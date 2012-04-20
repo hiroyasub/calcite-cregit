@@ -32,6 +32,62 @@ argument_list|<
 name|Boolean
 argument_list|>
 block|{
+comment|/**      * Predicate that always evaluates to {@code true}.      *      * @see Functions#truePredicate1()      */
+name|Predicate1
+argument_list|<
+name|Object
+argument_list|>
+name|TRUE
+init|=
+operator|new
+name|Predicate1
+argument_list|<
+name|Object
+argument_list|>
+argument_list|()
+block|{
+specifier|public
+name|boolean
+name|apply
+parameter_list|(
+name|Object
+name|v1
+parameter_list|)
+block|{
+return|return
+literal|true
+return|;
+block|}
+block|}
+decl_stmt|;
+comment|/**      * Predicate that always evaluates to {@code false}.      *      * @see Functions#falsePredicate1()      */
+name|Predicate1
+argument_list|<
+name|Object
+argument_list|>
+name|FALSE
+init|=
+operator|new
+name|Predicate1
+argument_list|<
+name|Object
+argument_list|>
+argument_list|()
+block|{
+specifier|public
+name|boolean
+name|apply
+parameter_list|(
+name|Object
+name|v1
+parameter_list|)
+block|{
+return|return
+literal|false
+return|;
+block|}
+block|}
+decl_stmt|;
 name|boolean
 name|apply
 parameter_list|(
@@ -41,6 +97,10 @@ parameter_list|)
 function_decl|;
 block|}
 end_interface
+
+begin_comment
+comment|// End Predicate1.java
+end_comment
 
 end_unit
 

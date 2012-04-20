@@ -16,30 +16,35 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * Function with 1 parameters.  *  * @param<R> result type  * @param<T1> type of parameter 1  */
+comment|/**  * Function with 2 parameters returning a native {@code boolean} value.  *  * @param<T1> type of parameter 1  * @param<T2> type of parameter 2  */
 end_comment
 
 begin_interface
 specifier|public
 interface|interface
-name|Function1
+name|Predicate2
 parameter_list|<
 name|T1
 parameter_list|,
-name|R
+name|T2
 parameter_list|>
+extends|extends
+name|Function
+argument_list|<
+name|Boolean
+argument_list|>
 block|{
-comment|/**      * The identity function.      *      * @see Functions#identitySelector()      */
-name|Function1
+comment|/**      * Predicate that always evaluates to {@code true}.      *      * @see net.hydromatic.linq4j.function.Functions#truePredicate1()      */
+name|Predicate2
 argument_list|<
 name|Object
 argument_list|,
 name|Object
 argument_list|>
-name|IDENTITY
+name|TRUE
 init|=
 operator|new
-name|Function1
+name|Predicate2
 argument_list|<
 name|Object
 argument_list|,
@@ -48,31 +53,72 @@ argument_list|>
 argument_list|()
 block|{
 specifier|public
-name|Object
+name|boolean
 name|apply
 parameter_list|(
 name|Object
 name|v1
+parameter_list|,
+name|Object
+name|v2
 parameter_list|)
 block|{
 return|return
-name|v1
+literal|true
 return|;
 block|}
 block|}
 decl_stmt|;
-name|R
+comment|/**      * Predicate that always evaluates to {@code false}.      *      * @see net.hydromatic.linq4j.function.Functions#falsePredicate1()      */
+name|Predicate2
+argument_list|<
+name|Object
+argument_list|,
+name|Object
+argument_list|>
+name|FALSE
+init|=
+operator|new
+name|Predicate2
+argument_list|<
+name|Object
+argument_list|,
+name|Object
+argument_list|>
+argument_list|()
+block|{
+specifier|public
+name|boolean
+name|apply
+parameter_list|(
+name|Object
+name|v1
+parameter_list|,
+name|Object
+name|v2
+parameter_list|)
+block|{
+return|return
+literal|false
+return|;
+block|}
+block|}
+decl_stmt|;
+name|boolean
 name|apply
 parameter_list|(
 name|T1
-name|a0
+name|v1
+parameter_list|,
+name|T2
+name|v2
 parameter_list|)
 function_decl|;
 block|}
 end_interface
 
 begin_comment
-comment|// End Function1.java
+comment|// End Predicate2.java
 end_comment
 
 end_unit

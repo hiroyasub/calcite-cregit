@@ -2124,13 +2124,11 @@ name|TSource
 argument_list|>
 name|where
 parameter_list|(
-name|Function2
+name|Predicate2
 argument_list|<
 name|TSource
 argument_list|,
 name|Integer
-argument_list|,
-name|Boolean
 argument_list|>
 name|predicate
 parameter_list|)
