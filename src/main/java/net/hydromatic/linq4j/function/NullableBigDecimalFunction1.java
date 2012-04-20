@@ -26,7 +26,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Function that takes 1 parameter and returns a {@link BigDecimal} value that  * may be null.  */
+comment|/**  * Function that takes one parameter and returns a {@link BigDecimal} value that  * may be null.  */
 end_comment
 
 begin_interface

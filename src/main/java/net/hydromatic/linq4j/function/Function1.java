@@ -16,7 +16,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * Function with 1 parameters.  *  * @param<R> result type  * @param<T1> type of parameter 1  */
+comment|/**  * Function with one parameter.  *  * @param<R> result type  * @param<T1> type of parameter 1  */
 end_comment
 
 begin_interface

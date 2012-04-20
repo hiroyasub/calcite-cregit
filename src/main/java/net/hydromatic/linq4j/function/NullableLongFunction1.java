@@ -16,7 +16,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * Function that takes 1 parameter and returns a {@link Long} value that  * may be null.  */
+comment|/**  * Function that takes one parameter and returns a {@link Long} value that  * may be null.  */
 end_comment
 
 begin_interface

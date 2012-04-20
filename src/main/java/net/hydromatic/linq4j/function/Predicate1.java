@@ -16,7 +16,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * Function with 1 parameters returning a native {@code boolean} value.  *  * @param<T1> type of parameter 1  */
+comment|/**  * Function with one parameter returning a native {@code boolean} value.  *  * @param<T1> type of parameter 1  */
 end_comment
 
 begin_interface
