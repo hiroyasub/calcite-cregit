@@ -15,6 +15,20 @@ end_package
 
 begin_import
 import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|linq4j
+operator|.
+name|function
+operator|.
+name|Function2
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -24,12 +38,13 @@ import|;
 end_import
 
 begin_comment
-comment|/** * Map where each key can have one or more values. */
+comment|/** * Represents a collection of keys each mapped to one or more values. */
 end_comment
 
 begin_interface
+specifier|public
 interface|interface
-name|MultiMap
+name|Lookup
 parameter_list|<
 name|K
 parameter_list|,
@@ -45,11 +60,47 @@ argument_list|<
 name|V
 argument_list|>
 argument_list|>
-block|{  }
+extends|,
+name|Enumerable
+argument_list|<
+name|Grouping
+argument_list|<
+name|K
+argument_list|,
+name|V
+argument_list|>
+argument_list|>
+block|{
+comment|/**      * Applies a transform function to each key and its associated values and      * returns the results.      *      * @param resultSelector Result selector      * @param<TResult> Result type      * @return Enumerable over results      */
+specifier|public
+parameter_list|<
+name|TResult
+parameter_list|>
+name|Enumerable
+argument_list|<
+name|TResult
+argument_list|>
+name|applyResultSelector
+parameter_list|(
+name|Function2
+argument_list|<
+name|K
+argument_list|,
+name|Enumerable
+argument_list|<
+name|V
+argument_list|>
+argument_list|,
+name|TResult
+argument_list|>
+name|resultSelector
+parameter_list|)
+function_decl|;
+block|}
 end_interface
 
 begin_comment
-comment|// End MultiMap.java
+comment|// End Lookup.java
 end_comment
 
 end_unit

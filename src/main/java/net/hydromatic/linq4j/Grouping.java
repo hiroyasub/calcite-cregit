@@ -18,6 +18,7 @@ comment|/** * Represents a collection of objects that have a common key. */
 end_comment
 
 begin_interface
+specifier|public
 interface|interface
 name|Grouping
 parameter_list|<

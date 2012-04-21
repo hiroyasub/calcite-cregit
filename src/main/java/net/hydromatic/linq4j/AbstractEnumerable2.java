@@ -42,10 +42,9 @@ block|{
 return|return
 name|Extensions
 operator|.
-name|iteratorEnumerator
+name|iterableEnumerator
 argument_list|(
-name|iterator
-argument_list|()
+name|this
 argument_list|)
 return|;
 block|}
