@@ -40,7 +40,7 @@ name|enumerator
 parameter_list|()
 block|{
 return|return
-name|Extensions
+name|Linq4j
 operator|.
 name|iterableEnumerator
 argument_list|(

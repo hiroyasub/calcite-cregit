@@ -142,7 +142,7 @@ argument_list|>
 argument_list|>
 name|enumerator
 init|=
-name|Extensions
+name|Linq4j
 operator|.
 name|enumerator
 argument_list|(
@@ -301,7 +301,7 @@ name|V
 argument_list|>
 name|enumerable
 init|=
-name|Extensions
+name|Linq4j
 operator|.
 name|asEnumerable
 argument_list|(
@@ -349,7 +349,7 @@ literal|null
 condition|?
 literal|null
 else|:
-name|Extensions
+name|Linq4j
 operator|.
 name|asEnumerable
 argument_list|(
@@ -400,7 +400,7 @@ literal|null
 condition|?
 literal|null
 else|:
-name|Extensions
+name|Linq4j
 operator|.
 name|asEnumerable
 argument_list|(
@@ -440,7 +440,7 @@ literal|null
 condition|?
 literal|null
 else|:
-name|Extensions
+name|Linq4j
 operator|.
 name|asEnumerable
 argument_list|(
@@ -634,7 +634,7 @@ name|next
 parameter_list|()
 block|{
 return|return
-name|Extensions
+name|Linq4j
 operator|.
 name|asEnumerable
 argument_list|(
@@ -839,7 +839,7 @@ operator|.
 name|getKey
 argument_list|()
 argument_list|,
-name|Extensions
+name|Linq4j
 operator|.
 name|asEnumerable
 argument_list|(

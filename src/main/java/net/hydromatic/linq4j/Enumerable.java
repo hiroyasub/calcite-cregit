@@ -25,6 +25,11 @@ parameter_list|<
 name|T
 parameter_list|>
 extends|extends
+name|RawEnumerable
+argument_list|<
+name|T
+argument_list|>
+extends|,
 name|Iterable
 argument_list|<
 name|T
@@ -35,14 +40,6 @@ argument_list|<
 name|T
 argument_list|>
 block|{
-comment|/**      * Returns an enumerator that iterates through a collection.      */
-name|Enumerator
-argument_list|<
-name|T
-argument_list|>
-name|enumerator
-parameter_list|()
-function_decl|;
 comment|/**      * Converts this Enumerable to a Queryable.      *      * @see Extensions#asQueryable(Enumerable)      */
 name|Queryable
 argument_list|<
@@ -50,23 +47,6 @@ name|T
 argument_list|>
 name|asQueryable
 parameter_list|()
-function_decl|;
-comment|/**      * Converts the elements of this Enumerable to the specified type.      *      * @see Extensions#cast(Enumerable, Class)      */
-parameter_list|<
-name|T2
-parameter_list|>
-name|Enumerable
-argument_list|<
-name|T2
-argument_list|>
-name|cast
-parameter_list|(
-name|Class
-argument_list|<
-name|T2
-argument_list|>
-name|clazz
-parameter_list|)
 function_decl|;
 block|}
 end_interface

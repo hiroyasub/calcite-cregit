@@ -13,57 +13,31 @@ name|linq4j
 package|;
 end_package
 
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|Iterator
-import|;
-end_import
-
 begin_comment
-comment|/**  * Abstract implementation of the {@link Enumerable} interface that  * implements the extension methods.  *  *<p>It is helpful to derive from this class if you are implementing  * {@code Enumerable}, because {@code Enumerable} has so many extension methods,  * but it is not required.</p>  */
+comment|/**  * Exposes the enumerator, which supports a simple iteration over a collection,  * without the extension methods.  *  *<p>Just the bare methods, to make it easier to implement. Code that requires  * the extension methods can use the static methods in {@link Extensions}.</p>  *  *<p>Analogous to LINQ's System.Collections.IEnumerable (both generic  * and non-generic variants), without the extension methods.</p>  *  * @see Enumerable  */
 end_comment
 
-begin_class
+begin_interface
 specifier|public
-specifier|abstract
-class|class
-name|AbstractEnumerable
+interface|interface
+name|RawEnumerable
 parameter_list|<
 name|T
 parameter_list|>
-extends|extends
-name|DefaultEnumerable
+block|{
+comment|/**      * Returns an enumerator that iterates through a collection.      */
+name|Enumerator
 argument_list|<
 name|T
 argument_list|>
-block|{
-specifier|public
-name|Iterator
-argument_list|<
-name|T
-argument_list|>
-name|iterator
-parameter_list|()
-block|{
-return|return
-name|Linq4j
-operator|.
-name|enumeratorIterator
-argument_list|(
 name|enumerator
-argument_list|()
-argument_list|)
-return|;
+parameter_list|()
+function_decl|;
 block|}
-block|}
-end_class
+end_interface
 
 begin_comment
-comment|// End AbstractEnumerable.java
+comment|// End RawEnumerable.java
 end_comment
 
 end_unit

@@ -202,7 +202,7 @@ name|getValue
 parameter_list|()
 block|{
 return|return
-name|Extensions
+name|Linq4j
 operator|.
 name|asEnumerable
 argument_list|(
@@ -252,7 +252,7 @@ name|enumerator
 parameter_list|()
 block|{
 return|return
-name|Extensions
+name|Linq4j
 operator|.
 name|enumerator
 argument_list|(
