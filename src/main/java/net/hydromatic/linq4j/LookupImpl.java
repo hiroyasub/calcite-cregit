@@ -1014,7 +1014,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End MultiMapImpl.java
+comment|// End LookupImpl.java
 end_comment
 
 end_unit
