@@ -42,5 +42,9 @@ block|}
 block|}
 end_class
 
+begin_comment
+comment|// End ConstantExpression.java
+end_comment
+
 end_unit
 

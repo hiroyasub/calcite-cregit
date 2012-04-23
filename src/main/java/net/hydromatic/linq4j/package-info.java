@@ -13,5 +13,9 @@ name|linq4j
 package|;
 end_package
 
+begin_comment
+comment|// End package-info.java
+end_comment
+
 end_unit
 

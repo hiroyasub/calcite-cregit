@@ -3154,7 +3154,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a LambdaExpression lambdaExpression by first constructing a delegate      * type. */
+comment|/** Creates a LambdaExpression lambdaExpression by first constructing a      * delegate type. */
 specifier|public
 specifier|static
 name|LambdaExpression
@@ -7726,6 +7726,10 @@ name|SymbolDocumentInfo
 block|{}
 block|}
 end_class
+
+begin_comment
+comment|// End Expressions.java
+end_comment
 
 end_unit
 

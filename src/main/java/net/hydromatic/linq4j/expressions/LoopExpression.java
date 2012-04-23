@@ -42,5 +42,9 @@ block|}
 block|}
 end_class
 
+begin_comment
+comment|// End LoopExpression.java
+end_comment
+
 end_unit
 

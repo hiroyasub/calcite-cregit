@@ -26,5 +26,9 @@ name|CallSiteBinder
 block|{ }
 end_interface
 
+begin_comment
+comment|// End CallSiteBinder.java
+end_comment
+
 end_unit
 

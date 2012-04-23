@@ -152,7 +152,7 @@ argument_list|>
 name|predicate
 parameter_list|)
 function_decl|;
-comment|/** Returns the input typed as Enumerable<TSource>.      *      *<p>The AsEnumerable<TSource>(Enumerable<TSource>) method has no effect      * other than to change the compile-time type of source from a type that      * implements Enumerable<TSource> to Enumerable<TSource> itself.      *      *<p>AsEnumerable<TSource>(Enumerable<TSource>) can be used to choose      * between query implementations when a sequence implements Enumerable<TSource>      * but also has a different set of public query methods available. For      * example, given a generic class Table that implements Enumerable<TSource> and      * has its own methods such as Where, Select, and SelectMany, a call to      * Where would invoke the public Where method of Table. A Table type that      * represents a database table could have a Where method that takes the      * predicate argument as an expression tree and converts the tree to SQL for      * remote execution. If remote execution is not desired, for example because      * the predicate invokes a local method, the AsEnumerable<TSource> method      * can be used to hide the custom methods and instead make the standard      * query operators available.      */
+comment|/** Returns the input typed as Enumerable<TSource>.      *      *<p>The AsEnumerable<TSource>(Enumerable<TSource>) method has no effect      * other than to change the compile-time type of source from a type that      * implements Enumerable<TSource> to Enumerable<TSource> itself.      *      *<p>AsEnumerable<TSource>(Enumerable<TSource>) can be used to choose      * between query implementations when a sequence implements      * Enumerable<TSource> but also has a different set of public query methods      * available. For example, given a generic class Table that implements      * Enumerable<TSource> and has its own methods such as Where, Select, and      * SelectMany, a call to Where would invoke the public Where method of      * Table. A Table type that represents a database table could have a Where      * method that takes the predicate argument as an expression tree and      * converts the tree to SQL for remote execution. If remote execution is not      * desired, for example because the predicate invokes a local method, the      * AsEnumerable<TSource> method can be used to hide the custom methods and      * instead make the standard query operators available.      */
 name|Enumerable
 argument_list|<
 name|TSource
@@ -2170,6 +2170,10 @@ parameter_list|)
 function_decl|;
 block|}
 end_interface
+
+begin_comment
+comment|// End ExtendedEnumerable.java
+end_comment
 
 end_unit
 

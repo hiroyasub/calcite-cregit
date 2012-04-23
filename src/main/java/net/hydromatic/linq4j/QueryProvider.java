@@ -24,5 +24,9 @@ name|QueryProvider
 block|{ }
 end_interface
 
+begin_comment
+comment|// End QueryProvider.java
+end_comment
+
 end_unit
 

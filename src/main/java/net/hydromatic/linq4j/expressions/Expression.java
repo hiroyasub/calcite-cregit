@@ -63,12 +63,9 @@ name|boolean
 name|canReduce
 parameter_list|()
 block|{
-throw|throw
-name|Extensions
-operator|.
-name|todo
-argument_list|()
-throw|;
+return|return
+literal|false
+return|;
 block|}
 comment|/** Gets the node type of this Expression. */
 specifier|public
@@ -80,7 +77,7 @@ return|return
 name|nodeType
 return|;
 block|}
-comment|/** Gets the static type of the expression that this Expression represents. */
+comment|/** Gets the static type of the expression that this Expression      * represents. */
 specifier|public
 name|Class
 name|getType

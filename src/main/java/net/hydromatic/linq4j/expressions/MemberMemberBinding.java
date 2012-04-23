@@ -28,5 +28,9 @@ name|MemberBinding
 block|{ }
 end_class
 
+begin_comment
+comment|// End MemberMemberBinding.java
+end_comment
+
 end_unit
 

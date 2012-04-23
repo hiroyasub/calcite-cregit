@@ -42,5 +42,9 @@ block|}
 block|}
 end_class
 
+begin_comment
+comment|// End UnaryExpression.java
+end_comment
+
 end_unit
 
