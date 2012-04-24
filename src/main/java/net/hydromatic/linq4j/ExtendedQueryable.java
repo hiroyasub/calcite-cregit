@@ -336,11 +336,11 @@ name|TSource
 argument_list|>
 name|concat
 parameter_list|(
-name|Queryable
+name|Enumerable
 argument_list|<
 name|TSource
 argument_list|>
-name|queryable1
+name|source2
 parameter_list|)
 function_decl|;
 comment|/** Determines whether a sequence contains a specified      * element by using the default equality comparer. */
@@ -378,7 +378,7 @@ argument_list|<
 name|TSource
 argument_list|>
 argument_list|>
-name|func
+name|predicate
 parameter_list|)
 function_decl|;
 comment|/** Returns the elements of the specified sequence or      * the type parameter's default value in a singleton collection if      * the sequence is empty. */
@@ -651,7 +651,12 @@ name|TElement
 parameter_list|>
 name|Queryable
 argument_list|<
+name|Grouping
+argument_list|<
+name|TKey
+argument_list|,
 name|TElement
+argument_list|>
 argument_list|>
 name|groupBy
 parameter_list|(
@@ -1118,10 +1123,7 @@ name|last
 parameter_list|()
 function_decl|;
 comment|/** Returns the last element of a sequence that      * satisfies a specified condition. */
-name|Queryable
-argument_list|<
 name|TSource
-argument_list|>
 name|last
 parameter_list|(
 name|FunctionExpression
@@ -1893,13 +1895,11 @@ name|whereN
 parameter_list|(
 name|FunctionExpression
 argument_list|<
-name|Function2
+name|Predicate2
 argument_list|<
 name|TSource
 argument_list|,
 name|Integer
-argument_list|,
-name|Boolean
 argument_list|>
 argument_list|>
 name|predicate

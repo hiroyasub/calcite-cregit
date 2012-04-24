@@ -15,6 +15,20 @@ name|expressions
 package|;
 end_package
 
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|linq4j
+operator|.
+name|function
+operator|.
+name|Function
+import|;
+end_import
+
 begin_comment
 comment|/**  * Represents a visitor or rewriter for expression trees.  */
 end_comment
@@ -23,7 +37,27 @@ begin_interface
 specifier|public
 interface|interface
 name|ExpressionVisitor
-block|{ }
+block|{
+comment|/** Visits the children of the delegate expression. */
+parameter_list|<
+name|T
+extends|extends
+name|Function
+argument_list|<
+name|?
+argument_list|>
+parameter_list|>
+name|void
+name|visitLambda
+parameter_list|(
+name|FunctionExpression
+argument_list|<
+name|T
+argument_list|>
+name|expression
+parameter_list|)
+function_decl|;
+block|}
 end_interface
 
 begin_comment

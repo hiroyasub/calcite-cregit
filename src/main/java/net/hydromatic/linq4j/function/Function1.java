@@ -28,6 +28,11 @@ name|T1
 parameter_list|,
 name|R
 parameter_list|>
+extends|extends
+name|Function
+argument_list|<
+name|R
+argument_list|>
 block|{
 comment|/**      * The identity function.      *      * @see Functions#identitySelector()      */
 name|Function1
