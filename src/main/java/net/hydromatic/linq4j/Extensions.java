@@ -1398,8 +1398,8 @@ name|TSource
 name|element
 parameter_list|)
 block|{
-comment|// TODO: Optimize if the enumerable has random access (e.g. is a
-comment|// HashSet)
+comment|// Implementations of Enumerable backed by a Collection call
+comment|// Collection.contains, which may be more efficient, not this method.
 for|for
 control|(
 name|TSource
