@@ -44,6 +44,10 @@ block|{
 name|super
 argument_list|(
 name|nodeType
+argument_list|,
+name|Void
+operator|.
+name|TYPE
 argument_list|)
 expr_stmt|;
 name|this

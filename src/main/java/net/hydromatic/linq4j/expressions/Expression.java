@@ -41,20 +41,6 @@ name|DynamicFunction
 import|;
 end_import
 
-begin_import
-import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|linq4j
-operator|.
-name|function
-operator|.
-name|Function
-import|;
-end_import
-
 begin_comment
 comment|/**  *<p>Analogous to LINQ's System.Linq.Expression.</p>  */
 end_comment
@@ -70,12 +56,20 @@ specifier|final
 name|ExpressionType
 name|nodeType
 decl_stmt|;
+specifier|public
+specifier|final
+name|Class
+name|type
+decl_stmt|;
 comment|/**      * Creates an Expression.      *      * @param nodeType Node type      */
 specifier|public
 name|Expression
 parameter_list|(
 name|ExpressionType
 name|nodeType
+parameter_list|,
+name|Class
+name|type
 parameter_list|)
 block|{
 name|this
@@ -83,6 +77,12 @@ operator|.
 name|nodeType
 operator|=
 name|nodeType
+expr_stmt|;
+name|this
+operator|.
+name|type
+operator|=
+name|type
 expr_stmt|;
 block|}
 comment|/** Indicates that the node can be reduced to a simpler node. If this      * returns true, Reduce() can be called to produce the reduced form. */
@@ -111,12 +111,9 @@ name|Class
 name|getType
 parameter_list|()
 block|{
-throw|throw
-name|Extensions
-operator|.
-name|todo
-argument_list|()
-throw|;
+return|return
+name|type
+return|;
 block|}
 specifier|public
 name|DynamicFunction

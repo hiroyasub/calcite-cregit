@@ -59,6 +59,14 @@ name|function
 init|=
 literal|null
 decl_stmt|;
+specifier|final
+name|StringBuilder
+name|buf
+init|=
+operator|new
+name|StringBuilder
+argument_list|()
+decl_stmt|;
 comment|/**      * Returns an invokable function that is the result of compilation.      *      * @return Invokable function      */
 specifier|public
 name|DynamicFunction
@@ -88,6 +96,22 @@ argument_list|>
 name|expression
 parameter_list|)
 block|{
+block|}
+specifier|public
+name|void
+name|output
+parameter_list|(
+name|String
+name|s
+parameter_list|)
+block|{
+name|buf
+operator|.
+name|append
+argument_list|(
+name|s
+argument_list|)
+expr_stmt|;
 block|}
 block|}
 end_class

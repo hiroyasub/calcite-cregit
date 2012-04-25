@@ -36,6 +36,10 @@ block|{
 name|super
 argument_list|(
 name|nodeType
+argument_list|,
+name|Boolean
+operator|.
+name|TYPE
 argument_list|)
 expr_stmt|;
 block|}

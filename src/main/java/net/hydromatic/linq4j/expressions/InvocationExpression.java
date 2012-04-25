@@ -31,11 +31,16 @@ name|InvocationExpression
 parameter_list|(
 name|ExpressionType
 name|nodeType
+parameter_list|,
+name|Class
+name|type
 parameter_list|)
 block|{
 name|super
 argument_list|(
 name|nodeType
+argument_list|,
+name|type
 argument_list|)
 expr_stmt|;
 block|}

@@ -9016,6 +9016,11 @@ argument_list|>
 name|predicate
 parameter_list|)
 block|{
+assert|assert
+name|predicate
+operator|!=
+literal|null
+assert|;
 return|return
 operator|new
 name|AbstractEnumerable

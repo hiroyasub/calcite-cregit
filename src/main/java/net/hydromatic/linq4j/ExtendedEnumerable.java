@@ -58,6 +58,22 @@ parameter_list|<
 name|TSource
 parameter_list|>
 block|{
+comment|/**      * Performs an operation for each member of the enumeration.      * @param func Operation      * @param<R> Return type      */
+parameter_list|<
+name|R
+parameter_list|>
+name|R
+name|foreach
+parameter_list|(
+name|Function1
+argument_list|<
+name|TSource
+argument_list|,
+name|R
+argument_list|>
+name|func
+parameter_list|)
+function_decl|;
 comment|/** Applies an accumulator function over a      * sequence. */
 name|TSource
 name|aggregate
