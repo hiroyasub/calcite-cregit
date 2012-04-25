@@ -1878,6 +1878,8 @@ name|where
 parameter_list|(
 name|FunctionExpression
 argument_list|<
+name|?
+extends|extends
 name|Predicate1
 argument_list|<
 name|TSource
@@ -1895,6 +1897,8 @@ name|whereN
 parameter_list|(
 name|FunctionExpression
 argument_list|<
+name|?
+extends|extends
 name|Predicate2
 argument_list|<
 name|TSource

@@ -56,6 +56,18 @@ operator|=
 name|value
 expr_stmt|;
 block|}
+specifier|public
+name|Object
+name|evaluate
+parameter_list|(
+name|Evaluator
+name|evaluator
+parameter_list|)
+block|{
+return|return
+name|value
+return|;
+block|}
 block|}
 end_class
 

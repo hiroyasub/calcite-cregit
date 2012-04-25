@@ -62,7 +62,7 @@ name|TestCase
 block|{
 specifier|public
 name|void
-name|testLambda
+name|testLambdaCallsBinaryOp
 parameter_list|()
 block|{
 comment|// A parameter for the lambda expression.
@@ -82,7 +82,7 @@ argument_list|)
 decl_stmt|;
 comment|// This expression represents a lambda expression
 comment|// that adds 1 to the parameter value.
-name|LambdaExpression
+name|FunctionExpression
 name|lambdaExpr
 init|=
 name|Expressions
@@ -99,7 +99,7 @@ name|Expressions
 operator|.
 name|constant
 argument_list|(
-literal|1
+literal|2
 argument_list|)
 argument_list|)
 argument_list|,
@@ -140,8 +140,138 @@ argument_list|)
 decl_stmt|;
 comment|// This code example produces the following output:
 comment|//
-comment|// arg => (arg +1)
-comment|// 2
+comment|// arg => (arg +2)
+comment|// 3
+name|assertEquals
+argument_list|(
+literal|3
+argument_list|,
+name|n
+argument_list|)
+expr_stmt|;
+block|}
+specifier|public
+name|void
+name|testLambdaCallsTwoArgMethod
+parameter_list|()
+throws|throws
+name|NoSuchMethodException
+block|{
+comment|// A parameter for the lambda expression.
+name|ParameterExpression
+name|paramS
+init|=
+name|Expressions
+operator|.
+name|parameter
+argument_list|(
+name|String
+operator|.
+name|class
+argument_list|,
+literal|"s"
+argument_list|)
+decl_stmt|;
+name|ParameterExpression
+name|paramBegin
+init|=
+name|Expressions
+operator|.
+name|parameter
+argument_list|(
+name|Integer
+operator|.
+name|TYPE
+argument_list|,
+literal|"begin"
+argument_list|)
+decl_stmt|;
+name|ParameterExpression
+name|paramEnd
+init|=
+name|Expressions
+operator|.
+name|parameter
+argument_list|(
+name|Integer
+operator|.
+name|TYPE
+argument_list|,
+literal|"end"
+argument_list|)
+decl_stmt|;
+comment|// This expression represents a lambda expression
+comment|// that adds 1 to the parameter value.
+name|FunctionExpression
+name|lambdaExpr
+init|=
+name|Expressions
+operator|.
+name|lambda
+argument_list|(
+name|Expressions
+operator|.
+name|call
+argument_list|(
+name|paramS
+argument_list|,
+name|String
+operator|.
+name|class
+operator|.
+name|getMethod
+argument_list|(
+literal|"substring"
+argument_list|,
+name|Integer
+operator|.
+name|TYPE
+argument_list|,
+name|Integer
+operator|.
+name|TYPE
+argument_list|)
+argument_list|,
+name|paramBegin
+argument_list|,
+name|paramEnd
+argument_list|)
+argument_list|,
+name|paramS
+argument_list|,
+name|paramBegin
+argument_list|,
+name|paramEnd
+argument_list|)
+decl_stmt|;
+comment|// Compile and run the lambda expression.
+name|String
+name|s
+init|=
+operator|(
+name|String
+operator|)
+name|lambdaExpr
+operator|.
+name|compile
+argument_list|()
+operator|.
+name|dynamicInvoke
+argument_list|(
+literal|"hello world"
+argument_list|,
+literal|3
+argument_list|,
+literal|7
+argument_list|)
+decl_stmt|;
+name|assertEquals
+argument_list|(
+literal|"lo w"
+argument_list|,
+name|s
+argument_list|)
+expr_stmt|;
 block|}
 block|}
 end_class

@@ -2801,6 +2801,8 @@ name|where
 parameter_list|(
 name|FunctionExpression
 argument_list|<
+name|?
+extends|extends
 name|Predicate1
 argument_list|<
 name|T
@@ -2809,6 +2811,7 @@ argument_list|>
 name|predicate
 parameter_list|)
 block|{
+comment|//noinspection unchecked
 return|return
 name|Extensions
 operator|.
@@ -2817,6 +2820,15 @@ argument_list|(
 name|getThis
 argument_list|()
 argument_list|,
+operator|(
+name|FunctionExpression
+argument_list|<
+name|Predicate1
+argument_list|<
+name|T
+argument_list|>
+argument_list|>
+operator|)
 name|predicate
 argument_list|)
 return|;
@@ -2830,6 +2842,8 @@ name|whereN
 parameter_list|(
 name|FunctionExpression
 argument_list|<
+name|?
+extends|extends
 name|Predicate2
 argument_list|<
 name|T
@@ -2840,6 +2854,7 @@ argument_list|>
 name|predicate
 parameter_list|)
 block|{
+comment|//noinspection unchecked
 return|return
 name|Extensions
 operator|.
@@ -2848,6 +2863,17 @@ argument_list|(
 name|getThis
 argument_list|()
 argument_list|,
+operator|(
+name|FunctionExpression
+argument_list|<
+name|Predicate2
+argument_list|<
+name|T
+argument_list|,
+name|Integer
+argument_list|>
+argument_list|>
+operator|)
 name|predicate
 argument_list|)
 return|;
