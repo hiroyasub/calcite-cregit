@@ -570,7 +570,7 @@ parameter_list|)
 block|{
 return|return
 operator|new
-name|CompositeEnumerator
+name|CompositeEnumerable
 argument_list|<
 name|E
 argument_list|>
@@ -579,6 +579,7 @@ name|enumerableList
 argument_list|)
 return|;
 block|}
+comment|/**      * Returns an enumerator that is the cartesian product of the given      * enumerators.      *      *<p>For example, given enumerator A that returns {"a", "b", "c"} and      * enumerator B that returns {"x", "y"}, product(List(A, B)) will return      * {List("a", "x"), List("a", "y"),      * List("b", "x"), List("b", "y"),      * List("c", "x"), List("c", "y")}.</p>      *      *<p>Notice that the cardinality of the result is the product of the      * cardinality of the inputs. The enumerators A and B have 3 and 2      * elements respectively, and the result has 3 * 2 = 6 elements.      * This is always the case. In      * particular, if any of the enumerators is empty, the result is empty.</p>      *      * @param enumerators List of enumerators      * @param<T> Element type      * @return Enumerator over the cartesian product      */
 specifier|public
 specifier|static
 parameter_list|<
@@ -600,7 +601,7 @@ argument_list|<
 name|T
 argument_list|>
 argument_list|>
-name|lists
+name|enumerators
 parameter_list|)
 block|{
 return|return
@@ -610,7 +611,7 @@ argument_list|<
 name|T
 argument_list|>
 argument_list|(
-name|lists
+name|enumerators
 argument_list|)
 return|;
 block|}
@@ -760,7 +761,7 @@ block|}
 block|}
 specifier|static
 class|class
-name|CompositeEnumerator
+name|CompositeEnumerable
 parameter_list|<
 name|E
 parameter_list|>
@@ -781,7 +782,7 @@ argument_list|>
 argument_list|>
 name|enumerableEnumerator
 decl_stmt|;
-name|CompositeEnumerator
+name|CompositeEnumerable
 parameter_list|(
 name|List
 argument_list|<
@@ -913,7 +914,7 @@ parameter_list|<
 name|T
 parameter_list|>
 extends|extends
-name|AbstractEnumerable
+name|AbstractEnumerable2
 argument_list|<
 name|T
 argument_list|>
@@ -943,18 +944,18 @@ name|iterable
 expr_stmt|;
 block|}
 specifier|public
-name|Enumerator
+name|Iterator
 argument_list|<
 name|T
 argument_list|>
-name|enumerator
+name|iterator
 parameter_list|()
 block|{
 return|return
-name|iterableEnumerator
-argument_list|(
 name|iterable
-argument_list|)
+operator|.
+name|iterator
+argument_list|()
 return|;
 block|}
 annotation|@
