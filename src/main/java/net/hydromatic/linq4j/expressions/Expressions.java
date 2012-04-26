@@ -3116,13 +3116,11 @@ comment|/** Creates a FunctionExpression from an actual function. */
 specifier|public
 specifier|static
 parameter_list|<
-name|T
-parameter_list|,
 name|F
 extends|extends
 name|Function
 argument_list|<
-name|T
+name|?
 argument_list|>
 parameter_list|>
 name|FunctionExpression
