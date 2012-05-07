@@ -1,0 +1,200 @@
+begin_unit|revision:1.0.0;language:Java;cregit-version:0.0.1
+begin_comment
+comment|/* // Licensed to DynamoBI Corporation (DynamoBI) under one // or more contributor license agreements.  See the NOTICE file // distributed with this work for additional information // regarding copyright ownership.  DynamoBI licenses this file // to you under the Apache License, Version 2.0 (the // "License"); you may not use this file except in compliance // with the License.  You may obtain a copy of the License at  //   http://www.apache.org/licenses/LICENSE-2.0  // Unless required by applicable law or agreed to in writing, // software distributed under the License is distributed on an // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY // KIND, either express or implied.  See the License for the // specific language governing permissions and limitations // under the License. */
+end_comment
+
+begin_package
+package|package
+name|org
+operator|.
+name|eigenbase
+operator|.
+name|sql
+operator|.
+name|validate
+package|;
+end_package
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|*
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
+name|reltype
+operator|.
+name|*
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
+name|sql
+operator|.
+name|*
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
+name|util
+operator|.
+name|*
+import|;
+end_import
+
+begin_comment
+comment|/**  * A namespace describes the relation returned by a section of a SQL query.  *  *<p>For example, in the query<code>SELECT emp.deptno, age FROM emp,  * dept</code>, the FROM clause forms a namespace consisting of two tables EMP  * and DEPT, and a row type consisting of the combined columns of those tables.  *  *<p>Other examples of namespaces include a table in the from list (the  * namespace contains the constituent columns) and a subquery (the namespace  * contains the columns in the SELECT clause of the subquery).  *  *<p>These various kinds of namespace are implemented by classes {@link  * IdentifierNamespace} for table names, {@link SelectNamespace} for SELECT  * queries, {@link SetopNamespace} for UNION, EXCEPT and INTERSECT, and so  * forth. But if you are looking at a SELECT query and call {@link  * SqlValidator#getNamespace(org.eigenbase.sql.SqlNode)}, you may not get a  * SelectNamespace. Why? Because the validator is allowed to wrap namespaces in  * other objects which implement {@link SqlValidatorNamespace}. Your  * SelectNamespace will be there somewhere, but might be one or two levels deep.  * Don't try to cast the namespace or use<code>instanceof</code>; use {@link  * SqlValidatorNamespace#unwrap(Class)} and {@link  * SqlValidatorNamespace#isWrapperFor(Class)} instead.</p>  *  * @author jhyde  * @version $Id$  * @see SqlValidator  * @see SqlValidatorScope  * @since Mar 25, 2003  */
+end_comment
+
+begin_interface
+specifier|public
+interface|interface
+name|SqlValidatorNamespace
+block|{
+comment|//~ Methods ----------------------------------------------------------------
+comment|/**      * Returns the validator.      *      * @return validator      */
+name|SqlValidator
+name|getValidator
+parameter_list|()
+function_decl|;
+comment|/**      * Returns the underlying table, or null if there is none.      */
+name|SqlValidatorTable
+name|getTable
+parameter_list|()
+function_decl|;
+comment|/**      * Returns the row type of this namespace, which comprises a list of names      * and types of the output columns. If the scope's type has not yet been      * derived, derives it. Never returns null.      *      * @post return != null      */
+name|RelDataType
+name|getRowType
+parameter_list|()
+function_decl|;
+comment|/**      * Allows RowType for the namespace to be explicitly set.      */
+name|void
+name|setRowType
+parameter_list|(
+name|RelDataType
+name|rowType
+parameter_list|)
+function_decl|;
+comment|/**      * Returns the row type of this namespace, sans any system columns.      *      * @return Row type sans system columns      */
+name|RelDataType
+name|getRowTypeSansSystemColumns
+parameter_list|()
+function_decl|;
+comment|/**      * Validates this namespace.      *      *<p>If the scope has already been validated, does nothing.</p>      *      *<p>Please call {@link SqlValidatorImpl#validateNamespace} rather than      * calling this method directly.</p>      */
+name|void
+name|validate
+parameter_list|()
+function_decl|;
+comment|/**      * Returns the parse tree node at the root of this namespace.      *      * @return parse tree node      */
+name|SqlNode
+name|getNode
+parameter_list|()
+function_decl|;
+comment|/**      * Returns the parse tree node that at is at the root of this namespace and      * includes all decorations. If there are no decorations, returns the same      * as {@link #getNode()}.      */
+name|SqlNode
+name|getEnclosingNode
+parameter_list|()
+function_decl|;
+comment|/**      * Looks up a child namespace of a given name.      *      *<p>For example, in the query<code>select e.name from emps as e</code>,      *<code>e</code> is an {@link IdentifierNamespace} which has a child<code>      * name</code> which is a {@link FieldNamespace}.      *      * @param name Name of namespace      *      * @return Namespace      */
+name|SqlValidatorNamespace
+name|lookupChild
+parameter_list|(
+name|String
+name|name
+parameter_list|)
+function_decl|;
+comment|/**      * Returns whether this namespace has a field of a given name.      *      * @param name Field name      *      * @return Whether field exists      */
+name|boolean
+name|fieldExists
+parameter_list|(
+name|String
+name|name
+parameter_list|)
+function_decl|;
+comment|/**      * Returns a list of expressions which are monotonic in this namespace. For      * example, if the namespace represents a relation ordered by a column      * called "TIMESTAMP", then the list would contain a {@link      * org.eigenbase.sql.SqlIdentifier} called "TIMESTAMP".      */
+name|List
+argument_list|<
+name|Pair
+argument_list|<
+name|SqlNode
+argument_list|,
+name|SqlMonotonicity
+argument_list|>
+argument_list|>
+name|getMonotonicExprs
+parameter_list|()
+function_decl|;
+comment|/**      * Returns whether and how a given column is sorted.      */
+name|SqlMonotonicity
+name|getMonotonicity
+parameter_list|(
+name|String
+name|columnName
+parameter_list|)
+function_decl|;
+comment|/**      * Makes all fields in this namespace nullable (typically because it is on      * the outer side of an outer join.      */
+name|void
+name|makeNullable
+parameter_list|()
+function_decl|;
+comment|/**      * Translates a field name to the name in the underlying namespace.      */
+name|String
+name|translate
+parameter_list|(
+name|String
+name|name
+parameter_list|)
+function_decl|;
+comment|/**      * Returns this namespace, or a wrapped namespace, cast to a particular      * class.      *      * @param clazz Desired type      *      * @return This namespace cast to desired type      *      * @throws ClassCastException if no such interface is available      */
+parameter_list|<
+name|T
+parameter_list|>
+name|T
+name|unwrap
+parameter_list|(
+name|Class
+argument_list|<
+name|T
+argument_list|>
+name|clazz
+parameter_list|)
+function_decl|;
+comment|/**      * Returns whether this namespace implements a given interface, or wraps a      * class which does.      *      * @param clazz Interface      *      * @return Whether namespace implements given interface      */
+name|boolean
+name|isWrapperFor
+parameter_list|(
+name|Class
+argument_list|<
+name|?
+argument_list|>
+name|clazz
+parameter_list|)
+function_decl|;
+block|}
+end_interface
+
+begin_comment
+comment|// End SqlValidatorNamespace.java
+end_comment
+
+end_unit
+
