@@ -52,6 +52,7 @@ comment|/**  * Extension methods in {@link Enumerable}.  */
 end_comment
 
 begin_interface
+specifier|public
 interface|interface
 name|ExtendedEnumerable
 parameter_list|<
