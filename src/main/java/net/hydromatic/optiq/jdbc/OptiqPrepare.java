@@ -61,20 +61,6 @@ name|net
 operator|.
 name|hydromatic
 operator|.
-name|linq4j
-operator|.
-name|function
-operator|.
-name|Function1
-import|;
-end_import
-
-begin_import
-import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
 name|optiq
 operator|.
 name|Function
@@ -434,7 +420,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * @author jhyde  */
+comment|/**  * Shit just got real.  *  * @author jhyde  */
 end_comment
 
 begin_class

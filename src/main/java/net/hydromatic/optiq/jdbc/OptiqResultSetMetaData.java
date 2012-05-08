@@ -553,13 +553,9 @@ argument_list|)
 return|;
 block|}
 throw|throw
-name|this
+name|OptiqConnectionImpl
 operator|.
-name|statement
-operator|.
-name|connection
-operator|.
-name|helper
+name|HELPER
 operator|.
 name|createException
 argument_list|(
