@@ -87,8 +87,8 @@ extends|extends
 name|ConcurrentTestPlugin
 block|{
 specifier|private
-specifier|final
 specifier|static
+specifier|final
 name|String
 name|DESCRIBE_RESULT_SET_CMD
 init|=

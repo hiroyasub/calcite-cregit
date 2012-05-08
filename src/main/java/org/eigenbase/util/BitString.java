@@ -538,8 +538,8 @@ name|dest
 return|;
 block|}
 comment|/**      * Concatenates some BitStrings. Concatenates all at once, not pairwise, to      * avoid string copies.      *      * @param args BitString[]      */
-specifier|static
 specifier|public
+specifier|static
 name|BitString
 name|concat
 parameter_list|(

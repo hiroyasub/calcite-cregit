@@ -182,8 +182,8 @@ argument_list|>
 name|threadNameMap
 decl_stmt|;
 comment|/** Describes a thread that failed */
-specifier|static
 specifier|public
+specifier|static
 class|class
 name|FailedThread
 block|{

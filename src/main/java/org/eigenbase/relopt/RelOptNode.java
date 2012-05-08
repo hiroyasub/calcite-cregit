@@ -15,6 +15,16 @@ end_package
 
 begin_import
 import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|eigenbase
@@ -22,16 +32,6 @@ operator|.
 name|reltype
 operator|.
 name|RelDataType
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|List
 import|;
 end_import
 
@@ -88,7 +88,7 @@ block|}
 end_interface
 
 begin_comment
-comment|// End RelNode.java
+comment|// End RelOptNode.java
 end_comment
 
 end_unit

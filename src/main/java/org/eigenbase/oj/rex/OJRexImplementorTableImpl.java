@@ -576,8 +576,8 @@ expr_stmt|;
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------
 specifier|public
-specifier|abstract
 specifier|static
+specifier|abstract
 class|class
 name|OJBasicAggImplementor
 implements|implements

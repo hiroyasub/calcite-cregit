@@ -47,14 +47,14 @@ extends|extends
 name|AbstractTupleIter
 block|{
 comment|//~ Instance fields --------------------------------------------------------
-specifier|final
 specifier|private
+specifier|final
 name|TupleIter
 index|[]
 name|in
 decl_stmt|;
-specifier|final
 specifier|private
+specifier|final
 name|boolean
 index|[]
 name|endOfData

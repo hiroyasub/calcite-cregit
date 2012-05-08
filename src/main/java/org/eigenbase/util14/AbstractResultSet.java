@@ -78,8 +78,8 @@ comment|/**  *<code>AbstractResultSet</code> provides a abstract implementation 
 end_comment
 
 begin_class
-specifier|abstract
 specifier|public
+specifier|abstract
 class|class
 name|AbstractResultSet
 extends|extends
@@ -123,8 +123,8 @@ name|maxRows
 decl_stmt|;
 comment|//~ Methods ----------------------------------------------------------------
 comment|/**      * Returns the raw value of a column as an object.      *      * @param columnIndex Column index, 1-based      */
-specifier|abstract
 specifier|protected
+specifier|abstract
 name|Object
 name|getRaw
 parameter_list|(

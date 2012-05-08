@@ -95,23 +95,23 @@ class|class
 name|PushProjector
 block|{
 comment|//~ Instance fields --------------------------------------------------------
-specifier|final
 specifier|private
+specifier|final
 name|ProjectRel
 name|origProj
 decl_stmt|;
-specifier|final
 specifier|private
+specifier|final
 name|RexNode
 name|origFilter
 decl_stmt|;
-specifier|final
 specifier|private
+specifier|final
 name|RelNode
 name|childRel
 decl_stmt|;
-specifier|final
 specifier|private
+specifier|final
 name|ExprCondition
 name|preserveExprCondition
 decl_stmt|;

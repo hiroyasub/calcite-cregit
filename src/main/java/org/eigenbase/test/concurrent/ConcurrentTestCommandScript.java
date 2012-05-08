@@ -9597,8 +9597,8 @@ expr_stmt|;
 block|}
 block|}
 comment|// Inner class: stand-alone client test tool
-specifier|static
 specifier|private
+specifier|static
 class|class
 name|Tool
 block|{
@@ -10118,8 +10118,8 @@ return|;
 block|}
 block|}
 comment|/**      * Client tool that connects via jdbc and runs one or more mtsql on that      * connection.      *      *<p>Usage: mtsql [-vgq] -u SERVER -d DRIVER [-n USER][-p PASSWORD]      * [VAR=VAL]...  SCRIPT [SCRIPT]...      */
-specifier|static
 specifier|public
+specifier|static
 name|void
 name|main
 parameter_list|(

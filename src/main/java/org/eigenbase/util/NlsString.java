@@ -569,8 +569,8 @@ argument_list|)
 return|;
 block|}
 comment|/**      * Concatenates some {@link NlsString} objects. The result has the charset      * and collation of the first element. The other elements must have matching      * (or null) charset and collation. Concatenates all at once, not pairwise,      * to avoid string copies.      *      * @param args array of {@link NlsString} to be concatenated      */
-specifier|static
 specifier|public
+specifier|static
 name|NlsString
 name|concat
 parameter_list|(

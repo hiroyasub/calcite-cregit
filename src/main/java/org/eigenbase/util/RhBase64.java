@@ -26,8 +26,8 @@ comment|/* ********  P U B L I C   F I E L D S  ******** */
 comment|//~ Static fields/initializers ---------------------------------------------
 comment|/**      * No options specified. Value is zero.      */
 specifier|public
-specifier|final
 specifier|static
+specifier|final
 name|int
 name|NO_OPTIONS
 init|=
@@ -35,8 +35,8 @@ literal|0
 decl_stmt|;
 comment|/**      * Specify encoding.      */
 specifier|public
-specifier|final
 specifier|static
+specifier|final
 name|int
 name|ENCODE
 init|=
@@ -44,8 +44,8 @@ literal|1
 decl_stmt|;
 comment|/**      * Specify decoding.      */
 specifier|public
-specifier|final
 specifier|static
+specifier|final
 name|int
 name|DECODE
 init|=
@@ -53,8 +53,8 @@ literal|0
 decl_stmt|;
 comment|/**      * Specify that data should be gzip-compressed.      */
 specifier|public
-specifier|final
 specifier|static
+specifier|final
 name|int
 name|GZIP
 init|=
@@ -62,8 +62,8 @@ literal|2
 decl_stmt|;
 comment|/**      * Don't break lines when encoding (violates strict Base64 specification)      */
 specifier|public
-specifier|final
 specifier|static
+specifier|final
 name|int
 name|DONT_BREAK_LINES
 init|=
@@ -72,8 +72,8 @@ decl_stmt|;
 comment|/* ********  P R I V A T E   F I E L D S  ******** */
 comment|/**      * Maximum line length (76) of Base64 output.      */
 specifier|private
-specifier|final
 specifier|static
+specifier|final
 name|int
 name|MAX_LINE_LENGTH
 init|=
@@ -81,8 +81,8 @@ literal|76
 decl_stmt|;
 comment|/**      * The equals sign (=) as a byte.      */
 specifier|private
-specifier|final
 specifier|static
+specifier|final
 name|byte
 name|EQUALS_SIGN
 init|=
@@ -93,8 +93,8 @@ literal|'='
 decl_stmt|;
 comment|/**      * The new line character (\n) as a byte.      */
 specifier|private
-specifier|final
 specifier|static
+specifier|final
 name|byte
 name|NEW_LINE
 init|=
@@ -105,8 +105,8 @@ literal|'\n'
 decl_stmt|;
 comment|/**      * Preferred encoding.      */
 specifier|private
-specifier|final
 specifier|static
+specifier|final
 name|String
 name|PREFERRED_ENCODING
 init|=
@@ -114,15 +114,15 @@ literal|"UTF-8"
 decl_stmt|;
 comment|/**      * The 64 valid Base64 values.      */
 specifier|private
-specifier|final
 specifier|static
+specifier|final
 name|byte
 index|[]
 name|ALPHABET
 decl_stmt|;
 specifier|private
-specifier|final
 specifier|static
+specifier|final
 name|byte
 index|[]
 name|_NATIVE_ALPHABET
@@ -492,8 +492,8 @@ expr_stmt|;
 block|}
 comment|/**      * Translates a Base64 value to either its 6-bit reconstruction value or a      * negative number indicating some other meaning.      */
 specifier|private
-specifier|final
 specifier|static
+specifier|final
 name|byte
 index|[]
 name|DECODABET
@@ -847,8 +847,8 @@ decl_stmt|;
 comment|// I think I end up not using the BAD_ENCODING indicator. private final
 comment|// static byte BAD_ENCODING    = -9; // Indicates error in encoding
 specifier|private
-specifier|final
 specifier|static
+specifier|final
 name|byte
 name|WHITE_SPACE_ENC
 init|=
@@ -858,8 +858,8 @@ decl_stmt|;
 comment|// Indicates white space in
 comment|// encoding
 specifier|private
-specifier|final
 specifier|static
+specifier|final
 name|byte
 name|EQUALS_SIGN_ENC
 init|=
