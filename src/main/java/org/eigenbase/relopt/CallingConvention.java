@@ -51,6 +51,22 @@ name|*
 import|;
 end_import
 
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|optiq
+operator|.
+name|rules
+operator|.
+name|java
+operator|.
+name|EnumerableRel
+import|;
+end_import
+
 begin_comment
 comment|/**  *<code>CallingConvention</code> enumerates the calling conventions built in to  * the Saffron project. This set can be extended by applications by defining new  * instances of CallingConvention and registering them with a planner, along  * with the desired conversion rules. Extended ordinals must be greater than  * CallingConvention.enumeration.getMax().  */
 end_comment
@@ -411,7 +427,7 @@ literal|"ENUMERABLE"
 argument_list|,
 name|ENUMERABLE_ORDINAL
 argument_list|,
-name|JavaRel
+name|EnumerableRel
 operator|.
 name|class
 argument_list|)

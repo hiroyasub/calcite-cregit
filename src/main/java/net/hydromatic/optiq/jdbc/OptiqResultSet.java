@@ -17,6 +17,18 @@ end_package
 
 begin_import
 import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|linq4j
+operator|.
+name|Enumerator
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|io
@@ -112,7 +124,7 @@ name|OptiqStatement
 name|statement
 decl_stmt|;
 specifier|private
-name|OptiqEnumerator
+name|Enumerator
 argument_list|<
 name|Object
 argument_list|>
@@ -782,11 +794,10 @@ name|void
 name|close
 parameter_list|()
 block|{
-throw|throw
-operator|new
-name|UnsupportedOperationException
-argument_list|()
-throw|;
+name|closed
+operator|=
+literal|true
+expr_stmt|;
 block|}
 comment|// not JDBC
 name|void

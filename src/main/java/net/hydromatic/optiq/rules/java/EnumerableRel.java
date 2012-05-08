@@ -11,38 +11,63 @@ name|hydromatic
 operator|.
 name|optiq
 operator|.
-name|jdbc
+name|rules
+operator|.
+name|java
 package|;
 end_package
 
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|linq4j
+operator|.
+name|expressions
+operator|.
+name|Expression
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
+name|rel
+operator|.
+name|RelNode
+import|;
+end_import
+
 begin_comment
-comment|/**  * Replica of LINQ's Enumerator interface.  *  *<p>Package-protected; not part of JDBC.</p>  */
+comment|/**  * A relational expression of one of the  * {@link org.eigenbase.relopt.CallingConvention#ENUMERABLE} calling convention.  *  * @author jhyde  */
 end_comment
 
 begin_interface
+specifier|public
 interface|interface
-name|OptiqEnumerator
-parameter_list|<
-name|T
-parameter_list|>
+name|EnumerableRel
+extends|extends
+name|RelNode
 block|{
-name|boolean
-name|moveNext
-parameter_list|()
-function_decl|;
-name|T
-name|current
-parameter_list|()
-function_decl|;
-name|void
-name|reset
-parameter_list|()
+comment|//~ Methods ----------------------------------------------------------------
+comment|/**      * Creates a plan for this expression according to a calling convention.      *      * @param implementor implementor      */
+name|Expression
+name|implement
+parameter_list|(
+name|EnumerableRelImplementor
+name|implementor
+parameter_list|)
 function_decl|;
 block|}
 end_interface
 
 begin_comment
-comment|// End OptiqEnumerator.java
+comment|// End EnumerableRel.java
 end_comment
 
 end_unit

@@ -23,6 +23,18 @@ name|hydromatic
 operator|.
 name|linq4j
 operator|.
+name|Enumerator
+import|;
+end_import
+
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|linq4j
+operator|.
 name|expressions
 operator|.
 name|Expression
@@ -686,7 +698,7 @@ name|resultSetMetaData
 expr_stmt|;
 block|}
 specifier|public
-name|OptiqEnumerator
+name|Enumerator
 argument_list|<
 name|Object
 argument_list|>
