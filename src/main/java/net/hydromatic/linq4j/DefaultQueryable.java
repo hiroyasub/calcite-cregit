@@ -463,7 +463,7 @@ specifier|public
 parameter_list|<
 name|T2
 parameter_list|>
-name|Enumerable
+name|Queryable
 argument_list|<
 name|T2
 argument_list|>

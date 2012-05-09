@@ -23,7 +23,27 @@ begin_class
 specifier|public
 class|class
 name|LabelTarget
-block|{ }
+block|{
+specifier|public
+specifier|final
+name|String
+name|name
+decl_stmt|;
+specifier|public
+name|LabelTarget
+parameter_list|(
+name|String
+name|name
+parameter_list|)
+block|{
+name|this
+operator|.
+name|name
+operator|=
+name|name
+expr_stmt|;
+block|}
+block|}
 end_class
 
 begin_comment

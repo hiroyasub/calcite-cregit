@@ -1239,6 +1239,22 @@ argument_list|>
 name|clazz
 parameter_list|)
 function_decl|;
+parameter_list|<
+name|T2
+parameter_list|>
+name|Queryable
+argument_list|<
+name|T2
+argument_list|>
+name|cast
+parameter_list|(
+name|Class
+argument_list|<
+name|T2
+argument_list|>
+name|clazz
+parameter_list|)
+function_decl|;
 comment|/** Sorts the elements of a sequence in ascending      * order according to a key. */
 parameter_list|<
 name|TKey
