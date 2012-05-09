@@ -1635,6 +1635,9 @@ expr_stmt|;
 name|JavaRelImplementor
 name|relImplementor
 init|=
+operator|(
+name|JavaRelImplementor
+operator|)
 name|getRelImplementor
 argument_list|(
 name|rootRel
@@ -1682,7 +1685,7 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/**      * Implements a physical query plan.      *      * @param rowType original rowtype returned by query validator      * @param rootRel root of the relational expression.      * @param sqlKind SqlKind of the original statement.      * @param decl ClassDeclaration of the generated result.      * @param args argument list of the generated result.      * @return an executable plan, a {@link PreparedExecution}.      */
-specifier|private
+specifier|protected
 name|PreparedExecution
 name|implement
 parameter_list|(
@@ -1742,6 +1745,9 @@ expr_stmt|;
 name|JavaRelImplementor
 name|relImplementor
 init|=
+operator|(
+name|JavaRelImplementor
+operator|)
 name|getRelImplementor
 argument_list|(
 name|rootRel
@@ -1932,7 +1938,7 @@ return|return
 name|plan
 return|;
 block|}
-specifier|private
+specifier|protected
 name|TableModificationRel
 operator|.
 name|Operation
@@ -2093,10 +2099,10 @@ name|RelOptConnection
 name|connection
 parameter_list|)
 function_decl|;
-comment|/**      * Protected method to allow subclasses to override construction of      * JavaRelImplementor.      */
+comment|/**      * Protected method to allow subclasses to override construction of      * RelImplementor.      */
 specifier|protected
 specifier|abstract
-name|JavaRelImplementor
+name|RelImplementor
 name|getRelImplementor
 parameter_list|(
 name|RexBuilder

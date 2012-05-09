@@ -16,7 +16,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * Statement within a OPTIQ server.  */
+comment|/**  * Statement within an Optiq server.  */
 end_comment
 
 begin_interface

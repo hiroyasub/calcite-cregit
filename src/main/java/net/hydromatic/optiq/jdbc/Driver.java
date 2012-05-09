@@ -16,7 +16,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * OPTIQ JDBC driver.  */
+comment|/**  * Optiq JDBC driver.  */
 end_comment
 
 begin_class

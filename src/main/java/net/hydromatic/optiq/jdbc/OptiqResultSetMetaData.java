@@ -46,7 +46,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Implementation of {@link ResultSetMetaData}  * for the OPTIQ engine.  */
+comment|/**  * Implementation of {@link ResultSetMetaData}  * for the Optiq engine.  */
 end_comment
 
 begin_class
@@ -553,9 +553,11 @@ argument_list|)
 return|;
 block|}
 throw|throw
-name|OptiqConnectionImpl
+name|statement
 operator|.
-name|HELPER
+name|connection
+operator|.
+name|helper
 operator|.
 name|createException
 argument_list|(

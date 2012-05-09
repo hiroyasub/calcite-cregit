@@ -118,6 +118,7 @@ name|BoundMethod
 name|boundMethod
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
+specifier|protected
 name|PreparedExecution
 parameter_list|(
 name|ParseTree

@@ -11,35 +11,21 @@ name|hydromatic
 operator|.
 name|optiq
 operator|.
-name|jdbc
+name|impl
+operator|.
+name|java
 package|;
 end_package
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|eigenbase
 operator|.
-name|optiq
+name|reltype
 operator|.
-name|MutableSchema
-import|;
-end_import
-
-begin_import
-import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|optiq
-operator|.
-name|impl
-operator|.
-name|java
-operator|.
-name|JavaTypeFactory
+name|RelDataType
 import|;
 end_import
 
@@ -55,41 +41,45 @@ name|RelDataTypeFactory
 import|;
 end_import
 
-begin_import
-import|import
-name|java
-operator|.
-name|sql
-operator|.
-name|Connection
-import|;
-end_import
-
 begin_comment
-comment|/**  * Extension to Optiq's implementation of  * {@link java.sql.Connection JDBC connection} allows schemas to be defined  * dynamically.  *  *<p>You can start off with an empty connection (no schemas), define one  * or two schemas, and start querying them.</p>  */
+comment|/**  * Type factory that can register Java classes as record types.  *  * @author jhyde  */
 end_comment
 
 begin_interface
 specifier|public
 interface|interface
-name|OptiqConnection
-extends|extends
-name|Connection
-block|{
-comment|/**      * Returns the root schema.      *      *<p>You can define objects (such as relations) in this schema, and      * also nested schemas.</p>      *      * @return Root schema      */
-name|MutableSchema
-name|getRootSchema
-parameter_list|()
-function_decl|;
 name|JavaTypeFactory
-name|getTypeFactory
-parameter_list|()
+extends|extends
+name|RelDataTypeFactory
+block|{
+comment|/**      * Creates a record type based upon the public fields of a Java class.      *      * @param clazz Java class      * @return Record type that remembers its Java class      */
+name|RelDataType
+name|createStructType
+parameter_list|(
+name|Class
+name|clazz
+parameter_list|)
+function_decl|;
+comment|/**      * Creates a type, deducing whether a record, scalar or primitive type      * is needed.      *      * @param type Java class      * @return Record or scalar type      */
+name|RelDataType
+name|createType
+parameter_list|(
+name|Class
+name|type
+parameter_list|)
+function_decl|;
+name|Class
+name|getJavaClass
+parameter_list|(
+name|RelDataType
+name|type
+parameter_list|)
 function_decl|;
 block|}
 end_interface
 
 begin_comment
-comment|// End OptiqConnection.java
+comment|// End JavaTypeFactory.java
 end_comment
 
 end_unit

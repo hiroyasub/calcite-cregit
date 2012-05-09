@@ -88,7 +88,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Implementation of {@link java.sql.PreparedStatement}  * for the OPTIQ engine.  *  *<p>This class has sub-classes which implement JDBC 3.0 and JDBC 4.0 APIs;  * it is instantiated using {@link Factory#newPreparedStatement}.</p>  *  * @author jhyde  * @since Jun 12, 2007  */
+comment|/**  * Implementation of {@link java.sql.PreparedStatement}  * for the Optiq engine.  *  *<p>This class has sub-classes which implement JDBC 3.0 and JDBC 4.0 APIs;  * it is instantiated using {@link Factory#newPreparedStatement}.</p>  *  * @author jhyde  */
 end_comment
 
 begin_class
@@ -108,7 +108,7 @@ operator|.
 name|PrepareResult
 name|prepareResult
 decl_stmt|;
-comment|/**      * Creates a OptiqPreparedStatement.      *      * @param connection Connection      * @param sql MDX query string      *      * @throws SQLException if database error occurs      */
+comment|/**      * Creates an OptiqPreparedStatement.      *      * @param connection Connection      * @param sql MDX query string      *      * @throws SQLException if database error occurs      */
 specifier|protected
 name|OptiqPreparedStatement
 parameter_list|(
@@ -1092,15 +1092,15 @@ parameter_list|)
 block|{
 comment|//noinspection ThrowableResultOfMethodCallIgnored
 throw|throw
-name|OptiqConnectionImpl
+name|connection
 operator|.
-name|HELPER
+name|helper
 operator|.
 name|toSQLException
 argument_list|(
-name|OptiqConnectionImpl
+name|connection
 operator|.
-name|HELPER
+name|helper
 operator|.
 name|createException
 argument_list|(

@@ -40,7 +40,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Implementation of {@link java.sql.Statement}  * for the OPTIQ engine.  */
+comment|/**  * Implementation of {@link java.sql.Statement}  * for the Optiq engine.  */
 end_comment
 
 begin_class
@@ -391,9 +391,9 @@ literal|0
 condition|)
 block|{
 throw|throw
-name|OptiqConnectionImpl
+name|connection
 operator|.
-name|HELPER
+name|helper
 operator|.
 name|createException
 argument_list|(
@@ -915,9 +915,9 @@ argument_list|)
 return|;
 block|}
 throw|throw
-name|OptiqConnectionImpl
+name|connection
 operator|.
-name|HELPER
+name|helper
 operator|.
 name|createException
 argument_list|(
@@ -1002,9 +1002,9 @@ name|e
 parameter_list|)
 block|{
 throw|throw
-name|OptiqConnectionImpl
+name|connection
 operator|.
-name|HELPER
+name|helper
 operator|.
 name|createException
 argument_list|(
@@ -1046,9 +1046,9 @@ name|e
 parameter_list|)
 block|{
 throw|throw
-name|OptiqConnectionImpl
+name|connection
 operator|.
-name|HELPER
+name|helper
 operator|.
 name|createException
 argument_list|(

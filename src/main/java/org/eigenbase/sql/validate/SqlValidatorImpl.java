@@ -15954,20 +15954,7 @@ argument_list|,
 name|i
 argument_list|)
 decl_stmt|;
-assert|assert
-name|origin
-operator|==
-literal|null
-operator|||
-name|origin
-operator|.
-name|size
-argument_list|()
-operator|>=
-literal|4
-operator|:
-name|origin
-assert|;
+comment|//            assert origin == null || origin.size()>= 4 : origin;
 name|list
 operator|.
 name|add

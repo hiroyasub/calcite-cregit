@@ -78,7 +78,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Implementation of OPTIQ JDBC driver that does not register itself.  */
+comment|/**  * Implementation of Optiq JDBC driver that does not register itself.  */
 end_comment
 
 begin_class

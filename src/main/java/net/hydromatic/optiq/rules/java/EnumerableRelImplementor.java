@@ -158,6 +158,23 @@ name|this
 argument_list|)
 return|;
 block|}
+specifier|public
+name|Expression
+name|implementRoot
+parameter_list|(
+name|EnumerableRel
+name|rootRel
+parameter_list|)
+block|{
+return|return
+name|rootRel
+operator|.
+name|implement
+argument_list|(
+name|this
+argument_list|)
+return|;
+block|}
 block|}
 end_class
 

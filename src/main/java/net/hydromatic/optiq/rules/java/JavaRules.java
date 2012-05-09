@@ -99,6 +99,22 @@ end_import
 
 begin_import
 import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|optiq
+operator|.
+name|impl
+operator|.
+name|java
+operator|.
+name|JavaTypeFactory
+import|;
+end_import
+
+begin_import
+import|import
 name|openjava
 operator|.
 name|mop
@@ -680,6 +696,21 @@ operator|:
 literal|"EnumerableJoin is equi only"
 assert|;
 comment|// TODO: stricter pre-check
+specifier|final
+name|JavaTypeFactory
+name|typeFactory
+init|=
+operator|(
+name|JavaTypeFactory
+operator|)
+name|left
+operator|.
+name|getCluster
+argument_list|()
+operator|.
+name|getTypeFactory
+argument_list|()
+decl_stmt|;
 return|return
 name|Expressions
 operator|.
@@ -719,6 +750,8 @@ name|EnumUtil
 operator|.
 name|generateAccessor
 argument_list|(
+name|typeFactory
+argument_list|,
 name|left
 operator|.
 name|getRowType
@@ -731,6 +764,8 @@ name|EnumUtil
 operator|.
 name|generateAccessor
 argument_list|(
+name|typeFactory
+argument_list|,
 name|right
 operator|.
 name|getRowType
@@ -743,6 +778,8 @@ name|EnumUtil
 operator|.
 name|generateSelector
 argument_list|(
+name|typeFactory
+argument_list|,
 name|rowType
 argument_list|)
 argument_list|)
@@ -759,6 +796,9 @@ specifier|static
 name|Expression
 name|generateAccessor
 parameter_list|(
+name|JavaTypeFactory
+name|typeFactory
+parameter_list|,
 name|RelDataType
 name|rowType
 parameter_list|,
@@ -797,9 +837,9 @@ name|Expressions
 operator|.
 name|parameter
 argument_list|(
-name|EnumUtil
+name|typeFactory
 operator|.
-name|toTypeName
+name|getJavaClass
 argument_list|(
 name|rowType
 argument_list|)
@@ -864,24 +904,14 @@ name|ordinal
 index|]
 return|;
 block|}
-specifier|private
-specifier|static
-name|Class
-name|toTypeName
-parameter_list|(
-name|RelDataType
-name|type
-parameter_list|)
-block|{
-return|return
-literal|null
-return|;
-block|}
 specifier|public
 specifier|static
 name|Expression
 name|generateSelector
 parameter_list|(
+name|JavaTypeFactory
+name|typeFactory
+parameter_list|,
 name|RelDataType
 name|rowType
 parameter_list|)
@@ -900,6 +930,10 @@ name|TableAccessRelBase
 implements|implements
 name|EnumerableRel
 block|{
+specifier|private
+name|Expression
+name|expression
+decl_stmt|;
 specifier|public
 name|EnumerableTableAccessRel
 parameter_list|(
@@ -911,6 +945,9 @@ name|table
 parameter_list|,
 name|RelOptConnection
 name|connection
+parameter_list|,
+name|Expression
+name|expression
 parameter_list|)
 block|{
 name|super
@@ -931,6 +968,12 @@ argument_list|,
 name|connection
 argument_list|)
 expr_stmt|;
+name|this
+operator|.
+name|expression
+operator|=
+name|expression
+expr_stmt|;
 block|}
 specifier|public
 name|Expression
@@ -941,7 +984,7 @@ name|implementor
 parameter_list|)
 block|{
 return|return
-literal|null
+name|expression
 return|;
 block|}
 block|}
@@ -1359,7 +1402,7 @@ name|getRowType
 argument_list|()
 decl_stmt|;
 return|return
-literal|null
+name|childExp
 comment|/* implementAbstract(                 implementor,                 this,                 childExp,                 varInputRow,                 inputRowType,                 outputRowType,                 program,                 null) */
 return|;
 block|}
