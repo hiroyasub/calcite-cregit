@@ -28,31 +28,45 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Provides functionality to evaluate queries against a specific data source  * wherein the type of the data is known.  *  *<p>Analogous to LINQ's System.Linq.IQueryable.</p>  */
+comment|/**  * Core methods that define a {@link Queryable}.  *  *<p>The other methods in {@link Queryable}, defined in  * {@link ExtendedQueryable}, can easily be implemented by calling the  * corresponding static methods in {@link Extensions}.  *  * @author jhyde  */
 end_comment
 
 begin_interface
 specifier|public
 interface|interface
-name|Queryable
+name|RawQueryable
 parameter_list|<
 name|T
 parameter_list|>
 extends|extends
-name|RawQueryable
+name|Enumerable
 argument_list|<
 name|T
 argument_list|>
-extends|,
-name|ExtendedQueryable
+block|{
+comment|/**      * Gets the type of the element(s) that are returned when the expression      * tree associated with this Queryable is executed.      */
+name|Class
 argument_list|<
 name|T
 argument_list|>
-block|{ }
+name|getElementType
+parameter_list|()
+function_decl|;
+comment|/** Gets the expression tree that is associated with this Queryable. */
+name|Expression
+name|getExpression
+parameter_list|()
+function_decl|;
+comment|/** Gets the query provider that is associated with this data source. */
+name|QueryProvider
+name|getProvider
+parameter_list|()
+function_decl|;
+block|}
 end_interface
 
 begin_comment
-comment|// End Queryable.java
+comment|// End RawQueryable.java
 end_comment
 
 end_unit

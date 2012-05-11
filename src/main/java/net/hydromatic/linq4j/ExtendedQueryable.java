@@ -1261,7 +1261,7 @@ name|TKey
 extends|extends
 name|Comparable
 parameter_list|>
-name|Queryable
+name|OrderedQueryable
 argument_list|<
 name|TSource
 argument_list|>
@@ -1283,7 +1283,7 @@ comment|/** Sorts the elements of a sequence in ascending      * order by using 
 parameter_list|<
 name|TKey
 parameter_list|>
-name|Queryable
+name|OrderedQueryable
 argument_list|<
 name|TSource
 argument_list|>
@@ -1313,7 +1313,7 @@ name|TKey
 extends|extends
 name|Comparable
 parameter_list|>
-name|Queryable
+name|OrderedQueryable
 argument_list|<
 name|TSource
 argument_list|>
@@ -1335,7 +1335,7 @@ comment|/** Sorts the elements of a sequence in descending      * order by using
 parameter_list|<
 name|TKey
 parameter_list|>
-name|Queryable
+name|OrderedQueryable
 argument_list|<
 name|TSource
 argument_list|>
