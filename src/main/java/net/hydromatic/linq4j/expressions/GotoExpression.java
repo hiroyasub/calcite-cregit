@@ -41,7 +41,6 @@ specifier|final
 name|Expression
 name|expression
 decl_stmt|;
-specifier|public
 name|GotoExpression
 parameter_list|(
 name|GotoExpressionKind
@@ -60,9 +59,18 @@ name|ExpressionType
 operator|.
 name|Goto
 argument_list|,
+name|expression
+operator|==
+literal|null
+condition|?
 name|Void
 operator|.
 name|TYPE
+else|:
+name|expression
+operator|.
+name|getType
+argument_list|()
 argument_list|)
 expr_stmt|;
 name|this

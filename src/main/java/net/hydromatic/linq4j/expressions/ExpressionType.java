@@ -111,6 +111,15 @@ name|Constant
 block|,
 comment|/** A cast or conversion operation, such as (SampleType)obj in      * C#or CType(obj, SampleType) in Visual Basic. For a numeric      * conversion, if the converted value is too large for the      * destination type, no exception is thrown. */
 name|Convert
+argument_list|(
+literal|null
+argument_list|,
+literal|false
+argument_list|,
+literal|2
+argument_list|,
+literal|true
+argument_list|)
 block|,
 comment|/** A cast or conversion operation, such as (SampleType)obj in      * C#or CType(obj, SampleType) in Visual Basic. For a numeric      * conversion, if the converted value does not fit the      * destination type, an exception is thrown. */
 name|ConvertChecked

@@ -129,11 +129,36 @@ comment|// Print out the expression.
 name|String
 name|s
 init|=
-name|lambdaExpr
+name|Expressions
 operator|.
 name|toString
-argument_list|()
+argument_list|(
+name|lambdaExpr
+argument_list|)
 decl_stmt|;
+name|assertEquals
+argument_list|(
+literal|"new net.hydromatic.linq4j.function.Function1() {\n"
+operator|+
+literal|"  public Integer apply(Integer arg) {\n"
+operator|+
+literal|"    return arg + 2;\n"
+operator|+
+literal|"  }\n"
+operator|+
+literal|"  public Object apply(Object arg) {\n"
+operator|+
+literal|"    return apply(\n"
+operator|+
+literal|"      (Integer) arg);\n"
+operator|+
+literal|"  }\n"
+operator|+
+literal|"}\n"
+argument_list|,
+name|s
+argument_list|)
+expr_stmt|;
 comment|// Compile and run the lambda expression.
 comment|// The value of the parameter is 1.
 name|int
@@ -621,9 +646,17 @@ name|assertEquals
 argument_list|(
 literal|"new net.hydromatic.linq4j.function.Function1() {\n"
 operator|+
-literal|"  void apply(String x) {\n"
+literal|"  public Integer apply(String x) {\n"
 operator|+
 literal|"    return x.length();\n"
+operator|+
+literal|"  }\n"
+operator|+
+literal|"  public Object apply(Object x) {\n"
+operator|+
+literal|"    return apply(\n"
+operator|+
+literal|"      (String) x);\n"
 operator|+
 literal|"  }\n"
 operator|+
@@ -678,6 +711,172 @@ operator|.
 name|asList
 argument_list|(
 name|paramX
+argument_list|)
+argument_list|)
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|assertEquals
+argument_list|(
+literal|"new String[] {\n"
+operator|+
+literal|"  \"foo\",\n"
+operator|+
+literal|"  null,\n"
+operator|+
+literal|"  \"bar\\\"baz\"}"
+argument_list|,
+name|Expressions
+operator|.
+name|toString
+argument_list|(
+name|Expressions
+operator|.
+name|newArrayInit
+argument_list|(
+name|String
+operator|.
+name|class
+argument_list|,
+name|Arrays
+operator|.
+expr|<
+name|Expression
+operator|>
+name|asList
+argument_list|(
+name|Expressions
+operator|.
+name|constant
+argument_list|(
+literal|"foo"
+argument_list|)
+argument_list|,
+name|Expressions
+operator|.
+name|constant
+argument_list|(
+literal|null
+argument_list|)
+argument_list|,
+name|Expressions
+operator|.
+name|constant
+argument_list|(
+literal|"bar\"baz"
+argument_list|)
+argument_list|)
+argument_list|)
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|assertEquals
+argument_list|(
+literal|"(int) ((String) (Object) \"foo\").length()"
+argument_list|,
+name|Expressions
+operator|.
+name|toString
+argument_list|(
+name|Expressions
+operator|.
+name|convert_
+argument_list|(
+name|Expressions
+operator|.
+name|call
+argument_list|(
+name|Expressions
+operator|.
+name|convert_
+argument_list|(
+name|Expressions
+operator|.
+name|convert_
+argument_list|(
+name|Expressions
+operator|.
+name|constant
+argument_list|(
+literal|"foo"
+argument_list|)
+argument_list|,
+name|Object
+operator|.
+name|class
+argument_list|)
+argument_list|,
+name|String
+operator|.
+name|class
+argument_list|)
+argument_list|,
+literal|"length"
+argument_list|,
+name|Collections
+operator|.
+expr|<
+name|Class
+operator|>
+name|emptyList
+argument_list|()
+argument_list|,
+name|Collections
+operator|.
+expr|<
+name|Expression
+operator|>
+name|emptyList
+argument_list|()
+argument_list|)
+argument_list|,
+name|Integer
+operator|.
+name|TYPE
+argument_list|)
+argument_list|)
+argument_list|)
+expr_stmt|;
+comment|// resolving a static method
+name|assertEquals
+argument_list|(
+literal|"Integer.valueOf(\"0123\")"
+argument_list|,
+name|Expressions
+operator|.
+name|toString
+argument_list|(
+name|Expressions
+operator|.
+name|call
+argument_list|(
+name|Integer
+operator|.
+name|class
+argument_list|,
+literal|"valueOf"
+argument_list|,
+name|Collections
+operator|.
+expr|<
+name|Class
+operator|>
+name|emptyList
+argument_list|()
+argument_list|,
+name|Collections
+operator|.
+expr|<
+name|Expression
+operator|>
+name|singletonList
+argument_list|(
+name|Expressions
+operator|.
+name|constant
+argument_list|(
+literal|"0123"
+argument_list|)
 argument_list|)
 argument_list|)
 argument_list|)

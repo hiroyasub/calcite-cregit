@@ -50,7 +50,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Represents a call to either static or an instance method.  */
+comment|/**  * Represents a call to either a static or an instance method.  */
 end_comment
 
 begin_class
@@ -70,6 +70,7 @@ specifier|final
 name|Expression
 name|targetExpression
 decl_stmt|;
+comment|// null for call to static method
 specifier|private
 specifier|final
 name|List
@@ -78,7 +79,6 @@ name|Expression
 argument_list|>
 name|expressions
 decl_stmt|;
-specifier|public
 name|MethodCallExpression
 parameter_list|(
 name|Method
@@ -124,16 +124,6 @@ name|expressions
 operator|=
 name|expressions
 expr_stmt|;
-assert|assert
-name|targetExpression
-operator|!=
-literal|null
-assert|;
-assert|assert
-name|method
-operator|!=
-literal|null
-assert|;
 assert|assert
 name|expressions
 operator|!=
@@ -314,6 +304,14 @@ condition|)
 block|{
 return|return;
 block|}
+if|if
+condition|(
+name|targetExpression
+operator|!=
+literal|null
+condition|)
+block|{
+comment|// instance method
 name|targetExpression
 operator|.
 name|accept
@@ -327,6 +325,21 @@ operator|.
 name|lprec
 argument_list|)
 expr_stmt|;
+block|}
+else|else
+block|{
+comment|// static method
+name|writer
+operator|.
+name|append
+argument_list|(
+name|method
+operator|.
+name|getDeclaringClass
+argument_list|()
+argument_list|)
+expr_stmt|;
+block|}
 name|writer
 operator|.
 name|append
