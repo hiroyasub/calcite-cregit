@@ -748,6 +748,10 @@ name|resultSetMetaData
 decl_stmt|;
 specifier|final
 name|RawEnumerable
+argument_list|<
+name|Object
+index|[]
+argument_list|>
 name|enumerable
 decl_stmt|;
 specifier|public
@@ -766,6 +770,10 @@ name|OptiqResultSetMetaData
 name|resultSetMetaData
 parameter_list|,
 name|RawEnumerable
+argument_list|<
+name|Object
+index|[]
+argument_list|>
 name|enumerable
 parameter_list|)
 block|{
@@ -799,6 +807,10 @@ expr_stmt|;
 block|}
 specifier|public
 name|Enumerator
+argument_list|<
+name|Object
+index|[]
+argument_list|>
 name|execute
 parameter_list|()
 block|{
