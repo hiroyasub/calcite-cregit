@@ -59,6 +59,17 @@ name|RelDataType
 name|getType
 parameter_list|()
 function_decl|;
+comment|/**      * Evaluates to yield a result. Typically the result will be a      * {@link net.hydromatic.linq4j.Queryable}.      */
+name|Object
+name|evaluate
+parameter_list|(
+name|List
+argument_list|<
+name|Object
+argument_list|>
+name|arguments
+parameter_list|)
+function_decl|;
 block|}
 end_interface
 

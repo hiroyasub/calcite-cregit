@@ -152,6 +152,8 @@ operator|.
 name|get
 argument_list|(
 name|column
+operator|-
+literal|1
 argument_list|)
 return|;
 block|}
@@ -591,9 +593,15 @@ name|this
 argument_list|)
 return|;
 block|}
+specifier|static
 class|class
 name|ColumnMetaData
 block|{
+specifier|final
+name|int
+name|ordinal
+decl_stmt|;
+comment|// 0-based
 specifier|final
 name|boolean
 name|autoIncrement
@@ -677,6 +685,9 @@ decl_stmt|;
 specifier|public
 name|ColumnMetaData
 parameter_list|(
+name|int
+name|ordinal
+parameter_list|,
 name|boolean
 name|autoIncrement
 parameter_list|,
@@ -738,6 +749,12 @@ name|String
 name|columnClassName
 parameter_list|)
 block|{
+name|this
+operator|.
+name|ordinal
+operator|=
+name|ordinal
+expr_stmt|;
 name|this
 operator|.
 name|autoIncrement

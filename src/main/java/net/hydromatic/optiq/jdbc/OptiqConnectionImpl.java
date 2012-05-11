@@ -219,7 +219,9 @@ name|rootSchema
 init|=
 operator|new
 name|MapSchema
-argument_list|()
+argument_list|(
+name|typeFactory
+argument_list|)
 decl_stmt|;
 specifier|final
 name|UnregisteredDriver
@@ -1528,6 +1530,24 @@ name|isPrimitive
 argument_list|()
 condition|)
 block|{
+return|return
+name|createJavaType
+argument_list|(
+name|type
+argument_list|)
+return|;
+block|}
+if|else if
+condition|(
+name|type
+operator|==
+name|String
+operator|.
+name|class
+condition|)
+block|{
+comment|// TODO: similar special treatment for BigDecimal, BigInteger,
+comment|//  Date, Time, Timestamp, Double etc.
 return|return
 name|createJavaType
 argument_list|(
