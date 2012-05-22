@@ -13,20 +13,6 @@ name|linq4j
 package|;
 end_package
 
-begin_import
-import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|linq4j
-operator|.
-name|expressions
-operator|.
-name|Expression
-import|;
-end_import
-
 begin_comment
 comment|/**  * Provides functionality to evaluate queries against a specific data source  * wherein the type of the data is known.  *  *<p>Analogous to LINQ's System.Linq.IQueryable.</p>  */
 end_comment

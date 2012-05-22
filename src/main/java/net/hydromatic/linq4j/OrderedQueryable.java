@@ -14,7 +14,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * @author jhyde  */
+comment|/**  * Represents the result of applying a sorting operation to a {@link Queryable}.  *  * @author jhyde  */
 end_comment
 
 begin_interface

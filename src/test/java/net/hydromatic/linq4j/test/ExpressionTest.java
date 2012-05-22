@@ -570,14 +570,6 @@ argument_list|)
 argument_list|,
 literal|"compareTo"
 argument_list|,
-name|Collections
-operator|.
-expr|<
-name|Class
-operator|>
-name|emptyList
-argument_list|()
-argument_list|,
 name|Arrays
 operator|.
 expr|<
@@ -687,14 +679,6 @@ argument_list|(
 name|paramX
 argument_list|,
 literal|"length"
-argument_list|,
-name|Collections
-operator|.
-expr|<
-name|Class
-operator|>
-name|emptyList
-argument_list|()
 argument_list|,
 name|Collections
 operator|.
@@ -816,14 +800,6 @@ argument_list|,
 name|Collections
 operator|.
 expr|<
-name|Class
-operator|>
-name|emptyList
-argument_list|()
-argument_list|,
-name|Collections
-operator|.
-expr|<
 name|Expression
 operator|>
 name|emptyList
@@ -859,14 +835,6 @@ argument_list|,
 name|Collections
 operator|.
 expr|<
-name|Class
-operator|>
-name|emptyList
-argument_list|()
-argument_list|,
-name|Collections
-operator|.
-expr|<
 name|Expression
 operator|>
 name|singletonList
@@ -880,6 +848,216 @@ argument_list|)
 argument_list|)
 argument_list|)
 argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+specifier|public
+name|void
+name|testWriteConstant
+parameter_list|()
+block|{
+comment|// primitives
+name|assertEquals
+argument_list|(
+literal|"new int[] {\n"
+operator|+
+literal|"  1,\n"
+operator|+
+literal|"  2,\n"
+operator|+
+literal|"  -1}"
+argument_list|,
+name|Expressions
+operator|.
+name|toString
+argument_list|(
+name|Expressions
+operator|.
+name|constant
+argument_list|(
+operator|new
+name|int
+index|[]
+block|{
+literal|1
+block|,
+literal|2
+block|,
+operator|-
+literal|1
+block|}
+argument_list|)
+argument_list|)
+argument_list|)
+expr_stmt|;
+comment|// objects and nulls
+name|assertEquals
+argument_list|(
+literal|"new String[] {\n"
+operator|+
+literal|"  \"foo\",\n"
+operator|+
+literal|"  null}"
+argument_list|,
+name|Expressions
+operator|.
+name|toString
+argument_list|(
+name|Expressions
+operator|.
+name|constant
+argument_list|(
+operator|new
+name|String
+index|[]
+block|{
+literal|"foo"
+block|,
+literal|null
+block|}
+argument_list|)
+argument_list|)
+argument_list|)
+expr_stmt|;
+comment|// automatically call constructor if it matches fields
+name|assertEquals
+argument_list|(
+literal|"new net.hydromatic.linq4j.test.Linq4jTest$Employee[] {\n"
+operator|+
+literal|"  new net.hydromatic.linq4j.test.Linq4jTest$Employee(\n"
+operator|+
+literal|"    100,\n"
+operator|+
+literal|"    \"Fred\",\n"
+operator|+
+literal|"    10),\n"
+operator|+
+literal|"  new net.hydromatic.linq4j.test.Linq4jTest$Employee(\n"
+operator|+
+literal|"    110,\n"
+operator|+
+literal|"    \"Bill\",\n"
+operator|+
+literal|"    30),\n"
+operator|+
+literal|"  new net.hydromatic.linq4j.test.Linq4jTest$Employee(\n"
+operator|+
+literal|"    120,\n"
+operator|+
+literal|"    \"Eric\",\n"
+operator|+
+literal|"    10),\n"
+operator|+
+literal|"  new net.hydromatic.linq4j.test.Linq4jTest$Employee(\n"
+operator|+
+literal|"    130,\n"
+operator|+
+literal|"    \"Jane\",\n"
+operator|+
+literal|"    10)}"
+argument_list|,
+name|Expressions
+operator|.
+name|toString
+argument_list|(
+name|Expressions
+operator|.
+name|constant
+argument_list|(
+name|Linq4jTest
+operator|.
+name|emps
+argument_list|)
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+specifier|public
+name|void
+name|testCompile
+parameter_list|()
+throws|throws
+name|NoSuchMethodException
+block|{
+comment|// Creating a parameter for the expression tree.
+name|ParameterExpression
+name|param
+init|=
+name|Expressions
+operator|.
+name|parameter
+argument_list|(
+name|String
+operator|.
+name|class
+argument_list|)
+decl_stmt|;
+comment|// Creating an expression for the method call and specifying its
+comment|// parameter.
+name|MethodCallExpression
+name|methodCall
+init|=
+name|Expressions
+operator|.
+name|call
+argument_list|(
+name|Integer
+operator|.
+name|class
+argument_list|,
+literal|"valueOf"
+argument_list|,
+name|Collections
+operator|.
+expr|<
+name|Expression
+operator|>
+name|singletonList
+argument_list|(
+name|param
+argument_list|)
+argument_list|)
+decl_stmt|;
+comment|// The following statement first creates an expression tree,
+comment|// then compiles it, and then runs it.
+name|int
+name|x
+init|=
+name|Expressions
+operator|.
+expr|<
+name|Function1
+argument_list|<
+name|String
+argument_list|,
+name|Integer
+argument_list|>
+operator|>
+name|lambda
+argument_list|(
+name|methodCall
+argument_list|,
+operator|new
+name|ParameterExpression
+index|[]
+block|{
+name|param
+block|}
+argument_list|)
+operator|.
+name|getFunction
+argument_list|()
+operator|.
+name|apply
+argument_list|(
+literal|"1234"
+argument_list|)
+decl_stmt|;
+name|assertEquals
+argument_list|(
+literal|1234
+argument_list|,
+name|x
 argument_list|)
 expr_stmt|;
 block|}

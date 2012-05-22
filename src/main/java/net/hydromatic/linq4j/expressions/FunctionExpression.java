@@ -71,17 +71,17 @@ parameter_list|>
 extends|extends
 name|LambdaExpression
 block|{
-specifier|private
+specifier|public
 specifier|final
 name|F
 name|function
 decl_stmt|;
-specifier|private
+specifier|public
 specifier|final
 name|Expression
 name|body
 decl_stmt|;
-specifier|private
+specifier|public
 specifier|final
 name|List
 argument_list|<
@@ -343,7 +343,12 @@ operator|new
 name|Class
 index|[]
 block|{
+name|Types
+operator|.
+name|toClass
+argument_list|(
 name|type
+argument_list|)
 block|}
 argument_list|,
 operator|new
@@ -399,7 +404,15 @@ name|int
 name|rprec
 parameter_list|)
 block|{
-comment|/*         "new Function1() {             public Result apply(T1 p1, ...) {<body>             }             // bridge method             public Object apply(Object p1, ...) {                 return apply((T1) p1, ...);             }         }          */
+comment|// "new Function1() {
+comment|//    public Result apply(T1 p1, ...) {
+comment|//<body>
+comment|//    }
+comment|//    // bridge method
+comment|//    public Object apply(Object p1, ...) {
+comment|//        return apply((T1) p1, ...);
+comment|//    }
+comment|// }
 name|List
 argument_list|<
 name|String
@@ -451,7 +464,7 @@ name|params
 operator|.
 name|add
 argument_list|(
-name|ExpressionWriter
+name|Types
 operator|.
 name|boxClassName
 argument_list|(
@@ -485,7 +498,7 @@ name|add
 argument_list|(
 literal|"("
 operator|+
-name|ExpressionWriter
+name|Types
 operator|.
 name|boxClassName
 argument_list|(
@@ -532,7 +545,7 @@ argument_list|)
 operator|.
 name|append
 argument_list|(
-name|ExpressionWriter
+name|Types
 operator|.
 name|boxClassName
 argument_list|(
