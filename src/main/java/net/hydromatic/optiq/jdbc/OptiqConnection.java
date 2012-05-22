@@ -45,6 +45,18 @@ end_import
 
 begin_import
 import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|linq4j
+operator|.
+name|QueryProvider
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|eigenbase
@@ -66,7 +78,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Extension to Optiq's implementation of  * {@link java.sql.Connection JDBC connection} allows schemas to be defined  * dynamically.  *  *<p>You can start off with an empty connection (no schemas), define one  * or two schemas, and start querying them.</p>  */
+comment|/**  * Extension to Optiq's implementation of  * {@link java.sql.Connection JDBC connection} allows schemas to be defined  * dynamically.  *  *<p>You can start off with an empty connection (no schemas), define one  * or two schemas, and start querying them.</p>  *  *<p>Since an {@code OptiqConnection} implements the linq4j  * {@link QueryProvider} interface, you can use a connection to execute  * expression trees as queries.</p>  */
 end_comment
 
 begin_interface
@@ -75,12 +87,15 @@ interface|interface
 name|OptiqConnection
 extends|extends
 name|Connection
+extends|,
+name|QueryProvider
 block|{
 comment|/**      * Returns the root schema.      *      *<p>You can define objects (such as relations) in this schema, and      * also nested schemas.</p>      *      * @return Root schema      */
 name|MutableSchema
 name|getRootSchema
 parameter_list|()
 function_decl|;
+comment|/**      * Returns the type factory.      *      * @return Type factory      */
 name|JavaTypeFactory
 name|getTypeFactory
 parameter_list|()

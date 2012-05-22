@@ -49,18 +49,6 @@ name|hydromatic
 operator|.
 name|linq4j
 operator|.
-name|Queryable
-import|;
-end_import
-
-begin_import
-import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|linq4j
-operator|.
 name|expressions
 operator|.
 name|*
@@ -234,18 +222,6 @@ operator|.
 name|rex
 operator|.
 name|RexProgram
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|lang
-operator|.
-name|reflect
-operator|.
-name|Field
 import|;
 end_import
 
@@ -1022,7 +998,11 @@ argument_list|(
 literal|0
 argument_list|)
 decl_stmt|;
-comment|/*             new Function1<Employee, Res> {                 public Res apply(Employee v1) {                     return v1.<fieldN>;                 }             }              */
+comment|// new Function1<Employee, Res> {
+comment|//    public Res apply(Employee v1) {
+comment|//        return v1.<fieldN>;
+comment|//    }
+comment|// }
 name|ParameterExpression
 name|v1
 init|=
@@ -1061,6 +1041,8 @@ name|field
 argument_list|(
 name|v1
 argument_list|,
+name|Types
+operator|.
 name|nthField
 argument_list|(
 name|field
@@ -1075,28 +1057,6 @@ argument_list|)
 argument_list|,
 name|v1
 argument_list|)
-return|;
-block|}
-specifier|private
-specifier|static
-name|Field
-name|nthField
-parameter_list|(
-name|int
-name|ordinal
-parameter_list|,
-name|Class
-name|clazz
-parameter_list|)
-block|{
-return|return
-name|clazz
-operator|.
-name|getFields
-argument_list|()
-index|[
-name|ordinal
-index|]
 return|;
 block|}
 specifier|static
@@ -1149,11 +1109,6 @@ specifier|final
 name|Expression
 name|expression
 decl_stmt|;
-specifier|private
-specifier|final
-name|Queryable
-name|queryable
-decl_stmt|;
 specifier|public
 name|EnumerableTableAccessRel
 parameter_list|(
@@ -1168,9 +1123,6 @@ name|connection
 parameter_list|,
 name|Expression
 name|expression
-parameter_list|,
-name|Queryable
-name|queryable
 parameter_list|)
 block|{
 name|super
@@ -1197,12 +1149,6 @@ name|expression
 operator|=
 name|expression
 expr_stmt|;
-name|this
-operator|.
-name|queryable
-operator|=
-name|queryable
-expr_stmt|;
 block|}
 specifier|public
 name|Expression
@@ -1213,12 +1159,7 @@ name|implementor
 parameter_list|)
 block|{
 return|return
-name|implementor
-operator|.
-name|register
-argument_list|(
-name|queryable
-argument_list|)
+name|expression
 return|;
 block|}
 block|}

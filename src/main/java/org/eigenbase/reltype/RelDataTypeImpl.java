@@ -326,10 +326,10 @@ name|getFields
 parameter_list|()
 block|{
 assert|assert
-operator|(
 name|isStruct
 argument_list|()
-operator|)
+operator|:
+name|this
 assert|;
 return|return
 name|fields
@@ -344,6 +344,8 @@ block|{
 assert|assert
 name|isStruct
 argument_list|()
+operator|:
+name|this
 assert|;
 return|return
 name|fields

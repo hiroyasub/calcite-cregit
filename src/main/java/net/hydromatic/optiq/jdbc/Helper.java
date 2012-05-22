@@ -30,9 +30,11 @@ comment|/**  * Utility methods, mainly concerning error-handling.  *  * @author 
 end_comment
 
 begin_class
+specifier|public
 class|class
 name|Helper
 block|{
+specifier|public
 specifier|static
 specifier|final
 name|Helper
