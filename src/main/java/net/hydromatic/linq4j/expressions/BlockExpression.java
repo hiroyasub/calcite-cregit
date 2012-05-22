@@ -19,6 +19,18 @@ begin_import
 import|import
 name|java
 operator|.
+name|lang
+operator|.
+name|reflect
+operator|.
+name|Type
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
 name|util
 operator|.
 name|List
@@ -52,7 +64,7 @@ name|Expression
 argument_list|>
 name|expressions
 parameter_list|,
-name|Class
+name|Type
 name|type
 parameter_list|)
 block|{

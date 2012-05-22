@@ -14,23 +14,23 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * Represents the result of applying a sorting operation to a {@link Queryable}.  *  * @author jhyde  */
+comment|/**  * Represents the result of applying a sorting operation to an  * {@link net.hydromatic.linq4j.Enumerable}.  *  * @author jhyde  */
 end_comment
 
 begin_interface
 specifier|public
 interface|interface
-name|OrderedQueryable
+name|OrderedEnumerable
 parameter_list|<
 name|T
 parameter_list|>
 extends|extends
-name|Queryable
+name|Enumerable
 argument_list|<
 name|T
 argument_list|>
 extends|,
-name|ExtendedOrderedQueryable
+name|ExtendedOrderedEnumerable
 argument_list|<
 name|T
 argument_list|>
@@ -38,7 +38,7 @@ block|{ }
 end_interface
 
 begin_comment
-comment|// End OrderedQueryable.java
+comment|// End OrderedEnumerable.java
 end_comment
 
 end_unit

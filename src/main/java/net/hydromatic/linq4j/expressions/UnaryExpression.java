@@ -15,6 +15,18 @@ name|expressions
 package|;
 end_package
 
+begin_import
+import|import
+name|java
+operator|.
+name|lang
+operator|.
+name|reflect
+operator|.
+name|Type
+import|;
+end_import
+
 begin_comment
 comment|/**  * Represents an expression that has a unary operator.  */
 end_comment
@@ -36,7 +48,7 @@ parameter_list|(
 name|ExpressionType
 name|nodeType
 parameter_list|,
-name|Class
+name|Type
 name|type
 parameter_list|,
 name|Expression
@@ -177,7 +189,6 @@ name|rprec
 argument_list|)
 expr_stmt|;
 block|}
-comment|//        (String) ((Object) "foo").
 block|}
 block|}
 end_class

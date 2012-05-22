@@ -27,6 +27,18 @@ name|Expression
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|lang
+operator|.
+name|reflect
+operator|.
+name|Type
+import|;
+end_import
+
 begin_comment
 comment|/**  * Core methods that define a {@link Queryable}.  *  *<p>The other methods in {@link Queryable}, defined in  * {@link ExtendedQueryable}, can easily be implemented by calling the  * corresponding static methods in {@link Extensions}.  *  * @author jhyde  */
 end_comment
@@ -45,10 +57,7 @@ name|T
 argument_list|>
 block|{
 comment|/**      * Gets the type of the element(s) that are returned when the expression      * tree associated with this Queryable is executed.      */
-name|Class
-argument_list|<
-name|T
-argument_list|>
+name|Type
 name|getElementType
 parameter_list|()
 function_decl|;

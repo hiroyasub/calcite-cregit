@@ -105,16 +105,10 @@ name|OrderedQueryable
 argument_list|<
 name|T
 argument_list|>
-name|getThisOrdered
+name|getThisOrderedQueryable
 parameter_list|()
 block|{
 return|return
-operator|(
-name|OrderedQueryable
-argument_list|<
-name|T
-argument_list|>
-operator|)
 name|this
 return|;
 block|}
@@ -2843,7 +2837,7 @@ name|Extensions
 operator|.
 name|thenBy
 argument_list|(
-name|getThisOrdered
+name|getThisOrderedQueryable
 argument_list|()
 argument_list|,
 name|keySelector
@@ -2883,7 +2877,7 @@ name|Extensions
 operator|.
 name|thenByDescending
 argument_list|(
-name|getThisOrdered
+name|getThisOrderedQueryable
 argument_list|()
 argument_list|,
 name|keySelector
@@ -2924,7 +2918,7 @@ name|Extensions
 operator|.
 name|thenByDescending
 argument_list|(
-name|getThisOrdered
+name|getThisOrderedQueryable
 argument_list|()
 argument_list|,
 name|keySelector
@@ -2964,7 +2958,7 @@ name|Extensions
 operator|.
 name|thenBy
 argument_list|(
-name|getThisOrdered
+name|getThisOrderedQueryable
 argument_list|()
 argument_list|,
 name|keySelector

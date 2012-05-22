@@ -27,6 +27,18 @@ name|Field
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|lang
+operator|.
+name|reflect
+operator|.
+name|Modifier
+import|;
+end_import
+
 begin_comment
 comment|/**  * Represents accessing a field or property.  */
 end_comment
@@ -38,12 +50,12 @@ name|MemberExpression
 extends|extends
 name|Expression
 block|{
-specifier|private
+specifier|public
 specifier|final
 name|Expression
 name|expression
 decl_stmt|;
-specifier|private
+specifier|public
 specifier|final
 name|Field
 name|field
@@ -82,6 +94,23 @@ name|field
 operator|=
 name|field
 expr_stmt|;
+assert|assert
+name|expression
+operator|!=
+literal|null
+operator|||
+name|Modifier
+operator|.
+name|isStatic
+argument_list|(
+name|field
+operator|.
+name|getModifiers
+argument_list|()
+argument_list|)
+operator|:
+literal|"must specify expression if field is not static"
+assert|;
 block|}
 specifier|public
 name|Object
@@ -95,6 +124,12 @@ specifier|final
 name|Object
 name|o
 init|=
+name|expression
+operator|==
+literal|null
+condition|?
+literal|null
+else|:
 name|expression
 operator|.
 name|evaluate

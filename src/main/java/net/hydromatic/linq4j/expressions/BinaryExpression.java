@@ -15,6 +15,18 @@ name|expressions
 package|;
 end_package
 
+begin_import
+import|import
+name|java
+operator|.
+name|lang
+operator|.
+name|reflect
+operator|.
+name|Type
+import|;
+end_import
+
 begin_comment
 comment|/**  * Represents an expression that has a binary operator.  */
 end_comment
@@ -26,10 +38,12 @@ name|BinaryExpression
 extends|extends
 name|Expression
 block|{
+specifier|public
 specifier|final
 name|Expression
 name|expression0
 decl_stmt|;
+specifier|public
 specifier|final
 name|Expression
 name|expression1
@@ -44,7 +58,7 @@ parameter_list|(
 name|ExpressionType
 name|nodeType
 parameter_list|,
-name|Class
+name|Type
 name|type
 parameter_list|,
 name|Expression

@@ -59,6 +59,18 @@ begin_import
 import|import
 name|java
 operator|.
+name|lang
+operator|.
+name|reflect
+operator|.
+name|Type
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
 name|math
 operator|.
 name|BigDecimal
@@ -657,10 +669,7 @@ return|;
 block|}
 comment|// Queryable methods
 specifier|public
-name|Class
-argument_list|<
-name|T
-argument_list|>
+name|Type
 name|getElementType
 parameter_list|()
 block|{

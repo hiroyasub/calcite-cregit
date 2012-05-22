@@ -15,6 +15,18 @@ name|expressions
 package|;
 end_package
 
+begin_import
+import|import
+name|java
+operator|.
+name|lang
+operator|.
+name|reflect
+operator|.
+name|Type
+import|;
+end_import
+
 begin_comment
 comment|/**  *<p>Analogous to LINQ's System.Linq.Expression.</p>  */
 end_comment
@@ -32,17 +44,17 @@ name|nodeType
 decl_stmt|;
 specifier|public
 specifier|final
-name|Class
+name|Type
 name|type
 decl_stmt|;
-comment|/**      * Creates an Expression.      *      * @param nodeType Node type      */
+comment|/**      * Creates an Expression.      *      *<p>The type of the expression may, at the caller's discretion, be a      * regular class (because {@link Class} implements {@link Type}) or it may      * be a different implementation that retains information about type      * parameters.</p>      *      * @param nodeType Node type      * @param type Type of the expression      */
 specifier|public
 name|Expression
 parameter_list|(
 name|ExpressionType
 name|nodeType
 parameter_list|,
-name|Class
+name|Type
 name|type
 parameter_list|)
 block|{
@@ -91,7 +103,7 @@ return|;
 block|}
 comment|/** Gets the static type of the expression that this Expression      * represents. */
 specifier|public
-name|Class
+name|Type
 name|getType
 parameter_list|()
 block|{
