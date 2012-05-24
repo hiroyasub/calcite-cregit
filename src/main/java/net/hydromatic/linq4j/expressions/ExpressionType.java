@@ -757,6 +757,9 @@ name|IsTrue
 block|,
 comment|/** A false condition value. */
 name|IsFalse
+block|,
+comment|/** Declaration of a variable. */
+name|Declaration
 block|;
 specifier|final
 name|String

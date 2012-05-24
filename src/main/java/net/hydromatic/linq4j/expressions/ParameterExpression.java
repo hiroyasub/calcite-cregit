@@ -15,6 +15,18 @@ name|expressions
 package|;
 end_package
 
+begin_import
+import|import
+name|java
+operator|.
+name|lang
+operator|.
+name|reflect
+operator|.
+name|Type
+import|;
+end_import
+
 begin_comment
 comment|/**  * Represents a named parameter expression.  */
 end_comment
@@ -40,7 +52,7 @@ decl_stmt|;
 specifier|public
 name|ParameterExpression
 parameter_list|(
-name|Class
+name|Type
 name|type
 parameter_list|)
 block|{
@@ -58,7 +70,7 @@ block|}
 specifier|public
 name|ParameterExpression
 parameter_list|(
-name|Class
+name|Type
 name|type
 parameter_list|,
 name|String
