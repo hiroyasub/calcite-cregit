@@ -760,6 +760,8 @@ name|IsFalse
 block|,
 comment|/** Declaration of a variable. */
 name|Declaration
+block|,
+name|While
 block|;
 specifier|final
 name|String

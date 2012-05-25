@@ -1149,6 +1149,37 @@ name|asList
 argument_list|(
 name|Expressions
 operator|.
+name|fieldDecl
+argument_list|(
+name|Modifier
+operator|.
+name|PUBLIC
+operator||
+name|Modifier
+operator|.
+name|FINAL
+argument_list|,
+name|Expressions
+operator|.
+name|parameter
+argument_list|(
+name|String
+operator|.
+name|class
+argument_list|,
+literal|"qux"
+argument_list|)
+argument_list|,
+name|Expressions
+operator|.
+name|constant
+argument_list|(
+literal|"xyzzy"
+argument_list|)
+argument_list|)
+argument_list|,
+name|Expressions
+operator|.
 name|methodDecl
 argument_list|(
 name|Modifier
@@ -1258,7 +1289,33 @@ argument_list|)
 decl_stmt|;
 name|assertEquals
 argument_list|(
-literal|"xxx"
+literal|"{\n"
+operator|+
+literal|"  java.util.List<String> baz = java.util.Arrays.asList(\"foo\", \"bar\");\n"
+operator|+
+literal|"  new java.util.AbstractList(){\n"
+operator|+
+literal|"    public final String qux = \"xyzzy\";\n"
+operator|+
+literal|"\n"
+operator|+
+literal|"    public int size() {\n"
+operator|+
+literal|"      return baz.size();\n"
+operator|+
+literal|"    }\n"
+operator|+
+literal|"\n"
+operator|+
+literal|"\n"
+operator|+
+literal|"    public String get(int index) {\n"
+operator|+
+literal|"      return ((String) baz.get(index)).toUpperCase();\n"
+operator|+
+literal|"    }\n"
+operator|+
+literal|"  }}\n"
 argument_list|,
 name|Expressions
 operator|.

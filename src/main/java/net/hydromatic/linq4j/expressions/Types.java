@@ -1109,7 +1109,7 @@ name|constructor
 range|:
 name|clazz
 operator|.
-name|getConstructors
+name|getDeclaredConstructors
 argument_list|()
 control|)
 block|{
