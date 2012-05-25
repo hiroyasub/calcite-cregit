@@ -389,7 +389,6 @@ name|buf
 operator|.
 name|append
 argument_list|(
-operator|(
 name|i
 operator|>
 literal|1
@@ -397,8 +396,10 @@ condition|?
 literal|"; "
 else|:
 literal|""
-operator|)
-operator|+
+argument_list|)
+operator|.
+name|append
+argument_list|(
 name|resultSet
 operator|.
 name|getMetaData
@@ -408,9 +409,15 @@ name|getColumnLabel
 argument_list|(
 name|i
 argument_list|)
-operator|+
+argument_list|)
+operator|.
+name|append
+argument_list|(
 literal|"="
-operator|+
+argument_list|)
+operator|.
+name|append
+argument_list|(
 name|resultSet
 operator|.
 name|getObject
