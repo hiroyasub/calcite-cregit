@@ -31,6 +31,18 @@ begin_import
 import|import
 name|java
 operator|.
+name|lang
+operator|.
+name|reflect
+operator|.
+name|Type
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
 name|util
 operator|.
 name|List
@@ -59,7 +71,7 @@ decl_stmt|;
 specifier|public
 name|NewArrayExpression
 parameter_list|(
-name|Class
+name|Type
 name|type
 parameter_list|,
 name|List
@@ -93,8 +105,8 @@ specifier|static
 name|Class
 name|arrayClass
 parameter_list|(
-name|Class
-name|clazz
+name|Type
+name|type
 parameter_list|)
 block|{
 comment|// REVIEW: Is there a way to do this without creating an instance? We
@@ -104,7 +116,12 @@ name|Array
 operator|.
 name|newInstance
 argument_list|(
-name|clazz
+name|Types
+operator|.
+name|toClass
+argument_list|(
+name|type
+argument_list|)
 argument_list|,
 literal|0
 argument_list|)

@@ -1293,7 +1293,7 @@ literal|"{\n"
 operator|+
 literal|"  java.util.List<String> baz = java.util.Arrays.asList(\"foo\", \"bar\");\n"
 operator|+
-literal|"  new java.util.AbstractList(){\n"
+literal|"  new java.util.AbstractList<String>(){\n"
 operator|+
 literal|"    public final String qux = \"xyzzy\";\n"
 operator|+
@@ -1315,7 +1315,9 @@ literal|"      return ((String) baz.get(index)).toUpperCase();\n"
 operator|+
 literal|"    }\n"
 operator|+
-literal|"  }}\n"
+literal|"  };\n"
+operator|+
+literal|"}\n"
 argument_list|,
 name|Expressions
 operator|.

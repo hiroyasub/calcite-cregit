@@ -59,7 +59,7 @@ parameter_list|<
 name|TSource
 parameter_list|>
 block|{
-comment|/**      * Performs an operation for each member of the enumeration.      * @param func Operation      * @param<R> Return type      */
+comment|/**      * Performs an operation for each member of this enumeration.      *      *<p>Returns the value returned by the function for the last element in      * this enumeration, or null if this enumeration is empty.</p>      *      * @param func Operation      * @param<R> Return type      */
 parameter_list|<
 name|R
 parameter_list|>

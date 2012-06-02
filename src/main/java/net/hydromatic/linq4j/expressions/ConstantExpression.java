@@ -55,6 +55,18 @@ begin_import
 import|import
 name|java
 operator|.
+name|lang
+operator|.
+name|reflect
+operator|.
+name|Type
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
 name|util
 operator|.
 name|AbstractList
@@ -90,7 +102,7 @@ decl_stmt|;
 specifier|public
 name|ConstantExpression
 parameter_list|(
-name|Class
+name|Type
 name|type
 parameter_list|,
 name|Object

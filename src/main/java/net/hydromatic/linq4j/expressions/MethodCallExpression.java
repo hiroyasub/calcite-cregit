@@ -208,7 +208,7 @@ name|this
 argument_list|(
 name|method
 operator|.
-name|getReturnType
+name|getGenericReturnType
 argument_list|()
 argument_list|,
 name|method

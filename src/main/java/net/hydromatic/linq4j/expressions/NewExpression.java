@@ -23,7 +23,7 @@ name|lang
 operator|.
 name|reflect
 operator|.
-name|Constructor
+name|Member
 import|;
 end_import
 
@@ -35,7 +35,7 @@ name|lang
 operator|.
 name|reflect
 operator|.
-name|Member
+name|Type
 import|;
 end_import
 
@@ -62,8 +62,8 @@ name|Expression
 block|{
 specifier|public
 specifier|final
-name|Constructor
-name|constructor
+name|Type
+name|type
 decl_stmt|;
 specifier|public
 specifier|final
@@ -84,8 +84,8 @@ decl_stmt|;
 specifier|public
 name|NewExpression
 parameter_list|(
-name|Constructor
-name|constructor
+name|Type
+name|type
 parameter_list|,
 name|List
 argument_list|<
@@ -113,23 +113,27 @@ name|ExpressionType
 operator|.
 name|New
 argument_list|,
-name|constructor
-operator|.
-name|getDeclaringClass
-argument_list|()
+name|type
 argument_list|)
 expr_stmt|;
 name|this
 operator|.
-name|constructor
+name|type
 operator|=
-name|constructor
+name|type
 expr_stmt|;
 name|this
 operator|.
 name|arguments
 operator|=
 name|arguments
+expr_stmt|;
+name|Types
+operator|.
+name|discard
+argument_list|(
+name|members
+argument_list|)
 expr_stmt|;
 name|this
 operator|.
@@ -162,10 +166,7 @@ argument_list|)
 operator|.
 name|append
 argument_list|(
-name|constructor
-operator|.
-name|getDeclaringClass
-argument_list|()
+name|type
 argument_list|)
 operator|.
 name|list
