@@ -946,9 +946,9 @@ expr_stmt|;
 comment|// automatically call constructor if it matches fields
 name|assertEquals
 argument_list|(
-literal|"new net.hydromatic.linq4j.test.Linq4jTest$Employee[] {\n"
+literal|"new net.hydromatic.linq4j.test.Linq4jTest.Employee[] {\n"
 operator|+
-literal|"  new net.hydromatic.linq4j.test.Linq4jTest$Employee(\n"
+literal|"  new net.hydromatic.linq4j.test.Linq4jTest.Employee(\n"
 operator|+
 literal|"    100,\n"
 operator|+
@@ -956,7 +956,7 @@ literal|"    \"Fred\",\n"
 operator|+
 literal|"    10),\n"
 operator|+
-literal|"  new net.hydromatic.linq4j.test.Linq4jTest$Employee(\n"
+literal|"  new net.hydromatic.linq4j.test.Linq4jTest.Employee(\n"
 operator|+
 literal|"    110,\n"
 operator|+
@@ -964,7 +964,7 @@ literal|"    \"Bill\",\n"
 operator|+
 literal|"    30),\n"
 operator|+
-literal|"  new net.hydromatic.linq4j.test.Linq4jTest$Employee(\n"
+literal|"  new net.hydromatic.linq4j.test.Linq4jTest.Employee(\n"
 operator|+
 literal|"    120,\n"
 operator|+
@@ -972,7 +972,7 @@ literal|"    \"Eric\",\n"
 operator|+
 literal|"    10),\n"
 operator|+
-literal|"  new net.hydromatic.linq4j.test.Linq4jTest$Employee(\n"
+literal|"  new net.hydromatic.linq4j.test.Linq4jTest.Employee(\n"
 operator|+
 literal|"    130,\n"
 operator|+
@@ -991,6 +991,74 @@ argument_list|(
 name|Linq4jTest
 operator|.
 name|emps
+argument_list|)
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+specifier|public
+name|void
+name|testWriteArray
+parameter_list|()
+block|{
+name|assertEquals
+argument_list|(
+literal|"1 + integers[2 + index]"
+argument_list|,
+name|Expressions
+operator|.
+name|toString
+argument_list|(
+name|Expressions
+operator|.
+name|add
+argument_list|(
+name|Expressions
+operator|.
+name|constant
+argument_list|(
+literal|1
+argument_list|)
+argument_list|,
+name|Expressions
+operator|.
+name|arrayAccess
+argument_list|(
+name|Expressions
+operator|.
+name|variable
+argument_list|(
+name|int
+index|[]
+operator|.
+expr|class
+argument_list|,
+literal|"integers"
+argument_list|)
+argument_list|,
+name|Expressions
+operator|.
+name|add
+argument_list|(
+name|Expressions
+operator|.
+name|constant
+argument_list|(
+literal|2
+argument_list|)
+argument_list|,
+name|Expressions
+operator|.
+name|variable
+argument_list|(
+name|int
+operator|.
+name|class
+argument_list|,
+literal|"index"
+argument_list|)
+argument_list|)
+argument_list|)
 argument_list|)
 argument_list|)
 argument_list|)
@@ -1291,7 +1359,7 @@ name|assertEquals
 argument_list|(
 literal|"{\n"
 operator|+
-literal|"  java.util.List<String> baz = java.util.Arrays.asList(\"foo\", \"bar\");\n"
+literal|"  final java.util.List<String> baz = java.util.Arrays.asList(\"foo\", \"bar\");\n"
 operator|+
 literal|"  new java.util.AbstractList<String>(){\n"
 operator|+
