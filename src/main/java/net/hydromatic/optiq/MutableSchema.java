@@ -13,6 +13,16 @@ name|optiq
 package|;
 end_package
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Map
+import|;
+end_import
+
 begin_comment
 comment|/**  * Schema that can be modified.  */
 end_comment
@@ -39,7 +49,24 @@ name|name
 parameter_list|,
 name|Schema
 name|schema
+parameter_list|,
+name|Object
+name|o
 parameter_list|)
+function_decl|;
+name|void
+name|add
+parameter_list|(
+name|String
+name|name
+parameter_list|,
+name|Object
+name|o
+parameter_list|)
+function_decl|;
+name|Map
+name|getInstanceMap
+parameter_list|()
 function_decl|;
 block|}
 end_interface

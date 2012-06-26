@@ -84,7 +84,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Enumeration of the type names which can be used to construct a SQL type.  * Rationale for this class's existence (instead of just using the standard  * java.sql.Type ordinals):  *  *<ul>  *<li>java.sql.Type does not include all SQL2003 datatypes  *<li>SqlTypeName provides a type-safe enumeration  *<li>SqlTypeName provides a place to hang extra information such as whether  * the type carries precision and scale  *</ul>  *  * @author jhyde  * @version $Id$  * @since Nov 24, 2003  */
+comment|/**  * Enumeration of the type names which can be used to construct a SQL type.  * Rationale for this class's existence (instead of just using the standard  * java.sql.Type ordinals):  *  *<ul>  *<li>{@link java.sql.Types} does not include all SQL2003 data-types;  *<li>SqlTypeName provides a type-safe enumeration;  *<li>SqlTypeName provides a place to hang extra information such as whether  * the type carries precision and scale.  *</ul>  *  * @author jhyde  * @version $Id$  * @since Nov 24, 2003  */
 end_comment
 
 begin_enum
@@ -455,6 +455,19 @@ argument_list|,
 name|Types
 operator|.
 name|STRUCT
+argument_list|)
+block|,
+name|OTHER
+argument_list|(
+name|PrecScale
+operator|.
+name|NoNo
+argument_list|,
+literal|false
+argument_list|,
+name|Types
+operator|.
+name|OTHER
 argument_list|)
 block|,
 name|CURSOR

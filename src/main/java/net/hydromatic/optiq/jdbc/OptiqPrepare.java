@@ -163,6 +163,16 @@ name|List
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Map
+import|;
+end_import
+
 begin_comment
 comment|/**  * API for a service that prepares statements for execution.  *  * @author jhyde  */
 end_comment
@@ -210,6 +220,10 @@ parameter_list|()
 function_decl|;
 name|Schema
 name|getRootSchema
+parameter_list|()
+function_decl|;
+name|Map
+name|getRoot
 parameter_list|()
 function_decl|;
 block|}

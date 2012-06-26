@@ -1688,10 +1688,12 @@ decl_stmt|;
 name|Class
 name|inputJavaType
 init|=
-name|typeFactory
+name|EnumUtil
 operator|.
-name|getJavaClass
+name|javaClass
 argument_list|(
+name|typeFactory
+argument_list|,
 name|inputRowType
 argument_list|)
 decl_stmt|;
@@ -1830,6 +1832,8 @@ argument_list|)
 argument_list|,
 name|program
 argument_list|,
+name|typeFactory
+argument_list|,
 name|list
 argument_list|)
 decl_stmt|;
@@ -1944,6 +1948,8 @@ argument_list|)
 argument_list|,
 name|program
 argument_list|,
+name|typeFactory
+argument_list|,
 name|list
 argument_list|)
 decl_stmt|;
@@ -2035,6 +2041,24 @@ name|FINAL
 argument_list|,
 name|inputEnumerable
 argument_list|,
+literal|false
+condition|?
+name|Expressions
+operator|.
+name|convert_
+argument_list|(
+name|Expressions
+operator|.
+name|constant
+argument_list|(
+literal|null
+argument_list|)
+argument_list|,
+name|Enumerable
+operator|.
+name|class
+argument_list|)
+else|:
 name|childExp
 argument_list|)
 argument_list|,
@@ -2229,6 +2253,8 @@ name|program
 return|;
 block|}
 block|}
+comment|/**      * Sample code. Not used; just here as a scratch pad, to make sure that what      * we generate will compile. Feel free to modify.      */
+specifier|private
 name|void
 name|foo
 parameter_list|()

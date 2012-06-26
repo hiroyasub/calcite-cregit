@@ -31,6 +31,18 @@ begin_import
 import|import
 name|java
 operator|.
+name|lang
+operator|.
+name|reflect
+operator|.
+name|Type
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
 name|util
 operator|.
 name|List
@@ -56,6 +68,7 @@ specifier|public
 interface|interface
 name|Schema
 block|{
+comment|/**      * Returns a sub-object with the given name, or null if there is no such      * object. The sub-object might be a {@link Schema}, or a {@link Function},      * or a {@link Overload} if there are several functions with the same name      * but different signatures.      *      * @param name Name of sub-object      * @return Sub-object, or null      */
 name|SchemaObject
 name|get
 parameter_list|(
@@ -63,6 +76,7 @@ name|String
 name|name
 parameter_list|)
 function_decl|;
+comment|/**      * Returns a map whose keys are the names of available sub-objects.      *      * @return Map from sub-object names to sub-objects.      */
 name|Map
 argument_list|<
 name|String
@@ -90,6 +104,23 @@ argument_list|<
 name|Expression
 argument_list|>
 name|arguments
+parameter_list|)
+function_decl|;
+comment|/**      * Given an object that is an instance of this schema,      * returns an object that is an instance of the named sub-object of this      * schema.      *      * @param schema Schema      * @param name Name of sub-object      * @param parameterTypes Parameter types (to resolve overloaded functions)      * @return Sub-object      */
+name|Object
+name|getSubSchema
+parameter_list|(
+name|Object
+name|schema
+parameter_list|,
+name|String
+name|name
+parameter_list|,
+name|List
+argument_list|<
+name|Type
+argument_list|>
+name|parameterTypes
 parameter_list|)
 function_decl|;
 block|}
