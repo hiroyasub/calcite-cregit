@@ -1022,7 +1022,7 @@ argument_list|)
 argument_list|,
 name|Expressions
 operator|.
-name|arrayAccess
+name|arrayIndex
 argument_list|(
 name|Expressions
 operator|.

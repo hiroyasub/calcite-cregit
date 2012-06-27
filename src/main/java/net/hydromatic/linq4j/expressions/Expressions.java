@@ -552,41 +552,17 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates an IndexExpression to access a multidimensional      * array. */
+comment|/** Creates an expression that represents applying an array      * index operator to an array of rank one. */
 specifier|public
 specifier|static
 name|IndexExpression
-name|arrayAccess
-parameter_list|(
-name|Expression
-name|array
-parameter_list|,
-name|Iterable
-argument_list|<
-name|Expression
-argument_list|>
-name|indexExpressions
-parameter_list|)
-block|{
-throw|throw
-name|Extensions
-operator|.
-name|todo
-argument_list|()
-throw|;
-block|}
-comment|/** Creates an IndexExpression to access an array. */
-specifier|public
-specifier|static
-name|IndexExpression
-name|arrayAccess
+name|arrayIndex
 parameter_list|(
 name|Expression
 name|array
 parameter_list|,
 name|Expression
-modifier|...
-name|indexExpressions
+name|indexExpression
 parameter_list|)
 block|{
 return|return
@@ -595,84 +571,14 @@ name|IndexExpression
 argument_list|(
 name|array
 argument_list|,
-name|Arrays
+name|Collections
 operator|.
-name|asList
+name|singletonList
 argument_list|(
-name|indexExpressions
+name|indexExpression
 argument_list|)
 argument_list|)
 return|;
-block|}
-comment|/** Creates a MethodCallExpression that represents applying an      * array index operator to an array of rank more than one. */
-specifier|public
-specifier|static
-name|IndexExpression
-name|arrayIndex
-parameter_list|(
-name|Expression
-name|array
-parameter_list|,
-name|Iterable
-argument_list|<
-name|Expression
-argument_list|>
-name|indexExpressions
-parameter_list|)
-block|{
-return|return
-operator|new
-name|IndexExpression
-argument_list|(
-name|array
-argument_list|,
-name|toList
-argument_list|(
-name|indexExpressions
-argument_list|)
-argument_list|)
-return|;
-block|}
-comment|/** Creates a BinaryExpression that represents applying an array      * index operator to an array of rank one. */
-specifier|public
-specifier|static
-name|BinaryExpression
-name|arrayIndex
-parameter_list|(
-name|Expression
-name|array
-parameter_list|,
-name|Expression
-name|indexExpressions
-parameter_list|)
-block|{
-throw|throw
-name|Extensions
-operator|.
-name|todo
-argument_list|()
-throw|;
-block|}
-comment|/** Creates a MethodCallExpression that represents applying an      * array index operator to a multidimensional array. */
-specifier|public
-specifier|static
-name|MethodCallExpression
-name|arrayIndex
-parameter_list|(
-name|Expression
-name|array
-parameter_list|,
-name|Expression
-modifier|...
-name|indexExpressions
-parameter_list|)
-block|{
-throw|throw
-name|Extensions
-operator|.
-name|todo
-argument_list|()
-throw|;
 block|}
 comment|/** Creates a UnaryExpression that represents an expression for      * obtaining the length of a one-dimensional array. */
 specifier|public
@@ -771,9 +677,7 @@ block|{
 return|return
 name|block
 argument_list|(
-name|Arrays
-operator|.
-name|asList
+name|toList
 argument_list|(
 name|expressions
 argument_list|)
@@ -857,9 +761,7 @@ name|block
 argument_list|(
 name|variables
 argument_list|,
-name|Arrays
-operator|.
-name|asList
+name|toList
 argument_list|(
 name|expressions
 argument_list|)
@@ -1215,9 +1117,7 @@ name|method
 argument_list|,
 literal|null
 argument_list|,
-name|Arrays
-operator|.
-name|asList
+name|toList
 argument_list|(
 name|arguments
 argument_list|)
@@ -1322,9 +1222,7 @@ name|method
 argument_list|,
 name|expression
 argument_list|,
-name|Arrays
-operator|.
-name|asList
+name|toList
 argument_list|(
 name|arguments
 argument_list|)
@@ -1430,7 +1328,7 @@ name|methodName
 parameter_list|,
 name|Expression
 modifier|...
-name|selectors
+name|arguments
 parameter_list|)
 block|{
 return|return
@@ -1447,7 +1345,7 @@ name|Expression
 operator|>
 name|asList
 argument_list|(
-name|selectors
+name|arguments
 argument_list|)
 argument_list|)
 return|;
@@ -3434,6 +3332,50 @@ specifier|static
 parameter_list|<
 name|T
 parameter_list|>
+name|List
+argument_list|<
+name|T
+argument_list|>
+name|toList
+parameter_list|(
+name|T
+index|[]
+name|ts
+parameter_list|)
+block|{
+if|if
+condition|(
+name|ts
+operator|.
+name|length
+operator|==
+literal|0
+condition|)
+block|{
+return|return
+name|Collections
+operator|.
+name|emptyList
+argument_list|()
+return|;
+block|}
+else|else
+block|{
+return|return
+name|Arrays
+operator|.
+name|asList
+argument_list|(
+name|ts
+argument_list|)
+return|;
+block|}
+block|}
+specifier|private
+specifier|static
+parameter_list|<
+name|T
+parameter_list|>
 name|Collection
 argument_list|<
 name|T
@@ -3533,9 +3475,7 @@ name|lambda
 argument_list|(
 name|body
 argument_list|,
-name|Arrays
-operator|.
-name|asList
+name|toList
 argument_list|(
 name|parameters
 argument_list|)
@@ -3590,7 +3530,7 @@ comment|//        Expression body,
 comment|//        boolean tailCall,
 comment|//        ParameterExpression... parameters)
 comment|//    {
-comment|//        return lambda(body, tailCall, Arrays.asList(parameters));
+comment|//        return lambda(body, tailCall, toList(parameters));
 comment|//    }
 comment|/** Creates a LambdaExpression by first constructing a delegate      * type. */
 specifier|public
@@ -3730,9 +3670,7 @@ name|type
 argument_list|,
 name|body
 argument_list|,
-name|Arrays
-operator|.
-name|asList
+name|toList
 argument_list|(
 name|parameters
 argument_list|)
@@ -3835,7 +3773,7 @@ comment|//        Expression body,
 comment|//        boolean tailCall,
 comment|//        ParameterExpression... parameters)
 comment|//    {
-comment|//        return lambda(type, body, tailCall, Arrays.asList(parameters));
+comment|//        return lambda(type, body, tailCall, toList(parameters));
 comment|//    }
 comment|/** Creates a LambdaExpression by first constructing a delegate      * type. */
 specifier|public
@@ -4961,9 +4899,7 @@ name|memberBind
 argument_list|(
 name|member
 argument_list|,
-name|Arrays
-operator|.
-name|asList
+name|toList
 argument_list|(
 name|bindings
 argument_list|)
@@ -5012,9 +4948,7 @@ name|memberBind
 argument_list|(
 name|method
 argument_list|,
-name|Arrays
-operator|.
-name|asList
+name|toList
 argument_list|(
 name|bindings
 argument_list|)
@@ -5063,9 +4997,7 @@ name|memberInit
 argument_list|(
 name|newExpression
 argument_list|,
-name|Arrays
-operator|.
-name|asList
+name|toList
 argument_list|(
 name|bindings
 argument_list|)
@@ -5953,9 +5885,7 @@ name|new_
 argument_list|(
 name|constructor
 argument_list|,
-name|Arrays
-operator|.
-name|asList
+name|toList
 argument_list|(
 name|expressions
 argument_list|)
@@ -6042,9 +5972,7 @@ name|constructor
 argument_list|,
 name|expressions
 argument_list|,
-name|Arrays
-operator|.
-name|asList
+name|toList
 argument_list|(
 name|members
 argument_list|)
@@ -6101,9 +6029,7 @@ name|newArrayBounds
 argument_list|(
 name|type
 argument_list|,
-name|Arrays
-operator|.
-name|asList
+name|toList
 argument_list|(
 name|expressions
 argument_list|)
@@ -6158,9 +6084,7 @@ name|newArrayInit
 argument_list|(
 name|type
 argument_list|,
-name|Arrays
-operator|.
-name|asList
+name|toList
 argument_list|(
 name|expressions
 argument_list|)
@@ -7875,9 +7799,7 @@ literal|null
 argument_list|,
 literal|null
 argument_list|,
-name|Arrays
-operator|.
-name|asList
+name|toList
 argument_list|(
 name|cases
 argument_list|)
@@ -7910,9 +7832,7 @@ name|defaultBody
 argument_list|,
 literal|null
 argument_list|,
-name|Arrays
-operator|.
-name|asList
+name|toList
 argument_list|(
 name|cases
 argument_list|)
@@ -7977,9 +7897,7 @@ name|defaultBody
 argument_list|,
 name|method
 argument_list|,
-name|Arrays
-operator|.
-name|asList
+name|toList
 argument_list|(
 name|cases
 argument_list|)
@@ -8052,9 +7970,7 @@ name|defaultBody
 argument_list|,
 name|method
 argument_list|,
-name|Arrays
-operator|.
-name|asList
+name|toList
 argument_list|(
 name|cases
 argument_list|)
@@ -8103,9 +8019,7 @@ name|switchCase
 argument_list|(
 name|expression
 argument_list|,
-name|Arrays
-operator|.
-name|asList
+name|toList
 argument_list|(
 name|body
 argument_list|)
@@ -8603,6 +8517,41 @@ argument_list|(
 name|modifiers
 argument_list|,
 name|parameter
+argument_list|,
+name|initializer
+argument_list|)
+return|;
+block|}
+comment|/** Creates an expression that declares and initializes a variable. No      * type is required; it is assumed that the variable is the same type as      * the initializer. */
+specifier|public
+specifier|static
+name|DeclarationExpression
+name|declare
+parameter_list|(
+name|int
+name|modifiers
+parameter_list|,
+name|String
+name|name
+parameter_list|,
+name|Expression
+name|initializer
+parameter_list|)
+block|{
+return|return
+name|declare
+argument_list|(
+name|modifiers
+argument_list|,
+name|parameter
+argument_list|(
+name|initializer
+operator|.
+name|getType
+argument_list|()
+argument_list|,
+name|name
+argument_list|)
 argument_list|,
 name|initializer
 argument_list|)
