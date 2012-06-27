@@ -534,6 +534,75 @@ argument_list|()
 expr_stmt|;
 name|assertEquals
 argument_list|(
+literal|"cust_id=100; prod_id=10; empid=100; deptno=10; name=Bill\n"
+operator|+
+literal|"cust_id=150; prod_id=20; empid=150; deptno=10; name=Sebastian\n"
+argument_list|,
+name|actual
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**      * Simple GROUP BY.      *      * @throws Exception on error      */
+specifier|public
+name|void
+name|testGroupBy
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+name|Connection
+name|connection
+init|=
+name|getConnectionWithHrFoodmart
+argument_list|()
+decl_stmt|;
+name|Statement
+name|statement
+init|=
+name|connection
+operator|.
+name|createStatement
+argument_list|()
+decl_stmt|;
+name|ResultSet
+name|resultSet
+init|=
+name|statement
+operator|.
+name|executeQuery
+argument_list|(
+literal|"select \"deptno\", sum(\"empid\"), count(*)\n"
+operator|+
+literal|"from \"hr\".\"emps\" as e\n"
+operator|+
+literal|"group by \"deptno\""
+argument_list|)
+decl_stmt|;
+name|String
+name|actual
+init|=
+name|toString
+argument_list|(
+name|resultSet
+argument_list|)
+decl_stmt|;
+name|resultSet
+operator|.
+name|close
+argument_list|()
+expr_stmt|;
+name|statement
+operator|.
+name|close
+argument_list|()
+expr_stmt|;
+name|connection
+operator|.
+name|close
+argument_list|()
+expr_stmt|;
+name|assertEquals
+argument_list|(
 literal|"cust_id=100; prod_id=10; empid=100; name=Bill\n"
 operator|+
 literal|"cust_id=150; prod_id=20; empid=150; name=Sebastian\n"
@@ -2324,6 +2393,8 @@ name|Employee
 argument_list|(
 literal|100
 argument_list|,
+literal|10
+argument_list|,
 literal|"Bill"
 argument_list|)
 block|,
@@ -2332,6 +2403,8 @@ name|Employee
 argument_list|(
 literal|200
 argument_list|,
+literal|20
+argument_list|,
 literal|"Eric"
 argument_list|)
 block|,
@@ -2339,6 +2412,8 @@ operator|new
 name|Employee
 argument_list|(
 literal|150
+argument_list|,
+literal|10
 argument_list|,
 literal|"Sebastian"
 argument_list|)
@@ -2357,6 +2432,11 @@ name|empid
 decl_stmt|;
 specifier|public
 specifier|final
+name|int
+name|deptno
+decl_stmt|;
+specifier|public
+specifier|final
 name|String
 name|name
 decl_stmt|;
@@ -2365,6 +2445,9 @@ name|Employee
 parameter_list|(
 name|int
 name|empid
+parameter_list|,
+name|int
+name|deptno
 parameter_list|,
 name|String
 name|name
@@ -2375,6 +2458,12 @@ operator|.
 name|empid
 operator|=
 name|empid
+expr_stmt|;
+name|this
+operator|.
+name|deptno
+operator|=
+name|deptno
 expr_stmt|;
 name|this
 operator|.
