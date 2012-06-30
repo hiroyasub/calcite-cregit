@@ -46,13 +46,13 @@ specifier|public
 class|class
 name|ConditionalExpression
 extends|extends
-name|Expression
+name|Node
 block|{
 specifier|private
 specifier|final
 name|List
 argument_list|<
-name|Expression
+name|Node
 argument_list|>
 name|expressionList
 decl_stmt|;
@@ -61,7 +61,7 @@ name|ConditionalExpression
 parameter_list|(
 name|List
 argument_list|<
-name|Expression
+name|Node
 argument_list|>
 name|expressionList
 parameter_list|,
@@ -149,7 +149,7 @@ argument_list|)
 operator|.
 name|append
 argument_list|(
-name|FunctionExpression
+name|Blocks
 operator|.
 name|toBlock
 argument_list|(
@@ -186,7 +186,7 @@ argument_list|)
 operator|.
 name|append
 argument_list|(
-name|FunctionExpression
+name|Blocks
 operator|.
 name|toBlock
 argument_list|(

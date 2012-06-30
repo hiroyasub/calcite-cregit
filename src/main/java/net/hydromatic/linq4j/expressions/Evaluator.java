@@ -207,7 +207,7 @@ block|}
 name|Object
 name|evaluate
 parameter_list|(
-name|Expression
+name|Node
 name|expression
 parameter_list|)
 block|{

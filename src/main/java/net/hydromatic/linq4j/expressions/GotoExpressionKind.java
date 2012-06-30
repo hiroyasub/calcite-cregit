@@ -27,42 +27,48 @@ block|{
 comment|/** A GotoExpression that represents a jump to some location. */
 name|Goto
 argument_list|(
-literal|"goto"
+literal|"goto "
 argument_list|)
 block|,
 comment|/** A GotoExpression that represents a return statement. */
 name|Return
 argument_list|(
-literal|"return"
+literal|"return "
 argument_list|)
 block|,
 comment|/** A GotoExpression that represents a break statement. */
 name|Break
 argument_list|(
-literal|"break"
+literal|"break "
 argument_list|)
 block|,
 comment|/** A GotoExpression that represents a continue statement. */
 name|Continue
 argument_list|(
-literal|"continue"
+literal|"continue "
+argument_list|)
+block|,
+comment|/** A GotoExpression that evaluates an expression and carries on. */
+name|Sequence
+argument_list|(
+literal|""
 argument_list|)
 block|;
 specifier|final
 name|String
-name|s
+name|prefix
 decl_stmt|;
 name|GotoExpressionKind
 parameter_list|(
 name|String
-name|s
+name|prefix
 parameter_list|)
 block|{
 name|this
 operator|.
-name|s
+name|prefix
 operator|=
-name|s
+name|prefix
 expr_stmt|;
 block|}
 block|}

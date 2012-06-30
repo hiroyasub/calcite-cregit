@@ -99,7 +99,7 @@ comment|/** Applies an accumulator function over a      * sequence. The specifie
 parameter_list|<
 name|TAccumulate
 parameter_list|>
-name|TSource
+name|TAccumulate
 name|aggregate
 parameter_list|(
 name|TAccumulate
@@ -1182,6 +1182,11 @@ function_decl|;
 comment|/** Invokes a projection function on each element of a      * generic IQueryable<TSource> and returns the maximum resulting      * value. */
 parameter_list|<
 name|TResult
+extends|extends
+name|Comparable
+argument_list|<
+name|TResult
+argument_list|>
 parameter_list|>
 name|TResult
 name|max
@@ -1206,6 +1211,11 @@ function_decl|;
 comment|/** Invokes a projection function on each element of a      * generic IQueryable<TSource> and returns the minimum resulting      * value. */
 parameter_list|<
 name|TResult
+extends|extends
+name|Comparable
+argument_list|<
+name|TResult
+argument_list|>
 parameter_list|>
 name|TResult
 name|min

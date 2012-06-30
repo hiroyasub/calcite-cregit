@@ -94,7 +94,7 @@ comment|/** Applies an accumulator function over a      * sequence. The specifie
 parameter_list|<
 name|TAccumulate
 parameter_list|>
-name|TSource
+name|TAccumulate
 name|aggregate
 parameter_list|(
 name|TAccumulate
@@ -1173,6 +1173,11 @@ function_decl|;
 comment|/** Invokes a transform function on each element of a      * generic sequence and returns the maximum resulting      * value. */
 parameter_list|<
 name|TResult
+extends|extends
+name|Comparable
+argument_list|<
+name|TResult
+argument_list|>
 parameter_list|>
 name|TResult
 name|max
@@ -1304,6 +1309,11 @@ function_decl|;
 comment|/** Invokes a transform function on each element of a      * generic sequence and returns the minimum resulting      * value. */
 parameter_list|<
 name|TResult
+extends|extends
+name|Comparable
+argument_list|<
+name|TResult
+argument_list|>
 parameter_list|>
 name|TResult
 name|min
@@ -1692,18 +1702,12 @@ name|predicate
 parameter_list|)
 function_decl|;
 comment|/** Computes the sum of the sequence of Decimal values      * that are obtained by invoking a transform function on each      * element of the input sequence. */
-name|java
-operator|.
-name|math
-operator|.
 name|BigDecimal
 name|sum
 parameter_list|(
-name|Function1
+name|BigDecimalFunction1
 argument_list|<
 name|TSource
-argument_list|,
-name|BigDecimal
 argument_list|>
 name|selector
 parameter_list|)

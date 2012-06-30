@@ -733,7 +733,7 @@ specifier|public
 parameter_list|<
 name|TAccumulate
 parameter_list|>
-name|T
+name|TAccumulate
 name|aggregate
 parameter_list|(
 name|TAccumulate
@@ -2278,6 +2278,11 @@ block|}
 specifier|public
 parameter_list|<
 name|TResult
+extends|extends
+name|Comparable
+argument_list|<
+name|TResult
+argument_list|>
 parameter_list|>
 name|TResult
 name|max
@@ -2312,6 +2317,11 @@ block|}
 specifier|public
 parameter_list|<
 name|TResult
+extends|extends
+name|Comparable
+argument_list|<
+name|TResult
+argument_list|>
 parameter_list|>
 name|TResult
 name|min

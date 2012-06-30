@@ -24,7 +24,7 @@ specifier|public
 class|class
 name|LoopExpression
 extends|extends
-name|Expression
+name|Statement
 block|{
 specifier|public
 name|LoopExpression

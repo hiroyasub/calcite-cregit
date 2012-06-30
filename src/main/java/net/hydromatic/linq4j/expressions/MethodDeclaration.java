@@ -95,7 +95,7 @@ name|parameters
 decl_stmt|;
 specifier|public
 specifier|final
-name|Expression
+name|BlockExpression
 name|body
 decl_stmt|;
 specifier|public
@@ -116,7 +116,7 @@ name|ParameterExpression
 argument_list|>
 name|parameters
 parameter_list|,
-name|Expression
+name|BlockExpression
 name|body
 parameter_list|)
 block|{
@@ -283,12 +283,7 @@ argument_list|)
 operator|.
 name|append
 argument_list|(
-name|FunctionExpression
-operator|.
-name|toFunctionBlock
-argument_list|(
 name|body
-argument_list|)
 argument_list|)
 expr_stmt|;
 block|}

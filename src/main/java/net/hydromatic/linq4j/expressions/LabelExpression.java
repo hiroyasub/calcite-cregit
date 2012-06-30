@@ -24,7 +24,7 @@ specifier|public
 class|class
 name|LabelExpression
 extends|extends
-name|Expression
+name|Statement
 block|{
 specifier|public
 specifier|final

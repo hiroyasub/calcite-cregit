@@ -109,7 +109,7 @@ specifier|public
 name|void
 name|write
 parameter_list|(
-name|Expression
+name|Node
 name|expression
 parameter_list|)
 block|{
@@ -119,11 +119,9 @@ name|accept
 argument_list|(
 name|this
 argument_list|,
-operator|-
-literal|1
+literal|0
 argument_list|,
-operator|-
-literal|1
+literal|0
 argument_list|)
 expr_stmt|;
 block|}
@@ -191,11 +189,9 @@ name|accept
 argument_list|(
 name|this
 argument_list|,
-operator|-
-literal|1
+literal|0
 argument_list|,
-operator|-
-literal|1
+literal|0
 argument_list|)
 expr_stmt|;
 name|buf
@@ -416,7 +412,7 @@ specifier|public
 name|ExpressionWriter
 name|append
 parameter_list|(
-name|Expression
+name|Node
 name|o
 parameter_list|)
 block|{

@@ -164,7 +164,7 @@ name|assertEquals
 argument_list|(
 literal|"new net.hydromatic.linq4j.function.Function1() {\n"
 operator|+
-literal|"  public Integer apply(Integer arg) {\n"
+literal|"  public int apply(Integer arg) {\n"
 operator|+
 literal|"    return arg + 2;\n"
 operator|+
@@ -552,7 +552,7 @@ argument_list|)
 expr_stmt|;
 name|assertEquals
 argument_list|(
-literal|"0 + (2 + 3).compareTo(1)"
+literal|"0 + (double) (2 + 3)"
 argument_list|,
 name|Expressions
 operator|.
@@ -571,7 +571,7 @@ argument_list|)
 argument_list|,
 name|Expressions
 operator|.
-name|call
+name|convert_
 argument_list|(
 name|Expressions
 operator|.
@@ -592,22 +592,9 @@ literal|3
 argument_list|)
 argument_list|)
 argument_list|,
-literal|"compareTo"
-argument_list|,
-name|Arrays
+name|Double
 operator|.
-expr|<
-name|Expression
-operator|>
-name|asList
-argument_list|(
-name|Expressions
-operator|.
-name|constant
-argument_list|(
-literal|1
-argument_list|)
-argument_list|)
+name|TYPE
 argument_list|)
 argument_list|)
 argument_list|)
@@ -662,7 +649,7 @@ name|assertEquals
 argument_list|(
 literal|"new net.hydromatic.linq4j.function.Function1() {\n"
 operator|+
-literal|"  public Integer apply(String x) {\n"
+literal|"  public int apply(String x) {\n"
 operator|+
 literal|"    return x.length();\n"
 operator|+
@@ -692,12 +679,6 @@ name|class
 argument_list|,
 name|Expressions
 operator|.
-name|return_
-argument_list|(
-literal|null
-argument_list|,
-name|Expressions
-operator|.
 name|call
 argument_list|(
 name|paramX
@@ -711,7 +692,6 @@ name|Expression
 operator|>
 name|emptyList
 argument_list|()
-argument_list|)
 argument_list|)
 argument_list|,
 name|Arrays
@@ -1117,19 +1097,12 @@ argument_list|,
 literal|"index"
 argument_list|)
 decl_stmt|;
-name|Expression
+name|BlockExpression
 name|e
 init|=
 name|Expressions
 operator|.
 name|block
-argument_list|(
-name|Arrays
-operator|.
-expr|<
-name|Expression
-operator|>
-name|asList
 argument_list|(
 name|Expressions
 operator|.
@@ -1175,6 +1148,10 @@ argument_list|)
 argument_list|)
 argument_list|)
 argument_list|,
+name|Expressions
+operator|.
+name|statement
+argument_list|(
 name|Expressions
 operator|.
 name|new_
@@ -1268,6 +1245,10 @@ operator|>
 name|emptyList
 argument_list|()
 argument_list|,
+name|Blocks
+operator|.
+name|toFunctionBlock
+argument_list|(
 name|Expressions
 operator|.
 name|call
@@ -1283,6 +1264,7 @@ name|Expression
 operator|>
 name|emptyList
 argument_list|()
+argument_list|)
 argument_list|)
 argument_list|)
 argument_list|,
@@ -1307,6 +1289,10 @@ argument_list|(
 name|indexParameter
 argument_list|)
 argument_list|,
+name|Blocks
+operator|.
+name|toFunctionBlock
+argument_list|(
 name|Expressions
 operator|.
 name|call
@@ -1354,6 +1340,7 @@ argument_list|)
 argument_list|)
 argument_list|)
 argument_list|)
+argument_list|)
 decl_stmt|;
 name|assertEquals
 argument_list|(
@@ -1392,6 +1379,120 @@ operator|.
 name|toString
 argument_list|(
 name|e
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+specifier|public
+name|void
+name|testWriteWhile
+parameter_list|()
+block|{
+name|DeclarationExpression
+name|xDecl
+decl_stmt|,
+name|yDecl
+decl_stmt|;
+name|Node
+name|node
+init|=
+name|Expressions
+operator|.
+name|block
+argument_list|(
+name|xDecl
+operator|=
+name|Expressions
+operator|.
+name|declare
+argument_list|(
+literal|0
+argument_list|,
+literal|"x"
+argument_list|,
+name|Expressions
+operator|.
+name|constant
+argument_list|(
+literal|10
+argument_list|)
+argument_list|)
+argument_list|,
+name|yDecl
+operator|=
+name|Expressions
+operator|.
+name|declare
+argument_list|(
+literal|0
+argument_list|,
+literal|"y"
+argument_list|,
+name|Expressions
+operator|.
+name|constant
+argument_list|(
+literal|0
+argument_list|)
+argument_list|)
+argument_list|,
+name|Expressions
+operator|.
+name|while_
+argument_list|(
+name|Expressions
+operator|.
+name|lessThan
+argument_list|(
+name|xDecl
+operator|.
+name|parameter
+argument_list|,
+name|Expressions
+operator|.
+name|constant
+argument_list|(
+literal|5
+argument_list|)
+argument_list|)
+argument_list|,
+name|Expressions
+operator|.
+name|statement
+argument_list|(
+name|Expressions
+operator|.
+name|preIncrementAssign
+argument_list|(
+name|yDecl
+operator|.
+name|parameter
+argument_list|)
+argument_list|)
+argument_list|)
+argument_list|)
+decl_stmt|;
+name|assertEquals
+argument_list|(
+literal|"{\n"
+operator|+
+literal|"  int x = 10;\n"
+operator|+
+literal|"  int y = 0;\n"
+operator|+
+literal|"  while (x< 5) {\n"
+operator|+
+literal|"    ++y;\n"
+operator|+
+literal|"  }\n"
+operator|+
+literal|"}\n"
+argument_list|,
+name|Expressions
+operator|.
+name|toString
+argument_list|(
+name|node
 argument_list|)
 argument_list|)
 expr_stmt|;
