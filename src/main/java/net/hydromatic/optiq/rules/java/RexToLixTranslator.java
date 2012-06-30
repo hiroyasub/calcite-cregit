@@ -379,7 +379,7 @@ decl_stmt|;
 specifier|private
 name|List
 argument_list|<
-name|Expression
+name|Statement
 argument_list|>
 name|list
 decl_stmt|;
@@ -498,7 +498,7 @@ name|typeFactory
 parameter_list|,
 name|List
 argument_list|<
-name|Expression
+name|Statement
 argument_list|>
 name|list
 parameter_list|)
@@ -1267,7 +1267,7 @@ name|translate
 parameter_list|(
 name|List
 argument_list|<
-name|Expression
+name|Statement
 argument_list|>
 name|list
 parameter_list|,
@@ -1413,7 +1413,7 @@ name|typeFactory
 parameter_list|,
 name|List
 argument_list|<
-name|Expression
+name|Statement
 argument_list|>
 name|list
 parameter_list|)

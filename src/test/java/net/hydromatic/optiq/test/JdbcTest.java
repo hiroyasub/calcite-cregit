@@ -571,7 +571,7 @@ name|statement
 operator|.
 name|executeQuery
 argument_list|(
-literal|"select \"deptno\", sum(\"empid\"), count(*)\n"
+literal|"select \"deptno\", sum(\"empid\") as s, count(*) as c\n"
 operator|+
 literal|"from \"hr\".\"emps\" as e\n"
 operator|+
@@ -603,9 +603,9 @@ argument_list|()
 expr_stmt|;
 name|assertEquals
 argument_list|(
-literal|"cust_id=100; prod_id=10; empid=100; name=Bill\n"
+literal|"deptno=20; S=200; C=1\n"
 operator|+
-literal|"cust_id=150; prod_id=20; empid=150; name=Sebastian\n"
+literal|"deptno=10; S=250; C=2\n"
 argument_list|,
 name|actual
 argument_list|)

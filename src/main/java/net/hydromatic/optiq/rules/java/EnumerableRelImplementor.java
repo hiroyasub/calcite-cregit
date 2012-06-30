@@ -39,21 +39,7 @@ name|linq4j
 operator|.
 name|expressions
 operator|.
-name|Expression
-import|;
-end_import
-
-begin_import
-import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|linq4j
-operator|.
-name|expressions
-operator|.
-name|Expressions
+name|*
 import|;
 end_import
 
@@ -168,7 +154,7 @@ argument_list|)
 expr_stmt|;
 block|}
 specifier|public
-name|Expression
+name|BlockExpression
 name|visitChild
 parameter_list|(
 name|EnumerableRel
@@ -183,7 +169,7 @@ parameter_list|)
 block|{
 return|return
 operator|(
-name|Expression
+name|BlockExpression
 operator|)
 name|super
 operator|.
@@ -198,7 +184,7 @@ argument_list|)
 return|;
 block|}
 specifier|public
-name|Expression
+name|BlockExpression
 name|visitChildInternal
 parameter_list|(
 name|RelNode
@@ -223,7 +209,7 @@ argument_list|)
 return|;
 block|}
 specifier|public
-name|Expression
+name|BlockExpression
 name|implementRoot
 parameter_list|(
 name|EnumerableRel

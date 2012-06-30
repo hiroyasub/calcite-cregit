@@ -27,7 +27,7 @@ name|linq4j
 operator|.
 name|expressions
 operator|.
-name|Expression
+name|BlockExpression
 import|;
 end_import
 
@@ -56,7 +56,7 @@ name|RelNode
 block|{
 comment|//~ Methods ----------------------------------------------------------------
 comment|/**      * Creates a plan for this expression according to a calling convention.      *      * @param implementor implementor      */
-name|Expression
+name|BlockExpression
 name|implement
 parameter_list|(
 name|EnumerableRelImplementor
