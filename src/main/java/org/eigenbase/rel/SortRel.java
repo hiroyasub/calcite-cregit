@@ -73,8 +73,10 @@ block|{
 comment|//~ Instance fields --------------------------------------------------------
 specifier|protected
 specifier|final
+name|List
+argument_list|<
 name|RelFieldCollation
-index|[]
+argument_list|>
 name|collations
 decl_stmt|;
 specifier|protected
@@ -84,18 +86,23 @@ index|[]
 name|fieldExps
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a sorter.      *      * @param cluster {@link RelOptCluster}  this relational expression belongs      * to      * @param child input relational expression      * @param collations array of sort specifications      */
+comment|/**      * Creates a sorter.      *      * @param cluster Cluster this relational expression belongs to      * @param traits Traits      * @param child input relational expression      * @param collations array of sort specifications      */
 specifier|public
 name|SortRel
 parameter_list|(
 name|RelOptCluster
 name|cluster
 parameter_list|,
+name|RelTraitSet
+name|traits
+parameter_list|,
 name|RelNode
 name|child
 parameter_list|,
+name|List
+argument_list|<
 name|RelFieldCollation
-index|[]
+argument_list|>
 name|collations
 parameter_list|)
 block|{
@@ -103,14 +110,7 @@ name|super
 argument_list|(
 name|cluster
 argument_list|,
-name|cluster
-operator|.
-name|traitSetOf
-argument_list|(
-name|CallingConvention
-operator|.
-name|NONE
-argument_list|)
+name|traits
 argument_list|,
 name|child
 argument_list|)
@@ -128,7 +128,8 @@ name|RexNode
 index|[
 name|collations
 operator|.
-name|length
+name|size
+argument_list|()
 index|]
 expr_stmt|;
 specifier|final
@@ -153,7 +154,8 @@ name|i
 operator|<
 name|collations
 operator|.
-name|length
+name|size
+argument_list|()
 condition|;
 operator|++
 name|i
@@ -163,9 +165,11 @@ name|int
 name|iField
 init|=
 name|collations
-index|[
+operator|.
+name|get
+argument_list|(
 name|i
-index|]
+argument_list|)
 operator|.
 name|getFieldIndex
 argument_list|()
@@ -227,6 +231,16 @@ argument_list|(
 name|getCluster
 argument_list|()
 argument_list|,
+name|getCluster
+argument_list|()
+operator|.
+name|traitSetOf
+argument_list|(
+name|CallingConvention
+operator|.
+name|NONE
+argument_list|)
+argument_list|,
 name|sole
 argument_list|(
 name|inputs
@@ -248,8 +262,10 @@ return|;
 block|}
 comment|/**      * @return array of RelFieldCollations, from most significant to least      * significant      */
 specifier|public
+name|List
+argument_list|<
 name|RelFieldCollation
-index|[]
+argument_list|>
 name|getCollations
 parameter_list|()
 block|{
@@ -277,7 +293,8 @@ operator|+
 operator|(
 name|collations
 operator|.
-name|length
+name|size
+argument_list|()
 operator|*
 literal|2
 operator|)
@@ -292,7 +309,8 @@ name|Object
 index|[
 name|collations
 operator|.
-name|length
+name|size
+argument_list|()
 index|]
 decl_stmt|;
 name|int
@@ -319,7 +337,8 @@ name|j
 operator|<
 name|collations
 operator|.
-name|length
+name|size
+argument_list|()
 condition|;
 operator|++
 name|j
@@ -347,7 +366,8 @@ name|j
 operator|<
 name|collations
 operator|.
-name|length
+name|size
+argument_list|()
 condition|;
 operator|++
 name|j
@@ -369,9 +389,11 @@ name|j
 index|]
 operator|=
 name|collations
-index|[
+operator|.
+name|get
+argument_list|(
 name|j
-index|]
+argument_list|)
 operator|.
 name|getDirection
 argument_list|()

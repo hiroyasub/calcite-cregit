@@ -611,6 +611,77 @@ name|actual
 argument_list|)
 expr_stmt|;
 block|}
+comment|/**      * Simple ORDER BY.      *      * @throws Exception on error      */
+specifier|public
+name|void
+name|testOrderBy
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+name|Connection
+name|connection
+init|=
+name|getConnectionWithHrFoodmart
+argument_list|()
+decl_stmt|;
+name|Statement
+name|statement
+init|=
+name|connection
+operator|.
+name|createStatement
+argument_list|()
+decl_stmt|;
+name|ResultSet
+name|resultSet
+init|=
+name|statement
+operator|.
+name|executeQuery
+argument_list|(
+literal|"select upper(\"name\") as un, \"deptno\"\n"
+operator|+
+literal|"from \"hr\".\"emps\" as e\n"
+operator|+
+literal|"order by \"deptno\", \"name\" desc"
+argument_list|)
+decl_stmt|;
+name|String
+name|actual
+init|=
+name|toString
+argument_list|(
+name|resultSet
+argument_list|)
+decl_stmt|;
+name|resultSet
+operator|.
+name|close
+argument_list|()
+expr_stmt|;
+name|statement
+operator|.
+name|close
+argument_list|()
+expr_stmt|;
+name|connection
+operator|.
+name|close
+argument_list|()
+expr_stmt|;
+name|assertEquals
+argument_list|(
+literal|"UN=SEBASTIAN; deptno=10\n"
+operator|+
+literal|"UN=BILL; deptno=10\n"
+operator|+
+literal|"UN=ERIC; deptno=20\n"
+argument_list|,
+name|actual
+argument_list|)
+expr_stmt|;
+block|}
 specifier|private
 name|String
 name|toString
