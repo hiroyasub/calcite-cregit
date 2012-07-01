@@ -4247,6 +4247,131 @@ argument_list|)
 expr_stmt|;
 block|}
 specifier|public
+name|void
+name|testOrderBy
+parameter_list|()
+block|{
+comment|// Note: sort is stable. Records occur Fred, Eric, Jane in input.
+name|assertEquals
+argument_list|(
+literal|"[Employee(name: Fred, deptno:10),"
+operator|+
+literal|" Employee(name: Eric, deptno:10),"
+operator|+
+literal|" Employee(name: Jane, deptno:10),"
+operator|+
+literal|" Employee(name: Bill, deptno:30)]"
+argument_list|,
+name|Linq4j
+operator|.
+name|asEnumerable
+argument_list|(
+name|emps
+argument_list|)
+operator|.
+name|orderBy
+argument_list|(
+name|EMP_DEPTNO_SELECTOR
+argument_list|)
+operator|.
+name|toList
+argument_list|()
+operator|.
+name|toString
+argument_list|()
+argument_list|)
+expr_stmt|;
+block|}
+specifier|public
+name|void
+name|testOrderByComparator
+parameter_list|()
+block|{
+name|assertEquals
+argument_list|(
+literal|"[Employee(name: Bill, deptno:30),"
+operator|+
+literal|" Employee(name: Eric, deptno:10),"
+operator|+
+literal|" Employee(name: Fred, deptno:10),"
+operator|+
+literal|" Employee(name: Jane, deptno:10)]"
+argument_list|,
+name|Linq4j
+operator|.
+name|asEnumerable
+argument_list|(
+name|emps
+argument_list|)
+operator|.
+name|orderBy
+argument_list|(
+name|EMP_NAME_SELECTOR
+argument_list|)
+operator|.
+name|orderBy
+argument_list|(
+name|EMP_DEPTNO_SELECTOR
+argument_list|,
+name|Collections
+operator|.
+expr|<
+name|Integer
+operator|>
+name|reverseOrder
+argument_list|()
+argument_list|)
+operator|.
+name|toList
+argument_list|()
+operator|.
+name|toString
+argument_list|()
+argument_list|)
+expr_stmt|;
+block|}
+specifier|public
+name|void
+name|testOrderByInSeries
+parameter_list|()
+block|{
+comment|// OrderBy in series works because sort is stable.
+name|assertEquals
+argument_list|(
+literal|"[Employee(name: Eric, deptno:10),"
+operator|+
+literal|" Employee(name: Fred, deptno:10),"
+operator|+
+literal|" Employee(name: Jane, deptno:10),"
+operator|+
+literal|" Employee(name: Bill, deptno:30)]"
+argument_list|,
+name|Linq4j
+operator|.
+name|asEnumerable
+argument_list|(
+name|emps
+argument_list|)
+operator|.
+name|orderBy
+argument_list|(
+name|EMP_NAME_SELECTOR
+argument_list|)
+operator|.
+name|orderBy
+argument_list|(
+name|EMP_DEPTNO_SELECTOR
+argument_list|)
+operator|.
+name|toList
+argument_list|()
+operator|.
+name|toString
+argument_list|()
+argument_list|)
+expr_stmt|;
+block|}
+specifier|public
 specifier|static
 class|class
 name|Employee
