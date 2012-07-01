@@ -45,6 +45,7 @@ name|seq
 init|=
 literal|0
 decl_stmt|;
+specifier|public
 specifier|final
 name|String
 name|name

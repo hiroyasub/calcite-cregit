@@ -1259,7 +1259,7 @@ name|methodName
 parameter_list|,
 name|Expression
 modifier|...
-name|selectors
+name|arguments
 parameter_list|)
 block|{
 return|return
@@ -1276,7 +1276,7 @@ name|Expression
 operator|>
 name|asList
 argument_list|(
-name|selectors
+name|arguments
 argument_list|)
 argument_list|)
 return|;
