@@ -719,8 +719,12 @@ operator|.
 name|getIndex
 argument_list|()
 decl_stmt|;
+specifier|final
+name|List
+argument_list|<
 name|RelDataTypeField
-name|field
+argument_list|>
+name|fields
 init|=
 name|program
 operator|.
@@ -729,6 +733,12 @@ argument_list|()
 operator|.
 name|getFieldList
 argument_list|()
+decl_stmt|;
+specifier|final
+name|RelDataTypeField
+name|field
+init|=
+name|fields
 operator|.
 name|get
 argument_list|(
@@ -736,6 +746,20 @@ name|index
 argument_list|)
 decl_stmt|;
 if|if
+condition|(
+name|fields
+operator|.
+name|size
+argument_list|()
+operator|==
+literal|1
+condition|)
+block|{
+return|return
+name|input
+return|;
+block|}
+if|else if
 condition|(
 name|input
 operator|.
