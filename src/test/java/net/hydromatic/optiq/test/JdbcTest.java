@@ -682,6 +682,83 @@ name|actual
 argument_list|)
 expr_stmt|;
 block|}
+comment|/**      * Simple UNION.      *      * @throws Exception on error      */
+specifier|public
+name|void
+name|testUnion
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+name|Connection
+name|connection
+init|=
+name|getConnectionWithHrFoodmart
+argument_list|()
+decl_stmt|;
+name|Statement
+name|statement
+init|=
+name|connection
+operator|.
+name|createStatement
+argument_list|()
+decl_stmt|;
+name|ResultSet
+name|resultSet
+init|=
+name|statement
+operator|.
+name|executeQuery
+argument_list|(
+literal|"select \"name\"\n"
+operator|+
+literal|"from \"hr\".\"emps\" as e\n"
+operator|+
+literal|"union all\n"
+operator|+
+literal|"select \"name\"\n"
+operator|+
+literal|"from \"hr\".\"depts\"\n"
+operator|+
+literal|"order by 1 desc"
+argument_list|)
+decl_stmt|;
+name|String
+name|actual
+init|=
+name|toString
+argument_list|(
+name|resultSet
+argument_list|)
+decl_stmt|;
+name|resultSet
+operator|.
+name|close
+argument_list|()
+expr_stmt|;
+name|statement
+operator|.
+name|close
+argument_list|()
+expr_stmt|;
+name|connection
+operator|.
+name|close
+argument_list|()
+expr_stmt|;
+name|assertEquals
+argument_list|(
+literal|"UN=SEBASTIAN; deptno=10\n"
+operator|+
+literal|"UN=BILL; deptno=10\n"
+operator|+
+literal|"UN=ERIC; deptno=20\n"
+argument_list|,
+name|actual
+argument_list|)
+expr_stmt|;
+block|}
 specifier|private
 name|String
 name|toString
@@ -718,6 +795,11 @@ operator|.
 name|getColumnCount
 argument_list|()
 decl_stmt|;
+name|String
+name|sep
+init|=
+literal|""
+decl_stmt|;
 for|for
 control|(
 name|int
@@ -737,13 +819,7 @@ name|buf
 operator|.
 name|append
 argument_list|(
-name|i
-operator|>
-literal|1
-condition|?
-literal|"; "
-else|:
-literal|""
+name|sep
 argument_list|)
 operator|.
 name|append
@@ -773,6 +849,10 @@ argument_list|(
 name|i
 argument_list|)
 argument_list|)
+expr_stmt|;
+name|sep
+operator|=
+literal|"; "
 expr_stmt|;
 block|}
 name|buf
@@ -2490,6 +2570,38 @@ literal|"Sebastian"
 argument_list|)
 block|,         }
 decl_stmt|;
+specifier|public
+specifier|final
+name|Department
+index|[]
+name|depts
+init|=
+block|{
+operator|new
+name|Department
+argument_list|(
+literal|10
+argument_list|,
+literal|"Sales"
+argument_list|)
+block|,
+operator|new
+name|Department
+argument_list|(
+literal|30
+argument_list|,
+literal|"Marketing"
+argument_list|)
+block|,
+operator|new
+name|Department
+argument_list|(
+literal|40
+argument_list|,
+literal|"HR"
+argument_list|)
+block|,         }
+decl_stmt|;
 block|}
 specifier|public
 specifier|static
@@ -2530,6 +2642,45 @@ name|empid
 operator|=
 name|empid
 expr_stmt|;
+name|this
+operator|.
+name|deptno
+operator|=
+name|deptno
+expr_stmt|;
+name|this
+operator|.
+name|name
+operator|=
+name|name
+expr_stmt|;
+block|}
+block|}
+specifier|public
+specifier|static
+class|class
+name|Department
+block|{
+specifier|public
+specifier|final
+name|int
+name|deptno
+decl_stmt|;
+specifier|public
+specifier|final
+name|String
+name|name
+decl_stmt|;
+specifier|public
+name|Department
+parameter_list|(
+name|int
+name|deptno
+parameter_list|,
+name|String
+name|name
+parameter_list|)
+block|{
 name|this
 operator|.
 name|deptno
