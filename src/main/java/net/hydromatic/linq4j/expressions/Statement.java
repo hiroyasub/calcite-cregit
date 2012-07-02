@@ -89,6 +89,19 @@ name|writer
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
+comment|// Make return type more specific. A statement can only become a different
+comment|// kind of statement; it can't become an expression.
+specifier|public
+specifier|abstract
+name|Statement
+name|accept
+parameter_list|(
+name|Visitor
+name|visitor
+parameter_list|)
+function_decl|;
 block|}
 end_class
 

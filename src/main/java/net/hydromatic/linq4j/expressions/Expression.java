@@ -100,6 +100,18 @@ name|toString
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
+comment|// More specific return type.
+specifier|public
+specifier|abstract
+name|Expression
+name|accept
+parameter_list|(
+name|Visitor
+name|visitor
+parameter_list|)
+function_decl|;
 comment|/** Indicates that the node can be reduced to a simpler node. If this      * returns true, Reduce() can be called to produce the reduced form. */
 specifier|public
 name|boolean

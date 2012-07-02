@@ -57,6 +57,25 @@ operator|=
 name|defaultValue
 expr_stmt|;
 block|}
+annotation|@
+name|Override
+specifier|public
+name|LabelExpression
+name|accept
+parameter_list|(
+name|Visitor
+name|visitor
+parameter_list|)
+block|{
+return|return
+name|visitor
+operator|.
+name|visit
+argument_list|(
+name|this
+argument_list|)
+return|;
+block|}
 block|}
 end_class
 
