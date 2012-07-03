@@ -901,8 +901,8 @@ block|}
 return|;
 block|}
 specifier|public
-specifier|abstract
 specifier|static
+specifier|abstract
 class|class
 name|AbstractMapper
 parameter_list|<

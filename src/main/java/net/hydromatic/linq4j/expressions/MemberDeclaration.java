@@ -34,6 +34,15 @@ name|ExpressionWriter
 name|expressionWriter
 parameter_list|)
 function_decl|;
+specifier|public
+specifier|abstract
+name|MemberDeclaration
+name|accept
+parameter_list|(
+name|Visitor
+name|visitor
+parameter_list|)
+function_decl|;
 block|}
 end_class
 
