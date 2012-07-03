@@ -105,7 +105,12 @@ name|visitor
 parameter_list|)
 block|{
 return|return
+name|visitor
+operator|.
+name|visit
+argument_list|(
 name|this
+argument_list|)
 return|;
 block|}
 specifier|public
