@@ -28,13 +28,13 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Implementation of {@link Cursor} on top of an  * {@link net.hydromatic.linq4j.Enumerator} that  * returns an array of {@link Object} for each row.  *  * @author jhyde  */
+comment|/**  * Implementation of {@link net.hydromatic.optiq.runtime.Cursor} on top of an  * {@link net.hydromatic.linq4j.Enumerator} that  * returns an array of {@link Object} for each row.  *  * @author jhyde  */
 end_comment
 
 begin_class
 specifier|public
 class|class
-name|ArrayEnumeratorCursor
+name|ObjectEnumeratorCursor
 extends|extends
 name|AbstractCursor
 block|{
@@ -43,18 +43,16 @@ specifier|final
 name|Enumerator
 argument_list|<
 name|Object
-index|[]
 argument_list|>
 name|enumerator
 decl_stmt|;
-comment|/**      * Creates an ArrayEnumeratorCursor.      *      * @param enumerator Enumerator      */
+comment|/**      * Creates an ObjectEnumeratorCursor.      *      * @param enumerator Enumerator      */
 specifier|public
-name|ArrayEnumeratorCursor
+name|ObjectEnumeratorCursor
 parameter_list|(
 name|Enumerator
 argument_list|<
 name|Object
-index|[]
 argument_list|>
 name|enumerator
 parameter_list|)
@@ -82,7 +80,7 @@ parameter_list|)
 block|{
 return|return
 operator|new
-name|ArrayEnumeratorGetter
+name|ObjectEnumeratorGetter
 argument_list|(
 name|ordinal
 argument_list|,
@@ -105,15 +103,10 @@ argument_list|()
 return|;
 block|}
 class|class
-name|ArrayEnumeratorGetter
+name|ObjectEnumeratorGetter
 implements|implements
 name|Getter
 block|{
-specifier|protected
-specifier|final
-name|int
-name|field
-decl_stmt|;
 specifier|protected
 specifier|final
 name|boolean
@@ -121,7 +114,7 @@ index|[]
 name|wasNull
 decl_stmt|;
 specifier|public
-name|ArrayEnumeratorGetter
+name|ObjectEnumeratorGetter
 parameter_list|(
 name|int
 name|field
@@ -131,12 +124,11 @@ index|[]
 name|wasNull
 parameter_list|)
 block|{
-name|this
-operator|.
+assert|assert
 name|field
-operator|=
-name|field
-expr_stmt|;
+operator|==
+literal|0
+assert|;
 name|this
 operator|.
 name|wasNull
@@ -156,9 +148,6 @@ name|enumerator
 operator|.
 name|current
 argument_list|()
-index|[
-name|field
-index|]
 decl_stmt|;
 name|wasNull
 index|[
@@ -192,7 +181,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End ArrayEnumeratorCursor.java
+comment|// End ObjectEnumeratorCursor.java
 end_comment
 
 end_unit
