@@ -609,6 +609,27 @@ throw|;
 block|}
 block|}
 block|}
+specifier|public
+name|void
+name|add
+parameter_list|(
+name|Expression
+name|expression
+parameter_list|)
+block|{
+name|add
+argument_list|(
+name|Expressions
+operator|.
+name|return_
+argument_list|(
+literal|null
+argument_list|,
+name|expression
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Returns a block consisting of the current list of statements. */
 specifier|public
 name|BlockExpression

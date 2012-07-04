@@ -403,6 +403,9 @@ argument_list|>
 name|enumerable1
 parameter_list|,
 name|EqualityComparer
+argument_list|<
+name|T
+argument_list|>
 name|comparer
 parameter_list|)
 block|{

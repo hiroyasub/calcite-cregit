@@ -37,6 +37,13 @@ name|T
 name|v2
 parameter_list|)
 function_decl|;
+name|int
+name|hashCode
+parameter_list|(
+name|T
+name|t
+parameter_list|)
+function_decl|;
 block|}
 end_interface
 

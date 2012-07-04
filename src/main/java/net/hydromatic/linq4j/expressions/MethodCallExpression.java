@@ -232,12 +232,14 @@ block|{
 name|Expression
 name|targetExpression
 init|=
-name|this
-operator|.
-name|targetExpression
+name|Expressions
 operator|.
 name|accept
 argument_list|(
+name|this
+operator|.
+name|targetExpression
+argument_list|,
 name|visitor
 argument_list|)
 decl_stmt|;

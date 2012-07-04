@@ -440,6 +440,9 @@ argument_list|>
 name|enumerable1
 parameter_list|,
 name|EqualityComparer
+argument_list|<
+name|TSource
+argument_list|>
 name|comparer
 parameter_list|)
 function_decl|;
@@ -905,6 +908,24 @@ argument_list|<
 name|TSource
 argument_list|>
 name|comparer
+parameter_list|)
+function_decl|;
+comment|/** Copies the contents of the sequence into a collection. */
+parameter_list|<
+name|C
+extends|extends
+name|Collection
+argument_list|<
+name|?
+super|super
+name|TSource
+argument_list|>
+parameter_list|>
+name|C
+name|into
+parameter_list|(
+name|C
+name|sink
 parameter_list|)
 function_decl|;
 comment|/** Correlates the elements of two sequences based on      * matching keys. The default equality comparer is used to compare      * keys. */
