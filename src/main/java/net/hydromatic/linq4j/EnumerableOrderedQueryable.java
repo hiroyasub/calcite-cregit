@@ -109,13 +109,13 @@ parameter_list|)
 block|{
 name|super
 argument_list|(
-name|enumerable
+name|provider
 argument_list|,
 name|rowType
 argument_list|,
-name|provider
-argument_list|,
 name|expression
+argument_list|,
+name|enumerable
 argument_list|)
 expr_stmt|;
 block|}
