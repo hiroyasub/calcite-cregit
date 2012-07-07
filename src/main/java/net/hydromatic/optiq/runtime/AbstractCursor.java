@@ -126,6 +126,17 @@ name|AbstractCursor
 implements|implements
 name|Cursor
 block|{
+comment|/**      * Slot into which each accessor should write whether the      * value returned was null.      */
+specifier|protected
+specifier|final
+name|boolean
+index|[]
+name|wasNull
+init|=
+block|{
+literal|false
+block|}
+decl_stmt|;
 specifier|protected
 name|AbstractCursor
 parameter_list|()
@@ -138,10 +149,6 @@ name|Accessor
 argument_list|>
 name|createAccessors
 parameter_list|(
-name|boolean
-index|[]
-name|wasNull
-parameter_list|,
 name|List
 argument_list|<
 name|Integer
@@ -182,8 +189,6 @@ name|accessors
 operator|.
 name|size
 argument_list|()
-argument_list|,
-name|wasNull
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -201,10 +206,6 @@ name|type
 parameter_list|,
 name|int
 name|ordinal
-parameter_list|,
-name|boolean
-index|[]
-name|wasNull
 parameter_list|)
 block|{
 comment|// Create an accessor appropriate to the underlying type; the accessor
@@ -215,8 +216,6 @@ init|=
 name|createGetter
 argument_list|(
 name|ordinal
-argument_list|,
-name|wasNull
 argument_list|)
 decl_stmt|;
 switch|switch
@@ -361,10 +360,6 @@ name|createGetter
 parameter_list|(
 name|int
 name|ordinal
-parameter_list|,
-name|boolean
-index|[]
-name|wasNull
 parameter_list|)
 function_decl|;
 specifier|public
@@ -1768,7 +1763,6 @@ name|Object
 name|getObject
 parameter_list|()
 function_decl|;
-comment|// REVIEW: should this be in Cursor instead?
 name|boolean
 name|wasNull
 parameter_list|()

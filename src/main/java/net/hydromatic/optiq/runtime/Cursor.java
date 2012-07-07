@@ -104,17 +104,13 @@ specifier|public
 interface|interface
 name|Cursor
 block|{
-comment|/**      * Creates a list of accessors, one per column.      *      * @param wasNull Slot into which each accessor should write whether the      *                value returned was null.      * @param types List of column types, per {@link Types}.      * @return List of column accessors      */
+comment|/**      * Creates a list of accessors, one per column.      *      * @param types List of column types, per {@link java.sql.Types}.      * @return List of column accessors      */
 name|List
 argument_list|<
 name|Accessor
 argument_list|>
 name|createAccessors
 parameter_list|(
-name|boolean
-index|[]
-name|wasNull
-parameter_list|,
 name|List
 argument_list|<
 name|Integer

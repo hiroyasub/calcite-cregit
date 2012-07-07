@@ -35,10 +35,10 @@ extends|extends
 name|Schema
 block|{
 name|void
-name|add
+name|addMember
 parameter_list|(
-name|SchemaObject
-name|schemaObject
+name|Member
+name|member
 parameter_list|)
 function_decl|;
 name|void

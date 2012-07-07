@@ -14,7 +14,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * A member of a {@link Schema}.  *  *<p>May be a {@link Function} or an {@link Overload}.</p>  */
+comment|/**  * A member of a {@link Schema}.  *  *<p>May be a {@link Member} or an {@link Overload}.</p>  */
 end_comment
 
 begin_interface

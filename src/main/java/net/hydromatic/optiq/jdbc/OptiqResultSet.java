@@ -491,12 +491,6 @@ operator|.
 name|createAccessors
 argument_list|(
 operator|new
-name|boolean
-index|[
-literal|1
-index|]
-argument_list|,
-operator|new
 name|AbstractList
 argument_list|<
 name|Integer
