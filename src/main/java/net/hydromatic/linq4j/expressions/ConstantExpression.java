@@ -231,6 +231,37 @@ block|}
 if|else if
 condition|(
 name|value
+operator|instanceof
+name|Class
+condition|)
+block|{
+name|Class
+name|clazz
+init|=
+operator|(
+name|Class
+operator|)
+name|value
+decl_stmt|;
+name|writer
+operator|.
+name|append
+argument_list|(
+name|clazz
+operator|.
+name|getCanonicalName
+argument_list|()
+argument_list|)
+operator|.
+name|append
+argument_list|(
+literal|".class"
+argument_list|)
+expr_stmt|;
+block|}
+if|else if
+condition|(
+name|value
 operator|.
 name|getClass
 argument_list|()
