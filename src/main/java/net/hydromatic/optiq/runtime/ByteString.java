@@ -40,6 +40,7 @@ comment|/**  * Collection of bytes.  *  *<p>ByteString is to bytes what {@link S
 end_comment
 
 begin_class
+specifier|public
 class|class
 name|ByteString
 implements|implements

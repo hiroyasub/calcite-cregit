@@ -207,6 +207,22 @@ name|impl
 operator|.
 name|jdbc
 operator|.
+name|JdbcDataContext
+import|;
+end_import
+
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|optiq
+operator|.
+name|impl
+operator|.
+name|jdbc
+operator|.
 name|JdbcSchema
 import|;
 end_import
@@ -273,6 +289,18 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
+name|util
+operator|.
+name|Util
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|io
@@ -319,27 +347,7 @@ name|java
 operator|.
 name|util
 operator|.
-name|Arrays
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|Collections
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|List
+name|*
 import|;
 end_import
 
@@ -567,13 +575,13 @@ parameter_list|()
 block|{
 name|assertQuery
 argument_list|(
-literal|"select substring(\"name\" from 1 for 2) as x\n"
+literal|"select substring(\"name\" from 1 for 1) as x\n"
 operator|+
 literal|"from \"hr\".\"emps\" as e\n"
 operator|+
 literal|"union\n"
 operator|+
-literal|"select substring(\"name\" from 1 for 2) as y\n"
+literal|"select substring(\"name\" from 1 for 1) as y\n"
 operator|+
 literal|"from \"hr\".\"depts\""
 argument_list|)
@@ -600,13 +608,13 @@ parameter_list|()
 block|{
 name|assertQuery
 argument_list|(
-literal|"select substring(\"name\" from 1 for 2) as x\n"
+literal|"select substring(\"name\" from 1 for 1) as x\n"
 operator|+
 literal|"from \"hr\".\"emps\" as e\n"
 operator|+
 literal|"intersect\n"
 operator|+
-literal|"select substring(\"name\" from 1 for 2) as y\n"
+literal|"select substring(\"name\" from 1 for 1) as y\n"
 operator|+
 literal|"from \"hr\".\"depts\""
 argument_list|)
@@ -625,13 +633,13 @@ parameter_list|()
 block|{
 name|assertQuery
 argument_list|(
-literal|"select substring(\"name\" from 1 for 2) as x\n"
+literal|"select substring(\"name\" from 1 for 1) as x\n"
 operator|+
 literal|"from \"hr\".\"emps\" as e\n"
 operator|+
 literal|"except\n"
 operator|+
-literal|"select substring(\"name\" from 1 for 2) as y\n"
+literal|"select substring(\"name\" from 1 for 1) as y\n"
 operator|+
 literal|"from \"hr\".\"depts\""
 argument_list|)
@@ -2419,6 +2427,174 @@ parameter_list|()
 throws|throws
 name|Exception
 block|{
+name|assertQuery
+argument_list|(
+literal|"select * from \"foodmart\".\"days\""
+argument_list|)
+operator|.
+name|inJdbcFoodmart
+argument_list|()
+operator|.
+name|returns
+argument_list|(
+literal|"day=1; week_day=Sunday\n"
+operator|+
+literal|"day=2; week_day=Monday\n"
+operator|+
+literal|"day=5; week_day=Thursday\n"
+operator|+
+literal|"day=4; week_day=Wednesday\n"
+operator|+
+literal|"day=3; week_day=Tuesday\n"
+operator|+
+literal|"day=6; week_day=Friday\n"
+operator|+
+literal|"day=7; week_day=Saturday\n"
+argument_list|)
+expr_stmt|;
+block|}
+specifier|public
+name|void
+name|testFoodMartJdbcWhere
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+name|assertQuery
+argument_list|(
+literal|"select * from \"foodmart\".\"days\" where \"day\"< 3"
+argument_list|)
+operator|.
+name|inJdbcFoodmart
+argument_list|()
+operator|.
+name|returns
+argument_list|(
+literal|"day=1; week_day=Sunday\n"
+operator|+
+literal|"day=2; week_day=Monday\n"
+argument_list|)
+expr_stmt|;
+block|}
+specifier|public
+name|void
+name|testFoodMartJdbcGroup
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+name|assertQuery
+argument_list|(
+literal|"select s, count(*) as c from (\n"
+operator|+
+literal|"select substring(\"week_day\" from 1 for 1) as s\n"
+operator|+
+literal|"from \"foodmart\".\"days\")\n"
+operator|+
+literal|"group by s"
+argument_list|)
+operator|.
+name|inJdbcFoodmart
+argument_list|()
+operator|.
+name|returns
+argument_list|(
+literal|"S=T; C=2\n"
+operator|+
+literal|"S=F; C=1\n"
+operator|+
+literal|"S=W; C=1\n"
+operator|+
+literal|"S=S; C=2\n"
+operator|+
+literal|"S=M; C=1\n"
+argument_list|)
+expr_stmt|;
+block|}
+specifier|public
+name|AssertQuery
+name|assertQuery
+parameter_list|(
+name|String
+name|s
+parameter_list|)
+block|{
+return|return
+operator|new
+name|AssertQuery
+argument_list|(
+name|s
+argument_list|)
+return|;
+block|}
+specifier|private
+class|class
+name|AssertQuery
+block|{
+specifier|private
+specifier|final
+name|String
+name|sql
+decl_stmt|;
+specifier|private
+name|Config
+name|config
+init|=
+name|Config
+operator|.
+name|REGULAR
+decl_stmt|;
+name|AssertQuery
+parameter_list|(
+name|String
+name|sql
+parameter_list|)
+block|{
+name|super
+argument_list|()
+expr_stmt|;
+name|this
+operator|.
+name|sql
+operator|=
+name|sql
+expr_stmt|;
+block|}
+name|void
+name|returns
+parameter_list|(
+name|String
+name|expected
+parameter_list|)
+block|{
+try|try
+block|{
+name|Connection
+name|connection
+decl_stmt|;
+name|Statement
+name|statement
+decl_stmt|;
+name|ResultSet
+name|resultSet
+decl_stmt|;
+switch|switch
+condition|(
+name|config
+condition|)
+block|{
+case|case
+name|REGULAR
+case|:
+name|connection
+operator|=
+name|getConnectionWithHrFoodmart
+argument_list|()
+expr_stmt|;
+break|break;
+case|case
+name|JDBC_FOODMART
+case|:
 name|Class
 operator|.
 name|forName
@@ -2433,16 +2609,15 @@ argument_list|(
 literal|"com.mysql.jdbc.Driver"
 argument_list|)
 expr_stmt|;
-name|Connection
 name|connection
-init|=
+operator|=
 name|DriverManager
 operator|.
 name|getConnection
 argument_list|(
 literal|"jdbc:optiq:"
 argument_list|)
-decl_stmt|;
+expr_stmt|;
 name|OptiqConnection
 name|optiqConnection
 init|=
@@ -2497,9 +2672,9 @@ name|JdbcSchema
 argument_list|(
 name|dataSource
 argument_list|,
-literal|null
+literal|"foodmart"
 argument_list|,
-literal|null
+literal|""
 argument_list|,
 name|optiqConnection
 operator|.
@@ -2507,125 +2682,40 @@ name|getTypeFactory
 argument_list|()
 argument_list|)
 argument_list|,
-literal|null
-argument_list|)
-expr_stmt|;
-name|Statement
-name|statement
-init|=
-name|connection
-operator|.
-name|createStatement
-argument_list|()
-decl_stmt|;
-name|ResultSet
-name|resultSet
-init|=
-name|statement
-operator|.
-name|executeQuery
-argument_list|(
-literal|"select * from \"foodmart\".\"customers\""
-argument_list|)
-decl_stmt|;
-while|while
-condition|(
-name|resultSet
-operator|.
-name|next
-argument_list|()
-condition|)
-block|{
-name|System
-operator|.
-name|out
-operator|.
-name|println
-argument_list|(
-name|resultSet
-operator|.
-name|getString
-argument_list|(
-literal|1
-argument_list|)
-argument_list|)
-expr_stmt|;
-block|}
-block|}
-specifier|public
-name|AssertQuery
-name|assertQuery
-parameter_list|(
-name|String
-name|s
-parameter_list|)
-block|{
-return|return
 operator|new
-name|AssertQuery
+name|JdbcDataContext
 argument_list|(
-name|s
+name|dataSource
 argument_list|)
-return|;
-block|}
-specifier|private
-class|class
-name|AssertQuery
-block|{
-specifier|private
-specifier|final
-name|String
-name|sql
-decl_stmt|;
-name|AssertQuery
-parameter_list|(
-name|String
-name|sql
-parameter_list|)
-block|{
-name|super
-argument_list|()
+argument_list|)
 expr_stmt|;
-name|this
+break|break;
+default|default:
+throw|throw
+name|Util
 operator|.
-name|sql
-operator|=
-name|sql
-expr_stmt|;
+name|unexpected
+argument_list|(
+name|config
+argument_list|)
+throw|;
 block|}
-name|void
-name|returns
-parameter_list|(
-name|String
-name|expected
-parameter_list|)
-block|{
-try|try
-block|{
-name|Connection
-name|connection
-init|=
-name|getConnectionWithHrFoodmart
-argument_list|()
-decl_stmt|;
-name|Statement
 name|statement
-init|=
+operator|=
 name|connection
 operator|.
 name|createStatement
 argument_list|()
-decl_stmt|;
-name|ResultSet
+expr_stmt|;
 name|resultSet
-init|=
+operator|=
 name|statement
 operator|.
 name|executeQuery
 argument_list|(
 name|sql
 argument_list|)
-decl_stmt|;
+expr_stmt|;
 name|String
 name|actual
 init|=
@@ -2707,7 +2797,30 @@ argument_list|)
 throw|;
 block|}
 block|}
+specifier|public
+name|AssertQuery
+name|inJdbcFoodmart
+parameter_list|()
+block|{
+name|config
+operator|=
+name|Config
+operator|.
+name|JDBC_FOODMART
+expr_stmt|;
+return|return
+name|this
+return|;
 block|}
+block|}
+specifier|private
+enum|enum
+name|Config
+block|{
+name|REGULAR
+block|,
+name|JDBC_FOODMART
+block|,     }
 specifier|public
 specifier|static
 class|class

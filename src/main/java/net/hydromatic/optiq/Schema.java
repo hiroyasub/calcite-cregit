@@ -31,6 +31,18 @@ begin_import
 import|import
 name|java
 operator|.
+name|lang
+operator|.
+name|reflect
+operator|.
+name|Type
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
 name|util
 operator|.
 name|List
@@ -108,6 +120,11 @@ parameter_list|,
 name|Schema
 name|subSchema
 parameter_list|)
+function_decl|;
+comment|/**      * Returns the type of the runtime object that represents an instance of      * this schema.      *      *<p>For a JDBC schema, this is generally {@link DataContext} or a      * sub-class.</p>      *      * @return Runtime type of an instance of this schema      */
+name|Type
+name|getType
+parameter_list|()
 function_decl|;
 block|}
 end_interface
