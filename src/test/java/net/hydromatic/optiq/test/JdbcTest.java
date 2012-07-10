@@ -430,13 +430,11 @@ operator|.
 name|class
 argument_list|)
 decl_stmt|;
-comment|/**      * Runs a simple query that reads from a table in an in-memory schema.      *      * @throws Exception on error      */
+comment|/**      * Runs a simple query that reads from a table in an in-memory schema.      *      * @on error      */
 specifier|public
 name|void
 name|testSelect
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 name|assertQuery
 argument_list|(
@@ -458,8 +456,6 @@ specifier|public
 name|void
 name|testJoin
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 name|assertQuery
 argument_list|(
@@ -485,8 +481,6 @@ specifier|public
 name|void
 name|testGroupBy
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 name|assertQuery
 argument_list|(
@@ -2424,8 +2418,6 @@ specifier|public
 name|void
 name|testFoodMartJdbc
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 name|assertQuery
 argument_list|(
@@ -2457,8 +2449,6 @@ specifier|public
 name|void
 name|testFoodMartJdbcWhere
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 name|assertQuery
 argument_list|(
@@ -2480,8 +2470,6 @@ specifier|public
 name|void
 name|testFoodMartJdbcGroup
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 name|assertQuery
 argument_list|(
@@ -2508,6 +2496,178 @@ operator|+
 literal|"S=S; C=2\n"
 operator|+
 literal|"S=M; C=1\n"
+argument_list|)
+expr_stmt|;
+block|}
+specifier|public
+name|void
+name|testFoodMartJdbcGroupEmpty
+parameter_list|()
+block|{
+name|assertQuery
+argument_list|(
+literal|"select count(*) as c\n"
+operator|+
+literal|"from \"foodmart\".\"days\""
+argument_list|)
+operator|.
+name|inJdbcFoodmart
+argument_list|()
+operator|.
+name|returns
+argument_list|(
+literal|"C=7\n"
+argument_list|)
+expr_stmt|;
+block|}
+specifier|public
+name|void
+name|testFoodMartJdbcJoinGroupByEmpty
+parameter_list|()
+block|{
+name|assertQuery
+argument_list|(
+literal|"select count(*) from (\n"
+operator|+
+literal|"  select *\n"
+operator|+
+literal|"  from \"foodmart\".\"sales_fact_1997\" as s\n"
+operator|+
+literal|"  join \"foodmart\".\"customer\" as c\n"
+operator|+
+literal|"  on s.\"customer_id\" = c.\"customer_id\")"
+argument_list|)
+operator|.
+name|inJdbcFoodmart
+argument_list|()
+operator|.
+name|returns
+argument_list|(
+literal|"EXPR$0=86837\n"
+argument_list|)
+expr_stmt|;
+block|}
+specifier|public
+name|void
+name|testFoodMartJdbcJoinGroupByOrderBy
+parameter_list|()
+block|{
+name|assertQuery
+argument_list|(
+literal|"select count(*), c.\"state_province\", sum(s.\"unit_sales\") as s\n"
+operator|+
+literal|"from \"foodmart\".\"sales_fact_1997\" as s\n"
+operator|+
+literal|"  join \"foodmart\".\"customer\" as c\n"
+operator|+
+literal|"  on s.\"customer_id\" = c.\"customer_id\"\n"
+operator|+
+literal|"group by c.\"state_province\"\n"
+operator|+
+literal|"order by c.\"state_province\""
+argument_list|)
+operator|.
+name|inJdbcFoodmart
+argument_list|()
+operator|.
+name|returns
+argument_list|(
+literal|"EXPR$0=24442; state_province=CA; S=74748.0000\n"
+operator|+
+literal|"EXPR$0=21611; state_province=OR; S=67659.0000\n"
+operator|+
+literal|"EXPR$0=40784; state_province=WA; S=124366.0000\n"
+argument_list|)
+expr_stmt|;
+block|}
+specifier|public
+name|void
+name|testFoodMartJdbcCompositeGroupBy
+parameter_list|()
+block|{
+name|assertQuery
+argument_list|(
+literal|"select count(*) as c, c.\"state_province\"\n"
+operator|+
+literal|"from \"foodmart\".\"customer\" as c\n"
+operator|+
+literal|"group by c.\"state_province\", c.\"country\"\n"
+operator|+
+literal|"order by c.\"state_province\", 1"
+argument_list|)
+operator|.
+name|inJdbcFoodmart
+argument_list|()
+operator|.
+name|returns
+argument_list|(
+literal|"C=1717; state_province=BC\n"
+operator|+
+literal|"C=4222; state_province=CA\n"
+operator|+
+literal|"C=347; state_province=DF\n"
+operator|+
+literal|"C=106; state_province=Guerrero\n"
+operator|+
+literal|"C=104; state_province=Jalisco\n"
+operator|+
+literal|"C=97; state_province=Mexico\n"
+operator|+
+literal|"C=1051; state_province=OR\n"
+operator|+
+literal|"C=90; state_province=Oaxaca\n"
+operator|+
+literal|"C=78; state_province=Sinaloa\n"
+operator|+
+literal|"C=93; state_province=Veracruz\n"
+operator|+
+literal|"C=2086; state_province=WA\n"
+operator|+
+literal|"C=99; state_province=Yucatan\n"
+operator|+
+literal|"C=191; state_province=Zacatecas\n"
+argument_list|)
+expr_stmt|;
+block|}
+specifier|public
+name|void
+name|testFoodMartJdbcDistinctCount
+parameter_list|()
+block|{
+comment|// Complicating factors:
+comment|// Composite GROUP BY key
+comment|// Order by select item, referenced by ordinal
+comment|// Distinct count
+comment|// Not all GROUP columns are projected
+name|assertQuery
+argument_list|(
+literal|"select c.\"state_province\",\n"
+operator|+
+literal|"  sum(s.\"unit_sales\") as s,\n"
+operator|+
+literal|"  count(distinct c.\"customer_id\") as dc\n"
+operator|+
+literal|"from \"foodmart\".\"sales_fact_1997\" as s\n"
+operator|+
+literal|"  join \"foodmart\".\"customer\" as c\n"
+operator|+
+literal|"  on s.\"customer_id\" = c.\"customer_id\"\n"
+operator|+
+literal|"group by c.\"state_province\", c.\"country\"\n"
+operator|+
+literal|"order by c.\"state_province\", 2"
+argument_list|)
+operator|.
+name|inJdbcFoodmart
+argument_list|()
+operator|.
+name|returns
+argument_list|(
+literal|"state_province=CA; S=74748.0000; DC=24442\n"
+operator|+
+literal|"state_province=OR; S=67659.0000; DC=21611\n"
+operator|+
+literal|"state_province=WA; S=124366.0000; DC=40784\n"
 argument_list|)
 expr_stmt|;
 block|}
