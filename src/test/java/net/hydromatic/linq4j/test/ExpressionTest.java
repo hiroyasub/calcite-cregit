@@ -944,7 +944,7 @@ literal|"  new net.hydromatic.linq4j.test.Linq4jTest.Employee(\n"
 operator|+
 literal|"    130,\n"
 operator|+
-literal|"    \"Jane\",\n"
+literal|"    \"Janet\",\n"
 operator|+
 literal|"    10)}"
 argument_list|,

@@ -573,6 +573,34 @@ name|clazz
 argument_list|)
 return|;
 block|}
+comment|/**      * Returns an {@link Enumerable} that has one element.      *      * @param<T> Element type      * @return Singleton enumerable      */
+specifier|public
+specifier|static
+parameter_list|<
+name|T
+parameter_list|>
+name|Enumerable
+argument_list|<
+name|T
+argument_list|>
+name|singletonEnumerable
+parameter_list|(
+name|T
+name|element
+parameter_list|)
+block|{
+return|return
+name|asEnumerable
+argument_list|(
+name|Collections
+operator|.
+name|singletonList
+argument_list|(
+name|element
+argument_list|)
+argument_list|)
+return|;
+block|}
 comment|/**      * Returns an {@link Enumerable} that has no elements.      *      * @param<T> Element type      * @return Empty enumerable      */
 specifier|public
 specifier|static

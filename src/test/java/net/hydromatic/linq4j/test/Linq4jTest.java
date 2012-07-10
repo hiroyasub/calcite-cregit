@@ -451,7 +451,7 @@ argument_list|()
 decl_stmt|;
 name|assertEquals
 argument_list|(
-literal|"[Fred, Bill, Eric, Jane]"
+literal|"[Fred, Bill, Eric, Janet]"
 argument_list|,
 name|names
 operator|.
@@ -516,7 +516,7 @@ argument_list|()
 decl_stmt|;
 name|assertEquals
 argument_list|(
-literal|"[Fred, Eric, Jane]"
+literal|"[Fred, Eric, Janet]"
 argument_list|,
 name|names
 operator|.
@@ -664,7 +664,7 @@ argument_list|()
 decl_stmt|;
 name|assertEquals
 argument_list|(
-literal|"[#0: Fred, #1: Eric, #2: Jane, #3: Bill]"
+literal|"[#0: Fred, #1: Eric, #2: Janet, #3: Bill]"
 argument_list|,
 name|nameSeqs
 operator|.
@@ -1384,7 +1384,7 @@ name|grouping
 operator|.
 name|contains
 argument_list|(
-literal|"Jane"
+literal|"Janet"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1502,6 +1502,148 @@ argument_list|)
 operator|.
 name|toList
 argument_list|()
+operator|.
+name|toString
+argument_list|()
+argument_list|)
+expr_stmt|;
+block|}
+specifier|public
+name|void
+name|testToLookupSelectorComparer
+parameter_list|()
+block|{
+specifier|final
+name|Lookup
+argument_list|<
+name|String
+argument_list|,
+name|Employee
+argument_list|>
+name|lookup
+init|=
+name|Linq4j
+operator|.
+name|asEnumerable
+argument_list|(
+name|emps
+argument_list|)
+operator|.
+name|toLookup
+argument_list|(
+name|EMP_NAME_SELECTOR
+argument_list|,
+operator|new
+name|EqualityComparer
+argument_list|<
+name|String
+argument_list|>
+argument_list|()
+block|{
+specifier|public
+name|boolean
+name|equal
+parameter_list|(
+name|String
+name|v1
+parameter_list|,
+name|String
+name|v2
+parameter_list|)
+block|{
+return|return
+name|v1
+operator|.
+name|length
+argument_list|()
+operator|==
+name|v2
+operator|.
+name|length
+argument_list|()
+return|;
+block|}
+specifier|public
+name|int
+name|hashCode
+parameter_list|(
+name|String
+name|s
+parameter_list|)
+block|{
+return|return
+name|s
+operator|.
+name|length
+argument_list|()
+return|;
+block|}
+block|}
+argument_list|)
+decl_stmt|;
+name|assertEquals
+argument_list|(
+literal|2
+argument_list|,
+name|lookup
+operator|.
+name|size
+argument_list|()
+argument_list|)
+expr_stmt|;
+name|assertEquals
+argument_list|(
+literal|"[Fred, Janet]"
+argument_list|,
+name|lookup
+operator|.
+name|keySet
+argument_list|()
+operator|.
+name|toString
+argument_list|()
+argument_list|)
+expr_stmt|;
+name|StringBuilder
+name|buf
+init|=
+operator|new
+name|StringBuilder
+argument_list|()
+decl_stmt|;
+for|for
+control|(
+name|Grouping
+argument_list|<
+name|String
+argument_list|,
+name|Employee
+argument_list|>
+name|grouping
+range|:
+name|lookup
+control|)
+block|{
+name|buf
+operator|.
+name|append
+argument_list|(
+name|grouping
+argument_list|)
+operator|.
+name|append
+argument_list|(
+literal|"\n"
+argument_list|)
+expr_stmt|;
+block|}
+name|assertEquals
+argument_list|(
+literal|"Fred: [Employee(name: Fred, deptno:10), Employee(name: Bill, deptno:30), Employee(name: Eric, deptno:10)]\n"
+operator|+
+literal|"Janet: [Employee(name: Janet, deptno:10)]\n"
+argument_list|,
+name|buf
 operator|.
 name|toString
 argument_list|()
@@ -2314,7 +2456,7 @@ argument_list|()
 decl_stmt|;
 name|assertEquals
 argument_list|(
-literal|"[[Fred, Eric, Jane] work(s) in Sales, "
+literal|"[[Fred, Eric, Janet] work(s) in Sales, "
 operator|+
 literal|"[] work(s) in HR, "
 operator|+
@@ -2414,7 +2556,7 @@ literal|"[Fred works in Sales, "
 operator|+
 literal|"Eric works in Sales, "
 operator|+
-literal|"Jane works in Sales, "
+literal|"Janet works in Sales, "
 operator|+
 literal|"Bill works in Marketing]"
 argument_list|,
@@ -4398,14 +4540,14 @@ name|void
 name|testOrderBy
 parameter_list|()
 block|{
-comment|// Note: sort is stable. Records occur Fred, Eric, Jane in input.
+comment|// Note: sort is stable. Records occur Fred, Eric, Janet in input.
 name|assertEquals
 argument_list|(
 literal|"[Employee(name: Fred, deptno:10),"
 operator|+
 literal|" Employee(name: Eric, deptno:10),"
 operator|+
-literal|" Employee(name: Jane, deptno:10),"
+literal|" Employee(name: Janet, deptno:10),"
 operator|+
 literal|" Employee(name: Bill, deptno:30)]"
 argument_list|,
@@ -4442,7 +4584,7 @@ literal|" Employee(name: Eric, deptno:10),"
 operator|+
 literal|" Employee(name: Fred, deptno:10),"
 operator|+
-literal|" Employee(name: Jane, deptno:10)]"
+literal|" Employee(name: Janet, deptno:10)]"
 argument_list|,
 name|Linq4j
 operator|.
@@ -4489,7 +4631,7 @@ literal|"[Employee(name: Eric, deptno:10),"
 operator|+
 literal|" Employee(name: Fred, deptno:10),"
 operator|+
-literal|" Employee(name: Jane, deptno:10),"
+literal|" Employee(name: Janet, deptno:10),"
 operator|+
 literal|" Employee(name: Bill, deptno:30)]"
 argument_list|,
@@ -4509,6 +4651,74 @@ name|orderBy
 argument_list|(
 name|EMP_DEPTNO_SELECTOR
 argument_list|)
+operator|.
+name|toList
+argument_list|()
+operator|.
+name|toString
+argument_list|()
+argument_list|)
+expr_stmt|;
+block|}
+specifier|public
+name|void
+name|testOrderByDescending
+parameter_list|()
+block|{
+name|assertEquals
+argument_list|(
+literal|"[Employee(name: Janet, deptno:10),"
+operator|+
+literal|" Employee(name: Fred, deptno:10),"
+operator|+
+literal|" Employee(name: Eric, deptno:10),"
+operator|+
+literal|" Employee(name: Bill, deptno:30)]"
+argument_list|,
+name|Linq4j
+operator|.
+name|asEnumerable
+argument_list|(
+name|emps
+argument_list|)
+operator|.
+name|orderByDescending
+argument_list|(
+name|EMP_NAME_SELECTOR
+argument_list|)
+operator|.
+name|toList
+argument_list|()
+operator|.
+name|toString
+argument_list|()
+argument_list|)
+expr_stmt|;
+block|}
+specifier|public
+name|void
+name|testReverse
+parameter_list|()
+block|{
+name|assertEquals
+argument_list|(
+literal|"[Employee(name: Janet, deptno:10),"
+operator|+
+literal|" Employee(name: Eric, deptno:10),"
+operator|+
+literal|" Employee(name: Bill, deptno:30),"
+operator|+
+literal|" Employee(name: Fred, deptno:10)]"
+argument_list|,
+name|Linq4j
+operator|.
+name|asEnumerable
+argument_list|(
+name|emps
+argument_list|)
+operator|.
+name|reverse
+argument_list|()
 operator|.
 name|toList
 argument_list|()
@@ -4731,7 +4941,7 @@ name|Employee
 argument_list|(
 literal|130
 argument_list|,
-literal|"Jane"
+literal|"Janet"
 argument_list|,
 literal|10
 argument_list|)

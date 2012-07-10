@@ -536,7 +536,10 @@ name|Modifier
 operator|.
 name|FINAL
 argument_list|,
+name|newName
+argument_list|(
 name|name
+argument_list|)
 argument_list|,
 name|block
 argument_list|)
