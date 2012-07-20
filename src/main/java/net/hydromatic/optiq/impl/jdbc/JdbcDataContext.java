@@ -114,6 +114,9 @@ comment|/** Creates a JdbcDataContext. */
 specifier|public
 name|JdbcDataContext
 parameter_list|(
+name|QueryProvider
+name|queryProvider
+parameter_list|,
 name|DataSource
 name|dataSource
 parameter_list|,
@@ -131,9 +134,7 @@ name|this
 operator|.
 name|queryProvider
 operator|=
-name|JdbcQueryProvider
-operator|.
-name|INSTANCE
+name|queryProvider
 expr_stmt|;
 name|this
 operator|.
@@ -148,10 +149,15 @@ name|JdbcDataContext
 parameter_list|(
 name|DataSource
 name|dataSource
+parameter_list|,
+name|QueryProvider
+name|queryProvider
 parameter_list|)
 block|{
 name|this
 argument_list|(
+name|queryProvider
+argument_list|,
 name|dataSource
 argument_list|,
 name|JdbcUtils
