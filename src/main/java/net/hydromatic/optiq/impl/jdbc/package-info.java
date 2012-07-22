@@ -14,6 +14,10 @@ operator|.
 name|hydromatic
 operator|.
 name|optiq
+operator|.
+name|impl
+operator|.
+name|jdbc
 package|;
 end_package
 

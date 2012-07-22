@@ -15,7 +15,7 @@ name|hydromatic
 operator|.
 name|optiq
 operator|.
-name|runtime
+name|server
 package|;
 end_package
 
