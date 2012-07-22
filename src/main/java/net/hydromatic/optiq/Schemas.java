@@ -325,27 +325,6 @@ name|fromType
 argument_list|)
 return|;
 block|}
-specifier|public
-interface|interface
-name|MemberPlus
-extends|extends
-name|Member
-block|{
-specifier|public
-name|Expression
-name|getExpression
-parameter_list|(
-name|Expression
-name|schemaExpression
-parameter_list|,
-name|List
-argument_list|<
-name|Expression
-argument_list|>
-name|argumentExpressions
-parameter_list|)
-function_decl|;
-block|}
 block|}
 end_class
 

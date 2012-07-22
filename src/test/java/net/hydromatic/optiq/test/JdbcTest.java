@@ -1374,6 +1374,8 @@ init|=
 operator|new
 name|MapSchema
 argument_list|(
+name|queryProvider
+argument_list|,
 name|typeFactory
 argument_list|)
 decl_stmt|;
@@ -1656,6 +1658,8 @@ init|=
 operator|new
 name|MapSchema
 argument_list|(
+name|queryProvider
+argument_list|,
 name|typeFactory
 argument_list|)
 decl_stmt|;
@@ -1798,6 +1802,8 @@ init|=
 operator|new
 name|MapSchema
 argument_list|(
+name|queryProvider
+argument_list|,
 name|typeFactory
 argument_list|)
 decl_stmt|;

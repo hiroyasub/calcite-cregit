@@ -275,6 +275,15 @@ name|typeFactory
 expr_stmt|;
 block|}
 specifier|public
+name|QueryProvider
+name|getQueryProvider
+parameter_list|()
+block|{
+return|return
+name|queryProvider
+return|;
+block|}
+specifier|public
 name|List
 argument_list|<
 name|TableFunction

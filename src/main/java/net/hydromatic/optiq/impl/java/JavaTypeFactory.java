@@ -41,6 +41,18 @@ name|RelDataTypeFactory
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|lang
+operator|.
+name|reflect
+operator|.
+name|Type
+import|;
+end_import
+
 begin_comment
 comment|/**  * Type factory that can register Java classes as record types.  *  * @author jhyde  */
 end_comment
@@ -60,11 +72,11 @@ name|Class
 name|clazz
 parameter_list|)
 function_decl|;
-comment|/**      * Creates a type, deducing whether a record, scalar or primitive type      * is needed.      *      * @param type Java class      * @return Record or scalar type      */
+comment|/**      * Creates a type, deducing whether a record, scalar or primitive type      * is needed.      *      * @param type Java type, such as a {@link Class}      * @return Record or scalar type      */
 name|RelDataType
 name|createType
 parameter_list|(
-name|Class
+name|Type
 name|type
 parameter_list|)
 function_decl|;
