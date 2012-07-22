@@ -67,16 +67,6 @@ name|*
 import|;
 end_import
 
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|Map
-import|;
-end_import
-
 begin_comment
 comment|/**  * Implementation of {@link java.sql.Statement}  * for the Optiq engine.  */
 end_comment
@@ -1174,7 +1164,7 @@ argument_list|()
 return|;
 block|}
 specifier|public
-name|Map
+name|Schema
 name|getRoot
 parameter_list|()
 block|{
@@ -1182,9 +1172,6 @@ return|return
 name|connection
 operator|.
 name|getRootSchema
-argument_list|()
-operator|.
-name|getInstanceMap
 argument_list|()
 return|;
 block|}

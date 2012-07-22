@@ -2189,7 +2189,7 @@ argument_list|()
 return|;
 block|}
 specifier|public
-name|Map
+name|MutableSchema
 name|getRoot
 parameter_list|()
 block|{
@@ -2197,9 +2197,6 @@ return|return
 name|connection
 operator|.
 name|getRootSchema
-argument_list|()
-operator|.
-name|getInstanceMap
 argument_list|()
 return|;
 block|}

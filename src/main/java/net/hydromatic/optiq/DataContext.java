@@ -25,18 +25,6 @@ name|Queryable
 import|;
 end_import
 
-begin_import
-import|import
-name|java
-operator|.
-name|lang
-operator|.
-name|reflect
-operator|.
-name|Type
-import|;
-end_import
-
 begin_comment
 comment|/**  * Runtime context allowing access to the tables in a database.  *  * @author jhyde  */
 end_comment
@@ -46,16 +34,6 @@ specifier|public
 interface|interface
 name|DataContext
 block|{
-name|Queryable
-name|getTable
-parameter_list|(
-name|String
-name|name
-parameter_list|,
-name|Type
-name|elementType
-parameter_list|)
-function_decl|;
 parameter_list|<
 name|T
 parameter_list|>

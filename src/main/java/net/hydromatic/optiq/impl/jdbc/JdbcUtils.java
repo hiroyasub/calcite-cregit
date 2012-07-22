@@ -106,7 +106,7 @@ parameter_list|(
 name|String
 name|sql
 parameter_list|,
-name|JdbcDataContext
+name|JdbcSchema
 name|dataContext
 parameter_list|)
 block|{

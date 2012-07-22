@@ -183,12 +183,12 @@ specifier|final
 name|Method
 name|parentMethod
 decl_stmt|;
-comment|/**      * Creates a ReflectiveSchema.      *      * @param clazz Class whose fields will be sub-objects      * @param typeFactory Type factory      */
+comment|/**      * Creates a ReflectiveSchema.      *      * @param target Object whose fields will be sub-objects      * @param typeFactory Type factory      */
 specifier|public
 name|ReflectiveSchema
 parameter_list|(
-name|Class
-name|clazz
+name|Object
+name|target
 parameter_list|,
 name|JavaTypeFactory
 name|typeFactory
@@ -196,7 +196,7 @@ parameter_list|)
 block|{
 name|this
 argument_list|(
-name|clazz
+name|target
 argument_list|,
 name|typeFactory
 argument_list|,
@@ -204,12 +204,12 @@ literal|null
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Creates a ReflectiveSchema that is optionally a sub-schema.      *      * @param clazz Class whose fields will be sub-objects      * @param typeFactory Type factory      */
+comment|/**      * Creates a ReflectiveSchema that is optionally a sub-schema.      *      * @param target Object whose fields will be sub-objects      * @param typeFactory Type factory      */
 specifier|protected
 name|ReflectiveSchema
 parameter_list|(
-name|Class
-name|clazz
+name|Object
+name|target
 parameter_list|,
 name|JavaTypeFactory
 name|typeFactory
@@ -227,7 +227,10 @@ name|this
 operator|.
 name|clazz
 operator|=
-name|clazz
+name|target
+operator|.
+name|getClass
+argument_list|()
 expr_stmt|;
 name|this
 operator|.
@@ -307,15 +310,6 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-block|}
-specifier|public
-name|Type
-name|getType
-parameter_list|()
-block|{
-return|return
-name|clazz
-return|;
 block|}
 specifier|public
 name|Expression

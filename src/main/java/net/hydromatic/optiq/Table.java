@@ -15,45 +15,42 @@ end_package
 
 begin_import
 import|import
-name|org
+name|net
 operator|.
-name|eigenbase
+name|hydromatic
 operator|.
-name|reltype
+name|linq4j
 operator|.
-name|RelDataType
+name|Queryable
 import|;
 end_import
 
 begin_comment
-comment|/**  * Parameter to a {@link TableFunction}.  */
+comment|/**  * Table.  *  * @see TableFunction  */
 end_comment
 
 begin_interface
 specifier|public
 interface|interface
-name|Parameter
+name|Table
+parameter_list|<
+name|T
+parameter_list|>
+extends|extends
+name|Queryable
+argument_list|<
+name|T
+argument_list|>
 block|{
-comment|/**      * Zero-based ordinal of this parameter within the member's parameter      * list.      *      * @return Parameter ordinal      */
-name|int
-name|getOrdinal
-parameter_list|()
-function_decl|;
-comment|/**      * Name of the parameter.      *      * @return Parameter name      */
-name|String
-name|getName
-parameter_list|()
-function_decl|;
-comment|/**      * Returns the type of this parameter.      *      * @return Parameter type.      */
-name|RelDataType
-name|getType
+name|DataContext
+name|getDataContext
 parameter_list|()
 function_decl|;
 block|}
 end_interface
 
 begin_comment
-comment|// End Parameter.java
+comment|// End Table.java
 end_comment
 
 end_unit

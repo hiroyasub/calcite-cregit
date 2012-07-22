@@ -61,7 +61,7 @@ name|hydromatic
 operator|.
 name|optiq
 operator|.
-name|Schema
+name|*
 import|;
 end_import
 
@@ -222,7 +222,7 @@ name|Schema
 name|getRootSchema
 parameter_list|()
 function_decl|;
-name|Map
+name|Schema
 name|getRoot
 parameter_list|()
 function_decl|;

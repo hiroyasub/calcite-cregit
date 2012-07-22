@@ -29,11 +29,13 @@ end_import
 
 begin_import
 import|import
-name|java
+name|net
 operator|.
-name|util
+name|hydromatic
 operator|.
-name|Map
+name|optiq
+operator|.
+name|DataContext
 import|;
 end_import
 
@@ -46,17 +48,12 @@ specifier|public
 interface|interface
 name|Executable
 block|{
-comment|/**      * Executes this statement and returns an enumerable which will yield rows.      * The {@code environment} parameter provides the values in the root of the      * environment (usually schemas).      *      * @param environment Mapping from names to values      * @return Enumerable over rows      */
+comment|/**      * Executes this statement and returns an enumerable which will yield rows.      * The {@code environment} parameter provides the values in the root of the      * environment (usually schemas).      *      * @param dataContext Environment that provides tables      * @return Enumerable over rows      */
 name|Enumerable
 name|execute
 parameter_list|(
-name|Map
-argument_list|<
-name|String
-argument_list|,
-name|Object
-argument_list|>
-name|environment
+name|DataContext
+name|dataContext
 parameter_list|)
 function_decl|;
 block|}

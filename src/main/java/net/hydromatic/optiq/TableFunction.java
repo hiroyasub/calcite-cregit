@@ -13,25 +13,72 @@ name|optiq
 package|;
 end_package
 
+begin_import
+import|import
+name|java
+operator|.
+name|lang
+operator|.
+name|reflect
+operator|.
+name|Type
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
+import|;
+end_import
+
 begin_comment
-comment|/**  * A member of a {@link Schema}.  *  *<p>May be a {@link Member} or an {@link Overload}.</p>  */
+comment|/**  * Function that returns a {@link Table}.  */
 end_comment
 
 begin_interface
 specifier|public
 interface|interface
-name|SchemaObject
+name|TableFunction
+parameter_list|<
+name|T
+parameter_list|>
 block|{
-comment|/**      * The name of this schema object.      */
-name|String
-name|getName
+comment|/**      * Element type of table that will be returned.      *      * @return Element type of table      */
+name|Type
+name|getElementType
 parameter_list|()
+function_decl|;
+comment|/**      * Returns the parameters of this table function.      *      * @return Parameters; never null      */
+name|List
+argument_list|<
+name|Parameter
+argument_list|>
+name|getParameters
+parameter_list|()
+function_decl|;
+comment|/**      * Applies arguments to yield a table.      *      * @param arguments Arguments      * @return Table      */
+name|Table
+argument_list|<
+name|T
+argument_list|>
+name|apply
+parameter_list|(
+name|List
+argument_list|<
+name|Object
+argument_list|>
+name|arguments
+parameter_list|)
 function_decl|;
 block|}
 end_interface
 
 begin_comment
-comment|// End SchemaObject.java
+comment|// End TableFunction.java
 end_comment
 
 end_unit

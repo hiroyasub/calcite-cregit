@@ -61,7 +61,7 @@ name|String
 name|getName
 parameter_list|()
 function_decl|;
-comment|/**      * Returns the parameters of this function.      *      * @return Parameters; never null      */
+comment|/**      * Returns the parameters of this member.      *      * @return Parameters; never null      */
 name|List
 argument_list|<
 name|Parameter
