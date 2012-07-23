@@ -25,6 +25,18 @@ end_import
 
 begin_import
 import|import
+name|java
+operator|.
+name|lang
+operator|.
+name|reflect
+operator|.
+name|Type
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|eigenbase
@@ -49,6 +61,8 @@ extends|extends
 name|RelDataTypeImpl
 implements|implements
 name|Serializable
+implements|,
+name|Type
 block|{
 comment|//~ Constructors -----------------------------------------------------------
 comment|/**      * Creates a<code>RecordType</code>. This should only be called from a      * factory method.      */

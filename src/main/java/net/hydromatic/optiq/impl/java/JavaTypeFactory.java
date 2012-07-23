@@ -80,7 +80,7 @@ name|Type
 name|type
 parameter_list|)
 function_decl|;
-name|Class
+name|Type
 name|getJavaClass
 parameter_list|(
 name|RelDataType

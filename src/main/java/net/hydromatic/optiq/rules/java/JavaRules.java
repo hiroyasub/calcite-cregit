@@ -1285,7 +1285,7 @@ specifier|static
 name|Expression
 name|castIfNecessary
 parameter_list|(
-name|Class
+name|Type
 name|returnType
 parameter_list|,
 name|Expression
@@ -1313,10 +1313,12 @@ return|;
 block|}
 if|if
 condition|(
-name|returnType
+name|Types
 operator|.
 name|isPrimitive
-argument_list|()
+argument_list|(
+name|returnType
+argument_list|)
 operator|&&
 operator|!
 name|Types
@@ -1362,7 +1364,7 @@ argument_list|)
 return|;
 block|}
 specifier|static
-name|Class
+name|Type
 name|javaClass
 parameter_list|(
 name|JavaTypeFactory
@@ -1373,7 +1375,7 @@ name|type
 parameter_list|)
 block|{
 specifier|final
-name|Class
+name|Type
 name|clazz
 init|=
 name|typeFactory
@@ -1408,7 +1410,7 @@ name|type
 parameter_list|)
 block|{
 specifier|final
-name|Class
+name|Type
 name|clazz
 init|=
 name|typeFactory
@@ -1420,19 +1422,22 @@ argument_list|)
 decl_stmt|;
 return|return
 name|clazz
-operator|==
-literal|null
+operator|instanceof
+name|Class
 condition|?
+operator|(
+name|Class
+operator|)
+name|clazz
+else|:
 name|Object
 index|[]
 operator|.
 name|class
-else|:
-name|clazz
 return|;
 block|}
 specifier|static
-name|Class
+name|Type
 name|computeOutputJavaType
 parameter_list|(
 name|JavaTypeFactory
@@ -1442,7 +1447,7 @@ name|RelDataType
 name|outputRowType
 parameter_list|)
 block|{
-name|Class
+name|Type
 name|outputJavaType
 init|=
 name|typeFactory
@@ -2168,7 +2173,7 @@ comment|//     Enumerator<IntString> enumerator() {
 comment|//         return new Enumerator<IntString>() {
 comment|//             public void reset() {
 comment|// ...
-name|Class
+name|Type
 name|outputJavaType
 init|=
 name|EnumUtil

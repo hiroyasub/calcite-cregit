@@ -54,6 +54,16 @@ name|Schema
 name|schema
 parameter_list|)
 function_decl|;
+name|void
+name|addReflectiveSchema
+parameter_list|(
+name|String
+name|name
+parameter_list|,
+name|Object
+name|target
+parameter_list|)
+function_decl|;
 block|}
 end_interface
 
