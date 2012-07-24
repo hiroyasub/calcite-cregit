@@ -19,6 +19,18 @@ begin_import
 import|import
 name|java
 operator|.
+name|lang
+operator|.
+name|reflect
+operator|.
+name|Type
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
 name|math
 operator|.
 name|BigDecimal
@@ -789,7 +801,7 @@ name|Function
 argument_list|>
 name|functionClass
 parameter_list|(
-name|Class
+name|Type
 name|aClass
 parameter_list|)
 block|{
