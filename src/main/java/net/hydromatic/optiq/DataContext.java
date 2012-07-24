@@ -53,6 +53,14 @@ argument_list|>
 name|elementType
 parameter_list|)
 function_decl|;
+comment|/**      * Returns a sub-schema with a given name, or null.      */
+name|Schema
+name|getSubSchema
+parameter_list|(
+name|String
+name|name
+parameter_list|)
+function_decl|;
 block|}
 end_interface
 

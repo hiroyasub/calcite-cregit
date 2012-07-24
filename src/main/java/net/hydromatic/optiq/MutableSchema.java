@@ -45,7 +45,7 @@ name|table
 parameter_list|)
 function_decl|;
 name|void
-name|add
+name|addSchema
 parameter_list|(
 name|String
 name|name

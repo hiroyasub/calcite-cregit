@@ -287,6 +287,31 @@ name|expression
 operator|=
 name|expression
 expr_stmt|;
+assert|assert
+name|expression
+operator|!=
+literal|null
+assert|;
+assert|assert
+name|typeFactory
+operator|!=
+literal|null
+assert|;
+assert|assert
+name|dialect
+operator|!=
+literal|null
+assert|;
+assert|assert
+name|queryProvider
+operator|!=
+literal|null
+assert|;
+assert|assert
+name|dataSource
+operator|!=
+literal|null
+assert|;
 block|}
 comment|/** Returns a suitable SQL dialect for the given data source. */
 specifier|public
@@ -372,6 +397,7 @@ name|elementType
 operator|!=
 literal|null
 assert|;
+comment|//noinspection unchecked
 return|return
 name|getTable
 argument_list|(
