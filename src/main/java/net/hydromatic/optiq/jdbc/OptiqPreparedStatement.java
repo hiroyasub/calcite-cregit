@@ -107,6 +107,9 @@ specifier|final
 name|OptiqPrepare
 operator|.
 name|PrepareResult
+argument_list|<
+name|?
+argument_list|>
 name|prepareResult
 decl_stmt|;
 specifier|private

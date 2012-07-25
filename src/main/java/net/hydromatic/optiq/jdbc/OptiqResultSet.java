@@ -274,6 +274,9 @@ parameter_list|,
 name|OptiqPrepare
 operator|.
 name|PrepareResult
+argument_list|<
+name|?
+argument_list|>
 name|prepareResult
 parameter_list|)
 block|{

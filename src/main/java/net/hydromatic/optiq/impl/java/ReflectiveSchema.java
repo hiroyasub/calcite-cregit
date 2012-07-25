@@ -164,23 +164,6 @@ name|ReflectiveSchema
 extends|extends
 name|MapSchema
 block|{
-specifier|private
-specifier|static
-specifier|final
-name|Method
-name|GET_TARGET_METHOD
-init|=
-name|Types
-operator|.
-name|lookupMethod
-argument_list|(
-name|ReflectiveSchema
-operator|.
-name|class
-argument_list|,
-literal|"getTarget"
-argument_list|)
-decl_stmt|;
 specifier|final
 name|Class
 name|clazz
@@ -303,7 +286,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/** Returns the wrapped object. (May not appear to be used, but is used in      * generated code via {@link #GET_TARGET_METHOD}.) */
+comment|/** Returns the wrapped object. (May not appear to be used, but is used in      * generated code via {@link BuiltinMethod#GET_TARGET}.) */
 specifier|public
 name|Object
 name|getTarget
@@ -669,7 +652,11 @@ name|getExpression
 argument_list|()
 argument_list|)
 argument_list|,
-name|GET_TARGET_METHOD
+name|BuiltinMethod
+operator|.
+name|GET_TARGET
+operator|.
+name|method
 argument_list|)
 argument_list|)
 return|;
@@ -950,9 +937,7 @@ parameter_list|<
 name|T
 parameter_list|>
 extends|extends
-name|Extensions
-operator|.
-name|AbstractQueryable2
+name|BaseQueryable
 argument_list|<
 name|T
 argument_list|>

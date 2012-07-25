@@ -1435,9 +1435,7 @@ parameter_list|)
 block|{
 return|return
 operator|new
-name|Extensions
-operator|.
-name|AbstractQueryable2
+name|BaseQueryable
 argument_list|<
 name|IntString
 argument_list|>
@@ -2518,6 +2516,12 @@ operator|new
 name|JdbcSchema
 argument_list|(
 name|queryProvider
+operator|==
+literal|null
+condition|?
+name|optiqConnection
+else|:
+name|queryProvider
 argument_list|,
 name|dataSource
 argument_list|,
@@ -2631,9 +2635,7 @@ name|connection
 init|=
 name|getConnection
 argument_list|(
-name|OptiqQueryProvider
-operator|.
-name|INSTANCE
+literal|null
 argument_list|)
 decl_stmt|;
 name|JdbcSchema
@@ -2646,6 +2648,11 @@ name|connection
 operator|.
 name|getRootSchema
 argument_list|()
+operator|.
+name|getSubSchema
+argument_list|(
+literal|"foodmart"
+argument_list|)
 decl_stmt|;
 name|ParameterExpression
 name|c
@@ -3027,9 +3034,7 @@ name|connection
 operator|=
 name|getConnection
 argument_list|(
-name|OptiqQueryProvider
-operator|.
-name|INSTANCE
+literal|null
 argument_list|)
 expr_stmt|;
 break|break;
