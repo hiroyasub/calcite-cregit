@@ -116,6 +116,23 @@ name|Type
 name|type
 parameter_list|)
 function_decl|;
+comment|/**      * Executes a queryable, and returns an enumerator over the      * rows that it yields.      *      * @param queryable Queryable      * @return Enumerator over rows      */
+parameter_list|<
+name|T
+parameter_list|>
+name|Enumerator
+argument_list|<
+name|T
+argument_list|>
+name|executeQuery
+parameter_list|(
+name|Queryable
+argument_list|<
+name|T
+argument_list|>
+name|queryable
+parameter_list|)
+function_decl|;
 block|}
 end_interface
 

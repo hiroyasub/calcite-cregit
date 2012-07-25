@@ -3243,7 +3243,7 @@ name|Department
 argument_list|>
 name|enumerableDeptsResult
 init|=
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|take
 argument_list|(
@@ -3325,7 +3325,7 @@ name|Department
 argument_list|>
 name|queryableResult
 init|=
-name|Extensions
+name|QueryableDefaults
 operator|.
 name|take
 argument_list|(
@@ -3387,7 +3387,7 @@ name|assertEquals
 argument_list|(
 literal|0
 argument_list|,
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|take
 argument_list|(
@@ -3412,7 +3412,7 @@ name|assertEquals
 argument_list|(
 literal|0
 argument_list|,
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|take
 argument_list|(
@@ -3444,7 +3444,7 @@ name|assertEquals
 argument_list|(
 literal|0
 argument_list|,
-name|Extensions
+name|QueryableDefaults
 operator|.
 name|take
 argument_list|(
@@ -3472,7 +3472,7 @@ name|assertEquals
 argument_list|(
 literal|0
 argument_list|,
-name|Extensions
+name|QueryableDefaults
 operator|.
 name|take
 argument_list|(
@@ -3524,7 +3524,7 @@ name|Department
 argument_list|>
 name|depList
 init|=
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|take
 argument_list|(
@@ -3618,7 +3618,7 @@ name|Department
 argument_list|>
 name|depList
 init|=
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|take
 argument_list|(
@@ -3712,7 +3712,7 @@ name|Department
 argument_list|>
 name|deptList
 init|=
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|takeWhile
 argument_list|(
@@ -3806,7 +3806,7 @@ name|Department
 argument_list|>
 name|deptList
 init|=
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|takeWhile
 argument_list|(
@@ -3953,7 +3953,7 @@ name|Department
 argument_list|>
 name|deptList
 init|=
-name|Extensions
+name|QueryableDefaults
 operator|.
 name|takeWhile
 argument_list|(
@@ -4012,7 +4012,7 @@ block|}
 expr_stmt|;
 name|deptList
 operator|=
-name|Extensions
+name|QueryableDefaults
 operator|.
 name|takeWhile
 argument_list|(
@@ -4139,7 +4139,7 @@ name|Department
 argument_list|>
 name|deptList
 init|=
-name|Extensions
+name|QueryableDefaults
 operator|.
 name|takeWhileN
 argument_list|(
@@ -4239,7 +4239,7 @@ name|Department
 argument_list|>
 name|deptList
 init|=
-name|Extensions
+name|QueryableDefaults
 operator|.
 name|takeWhileN
 argument_list|(

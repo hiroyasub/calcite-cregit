@@ -53,7 +53,7 @@ operator|new
 name|QueryProviderImpl
 argument_list|()
 block|{
-specifier|protected
+specifier|public
 parameter_list|<
 name|T
 parameter_list|>
@@ -63,7 +63,7 @@ name|T
 argument_list|>
 name|executeQuery
 parameter_list|(
-name|QueryableImpl
+name|Queryable
 argument_list|<
 name|T
 argument_list|>

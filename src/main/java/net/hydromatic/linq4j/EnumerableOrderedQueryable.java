@@ -147,7 +147,7 @@ name|keySelector
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|QueryableDefaults
 operator|.
 name|thenBy
 argument_list|(
@@ -187,7 +187,7 @@ name|comparator
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|QueryableDefaults
 operator|.
 name|thenBy
 argument_list|(
@@ -228,7 +228,7 @@ name|keySelector
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|QueryableDefaults
 operator|.
 name|thenByDescending
 argument_list|(
@@ -268,7 +268,7 @@ name|comparator
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|QueryableDefaults
 operator|.
 name|thenByDescending
 argument_list|(

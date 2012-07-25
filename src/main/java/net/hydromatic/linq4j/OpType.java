@@ -14,45 +14,20 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * Exposes the enumerator, which supports a simple iteration over a collection.  *  *<p>Analogous to LINQ's System.Collections.IEnumerable (both generic  * and non-generic variants).</p>  *  *<p>Also implements {@link Iterable}, to enable use in Java foreach loops.</p>  *  * @param<T> element type  */
+comment|/**  * @author jhyde  */
 end_comment
 
-begin_interface
+begin_enum
 specifier|public
-interface|interface
-name|Enumerable
-parameter_list|<
-name|T
-parameter_list|>
-extends|extends
-name|RawEnumerable
-argument_list|<
-name|T
-argument_list|>
-extends|,
-name|Iterable
-argument_list|<
-name|T
-argument_list|>
-extends|,
-name|ExtendedEnumerable
-argument_list|<
-name|T
-argument_list|>
+enum|enum
+name|OpType
 block|{
-comment|/**      * Converts this Enumerable to a Queryable.      *      * @see EnumerableDefaults#asQueryable(Enumerable      */
-name|Queryable
-argument_list|<
-name|T
-argument_list|>
-name|asQueryable
-parameter_list|()
-function_decl|;
-block|}
-end_interface
+name|WHERE
+block|, }
+end_enum
 
 begin_comment
-comment|// End Enumerable.java
+comment|// End OpType.java
 end_comment
 
 end_unit

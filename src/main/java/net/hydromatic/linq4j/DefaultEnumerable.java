@@ -161,7 +161,7 @@ name|asOrderedQueryable
 parameter_list|()
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|asOrderedQueryable
 argument_list|(
@@ -185,7 +185,7 @@ name|func
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|aggregate
 argument_list|(
@@ -218,7 +218,7 @@ name|func
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|aggregate
 argument_list|(
@@ -263,7 +263,7 @@ name|selector
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|aggregate
 argument_list|(
@@ -290,7 +290,7 @@ name|predicate
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|all
 argument_list|(
@@ -307,7 +307,7 @@ name|any
 parameter_list|()
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|any
 argument_list|(
@@ -328,7 +328,7 @@ name|predicate
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|any
 argument_list|(
@@ -348,7 +348,7 @@ name|asEnumerable
 parameter_list|()
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|asEnumerable
 argument_list|(
@@ -369,7 +369,7 @@ name|selector
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|average
 argument_list|(
@@ -392,7 +392,7 @@ name|selector
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|average
 argument_list|(
@@ -415,7 +415,7 @@ name|selector
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|average
 argument_list|(
@@ -438,7 +438,7 @@ name|selector
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|average
 argument_list|(
@@ -461,7 +461,7 @@ name|selector
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|average
 argument_list|(
@@ -484,7 +484,7 @@ name|selector
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|average
 argument_list|(
@@ -507,7 +507,7 @@ name|selector
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|average
 argument_list|(
@@ -530,7 +530,7 @@ name|selector
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|average
 argument_list|(
@@ -553,7 +553,7 @@ name|selector
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|average
 argument_list|(
@@ -576,7 +576,7 @@ name|selector
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|average
 argument_list|(
@@ -605,7 +605,7 @@ name|clazz
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|cast
 argument_list|(
@@ -631,7 +631,7 @@ name|enumerable1
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|concat
 argument_list|(
@@ -651,7 +651,7 @@ name|element
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|contains
 argument_list|(
@@ -674,7 +674,7 @@ name|comparer
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|contains
 argument_list|(
@@ -693,7 +693,7 @@ name|count
 parameter_list|()
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|count
 argument_list|(
@@ -714,7 +714,7 @@ name|predicate
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|count
 argument_list|(
@@ -754,7 +754,7 @@ name|descending
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|createOrderedEnumerable
 argument_list|(
@@ -778,7 +778,7 @@ name|defaultIfEmpty
 parameter_list|()
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|defaultIfEmpty
 argument_list|(
@@ -796,7 +796,7 @@ name|value
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|defaultIfEmpty
 argument_list|(
@@ -816,7 +816,7 @@ name|distinct
 parameter_list|()
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|distinct
 argument_list|(
@@ -837,7 +837,7 @@ name|comparer
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|distinct
 argument_list|(
@@ -857,7 +857,7 @@ name|index
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|elementAt
 argument_list|(
@@ -877,7 +877,7 @@ name|index
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|elementAtOrDefault
 argument_list|(
@@ -903,7 +903,7 @@ name|enumerable1
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|except
 argument_list|(
@@ -935,7 +935,7 @@ name|comparer
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|except
 argument_list|(
@@ -954,7 +954,7 @@ name|first
 parameter_list|()
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|first
 argument_list|(
@@ -975,7 +975,7 @@ name|predicate
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|first
 argument_list|(
@@ -992,7 +992,7 @@ name|firstOrDefault
 parameter_list|()
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|firstOrDefault
 argument_list|(
@@ -1013,7 +1013,7 @@ name|predicate
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|firstOrDefault
 argument_list|(
@@ -1049,7 +1049,7 @@ name|keySelector
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|groupBy
 argument_list|(
@@ -1088,7 +1088,7 @@ name|comparer
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|groupBy
 argument_list|(
@@ -1136,7 +1136,7 @@ name|elementSelector
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|groupBy
 argument_list|(
@@ -1189,7 +1189,7 @@ name|elementSelector
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|groupBy
 argument_list|(
@@ -1240,7 +1240,7 @@ name|comparer
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|groupBy
 argument_list|(
@@ -1291,7 +1291,7 @@ name|comparer
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|groupBy
 argument_list|(
@@ -1303,66 +1303,6 @@ argument_list|,
 name|elementSelector
 argument_list|,
 name|comparer
-argument_list|)
-return|;
-block|}
-specifier|public
-parameter_list|<
-name|TKey
-parameter_list|,
-name|TElement
-parameter_list|,
-name|TResult
-parameter_list|>
-name|Enumerable
-argument_list|<
-name|TResult
-argument_list|>
-name|groupBy
-parameter_list|(
-name|Function1
-argument_list|<
-name|T
-argument_list|,
-name|TKey
-argument_list|>
-name|keySelector
-parameter_list|,
-name|Function1
-argument_list|<
-name|T
-argument_list|,
-name|TElement
-argument_list|>
-name|elementSelector
-parameter_list|,
-name|Function2
-argument_list|<
-name|TKey
-argument_list|,
-name|Enumerable
-argument_list|<
-name|TElement
-argument_list|>
-argument_list|,
-name|TResult
-argument_list|>
-name|resultSelector
-parameter_list|)
-block|{
-return|return
-name|Extensions
-operator|.
-name|groupBy
-argument_list|(
-name|getThis
-argument_list|()
-argument_list|,
-name|keySelector
-argument_list|,
-name|elementSelector
-argument_list|,
-name|resultSelector
 argument_list|)
 return|;
 block|}
@@ -1408,6 +1348,66 @@ argument_list|,
 name|TResult
 argument_list|>
 name|resultSelector
+parameter_list|)
+block|{
+return|return
+name|EnumerableDefaults
+operator|.
+name|groupBy
+argument_list|(
+name|getThis
+argument_list|()
+argument_list|,
+name|keySelector
+argument_list|,
+name|elementSelector
+argument_list|,
+name|resultSelector
+argument_list|)
+return|;
+block|}
+specifier|public
+parameter_list|<
+name|TKey
+parameter_list|,
+name|TElement
+parameter_list|,
+name|TResult
+parameter_list|>
+name|Enumerable
+argument_list|<
+name|TResult
+argument_list|>
+name|groupBy
+parameter_list|(
+name|Function1
+argument_list|<
+name|T
+argument_list|,
+name|TKey
+argument_list|>
+name|keySelector
+parameter_list|,
+name|Function1
+argument_list|<
+name|T
+argument_list|,
+name|TElement
+argument_list|>
+name|elementSelector
+parameter_list|,
+name|Function2
+argument_list|<
+name|TKey
+argument_list|,
+name|Enumerable
+argument_list|<
+name|TElement
+argument_list|>
+argument_list|,
+name|TResult
+argument_list|>
+name|resultSelector
 parameter_list|,
 name|EqualityComparer
 argument_list|<
@@ -1417,7 +1417,7 @@ name|comparer
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|groupBy
 argument_list|(
@@ -1485,7 +1485,7 @@ name|resultSelector
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|groupJoin
 argument_list|(
@@ -1559,7 +1559,7 @@ name|comparer
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|groupJoin
 argument_list|(
@@ -1593,7 +1593,7 @@ name|enumerable1
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|intersect
 argument_list|(
@@ -1625,7 +1625,7 @@ name|comparer
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|intersect
 argument_list|(
@@ -1657,7 +1657,7 @@ name|sink
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|into
 argument_list|(
@@ -1716,7 +1716,7 @@ name|resultSelector
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|join
 argument_list|(
@@ -1787,7 +1787,7 @@ name|comparer
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|join
 argument_list|(
@@ -1812,7 +1812,7 @@ name|last
 parameter_list|()
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|last
 argument_list|(
@@ -1833,7 +1833,7 @@ name|predicate
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|last
 argument_list|(
@@ -1850,7 +1850,7 @@ name|lastOrDefault
 parameter_list|()
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|lastOrDefault
 argument_list|(
@@ -1871,7 +1871,7 @@ name|predicate
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|lastOrDefault
 argument_list|(
@@ -1888,7 +1888,7 @@ name|longCount
 parameter_list|()
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|longCount
 argument_list|(
@@ -1909,7 +1909,7 @@ name|predicate
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|longCount
 argument_list|(
@@ -1929,7 +1929,7 @@ return|return
 operator|(
 name|T
 operator|)
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|max
 argument_list|(
@@ -1953,7 +1953,7 @@ name|selector
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|max
 argument_list|(
@@ -1976,7 +1976,7 @@ name|selector
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|max
 argument_list|(
@@ -1999,7 +1999,7 @@ name|selector
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|max
 argument_list|(
@@ -2022,7 +2022,7 @@ name|selector
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|max
 argument_list|(
@@ -2045,7 +2045,7 @@ name|selector
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|max
 argument_list|(
@@ -2068,7 +2068,7 @@ name|selector
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|max
 argument_list|(
@@ -2091,7 +2091,7 @@ name|selector
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|max
 argument_list|(
@@ -2114,7 +2114,7 @@ name|selector
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|max
 argument_list|(
@@ -2137,7 +2137,7 @@ name|selector
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|max
 argument_list|(
@@ -2160,7 +2160,7 @@ name|selector
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|max
 argument_list|(
@@ -2193,7 +2193,7 @@ name|selector
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|max
 argument_list|(
@@ -2213,7 +2213,7 @@ return|return
 operator|(
 name|T
 operator|)
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|min
 argument_list|(
@@ -2239,7 +2239,7 @@ name|selector
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|min
 argument_list|(
@@ -2262,7 +2262,7 @@ name|selector
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|min
 argument_list|(
@@ -2285,7 +2285,7 @@ name|selector
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|min
 argument_list|(
@@ -2308,7 +2308,7 @@ name|selector
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|min
 argument_list|(
@@ -2331,7 +2331,7 @@ name|selector
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|min
 argument_list|(
@@ -2354,7 +2354,7 @@ name|selector
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|min
 argument_list|(
@@ -2377,7 +2377,7 @@ name|selector
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|min
 argument_list|(
@@ -2400,7 +2400,7 @@ name|selector
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|min
 argument_list|(
@@ -2423,7 +2423,7 @@ name|selector
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|min
 argument_list|(
@@ -2446,7 +2446,7 @@ name|selector
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|min
 argument_list|(
@@ -2479,7 +2479,7 @@ name|selector
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|min
 argument_list|(
@@ -2508,7 +2508,7 @@ name|clazz
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|ofType
 argument_list|(
@@ -2541,7 +2541,7 @@ name|keySelector
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|orderBy
 argument_list|(
@@ -2578,7 +2578,7 @@ name|comparator
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|orderBy
 argument_list|(
@@ -2613,7 +2613,7 @@ name|keySelector
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|orderByDescending
 argument_list|(
@@ -2650,7 +2650,7 @@ name|comparator
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|orderByDescending
 argument_list|(
@@ -2672,7 +2672,7 @@ name|reverse
 parameter_list|()
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|reverse
 argument_list|(
@@ -2701,7 +2701,7 @@ name|selector
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|select
 argument_list|(
@@ -2734,7 +2734,7 @@ name|selector
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|select
 argument_list|(
@@ -2768,7 +2768,7 @@ name|selector
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|selectMany
 argument_list|(
@@ -2804,7 +2804,7 @@ name|selector
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|selectMany
 argument_list|(
@@ -2852,7 +2852,7 @@ name|resultSelector
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|selectMany
 argument_list|(
@@ -2900,7 +2900,7 @@ name|resultSelector
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|selectMany
 argument_list|(
@@ -2925,7 +2925,7 @@ name|enumerable1
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|sequenceEqual
 argument_list|(
@@ -2954,7 +2954,7 @@ name|comparer
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|sequenceEqual
 argument_list|(
@@ -2973,7 +2973,7 @@ name|single
 parameter_list|()
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|single
 argument_list|(
@@ -2994,7 +2994,7 @@ name|predicate
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|single
 argument_list|(
@@ -3011,7 +3011,7 @@ name|singleOrDefault
 parameter_list|()
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|singleOrDefault
 argument_list|(
@@ -3032,7 +3032,7 @@ name|predicate
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|singleOrDefault
 argument_list|(
@@ -3055,7 +3055,7 @@ name|count
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|skip
 argument_list|(
@@ -3081,7 +3081,7 @@ name|predicate
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|skipWhile
 argument_list|(
@@ -3109,7 +3109,7 @@ name|predicate
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|skipWhile
 argument_list|(
@@ -3132,7 +3132,7 @@ name|selector
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|sum
 argument_list|(
@@ -3155,7 +3155,7 @@ name|selector
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|sum
 argument_list|(
@@ -3178,7 +3178,7 @@ name|selector
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|sum
 argument_list|(
@@ -3201,7 +3201,7 @@ name|selector
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|sum
 argument_list|(
@@ -3224,7 +3224,7 @@ name|selector
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|sum
 argument_list|(
@@ -3247,7 +3247,7 @@ name|selector
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|sum
 argument_list|(
@@ -3270,7 +3270,7 @@ name|selector
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|sum
 argument_list|(
@@ -3293,7 +3293,7 @@ name|selector
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|sum
 argument_list|(
@@ -3316,7 +3316,7 @@ name|selector
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|sum
 argument_list|(
@@ -3339,7 +3339,7 @@ name|selector
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|sum
 argument_list|(
@@ -3362,7 +3362,7 @@ name|count
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|take
 argument_list|(
@@ -3388,7 +3388,7 @@ name|predicate
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|takeWhile
 argument_list|(
@@ -3416,7 +3416,7 @@ name|predicate
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|takeWhile
 argument_list|(
@@ -3452,7 +3452,7 @@ name|keySelector
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|thenBy
 argument_list|(
@@ -3489,7 +3489,7 @@ name|comparator
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|thenByDescending
 argument_list|(
@@ -3527,7 +3527,7 @@ name|keySelector
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|thenByDescending
 argument_list|(
@@ -3564,7 +3564,7 @@ name|comparator
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|thenBy
 argument_list|(
@@ -3599,7 +3599,7 @@ name|keySelector
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|toMap
 argument_list|(
@@ -3638,7 +3638,7 @@ name|comparer
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|toMap
 argument_list|(
@@ -3683,7 +3683,7 @@ name|elementSelector
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|toMap
 argument_list|(
@@ -3734,7 +3734,7 @@ name|comparer
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|toMap
 argument_list|(
@@ -3758,7 +3758,7 @@ name|toList
 parameter_list|()
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|toList
 argument_list|(
@@ -3789,7 +3789,7 @@ name|keySelector
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|toLookup
 argument_list|(
@@ -3828,7 +3828,7 @@ name|comparer
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|toLookup
 argument_list|(
@@ -3873,7 +3873,7 @@ name|elementSelector
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|toLookup
 argument_list|(
@@ -3924,7 +3924,7 @@ name|comparer
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|toLookup
 argument_list|(
@@ -3954,7 +3954,7 @@ name|source1
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|union
 argument_list|(
@@ -3986,7 +3986,7 @@ name|comparer
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|union
 argument_list|(
@@ -4014,7 +4014,7 @@ name|predicate
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|where
 argument_list|(
@@ -4042,7 +4042,7 @@ name|predicate
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|where
 argument_list|(
@@ -4083,7 +4083,7 @@ name|resultSelector
 parameter_list|)
 block|{
 return|return
-name|Extensions
+name|EnumerableDefaults
 operator|.
 name|zip
 argument_list|(

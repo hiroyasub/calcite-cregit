@@ -1226,7 +1226,7 @@ throw|throw
 operator|new
 name|RuntimeException
 argument_list|(
-literal|"while resolving static method '"
+literal|"while resolving method '"
 operator|+
 name|methodName
 operator|+
