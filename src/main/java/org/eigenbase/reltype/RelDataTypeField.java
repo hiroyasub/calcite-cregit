@@ -13,6 +13,20 @@ name|reltype
 package|;
 end_package
 
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|linq4j
+operator|.
+name|expressions
+operator|.
+name|Types
+import|;
+end_import
+
 begin_comment
 comment|/**  * RelDataTypeField represents the definition of a field in a structured {@link  * RelDataType}.  *  * @author jhyde  * @version $Id$  * @since May 29, 2003  */
 end_comment
@@ -21,6 +35,10 @@ begin_interface
 specifier|public
 interface|interface
 name|RelDataTypeField
+extends|extends
+name|Types
+operator|.
+name|RecordField
 block|{
 comment|//~ Methods ----------------------------------------------------------------
 comment|/**      * Gets the name of this field, which is unique within its containing type.      *      * @return field name      */

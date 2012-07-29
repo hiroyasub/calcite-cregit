@@ -2711,7 +2711,7 @@ name|Expressions
 operator|.
 name|constant
 argument_list|(
-literal|50
+literal|5
 argument_list|)
 argument_list|)
 argument_list|,
@@ -2725,6 +2725,15 @@ operator|.
 name|toString
 argument_list|()
 decl_stmt|;
+name|System
+operator|.
+name|out
+operator|.
+name|println
+argument_list|(
+name|s
+argument_list|)
+expr_stmt|;
 block|}
 catch|catch
 parameter_list|(

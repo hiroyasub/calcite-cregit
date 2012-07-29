@@ -37,6 +37,16 @@ end_import
 
 begin_import
 import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|eigenbase
@@ -46,6 +56,32 @@ operator|.
 name|type
 operator|.
 name|*
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
+name|util
+operator|.
+name|Util
+import|;
+end_import
+
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|linq4j
+operator|.
+name|expressions
+operator|.
+name|Types
 import|;
 end_import
 
@@ -63,6 +99,10 @@ implements|implements
 name|Serializable
 implements|,
 name|Type
+implements|,
+name|Types
+operator|.
+name|RecordType
 block|{
 comment|//~ Constructors -----------------------------------------------------------
 comment|/**      * Creates a<code>RecordType</code>. This should only be called from a      * factory method.      */
@@ -84,6 +124,24 @@ argument_list|()
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+specifier|public
+name|List
+argument_list|<
+name|Types
+operator|.
+name|RecordField
+argument_list|>
+name|getRecordFields
+parameter_list|()
+block|{
+return|return
+operator|(
+name|List
+operator|)
+name|getFieldList
+argument_list|()
+return|;
+block|}
 comment|// implement RelDataType
 specifier|public
 name|SqlTypeName
