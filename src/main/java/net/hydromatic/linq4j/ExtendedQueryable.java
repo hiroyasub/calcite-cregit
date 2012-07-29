@@ -77,7 +77,7 @@ argument_list|<
 name|TSource
 argument_list|>
 block|{
-comment|/** Applies an accumulator function over a      * sequence.      */
+comment|/** Applies an accumulator function over a sequence. */
 name|TSource
 name|aggregate
 parameter_list|(
@@ -169,11 +169,6 @@ argument_list|>
 argument_list|>
 name|predicate
 parameter_list|)
-function_decl|;
-comment|/** Determines whether a sequence contains any      * elements. */
-name|boolean
-name|any
-parameter_list|()
 function_decl|;
 comment|/** Determines whether any element of a sequence      * satisfies a condition. */
 name|boolean
@@ -343,30 +338,6 @@ argument_list|>
 name|source2
 parameter_list|)
 function_decl|;
-comment|/** Determines whether a sequence contains a specified      * element by using the default equality comparer. */
-name|boolean
-name|contains
-parameter_list|(
-name|TSource
-name|element
-parameter_list|)
-function_decl|;
-comment|/** Determines whether a sequence contains a specified      * element by using a specified EqualityComparer<TSource>. */
-name|boolean
-name|contains
-parameter_list|(
-name|TSource
-name|element
-parameter_list|,
-name|EqualityComparer
-name|comparer
-parameter_list|)
-function_decl|;
-comment|/** Returns the number of elements in a      * sequence. */
-name|int
-name|count
-parameter_list|()
-function_decl|;
 comment|/** Returns the number of elements in the specified      * sequence that satisfies a condition. */
 name|int
 name|count
@@ -389,14 +360,6 @@ argument_list|>
 name|defaultIfEmpty
 parameter_list|()
 function_decl|;
-comment|/** Returns the elements of the specified sequence or      * the specified value in a singleton collection if the sequence      * is empty. */
-name|TSource
-name|defaultIfEmpty
-parameter_list|(
-name|TSource
-name|value
-parameter_list|)
-function_decl|;
 comment|/** Returns distinct elements from a sequence by using      * the default equality comparer to compare values. */
 name|Queryable
 argument_list|<
@@ -405,7 +368,7 @@ argument_list|>
 name|distinct
 parameter_list|()
 function_decl|;
-comment|/** Returns distinct elements from a sequence by using      * a specified EqualityComparer<TSource> to compare values. */
+comment|/** Returns distinct elements from a sequence by using      * a specified EqualityComparer&lt;TSource&gt; to compare values. */
 name|Queryable
 argument_list|<
 name|TSource
@@ -414,22 +377,6 @@ name|distinct
 parameter_list|(
 name|EqualityComparer
 name|comparer
-parameter_list|)
-function_decl|;
-comment|/** Returns the element at a specified index in a      * sequence. */
-name|TSource
-name|elementAt
-parameter_list|(
-name|int
-name|index
-parameter_list|)
-function_decl|;
-comment|/** Returns the element at a specified index in a      * sequence or a default value if the index is out of      * range. */
-name|TSource
-name|elementAtOrDefault
-parameter_list|(
-name|int
-name|index
 parameter_list|)
 function_decl|;
 comment|/** Produces the set difference of two sequences by      * using the default equality comparer to compare values. (Defined      * by Queryable.) */
@@ -466,11 +413,6 @@ argument_list|>
 name|comparer
 parameter_list|)
 function_decl|;
-comment|/** Returns the first element of a sequence. (Defined      * by Queryable.) */
-name|TSource
-name|first
-parameter_list|()
-function_decl|;
 comment|/** Returns the first element of a sequence that      * satisfies a specified condition. */
 name|TSource
 name|first
@@ -484,11 +426,6 @@ argument_list|>
 argument_list|>
 name|predicate
 parameter_list|)
-function_decl|;
-comment|/** Returns the first element of a sequence, or a      * default value if the sequence contains no elements. */
-name|TSource
-name|firstOrDefault
-parameter_list|()
 function_decl|;
 comment|/** Returns the first element of a sequence that      * satisfies a specified condition or a default value if no such      * element is found. */
 name|TSource
@@ -1120,11 +1057,6 @@ argument_list|>
 name|comparer
 parameter_list|)
 function_decl|;
-comment|/** Returns the last element in a sequence. (Defined      * by Queryable.) */
-name|TSource
-name|last
-parameter_list|()
-function_decl|;
 comment|/** Returns the last element of a sequence that      * satisfies a specified condition. */
 name|TSource
 name|last
@@ -1138,11 +1070,6 @@ argument_list|>
 argument_list|>
 name|predicate
 parameter_list|)
-function_decl|;
-comment|/** Returns the last element in a sequence, or a      * default value if the sequence contains no elements. */
-name|TSource
-name|lastOrDefault
-parameter_list|()
 function_decl|;
 comment|/** Returns the last element of a sequence that      * satisfies a condition or a default value if no such element is      * found. */
 name|TSource
@@ -1158,11 +1085,6 @@ argument_list|>
 name|predicate
 parameter_list|)
 function_decl|;
-comment|/** Returns an long that represents the total number      * of elements in a sequence. */
-name|long
-name|longCount
-parameter_list|()
-function_decl|;
 comment|/** Returns an long that represents the number of      * elements in a sequence that satisfy a condition. */
 name|long
 name|longCount
@@ -1176,11 +1098,6 @@ argument_list|>
 argument_list|>
 name|predicate
 parameter_list|)
-function_decl|;
-comment|/** Returns the maximum value in a generic      * IQueryable<TSource>. */
-name|TSource
-name|max
-parameter_list|()
 function_decl|;
 comment|/** Invokes a projection function on each element of a      * generic IQueryable<TSource> and returns the maximum resulting      * value. */
 parameter_list|<
@@ -1205,11 +1122,6 @@ argument_list|>
 argument_list|>
 name|selector
 parameter_list|)
-function_decl|;
-comment|/** Returns the minimum value in a generic      * IQueryable<TSource>. */
-name|TSource
-name|min
-parameter_list|()
 function_decl|;
 comment|/** Invokes a projection function on each element of a      * generic IQueryable<TSource> and returns the minimum resulting      * value. */
 parameter_list|<
@@ -1372,7 +1284,7 @@ argument_list|>
 name|comparator
 parameter_list|)
 function_decl|;
-comment|/** Inverts the order of the elements in a      * sequence. */
+comment|/** Inverts the order of the elements in a sequence. */
 name|Queryable
 argument_list|<
 name|TSource
@@ -1380,7 +1292,7 @@ argument_list|>
 name|reverse
 parameter_list|()
 function_decl|;
-comment|/** Projects each element of a sequence into a new      * form. */
+comment|/** Projects each element of a sequence into a new form. */
 parameter_list|<
 name|TResult
 parameter_list|>
@@ -1559,39 +1471,6 @@ argument_list|>
 argument_list|>
 name|resultSelector
 parameter_list|)
-function_decl|;
-comment|/** Determines whether two sequences are equal by      * using the default equality comparer to compare      * elements. */
-name|boolean
-name|sequenceEqual
-parameter_list|(
-name|Enumerable
-argument_list|<
-name|TSource
-argument_list|>
-name|enumerable
-parameter_list|)
-function_decl|;
-comment|/** Determines whether two sequences are equal by      * using a specified EqualityComparer<TSource> to compare      * elements. */
-name|boolean
-name|sequenceEqual
-parameter_list|(
-name|Enumerable
-argument_list|<
-name|TSource
-argument_list|>
-name|enumerable
-parameter_list|,
-name|EqualityComparer
-argument_list|<
-name|TSource
-argument_list|>
-name|comparer
-parameter_list|)
-function_decl|;
-comment|/** Returns the only element of a sequence, and throws      * an exception if there is not exactly one element in the      * sequence. */
-name|TSource
-name|single
-parameter_list|()
 function_decl|;
 comment|/** Returns the only element of a sequence that      * satisfies a specified condition, and throws an exception if      * more than one such element exists. */
 name|TSource
