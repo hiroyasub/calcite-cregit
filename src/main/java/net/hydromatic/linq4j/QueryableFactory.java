@@ -469,6 +469,9 @@ name|T
 name|element
 parameter_list|,
 name|EqualityComparer
+argument_list|<
+name|T
+argument_list|>
 name|comparer
 parameter_list|)
 function_decl|;
@@ -518,7 +521,10 @@ name|source
 parameter_list|)
 function_decl|;
 comment|/** Returns the elements of the specified sequence or      * the specified value in a singleton collection if the sequence      * is empty. */
+name|Queryable
+argument_list|<
 name|T
+argument_list|>
 name|defaultIfEmpty
 parameter_list|(
 name|Queryable
@@ -559,6 +565,9 @@ argument_list|>
 name|source
 parameter_list|,
 name|EqualityComparer
+argument_list|<
+name|T
+argument_list|>
 name|comparer
 parameter_list|)
 function_decl|;
@@ -764,6 +773,9 @@ argument_list|>
 name|keySelector
 parameter_list|,
 name|EqualityComparer
+argument_list|<
+name|T
+argument_list|>
 name|comparer
 parameter_list|)
 function_decl|;
@@ -910,6 +922,9 @@ argument_list|>
 name|elementSelector
 parameter_list|,
 name|EqualityComparer
+argument_list|<
+name|T
+argument_list|>
 name|comparer
 parameter_list|)
 function_decl|;
@@ -959,6 +974,9 @@ argument_list|>
 name|elementSelector
 parameter_list|,
 name|EqualityComparer
+argument_list|<
+name|TKey
+argument_list|>
 name|comparer
 parameter_list|)
 function_decl|;
@@ -1159,7 +1177,7 @@ name|TKey
 parameter_list|,
 name|TResult
 parameter_list|>
-name|Enumerable
+name|Queryable
 argument_list|<
 name|TResult
 argument_list|>

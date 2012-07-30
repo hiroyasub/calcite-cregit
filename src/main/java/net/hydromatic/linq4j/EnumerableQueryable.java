@@ -1925,7 +1925,7 @@ name|TKey
 parameter_list|,
 name|TResult
 parameter_list|>
-name|Enumerable
+name|Queryable
 argument_list|<
 name|TResult
 argument_list|>
@@ -2009,6 +2009,9 @@ argument_list|()
 argument_list|,
 name|comparer
 argument_list|)
+operator|.
+name|asQueryable
+argument_list|()
 return|;
 block|}
 specifier|public

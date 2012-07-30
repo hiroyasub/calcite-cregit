@@ -1635,7 +1635,7 @@ name|TKey
 parameter_list|,
 name|TResult
 parameter_list|>
-name|Enumerable
+name|Queryable
 argument_list|<
 name|TResult
 argument_list|>
