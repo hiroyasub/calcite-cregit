@@ -123,20 +123,6 @@ name|org
 operator|.
 name|eigenbase
 operator|.
-name|relopt
-operator|.
-name|volcano
-operator|.
-name|VolcanoPlannerTraitTest
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
 name|reltype
 operator|.
 name|*
@@ -208,7 +194,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  *<code>RelOptUtil</code> defines static utility methods for use in optimizing  * {@link RelNode}s.  *  * @author jhyde  * @version $Id$  * @since 26 September, 2003  */
+comment|/**  *<code>RelOptUtil</code> defines static utility methods for use in optimizing  * {@link RelNode}s.  *  * @author jhyde  * @since 26 September, 2003  */
 end_comment
 
 begin_class
