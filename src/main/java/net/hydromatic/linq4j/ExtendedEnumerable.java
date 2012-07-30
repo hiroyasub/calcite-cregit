@@ -393,6 +393,9 @@ argument_list|>
 name|distinct
 parameter_list|(
 name|EqualityComparer
+argument_list|<
+name|TSource
+argument_list|>
 name|comparer
 parameter_list|)
 function_decl|;
