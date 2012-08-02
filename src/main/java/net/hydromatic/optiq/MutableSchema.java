@@ -13,6 +13,20 @@ name|optiq
 package|;
 end_package
 
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|linq4j
+operator|.
+name|expressions
+operator|.
+name|Expression
+import|;
+end_import
+
 begin_comment
 comment|/**  * Schema that can be modified.  */
 end_comment
@@ -24,6 +38,7 @@ name|MutableSchema
 extends|extends
 name|Schema
 block|{
+comment|/** Defines a table-function in this schema. There can be multiple      * table-functions with the same name; this method will not remove a      * table-function with the same name, just define another overloading. */
 name|void
 name|addTableFunction
 parameter_list|(
@@ -34,6 +49,7 @@ name|TableFunction
 name|tableFunction
 parameter_list|)
 function_decl|;
+comment|/** Defines a table within this schema. */
 name|void
 name|addTable
 parameter_list|(
@@ -44,6 +60,7 @@ name|Table
 name|table
 parameter_list|)
 function_decl|;
+comment|/** Adds a child schema of this schema. */
 name|void
 name|addSchema
 parameter_list|(
@@ -54,14 +71,15 @@ name|Schema
 name|schema
 parameter_list|)
 function_decl|;
-name|void
-name|addReflectiveSchema
+comment|/** Returns the expression with which a sub-schema of this schema with a      * given name and type should be accessed. */
+name|Expression
+name|getSubSchemaExpression
 parameter_list|(
 name|String
 name|name
 parameter_list|,
-name|Object
-name|target
+name|Class
+name|type
 parameter_list|)
 function_decl|;
 block|}
