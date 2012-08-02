@@ -14,6 +14,8 @@ operator|.
 name|hydromatic
 operator|.
 name|optiq
+operator|.
+name|impl
 package|;
 end_package
 

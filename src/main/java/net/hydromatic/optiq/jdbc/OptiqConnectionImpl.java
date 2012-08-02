@@ -570,7 +570,7 @@ parameter_list|)
 block|{
 return|return
 operator|new
-name|ObjectAbstractQueryable2
+name|OptiqQueryable
 argument_list|<
 name|T
 argument_list|>
@@ -602,7 +602,7 @@ parameter_list|)
 block|{
 return|return
 operator|new
-name|ObjectAbstractQueryable2
+name|OptiqQueryable
 argument_list|<
 name|T
 argument_list|>
@@ -2235,7 +2235,7 @@ block|}
 block|}
 specifier|static
 class|class
-name|ObjectAbstractQueryable2
+name|OptiqQueryable
 parameter_list|<
 name|T
 parameter_list|>
@@ -2246,7 +2246,7 @@ name|T
 argument_list|>
 block|{
 specifier|public
-name|ObjectAbstractQueryable2
+name|OptiqQueryable
 parameter_list|(
 name|OptiqConnection
 name|connection

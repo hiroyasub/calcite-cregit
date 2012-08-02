@@ -122,7 +122,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Implementation of {@link QueryableFactory}  * that builds a tree of {@link RelNode} planner nodes. Used by  * {@link LixToRelTranslator}.  *  * @author jhyde */
+comment|/**  * Implementation of {@link QueryableFactory}  * that builds a tree of {@link RelNode} planner nodes. Used by  * {@link LixToRelTranslator}.  *  *<p>Each of the methods that implements a {@code Replayer} method creates  * a tree of {@code RelNode}s equivalent to the arguments, and calls  * {@link #setRel} to assign the root of that tree to the {@link #rel} member  * variable.</p>  *  *<p>To comply with the {@link net.hydromatic.linq4j.QueryableFactory}  * interface, which is after all a factory, each method returns a dummy result  * such as {@code null} or {@code 0}.  * The caller will not use the result.  * The real effect of the method is to  * call {@link #setRel} with a {@code RelNode}.</p>  *  *<p>NOTE: Many methods currently throw {@link UnsupportedOperationException}.  * These method need to be implemented.</p>  *  * @author jhyde */
 end_comment
 
 begin_class
@@ -261,6 +261,22 @@ name|getExpression
 argument_list|()
 argument_list|)
 return|;
+block|}
+comment|/** Sets the output of this event. */
+specifier|private
+name|void
+name|setRel
+parameter_list|(
+name|RelNode
+name|rel
+parameter_list|)
+block|{
+name|this
+operator|.
+name|rel
+operator|=
+name|rel
+expr_stmt|;
 block|}
 comment|// ~ Methods from QueryableFactory -----------------------------------------
 specifier|public
@@ -3504,22 +3520,6 @@ expr_stmt|;
 return|return
 name|source
 return|;
-block|}
-comment|// called internally, when a RelNode is produced
-specifier|private
-name|void
-name|setRel
-parameter_list|(
-name|RelNode
-name|rel
-parameter_list|)
-block|{
-name|this
-operator|.
-name|rel
-operator|=
-name|rel
-expr_stmt|;
 block|}
 specifier|public
 name|Queryable
