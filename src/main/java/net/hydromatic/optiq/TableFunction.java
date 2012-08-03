@@ -47,11 +47,6 @@ parameter_list|<
 name|T
 parameter_list|>
 block|{
-comment|/**      * Element type of table that will be returned.      *      * @return Element type of table      */
-name|Type
-name|getElementType
-parameter_list|()
-function_decl|;
 comment|/**      * Returns the parameters of this table function.      *      * @return Parameters; never null      */
 name|List
 argument_list|<
