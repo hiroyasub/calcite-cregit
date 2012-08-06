@@ -208,11 +208,6 @@ specifier|final
 name|DataSource
 name|dataSource
 decl_stmt|;
-comment|/**      * The expression which yields the connection object.      */
-specifier|protected
-name|RelOptConnection
-name|connection
-decl_stmt|;
 name|SqlDialect
 name|dialect
 decl_stmt|;
@@ -225,7 +220,7 @@ name|SqlString
 name|queryString
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a<code>JdbcQuery</code>.      *      * @param cluster {@link RelOptCluster}  this relational expression belongs      * to      * @param connection a {@link RelOptConnection}; must also implement {@link      * DataSource}, because that's how we will acquire the JDBC connection      * @param sql SQL parse tree, may be null, otherwise must be a SELECT      * statement      * @param dataSource Provides a JDBC connection to run this query against.      *      *<p>In saffron, if the query is implementing a JDBC table, then the      * connection's schema will implement<code>      * net.sf.saffron.ext.JdbcSchema</code>, and data source will typically be      * the same as calling the<code>getDataSource()</code> method on that      * schema. But non-JDBC schemas are also acceptable.      *      * @pre connection != null      * @pre sql == null || sql.isA(SqlNode.Kind.Select)      * @pre dataSource != null      */
+comment|/**      * Creates a<code>JdbcQuery</code>.      *      * @param cluster {@link RelOptCluster}  this relational expression belongs      * to      * @param sql SQL parse tree, may be null, otherwise must be a SELECT      * statement      * @param dataSource Provides a JDBC connection to run this query against.      *      *<p>In saffron, if the query is implementing a JDBC table, then the      * connection's schema will implement<code>      * net.sf.saffron.ext.JdbcSchema</code>, and data source will typically be      * the same as calling the<code>getDataSource()</code> method on that      * schema. But non-JDBC schemas are also acceptable.      *      * @pre sql == null || sql.isA(SqlNode.Kind.Select)      * @pre dataSource != null      */
 specifier|public
 name|JdbcQuery
 parameter_list|(
@@ -234,9 +229,6 @@ name|cluster
 parameter_list|,
 name|RelDataType
 name|rowType
-parameter_list|,
-name|RelOptConnection
-name|connection
 parameter_list|,
 name|SqlDialect
 name|dialect
@@ -266,17 +258,6 @@ name|Util
 operator|.
 name|pre
 argument_list|(
-name|connection
-operator|!=
-literal|null
-argument_list|,
-literal|"connection != null"
-argument_list|)
-expr_stmt|;
-name|Util
-operator|.
-name|pre
-argument_list|(
 name|dataSource
 operator|!=
 literal|null
@@ -289,12 +270,6 @@ operator|.
 name|rowType
 operator|=
 name|rowType
-expr_stmt|;
-name|this
-operator|.
-name|connection
-operator|=
-name|connection
 expr_stmt|;
 name|this
 operator|.
@@ -372,16 +347,6 @@ name|dataSource
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Returns the connection      *      * @return connection      */
-specifier|public
-name|RelOptConnection
-name|getConnection
-parameter_list|()
-block|{
-return|return
-name|connection
-return|;
-block|}
 comment|/**      * Returns the JDBC data source      *      * @return data source      */
 specifier|public
 name|DataSource
@@ -499,8 +464,6 @@ name|getCluster
 argument_list|()
 argument_list|,
 name|rowType
-argument_list|,
-name|connection
 argument_list|,
 name|dialect
 argument_list|,

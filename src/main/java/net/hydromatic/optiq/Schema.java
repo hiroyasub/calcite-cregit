@@ -49,6 +49,16 @@ name|List
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Map
+import|;
+end_import
+
 begin_comment
 comment|/**  * A namespace for tables and table functions.  *  *<p>A schema can also contain sub-schemas, to any level of nesting. Most  * providers have a limited number of levels; for example, most JDBC databases  * have either one level ("schemas") or two levels ("database" and  * "catalog").</p>  *  *<p>There may be multiple overloaded table functions with the same name but  * different numbers or types of parameters.  * For this reason, {@link #getTableFunctions} returns a list of all  * members with the same name. Optiq will call  * {@link Schemas#resolve(String, java.util.List, java.util.List)} to choose the  * appropriate one.</p>  *  *<p>The most common and important type of member is the one with no  * arguments and a result type that is a collection of records. This is called a  *<dfn>relation</dfn>. It is equivalent to a table in a relational  * database.</p>  *  *<p>For example, the query</p>  *  *<blockquote>select * from sales.emps</blockquote>  *  *<p>is valid if "sales" is a registered  * schema and "emps" is a member with zero parameters and a result type  * of<code>Collection(Record(int: "empno", String: "name"))</code>.</p>  *  *<p>A schema may be nested within another schema; see  * {@link Schema#getSubSchema(String)}.</p>  */
 end_comment
@@ -85,6 +95,18 @@ parameter_list|()
 function_decl|;
 name|QueryProvider
 name|getQueryProvider
+parameter_list|()
+function_decl|;
+name|Map
+argument_list|<
+name|String
+argument_list|,
+name|List
+argument_list|<
+name|TableFunction
+argument_list|>
+argument_list|>
+name|getTableFunctions
 parameter_list|()
 function_decl|;
 block|}

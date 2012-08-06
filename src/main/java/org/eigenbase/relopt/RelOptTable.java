@@ -29,6 +29,20 @@ name|org
 operator|.
 name|eigenbase
 operator|.
+name|oj
+operator|.
+name|stmt
+operator|.
+name|OJPreparingStmt
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
 name|rel
 operator|.
 name|*
@@ -78,15 +92,12 @@ name|RelOptSchema
 name|getRelOptSchema
 parameter_list|()
 function_decl|;
-comment|/**      * Converts this table into a {@link RelNode relational expression}.      *      *<p>The {@link org.eigenbase.relopt.RelOptPlanner planner} calls this      * method to convert a table into an initial relational expression,      * generally something abstract, such as a {@link      * org.eigenbase.rel.TableAccessRel}, then optimizes this expression by      * applying {@link org.eigenbase.relopt.RelOptRule rules} to transform it      * into more efficient access methods for this table.</p>      *      * @param cluster the cluster the relational expression will belong to      * @param connection the parse tree of the expression which evaluates to a      * connection object      *      * @pre cluster != null      * @pre connection != null      */
+comment|/**      * Converts this table into a {@link RelNode relational expression}.      *      *<p>The {@link org.eigenbase.relopt.RelOptPlanner planner} calls this      * method to convert a table into an initial relational expression,      * generally something abstract, such as a {@link      * org.eigenbase.rel.TableAccessRel}, then optimizes this expression by      * applying {@link org.eigenbase.relopt.RelOptRule rules} to transform it      * into more efficient access methods for this table.</p>      */
 name|RelNode
 name|toRel
 parameter_list|(
-name|RelOptCluster
-name|cluster
-parameter_list|,
-name|RelOptConnection
-name|connection
+name|ToRelContext
+name|context
 parameter_list|)
 function_decl|;
 comment|/**      * Returns a description of the physical ordering (or orderings) of the rows      * returned from this table.      *      * @see RelNode#getCollationList()      * @post return != null      */
@@ -98,6 +109,18 @@ argument_list|>
 name|getCollationList
 parameter_list|()
 function_decl|;
+interface|interface
+name|ToRelContext
+block|{
+name|RelOptCluster
+name|getCluster
+parameter_list|()
+function_decl|;
+name|OJPreparingStmt
+name|getPreparingStmt
+parameter_list|()
+function_decl|;
+block|}
 block|}
 end_interface
 

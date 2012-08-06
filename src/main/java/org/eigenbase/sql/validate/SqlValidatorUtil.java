@@ -43,6 +43,20 @@ name|org
 operator|.
 name|eigenbase
 operator|.
+name|oj
+operator|.
+name|stmt
+operator|.
+name|OJPreparingStmt
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
 name|relopt
 operator|.
 name|*
@@ -137,7 +151,7 @@ class|class
 name|SqlValidatorUtil
 block|{
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Converts a {@link SqlValidatorScope} into a {@link RelOptTable}. This is      * only possible if the scope represents an identifier, such as "sales.emp".      * Otherwise, returns null.      *      * @param namespace Namespace      * @param schema Schema      * @param datasetName Name of sample dataset to substitute, or null to use      * the regular table      * @param usedDataset Output parameter which is set to true if a sample      * dataset is found; may be null      */
+comment|/**      * Converts a {@link SqlValidatorScope} into a {@link RelOptTable}. This is      * only possible if the scope represents an identifier, such as "sales.emp".      * Otherwise, returns null.      *      * @param namespace Namespace      * @param catalogReader Schema      * @param datasetName Name of sample dataset to substitute, or null to use      * the regular table      * @param usedDataset Output parameter which is set to true if a sample      * dataset is found; may be null      */
 specifier|public
 specifier|static
 name|RelOptTable
@@ -146,8 +160,10 @@ parameter_list|(
 name|SqlValidatorNamespace
 name|namespace
 parameter_list|,
-name|RelOptSchema
-name|schema
+name|OJPreparingStmt
+operator|.
+name|CatalogReader
+name|catalogReader
 parameter_list|,
 name|String
 name|datasetName
@@ -202,7 +218,7 @@ literal|null
 operator|)
 operator|&&
 operator|(
-name|schema
+name|catalogReader
 operator|instanceof
 name|RelOptSchemaWithSampling
 operator|)
@@ -213,7 +229,7 @@ operator|(
 operator|(
 name|RelOptSchemaWithSampling
 operator|)
-name|schema
+name|catalogReader
 operator|)
 operator|.
 name|getTableForMember
@@ -231,7 +247,7 @@ block|{
 comment|// Schema does not support substitution. Ignore the dataset,
 comment|// if any.
 return|return
-name|schema
+name|catalogReader
 operator|.
 name|getTableForMember
 argument_list|(

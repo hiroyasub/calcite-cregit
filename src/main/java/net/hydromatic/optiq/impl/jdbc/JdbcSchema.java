@@ -165,6 +165,16 @@ end_import
 
 begin_import
 import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Map
+import|;
+end_import
+
+begin_import
+import|import
 name|javax
 operator|.
 name|sql
@@ -800,6 +810,27 @@ name|sqlTypeName
 argument_list|)
 return|;
 block|}
+block|}
+specifier|public
+name|Map
+argument_list|<
+name|String
+argument_list|,
+name|List
+argument_list|<
+name|TableFunction
+argument_list|>
+argument_list|>
+name|getTableFunctions
+parameter_list|()
+block|{
+comment|// TODO: populate map from JDBC metadata
+return|return
+name|Collections
+operator|.
+name|emptyMap
+argument_list|()
+return|;
 block|}
 specifier|public
 name|Schema

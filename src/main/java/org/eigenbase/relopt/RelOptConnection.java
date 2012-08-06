@@ -28,17 +28,6 @@ name|RelOptSchema
 name|getRelOptSchema
 parameter_list|()
 function_decl|;
-comment|/**      * In theory, this method returns the contents of<code>tableName</code> as      * an array; in practice, it is a placeholder recognized by the optimizer to      * do something much more efficient. This involves calling<code>{@link      * RelOptSchema#getTableForMember}(qualifier,tableName).{@link      * RelOptTable#toRel}(cluster, exp)</code>.      */
-name|Object
-name|contentsAsArray
-parameter_list|(
-name|String
-name|qualifier
-parameter_list|,
-name|String
-name|tableName
-parameter_list|)
-function_decl|;
 block|}
 end_interface
 

@@ -29,6 +29,20 @@ name|org
 operator|.
 name|eigenbase
 operator|.
+name|oj
+operator|.
+name|stmt
+operator|.
+name|OJPreparingStmt
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
 name|rel
 operator|.
 name|metadata
@@ -104,8 +118,10 @@ block|;     }
 comment|//~ Instance fields --------------------------------------------------------
 comment|/**      * The connection to the optimizing session.      */
 specifier|protected
-name|RelOptConnection
-name|connection
+name|OJPreparingStmt
+operator|.
+name|CatalogReader
+name|catalogReader
 decl_stmt|;
 comment|/**      * The table definition.      */
 specifier|protected
@@ -148,8 +164,10 @@ parameter_list|,
 name|RelOptTable
 name|table
 parameter_list|,
-name|RelOptConnection
-name|connection
+name|OJPreparingStmt
+operator|.
+name|CatalogReader
+name|catalogReader
 parameter_list|,
 name|RelNode
 name|child
@@ -184,9 +202,9 @@ name|table
 expr_stmt|;
 name|this
 operator|.
-name|connection
+name|catalogReader
 operator|=
-name|connection
+name|catalogReader
 expr_stmt|;
 name|this
 operator|.
@@ -233,12 +251,14 @@ expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
 specifier|public
-name|RelOptConnection
-name|getConnection
+name|OJPreparingStmt
+operator|.
+name|CatalogReader
+name|getCatalogReader
 parameter_list|()
 block|{
 return|return
-name|connection
+name|catalogReader
 return|;
 block|}
 specifier|public

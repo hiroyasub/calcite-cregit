@@ -1503,9 +1503,6 @@ parameter_list|,
 name|RelOptTable
 name|table
 parameter_list|,
-name|RelOptConnection
-name|connection
-parameter_list|,
 name|Expression
 name|expression
 parameter_list|)
@@ -1524,8 +1521,6 @@ name|ENUMERABLE
 argument_list|)
 argument_list|,
 name|table
-argument_list|,
-name|connection
 argument_list|)
 expr_stmt|;
 if|if

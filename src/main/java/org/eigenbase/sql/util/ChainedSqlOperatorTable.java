@@ -49,7 +49,7 @@ implements|implements
 name|SqlOperatorTable
 block|{
 comment|//~ Instance fields --------------------------------------------------------
-specifier|private
+specifier|protected
 specifier|final
 name|List
 argument_list|<
@@ -58,19 +58,22 @@ argument_list|>
 name|tableList
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a new empty table.      */
+comment|/**      * Creates a table based on a given list.      */
 specifier|public
 name|ChainedSqlOperatorTable
-parameter_list|()
-block|{
-name|tableList
-operator|=
-operator|new
-name|ArrayList
+parameter_list|(
+name|List
 argument_list|<
 name|SqlOperatorTable
 argument_list|>
-argument_list|()
+name|tableList
+parameter_list|)
+block|{
+name|this
+operator|.
+name|tableList
+operator|=
+name|tableList
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------

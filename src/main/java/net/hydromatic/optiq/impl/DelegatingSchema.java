@@ -75,6 +75,16 @@ name|List
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Map
+import|;
+end_import
+
 begin_comment
 comment|/**  * Implementation of {@link net.hydromatic.optiq.Schema} that delegates to an  * underlying schema.  *  * @author jhyde  */
 end_comment
@@ -105,6 +115,26 @@ name|schema
 operator|=
 name|schema
 expr_stmt|;
+block|}
+specifier|public
+name|Map
+argument_list|<
+name|String
+argument_list|,
+name|List
+argument_list|<
+name|TableFunction
+argument_list|>
+argument_list|>
+name|getTableFunctions
+parameter_list|()
+block|{
+return|return
+name|schema
+operator|.
+name|getTableFunctions
+argument_list|()
+return|;
 block|}
 specifier|public
 name|Expression

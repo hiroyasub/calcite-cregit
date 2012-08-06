@@ -5,11 +5,11 @@ end_comment
 
 begin_package
 package|package
-name|org
+name|net
 operator|.
-name|eigenbase
+name|hydromatic
 operator|.
-name|relopt
+name|optiq
 package|;
 end_package
 
@@ -19,51 +19,56 @@ name|org
 operator|.
 name|eigenbase
 operator|.
-name|reltype
+name|rel
 operator|.
-name|*
+name|RelNode
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
+name|relopt
+operator|.
+name|RelOptTable
 import|;
 end_import
 
 begin_comment
-comment|/**  * A<code>RelOptSchema</code> is a set of {@link RelOptTable} objects.  */
+comment|/**  * Extension to {@link Table} that specifies how it is to be translated to  * a {@link org.eigenbase.rel.RelNode planner node}.  *  *<p>It is optional for a Table to implement this interface. A Table that does  * not implement this interface, a Table will be converted to an  * EnumerableTableAccessRel. Generally a Table will implements this interface to  * create a particular subclass of RelNode, and also register rules that act  * on that particular subclass of RelNode.</p>  *  * @author jhyde  */
 end_comment
 
 begin_interface
 specifier|public
 interface|interface
-name|RelOptSchema
+name|TranslatableTable
+parameter_list|<
+name|T
+parameter_list|>
+extends|extends
+name|Table
+argument_list|<
+name|T
+argument_list|>
 block|{
-comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Retrieves a {@link RelOptTable} based upon a member access.      *      *<p>For example, the Saffron expression<code>salesSchema.emps</code>      * would be resolved using a call to<code>salesSchema.getTableForMember(new      * String[]{"emps" })</code>.</p>      *      *<p>Note that name.length is only greater than 1 for queries originating      * from JDBC.</p>      */
+comment|/** Converts this table into a {@link RelNode relational expression}. */
+name|RelNode
+name|toRel
+parameter_list|(
 name|RelOptTable
-name|getTableForMember
-parameter_list|(
-name|String
-index|[]
-name|names
+operator|.
+name|ToRelContext
+name|context
 parameter_list|)
-function_decl|;
-comment|/**      * Returns the {@link RelDataTypeFactory type factory} used to generate      * types for this schema.      */
-name|RelDataTypeFactory
-name|getTypeFactory
-parameter_list|()
-function_decl|;
-comment|/**      * Registers all of the rules supported by this schema. Only called by      * {@link RelOptPlanner#registerSchema}.      */
-name|void
-name|registerRules
-parameter_list|(
-name|RelOptPlanner
-name|planner
-parameter_list|)
-throws|throws
-name|Exception
 function_decl|;
 block|}
 end_interface
 
 begin_comment
-comment|// End RelOptSchema.java
+comment|// End TranslatableTable.java
 end_comment
 
 end_unit

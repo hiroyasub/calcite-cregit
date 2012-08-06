@@ -60,11 +60,6 @@ extends|extends
 name|AbstractRelNode
 block|{
 comment|//~ Instance fields --------------------------------------------------------
-comment|/**      * The connection to the optimizing session.      */
-specifier|protected
-name|RelOptConnection
-name|connection
-decl_stmt|;
 comment|/**      * The table definition.      */
 specifier|protected
 name|RelOptTable
@@ -82,9 +77,6 @@ name|traits
 parameter_list|,
 name|RelOptTable
 name|table
-parameter_list|,
-name|RelOptConnection
-name|connection
 parameter_list|)
 block|{
 name|super
@@ -99,12 +91,6 @@ operator|.
 name|table
 operator|=
 name|table
-expr_stmt|;
-name|this
-operator|.
-name|connection
-operator|=
-name|connection
 expr_stmt|;
 if|if
 condition|(
@@ -132,15 +118,6 @@ expr_stmt|;
 block|}
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-specifier|public
-name|RelOptConnection
-name|getConnection
-parameter_list|()
-block|{
-return|return
-name|connection
-return|;
-block|}
 specifier|public
 name|double
 name|getRows

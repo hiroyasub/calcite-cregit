@@ -319,8 +319,8 @@ name|javaCompiler
 decl_stmt|;
 specifier|protected
 specifier|final
-name|RelOptConnection
-name|connection
+name|CatalogReader
+name|catalogReader
 decl_stmt|;
 specifier|protected
 name|EigenbaseTimingTracer
@@ -350,51 +350,19 @@ argument_list|>
 name|fieldOrigins
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a statement.      *      * @param connection Connection statement belongs to; may be null, but only      * if this statement implements {@link RelOptConnection}      *      * @pre connection != null || this instanceof RelOptConnection      */
+comment|/**      * Creates a statement.      *      * @param catalogReader Catalog reader      */
 specifier|public
 name|OJPreparingStmt
 parameter_list|(
-name|RelOptConnection
-name|connection
+name|CatalogReader
+name|catalogReader
 parameter_list|)
 block|{
 name|this
 operator|.
-name|connection
+name|catalogReader
 operator|=
-operator|(
-operator|(
-name|connection
-operator|==
-literal|null
-operator|)
-operator|&&
-operator|(
-name|this
-operator|instanceof
-name|RelOptConnection
-operator|)
-operator|)
-condition|?
-operator|(
-name|RelOptConnection
-operator|)
-name|this
-else|:
-name|connection
-expr_stmt|;
-name|Util
-operator|.
-name|pre
-argument_list|(
-name|this
-operator|.
-name|connection
-operator|!=
-literal|null
-argument_list|,
-literal|"connection != null || this instanceof RelOptConnection"
-argument_list|)
+name|catalogReader
 expr_stmt|;
 name|this
 operator|.
@@ -412,27 +380,6 @@ literal|true
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-specifier|public
-name|RelOptSchema
-name|getRelOptSchema
-parameter_list|()
-block|{
-return|return
-name|connection
-operator|.
-name|getRelOptSchema
-argument_list|()
-return|;
-block|}
-specifier|public
-name|Environment
-name|getEnvironment
-parameter_list|()
-block|{
-return|return
-name|env
-return|;
-block|}
 specifier|public
 name|void
 name|setResultCallingConvention
@@ -851,26 +798,6 @@ name|getClass
 argument_list|()
 expr_stmt|;
 block|}
-if|if
-condition|(
-name|RelOptConnection
-operator|.
-name|class
-operator|.
-name|isInstance
-argument_list|(
-name|argument
-operator|.
-name|value
-argument_list|)
-condition|)
-block|{
-comment|// Don't fix up the type of connections. (The mapping to
-comment|// schema is made via static typing, so changing the type
-comment|// destroys the mapping.)
-block|}
-else|else
-block|{
 comment|// If the argument's type is a private class, change its
 comment|// type to the nearest base class which is public. Otherwise
 comment|// the generated code won't compile.
@@ -887,7 +814,6 @@ argument_list|,
 name|packageName
 argument_list|)
 expr_stmt|;
-block|}
 name|bindArgument
 argument_list|(
 name|argument
@@ -983,21 +909,6 @@ operator|.
 name|toString
 argument_list|()
 expr_stmt|;
-if|if
-condition|(
-name|runtimeContextClass
-operator|==
-literal|null
-condition|)
-block|{
-name|runtimeContextClass
-operator|=
-name|connection
-operator|.
-name|getClass
-argument_list|()
-expr_stmt|;
-block|}
 specifier|final
 name|Argument
 index|[]
@@ -1011,7 +922,7 @@ name|connectionVariable
 argument_list|,
 name|runtimeContextClass
 argument_list|,
-name|connection
+literal|null
 argument_list|)
 block|}
 decl_stmt|;
@@ -1030,7 +941,7 @@ name|getSqlToRelConverter
 argument_list|(
 name|validator
 argument_list|,
-name|connection
+name|catalogReader
 argument_list|)
 decl_stmt|;
 name|SqlExplain
@@ -1277,9 +1188,6 @@ case|:
 default|default:
 name|rootRel
 operator|=
-operator|(
-name|RelNode
-operator|)
 name|optimize
 argument_list|(
 name|rootRel
@@ -1307,9 +1215,6 @@ block|}
 block|}
 name|rootRel
 operator|=
-operator|(
-name|RelNode
-operator|)
 name|optimize
 argument_list|(
 name|resultType
@@ -1401,12 +1306,7 @@ block|{
 name|RelOptPlanner
 name|planner
 init|=
-operator|(
-operator|(
-name|RelNode
-operator|)
 name|rootRel
-operator|)
 operator|.
 name|getCluster
 argument_list|()
@@ -1620,7 +1520,7 @@ name|connectionVariable
 argument_list|,
 name|runtimeContextClass
 argument_list|,
-name|connection
+literal|null
 argument_list|)
 block|}
 decl_stmt|;
@@ -2046,9 +1946,6 @@ name|rootRel
 operator|=
 name|flattenTypes
 argument_list|(
-operator|(
-name|RelNode
-operator|)
 name|rootRel
 argument_list|,
 literal|true
@@ -2072,9 +1969,6 @@ name|implement
 argument_list|(
 name|rowType
 argument_list|,
-operator|(
-name|RelNode
-operator|)
 name|rootRel
 argument_list|,
 name|sqlKind
@@ -2094,9 +1988,8 @@ parameter_list|(
 name|SqlValidator
 name|validator
 parameter_list|,
-specifier|final
-name|RelOptConnection
-name|connection
+name|CatalogReader
+name|catalogReader
 parameter_list|)
 function_decl|;
 comment|/**      * Protected method to allow subclasses to override construction of      * RelImplementor.      */
@@ -2157,7 +2050,7 @@ name|boolean
 name|shouldSetConnectionInfo
 parameter_list|()
 function_decl|;
-specifier|protected
+specifier|public
 specifier|abstract
 name|RelNode
 name|flattenTypes
@@ -3563,6 +3456,24 @@ argument_list|)
 throw|;
 block|}
 block|}
+comment|/**      * Returns a relational expression which is to be substituted for an access      * to a SQL view.      *      * @param rowType Row type of the view      * @param queryString Body of the view      *      * @return Relational expression      */
+specifier|public
+name|RelNode
+name|expandView
+parameter_list|(
+name|RelDataType
+name|rowType
+parameter_list|,
+name|String
+name|queryString
+parameter_list|)
+block|{
+throw|throw
+operator|new
+name|UnsupportedOperationException
+argument_list|()
+throw|;
+block|}
 comment|//~ Inner Classes ----------------------------------------------------------
 comment|/**      * An<code>Argument</code> supplies a name/value pair to a statement. The      * class of the argument is usually superfluous, but is necessary when the      * value is a primitive type (such as<code>int</code>, as opposed to {@link      * Integer}), or is a superclass of the object's runtime type.      */
 specifier|public
@@ -3774,6 +3685,39 @@ name|javaRelFound
 return|;
 block|}
 block|}
+specifier|public
+interface|interface
+name|CatalogReader
+extends|extends
+name|RelOptSchema
+extends|,
+name|SqlValidatorCatalogReader
+block|{
+name|PreparingTable
+name|getTableForMember
+parameter_list|(
+name|String
+index|[]
+name|names
+parameter_list|)
+function_decl|;
+name|PreparingTable
+name|getTable
+parameter_list|(
+name|String
+index|[]
+name|names
+parameter_list|)
+function_decl|;
+block|}
+specifier|public
+interface|interface
+name|PreparingTable
+extends|extends
+name|RelOptTable
+extends|,
+name|SqlValidatorTable
+block|{     }
 block|}
 end_class
 

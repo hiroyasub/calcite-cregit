@@ -14,7 +14,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * Extension to {@link RelOptSchema} with support for sample datasets.  *  * @author jhyde  * @version $Id$  * @see RelOptConnection  * @see RelOptSchema  */
+comment|/**  * Extension to {@link RelOptSchema} with support for sample data-sets.  *  * @author jhyde  * @see RelOptSchema  */
 end_comment
 
 begin_interface

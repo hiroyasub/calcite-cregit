@@ -181,6 +181,13 @@ decl_stmt|;
 name|boolean
 name|restructured
 decl_stmt|;
+specifier|private
+specifier|final
+name|RelOptTable
+operator|.
+name|ToRelContext
+name|toRelContext
+decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 specifier|public
 name|RelStructuredTypeFlattener
@@ -201,6 +208,11 @@ operator|new
 name|RewriteRelVisitor
 argument_list|()
 expr_stmt|;
+name|toRelContext
+operator|=
+literal|null
+expr_stmt|;
+comment|// TODO:
 block|}
 comment|//~ Methods ----------------------------------------------------------------
 specifier|public
@@ -1118,7 +1130,7 @@ argument_list|()
 argument_list|,
 name|rel
 operator|.
-name|getConnection
+name|getCatalogReader
 argument_list|()
 argument_list|,
 name|getNewForOldRel
@@ -2937,15 +2949,7 @@ argument_list|()
 operator|.
 name|toRel
 argument_list|(
-name|rel
-operator|.
-name|getCluster
-argument_list|()
-argument_list|,
-name|rel
-operator|.
-name|getConnection
-argument_list|()
+name|toRelContext
 argument_list|)
 decl_stmt|;
 name|setNewForOldRel

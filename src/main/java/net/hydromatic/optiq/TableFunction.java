@@ -55,6 +55,11 @@ argument_list|>
 name|getParameters
 parameter_list|()
 function_decl|;
+comment|/**      * Returns the record type of the table yielded by this function when      * applied to parameters of given types.      */
+name|Type
+name|getElementType
+parameter_list|()
+function_decl|;
 comment|/**      * Applies arguments to yield a table.      *      * @param arguments Arguments      * @return Table      */
 name|Table
 argument_list|<

@@ -558,48 +558,32 @@ name|SqlConformance
 name|conformance
 parameter_list|)
 block|{
-name|Util
+name|Objects
 operator|.
-name|pre
+name|requireNonNull
 argument_list|(
 name|opTab
-operator|!=
-literal|null
-argument_list|,
-literal|"opTab != null"
 argument_list|)
 expr_stmt|;
-name|Util
+name|Objects
 operator|.
-name|pre
+name|requireNonNull
 argument_list|(
 name|catalogReader
-operator|!=
-literal|null
-argument_list|,
-literal|"catalogReader != null"
 argument_list|)
 expr_stmt|;
-name|Util
+name|Objects
 operator|.
-name|pre
+name|requireNonNull
 argument_list|(
 name|typeFactory
-operator|!=
-literal|null
-argument_list|,
-literal|"typeFactory != null"
 argument_list|)
 expr_stmt|;
-name|Util
+name|Objects
 operator|.
-name|pre
+name|requireNonNull
 argument_list|(
 name|conformance
-operator|!=
-literal|null
-argument_list|,
-literal|"conformance != null"
 argument_list|)
 expr_stmt|;
 name|this

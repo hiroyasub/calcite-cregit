@@ -48,7 +48,7 @@ extends|extends
 name|TableAccessRelBase
 block|{
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a TableAccessRel.      *      * @param cluster Cluster      * @param table Table      * @param connection Connection      */
+comment|/**      * Creates a TableAccessRel.      *      * @param cluster Cluster      * @param table Table      */
 specifier|public
 name|TableAccessRel
 parameter_list|(
@@ -57,9 +57,6 @@ name|cluster
 parameter_list|,
 name|RelOptTable
 name|table
-parameter_list|,
-name|RelOptConnection
-name|connection
 parameter_list|)
 block|{
 name|super
@@ -76,8 +73,6 @@ name|NONE
 argument_list|)
 argument_list|,
 name|table
-argument_list|,
-name|connection
 argument_list|)
 expr_stmt|;
 block|}
