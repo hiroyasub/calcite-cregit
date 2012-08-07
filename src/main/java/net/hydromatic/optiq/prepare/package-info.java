@@ -4,7 +4,7 @@ comment|/* // Licensed to Julian Hyde under one or more contributor license // a
 end_comment
 
 begin_comment
-comment|/**  * Query provider based on a JDBC data source.  */
+comment|/**  * Preparation of queries (parsing, planning and implementation).  */
 end_comment
 
 begin_package
@@ -15,9 +15,7 @@ name|hydromatic
 operator|.
 name|optiq
 operator|.
-name|impl
-operator|.
-name|jdbc
+name|prepare
 package|;
 end_package
 

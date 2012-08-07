@@ -4,7 +4,7 @@ comment|/* // Licensed to Julian Hyde under one or more contributor license // a
 end_comment
 
 begin_comment
-comment|/**  * Main package for Optiq, the dynamic data management platform.  */
+comment|/**  * Utilities to help implement Optiq's SPIs.  */
 end_comment
 
 begin_package

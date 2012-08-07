@@ -4,7 +4,7 @@ comment|/* // Licensed to Julian Hyde under one or more contributor license // a
 end_comment
 
 begin_comment
-comment|/**  * Query provider based on a JDBC data source.  */
+comment|/**  * Query optimizer rules for Java calling convention.  */
 end_comment
 
 begin_package
@@ -15,9 +15,9 @@ name|hydromatic
 operator|.
 name|optiq
 operator|.
-name|impl
+name|rules
 operator|.
-name|jdbc
+name|java
 package|;
 end_package
 
