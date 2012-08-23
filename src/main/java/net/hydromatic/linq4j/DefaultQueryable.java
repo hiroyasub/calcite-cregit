@@ -132,6 +132,8 @@ name|factory
 expr_stmt|;
 block|}
 comment|// override return type
+annotation|@
+name|Override
 specifier|protected
 name|Queryable
 argument_list|<
@@ -349,6 +351,8 @@ name|enumerable1
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Queryable
 argument_list|<
@@ -372,6 +376,8 @@ name|count
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Queryable
 argument_list|<
@@ -395,6 +401,8 @@ name|count
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Queryable
 argument_list|<
@@ -526,6 +534,8 @@ return|return
 name|this
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|T2
