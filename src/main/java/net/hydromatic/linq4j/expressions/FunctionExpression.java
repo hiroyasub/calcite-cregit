@@ -617,6 +617,16 @@ name|equals
 argument_list|(
 name|bridgeParams
 argument_list|)
+operator|&&
+operator|!
+operator|(
+name|body
+operator|.
+name|getType
+argument_list|()
+operator|instanceof
+name|TypeVariable
+operator|)
 condition|)
 block|{
 name|resultType2

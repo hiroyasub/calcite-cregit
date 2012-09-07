@@ -5217,6 +5217,8 @@ argument_list|>
 name|arguments
 parameter_list|)
 block|{
+comment|// Note that the last argument is not an empty list. That would cause
+comment|// an anonymous inner-class with no members to be generated.
 return|return
 name|new_
 argument_list|(
@@ -5284,6 +5286,8 @@ argument_list|>
 name|expressions
 parameter_list|)
 block|{
+comment|// Note that the last argument is not an empty list. That would cause
+comment|// an anonymous inner-class with no members to be generated.
 return|return
 name|new_
 argument_list|(
@@ -5294,13 +5298,7 @@ argument_list|()
 argument_list|,
 name|expressions
 argument_list|,
-name|Collections
-operator|.
-expr|<
-name|MemberDeclaration
-operator|>
-name|emptyList
-argument_list|()
+literal|null
 argument_list|)
 return|;
 block|}
