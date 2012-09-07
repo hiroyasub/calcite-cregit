@@ -568,9 +568,9 @@ return|return
 name|r
 return|;
 block|}
-comment|/**      * Registers any planner rules needed to implement queries using JdbcQuery      * objects.      *      * @param planner Planner      */
+annotation|@
+name|Override
 specifier|public
-specifier|static
 name|void
 name|register
 parameter_list|(
@@ -579,6 +579,13 @@ name|planner
 parameter_list|)
 block|{
 comment|// nothing for now
+name|super
+operator|.
+name|register
+argument_list|(
+name|planner
+argument_list|)
+expr_stmt|;
 block|}
 specifier|public
 name|ParseTree

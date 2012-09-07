@@ -194,6 +194,8 @@ comment|/**      * If true, the planner keeps applying rules as long as they con
 specifier|protected
 name|boolean
 name|ambitious
+init|=
+literal|true
 decl_stmt|;
 comment|/**      * If true, and if {@link #ambitious} is true, the planner waits a finite      * number of iterations for the cost to improve.      *      *<p>The number of iterations K is equal to the number of iterations      * required to get the first finite plan. After the first finite plan, it      * continues to fire rules to try to improve it. The planner sets a target      * cost of the current best cost multiplied by {@link #CostImprovement}. If      * it does not meet that cost target within K steps, it quits, and uses the      * current best plan. If it meets the cost, it sets a new, lower target, and      * has another K iterations to meet it. And so forth.      *      *<p>If false, the planner continues to fire rules until the rule queue is      * empty.      */
 specifier|protected

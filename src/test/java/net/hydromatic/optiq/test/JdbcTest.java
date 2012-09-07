@@ -2767,6 +2767,9 @@ name|RelOptTable
 operator|.
 name|ToRelContext
 name|context
+parameter_list|,
+name|RelOptTable
+name|relOptTable
 parameter_list|)
 block|{
 return|return

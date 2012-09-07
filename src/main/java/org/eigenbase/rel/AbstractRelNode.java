@@ -572,9 +572,7 @@ name|getQuery
 argument_list|()
 return|;
 block|}
-comment|/**      * Registers any special rules specific to this kind of relational      * expression.      *      *<p>The planner calls this method this first time that it sees a      * relational expression of this class. The derived class should call {@link      * RelOptPlanner#addRule} for each rule, and then call {@link #register} on      * its base class.</p>      */
 specifier|public
-specifier|static
 name|void
 name|register
 parameter_list|(

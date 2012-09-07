@@ -325,6 +325,14 @@ argument_list|>
 name|inputs
 parameter_list|)
 function_decl|;
+comment|/**      * Registers any special rules specific to this kind of relational      * expression.      *      *<p>The planner calls this method this first time that it sees a      * relational expression of this class. The derived class should call {@link      * org.eigenbase.relopt.RelOptPlanner#addRule} for each rule, and then call      * {@code super.register}.</p>      */
+name|void
+name|register
+parameter_list|(
+name|RelOptPlanner
+name|planner
+parameter_list|)
+function_decl|;
 block|}
 end_interface
 

@@ -345,6 +345,14 @@ name|double
 name|importance
 parameter_list|)
 function_decl|;
+comment|/**      * Registers a class of RelNode. If this class of RelNode has been seen      * before, does nothing.      *      * @param node Relational expression      */
+name|void
+name|registerClass
+parameter_list|(
+name|RelNode
+name|node
+parameter_list|)
+function_decl|;
 block|}
 end_interface
 

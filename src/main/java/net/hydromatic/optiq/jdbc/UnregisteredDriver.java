@@ -78,10 +78,11 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Implementation of Optiq JDBC driver that does not register itself.  */
+comment|/**  * Implementation of Optiq JDBC driver that does not register itself.  *  *<p>You can easily create a "vanity driver" that recognizes its own  * URL prefix as a sub-class of this class. Per the JDBC specification it  * must register itself.</p>  */
 end_comment
 
 begin_class
+specifier|public
 class|class
 name|UnregisteredDriver
 implements|implements
@@ -103,6 +104,7 @@ specifier|final
 name|Factory
 name|factory
 decl_stmt|;
+specifier|protected
 name|UnregisteredDriver
 parameter_list|()
 block|{
@@ -514,6 +516,7 @@ literal|true
 return|;
 block|}
 comment|/**      * Registers this driver with the driver manager.      */
+specifier|protected
 name|void
 name|register
 parameter_list|()
