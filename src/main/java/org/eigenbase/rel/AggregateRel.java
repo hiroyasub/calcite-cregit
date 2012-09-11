@@ -48,7 +48,7 @@ extends|extends
 name|AggregateRelBase
 block|{
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates an AggregateRel.      *      * @param cluster {@link RelOptCluster}  this relational expression belongs      * to      * @param child input relational expression      * @param groupCount Number of columns to group on      * @param aggCalls Array of aggregates to compute      *      * @pre aggCalls != null      */
+comment|/**      * Creates an AggregateRel.      *      * @param cluster Cluster that this relational expression belongs to      * @param child input relational expression      * @param groupSet Bitset of grouping fields      * @param aggCalls Array of aggregates to compute      *      * @pre aggCalls != null      */
 specifier|public
 name|AggregateRel
 parameter_list|(
@@ -58,8 +58,8 @@ parameter_list|,
 name|RelNode
 name|child
 parameter_list|,
-name|int
-name|groupCount
+name|BitSet
+name|groupSet
 parameter_list|,
 name|List
 argument_list|<
@@ -83,13 +83,15 @@ argument_list|)
 argument_list|,
 name|child
 argument_list|,
-name|groupCount
+name|groupSet
 argument_list|,
 name|aggCalls
 argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
 specifier|public
 name|RelNode
 name|copy
@@ -126,7 +128,7 @@ argument_list|(
 name|inputs
 argument_list|)
 argument_list|,
-name|groupCount
+name|groupSet
 argument_list|,
 name|aggCalls
 argument_list|)

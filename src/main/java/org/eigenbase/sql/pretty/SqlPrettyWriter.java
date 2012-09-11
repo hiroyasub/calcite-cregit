@@ -169,33 +169,6 @@ argument_list|(
 literal|"line.separator"
 argument_list|)
 decl_stmt|;
-specifier|private
-specifier|static
-specifier|final
-name|String
-index|[]
-name|spaces
-init|=
-block|{
-literal|""
-block|,
-literal|" "
-block|,
-literal|"  "
-block|,
-literal|"   "
-block|,
-literal|"    "
-block|,
-literal|"     "
-block|,
-literal|"      "
-block|,
-literal|"       "
-block|,
-literal|"        "
-block|,     }
-decl_stmt|;
 comment|//~ Instance fields --------------------------------------------------------
 specifier|private
 specifier|final
@@ -1081,6 +1054,8 @@ name|pw
 operator|.
 name|print
 argument_list|(
+name|Util
+operator|.
 name|spaces
 index|[
 name|indent
@@ -1126,6 +1101,8 @@ name|pw
 operator|.
 name|print
 argument_list|(
+name|Util
+operator|.
 name|spaces
 index|[
 literal|8
@@ -1144,6 +1121,8 @@ name|pw
 operator|.
 name|print
 argument_list|(
+name|Util
+operator|.
 name|spaces
 index|[
 name|rem
@@ -1363,6 +1342,8 @@ name|open
 operator|=
 literal|"("
 operator|+
+name|Util
+operator|.
 name|spaces
 argument_list|(
 name|indentation
@@ -1916,60 +1897,6 @@ argument_list|,
 literal|false
 argument_list|)
 return|;
-block|}
-comment|/**      * Returns a string of N spaces.      */
-specifier|private
-specifier|static
-name|String
-name|spaces
-parameter_list|(
-name|int
-name|i
-parameter_list|)
-block|{
-if|if
-condition|(
-name|i
-operator|<=
-literal|8
-condition|)
-block|{
-return|return
-name|spaces
-index|[
-name|i
-index|]
-return|;
-block|}
-else|else
-block|{
-name|char
-index|[]
-name|chars
-init|=
-operator|new
-name|char
-index|[
-name|i
-index|]
-decl_stmt|;
-name|Arrays
-operator|.
-name|fill
-argument_list|(
-name|chars
-argument_list|,
-literal|' '
-argument_list|)
-expr_stmt|;
-return|return
-operator|new
-name|String
-argument_list|(
-name|chars
-argument_list|)
-return|;
-block|}
 block|}
 comment|/**      * Starts a list.      *      * @param frameType Type of list. For example, a SELECT list will be      * governed according to SELECT-list formatting preferences.      * @param open String to print at the start of the list; typically "(" or      * the empty string.      * @param close String to print at the end of the list.      */
 specifier|protected

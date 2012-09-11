@@ -110,7 +110,8 @@ operator|new
 name|PushAggregateThroughUnionRule
 argument_list|()
 decl_stmt|;
-specifier|public
+comment|/**      * Private constructor.      */
+specifier|private
 name|PushAggregateThroughUnionRule
 parameter_list|()
 block|{
@@ -250,7 +251,10 @@ argument_list|()
 argument_list|,
 name|aggRel
 operator|.
-name|getGroupCount
+name|getGroupSet
+argument_list|()
+operator|.
+name|cardinality
 argument_list|()
 argument_list|,
 name|aggRel
@@ -309,7 +313,10 @@ name|areColumnsDefinitelyUnique
 argument_list|(
 name|input
 argument_list|,
-name|groupByKeyMask
+name|aggRel
+operator|.
+name|getGroupSet
+argument_list|()
 argument_list|)
 decl_stmt|;
 if|if
@@ -344,7 +351,7 @@ name|input
 argument_list|,
 name|aggRel
 operator|.
-name|getGroupCount
+name|getGroupSet
 argument_list|()
 argument_list|,
 name|aggRel
@@ -393,7 +400,7 @@ name|newUnionRel
 argument_list|,
 name|aggRel
 operator|.
-name|getGroupCount
+name|getGroupSet
 argument_list|()
 argument_list|,
 name|transformedAggCalls

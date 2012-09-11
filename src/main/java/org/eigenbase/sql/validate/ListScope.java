@@ -428,8 +428,8 @@ name|rowType
 argument_list|,
 name|columnName
 argument_list|)
-operator|>=
-literal|0
+operator|!=
+literal|null
 condition|)
 block|{
 name|tableName

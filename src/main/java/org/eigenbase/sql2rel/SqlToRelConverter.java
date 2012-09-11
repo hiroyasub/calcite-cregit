@@ -387,6 +387,10 @@ name|decorrelationEnabled
 decl_stmt|;
 specifier|private
 name|boolean
+name|trimUnusedFields
+decl_stmt|;
+specifier|private
+name|boolean
 name|shouldCreateValuesRel
 decl_stmt|;
 specifier|private
@@ -706,6 +710,10 @@ expr_stmt|;
 name|decorrelationEnabled
 operator|=
 literal|true
+expr_stmt|;
+name|trimUnusedFields
+operator|=
+literal|false
 expr_stmt|;
 name|shouldCreateValuesRel
 operator|=
@@ -1119,6 +1127,7 @@ return|return
 name|newRootRel
 return|;
 block|}
+comment|/**      * If subquery is correlated and decorrelation is enabled, performs      * decorrelation.      *      * @param query Query      * @param rootRel Root relational expression      * @return New root relational expression after decorrelation      */
 specifier|public
 name|RelNode
 name|decorrelate
@@ -1135,8 +1144,6 @@ name|result
 init|=
 name|rootRel
 decl_stmt|;
-comment|// If subquery is correlated and decorrelation is enabled, perform
-comment|// decorrelation.
 if|if
 condition|(
 name|enableDecorrelation
@@ -1163,6 +1170,95 @@ expr_stmt|;
 block|}
 return|return
 name|result
+return|;
+block|}
+comment|/**      * Walks over a tree of relational expressions, replacing each      * {@link RelNode} with a 'slimmed down' relational expression that projects      * only the fields required by its consumer.      *      *<p>This may make things easier for the optimizer, by removing crud that      * would expand the search space, but is difficult for the optimizer itself      * to do it, because optimizer rules must preserve the number and type of      * fields. Hence, this transform that operates on the entire tree, similar      * to the {@link RelStructuredTypeFlattener type-flattening transform}.      *      *<p>Currently this functionality is disabled in farrago/luciddb; the      * default implementation of this method does nothing.      *      * @param rootRel Relational expression that is at the root of the tree      * @return Trimmed relational expression      */
+specifier|public
+name|RelNode
+name|trimUnusedFields
+parameter_list|(
+name|RelNode
+name|rootRel
+parameter_list|)
+block|{
+comment|// Trim fields that are not used by their consumer.
+if|if
+condition|(
+name|isTrimUnusedFields
+argument_list|()
+condition|)
+block|{
+specifier|final
+name|RelFieldTrimmer
+name|trimmer
+init|=
+name|newFieldTrimmer
+argument_list|()
+decl_stmt|;
+name|rootRel
+operator|=
+name|trimmer
+operator|.
+name|trim
+argument_list|(
+name|rootRel
+argument_list|)
+expr_stmt|;
+name|boolean
+name|dumpPlan
+init|=
+name|sqlToRelTracer
+operator|.
+name|isLoggable
+argument_list|(
+name|Level
+operator|.
+name|FINE
+argument_list|)
+decl_stmt|;
+if|if
+condition|(
+name|dumpPlan
+condition|)
+block|{
+name|sqlToRelTracer
+operator|.
+name|fine
+argument_list|(
+name|RelOptUtil
+operator|.
+name|dumpPlan
+argument_list|(
+literal|"Plan after trimming unused fields"
+argument_list|,
+name|rootRel
+argument_list|,
+literal|false
+argument_list|,
+name|SqlExplainLevel
+operator|.
+name|EXPPLAN_ATTRIBUTES
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+block|}
+return|return
+name|rootRel
+return|;
+block|}
+comment|/**      * Creates a RelFieldTrimmer.      *      * @return Field trimmer      */
+specifier|protected
+name|RelFieldTrimmer
+name|newFieldTrimmer
+parameter_list|()
+block|{
+return|return
+operator|new
+name|RelFieldTrimmer
+argument_list|(
+name|validator
+argument_list|)
 return|;
 block|}
 comment|/**      * Converts an unvalidated query's parse tree into a relational expression.      *      * @param query Query to convert      * @param needsValidation Whether to validate the query before converting;      *<code>false</code> if the query has already been validated.      * @param top Whether the query is top-level, say if its result will become      * a JDBC result set;<code>false</code> if the query will be part of a      * view.      */
@@ -2162,6 +2258,7 @@ operator|-
 literal|1
 return|;
 block|}
+comment|/**      * Converts a query's ORDER BY clause, if any.      *      * @param select Query      * @param bb Blackboard      * @param collationList Collation list      * @param orderExprList Method populates this list with orderBy expressions      *   not present in selectList      */
 specifier|protected
 name|void
 name|convertOrder
@@ -2195,6 +2292,12 @@ operator|==
 literal|null
 condition|)
 block|{
+assert|assert
+name|collationList
+operator|.
+name|isEmpty
+argument_list|()
+assert|;
 return|return;
 block|}
 comment|// Create a sorter using the previously constructed collations.
@@ -3062,27 +3165,10 @@ comment|// only allocate filter if the condition is not TRUE
 if|if
 condition|(
 operator|!
-operator|(
 name|convertedWhere
-operator|instanceof
-name|RexLiteral
-operator|)
-operator|||
-operator|(
-operator|(
-operator|(
-name|RexLiteral
-operator|)
-name|convertedWhere
-operator|)
 operator|.
-name|getValue
+name|isAlwaysTrue
 argument_list|()
-operator|!=
-name|Boolean
-operator|.
-name|TRUE
-operator|)
 condition|)
 block|{
 name|RelNode
@@ -4790,8 +4876,10 @@ name|bb
 argument_list|,
 name|rowType
 argument_list|,
-name|i
-operator|++
+name|tuple
+operator|.
+name|size
+argument_list|()
 argument_list|)
 decl_stmt|;
 if|if
@@ -8038,6 +8126,7 @@ range|:
 name|nameList
 control|)
 block|{
+specifier|final
 name|RelDataType
 name|leftRowType
 init|=
@@ -8046,7 +8135,7 @@ operator|.
 name|getRowType
 argument_list|()
 decl_stmt|;
-name|int
+name|RelDataTypeField
 name|leftField
 init|=
 name|SqlValidatorUtil
@@ -8065,22 +8154,18 @@ name|rexBuilder
 operator|.
 name|makeInputRef
 argument_list|(
-name|leftRowType
-operator|.
-name|getFieldList
-argument_list|()
-operator|.
-name|get
-argument_list|(
 name|leftField
-argument_list|)
 operator|.
 name|getType
 argument_list|()
 argument_list|,
 name|leftField
+operator|.
+name|getIndex
+argument_list|()
 argument_list|)
 decl_stmt|;
+specifier|final
 name|RelDataType
 name|rightRowType
 init|=
@@ -8089,7 +8174,7 @@ operator|.
 name|getRowType
 argument_list|()
 decl_stmt|;
-name|int
+name|RelDataTypeField
 name|rightField
 init|=
 name|SqlValidatorUtil
@@ -8108,27 +8193,14 @@ name|rexBuilder
 operator|.
 name|makeInputRef
 argument_list|(
-name|rightRowType
-operator|.
-name|getFieldList
-argument_list|()
-operator|.
-name|get
-argument_list|(
 name|rightField
-argument_list|)
 operator|.
 name|getType
 argument_list|()
 argument_list|,
 name|rightField
-operator|+
-name|leftRowType
 operator|.
-name|getFieldList
-argument_list|()
-operator|.
-name|size
+name|getIndex
 argument_list|()
 argument_list|)
 decl_stmt|;
@@ -9042,6 +9114,19 @@ argument_list|(
 name|newHaving
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+name|havingExpr
+operator|.
+name|isAlwaysTrue
+argument_list|()
+condition|)
+block|{
+name|havingExpr
+operator|=
+literal|null
+expr_stmt|;
+block|}
 block|}
 comment|// Now convert the other subqueries in the select list.
 comment|// This needs to be done separately from the subquery inside
@@ -9221,39 +9306,12 @@ operator|=
 literal|null
 expr_stmt|;
 block|}
-comment|// implement HAVING
+comment|// implement HAVING (we have already checked that it is non-trivial)
 if|if
 condition|(
-operator|(
 name|havingExpr
 operator|!=
 literal|null
-operator|)
-operator|&&
-operator|(
-operator|!
-operator|(
-name|havingExpr
-operator|instanceof
-name|RexLiteral
-operator|)
-operator|||
-operator|(
-operator|(
-operator|(
-name|RexLiteral
-operator|)
-name|havingExpr
-operator|)
-operator|.
-name|getValue
-argument_list|()
-operator|!=
-name|Boolean
-operator|.
-name|TRUE
-operator|)
-operator|)
 condition|)
 block|{
 name|bb
@@ -9360,7 +9418,14 @@ name|bb
 operator|.
 name|root
 argument_list|,
+name|Util
+operator|.
+name|bitSetBetween
+argument_list|(
+literal|0
+argument_list|,
 name|groupCount
+argument_list|)
 argument_list|,
 name|aggCalls
 argument_list|)
@@ -9762,6 +9827,7 @@ return|return
 name|decorrelationEnabled
 return|;
 block|}
+comment|/**      * Returns whether there are any correlating variables in this statement.      *      * @return whether there are any correlating variables      */
 specifier|public
 name|boolean
 name|hasCorrelation
@@ -9867,6 +9933,32 @@ expr_stmt|;
 block|}
 return|return
 name|newRootRel
+return|;
+block|}
+comment|/**      * Sets whether to trim unused fields as part of the conversion process.      *      * @param trim Whether to trim unused fields      */
+specifier|public
+name|void
+name|setTrimUnusedFields
+parameter_list|(
+name|boolean
+name|trim
+parameter_list|)
+block|{
+name|this
+operator|.
+name|trimUnusedFields
+operator|=
+name|trim
+expr_stmt|;
+block|}
+comment|/**      * Returns whether to trim unused fields as part of the conversion process.      *      * @return Whether to trim unused fields      */
+specifier|public
+name|boolean
+name|isTrimUnusedFields
+parameter_list|()
+block|{
+return|return
+name|trimUnusedFields
 return|;
 block|}
 comment|/**      * Recursively converts a query to a relational expression.      *      * @param query Query      * @param top Whether this query is the top-level query of the statement      *      * @return Relational expression      */
@@ -10333,6 +10425,7 @@ name|String
 argument_list|>
 argument_list|()
 decl_stmt|;
+specifier|final
 name|List
 argument_list|<
 name|RexNode
@@ -10450,6 +10543,12 @@ name|iTarget
 operator|!=
 operator|-
 literal|1
+operator|:
+literal|"column "
+operator|+
+name|targetColumnName
+operator|+
+literal|" not found"
 assert|;
 name|sourceExps
 index|[
@@ -11643,7 +11742,7 @@ return|return
 name|e
 return|;
 block|}
-comment|/**      * Adjust the type of a reference to an input field to account for nulls      * introduced by outer joins; and adjust the offset to match the physical      * implementation.      *      * @param bb Blackboard      * @param inputRef Input ref      *      * @return Adjusted input ref      */
+comment|/**      * Adjusts the type of a reference to an input field to account for nulls      * introduced by outer joins; and adjusts the offset to match the physical      * implementation.      *      * @param bb Blackboard      * @param inputRef Input ref      *      * @return Adjusted input ref      */
 specifier|protected
 name|RexNode
 name|adjustInputRef
@@ -11705,18 +11804,14 @@ name|SqlCall
 name|rowConstructor
 parameter_list|)
 block|{
-name|Util
-operator|.
-name|pre
-argument_list|(
+assert|assert
 name|isRowConstructor
 argument_list|(
 name|rowConstructor
 argument_list|)
-argument_list|,
-literal|"isRowConstructor(rowConstructor)"
-argument_list|)
-expr_stmt|;
+operator|:
+name|rowConstructor
+assert|;
 specifier|final
 name|SqlNode
 index|[]
@@ -11841,7 +11936,7 @@ name|Blackboard
 name|bb
 parameter_list|)
 block|{
-comment|// TODO Wael 2/04/05: this implementation is not the most efficent in
+comment|// NOTE: Wael 2/04/05: this implementation is not the most efficent in
 comment|// terms of planning since it generates XOs that can be reduced.
 name|List
 argument_list|<
@@ -12712,6 +12807,8 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+name|fieldNames
+operator|=
 name|SqlValidatorUtil
 operator|.
 name|uniquify
@@ -12986,7 +13083,7 @@ return|return
 name|alias
 return|;
 block|}
-comment|/**      * Converts a values clause (as in "INSERT INTO T(x,y) VALUES (1,2)") into a      * relational expression.      */
+comment|/**      * Converts a values clause (as in "INSERT INTO T(x,y) VALUES (1,2)") into a      * relational expression.      *      * @param bb Blackboard      * @param values Call to SQL VALUES operator      */
 specifier|private
 name|void
 name|convertValues
@@ -14875,13 +14972,9 @@ name|relOffsetList
 operator|.
 name|add
 argument_list|(
-operator|new
 name|Pair
-argument_list|<
-name|RelNode
-argument_list|,
-name|Integer
-argument_list|>
+operator|.
+name|of
 argument_list|(
 name|rel
 argument_list|,
@@ -14913,6 +15006,10 @@ condition|(
 name|rel
 operator|instanceof
 name|JoinRel
+operator|||
+name|rel
+operator|instanceof
+name|AggregateRel
 condition|)
 block|{
 name|start
@@ -16531,14 +16628,24 @@ name|expr
 argument_list|)
 decl_stmt|;
 specifier|final
-name|int
-name|index
+name|RexNode
+name|rex
 init|=
-name|groupExprs
-operator|.
-name|size
-argument_list|()
+name|lookupGroupExpr
+argument_list|(
+name|expr
+argument_list|)
 decl_stmt|;
+if|if
+condition|(
+name|rex
+operator|!=
+literal|null
+condition|)
+block|{
+return|return;
+comment|// don't add duplicates, in e.g. "GROUP BY x, y, x"
+block|}
 name|groupExprs
 operator|.
 name|add
@@ -16579,16 +16686,16 @@ name|inputRefs
 operator|.
 name|add
 argument_list|(
-operator|(
-name|RexInputRef
-operator|)
 name|rexBuilder
 operator|.
 name|makeInputRef
 argument_list|(
 name|type
 argument_list|,
-name|index
+name|inputRefs
+operator|.
+name|size
+argument_list|()
 argument_list|)
 argument_list|)
 expr_stmt|;

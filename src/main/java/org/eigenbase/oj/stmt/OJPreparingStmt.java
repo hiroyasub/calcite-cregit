@@ -1143,6 +1143,14 @@ argument_list|,
 name|rootRel
 argument_list|)
 expr_stmt|;
+comment|// Trim unused fields.
+name|rootRel
+operator|=
+name|trimUnusedFields
+argument_list|(
+name|rootRel
+argument_list|)
+expr_stmt|;
 comment|// Display physical plan after decorrelation.
 if|if
 condition|(
@@ -1316,6 +1324,9 @@ name|getPlanner
 argument_list|()
 decl_stmt|;
 comment|// Allow each rel to register its own rules.
+name|RelVisitor
+name|visitor
+init|=
 operator|new
 name|RelVisitor
 argument_list|()
@@ -1356,6 +1367,8 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+decl_stmt|;
+name|visitor
 operator|.
 name|go
 argument_list|(
@@ -1377,8 +1390,10 @@ argument_list|(
 name|rootRel
 argument_list|)
 decl_stmt|;
-name|rootRel
-operator|=
+specifier|final
+name|RelNode
+name|rootRel2
+init|=
 name|planner
 operator|.
 name|changeTraits
@@ -1387,19 +1402,17 @@ name|rootRel
 argument_list|,
 name|desiredTraits
 argument_list|)
-expr_stmt|;
+decl_stmt|;
 assert|assert
-operator|(
-name|rootRel
+name|rootRel2
 operator|!=
 literal|null
-operator|)
 assert|;
 name|planner
 operator|.
 name|setRoot
 argument_list|(
-name|rootRel
+name|rootRel2
 argument_list|)
 expr_stmt|;
 specifier|final
@@ -1413,7 +1426,7 @@ argument_list|()
 decl_stmt|;
 specifier|final
 name|RelNode
-name|rootRel2
+name|rootRel3
 init|=
 name|planner2
 operator|.
@@ -1421,16 +1434,14 @@ name|findBestExp
 argument_list|()
 decl_stmt|;
 assert|assert
-operator|(
-name|rootRel2
+name|rootRel3
 operator|!=
 literal|null
-operator|)
 operator|:
 literal|"could not implement exp"
 assert|;
 return|return
-name|rootRel2
+name|rootRel3
 return|;
 block|}
 specifier|protected
@@ -2122,6 +2133,16 @@ parameter_list|(
 name|SqlNode
 name|query
 parameter_list|,
+name|RelNode
+name|rootRel
+parameter_list|)
+function_decl|;
+comment|/**      * Walks over a tree of relational expressions, replacing each      * {@link RelNode} with a 'slimmed down' relational expression that projects      * only the columns required by its consumer.      *      * @param rootRel Relational expression that is at the root of the tree      * @return Trimmed relational expression      */
+specifier|protected
+specifier|abstract
+name|RelNode
+name|trimUnusedFields
+parameter_list|(
 name|RelNode
 name|rootRel
 parameter_list|)

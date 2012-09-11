@@ -79,6 +79,16 @@ name|boolean
 name|isIdentity
 parameter_list|()
 function_decl|;
+comment|/**      * Removes all elements in the mapping.      */
+name|void
+name|clear
+parameter_list|()
+function_decl|;
+comment|/**      * Returns the number of elements in the mapping.      */
+name|int
+name|size
+parameter_list|()
+function_decl|;
 block|}
 end_interface
 

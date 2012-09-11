@@ -61,18 +61,6 @@ end_import
 
 begin_import
 import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
-name|util
-operator|.
-name|Util
-import|;
-end_import
-
-begin_import
-import|import
 name|net
 operator|.
 name|hydromatic

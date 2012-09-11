@@ -298,6 +298,21 @@ operator|.
 name|length
 return|;
 block|}
+specifier|public
+name|void
+name|clear
+parameter_list|()
+block|{
+throw|throw
+operator|new
+name|UnsupportedOperationException
+argument_list|(
+literal|"Cannot clear: permutation must always contain one mapping per "
+operator|+
+literal|"element"
+argument_list|)
+throw|;
+block|}
 comment|/**      * Returns a string representation of this permutation.      *      *<p>For example, the mapping      *      *<table>      *<tr>      *<th>source</th>      *<th>target</th>      *</tr>      *<tr>      *<td>0</td>      *<td>2</td>      *</tr>      *<tr>      *<td>1</td>      *<td>0</td>      *</tr>      *<tr>      *<td>2</td>      *<td>1</td>      *</tr>      *<tr>      *<td>3</td>      *<td>3</td>      *</tr>      *</table>      *      * is represented by the string "[2, 0, 1, 3]".      */
 specifier|public
 name|String
@@ -515,7 +530,7 @@ comment|//  previous source of target (0) was 2, is now 1
 comment|//  something now has to have target 1 -- use previous source
 comment|// After:  [2, 0, 1, 3]
 block|}
-comment|/**      * Inserts into the targets.      *      *<p/>For example, consider the permutation      *      *<table border="1">      *<tr>      *<td>source</td>      *<td>0</td>      *<td>1</td>      *<td>2</td>      *<td>3</td>      *<td>4</td>      *</tr>      *<tr>      *<td>target</td>      *<td>3</td>      *<td>0</td>      *<td>4</td>      *<td>2</td>      *<td>1</td>      *</tr>      *</table>      *      * After applying<code>insertTarget(2)</code> every target 2 or higher is      * shifted up one.      *      *<p/>      *<table border="1">      *<tr>      *<td>source</td>      *<td>0</td>      *<td>1</td>      *<td>2</td>      *<td>3</td>      *<td>4</td>      *<td>5</td>      *</tr>      *<tr>      *<td>target</td>      *<td>4</td>      *<td>0</td>      *<td>5</td>      *<td>3</td>      *<td>1</td>      *<td>2</td>      *</tr>      *</table>      *      * Note that the array has been extended to accomodate the new target, and      * the previously unmapped source 5 is mapped to the unused target slot 2.      *      * @param x      */
+comment|/**      * Inserts into the targets.      *      *<p/>For example, consider the permutation      *      *<table border="1">      *<tr>      *<td>source</td>      *<td>0</td>      *<td>1</td>      *<td>2</td>      *<td>3</td>      *<td>4</td>      *</tr>      *<tr>      *<td>target</td>      *<td>3</td>      *<td>0</td>      *<td>4</td>      *<td>2</td>      *<td>1</td>      *</tr>      *</table>      *      * After applying<code>insertTarget(2)</code> every target 2 or higher is      * shifted up one.      *      *<p/>      *<table border="1">      *<tr>      *<td>source</td>      *<td>0</td>      *<td>1</td>      *<td>2</td>      *<td>3</td>      *<td>4</td>      *<td>5</td>      *</tr>      *<tr>      *<td>target</td>      *<td>4</td>      *<td>0</td>      *<td>5</td>      *<td>3</td>      *<td>1</td>      *<td>2</td>      *</tr>      *</table>      *      * Note that the array has been extended to accomodate the new target, and      * the previously unmapped source 5 is mapped to the unused target slot 2.      *      * @param x Ordinal of position to add to target      */
 specifier|public
 name|void
 name|insertTarget
@@ -562,7 +577,7 @@ literal|true
 argument_list|)
 assert|;
 block|}
-comment|/**      * Inserts into the sources.      *      *<p/>Behavior is analogous to {@link #insertTarget(int)}.      *      * @param x      */
+comment|/**      * Inserts into the sources.      *      *<p/>Behavior is analogous to {@link #insertTarget(int)}.      *      * @param x Ordinal of position to add to source      */
 specifier|public
 name|void
 name|insertSource
@@ -908,19 +923,11 @@ return|return
 operator|new
 name|Permutation
 argument_list|(
-operator|(
-name|int
-index|[]
-operator|)
 name|sources
 operator|.
 name|clone
 argument_list|()
 argument_list|,
-operator|(
-name|int
-index|[]
-operator|)
 name|targets
 operator|.
 name|clone

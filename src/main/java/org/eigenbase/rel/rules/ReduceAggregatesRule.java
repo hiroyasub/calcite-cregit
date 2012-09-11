@@ -1661,7 +1661,7 @@ name|inputRel
 argument_list|,
 name|oldAggRel
 operator|.
-name|getGroupCount
+name|getGroupSet
 argument_list|()
 argument_list|,
 name|newCalls

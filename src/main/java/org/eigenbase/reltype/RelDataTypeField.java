@@ -15,6 +15,16 @@ end_package
 
 begin_import
 import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Map
+import|;
+end_import
+
+begin_import
+import|import
 name|net
 operator|.
 name|hydromatic
@@ -28,7 +38,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * RelDataTypeField represents the definition of a field in a structured {@link  * RelDataType}.  *  * @author jhyde  * @version $Id$  * @since May 29, 2003  */
+comment|/**  * RelDataTypeField represents the definition of a field in a structured {@link  * RelDataType}.  *  *<p>Extends the {@link java.util.Map.Entry} interface to allow convenient  * inter-operation with Java collections classes. In any implementation of this  * interface, {@link #getKey()} must be equivalent to {@link #getName()}  * and {@link #getValue()} must be equivalent to {@link #getType()}.  *  * @author jhyde  * @version $Id$  * @since May 29, 2003  */
 end_comment
 
 begin_interface
@@ -39,6 +49,15 @@ extends|extends
 name|Types
 operator|.
 name|RecordField
+extends|,
+name|Map
+operator|.
+name|Entry
+argument_list|<
+name|String
+argument_list|,
+name|RelDataType
+argument_list|>
 block|{
 comment|//~ Methods ----------------------------------------------------------------
 comment|/**      * Gets the name of this field, which is unique within its containing type.      *      * @return field name      */

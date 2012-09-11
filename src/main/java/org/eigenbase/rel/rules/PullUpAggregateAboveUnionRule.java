@@ -348,7 +348,7 @@ name|newUnionRel
 argument_list|,
 name|topAggRel
 operator|.
-name|getGroupCount
+name|getGroupSet
 argument_list|()
 argument_list|,
 name|topAggRel

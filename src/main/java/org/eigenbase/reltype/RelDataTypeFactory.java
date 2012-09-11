@@ -130,6 +130,27 @@ name|FieldInfo
 name|fieldInfo
 parameter_list|)
 function_decl|;
+comment|/**      * Creates a type which represents a structured collection of fieldList,      * obtaining the field information from a list of (name, type) pairs.      *      * @param fieldList List of (name, type) pairs      *      * @return canonical struct type descriptor      */
+specifier|public
+name|RelDataType
+name|createStructType
+parameter_list|(
+name|List
+argument_list|<
+name|?
+extends|extends
+name|Map
+operator|.
+name|Entry
+argument_list|<
+name|String
+argument_list|,
+name|RelDataType
+argument_list|>
+argument_list|>
+name|fieldList
+parameter_list|)
+function_decl|;
 comment|/**      * Creates an array type. Arrays are ordered collections of elements.      *      * @param elementType type of the elements of the array      * @param maxCardinality maximum array size, or -1 for unlimited      *      * @return canonical array type descriptor      */
 specifier|public
 name|RelDataType

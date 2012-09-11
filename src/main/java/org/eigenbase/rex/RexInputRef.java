@@ -15,6 +15,16 @@ end_package
 
 begin_import
 import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|eigenbase
@@ -37,18 +47,19 @@ extends|extends
 name|RexSlot
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
-comment|// array of common names, to reduce memory allocations
+comment|// list of common names, to reduce memory allocations
 specifier|private
 specifier|static
 specifier|final
+name|List
+argument_list|<
 name|String
-index|[]
+argument_list|>
 name|names
 init|=
-name|makeArray
+operator|new
+name|SelfPopulatingList
 argument_list|(
-literal|32
-argument_list|,
 literal|"$"
 argument_list|)
 decl_stmt|;
@@ -127,24 +138,12 @@ name|index
 parameter_list|)
 block|{
 return|return
-operator|(
-name|index
-operator|<
 name|names
 operator|.
-name|length
-operator|)
-condition|?
-name|names
-index|[
+name|get
+argument_list|(
 name|index
-index|]
-else|:
-operator|(
-literal|"$"
-operator|+
-name|index
-operator|)
+argument_list|)
 return|;
 block|}
 block|}

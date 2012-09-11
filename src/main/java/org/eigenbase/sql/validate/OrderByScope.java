@@ -207,8 +207,8 @@ name|rowType
 argument_list|,
 name|name
 argument_list|)
-operator|>=
-literal|0
+operator|!=
+literal|null
 condition|)
 block|{
 return|return
