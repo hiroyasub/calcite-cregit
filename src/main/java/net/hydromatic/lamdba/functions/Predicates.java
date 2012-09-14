@@ -978,8 +978,7 @@ block|}
 block|}
 return|;
 block|}
-annotation|@
-name|SafeVarargs
+comment|//@SafeVarargs
 specifier|public
 specifier|static
 parameter_list|<
@@ -1110,8 +1109,7 @@ argument_list|()
 throw|;
 comment|// TODO:
 block|}
-annotation|@
-name|SafeVarargs
+comment|//@SafeVarargs
 specifier|public
 specifier|static
 parameter_list|<
@@ -1174,11 +1172,15 @@ argument_list|>
 name|p
 parameter_list|)
 block|{
+comment|//noinspection unchecked
 return|return
 name|Predicates
 operator|.
 name|and
 argument_list|(
+operator|(
+name|Predicate
+operator|)
 name|this
 argument_list|,
 name|p
@@ -1201,11 +1203,15 @@ argument_list|>
 name|p
 parameter_list|)
 block|{
+comment|//noinspection unchecked
 return|return
 name|Predicates
 operator|.
 name|or
 argument_list|(
+operator|(
+name|Predicate
+operator|)
 name|this
 argument_list|,
 name|p
@@ -1228,11 +1234,15 @@ argument_list|>
 name|p
 parameter_list|)
 block|{
+comment|//noinspection unchecked
 return|return
 name|Predicates
 operator|.
 name|xor
 argument_list|(
+operator|(
+name|Predicate
+operator|)
 name|this
 argument_list|,
 name|p

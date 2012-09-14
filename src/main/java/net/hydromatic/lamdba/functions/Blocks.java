@@ -17,11 +17,13 @@ end_package
 
 begin_import
 import|import
-name|java
+name|net
 operator|.
-name|util
+name|hydromatic
 operator|.
-name|Objects
+name|linq4j
+operator|.
+name|Linq4j
 import|;
 end_import
 
@@ -114,7 +116,7 @@ name|Object
 name|o
 parameter_list|)
 block|{
-name|Objects
+name|Linq4j
 operator|.
 name|requireNonNull
 argument_list|(
@@ -282,11 +284,15 @@ argument_list|>
 name|second
 parameter_list|)
 block|{
+comment|//noinspection unchecked
 return|return
 name|Blocks
 operator|.
 name|chain
 argument_list|(
+operator|(
+name|Block
+operator|)
 name|this
 argument_list|,
 name|second
@@ -296,8 +302,6 @@ block|}
 block|}
 return|;
 block|}
-annotation|@
-name|SafeVarargs
 specifier|public
 specifier|static
 parameter_list|<
@@ -374,11 +378,15 @@ argument_list|>
 name|second
 parameter_list|)
 block|{
+comment|//noinspection unchecked
 return|return
 name|Blocks
 operator|.
 name|chain
 argument_list|(
+operator|(
+name|Block
+operator|)
 name|this
 argument_list|,
 name|second
@@ -468,11 +476,15 @@ argument_list|>
 name|second
 parameter_list|)
 block|{
+comment|//noinspection unchecked
 return|return
 name|Blocks
 operator|.
 name|chain
 argument_list|(
+operator|(
+name|Block
+operator|)
 name|this
 argument_list|,
 name|second

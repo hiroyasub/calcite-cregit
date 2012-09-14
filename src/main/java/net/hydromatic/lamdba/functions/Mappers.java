@@ -17,11 +17,13 @@ end_package
 
 begin_import
 import|import
-name|java
+name|net
 operator|.
-name|util
+name|hydromatic
 operator|.
-name|Map
+name|linq4j
+operator|.
+name|Linq4j
 import|;
 end_import
 
@@ -31,7 +33,7 @@ name|java
 operator|.
 name|util
 operator|.
-name|Objects
+name|Map
 import|;
 end_import
 
@@ -490,7 +492,7 @@ name|t
 parameter_list|)
 block|{
 return|return
-name|Objects
+name|Linq4j
 operator|.
 name|equals
 argument_list|(

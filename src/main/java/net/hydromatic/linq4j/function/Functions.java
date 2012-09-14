@@ -17,6 +17,18 @@ end_package
 
 begin_import
 import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|linq4j
+operator|.
+name|Linq4j
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|lang
@@ -1172,7 +1184,7 @@ name|v2
 parameter_list|)
 block|{
 return|return
-name|Objects
+name|Linq4j
 operator|.
 name|equals
 argument_list|(

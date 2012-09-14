@@ -31,16 +31,6 @@ name|java
 operator|.
 name|util
 operator|.
-name|Collection
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
 name|Iterator
 import|;
 end_import
@@ -1032,8 +1022,6 @@ block|}
 block|}
 return|;
 block|}
-annotation|@
-name|SafeVarargs
 specifier|public
 specifier|static
 parameter_list|<
@@ -1430,8 +1418,7 @@ block|}
 block|}
 return|;
 block|}
-annotation|@
-name|SafeVarargs
+comment|//@SafeVarargs
 specifier|public
 specifier|static
 parameter_list|<
@@ -1513,13 +1500,20 @@ argument_list|>
 name|p
 parameter_list|)
 block|{
+comment|//noinspection unchecked
 return|return
 name|BiPredicates
 operator|.
 name|and
 argument_list|(
+operator|(
+name|BiPredicate
+operator|)
 name|this
 argument_list|,
+operator|(
+name|BiPredicate
+operator|)
 name|p
 argument_list|)
 return|;
@@ -1546,11 +1540,15 @@ argument_list|>
 name|p
 parameter_list|)
 block|{
+comment|//noinspection unchecked
 return|return
 name|BiPredicates
 operator|.
 name|or
 argument_list|(
+operator|(
+name|BiPredicate
+operator|)
 name|this
 argument_list|,
 name|p
@@ -1579,11 +1577,15 @@ argument_list|>
 name|p
 parameter_list|)
 block|{
+comment|//noinspection unchecked
 return|return
 name|BiPredicates
 operator|.
 name|xor
 argument_list|(
+operator|(
+name|BiPredicate
+operator|)
 name|this
 argument_list|,
 name|p
