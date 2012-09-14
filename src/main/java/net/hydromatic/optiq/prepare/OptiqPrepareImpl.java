@@ -1530,7 +1530,7 @@ name|sqlToRelConverter
 operator|.
 name|setTrimUnusedFields
 argument_list|(
-literal|true
+literal|false
 argument_list|)
 expr_stmt|;
 return|return
@@ -1671,30 +1671,6 @@ name|boolean
 name|restructure
 parameter_list|)
 block|{
-specifier|final
-name|RelNode
-name|rel
-init|=
-name|addUnadvertisedFields
-argument_list|(
-name|rootRel
-argument_list|)
-decl_stmt|;
-return|return
-name|rel
-return|;
-block|}
-specifier|private
-name|RelNode
-name|addUnadvertisedFields
-parameter_list|(
-name|RelNode
-name|rootRel
-parameter_list|)
-block|{
-comment|// First, find all types for which expressions want extra fields.
-comment|// You can find them because they occur as _GET(record, "field")
-comment|// calls.
 return|return
 name|rootRel
 return|;
