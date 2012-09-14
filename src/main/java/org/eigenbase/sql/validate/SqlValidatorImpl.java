@@ -187,6 +187,18 @@ name|*
 import|;
 end_import
 
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|linq4j
+operator|.
+name|Linq4j
+import|;
+end_import
+
 begin_comment
 comment|/**  * Default implementation of {@link SqlValidator}.  *  * @author jhyde  * @version $Id$  * @since Mar 3, 2005  */
 end_comment
@@ -541,7 +553,7 @@ name|boolean
 name|validatingSqlMerge
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a validator.      *      * @param opTab Operator table      * @param catalogReader Catalog reader      * @param typeFactory Type factory      * @param conformance Compatibility mode      *      * @pre opTab != null      * @pre // node is a "query expression" (per SQL standard)      * @pre catalogReader != null      * @pre typeFactory != null      * @pre conformance != null      */
+comment|/**      * Creates a validator.      *      * @param opTab Operator table      * @param catalogReader Catalog reader      * @param typeFactory Type factory      * @param conformance Compatibility mode      */
 specifier|protected
 name|SqlValidatorImpl
 parameter_list|(
@@ -558,28 +570,28 @@ name|SqlConformance
 name|conformance
 parameter_list|)
 block|{
-name|Objects
+name|Linq4j
 operator|.
 name|requireNonNull
 argument_list|(
 name|opTab
 argument_list|)
 expr_stmt|;
-name|Objects
+name|Linq4j
 operator|.
 name|requireNonNull
 argument_list|(
 name|catalogReader
 argument_list|)
 expr_stmt|;
-name|Objects
+name|Linq4j
 operator|.
 name|requireNonNull
 argument_list|(
 name|typeFactory
 argument_list|)
 expr_stmt|;
-name|Objects
+name|Linq4j
 operator|.
 name|requireNonNull
 argument_list|(
