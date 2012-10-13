@@ -567,6 +567,32 @@ name|variablesStopped
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
+specifier|public
+name|RelOptCost
+name|computeSelfCost
+parameter_list|(
+name|RelOptPlanner
+name|planner
+parameter_list|)
+block|{
+comment|// Inflate Java cost to make Cascading implementation more
+comment|// attractive.
+return|return
+name|super
+operator|.
+name|computeSelfCost
+argument_list|(
+name|planner
+argument_list|)
+operator|.
+name|multiplyBy
+argument_list|(
+literal|2d
+argument_list|)
+return|;
+block|}
 specifier|public
 name|BlockExpression
 name|implement
