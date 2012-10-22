@@ -1978,15 +1978,6 @@ argument_list|,
 literal|false
 argument_list|)
 decl_stmt|;
-name|System
-operator|.
-name|out
-operator|.
-name|println
-argument_list|(
-name|s
-argument_list|)
-expr_stmt|;
 specifier|final
 name|Executable
 name|executable
