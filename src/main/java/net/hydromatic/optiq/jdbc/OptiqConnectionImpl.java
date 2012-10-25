@@ -463,6 +463,15 @@ return|return
 name|typeFactory
 return|;
 block|}
+specifier|public
+name|Properties
+name|getProperties
+parameter_list|()
+block|{
+return|return
+name|info
+return|;
+block|}
 comment|// QueryProvider methods
 specifier|public
 parameter_list|<

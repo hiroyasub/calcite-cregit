@@ -57,13 +57,11 @@ end_import
 
 begin_import
 import|import
-name|org
+name|java
 operator|.
-name|eigenbase
+name|sql
 operator|.
-name|reltype
-operator|.
-name|RelDataTypeFactory
+name|Connection
 import|;
 end_import
 
@@ -71,9 +69,9 @@ begin_import
 import|import
 name|java
 operator|.
-name|sql
+name|util
 operator|.
-name|Connection
+name|Properties
 import|;
 end_import
 
@@ -98,6 +96,11 @@ function_decl|;
 comment|/**      * Returns the type factory.      *      * @return Type factory      */
 name|JavaTypeFactory
 name|getTypeFactory
+parameter_list|()
+function_decl|;
+comment|/**      * Returns an instance of the connection properties.      *      *<p>NOTE: The resulting collection of properties is same collection used      * by the connection, and is writable, but behavior if you modify the      * collection is undefined. Some implementations might, for example, see      * a modified property, but only if you set it before you create a      * statement. We will remove this method when there are better      * implementations of stateful connections and configuration.</p>      *      * @return properties      */
+name|Properties
+name|getProperties
 parameter_list|()
 function_decl|;
 block|}
