@@ -17,6 +17,16 @@ end_package
 
 begin_import
 import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|eigenbase
@@ -52,6 +62,17 @@ name|TableModificationRel
 operator|.
 name|Operation
 name|getTableModOp
+parameter_list|()
+function_decl|;
+comment|/**      * Returns a list describing, for each result field, the origin of the field      * as a 4-element list of (database, schema, table, column).      */
+name|List
+argument_list|<
+name|List
+argument_list|<
+name|String
+argument_list|>
+argument_list|>
+name|getFieldOrigins
 parameter_list|()
 function_decl|;
 comment|/**      * Executes the prepared result.      *      * @return producer of rows resulting from execution      */

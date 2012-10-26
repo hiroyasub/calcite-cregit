@@ -1895,6 +1895,8 @@ name|sqlKind
 argument_list|)
 argument_list|,
 name|boundMethod
+argument_list|,
+name|fieldOrigins
 argument_list|)
 decl_stmt|;
 return|return

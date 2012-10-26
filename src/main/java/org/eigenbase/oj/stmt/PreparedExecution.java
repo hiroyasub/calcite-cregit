@@ -29,6 +29,16 @@ end_import
 
 begin_import
 import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
+import|;
+end_import
+
+begin_import
+import|import
 name|openjava
 operator|.
 name|ptree
@@ -117,6 +127,17 @@ specifier|final
 name|BoundMethod
 name|boundMethod
 decl_stmt|;
+specifier|private
+specifier|final
+name|List
+argument_list|<
+name|List
+argument_list|<
+name|String
+argument_list|>
+argument_list|>
+name|fieldOrigins
+decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 specifier|protected
 name|PreparedExecution
@@ -140,6 +161,15 @@ name|tableModOp
 parameter_list|,
 name|BoundMethod
 name|boundMethod
+parameter_list|,
+name|List
+argument_list|<
+name|List
+argument_list|<
+name|String
+argument_list|>
+argument_list|>
+name|fieldOrigins
 parameter_list|)
 block|{
 name|this
@@ -178,6 +208,12 @@ name|boundMethod
 operator|=
 name|boundMethod
 expr_stmt|;
+name|this
+operator|.
+name|fieldOrigins
+operator|=
+name|fieldOrigins
+expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
 specifier|public
@@ -210,6 +246,21 @@ parameter_list|()
 block|{
 return|return
 name|tableModOp
+return|;
+block|}
+specifier|public
+name|List
+argument_list|<
+name|List
+argument_list|<
+name|String
+argument_list|>
+argument_list|>
+name|getFieldOrigins
+parameter_list|()
+block|{
+return|return
+name|fieldOrigins
 return|;
 block|}
 comment|/**      * Returns the physical row type of this prepared statement. May not be      * identical to the row type returned by the validator; for example, the      * field names may have been made unique.      */

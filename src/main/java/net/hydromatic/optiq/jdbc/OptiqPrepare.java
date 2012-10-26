@@ -657,11 +657,23 @@ name|label
 operator|=
 name|label
 expr_stmt|;
+comment|// Per the JDBC spec this should be just columnName.
+comment|// For example, the query
+comment|//     select 1 as x, c as y from t
+comment|// should give columns
+comment|//     (label=x, column=null, table=null)
+comment|//     (label=y, column=c table=t)
+comment|// But DbUnit requires every column to have a name. Duh.
 name|this
 operator|.
 name|columnName
 operator|=
+name|first
+argument_list|(
 name|columnName
+argument_list|,
+name|label
+argument_list|)
 expr_stmt|;
 name|this
 operator|.
@@ -729,6 +741,31 @@ name|columnClassName
 operator|=
 name|columnClassName
 expr_stmt|;
+block|}
+specifier|private
+specifier|static
+parameter_list|<
+name|T
+parameter_list|>
+name|T
+name|first
+parameter_list|(
+name|T
+name|t0
+parameter_list|,
+name|T
+name|t1
+parameter_list|)
+block|{
+return|return
+name|t0
+operator|!=
+literal|null
+condition|?
+name|t0
+else|:
+name|t1
+return|;
 block|}
 block|}
 comment|/**      * Metadata for a parameter. Plus a slot to hold its value.      */
