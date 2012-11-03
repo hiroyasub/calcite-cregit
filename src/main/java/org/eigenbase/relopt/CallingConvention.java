@@ -324,7 +324,7 @@ operator|.
 name|class
 argument_list|)
 decl_stmt|;
-comment|/**      * The<code>ITERABLE</code> calling convention means that the expression is      * converted to an openjava expression ({@link openjava.ptree.Expression})      * which evalutes to an object which implements {@link      * org.eigenbase.runtime.Iterable}.      */
+comment|/**      * The<code>ITERABLE</code> calling convention means that the expression is      * converted to an openjava expression ({@link openjava.ptree.Expression})      * which evaluates to an object which implements {@link Iterable}.      */
 specifier|public
 specifier|static
 specifier|final
@@ -631,18 +631,15 @@ name|Object
 name|o
 parameter_list|)
 block|{
-if|if
-condition|(
-name|o
+return|return
+name|this
 operator|==
-literal|null
-condition|)
-block|{
-return|return
-literal|false
-return|;
-block|}
-return|return
+name|o
+operator|||
+name|o
+operator|instanceof
+name|CallingConvention
+operator|&&
 name|ordinal
 operator|==
 operator|(

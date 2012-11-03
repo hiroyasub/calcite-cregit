@@ -51,6 +51,10 @@ name|Iterator
 implements|,
 name|Runnable
 implements|,
+name|java
+operator|.
+name|lang
+operator|.
 name|Iterable
 block|{
 comment|//~ Instance fields --------------------------------------------------------
