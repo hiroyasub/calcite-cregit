@@ -61,6 +61,8 @@ operator|new
 name|SelfPopulatingList
 argument_list|(
 literal|"$"
+argument_list|,
+literal|30
 argument_list|)
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------

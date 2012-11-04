@@ -112,6 +112,86 @@ expr_stmt|;
 block|}
 specifier|public
 name|void
+name|testWhere2
+parameter_list|()
+block|{
+name|assertThat
+argument_list|()
+operator|.
+name|inJdbcFoodmart
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"select * from \"foodmart\".\"days\"\n"
+operator|+
+literal|"where not (lower(\"week_day\") = 'wednesday')"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"day=1; week_day=Sunday\n"
+operator|+
+literal|"day=2; week_day=Monday\n"
+operator|+
+literal|"day=5; week_day=Thursday\n"
+operator|+
+literal|"day=3; week_day=Tuesday\n"
+operator|+
+literal|"day=6; week_day=Friday\n"
+operator|+
+literal|"day=7; week_day=Saturday\n"
+argument_list|)
+expr_stmt|;
+block|}
+specifier|public
+name|void
+name|testCase
+parameter_list|()
+block|{
+name|assertThat
+argument_list|()
+operator|.
+name|inJdbcFoodmart
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"select \"day\",\n"
+operator|+
+literal|" \"week_day\",\n"
+operator|+
+literal|" case when \"day\"< 3 then upper(\"week_day\")\n"
+operator|+
+literal|"      when \"day\"< 5 then lower(\"week_day\")\n"
+operator|+
+literal|"      else \"week_day\" end as d\n"
+operator|+
+literal|"from \"foodmart\".\"days\"\n"
+operator|+
+literal|"where \"day\"<> 1\n"
+operator|+
+literal|"order by \"day\""
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"day=2; week_day=Monday; D=MONDAY\n"
+operator|+
+literal|"day=3; week_day=Tuesday; D=tuesday\n"
+operator|+
+literal|"day=4; week_day=Wednesday; D=wednesday\n"
+operator|+
+literal|"day=5; week_day=Thursday; D=Thursday\n"
+operator|+
+literal|"day=6; week_day=Friday; D=Friday\n"
+operator|+
+literal|"day=7; week_day=Saturday; D=Saturday\n"
+argument_list|)
+expr_stmt|;
+block|}
+specifier|public
+name|void
 name|testGroup
 parameter_list|()
 block|{
@@ -123,9 +203,11 @@ argument_list|()
 operator|.
 name|query
 argument_list|(
-literal|"select s, count(*) as c from (\n"
+literal|"select s, count(*) as c, min(\"week_day\") as mw from (\n"
 operator|+
-literal|"select substring(\"week_day\" from 1 for 1) as s\n"
+literal|"select \"week_day\",\n"
+operator|+
+literal|"  substring(\"week_day\" from 1 for 1) as s\n"
 operator|+
 literal|"from \"foodmart\".\"days\")\n"
 operator|+
@@ -134,15 +216,15 @@ argument_list|)
 operator|.
 name|returns
 argument_list|(
-literal|"S=T; C=2\n"
+literal|"S=T; C=2; MW=Thursday\n"
 operator|+
-literal|"S=F; C=1\n"
+literal|"S=F; C=1; MW=Friday\n"
 operator|+
-literal|"S=W; C=1\n"
+literal|"S=W; C=1; MW=Wednesday\n"
 operator|+
-literal|"S=S; C=2\n"
+literal|"S=S; C=2; MW=Saturday\n"
 operator|+
-literal|"S=M; C=1\n"
+literal|"S=M; C=1; MW=Monday\n"
 argument_list|)
 expr_stmt|;
 block|}
