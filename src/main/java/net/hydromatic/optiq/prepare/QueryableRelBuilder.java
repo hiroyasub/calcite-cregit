@@ -1180,7 +1180,7 @@ name|keySelector
 parameter_list|,
 name|EqualityComparer
 argument_list|<
-name|T
+name|TKey
 argument_list|>
 name|comparer
 parameter_list|)
@@ -1347,7 +1347,7 @@ name|elementSelector
 parameter_list|,
 name|EqualityComparer
 argument_list|<
-name|T
+name|TKey
 argument_list|>
 name|comparer
 parameter_list|)
