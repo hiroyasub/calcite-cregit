@@ -2250,7 +2250,7 @@ parameter_list|,
 specifier|final
 name|EqualityComparer
 argument_list|<
-name|T
+name|TKey
 argument_list|>
 name|comparer
 parameter_list|)
@@ -2526,7 +2526,7 @@ parameter_list|,
 specifier|final
 name|EqualityComparer
 argument_list|<
-name|T
+name|TKey
 argument_list|>
 name|comparer
 parameter_list|)
