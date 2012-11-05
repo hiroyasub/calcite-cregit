@@ -876,7 +876,7 @@ argument_list|>
 name|elementSelector
 parameter_list|)
 function_decl|;
-comment|/** Groups the elements of a sequence and projects the      * elements for each group by using a specified function. Key      * values are compared by using a specified comparer.      */
+comment|/** Groups the elements of a sequence and projects the      * elements for each group by using a specified function. Key      * values are compared by using a specified comparer. */
 parameter_list|<
 name|TKey
 parameter_list|,
@@ -928,7 +928,7 @@ argument_list|>
 name|comparer
 parameter_list|)
 function_decl|;
-comment|/** Groups the elements of a sequence according to a      * specified key selector function and creates a result value from      * each group and its key. Keys are compared by using a specified      * comparer.      */
+comment|/** Groups the elements of a sequence according to a      * specified key selector function and creates a result value from      * each group and its key. Keys are compared by using a specified      * comparer. */
 parameter_list|<
 name|TKey
 parameter_list|,
@@ -1169,7 +1169,7 @@ argument_list|>
 name|resultSelector
 parameter_list|)
 function_decl|;
-comment|/** Correlates the elements of two sequences based on      * key equality and groups the results. A specified      * EqualityComparer<T> is used to compare keys. */
+comment|/** Correlates the elements of two sequences based on      * key equality and groups the results. A specified      * EqualityComparer is used to compare keys. */
 parameter_list|<
 name|TInner
 parameter_list|,
@@ -1260,7 +1260,7 @@ argument_list|>
 name|enumerable
 parameter_list|)
 function_decl|;
-comment|/** Produces the set intersection of two sequences by      * using the specified EqualityComparer<T> to compare      * values. */
+comment|/** Produces the set intersection of two sequences by      * using the specified EqualityComparer to compare      * values. */
 name|Queryable
 argument_list|<
 name|T
@@ -1348,7 +1348,7 @@ argument_list|>
 name|resultSelector
 parameter_list|)
 function_decl|;
-comment|/** Correlates the elements of two sequences based on      * matching keys. A specified EqualityComparer<T> is used to      * compare keys. */
+comment|/** Correlates the elements of two sequences based on      * matching keys. A specified EqualityComparer is used to      * compare keys. */
 parameter_list|<
 name|TInner
 parameter_list|,
@@ -2011,7 +2011,7 @@ argument_list|>
 name|enumerable
 parameter_list|)
 function_decl|;
-comment|/** Determines whether two sequences are equal by      * using a specified EqualityComparer<T> to compare      * elements. */
+comment|/** Determines whether two sequences are equal by      * using a specified EqualityComparer to compare      * elements. */
 name|boolean
 name|sequenceEqual
 parameter_list|(
