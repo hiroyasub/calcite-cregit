@@ -498,6 +498,9 @@ argument_list|>
 name|keySelector
 parameter_list|,
 name|EqualityComparer
+argument_list|<
+name|TKey
+argument_list|>
 name|comparer
 parameter_list|)
 function_decl|;
@@ -626,10 +629,13 @@ argument_list|>
 name|elementSelector
 parameter_list|,
 name|EqualityComparer
+argument_list|<
+name|TKey
+argument_list|>
 name|comparer
 parameter_list|)
 function_decl|;
-comment|/** Groups the elements of a sequence according to a      * specified key selector function and creates a result value from      * each group and its key. Keys are compared by using a specified      * comparer.      */
+comment|/** Groups the elements of a sequence according to a      * specified key selector function and creates a result value from      * each group and its key. Keys are compared by using a specified      * comparer. */
 parameter_list|<
 name|TKey
 parameter_list|,
@@ -669,6 +675,9 @@ argument_list|>
 name|elementSelector
 parameter_list|,
 name|EqualityComparer
+argument_list|<
+name|TKey
+argument_list|>
 name|comparer
 parameter_list|)
 function_decl|;

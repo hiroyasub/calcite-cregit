@@ -1087,6 +1087,9 @@ argument_list|>
 name|keySelector
 parameter_list|,
 name|EqualityComparer
+argument_list|<
+name|TKey
+argument_list|>
 name|comparer
 parameter_list|)
 block|{
