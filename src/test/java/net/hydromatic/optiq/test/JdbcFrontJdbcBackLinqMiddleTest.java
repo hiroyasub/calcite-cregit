@@ -310,11 +310,11 @@ argument_list|)
 operator|.
 name|returns
 argument_list|(
-literal|"EXPR$0=24442; state_province=CA; S=74748.0000\n"
+literal|"EXPR$0=24442; state_province=CA; S=74748\n"
 operator|+
-literal|"EXPR$0=21611; state_province=OR; S=67659.0000\n"
+literal|"EXPR$0=21611; state_province=OR; S=67659\n"
 operator|+
-literal|"EXPR$0=40784; state_province=WA; S=124366.0000\n"
+literal|"EXPR$0=40784; state_province=WA; S=124366\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -407,11 +407,11 @@ argument_list|)
 operator|.
 name|returns
 argument_list|(
-literal|"state_province=CA; S=74748.0000; DC=24442\n"
+literal|"state_province=CA; S=74748; DC=24442\n"
 operator|+
-literal|"state_province=OR; S=67659.0000; DC=21611\n"
+literal|"state_province=OR; S=67659; DC=21611\n"
 operator|+
-literal|"state_province=WA; S=124366.0000; DC=40784\n"
+literal|"state_province=WA; S=124366; DC=40784\n"
 argument_list|)
 expr_stmt|;
 block|}
