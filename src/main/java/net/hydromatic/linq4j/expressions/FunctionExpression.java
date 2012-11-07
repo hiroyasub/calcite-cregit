@@ -696,7 +696,19 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 comment|// Generate a bridge method. Argument types are looser (as if every
-comment|// type parameter is set to 'Object')
+comment|// type parameter is set to 'Object').
+comment|//
+comment|// Skip the bridge method if there are no arguments. It would have the
+comment|// same overload as the regular method.
+if|if
+condition|(
+operator|!
+name|bridgeParams
+operator|.
+name|isEmpty
+argument_list|()
+condition|)
+block|{
 name|writer
 operator|.
 name|append
@@ -746,6 +758,7 @@ argument_list|(
 literal|"}\n"
 argument_list|)
 expr_stmt|;
+block|}
 name|writer
 operator|.
 name|end

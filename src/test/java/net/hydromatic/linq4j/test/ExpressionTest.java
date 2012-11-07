@@ -331,11 +331,15 @@ parameter_list|()
 block|{
 name|assertEquals
 argument_list|(
-literal|"1 + 2 + 3"
+literal|"1 + 2f + 3l + Long.valueOf(4)"
 argument_list|,
 name|Expressions
 operator|.
 name|toString
+argument_list|(
+name|Expressions
+operator|.
+name|add
 argument_list|(
 name|Expressions
 operator|.
@@ -357,6 +361,10 @@ operator|.
 name|constant
 argument_list|(
 literal|2
+argument_list|,
+name|Float
+operator|.
+name|TYPE
 argument_list|)
 argument_list|)
 argument_list|,
@@ -365,6 +373,22 @@ operator|.
 name|constant
 argument_list|(
 literal|3
+argument_list|,
+name|Long
+operator|.
+name|TYPE
+argument_list|)
+argument_list|)
+argument_list|,
+name|Expressions
+operator|.
+name|constant
+argument_list|(
+literal|4
+argument_list|,
+name|Long
+operator|.
+name|class
 argument_list|)
 argument_list|)
 argument_list|)
