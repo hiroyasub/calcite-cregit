@@ -1374,11 +1374,11 @@ operator|==
 name|countOperator
 condition|)
 block|{
+comment|// FIXME: count(x) and count(distinct x) don't work currently
 name|accessor
 operator|=
 literal|null
 expr_stmt|;
-comment|// FIXME
 block|}
 if|if
 condition|(

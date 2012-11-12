@@ -252,6 +252,37 @@ literal|"C=7\n"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Tests that a theta join (a join whose condition cannot be decomposed      * into input0.x = input1.x and ... input0.z = input1.z) throws a reasonably      * civilized "cannot be implemented" exception. Of course, we'd like to be      * able to implement it one day. */
+specifier|public
+name|void
+name|testJoinTheta
+parameter_list|()
+block|{
+name|assertThat
+argument_list|()
+operator|.
+name|inJdbcFoodmart
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"select count(*) from (\n"
+operator|+
+literal|"  select *\n"
+operator|+
+literal|"  from \"foodmart\".\"sales_fact_1997\" as s\n"
+operator|+
+literal|"  join \"foodmart\".\"customer\" as c\n"
+operator|+
+literal|"  on s.\"customer_id\" - c.\"customer_id\" = 0)"
+argument_list|)
+operator|.
+name|throws_
+argument_list|(
+literal|"node could not be implemented"
+argument_list|)
+expr_stmt|;
+block|}
 specifier|public
 name|void
 name|testJoinGroupByEmpty

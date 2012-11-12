@@ -231,6 +231,18 @@ name|org
 operator|.
 name|eigenbase
 operator|.
+name|trace
+operator|.
+name|EigenbaseTrace
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
 name|util
 operator|.
 name|Pair
@@ -271,6 +283,18 @@ name|*
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|logging
+operator|.
+name|Logger
+import|;
+end_import
+
 begin_comment
 comment|/**  * Rules and relational operators for the {@link Enumerable} calling convention.  *  * @author jhyde  */
 end_comment
@@ -294,6 +318,17 @@ name|AbstractEnumerable
 operator|.
 name|class
 argument_list|)
+decl_stmt|;
+specifier|protected
+specifier|static
+specifier|final
+name|Logger
+name|tracer
+init|=
+name|EigenbaseTrace
+operator|.
+name|getPlannerTracer
+argument_list|()
 decl_stmt|;
 specifier|public
 specifier|static
@@ -417,6 +452,8 @@ return|return
 literal|null
 return|;
 block|}
+try|try
+block|{
 return|return
 operator|new
 name|EnumerableJoinRel
@@ -469,6 +506,27 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+catch|catch
+parameter_list|(
+name|InvalidRelException
+name|e
+parameter_list|)
+block|{
+name|tracer
+operator|.
+name|warning
+argument_list|(
+name|e
+operator|.
+name|toString
+argument_list|()
+argument_list|)
+expr_stmt|;
+return|return
+literal|null
+return|;
+block|}
+block|}
 block|}
 specifier|public
 specifier|static
@@ -506,6 +564,8 @@ name|String
 argument_list|>
 name|variablesStopped
 parameter_list|)
+throws|throws
+name|InvalidRelException
 block|{
 name|super
 argument_list|(
@@ -524,6 +584,29 @@ argument_list|,
 name|variablesStopped
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+operator|!
+name|RelOptUtil
+operator|.
+name|isEqui
+argument_list|(
+name|left
+argument_list|,
+name|right
+argument_list|,
+name|condition
+argument_list|)
+condition|)
+block|{
+throw|throw
+operator|new
+name|InvalidRelException
+argument_list|(
+literal|"EnumerableJoinRel only supports equi-join"
+argument_list|)
+throw|;
+block|}
 block|}
 annotation|@
 name|Override
@@ -543,6 +626,8 @@ parameter_list|,
 name|RelNode
 name|right
 parameter_list|)
+block|{
+try|try
 block|{
 return|return
 operator|new
@@ -564,6 +649,23 @@ argument_list|,
 name|variablesStopped
 argument_list|)
 return|;
+block|}
+catch|catch
+parameter_list|(
+name|InvalidRelException
+name|e
+parameter_list|)
+block|{
+comment|// Semantic error not possible. Must be a bug. Convert to
+comment|// internal error.
+throw|throw
+operator|new
+name|RuntimeException
+argument_list|(
+name|e
+argument_list|)
+throw|;
+block|}
 block|}
 annotation|@
 name|Override
@@ -645,17 +747,26 @@ argument_list|,
 name|rightKeys
 argument_list|)
 decl_stmt|;
-assert|assert
+if|if
+condition|(
+operator|!
 name|remaining
 operator|.
 name|isAlwaysTrue
 argument_list|()
-operator|:
-literal|"EnumerableJoin is equi only; "
+condition|)
+block|{
+comment|// We checked "isEqui" in constructor. Something went wrong.
+throw|throw
+operator|new
+name|AssertionError
+argument_list|(
+literal|"not equi-join condition: "
 operator|+
 name|remaining
-assert|;
-comment|// TODO: stricter pre-check
+argument_list|)
+throw|;
+block|}
 specifier|final
 name|JavaTypeFactory
 name|typeFactory
