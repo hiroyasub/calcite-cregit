@@ -52,6 +52,7 @@ comment|/**  * Enumeration of Java's primitive types.  *  *<p>There are fields f
 end_comment
 
 begin_enum
+specifier|public
 enum|enum
 name|Primitive
 block|{

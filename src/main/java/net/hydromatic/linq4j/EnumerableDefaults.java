@@ -4893,8 +4893,9 @@ argument_list|>
 name|comparator
 parameter_list|)
 block|{
-comment|// NOTE: TreeMap allows null comparator. But I'm not sure that orderBy
-comment|// should.
+comment|// NOTE: TreeMap allows null comparator. But the caller of this method
+comment|// must supply a comparator if the key does not extend Comparable.
+comment|// Otherwise there will be a ClassCastException while retrieving.
 specifier|final
 name|Map
 argument_list|<
