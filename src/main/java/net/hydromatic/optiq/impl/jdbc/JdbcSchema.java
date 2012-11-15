@@ -226,7 +226,6 @@ specifier|final
 name|String
 name|schema
 decl_stmt|;
-specifier|private
 specifier|final
 name|JavaTypeFactory
 name|typeFactory

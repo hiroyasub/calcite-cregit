@@ -1531,8 +1531,6 @@ specifier|public
 name|String
 name|getSchema
 parameter_list|()
-throws|throws
-name|SQLException
 block|{
 return|return
 name|schema

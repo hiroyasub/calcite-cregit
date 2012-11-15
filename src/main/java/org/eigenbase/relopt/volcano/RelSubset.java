@@ -253,12 +253,6 @@ argument_list|()
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|// REVIEW jvs 15-Mar-2005: I disabled this exception because there is
-comment|// actually code which walks over trees containing RelSubsets (in
-comment|// RelOptUtil), and that code was special casing traversal of RelSubset,
-comment|// which isn't right.
-comment|/**      * There are no children, as such. We throw an exception because you      * probably don't want to be walking over trees which contain<code>      * RelSubset</code>s.      */
-comment|/*     public RelNode [] getInputs() { throw new UnsupportedOperationException(); }      */
 specifier|public
 name|Set
 argument_list|<
@@ -1335,12 +1329,11 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-name|Error
+name|RuntimeException
 name|e
 init|=
-name|Util
-operator|.
-name|newInternal
+operator|new
+name|RuntimeException
 argument_list|(
 literal|"node could not be implemented: "
 operator|+

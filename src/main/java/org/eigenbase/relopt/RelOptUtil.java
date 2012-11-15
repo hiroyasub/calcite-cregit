@@ -5454,6 +5454,15 @@ comment|// we fail. Fall through.
 block|}
 block|}
 comment|// Add this condition to the list of non-equi-join conditions.
+if|if
+condition|(
+operator|!
+name|condition
+operator|.
+name|isAlwaysTrue
+argument_list|()
+condition|)
+block|{
 name|nonEquiList
 operator|.
 name|add
@@ -5461,6 +5470,7 @@ argument_list|(
 name|condition
 argument_list|)
 expr_stmt|;
+block|}
 block|}
 comment|/**      * Adding projection to the inputs of a join to produce the required join      * keys.      *      * @param inputRels inputs to a join      * @param leftJoinKeys expressions for LHS of join key      * @param rightJoinKeys expressions for RHS of join key      * @param systemColCount number of system columns, usually zero. These      * columns are projected at the leading edge of the output row.      * @param leftKeys on return this contains the join key positions from the      * new project rel on the LHS.      * @param rightKeys on return this contains the join key positions from the      * new project rel on the RHS.      * @param outputProj on return this contains the positions of the original      * join output in the (to be formed by caller) LhxJoinRel. Caller needs to      * be responsible for adding projection on the new join output.      */
 specifier|public

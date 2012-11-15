@@ -260,6 +260,13 @@ name|Schema
 name|getRootSchema
 parameter_list|()
 function_decl|;
+name|List
+argument_list|<
+name|String
+argument_list|>
+name|getDefaultSchemaPath
+parameter_list|()
+function_decl|;
 block|}
 specifier|public
 specifier|static

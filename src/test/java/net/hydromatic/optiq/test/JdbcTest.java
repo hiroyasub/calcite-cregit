@@ -105,6 +105,22 @@ name|optiq
 operator|.
 name|impl
 operator|.
+name|clone
+operator|.
+name|CloneSchema
+import|;
+end_import
+
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|optiq
+operator|.
+name|impl
+operator|.
 name|java
 operator|.
 name|JavaTypeFactory
@@ -1747,6 +1763,21 @@ name|getRootSchema
 argument_list|()
 return|;
 block|}
+specifier|public
+name|List
+argument_list|<
+name|String
+argument_list|>
+name|getDefaultSchemaPath
+parameter_list|()
+block|{
+return|return
+name|Collections
+operator|.
+name|emptyList
+argument_list|()
+return|;
+block|}
 block|}
 argument_list|,
 name|viewSql
@@ -1877,13 +1908,16 @@ return|return
 name|connection
 return|;
 block|}
-comment|/**      * Creates a connection with a given query provider. If provider is null,      * uses the connection as its own provider. The connection contains a      * schema called "foodmart" backed by a JDBC connection to MySQL.      *      * @param queryProvider Query provider      * @return Connection      * @throws ClassNotFoundException      * @throws SQLException      */
+comment|/**      * Creates a connection with a given query provider. If provider is null,      * uses the connection as its own provider. The connection contains a      * schema called "foodmart" backed by a JDBC connection to MySQL.      *      * @param queryProvider Query provider      * @param withClone Whether to create a "foodmart2" schema as in-memory      *     clone      * @return Connection      * @throws ClassNotFoundException      * @throws SQLException      */
 specifier|static
 name|OptiqConnection
 name|getConnection
 parameter_list|(
 name|QueryProvider
 name|queryProvider
+parameter_list|,
+name|boolean
+name|withClone
 parameter_list|)
 throws|throws
 name|ClassNotFoundException
@@ -1955,6 +1989,9 @@ literal|"foodmart"
 argument_list|)
 expr_stmt|;
 name|JdbcSchema
+name|foodmart
+init|=
+name|JdbcSchema
 operator|.
 name|create
 argument_list|(
@@ -1972,6 +2009,35 @@ argument_list|,
 literal|""
 argument_list|,
 literal|"foodmart"
+argument_list|)
+decl_stmt|;
+if|if
+condition|(
+name|withClone
+condition|)
+block|{
+name|CloneSchema
+operator|.
+name|create
+argument_list|(
+name|optiqConnection
+argument_list|,
+name|optiqConnection
+operator|.
+name|getRootSchema
+argument_list|()
+argument_list|,
+literal|"foodmart2"
+argument_list|,
+name|foodmart
+argument_list|)
+expr_stmt|;
+block|}
+name|optiqConnection
+operator|.
+name|setSchema
+argument_list|(
+literal|"foodmart2"
 argument_list|)
 expr_stmt|;
 return|return
@@ -2316,6 +2382,444 @@ operator|.
 name|close
 argument_list|()
 expr_stmt|;
+block|}
+specifier|public
+name|void
+name|testCloneSchema
+parameter_list|()
+throws|throws
+name|ClassNotFoundException
+throws|,
+name|SQLException
+block|{
+specifier|final
+name|OptiqConnection
+name|connection
+init|=
+name|JdbcTest
+operator|.
+name|getConnection
+argument_list|(
+literal|null
+argument_list|,
+literal|false
+argument_list|)
+decl_stmt|;
+name|Schema
+name|foodmart
+init|=
+name|connection
+operator|.
+name|getRootSchema
+argument_list|()
+operator|.
+name|getSubSchema
+argument_list|(
+literal|"foodmart"
+argument_list|)
+decl_stmt|;
+name|CloneSchema
+operator|.
+name|create
+argument_list|(
+name|connection
+argument_list|,
+name|connection
+operator|.
+name|getRootSchema
+argument_list|()
+argument_list|,
+literal|"foodmart2"
+argument_list|,
+name|foodmart
+argument_list|)
+expr_stmt|;
+name|Statement
+name|statement
+init|=
+name|connection
+operator|.
+name|createStatement
+argument_list|()
+decl_stmt|;
+name|ResultSet
+name|resultSet
+init|=
+name|statement
+operator|.
+name|executeQuery
+argument_list|(
+literal|"select count(*) from \"foodmart2\".\"time_by_day\""
+argument_list|)
+decl_stmt|;
+name|assertTrue
+argument_list|(
+name|resultSet
+operator|.
+name|next
+argument_list|()
+argument_list|)
+expr_stmt|;
+name|assertEquals
+argument_list|(
+literal|730
+argument_list|,
+name|resultSet
+operator|.
+name|getInt
+argument_list|(
+literal|1
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|resultSet
+operator|.
+name|close
+argument_list|()
+expr_stmt|;
+name|connection
+operator|.
+name|close
+argument_list|()
+expr_stmt|;
+block|}
+specifier|public
+name|void
+name|testCloneGroupBy
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|assertThat
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|FOODMART_CLONE
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select \"the_year\", count(*) as c, min(\"the_month\") as m\n"
+operator|+
+literal|"from \"foodmart2\".\"time_by_day\"\n"
+operator|+
+literal|"group by \"the_year\"\n"
+operator|+
+literal|"order by 1, 2"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"the_year=1997; C=365; M=April\n"
+operator|+
+literal|"the_year=1998; C=365; M=April\n"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** A selection of queries generated by Mondrian. */
+specifier|public
+name|void
+name|testCloneQueries
+parameter_list|()
+block|{
+name|String
+index|[]
+name|queries
+init|=
+block|{
+literal|"select count(*) from (select 1 as \"c0\" from \"salary\" as \"salary\") as \"init\""
+block|,
+literal|"EXPR$0=21252\n"
+block|,
+literal|"select count(*) from (select 1 as \"c0\" from \"salary\" as \"salary2\") as \"init\""
+block|,
+literal|"EXPR$0=21252\n"
+block|,
+literal|"select count(*) from (select 1 as \"c0\" from \"department\" as \"department\") as \"init\""
+block|,
+literal|"EXPR$0=12\n"
+block|,
+literal|"select count(*) from (select 1 as \"c0\" from \"employee\" as \"employee\") as \"init\""
+block|,
+literal|"EXPR$0=1155\n"
+block|,
+literal|"select count(*) from (select 1 as \"c0\" from \"employee_closure\" as \"employee_closure\") as \"init\""
+block|,
+literal|"EXPR$0=7179\n"
+block|,
+literal|"select count(*) from (select 1 as \"c0\" from \"position\" as \"position\") as \"init\""
+block|,
+literal|"EXPR$0=18\n"
+block|,
+literal|"select count(*) from (select 1 as \"c0\" from \"promotion\" as \"promotion\") as \"init\""
+block|,
+literal|"EXPR$0=1864\n"
+block|,
+literal|"select count(*) from (select 1 as \"c0\" from \"store\" as \"store\") as \"init\""
+block|,
+literal|"EXPR$0=25\n"
+block|,
+literal|"select count(*) from (select 1 as \"c0\" from \"product\" as \"product\") as \"init\""
+block|,
+literal|"EXPR$0=1560\n"
+block|,
+literal|"select count(*) from (select 1 as \"c0\" from \"product_class\" as \"product_class\") as \"init\""
+block|,
+literal|"EXPR$0=110\n"
+block|,
+literal|"select count(*) from (select 1 as \"c0\" from \"time_by_day\" as \"time_by_day\") as \"init\""
+block|,
+literal|"EXPR$0=730\n"
+block|,
+literal|"select count(*) from (select 1 as \"c0\" from \"customer\" as \"customer\") as \"init\""
+block|,
+literal|"EXPR$0=10281\n"
+block|,
+literal|"select count(*) from (select 1 as \"c0\" from \"sales_fact_1997\" as \"sales_fact_1997\") as \"init\""
+block|,
+literal|"EXPR$0=86837\n"
+block|,
+literal|"select count(*) from (select 1 as \"c0\" from \"inventory_fact_1997\" as \"inventory_fact_1997\") as \"init\""
+block|,
+literal|"EXPR$0=4070\n"
+block|,
+literal|"select count(*) from (select 1 as \"c0\" from \"warehouse\" as \"warehouse\") as \"init\""
+block|,
+literal|"EXPR$0=24\n"
+block|,
+literal|"select count(*) from (select 1 as \"c0\" from \"agg_c_special_sales_fact_1997\" as \"agg_c_special_sales_fact_1997\") as \"init\""
+block|,
+literal|"EXPR$0=86805\n"
+block|,
+literal|"select count(*) from (select 1 as \"c0\" from \"agg_pl_01_sales_fact_1997\" as \"agg_pl_01_sales_fact_1997\") as \"init\""
+block|,
+literal|"EXPR$0=86829\n"
+block|,
+literal|"select count(*) from (select 1 as \"c0\" from \"agg_l_05_sales_fact_1997\" as \"agg_l_05_sales_fact_1997\") as \"init\""
+block|,
+literal|"EXPR$0=86154\n"
+block|,
+literal|"select count(*) from (select 1 as \"c0\" from \"agg_g_ms_pcat_sales_fact_1997\" as \"agg_g_ms_pcat_sales_fact_1997\") as \"init\""
+block|,
+literal|"EXPR$0=2637\n"
+block|,
+literal|"select count(*) from (select 1 as \"c0\" from \"agg_c_14_sales_fact_1997\" as \"agg_c_14_sales_fact_1997\") as \"init\""
+block|,
+literal|"EXPR$0=86805\n"
+block|,
+literal|"select \"time_by_day\".\"the_year\" as \"c0\" from \"time_by_day\" as \"time_by_day\" group by \"time_by_day\".\"the_year\" order by \"time_by_day\".\"the_year\" ASC"
+block|,
+literal|"c0=1997\n"
+operator|+
+literal|"c0=1998\n"
+block|,
+literal|"select \"store\".\"store_country\" as \"c0\" from \"store\" as \"store\" where UPPER(\"store\".\"store_country\") = UPPER('USA') group by \"store\".\"store_country\" order by \"store\".\"store_country\" ASC"
+block|,
+literal|"c0=USA\n"
+block|,
+literal|"select \"store\".\"store_state\" as \"c0\" from \"store\" as \"store\" where (\"store\".\"store_country\" = 'USA') and UPPER(\"store\".\"store_state\") = UPPER('CA') group by \"store\".\"store_state\" order by \"store\".\"store_state\" ASC"
+block|,
+literal|"c0=CA\n"
+block|,
+literal|"select \"store\".\"store_city\" as \"c0\", \"store\".\"store_state\" as \"c1\" from \"store\" as \"store\" where (\"store\".\"store_state\" = 'CA' and \"store\".\"store_country\" = 'USA') and UPPER(\"store\".\"store_city\") = UPPER('Los Angeles') group by \"store\".\"store_city\", \"store\".\"store_state\" order by \"store\".\"store_city\" ASC"
+block|,
+literal|"c0=Los Angeles; c1=CA\n"
+block|,
+literal|"select \"customer\".\"country\" as \"c0\" from \"customer\" as \"customer\" where UPPER(\"customer\".\"country\") = UPPER('USA') group by \"customer\".\"country\" order by \"customer\".\"country\" ASC"
+block|,
+literal|"c0=USA\n"
+block|,
+literal|"select \"customer\".\"state_province\" as \"c0\", \"customer\".\"country\" as \"c1\" from \"customer\" as \"customer\" where (\"customer\".\"country\" = 'USA') and UPPER(\"customer\".\"state_province\") = UPPER('CA') group by \"customer\".\"state_province\", \"customer\".\"country\" order by \"customer\".\"state_province\" ASC"
+block|,
+literal|"c0=CA; c1=USA\n"
+block|,
+literal|"select \"customer\".\"city\" as \"c0\", \"customer\".\"country\" as \"c1\", \"customer\".\"state_province\" as \"c2\" from \"customer\" as \"customer\" where (\"customer\".\"country\" = 'USA' and \"customer\".\"state_province\" = 'CA' and \"customer\".\"country\" = 'USA' and \"customer\".\"state_province\" = 'CA' and \"customer\".\"country\" = 'USA') and UPPER(\"customer\".\"city\") = UPPER('Los Angeles') group by \"customer\".\"city\", \"customer\".\"country\", \"customer\".\"state_province\" order by \"customer\".\"city\" ASC"
+block|,
+literal|"c0=Los Angeles; c1=USA; c2=CA\n"
+block|,
+literal|"select \"store\".\"store_country\" as \"c0\" from \"store\" as \"store\" where UPPER(\"store\".\"store_country\") = UPPER('Gender') group by \"store\".\"store_country\" order by \"store\".\"store_country\" ASC"
+block|,
+literal|""
+block|,
+literal|"select \"store\".\"store_type\" as \"c0\" from \"store\" as \"store\" where UPPER(\"store\".\"store_type\") = UPPER('Gender') group by \"store\".\"store_type\" order by \"store\".\"store_type\" ASC"
+block|,
+literal|""
+block|,
+literal|"select \"product_class\".\"product_family\" as \"c0\" from \"product\" as \"product\", \"product_class\" as \"product_class\" where \"product\".\"product_class_id\" = \"product_class\".\"product_class_id\" and UPPER(\"product_class\".\"product_family\") = UPPER('Gender') group by \"product_class\".\"product_family\" order by \"product_class\".\"product_family\" ASC"
+block|,
+literal|""
+block|,
+literal|"select \"promotion\".\"media_type\" as \"c0\" from \"promotion\" as \"promotion\" where UPPER(\"promotion\".\"media_type\") = UPPER('Gender') group by \"promotion\".\"media_type\" order by \"promotion\".\"media_type\" ASC"
+block|,
+literal|""
+block|,
+literal|"select \"promotion\".\"promotion_name\" as \"c0\" from \"promotion\" as \"promotion\" where UPPER(\"promotion\".\"promotion_name\") = UPPER('Gender') group by \"promotion\".\"promotion_name\" order by \"promotion\".\"promotion_name\" ASC"
+block|,
+literal|""
+block|,
+literal|"select \"promotion\".\"media_type\" as \"c0\" from \"promotion\" as \"promotion\" where UPPER(\"promotion\".\"media_type\") = UPPER('No Media') group by \"promotion\".\"media_type\" order by \"promotion\".\"media_type\" ASC"
+block|,
+literal|"c0=No Media\n"
+block|,
+literal|"select \"promotion\".\"media_type\" as \"c0\" from \"promotion\" as \"promotion\" group by \"promotion\".\"media_type\" order by \"promotion\".\"media_type\" ASC"
+block|,
+literal|"c0=Bulk Mail\n"
+operator|+
+literal|"c0=Cash Register Handout\n"
+operator|+
+literal|"c0=Daily Paper\n"
+operator|+
+literal|"c0=Daily Paper, Radio\n"
+operator|+
+literal|"c0=Daily Paper, Radio, TV\n"
+operator|+
+literal|"c0=In-Store Coupon\n"
+operator|+
+literal|"c0=No Media\n"
+operator|+
+literal|"c0=Product Attachment\n"
+operator|+
+literal|"c0=Radio\n"
+operator|+
+literal|"c0=Street Handout\n"
+operator|+
+literal|"c0=Sunday Paper\n"
+operator|+
+literal|"c0=Sunday Paper, Radio\n"
+operator|+
+literal|"c0=Sunday Paper, Radio, TV\n"
+operator|+
+literal|"c0=TV\n"
+block|,
+literal|"select count(distinct \"the_year\") from \"time_by_day\""
+block|,
+comment|// TODO: "EXPR$0=2\n",
+literal|"select \"time_by_day\".\"the_year\" as \"c0\", sum(\"sales_fact_1997\".\"unit_sales\") as \"m0\" from \"time_by_day\" as \"time_by_day\", \"sales_fact_1997\" as \"sales_fact_1997\" where \"sales_fact_1997\".\"time_id\" = \"time_by_day\".\"time_id\" and \"time_by_day\".\"the_year\" = 1997 group by \"time_by_day\".\"the_year\""
+block|,
+comment|// TODO: "c0=1997; m0=266773\n",
+literal|"select \"time_by_day\".\"the_year\" as \"c0\", \"promotion\".\"media_type\" as \"c1\", sum(\"sales_fact_1997\".\"unit_sales\") as \"m0\" from \"time_by_day\" as \"time_by_day\", \"sales_fact_1997\" as \"sales_fact_1997\", \"promotion\" as \"promotion\" where \"sales_fact_1997\".\"time_id\" = \"time_by_day\".\"time_id\" and \"time_by_day\".\"the_year\" = 1997 and \"sales_fact_1997\".\"promotion_id\" = \"promotion\".\"promotion_id\" group by \"time_by_day\".\"the_year\", \"promotion\".\"media_type\""
+block|,
+comment|// TODO: "c0=1997; c1=Bulk Mail; m0=4320\n" etc,
+block|}
+decl_stmt|;
+name|OptiqAssert
+operator|.
+name|AssertThat
+name|with
+init|=
+name|OptiqAssert
+operator|.
+name|assertThat
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|FOODMART_CLONE
+argument_list|)
+decl_stmt|;
+for|for
+control|(
+name|int
+name|i
+init|=
+literal|0
+init|;
+name|i
+operator|<
+name|queries
+operator|.
+name|length
+condition|;
+name|i
+operator|++
+control|)
+block|{
+name|String
+name|query
+init|=
+name|queries
+index|[
+name|i
+index|]
+decl_stmt|;
+if|if
+condition|(
+name|i
+operator|+
+literal|1
+operator|<
+name|queries
+operator|.
+name|length
+operator|&&
+name|queries
+index|[
+name|i
+operator|+
+literal|1
+index|]
+operator|!=
+literal|null
+operator|&&
+operator|!
+name|queries
+index|[
+name|i
+operator|+
+literal|1
+index|]
+operator|.
+name|startsWith
+argument_list|(
+literal|"select"
+argument_list|)
+condition|)
+block|{
+name|String
+name|expected
+init|=
+name|queries
+index|[
+operator|++
+name|i
+index|]
+decl_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+else|else
+block|{
+name|with
+operator|.
+name|query
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|runs
+argument_list|()
+expr_stmt|;
+block|}
+block|}
 block|}
 specifier|public
 specifier|static

@@ -60,8 +60,14 @@ block|{
 name|assertThat
 argument_list|()
 operator|.
-name|inJdbcFoodmart2
-argument_list|()
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|JDBC_FOODMART2
+argument_list|)
 operator|.
 name|query
 argument_list|(
