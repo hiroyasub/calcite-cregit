@@ -16,61 +16,46 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * Optiq JDBC driver.  */
+comment|/**  * Version information for Optiq JDBC Driver.  */
 end_comment
 
 begin_class
-specifier|public
 class|class
-name|Driver
-extends|extends
-name|UnregisteredDriver
-block|{
-specifier|public
-specifier|static
-specifier|final
-name|String
-name|CONNECT_STRING_PREFIX
-init|=
-literal|"jdbc:optiq:"
-decl_stmt|;
-static|static
-block|{
-operator|new
-name|Driver
-argument_list|()
-operator|.
-name|register
-argument_list|()
-expr_stmt|;
-block|}
-annotation|@
-name|Override
-specifier|protected
-name|String
-name|getConnectStringPrefix
-parameter_list|()
-block|{
-return|return
-name|CONNECT_STRING_PREFIX
-return|;
-block|}
-specifier|protected
-name|DriverVersion
-name|createDriverVersion
-parameter_list|()
-block|{
-return|return
-operator|new
 name|OptiqDriverVersion
-argument_list|()
-return|;
+extends|extends
+name|DriverVersion
+block|{
+comment|/** Creates an OptiqDriverVersion. */
+name|OptiqDriverVersion
+parameter_list|()
+block|{
+name|super
+argument_list|(
+literal|"Optiq JDBC Driver"
+argument_list|,
+literal|"0.1"
+argument_list|,
+literal|"Optiq"
+argument_list|,
+literal|"0.1"
+argument_list|,
+literal|true
+argument_list|,
+literal|0
+argument_list|,
+literal|1
+argument_list|,
+literal|0
+argument_list|,
+literal|1
+argument_list|)
+expr_stmt|;
 block|}
 block|}
 end_class
 
 begin_comment
-comment|// End Driver.java
+comment|// End OptiqDriverVersion.java
 end_comment
 
 end_unit

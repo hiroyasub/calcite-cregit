@@ -277,8 +277,9 @@ name|connection
 operator|.
 name|driver
 operator|.
-name|getName
-argument_list|()
+name|version
+operator|.
+name|name
 return|;
 block|}
 specifier|public
@@ -293,8 +294,9 @@ name|connection
 operator|.
 name|driver
 operator|.
-name|getVersion
-argument_list|()
+name|version
+operator|.
+name|versionString
 return|;
 block|}
 specifier|public

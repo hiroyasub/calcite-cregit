@@ -90,7 +90,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Implementation of Optiq JDBC driver that does not register itself.  *  *<p>You can easily create a "vanity driver" that recognizes its own  * URL prefix as a sub-class of this class. Per the JDBC specification it  * must register itself.</p>  */
+comment|/**  * Implementation of Optiq JDBC driver that does not register itself.  *  *<p>You can easily create a "vanity driver" that recognizes its own  * URL prefix as a sub-class of this class. Per the JDBC specification it  * must register itself when the class is loaded.</p>  *  *<p>Derived classes must implement {@link #createDriverVersion()} and  * {@link #getConnectStringPrefix()}, and may override  * {@link #createFactory()}.</p>  */
 end_comment
 
 begin_class
@@ -108,10 +108,6 @@ block|{
 specifier|final
 name|DriverVersion
 name|version
-init|=
-operator|new
-name|DriverVersion
-argument_list|()
 decl_stmt|;
 specifier|final
 name|Factory
@@ -128,20 +124,85 @@ operator|=
 name|createFactory
 argument_list|()
 expr_stmt|;
+name|this
+operator|.
+name|version
+operator|=
+name|createDriverVersion
+argument_list|()
+expr_stmt|;
 block|}
-specifier|private
-specifier|static
+comment|/**      * Creates a factory for JDBC objects (connection, statement).      * Called from the driver constructor.      *      *<p>The default implementation calls {@link JdbcVersion#current},      * then {@link #getFactoryClassName} with that version,      * then passes that class name to {@link #instantiateFactory(String)}.      * This approach is recommended it does not include in the code references      * to classes that may not be instantiable in all JDK versions.      * But drivers are free to do it their own way.</p>      *      * @return JDBC object factory      */
+specifier|protected
 name|Factory
 name|createFactory
 parameter_list|()
 block|{
-specifier|final
+return|return
+name|instantiateFactory
+argument_list|(
+name|getFactoryClassName
+argument_list|(
+name|JdbcVersion
+operator|.
+name|current
+argument_list|()
+argument_list|)
+argument_list|)
+return|;
+block|}
+comment|/**      * Returns the name of a class to be factory for JDBC objects      * (connection, statement) appropriate for the current JDBC version.      */
+specifier|protected
+name|String
+name|getFactoryClassName
+parameter_list|(
+name|JdbcVersion
+name|jdbcVersion
+parameter_list|)
+block|{
+switch|switch
+condition|(
+name|jdbcVersion
+condition|)
+block|{
+case|case
+name|JDBC_30
+case|:
+return|return
+literal|"net.hydromatic.optiq.jdbc.FactoryJdbc3Impl"
+return|;
+case|case
+name|JDBC_40
+case|:
+return|return
+literal|"net.hydromatic.optiq.jdbc.FactoryJdbc4Impl"
+return|;
+case|case
+name|JDBC_41
+case|:
+default|default:
+return|return
+literal|"net.hydromatic.optiq.jdbc.FactoryJdbc41"
+return|;
+block|}
+block|}
+comment|/**      * Creates an object describing the name and version of this driver.      * Called from the driver constructor.      */
+specifier|protected
+specifier|abstract
+name|DriverVersion
+name|createDriverVersion
+parameter_list|()
+function_decl|;
+comment|/** Helper method for creating factories. */
+specifier|protected
+specifier|static
+name|Factory
+name|instantiateFactory
+parameter_list|(
 name|String
 name|factoryClassName
-init|=
-name|getFactoryClassName
-argument_list|()
-decl_stmt|;
+parameter_list|)
+block|{
 try|try
 block|{
 specifier|final
@@ -209,63 +270,6 @@ argument_list|(
 name|e
 argument_list|)
 throw|;
-block|}
-block|}
-specifier|private
-specifier|static
-name|String
-name|getFactoryClassName
-parameter_list|()
-block|{
-try|try
-block|{
-comment|// If java.sql.PseudoColumnUsage is present, we are running JDBC 4.1
-comment|// or later.
-name|Class
-operator|.
-name|forName
-argument_list|(
-literal|"java.sql.PseudoColumnUsage"
-argument_list|)
-expr_stmt|;
-return|return
-literal|"net.hydromatic.optiq.jdbc.FactoryJdbc41"
-return|;
-block|}
-catch|catch
-parameter_list|(
-name|ClassNotFoundException
-name|e
-parameter_list|)
-block|{
-comment|// java.sql.PseudoColumnUsage is not present. This means we are
-comment|// running JDBC 4.0 or earlier.
-try|try
-block|{
-name|Class
-operator|.
-name|forName
-argument_list|(
-literal|"java.sql.Wrapper"
-argument_list|)
-expr_stmt|;
-return|return
-literal|"net.hydromatic.optiq.jdbc.FactoryJdbc4Impl"
-return|;
-block|}
-catch|catch
-parameter_list|(
-name|ClassNotFoundException
-name|e2
-parameter_list|)
-block|{
-comment|// java.sql.Wrapper is not present. This means we are running
-comment|// JDBC 3.0 or earlier (probably JDK 1.5). Load the JDBC 3.0
-comment|// factory.
-return|return
-literal|"net.hydromatic.optiq.jdbc.FactoryJdbc3Impl"
-return|;
-block|}
 block|}
 block|}
 specifier|public
@@ -525,29 +529,18 @@ literal|""
 argument_list|)
 return|;
 block|}
-comment|/**      * Returns the driver name. Not in the JDBC API.      *      * @return Driver name      */
-name|String
-name|getName
+comment|/**      * Returns the driver version object. Not in the JDBC API.      *      * @return Driver version      */
+specifier|public
+name|DriverVersion
+name|getDriverVersion
 parameter_list|()
 block|{
 return|return
 name|version
-operator|.
-name|name
-return|;
-block|}
-comment|/**      * Returns the driver version. Not in the JDBC API.      *      * @return Driver version      */
-name|String
-name|getVersion
-parameter_list|()
-block|{
-return|return
-name|version
-operator|.
-name|versionString
 return|;
 block|}
 specifier|public
+specifier|final
 name|int
 name|getMajorVersion
 parameter_list|()
@@ -559,6 +552,7 @@ name|majorVersion
 return|;
 block|}
 specifier|public
+specifier|final
 name|int
 name|getMinorVersion
 parameter_list|()
@@ -575,7 +569,9 @@ name|jdbcCompliant
 parameter_list|()
 block|{
 return|return
-literal|true
+name|version
+operator|.
+name|jdbcCompliant
 return|;
 block|}
 comment|/**      * Registers this driver with the driver manager.      */
@@ -618,6 +614,81 @@ name|toString
 argument_list|()
 argument_list|)
 expr_stmt|;
+block|}
+block|}
+comment|/** JDBC version. */
+specifier|protected
+enum|enum
+name|JdbcVersion
+block|{
+comment|/** Unknown JDBC version. */
+name|JDBC_UNKNOWN
+block|,
+comment|/** JDBC version 3.0. Generally associated with JDK 1.5. */
+name|JDBC_30
+block|,
+comment|/** JDBC version 4.0. Generally associated with JDK 1.6. */
+name|JDBC_40
+block|,
+comment|/** JDBC version 4.1. Generally associated with JDK 1.7. */
+name|JDBC_41
+block|;
+comment|/** Deduces the current JDBC version. */
+specifier|protected
+specifier|static
+name|JdbcVersion
+name|current
+parameter_list|()
+block|{
+try|try
+block|{
+comment|// If java.sql.PseudoColumnUsage is present, we are running JDBC
+comment|// 4.1 or later.
+name|Class
+operator|.
+name|forName
+argument_list|(
+literal|"java.sql.PseudoColumnUsage"
+argument_list|)
+expr_stmt|;
+return|return
+name|JDBC_41
+return|;
+block|}
+catch|catch
+parameter_list|(
+name|ClassNotFoundException
+name|e
+parameter_list|)
+block|{
+comment|// java.sql.PseudoColumnUsage is not present. This means we are
+comment|// running JDBC 4.0 or earlier.
+try|try
+block|{
+name|Class
+operator|.
+name|forName
+argument_list|(
+literal|"java.sql.Wrapper"
+argument_list|)
+expr_stmt|;
+return|return
+name|JDBC_40
+return|;
+block|}
+catch|catch
+parameter_list|(
+name|ClassNotFoundException
+name|e2
+parameter_list|)
+block|{
+comment|// java.sql.Wrapper is not present. This means we are
+comment|// running JDBC 3.0 or earlier (probably JDK 1.5).
+return|return
+name|JDBC_30
+return|;
+block|}
+block|}
 block|}
 block|}
 block|}
