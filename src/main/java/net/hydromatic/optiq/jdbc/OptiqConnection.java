@@ -69,6 +69,16 @@ begin_import
 import|import
 name|java
 operator|.
+name|sql
+operator|.
+name|SQLException
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
 name|util
 operator|.
 name|Properties
@@ -102,6 +112,16 @@ comment|/**      * Returns an instance of the connection properties.      *     
 name|Properties
 name|getProperties
 parameter_list|()
+function_decl|;
+comment|// in java.sql.Connection from JDK 1.7, but declare here to allow other JDKs
+name|void
+name|setSchema
+parameter_list|(
+name|String
+name|schema
+parameter_list|)
+throws|throws
+name|SQLException
 function_decl|;
 block|}
 end_interface
