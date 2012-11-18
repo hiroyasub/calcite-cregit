@@ -345,7 +345,7 @@ case|:
 return|return
 name|resultSet
 operator|.
-name|getBoolean
+name|getInt
 argument_list|(
 name|i
 operator|+
