@@ -308,31 +308,13 @@ name|nodeType
 argument_list|)
 expr_stmt|;
 block|}
-name|RelDataType
-index|[]
-name|rightTypes
-init|=
-name|rightTypeList
-operator|.
-name|toArray
-argument_list|(
-operator|new
-name|RelDataType
-index|[
-name|rightTypeList
-operator|.
-name|size
-argument_list|()
-index|]
-argument_list|)
-decl_stmt|;
 name|rightType
 operator|=
 name|typeFactory
 operator|.
 name|leastRestrictive
 argument_list|(
-name|rightTypes
+name|rightTypeList
 argument_list|)
 expr_stmt|;
 comment|// First check that the expressions in the IN list are compatible
@@ -461,20 +443,17 @@ argument_list|,
 name|call
 argument_list|)
 argument_list|,
-operator|new
-name|RelDataType
-index|[]
-block|{
+name|Arrays
+operator|.
+name|asList
+argument_list|(
 name|leftRowType
-operator|,
+argument_list|,
 name|rightRowType
-block|}
-block_content|)
-block|)
-end_class
-
-begin_block
-unit|)
+argument_list|)
+argument_list|)
+argument_list|)
+condition|)
 block|{
 throw|throw
 name|validator
@@ -502,17 +481,8 @@ argument_list|)
 argument_list|)
 throw|;
 block|}
-end_block
-
-begin_comment
 comment|// Result is a boolean, nullable if there are any nullable types
-end_comment
-
-begin_comment
 comment|// on either side.
-end_comment
-
-begin_decl_stmt
 name|RelDataType
 name|type
 init|=
@@ -525,9 +495,6 @@ operator|.
 name|BOOLEAN
 argument_list|)
 decl_stmt|;
-end_decl_stmt
-
-begin_if_stmt
 if|if
 condition|(
 name|leftType
@@ -553,16 +520,11 @@ literal|true
 argument_list|)
 expr_stmt|;
 block|}
-end_if_stmt
-
-begin_return
 return|return
 name|type
 return|;
-end_return
-
-begin_function
-unit|}      public
+block|}
+specifier|public
 name|boolean
 name|argumentMustBeScalar
 parameter_list|(
@@ -582,10 +544,10 @@ operator|==
 literal|0
 return|;
 block|}
-end_function
+block|}
+end_class
 
 begin_comment
-unit|}
 comment|// End SqlInOperator.java
 end_comment
 

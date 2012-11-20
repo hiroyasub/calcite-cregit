@@ -15,6 +15,16 @@ end_package
 
 begin_import
 import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|eigenbase
@@ -79,8 +89,10 @@ block|{
 comment|//~ Instance fields --------------------------------------------------------
 specifier|private
 specifier|final
+name|List
+argument_list|<
 name|RelDataType
-index|[]
+argument_list|>
 name|types
 decl_stmt|;
 specifier|private
@@ -95,8 +107,10 @@ parameter_list|(
 name|SqlOperatorBinding
 name|delegate
 parameter_list|,
+name|List
+argument_list|<
 name|RelDataType
-index|[]
+argument_list|>
 name|types
 parameter_list|)
 block|{
@@ -127,8 +141,10 @@ parameter_list|,
 name|SqlOperator
 name|operator
 parameter_list|,
+name|List
+argument_list|<
 name|RelDataType
-index|[]
+argument_list|>
 name|types
 parameter_list|)
 block|{
@@ -156,8 +172,10 @@ parameter_list|,
 name|SqlOperator
 name|operator
 parameter_list|,
+name|List
+argument_list|<
 name|RelDataType
-index|[]
+argument_list|>
 name|types
 parameter_list|)
 block|{
@@ -191,7 +209,8 @@ block|{
 return|return
 name|types
 operator|.
-name|length
+name|size
+argument_list|()
 return|;
 block|}
 comment|// implement SqlOperatorBinding
@@ -205,9 +224,11 @@ parameter_list|)
 block|{
 return|return
 name|types
-index|[
+operator|.
+name|get
+argument_list|(
 name|ordinal
-index|]
+argument_list|)
 return|;
 block|}
 specifier|public

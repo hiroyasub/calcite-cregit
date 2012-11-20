@@ -622,7 +622,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**      * Rewrites a call to this operator. Some operators are implemented as      * trivial rewrites (e.g. NULLIF becomes CASE). However, we don't do this at      * createCall time because we want to preserve the original SQL syntax as      * much as possible; instead, we do this before the call is validated (so      * the trivial operator doesn't need its own implementation of type      * derivation methods). The default implementation is to just return the      * original call without any rewrite.      *      * @param validator      * @param call to be rewritten      *      * @return rewritten call      */
+comment|/**      * Rewrites a call to this operator. Some operators are implemented as      * trivial rewrites (e.g. NULLIF becomes CASE). However, we don't do this at      * createCall time because we want to preserve the original SQL syntax as      * much as possible; instead, we do this before the call is validated (so      * the trivial operator doesn't need its own implementation of type      * derivation methods). The default implementation is to just return the      * original call without any rewrite.      *      * @param validator Validator      * @param call Call to be rewritten      *      * @return rewritten call      */
 specifier|public
 name|SqlNode
 name|rewriteCall
@@ -1214,7 +1214,12 @@ name|typeFactory
 argument_list|,
 name|this
 argument_list|,
+name|Arrays
+operator|.
+name|asList
+argument_list|(
 name|operandTypes
+argument_list|)
 argument_list|)
 argument_list|)
 return|;

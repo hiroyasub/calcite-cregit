@@ -17,6 +17,16 @@ end_package
 
 begin_import
 import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|eigenbase
@@ -178,8 +188,10 @@ parameter_list|(
 name|RelDataTypeFactory
 name|typeFactory
 parameter_list|,
+name|List
+argument_list|<
 name|RelDataType
-index|[]
+argument_list|>
 name|argTypes
 parameter_list|)
 block|{
@@ -204,8 +216,10 @@ name|throwOnFailure
 parameter_list|)
 block|{
 specifier|final
+name|List
+argument_list|<
 name|RelDataType
-index|[]
+argument_list|>
 name|argTypes
 init|=
 name|SqlTypeUtil

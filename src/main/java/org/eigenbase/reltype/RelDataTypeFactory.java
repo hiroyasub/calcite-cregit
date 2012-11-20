@@ -217,13 +217,15 @@ name|Charset
 name|getDefaultCharset
 parameter_list|()
 function_decl|;
-comment|/**      * Returns the most general of a set of types (that is, one type to which      * they can all be cast), or null if conversion is not possible. The result      * may be a new type which is less restrictive than any of the input types,      * e.g. leastRestrictive(INT, NUMERIC(3,2)) could be NUMERIC(12,2).      *      * @param types input types to be unioned      *      * @return canonical union type descriptor      *      * @pre types != null      * @pre types.length>= 1      */
+comment|/**      * Returns the most general of a set of types (that is, one type to which      * they can all be cast), or null if conversion is not possible. The result      * may be a new type which is less restrictive than any of the input types,      * e.g. leastRestrictive(INT, NUMERIC(3,2)) could be NUMERIC(12,2).      *      * @param types input types to be combined using union      *      * @return canonical union type descriptor      *      * @pre types != null      * @pre types.length>= 1      */
 specifier|public
 name|RelDataType
 name|leastRestrictive
 parameter_list|(
+name|List
+argument_list|<
 name|RelDataType
-index|[]
+argument_list|>
 name|types
 parameter_list|)
 function_decl|;
