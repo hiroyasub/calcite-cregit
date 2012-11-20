@@ -527,6 +527,24 @@ index|]
 argument_list|)
 return|;
 block|}
+specifier|static
+name|Type
+name|componentType
+parameter_list|(
+name|Type
+name|type
+parameter_list|)
+block|{
+return|return
+name|toClass
+argument_list|(
+name|type
+argument_list|)
+operator|.
+name|getComponentType
+argument_list|()
+return|;
+block|}
 comment|/**      * Boxes a type, if it is primitive, and returns the type name.      * The type is abbreviated if it is in the "java.lang" package.      *      *<p>For example,      * boxClassName(int) returns "Integer";      * boxClassName(List&lt;String&gt;) returns "List&lt;String&gt;"</p>      *      * @param type Type      * @return Class name      */
 specifier|static
 name|String

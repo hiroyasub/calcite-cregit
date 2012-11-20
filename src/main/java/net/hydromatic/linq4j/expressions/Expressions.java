@@ -4377,12 +4377,17 @@ name|type
 operator|!=
 literal|null
 assert|;
-throw|throw
-name|Extensions
-operator|.
-name|todo
-argument_list|()
-throw|;
+return|return
+operator|new
+name|UnaryExpression
+argument_list|(
+name|expressionType
+argument_list|,
+name|type
+argument_list|,
+name|expression
+argument_list|)
+return|;
 block|}
 comment|/** Creates a MemberMemberBinding that represents the recursive      * initialization of members of a field or property. */
 specifier|public
