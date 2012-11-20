@@ -1837,7 +1837,7 @@ literal|false
 argument_list|)
 return|;
 block|}
-comment|/**  * Casts a decimal's integer representation to a decimal node. If the  * expression is not the expected integer type, then it is casted first.  *  *<p>An overflow check may be requested to ensure the internal value  * does not exceed the maximum value of the decimal type.  *  * @param value integer representation of decimal  * @param type type integer will be reinterpreted as  * @param checkOverflow indicates whether an overflow check is required  * when reinterpreting this particular value as the decimal type. A  * check usually not required for arithmetic, but is often required for  * rounding and explicit casts.  *  * @return the integer reinterpreted as an opaque decimal type  */
+comment|/**      * Casts a decimal's integer representation to a decimal node. If the      * expression is not the expected integer type, then it is casted first.      *      *<p>An overflow check may be requested to ensure the internal value      * does not exceed the maximum value of the decimal type.      *      * @param value integer representation of decimal      * @param type type integer will be reinterpreted as      * @param checkOverflow indicates whether an overflow check is required      * when reinterpreting this particular value as the decimal type. A      * check usually not required for arithmetic, but is often required for      * rounding and explicit casts.      *      * @return the integer reinterpreted as an opaque decimal type      */
 specifier|public
 name|RexNode
 name|encodeIntervalOrDecimal
@@ -1890,7 +1890,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**  * Retrieves an interval or decimal node's integer representation  *  * @param node the interval or decimal value as an opaque type  *  * @return an integer representation of the decimal value  */
+comment|/**      * Retrieves an interval or decimal node's integer representation      *      * @param node the interval or decimal value as an opaque type      *      * @return an integer representation of the decimal value      */
 specifier|public
 name|RexNode
 name|decodeIntervalOrDecimal

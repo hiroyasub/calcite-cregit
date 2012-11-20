@@ -5243,12 +5243,18 @@ name|RexCall
 operator|)
 name|condition
 decl_stmt|;
-if|if
-condition|(
+specifier|final
+name|SqlOperator
+name|operator
+init|=
 name|call
 operator|.
 name|getOperator
 argument_list|()
+decl_stmt|;
+if|if
+condition|(
+name|operator
 operator|==
 name|SqlStdOperatorTable
 operator|.
@@ -5282,16 +5288,21 @@ expr_stmt|;
 block|}
 return|return;
 block|}
+comment|// "=" and "IS NOT DISTINCT FROM" are the same except for how they
+comment|// treat nulls. TODO: record null treatment
 if|if
 condition|(
-name|call
-operator|.
-name|getOperator
-argument_list|()
+name|operator
 operator|==
 name|SqlStdOperatorTable
 operator|.
 name|equalsOperator
+operator|||
+name|operator
+operator|==
+name|SqlStdOperatorTable
+operator|.
+name|isNotDistinctFromOperator
 condition|)
 block|{
 specifier|final
