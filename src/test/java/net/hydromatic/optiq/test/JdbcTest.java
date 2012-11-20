@@ -2190,8 +2190,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|// result set is empty (for now)
-name|assertFalse
+name|assertTrue
 argument_list|(
 name|resultSet
 operator|.
@@ -2199,6 +2198,7 @@ name|next
 argument_list|()
 argument_list|)
 expr_stmt|;
+comment|// there's something
 name|resultSet
 operator|.
 name|close
