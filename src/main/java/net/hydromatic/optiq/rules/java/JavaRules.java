@@ -2380,9 +2380,9 @@ decl_stmt|;
 name|Expression
 name|input
 init|=
-name|Expressions
+name|RexToLixTranslator
 operator|.
-name|convert_
+name|convert
 argument_list|(
 name|Expressions
 operator|.
