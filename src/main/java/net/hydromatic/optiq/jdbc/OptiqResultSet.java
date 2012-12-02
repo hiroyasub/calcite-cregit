@@ -794,6 +794,8 @@ return|return
 name|getAccessor
 argument_list|(
 name|columnIndex
+operator|-
+literal|1
 argument_list|)
 operator|.
 name|getDouble

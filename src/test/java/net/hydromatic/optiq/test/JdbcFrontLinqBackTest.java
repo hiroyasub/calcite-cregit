@@ -439,6 +439,30 @@ literal|"Column 'EMPID' not found in any table"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for https://github.com/julianhyde/optiq/issues/9. */
+specifier|public
+name|void
+name|testWhereOr
+parameter_list|()
+block|{
+name|assertThat
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"select * from \"hr\".\"emps\"\n"
+operator|+
+literal|"where (\"empid\" = 100 or \"empid\" = 200)\n"
+operator|+
+literal|"and \"deptno\" = 10"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"empid=100; deptno=10; name=Bill\n"
+argument_list|)
+expr_stmt|;
+block|}
 specifier|public
 name|void
 name|testWhereLike
