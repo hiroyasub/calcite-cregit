@@ -380,6 +380,41 @@ block|}
 argument_list|)
 expr_stmt|;
 block|}
+specifier|public
+name|void
+name|testCase
+parameter_list|()
+block|{
+name|assertThat
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|JDBC_FOODMART2
+argument_list|)
+operator|.
+name|withSchema
+argument_list|(
+literal|"foodmart"
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select case when \"sales_fact_1997\".\"promotion_id\" = 1 then 0\n"
+operator|+
+literal|"                        else \"sales_fact_1997\".\"store_sales\" end as \"c0\" from \"sales_fact_1997\" as \"sales_fact_1997\""
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"xxx"
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 end_class
 

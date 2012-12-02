@@ -1219,6 +1219,38 @@ parameter_list|)
 block|{
 if|if
 condition|(
+name|exp
+operator|instanceof
+name|RexLiteral
+condition|)
+block|{
+name|RexLiteral
+name|literal
+init|=
+operator|(
+name|RexLiteral
+operator|)
+name|exp
+decl_stmt|;
+return|return
+name|makeLiteral
+argument_list|(
+name|literal
+operator|.
+name|getValue
+argument_list|()
+argument_list|,
+name|type
+argument_list|,
+name|literal
+operator|.
+name|getTypeName
+argument_list|()
+argument_list|)
+return|;
+block|}
+if|else if
+condition|(
 name|SqlTypeUtil
 operator|.
 name|isInterval
@@ -2314,6 +2346,11 @@ condition|)
 block|{
 comment|// Character literals must have a charset and collation. Populate
 comment|// from the type if necessary.
+assert|assert
+name|o
+operator|instanceof
+name|NlsString
+assert|;
 name|NlsString
 name|nlsString
 init|=
