@@ -1829,7 +1829,7 @@ block|}
 return|;
 block|}
 specifier|static
-name|Connection
+name|OptiqConnection
 name|getConnectionWithHrFoodmart
 parameter_list|()
 throws|throws
@@ -1905,7 +1905,7 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 return|return
-name|connection
+name|optiqConnection
 return|;
 block|}
 comment|/**      * Creates a connection with a given query provider. If provider is null,      * uses the connection as its own provider. The connection contains a      * schema called "foodmart" backed by a JDBC connection to MySQL.      *      * @param queryProvider Query provider      * @param withClone Whether to create a "foodmart2" schema as in-memory      *     clone      * @return Connection      * @throws ClassNotFoundException      * @throws SQLException      */

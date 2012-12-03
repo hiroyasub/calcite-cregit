@@ -782,7 +782,7 @@ specifier|public
 interface|interface
 name|ConnectionFactory
 block|{
-name|Connection
+name|OptiqConnection
 name|createConnection
 parameter_list|()
 throws|throws
@@ -816,7 +816,7 @@ name|config
 expr_stmt|;
 block|}
 specifier|public
-name|Connection
+name|OptiqConnection
 name|createConnection
 parameter_list|()
 throws|throws
@@ -918,7 +918,7 @@ name|factory
 expr_stmt|;
 block|}
 specifier|public
-name|Connection
+name|OptiqConnection
 name|createConnection
 parameter_list|()
 throws|throws
@@ -969,13 +969,13 @@ block|}
 annotation|@
 name|Override
 specifier|public
-name|Connection
+name|OptiqConnection
 name|createConnection
 parameter_list|()
 throws|throws
 name|Exception
 block|{
-name|Connection
+name|OptiqConnection
 name|connection
 init|=
 name|super
