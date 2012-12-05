@@ -1151,6 +1151,8 @@ name|map
 operator|.
 name|size
 argument_list|()
+operator|-
+literal|1
 argument_list|)
 decl_stmt|;
 return|return
