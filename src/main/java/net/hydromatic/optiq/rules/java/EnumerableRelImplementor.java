@@ -112,7 +112,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Subclass of {@link RelImplementor} for relational operators  * of {@link org.eigenbase.relopt.CallingConvention#ENUMERABLE} calling  * convention.  *  * @author jhyde  */
+comment|/**  * Subclass of {@link RelImplementor} for relational operators  * of {@link JavaRules#CONVENTION} calling  * convention.  *  * @author jhyde  */
 end_comment
 
 begin_class

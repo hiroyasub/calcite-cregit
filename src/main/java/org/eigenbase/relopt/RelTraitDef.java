@@ -62,7 +62,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * RelTraitDef represents a class of {@link RelTrait}s. Implementations of  * RelTraitDef may be singletons under the following conditions:  *  *<ol>  *<li>if the set of all possible associated RelTraits is finite and fixed (e.g.  * all RelTraits for this RelTraitDef are known at compile time). For example,  * the CallingConvention trait meets this requirement, because CallingConvention  * is effectively an enumeration.</li>  *<li>Either  *  *<ul>  *<li> {@link #canConvert(RelOptPlanner, RelTrait, RelTrait)} and {@link  * #convert(RelOptPlanner, RelNode, RelTrait, boolean)} do not require  * planner-instance-specific information,<b>or</b></li>  *<li>the RelTraitDef manages separate sets of conversion data internally. See  * {@link CallingConventionTraitDef} for an example of this.</li>  *</ul>  *</li>  *</ol>  *  *<p>Otherwise, a new instance of RelTraitDef must be constructed and  * registered with each new planner instantiated.</p>  *  * @author Stephan Zuercher  * @version $Id$  */
+comment|/**  * RelTraitDef represents a class of {@link RelTrait}s. Implementations of  * RelTraitDef may be singletons under the following conditions:  *  *<ol>  *<li>if the set of all possible associated RelTraits is finite and fixed (e.g.  * all RelTraits for this RelTraitDef are known at compile time). For example,  * the CallingConvention trait meets this requirement, because CallingConvention  * is effectively an enumeration.</li>  *<li>Either  *  *<ul>  *<li> {@link #canConvert(RelOptPlanner, RelTrait, RelTrait)} and {@link  * #convert(RelOptPlanner, RelNode, RelTrait, boolean)} do not require  * planner-instance-specific information,<b>or</b></li>  *<li>the RelTraitDef manages separate sets of conversion data internally. See  * {@link ConventionTraitDef} for an example of this.</li>  *</ul>  *</li>  *</ol>  *  *<p>Otherwise, a new instance of RelTraitDef must be constructed and  * registered with each new planner instantiated.</p>  *  * @author Stephan Zuercher  * @version $Id$  */
 end_comment
 
 begin_class
@@ -70,6 +70,11 @@ specifier|public
 specifier|abstract
 class|class
 name|RelTraitDef
+parameter_list|<
+name|T
+extends|extends
+name|RelTrait
+parameter_list|>
 block|{
 comment|//~ Instance fields --------------------------------------------------------
 specifier|private
@@ -112,6 +117,9 @@ comment|/**      * @return the specific RelTrait type associated with this RelTr
 specifier|public
 specifier|abstract
 name|Class
+argument_list|<
+name|T
+argument_list|>
 name|getTraitClass
 parameter_list|()
 function_decl|;
@@ -133,7 +141,6 @@ name|trait
 parameter_list|)
 block|{
 assert|assert
-operator|(
 name|getTraitClass
 argument_list|()
 operator|.
@@ -141,7 +148,6 @@ name|isInstance
 argument_list|(
 name|trait
 argument_list|)
-operator|)
 operator|:
 name|getClass
 argument_list|()
@@ -238,7 +244,7 @@ return|return
 name|trait
 return|;
 block|}
-comment|/**      * Converts the given RelNode to the given RelTrait.      *      * @param planner the planner requesting the conversion      * @param rel RelNode to convert      * @param toTrait RelTrait to convert to      * @param allowInfiniteCostConverters flag indicating whether infinite cost      * converters are allowe      *      * @return a converted RelNode or null if conversion is not possible      */
+comment|/**      * Converts the given RelNode to the given RelTrait.      *      * @param planner the planner requesting the conversion      * @param rel RelNode to convert      * @param toTrait RelTrait to convert to      * @param allowInfiniteCostConverters flag indicating whether infinite cost      * converters are allowed      *      * @return a converted RelNode or null if conversion is not possible      */
 specifier|public
 specifier|abstract
 name|RelNode
@@ -257,7 +263,7 @@ name|boolean
 name|allowInfiniteCostConverters
 parameter_list|)
 function_decl|;
-comment|/**      * Tests whether the given RelTrait can be converted to another RelTrait.      *      * @param planner the planner requesting the conversion test      * @param fromTrait the RelTrait to convert from      * @param toTrait the RelTrait to conver to      *      * @return true if fromTrait can be converted to toTrait      */
+comment|/**      * Tests whether the given RelTrait can be converted to another RelTrait.      *      * @param planner the planner requesting the conversion test      * @param fromTrait the RelTrait to convert from      * @param toTrait the RelTrait to convert to      *      * @return true if fromTrait can be converted to toTrait      */
 specifier|public
 specifier|abstract
 name|boolean
@@ -286,7 +292,7 @@ name|converterRule
 parameter_list|)
 block|{
 block|}
-comment|/**      * Provides notification that a particular {@link ConverterRule} has been      * deregistered from a {@link RelOptPlanner}. The default implementation      * does nothing.      *      * @param planner the planner registering the rule      * @param converterRule the registered converter rule      */
+comment|/**      * Provides notification that a particular {@link ConverterRule} has been      * de-registered from a {@link RelOptPlanner}. The default implementation      * does nothing.      *      * @param planner the planner registering the rule      * @param converterRule the registered converter rule      */
 specifier|public
 name|void
 name|deregisterConverterRule

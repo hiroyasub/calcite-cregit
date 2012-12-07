@@ -250,7 +250,7 @@ name|traitSet
 operator|.
 name|comprises
 argument_list|(
-name|CallingConvention
+name|Convention
 operator|.
 name|NONE
 argument_list|)
@@ -267,7 +267,7 @@ argument_list|()
 operator|.
 name|traitSetOf
 argument_list|(
-name|CallingConvention
+name|Convention
 operator|.
 name|NONE
 argument_list|)

@@ -929,7 +929,7 @@ name|ordinal
 parameter_list|)
 block|{
 specifier|final
-name|CallingConvention
+name|Convention
 name|convention
 init|=
 name|child

@@ -144,12 +144,12 @@ block|}
 comment|//~ Methods ----------------------------------------------------------------
 comment|// implement RelOptRule
 specifier|public
-name|CallingConvention
+name|Convention
 name|getOutConvention
 parameter_list|()
 block|{
 return|return
-name|CallingConvention
+name|Convention
 operator|.
 name|NONE
 return|;

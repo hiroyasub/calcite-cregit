@@ -84,7 +84,7 @@ parameter_list|,
 name|RelNode
 name|rel
 parameter_list|,
-name|CallingConvention
+name|Convention
 name|outConvention
 parameter_list|)
 block|{

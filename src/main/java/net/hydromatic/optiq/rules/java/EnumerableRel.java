@@ -44,7 +44,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A relational expression of one of the  * {@link org.eigenbase.relopt.CallingConvention#ENUMERABLE} calling convention.  *  * @author jhyde  */
+comment|/**  * A relational expression of the  * {@link JavaRules#CONVENTION} calling convention.  *  * @author jhyde  */
 end_comment
 
 begin_interface

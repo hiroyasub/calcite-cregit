@@ -619,9 +619,9 @@ name|RelOptRuleCall
 name|call
 parameter_list|)
 function_decl|;
-comment|/**      * Returns the calling convention of the result of firing this rule, null if      * not known.      */
+comment|/**      * Returns the convention of the result of firing this rule, null if      * not known.      */
 specifier|public
-name|CallingConvention
+name|Convention
 name|getOutConvention
 parameter_list|()
 block|{

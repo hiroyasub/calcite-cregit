@@ -105,7 +105,7 @@ parameter_list|()
 function_decl|;
 comment|/**      * Return the CallingConvention trait from this RelNode's {@link      * #getTraitSet() trait set}.      *      * @return this RelNode's CallingConvention      */
 specifier|public
-name|CallingConvention
+name|Convention
 name|getConvention
 parameter_list|()
 function_decl|;

@@ -117,7 +117,7 @@ block|}
 comment|//~ Methods ----------------------------------------------------------------
 comment|// implement RelOptRule
 specifier|public
-name|CallingConvention
+name|Convention
 name|getOutConvention
 parameter_list|()
 block|{

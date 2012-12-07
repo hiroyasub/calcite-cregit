@@ -136,10 +136,18 @@ return|;
 block|}
 comment|/**      * Retrieves a RelTrait of the given type from the set.      *      * @param traitDef the type of RelTrait to retrieve      *      * @return the RelTrait, or null if not found      */
 specifier|public
+parameter_list|<
+name|T
+extends|extends
 name|RelTrait
+parameter_list|>
+name|T
 name|getTrait
 parameter_list|(
 name|RelTraitDef
+argument_list|<
+name|T
+argument_list|>
 name|traitDef
 parameter_list|)
 block|{
@@ -158,7 +166,11 @@ operator|>=
 literal|0
 condition|)
 block|{
+comment|//noinspection unchecked
 return|return
+operator|(
+name|T
+operator|)
 name|getTrait
 argument_list|(
 name|index

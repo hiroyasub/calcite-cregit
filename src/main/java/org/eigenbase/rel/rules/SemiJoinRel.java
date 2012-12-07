@@ -152,7 +152,7 @@ name|cluster
 operator|.
 name|traitSetOf
 argument_list|(
-name|CallingConvention
+name|Convention
 operator|.
 name|NONE
 argument_list|)

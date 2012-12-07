@@ -62,7 +62,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  *<code>NoneConverter</code> converts a plan from<code>inConvention</code> to  * {@link org.eigenbase.relopt.CallingConvention#NONE_ORDINAL}.  *  * @author jhyde  * @version $Id$  * @since 15 February, 2002  */
+comment|/**  *<code>NoneConverter</code> converts a plan from<code>inConvention</code> to  * {@link org.eigenbase.relopt.Convention#NONE}.  *  * @author jhyde  * @version $Id$  * @since 15 February, 2002  */
 end_comment
 
 begin_class
@@ -87,7 +87,7 @@ name|super
 argument_list|(
 name|cluster
 argument_list|,
-name|CallingConventionTraitDef
+name|ConventionTraitDef
 operator|.
 name|instance
 argument_list|,
@@ -95,7 +95,7 @@ name|cluster
 operator|.
 name|traitSetOf
 argument_list|(
-name|CallingConvention
+name|Convention
 operator|.
 name|NONE
 argument_list|)
@@ -124,7 +124,7 @@ name|traitSet
 operator|.
 name|comprises
 argument_list|(
-name|CallingConvention
+name|Convention
 operator|.
 name|NONE
 argument_list|)

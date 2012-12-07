@@ -148,13 +148,13 @@ expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
 specifier|public
-name|CallingConvention
+name|Convention
 name|getOutConvention
 parameter_list|()
 block|{
 return|return
 operator|(
-name|CallingConvention
+name|Convention
 operator|)
 name|outTrait
 return|;

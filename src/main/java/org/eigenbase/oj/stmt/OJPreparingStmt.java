@@ -297,8 +297,8 @@ name|decl
 decl_stmt|;
 comment|/**      * CallingConvention via which results should be returned by execution.      */
 specifier|private
-name|CallingConvention
-name|resultCallingConvention
+name|Convention
+name|resultConvention
 decl_stmt|;
 specifier|protected
 name|JavaCompiler
@@ -353,7 +353,7 @@ name|catalogReader
 expr_stmt|;
 name|this
 operator|.
-name|resultCallingConvention
+name|resultConvention
 operator|=
 name|CallingConvention
 operator|.
@@ -369,17 +369,17 @@ block|}
 comment|//~ Methods ----------------------------------------------------------------
 specifier|public
 name|void
-name|setResultCallingConvention
+name|setResultConvention
 parameter_list|(
-name|CallingConvention
-name|resultCallingConvention
+name|Convention
+name|resultConvention
 parameter_list|)
 block|{
 name|this
 operator|.
-name|resultCallingConvention
+name|resultConvention
 operator|=
-name|resultCallingConvention
+name|resultConvention
 expr_stmt|;
 block|}
 specifier|protected
@@ -1308,7 +1308,7 @@ argument_list|()
 operator|.
 name|replace
 argument_list|(
-name|resultCallingConvention
+name|resultConvention
 argument_list|)
 return|;
 block|}

@@ -62,25 +62,28 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * CallingConventionTraitDef is a {@link RelTraitDef} that defines the  * calling-convention trait. A new set of conversion information is created for  * each planner that registers at least one {@link ConverterRule} instance.  *  *<p>Conversion data is held in a {@link WeakHashMap} so that the JVM's garbage  * collector may reclaim the conversion data after the planner itself has been  * garbage collected. The conversion information consists of a graph of  * conversions (from one calling convention to another) and a map of graph arcs  * to {@link ConverterRule}s.  *  * @author Stephan Zuercher  * @version $Id$  */
+comment|/**  * Definition of the the convention trait.  * A new set of conversion information is created for  * each planner that registers at least one {@link ConverterRule} instance.  *  *<p>Conversion data is held in a {@link WeakHashMap} so that the JVM's garbage  * collector may reclaim the conversion data after the planner itself has been  * garbage collected. The conversion information consists of a graph of  * conversions (from one calling convention to another) and a map of graph arcs  * to {@link ConverterRule}s.  *  * @author Stephan Zuercher  * @version $Id$  */
 end_comment
 
 begin_class
 specifier|public
 class|class
-name|CallingConventionTraitDef
+name|ConventionTraitDef
 extends|extends
 name|RelTraitDef
+argument_list|<
+name|Convention
+argument_list|>
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
 specifier|public
 specifier|static
 specifier|final
-name|CallingConventionTraitDef
+name|ConventionTraitDef
 name|instance
 init|=
 operator|new
-name|CallingConventionTraitDef
+name|ConventionTraitDef
 argument_list|()
 decl_stmt|;
 comment|//~ Instance fields --------------------------------------------------------
@@ -106,7 +109,7 @@ argument_list|()
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 specifier|private
-name|CallingConventionTraitDef
+name|ConventionTraitDef
 parameter_list|()
 block|{
 name|super
@@ -117,16 +120,18 @@ comment|//~ Methods ------------------------------------------------------------
 comment|// implement RelTraitDef
 specifier|public
 name|Class
+argument_list|<
+name|Convention
+argument_list|>
 name|getTraitClass
 parameter_list|()
 block|{
 return|return
-name|CallingConvention
+name|Convention
 operator|.
 name|class
 return|;
 block|}
-comment|// implement RelTraitDef
 specifier|public
 name|String
 name|getSimpleName
@@ -136,7 +141,6 @@ return|return
 literal|"convention"
 return|;
 block|}
-comment|// override RelTraitDef
 specifier|public
 name|void
 name|registerConverterRule
@@ -167,7 +171,7 @@ decl_stmt|;
 specifier|final
 name|Graph
 argument_list|<
-name|CallingConvention
+name|Convention
 argument_list|>
 name|conversionGraph
 init|=
@@ -201,7 +205,7 @@ operator|.
 name|createArc
 argument_list|(
 operator|(
-name|CallingConvention
+name|Convention
 operator|)
 name|converterRule
 operator|.
@@ -209,7 +213,7 @@ name|getInTrait
 argument_list|()
 argument_list|,
 operator|(
-name|CallingConvention
+name|Convention
 operator|)
 name|converterRule
 operator|.
@@ -258,7 +262,7 @@ decl_stmt|;
 specifier|final
 name|Graph
 argument_list|<
-name|CallingConvention
+name|Convention
 argument_list|>
 name|conversionGraph
 init|=
@@ -292,7 +296,7 @@ operator|.
 name|deleteArc
 argument_list|(
 operator|(
-name|CallingConvention
+name|Convention
 operator|)
 name|converterRule
 operator|.
@@ -300,7 +304,7 @@ name|getInTrait
 argument_list|()
 argument_list|,
 operator|(
-name|CallingConvention
+name|Convention
 operator|)
 name|converterRule
 operator|.
@@ -354,7 +358,7 @@ decl_stmt|;
 specifier|final
 name|Graph
 argument_list|<
-name|CallingConvention
+name|Convention
 argument_list|>
 name|conversionGraph
 init|=
@@ -378,7 +382,7 @@ operator|.
 name|mapArcToConverterRule
 decl_stmt|;
 specifier|final
-name|CallingConvention
+name|Convention
 name|fromConvention
 init|=
 name|rel
@@ -387,11 +391,11 @@ name|getConvention
 argument_list|()
 decl_stmt|;
 specifier|final
-name|CallingConvention
+name|Convention
 name|toConvention
 init|=
 operator|(
-name|CallingConvention
+name|Convention
 operator|)
 name|toTrait
 decl_stmt|;
@@ -401,7 +405,7 @@ name|Graph
 operator|.
 name|Arc
 argument_list|<
-name|CallingConvention
+name|Convention
 argument_list|>
 index|[]
 argument_list|>
@@ -472,19 +476,12 @@ name|rel
 decl_stmt|;
 for|for
 control|(
-name|int
-name|i
-init|=
-literal|0
-init|;
-name|i
-operator|<
-name|arcs
+name|Graph
 operator|.
-name|length
-condition|;
-name|i
-operator|++
+name|Arc
+name|arc
+range|:
+name|arcs
 control|)
 block|{
 if|if
@@ -513,10 +510,7 @@ name|changeConvention
 argument_list|(
 name|converted
 argument_list|,
-name|arcs
-index|[
-name|i
-index|]
+name|arc
 argument_list|,
 name|mapArcToConverterRule
 argument_list|)
@@ -535,19 +529,13 @@ name|newInternal
 argument_list|(
 literal|"Converter from "
 operator|+
-name|arcs
-index|[
-name|i
-index|]
+name|arc
 operator|.
 name|from
 operator|+
 literal|" to "
 operator|+
-name|arcs
-index|[
-name|i
-index|]
+name|arc
 operator|.
 name|to
 operator|+
@@ -605,40 +593,19 @@ comment|// Try to apply each converter rule for this arc's source/target calling
 comment|// conventions.
 for|for
 control|(
-name|Iterator
-argument_list|<
 name|ConverterRule
-argument_list|>
-name|converterRuleIter
-init|=
+name|rule
+range|:
 name|mapArcToConverterRule
 operator|.
 name|getMulti
 argument_list|(
 name|arc
 argument_list|)
-operator|.
-name|iterator
-argument_list|()
-init|;
-name|converterRuleIter
-operator|.
-name|hasNext
-argument_list|()
-condition|;
 control|)
 block|{
-name|ConverterRule
-name|converterRule
-init|=
-name|converterRuleIter
-operator|.
-name|next
-argument_list|()
-decl_stmt|;
 assert|assert
-operator|(
-name|converterRule
+name|rule
 operator|.
 name|getInTrait
 argument_list|()
@@ -646,11 +613,9 @@ operator|==
 name|arc
 operator|.
 name|from
-operator|)
 assert|;
 assert|assert
-operator|(
-name|converterRule
+name|rule
 operator|.
 name|getOutTrait
 argument_list|()
@@ -658,12 +623,11 @@ operator|==
 name|arc
 operator|.
 name|to
-operator|)
 assert|;
 name|RelNode
 name|converted
 init|=
-name|converterRule
+name|rule
 operator|.
 name|convert
 argument_list|(
@@ -686,7 +650,6 @@ return|return
 literal|null
 return|;
 block|}
-comment|// implement RelTraitDef
 specifier|public
 name|boolean
 name|canConvert
@@ -709,19 +672,19 @@ argument_list|(
 name|planner
 argument_list|)
 decl_stmt|;
-name|CallingConvention
+name|Convention
 name|fromConvention
 init|=
 operator|(
-name|CallingConvention
+name|Convention
 operator|)
 name|fromTrait
 decl_stmt|;
-name|CallingConvention
+name|Convention
 name|toConvention
 init|=
 operator|(
-name|CallingConvention
+name|Convention
 operator|)
 name|toTrait
 decl_stmt|;
@@ -798,14 +761,14 @@ block|{
 specifier|final
 name|Graph
 argument_list|<
-name|CallingConvention
+name|Convention
 argument_list|>
 name|conversionGraph
 init|=
 operator|new
 name|Graph
 argument_list|<
-name|CallingConvention
+name|Convention
 argument_list|>
 argument_list|()
 decl_stmt|;
@@ -837,7 +800,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End CallingConventionTraitDef.java
+comment|// End ConventionTraitDef.java
 end_comment
 
 end_unit

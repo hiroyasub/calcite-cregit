@@ -74,7 +74,7 @@ name|cluster
 operator|.
 name|traitSetOf
 argument_list|(
-name|CallingConvention
+name|Convention
 operator|.
 name|NONE
 argument_list|)
@@ -109,7 +109,7 @@ name|traitSet
 operator|.
 name|comprises
 argument_list|(
-name|CallingConvention
+name|Convention
 operator|.
 name|NONE
 argument_list|)

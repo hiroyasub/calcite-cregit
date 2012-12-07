@@ -163,18 +163,15 @@ comment|/**      * Private calling convention representing a physical implementa
 specifier|private
 specifier|static
 specifier|final
-name|CallingConvention
+name|Convention
 name|PHYS_CALLING_CONVENTION
 init|=
 operator|new
-name|CallingConvention
+name|Convention
+operator|.
+name|Impl
 argument_list|(
 literal|"PHYS"
-argument_list|,
-name|CallingConvention
-operator|.
-name|generateOrdinal
-argument_list|()
 argument_list|,
 name|RelNode
 operator|.
@@ -256,7 +253,7 @@ name|planner
 operator|.
 name|addRelTraitDef
 argument_list|(
-name|CallingConventionTraitDef
+name|ConventionTraitDef
 operator|.
 name|instance
 argument_list|)
@@ -349,7 +346,7 @@ name|planner
 operator|.
 name|addRelTraitDef
 argument_list|(
-name|CallingConventionTraitDef
+name|ConventionTraitDef
 operator|.
 name|instance
 argument_list|)
@@ -462,7 +459,7 @@ name|planner
 operator|.
 name|addRelTraitDef
 argument_list|(
-name|CallingConventionTraitDef
+name|ConventionTraitDef
 operator|.
 name|instance
 argument_list|)
@@ -583,7 +580,7 @@ name|planner
 operator|.
 name|addRelTraitDef
 argument_list|(
-name|CallingConventionTraitDef
+name|ConventionTraitDef
 operator|.
 name|instance
 argument_list|)
@@ -844,7 +841,7 @@ name|planner
 operator|.
 name|addRelTraitDef
 argument_list|(
-name|CallingConventionTraitDef
+name|ConventionTraitDef
 operator|.
 name|instance
 argument_list|)
@@ -981,7 +978,7 @@ name|planner
 operator|.
 name|addRelTraitDef
 argument_list|(
-name|CallingConventionTraitDef
+name|ConventionTraitDef
 operator|.
 name|instance
 argument_list|)
@@ -1135,7 +1132,7 @@ name|planner
 operator|.
 name|addRelTraitDef
 argument_list|(
-name|CallingConventionTraitDef
+name|ConventionTraitDef
 operator|.
 name|instance
 argument_list|)
@@ -1770,7 +1767,7 @@ name|cluster
 operator|.
 name|traitSetOf
 argument_list|(
-name|CallingConvention
+name|Convention
 operator|.
 name|NONE
 argument_list|)
@@ -1798,7 +1795,7 @@ name|traitSet
 operator|.
 name|comprises
 argument_list|(
-name|CallingConvention
+name|Convention
 operator|.
 name|NONE
 argument_list|)
@@ -1843,7 +1840,7 @@ name|cluster
 operator|.
 name|traitSetOf
 argument_list|(
-name|CallingConvention
+name|Convention
 operator|.
 name|NONE
 argument_list|)
@@ -1871,7 +1868,7 @@ name|traitSet
 operator|.
 name|comprises
 argument_list|(
-name|CallingConvention
+name|Convention
 operator|.
 name|NONE
 argument_list|)
@@ -2070,7 +2067,7 @@ name|super
 argument_list|(
 name|cluster
 argument_list|,
-name|CallingConventionTraitDef
+name|ConventionTraitDef
 operator|.
 name|instance
 argument_list|,
@@ -2152,7 +2149,7 @@ expr_stmt|;
 block|}
 comment|// implement RelOptRule
 specifier|public
-name|CallingConvention
+name|Convention
 name|getOutConvention
 parameter_list|()
 block|{
@@ -2229,7 +2226,7 @@ expr_stmt|;
 block|}
 comment|// implement RelOptRule
 specifier|public
-name|CallingConvention
+name|Convention
 name|getOutConvention
 parameter_list|()
 block|{
@@ -2340,7 +2337,7 @@ expr_stmt|;
 block|}
 comment|// implement RelOptRule
 specifier|public
-name|CallingConvention
+name|Convention
 name|getOutConvention
 parameter_list|()
 block|{
@@ -2439,7 +2436,7 @@ expr_stmt|;
 block|}
 comment|// implement RelOptRule
 specifier|public
-name|CallingConvention
+name|Convention
 name|getOutConvention
 parameter_list|()
 block|{
@@ -2526,7 +2523,7 @@ expr_stmt|;
 block|}
 comment|// implement RelOptRule
 specifier|public
-name|CallingConvention
+name|Convention
 name|getOutConvention
 parameter_list|()
 block|{
@@ -2621,7 +2618,7 @@ expr_stmt|;
 block|}
 comment|// implement RelOptRule
 specifier|public
-name|CallingConvention
+name|Convention
 name|getOutConvention
 parameter_list|()
 block|{

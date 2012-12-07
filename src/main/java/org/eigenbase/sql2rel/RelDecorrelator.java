@@ -1140,7 +1140,7 @@ argument_list|()
 operator|.
 name|traitSetOf
 argument_list|(
-name|CallingConvention
+name|Convention
 operator|.
 name|NONE
 argument_list|)
@@ -4636,7 +4636,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**      * Pull projRel above the joinRel from its RHS input. Enforce nullability      * for join output.      *      * @param joinRel      * @param projRel the orginal projRel as the RHS input of the join.      * @param nullIndicatorPos      *      * @return the subtree with the new ProjectRel at the root      */
+comment|/**      * Pull projRel above the joinRel from its RHS input. Enforce nullability      * for join output.      *      * @param joinRel Join      * @param projRel the orginal projRel as the RHS input of the join.      * @param nullIndicatorPos Position of null indicator      *      * @return the subtree with the new ProjectRel at the root      */
 specifier|private
 name|RelNode
 name|projectJoinOutputWithNullability
@@ -5352,7 +5352,7 @@ return|return
 literal|true
 return|;
 block|}
-comment|/**      * Remove correlated variables from the tree at root corRel      *      * @param corRel      */
+comment|/**      * Remove correlated variables from the tree at root corRel      *      * @param corRel Correlator      */
 specifier|private
 name|void
 name|removeCorVarFromTree
@@ -5420,7 +5420,7 @@ expr_stmt|;
 block|}
 block|}
 block|}
-comment|/**      * Project all childRel output fields plus the additional expressions.      *      * @param childRel      * @param additionalExprs      * @param additionalExprNames      *      * @return the new ProjectRel      */
+comment|/**      * Project all childRel output fields plus the additional expressions.      *      * @param childRel Child relational expression      * @param additionalExprs Additional expressions      * @param additionalExprNames Names of additional expressions      *      * @return the new ProjectRel      */
 specifier|private
 name|RelNode
 name|createProjectWithAdditionalExprs
@@ -5744,7 +5744,7 @@ name|p
 argument_list|)
 expr_stmt|;
 block|}
-comment|//else no rewrite will occur. This will terminate the bottom-up
+comment|// else no rewrite will occur. This will terminate the bottom-up
 comment|// rewrite. If root node of a RelNode tree is not rewritten, the
 comment|// original tree will be returned. See decorrelate() method.
 block|}
@@ -5865,7 +5865,7 @@ operator|!=
 literal|null
 condition|)
 block|{
-comment|//try to find in this input rel the position of cor var
+comment|// try to find in this input rel the position of cor var
 name|CorrelatorRel
 operator|.
 name|Correlation

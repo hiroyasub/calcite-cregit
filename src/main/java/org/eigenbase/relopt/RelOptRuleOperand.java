@@ -173,29 +173,15 @@ condition|)
 block|{
 for|for
 control|(
-name|int
-name|i
-init|=
-literal|0
-init|;
-name|i
-operator|<
+name|RelOptRuleOperand
+name|child
+range|:
 name|this
 operator|.
 name|children
-operator|.
-name|length
-condition|;
-name|i
-operator|++
 control|)
 block|{
-name|this
-operator|.
-name|children
-index|[
-name|i
-index|]
+name|child
 operator|.
 name|parent
 operator|=
@@ -570,7 +556,7 @@ return|return
 name|children
 return|;
 block|}
-comment|/**      * Returns whether a relational expression matches this operand. It must be      * of the right class and calling convention.      */
+comment|/**      * Returns whether a relational expression matches this operand. It must be      * of the right class and trait.      */
 specifier|public
 name|boolean
 name|matches

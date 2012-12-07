@@ -37,16 +37,6 @@ end_import
 
 begin_import
 import|import
-name|openjava
-operator|.
-name|ptree
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
 name|org
 operator|.
 name|eigenbase
@@ -137,7 +127,7 @@ name|UnionRel
 operator|.
 name|class
 argument_list|,
-name|CallingConvention
+name|Convention
 operator|.
 name|NONE
 argument_list|,
@@ -389,7 +379,7 @@ name|OneRowRel
 operator|.
 name|class
 argument_list|,
-name|CallingConvention
+name|Convention
 operator|.
 name|NONE
 argument_list|,
@@ -458,7 +448,7 @@ name|CalcRel
 operator|.
 name|class
 argument_list|,
-name|CallingConvention
+name|Convention
 operator|.
 name|NONE
 argument_list|,
