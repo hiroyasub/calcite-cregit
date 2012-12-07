@@ -2853,6 +2853,119 @@ block|}
 block|}
 block|}
 specifier|public
+name|void
+name|testValues
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|assertThat
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"values (1), (2)"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"EXPR$0=1\n"
+operator|+
+literal|"EXPR$0=2\n"
+argument_list|)
+expr_stmt|;
+block|}
+specifier|public
+name|void
+name|testValuesComposite
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|assertThat
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"values (1, 'a'), (2, 'abc')"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"EXPR$0=1; EXPR$1=a  \n"
+operator|+
+literal|"EXPR$0=2; EXPR$1=abc\n"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** A difficult query: an IN list so large that the planner promotes it      * to a semi-join against a VALUES relation. */
+specifier|public
+name|void
+name|testIn
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|assertThat
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|FOODMART_CLONE
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select \"time_by_day\".\"the_year\" as \"c0\",\n"
+operator|+
+literal|" \"product_class\".\"product_family\" as \"c1\",\n"
+operator|+
+literal|" \"customer\".\"country\" as \"c2\",\n"
+operator|+
+literal|" \"customer\".\"state_province\" as \"c3\",\n"
+operator|+
+literal|" \"customer\".\"city\" as \"c4\",\n"
+operator|+
+literal|" sum(\"sales_fact_1997\".\"unit_sales\") as \"m0\"\n"
+operator|+
+literal|"from \"time_by_day\" as \"time_by_day\",\n"
+operator|+
+literal|" \"sales_fact_1997\" as \"sales_fact_1997\",\n"
+operator|+
+literal|" \"product_class\" as \"product_class\",\n"
+operator|+
+literal|" \"product\" as \"product\", \"customer\" as \"customer\"\n"
+operator|+
+literal|"where \"sales_fact_1997\".\"time_id\" = \"time_by_day\".\"time_id\"\n"
+operator|+
+literal|"and \"time_by_day\".\"the_year\" = 1997\n"
+operator|+
+literal|"and \"sales_fact_1997\".\"product_id\" = \"product\".\"product_id\"\n"
+operator|+
+literal|"and \"product\".\"product_class_id\" = \"product_class\".\"product_class_id\"\n"
+operator|+
+literal|"and \"product_class\".\"product_family\" = 'Drink'\n"
+operator|+
+literal|"and \"sales_fact_1997\".\"customer_id\" = \"customer\".\"customer_id\"\n"
+operator|+
+literal|"and \"customer\".\"country\" = 'USA'\n"
+operator|+
+literal|"and \"customer\".\"state_province\" = 'WA'\n"
+operator|+
+literal|"and \"customer\".\"city\" in ('Anacortes', 'Ballard', 'Bellingham', 'Bremerton', 'Burien', 'Edmonds', 'Everett', 'Issaquah', 'Kirkland', 'Lynnwood', 'Marysville', 'Olympia', 'Port Orchard', 'Puyallup', 'Redmond', 'Renton', 'Seattle', 'Sedro Woolley', 'Spokane', 'Tacoma', 'Walla Walla', 'Yakima') group by \"time_by_day\".\"the_year\", \"product_class\".\"product_family\", \"customer\".\"country\", \"customer\".\"state_province\", \"customer\".\"city\""
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"c0=1997; c1=Drink; c2=USA; c3=WA; c4=Sedro Woolley; m0=58\n"
+argument_list|)
+expr_stmt|;
+block|}
+specifier|public
 specifier|static
 class|class
 name|HrSchema

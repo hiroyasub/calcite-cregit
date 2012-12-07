@@ -2044,7 +2044,7 @@ block|}
 comment|//~ Inner Classes ----------------------------------------------------------
 comment|// TODO jvs 13-Dec-2004:  move to OJTypeFactoryImpl?
 comment|/**      * Type which is based upon a Java class.      */
-specifier|protected
+specifier|public
 class|class
 name|JavaType
 extends|extends
