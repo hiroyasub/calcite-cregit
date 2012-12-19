@@ -406,12 +406,20 @@ name|query
 argument_list|(
 literal|"select case when \"sales_fact_1997\".\"promotion_id\" = 1 then 0\n"
 operator|+
-literal|"                        else \"sales_fact_1997\".\"store_sales\" end as \"c0\" from \"sales_fact_1997\" as \"sales_fact_1997\""
+literal|"                        else \"sales_fact_1997\".\"store_sales\" end as \"c0\"\n"
+operator|+
+literal|"from \"sales_fact_1997\" as \"sales_fact_1997\""
+operator|+
+literal|"where \"product_id\" = 1\n"
+operator|+
+literal|"and \"time_id\"< 400"
 argument_list|)
 operator|.
 name|returns
 argument_list|(
-literal|"xxx"
+literal|"c0=11.4000\n"
+operator|+
+literal|"c0=8.5500\n"
 argument_list|)
 expr_stmt|;
 block|}
