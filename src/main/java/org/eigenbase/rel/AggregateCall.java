@@ -74,13 +74,6 @@ specifier|final
 name|Aggregation
 name|aggregation
 decl_stmt|;
-comment|/**      * TODO jvs 24-Apr-2006: make this array and its contents immutable      *      * @deprecated todo: change all public uses to use {@link #getArgList}, then      * make private      */
-specifier|public
-specifier|final
-name|int
-index|[]
-name|args
-decl_stmt|;
 specifier|private
 specifier|final
 name|boolean
@@ -161,19 +154,17 @@ name|aggregation
 operator|=
 name|aggregation
 expr_stmt|;
-comment|// Conversion from list to array to list is intentional. We want the
-comment|// argList member to point to the same data as the args member.
-name|this
-operator|.
+name|int
+index|[]
 name|args
-operator|=
+init|=
 name|IntList
 operator|.
 name|toArray
 argument_list|(
 name|argList
 argument_list|)
-expr_stmt|;
+decl_stmt|;
 name|this
 operator|.
 name|argList

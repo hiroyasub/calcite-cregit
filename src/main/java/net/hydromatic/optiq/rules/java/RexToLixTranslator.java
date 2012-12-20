@@ -1726,7 +1726,7 @@ name|Map
 argument_list|<
 name|Aggregation
 argument_list|,
-name|AggregateImplementor2
+name|AggImplementor2
 argument_list|>
 name|agg2Map
 init|=
@@ -1735,7 +1735,7 @@ name|HashMap
 argument_list|<
 name|Aggregation
 argument_list|,
-name|AggregateImplementor2
+name|AggImplementor2
 argument_list|>
 argument_list|()
 decl_stmt|;
@@ -2438,7 +2438,7 @@ argument_list|)
 return|;
 block|}
 specifier|public
-name|AggregateImplementor2
+name|AggImplementor2
 name|get2
 parameter_list|(
 specifier|final
@@ -2669,7 +2669,7 @@ function_decl|;
 block|}
 comment|/** Implements an aggregate function by generating expressions to      * initialize, add to, and get a result from, an accumulator. */
 interface|interface
-name|AggregateImplementor2
+name|AggImplementor2
 block|{
 name|Expression
 name|implementInit
@@ -2783,7 +2783,7 @@ specifier|static
 class|class
 name|CountImplementor2
 implements|implements
-name|AggregateImplementor2
+name|AggImplementor2
 block|{
 specifier|public
 name|Expression
@@ -2874,7 +2874,7 @@ specifier|static
 class|class
 name|SumImplementor2
 implements|implements
-name|AggregateImplementor2
+name|AggImplementor2
 block|{
 specifier|public
 name|Expression
@@ -2973,7 +2973,7 @@ specifier|static
 class|class
 name|MinMaxImplementor2
 implements|implements
-name|AggregateImplementor2
+name|AggImplementor2
 block|{
 specifier|public
 name|Expression
