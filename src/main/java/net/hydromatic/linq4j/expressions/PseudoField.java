@@ -15,35 +15,57 @@ name|expressions
 package|;
 end_package
 
+begin_import
+import|import
+name|java
+operator|.
+name|lang
+operator|.
+name|reflect
+operator|.
+name|Type
+import|;
+end_import
+
 begin_comment
-comment|/** *<p>Parse tree node.</p>  */
+comment|/**  * Contains the parts of the {@link java.lang.reflect.Field} class needed  * for code generation, but might be implemented differently.  */
 end_comment
 
 begin_interface
 specifier|public
 interface|interface
-name|Node
+name|PseudoField
 block|{
-specifier|public
-name|Node
-name|accept
-parameter_list|(
-name|Visitor
-name|visitor
-parameter_list|)
+name|String
+name|getName
+parameter_list|()
 function_decl|;
-name|void
-name|accept
+name|Type
+name|getType
+parameter_list|()
+function_decl|;
+name|int
+name|getModifiers
+parameter_list|()
+function_decl|;
+name|Object
+name|get
 parameter_list|(
-name|ExpressionWriter
-name|expressionWriter
+name|Object
+name|o
 parameter_list|)
+throws|throws
+name|IllegalAccessException
+function_decl|;
+name|Type
+name|getDeclaringClass
+parameter_list|()
 function_decl|;
 block|}
 end_interface
 
 begin_comment
-comment|// End Node.java
+comment|// End PseudoField.java
 end_comment
 
 end_unit

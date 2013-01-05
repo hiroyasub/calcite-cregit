@@ -208,14 +208,14 @@ name|writer
 operator|.
 name|append
 argument_list|(
-name|labelTarget
-operator|.
-name|name
+literal|' '
 argument_list|)
 operator|.
 name|append
 argument_list|(
-literal|' '
+name|labelTarget
+operator|.
+name|name
 argument_list|)
 expr_stmt|;
 block|}
@@ -226,6 +226,25 @@ operator|!=
 literal|null
 condition|)
 block|{
+if|if
+condition|(
+operator|!
+name|kind
+operator|.
+name|prefix
+operator|.
+name|isEmpty
+argument_list|()
+condition|)
+block|{
+name|writer
+operator|.
+name|append
+argument_list|(
+literal|' '
+argument_list|)
+expr_stmt|;
+block|}
 switch|switch
 condition|(
 name|kind

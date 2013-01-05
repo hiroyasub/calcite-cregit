@@ -340,6 +340,11 @@ argument_list|(
 name|body
 argument_list|)
 expr_stmt|;
+name|writer
+operator|.
+name|newlineAndIndent
+argument_list|()
+expr_stmt|;
 block|}
 block|}
 end_class

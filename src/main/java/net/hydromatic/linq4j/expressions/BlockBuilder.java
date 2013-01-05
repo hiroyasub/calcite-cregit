@@ -74,6 +74,23 @@ name|String
 argument_list|>
 argument_list|()
 decl_stmt|;
+comment|/** Clears this BlockBuilder. */
+specifier|public
+name|void
+name|clear
+parameter_list|()
+block|{
+name|statements
+operator|.
+name|clear
+argument_list|()
+expr_stmt|;
+name|variables
+operator|.
+name|clear
+argument_list|()
+expr_stmt|;
+block|}
 comment|/** Appends a block to a list of statements and returns an expression      * (possibly a variable) that represents the result of the newly added      * block. */
 specifier|public
 name|Expression

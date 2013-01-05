@@ -238,7 +238,7 @@ name|list
 argument_list|(
 literal|"{\n"
 argument_list|,
-literal|"\n\n"
+literal|""
 argument_list|,
 literal|"}"
 argument_list|,

@@ -186,6 +186,8 @@ name|writer
 argument_list|,
 name|lprec
 argument_list|,
+name|nodeType
+operator|.
 name|rprec
 argument_list|)
 expr_stmt|;
@@ -216,6 +218,8 @@ name|accept
 argument_list|(
 name|writer
 argument_list|,
+name|nodeType
+operator|.
 name|lprec
 argument_list|,
 name|rprec

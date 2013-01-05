@@ -37,7 +37,7 @@ specifier|abstract
 class|class
 name|Expression
 extends|extends
-name|Node
+name|AbstractNode
 block|{
 comment|/**      * Creates an Expression.      *      *<p>The type of the expression may, at the caller's discretion, be a      * regular class (because {@link Class} implements {@link Type}) or it may      * be a different implementation that retains information about type      * parameters.</p>      *      * @param nodeType Node type      * @param type Type of the expression      */
 specifier|public

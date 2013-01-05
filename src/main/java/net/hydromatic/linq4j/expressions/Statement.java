@@ -37,7 +37,7 @@ specifier|abstract
 class|class
 name|Statement
 extends|extends
-name|Node
+name|AbstractNode
 block|{
 specifier|protected
 name|Statement

@@ -33,19 +33,19 @@ block|,
 comment|/** A GotoExpression that represents a return statement. */
 name|Return
 argument_list|(
-literal|"return "
+literal|"return"
 argument_list|)
 block|,
 comment|/** A GotoExpression that represents a break statement. */
 name|Break
 argument_list|(
-literal|"break "
+literal|"break"
 argument_list|)
 block|,
 comment|/** A GotoExpression that represents a continue statement. */
 name|Continue
 argument_list|(
-literal|"continue "
+literal|"continue"
 argument_list|)
 block|,
 comment|/** A GotoExpression that evaluates an expression and carries on. */

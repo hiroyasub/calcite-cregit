@@ -46,7 +46,7 @@ specifier|public
 class|class
 name|ConditionalExpression
 extends|extends
-name|Node
+name|AbstractNode
 block|{
 specifier|private
 specifier|final

@@ -212,7 +212,12 @@ name|expression
 parameter_list|)
 block|{
 return|return
+operator|(
+operator|(
+name|AbstractNode
+operator|)
 name|expression
+operator|)
 operator|.
 name|evaluate
 argument_list|(
