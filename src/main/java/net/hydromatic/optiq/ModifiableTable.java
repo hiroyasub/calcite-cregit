@@ -10,69 +10,46 @@ operator|.
 name|hydromatic
 operator|.
 name|optiq
-operator|.
-name|rules
-operator|.
-name|java
 package|;
 end_package
 
 begin_import
 import|import
-name|net
+name|java
 operator|.
-name|hydromatic
+name|util
 operator|.
-name|linq4j
-operator|.
-name|expressions
-operator|.
-name|BlockExpression
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
-name|rel
-operator|.
-name|RelNode
+name|Collection
 import|;
 end_import
 
 begin_comment
-comment|/**  * A relational expression of one of the  * {@link net.hydromatic.optiq.rules.java.EnumerableConvention} calling  * conventions.  *  * @author jhyde  */
+comment|/**  * A table that can be modified.  *  *<p>NOTE: The current API is inefficient and experimental. It will change  * without notice.</p>  */
 end_comment
 
 begin_interface
 specifier|public
 interface|interface
-name|EnumerableRel
+name|ModifiableTable
+parameter_list|<
+name|E
+parameter_list|>
 extends|extends
-name|RelNode
+name|Table
+argument_list|<
+name|E
+argument_list|>
 block|{
-comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Creates a plan for this expression according to a calling convention.      *      * @param implementor implementor      */
-name|BlockExpression
-name|implement
-parameter_list|(
-name|EnumerableRelImplementor
-name|implementor
-parameter_list|)
-function_decl|;
-comment|/**      * Describes the Java type returned by this relational expression, and the      * mapping between it and the fields of the logical row type.      */
-name|PhysType
-name|getPhysType
+comment|/** Returns the modifiable collection.      * Modifying the collection will change the table's contents. */
+name|Collection
+name|getModifiableCollection
 parameter_list|()
 function_decl|;
 block|}
 end_interface
 
 begin_comment
-comment|// End EnumerableRel.java
+comment|// End ModifiableTable.java
 end_comment
 
 end_unit

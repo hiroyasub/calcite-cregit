@@ -85,18 +85,6 @@ name|OptiqConnection
 import|;
 end_import
 
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
-name|reltype
-operator|.
-name|*
-import|;
-end_import
-
 begin_comment
 comment|/**  * Schema that contains in-memory copies of tables from a JDBC schema.  */
 end_comment
@@ -242,18 +230,6 @@ parameter_list|)
 block|{
 comment|// More efficient: table based on an array per column.
 specifier|final
-name|RelDataType
-name|elementType
-init|=
-operator|(
-name|RelDataType
-operator|)
-name|sourceTable
-operator|.
-name|getElementType
-argument_list|()
-decl_stmt|;
-specifier|final
 name|ColumnLoader
 name|loader
 init|=
@@ -267,7 +243,10 @@ name|typeFactory
 argument_list|,
 name|sourceTable
 argument_list|,
-name|elementType
+name|sourceTable
+operator|.
+name|getRowType
+argument_list|()
 argument_list|)
 decl_stmt|;
 return|return
@@ -282,6 +261,11 @@ argument_list|,
 name|sourceTable
 operator|.
 name|getElementType
+argument_list|()
+argument_list|,
+name|sourceTable
+operator|.
+name|getRowType
 argument_list|()
 argument_list|,
 name|Expressions

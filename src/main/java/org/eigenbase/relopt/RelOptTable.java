@@ -61,6 +61,18 @@ name|*
 import|;
 end_import
 
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|optiq
+operator|.
+name|ModifiableTable
+import|;
+end_import
+
 begin_comment
 comment|/**  * Represents a relational dataset in a {@link RelOptSchema}. It has methods to  * describe and implement itself.  *  * @author jhyde  * @version $Id$  * @since 10 November, 2001  */
 end_comment
@@ -108,6 +120,20 @@ name|RelCollation
 argument_list|>
 name|getCollationList
 parameter_list|()
+function_decl|;
+comment|/** Finds an interface implemented by this table. */
+parameter_list|<
+name|T
+parameter_list|>
+name|T
+name|unwrap
+parameter_list|(
+name|Class
+argument_list|<
+name|T
+argument_list|>
+name|clazz
+parameter_list|)
 function_decl|;
 interface|interface
 name|ToRelContext

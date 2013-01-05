@@ -46,10 +46,7 @@ specifier|public
 interface|interface
 name|RelDataTypeField
 extends|extends
-name|Types
-operator|.
-name|RecordField
-extends|,
+comment|/*Types.RecordField, */
 name|Map
 operator|.
 name|Entry

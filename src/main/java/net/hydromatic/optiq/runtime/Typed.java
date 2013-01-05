@@ -11,68 +11,42 @@ name|hydromatic
 operator|.
 name|optiq
 operator|.
-name|rules
-operator|.
-name|java
+name|runtime
 package|;
 end_package
 
 begin_import
 import|import
-name|net
+name|java
 operator|.
-name|hydromatic
+name|lang
 operator|.
-name|linq4j
+name|reflect
 operator|.
-name|expressions
-operator|.
-name|BlockExpression
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
-name|rel
-operator|.
-name|RelNode
+name|Type
 import|;
 end_import
 
 begin_comment
-comment|/**  * A relational expression of one of the  * {@link net.hydromatic.optiq.rules.java.EnumerableConvention} calling  * conventions.  *  * @author jhyde  */
+comment|/**  * Adds type information to a {@link net.hydromatic.linq4j.Enumerable}.  */
 end_comment
 
 begin_interface
 specifier|public
 interface|interface
-name|EnumerableRel
-extends|extends
-name|RelNode
+name|Typed
 block|{
-comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Creates a plan for this expression according to a calling convention.      *      * @param implementor implementor      */
-name|BlockExpression
-name|implement
-parameter_list|(
-name|EnumerableRelImplementor
-name|implementor
-parameter_list|)
-function_decl|;
-comment|/**      * Describes the Java type returned by this relational expression, and the      * mapping between it and the fields of the logical row type.      */
-name|PhysType
-name|getPhysType
+comment|/**      * Gets the type of the element(s) that are returned in this collection.      */
+specifier|public
+name|Type
+name|getElementType
 parameter_list|()
 function_decl|;
 block|}
 end_interface
 
 begin_comment
-comment|// End EnumerableRel.java
+comment|// End Typed.java
 end_comment
 
 end_unit

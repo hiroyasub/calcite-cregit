@@ -364,6 +364,11 @@ argument_list|>
 name|enumerable
 decl_stmt|;
 specifier|public
+specifier|final
+name|Class
+name|resultClazz
+decl_stmt|;
+specifier|public
 name|PrepareResult
 parameter_list|(
 name|String
@@ -386,6 +391,9 @@ argument_list|<
 name|T
 argument_list|>
 name|enumerable
+parameter_list|,
+name|Class
+name|resultClazz
 parameter_list|)
 block|{
 name|super
@@ -414,6 +422,12 @@ operator|.
 name|enumerable
 operator|=
 name|enumerable
+expr_stmt|;
+name|this
+operator|.
+name|resultClazz
+operator|=
+name|resultClazz
 expr_stmt|;
 block|}
 specifier|public

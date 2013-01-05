@@ -19,60 +19,72 @@ end_package
 
 begin_import
 import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|linq4j
-operator|.
-name|expressions
-operator|.
-name|BlockExpression
-import|;
-end_import
-
-begin_import
-import|import
 name|org
 operator|.
 name|eigenbase
 operator|.
-name|rel
+name|reltype
 operator|.
-name|RelNode
+name|RelDataType
 import|;
 end_import
 
 begin_comment
-comment|/**  * A relational expression of one of the  * {@link net.hydromatic.optiq.rules.java.EnumerableConvention} calling  * conventions.  *  * @author jhyde  */
+comment|/**  * How a row is represented as a Java value.  */
 end_comment
 
-begin_interface
+begin_enum
 specifier|public
-interface|interface
-name|EnumerableRel
-extends|extends
-name|RelNode
+enum|enum
+name|JavaRowFormat
 block|{
-comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Creates a plan for this expression according to a calling convention.      *      * @param implementor implementor      */
-name|BlockExpression
-name|implement
+name|CUSTOM
+block|,
+name|SCALAR
+block|,
+name|EMPTY_LIST
+block|,
+name|ARRAY
+block|;
+specifier|public
+name|JavaRowFormat
+name|optimize
 parameter_list|(
-name|EnumerableRelImplementor
-name|implementor
+name|RelDataType
+name|rowType
 parameter_list|)
-function_decl|;
-comment|/**      * Describes the Java type returned by this relational expression, and the      * mapping between it and the fields of the logical row type.      */
-name|PhysType
-name|getPhysType
-parameter_list|()
-function_decl|;
+block|{
+switch|switch
+condition|(
+name|rowType
+operator|.
+name|getFieldCount
+argument_list|()
+condition|)
+block|{
+case|case
+literal|0
+case|:
+return|return
+name|EMPTY_LIST
+return|;
+case|case
+literal|1
+case|:
+return|return
+name|SCALAR
+return|;
+default|default:
+return|return
+name|this
+return|;
 block|}
-end_interface
+block|}
+block|}
+end_enum
 
 begin_comment
-comment|// End EnumerableRel.java
+comment|// End JavaRowFormat.java
 end_comment
 
 end_unit

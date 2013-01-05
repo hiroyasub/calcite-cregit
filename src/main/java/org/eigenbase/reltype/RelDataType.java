@@ -17,18 +17,6 @@ begin_import
 import|import
 name|java
 operator|.
-name|lang
-operator|.
-name|reflect
-operator|.
-name|Type
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
 name|nio
 operator|.
 name|charset
@@ -81,8 +69,7 @@ begin_interface
 specifier|public
 interface|interface
 name|RelDataType
-extends|extends
-name|Type
+comment|/*extends Type*/
 block|{
 comment|//~ Methods ----------------------------------------------------------------
 comment|/**      * Queries whether this is a structured type.      *      * @return whether this type has fields; examples include rows and      * user-defined structured types in SQL, and classes in Java      */

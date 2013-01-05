@@ -53,6 +53,16 @@ name|Type
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
+import|;
+end_import
+
 begin_comment
 comment|/**  * Type factory that can register Java classes as record types.  *  * @author jhyde  */
 end_comment
@@ -85,6 +95,17 @@ name|getJavaClass
 parameter_list|(
 name|RelDataType
 name|type
+parameter_list|)
+function_decl|;
+comment|/** Creates a synthetic Java class whose fields have the given Java      * types. */
+name|Type
+name|createSyntheticType
+parameter_list|(
+name|List
+argument_list|<
+name|Type
+argument_list|>
+name|types
 parameter_list|)
 function_decl|;
 block|}

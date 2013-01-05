@@ -117,6 +117,16 @@ name|java
 operator|.
 name|util
 operator|.
+name|Collection
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
 name|List
 import|;
 end_import
@@ -581,15 +591,29 @@ argument_list|,
 operator|new
 name|JdbcTest
 operator|.
-name|AbstractTable
+name|AbstractModifiableTable
 argument_list|(
+name|mapSchema
+argument_list|,
 name|JdbcTest
 operator|.
 name|Employee
 operator|.
 name|class
 argument_list|,
-name|mapSchema
+name|optiqConnection
+operator|.
+name|getTypeFactory
+argument_list|()
+operator|.
+name|createType
+argument_list|(
+name|JdbcTest
+operator|.
+name|Employee
+operator|.
+name|class
+argument_list|)
 argument_list|,
 literal|"bar"
 argument_list|)
@@ -606,6 +630,15 @@ name|enumerator
 argument_list|(
 name|employees
 argument_list|)
+return|;
+block|}
+specifier|public
+name|Collection
+name|getModifiableCollection
+parameter_list|()
+block|{
+return|return
+name|employees
 return|;
 block|}
 block|}
@@ -659,11 +692,53 @@ argument_list|)
 operator|.
 name|returns
 argument_list|(
-literal|"empid=100; deptno=10; name=Bill\n"
+literal|"ROWCOUNT=3\n"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select count(*) as c from \"foo\".\"bar\""
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"C=4\n"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"insert into \"foo\".\"bar\" "
 operator|+
-literal|"empid=200; deptno=20; name=Eric\n"
+literal|"select * from \"hr\".\"emps\" where \"deptno\" = 10"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"ROWCOUNT=2\n"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select \"name\", count(*) as c from \"foo\".\"bar\" "
 operator|+
-literal|"empid=150; deptno=10; name=Sebastian\n"
+literal|"group by \"name\""
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"name=Bill; C=2\n"
+operator|+
+literal|"name=Eric; C=1\n"
+operator|+
+literal|"name=first; C=1\n"
+operator|+
+literal|"name=Sebastian; C=2\n"
 argument_list|)
 expr_stmt|;
 block|}

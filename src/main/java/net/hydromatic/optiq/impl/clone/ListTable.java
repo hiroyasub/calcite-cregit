@@ -57,6 +57,18 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
+name|reltype
+operator|.
+name|RelDataType
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|lang
@@ -105,12 +117,18 @@ name|schema
 decl_stmt|;
 specifier|private
 specifier|final
+name|RelDataType
+name|relDataType
+decl_stmt|;
+specifier|private
+specifier|final
 name|List
 argument_list|<
 name|T
 argument_list|>
 name|list
 decl_stmt|;
+comment|/** Creates a ListTable. */
 specifier|public
 name|ListTable
 parameter_list|(
@@ -119,6 +137,9 @@ name|schema
 parameter_list|,
 name|Type
 name|elementType
+parameter_list|,
+name|RelDataType
+name|relDataType
 parameter_list|,
 name|Expression
 name|expression
@@ -150,6 +171,12 @@ name|schema
 expr_stmt|;
 name|this
 operator|.
+name|relDataType
+operator|=
+name|relDataType
+expr_stmt|;
+name|this
+operator|.
 name|list
 operator|=
 name|list
@@ -162,6 +189,15 @@ parameter_list|()
 block|{
 return|return
 name|schema
+return|;
+block|}
+specifier|public
+name|RelDataType
+name|getRowType
+parameter_list|()
+block|{
+return|return
+name|relDataType
 return|;
 block|}
 annotation|@

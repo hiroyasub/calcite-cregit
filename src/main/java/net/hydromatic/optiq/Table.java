@@ -25,6 +25,18 @@ name|Queryable
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
+name|reltype
+operator|.
+name|RelDataType
+import|;
+end_import
+
 begin_comment
 comment|/**  * Table.  *  * @see TableFunction  */
 end_comment
@@ -44,6 +56,10 @@ argument_list|>
 block|{
 name|DataContext
 name|getDataContext
+parameter_list|()
+function_decl|;
+name|RelDataType
+name|getRowType
 parameter_list|()
 function_decl|;
 block|}

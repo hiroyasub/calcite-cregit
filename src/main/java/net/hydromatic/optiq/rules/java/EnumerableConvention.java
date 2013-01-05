@@ -5,11 +5,15 @@ end_comment
 
 begin_package
 package|package
-name|org
+name|net
 operator|.
-name|eigenbase
+name|hydromatic
 operator|.
-name|relopt
+name|optiq
+operator|.
+name|rules
+operator|.
+name|java
 package|;
 end_package
 
@@ -19,105 +23,70 @@ name|org
 operator|.
 name|eigenbase
 operator|.
-name|rel
+name|relopt
 operator|.
-name|RelNode
+name|*
 import|;
 end_import
 
 begin_comment
-comment|/**  * Calling convention trait.  */
+comment|/**  * Family of calling conventions that return results as an  * {@link net.hydromatic.linq4j.Enumerable}. */
 end_comment
 
-begin_interface
+begin_enum
 specifier|public
-interface|interface
-name|Convention
-extends|extends
-name|RelTrait
-block|{
-comment|/**      * Convention that for a relational expression that does not support any      * convention. It is not implementable, and has to be transformed to      * something else in order to be implemented.      *      *<p>Relational expressions generally start off in this form.</p>      *      *<p>Such expressions always have infinite cost.</p>      */
-name|Convention
-name|NONE
-init|=
-operator|new
-name|Impl
-argument_list|(
-literal|"NONE"
-argument_list|,
-name|RelNode
-operator|.
-name|class
-argument_list|)
-decl_stmt|;
-name|Class
-name|getInterface
-parameter_list|()
-function_decl|;
-name|String
-name|getName
-parameter_list|()
-function_decl|;
-comment|/** Default implementation. */
-class|class
-name|Impl
+enum|enum
+name|EnumerableConvention
 implements|implements
 name|Convention
 block|{
+comment|/** Convention that returns result as an Enumerable, each record as an array      * of objects. Records of 0 and 1 fields are represented as empty lists      * and scalars, respectively. */
+name|ARRAY
+argument_list|(
+name|JavaRowFormat
+operator|.
+name|ARRAY
+argument_list|)
+block|,
+comment|/** Convention that returns result as an Enumerable, each record as an      * object that has one data member for each column. Records of 0 and 1      * fields are represented as empty lists and scalars, respectively. */
+name|CUSTOM
+argument_list|(
+name|JavaRowFormat
+operator|.
+name|CUSTOM
+argument_list|)
+block|;
 specifier|private
 specifier|final
 name|String
 name|name
-decl_stmt|;
-specifier|private
-specifier|final
-name|Class
-argument_list|<
-name|?
-extends|extends
-name|RelNode
-argument_list|>
-name|relClass
 decl_stmt|;
 specifier|public
-name|Impl
+specifier|final
+name|JavaRowFormat
+name|format
+decl_stmt|;
+name|EnumerableConvention
 parameter_list|(
-name|String
-name|name
-parameter_list|,
-name|Class
-argument_list|<
-name|?
-extends|extends
-name|RelNode
-argument_list|>
-name|relClass
+name|JavaRowFormat
+name|format
 parameter_list|)
 block|{
 name|this
 operator|.
-name|name
+name|format
 operator|=
-name|name
+name|format
 expr_stmt|;
 name|this
 operator|.
-name|relClass
+name|name
 operator|=
-name|relClass
-expr_stmt|;
-block|}
-annotation|@
-name|Override
-specifier|public
-name|String
-name|toString
-parameter_list|()
-block|{
-return|return
-name|getName
+literal|"ENUMERABLE_"
+operator|+
+name|name
 argument_list|()
-return|;
+expr_stmt|;
 block|}
 specifier|public
 name|Class
@@ -125,7 +94,9 @@ name|getInterface
 parameter_list|()
 block|{
 return|return
-name|relClass
+name|EnumerableRel
+operator|.
+name|class
 return|;
 block|}
 specifier|public
@@ -149,11 +120,10 @@ name|instance
 return|;
 block|}
 block|}
-block|}
-end_interface
+end_enum
 
 begin_comment
-comment|// End Convention.java
+comment|// End EnumerableConvention.java
 end_comment
 
 end_unit
