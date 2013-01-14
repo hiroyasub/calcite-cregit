@@ -634,7 +634,7 @@ comment|/** JDBC version 4.1. Generally associated with JDK 1.7. */
 name|JDBC_41
 block|;
 comment|/** Deduces the current JDBC version. */
-specifier|protected
+specifier|public
 specifier|static
 name|JdbcVersion
 name|current
