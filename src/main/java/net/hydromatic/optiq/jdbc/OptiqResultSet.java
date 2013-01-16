@@ -443,6 +443,14 @@ operator|.
 name|resultClazz
 operator|!=
 literal|null
+operator|&&
+operator|!
+name|prepareResult
+operator|.
+name|resultClazz
+operator|.
+name|isArray
+argument_list|()
 condition|?
 operator|new
 name|RecordEnumeratorCursor

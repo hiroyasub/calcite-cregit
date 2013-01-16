@@ -28,7 +28,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Implementation of {@link net.hydromatic.optiq.runtime.Cursor} on top of an  * {@link net.hydromatic.linq4j.Enumerator} that  * returns an array of {@link Object} for each row.  *  * @author jhyde  */
+comment|/**  * Implementation of {@link Cursor} on top of an  * {@link net.hydromatic.linq4j.Enumerator} that  * returns an {@link Object} for each row.  *  * @author jhyde  */
 end_comment
 
 begin_class

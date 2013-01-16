@@ -287,6 +287,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+specifier|public
 specifier|static
 name|PhysType
 name|of

@@ -1689,6 +1689,23 @@ operator|.
 name|BOOLEAN
 argument_list|)
 decl_stmt|;
+comment|/**      * Type-inference strategy whereby the result type of a call is Boolean      * not null.      */
+specifier|public
+specifier|static
+specifier|final
+name|SqlReturnTypeInference
+name|rtiBooleanNotNull
+init|=
+operator|new
+name|SqlTypeTransformCascade
+argument_list|(
+name|rtiBoolean
+argument_list|,
+name|SqlTypeTransforms
+operator|.
+name|toNotNullable
+argument_list|)
+decl_stmt|;
 comment|/**      * Type-inference strategy whereby the result type of a call is Boolean,      * with nulls allowed if any of the operands allow nulls.      */
 specifier|public
 specifier|static

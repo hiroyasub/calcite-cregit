@@ -1037,7 +1037,7 @@ literal|30
 argument_list|,
 name|SqlTypeStrategies
 operator|.
-name|rtiBoolean
+name|rtiBooleanNotNull
 argument_list|,
 name|SqlTypeStrategies
 operator|.
@@ -1067,7 +1067,7 @@ literal|30
 argument_list|,
 name|SqlTypeStrategies
 operator|.
-name|rtiBoolean
+name|rtiBooleanNotNull
 argument_list|,
 name|SqlTypeStrategies
 operator|.
@@ -1097,7 +1097,7 @@ literal|30
 argument_list|,
 name|SqlTypeStrategies
 operator|.
-name|rtiBoolean
+name|rtiBooleanNotNull
 argument_list|,
 name|SqlTypeStrategies
 operator|.
@@ -1127,7 +1127,7 @@ literal|30
 argument_list|,
 name|SqlTypeStrategies
 operator|.
-name|rtiBoolean
+name|rtiBooleanNotNull
 argument_list|,
 name|SqlTypeStrategies
 operator|.
@@ -1157,7 +1157,7 @@ literal|30
 argument_list|,
 name|SqlTypeStrategies
 operator|.
-name|rtiBoolean
+name|rtiBooleanNotNull
 argument_list|,
 name|SqlTypeStrategies
 operator|.
@@ -1187,7 +1187,7 @@ literal|30
 argument_list|,
 name|SqlTypeStrategies
 operator|.
-name|rtiBoolean
+name|rtiBooleanNotNull
 argument_list|,
 name|SqlTypeStrategies
 operator|.
@@ -1217,7 +1217,7 @@ literal|30
 argument_list|,
 name|SqlTypeStrategies
 operator|.
-name|rtiBoolean
+name|rtiBooleanNotNull
 argument_list|,
 name|SqlTypeStrategies
 operator|.
@@ -1247,7 +1247,7 @@ literal|30
 argument_list|,
 name|SqlTypeStrategies
 operator|.
-name|rtiBoolean
+name|rtiBooleanNotNull
 argument_list|,
 name|SqlTypeStrategies
 operator|.
