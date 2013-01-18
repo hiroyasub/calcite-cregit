@@ -77,19 +77,7 @@ name|hydromatic
 operator|.
 name|optiq
 operator|.
-name|DataContext
-import|;
-end_import
-
-begin_import
-import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|optiq
-operator|.
-name|MutableSchema
+name|*
 import|;
 end_import
 
@@ -421,6 +409,11 @@ expr_stmt|;
 block|}
 block|}
 decl_stmt|;
+specifier|private
+specifier|final
+name|Schema
+name|informationSchema
+decl_stmt|;
 comment|/**      * Creates an OptiqConnectionImpl.      *      *<p>Not public; method is called only from the driver.</p>      *      * @param driver Driver      * @param factory Factory for JDBC objects      * @param url Server URL      * @param info Other connection properties      */
 name|OptiqConnectionImpl
 parameter_list|(
@@ -487,6 +480,17 @@ operator|=
 name|metaData
 operator|.
 name|getResultSetHoldability
+argument_list|()
+expr_stmt|;
+name|this
+operator|.
+name|informationSchema
+operator|=
+name|metaData
+operator|.
+name|meta
+operator|.
+name|createInformationSchema
 argument_list|()
 expr_stmt|;
 comment|// Temporary... for testing under Mondrian.

@@ -74,7 +74,6 @@ specifier|final
 name|OptiqConnectionImpl
 name|connection
 decl_stmt|;
-specifier|private
 specifier|final
 name|Meta
 name|meta

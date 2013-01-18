@@ -545,8 +545,12 @@ name|connection
 init|=
 name|JdbcTest
 operator|.
-name|getConnectionWithHrFoodmart
-argument_list|()
+name|getConnection
+argument_list|(
+literal|"hr"
+argument_list|,
+literal|"foodmart"
+argument_list|)
 decl_stmt|;
 name|OptiqConnection
 name|optiqConnection
