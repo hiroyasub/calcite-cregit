@@ -47,6 +47,11 @@ literal|0
 decl_stmt|;
 specifier|public
 specifier|final
+name|int
+name|modifier
+decl_stmt|;
+specifier|public
+specifier|final
 name|String
 name|name
 decl_stmt|;
@@ -59,6 +64,8 @@ parameter_list|)
 block|{
 name|this
 argument_list|(
+literal|0
+argument_list|,
 name|type
 argument_list|,
 literal|"p"
@@ -71,6 +78,9 @@ block|}
 specifier|public
 name|ParameterExpression
 parameter_list|(
+name|int
+name|modifier
+parameter_list|,
 name|Type
 name|type
 parameter_list|,
@@ -89,6 +99,12 @@ argument_list|)
 expr_stmt|;
 name|this
 operator|.
+name|modifier
+operator|=
+name|modifier
+expr_stmt|;
+name|this
+operator|.
 name|name
 operator|=
 name|name
@@ -97,7 +113,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
-name|ParameterExpression
+name|Expression
 name|accept
 parameter_list|(
 name|Visitor

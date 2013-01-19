@@ -837,7 +837,7 @@ argument_list|)
 return|;
 block|}
 specifier|public
-name|ParameterExpression
+name|Expression
 name|visit
 parameter_list|(
 name|ParameterExpression

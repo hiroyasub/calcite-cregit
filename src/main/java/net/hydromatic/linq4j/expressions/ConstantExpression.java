@@ -303,7 +303,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
-name|ConstantExpression
+name|Expression
 name|accept
 parameter_list|(
 name|Visitor

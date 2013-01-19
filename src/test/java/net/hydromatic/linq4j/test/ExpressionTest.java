@@ -1850,12 +1850,58 @@ name|void
 name|testBlockBuilder
 parameter_list|()
 block|{
+name|checkBlockBuilder
+argument_list|(
+literal|false
+argument_list|,
+literal|"{\n"
+operator|+
+literal|"  final int three = 1 + 2;\n"
+operator|+
+literal|"  final int six = three * 2;\n"
+operator|+
+literal|"  final int nine = three * three;\n"
+operator|+
+literal|"  final int eighteen = three + six + nine;\n"
+operator|+
+literal|"  return eighteen;\n"
+operator|+
+literal|"}\n"
+argument_list|)
+expr_stmt|;
+name|checkBlockBuilder
+argument_list|(
+literal|true
+argument_list|,
+literal|"{\n"
+operator|+
+literal|"  final int three = 1 + 2;\n"
+operator|+
+literal|"  return three + three * 2 + three * three;\n"
+operator|+
+literal|"}\n"
+argument_list|)
+expr_stmt|;
+block|}
+specifier|public
+name|void
+name|checkBlockBuilder
+parameter_list|(
+name|boolean
+name|optimizing
+parameter_list|,
+name|String
+name|expected
+parameter_list|)
+block|{
 name|BlockBuilder
 name|statements
 init|=
 operator|new
 name|BlockBuilder
-argument_list|()
+argument_list|(
+name|optimizing
+argument_list|)
 decl_stmt|;
 name|Expression
 name|one
@@ -1930,6 +1976,25 @@ argument_list|)
 argument_list|)
 decl_stmt|;
 name|Expression
+name|nine
+init|=
+name|statements
+operator|.
+name|append
+argument_list|(
+literal|"nine"
+argument_list|,
+name|Expressions
+operator|.
+name|multiply
+argument_list|(
+name|three
+argument_list|,
+name|three
+argument_list|)
+argument_list|)
+decl_stmt|;
+name|Expression
 name|eighteen
 init|=
 name|statements
@@ -1940,11 +2005,18 @@ literal|"eighteen"
 argument_list|,
 name|Expressions
 operator|.
-name|multiply
+name|add
+argument_list|(
+name|Expressions
+operator|.
+name|add
 argument_list|(
 name|three
 argument_list|,
 name|six
+argument_list|)
+argument_list|,
+name|nine
 argument_list|)
 argument_list|)
 decl_stmt|;
@@ -1964,17 +2036,7 @@ argument_list|)
 expr_stmt|;
 name|assertEquals
 argument_list|(
-literal|"{\n"
-operator|+
-literal|"  final int three = 1 + 2;\n"
-operator|+
-literal|"  final int six = three * 2;\n"
-operator|+
-literal|"  final int eighteen = three * six;\n"
-operator|+
-literal|"  return eighteen;\n"
-operator|+
-literal|"}\n"
+name|expected
 argument_list|,
 name|Expressions
 operator|.
@@ -2093,11 +2155,9 @@ literal|"{\n"
 operator|+
 literal|"  final java.util.Comparator comparator = null;\n"
 operator|+
-literal|"  final java.util.TreeSet treeSet = new java.util.TreeSet(\n"
+literal|"  return new java.util.TreeSet(\n"
 operator|+
-literal|"    comparator);\n"
-operator|+
-literal|"  return treeSet.add(null);\n"
+literal|"      comparator).add(null);\n"
 operator|+
 literal|"}\n"
 argument_list|,
@@ -2156,8 +2216,9 @@ name|Modifier
 operator|.
 name|FINAL
 argument_list|,
-operator|new
-name|ParameterExpression
+name|Expressions
+operator|.
+name|parameter
 argument_list|(
 name|String
 operator|.
@@ -2209,8 +2270,9 @@ name|FieldDeclaration
 argument_list|(
 literal|0
 argument_list|,
-operator|new
-name|ParameterExpression
+name|Expressions
+operator|.
+name|parameter
 argument_list|(
 name|int
 operator|.
@@ -2234,8 +2296,9 @@ name|FieldDeclaration
 argument_list|(
 literal|0
 argument_list|,
-operator|new
-name|ParameterExpression
+name|Expressions
+operator|.
+name|parameter
 argument_list|(
 name|int
 operator|.

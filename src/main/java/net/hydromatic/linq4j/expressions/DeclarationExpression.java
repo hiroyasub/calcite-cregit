@@ -106,18 +106,7 @@ name|Visitor
 name|visitor
 parameter_list|)
 block|{
-name|ParameterExpression
-name|parameter
-init|=
-name|this
-operator|.
-name|parameter
-operator|.
-name|accept
-argument_list|(
-name|visitor
-argument_list|)
-decl_stmt|;
+comment|// do not visit parameter - visit may not return a ParameterExpression
 name|Expression
 name|initializer
 init|=
