@@ -25,6 +25,18 @@ name|hydromatic
 operator|.
 name|linq4j
 operator|.
+name|Ord
+import|;
+end_import
+
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|linq4j
+operator|.
 name|expressions
 operator|.
 name|Primitive
@@ -80,18 +92,6 @@ operator|.
 name|reltype
 operator|.
 name|RelDataTypeField
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
-name|util
-operator|.
-name|Ord
 import|;
 end_import
 

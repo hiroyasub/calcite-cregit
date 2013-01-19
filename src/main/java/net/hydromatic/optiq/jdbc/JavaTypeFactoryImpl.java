@@ -23,6 +23,18 @@ name|hydromatic
 operator|.
 name|linq4j
 operator|.
+name|Ord
+import|;
+end_import
+
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|linq4j
+operator|.
 name|expressions
 operator|.
 name|Primitive
@@ -110,18 +122,6 @@ operator|.
 name|type
 operator|.
 name|SqlTypeFactoryImpl
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
-name|util
-operator|.
-name|Ord
 import|;
 end_import
 

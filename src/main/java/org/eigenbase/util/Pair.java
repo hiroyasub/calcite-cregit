@@ -309,7 +309,7 @@ return|return
 name|map
 return|;
 block|}
-comment|/**      * Converts two lists into a list of {@link Pair}s.      *      *<p>The length of the combined list is the lesser of the lengths of the      * source lists. But typically the source lists will be the same length.</p>      *      * @param ks Left list      * @param vs Right list      * @return List of pairs      *      * @see Ord#zip      */
+comment|/**      * Converts two lists into a list of {@link Pair}s.      *      *<p>The length of the combined list is the lesser of the lengths of the      * source lists. But typically the source lists will be the same length.</p>      *      * @param ks Left list      * @param vs Right list      * @return List of pairs      *      * @see net.hydromatic.linq4j.Ord#zip(java.util.List)      */
 specifier|public
 specifier|static
 parameter_list|<
