@@ -346,6 +346,10 @@ name|Expressions
 operator|.
 name|parameter
 argument_list|(
+name|Modifier
+operator|.
+name|FINAL
+argument_list|,
 name|DataContext
 operator|.
 name|class
