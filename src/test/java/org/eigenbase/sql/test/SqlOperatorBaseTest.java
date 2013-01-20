@@ -193,7 +193,7 @@ begin_class
 specifier|public
 specifier|abstract
 class|class
-name|SqlOperatorTests
+name|SqlOperatorBaseTest
 extends|extends
 name|TestCase
 block|{
@@ -761,7 +761,7 @@ argument_list|)
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 specifier|public
-name|SqlOperatorTests
+name|SqlOperatorBaseTest
 parameter_list|(
 name|String
 name|testName
@@ -6197,6 +6197,10 @@ name|SqlOperatorTest
 operator|.
 name|class
 operator|)
+operator|&&
+name|Bug
+operator|.
+name|TodoFixed
 condition|)
 block|{
 name|getTester
@@ -8125,6 +8129,16 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+operator|!
+name|Bug
+operator|.
+name|TodoFixed
+condition|)
+block|{
+return|return;
+block|}
 name|getTester
 argument_list|()
 operator|.
@@ -8234,6 +8248,16 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+operator|!
+name|Bug
+operator|.
+name|TodoFixed
+condition|)
+block|{
+return|return;
+block|}
 name|getTester
 argument_list|()
 operator|.
@@ -18893,7 +18917,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End SqlOperatorTests.java
+comment|// End SqlOperatorBaseTest.java
 end_comment
 
 end_unit

@@ -42,7 +42,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Concrete subclass of {@link SqlOperatorTests} which checks against  *  * @author Julian Hyde  * @since July 7, 2005  */
+comment|/**  * Concrete subclass of {@link SqlOperatorBaseTest} which checks against  * a {@link SqlValidator}. Tests that involve execution trivially succeed.  *  * @author Julian Hyde  * @since July 7, 2005  */
 end_comment
 
 begin_class
@@ -50,7 +50,7 @@ specifier|public
 class|class
 name|SqlOperatorTest
 extends|extends
-name|SqlOperatorTests
+name|SqlOperatorBaseTest
 block|{
 comment|//~ Instance fields --------------------------------------------------------
 specifier|private

@@ -2953,6 +2953,27 @@ expr_stmt|;
 block|}
 specifier|public
 name|void
+name|testValuesMinus
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|assertThat
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"values (-2-1)"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"EXPR$0=-3\n"
+argument_list|)
+expr_stmt|;
+block|}
+specifier|public
+name|void
 name|testValuesComposite
 parameter_list|()
 block|{

@@ -279,6 +279,15 @@ name|Frg378Fixed
 init|=
 literal|false
 decl_stmt|;
+comment|/** Temporary. */
+specifier|public
+specifier|static
+specifier|final
+name|boolean
+name|TodoFixed
+init|=
+literal|false
+decl_stmt|;
 block|}
 end_class
 

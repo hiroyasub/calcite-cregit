@@ -1474,6 +1474,15 @@ name|addRule
 argument_list|(
 name|JavaRules
 operator|.
+name|ENUMERABLE_ONE_ROW_RULE
+argument_list|)
+expr_stmt|;
+name|planner
+operator|.
+name|addRule
+argument_list|(
+name|JavaRules
+operator|.
 name|ENUMERABLE_CUSTOM_TO_ARRAY_RULE
 argument_list|)
 expr_stmt|;
