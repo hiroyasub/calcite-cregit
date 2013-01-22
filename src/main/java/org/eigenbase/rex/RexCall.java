@@ -15,6 +15,16 @@ end_package
 
 begin_import
 import|import
+name|java
+operator|.
+name|util
+operator|.
+name|*
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|eigenbase
@@ -191,7 +201,7 @@ assert|;
 block|}
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Returns the {@link RexKind} corresponding to a {@link SqlKind}. Fails if      * there is none.      *      * @post return != null      */
+comment|/**      * Returns the {@link RexKind} corresponding to a {@link SqlKind}. Fails if      * there is none. Never returns null.      */
 specifier|static
 name|RexKind
 name|sqlKindToRexKind
@@ -739,6 +749,28 @@ parameter_list|()
 block|{
 return|return
 name|operands
+return|;
+block|}
+specifier|public
+name|List
+argument_list|<
+name|RexNode
+argument_list|>
+name|getOperandList
+parameter_list|()
+block|{
+return|return
+name|Collections
+operator|.
+name|unmodifiableList
+argument_list|(
+name|Arrays
+operator|.
+name|asList
+argument_list|(
+name|operands
+argument_list|)
+argument_list|)
 return|;
 block|}
 specifier|public

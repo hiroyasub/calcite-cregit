@@ -91,10 +91,7 @@ extends|extends
 name|SqlOperatorBaseTest
 block|{
 specifier|private
-name|SqlTester
-name|tester
-decl_stmt|;
-specifier|private
+specifier|static
 name|SqlTester
 name|STATIC_TESTER
 decl_stmt|;
@@ -123,10 +120,12 @@ block|{
 if|if
 condition|(
 name|STATIC_TESTER
-operator|==
+operator|!=
 literal|null
 condition|)
 block|{
+return|return;
+block|}
 specifier|final
 name|OptiqConnection
 name|connection
@@ -264,11 +263,6 @@ block|}
 block|}
 expr_stmt|;
 block|}
-name|tester
-operator|=
-name|STATIC_TESTER
-expr_stmt|;
-block|}
 annotation|@
 name|Override
 specifier|protected
@@ -277,7 +271,7 @@ name|getTester
 parameter_list|()
 block|{
 return|return
-name|tester
+name|STATIC_TESTER
 return|;
 block|}
 block|}

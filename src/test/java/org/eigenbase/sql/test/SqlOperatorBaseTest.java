@@ -6479,6 +6479,48 @@ expr_stmt|;
 block|}
 specifier|public
 name|void
+name|testAndOperator2
+parameter_list|()
+block|{
+name|getTester
+argument_list|()
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"case when false then unknown else true end and true"
+argument_list|,
+name|Boolean
+operator|.
+name|TRUE
+argument_list|)
+expr_stmt|;
+name|getTester
+argument_list|()
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"case when false then cast(null as boolean) else true end and true"
+argument_list|,
+name|Boolean
+operator|.
+name|TRUE
+argument_list|)
+expr_stmt|;
+name|getTester
+argument_list|()
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"case when false then null else true end and true"
+argument_list|,
+name|Boolean
+operator|.
+name|TRUE
+argument_list|)
+expr_stmt|;
+block|}
+specifier|public
+name|void
 name|testAndOperatorLazy
 parameter_list|()
 block|{
@@ -13936,7 +13978,7 @@ block|{
 comment|// The extra CASE expression is to fool Janino.  It does constant
 comment|// reduction and will throw the divide by zero exception while
 comment|// compiling the expression.  The test frame work would then issue
-comment|// unexpected exception occured during "validation".  You cannot
+comment|// unexpected exception occurred during "validation".  You cannot
 comment|// submit as non-runtime because the janino exception does not have
 comment|// error position information and the framework is unhappy with that.
 name|getTester
