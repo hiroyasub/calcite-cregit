@@ -2993,6 +2993,17 @@ name|primitive
 operator|==
 name|CHAR
 operator|)
+operator|&&
+operator|!
+operator|(
+name|this
+operator|==
+name|CHAR
+operator|&&
+name|primitive
+operator|==
+name|BYTE
+operator|)
 return|;
 block|}
 comment|/** A place to send a value. */
