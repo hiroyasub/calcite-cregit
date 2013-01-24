@@ -108,6 +108,14 @@ argument_list|>
 name|types
 parameter_list|)
 function_decl|;
+comment|/** Converts a type in Java format to a SQL-oriented type. */
+name|RelDataType
+name|toSql
+parameter_list|(
+name|RelDataType
+name|type
+parameter_list|)
+function_decl|;
 block|}
 end_interface
 
