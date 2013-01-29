@@ -366,9 +366,6 @@ return|;
 case|case
 name|AS_QUERYABLE
 case|:
-case|case
-name|SCHEMA_GET_TABLE
-case|:
 return|return
 operator|new
 name|TableAccessRel

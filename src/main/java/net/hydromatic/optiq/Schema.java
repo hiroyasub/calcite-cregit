@@ -91,12 +91,24 @@ name|String
 name|name
 parameter_list|)
 function_decl|;
-comment|/**      * Returns a table with the given name, or null.      *      * @param name Table name      * @return Table, or null      */
+comment|/**      * Returns a table with the given name, or null.      *      * @param name Table name      * @param elementType Element type      * @return Table, or null      */
+parameter_list|<
+name|E
+parameter_list|>
 name|Table
+argument_list|<
+name|E
+argument_list|>
 name|getTable
 parameter_list|(
 name|String
 name|name
+parameter_list|,
+name|Class
+argument_list|<
+name|E
+argument_list|>
+name|elementType
 parameter_list|)
 function_decl|;
 name|Expression
