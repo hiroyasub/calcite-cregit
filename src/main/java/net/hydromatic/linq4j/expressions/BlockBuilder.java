@@ -134,6 +134,54 @@ name|BlockExpression
 name|block
 parameter_list|)
 block|{
+return|return
+name|append
+argument_list|(
+name|name
+argument_list|,
+name|block
+argument_list|,
+literal|true
+argument_list|)
+return|;
+block|}
+comment|/** Appends an expression to a list of statements, optionally optimizing it      * to a variable if it is used more than once.      *      * @param name Suggested variable name      * @param block Expression      * @param optimize Whether to try to optimize by assigning the expression to      *                 a variable. Do not do this if the expression has      *                 side-effects or a time-dependent value.      */
+specifier|public
+name|Expression
+name|append
+parameter_list|(
+name|String
+name|name
+parameter_list|,
+name|BlockExpression
+name|block
+parameter_list|,
+name|boolean
+name|optimize
+parameter_list|)
+block|{
+if|if
+condition|(
+operator|!
+name|optimize
+operator|&&
+operator|!
+name|name
+operator|.
+name|startsWith
+argument_list|(
+literal|"_"
+argument_list|)
+condition|)
+block|{
+comment|// "_" prefix reminds us not to consider the variable for inlining
+name|name
+operator|=
+literal|'_'
+operator|+
+name|name
+expr_stmt|;
+block|}
 if|if
 condition|(
 name|statements
@@ -1041,6 +1089,30 @@ condition|)
 block|{
 comment|// Don't allow 'final Type t = null' to be inlined. There
 comment|// is an implicit cast.
+name|count
+operator|=
+literal|100
+expr_stmt|;
+block|}
+if|if
+condition|(
+name|statement
+operator|.
+name|parameter
+operator|.
+name|name
+operator|.
+name|startsWith
+argument_list|(
+literal|"_"
+argument_list|)
+condition|)
+block|{
+comment|// Don't inline variables whose name begins with "_". This
+comment|// is a hacky way to prevent inlining. E.g.
+comment|//   final int _count = collection.size();
+comment|//   foo(collection);
+comment|//   return collection.size() - _count;
 name|count
 operator|=
 literal|100
