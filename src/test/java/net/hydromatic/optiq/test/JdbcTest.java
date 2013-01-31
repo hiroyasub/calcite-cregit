@@ -2960,6 +2960,7 @@ literal|"EXPR$0=-3\n"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Tests a table constructor that has multiple rows and multiple columns.      *      *<p>Note that the character literals become CHAR(3) and that the first is      * correctly rendered with trailing spaces: 'a  '. If we were inserting      * into a VARCHAR column the behavior would be different; the literals      * would be converted into VARCHAR(3) values and the implied cast from      * CHAR(1) to CHAR(3) that appends trailing spaces does not occur. See      * "contextually typed value specification" in the SQL spec.</p>      */
 specifier|public
 name|void
 name|testValuesComposite

@@ -3962,6 +3962,8 @@ case|:
 if|if
 condition|(
 name|underFrom
+operator|||
+literal|true
 condition|)
 block|{
 comment|// leave FROM (VALUES(...)) [ AS alias ] clauses alone,
@@ -8738,6 +8740,15 @@ operator|(
 name|SqlCall
 operator|)
 name|node
+expr_stmt|;
+name|scopes
+operator|.
+name|put
+argument_list|(
+name|call
+argument_list|,
+name|parentScope
+argument_list|)
 expr_stmt|;
 specifier|final
 name|TableConstructorNamespace
@@ -13745,6 +13756,13 @@ argument_list|,
 name|insert
 argument_list|)
 decl_stmt|;
+name|setValidatedNodeType
+argument_list|(
+name|insert
+argument_list|,
+name|logicalTargetRowType
+argument_list|)
+expr_stmt|;
 name|RelDataType
 name|logicalSourceRowType
 init|=

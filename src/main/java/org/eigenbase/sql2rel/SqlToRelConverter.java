@@ -1313,6 +1313,8 @@ argument_list|(
 name|query
 argument_list|,
 name|top
+argument_list|,
+literal|null
 argument_list|)
 decl_stmt|;
 name|checkConvertedType
@@ -4746,6 +4748,8 @@ argument_list|(
 name|seek
 argument_list|,
 literal|false
+argument_list|,
+literal|null
 argument_list|)
 return|;
 block|}
@@ -6701,6 +6705,8 @@ argument_list|(
 name|from
 argument_list|,
 literal|false
+argument_list|,
+literal|null
 argument_list|)
 decl_stmt|;
 name|bb
@@ -6716,7 +6722,7 @@ return|return;
 case|case
 name|VALUES
 case|:
-name|convertValues
+name|convertValuesImpl
 argument_list|(
 name|bb
 argument_list|,
@@ -6724,6 +6730,8 @@ operator|(
 name|SqlCall
 operator|)
 name|from
+argument_list|,
+literal|null
 argument_list|)
 expr_stmt|;
 return|return;
@@ -9957,7 +9965,7 @@ return|return
 name|trimUnusedFields
 return|;
 block|}
-comment|/**      * Recursively converts a query to a relational expression.      *      * @param query Query      * @param top Whether this query is the top-level query of the statement      *      * @return Relational expression      */
+comment|/**      * Recursively converts a query to a relational expression.      *      * @param query Query      * @param top Whether this query is the top-level query of the statement      * @param targetRowType Target row type, or null      *      * @return Relational expression      */
 specifier|protected
 name|RelNode
 name|convertQueryRecursive
@@ -9967,6 +9975,9 @@ name|query
 parameter_list|,
 name|boolean
 name|top
+parameter_list|,
+name|RelDataType
+name|targetRowType
 parameter_list|)
 block|{
 switch|switch
@@ -10055,6 +10066,20 @@ operator|)
 name|query
 argument_list|)
 return|;
+case|case
+name|VALUES
+case|:
+return|return
+name|convertValues
+argument_list|(
+operator|(
+name|SqlCall
+operator|)
+name|query
+argument_list|,
+name|targetRowType
+argument_list|)
+return|;
 default|default:
 throw|throw
 name|Util
@@ -10099,6 +10124,8 @@ literal|0
 index|]
 argument_list|,
 literal|false
+argument_list|,
+literal|null
 argument_list|)
 decl_stmt|;
 specifier|final
@@ -10113,6 +10140,8 @@ literal|1
 index|]
 argument_list|,
 literal|false
+argument_list|,
+literal|null
 argument_list|)
 decl_stmt|;
 name|boolean
@@ -10287,6 +10316,22 @@ argument_list|(
 name|call
 argument_list|)
 decl_stmt|;
+specifier|final
+name|RelDataType
+name|targetRowType
+init|=
+name|validator
+operator|.
+name|getValidatedNodeType
+argument_list|(
+name|call
+argument_list|)
+decl_stmt|;
+assert|assert
+name|targetRowType
+operator|!=
+literal|null
+assert|;
 name|RelNode
 name|sourceRel
 init|=
@@ -10298,6 +10343,8 @@ name|getSource
 argument_list|()
 argument_list|,
 literal|false
+argument_list|,
+name|targetRowType
 argument_list|)
 decl_stmt|;
 name|RelNode
@@ -12156,17 +12203,7 @@ operator|.
 name|operands
 argument_list|)
 decl_stmt|;
-assert|assert
-name|bb
-operator|.
-name|scope
-operator|instanceof
-name|SelectScope
-operator|:
-name|bb
-operator|.
-name|scope
-assert|;
+comment|//                assert bb.scope instanceof SelectScope : bb.scope;
 name|CollectNamespace
 name|nss
 init|=
@@ -13159,16 +13196,97 @@ return|return
 name|alias
 return|;
 block|}
-comment|/**      * Converts a values clause (as in "INSERT INTO T(x,y) VALUES (1,2)") into a      * relational expression.      *      * @param bb Blackboard      * @param values Call to SQL VALUES operator      */
+comment|/**      * Converts a SELECT statement's parse tree into a relational expression.      */
+specifier|public
+name|RelNode
+name|convertValues
+parameter_list|(
+name|SqlCall
+name|values
+parameter_list|,
+name|RelDataType
+name|targetRowType
+parameter_list|)
+block|{
+specifier|final
+name|SqlValidatorScope
+name|scope
+init|=
+name|validator
+operator|.
+name|getOverScope
+argument_list|(
+name|values
+argument_list|)
+decl_stmt|;
+assert|assert
+name|scope
+operator|!=
+literal|null
+assert|;
+specifier|final
+name|Blackboard
+name|bb
+init|=
+name|createBlackboard
+argument_list|(
+name|scope
+argument_list|,
+literal|null
+argument_list|)
+decl_stmt|;
+name|convertValuesImpl
+argument_list|(
+name|bb
+argument_list|,
+name|values
+argument_list|,
+name|targetRowType
+argument_list|)
+expr_stmt|;
+name|mapScopeToLux
+operator|.
+name|put
+argument_list|(
+name|bb
+operator|.
+name|scope
+argument_list|,
+operator|new
+name|LookupContext
+argument_list|(
+name|bb
+operator|.
+name|root
+argument_list|,
+name|bb
+operator|.
+name|systemFieldList
+operator|.
+name|size
+argument_list|()
+argument_list|)
+argument_list|)
+expr_stmt|;
+return|return
+name|bb
+operator|.
+name|root
+return|;
+block|}
+comment|/**      * Converts a values clause (as in "INSERT INTO T(x,y) VALUES (1,2)") into a      * relational expression.      *      * @param bb Blackboard      * @param values Call to SQL VALUES operator      * @param targetRowType Target row type      */
 specifier|private
 name|void
-name|convertValues
+name|convertValuesImpl
 parameter_list|(
 name|Blackboard
 name|bb
 parameter_list|,
 name|SqlCall
 name|values
+parameter_list|,
+name|RelDataType
+name|targetRowType
 parameter_list|)
 block|{
 comment|// Attempt direct conversion to ValuesRel; if that fails, deal with
@@ -17810,9 +17928,9 @@ argument_list|)
 decl_stmt|;
 comment|// For DECIMAL, since it's already represented as a bigint we
 comment|// want to do a reinterpretCast instead of a cast to avoid
-comment|// losing any precisision.
+comment|// losing any precision.
 name|boolean
-name|renterpretCast
+name|reinterpretCast
 init|=
 name|type
 operator|.
@@ -17823,7 +17941,7 @@ name|SqlTypeName
 operator|.
 name|DECIMAL
 decl_stmt|;
-comment|// Replace orignal expression with CAST of not one
+comment|// Replace original expression with CAST of not one
 comment|// of the supported types
 if|if
 condition|(
@@ -17834,7 +17952,7 @@ condition|)
 block|{
 if|if
 condition|(
-name|renterpretCast
+name|reinterpretCast
 condition|)
 block|{
 name|exprs
@@ -17972,7 +18090,7 @@ condition|)
 block|{
 if|if
 condition|(
-name|renterpretCast
+name|reinterpretCast
 condition|)
 block|{
 name|histogramCall

@@ -110,7 +110,7 @@ name|identifier
 parameter_list|)
 block|{
 return|return
-literal|null
+name|identifier
 return|;
 block|}
 specifier|public

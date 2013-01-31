@@ -585,6 +585,14 @@ name|SqlNode
 name|sqlQuery
 parameter_list|)
 function_decl|;
+comment|/**      * Returns the scope of an OVER or VALUES node.      *      * @param node Node      * @return Scope      */
+name|SqlValidatorScope
+name|getOverScope
+parameter_list|(
+name|SqlNode
+name|node
+parameter_list|)
+function_decl|;
 block|}
 end_interface
 
