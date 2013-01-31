@@ -113,6 +113,10 @@ specifier|final
 name|Factory
 name|factory
 decl_stmt|;
+specifier|final
+name|Handler
+name|handler
+decl_stmt|;
 specifier|protected
 name|UnregisteredDriver
 parameter_list|()
@@ -129,6 +133,13 @@ operator|.
 name|version
 operator|=
 name|createDriverVersion
+argument_list|()
+expr_stmt|;
+name|this
+operator|.
+name|handler
+operator|=
+name|createHandler
 argument_list|()
 expr_stmt|;
 block|}
@@ -149,6 +160,18 @@ name|current
 argument_list|()
 argument_list|)
 argument_list|)
+return|;
+block|}
+comment|/** Creates a Handler. */
+specifier|protected
+name|Handler
+name|createHandler
+parameter_list|()
+block|{
+return|return
+operator|new
+name|HandlerImpl
+argument_list|()
 return|;
 block|}
 comment|/**      * Returns the name of a class to be factory for JDBC objects      * (connection, statement) appropriate for the current JDBC version.      */
@@ -340,7 +363,10 @@ argument_list|,
 name|info
 argument_list|)
 decl_stmt|;
-return|return
+specifier|final
+name|OptiqConnectionImpl
+name|connection
+init|=
 name|factory
 operator|.
 name|newConnection
@@ -353,6 +379,16 @@ name|url
 argument_list|,
 name|info2
 argument_list|)
+decl_stmt|;
+name|handler
+operator|.
+name|onConnectionInit
+argument_list|(
+name|connection
+argument_list|)
+expr_stmt|;
+return|return
+name|connection
 return|;
 block|}
 specifier|public
