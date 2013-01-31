@@ -2952,7 +2952,7 @@ return|return
 name|node
 return|;
 block|}
-comment|/**      * Ensure's type's nullability matches a value's nullability      */
+comment|/**      * Ensures that a type's nullability matches a value's nullability.      */
 specifier|public
 name|RelDataType
 name|matchNullability
