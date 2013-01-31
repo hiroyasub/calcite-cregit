@@ -389,7 +389,7 @@ literal|true
 argument_list|,
 name|Types
 operator|.
-name|OTHER
+name|JAVA_OBJECT
 argument_list|)
 block|,
 name|SYMBOL
@@ -3029,7 +3029,7 @@ condition|(
 name|this
 condition|)
 block|{
-comment|//TODO: Minimum numeric scale for decimal
+comment|// TODO: Minimum numeric scale for decimal
 case|case
 name|INTERVAL_DAY_TIME
 case|:

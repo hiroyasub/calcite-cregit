@@ -839,6 +839,14 @@ name|Timestamp
 operator|.
 name|class
 return|;
+case|case
+name|ANY
+case|:
+return|return
+name|Object
+operator|.
+name|class
+return|;
 block|}
 block|}
 return|return

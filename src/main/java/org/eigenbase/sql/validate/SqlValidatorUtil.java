@@ -333,7 +333,7 @@ return|;
 block|}
 block|}
 comment|// If record type is flagged as having "any field you ask for",
-comment|// return a type. (TODO: Better way to mark accomodating types.)
+comment|// return a type. (TODO: Better way to mark accommodating types.)
 name|RelDataTypeField
 name|extra
 init|=
@@ -428,6 +428,41 @@ return|return
 name|field
 return|;
 block|}
+block|}
+comment|// If record type is flagged as having "any field you ask for",
+comment|// return a type. (TODO: Better way to mark accommodating types.)
+name|RelDataTypeField
+name|extra
+init|=
+name|rowType
+operator|.
+name|getField
+argument_list|(
+literal|"_extra"
+argument_list|)
+decl_stmt|;
+if|if
+condition|(
+name|extra
+operator|!=
+literal|null
+condition|)
+block|{
+return|return
+operator|new
+name|RelDataTypeFieldImpl
+argument_list|(
+name|columnName
+argument_list|,
+operator|-
+literal|1
+argument_list|,
+name|extra
+operator|.
+name|getType
+argument_list|()
+argument_list|)
+return|;
 block|}
 return|return
 literal|null
