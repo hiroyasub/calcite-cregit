@@ -499,6 +499,103 @@ name|Employee
 argument_list|>
 argument_list|()
 decl_stmt|;
+name|OptiqAssert
+operator|.
+name|AssertThat
+name|with
+init|=
+name|mutable
+argument_list|(
+name|employees
+argument_list|)
+decl_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select * from \"foo\".\"bar\""
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"empid=0; deptno=0; name=first\n"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"insert into \"foo\".\"bar\" select * from \"hr\".\"emps\""
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"ROWCOUNT=3\n"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select count(*) as c from \"foo\".\"bar\""
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"C=4\n"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"insert into \"foo\".\"bar\" "
+operator|+
+literal|"select * from \"hr\".\"emps\" where \"deptno\" = 10"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"ROWCOUNT=2\n"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select \"name\", count(*) as c from \"foo\".\"bar\" "
+operator|+
+literal|"group by \"name\""
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"name=Bill; C=2\n"
+operator|+
+literal|"name=Eric; C=1\n"
+operator|+
+literal|"name=first; C=1\n"
+operator|+
+literal|"name=Sebastian; C=2\n"
+argument_list|)
+expr_stmt|;
+block|}
+specifier|private
+name|OptiqAssert
+operator|.
+name|AssertThat
+name|mutable
+parameter_list|(
+specifier|final
+name|List
+argument_list|<
+name|JdbcTest
+operator|.
+name|Employee
+argument_list|>
+name|employees
+parameter_list|)
+block|{
 name|employees
 operator|.
 name|add
@@ -516,11 +613,7 @@ literal|"first"
 argument_list|)
 argument_list|)
 expr_stmt|;
-name|OptiqAssert
-operator|.
-name|AssertThat
-name|with
-init|=
+return|return
 name|assertThat
 argument_list|()
 operator|.
@@ -654,26 +747,41 @@ return|;
 block|}
 block|}
 argument_list|)
-decl_stmt|;
-name|with
-operator|.
-name|query
-argument_list|(
-literal|"select * from \"foo\".\"bar\""
-argument_list|)
-operator|.
-name|returns
-argument_list|(
-literal|"empid=0; deptno=0; name=first\n"
-argument_list|)
-expr_stmt|;
-if|if
-condition|(
-literal|false
-condition|)
+return|;
+block|}
+specifier|public
+name|void
+name|testInsert2
+parameter_list|()
 block|{
-comment|// TODO: fix "Cannot assign to target field 'empid' of type
-comment|//   JavaType(int) from source field 'EXPR$0' of type INTEGER"
+specifier|final
+name|List
+argument_list|<
+name|JdbcTest
+operator|.
+name|Employee
+argument_list|>
+name|employees
+init|=
+operator|new
+name|ArrayList
+argument_list|<
+name|JdbcTest
+operator|.
+name|Employee
+argument_list|>
+argument_list|()
+decl_stmt|;
+name|OptiqAssert
+operator|.
+name|AssertThat
+name|with
+init|=
+name|mutable
+argument_list|(
+name|employees
+argument_list|)
+decl_stmt|;
 name|with
 operator|.
 name|query
@@ -683,15 +791,16 @@ argument_list|)
 operator|.
 name|returns
 argument_list|(
-literal|"1"
+literal|"ROWCOUNT=1\n"
 argument_list|)
 expr_stmt|;
-block|}
 name|with
 operator|.
 name|query
 argument_list|(
-literal|"insert into \"foo\".\"bar\" select * from \"hr\".\"emps\""
+literal|"insert into \"foo\".\"bar\"\n"
+operator|+
+literal|"values (1, 3, 'third'), (1, 4, 'fourth'), (1, 5, 'fifth ')"
 argument_list|)
 operator|.
 name|returns
@@ -708,41 +817,7 @@ argument_list|)
 operator|.
 name|returns
 argument_list|(
-literal|"C=4\n"
-argument_list|)
-expr_stmt|;
-name|with
-operator|.
-name|query
-argument_list|(
-literal|"insert into \"foo\".\"bar\" "
-operator|+
-literal|"select * from \"hr\".\"emps\" where \"deptno\" = 10"
-argument_list|)
-operator|.
-name|returns
-argument_list|(
-literal|"ROWCOUNT=2\n"
-argument_list|)
-expr_stmt|;
-name|with
-operator|.
-name|query
-argument_list|(
-literal|"select \"name\", count(*) as c from \"foo\".\"bar\" "
-operator|+
-literal|"group by \"name\""
-argument_list|)
-operator|.
-name|returns
-argument_list|(
-literal|"name=Bill; C=2\n"
-operator|+
-literal|"name=Eric; C=1\n"
-operator|+
-literal|"name=first; C=1\n"
-operator|+
-literal|"name=Sebastian; C=2\n"
+literal|"C=5\n"
 argument_list|)
 expr_stmt|;
 block|}
