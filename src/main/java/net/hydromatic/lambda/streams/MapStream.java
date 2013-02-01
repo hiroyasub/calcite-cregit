@@ -9,7 +9,7 @@ name|net
 operator|.
 name|hydromatic
 operator|.
-name|lamdba
+name|lambda
 operator|.
 name|streams
 package|;
@@ -21,7 +21,7 @@ name|net
 operator|.
 name|hydromatic
 operator|.
-name|lamdba
+name|lambda
 operator|.
 name|functions
 operator|.

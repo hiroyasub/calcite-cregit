@@ -9,49 +9,52 @@ name|net
 operator|.
 name|hydromatic
 operator|.
-name|lamdba
+name|lambda
 operator|.
 name|functions
 package|;
 end_package
 
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|Map
-import|;
-end_import
-
 begin_comment
-comment|/**  * Key/value pair.  *  *<p>(Based upon java.lang.BiValue coming in JDK 8.)</p>  */
+comment|/**  * Block.  *  *<p>Based on {@code java.util.functions.Block}.</p>  */
 end_comment
 
 begin_interface
 specifier|public
 interface|interface
-name|BiValue
+name|Block
 parameter_list|<
-name|K
-parameter_list|,
-name|V
+name|T
 parameter_list|>
 block|{
-name|V
-name|getValue
-parameter_list|()
+name|void
+name|apply
+parameter_list|(
+name|T
+name|t
+parameter_list|)
 function_decl|;
-name|K
-name|getKey
-parameter_list|()
+name|Block
+argument_list|<
+name|T
+argument_list|>
+name|chain
+parameter_list|(
+name|Block
+argument_list|<
+name|?
+super|super
+name|T
+argument_list|>
+name|second
+parameter_list|)
 function_decl|;
+comment|// default: Blocks.chain(this, second);
 block|}
 end_interface
 
 begin_comment
-comment|// End BiValue.java
+comment|// End Block.java
 end_comment
 
 end_unit

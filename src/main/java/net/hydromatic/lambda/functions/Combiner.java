@@ -9,46 +9,43 @@ name|net
 operator|.
 name|hydromatic
 operator|.
-name|lamdba
+name|lambda
 operator|.
 name|functions
 package|;
 end_package
 
 begin_comment
-comment|/**  * FlatMapper.  *  *<p>Based on {@code java.util.functions.FlatMapper}.</p>  */
+comment|/**  * Combiner.  *  *<p>Based on {@code java.util.functions.Combiner}.</p>  */
 end_comment
 
 begin_interface
 specifier|public
 interface|interface
-name|FlatMapper
+name|Combiner
 parameter_list|<
 name|T
 parameter_list|,
-name|R
+name|U
+parameter_list|,
+name|V
 parameter_list|>
 block|{
-name|void
-name|flatMapInto
+name|V
+name|combine
 parameter_list|(
 name|T
-name|element
+name|t
 parameter_list|,
-name|Sink
-argument_list|<
-name|?
-super|super
-name|R
-argument_list|>
-name|sink
+name|U
+name|v
 parameter_list|)
 function_decl|;
 block|}
 end_interface
 
 begin_comment
-comment|// End FlatMapper.java
+comment|// End Combiner.java
 end_comment
 
 end_unit

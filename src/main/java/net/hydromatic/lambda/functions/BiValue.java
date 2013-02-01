@@ -9,60 +9,39 @@ name|net
 operator|.
 name|hydromatic
 operator|.
-name|lamdba
+name|lambda
 operator|.
 name|functions
 package|;
 end_package
 
 begin_comment
-comment|/**  * BinaryOperator.  *  *<p>Based on {@code java.util.functions.BinaryOperator}.</p>  */
+comment|/**  * Key/value pair.  *  *<p>(Based upon java.lang.BiValue coming in JDK 8.)</p>  */
 end_comment
 
 begin_interface
 specifier|public
 interface|interface
-name|BinaryOperator
+name|BiValue
 parameter_list|<
-name|T
+name|K
+parameter_list|,
+name|V
 parameter_list|>
-extends|extends
-name|Combiner
-argument_list|<
-name|T
-argument_list|,
-name|T
-argument_list|,
-name|T
-argument_list|>
 block|{
-name|T
-name|operate
-parameter_list|(
-name|T
-name|left
-parameter_list|,
-name|T
-name|right
-parameter_list|)
+name|V
+name|getValue
+parameter_list|()
 function_decl|;
-name|T
-name|combine
-parameter_list|(
-name|T
-name|t1
-parameter_list|,
-name|T
-name|t2
-parameter_list|)
+name|K
+name|getKey
+parameter_list|()
 function_decl|;
-comment|// default:
-comment|// return operate(t1, t2);
 block|}
 end_interface
 
 begin_comment
-comment|// End BinaryOperator.java
+comment|// End BiValue.java
 end_comment
 
 end_unit

@@ -9,33 +9,60 @@ name|net
 operator|.
 name|hydromatic
 operator|.
-name|lamdba
+name|lambda
 operator|.
 name|functions
 package|;
 end_package
 
 begin_comment
-comment|/**  * Creates objects. Aka Source and Producer.  *  *<p>Based on {@code java.util.functions.Factory}.</p>  */
+comment|/**  * BinaryOperator.  *  *<p>Based on {@code java.util.functions.BinaryOperator}.</p>  */
 end_comment
 
 begin_interface
 specifier|public
 interface|interface
-name|Factory
+name|BinaryOperator
 parameter_list|<
 name|T
 parameter_list|>
+extends|extends
+name|Combiner
+argument_list|<
+name|T
+argument_list|,
+name|T
+argument_list|,
+name|T
+argument_list|>
 block|{
 name|T
-name|make
-parameter_list|()
+name|operate
+parameter_list|(
+name|T
+name|left
+parameter_list|,
+name|T
+name|right
+parameter_list|)
 function_decl|;
+name|T
+name|combine
+parameter_list|(
+name|T
+name|t1
+parameter_list|,
+name|T
+name|t2
+parameter_list|)
+function_decl|;
+comment|// default:
+comment|// return operate(t1, t2);
 block|}
 end_interface
 
 begin_comment
-comment|// End Factory.java
+comment|// End BinaryOperator.java
 end_comment
 
 end_unit

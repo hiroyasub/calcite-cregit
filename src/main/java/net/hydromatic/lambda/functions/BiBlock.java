@@ -9,96 +9,64 @@ name|net
 operator|.
 name|hydromatic
 operator|.
-name|lamdba
+name|lambda
 operator|.
 name|functions
 package|;
 end_package
 
 begin_comment
-comment|/**  * Predicate.  *  *<p>Based on {@code java.util.functions.Predicate}.</p>  */
+comment|/**  * Performs operations on a pair of values from a BiValue.  */
 end_comment
 
 begin_interface
 specifier|public
 interface|interface
-name|Predicate
+name|BiBlock
 parameter_list|<
-name|T
+name|L
+parameter_list|,
+name|R
 parameter_list|>
 block|{
-name|boolean
-name|test
+name|void
+name|apply
 parameter_list|(
-name|T
-name|t
+name|L
+name|l
+parameter_list|,
+name|R
+name|r
 parameter_list|)
 function_decl|;
-name|Predicate
+name|BiBlock
 argument_list|<
-name|T
+name|L
+argument_list|,
+name|R
 argument_list|>
-name|and
+name|chain
 parameter_list|(
-name|Predicate
+name|BiBlock
 argument_list|<
 name|?
 super|super
-name|T
-argument_list|>
-name|p
-parameter_list|)
-function_decl|;
-comment|// default:
-comment|// return Predicates.and(this, p);
-name|Predicate
-argument_list|<
-name|T
-argument_list|>
-name|negate
-parameter_list|()
-function_decl|;
-comment|// default:
-comment|// return Predicates.negate(this);
-name|Predicate
-argument_list|<
-name|T
-argument_list|>
-name|or
-parameter_list|(
-name|Predicate
-argument_list|<
+name|L
+argument_list|,
 name|?
 super|super
-name|T
+name|R
 argument_list|>
-name|p
+name|second
 parameter_list|)
 function_decl|;
 comment|// default:
-comment|// return Predicates.or(this, p);
-name|Predicate
-argument_list|<
-name|T
-argument_list|>
-name|xor
-parameter_list|(
-name|Predicate
-argument_list|<
-name|?
-super|super
-name|T
-argument_list|>
-name|p
-parameter_list|)
-function_decl|;
-comment|// default:
-comment|// return Predicates.xor(this, p);
+comment|// throw new UnsupportedOperationException("Not yet implemented");
 block|}
 end_interface
 
 begin_comment
-comment|// End Predicate.java
+comment|// End BiBlock.java
 end_comment
 
 end_unit

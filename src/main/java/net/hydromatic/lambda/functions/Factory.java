@@ -9,52 +9,33 @@ name|net
 operator|.
 name|hydromatic
 operator|.
-name|lamdba
+name|lambda
 operator|.
 name|functions
 package|;
 end_package
 
 begin_comment
-comment|/**  * Block.  *  *<p>Based on {@code java.util.functions.Block}.</p>  */
+comment|/**  * Creates objects. Aka Source and Producer.  *  *<p>Based on {@code java.util.functions.Factory}.</p>  */
 end_comment
 
 begin_interface
 specifier|public
 interface|interface
-name|Block
+name|Factory
 parameter_list|<
 name|T
 parameter_list|>
 block|{
-name|void
-name|apply
-parameter_list|(
 name|T
-name|t
-parameter_list|)
+name|make
+parameter_list|()
 function_decl|;
-name|Block
-argument_list|<
-name|T
-argument_list|>
-name|chain
-parameter_list|(
-name|Block
-argument_list|<
-name|?
-super|super
-name|T
-argument_list|>
-name|second
-parameter_list|)
-function_decl|;
-comment|// default: Blocks.chain(this, second);
 block|}
 end_interface
 
 begin_comment
-comment|// End Block.java
+comment|// End Factory.java
 end_comment
 
 end_unit
