@@ -256,6 +256,15 @@ name|testSuite
 operator|.
 name|addTestSuite
 argument_list|(
+name|SqlFunctionsTest
+operator|.
+name|class
+argument_list|)
+expr_stmt|;
+name|testSuite
+operator|.
+name|addTestSuite
+argument_list|(
 name|SqlOperatorTest
 operator|.
 name|class

@@ -389,7 +389,7 @@ name|toClass
 argument_list|(
 name|Types
 operator|.
-name|getComponentType
+name|getElementType
 argument_list|(
 name|call
 operator|.

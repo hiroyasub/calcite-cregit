@@ -4737,6 +4737,8 @@ name|getList
 argument_list|()
 argument_list|,
 literal|false
+argument_list|,
+literal|null
 argument_list|)
 return|;
 block|}
@@ -4772,6 +4774,9 @@ name|rows
 parameter_list|,
 name|boolean
 name|allowLiteralsOnly
+parameter_list|,
+name|RelDataType
+name|targetRowType
 parameter_list|)
 block|{
 comment|// NOTE jvs 30-Apr-2006: We combine all rows consisting entirely of
@@ -4779,6 +4784,7 @@ comment|// literals into a single ValuesRel; this gives the optimizer a smaller
 comment|// input tree.  For everything else (computed expressions, row
 comment|// subqueries), we union each row in as a projection on top of a
 comment|// OneRowRel.
+specifier|final
 name|List
 argument_list|<
 name|List
@@ -4798,16 +4804,24 @@ argument_list|>
 argument_list|>
 argument_list|()
 decl_stmt|;
+specifier|final
 name|RelDataType
 name|rowType
-init|=
-name|validator
-operator|.
-name|getValidatedNodeType
-argument_list|(
-name|rowList
-argument_list|)
 decl_stmt|;
+if|if
+condition|(
+name|targetRowType
+operator|!=
+literal|null
+condition|)
+block|{
+name|rowType
+operator|=
+name|targetRowType
+expr_stmt|;
+block|}
+else|else
+block|{
 name|rowType
 operator|=
 name|SqlTypeUtil
@@ -4816,11 +4830,17 @@ name|promoteToRowType
 argument_list|(
 name|typeFactory
 argument_list|,
-name|rowType
+name|validator
+operator|.
+name|getValidatedNodeType
+argument_list|(
+name|rowList
+argument_list|)
 argument_list|,
 literal|null
 argument_list|)
 expr_stmt|;
+block|}
 name|List
 argument_list|<
 name|RelNode
@@ -13311,6 +13331,8 @@ argument_list|()
 argument_list|)
 argument_list|,
 literal|true
+argument_list|,
+name|targetRowType
 argument_list|)
 decl_stmt|;
 if|if
