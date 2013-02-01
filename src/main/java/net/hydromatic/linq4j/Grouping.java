@@ -14,7 +14,7 @@ package|;
 end_package
 
 begin_comment
-comment|/** * Represents a collection of objects that have a common key. */
+comment|/**  * Represents a collection of objects that have a common key.  */
 end_comment
 
 begin_interface
@@ -32,7 +32,7 @@ argument_list|<
 name|T
 argument_list|>
 block|{
-comment|/**      * Gets the key of this Grouping.      */
+comment|/**    * Gets the key of this Grouping.    */
 name|TKey
 name|getKey
 parameter_list|()

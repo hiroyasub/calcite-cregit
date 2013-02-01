@@ -34,7 +34,7 @@ import|;
 end_import
 
 begin_comment
-comment|/** * Implementation of {@link Grouping}. */
+comment|/**  * Implementation of {@link Grouping}.  */
 end_comment
 
 begin_class

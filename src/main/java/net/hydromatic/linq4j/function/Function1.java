@@ -34,7 +34,7 @@ argument_list|<
 name|R
 argument_list|>
 block|{
-comment|/**      * The identity function.      *      * @see Functions#identitySelector()      */
+comment|/**    * The identity function.    *    * @see Functions#identitySelector()    */
 name|Function1
 argument_list|<
 name|Object

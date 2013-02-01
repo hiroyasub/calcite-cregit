@@ -40,7 +40,7 @@ argument_list|<
 name|T
 argument_list|>
 block|{
-comment|/**      * Converts this Enumerable to a Queryable.      *      * @see EnumerableDefaults#asQueryable(Enumerable      */
+comment|/**    * Converts this Enumerable to a Queryable.    *    * @see EnumerableDefaults#asQueryable(Enumerable    */
 name|Queryable
 argument_list|<
 name|T

@@ -16,7 +16,7 @@ package|;
 end_package
 
 begin_comment
-comment|/** *<p>Parse tree node.</p>  */
+comment|/**  *<p>Parse tree node.</p>  */
 end_comment
 
 begin_interface

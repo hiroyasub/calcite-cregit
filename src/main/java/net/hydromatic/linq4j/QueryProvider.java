@@ -48,7 +48,7 @@ specifier|public
 interface|interface
 name|QueryProvider
 block|{
-comment|/**      * Constructs a {@link Queryable} object that can evaluate the query      * represented by a specified expression tree.      *      *<p>NOTE: The {@link net.hydromatic.linq4j.Queryable#getExpression()}      * property of the returned {@link Queryable} object is equal to      * {@code expression}.</p>      *      * @param expression Expression      * @param rowType Row type      * @param<T> Row type      * @return Queryable      */
+comment|/**    * Constructs a {@link Queryable} object that can evaluate the query    * represented by a specified expression tree.    *    *<p>NOTE: The {@link net.hydromatic.linq4j.Queryable#getExpression()}    * property of the returned {@link Queryable} object is equal to    * {@code expression}.</p>    *    * @param expression Expression    * @param rowType Row type    * @param<T> Row type    *    * @return Queryable    */
 parameter_list|<
 name|T
 parameter_list|>
@@ -68,7 +68,7 @@ argument_list|>
 name|rowType
 parameter_list|)
 function_decl|;
-comment|/**      * Constructs a {@link Queryable} object that can evaluate the query      * represented by a specified expression tree. The row type may contain      * generic information.      *      * @param expression Expression      * @param rowType Row type      * @param<T> Row type      * @return Queryable      */
+comment|/**    * Constructs a {@link Queryable} object that can evaluate the query    * represented by a specified expression tree. The row type may contain    * generic information.    *    * @param expression Expression    * @param rowType Row type    * @param<T> Row type    *    * @return Queryable    */
 parameter_list|<
 name|T
 parameter_list|>
@@ -85,7 +85,7 @@ name|Type
 name|rowType
 parameter_list|)
 function_decl|;
-comment|/**      * Executes the query represented by a specified expression tree.      *      *<p>This method executes queries that return a single value      * (instead of an enumerable sequence of values). Expression trees that      * represent queries that return enumerable results are executed when the      * {@link Queryable} object that contains the expression tree is      * enumerated.</p>      *      *<p>The Queryable standard query operator methods that return singleton      * results call {@code execute}. They pass it a      * {@link net.hydromatic.linq4j.expressions.MethodCallExpression}      * that represents a linq4j query.      */
+comment|/**    * Executes the query represented by a specified expression tree.    *    *<p>This method executes queries that return a single value    * (instead of an enumerable sequence of values). Expression trees that    * represent queries that return enumerable results are executed when the    * {@link Queryable} object that contains the expression tree is    * enumerated.</p>    *    *<p>The Queryable standard query operator methods that return singleton    * results call {@code execute}. They pass it a    * {@link net.hydromatic.linq4j.expressions.MethodCallExpression}    * that represents a linq4j query.    */
 parameter_list|<
 name|T
 parameter_list|>
@@ -102,7 +102,7 @@ argument_list|>
 name|type
 parameter_list|)
 function_decl|;
-comment|/**      * Executes the query represented by a specified expression tree.      * The row type may contain type parameters.      */
+comment|/**    * Executes the query represented by a specified expression tree.    * The row type may contain type parameters.    */
 parameter_list|<
 name|T
 parameter_list|>
@@ -116,7 +116,7 @@ name|Type
 name|type
 parameter_list|)
 function_decl|;
-comment|/**      * Executes a queryable, and returns an enumerator over the      * rows that it yields.      *      * @param queryable Queryable      * @return Enumerator over rows      */
+comment|/**    * Executes a queryable, and returns an enumerator over the    * rows that it yields.    *    * @param queryable Queryable    *    * @return Enumerator over rows    */
 parameter_list|<
 name|T
 parameter_list|>

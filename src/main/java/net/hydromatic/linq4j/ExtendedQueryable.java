@@ -77,7 +77,7 @@ argument_list|<
 name|TSource
 argument_list|>
 block|{
-comment|/** Applies an accumulator function over a sequence. */
+comment|/**    * Applies an accumulator function over a sequence.    */
 name|TSource
 name|aggregate
 parameter_list|(
@@ -95,7 +95,7 @@ argument_list|>
 name|selector
 parameter_list|)
 function_decl|;
-comment|/** Applies an accumulator function over a      * sequence. The specified seed value is used as the initial      * accumulator value. */
+comment|/**    * Applies an accumulator function over a    * sequence. The specified seed value is used as the initial    * accumulator value.    */
 parameter_list|<
 name|TAccumulate
 parameter_list|>
@@ -119,7 +119,7 @@ argument_list|>
 name|selector
 parameter_list|)
 function_decl|;
-comment|/** Applies an accumulator function over a      * sequence. The specified seed value is used as the initial      * accumulator value, and the specified function is used to select      * the result value. */
+comment|/**    * Applies an accumulator function over a    * sequence. The specified seed value is used as the initial    * accumulator value, and the specified function is used to select    * the result value.    */
 parameter_list|<
 name|TAccumulate
 parameter_list|,
@@ -156,7 +156,7 @@ argument_list|>
 name|selector
 parameter_list|)
 function_decl|;
-comment|/** Determines whether all the elements of a sequence      * satisfy a condition. */
+comment|/**    * Determines whether all the elements of a sequence    * satisfy a condition.    */
 name|boolean
 name|all
 parameter_list|(
@@ -170,7 +170,7 @@ argument_list|>
 name|predicate
 parameter_list|)
 function_decl|;
-comment|/** Determines whether any element of a sequence      * satisfies a condition. */
+comment|/**    * Determines whether any element of a sequence    * satisfies a condition.    */
 name|boolean
 name|any
 parameter_list|(
@@ -184,7 +184,7 @@ argument_list|>
 name|predicate
 parameter_list|)
 function_decl|;
-comment|/** Computes the average of a sequence of Decimal      * values that is obtained by invoking a projection function on      * each element of the input sequence. */
+comment|/**    * Computes the average of a sequence of Decimal    * values that is obtained by invoking a projection function on    * each element of the input sequence.    */
 name|BigDecimal
 name|averageBigDecimal
 parameter_list|(
@@ -198,7 +198,7 @@ argument_list|>
 name|selector
 parameter_list|)
 function_decl|;
-comment|/** Computes the average of a sequence of nullable      * Decimal values that is obtained by invoking a projection      * function on each element of the input sequence. */
+comment|/**    * Computes the average of a sequence of nullable    * Decimal values that is obtained by invoking a projection    * function on each element of the input sequence.    */
 name|BigDecimal
 name|averageNullableBigDecimal
 parameter_list|(
@@ -212,7 +212,7 @@ argument_list|>
 name|selector
 parameter_list|)
 function_decl|;
-comment|/** Computes the average of a sequence of Double      * values that is obtained by invoking a projection function on      * each element of the input sequence. */
+comment|/**    * Computes the average of a sequence of Double    * values that is obtained by invoking a projection function on    * each element of the input sequence.    */
 name|double
 name|averageDouble
 parameter_list|(
@@ -226,7 +226,7 @@ argument_list|>
 name|selector
 parameter_list|)
 function_decl|;
-comment|/** Computes the average of a sequence of nullable      * Double values that is obtained by invoking a projection      * function on each element of the input sequence. */
+comment|/**    * Computes the average of a sequence of nullable    * Double values that is obtained by invoking a projection    * function on each element of the input sequence.    */
 name|Double
 name|averageNullableDouble
 parameter_list|(
@@ -240,7 +240,7 @@ argument_list|>
 name|selector
 parameter_list|)
 function_decl|;
-comment|/** Computes the average of a sequence of int values      * that is obtained by invoking a projection function on each      * element of the input sequence. */
+comment|/**    * Computes the average of a sequence of int values    * that is obtained by invoking a projection function on each    * element of the input sequence.    */
 name|int
 name|averageInteger
 parameter_list|(
@@ -254,7 +254,7 @@ argument_list|>
 name|selector
 parameter_list|)
 function_decl|;
-comment|/** Computes the average of a sequence of nullable      * int values that is obtained by invoking a projection function      * on each element of the input sequence. */
+comment|/**    * Computes the average of a sequence of nullable    * int values that is obtained by invoking a projection function    * on each element of the input sequence.    */
 name|Integer
 name|averageNullableInteger
 parameter_list|(
@@ -268,7 +268,7 @@ argument_list|>
 name|selector
 parameter_list|)
 function_decl|;
-comment|/** Computes the average of a sequence of Float      * values that is obtained by invoking a projection function on      * each element of the input sequence. */
+comment|/**    * Computes the average of a sequence of Float    * values that is obtained by invoking a projection function on    * each element of the input sequence.    */
 name|float
 name|averageFloat
 parameter_list|(
@@ -282,7 +282,7 @@ argument_list|>
 name|selector
 parameter_list|)
 function_decl|;
-comment|/** Computes the average of a sequence of nullable      * Float values that is obtained by invoking a projection      * function on each element of the input sequence. */
+comment|/**    * Computes the average of a sequence of nullable    * Float values that is obtained by invoking a projection    * function on each element of the input sequence.    */
 name|Float
 name|averageNullableFloat
 parameter_list|(
@@ -296,7 +296,7 @@ argument_list|>
 name|selector
 parameter_list|)
 function_decl|;
-comment|/** Computes the average of a sequence of long values      * that is obtained by invoking a projection function on each      * element of the input sequence. */
+comment|/**    * Computes the average of a sequence of long values    * that is obtained by invoking a projection function on each    * element of the input sequence.    */
 name|long
 name|averageLong
 parameter_list|(
@@ -310,7 +310,7 @@ argument_list|>
 name|selector
 parameter_list|)
 function_decl|;
-comment|/** Computes the average of a sequence of nullable      * long values that is obtained by invoking a projection function      * on each element of the input sequence. */
+comment|/**    * Computes the average of a sequence of nullable    * long values that is obtained by invoking a projection function    * on each element of the input sequence.    */
 name|Long
 name|averageNullableLong
 parameter_list|(
@@ -324,7 +324,7 @@ argument_list|>
 name|selector
 parameter_list|)
 function_decl|;
-comment|/** Concatenates two sequences. */
+comment|/**    * Concatenates two sequences.    */
 name|Queryable
 argument_list|<
 name|TSource
@@ -338,7 +338,7 @@ argument_list|>
 name|source2
 parameter_list|)
 function_decl|;
-comment|/** Returns the number of elements in the specified      * sequence that satisfies a condition. */
+comment|/**    * Returns the number of elements in the specified    * sequence that satisfies a condition.    */
 name|int
 name|count
 parameter_list|(
@@ -352,7 +352,7 @@ argument_list|>
 name|predicate
 parameter_list|)
 function_decl|;
-comment|/** Returns the elements of the specified sequence or      * the type parameter's default value in a singleton collection if      * the sequence is empty. */
+comment|/**    * Returns the elements of the specified sequence or    * the type parameter's default value in a singleton collection if    * the sequence is empty.    */
 name|Queryable
 argument_list|<
 name|TSource
@@ -360,7 +360,7 @@ argument_list|>
 name|defaultIfEmpty
 parameter_list|()
 function_decl|;
-comment|/** Returns distinct elements from a sequence by using      * the default equality comparer to compare values. */
+comment|/**    * Returns distinct elements from a sequence by using    * the default equality comparer to compare values.    */
 name|Queryable
 argument_list|<
 name|TSource
@@ -368,7 +368,7 @@ argument_list|>
 name|distinct
 parameter_list|()
 function_decl|;
-comment|/** Returns distinct elements from a sequence by using      * a specified EqualityComparer&lt;TSource&gt; to compare values. */
+comment|/**    * Returns distinct elements from a sequence by using    * a specified EqualityComparer&lt;TSource&gt; to compare values.    */
 name|Queryable
 argument_list|<
 name|TSource
@@ -382,7 +382,7 @@ argument_list|>
 name|comparer
 parameter_list|)
 function_decl|;
-comment|/** Produces the set difference of two sequences by      * using the default equality comparer to compare values. (Defined      * by Queryable.) */
+comment|/**    * Produces the set difference of two sequences by    * using the default equality comparer to compare values. (Defined    * by Queryable.)    */
 name|Queryable
 argument_list|<
 name|TSource
@@ -396,7 +396,7 @@ argument_list|>
 name|enumerable
 parameter_list|)
 function_decl|;
-comment|/** Produces the set difference of two sequences by      * using the specified EqualityComparer<TSource> to compare      * values. */
+comment|/**    * Produces the set difference of two sequences by    * using the specified EqualityComparer<TSource> to compare    * values.    */
 name|Queryable
 argument_list|<
 name|TSource
@@ -416,7 +416,7 @@ argument_list|>
 name|comparer
 parameter_list|)
 function_decl|;
-comment|/** Returns the first element of a sequence that      * satisfies a specified condition. */
+comment|/**    * Returns the first element of a sequence that    * satisfies a specified condition.    */
 name|TSource
 name|first
 parameter_list|(
@@ -430,7 +430,7 @@ argument_list|>
 name|predicate
 parameter_list|)
 function_decl|;
-comment|/** Returns the first element of a sequence that      * satisfies a specified condition or a default value if no such      * element is found. */
+comment|/**    * Returns the first element of a sequence that    * satisfies a specified condition or a default value if no such    * element is found.    */
 name|TSource
 name|firstOrDefault
 parameter_list|(
@@ -444,7 +444,7 @@ argument_list|>
 name|predicate
 parameter_list|)
 function_decl|;
-comment|/** Groups the elements of a sequence according to a      * specified key selector function. */
+comment|/**    * Groups the elements of a sequence according to a    * specified key selector function.    */
 parameter_list|<
 name|TKey
 parameter_list|>
@@ -471,7 +471,7 @@ argument_list|>
 name|keySelector
 parameter_list|)
 function_decl|;
-comment|/** Groups the elements of a sequence according to a      * specified key selector function and compares the keys by using      * a specified comparer. */
+comment|/**    * Groups the elements of a sequence according to a    * specified key selector function and compares the keys by using    * a specified comparer.    */
 parameter_list|<
 name|TKey
 parameter_list|>
@@ -504,7 +504,7 @@ argument_list|>
 name|comparer
 parameter_list|)
 function_decl|;
-comment|/** Groups the elements of a sequence according to a      * specified key selector function and projects the elements for      * each group by using a specified function. */
+comment|/**    * Groups the elements of a sequence according to a    * specified key selector function and projects the elements for    * each group by using a specified function.    */
 parameter_list|<
 name|TKey
 parameter_list|,
@@ -544,7 +544,7 @@ argument_list|>
 name|elementSelector
 parameter_list|)
 function_decl|;
-comment|/** Groups the elements of a sequence according to a      * specified key selector function and creates a result value from      * each group and its key.      *      *<p>NOTE: Renamed from {@code groupBy} to distinguish from      * {@link #groupBy(net.hydromatic.linq4j.expressions.FunctionExpression, net.hydromatic.linq4j.expressions.FunctionExpression)},      * which has the same erasure.</p>      */
+comment|/**    * Groups the elements of a sequence according to a    * specified key selector function and creates a result value from    * each group and its key.    *    *<p>NOTE: Renamed from {@code groupBy} to distinguish from    * {@link #groupBy(net.hydromatic.linq4j.expressions.FunctionExpression, net.hydromatic.linq4j.expressions.FunctionExpression)},    * which has the same erasure.</p>    */
 parameter_list|<
 name|TKey
 parameter_list|,
@@ -589,7 +589,7 @@ argument_list|>
 name|elementSelector
 parameter_list|)
 function_decl|;
-comment|/** Groups the elements of a sequence and projects the      * elements for each group by using a specified function. Key      * values are compared by using a specified comparer.      */
+comment|/**    * Groups the elements of a sequence and projects the    * elements for each group by using a specified function. Key    * values are compared by using a specified comparer.    */
 parameter_list|<
 name|TKey
 parameter_list|,
@@ -635,7 +635,7 @@ argument_list|>
 name|comparer
 parameter_list|)
 function_decl|;
-comment|/** Groups the elements of a sequence according to a      * specified key selector function and creates a result value from      * each group and its key. Keys are compared by using a specified      * comparer. */
+comment|/**    * Groups the elements of a sequence according to a    * specified key selector function and creates a result value from    * each group and its key. Keys are compared by using a specified    * comparer.    */
 parameter_list|<
 name|TKey
 parameter_list|,
@@ -681,7 +681,7 @@ argument_list|>
 name|comparer
 parameter_list|)
 function_decl|;
-comment|/** Groups the elements of a sequence according to a      * specified key selector function and creates a result value from      * each group and its key. The elements of each group are      * projected by using a specified function. */
+comment|/**    * Groups the elements of a sequence according to a    * specified key selector function and creates a result value from    * each group and its key. The elements of each group are    * projected by using a specified function.    */
 parameter_list|<
 name|TKey
 parameter_list|,
@@ -734,7 +734,7 @@ argument_list|>
 name|resultSelector
 parameter_list|)
 function_decl|;
-comment|/** Groups the elements of a sequence according to a      * specified key selector function and creates a result value from      * each group and its key. Keys are compared by using a specified      * comparer and the elements of each group are projected by using      * a specified function. */
+comment|/**    * Groups the elements of a sequence according to a    * specified key selector function and creates a result value from    * each group and its key. Keys are compared by using a specified    * comparer and the elements of each group are projected by using    * a specified function.    */
 parameter_list|<
 name|TKey
 parameter_list|,
@@ -793,7 +793,7 @@ argument_list|>
 name|comparer
 parameter_list|)
 function_decl|;
-comment|/** Correlates the elements of two sequences based on      * key equality and groups the results. The default equality      * comparer is used to compare keys. */
+comment|/**    * Correlates the elements of two sequences based on    * key equality and groups the results. The default equality    * comparer is used to compare keys.    */
 parameter_list|<
 name|TInner
 parameter_list|,
@@ -852,7 +852,7 @@ argument_list|>
 name|resultSelector
 parameter_list|)
 function_decl|;
-comment|/** Correlates the elements of two sequences based on      * key equality and groups the results. A specified      * EqualityComparer<TSource> is used to compare keys. */
+comment|/**    * Correlates the elements of two sequences based on    * key equality and groups the results. A specified    * EqualityComparer<TSource> is used to compare keys.    */
 parameter_list|<
 name|TInner
 parameter_list|,
@@ -917,7 +917,7 @@ argument_list|>
 name|comparer
 parameter_list|)
 function_decl|;
-comment|/** Produces the set intersection of two sequences by      * using the default equality comparer to compare values. (Defined      * by Queryable.) */
+comment|/**    * Produces the set intersection of two sequences by    * using the default equality comparer to compare values. (Defined    * by Queryable.)    */
 name|Queryable
 argument_list|<
 name|TSource
@@ -931,7 +931,7 @@ argument_list|>
 name|enumerable
 parameter_list|)
 function_decl|;
-comment|/** Produces the set intersection of two sequences by      * using the specified EqualityComparer<TSource> to compare      * values. */
+comment|/**    * Produces the set intersection of two sequences by    * using the specified EqualityComparer<TSource> to compare    * values.    */
 name|Queryable
 argument_list|<
 name|TSource
@@ -951,7 +951,7 @@ argument_list|>
 name|comparer
 parameter_list|)
 function_decl|;
-comment|/** Correlates the elements of two sequences based on      * matching keys. The default equality comparer is used to compare      * keys. */
+comment|/**    * Correlates the elements of two sequences based on    * matching keys. The default equality comparer is used to compare    * keys.    */
 parameter_list|<
 name|TInner
 parameter_list|,
@@ -1007,7 +1007,7 @@ argument_list|>
 name|resultSelector
 parameter_list|)
 function_decl|;
-comment|/** Correlates the elements of two sequences based on      * matching keys. A specified EqualityComparer<TSource> is used to      * compare keys. */
+comment|/**    * Correlates the elements of two sequences based on    * matching keys. A specified EqualityComparer<TSource> is used to    * compare keys.    */
 parameter_list|<
 name|TInner
 parameter_list|,
@@ -1069,7 +1069,7 @@ argument_list|>
 name|comparer
 parameter_list|)
 function_decl|;
-comment|/** Returns the last element of a sequence that      * satisfies a specified condition. */
+comment|/**    * Returns the last element of a sequence that    * satisfies a specified condition.    */
 name|TSource
 name|last
 parameter_list|(
@@ -1083,7 +1083,7 @@ argument_list|>
 name|predicate
 parameter_list|)
 function_decl|;
-comment|/** Returns the last element of a sequence that      * satisfies a condition or a default value if no such element is      * found. */
+comment|/**    * Returns the last element of a sequence that    * satisfies a condition or a default value if no such element is    * found.    */
 name|TSource
 name|lastOrDefault
 parameter_list|(
@@ -1097,7 +1097,7 @@ argument_list|>
 name|predicate
 parameter_list|)
 function_decl|;
-comment|/** Returns an long that represents the number of      * elements in a sequence that satisfy a condition. */
+comment|/**    * Returns an long that represents the number of    * elements in a sequence that satisfy a condition.    */
 name|long
 name|longCount
 parameter_list|(
@@ -1111,7 +1111,7 @@ argument_list|>
 name|predicate
 parameter_list|)
 function_decl|;
-comment|/** Invokes a projection function on each element of a      * generic IQueryable<TSource> and returns the maximum resulting      * value. */
+comment|/**    * Invokes a projection function on each element of a    * generic IQueryable<TSource> and returns the maximum resulting    * value.    */
 parameter_list|<
 name|TResult
 extends|extends
@@ -1135,7 +1135,7 @@ argument_list|>
 name|selector
 parameter_list|)
 function_decl|;
-comment|/** Invokes a projection function on each element of a      * generic IQueryable<TSource> and returns the minimum resulting      * value. */
+comment|/**    * Invokes a projection function on each element of a    * generic IQueryable<TSource> and returns the minimum resulting    * value.    */
 parameter_list|<
 name|TResult
 extends|extends
@@ -1159,7 +1159,7 @@ argument_list|>
 name|selector
 parameter_list|)
 function_decl|;
-comment|/** Filters the elements of an IQueryable based on a      * specified type.      *      *<p>The OfType method generates a      * {@link net.hydromatic.linq4j.expressions.MethodCallExpression} that represents      * calling OfType itself as a constructed generic method. It then passes the      * MethodCallExpression to the CreateQuery(Expression) method of the      * {@link QueryProvider} represented by the Provider property of the source      * parameter.      *      *<p>The query behavior that occurs as a result of executing an expression      * tree that represents calling OfType depends on the implementation of the      * type of the source parameter. The expected behavior is that it filters      * out any elements in source that are not of type TResult.      *      *<p>NOTE: clazz parameter not present in C# LINQ; necessary because of      * Java type erasure.</p>      */
+comment|/**    * Filters the elements of an IQueryable based on a    * specified type.    *    *<p>The OfType method generates a    * {@link net.hydromatic.linq4j.expressions.MethodCallExpression} that represents    * calling OfType itself as a constructed generic method. It then passes the    * MethodCallExpression to the CreateQuery(Expression) method of the    * {@link QueryProvider} represented by the Provider property of the source    * parameter.    *    *<p>The query behavior that occurs as a result of executing an expression    * tree that represents calling OfType depends on the implementation of the    * type of the source parameter. The expected behavior is that it filters    * out any elements in source that are not of type TResult.    *    *<p>NOTE: clazz parameter not present in C# LINQ; necessary because of    * Java type erasure.</p>    */
 parameter_list|<
 name|TResult
 parameter_list|>
@@ -1192,7 +1192,7 @@ argument_list|>
 name|clazz
 parameter_list|)
 function_decl|;
-comment|/** Sorts the elements of a sequence in ascending      * order according to a key. */
+comment|/**    * Sorts the elements of a sequence in ascending    * order according to a key.    */
 parameter_list|<
 name|TKey
 extends|extends
@@ -1216,7 +1216,7 @@ argument_list|>
 name|keySelector
 parameter_list|)
 function_decl|;
-comment|/** Sorts the elements of a sequence in ascending      * order by using a specified comparer. */
+comment|/**    * Sorts the elements of a sequence in ascending    * order by using a specified comparer.    */
 parameter_list|<
 name|TKey
 parameter_list|>
@@ -1244,7 +1244,7 @@ argument_list|>
 name|comparator
 parameter_list|)
 function_decl|;
-comment|/** Sorts the elements of a sequence in descending      * order according to a key. */
+comment|/**    * Sorts the elements of a sequence in descending    * order according to a key.    */
 parameter_list|<
 name|TKey
 extends|extends
@@ -1268,7 +1268,7 @@ argument_list|>
 name|keySelector
 parameter_list|)
 function_decl|;
-comment|/** Sorts the elements of a sequence in descending      * order by using a specified comparer. */
+comment|/**    * Sorts the elements of a sequence in descending    * order by using a specified comparer.    */
 parameter_list|<
 name|TKey
 parameter_list|>
@@ -1296,7 +1296,7 @@ argument_list|>
 name|comparator
 parameter_list|)
 function_decl|;
-comment|/** Inverts the order of the elements in a sequence. */
+comment|/**    * Inverts the order of the elements in a sequence.    */
 name|Queryable
 argument_list|<
 name|TSource
@@ -1304,7 +1304,7 @@ argument_list|>
 name|reverse
 parameter_list|()
 function_decl|;
-comment|/** Projects each element of a sequence into a new form. */
+comment|/**    * Projects each element of a sequence into a new form.    */
 parameter_list|<
 name|TResult
 parameter_list|>
@@ -1326,7 +1326,7 @@ argument_list|>
 name|selector
 parameter_list|)
 function_decl|;
-comment|/** Projects each element of a sequence into a new      * form by incorporating the element's index.      *      *<p>NOTE: Renamed from {@code select} because had same erasure as      * {@link #select(net.hydromatic.linq4j.expressions.FunctionExpression)}.</p>      */
+comment|/**    * Projects each element of a sequence into a new    * form by incorporating the element's index.    *    *<p>NOTE: Renamed from {@code select} because had same erasure as    * {@link #select(net.hydromatic.linq4j.expressions.FunctionExpression)}.</p>    */
 parameter_list|<
 name|TResult
 parameter_list|>
@@ -1350,7 +1350,7 @@ argument_list|>
 name|selector
 parameter_list|)
 function_decl|;
-comment|/** Projects each element of a sequence to an      * Enumerable<TSource> and combines the resulting sequences into one      * sequence. */
+comment|/**    * Projects each element of a sequence to an    * Enumerable<TSource> and combines the resulting sequences into one    * sequence.    */
 parameter_list|<
 name|TResult
 parameter_list|>
@@ -1375,7 +1375,7 @@ argument_list|>
 name|selector
 parameter_list|)
 function_decl|;
-comment|/** Projects each element of a sequence to an      * Enumerable<TSource> and combines the resulting sequences into one      * sequence. The index of each source element is used in the      * projected form of that element.      *      *<p>NOTE: Renamed from {@code selectMany} because had same erasure as      * {@link #selectMany(net.hydromatic.linq4j.expressions.FunctionExpression)}</p>      */
+comment|/**    * Projects each element of a sequence to an    * Enumerable<TSource> and combines the resulting sequences into one    * sequence. The index of each source element is used in the    * projected form of that element.    *    *<p>NOTE: Renamed from {@code selectMany} because had same erasure as    * {@link #selectMany(net.hydromatic.linq4j.expressions.FunctionExpression)}</p>    */
 parameter_list|<
 name|TResult
 parameter_list|>
@@ -1402,7 +1402,7 @@ argument_list|>
 name|selector
 parameter_list|)
 function_decl|;
-comment|/** Projects each element of a sequence to an      * Enumerable<TSource> that incorporates the index of the source      * element that produced it. A result selector function is invoked      * on each element of each intermediate sequence, and the      * resulting values are combined into a single, one-dimensional      * sequence and returned. */
+comment|/**    * Projects each element of a sequence to an    * Enumerable<TSource> that incorporates the index of the source    * element that produced it. A result selector function is invoked    * on each element of each intermediate sequence, and the    * resulting values are combined into a single, one-dimensional    * sequence and returned.    */
 parameter_list|<
 name|TCollection
 parameter_list|,
@@ -1444,7 +1444,7 @@ argument_list|>
 name|resultSelector
 parameter_list|)
 function_decl|;
-comment|/** Projects each element of a sequence to an      * Enumerable<TSource> and invokes a result selector function on each      * element therein. The resulting values from each intermediate      * sequence are combined into a single, one-dimensional sequence      * and returned.      *      *<p>NOTE: Renamed from {@code selectMany} because had same erasure as      * {@link #selectMany(net.hydromatic.linq4j.expressions.FunctionExpression, net.hydromatic.linq4j.expressions.FunctionExpression)}</p>      * */
+comment|/**    * Projects each element of a sequence to an    * Enumerable<TSource> and invokes a result selector function on each    * element therein. The resulting values from each intermediate    * sequence are combined into a single, one-dimensional sequence    * and returned.    *    *<p>NOTE: Renamed from {@code selectMany} because had same erasure as    * {@link #selectMany(net.hydromatic.linq4j.expressions.FunctionExpression, net.hydromatic.linq4j.expressions.FunctionExpression)}</p>    */
 parameter_list|<
 name|TCollection
 parameter_list|,
@@ -1484,7 +1484,7 @@ argument_list|>
 name|resultSelector
 parameter_list|)
 function_decl|;
-comment|/** Returns the only element of a sequence that      * satisfies a specified condition, and throws an exception if      * more than one such element exists. */
+comment|/**    * Returns the only element of a sequence that    * satisfies a specified condition, and throws an exception if    * more than one such element exists.    */
 name|TSource
 name|single
 parameter_list|(
@@ -1498,12 +1498,12 @@ argument_list|>
 name|predicate
 parameter_list|)
 function_decl|;
-comment|/** Returns the only element of a sequence, or a      * default value if the sequence is empty; this method throws an      * exception if there is more than one element in the      * sequence. */
+comment|/**    * Returns the only element of a sequence, or a    * default value if the sequence is empty; this method throws an    * exception if there is more than one element in the    * sequence.    */
 name|TSource
 name|singleOrDefault
 parameter_list|()
 function_decl|;
-comment|/** Returns the only element of a sequence that      * satisfies a specified condition or a default value if no such      * element exists; this method throws an exception if more than      * one element satisfies the condition. */
+comment|/**    * Returns the only element of a sequence that    * satisfies a specified condition or a default value if no such    * element exists; this method throws an exception if more than    * one element satisfies the condition.    */
 name|TSource
 name|singleOrDefault
 parameter_list|(
@@ -1517,7 +1517,7 @@ argument_list|>
 name|predicate
 parameter_list|)
 function_decl|;
-comment|/** Bypasses a specified number of elements in a      * sequence and then returns the remaining elements. */
+comment|/**    * Bypasses a specified number of elements in a    * sequence and then returns the remaining elements.    */
 name|Queryable
 argument_list|<
 name|TSource
@@ -1528,7 +1528,7 @@ name|int
 name|count
 parameter_list|)
 function_decl|;
-comment|/** Bypasses elements in a sequence as long as a      * specified condition is true and then returns the remaining      * elements. */
+comment|/**    * Bypasses elements in a sequence as long as a    * specified condition is true and then returns the remaining    * elements.    */
 name|Queryable
 argument_list|<
 name|TSource
@@ -1545,7 +1545,7 @@ argument_list|>
 name|predicate
 parameter_list|)
 function_decl|;
-comment|/** Bypasses elements in a sequence as long as a      * specified condition is true and then returns the remaining      * elements. The element's index is used in the logic of the      * predicate function. */
+comment|/**    * Bypasses elements in a sequence as long as a    * specified condition is true and then returns the remaining    * elements. The element's index is used in the logic of the    * predicate function.    */
 name|Queryable
 argument_list|<
 name|TSource
@@ -1564,7 +1564,7 @@ argument_list|>
 name|predicate
 parameter_list|)
 function_decl|;
-comment|/** Computes the sum of the sequence of Decimal values      * that is obtained by invoking a projection function on each      * element of the input sequence. */
+comment|/**    * Computes the sum of the sequence of Decimal values    * that is obtained by invoking a projection function on each    * element of the input sequence.    */
 name|BigDecimal
 name|sumBigDecimal
 parameter_list|(
@@ -1578,7 +1578,7 @@ argument_list|>
 name|selector
 parameter_list|)
 function_decl|;
-comment|/** Computes the sum of the sequence of nullable      * Decimal values that is obtained by invoking a projection      * function on each element of the input sequence. */
+comment|/**    * Computes the sum of the sequence of nullable    * Decimal values that is obtained by invoking a projection    * function on each element of the input sequence.    */
 name|BigDecimal
 name|sumNullableBigDecimal
 parameter_list|(
@@ -1592,7 +1592,7 @@ argument_list|>
 name|selector
 parameter_list|)
 function_decl|;
-comment|/** Computes the sum of the sequence of Double values      * that is obtained by invoking a projection function on each      * element of the input sequence. */
+comment|/**    * Computes the sum of the sequence of Double values    * that is obtained by invoking a projection function on each    * element of the input sequence.    */
 name|double
 name|sumDouble
 parameter_list|(
@@ -1606,7 +1606,7 @@ argument_list|>
 name|selector
 parameter_list|)
 function_decl|;
-comment|/** Computes the sum of the sequence of nullable      * Double values that is obtained by invoking a projection      * function on each element of the input sequence. */
+comment|/**    * Computes the sum of the sequence of nullable    * Double values that is obtained by invoking a projection    * function on each element of the input sequence.    */
 name|Double
 name|sumNullableDouble
 parameter_list|(
@@ -1620,7 +1620,7 @@ argument_list|>
 name|selector
 parameter_list|)
 function_decl|;
-comment|/** Computes the sum of the sequence of int values      * that is obtained by invoking a projection function on each      * element of the input sequence. */
+comment|/**    * Computes the sum of the sequence of int values    * that is obtained by invoking a projection function on each    * element of the input sequence.    */
 name|int
 name|sumInteger
 parameter_list|(
@@ -1634,7 +1634,7 @@ argument_list|>
 name|selector
 parameter_list|)
 function_decl|;
-comment|/** Computes the sum of the sequence of nullable int      * values that is obtained by invoking a projection function on      * each element of the input sequence. */
+comment|/**    * Computes the sum of the sequence of nullable int    * values that is obtained by invoking a projection function on    * each element of the input sequence.    */
 name|Integer
 name|sumNullableInteger
 parameter_list|(
@@ -1648,7 +1648,7 @@ argument_list|>
 name|selector
 parameter_list|)
 function_decl|;
-comment|/** Computes the sum of the sequence of long values      * that is obtained by invoking a projection function on each      * element of the input sequence. */
+comment|/**    * Computes the sum of the sequence of long values    * that is obtained by invoking a projection function on each    * element of the input sequence.    */
 name|long
 name|sumLong
 parameter_list|(
@@ -1662,7 +1662,7 @@ argument_list|>
 name|selector
 parameter_list|)
 function_decl|;
-comment|/** Computes the sum of the sequence of nullable long      * values that is obtained by invoking a projection function on      * each element of the input sequence. */
+comment|/**    * Computes the sum of the sequence of nullable long    * values that is obtained by invoking a projection function on    * each element of the input sequence.    */
 name|Long
 name|sumNullableLong
 parameter_list|(
@@ -1676,7 +1676,7 @@ argument_list|>
 name|selector
 parameter_list|)
 function_decl|;
-comment|/** Computes the sum of the sequence of Float values      * that is obtained by invoking a projection function on each      * element of the input sequence. */
+comment|/**    * Computes the sum of the sequence of Float values    * that is obtained by invoking a projection function on each    * element of the input sequence.    */
 name|float
 name|sumFloat
 parameter_list|(
@@ -1690,7 +1690,7 @@ argument_list|>
 name|selector
 parameter_list|)
 function_decl|;
-comment|/** Computes the sum of the sequence of nullable      * Float values that is obtained by invoking a projection      * function on each element of the input sequence. */
+comment|/**    * Computes the sum of the sequence of nullable    * Float values that is obtained by invoking a projection    * function on each element of the input sequence.    */
 name|Float
 name|sumNullableFloat
 parameter_list|(
@@ -1704,7 +1704,7 @@ argument_list|>
 name|selector
 parameter_list|)
 function_decl|;
-comment|/** Returns a specified number of contiguous elements      * from the start of a sequence. */
+comment|/**    * Returns a specified number of contiguous elements    * from the start of a sequence.    */
 name|Queryable
 argument_list|<
 name|TSource
@@ -1715,7 +1715,7 @@ name|int
 name|count
 parameter_list|)
 function_decl|;
-comment|/** Returns elements from a sequence as long as a      * specified condition is true. */
+comment|/**    * Returns elements from a sequence as long as a    * specified condition is true.    */
 name|Queryable
 argument_list|<
 name|TSource
@@ -1732,7 +1732,7 @@ argument_list|>
 name|predicate
 parameter_list|)
 function_decl|;
-comment|/** Returns elements from a sequence as long as a      * specified condition is true. The element's index is used in the      * logic of the predicate function. */
+comment|/**    * Returns elements from a sequence as long as a    * specified condition is true. The element's index is used in the    * logic of the predicate function.    */
 name|Queryable
 argument_list|<
 name|TSource
@@ -1751,7 +1751,7 @@ argument_list|>
 name|predicate
 parameter_list|)
 function_decl|;
-comment|/** Produces the set union of two sequences by using      * the default equality comparer. */
+comment|/**    * Produces the set union of two sequences by using    * the default equality comparer.    */
 name|Queryable
 argument_list|<
 name|TSource
@@ -1765,7 +1765,7 @@ argument_list|>
 name|source1
 parameter_list|)
 function_decl|;
-comment|/** Produces the set union of two sequences by using a      * specified EqualityComparer<TSource>. */
+comment|/**    * Produces the set union of two sequences by using a    * specified EqualityComparer<TSource>.    */
 name|Queryable
 argument_list|<
 name|TSource
@@ -1785,7 +1785,7 @@ argument_list|>
 name|comparer
 parameter_list|)
 function_decl|;
-comment|/** Filters a sequence of values based on a      * predicate. */
+comment|/**    * Filters a sequence of values based on a    * predicate.    */
 name|Queryable
 argument_list|<
 name|TSource
@@ -1804,7 +1804,7 @@ argument_list|>
 name|predicate
 parameter_list|)
 function_decl|;
-comment|/** Filters a sequence of values based on a      * predicate. Each element's index is used in the logic of the      * predicate function. */
+comment|/**    * Filters a sequence of values based on a    * predicate. Each element's index is used in the logic of the    * predicate function.    */
 name|Queryable
 argument_list|<
 name|TSource
@@ -1825,7 +1825,7 @@ argument_list|>
 name|predicate
 parameter_list|)
 function_decl|;
-comment|/** Merges two sequences by using the specified      * predicate function. */
+comment|/**    * Merges two sequences by using the specified    * predicate function.    */
 parameter_list|<
 name|T1
 parameter_list|,

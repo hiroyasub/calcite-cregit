@@ -165,7 +165,7 @@ name|toString
 argument_list|()
 return|;
 block|}
-comment|/** If parentheses are required, writes this expression out with      * parentheses and returns true. If they are not required, does nothing      * and returns false. */
+comment|/**    * If parentheses are required, writes this expression out with    * parentheses and returns true. If they are not required, does nothing    * and returns false.    */
 specifier|public
 name|boolean
 name|requireParentheses
@@ -232,7 +232,7 @@ return|return
 literal|true
 return|;
 block|}
-comment|/**      * Increases the indentation level.      */
+comment|/**    * Increases the indentation level.    */
 specifier|public
 name|void
 name|begin
@@ -249,7 +249,7 @@ name|level
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Decreases the indentation level.      */
+comment|/**    * Decreases the indentation level.    */
 specifier|public
 name|void
 name|end

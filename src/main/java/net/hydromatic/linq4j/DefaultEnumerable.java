@@ -65,7 +65,7 @@ argument_list|<
 name|T
 argument_list|>
 block|{
-comment|/**      * Derived classes might wish to override this method to return the "outer"      * enumerable.      */
+comment|/**    * Derived classes might wish to override this method to return the "outer"    * enumerable.    */
 specifier|protected
 name|Enumerable
 argument_list|<
@@ -78,7 +78,7 @@ return|return
 name|this
 return|;
 block|}
-comment|/**      * Derived classes might wish to override this method to return the "outer"      * ordered-enumerable.      */
+comment|/**    * Derived classes might wish to override this method to return the "outer"    * ordered-enumerable.    */
 specifier|protected
 name|OrderedEnumerable
 argument_list|<

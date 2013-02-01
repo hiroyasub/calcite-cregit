@@ -24,31 +24,31 @@ specifier|public
 enum|enum
 name|GotoExpressionKind
 block|{
-comment|/** A GotoExpression that represents a jump to some location. */
+comment|/**    * A GotoExpression that represents a jump to some location.    */
 name|Goto
 argument_list|(
 literal|"goto "
 argument_list|)
 block|,
-comment|/** A GotoExpression that represents a return statement. */
+comment|/**    * A GotoExpression that represents a return statement.    */
 name|Return
 argument_list|(
 literal|"return"
 argument_list|)
 block|,
-comment|/** A GotoExpression that represents a break statement. */
+comment|/**    * A GotoExpression that represents a break statement.    */
 name|Break
 argument_list|(
 literal|"break"
 argument_list|)
 block|,
-comment|/** A GotoExpression that represents a continue statement. */
+comment|/**    * A GotoExpression that represents a continue statement.    */
 name|Continue
 argument_list|(
 literal|"continue"
 argument_list|)
 block|,
-comment|/** A GotoExpression that evaluates an expression and carries on. */
+comment|/**    * A GotoExpression that evaluates an expression and carries on.    */
 name|Sequence
 argument_list|(
 literal|""

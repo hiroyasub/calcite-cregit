@@ -59,7 +59,7 @@ parameter_list|<
 name|TSource
 parameter_list|>
 block|{
-comment|/**      * Performs an operation for each member of this enumeration.      *      *<p>Returns the value returned by the function for the last element in      * this enumeration, or null if this enumeration is empty.</p>      *      * @param func Operation      * @param<R> Return type      */
+comment|/**    * Performs an operation for each member of this enumeration.    *    *<p>Returns the value returned by the function for the last element in    * this enumeration, or null if this enumeration is empty.</p>    *    * @param func Operation    * @param<R> Return type    */
 parameter_list|<
 name|R
 parameter_list|>
@@ -75,7 +75,7 @@ argument_list|>
 name|func
 parameter_list|)
 function_decl|;
-comment|/** Applies an accumulator function over a      * sequence. */
+comment|/**    * Applies an accumulator function over a    * sequence.    */
 name|TSource
 name|aggregate
 parameter_list|(
@@ -90,7 +90,7 @@ argument_list|>
 name|func
 parameter_list|)
 function_decl|;
-comment|/** Applies an accumulator function over a      * sequence. The specified seed value is used as the initial      * accumulator value. */
+comment|/**    * Applies an accumulator function over a    * sequence. The specified seed value is used as the initial    * accumulator value.    */
 parameter_list|<
 name|TAccumulate
 parameter_list|>
@@ -111,7 +111,7 @@ argument_list|>
 name|func
 parameter_list|)
 function_decl|;
-comment|/** Applies an accumulator function over a      * sequence. The specified seed value is used as the initial      * accumulator value, and the specified function is used to select      * the result value. */
+comment|/**    * Applies an accumulator function over a    * sequence. The specified seed value is used as the initial    * accumulator value, and the specified function is used to select    * the result value.    */
 parameter_list|<
 name|TAccumulate
 parameter_list|,
@@ -142,7 +142,7 @@ argument_list|>
 name|selector
 parameter_list|)
 function_decl|;
-comment|/** Determines whether all elements of a sequence      * satisfy a condition. */
+comment|/**    * Determines whether all elements of a sequence    * satisfy a condition.    */
 name|boolean
 name|all
 parameter_list|(
@@ -153,12 +153,12 @@ argument_list|>
 name|predicate
 parameter_list|)
 function_decl|;
-comment|/** Determines whether a sequence contains any      * elements. (Defined by Enumerable.) */
+comment|/**    * Determines whether a sequence contains any    * elements. (Defined by Enumerable.)    */
 name|boolean
 name|any
 parameter_list|()
 function_decl|;
-comment|/** Determines whether any element of a sequence      * satisfies a condition. */
+comment|/**    * Determines whether any element of a sequence    * satisfies a condition.    */
 name|boolean
 name|any
 parameter_list|(
@@ -169,7 +169,7 @@ argument_list|>
 name|predicate
 parameter_list|)
 function_decl|;
-comment|/** Returns the input typed as Enumerable<TSource>.      *      *<p>The AsEnumerable<TSource>(Enumerable<TSource>) method has no effect      * other than to change the compile-time type of source from a type that      * implements Enumerable<TSource> to Enumerable<TSource> itself.      *      *<p>AsEnumerable<TSource>(Enumerable<TSource>) can be used to choose      * between query implementations when a sequence implements      * Enumerable<TSource> but also has a different set of public query methods      * available. For example, given a generic class Table that implements      * Enumerable<TSource> and has its own methods such as Where, Select, and      * SelectMany, a call to Where would invoke the public Where method of      * Table. A Table type that represents a database table could have a Where      * method that takes the predicate argument as an expression tree and      * converts the tree to SQL for remote execution. If remote execution is not      * desired, for example because the predicate invokes a local method, the      * AsEnumerable<TSource> method can be used to hide the custom methods and      * instead make the standard query operators available.      */
+comment|/**    * Returns the input typed as Enumerable<TSource>.    *    *<p>The AsEnumerable<TSource>(Enumerable<TSource>) method has no effect    * other than to change the compile-time type of source from a type that    * implements Enumerable<TSource> to Enumerable<TSource> itself.    *    *<p>AsEnumerable<TSource>(Enumerable<TSource>) can be used to choose    * between query implementations when a sequence implements    * Enumerable<TSource> but also has a different set of public query methods    * available. For example, given a generic class Table that implements    * Enumerable<TSource> and has its own methods such as Where, Select, and    * SelectMany, a call to Where would invoke the public Where method of    * Table. A Table type that represents a database table could have a Where    * method that takes the predicate argument as an expression tree and    * converts the tree to SQL for remote execution. If remote execution is not    * desired, for example because the predicate invokes a local method, the    * AsEnumerable<TSource> method can be used to hide the custom methods and    * instead make the standard query operators available.    */
 name|Enumerable
 argument_list|<
 name|TSource
@@ -177,7 +177,7 @@ argument_list|>
 name|asEnumerable
 parameter_list|()
 function_decl|;
-comment|/**      * Converts an Enumerable to a {@link Queryable}.      *      *<p>If the type of source implements {@code Queryable}, this method      * returns it directly. Otherwise, it returns a {@code Queryable} that      * executes queries by calling the equivalent query operator methods in      * {@code Enumerable} instead of those in {@code Queryable}.</p>      *      *<p>Analogous to the LINQ's Enumerable.AsQueryable extension method.</p>      *      * @return A queryable      */
+comment|/**    * Converts an Enumerable to a {@link Queryable}.    *    *<p>If the type of source implements {@code Queryable}, this method    * returns it directly. Otherwise, it returns a {@code Queryable} that    * executes queries by calling the equivalent query operator methods in    * {@code Enumerable} instead of those in {@code Queryable}.</p>    *    *<p>Analogous to the LINQ's Enumerable.AsQueryable extension method.</p>    *    * @return A queryable    */
 name|Queryable
 argument_list|<
 name|TSource
@@ -185,7 +185,7 @@ argument_list|>
 name|asQueryable
 parameter_list|()
 function_decl|;
-comment|/** Computes the average of a sequence of Decimal      * values that are obtained by invoking a transform function on      * each element of the input sequence. */
+comment|/**    * Computes the average of a sequence of Decimal    * values that are obtained by invoking a transform function on    * each element of the input sequence.    */
 name|BigDecimal
 name|average
 parameter_list|(
@@ -196,7 +196,7 @@ argument_list|>
 name|selector
 parameter_list|)
 function_decl|;
-comment|/** Computes the average of a sequence of nullable      * Decimal values that are obtained by invoking a transform      * function on each element of the input sequence. */
+comment|/**    * Computes the average of a sequence of nullable    * Decimal values that are obtained by invoking a transform    * function on each element of the input sequence.    */
 name|BigDecimal
 name|average
 parameter_list|(
@@ -207,7 +207,7 @@ argument_list|>
 name|selector
 parameter_list|)
 function_decl|;
-comment|/** Computes the average of a sequence of Double      * values that are obtained by invoking a transform function on      * each element of the input sequence. */
+comment|/**    * Computes the average of a sequence of Double    * values that are obtained by invoking a transform function on    * each element of the input sequence.    */
 name|double
 name|average
 parameter_list|(
@@ -218,7 +218,7 @@ argument_list|>
 name|selector
 parameter_list|)
 function_decl|;
-comment|/** Computes the average of a sequence of nullable      * Double values that are obtained by invoking a transform      * function on each element of the input sequence. */
+comment|/**    * Computes the average of a sequence of nullable    * Double values that are obtained by invoking a transform    * function on each element of the input sequence.    */
 name|Double
 name|average
 parameter_list|(
@@ -229,7 +229,7 @@ argument_list|>
 name|selector
 parameter_list|)
 function_decl|;
-comment|/** Computes the average of a sequence of int values      * that are obtained by invoking a transform function on each      * element of the input sequence. */
+comment|/**    * Computes the average of a sequence of int values    * that are obtained by invoking a transform function on each    * element of the input sequence.    */
 name|int
 name|average
 parameter_list|(
@@ -240,7 +240,7 @@ argument_list|>
 name|selector
 parameter_list|)
 function_decl|;
-comment|/** Computes the average of a sequence of nullable      * int values that are obtained by invoking a transform function      * on each element of the input sequence. */
+comment|/**    * Computes the average of a sequence of nullable    * int values that are obtained by invoking a transform function    * on each element of the input sequence.    */
 name|Integer
 name|average
 parameter_list|(
@@ -251,7 +251,7 @@ argument_list|>
 name|selector
 parameter_list|)
 function_decl|;
-comment|/** Computes the average of a sequence of long values      * that are obtained by invoking a transform function on each      * element of the input sequence. */
+comment|/**    * Computes the average of a sequence of long values    * that are obtained by invoking a transform function on each    * element of the input sequence.    */
 name|long
 name|average
 parameter_list|(
@@ -262,7 +262,7 @@ argument_list|>
 name|selector
 parameter_list|)
 function_decl|;
-comment|/** Computes the average of a sequence of nullable      * long values that are obtained by invoking a transform function      * on each element of the input sequence. */
+comment|/**    * Computes the average of a sequence of nullable    * long values that are obtained by invoking a transform function    * on each element of the input sequence.    */
 name|Long
 name|average
 parameter_list|(
@@ -273,7 +273,7 @@ argument_list|>
 name|selector
 parameter_list|)
 function_decl|;
-comment|/** Computes the average of a sequence of Float      * values that are obtained by invoking a transform function on      * each element of the input sequence. */
+comment|/**    * Computes the average of a sequence of Float    * values that are obtained by invoking a transform function on    * each element of the input sequence.    */
 name|float
 name|average
 parameter_list|(
@@ -284,7 +284,7 @@ argument_list|>
 name|selector
 parameter_list|)
 function_decl|;
-comment|/** Computes the average of a sequence of nullable      * Float values that are obtained by invoking a transform      * function on each element of the input sequence. */
+comment|/**    * Computes the average of a sequence of nullable    * Float values that are obtained by invoking a transform    * function on each element of the input sequence.    */
 name|Float
 name|average
 parameter_list|(
@@ -295,7 +295,7 @@ argument_list|>
 name|selector
 parameter_list|)
 function_decl|;
-comment|/**      * Converts the elements of this Enumerable to the specified type.      *      *<p>This method is implemented by using deferred execution. The immediate      * return value is an object that stores all the information that is      * required to perform the action. The query represented by this method is      * not executed until the object is enumerated either by calling its      * {@link Enumerable#enumerator} method directly or by using      * {@code for (... in ...)}.      *      *<p>If an element cannot be cast to type TResult, the      * {@link Enumerator#current()} method will throw a      * {@link ClassCastException} a exception when the element it accessed. To      * obtain only those elements that can be cast to type TResult, use the      * {@link #ofType(Class)} method instead.      *      * @see EnumerableDefaults#cast      * @see #ofType(Class)      */
+comment|/**    * Converts the elements of this Enumerable to the specified type.    *    *<p>This method is implemented by using deferred execution. The immediate    * return value is an object that stores all the information that is    * required to perform the action. The query represented by this method is    * not executed until the object is enumerated either by calling its    * {@link Enumerable#enumerator} method directly or by using    * {@code for (... in ...)}.    *    *<p>If an element cannot be cast to type TResult, the    * {@link Enumerator#current()} method will throw a    * {@link ClassCastException} a exception when the element it accessed. To    * obtain only those elements that can be cast to type TResult, use the    * {@link #ofType(Class)} method instead.    *    * @see EnumerableDefaults#cast    * @see #ofType(Class)    */
 parameter_list|<
 name|T2
 parameter_list|>
@@ -312,7 +312,7 @@ argument_list|>
 name|clazz
 parameter_list|)
 function_decl|;
-comment|/** Concatenates two sequences. */
+comment|/**    * Concatenates two sequences.    */
 name|Enumerable
 argument_list|<
 name|TSource
@@ -326,7 +326,7 @@ argument_list|>
 name|enumerable1
 parameter_list|)
 function_decl|;
-comment|/** Determines whether a sequence contains a specified      * element by using the default equality comparer. */
+comment|/**    * Determines whether a sequence contains a specified    * element by using the default equality comparer.    */
 name|boolean
 name|contains
 parameter_list|(
@@ -334,7 +334,7 @@ name|TSource
 name|element
 parameter_list|)
 function_decl|;
-comment|/** Determines whether a sequence contains a specified      * element by using a specified EqualityComparer<TSource>. */
+comment|/**    * Determines whether a sequence contains a specified    * element by using a specified EqualityComparer<TSource>.    */
 name|boolean
 name|contains
 parameter_list|(
@@ -345,12 +345,12 @@ name|EqualityComparer
 name|comparer
 parameter_list|)
 function_decl|;
-comment|/** Returns the number of elements in a      * sequence. */
+comment|/**    * Returns the number of elements in a    * sequence.    */
 name|int
 name|count
 parameter_list|()
 function_decl|;
-comment|/** Returns a number that represents how many elements      * in the specified sequence satisfy a condition. */
+comment|/**    * Returns a number that represents how many elements    * in the specified sequence satisfy a condition.    */
 name|int
 name|count
 parameter_list|(
@@ -361,7 +361,7 @@ argument_list|>
 name|predicate
 parameter_list|)
 function_decl|;
-comment|/** Returns the elements of the specified sequence or      * the type parameter's default value in a singleton collection if      * the sequence is empty. */
+comment|/**    * Returns the elements of the specified sequence or    * the type parameter's default value in a singleton collection if    * the sequence is empty.    */
 name|Enumerable
 argument_list|<
 name|TSource
@@ -369,7 +369,7 @@ argument_list|>
 name|defaultIfEmpty
 parameter_list|()
 function_decl|;
-comment|/** Returns the elements of the specified sequence or      * the specified value in a singleton collection if the sequence      * is empty. */
+comment|/**    * Returns the elements of the specified sequence or    * the specified value in a singleton collection if the sequence    * is empty.    */
 name|TSource
 name|defaultIfEmpty
 parameter_list|(
@@ -377,7 +377,7 @@ name|TSource
 name|value
 parameter_list|)
 function_decl|;
-comment|/** Returns distinct elements from a sequence by using      * the default equality comparer to compare values. */
+comment|/**    * Returns distinct elements from a sequence by using    * the default equality comparer to compare values.    */
 name|Enumerable
 argument_list|<
 name|TSource
@@ -385,7 +385,7 @@ argument_list|>
 name|distinct
 parameter_list|()
 function_decl|;
-comment|/** Returns distinct elements from a sequence by using      * a specified EqualityComparer<TSource> to compare values. */
+comment|/**    * Returns distinct elements from a sequence by using    * a specified EqualityComparer<TSource> to compare values.    */
 name|Enumerable
 argument_list|<
 name|TSource
@@ -399,7 +399,7 @@ argument_list|>
 name|comparer
 parameter_list|)
 function_decl|;
-comment|/** Returns the element at a specified index in a      * sequence. */
+comment|/**    * Returns the element at a specified index in a    * sequence.    */
 name|TSource
 name|elementAt
 parameter_list|(
@@ -407,7 +407,7 @@ name|int
 name|index
 parameter_list|)
 function_decl|;
-comment|/** Returns the element at a specified index in a      * sequence or a default value if the index is out of      * range. */
+comment|/**    * Returns the element at a specified index in a    * sequence or a default value if the index is out of    * range.    */
 name|TSource
 name|elementAtOrDefault
 parameter_list|(
@@ -415,7 +415,7 @@ name|int
 name|index
 parameter_list|)
 function_decl|;
-comment|/** Produces the set difference of two sequences by      * using the default equality comparer to compare values. (Defined      * by Enumerable.) */
+comment|/**    * Produces the set difference of two sequences by    * using the default equality comparer to compare values. (Defined    * by Enumerable.)    */
 name|Enumerable
 argument_list|<
 name|TSource
@@ -429,7 +429,7 @@ argument_list|>
 name|enumerable1
 parameter_list|)
 function_decl|;
-comment|/** Produces the set difference of two sequences by      * using the specified EqualityComparer<TSource> to compare      * values. */
+comment|/**    * Produces the set difference of two sequences by    * using the specified EqualityComparer<TSource> to compare    * values.    */
 name|Enumerable
 argument_list|<
 name|TSource
@@ -449,12 +449,12 @@ argument_list|>
 name|comparer
 parameter_list|)
 function_decl|;
-comment|/** Returns the first element of a sequence. (Defined      * by Enumerable.) */
+comment|/**    * Returns the first element of a sequence. (Defined    * by Enumerable.)    */
 name|TSource
 name|first
 parameter_list|()
 function_decl|;
-comment|/** Returns the first element in a sequence that      * satisfies a specified condition. */
+comment|/**    * Returns the first element in a sequence that    * satisfies a specified condition.    */
 name|TSource
 name|first
 parameter_list|(
@@ -465,12 +465,12 @@ argument_list|>
 name|predicate
 parameter_list|)
 function_decl|;
-comment|/** Returns the first element of a sequence, or a      * default value if the sequence contains no elements. */
+comment|/**    * Returns the first element of a sequence, or a    * default value if the sequence contains no elements.    */
 name|TSource
 name|firstOrDefault
 parameter_list|()
 function_decl|;
-comment|/** Returns the first element of the sequence that      * satisfies a condition or a default value if no such element is      * found. */
+comment|/**    * Returns the first element of the sequence that    * satisfies a condition or a default value if no such element is    * found.    */
 name|TSource
 name|firstOrDefault
 parameter_list|(
@@ -481,7 +481,7 @@ argument_list|>
 name|predicate
 parameter_list|)
 function_decl|;
-comment|/** Groups the elements of a sequence according to a      * specified key selector function. */
+comment|/**    * Groups the elements of a sequence according to a    * specified key selector function.    */
 parameter_list|<
 name|TKey
 parameter_list|>
@@ -505,7 +505,7 @@ argument_list|>
 name|keySelector
 parameter_list|)
 function_decl|;
-comment|/** Groups the elements of a sequence according to a      * specified key selector function and compares the keys by using      * a specified comparer. */
+comment|/**    * Groups the elements of a sequence according to a    * specified key selector function and compares the keys by using    * a specified comparer.    */
 parameter_list|<
 name|TKey
 parameter_list|>
@@ -535,7 +535,7 @@ argument_list|>
 name|comparer
 parameter_list|)
 function_decl|;
-comment|/** Groups the elements of a sequence according to a      * specified key selector function and projects the elements for      * each group by using a specified function. */
+comment|/**    * Groups the elements of a sequence according to a    * specified key selector function and projects the elements for    * each group by using a specified function.    */
 parameter_list|<
 name|TKey
 parameter_list|,
@@ -569,7 +569,7 @@ argument_list|>
 name|elementSelector
 parameter_list|)
 function_decl|;
-comment|/** Groups the elements of a sequence according to a      * specified key selector function and creates a result value from      * each group and its key. */
+comment|/**    * Groups the elements of a sequence according to a    * specified key selector function and creates a result value from    * each group and its key.    */
 parameter_list|<
 name|TKey
 parameter_list|,
@@ -608,7 +608,7 @@ argument_list|>
 name|elementSelector
 parameter_list|)
 function_decl|;
-comment|/** Groups the elements of a sequence according to a      * key selector function. The keys are compared by using a      * comparer and each group's elements are projected by using a      * specified function. */
+comment|/**    * Groups the elements of a sequence according to a    * key selector function. The keys are compared by using a    * comparer and each group's elements are projected by using a    * specified function.    */
 parameter_list|<
 name|TKey
 parameter_list|,
@@ -645,7 +645,7 @@ name|EqualityComparer
 name|comparer
 parameter_list|)
 function_decl|;
-comment|/** Groups the elements of a sequence according to a      * specified key selector function and creates a result value from      * each group and its key. The keys are compared by using a      * specified comparer. */
+comment|/**    * Groups the elements of a sequence according to a    * specified key selector function and creates a result value from    * each group and its key. The keys are compared by using a    * specified comparer.    */
 parameter_list|<
 name|TKey
 parameter_list|,
@@ -682,7 +682,7 @@ name|EqualityComparer
 name|comparer
 parameter_list|)
 function_decl|;
-comment|/** Groups the elements of a sequence according to a      * specified key selector function and creates a result value from      * each group and its key. The elements of each group are      * projected by using a specified function. */
+comment|/**    * Groups the elements of a sequence according to a    * specified key selector function and creates a result value from    * each group and its key. The elements of each group are    * projected by using a specified function.    */
 parameter_list|<
 name|TKey
 parameter_list|,
@@ -726,7 +726,7 @@ argument_list|>
 name|resultSelector
 parameter_list|)
 function_decl|;
-comment|/** Groups the elements of a sequence according to a      * specified key selector function and creates a result value from      * each group and its key. Key values are compared by using a      * specified comparer, and the elements of each group are      * projected by using a specified function. */
+comment|/**    * Groups the elements of a sequence according to a    * specified key selector function and creates a result value from    * each group and its key. Key values are compared by using a    * specified comparer, and the elements of each group are    * projected by using a specified function.    */
 parameter_list|<
 name|TKey
 parameter_list|,
@@ -776,7 +776,7 @@ argument_list|>
 name|comparer
 parameter_list|)
 function_decl|;
-comment|/** Groups the elements of a sequence according to a      * specified key selector function, initializing an accumulator for each      * group and adding to it each time an element with the same key is seen.      * Creates a result value from each accumulator and its key using a      * specified function. */
+comment|/**    * Groups the elements of a sequence according to a    * specified key selector function, initializing an accumulator for each    * group and adding to it each time an element with the same key is seen.    * Creates a result value from each accumulator and its key using a    * specified function.    */
 parameter_list|<
 name|TKey
 parameter_list|,
@@ -825,7 +825,7 @@ argument_list|>
 name|resultSelector
 parameter_list|)
 function_decl|;
-comment|/** Groups the elements of a sequence according to a      * specified key selector function, initializing an accumulator for each      * group and adding to it each time an element with the same key is seen.      * Creates a result value from each accumulator and its key using a      * specified function. Key values are compared by using a      * specified comparer. */
+comment|/**    * Groups the elements of a sequence according to a    * specified key selector function, initializing an accumulator for each    * group and adding to it each time an element with the same key is seen.    * Creates a result value from each accumulator and its key using a    * specified function. Key values are compared by using a    * specified comparer.    */
 parameter_list|<
 name|TKey
 parameter_list|,
@@ -880,7 +880,7 @@ argument_list|>
 name|comparer
 parameter_list|)
 function_decl|;
-comment|/** Correlates the elements of two sequences based on      * equality of keys and groups the results. The default equality      * comparer is used to compare keys. */
+comment|/**    * Correlates the elements of two sequences based on    * equality of keys and groups the results. The default equality    * comparer is used to compare keys.    */
 parameter_list|<
 name|TInner
 parameter_list|,
@@ -930,7 +930,7 @@ argument_list|>
 name|resultSelector
 parameter_list|)
 function_decl|;
-comment|/** Correlates the elements of two sequences based on      * key equality and groups the results. A specified      * EqualityComparer<TSource> is used to compare keys. */
+comment|/**    * Correlates the elements of two sequences based on    * key equality and groups the results. A specified    * EqualityComparer<TSource> is used to compare keys.    */
 parameter_list|<
 name|TInner
 parameter_list|,
@@ -986,7 +986,7 @@ argument_list|>
 name|comparer
 parameter_list|)
 function_decl|;
-comment|/** Produces the set intersection of two sequences by      * using the default equality comparer to compare values. (Defined      * by Enumerable.) */
+comment|/**    * Produces the set intersection of two sequences by    * using the default equality comparer to compare values. (Defined    * by Enumerable.)    */
 name|Enumerable
 argument_list|<
 name|TSource
@@ -1000,7 +1000,7 @@ argument_list|>
 name|enumerable1
 parameter_list|)
 function_decl|;
-comment|/** Produces the set intersection of two sequences by      * using the specified EqualityComparer<TSource> to compare      * values. */
+comment|/**    * Produces the set intersection of two sequences by    * using the specified EqualityComparer<TSource> to compare    * values.    */
 name|Enumerable
 argument_list|<
 name|TSource
@@ -1020,7 +1020,7 @@ argument_list|>
 name|comparer
 parameter_list|)
 function_decl|;
-comment|/** Copies the contents of the sequence into a collection. */
+comment|/**    * Copies the contents of the sequence into a collection.    */
 parameter_list|<
 name|C
 extends|extends
@@ -1038,7 +1038,7 @@ name|C
 name|sink
 parameter_list|)
 function_decl|;
-comment|/** Correlates the elements of two sequences based on      * matching keys. The default equality comparer is used to compare      * keys. */
+comment|/**    * Correlates the elements of two sequences based on    * matching keys. The default equality comparer is used to compare    * keys.    */
 parameter_list|<
 name|TInner
 parameter_list|,
@@ -1085,7 +1085,7 @@ argument_list|>
 name|resultSelector
 parameter_list|)
 function_decl|;
-comment|/** Correlates the elements of two sequences based on      * matching keys. A specified EqualityComparer<TSource> is used to      * compare keys. */
+comment|/**    * Correlates the elements of two sequences based on    * matching keys. A specified EqualityComparer<TSource> is used to    * compare keys.    */
 parameter_list|<
 name|TInner
 parameter_list|,
@@ -1138,12 +1138,12 @@ argument_list|>
 name|comparer
 parameter_list|)
 function_decl|;
-comment|/** Returns the last element of a sequence. (Defined      * by Enumerable.) */
+comment|/**    * Returns the last element of a sequence. (Defined    * by Enumerable.)    */
 name|TSource
 name|last
 parameter_list|()
 function_decl|;
-comment|/** Returns the last element of a sequence that      * satisfies a specified condition. */
+comment|/**    * Returns the last element of a sequence that    * satisfies a specified condition.    */
 name|TSource
 name|last
 parameter_list|(
@@ -1154,12 +1154,12 @@ argument_list|>
 name|predicate
 parameter_list|)
 function_decl|;
-comment|/** Returns the last element of a sequence, or a      * default value if the sequence contains no elements. */
+comment|/**    * Returns the last element of a sequence, or a    * default value if the sequence contains no elements.    */
 name|TSource
 name|lastOrDefault
 parameter_list|()
 function_decl|;
-comment|/** Returns the last element of a sequence that      * satisfies a condition or a default value if no such element is      * found. */
+comment|/**    * Returns the last element of a sequence that    * satisfies a condition or a default value if no such element is    * found.    */
 name|TSource
 name|lastOrDefault
 parameter_list|(
@@ -1170,12 +1170,12 @@ argument_list|>
 name|predicate
 parameter_list|)
 function_decl|;
-comment|/** Returns an long that represents the total number      * of elements in a sequence. */
+comment|/**    * Returns an long that represents the total number    * of elements in a sequence.    */
 name|long
 name|longCount
 parameter_list|()
 function_decl|;
-comment|/** Returns an long that represents how many elements      * in a sequence satisfy a condition. */
+comment|/**    * Returns an long that represents how many elements    * in a sequence satisfy a condition.    */
 name|long
 name|longCount
 parameter_list|(
@@ -1186,12 +1186,12 @@ argument_list|>
 name|predicate
 parameter_list|)
 function_decl|;
-comment|/** Returns the maximum value in a generic      * sequence. */
+comment|/**    * Returns the maximum value in a generic    * sequence.    */
 name|TSource
 name|max
 parameter_list|()
 function_decl|;
-comment|/** Invokes a transform function on each element of a      * sequence and returns the maximum Decimal value. */
+comment|/**    * Invokes a transform function on each element of a    * sequence and returns the maximum Decimal value.    */
 name|BigDecimal
 name|max
 parameter_list|(
@@ -1202,7 +1202,7 @@ argument_list|>
 name|selector
 parameter_list|)
 function_decl|;
-comment|/** Invokes a transform function on each element of a      * sequence and returns the maximum nullable Decimal      * value. */
+comment|/**    * Invokes a transform function on each element of a    * sequence and returns the maximum nullable Decimal    * value.    */
 name|BigDecimal
 name|max
 parameter_list|(
@@ -1213,7 +1213,7 @@ argument_list|>
 name|selector
 parameter_list|)
 function_decl|;
-comment|/** Invokes a transform function on each element of a      * sequence and returns the maximum Double value. */
+comment|/**    * Invokes a transform function on each element of a    * sequence and returns the maximum Double value.    */
 name|double
 name|max
 parameter_list|(
@@ -1224,7 +1224,7 @@ argument_list|>
 name|selector
 parameter_list|)
 function_decl|;
-comment|/** Invokes a transform function on each element of a      * sequence and returns the maximum nullable Double      * value. */
+comment|/**    * Invokes a transform function on each element of a    * sequence and returns the maximum nullable Double    * value.    */
 name|Double
 name|max
 parameter_list|(
@@ -1235,7 +1235,7 @@ argument_list|>
 name|selector
 parameter_list|)
 function_decl|;
-comment|/** Invokes a transform function on each element of a      * sequence and returns the maximum int value. */
+comment|/**    * Invokes a transform function on each element of a    * sequence and returns the maximum int value.    */
 name|int
 name|max
 parameter_list|(
@@ -1246,7 +1246,7 @@ argument_list|>
 name|selector
 parameter_list|)
 function_decl|;
-comment|/** Invokes a transform function on each element of a      * sequence and returns the maximum nullable int value. (Defined      * by Enumerable.) */
+comment|/**    * Invokes a transform function on each element of a    * sequence and returns the maximum nullable int value. (Defined    * by Enumerable.)    */
 name|Integer
 name|max
 parameter_list|(
@@ -1257,7 +1257,7 @@ argument_list|>
 name|selector
 parameter_list|)
 function_decl|;
-comment|/** Invokes a transform function on each element of a      * sequence and returns the maximum long value. */
+comment|/**    * Invokes a transform function on each element of a    * sequence and returns the maximum long value.    */
 name|long
 name|max
 parameter_list|(
@@ -1268,7 +1268,7 @@ argument_list|>
 name|selector
 parameter_list|)
 function_decl|;
-comment|/** Invokes a transform function on each element of a      * sequence and returns the maximum nullable long value. (Defined      * by Enumerable.) */
+comment|/**    * Invokes a transform function on each element of a    * sequence and returns the maximum nullable long value. (Defined    * by Enumerable.)    */
 name|Long
 name|max
 parameter_list|(
@@ -1279,7 +1279,7 @@ argument_list|>
 name|selector
 parameter_list|)
 function_decl|;
-comment|/** Invokes a transform function on each element of a      * sequence and returns the maximum Float value. */
+comment|/**    * Invokes a transform function on each element of a    * sequence and returns the maximum Float value.    */
 name|float
 name|max
 parameter_list|(
@@ -1290,7 +1290,7 @@ argument_list|>
 name|selector
 parameter_list|)
 function_decl|;
-comment|/** Invokes a transform function on each element of a      * sequence and returns the maximum nullable Float      * value. */
+comment|/**    * Invokes a transform function on each element of a    * sequence and returns the maximum nullable Float    * value.    */
 name|Float
 name|max
 parameter_list|(
@@ -1301,7 +1301,7 @@ argument_list|>
 name|selector
 parameter_list|)
 function_decl|;
-comment|/** Invokes a transform function on each element of a      * generic sequence and returns the maximum resulting      * value. */
+comment|/**    * Invokes a transform function on each element of a    * generic sequence and returns the maximum resulting    * value.    */
 parameter_list|<
 name|TResult
 extends|extends
@@ -1322,12 +1322,12 @@ argument_list|>
 name|selector
 parameter_list|)
 function_decl|;
-comment|/** Returns the minimum value in a generic      * sequence. */
+comment|/**    * Returns the minimum value in a generic    * sequence.    */
 name|TSource
 name|min
 parameter_list|()
 function_decl|;
-comment|/** Invokes a transform function on each element of a      * sequence and returns the minimum Decimal value. */
+comment|/**    * Invokes a transform function on each element of a    * sequence and returns the minimum Decimal value.    */
 name|BigDecimal
 name|min
 parameter_list|(
@@ -1338,7 +1338,7 @@ argument_list|>
 name|selector
 parameter_list|)
 function_decl|;
-comment|/** Invokes a transform function on each element of a      * sequence and returns the minimum nullable Decimal      * value. */
+comment|/**    * Invokes a transform function on each element of a    * sequence and returns the minimum nullable Decimal    * value.    */
 name|BigDecimal
 name|min
 parameter_list|(
@@ -1349,7 +1349,7 @@ argument_list|>
 name|selector
 parameter_list|)
 function_decl|;
-comment|/** Invokes a transform function on each element of a      * sequence and returns the minimum Double value. */
+comment|/**    * Invokes a transform function on each element of a    * sequence and returns the minimum Double value.    */
 name|double
 name|min
 parameter_list|(
@@ -1360,7 +1360,7 @@ argument_list|>
 name|selector
 parameter_list|)
 function_decl|;
-comment|/** Invokes a transform function on each element of a      * sequence and returns the minimum nullable Double      * value. */
+comment|/**    * Invokes a transform function on each element of a    * sequence and returns the minimum nullable Double    * value.    */
 name|Double
 name|min
 parameter_list|(
@@ -1371,7 +1371,7 @@ argument_list|>
 name|selector
 parameter_list|)
 function_decl|;
-comment|/** Invokes a transform function on each element of a      * sequence and returns the minimum int value. */
+comment|/**    * Invokes a transform function on each element of a    * sequence and returns the minimum int value.    */
 name|int
 name|min
 parameter_list|(
@@ -1382,7 +1382,7 @@ argument_list|>
 name|selector
 parameter_list|)
 function_decl|;
-comment|/** Invokes a transform function on each element of a      * sequence and returns the minimum nullable int value. (Defined      * by Enumerable.) */
+comment|/**    * Invokes a transform function on each element of a    * sequence and returns the minimum nullable int value. (Defined    * by Enumerable.)    */
 name|Integer
 name|min
 parameter_list|(
@@ -1393,7 +1393,7 @@ argument_list|>
 name|selector
 parameter_list|)
 function_decl|;
-comment|/** Invokes a transform function on each element of a      * sequence and returns the minimum long value. */
+comment|/**    * Invokes a transform function on each element of a    * sequence and returns the minimum long value.    */
 name|long
 name|min
 parameter_list|(
@@ -1404,7 +1404,7 @@ argument_list|>
 name|selector
 parameter_list|)
 function_decl|;
-comment|/** Invokes a transform function on each element of a      * sequence and returns the minimum nullable long value. (Defined      * by Enumerable.) */
+comment|/**    * Invokes a transform function on each element of a    * sequence and returns the minimum nullable long value. (Defined    * by Enumerable.)    */
 name|Long
 name|min
 parameter_list|(
@@ -1415,7 +1415,7 @@ argument_list|>
 name|selector
 parameter_list|)
 function_decl|;
-comment|/** Invokes a transform function on each element of a      * sequence and returns the minimum Float value. */
+comment|/**    * Invokes a transform function on each element of a    * sequence and returns the minimum Float value.    */
 name|float
 name|min
 parameter_list|(
@@ -1426,7 +1426,7 @@ argument_list|>
 name|selector
 parameter_list|)
 function_decl|;
-comment|/** Invokes a transform function on each element of a      * sequence and returns the minimum nullable Float      * value. */
+comment|/**    * Invokes a transform function on each element of a    * sequence and returns the minimum nullable Float    * value.    */
 name|Float
 name|min
 parameter_list|(
@@ -1437,7 +1437,7 @@ argument_list|>
 name|selector
 parameter_list|)
 function_decl|;
-comment|/** Invokes a transform function on each element of a      * generic sequence and returns the minimum resulting      * value. */
+comment|/**    * Invokes a transform function on each element of a    * generic sequence and returns the minimum resulting    * value.    */
 parameter_list|<
 name|TResult
 extends|extends
@@ -1458,7 +1458,7 @@ argument_list|>
 name|selector
 parameter_list|)
 function_decl|;
-comment|/**      * Filters the elements of an Enumerable based on a      * specified type.      *      *<p>Analogous to LINQ's Enumerable.OfType extension method.</p>      *      * @param clazz Target type      * @param<TResult> Target type      * @return Collection of T2      */
+comment|/**    * Filters the elements of an Enumerable based on a    * specified type.    *    *<p>Analogous to LINQ's Enumerable.OfType extension method.</p>    *    * @param clazz Target type    * @param<TResult> Target type    *    * @return Collection of T2    */
 parameter_list|<
 name|TResult
 parameter_list|>
@@ -1475,7 +1475,7 @@ argument_list|>
 name|clazz
 parameter_list|)
 function_decl|;
-comment|/** Sorts the elements of a sequence in ascending      * order according to a key. */
+comment|/**    * Sorts the elements of a sequence in ascending    * order according to a key.    */
 parameter_list|<
 name|TKey
 extends|extends
@@ -1496,7 +1496,7 @@ argument_list|>
 name|keySelector
 parameter_list|)
 function_decl|;
-comment|/** Sorts the elements of a sequence in ascending      * order by using a specified comparer. */
+comment|/**    * Sorts the elements of a sequence in ascending    * order by using a specified comparer.    */
 parameter_list|<
 name|TKey
 parameter_list|>
@@ -1521,7 +1521,7 @@ argument_list|>
 name|comparator
 parameter_list|)
 function_decl|;
-comment|/** Sorts the elements of a sequence in descending      * order according to a key. */
+comment|/**    * Sorts the elements of a sequence in descending    * order according to a key.    */
 parameter_list|<
 name|TKey
 extends|extends
@@ -1542,7 +1542,7 @@ argument_list|>
 name|keySelector
 parameter_list|)
 function_decl|;
-comment|/** Sorts the elements of a sequence in descending      * order by using a specified comparer. */
+comment|/**    * Sorts the elements of a sequence in descending    * order by using a specified comparer.    */
 parameter_list|<
 name|TKey
 parameter_list|>
@@ -1567,7 +1567,7 @@ argument_list|>
 name|comparator
 parameter_list|)
 function_decl|;
-comment|/** Inverts the order of the elements in a      * sequence. */
+comment|/**    * Inverts the order of the elements in a    * sequence.    */
 name|Enumerable
 argument_list|<
 name|TSource
@@ -1575,7 +1575,7 @@ argument_list|>
 name|reverse
 parameter_list|()
 function_decl|;
-comment|/** Projects each element of a sequence into a new      * form. */
+comment|/**    * Projects each element of a sequence into a new    * form.    */
 parameter_list|<
 name|TResult
 parameter_list|>
@@ -1594,7 +1594,7 @@ argument_list|>
 name|selector
 parameter_list|)
 function_decl|;
-comment|/** Projects each element of a sequence into a new      * form by incorporating the element's index. */
+comment|/**    * Projects each element of a sequence into a new    * form by incorporating the element's index.    */
 parameter_list|<
 name|TResult
 parameter_list|>
@@ -1615,7 +1615,7 @@ argument_list|>
 name|selector
 parameter_list|)
 function_decl|;
-comment|/** Projects each element of a sequence to an      * Enumerable<TSource> and flattens the resulting sequences into one      * sequence. */
+comment|/**    * Projects each element of a sequence to an    * Enumerable<TSource> and flattens the resulting sequences into one    * sequence.    */
 parameter_list|<
 name|TResult
 parameter_list|>
@@ -1637,7 +1637,7 @@ argument_list|>
 name|selector
 parameter_list|)
 function_decl|;
-comment|/** Projects each element of a sequence to an      * Enumerable<TSource>, and flattens the resulting sequences into one      * sequence. The index of each source element is used in the      * projected form of that element. */
+comment|/**    * Projects each element of a sequence to an    * Enumerable<TSource>, and flattens the resulting sequences into one    * sequence. The index of each source element is used in the    * projected form of that element.    */
 parameter_list|<
 name|TResult
 parameter_list|>
@@ -1661,7 +1661,7 @@ argument_list|>
 name|selector
 parameter_list|)
 function_decl|;
-comment|/** Projects each element of a sequence to an      * Enumerable<TSource>, flattens the resulting sequences into one      * sequence, and invokes a result selector function on each      * element therein. The index of each source element is used in      * the intermediate projected form of that element. */
+comment|/**    * Projects each element of a sequence to an    * Enumerable<TSource>, flattens the resulting sequences into one    * sequence, and invokes a result selector function on each    * element therein. The index of each source element is used in    * the intermediate projected form of that element.    */
 parameter_list|<
 name|TCollection
 parameter_list|,
@@ -1697,7 +1697,7 @@ argument_list|>
 name|resultSelector
 parameter_list|)
 function_decl|;
-comment|/** Projects each element of a sequence to an      * Enumerable<TSource>, flattens the resulting sequences into one      * sequence, and invokes a result selector function on each      * element therein. */
+comment|/**    * Projects each element of a sequence to an    * Enumerable<TSource>, flattens the resulting sequences into one    * sequence, and invokes a result selector function on each    * element therein.    */
 parameter_list|<
 name|TCollection
 parameter_list|,
@@ -1731,7 +1731,7 @@ argument_list|>
 name|resultSelector
 parameter_list|)
 function_decl|;
-comment|/** Determines whether two sequences are equal by      * comparing the elements by using the default equality comparer      * for their type. */
+comment|/**    * Determines whether two sequences are equal by    * comparing the elements by using the default equality comparer    * for their type.    */
 name|boolean
 name|sequenceEqual
 parameter_list|(
@@ -1742,7 +1742,7 @@ argument_list|>
 name|enumerable1
 parameter_list|)
 function_decl|;
-comment|/** Determines whether two sequences are equal by      * comparing their elements by using a specified      * EqualityComparer<TSource>. */
+comment|/**    * Determines whether two sequences are equal by    * comparing their elements by using a specified    * EqualityComparer<TSource>.    */
 name|boolean
 name|sequenceEqual
 parameter_list|(
@@ -1759,12 +1759,12 @@ argument_list|>
 name|comparer
 parameter_list|)
 function_decl|;
-comment|/** Returns the only element of a sequence, and throws      * an exception if there is not exactly one element in the      * sequence. */
+comment|/**    * Returns the only element of a sequence, and throws    * an exception if there is not exactly one element in the    * sequence.    */
 name|TSource
 name|single
 parameter_list|()
 function_decl|;
-comment|/** Returns the only element of a sequence that      * satisfies a specified condition, and throws an exception if      * more than one such element exists. */
+comment|/**    * Returns the only element of a sequence that    * satisfies a specified condition, and throws an exception if    * more than one such element exists.    */
 name|TSource
 name|single
 parameter_list|(
@@ -1775,12 +1775,12 @@ argument_list|>
 name|predicate
 parameter_list|)
 function_decl|;
-comment|/** Returns the only element of a sequence, or a      * default value if the sequence is empty; this method throws an      * exception if there is more than one element in the      * sequence. */
+comment|/**    * Returns the only element of a sequence, or a    * default value if the sequence is empty; this method throws an    * exception if there is more than one element in the    * sequence.    */
 name|TSource
 name|singleOrDefault
 parameter_list|()
 function_decl|;
-comment|/** Returns the only element of a sequence that      * satisfies a specified condition or a default value if no such      * element exists; this method throws an exception if more than      * one element satisfies the condition. */
+comment|/**    * Returns the only element of a sequence that    * satisfies a specified condition or a default value if no such    * element exists; this method throws an exception if more than    * one element satisfies the condition.    */
 name|TSource
 name|singleOrDefault
 parameter_list|(
@@ -1791,7 +1791,7 @@ argument_list|>
 name|predicate
 parameter_list|)
 function_decl|;
-comment|/** Bypasses a specified number of elements in a      * sequence and then returns the remaining elements. */
+comment|/**    * Bypasses a specified number of elements in a    * sequence and then returns the remaining elements.    */
 name|Enumerable
 argument_list|<
 name|TSource
@@ -1802,7 +1802,7 @@ name|int
 name|count
 parameter_list|)
 function_decl|;
-comment|/** Bypasses elements in a sequence as long as a      * specified condition is true and then returns the remaining      * elements. */
+comment|/**    * Bypasses elements in a sequence as long as a    * specified condition is true and then returns the remaining    * elements.    */
 name|Enumerable
 argument_list|<
 name|TSource
@@ -1816,7 +1816,7 @@ argument_list|>
 name|predicate
 parameter_list|)
 function_decl|;
-comment|/** Bypasses elements in a sequence as long as a      * specified condition is true and then returns the remaining      * elements. The element's index is used in the logic of the      * predicate function. */
+comment|/**    * Bypasses elements in a sequence as long as a    * specified condition is true and then returns the remaining    * elements. The element's index is used in the logic of the    * predicate function.    */
 name|Enumerable
 argument_list|<
 name|TSource
@@ -1832,7 +1832,7 @@ argument_list|>
 name|predicate
 parameter_list|)
 function_decl|;
-comment|/** Computes the sum of the sequence of Decimal values      * that are obtained by invoking a transform function on each      * element of the input sequence. */
+comment|/**    * Computes the sum of the sequence of Decimal values    * that are obtained by invoking a transform function on each    * element of the input sequence.    */
 name|BigDecimal
 name|sum
 parameter_list|(
@@ -1843,7 +1843,7 @@ argument_list|>
 name|selector
 parameter_list|)
 function_decl|;
-comment|/** Computes the sum of the sequence of nullable      * Decimal values that are obtained by invoking a transform      * function on each element of the input sequence. */
+comment|/**    * Computes the sum of the sequence of nullable    * Decimal values that are obtained by invoking a transform    * function on each element of the input sequence.    */
 name|BigDecimal
 name|sum
 parameter_list|(
@@ -1854,7 +1854,7 @@ argument_list|>
 name|selector
 parameter_list|)
 function_decl|;
-comment|/** Computes the sum of the sequence of Double values      * that are obtained by invoking a transform function on each      * element of the input sequence. */
+comment|/**    * Computes the sum of the sequence of Double values    * that are obtained by invoking a transform function on each    * element of the input sequence.    */
 name|double
 name|sum
 parameter_list|(
@@ -1865,7 +1865,7 @@ argument_list|>
 name|selector
 parameter_list|)
 function_decl|;
-comment|/** Computes the sum of the sequence of nullable      * Double values that are obtained by invoking a transform      * function on each element of the input sequence. */
+comment|/**    * Computes the sum of the sequence of nullable    * Double values that are obtained by invoking a transform    * function on each element of the input sequence.    */
 name|Double
 name|sum
 parameter_list|(
@@ -1876,7 +1876,7 @@ argument_list|>
 name|selector
 parameter_list|)
 function_decl|;
-comment|/** Computes the sum of the sequence of int values      * that are obtained by invoking a transform function on each      * element of the input sequence. */
+comment|/**    * Computes the sum of the sequence of int values    * that are obtained by invoking a transform function on each    * element of the input sequence.    */
 name|int
 name|sum
 parameter_list|(
@@ -1887,7 +1887,7 @@ argument_list|>
 name|selector
 parameter_list|)
 function_decl|;
-comment|/** Computes the sum of the sequence of nullable int      * values that are obtained by invoking a transform function on      * each element of the input sequence. */
+comment|/**    * Computes the sum of the sequence of nullable int    * values that are obtained by invoking a transform function on    * each element of the input sequence.    */
 name|Integer
 name|sum
 parameter_list|(
@@ -1898,7 +1898,7 @@ argument_list|>
 name|selector
 parameter_list|)
 function_decl|;
-comment|/** Computes the sum of the sequence of long values      * that are obtained by invoking a transform function on each      * element of the input sequence. */
+comment|/**    * Computes the sum of the sequence of long values    * that are obtained by invoking a transform function on each    * element of the input sequence.    */
 name|long
 name|sum
 parameter_list|(
@@ -1909,7 +1909,7 @@ argument_list|>
 name|selector
 parameter_list|)
 function_decl|;
-comment|/** Computes the sum of the sequence of nullable long      * values that are obtained by invoking a transform function on      * each element of the input sequence. */
+comment|/**    * Computes the sum of the sequence of nullable long    * values that are obtained by invoking a transform function on    * each element of the input sequence.    */
 name|Long
 name|sum
 parameter_list|(
@@ -1920,7 +1920,7 @@ argument_list|>
 name|selector
 parameter_list|)
 function_decl|;
-comment|/** Computes the sum of the sequence of Float values      * that are obtained by invoking a transform function on each      * element of the input sequence. */
+comment|/**    * Computes the sum of the sequence of Float values    * that are obtained by invoking a transform function on each    * element of the input sequence.    */
 name|float
 name|sum
 parameter_list|(
@@ -1931,7 +1931,7 @@ argument_list|>
 name|selector
 parameter_list|)
 function_decl|;
-comment|/** Computes the sum of the sequence of nullable      * Float values that are obtained by invoking a transform      * function on each element of the input sequence. */
+comment|/**    * Computes the sum of the sequence of nullable    * Float values that are obtained by invoking a transform    * function on each element of the input sequence.    */
 name|Float
 name|sum
 parameter_list|(
@@ -1942,7 +1942,7 @@ argument_list|>
 name|selector
 parameter_list|)
 function_decl|;
-comment|/** Returns a specified number of contiguous elements      * from the start of a sequence. */
+comment|/**    * Returns a specified number of contiguous elements    * from the start of a sequence.    */
 name|Enumerable
 argument_list|<
 name|TSource
@@ -1953,7 +1953,7 @@ name|int
 name|count
 parameter_list|)
 function_decl|;
-comment|/** Returns elements from a sequence as long as a      * specified condition is true. */
+comment|/**    * Returns elements from a sequence as long as a    * specified condition is true.    */
 name|Enumerable
 argument_list|<
 name|TSource
@@ -1967,7 +1967,7 @@ argument_list|>
 name|predicate
 parameter_list|)
 function_decl|;
-comment|/** Returns elements from a sequence as long as a      * specified condition is true. The element's index is used in the      * logic of the predicate function. */
+comment|/**    * Returns elements from a sequence as long as a    * specified condition is true. The element's index is used in the    * logic of the predicate function.    */
 name|Enumerable
 argument_list|<
 name|TSource
@@ -1983,7 +1983,7 @@ argument_list|>
 name|predicate
 parameter_list|)
 function_decl|;
-comment|/** Creates a Dictionary<TKey, TValue> from an      * Enumerable<TSource> according to a specified key selector      * function.      *      *<p>NOTE: Called {@code toDictionary} in LINQ.NET.</p>      * */
+comment|/**    * Creates a Dictionary<TKey, TValue> from an    * Enumerable<TSource> according to a specified key selector    * function.    *    *<p>NOTE: Called {@code toDictionary} in LINQ.NET.</p>    */
 parameter_list|<
 name|TKey
 parameter_list|>
@@ -2004,7 +2004,7 @@ argument_list|>
 name|keySelector
 parameter_list|)
 function_decl|;
-comment|/** Creates a Dictionary<TKey, TValue> from an      * Enumerable<TSource> according to a specified key selector function      * and key comparer. */
+comment|/**    * Creates a Dictionary<TKey, TValue> from an    * Enumerable<TSource> according to a specified key selector function    * and key comparer.    */
 parameter_list|<
 name|TKey
 parameter_list|>
@@ -2031,7 +2031,7 @@ argument_list|>
 name|comparer
 parameter_list|)
 function_decl|;
-comment|/** Creates a Dictionary<TKey, TValue> from an      * Enumerable<TSource> according to specified key selector and element      * selector functions. */
+comment|/**    * Creates a Dictionary<TKey, TValue> from an    * Enumerable<TSource> according to specified key selector and element    * selector functions.    */
 parameter_list|<
 name|TKey
 parameter_list|,
@@ -2062,7 +2062,7 @@ argument_list|>
 name|elementSelector
 parameter_list|)
 function_decl|;
-comment|/** Creates a Dictionary<TKey, TValue> from an      * Enumerable<TSource> according to a specified key selector function,      * a comparer, and an element selector function. */
+comment|/**    * Creates a Dictionary<TKey, TValue> from an    * Enumerable<TSource> according to a specified key selector function,    * a comparer, and an element selector function.    */
 parameter_list|<
 name|TKey
 parameter_list|,
@@ -2099,7 +2099,7 @@ argument_list|>
 name|comparer
 parameter_list|)
 function_decl|;
-comment|/** Creates a List<TSource> from an Enumerable<TSource>. */
+comment|/**    * Creates a List<TSource> from an Enumerable<TSource>.    */
 name|List
 argument_list|<
 name|TSource
@@ -2107,7 +2107,7 @@ argument_list|>
 name|toList
 parameter_list|()
 function_decl|;
-comment|/** Creates a Lookup<TKey, TElement> from an      * Enumerable<TSource> according to a specified key selector      * function. */
+comment|/**    * Creates a Lookup<TKey, TElement> from an    * Enumerable<TSource> according to a specified key selector    * function.    */
 parameter_list|<
 name|TKey
 parameter_list|>
@@ -2128,7 +2128,7 @@ argument_list|>
 name|keySelector
 parameter_list|)
 function_decl|;
-comment|/** Creates a Lookup<TKey, TElement> from an      * Enumerable<TSource> according to a specified key selector function      * and key comparer. */
+comment|/**    * Creates a Lookup<TKey, TElement> from an    * Enumerable<TSource> according to a specified key selector function    * and key comparer.    */
 parameter_list|<
 name|TKey
 parameter_list|>
@@ -2155,7 +2155,7 @@ argument_list|>
 name|comparer
 parameter_list|)
 function_decl|;
-comment|/** Creates a Lookup<TKey, TElement> from an      * Enumerable<TSource> according to specified key selector and element      * selector functions. */
+comment|/**    * Creates a Lookup<TKey, TElement> from an    * Enumerable<TSource> according to specified key selector and element    * selector functions.    */
 parameter_list|<
 name|TKey
 parameter_list|,
@@ -2186,7 +2186,7 @@ argument_list|>
 name|elementSelector
 parameter_list|)
 function_decl|;
-comment|/** Creates a Lookup<TKey, TElement> from an      * Enumerable<TSource> according to a specified key selector function,      * a comparer and an element selector function. */
+comment|/**    * Creates a Lookup<TKey, TElement> from an    * Enumerable<TSource> according to a specified key selector function,    * a comparer and an element selector function.    */
 parameter_list|<
 name|TKey
 parameter_list|,
@@ -2223,7 +2223,7 @@ argument_list|>
 name|comparer
 parameter_list|)
 function_decl|;
-comment|/** Produces the set union of two sequences by using      * the default equality comparer. */
+comment|/**    * Produces the set union of two sequences by using    * the default equality comparer.    */
 name|Enumerable
 argument_list|<
 name|TSource
@@ -2237,7 +2237,7 @@ argument_list|>
 name|source1
 parameter_list|)
 function_decl|;
-comment|/** Produces the set union of two sequences by using a      * specified EqualityComparer<TSource>. */
+comment|/**    * Produces the set union of two sequences by using a    * specified EqualityComparer<TSource>.    */
 name|Enumerable
 argument_list|<
 name|TSource
@@ -2257,7 +2257,7 @@ argument_list|>
 name|comparer
 parameter_list|)
 function_decl|;
-comment|/** Filters a sequence of values based on a      * predicate. */
+comment|/**    * Filters a sequence of values based on a    * predicate.    */
 name|Enumerable
 argument_list|<
 name|TSource
@@ -2271,7 +2271,7 @@ argument_list|>
 name|predicate
 parameter_list|)
 function_decl|;
-comment|/** Filters a sequence of values based on a      * predicate. Each element's index is used in the logic of the      * predicate function. */
+comment|/**    * Filters a sequence of values based on a    * predicate. Each element's index is used in the logic of the    * predicate function.    */
 name|Enumerable
 argument_list|<
 name|TSource
@@ -2287,7 +2287,7 @@ argument_list|>
 name|predicate
 parameter_list|)
 function_decl|;
-comment|/** Applies a specified function to the corresponding      * elements of two sequences, producing a sequence of the      * results. */
+comment|/**    * Applies a specified function to the corresponding    * elements of two sequences, producing a sequence of the    * results.    */
 parameter_list|<
 name|T1
 parameter_list|,

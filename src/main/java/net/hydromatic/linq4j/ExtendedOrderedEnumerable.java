@@ -54,7 +54,7 @@ argument_list|<
 name|T
 argument_list|>
 block|{
-comment|/** Performs a subsequent ordering of the elements in an      * {@link OrderedEnumerable} according to a key, using a specified      * comparator.      *      *<p>The functionality provided by this method is like that provided by      * {@link #thenBy(net.hydromatic.linq4j.function.Function1, java.util.Comparator) thenBy}      * or {@link #thenByDescending(net.hydromatic.linq4j.function.Function1, java.util.Comparator) thenByDescending},      * depending on whether descending is true or false. They both perform a      * subordinate ordering of an already sorted sequence of type      * {@link OrderedEnumerable}.</p> */
+comment|/**    * Performs a subsequent ordering of the elements in an    * {@link OrderedEnumerable} according to a key, using a specified    * comparator.    *    *<p>The functionality provided by this method is like that provided by    * {@link #thenBy(net.hydromatic.linq4j.function.Function1, java.util.Comparator) thenBy}    * or {@link #thenByDescending(net.hydromatic.linq4j.function.Function1, java.util.Comparator) thenByDescending},    * depending on whether descending is true or false. They both perform a    * subordinate ordering of an already sorted sequence of type    * {@link OrderedEnumerable}.</p>    */
 parameter_list|<
 name|TKey
 parameter_list|>
@@ -82,7 +82,7 @@ name|boolean
 name|descending
 parameter_list|)
 function_decl|;
-comment|/** Performs a subsequent ordering of the elements in a sequence in      * ascending order according to a key. */
+comment|/**    * Performs a subsequent ordering of the elements in a sequence in    * ascending order according to a key.    */
 parameter_list|<
 name|TKey
 extends|extends
@@ -106,7 +106,7 @@ argument_list|>
 name|keySelector
 parameter_list|)
 function_decl|;
-comment|/** Performs a subsequent ordering of the elements in a sequence in      * ascending order according to a key, using a specified comparator. */
+comment|/**    * Performs a subsequent ordering of the elements in a sequence in    * ascending order according to a key, using a specified comparator.    */
 parameter_list|<
 name|TKey
 parameter_list|>
@@ -131,7 +131,7 @@ argument_list|>
 name|comparator
 parameter_list|)
 function_decl|;
-comment|/** Performs a subsequent ordering of the elements in a sequence in      * descending order according to a key. */
+comment|/**    * Performs a subsequent ordering of the elements in a sequence in    * descending order according to a key.    */
 parameter_list|<
 name|TKey
 extends|extends
@@ -155,7 +155,7 @@ argument_list|>
 name|keySelector
 parameter_list|)
 function_decl|;
-comment|/** Performs a subsequent ordering of the elements in a sequence in      * descending order according to a key, using a specified comparator. */
+comment|/**    * Performs a subsequent ordering of the elements in a sequence in    * descending order according to a key, using a specified comparator.    */
 parameter_list|<
 name|TKey
 parameter_list|>

@@ -51,7 +51,7 @@ name|QueryProviderImpl
 implements|implements
 name|QueryProvider
 block|{
-comment|/**      * Creates a QueryProviderImpl.      */
+comment|/**    * Creates a QueryProviderImpl.    */
 specifier|public
 name|QueryProviderImpl
 parameter_list|()
@@ -170,7 +170,7 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
-comment|/**      * Binds an expression to this query provider.      */
+comment|/**    * Binds an expression to this query provider.    */
 specifier|public
 specifier|static
 class|class

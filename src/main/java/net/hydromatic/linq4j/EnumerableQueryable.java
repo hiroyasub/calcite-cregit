@@ -204,7 +204,7 @@ return|return
 name|enumerable
 return|;
 block|}
-comment|/**      * Returns the target queryable. Usually this.      *      * @return Target queryable      */
+comment|/**    * Returns the target queryable. Usually this.    *    * @return Target queryable    */
 specifier|protected
 name|Queryable
 argument_list|<

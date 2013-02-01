@@ -96,7 +96,7 @@ name|T
 argument_list|>
 name|factory
 decl_stmt|;
-comment|/** Creates a DefaultQueryable using a factory that records events. */
+comment|/**    * Creates a DefaultQueryable using a factory that records events.    */
 specifier|protected
 name|DefaultQueryable
 parameter_list|()
@@ -113,7 +113,7 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Creates a DefaultQueryable using a particular factory. */
+comment|/**    * Creates a DefaultQueryable using a particular factory.    */
 specifier|protected
 name|DefaultQueryable
 parameter_list|(

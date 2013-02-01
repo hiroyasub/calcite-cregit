@@ -33,7 +33,7 @@ name|T0
 argument_list|,
 name|Float
 argument_list|>
-block|{}
+block|{ }
 end_interface
 
 begin_comment

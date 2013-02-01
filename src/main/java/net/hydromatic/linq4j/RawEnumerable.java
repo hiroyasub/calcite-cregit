@@ -25,7 +25,7 @@ parameter_list|<
 name|T
 parameter_list|>
 block|{
-comment|/**      * Returns an enumerator that iterates through a collection.      */
+comment|/**    * Returns an enumerator that iterates through a collection.    */
 name|Enumerator
 argument_list|<
 name|T

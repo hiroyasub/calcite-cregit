@@ -16,7 +16,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  *<p>Helper methods concerning {@link BlockExpression}s.</p>  *  * @see BlockBuilder  *  * @author jhyde  */
+comment|/**  *<p>Helper methods concerning {@link BlockExpression}s.</p>  *  * @author jhyde  * @see BlockBuilder  */
 end_comment
 
 begin_class
@@ -197,7 +197,7 @@ literal|false
 argument_list|)
 return|;
 block|}
-comment|/** Prepends a statement to a block. */
+comment|/**    * Prepends a statement to a block.    */
 specifier|public
 specifier|static
 name|BlockExpression
@@ -231,7 +231,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/** Converts a simple "{ return expr; }" block into "expr"; otherwise      * throws. */
+comment|/**    * Converts a simple "{ return expr; }" block into "expr"; otherwise    * throws.    */
 specifier|public
 specifier|static
 name|Expression

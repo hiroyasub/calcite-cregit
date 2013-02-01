@@ -39,7 +39,7 @@ name|Expression
 extends|extends
 name|AbstractNode
 block|{
-comment|/**      * Creates an Expression.      *      *<p>The type of the expression may, at the caller's discretion, be a      * regular class (because {@link Class} implements {@link Type}) or it may      * be a different implementation that retains information about type      * parameters.</p>      *      * @param nodeType Node type      * @param type Type of the expression      */
+comment|/**    * Creates an Expression.    *    *<p>The type of the expression may, at the caller's discretion, be a    * regular class (because {@link Class} implements {@link Type}) or it may    * be a different implementation that retains information about type    * parameters.</p>    *    * @param nodeType Node type    * @param type Type of the expression    */
 specifier|public
 name|Expression
 parameter_list|(
@@ -112,7 +112,7 @@ name|Visitor
 name|visitor
 parameter_list|)
 function_decl|;
-comment|/** Indicates that the node can be reduced to a simpler node. If this      * returns true, Reduce() can be called to produce the reduced form. */
+comment|/**    * Indicates that the node can be reduced to a simpler node. If this    * returns true, Reduce() can be called to produce the reduced form.    */
 specifier|public
 name|boolean
 name|canReduce

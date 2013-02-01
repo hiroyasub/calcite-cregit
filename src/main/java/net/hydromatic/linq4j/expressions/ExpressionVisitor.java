@@ -38,7 +38,7 @@ specifier|public
 interface|interface
 name|ExpressionVisitor
 block|{
-comment|/** Visits the children of the delegate expression. */
+comment|/**    * Visits the children of the delegate expression.    */
 parameter_list|<
 name|T
 extends|extends

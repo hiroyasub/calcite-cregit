@@ -80,7 +80,7 @@ argument_list|>
 argument_list|>
 name|map
 decl_stmt|;
-comment|/**      * Creates a MultiMapImpl.      *      * @param map Underlying map      */
+comment|/**    * Creates a MultiMapImpl.    *    * @param map Underlying map    */
 name|LookupImpl
 parameter_list|(
 name|Map
@@ -1008,7 +1008,7 @@ block|}
 block|}
 return|;
 block|}
-comment|/** Returns an enumerable over the values in this lookup, in map order.      * If the map is sorted, the values will be emitted sorted by key. */
+comment|/**    * Returns an enumerable over the values in this lookup, in map order.    * If the map is sorted, the values will be emitted sorted by key.    */
 specifier|public
 name|Enumerable
 argument_list|<

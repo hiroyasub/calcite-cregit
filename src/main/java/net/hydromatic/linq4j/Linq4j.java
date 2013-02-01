@@ -42,7 +42,7 @@ operator|new
 name|Object
 argument_list|()
 decl_stmt|;
-comment|/** Query provider that simply executes a {@link Queryable} by calling its      * enumerator method; does not attempt optimization. */
+comment|/**    * Query provider that simply executes a {@link Queryable} by calling its    * enumerator method; does not attempt optimization.    */
 specifier|public
 specifier|static
 specifier|final
@@ -153,7 +153,7 @@ return|;
 block|}
 block|}
 decl_stmt|;
-comment|/**      * Adapter that converts an enumerator into an iterator.      *      * @param enumerator Enumerator      * @param<T> Element type      * @return Iterator      */
+comment|/**    * Adapter that converts an enumerator into an iterator.    *    * @param enumerator Enumerator    * @param<T> Element type    *    * @return Iterator    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -236,7 +236,7 @@ block|}
 block|}
 return|;
 block|}
-comment|/**      * Adapter that converts an iterable into an enumerator.      *      * @param iterable Iterable      * @param<T> Element type      * @return enumerator      */
+comment|/**    * Adapter that converts an iterable into an enumerator.    *    * @param iterable Iterable    * @param<T> Element type    *    * @return enumerator    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -267,7 +267,7 @@ name|iterable
 argument_list|)
 return|;
 block|}
-comment|/**      * Adapter that converts an {@link List} into an {@link Enumerable}.      *      * @param list List      * @param<T> Element type      * @return enumerable      */
+comment|/**    * Adapter that converts an {@link List} into an {@link Enumerable}.    *    * @param list List    * @param<T> Element type    *    * @return enumerable    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -298,7 +298,7 @@ name|list
 argument_list|)
 return|;
 block|}
-comment|/**      * Adapter that converts an {@link Collection} into an {@link Enumerable}.      *      *<p>It uses more efficient implementations if the iterable happens to      * be a {@link List}.</p>      *      * @param collection Collection      * @param<T> Element type      * @return enumerable      */
+comment|/**    * Adapter that converts an {@link Collection} into an {@link Enumerable}.    *    *<p>It uses more efficient implementations if the iterable happens to    * be a {@link List}.</p>    *    * @param collection Collection    * @param<T> Element type    *    * @return enumerable    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -347,7 +347,7 @@ name|collection
 argument_list|)
 return|;
 block|}
-comment|/**      * Adapter that converts an {@link Iterable} into an {@link Enumerable}.      *      *<p>It uses more efficient implementations if the iterable happens to      * be a {@link Collection} or a {@link List}.</p>      *      * @param iterable Iterable      * @param<T> Element type      * @return enumerable      */
+comment|/**    * Adapter that converts an {@link Iterable} into an {@link Enumerable}.    *    *<p>It uses more efficient implementations if the iterable happens to    * be a {@link Collection} or a {@link List}.</p>    *    * @param iterable Iterable    * @param<T> Element type    *    * @return enumerable    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -396,7 +396,7 @@ name|iterable
 argument_list|)
 return|;
 block|}
-comment|/**      * Adapter that converts an array into an enumerable.      *      * @param ts Array      * @param<T> Element type      * @return enumerable      */
+comment|/**    * Adapter that converts an array into an enumerable.    *    * @param ts Array    * @param<T> Element type    *    * @return enumerable    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -430,7 +430,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**      * Adapter that converts a collection into an enumerator.      *      * @param values Collection      * @param<V> Element type      * @return Enumerator over the collection      */
+comment|/**    * Adapter that converts a collection into an enumerator.    *    * @param values Collection    * @param<V> Element type    *    * @return Enumerator over the collection    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -456,7 +456,7 @@ name|values
 argument_list|)
 return|;
 block|}
-comment|/**      * Converts the elements of a given Iterable to the specified type.      *      *<p>This method is implemented by using deferred execution. The immediate      * return value is an object that stores all the information that is      * required to perform the action. The query represented by this method is      * not executed until the object is enumerated either by calling its      * {@link Enumerable#enumerator} method directly or by using      * {@code for (... in ...)}.      *      *<p>Since standard Java {@link Collection} objects implement the      * {@link Iterable} interface, the {@code cast} method enables the standard      * query operators to be invoked on collections      * (including {@link java.util.List} and {@link java.util.Set}) by supplying      * the necessary type information. For example, {@link ArrayList} does not      * implement {@link Enumerable}&lt;T&gt;, but you can invoke      *      *<blockquote><code>Linq4j.cast(list, Integer.class)</code></blockquote>      *      * to convert the list of an enumerable that can be queried using the      * standard query operators.      *      *<p>If an element cannot be cast to type&lt;TResult&gt;, this method will      * throw a {@link ClassCastException}. To obtain only those elements that      * can be cast to type TResult, use the {@link #ofType} method instead.      *      * @see Enumerable#cast(Class)      * @see #ofType      * @see #asEnumerable(Iterable)      */
+comment|/**    * Converts the elements of a given Iterable to the specified type.    *    *<p>This method is implemented by using deferred execution. The immediate    * return value is an object that stores all the information that is    * required to perform the action. The query represented by this method is    * not executed until the object is enumerated either by calling its    * {@link Enumerable#enumerator} method directly or by using    * {@code for (... in ...)}.    *    *<p>Since standard Java {@link Collection} objects implement the    * {@link Iterable} interface, the {@code cast} method enables the standard    * query operators to be invoked on collections    * (including {@link java.util.List} and {@link java.util.Set}) by supplying    * the necessary type information. For example, {@link ArrayList} does not    * implement {@link Enumerable}&lt;T&gt;, but you can invoke    *    *<blockquote><code>Linq4j.cast(list, Integer.class)</code></blockquote>    *    * to convert the list of an enumerable that can be queried using the    * standard query operators.    *    *<p>If an element cannot be cast to type&lt;TResult&gt;, this method will    * throw a {@link ClassCastException}. To obtain only those elements that    * can be cast to type TResult, use the {@link #ofType} method instead.    *    * @see Enumerable#cast(Class)    * @see #ofType    * @see #asEnumerable(Iterable)    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -495,7 +495,7 @@ name|clazz
 argument_list|)
 return|;
 block|}
-comment|/**      * Returns elements of a given {@link Iterable} that are of the specified      * type.      *      *<p>This method is implemented by using deferred execution. The immediate      * return value is an object that stores all the information that is      * required to perform the action. The query represented by this method is      * not executed until the object is enumerated either by calling its      * {@link Enumerable#enumerator} method directly or by using      * {@code for (... in ...)}.      *      *<p>The {@code ofType} method returns only those elements in source that      * can be cast to type TResult. To instead receive an exception if an      * element cannot be cast to type TResult, use      * {@link #cast(Iterable, Class)}.</p>      *      *<p>Since standard Java {@link Collection} objects implement the      * {@link Iterable} interface, the {@code cast} method enables the standard      * query operators to be invoked on collections      * (including {@link java.util.List} and {@link java.util.Set}) by supplying      * the necessary type information. For example, {@link ArrayList} does not      * implement {@link Enumerable}&lt;T&gt;, but you can invoke      *      *<blockquote><code>Linq4j.ofType(list, Integer.class)</code></blockquote>      *      * to convert the list of an enumerable that can be queried using the      * standard query operators.      *      * @see Enumerable#cast(Class)      * @see #cast      */
+comment|/**    * Returns elements of a given {@link Iterable} that are of the specified    * type.    *    *<p>This method is implemented by using deferred execution. The immediate    * return value is an object that stores all the information that is    * required to perform the action. The query represented by this method is    * not executed until the object is enumerated either by calling its    * {@link Enumerable#enumerator} method directly or by using    * {@code for (... in ...)}.    *    *<p>The {@code ofType} method returns only those elements in source that    * can be cast to type TResult. To instead receive an exception if an    * element cannot be cast to type TResult, use    * {@link #cast(Iterable, Class)}.</p>    *    *<p>Since standard Java {@link Collection} objects implement the    * {@link Iterable} interface, the {@code cast} method enables the standard    * query operators to be invoked on collections    * (including {@link java.util.List} and {@link java.util.Set}) by supplying    * the necessary type information. For example, {@link ArrayList} does not    * implement {@link Enumerable}&lt;T&gt;, but you can invoke    *    *<blockquote><code>Linq4j.ofType(list, Integer.class)</code></blockquote>    *    * to convert the list of an enumerable that can be queried using the    * standard query operators.    *    * @see Enumerable#cast(Class)    * @see #cast    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -534,7 +534,7 @@ name|clazz
 argument_list|)
 return|;
 block|}
-comment|/**      * Returns an {@link Enumerable} that has one element.      *      * @param<T> Element type      * @return Singleton enumerable      */
+comment|/**    * Returns an {@link Enumerable} that has one element.    *    * @param<T> Element type    *    * @return Singleton enumerable    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -562,7 +562,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**      * Returns an {@link Enumerable} that has no elements.      *      * @param<T> Element type      * @return Empty enumerable      */
+comment|/**    * Returns an {@link Enumerable} that has no elements.    *    * @param<T> Element type    *    * @return Empty enumerable    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -586,7 +586,7 @@ operator|)
 name|EMPTY_ENUMERABLE
 return|;
 block|}
-comment|/**      * Returns an {@link Enumerator} that has no elements.      *      * @param<T> Element type      * @return Empty enumerator      */
+comment|/**    * Returns an {@link Enumerator} that has no elements.    *    * @param<T> Element type    *    * @return Empty enumerator    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -610,7 +610,7 @@ operator|)
 name|EMPTY_ENUMERATOR
 return|;
 block|}
-comment|/**      * Concatenates two or more {@link Enumerable}s to form a composite      * enumerable that contains the union of their elements.      *      * @param enumerableList List of enumerable objects      * @param<E> Element type      * @return Composite enumerator      */
+comment|/**    * Concatenates two or more {@link Enumerable}s to form a composite    * enumerable that contains the union of their elements.    *    * @param enumerableList List of enumerable objects    * @param<E> Element type    *    * @return Composite enumerator    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -644,7 +644,7 @@ name|enumerableList
 argument_list|)
 return|;
 block|}
-comment|/**      * Returns an enumerator that is the cartesian product of the given      * enumerators.      *      *<p>For example, given enumerator A that returns {"a", "b", "c"} and      * enumerator B that returns {"x", "y"}, product(List(A, B)) will return      * {List("a", "x"), List("a", "y"),      * List("b", "x"), List("b", "y"),      * List("c", "x"), List("c", "y")}.</p>      *      *<p>Notice that the cardinality of the result is the product of the      * cardinality of the inputs. The enumerators A and B have 3 and 2      * elements respectively, and the result has 3 * 2 = 6 elements.      * This is always the case. In      * particular, if any of the enumerators is empty, the result is empty.</p>      *      * @param enumerators List of enumerators      * @param<T> Element type      * @return Enumerator over the cartesian product      */
+comment|/**    * Returns an enumerator that is the cartesian product of the given    * enumerators.    *    *<p>For example, given enumerator A that returns {"a", "b", "c"} and    * enumerator B that returns {"x", "y"}, product(List(A, B)) will return    * {List("a", "x"), List("a", "y"),    * List("b", "x"), List("b", "y"),    * List("c", "x"), List("c", "y")}.</p>    *    *<p>Notice that the cardinality of the result is the product of the    * cardinality of the inputs. The enumerators A and B have 3 and 2    * elements respectively, and the result has 3 * 2 = 6 elements.    * This is always the case. In    * particular, if any of the enumerators is empty, the result is empty.</p>    *    * @param enumerators List of enumerators    * @param<T> Element type    *    * @return Enumerator over the cartesian product    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -680,7 +680,7 @@ name|enumerators
 argument_list|)
 return|;
 block|}
-comment|/**      * Returns whether the arguments are equal to each other.      *      *<p>Equivalent to {@code Objects#equals} in JDK 1.7 and above.</p>      */
+comment|/**    * Returns whether the arguments are equal to each other.    *    *<p>Equivalent to {@code Objects#equals} in JDK 1.7 and above.</p>    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -713,7 +713,7 @@ name|t1
 argument_list|)
 return|;
 block|}
-comment|/**      * Throws {@link NullPointerException} if argument is null, otherwise      * returns argument.      *      *<p>Equivalent to {@code Objects#equireNonNull} in JDK 1.7 and above.</p>      */
+comment|/**    * Throws {@link NullPointerException} if argument is null, otherwise    * returns argument.    *    *<p>Equivalent to {@code Objects#equireNonNull} in JDK 1.7 and above.</p>    */
 specifier|public
 specifier|static
 parameter_list|<

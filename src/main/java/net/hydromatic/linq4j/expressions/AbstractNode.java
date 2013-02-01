@@ -71,7 +71,7 @@ operator|=
 name|nodeType
 expr_stmt|;
 block|}
-comment|/** Gets the node type of this Expression. */
+comment|/**    * Gets the node type of this Expression.    */
 specifier|public
 name|ExpressionType
 name|getNodeType
@@ -81,7 +81,7 @@ return|return
 name|nodeType
 return|;
 block|}
-comment|/** Gets the static type of the expression that this Expression      * represents. */
+comment|/**    * Gets the static type of the expression that this Expression    * represents.    */
 specifier|public
 name|Type
 name|getType

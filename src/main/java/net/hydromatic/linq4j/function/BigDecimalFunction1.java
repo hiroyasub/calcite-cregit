@@ -26,7 +26,7 @@ import|;
 end_import
 
 begin_comment
-comment|/** * Function that takes one parameter and returns a {@link BigDecimal} value. */
+comment|/**  * Function that takes one parameter and returns a {@link BigDecimal} value.  */
 end_comment
 
 begin_interface
@@ -43,7 +43,7 @@ name|T0
 argument_list|,
 name|BigDecimal
 argument_list|>
-block|{}
+block|{ }
 end_interface
 
 begin_comment

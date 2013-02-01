@@ -92,7 +92,7 @@ specifier|public
 class|class
 name|Expressions
 block|{
-comment|/** Converts a list of expressions to Java source code, optionally emitting      * extra type information in generics. */
+comment|/**    * Converts a list of expressions to Java source code, optionally emitting    * extra type information in generics.    */
 specifier|public
 specifier|static
 name|String
@@ -153,7 +153,7 @@ name|toString
 argument_list|()
 return|;
 block|}
-comment|/** Converts an expression to Java source code. */
+comment|/**    * Converts an expression to Java source code.    */
 specifier|public
 specifier|static
 name|String
@@ -179,7 +179,7 @@ literal|true
 argument_list|)
 return|;
 block|}
-comment|/** Creates a BinaryExpression that represents an arithmetic      * addition operation that does not have overflow checking. */
+comment|/**    * Creates a BinaryExpression that represents an arithmetic    * addition operation that does not have overflow checking.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -205,7 +205,7 @@ name|right
 argument_list|)
 return|;
 block|}
-comment|/** Creates a BinaryExpression that represents an arithmetic      * addition operation that does not have overflow checking. The      * implementing method can be specified. */
+comment|/**    * Creates a BinaryExpression that represents an arithmetic    * addition operation that does not have overflow checking. The    * implementing method can be specified.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -228,7 +228,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a BinaryExpression that represents an addition      * assignment operation that does not have overflow checking. */
+comment|/**    * Creates a BinaryExpression that represents an addition    * assignment operation that does not have overflow checking.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -254,7 +254,7 @@ name|right
 argument_list|)
 return|;
 block|}
-comment|/** Creates a BinaryExpression that represents an addition      * assignment operation that does not have overflow checking. */
+comment|/**    * Creates a BinaryExpression that represents an addition    * assignment operation that does not have overflow checking.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -277,7 +277,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a BinaryExpression that represents an addition      * assignment operation that does not have overflow checking. */
+comment|/**    * Creates a BinaryExpression that represents an addition    * assignment operation that does not have overflow checking.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -306,7 +306,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a BinaryExpression that represents an addition      * assignment operation that has overflow checking. */
+comment|/**    * Creates a BinaryExpression that represents an addition    * assignment operation that has overflow checking.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -332,7 +332,7 @@ name|right
 argument_list|)
 return|;
 block|}
-comment|/** Creates a BinaryExpression that represents an addition      * assignment operation that has overflow checking. */
+comment|/**    * Creates a BinaryExpression that represents an addition    * assignment operation that has overflow checking.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -355,7 +355,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a BinaryExpression that represents an addition      * assignment operation that has overflow checking. */
+comment|/**    * Creates a BinaryExpression that represents an addition    * assignment operation that has overflow checking.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -381,7 +381,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a BinaryExpression that represents an arithmetic      * addition operation that has overflow checking. */
+comment|/**    * Creates a BinaryExpression that represents an arithmetic    * addition operation that has overflow checking.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -407,7 +407,7 @@ name|right
 argument_list|)
 return|;
 block|}
-comment|/** Creates a BinaryExpression that represents an arithmetic      * addition operation that has overflow checking. The implementing      * method can be specified. */
+comment|/**    * Creates a BinaryExpression that represents an arithmetic    * addition operation that has overflow checking. The implementing    * method can be specified.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -430,7 +430,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a BinaryExpression that represents a bitwise AND      * operation. */
+comment|/**    * Creates a BinaryExpression that represents a bitwise AND    * operation.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -456,7 +456,7 @@ name|right
 argument_list|)
 return|;
 block|}
-comment|/** Creates a BinaryExpression that represents a bitwise AND      * operation. The implementing method can be specified. */
+comment|/**    * Creates a BinaryExpression that represents a bitwise AND    * operation. The implementing method can be specified.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -479,7 +479,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a BinaryExpression that represents a conditional AND      * operation that evaluates the second operand only if the first      * operand evaluates to true. */
+comment|/**    * Creates a BinaryExpression that represents a conditional AND    * operation that evaluates the second operand only if the first    * operand evaluates to true.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -505,7 +505,7 @@ name|right
 argument_list|)
 return|;
 block|}
-comment|/** Creates a BinaryExpression that represents a conditional AND      * operation that evaluates the second operand only if the first      * operand is resolved to true. The implementing method can be      * specified. */
+comment|/**    * Creates a BinaryExpression that represents a conditional AND    * operation that evaluates the second operand only if the first    * operand is resolved to true. The implementing method can be    * specified.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -528,7 +528,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a BinaryExpression that represents a bitwise AND      * assignment operation. */
+comment|/**    * Creates a BinaryExpression that represents a bitwise AND    * assignment operation.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -554,7 +554,7 @@ name|right
 argument_list|)
 return|;
 block|}
-comment|/** Creates a BinaryExpression that represents a bitwise AND      * assignment operation. */
+comment|/**    * Creates a BinaryExpression that represents a bitwise AND    * assignment operation.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -577,7 +577,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a BinaryExpression that represents a bitwise AND      * assignment operation. */
+comment|/**    * Creates a BinaryExpression that represents a bitwise AND    * assignment operation.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -603,7 +603,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates an expression that represents applying an array      * index operator to an array of rank one. */
+comment|/**    * Creates an expression that represents applying an array    * index operator to an array of rank one.    */
 specifier|public
 specifier|static
 name|IndexExpression
@@ -631,7 +631,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/** Creates a UnaryExpression that represents an expression for      * obtaining the length of a one-dimensional array. */
+comment|/**    * Creates a UnaryExpression that represents an expression for    * obtaining the length of a one-dimensional array.    */
 specifier|public
 specifier|static
 name|UnaryExpression
@@ -648,7 +648,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a BinaryExpression that represents an assignment      * operation. */
+comment|/**    * Creates a BinaryExpression that represents an assignment    * operation.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -674,7 +674,7 @@ name|right
 argument_list|)
 return|;
 block|}
-comment|/** Creates a MemberAssignment that represents the initialization      * of a field or property. */
+comment|/**    * Creates a MemberAssignment that represents the initialization    * of a field or property.    */
 specifier|public
 specifier|static
 name|MemberAssignment
@@ -694,7 +694,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a MemberAssignment that represents the initialization      * of a member by using a property accessor method. */
+comment|/**    * Creates a MemberAssignment that represents the initialization    * of a member by using a property accessor method.    */
 specifier|public
 specifier|static
 name|MemberAssignment
@@ -714,7 +714,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a BlockExpression that contains the given statements. */
+comment|/**    * Creates a BlockExpression that contains the given statements.    */
 specifier|public
 specifier|static
 name|BlockExpression
@@ -735,7 +735,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/** Creates a BlockExpression that contains the given statements. */
+comment|/**    * Creates a BlockExpression that contains the given statements.    */
 specifier|public
 specifier|static
 name|BlockExpression
@@ -762,7 +762,7 @@ name|statements
 argument_list|)
 return|;
 block|}
-comment|/** Creates a BlockExpression that contains the given expressions,      * has no variables and has specific result type. */
+comment|/**    * Creates a BlockExpression that contains the given expressions,    * has no variables and has specific result type.    */
 specifier|public
 specifier|static
 name|BlockExpression
@@ -846,7 +846,7 @@ name|type
 argument_list|)
 return|;
 block|}
-comment|/** Creates a BlockExpression that contains the given statements      * and has a specific result type. */
+comment|/**    * Creates a BlockExpression that contains the given statements    * and has a specific result type.    */
 specifier|public
 specifier|static
 name|BlockExpression
@@ -872,7 +872,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/** Creates a GotoExpression representing a break statement. */
+comment|/**    * Creates a GotoExpression representing a break statement.    */
 specifier|public
 specifier|static
 name|GotoExpression
@@ -889,7 +889,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a GotoExpression representing a break statement. The      * value passed to the label upon jumping can be specified. */
+comment|/**    * Creates a GotoExpression representing a break statement. The    * value passed to the label upon jumping can be specified.    */
 specifier|public
 specifier|static
 name|GotoExpression
@@ -909,7 +909,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a GotoExpression representing a break statement with      * the specified type. */
+comment|/**    * Creates a GotoExpression representing a break statement with    * the specified type.    */
 specifier|public
 specifier|static
 name|GotoExpression
@@ -929,7 +929,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a GotoExpression representing a break statement with      * the specified type. The value passed to the label upon jumping      * can be specified. */
+comment|/**    * Creates a GotoExpression representing a break statement with    * the specified type. The value passed to the label upon jumping    * can be specified.    */
 specifier|public
 specifier|static
 name|GotoExpression
@@ -952,7 +952,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a MethodCallExpression that represents a call to a      * static method. */
+comment|/**    * Creates a MethodCallExpression that represents a call to a    * static method.    */
 specifier|public
 specifier|static
 name|MethodCallExpression
@@ -983,7 +983,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/** Creates a MethodCallExpression that represents a call to a      * static method that has arguments. */
+comment|/**    * Creates a MethodCallExpression that represents a call to a    * static method that has arguments.    */
 specifier|public
 specifier|static
 name|MethodCallExpression
@@ -1012,7 +1012,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/** Creates a MethodCallExpression that represents a call to a      * method that takes arguments. */
+comment|/**    * Creates a MethodCallExpression that represents a call to a    * method that takes arguments.    */
 specifier|public
 specifier|static
 name|MethodCallExpression
@@ -1046,7 +1046,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/** Creates a MethodCallExpression that represents a call to a      * method that takes arguments, with an explicit return type.      *      *<p>The return type must be consistent with the return type of the method,      * but may contain extra information, such as type parameters.</p>      *      *<p>The {@code expression} argument may be null if and only if the method      * is static.</p>      */
+comment|/**    * Creates a MethodCallExpression that represents a call to a    * method that takes arguments, with an explicit return type.    *    *<p>The return type must be consistent with the return type of the method,    * but may contain extra information, such as type parameters.</p>    *    *<p>The {@code expression} argument may be null if and only if the method    * is static.</p>    */
 specifier|public
 specifier|static
 name|MethodCallExpression
@@ -1085,7 +1085,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/** Creates a MethodCallExpression that represents a call to a      * method that takes arguments. */
+comment|/**    * Creates a MethodCallExpression that represents a call to a    * method that takes arguments.    */
 specifier|public
 specifier|static
 name|MethodCallExpression
@@ -1117,7 +1117,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/** Creates a MethodCallExpression that represents a call to an      * instance method by calling the appropriate factory method. */
+comment|/**    * Creates a MethodCallExpression that represents a call to an    * instance method by calling the appropriate factory method.    */
 specifier|public
 specifier|static
 name|MethodCallExpression
@@ -1202,7 +1202,7 @@ name|arguments
 argument_list|)
 return|;
 block|}
-comment|/** Creates a MethodCallExpression that represents a call to an      * instance method by calling the appropriate factory method. */
+comment|/**    * Creates a MethodCallExpression that represents a call to an    * instance method by calling the appropriate factory method.    */
 specifier|public
 specifier|static
 name|MethodCallExpression
@@ -1238,7 +1238,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/** Creates a MethodCallExpression that represents a call to a      * static method by calling the      * appropriate factory method. */
+comment|/**    * Creates a MethodCallExpression that represents a call to a    * static method by calling the    * appropriate factory method.    */
 specifier|public
 specifier|static
 name|MethodCallExpression
@@ -1296,7 +1296,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/** Creates a MethodCallExpression that represents a call to a      * static method by calling the      * appropriate factory method. */
+comment|/**    * Creates a MethodCallExpression that represents a call to a    * static method by calling the    * appropriate factory method.    */
 specifier|public
 specifier|static
 name|MethodCallExpression
@@ -1332,7 +1332,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/** Creates a CatchBlock representing a catch statement with a      * reference to the caught Exception object for use in the handler      * body. */
+comment|/**    * Creates a CatchBlock representing a catch statement with a    * reference to the caught Exception object for use in the handler    * body.    */
 specifier|public
 specifier|static
 name|CatchBlock
@@ -1352,7 +1352,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a CatchBlock representing a catch statement. */
+comment|/**    * Creates a CatchBlock representing a catch statement.    */
 specifier|public
 specifier|static
 name|CatchBlock
@@ -1372,7 +1372,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a CatchBlock representing a catch statement with an      * Exception filter and a reference to the caught Exception      * object. */
+comment|/**    * Creates a CatchBlock representing a catch statement with an    * Exception filter and a reference to the caught Exception    * object.    */
 specifier|public
 specifier|static
 name|CatchBlock
@@ -1395,7 +1395,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a CatchBlock representing a catch statement with an      * Exception filter but no reference to the caught Exception      * object. */
+comment|/**    * Creates a CatchBlock representing a catch statement with an    * Exception filter but no reference to the caught Exception    * object.    */
 specifier|public
 specifier|static
 name|CatchBlock
@@ -1418,7 +1418,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a DebugInfoExpression for clearing a sequence      * point. */
+comment|/**    * Creates a DebugInfoExpression for clearing a sequence    * point.    */
 specifier|public
 specifier|static
 name|void
@@ -1432,7 +1432,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a BinaryExpression that represents a coalescing      * operation. */
+comment|/**    * Creates a BinaryExpression that represents a coalescing    * operation.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -1452,7 +1452,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a BinaryExpression that represents a coalescing      * operation, given a conversion function. */
+comment|/**    * Creates a BinaryExpression that represents a coalescing    * operation, given a conversion function.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -1475,7 +1475,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a ConditionalExpression that represents a conditional      * statement. */
+comment|/**    * Creates a ConditionalExpression that represents a conditional    * statement.    */
 specifier|public
 specifier|static
 name|Expression
@@ -1567,7 +1567,7 @@ operator|==
 literal|null
 return|;
 block|}
-comment|/** Creates a ConditionalExpression that represents a conditional      * statement.      *      *<p>This method allows explicitly unifying the result type of the      * conditional expression in cases where the types of ifTrue and ifFalse      * expressions are not equal. Types of both ifTrue and ifFalse must be      * implicitly reference assignable to the result type. The type is allowed      * to be {@link Void#TYPE void}.</p> */
+comment|/**    * Creates a ConditionalExpression that represents a conditional    * statement.    *    *<p>This method allows explicitly unifying the result type of the    * conditional expression in cases where the types of ifTrue and ifFalse    * expressions are not equal. Types of both ifTrue and ifFalse must be    * implicitly reference assignable to the result type. The type is allowed    * to be {@link Void#TYPE void}.</p>    */
 specifier|public
 specifier|static
 name|ConditionalExpression
@@ -1608,7 +1608,7 @@ name|type
 argument_list|)
 return|;
 block|}
-comment|/** Creates a ConstantExpression that has the Value property set      * to the specified value. */
+comment|/**    * Creates a ConstantExpression that has the Value property set    * to the specified value.    */
 specifier|public
 specifier|static
 name|ConstantExpression
@@ -1689,7 +1689,7 @@ name|value
 argument_list|)
 return|;
 block|}
-comment|/** Creates a ConstantExpression that has the Value and Type      * properties set to the specified values. */
+comment|/**    * Creates a ConstantExpression that has the Value and Type    * properties set to the specified values.    */
 specifier|public
 specifier|static
 name|ConstantExpression
@@ -1832,7 +1832,7 @@ name|value
 argument_list|)
 return|;
 block|}
-comment|/** Creates a GotoExpression representing a continue statement. */
+comment|/**    * Creates a GotoExpression representing a continue statement.    */
 specifier|public
 specifier|static
 name|GotoExpression
@@ -1849,7 +1849,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a GotoExpression representing a continue statement      * with the specified type. */
+comment|/**    * Creates a GotoExpression representing a continue statement    * with the specified type.    */
 specifier|public
 specifier|static
 name|GotoExpression
@@ -1869,7 +1869,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a UnaryExpression that represents a type conversion      * operation. */
+comment|/**    * Creates a UnaryExpression that represents a type conversion    * operation.    */
 specifier|public
 specifier|static
 name|UnaryExpression
@@ -1896,7 +1896,7 @@ name|expression
 argument_list|)
 return|;
 block|}
-comment|/** Creates a UnaryExpression that represents a conversion      * operation for which the implementing method is specified. */
+comment|/**    * Creates a UnaryExpression that represents a conversion    * operation for which the implementing method is specified.    */
 specifier|public
 specifier|static
 name|UnaryExpression
@@ -1919,7 +1919,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a UnaryExpression that represents a conversion      * operation that throws an exception if the target type is      * overflowed. */
+comment|/**    * Creates a UnaryExpression that represents a conversion    * operation that throws an exception if the target type is    * overflowed.    */
 specifier|public
 specifier|static
 name|UnaryExpression
@@ -1939,7 +1939,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a UnaryExpression that represents a conversion      * operation that throws an exception if the target type is      * overflowed and for which the implementing method is      * specified. */
+comment|/**    * Creates a UnaryExpression that represents a conversion    * operation that throws an exception if the target type is    * overflowed and for which the implementing method is    * specified.    */
 specifier|public
 specifier|static
 name|UnaryExpression
@@ -1962,7 +1962,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a DebugInfoExpression with the specified span. */
+comment|/**    * Creates a DebugInfoExpression with the specified span.    */
 specifier|public
 specifier|static
 name|void
@@ -1976,7 +1976,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a UnaryExpression that represents the decrementing of      * the expression by 1. */
+comment|/**    * Creates a UnaryExpression that represents the decrementing of    * the expression by 1.    */
 specifier|public
 specifier|static
 name|UnaryExpression
@@ -1993,7 +1993,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a UnaryExpression that represents the decrementing of      * the expression by 1. */
+comment|/**    * Creates a UnaryExpression that represents the decrementing of    * the expression by 1.    */
 specifier|public
 specifier|static
 name|UnaryExpression
@@ -2013,7 +2013,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a DefaultExpression that has the Type property set to      * the specified type. */
+comment|/**    * Creates a DefaultExpression that has the Type property set to    * the specified type.    */
 specifier|public
 specifier|static
 name|DefaultExpression
@@ -2027,7 +2027,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a BinaryExpression that represents an arithmetic      * division operation. */
+comment|/**    * Creates a BinaryExpression that represents an arithmetic    * division operation.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -2053,7 +2053,7 @@ name|right
 argument_list|)
 return|;
 block|}
-comment|/** Creates a BinaryExpression that represents an arithmetic      * division operation. The implementing method can be      * specified. */
+comment|/**    * Creates a BinaryExpression that represents an arithmetic    * division operation. The implementing method can be    * specified.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -2093,7 +2093,7 @@ name|method
 argument_list|)
 return|;
 block|}
-comment|/** Creates a BinaryExpression that represents a division      * assignment operation that does not have overflow checking. */
+comment|/**    * Creates a BinaryExpression that represents a division    * assignment operation that does not have overflow checking.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -2119,7 +2119,7 @@ name|right
 argument_list|)
 return|;
 block|}
-comment|/** Creates a BinaryExpression that represents a division      * assignment operation that does not have overflow checking. */
+comment|/**    * Creates a BinaryExpression that represents a division    * assignment operation that does not have overflow checking.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -2142,7 +2142,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a BinaryExpression that represents a division      * assignment operation that does not have overflow checking. */
+comment|/**    * Creates a BinaryExpression that represents a division    * assignment operation that does not have overflow checking.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -2168,7 +2168,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a DynamicExpression that represents a dynamic      * operation bound by the provided CallSiteBinder. */
+comment|/**    * Creates a DynamicExpression that represents a dynamic    * operation bound by the provided CallSiteBinder.    */
 specifier|public
 specifier|static
 name|DynamicExpression
@@ -2194,7 +2194,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a DynamicExpression that represents a dynamic      * operation bound by the provided CallSiteBinder. */
+comment|/**    * Creates a DynamicExpression that represents a dynamic    * operation bound by the provided CallSiteBinder.    */
 specifier|public
 specifier|static
 name|DynamicExpression
@@ -2217,7 +2217,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a DynamicExpression that represents a dynamic      * operation bound by the provided CallSiteBinder. */
+comment|/**    * Creates a DynamicExpression that represents a dynamic    * operation bound by the provided CallSiteBinder.    */
 specifier|public
 specifier|static
 name|DynamicExpression
@@ -2241,7 +2241,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates an ElementInit, given an Iterable<T> as the second      * argument. */
+comment|/**    * Creates an ElementInit, given an Iterable<T> as the second    * argument.    */
 specifier|public
 specifier|static
 name|ElementInit
@@ -2264,7 +2264,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates an ElementInit, given an array of values as the second      * argument. */
+comment|/**    * Creates an ElementInit, given an array of values as the second    * argument.    */
 specifier|public
 specifier|static
 name|ElementInit
@@ -2285,7 +2285,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates an empty expression that has Void type. */
+comment|/**    * Creates an empty expression that has Void type.    */
 specifier|public
 specifier|static
 name|DefaultExpression
@@ -2299,7 +2299,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a BinaryExpression that represents an equality      * comparison. */
+comment|/**    * Creates a BinaryExpression that represents an equality    * comparison.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -2325,7 +2325,7 @@ name|right
 argument_list|)
 return|;
 block|}
-comment|/** Creates a BinaryExpression that represents an equality      * comparison. The implementing method can be specified. */
+comment|/**    * Creates a BinaryExpression that represents an equality    * comparison. The implementing method can be specified.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -2351,7 +2351,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a BinaryExpression that represents a bitwise XOR      * operation, using op_ExclusiveOr for user-defined types. */
+comment|/**    * Creates a BinaryExpression that represents a bitwise XOR    * operation, using op_ExclusiveOr for user-defined types.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -2377,7 +2377,7 @@ name|right
 argument_list|)
 return|;
 block|}
-comment|/** Creates a BinaryExpression that represents a bitwise XOR      * operation, using op_ExclusiveOr for user-defined types. The      * implementing method can be specified. */
+comment|/**    * Creates a BinaryExpression that represents a bitwise XOR    * operation, using op_ExclusiveOr for user-defined types. The    * implementing method can be specified.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -2400,7 +2400,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a BinaryExpression that represents a bitwise XOR      * assignment operation, using op_ExclusiveOr for user-defined      * types. */
+comment|/**    * Creates a BinaryExpression that represents a bitwise XOR    * assignment operation, using op_ExclusiveOr for user-defined    * types.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -2426,7 +2426,7 @@ name|right
 argument_list|)
 return|;
 block|}
-comment|/** Creates a BinaryExpression that represents a bitwise XOR      * assignment operation, using op_ExclusiveOr for user-defined      * types. */
+comment|/**    * Creates a BinaryExpression that represents a bitwise XOR    * assignment operation, using op_ExclusiveOr for user-defined    * types.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -2449,7 +2449,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a BinaryExpression that represents a bitwise XOR      * assignment operation, using op_ExclusiveOr for user-defined      * types. */
+comment|/**    * Creates a BinaryExpression that represents a bitwise XOR    * assignment operation, using op_ExclusiveOr for user-defined    * types.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -2475,7 +2475,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a MemberExpression that represents accessing a field. */
+comment|/**    * Creates a MemberExpression that represents accessing a field.    */
 specifier|public
 specifier|static
 name|MemberExpression
@@ -2502,7 +2502,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/** Creates a MemberExpression that represents accessing a field. */
+comment|/**    * Creates a MemberExpression that represents accessing a field.    */
 specifier|public
 specifier|static
 name|MemberExpression
@@ -2524,7 +2524,7 @@ name|field
 argument_list|)
 return|;
 block|}
-comment|/** Creates a MemberExpression that represents accessing a field      * given the name of the field. */
+comment|/**    * Creates a MemberExpression that represents accessing a field    * given the name of the field.    */
 specifier|public
 specifier|static
 name|MemberExpression
@@ -2561,7 +2561,7 @@ name|field
 argument_list|)
 return|;
 block|}
-comment|/** Creates a MemberExpression that represents accessing a field. */
+comment|/**    * Creates a MemberExpression that represents accessing a field.    */
 specifier|public
 specifier|static
 name|MemberExpression
@@ -2598,7 +2598,7 @@ name|field
 argument_list|)
 return|;
 block|}
-comment|/** Creates a Type object that represents a generic System.Action      * delegate type that has specific type arguments. */
+comment|/**    * Creates a Type object that represents a generic System.Action    * delegate type that has specific type arguments.    */
 specifier|public
 specifier|static
 name|Class
@@ -2616,7 +2616,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Gets a Type object that represents a generic System.Func or      * System.Action delegate type that has specific type      * arguments. */
+comment|/**    * Gets a Type object that represents a generic System.Func or    * System.Action delegate type that has specific type    * arguments.    */
 specifier|public
 specifier|static
 name|Class
@@ -2634,7 +2634,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a Type object that represents a generic System.Func      * delegate type that has specific type arguments. The last type      * argument specifies the return type of the created delegate. */
+comment|/**    * Creates a Type object that represents a generic System.Func    * delegate type that has specific type arguments. The last type    * argument specifies the return type of the created delegate.    */
 specifier|public
 specifier|static
 name|Class
@@ -2652,7 +2652,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a GotoExpression representing a "go to" statement. */
+comment|/**    * Creates a GotoExpression representing a "go to" statement.    */
 specifier|public
 specifier|static
 name|GotoExpression
@@ -2669,7 +2669,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a GotoExpression representing a "go to" statement. The      * value passed to the label upon jumping can be specified. */
+comment|/**    * Creates a GotoExpression representing a "go to" statement. The    * value passed to the label upon jumping can be specified.    */
 specifier|public
 specifier|static
 name|GotoExpression
@@ -2689,7 +2689,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a GotoExpression representing a "go to" statement with      * the specified type. */
+comment|/**    * Creates a GotoExpression representing a "go to" statement with    * the specified type.    */
 specifier|public
 specifier|static
 name|GotoExpression
@@ -2709,7 +2709,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a GotoExpression representing a "go to" statement with      * the specified type. The value passed to the label upon jumping      * can be specified. */
+comment|/**    * Creates a GotoExpression representing a "go to" statement with    * the specified type. The value passed to the label upon jumping    * can be specified.    */
 specifier|public
 specifier|static
 name|GotoExpression
@@ -2732,7 +2732,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a BinaryExpression that represents a "greater than"      * numeric comparison. */
+comment|/**    * Creates a BinaryExpression that represents a "greater than"    * numeric comparison.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -2758,7 +2758,7 @@ name|right
 argument_list|)
 return|;
 block|}
-comment|/** Creates a BinaryExpression that represents a "greater than"      * numeric comparison. The implementing method can be      * specified. */
+comment|/**    * Creates a BinaryExpression that represents a "greater than"    * numeric comparison. The implementing method can be    * specified.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -2784,7 +2784,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a BinaryExpression that represents a "greater than or      * equal" numeric comparison. */
+comment|/**    * Creates a BinaryExpression that represents a "greater than or    * equal" numeric comparison.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -2810,7 +2810,7 @@ name|right
 argument_list|)
 return|;
 block|}
-comment|/** Creates a BinaryExpression that represents a "greater than or      * equal" numeric comparison. */
+comment|/**    * Creates a BinaryExpression that represents a "greater than or    * equal" numeric comparison.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -2836,7 +2836,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a ConditionalExpression that represents a conditional      * block with an if statement. */
+comment|/**    * Creates a ConditionalExpression that represents a conditional    * block with an if statement.    */
 specifier|public
 specifier|static
 name|ConditionalStatement
@@ -2867,7 +2867,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/** Creates a ConditionalExpression that represents a conditional      * block with if and else statements. */
+comment|/**    * Creates a ConditionalExpression that represents a conditional    * block with if and else statements.    */
 specifier|public
 specifier|static
 name|ConditionalStatement
@@ -2903,7 +2903,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/** Creates a UnaryExpression that represents the incrementing of      * the expression value by 1. */
+comment|/**    * Creates a UnaryExpression that represents the incrementing of    * the expression value by 1.    */
 specifier|public
 specifier|static
 name|UnaryExpression
@@ -2920,7 +2920,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a UnaryExpression that represents the incrementing of      * the expression by 1. */
+comment|/**    * Creates a UnaryExpression that represents the incrementing of    * the expression by 1.    */
 specifier|public
 specifier|static
 name|UnaryExpression
@@ -2940,7 +2940,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates an InvocationExpression that applies a delegate or      * lambda expression to a list of argument expressions. */
+comment|/**    * Creates an InvocationExpression that applies a delegate or    * lambda expression to a list of argument expressions.    */
 specifier|public
 specifier|static
 name|InvocationExpression
@@ -2963,7 +2963,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates an InvocationExpression that applies a delegate or      * lambda expression to a list of argument expressions. */
+comment|/**    * Creates an InvocationExpression that applies a delegate or    * lambda expression to a list of argument expressions.    */
 specifier|public
 specifier|static
 name|InvocationExpression
@@ -2984,7 +2984,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Returns whether the expression evaluates to false. */
+comment|/**    * Returns whether the expression evaluates to false.    */
 specifier|public
 specifier|static
 name|UnaryExpression
@@ -3001,7 +3001,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Returns whether the expression evaluates to false. */
+comment|/**    * Returns whether the expression evaluates to false.    */
 specifier|public
 specifier|static
 name|UnaryExpression
@@ -3021,7 +3021,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Returns whether the expression evaluates to true. */
+comment|/**    * Returns whether the expression evaluates to true.    */
 specifier|public
 specifier|static
 name|UnaryExpression
@@ -3038,7 +3038,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Returns whether the expression evaluates to true. */
+comment|/**    * Returns whether the expression evaluates to true.    */
 specifier|public
 specifier|static
 name|UnaryExpression
@@ -3058,7 +3058,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a LabelTarget representing a label with X type and      * no name. */
+comment|/**    * Creates a LabelTarget representing a label with X type and    * no name.    */
 specifier|public
 specifier|static
 name|LabelTarget
@@ -3072,7 +3072,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a LabelExpression representing a label without a      * default value. */
+comment|/**    * Creates a LabelExpression representing a label without a    * default value.    */
 specifier|public
 specifier|static
 name|LabelExpression
@@ -3089,7 +3089,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a LabelTarget representing a label with X type and      * the given name. */
+comment|/**    * Creates a LabelTarget representing a label with X type and    * the given name.    */
 specifier|public
 specifier|static
 name|LabelTarget
@@ -3106,7 +3106,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a LabelTarget representing a label with the given      * type. */
+comment|/**    * Creates a LabelTarget representing a label with the given    * type.    */
 specifier|public
 specifier|static
 name|LabelTarget
@@ -3123,7 +3123,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a LabelExpression representing a label with the given      * default value. */
+comment|/**    * Creates a LabelExpression representing a label with the given    * default value.    */
 specifier|public
 specifier|static
 name|LabelExpression
@@ -3143,7 +3143,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a LabelTarget representing a label with the given type      * and name. */
+comment|/**    * Creates a LabelTarget representing a label with the given type    * and name.    */
 specifier|public
 specifier|static
 name|LabelTarget
@@ -3163,7 +3163,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a FunctionExpression from an actual function. */
+comment|/**    * Creates a FunctionExpression from an actual function.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -3198,7 +3198,7 @@ name|function
 argument_list|)
 return|;
 block|}
-comment|/** Creates a LambdaExpression by first constructing a delegate      * type. */
+comment|/**    * Creates a LambdaExpression by first constructing a delegate    * type.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -3268,7 +3268,7 @@ name|parameterList
 argument_list|)
 return|;
 block|}
-comment|/** Creates a LambdaExpression by first constructing a delegate      * type. */
+comment|/**    * Creates a LambdaExpression by first constructing a delegate    * type.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -3309,7 +3309,7 @@ name|parameters
 argument_list|)
 return|;
 block|}
-comment|/** Creates an Expression<TDelegate> where the delegate type is      * known at compile time. */
+comment|/**    * Creates an Expression<TDelegate> where the delegate type is    * known at compile time.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -3346,7 +3346,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/** Creates an Expression<TDelegate> where the delegate type is      * known at compile time. */
+comment|/**    * Creates an Expression<TDelegate> where the delegate type is    * known at compile time.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -3388,7 +3388,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/** Creates a LambdaExpression by first constructing a delegate      * type. It can be used when the delegate type is not known at      * compile time. */
+comment|/**    * Creates a LambdaExpression by first constructing a delegate    * type. It can be used when the delegate type is not known at    * compile time.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -3443,7 +3443,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/** Creates a LambdaExpression by first constructing a delegate      * type. It can be used when the delegate type is not known at      * compile time. */
+comment|/**    * Creates a LambdaExpression by first constructing a delegate    * type. It can be used when the delegate type is not known at    * compile time.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -3499,7 +3499,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/** Creates a LambdaExpression by first constructing a delegate      * type. It can be used when the delegate type is not known at      * compile time. */
+comment|/**    * Creates a LambdaExpression by first constructing a delegate    * type. It can be used when the delegate type is not known at    * compile time.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -3548,7 +3548,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/** Creates a LambdaExpression by first constructing a delegate      * type. It can be used when the delegate type is not known at      * compile time. */
+comment|/**    * Creates a LambdaExpression by first constructing a delegate    * type. It can be used when the delegate type is not known at    * compile time.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -3597,7 +3597,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/** Creates a LambdaExpression by first constructing a delegate      * type. */
+comment|/**    * Creates a LambdaExpression by first constructing a delegate    * type.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -3641,7 +3641,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a BinaryExpression that represents a bitwise      * left-shift operation. */
+comment|/**    * Creates a BinaryExpression that represents a bitwise    * left-shift operation.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -3667,7 +3667,7 @@ name|right
 argument_list|)
 return|;
 block|}
-comment|/** Creates a BinaryExpression that represents a bitwise      * left-shift operation. */
+comment|/**    * Creates a BinaryExpression that represents a bitwise    * left-shift operation.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -3690,7 +3690,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a BinaryExpression that represents a bitwise      * left-shift assignment operation. */
+comment|/**    * Creates a BinaryExpression that represents a bitwise    * left-shift assignment operation.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -3716,7 +3716,7 @@ name|right
 argument_list|)
 return|;
 block|}
-comment|/** Creates a BinaryExpression that represents a bitwise      * left-shift assignment operation. */
+comment|/**    * Creates a BinaryExpression that represents a bitwise    * left-shift assignment operation.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -3739,7 +3739,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a BinaryExpression that represents a bitwise      * left-shift assignment operation. */
+comment|/**    * Creates a BinaryExpression that represents a bitwise    * left-shift assignment operation.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -3765,7 +3765,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a BinaryExpression that represents a "less than"      * numeric comparison. */
+comment|/**    * Creates a BinaryExpression that represents a "less than"    * numeric comparison.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -3791,7 +3791,7 @@ name|right
 argument_list|)
 return|;
 block|}
-comment|/** Creates a BinaryExpression that represents a "less than"      * numeric comparison. */
+comment|/**    * Creates a BinaryExpression that represents a "less than"    * numeric comparison.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -3817,7 +3817,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a BinaryExpression that represents a " less than or      * equal" numeric comparison. */
+comment|/**    * Creates a BinaryExpression that represents a " less than or    * equal" numeric comparison.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -3843,7 +3843,7 @@ name|right
 argument_list|)
 return|;
 block|}
-comment|/** Creates a BinaryExpression that represents a "less than or      * equal" numeric comparison. */
+comment|/**    * Creates a BinaryExpression that represents a "less than or    * equal" numeric comparison.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -3869,7 +3869,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a MemberListBinding where the member is a field or      * property. */
+comment|/**    * Creates a MemberListBinding where the member is a field or    * property.    */
 specifier|public
 specifier|static
 name|MemberListBinding
@@ -3892,7 +3892,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a MemberListBinding where the member is a field or      * property. */
+comment|/**    * Creates a MemberListBinding where the member is a field or    * property.    */
 specifier|public
 specifier|static
 name|MemberListBinding
@@ -3913,7 +3913,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a MemberListBinding based on a specified property      * accessor method. */
+comment|/**    * Creates a MemberListBinding based on a specified property    * accessor method.    */
 specifier|public
 specifier|static
 name|MemberListBinding
@@ -3936,7 +3936,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a MemberListBinding object based on a specified      * property accessor method. */
+comment|/**    * Creates a MemberListBinding object based on a specified    * property accessor method.    */
 specifier|public
 specifier|static
 name|MemberListBinding
@@ -3957,7 +3957,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a ListInitExpression that uses specified ElementInit      * objects to initialize a collection. */
+comment|/**    * Creates a ListInitExpression that uses specified ElementInit    * objects to initialize a collection.    */
 specifier|public
 specifier|static
 name|ListInitExpression
@@ -3980,7 +3980,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a ListInitExpression that uses a method named "Add" to      * add elements to a collection. */
+comment|/**    * Creates a ListInitExpression that uses a method named "Add" to    * add elements to a collection.    */
 specifier|public
 specifier|static
 name|ListInitExpression
@@ -4003,7 +4003,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a ListInitExpression that uses specified ElementInit      * objects to initialize a collection. */
+comment|/**    * Creates a ListInitExpression that uses specified ElementInit    * objects to initialize a collection.    */
 specifier|public
 specifier|static
 name|ListInitExpression
@@ -4024,7 +4024,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a ListInitExpression that uses a method named "Add" to      * add elements to a collection. */
+comment|/**    * Creates a ListInitExpression that uses a method named "Add" to    * add elements to a collection.    */
 specifier|public
 specifier|static
 name|ListInitExpression
@@ -4045,7 +4045,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a ListInitExpression that uses a specified method to      * add elements to a collection. */
+comment|/**    * Creates a ListInitExpression that uses a specified method to    * add elements to a collection.    */
 specifier|public
 specifier|static
 name|ListInitExpression
@@ -4071,7 +4071,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a ListInitExpression that uses a specified method to      * add elements to a collection. */
+comment|/**    * Creates a ListInitExpression that uses a specified method to    * add elements to a collection.    */
 specifier|public
 specifier|static
 name|ListInitExpression
@@ -4095,7 +4095,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a LoopExpression with the given body. */
+comment|/**    * Creates a LoopExpression with the given body.    */
 specifier|public
 specifier|static
 name|LoopExpression
@@ -4112,7 +4112,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a LoopExpression with the given body and break      * target. */
+comment|/**    * Creates a LoopExpression with the given body and break    * target.    */
 specifier|public
 specifier|static
 name|LoopExpression
@@ -4132,7 +4132,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a LoopExpression with the given body. */
+comment|/**    * Creates a LoopExpression with the given body.    */
 specifier|public
 specifier|static
 name|LoopExpression
@@ -4155,7 +4155,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a BinaryExpression, given the left and right operands,      * by calling an appropriate factory method. */
+comment|/**    * Creates a BinaryExpression, given the left and right operands,    * by calling an appropriate factory method.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -4229,7 +4229,7 @@ name|right
 argument_list|)
 return|;
 block|}
-comment|/** Creates a BinaryExpression, given the left operand, right      * operand and implementing method, by calling the appropriate      * factory method. */
+comment|/**    * Creates a BinaryExpression, given the left operand, right    * operand and implementing method, by calling the appropriate    * factory method.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -4258,7 +4258,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a BinaryExpression, given the left operand, right      * operand, implementing method and type conversion function, by      * calling the appropriate factory method. */
+comment|/**    * Creates a BinaryExpression, given the left operand, right    * operand, implementing method and type conversion function, by    * calling the appropriate factory method.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -4290,7 +4290,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a TernaryExpression, given the left and right operands,      * by calling an appropriate factory method. */
+comment|/**    * Creates a TernaryExpression, given the left and right operands,    * by calling an appropriate factory method.    */
 specifier|public
 specifier|static
 name|TernaryExpression
@@ -4390,7 +4390,7 @@ name|e2
 argument_list|)
 return|;
 block|}
-comment|/** Creates a CatchBlock representing a catch statement with the      * specified elements. */
+comment|/**    * Creates a CatchBlock representing a catch statement with the    * specified elements.    */
 specifier|public
 specifier|static
 name|CatchBlock
@@ -4416,7 +4416,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a DynamicExpression that represents a dynamic      * operation bound by the provided CallSiteBinder. */
+comment|/**    * Creates a DynamicExpression that represents a dynamic    * operation bound by the provided CallSiteBinder.    */
 specifier|public
 specifier|static
 name|DynamicExpression
@@ -4442,7 +4442,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a DynamicExpression that represents a dynamic      * operation bound by the provided CallSiteBinder and one      * argument. */
+comment|/**    * Creates a DynamicExpression that represents a dynamic    * operation bound by the provided CallSiteBinder and one    * argument.    */
 specifier|public
 specifier|static
 name|DynamicExpression
@@ -4465,7 +4465,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a DynamicExpression that represents a dynamic      * operation bound by the provided CallSiteBinder. */
+comment|/**    * Creates a DynamicExpression that represents a dynamic    * operation bound by the provided CallSiteBinder.    */
 specifier|public
 specifier|static
 name|DynamicExpression
@@ -4489,7 +4489,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a GotoExpression representing a jump of the specified      * GotoExpressionKind. The value passed to the label upon jumping      * can also be specified. */
+comment|/**    * Creates a GotoExpression representing a jump of the specified    * GotoExpressionKind. The value passed to the label upon jumping    * can also be specified.    */
 specifier|public
 specifier|static
 name|GotoExpression
@@ -4515,7 +4515,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates an IndexExpression that represents accessing an      * indexed property in an object. */
+comment|/**    * Creates an IndexExpression that represents accessing an    * indexed property in an object.    */
 specifier|public
 specifier|static
 name|IndexExpression
@@ -4541,7 +4541,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a MemberExpression that represents accessing a field. */
+comment|/**    * Creates a MemberExpression that represents accessing a field.    */
 specifier|public
 specifier|static
 name|MemberExpression
@@ -4564,7 +4564,7 @@ name|member
 argument_list|)
 return|;
 block|}
-comment|/** Creates a TryExpression representing a try block with the      * specified elements. */
+comment|/**    * Creates a TryExpression representing a try block with the    * specified elements.    */
 specifier|public
 specifier|static
 name|TryExpression
@@ -4596,7 +4596,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a UnaryExpression, given an operand, by calling the      * appropriate factory method. */
+comment|/**    * Creates a UnaryExpression, given an operand, by calling the    * appropriate factory method.    */
 specifier|public
 specifier|static
 name|UnaryExpression
@@ -4624,7 +4624,7 @@ name|expression
 argument_list|)
 return|;
 block|}
-comment|/** Creates a UnaryExpression, given an operand and implementing      * method, by calling the appropriate factory method. */
+comment|/**    * Creates a UnaryExpression, given an operand and implementing    * method, by calling the appropriate factory method.    */
 specifier|public
 specifier|static
 name|UnaryExpression
@@ -4660,7 +4660,7 @@ name|expression
 argument_list|)
 return|;
 block|}
-comment|/** Creates a MemberMemberBinding that represents the recursive      * initialization of members of a field or property. */
+comment|/**    * Creates a MemberMemberBinding that represents the recursive    * initialization of members of a field or property.    */
 specifier|public
 specifier|static
 name|MemberMemberBinding
@@ -4683,7 +4683,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a MemberMemberBinding that represents the recursive      * initialization of members of a field or property. */
+comment|/**    * Creates a MemberMemberBinding that represents the recursive    * initialization of members of a field or property.    */
 specifier|public
 specifier|static
 name|MemberMemberBinding
@@ -4709,7 +4709,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/** Creates a MemberMemberBinding that represents the recursive      * initialization of members of a member that is accessed by using      * a property accessor method. */
+comment|/**    * Creates a MemberMemberBinding that represents the recursive    * initialization of members of a member that is accessed by using    * a property accessor method.    */
 specifier|public
 specifier|static
 name|MemberMemberBinding
@@ -4732,7 +4732,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a MemberMemberBinding that represents the recursive      * initialization of members of a member that is accessed by using      * a property accessor method. */
+comment|/**    * Creates a MemberMemberBinding that represents the recursive    * initialization of members of a member that is accessed by using    * a property accessor method.    */
 specifier|public
 specifier|static
 name|MemberMemberBinding
@@ -4758,7 +4758,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/** Represents an expression that creates a new object and      * initializes a property of the object. */
+comment|/**    * Represents an expression that creates a new object and    * initializes a property of the object.    */
 specifier|public
 specifier|static
 name|MemberInitExpression
@@ -4781,7 +4781,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a MemberInitExpression. */
+comment|/**    * Creates a MemberInitExpression.    */
 specifier|public
 specifier|static
 name|MemberInitExpression
@@ -4807,7 +4807,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/** Declares a method. */
+comment|/**    * Declares a method.    */
 specifier|public
 specifier|static
 name|MethodDeclaration
@@ -4851,7 +4851,7 @@ name|body
 argument_list|)
 return|;
 block|}
-comment|/** Declares a constructor. */
+comment|/**    * Declares a constructor.    */
 specifier|public
 specifier|static
 name|ConstructorDeclaration
@@ -4890,7 +4890,7 @@ name|body
 argument_list|)
 return|;
 block|}
-comment|/** Declares a field. */
+comment|/**    * Declares a field.    */
 specifier|public
 specifier|static
 name|FieldDeclaration
@@ -4918,7 +4918,7 @@ name|initializer
 argument_list|)
 return|;
 block|}
-comment|/** Declares a class. */
+comment|/**    * Declares a class.    */
 specifier|public
 specifier|static
 name|ClassDeclaration
@@ -4962,7 +4962,7 @@ name|memberDeclarations
 argument_list|)
 return|;
 block|}
-comment|/** Creates a BinaryExpression that represents an arithmetic      * remainder operation. */
+comment|/**    * Creates a BinaryExpression that represents an arithmetic    * remainder operation.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -4988,7 +4988,7 @@ name|right
 argument_list|)
 return|;
 block|}
-comment|/** Creates a BinaryExpression that represents an arithmetic      * remainder operation. */
+comment|/**    * Creates a BinaryExpression that represents an arithmetic    * remainder operation.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -5028,7 +5028,7 @@ name|method
 argument_list|)
 return|;
 block|}
-comment|/** Creates a BinaryExpression that represents a remainder      * assignment operation. */
+comment|/**    * Creates a BinaryExpression that represents a remainder    * assignment operation.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -5054,7 +5054,7 @@ name|right
 argument_list|)
 return|;
 block|}
-comment|/** Creates a BinaryExpression that represents a remainder      * assignment operation. */
+comment|/**    * Creates a BinaryExpression that represents a remainder    * assignment operation.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -5087,7 +5087,7 @@ name|method
 argument_list|)
 return|;
 block|}
-comment|/** Creates a BinaryExpression that represents a remainder      * assignment operation. */
+comment|/**    * Creates a BinaryExpression that represents a remainder    * assignment operation.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -5125,7 +5125,7 @@ name|lambdaExpression
 argument_list|)
 return|;
 block|}
-comment|/** Creates a BinaryExpression that represents an arithmetic      * multiplication operation that does not have overflow      * checking. */
+comment|/**    * Creates a BinaryExpression that represents an arithmetic    * multiplication operation that does not have overflow    * checking.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -5151,7 +5151,7 @@ name|right
 argument_list|)
 return|;
 block|}
-comment|/** Creates a BinaryExpression that represents an arithmetic      * multiplication operation that does not have overflow      * checking. */
+comment|/**    * Creates a BinaryExpression that represents an arithmetic    * multiplication operation that does not have overflow    * checking.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -5191,7 +5191,7 @@ name|method
 argument_list|)
 return|;
 block|}
-comment|/** Creates a BinaryExpression that represents a multiplication      * assignment operation that does not have overflow checking. */
+comment|/**    * Creates a BinaryExpression that represents a multiplication    * assignment operation that does not have overflow checking.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -5217,7 +5217,7 @@ name|right
 argument_list|)
 return|;
 block|}
-comment|/** Creates a BinaryExpression that represents a multiplication      * assignment operation that does not have overflow checking. */
+comment|/**    * Creates a BinaryExpression that represents a multiplication    * assignment operation that does not have overflow checking.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -5250,7 +5250,7 @@ name|method
 argument_list|)
 return|;
 block|}
-comment|/** Creates a BinaryExpression that represents a multiplication      * assignment operation that does not have overflow checking. */
+comment|/**    * Creates a BinaryExpression that represents a multiplication    * assignment operation that does not have overflow checking.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -5288,7 +5288,7 @@ name|lambdaExpression
 argument_list|)
 return|;
 block|}
-comment|/** Creates a BinaryExpression that represents a multiplication      * assignment operation that has overflow checking. */
+comment|/**    * Creates a BinaryExpression that represents a multiplication    * assignment operation that has overflow checking.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -5314,7 +5314,7 @@ name|right
 argument_list|)
 return|;
 block|}
-comment|/** Creates a BinaryExpression that represents a multiplication      * assignment operation that has overflow checking. */
+comment|/**    * Creates a BinaryExpression that represents a multiplication    * assignment operation that has overflow checking.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -5347,7 +5347,7 @@ name|method
 argument_list|)
 return|;
 block|}
-comment|/** Creates a BinaryExpression that represents a multiplication      * assignment operation that has overflow checking. */
+comment|/**    * Creates a BinaryExpression that represents a multiplication    * assignment operation that has overflow checking.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -5385,7 +5385,7 @@ name|lambdaExpression
 argument_list|)
 return|;
 block|}
-comment|/** Creates a BinaryExpression that represents an arithmetic      * multiplication operation that has overflow checking. */
+comment|/**    * Creates a BinaryExpression that represents an arithmetic    * multiplication operation that has overflow checking.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -5411,7 +5411,7 @@ name|right
 argument_list|)
 return|;
 block|}
-comment|/** Creates a BinaryExpression that represents an arithmetic      * multiplication operation that has overflow checking. */
+comment|/**    * Creates a BinaryExpression that represents an arithmetic    * multiplication operation that has overflow checking.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -5451,7 +5451,7 @@ name|method
 argument_list|)
 return|;
 block|}
-comment|/** Creates a UnaryExpression that represents an arithmetic      * negation operation. */
+comment|/**    * Creates a UnaryExpression that represents an arithmetic    * negation operation.    */
 specifier|public
 specifier|static
 name|UnaryExpression
@@ -5472,7 +5472,7 @@ name|expression
 argument_list|)
 return|;
 block|}
-comment|/** Creates a UnaryExpression that represents an arithmetic      * negation operation. */
+comment|/**    * Creates a UnaryExpression that represents an arithmetic    * negation operation.    */
 specifier|public
 specifier|static
 name|UnaryExpression
@@ -5500,7 +5500,7 @@ name|method
 argument_list|)
 return|;
 block|}
-comment|/** Creates a UnaryExpression that represents an arithmetic      * negation operation that has overflow checking. */
+comment|/**    * Creates a UnaryExpression that represents an arithmetic    * negation operation that has overflow checking.    */
 specifier|public
 specifier|static
 name|UnaryExpression
@@ -5521,7 +5521,7 @@ name|expression
 argument_list|)
 return|;
 block|}
-comment|/** Creates a UnaryExpression that represents an arithmetic      * negation operation that has overflow checking. The implementing      * method can be specified. */
+comment|/**    * Creates a UnaryExpression that represents an arithmetic    * negation operation that has overflow checking. The implementing    * method can be specified.    */
 specifier|public
 specifier|static
 name|UnaryExpression
@@ -5549,7 +5549,7 @@ name|method
 argument_list|)
 return|;
 block|}
-comment|/** Creates a NewExpression that represents calling the specified      * constructor that takes no arguments. */
+comment|/**    * Creates a NewExpression that represents calling the specified    * constructor that takes no arguments.    */
 specifier|public
 specifier|static
 name|NewExpression
@@ -5577,7 +5577,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/** Creates a NewExpression that represents calling the      * parameterless constructor of the specified type. */
+comment|/**    * Creates a NewExpression that represents calling the    * parameterless constructor of the specified type.    */
 specifier|public
 specifier|static
 name|NewExpression
@@ -5602,7 +5602,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/** Creates a NewExpression that represents calling the constructor of the      * specified type whose parameters are assignable from the specified      * arguments. */
+comment|/**    * Creates a NewExpression that represents calling the constructor of the    * specified type whose parameters are assignable from the specified    * arguments.    */
 specifier|public
 specifier|static
 name|NewExpression
@@ -5631,7 +5631,7 @@ literal|null
 argument_list|)
 return|;
 block|}
-comment|/** Creates a NewExpression that represents calling the constructor of the      * specified type whose parameters are assignable from the specified      * arguments. */
+comment|/**    * Creates a NewExpression that represents calling the constructor of the    * specified type whose parameters are assignable from the specified    * arguments.    */
 specifier|public
 specifier|static
 name|NewExpression
@@ -5671,7 +5671,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/** Creates a NewExpression that represents calling the specified      * constructor with the specified arguments. */
+comment|/**    * Creates a NewExpression that represents calling the specified    * constructor with the specified arguments.    */
 specifier|public
 specifier|static
 name|NewExpression
@@ -5703,7 +5703,7 @@ literal|null
 argument_list|)
 return|;
 block|}
-comment|/** Creates a NewExpression that represents calling the specified      * constructor with the specified arguments. */
+comment|/**    * Creates a NewExpression that represents calling the specified    * constructor with the specified arguments.    */
 specifier|public
 specifier|static
 name|NewExpression
@@ -5729,7 +5729,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/** Creates a NewExpression that represents calling the specified      * constructor with the specified arguments. The members that      * access the constructor initialized fields are specified. */
+comment|/**    * Creates a NewExpression that represents calling the specified    * constructor with the specified arguments. The members that    * access the constructor initialized fields are specified.    */
 specifier|public
 specifier|static
 name|NewExpression
@@ -5771,7 +5771,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/** Creates a NewArrayExpression that represents creating an array      * that has a specified rank. */
+comment|/**    * Creates a NewArrayExpression that represents creating an array    * that has a specified rank.    */
 specifier|public
 specifier|static
 name|NewArrayExpression
@@ -5794,7 +5794,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a NewArrayExpression that represents creating an array      * that has a specified rank. */
+comment|/**    * Creates a NewArrayExpression that represents creating an array    * that has a specified rank.    */
 specifier|public
 specifier|static
 name|NewArrayExpression
@@ -5820,7 +5820,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/** Creates a NewArrayExpression that represents creating a      * one-dimensional array and initializing it from a list of      * elements.      *      * @param type Element type of the array.      */
+comment|/**    * Creates a NewArrayExpression that represents creating a    * one-dimensional array and initializing it from a list of    * elements.    *    * @param type Element type of the array.    */
 specifier|public
 specifier|static
 name|NewArrayExpression
@@ -5849,7 +5849,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/** Creates a NewArrayExpression that represents creating a      * one-dimensional array and initializing it from a list of      * elements. */
+comment|/**    * Creates a NewArrayExpression that represents creating a    * one-dimensional array and initializing it from a list of    * elements.    */
 specifier|public
 specifier|static
 name|NewArrayExpression
@@ -5875,7 +5875,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/** Creates a UnaryExpression that represents a bitwise complement      * operation. */
+comment|/**    * Creates a UnaryExpression that represents a bitwise complement    * operation.    */
 specifier|public
 specifier|static
 name|UnaryExpression
@@ -5896,7 +5896,7 @@ name|expression
 argument_list|)
 return|;
 block|}
-comment|/** Creates a UnaryExpression that represents a bitwise complement      * operation. The implementing method can be specified. */
+comment|/**    * Creates a UnaryExpression that represents a bitwise complement    * operation. The implementing method can be specified.    */
 specifier|public
 specifier|static
 name|UnaryExpression
@@ -5924,7 +5924,7 @@ name|method
 argument_list|)
 return|;
 block|}
-comment|/** Creates a BinaryExpression that represents an inequality      * comparison. */
+comment|/**    * Creates a BinaryExpression that represents an inequality    * comparison.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -5950,7 +5950,7 @@ name|right
 argument_list|)
 return|;
 block|}
-comment|/** Creates a BinaryExpression that represents an inequality      * comparison. */
+comment|/**    * Creates a BinaryExpression that represents an inequality    * comparison.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -5986,7 +5986,7 @@ name|method
 argument_list|)
 return|;
 block|}
-comment|/** Returns the expression representing the ones complement. */
+comment|/**    * Returns the expression representing the ones complement.    */
 specifier|public
 specifier|static
 name|UnaryExpression
@@ -6007,7 +6007,7 @@ name|expression
 argument_list|)
 return|;
 block|}
-comment|/** Returns the expression representing the ones complement. */
+comment|/**    * Returns the expression representing the ones complement.    */
 specifier|public
 specifier|static
 name|UnaryExpression
@@ -6038,7 +6038,7 @@ name|method
 argument_list|)
 return|;
 block|}
-comment|/** Creates a BinaryExpression that represents a bitwise OR      * operation. */
+comment|/**    * Creates a BinaryExpression that represents a bitwise OR    * operation.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -6064,7 +6064,7 @@ name|right
 argument_list|)
 return|;
 block|}
-comment|/** Creates a BinaryExpression that represents a bitwise OR      * operation. */
+comment|/**    * Creates a BinaryExpression that represents a bitwise OR    * operation.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -6097,7 +6097,7 @@ name|method
 argument_list|)
 return|;
 block|}
-comment|/** Creates a BinaryExpression that represents a bitwise OR      * assignment operation. */
+comment|/**    * Creates a BinaryExpression that represents a bitwise OR    * assignment operation.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -6123,7 +6123,7 @@ name|right
 argument_list|)
 return|;
 block|}
-comment|/** Creates a BinaryExpression that represents a bitwise OR      * assignment operation. */
+comment|/**    * Creates a BinaryExpression that represents a bitwise OR    * assignment operation.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -6152,7 +6152,7 @@ name|right
 argument_list|)
 return|;
 block|}
-comment|/** Creates a BinaryExpression that represents a bitwise OR      * assignment operation. */
+comment|/**    * Creates a BinaryExpression that represents a bitwise OR    * assignment operation.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -6190,7 +6190,7 @@ name|lambdaExpression
 argument_list|)
 return|;
 block|}
-comment|/** Creates a BinaryExpression that represents a conditional OR      * operation that evaluates the second operand only if the first      * operand evaluates to false. */
+comment|/**    * Creates a BinaryExpression that represents a conditional OR    * operation that evaluates the second operand only if the first    * operand evaluates to false.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -6216,7 +6216,7 @@ name|right
 argument_list|)
 return|;
 block|}
-comment|/** Creates a BinaryExpression that represents a conditional OR      * operation that evaluates the second operand only if the first      * operand evaluates to false. */
+comment|/**    * Creates a BinaryExpression that represents a conditional OR    * operation that evaluates the second operand only if the first    * operand evaluates to false.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -6249,7 +6249,7 @@ name|method
 argument_list|)
 return|;
 block|}
-comment|/** Creates a ParameterExpression node that can be used to      * identify a parameter or a variable in an expression tree. */
+comment|/**    * Creates a ParameterExpression node that can be used to    * identify a parameter or a variable in an expression tree.    */
 specifier|public
 specifier|static
 name|ParameterExpression
@@ -6267,7 +6267,7 @@ name|type
 argument_list|)
 return|;
 block|}
-comment|/** Creates a ParameterExpression node that can be used to      * identify a parameter or a variable in an expression tree. */
+comment|/**    * Creates a ParameterExpression node that can be used to    * identify a parameter or a variable in an expression tree.    */
 specifier|public
 specifier|static
 name|ParameterExpression
@@ -6292,7 +6292,7 @@ name|name
 argument_list|)
 return|;
 block|}
-comment|/** Creates a ParameterExpression. */
+comment|/**    * Creates a ParameterExpression.    */
 specifier|public
 specifier|static
 name|ParameterExpression
@@ -6320,7 +6320,7 @@ name|name
 argument_list|)
 return|;
 block|}
-comment|/** Creates a UnaryExpression that represents the assignment of      * the expression followed by a subsequent decrement by 1 of the      * original expression. */
+comment|/**    * Creates a UnaryExpression that represents the assignment of    * the expression followed by a subsequent decrement by 1 of the    * original expression.    */
 specifier|public
 specifier|static
 name|UnaryExpression
@@ -6341,7 +6341,7 @@ name|expression
 argument_list|)
 return|;
 block|}
-comment|/** Creates a UnaryExpression that represents the assignment of      * the expression followed by a subsequent decrement by 1 of the      * original expression. */
+comment|/**    * Creates a UnaryExpression that represents the assignment of    * the expression followed by a subsequent decrement by 1 of the    * original expression.    */
 specifier|public
 specifier|static
 name|UnaryExpression
@@ -6372,7 +6372,7 @@ name|method
 argument_list|)
 return|;
 block|}
-comment|/** Creates a UnaryExpression that represents the assignment of      * the expression followed by a subsequent increment by 1 of the      * original expression. */
+comment|/**    * Creates a UnaryExpression that represents the assignment of    * the expression followed by a subsequent increment by 1 of the    * original expression.    */
 specifier|public
 specifier|static
 name|UnaryExpression
@@ -6393,7 +6393,7 @@ name|expression
 argument_list|)
 return|;
 block|}
-comment|/** Creates a UnaryExpression that represents the assignment of      * the expression followed by a subsequent increment by 1 of the      * original expression. */
+comment|/**    * Creates a UnaryExpression that represents the assignment of    * the expression followed by a subsequent increment by 1 of the    * original expression.    */
 specifier|public
 specifier|static
 name|UnaryExpression
@@ -6424,7 +6424,7 @@ name|method
 argument_list|)
 return|;
 block|}
-comment|/** Creates a BinaryExpression that represents raising a number to      * a power. */
+comment|/**    * Creates a BinaryExpression that represents raising a number to    * a power.    */
 comment|// REVIEW: In Java this is a call to a lib function, Math.pow.
 specifier|public
 specifier|static
@@ -6445,7 +6445,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a BinaryExpression that represents raising a number to      * a power. */
+comment|/**    * Creates a BinaryExpression that represents raising a number to    * a power.    */
 comment|// REVIEW: In Java this is a call to a lib function, Math.pow.
 specifier|public
 specifier|static
@@ -6469,7 +6469,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a BinaryExpression that represents raising an      * expression to a power and assigning the result back to the      * expression. */
+comment|/**    * Creates a BinaryExpression that represents raising an    * expression to a power and assigning the result back to the    * expression.    */
 comment|// REVIEW: In Java this is a call to a lib function, Math.pow.
 specifier|public
 specifier|static
@@ -6490,7 +6490,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a BinaryExpression that represents raising an      * expression to a power and assigning the result back to the      * expression. */
+comment|/**    * Creates a BinaryExpression that represents raising an    * expression to a power and assigning the result back to the    * expression.    */
 comment|// REVIEW: In Java this is a call to a lib function, Math.pow.
 specifier|public
 specifier|static
@@ -6514,7 +6514,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a BinaryExpression that represents raising an      * expression to a power and assigning the result back to the      * expression. */
+comment|/**    * Creates a BinaryExpression that represents raising an    * expression to a power and assigning the result back to the    * expression.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -6540,7 +6540,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a UnaryExpression that decrements the expression by 1      * and assigns the result back to the expression. */
+comment|/**    * Creates a UnaryExpression that decrements the expression by 1    * and assigns the result back to the expression.    */
 specifier|public
 specifier|static
 name|UnaryExpression
@@ -6561,7 +6561,7 @@ name|expression
 argument_list|)
 return|;
 block|}
-comment|/** Creates a UnaryExpression that decrements the expression by 1      * and assigns the result back to the expression. */
+comment|/**    * Creates a UnaryExpression that decrements the expression by 1    * and assigns the result back to the expression.    */
 specifier|public
 specifier|static
 name|UnaryExpression
@@ -6592,7 +6592,7 @@ name|method
 argument_list|)
 return|;
 block|}
-comment|/** Creates a UnaryExpression that increments the expression by 1      * and assigns the result back to the expression. */
+comment|/**    * Creates a UnaryExpression that increments the expression by 1    * and assigns the result back to the expression.    */
 specifier|public
 specifier|static
 name|UnaryExpression
@@ -6613,7 +6613,7 @@ name|expression
 argument_list|)
 return|;
 block|}
-comment|/** Creates a UnaryExpression that increments the expression by 1      * and assigns the result back to the expression. */
+comment|/**    * Creates a UnaryExpression that increments the expression by 1    * and assigns the result back to the expression.    */
 specifier|public
 specifier|static
 name|UnaryExpression
@@ -6644,7 +6644,7 @@ name|method
 argument_list|)
 return|;
 block|}
-comment|/** Creates a MemberExpression that represents accessing a      * property by using a property accessor method. */
+comment|/**    * Creates a MemberExpression that represents accessing a    * property by using a property accessor method.    */
 comment|// REVIEW: No equivalent to properties in Java.
 specifier|public
 specifier|static
@@ -6665,7 +6665,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a MemberExpression that represents accessing a      * property. */
+comment|/**    * Creates a MemberExpression that represents accessing a    * property.    */
 comment|// REVIEW: No equivalent to properties in Java.
 specifier|public
 specifier|static
@@ -6686,7 +6686,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a MemberExpression that represents accessing a      * property. */
+comment|/**    * Creates a MemberExpression that represents accessing a    * property.    */
 comment|// REVIEW: No equivalent to properties in Java.
 specifier|public
 specifier|static
@@ -6707,7 +6707,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates an IndexExpression representing the access to an      * indexed property. */
+comment|/**    * Creates an IndexExpression representing the access to an    * indexed property.    */
 comment|// REVIEW: No equivalent to properties in Java.
 specifier|public
 specifier|static
@@ -6734,7 +6734,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates an IndexExpression representing the access to an      * indexed property. */
+comment|/**    * Creates an IndexExpression representing the access to an    * indexed property.    */
 comment|// REVIEW: No equivalent to properties in Java.
 specifier|public
 specifier|static
@@ -6759,7 +6759,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates an IndexExpression representing the access to an      * indexed property. */
+comment|/**    * Creates an IndexExpression representing the access to an    * indexed property.    */
 comment|// REVIEW: No equivalent to properties in Java.
 specifier|public
 specifier|static
@@ -6784,7 +6784,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a MemberExpression accessing a property. */
+comment|/**    * Creates a MemberExpression accessing a property.    */
 specifier|public
 specifier|static
 name|MemberExpression
@@ -6807,7 +6807,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a MemberExpression that represents accessing a      * property or field. */
+comment|/**    * Creates a MemberExpression that represents accessing a    * property or field.    */
 comment|// REVIEW: Java does not have properties; can only be a field name.
 specifier|public
 specifier|static
@@ -6828,7 +6828,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a UnaryExpression that represents an expression that      * has a constant value of type Expression. */
+comment|/**    * Creates a UnaryExpression that represents an expression that    * has a constant value of type Expression.    */
 specifier|public
 specifier|static
 name|UnaryExpression
@@ -6849,7 +6849,7 @@ name|expression
 argument_list|)
 return|;
 block|}
-comment|/** Reduces this node to a simpler expression. If CanReduce      * returns true, this should return a valid expression. This      * method can return another node which itself must be reduced. */
+comment|/**    * Reduces this node to a simpler expression. If CanReduce    * returns true, this should return a valid expression. This    * method can return another node which itself must be reduced.    */
 specifier|public
 specifier|static
 name|Expression
@@ -6866,7 +6866,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Reduces this node to a simpler expression. If CanReduce      * returns true, this should return a valid expression. This      * method can return another node which itself must be reduced. */
+comment|/**    * Reduces this node to a simpler expression. If CanReduce    * returns true, this should return a valid expression. This    * method can return another node which itself must be reduced.    */
 specifier|public
 specifier|static
 name|Expression
@@ -6883,7 +6883,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Reduces the expression to a known node type (that is not an      * Extension node) or just returns the expression if it is already      * a known type. */
+comment|/**    * Reduces the expression to a known node type (that is not an    * Extension node) or just returns the expression if it is already    * a known type.    */
 specifier|public
 specifier|static
 name|Expression
@@ -6900,7 +6900,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a BinaryExpression that represents a reference      * equality comparison. */
+comment|/**    * Creates a BinaryExpression that represents a reference    * equality comparison.    */
 specifier|public
 specifier|static
 name|Expression
@@ -6926,7 +6926,7 @@ name|right
 argument_list|)
 return|;
 block|}
-comment|/** Creates a BinaryExpression that represents a reference      * inequality comparison. */
+comment|/**    * Creates a BinaryExpression that represents a reference    * inequality comparison.    */
 specifier|public
 specifier|static
 name|Expression
@@ -6952,7 +6952,7 @@ name|right
 argument_list|)
 return|;
 block|}
-comment|/** Creates a UnaryExpression that represents a rethrowing of an      * exception. */
+comment|/**    * Creates a UnaryExpression that represents a rethrowing of an    * exception.    */
 specifier|public
 specifier|static
 name|UnaryExpression
@@ -6966,7 +6966,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a UnaryExpression that represents a rethrowing of an      * exception with a given type. */
+comment|/**    * Creates a UnaryExpression that represents a rethrowing of an    * exception with a given type.    */
 specifier|public
 specifier|static
 name|UnaryExpression
@@ -6983,7 +6983,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a GotoExpression representing a return statement. */
+comment|/**    * Creates a GotoExpression representing a return statement.    */
 specifier|public
 specifier|static
 name|GotoExpression
@@ -7005,7 +7005,7 @@ literal|null
 argument_list|)
 return|;
 block|}
-comment|/** Creates a GotoExpression representing a return statement. The      * value passed to the label upon jumping can be specified. */
+comment|/**    * Creates a GotoExpression representing a return statement. The    * value passed to the label upon jumping can be specified.    */
 specifier|public
 specifier|static
 name|GotoExpression
@@ -7058,7 +7058,7 @@ name|expression
 argument_list|)
 return|;
 block|}
-comment|/** Creates a GotoExpression representing a return statement with      * the specified type. */
+comment|/**    * Creates a GotoExpression representing a return statement with    * the specified type.    */
 specifier|public
 specifier|static
 name|GotoExpression
@@ -7078,7 +7078,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a GotoExpression representing a return statement with      * the specified type. The value passed to the label upon jumping      * can be specified. */
+comment|/**    * Creates a GotoExpression representing a return statement with    * the specified type. The value passed to the label upon jumping    * can be specified.    */
 specifier|public
 specifier|static
 name|GotoExpression
@@ -7101,7 +7101,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a BinaryExpression that represents a bitwise      * right-shift operation. */
+comment|/**    * Creates a BinaryExpression that represents a bitwise    * right-shift operation.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -7127,7 +7127,7 @@ name|right
 argument_list|)
 return|;
 block|}
-comment|/** Creates a BinaryExpression that represents a bitwise      * right-shift operation. */
+comment|/**    * Creates a BinaryExpression that represents a bitwise    * right-shift operation.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -7160,7 +7160,7 @@ name|method
 argument_list|)
 return|;
 block|}
-comment|/** Creates a BinaryExpression that represents a bitwise      * right-shift assignment operation. */
+comment|/**    * Creates a BinaryExpression that represents a bitwise    * right-shift assignment operation.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -7186,7 +7186,7 @@ name|right
 argument_list|)
 return|;
 block|}
-comment|/** Creates a BinaryExpression that represents a bitwise      * right-shift assignment operation. */
+comment|/**    * Creates a BinaryExpression that represents a bitwise    * right-shift assignment operation.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -7219,7 +7219,7 @@ name|method
 argument_list|)
 return|;
 block|}
-comment|/** Creates a BinaryExpression that represents a bitwise      * right-shift assignment operation. */
+comment|/**    * Creates a BinaryExpression that represents a bitwise    * right-shift assignment operation.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -7257,7 +7257,7 @@ name|lambdaExpression
 argument_list|)
 return|;
 block|}
-comment|/** Creates an instance of RuntimeVariablesExpression. */
+comment|/**    * Creates an instance of RuntimeVariablesExpression.    */
 specifier|public
 specifier|static
 name|RuntimeVariablesExpression
@@ -7277,7 +7277,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates an instance of RuntimeVariablesExpression. */
+comment|/**    * Creates an instance of RuntimeVariablesExpression.    */
 specifier|public
 specifier|static
 name|RuntimeVariablesExpression
@@ -7295,7 +7295,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a BinaryExpression that represents an arithmetic      * subtraction operation that does not have overflow checking. */
+comment|/**    * Creates a BinaryExpression that represents an arithmetic    * subtraction operation that does not have overflow checking.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -7321,7 +7321,7 @@ name|right
 argument_list|)
 return|;
 block|}
-comment|/** Creates a BinaryExpression that represents an arithmetic      * subtraction operation that does not have overflow checking. */
+comment|/**    * Creates a BinaryExpression that represents an arithmetic    * subtraction operation that does not have overflow checking.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -7361,7 +7361,7 @@ name|method
 argument_list|)
 return|;
 block|}
-comment|/** Creates a BinaryExpression that represents a subtraction      * assignment operation that does not have overflow checking. */
+comment|/**    * Creates a BinaryExpression that represents a subtraction    * assignment operation that does not have overflow checking.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -7387,7 +7387,7 @@ name|right
 argument_list|)
 return|;
 block|}
-comment|/** Creates a BinaryExpression that represents a subtraction      * assignment operation that does not have overflow checking. */
+comment|/**    * Creates a BinaryExpression that represents a subtraction    * assignment operation that does not have overflow checking.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -7420,7 +7420,7 @@ name|method
 argument_list|)
 return|;
 block|}
-comment|/** Creates a BinaryExpression that represents a subtraction      * assignment operation that does not have overflow checking. */
+comment|/**    * Creates a BinaryExpression that represents a subtraction    * assignment operation that does not have overflow checking.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -7458,7 +7458,7 @@ name|lambdaExpression
 argument_list|)
 return|;
 block|}
-comment|/** Creates a BinaryExpression that represents a subtraction      * assignment operation that has overflow checking. */
+comment|/**    * Creates a BinaryExpression that represents a subtraction    * assignment operation that has overflow checking.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -7484,7 +7484,7 @@ name|right
 argument_list|)
 return|;
 block|}
-comment|/** Creates a BinaryExpression that represents a subtraction      * assignment operation that has overflow checking. */
+comment|/**    * Creates a BinaryExpression that represents a subtraction    * assignment operation that has overflow checking.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -7517,7 +7517,7 @@ name|method
 argument_list|)
 return|;
 block|}
-comment|/** Creates a BinaryExpression that represents a subtraction      * assignment operation that has overflow checking. */
+comment|/**    * Creates a BinaryExpression that represents a subtraction    * assignment operation that has overflow checking.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -7555,7 +7555,7 @@ name|lambdaExpression
 argument_list|)
 return|;
 block|}
-comment|/** Creates a BinaryExpression that represents an arithmetic      * subtraction operation that has overflow checking. */
+comment|/**    * Creates a BinaryExpression that represents an arithmetic    * subtraction operation that has overflow checking.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -7581,7 +7581,7 @@ name|right
 argument_list|)
 return|;
 block|}
-comment|/** Creates a BinaryExpression that represents an arithmetic      * subtraction operation that has overflow checking. */
+comment|/**    * Creates a BinaryExpression that represents an arithmetic    * subtraction operation that has overflow checking.    */
 specifier|public
 specifier|static
 name|BinaryExpression
@@ -7621,7 +7621,7 @@ name|method
 argument_list|)
 return|;
 block|}
-comment|/** Creates a SwitchExpression that represents a switch statement      * without a default case. */
+comment|/**    * Creates a SwitchExpression that represents a switch statement    * without a default case.    */
 specifier|public
 specifier|static
 name|SwitchExpression
@@ -7651,7 +7651,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/** Creates a SwitchExpression that represents a switch statement      * that has a default case. */
+comment|/**    * Creates a SwitchExpression that represents a switch statement    * that has a default case.    */
 specifier|public
 specifier|static
 name|SwitchExpression
@@ -7684,7 +7684,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/** Creates a SwitchExpression that represents a switch statement      * that has a default case. */
+comment|/**    * Creates a SwitchExpression that represents a switch statement    * that has a default case.    */
 specifier|public
 specifier|static
 name|SwitchExpression
@@ -7713,7 +7713,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a SwitchExpression that represents a switch statement      * that has a default case. */
+comment|/**    * Creates a SwitchExpression that represents a switch statement    * that has a default case.    */
 specifier|public
 specifier|static
 name|SwitchExpression
@@ -7749,7 +7749,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/** Creates a SwitchExpression that represents a switch statement      * that has a default case. */
+comment|/**    * Creates a SwitchExpression that represents a switch statement    * that has a default case.    */
 specifier|public
 specifier|static
 name|SwitchExpression
@@ -7781,7 +7781,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a SwitchExpression that represents a switch statement      * that has a default case.. */
+comment|/**    * Creates a SwitchExpression that represents a switch statement    * that has a default case..    */
 specifier|public
 specifier|static
 name|SwitchExpression
@@ -7822,7 +7822,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/** Creates a SwitchCase object to be used in a SwitchExpression      * object. */
+comment|/**    * Creates a SwitchCase object to be used in a SwitchExpression    * object.    */
 specifier|public
 specifier|static
 name|SwitchCase
@@ -7845,7 +7845,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a SwitchCase for use in a SwitchExpression. */
+comment|/**    * Creates a SwitchCase for use in a SwitchExpression.    */
 specifier|public
 specifier|static
 name|SwitchCase
@@ -7871,7 +7871,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/** Creates an instance of SymbolDocumentInfo. */
+comment|/**    * Creates an instance of SymbolDocumentInfo.    */
 specifier|public
 specifier|static
 name|SymbolDocumentInfo
@@ -7888,7 +7888,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates an instance of SymbolDocumentInfo. */
+comment|/**    * Creates an instance of SymbolDocumentInfo.    */
 specifier|public
 specifier|static
 name|SymbolDocumentInfo
@@ -7908,7 +7908,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates an instance of SymbolDocumentInfo. */
+comment|/**    * Creates an instance of SymbolDocumentInfo.    */
 specifier|public
 specifier|static
 name|SymbolDocumentInfo
@@ -7931,7 +7931,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates an instance of SymbolDocumentInfo. */
+comment|/**    * Creates an instance of SymbolDocumentInfo.    */
 specifier|public
 specifier|static
 name|SymbolDocumentInfo
@@ -7957,7 +7957,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a UnaryExpression that represents a throwing of an      * exception. */
+comment|/**    * Creates a UnaryExpression that represents a throwing of an    * exception.    */
 specifier|public
 specifier|static
 name|UnaryExpression
@@ -7974,7 +7974,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a UnaryExpression that represents a throwing of an      * exception with a given type. */
+comment|/**    * Creates a UnaryExpression that represents a throwing of an    * exception with a given type.    */
 specifier|public
 specifier|static
 name|UnaryExpression
@@ -7994,7 +7994,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a TryExpression representing a try block with any      * number of catch statements and neither a fault nor finally      * block. */
+comment|/**    * Creates a TryExpression representing a try block with any    * number of catch statements and neither a fault nor finally    * block.    */
 specifier|public
 specifier|static
 name|TryExpression
@@ -8015,7 +8015,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a TryExpression representing a try block with any      * number of catch statements and a finally block. */
+comment|/**    * Creates a TryExpression representing a try block with any    * number of catch statements and a finally block.    */
 specifier|public
 specifier|static
 name|TryExpression
@@ -8036,7 +8036,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a TryExpression representing a try block with a fault      * block and no catch statements. */
+comment|/**    * Creates a TryExpression representing a try block with a fault    * block and no catch statements.    */
 specifier|public
 specifier|static
 name|TryExpression
@@ -8056,7 +8056,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a TryExpression representing a try block with a      * finally block and no catch statements. */
+comment|/**    * Creates a TryExpression representing a try block with a    * finally block and no catch statements.    */
 specifier|public
 specifier|static
 name|TryExpression
@@ -8076,7 +8076,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a Type object that represents a generic System.Action      * delegate type that has specific type arguments. */
+comment|/**    * Creates a Type object that represents a generic System.Action    * delegate type that has specific type arguments.    */
 specifier|public
 specifier|static
 name|boolean
@@ -8098,7 +8098,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a Type object that represents a generic System.Func      * delegate type that has specific type arguments. The last type      * argument specifies the return type of the created delegate. */
+comment|/**    * Creates a Type object that represents a generic System.Func    * delegate type that has specific type arguments. The last type    * argument specifies the return type of the created delegate.    */
 specifier|public
 specifier|static
 name|boolean
@@ -8120,7 +8120,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a UnaryExpression that represents an explicit      * reference or boxing conversion where null is supplied if the      * conversion fails. */
+comment|/**    * Creates a UnaryExpression that represents an explicit    * reference or boxing conversion where null is supplied if the    * conversion fails.    */
 specifier|public
 specifier|static
 name|UnaryExpression
@@ -8140,7 +8140,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a TypeBinaryExpression that compares run-time type      * identity. */
+comment|/**    * Creates a TypeBinaryExpression that compares run-time type    * identity.    */
 specifier|public
 specifier|static
 name|TypeBinaryExpression
@@ -8160,7 +8160,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a TypeBinaryExpression. */
+comment|/**    * Creates a TypeBinaryExpression.    */
 specifier|public
 specifier|static
 name|TypeBinaryExpression
@@ -8187,7 +8187,7 @@ name|type
 argument_list|)
 return|;
 block|}
-comment|/** Creates a UnaryExpression that represents a unary plus      * operation. */
+comment|/**    * Creates a UnaryExpression that represents a unary plus    * operation.    */
 specifier|public
 specifier|static
 name|UnaryExpression
@@ -8208,7 +8208,7 @@ name|expression
 argument_list|)
 return|;
 block|}
-comment|/** Creates a UnaryExpression that represents a unary plus      * operation. */
+comment|/**    * Creates a UnaryExpression that represents a unary plus    * operation.    */
 specifier|public
 specifier|static
 name|UnaryExpression
@@ -8239,7 +8239,7 @@ name|method
 argument_list|)
 return|;
 block|}
-comment|/** Creates a UnaryExpression that represents an explicit      * unboxing. */
+comment|/**    * Creates a UnaryExpression that represents an explicit    * unboxing.    */
 specifier|public
 specifier|static
 name|UnaryExpression
@@ -8266,7 +8266,7 @@ name|expression
 argument_list|)
 return|;
 block|}
-comment|/** Creates a ParameterExpression node that can be used to      * identify a parameter or a variable in an expression tree. */
+comment|/**    * Creates a ParameterExpression node that can be used to    * identify a parameter or a variable in an expression tree.    */
 specifier|public
 specifier|static
 name|ParameterExpression
@@ -8283,7 +8283,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a ParameterExpression node that can be used to      * identify a parameter or a variable in an expression tree. */
+comment|/**    * Creates a ParameterExpression node that can be used to    * identify a parameter or a variable in an expression tree.    */
 specifier|public
 specifier|static
 name|ParameterExpression
@@ -8308,7 +8308,7 @@ name|name
 argument_list|)
 return|;
 block|}
-comment|/** Reduces the node and then calls the visitor delegate on the      * reduced expression. The method throws an exception if the node      * is not reducible.*/
+comment|/**    * Reduces the node and then calls the visitor delegate on the    * reduced expression. The method throws an exception if the node    * is not reducible.    */
 specifier|public
 specifier|static
 name|Expression
@@ -8325,7 +8325,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a WhileExpression representing a while loop. */
+comment|/**    * Creates a WhileExpression representing a while loop.    */
 specifier|public
 specifier|static
 name|WhileExpression
@@ -8348,7 +8348,7 @@ name|body
 argument_list|)
 return|;
 block|}
-comment|/** Creates a statement that declares a variable. */
+comment|/**    * Creates a statement that declares a variable.    */
 specifier|public
 specifier|static
 name|DeclarationExpression
@@ -8376,7 +8376,7 @@ name|initializer
 argument_list|)
 return|;
 block|}
-comment|/** Creates an expression that declares and initializes a variable. No      * type is required; it is assumed that the variable is the same type as      * the initializer. You can retrieve the {@link ParameterExpression} from      * the {@link DeclarationExpression#parameter} field of the result. */
+comment|/**    * Creates an expression that declares and initializes a variable. No    * type is required; it is assumed that the variable is the same type as    * the initializer. You can retrieve the {@link ParameterExpression} from    * the {@link DeclarationExpression#parameter} field of the result.    */
 specifier|public
 specifier|static
 name|DeclarationExpression
@@ -8411,7 +8411,7 @@ name|initializer
 argument_list|)
 return|;
 block|}
-comment|/** Creates a statement that executes an expression. */
+comment|/**    * Creates a statement that executes an expression.    */
 specifier|public
 specifier|static
 name|Statement
@@ -8435,7 +8435,7 @@ name|expression
 argument_list|)
 return|;
 block|}
-comment|/** Creates an empty fluent list. */
+comment|/**    * Creates an empty fluent list.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -8457,7 +8457,7 @@ argument_list|>
 argument_list|()
 return|;
 block|}
-comment|/** Creates a fluent list with given elements. */
+comment|/**    * Creates a fluent list with given elements.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -8490,7 +8490,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/** Creates a fluent list with given elements. */
+comment|/**    * Creates a fluent list with given elements.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -9248,13 +9248,13 @@ comment|// Some interfaces we'd rather not implement yet. They don't seem releva
 comment|// in the Java world.
 interface|interface
 name|PropertyInfo
-block|{}
+block|{   }
 interface|interface
 name|RuntimeVariablesExpression
-block|{}
+block|{   }
 interface|interface
 name|SymbolDocumentInfo
-block|{}
+block|{   }
 specifier|public
 interface|interface
 name|FluentList

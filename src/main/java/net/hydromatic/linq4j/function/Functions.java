@@ -439,7 +439,7 @@ return|return
 name|inverseMap
 return|;
 block|}
-comment|/**      * A predicate with one parameter that always returns {@code true}.      *      * @param<T> First parameter type      * @return Predicate that always returns true      */
+comment|/**    * A predicate with one parameter that always returns {@code true}.    *    * @param<T> First parameter type    *    * @return Predicate that always returns true    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -465,7 +465,7 @@ operator|.
 name|TRUE
 return|;
 block|}
-comment|/**      * A predicate with one parameter that always returns {@code true}.      *      * @param<T> First parameter type      * @return Predicate that always returns true      */
+comment|/**    * A predicate with one parameter that always returns {@code true}.    *    * @param<T> First parameter type    *    * @return Predicate that always returns true    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -491,7 +491,7 @@ operator|.
 name|FALSE
 return|;
 block|}
-comment|/**      * A predicate with two parameters that always returns {@code true}.      *      * @param<T1> First parameter type      * @param<T2> Second parameter type      * @return Predicate that always returns true      */
+comment|/**    * A predicate with two parameters that always returns {@code true}.    *    * @param<T1> First parameter type    * @param<T2> Second parameter type    *    * @return Predicate that always returns true    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -523,7 +523,7 @@ operator|.
 name|TRUE
 return|;
 block|}
-comment|/**      * A predicate with two parameters that always returns {@code false}.      *      * @param<T1> First parameter type      * @param<T2> Second parameter type      * @return Predicate that always returns false      */
+comment|/**    * A predicate with two parameters that always returns {@code false}.    *    * @param<T1> First parameter type    * @param<T2> Second parameter type    *    * @return Predicate that always returns false    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -579,7 +579,7 @@ operator|.
 name|IDENTITY
 return|;
 block|}
-comment|/**      * Creates a predicate that returns whether an object is an instance of a      * particular type or is null.      *      * @param clazz Desired type      * @param<T> Type of objects to test      * @param<T2> Desired type      * @return Predicate that tests for desired type      */
+comment|/**    * Creates a predicate that returns whether an object is an instance of a    * particular type or is null.    *    * @param clazz Desired type    * @param<T> Type of objects to test    * @param<T2> Desired type    *    * @return Predicate that tests for desired type    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -689,7 +689,7 @@ block|}
 block|}
 return|;
 block|}
-comment|/**      * Converts a 2-parameter function to a predicate.      */
+comment|/**    * Converts a 2-parameter function to a predicate.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -752,7 +752,7 @@ block|}
 block|}
 return|;
 block|}
-comment|/**      * Converts a 1-parameter function to a predicate.      */
+comment|/**    * Converts a 1-parameter function to a predicate.    */
 specifier|private
 specifier|static
 parameter_list|<
@@ -802,7 +802,7 @@ block|}
 block|}
 return|;
 block|}
-comment|/**      * Returns the appropriate interface for a lambda function with      * 1 argument and the given return type.      *      *<p>For example:</p>      * functionClass(Integer.TYPE) returns IntegerFunction1.class      * functionClass(String.class) returns Function1.class      *      * @param aClass Return type      * @return Function class      */
+comment|/**    * Returns the appropriate interface for a lambda function with    * 1 argument and the given return type.    *    *<p>For example:</p>    * functionClass(Integer.TYPE) returns IntegerFunction1.class    * functionClass(String.class) returns Function1.class    *    * @param aClass Return type    *    * @return Function class    */
 specifier|public
 specifier|static
 name|Class
@@ -849,7 +849,7 @@ operator|.
 name|class
 return|;
 block|}
-comment|/** Adapts an {@link IntegerFunction1} (that returns an {@code int}) to      * an {@link Function1} returning an {@link Integer}. */
+comment|/**    * Adapts an {@link IntegerFunction1} (that returns an {@code int}) to    * an {@link Function1} returning an {@link Integer}.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -901,7 +901,7 @@ block|}
 block|}
 return|;
 block|}
-comment|/** Adapts a {@link DoubleFunction1} (that returns a {@code double}) to      * an {@link Function1} returning a {@link Double}. */
+comment|/**    * Adapts a {@link DoubleFunction1} (that returns a {@code double}) to    * an {@link Function1} returning a {@link Double}.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -953,7 +953,7 @@ block|}
 block|}
 return|;
 block|}
-comment|/** Adapts a {@link LongFunction1} (that returns a {@code long}) to      * an {@link Function1} returning a {@link Long}. */
+comment|/**    * Adapts a {@link LongFunction1} (that returns a {@code long}) to    * an {@link Function1} returning a {@link Long}.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -1005,7 +1005,7 @@ block|}
 block|}
 return|;
 block|}
-comment|/** Adapts a {@link FloatFunction1} (that returns a {@code float}) to      * an {@link Function1} returning a {@link Float}. */
+comment|/**    * Adapts a {@link FloatFunction1} (that returns a {@code float}) to    * an {@link Function1} returning a {@link Float}.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -1057,7 +1057,7 @@ block|}
 block|}
 return|;
 block|}
-comment|/** Creates a view of a list that applies a function to each element. */
+comment|/**    * Creates a view of a list that applies a function to each element.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -1133,7 +1133,7 @@ block|}
 block|}
 return|;
 block|}
-comment|/** Creates a copy of a list, applying a function to each element. */
+comment|/**    * Creates a copy of a list, applying a function to each element.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -1208,7 +1208,7 @@ return|return
 name|list2
 return|;
 block|}
-comment|/** Returns an {@link EqualityComparer} that uses object identity and hash      * code. */
+comment|/**    * Returns an {@link EqualityComparer} that uses object identity and hash    * code.    */
 annotation|@
 name|SuppressWarnings
 argument_list|(
@@ -1233,7 +1233,7 @@ operator|)
 name|IDENTITY_COMPARER
 return|;
 block|}
-comment|/** Returns an {@link EqualityComparer} that works on arrays of objects. */
+comment|/**    * Returns an {@link EqualityComparer} that works on arrays of objects.    */
 annotation|@
 name|SuppressWarnings
 argument_list|(

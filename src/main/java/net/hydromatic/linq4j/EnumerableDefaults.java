@@ -73,7 +73,7 @@ specifier|abstract
 class|class
 name|EnumerableDefaults
 block|{
-comment|/** Applies an accumulator function over a sequence. */
+comment|/**    * Applies an accumulator function over a sequence.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -128,7 +128,7 @@ return|return
 name|result
 return|;
 block|}
-comment|/** Applies an accumulator function over a      * sequence. The specified seed value is used as the initial      * accumulator value. */
+comment|/**    * Applies an accumulator function over a    * sequence. The specified seed value is used as the initial    * accumulator value.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -188,7 +188,7 @@ return|return
 name|result
 return|;
 block|}
-comment|/** Applies an accumulator function over a      * sequence. The specified seed value is used as the initial      * accumulator value, and the specified function is used to select      * the result value. */
+comment|/**    * Applies an accumulator function over a    * sequence. The specified seed value is used as the initial    * accumulator value, and the specified function is used to select    * the result value.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -263,7 +263,7 @@ name|accumulate
 argument_list|)
 return|;
 block|}
-comment|/** Determines whether all elements of a sequence      * satisfy a condition. */
+comment|/**    * Determines whether all elements of a sequence    * satisfy a condition.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -292,7 +292,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Determines whether a sequence contains any      * elements. */
+comment|/**    * Determines whether a sequence contains any    * elements.    */
 specifier|public
 specifier|static
 name|boolean
@@ -312,7 +312,7 @@ name|moveNext
 argument_list|()
 return|;
 block|}
-comment|/** Determines whether any element of a sequence      * satisfies a condition. */
+comment|/**    * Determines whether any element of a sequence    * satisfies a condition.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -341,7 +341,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Returns the input typed as Enumerable<TSource>.      *      *<p>The AsEnumerable<TSource>(Enumerable<TSource>) method has no effect      * other than to change the compile-time type of source from a type that      * implements Enumerable<TSource> to Enumerable<TSource> itself.      *      *<p>AsEnumerable<TSource>(Enumerable<TSource>) can be used to choose      * between query implementations when a sequence implements      * Enumerable<TSource> but also has a different set of public query methods      * available. For example, given a generic class Table that implements      * Enumerable<TSource> and has its own methods such as Where, Select, and      * SelectMany, a call to Where would invoke the public Where method of      * Table. A Table type that represents a database table could have a Where      * method that takes the predicate argument as an expression tree and      * converts the tree to SQL for remote execution. If remote execution is not      * desired, for example because the predicate invokes a local method, the      * AsEnumerable<TSource> method can be used to hide the custom methods and      * instead make the standard query operators available.      */
+comment|/**    * Returns the input typed as Enumerable<TSource>.    *    *<p>The AsEnumerable<TSource>(Enumerable<TSource>) method has no effect    * other than to change the compile-time type of source from a type that    * implements Enumerable<TSource> to Enumerable<TSource> itself.    *    *<p>AsEnumerable<TSource>(Enumerable<TSource>) can be used to choose    * between query implementations when a sequence implements    * Enumerable<TSource> but also has a different set of public query methods    * available. For example, given a generic class Table that implements    * Enumerable<TSource> and has its own methods such as Where, Select, and    * SelectMany, a call to Where would invoke the public Where method of    * Table. A Table type that represents a database table could have a Where    * method that takes the predicate argument as an expression tree and    * converts the tree to SQL for remote execution. If remote execution is not    * desired, for example because the predicate invokes a local method, the    * AsEnumerable<TSource> method can be used to hide the custom methods and    * instead make the standard query operators available.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -364,7 +364,7 @@ return|return
 name|enumerable
 return|;
 block|}
-comment|/**      * Converts an Enumerable to an IQueryable.      *      *<p>Analogous to the LINQ's Enumerable.AsQueryable extension method.</p>      *      * @param enumerable Enumerable      * @param<TSource> Element type      * @return A queryable      */
+comment|/**    * Converts an Enumerable to an IQueryable.    *    *<p>Analogous to the LINQ's Enumerable.AsQueryable extension method.</p>    *    * @param enumerable Enumerable    * @param<TSource> Element type    *    * @return A queryable    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -390,7 +390,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Computes the average of a sequence of Decimal      * values that are obtained by invoking a transform function on      * each element of the input sequence. */
+comment|/**    * Computes the average of a sequence of Decimal    * values that are obtained by invoking a transform function on    * each element of the input sequence.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -434,7 +434,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/** Computes the average of a sequence of nullable      * Decimal values that are obtained by invoking a transform      * function on each element of the input sequence. */
+comment|/**    * Computes the average of a sequence of nullable    * Decimal values that are obtained by invoking a transform    * function on each element of the input sequence.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -478,7 +478,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/** Computes the average of a sequence of Double      * values that are obtained by invoking a transform function on      * each element of the input sequence. */
+comment|/**    * Computes the average of a sequence of Double    * values that are obtained by invoking a transform function on    * each element of the input sequence.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -514,7 +514,7 @@ name|source
 argument_list|)
 return|;
 block|}
-comment|/** Computes the average of a sequence of nullable      * Double values that are obtained by invoking a transform      * function on each element of the input sequence. */
+comment|/**    * Computes the average of a sequence of nullable    * Double values that are obtained by invoking a transform    * function on each element of the input sequence.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -550,7 +550,7 @@ name|source
 argument_list|)
 return|;
 block|}
-comment|/** Computes the average of a sequence of int values      * that are obtained by invoking a transform function on each      * element of the input sequence. */
+comment|/**    * Computes the average of a sequence of int values    * that are obtained by invoking a transform function on each    * element of the input sequence.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -586,7 +586,7 @@ name|source
 argument_list|)
 return|;
 block|}
-comment|/** Computes the average of a sequence of nullable      * int values that are obtained by invoking a transform function      * on each element of the input sequence. */
+comment|/**    * Computes the average of a sequence of nullable    * int values that are obtained by invoking a transform function    * on each element of the input sequence.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -622,7 +622,7 @@ name|source
 argument_list|)
 return|;
 block|}
-comment|/** Computes the average of a sequence of long values      * that are obtained by invoking a transform function on each      * element of the input sequence. */
+comment|/**    * Computes the average of a sequence of long values    * that are obtained by invoking a transform function on each    * element of the input sequence.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -658,7 +658,7 @@ name|source
 argument_list|)
 return|;
 block|}
-comment|/** Computes the average of a sequence of nullable      * long values that are obtained by invoking a transform function      * on each element of the input sequence. */
+comment|/**    * Computes the average of a sequence of nullable    * long values that are obtained by invoking a transform function    * on each element of the input sequence.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -694,7 +694,7 @@ name|source
 argument_list|)
 return|;
 block|}
-comment|/** Computes the average of a sequence of Float      * values that are obtained by invoking a transform function on      * each element of the input sequence. */
+comment|/**    * Computes the average of a sequence of Float    * values that are obtained by invoking a transform function on    * each element of the input sequence.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -730,7 +730,7 @@ name|source
 argument_list|)
 return|;
 block|}
-comment|/** Computes the average of a sequence of nullable      * Float values that are obtained by invoking a transform      * function on each element of the input sequence. */
+comment|/**    * Computes the average of a sequence of nullable    * Float values that are obtained by invoking a transform    * function on each element of the input sequence.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -766,7 +766,7 @@ name|source
 argument_list|)
 return|;
 block|}
-comment|/**      *<p>Analogous to LINQ's Enumerable.Cast extension method.</p>      *      * @param clazz Target type      * @param<T2> Target type      * @return Collection of T2      */
+comment|/**    *<p>Analogous to LINQ's Enumerable.Cast extension method.</p>    *    * @param clazz Target type    * @param<T2> Target type    *    * @return Collection of T2    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -830,7 +830,7 @@ block|}
 block|}
 return|;
 block|}
-comment|/** Concatenates two sequences. */
+comment|/**    * Concatenates two sequences.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -878,7 +878,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/** Determines whether a sequence contains a specified      * element by using the default equality comparer. */
+comment|/**    * Determines whether a sequence contains a specified    * element by using the default equality comparer.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -926,7 +926,7 @@ return|return
 literal|false
 return|;
 block|}
-comment|/** Determines whether a sequence contains a specified      * element by using a specified EqualityComparer<TSource>. */
+comment|/**    * Determines whether a sequence contains a specified    * element by using a specified EqualityComparer<TSource>.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -955,7 +955,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Returns the number of elements in a      * sequence. */
+comment|/**    * Returns the number of elements in a    * sequence.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -989,7 +989,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/** Returns a number that represents how many elements      * in the specified sequence satisfy a condition. */
+comment|/**    * Returns a number that represents how many elements    * in the specified sequence satisfy a condition.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -1023,7 +1023,7 @@ name|predicate
 argument_list|)
 return|;
 block|}
-comment|/** Returns the elements of the specified sequence or      * the type parameter's default value in a singleton collection if      * the sequence is empty. */
+comment|/**    * Returns the elements of the specified sequence or    * the type parameter's default value in a singleton collection if    * the sequence is empty.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -1049,7 +1049,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Returns the elements of the specified sequence or      * the specified value in a singleton collection if the sequence      * is empty. */
+comment|/**    * Returns the elements of the specified sequence or    * the specified value in a singleton collection if the sequence    * is empty.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -1075,7 +1075,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Returns distinct elements from a sequence by using      * the default equality comparer to compare values. */
+comment|/**    * Returns distinct elements from a sequence by using    * the default equality comparer to compare values.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -1101,7 +1101,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Returns distinct elements from a sequence by using      * a specified EqualityComparer<TSource> to compare values. */
+comment|/**    * Returns distinct elements from a sequence by using    * a specified EqualityComparer<TSource> to compare values.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -1130,7 +1130,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Returns the element at a specified index in a      * sequence. */
+comment|/**    * Returns the element at a specified index in a    * sequence.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -1156,7 +1156,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Returns the element at a specified index in a      * sequence or a default value if the index is out of      * range. */
+comment|/**    * Returns the element at a specified index in a    * sequence or a default value if the index is out of    * range.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -1182,7 +1182,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Produces the set difference of two sequences by      * using the default equality comparer to compare values. (Defined      * by Enumerable.) */
+comment|/**    * Produces the set difference of two sequences by    * using the default equality comparer to compare values. (Defined    * by Enumerable.)    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -1252,7 +1252,7 @@ name|set
 argument_list|)
 return|;
 block|}
-comment|/** Produces the set difference of two sequences by      * using the specified EqualityComparer<TSource> to compare      * values. */
+comment|/**    * Produces the set difference of two sequences by    * using the specified EqualityComparer<TSource> to compare    * values.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -1382,7 +1382,7 @@ name|unwrapper
 argument_list|)
 return|;
 block|}
-comment|/** Returns the first element of a sequence. (Defined      * by Enumerable.) */
+comment|/**    * Returns the first element of a sequence. (Defined    * by Enumerable.)    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -1405,7 +1405,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Returns the first element in a sequence that      * satisfies a specified condition. */
+comment|/**    * Returns the first element in a sequence that    * satisfies a specified condition.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -1434,7 +1434,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Returns the first element of a sequence, or a      * default value if the sequence contains no elements. */
+comment|/**    * Returns the first element of a sequence, or a    * default value if the sequence contains no elements.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -1457,7 +1457,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Returns the first element of the sequence that      * satisfies a condition or a default value if no such element is      * found. */
+comment|/**    * Returns the first element of the sequence that    * satisfies a condition or a default value if no such element is    * found.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -1486,7 +1486,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Groups the elements of a sequence according to a      * specified key selector function. */
+comment|/**    * Groups the elements of a sequence according to a    * specified key selector function.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -1531,7 +1531,7 @@ name|keySelector
 argument_list|)
 return|;
 block|}
-comment|/** Groups the elements of a sequence according to a      * specified key selector function and compares the keys by using      * a specified comparer. */
+comment|/**    * Groups the elements of a sequence according to a    * specified key selector function and compares the keys by using    * a specified comparer.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -1582,7 +1582,7 @@ name|comparer
 argument_list|)
 return|;
 block|}
-comment|/** Groups the elements of a sequence according to a      * specified key selector function and projects the elements for      * each group by using a specified function. */
+comment|/**    * Groups the elements of a sequence according to a    * specified key selector function and projects the elements for    * each group by using a specified function.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -1633,7 +1633,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Groups the elements of a sequence according to a      * specified key selector function and creates a result value from      * each group and its key. */
+comment|/**    * Groups the elements of a sequence according to a    * specified key selector function and creates a result value from    * each group and its key.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -1689,7 +1689,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Groups the elements of a sequence according to a      * key selector function. The keys are compared by using a      * comparer and each group's elements are projected by using a      * specified function. */
+comment|/**    * Groups the elements of a sequence according to a    * key selector function. The keys are compared by using a    * comparer and each group's elements are projected by using a    * specified function.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -1746,7 +1746,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Groups the elements of a sequence according to a      * specified key selector function and creates a result value from      * each group and its key. The keys are compared by using a      * specified comparer. */
+comment|/**    * Groups the elements of a sequence according to a    * specified key selector function and creates a result value from    * each group and its key. The keys are compared by using a    * specified comparer.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -1800,7 +1800,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Groups the elements of a sequence according to a      * specified key selector function and creates a result value from      * each group and its key. The elements of each group are      * projected by using a specified function. */
+comment|/**    * Groups the elements of a sequence according to a    * specified key selector function and creates a result value from    * each group and its key. The elements of each group are    * projected by using a specified function.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -1861,7 +1861,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Groups the elements of a sequence according to a      * specified key selector function and creates a result value from      * each group and its key. Key values are compared by using a      * specified comparer, and the elements of each group are      * projected by using a specified function. */
+comment|/**    * Groups the elements of a sequence according to a    * specified key selector function and creates a result value from    * each group and its key. Key values are compared by using a    * specified comparer, and the elements of each group are    * projected by using a specified function.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -1928,7 +1928,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Groups the elements of a sequence according to a      * specified key selector function, initializing an accumulator for each      * group and adding to it each time an element with the same key is seen.      * Creates a result value from each accumulator and its key using a      * specified function. */
+comment|/**    * Groups the elements of a sequence according to a    * specified key selector function, initializing an accumulator for each    * group and adding to it each time an element with the same key is seen.    * Creates a result value from each accumulator and its key using a    * specified function.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -2012,7 +2012,7 @@ name|resultSelector
 argument_list|)
 return|;
 block|}
-comment|/** Groups the elements of a sequence according to a      * specified key selector function, initializing an accumulator for each      * group and adding to it each time an element with the same key is seen.      * Creates a result value from each accumulator and its key using a      * specified function. Key values are compared by using a      * specified comparer. */
+comment|/**    * Groups the elements of a sequence according to a    * specified key selector function, initializing an accumulator for each    * group and adding to it each time an element with the same key is seen.    * Creates a result value from each accumulator and its key using a    * specified function. Key values are compared by using a    * specified comparer.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -2384,7 +2384,7 @@ block|}
 block|}
 return|;
 block|}
-comment|/** Correlates the elements of two sequences based on      * equality of keys and groups the results. The default equality      * comparer is used to compare keys. */
+comment|/**    * Correlates the elements of two sequences based on    * equality of keys and groups the results. The default equality    * comparer is used to compare keys.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -2622,7 +2622,7 @@ block|}
 block|}
 return|;
 block|}
-comment|/** Correlates the elements of two sequences based on      * key equality and groups the results. A specified      * EqualityComparer<TSource> is used to compare keys. */
+comment|/**    * Correlates the elements of two sequences based on    * key equality and groups the results. A specified    * EqualityComparer<TSource> is used to compare keys.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -2695,7 +2695,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Produces the set intersection of two sequences by      * using the default equality comparer to compare values. (Defined      * by Enumerable.) */
+comment|/**    * Produces the set intersection of two sequences by    * using the default equality comparer to compare values. (Defined    * by Enumerable.)    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -2789,7 +2789,7 @@ name|set1
 argument_list|)
 return|;
 block|}
-comment|/** Produces the set intersection of two sequences by      * using the specified EqualityComparer<TSource> to compare      * values. */
+comment|/**    * Produces the set intersection of two sequences by    * using the specified EqualityComparer<TSource> to compare    * values.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -2949,7 +2949,7 @@ name|unwrapper
 argument_list|)
 return|;
 block|}
-comment|/** Correlates the elements of two sequences based on      * matching keys. The default equality comparer is used to compare      * keys. */
+comment|/**    * Correlates the elements of two sequences based on    * matching keys. The default equality comparer is used to compare    * keys.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -3028,7 +3028,7 @@ literal|null
 argument_list|)
 return|;
 block|}
-comment|/** Correlates the elements of two sequences based on      * matching keys. A specified EqualityComparer<TSource> is used to      * compare keys. */
+comment|/**    * Correlates the elements of two sequences based on    * matching keys. A specified EqualityComparer<TSource> is used to    * compare keys.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -3510,7 +3510,7 @@ block|}
 block|}
 return|;
 block|}
-comment|/** Returns the last element of a sequence. (Defined      * by Enumerable.) */
+comment|/**    * Returns the last element of a sequence. (Defined    * by Enumerable.)    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -3533,7 +3533,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Returns the last element of a sequence that      * satisfies a specified condition. */
+comment|/**    * Returns the last element of a sequence that    * satisfies a specified condition.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -3562,7 +3562,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Returns the last element of a sequence, or a      * default value if the sequence contains no elements. */
+comment|/**    * Returns the last element of a sequence, or a    * default value if the sequence contains no elements.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -3585,7 +3585,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Returns the last element of a sequence that      * satisfies a condition or a default value if no such element is      * found. */
+comment|/**    * Returns the last element of a sequence that    * satisfies a condition or a default value if no such element is    * found.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -3614,7 +3614,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Returns an long that represents the total number      * of elements in a sequence. */
+comment|/**    * Returns an long that represents the total number    * of elements in a sequence.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -3645,7 +3645,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/** Returns an long that represents how many elements      * in a sequence satisfy a condition. */
+comment|/**    * Returns an long that represents how many elements    * in a sequence satisfy a condition.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -3725,7 +3725,7 @@ return|return
 name|n
 return|;
 block|}
-comment|/** Returns the maximum value in a generic      * sequence. */
+comment|/**    * Returns the maximum value in a generic    * sequence.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -3770,7 +3770,7 @@ name|max
 argument_list|)
 return|;
 block|}
-comment|/** Invokes a transform function on each element of a      * sequence and returns the maximum Decimal value. */
+comment|/**    * Invokes a transform function on each element of a    * sequence and returns the maximum Decimal value.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -3821,7 +3821,7 @@ name|max
 argument_list|)
 return|;
 block|}
-comment|/** Invokes a transform function on each element of a      * sequence and returns the maximum nullable Decimal      * value. */
+comment|/**    * Invokes a transform function on each element of a    * sequence and returns the maximum nullable Decimal    * value.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -3872,7 +3872,7 @@ name|max
 argument_list|)
 return|;
 block|}
-comment|/** Invokes a transform function on each element of a      * sequence and returns the maximum Double value. */
+comment|/**    * Invokes a transform function on each element of a    * sequence and returns the maximum Double value.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -3915,7 +3915,7 @@ name|DOUBLE_MAX
 argument_list|)
 return|;
 block|}
-comment|/** Invokes a transform function on each element of a      * sequence and returns the maximum nullable Double      * value. */
+comment|/**    * Invokes a transform function on each element of a    * sequence and returns the maximum nullable Double    * value.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -3955,7 +3955,7 @@ name|DOUBLE_MAX
 argument_list|)
 return|;
 block|}
-comment|/** Invokes a transform function on each element of a      * sequence and returns the maximum int value. */
+comment|/**    * Invokes a transform function on each element of a    * sequence and returns the maximum int value.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -3998,7 +3998,7 @@ name|INTEGER_MAX
 argument_list|)
 return|;
 block|}
-comment|/** Invokes a transform function on each element of a      * sequence and returns the maximum nullable int value. (Defined      * by Enumerable.) */
+comment|/**    * Invokes a transform function on each element of a    * sequence and returns the maximum nullable int value. (Defined    * by Enumerable.)    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -4038,7 +4038,7 @@ name|INTEGER_MAX
 argument_list|)
 return|;
 block|}
-comment|/** Invokes a transform function on each element of a      * sequence and returns the maximum long value. */
+comment|/**    * Invokes a transform function on each element of a    * sequence and returns the maximum long value.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -4081,7 +4081,7 @@ name|LONG_MAX
 argument_list|)
 return|;
 block|}
-comment|/** Invokes a transform function on each element of a      * sequence and returns the maximum nullable long value. (Defined      * by Enumerable.) */
+comment|/**    * Invokes a transform function on each element of a    * sequence and returns the maximum nullable long value. (Defined    * by Enumerable.)    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -4121,7 +4121,7 @@ name|LONG_MAX
 argument_list|)
 return|;
 block|}
-comment|/** Invokes a transform function on each element of a      * sequence and returns the maximum Float value. */
+comment|/**    * Invokes a transform function on each element of a    * sequence and returns the maximum Float value.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -4164,7 +4164,7 @@ name|FLOAT_MAX
 argument_list|)
 return|;
 block|}
-comment|/** Invokes a transform function on each element of a      * sequence and returns the maximum nullable Float      * value. */
+comment|/**    * Invokes a transform function on each element of a    * sequence and returns the maximum nullable Float    * value.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -4204,7 +4204,7 @@ name|FLOAT_MAX
 argument_list|)
 return|;
 block|}
-comment|/** Invokes a transform function on each element of a      * generic sequence and returns the maximum resulting      * value. */
+comment|/**    * Invokes a transform function on each element of a    * generic sequence and returns the maximum resulting    * value.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -4264,7 +4264,7 @@ name|max
 argument_list|)
 return|;
 block|}
-comment|/** Returns the minimum value in a generic      * sequence. */
+comment|/**    * Returns the minimum value in a generic    * sequence.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -4393,7 +4393,7 @@ operator|.
 name|COMPARABLE_MAX
 return|;
 block|}
-comment|/** Invokes a transform function on each element of a      * sequence and returns the minimum Decimal value. */
+comment|/**    * Invokes a transform function on each element of a    * sequence and returns the minimum Decimal value.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -4444,7 +4444,7 @@ name|min
 argument_list|)
 return|;
 block|}
-comment|/** Invokes a transform function on each element of a      * sequence and returns the minimum nullable Decimal      * value. */
+comment|/**    * Invokes a transform function on each element of a    * sequence and returns the minimum nullable Decimal    * value.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -4495,7 +4495,7 @@ name|min
 argument_list|)
 return|;
 block|}
-comment|/** Invokes a transform function on each element of a      * sequence and returns the minimum Double value. */
+comment|/**    * Invokes a transform function on each element of a    * sequence and returns the minimum Double value.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -4538,7 +4538,7 @@ name|DOUBLE_MIN
 argument_list|)
 return|;
 block|}
-comment|/** Invokes a transform function on each element of a      * sequence and returns the minimum nullable Double      * value. */
+comment|/**    * Invokes a transform function on each element of a    * sequence and returns the minimum nullable Double    * value.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -4578,7 +4578,7 @@ name|DOUBLE_MIN
 argument_list|)
 return|;
 block|}
-comment|/** Invokes a transform function on each element of a      * sequence and returns the minimum int value. */
+comment|/**    * Invokes a transform function on each element of a    * sequence and returns the minimum int value.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -4621,7 +4621,7 @@ name|INTEGER_MIN
 argument_list|)
 return|;
 block|}
-comment|/** Invokes a transform function on each element of a      * sequence and returns the minimum nullable int value. (Defined      * by Enumerable.) */
+comment|/**    * Invokes a transform function on each element of a    * sequence and returns the minimum nullable int value. (Defined    * by Enumerable.)    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -4661,7 +4661,7 @@ name|INTEGER_MIN
 argument_list|)
 return|;
 block|}
-comment|/** Invokes a transform function on each element of a      * sequence and returns the minimum long value. */
+comment|/**    * Invokes a transform function on each element of a    * sequence and returns the minimum long value.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -4704,7 +4704,7 @@ name|LONG_MIN
 argument_list|)
 return|;
 block|}
-comment|/** Invokes a transform function on each element of a      * sequence and returns the minimum nullable long value. (Defined      * by Enumerable.) */
+comment|/**    * Invokes a transform function on each element of a    * sequence and returns the minimum nullable long value. (Defined    * by Enumerable.)    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -4744,7 +4744,7 @@ name|LONG_MIN
 argument_list|)
 return|;
 block|}
-comment|/** Invokes a transform function on each element of a      * sequence and returns the minimum Float value. */
+comment|/**    * Invokes a transform function on each element of a    * sequence and returns the minimum Float value.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -4787,7 +4787,7 @@ name|FLOAT_MIN
 argument_list|)
 return|;
 block|}
-comment|/** Invokes a transform function on each element of a      * sequence and returns the minimum nullable Float      * value. */
+comment|/**    * Invokes a transform function on each element of a    * sequence and returns the minimum nullable Float    * value.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -4827,7 +4827,7 @@ name|FLOAT_MIN
 argument_list|)
 return|;
 block|}
-comment|/** Invokes a transform function on each element of a      * generic sequence and returns the minimum resulting      * value. */
+comment|/**    * Invokes a transform function on each element of a    * generic sequence and returns the minimum resulting    * value.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -4887,7 +4887,7 @@ name|min
 argument_list|)
 return|;
 block|}
-comment|/**      * Filters the elements of an Enumerable based on a      * specified type.      *      *<p>Analogous to LINQ's Enumerable.OfType extension method.</p>      *      * @param clazz Target type      * @param<TResult> Target type      * @return Collection of T2      */
+comment|/**    * Filters the elements of an Enumerable based on a    * specified type.    *    *<p>Analogous to LINQ's Enumerable.OfType extension method.</p>    *    * @param clazz Target type    * @param<TResult> Target type    *    * @return Collection of T2    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -4937,7 +4937,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/** Sorts the elements of a sequence in ascending      * order according to a key. */
+comment|/**    * Sorts the elements of a sequence in ascending    * order according to a key.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -4979,7 +4979,7 @@ literal|null
 argument_list|)
 return|;
 block|}
-comment|/** Sorts the elements of a sequence in ascending      * order by using a specified comparer. */
+comment|/**    * Sorts the elements of a sequence in ascending    * order by using a specified comparer.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -5075,7 +5075,7 @@ name|valuesEnumerable
 argument_list|()
 return|;
 block|}
-comment|/** Sorts the elements of a sequence in descending      * order according to a key. */
+comment|/**    * Sorts the elements of a sequence in descending    * order according to a key.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -5123,7 +5123,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/** Sorts the elements of a sequence in descending      * order by using a specified comparer. */
+comment|/**    * Sorts the elements of a sequence in descending    * order by using a specified comparer.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -5174,7 +5174,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/** Inverts the order of the elements in a      * sequence. */
+comment|/**    * Inverts the order of the elements in a    * sequence.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -5260,7 +5260,7 @@ block|}
 argument_list|)
 return|;
 block|}
-comment|/** Projects each element of a sequence into a new      * form. */
+comment|/**    * Projects each element of a sequence into a new    * form.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -5373,7 +5373,7 @@ block|}
 block|}
 return|;
 block|}
-comment|/** Projects each element of a sequence into a new      * form by incorporating the element's index. */
+comment|/**    * Projects each element of a sequence into a new    * form by incorporating the element's index.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -5511,7 +5511,7 @@ block|}
 block|}
 return|;
 block|}
-comment|/** Projects each element of a sequence to an      * Enumerable<TSource> and flattens the resulting sequences into one      * sequence. */
+comment|/**    * Projects each element of a sequence to an    * Enumerable<TSource> and flattens the resulting sequences into one    * sequence.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -5680,7 +5680,7 @@ block|}
 block|}
 return|;
 block|}
-comment|/** Projects each element of a sequence to an      * Enumerable<TSource>, and flattens the resulting sequences into one      * sequence. The index of each source element is used in the      * projected form of that element. */
+comment|/**    * Projects each element of a sequence to an    * Enumerable<TSource>, and flattens the resulting sequences into one    * sequence. The index of each source element is used in the    * projected form of that element.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -5721,7 +5721,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Projects each element of a sequence to an      * Enumerable<TSource>, flattens the resulting sequences into one      * sequence, and invokes a result selector function on each      * element therein. The index of each source element is used in      * the intermediate projected form of that element. */
+comment|/**    * Projects each element of a sequence to an    * Enumerable<TSource>, flattens the resulting sequences into one    * sequence, and invokes a result selector function on each    * element therein. The index of each source element is used in    * the intermediate projected form of that element.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -5774,7 +5774,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Projects each element of a sequence to an      * Enumerable<TSource>, flattens the resulting sequences into one      * sequence, and invokes a result selector function on each      * element therein. */
+comment|/**    * Projects each element of a sequence to an    * Enumerable<TSource>, flattens the resulting sequences into one    * sequence, and invokes a result selector function on each    * element therein.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -5825,7 +5825,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Determines whether two sequences are equal by      * comparing the elements by using the default equality comparer      * for their type. */
+comment|/**    * Determines whether two sequences are equal by    * comparing the elements by using the default equality comparer    * for their type.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -5854,7 +5854,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Determines whether two sequences are equal by      * comparing their elements by using a specified      * EqualityComparer<TSource>. */
+comment|/**    * Determines whether two sequences are equal by    * comparing their elements by using a specified    * EqualityComparer<TSource>.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -5889,7 +5889,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Returns the only element of a sequence, and throws      * an exception if there is not exactly one element in the      * sequence. */
+comment|/**    * Returns the only element of a sequence, and throws    * an exception if there is not exactly one element in the    * sequence.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -5912,7 +5912,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Returns the only element of a sequence that      * satisfies a specified condition, and throws an exception if      * more than one such element exists. */
+comment|/**    * Returns the only element of a sequence that    * satisfies a specified condition, and throws an exception if    * more than one such element exists.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -5941,7 +5941,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Returns the only element of a sequence, or a      * default value if the sequence is empty; this method throws an      * exception if there is more than one element in the      * sequence. */
+comment|/**    * Returns the only element of a sequence, or a    * default value if the sequence is empty; this method throws an    * exception if there is more than one element in the    * sequence.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -5964,7 +5964,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Returns the only element of a sequence that      * satisfies a specified condition or a default value if no such      * element exists; this method throws an exception if more than      * one element satisfies the condition. */
+comment|/**    * Returns the only element of a sequence that    * satisfies a specified condition or a default value if no such    * element exists; this method throws an exception if more than    * one element satisfies the condition.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -5993,7 +5993,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Bypasses a specified number of elements in a      * sequence and then returns the remaining elements. */
+comment|/**    * Bypasses a specified number of elements in a    * sequence and then returns the remaining elements.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -6052,7 +6052,7 @@ block|}
 argument_list|)
 return|;
 block|}
-comment|/** Bypasses elements in a sequence as long as a      * specified condition is true and then returns the remaining      * elements. */
+comment|/**    * Bypasses elements in a sequence as long as a    * specified condition is true and then returns the remaining    * elements.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -6096,7 +6096,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/** Bypasses elements in a sequence as long as a      * specified condition is true and then returns the remaining      * elements. The element's index is used in the logic of the      * predicate function. */
+comment|/**    * Bypasses elements in a sequence as long as a    * specified condition is true and then returns the remaining    * elements. The element's index is used in the logic of the    * predicate function.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -6160,7 +6160,7 @@ block|}
 block|}
 return|;
 block|}
-comment|/** Computes the sum of the sequence of Decimal values      * that are obtained by invoking a transform function on each      * element of the input sequence. */
+comment|/**    * Computes the sum of the sequence of Decimal values    * that are obtained by invoking a transform function on each    * element of the input sequence.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -6202,7 +6202,7 @@ name|BIG_DECIMAL_SUM
 argument_list|)
 return|;
 block|}
-comment|/** Computes the sum of the sequence of nullable      * Decimal values that are obtained by invoking a transform      * function on each element of the input sequence. */
+comment|/**    * Computes the sum of the sequence of nullable    * Decimal values that are obtained by invoking a transform    * function on each element of the input sequence.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -6244,7 +6244,7 @@ name|BIG_DECIMAL_SUM
 argument_list|)
 return|;
 block|}
-comment|/** Computes the sum of the sequence of Double values      * that are obtained by invoking a transform function on each      * element of the input sequence. */
+comment|/**    * Computes the sum of the sequence of Double values    * that are obtained by invoking a transform function on each    * element of the input sequence.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -6287,7 +6287,7 @@ name|DOUBLE_SUM
 argument_list|)
 return|;
 block|}
-comment|/** Computes the sum of the sequence of nullable      * Double values that are obtained by invoking a transform      * function on each element of the input sequence. */
+comment|/**    * Computes the sum of the sequence of nullable    * Double values that are obtained by invoking a transform    * function on each element of the input sequence.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -6327,7 +6327,7 @@ name|DOUBLE_SUM
 argument_list|)
 return|;
 block|}
-comment|/** Computes the sum of the sequence of int values      * that are obtained by invoking a transform function on each      * element of the input sequence. */
+comment|/**    * Computes the sum of the sequence of int values    * that are obtained by invoking a transform function on each    * element of the input sequence.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -6370,7 +6370,7 @@ name|INTEGER_SUM
 argument_list|)
 return|;
 block|}
-comment|/** Computes the sum of the sequence of nullable int      * values that are obtained by invoking a transform function on      * each element of the input sequence. */
+comment|/**    * Computes the sum of the sequence of nullable int    * values that are obtained by invoking a transform function on    * each element of the input sequence.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -6410,7 +6410,7 @@ name|INTEGER_SUM
 argument_list|)
 return|;
 block|}
-comment|/** Computes the sum of the sequence of long values      * that are obtained by invoking a transform function on each      * element of the input sequence. */
+comment|/**    * Computes the sum of the sequence of long values    * that are obtained by invoking a transform function on each    * element of the input sequence.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -6453,7 +6453,7 @@ name|LONG_SUM
 argument_list|)
 return|;
 block|}
-comment|/** Computes the sum of the sequence of nullable long      * values that are obtained by invoking a transform function on      * each element of the input sequence. */
+comment|/**    * Computes the sum of the sequence of nullable long    * values that are obtained by invoking a transform function on    * each element of the input sequence.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -6493,7 +6493,7 @@ name|LONG_SUM
 argument_list|)
 return|;
 block|}
-comment|/** Computes the sum of the sequence of Float values      * that are obtained by invoking a transform function on each      * element of the input sequence. */
+comment|/**    * Computes the sum of the sequence of Float values    * that are obtained by invoking a transform function on each    * element of the input sequence.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -6536,7 +6536,7 @@ name|FLOAT_SUM
 argument_list|)
 return|;
 block|}
-comment|/** Computes the sum of the sequence of nullable      * Float values that are obtained by invoking a transform      * function on each element of the input sequence. */
+comment|/**    * Computes the sum of the sequence of nullable    * Float values that are obtained by invoking a transform    * function on each element of the input sequence.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -6576,7 +6576,7 @@ name|FLOAT_SUM
 argument_list|)
 return|;
 block|}
-comment|/** Returns a specified number of contiguous elements      * from the start of a sequence. */
+comment|/**    * Returns a specified number of contiguous elements    * from the start of a sequence.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -6635,7 +6635,7 @@ block|}
 argument_list|)
 return|;
 block|}
-comment|/** Returns elements from a sequence as long as a      * specified condition is true. */
+comment|/**    * Returns elements from a sequence as long as a    * specified condition is true.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -6680,7 +6680,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/** Returns elements from a sequence as long as a      * specified condition is true. The element's index is used in the      * logic of the predicate function. */
+comment|/**    * Returns elements from a sequence as long as a    * specified condition is true. The element's index is used in the    * logic of the predicate function.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -6744,7 +6744,7 @@ block|}
 block|}
 return|;
 block|}
-comment|/** Performs a subsequent ordering of the elements in a sequence according      * to a key. */
+comment|/**    * Performs a subsequent ordering of the elements in a sequence according    * to a key.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -6789,7 +6789,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Performs a subsequent ordering of the elements in a sequence in      * ascending order according to a key. */
+comment|/**    * Performs a subsequent ordering of the elements in a sequence in    * ascending order according to a key.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -6842,7 +6842,7 @@ literal|false
 argument_list|)
 return|;
 block|}
-comment|/** Performs a subsequent ordering of the elements in a sequence in      * ascending order according to a key, using a specified comparator. */
+comment|/**    * Performs a subsequent ordering of the elements in a sequence in    * ascending order according to a key, using a specified comparator.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -6890,7 +6890,7 @@ literal|false
 argument_list|)
 return|;
 block|}
-comment|/** Performs a subsequent ordering of the elements in a sequence in      * descending order according to a key. */
+comment|/**    * Performs a subsequent ordering of the elements in a sequence in    * descending order according to a key.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -6943,7 +6943,7 @@ literal|true
 argument_list|)
 return|;
 block|}
-comment|/** Performs a subsequent ordering of the elements in a sequence in      * descending order according to a key, using a specified comparator. */
+comment|/**    * Performs a subsequent ordering of the elements in a sequence in    * descending order according to a key, using a specified comparator.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -6991,7 +6991,7 @@ literal|true
 argument_list|)
 return|;
 block|}
-comment|/** Creates a Map&lt;TKey, TValue&gt; from an      * Enumerable&lt;TSource&gt; according to a specified key selector      * function.      *      *<p>NOTE: Called {@code toDictionary} in LINQ.NET.</p>      * */
+comment|/**    * Creates a Map&lt;TKey, TValue&gt; from an    * Enumerable&lt;TSource&gt; according to a specified key selector    * function.    *    *<p>NOTE: Called {@code toDictionary} in LINQ.NET.</p>    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -7039,7 +7039,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/** Creates a Dictionary<TKey, TValue> from an      * Enumerable<TSource> according to a specified key selector function      * and key comparer. */
+comment|/**    * Creates a Dictionary<TKey, TValue> from an    * Enumerable<TSource> according to a specified key selector function    * and key comparer.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -7083,7 +7083,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a Dictionary<TKey, TValue> from an      * Enumerable<TSource> according to specified key selector and element      * selector functions. */
+comment|/**    * Creates a Dictionary<TKey, TValue> from an    * Enumerable<TSource> according to specified key selector and element    * selector functions.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -7176,7 +7176,7 @@ return|return
 name|map
 return|;
 block|}
-comment|/** Creates a Dictionary<TKey, TValue> from an      * Enumerable<TSource> according to a specified key selector function,      * a comparer, and an element selector function. */
+comment|/**    * Creates a Dictionary<TKey, TValue> from an    * Enumerable<TSource> according to a specified key selector function,    * a comparer, and an element selector function.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -7230,7 +7230,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Creates a List<TSource> from an Enumerable<TSource>. */
+comment|/**    * Creates a List<TSource> from an Enumerable<TSource>.    */
 annotation|@
 name|SuppressWarnings
 argument_list|(
@@ -7313,7 +7313,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/** Creates a Lookup&lt;TKey, TElement&gt; from an      * Enumerable&lt;TSource&gt; according to a specified key selector      * function. */
+comment|/**    * Creates a Lookup&lt;TKey, TElement&gt; from an    * Enumerable&lt;TSource&gt; according to a specified key selector    * function.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -7361,7 +7361,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/** Creates a Lookup<TKey, TElement> from an      * Enumerable<TSource> according to a specified key selector function      * and key comparer. */
+comment|/**    * Creates a Lookup<TKey, TElement> from an    * Enumerable<TSource> according to a specified key selector function    * and key comparer.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -7417,7 +7417,7 @@ name|comparer
 argument_list|)
 return|;
 block|}
-comment|/** Creates a Lookup<TKey, TElement> from an      * Enumerable<TSource> according to specified key selector and element      * selector functions. */
+comment|/**    * Creates a Lookup<TKey, TElement> from an    * Enumerable<TSource> according to specified key selector and element    * selector functions.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -7676,7 +7676,7 @@ name|map
 argument_list|)
 return|;
 block|}
-comment|/** Creates a Lookup<TKey, TElement> from an      * Enumerable<TSource> according to a specified key selector function,      * a comparer and an element selector function. */
+comment|/**    * Creates a Lookup<TKey, TElement> from an    * Enumerable<TSource> according to a specified key selector function,    * a comparer and an element selector function.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -7748,7 +7748,7 @@ name|elementSelector
 argument_list|)
 return|;
 block|}
-comment|/** Produces the set union of two sequences by using      * the default equality comparer. */
+comment|/**    * Produces the set union of two sequences by using    * the default equality comparer.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -7809,7 +7809,7 @@ name|set
 argument_list|)
 return|;
 block|}
-comment|/** Produces the set union of two sequences by using a      * specified EqualityComparer&lt;TSource&gt;. */
+comment|/**    * Produces the set union of two sequences by using a    * specified EqualityComparer&lt;TSource&gt;.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -8059,7 +8059,7 @@ block|}
 block|}
 return|;
 block|}
-comment|/** Filters a sequence of values based on a      * predicate. */
+comment|/**    * Filters a sequence of values based on a    * predicate.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -8191,7 +8191,7 @@ block|}
 block|}
 return|;
 block|}
-comment|/** Filters a sequence of values based on a      * predicate. Each element's index is used in the logic of the      * predicate function. */
+comment|/**    * Filters a sequence of values based on a    * predicate. Each element's index is used in the logic of the    * predicate function.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -8336,7 +8336,7 @@ block|}
 block|}
 return|;
 block|}
-comment|/** Applies a specified function to the corresponding      * elements of two sequences, producing a sequence of the      * results. */
+comment|/**    * Applies a specified function to the corresponding    * elements of two sequences, producing a sequence of the    * results.    */
 specifier|public
 specifier|static
 parameter_list|<

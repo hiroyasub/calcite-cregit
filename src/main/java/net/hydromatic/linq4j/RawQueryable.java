@@ -56,17 +56,17 @@ argument_list|<
 name|T
 argument_list|>
 block|{
-comment|/**      * Gets the type of the element(s) that are returned when the expression      * tree associated with this Queryable is executed.      */
+comment|/**    * Gets the type of the element(s) that are returned when the expression    * tree associated with this Queryable is executed.    */
 name|Type
 name|getElementType
 parameter_list|()
 function_decl|;
-comment|/** Gets the expression tree that is associated with this Queryable. */
+comment|/**    * Gets the expression tree that is associated with this Queryable.    */
 name|Expression
 name|getExpression
 parameter_list|()
 function_decl|;
-comment|/** Gets the query provider that is associated with this data source. */
+comment|/**    * Gets the query provider that is associated with this data source.    */
 name|QueryProvider
 name|getProvider
 parameter_list|()

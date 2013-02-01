@@ -32,7 +32,7 @@ argument_list|<
 name|Boolean
 argument_list|>
 block|{
-comment|/**      * Predicate that always evaluates to {@code true}.      *      * @see Functions#truePredicate1()      */
+comment|/**    * Predicate that always evaluates to {@code true}.    *    * @see Functions#truePredicate1()    */
 name|Predicate1
 argument_list|<
 name|Object
@@ -60,7 +60,7 @@ return|;
 block|}
 block|}
 decl_stmt|;
-comment|/**      * Predicate that always evaluates to {@code false}.      *      * @see Functions#falsePredicate1()      */
+comment|/**    * Predicate that always evaluates to {@code false}.    *    * @see Functions#falsePredicate1()    */
 name|Predicate1
 argument_list|<
 name|Object

@@ -16,7 +16,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * Function that takes one parameter and returns a native {@code double} value. */
+comment|/**  * Function that takes one parameter and returns a native {@code double} value.  */
 end_comment
 
 begin_interface

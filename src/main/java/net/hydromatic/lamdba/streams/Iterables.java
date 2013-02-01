@@ -55,7 +55,7 @@ name|AssertionError
 argument_list|()
 throw|;
 block|}
-comment|/**      * Returns the only element of an iterable.      *      * @throws NoSuchElementException if this Iterable contains no elements.      * @throws IllegalStateException if this Iterable contains more than one      * element.      */
+comment|/**    * Returns the only element of an iterable.    *    * @throws NoSuchElementException if this Iterable contains no elements.    * @throws IllegalStateException  if this Iterable contains more than one    *                                element.    */
 specifier|public
 specifier|static
 parameter_list|<

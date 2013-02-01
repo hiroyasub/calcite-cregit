@@ -82,7 +82,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Enumeration of Java's primitive types.  *  *<p>There are fields for the native class (e.g.<code>int</code>, also  * known as {@link Integer#TYPE}) and the boxing class  * (e.g. {@link Integer}).</p> */
+comment|/**  * Enumeration of Java's primitive types.  *  *<p>There are fields for the native class (e.g.<code>int</code>, also  * known as {@link Integer#TYPE}) and the boxing class  * (e.g. {@link Integer}).</p>  */
 end_comment
 
 begin_enum
@@ -520,7 +520,7 @@ operator|=
 name|max
 expr_stmt|;
 block|}
-comment|/** Returns the Primitive object for a given primitive class.      *      *<p>For example,<code>of(Long.TYPE)</code> or<code>of(long.class)</code>      * returns {@link #LONG}. */
+comment|/**    * Returns the Primitive object for a given primitive class.    *    *<p>For example,<code>of(Long.TYPE)</code> or<code>of(long.class)</code>    * returns {@link #LONG}.    */
 specifier|public
 specifier|static
 name|Primitive
@@ -540,7 +540,7 @@ name|type
 argument_list|)
 return|;
 block|}
-comment|/** Returns the Primitive object for a given boxing class.      *      *<p>For example,<code>ofBox(java.util.Long.class)</code>      * returns {@link #LONG}. */
+comment|/**    * Returns the Primitive object for a given boxing class.    *    *<p>For example,<code>ofBox(java.util.Long.class)</code>    * returns {@link #LONG}.    */
 specifier|public
 specifier|static
 name|Primitive
@@ -560,7 +560,7 @@ name|type
 argument_list|)
 return|;
 block|}
-comment|/** Converts a primitive type to a boxed type; returns other types      * unchanged. */
+comment|/**    * Converts a primitive type to a boxed type; returns other types    * unchanged.    */
 specifier|public
 specifier|static
 name|Type
@@ -590,7 +590,7 @@ operator|.
 name|boxClass
 return|;
 block|}
-comment|/** Converts a primitive class to a boxed class; returns other classes      * unchanged. */
+comment|/**    * Converts a primitive class to a boxed class; returns other classes    * unchanged.    */
 specifier|public
 specifier|static
 name|Class
@@ -620,7 +620,7 @@ operator|.
 name|boxClass
 return|;
 block|}
-comment|/** Converts a boxed type to a primitive type; returns other types      * unchanged. */
+comment|/**    * Converts a boxed type to a primitive type; returns other types    * unchanged.    */
 specifier|public
 specifier|static
 name|Type
@@ -650,7 +650,7 @@ operator|.
 name|primitiveClass
 return|;
 block|}
-comment|/** Converts a boxed class to a primitive class; returns other types      * unchanged. */
+comment|/**    * Converts a boxed class to a primitive class; returns other types    * unchanged.    */
 specifier|public
 specifier|static
 name|Class
@@ -680,7 +680,7 @@ operator|.
 name|primitiveClass
 return|;
 block|}
-comment|/** Adapts a primitive array into a {@link List}. For example,      * {@code asList(new double[2])} returns a {@code List&lt;Double&gt;}. */
+comment|/**    * Adapts a primitive array into a {@link List}. For example,    * {@code asList(new double[2])} returns a {@code List&lt;Double&gt;}.    */
 specifier|public
 specifier|static
 name|List
@@ -736,7 +736,7 @@ block|}
 block|}
 return|;
 block|}
-comment|/** Adapts an array of {@code boolean} into a {@link List} of      * {@link Boolean}. */
+comment|/**    * Adapts an array of {@code boolean} into a {@link List} of    * {@link Boolean}.    */
 specifier|public
 specifier|static
 name|List
@@ -767,7 +767,7 @@ name|elements
 argument_list|)
 return|;
 block|}
-comment|/** Adapts an array of {@code byte} into a {@link List} of      * {@link Byte}. */
+comment|/**    * Adapts an array of {@code byte} into a {@link List} of    * {@link Byte}.    */
 specifier|public
 specifier|static
 name|List
@@ -798,7 +798,7 @@ name|elements
 argument_list|)
 return|;
 block|}
-comment|/** Adapts an array of {@code char} into a {@link List} of      * {@link Character}. */
+comment|/**    * Adapts an array of {@code char} into a {@link List} of    * {@link Character}.    */
 specifier|public
 specifier|static
 name|List
@@ -829,7 +829,7 @@ name|elements
 argument_list|)
 return|;
 block|}
-comment|/** Adapts an array of {@code short} into a {@link List} of      * {@link Short}. */
+comment|/**    * Adapts an array of {@code short} into a {@link List} of    * {@link Short}.    */
 specifier|public
 specifier|static
 name|List
@@ -860,7 +860,7 @@ name|elements
 argument_list|)
 return|;
 block|}
-comment|/** Adapts an array of {@code int} into a {@link List} of      * {@link Integer}. */
+comment|/**    * Adapts an array of {@code int} into a {@link List} of    * {@link Integer}.    */
 specifier|public
 specifier|static
 name|List
@@ -891,7 +891,7 @@ name|elements
 argument_list|)
 return|;
 block|}
-comment|/** Adapts an array of {@code long} into a {@link List} of      * {@link Long}. */
+comment|/**    * Adapts an array of {@code long} into a {@link List} of    * {@link Long}.    */
 specifier|public
 specifier|static
 name|List
@@ -922,7 +922,7 @@ name|elements
 argument_list|)
 return|;
 block|}
-comment|/** Adapts an array of {@code float} into a {@link List} of      * {@link Float}. */
+comment|/**    * Adapts an array of {@code float} into a {@link List} of    * {@link Float}.    */
 specifier|public
 specifier|static
 name|List
@@ -953,7 +953,7 @@ name|elements
 argument_list|)
 return|;
 block|}
-comment|/** Adapts an array of {@code double} into a {@link List} of      * {@link Double}. */
+comment|/**    * Adapts an array of {@code double} into a {@link List} of    * {@link Double}.    */
 specifier|public
 specifier|static
 name|List
@@ -984,7 +984,7 @@ name|elements
 argument_list|)
 return|;
 block|}
-comment|/**      * Converts a collection of boxed primitives into an array of primitives.      *      * @param collection Collection of boxed primitives      * @return array of primitives      *      * @throws ClassCastException if any element is not of the box type      * @throws NullPointerException if any element is null      */
+comment|/**    * Converts a collection of boxed primitives into an array of primitives.    *    * @param collection Collection of boxed primitives    *    * @return array of primitives    * @throws ClassCastException   if any element is not of the box type    * @throws NullPointerException if any element is null    */
 annotation|@
 name|SuppressWarnings
 argument_list|(
@@ -1356,7 +1356,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/** Converts a collection of {@link Number} to a primitive array. */
+comment|/**    * Converts a collection of {@link Number} to a primitive array.    */
 specifier|public
 name|Object
 name|toArray2
@@ -1707,7 +1707,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/** Sends a field value to a sink. */
+comment|/**    * Sends a field value to a sink.    */
 specifier|public
 name|void
 name|send
@@ -1873,7 +1873,7 @@ expr_stmt|;
 break|break;
 block|}
 block|}
-comment|/** Gets an item from an array. */
+comment|/**    * Gets an item from an array.    */
 specifier|public
 name|Object
 name|arrayItem
@@ -2022,7 +2022,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/** Reads value from a source into an array. */
+comment|/**    * Reads value from a source into an array.    */
 specifier|public
 name|void
 name|arrayItem
@@ -2216,7 +2216,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/** Sends to a sink an from an array. */
+comment|/**    * Sends to a sink an from an array.    */
 specifier|public
 name|void
 name|arrayItem
@@ -2410,7 +2410,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/** Gets a value from a given column in a JDBC result set.      *      * @param resultSet Result set      * @param i Ordinal of column (1-based, per JDBC)      */
+comment|/**    * Gets a value from a given column in a JDBC result set.    *    * @param resultSet Result set    * @param i Ordinal of column (1-based, per JDBC)    */
 specifier|public
 name|Object
 name|jdbcGet
@@ -2531,7 +2531,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/** Sends to a sink a value from a given column in a JDBC result set.      *      * @param resultSet Result set      * @param i Ordinal of column (1-based, per JDBC)      * @param sink Sink      */
+comment|/**    * Sends to a sink a value from a given column in a JDBC result set.    *    * @param resultSet Result set    * @param i Ordinal of column (1-based, per JDBC)    * @param sink Sink    */
 specifier|public
 name|void
 name|jdbc
@@ -2700,7 +2700,7 @@ expr_stmt|;
 break|break;
 block|}
 block|}
-comment|/** Sends a value from a source to a sink. */
+comment|/**    * Sends a value from a source to a sink.    */
 specifier|public
 name|void
 name|send
@@ -2843,7 +2843,7 @@ expr_stmt|;
 break|break;
 block|}
 block|}
-comment|/** Calls the appropriate {@link Integer#valueOf(String) valueOf(String)}      * method. */
+comment|/**    * Calls the appropriate {@link Integer#valueOf(String) valueOf(String)}    * method.    */
 specifier|public
 name|Object
 name|parse
@@ -3006,7 +3006,7 @@ name|BYTE
 operator|)
 return|;
 block|}
-comment|/** A place to send a value. */
+comment|/**    * A place to send a value.    */
 interface|interface
 name|Sink
 block|{
@@ -3074,7 +3074,7 @@ name|v
 parameter_list|)
 function_decl|;
 block|}
-comment|/** A place from which to read a value. */
+comment|/**    * A place from which to read a value.    */
 interface|interface
 name|Source
 block|{

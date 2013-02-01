@@ -79,7 +79,7 @@ specifier|final
 name|boolean
 name|optimizing
 decl_stmt|;
-comment|/** Creates a non-optimizing BlockBuilder. */
+comment|/**    * Creates a non-optimizing BlockBuilder.    */
 specifier|public
 name|BlockBuilder
 parameter_list|()
@@ -90,7 +90,7 @@ literal|true
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Creates a BlockBuilder.      *      * @param optimizing Whether to eliminate common sub-expressions      */
+comment|/**    * Creates a BlockBuilder.    *    * @param optimizing Whether to eliminate common sub-expressions    */
 specifier|public
 name|BlockBuilder
 parameter_list|(
@@ -105,7 +105,7 @@ operator|=
 name|optimizing
 expr_stmt|;
 block|}
-comment|/** Clears this BlockBuilder. */
+comment|/**    * Clears this BlockBuilder.    */
 specifier|public
 name|void
 name|clear
@@ -122,7 +122,7 @@ name|clear
 argument_list|()
 expr_stmt|;
 block|}
-comment|/** Appends a block to a list of statements and returns an expression      * (possibly a variable) that represents the result of the newly added      * block. */
+comment|/**    * Appends a block to a list of statements and returns an expression    * (possibly a variable) that represents the result of the newly added    * block.    */
 specifier|public
 name|Expression
 name|append
@@ -145,7 +145,7 @@ literal|true
 argument_list|)
 return|;
 block|}
-comment|/** Appends an expression to a list of statements, optionally optimizing it      * to a variable if it is used more than once.      *      * @param name Suggested variable name      * @param block Expression      * @param optimize Whether to try to optimize by assigning the expression to      *                 a variable. Do not do this if the expression has      *                 side-effects or a time-dependent value.      */
+comment|/**    * Appends an expression to a list of statements, optionally optimizing it    * to a variable if it is used more than once.    *    * @param name Suggested variable name    * @param block Expression    * @param optimize Whether to try to optimize by assigning the expression to    * a variable. Do not do this if the expression has    * side-effects or a time-dependent value.    */
 specifier|public
 name|Expression
 name|append
@@ -537,7 +537,7 @@ return|return
 name|result
 return|;
 block|}
-comment|/** Appends an expression to a list of statements, and returns an expression      * (possibly a variable) that represents the result of the newly added      * block. */
+comment|/**    * Appends an expression to a list of statements, and returns an expression    * (possibly a variable) that represents the result of the newly added    * block.    */
 specifier|public
 name|Expression
 name|append
@@ -560,7 +560,7 @@ literal|true
 argument_list|)
 return|;
 block|}
-comment|/** Appends an expression to a list of statements, optionally optimizing if      * the expression is used more than once. */
+comment|/**    * Appends an expression to a list of statements, optionally optimizing if    * the expression is used more than once.    */
 specifier|public
 name|Expression
 name|append
@@ -881,7 +881,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Returns a block consisting of the current list of statements. */
+comment|/**    * Returns a block consisting of the current list of statements.    */
 specifier|public
 name|BlockExpression
 name|toBlock
@@ -905,7 +905,7 @@ name|statements
 argument_list|)
 return|;
 block|}
-comment|/** Optimizes the list of statements. If an expression is used only once,      * it is inlined. */
+comment|/**    * Optimizes the list of statements. If an expression is used only once,    * it is inlined.    */
 specifier|private
 name|void
 name|optimize
@@ -1269,7 +1269,7 @@ expr_stmt|;
 block|}
 block|}
 block|}
-comment|/** Creates a name for a new variable, unique within this block. */
+comment|/**    * Creates a name for a new variable, unique within this block.    */
 specifier|private
 name|String
 name|newName
@@ -1585,7 +1585,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/** Workspace for optimization. */
+comment|/**    * Workspace for optimization.    */
 specifier|private
 specifier|static
 class|class

@@ -58,7 +58,7 @@ specifier|public
 class|class
 name|Types
 block|{
-comment|/** Creates a type with generic parameters. */
+comment|/**    * Creates a type with generic parameters.    */
 specifier|public
 specifier|static
 name|Type
@@ -100,7 +100,7 @@ literal|null
 argument_list|)
 return|;
 block|}
-comment|/** Returns the element type of a {@link Collection}, {@link Iterable}      * (including {@link net.hydromatic.linq4j.Queryable Queryable} and      * {@link net.hydromatic.linq4j.Enumerable Enumerable}), {@link Iterator},      * {@link Enumerator}, or an array.      *      *<p>Returns null if the type is not one of these.</p> */
+comment|/**    * Returns the element type of a {@link Collection}, {@link Iterable}    * (including {@link net.hydromatic.linq4j.Queryable Queryable} and    * {@link net.hydromatic.linq4j.Enumerable Enumerable}), {@link Iterator},    * {@link Enumerator}, or an array.    *    *<p>Returns null if the type is not one of these.</p>    */
 specifier|public
 specifier|static
 name|Type
@@ -242,7 +242,7 @@ return|return
 literal|null
 return|;
 block|}
-comment|/** Returns a list backed by a copy of an array. The contents of the list      * will not change even if the contents of the array are subsequently      * modified. */
+comment|/**    * Returns a list backed by a copy of an array. The contents of the list    * will not change even if the contents of the array are subsequently    * modified.    */
 specifier|private
 specifier|static
 parameter_list|<
@@ -658,7 +658,7 @@ index|]
 argument_list|)
 return|;
 block|}
-comment|/** Returns the component type of an array. */
+comment|/**    * Returns the component type of an array.    */
 specifier|public
 specifier|static
 name|Type
@@ -780,7 +780,7 @@ literal|null
 return|;
 comment|// not an array type
 block|}
-comment|/**      * Boxes a type, if it is primitive, and returns the type name.      * The type is abbreviated if it is in the "java.lang" package.      *      *<p>For example,      * boxClassName(int) returns "Integer";      * boxClassName(List&lt;String&gt;) returns "List&lt;String&gt;"</p>      *      * @param type Type      * @return Class name      */
+comment|/**    * Boxes a type, if it is primitive, and returns the type name.    * The type is abbreviated if it is in the "java.lang" package.    *    *<p>For example,    * boxClassName(int) returns "Integer";    * boxClassName(List&lt;String&gt;) returns "List&lt;String&gt;"</p>    *    * @param type Type    *    * @return Class name    */
 specifier|static
 name|String
 name|boxClassName
@@ -1292,7 +1292,7 @@ return|return
 literal|true
 return|;
 block|}
-comment|/** Returns whether a parameter is assignable from an argument by virtue      * of (a) sub-classing (e.g. Writer is assignable from PrintWriter) and (b)      * up-casting (e.g. int is assignable from short).      *      * @param parameter Parameter type      * @param argument Argument type      * @return Whether parameter can be assigned from argument      */
+comment|/**    * Returns whether a parameter is assignable from an argument by virtue    * of (a) sub-classing (e.g. Writer is assignable from PrintWriter) and (b)    * up-casting (e.g. int is assignable from short).    *    * @param parameter Parameter type    * @param argument Argument type    *    * @return Whether parameter can be assigned from argument    */
 specifier|private
 specifier|static
 name|boolean
@@ -1341,7 +1341,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**      * Finds a method of a given name that accepts a given set of arguments.      * Includes in its search inherited methods and methods with wider argument      * types.      *      * @param clazz Class against which method is invoked      * @param methodName Name of method      * @param argumentTypes Types of arguments      * @return A method with the given name that matches the arguments given      *      * @throws RuntimeException if method not found      */
+comment|/**    * Finds a method of a given name that accepts a given set of arguments.    * Includes in its search inherited methods and methods with wider argument    * types.    *    * @param clazz Class against which method is invoked    * @param methodName Name of method    * @param argumentTypes Types of arguments    *    * @return A method with the given name that matches the arguments given    * @throws RuntimeException if method not found    */
 specifier|public
 specifier|static
 name|Method
@@ -1438,7 +1438,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**      * Finds a constructor of a given class that accepts a given set of      * arguments. Includes in its search methods with wider argument types.      *      * @param type Class against which method is invoked      * @param argumentTypes Types of arguments      * @return A method with the given name that matches the arguments given      *      * @throws RuntimeException if method not found      */
+comment|/**    * Finds a constructor of a given class that accepts a given set of    * arguments. Includes in its search methods with wider argument types.    *    * @param type Class against which method is invoked    * @param argumentTypes Types of arguments    *    * @return A method with the given name that matches the arguments given    * @throws RuntimeException if method not found    */
 specifier|public
 specifier|static
 name|Constructor
@@ -1608,7 +1608,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/** Returns the most restrictive type that is assignable from all given      * types. */
+comment|/**    * Returns the most restrictive type that is assignable from all given    * types.    */
 specifier|static
 name|Type
 name|gcd
@@ -1820,7 +1820,7 @@ literal|0
 index|]
 return|;
 block|}
-comment|/**      * Wraps an expression in a cast if it is not already of the desired type,      * or cannot be implicitly converted to it.      *      * @param returnType Desired type      * @param expression Expression      * @return Expression of desired type      */
+comment|/**    * Wraps an expression in a cast if it is not already of the desired type,    * or cannot be implicitly converted to it.    *    * @param returnType Desired type    * @param expression Expression    *    * @return Expression of desired type    */
 specifier|public
 specifier|static
 name|Expression
@@ -2412,7 +2412,7 @@ name|ownerType
 return|;
 block|}
 block|}
-comment|/** Base class for record-like types that do not mapped to (currently      * loaded) Java {@link Class} objects. Gives the opportunity to generate      * code that references temporary types, then generate classes for those      * types along with the code that uses them. */
+comment|/**    * Base class for record-like types that do not mapped to (currently    * loaded) Java {@link Class} objects. Gives the opportunity to generate    * code that references temporary types, then generate classes for those    * types along with the code that uses them.    */
 specifier|public
 interface|interface
 name|RecordType
@@ -2431,7 +2431,7 @@ name|getName
 parameter_list|()
 function_decl|;
 block|}
-comment|/** Field that belongs to a record. */
+comment|/**    * Field that belongs to a record.    */
 specifier|public
 interface|interface
 name|RecordField
@@ -2443,7 +2443,7 @@ name|nullable
 parameter_list|()
 function_decl|;
 block|}
-comment|/** Array type. */
+comment|/**    * Array type.    */
 specifier|public
 specifier|static
 class|class

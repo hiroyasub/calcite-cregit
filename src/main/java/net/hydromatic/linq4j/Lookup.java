@@ -38,7 +38,7 @@ import|;
 end_import
 
 begin_comment
-comment|/** * Represents a collection of keys each mapped to one or more values. */
+comment|/**  * Represents a collection of keys each mapped to one or more values.  */
 end_comment
 
 begin_interface
@@ -71,7 +71,7 @@ name|V
 argument_list|>
 argument_list|>
 block|{
-comment|/**      * Applies a transform function to each key and its associated values and      * returns the results.      *      * @param resultSelector Result selector      * @param<TResult> Result type      * @return Enumerable over results      */
+comment|/**    * Applies a transform function to each key and its associated values and    * returns the results.    *    * @param resultSelector Result selector    * @param<TResult> Result type    *    * @return Enumerable over results    */
 specifier|public
 parameter_list|<
 name|TResult

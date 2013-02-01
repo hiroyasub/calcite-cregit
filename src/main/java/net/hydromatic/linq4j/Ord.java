@@ -54,7 +54,7 @@ specifier|final
 name|E
 name|e
 decl_stmt|;
-comment|/** Creates an Ord. */
+comment|/**    * Creates an Ord.    */
 specifier|public
 name|Ord
 parameter_list|(
@@ -78,7 +78,7 @@ operator|=
 name|e
 expr_stmt|;
 block|}
-comment|/** Creates an Ord. */
+comment|/**    * Creates an Ord.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -110,7 +110,7 @@ name|e
 argument_list|)
 return|;
 block|}
-comment|/** Creates an iterable of {@code Ord}s over an iterable. */
+comment|/**    * Creates an iterable of {@code Ord}s over an iterable.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -168,7 +168,7 @@ block|}
 block|}
 return|;
 block|}
-comment|/** Creates an iterator of {@code Ord}s over an iterator. */
+comment|/**    * Creates an iterator of {@code Ord}s over an iterator.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -256,7 +256,7 @@ block|}
 block|}
 return|;
 block|}
-comment|/** Returns a numbered list based on an array. */
+comment|/**    * Returns a numbered list based on an array.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -289,7 +289,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/** Returns a numbered list. */
+comment|/**    * Returns a numbered list.    */
 specifier|public
 specifier|static
 parameter_list|<

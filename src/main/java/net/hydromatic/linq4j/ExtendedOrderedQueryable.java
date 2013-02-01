@@ -68,7 +68,7 @@ argument_list|<
 name|T
 argument_list|>
 block|{
-comment|/** Performs a subsequent ordering of the elements in a sequence in      * ascending order according to a key. */
+comment|/**    * Performs a subsequent ordering of the elements in a sequence in    * ascending order according to a key.    */
 parameter_list|<
 name|TKey
 extends|extends
@@ -95,7 +95,7 @@ argument_list|>
 name|keySelector
 parameter_list|)
 function_decl|;
-comment|/** Performs a subsequent ordering of the elements in a sequence in      * ascending order according to a key, using a specified comparator. */
+comment|/**    * Performs a subsequent ordering of the elements in a sequence in    * ascending order according to a key, using a specified comparator.    */
 parameter_list|<
 name|TKey
 parameter_list|>
@@ -123,7 +123,7 @@ argument_list|>
 name|comparator
 parameter_list|)
 function_decl|;
-comment|/** Performs a subsequent ordering of the elements in a sequence in      * descending order according to a key. */
+comment|/**    * Performs a subsequent ordering of the elements in a sequence in    * descending order according to a key.    */
 parameter_list|<
 name|TKey
 extends|extends
@@ -150,7 +150,7 @@ argument_list|>
 name|keySelector
 parameter_list|)
 function_decl|;
-comment|/** Performs a subsequent ordering of the elements in a sequence in      * descending order according to a key, using a specified comparator. */
+comment|/**    * Performs a subsequent ordering of the elements in a sequence in    * descending order according to a key, using a specified comparator.    */
 parameter_list|<
 name|TKey
 parameter_list|>
