@@ -598,7 +598,7 @@ name|newArrayInit
 argument_list|(
 name|Types
 operator|.
-name|componentType
+name|getComponentType
 argument_list|(
 name|newArrayExpression
 operator|.
