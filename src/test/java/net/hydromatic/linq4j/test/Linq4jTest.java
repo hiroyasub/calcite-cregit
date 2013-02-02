@@ -1742,7 +1742,7 @@ block|}
 block|}
 return|;
 block|}
-comment|/**      * Tests the version of {@link ExtendedEnumerable#groupBy}      * that uses an accumulator; does not build intermediate lists.      */
+comment|/**    * Tests the version of {@link ExtendedEnumerable#groupBy}    * that uses an accumulator; does not build intermediate lists.    */
 specifier|public
 name|void
 name|testGroupBy
@@ -1882,7 +1882,7 @@ name|s
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Tests the version of      * {@link ExtendedEnumerable#aggregate}      * that has a result selector. Note how similar it is to      * {@link #testGroupBy()}.      */
+comment|/**    * Tests the version of    * {@link ExtendedEnumerable#aggregate}    * that has a result selector. Note how similar it is to    * {@link #testGroupBy()}.    */
 specifier|public
 name|void
 name|testAggregate2
@@ -2579,7 +2579,7 @@ name|emps
 index|[
 literal|3
 index|]
-block|,         }
+block|,     }
 decl_stmt|;
 name|assertEquals
 argument_list|(
@@ -2632,7 +2632,7 @@ name|emps
 index|[
 literal|3
 index|]
-block|,         }
+block|,     }
 decl_stmt|;
 name|assertEquals
 argument_list|(
@@ -5259,7 +5259,7 @@ literal|"Cedric"
 argument_list|,
 literal|40
 argument_list|)
-block|,     }
+block|,   }
 decl_stmt|;
 specifier|public
 specifier|static
@@ -5308,7 +5308,7 @@ literal|"Janet"
 argument_list|,
 literal|10
 argument_list|)
-block|,     }
+block|,   }
 decl_stmt|;
 specifier|public
 specifier|static
@@ -5379,7 +5379,7 @@ literal|1
 index|]
 argument_list|)
 argument_list|)
-block|,     }
+block|,   }
 decl_stmt|;
 block|}
 end_class
