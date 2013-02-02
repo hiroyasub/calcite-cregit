@@ -17,16 +17,6 @@ end_package
 
 begin_import
 import|import
-name|openjava
-operator|.
-name|mop
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
 name|org
 operator|.
 name|eigenbase
@@ -157,20 +147,6 @@ parameter_list|)
 block|{
 return|return
 name|type
-return|;
-block|}
-specifier|public
-name|OJClass
-index|[]
-name|getStartParameterTypes
-parameter_list|()
-block|{
-return|return
-operator|new
-name|OJClass
-index|[
-literal|0
-index|]
 return|;
 block|}
 block|}
