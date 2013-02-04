@@ -316,6 +316,8 @@ name|equals
 argument_list|(
 name|targetExpression
 argument_list|,
+name|call
+operator|.
 name|targetExpression
 argument_list|)
 operator|&&
