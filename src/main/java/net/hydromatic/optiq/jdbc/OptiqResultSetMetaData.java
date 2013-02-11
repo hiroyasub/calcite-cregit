@@ -17,6 +17,20 @@ end_package
 
 begin_import
 import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|optiq
+operator|.
+name|runtime
+operator|.
+name|ColumnMetaData
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|sql
@@ -66,8 +80,6 @@ decl_stmt|;
 specifier|final
 name|List
 argument_list|<
-name|OptiqPrepare
-operator|.
 name|ColumnMetaData
 argument_list|>
 name|columnMetaDataList
@@ -82,8 +94,6 @@ name|query
 parameter_list|,
 name|List
 argument_list|<
-name|OptiqPrepare
-operator|.
 name|ColumnMetaData
 argument_list|>
 name|columnMetaDataList
@@ -109,8 +119,6 @@ name|columnMetaDataList
 expr_stmt|;
 block|}
 specifier|private
-name|OptiqPrepare
-operator|.
 name|ColumnMetaData
 name|getColumnMetaData
 parameter_list|(

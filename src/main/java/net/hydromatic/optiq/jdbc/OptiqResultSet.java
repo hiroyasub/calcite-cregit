@@ -325,8 +325,6 @@ argument_list|)
 expr_stmt|;
 for|for
 control|(
-name|OptiqPrepare
-operator|.
 name|ColumnMetaData
 name|column
 range|:
@@ -471,8 +469,6 @@ expr_stmt|;
 specifier|final
 name|List
 argument_list|<
-name|OptiqPrepare
-operator|.
 name|ColumnMetaData
 argument_list|>
 name|columnMetaDataList
