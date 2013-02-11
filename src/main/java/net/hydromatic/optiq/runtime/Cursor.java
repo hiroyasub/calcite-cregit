@@ -113,7 +113,7 @@ name|createAccessors
 parameter_list|(
 name|List
 argument_list|<
-name|Integer
+name|ColumnMetaData
 argument_list|>
 name|types
 parameter_list|)

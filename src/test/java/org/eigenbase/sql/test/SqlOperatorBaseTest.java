@@ -759,6 +759,24 @@ argument_list|(
 literal|"(?s).*could not calculate results for the following row.*PC=5 Code=2201F.*"
 argument_list|)
 decl_stmt|;
+comment|/** Whether DECIMAL type is implemented. */
+specifier|public
+specifier|static
+specifier|final
+name|boolean
+name|DECIMAL
+init|=
+literal|false
+decl_stmt|;
+comment|/** Whether INTERVAL type is implemented. */
+specifier|public
+specifier|static
+specifier|final
+name|boolean
+name|INTERVAL
+init|=
+literal|false
+decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 specifier|public
 name|SqlOperatorBaseTest
@@ -798,6 +816,22 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//--- Tests -----------------------------------------------------------
+comment|/** For development. Put any old code in here. */
+specifier|public
+name|void
+name|testDummy
+parameter_list|()
+block|{
+name|checkCastToString
+argument_list|(
+literal|"date '2008-01-01'"
+argument_list|,
+literal|"CHAR(10)"
+argument_list|,
+literal|"2008-01-01"
+argument_list|)
+expr_stmt|;
+block|}
 specifier|public
 name|void
 name|testBetween
@@ -1742,6 +1776,11 @@ argument_list|,
 literal|"0E0"
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+name|todo
+condition|)
+block|{
 name|checkCastToString
 argument_list|(
 literal|"cast(-45e-2 as varchar(17))"
@@ -1751,6 +1790,12 @@ argument_list|,
 literal|"-4.5E-1"
 argument_list|)
 expr_stmt|;
+block|}
+if|if
+condition|(
+name|todo
+condition|)
+block|{
 name|checkCastToString
 argument_list|(
 literal|"cast(4683442.3432498375e0 as varchar(20))"
@@ -1760,6 +1805,12 @@ argument_list|,
 literal|"4.683442343249838E6"
 argument_list|)
 expr_stmt|;
+block|}
+if|if
+condition|(
+name|todo
+condition|)
+block|{
 name|checkCastToString
 argument_list|(
 literal|"cast(-0.1 as real)"
@@ -1769,6 +1820,7 @@ argument_list|,
 literal|"-1E-1"
 argument_list|)
 expr_stmt|;
+block|}
 name|getTester
 argument_list|()
 operator|.
@@ -2766,6 +2818,14 @@ operator|.
 name|castFunc
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+operator|!
+name|INTERVAL
+condition|)
+block|{
+return|return;
+block|}
 name|getTester
 argument_list|()
 operator|.
@@ -3759,6 +3819,11 @@ argument_list|(
 literal|"cast(null as integer)"
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+name|DECIMAL
+condition|)
+block|{
 name|getTester
 argument_list|()
 operator|.
@@ -3767,6 +3832,7 @@ argument_list|(
 literal|"cast(null as decimal(4,3))"
 argument_list|)
 expr_stmt|;
+block|}
 name|getTester
 argument_list|()
 operator|.
@@ -3815,6 +3881,11 @@ argument_list|(
 literal|"cast(null as timestamp)"
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+name|INTERVAL
+condition|)
+block|{
 name|getTester
 argument_list|()
 operator|.
@@ -3831,6 +3902,7 @@ argument_list|(
 literal|"cast(null as interval day to second(3))"
 argument_list|)
 expr_stmt|;
+block|}
 name|getTester
 argument_list|()
 operator|.
@@ -4833,6 +4905,11 @@ argument_list|,
 literal|"VARCHAR(3)"
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+name|DECIMAL
+condition|)
+block|{
 name|getTester
 argument_list|()
 operator|.
@@ -4857,6 +4934,7 @@ argument_list|,
 literal|"11.200"
 argument_list|)
 expr_stmt|;
+block|}
 name|getTester
 argument_list|()
 operator|.
@@ -8714,7 +8792,20 @@ argument_list|(
 literal|"cast(null as integer)<1.32"
 argument_list|)
 expr_stmt|;
-comment|// Intervals
+block|}
+specifier|public
+name|void
+name|testLessThanOperatorInterval
+parameter_list|()
+block|{
+if|if
+condition|(
+operator|!
+name|DECIMAL
+condition|)
+block|{
+return|return;
+block|}
 name|getTester
 argument_list|()
 operator|.
@@ -9067,7 +9158,20 @@ argument_list|(
 literal|"cast(null as integer)<=1.32"
 argument_list|)
 expr_stmt|;
-comment|// Intervals
+block|}
+specifier|public
+name|void
+name|testLessThanOrEqualOperatorInterval
+parameter_list|()
+block|{
+if|if
+condition|(
+operator|!
+name|INTERVAL
+condition|)
+block|{
+return|return;
+block|}
 name|getTester
 argument_list|()
 operator|.
@@ -9417,7 +9521,14 @@ operator|.
 name|minusOperator
 argument_list|)
 expr_stmt|;
-comment|// Intervals
+if|if
+condition|(
+operator|!
+name|INTERVAL
+condition|)
+block|{
+return|return;
+block|}
 name|getTester
 argument_list|()
 operator|.
@@ -9909,7 +10020,20 @@ literal|true
 argument_list|)
 expr_stmt|;
 block|}
-comment|// Intervals
+block|}
+specifier|public
+name|void
+name|testMultiplyIntervals
+parameter_list|()
+block|{
+if|if
+condition|(
+operator|!
+name|INTERVAL
+condition|)
+block|{
+return|return;
+block|}
 name|getTester
 argument_list|()
 operator|.
@@ -10040,7 +10164,20 @@ argument_list|(
 literal|"'a'<>cast(null as varchar(1))"
 argument_list|)
 expr_stmt|;
-comment|// Intervals
+block|}
+specifier|public
+name|void
+name|testNotEqualsOperatorIntervals
+parameter_list|()
+block|{
+if|if
+condition|(
+operator|!
+name|INTERVAL
+condition|)
+block|{
+return|return;
+block|}
 name|getTester
 argument_list|()
 operator|.
@@ -10502,7 +10639,14 @@ operator|.
 name|plusOperator
 argument_list|)
 expr_stmt|;
-comment|// Intervals
+if|if
+condition|(
+operator|!
+name|INTERVAL
+condition|)
+block|{
+return|return;
+block|}
 name|getTester
 argument_list|()
 operator|.
@@ -11246,7 +11390,20 @@ argument_list|(
 literal|"-cast(null as tinyint)"
 argument_list|)
 expr_stmt|;
-comment|// Intervals
+block|}
+specifier|public
+name|void
+name|testPrefixMinusOperatorIntervals
+parameter_list|()
+block|{
+if|if
+condition|(
+operator|!
+name|INTERVAL
+condition|)
+block|{
+return|return;
+block|}
 name|getTester
 argument_list|()
 operator|.
@@ -11361,7 +11518,20 @@ argument_list|(
 literal|"+cast(null as tinyint)"
 argument_list|)
 expr_stmt|;
-comment|// Intervals
+block|}
+specifier|public
+name|void
+name|testPrefixPlusOperatorIntervals
+parameter_list|()
+block|{
+if|if
+condition|(
+operator|!
+name|INTERVAL
+condition|)
+block|{
+return|return;
+block|}
 name|getTester
 argument_list|()
 operator|.
@@ -14302,7 +14472,20 @@ argument_list|(
 literal|"abs(cast(null as double))"
 argument_list|)
 expr_stmt|;
-comment|// Intervals
+block|}
+specifier|public
+name|void
+name|testAbsFuncIntervals
+parameter_list|()
+block|{
+if|if
+condition|(
+operator|!
+name|INTERVAL
+condition|)
+block|{
+return|return;
+block|}
 name|getTester
 argument_list|()
 operator|.
@@ -14553,7 +14736,20 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-comment|// Intervals
+block|}
+specifier|public
+name|void
+name|testNullIfOperatorIntervals
+parameter_list|()
+block|{
+if|if
+condition|(
+operator|!
+name|INTERVAL
+condition|)
+block|{
+return|return;
+block|}
 name|getTester
 argument_list|()
 operator|.
@@ -15803,7 +15999,14 @@ argument_list|,
 name|VM_JAVA
 argument_list|)
 expr_stmt|;
-comment|// Intervals
+if|if
+condition|(
+operator|!
+name|INTERVAL
+condition|)
+block|{
+return|return;
+block|}
 name|getTester
 argument_list|()
 operator|.
@@ -15984,7 +16187,20 @@ argument_list|(
 literal|"ceiling(cast(null as double))"
 argument_list|)
 expr_stmt|;
-comment|// Intervals
+block|}
+specifier|public
+name|void
+name|testCeilFuncInterval
+parameter_list|()
+block|{
+if|if
+condition|(
+operator|!
+name|INTERVAL
+condition|)
+block|{
+return|return;
+block|}
 name|getTester
 argument_list|()
 operator|.
@@ -16140,7 +16356,20 @@ argument_list|(
 literal|"floor(cast(null as real))"
 argument_list|)
 expr_stmt|;
-comment|// Intervals
+block|}
+specifier|public
+name|void
+name|testFloorFuncInterval
+parameter_list|()
+block|{
+if|if
+condition|(
+operator|!
+name|INTERVAL
+condition|)
+block|{
+return|return;
+block|}
 name|getTester
 argument_list|()
 operator|.

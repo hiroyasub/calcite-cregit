@@ -189,7 +189,7 @@ name|SqlTypeName
 name|typeName
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a<code>RexLiteral</code>.      *      * @pre type != null      * @pre valueMatchesType(value,typeName)      * @pre (value == null) == type.isNullable()      */
+comment|/**      * Creates a<code>RexLiteral</code>.      */
 name|RexLiteral
 parameter_list|(
 name|Comparable
@@ -202,35 +202,22 @@ name|SqlTypeName
 name|typeName
 parameter_list|)
 block|{
-name|Util
-operator|.
-name|pre
-argument_list|(
+assert|assert
 name|type
 operator|!=
 literal|null
-argument_list|,
-literal|"type != null"
-argument_list|)
-expr_stmt|;
-name|Util
-operator|.
-name|pre
-argument_list|(
+assert|;
+assert|assert
 name|valueMatchesType
 argument_list|(
 name|value
 argument_list|,
 name|typeName
-argument_list|)
 argument_list|,
-literal|"valueMatchesType(value,typeName)"
+literal|true
 argument_list|)
-expr_stmt|;
-name|Util
-operator|.
-name|pre
-argument_list|(
+assert|;
+assert|assert
 operator|(
 name|value
 operator|==
@@ -241,10 +228,7 @@ name|type
 operator|.
 name|isNullable
 argument_list|()
-argument_list|,
-literal|"(value == null) == type.isNullable()"
-argument_list|)
-expr_stmt|;
+assert|;
 name|this
 operator|.
 name|value
@@ -287,8 +271,25 @@ name|value
 parameter_list|,
 name|SqlTypeName
 name|typeName
+parameter_list|,
+name|boolean
+name|strict
 parameter_list|)
 block|{
+if|if
+condition|(
+name|value
+operator|==
+literal|null
+operator|&&
+operator|!
+name|strict
+condition|)
+block|{
+return|return
+literal|true
+return|;
+block|}
 switch|switch
 condition|(
 name|typeName
@@ -312,10 +313,32 @@ operator|==
 literal|null
 return|;
 case|case
+name|INTEGER
+case|:
+comment|// not allowed -- use Decimal
+if|if
+condition|(
+name|strict
+condition|)
+block|{
+throw|throw
+name|Util
+operator|.
+name|unexpected
+argument_list|(
+name|typeName
+argument_list|)
+throw|;
+block|}
+comment|// fall through
+case|case
 name|DECIMAL
 case|:
 case|case
 name|DOUBLE
+case|:
+case|case
+name|REAL
 case|:
 case|case
 name|BIGINT
@@ -360,6 +383,25 @@ literal|null
 operator|)
 return|;
 case|case
+name|VARBINARY
+case|:
+comment|// not allowed -- use Binary
+if|if
+condition|(
+name|strict
+condition|)
+block|{
+throw|throw
+name|Util
+operator|.
+name|unexpected
+argument_list|(
+name|typeName
+argument_list|)
+throw|;
+block|}
+comment|// fall through
+case|case
 name|BINARY
 case|:
 return|return
@@ -367,6 +409,25 @@ name|value
 operator|instanceof
 name|ByteBuffer
 return|;
+case|case
+name|VARCHAR
+case|:
+comment|// not allowed -- use Char
+if|if
+condition|(
+name|strict
+condition|)
+block|{
+throw|throw
+name|Util
+operator|.
+name|unexpected
+argument_list|(
+name|typeName
+argument_list|)
+throw|;
+block|}
+comment|// fall through
 case|case
 name|CHAR
 case|:
@@ -425,18 +486,6 @@ operator|instanceof
 name|Enum
 operator|)
 return|;
-case|case
-name|INTEGER
-case|:
-comment|// not allowed -- use Decimal
-case|case
-name|VARCHAR
-case|:
-comment|// not allowed -- use Char
-case|case
-name|VARBINARY
-case|:
-comment|// not allowed -- use Binary
 default|default:
 throw|throw
 name|Util
@@ -874,20 +923,16 @@ expr_stmt|;
 block|}
 break|break;
 default|default:
-name|Util
-operator|.
-name|pre
-argument_list|(
+assert|assert
 name|valueMatchesType
 argument_list|(
 name|value
 argument_list|,
 name|typeName
-argument_list|)
 argument_list|,
-literal|"valueMatchesType(value, typeName)"
+literal|true
 argument_list|)
-expr_stmt|;
+assert|;
 throw|throw
 name|Util
 operator|.
@@ -1401,7 +1446,7 @@ operator|.
 name|Literal
 return|;
 block|}
-comment|/**      * Returns the value of this literal.      *      * @post valueMatchesType(return, typeName)      */
+comment|/**      * Returns the value of this literal.      */
 specifier|public
 name|Comparable
 name|getValue
@@ -1413,6 +1458,8 @@ argument_list|(
 name|value
 argument_list|,
 name|typeName
+argument_list|,
+literal|true
 argument_list|)
 operator|:
 name|value
