@@ -456,6 +456,19 @@ expr_stmt|;
 block|}
 specifier|public
 name|void
+name|testOrderDescNullsLast
+parameter_list|()
+block|{
+name|check
+argument_list|(
+literal|"select empno from emp order by empno desc nulls last"
+argument_list|,
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
+specifier|public
+name|void
 name|testOrderByOrdinalDesc
 parameter_list|()
 block|{

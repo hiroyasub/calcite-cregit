@@ -1371,6 +1371,12 @@ argument_list|(
 name|i
 argument_list|,
 name|direction
+argument_list|,
+name|RelFieldCollation
+operator|.
+name|NullDirection
+operator|.
+name|UNSPECIFIED
 argument_list|)
 argument_list|)
 argument_list|)

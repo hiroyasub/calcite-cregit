@@ -193,8 +193,14 @@ comment|/**      * NewSpecification      */
 name|NEW_SPECIFICATION
 block|,
 comment|// postfix operators
-comment|/**      * Descending      */
+comment|/**      * DESC in ORDER BY. A parse tree, not a true expression.      */
 name|DESCENDING
+block|,
+comment|/**      * NULLS FIRST clause in ORDER BY. A parse tree, not a true expression.      */
+name|NULLS_FIRST
+block|,
+comment|/**      * NULLS LAST clause in ORDER BY. A parse tree, not a true expression.      */
+name|NULLS_LAST
 block|,
 comment|/**      * IS TRUE operator.      */
 name|IS_TRUE
@@ -323,6 +329,10 @@ argument_list|,
 name|FOLLOWING
 argument_list|,
 name|ORDER_BY
+argument_list|,
+name|NULLS_FIRST
+argument_list|,
+name|NULLS_LAST
 argument_list|,
 name|COLLECTION_TABLE
 argument_list|,

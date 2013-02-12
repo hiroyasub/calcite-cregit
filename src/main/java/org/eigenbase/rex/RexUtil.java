@@ -1885,7 +1885,7 @@ return|return
 literal|false
 return|;
 block|}
-comment|/**      * Returns whether an array of expressions contains a forward reference.      * That is, if expression #i contains a {@link RexInputRef} referencing      * field i or greater.      *      * @param exprs Array of expressions      * @param inputRowType      * @param fail Whether to assert if there is a forward reference      *      * @return Whether there is a forward reference      */
+comment|/**      * Returns whether an array of expressions contains a forward reference.      * That is, if expression #i contains a {@link RexInputRef} referencing      * field i or greater.      *      * @param exprs Array of expressions      * @param inputRowType Input row type      * @param fail Whether to assert if there is a forward reference      *      * @return Whether there is a forward reference      */
 specifier|public
 specifier|static
 name|boolean
@@ -3263,15 +3263,11 @@ literal|null
 return|;
 block|}
 return|return
-operator|new
-name|RelFieldCollation
-argument_list|(
-name|target
-argument_list|,
 name|fieldCollation
 operator|.
-name|getDirection
-argument_list|()
+name|copy
+argument_list|(
+name|target
 argument_list|)
 return|;
 block|}

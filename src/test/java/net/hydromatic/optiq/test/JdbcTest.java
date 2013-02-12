@@ -3051,6 +3051,154 @@ literal|"c0=1997; c1=Drink; c2=USA; c3=WA; c4=Sedro Woolley; m0=58\n"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Tests ORDER BY ... DESC NULLS FIRST. */
+specifier|public
+name|void
+name|testOrderByDescNullsFirst
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|assertThat
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|FOODMART_CLONE
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select \"store_id\", \"grocery_sqft\" from \"store\"\n"
+operator|+
+literal|"where \"store_id\"< 3 order by 2 desc nulls first"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"store_id=0; grocery_sqft=null\n"
+operator|+
+literal|"store_id=2; grocery_sqft=22271\n"
+operator|+
+literal|"store_id=1; grocery_sqft=17475\n"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests ORDER BY ... NULLS FIRST. */
+specifier|public
+name|void
+name|testOrderByNullsFirst
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|assertThat
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|FOODMART_CLONE
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select \"store_id\", \"grocery_sqft\" from \"store\"\n"
+operator|+
+literal|"where \"store_id\"< 3 order by 2 nulls first"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"store_id=0; grocery_sqft=null\n"
+operator|+
+literal|"store_id=1; grocery_sqft=17475\n"
+operator|+
+literal|"store_id=2; grocery_sqft=22271\n"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests ORDER BY ... DESC NULLS LAST. */
+specifier|public
+name|void
+name|testOrderByDescNullsLast
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|assertThat
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|FOODMART_CLONE
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select \"store_id\", \"grocery_sqft\" from \"store\"\n"
+operator|+
+literal|"where \"store_id\"< 3 order by 2 desc nulls last"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"store_id=2; grocery_sqft=22271\n"
+operator|+
+literal|"store_id=1; grocery_sqft=17475\n"
+operator|+
+literal|"store_id=0; grocery_sqft=null\n"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests ORDER BY ... NULLS LAST. */
+specifier|public
+name|void
+name|testOrderByNullsLast
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|assertThat
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|FOODMART_CLONE
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select \"store_id\", \"grocery_sqft\" from \"store\"\n"
+operator|+
+literal|"where \"store_id\"< 3 order by 2 nulls last"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"store_id=1; grocery_sqft=17475\n"
+operator|+
+literal|"store_id=2; grocery_sqft=22271\n"
+operator|+
+literal|"store_id=0; grocery_sqft=null\n"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Tests the TABLES table in the information schema. */
 specifier|public
 name|void

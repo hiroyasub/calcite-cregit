@@ -14,7 +14,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * RelFieldCollation defines the ordering for one field of a RelNode whose  * output is to be sorted.  *  *<p>TODO: collation sequence (including ASC/DESC)  */
+comment|/**  * Definition of the ordering of one field of a RelNode whose  * output is to be sorted.  *  * @see RelCollation  */
 end_comment
 
 begin_class
@@ -22,24 +22,9 @@ specifier|public
 class|class
 name|RelFieldCollation
 block|{
-comment|//~ Static fields/initializers ---------------------------------------------
-specifier|public
-specifier|static
-specifier|final
-name|RelFieldCollation
-index|[]
-name|emptyCollationArray
-init|=
-operator|new
-name|RelFieldCollation
-index|[
-literal|0
-index|]
-decl_stmt|;
 comment|//~ Enums ------------------------------------------------------------------
 comment|/**      * Direction that a field is ordered in.      */
 specifier|public
-specifier|static
 enum|enum
 name|Direction
 block|{
@@ -58,6 +43,17 @@ block|,
 comment|/**          * Clustered direction: Values occur in no particular order, and the          * same value may occur in contiguous groups, but never occurs after          * that. This sort order tends to occur when values are ordered          * according to a hash-key.          */
 name|Clustered
 block|,     }
+comment|/**      * Ordering of nulls.      */
+specifier|public
+enum|enum
+name|NullDirection
+block|{
+name|FIRST
+block|,
+name|LAST
+block|,
+name|UNSPECIFIED
+block|}
 comment|//~ Instance fields --------------------------------------------------------
 comment|/**      * 0-based index of field being sorted.      */
 specifier|private
@@ -70,6 +66,12 @@ specifier|private
 specifier|final
 name|Direction
 name|direction
+decl_stmt|;
+comment|/**      * Direction of sorting of nulls.      */
+specifier|public
+specifier|final
+name|NullDirection
+name|nullDirection
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 comment|/**      * Creates an ascending field collation.      */
@@ -87,6 +89,33 @@ argument_list|,
 name|Direction
 operator|.
 name|Ascending
+argument_list|,
+name|NullDirection
+operator|.
+name|UNSPECIFIED
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**      * Creates a field collation with unspecified null direction.      */
+specifier|public
+name|RelFieldCollation
+parameter_list|(
+name|int
+name|fieldIndex
+parameter_list|,
+name|Direction
+name|direction
+parameter_list|)
+block|{
+name|this
+argument_list|(
+name|fieldIndex
+argument_list|,
+name|direction
+argument_list|,
+name|NullDirection
+operator|.
+name|UNSPECIFIED
 argument_list|)
 expr_stmt|;
 block|}
@@ -99,6 +128,9 @@ name|fieldIndex
 parameter_list|,
 name|Direction
 name|direction
+parameter_list|,
+name|NullDirection
+name|nullDirection
 parameter_list|)
 block|{
 name|this
@@ -113,8 +145,56 @@ name|direction
 operator|=
 name|direction
 expr_stmt|;
+name|this
+operator|.
+name|nullDirection
+operator|=
+name|nullDirection
+expr_stmt|;
+assert|assert
+name|direction
+operator|!=
+literal|null
+assert|;
+assert|assert
+name|nullDirection
+operator|!=
+literal|null
+assert|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+comment|/** Creates a copy of this RelFieldCollation against a different field. */
+specifier|public
+name|RelFieldCollation
+name|copy
+parameter_list|(
+name|int
+name|target
+parameter_list|)
+block|{
+if|if
+condition|(
+name|target
+operator|==
+name|fieldIndex
+condition|)
+block|{
+return|return
+name|this
+return|;
+block|}
+return|return
+operator|new
+name|RelFieldCollation
+argument_list|(
+name|target
+argument_list|,
+name|direction
+argument_list|,
+name|nullDirection
+argument_list|)
+return|;
+block|}
 comment|// implement Object
 specifier|public
 name|boolean
@@ -218,6 +298,20 @@ operator|+
 literal|" "
 operator|+
 name|direction
+operator|+
+operator|(
+name|nullDirection
+operator|==
+name|NullDirection
+operator|.
+name|UNSPECIFIED
+condition|?
+literal|""
+else|:
+literal|" "
+operator|+
+name|nullDirection
+operator|)
 return|;
 block|}
 block|}

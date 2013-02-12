@@ -1101,8 +1101,9 @@ name|newCollations
 operator|.
 name|add
 argument_list|(
-operator|new
-name|RelFieldCollation
+name|oldCollation
+operator|.
+name|copy
 argument_list|(
 name|childMapOldToNewOutputPos
 operator|.
@@ -1113,11 +1114,6 @@ operator|.
 name|getFieldIndex
 argument_list|()
 argument_list|)
-argument_list|,
-name|oldCollation
-operator|.
-name|getDirection
-argument_list|()
 argument_list|)
 argument_list|)
 expr_stmt|;

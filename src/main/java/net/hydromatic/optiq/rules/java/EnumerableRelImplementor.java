@@ -1367,7 +1367,7 @@ operator|.
 name|nullable
 argument_list|()
 condition|?
-literal|"compareNullable"
+literal|"compareNullsLast"
 else|:
 literal|"compare"
 argument_list|,

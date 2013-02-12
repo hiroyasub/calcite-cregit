@@ -3215,6 +3215,28 @@ expr_stmt|;
 block|}
 specifier|public
 name|void
+name|testOrderNullsFirst
+parameter_list|()
+block|{
+name|check
+argument_list|(
+literal|"select * from emp order by gender desc nulls last, deptno asc nulls first, empno nulls last"
+argument_list|,
+name|TestUtil
+operator|.
+name|fold
+argument_list|(
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `EMP`\n"
+operator|+
+literal|"ORDER BY `GENDER` DESC NULLS LAST, `DEPTNO` NULLS FIRST, `EMPNO` NULLS LAST"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+specifier|public
+name|void
 name|testOrderInternal
 parameter_list|()
 block|{
@@ -3579,7 +3601,7 @@ name|void
 name|testParseNumber
 parameter_list|()
 block|{
-comment|//Exacts
+comment|// Exacts
 name|checkExp
 argument_list|(
 literal|"1"
@@ -3650,7 +3672,7 @@ argument_list|,
 literal|"5000000000"
 argument_list|)
 expr_stmt|;
-comment|//Approxs
+comment|// Approximates
 name|checkExp
 argument_list|(
 literal|"1e1"
@@ -3742,7 +3764,7 @@ argument_list|,
 literal|"5E-33"
 argument_list|)
 expr_stmt|;
-comment|//Mix integer/decimals/approx
+comment|// Mix integer/decimals/approx
 name|checkExp
 argument_list|(
 literal|"3. + 2"
@@ -5311,7 +5333,7 @@ name|void
 name|testCaseExpression
 parameter_list|()
 block|{
-comment|//implicit simple else null case
+comment|// implicit simple "ELSE NULL" case
 name|checkExp
 argument_list|(
 literal|"case \t col1 when 1 then 'one' end"
@@ -5319,7 +5341,7 @@ argument_list|,
 literal|"(CASE WHEN (`COL1` = 1) THEN 'one' ELSE NULL END)"
 argument_list|)
 expr_stmt|;
-comment|//implicit searched elee null case
+comment|// implicit searched "ELSE NULL" case
 name|checkExp
 argument_list|(
 literal|"case when nbr is false then 'one' end"
@@ -5327,7 +5349,7 @@ argument_list|,
 literal|"(CASE WHEN (`NBR` IS FALSE) THEN 'one' ELSE NULL END)"
 argument_list|)
 expr_stmt|;
-comment|//multiple whens
+comment|// multiple WHENs
 name|checkExp
 argument_list|(
 literal|"case col1 when \n1.2 then 'one' when 2 then 'two' else 'three' end"
@@ -6755,7 +6777,7 @@ name|void
 name|subTestIntervalYearPositive
 parameter_list|()
 block|{
-comment|//default precision
+comment|// default precision
 name|checkExp
 argument_list|(
 literal|"interval '1' year"
@@ -6770,7 +6792,7 @@ argument_list|,
 literal|"INTERVAL '99' YEAR"
 argument_list|)
 expr_stmt|;
-comment|//explicit precision equal to default
+comment|// explicit precision equal to default
 name|checkExp
 argument_list|(
 literal|"interval '1' year(2)"
@@ -6785,7 +6807,7 @@ argument_list|,
 literal|"INTERVAL '99' YEAR(2)"
 argument_list|)
 expr_stmt|;
-comment|//max precision
+comment|// max precision
 name|checkExp
 argument_list|(
 literal|"interval '2147483647' year(10)"
@@ -6793,7 +6815,7 @@ argument_list|,
 literal|"INTERVAL '2147483647' YEAR(10)"
 argument_list|)
 expr_stmt|;
-comment|//min precision
+comment|// min precision
 name|checkExp
 argument_list|(
 literal|"interval '0' year(1)"
@@ -6801,7 +6823,7 @@ argument_list|,
 literal|"INTERVAL '0' YEAR(1)"
 argument_list|)
 expr_stmt|;
-comment|//alternate precision
+comment|// alternate precision
 name|checkExp
 argument_list|(
 literal|"interval '1234' year(4)"
@@ -6809,7 +6831,7 @@ argument_list|,
 literal|"INTERVAL '1234' YEAR(4)"
 argument_list|)
 expr_stmt|;
-comment|//sign
+comment|// sign
 name|checkExp
 argument_list|(
 literal|"interval '+1' year"
@@ -6873,7 +6895,7 @@ name|void
 name|subTestIntervalYearToMonthPositive
 parameter_list|()
 block|{
-comment|//default precision
+comment|// default precision
 name|checkExp
 argument_list|(
 literal|"interval '1-2' year to month"
@@ -6895,7 +6917,7 @@ argument_list|,
 literal|"INTERVAL '99-0' YEAR TO MONTH"
 argument_list|)
 expr_stmt|;
-comment|//explicit precision equal to default
+comment|// explicit precision equal to default
 name|checkExp
 argument_list|(
 literal|"interval '1-2' year(2) to month"
@@ -6917,7 +6939,7 @@ argument_list|,
 literal|"INTERVAL '99-0' YEAR(2) TO MONTH"
 argument_list|)
 expr_stmt|;
-comment|//max precision
+comment|// max precision
 name|checkExp
 argument_list|(
 literal|"interval '2147483647-11' year(10) to month"
@@ -6925,7 +6947,7 @@ argument_list|,
 literal|"INTERVAL '2147483647-11' YEAR(10) TO MONTH"
 argument_list|)
 expr_stmt|;
-comment|//min precision
+comment|// min precision
 name|checkExp
 argument_list|(
 literal|"interval '0-0' year(1) to month"
@@ -6933,7 +6955,7 @@ argument_list|,
 literal|"INTERVAL '0-0' YEAR(1) TO MONTH"
 argument_list|)
 expr_stmt|;
-comment|//alternate precision
+comment|// alternate precision
 name|checkExp
 argument_list|(
 literal|"interval '2006-2' year(4) to month"
@@ -6941,7 +6963,7 @@ argument_list|,
 literal|"INTERVAL '2006-2' YEAR(4) TO MONTH"
 argument_list|)
 expr_stmt|;
-comment|//sign
+comment|// sign
 name|checkExp
 argument_list|(
 literal|"interval '-1-2' year to month"
@@ -7005,7 +7027,7 @@ name|void
 name|subTestIntervalMonthPositive
 parameter_list|()
 block|{
-comment|//default precision
+comment|// default precision
 name|checkExp
 argument_list|(
 literal|"interval '1' month"
@@ -7020,7 +7042,7 @@ argument_list|,
 literal|"INTERVAL '99' MONTH"
 argument_list|)
 expr_stmt|;
-comment|//explicit precision equal to default
+comment|// explicit precision equal to default
 name|checkExp
 argument_list|(
 literal|"interval '1' month(2)"
@@ -7035,7 +7057,7 @@ argument_list|,
 literal|"INTERVAL '99' MONTH(2)"
 argument_list|)
 expr_stmt|;
-comment|//max precision
+comment|// max precision
 name|checkExp
 argument_list|(
 literal|"interval '2147483647' month(10)"
@@ -7043,7 +7065,7 @@ argument_list|,
 literal|"INTERVAL '2147483647' MONTH(10)"
 argument_list|)
 expr_stmt|;
-comment|//min precision
+comment|// min precision
 name|checkExp
 argument_list|(
 literal|"interval '0' month(1)"
@@ -7051,7 +7073,7 @@ argument_list|,
 literal|"INTERVAL '0' MONTH(1)"
 argument_list|)
 expr_stmt|;
-comment|//alternate precision
+comment|// alternate precision
 name|checkExp
 argument_list|(
 literal|"interval '1234' month(4)"
@@ -7059,7 +7081,7 @@ argument_list|,
 literal|"INTERVAL '1234' MONTH(4)"
 argument_list|)
 expr_stmt|;
-comment|//sign
+comment|// sign
 name|checkExp
 argument_list|(
 literal|"interval '+1' month"
@@ -7123,7 +7145,7 @@ name|void
 name|subTestIntervalDayPositive
 parameter_list|()
 block|{
-comment|//default precision
+comment|// default precision
 name|checkExp
 argument_list|(
 literal|"interval '1' day"
@@ -7138,7 +7160,7 @@ argument_list|,
 literal|"INTERVAL '99' DAY"
 argument_list|)
 expr_stmt|;
-comment|//explicit precision equal to default
+comment|// explicit precision equal to default
 name|checkExp
 argument_list|(
 literal|"interval '1' day(2)"
@@ -7153,7 +7175,7 @@ argument_list|,
 literal|"INTERVAL '99' DAY(2)"
 argument_list|)
 expr_stmt|;
-comment|//max precision
+comment|// max precision
 name|checkExp
 argument_list|(
 literal|"interval '2147483647' day(10)"
@@ -7161,7 +7183,7 @@ argument_list|,
 literal|"INTERVAL '2147483647' DAY(10)"
 argument_list|)
 expr_stmt|;
-comment|//min precision
+comment|// min precision
 name|checkExp
 argument_list|(
 literal|"interval '0' day(1)"
@@ -7169,7 +7191,7 @@ argument_list|,
 literal|"INTERVAL '0' DAY(1)"
 argument_list|)
 expr_stmt|;
-comment|//alternate precision
+comment|// alternate precision
 name|checkExp
 argument_list|(
 literal|"interval '1234' day(4)"
@@ -7177,7 +7199,7 @@ argument_list|,
 literal|"INTERVAL '1234' DAY(4)"
 argument_list|)
 expr_stmt|;
-comment|//sign
+comment|// sign
 name|checkExp
 argument_list|(
 literal|"interval '+1' day"
@@ -7241,7 +7263,7 @@ name|void
 name|subTestIntervalDayToHourPositive
 parameter_list|()
 block|{
-comment|//default precision
+comment|// default precision
 name|checkExp
 argument_list|(
 literal|"interval '1 2' day to hour"
@@ -7263,7 +7285,7 @@ argument_list|,
 literal|"INTERVAL '99 0' DAY TO HOUR"
 argument_list|)
 expr_stmt|;
-comment|//explicit precision equal to default
+comment|// explicit precision equal to default
 name|checkExp
 argument_list|(
 literal|"interval '1 2' day(2) to hour"
@@ -7285,7 +7307,7 @@ argument_list|,
 literal|"INTERVAL '99 0' DAY(2) TO HOUR"
 argument_list|)
 expr_stmt|;
-comment|//max precision
+comment|// max precision
 name|checkExp
 argument_list|(
 literal|"interval '2147483647 23' day(10) to hour"
@@ -7293,7 +7315,7 @@ argument_list|,
 literal|"INTERVAL '2147483647 23' DAY(10) TO HOUR"
 argument_list|)
 expr_stmt|;
-comment|//min precision
+comment|// min precision
 name|checkExp
 argument_list|(
 literal|"interval '0 0' day(1) to hour"
@@ -7301,7 +7323,7 @@ argument_list|,
 literal|"INTERVAL '0 0' DAY(1) TO HOUR"
 argument_list|)
 expr_stmt|;
-comment|//alternate precision
+comment|// alternate precision
 name|checkExp
 argument_list|(
 literal|"interval '2345 2' day(4) to hour"
@@ -7309,7 +7331,7 @@ argument_list|,
 literal|"INTERVAL '2345 2' DAY(4) TO HOUR"
 argument_list|)
 expr_stmt|;
-comment|//sign
+comment|// sign
 name|checkExp
 argument_list|(
 literal|"interval '-1 2' day to hour"
@@ -7373,7 +7395,7 @@ name|void
 name|subTestIntervalDayToMinutePositive
 parameter_list|()
 block|{
-comment|//default precision
+comment|// default precision
 name|checkExp
 argument_list|(
 literal|"interval '1 2:3' day to minute"
@@ -7395,7 +7417,7 @@ argument_list|,
 literal|"INTERVAL '99 0:0' DAY TO MINUTE"
 argument_list|)
 expr_stmt|;
-comment|//explicit precision equal to default
+comment|// explicit precision equal to default
 name|checkExp
 argument_list|(
 literal|"interval '1 2:3' day(2) to minute"
@@ -7417,7 +7439,7 @@ argument_list|,
 literal|"INTERVAL '99 0:0' DAY(2) TO MINUTE"
 argument_list|)
 expr_stmt|;
-comment|//max precision
+comment|// max precision
 name|checkExp
 argument_list|(
 literal|"interval '2147483647 23:59' day(10) to minute"
@@ -7425,7 +7447,7 @@ argument_list|,
 literal|"INTERVAL '2147483647 23:59' DAY(10) TO MINUTE"
 argument_list|)
 expr_stmt|;
-comment|//min precision
+comment|// min precision
 name|checkExp
 argument_list|(
 literal|"interval '0 0:0' day(1) to minute"
@@ -7433,7 +7455,7 @@ argument_list|,
 literal|"INTERVAL '0 0:0' DAY(1) TO MINUTE"
 argument_list|)
 expr_stmt|;
-comment|//alternate precision
+comment|// alternate precision
 name|checkExp
 argument_list|(
 literal|"interval '2345 6:7' day(4) to minute"
@@ -7441,7 +7463,7 @@ argument_list|,
 literal|"INTERVAL '2345 6:7' DAY(4) TO MINUTE"
 argument_list|)
 expr_stmt|;
-comment|//sign
+comment|// sign
 name|checkExp
 argument_list|(
 literal|"interval '-1 2:3' day to minute"
@@ -7505,7 +7527,7 @@ name|void
 name|subTestIntervalDayToSecondPositive
 parameter_list|()
 block|{
-comment|//default precision
+comment|// default precision
 name|checkExp
 argument_list|(
 literal|"interval '1 2:3:4' day to second"
@@ -7541,7 +7563,7 @@ argument_list|,
 literal|"INTERVAL '99 0:0:0.0' DAY TO SECOND"
 argument_list|)
 expr_stmt|;
-comment|//explicit precision equal to default
+comment|// explicit precision equal to default
 name|checkExp
 argument_list|(
 literal|"interval '1 2:3:4' day(2) to second"
@@ -7577,7 +7599,7 @@ argument_list|,
 literal|"INTERVAL '99 0:0:0.0' DAY TO SECOND(6)"
 argument_list|)
 expr_stmt|;
-comment|//max precision
+comment|// max precision
 name|checkExp
 argument_list|(
 literal|"interval '2147483647 23:59:59' day(10) to second"
@@ -7592,7 +7614,7 @@ argument_list|,
 literal|"INTERVAL '2147483647 23:59:59.999999999' DAY(10) TO SECOND(9)"
 argument_list|)
 expr_stmt|;
-comment|//min precision
+comment|// min precision
 name|checkExp
 argument_list|(
 literal|"interval '0 0:0:0' day(1) to second"
@@ -7607,7 +7629,7 @@ argument_list|,
 literal|"INTERVAL '0 0:0:0.0' DAY(1) TO SECOND(1)"
 argument_list|)
 expr_stmt|;
-comment|//alternate precision
+comment|// alternate precision
 name|checkExp
 argument_list|(
 literal|"interval '2345 6:7:8' day(4) to second"
@@ -7622,7 +7644,7 @@ argument_list|,
 literal|"INTERVAL '2345 6:7:8.9012' DAY(4) TO SECOND(4)"
 argument_list|)
 expr_stmt|;
-comment|//sign
+comment|// sign
 name|checkExp
 argument_list|(
 literal|"interval '-1 2:3:4' day to second"
@@ -7686,7 +7708,7 @@ name|void
 name|subTestIntervalHourPositive
 parameter_list|()
 block|{
-comment|//default precision
+comment|// default precision
 name|checkExp
 argument_list|(
 literal|"interval '1' hour"
@@ -7701,7 +7723,7 @@ argument_list|,
 literal|"INTERVAL '99' HOUR"
 argument_list|)
 expr_stmt|;
-comment|//explicit precision equal to default
+comment|// explicit precision equal to default
 name|checkExp
 argument_list|(
 literal|"interval '1' hour(2)"
@@ -7716,7 +7738,7 @@ argument_list|,
 literal|"INTERVAL '99' HOUR(2)"
 argument_list|)
 expr_stmt|;
-comment|//max precision
+comment|// max precision
 name|checkExp
 argument_list|(
 literal|"interval '2147483647' hour(10)"
@@ -7724,7 +7746,7 @@ argument_list|,
 literal|"INTERVAL '2147483647' HOUR(10)"
 argument_list|)
 expr_stmt|;
-comment|//min precision
+comment|// min precision
 name|checkExp
 argument_list|(
 literal|"interval '0' hour(1)"
@@ -7732,7 +7754,7 @@ argument_list|,
 literal|"INTERVAL '0' HOUR(1)"
 argument_list|)
 expr_stmt|;
-comment|//alternate precision
+comment|// alternate precision
 name|checkExp
 argument_list|(
 literal|"interval '1234' hour(4)"
@@ -7740,7 +7762,7 @@ argument_list|,
 literal|"INTERVAL '1234' HOUR(4)"
 argument_list|)
 expr_stmt|;
-comment|//sign
+comment|// sign
 name|checkExp
 argument_list|(
 literal|"interval '+1' hour"
@@ -7804,7 +7826,7 @@ name|void
 name|subTestIntervalHourToMinutePositive
 parameter_list|()
 block|{
-comment|//default precision
+comment|// default precision
 name|checkExp
 argument_list|(
 literal|"interval '2:3' hour to minute"
@@ -7826,7 +7848,7 @@ argument_list|,
 literal|"INTERVAL '99:0' HOUR TO MINUTE"
 argument_list|)
 expr_stmt|;
-comment|//explicit precision equal to default
+comment|// explicit precision equal to default
 name|checkExp
 argument_list|(
 literal|"interval '2:3' hour(2) to minute"
@@ -7848,7 +7870,7 @@ argument_list|,
 literal|"INTERVAL '99:0' HOUR(2) TO MINUTE"
 argument_list|)
 expr_stmt|;
-comment|//max precision
+comment|// max precision
 name|checkExp
 argument_list|(
 literal|"interval '2147483647:59' hour(10) to minute"
@@ -7856,7 +7878,7 @@ argument_list|,
 literal|"INTERVAL '2147483647:59' HOUR(10) TO MINUTE"
 argument_list|)
 expr_stmt|;
-comment|//min precision
+comment|// min precision
 name|checkExp
 argument_list|(
 literal|"interval '0:0' hour(1) to minute"
@@ -7864,7 +7886,7 @@ argument_list|,
 literal|"INTERVAL '0:0' HOUR(1) TO MINUTE"
 argument_list|)
 expr_stmt|;
-comment|//alternate precision
+comment|// alternate precision
 name|checkExp
 argument_list|(
 literal|"interval '2345:7' hour(4) to minute"
@@ -7872,7 +7894,7 @@ argument_list|,
 literal|"INTERVAL '2345:7' HOUR(4) TO MINUTE"
 argument_list|)
 expr_stmt|;
-comment|//sign
+comment|// sign
 name|checkExp
 argument_list|(
 literal|"interval '-1:3' hour to minute"
@@ -7936,7 +7958,7 @@ name|void
 name|subTestIntervalHourToSecondPositive
 parameter_list|()
 block|{
-comment|//default precision
+comment|// default precision
 name|checkExp
 argument_list|(
 literal|"interval '2:3:4' hour to second"
@@ -7972,7 +7994,7 @@ argument_list|,
 literal|"INTERVAL '99:0:0.0' HOUR TO SECOND"
 argument_list|)
 expr_stmt|;
-comment|//explicit precision equal to default
+comment|// explicit precision equal to default
 name|checkExp
 argument_list|(
 literal|"interval '2:3:4' hour(2) to second"
@@ -8008,7 +8030,7 @@ argument_list|,
 literal|"INTERVAL '99:0:0.0' HOUR TO SECOND(6)"
 argument_list|)
 expr_stmt|;
-comment|//max precision
+comment|// max precision
 name|checkExp
 argument_list|(
 literal|"interval '2147483647:59:59' hour(10) to second"
@@ -8023,7 +8045,7 @@ argument_list|,
 literal|"INTERVAL '2147483647:59:59.999999999' HOUR(10) TO SECOND(9)"
 argument_list|)
 expr_stmt|;
-comment|//min precision
+comment|// min precision
 name|checkExp
 argument_list|(
 literal|"interval '0:0:0' hour(1) to second"
@@ -8038,7 +8060,7 @@ argument_list|,
 literal|"INTERVAL '0:0:0.0' HOUR(1) TO SECOND(1)"
 argument_list|)
 expr_stmt|;
-comment|//alternate precision
+comment|// alternate precision
 name|checkExp
 argument_list|(
 literal|"interval '2345:7:8' hour(4) to second"
@@ -8053,7 +8075,7 @@ argument_list|,
 literal|"INTERVAL '2345:7:8.9012' HOUR(4) TO SECOND(4)"
 argument_list|)
 expr_stmt|;
-comment|//sign
+comment|// sign
 name|checkExp
 argument_list|(
 literal|"interval '-2:3:4' hour to second"
@@ -8117,7 +8139,7 @@ name|void
 name|subTestIntervalMinutePositive
 parameter_list|()
 block|{
-comment|//default precision
+comment|// default precision
 name|checkExp
 argument_list|(
 literal|"interval '1' minute"
@@ -8132,7 +8154,7 @@ argument_list|,
 literal|"INTERVAL '99' MINUTE"
 argument_list|)
 expr_stmt|;
-comment|//explicit precision equal to default
+comment|// explicit precision equal to default
 name|checkExp
 argument_list|(
 literal|"interval '1' minute(2)"
@@ -8147,7 +8169,7 @@ argument_list|,
 literal|"INTERVAL '99' MINUTE(2)"
 argument_list|)
 expr_stmt|;
-comment|//max precision
+comment|// max precision
 name|checkExp
 argument_list|(
 literal|"interval '2147483647' minute(10)"
@@ -8155,7 +8177,7 @@ argument_list|,
 literal|"INTERVAL '2147483647' MINUTE(10)"
 argument_list|)
 expr_stmt|;
-comment|//min precision
+comment|// min precision
 name|checkExp
 argument_list|(
 literal|"interval '0' minute(1)"
@@ -8163,7 +8185,7 @@ argument_list|,
 literal|"INTERVAL '0' MINUTE(1)"
 argument_list|)
 expr_stmt|;
-comment|//alternate precision
+comment|// alternate precision
 name|checkExp
 argument_list|(
 literal|"interval '1234' minute(4)"
@@ -8171,7 +8193,7 @@ argument_list|,
 literal|"INTERVAL '1234' MINUTE(4)"
 argument_list|)
 expr_stmt|;
-comment|//sign
+comment|// sign
 name|checkExp
 argument_list|(
 literal|"interval '+1' minute"
@@ -8235,7 +8257,7 @@ name|void
 name|subTestIntervalMinuteToSecondPositive
 parameter_list|()
 block|{
-comment|//default precision
+comment|// default precision
 name|checkExp
 argument_list|(
 literal|"interval '2:4' minute to second"
@@ -8271,7 +8293,7 @@ argument_list|,
 literal|"INTERVAL '99:0.0' MINUTE TO SECOND"
 argument_list|)
 expr_stmt|;
-comment|//explicit precision equal to default
+comment|// explicit precision equal to default
 name|checkExp
 argument_list|(
 literal|"interval '2:4' minute(2) to second"
@@ -8307,7 +8329,7 @@ argument_list|,
 literal|"INTERVAL '99:0.0' MINUTE TO SECOND(6)"
 argument_list|)
 expr_stmt|;
-comment|//max precision
+comment|// max precision
 name|checkExp
 argument_list|(
 literal|"interval '2147483647:59' minute(10) to second"
@@ -8322,7 +8344,7 @@ argument_list|,
 literal|"INTERVAL '2147483647:59.999999999' MINUTE(10) TO SECOND(9)"
 argument_list|)
 expr_stmt|;
-comment|//min precision
+comment|// min precision
 name|checkExp
 argument_list|(
 literal|"interval '0:0' minute(1) to second"
@@ -8337,7 +8359,7 @@ argument_list|,
 literal|"INTERVAL '0:0.0' MINUTE(1) TO SECOND(1)"
 argument_list|)
 expr_stmt|;
-comment|//alternate precision
+comment|// alternate precision
 name|checkExp
 argument_list|(
 literal|"interval '2345:8' minute(4) to second"
@@ -8352,7 +8374,7 @@ argument_list|,
 literal|"INTERVAL '2345:7.8901' MINUTE(4) TO SECOND(4)"
 argument_list|)
 expr_stmt|;
-comment|//sign
+comment|// sign
 name|checkExp
 argument_list|(
 literal|"interval '-3:4' minute to second"
@@ -8416,7 +8438,7 @@ name|void
 name|subTestIntervalSecondPositive
 parameter_list|()
 block|{
-comment|//default precision
+comment|// default precision
 name|checkExp
 argument_list|(
 literal|"interval '1' second"
@@ -8431,7 +8453,7 @@ argument_list|,
 literal|"INTERVAL '99' SECOND"
 argument_list|)
 expr_stmt|;
-comment|//explicit precision equal to default
+comment|// explicit precision equal to default
 name|checkExp
 argument_list|(
 literal|"interval '1' second(2)"
@@ -8460,7 +8482,7 @@ argument_list|,
 literal|"INTERVAL '99' SECOND(2, 6)"
 argument_list|)
 expr_stmt|;
-comment|//max precision
+comment|// max precision
 name|checkExp
 argument_list|(
 literal|"interval '2147483647' second(10)"
@@ -8475,7 +8497,7 @@ argument_list|,
 literal|"INTERVAL '2147483647.999999999' SECOND(9, 9)"
 argument_list|)
 expr_stmt|;
-comment|//min precision
+comment|// min precision
 name|checkExp
 argument_list|(
 literal|"interval '0' second(1)"
@@ -8490,7 +8512,7 @@ argument_list|,
 literal|"INTERVAL '0.0' SECOND(1, 1)"
 argument_list|)
 expr_stmt|;
-comment|//alternate precision
+comment|// alternate precision
 name|checkExp
 argument_list|(
 literal|"interval '1234' second(4)"
@@ -8505,7 +8527,7 @@ argument_list|,
 literal|"INTERVAL '1234.56789' SECOND(4, 5)"
 argument_list|)
 expr_stmt|;
-comment|//sign
+comment|// sign
 name|checkExp
 argument_list|(
 literal|"interval '+1' second"
