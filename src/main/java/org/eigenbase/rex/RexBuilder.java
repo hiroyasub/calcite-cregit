@@ -1271,6 +1271,11 @@ operator|instanceof
 name|NlsString
 operator|)
 operator|||
+operator|(
+name|type
+operator|instanceof
+name|BasicSqlType
+operator|&&
 name|type
 operator|.
 name|getPrecision
@@ -1288,6 +1293,7 @@ argument_list|()
 operator|.
 name|length
 argument_list|()
+operator|)
 operator|)
 condition|)
 block|{
