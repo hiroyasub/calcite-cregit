@@ -820,6 +820,30 @@ argument_list|(
 literal|"C=5\n"
 argument_list|)
 expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"insert into \"foo\".\"bar\" values (1, 6, null)"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"ROWCOUNT=1\n"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select count(*) as c from \"foo\".\"bar\""
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"C=6\n"
+argument_list|)
+expr_stmt|;
 block|}
 block|}
 end_class
