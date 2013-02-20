@@ -85,18 +85,6 @@ name|*
 import|;
 end_import
 
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
-name|util
-operator|.
-name|*
-import|;
-end_import
-
 begin_comment
 comment|/**  * RelDataTypeImpl is an abstract base for implementations of {@link  * RelDataType}.  *  *<p>Identity is based upon the {@link #digest} field, which each derived class  * should set during construction.</p>  *  * @author jhyde  * @version $Id$  */
 end_comment
@@ -533,16 +521,9 @@ name|int
 name|getPrecision
 parameter_list|()
 block|{
-throw|throw
-name|Util
-operator|.
-name|newInternal
-argument_list|(
-literal|"no precision: "
-operator|+
-name|this
-argument_list|)
-throw|;
+return|return
+name|PRECISION_NOT_SPECIFIED
+return|;
 block|}
 comment|// implement RelDataType
 specifier|public
@@ -550,16 +531,9 @@ name|int
 name|getScale
 parameter_list|()
 block|{
-throw|throw
-name|Util
-operator|.
-name|newInternal
-argument_list|(
-literal|"no scale: "
-operator|+
-name|this
-argument_list|)
-throw|;
+return|return
+name|SCALE_NOT_SPECIFIED
+return|;
 block|}
 comment|// implement RelDataType
 specifier|public

@@ -63,25 +63,6 @@ extends|extends
 name|AbstractSqlType
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
-specifier|public
-specifier|static
-specifier|final
-name|int
-name|SCALE_NOT_SPECIFIED
-init|=
-name|Integer
-operator|.
-name|MIN_VALUE
-decl_stmt|;
-specifier|public
-specifier|static
-specifier|final
-name|int
-name|PRECISION_NOT_SPECIFIED
-init|=
-operator|-
-literal|1
-decl_stmt|;
 comment|//~ Instance fields --------------------------------------------------------
 specifier|private
 name|int
@@ -398,7 +379,7 @@ return|return
 name|ret
 return|;
 block|}
-comment|//implement RelDataType
+comment|// implement RelDataType
 specifier|public
 name|int
 name|getPrecision
@@ -508,18 +489,7 @@ literal|1
 return|;
 comment|// SQL2003 part 2 section 6.1 syntax rule 5
 default|default:
-throw|throw
-name|Util
-operator|.
-name|newInternal
-argument_list|(
-literal|"type "
-operator|+
-name|typeName
-operator|+
-literal|" does not have a precision"
-argument_list|)
-throw|;
+comment|// fall through
 block|}
 block|}
 return|return
@@ -563,18 +533,7 @@ return|return
 literal|0
 return|;
 default|default:
-throw|throw
-name|Util
-operator|.
-name|newInternal
-argument_list|(
-literal|"type "
-operator|+
-name|typeName
-operator|+
-literal|" does not have a scale"
-argument_list|)
-throw|;
+comment|// fall through
 block|}
 block|}
 return|return

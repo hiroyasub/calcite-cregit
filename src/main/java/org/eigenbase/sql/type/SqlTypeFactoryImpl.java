@@ -148,7 +148,7 @@ operator|||
 operator|(
 name|precision
 operator|==
-name|BasicSqlType
+name|RelDataType
 operator|.
 name|PRECISION_NOT_SPECIFIED
 operator|)
@@ -212,7 +212,7 @@ operator|||
 operator|(
 name|precision
 operator|==
-name|BasicSqlType
+name|RelDataType
 operator|.
 name|PRECISION_NOT_SPECIFIED
 operator|)

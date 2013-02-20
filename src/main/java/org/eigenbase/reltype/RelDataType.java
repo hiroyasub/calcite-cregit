@@ -71,6 +71,19 @@ interface|interface
 name|RelDataType
 comment|/*extends Type*/
 block|{
+name|int
+name|SCALE_NOT_SPECIFIED
+init|=
+name|Integer
+operator|.
+name|MIN_VALUE
+decl_stmt|;
+name|int
+name|PRECISION_NOT_SPECIFIED
+init|=
+operator|-
+literal|1
+decl_stmt|;
 comment|//~ Methods ----------------------------------------------------------------
 comment|/**      * Queries whether this is a structured type.      *      * @return whether this type has fields; examples include rows and      * user-defined structured types in SQL, and classes in Java      */
 specifier|public
@@ -153,13 +166,13 @@ name|SqlIntervalQualifier
 name|getIntervalQualifier
 parameter_list|()
 function_decl|;
-comment|/**      * Gets the JDBC-defined precision for values of this type. Note that this      * is not always the same as the user-specified precision. For example, the      * type INTEGER has no user-specified precision, but this method returns 10      * for an INTEGER type.      *      * @return number of decimal digits for exact numeric types; number of      * decimal digits in mantissa for approximate numeric types; number of      * decimal digits for fractional seconds of datetime types; length in      * characters for character types; length in bytes for binary types; length      * in bits for bit types; 1 for BOOLEAN      */
+comment|/**      * Gets the JDBC-defined precision for values of this type. Note that this      * is not always the same as the user-specified precision. For example, the      * type INTEGER has no user-specified precision, but this method returns 10      * for an INTEGER type.      *      *<p>Returns {@link #PRECISION_NOT_SPECIFIED} (-1) if precision is not      * applicable for this type.</p>      *      * @return number of decimal digits for exact numeric types; number of      * decimal digits in mantissa for approximate numeric types; number of      * decimal digits for fractional seconds of datetime types; length in      * characters for character types; length in bytes for binary types; length      * in bits for bit types; 1 for BOOLEAN; -1 if precision is not valid for      * this type      */
 specifier|public
 name|int
 name|getPrecision
 parameter_list|()
 function_decl|;
-comment|/**      * Gets the scale of this type.      *      * @return number of digits of scale      */
+comment|/**      * Gets the scale of this type. Returns {@link #SCALE_NOT_SPECIFIED} (-1) if      * scale is not valid for this type.      *      * @return number of digits of scale      */
 specifier|public
 name|int
 name|getScale
