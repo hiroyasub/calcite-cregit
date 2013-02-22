@@ -27,6 +27,16 @@ end_import
 
 begin_import
 import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|eigenbase
@@ -74,8 +84,12 @@ parameter_list|,
 name|boolean
 name|isNullable
 parameter_list|,
+name|List
+argument_list|<
+name|?
+extends|extends
 name|RelDataTypeField
-index|[]
+argument_list|>
 name|fields
 parameter_list|)
 block|{

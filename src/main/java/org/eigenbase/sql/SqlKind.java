@@ -251,6 +251,18 @@ block|,
 comment|/**      * Table operator which converts user-defined transform into a relation, for      * example,<code>select * from TABLE(udx(x, y, z))</code>. See also the      * {@link #EXPLICIT_TABLE} prefix operator.      */
 name|COLLECTION_TABLE
 block|,
+comment|/**      * Array Value Constructor, e.g. {@code Array[1, 2, 3]}.      */
+name|ARRAY_VALUE_CONSTRUCTOR
+block|,
+comment|/**      * Array Query Constructor, e.g. {@code Array(select deptno from dept)}.      */
+name|ARRAY_QUERY_CONSTRUCTOR
+block|,
+comment|/**      * Map Value Constructor, e.g. {@code Map['washington', 1, 'obama', 44]}.      */
+name|MAP_VALUE_CONSTRUCTOR
+block|,
+comment|/**      * Map Query Constructor, e.g. {@code MAP (SELECT empno, deptno FROM emp)}.      */
+name|MAP_QUERY_CONSTRUCTOR
+block|,
 comment|/**      * CURSOR constructor, for example,<code>select * from      * TABLE(udx(CURSOR(select ...), x, y, z))</code>      */
 name|CURSOR
 block|,

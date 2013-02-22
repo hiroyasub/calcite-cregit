@@ -285,9 +285,12 @@ name|getOperandCountRange
 parameter_list|()
 block|{
 return|return
-name|SqlOperandCountRange
+name|SqlOperandCountRanges
 operator|.
-name|Four
+name|of
+argument_list|(
+literal|4
+argument_list|)
 return|;
 block|}
 specifier|public
@@ -298,24 +301,13 @@ name|int
 name|operandsCount
 parameter_list|)
 block|{
-if|if
-condition|(
+assert|assert
 literal|4
 operator|==
 name|operandsCount
-condition|)
-block|{
-return|return
-literal|"({1}, {2}) {0} ({3}, {4})"
-return|;
-block|}
-assert|assert
-operator|(
-literal|false
-operator|)
 assert|;
 return|return
-literal|null
+literal|"({1}, {2}) {0} ({3}, {4})"
 return|;
 block|}
 specifier|public

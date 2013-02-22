@@ -17,11 +17,13 @@ end_package
 
 begin_import
 import|import
-name|java
+name|org
 operator|.
-name|util
+name|eigenbase
 operator|.
-name|List
+name|reltype
+operator|.
+name|RelDataType
 import|;
 end_import
 
@@ -33,7 +35,7 @@ name|eigenbase
 operator|.
 name|reltype
 operator|.
-name|*
+name|RelDataTypeFamily
 import|;
 end_import
 
@@ -43,138 +45,68 @@ name|org
 operator|.
 name|eigenbase
 operator|.
-name|sql
+name|util
 operator|.
-name|*
+name|Util
 import|;
 end_import
 
 begin_comment
-comment|/**  * ObjectSqlType represents an SQL structured user-defined type.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  * SQL array type.  */
 end_comment
 
 begin_class
 specifier|public
 class|class
-name|ObjectSqlType
+name|ArraySqlType
 extends|extends
 name|AbstractSqlType
 block|{
 comment|//~ Instance fields --------------------------------------------------------
 specifier|private
 specifier|final
-name|SqlIdentifier
-name|sqlIdentifier
-decl_stmt|;
-specifier|private
-specifier|final
-name|RelDataTypeComparability
-name|comparability
-decl_stmt|;
-specifier|private
-name|RelDataTypeFamily
-name|family
+name|RelDataType
+name|elementType
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Constructs an object type. This should only be called from a factory      * method.      *      * @param typeName SqlTypeName for this type (either Distinct or Structured)      * @param sqlIdentifier identifier for this type      * @param nullable whether type accepts nulls      * @param fields object attribute definitions      */
+comment|/**      * Creates an ArraySqlType. This constructor should only be called      * from a factory method.      */
 specifier|public
-name|ObjectSqlType
+name|ArraySqlType
 parameter_list|(
-name|SqlTypeName
-name|typeName
-parameter_list|,
-name|SqlIdentifier
-name|sqlIdentifier
+name|RelDataType
+name|elementType
 parameter_list|,
 name|boolean
-name|nullable
-parameter_list|,
-name|List
-argument_list|<
-name|?
-extends|extends
-name|RelDataTypeField
-argument_list|>
-name|fields
-parameter_list|,
-name|RelDataTypeComparability
-name|comparability
+name|isNullable
 parameter_list|)
 block|{
 name|super
 argument_list|(
-name|typeName
+name|SqlTypeName
+operator|.
+name|ARRAY
 argument_list|,
-name|nullable
+name|isNullable
 argument_list|,
-name|fields
+literal|null
 argument_list|)
 expr_stmt|;
+assert|assert
+name|elementType
+operator|!=
+literal|null
+assert|;
 name|this
 operator|.
-name|sqlIdentifier
+name|elementType
 operator|=
-name|sqlIdentifier
-expr_stmt|;
-name|this
-operator|.
-name|comparability
-operator|=
-name|comparability
+name|elementType
 expr_stmt|;
 name|computeDigest
 argument_list|()
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-specifier|public
-name|void
-name|setFamily
-parameter_list|(
-name|RelDataTypeFamily
-name|family
-parameter_list|)
-block|{
-name|this
-operator|.
-name|family
-operator|=
-name|family
-expr_stmt|;
-block|}
-comment|// implement RelDataType
-specifier|public
-name|RelDataTypeComparability
-name|getComparability
-parameter_list|()
-block|{
-return|return
-name|comparability
-return|;
-block|}
-comment|// override AbstractSqlType
-specifier|public
-name|SqlIdentifier
-name|getSqlIdentifier
-parameter_list|()
-block|{
-return|return
-name|sqlIdentifier
-return|;
-block|}
-comment|// override AbstractSqlType
-specifier|public
-name|RelDataTypeFamily
-name|getFamily
-parameter_list|()
-block|{
-comment|// each UDT is in its own lonely family, until one day when
-comment|// we support inheritance (at which time also need to implement
-comment|// getPrecedenceList).
-return|return
-name|family
-return|;
-block|}
 comment|// implement RelDataTypeImpl
 specifier|protected
 name|void
@@ -187,37 +119,68 @@ name|boolean
 name|withDetail
 parameter_list|)
 block|{
-comment|// TODO jvs 10-Feb-2005:  proper quoting; dump attributes withDetail?
+if|if
+condition|(
+name|withDetail
+condition|)
+block|{
 name|sb
 operator|.
 name|append
 argument_list|(
-literal|"ObjectSqlType("
+name|elementType
+operator|.
+name|getFullTypeString
+argument_list|()
 argument_list|)
 expr_stmt|;
+block|}
+else|else
+block|{
 name|sb
 operator|.
 name|append
 argument_list|(
-name|sqlIdentifier
+name|elementType
 operator|.
 name|toString
 argument_list|()
 argument_list|)
 expr_stmt|;
+block|}
 name|sb
 operator|.
 name|append
 argument_list|(
-literal|")"
+literal|" ARRAY"
 argument_list|)
 expr_stmt|;
+block|}
+comment|// implement RelDataType
+specifier|public
+name|RelDataType
+name|getComponentType
+parameter_list|()
+block|{
+return|return
+name|elementType
+return|;
+block|}
+comment|// implement RelDataType
+specifier|public
+name|RelDataTypeFamily
+name|getFamily
+parameter_list|()
+block|{
+return|return
+name|this
+return|;
 block|}
 block|}
 end_class
 
 begin_comment
-comment|// End ObjectSqlType.java
+comment|// End ArraySqlType.java
 end_comment
 
 end_unit

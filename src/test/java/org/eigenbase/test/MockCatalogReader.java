@@ -402,10 +402,10 @@ argument_list|)
 argument_list|,
 literal|false
 argument_list|,
-operator|new
-name|RelDataTypeField
-index|[]
-block|{
+name|Arrays
+operator|.
+name|asList
+argument_list|(
 operator|new
 name|RelDataTypeFieldImpl
 argument_list|(
@@ -415,7 +415,7 @@ literal|0
 argument_list|,
 name|varchar20Type
 argument_list|)
-block|,
+argument_list|,
 operator|new
 name|RelDataTypeFieldImpl
 argument_list|(
@@ -425,7 +425,7 @@ literal|1
 argument_list|,
 name|varchar20Type
 argument_list|)
-block|,
+argument_list|,
 operator|new
 name|RelDataTypeFieldImpl
 argument_list|(
@@ -435,7 +435,7 @@ literal|1
 argument_list|,
 name|intType
 argument_list|)
-block|,
+argument_list|,
 operator|new
 name|RelDataTypeFieldImpl
 argument_list|(
@@ -445,7 +445,7 @@ literal|1
 argument_list|,
 name|varchar20Type
 argument_list|)
-block|}
+argument_list|)
 argument_list|,
 name|RelDataTypeComparability
 operator|.

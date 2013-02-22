@@ -81,7 +81,7 @@ specifier|public
 name|SqlMultisetMemberOfOperator
 parameter_list|()
 block|{
-comment|//TODO check if precedence is correct
+comment|// TODO check if precedence is correct
 name|super
 argument_list|(
 literal|"MEMBER OF"
@@ -269,9 +269,12 @@ name|getOperandCountRange
 parameter_list|()
 block|{
 return|return
-name|SqlOperandCountRange
+name|SqlOperandCountRanges
 operator|.
-name|Two
+name|of
+argument_list|(
+literal|2
+argument_list|)
 return|;
 block|}
 block|}

@@ -4357,8 +4357,9 @@ index|]
 argument_list|)
 argument_list|)
 argument_list|,
-operator|new
-name|FamilyOperandTypeChecker
+name|SqlTypeStrategies
+operator|.
+name|family
 argument_list|(
 name|typeFamilies
 operator|.

@@ -1984,6 +1984,28 @@ operator|new
 name|SqlMultisetQueryConstructor
 argument_list|()
 decl_stmt|;
+comment|/**      * The ARRAY Query Constructor. e.g. "<code>SELECT dname, ARRAY(SELECT      * FROM emp WHERE deptno = dept.deptno) FROM dept</code>".      */
+specifier|public
+specifier|static
+specifier|final
+name|SqlMultisetQueryConstructor
+name|arrayQueryConstructor
+init|=
+operator|new
+name|SqlArrayQueryConstructor
+argument_list|()
+decl_stmt|;
+comment|/**      * The MAP Query Constructor. e.g. "<code>MAP(SELECT empno, deptno      * FROM emp)</code>".      */
+specifier|public
+specifier|static
+specifier|final
+name|SqlMultisetQueryConstructor
+name|mapQueryConstructor
+init|=
+operator|new
+name|SqlMapQueryConstructor
+argument_list|()
+decl_stmt|;
 comment|/**      * The CURSOR constructor. e.g. "<code>SELECT * FROM      * TABLE(DEDUP(CURSOR(SELECT * FROM EMPS), 'name'))</code>".      */
 specifier|public
 specifier|static
@@ -2454,9 +2476,14 @@ name|getOperandCountRange
 parameter_list|()
 block|{
 return|return
-name|SqlOperandCountRange
+name|SqlOperandCountRanges
 operator|.
-name|OneOrTwo
+name|between
+argument_list|(
+literal|1
+argument_list|,
+literal|2
+argument_list|)
 return|;
 block|}
 block|}
@@ -2514,11 +2541,49 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlFunction
-name|trimFunc
+name|trimBothFunc
 init|=
 operator|new
 name|SqlTrimFunction
-argument_list|()
+argument_list|(
+name|SqlTrimFunction
+operator|.
+name|Flag
+operator|.
+name|BOTH
+argument_list|)
+decl_stmt|;
+specifier|public
+specifier|static
+specifier|final
+name|SqlFunction
+name|trimLeadingFunc
+init|=
+operator|new
+name|SqlTrimFunction
+argument_list|(
+name|SqlTrimFunction
+operator|.
+name|Flag
+operator|.
+name|LEADING
+argument_list|)
+decl_stmt|;
+specifier|public
+specifier|static
+specifier|final
+name|SqlFunction
+name|trimTrailingFunc
+init|=
+operator|new
+name|SqlTrimFunction
+argument_list|(
+name|SqlTrimFunction
+operator|.
+name|Flag
+operator|.
+name|TRAILING
+argument_list|)
 decl_stmt|;
 specifier|public
 specifier|static
@@ -3243,6 +3308,39 @@ operator|.
 name|System
 argument_list|)
 decl_stmt|;
+comment|/**      * The item operator {@code [ ... ]}, used to access a given element of an      * array or map. For example, {@code myArray[3]} or {@code "myMap['foo']"}.      *      *<p>The SQL standard calls the ARRAY variant a      *&lt;array element reference&gt;. Index is 1-based. The standard says      * to raise "data exception â array element error" but we currently return      * null.</p>      *      *<p>MAP is not standard SQL.</p>      */
+specifier|public
+specifier|static
+specifier|final
+name|SqlOperator
+name|itemOp
+init|=
+operator|new
+name|SqlItemOperator
+argument_list|()
+decl_stmt|;
+comment|/**      * The ARRAY Value Constructor. e.g. "<code>ARRAY[1, 2, 3]</code>".      */
+specifier|public
+specifier|static
+specifier|final
+name|SqlArrayValueConstructor
+name|arrayValueConstructor
+init|=
+operator|new
+name|SqlArrayValueConstructor
+argument_list|()
+decl_stmt|;
+comment|/**      * The MAP Value Constructor,      * e.g. "<code>MAP['washington', 1, 'obama', 44]</code>".      */
+specifier|public
+specifier|static
+specifier|final
+name|SqlMapValueConstructor
+name|mapValueConstructor
+init|=
+operator|new
+name|SqlMapValueConstructor
+argument_list|()
+decl_stmt|;
 comment|/**      * The internal "$SLICE" operator takes a multiset of records and returns a      * multiset of the first column of those records.      *      *<p>It is introduced when multisets of scalar types are created, in order      * to keep types consistent. For example,<code>MULTISET [5]</code> has type      *<code>INTEGER MULTISET</code> but is translated to an expression of type      *<code>RECORD(INTEGER EXPR$0) MULTISET</code> because in our internal      * representation of multisets, every element must be a record. Applying the      * "$SLICE" operator to this result converts the type back to an<code>      * INTEGER MULTISET</code> multiset value.      *      *<p><code>$SLICE</code> is often translated away when the multiset type is      * converted back to scalar values.      */
 specifier|public
 specifier|static
@@ -3443,7 +3541,7 @@ return|;
 block|}
 block|}
 decl_stmt|;
-comment|/**      * The CARDINALITY operator, used to retrieve the number of elements in a      * MULTISET      */
+comment|/**      * The CARDINALITY operator, used to retrieve the number of elements in a      * MULTISET, ARRAY or MAP.      */
 specifier|public
 specifier|static
 specifier|final
@@ -3467,7 +3565,7 @@ literal|null
 argument_list|,
 name|SqlTypeStrategies
 operator|.
-name|otcMultiset
+name|otcCollection
 argument_list|,
 name|SqlFunctionCategory
 operator|.

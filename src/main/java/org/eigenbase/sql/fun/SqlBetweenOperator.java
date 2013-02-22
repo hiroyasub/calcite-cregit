@@ -200,15 +200,6 @@ name|UPPER_OPERAND
 init|=
 literal|2
 decl_stmt|;
-comment|/**      * Ordinal of the 'symmetric' operand.      */
-specifier|public
-specifier|static
-specifier|final
-name|int
-name|SYMFLAG_OPERAND
-init|=
-literal|3
-decl_stmt|;
 comment|/**      * Custom operand-type checking strategy.      */
 specifier|private
 specifier|static
@@ -256,10 +247,9 @@ block|{
 name|ASYMMETRIC
 block|,
 name|SYMMETRIC
-block|;     }
+block|}
 comment|//~ Instance fields --------------------------------------------------------
-comment|/**      * todo: Use a wrapper 'class SqlTempCall(SqlOperator,SqlParserPos) extends      * SqlNode' to store extra flags (neg and asymmetric) to calls to BETWEEN.      * Then we can obsolete flag. SqlTempCall would never have any SqlNodes as      * children, but it can have flags.      */
-specifier|private
+specifier|public
 specifier|final
 name|Flag
 name|flag
@@ -464,18 +454,6 @@ literal|"{1} {0} {2} AND {3}"
 return|;
 block|}
 specifier|public
-name|SqlOperandCountRange
-name|getOperandCountRange
-parameter_list|()
-block|{
-comment|// exp1 [ASYMMETRIC|SYMMETRIC] BETWEEN exp4 AND exp4
-return|return
-name|SqlOperandCountRange
-operator|.
-name|Four
-return|;
-block|}
-specifier|public
 name|void
 name|unparse
 parameter_list|(
@@ -533,18 +511,14 @@ name|getName
 argument_list|()
 argument_list|)
 expr_stmt|;
-name|operands
-index|[
-name|SYMFLAG_OPERAND
-index|]
-operator|.
-name|unparse
-argument_list|(
 name|writer
-argument_list|,
-literal|0
-argument_list|,
-literal|0
+operator|.
+name|sep
+argument_list|(
+name|flag
+operator|.
+name|name
+argument_list|()
 argument_list|)
 expr_stmt|;
 comment|// If the expression for the lower bound contains a call to an AND
@@ -981,17 +955,6 @@ argument_list|,
 name|exp1
 argument_list|,
 name|exp2
-argument_list|,
-name|SqlLiteral
-operator|.
-name|createSymbol
-argument_list|(
-name|flag
-argument_list|,
-name|SqlParserPos
-operator|.
-name|ZERO
-argument_list|)
 argument_list|)
 decl_stmt|;
 comment|// Replace all of the matched nodes with the single reduced node.

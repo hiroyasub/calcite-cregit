@@ -52,6 +52,7 @@ name|AbstractSqlType
 block|{
 comment|//~ Instance fields --------------------------------------------------------
 specifier|private
+specifier|final
 name|RelDataType
 name|elementType
 decl_stmt|;

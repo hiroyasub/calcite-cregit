@@ -163,6 +163,18 @@ name|long
 name|maxCardinality
 parameter_list|)
 function_decl|;
+comment|/**      * Creates a map type. Maps are unordered collections of key/value pairs.      *      * @param keyType type of the keys of the map      * @param valueType type of the values of the map      *      * @return canonical map type descriptor      */
+specifier|public
+name|RelDataType
+name|createMapType
+parameter_list|(
+name|RelDataType
+name|keyType
+parameter_list|,
+name|RelDataType
+name|valueType
+parameter_list|)
+function_decl|;
 comment|/**      * Creates a multiset type. Multisets are unordered collections of elements.      *      * @param elementType type of the elements of the multiset      * @param maxCardinality maximum collection size, or -1 for unlimited      *      * @return canonical multiset type descriptor      */
 specifier|public
 name|RelDataType

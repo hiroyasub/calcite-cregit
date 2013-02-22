@@ -651,9 +651,14 @@ name|getOperandCountRange
 parameter_list|()
 block|{
 return|return
-name|SqlOperandCountRange
+name|SqlOperandCountRanges
 operator|.
-name|TwoOrThree
+name|between
+argument_list|(
+literal|2
+argument_list|,
+literal|3
+argument_list|)
 return|;
 block|}
 specifier|public

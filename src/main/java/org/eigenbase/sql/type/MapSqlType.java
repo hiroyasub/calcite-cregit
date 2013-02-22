@@ -17,11 +17,13 @@ end_package
 
 begin_import
 import|import
-name|java
+name|org
 operator|.
-name|util
+name|eigenbase
 operator|.
-name|List
+name|reltype
+operator|.
+name|RelDataType
 import|;
 end_import
 
@@ -33,146 +35,105 @@ name|eigenbase
 operator|.
 name|reltype
 operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
-name|sql
-operator|.
-name|*
+name|RelDataTypeFamily
 import|;
 end_import
 
 begin_comment
-comment|/**  * ObjectSqlType represents an SQL structured user-defined type.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  * SQL map type.  */
 end_comment
 
 begin_class
 specifier|public
 class|class
-name|ObjectSqlType
+name|MapSqlType
 extends|extends
 name|AbstractSqlType
 block|{
 comment|//~ Instance fields --------------------------------------------------------
 specifier|private
 specifier|final
-name|SqlIdentifier
-name|sqlIdentifier
+name|RelDataType
+name|keyType
 decl_stmt|;
 specifier|private
 specifier|final
-name|RelDataTypeComparability
-name|comparability
-decl_stmt|;
-specifier|private
-name|RelDataTypeFamily
-name|family
+name|RelDataType
+name|valueType
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Constructs an object type. This should only be called from a factory      * method.      *      * @param typeName SqlTypeName for this type (either Distinct or Structured)      * @param sqlIdentifier identifier for this type      * @param nullable whether type accepts nulls      * @param fields object attribute definitions      */
+comment|/**      * Creates a MapSqlType. This constructor should only be called      * from a factory method.      */
 specifier|public
-name|ObjectSqlType
+name|MapSqlType
 parameter_list|(
-name|SqlTypeName
-name|typeName
+name|RelDataType
+name|keyType
 parameter_list|,
-name|SqlIdentifier
-name|sqlIdentifier
+name|RelDataType
+name|valueType
 parameter_list|,
 name|boolean
-name|nullable
-parameter_list|,
-name|List
-argument_list|<
-name|?
-extends|extends
-name|RelDataTypeField
-argument_list|>
-name|fields
-parameter_list|,
-name|RelDataTypeComparability
-name|comparability
+name|isNullable
 parameter_list|)
 block|{
 name|super
 argument_list|(
-name|typeName
+name|SqlTypeName
+operator|.
+name|MAP
 argument_list|,
-name|nullable
+name|isNullable
 argument_list|,
-name|fields
+literal|null
 argument_list|)
 expr_stmt|;
+assert|assert
+name|keyType
+operator|!=
+literal|null
+assert|;
+assert|assert
+name|valueType
+operator|!=
+literal|null
+assert|;
 name|this
 operator|.
-name|sqlIdentifier
+name|keyType
 operator|=
-name|sqlIdentifier
+name|keyType
 expr_stmt|;
 name|this
 operator|.
-name|comparability
+name|valueType
 operator|=
-name|comparability
+name|valueType
 expr_stmt|;
 name|computeDigest
 argument_list|()
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
 specifier|public
-name|void
-name|setFamily
-parameter_list|(
-name|RelDataTypeFamily
-name|family
-parameter_list|)
-block|{
-name|this
-operator|.
-name|family
-operator|=
-name|family
-expr_stmt|;
-block|}
-comment|// implement RelDataType
-specifier|public
-name|RelDataTypeComparability
-name|getComparability
+name|RelDataType
+name|getValueType
 parameter_list|()
 block|{
 return|return
-name|comparability
+name|valueType
 return|;
 block|}
-comment|// override AbstractSqlType
+annotation|@
+name|Override
 specifier|public
-name|SqlIdentifier
-name|getSqlIdentifier
+name|RelDataType
+name|getKeyType
 parameter_list|()
 block|{
 return|return
-name|sqlIdentifier
-return|;
-block|}
-comment|// override AbstractSqlType
-specifier|public
-name|RelDataTypeFamily
-name|getFamily
-parameter_list|()
-block|{
-comment|// each UDT is in its own lonely family, until one day when
-comment|// we support inheritance (at which time also need to implement
-comment|// getPrecedenceList).
-return|return
-name|family
+name|keyType
 return|;
 block|}
 comment|// implement RelDataTypeImpl
@@ -187,37 +148,69 @@ name|boolean
 name|withDetail
 parameter_list|)
 block|{
-comment|// TODO jvs 10-Feb-2005:  proper quoting; dump attributes withDetail?
 name|sb
 operator|.
 name|append
 argument_list|(
-literal|"ObjectSqlType("
+literal|"("
 argument_list|)
-expr_stmt|;
-name|sb
 operator|.
 name|append
 argument_list|(
-name|sqlIdentifier
+name|withDetail
+condition|?
+name|keyType
+operator|.
+name|getFullTypeString
+argument_list|()
+else|:
+name|keyType
 operator|.
 name|toString
 argument_list|()
 argument_list|)
-expr_stmt|;
-name|sb
 operator|.
 name|append
 argument_list|(
-literal|")"
+literal|", "
+argument_list|)
+operator|.
+name|append
+argument_list|(
+name|withDetail
+condition|?
+name|valueType
+operator|.
+name|getFullTypeString
+argument_list|()
+else|:
+name|valueType
+operator|.
+name|toString
+argument_list|()
+argument_list|)
+operator|.
+name|append
+argument_list|(
+literal|") MAP"
 argument_list|)
 expr_stmt|;
+block|}
+comment|// implement RelDataType
+specifier|public
+name|RelDataTypeFamily
+name|getFamily
+parameter_list|()
+block|{
+return|return
+name|this
+return|;
 block|}
 block|}
 end_class
 
 begin_comment
-comment|// End ObjectSqlType.java
+comment|// End MapSqlType.java
 end_comment
 
 end_unit

@@ -922,9 +922,10 @@ name|getOperandCountRange
 parameter_list|()
 block|{
 return|return
-name|SqlOperandCountRange
+name|SqlOperandCountRanges
 operator|.
-name|Variadic
+name|any
+argument_list|()
 return|;
 block|}
 specifier|public

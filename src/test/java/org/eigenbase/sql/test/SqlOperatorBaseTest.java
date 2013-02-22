@@ -15600,7 +15600,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|trimFunc
+name|trimBothFunc
 argument_list|)
 expr_stmt|;
 comment|// SQL:2003 6.29.11 Trimming a CHAR yields a VARCHAR
@@ -15853,6 +15853,28 @@ literal|"2"
 argument_list|)
 expr_stmt|;
 block|}
+comment|// applied to array
+name|getTester
+argument_list|()
+operator|.
+name|checkScalarExact
+argument_list|(
+literal|"cardinality(array['foo', 'bar'])"
+argument_list|,
+literal|"2"
+argument_list|)
+expr_stmt|;
+comment|// applied to map
+name|getTester
+argument_list|()
+operator|.
+name|checkScalarExact
+argument_list|(
+literal|"cardinality(map['foo', 1, 'bar', 2])"
+argument_list|,
+literal|"2"
+argument_list|)
+expr_stmt|;
 block|}
 specifier|public
 name|void
@@ -16086,6 +16108,263 @@ operator|.
 name|checkNull
 argument_list|(
 literal|"extract(month from cast(null as interval year))"
+argument_list|)
+expr_stmt|;
+block|}
+specifier|public
+name|void
+name|testArrayValueConstructor
+parameter_list|()
+block|{
+name|getTester
+argument_list|()
+operator|.
+name|setFor
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|arrayValueConstructor
+argument_list|)
+expr_stmt|;
+name|getTester
+argument_list|()
+operator|.
+name|checkScalar
+argument_list|(
+literal|"Array['foo', 'bar']"
+argument_list|,
+literal|"[foo, bar]"
+argument_list|,
+literal|"CHAR(3) NOT NULL ARRAY NOT NULL"
+argument_list|)
+expr_stmt|;
+comment|// empty array is illegal per SQL spec. presumably because one can't
+comment|// infer type
+name|getTester
+argument_list|()
+operator|.
+name|checkFails
+argument_list|(
+literal|"^Array[]^"
+argument_list|,
+literal|"Require at least 1 argument"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+block|}
+specifier|public
+name|void
+name|testItemOp
+parameter_list|()
+block|{
+name|getTester
+argument_list|()
+operator|.
+name|setFor
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|itemOp
+argument_list|)
+expr_stmt|;
+name|getTester
+argument_list|()
+operator|.
+name|checkScalar
+argument_list|(
+literal|"ARRAY ['foo', 'bar'][1]"
+argument_list|,
+literal|"foo"
+argument_list|,
+literal|"CHAR(3) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|getTester
+argument_list|()
+operator|.
+name|checkScalar
+argument_list|(
+literal|"ARRAY ['foo', 'bar'][0]"
+argument_list|,
+literal|null
+argument_list|,
+literal|"CHAR(3) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|getTester
+argument_list|()
+operator|.
+name|checkScalar
+argument_list|(
+literal|"ARRAY ['foo', 'bar'][2]"
+argument_list|,
+literal|"bar"
+argument_list|,
+literal|"CHAR(3) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|getTester
+argument_list|()
+operator|.
+name|checkScalar
+argument_list|(
+literal|"ARRAY ['foo', 'bar'][3]"
+argument_list|,
+literal|null
+argument_list|,
+literal|"CHAR(3) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|getTester
+argument_list|()
+operator|.
+name|checkNull
+argument_list|(
+literal|"ARRAY ['foo', 'bar'][1 + CAST(NULL AS INTEGER)]"
+argument_list|)
+expr_stmt|;
+name|getTester
+argument_list|()
+operator|.
+name|checkFails
+argument_list|(
+literal|"^ARRAY ['foo', 'bar']['baz']^"
+argument_list|,
+literal|"Cannot apply 'ITEM' to arguments of type 'ITEM\\(<CHAR\\(3\\) ARRAY>,<CHAR\\(3\\)>\\)'\\. Supported form\\(s\\):<ARRAY>\\[<INTEGER>\\]\n"
+operator|+
+literal|"<MAP>\\[<VALUE>\\]"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+comment|// Array of INTEGER NOT NULL is interesting because we might be tempted
+comment|// to represent the result as Java "int".
+name|getTester
+argument_list|()
+operator|.
+name|checkScalar
+argument_list|(
+literal|"ARRAY [2, 4, 6][2]"
+argument_list|,
+literal|"4"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+name|getTester
+argument_list|()
+operator|.
+name|checkScalar
+argument_list|(
+literal|"ARRAY [2, 4, 6][4]"
+argument_list|,
+literal|null
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+comment|// Map item
+name|getTester
+argument_list|()
+operator|.
+name|checkScalarExact
+argument_list|(
+literal|"map['foo', 3, 'bar', 7]['bar']"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|,
+literal|"7"
+argument_list|)
+expr_stmt|;
+name|getTester
+argument_list|()
+operator|.
+name|checkScalarExact
+argument_list|(
+literal|"map['foo', CAST(NULL AS INTEGER), 'bar', 7]['bar']"
+argument_list|,
+literal|"INTEGER"
+argument_list|,
+literal|"7"
+argument_list|)
+expr_stmt|;
+name|getTester
+argument_list|()
+operator|.
+name|checkScalarExact
+argument_list|(
+literal|"map['foo', CAST(NULL AS INTEGER), 'bar', 7]['baz']"
+argument_list|,
+literal|"INTEGER"
+argument_list|,
+literal|null
+argument_list|)
+expr_stmt|;
+block|}
+specifier|public
+name|void
+name|testMapValueConstructor
+parameter_list|()
+block|{
+name|getTester
+argument_list|()
+operator|.
+name|setFor
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|mapValueConstructor
+argument_list|,
+name|VM_JAVA
+argument_list|)
+expr_stmt|;
+name|getTester
+argument_list|()
+operator|.
+name|checkFails
+argument_list|(
+literal|"^Map[]^"
+argument_list|,
+literal|"Map requires at least 2 arguments"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|getTester
+argument_list|()
+operator|.
+name|checkFails
+argument_list|(
+literal|"^Map[1, 'x', 2]^"
+argument_list|,
+literal|"Map requires an even number of arguments"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|getTester
+argument_list|()
+operator|.
+name|checkFails
+argument_list|(
+literal|"^map[1, 1, 2, 'x']^"
+argument_list|,
+literal|"Parameters must be of the same type"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|getTester
+argument_list|()
+operator|.
+name|checkScalarExact
+argument_list|(
+literal|"map['washington', 1, 'obama', 44]"
+argument_list|,
+literal|"(CHAR(10) NOT NULL, INTEGER NOT NULL) MAP NOT NULL"
+argument_list|,
+literal|"{washington=1, obama=44}"
 argument_list|)
 expr_stmt|;
 block|}

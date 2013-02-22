@@ -183,6 +183,12 @@ block|,
 comment|/**      * The MULTISET Query Constructor      */
 name|MultisetQueryConstructor
 block|,
+comment|/**      * The MAP value constructor      */
+name|MapValueConstructor
+block|,
+comment|/**      * The ARRAY value constructor      */
+name|ArrayValueConstructor
+block|,
 comment|/**      * NEW invocation      */
 name|NewSpecification
 block|,

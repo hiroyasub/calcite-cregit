@@ -74,16 +74,21 @@ name|SqlSingleOperandTypeChecker
 block|{
 comment|//~ Instance fields --------------------------------------------------------
 specifier|protected
+specifier|final
+name|List
+argument_list|<
 name|SqlTypeFamily
-index|[]
+argument_list|>
 name|families
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-specifier|public
+comment|/** Package private. Create using {@link SqlTypeStrategies#family}. */
 name|FamilyOperandTypeChecker
 parameter_list|(
+name|List
+argument_list|<
 name|SqlTypeFamily
-modifier|...
+argument_list|>
 name|families
 parameter_list|)
 block|{
@@ -117,9 +122,11 @@ name|SqlTypeFamily
 name|family
 init|=
 name|families
-index|[
+operator|.
+name|get
+argument_list|(
 name|iFormalOperand
-index|]
+argument_list|)
 decl_stmt|;
 if|if
 condition|(
@@ -257,7 +264,8 @@ if|if
 condition|(
 name|families
 operator|.
-name|length
+name|size
+argument_list|()
 operator|!=
 name|callBinding
 operator|.
@@ -333,12 +341,14 @@ name|getOperandCountRange
 parameter_list|()
 block|{
 return|return
-operator|new
-name|SqlOperandCountRange
+name|SqlOperandCountRanges
+operator|.
+name|of
 argument_list|(
 name|families
 operator|.
-name|length
+name|size
+argument_list|()
 argument_list|)
 return|;
 block|}
@@ -363,24 +373,8 @@ name|op
 argument_list|,
 name|opName
 argument_list|,
-name|Arrays
-operator|.
-name|asList
-argument_list|(
 name|families
 argument_list|)
-argument_list|)
-return|;
-block|}
-comment|// hack for FarragoCalcSystemTest
-specifier|public
-name|SqlTypeFamily
-index|[]
-name|getFamilies
-parameter_list|()
-block|{
-return|return
-name|families
 return|;
 block|}
 block|}

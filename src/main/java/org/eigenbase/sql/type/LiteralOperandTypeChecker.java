@@ -52,7 +52,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Parameter type-checking strategy type must be a literal (whether null is  * allowede is determined by the constructor).<code>CAST(NULL as ...)</code> is  * considered to be a NULL literal but not<code>CAST(CAST(NULL as ...) AS  * ...)</code>  *  * @author Wael Chatila  * @version $Id$  */
+comment|/**  * Parameter type-checking strategy type must be a literal (whether null is  * allowed is determined by the constructor).<code>CAST(NULL as ...)</code> is  * considered to be a NULL literal but not<code>CAST(CAST(NULL as ...) AS  * ...)</code>  *  * @author Wael Chatila  * @version $Id$  */
 end_comment
 
 begin_class
@@ -257,9 +257,12 @@ name|getOperandCountRange
 parameter_list|()
 block|{
 return|return
-name|SqlOperandCountRange
+name|SqlOperandCountRanges
 operator|.
-name|One
+name|of
+argument_list|(
+literal|1
+argument_list|)
 return|;
 block|}
 specifier|public

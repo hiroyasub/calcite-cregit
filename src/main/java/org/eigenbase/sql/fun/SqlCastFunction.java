@@ -19,18 +19,6 @@ begin_import
 import|import
 name|java
 operator|.
-name|nio
-operator|.
-name|charset
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
 name|util
 operator|.
 name|*
@@ -152,7 +140,7 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/*      * List all casts that do not preserve monotonicity      */
+comment|/**      * List all casts that do not preserve monotonicity.      */
 specifier|private
 name|Set
 argument_list|<
@@ -552,25 +540,13 @@ name|int
 name|operandsCount
 parameter_list|)
 block|{
-switch|switch
-condition|(
-name|operandsCount
-condition|)
-block|{
-case|case
-literal|2
-case|:
-return|return
-literal|"{0}({1} AS {2})"
-return|;
-block|}
 assert|assert
-operator|(
-literal|false
-operator|)
+name|operandsCount
+operator|==
+literal|2
 assert|;
 return|return
-literal|null
+literal|"{0}({1} AS {2})"
 return|;
 block|}
 specifier|public
@@ -579,9 +555,12 @@ name|getOperandCountRange
 parameter_list|()
 block|{
 return|return
-name|SqlOperandCountRange
+name|SqlOperandCountRanges
 operator|.
-name|Two
+name|of
+argument_list|(
+literal|2
+argument_list|)
 return|;
 block|}
 comment|/**      * Makes sure that the number and types of arguments are allowable.      * Operators (such as "ROW" and "AS") which do not check their arguments can      * override this method.      */

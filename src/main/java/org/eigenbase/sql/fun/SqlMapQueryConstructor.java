@@ -5,13 +5,13 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|eigenbase
 operator|.
-name|optiq
+name|sql
 operator|.
-name|jdbc
+name|fun
 package|;
 end_package
 
@@ -21,84 +21,43 @@ name|org
 operator|.
 name|eigenbase
 operator|.
-name|reltype
+name|sql
 operator|.
-name|RelDataTypeField
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
-name|reltype
-operator|.
-name|RelRecordType
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|List
+name|SqlKind
 import|;
 end_import
 
 begin_comment
-comment|/** * Record type based on a Java class. The fields of the type are the fields  * of the class.  *  *<p><strong>NOTE: This class is experimental and subject to  * change/removal without notice</strong>.</p> */
+comment|/**  * Definition of the MAP query constructor,<code>  * MAP (&lt;query&gt;)</code>.  *  *<p>Like the MAP type, not standard SQL.</p>  */
 end_comment
 
 begin_class
 specifier|public
 class|class
-name|JavaRecordType
+name|SqlMapQueryConstructor
 extends|extends
-name|RelRecordType
+name|SqlMultisetQueryConstructor
 block|{
-specifier|final
-name|Class
-name|clazz
-decl_stmt|;
+comment|//~ Constructors -----------------------------------------------------------
 specifier|public
-name|JavaRecordType
-parameter_list|(
-name|List
-argument_list|<
-name|RelDataTypeField
-argument_list|>
-name|fields
-parameter_list|,
-name|Class
-name|clazz
-parameter_list|)
+name|SqlMapQueryConstructor
+parameter_list|()
 block|{
 name|super
 argument_list|(
-name|fields
+literal|"MAP"
+argument_list|,
+name|SqlKind
+operator|.
+name|MAP_QUERY_CONSTRUCTOR
 argument_list|)
 expr_stmt|;
-name|this
-operator|.
-name|clazz
-operator|=
-name|clazz
-expr_stmt|;
-assert|assert
-name|clazz
-operator|!=
-literal|null
-assert|;
 block|}
 block|}
 end_class
 
 begin_comment
-comment|// End JavaRecordType.java
+comment|// End SqlMapQueryConstructor.java
 end_comment
 
 end_unit

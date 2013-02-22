@@ -6771,6 +6771,130 @@ literal|"(((`A` MULTISET UNION (`B` MULTISET INTERSECT `C`)) MULTISET EXCEPT `D`
 argument_list|)
 expr_stmt|;
 block|}
+specifier|public
+name|void
+name|testMapElement
+parameter_list|()
+block|{
+name|checkExp
+argument_list|(
+literal|"a['foo']"
+argument_list|,
+literal|"`A` ['foo']"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"a['x' || 'y']"
+argument_list|,
+literal|"`A` [('x' || 'y')]"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"a['foo'] ['bar']"
+argument_list|,
+literal|"`A` ['foo'] ['bar']"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"a['foo']['bar']"
+argument_list|,
+literal|"`A` ['foo'] ['bar']"
+argument_list|)
+expr_stmt|;
+block|}
+specifier|public
+name|void
+name|testArrayElement
+parameter_list|()
+block|{
+name|checkExp
+argument_list|(
+literal|"a[1]"
+argument_list|,
+literal|"`A` [1]"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"a[b[1]]"
+argument_list|,
+literal|"`A` [`B` [1]]"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"a[b[1 + 2] + 3]"
+argument_list|,
+literal|"`A` [(`B` [(1 + 2)] + 3)]"
+argument_list|)
+expr_stmt|;
+block|}
+specifier|public
+name|void
+name|testArrayValueConstructor
+parameter_list|()
+block|{
+name|checkExp
+argument_list|(
+literal|"array[1, 2]"
+argument_list|,
+literal|"(ARRAY [1, 2])"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"array [1, 2]"
+argument_list|,
+literal|"(ARRAY [1, 2])"
+argument_list|)
+expr_stmt|;
+comment|// with space
+comment|// parser allows empty array; validator will reject it
+name|checkExp
+argument_list|(
+literal|"array[]"
+argument_list|,
+literal|"(ARRAY [])"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"array[(1, 'a'), (2, 'b')]"
+argument_list|,
+literal|"(ARRAY [(ROW(1, 'a')), (ROW(2, 'b'))])"
+argument_list|)
+expr_stmt|;
+block|}
+specifier|public
+name|void
+name|testMapValueConstructor
+parameter_list|()
+block|{
+name|checkExp
+argument_list|(
+literal|"map[1, 'x', 2, 'y']"
+argument_list|,
+literal|"(MAP [1, 'x', 2, 'y'])"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"map [1, 'x', 2, 'y']"
+argument_list|,
+literal|"(MAP [1, 'x', 2, 'y'])"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"map[]"
+argument_list|,
+literal|"(MAP [])"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/**      * Runs tests for INTERVAL... YEAR that should pass both parser and      * validator. A substantially identical set of tests exists in      * SqlValidatorTest, and any changes here should be synchronized there.      * Similarly, any changes to tests here should be echoed appropriately to      * each of the other 12 subTestIntervalXXXPositive() tests.      */
 specifier|public
 name|void
@@ -13622,11 +13746,6 @@ name|SqlParseException
 name|e
 parameter_list|)
 block|{
-name|e
-operator|.
-name|printStackTrace
-argument_list|()
-expr_stmt|;
 name|String
 name|message
 init|=
@@ -13645,9 +13764,11 @@ argument_list|()
 decl_stmt|;
 throw|throw
 operator|new
-name|AssertionFailedError
+name|RuntimeException
 argument_list|(
 name|message
+argument_list|,
+name|e
 argument_list|)
 throw|;
 block|}

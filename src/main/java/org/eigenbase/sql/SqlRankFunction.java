@@ -132,17 +132,6 @@ expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
 specifier|public
-name|SqlOperandCountRange
-name|getOperandCountRange
-parameter_list|()
-block|{
-return|return
-name|SqlOperandCountRange
-operator|.
-name|Zero
-return|;
-block|}
-specifier|public
 name|RelDataType
 name|getReturnType
 parameter_list|(

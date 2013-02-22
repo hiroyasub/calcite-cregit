@@ -148,6 +148,18 @@ name|RelDataType
 name|getComponentType
 parameter_list|()
 function_decl|;
+comment|/**      * Gets the key type if this type is a map, otherwise null.      *      * @return canonical type descriptor for key      */
+specifier|public
+name|RelDataType
+name|getKeyType
+parameter_list|()
+function_decl|;
+comment|/**      * Gets the value type if this type is a map, otherwise null.      *      * @return canonical type descriptor for value      */
+specifier|public
+name|RelDataType
+name|getValueType
+parameter_list|()
+function_decl|;
 comment|/**      * Gets this type's character set, or null if this type cannot carry a      * character set or has no character set defined.      *      * @return charset of type      */
 specifier|public
 name|Charset

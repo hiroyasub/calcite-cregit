@@ -752,7 +752,7 @@ literal|false
 return|;
 block|}
 block|}
-comment|/**      * Unparses a call to an operator which has function syntax.      *      * @param operator The operator      * @param writer Writer      * @param operands List of 0 or more operands      * @param emptyParens Whether to print parentheses if there are 0 operands      * @param quantifier      */
+comment|/**      * Unparses a call to an operator which has function syntax.      *      * @param operator The operator      * @param writer Writer      * @param operands List of 0 or more operands      * @param emptyParens Whether to print parentheses if there are 0 operands      * @param quantifier Quantifier      */
 specifier|public
 specifier|static
 name|void
@@ -1520,24 +1520,11 @@ condition|(
 operator|!
 name|od
 operator|.
-name|isVariadic
-argument_list|()
-operator|&&
-operator|!
-name|od
-operator|.
-name|getAllowedList
-argument_list|()
-operator|.
-name|contains
-argument_list|(
-operator|new
-name|Integer
+name|isValidCount
 argument_list|(
 name|argTypes
 operator|.
 name|length
-argument_list|)
 argument_list|)
 condition|)
 block|{

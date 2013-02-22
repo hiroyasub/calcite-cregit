@@ -82,8 +82,9 @@ name|getOperandCountRange
 parameter_list|()
 block|{
 return|return
-operator|new
-name|SqlOperandCountRange
+name|SqlOperandCountRanges
+operator|.
+name|of
 argument_list|(
 name|paramTypes
 operator|.
