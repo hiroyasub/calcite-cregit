@@ -512,6 +512,56 @@ literal|"state_province=WA; S=124366; DC=1828\n"
 argument_list|)
 expr_stmt|;
 block|}
+specifier|public
+name|void
+name|testPlan
+parameter_list|()
+block|{
+name|assertThat
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|JDBC_FOODMART
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select c.\"state_province\"\n"
+operator|+
+literal|"from \"foodmart\".\"customer\" as c\n"
+operator|+
+literal|"where c.\"state_province\" = 'USA'"
+argument_list|)
+operator|.
+name|planContains
+argument_list|(
+literal|"            public boolean moveNext() {\n"
+operator|+
+literal|"              while (inputEnumerator.moveNext()) {\n"
+operator|+
+literal|"                final String v = (String) ((Object[]) inputEnumerator.current())[10];\n"
+operator|+
+literal|"                final Boolean v2 = v == null ? null : net.hydromatic.optiq.runtime.SqlFunctions.eq(v == null ? null : net.hydromatic.optiq.runtime.SqlFunctions.truncate(v, 30), \"USA\");\n"
+operator|+
+literal|"                if (v2 != null&& v2) {\n"
+operator|+
+literal|"                  return true;\n"
+operator|+
+literal|"                }\n"
+operator|+
+literal|"              }\n"
+operator|+
+literal|"              return false;\n"
+operator|+
+literal|"            }\n"
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 end_class
 

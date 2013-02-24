@@ -2205,6 +2205,15 @@ name|s
 argument_list|)
 expr_stmt|;
 block|}
+name|Hook
+operator|.
+name|JAVA_PLAN
+operator|.
+name|run
+argument_list|(
+name|s
+argument_list|)
+expr_stmt|;
 specifier|final
 name|Executable
 name|executable
