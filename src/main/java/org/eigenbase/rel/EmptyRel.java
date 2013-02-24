@@ -177,15 +177,30 @@ return|;
 block|}
 comment|// implement RelNode
 specifier|public
-name|void
-name|explain
+name|RelOptPlanWriter
+name|explainTerms
 parameter_list|(
 name|RelOptPlanWriter
 name|pw
 parameter_list|)
 block|{
-if|if
-condition|(
+return|return
+name|super
+operator|.
+name|explainTerms
+argument_list|(
+name|pw
+argument_list|)
+comment|// For rel digest, include the row type to discriminate
+comment|// this from other empties with different row types.
+comment|// For normal EXPLAIN PLAN, omit the type.
+operator|.
+name|itemIf
+argument_list|(
+literal|"type"
+argument_list|,
+name|rowType
+argument_list|,
 name|pw
 operator|.
 name|getDetailLevel
@@ -194,43 +209,8 @@ operator|==
 name|SqlExplainLevel
 operator|.
 name|DIGEST_ATTRIBUTES
-condition|)
-block|{
-comment|// For rel digest, include the row type to discriminate
-comment|// this from other empties with different row types.
-name|pw
-operator|.
-name|explain
-argument_list|(
-name|this
-argument_list|,
-operator|new
-name|String
-index|[]
-block|{
-literal|"type"
-block|, }
-argument_list|,
-operator|new
-name|Object
-index|[]
-block|{
-name|rowType
-block|}
 argument_list|)
-expr_stmt|;
-block|}
-else|else
-block|{
-comment|// For normal EXPLAIN PLAN, omit the type.
-name|super
-operator|.
-name|explain
-argument_list|(
-name|pw
-argument_list|)
-expr_stmt|;
-block|}
+return|;
 block|}
 block|}
 end_class

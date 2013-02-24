@@ -7102,11 +7102,6 @@ argument_list|(
 name|planWriter
 argument_list|)
 expr_stmt|;
-name|planWriter
-operator|.
-name|flush
-argument_list|()
-expr_stmt|;
 return|return
 name|sw
 operator|.

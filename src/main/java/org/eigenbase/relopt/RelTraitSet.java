@@ -41,8 +41,14 @@ end_comment
 
 begin_class
 specifier|public
+specifier|final
 class|class
 name|RelTraitSet
+extends|extends
+name|AbstractList
+argument_list|<
+name|RelTrait
+argument_list|>
 block|{
 specifier|public
 specifier|static
@@ -132,6 +138,21 @@ name|traits
 index|[
 name|index
 index|]
+return|;
+block|}
+specifier|public
+name|RelTrait
+name|get
+parameter_list|(
+name|int
+name|index
+parameter_list|)
+block|{
+return|return
+name|getTrait
+argument_list|(
+name|index
+argument_list|)
 return|;
 block|}
 comment|/**      * Retrieves a RelTrait of the given type from the set.      *      * @param traitDef the type of RelTrait to retrieve      *      * @return the RelTrait, or null if not found      */

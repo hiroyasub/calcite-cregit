@@ -232,6 +232,7 @@ name|RelOptPlanner
 name|planner
 parameter_list|)
 function_decl|;
+comment|/** Describes the inputs and attributes of this relational expression.      * Each node should call {@code super.explain}, then call the      * {@link RelOptPlanWriter#input(String, RelNode)}      * and {@link RelOptPlanWriter#item(String, Object)} methods for each input      * and attribute.      *      * @param pw Plan writer      */
 specifier|public
 name|void
 name|explain
@@ -282,7 +283,7 @@ name|RelOptTable
 name|getTable
 parameter_list|()
 function_decl|;
-comment|/**      * Returns the name of this relational expression's class, sans package      * name, for use in {@link #explain}. For example, for a<code>      * org.eigenbase.rel.ArrayRel.ArrayReader</code>, this method returns      * "ArrayReader".      */
+comment|/**      * Returns the name of this relational expression's class, sans package      * name, for use in explain. For example, for a<code>      * org.eigenbase.rel.ArrayRel.ArrayReader</code>, this method returns      * "ArrayReader".      */
 specifier|public
 name|String
 name|getRelTypeName

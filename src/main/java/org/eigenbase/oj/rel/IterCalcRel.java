@@ -346,22 +346,26 @@ comment|//~ Methods ------------------------------------------------------------
 comment|// TODO jvs 10-May-2004: need a computeSelfCost which takes condition into
 comment|// account; maybe inherit from CalcRelBase?
 specifier|public
-name|void
-name|explain
+name|RelOptPlanWriter
+name|explainTerms
 parameter_list|(
 name|RelOptPlanWriter
 name|pw
 parameter_list|)
 block|{
+return|return
 name|program
 operator|.
 name|explainCalc
 argument_list|(
-name|this
-argument_list|,
+name|super
+operator|.
+name|explainTerms
+argument_list|(
 name|pw
 argument_list|)
-expr_stmt|;
+argument_list|)
+return|;
 block|}
 specifier|protected
 name|String
