@@ -98,7 +98,7 @@ argument_list|>
 name|argList
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates an AggregateCall.      *      * @param aggregation Aggregation      * @param distinct Whether distinct      * @param argList List of ordinals of arguments      * @param type Result type      * @param name Name      */
+comment|/**      * Creates an AggregateCall.      *      * @param aggregation Aggregation      * @param distinct Whether distinct      * @param argList List of ordinals of arguments      * @param type Result type      * @param name Name (may be null)      */
 specifier|public
 name|AggregateCall
 parameter_list|(
@@ -244,6 +244,32 @@ parameter_list|()
 block|{
 return|return
 name|name
+return|;
+block|}
+comment|/**      * Creates an equivalent AggregateCall that has a new name.      *      * @param name New name (may be null)      */
+specifier|public
+name|AggregateCall
+name|rename
+parameter_list|(
+name|String
+name|name
+parameter_list|)
+block|{
+comment|// no need to copy argList - already immutable
+return|return
+operator|new
+name|AggregateCall
+argument_list|(
+name|aggregation
+argument_list|,
+name|distinct
+argument_list|,
+name|argList
+argument_list|,
+name|type
+argument_list|,
+name|name
+argument_list|)
 return|;
 block|}
 specifier|public
