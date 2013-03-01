@@ -612,10 +612,10 @@ argument_list|)
 return|;
 block|}
 comment|// =
-comment|/** SQL = operator applied to Object values (including String; either      * side may be null). */
+comment|/** SQL = operator applied to Object values (including String; neither      * side may be null). */
 specifier|public
 specifier|static
-name|Boolean
+name|boolean
 name|eq
 parameter_list|(
 name|Object
@@ -626,7 +626,6 @@ name|b1
 parameter_list|)
 block|{
 return|return
-comment|/* (b0 == null || b1 == null) ? null : */
 name|b0
 operator|.
 name|equals
@@ -635,11 +634,39 @@ name|b1
 argument_list|)
 return|;
 block|}
+comment|/** SQL = operator applied to BigDecimal values (neither may be null). */
+specifier|public
+specifier|static
+name|boolean
+name|eq
+parameter_list|(
+name|BigDecimal
+name|b0
+parameter_list|,
+name|BigDecimal
+name|b1
+parameter_list|)
+block|{
+return|return
+name|b0
+operator|.
+name|stripTrailingZeros
+argument_list|()
+operator|.
+name|equals
+argument_list|(
+name|b1
+operator|.
+name|stripTrailingZeros
+argument_list|()
+argument_list|)
+return|;
+block|}
 comment|//<>
 comment|/** SQL&lt;&gt; operator applied to Object values (including String;      * neither side may be null). */
 specifier|public
 specifier|static
-name|Boolean
+name|boolean
 name|ne
 parameter_list|(
 name|Object
@@ -3001,6 +3028,42 @@ name|get
 argument_list|(
 name|item
 argument_list|)
+return|;
+block|}
+comment|/** NULL -> FALSE, FALSE -> FALSE, TRUE -> TRUE. */
+specifier|public
+specifier|static
+name|boolean
+name|isTrue
+parameter_list|(
+name|Boolean
+name|b
+parameter_list|)
+block|{
+return|return
+name|b
+operator|!=
+literal|null
+operator|&&
+name|b
+return|;
+block|}
+comment|/** NULL -> TRUE, FALSE -> FALSE, TRUE -> TRUE. */
+specifier|public
+specifier|static
+name|boolean
+name|isNotFalse
+parameter_list|(
+name|Boolean
+name|b
+parameter_list|)
+block|{
+return|return
+name|b
+operator|==
+literal|null
+operator|||
+name|b
 return|;
 block|}
 block|}

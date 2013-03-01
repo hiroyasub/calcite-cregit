@@ -7105,7 +7105,21 @@ argument_list|(
 literal|"cast(null as varchar(10))='a'"
 argument_list|)
 expr_stmt|;
+block|}
+specifier|public
+name|void
+name|testEqualsOperatorInterval
+parameter_list|()
+block|{
 comment|// Intervals
+if|if
+condition|(
+operator|!
+name|INTERVAL
+condition|)
+block|{
+return|return;
+block|}
 name|getTester
 argument_list|()
 operator|.
