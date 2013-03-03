@@ -290,6 +290,11 @@ name|Types
 operator|.
 name|FLOAT
 case|:
+case|case
+name|Types
+operator|.
+name|REAL
+case|:
 return|return
 operator|new
 name|FloatAccessor
@@ -418,6 +423,8 @@ name|RuntimeException
 argument_list|(
 literal|"unknown type "
 operator|+
+name|type
+operator|.
 name|type
 argument_list|)
 throw|;

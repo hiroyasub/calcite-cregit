@@ -344,6 +344,9 @@ case|case
 name|DOUBLE
 case|:
 case|case
+name|FLOAT
+case|:
+case|case
 name|REAL
 case|:
 case|case
