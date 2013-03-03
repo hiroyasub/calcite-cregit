@@ -127,18 +127,6 @@ name|eigenbase
 operator|.
 name|util
 operator|.
-name|Bug
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
-name|util
-operator|.
 name|Util
 import|;
 end_import
@@ -284,14 +272,6 @@ operator|.
 name|class
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-name|Bug
-operator|.
-name|TodoFixed
-condition|)
-block|{
-comment|// 96 failures currently
 name|testSuite
 operator|.
 name|addTestSuite
@@ -301,7 +281,6 @@ operator|.
 name|class
 argument_list|)
 expr_stmt|;
-block|}
 return|return
 name|testSuite
 return|;

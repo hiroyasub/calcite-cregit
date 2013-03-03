@@ -84,6 +84,8 @@ block|{
 name|super
 argument_list|(
 name|testName
+argument_list|,
+literal|false
 argument_list|)
 expr_stmt|;
 block|}

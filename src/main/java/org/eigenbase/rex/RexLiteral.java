@@ -309,14 +309,19 @@ case|case
 name|NULL
 case|:
 return|return
-name|value
-operator|==
-literal|null
+literal|false
 return|;
+comment|// value should have been false
 case|case
 name|INTEGER
 case|:
 comment|// not allowed -- use Decimal
+case|case
+name|TINYINT
+case|:
+case|case
+name|SMALLINT
+case|:
 if|if
 condition|(
 name|strict
@@ -369,19 +374,10 @@ case|:
 case|case
 name|INTERVAL_YEAR_MONTH
 case|:
-comment|// REVIEW: angel 2006-08-27 - why is interval sometimes null?
 return|return
-operator|(
 name|value
 operator|instanceof
 name|BigDecimal
-operator|)
-operator|||
-operator|(
-name|value
-operator|==
-literal|null
-operator|)
 return|;
 case|case
 name|VARBINARY
