@@ -43,6 +43,16 @@ name|java
 operator|.
 name|util
 operator|.
+name|List
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
 name|logging
 operator|.
 name|*
@@ -319,16 +329,8 @@ name|boolean
 name|containsJava
 decl_stmt|;
 specifier|protected
-name|java
-operator|.
-name|util
-operator|.
 name|List
 argument_list|<
-name|java
-operator|.
-name|util
-operator|.
 name|List
 argument_list|<
 name|String
@@ -3193,7 +3195,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**      * Returns a relational expression which is to be substituted for an access      * to a SQL view.      *      * @param rowType Row type of the view      * @param queryString Body of the view      *      * @return Relational expression      */
+comment|/**      * Returns a relational expression which is to be substituted for an access      * to a SQL view.      *      * @param rowType Row type of the view      * @param queryString Body of the view      * @param schemaPath List of schema names wherein to find referenced tables      * @return Relational expression      */
 specifier|public
 name|RelNode
 name|expandView
@@ -3203,6 +3205,12 @@ name|rowType
 parameter_list|,
 name|String
 name|queryString
+parameter_list|,
+name|List
+argument_list|<
+name|String
+argument_list|>
+name|schemaPath
 parameter_list|)
 block|{
 throw|throw
