@@ -281,6 +281,15 @@ operator|.
 name|class
 argument_list|)
 expr_stmt|;
+name|testSuite
+operator|.
+name|addTestSuite
+argument_list|(
+name|ModelTest
+operator|.
+name|class
+argument_list|)
+expr_stmt|;
 return|return
 name|testSuite
 return|;
