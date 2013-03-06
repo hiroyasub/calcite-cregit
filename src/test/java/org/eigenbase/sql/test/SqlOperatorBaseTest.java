@@ -1912,14 +1912,6 @@ argument_list|,
 literal|"2008-01-01"
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-operator|!
-name|enable
-condition|)
-block|{
-return|return;
-block|}
 name|checkCastToString
 argument_list|(
 literal|"time '1:2:3'"
@@ -1962,6 +1954,8 @@ operator|.
 name|FENNEL
 argument_list|)
 operator|)
+operator|&&
+name|INTERVAL
 condition|)
 block|{
 name|checkCastToString
@@ -4021,14 +4015,6 @@ operator|.
 name|castFunc
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-operator|!
-name|enable
-condition|)
-block|{
-return|return;
-block|}
 name|getTester
 argument_list|()
 operator|.
@@ -4036,7 +4022,7 @@ name|checkScalar
 argument_list|(
 literal|"cast(TIMESTAMP '1945-02-24 12:42:25.34' as TIMESTAMP)"
 argument_list|,
-literal|"1945-02-24 12:42:25"
+literal|"1945-02-24 12:42:25.0"
 argument_list|,
 literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
@@ -4112,6 +4098,31 @@ argument_list|,
 literal|"TIME(0) NOT NULL"
 argument_list|)
 expr_stmt|;
+comment|// time<-> string
+name|checkCastToString
+argument_list|(
+literal|"TIME '12:42:25'"
+argument_list|,
+literal|null
+argument_list|,
+literal|"12:42:25"
+argument_list|)
+expr_stmt|;
+if|if
+condition|(
+name|todo
+condition|)
+block|{
+name|checkCastToString
+argument_list|(
+literal|"TIME '12:42:25.34'"
+argument_list|,
+literal|null
+argument_list|,
+literal|"12:42:25.34"
+argument_list|)
+expr_stmt|;
+block|}
 comment|// Generate the current date as a string, e.g. "2007-04-18". The value
 comment|// is guaranteed to be good for at least 2 minutes, which should give
 comment|// us time to run the rest of the tests.
@@ -4138,6 +4149,26 @@ name|getTime
 argument_list|()
 argument_list|)
 decl_stmt|;
+name|getTester
+argument_list|()
+operator|.
+name|checkScalar
+argument_list|(
+literal|"cast(DATE '1945-02-24' as TIMESTAMP)"
+argument_list|,
+literal|"1945-02-24 00:00:00.0"
+argument_list|,
+literal|"TIMESTAMP(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+if|if
+condition|(
+operator|!
+name|enable
+condition|)
+block|{
+return|return;
+block|}
 comment|// Note: Casting to time(0) should lose date info and fractional
 comment|// seconds, then casting back to timestamp should initialize to
 comment|// current_date.
@@ -4195,43 +4226,6 @@ argument_list|,
 literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
-operator|.
-name|checkScalar
-argument_list|(
-literal|"cast(DATE '1945-02-24' as TIMESTAMP)"
-argument_list|,
-literal|"1945-02-24 00:00:00"
-argument_list|,
-literal|"TIMESTAMP(0) NOT NULL"
-argument_list|)
-expr_stmt|;
-comment|// time<-> string
-name|checkCastToString
-argument_list|(
-literal|"TIME '12:42:25'"
-argument_list|,
-literal|null
-argument_list|,
-literal|"12:42:25"
-argument_list|)
-expr_stmt|;
-if|if
-condition|(
-name|todo
-condition|)
-block|{
-name|checkCastToString
-argument_list|(
-literal|"TIME '12:42:25.34'"
-argument_list|,
-literal|null
-argument_list|,
-literal|"12:42:25.34"
-argument_list|)
-expr_stmt|;
-block|}
 name|getTester
 argument_list|()
 operator|.
