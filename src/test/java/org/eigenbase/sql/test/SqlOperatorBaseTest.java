@@ -1902,14 +1902,6 @@ argument_list|,
 literal|"abc"
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-operator|!
-name|enable
-condition|)
-block|{
-return|return;
-block|}
 comment|// date& time
 name|checkCastToString
 argument_list|(
@@ -1920,6 +1912,14 @@ argument_list|,
 literal|"2008-01-01"
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+operator|!
+name|enable
+condition|)
+block|{
+return|return;
+block|}
 name|checkCastToString
 argument_list|(
 literal|"time '1:2:3'"
@@ -7542,6 +7542,28 @@ operator|.
 name|checkNull
 argument_list|(
 literal|"3.0>cast(null as double)"
+argument_list|)
+expr_stmt|;
+name|getTester
+argument_list|()
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"DATE '2013-02-23'> DATE '1945-02-24'"
+argument_list|,
+name|Boolean
+operator|.
+name|TRUE
+argument_list|)
+expr_stmt|;
+name|getTester
+argument_list|()
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"DATE '2013-02-23'> CAST(NULL AS DATE)"
+argument_list|,
+literal|null
 argument_list|)
 expr_stmt|;
 block|}

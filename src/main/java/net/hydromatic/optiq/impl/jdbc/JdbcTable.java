@@ -65,19 +65,7 @@ name|hydromatic
 operator|.
 name|optiq
 operator|.
-name|DataContext
-import|;
-end_import
-
-begin_import
-import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|optiq
-operator|.
-name|Table
+name|*
 import|;
 end_import
 
@@ -293,7 +281,11 @@ operator|.
 name|getExpression
 argument_list|()
 argument_list|,
-literal|"getTable"
+name|BuiltinMethod
+operator|.
+name|DATA_CONTEXT_GET_TABLE
+operator|.
+name|method
 argument_list|,
 name|Expressions
 operator|.
@@ -427,9 +419,7 @@ index|[]
 argument_list|>
 argument_list|>
 name|rowBuilderFactory
-decl_stmt|;
-name|rowBuilderFactory
-operator|=
+init|=
 name|JdbcUtils
 operator|.
 name|ObjectArrayRowBuilder
@@ -447,7 +437,7 @@ argument_list|,
 name|rowType
 argument_list|)
 argument_list|)
-expr_stmt|;
+decl_stmt|;
 return|return
 name|JdbcUtils
 operator|.

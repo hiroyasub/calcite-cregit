@@ -955,15 +955,13 @@ name|add
 argument_list|(
 name|Primitive
 operator|.
-name|of
+name|is
 argument_list|(
 name|field
 operator|.
 name|getType
 argument_list|()
 argument_list|)
-operator|!=
-literal|null
 condition|?
 name|Expressions
 operator|.

@@ -1576,17 +1576,16 @@ argument_list|)
 condition|)
 block|{
 assert|assert
+operator|!
 name|Primitive
 operator|.
-name|ofBox
+name|isBox
 argument_list|(
 name|translate
 operator|.
 name|getType
 argument_list|()
 argument_list|)
-operator|==
-literal|null
 operator|:
 literal|"Not-null boxed primitive should come back as primitive: "
 operator|+
