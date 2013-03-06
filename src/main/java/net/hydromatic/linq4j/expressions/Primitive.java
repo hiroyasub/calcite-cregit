@@ -560,6 +560,93 @@ name|type
 argument_list|)
 return|;
 block|}
+comment|/**    * Returns whether a given type is primitive.    */
+specifier|public
+specifier|static
+name|boolean
+name|is
+parameter_list|(
+name|Type
+name|type
+parameter_list|)
+block|{
+comment|//noinspection SuspiciousMethodCalls
+return|return
+name|PRIMITIVE_MAP
+operator|.
+name|containsKey
+argument_list|(
+name|type
+argument_list|)
+return|;
+block|}
+comment|/**    * Returns whether a given type is a box type (e.g. {@link Integer}).    */
+specifier|public
+specifier|static
+name|boolean
+name|isBox
+parameter_list|(
+name|Type
+name|type
+parameter_list|)
+block|{
+comment|//noinspection SuspiciousMethodCalls
+return|return
+name|BOX_MAP
+operator|.
+name|containsKey
+argument_list|(
+name|type
+argument_list|)
+return|;
+block|}
+comment|/** Returns whether this type is a primitive, box or other type. Useful for    * switch statements. */
+specifier|public
+specifier|static
+name|Flavor
+name|flavor
+parameter_list|(
+name|Type
+name|type
+parameter_list|)
+block|{
+if|if
+condition|(
+name|is
+argument_list|(
+name|type
+argument_list|)
+condition|)
+block|{
+return|return
+name|Flavor
+operator|.
+name|PRIMITIVE
+return|;
+block|}
+if|else if
+condition|(
+name|isBox
+argument_list|(
+name|type
+argument_list|)
+condition|)
+block|{
+return|return
+name|Flavor
+operator|.
+name|BOX
+return|;
+block|}
+else|else
+block|{
+return|return
+name|Flavor
+operator|.
+name|OBJECT
+return|;
+block|}
+block|}
 comment|/**    * Converts a primitive type to a boxed type; returns other types    * unchanged.    */
 specifier|public
 specifier|static
@@ -3119,6 +3206,7 @@ throw|;
 block|}
 block|}
 comment|/**    * A place to send a value.    */
+specifier|public
 interface|interface
 name|Sink
 block|{
@@ -3187,6 +3275,7 @@ parameter_list|)
 function_decl|;
 block|}
 comment|/**    * A place from which to read a value.    */
+specifier|public
 interface|interface
 name|Source
 block|{
@@ -3226,6 +3315,16 @@ name|Object
 name|getObject
 parameter_list|()
 function_decl|;
+block|}
+specifier|public
+enum|enum
+name|Flavor
+block|{
+name|PRIMITIVE
+block|,
+name|BOX
+block|,
+name|OBJECT
 block|}
 block|}
 end_enum

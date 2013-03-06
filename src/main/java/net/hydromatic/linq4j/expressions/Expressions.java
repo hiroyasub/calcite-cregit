@@ -1542,6 +1542,8 @@ return|return
 name|type
 return|;
 block|}
+comment|/** Returns whether an expression always evaluates to null. */
+specifier|public
 specifier|static
 name|boolean
 name|isConstantNull
