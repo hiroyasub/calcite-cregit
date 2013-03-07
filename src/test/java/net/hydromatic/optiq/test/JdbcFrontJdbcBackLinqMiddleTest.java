@@ -321,7 +321,7 @@ argument_list|)
 operator|.
 name|throws_
 argument_list|(
-literal|"node could not be implemented"
+literal|" could not be implemented"
 argument_list|)
 expr_stmt|;
 block|}
