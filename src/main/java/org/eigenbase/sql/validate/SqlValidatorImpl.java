@@ -5394,6 +5394,7 @@ name|ZERO
 argument_list|)
 return|;
 block|}
+comment|/** Returns null if there is no common type. E.g. if the rows have a      * different number of columns. */
 name|RelDataType
 name|getTableConstructorRowType
 parameter_list|(

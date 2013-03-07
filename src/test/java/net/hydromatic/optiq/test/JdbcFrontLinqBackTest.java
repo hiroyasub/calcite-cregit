@@ -204,9 +204,9 @@ argument_list|)
 operator|.
 name|returns
 argument_list|(
-literal|"cust_id=100; prod_id=10; empid=100; deptno=10; name=Bill\n"
+literal|"cust_id=100; prod_id=10; empid=100; deptno=10; name=Bill; commission=1000\n"
 operator|+
-literal|"cust_id=150; prod_id=20; empid=150; deptno=10; name=Sebastian\n"
+literal|"cust_id=150; prod_id=20; empid=150; deptno=10; name=Sebastian; commission=null\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -441,7 +441,7 @@ argument_list|)
 operator|.
 name|returns
 argument_list|(
-literal|"empid=100; deptno=10; name=Bill\n"
+literal|"empid=100; deptno=10; name=Bill; commission=1000\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -518,7 +518,7 @@ argument_list|)
 operator|.
 name|returns
 argument_list|(
-literal|"empid=0; deptno=0; name=first\n"
+literal|"empid=0; deptno=0; name=first; commission=null\n"
 argument_list|)
 expr_stmt|;
 name|with
@@ -610,6 +610,8 @@ argument_list|,
 literal|0
 argument_list|,
 literal|"first"
+argument_list|,
+literal|null
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -786,7 +788,7 @@ name|with
 operator|.
 name|query
 argument_list|(
-literal|"insert into \"foo\".\"bar\" values (1, 1, 'second')"
+literal|"insert into \"foo\".\"bar\" values (1, 1, 'second', 2)"
 argument_list|)
 operator|.
 name|returns
@@ -800,7 +802,7 @@ name|query
 argument_list|(
 literal|"insert into \"foo\".\"bar\"\n"
 operator|+
-literal|"values (1, 3, 'third'), (1, 4, 'fourth'), (1, 5, 'fifth ')"
+literal|"values (1, 3, 'third', 3), (1, 4, 'fourth', 4), (1, 5, 'fifth ', 3)"
 argument_list|)
 operator|.
 name|returns
@@ -824,7 +826,7 @@ name|with
 operator|.
 name|query
 argument_list|(
-literal|"insert into \"foo\".\"bar\" values (1, 6, null)"
+literal|"insert into \"foo\".\"bar\" values (1, 6, null, null)"
 argument_list|)
 operator|.
 name|returns
@@ -842,6 +844,59 @@ operator|.
 name|returns
 argument_list|(
 literal|"C=6\n"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Some of the rows have the wrong number of columns. */
+specifier|public
+name|void
+name|testInsertMultipleRowMismatch
+parameter_list|()
+block|{
+specifier|final
+name|List
+argument_list|<
+name|JdbcTest
+operator|.
+name|Employee
+argument_list|>
+name|employees
+init|=
+operator|new
+name|ArrayList
+argument_list|<
+name|JdbcTest
+operator|.
+name|Employee
+argument_list|>
+argument_list|()
+decl_stmt|;
+name|OptiqAssert
+operator|.
+name|AssertThat
+name|with
+init|=
+name|mutable
+argument_list|(
+name|employees
+argument_list|)
+decl_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"insert into \"foo\".\"bar\" values\n"
+operator|+
+literal|" (1, 3, 'third'),\n"
+operator|+
+literal|" (1, 4, 'fourth'),\n"
+operator|+
+literal|" (1, 5, 'fifth ', 3)"
+argument_list|)
+operator|.
+name|throws_
+argument_list|(
+literal|"Incompatible types"
 argument_list|)
 expr_stmt|;
 block|}

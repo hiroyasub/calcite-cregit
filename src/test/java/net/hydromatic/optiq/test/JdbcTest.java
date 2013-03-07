@@ -1606,7 +1606,7 @@ argument_list|)
 decl_stmt|;
 name|assertEquals
 argument_list|(
-literal|"empid=100; deptno=10; name=Bill\n"
+literal|"empid=100; deptno=10; name=Bill; commission=1000\n"
 argument_list|,
 name|toString
 argument_list|(
@@ -3104,6 +3104,39 @@ literal|"store_id=0; grocery_sqft=null\n"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Tests WHERE comparing a nullable integer with an integer literal. */
+specifier|public
+name|void
+name|testWhereNullable
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|assertThat
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select * from \"hr\".\"emps\"\n"
+operator|+
+literal|"where \"commission\"> 800"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"empid=100; deptno=10; name=Bill; commission=1000\n"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Tests array index. */
 specifier|public
 name|void
@@ -3316,9 +3349,9 @@ argument_list|)
 operator|.
 name|returns
 argument_list|(
-literal|"empid=100; deptno=10; name=Bill\n"
+literal|"empid=100; deptno=10; name=Bill; commission=1000\n"
 operator|+
-literal|"empid=150; deptno=10; name=Sebastian\n"
+literal|"empid=150; deptno=10; name=Sebastian; commission=null\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -3394,9 +3427,9 @@ argument_list|)
 operator|.
 name|returns
 argument_list|(
-literal|"empid=150; deptno=10; name=Sebastian\n"
+literal|"empid=150; deptno=10; name=Sebastian; commission=null\n"
 operator|+
-literal|"empid=100; deptno=10; name=Bill\n"
+literal|"empid=100; deptno=10; name=Bill; commission=1000\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -3420,6 +3453,8 @@ argument_list|,
 literal|10
 argument_list|,
 literal|"Bill"
+argument_list|,
+literal|1000
 argument_list|)
 block|,
 operator|new
@@ -3430,6 +3465,8 @@ argument_list|,
 literal|20
 argument_list|,
 literal|"Eric"
+argument_list|,
+literal|500
 argument_list|)
 block|,
 operator|new
@@ -3440,6 +3477,8 @@ argument_list|,
 literal|10
 argument_list|,
 literal|"Sebastian"
+argument_list|,
+literal|null
 argument_list|)
 block|,         }
 decl_stmt|;
@@ -3530,6 +3569,11 @@ name|String
 name|name
 decl_stmt|;
 specifier|public
+specifier|final
+name|Integer
+name|commission
+decl_stmt|;
+specifier|public
 name|Employee
 parameter_list|(
 name|int
@@ -3540,6 +3584,9 @@ name|deptno
 parameter_list|,
 name|String
 name|name
+parameter_list|,
+name|Integer
+name|commission
 parameter_list|)
 block|{
 name|this
@@ -3559,6 +3606,12 @@ operator|.
 name|name
 operator|=
 name|name
+expr_stmt|;
+name|this
+operator|.
+name|commission
+operator|=
+name|commission
 expr_stmt|;
 block|}
 specifier|public
