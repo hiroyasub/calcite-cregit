@@ -225,6 +225,113 @@ expr_stmt|;
 block|}
 specifier|public
 name|void
+name|testLambdaPrimitiveTwoArgs
+parameter_list|()
+block|{
+comment|// Parameters for the lambda expression.
+name|ParameterExpression
+name|paramExpr
+init|=
+name|Expressions
+operator|.
+name|parameter
+argument_list|(
+name|int
+operator|.
+name|class
+argument_list|,
+literal|"key"
+argument_list|)
+decl_stmt|;
+name|ParameterExpression
+name|param2Expr
+init|=
+name|Expressions
+operator|.
+name|parameter
+argument_list|(
+name|int
+operator|.
+name|class
+argument_list|,
+literal|"key2"
+argument_list|)
+decl_stmt|;
+name|FunctionExpression
+name|lambdaExpr
+init|=
+name|Expressions
+operator|.
+name|lambda
+argument_list|(
+name|Expressions
+operator|.
+name|block
+argument_list|(
+operator|(
+name|Type
+operator|)
+literal|null
+argument_list|,
+name|Expressions
+operator|.
+name|return_
+argument_list|(
+literal|null
+argument_list|,
+name|paramExpr
+argument_list|)
+argument_list|)
+argument_list|,
+name|Arrays
+operator|.
+name|asList
+argument_list|(
+name|paramExpr
+argument_list|,
+name|param2Expr
+argument_list|)
+argument_list|)
+decl_stmt|;
+comment|// Print out the expression.
+name|String
+name|s
+init|=
+name|Expressions
+operator|.
+name|toString
+argument_list|(
+name|lambdaExpr
+argument_list|)
+decl_stmt|;
+name|assertEquals
+argument_list|(
+literal|"new net.hydromatic.linq4j.function.Function2() {\n"
+operator|+
+literal|"  public int apply(Integer key, Integer key2) {\n"
+operator|+
+literal|"    return key;\n"
+operator|+
+literal|"  }\n"
+operator|+
+literal|"  public Integer apply(Object key, Object key2) {\n"
+operator|+
+literal|"    return apply(\n"
+operator|+
+literal|"      (Integer) key,\n"
+operator|+
+literal|"      (Integer) key2);\n"
+operator|+
+literal|"  }\n"
+operator|+
+literal|"}\n"
+argument_list|,
+name|s
+argument_list|)
+expr_stmt|;
+block|}
+specifier|public
+name|void
 name|testLambdaCallsTwoArgMethod
 parameter_list|()
 throws|throws
@@ -1892,12 +1999,7 @@ name|Expressions
 operator|.
 name|constant
 argument_list|(
-name|Integer
-operator|.
-name|valueOf
-argument_list|(
 literal|0
-argument_list|)
 argument_list|)
 argument_list|,
 name|Expressions

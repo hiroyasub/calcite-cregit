@@ -703,7 +703,7 @@ name|append
 argument_list|(
 name|Types
 operator|.
-name|className
+name|boxClassName
 argument_list|(
 name|bridgeResultType
 argument_list|)
