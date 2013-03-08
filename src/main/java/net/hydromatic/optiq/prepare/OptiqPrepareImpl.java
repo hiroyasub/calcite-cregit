@@ -626,6 +626,9 @@ name|queryable
 operator|.
 name|getElementType
 argument_list|()
+argument_list|,
+operator|-
+literal|1
 argument_list|)
 return|;
 block|}
@@ -653,6 +656,9 @@ name|expression
 parameter_list|,
 name|Type
 name|elementType
+parameter_list|,
+name|int
+name|maxRowCount
 parameter_list|)
 block|{
 return|return
@@ -665,6 +671,8 @@ argument_list|,
 name|expression
 argument_list|,
 name|elementType
+argument_list|,
+name|maxRowCount
 argument_list|)
 return|;
 block|}
@@ -691,6 +699,9 @@ name|queryable
 parameter_list|,
 name|Type
 name|elementType
+parameter_list|,
+name|int
+name|maxRowCount
 parameter_list|)
 block|{
 specifier|final
@@ -1210,7 +1221,6 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-specifier|final
 name|Enumerable
 argument_list|<
 name|T
@@ -1228,6 +1238,25 @@ operator|.
 name|execute
 argument_list|()
 decl_stmt|;
+if|if
+condition|(
+name|maxRowCount
+operator|>=
+literal|0
+condition|)
+block|{
+comment|// Apply limit. In JDBC 0 means "no limit". But for us, -1 means
+comment|// "no limit", and 0 is a valid limit.
+name|enumerable
+operator|=
+name|enumerable
+operator|.
+name|take
+argument_list|(
+name|maxRowCount
+argument_list|)
+expr_stmt|;
+block|}
 name|Class
 name|resultClazz
 init|=

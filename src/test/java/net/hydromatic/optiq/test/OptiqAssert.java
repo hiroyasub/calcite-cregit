@@ -1277,13 +1277,14 @@ argument_list|()
 return|;
 block|}
 specifier|public
-name|void
+name|AssertQuery
 name|returns
 parameter_list|(
 name|String
 name|expected
 parameter_list|)
 block|{
+return|return
 name|returns
 argument_list|(
 name|checkResult
@@ -1291,10 +1292,10 @@ argument_list|(
 name|expected
 argument_list|)
 argument_list|)
-expr_stmt|;
+return|;
 block|}
 specifier|public
-name|void
+name|AssertQuery
 name|returns
 parameter_list|(
 name|Function1
@@ -1320,6 +1321,9 @@ argument_list|,
 literal|null
 argument_list|)
 expr_stmt|;
+return|return
+name|this
+return|;
 block|}
 catch|catch
 parameter_list|(
@@ -1343,7 +1347,7 @@ throw|;
 block|}
 block|}
 specifier|public
-name|void
+name|AssertQuery
 name|throws_
 parameter_list|(
 name|String
@@ -1367,6 +1371,9 @@ name|message
 argument_list|)
 argument_list|)
 expr_stmt|;
+return|return
+name|this
+return|;
 block|}
 catch|catch
 parameter_list|(
@@ -1390,7 +1397,7 @@ throw|;
 block|}
 block|}
 specifier|public
-name|void
+name|AssertQuery
 name|runs
 parameter_list|()
 block|{
@@ -1408,6 +1415,9 @@ argument_list|,
 literal|null
 argument_list|)
 expr_stmt|;
+return|return
+name|this
+return|;
 block|}
 catch|catch
 parameter_list|(

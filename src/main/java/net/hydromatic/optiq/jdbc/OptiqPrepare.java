@@ -241,6 +241,9 @@ name|expression
 parameter_list|,
 name|Type
 name|elementType
+parameter_list|,
+name|int
+name|maxRowCount
 parameter_list|)
 function_decl|;
 parameter_list|<
