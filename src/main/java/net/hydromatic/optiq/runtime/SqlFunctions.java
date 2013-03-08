@@ -51,17 +51,7 @@ name|java
 operator|.
 name|util
 operator|.
-name|List
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|Map
+name|*
 import|;
 end_import
 
@@ -3626,6 +3616,25 @@ return|;
 block|}
 return|return
 literal|null
+return|;
+block|}
+specifier|public
+specifier|static
+name|List
+name|asList
+parameter_list|(
+name|Object
+index|[]
+name|os
+parameter_list|)
+block|{
+return|return
+name|Arrays
+operator|.
+name|asList
+argument_list|(
+name|os
+argument_list|)
 return|;
 block|}
 comment|/** NULL -> FALSE, FALSE -> FALSE, TRUE -> TRUE. */

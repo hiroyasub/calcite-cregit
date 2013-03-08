@@ -1661,9 +1661,10 @@ name|v1
 argument_list|)
 return|;
 default|default:
-comment|// new Function1<Employee, Object[]> {
-comment|//    public Object[] apply(Employee v1) {
-comment|//        return new Object[] {v1.<fieldN>, v1.<fieldM>};
+comment|// new Function1<Employee, List> {
+comment|//    public List apply(Employee v1) {
+comment|//        return Arrays.asList(
+comment|//            new Object[] {v1.<fieldN>, v1.<fieldM>});
 comment|//    }
 comment|// }
 name|Expressions
@@ -1711,6 +1712,16 @@ name|class
 argument_list|,
 name|Expressions
 operator|.
+name|call
+argument_list|(
+name|BuiltinMethod
+operator|.
+name|ARRAYS_AS_LIST
+operator|.
+name|method
+argument_list|,
+name|Expressions
+operator|.
 name|newArrayInit
 argument_list|(
 name|Object
@@ -1718,6 +1729,7 @@ operator|.
 name|class
 argument_list|,
 name|list
+argument_list|)
 argument_list|)
 argument_list|,
 name|v1

@@ -504,11 +504,11 @@ argument_list|)
 operator|.
 name|returns
 argument_list|(
-literal|"state_province=CA; S=74748; DC=2716\n"
+literal|"state_province=CA; S=74748.0000; DC=2716\n"
 operator|+
-literal|"state_province=OR; S=67659; DC=1037\n"
+literal|"state_province=OR; S=67659.0000; DC=1037\n"
 operator|+
-literal|"state_province=WA; S=124366; DC=1828\n"
+literal|"state_province=WA; S=124366.0000; DC=1828\n"
 argument_list|)
 expr_stmt|;
 block|}
