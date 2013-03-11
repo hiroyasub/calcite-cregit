@@ -4839,14 +4839,6 @@ operator|.
 name|castFunc
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-operator|!
-name|enable
-condition|)
-block|{
-return|return;
-block|}
 comment|// string to boolean
 name|getTester
 argument_list|()
