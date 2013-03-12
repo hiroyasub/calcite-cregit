@@ -3674,25 +3674,6 @@ return|return
 literal|null
 return|;
 block|}
-specifier|public
-specifier|static
-name|List
-name|asList
-parameter_list|(
-name|Object
-index|[]
-name|os
-parameter_list|)
-block|{
-return|return
-name|Arrays
-operator|.
-name|asList
-argument_list|(
-name|os
-argument_list|)
-return|;
-block|}
 comment|/** NULL -> FALSE, FALSE -> FALSE, TRUE -> TRUE. */
 specifier|public
 specifier|static
