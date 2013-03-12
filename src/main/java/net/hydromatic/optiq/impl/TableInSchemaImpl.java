@@ -10,6 +10,8 @@ operator|.
 name|hydromatic
 operator|.
 name|optiq
+operator|.
+name|impl
 package|;
 end_package
 
@@ -19,71 +21,108 @@ name|net
 operator|.
 name|hydromatic
 operator|.
-name|linq4j
+name|optiq
 operator|.
-name|expressions
+name|Schema
+import|;
+end_import
+
+begin_import
+import|import
+name|net
 operator|.
-name|Expression
+name|hydromatic
+operator|.
+name|optiq
+operator|.
+name|Table
 import|;
 end_import
 
 begin_comment
-comment|/**  * Schema that can be modified.  */
+comment|/** * Implementation of {@link Schema.TableInSchema} where all properties are  * held in fields.  */
 end_comment
 
-begin_interface
+begin_class
 specifier|public
-interface|interface
-name|MutableSchema
+class|class
+name|TableInSchemaImpl
 extends|extends
 name|Schema
-block|{
-comment|/** Defines a table-function in this schema. There can be multiple      * table-functions with the same name; this method will not remove a      * table-function with the same name, just define another overloading. */
-name|void
-name|addTableFunction
-parameter_list|(
-name|String
-name|name
-parameter_list|,
-name|TableFunction
-name|tableFunction
-parameter_list|)
-function_decl|;
-comment|/** Defines a table within this schema. */
-name|void
-name|addTable
-parameter_list|(
+operator|.
 name|TableInSchema
+block|{
+specifier|private
+specifier|final
+name|Table
 name|table
-parameter_list|)
-function_decl|;
-comment|/** Adds a child schema of this schema. */
-name|void
-name|addSchema
+decl_stmt|;
+comment|/** Creates a TableInSchemaImpl. */
+specifier|public
+name|TableInSchemaImpl
 parameter_list|(
+name|Schema
+name|schema
+parameter_list|,
 name|String
 name|name
 parameter_list|,
 name|Schema
-name|schema
-parameter_list|)
-function_decl|;
-comment|/** Returns the expression with which a sub-schema of this schema with a      * given name and type should be accessed. */
-name|Expression
-name|getSubSchemaExpression
-parameter_list|(
-name|String
-name|name
+operator|.
+name|TableType
+name|tableType
 parameter_list|,
-name|Class
-name|type
+name|Table
+name|table
 parameter_list|)
-function_decl|;
+block|{
+name|super
+argument_list|(
+name|schema
+argument_list|,
+name|name
+argument_list|,
+name|tableType
+argument_list|)
+expr_stmt|;
+name|this
+operator|.
+name|table
+operator|=
+name|table
+expr_stmt|;
 block|}
-end_interface
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unchecked"
+argument_list|)
+specifier|public
+parameter_list|<
+name|E
+parameter_list|>
+name|Table
+argument_list|<
+name|E
+argument_list|>
+name|getTable
+parameter_list|(
+name|Class
+argument_list|<
+name|E
+argument_list|>
+name|elementType
+parameter_list|)
+block|{
+return|return
+name|table
+return|;
+block|}
+block|}
+end_class
 
 begin_comment
-comment|// End MutableSchema.java
+comment|// End TableInSchemaImpl.java
 end_comment
 
 end_unit

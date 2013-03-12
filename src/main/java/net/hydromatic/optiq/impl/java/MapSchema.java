@@ -134,10 +134,7 @@ name|Map
 argument_list|<
 name|String
 argument_list|,
-name|Table
-argument_list|<
-name|Object
-argument_list|>
+name|TableInSchema
 argument_list|>
 name|tableMap
 init|=
@@ -146,10 +143,7 @@ name|HashMap
 argument_list|<
 name|String
 argument_list|,
-name|Table
-argument_list|<
-name|Object
-argument_list|>
+name|TableInSchema
 argument_list|>
 argument_list|()
 decl_stmt|;
@@ -335,15 +329,15 @@ block|}
 specifier|public
 name|Collection
 argument_list|<
-name|String
+name|TableInSchema
 argument_list|>
-name|getTableNames
+name|getTables
 parameter_list|()
 block|{
 return|return
 name|tableMap
 operator|.
-name|keySet
+name|values
 argument_list|()
 return|;
 block|}
@@ -374,7 +368,7 @@ operator|!=
 literal|null
 assert|;
 comment|// First look for a table.
-name|Table
+name|TableInSchema
 name|table
 init|=
 name|tableMap
@@ -393,6 +387,11 @@ condition|)
 block|{
 return|return
 name|table
+operator|.
+name|getTable
+argument_list|(
+name|elementType
+argument_list|)
 return|;
 block|}
 comment|// Then look for a table-function with no arguments.
@@ -569,10 +568,7 @@ specifier|public
 name|void
 name|addTable
 parameter_list|(
-name|String
-name|name
-parameter_list|,
-name|Table
+name|TableInSchema
 name|table
 parameter_list|)
 block|{
@@ -580,6 +576,8 @@ name|tableMap
 operator|.
 name|put
 argument_list|(
+name|table
+operator|.
 name|name
 argument_list|,
 name|table
