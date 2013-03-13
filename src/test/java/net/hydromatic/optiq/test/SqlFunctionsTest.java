@@ -108,14 +108,6 @@ literal|"xyz"
 argument_list|)
 argument_list|)
 expr_stmt|;
-name|assertNull
-argument_list|(
-name|charLength
-argument_list|(
-literal|null
-argument_list|)
-argument_list|)
-expr_stmt|;
 block|}
 specifier|public
 name|void
@@ -134,8 +126,13 @@ literal|"cd"
 argument_list|)
 argument_list|)
 expr_stmt|;
-name|assertNull
+comment|// The code generator will ensure that nulls are never passed in. If we
+comment|// pass in null, it is treated like the string "null", as the following
+comment|// tests show. Not the desired behavior for SQL.
+name|assertEquals
 argument_list|(
+literal|"anull"
+argument_list|,
 name|concat
 argument_list|(
 literal|"a"
@@ -144,8 +141,10 @@ literal|null
 argument_list|)
 argument_list|)
 expr_stmt|;
-name|assertNull
+name|assertEquals
 argument_list|(
+literal|"nullnull"
+argument_list|,
 name|concat
 argument_list|(
 literal|null
@@ -154,8 +153,10 @@ literal|null
 argument_list|)
 argument_list|)
 expr_stmt|;
-name|assertNull
+name|assertEquals
 argument_list|(
+literal|"nullb"
+argument_list|,
 name|concat
 argument_list|(
 literal|null

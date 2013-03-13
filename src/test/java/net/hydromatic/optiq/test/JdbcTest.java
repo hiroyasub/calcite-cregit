@@ -3259,7 +3259,7 @@ name|OptiqAssert
 operator|.
 name|checkResultContains
 argument_list|(
-literal|"tableSchem=metadata; tableName=COLUMNS; tableType=null; "
+literal|"tableSchem=metadata; tableName=COLUMNS; tableType=SYSTEM_TABLE; "
 argument_list|)
 argument_list|)
 expr_stmt|;
