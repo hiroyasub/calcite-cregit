@@ -180,14 +180,6 @@ literal|"A bCd"
 argument_list|)
 argument_list|)
 expr_stmt|;
-name|assertNull
-argument_list|(
-name|lower
-argument_list|(
-literal|null
-argument_list|)
-argument_list|)
-expr_stmt|;
 block|}
 specifier|public
 name|void
@@ -204,25 +196,17 @@ literal|"A bCd"
 argument_list|)
 argument_list|)
 expr_stmt|;
-name|assertNull
-argument_list|(
-name|lower
-argument_list|(
-literal|null
-argument_list|)
-argument_list|)
-expr_stmt|;
 block|}
 specifier|public
 name|void
-name|testInitCap
+name|testInitcap
 parameter_list|()
 block|{
 name|assertEquals
 argument_list|(
 literal|"Aa"
 argument_list|,
-name|initCap
+name|initcap
 argument_list|(
 literal|"aA"
 argument_list|)
@@ -232,7 +216,7 @@ name|assertEquals
 argument_list|(
 literal|"Zz"
 argument_list|,
-name|initCap
+name|initcap
 argument_list|(
 literal|"zz"
 argument_list|)
@@ -242,7 +226,7 @@ name|assertEquals
 argument_list|(
 literal|"Az"
 argument_list|,
-name|initCap
+name|initcap
 argument_list|(
 literal|"AZ"
 argument_list|)
@@ -252,7 +236,7 @@ name|assertEquals
 argument_list|(
 literal|"Try A Little  "
 argument_list|,
-name|initCap
+name|initcap
 argument_list|(
 literal|"tRy a littlE  "
 argument_list|)
@@ -260,9 +244,19 @@ argument_list|)
 expr_stmt|;
 name|assertEquals
 argument_list|(
+literal|"Won'T It?No"
+argument_list|,
+name|initcap
+argument_list|(
+literal|"won't it?no"
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|assertEquals
+argument_list|(
 literal|"1a"
 argument_list|,
-name|initCap
+name|initcap
 argument_list|(
 literal|"1A"
 argument_list|)
@@ -272,7 +266,7 @@ name|assertEquals
 argument_list|(
 literal|" B0123b"
 argument_list|,
-name|initCap
+name|initcap
 argument_list|(
 literal|" b0123B"
 argument_list|)
@@ -352,9 +346,6 @@ name|assertNull
 argument_list|(
 name|lesser
 argument_list|(
-operator|(
-name|Comparable
-operator|)
 literal|null
 argument_list|,
 literal|null
@@ -435,9 +426,6 @@ name|assertNull
 argument_list|(
 name|greater
 argument_list|(
-operator|(
-name|Comparable
-operator|)
 literal|null
 argument_list|,
 literal|null

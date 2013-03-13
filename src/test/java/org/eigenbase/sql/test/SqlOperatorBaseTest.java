@@ -6786,6 +6786,30 @@ argument_list|,
 literal|"CHAR(2) NOT NULL"
 argument_list|)
 expr_stmt|;
+name|getTester
+argument_list|()
+operator|.
+name|checkNull
+argument_list|(
+literal|" 'a' || cast(null as char(2)) "
+argument_list|)
+expr_stmt|;
+name|getTester
+argument_list|()
+operator|.
+name|checkNull
+argument_list|(
+literal|" cast(null as char(2)) || 'b' "
+argument_list|)
+expr_stmt|;
+name|getTester
+argument_list|()
+operator|.
+name|checkNull
+argument_list|(
+literal|" cast(null as char(1)) || cast(null as char(2)) "
+argument_list|)
+expr_stmt|;
 if|if
 condition|(
 name|todo

@@ -745,7 +745,7 @@ name|SqlFunctions
 operator|.
 name|class
 argument_list|,
-literal|"initCap"
+literal|"initcap"
 argument_list|,
 name|String
 operator|.

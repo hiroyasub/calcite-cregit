@@ -56,7 +56,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Helper methods to implement SQL functions in generated code.  *  *<p>Not present: and, or, not (builtin operators are better, because they  * use lazy evaluation. Implementations do not check for null values; the  * calling code must do that.</p>  *  * @author jhyde  */
+comment|/**  * Helper methods to implement SQL functions in generated code.  *  *<p>Not present: and, or, not (builtin operators are better, because they  * use lazy evaluation. Implementations do not check for null values; the  * calling code must do that.</p>  *  *<p>Many of the functions do not check for null values. This is intentional.  * If null arguments are possible, the code-generation framework checks for  * nulls before calling the functions.</p>  *  * @author jhyde  */
 end_comment
 
 begin_class
@@ -158,17 +158,6 @@ name|String
 name|s
 parameter_list|)
 block|{
-if|if
-condition|(
-name|s
-operator|==
-literal|null
-condition|)
-block|{
-return|return
-literal|null
-return|;
-block|}
 return|return
 name|s
 operator|.
@@ -186,17 +175,6 @@ name|String
 name|s
 parameter_list|)
 block|{
-if|if
-condition|(
-name|s
-operator|==
-literal|null
-condition|)
-block|{
-return|return
-literal|null
-return|;
-block|}
 return|return
 name|s
 operator|.
@@ -208,7 +186,7 @@ comment|/** SQL INITCAP(string) function. */
 specifier|public
 specifier|static
 name|String
-name|initCap
+name|initcap
 parameter_list|(
 name|String
 name|s
@@ -216,7 +194,7 @@ parameter_list|)
 block|{
 comment|// Assumes Alpha as [A-Za-z0-9]
 comment|// white space is treated as everything else.
-comment|//
+specifier|final
 name|int
 name|len
 init|=
@@ -230,9 +208,7 @@ name|start
 init|=
 literal|true
 decl_stmt|;
-name|char
-name|curCh
-decl_stmt|;
+specifier|final
 name|StringBuilder
 name|newS
 init|=
@@ -255,15 +231,25 @@ name|i
 operator|++
 control|)
 block|{
+name|char
 name|curCh
-operator|=
+init|=
 name|s
 operator|.
 name|charAt
 argument_list|(
 name|i
 argument_list|)
-expr_stmt|;
+decl_stmt|;
+specifier|final
+name|int
+name|c
+init|=
+operator|(
+name|int
+operator|)
+name|curCh
+decl_stmt|;
 if|if
 condition|(
 name|start
@@ -272,23 +258,13 @@ block|{
 comment|// curCh is whitespace or first character of word.
 if|if
 condition|(
-operator|(
-operator|(
-name|int
-operator|)
-name|curCh
+name|c
 operator|>
 literal|47
-operator|)
 operator|&&
-operator|(
-operator|(
-name|int
-operator|)
-name|curCh
+name|c
 operator|<
 literal|58
-operator|)
 condition|)
 block|{
 comment|// 0-9
@@ -299,23 +275,13 @@ expr_stmt|;
 block|}
 if|else if
 condition|(
-operator|(
-operator|(
-name|int
-operator|)
-name|curCh
+name|c
 operator|>
 literal|64
-operator|)
 operator|&&
-operator|(
-operator|(
-name|int
-operator|)
-name|curCh
+name|c
 operator|<
 literal|91
-operator|)
 condition|)
 block|{
 comment|// A-Z
@@ -326,23 +292,13 @@ expr_stmt|;
 block|}
 if|else if
 condition|(
-operator|(
-operator|(
-name|int
-operator|)
-name|curCh
+name|c
 operator|>
 literal|96
-operator|)
 operator|&&
-operator|(
-operator|(
-name|int
-operator|)
-name|curCh
+name|c
 operator|<
 literal|123
-operator|)
 condition|)
 block|{
 comment|// a-z
@@ -356,10 +312,7 @@ operator|(
 name|char
 operator|)
 operator|(
-operator|(
-name|int
-operator|)
-name|curCh
+name|c
 operator|-
 literal|32
 operator|)
@@ -373,23 +326,13 @@ block|{
 comment|// Inside of a word or white space after end of word.
 if|if
 condition|(
-operator|(
-operator|(
-name|int
-operator|)
-name|curCh
+name|c
 operator|>
 literal|47
-operator|)
 operator|&&
-operator|(
-operator|(
-name|int
-operator|)
-name|curCh
+name|c
 operator|<
 literal|58
-operator|)
 condition|)
 block|{
 comment|// 0-9
@@ -397,23 +340,13 @@ comment|// noop
 block|}
 if|else if
 condition|(
-operator|(
-operator|(
-name|int
-operator|)
-name|curCh
+name|c
 operator|>
 literal|64
-operator|)
 operator|&&
-operator|(
-operator|(
-name|int
-operator|)
-name|curCh
+name|c
 operator|<
 literal|91
-operator|)
 condition|)
 block|{
 comment|// A-Z
@@ -423,43 +356,30 @@ operator|(
 name|char
 operator|)
 operator|(
-operator|(
-name|int
-operator|)
-name|curCh
+name|c
 operator|+
 literal|32
 operator|)
 expr_stmt|;
-comment|// Lower Case this character
+comment|// Lowercase this character
 block|}
 if|else if
 condition|(
-operator|(
-operator|(
-name|int
-operator|)
-name|curCh
+name|c
 operator|>
 literal|96
-operator|)
 operator|&&
-operator|(
-operator|(
-name|int
-operator|)
-name|curCh
+name|c
 operator|<
 literal|123
-operator|)
 condition|)
 block|{
 comment|// a-z
-comment|//noop
+comment|// noop
 block|}
 else|else
 block|{
-comment|//whitespace
+comment|// whitespace
 name|start
 operator|=
 literal|true
@@ -492,17 +412,6 @@ name|String
 name|s
 parameter_list|)
 block|{
-if|if
-condition|(
-name|s
-operator|==
-literal|null
-condition|)
-block|{
-return|return
-literal|null
-return|;
-block|}
 return|return
 name|s
 operator|.
@@ -523,21 +432,6 @@ name|String
 name|s1
 parameter_list|)
 block|{
-if|if
-condition|(
-name|s0
-operator|==
-literal|null
-operator|||
-name|s1
-operator|==
-literal|null
-condition|)
-block|{
-return|return
-literal|null
-return|;
-block|}
 return|return
 name|s0
 operator|+
