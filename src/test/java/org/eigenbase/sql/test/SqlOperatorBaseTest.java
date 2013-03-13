@@ -14004,14 +14004,6 @@ argument_list|,
 name|VM_FENNEL
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-operator|!
-name|enable
-condition|)
-block|{
-return|return;
-block|}
 name|getTester
 argument_list|()
 operator|.
