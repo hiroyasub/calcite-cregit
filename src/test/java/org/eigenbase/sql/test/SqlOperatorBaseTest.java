@@ -14004,10 +14004,6 @@ argument_list|,
 name|VM_FENNEL
 argument_list|)
 expr_stmt|;
-comment|// Comment this out, it is keeping the function from testing initcap
-comment|// if (!enable) {
-comment|//    return;
-comment|//}
 name|getTester
 argument_list|()
 operator|.
