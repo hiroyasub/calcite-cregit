@@ -296,7 +296,7 @@ throw|;
 block|}
 block|}
 specifier|public
-name|Connection
+name|OptiqConnection
 name|connect
 parameter_list|(
 name|String

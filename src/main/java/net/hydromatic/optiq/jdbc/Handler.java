@@ -26,7 +26,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Called at various points in the JDBC lifecycle.  */
+comment|/**  * Called at various points in the JDBC lifecycle.  *  *<p>Most drivers will use {@link HandlerImpl}, which provides no-op  * implementations of all methods. You only need to override methods if you  * need to achieve special effects.</p>  */
 end_comment
 
 begin_interface
@@ -44,6 +44,28 @@ parameter_list|)
 throws|throws
 name|SQLException
 function_decl|;
+comment|/** Called by Optiq server when a statement is being executed.      *      *<p>If the session would like the statement results stored in a temporary      * table, {@code resultSink} is not null.      * The provider must call its {@link ResultSink#toBeCompleted}      * method at some point during execution (not necessarily before the call to      * this method returns).</p>      *      * @param statement Statement      * @param resultSink Place to put result of query. Null if Optiq does not      *                   want results stored to a temporary table      * @throws RuntimeException on error      */
+name|void
+name|onStatementExecute
+parameter_list|(
+name|OptiqStatement
+name|statement
+parameter_list|,
+name|ResultSink
+name|resultSink
+parameter_list|)
+throws|throws
+name|RuntimeException
+function_decl|;
+interface|interface
+name|ResultSink
+block|{
+comment|/** Registers a temporary table. */
+name|void
+name|toBeCompleted
+parameter_list|()
+function_decl|;
+block|}
 block|}
 end_interface
 

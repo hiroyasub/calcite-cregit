@@ -48,6 +48,21 @@ name|SQLException
 block|{
 comment|// nothing
 block|}
+specifier|public
+name|void
+name|onStatementExecute
+parameter_list|(
+name|OptiqStatement
+name|statement
+parameter_list|,
+name|ResultSink
+name|resultSink
+parameter_list|)
+throws|throws
+name|RuntimeException
+block|{
+comment|// nothing
+block|}
 block|}
 end_class
 

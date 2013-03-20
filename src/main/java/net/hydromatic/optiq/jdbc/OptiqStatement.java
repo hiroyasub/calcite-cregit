@@ -104,6 +104,7 @@ comment|/**  * Implementation of {@link java.sql.Statement}  * for the Optiq eng
 end_comment
 
 begin_class
+specifier|public
 specifier|abstract
 class|class
 name|OptiqStatement
