@@ -347,6 +347,9 @@ name|assertNull
 argument_list|(
 name|lesser
 argument_list|(
+operator|(
+name|String
+operator|)
 literal|null
 argument_list|,
 literal|null
@@ -427,6 +430,9 @@ name|assertNull
 argument_list|(
 name|greater
 argument_list|(
+operator|(
+name|String
+operator|)
 literal|null
 argument_list|,
 literal|null
