@@ -85,20 +85,6 @@ end_import
 
 begin_import
 import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|optiq
-operator|.
-name|prepare
-operator|.
-name|Factory
-import|;
-end_import
-
-begin_import
-import|import
 name|org
 operator|.
 name|eigenbase
@@ -631,9 +617,11 @@ operator|.
 name|ParseResult
 name|parsed
 init|=
-name|Factory
+name|OptiqPrepare
 operator|.
-name|implement
+name|DEFAULT_FACTORY
+operator|.
+name|apply
 argument_list|()
 operator|.
 name|parse

@@ -17,6 +17,20 @@ end_package
 
 begin_import
 import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|linq4j
+operator|.
+name|function
+operator|.
+name|Function0
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|io
@@ -145,6 +159,12 @@ parameter_list|,
 name|Factory
 name|factory
 parameter_list|,
+name|Function0
+argument_list|<
+name|OptiqPrepare
+argument_list|>
+name|prepareFactory
+parameter_list|,
 name|String
 name|url
 parameter_list|,
@@ -159,6 +179,8 @@ argument_list|(
 name|driver
 argument_list|,
 name|factory
+argument_list|,
+name|prepareFactory
 argument_list|,
 name|url
 argument_list|,
@@ -316,6 +338,12 @@ parameter_list|,
 name|Factory
 name|factory
 parameter_list|,
+name|Function0
+argument_list|<
+name|OptiqPrepare
+argument_list|>
+name|prepareFactory
+parameter_list|,
 name|String
 name|url
 parameter_list|,
@@ -328,6 +356,8 @@ argument_list|(
 name|driver
 argument_list|,
 name|factory
+argument_list|,
+name|prepareFactory
 argument_list|,
 name|url
 argument_list|,

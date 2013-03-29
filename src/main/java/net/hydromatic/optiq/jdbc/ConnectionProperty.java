@@ -56,6 +56,18 @@ name|STRING
 argument_list|,
 literal|null
 argument_list|)
+block|,
+comment|/** Name of initial schema. */
+name|SCHEMA
+argument_list|(
+literal|"schema"
+argument_list|,
+name|Type
+operator|.
+name|STRING
+argument_list|,
+literal|null
+argument_list|)
 block|;
 specifier|private
 specifier|final
