@@ -35,16 +35,6 @@ end_import
 
 begin_import
 import|import
-name|openjava
-operator|.
-name|mop
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
 name|org
 operator|.
 name|eigenbase
@@ -1392,10 +1382,7 @@ name|RelDataTypeFactory
 name|typeFactory
 parameter_list|)
 block|{
-specifier|final
-name|SqlToRelConverter
-name|converter
-init|=
+return|return
 operator|new
 name|SqlToRelConverter
 argument_list|(
@@ -1404,10 +1391,6 @@ argument_list|,
 name|validator
 argument_list|,
 name|catalogReader
-argument_list|,
-name|OJSystem
-operator|.
-name|env
 argument_list|,
 name|getPlanner
 argument_list|()
@@ -1418,9 +1401,6 @@ argument_list|(
 name|typeFactory
 argument_list|)
 argument_list|)
-decl_stmt|;
-return|return
-name|converter
 return|;
 block|}
 specifier|protected

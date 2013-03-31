@@ -47,16 +47,6 @@ end_import
 
 begin_import
 import|import
-name|openjava
-operator|.
-name|mop
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
 name|org
 operator|.
 name|eigenbase
@@ -583,7 +573,7 @@ name|OJPreparingStmt
 name|preparingStmt
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a converter.      *      * @param preparingStmt Preparing statement      * @param validator Validator      * @param catalogReader Schema      * @param env Environment      * @param planner Planner      * @param rexBuilder Rex builder      */
+comment|/**      * Creates a converter.      *      * @param preparingStmt Preparing statement      * @param validator Validator      * @param catalogReader Schema      * @param planner Planner      * @param rexBuilder Rex builder      */
 specifier|public
 name|SqlToRelConverter
 parameter_list|(
@@ -597,9 +587,6 @@ name|OJPreparingStmt
 operator|.
 name|CatalogReader
 name|catalogReader
-parameter_list|,
-name|Environment
-name|env
 parameter_list|,
 name|RelOptPlanner
 name|planner
@@ -694,8 +681,6 @@ name|query
 operator|.
 name|createCluster
 argument_list|(
-name|env
-argument_list|,
 name|typeFactory
 argument_list|,
 name|rexBuilder

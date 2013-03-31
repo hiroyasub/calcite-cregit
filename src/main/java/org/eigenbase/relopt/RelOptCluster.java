@@ -15,16 +15,6 @@ end_package
 
 begin_import
 import|import
-name|openjava
-operator|.
-name|mop
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
 name|org
 operator|.
 name|eigenbase
@@ -85,11 +75,6 @@ block|{
 comment|//~ Instance fields --------------------------------------------------------
 specifier|private
 specifier|final
-name|Environment
-name|env
-decl_stmt|;
-specifier|private
-specifier|final
 name|RelDataTypeFactory
 name|typeFactory
 decl_stmt|;
@@ -122,14 +107,11 @@ name|RelTraitSet
 name|emptyTraitSet
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a cluster.      *      * @pre planner != null      * @pre typeFactory != null      */
+comment|/**      * Creates a cluster.      */
 name|RelOptCluster
 parameter_list|(
 name|RelOptQuery
 name|query
-parameter_list|,
-name|Environment
-name|env
 parameter_list|,
 name|RelOptPlanner
 name|planner
@@ -142,30 +124,20 @@ name|rexBuilder
 parameter_list|)
 block|{
 assert|assert
-operator|(
 name|planner
 operator|!=
 literal|null
-operator|)
 assert|;
 assert|assert
-operator|(
 name|typeFactory
 operator|!=
 literal|null
-operator|)
 assert|;
 name|this
 operator|.
 name|query
 operator|=
 name|query
-expr_stmt|;
-name|this
-operator|.
-name|env
-operator|=
-name|env
 expr_stmt|;
 name|this
 operator|.
@@ -213,15 +185,6 @@ argument_list|()
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-specifier|public
-name|Environment
-name|getEnv
-parameter_list|()
-block|{
-return|return
-name|env
-return|;
-block|}
 specifier|public
 name|RelOptQuery
 name|getQuery

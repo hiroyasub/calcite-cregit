@@ -1715,8 +1715,6 @@ name|query
 operator|.
 name|createCluster
 argument_list|(
-name|env
-argument_list|,
 name|rexBuilder
 operator|.
 name|getTypeFactory
@@ -1869,8 +1867,6 @@ argument_list|,
 name|validator
 argument_list|,
 name|catalogReader
-argument_list|,
-name|env
 argument_list|,
 name|planner
 argument_list|,

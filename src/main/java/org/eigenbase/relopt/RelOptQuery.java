@@ -25,16 +25,6 @@ end_import
 
 begin_import
 import|import
-name|openjava
-operator|.
-name|mop
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
 name|org
 operator|.
 name|eigenbase
@@ -208,14 +198,11 @@ return|return
 name|mapDeferredToCorrel
 return|;
 block|}
-comment|/**      * Creates a cluster.      *      * @param env OpenJava environment      * @param typeFactory Type factory      * @param rexBuilder Expression builder      *      * @return New cluster      */
+comment|/**      * Creates a cluster.      *      * @param typeFactory Type factory      * @param rexBuilder Expression builder      *      * @return New cluster      */
 specifier|public
 name|RelOptCluster
 name|createCluster
 parameter_list|(
-name|Environment
-name|env
-parameter_list|,
 name|RelDataTypeFactory
 name|typeFactory
 parameter_list|,
@@ -228,8 +215,6 @@ operator|new
 name|RelOptCluster
 argument_list|(
 name|this
-argument_list|,
-name|env
 argument_list|,
 name|planner
 argument_list|,
