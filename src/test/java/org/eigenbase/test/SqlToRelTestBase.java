@@ -41,20 +41,6 @@ name|eigenbase
 operator|.
 name|oj
 operator|.
-name|stmt
-operator|.
-name|OJPreparingStmt
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
-name|oj
-operator|.
 name|util
 operator|.
 name|*
@@ -189,6 +175,20 @@ name|*
 import|;
 end_import
 
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|optiq
+operator|.
+name|prepare
+operator|.
+name|Prepare
+import|;
+end_import
+
 begin_comment
 comment|/**  * SqlToRelTestBase is an abstract base for tests which involve conversion from  * SQL to relational algebra.  *  *<p>SQL statements to be translated can use the schema defined in {@link  * MockCatalogReader}; note that this is slightly different from Farrago's SALES  * schema. If you get a parser or validator error from your test SQL, look down  * in the stack until you see "Caused by", which will usually tell you the real  * error.  *  * @author jhyde  */
 end_comment
@@ -305,8 +305,8 @@ name|RelDataTypeFactory
 name|typeFactory
 parameter_list|)
 function_decl|;
-comment|/**          * Factory method for a          * {@link org.eigenbase.oj.stmt.OJPreparingStmt.CatalogReader}.          */
-name|OJPreparingStmt
+comment|/**          * Factory method for a          * {@link net.hydromatic.optiq.prepare.Prepare.CatalogReader}.          */
+name|Prepare
 operator|.
 name|CatalogReader
 name|createCatalogReader
@@ -1281,7 +1281,7 @@ name|getTypeFactory
 argument_list|()
 decl_stmt|;
 specifier|final
-name|OJPreparingStmt
+name|Prepare
 operator|.
 name|CatalogReader
 name|catalogReader
@@ -1372,7 +1372,7 @@ name|SqlValidator
 name|validator
 parameter_list|,
 specifier|final
-name|OJPreparingStmt
+name|Prepare
 operator|.
 name|CatalogReader
 name|catalogReader
@@ -1587,7 +1587,7 @@ name|opTab
 return|;
 block|}
 specifier|public
-name|OJPreparingStmt
+name|Prepare
 operator|.
 name|CatalogReader
 name|createCatalogReader

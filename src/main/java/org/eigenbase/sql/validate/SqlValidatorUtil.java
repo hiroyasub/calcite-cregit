@@ -43,20 +43,6 @@ name|org
 operator|.
 name|eigenbase
 operator|.
-name|oj
-operator|.
-name|stmt
-operator|.
-name|OJPreparingStmt
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
 name|relopt
 operator|.
 name|*
@@ -141,6 +127,20 @@ name|*
 import|;
 end_import
 
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|optiq
+operator|.
+name|prepare
+operator|.
+name|Prepare
+import|;
+end_import
+
 begin_comment
 comment|/**  * Utility methods related to validation.  *  * @author jhyde  * @version $Id$  * @since Mar 25, 2003  */
 end_comment
@@ -160,7 +160,7 @@ parameter_list|(
 name|SqlValidatorNamespace
 name|namespace
 parameter_list|,
-name|OJPreparingStmt
+name|Prepare
 operator|.
 name|CatalogReader
 name|catalogReader

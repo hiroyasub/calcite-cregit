@@ -51,20 +51,6 @@ name|org
 operator|.
 name|eigenbase
 operator|.
-name|oj
-operator|.
-name|stmt
-operator|.
-name|OJPreparingStmt
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
 name|rel
 operator|.
 name|*
@@ -263,6 +249,20 @@ name|ModifiableTable
 import|;
 end_import
 
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|optiq
+operator|.
+name|prepare
+operator|.
+name|Prepare
+import|;
+end_import
+
 begin_comment
 comment|/**  * Converts a SQL parse tree (consisting of {@link org.eigenbase.sql.SqlNode}  * objects) into a relational algebra expression (consisting of {@link  * org.eigenbase.rel.RelNode} objects).  *  *<p>The public entry points are: {@link #convertQuery}, {@link  * #convertExpression(SqlNode)}.  *  * @author jhyde  * @version $Id$  * @since Oct 10, 2003  */
 end_comment
@@ -297,7 +297,7 @@ name|rexBuilder
 decl_stmt|;
 specifier|protected
 specifier|final
-name|OJPreparingStmt
+name|Prepare
 operator|.
 name|CatalogReader
 name|catalogReader
@@ -569,7 +569,7 @@ argument_list|()
 decl_stmt|;
 specifier|private
 specifier|final
-name|OJPreparingStmt
+name|Prepare
 name|preparingStmt
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
@@ -577,13 +577,13 @@ comment|/**      * Creates a converter.      *      * @param preparingStmt Prepa
 specifier|public
 name|SqlToRelConverter
 parameter_list|(
-name|OJPreparingStmt
+name|Prepare
 name|preparingStmt
 parameter_list|,
 name|SqlValidator
 name|validator
 parameter_list|,
-name|OJPreparingStmt
+name|Prepare
 operator|.
 name|CatalogReader
 name|catalogReader
@@ -10524,7 +10524,7 @@ name|cluster
 return|;
 block|}
 specifier|public
-name|OJPreparingStmt
+name|Prepare
 name|getPreparingStmt
 parameter_list|()
 block|{

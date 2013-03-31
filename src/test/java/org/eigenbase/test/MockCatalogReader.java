@@ -29,20 +29,6 @@ name|org
 operator|.
 name|eigenbase
 operator|.
-name|oj
-operator|.
-name|stmt
-operator|.
-name|OJPreparingStmt
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
 name|rel
 operator|.
 name|*
@@ -151,6 +137,20 @@ name|Pair
 import|;
 end_import
 
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|optiq
+operator|.
+name|prepare
+operator|.
+name|Prepare
+import|;
+end_import
+
 begin_comment
 comment|/**  * Mock implementation of {@link SqlValidatorCatalogReader} which returns tables  * "EMP", "DEPT", "BONUS", "SALGRADE" (same as Oracle's SCOTT schema).  *  * @author jhyde  */
 end_comment
@@ -160,7 +160,7 @@ specifier|public
 class|class
 name|MockCatalogReader
 implements|implements
-name|OJPreparingStmt
+name|Prepare
 operator|.
 name|CatalogReader
 block|{
@@ -879,7 +879,7 @@ expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
 specifier|public
-name|OJPreparingStmt
+name|Prepare
 operator|.
 name|PreparingTable
 name|getTableForMember
@@ -968,7 +968,7 @@ argument_list|)
 expr_stmt|;
 block|}
 specifier|public
-name|OJPreparingStmt
+name|Prepare
 operator|.
 name|PreparingTable
 name|getTable
@@ -1264,7 +1264,7 @@ name|RelCollation
 argument_list|>
 name|deduceMonotonicity
 parameter_list|(
-name|OJPreparingStmt
+name|Prepare
 operator|.
 name|PreparingTable
 name|table
@@ -1453,13 +1453,13 @@ name|defaultCatalog
 return|;
 block|}
 block|}
-comment|/**      * Mock implementation of      * {@link org.eigenbase.oj.stmt.OJPreparingStmt.PreparingTable}.      */
+comment|/**      * Mock implementation of      * {@link net.hydromatic.optiq.prepare.Prepare.PreparingTable}.      */
 specifier|public
 specifier|static
 class|class
 name|MockTable
 implements|implements
-name|OJPreparingStmt
+name|Prepare
 operator|.
 name|PreparingTable
 block|{

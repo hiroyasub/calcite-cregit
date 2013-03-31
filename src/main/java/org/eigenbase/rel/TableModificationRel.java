@@ -29,23 +29,23 @@ name|org
 operator|.
 name|eigenbase
 operator|.
-name|oj
+name|relopt
 operator|.
-name|stmt
-operator|.
-name|OJPreparingStmt
+name|*
 import|;
 end_import
 
 begin_import
 import|import
-name|org
+name|net
 operator|.
-name|eigenbase
+name|hydromatic
 operator|.
-name|relopt
+name|optiq
 operator|.
-name|*
+name|prepare
+operator|.
+name|Prepare
 import|;
 end_import
 
@@ -71,7 +71,7 @@ parameter_list|,
 name|RelOptTable
 name|table
 parameter_list|,
-name|OJPreparingStmt
+name|Prepare
 operator|.
 name|CatalogReader
 name|schema

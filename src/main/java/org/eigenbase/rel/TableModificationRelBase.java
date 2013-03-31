@@ -29,20 +29,6 @@ name|org
 operator|.
 name|eigenbase
 operator|.
-name|oj
-operator|.
-name|stmt
-operator|.
-name|OJPreparingStmt
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
 name|rel
 operator|.
 name|metadata
@@ -101,6 +87,20 @@ name|*
 import|;
 end_import
 
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|optiq
+operator|.
+name|prepare
+operator|.
+name|Prepare
+import|;
+end_import
+
 begin_comment
 comment|/**  *<code>TableModificationRelBase</code> is an abstract base class for  * implementations of {@link TableModificationRel}.  *  * @author John V. Sichi  * @version $Id$  */
 end_comment
@@ -130,7 +130,7 @@ block|;     }
 comment|//~ Instance fields --------------------------------------------------------
 comment|/**      * The connection to the optimizing session.      */
 specifier|protected
-name|OJPreparingStmt
+name|Prepare
 operator|.
 name|CatalogReader
 name|catalogReader
@@ -176,7 +176,7 @@ parameter_list|,
 name|RelOptTable
 name|table
 parameter_list|,
-name|OJPreparingStmt
+name|Prepare
 operator|.
 name|CatalogReader
 name|catalogReader
@@ -263,7 +263,7 @@ expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
 specifier|public
-name|OJPreparingStmt
+name|Prepare
 operator|.
 name|CatalogReader
 name|getCatalogReader

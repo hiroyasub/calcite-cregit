@@ -219,6 +219,20 @@ end_import
 
 begin_import
 import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|optiq
+operator|.
+name|prepare
+operator|.
+name|Prepare
+import|;
+end_import
+
+begin_import
+import|import
 name|junit
 operator|.
 name|framework
@@ -238,20 +252,6 @@ operator|.
 name|dbcp
 operator|.
 name|BasicDataSource
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
-name|oj
-operator|.
-name|stmt
-operator|.
-name|OJPreparingStmt
 import|;
 end_import
 
@@ -4481,7 +4481,7 @@ parameter_list|,
 name|RelOptTable
 name|table
 parameter_list|,
-name|OJPreparingStmt
+name|Prepare
 operator|.
 name|CatalogReader
 name|catalogReader

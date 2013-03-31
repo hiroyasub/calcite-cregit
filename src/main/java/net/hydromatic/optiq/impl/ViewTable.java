@@ -85,15 +85,15 @@ end_import
 
 begin_import
 import|import
-name|org
+name|net
 operator|.
-name|eigenbase
+name|hydromatic
 operator|.
-name|oj
+name|optiq
 operator|.
-name|stmt
+name|prepare
 operator|.
-name|OJPreparingStmt
+name|Prepare
 import|;
 end_import
 
@@ -398,7 +398,7 @@ specifier|private
 name|RelNode
 name|expandView
 parameter_list|(
-name|OJPreparingStmt
+name|Prepare
 name|preparingStmt
 parameter_list|,
 name|RelDataType

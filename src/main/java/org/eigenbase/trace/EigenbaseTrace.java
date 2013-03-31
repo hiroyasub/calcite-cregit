@@ -57,20 +57,6 @@ name|eigenbase
 operator|.
 name|oj
 operator|.
-name|stmt
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
-name|oj
-operator|.
 name|util
 operator|.
 name|*
@@ -124,6 +110,20 @@ operator|.
 name|property
 operator|.
 name|*
+import|;
+end_import
+
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|optiq
+operator|.
+name|prepare
+operator|.
+name|Prepare
 import|;
 end_import
 
@@ -231,7 +231,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**      * The "org.eigenbase.oj.stmt.OJPreparingStmt" tracer prints the generated      * program at level {@link java.util.logging.Level#FINE} or higher.      */
+comment|/**      * The "net.hydromatic.optiq.prepare.Prepare" tracer prints the generated      * program at level {@link java.util.logging.Level#FINE} or higher.      */
 specifier|public
 specifier|static
 name|Logger
@@ -243,7 +243,7 @@ name|Logger
 operator|.
 name|getLogger
 argument_list|(
-name|OJPreparingStmt
+name|Prepare
 operator|.
 name|class
 operator|.

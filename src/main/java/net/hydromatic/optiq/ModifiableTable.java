@@ -15,15 +15,15 @@ end_package
 
 begin_import
 import|import
-name|org
+name|net
 operator|.
-name|eigenbase
+name|hydromatic
 operator|.
-name|oj
+name|optiq
 operator|.
-name|stmt
+name|prepare
 operator|.
-name|OJPreparingStmt
+name|Prepare
 import|;
 end_import
 
@@ -115,7 +115,7 @@ parameter_list|,
 name|RelOptTable
 name|table
 parameter_list|,
-name|OJPreparingStmt
+name|Prepare
 operator|.
 name|CatalogReader
 name|catalogReader
