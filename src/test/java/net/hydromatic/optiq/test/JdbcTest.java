@@ -3823,6 +3823,82 @@ argument_list|)
 expr_stmt|;
 block|}
 specifier|public
+name|void
+name|testExplain
+parameter_list|()
+block|{
+specifier|final
+name|OptiqAssert
+operator|.
+name|AssertThat
+name|with
+init|=
+name|OptiqAssert
+operator|.
+name|assertThat
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|FOODMART_CLONE
+argument_list|)
+decl_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"explain plan for values (1, 'ab')"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"PLAN=EnumerableValuesRel(tuples=[[{ 1, 'ab' }]])\n\n"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"explain plan with implementation for values (1, 'ab')"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"PLAN=EnumerableValuesRel(tuples=[[{ 1, 'ab' }]])\n\n"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"explain plan without implementation for values (1, 'ab')"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"PLAN=ValuesRel(tuples=[[{ 1, 'ab' }]])\n\n"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"explain plan with type for values (1, 'ab')"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"PLAN=EXPR$0 INTEGER NOT NULL,\n"
+operator|+
+literal|"EXPR$1 CHAR(2) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\" NOT NULL\n"
+argument_list|)
+expr_stmt|;
+block|}
+specifier|public
 specifier|static
 class|class
 name|HrSchema
