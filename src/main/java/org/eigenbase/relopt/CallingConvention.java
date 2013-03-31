@@ -78,7 +78,7 @@ operator|.
 name|class
 argument_list|)
 decl_stmt|;
-comment|/**      * The<code>ITERATOR</code> calling convention means that the expression is      * converted to an openjava expression ({@link openjava.ptree.Expression})      * which evaluates to an {@link org.eigenbase.runtime.TupleIter}. See {@link      * org.eigenbase.rel.convert.ConverterRel}.      */
+comment|/**      * The<code>ITERATOR</code> calling convention means that the expression is      * converted to an OpenJava expression      * which evaluates to an {@link org.eigenbase.runtime.TupleIter}. See {@link      * org.eigenbase.rel.convert.ConverterRel}.      */
 specifier|private
 specifier|static
 specifier|final
@@ -263,7 +263,7 @@ operator|.
 name|class
 argument_list|)
 decl_stmt|;
-comment|/**      * The<code>ITERABLE</code> calling convention means that the expression is      * converted to an openjava expression ({@link openjava.ptree.Expression})      * which evaluates to an object which implements {@link Iterable}.      */
+comment|/**      * The<code>ITERABLE</code> calling convention means that the expression is      * converted to an OpenJava expression      * which evaluates to an object which implements {@link Iterable}.      */
 specifier|private
 specifier|static
 specifier|final

@@ -293,11 +293,14 @@ comment|// create a new setop whose children are the filters created above
 name|SetOpRel
 name|newSetOpRel
 init|=
-name|RelOptUtil
+name|setOpRel
 operator|.
-name|createNewSetOpRel
+name|copy
 argument_list|(
 name|setOpRel
+operator|.
+name|getTraitSet
+argument_list|()
 argument_list|,
 name|newSetOpInputs
 argument_list|)
