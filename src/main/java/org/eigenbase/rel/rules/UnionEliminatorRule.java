@@ -119,10 +119,10 @@ return|return;
 block|}
 if|if
 condition|(
+operator|!
 name|union
 operator|.
-name|isDistinct
-argument_list|()
+name|all
 condition|)
 block|{
 return|return;

@@ -183,10 +183,10 @@ decl_stmt|;
 comment|// cannot push project past a distinct
 if|if
 condition|(
+operator|!
 name|setOpRel
 operator|.
-name|isDistinct
-argument_list|()
+name|all
 condition|)
 block|{
 return|return;

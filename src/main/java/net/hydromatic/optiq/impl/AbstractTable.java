@@ -226,6 +226,18 @@ return|return
 name|schema
 return|;
 block|}
+comment|// Default implementation. Override if you have statistics.
+specifier|public
+name|Statistic
+name|getStatistic
+parameter_list|()
+block|{
+return|return
+name|Statistics
+operator|.
+name|UNKNOWN
+return|;
+block|}
 specifier|public
 name|Type
 name|getElementType

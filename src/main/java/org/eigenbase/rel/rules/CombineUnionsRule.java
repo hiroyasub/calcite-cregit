@@ -206,15 +206,15 @@ block|}
 comment|// If distincts haven't been removed yet, defer invoking this rule
 if|if
 condition|(
+operator|!
 name|topUnionRel
 operator|.
-name|isDistinct
-argument_list|()
+name|all
 operator|||
+operator|!
 name|bottomUnionRel
 operator|.
-name|isDistinct
-argument_list|()
+name|all
 condition|)
 block|{
 return|return;

@@ -319,6 +319,17 @@ argument_list|)
 return|;
 block|}
 specifier|public
+name|Statistic
+name|getStatistic
+parameter_list|()
+block|{
+return|return
+name|Statistics
+operator|.
+name|UNKNOWN
+return|;
+block|}
+specifier|public
 name|Iterator
 argument_list|<
 name|Object

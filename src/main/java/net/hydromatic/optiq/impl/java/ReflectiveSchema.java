@@ -1131,6 +1131,17 @@ return|return
 name|relDataType
 return|;
 block|}
+specifier|public
+name|Statistic
+name|getStatistic
+parameter_list|()
+block|{
+return|return
+name|Statistics
+operator|.
+name|UNKNOWN
+return|;
+block|}
 block|}
 block|}
 end_class

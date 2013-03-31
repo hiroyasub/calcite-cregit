@@ -255,11 +255,9 @@ argument_list|()
 argument_list|,
 name|newChildRels
 argument_list|,
-operator|!
 name|union
 operator|.
-name|isDistinct
-argument_list|()
+name|all
 argument_list|)
 expr_stmt|;
 break|break;

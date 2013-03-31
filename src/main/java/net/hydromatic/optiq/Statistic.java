@@ -15,63 +15,41 @@ end_package
 
 begin_import
 import|import
-name|net
+name|java
 operator|.
-name|hydromatic
+name|util
 operator|.
-name|linq4j
-operator|.
-name|Queryable
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
-name|reltype
-operator|.
-name|RelDataType
+name|BitSet
 import|;
 end_import
 
 begin_comment
-comment|/**  * Table.  *  * @see TableFunction  */
+comment|/**  * Statistics about a {@link Table}.  *  *<p>Each of the methods may return {@code null} meaning "not known".</p>  *  * @see Statistics  */
 end_comment
 
 begin_interface
 specifier|public
 interface|interface
-name|Table
-parameter_list|<
-name|T
-parameter_list|>
-extends|extends
-name|Queryable
-argument_list|<
-name|T
-argument_list|>
-block|{
-name|DataContext
-name|getDataContext
-parameter_list|()
-function_decl|;
-name|RelDataType
-name|getRowType
-parameter_list|()
-function_decl|;
-comment|/** Returns a provider of statistics about this table. */
 name|Statistic
-name|getStatistic
+block|{
+comment|/** Returns the approximate number of rows in the table. */
+name|Double
+name|getRowCount
 parameter_list|()
+function_decl|;
+comment|/** Returns whether the given set of columns is a unique key, or a superset      * of a unique key, of the table.      */
+name|boolean
+name|isKey
+parameter_list|(
+name|BitSet
+name|columns
+parameter_list|)
 function_decl|;
 block|}
 end_interface
 
 begin_comment
-comment|// End Table.java
+comment|// End Statistic.java
 end_comment
 
 end_unit

@@ -237,31 +237,9 @@ name|boolean
 name|isDistinct
 parameter_list|()
 block|{
-comment|// REVIEW jvs 5-Apr-2008:  Shouldn't this just return true always?
-comment|// How can the result of aggregation have any duplicates?
+comment|// we never return duplicate rows
 return|return
-operator|(
-name|aggCalls
-operator|.
-name|size
-argument_list|()
-operator|==
-literal|0
-operator|)
-operator|&&
-operator|(
-name|getGroupCount
-argument_list|()
-operator|==
-name|getChild
-argument_list|()
-operator|.
-name|getRowType
-argument_list|()
-operator|.
-name|getFieldCount
-argument_list|()
-operator|)
+literal|true
 return|;
 block|}
 comment|/**      * Returns a list of calls to aggregate functions.      *      * @return list of calls to aggregate functions      */

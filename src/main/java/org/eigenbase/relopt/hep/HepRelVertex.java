@@ -21,6 +21,16 @@ name|java
 operator|.
 name|util
 operator|.
+name|BitSet
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
 name|List
 import|;
 end_import
@@ -130,6 +140,8 @@ name|rel
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
 specifier|public
 name|RelNode
 name|copy
@@ -169,7 +181,8 @@ return|return
 name|this
 return|;
 block|}
-comment|// implement RelNode
+annotation|@
+name|Override
 specifier|public
 name|RelOptCost
 name|computeSelfCost
@@ -189,7 +202,8 @@ literal|"should never get here"
 argument_list|)
 throw|;
 block|}
-comment|// implement RelNode
+annotation|@
+name|Override
 specifier|public
 name|double
 name|getRows
@@ -204,7 +218,8 @@ name|currentRel
 argument_list|)
 return|;
 block|}
-comment|// implement RelNode
+annotation|@
+name|Override
 specifier|protected
 name|RelDataType
 name|deriveRowType
@@ -217,7 +232,8 @@ name|getRowType
 argument_list|()
 return|;
 block|}
-comment|// implement RelNode
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isDistinct
@@ -230,7 +246,27 @@ name|isDistinct
 argument_list|()
 return|;
 block|}
-comment|// implement RelNode
+annotation|@
+name|Override
+specifier|public
+name|boolean
+name|isKey
+parameter_list|(
+name|BitSet
+name|columns
+parameter_list|)
+block|{
+return|return
+name|currentRel
+operator|.
+name|isKey
+argument_list|(
+name|columns
+argument_list|)
+return|;
+block|}
+annotation|@
+name|Override
 specifier|protected
 name|String
 name|computeDigest

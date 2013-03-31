@@ -262,10 +262,10 @@ expr_stmt|;
 block|}
 if|if
 condition|(
+operator|!
 name|unionRel
 operator|.
-name|isDistinct
-argument_list|()
+name|all
 condition|)
 block|{
 return|return;

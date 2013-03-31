@@ -175,10 +175,10 @@ index|]
 decl_stmt|;
 if|if
 condition|(
+operator|!
 name|unionRel
 operator|.
-name|isDistinct
-argument_list|()
+name|all
 condition|)
 block|{
 comment|// This transformation is only valid for UNION ALL.

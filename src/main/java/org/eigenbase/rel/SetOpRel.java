@@ -19,17 +19,7 @@ name|java
 operator|.
 name|util
 operator|.
-name|AbstractList
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|List
+name|*
 import|;
 end_import
 
@@ -89,7 +79,8 @@ name|RelNode
 argument_list|>
 name|inputs
 decl_stmt|;
-specifier|protected
+specifier|public
+specifier|final
 name|boolean
 name|all
 decl_stmt|;
@@ -185,6 +176,36 @@ block|{
 return|return
 operator|!
 name|all
+return|;
+block|}
+annotation|@
+name|Override
+specifier|public
+name|boolean
+name|isKey
+parameter_list|(
+name|BitSet
+name|columns
+parameter_list|)
+block|{
+comment|// If not ALL then the rows are distinct.
+comment|// Therefore the set of all columns is a key.
+return|return
+operator|!
+name|all
+operator|&&
+name|columns
+operator|.
+name|nextClearBit
+argument_list|(
+literal|0
+argument_list|)
+operator|>=
+name|getRowType
+argument_list|()
+operator|.
+name|getFieldCount
+argument_list|()
 return|;
 block|}
 specifier|public

@@ -61,18 +61,6 @@ name|*
 import|;
 end_import
 
-begin_import
-import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|optiq
-operator|.
-name|ModifiableTable
-import|;
-end_import
-
 begin_comment
 comment|/**  * Represents a relational dataset in a {@link RelOptSchema}. It has methods to  * describe and implement itself.  *  * @author jhyde  * @version $Id$  * @since 10 November, 2001  */
 end_comment
@@ -113,13 +101,20 @@ name|context
 parameter_list|)
 function_decl|;
 comment|/**      * Returns a description of the physical ordering (or orderings) of the rows      * returned from this table.      *      * @see RelNode#getCollationList()      * @post return != null      */
-specifier|public
 name|List
 argument_list|<
 name|RelCollation
 argument_list|>
 name|getCollationList
 parameter_list|()
+function_decl|;
+comment|/**      * Returns whether the given columns are a key or a superset of a unique key      * of this table.      *      * @param columns Ordinals of key columns      * @return Whether the given columns are a key or a superset of a key      */
+name|boolean
+name|isKey
+parameter_list|(
+name|BitSet
+name|columns
+parameter_list|)
 function_decl|;
 comment|/** Finds an interface implemented by this table. */
 parameter_list|<

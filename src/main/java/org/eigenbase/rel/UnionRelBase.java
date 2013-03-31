@@ -110,8 +110,8 @@ argument_list|)
 decl_stmt|;
 if|if
 condition|(
-name|isDistinct
-argument_list|()
+operator|!
+name|all
 condition|)
 block|{
 name|dRows
