@@ -68,6 +68,11 @@ specifier|public
 name|ConverterRule
 parameter_list|(
 name|Class
+argument_list|<
+name|?
+extends|extends
+name|RelNode
+argument_list|>
 name|clazz
 parameter_list|,
 name|RelTrait
@@ -277,6 +282,11 @@ specifier|public
 name|ConverterRelOptRuleOperand
 parameter_list|(
 name|Class
+argument_list|<
+name|?
+extends|extends
+name|RelNode
+argument_list|>
 name|clazz
 parameter_list|,
 name|RelTrait
