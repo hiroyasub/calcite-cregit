@@ -5,27 +5,57 @@ end_comment
 
 begin_package
 package|package
-name|org
+name|net
 operator|.
-name|eigenbase
+name|hydromatic
 operator|.
-name|runtime
+name|optiq
+operator|.
+name|jdbc
 package|;
 end_package
 
+begin_import
+import|import
+name|java
+operator|.
+name|sql
+operator|.
+name|SQLException
+import|;
+end_import
+
 begin_comment
-comment|/**  *<code>Dummy</code> is the default context for code calling the<code>  * net.sf.saffron.oj.stmt.OJStatement.execute()</code> method.  *  * @author jhyde  * @version $Id$  * @since 22 September, 2001  */
+comment|/**  * Indicates that an operation timed out. This is not an error; you can  * retry the operation.  */
 end_comment
 
 begin_class
 specifier|public
 class|class
-name|Dummy
-block|{ }
+name|SqlTimeoutException
+extends|extends
+name|SQLException
+block|{
+name|SqlTimeoutException
+parameter_list|()
+block|{
+comment|// SQLException(reason, SQLState, vendorCode)
+comment|// REVIEW mb 19-Jul-05 Is there a standard SQLState?
+name|super
+argument_list|(
+literal|"timeout"
+argument_list|,
+literal|null
+argument_list|,
+literal|0
+argument_list|)
+expr_stmt|;
+block|}
+block|}
 end_class
 
 begin_comment
-comment|// End Dummy.java
+comment|// End SqlTimeoutException.java
 end_comment
 
 end_unit

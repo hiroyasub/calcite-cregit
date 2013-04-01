@@ -100,6 +100,7 @@ comment|/**  * Base class for implementing a cursor.  *  *<p>Derived class needs
 end_comment
 
 begin_class
+specifier|public
 specifier|abstract
 class|class
 name|AbstractCursor

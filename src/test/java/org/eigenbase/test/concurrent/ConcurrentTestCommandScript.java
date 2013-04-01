@@ -63,21 +63,23 @@ name|org
 operator|.
 name|eigenbase
 operator|.
-name|runtime
+name|util
 operator|.
-name|AbstractIterResultSet
+name|Util
 import|;
 end_import
 
 begin_import
 import|import
-name|org
+name|net
 operator|.
-name|eigenbase
+name|hydromatic
 operator|.
-name|util
+name|optiq
 operator|.
-name|Util
+name|jdbc
+operator|.
+name|SqlTimeoutException
 import|;
 end_import
 
@@ -1980,7 +1982,7 @@ name|getMessage
 argument_list|()
 argument_list|)
 expr_stmt|;
-comment|//swallow
+comment|// swallow
 block|}
 else|else
 block|{
@@ -8325,8 +8327,6 @@ block|}
 block|}
 catch|catch
 parameter_list|(
-name|AbstractIterResultSet
-operator|.
 name|SqlTimeoutException
 name|e
 parameter_list|)
@@ -9020,8 +9020,6 @@ block|}
 block|}
 catch|catch
 parameter_list|(
-name|AbstractIterResultSet
-operator|.
 name|SqlTimeoutException
 name|e
 parameter_list|)

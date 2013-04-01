@@ -172,6 +172,8 @@ argument_list|(
 name|this
 argument_list|,
 name|prepareResult
+operator|.
+name|columnList
 argument_list|)
 expr_stmt|;
 block|}
