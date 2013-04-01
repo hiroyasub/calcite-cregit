@@ -454,19 +454,9 @@ specifier|final
 name|JavaRelImplementor
 name|relImplementor
 init|=
-name|rel
-operator|.
-name|getCluster
-argument_list|()
-operator|.
-name|getPlanner
-argument_list|()
-operator|.
-name|getJavaRelImplementor
-argument_list|(
-name|rel
-argument_list|)
+literal|null
 decl_stmt|;
+comment|/*                 rel.getCluster().getPlanner().getJavaRelImplementor(rel);                 */
 specifier|final
 name|RelNode
 name|convertedChild

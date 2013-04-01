@@ -85,18 +85,6 @@ name|org
 operator|.
 name|eigenbase
 operator|.
-name|trace
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
 name|util
 operator|.
 name|*
@@ -119,10 +107,17 @@ specifier|final
 name|Logger
 name|tracer
 init|=
-name|EigenbaseTrace
+name|Logger
 operator|.
-name|getClassMapTracer
+name|getLogger
+argument_list|(
+name|OJClassMap
+operator|.
+name|class
+operator|.
+name|getName
 argument_list|()
+argument_list|)
 decl_stmt|;
 comment|//~ Instance fields --------------------------------------------------------
 comment|// REVIEW jvs 21-Jun-2003:  change to HashMap?  This shouldn't be accessed

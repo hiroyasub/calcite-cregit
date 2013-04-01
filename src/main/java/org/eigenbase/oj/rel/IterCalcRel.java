@@ -747,7 +747,7 @@ name|tag
 argument_list|)
 return|;
 block|}
-comment|/**      * Generates code for a Java expression satisfying the {@link      * org.eigenbase.runtime.TupleIter} interface. The generated code allocates      * a {@link org.eigenbase.runtime.CalcTupleIter} with a dynamic {@link      * org.eigenbase.runtime.TupleIter#fetchNext()} method. If the "abort on      * error" flag is false, or an error handling tag is specified, then      * fetchNext is written to handle row errors.      *      *<p>Row errors are handled by wrapping expressions that can fail with a      * try/catch block. A caught RuntimeException is then published to an      * "connection variable." In the event that errors can overflow, an "error      * buffering" flag allows them to be posted again on the next iteration of      * fetchNext.      *      * @param implementor an object that implements relations as Java code      * @param rel the relation to be implemented      * @param childExp the implemented child of the relation      * @param varInputRow the Java variable to use for the input row      * @param inputRowType the rel data type of the input row      * @param outputRowType the rel data type of the output row      * @param program the rex program to implemented by the relation      * @param tag an error handling tag      *      * @return a Java expression satisfying the TupleIter interface      */
+comment|/**      * Generates code for a Java expression satisfying the {@link      * org.eigenbase.runtime.TupleIter} interface. The generated code allocates      * a {@code org.eigenbase.runtime.CalcTupleIter} with a dynamic {@link      * org.eigenbase.runtime.TupleIter#fetchNext()} method. If the "abort on      * error" flag is false, or an error handling tag is specified, then      * fetchNext is written to handle row errors.      *      *<p>Row errors are handled by wrapping expressions that can fail with a      * try/catch block. A caught RuntimeException is then published to an      * "connection variable." In the event that errors can overflow, an "error      * buffering" flag allows them to be posted again on the next iteration of      * fetchNext.      *      * @param implementor an object that implements relations as Java code      * @param rel the relation to be implemented      * @param childExp the implemented child of the relation      * @param varInputRow the Java variable to use for the input row      * @param inputRowType the rel data type of the input row      * @param outputRowType the rel data type of the output row      * @param program the rex program to implemented by the relation      * @param tag an error handling tag      *      * @return a Java expression satisfying the TupleIter interface      */
 specifier|public
 specifier|static
 name|Expression
@@ -1916,9 +1916,10 @@ name|OJUtil
 operator|.
 name|typeNameForClass
 argument_list|(
-name|CalcTupleIter
+name|Object
 operator|.
 name|class
+comment|/*CalcTupleIter.class*/
 argument_list|)
 argument_list|,
 operator|new

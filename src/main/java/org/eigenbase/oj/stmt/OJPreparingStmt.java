@@ -269,6 +269,10 @@ block|{
 name|super
 argument_list|(
 name|catalogReader
+argument_list|,
+name|CallingConvention
+operator|.
+name|RESULT_SET
 argument_list|)
 expr_stmt|;
 name|this

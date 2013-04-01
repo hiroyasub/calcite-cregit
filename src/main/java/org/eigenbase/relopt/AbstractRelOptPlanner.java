@@ -53,20 +53,6 @@ name|org
 operator|.
 name|eigenbase
 operator|.
-name|oj
-operator|.
-name|rel
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
 name|rel
 operator|.
 name|*
@@ -688,19 +674,6 @@ argument_list|(
 name|newListener
 argument_list|)
 expr_stmt|;
-block|}
-comment|// implement RelOptPlanner
-specifier|public
-name|JavaRelImplementor
-name|getJavaRelImplementor
-parameter_list|(
-name|RelNode
-name|rel
-parameter_list|)
-block|{
-return|return
-literal|null
-return|;
 block|}
 comment|// implement RelOptPlanner
 specifier|public

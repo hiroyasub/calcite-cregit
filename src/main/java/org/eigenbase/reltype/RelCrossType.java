@@ -23,28 +23,6 @@ name|List
 import|;
 end_import
 
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
-name|oj
-operator|.
-name|util
-operator|.
-name|*
-import|;
-end_import
-
-begin_comment
-comment|// REVIEW jvs 17-Dec-2004:  does this still need to exist?  Is it supposed
-end_comment
-
-begin_comment
-comment|// to have fields?
-end_comment
-
 begin_comment
 comment|/**  * Type of the cartesian product of two or more sets of records.  *  *<p>Its fields are those of its constituent records, but unlike a {@link  * RelRecordType}, those fields' names are not necessarily distinct.</p>  *  * @author jhyde  * @version $Id$  */
 end_comment
@@ -163,30 +141,6 @@ name|String
 name|fieldName
 parameter_list|)
 block|{
-specifier|final
-name|int
-name|ordinal
-init|=
-name|OJSyntheticClass
-operator|.
-name|getOrdinal
-argument_list|(
-name|fieldName
-argument_list|,
-literal|false
-argument_list|)
-decl_stmt|;
-if|if
-condition|(
-name|ordinal
-operator|>=
-literal|0
-condition|)
-block|{
-return|return
-name|ordinal
-return|;
-block|}
 throw|throw
 operator|new
 name|UnsupportedOperationException

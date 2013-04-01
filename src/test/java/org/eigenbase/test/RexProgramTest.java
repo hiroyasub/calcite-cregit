@@ -45,27 +45,31 @@ end_import
 
 begin_import
 import|import
-name|org
+name|net
 operator|.
-name|eigenbase
+name|hydromatic
 operator|.
-name|oj
+name|optiq
 operator|.
-name|OJTypeFactoryImpl
+name|impl
+operator|.
+name|java
+operator|.
+name|JavaTypeFactory
 import|;
 end_import
 
 begin_import
 import|import
-name|org
+name|net
 operator|.
-name|eigenbase
+name|hydromatic
 operator|.
-name|oj
+name|optiq
 operator|.
-name|util
+name|jdbc
 operator|.
-name|JavaRexBuilder
+name|JavaTypeFactoryImpl
 import|;
 end_import
 
@@ -146,7 +150,7 @@ name|TestCase
 block|{
 comment|//~ Instance fields --------------------------------------------------------
 specifier|private
-name|OJTypeFactoryImpl
+name|JavaTypeFactory
 name|typeFactory
 decl_stmt|;
 specifier|private
@@ -187,13 +191,13 @@ block|{
 name|typeFactory
 operator|=
 operator|new
-name|OJTypeFactoryImpl
+name|JavaTypeFactoryImpl
 argument_list|()
 expr_stmt|;
 name|rexBuilder
 operator|=
 operator|new
-name|JavaRexBuilder
+name|RexBuilder
 argument_list|(
 name|typeFactory
 argument_list|)

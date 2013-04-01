@@ -233,9 +233,10 @@ name|OJUtil
 operator|.
 name|typeNameForClass
 argument_list|(
-name|RestartableCollectionTupleIter
+name|Object
 operator|.
 name|class
+comment|/*RestartableCollectionTupleIter.class*/
 argument_list|)
 argument_list|,
 operator|new

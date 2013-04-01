@@ -43,7 +43,7 @@ name|eigenbase
 operator|.
 name|oj
 operator|.
-name|rel
+name|util
 operator|.
 name|*
 import|;
@@ -55,11 +55,9 @@ name|org
 operator|.
 name|eigenbase
 operator|.
-name|oj
+name|rel
 operator|.
-name|util
-operator|.
-name|*
+name|RelImplementorImpl
 import|;
 end_import
 
@@ -252,7 +250,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**      * The "org.eigenbase.oj.rel.JavaRelImplementor" tracer reports when      * expressions are bound to variables ({@link Level#FINE})      */
+comment|/**      * The "org.eigenbase.rel.RelImplementorImpl" tracer reports when      * expressions are bound to variables ({@link Level#FINE})      */
 specifier|public
 specifier|static
 name|Logger
@@ -264,7 +262,7 @@ name|Logger
 operator|.
 name|getLogger
 argument_list|(
-name|JavaRelImplementor
+name|RelImplementorImpl
 operator|.
 name|class
 operator|.
@@ -334,27 +332,6 @@ operator|.
 name|getLogger
 argument_list|(
 literal|"org.eigenbase.jmi.JmiChangeSet"
-argument_list|)
-return|;
-block|}
-comment|/**      * The "org.eigenbase.oj.util.OJClassMap" tracer reports when synthetic      * classes are created ({@link Level#FINE})      */
-specifier|public
-specifier|static
-name|Logger
-name|getClassMapTracer
-parameter_list|()
-block|{
-return|return
-name|Logger
-operator|.
-name|getLogger
-argument_list|(
-name|OJClassMap
-operator|.
-name|class
-operator|.
-name|getName
-argument_list|()
 argument_list|)
 return|;
 block|}

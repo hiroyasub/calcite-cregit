@@ -43,20 +43,6 @@ name|org
 operator|.
 name|eigenbase
 operator|.
-name|oj
-operator|.
-name|rel
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
 name|rel
 operator|.
 name|*
@@ -293,18 +279,6 @@ name|registerSchema
 parameter_list|(
 name|RelOptSchema
 name|schema
-parameter_list|)
-function_decl|;
-comment|// REVIEW jvs 3-Apr-2006:  Implementation is completely separate
-comment|// from planning, so this should probably be moved to somewhere
-comment|// in Farrago pluggability instead.
-comment|/**      * Retrieves an implementor appropriate for the context in which this      * planner was created.      */
-specifier|public
-name|JavaRelImplementor
-name|getJavaRelImplementor
-parameter_list|(
-name|RelNode
-name|rel
 parameter_list|)
 function_decl|;
 comment|/**      * Adds a listener to this planner.      *      * @param newListener new listener to be notified of events      */
