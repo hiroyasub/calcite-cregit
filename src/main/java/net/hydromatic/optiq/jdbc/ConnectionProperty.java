@@ -365,17 +365,8 @@ operator|==
 literal|null
 condition|)
 block|{
-throw|throw
-operator|new
-name|RuntimeException
-argument_list|(
-literal|"Unknown property '"
-operator|+
-name|name
-operator|+
-literal|"'"
-argument_list|)
-throw|;
+comment|// For now, don't throw. It messes up sub-projects.
+comment|//throw new RuntimeException("Unknown property '" + name + "'");
 block|}
 name|map
 operator|.
