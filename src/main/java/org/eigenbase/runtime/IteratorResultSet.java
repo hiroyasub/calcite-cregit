@@ -46,7 +46,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A<code>IteratorResultSet</code> is an adapter which converts a {@link  * java.util.Iterator} into a {@link java.sql.ResultSet}.  *  *<p>See also its converse adapter, {@link ResultSetIterator}</p>  */
+comment|/**  * A<code>IteratorResultSet</code> is an adapter which converts a {@link  * java.util.Iterator} into a {@link java.sql.ResultSet}.  */
 end_comment
 
 begin_class

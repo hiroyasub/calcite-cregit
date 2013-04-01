@@ -92,22 +92,6 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      * The boolean property "saffron.Statement.printBeforeCompile" controls      * whether {@link openjava.ptree.Statement} prints the statement before      * compiling it.      */
-specifier|public
-specifier|final
-name|BooleanProperty
-name|printBeforeCompile
-init|=
-operator|new
-name|BooleanProperty
-argument_list|(
-name|this
-argument_list|,
-literal|"saffron.Statement.printBeforeCompile"
-argument_list|,
-literal|false
-argument_list|)
-decl_stmt|;
 comment|/**      * The string property "saffron.java.compiler.class" is the name of the Java      * compiler to use. It must implement {@link      * org.eigenbase.javac.JavaCompiler}. The default value is      * "JP.ac.tsukuba.openjava.SunJavaCompiler".      */
 specifier|public
 specifier|final
