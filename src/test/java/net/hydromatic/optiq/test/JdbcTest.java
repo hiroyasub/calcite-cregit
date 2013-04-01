@@ -2420,6 +2420,58 @@ literal|"c0=1997; c1=Q1; c2=Non-Consumable; m0=12506.0000\n"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Tests plan for a query with 4 tables, 3 joins. */
+specifier|public
+name|void
+name|testCloneGroupBy2Plan
+parameter_list|()
+block|{
+comment|// NOTE: Plan is nowhere near optimal yet.
+name|OptiqAssert
+operator|.
+name|assertThat
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|FOODMART_CLONE
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"explain plan for select \"time_by_day\".\"the_year\" as \"c0\", \"time_by_day\".\"quarter\" as \"c1\", \"product_class\".\"product_family\" as \"c2\", sum(\"sales_fact_1997\".\"unit_sales\") as \"m0\" from \"time_by_day\" as \"time_by_day\", \"sales_fact_1997\" as \"sales_fact_1997\", \"product_class\" as \"product_class\", \"product\" as \"product\" where \"sales_fact_1997\".\"time_id\" = \"time_by_day\".\"time_id\" and \"time_by_day\".\"the_year\" = 1997 and \"sales_fact_1997\".\"product_id\" = \"product\".\"product_id\" and \"product\".\"product_class_id\" = \"product_class\".\"product_class_id\" group by \"time_by_day\".\"the_year\", \"time_by_day\".\"quarter\", \"product_class\".\"product_family\""
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"PLAN=EnumerableAggregateRel(group=[{0, 1, 2}], m0=[SUM($3)])\n"
+operator|+
+literal|"  EnumerableCalcRel(expr#0..37=[{inputs}], c0=[$t4], c1=[$t8], c2=[$t22], unit_sales=[$t17])\n"
+operator|+
+literal|"    EnumerableJoinRel(condition=[AND(=($10, $24), =($23, $18))], joinType=[inner])\n"
+operator|+
+literal|"      EnumerableJoinRel(condition=[true], joinType=[inner])\n"
+operator|+
+literal|"        EnumerableJoinRel(condition=[=($11, $0)], joinType=[inner])\n"
+operator|+
+literal|"          EnumerableCalcRel(expr#0..9=[{inputs}], expr#10=[CAST($t4):INTEGER], expr#11=[1997], expr#12=[=($t10, $t11)], proj#0..9=[{exprs}], $condition=[$t12])\n"
+operator|+
+literal|"            EnumerableTableAccessRel(table=[[foodmart2, time_by_day]])\n"
+operator|+
+literal|"          EnumerableTableAccessRel(table=[[foodmart2, sales_fact_1997]])\n"
+operator|+
+literal|"        EnumerableTableAccessRel(table=[[foodmart2, product_class]])\n"
+operator|+
+literal|"      EnumerableTableAccessRel(table=[[foodmart2, product]])\n"
+operator|+
+literal|"\n"
+argument_list|)
+expr_stmt|;
+block|}
 specifier|private
 specifier|static
 specifier|final
@@ -3704,6 +3756,9 @@ block|{
 name|OptiqConnection
 name|connection
 init|=
+operator|(
+name|OptiqConnection
+operator|)
 operator|new
 name|AutoTempDriver
 argument_list|(
