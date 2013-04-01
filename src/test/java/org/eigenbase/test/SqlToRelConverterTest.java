@@ -208,6 +208,21 @@ expr_stmt|;
 block|}
 specifier|public
 name|void
+name|testJoinOnIn
+parameter_list|()
+block|{
+name|check
+argument_list|(
+literal|"select * from emp join dept\n"
+operator|+
+literal|" on emp.deptno = dept.deptno and emp.empno in (1, 3)"
+argument_list|,
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
+specifier|public
+name|void
 name|testJoinUsing
 parameter_list|()
 block|{
