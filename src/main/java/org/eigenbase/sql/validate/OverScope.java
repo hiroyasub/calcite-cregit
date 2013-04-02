@@ -150,6 +150,8 @@ name|get
 argument_list|(
 literal|0
 argument_list|)
+operator|.
+name|right
 decl_stmt|;
 specifier|final
 name|List
