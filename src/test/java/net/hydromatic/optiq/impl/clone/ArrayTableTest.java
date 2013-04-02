@@ -546,6 +546,8 @@ operator|.
 name|freeze
 argument_list|(
 literal|0
+argument_list|,
+literal|null
 argument_list|)
 expr_stmt|;
 name|assertTrue
@@ -667,6 +669,8 @@ operator|.
 name|freeze
 argument_list|(
 literal|0
+argument_list|,
+literal|null
 argument_list|)
 expr_stmt|;
 name|assertTrue
@@ -788,6 +792,8 @@ operator|.
 name|freeze
 argument_list|(
 literal|0
+argument_list|,
+literal|null
 argument_list|)
 expr_stmt|;
 name|assertTrue
@@ -843,6 +849,8 @@ operator|.
 name|freeze
 argument_list|(
 literal|0
+argument_list|,
+literal|null
 argument_list|)
 expr_stmt|;
 name|assertTrue
@@ -1013,6 +1021,8 @@ operator|.
 name|freeze
 argument_list|(
 literal|0
+argument_list|,
+literal|null
 argument_list|)
 decl_stmt|;
 name|assertTrue
@@ -1154,6 +1164,8 @@ operator|.
 name|freeze
 argument_list|(
 literal|0
+argument_list|,
+literal|null
 argument_list|)
 decl_stmt|;
 name|assertTrue
@@ -1255,6 +1267,8 @@ operator|.
 name|freeze
 argument_list|(
 literal|0
+argument_list|,
+literal|null
 argument_list|)
 expr_stmt|;
 name|assertTrue
@@ -1355,6 +1369,8 @@ operator|.
 name|freeze
 argument_list|(
 literal|0
+argument_list|,
+literal|null
 argument_list|)
 expr_stmt|;
 specifier|final
@@ -1440,6 +1456,8 @@ operator|.
 name|freeze
 argument_list|(
 literal|0
+argument_list|,
+literal|null
 argument_list|)
 expr_stmt|;
 specifier|final
@@ -1597,6 +1615,8 @@ operator|.
 name|freeze
 argument_list|(
 literal|0
+argument_list|,
+literal|null
 argument_list|)
 expr_stmt|;
 name|assertTrue
@@ -1678,6 +1698,8 @@ operator|.
 name|freeze
 argument_list|(
 literal|0
+argument_list|,
+literal|null
 argument_list|)
 expr_stmt|;
 specifier|final
@@ -1763,6 +1785,8 @@ operator|.
 name|freeze
 argument_list|(
 literal|0
+argument_list|,
+literal|null
 argument_list|)
 expr_stmt|;
 name|assertTrue
@@ -1844,6 +1868,8 @@ operator|.
 name|freeze
 argument_list|(
 literal|0
+argument_list|,
+literal|null
 argument_list|)
 expr_stmt|;
 specifier|final

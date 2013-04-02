@@ -358,6 +358,10 @@ name|loader
 operator|.
 name|size
 argument_list|()
+argument_list|,
+name|loader
+operator|.
+name|sortField
 argument_list|)
 return|;
 block|}
