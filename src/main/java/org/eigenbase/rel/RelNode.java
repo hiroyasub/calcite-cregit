@@ -74,7 +74,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A<code>RelNode</code> is a relational expression.  *  *<p>A relational expression is not a scalar expression; see  * {@link org.eigenbase.sql.SqlNode} and {@link RexNode}.</p>  *  *<p>If this type of relational expression has some particular planner rules,  * it should implement the<em>public static</em> method  * {@link AbstractRelNode#register}.</p>  *  *<p>When a relational expression comes to be implemented, the system allocates  * a {@link org.eigenbase.relopt.RelImplementor} to manage the process. Every  * implementable relational expression has a {@link RelTraitSet} describing its  * physical attributes. The RelTraitSet always contains a {@link Convention}  * describing how the expression passes data to its consuming  * relational expression, but may contain other traits, including some applied  * externally. Because traits can be applied externally, implementaitons of  * RelNode should never assume the size or contents of their trait set (beyond  * those traits configured by the RelNode itself).</p>  *  *<p>For each calling-convention, there is a corresponding sub-interface of  * RelNode. For example, {@code net.hydromatic.optiq.rules.java.EnumerableRel} has operations to  * manage the conversion to a graph of  * {@code net.hydromatic.optiq.rules.java.EnumerableConvention}  * calling-convention, and it interacts with a  * {@code EnumerableRelImplementor}.</p>  *  *<p>A relational expression is only required to implement its  * calling-convention's interface when it is actually implemented, that is,  * converted into a plan/program. This means that relational expressions which  * cannot be implemented, such as converters, are not required to implement  * their convention's interface.</p>  *  *<p>Every relational expression must derive from {@link AbstractRelNode}. (Why  * have the<code>RelNode</code> interface, then? We need a root interface,  * because an interface can only derive from an interface.)</p>  *  * @author jhyde  * @version $Id$  * @since May 24, 2004  */
+comment|/**  * A<code>RelNode</code> is a relational expression.  *  *<p>A relational expression is not a scalar expression; see  * {@link org.eigenbase.sql.SqlNode} and {@link RexNode}.</p>  *  *<p>If this type of relational expression has some particular planner rules,  * it should implement the<em>public static</em> method  * {@link AbstractRelNode#register}.</p>  *  *<p>When a relational expression comes to be implemented, the system allocates  * a {@link org.eigenbase.relopt.RelImplementor} to manage the process. Every  * implementable relational expression has a {@link RelTraitSet} describing its  * physical attributes. The RelTraitSet always contains a {@link Convention}  * describing how the expression passes data to its consuming  * relational expression, but may contain other traits, including some applied  * externally. Because traits can be applied externally, implementations of  * RelNode should never assume the size or contents of their trait set (beyond  * those traits configured by the RelNode itself).</p>  *  *<p>For each calling-convention, there is a corresponding sub-interface of  * RelNode. For example, {@code net.hydromatic.optiq.rules.java.EnumerableRel}  * has operations to manage the conversion to a graph of  * {@code net.hydromatic.optiq.rules.java.EnumerableConvention}  * calling-convention, and it interacts with a  * {@code EnumerableRelImplementor}.</p>  *  *<p>A relational expression is only required to implement its  * calling-convention's interface when it is actually implemented, that is,  * converted into a plan/program. This means that relational expressions which  * cannot be implemented, such as converters, are not required to implement  * their convention's interface.</p>  *  *<p>Every relational expression must derive from {@link AbstractRelNode}. (Why  * have the<code>RelNode</code> interface, then? We need a root interface,  * because an interface can only derive from an interface.)</p>  *  * @author jhyde  * @version $Id$  * @since May 24, 2004  */
 end_comment
 
 begin_interface
@@ -87,15 +87,6 @@ extends|,
 name|Cloneable
 block|{
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Returns whether this relational expression is an access to<code>      * table</code>.      */
-specifier|public
-name|boolean
-name|isAccessTo
-parameter_list|(
-name|RelOptTable
-name|table
-parameter_list|)
-function_decl|;
 comment|/**      * Returns an array of this relational expression's child expressions (not      * including the inputs returned by {@link #getInputs}. If there are no      * child expressions, returns an empty array, not<code>null</code>.      */
 specifier|public
 name|RexNode
@@ -305,11 +296,6 @@ argument_list|<
 name|RelCollation
 argument_list|>
 name|getCollationList
-parameter_list|()
-function_decl|;
-comment|/**      * Clones this RelNode.      *      *<b>IMPORTANT.</b> This method must be overridden whenever an existing,      * concrete RelNode is extended. Otherwise, calling clone() will produce a      * differently typed RelNode, resulting in invalid or incorrect query plans.      * (Since many sub-classes implement this method by calling {@link #copy} or      * a variant of it, it is sufficient in those cases to override      * {@code copy}.)      *      * @return a clone of this RelNode      */
-name|RelNode
-name|clone
 parameter_list|()
 function_decl|;
 comment|/**      * Creates a copy of this relational expression, perhaps changing traits and      * inputs.      *      *<p>Sub-classes with other important attributes are encouraged to create      * variants of this method with more parameters.</p>      *      * @param traitSet Trait set      * @param inputs Inputs      * @return Copy of this relational expression, substituting traits and      * inputs      */

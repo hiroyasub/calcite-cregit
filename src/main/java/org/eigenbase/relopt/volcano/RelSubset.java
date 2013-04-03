@@ -290,16 +290,6 @@ return|return
 name|best
 return|;
 block|}
-comment|/**      * A<code>RelSubSet</code> is its own clone.      */
-specifier|public
-name|RelSubset
-name|clone
-parameter_list|()
-block|{
-return|return
-name|this
-return|;
-block|}
 specifier|public
 name|RelNode
 name|copy
