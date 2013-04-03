@@ -196,11 +196,11 @@ literal|2
 argument_list|,
 literal|true
 argument_list|,
-name|Short
+name|Integer
 operator|.
 name|MIN_VALUE
 argument_list|,
-name|Short
+name|Integer
 operator|.
 name|MAX_VALUE
 argument_list|)
