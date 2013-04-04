@@ -505,9 +505,7 @@ parameter_list|)
 block|{
 try|try
 block|{
-name|OptiqResultSet
-name|x
-init|=
+return|return
 name|connection
 operator|.
 name|driver
@@ -556,14 +554,9 @@ return|;
 block|}
 block|}
 argument_list|)
-decl_stmt|;
-name|x
 operator|.
 name|execute
 argument_list|()
-expr_stmt|;
-return|return
-name|x
 return|;
 block|}
 catch|catch

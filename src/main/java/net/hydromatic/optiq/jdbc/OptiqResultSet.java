@@ -464,7 +464,7 @@ block|{
 comment|// TODO:
 block|}
 comment|/**      * Executes this result set. (Not a JDBC method.)      *      *<p>Note that execute cannot occur in the constructor, because the      * constructor occurs while the statement is locked, to make sure that      * execute/cancel don't happen at the same time.</p>      */
-name|void
+name|OptiqResultSet
 name|execute
 parameter_list|()
 block|{
@@ -595,6 +595,9 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+return|return
+name|this
+return|;
 block|}
 specifier|public
 name|boolean
