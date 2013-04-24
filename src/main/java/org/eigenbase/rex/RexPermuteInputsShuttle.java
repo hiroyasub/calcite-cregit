@@ -275,7 +275,12 @@ return|;
 block|}
 block|}
 return|return
+name|super
+operator|.
+name|visitCall
+argument_list|(
 name|call
+argument_list|)
 return|;
 block|}
 specifier|private

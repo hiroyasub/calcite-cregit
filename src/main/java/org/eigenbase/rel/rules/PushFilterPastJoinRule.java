@@ -210,31 +210,23 @@ literal|1
 index|]
 expr_stmt|;
 block|}
+specifier|final
 name|List
 argument_list|<
 name|RexNode
 argument_list|>
 name|joinFilters
 init|=
-operator|new
-name|ArrayList
-argument_list|<
-name|RexNode
-argument_list|>
-argument_list|()
-decl_stmt|;
 name|RelOptUtil
 operator|.
-name|decomposeConjunction
+name|conjunctions
 argument_list|(
 name|joinRel
 operator|.
 name|getCondition
 argument_list|()
-argument_list|,
-name|joinFilters
 argument_list|)
-expr_stmt|;
+decl_stmt|;
 if|if
 condition|(
 name|filterRel
@@ -283,39 +275,35 @@ block|{
 return|return;
 block|}
 block|}
+specifier|final
 name|List
 argument_list|<
 name|RexNode
 argument_list|>
 name|aboveFilters
 init|=
-operator|new
-name|ArrayList
-argument_list|<
-name|RexNode
-argument_list|>
-argument_list|()
-decl_stmt|;
-if|if
-condition|(
 name|filterRel
 operator|!=
 literal|null
-condition|)
-block|{
+condition|?
 name|RelOptUtil
 operator|.
-name|decomposeConjunction
+name|conjunctions
 argument_list|(
 name|filterRel
 operator|.
 name|getCondition
 argument_list|()
-argument_list|,
-name|aboveFilters
 argument_list|)
-expr_stmt|;
-block|}
+else|:
+name|Collections
+operator|.
+expr|<
+name|RexNode
+operator|>
+name|emptyList
+argument_list|()
+decl_stmt|;
 name|List
 argument_list|<
 name|RexNode
@@ -347,7 +335,9 @@ comment|// (t1.a = 1 AND t2.a = 2) OR (t1.b = 3 AND t2.b = 4), you can
 comment|// derive table filters:
 comment|// (t1.a = 1 OR t1.b = 3)
 comment|// (t2.a = 2 OR t2.b = 4)
-comment|/*          * Try to push down above filters. These are typically where clause          * filters. They can be pushed down if they are not on the NULL          * generating side.          */
+comment|// Try to push down above filters. These are typically where clause
+comment|// filters. They can be pushed down if they are not on the NULL
+comment|// generating side.
 name|boolean
 name|filterPushed
 init|=
@@ -405,7 +395,9 @@ operator|=
 literal|true
 expr_stmt|;
 block|}
-comment|/*          * Try to push down filters in ON clause. A ON clause filter can only be          * pushed down if it does not affect the non-matching set, i.e. it is          * not on the side which is preserved.          */
+comment|// Try to push down filters in ON clause. A ON clause filter can only be
+comment|// pushed down if it does not affect the non-matching set, i.e. it is
+comment|// not on the side which is preserved.
 if|if
 condition|(
 name|RelOptUtil
