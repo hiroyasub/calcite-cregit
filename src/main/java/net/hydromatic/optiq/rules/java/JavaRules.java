@@ -2127,7 +2127,7 @@ specifier|public
 specifier|static
 specifier|final
 name|ConverterRule
-name|ENUMERABLE_ARRAY_TO_CUSTOM_RULE
+name|ENUMERABLE_ARRAY_FROM_CUSTOM_RULE
 init|=
 operator|new
 name|EnumerableConverterRule
@@ -2145,7 +2145,7 @@ specifier|public
 specifier|static
 specifier|final
 name|ConverterRule
-name|ENUMERABLE_CUSTOM_TO_ARRAY_RULE
+name|ENUMERABLE_CUSTOM_FROM_ARRAY_RULE
 init|=
 operator|new
 name|EnumerableConverterRule
@@ -2158,6 +2158,24 @@ name|EnumerableConvention
 operator|.
 name|ARRAY
 argument_list|)
+decl_stmt|;
+comment|/** @deprecated Name is misleading.      * Use {@link #ENUMERABLE_CUSTOM_FROM_ARRAY_RULE}. */
+specifier|public
+specifier|static
+specifier|final
+name|ConverterRule
+name|ENUMERABLE_CUSTOM_TO_ARRAY_RULE
+init|=
+name|ENUMERABLE_CUSTOM_FROM_ARRAY_RULE
+decl_stmt|;
+comment|/** @deprecated Name is misleading.      * Use {@link #ENUMERABLE_CUSTOM_FROM_ARRAY_RULE}. */
+specifier|public
+specifier|static
+specifier|final
+name|ConverterRule
+name|ENUMERABLE_ARRAY_TO_CUSTOM_RULE
+init|=
+name|ENUMERABLE_ARRAY_FROM_CUSTOM_RULE
 decl_stmt|;
 comment|/**      * Rule to convert a relational expression from      * {@link EnumerableConvention#ARRAY} to another      * {@link EnumerableConvention}.      */
 specifier|private
