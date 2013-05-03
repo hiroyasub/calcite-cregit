@@ -1221,7 +1221,7 @@ argument_list|,
 name|schema
 argument_list|)
 expr_stmt|;
-name|connection
+name|optiqConnection
 operator|.
 name|setSchema
 argument_list|(
