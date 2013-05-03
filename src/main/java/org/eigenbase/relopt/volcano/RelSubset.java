@@ -1306,7 +1306,9 @@ name|RuntimeException
 name|e
 init|=
 operator|new
-name|RuntimeException
+name|RelOptPlanner
+operator|.
+name|CannotPlanException
 argument_list|(
 name|dump
 argument_list|)

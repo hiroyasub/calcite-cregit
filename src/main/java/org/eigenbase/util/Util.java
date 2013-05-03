@@ -6573,6 +6573,36 @@ return|return
 literal|true
 return|;
 block|}
+comment|/** Returns the last element of a list. Throws if the list is empty or      * null. */
+specifier|public
+specifier|static
+parameter_list|<
+name|T
+parameter_list|>
+name|T
+name|last
+parameter_list|(
+name|List
+argument_list|<
+name|T
+argument_list|>
+name|list
+parameter_list|)
+block|{
+return|return
+name|list
+operator|.
+name|get
+argument_list|(
+name|list
+operator|.
+name|size
+argument_list|()
+operator|-
+literal|1
+argument_list|)
+return|;
+block|}
 comment|//~ Inner Classes ----------------------------------------------------------
 comment|/**      * Exception used to interrupt a tree walk of any kind.      */
 specifier|public

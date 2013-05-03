@@ -345,6 +345,11 @@ specifier|private
 name|String
 name|originalRootString
 decl_stmt|;
+comment|/**      * Whether the planner can accept new rules.      */
+specifier|private
+name|boolean
+name|locked
+decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 comment|/**      * Creates a uninitialized<code>VolcanoPlanner</code>. To fully initialize      * it, the caller must register the desired set of relations, rules, and      * calling conventions.      */
 specifier|public
@@ -635,6 +640,15 @@ name|RelOptRule
 name|rule
 parameter_list|)
 block|{
+if|if
+condition|(
+name|locked
+condition|)
+block|{
+return|return
+literal|false
+return|;
+block|}
 if|if
 condition|(
 name|ruleSet
@@ -5337,6 +5351,22 @@ literal|"}."
 argument_list|)
 expr_stmt|;
 block|}
+block|}
+comment|/**      * Sets whether this planner is locked. A locked planner does not accept      * new rules. {@link #addRule(org.eigenbase.relopt.RelOptRule)} will do      * nothing and return false.      *      * @param locked Whether planner is locked      */
+specifier|public
+name|void
+name|setLocked
+parameter_list|(
+name|boolean
+name|locked
+parameter_list|)
+block|{
+name|this
+operator|.
+name|locked
+operator|=
+name|locked
+expr_stmt|;
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------
 comment|/**      * A rule call which defers its actions. Whereas {@link RelOptRuleCall}      * invokes the rule when it finds a match, a<code>DeferringRuleCall</code>      * creates a {@link VolcanoRuleMatch} which can be invoked later.      */

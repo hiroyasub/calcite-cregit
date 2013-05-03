@@ -186,7 +186,7 @@ name|RelOptPlanner
 name|chooseDelegate
 parameter_list|()
 function_decl|;
-comment|/**      * Finds the most efficient expression to implement this query.      */
+comment|/**      * Finds the most efficient expression to implement this query.      *      * @throws CannotPlanException if cannot find a plan      */
 specifier|public
 name|RelNode
 name|findBestExp
@@ -327,6 +327,26 @@ name|RelNode
 name|node
 parameter_list|)
 function_decl|;
+comment|/** Thrown by {@link org.eigenbase.relopt.RelOptPlanner#findBestExp()}. */
+class|class
+name|CannotPlanException
+extends|extends
+name|RuntimeException
+block|{
+specifier|public
+name|CannotPlanException
+parameter_list|(
+name|String
+name|message
+parameter_list|)
+block|{
+name|super
+argument_list|(
+name|message
+argument_list|)
+expr_stmt|;
+block|}
+block|}
 block|}
 end_interface
 
