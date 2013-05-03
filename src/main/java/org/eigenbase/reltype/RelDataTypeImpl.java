@@ -240,6 +240,12 @@ comment|// Extra field
 if|if
 condition|(
 name|fields
+operator|.
+name|length
+operator|>
+literal|0
+operator|&&
+name|fields
 index|[
 name|fields
 operator|.

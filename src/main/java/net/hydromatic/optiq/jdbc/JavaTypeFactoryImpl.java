@@ -406,13 +406,6 @@ argument_list|(
 literal|"TODO: implement "
 operator|+
 name|type
-operator|+
-literal|": "
-operator|+
-name|type
-operator|.
-name|getClass
-argument_list|()
 argument_list|)
 throw|;
 block|}
@@ -463,15 +456,19 @@ return|;
 block|}
 if|if
 condition|(
-name|clazz
-operator|==
-name|String
+name|JavaToSqlTypeConversionRules
 operator|.
-name|class
+name|instance
+argument_list|()
+operator|.
+name|lookup
+argument_list|(
+name|clazz
+argument_list|)
+operator|!=
+literal|null
 condition|)
 block|{
-comment|// TODO: similar special treatment for BigDecimal, BigInteger,
-comment|//  Date, Time, Timestamp, Double etc.
 return|return
 name|createJavaType
 argument_list|(

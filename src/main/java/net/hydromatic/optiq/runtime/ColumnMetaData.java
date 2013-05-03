@@ -130,6 +130,12 @@ specifier|final
 name|String
 name|columnClassName
 decl_stmt|;
+comment|/** The type of the field that holds the value. Not a JDBC property. */
+specifier|public
+specifier|final
+name|Class
+name|internalClass
+decl_stmt|;
 specifier|public
 name|ColumnMetaData
 parameter_list|(
@@ -195,6 +201,9 @@ name|definitelyWritable
 parameter_list|,
 name|String
 name|columnClassName
+parameter_list|,
+name|Class
+name|internalClass
 parameter_list|)
 block|{
 name|this
@@ -334,6 +343,12 @@ operator|.
 name|columnClassName
 operator|=
 name|columnClassName
+expr_stmt|;
+name|this
+operator|.
+name|internalClass
+operator|=
+name|internalClass
 expr_stmt|;
 block|}
 specifier|private

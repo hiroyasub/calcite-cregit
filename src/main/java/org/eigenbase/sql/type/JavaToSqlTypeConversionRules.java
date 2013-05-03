@@ -359,6 +359,23 @@ name|rules
 operator|.
 name|put
 argument_list|(
+name|java
+operator|.
+name|util
+operator|.
+name|Date
+operator|.
+name|class
+argument_list|,
+name|SqlTypeName
+operator|.
+name|TIMESTAMP
+argument_list|)
+expr_stmt|;
+name|rules
+operator|.
+name|put
+argument_list|(
 name|Date
 operator|.
 name|class
@@ -424,7 +441,7 @@ name|rules
 operator|.
 name|put
 argument_list|(
-name|List
+name|ColumnList
 operator|.
 name|class
 argument_list|,
@@ -464,6 +481,13 @@ name|javaClass
 argument_list|)
 return|;
 block|}
+comment|/**      * Make this public when needed. To represent COLUMN_LIST SQL value, we need      * a type distinguishable from {@link List} in user-defined types.      */
+specifier|private
+interface|interface
+name|ColumnList
+extends|extends
+name|List
+block|{     }
 block|}
 end_class
 

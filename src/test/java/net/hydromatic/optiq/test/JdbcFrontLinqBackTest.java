@@ -47,19 +47,7 @@ name|hydromatic
 operator|.
 name|optiq
 operator|.
-name|MutableSchema
-import|;
-end_import
-
-begin_import
-import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|optiq
-operator|.
-name|Schema
+name|*
 import|;
 end_import
 
