@@ -277,6 +277,18 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
+name|util
+operator|.
+name|Bug
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|lang
@@ -2339,6 +2351,121 @@ operator|.
 name|returns
 argument_list|(
 literal|"c0=1997; c1=Drink; c2=USA; c3=WA; c4=Sedro Woolley; m0=58.0000\n"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Query that uses parenthesized JOIN. */
+specifier|public
+name|void
+name|testSql92JoinParenthesized
+parameter_list|()
+block|{
+if|if
+condition|(
+operator|!
+name|Bug
+operator|.
+name|TodoFixed
+condition|)
+block|{
+return|return;
+block|}
+name|OptiqAssert
+operator|.
+name|assertThat
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|FOODMART_CLONE
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select\n"
+operator|+
+literal|"   \"product_class\".\"product_family\" as \"c0\",\n"
+operator|+
+literal|"   \"product_class\".\"product_department\" as \"c1\",\n"
+operator|+
+literal|"   \"customer\".\"country\" as \"c2\",\n"
+operator|+
+literal|"   \"customer\".\"state_province\" as \"c3\",\n"
+operator|+
+literal|"   \"customer\".\"city\" as \"c4\"\n"
+operator|+
+literal|"from\n"
+operator|+
+literal|"   \"sales_fact_1997\" as \"sales_fact_1997\"\n"
+operator|+
+literal|"join (\"product\" as \"product\"\n"
+operator|+
+literal|"     join \"product_class\" as \"product_class\"\n"
+operator|+
+literal|"     on \"product\".\"product_class_id\" = \"product_class\".\"product_class_id\")\n"
+operator|+
+literal|"on  \"sales_fact_1997\".\"product_id\" = \"product\".\"product_id\"\n"
+operator|+
+literal|"join \"customer\" as \"customer\"\n"
+operator|+
+literal|"on  \"sales_fact_1997\".\"customer_id\" = \"customer\".\"customer_id\"\n"
+operator|+
+literal|"join \"promotion\" as \"promotion\"\n"
+operator|+
+literal|"on \"sales_fact_1997\".\"promotion_id\" = \"promotion\".\"promotion_id\"\n"
+operator|+
+literal|"where (\"promotion\".\"media_type\" = 'Radio'\n"
+operator|+
+literal|" or \"promotion\".\"media_type\" = 'TV'\n"
+operator|+
+literal|" or \"promotion\".\"media_type\" = 'Sunday Paper'\n"
+operator|+
+literal|" or \"promotion\".\"media_type\" = 'Street Handout')\n"
+operator|+
+literal|" and (\"product_class\".\"product_family\" = 'Drink')\n"
+operator|+
+literal|" and (\"customer\".\"country\" = 'USA' and \"customer\".\"state_province\""
+operator|+
+literal|" = 'WA' and \"customer\".\"city\" = 'Bellingham')\n"
+operator|+
+literal|"group by \"product_class\".\"product_family\",\n"
+operator|+
+literal|"   \"product_class\".\"product_department\",\n"
+operator|+
+literal|"   \"customer\".\"country\",\n"
+operator|+
+literal|"   \"customer\".\"state_province\",\n"
+operator|+
+literal|"   \"customer\".\"city\"\n"
+operator|+
+literal|"order by \"product_class\".\"product_family\" ASC,\n"
+operator|+
+literal|"   \"product_class\".\"product_department\" ASC,\n"
+operator|+
+literal|"   \"customer\".\"country\" ASC,\n"
+operator|+
+literal|"   \"customer\".\"state_province\" ASC,\n"
+operator|+
+literal|"   \"customer\".\"city\" ASC"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"+-------+---------------------+-----+------+------------+\n"
+operator|+
+literal|"| c0    | c1                  | c2  | c3   | c4         |\n"
+operator|+
+literal|"+-------+---------------------+-----+------+------------+\n"
+operator|+
+literal|"| Drink | Alcoholic Beverages | USA | WA   | Bellingham |\n"
+operator|+
+literal|"| Drink | Dairy               | USA | WA   | Bellingham |\n"
+operator|+
+literal|"+-------+---------------------+-----+------+------------+\n"
 argument_list|)
 expr_stmt|;
 block|}

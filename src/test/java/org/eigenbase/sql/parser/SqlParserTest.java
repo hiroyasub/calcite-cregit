@@ -342,7 +342,7 @@ name|expectedMsgPattern
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Tests that when there is an error, non-reserved keywords such as "A",      * "ABSOLUTE" (which naturally arise whenver a production uses      * "&lt;IDENTIFIER&gt;") are removed, but reserved words such as "AND"      * remain.      */
+comment|/**      * Tests that when there is an error, non-reserved keywords such as "A",      * "ABSOLUTE" (which naturally arise whenever a production uses      * "&lt;IDENTIFIER&gt;") are removed, but reserved words such as "AND"      * remain.      */
 specifier|public
 name|void
 name|testExceptionCleanup
@@ -730,7 +730,7 @@ parameter_list|()
 block|{
 name|String
 index|[]
-name|inOut
+name|inOuts
 init|=
 block|{
 literal|"NULL"
@@ -744,19 +744,10 @@ block|}
 decl_stmt|;
 for|for
 control|(
-name|int
-name|i
-init|=
-literal|0
-init|;
-name|i
-operator|<
+name|String
 name|inOut
-operator|.
-name|length
-condition|;
-name|i
-operator|++
+range|:
+name|inOuts
 control|)
 block|{
 name|check
@@ -764,24 +755,14 @@ argument_list|(
 literal|"select * from t where nOt fAlSe Is "
 operator|+
 name|inOut
-index|[
-name|i
-index|]
 argument_list|,
-literal|"SELECT *"
+literal|"SELECT *\n"
 operator|+
-name|NL
-operator|+
-literal|"FROM `T`"
-operator|+
-name|NL
+literal|"FROM `T`\n"
 operator|+
 literal|"WHERE ((NOT FALSE) IS "
 operator|+
 name|inOut
-index|[
-name|i
-index|]
 operator|+
 literal|")"
 argument_list|)
@@ -791,24 +772,14 @@ argument_list|(
 literal|"select * from t where c1=1.1 IS NOT "
 operator|+
 name|inOut
-index|[
-name|i
-index|]
 argument_list|,
-literal|"SELECT *"
+literal|"SELECT *\n"
 operator|+
-name|NL
-operator|+
-literal|"FROM `T`"
-operator|+
-name|NL
+literal|"FROM `T`\n"
 operator|+
 literal|"WHERE ((`C1` = 1.1) IS NOT "
 operator|+
 name|inOut
-index|[
-name|i
-index|]
 operator|+
 literal|")"
 argument_list|)
@@ -2248,6 +2219,28 @@ literal|"FROM `DEPT`))"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Tricky for the parser - looks like "IN (scalar, scalar)" but isn't. */
+specifier|public
+name|void
+name|testInQueryWithComma
+parameter_list|()
+block|{
+name|check
+argument_list|(
+literal|"select * from emp where deptno in (select deptno from dept group by 1, 2)"
+argument_list|,
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `EMP`\n"
+operator|+
+literal|"WHERE (`DEPTNO` IN (SELECT `DEPTNO`\n"
+operator|+
+literal|"FROM `DEPT`\n"
+operator|+
+literal|"GROUP BY 1, 2))"
+argument_list|)
+expr_stmt|;
+block|}
 specifier|public
 name|void
 name|testInSetop
@@ -2665,7 +2658,112 @@ expr_stmt|;
 block|}
 specifier|public
 name|void
-name|testOuterJoinNoiseword
+name|testJoinOnParentheses
+parameter_list|()
+block|{
+name|check
+argument_list|(
+literal|"select * from a\n"
+operator|+
+literal|" left join (b join c as c1 on 1 = 1) on 2 = 2\n"
+operator|+
+literal|"where 3 = 3"
+argument_list|,
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `A`\n"
+operator|+
+literal|"LEFT JOIN (`B` INNER JOIN `C` AS `C1` ON (1 = 1)) ON (2 = 2)\n"
+operator|+
+literal|"WHERE (3 = 3)"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Same as {@link #testJoinOnParentheses()} but fancy aliases. */
+specifier|public
+name|void
+name|testJoinOnParenthesesPlus
+parameter_list|()
+block|{
+if|if
+condition|(
+operator|!
+name|Bug
+operator|.
+name|TodoFixed
+condition|)
+block|{
+return|return;
+block|}
+name|check
+argument_list|(
+literal|"select * from a\n"
+operator|+
+literal|" left join (b as b1 (x, y) join (select * from c) c1 on 1 = 1) on 2 = 2\n"
+operator|+
+literal|"where 3 = 3"
+argument_list|,
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `A`\n"
+operator|+
+literal|"LEFT JOIN (`B` AS `B1` (`X`, `Y`) INNER JOIN (SELECT *\n"
+operator|+
+literal|"FROM `C`) AS `C1` ON (1 = 1)) ON (2 = 2)\n"
+operator|+
+literal|"WHERE (3 = 3)"
+argument_list|)
+expr_stmt|;
+block|}
+specifier|public
+name|void
+name|testExplicitTableInJoin
+parameter_list|()
+block|{
+name|check
+argument_list|(
+literal|"select * from a left join (table b) on 2 = 2 where 3 = 3"
+argument_list|,
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `A`\n"
+operator|+
+literal|"LEFT JOIN (TABLE `B`) ON (2 = 2)\n"
+operator|+
+literal|"WHERE (3 = 3)"
+argument_list|)
+expr_stmt|;
+block|}
+specifier|public
+name|void
+name|testSubqueryInJoin
+parameter_list|()
+block|{
+name|check
+argument_list|(
+literal|"select * from (select * from a cross join b) as ab\n"
+operator|+
+literal|" left join ((table c) join d on 2 = 2) on 3 = 3\n"
+operator|+
+literal|" where 4 = 4"
+argument_list|,
+literal|"SELECT *\n"
+operator|+
+literal|"FROM (SELECT *\n"
+operator|+
+literal|"FROM `A`\n"
+operator|+
+literal|"CROSS JOIN `B`) AS `AB`\n"
+operator|+
+literal|"LEFT JOIN ((TABLE `C`) INNER JOIN `D` ON (2 = 2)) ON (3 = 3)\n"
+operator|+
+literal|"WHERE (4 = 4)"
+argument_list|)
+expr_stmt|;
+block|}
+specifier|public
+name|void
+name|testOuterJoinNoiseWord
 parameter_list|()
 block|{
 name|check

@@ -1734,6 +1734,9 @@ block|,
 comment|/**          * Accept only query expressions in this context.          */
 name|ACCEPT_QUERY
 block|,
+comment|/**          * Accept query or join expressions in this context.          */
+name|ACCEPT_QUERY_OR_JOIN
+block|,
 comment|/**          * Accept only non-query expressions in this context.          */
 name|ACCEPT_NONQUERY
 block|,
@@ -1742,7 +1745,7 @@ name|ACCEPT_SUBQUERY
 block|,
 comment|/**          * Accept only CURSOR constructors, parenthesized queries, or non-query          * expressions in this context.          */
 name|ACCEPT_CURSOR
-block|;     }
+block|}
 comment|//~ Instance fields --------------------------------------------------------
 comment|/**      * Operator table containing the standard SQL operators and functions.      */
 specifier|protected
