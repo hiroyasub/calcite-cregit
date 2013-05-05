@@ -111,19 +111,6 @@ extends|extends
 name|TestCase
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
-specifier|protected
-specifier|static
-specifier|final
-name|String
-name|NL
-init|=
-name|System
-operator|.
-name|getProperty
-argument_list|(
-literal|"line.separator"
-argument_list|)
-decl_stmt|;
 specifier|private
 specifier|static
 specifier|final
@@ -352,121 +339,63 @@ name|checkFails
 argument_list|(
 literal|"select 0.5e1^.1^ from sales.emps"
 argument_list|,
-literal|"(?s).*Encountered \".1\" at line 1, column 13."
+literal|"(?s).*Encountered \".1\" at line 1, column 13.\n"
 operator|+
-name|NL
+literal|"Was expecting one of:\n"
 operator|+
-literal|"Was expecting one of:"
+literal|"    \"AND\" ...\n"
 operator|+
-name|NL
+literal|"    \"AS\" ...\n"
 operator|+
-literal|"    \"AND\" ..."
+literal|"    \"BETWEEN\" ...\n"
 operator|+
-name|NL
+literal|"    \"FROM\" ...\n"
 operator|+
-literal|"    \"AS\" ..."
+literal|"    \"IN\" ...\n"
 operator|+
-name|NL
+literal|"    \"IS\" ...\n"
 operator|+
-literal|"    \"BETWEEN\" ..."
+literal|"    \"LIKE\" ...\n"
 operator|+
-name|NL
+literal|"    \"MEMBER\" ...\n"
 operator|+
-literal|"    \"FROM\" ..."
+literal|"    \"MULTISET\" ...\n"
 operator|+
-name|NL
+literal|"    \"NOT\" ...\n"
 operator|+
-literal|"    \"IN\" ..."
+literal|"    \"OR\" ...\n"
 operator|+
-name|NL
+literal|"    \"SIMILAR\" ...\n"
 operator|+
-literal|"    \"IS\" ..."
+literal|"    \"SUBMULTISET\" ...\n"
 operator|+
-name|NL
+literal|"    \",\" ...\n"
 operator|+
-literal|"    \"LIKE\" ..."
+literal|"    \"=\" ...\n"
 operator|+
-name|NL
+literal|"    \">\" ...\n"
 operator|+
-literal|"    \"MEMBER\" ..."
+literal|"    \"<\" ...\n"
 operator|+
-name|NL
+literal|"    \"<=\" ...\n"
 operator|+
-literal|"    \"MULTISET\" ..."
+literal|"    \">=\" ...\n"
 operator|+
-name|NL
+literal|"    \"<>\" ...\n"
 operator|+
-literal|"    \"NOT\" ..."
+literal|"    \"\\+\" ...\n"
 operator|+
-name|NL
+literal|"    \"-\" ...\n"
 operator|+
-literal|"    \"OR\" ..."
+literal|"    \"\\*\" ...\n"
 operator|+
-name|NL
+literal|"    \"/\" ...\n"
 operator|+
-literal|"    \"SIMILAR\" ..."
+literal|"    \"\\|\\|\" ...\n"
 operator|+
-name|NL
+literal|"<IDENTIFIER> ...\n"
 operator|+
-literal|"    \"SUBMULTISET\" ..."
-operator|+
-name|NL
-operator|+
-literal|"    \",\" ..."
-operator|+
-name|NL
-operator|+
-literal|"    \"=\" ..."
-operator|+
-name|NL
-operator|+
-literal|"    \">\" ..."
-operator|+
-name|NL
-operator|+
-literal|"    \"<\" ..."
-operator|+
-name|NL
-operator|+
-literal|"    \"<=\" ..."
-operator|+
-name|NL
-operator|+
-literal|"    \">=\" ..."
-operator|+
-name|NL
-operator|+
-literal|"    \"<>\" ..."
-operator|+
-name|NL
-operator|+
-literal|"    \"\\+\" ..."
-operator|+
-name|NL
-operator|+
-literal|"    \"-\" ..."
-operator|+
-name|NL
-operator|+
-literal|"    \"\\*\" ..."
-operator|+
-name|NL
-operator|+
-literal|"    \"/\" ..."
-operator|+
-name|NL
-operator|+
-literal|"    \"\\|\\|\" ..."
-operator|+
-name|NL
-operator|+
-literal|"<IDENTIFIER> ..."
-operator|+
-name|NL
-operator|+
-literal|"<QUOTED_IDENTIFIER> ..."
-operator|+
-name|NL
+literal|"<QUOTED_IDENTIFIER> ...\n"
 operator|+
 literal|".*"
 argument_list|)
@@ -576,9 +505,7 @@ name|check
 argument_list|(
 literal|"select 1 as foo from emp"
 argument_list|,
-literal|"SELECT 1 AS `FOO`"
-operator|+
-name|NL
+literal|"SELECT 1 AS `FOO`\n"
 operator|+
 literal|"FROM `EMP`"
 argument_list|)
@@ -593,9 +520,7 @@ name|check
 argument_list|(
 literal|"select 1 foo from emp"
 argument_list|,
-literal|"SELECT 1 AS `FOO`"
-operator|+
-name|NL
+literal|"SELECT 1 AS `FOO`\n"
 operator|+
 literal|"FROM `EMP`"
 argument_list|)
@@ -649,9 +574,7 @@ name|check
 argument_list|(
 literal|"select not true, not false, not null, not unknown from t"
 argument_list|,
-literal|"SELECT (NOT TRUE), (NOT FALSE), (NOT NULL), (NOT UNKNOWN)"
-operator|+
-name|NL
+literal|"SELECT (NOT TRUE), (NOT FALSE), (NOT NULL), (NOT UNKNOWN)\n"
 operator|+
 literal|"FROM `T`"
 argument_list|)
@@ -666,13 +589,9 @@ name|check
 argument_list|(
 literal|"select * from t where true and false"
 argument_list|,
-literal|"SELECT *"
+literal|"SELECT *\n"
 operator|+
-name|NL
-operator|+
-literal|"FROM `T`"
-operator|+
-name|NL
+literal|"FROM `T`\n"
 operator|+
 literal|"WHERE (TRUE AND FALSE)"
 argument_list|)
@@ -681,13 +600,9 @@ name|check
 argument_list|(
 literal|"select * from t where null or unknown and unknown"
 argument_list|,
-literal|"SELECT *"
+literal|"SELECT *\n"
 operator|+
-name|NL
-operator|+
-literal|"FROM `T`"
-operator|+
-name|NL
+literal|"FROM `T`\n"
 operator|+
 literal|"WHERE (NULL OR (UNKNOWN AND UNKNOWN))"
 argument_list|)
@@ -696,13 +611,9 @@ name|check
 argument_list|(
 literal|"select * from t where true and (true or true) or false"
 argument_list|,
-literal|"SELECT *"
+literal|"SELECT *\n"
 operator|+
-name|NL
-operator|+
-literal|"FROM `T`"
-operator|+
-name|NL
+literal|"FROM `T`\n"
 operator|+
 literal|"WHERE ((TRUE AND (TRUE OR TRUE)) OR FALSE)"
 argument_list|)
@@ -711,13 +622,9 @@ name|check
 argument_list|(
 literal|"select * from t where 1 and true"
 argument_list|,
-literal|"SELECT *"
+literal|"SELECT *\n"
 operator|+
-name|NL
-operator|+
-literal|"FROM `T`"
-operator|+
-name|NL
+literal|"FROM `T`\n"
 operator|+
 literal|"WHERE (1 AND TRUE)"
 argument_list|)
@@ -795,13 +702,9 @@ name|check
 argument_list|(
 literal|"select * from t where x is unknown is not unknown"
 argument_list|,
-literal|"SELECT *"
+literal|"SELECT *\n"
 operator|+
-name|NL
-operator|+
-literal|"FROM `T`"
-operator|+
-name|NL
+literal|"FROM `T`\n"
 operator|+
 literal|"WHERE ((`X` IS UNKNOWN) IS NOT UNKNOWN)"
 argument_list|)
@@ -810,13 +713,9 @@ name|check
 argument_list|(
 literal|"select 1 from t where not true is unknown"
 argument_list|,
-literal|"SELECT 1"
+literal|"SELECT 1\n"
 operator|+
-name|NL
-operator|+
-literal|"FROM `T`"
-operator|+
-name|NL
+literal|"FROM `T`\n"
 operator|+
 literal|"WHERE ((NOT TRUE) IS UNKNOWN)"
 argument_list|)
@@ -827,13 +726,9 @@ literal|"select * from t where x is unknown is not unknown is false is not false
 operator|+
 literal|" is true is not true is null is not null"
 argument_list|,
-literal|"SELECT *"
+literal|"SELECT *\n"
 operator|+
-name|NL
-operator|+
-literal|"FROM `T`"
-operator|+
-name|NL
+literal|"FROM `T`\n"
 operator|+
 literal|"WHERE ((((((((`X` IS UNKNOWN) IS NOT UNKNOWN) IS FALSE) IS NOT FALSE) IS TRUE) IS NOT TRUE) IS NULL) IS NOT NULL)"
 argument_list|)
@@ -843,13 +738,9 @@ name|check
 argument_list|(
 literal|"select * from t where x is unknown is false and x is unknown is true or not y is unknown is not null"
 argument_list|,
-literal|"SELECT *"
+literal|"SELECT *\n"
 operator|+
-name|NL
-operator|+
-literal|"FROM `T`"
-operator|+
-name|NL
+literal|"FROM `T`\n"
 operator|+
 literal|"WHERE ((((`X` IS UNKNOWN) IS FALSE) AND ((`X` IS UNKNOWN) IS TRUE)) OR (((NOT `Y`) IS UNKNOWN) IS NOT NULL))"
 argument_list|)
@@ -918,13 +809,9 @@ name|check
 argument_list|(
 literal|"select * from t where price between 1 and 2"
 argument_list|,
-literal|"SELECT *"
+literal|"SELECT *\n"
 operator|+
-name|NL
-operator|+
-literal|"FROM `T`"
-operator|+
-name|NL
+literal|"FROM `T`\n"
 operator|+
 literal|"WHERE (`PRICE` BETWEEN ASYMMETRIC 1 AND 2)"
 argument_list|)
@@ -933,13 +820,9 @@ name|check
 argument_list|(
 literal|"select * from t where price between symmetric 1 and 2"
 argument_list|,
-literal|"SELECT *"
+literal|"SELECT *\n"
 operator|+
-name|NL
-operator|+
-literal|"FROM `T`"
-operator|+
-name|NL
+literal|"FROM `T`\n"
 operator|+
 literal|"WHERE (`PRICE` BETWEEN SYMMETRIC 1 AND 2)"
 argument_list|)
@@ -948,13 +831,9 @@ name|check
 argument_list|(
 literal|"select * from t where price not between symmetric 1 and 2"
 argument_list|,
-literal|"SELECT *"
+literal|"SELECT *\n"
 operator|+
-name|NL
-operator|+
-literal|"FROM `T`"
-operator|+
-name|NL
+literal|"FROM `T`\n"
 operator|+
 literal|"WHERE (`PRICE` NOT BETWEEN SYMMETRIC 1 AND 2)"
 argument_list|)
@@ -963,13 +842,9 @@ name|check
 argument_list|(
 literal|"select * from t where price between ASYMMETRIC 1 and 2+2*2"
 argument_list|,
-literal|"SELECT *"
+literal|"SELECT *\n"
 operator|+
-name|NL
-operator|+
-literal|"FROM `T`"
-operator|+
-name|NL
+literal|"FROM `T`\n"
 operator|+
 literal|"WHERE (`PRICE` BETWEEN ASYMMETRIC 1 AND (2 + (2 * 2)))"
 argument_list|)
@@ -978,13 +853,9 @@ name|check
 argument_list|(
 literal|"select * from t where price> 5 and price not between 1 + 2 and 3 * 4 AnD price is null"
 argument_list|,
-literal|"SELECT *"
+literal|"SELECT *\n"
 operator|+
-name|NL
-operator|+
-literal|"FROM `T`"
-operator|+
-name|NL
+literal|"FROM `T`\n"
 operator|+
 literal|"WHERE (((`PRICE`> 5) AND (`PRICE` NOT BETWEEN ASYMMETRIC (1 + 2) AND (3 * 4))) AND (`PRICE` IS NULL))"
 argument_list|)
@@ -993,13 +864,9 @@ name|check
 argument_list|(
 literal|"select * from t where price> 5 and price between 1 + 2 and 3 * 4 + price is null"
 argument_list|,
-literal|"SELECT *"
+literal|"SELECT *\n"
 operator|+
-name|NL
-operator|+
-literal|"FROM `T`"
-operator|+
-name|NL
+literal|"FROM `T`\n"
 operator|+
 literal|"WHERE ((`PRICE`> 5) AND ((`PRICE` BETWEEN ASYMMETRIC (1 + 2) AND ((3 * 4) + `PRICE`)) IS NULL))"
 argument_list|)
@@ -1008,13 +875,9 @@ name|check
 argument_list|(
 literal|"select * from t where price> 5 and price between 1 + 2 and 3 * 4 or price is null"
 argument_list|,
-literal|"SELECT *"
+literal|"SELECT *\n"
 operator|+
-name|NL
-operator|+
-literal|"FROM `T`"
-operator|+
-name|NL
+literal|"FROM `T`\n"
 operator|+
 literal|"WHERE (((`PRICE`> 5) AND (`PRICE` BETWEEN ASYMMETRIC (1 + 2) AND (3 * 4))) OR (`PRICE` IS NULL))"
 argument_list|)
@@ -1081,9 +944,7 @@ name|check
 argument_list|(
 literal|"select c1*1,c2  + 2,c3/3,c4-4,c5*c4  from t"
 argument_list|,
-literal|"SELECT (`C1` * 1), (`C2` + 2), (`C3` / 3), (`C4` - 4), (`C5` * `C4`)"
-operator|+
-name|NL
+literal|"SELECT (`C1` * 1), (`C2` + 2), (`C3` / 3), (`C4` - 4), (`C5` * `C4`)\n"
 operator|+
 literal|"FROM `T`"
 argument_list|)
@@ -1098,13 +959,9 @@ name|check
 argument_list|(
 literal|"select t.r.\"EXPR$1\", t.r.\"EXPR$0\" from (select (1,2) r from sales.depts) t"
 argument_list|,
-literal|"SELECT `T`.`R`.`EXPR$1`, `T`.`R`.`EXPR$0`"
+literal|"SELECT `T`.`R`.`EXPR$1`, `T`.`R`.`EXPR$0`\n"
 operator|+
-name|NL
-operator|+
-literal|"FROM (SELECT (ROW(1, 2)) AS `R`"
-operator|+
-name|NL
+literal|"FROM (SELECT (ROW(1, 2)) AS `R`\n"
 operator|+
 literal|"FROM `SALES`.`DEPTS`) AS `T`"
 argument_list|)
@@ -1115,13 +972,9 @@ literal|"select t.r.\"EXPR$1\".\"EXPR$2\" "
 operator|+
 literal|"from (select ((1,2),(3,4,5)) r from sales.depts) t"
 argument_list|,
-literal|"SELECT `T`.`R`.`EXPR$1`.`EXPR$2`"
+literal|"SELECT `T`.`R`.`EXPR$1`.`EXPR$2`\n"
 operator|+
-name|NL
-operator|+
-literal|"FROM (SELECT (ROW((ROW(1, 2)), (ROW(3, 4, 5)))) AS `R`"
-operator|+
-name|NL
+literal|"FROM (SELECT (ROW((ROW(1, 2)), (ROW(3, 4, 5)))) AS `R`\n"
 operator|+
 literal|"FROM `SALES`.`DEPTS`) AS `T`"
 argument_list|)
@@ -1132,13 +985,9 @@ literal|"select t.r.\"EXPR$1\".\"EXPR$2\" "
 operator|+
 literal|"from (select ((1,2),(3,4,5,6)) r from sales.depts) t"
 argument_list|,
-literal|"SELECT `T`.`R`.`EXPR$1`.`EXPR$2`"
+literal|"SELECT `T`.`R`.`EXPR$1`.`EXPR$2`\n"
 operator|+
-name|NL
-operator|+
-literal|"FROM (SELECT (ROW((ROW(1, 2)), (ROW(3, 4, 5, 6)))) AS `R`"
-operator|+
-name|NL
+literal|"FROM (SELECT (ROW((ROW(1, 2)), (ROW(3, 4, 5, 6)))) AS `R`\n"
 operator|+
 literal|"FROM `SALES`.`DEPTS`) AS `T`"
 argument_list|)
@@ -1201,9 +1050,7 @@ name|check
 argument_list|(
 literal|"select x is distinct from y from t"
 argument_list|,
-literal|"SELECT (`X` IS DISTINCT FROM `Y`)"
-operator|+
-name|NL
+literal|"SELECT (`X` IS DISTINCT FROM `Y`)\n"
 operator|+
 literal|"FROM `T`"
 argument_list|)
@@ -1212,13 +1059,9 @@ name|check
 argument_list|(
 literal|"select * from t where x is distinct from y"
 argument_list|,
-literal|"SELECT *"
+literal|"SELECT *\n"
 operator|+
-name|NL
-operator|+
-literal|"FROM `T`"
-operator|+
-name|NL
+literal|"FROM `T`\n"
 operator|+
 literal|"WHERE (`X` IS DISTINCT FROM `Y`)"
 argument_list|)
@@ -1227,13 +1070,9 @@ name|check
 argument_list|(
 literal|"select * from t where x is distinct from (4,5,6)"
 argument_list|,
-literal|"SELECT *"
+literal|"SELECT *\n"
 operator|+
-name|NL
-operator|+
-literal|"FROM `T`"
-operator|+
-name|NL
+literal|"FROM `T`\n"
 operator|+
 literal|"WHERE (`X` IS DISTINCT FROM (ROW(4, 5, 6)))"
 argument_list|)
@@ -1242,13 +1081,9 @@ name|check
 argument_list|(
 literal|"select * from t where true is distinct from true"
 argument_list|,
-literal|"SELECT *"
+literal|"SELECT *\n"
 operator|+
-name|NL
-operator|+
-literal|"FROM `T`"
-operator|+
-name|NL
+literal|"FROM `T`\n"
 operator|+
 literal|"WHERE (TRUE IS DISTINCT FROM TRUE)"
 argument_list|)
@@ -1257,13 +1092,9 @@ name|check
 argument_list|(
 literal|"select * from t where true is distinct from true is true"
 argument_list|,
-literal|"SELECT *"
+literal|"SELECT *\n"
 operator|+
-name|NL
-operator|+
-literal|"FROM `T`"
-operator|+
-name|NL
+literal|"FROM `T`\n"
 operator|+
 literal|"WHERE ((TRUE IS DISTINCT FROM TRUE) IS TRUE)"
 argument_list|)
@@ -1278,9 +1109,7 @@ name|check
 argument_list|(
 literal|"select x is not distinct from y from t"
 argument_list|,
-literal|"SELECT (`X` IS NOT DISTINCT FROM `Y`)"
-operator|+
-name|NL
+literal|"SELECT (`X` IS NOT DISTINCT FROM `Y`)\n"
 operator|+
 literal|"FROM `T`"
 argument_list|)
@@ -1289,13 +1118,9 @@ name|check
 argument_list|(
 literal|"select * from t where true is not distinct from true"
 argument_list|,
-literal|"SELECT *"
+literal|"SELECT *\n"
 operator|+
-name|NL
-operator|+
-literal|"FROM `T`"
-operator|+
-name|NL
+literal|"FROM `T`\n"
 operator|+
 literal|"WHERE (TRUE IS NOT DISTINCT FROM TRUE)"
 argument_list|)
@@ -1469,13 +1294,9 @@ name|check
 argument_list|(
 literal|"select * from t where x like '%abc%'"
 argument_list|,
-literal|"SELECT *"
+literal|"SELECT *\n"
 operator|+
-name|NL
-operator|+
-literal|"FROM `T`"
-operator|+
-name|NL
+literal|"FROM `T`\n"
 operator|+
 literal|"WHERE (`X` LIKE '%abc%')"
 argument_list|)
@@ -1484,13 +1305,9 @@ name|check
 argument_list|(
 literal|"select * from t where x+1 not siMilaR to '%abc%' ESCAPE 'e'"
 argument_list|,
-literal|"SELECT *"
+literal|"SELECT *\n"
 operator|+
-name|NL
-operator|+
-literal|"FROM `T`"
-operator|+
-name|NL
+literal|"FROM `T`\n"
 operator|+
 literal|"WHERE ((`X` + 1) NOT SIMILAR TO '%abc%' ESCAPE 'e')"
 argument_list|)
@@ -1500,17 +1317,11 @@ name|check
 argument_list|(
 literal|"select * from t where price> 5 and x+2*2 like y*3+2 escape (select*from t)"
 argument_list|,
-literal|"SELECT *"
+literal|"SELECT *\n"
 operator|+
-name|NL
+literal|"FROM `T`\n"
 operator|+
-literal|"FROM `T`"
-operator|+
-name|NL
-operator|+
-literal|"WHERE ((`PRICE`> 5) AND ((`X` + (2 * 2)) LIKE ((`Y` * 3) + 2) ESCAPE (SELECT *"
-operator|+
-name|NL
+literal|"WHERE ((`PRICE`> 5) AND ((`X` + (2 * 2)) LIKE ((`Y` * 3) + 2) ESCAPE (SELECT *\n"
 operator|+
 literal|"FROM `T`)))"
 argument_list|)
@@ -1612,13 +1423,9 @@ name|check
 argument_list|(
 literal|"select * from t where x similar to '%abc%'"
 argument_list|,
-literal|"SELECT *"
+literal|"SELECT *\n"
 operator|+
-name|NL
-operator|+
-literal|"FROM `T`"
-operator|+
-name|NL
+literal|"FROM `T`\n"
 operator|+
 literal|"WHERE (`X` SIMILAR TO '%abc%')"
 argument_list|)
@@ -1627,13 +1434,9 @@ name|check
 argument_list|(
 literal|"select * from t where x+1 not siMilaR to '%abc%' ESCAPE 'e'"
 argument_list|,
-literal|"SELECT *"
+literal|"SELECT *\n"
 operator|+
-name|NL
-operator|+
-literal|"FROM `T`"
-operator|+
-name|NL
+literal|"FROM `T`\n"
 operator|+
 literal|"WHERE ((`X` + 1) NOT SIMILAR TO '%abc%' ESCAPE 'e')"
 argument_list|)
@@ -1643,17 +1446,11 @@ name|check
 argument_list|(
 literal|"select * from t where price> 5 and x+2*2 SIMILAR TO y*3+2 escape (select*from t)"
 argument_list|,
-literal|"SELECT *"
+literal|"SELECT *\n"
 operator|+
-name|NL
+literal|"FROM `T`\n"
 operator|+
-literal|"FROM `T`"
-operator|+
-name|NL
-operator|+
-literal|"WHERE ((`PRICE`> 5) AND ((`X` + (2 * 2)) SIMILAR TO ((`Y` * 3) + 2) ESCAPE (SELECT *"
-operator|+
-name|NL
+literal|"WHERE ((`PRICE`> 5) AND ((`X` + (2 * 2)) SIMILAR TO ((`Y` * 3) + 2) ESCAPE (SELECT *\n"
 operator|+
 literal|"FROM `T`)))"
 argument_list|)
@@ -1671,13 +1468,9 @@ name|check
 argument_list|(
 literal|"values a similar to (select * from t where a like b escape c) escape d"
 argument_list|,
-literal|"(VALUES (ROW((`A` SIMILAR TO (SELECT *"
+literal|"(VALUES (ROW((`A` SIMILAR TO (SELECT *\n"
 operator|+
-name|NL
-operator|+
-literal|"FROM `T`"
-operator|+
-name|NL
+literal|"FROM `T`\n"
 operator|+
 literal|"WHERE (`A` LIKE `B` ESCAPE `C`)) ESCAPE `D`))))"
 argument_list|)
@@ -1746,21 +1539,13 @@ name|check
 argument_list|(
 literal|"select * from dept where exists (select 1 from emp where emp.deptno = dept.deptno)"
 argument_list|,
-literal|"SELECT *"
+literal|"SELECT *\n"
 operator|+
-name|NL
+literal|"FROM `DEPT`\n"
 operator|+
-literal|"FROM `DEPT`"
+literal|"WHERE (EXISTS (SELECT 1\n"
 operator|+
-name|NL
-operator|+
-literal|"WHERE (EXISTS (SELECT 1"
-operator|+
-name|NL
-operator|+
-literal|"FROM `EMP`"
-operator|+
-name|NL
+literal|"FROM `EMP`\n"
 operator|+
 literal|"WHERE (`EMP`.`DEPTNO` = `DEPT`.`DEPTNO`)))"
 argument_list|)
@@ -1775,17 +1560,11 @@ name|check
 argument_list|(
 literal|"select * from emp where 1 = 2 and exists (select 1 from dept) and 3 = 4"
 argument_list|,
-literal|"SELECT *"
+literal|"SELECT *\n"
 operator|+
-name|NL
+literal|"FROM `EMP`\n"
 operator|+
-literal|"FROM `EMP`"
-operator|+
-name|NL
-operator|+
-literal|"WHERE (((1 = 2) AND (EXISTS (SELECT 1"
-operator|+
-name|NL
+literal|"WHERE (((1 = 2) AND (EXISTS (SELECT 1\n"
 operator|+
 literal|"FROM `DEPT`))) AND (3 = 4))"
 argument_list|)
@@ -1800,13 +1579,9 @@ name|check
 argument_list|(
 literal|"select 1 from emp as e where 1"
 argument_list|,
-literal|"SELECT 1"
+literal|"SELECT 1\n"
 operator|+
-name|NL
-operator|+
-literal|"FROM `EMP` AS `E`"
-operator|+
-name|NL
+literal|"FROM `EMP` AS `E`\n"
 operator|+
 literal|"WHERE 1"
 argument_list|)
@@ -1895,9 +1670,7 @@ name|check
 argument_list|(
 literal|"select substring('Eggs and ham', 1, 3 + 2) || ' benedict' from emp"
 argument_list|,
-literal|"SELECT (SUBSTRING('Eggs and ham' FROM 1 FOR (3 + 2)) || ' benedict')"
-operator|+
-name|NL
+literal|"SELECT (SUBSTRING('Eggs and ham' FROM 1 FOR (3 + 2)) || ' benedict')\n"
 operator|+
 literal|"FROM `EMP`"
 argument_list|)
@@ -1940,9 +1713,7 @@ name|check
 argument_list|(
 literal|"select count(1), count(distinct 2) from emp"
 argument_list|,
-literal|"SELECT COUNT(1), COUNT(DISTINCT 2)"
-operator|+
-name|NL
+literal|"SELECT COUNT(1), COUNT(DISTINCT 2)\n"
 operator|+
 literal|"FROM `EMP`"
 argument_list|)
@@ -1970,13 +1741,9 @@ name|check
 argument_list|(
 literal|"select deptno, min(foo) as x from emp group by deptno, gender"
 argument_list|,
-literal|"SELECT `DEPTNO`, MIN(`FOO`) AS `X`"
+literal|"SELECT `DEPTNO`, MIN(`FOO`) AS `X`\n"
 operator|+
-name|NL
-operator|+
-literal|"FROM `EMP`"
-operator|+
-name|NL
+literal|"FROM `EMP`\n"
 operator|+
 literal|"GROUP BY `DEPTNO`, `GENDER`"
 argument_list|)
@@ -1991,46 +1758,26 @@ name|check
 argument_list|(
 literal|"select count(*) from emp group by ()"
 argument_list|,
-name|TestUtil
-operator|.
-name|fold
-argument_list|(
-operator|new
-name|String
-index|[]
-block|{
-literal|"SELECT COUNT(*)"
-block|,
-literal|"FROM `EMP`"
-block|,
+literal|"SELECT COUNT(*)\n"
+operator|+
+literal|"FROM `EMP`\n"
+operator|+
 literal|"GROUP BY ()"
-block|}
-argument_list|)
 argument_list|)
 expr_stmt|;
 name|check
 argument_list|(
 literal|"select count(*) from emp group by () having 1 = 2 order by 3"
 argument_list|,
-name|TestUtil
-operator|.
-name|fold
-argument_list|(
-operator|new
-name|String
-index|[]
-block|{
-literal|"SELECT COUNT(*)"
-block|,
-literal|"FROM `EMP`"
-block|,
-literal|"GROUP BY ()"
-block|,
-literal|"HAVING (1 = 2)"
-block|,
+literal|"SELECT COUNT(*)\n"
+operator|+
+literal|"FROM `EMP`\n"
+operator|+
+literal|"GROUP BY ()\n"
+operator|+
+literal|"HAVING (1 = 2)\n"
+operator|+
 literal|"ORDER BY 3"
-block|}
-argument_list|)
 argument_list|)
 expr_stmt|;
 name|checkFails
@@ -2052,21 +1799,11 @@ name|check
 argument_list|(
 literal|"select 1 from emp group by (empno + deptno)"
 argument_list|,
-name|TestUtil
-operator|.
-name|fold
-argument_list|(
-operator|new
-name|String
-index|[]
-block|{
-literal|"SELECT 1"
-block|,
-literal|"FROM `EMP`"
-block|,
+literal|"SELECT 1\n"
+operator|+
+literal|"FROM `EMP`\n"
+operator|+
 literal|"GROUP BY (`EMPNO` + `DEPTNO`)"
-block|}
-argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -2079,21 +1816,13 @@ name|check
 argument_list|(
 literal|"select deptno from emp group by deptno, emp having count(*)> 5 and 1 = 2 order by 5, 2"
 argument_list|,
-literal|"SELECT `DEPTNO`"
+literal|"SELECT `DEPTNO`\n"
 operator|+
-name|NL
+literal|"FROM `EMP`\n"
 operator|+
-literal|"FROM `EMP`"
+literal|"GROUP BY `DEPTNO`, `EMP`\n"
 operator|+
-name|NL
-operator|+
-literal|"GROUP BY `DEPTNO`, `EMP`"
-operator|+
-name|NL
-operator|+
-literal|"HAVING ((COUNT(*)> 5) AND (1 = 2))"
-operator|+
-name|NL
+literal|"HAVING ((COUNT(*)> 5) AND (1 = 2))\n"
 operator|+
 literal|"ORDER BY 5, 2"
 argument_list|)
@@ -2121,13 +1850,9 @@ name|check
 argument_list|(
 literal|"select deptno from emp having count(*)> 5"
 argument_list|,
-literal|"SELECT `DEPTNO`"
+literal|"SELECT `DEPTNO`\n"
 operator|+
-name|NL
-operator|+
-literal|"FROM `EMP`"
-operator|+
-name|NL
+literal|"FROM `EMP`\n"
 operator|+
 literal|"HAVING (COUNT(*)> 5)"
 argument_list|)
@@ -2169,13 +1894,9 @@ name|check
 argument_list|(
 literal|"select * from emp where deptno in (10, 20) and gender = 'F'"
 argument_list|,
-literal|"SELECT *"
+literal|"SELECT *\n"
 operator|+
-name|NL
-operator|+
-literal|"FROM `EMP`"
-operator|+
-name|NL
+literal|"FROM `EMP`\n"
 operator|+
 literal|"WHERE ((`DEPTNO` IN (10, 20)) AND (`GENDER` = 'F'))"
 argument_list|)
@@ -2203,17 +1924,11 @@ name|check
 argument_list|(
 literal|"select * from emp where deptno in (select deptno from dept)"
 argument_list|,
-literal|"SELECT *"
+literal|"SELECT *\n"
 operator|+
-name|NL
+literal|"FROM `EMP`\n"
 operator|+
-literal|"FROM `EMP`"
-operator|+
-name|NL
-operator|+
-literal|"WHERE (`DEPTNO` IN (SELECT `DEPTNO`"
-operator|+
-name|NL
+literal|"WHERE (`DEPTNO` IN (SELECT `DEPTNO`\n"
 operator|+
 literal|"FROM `DEPT`))"
 argument_list|)
@@ -2252,35 +1967,25 @@ literal|"select * from emp where deptno in ((select deptno from dept union selec
 operator|+
 literal|"except select * from dept) and false"
 argument_list|,
-name|TestUtil
-operator|.
-name|fold
-argument_list|(
-operator|new
-name|String
-index|[]
-block|{
-literal|"SELECT *"
-block|,
-literal|"FROM `EMP`"
-block|,
-literal|"WHERE ((`DEPTNO` IN ((SELECT `DEPTNO`"
-block|,
-literal|"FROM `DEPT`"
-block|,
-literal|"UNION"
-block|,
-literal|"SELECT *"
-block|,
-literal|"FROM `DEPT`)"
-block|,
-literal|"EXCEPT"
-block|,
-literal|"SELECT *"
-block|,
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `EMP`\n"
+operator|+
+literal|"WHERE ((`DEPTNO` IN ((SELECT `DEPTNO`\n"
+operator|+
+literal|"FROM `DEPT`\n"
+operator|+
+literal|"UNION\n"
+operator|+
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `DEPT`)\n"
+operator|+
+literal|"EXCEPT\n"
+operator|+
+literal|"SELECT *\n"
+operator|+
 literal|"FROM `DEPT`)) AND FALSE)"
-block|}
-argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -2293,75 +1998,45 @@ name|check
 argument_list|(
 literal|"select * from a union select * from a"
 argument_list|,
-name|TestUtil
-operator|.
-name|fold
-argument_list|(
-operator|new
-name|String
-index|[]
-block|{
-literal|"(SELECT *"
-block|,
-literal|"FROM `A`"
-block|,
-literal|"UNION"
-block|,
-literal|"SELECT *"
-block|,
+literal|"(SELECT *\n"
+operator|+
+literal|"FROM `A`\n"
+operator|+
+literal|"UNION\n"
+operator|+
+literal|"SELECT *\n"
+operator|+
 literal|"FROM `A`)"
-block|}
-argument_list|)
 argument_list|)
 expr_stmt|;
 name|check
 argument_list|(
 literal|"select * from a union all select * from a"
 argument_list|,
-name|TestUtil
-operator|.
-name|fold
-argument_list|(
-operator|new
-name|String
-index|[]
-block|{
-literal|"(SELECT *"
-block|,
-literal|"FROM `A`"
-block|,
-literal|"UNION ALL"
-block|,
-literal|"SELECT *"
-block|,
+literal|"(SELECT *\n"
+operator|+
+literal|"FROM `A`\n"
+operator|+
+literal|"UNION ALL\n"
+operator|+
+literal|"SELECT *\n"
+operator|+
 literal|"FROM `A`)"
-block|}
-argument_list|)
 argument_list|)
 expr_stmt|;
 name|check
 argument_list|(
 literal|"select * from a union distinct select * from a"
 argument_list|,
-name|TestUtil
-operator|.
-name|fold
-argument_list|(
-operator|new
-name|String
-index|[]
-block|{
-literal|"(SELECT *"
-block|,
-literal|"FROM `A`"
-block|,
-literal|"UNION"
-block|,
-literal|"SELECT *"
-block|,
+literal|"(SELECT *\n"
+operator|+
+literal|"FROM `A`\n"
+operator|+
+literal|"UNION\n"
+operator|+
+literal|"SELECT *\n"
+operator|+
 literal|"FROM `A`)"
-block|}
-argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -2380,27 +2055,17 @@ literal|"select x, y from u "
 operator|+
 literal|"order by 1 asc, 2 desc"
 argument_list|,
-name|TestUtil
-operator|.
-name|fold
-argument_list|(
-operator|new
-name|String
-index|[]
-block|{
-literal|"(SELECT `A`, `B`"
-block|,
-literal|"FROM `T`"
-block|,
-literal|"UNION ALL"
-block|,
-literal|"SELECT `X`, `Y`"
-block|,
-literal|"FROM `U`)"
-block|,
+literal|"(SELECT `A`, `B`\n"
+operator|+
+literal|"FROM `T`\n"
+operator|+
+literal|"UNION ALL\n"
+operator|+
+literal|"SELECT `X`, `Y`\n"
+operator|+
+literal|"FROM `U`)\n"
+operator|+
 literal|"ORDER BY 1, 2 DESC"
-block|}
-argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -2447,75 +2112,45 @@ name|check
 argument_list|(
 literal|"select * from a except select * from a"
 argument_list|,
-name|TestUtil
-operator|.
-name|fold
-argument_list|(
-operator|new
-name|String
-index|[]
-block|{
-literal|"(SELECT *"
-block|,
-literal|"FROM `A`"
-block|,
-literal|"EXCEPT"
-block|,
-literal|"SELECT *"
-block|,
+literal|"(SELECT *\n"
+operator|+
+literal|"FROM `A`\n"
+operator|+
+literal|"EXCEPT\n"
+operator|+
+literal|"SELECT *\n"
+operator|+
 literal|"FROM `A`)"
-block|}
-argument_list|)
 argument_list|)
 expr_stmt|;
 name|check
 argument_list|(
 literal|"select * from a except all select * from a"
 argument_list|,
-name|TestUtil
-operator|.
-name|fold
-argument_list|(
-operator|new
-name|String
-index|[]
-block|{
-literal|"(SELECT *"
-block|,
-literal|"FROM `A`"
-block|,
-literal|"EXCEPT ALL"
-block|,
-literal|"SELECT *"
-block|,
+literal|"(SELECT *\n"
+operator|+
+literal|"FROM `A`\n"
+operator|+
+literal|"EXCEPT ALL\n"
+operator|+
+literal|"SELECT *\n"
+operator|+
 literal|"FROM `A`)"
-block|}
-argument_list|)
 argument_list|)
 expr_stmt|;
 name|check
 argument_list|(
 literal|"select * from a except distinct select * from a"
 argument_list|,
-name|TestUtil
-operator|.
-name|fold
-argument_list|(
-operator|new
-name|String
-index|[]
-block|{
-literal|"(SELECT *"
-block|,
-literal|"FROM `A`"
-block|,
-literal|"EXCEPT"
-block|,
-literal|"SELECT *"
-block|,
+literal|"(SELECT *\n"
+operator|+
+literal|"FROM `A`\n"
+operator|+
+literal|"EXCEPT\n"
+operator|+
+literal|"SELECT *\n"
+operator|+
 literal|"FROM `A`)"
-block|}
-argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -2528,75 +2163,45 @@ name|check
 argument_list|(
 literal|"select * from a intersect select * from a"
 argument_list|,
-name|TestUtil
-operator|.
-name|fold
-argument_list|(
-operator|new
-name|String
-index|[]
-block|{
-literal|"(SELECT *"
-block|,
-literal|"FROM `A`"
-block|,
-literal|"INTERSECT"
-block|,
-literal|"SELECT *"
-block|,
+literal|"(SELECT *\n"
+operator|+
+literal|"FROM `A`\n"
+operator|+
+literal|"INTERSECT\n"
+operator|+
+literal|"SELECT *\n"
+operator|+
 literal|"FROM `A`)"
-block|}
-argument_list|)
 argument_list|)
 expr_stmt|;
 name|check
 argument_list|(
 literal|"select * from a intersect all select * from a"
 argument_list|,
-name|TestUtil
-operator|.
-name|fold
-argument_list|(
-operator|new
-name|String
-index|[]
-block|{
-literal|"(SELECT *"
-block|,
-literal|"FROM `A`"
-block|,
-literal|"INTERSECT ALL"
-block|,
-literal|"SELECT *"
-block|,
+literal|"(SELECT *\n"
+operator|+
+literal|"FROM `A`\n"
+operator|+
+literal|"INTERSECT ALL\n"
+operator|+
+literal|"SELECT *\n"
+operator|+
 literal|"FROM `A`)"
-block|}
-argument_list|)
 argument_list|)
 expr_stmt|;
 name|check
 argument_list|(
 literal|"select * from a intersect distinct select * from a"
 argument_list|,
-name|TestUtil
-operator|.
-name|fold
-argument_list|(
-operator|new
-name|String
-index|[]
-block|{
-literal|"(SELECT *"
-block|,
-literal|"FROM `A`"
-block|,
-literal|"INTERSECT"
-block|,
-literal|"SELECT *"
-block|,
+literal|"(SELECT *\n"
+operator|+
+literal|"FROM `A`\n"
+operator|+
+literal|"INTERSECT\n"
+operator|+
+literal|"SELECT *\n"
+operator|+
 literal|"FROM `A`)"
-block|}
-argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -2609,21 +2214,11 @@ name|check
 argument_list|(
 literal|"select * from a as a2 cross join b"
 argument_list|,
-name|TestUtil
-operator|.
-name|fold
-argument_list|(
-operator|new
-name|String
-index|[]
-block|{
-literal|"SELECT *"
-block|,
-literal|"FROM `A` AS `A2`"
-block|,
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `A` AS `A2`\n"
+operator|+
 literal|"CROSS JOIN `B`"
-block|}
-argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -2636,23 +2231,13 @@ name|check
 argument_list|(
 literal|"select * from a left join b on 1 = 1 and 2 = 2 where 3 = 3"
 argument_list|,
-name|TestUtil
-operator|.
-name|fold
-argument_list|(
-operator|new
-name|String
-index|[]
-block|{
-literal|"SELECT *"
-block|,
-literal|"FROM `A`"
-block|,
-literal|"LEFT JOIN `B` ON ((1 = 1) AND (2 = 2))"
-block|,
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `A`\n"
+operator|+
+literal|"LEFT JOIN `B` ON ((1 = 1) AND (2 = 2))\n"
+operator|+
 literal|"WHERE (3 = 3)"
-block|}
-argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -2770,17 +2355,11 @@ name|check
 argument_list|(
 literal|"select * from a left outer join b on 1 = 1 and 2 = 2 where 3 = 3"
 argument_list|,
-literal|"SELECT *"
+literal|"SELECT *\n"
 operator|+
-name|NL
+literal|"FROM `A`\n"
 operator|+
-literal|"FROM `A`"
-operator|+
-name|NL
-operator|+
-literal|"LEFT JOIN `B` ON ((1 = 1) AND (2 = 2))"
-operator|+
-name|NL
+literal|"LEFT JOIN `B` ON ((1 = 1) AND (2 = 2))\n"
 operator|+
 literal|"WHERE (3 = 3)"
 argument_list|)
@@ -2795,17 +2374,11 @@ name|check
 argument_list|(
 literal|"select * from a join (select * from b) as b2 on true"
 argument_list|,
-literal|"SELECT *"
+literal|"SELECT *\n"
 operator|+
-name|NL
+literal|"FROM `A`\n"
 operator|+
-literal|"FROM `A`"
-operator|+
-name|NL
-operator|+
-literal|"INNER JOIN (SELECT *"
-operator|+
-name|NL
+literal|"INNER JOIN (SELECT *\n"
 operator|+
 literal|"FROM `B`) AS `B2` ON TRUE"
 argument_list|)
@@ -2835,21 +2408,11 @@ name|check
 argument_list|(
 literal|"select * from a full outer join b"
 argument_list|,
-name|TestUtil
-operator|.
-name|fold
-argument_list|(
-operator|new
-name|String
-index|[]
-block|{
-literal|"SELECT *"
-block|,
-literal|"FROM `A`"
-block|,
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `A`\n"
+operator|+
 literal|"FULL JOIN `B`"
-block|}
-argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -2877,13 +2440,9 @@ name|check
 argument_list|(
 literal|"select * from (a natural left join b) left join c on b.c1 = c.c1"
 argument_list|,
-literal|"SELECT *"
+literal|"SELECT *\n"
 operator|+
-name|NL
-operator|+
-literal|"FROM (`A` NATURAL LEFT JOIN `B`) LEFT JOIN `C` ON (`B`.`C1` = `C`.`C1`)"
-operator|+
-name|NL
+literal|"FROM (`A` NATURAL LEFT JOIN `B`) LEFT JOIN `C` ON (`B`.`C1` = `C`.`C1`)\n"
 argument_list|)
 expr_stmt|;
 comment|// 2. parens needed
@@ -2891,13 +2450,9 @@ name|check
 argument_list|(
 literal|"select * from a natural left join (b left join c on b.c1 = c.c1)"
 argument_list|,
-literal|"SELECT *"
+literal|"SELECT *\n"
 operator|+
-name|NL
-operator|+
-literal|"FROM (`A` NATURAL LEFT JOIN `B`) LEFT JOIN `C` ON (`B`.`C1` = `C`.`C1`)"
-operator|+
-name|NL
+literal|"FROM (`A` NATURAL LEFT JOIN `B`) LEFT JOIN `C` ON (`B`.`C1` = `C`.`C1`)\n"
 argument_list|)
 expr_stmt|;
 comment|// 3. same as 1
@@ -2905,13 +2460,9 @@ name|check
 argument_list|(
 literal|"select * from a natural left join b left join c on b.c1 = c.c1"
 argument_list|,
-literal|"SELECT *"
+literal|"SELECT *\n"
 operator|+
-name|NL
-operator|+
-literal|"FROM (`A` NATURAL LEFT JOIN `B`) LEFT JOIN `C` ON (`B`.`C1` = `C`.`C1`)"
-operator|+
-name|NL
+literal|"FROM (`A` NATURAL LEFT JOIN `B`) LEFT JOIN `C` ON (`B`.`C1` = `C`.`C1`)\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -2927,21 +2478,11 @@ name|check
 argument_list|(
 literal|"select * from a natural cross join b"
 argument_list|,
-name|TestUtil
-operator|.
-name|fold
-argument_list|(
-operator|new
-name|String
-index|[]
-block|{
-literal|"SELECT *"
-block|,
-literal|"FROM `A`"
-block|,
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `A`\n"
+operator|+
 literal|"NATURAL CROSS JOIN `B`"
-block|}
-argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -2954,21 +2495,11 @@ name|check
 argument_list|(
 literal|"select * from a join b using (x)"
 argument_list|,
-name|TestUtil
-operator|.
-name|fold
-argument_list|(
-operator|new
-name|String
-index|[]
-block|{
-literal|"SELECT *"
-block|,
-literal|"FROM `A`"
-block|,
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `A`\n"
+operator|+
 literal|"INNER JOIN `B` USING (`X`)"
-block|}
-argument_list|)
 argument_list|)
 expr_stmt|;
 name|checkFails
@@ -2998,27 +2529,17 @@ literal|"  where gender = 'F'"
 operator|+
 literal|"  order by sal) tablesample substitute('medium')"
 argument_list|,
-name|TestUtil
-operator|.
-name|fold
-argument_list|(
-operator|new
-name|String
-index|[]
-block|{
-literal|"SELECT *"
-block|,
-literal|"FROM (SELECT *"
-block|,
-literal|"FROM `EMP`"
-block|,
-literal|"INNER JOIN `DEPT` ON (`EMP`.`DEPTNO` = `DEPT`.`DEPTNO`)"
-block|,
-literal|"WHERE (`GENDER` = 'F')"
-block|,
+literal|"SELECT *\n"
+operator|+
+literal|"FROM (SELECT *\n"
+operator|+
+literal|"FROM `EMP`\n"
+operator|+
+literal|"INNER JOIN `DEPT` ON (`EMP`.`DEPTNO` = `DEPT`.`DEPTNO`)\n"
+operator|+
+literal|"WHERE (`GENDER` = 'F')\n"
+operator|+
 literal|"ORDER BY `SAL`) TABLESAMPLE SUBSTITUTE('MEDIUM')"
-block|}
-argument_list|)
 argument_list|)
 expr_stmt|;
 name|check
@@ -3029,21 +2550,11 @@ literal|"from emp as x tablesample substitute('medium') "
 operator|+
 literal|"join dept tablesample substitute('lar' /* split */ 'ge') on x.deptno = dept.deptno"
 argument_list|,
-name|TestUtil
-operator|.
-name|fold
-argument_list|(
-operator|new
-name|String
-index|[]
-block|{
-literal|"SELECT *"
-block|,
-literal|"FROM `EMP` AS `X` TABLESAMPLE SUBSTITUTE('MEDIUM')"
-block|,
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `EMP` AS `X` TABLESAMPLE SUBSTITUTE('MEDIUM')\n"
+operator|+
 literal|"INNER JOIN `DEPT` TABLESAMPLE SUBSTITUTE('LARGE') ON (`X`.`DEPTNO` = `DEPT`.`DEPTNO`)"
-block|}
-argument_list|)
 argument_list|)
 expr_stmt|;
 name|check
@@ -3052,19 +2563,9 @@ literal|"select * "
 operator|+
 literal|"from emp as x tablesample bernoulli(50)"
 argument_list|,
-name|TestUtil
-operator|.
-name|fold
-argument_list|(
-operator|new
-name|String
-index|[]
-block|{
-literal|"SELECT *"
-block|,
+literal|"SELECT *\n"
+operator|+
 literal|"FROM `EMP` AS `X` TABLESAMPLE BERNOULLI(50.0)"
-block|}
-argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -3087,9 +2588,7 @@ name|check
 argument_list|(
 literal|"select 1 as one, 'x' as x, null as n from emp"
 argument_list|,
-literal|"SELECT 1 AS `ONE`, 'x' AS `X`, NULL AS `N`"
-operator|+
-name|NL
+literal|"SELECT 1 AS `ONE`, 'x' AS `X`, NULL AS `N`\n"
 operator|+
 literal|"FROM `EMP`"
 argument_list|)
@@ -3230,25 +2729,15 @@ name|check
 argument_list|(
 literal|"select * from a join b using (x), c join d using (y)"
 argument_list|,
-name|TestUtil
-operator|.
-name|fold
-argument_list|(
-operator|new
-name|String
-index|[]
-block|{
-literal|"SELECT *"
-block|,
-literal|"FROM `A`"
-block|,
-literal|"INNER JOIN `B` USING (`X`),"
-block|,
-literal|"`C`"
-block|,
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `A`\n"
+operator|+
+literal|"INNER JOIN `B` USING (`X`),\n"
+operator|+
+literal|"`C`\n"
+operator|+
 literal|"INNER JOIN `D` USING (`Y`)"
-block|}
-argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -3261,21 +2750,11 @@ name|check
 argument_list|(
 literal|"select emp.*, 1 as foo from emp, dept"
 argument_list|,
-name|TestUtil
-operator|.
-name|fold
-argument_list|(
-operator|new
-name|String
-index|[]
-block|{
-literal|"SELECT `EMP`.*, 1 AS `FOO`"
-block|,
-literal|"FROM `EMP`,"
-block|,
+literal|"SELECT `EMP`.*, 1 AS `FOO`\n"
+operator|+
+literal|"FROM `EMP`,\n"
+operator|+
 literal|"`DEPT`"
-block|}
-argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -3288,17 +2767,11 @@ name|check
 argument_list|(
 literal|"select * from dept where not not exists (select * from emp) and true"
 argument_list|,
-literal|"SELECT *"
+literal|"SELECT *\n"
 operator|+
-name|NL
+literal|"FROM `DEPT`\n"
 operator|+
-literal|"FROM `DEPT`"
-operator|+
-name|NL
-operator|+
-literal|"WHERE ((NOT (NOT (EXISTS (SELECT *"
-operator|+
-name|NL
+literal|"WHERE ((NOT (NOT (EXISTS (SELECT *\n"
 operator|+
 literal|"FROM `EMP`)))) AND TRUE)"
 argument_list|)
@@ -3313,21 +2786,11 @@ name|check
 argument_list|(
 literal|"select * from emp order by empno, gender desc, deptno asc, empno asc, name desc"
 argument_list|,
-name|TestUtil
-operator|.
-name|fold
-argument_list|(
-operator|new
-name|String
-index|[]
-block|{
-literal|"SELECT *"
-block|,
-literal|"FROM `EMP`"
-block|,
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `EMP`\n"
+operator|+
 literal|"ORDER BY `EMPNO`, `GENDER` DESC, `DEPTNO`, `EMPNO`, `NAME` DESC"
-block|}
-argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -3340,16 +2803,11 @@ name|check
 argument_list|(
 literal|"select * from emp order by gender desc nulls last, deptno asc nulls first, empno nulls last"
 argument_list|,
-name|TestUtil
-operator|.
-name|fold
-argument_list|(
 literal|"SELECT *\n"
 operator|+
 literal|"FROM `EMP`\n"
 operator|+
 literal|"ORDER BY `GENDER` DESC NULLS LAST, `DEPTNO` NULLS FIRST, `EMPNO` NULLS LAST"
-argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -3362,37 +2820,23 @@ name|check
 argument_list|(
 literal|"(select * from emp order by empno) union select * from emp"
 argument_list|,
-name|TestUtil
-operator|.
-name|fold
-argument_list|(
-operator|new
-name|String
-index|[]
-block|{
-literal|"((SELECT *"
-block|,
-literal|"FROM `EMP`"
-block|,
-literal|"ORDER BY `EMPNO`)"
-block|,
-literal|"UNION"
-block|,
-literal|"SELECT *"
-block|,
+literal|"((SELECT *\n"
+operator|+
+literal|"FROM `EMP`\n"
+operator|+
+literal|"ORDER BY `EMPNO`)\n"
+operator|+
+literal|"UNION\n"
+operator|+
+literal|"SELECT *\n"
+operator|+
 literal|"FROM `EMP`)"
-block|}
-argument_list|)
 argument_list|)
 expr_stmt|;
 name|check
 argument_list|(
 literal|"select * from (select * from t order by x, y) where a = b"
 argument_list|,
-name|TestUtil
-operator|.
-name|fold
-argument_list|(
 literal|"SELECT *\n"
 operator|+
 literal|"FROM (SELECT *\n"
@@ -3402,7 +2846,6 @@ operator|+
 literal|"ORDER BY `X`, `Y`)\n"
 operator|+
 literal|"WHERE (`A` = `B`)"
-argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -3415,10 +2858,6 @@ name|check
 argument_list|(
 literal|"select (select 1 from foo order by x,y) from t where a = b"
 argument_list|,
-name|TestUtil
-operator|.
-name|fold
-argument_list|(
 literal|"SELECT (SELECT 1\n"
 operator|+
 literal|"FROM `FOO`\n"
@@ -3428,7 +2867,6 @@ operator|+
 literal|"FROM `T`\n"
 operator|+
 literal|"WHERE (`A` = `B`)"
-argument_list|)
 argument_list|)
 expr_stmt|;
 name|checkFails
@@ -3446,47 +2884,31 @@ parameter_list|()
 block|{
 name|check
 argument_list|(
-literal|"select 1 from t --this is a comment"
-operator|+
-name|NL
+literal|"select 1 from t --this is a comment\n"
 argument_list|,
-literal|"SELECT 1"
-operator|+
-name|NL
+literal|"SELECT 1\n"
 operator|+
 literal|"FROM `T`"
 argument_list|)
 expr_stmt|;
 name|check
 argument_list|(
-literal|"select 1 from t--"
-operator|+
-name|NL
+literal|"select 1 from t--\n"
 argument_list|,
-literal|"SELECT 1"
-operator|+
-name|NL
+literal|"SELECT 1\n"
 operator|+
 literal|"FROM `T`"
 argument_list|)
 expr_stmt|;
 name|check
 argument_list|(
-literal|"select 1 from t--this is a comment"
+literal|"select 1 from t--this is a comment\n"
 operator|+
-name|NL
-operator|+
-literal|"where a>b-- this is comment"
-operator|+
-name|NL
+literal|"where a>b-- this is comment\n"
 argument_list|,
-literal|"SELECT 1"
+literal|"SELECT 1\n"
 operator|+
-name|NL
-operator|+
-literal|"FROM `T`"
-operator|+
-name|NL
+literal|"FROM `T`\n"
 operator|+
 literal|"WHERE (`A`> `B`)"
 argument_list|)
@@ -3502,9 +2924,7 @@ name|check
 argument_list|(
 literal|"select 1 /* , 2 */, 3 from t"
 argument_list|,
-literal|"SELECT 1, 3"
-operator|+
-name|NL
+literal|"SELECT 1, 3\n"
 operator|+
 literal|"FROM `T`"
 argument_list|)
@@ -3512,19 +2932,13 @@ expr_stmt|;
 comment|// on several lines
 name|check
 argument_list|(
-literal|"select /* 1,"
+literal|"select /* 1,\n"
 operator|+
-name|NL
-operator|+
-literal|" 2, "
-operator|+
-name|NL
+literal|" 2, \n"
 operator|+
 literal|" */ 3 from t"
 argument_list|,
-literal|"SELECT 3"
-operator|+
-name|NL
+literal|"SELECT 3\n"
 operator|+
 literal|"FROM `T`"
 argument_list|)
@@ -3549,9 +2963,7 @@ comment|// SQL:2003, 5.2, syntax rule # 8 "There shall be no<separator>
 comment|// separating the<minus sign>s of a<simple comment introducer>".
 name|check
 argument_list|(
-literal|"values (- -1"
-operator|+
-name|NL
+literal|"values (- -1\n"
 operator|+
 literal|")"
 argument_list|,
@@ -3560,9 +2972,7 @@ argument_list|)
 expr_stmt|;
 name|check
 argument_list|(
-literal|"values (--1+"
-operator|+
-name|NL
+literal|"values (--1+\n"
 operator|+
 literal|"2)"
 argument_list|,
@@ -3624,9 +3034,7 @@ condition|)
 block|{
 name|checkFails
 argument_list|(
-literal|"values /* multiline contains -- singline */ "
-operator|+
-name|NL
+literal|"values /* multiline contains -- singline */ \n"
 operator|+
 literal|" (1)"
 argument_list|,
@@ -3646,9 +3054,7 @@ comment|// Test should fail, and it does, but it should give "*/" as the
 comment|// erroneous token.
 name|checkFails
 argument_list|(
-literal|"values ( -- rest of line /* a comment  "
-operator|+
-name|NL
+literal|"values ( -- rest of line /* a comment  \n"
 operator|+
 literal|" 1, ^*/^ 2)"
 argument_list|,
@@ -3658,9 +3064,7 @@ expr_stmt|;
 block|}
 name|check
 argument_list|(
-literal|"values (1 + /* comment -- rest of line"
-operator|+
-name|NL
+literal|"values (1 + /* comment -- rest of line\n"
 operator|+
 literal|" rest of comment */ 2)"
 argument_list|,
@@ -3670,9 +3074,7 @@ expr_stmt|;
 comment|// multiline comment inside singleline comment
 name|check
 argument_list|(
-literal|"values -- rest of line /* a comment */ "
-operator|+
-name|NL
+literal|"values -- rest of line /* a comment */ \n"
 operator|+
 literal|"(1)"
 argument_list|,
@@ -3682,9 +3084,7 @@ expr_stmt|;
 comment|// non-terminated multiline comment inside singleline comment
 name|check
 argument_list|(
-literal|"values -- rest of line /* a comment  "
-operator|+
-name|NL
+literal|"values -- rest of line /* a comment  \n"
 operator|+
 literal|"(1)"
 argument_list|,
@@ -3913,9 +3313,7 @@ argument_list|)
 expr_stmt|;
 name|checkExp
 argument_list|(
-literal|"1- -2.3e-4 - -.5e-6  -"
-operator|+
-name|NL
+literal|"1- -2.3e-4 - -.5e-6  -\n"
 operator|+
 literal|"-.7++8"
 argument_list|,
@@ -4068,55 +3466,45 @@ literal|"select * from f union "
 operator|+
 literal|"select * from g"
 argument_list|,
-name|TestUtil
-operator|.
-name|fold
-argument_list|(
-operator|new
-name|String
-index|[]
-block|{
-literal|"((((SELECT *"
-block|,
-literal|"FROM `A`"
-block|,
-literal|"UNION"
-block|,
-literal|"((SELECT *"
-block|,
-literal|"FROM `B`"
-block|,
-literal|"INTERSECT"
-block|,
-literal|"SELECT *"
-block|,
-literal|"FROM `C`)"
-block|,
-literal|"INTERSECT"
-block|,
-literal|"SELECT *"
-block|,
-literal|"FROM `D`))"
-block|,
-literal|"EXCEPT"
-block|,
-literal|"SELECT *"
-block|,
-literal|"FROM `E`)"
-block|,
-literal|"EXCEPT"
-block|,
-literal|"SELECT *"
-block|,
-literal|"FROM `F`)"
-block|,
-literal|"UNION"
-block|,
-literal|"SELECT *"
-block|,
+literal|"((((SELECT *\n"
+operator|+
+literal|"FROM `A`\n"
+operator|+
+literal|"UNION\n"
+operator|+
+literal|"((SELECT *\n"
+operator|+
+literal|"FROM `B`\n"
+operator|+
+literal|"INTERSECT\n"
+operator|+
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `C`)\n"
+operator|+
+literal|"INTERSECT\n"
+operator|+
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `D`))\n"
+operator|+
+literal|"EXCEPT\n"
+operator|+
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `E`)\n"
+operator|+
+literal|"EXCEPT\n"
+operator|+
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `F`)\n"
+operator|+
+literal|"UNION\n"
+operator|+
+literal|"SELECT *\n"
+operator|+
 literal|"FROM `G`)"
-block|}
-argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -4130,25 +3518,15 @@ name|check
 argument_list|(
 literal|"select * from (select * from emp) as e join (select * from dept) d"
 argument_list|,
-name|TestUtil
-operator|.
-name|fold
-argument_list|(
-operator|new
-name|String
-index|[]
-block|{
-literal|"SELECT *"
-block|,
-literal|"FROM (SELECT *"
-block|,
-literal|"FROM `EMP`) AS `E`"
-block|,
-literal|"INNER JOIN (SELECT *"
-block|,
+literal|"SELECT *\n"
+operator|+
+literal|"FROM (SELECT *\n"
+operator|+
+literal|"FROM `EMP`) AS `E`\n"
+operator|+
+literal|"INNER JOIN (SELECT *\n"
+operator|+
 literal|"FROM `DEPT`) AS `D`"
-block|}
-argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -4195,21 +3573,13 @@ name|check
 argument_list|(
 literal|"select * from emp where 3 = (select count(*) from dept where dept.deptno = emp.deptno)"
 argument_list|,
-literal|"SELECT *"
+literal|"SELECT *\n"
 operator|+
-name|NL
+literal|"FROM `EMP`\n"
 operator|+
-literal|"FROM `EMP`"
+literal|"WHERE (3 = (SELECT COUNT(*)\n"
 operator|+
-name|NL
-operator|+
-literal|"WHERE (3 = (SELECT COUNT(*)"
-operator|+
-name|NL
-operator|+
-literal|"FROM `DEPT`"
-operator|+
-name|NL
+literal|"FROM `DEPT`\n"
 operator|+
 literal|"WHERE (`DEPT`.`DEPTNO` = `EMP`.`DEPTNO`)))"
 argument_list|)
@@ -4224,10 +3594,6 @@ name|check
 argument_list|(
 literal|"select x, (select count(*) from dept where dept.deptno = emp.deptno) from emp"
 argument_list|,
-name|TestUtil
-operator|.
-name|fold
-argument_list|(
 literal|"SELECT `X`, (SELECT COUNT(*)\n"
 operator|+
 literal|"FROM `DEPT`\n"
@@ -4235,7 +3601,6 @@ operator|+
 literal|"WHERE (`DEPT`.`DEPTNO` = `EMP`.`DEPTNO`))\n"
 operator|+
 literal|"FROM `EMP`"
-argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -4248,21 +3613,11 @@ name|check
 argument_list|(
 literal|"select * from emp, dept"
 argument_list|,
-name|TestUtil
-operator|.
-name|fold
-argument_list|(
-operator|new
-name|String
-index|[]
-block|{
-literal|"SELECT *"
-block|,
-literal|"FROM `EMP`,"
-block|,
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `EMP`,\n"
+operator|+
 literal|"`DEPT`"
-block|}
-argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -4275,9 +3630,7 @@ name|check
 argument_list|(
 literal|"select 1, emp.*, 2 from emp"
 argument_list|,
-literal|"SELECT 1, `EMP`.*, 2"
-operator|+
-name|NL
+literal|"SELECT 1, `EMP`.*, 2\n"
 operator|+
 literal|"FROM `EMP`"
 argument_list|)
@@ -4305,9 +3658,7 @@ name|check
 argument_list|(
 literal|"select * from emp"
 argument_list|,
-literal|"SELECT *"
-operator|+
-name|NL
+literal|"SELECT *\n"
 operator|+
 literal|"FROM `EMP`"
 argument_list|)
@@ -4322,9 +3673,7 @@ name|check
 argument_list|(
 literal|"select distinct foo from bar"
 argument_list|,
-literal|"SELECT DISTINCT `FOO`"
-operator|+
-name|NL
+literal|"SELECT DISTINCT `FOO`\n"
 operator|+
 literal|"FROM `BAR`"
 argument_list|)
@@ -4340,13 +3689,9 @@ name|check
 argument_list|(
 literal|"select * from (select all foo from bar) as xyz"
 argument_list|,
-literal|"SELECT *"
+literal|"SELECT *\n"
 operator|+
-name|NL
-operator|+
-literal|"FROM (SELECT ALL `FOO`"
-operator|+
-name|NL
+literal|"FROM (SELECT ALL `FOO`\n"
 operator|+
 literal|"FROM `BAR`) AS `XYZ`"
 argument_list|)
@@ -4361,13 +3706,9 @@ name|check
 argument_list|(
 literal|"select * from emp where empno> 5 and gender = 'F'"
 argument_list|,
-literal|"SELECT *"
+literal|"SELECT *\n"
 operator|+
-name|NL
-operator|+
-literal|"FROM `EMP`"
-operator|+
-name|NL
+literal|"FROM `EMP`\n"
 operator|+
 literal|"WHERE ((`EMPNO`> 5) AND (`GENDER` = 'F'))"
 argument_list|)
@@ -4382,13 +3723,9 @@ name|check
 argument_list|(
 literal|"select * from (select * from emp)"
 argument_list|,
-literal|"SELECT *"
+literal|"SELECT *\n"
 operator|+
-name|NL
-operator|+
-literal|"FROM (SELECT *"
-operator|+
-name|NL
+literal|"FROM (SELECT *\n"
 operator|+
 literal|"FROM `EMP`)"
 argument_list|)
@@ -4429,9 +3766,7 @@ name|check
 argument_list|(
 literal|"select * from (values(1,'two'), 3, (4, 'five'))"
 argument_list|,
-literal|"SELECT *"
-operator|+
-name|NL
+literal|"SELECT *\n"
 operator|+
 literal|"FROM (VALUES (ROW(1, 'two')), (ROW(3)), (ROW(4, 'five')))"
 argument_list|)
@@ -4446,41 +3781,23 @@ name|checkFails
 argument_list|(
 literal|"select 1 from ^values^('x')"
 argument_list|,
-literal|"Encountered \"values\" at line 1, column 15\\."
+literal|"Encountered \"values\" at line 1, column 15\\.\n"
 operator|+
-name|NL
+literal|"Was expecting one of:\n"
 operator|+
-literal|"Was expecting one of:"
+literal|"    \"LATERAL\" \\.\\.\\.\n"
 operator|+
-name|NL
+literal|"    \"TABLE\" \\.\\.\\.\n"
 operator|+
-literal|"    \"LATERAL\" \\.\\.\\."
+literal|"    \"UNNEST\" \\.\\.\\.\n"
 operator|+
-name|NL
+literal|"    \"\\(\" \\.\\.\\.\n"
 operator|+
-literal|"    \"TABLE\" \\.\\.\\."
+literal|"<IDENTIFIER> \\.\\.\\.\n"
 operator|+
-name|NL
+literal|"<QUOTED_IDENTIFIER> \\.\\.\\.\n"
 operator|+
-literal|"    \"UNNEST\" \\.\\.\\."
-operator|+
-name|NL
-operator|+
-literal|"    \"\\(\" \\.\\.\\."
-operator|+
-name|NL
-operator|+
-literal|"<IDENTIFIER> \\.\\.\\."
-operator|+
-name|NL
-operator|+
-literal|"<QUOTED_IDENTIFIER> \\.\\.\\."
-operator|+
-name|NL
-operator|+
-literal|"<UNICODE_QUOTED_IDENTIFIER> \\.\\.\\."
-operator|+
-name|NL
+literal|"<UNICODE_QUOTED_IDENTIFIER> \\.\\.\\.\n"
 operator|+
 literal|"    "
 argument_list|)
@@ -4515,25 +3832,15 @@ name|checkFails
 argument_list|(
 literal|"table ^123^"
 argument_list|,
-literal|"Encountered \"123\" at line 1, column 7\\."
+literal|"Encountered \"123\" at line 1, column 7\\.\n"
 operator|+
-name|NL
+literal|"Was expecting one of:\n"
 operator|+
-literal|"Was expecting one of:"
+literal|"<IDENTIFIER> \\.\\.\\.\n"
 operator|+
-name|NL
+literal|"<QUOTED_IDENTIFIER> \\.\\.\\.\n"
 operator|+
-literal|"<IDENTIFIER> \\.\\.\\."
-operator|+
-name|NL
-operator|+
-literal|"<QUOTED_IDENTIFIER> \\.\\.\\."
-operator|+
-name|NL
-operator|+
-literal|"<UNICODE_QUOTED_IDENTIFIER> \\.\\.\\."
-operator|+
-name|NL
+literal|"<UNICODE_QUOTED_IDENTIFIER> \\.\\.\\.\n"
 operator|+
 literal|"    "
 argument_list|)
@@ -4548,19 +3855,9 @@ name|check
 argument_list|(
 literal|"table emp order by name"
 argument_list|,
-name|TestUtil
-operator|.
-name|fold
-argument_list|(
-operator|new
-name|String
-index|[]
-block|{
-literal|"(TABLE `EMP`)"
-block|,
+literal|"(TABLE `EMP`)\n"
+operator|+
 literal|"ORDER BY `NAME`"
-block|}
-argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -4573,9 +3870,7 @@ name|check
 argument_list|(
 literal|"select * from (table emp)"
 argument_list|,
-literal|"SELECT *"
-operator|+
-name|NL
+literal|"SELECT *\n"
 operator|+
 literal|"FROM (TABLE `EMP`)"
 argument_list|)
@@ -4610,19 +3905,9 @@ name|check
 argument_list|(
 literal|"select * from table(ramp(3, 4))"
 argument_list|,
-name|TestUtil
-operator|.
-name|fold
-argument_list|(
-operator|new
-name|String
-index|[]
-block|{
-literal|"SELECT *"
-block|,
+literal|"SELECT *\n"
+operator|+
 literal|"FROM TABLE(`RAMP`(3, 4))"
-block|}
-argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -4635,21 +3920,11 @@ name|check
 argument_list|(
 literal|"select * from table(dedup(cursor(select * from emps),'name'))"
 argument_list|,
-name|TestUtil
-operator|.
-name|fold
-argument_list|(
-operator|new
-name|String
-index|[]
-block|{
-literal|"SELECT *"
-block|,
-literal|"FROM TABLE(`DEDUP`((CURSOR ((SELECT *"
-block|,
+literal|"SELECT *\n"
+operator|+
+literal|"FROM TABLE(`DEDUP`((CURSOR ((SELECT *\n"
+operator|+
 literal|"FROM `EMPS`))), 'name'))"
-block|}
-argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -4664,21 +3939,11 @@ literal|"select * from table(dedup(cursor(select * from emps),"
 operator|+
 literal|"row(empno, name)))"
 argument_list|,
-name|TestUtil
-operator|.
-name|fold
-argument_list|(
-operator|new
-name|String
-index|[]
-block|{
-literal|"SELECT *"
-block|,
-literal|"FROM TABLE(`DEDUP`((CURSOR ((SELECT *"
-block|,
+literal|"SELECT *\n"
+operator|+
+literal|"FROM TABLE(`DEDUP`((CURSOR ((SELECT *\n"
+operator|+
 literal|"FROM `EMPS`))), (ROW(`EMPNO`, `NAME`))))"
-block|}
-argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -4718,21 +3983,11 @@ name|check
 argument_list|(
 literal|"explain plan for select * from emps"
 argument_list|,
-name|TestUtil
-operator|.
-name|fold
-argument_list|(
-operator|new
-name|String
-index|[]
-block|{
-literal|"EXPLAIN PLAN INCLUDING ATTRIBUTES WITH IMPLEMENTATION FOR"
-block|,
-literal|"SELECT *"
-block|,
+literal|"EXPLAIN PLAN INCLUDING ATTRIBUTES WITH IMPLEMENTATION FOR\n"
+operator|+
+literal|"SELECT *\n"
+operator|+
 literal|"FROM `EMPS`"
-block|}
-argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -4745,21 +4000,11 @@ name|check
 argument_list|(
 literal|"explain plan with implementation for select * from emps"
 argument_list|,
-name|TestUtil
-operator|.
-name|fold
-argument_list|(
-operator|new
-name|String
-index|[]
-block|{
-literal|"EXPLAIN PLAN INCLUDING ATTRIBUTES WITH IMPLEMENTATION FOR"
-block|,
-literal|"SELECT *"
-block|,
+literal|"EXPLAIN PLAN INCLUDING ATTRIBUTES WITH IMPLEMENTATION FOR\n"
+operator|+
+literal|"SELECT *\n"
+operator|+
 literal|"FROM `EMPS`"
-block|}
-argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -4772,21 +4017,11 @@ name|check
 argument_list|(
 literal|"explain plan without implementation for select * from emps"
 argument_list|,
-name|TestUtil
-operator|.
-name|fold
-argument_list|(
-operator|new
-name|String
-index|[]
-block|{
-literal|"EXPLAIN PLAN INCLUDING ATTRIBUTES WITHOUT IMPLEMENTATION FOR"
-block|,
-literal|"SELECT *"
-block|,
+literal|"EXPLAIN PLAN INCLUDING ATTRIBUTES WITHOUT IMPLEMENTATION FOR\n"
+operator|+
+literal|"SELECT *\n"
+operator|+
 literal|"FROM `EMPS`"
-block|}
-argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -4799,19 +4034,9 @@ name|check
 argument_list|(
 literal|"explain plan with type for (values (true))"
 argument_list|,
-name|TestUtil
-operator|.
-name|fold
-argument_list|(
-operator|new
-name|String
-index|[]
-block|{
-literal|"EXPLAIN PLAN INCLUDING ATTRIBUTES WITH TYPE FOR"
-block|,
+literal|"EXPLAIN PLAN INCLUDING ATTRIBUTES WITH TYPE FOR\n"
+operator|+
 literal|"(VALUES (ROW(TRUE)))"
-block|}
-argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -4824,21 +4049,11 @@ name|check
 argument_list|(
 literal|"insert into emps select * from emps"
 argument_list|,
-name|TestUtil
-operator|.
-name|fold
-argument_list|(
-operator|new
-name|String
-index|[]
-block|{
-literal|"INSERT INTO `EMPS`"
-block|,
-literal|"(SELECT *"
-block|,
+literal|"INSERT INTO `EMPS`\n"
+operator|+
+literal|"(SELECT *\n"
+operator|+
 literal|"FROM `EMPS`)"
-block|}
-argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -4851,27 +4066,17 @@ name|check
 argument_list|(
 literal|"insert into emps select * from emps1 union select * from emps2"
 argument_list|,
-name|TestUtil
-operator|.
-name|fold
-argument_list|(
-operator|new
-name|String
-index|[]
-block|{
-literal|"INSERT INTO `EMPS`"
-block|,
-literal|"(SELECT *"
-block|,
-literal|"FROM `EMPS1`"
-block|,
-literal|"UNION"
-block|,
-literal|"SELECT *"
-block|,
+literal|"INSERT INTO `EMPS`\n"
+operator|+
+literal|"(SELECT *\n"
+operator|+
+literal|"FROM `EMPS1`\n"
+operator|+
+literal|"UNION\n"
+operator|+
+literal|"SELECT *\n"
+operator|+
 literal|"FROM `EMPS2`)"
-block|}
-argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -4884,9 +4089,7 @@ name|check
 argument_list|(
 literal|"insert into emps values (1,'Fredkin')"
 argument_list|,
-literal|"INSERT INTO `EMPS`"
-operator|+
-name|NL
+literal|"INSERT INTO `EMPS`\n"
 operator|+
 literal|"(VALUES (ROW(1, 'Fredkin')))"
 argument_list|)
@@ -4901,21 +4104,11 @@ name|check
 argument_list|(
 literal|"insert into emps(x,y) select * from emps"
 argument_list|,
-name|TestUtil
-operator|.
-name|fold
-argument_list|(
-operator|new
-name|String
-index|[]
-block|{
-literal|"INSERT INTO `EMPS` (`X`, `Y`)"
-block|,
-literal|"(SELECT *"
-block|,
+literal|"INSERT INTO `EMPS` (`X`, `Y`)\n"
+operator|+
+literal|"(SELECT *\n"
+operator|+
 literal|"FROM `EMPS`)"
-block|}
-argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -4928,17 +4121,11 @@ name|check
 argument_list|(
 literal|"explain plan for insert into emps1 select * from emps2"
 argument_list|,
-literal|"EXPLAIN PLAN INCLUDING ATTRIBUTES WITH IMPLEMENTATION FOR"
+literal|"EXPLAIN PLAN INCLUDING ATTRIBUTES WITH IMPLEMENTATION FOR\n"
 operator|+
-name|NL
+literal|"INSERT INTO `EMPS1`\n"
 operator|+
-literal|"INSERT INTO `EMPS1`"
-operator|+
-name|NL
-operator|+
-literal|"(SELECT *"
-operator|+
-name|NL
+literal|"(SELECT *\n"
 operator|+
 literal|"FROM `EMPS2`)"
 argument_list|)
@@ -4966,9 +4153,7 @@ name|check
 argument_list|(
 literal|"delete from emps where empno=12"
 argument_list|,
-literal|"DELETE FROM `EMPS`"
-operator|+
-name|NL
+literal|"DELETE FROM `EMPS`\n"
 operator|+
 literal|"WHERE (`EMPNO` = 12)"
 argument_list|)
@@ -4995,35 +4180,25 @@ literal|"when not matched then insert (name, dept, salary) "
 operator|+
 literal|"values(t.name, 10, t.salary * .15)"
 argument_list|,
-name|TestUtil
-operator|.
-name|fold
-argument_list|(
-operator|new
-name|String
-index|[]
-block|{
-literal|"MERGE INTO `EMPS` AS `E`"
-block|,
-literal|"USING (SELECT *"
-block|,
-literal|"FROM `TEMPEMPS`"
-block|,
-literal|"WHERE (`DEPTNO` IS NULL)) AS `T`"
-block|,
-literal|"ON (`E`.`EMPNO` = `T`.`EMPNO`)"
-block|,
-literal|"WHEN MATCHED THEN UPDATE SET `NAME` = `T`.`NAME`"
-block|,
-literal|", `DEPTNO` = `T`.`DEPTNO`"
-block|,
-literal|", `SALARY` = (`T`.`SALARY` * 0.1)"
-block|,
+literal|"MERGE INTO `EMPS` AS `E`\n"
+operator|+
+literal|"USING (SELECT *\n"
+operator|+
+literal|"FROM `TEMPEMPS`\n"
+operator|+
+literal|"WHERE (`DEPTNO` IS NULL)) AS `T`\n"
+operator|+
+literal|"ON (`E`.`EMPNO` = `T`.`EMPNO`)\n"
+operator|+
+literal|"WHEN MATCHED THEN UPDATE SET `NAME` = `T`.`NAME`\n"
+operator|+
+literal|", `DEPTNO` = `T`.`DEPTNO`\n"
+operator|+
+literal|", `SALARY` = (`T`.`SALARY` * 0.1)\n"
+operator|+
 literal|"WHEN NOT MATCHED THEN INSERT (`NAME`, `DEPT`, `SALARY`) "
 operator|+
 literal|"(VALUES (ROW(`T`.`NAME`, 10, (`T`.`SALARY` * 0.15))))"
-block|}
-argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -5048,31 +4223,21 @@ literal|"when not matched then insert (name, dept, salary) "
 operator|+
 literal|"values(t.name, 10, t.salary * .15)"
 argument_list|,
-name|TestUtil
-operator|.
-name|fold
-argument_list|(
-operator|new
-name|String
-index|[]
-block|{
-literal|"MERGE INTO `EMPS` AS `E`"
-block|,
-literal|"USING `TEMPEMPS` AS `T`"
-block|,
-literal|"ON (`E`.`EMPNO` = `T`.`EMPNO`)"
-block|,
-literal|"WHEN MATCHED THEN UPDATE SET `NAME` = `T`.`NAME`"
-block|,
-literal|", `DEPTNO` = `T`.`DEPTNO`"
-block|,
-literal|", `SALARY` = (`T`.`SALARY` * 0.1)"
-block|,
+literal|"MERGE INTO `EMPS` AS `E`\n"
+operator|+
+literal|"USING `TEMPEMPS` AS `T`\n"
+operator|+
+literal|"ON (`E`.`EMPNO` = `T`.`EMPNO`)\n"
+operator|+
+literal|"WHEN MATCHED THEN UPDATE SET `NAME` = `T`.`NAME`\n"
+operator|+
+literal|", `DEPTNO` = `T`.`DEPTNO`\n"
+operator|+
+literal|", `SALARY` = (`T`.`SALARY` * 0.1)\n"
+operator|+
 literal|"WHEN NOT MATCHED THEN INSERT (`NAME`, `DEPT`, `SALARY`) "
 operator|+
 literal|"(VALUES (ROW(`T`.`NAME`, 10, (`T`.`SALARY` * 0.15))))"
-block|}
-argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -5111,13 +4276,9 @@ argument_list|)
 expr_stmt|;
 name|checkExp
 argument_list|(
-literal|"x'1' \t\t\f\r "
+literal|"x'1' \t\t\f\r \n"
 operator|+
-name|NL
-operator|+
-literal|"'2'--hi this is a comment'FF'\r\r\t\f "
-operator|+
-name|NL
+literal|"'2'--hi this is a comment'FF'\r\r\t\f \n"
 operator|+
 literal|"'34'"
 argument_list|,
@@ -5131,13 +4292,9 @@ argument_list|)
 expr_stmt|;
 name|checkExp
 argument_list|(
-literal|"x'1' \t\t\f\r "
+literal|"x'1' \t\t\f\r \n"
 operator|+
-name|NL
-operator|+
-literal|"'000'--"
-operator|+
-name|NL
+literal|"'000'--\n"
 operator|+
 literal|"'01'"
 argument_list|,
@@ -5347,14 +4504,9 @@ name|check
 argument_list|(
 literal|"select N'1' '2' from t"
 argument_list|,
-name|TestUtil
-operator|.
-name|fold
-argument_list|(
 literal|"SELECT _ISO-8859-1'1'\n'2'\n"
 operator|+
 literal|"FROM `T`"
-argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -5367,39 +4519,19 @@ specifier|final
 name|String
 name|fooBar
 init|=
-name|TestUtil
-operator|.
-name|fold
-argument_list|(
-operator|new
-name|String
-index|[]
-block|{
-literal|"'foo'"
-block|,
+literal|"'foo'\n"
+operator|+
 literal|"'bar'"
-block|}
-argument_list|)
 decl_stmt|;
 specifier|final
 name|String
 name|fooBarBaz
 init|=
-name|TestUtil
-operator|.
-name|fold
-argument_list|(
-operator|new
-name|String
-index|[]
-block|{
-literal|"'foo'"
-block|,
-literal|"'bar'"
-block|,
+literal|"'foo'\n"
+operator|+
+literal|"'bar'\n"
+operator|+
 literal|"'baz'"
-block|}
-argument_list|)
 decl_stmt|;
 name|checkExp
 argument_list|(
@@ -5480,76 +4612,36 @@ name|checkExp
 argument_list|(
 literal|"case (select * from emp) when 1 then 2 end"
 argument_list|,
-name|TestUtil
-operator|.
-name|fold
-argument_list|(
-operator|new
-name|String
-index|[]
-block|{
-literal|"(CASE WHEN ((SELECT *"
-block|,
+literal|"(CASE WHEN ((SELECT *\n"
+operator|+
 literal|"FROM `EMP`) = 1) THEN 2 ELSE NULL END)"
-block|}
-argument_list|)
 argument_list|)
 expr_stmt|;
 name|checkExp
 argument_list|(
 literal|"case 1 when (select * from emp) then 2 end"
 argument_list|,
-name|TestUtil
-operator|.
-name|fold
-argument_list|(
-operator|new
-name|String
-index|[]
-block|{
-literal|"(CASE WHEN (1 = (SELECT *"
-block|,
+literal|"(CASE WHEN (1 = (SELECT *\n"
+operator|+
 literal|"FROM `EMP`)) THEN 2 ELSE NULL END)"
-block|}
-argument_list|)
 argument_list|)
 expr_stmt|;
 name|checkExp
 argument_list|(
 literal|"case 1 when 2 then (select * from emp) end"
 argument_list|,
-name|TestUtil
-operator|.
-name|fold
-argument_list|(
-operator|new
-name|String
-index|[]
-block|{
-literal|"(CASE WHEN (1 = 2) THEN (SELECT *"
-block|,
+literal|"(CASE WHEN (1 = 2) THEN (SELECT *\n"
+operator|+
 literal|"FROM `EMP`) ELSE NULL END)"
-block|}
-argument_list|)
 argument_list|)
 expr_stmt|;
 name|checkExp
 argument_list|(
 literal|"case 1 when 2 then 3 else (select * from emp) end"
 argument_list|,
-name|TestUtil
-operator|.
-name|fold
-argument_list|(
-operator|new
-name|String
-index|[]
-block|{
-literal|"(CASE WHEN (1 = 2) THEN 3 ELSE (SELECT *"
-block|,
+literal|"(CASE WHEN (1 = 2) THEN 3 ELSE (SELECT *\n"
+operator|+
 literal|"FROM `EMP`) END)"
-block|}
-argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -6153,10 +5245,6 @@ name|check
 argument_list|(
 literal|"select * from ( select sum(x) over w, sum(y) over w from s window w as (range interval '1' minute preceding))"
 argument_list|,
-name|TestUtil
-operator|.
-name|fold
-argument_list|(
 literal|"SELECT *\n"
 operator|+
 literal|"FROM (SELECT (SUM(`X`) OVER `W`), (SUM(`Y`) OVER `W`)\n"
@@ -6164,7 +5252,6 @@ operator|+
 literal|"FROM `S`\n"
 operator|+
 literal|"WINDOW `W` AS (RANGE INTERVAL '1' MINUTE PRECEDING))"
-argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -6178,34 +5265,20 @@ name|check
 argument_list|(
 literal|"select count(z) over w as foo from Bids window w as (partition by y + yy, yyy order by x rows between 2 preceding and 2 following)"
 argument_list|,
-name|TestUtil
-operator|.
-name|fold
-argument_list|(
-operator|new
-name|String
-index|[]
-block|{
-literal|"SELECT (COUNT(`Z`) OVER `W`) AS `FOO`"
-block|,
-literal|"FROM `BIDS`"
-block|,
+literal|"SELECT (COUNT(`Z`) OVER `W`) AS `FOO`\n"
+operator|+
+literal|"FROM `BIDS`\n"
+operator|+
 literal|"WINDOW `W` AS (PARTITION BY (`Y` + `YY`), `YYY` ORDER BY `X` ROWS BETWEEN 2 PRECEDING AND 2 FOLLOWING)"
-block|}
-argument_list|)
 argument_list|)
 expr_stmt|;
 name|check
 argument_list|(
 literal|"select count(*) over w from emp window w as (rows 2 preceding)"
 argument_list|,
-literal|"SELECT (COUNT(*) OVER `W`)"
+literal|"SELECT (COUNT(*) OVER `W`)\n"
 operator|+
-name|NL
-operator|+
-literal|"FROM `EMP`"
-operator|+
-name|NL
+literal|"FROM `EMP`\n"
 operator|+
 literal|"WINDOW `W` AS (ROWS 2 PRECEDING)"
 argument_list|)
@@ -6231,9 +5304,7 @@ expr_stmt|;
 comment|// Partition clause out of place. Found after ORDER BY
 name|checkFails
 argument_list|(
-literal|"select count(z) over w as foo "
-operator|+
-name|NL
+literal|"select count(z) over w as foo \n"
 operator|+
 literal|"from Bids window w as (partition by y order by x ^partition^ by y)"
 argument_list|,
@@ -6291,28 +5362,18 @@ name|check
 argument_list|(
 literal|"select sum(x) over (order by x allow partial) from bids"
 argument_list|,
-name|TestUtil
-operator|.
-name|fold
-argument_list|(
 literal|"SELECT (SUM(`X`) OVER (ORDER BY `X`))\n"
 operator|+
 literal|"FROM `BIDS`"
-argument_list|)
 argument_list|)
 expr_stmt|;
 name|check
 argument_list|(
 literal|"select sum(x) over (order by x) from bids"
 argument_list|,
-name|TestUtil
-operator|.
-name|fold
-argument_list|(
 literal|"SELECT (SUM(`X`) OVER (ORDER BY `X`))\n"
 operator|+
 literal|"FROM `BIDS`"
-argument_list|)
 argument_list|)
 expr_stmt|;
 name|check
@@ -6772,19 +5833,9 @@ name|checkExp
 argument_list|(
 literal|"multiset(select*from T)"
 argument_list|,
-name|TestUtil
-operator|.
-name|fold
-argument_list|(
-operator|new
-name|String
-index|[]
-block|{
-literal|"(MULTISET ((SELECT *"
-block|,
+literal|"(MULTISET ((SELECT *\n"
+operator|+
 literal|"FROM `T`)))"
-block|}
-argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -13302,9 +12353,7 @@ literal|"select * from "
 operator|+
 name|ident128
 argument_list|,
-literal|"SELECT *"
-operator|+
-name|NL
+literal|"SELECT *\n"
 operator|+
 literal|"FROM `"
 operator|+
@@ -13340,9 +12389,7 @@ literal|"SELECT `"
 operator|+
 name|ident128Upper
 operator|+
-literal|"`"
-operator|+
-name|NL
+literal|"`\n"
 operator|+
 literal|"FROM `MYTABLE`"
 argument_list|)
@@ -13779,9 +12826,7 @@ literal|"Received error while parsing SQL '"
 operator|+
 name|sql
 operator|+
-literal|"'; error is:"
-operator|+
-name|NL
+literal|"'; error is:\n"
 operator|+
 name|e
 operator|.
@@ -13881,9 +12926,7 @@ literal|"Received error while parsing SQL '"
 operator|+
 name|sql
 operator|+
-literal|"'; error is:"
-operator|+
-name|NL
+literal|"'; error is:\n"
 operator|+
 name|e
 operator|.
