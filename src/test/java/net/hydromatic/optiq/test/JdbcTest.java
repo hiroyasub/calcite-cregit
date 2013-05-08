@@ -2183,6 +2183,37 @@ throw|;
 block|}
 block|}
 block|}
+comment|/** There was a bug representing a nullable timestamp using a {@link Long}      * internally. */
+specifier|public
+name|void
+name|testNullableTimestamp
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|assertThat
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|FOODMART_CLONE
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select \"hire_date\" from \"employee\" where \"employee_id\" = 1"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"hire_date=1994-12-01T08:00:00Z\n"
+argument_list|)
+expr_stmt|;
+block|}
 specifier|public
 name|void
 name|testValues

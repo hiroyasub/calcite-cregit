@@ -391,6 +391,9 @@ block|{
 case|case
 name|PRIMITIVE_INT
 case|:
+case|case
+name|INTEGER
+case|:
 return|return
 operator|new
 name|DateFromIntAccessor
@@ -441,6 +444,9 @@ block|{
 case|case
 name|PRIMITIVE_INT
 case|:
+case|case
+name|INTEGER
+case|:
 return|return
 operator|new
 name|TimeFromIntAccessor
@@ -490,6 +496,9 @@ condition|)
 block|{
 case|case
 name|PRIMITIVE_LONG
+case|:
+case|case
+name|LONG
 case|:
 return|return
 operator|new
