@@ -1000,7 +1000,7 @@ name|class
 argument_list|,
 literal|"unixTimestampToString"
 argument_list|,
-name|int
+name|long
 operator|.
 name|class
 argument_list|)
