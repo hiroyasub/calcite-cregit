@@ -121,7 +121,7 @@ name|Expressions
 operator|.
 name|parameter
 argument_list|(
-name|Integer
+name|Double
 operator|.
 name|TYPE
 argument_list|,
@@ -147,7 +147,7 @@ name|Expressions
 operator|.
 name|constant
 argument_list|(
-literal|2
+literal|2d
 argument_list|)
 argument_list|)
 argument_list|,
@@ -174,9 +174,17 @@ name|assertEquals
 argument_list|(
 literal|"new net.hydromatic.linq4j.function.Function1() {\n"
 operator|+
-literal|"  public int apply(Integer arg) {\n"
+literal|"  public double apply(double arg) {\n"
 operator|+
-literal|"    return arg + 2;\n"
+literal|"    return arg + 2.0D;\n"
+operator|+
+literal|"  }\n"
+operator|+
+literal|"  public Object apply(Double arg) {\n"
+operator|+
+literal|"    return apply(\n"
+operator|+
+literal|"      arg.doubleValue());\n"
 operator|+
 literal|"  }\n"
 operator|+
@@ -184,7 +192,7 @@ literal|"  public Object apply(Object arg) {\n"
 operator|+
 literal|"    return apply(\n"
 operator|+
-literal|"      (Integer) arg);\n"
+literal|"      (Double) arg);\n"
 operator|+
 literal|"  }\n"
 operator|+
@@ -194,12 +202,12 @@ name|s
 argument_list|)
 expr_stmt|;
 comment|// Compile and run the lambda expression.
-comment|// The value of the parameter is 1.
-name|int
+comment|// The value of the parameter is 1.5.
+name|double
 name|n
 init|=
 operator|(
-name|Integer
+name|Double
 operator|)
 name|lambdaExpr
 operator|.
@@ -208,7 +216,7 @@ argument_list|()
 operator|.
 name|dynamicInvoke
 argument_list|(
-literal|1
+literal|1.5d
 argument_list|)
 decl_stmt|;
 comment|// This code example produces the following output:
@@ -217,7 +225,7 @@ comment|// arg => (arg +2)
 comment|// 3
 name|assertEquals
 argument_list|(
-literal|3
+literal|3.5D
 argument_list|,
 name|n
 argument_list|)
@@ -308,9 +316,19 @@ name|assertEquals
 argument_list|(
 literal|"new net.hydromatic.linq4j.function.Function2() {\n"
 operator|+
-literal|"  public int apply(Integer key, Integer key2) {\n"
+literal|"  public int apply(int key, int key2) {\n"
 operator|+
 literal|"    return key;\n"
+operator|+
+literal|"  }\n"
+operator|+
+literal|"  public Integer apply(Integer key, Integer key2) {\n"
+operator|+
+literal|"    return apply(\n"
+operator|+
+literal|"      key.intValue(),\n"
+operator|+
+literal|"      key2.intValue());\n"
 operator|+
 literal|"  }\n"
 operator|+

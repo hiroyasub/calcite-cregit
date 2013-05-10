@@ -448,6 +448,21 @@ comment|//    public Object apply(Object p1, ...) {
 comment|//        return apply((T1) p1, ...);
 comment|//    }
 comment|// }
+comment|//
+comment|// if any arguments are primitive there is an extra bridge method:
+comment|//
+comment|//  new Function1() {
+comment|//    public double apply(double p1, int p2) {
+comment|//<body>
+comment|//    }
+comment|//    // box bridge method
+comment|//    public Double apply(Double p1, Integer p2) {
+comment|//      return apply(p1.doubleValue(), p2.intValue());
+comment|//    }
+comment|//    // bridge method
+comment|//    public Object apply(Object p1, Object p2) {
+comment|//      return apply((Double) p1, (Integer) p2);
+comment|//    }
 name|List
 argument_list|<
 name|String
@@ -487,6 +502,32 @@ name|String
 argument_list|>
 argument_list|()
 decl_stmt|;
+name|List
+argument_list|<
+name|String
+argument_list|>
+name|boxBridgeParams
+init|=
+operator|new
+name|ArrayList
+argument_list|<
+name|String
+argument_list|>
+argument_list|()
+decl_stmt|;
+name|List
+argument_list|<
+name|String
+argument_list|>
+name|boxBridgeArgs
+init|=
+operator|new
+name|ArrayList
+argument_list|<
+name|String
+argument_list|>
+argument_list|()
+decl_stmt|;
 for|for
 control|(
 name|ParameterExpression
@@ -495,19 +536,42 @@ range|:
 name|parameterList
 control|)
 block|{
-name|params
-operator|.
-name|add
-argument_list|(
-name|Types
-operator|.
-name|boxClassName
-argument_list|(
+specifier|final
+name|Type
+name|parameterType
+init|=
 name|parameterExpression
 operator|.
 name|getType
 argument_list|()
+decl_stmt|;
+specifier|final
+name|String
+name|parameterTypeName
+init|=
+name|Types
+operator|.
+name|className
+argument_list|(
+name|parameterType
 argument_list|)
+decl_stmt|;
+specifier|final
+name|String
+name|parameterBoxTypeName
+init|=
+name|Types
+operator|.
+name|boxClassName
+argument_list|(
+name|parameterType
+argument_list|)
+decl_stmt|;
+name|params
+operator|.
+name|add
+argument_list|(
+name|parameterTypeName
 operator|+
 literal|" "
 operator|+
@@ -533,21 +597,59 @@ name|add
 argument_list|(
 literal|"("
 operator|+
-name|Types
-operator|.
-name|boxClassName
-argument_list|(
-name|parameterExpression
-operator|.
-name|getType
-argument_list|()
-argument_list|)
+name|parameterBoxTypeName
 operator|+
 literal|") "
 operator|+
 name|parameterExpression
 operator|.
 name|name
+argument_list|)
+expr_stmt|;
+name|boxBridgeParams
+operator|.
+name|add
+argument_list|(
+name|parameterBoxTypeName
+operator|+
+literal|" "
+operator|+
+name|parameterExpression
+operator|.
+name|name
+argument_list|)
+expr_stmt|;
+name|boxBridgeArgs
+operator|.
+name|add
+argument_list|(
+name|parameterExpression
+operator|.
+name|name
+operator|+
+operator|(
+name|Primitive
+operator|.
+name|is
+argument_list|(
+name|parameterType
+argument_list|)
+condition|?
+literal|"."
+operator|+
+name|Primitive
+operator|.
+name|of
+argument_list|(
+name|parameterType
+argument_list|)
+operator|.
+name|primitiveName
+operator|+
+literal|"Value()"
+else|:
+literal|""
+operator|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -678,6 +780,69 @@ name|body
 argument_list|)
 argument_list|)
 expr_stmt|;
+comment|// Generate an intermediate bridge method if at least one parameter is
+comment|// primitive.
+if|if
+condition|(
+operator|!
+name|boxBridgeParams
+operator|.
+name|equals
+argument_list|(
+name|params
+argument_list|)
+condition|)
+block|{
+name|writer
+operator|.
+name|append
+argument_list|(
+literal|"public "
+argument_list|)
+operator|.
+name|append
+argument_list|(
+name|Types
+operator|.
+name|boxClassName
+argument_list|(
+name|bridgeResultType
+argument_list|)
+argument_list|)
+operator|.
+name|list
+argument_list|(
+literal|" apply("
+argument_list|,
+literal|", "
+argument_list|,
+literal|") "
+argument_list|,
+name|boxBridgeParams
+argument_list|)
+operator|.
+name|begin
+argument_list|(
+literal|"{\n"
+argument_list|)
+operator|.
+name|list
+argument_list|(
+literal|"return apply(\n"
+argument_list|,
+literal|",\n"
+argument_list|,
+literal|");\n"
+argument_list|,
+name|boxBridgeArgs
+argument_list|)
+operator|.
+name|end
+argument_list|(
+literal|"}\n"
+argument_list|)
+expr_stmt|;
+block|}
 comment|// Generate a bridge method. Argument types are looser (as if every
 comment|// type parameter is set to 'Object').
 comment|//
@@ -688,8 +853,10 @@ condition|(
 operator|!
 name|bridgeParams
 operator|.
-name|isEmpty
-argument_list|()
+name|equals
+argument_list|(
+name|params
+argument_list|)
 condition|)
 block|{
 name|writer
