@@ -1875,7 +1875,7 @@ comment|//   }
 return|return
 name|Expressions
 operator|.
-name|call
+name|unbox
 argument_list|(
 name|expression
 argument_list|,
@@ -1885,10 +1885,6 @@ name|ofBox
 argument_list|(
 name|returnType
 argument_list|)
-operator|.
-name|primitiveName
-operator|+
-literal|"Value"
 argument_list|)
 return|;
 block|}
@@ -1912,12 +1908,12 @@ condition|)
 block|{
 comment|// E.g.
 comment|//   int foo(Object o) {
-comment|//     return (int) (Integer) o;
+comment|//     return ((Integer) o).intValue();
 comment|//   }
 return|return
 name|Expressions
 operator|.
-name|convert_
+name|unbox
 argument_list|(
 name|Expressions
 operator|.
@@ -1933,7 +1929,12 @@ name|returnType
 argument_list|)
 argument_list|)
 argument_list|,
+name|Primitive
+operator|.
+name|of
+argument_list|(
 name|returnType
+argument_list|)
 argument_list|)
 return|;
 block|}
