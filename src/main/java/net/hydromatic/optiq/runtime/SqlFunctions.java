@@ -405,7 +405,7 @@ block|}
 comment|/** SQL CHARACTER_LENGTH(string) function. */
 specifier|public
 specifier|static
-name|Integer
+name|int
 name|charLength
 parameter_list|(
 name|String
@@ -848,7 +848,7 @@ block|}
 comment|/** SQL&lt; operator applied to String values. */
 specifier|public
 specifier|static
-name|Boolean
+name|boolean
 name|lt
 parameter_list|(
 name|String
@@ -859,19 +859,6 @@ name|b1
 parameter_list|)
 block|{
 return|return
-operator|(
-name|b0
-operator|==
-literal|null
-operator|||
-name|b1
-operator|==
-literal|null
-operator|)
-condition|?
-literal|null
-else|:
-operator|(
 name|b0
 operator|.
 name|compareTo
@@ -880,13 +867,12 @@ name|b1
 argument_list|)
 operator|<
 literal|0
-operator|)
 return|;
 block|}
 comment|/** SQL&lt; operator applied to BigDecimal values. */
 specifier|public
 specifier|static
-name|Boolean
+name|boolean
 name|lt
 parameter_list|(
 name|BigDecimal
@@ -897,19 +883,6 @@ name|b1
 parameter_list|)
 block|{
 return|return
-operator|(
-name|b0
-operator|==
-literal|null
-operator|||
-name|b1
-operator|==
-literal|null
-operator|)
-condition|?
-literal|null
-else|:
-operator|(
 name|b0
 operator|.
 name|compareTo
@@ -918,7 +891,6 @@ name|b1
 argument_list|)
 operator|<
 literal|0
-operator|)
 return|;
 block|}
 comment|//<=
@@ -949,7 +921,7 @@ block|}
 comment|/** SQL&le; operator applied to String values. */
 specifier|public
 specifier|static
-name|Boolean
+name|boolean
 name|le
 parameter_list|(
 name|String
@@ -960,19 +932,6 @@ name|b1
 parameter_list|)
 block|{
 return|return
-operator|(
-name|b0
-operator|==
-literal|null
-operator|||
-name|b1
-operator|==
-literal|null
-operator|)
-condition|?
-literal|null
-else|:
-operator|(
 name|b0
 operator|.
 name|compareTo
@@ -981,13 +940,12 @@ name|b1
 argument_list|)
 operator|<=
 literal|0
-operator|)
 return|;
 block|}
 comment|/** SQL&le; operator applied to BigDecimal values. */
 specifier|public
 specifier|static
-name|Boolean
+name|boolean
 name|le
 parameter_list|(
 name|BigDecimal
@@ -998,19 +956,6 @@ name|b1
 parameter_list|)
 block|{
 return|return
-operator|(
-name|b0
-operator|==
-literal|null
-operator|||
-name|b1
-operator|==
-literal|null
-operator|)
-condition|?
-literal|null
-else|:
-operator|(
 name|b0
 operator|.
 name|compareTo
@@ -1019,7 +964,6 @@ name|b1
 argument_list|)
 operator|<=
 literal|0
-operator|)
 return|;
 block|}
 comment|//>
@@ -1050,7 +994,7 @@ block|}
 comment|/** SQL&gt; operator applied to String values. */
 specifier|public
 specifier|static
-name|Boolean
+name|boolean
 name|gt
 parameter_list|(
 name|String
@@ -1061,19 +1005,6 @@ name|b1
 parameter_list|)
 block|{
 return|return
-operator|(
-name|b0
-operator|==
-literal|null
-operator|||
-name|b1
-operator|==
-literal|null
-operator|)
-condition|?
-literal|null
-else|:
-operator|(
 name|b0
 operator|.
 name|compareTo
@@ -1082,13 +1013,12 @@ name|b1
 argument_list|)
 operator|>
 literal|0
-operator|)
 return|;
 block|}
 comment|/** SQL&gt; operator applied to BigDecimal values. */
 specifier|public
 specifier|static
-name|Boolean
+name|boolean
 name|gt
 parameter_list|(
 name|BigDecimal
@@ -1099,19 +1029,6 @@ name|b1
 parameter_list|)
 block|{
 return|return
-operator|(
-name|b0
-operator|==
-literal|null
-operator|||
-name|b1
-operator|==
-literal|null
-operator|)
-condition|?
-literal|null
-else|:
-operator|(
 name|b0
 operator|.
 name|compareTo
@@ -1120,7 +1037,6 @@ name|b1
 argument_list|)
 operator|>
 literal|0
-operator|)
 return|;
 block|}
 comment|//>=
@@ -1151,7 +1067,7 @@ block|}
 comment|/** SQL&ge; operator applied to String values. */
 specifier|public
 specifier|static
-name|Boolean
+name|boolean
 name|ge
 parameter_list|(
 name|String
@@ -1162,19 +1078,6 @@ name|b1
 parameter_list|)
 block|{
 return|return
-operator|(
-name|b0
-operator|==
-literal|null
-operator|||
-name|b1
-operator|==
-literal|null
-operator|)
-condition|?
-literal|null
-else|:
-operator|(
 name|b0
 operator|.
 name|compareTo
@@ -1183,13 +1086,12 @@ name|b1
 argument_list|)
 operator|>=
 literal|0
-operator|)
 return|;
 block|}
 comment|/** SQL&ge; operator applied to BigDecimal values. */
 specifier|public
 specifier|static
-name|Boolean
+name|boolean
 name|ge
 parameter_list|(
 name|BigDecimal
@@ -1200,19 +1102,6 @@ name|b1
 parameter_list|)
 block|{
 return|return
-operator|(
-name|b0
-operator|==
-literal|null
-operator|||
-name|b1
-operator|==
-literal|null
-operator|)
-condition|?
-literal|null
-else|:
-operator|(
 name|b0
 operator|.
 name|compareTo
@@ -1221,7 +1110,6 @@ name|b1
 argument_list|)
 operator|>=
 literal|0
-operator|)
 return|;
 block|}
 comment|// +

@@ -97,9 +97,6 @@ parameter_list|()
 block|{
 name|assertEquals
 argument_list|(
-operator|(
-name|Integer
-operator|)
 literal|3
 argument_list|,
 name|charLength

@@ -801,6 +801,15 @@ name|planner
 operator|.
 name|addRule
 argument_list|(
+name|ReduceAggregatesRule
+operator|.
+name|instance
+argument_list|)
+expr_stmt|;
+name|planner
+operator|.
+name|addRule
+argument_list|(
 name|SwapJoinRule
 operator|.
 name|instance

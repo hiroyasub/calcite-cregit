@@ -17794,14 +17794,6 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-operator|!
-name|enable
-condition|)
-block|{
-return|return;
-block|}
 name|getTester
 argument_list|()
 operator|.
@@ -17822,6 +17814,14 @@ argument_list|,
 literal|"DECIMAL(2, 1)"
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+operator|!
+name|enable
+condition|)
+block|{
+return|return;
+block|}
 specifier|final
 name|String
 index|[]

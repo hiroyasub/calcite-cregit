@@ -1039,9 +1039,7 @@ name|return_
 argument_list|(
 literal|null
 argument_list|,
-name|JavaRules
-operator|.
-name|EnumUtil
+name|Expressions
 operator|.
 name|foldAnd
 argument_list|(
