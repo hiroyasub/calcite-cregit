@@ -852,6 +852,15 @@ name|void
 name|testDummy
 parameter_list|()
 block|{
+name|checkCastToScalarOkay
+argument_list|(
+literal|"'1'"
+argument_list|,
+literal|"INTEGER"
+argument_list|,
+literal|"1"
+argument_list|)
+expr_stmt|;
 block|}
 specifier|public
 name|void
@@ -2472,14 +2481,6 @@ argument_list|,
 literal|"-999"
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-operator|!
-name|enable
-condition|)
-block|{
-return|return;
-block|}
 name|checkCastToScalarOkay
 argument_list|(
 literal|"'1'"
@@ -2516,6 +2517,63 @@ argument_list|,
 literal|"0"
 argument_list|)
 expr_stmt|;
+comment|// string to integer
+name|getTester
+argument_list|()
+operator|.
+name|checkScalarExact
+argument_list|(
+literal|"cast('6543' as integer)"
+argument_list|,
+literal|"6543"
+argument_list|)
+expr_stmt|;
+name|getTester
+argument_list|()
+operator|.
+name|checkScalarExact
+argument_list|(
+literal|"cast(' -123 ' as int)"
+argument_list|,
+literal|"-123"
+argument_list|)
+expr_stmt|;
+name|getTester
+argument_list|()
+operator|.
+name|checkScalarExact
+argument_list|(
+literal|"cast('654342432412312' as bigint)"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|,
+literal|"654342432412312"
+argument_list|)
+expr_stmt|;
+block|}
+specifier|public
+name|void
+name|testCastStringToDecimal
+parameter_list|()
+block|{
+name|getTester
+argument_list|()
+operator|.
+name|setFor
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|castFunc
+argument_list|)
+expr_stmt|;
+if|if
+condition|(
+operator|!
+name|DECIMAL
+condition|)
+block|{
+return|return;
+block|}
 comment|// string to decimal
 name|getTester
 argument_list|()
@@ -2601,47 +2659,30 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-comment|// string to integer
-name|getTester
-argument_list|()
-operator|.
-name|checkScalarExact
-argument_list|(
-literal|"cast('6543' as integer)"
-argument_list|,
-literal|"6543"
-argument_list|)
-expr_stmt|;
-if|if
-condition|(
-name|Bug
-operator|.
-name|Frg26Fixed
-condition|)
+block|}
+specifier|public
+name|void
+name|testCastIntervalToNumeric
+parameter_list|()
 block|{
 name|getTester
 argument_list|()
 operator|.
-name|checkScalarExact
+name|setFor
 argument_list|(
-literal|"cast(' -123 ' as int)"
-argument_list|,
-literal|"-123"
-argument_list|)
-expr_stmt|;
-block|}
-name|getTester
-argument_list|()
+name|SqlStdOperatorTable
 operator|.
-name|checkScalarExact
-argument_list|(
-literal|"cast('654342432412312' as bigint)"
-argument_list|,
-literal|"BIGINT NOT NULL"
-argument_list|,
-literal|"654342432412312"
+name|castFunc
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+operator|!
+name|INTERVAL
+condition|)
+block|{
+return|return;
+block|}
 comment|// interval to decimal
 name|getTester
 argument_list|()
@@ -3808,14 +3849,6 @@ argument_list|,
 literal|0
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-operator|!
-name|enable
-condition|)
-block|{
-return|return;
-block|}
 name|checkCastToApproxOkay
 argument_list|(
 literal|"-2.3"

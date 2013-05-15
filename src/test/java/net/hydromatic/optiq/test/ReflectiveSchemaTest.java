@@ -1188,9 +1188,9 @@ argument_list|)
 operator|.
 name|returns
 argument_list|(
-literal|"primitiveBoolean=false; primitiveByte=0; primitiveChar=\u0000; primitiveShort=0; primitiveInt=0; primitiveLong=0; primitiveFloat=0.0; primitiveDouble=0.0; wrapperBoolean=false; wrapperByte=0; wrapperCharacter=\u0000; wrapperShort=0; wrapperInteger=0; wrapperLong=0; wrapperFloat=0.0; wrapperDouble=0.0; sqlDate=1970-01-01; sqlTime=00:00:00; sqlTimestamp=1970-01-01T00:00:00Z; utilDate=1970-01-01T00:00:00Z\n"
+literal|"primitiveBoolean=false; primitiveByte=0; primitiveChar=\u0000; primitiveShort=0; primitiveInt=0; primitiveLong=0; primitiveFloat=0.0; primitiveDouble=0.0; wrapperBoolean=false; wrapperByte=0; wrapperCharacter=\u0000; wrapperShort=0; wrapperInteger=0; wrapperLong=0; wrapperFloat=0.0; wrapperDouble=0.0; sqlDate=1970-01-01; sqlTime=00:00:00; sqlTimestamp=1970-01-01T00:00:00Z; utilDate=1970-01-01T00:00:00Z; string=1\n"
 operator|+
-literal|"primitiveBoolean=true; primitiveByte=127; primitiveChar=\uffff; primitiveShort=32767; primitiveInt=2147483647; primitiveLong=9223372036854775807; primitiveFloat=3.4028235E38; primitiveDouble=1.7976931348623157E308; wrapperBoolean=null; wrapperByte=null; wrapperCharacter=null; wrapperShort=null; wrapperInteger=null; wrapperLong=null; wrapperFloat=null; wrapperDouble=null; sqlDate=null; sqlTime=null; sqlTimestamp=null; utilDate=null\n"
+literal|"primitiveBoolean=true; primitiveByte=127; primitiveChar=\uffff; primitiveShort=32767; primitiveInt=2147483647; primitiveLong=9223372036854775807; primitiveFloat=3.4028235E38; primitiveDouble=1.7976931348623157E308; wrapperBoolean=null; wrapperByte=null; wrapperCharacter=null; wrapperShort=null; wrapperInteger=null; wrapperLong=null; wrapperFloat=null; wrapperDouble=null; sqlDate=null; sqlTime=null; sqlTimestamp=null; utilDate=null; string=null\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -1550,6 +1550,38 @@ expr_stmt|;
 block|}
 block|}
 block|}
+specifier|public
+name|void
+name|testCastFromString
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|assertThat
+argument_list|()
+operator|.
+name|with
+argument_list|(
+literal|"s"
+argument_list|,
+operator|new
+name|CatchallSchema
+argument_list|()
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select cast(\"string\" as int) as c from \"s\".\"everyTypes\""
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"C=1\n"
+operator|+
+literal|"C=null\n"
+argument_list|)
+expr_stmt|;
+block|}
 specifier|private
 specifier|static
 name|boolean
@@ -1889,6 +1921,11 @@ name|Date
 name|utilDate
 decl_stmt|;
 specifier|public
+specifier|final
+name|String
+name|string
+decl_stmt|;
+specifier|public
 name|EveryType
 parameter_list|(
 name|boolean
@@ -1954,6 +1991,9 @@ name|sqlTimestamp
 parameter_list|,
 name|Date
 name|utilDate
+parameter_list|,
+name|String
+name|string
 parameter_list|)
 block|{
 name|this
@@ -2075,6 +2115,12 @@ operator|.
 name|utilDate
 operator|=
 name|utilDate
+expr_stmt|;
+name|this
+operator|.
+name|string
+operator|=
+name|string
 expr_stmt|;
 block|}
 specifier|static
@@ -2333,6 +2379,8 @@ name|Date
 argument_list|(
 literal|0
 argument_list|)
+argument_list|,
+literal|"1"
 argument_list|)
 block|,
 operator|new
@@ -2367,6 +2415,8 @@ argument_list|,
 name|Double
 operator|.
 name|MAX_VALUE
+argument_list|,
+literal|null
 argument_list|,
 literal|null
 argument_list|,
