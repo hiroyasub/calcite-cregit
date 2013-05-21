@@ -5313,10 +5313,9 @@ name|newLeftFieldNames
 operator|.
 name|add
 argument_list|(
-name|leftKey
-operator|.
-name|toString
-argument_list|()
+literal|"$left"
+operator|+
+name|newLeftKeyCount
 argument_list|)
 expr_stmt|;
 name|leftKeys
@@ -5478,10 +5477,9 @@ name|newRightFieldNames
 operator|.
 name|add
 argument_list|(
-name|rightKey
-operator|.
-name|toString
-argument_list|()
+literal|"$right"
+operator|+
+name|newRightKeyCount
 argument_list|)
 expr_stmt|;
 name|rightKeys

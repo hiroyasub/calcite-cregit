@@ -594,7 +594,11 @@ parameter_list|(
 specifier|final
 name|List
 argument_list|<
-name|Pair
+name|?
+extends|extends
+name|Map
+operator|.
+name|Entry
 argument_list|<
 name|K
 argument_list|,
@@ -628,7 +632,8 @@ argument_list|(
 name|index
 argument_list|)
 operator|.
-name|left
+name|getKey
+argument_list|()
 return|;
 block|}
 specifier|public
@@ -662,7 +667,11 @@ parameter_list|(
 specifier|final
 name|List
 argument_list|<
-name|Pair
+name|?
+extends|extends
+name|Map
+operator|.
+name|Entry
 argument_list|<
 name|K
 argument_list|,
@@ -696,7 +705,8 @@ argument_list|(
 name|index
 argument_list|)
 operator|.
-name|right
+name|getValue
+argument_list|()
 return|;
 block|}
 specifier|public
