@@ -36,23 +36,6 @@ name|Dt239Fixed
 init|=
 literal|false
 decl_stmt|;
-comment|/**      * Window Rank functions are supported through the validator but not      * implenmented by calculator. Disable tests and modified SqlRankFunction to      * return "Unknown Function".      */
-specifier|public
-specifier|static
-specifier|final
-name|boolean
-name|Dt561Fixed
-init|=
-literal|false
-decl_stmt|;
-specifier|public
-specifier|static
-specifier|final
-name|boolean
-name|Dt591Fixed
-init|=
-literal|false
-decl_stmt|;
 specifier|public
 specifier|static
 specifier|final
@@ -117,15 +100,6 @@ name|Dt1684Fixed
 init|=
 literal|false
 decl_stmt|;
-comment|/**      * Whether dtbug1684 "Integration issues" is fixed.      */
-specifier|public
-specifier|static
-specifier|final
-name|boolean
-name|Dt1847Fixed
-init|=
-literal|false
-decl_stmt|;
 comment|// kkrueger
 comment|// mberkowitz
 comment|// murali
@@ -144,28 +118,10 @@ name|Fnl25Fixed
 init|=
 literal|false
 decl_stmt|;
-comment|/**      * Whether<a href="http://issues.eigenbase.org/browse/FNL-54">issue FNL-54:      * cast time to timestamp should initialize date to current_date</a> is      * fixed.      */
-specifier|public
-specifier|static
-specifier|final
-name|boolean
-name|Fnl54Fixed
-init|=
-literal|false
-decl_stmt|;
 comment|// johnk
 comment|// jouellette
 comment|// jpham
 comment|// jvs
-comment|/**      * Whether<a href="http://issues.eigenbase.org/browse/FRG-26">issue      * FRG-26</a> is fixed.      */
-specifier|public
-specifier|static
-specifier|final
-name|boolean
-name|Frg26Fixed
-init|=
-literal|false
-decl_stmt|;
 comment|/**      * Whether<a href="http://issues.eigenbase.org/browse/FRG-73">issue FRG-73:      * miscellaneous bugs with nested comments</a> is fixed.      */
 specifier|public
 specifier|static
@@ -181,15 +137,6 @@ specifier|static
 specifier|final
 name|boolean
 name|Frg78Fixed
-init|=
-literal|false
-decl_stmt|;
-comment|/**      * Whether<a href="http://issues.eigenbase.org/browse/FRG-103">issue      * FRG-103: validator allows duplicate target columns in insert</a> is      * fixed.      */
-specifier|public
-specifier|static
-specifier|final
-name|boolean
-name|Frg103Fixed
 init|=
 literal|false
 decl_stmt|;
@@ -277,7 +224,7 @@ specifier|final
 name|boolean
 name|Frg378Fixed
 init|=
-literal|false
+literal|true
 decl_stmt|;
 comment|/** Temporary. */
 specifier|public

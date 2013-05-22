@@ -11967,14 +11967,6 @@ argument_list|,
 name|VM_EXPAND
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-operator|!
-name|enable
-condition|)
-block|{
-return|return;
-block|}
 name|getTester
 argument_list|()
 operator|.
@@ -12003,14 +11995,6 @@ operator|.
 name|likeOperator
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-operator|!
-name|enable
-condition|)
-block|{
-return|return;
-block|}
 name|getTester
 argument_list|()
 operator|.
@@ -12209,14 +12193,6 @@ argument_list|,
 name|VM_EXPAND
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-operator|!
-name|enable
-condition|)
-block|{
-return|return;
-block|}
 name|getTester
 argument_list|()
 operator|.
@@ -12293,14 +12269,6 @@ operator|.
 name|similarOperator
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-operator|!
-name|enable
-condition|)
-block|{
-return|return;
-block|}
 comment|// like LIKE
 name|getTester
 argument_list|()
@@ -13256,17 +13224,6 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-comment|// all the following tests wrong results due to missing functionality
-comment|// or defect (FRG-375, 377& 378).
-if|if
-condition|(
-name|Bug
-operator|.
-name|Frg378Fixed
-condition|)
-block|{
-comment|// following 2 tests have different behavior under javaVM
-comment|// and fennelVM. FennelVM throws exception.
 name|getTester
 argument_list|()
 operator|.
@@ -13293,8 +13250,36 @@ argument_list|)
 expr_stmt|;
 comment|// The following two tests throws exception(They probably should).
 comment|// "Dangling meta character '*' near index 2"
-comment|//getTester().checkBoolean("'y' similar to 'x+*y'", Boolean.TRUE);
-comment|//getTester().checkBoolean("'y' similar to 'x?*y'", Boolean.TRUE);
+if|if
+condition|(
+name|enable
+condition|)
+block|{
+name|getTester
+argument_list|()
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"'y' similar to 'x+*y'"
+argument_list|,
+name|Boolean
+operator|.
+name|TRUE
+argument_list|)
+expr_stmt|;
+name|getTester
+argument_list|()
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"'y' similar to 'x?*y'"
+argument_list|,
+name|Boolean
+operator|.
+name|TRUE
+argument_list|)
+expr_stmt|;
+block|}
 comment|// some negative tests
 name|getTester
 argument_list|()
@@ -13303,13 +13288,9 @@ name|checkFails
 argument_list|(
 literal|"'yd' similar to '[x-ze-a]d'"
 argument_list|,
-literal|"Illegal character range near index 6"
+literal|"Illegal character range near index 6\n"
 operator|+
-name|NL
-operator|+
-literal|"\\[x-ze-a\\]d"
-operator|+
-name|NL
+literal|"\\[x-ze-a\\]d\n"
 operator|+
 literal|"      \\^"
 argument_list|,
@@ -13324,13 +13305,9 @@ name|checkFails
 argument_list|(
 literal|"'yd3223' similar to '[:LOWER:]{2}[:DIGIT:]{,5}'"
 argument_list|,
-literal|"Illegal repetition near index 20"
+literal|"Illegal repetition near index 20\n"
 operator|+
-name|NL
-operator|+
-literal|"\\[\\:LOWER\\:\\]\\{2\\}\\[\\:DIGIT\\:\\]\\{,5\\}"
-operator|+
-name|NL
+literal|"\\[\\:LOWER\\:\\]\\{2\\}\\[\\:DIGIT\\:\\]\\{,5\\}\n"
 operator|+
 literal|"                    \\^"
 argument_list|,
@@ -13361,7 +13338,8 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-block|}
+comment|// all the following tests wrong results due to missing functionality
+comment|// or defect (FRG-375, 377).
 if|if
 condition|(
 name|Bug
