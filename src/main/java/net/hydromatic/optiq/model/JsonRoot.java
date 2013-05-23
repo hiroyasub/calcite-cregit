@@ -59,6 +59,10 @@ name|String
 name|version
 decl_stmt|;
 specifier|public
+name|String
+name|defaultSchema
+decl_stmt|;
+specifier|public
 specifier|final
 name|List
 argument_list|<

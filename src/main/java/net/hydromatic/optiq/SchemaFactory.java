@@ -10,8 +10,6 @@ operator|.
 name|hydromatic
 operator|.
 name|optiq
-operator|.
-name|model
 package|;
 end_package
 
@@ -26,23 +24,24 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Custom table schema element.  *  * @see JsonRoot Description of schema elements  */
+comment|/**  * Factory for {@link net.hydromatic.optiq.Schema} objects.  *  *<p>A class that implements SchemaFactory specified in a schema must have a  * public default constructor.</p>  */
 end_comment
 
-begin_class
+begin_interface
 specifier|public
-class|class
-name|JsonCustomTable
-extends|extends
-name|JsonTable
+interface|interface
+name|SchemaFactory
 block|{
-comment|/** Name of the factory class for this table. Must implement interface      * {@link net.hydromatic.optiq.TableFactory} and have a public default      * constructor. */
-specifier|public
+comment|/** Creates a Schema.      *      *<p>The implementation must register the schema in the parent schema,      * by calling {@link MutableSchema#addSchema(String, Schema)}.</p>      *      * @param schema Parent schema      * @param name Name of this schema      * @param operand The "operand" JSON property      */
+name|Schema
+name|create
+parameter_list|(
+name|MutableSchema
+name|schema
+parameter_list|,
 name|String
-name|factory
-decl_stmt|;
-comment|/** Operand. May be a JSON object (represented as Map) or null. */
-specifier|public
+name|name
+parameter_list|,
 name|Map
 argument_list|<
 name|String
@@ -50,28 +49,13 @@ argument_list|,
 name|Object
 argument_list|>
 name|operand
-decl_stmt|;
-specifier|public
-name|void
-name|accept
-parameter_list|(
-name|ModelHandler
-name|handler
 parameter_list|)
-block|{
-name|handler
-operator|.
-name|visit
-argument_list|(
-name|this
-argument_list|)
-expr_stmt|;
+function_decl|;
 block|}
-block|}
-end_class
+end_interface
 
 begin_comment
-comment|// End JsonCustomTable.java
+comment|// End SchemaFactory.java
 end_comment
 
 end_unit

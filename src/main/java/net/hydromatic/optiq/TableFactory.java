@@ -41,6 +41,16 @@ name|RelDataType
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Map
+import|;
+end_import
+
 begin_comment
 comment|/**  * Factory for {@link Table} objects.  *  *<p>A class that implements TableFactory specified in a schema must have a  * public default constructor.</p>  */
 end_comment
@@ -55,7 +65,7 @@ extends|extends
 name|Table
 parameter_list|>
 block|{
-comment|/** Creates a Table.      *      * @param typeFactory Type factory      * @param schema Schema this table belongs to      * @param name Name of this table      * @param rowType Row type. Specified if the "columns" JSON property.      * @param operand The "operand" JSON property      */
+comment|/** Creates a Table.      *      * @param typeFactory Type factory      * @param schema Schema this table belongs to      * @param name Name of this table      * @param operand The "operand" JSON property      * @param rowType Row type. Specified if the "columns" JSON property.      */
 name|T
 name|create
 parameter_list|(
@@ -68,7 +78,12 @@ parameter_list|,
 name|String
 name|name
 parameter_list|,
+name|Map
+argument_list|<
+name|String
+argument_list|,
 name|Object
+argument_list|>
 name|operand
 parameter_list|,
 name|RelDataType

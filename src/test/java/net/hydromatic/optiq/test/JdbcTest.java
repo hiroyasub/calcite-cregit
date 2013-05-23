@@ -105,6 +105,20 @@ name|optiq
 operator|.
 name|impl
 operator|.
+name|TableInSchemaImpl
+import|;
+end_import
+
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|optiq
+operator|.
+name|impl
+operator|.
 name|clone
 operator|.
 name|CloneSchema
@@ -3039,7 +3053,7 @@ block|}
 comment|/** Tests a JDBC connection that provides a model that contains custom      * tables. */
 specifier|public
 name|void
-name|testModelCustom
+name|testModelCustomTable
 parameter_list|()
 block|{
 name|OptiqAssert
@@ -3069,7 +3083,7 @@ literal|"           type: 'custom',\n"
 operator|+
 literal|"           factory: '"
 operator|+
-name|EmpDeptFactory
+name|EmpDeptTableFactory
 operator|.
 name|class
 operator|.
@@ -3078,7 +3092,7 @@ argument_list|()
 operator|+
 literal|"',\n"
 operator|+
-literal|"           operand: ['foo', 'bar', 345]\n"
+literal|"           operand: {'foo': 1, 'bar': [345, 357] }\n"
 operator|+
 literal|"         }\n"
 operator|+
@@ -3101,6 +3115,150 @@ argument_list|(
 literal|"empid=100; deptno=10; name=Bill; commission=1000\n"
 operator|+
 literal|"empid=150; deptno=10; name=Sebastian; commission=null\n"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests a JDBC connection that provides a model that contains a custom      * schema. */
+specifier|public
+name|void
+name|testModelCustomSchema
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|OptiqAssert
+operator|.
+name|AssertThat
+name|that
+init|=
+name|OptiqAssert
+operator|.
+name|assertThat
+argument_list|()
+operator|.
+name|withModel
+argument_list|(
+literal|"{\n"
+operator|+
+literal|"  version: '1.0',\n"
+operator|+
+literal|"  defaultSchema: 'adhoc',\n"
+operator|+
+literal|"  schemas: [\n"
+operator|+
+literal|"    {\n"
+operator|+
+literal|"      name: 'empty'\n"
+operator|+
+literal|"    },\n"
+operator|+
+literal|"    {\n"
+operator|+
+literal|"      name: 'adhoc',\n"
+operator|+
+literal|"      type: 'custom',\n"
+operator|+
+literal|"      factory: '"
+operator|+
+name|MySchemaFactory
+operator|.
+name|class
+operator|.
+name|getName
+argument_list|()
+operator|+
+literal|"',\n"
+operator|+
+literal|"      operand: {'tableName': 'ELVIS'}\n"
+operator|+
+literal|"    }\n"
+operator|+
+literal|"  ]\n"
+operator|+
+literal|"}"
+argument_list|)
+decl_stmt|;
+comment|// check that the specified 'defaultSchema' was used
+name|that
+operator|.
+name|doWithConnection
+argument_list|(
+operator|new
+name|Function1
+argument_list|<
+name|OptiqConnection
+argument_list|,
+name|Object
+argument_list|>
+argument_list|()
+block|{
+specifier|public
+name|Object
+name|apply
+parameter_list|(
+name|OptiqConnection
+name|connection
+parameter_list|)
+block|{
+try|try
+block|{
+name|assertEquals
+argument_list|(
+literal|"adhoc"
+argument_list|,
+name|connection
+operator|.
+name|getSchema
+argument_list|()
+argument_list|)
+expr_stmt|;
+return|return
+literal|null
+return|;
+block|}
+catch|catch
+parameter_list|(
+name|SQLException
+name|e
+parameter_list|)
+block|{
+throw|throw
+operator|new
+name|RuntimeException
+argument_list|(
+name|e
+argument_list|)
+throw|;
+block|}
+block|}
+block|}
+argument_list|)
+expr_stmt|;
+name|that
+operator|.
+name|query
+argument_list|(
+literal|"select * from \"adhoc\".ELVIS where \"deptno\" = 10"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"empid=100; deptno=10; name=Bill; commission=1000\n"
+operator|+
+literal|"empid=150; deptno=10; name=Sebastian; commission=null\n"
+argument_list|)
+expr_stmt|;
+name|that
+operator|.
+name|query
+argument_list|(
+literal|"select * from \"adhoc\".EMPLOYEES"
+argument_list|)
+operator|.
+name|throws_
+argument_list|(
+literal|"Table 'adhoc.EMPLOYEES' not found"
 argument_list|)
 expr_stmt|;
 block|}
@@ -3137,7 +3295,7 @@ literal|"           type: 'custom',\n"
 operator|+
 literal|"           factory: '"
 operator|+
-name|EmpDeptFactory
+name|EmpDeptTableFactory
 operator|.
 name|class
 operator|.
@@ -3146,7 +3304,7 @@ argument_list|()
 operator|+
 literal|"',\n"
 operator|+
-literal|"           operand: ['foo', 'bar', 345]\n"
+literal|"           operand: {'foo': true, 'bar': 345}\n"
 operator|+
 literal|"         },\n"
 operator|+
@@ -4153,9 +4311,12 @@ block|}
 specifier|public
 specifier|static
 class|class
-name|EmpDeptFactory
+name|EmpDeptTableFactory
 implements|implements
 name|TableFactory
+argument_list|<
+name|Table
+argument_list|>
 block|{
 specifier|public
 name|Table
@@ -4170,7 +4331,12 @@ parameter_list|,
 name|String
 name|name
 parameter_list|,
+name|Map
+argument_list|<
+name|String
+argument_list|,
 name|Object
+argument_list|>
 name|operand
 parameter_list|,
 name|RelDataType
@@ -4266,6 +4432,136 @@ argument_list|)
 return|;
 block|}
 block|}
+return|;
+block|}
+block|}
+specifier|public
+specifier|static
+class|class
+name|MySchemaFactory
+implements|implements
+name|SchemaFactory
+block|{
+specifier|public
+name|Schema
+name|create
+parameter_list|(
+name|MutableSchema
+name|parentSchema
+parameter_list|,
+name|String
+name|name
+parameter_list|,
+name|Map
+argument_list|<
+name|String
+argument_list|,
+name|Object
+argument_list|>
+name|operand
+parameter_list|)
+block|{
+specifier|final
+name|OptiqConnection
+name|connection
+init|=
+operator|(
+name|OptiqConnection
+operator|)
+name|parentSchema
+operator|.
+name|getQueryProvider
+argument_list|()
+decl_stmt|;
+specifier|final
+name|MapSchema
+name|schema
+init|=
+name|MapSchema
+operator|.
+name|create
+argument_list|(
+name|connection
+argument_list|,
+name|parentSchema
+argument_list|,
+name|name
+argument_list|)
+decl_stmt|;
+comment|// create an HR schema and mine its "emps" table
+specifier|final
+name|Schema
+name|hrSchema
+init|=
+name|ReflectiveSchema
+operator|.
+name|create
+argument_list|(
+name|connection
+argument_list|,
+name|connection
+operator|.
+name|getRootSchema
+argument_list|()
+argument_list|,
+literal|"hr"
+argument_list|,
+operator|new
+name|HrSchema
+argument_list|()
+argument_list|)
+decl_stmt|;
+specifier|final
+name|Table
+name|table
+init|=
+name|hrSchema
+operator|.
+name|getTable
+argument_list|(
+literal|"emps"
+argument_list|,
+name|Object
+operator|.
+name|class
+argument_list|)
+decl_stmt|;
+name|String
+name|tableName
+init|=
+operator|(
+name|String
+operator|)
+name|operand
+operator|.
+name|get
+argument_list|(
+literal|"tableName"
+argument_list|)
+decl_stmt|;
+name|schema
+operator|.
+name|addTable
+argument_list|(
+operator|new
+name|TableInSchemaImpl
+argument_list|(
+name|schema
+argument_list|,
+name|tableName
+argument_list|,
+name|Schema
+operator|.
+name|TableType
+operator|.
+name|TABLE
+argument_list|,
+name|table
+argument_list|)
+argument_list|)
+expr_stmt|;
+return|return
+name|schema
 return|;
 block|}
 block|}

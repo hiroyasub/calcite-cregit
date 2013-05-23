@@ -26,17 +26,17 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Custom table schema element.  *  * @see JsonRoot Description of schema elements  */
+comment|/**  * JSON schema element that represents a custom schema.  *  * @see net.hydromatic.optiq.model.JsonRoot Description of schema elements  */
 end_comment
 
 begin_class
 specifier|public
 class|class
-name|JsonCustomTable
+name|JsonCustomSchema
 extends|extends
-name|JsonTable
+name|JsonSchema
 block|{
-comment|/** Name of the factory class for this table. Must implement interface      * {@link net.hydromatic.optiq.TableFactory} and have a public default      * constructor. */
+comment|/** Name of the factory class for this schema. Must implement interface      * {@link net.hydromatic.optiq.SchemaFactory} and have a public default      * constructor. */
 specifier|public
 name|String
 name|factory
@@ -71,7 +71,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End JsonCustomTable.java
+comment|// End JsonCustomSchema.java
 end_comment
 
 end_unit
