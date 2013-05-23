@@ -4200,6 +4200,12 @@ case|:
 case|case
 name|GreaterThanOrEqual
 case|:
+case|case
+name|AndAlso
+case|:
+case|case
+name|OrElse
+case|:
 name|type
 operator|=
 name|Boolean
