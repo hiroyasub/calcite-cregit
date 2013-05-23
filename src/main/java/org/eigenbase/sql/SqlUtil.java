@@ -2783,15 +2783,9 @@ condition|)
 block|{
 name|collation
 operator|=
-operator|new
-name|SqlCollation
-argument_list|(
 name|SqlCollation
 operator|.
-name|Coercibility
-operator|.
-name|Coercible
-argument_list|)
+name|COERCIBLE
 expr_stmt|;
 block|}
 name|RelDataType

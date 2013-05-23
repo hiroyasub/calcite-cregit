@@ -2681,6 +2681,41 @@ literal|"empid=100; deptno=10; name=Bill; commission=1000\n"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Tests the LIKE operator. */
+specifier|public
+name|void
+name|testLike
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|assertThat
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select * from \"hr\".\"emps\"\n"
+operator|+
+literal|"where \"name\" like '%i__'"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"empid=100; deptno=10; name=Bill; commission=1000\n"
+operator|+
+literal|"empid=150; deptno=10; name=Sebastian; commission=null\n"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Tests array index. */
 specifier|public
 name|void

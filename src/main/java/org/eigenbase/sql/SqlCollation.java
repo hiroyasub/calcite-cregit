@@ -94,6 +94,34 @@ name|SqlCollation
 implements|implements
 name|Serializable
 block|{
+specifier|public
+specifier|static
+specifier|final
+name|SqlCollation
+name|COERCIBLE
+init|=
+operator|new
+name|SqlCollation
+argument_list|(
+name|Coercibility
+operator|.
+name|Coercible
+argument_list|)
+decl_stmt|;
+specifier|public
+specifier|static
+specifier|final
+name|SqlCollation
+name|IMPLICIT
+init|=
+operator|new
+name|SqlCollation
+argument_list|(
+name|Coercibility
+operator|.
+name|Implicit
+argument_list|)
+decl_stmt|;
 comment|//~ Enums ------------------------------------------------------------------
 comment|/**      *<blockquote>A&lt;character value expression&gt; consisting of a column      * reference has the coercibility characteristic Implicit, with collating      * sequence as defined when the column was created. A&lt;character value      * expression&gt; consisting of a value other than a column (e.g., a host      * variable or a literal) has the coercibility characteristic Coercible,      * with the default collation for its character repertoire. A&lt;character      * value expression&gt; simply containing a&lt;collate clause&gt; has the      * coercibility characteristic Explicit, with the collating sequence      * specified in the&lt;collate clause&gt;.</blockquote>      *      * @sql.99 Part 2 Section 4.2.3      */
 specifier|public

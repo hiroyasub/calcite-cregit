@@ -3875,15 +3875,9 @@ condition|)
 block|{
 name|collation
 operator|=
-operator|new
-name|SqlCollation
-argument_list|(
 name|SqlCollation
 operator|.
-name|Coercibility
-operator|.
-name|Implicit
-argument_list|)
+name|IMPLICIT
 expr_stmt|;
 block|}
 comment|// todo: should get the implicit collation from repository

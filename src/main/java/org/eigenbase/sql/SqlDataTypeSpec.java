@@ -907,7 +907,7 @@ operator|.
 name|getSimple
 argument_list|()
 decl_stmt|;
-comment|//for now we only support builtin datatypes
+comment|// for now we only support builtin datatypes
 if|if
 condition|(
 name|SqlTypeName
@@ -1149,15 +1149,9 @@ comment|// specification> has the Coercible coercibility characteristic."
 name|SqlCollation
 name|collation
 init|=
-operator|new
-name|SqlCollation
-argument_list|(
 name|SqlCollation
 operator|.
-name|Coercibility
-operator|.
-name|Coercible
-argument_list|)
+name|COERCIBLE
 decl_stmt|;
 name|Charset
 name|charset
