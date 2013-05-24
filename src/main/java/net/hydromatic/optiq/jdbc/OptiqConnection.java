@@ -123,6 +123,13 @@ parameter_list|)
 throws|throws
 name|SQLException
 function_decl|;
+comment|// in java.sql.Connection from JDK 1.7, but declare here to allow other JDKs
+name|String
+name|getSchema
+parameter_list|()
+throws|throws
+name|SQLException
+function_decl|;
 block|}
 end_interface
 
