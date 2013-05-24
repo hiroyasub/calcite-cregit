@@ -60,6 +60,12 @@ name|CsvSchemaFactory
 implements|implements
 name|SchemaFactory
 block|{
+comment|// public constructor, per factory contract
+specifier|public
+name|CsvSchemaFactory
+parameter_list|()
+block|{
+block|}
 specifier|public
 name|Schema
 name|create
