@@ -54,6 +54,11 @@ comment|/**  * Factory that creates a {@link CsvSchema}.  *  *<p>Allows a custom
 end_comment
 
 begin_class
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"UnusedDeclaration"
+argument_list|)
 specifier|public
 class|class
 name|CsvSchemaFactory
@@ -106,6 +111,19 @@ argument_list|(
 literal|"directory"
 argument_list|)
 decl_stmt|;
+name|Boolean
+name|smart
+init|=
+operator|(
+name|Boolean
+operator|)
+name|map
+operator|.
+name|get
+argument_list|(
+literal|"smart"
+argument_list|)
+decl_stmt|;
 specifier|final
 name|CsvSchema
 name|schema
@@ -131,6 +149,12 @@ name|CsvSchema
 operator|.
 name|class
 argument_list|)
+argument_list|,
+name|smart
+operator|!=
+literal|null
+operator|&&
+name|smart
 argument_list|)
 decl_stmt|;
 name|parentSchema
