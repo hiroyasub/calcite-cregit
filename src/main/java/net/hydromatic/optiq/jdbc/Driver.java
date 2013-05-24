@@ -95,9 +95,24 @@ name|createDriverVersion
 parameter_list|()
 block|{
 return|return
-operator|new
-name|OptiqDriverVersion
-argument_list|()
+name|DriverVersion
+operator|.
+name|load
+argument_list|(
+name|Driver
+operator|.
+name|class
+argument_list|,
+literal|"net-hydromatic-optiq-jdbc.properties"
+argument_list|,
+literal|"Optiq JDBC Driver"
+argument_list|,
+literal|"unknown version"
+argument_list|,
+literal|"Optiq"
+argument_list|,
+literal|"unknown version"
+argument_list|)
 return|;
 block|}
 annotation|@
