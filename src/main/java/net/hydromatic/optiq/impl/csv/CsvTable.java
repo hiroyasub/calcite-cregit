@@ -207,7 +207,7 @@ argument_list|>
 block|{
 specifier|private
 specifier|final
-name|CsvSchema
+name|Schema
 name|schema
 decl_stmt|;
 specifier|private
@@ -236,7 +236,7 @@ decl_stmt|;
 comment|/** Creates a CsvTable. */
 name|CsvTable
 parameter_list|(
-name|CsvSchema
+name|Schema
 name|schema
 parameter_list|,
 name|String

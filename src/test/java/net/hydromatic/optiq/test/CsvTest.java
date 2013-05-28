@@ -196,6 +196,23 @@ block|{
 name|checkSql
 argument_list|(
 literal|"select * from EMPS"
+argument_list|,
+literal|"model"
+argument_list|)
+expr_stmt|;
+block|}
+specifier|public
+name|void
+name|testCustomTable
+parameter_list|()
+throws|throws
+name|SQLException
+block|{
+name|checkSql
+argument_list|(
+literal|"select * from CUSTOM_TABLE.EMPS"
+argument_list|,
+literal|"model-with-custom-table"
 argument_list|)
 expr_stmt|;
 block|}
@@ -205,6 +222,9 @@ name|checkSql
 parameter_list|(
 name|String
 name|sql
+parameter_list|,
+name|String
+name|model
 parameter_list|)
 throws|throws
 name|SQLException
@@ -234,7 +254,11 @@ name|put
 argument_list|(
 literal|"model"
 argument_list|,
-literal|"target/test-classes/model.json"
+literal|"target/test-classes/"
+operator|+
+name|model
+operator|+
+literal|".json"
 argument_list|)
 expr_stmt|;
 name|connection
