@@ -71,20 +71,6 @@ end_import
 
 begin_import
 import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|optiq
-operator|.
-name|jdbc
-operator|.
-name|OptiqConnection
-import|;
-end_import
-
-begin_import
-import|import
 name|org
 operator|.
 name|eigenbase
@@ -272,15 +258,7 @@ operator|.
 name|getQueryProvider
 argument_list|()
 argument_list|,
-operator|(
-operator|(
-name|OptiqConnection
-operator|)
 name|parentSchema
-operator|.
-name|getQueryProvider
-argument_list|()
-operator|)
 operator|.
 name|getTypeFactory
 argument_list|()
@@ -289,15 +267,12 @@ name|expression
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Creates a MapSchema within another schema.      *      * @param optiqConnection Connection to Optiq (also a query provider)      * @param parentSchema Parent schema      * @param name Name of new schema      * @return New MapSchema      */
+comment|/**      * Creates a MapSchema within another schema.      *      * @param parentSchema Parent schema      * @param name Name of new schema      * @return New MapSchema      */
 specifier|public
 specifier|static
 name|MapSchema
 name|create
 parameter_list|(
-name|OptiqConnection
-name|optiqConnection
-parameter_list|,
 name|MutableSchema
 name|parentSchema
 parameter_list|,
@@ -311,9 +286,12 @@ init|=
 operator|new
 name|MapSchema
 argument_list|(
-name|optiqConnection
+name|parentSchema
+operator|.
+name|getQueryProvider
+argument_list|()
 argument_list|,
-name|optiqConnection
+name|parentSchema
 operator|.
 name|getTypeFactory
 argument_list|()
@@ -370,6 +348,15 @@ name|tableInSchema
 argument_list|)
 expr_stmt|;
 block|}
+block|}
+specifier|public
+name|JavaTypeFactory
+name|getTypeFactory
+parameter_list|()
+block|{
+return|return
+name|typeFactory
+return|;
 block|}
 specifier|public
 name|Expression

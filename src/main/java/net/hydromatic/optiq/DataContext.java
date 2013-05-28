@@ -25,8 +25,24 @@ name|Queryable
 import|;
 end_import
 
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|optiq
+operator|.
+name|impl
+operator|.
+name|java
+operator|.
+name|JavaTypeFactory
+import|;
+end_import
+
 begin_comment
-comment|/**  * Runtime context allowing access to the tables in a database.  *  * @author jhyde  */
+comment|/**  * Runtime context allowing access to the tables in a database.  */
 end_comment
 
 begin_interface
@@ -34,6 +50,7 @@ specifier|public
 interface|interface
 name|DataContext
 block|{
+comment|/**      * Returns a table with a given name and element type, or null if not found.      */
 parameter_list|<
 name|T
 parameter_list|>
@@ -60,6 +77,11 @@ parameter_list|(
 name|String
 name|name
 parameter_list|)
+function_decl|;
+comment|/**      * Returns the type factory.      */
+name|JavaTypeFactory
+name|getTypeFactory
+parameter_list|()
 function_decl|;
 block|}
 end_interface

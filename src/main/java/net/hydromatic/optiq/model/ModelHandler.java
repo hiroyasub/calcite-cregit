@@ -488,8 +488,6 @@ name|MapSchema
 operator|.
 name|create
 argument_list|(
-name|connection
-argument_list|,
 name|parentSchema
 argument_list|,
 name|jsonSchema
@@ -705,8 +703,6 @@ name|JdbcSchema
 operator|.
 name|create
 argument_list|(
-name|connection
-argument_list|,
 name|currentMutableSchema
 argument_list|(
 literal|"jdbc schema"
@@ -927,11 +923,6 @@ name|tableFactory
 operator|.
 name|create
 argument_list|(
-name|connection
-operator|.
-name|getTypeFactory
-argument_list|()
-argument_list|,
 name|schema
 argument_list|,
 name|jsonTable

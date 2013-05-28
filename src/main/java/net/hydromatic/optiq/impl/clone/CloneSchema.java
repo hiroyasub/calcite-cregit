@@ -103,20 +103,6 @@ end_import
 
 begin_import
 import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|optiq
-operator|.
-name|jdbc
-operator|.
-name|OptiqConnection
-import|;
-end_import
-
-begin_import
-import|import
 name|java
 operator|.
 name|util
@@ -394,15 +380,12 @@ name|sortField
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates a CloneSchema within another schema.      *      * @param optiqConnection Connection to Optiq (also a query provider)      * @param parentSchema Parent schema      * @param name Name of new schema      * @param sourceSchema Source schema      * @return New CloneSchema      */
+comment|/**      * Creates a CloneSchema within another schema.      *      * @param parentSchema Parent schema      * @param name Name of new schema      * @param sourceSchema Source schema      * @return New CloneSchema      */
 specifier|public
 specifier|static
 name|CloneSchema
 name|create
 parameter_list|(
-name|OptiqConnection
-name|optiqConnection
-parameter_list|,
 name|MutableSchema
 name|parentSchema
 parameter_list|,
@@ -419,9 +402,12 @@ init|=
 operator|new
 name|CloneSchema
 argument_list|(
-name|optiqConnection
+name|parentSchema
+operator|.
+name|getQueryProvider
+argument_list|()
 argument_list|,
-name|optiqConnection
+name|parentSchema
 operator|.
 name|getTypeFactory
 argument_list|()
@@ -480,18 +466,6 @@ argument_list|>
 name|operand
 parameter_list|)
 block|{
-specifier|final
-name|OptiqConnection
-name|connection
-init|=
-operator|(
-name|OptiqConnection
-operator|)
-name|parentSchema
-operator|.
-name|getQueryProvider
-argument_list|()
-decl_stmt|;
 name|JdbcSchema
 name|jdbcSchema
 init|=
@@ -499,8 +473,6 @@ name|JdbcSchema
 operator|.
 name|create
 argument_list|(
-name|connection
-argument_list|,
 name|parentSchema
 argument_list|,
 name|name
@@ -515,8 +487,6 @@ name|CloneSchema
 operator|.
 name|create
 argument_list|(
-name|connection
-argument_list|,
 name|parentSchema
 argument_list|,
 name|name

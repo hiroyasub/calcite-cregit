@@ -15,22 +15,6 @@ end_package
 
 begin_import
 import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|optiq
-operator|.
-name|impl
-operator|.
-name|java
-operator|.
-name|JavaTypeFactory
-import|;
-end_import
-
-begin_import
-import|import
 name|org
 operator|.
 name|eigenbase
@@ -65,13 +49,10 @@ extends|extends
 name|Table
 parameter_list|>
 block|{
-comment|/** Creates a Table.      *      * @param typeFactory Type factory      * @param schema Schema this table belongs to      * @param name Name of this table      * @param operand The "operand" JSON property      * @param rowType Row type. Specified if the "columns" JSON property.      */
+comment|/** Creates a Table.      *      * @param schema Schema this table belongs to      * @param name Name of this table      * @param operand The "operand" JSON property      * @param rowType Row type. Specified if the "columns" JSON property.      */
 name|T
 name|create
 parameter_list|(
-name|JavaTypeFactory
-name|typeFactory
-parameter_list|,
 name|Schema
 name|schema
 parameter_list|,

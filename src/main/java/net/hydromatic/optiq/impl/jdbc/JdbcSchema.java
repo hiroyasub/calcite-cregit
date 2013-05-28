@@ -73,20 +73,6 @@ end_import
 
 begin_import
 import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|optiq
-operator|.
-name|jdbc
-operator|.
-name|OptiqConnection
-import|;
-end_import
-
-begin_import
-import|import
 name|org
 operator|.
 name|eigenbase
@@ -316,15 +302,12 @@ operator|!=
 literal|null
 assert|;
 block|}
-comment|/**      * Creates a JdbcSchema within another schema.      *      * @param optiqConnection Connection to Optiq (also a query provider)      * @param parentSchema Parent schema      * @param dataSource Data source      * @param jdbcCatalog Catalog name, or null      * @param jdbcSchema Schema name pattern      * @param name Name of new schema      * @return New JdbcSchema      */
+comment|/**      * Creates a JdbcSchema within another schema.      *      * @param parentSchema Parent schema      * @param dataSource Data source      * @param jdbcCatalog Catalog name, or null      * @param jdbcSchema Schema name pattern      * @param name Name of new schema      * @return New JdbcSchema      */
 specifier|public
 specifier|static
 name|JdbcSchema
 name|create
 parameter_list|(
-name|OptiqConnection
-name|optiqConnection
-parameter_list|,
 name|MutableSchema
 name|parentSchema
 parameter_list|,
@@ -347,7 +330,10 @@ init|=
 operator|new
 name|JdbcSchema
 argument_list|(
-name|optiqConnection
+name|parentSchema
+operator|.
+name|getQueryProvider
+argument_list|()
 argument_list|,
 name|dataSource
 argument_list|,
@@ -362,7 +348,7 @@ name|jdbcCatalog
 argument_list|,
 name|jdbcSchema
 argument_list|,
-name|optiqConnection
+name|parentSchema
 operator|.
 name|getTypeFactory
 argument_list|()
@@ -392,15 +378,12 @@ return|return
 name|schema
 return|;
 block|}
-comment|/**      * Creates a JdbcSchema, taking credentials from a map.      *      * @param connection Optiq connection      * @param parentSchema Parent schema      * @param name Name      * @param operand Map of property/value pairs      * @return A JdbcSchema      */
+comment|/**      * Creates a JdbcSchema, taking credentials from a map.      *      * @param parentSchema Parent schema      * @param name Name      * @param operand Map of property/value pairs      * @return A JdbcSchema      */
 specifier|public
 specifier|static
 name|JdbcSchema
 name|create
 parameter_list|(
-name|OptiqConnection
-name|connection
-parameter_list|,
 name|MutableSchema
 name|parentSchema
 parameter_list|,
@@ -518,8 +501,6 @@ decl_stmt|;
 return|return
 name|create
 argument_list|(
-name|connection
-argument_list|,
 name|parentSchema
 argument_list|,
 name|dataSource
@@ -1445,25 +1426,11 @@ argument_list|>
 name|operand
 parameter_list|)
 block|{
-specifier|final
-name|OptiqConnection
-name|connection
-init|=
-operator|(
-name|OptiqConnection
-operator|)
-name|parentSchema
-operator|.
-name|getQueryProvider
-argument_list|()
-decl_stmt|;
 return|return
 name|JdbcSchema
 operator|.
 name|create
 argument_list|(
-name|connection
-argument_list|,
 name|parentSchema
 argument_list|,
 name|name

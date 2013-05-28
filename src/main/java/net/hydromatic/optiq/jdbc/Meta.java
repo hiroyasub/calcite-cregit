@@ -251,8 +251,6 @@ operator|.
 name|create
 argument_list|(
 name|connection
-argument_list|,
-name|connection
 operator|.
 name|getRootSchema
 argument_list|()

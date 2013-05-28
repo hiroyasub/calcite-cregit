@@ -825,8 +825,6 @@ name|MapSchema
 operator|.
 name|create
 argument_list|(
-name|optiqConnection
-argument_list|,
 name|rootSchema
 argument_list|,
 literal|"s"
@@ -969,8 +967,6 @@ name|MapSchema
 operator|.
 name|create
 argument_list|(
-name|optiqConnection
-argument_list|,
 name|rootSchema
 argument_list|,
 literal|"s"

@@ -597,8 +597,6 @@ name|MapSchema
 operator|.
 name|create
 argument_list|(
-name|optiqConnection
-argument_list|,
 name|rootSchema
 argument_list|,
 literal|"s"
@@ -1036,8 +1034,6 @@ operator|.
 name|create
 argument_list|(
 name|optiqConnection
-argument_list|,
-name|optiqConnection
 operator|.
 name|getRootSchema
 argument_list|()
@@ -1060,8 +1056,6 @@ name|CloneSchema
 operator|.
 name|create
 argument_list|(
-name|optiqConnection
-argument_list|,
 name|optiqConnection
 operator|.
 name|getRootSchema
@@ -1743,8 +1737,6 @@ name|CloneSchema
 operator|.
 name|create
 argument_list|(
-name|connection
-argument_list|,
 name|connection
 operator|.
 name|getRootSchema
@@ -4775,9 +4767,6 @@ specifier|public
 name|Table
 name|create
 parameter_list|(
-name|JavaTypeFactory
-name|typeFactory
-parameter_list|,
 name|Schema
 name|schema
 parameter_list|,
@@ -4855,7 +4844,10 @@ name|schema
 argument_list|,
 name|clazz
 argument_list|,
-name|typeFactory
+name|schema
+operator|.
+name|getTypeFactory
+argument_list|()
 operator|.
 name|createType
 argument_list|(
