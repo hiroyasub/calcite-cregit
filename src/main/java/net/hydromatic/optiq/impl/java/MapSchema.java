@@ -254,6 +254,41 @@ operator|!=
 literal|null
 assert|;
 block|}
+comment|/**      * Creates a MapSchema that is a sub-schema.      *      * @param parentSchema Parent schema      * @param expression Expression for schema      */
+specifier|public
+name|MapSchema
+parameter_list|(
+name|Schema
+name|parentSchema
+parameter_list|,
+name|Expression
+name|expression
+parameter_list|)
+block|{
+name|this
+argument_list|(
+name|parentSchema
+operator|.
+name|getQueryProvider
+argument_list|()
+argument_list|,
+operator|(
+operator|(
+name|OptiqConnection
+operator|)
+name|parentSchema
+operator|.
+name|getQueryProvider
+argument_list|()
+operator|)
+operator|.
+name|getTypeFactory
+argument_list|()
+argument_list|,
+name|expression
+argument_list|)
+expr_stmt|;
+block|}
 comment|/**      * Creates a MapSchema within another schema.      *      * @param optiqConnection Connection to Optiq (also a query provider)      * @param parentSchema Parent schema      * @param name Name of new schema      * @return New MapSchema      */
 specifier|public
 specifier|static
@@ -307,6 +342,34 @@ expr_stmt|;
 return|return
 name|schema
 return|;
+block|}
+comment|/** Called by Optiq after creation, before loading tables explicitly defined      * in a JSON model. */
+specifier|public
+name|void
+name|initialize
+parameter_list|()
+block|{
+for|for
+control|(
+name|TableInSchema
+name|tableInSchema
+range|:
+name|initialTables
+argument_list|()
+control|)
+block|{
+name|tableMap
+operator|.
+name|put
+argument_list|(
+name|tableInSchema
+operator|.
+name|name
+argument_list|,
+name|tableInSchema
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 specifier|public
 name|Expression
@@ -434,6 +497,7 @@ name|isEmpty
 argument_list|()
 condition|)
 block|{
+comment|//noinspection unchecked
 return|return
 name|tableFunction
 operator|.
@@ -649,6 +713,7 @@ argument_list|)
 argument_list|)
 argument_list|)
 decl_stmt|;
+comment|//noinspection unchecked
 if|if
 condition|(
 name|type
@@ -679,6 +744,22 @@ return|;
 block|}
 return|return
 name|call
+return|;
+block|}
+comment|/** Returns the initial set of tables.      *      *<p>The default implementation returns an empty list. Derived classes      * may override this method to create tables based on their schema type. For      * example, a CSV provider might scan for all ".csv" files in a particular      * directory and return a table for each.</p>      */
+specifier|protected
+name|Collection
+argument_list|<
+name|TableInSchema
+argument_list|>
+name|initialTables
+parameter_list|()
+block|{
+return|return
+name|Collections
+operator|.
+name|emptyList
+argument_list|()
 return|;
 block|}
 specifier|private

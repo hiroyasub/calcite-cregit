@@ -91,21 +91,7 @@ name|optiq
 operator|.
 name|impl
 operator|.
-name|AbstractTable
-import|;
-end_import
-
-begin_import
-import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|optiq
-operator|.
-name|impl
-operator|.
-name|TableInSchemaImpl
+name|*
 import|;
 end_import
 
@@ -3535,6 +3521,99 @@ literal|"Table 'adhoc.EMPLOYEES' not found"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Tests that an immutable schema in a model cannot contain a view. */
+specifier|public
+name|void
+name|testModelImmutableSchemaCannotContainView
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|OptiqAssert
+operator|.
+name|AssertThat
+name|that
+init|=
+name|OptiqAssert
+operator|.
+name|assertThat
+argument_list|()
+operator|.
+name|withModel
+argument_list|(
+literal|"{\n"
+operator|+
+literal|"  version: '1.0',\n"
+operator|+
+literal|"  defaultSchema: 'adhoc',\n"
+operator|+
+literal|"  schemas: [\n"
+operator|+
+literal|"    {\n"
+operator|+
+literal|"      name: 'empty'\n"
+operator|+
+literal|"    },\n"
+operator|+
+literal|"    {\n"
+operator|+
+literal|"      name: 'adhoc',\n"
+operator|+
+literal|"      type: 'custom',\n"
+operator|+
+literal|"      tables: [\n"
+operator|+
+literal|"        {\n"
+operator|+
+literal|"          name: 'v',\n"
+operator|+
+literal|"          type: 'view',\n"
+operator|+
+literal|"          sql: 'values (1)'\n"
+operator|+
+literal|"        }\n"
+operator|+
+literal|"      ],\n"
+operator|+
+literal|"      factory: '"
+operator|+
+name|MySchemaFactory
+operator|.
+name|class
+operator|.
+name|getName
+argument_list|()
+operator|+
+literal|"',\n"
+operator|+
+literal|"      operand: {\n"
+operator|+
+literal|"           'tableName': 'ELVIS',\n"
+operator|+
+literal|"           'mutable': false\n"
+operator|+
+literal|"      }\n"
+operator|+
+literal|"    }\n"
+operator|+
+literal|"  ]\n"
+operator|+
+literal|"}"
+argument_list|)
+decl_stmt|;
+name|that
+operator|.
+name|connectThrows
+argument_list|(
+literal|"Cannot define view; parent schema "
+operator|+
+literal|"DelegatingSchema(delegate=ReflectiveSchema(target=HrSchema)) is "
+operator|+
+literal|"not mutable"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Tests a JDBC connection that provides a model that contains a view. */
 specifier|public
 name|void
@@ -3959,6 +4038,17 @@ specifier|static
 class|class
 name|HrSchema
 block|{
+annotation|@
+name|Override
+specifier|public
+name|String
+name|toString
+parameter_list|()
+block|{
+return|return
+literal|"HrSchema"
+return|;
+block|}
 specifier|public
 specifier|final
 name|Employee
@@ -4747,10 +4837,10 @@ name|getQueryProvider
 argument_list|()
 decl_stmt|;
 specifier|final
-name|MapSchema
+name|ReflectiveSchema
 name|schema
 init|=
-name|MapSchema
+name|ReflectiveSchema
 operator|.
 name|create
 argument_list|(
@@ -4759,36 +4849,18 @@ argument_list|,
 name|parentSchema
 argument_list|,
 name|name
-argument_list|)
-decl_stmt|;
-comment|// create an HR schema and mine its "emps" table
-specifier|final
-name|Schema
-name|hrSchema
-init|=
-name|ReflectiveSchema
-operator|.
-name|create
-argument_list|(
-name|connection
-argument_list|,
-name|connection
-operator|.
-name|getRootSchema
-argument_list|()
-argument_list|,
-literal|"hr"
 argument_list|,
 operator|new
 name|HrSchema
 argument_list|()
 argument_list|)
 decl_stmt|;
+comment|// Mine the EMPS table and add it under another name e.g. ELVIS
 specifier|final
 name|Table
 name|table
 init|=
-name|hrSchema
+name|schema
 operator|.
 name|getTable
 argument_list|(
@@ -4833,9 +4905,45 @@ name|table
 argument_list|)
 argument_list|)
 expr_stmt|;
+specifier|final
+name|Boolean
+name|mutable
+init|=
+operator|(
+name|Boolean
+operator|)
+name|operand
+operator|.
+name|get
+argument_list|(
+literal|"mutable"
+argument_list|)
+decl_stmt|;
+if|if
+condition|(
+name|mutable
+operator|==
+literal|null
+operator|||
+name|mutable
+condition|)
+block|{
 return|return
 name|schema
 return|;
+block|}
+else|else
+block|{
+comment|// Wrap the schema in DelegatingSchema so that it does not
+comment|// implement MutableSchema.
+return|return
+operator|new
+name|DelegatingSchema
+argument_list|(
+name|schema
+argument_list|)
+return|;
+block|}
 block|}
 block|}
 comment|/** Mock driver that has a handler that stores the results of each query in      * a temporary table. */

@@ -75,6 +75,21 @@ name|this
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
+specifier|public
+name|String
+name|toString
+parameter_list|()
+block|{
+return|return
+literal|"JsonView(name="
+operator|+
+name|name
+operator|+
+literal|")"
+return|;
+block|}
 block|}
 end_class
 

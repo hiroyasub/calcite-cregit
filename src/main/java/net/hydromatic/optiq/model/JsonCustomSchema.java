@@ -34,7 +34,7 @@ specifier|public
 class|class
 name|JsonCustomSchema
 extends|extends
-name|JsonSchema
+name|JsonMapSchema
 block|{
 comment|/** Name of the factory class for this schema. Must implement interface      * {@link net.hydromatic.optiq.SchemaFactory} and have a public default      * constructor. */
 specifier|public
@@ -66,6 +66,21 @@ argument_list|(
 name|this
 argument_list|)
 expr_stmt|;
+block|}
+annotation|@
+name|Override
+specifier|public
+name|String
+name|toString
+parameter_list|()
+block|{
+return|return
+literal|"JsonCustomSchema(name="
+operator|+
+name|name
+operator|+
+literal|")"
+return|;
 block|}
 block|}
 end_class
