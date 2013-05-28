@@ -287,14 +287,6 @@ operator|new
 name|MapSchema
 argument_list|(
 name|parentSchema
-operator|.
-name|getQueryProvider
-argument_list|()
-argument_list|,
-name|parentSchema
-operator|.
-name|getTypeFactory
-argument_list|()
 argument_list|,
 name|parentSchema
 operator|.

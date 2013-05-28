@@ -25,18 +25,6 @@ name|hydromatic
 operator|.
 name|linq4j
 operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|linq4j
-operator|.
 name|expressions
 operator|.
 name|*
@@ -130,15 +118,12 @@ specifier|final
 name|Schema
 name|sourceSchema
 decl_stmt|;
-comment|/**      * Creates a CloneSchema.      *      * @param queryProvider Query provider      * @param typeFactory Type factory      * @param expression Expression for schema      * @param sourceSchema JDBC data source      */
+comment|/**      * Creates a CloneSchema.      *      * @param parentSchema Parent schema      * @param expression Expression for schema      * @param sourceSchema JDBC data source      */
 specifier|public
 name|CloneSchema
 parameter_list|(
-name|QueryProvider
-name|queryProvider
-parameter_list|,
-name|JavaTypeFactory
-name|typeFactory
+name|Schema
+name|parentSchema
 parameter_list|,
 name|Expression
 name|expression
@@ -149,9 +134,7 @@ parameter_list|)
 block|{
 name|super
 argument_list|(
-name|queryProvider
-argument_list|,
-name|typeFactory
+name|parentSchema
 argument_list|,
 name|expression
 argument_list|)
@@ -403,14 +386,6 @@ operator|new
 name|CloneSchema
 argument_list|(
 name|parentSchema
-operator|.
-name|getQueryProvider
-argument_list|()
-argument_list|,
-name|parentSchema
-operator|.
-name|getTypeFactory
-argument_list|()
 argument_list|,
 name|parentSchema
 operator|.

@@ -870,8 +870,6 @@ name|ReflectiveSchema
 operator|.
 name|create
 argument_list|(
-name|optiqConnection
-argument_list|,
 name|rootSchema
 argument_list|,
 literal|"hr"
@@ -1002,8 +1000,6 @@ name|ReflectiveSchema
 operator|.
 name|create
 argument_list|(
-name|optiqConnection
-argument_list|,
 name|rootSchema
 argument_list|,
 literal|"hr"

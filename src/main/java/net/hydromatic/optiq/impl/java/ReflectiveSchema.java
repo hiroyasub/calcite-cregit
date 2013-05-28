@@ -136,12 +136,12 @@ specifier|private
 name|Object
 name|target
 decl_stmt|;
-comment|/**      * Creates a ReflectiveSchema.      *      * @param optiqConnection Connection to Optiq (also a query provider)      * @param target Object whose fields will be sub-objects of the schema      * @param expression Expression for schema      */
+comment|/**      * Creates a ReflectiveSchema.      *      * @param parentSchema Parent schema      * @param target Object whose fields will be sub-objects of the schema      * @param expression Expression for schema      */
 specifier|public
 name|ReflectiveSchema
 parameter_list|(
-name|OptiqConnection
-name|optiqConnection
+name|Schema
+name|parentSchema
 parameter_list|,
 name|Object
 name|target
@@ -152,9 +152,12 @@ parameter_list|)
 block|{
 name|super
 argument_list|(
-name|optiqConnection
+name|parentSchema
+operator|.
+name|getQueryProvider
+argument_list|()
 argument_list|,
-name|optiqConnection
+name|parentSchema
 operator|.
 name|getTypeFactory
 argument_list|()
@@ -292,15 +295,12 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Creates a ReflectiveSchema within another schema.      *      * @param optiqConnection Connection to Optiq (also a query provider)      * @param parentSchema Parent schema      * @param name Name of new schema      * @param target Object whose fields become the tables of the schema      * @return New ReflectiveSchema      */
+comment|/**      * Creates a ReflectiveSchema within another schema.      *      * @param parentSchema Parent schema      * @param name Name of new schema      * @param target Object whose fields become the tables of the schema      * @return New ReflectiveSchema      */
 specifier|public
 specifier|static
 name|ReflectiveSchema
 name|create
 parameter_list|(
-name|OptiqConnection
-name|optiqConnection
-parameter_list|,
 name|MutableSchema
 name|parentSchema
 parameter_list|,
@@ -317,7 +317,7 @@ init|=
 operator|new
 name|ReflectiveSchema
 argument_list|(
-name|optiqConnection
+name|parentSchema
 argument_list|,
 name|target
 argument_list|,
