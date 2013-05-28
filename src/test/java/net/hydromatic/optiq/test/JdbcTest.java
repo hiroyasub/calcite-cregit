@@ -121,6 +121,22 @@ name|optiq
 operator|.
 name|impl
 operator|.
+name|generate
+operator|.
+name|RangeTable
+import|;
+end_import
+
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|optiq
+operator|.
+name|impl
+operator|.
 name|java
 operator|.
 name|JavaTypeFactory
@@ -1828,7 +1844,7 @@ expr_stmt|;
 block|}
 specifier|public
 name|void
-name|testCloneGroupBy2
+name|_testCloneGroupBy2
 parameter_list|()
 block|{
 name|OptiqAssert
@@ -3374,6 +3390,80 @@ argument_list|(
 literal|"empid=100; deptno=10; name=Bill; commission=1000\n"
 operator|+
 literal|"empid=150; deptno=10; name=Sebastian; commission=null\n"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests a JDBC connection that provides a model that contains custom      * tables. */
+specifier|public
+name|void
+name|testModelCustomTable2
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|assertThat
+argument_list|()
+operator|.
+name|withModel
+argument_list|(
+literal|"{\n"
+operator|+
+literal|"  version: '1.0',\n"
+operator|+
+literal|"   schemas: [\n"
+operator|+
+literal|"     {\n"
+operator|+
+literal|"       name: 'MATH',\n"
+operator|+
+literal|"       tables: [\n"
+operator|+
+literal|"         {\n"
+operator|+
+literal|"           name: 'INTEGERS',\n"
+operator|+
+literal|"           type: 'custom',\n"
+operator|+
+literal|"           factory: '"
+operator|+
+name|RangeTable
+operator|.
+name|Factory
+operator|.
+name|class
+operator|.
+name|getName
+argument_list|()
+operator|+
+literal|"',\n"
+operator|+
+literal|"           operand: {'column': 'N', 'start': 3, 'end': 7 }\n"
+operator|+
+literal|"         }\n"
+operator|+
+literal|"       ]\n"
+operator|+
+literal|"     }\n"
+operator|+
+literal|"   ]\n"
+operator|+
+literal|"}"
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select * from math.integers"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"N=3\n"
+operator|+
+literal|"N=4\n"
+operator|+
+literal|"N=5\n"
+operator|+
+literal|"N=6\n"
 argument_list|)
 expr_stmt|;
 block|}
