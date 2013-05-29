@@ -424,6 +424,50 @@ operator|.
 name|class
 argument_list|)
 decl_stmt|;
+specifier|public
+specifier|static
+specifier|final
+name|String
+name|FOODMART_SCHEMA
+init|=
+literal|"     {\n"
+operator|+
+literal|"       type: 'jdbc',\n"
+operator|+
+literal|"       name: 'foodmart',\n"
+operator|+
+literal|"       jdbcUser: 'foodmart',\n"
+operator|+
+literal|"       jdbcPassword: 'foodmart',\n"
+operator|+
+literal|"       jdbcUrl: 'jdbc:mysql://localhost',\n"
+operator|+
+literal|"       jdbcCatalog: 'foodmart',\n"
+operator|+
+literal|"       jdbcSchema: ''\n"
+operator|+
+literal|"     }\n"
+decl_stmt|;
+specifier|public
+specifier|static
+specifier|final
+name|String
+name|FOODMART_MODEL
+init|=
+literal|"{\n"
+operator|+
+literal|"  version: '1.0',\n"
+operator|+
+literal|"  defaultSchema: 'foodmart',\n"
+operator|+
+literal|"   schemas: [\n"
+operator|+
+name|FOODMART_SCHEMA
+operator|+
+literal|"   ]\n"
+operator|+
+literal|"}"
+decl_stmt|;
 specifier|static
 name|String
 name|toString
@@ -1272,7 +1316,7 @@ argument_list|)
 expr_stmt|;
 name|assertEquals
 argument_list|(
-literal|3
+literal|4
 argument_list|,
 name|driverMinorVersion
 argument_list|)
@@ -1328,7 +1372,9 @@ argument_list|,
 name|databaseMinorVersion
 argument_list|)
 expr_stmt|;
-comment|// Check how version is composed of major and minor version.
+comment|// Check how version is composed of major and minor version. Note that
+comment|// version is stored in pom.xml; major and minor version are
+comment|// stored in net-hydromatic-optiq-jdbc.properties.
 if|if
 condition|(
 operator|!
@@ -3271,33 +3317,7 @@ argument_list|()
 operator|.
 name|withModel
 argument_list|(
-literal|"{\n"
-operator|+
-literal|"  version: '1.0',\n"
-operator|+
-literal|"   schemas: [\n"
-operator|+
-literal|"     {\n"
-operator|+
-literal|"       type: 'jdbc',\n"
-operator|+
-literal|"       name: 'foodmart',\n"
-operator|+
-literal|"       jdbcUser: 'foodmart',\n"
-operator|+
-literal|"       jdbcPassword: 'foodmart',\n"
-operator|+
-literal|"       jdbcUrl: 'jdbc:mysql://localhost',\n"
-operator|+
-literal|"       jdbcCatalog: 'foodmart',\n"
-operator|+
-literal|"       jdbcSchema: ''\n"
-operator|+
-literal|"     }\n"
-operator|+
-literal|"   ]\n"
-operator|+
-literal|"}"
+name|FOODMART_MODEL
 argument_list|)
 operator|.
 name|query
