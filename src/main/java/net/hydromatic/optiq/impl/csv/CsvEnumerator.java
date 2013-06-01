@@ -19,6 +19,18 @@ end_package
 
 begin_import
 import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|linq4j
+operator|.
+name|Enumerator
+import|;
+end_import
+
+begin_import
+import|import
 name|au
 operator|.
 name|com
@@ -28,18 +40,6 @@ operator|.
 name|opencsv
 operator|.
 name|CSVReader
-import|;
-end_import
-
-begin_import
-import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|linq4j
-operator|.
-name|Enumerator
 import|;
 end_import
 
