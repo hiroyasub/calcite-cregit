@@ -8924,9 +8924,11 @@ name|RexNode
 operator|)
 name|rexBuilder
 operator|.
-name|makeLiteral
+name|makeExactLiteral
 argument_list|(
-literal|true
+name|BigDecimal
+operator|.
+name|ZERO
 argument_list|)
 argument_list|)
 expr_stmt|;

@@ -444,7 +444,7 @@ literal|"       jdbcUrl: 'jdbc:mysql://localhost',\n"
 operator|+
 literal|"       jdbcCatalog: 'foodmart',\n"
 operator|+
-literal|"       jdbcSchema: ''\n"
+literal|"       jdbcSchema: null\n"
 operator|+
 literal|"     }\n"
 decl_stmt|;
@@ -1082,7 +1082,7 @@ name|dataSource
 argument_list|,
 literal|"foodmart"
 argument_list|,
-literal|""
+literal|null
 argument_list|,
 literal|"foodmart"
 argument_list|)
@@ -4617,6 +4617,8 @@ block|{
 name|super
 argument_list|(
 name|queryProvider
+argument_list|,
+literal|"FoodMart"
 argument_list|,
 name|dataSource
 argument_list|,

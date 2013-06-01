@@ -182,12 +182,10 @@ specifier|final
 name|DataSource
 name|dataSource
 decl_stmt|;
-specifier|private
 specifier|final
 name|String
 name|catalog
 decl_stmt|;
-specifier|private
 specifier|final
 name|String
 name|schema
@@ -205,12 +203,19 @@ specifier|final
 name|SqlDialect
 name|dialect
 decl_stmt|;
-comment|/**      * Creates a JDBC schema.      *      * @param queryProvider Query provider      * @param dataSource Data source      * @param dialect SQL dialect      * @param catalog Catalog name, or null      * @param schema Schema name pattern      * @param typeFactory Type factory      */
+specifier|final
+name|JdbcConvention
+name|convention
+decl_stmt|;
+comment|/**      * Creates a JDBC schema.      *      * @param queryProvider Query provider      * @param name Schema name      * @param dataSource Data source      * @param dialect SQL dialect      * @param catalog Catalog name, or null      * @param schema Schema name pattern      * @param typeFactory Type factory      */
 specifier|public
 name|JdbcSchema
 parameter_list|(
 name|QueryProvider
 name|queryProvider
+parameter_list|,
+name|String
+name|name
 parameter_list|,
 name|DataSource
 name|dataSource
@@ -276,6 +281,19 @@ name|expression
 operator|=
 name|expression
 expr_stmt|;
+name|this
+operator|.
+name|convention
+operator|=
+name|JdbcConvention
+operator|.
+name|of
+argument_list|(
+name|this
+argument_list|,
+name|name
+argument_list|)
+expr_stmt|;
 assert|assert
 name|expression
 operator|!=
@@ -334,6 +352,8 @@ name|parentSchema
 operator|.
 name|getQueryProvider
 argument_list|()
+argument_list|,
+name|name
 argument_list|,
 name|dataSource
 argument_list|,
@@ -534,6 +554,16 @@ name|get
 argument_list|(
 name|dataSource
 argument_list|)
+return|;
+block|}
+comment|// Used by generated code.
+specifier|public
+name|DataSource
+name|getDataSource
+parameter_list|()
+block|{
+return|return
+name|dataSource
 return|;
 block|}
 specifier|public

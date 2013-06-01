@@ -1915,6 +1915,10 @@ operator|new
 name|LixToRelTranslator
 argument_list|(
 name|cluster
+argument_list|,
+name|OptiqPreparingStmt
+operator|.
+name|this
 argument_list|)
 operator|.
 name|translate

@@ -5820,6 +5820,7 @@ operator|.
 name|filterInstance
 argument_list|)
 expr_stmt|;
+comment|//planner.addRule(RemoveTrivialProjectRule.instance);
 block|}
 comment|/**      * Dumps a plan as a string.      *      * @param header Header to print before the plan. Ignored if the format is      * XML.      * @param rel Relational expression to explain.      * @param asXml Whether to format as XML.      * @param detailLevel Detail level.      *      * @return Plan      */
 specifier|public
