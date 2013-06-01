@@ -64,7 +64,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Type factory that can register Java classes as record types.  *  * @author jhyde  */
+comment|/**  * Type factory that can register Java classes as record types.  */
 end_comment
 
 begin_interface
@@ -74,7 +74,7 @@ name|JavaTypeFactory
 extends|extends
 name|RelDataTypeFactory
 block|{
-comment|/**      * Creates a record type based upon the public fields of a Java class.      *      * @param clazz Java class      * @return Record type that remembers its Java class      */
+comment|/**    * Creates a record type based upon the public fields of a Java class.    *    * @param clazz Java class    * @return Record type that remembers its Java class    */
 name|RelDataType
 name|createStructType
 parameter_list|(
@@ -82,7 +82,7 @@ name|Class
 name|clazz
 parameter_list|)
 function_decl|;
-comment|/**      * Creates a type, deducing whether a record, scalar or primitive type      * is needed.      *      * @param type Java type, such as a {@link Class}      * @return Record or scalar type      */
+comment|/**    * Creates a type, deducing whether a record, scalar or primitive type    * is needed.    *    * @param type Java type, such as a {@link Class}    * @return Record or scalar type    */
 name|RelDataType
 name|createType
 parameter_list|(
@@ -97,7 +97,7 @@ name|RelDataType
 name|type
 parameter_list|)
 function_decl|;
-comment|/** Creates a synthetic Java class whose fields have the given Java      * types. */
+comment|/** Creates a synthetic Java class whose fields have the given Java    * types. */
 name|Type
 name|createSyntheticType
 parameter_list|(

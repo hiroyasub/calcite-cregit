@@ -60,7 +60,7 @@ specifier|public
 enum|enum
 name|Hook
 block|{
-comment|/** Called with the generated Java plan, just before it is compiled by      * Janino. */
+comment|/** Called with the generated Java plan, just before it is compiled by    * Janino. */
 name|JAVA_PLAN
 block|;
 specifier|private
@@ -88,7 +88,7 @@ argument_list|>
 argument_list|>
 argument_list|()
 decl_stmt|;
-comment|/** Adds a handler for this Hook.      *      *<p>Returns a {@link Hook.Closeable} so that you can use the following      * try-finally pattern to prevent leaks:</p>      *      *<blockquote><pre>      *     final Hook.Closeable closeable = Hook.FOO.add(HANDLER);      *     try {      *         ...      *     } finally {      *         closeable.close();      *     }</pre>      *</blockquote>      */
+comment|/** Adds a handler for this Hook.    *    *<p>Returns a {@link Hook.Closeable} so that you can use the following    * try-finally pattern to prevent leaks:</p>    *    *<blockquote><pre>    *     final Hook.Closeable closeable = Hook.FOO.add(HANDLER);    *     try {    *         ...    *     } finally {    *         closeable.close();    *     }</pre>    *</blockquote>    */
 specifier|public
 name|Closeable
 name|add
@@ -178,7 +178,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/** Removes a Hook after use.      *      *<p>Note: Although it would be convenient, this interface cannot extend      * {@code AutoCloseable} while Optiq maintains compatibility with      * JDK 1.6.</p>      */
+comment|/** Removes a Hook after use.    *    *<p>Note: Although it would be convenient, this interface cannot extend    * {@code AutoCloseable} while Optiq maintains compatibility with    * JDK 1.6.</p>    */
 specifier|public
 interface|interface
 name|Closeable

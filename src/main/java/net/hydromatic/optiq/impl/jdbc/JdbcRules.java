@@ -1303,7 +1303,7 @@ argument_list|()
 return|;
 block|}
 block|}
-comment|/**      * Rule to convert a {@link CalcRel} to an      * {@link JdbcCalcRel}.      */
+comment|/**    * Rule to convert a {@link CalcRel} to an    * {@link JdbcCalcRel}.    */
 specifier|private
 specifier|static
 class|class
@@ -1435,7 +1435,7 @@ specifier|final
 name|RexProgram
 name|program
 decl_stmt|;
-comment|/**          * Values defined in {@link org.eigenbase.rel.ProjectRelBase.Flags}.          */
+comment|/**      * Values defined in {@link org.eigenbase.rel.ProjectRelBase.Flags}.      */
 specifier|protected
 name|int
 name|flags
@@ -2117,7 +2117,7 @@ throw|;
 block|}
 block|}
 block|}
-comment|/**      * Rule to convert an {@link org.eigenbase.rel.AggregateRel} to an      * {@link JdbcAggregateRel}.      */
+comment|/**    * Rule to convert an {@link org.eigenbase.rel.AggregateRel} to an    * {@link JdbcAggregateRel}.    */
 specifier|private
 specifier|static
 class|class
@@ -2738,7 +2738,7 @@ argument_list|()
 return|;
 block|}
 block|}
-comment|/**      * Rule to convert an {@link org.eigenbase.rel.SortRel} to an      * {@link JdbcSortRel}.      */
+comment|/**    * Rule to convert an {@link org.eigenbase.rel.SortRel} to an    * {@link JdbcSortRel}.    */
 specifier|private
 specifier|static
 class|class
@@ -2934,7 +2934,7 @@ throw|;
 comment|// TODO:
 block|}
 block|}
-comment|/**      * Rule to convert an {@link org.eigenbase.rel.UnionRel} to a      * {@link JdbcUnionRel}.      */
+comment|/**    * Rule to convert an {@link org.eigenbase.rel.UnionRel} to a    * {@link JdbcUnionRel}.    */
 specifier|private
 specifier|static
 class|class
@@ -3251,7 +3251,7 @@ name|toSqlString
 argument_list|()
 return|;
 block|}
-comment|/**      * Rule to convert an {@link org.eigenbase.rel.IntersectRel} to an      * {@link JdbcIntersectRel}.      */
+comment|/**    * Rule to convert an {@link org.eigenbase.rel.IntersectRel} to an    * {@link JdbcIntersectRel}.    */
 specifier|private
 specifier|static
 class|class
@@ -3449,7 +3449,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**      * Rule to convert an {@link org.eigenbase.rel.MinusRel} to an      * {@link JdbcMinusRel}.      */
+comment|/**    * Rule to convert an {@link org.eigenbase.rel.MinusRel} to an    * {@link JdbcMinusRel}.    */
 specifier|private
 specifier|static
 class|class

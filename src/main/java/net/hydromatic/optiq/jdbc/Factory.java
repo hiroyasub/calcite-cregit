@@ -172,7 +172,7 @@ parameter_list|)
 throws|throws
 name|SQLException
 function_decl|;
-comment|/**      * Creates a result set. You will then need to call      * {@link net.hydromatic.optiq.jdbc.OptiqResultSet#execute()} on it.      *      * @param statement Statement      * @param columnMetaDataList Metadata for each column      * @param cursorFactory Called on execute to create a cursor      * @return Result set      */
+comment|/**    * Creates a result set. You will then need to call    * {@link net.hydromatic.optiq.jdbc.OptiqResultSet#execute()} on it.    *    * @param statement Statement    * @param columnMetaDataList Metadata for each column    * @param cursorFactory Called on execute to create a cursor    * @return Result set    */
 name|OptiqResultSet
 name|newResultSet
 parameter_list|(

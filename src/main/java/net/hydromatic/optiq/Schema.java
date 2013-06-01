@@ -80,7 +80,7 @@ name|Schema
 extends|extends
 name|DataContext
 block|{
-comment|/**      * Returns a list of table functions in this schema with the given name, or      * an empty list if there is no such table function.      *      * @param name Name of table function      * @return List of table functions with given name, or empty list      */
+comment|/**    * Returns a list of table functions in this schema with the given name, or    * an empty list if there is no such table function.    *    * @param name Name of table function    * @return List of table functions with given name, or empty list    */
 name|List
 argument_list|<
 name|TableFunction
@@ -91,7 +91,7 @@ name|String
 name|name
 parameter_list|)
 function_decl|;
-comment|/**      * Returns a table with the given name, or null.      *      * @param name Table name      * @param elementType Element type      * @return Table, or null      */
+comment|/**    * Returns a table with the given name, or null.    *    * @param name Table name    * @param elementType Element type    * @return Table, or null    */
 parameter_list|<
 name|E
 parameter_list|>
@@ -225,7 +225,7 @@ block|,
 name|SYSTEM_TABLE
 block|,
 name|LOCAL_TEMPORARY
-block|,     }
+block|,   }
 block|}
 end_interface
 

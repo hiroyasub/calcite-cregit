@@ -44,7 +44,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A relational expression of one of the  * {@link net.hydromatic.optiq.rules.java.EnumerableConvention} calling  * conventions.  *  * @author jhyde  */
+comment|/**  * A relational expression of one of the  * {@link net.hydromatic.optiq.rules.java.EnumerableConvention} calling  * conventions.  */
 end_comment
 
 begin_interface
@@ -55,7 +55,7 @@ extends|extends
 name|RelNode
 block|{
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Creates a plan for this expression according to a calling convention.      *      * @param implementor implementor      */
+comment|/**    * Creates a plan for this expression according to a calling convention.    *    * @param implementor implementor    */
 name|BlockExpression
 name|implement
 parameter_list|(
@@ -63,7 +63,7 @@ name|EnumerableRelImplementor
 name|implementor
 parameter_list|)
 function_decl|;
-comment|/**      * Describes the Java type returned by this relational expression, and the      * mapping between it and the fields of the logical row type.      */
+comment|/**    * Describes the Java type returned by this relational expression, and the    * mapping between it and the fields of the logical row type.    */
 name|PhysType
 name|getPhysType
 parameter_list|()

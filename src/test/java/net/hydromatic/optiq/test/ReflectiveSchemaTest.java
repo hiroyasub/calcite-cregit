@@ -238,7 +238,7 @@ operator|.
 expr|class
 argument_list|)
 decl_stmt|;
-comment|/**      * Test that uses a JDBC connection as a linq4j {@link net.hydromatic.linq4j.QueryProvider}.      *      * @throws Exception on error      */
+comment|/**    * Test that uses a JDBC connection as a linq4j {@link net.hydromatic.linq4j.QueryProvider}.    *    * @throws Exception on error    */
 specifier|public
 name|void
 name|testQueryProvider
@@ -763,7 +763,7 @@ name|list
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Tests a relation that is accessed via method syntax.      * The function returns a {@link net.hydromatic.linq4j.Queryable}.      */
+comment|/**    * Tests a relation that is accessed via method syntax.    * The function returns a {@link net.hydromatic.linq4j.Queryable}.    */
 specifier|public
 name|void
 name|_testOperator
@@ -911,7 +911,7 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Tests a view.      */
+comment|/**    * Tests a view.    */
 specifier|public
 name|void
 name|testView
@@ -1129,7 +1129,7 @@ literal|"Column 'x' not found in any table"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Tests columns based on types such as java.sql.Date and java.util.Date.      *      * @see CatchallSchema#everyTypes */
+comment|/** Tests columns based on types such as java.sql.Date and java.util.Date.    *    * @see CatchallSchema#everyTypes */
 specifier|public
 name|void
 name|testColumnTypes
@@ -1186,7 +1186,7 @@ literal|"primitiveBoolean=true; primitiveByte=127; primitiveChar=\uffff; primiti
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Tests columns based on types such as java.sql.Date and java.util.Date.      *      * @see CatchallSchema#everyTypes */
+comment|/** Tests columns based on types such as java.sql.Date and java.util.Date.    *    * @see CatchallSchema#everyTypes */
 specifier|public
 name|void
 name|testAggregateFunctions
@@ -1635,7 +1635,7 @@ return|;
 comment|// e.g. BigDecimal
 block|}
 block|}
-comment|/** Tests that if a field of a relation has an unrecognized type (in this      * case a {@link BitSet}) then it is treated as an object.      *      * @see CatchallSchema#badTypes */
+comment|/** Tests that if a field of a relation has an unrecognized type (in this    * case a {@link BitSet}) then it is treated as an object.    *    * @see CatchallSchema#badTypes */
 specifier|public
 name|void
 name|testTableFieldHasBadType
@@ -1668,7 +1668,7 @@ literal|"integer=0; bitSet={}\n"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Tests that a schema with a field whose type cannot be recognized      * throws an informative exception.      *      * @see CatchallSchema#enumerable      * @see CatchallSchema#list */
+comment|/** Tests that a schema with a field whose type cannot be recognized    * throws an informative exception.    *    * @see CatchallSchema#enumerable    * @see CatchallSchema#list */
 specifier|public
 name|void
 name|testSchemaFieldHasBadType
@@ -2220,7 +2220,7 @@ literal|0
 argument_list|)
 decl_stmt|;
 block|}
-comment|/** Object whose fields are relations. Called "catch-all" because it's OK      * if tests add new fields. */
+comment|/** Object whose fields are relations. Called "catch-all" because it's OK    * if tests add new fields. */
 specifier|public
 specifier|static
 class|class
@@ -2434,7 +2434,7 @@ literal|null
 argument_list|,
 literal|null
 argument_list|)
-block|,         }
+block|,     }
 decl_stmt|;
 specifier|public
 specifier|final

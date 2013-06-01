@@ -42,7 +42,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Tests for a JDBC front-end and JDBC back-end where the processing is not  * pushed down to JDBC (as in {@link JdbcFrontJdbcBackTest}) but is executed  * in a pipeline of linq4j operators.  *  * @author jhyde  */
+comment|/**  * Tests for a JDBC front-end and JDBC back-end where the processing is not  * pushed down to JDBC (as in {@link JdbcFrontJdbcBackTest}) but is executed  * in a pipeline of linq4j operators.  */
 end_comment
 
 begin_class
@@ -288,7 +288,7 @@ literal|"C=7\n"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Tests that a theta join (a join whose condition cannot be decomposed      * into input0.x = input1.x and ... input0.z = input1.z) throws a reasonably      * civilized "cannot be implemented" exception. Of course, we'd like to be      * able to implement it one day. */
+comment|/** Tests that a theta join (a join whose condition cannot be decomposed    * into input0.x = input1.x and ... input0.z = input1.z) throws a reasonably    * civilized "cannot be implemented" exception. Of course, we'd like to be    * able to implement it one day. */
 specifier|public
 name|void
 name|testJoinTheta

@@ -28,7 +28,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Implementation of {@link Cursor} on top of an  * {@link net.hydromatic.linq4j.Enumerator} that  * returns an {@link Object} for each row.  *  * @author jhyde  */
+comment|/**  * Implementation of {@link Cursor} on top of an  * {@link net.hydromatic.linq4j.Enumerator} that  * returns an {@link Object} for each row.  */
 end_comment
 
 begin_class
@@ -46,7 +46,7 @@ name|Object
 argument_list|>
 name|enumerator
 decl_stmt|;
-comment|/**      * Creates an ObjectEnumeratorCursor.      *      * @param enumerator Enumerator      */
+comment|/**    * Creates an ObjectEnumeratorCursor.    *    * @param enumerator Enumerator    */
 specifier|public
 name|ObjectEnumeratorCursor
 parameter_list|(

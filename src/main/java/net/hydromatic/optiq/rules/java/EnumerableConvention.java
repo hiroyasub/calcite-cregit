@@ -30,7 +30,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Family of calling conventions that return results as an  * {@link net.hydromatic.linq4j.Enumerable}. */
+comment|/**  * Family of calling conventions that return results as an  * {@link net.hydromatic.linq4j.Enumerable}.  */
 end_comment
 
 begin_enum
@@ -40,7 +40,7 @@ name|EnumerableConvention
 implements|implements
 name|Convention
 block|{
-comment|/** Convention that returns result as an Enumerable, each record as an array      * of objects. Records of 0 and 1 fields are represented as empty lists      * and scalars, respectively. */
+comment|/** Convention that returns result as an Enumerable, each record as an array    * of objects. Records of 0 and 1 fields are represented as empty lists    * and scalars, respectively. */
 name|ARRAY
 argument_list|(
 name|JavaRowFormat
@@ -48,7 +48,7 @@ operator|.
 name|ARRAY
 argument_list|)
 block|,
-comment|/** Convention that returns result as an Enumerable, each record as an      * object that has one data member for each column. Records of 0 and 1      * fields are represented as empty lists and scalars, respectively. */
+comment|/** Convention that returns result as an Enumerable, each record as an    * object that has one data member for each column. Records of 0 and 1    * fields are represented as empty lists and scalars, respectively. */
 name|CUSTOM
 argument_list|(
 name|JavaRowFormat

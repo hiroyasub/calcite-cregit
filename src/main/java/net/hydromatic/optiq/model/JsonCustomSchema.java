@@ -36,7 +36,7 @@ name|JsonCustomSchema
 extends|extends
 name|JsonMapSchema
 block|{
-comment|/** Name of the factory class for this schema. Must implement interface      * {@link net.hydromatic.optiq.SchemaFactory} and have a public default      * constructor. */
+comment|/** Name of the factory class for this schema. Must implement interface    * {@link net.hydromatic.optiq.SchemaFactory} and have a public default    * constructor. */
 specifier|public
 name|String
 name|factory

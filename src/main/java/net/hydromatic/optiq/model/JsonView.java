@@ -51,7 +51,7 @@ specifier|public
 name|String
 name|sql
 decl_stmt|;
-comment|/** Schema name(s) to use when resolving query. If not specified, defaults      * to current schema. */
+comment|/** Schema name(s) to use when resolving query. If not specified, defaults    * to current schema. */
 specifier|public
 name|List
 argument_list|<

@@ -161,12 +161,12 @@ specifier|private
 name|boolean
 name|closed
 decl_stmt|;
-comment|/**      * Support for {@link #closeOnCompletion()} method.      */
+comment|/**    * Support for {@link #closeOnCompletion()} method.    */
 specifier|protected
 name|boolean
 name|closeOnCompletion
 decl_stmt|;
-comment|/**      * Current result set, or null if the statement is not executing anything.      * Any method which modifies this member must synchronize      * on the OptiqStatement.      */
+comment|/**    * Current result set, or null if the statement is not executing anything.    * Any method which modifies this member must synchronize    * on the OptiqStatement.    */
 name|OptiqResultSet
 name|openResultSet
 decl_stmt|;
@@ -1159,7 +1159,7 @@ name|this
 argument_list|)
 return|;
 block|}
-comment|/**      * Executes a parsed statement.      *      * @param query Parsed statement      * @return as specified by {@link Statement#execute(String)}      * @throws SQLException if a database error occurs      */
+comment|/**    * Executes a parsed statement.    *    * @param query Parsed statement    * @return as specified by {@link Statement#execute(String)}    * @throws SQLException if a database error occurs    */
 specifier|protected
 name|boolean
 name|executeInternal
@@ -1184,7 +1184,7 @@ return|return
 literal|true
 return|;
 block|}
-comment|/**      * Executes a parsed query, closing any previously open result set.      *      * @param query Parsed query      * @return Result set      * @throws SQLException if a database error occurs      */
+comment|/**    * Executes a parsed query, closing any previously open result set.    *    * @param query Parsed query    * @return Result set    * @throws SQLException if a database error occurs    */
 specifier|protected
 name|ResultSet
 name|executeQueryInternal
@@ -1401,7 +1401,7 @@ block|}
 block|}
 return|;
 block|}
-comment|/**      * Called by each child result set when it is closed.      *      * @param resultSet Result set or cell set      */
+comment|/**    * Called by each child result set when it is closed.    *    * @param resultSet Result set or cell set    */
 name|void
 name|onResultSetClose
 parameter_list|(

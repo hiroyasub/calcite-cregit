@@ -50,7 +50,7 @@ specifier|public
 interface|interface
 name|DataContext
 block|{
-comment|/**      * Returns a table with a given name and element type, or null if not found.      */
+comment|/**    * Returns a table with a given name and element type, or null if not found.    */
 parameter_list|<
 name|T
 parameter_list|>
@@ -70,7 +70,7 @@ argument_list|>
 name|elementType
 parameter_list|)
 function_decl|;
-comment|/**      * Returns a sub-schema with a given name, or null.      */
+comment|/**    * Returns a sub-schema with a given name, or null.    */
 name|Schema
 name|getSubSchema
 parameter_list|(
@@ -78,7 +78,7 @@ name|String
 name|name
 parameter_list|)
 function_decl|;
-comment|/**      * Returns the type factory.      */
+comment|/**    * Returns the type factory.    */
 name|JavaTypeFactory
 name|getTypeFactory
 parameter_list|()

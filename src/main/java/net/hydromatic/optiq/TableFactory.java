@@ -49,7 +49,7 @@ extends|extends
 name|Table
 parameter_list|>
 block|{
-comment|/** Creates a Table.      *      * @param schema Schema this table belongs to      * @param name Name of this table      * @param operand The "operand" JSON property      * @param rowType Row type. Specified if the "columns" JSON property.      */
+comment|/** Creates a Table.    *    * @param schema Schema this table belongs to    * @param name Name of this table    * @param operand The "operand" JSON property    * @param rowType Row type. Specified if the "columns" JSON property.    */
 name|T
 name|create
 parameter_list|(

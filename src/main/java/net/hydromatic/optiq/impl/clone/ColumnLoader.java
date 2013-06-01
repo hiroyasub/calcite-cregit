@@ -176,7 +176,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Column loader.  *  * @author jhyde */
+comment|/**  * Column loader.  */
 end_comment
 
 begin_class
@@ -1264,7 +1264,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/** Adapt for some types that we represent differently internally than their      * JDBC types. {@link java.sql.Timestamp} values that are not null are      * converted to {@code long}, but nullable timestamps are acquired using      * {@link java.sql.ResultSet#getObject(int)} and therefore the Timestamp      * value needs to be converted to a {@link Long}. Similarly      * {@link java.sql.Date} and {@link java.sql.Time} values to      * {@link Integer}. */
+comment|/** Adapt for some types that we represent differently internally than their    * JDBC types. {@link java.sql.Timestamp} values that are not null are    * converted to {@code long}, but nullable timestamps are acquired using    * {@link java.sql.ResultSet#getObject(int)} and therefore the Timestamp    * value needs to be converted to a {@link Long}. Similarly    * {@link java.sql.Date} and {@link java.sql.Time} values to    * {@link Integer}. */
 specifier|private
 specifier|static
 name|List
@@ -1338,7 +1338,7 @@ return|return
 name|list
 return|;
 block|}
-comment|/**      * Set of values of a column, created during the load process, and converted      * to a serializable (and more compact) form before load completes.      */
+comment|/**    * Set of values of a column, created during the load process, and converted    * to a serializable (and more compact) form before load completes.    */
 specifier|static
 class|class
 name|ValueSet
@@ -1511,7 +1511,7 @@ name|e
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Freezes the contents of this value set into a column, optionally          * re-ordering if {@code sources} is specified. */
+comment|/** Freezes the contents of this value set into a column, optionally      * re-ordering if {@code sources} is specified. */
 name|ArrayTable
 operator|.
 name|Column
@@ -1877,7 +1877,7 @@ operator|instanceof
 name|Number
 return|;
 block|}
-comment|/** Chooses a representation for a fixed-precision primitive type          * (boolean, byte, char, short, int, long).          *          * @param ordinal Ordinal of this column in table          * @param p Type that values are to be returned as (not necessarily the          *     same as they will be stored)          * @param min Minimum value to be encoded          * @param max Maximum value to be encoded (inclusive)          */
+comment|/** Chooses a representation for a fixed-precision primitive type      * (boolean, byte, char, short, int, long).      *      * @param ordinal Ordinal of this column in table      * @param p Type that values are to be returned as (not necessarily the      *     same as they will be stored)      * @param min Minimum value to be encoded      * @param max Maximum value to be encoded (inclusive)      */
 specifier|private
 name|ArrayTable
 operator|.

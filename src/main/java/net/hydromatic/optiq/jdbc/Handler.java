@@ -34,7 +34,7 @@ specifier|public
 interface|interface
 name|Handler
 block|{
-comment|/** Called when a connection is being created. If it throws, the connection      * will not be created.      *      * @param connection Connection      * @throws SQLException on error      */
+comment|/** Called when a connection is being created. If it throws, the connection    * will not be created.    *    * @param connection Connection    * @throws SQLException on error    */
 name|void
 name|onConnectionInit
 parameter_list|(
@@ -44,7 +44,7 @@ parameter_list|)
 throws|throws
 name|SQLException
 function_decl|;
-comment|/** Called by Optiq server when a statement is being executed.      *      *<p>If the session would like the statement results stored in a temporary      * table, {@code resultSink} is not null.      * The provider must call its {@link ResultSink#toBeCompleted}      * method at some point during execution (not necessarily before the call to      * this method returns).</p>      *      * @param statement Statement      * @param resultSink Place to put result of query. Null if Optiq does not      *                   want results stored to a temporary table      * @throws RuntimeException on error      */
+comment|/** Called by Optiq server when a statement is being executed.    *    *<p>If the session would like the statement results stored in a temporary    * table, {@code resultSink} is not null.    * The provider must call its {@link ResultSink#toBeCompleted}    * method at some point during execution (not necessarily before the call to    * this method returns).</p>    *    * @param statement Statement    * @param resultSink Place to put result of query. Null if Optiq does not    *                   want results stored to a temporary table    * @throws RuntimeException on error    */
 name|void
 name|onStatementExecute
 parameter_list|(

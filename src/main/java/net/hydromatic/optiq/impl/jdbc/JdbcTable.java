@@ -180,7 +180,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Queryable that gets its data from a table within a JDBC connection.  *  *<p>The idea is not to read the whole table, however. The idea is to use  * this as a building block for a query, by applying Queryable operators  * such as {@link net.hydromatic.linq4j.Queryable#where(net.hydromatic.linq4j.function.Predicate2)}.  * The resulting queryable can then be converted to a SQL query, which can be  * executed efficiently on the JDBC server.</p>  *  * @author jhyde  */
+comment|/**  * Queryable that gets its data from a table within a JDBC connection.  *  *<p>The idea is not to read the whole table, however. The idea is to use  * this as a building block for a query, by applying Queryable operators  * such as {@link net.hydromatic.linq4j.Queryable#where(net.hydromatic.linq4j.function.Predicate2)}.  * The resulting queryable can then be converted to a SQL query, which can be  * executed efficiently on the JDBC server.</p>  */
 end_comment
 
 begin_class

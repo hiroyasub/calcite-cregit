@@ -1242,7 +1242,7 @@ name|syntheticType2
 return|;
 block|}
 block|}
-comment|/** Creates a synthetic Java class whose fields have the same names and      * relational types. */
+comment|/** Creates a synthetic Java class whose fields have the same names and    * relational types. */
 specifier|private
 name|Type
 name|createSyntheticType

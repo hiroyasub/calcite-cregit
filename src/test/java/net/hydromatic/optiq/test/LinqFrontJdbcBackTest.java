@@ -106,7 +106,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Tests for a linq4j front-end and JDBC back-end.  *  * @author jhyde  */
+comment|/**  * Tests for a linq4j front-end and JDBC back-end.  */
 end_comment
 
 begin_class

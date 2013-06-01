@@ -112,7 +112,7 @@ specifier|public
 interface|interface
 name|PhysType
 block|{
-comment|/** Returns the Java type (often a Class) that represents a row. For      * example, in one row format, always returns {@code Object[].class}. */
+comment|/** Returns the Java type (often a Class) that represents a row. For    * example, in one row format, always returns {@code Object[].class}. */
 name|Type
 name|getJavaRowType
 parameter_list|()
@@ -138,7 +138,7 @@ name|int
 name|index
 parameter_list|)
 function_decl|;
-comment|/** Generates a reference to a given field in an expression.      *      *<p>For example given {@code expression=employee} and {@code field=2},      * generates</p>      *<pre>{@code employee.deptno}</pre>      *      * @param expression Expression      * @param field Ordinal of field      * @return Expression to access the field of the expression      */
+comment|/** Generates a reference to a given field in an expression.    *    *<p>For example given {@code expression=employee} and {@code field=2},    * generates</p>    *<pre>{@code employee.deptno}</pre>    *    * @param expression Expression    * @param field Ordinal of field    * @return Expression to access the field of the expression    */
 name|Expression
 name|fieldReference
 parameter_list|(
@@ -149,7 +149,7 @@ name|int
 name|field
 parameter_list|)
 function_decl|;
-comment|/** Generates an accessor function for a given list of fields.      *      *<p>For example:</p>      *<pre>{@code      * new Function1<Employee, Object[]> {      *    public Object[] apply(Employee v1) {      *        return new Object[] {v1.<fieldN>, v1.<fieldM>};      *    }      * }      * }</pre>      */
+comment|/** Generates an accessor function for a given list of fields.    *    *<p>For example:</p>    *<pre>{@code    * new Function1<Employee, Object[]> {    *    public Object[] apply(Employee v1) {    *        return new Object[] {v1.<fieldN>, v1.<fieldM>};    *    }    * }    * }</pre>    */
 name|Expression
 name|generateAccessor
 parameter_list|(
@@ -174,7 +174,7 @@ argument_list|>
 name|fields
 parameter_list|)
 function_decl|;
-comment|/** Projects a given collection of fields from this input record, into      * a particular preferred output format. The output format is optimized      * if there are 0 or 1 fields. */
+comment|/** Projects a given collection of fields from this input record, into    * a particular preferred output format. The output format is optimized    * if there are 0 or 1 fields. */
 name|PhysType
 name|project
 parameter_list|(
@@ -188,7 +188,7 @@ name|JavaRowFormat
 name|format
 parameter_list|)
 function_decl|;
-comment|/** Returns a lambda to create a collation key and a comparator. The      * comparator is sometimes null. */
+comment|/** Returns a lambda to create a collation key and a comparator. The    * comparator is sometimes null. */
 name|Pair
 argument_list|<
 name|Expression
@@ -204,12 +204,12 @@ argument_list|>
 name|collations
 parameter_list|)
 function_decl|;
-comment|/** Returns a expression that yields a comparer, or null if this type      * is comparable. */
+comment|/** Returns a expression that yields a comparer, or null if this type    * is comparable. */
 name|Expression
 name|comparer
 parameter_list|()
 function_decl|;
-comment|/** Generates an expression that creates a record for a row, initializing      * its fields with the given expressions. There must be one expression per      * field.      *      * @param expressions Expression to initialize each field      * @return Expression to create a row      */
+comment|/** Generates an expression that creates a record for a row, initializing    * its fields with the given expressions. There must be one expression per    * field.    *    * @param expressions Expression to initialize each field    * @return Expression to create a row    */
 name|Expression
 name|record
 parameter_list|(

@@ -128,7 +128,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Utilities for the JDBC provider.  *  * @author jhyde  */
+comment|/**  * Utilities for the JDBC provider.  */
 end_comment
 
 begin_class
@@ -437,7 +437,7 @@ block|}
 block|}
 block|}
 block|}
-comment|/** Builder that calls {@link ResultSet#getObject(int)} for every column,      * or {@code getXxx} if the result type is a primitive {@code xxx},      * and returns an array of objects for each row. */
+comment|/** Builder that calls {@link ResultSet#getObject(int)} for every column,    * or {@code getXxx} if the result type is a primitive {@code xxx},    * and returns an array of objects for each row. */
 specifier|public
 specifier|static
 class|class

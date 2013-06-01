@@ -112,7 +112,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Utility functions for schemas.  *  * @author jhyde  */
+comment|/**  * Utility functions for schemas.  */
 end_comment
 
 begin_class

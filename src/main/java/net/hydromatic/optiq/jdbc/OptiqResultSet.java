@@ -418,7 +418,7 @@ expr_stmt|;
 comment|// TODO: for timeout, see IteratorResultSet.close
 comment|/*         if (timeoutCursor != null) {             final long noTimeout = 0;             timeoutCursor.close(noTimeout);             timeoutCursor = null;         } */
 block|}
-comment|/**      * Sets the timeout that this result set will wait for a row from the      * underlying iterator.      *      *<p>Not a JDBC method.</p>      *      * @param timeoutMillis Timeout in milliseconds. Must be greater than zero.      */
+comment|/**    * Sets the timeout that this result set will wait for a row from the    * underlying iterator.    *    *<p>Not a JDBC method.</p>    *    * @param timeoutMillis Timeout in milliseconds. Must be greater than zero.    */
 name|void
 name|setTimeout
 parameter_list|(
@@ -463,7 +463,7 @@ parameter_list|()
 block|{
 comment|// TODO:
 block|}
-comment|/**      * Executes this result set. (Not a JDBC method.)      *      *<p>Note that execute cannot occur in the constructor, because the      * constructor occurs while the statement is locked, to make sure that      * execute/cancel don't happen at the same time.</p>      */
+comment|/**    * Executes this result set. (Not a JDBC method.)    *    *<p>Note that execute cannot occur in the constructor, because the    * constructor occurs while the statement is locked, to make sure that    * execute/cancel don't happen at the same time.</p>    */
 name|OptiqResultSet
 name|execute
 parameter_list|()

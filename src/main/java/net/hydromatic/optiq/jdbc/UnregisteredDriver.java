@@ -185,7 +185,7 @@ operator|.
 name|DEFAULT_FACTORY
 return|;
 block|}
-comment|/**      * Creates a factory for JDBC objects (connection, statement).      * Called from the driver constructor.      *      *<p>The default implementation calls {@link JdbcVersion#current},      * then {@link #getFactoryClassName} with that version,      * then passes that class name to {@link #instantiateFactory(String)}.      * This approach is recommended it does not include in the code references      * to classes that may not be instantiable in all JDK versions.      * But drivers are free to do it their own way.</p>      *      * @return JDBC object factory      */
+comment|/**    * Creates a factory for JDBC objects (connection, statement).    * Called from the driver constructor.    *    *<p>The default implementation calls {@link JdbcVersion#current},    * then {@link #getFactoryClassName} with that version,    * then passes that class name to {@link #instantiateFactory(String)}.    * This approach is recommended it does not include in the code references    * to classes that may not be instantiable in all JDK versions.    * But drivers are free to do it their own way.</p>    *    * @return JDBC object factory    */
 specifier|protected
 name|Factory
 name|createFactory
@@ -216,7 +216,7 @@ name|HandlerImpl
 argument_list|()
 return|;
 block|}
-comment|/**      * Returns the name of a class to be factory for JDBC objects      * (connection, statement) appropriate for the current JDBC version.      */
+comment|/**    * Returns the name of a class to be factory for JDBC objects    * (connection, statement) appropriate for the current JDBC version.    */
 specifier|protected
 name|String
 name|getFactoryClassName
@@ -251,7 +251,7 @@ literal|"net.hydromatic.optiq.jdbc.FactoryJdbc41"
 return|;
 block|}
 block|}
-comment|/**      * Creates an object describing the name and version of this driver.      * Called from the driver constructor.      */
+comment|/**    * Creates an object describing the name and version of this driver.    * Called from the driver constructor.    */
 specifier|protected
 specifier|abstract
 name|DriverVersion
@@ -455,7 +455,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/** Returns the prefix of the connect string that this driver will recognize      * as its own. For example, "jdbc:optiq:". */
+comment|/** Returns the prefix of the connect string that this driver will recognize    * as its own. For example, "jdbc:optiq:". */
 specifier|protected
 specifier|abstract
 name|String
@@ -609,7 +609,7 @@ literal|""
 argument_list|)
 return|;
 block|}
-comment|/**      * Returns the driver version object. Not in the JDBC API.      *      * @return Driver version      */
+comment|/**    * Returns the driver version object. Not in the JDBC API.    *    * @return Driver version    */
 specifier|public
 name|DriverVersion
 name|getDriverVersion
@@ -654,7 +654,7 @@ operator|.
 name|jdbcCompliant
 return|;
 block|}
-comment|/**      * Registers this driver with the driver manager.      */
+comment|/**    * Registers this driver with the driver manager.    */
 specifier|protected
 name|void
 name|register

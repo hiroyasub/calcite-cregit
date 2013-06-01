@@ -36,7 +36,7 @@ name|JsonCustomTable
 extends|extends
 name|JsonTable
 block|{
-comment|/** Name of the factory class for this table. Must implement interface      * {@link net.hydromatic.optiq.TableFactory} and have a public default      * constructor. */
+comment|/** Name of the factory class for this table. Must implement interface    * {@link net.hydromatic.optiq.TableFactory} and have a public default    * constructor. */
 specifier|public
 name|String
 name|factory

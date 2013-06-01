@@ -107,7 +107,7 @@ name|t2
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates a memory-, CPU- and cache-efficient immutable list.      *      * @param t Array of members of list      * @param<T> Element type      * @return List containing the given members      */
+comment|/**    * Creates a memory-, CPU- and cache-efficient immutable list.    *    * @param t Array of members of list    * @param<T> Element type    * @return List containing the given members    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -133,7 +133,7 @@ literal|false
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates a memory-, CPU- and cache-efficient immutable list,      * always copying the contents.      *      * @param t Array of members of list      * @param<T> Element type      * @return List containing the given members      */
+comment|/**    * Creates a memory-, CPU- and cache-efficient immutable list,    * always copying the contents.    *    * @param t Array of members of list    * @param<T> Element type    * @return List containing the given members    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -159,7 +159,7 @@ literal|true
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates a memory-, CPU- and cache-efficient immutable list, optionally      * copying the list.      *      * @param copy Whether to always copy the list      * @param t Array of members of list      * @return List containing the given members      */
+comment|/**    * Creates a memory-, CPU- and cache-efficient immutable list, optionally    * copying the list.    *    * @param copy Whether to always copy the list    * @param t Array of members of list    * @return List containing the given members    */
 specifier|private
 specifier|static
 parameter_list|<
@@ -295,7 +295,7 @@ return|;
 block|}
 block|}
 block|}
-comment|/**      * Creates a memory-, CPU- and cache-efficient immutable list from an      * existing list. The list is always copied.      *      * @param t Array of members of list      * @param<T> Element type      * @return List containing the given members      */
+comment|/**    * Creates a memory-, CPU- and cache-efficient immutable list from an    * existing list. The list is always copied.    *    * @param t Array of members of list    * @param<T> Element type    * @return List containing the given members    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -768,7 +768,7 @@ argument_list|()
 throw|;
 block|}
 block|}
-comment|/**      * List that stores its two elements in the two members of the class.      * Unlike {@link java.util.ArrayList} or      * {@link java.util.Arrays#asList(Object[])} there is      * no array, only one piece of memory allocated, therefore is very compact      * and cache and CPU efficient.      *      *<p>The list is read-only, cannot be modified or resized, and neither      * of the elements can be null.      *      *<p>The list is created via {@link FlatLists#of}.      *      * @param<T>      */
+comment|/**    * List that stores its two elements in the two members of the class.    * Unlike {@link java.util.ArrayList} or    * {@link java.util.Arrays#asList(Object[])} there is    * no array, only one piece of memory allocated, therefore is very compact    * and cache and CPU efficient.    *    *<p>The list is read-only, cannot be modified or resized, and neither    * of the elements can be null.    *    *<p>The list is created via {@link FlatLists#of}.    *    * @param<T>    */
 specifier|protected
 specifier|static
 class|class
@@ -1245,7 +1245,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**      * List that stores its three elements in the three members of the class.      * Unlike {@link java.util.ArrayList} or      * {@link java.util.Arrays#asList(Object[])} there is      * no array, only one piece of memory allocated, therefore is very compact      * and cache and CPU efficient.      *      *<p>The list is read-only, cannot be modified or resized, and none      * of the elements can be null.      *      *<p>The list is created via {@link FlatLists#of(java.util.List)}.      *      * @param<T>      */
+comment|/**    * List that stores its three elements in the three members of the class.    * Unlike {@link java.util.ArrayList} or    * {@link java.util.Arrays#asList(Object[])} there is    * no array, only one piece of memory allocated, therefore is very compact    * and cache and CPU efficient.    *    *<p>The list is read-only, cannot be modified or resized, and none    * of the elements can be null.    *    *<p>The list is created via {@link FlatLists#of(java.util.List)}.    *    * @param<T>    */
 specifier|protected
 specifier|static
 class|class

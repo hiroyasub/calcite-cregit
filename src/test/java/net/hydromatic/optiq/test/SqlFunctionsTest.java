@@ -988,7 +988,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Unit test for      * {@link Utilities#compare(java.util.List, java.util.List)}. */
+comment|/** Unit test for    * {@link Utilities#compare(java.util.List, java.util.List)}. */
 specifier|public
 name|void
 name|testCompare

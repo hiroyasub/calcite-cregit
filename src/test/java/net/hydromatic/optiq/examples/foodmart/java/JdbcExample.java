@@ -326,7 +326,7 @@ literal|150
 argument_list|,
 literal|"Sebastian"
 argument_list|)
-block|,         }
+block|,     }
 decl_stmt|;
 block|}
 specifier|public
@@ -395,7 +395,7 @@ literal|150
 argument_list|,
 literal|20
 argument_list|)
-block|,         }
+block|,     }
 decl_stmt|;
 block|}
 specifier|public

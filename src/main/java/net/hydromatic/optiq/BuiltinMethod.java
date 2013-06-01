@@ -160,7 +160,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Builtin methods.  *  * @author jhyde  */
+comment|/**  * Builtin methods.  */
 end_comment
 
 begin_enum

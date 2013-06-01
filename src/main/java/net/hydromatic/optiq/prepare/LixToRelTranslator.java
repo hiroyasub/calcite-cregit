@@ -150,7 +150,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Translates a tree of linq4j {@link Queryable} nodes to a tree of  * {@link RelNode} planner nodes.  *  * @see QueryableRelBuilder  *  * @author jhyde  */
+comment|/**  * Translates a tree of linq4j {@link Queryable} nodes to a tree of  * {@link RelNode} planner nodes.  *  * @see QueryableRelBuilder  */
 end_comment
 
 begin_class

@@ -36,7 +36,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Compares arrays.  *  * @author jhyde  */
+comment|/**  * Compares arrays.  */
 end_comment
 
 begin_class

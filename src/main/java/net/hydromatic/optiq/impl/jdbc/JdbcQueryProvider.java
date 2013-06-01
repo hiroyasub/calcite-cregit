@@ -66,7 +66,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Implementation of {@link QueryProvider} that talks to JDBC databases.  *  * @author jhyde  */
+comment|/**  * Implementation of {@link QueryProvider} that talks to JDBC databases.  */
 end_comment
 
 begin_class

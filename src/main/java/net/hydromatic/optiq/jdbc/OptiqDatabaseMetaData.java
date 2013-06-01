@@ -26,7 +26,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Implementation of {@link java.sql.DatabaseMetaData}  * for the Optiq engine.  *  *<p>This class has sub-classes which implement JDBC 3.0 and JDBC 4.0 APIs;  * it is instantiated using {@link Factory#newDatabaseMetaData}.</p>  *  * @author jhyde  */
+comment|/**  * Implementation of {@link java.sql.DatabaseMetaData}  * for the Optiq engine.  *  *<p>This class has sub-classes which implement JDBC 3.0 and JDBC 4.0 APIs;  * it is instantiated using {@link Factory#newDatabaseMetaData}.</p>  */
 end_comment
 
 begin_class

@@ -105,7 +105,7 @@ block|,
 literal|"\\p{Alnum}"
 block|}
 decl_stmt|;
-comment|/**      * Translates a SQL LIKE pattern to Java regex pattern, with optional      * escape string.      */
+comment|/**    * Translates a SQL LIKE pattern to Java regex pattern, with optional    * escape string.    */
 specifier|static
 name|String
 name|sqlToRegexLike
@@ -174,7 +174,7 @@ name|escapeChar
 argument_list|)
 return|;
 block|}
-comment|/**      * Translates a SQL LIKE pattern to Java regex pattern.      */
+comment|/**    * Translates a SQL LIKE pattern to Java regex pattern.    */
 specifier|static
 name|String
 name|sqlToRegexLike
@@ -980,7 +980,7 @@ operator|-
 literal|1
 return|;
 block|}
-comment|/**      * Translates a SQL SIMILAR pattern to Java regex pattern, with optional      * escape string.      */
+comment|/**    * Translates a SQL SIMILAR pattern to Java regex pattern, with optional    * escape string.    */
 specifier|static
 name|String
 name|sqlToRegexSimilar
@@ -1049,7 +1049,7 @@ name|escapeChar
 argument_list|)
 return|;
 block|}
-comment|/**      * Translates SQL SIMILAR pattern to Java regex pattern.      */
+comment|/**    * Translates SQL SIMILAR pattern to Java regex pattern.    */
 specifier|static
 name|String
 name|sqlToRegexSimilar

@@ -186,7 +186,7 @@ operator|=
 name|databaseMinorVersion
 expr_stmt|;
 block|}
-comment|/** Loads a driver version from a properties file, read from the classpath.      * The arguments provide defaults if the properties cannot be loaded.      *      * @param driverClass Class of driver; used to find resource      * @param resourceName Name of resource file      * @param driverName Fallback name of driver      * @param driverVersion Fallback version of driver      * @param productName Fallback product name      * @param productVersion Fallback product version      * @return A populated driver version object, never null      */
+comment|/** Loads a driver version from a properties file, read from the classpath.    * The arguments provide defaults if the properties cannot be loaded.    *    * @param driverClass Class of driver; used to find resource    * @param resourceName Name of resource file    * @param driverName Fallback name of driver    * @param driverVersion Fallback version of driver    * @param productName Fallback product name    * @param productVersion Fallback product version    * @return A populated driver version object, never null    */
 specifier|public
 specifier|static
 name|DriverVersion

@@ -2625,7 +2625,7 @@ name|translatedOperands
 argument_list|)
 return|;
 block|}
-comment|/** Implements an aggregate function by generating a call to a method that      * takes an enumeration and an accessor function. */
+comment|/** Implements an aggregate function by generating a call to a method that    * takes an enumeration and an accessor function. */
 interface|interface
 name|AggregateImplementor
 block|{
@@ -2640,11 +2640,11 @@ name|accessor
 parameter_list|)
 function_decl|;
 block|}
-comment|/** Implements an aggregate function by generating expressions to      * initialize, add to, and get a result from, an accumulator. */
+comment|/** Implements an aggregate function by generating expressions to    * initialize, add to, and get a result from, an accumulator. */
 interface|interface
 name|AggImplementor2
 block|{
-comment|/** Whether "add" code is called if any of the arguments are null. If          * false, the container will ensure that the "add" arguments are always          * not-null. If true, the container code must handle null values          * appropriately. */
+comment|/** Whether "add" code is called if any of the arguments are null. If      * false, the container will ensure that the "add" arguments are always      * not-null. If true, the container code must handle null values      * appropriately. */
 name|boolean
 name|callOnNull
 parameter_list|()
@@ -2726,7 +2726,7 @@ else|:
 name|NOT_POSSIBLE
 return|;
 block|}
-comment|/** Adapts an expression with "normal" result to one that adheres to          * this particular policy. */
+comment|/** Adapts an expression with "normal" result to one that adheres to      * this particular policy. */
 specifier|public
 name|Expression
 name|handle
@@ -2976,7 +2976,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/** Simplified version of {@link CallImplementor} that does not know about      * null semantics. */
+comment|/** Simplified version of {@link CallImplementor} that does not know about    * null semantics. */
 interface|interface
 name|NotNullImplementor
 block|{
@@ -3735,7 +3735,7 @@ name|BinaryImplementor
 implements|implements
 name|NotNullImplementor
 block|{
-comment|/** Types that can be arguments to comparison operators such as          * {@code<}. */
+comment|/** Types that can be arguments to comparison operators such as      * {@code<}. */
 specifier|private
 specifier|static
 specifier|final
@@ -3979,7 +3979,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/** Describes when a function/operator will return null.      *      *<p>STRICT and ANY are similar. STRICT says f(a0, a1) will NEVER return      * null if a0 and a1 are not null. This means that we can check whether f      * returns null just by checking its arguments. Use STRICT in preference to      * ANY whenever possible.</p>      */
+comment|/** Describes when a function/operator will return null.    *    *<p>STRICT and ANY are similar. STRICT says f(a0, a1) will NEVER return    * null if a0 and a1 are not null. This means that we can check whether f    * returns null just by checking its arguments. Use STRICT in preference to    * ANY whenever possible.</p>    */
 enum|enum
 name|NullPolicy
 block|{
@@ -3989,15 +3989,15 @@ block|,
 comment|/** If any of the arguments are null, return null. */
 name|ANY
 block|,
-comment|/** If any of the arguments are false, result is false; else if any          * arguments are null, result is null; else true. */
+comment|/** If any of the arguments are false, result is false; else if any      * arguments are null, result is null; else true. */
 name|AND
 block|,
-comment|/** If any of the arguments are true, result is true; else if any          * arguments are null, result is null; else false. */
+comment|/** If any of the arguments are true, result is true; else if any      * arguments are null, result is null; else false. */
 name|OR
 block|,
 name|NONE
 block|}
-comment|/** Visitor that optimizes expressions.      *      *<p>The optimizations are essential, not mere tweaks. Without      * optimization, expressions such as {@code false == null} will be left in,      * which are invalid to Janino (because it does not automatically box      * primitives).</p>      */
+comment|/** Visitor that optimizes expressions.    *    *<p>The optimizations are essential, not mere tweaks. Without    * optimization, expressions such as {@code false == null} will be left in,    * which are invalid to Janino (because it does not automatically box    * primitives).</p>    */
 specifier|static
 class|class
 name|OptimizeVisitor
@@ -4351,7 +4351,7 @@ return|return
 name|binary
 return|;
 block|}
-comment|/** Returns whether an expression always evaluates to true or false.          * Assumes that expression has already been optimized. */
+comment|/** Returns whether an expression always evaluates to true or false.      * Assumes that expression has already been optimized. */
 specifier|private
 specifier|static
 name|Boolean
@@ -4845,7 +4845,7 @@ return|;
 block|}
 block|}
 block|}
-comment|/** Implements "IS XXX" operations such as "IS NULL"      * or "IS NOT TRUE".      *      *<p>What these operators have in common:</p>      * 1. They return TRUE or FALSE, never NULL.      * 2. Of the 3 input values (TRUE, FALSE, NULL) they return TRUE for 1 or 2,      *    FALSE for the other 2 or 1.      */
+comment|/** Implements "IS XXX" operations such as "IS NULL"    * or "IS NOT TRUE".    *    *<p>What these operators have in common:</p>    * 1. They return TRUE or FALSE, never NULL.    * 2. Of the 3 input values (TRUE, FALSE, NULL) they return TRUE for 1 or 2,    *    FALSE for the other 2 or 1.    */
 specifier|private
 specifier|static
 class|class

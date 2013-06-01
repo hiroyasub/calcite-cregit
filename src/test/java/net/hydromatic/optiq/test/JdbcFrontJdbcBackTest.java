@@ -90,7 +90,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Tests for a JDBC front-end and JDBC back-end.  *  *<p>The idea is that as much as possible of the query is pushed down  * to the JDBC data source, in the form of a large (and hopefully efficient)  * SQL statement.</p>  *  * @see JdbcFrontJdbcBackLinqMiddleTest  *  * @author jhyde  */
+comment|/**  * Tests for a JDBC front-end and JDBC back-end.  *  *<p>The idea is that as much as possible of the query is pushed down  * to the JDBC data source, in the form of a large (and hopefully efficient)  * SQL statement.</p>  *  * @see JdbcFrontJdbcBackLinqMiddleTest  */
 end_comment
 
 begin_class
@@ -510,7 +510,7 @@ block|}
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Tests a JDBC method known to be not implemented (as it happens,      * {@link java.sql.DatabaseMetaData#getPrimaryKeys}) that therefore uses      * empty result set. */
+comment|/** Tests a JDBC method known to be not implemented (as it happens,    * {@link java.sql.DatabaseMetaData#getPrimaryKeys}) that therefore uses    * empty result set. */
 specifier|public
 name|void
 name|testEmpty

@@ -162,7 +162,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Tests for a JDBC front-end (with some quite complex SQL) and Linq4j back-end  * (based on in-memory collections).  *  * @author jhyde  */
+comment|/**  * Tests for a JDBC front-end (with some quite complex SQL) and Linq4j back-end  * (based on in-memory collections).  */
 end_comment
 
 begin_class
@@ -172,7 +172,7 @@ name|JdbcFrontLinqBackTest
 extends|extends
 name|TestCase
 block|{
-comment|/**      * Runs a simple query that reads from a table in an in-memory schema.      */
+comment|/**    * Runs a simple query that reads from a table in an in-memory schema.    */
 specifier|public
 name|void
 name|testSelect
@@ -196,7 +196,7 @@ literal|"cust_id=100; prod_id=10\n"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Runs a simple query that joins between two in-memory schemas.      */
+comment|/**    * Runs a simple query that joins between two in-memory schemas.    */
 specifier|public
 name|void
 name|testJoin
@@ -224,7 +224,7 @@ literal|"cust_id=150; prod_id=20; empid=150; deptno=10; name=Sebastian; commissi
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Simple GROUP BY.      */
+comment|/**    * Simple GROUP BY.    */
 specifier|public
 name|void
 name|testGroupBy
@@ -250,7 +250,7 @@ literal|"deptno=10; S=250; C=2\n"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Simple ORDER BY.      */
+comment|/**    * Simple ORDER BY.    */
 specifier|public
 name|void
 name|testOrderBy
@@ -278,7 +278,7 @@ literal|"UN=ERIC; deptno=20\n"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Simple UNION, plus ORDER BY.      *      *<p>Also tests a query that returns a single column. We optimize this case      * internally, using non-array representations for rows.</p>      */
+comment|/**    * Simple UNION, plus ORDER BY.    *    *<p>Also tests a query that returns a single column. We optimize this case    * internally, using non-array representations for rows.</p>    */
 specifier|public
 name|void
 name|testUnionAllOrderBy
@@ -318,7 +318,7 @@ literal|"name=Bill\n"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Tests UNION.      */
+comment|/**    * Tests UNION.    */
 specifier|public
 name|void
 name|testUnion
@@ -354,7 +354,7 @@ literal|"X=H\n"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Tests INTERSECT.      */
+comment|/**    * Tests INTERSECT.    */
 specifier|public
 name|void
 name|testIntersect
@@ -382,7 +382,7 @@ literal|"X=S\n"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Tests EXCEPT.      */
+comment|/**    * Tests EXCEPT.    */
 specifier|public
 name|void
 name|testExcept

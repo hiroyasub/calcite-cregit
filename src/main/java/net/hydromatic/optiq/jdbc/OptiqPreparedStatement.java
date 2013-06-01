@@ -88,7 +88,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Implementation of {@link java.sql.PreparedStatement}  * for the Optiq engine.  *  *<p>This class has sub-classes which implement JDBC 3.0 and JDBC 4.0 APIs;  * it is instantiated using {@link Factory#newPreparedStatement}.</p>  *  * @author jhyde  */
+comment|/**  * Implementation of {@link java.sql.PreparedStatement}  * for the Optiq engine.  *  *<p>This class has sub-classes which implement JDBC 3.0 and JDBC 4.0 APIs;  * it is instantiated using {@link Factory#newPreparedStatement}.</p>  */
 end_comment
 
 begin_class
@@ -117,7 +117,7 @@ specifier|final
 name|ResultSetMetaData
 name|resultSetMetaData
 decl_stmt|;
-comment|/**      * Creates an OptiqPreparedStatement.      *      * @param connection Connection      * @param sql MDX query string      *      * @throws SQLException if database error occurs      */
+comment|/**    * Creates an OptiqPreparedStatement.    *    * @param connection Connection    * @param sql MDX query string    *    * @throws SQLException if database error occurs    */
 specifier|protected
 name|OptiqPreparedStatement
 parameter_list|(

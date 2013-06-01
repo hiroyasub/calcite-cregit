@@ -38,7 +38,7 @@ name|MutableSchema
 extends|extends
 name|Schema
 block|{
-comment|/** Defines a table-function in this schema. There can be multiple      * table-functions with the same name; this method will not remove a      * table-function with the same name, just define another overloading. */
+comment|/** Defines a table-function in this schema. There can be multiple    * table-functions with the same name; this method will not remove a    * table-function with the same name, just define another overloading. */
 name|void
 name|addTableFunction
 parameter_list|(
@@ -68,7 +68,7 @@ name|Schema
 name|schema
 parameter_list|)
 function_decl|;
-comment|/** Returns the expression with which a sub-schema of this schema with a      * given name and type should be accessed. */
+comment|/** Returns the expression with which a sub-schema of this schema with a    * given name and type should be accessed. */
 name|Expression
 name|getSubSchemaExpression
 parameter_list|(

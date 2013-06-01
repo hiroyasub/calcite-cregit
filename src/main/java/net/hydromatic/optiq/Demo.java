@@ -24,7 +24,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Created with IntelliJ IDEA.  * User: jhyde  * Date: 4/23/12  * Time: 11:29 AM  * To change this template use File | Settings | File Templates.  */
+comment|/**  * Demo.  */
 end_comment
 
 begin_class

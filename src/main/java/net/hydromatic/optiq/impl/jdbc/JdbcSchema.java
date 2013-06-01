@@ -164,7 +164,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Implementation of {@link Schema} that is backed by a JDBC data source.  *  *<p>The tables in the JDBC data source appear to be tables in this schema;  * queries against this schema are executed against those tables, pushing down  * as much as possible of the query logic to SQL.</p>  *  * @author jhyde  */
+comment|/**  * Implementation of {@link Schema} that is backed by a JDBC data source.  *  *<p>The tables in the JDBC data source appear to be tables in this schema;  * queries against this schema are executed against those tables, pushing down  * as much as possible of the query logic to SQL.</p>  */
 end_comment
 
 begin_class
@@ -207,7 +207,7 @@ specifier|final
 name|JdbcConvention
 name|convention
 decl_stmt|;
-comment|/**      * Creates a JDBC schema.      *      * @param queryProvider Query provider      * @param name Schema name      * @param dataSource Data source      * @param dialect SQL dialect      * @param catalog Catalog name, or null      * @param schema Schema name pattern      * @param typeFactory Type factory      */
+comment|/**    * Creates a JDBC schema.    *    * @param queryProvider Query provider    * @param name Schema name    * @param dataSource Data source    * @param dialect SQL dialect    * @param catalog Catalog name, or null    * @param schema Schema name pattern    * @param typeFactory Type factory    */
 specifier|public
 name|JdbcSchema
 parameter_list|(
@@ -320,7 +320,7 @@ operator|!=
 literal|null
 assert|;
 block|}
-comment|/**      * Creates a JdbcSchema within another schema.      *      * @param parentSchema Parent schema      * @param dataSource Data source      * @param jdbcCatalog Catalog name, or null      * @param jdbcSchema Schema name pattern      * @param name Name of new schema      * @return New JdbcSchema      */
+comment|/**    * Creates a JdbcSchema within another schema.    *    * @param parentSchema Parent schema    * @param dataSource Data source    * @param jdbcCatalog Catalog name, or null    * @param jdbcSchema Schema name pattern    * @param name Name of new schema    * @return New JdbcSchema    */
 specifier|public
 specifier|static
 name|JdbcSchema
@@ -398,7 +398,7 @@ return|return
 name|schema
 return|;
 block|}
-comment|/**      * Creates a JdbcSchema, taking credentials from a map.      *      * @param parentSchema Parent schema      * @param name Name      * @param operand Map of property/value pairs      * @return A JdbcSchema      */
+comment|/**    * Creates a JdbcSchema, taking credentials from a map.    *    * @param parentSchema Parent schema    * @param name Name    * @param operand Map of property/value pairs    * @return A JdbcSchema    */
 specifier|public
 specifier|static
 name|JdbcSchema
@@ -1429,7 +1429,7 @@ name|table
 return|;
 block|}
 block|}
-comment|/** Schema factory that creates a      * {@link net.hydromatic.optiq.impl.clone.CloneSchema}.      * This allows you to create a clone schema inside a model.json file.      *      *<pre>{@code      * {      *   version: '1.0',      *   defaultSchema: 'FOODMART_CLONE',      *   schemas: [      *     {      *       name: 'FOODMART_CLONE',      *       type: 'custom',      *       factory: 'net.hydromatic.optiq.impl.clone.CloneSchema.Factory',      *       operand: {      *         driver: 'com.mysql.jdbc.Driver',      *         url: 'jdbc:mysql://localhost/foodmart',      *         user: 'foodmart',      *         password: 'foodmart'      *       }      *     }      *   ]      * }      * }</pre>      */
+comment|/** Schema factory that creates a    * {@link net.hydromatic.optiq.impl.clone.CloneSchema}.    * This allows you to create a clone schema inside a model.json file.    *    *<pre>{@code    * {    *   version: '1.0',    *   defaultSchema: 'FOODMART_CLONE',    *   schemas: [    *     {    *       name: 'FOODMART_CLONE',    *       type: 'custom',    *       factory: 'net.hydromatic.optiq.impl.clone.CloneSchema.Factory',    *       operand: {    *         driver: 'com.mysql.jdbc.Driver',    *         url: 'jdbc:mysql://localhost/foodmart',    *         user: 'foodmart',    *         password: 'foodmart'    *       }    *     }    *   ]    * }    * }</pre>    */
 specifier|public
 specifier|static
 class|class

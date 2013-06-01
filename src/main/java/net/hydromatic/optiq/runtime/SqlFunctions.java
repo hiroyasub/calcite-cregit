@@ -68,7 +68,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Helper methods to implement SQL functions in generated code.  *  *<p>Not present: and, or, not (builtin operators are better, because they  * use lazy evaluation. Implementations do not check for null values; the  * calling code must do that.</p>  *  *<p>Many of the functions do not check for null values. This is intentional.  * If null arguments are possible, the code-generation framework checks for  * nulls before calling the functions.</p>  *  * @author jhyde  */
+comment|/**  * Helper methods to implement SQL functions in generated code.  *  *<p>Not present: and, or, not (builtin operators are better, because they  * use lazy evaluation. Implementations do not check for null values; the  * calling code must do that.</p>  *  *<p>Many of the functions do not check for null values. This is intentional.  * If null arguments are possible, the code-generation framework checks for  * nulls before calling the functions.</p>  */
 end_comment
 
 begin_class
@@ -912,7 +912,7 @@ argument_list|)
 return|;
 block|}
 comment|// =
-comment|/** SQL = operator applied to Object values (including String; neither      * side may be null). */
+comment|/** SQL = operator applied to Object values (including String; neither    * side may be null). */
 specifier|public
 specifier|static
 name|boolean
@@ -963,7 +963,7 @@ argument_list|)
 return|;
 block|}
 comment|//<>
-comment|/** SQL&lt;&gt; operator applied to Object values (including String;      * neither side may be null). */
+comment|/** SQL&lt;&gt; operator applied to Object values (including String;    * neither side may be null). */
 specifier|public
 specifier|static
 name|boolean
@@ -1298,7 +1298,7 @@ operator|+
 name|b1
 return|;
 block|}
-comment|/** SQL<code>+</code> operator applied to int values; left side may be      * null. */
+comment|/** SQL<code>+</code> operator applied to int values; left side may be    * null. */
 specifier|public
 specifier|static
 name|Integer
@@ -1325,7 +1325,7 @@ name|b1
 operator|)
 return|;
 block|}
-comment|/** SQL<code>+</code> operator applied to int values; right side may be      * null. */
+comment|/** SQL<code>+</code> operator applied to int values; right side may be    * null. */
 specifier|public
 specifier|static
 name|Integer
@@ -1517,7 +1517,7 @@ operator|-
 name|b1
 return|;
 block|}
-comment|/** SQL<code>-</code> operator applied to int values; left side may be      * null. */
+comment|/** SQL<code>-</code> operator applied to int values; left side may be    * null. */
 specifier|public
 specifier|static
 name|Integer
@@ -1544,7 +1544,7 @@ name|b1
 operator|)
 return|;
 block|}
-comment|/** SQL<code>-</code> operator applied to int values; right side may be      * null. */
+comment|/** SQL<code>-</code> operator applied to int values; right side may be    * null. */
 specifier|public
 specifier|static
 name|Integer
@@ -1736,7 +1736,7 @@ operator|/
 name|b1
 return|;
 block|}
-comment|/** SQL<code>/</code> operator applied to int values; left side may be      * null. */
+comment|/** SQL<code>/</code> operator applied to int values; left side may be    * null. */
 specifier|public
 specifier|static
 name|Integer
@@ -1763,7 +1763,7 @@ name|b1
 operator|)
 return|;
 block|}
-comment|/** SQL<code>/</code> operator applied to int values; right side may be      * null. */
+comment|/** SQL<code>/</code> operator applied to int values; right side may be    * null. */
 specifier|public
 specifier|static
 name|Integer
@@ -1955,7 +1955,7 @@ operator|*
 name|b1
 return|;
 block|}
-comment|/** SQL<code>*</code> operator applied to int values; left side may be      * null. */
+comment|/** SQL<code>*</code> operator applied to int values; left side may be    * null. */
 specifier|public
 specifier|static
 name|Integer
@@ -1982,7 +1982,7 @@ name|b1
 operator|)
 return|;
 block|}
-comment|/** SQL<code>*</code> operator applied to int values; right side may be      * null. */
+comment|/** SQL<code>*</code> operator applied to int values; right side may be    * null. */
 specifier|public
 specifier|static
 name|Integer
@@ -4227,7 +4227,7 @@ operator|-
 literal|32083
 return|;
 block|}
-comment|/** Helper for "array element reference". Caller has already ensured that      * array and index are not null. Index is 1-based, per SQL. */
+comment|/** Helper for "array element reference". Caller has already ensured that    * array and index are not null. Index is 1-based, per SQL. */
 specifier|public
 specifier|static
 name|Object
@@ -4269,7 +4269,7 @@ literal|1
 argument_list|)
 return|;
 block|}
-comment|/** Helper for "map element reference". Caller has already ensured that      * array and index are not null. Index is 1-based, per SQL. */
+comment|/** Helper for "map element reference". Caller has already ensured that    * array and index are not null. Index is 1-based, per SQL. */
 specifier|public
 specifier|static
 name|Object
@@ -4291,7 +4291,7 @@ name|item
 argument_list|)
 return|;
 block|}
-comment|/** Implements the {@code [ ... ]} operator on an object whose type is not      * known until runtime.      */
+comment|/** Implements the {@code [ ... ]} operator on an object whose type is not    * known until runtime.    */
 specifier|public
 specifier|static
 name|Object

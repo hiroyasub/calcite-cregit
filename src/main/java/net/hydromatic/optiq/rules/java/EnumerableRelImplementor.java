@@ -204,7 +204,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Subclass of {@link RelImplementor} for relational operators  * of one of the {@link EnumerableConvention} calling  * conventions.  *  * @author jhyde  */
+comment|/**  * Subclass of {@link RelImplementor} for relational operators  * of one of the {@link EnumerableConvention} calling  * conventions.  */
 end_comment
 
 begin_class

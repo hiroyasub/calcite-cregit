@@ -244,7 +244,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Fluid DSL for testing Optiq connections and queries.  *  * @author jhyde  */
+comment|/**  * Fluid DSL for testing Optiq connections and queries.  */
 end_comment
 
 begin_class
@@ -1099,7 +1099,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**      * Result of calling {@link OptiqAssert#assertThat}.      */
+comment|/**    * Result of calling {@link OptiqAssert#assertThat}.    */
 specifier|public
 specifier|static
 class|class
@@ -1173,7 +1173,7 @@ name|connectionFactory
 argument_list|)
 return|;
 block|}
-comment|/** Sets the default schema to a reflective schema based on a given          * object. */
+comment|/** Sets the default schema to a reflective schema based on a given      * object. */
 specifier|public
 name|AssertThat
 name|with
@@ -1363,7 +1363,7 @@ name|sql
 argument_list|)
 return|;
 block|}
-comment|/** Asserts that there is an exception with the given message while          * creating a connection. */
+comment|/** Asserts that there is an exception with the given message while      * creating a connection. */
 specifier|public
 name|void
 name|connectThrows
@@ -1381,7 +1381,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Asserts that there is an exception that matches the given predicate          * while creating a connection. */
+comment|/** Asserts that there is an exception that matches the given predicate      * while creating a connection. */
 specifier|public
 name|void
 name|connectThrows
@@ -2237,20 +2237,20 @@ specifier|public
 enum|enum
 name|Config
 block|{
-comment|/**          * Configuration that creates a connection with two in-memory data sets:          * {@link net.hydromatic.optiq.test.JdbcTest.HrSchema} and          * {@link net.hydromatic.optiq.test.JdbcTest.FoodmartSchema}.          */
+comment|/**      * Configuration that creates a connection with two in-memory data sets:      * {@link net.hydromatic.optiq.test.JdbcTest.HrSchema} and      * {@link net.hydromatic.optiq.test.JdbcTest.FoodmartSchema}.      */
 name|REGULAR
 block|,
-comment|/**          * Configuration that creates a connection to a MySQL server. Tables          * such as "customer" and "sales_fact_1997" are available. Queries          * are processed by generating Java that calls linq4j operators          * such as          * {@link net.hydromatic.linq4j.Enumerable#where(net.hydromatic.linq4j.function.Predicate1)}.          */
+comment|/**      * Configuration that creates a connection to a MySQL server. Tables      * such as "customer" and "sales_fact_1997" are available. Queries      * are processed by generating Java that calls linq4j operators      * such as      * {@link net.hydromatic.linq4j.Enumerable#where(net.hydromatic.linq4j.function.Predicate1)}.      */
 name|JDBC_FOODMART
 block|,
 name|JDBC_FOODMART2
 block|,
-comment|/** Configuration that contains an in-memory clone of the FoodMart          * database. */
+comment|/** Configuration that contains an in-memory clone of the FoodMart      * database. */
 name|FOODMART_CLONE
 block|,
 comment|/** Configuration that includes the metadata schema. */
 name|REGULAR_PLUS_METADATA
-block|,     }
+block|,   }
 block|}
 end_class
 

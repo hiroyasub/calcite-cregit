@@ -100,7 +100,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Implementation of {@link net.hydromatic.optiq.Schema} that delegates to an  * underlying schema.  *  * @author jhyde  */
+comment|/**  * Implementation of {@link net.hydromatic.optiq.Schema} that delegates to an  * underlying schema.  */
 end_comment
 
 begin_class
@@ -115,7 +115,7 @@ specifier|final
 name|Schema
 name|schema
 decl_stmt|;
-comment|/**      * Creates a DelegatingSchema.      *      * @param schema Underlying schema      */
+comment|/**    * Creates a DelegatingSchema.    *    * @param schema Underlying schema    */
 specifier|public
 name|DelegatingSchema
 parameter_list|(

@@ -136,7 +136,7 @@ specifier|private
 name|Object
 name|target
 decl_stmt|;
-comment|/**      * Creates a ReflectiveSchema.      *      * @param parentSchema Parent schema      * @param target Object whose fields will be sub-objects of the schema      * @param expression Expression for schema      */
+comment|/**    * Creates a ReflectiveSchema.    *    * @param parentSchema Parent schema    * @param target Object whose fields will be sub-objects of the schema    * @param expression Expression for schema    */
 specifier|public
 name|ReflectiveSchema
 parameter_list|(
@@ -295,7 +295,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Creates a ReflectiveSchema within another schema.      *      * @param parentSchema Parent schema      * @param name Name of new schema      * @param target Object whose fields become the tables of the schema      * @return New ReflectiveSchema      */
+comment|/**    * Creates a ReflectiveSchema within another schema.    *    * @param parentSchema Parent schema    * @param name Name of new schema    * @param target Object whose fields become the tables of the schema    * @return New ReflectiveSchema    */
 specifier|public
 specifier|static
 name|ReflectiveSchema
@@ -361,7 +361,7 @@ operator|+
 literal|")"
 return|;
 block|}
-comment|/** Returns the wrapped object. (May not appear to be used, but is used in      * generated code via {@link BuiltinMethod#GET_TARGET}.) */
+comment|/** Returns the wrapped object. (May not appear to be used, but is used in    * generated code via {@link BuiltinMethod#GET_TARGET}.) */
 specifier|public
 name|Object
 name|getTarget
@@ -705,7 +705,7 @@ block|}
 block|}
 return|;
 block|}
-comment|/** Returns an expression for the object wrapped by this schema (not the      * schema itself). */
+comment|/** Returns an expression for the object wrapped by this schema (not the    * schema itself). */
 name|Expression
 name|getTargetExpression
 parameter_list|()
@@ -745,7 +745,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/** Returns a table based on a particular field of this schema. If the      * field is not of the right type to be a relation, returns null. */
+comment|/** Returns a table based on a particular field of this schema. If the    * field is not of the right type to be a relation, returns null. */
 specifier|private
 parameter_list|<
 name|T
@@ -904,7 +904,7 @@ block|}
 block|}
 return|;
 block|}
-comment|/** Deduces the element type of a collection;      * same logic as {@link #toEnumerable} */
+comment|/** Deduces the element type of a collection;    * same logic as {@link #toEnumerable} */
 specifier|private
 specifier|static
 name|Type

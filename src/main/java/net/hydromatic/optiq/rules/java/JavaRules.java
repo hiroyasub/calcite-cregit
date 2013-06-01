@@ -296,7 +296,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Rules and relational operators for the {@link Enumerable} calling convention.  *  * @author jhyde  */
+comment|/**  * Rules and relational operators for the {@link Enumerable} calling convention.  */
 end_comment
 
 begin_class
@@ -1288,7 +1288,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**      * Utilities for generating programs in the Enumerable (functional)      * style.      */
+comment|/**    * Utilities for generating programs in the Enumerable (functional)    * style.    */
 specifier|public
 specifier|static
 class|class
@@ -1736,7 +1736,7 @@ operator|new
 name|EnumerableCalcRule
 argument_list|()
 decl_stmt|;
-comment|/**      * Rule to convert a {@link CalcRel} to an      * {@link EnumerableCalcRel}.      */
+comment|/**    * Rule to convert a {@link CalcRel} to an    * {@link EnumerableCalcRel}.    */
 specifier|private
 specifier|static
 class|class
@@ -1857,7 +1857,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**      * Rule to convert an {@link EnumerableCalcRel} on an      * {@link EnumerableConvention#ARRAY} input to one on a      * {@link EnumerableConvention#CUSTOM} input.      */
+comment|/**    * Rule to convert an {@link EnumerableCalcRel} on an    * {@link EnumerableConvention#ARRAY} input to one on a    * {@link EnumerableConvention#CUSTOM} input.    */
 specifier|public
 specifier|static
 class|class
@@ -2034,7 +2034,7 @@ operator|.
 name|ARRAY
 argument_list|)
 decl_stmt|;
-comment|/**      * Rule to convert a relational expression from      * {@link EnumerableConvention#ARRAY} to another      * {@link EnumerableConvention}.      */
+comment|/**    * Rule to convert a relational expression from    * {@link EnumerableConvention#ARRAY} to another    * {@link EnumerableConvention}.    */
 specifier|private
 specifier|static
 class|class
@@ -2193,7 +2193,7 @@ specifier|final
 name|PhysType
 name|physType
 decl_stmt|;
-comment|/**          * Values defined in {@link org.eigenbase.rel.ProjectRelBase.Flags}.          */
+comment|/**      * Values defined in {@link org.eigenbase.rel.ProjectRelBase.Flags}.      */
 specifier|protected
 name|int
 name|flags
@@ -3006,7 +3006,7 @@ operator|new
 name|EnumerableAggregateRule
 argument_list|()
 decl_stmt|;
-comment|/**      * Rule to convert an {@link org.eigenbase.rel.AggregateRel} to an      * {@link net.hydromatic.optiq.rules.java.JavaRules.EnumerableAggregateRel}.      */
+comment|/**    * Rule to convert an {@link org.eigenbase.rel.AggregateRel} to an    * {@link net.hydromatic.optiq.rules.java.JavaRules.EnumerableAggregateRel}.    */
 specifier|private
 specifier|static
 class|class
@@ -4673,7 +4673,7 @@ operator|new
 name|EnumerableSortRule
 argument_list|()
 decl_stmt|;
-comment|/**      * Rule to convert an {@link org.eigenbase.rel.SortRel} to an      * {@link net.hydromatic.optiq.rules.java.JavaRules.EnumerableSortRel}.      */
+comment|/**    * Rule to convert an {@link org.eigenbase.rel.SortRel} to an    * {@link net.hydromatic.optiq.rules.java.JavaRules.EnumerableSortRel}.    */
 specifier|private
 specifier|static
 class|class
@@ -5075,7 +5075,7 @@ operator|new
 name|EnumerableUnionRule
 argument_list|()
 decl_stmt|;
-comment|/**      * Rule to convert an {@link org.eigenbase.rel.UnionRel} to an      * {@link net.hydromatic.optiq.rules.java.JavaRules.EnumerableUnionRel}.      */
+comment|/**    * Rule to convert an {@link org.eigenbase.rel.UnionRel} to an    * {@link net.hydromatic.optiq.rules.java.JavaRules.EnumerableUnionRel}.    */
 specifier|private
 specifier|static
 class|class
@@ -5418,7 +5418,7 @@ operator|new
 name|EnumerableIntersectRule
 argument_list|()
 decl_stmt|;
-comment|/**      * Rule to convert an {@link org.eigenbase.rel.IntersectRel} to an      * {@link net.hydromatic.optiq.rules.java.JavaRules.EnumerableIntersectRel}.      */
+comment|/**    * Rule to convert an {@link org.eigenbase.rel.IntersectRel} to an    * {@link net.hydromatic.optiq.rules.java.JavaRules.EnumerableIntersectRel}.    */
 specifier|private
 specifier|static
 class|class
@@ -5778,7 +5778,7 @@ operator|new
 name|EnumerableMinusRule
 argument_list|()
 decl_stmt|;
-comment|/**      * Rule to convert an {@link org.eigenbase.rel.MinusRel} to an      * {@link net.hydromatic.optiq.rules.java.JavaRules.EnumerableMinusRel}.      */
+comment|/**    * Rule to convert an {@link org.eigenbase.rel.MinusRel} to an    * {@link net.hydromatic.optiq.rules.java.JavaRules.EnumerableMinusRel}.    */
 specifier|private
 specifier|static
 class|class

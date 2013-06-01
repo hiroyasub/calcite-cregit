@@ -36,7 +36,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Collection of bytes.  *  *<p>ByteString is to bytes what {@link String} is to chars: It is immutable,  * implements equality (hashCode and equals), comparison (compareTo) and  * serialization correctly.</p>  *  * @author jhyde  */
+comment|/**  * Collection of bytes.  *  *<p>ByteString is to bytes what {@link String} is to chars: It is immutable,  * implements equality (hashCode and equals), comparison (compareTo) and  * serialization correctly.</p>  */
 end_comment
 
 begin_class
@@ -98,7 +98,7 @@ block|,
 literal|'f'
 block|}
 decl_stmt|;
-comment|/**      * Creates a ByteString.      *      * @param bytes Bytes      */
+comment|/**    * Creates a ByteString.    *    * @param bytes Bytes    */
 specifier|public
 name|ByteString
 parameter_list|(
@@ -261,7 +261,7 @@ operator|.
 name|length
 return|;
 block|}
-comment|/**      * Returns this byte string in hexadecimal format.      *      * @return Hexadecimal string      */
+comment|/**    * Returns this byte string in hexadecimal format.    *    * @return Hexadecimal string    */
 annotation|@
 name|Override
 specifier|public
@@ -276,7 +276,7 @@ name|bytes
 argument_list|)
 return|;
 block|}
-comment|/**      * Returns the given byte array in hexadecimal format.      *      *<p>For example,<tt>toString(new byte[] {0xDE, 0xAD})</tt>      * returns {@code "DEAD"}.</p>      *      * @param bytes Array of bytes      * @return String      */
+comment|/**    * Returns the given byte array in hexadecimal format.    *    *<p>For example,<tt>toString(new byte[] {0xDE, 0xAD})</tt>    * returns {@code "DEAD"}.</p>    *    * @param bytes Array of bytes    * @return String    */
 specifier|public
 specifier|static
 name|String
@@ -389,7 +389,7 @@ return|return
 name|this
 return|;
 block|}
-comment|/**      * Returns the number of bytes in this byte string.      *      * @return Length of this byte string      */
+comment|/**    * Returns the number of bytes in this byte string.    *    * @return Length of this byte string    */
 specifier|public
 name|int
 name|length
@@ -401,7 +401,7 @@ operator|.
 name|length
 return|;
 block|}
-comment|/**      * Returns the byte at a given position in the byte string.      *      * @param i Index      * @throws  IndexOutOfBoundsException      *          if the<tt>index</tt> argument is negative or not less than      *<tt>length()</tt>      * @return Byte at given position      */
+comment|/**    * Returns the byte at a given position in the byte string.    *    * @param i Index    * @throws  IndexOutOfBoundsException    *          if the<tt>index</tt> argument is negative or not less than    *<tt>length()</tt>    * @return Byte at given position    */
 specifier|public
 name|byte
 name|byteAt

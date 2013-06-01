@@ -226,7 +226,7 @@ return|return
 name|defaultValue
 return|;
 block|}
-comment|/** Returns the string value of this property, or null if not specified and      * no default. */
+comment|/** Returns the string value of this property, or null if not specified and    * no default. */
 specifier|public
 name|String
 name|getString
@@ -249,7 +249,7 @@ name|properties
 argument_list|)
 return|;
 block|}
-comment|/** Returns the boolean value of this property. Throws if not set and no      * default. */
+comment|/** Returns the boolean value of this property. Throws if not set and no    * default. */
 specifier|public
 name|boolean
 name|getBoolean
@@ -301,7 +301,7 @@ name|s
 argument_list|)
 return|;
 block|}
-comment|/** Converts a {@link Properties} object containing (name, value) pairs      * into a map whose keys are {@link ConnectionProperty} objects.      *      *<p>Matching is case-insensitive. Throws if a property is not known.      * If a property occurs more than once, takes the last occurrence.</p>      *      * @param properties Properties      * @return Map      * @throws RuntimeException if a property is not known      */
+comment|/** Converts a {@link Properties} object containing (name, value) pairs    * into a map whose keys are {@link ConnectionProperty} objects.    *    *<p>Matching is case-insensitive. Throws if a property is not known.    * If a property occurs more than once, takes the last occurrence.</p>    *    * @param properties Properties    * @return Map    * @throws RuntimeException if a property is not known    */
 specifier|static
 name|Map
 argument_list|<

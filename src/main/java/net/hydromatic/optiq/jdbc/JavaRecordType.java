@@ -50,7 +50,7 @@ import|;
 end_import
 
 begin_comment
-comment|/** * Record type based on a Java class. The fields of the type are the fields  * of the class.  *  *<p><strong>NOTE: This class is experimental and subject to  * change/removal without notice</strong>.</p> */
+comment|/**  * Record type based on a Java class. The fields of the type are the fields  * of the class.  *  *<p><strong>NOTE: This class is experimental and subject to  * change/removal without notice</strong>.</p>  */
 end_comment
 
 begin_class

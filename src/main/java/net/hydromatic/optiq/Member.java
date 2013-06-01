@@ -56,12 +56,12 @@ specifier|public
 interface|interface
 name|Member
 block|{
-comment|/**      * The name of this function.      */
+comment|/**    * The name of this function.    */
 name|String
 name|getName
 parameter_list|()
 function_decl|;
-comment|/**      * Returns the parameters of this member.      *      * @return Parameters; never null      */
+comment|/**    * Returns the parameters of this member.    *    * @return Parameters; never null    */
 name|List
 argument_list|<
 name|Parameter
@@ -69,12 +69,12 @@ argument_list|>
 name|getParameters
 parameter_list|()
 function_decl|;
-comment|/**      * Returns the type of this function's result.      *      * @return Type of result; never null      */
+comment|/**    * Returns the type of this function's result.    *    * @return Type of result; never null    */
 name|RelDataType
 name|getType
 parameter_list|()
 function_decl|;
-comment|/**      * Evaluates this member to yield a result. The result is a      * {@link net.hydromatic.linq4j.Queryable}.      *      * @param schemaInstance Object that is an instance of the containing      *                       {@link net.hydromatic.optiq.Schema}      * @param arguments List of arguments to the call; must match      *                  {@link #getParameters() parameters} in number and type      *      * @return An instance of this schema object, as a Queryable      */
+comment|/**    * Evaluates this member to yield a result. The result is a    * {@link net.hydromatic.linq4j.Queryable}.    *    * @param schemaInstance Object that is an instance of the containing    *                       {@link net.hydromatic.optiq.Schema}    * @param arguments List of arguments to the call; must match    *                  {@link #getParameters() parameters} in number and type    *    * @return An instance of this schema object, as a Queryable    */
 name|Queryable
 name|evaluate
 parameter_list|(

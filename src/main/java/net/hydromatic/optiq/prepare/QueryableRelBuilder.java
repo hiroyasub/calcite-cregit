@@ -134,7 +134,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Implementation of {@link QueryableFactory}  * that builds a tree of {@link RelNode} planner nodes. Used by  * {@link LixToRelTranslator}.  *  *<p>Each of the methods that implements a {@code Replayer} method creates  * a tree of {@code RelNode}s equivalent to the arguments, and calls  * {@link #setRel} to assign the root of that tree to the {@link #rel} member  * variable.</p>  *  *<p>To comply with the {@link net.hydromatic.linq4j.QueryableFactory}  * interface, which is after all a factory, each method returns a dummy result  * such as {@code null} or {@code 0}.  * The caller will not use the result.  * The real effect of the method is to  * call {@link #setRel} with a {@code RelNode}.</p>  *  *<p>NOTE: Many methods currently throw {@link UnsupportedOperationException}.  * These method need to be implemented.</p>  *  * @author jhyde */
+comment|/**  * Implementation of {@link QueryableFactory}  * that builds a tree of {@link RelNode} planner nodes. Used by  * {@link LixToRelTranslator}.  *  *<p>Each of the methods that implements a {@code Replayer} method creates  * a tree of {@code RelNode}s equivalent to the arguments, and calls  * {@link #setRel} to assign the root of that tree to the {@link #rel} member  * variable.</p>  *  *<p>To comply with the {@link net.hydromatic.linq4j.QueryableFactory}  * interface, which is after all a factory, each method returns a dummy result  * such as {@code null} or {@code 0}.  * The caller will not use the result.  * The real effect of the method is to  * call {@link #setRel} with a {@code RelNode}.</p>  *  *<p>NOTE: Many methods currently throw {@link UnsupportedOperationException}.  * These method need to be implemented.</p>  */
 end_comment
 
 begin_class

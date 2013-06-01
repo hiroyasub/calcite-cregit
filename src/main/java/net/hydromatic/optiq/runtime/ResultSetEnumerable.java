@@ -417,7 +417,7 @@ name|ARRAY_ROW_BUILDER_FACTORY
 argument_list|)
 return|;
 block|}
-comment|/** Executes a SQL query and returns the results as an enumerator. The      * parameterization not withstanding, the result type must be an array of      * objects. */
+comment|/** Executes a SQL query and returns the results as an enumerator. The    * parameterization not withstanding, the result type must be an array of    * objects. */
 specifier|public
 specifier|static
 parameter_list|<

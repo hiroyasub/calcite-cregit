@@ -213,7 +213,7 @@ name|queryString
 init|=
 literal|null
 decl_stmt|;
-comment|/**      * Convention via which results should be returned by execution.      */
+comment|/**    * Convention via which results should be returned by execution.    */
 specifier|protected
 specifier|final
 name|Convention
@@ -274,7 +274,7 @@ name|SqlExplainLevel
 name|detailLevel
 parameter_list|)
 function_decl|;
-comment|/**      * Optimizes a query plan.      *      * @param logicalRowType logical row type of relational expression (before      * struct fields are flattened, or field names are renamed for uniqueness)      * @param rootRel root of a relational expression      *      * @return an equivalent optimized relational expression      */
+comment|/**    * Optimizes a query plan.    *    * @param logicalRowType logical row type of relational expression (before    * struct fields are flattened, or field names are renamed for uniqueness)    * @param rootRel root of a relational expression    *    * @return an equivalent optimized relational expression    */
 specifier|protected
 name|RelNode
 name|optimize
@@ -440,7 +440,7 @@ name|resultConvention
 argument_list|)
 return|;
 block|}
-comment|/**      * Implements a physical query plan.      *      * @param rowType original row type returned by query validator      * @param rootRel root of the relational expression.      * @param sqlKind SqlKind of the original statement.      * @return an executable plan      */
+comment|/**    * Implements a physical query plan.    *    * @param rowType original row type returned by query validator    * @param rootRel root of the relational expression.    * @param sqlKind SqlKind of the original statement.    * @return an executable plan    */
 specifier|protected
 specifier|abstract
 name|PreparedResult
@@ -945,7 +945,7 @@ literal|null
 return|;
 block|}
 block|}
-comment|/**      * Protected method to allow subclasses to override construction of      * SqlToRelConverter.      */
+comment|/**    * Protected method to allow subclasses to override construction of    * SqlToRelConverter.    */
 specifier|protected
 specifier|abstract
 name|SqlToRelConverter
@@ -958,7 +958,7 @@ name|CatalogReader
 name|catalogReader
 parameter_list|)
 function_decl|;
-comment|/**      * Protected method to allow subclasses to override construction of      * RelImplementor.      */
+comment|/**    * Protected method to allow subclasses to override construction of    * RelImplementor.    */
 specifier|protected
 specifier|abstract
 name|RelImplementor
@@ -998,7 +998,7 @@ name|RelNode
 name|rootRel
 parameter_list|)
 function_decl|;
-comment|/**      * Walks over a tree of relational expressions, replacing each      * {@link org.eigenbase.rel.RelNode} with a 'slimmed down' relational      * expression that projects      * only the columns required by its consumer.      *      * @param rootRel Relational expression that is at the root of the tree      * @return Trimmed relational expression      */
+comment|/**    * Walks over a tree of relational expressions, replacing each    * {@link org.eigenbase.rel.RelNode} with a 'slimmed down' relational    * expression that projects    * only the columns required by its consumer.    *    * @param rootRel Relational expression that is at the root of the tree    * @return Trimmed relational expression    */
 specifier|protected
 name|RelNode
 name|trimUnusedFields
@@ -1022,7 +1022,7 @@ name|rootRel
 argument_list|)
 return|;
 block|}
-comment|/**      * Returns a relational expression which is to be substituted for an access      * to a SQL view.      *      * @param rowType Row type of the view      * @param queryString Body of the view      * @param schemaPath List of schema names wherein to find referenced tables      * @return Relational expression      */
+comment|/**    * Returns a relational expression which is to be substituted for an access    * to a SQL view.    *    * @param rowType Row type of the view    * @param queryString Body of the view    * @param schemaPath List of schema names wherein to find referenced tables    * @return Relational expression    */
 specifier|public
 name|RelNode
 name|expandView
@@ -1093,8 +1093,8 @@ extends|extends
 name|RelOptTable
 extends|,
 name|SqlValidatorTable
-block|{     }
-comment|/**      * PreparedExplanation is a PreparedResult for an EXPLAIN PLAN statement.      * It's always good to have an explanation prepared.      */
+block|{   }
+comment|/**    * PreparedExplanation is a PreparedResult for an EXPLAIN PLAN statement.    * It's always good to have an explanation prepared.    */
 specifier|public
 specifier|static
 specifier|abstract
@@ -1269,29 +1269,29 @@ name|execute
 parameter_list|()
 function_decl|;
 block|}
-comment|/**      * Result of a call to {@link Prepare#prepareSql}.      */
+comment|/**    * Result of a call to {@link Prepare#prepareSql}.    */
 specifier|public
 interface|interface
 name|PreparedResult
 block|{
-comment|/**          * Returns the code generated by preparation.          */
+comment|/**      * Returns the code generated by preparation.      */
 name|String
 name|getCode
 parameter_list|()
 function_decl|;
-comment|/**          * Returns whether this result is for a DML statement, in which case the          * result set is one row with one column containing the number of rows          * affected.          */
+comment|/**      * Returns whether this result is for a DML statement, in which case the      * result set is one row with one column containing the number of rows      * affected.      */
 name|boolean
 name|isDml
 parameter_list|()
 function_decl|;
-comment|/**          * Returns the table modification operation corresponding to this          * statement if it is a table modification statement; otherwise null.          */
+comment|/**      * Returns the table modification operation corresponding to this      * statement if it is a table modification statement; otherwise null.      */
 name|TableModificationRel
 operator|.
 name|Operation
 name|getTableModOp
 parameter_list|()
 function_decl|;
-comment|/**          * Returns a list describing, for each result field, the origin of the          * field as a 4-element list of (database, schema, table, column).          */
+comment|/**      * Returns a list describing, for each result field, the origin of the      * field as a 4-element list of (database, schema, table, column).      */
 name|List
 argument_list|<
 name|List
@@ -1302,13 +1302,13 @@ argument_list|>
 name|getFieldOrigins
 parameter_list|()
 function_decl|;
-comment|/**          * Executes the prepared result.          *          * @return producer of rows resulting from execution          */
+comment|/**      * Executes the prepared result.      *      * @return producer of rows resulting from execution      */
 name|Object
 name|execute
 parameter_list|()
 function_decl|;
 block|}
-comment|/**      * Abstract implementation of {@link PreparedResult}.      */
+comment|/**    * Abstract implementation of {@link PreparedResult}.    */
 specifier|public
 specifier|static
 specifier|abstract
@@ -1445,7 +1445,7 @@ return|return
 name|fieldOrigins
 return|;
 block|}
-comment|/**          * Returns the physical row type of this prepared statement. May not be          * identical to the row type returned by the validator; for example, the          * field names may have been made unique.          */
+comment|/**      * Returns the physical row type of this prepared statement. May not be      * identical to the row type returned by the validator; for example, the      * field names may have been made unique.      */
 specifier|public
 name|RelDataType
 name|getPhysicalRowType

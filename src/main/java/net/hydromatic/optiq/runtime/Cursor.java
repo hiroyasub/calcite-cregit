@@ -96,7 +96,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Interface to an iteration that is similar to, and can easily support,  * a JDBC {@link ResultSet}, but is simpler to implement.  *  * @author jhyde  */
+comment|/**  * Interface to an iteration that is similar to, and can easily support,  * a JDBC {@link ResultSet}, but is simpler to implement.  */
 end_comment
 
 begin_interface
@@ -104,7 +104,7 @@ specifier|public
 interface|interface
 name|Cursor
 block|{
-comment|/**      * Creates a list of accessors, one per column.      *      * @param types List of column types, per {@link java.sql.Types}.      * @return List of column accessors      */
+comment|/**    * Creates a list of accessors, one per column.    *    * @param types List of column types, per {@link java.sql.Types}.    * @return List of column accessors    */
 name|List
 argument_list|<
 name|Accessor
@@ -118,12 +118,12 @@ argument_list|>
 name|types
 parameter_list|)
 function_decl|;
-comment|/**      * Moves to the next row.      *      * @return Whether moved      */
+comment|/**    * Moves to the next row.    *    * @return Whether moved    */
 name|boolean
 name|next
 parameter_list|()
 function_decl|;
-comment|/**      * Accessor of a column value.      */
+comment|/**    * Accessor of a column value.    */
 interface|interface
 name|Accessor
 block|{

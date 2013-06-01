@@ -96,7 +96,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Base class for implementing a cursor.  *  *<p>Derived class needs to provide {@link Getter} and can override  * {@link Accessor} implementations if it wishes.</p>  *  * @author jhyde  */
+comment|/**  * Base class for implementing a cursor.  *  *<p>Derived class needs to provide {@link Getter} and can override  * {@link Accessor} implementations if it wishes.</p>  */
 end_comment
 
 begin_class
@@ -126,7 +126,7 @@ operator|.
 name|getInstance
 argument_list|()
 decl_stmt|;
-comment|/**      * Slot into which each accessor should write whether the      * value returned was null.      */
+comment|/**    * Slot into which each accessor should write whether the    * value returned was null.    */
 specifier|protected
 specifier|final
 name|boolean
@@ -1083,7 +1083,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**      * Accessor of exact numeric values. The subclass must implement the      * {@link #getLong()} method.      */
+comment|/**    * Accessor of exact numeric values. The subclass must implement the    * {@link #getLong()} method.    */
 specifier|private
 specifier|static
 specifier|abstract
@@ -1259,7 +1259,7 @@ literal|0d
 return|;
 block|}
 block|}
-comment|/**      * Accessor that assumes that the underlying value is a {@link Boolean};      * corresponds to {@link java.sql.Types#BOOLEAN}.      */
+comment|/**    * Accessor that assumes that the underlying value is a {@link Boolean};    * corresponds to {@link java.sql.Types#BOOLEAN}.    */
 specifier|private
 specifier|static
 class|class
@@ -1317,7 +1317,7 @@ literal|0
 return|;
 block|}
 block|}
-comment|/**      * Accessor that assumes that the underlying value is a {@link Byte};      * corresponds to {@link java.sql.Types#TINYINT}.      */
+comment|/**    * Accessor that assumes that the underlying value is a {@link Byte};    * corresponds to {@link java.sql.Types#TINYINT}.    */
 specifier|private
 specifier|static
 class|class
@@ -1373,7 +1373,7 @@ argument_list|()
 return|;
 block|}
 block|}
-comment|/**      * Accessor that assumes that the underlying value is a {@link Short};      * corresponds to {@link java.sql.Types#SMALLINT}.      */
+comment|/**    * Accessor that assumes that the underlying value is a {@link Short};    * corresponds to {@link java.sql.Types#SMALLINT}.    */
 specifier|private
 specifier|static
 class|class
@@ -1429,7 +1429,7 @@ argument_list|()
 return|;
 block|}
 block|}
-comment|/**      * Accessor that assumes that the underlying value is an {@link Integer};      * corresponds to {@link java.sql.Types#INTEGER}.      */
+comment|/**    * Accessor that assumes that the underlying value is an {@link Integer};    * corresponds to {@link java.sql.Types#INTEGER}.    */
 specifier|private
 specifier|static
 class|class
@@ -1487,7 +1487,7 @@ argument_list|()
 return|;
 block|}
 block|}
-comment|/**      * Accessor that assumes that the underlying value is a {@link Long};      * corresponds to {@link java.sql.Types#BIGINT}.      */
+comment|/**    * Accessor that assumes that the underlying value is a {@link Long};    * corresponds to {@link java.sql.Types#BIGINT}.    */
 specifier|private
 specifier|static
 class|class
@@ -1535,7 +1535,7 @@ name|o
 return|;
 block|}
 block|}
-comment|/**      * Accessor of values that are {@link Double} or null.      */
+comment|/**    * Accessor of values that are {@link Double} or null.    */
 specifier|private
 specifier|static
 specifier|abstract
@@ -1717,7 +1717,7 @@ literal|0
 return|;
 block|}
 block|}
-comment|/**      * Accessor that assumes that the underlying value is a {@link Float};      * corresponds to {@link java.sql.Types#FLOAT}.      */
+comment|/**    * Accessor that assumes that the underlying value is a {@link Float};    * corresponds to {@link java.sql.Types#FLOAT}.    */
 specifier|private
 specifier|static
 class|class
@@ -1773,7 +1773,7 @@ argument_list|()
 return|;
 block|}
 block|}
-comment|/**      * Accessor that assumes that the underlying value is a {@link Float};      * corresponds to {@link java.sql.Types#FLOAT}.      */
+comment|/**    * Accessor that assumes that the underlying value is a {@link Float};    * corresponds to {@link java.sql.Types#FLOAT}.    */
 specifier|private
 specifier|static
 class|class
@@ -1819,7 +1819,7 @@ name|o
 return|;
 block|}
 block|}
-comment|/**      * Accessor of exact numeric values. The subclass must implement the      * {@link #getLong()} method.      */
+comment|/**    * Accessor of exact numeric values. The subclass must implement the    * {@link #getLong()} method.    */
 specifier|private
 specifier|static
 specifier|abstract
@@ -2016,7 +2016,7 @@ literal|0
 return|;
 block|}
 block|}
-comment|/**      * Accessor that assumes that the underlying value is a {@link BigDecimal};      * corresponds to {@link java.sql.Types#DECIMAL}.      */
+comment|/**    * Accessor that assumes that the underlying value is a {@link BigDecimal};    * corresponds to {@link java.sql.Types#DECIMAL}.    */
 specifier|private
 specifier|static
 class|class
@@ -2080,7 +2080,7 @@ argument_list|()
 return|;
 block|}
 block|}
-comment|/**      * Accessor that assumes that the underlying value is a {@link String};      * corresponds to {@link java.sql.Types#CHAR} and {@link java.sql.Types#VARCHAR}.      */
+comment|/**    * Accessor that assumes that the underlying value is a {@link String};    * corresponds to {@link java.sql.Types#CHAR} and {@link java.sql.Types#VARCHAR}.    */
 specifier|private
 specifier|static
 class|class
@@ -2115,7 +2115,7 @@ argument_list|()
 return|;
 block|}
 block|}
-comment|/**      * Accessor that assumes that the underlying value is a {@link String};      * corresponds to {@link java.sql.Types#CHAR}.      */
+comment|/**    * Accessor that assumes that the underlying value is a {@link String};    * corresponds to {@link java.sql.Types#CHAR}.    */
 specifier|private
 specifier|static
 class|class
@@ -2188,7 +2188,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**      * Accessor that assumes that the underlying value is an array of      * {@code byte} values;      * corresponds to {@link java.sql.Types#BINARY} and {@link java.sql.Types#VARBINARY}.      */
+comment|/**    * Accessor that assumes that the underlying value is an array of    * {@code byte} values;    * corresponds to {@link java.sql.Types#BINARY} and {@link java.sql.Types#VARBINARY}.    */
 specifier|private
 specifier|static
 class|class
@@ -2254,7 +2254,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**      * Accessor that assumes that the underlying value is a DATE,      * in its default representation {@code int};      * corresponds to {@link java.sql.Types#DATE}.      */
+comment|/**    * Accessor that assumes that the underlying value is a DATE,    * in its default representation {@code int};    * corresponds to {@link java.sql.Types#DATE}.    */
 specifier|private
 specifier|static
 class|class
@@ -2379,7 +2379,7 @@ argument_list|()
 return|;
 block|}
 block|}
-comment|/**      * Accessor that assumes that the underlying value is a Time,      * in its default representation {@code int};      * corresponds to {@link java.sql.Types#TIME}.      */
+comment|/**    * Accessor that assumes that the underlying value is a Time,    * in its default representation {@code int};    * corresponds to {@link java.sql.Types#TIME}.    */
 specifier|private
 specifier|static
 class|class
@@ -2490,7 +2490,7 @@ argument_list|()
 return|;
 block|}
 block|}
-comment|/**      * Accessor that assumes that the underlying value is a TIMESTAMP,      * in its default representation {@code long};      * corresponds to {@link java.sql.Types#TIMESTAMP}.      */
+comment|/**    * Accessor that assumes that the underlying value is a TIMESTAMP,    * in its default representation {@code long};    * corresponds to {@link java.sql.Types#TIMESTAMP}.    */
 specifier|private
 specifier|static
 class|class
@@ -2601,7 +2601,7 @@ argument_list|()
 return|;
 block|}
 block|}
-comment|/**      * Accessor that assumes that the underlying value is a DATE,      * represented as a java.sql.Date;      * corresponds to {@link java.sql.Types#DATE}.      */
+comment|/**    * Accessor that assumes that the underlying value is a DATE,    * represented as a java.sql.Date;    * corresponds to {@link java.sql.Types#DATE}.    */
 specifier|private
 specifier|static
 class|class
@@ -2714,7 +2714,7 @@ argument_list|()
 return|;
 block|}
 block|}
-comment|/**      * Accessor that assumes that the underlying value is a TIME,      * represented as a java.sql.Time;      * corresponds to {@link java.sql.Types#TIME}.      */
+comment|/**    * Accessor that assumes that the underlying value is a TIME,    * represented as a java.sql.Time;    * corresponds to {@link java.sql.Types#TIME}.    */
 specifier|private
 specifier|static
 class|class
@@ -2823,7 +2823,7 @@ argument_list|()
 return|;
 block|}
 block|}
-comment|/**      * Accessor that assumes that the underlying value is a TIMESTAMP,      * represented as a java.sql.Timestamp;      * corresponds to {@link java.sql.Types#TIMESTAMP}.      */
+comment|/**    * Accessor that assumes that the underlying value is a TIMESTAMP,    * represented as a java.sql.Timestamp;    * corresponds to {@link java.sql.Types#TIMESTAMP}.    */
 specifier|private
 specifier|static
 class|class
@@ -2932,7 +2932,7 @@ argument_list|()
 return|;
 block|}
 block|}
-comment|/**      * Accessor that assumes that the underlying value is a TIMESTAMP,      * represented as a java.util.Date;      * corresponds to {@link java.sql.Types#TIMESTAMP}.      */
+comment|/**    * Accessor that assumes that the underlying value is a TIMESTAMP,    * represented as a java.util.Date;    * corresponds to {@link java.sql.Types#TIMESTAMP}.    */
 specifier|private
 specifier|static
 class|class
@@ -3045,7 +3045,7 @@ argument_list|()
 return|;
 block|}
 block|}
-comment|/**      * Accessor that assumes that the underlying value is an OBJECT;      * corresponds to {@link java.sql.Types#JAVA_OBJECT}.      */
+comment|/**    * Accessor that assumes that the underlying value is an OBJECT;    * corresponds to {@link java.sql.Types#JAVA_OBJECT}.    */
 specifier|private
 specifier|static
 class|class

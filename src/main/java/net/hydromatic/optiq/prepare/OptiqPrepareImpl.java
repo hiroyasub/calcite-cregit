@@ -416,7 +416,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Shit just got real.  *  *<p>This class is public so that projects that create their own JDBC driver  * and server can fine-tune preferences. However, this class and its methods are  * subject to change without notice.</p>  *  * @author jhyde  */
+comment|/**  * Shit just got real.  *  *<p>This class is public so that projects that create their own JDBC driver  * and server can fine-tune preferences. However, this class and its methods are  * subject to change without notice.</p>  */
 end_comment
 
 begin_class
@@ -568,7 +568,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/** Creates a collection of planner factories.      *      *<p>The collection must have at least one factory, and each factory must      * create a planner. If the collection has more than one planner, Optiq will      * try each planner in turn.</p>      *      *<p>One of the things you can do with this mechanism is to try a simpler,      * faster, planner with a smaller rule set first, then fall back to a more      * complex planner for complex and costly queries.</p>      *      *<p>The default implementation returns a factory that calls      * {@link #createPlanner()}.</p> */
+comment|/** Creates a collection of planner factories.    *    *<p>The collection must have at least one factory, and each factory must    * create a planner. If the collection has more than one planner, Optiq will    * try each planner in turn.</p>    *    *<p>One of the things you can do with this mechanism is to try a simpler,    * faster, planner with a smaller rule set first, then fall back to a more    * complex planner for complex and costly queries.</p>    *    *<p>The default implementation returns a factory that calls    * {@link #createPlanner()}.</p> */
 specifier|protected
 name|List
 argument_list|<
@@ -612,7 +612,7 @@ block|}
 argument_list|)
 return|;
 block|}
-comment|/** Creates a query planner and initializes it with a default set of      * rules. */
+comment|/** Creates a query planner and initializes it with a default set of    * rules. */
 specifier|protected
 name|RelOptPlanner
 name|createPlanner

@@ -26,7 +26,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Comparator that uses the natural ordering of [@link Comparable} values.  *  * @author jhyde  */
+comment|/**  * Comparator that uses the natural ordering of [@link Comparable} values.  */
 end_comment
 
 begin_class

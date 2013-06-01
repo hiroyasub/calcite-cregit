@@ -368,7 +368,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Tests for using Optiq via JDBC.  *  * @author jhyde  */
+comment|/**  * Tests for using Optiq via JDBC.  */
 end_comment
 
 begin_class
@@ -579,7 +579,7 @@ name|toString
 argument_list|()
 return|;
 block|}
-comment|/**      * Tests a relation that is accessed via method syntax.      * The function returns a {@link Queryable}.      */
+comment|/**    * Tests a relation that is accessed via method syntax.    * The function returns a {@link Queryable}.    */
 specifier|public
 name|void
 name|_testFunction
@@ -986,7 +986,7 @@ return|return
 name|optiqConnection
 return|;
 block|}
-comment|/**      * Creates a connection with a given query provider. If provider is null,      * uses the connection as its own provider. The connection contains a      * schema called "foodmart" backed by a JDBC connection to MySQL.      *      * @param queryProvider Query provider      * @param withClone Whether to create a "foodmart2" schema as in-memory      *     clone      * @return Connection      * @throws ClassNotFoundException      * @throws SQLException      */
+comment|/**    * Creates a connection with a given query provider. If provider is null,    * uses the connection as its own provider. The connection contains a    * schema called "foodmart" backed by a JDBC connection to MySQL.    *    * @param queryProvider Query provider    * @param withClone Whether to create a "foodmart2" schema as in-memory    *     clone    * @return Connection    * @throws ClassNotFoundException    * @throws SQLException    */
 specifier|static
 name|OptiqConnection
 name|getConnection
@@ -1118,7 +1118,7 @@ return|return
 name|optiqConnection
 return|;
 block|}
-comment|/**      * The example in the README.      */
+comment|/**    * The example in the README.    */
 specifier|public
 name|void
 name|testReadme
@@ -1222,7 +1222,7 @@ name|close
 argument_list|()
 expr_stmt|;
 block|}
-comment|/**      * Make sure that the properties look sane.      */
+comment|/**    * Make sure that the properties look sane.    */
 specifier|public
 name|void
 name|testVersion
@@ -2239,9 +2239,9 @@ block|,
 literal|"select count(distinct \"product_id\") from \"product\""
 block|,
 literal|"EXPR$0=1560\n"
-block|,     }
+block|,   }
 decl_stmt|;
-comment|/** Test case for      *<a href="https://github.com/julianhyde/optiq/issues/35">issue #35</a>. */
+comment|/** Test case for    *<a href="https://github.com/julianhyde/optiq/issues/35">issue #35</a>. */
 specifier|public
 name|void
 name|_testJoinJoin
@@ -2504,7 +2504,7 @@ throw|;
 block|}
 block|}
 block|}
-comment|/** There was a bug representing a nullable timestamp using a {@link Long}      * internally. */
+comment|/** There was a bug representing a nullable timestamp using a {@link Long}    * internally. */
 specifier|public
 name|void
 name|testNullableTimestamp
@@ -2579,7 +2579,7 @@ literal|"EXPR$0=-3\n"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Tests a table constructor that has multiple rows and multiple columns.      *      *<p>Note that the character literals become CHAR(3) and that the first is      * correctly rendered with trailing spaces: 'a  '. If we were inserting      * into a VARCHAR column the behavior would be different; the literals      * would be converted into VARCHAR(3) values and the implied cast from      * CHAR(1) to CHAR(3) that appends trailing spaces does not occur. See      * "contextually typed value specification" in the SQL spec.</p>      */
+comment|/** Tests a table constructor that has multiple rows and multiple columns.    *    *<p>Note that the character literals become CHAR(3) and that the first is    * correctly rendered with trailing spaces: 'a  '. If we were inserting    * into a VARCHAR column the behavior would be different; the literals    * would be converted into VARCHAR(3) values and the implied cast from    * CHAR(1) to CHAR(3) that appends trailing spaces does not occur. See    * "contextually typed value specification" in the SQL spec.</p>    */
 specifier|public
 name|void
 name|testValuesComposite
@@ -2639,7 +2639,7 @@ literal|"c0=1997; m0=266773.0000\n"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** A difficult query: an IN list so large that the planner promotes it      * to a semi-join against a VALUES relation. */
+comment|/** A difficult query: an IN list so large that the planner promotes it    * to a semi-join against a VALUES relation. */
 specifier|public
 name|void
 name|testIn
@@ -3304,7 +3304,7 @@ block|}
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Tests a JDBC connection that provides a model (a single schema based on      * a JDBC database). */
+comment|/** Tests a JDBC connection that provides a model (a single schema based on    * a JDBC database). */
 specifier|public
 name|void
 name|testModel
@@ -3331,7 +3331,7 @@ literal|"C=730\n"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Tests a JDBC connection that provides a model that contains custom      * tables. */
+comment|/** Tests a JDBC connection that provides a model that contains custom    * tables. */
 specifier|public
 name|void
 name|testModelCustomTable
@@ -3399,7 +3399,7 @@ literal|"empid=150; deptno=10; name=Sebastian; commission=null\n"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Tests a JDBC connection that provides a model that contains custom      * tables. */
+comment|/** Tests a JDBC connection that provides a model that contains custom    * tables. */
 specifier|public
 name|void
 name|testModelCustomTable2
@@ -3473,7 +3473,7 @@ literal|"N=6\n"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Tests a JDBC connection that provides a model that contains a custom      * schema. */
+comment|/** Tests a JDBC connection that provides a model that contains a custom    * schema. */
 specifier|public
 name|void
 name|testModelCustomSchema
@@ -3915,7 +3915,7 @@ block|}
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Tests saving query results into temporary tables, per      * {@link net.hydromatic.optiq.jdbc.Handler.ResultSink}. */
+comment|/** Tests saving query results into temporary tables, per    * {@link net.hydromatic.optiq.jdbc.Handler.ResultSink}. */
 specifier|public
 name|void
 name|testAutomaticTemporaryTable
@@ -4155,7 +4155,7 @@ literal|"EXPR$1 CHAR(2) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test case for bug where if two tables have different element classes      * but those classes have identical fields, Optiq would generate code to use      * the wrong element class; a {@link ClassCastException} would ensue. */
+comment|/** Test case for bug where if two tables have different element classes    * but those classes have identical fields, Optiq would generate code to use    * the wrong element class; a {@link ClassCastException} would ensue. */
 specifier|public
 name|void
 name|testDifferentTypesSameFields
@@ -4316,7 +4316,7 @@ literal|"Sebastian"
 argument_list|,
 literal|null
 argument_list|)
-block|,         }
+block|,     }
 decl_stmt|;
 specifier|public
 specifier|final
@@ -4381,7 +4381,7 @@ literal|1
 index|]
 argument_list|)
 argument_list|)
-block|,         }
+block|,     }
 decl_stmt|;
 block|}
 specifier|public
@@ -4579,7 +4579,7 @@ literal|150
 argument_list|,
 literal|20
 argument_list|)
-block|,         }
+block|,     }
 decl_stmt|;
 block|}
 specifier|public
@@ -5159,7 +5159,7 @@ return|;
 block|}
 block|}
 block|}
-comment|/** Mock driver that has a handler that stores the results of each query in      * a temporary table. */
+comment|/** Mock driver that has a handler that stores the results of each query in    * a temporary table. */
 specifier|public
 specifier|static
 class|class

@@ -40,7 +40,7 @@ import|;
 end_import
 
 begin_comment
-comment|/** * Implementation of {@link Schema.TableInSchema} where all properties are  * held in fields.  */
+comment|/**  * Implementation of {@link Schema.TableInSchema} where all properties are  * held in fields.  */
 end_comment
 
 begin_class

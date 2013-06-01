@@ -32,7 +32,7 @@ specifier|public
 interface|interface
 name|SchemaFactory
 block|{
-comment|/** Creates a Schema.      *      *<p>The implementation must register the schema in the parent schema,      * by calling {@link MutableSchema#addSchema(String, Schema)}.</p>      *      * @param schema Parent schema      * @param name Name of this schema      * @param operand The "operand" JSON property      */
+comment|/** Creates a Schema.    *    *<p>The implementation must register the schema in the parent schema,    * by calling {@link MutableSchema#addSchema(String, Schema)}.</p>    *    * @param schema Parent schema    * @param name Name of this schema    * @param operand The "operand" JSON property    */
 name|Schema
 name|create
 parameter_list|(

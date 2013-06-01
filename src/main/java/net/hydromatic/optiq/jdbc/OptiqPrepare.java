@@ -228,7 +228,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * API for a service that prepares statements for execution.  *  * @author jhyde  */
+comment|/**  * API for a service that prepares statements for execution.  */
 end_comment
 
 begin_interface
@@ -517,7 +517,7 @@ argument_list|()
 return|;
 block|}
 block|}
-comment|/**      * Metadata for a parameter. Plus a slot to hold its value.      */
+comment|/**    * Metadata for a parameter. Plus a slot to hold its value.    */
 specifier|public
 specifier|static
 class|class

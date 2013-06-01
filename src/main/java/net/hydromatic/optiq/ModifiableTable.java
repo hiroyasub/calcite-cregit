@@ -100,7 +100,7 @@ argument_list|<
 name|E
 argument_list|>
 block|{
-comment|/** Returns the modifiable collection.      * Modifying the collection will change the table's contents. */
+comment|/** Returns the modifiable collection.    * Modifying the collection will change the table's contents. */
 name|Collection
 name|getModifiableCollection
 parameter_list|()

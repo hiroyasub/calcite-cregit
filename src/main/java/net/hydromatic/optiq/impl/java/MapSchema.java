@@ -104,7 +104,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Implementation of {@link Schema} backed by a {@link HashMap}.  *  * @author jhyde  */
+comment|/**  * Implementation of {@link Schema} backed by a {@link HashMap}.  */
 end_comment
 
 begin_class
@@ -192,7 +192,7 @@ specifier|final
 name|Expression
 name|expression
 decl_stmt|;
-comment|/**      * Creates a MapSchema.      *      * @param queryProvider Query provider      * @param typeFactory Type factory      * @param expression Expression for schema      */
+comment|/**    * Creates a MapSchema.    *    * @param queryProvider Query provider    * @param typeFactory Type factory    * @param expression Expression for schema    */
 specifier|public
 name|MapSchema
 parameter_list|(
@@ -240,7 +240,7 @@ operator|!=
 literal|null
 assert|;
 block|}
-comment|/**      * Creates a MapSchema that is a sub-schema.      *      * @param parentSchema Parent schema      * @param expression Expression for schema      */
+comment|/**    * Creates a MapSchema that is a sub-schema.    *    * @param parentSchema Parent schema    * @param expression Expression for schema    */
 specifier|public
 name|MapSchema
 parameter_list|(
@@ -267,7 +267,7 @@ name|expression
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Creates a MapSchema within another schema.      *      * @param parentSchema Parent schema      * @param name Name of new schema      * @return New MapSchema      */
+comment|/**    * Creates a MapSchema within another schema.    *    * @param parentSchema Parent schema    * @param name Name of new schema    * @return New MapSchema    */
 specifier|public
 specifier|static
 name|MapSchema
@@ -313,7 +313,7 @@ return|return
 name|schema
 return|;
 block|}
-comment|/** Called by Optiq after creation, before loading tables explicitly defined      * in a JSON model. */
+comment|/** Called by Optiq after creation, before loading tables explicitly defined    * in a JSON model. */
 specifier|public
 name|void
 name|initialize
@@ -725,7 +725,7 @@ return|return
 name|call
 return|;
 block|}
-comment|/** Returns the initial set of tables.      *      *<p>The default implementation returns an empty list. Derived classes      * may override this method to create tables based on their schema type. For      * example, a CSV provider might scan for all ".csv" files in a particular      * directory and return a table for each.</p>      */
+comment|/** Returns the initial set of tables.    *    *<p>The default implementation returns an empty list. Derived classes    * may override this method to create tables based on their schema type. For    * example, a CSV provider might scan for all ".csv" files in a particular    * directory and return a table for each.</p>    */
 specifier|protected
 name|Collection
 argument_list|<

@@ -501,30 +501,30 @@ block|}
 enum|enum
 name|RepresentationType
 block|{
-comment|/** Constant. Contains only one value.          *          *<p>We can't store 0-bit values in          * an array: we'd have no way of knowing how many there were.</p>          *          * @see Constant          */
+comment|/** Constant. Contains only one value.      *      *<p>We can't store 0-bit values in      * an array: we'd have no way of knowing how many there were.</p>      *      * @see Constant      */
 name|CONSTANT
 block|,
-comment|/** Object array. Null values are represented by null. Values may or may          * not be canonized; if canonized, = and != can be implemented using          * pointer.          *          * @see ObjectArray          */
+comment|/** Object array. Null values are represented by null. Values may or may      * not be canonized; if canonized, = and != can be implemented using      * pointer.      *      * @see ObjectArray      */
 name|OBJECT_ARRAY
 block|,
-comment|/**          * Array of primitives. Null values not possible. Only for primitive          * types (and not optimal for boolean).          *          * @see PrimitiveArray          */
+comment|/**      * Array of primitives. Null values not possible. Only for primitive      * types (and not optimal for boolean).      *      * @see PrimitiveArray      */
 name|PRIMITIVE_ARRAY
 block|,
-comment|/** Bit-sliced primitive array. Values are {@code bitCount} bits each,          * and interpreted as signed. Stored as an array of long values.          *          *<p>If gcd(bitCount, 64) != 0, some values will cross boundaries.          * bits each. But for all of those values except 4, there is a primitive          * type (8 byte, 16 short, 32 int) which is more efficient.          *          * @see BitSlicedPrimitiveArray          */
+comment|/** Bit-sliced primitive array. Values are {@code bitCount} bits each,      * and interpreted as signed. Stored as an array of long values.      *      *<p>If gcd(bitCount, 64) != 0, some values will cross boundaries.      * bits each. But for all of those values except 4, there is a primitive      * type (8 byte, 16 short, 32 int) which is more efficient.      *      * @see BitSlicedPrimitiveArray      */
 name|BIT_SLICED_PRIMITIVE_ARRAY
 block|,
-comment|/**          * Dictionary of primitives. Use one of the previous methods to store          * unsigned offsets into the dictionary. Dictionary is canonized and          * sorted, so v1&lt; v2 if and only if code(v1)&lt; code(v2). The          * dictionary may or may not contain a null value.          *          *<p>The dictionary is not beneficial unless the codes are          * significantly shorter than the values. A column of {@code long}          * values with many duplicates is a win; a column of mostly distinct          * {@code short} values is likely a loss. The other win is if there are          * null values; otherwise the best option would be an          * {@link #OBJECT_ARRAY}.</p>          *          * @see PrimitiveDictionary          */
+comment|/**      * Dictionary of primitives. Use one of the previous methods to store      * unsigned offsets into the dictionary. Dictionary is canonized and      * sorted, so v1&lt; v2 if and only if code(v1)&lt; code(v2). The      * dictionary may or may not contain a null value.      *      *<p>The dictionary is not beneficial unless the codes are      * significantly shorter than the values. A column of {@code long}      * values with many duplicates is a win; a column of mostly distinct      * {@code short} values is likely a loss. The other win is if there are      * null values; otherwise the best option would be an      * {@link #OBJECT_ARRAY}.</p>      *      * @see PrimitiveDictionary      */
 name|PRIMITIVE_DICTIONARY
 block|,
-comment|/**          * Dictionary of objects. Use one of the previous methods to store          * unsigned offsets into the dictionary.          *          * @see ObjectDictionary          */
+comment|/**      * Dictionary of objects. Use one of the previous methods to store      * unsigned offsets into the dictionary.      *      * @see ObjectDictionary      */
 name|OBJECT_DICTIONARY
 block|,
-comment|/**          * Compressed string table. Block of char data. Strings represented          * using an unsigned offset into the table (stored using one of the          * previous methods).          *          *<p>First 2 bytes are unsigned length; subsequent bytes are string          * contents. The null value, strings longer than 64k and strings that          * occur very commonly are held in an 'exceptions' array and are          * recognized by their high offsets. Other strings are created on demand          * (this reduces the number of objects that need to be created during          * deserialization from cache.</p>          *          * @see StringDictionary          */
+comment|/**      * Compressed string table. Block of char data. Strings represented      * using an unsigned offset into the table (stored using one of the      * previous methods).      *      *<p>First 2 bytes are unsigned length; subsequent bytes are string      * contents. The null value, strings longer than 64k and strings that      * occur very commonly are held in an 'exceptions' array and are      * recognized by their high offsets. Other strings are created on demand      * (this reduces the number of objects that need to be created during      * deserialization from cache.</p>      *      * @see StringDictionary      */
 name|STRING_DICTIONARY
 block|,
-comment|/**          * Compressed byte array table. Similar to compressed string table.          *          * @see ByteStringDictionary          */
+comment|/**      * Compressed byte array table. Similar to compressed string table.      *      * @see ByteStringDictionary      */
 name|BYTE_STRING_DICTIONARY
-block|,     }
+block|,   }
 specifier|public
 specifier|static
 class|class
@@ -610,7 +610,7 @@ name|RepresentationType
 name|getType
 parameter_list|()
 function_decl|;
-comment|/** Converts a value set into a compact representation. If          * {@code sources} is not null, permutes. */
+comment|/** Converts a value set into a compact representation. If      * {@code sources} is not null, permutes. */
 name|Object
 name|freeze
 parameter_list|(
@@ -644,7 +644,7 @@ name|int
 name|ordinal
 parameter_list|)
 function_decl|;
-comment|/** Creates a data set that is the same as a given data set          * but re-ordered. */
+comment|/** Creates a data set that is the same as a given data set      * but re-ordered. */
 name|Object
 name|permute
 parameter_list|(

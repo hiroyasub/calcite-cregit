@@ -325,7 +325,7 @@ argument_list|)
 return|;
 comment|// TODO: better wildcard
 block|}
-comment|/** Creates the data dictionary, also called the information schema. It is a      * schema called "metadata" that contains tables "TABLES", "COLUMNS" etc. */
+comment|/** Creates the data dictionary, also called the information schema. It is a    * schema called "metadata" that contains tables "TABLES", "COLUMNS" etc. */
 name|MapSchema
 name|createInformationSchema
 parameter_list|()

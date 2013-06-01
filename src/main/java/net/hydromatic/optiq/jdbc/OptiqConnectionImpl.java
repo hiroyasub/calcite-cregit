@@ -389,7 +389,7 @@ specifier|final
 name|Schema
 name|informationSchema
 decl_stmt|;
-comment|/**      * Creates an OptiqConnectionImpl.      *      *<p>Not public; method is called only from the driver.</p>      *      * @param driver Driver      * @param factory Factory for JDBC objects      * @param prepareFactory Factory for {@link OptiqPrepare}      * @param url Server URL      * @param info Other connection properties      */
+comment|/**    * Creates an OptiqConnectionImpl.    *    *<p>Not public; method is called only from the driver.</p>    *    * @param driver Driver    * @param factory Factory for JDBC objects    * @param prepareFactory Factory for {@link OptiqPrepare}    * @param url Server URL    * @param info Other connection properties    */
 name|OptiqConnectionImpl
 parameter_list|(
 name|UnregisteredDriver

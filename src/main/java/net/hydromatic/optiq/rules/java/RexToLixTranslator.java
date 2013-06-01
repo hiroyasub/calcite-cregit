@@ -206,7 +206,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Translates {@link org.eigenbase.rex.RexNode REX expressions} to  * {@link Expression linq4j expressions}.  *  * @author jhyde  */
+comment|/**  * Translates {@link org.eigenbase.rex.RexNode REX expressions} to  * {@link Expression linq4j expressions}.  */
 end_comment
 
 begin_class
@@ -503,7 +503,7 @@ operator|=
 name|builder
 expr_stmt|;
 block|}
-comment|/**      * Translates a {@link RexProgram} to a sequence of expressions and      * declarations.      *      * @param program Program to be translated      * @param typeFactory Type factory      * @param list List of statements, populated with declarations      * @param inputGetter Generates expressions for inputs      * @return Sequence of expressions, optional condition      */
+comment|/**    * Translates a {@link RexProgram} to a sequence of expressions and    * declarations.    *    * @param program Program to be translated    * @param typeFactory Type factory    * @param list List of statements, populated with declarations    * @param inputGetter Generates expressions for inputs    * @return Sequence of expressions, optional condition    */
 specifier|public
 specifier|static
 name|List
@@ -1036,7 +1036,7 @@ return|return
 name|convert
 return|;
 block|}
-comment|/** Translates an expression that is not in the cache.      *      * @param expr Expression      * @param nullAs If false, if expression is definitely not null at      *   runtime. Therefore we can optimize. For example, we can cast to int      *   using x.intValue().      * @return Translated expression      */
+comment|/** Translates an expression that is not in the cache.    *    * @param expr Expression    * @param nullAs If false, if expression is definitely not null at    *   runtime. Therefore we can optimize. For example, we can cast to int    *   using x.intValue().    * @return Translated expression    */
 specifier|private
 name|Expression
 name|translate0
@@ -1286,7 +1286,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/** Translates a literal.      *      * @throws AlwaysNull if literal is null but {@code nullAs} is      * {@link net.hydromatic.optiq.rules.java.RexImpTable.NullAs#NOT_POSSIBLE}.      */
+comment|/** Translates a literal.    *    * @throws AlwaysNull if literal is null but {@code nullAs} is    * {@link net.hydromatic.optiq.rules.java.RexImpTable.NullAs#NOT_POSSIBLE}.    */
 specifier|public
 specifier|static
 name|Expression
@@ -2762,7 +2762,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/** Returns whether an expression is nullable. Even if its type says it is      * nullable, if we have previously generated a check to make sure that it is      * not null, we will say so.      *      *<p>For example, {@code WHERE a == b} translates to      * {@code a != null&& b != null&& a.equals(b)}. When translating the      * 3rd part of the disjunction, we already know a and b are not null.</p>      *      * @param e Expression      * @return Whether expression is nullable in the current translation context      */
+comment|/** Returns whether an expression is nullable. Even if its type says it is    * nullable, if we have previously generated a check to make sure that it is    * not null, we will say so.    *    *<p>For example, {@code WHERE a == b} translates to    * {@code a != null&& b != null&& a.equals(b)}. When translating the    * 3rd part of the disjunction, we already know a and b are not null.</p>    *    * @param e Expression    * @return Whether expression is nullable in the current translation context    */
 specifier|public
 name|boolean
 name|isNullable
@@ -2803,7 +2803,7 @@ name|isNullable
 argument_list|()
 return|;
 block|}
-comment|/** Creates a read-only copy of this translator that records that a given      * expression is nullable. */
+comment|/** Creates a read-only copy of this translator that records that a given    * expression is nullable. */
 specifier|public
 name|RexToLixTranslator
 name|setNullable
@@ -2972,7 +2972,7 @@ name|index
 parameter_list|)
 function_decl|;
 block|}
-comment|/** Implementation of {@link InputGetter} that calls      * {@link PhysType#fieldReference}. */
+comment|/** Implementation of {@link InputGetter} that calls    * {@link PhysType#fieldReference}. */
 specifier|public
 specifier|static
 class|class
@@ -3078,7 +3078,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/** Thrown in the unusual (but not erroneous) situation where the expression      * we are translating is the null literal but we have already checked that      * it is not null. It is easier to throw (and caller will always handle)      * than to check exhaustively beforehand. */
+comment|/** Thrown in the unusual (but not erroneous) situation where the expression    * we are translating is the null literal but we have already checked that    * it is not null. It is easier to throw (and caller will always handle)    * than to check exhaustively beforehand. */
 specifier|static
 class|class
 name|AlwaysNull

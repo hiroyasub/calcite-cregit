@@ -98,7 +98,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Utility methods, mainly concerning error-handling.  *  * @author jhyde  */
+comment|/**  * Utility methods, mainly concerning error-handling.  */
 end_comment
 
 begin_class
@@ -204,7 +204,7 @@ return|return
 name|exception
 return|;
 block|}
-comment|/** Creates an empty result set. Useful for JDBC metadata methods that are      * not implemented or which query entities that are not supported (e.g.      * triggers in Lingual). */
+comment|/** Creates an empty result set. Useful for JDBC metadata methods that are    * not implemented or which query entities that are not supported (e.g.    * triggers in Lingual). */
 specifier|public
 name|ResultSet
 name|createEmptyResultSet

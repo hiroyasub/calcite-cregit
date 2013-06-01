@@ -37,7 +37,7 @@ name|Double
 name|getRowCount
 parameter_list|()
 function_decl|;
-comment|/** Returns whether the given set of columns is a unique key, or a superset      * of a unique key, of the table.      */
+comment|/** Returns whether the given set of columns is a unique key, or a superset    * of a unique key, of the table.    */
 name|boolean
 name|isKey
 parameter_list|(

@@ -388,7 +388,7 @@ argument_list|()
 expr_stmt|;
 block|}
 block|}
-comment|/** Returns a string that is padded on the right with spaces to the current      * length. */
+comment|/** Returns a string that is padded on the right with spaces to the current    * length. */
 specifier|public
 name|String
 name|padRight

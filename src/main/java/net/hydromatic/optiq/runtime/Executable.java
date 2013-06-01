@@ -40,7 +40,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Executable statement.  *  * @author jhyde  */
+comment|/**  * Executable statement.  */
 end_comment
 
 begin_interface
@@ -48,7 +48,7 @@ specifier|public
 interface|interface
 name|Executable
 block|{
-comment|/**      * Executes this statement and returns an enumerable which will yield rows.      * The {@code environment} parameter provides the values in the root of the      * environment (usually schemas).      *      * @param dataContext Environment that provides tables      * @return Enumerable over rows      */
+comment|/**    * Executes this statement and returns an enumerable which will yield rows.    * The {@code environment} parameter provides the values in the root of the    * environment (usually schemas).    *    * @param dataContext Environment that provides tables    * @return Enumerable over rows    */
 name|Enumerable
 name|execute
 parameter_list|(

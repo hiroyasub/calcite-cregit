@@ -34,17 +34,17 @@ specifier|public
 interface|interface
 name|Parameter
 block|{
-comment|/**      * Zero-based ordinal of this parameter within the member's parameter      * list.      *      * @return Parameter ordinal      */
+comment|/**    * Zero-based ordinal of this parameter within the member's parameter    * list.    *    * @return Parameter ordinal    */
 name|int
 name|getOrdinal
 parameter_list|()
 function_decl|;
-comment|/**      * Name of the parameter.      *      * @return Parameter name      */
+comment|/**    * Name of the parameter.    *    * @return Parameter name    */
 name|String
 name|getName
 parameter_list|()
 function_decl|;
-comment|/**      * Returns the type of this parameter.      *      * @return Parameter type.      */
+comment|/**    * Returns the type of this parameter.    *    * @return Parameter type.    */
 name|RelDataType
 name|getType
 parameter_list|()
