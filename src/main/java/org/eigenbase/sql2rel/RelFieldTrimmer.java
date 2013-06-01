@@ -454,12 +454,10 @@ name|String
 argument_list|>
 name|nameList
 init|=
-name|RelOptUtil
-operator|.
-name|getFieldNameList
-argument_list|(
 name|rowType
-argument_list|)
+operator|.
+name|getFieldNames
+argument_list|()
 decl_stmt|;
 name|RexBuilder
 name|rexBuilder

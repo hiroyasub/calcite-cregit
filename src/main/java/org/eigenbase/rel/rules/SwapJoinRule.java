@@ -367,8 +367,10 @@ argument_list|)
 expr_stmt|;
 block|}
 specifier|final
+name|List
+argument_list|<
 name|RexNode
-index|[]
+argument_list|>
 name|exps
 init|=
 name|RelOptUtil
@@ -391,15 +393,13 @@ name|newJoin
 argument_list|,
 name|exps
 argument_list|,
-name|RelOptUtil
-operator|.
-name|getFieldNames
-argument_list|(
 name|join
 operator|.
 name|getRowType
 argument_list|()
-argument_list|)
+operator|.
+name|getFieldNames
+argument_list|()
 argument_list|,
 literal|true
 argument_list|)
@@ -500,8 +500,10 @@ comment|// b0,b1,a0,a1,a2 from (select a0,a1,a2,b0,b1 from b join a)' is the
 comment|// same as 'b join a'. If we didn't do this, the swap join rule
 comment|// would fire on the new join, ad infinitum.
 specifier|final
+name|List
+argument_list|<
 name|RexNode
-index|[]
+argument_list|>
 name|exps
 init|=
 name|RelOptUtil
@@ -526,15 +528,13 @@ name|swapped
 argument_list|,
 name|exps
 argument_list|,
-name|RelOptUtil
-operator|.
-name|getFieldNames
-argument_list|(
 name|newJoin
 operator|.
 name|getRowType
 argument_list|()
-argument_list|)
+operator|.
+name|getFieldNames
+argument_list|()
 argument_list|)
 decl_stmt|;
 comment|// Make sure extra traits are carried over from the original rel

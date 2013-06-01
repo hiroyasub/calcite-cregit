@@ -17256,10 +17256,6 @@ name|this
 operator|.
 name|aliasList
 operator|=
-name|RelOptUtil
-operator|.
-name|getFieldNameList
-argument_list|(
 name|getNamespace
 argument_list|(
 name|select
@@ -17267,7 +17263,9 @@ argument_list|)
 operator|.
 name|getRowType
 argument_list|()
-argument_list|)
+operator|.
+name|getFieldNames
+argument_list|()
 expr_stmt|;
 block|}
 specifier|public
