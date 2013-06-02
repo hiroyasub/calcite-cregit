@@ -489,6 +489,15 @@ name|testSuite
 operator|.
 name|addTestSuite
 argument_list|(
+name|MongoAdapterTest
+operator|.
+name|class
+argument_list|)
+expr_stmt|;
+name|testSuite
+operator|.
+name|addTestSuite
+argument_list|(
 name|JdbcTest
 operator|.
 name|class

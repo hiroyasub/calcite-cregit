@@ -159,13 +159,11 @@ extends|extends
 name|AbstractQueryable
 argument_list|<
 name|Object
-index|[]
 argument_list|>
 implements|implements
 name|TranslatableTable
 argument_list|<
 name|Object
-index|[]
 argument_list|>
 block|{
 specifier|private
@@ -357,7 +355,6 @@ specifier|public
 name|Iterator
 argument_list|<
 name|Object
-index|[]
 argument_list|>
 name|iterator
 parameter_list|()
@@ -376,7 +373,6 @@ specifier|public
 name|Enumerator
 argument_list|<
 name|Object
-index|[]
 argument_list|>
 name|enumerator
 parameter_list|()
@@ -426,7 +422,7 @@ name|traitSetOf
 argument_list|(
 name|EnumerableConvention
 operator|.
-name|CUSTOM
+name|ARRAY
 argument_list|)
 argument_list|,
 name|relOptTable
