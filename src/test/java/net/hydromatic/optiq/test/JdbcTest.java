@@ -2239,7 +2239,43 @@ block|,
 literal|"select count(distinct \"product_id\") from \"product\""
 block|,
 literal|"EXPR$0=1560\n"
-block|,   }
+block|,
+literal|"select \"store\".\"store_name\" as \"c0\",\n"
+operator|+
+literal|" \"time_by_day\".\"the_year\" as \"c1\",\n"
+operator|+
+literal|" sum(\"sales_fact_1997\".\"store_sales\") as \"m0\"\n"
+operator|+
+literal|"from \"store\" as \"store\",\n"
+operator|+
+literal|" \"sales_fact_1997\" as \"sales_fact_1997\",\n"
+operator|+
+literal|" \"time_by_day\" as \"time_by_day\"\n"
+operator|+
+literal|"where \"sales_fact_1997\".\"store_id\" = \"store\".\"store_id\"\n"
+operator|+
+literal|"and \"store\".\"store_name\" in ('Store 1', 'Store 10', 'Store 11', 'Store 15', 'Store 16', 'Store 24', 'Store 3', 'Store 7')\n"
+operator|+
+literal|"and \"sales_fact_1997\".\"time_id\" = \"time_by_day\".\"time_id\"\n"
+operator|+
+literal|"and \"time_by_day\".\"the_year\" = 1997\n"
+operator|+
+literal|"group by \"store\".\"store_name\",\n"
+operator|+
+literal|" \"time_by_day\".\"the_year\"\n"
+block|,
+literal|"c0=Store 7; c1=1997; m0=54545.2800\n"
+operator|+
+literal|"c0=Store 24; c1=1997; m0=54431.1400\n"
+operator|+
+literal|"c0=Store 16; c1=1997; m0=49634.4600\n"
+operator|+
+literal|"c0=Store 3; c1=1997; m0=52896.3000\n"
+operator|+
+literal|"c0=Store 15; c1=1997; m0=52644.0700\n"
+operator|+
+literal|"c0=Store 11; c1=1997; m0=55058.7900\n"
+block|}
 decl_stmt|;
 comment|/** Test case for    *<a href="https://github.com/julianhyde/optiq/issues/35">issue #35</a>. */
 specifier|public

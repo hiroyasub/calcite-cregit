@@ -922,6 +922,10 @@ decl_stmt|;
 if|if
 condition|(
 name|sourcePrecision
+operator|<
+literal|0
+operator|||
+name|sourcePrecision
 operator|>=
 literal|0
 operator|&&

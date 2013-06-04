@@ -55,11 +55,11 @@ argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"select * from sales_fact_1997\n"
+literal|"select * from \"sales_fact_1997\"\n"
 operator|+
 literal|"union all\n"
 operator|+
-literal|"select * from sales_fact_1998"
+literal|"select * from \"sales_fact_1998\""
 argument_list|)
 operator|.
 name|explainContains
@@ -68,18 +68,18 @@ literal|"PLAN=JdbcToEnumerableConverter\n"
 operator|+
 literal|"  JdbcUnionRel(all=[true])\n"
 operator|+
-literal|"    JdbcTableScan(table=[[foodmart, SALES_FACT_1997]])\n"
+literal|"    JdbcTableScan(table=[[foodmart, sales_fact_1997]])\n"
 operator|+
-literal|"    JdbcTableScan(table=[[foodmart, SALES_FACT_1998]])"
+literal|"    JdbcTableScan(table=[[foodmart, sales_fact_1998]])"
 argument_list|)
 operator|.
 name|planHasSql
 argument_list|(
-literal|"SELECT * FROM `foodmart`.`SALES_FACT_1997`\n"
+literal|"SELECT * FROM `foodmart`.`sales_fact_1997`\n"
 operator|+
 literal|"UNION ALL \n"
 operator|+
-literal|"SELECT * FROM `foodmart`.`SALES_FACT_1998`"
+literal|"SELECT * FROM `foodmart`.`sales_fact_1998`"
 argument_list|)
 operator|.
 name|runs
@@ -107,11 +107,11 @@ name|query
 argument_list|(
 literal|"select * from (\n"
 operator|+
-literal|"  select * from sales_fact_1997\n"
+literal|"  select * from \"sales_fact_1997\"\n"
 operator|+
 literal|"  union all\n"
 operator|+
-literal|"  select * from sales_fact_1998)\n"
+literal|"  select * from \"sales_fact_1998\")\n"
 operator|+
 literal|"where \"product_id\" = 1"
 argument_list|)
@@ -122,7 +122,7 @@ literal|"SELECT *\n"
 operator|+
 literal|"FROM (\n"
 operator|+
-literal|"    SELECT * FROM `foodmart`.`SALES_FACT_1997`) AS `t`\n"
+literal|"    SELECT * FROM `foodmart`.`sales_fact_1997`) AS `t`\n"
 operator|+
 literal|"WHERE `product_id` = 1\n"
 operator|+
@@ -132,13 +132,68 @@ literal|"SELECT *\n"
 operator|+
 literal|"FROM (\n"
 operator|+
-literal|"    SELECT * FROM `foodmart`.`SALES_FACT_1998`) AS `t`\n"
+literal|"    SELECT * FROM `foodmart`.`sales_fact_1998`) AS `t`\n"
 operator|+
 literal|"WHERE `product_id` = 1"
 argument_list|)
 operator|.
 name|runs
 argument_list|()
+expr_stmt|;
+block|}
+specifier|public
+name|void
+name|testInPlan
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|assertThat
+argument_list|()
+operator|.
+name|withModel
+argument_list|(
+name|JdbcTest
+operator|.
+name|FOODMART_MODEL
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select \"store_id\", \"store_name\" from \"store\"\n"
+operator|+
+literal|"where \"store_name\" in ('Store 1', 'Store 10', 'Store 11', 'Store 15', 'Store 16', 'Store 24', 'Store 3', 'Store 7')"
+argument_list|)
+operator|.
+name|planHasSql
+argument_list|(
+literal|"SELECT `store_id` AS `store_id`, `store_name` AS `store_name`\n"
+operator|+
+literal|"FROM (\n"
+operator|+
+literal|"    SELECT * FROM `foodmart`.`store`) AS `t`\n"
+operator|+
+literal|"WHERE `store_name` = 'Store 1' OR `store_name` = 'Store 10' OR `store_name` = 'Store 11' OR `store_name` = 'Store 15' OR `store_name` = 'Store 16' OR `store_name` = 'Store 24' OR `store_name` = 'Store 3' OR `store_name` = 'Store 7'"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"store_id=1; store_name=Store 1\n"
+operator|+
+literal|"store_id=3; store_name=Store 3\n"
+operator|+
+literal|"store_id=7; store_name=Store 7\n"
+operator|+
+literal|"store_id=10; store_name=Store 10\n"
+operator|+
+literal|"store_id=11; store_name=Store 11\n"
+operator|+
+literal|"store_id=15; store_name=Store 15\n"
+operator|+
+literal|"store_id=16; store_name=Store 16\n"
+operator|+
+literal|"store_id=24; store_name=Store 24\n"
+argument_list|)
 expr_stmt|;
 block|}
 block|}

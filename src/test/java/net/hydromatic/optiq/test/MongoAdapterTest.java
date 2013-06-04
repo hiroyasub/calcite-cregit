@@ -78,16 +78,6 @@ literal|"       tables: [\n"
 operator|+
 literal|"         {\n"
 operator|+
-literal|"           name: 'warehouse',\n"
-operator|+
-literal|"           type: 'view',\n"
-operator|+
-literal|"           sql: 'select cast(_MAP[\\'warehouse_id\\'] AS double) AS \"warehouse_id\", cast(_MAP[\\'warehouse_state_province\\'] AS varchar(20)) AS \"warehouse_state_province\" from \"_foodmart\".\"warehouse\"'\n"
-operator|+
-literal|"         },\n"
-operator|+
-literal|"         {\n"
-operator|+
 literal|"           name: 'sales_fact_1997',\n"
 operator|+
 literal|"           type: 'view',\n"
@@ -103,6 +93,26 @@ operator|+
 literal|"           type: 'view',\n"
 operator|+
 literal|"           sql: 'select cast(_MAP[\\'product_id\\'] AS double) AS \"product_id\" from \"_foodmart\".\"sales_fact_1998\"'\n"
+operator|+
+literal|"         },\n"
+operator|+
+literal|"         {\n"
+operator|+
+literal|"           name: 'store',\n"
+operator|+
+literal|"           type: 'view',\n"
+operator|+
+literal|"           sql: 'select cast(_MAP[\\'store_id\\'] AS double) AS \"store_id\", cast(_MAP[\\'store_name\\'] AS varchar(20)) AS \"store_name\" from \"_foodmart\".\"store\"'\n"
+operator|+
+literal|"         },\n"
+operator|+
+literal|"         {\n"
+operator|+
+literal|"           name: 'warehouse',\n"
+operator|+
+literal|"           type: 'view',\n"
+operator|+
+literal|"           sql: 'select cast(_MAP[\\'warehouse_id\\'] AS double) AS \"warehouse_id\", cast(_MAP[\\'warehouse_state_province\\'] AS varchar(20)) AS \"warehouse_state_province\" from \"_foodmart\".\"warehouse\"'\n"
 operator|+
 literal|"         }\n"
 operator|+
@@ -281,6 +291,56 @@ operator|+
 literal|"warehouse_id=14.0; warehouse_state_province=CA\n"
 operator|+
 literal|"warehouse_id=24.0; warehouse_state_province=CA\n"
+argument_list|)
+expr_stmt|;
+block|}
+specifier|public
+name|void
+name|testInPlan
+parameter_list|()
+block|{
+if|if
+condition|(
+operator|!
+name|ENABLED
+condition|)
+block|{
+return|return;
+block|}
+name|OptiqAssert
+operator|.
+name|assertThat
+argument_list|()
+operator|.
+name|withModel
+argument_list|(
+name|MONGO_FOODMART_MODEL
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select \"store_id\", \"store_name\" from \"store\"\n"
+operator|+
+literal|"where \"store_name\" in ('Store 1', 'Store 10', 'Store 11', 'Store 15', 'Store 16', 'Store 24', 'Store 3', 'Store 7')"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"store_id=1.0; store_name=Store 1\n"
+operator|+
+literal|"store_id=3.0; store_name=Store 3\n"
+operator|+
+literal|"store_id=7.0; store_name=Store 7\n"
+operator|+
+literal|"store_id=10.0; store_name=Store 10\n"
+operator|+
+literal|"store_id=11.0; store_name=Store 11\n"
+operator|+
+literal|"store_id=15.0; store_name=Store 15\n"
+operator|+
+literal|"store_id=16.0; store_name=Store 16\n"
+operator|+
+literal|"store_id=24.0; store_name=Store 24\n"
 argument_list|)
 expr_stmt|;
 block|}
