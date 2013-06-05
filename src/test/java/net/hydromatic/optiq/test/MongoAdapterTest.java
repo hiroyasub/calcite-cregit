@@ -171,7 +171,7 @@ name|enabled
 parameter_list|()
 block|{
 return|return
-literal|false
+literal|true
 return|;
 block|}
 specifier|public
@@ -456,7 +456,9 @@ literal|"PLAN=EnumerableAggregateRel(group=[{}], EXPR$0=[COUNT()])\n"
 operator|+
 literal|"  EnumerableCalcRel(expr#0=[{inputs}], expr#1=[0], $f0=[$t1])\n"
 operator|+
-literal|"    EnumerableTableAccessRel(table=[[mongo_raw, zips]])"
+literal|"    MongoToEnumerableConverter\n"
+operator|+
+literal|"      MongoTableScan(table=[[mongo_raw, zips]], ops=[[]])"
 argument_list|)
 expr_stmt|;
 block|}

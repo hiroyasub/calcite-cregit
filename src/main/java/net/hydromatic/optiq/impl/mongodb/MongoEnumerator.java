@@ -39,6 +39,16 @@ name|*
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Iterator
+import|;
+end_import
+
 begin_comment
 comment|/** Enumerator that reads from a MongoDB collection. */
 end_comment
@@ -54,37 +64,32 @@ argument_list|>
 block|{
 specifier|private
 specifier|final
-name|DBCursor
+name|Iterator
+argument_list|<
+name|DBObject
+argument_list|>
 name|cursor
 decl_stmt|;
 specifier|private
 name|DBObject
 name|current
 decl_stmt|;
-comment|/** Creates a MongoEnumerator.    *    * @param mongoDb Connection to a Mongo database    * @param collectionName Collection name    */
+comment|/** Creates a MongoEnumerator.    *    * @param cursor Mongo iterator (usually a {@link DBCursor})    */
 specifier|public
 name|MongoEnumerator
 parameter_list|(
-name|DB
-name|mongoDb
-parameter_list|,
-name|String
-name|collectionName
+name|Iterator
+argument_list|<
+name|DBObject
+argument_list|>
+name|cursor
 parameter_list|)
 block|{
 name|this
 operator|.
 name|cursor
 operator|=
-name|mongoDb
-operator|.
-name|getCollection
-argument_list|(
-name|collectionName
-argument_list|)
-operator|.
-name|find
-argument_list|()
+name|cursor
 expr_stmt|;
 block|}
 specifier|public
