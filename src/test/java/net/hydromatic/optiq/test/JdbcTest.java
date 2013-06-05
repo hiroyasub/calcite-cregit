@@ -2275,7 +2275,89 @@ operator|+
 literal|"c0=Store 15; c1=1997; m0=52644.0700\n"
 operator|+
 literal|"c0=Store 11; c1=1997; m0=55058.7900\n"
-block|}
+block|,
+literal|"select \"customer\".\"yearly_income\" as \"c0\","
+operator|+
+literal|" \"customer\".\"education\" as \"c1\" \n"
+operator|+
+literal|"from \"customer\" as \"customer\",\n"
+operator|+
+literal|" \"sales_fact_1997\" as \"sales_fact_1997\"\n"
+operator|+
+literal|"where \"sales_fact_1997\".\"customer_id\" = \"customer\".\"customer_id\"\n"
+operator|+
+literal|" and ((not (\"customer\".\"yearly_income\" in ('$10K - $30K', '$50K - $70K'))\n"
+operator|+
+literal|" or (\"customer\".\"yearly_income\" is null)))\n"
+operator|+
+literal|"group by \"customer\".\"yearly_income\",\n"
+operator|+
+literal|" \"customer\".\"education\"\n"
+operator|+
+literal|"order by \"customer\".\"yearly_income\" ASC NULLS LAST,\n"
+operator|+
+literal|" \"customer\".\"education\" ASC NULLS LAST"
+block|,
+literal|"c0=$110K - $130K; c1=Bachelors Degree\n"
+operator|+
+literal|"c0=$110K - $130K; c1=Graduate Degree\n"
+operator|+
+literal|"c0=$110K - $130K; c1=High School Degree\n"
+operator|+
+literal|"c0=$110K - $130K; c1=Partial College\n"
+operator|+
+literal|"c0=$110K - $130K; c1=Partial High School\n"
+operator|+
+literal|"c0=$130K - $150K; c1=Bachelors Degree\n"
+operator|+
+literal|"c0=$130K - $150K; c1=Graduate Degree\n"
+operator|+
+literal|"c0=$130K - $150K; c1=High School Degree\n"
+operator|+
+literal|"c0=$130K - $150K; c1=Partial College\n"
+operator|+
+literal|"c0=$130K - $150K; c1=Partial High School\n"
+operator|+
+literal|"c0=$150K +; c1=Bachelors Degree\n"
+operator|+
+literal|"c0=$150K +; c1=Graduate Degree\n"
+operator|+
+literal|"c0=$150K +; c1=High School Degree\n"
+operator|+
+literal|"c0=$150K +; c1=Partial College\n"
+operator|+
+literal|"c0=$150K +; c1=Partial High School\n"
+operator|+
+literal|"c0=$30K - $50K; c1=Bachelors Degree\n"
+operator|+
+literal|"c0=$30K - $50K; c1=Graduate Degree\n"
+operator|+
+literal|"c0=$30K - $50K; c1=High School Degree\n"
+operator|+
+literal|"c0=$30K - $50K; c1=Partial College\n"
+operator|+
+literal|"c0=$30K - $50K; c1=Partial High School\n"
+operator|+
+literal|"c0=$70K - $90K; c1=Bachelors Degree\n"
+operator|+
+literal|"c0=$70K - $90K; c1=Graduate Degree\n"
+operator|+
+literal|"c0=$70K - $90K; c1=High School Degree\n"
+operator|+
+literal|"c0=$70K - $90K; c1=Partial College\n"
+operator|+
+literal|"c0=$70K - $90K; c1=Partial High School\n"
+operator|+
+literal|"c0=$90K - $110K; c1=Bachelors Degree\n"
+operator|+
+literal|"c0=$90K - $110K; c1=Graduate Degree\n"
+operator|+
+literal|"c0=$90K - $110K; c1=High School Degree\n"
+operator|+
+literal|"c0=$90K - $110K; c1=Partial College\n"
+operator|+
+literal|"c0=$90K - $110K; c1=Partial High School\n"
+block|,   }
 decl_stmt|;
 comment|/** Test case for    *<a href="https://github.com/julianhyde/optiq/issues/35">issue #35</a>. */
 specifier|public
@@ -2482,7 +2564,7 @@ index|]
 expr_stmt|;
 block|}
 comment|// uncomment to run specific queries:
-comment|//                if (i != 85) continue;
+comment|//if (i != queries.length - 1) continue;
 specifier|final
 name|OptiqAssert
 operator|.
@@ -3107,6 +3189,96 @@ operator|+
 literal|"deptno=40; E=Employee [empid: 200, deptno: 20, name: Eric]\n"
 argument_list|)
 expr_stmt|;
+block|}
+comment|/** Tests the NOT IN operator. Problems arose in code-generation because    * the column allows nulls. */
+specifier|public
+name|void
+name|testNotIn
+parameter_list|()
+block|{
+name|predicate
+argument_list|(
+literal|"\"name\" not in ('a', 'b') or \"name\" is null"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"empid=100; deptno=10; name=Bill; commission=1000\n"
+operator|+
+literal|"empid=200; deptno=20; name=Eric; commission=500\n"
+operator|+
+literal|"empid=150; deptno=10; name=Sebastian; commission=null\n"
+argument_list|)
+expr_stmt|;
+comment|// And some similar combinations...
+name|predicate
+argument_list|(
+literal|"\"name\" in ('a', 'b') or \"name\" is null"
+argument_list|)
+expr_stmt|;
+name|predicate
+argument_list|(
+literal|"\"name\" in ('a', 'b', null) or \"name\" is null"
+argument_list|)
+expr_stmt|;
+name|predicate
+argument_list|(
+literal|"\"name\" in ('a', 'b') or \"name\" is not null"
+argument_list|)
+expr_stmt|;
+name|predicate
+argument_list|(
+literal|"\"name\" in ('a', 'b', null) or \"name\" is not null"
+argument_list|)
+expr_stmt|;
+name|predicate
+argument_list|(
+literal|"\"name\" not in ('a', 'b', null) or \"name\" is not null"
+argument_list|)
+expr_stmt|;
+name|predicate
+argument_list|(
+literal|"\"name\" not in ('a', 'b', null) and \"name\" is not null"
+argument_list|)
+expr_stmt|;
+block|}
+specifier|private
+name|OptiqAssert
+operator|.
+name|AssertQuery
+name|predicate
+parameter_list|(
+name|String
+name|foo
+parameter_list|)
+block|{
+return|return
+name|OptiqAssert
+operator|.
+name|assertThat
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select * from \"hr\".\"emps\"\n"
+operator|+
+literal|"where "
+operator|+
+name|foo
+argument_list|)
+operator|.
+name|runs
+argument_list|()
+return|;
 block|}
 comment|/** Tests the TABLES table in the information schema. */
 specifier|public

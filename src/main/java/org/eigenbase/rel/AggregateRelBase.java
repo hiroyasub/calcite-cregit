@@ -603,7 +603,14 @@ name|name
 operator|=
 literal|"$f"
 operator|+
+operator|(
+name|groupSet
+operator|.
+name|cardinality
+argument_list|()
+operator|+
 name|index
+operator|)
 expr_stmt|;
 block|}
 assert|assert

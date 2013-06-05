@@ -1352,7 +1352,7 @@ argument_list|)
 operator|.
 name|planContains
 argument_list|(
-literal|"return current13.wrapperLong == null ? null : Long.valueOf(current13.wrapperLong.longValue() / current13.primitiveLong);"
+literal|"return current13.wrapperLong == null ? (Long) null : Long.valueOf(current13.wrapperLong.longValue() / current13.primitiveLong);"
 argument_list|)
 operator|.
 name|returns
@@ -1371,7 +1371,7 @@ argument_list|)
 operator|.
 name|planContains
 argument_list|(
-literal|"return current13.wrapperLong == null ? null : Long.valueOf(current13.wrapperLong.longValue() / current13.wrapperLong.longValue());"
+literal|"return current13.wrapperLong == null ? (Long) null : Long.valueOf(current13.wrapperLong.longValue() / current13.wrapperLong.longValue());"
 argument_list|)
 operator|.
 name|returns
