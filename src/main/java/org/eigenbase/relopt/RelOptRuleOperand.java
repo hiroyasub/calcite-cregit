@@ -58,13 +58,20 @@ name|RelOptRuleOperand
 block|{
 comment|//~ Enums ------------------------------------------------------------------
 comment|/**      * Dummy type, containing a single value, for parameters to overloaded forms      * of the {@link org.eigenbase.relopt.RelOptRuleOperand} constructor      * signifying operands that will be matched by relational expressions with      * any number of children.      */
-specifier|public
 enum|enum
 name|Dummy
 block|{
-comment|/**          * Signifies that operand can have any number of children.          */
+comment|/** Signifies that operand can have any number of children. */
 name|ANY
-block|}
+block|,
+comment|/** Signifies that operand has no children. Therefore it matches a          * leaf node, such as a table scan or VALUES operator.          *          *<p>{@code RelOptRuleOperand(Foo.class, NONE)} is equivalent to          * {@code RelOptRuleOperand(Foo.class)} but we prefer the former because          * it is more explicit.</p> */
+name|LEAF
+block|,
+name|SOME
+block|,
+comment|/** Signifies that the rule matches any one of its parents' children.          * The parent may have one or more children. */
+name|UNORDERED
+block|,     }
 comment|//~ Instance fields --------------------------------------------------------
 specifier|private
 name|RelOptRuleOperand
@@ -110,14 +117,14 @@ name|RelOptRuleOperand
 index|[]
 name|children
 decl_stmt|;
+comment|/** Whether child operands can be matched in any order. */
 specifier|public
 specifier|final
 name|boolean
 name|matchAnyChildren
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates an operand.      *      *<p>If<code>children</code> is null, the rule matches regardless of the      * number of children.      *      *<p>If<code>matchAnyChild</code> is true, child operands can be matched      * in any order. This is useful when matching a relational expression which      * can have a variable number of children. For example, the rule to      * eliminate empty children of a Union would have operands      *      *<blockquote>Operand(UnionRel, true, Operand(EmptyRel))</blockquote>      *      * and given the relational expressions      *      *<blockquote>UnionRel(FilterRel, EmptyRel, ProjectRel)</blockquote>      *      * would fire the rule with arguments      *      *<blockquote>{Union, Empty}</blockquote>      *      * It is up to the rule to deduce the other children, or indeed the position      * of the matched child.</p>      *      * @param clazz Class of relational expression to match (must not be null)      * @param trait Trait to match, or null to match any trait      * @param matchAnyChild Whether child operands can be matched in any order      * @param children Child operands; or null, meaning match any number of      * children      */
-specifier|public
+comment|/**      * Creates an operand.      *      *<p>If<code>children</code> is null, the rule matches regardless of the      * number of children.      *      *<p>If<code>matchAnyChild</code> is true, child operands can be matched      * in any order. This is useful when matching a relational expression which      * can have a variable number of children. For example, the rule to      * eliminate empty children of a Union would have operands      *      *<blockquote>Operand(UnionRel, true, Operand(EmptyRel))</blockquote>      *      * and given the relational expressions      *      *<blockquote>UnionRel(FilterRel, EmptyRel, ProjectRel)</blockquote>      *      * would fire the rule with arguments      *      *<blockquote>{Union, Empty}</blockquote>      *      * It is up to the rule to deduce the other children, or indeed the position      * of the matched child.</p>      *      * @param clazz Class of relational expression to match (must not be null)      * @param trait Trait to match, or null to match any trait      * @param children Child operands; or null, meaning match any number of      * children      */
 name|RelOptRuleOperand
 parameter_list|(
 name|Class
@@ -131,21 +138,88 @@ parameter_list|,
 name|RelTrait
 name|trait
 parameter_list|,
-name|boolean
-name|matchAnyChild
+name|Dummy
+name|dummy
 parameter_list|,
 name|RelOptRuleOperand
-modifier|...
+index|[]
 name|children
 parameter_list|)
 block|{
 assert|assert
-operator|(
 name|clazz
 operator|!=
 literal|null
-operator|)
 assert|;
+switch|switch
+condition|(
+name|dummy
+condition|)
+block|{
+case|case
+name|ANY
+case|:
+name|this
+operator|.
+name|matchAnyChildren
+operator|=
+literal|false
+expr_stmt|;
+assert|assert
+name|children
+operator|==
+literal|null
+assert|;
+break|break;
+case|case
+name|LEAF
+case|:
+name|this
+operator|.
+name|matchAnyChildren
+operator|=
+literal|false
+expr_stmt|;
+assert|assert
+name|children
+operator|.
+name|length
+operator|==
+literal|0
+assert|;
+break|break;
+case|case
+name|UNORDERED
+case|:
+name|this
+operator|.
+name|matchAnyChildren
+operator|=
+literal|true
+expr_stmt|;
+assert|assert
+name|children
+operator|.
+name|length
+operator|==
+literal|1
+assert|;
+break|break;
+default|default:
+name|this
+operator|.
+name|matchAnyChildren
+operator|=
+literal|false
+expr_stmt|;
+assert|assert
+name|children
+operator|.
+name|length
+operator|==
+literal|1
+assert|;
+block|}
 name|this
 operator|.
 name|clazz
@@ -189,14 +263,8 @@ name|this
 expr_stmt|;
 block|}
 block|}
-name|this
-operator|.
-name|matchAnyChildren
-operator|=
-name|matchAnyChild
-expr_stmt|;
 block|}
-comment|/**      * Creates an operand which matches a given trait and matches child operands      * in the order they appear.      *      * @param clazz Class of relational expression to match (must not be null)      * @param trait Trait to match, or null to match any trait      * @param children Child operands; must not be null      */
+comment|/**      * Creates an operand which matches a given trait and matches child operands      * in the order they appear.      *      * @param clazz Class of relational expression to match (must not be null)      * @param trait Trait to match, or null to match any trait      * @param children Child operands; must not be null      *      * @deprecated Use {@link RelOptRule#some}      */
 specifier|public
 name|RelOptRuleOperand
 parameter_list|(
@@ -222,18 +290,15 @@ name|clazz
 argument_list|,
 name|trait
 argument_list|,
-literal|false
+name|Dummy
+operator|.
+name|SOME
 argument_list|,
 name|children
 argument_list|)
 expr_stmt|;
-assert|assert
-name|children
-operator|!=
-literal|null
-assert|;
 block|}
-comment|/**      * Creates an operand that matches a given trait and any number of children.      *      * @param clazz Class of relational expression to match (must not be null)      * @param trait Trait to match, or null to match any trait      * @param dummy Dummy argument to distinguish this constructor from other      * overloaded forms      */
+comment|/**      * Creates an operand that matches a given trait and any number of children.      *      * @param clazz Class of relational expression to match (must not be null)      * @param trait Trait to match, or null to match any trait      * @param dummy Dummy argument to distinguish this constructor from other      * overloaded forms; must be ANY.      *      * @deprecated Use {@link RelOptRule#any(Class, RelTrait)}      */
 specifier|public
 name|RelOptRuleOperand
 parameter_list|(
@@ -258,24 +323,20 @@ name|clazz
 argument_list|,
 name|trait
 argument_list|,
-literal|false
+name|dummy
 argument_list|,
-operator|(
-name|RelOptRuleOperand
-index|[]
-operator|)
 literal|null
 argument_list|)
 expr_stmt|;
-name|Util
-operator|.
-name|discard
-argument_list|(
+assert|assert
 name|dummy
-argument_list|)
-expr_stmt|;
+operator|==
+name|Dummy
+operator|.
+name|ANY
+assert|;
 block|}
-comment|/**      * Creates an operand that matches child operands in the order they appear.      *      *<p>If<code>children</code> is null, the rule matches regardless of the      * number of children.      *      * @param clazz Class of relational expression to match (must not be null)      * @param children Child operands; must not be null      */
+comment|/**      * Creates an operand that matches child operands in the order they appear.      *      *<p>There must be at least one child operand. If your rule is intended      * to match a relational expression that has no children, use      * {@code RelOptRuleOperand(Class, NONE)}.      *      * @param clazz Class of relational expression to match (must not be null)      * @param children Child operands; must not be null      *      * @deprecated Use {@link RelOptRule#some}      */
 specifier|public
 name|RelOptRuleOperand
 parameter_list|(
@@ -298,7 +359,9 @@ name|clazz
 argument_list|,
 literal|null
 argument_list|,
-literal|false
+name|Dummy
+operator|.
+name|SOME
 argument_list|,
 name|children
 argument_list|)
@@ -309,7 +372,7 @@ operator|!=
 literal|null
 assert|;
 block|}
-comment|/**      * Creates an operand that matches any number of children.      *      * @param clazz Class of relational expression to match (must not be null)      * @param dummy Dummy argument to distinguish this constructor from other      * overloaded forms      */
+comment|/**      * Creates an operand that matches any number of children.      *      * @param clazz Class of relational expression to match (must not be null)      * @param dummy Dummy argument to distinguish this constructor from other      * overloaded forms. Must be ANY.      *      * @deprecated Use {@link RelOptRule#any} or {@link RelOptRule#leaf}      */
 specifier|public
 name|RelOptRuleOperand
 parameter_list|(
@@ -331,20 +394,9 @@ name|clazz
 argument_list|,
 literal|null
 argument_list|,
-literal|false
-argument_list|,
-operator|(
-name|RelOptRuleOperand
-index|[]
-operator|)
-literal|null
-argument_list|)
-expr_stmt|;
-name|Util
-operator|.
-name|discard
-argument_list|(
 name|dummy
+argument_list|,
+literal|null
 argument_list|)
 expr_stmt|;
 block|}
