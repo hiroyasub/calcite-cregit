@@ -114,7 +114,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * VolcanoPlannerTraitTest  *  * @author Stephan Zuercher  */
+comment|/**  * Unit test for handling of traits by {@link VolcanoPlanner}.  */
 end_comment
 
 begin_class
@@ -1764,14 +1764,11 @@ parameter_list|()
 block|{
 name|super
 argument_list|(
-operator|new
-name|RelOptRuleOperand
+name|any
 argument_list|(
 name|NoneLeafRel
 operator|.
 name|class
-argument_list|,
-name|ANY
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1798,15 +1795,12 @@ block|{
 name|NoneLeafRel
 name|leafRel
 init|=
-operator|(
-name|NoneLeafRel
-operator|)
 name|call
 operator|.
-name|rels
-index|[
+name|rel
+argument_list|(
 literal|0
-index|]
+argument_list|)
 decl_stmt|;
 name|call
 operator|.
@@ -1841,14 +1835,11 @@ parameter_list|()
 block|{
 name|super
 argument_list|(
-operator|new
-name|RelOptRuleOperand
+name|any
 argument_list|(
 name|NoneSingleRel
 operator|.
 name|class
-argument_list|,
-name|ANY
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1887,15 +1878,12 @@ block|{
 name|NoneSingleRel
 name|rel
 init|=
-operator|(
-name|NoneSingleRel
-operator|)
 name|call
 operator|.
-name|rels
-index|[
+name|rel
+argument_list|(
 literal|0
-index|]
+argument_list|)
 decl_stmt|;
 name|RelNode
 name|converted
@@ -1951,14 +1939,11 @@ parameter_list|()
 block|{
 name|super
 argument_list|(
-operator|new
-name|RelOptRuleOperand
+name|any
 argument_list|(
 name|NoneSingleRel
 operator|.
 name|class
-argument_list|,
-name|ANY
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1997,15 +1982,12 @@ block|{
 name|NoneSingleRel
 name|rel
 init|=
-operator|(
-name|NoneSingleRel
-operator|)
 name|call
 operator|.
-name|rels
-index|[
+name|rel
+argument_list|(
 literal|0
-index|]
+argument_list|)
 decl_stmt|;
 name|RelNode
 name|converted

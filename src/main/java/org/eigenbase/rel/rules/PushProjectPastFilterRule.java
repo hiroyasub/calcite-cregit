@@ -52,7 +52,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * PushProjectPastFilterRule implements the rule for pushing a projection past a  * filter.  *  * @author Zelaine Fong  * @version $Id$  */
+comment|/**  * PushProjectPastFilterRule implements the rule for pushing a projection past a  * filter.  */
 end_comment
 
 begin_class
@@ -89,21 +89,17 @@ parameter_list|()
 block|{
 name|super
 argument_list|(
-operator|new
-name|RelOptRuleOperand
+name|some
 argument_list|(
 name|ProjectRel
 operator|.
 name|class
 argument_list|,
-operator|new
-name|RelOptRuleOperand
+name|any
 argument_list|(
 name|FilterRel
 operator|.
 name|class
-argument_list|,
-name|ANY
 argument_list|)
 argument_list|)
 argument_list|)
@@ -180,27 +176,21 @@ condition|)
 block|{
 name|origProj
 operator|=
-operator|(
-name|ProjectRel
-operator|)
 name|call
 operator|.
-name|rels
-index|[
+name|rel
+argument_list|(
 literal|0
-index|]
+argument_list|)
 expr_stmt|;
 name|filterRel
 operator|=
-operator|(
-name|FilterRel
-operator|)
 name|call
 operator|.
-name|rels
-index|[
+name|rel
+argument_list|(
 literal|1
-index|]
+argument_list|)
 expr_stmt|;
 block|}
 else|else
@@ -211,15 +201,12 @@ literal|null
 expr_stmt|;
 name|filterRel
 operator|=
-operator|(
-name|FilterRel
-operator|)
 name|call
 operator|.
-name|rels
-index|[
+name|rel
+argument_list|(
 literal|0
-index|]
+argument_list|)
 expr_stmt|;
 block|}
 name|RelNode

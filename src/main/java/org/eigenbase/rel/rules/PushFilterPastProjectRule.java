@@ -52,7 +52,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * PushFilterPastProjectRule implements the rule for pushing a {@link FilterRel}  * past a {@link ProjectRel}.  *  * @author Zelaine Fong  * @version $Id$  */
+comment|/**  * PushFilterPastProjectRule implements the rule for pushing a {@link FilterRel}  * past a {@link ProjectRel}.  */
 end_comment
 
 begin_class
@@ -80,21 +80,17 @@ parameter_list|()
 block|{
 name|super
 argument_list|(
-operator|new
-name|RelOptRuleOperand
+name|some
 argument_list|(
 name|FilterRel
 operator|.
 name|class
 argument_list|,
-operator|new
-name|RelOptRuleOperand
+name|any
 argument_list|(
 name|ProjectRel
 operator|.
 name|class
-argument_list|,
-name|ANY
 argument_list|)
 argument_list|)
 argument_list|)
@@ -113,28 +109,22 @@ block|{
 name|FilterRel
 name|filterRel
 init|=
-operator|(
-name|FilterRel
-operator|)
 name|call
 operator|.
-name|rels
-index|[
+name|rel
+argument_list|(
 literal|0
-index|]
+argument_list|)
 decl_stmt|;
 name|ProjectRel
 name|projRel
 init|=
-operator|(
-name|ProjectRel
-operator|)
 name|call
 operator|.
-name|rels
-index|[
+name|rel
+argument_list|(
 literal|1
-index|]
+argument_list|)
 decl_stmt|;
 comment|// convert the filter to one that references the child of the project
 name|RexNode

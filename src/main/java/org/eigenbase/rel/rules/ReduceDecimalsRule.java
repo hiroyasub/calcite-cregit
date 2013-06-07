@@ -148,7 +148,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * ReduceDecimalsRule is a rule which reduces decimal operations (such as casts  * or arithmetic) into operations involving more primitive types (such as longs  * and doubles). The rule allows eigenbase implementations to deal with decimals  * in a consistent manner, while saving the effort of implementing them.  *  *<p>The rule can be applied to a {@link CalcRel} with a program for which  * {@link RexUtil#requiresDecimalExpansion} returns true. The rule relies on a  * {@link RexShuttle} to walk over relational expressions and replace them.  *  *<p>While decimals are generally not implemented by the eigenbase runtime, the  * rule is optionally applied, in order to support the situation in which we  * would like to push down decimal operations to an external database.  *  * @author jpham  * @version $Id$  */
+comment|/**  * ReduceDecimalsRule is a rule which reduces decimal operations (such as casts  * or arithmetic) into operations involving more primitive types (such as longs  * and doubles). The rule allows eigenbase implementations to deal with decimals  * in a consistent manner, while saving the effort of implementing them.  *  *<p>The rule can be applied to a {@link CalcRel} with a program for which  * {@link RexUtil#requiresDecimalExpansion} returns true. The rule relies on a  * {@link RexShuttle} to walk over relational expressions and replace them.  *  *<p>While decimals are generally not implemented by the eigenbase runtime, the  * rule is optionally applied, in order to support the situation in which we  * would like to push down decimal operations to an external database.  */
 end_comment
 
 begin_class
@@ -176,14 +176,11 @@ parameter_list|()
 block|{
 name|super
 argument_list|(
-operator|new
-name|RelOptRuleOperand
+name|any
 argument_list|(
 name|CalcRel
 operator|.
 name|class
-argument_list|,
-name|ANY
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -213,15 +210,12 @@ block|{
 name|CalcRel
 name|calcRel
 init|=
-operator|(
-name|CalcRel
-operator|)
 name|call
 operator|.
-name|rels
-index|[
+name|rel
+argument_list|(
 literal|0
-index|]
+argument_list|)
 decl_stmt|;
 comment|// Expand decimals in every expression in this program. If no
 comment|// expression changes, don't apply the rule.
@@ -2589,8 +2583,6 @@ argument_list|)
 decl_stmt|;
 name|RexNode
 name|scaled
-init|=
-literal|null
 decl_stmt|;
 if|if
 condition|(
@@ -4407,45 +4399,6 @@ expr_stmt|;
 block|}
 return|return
 name|type
-return|;
-block|}
-block|}
-comment|/**      * An expander which casts decimal arguments as call return type      */
-specifier|private
-class|class
-name|CastArgAsReturnExpander
-extends|extends
-name|CastArgAsTypeExpander
-block|{
-specifier|private
-name|CastArgAsReturnExpander
-parameter_list|(
-name|RexBuilder
-name|builder
-parameter_list|)
-block|{
-name|super
-argument_list|(
-name|builder
-argument_list|)
-expr_stmt|;
-block|}
-specifier|public
-name|RelDataType
-name|getArgType
-parameter_list|(
-name|RexCall
-name|call
-parameter_list|,
-name|int
-name|ordinal
-parameter_list|)
-block|{
-return|return
-name|call
-operator|.
-name|getType
-argument_list|()
 return|;
 block|}
 block|}

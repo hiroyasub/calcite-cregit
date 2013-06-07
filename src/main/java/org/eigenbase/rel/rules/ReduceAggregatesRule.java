@@ -122,7 +122,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Rule to reduce aggregates to simpler forms. Currently only AVG(x) to  * SUM(x)/COUNT(x), but eventually will handle others such as STDDEV.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  * Rule to reduce aggregates to simpler forms. Currently only AVG(x) to  * SUM(x)/COUNT(x), but eventually will handle others such as STDDEV.  */
 end_comment
 
 begin_class
@@ -143,14 +143,11 @@ init|=
 operator|new
 name|ReduceAggregatesRule
 argument_list|(
-operator|new
-name|RelOptRuleOperand
+name|any
 argument_list|(
 name|AggregateRel
 operator|.
 name|class
-argument_list|,
-name|ANY
 argument_list|)
 argument_list|)
 decl_stmt|;

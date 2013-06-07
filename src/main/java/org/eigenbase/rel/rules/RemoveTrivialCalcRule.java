@@ -52,7 +52,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Rule which removes a trivial {@link CalcRel}.  *  *<p>A {@link CalcRel} is trivial if it projects its input fields in their  * original order, and it does not filter.  *  * @author Julian Hyde  * @version $Id$  * @see org.eigenbase.rel.rules.RemoveTrivialProjectRule  */
+comment|/**  * Rule which removes a trivial {@link CalcRel}.  *  *<p>A {@link CalcRel} is trivial if it projects its input fields in their  * original order, and it does not filter.  *  * @see org.eigenbase.rel.rules.RemoveTrivialProjectRule  */
 end_comment
 
 begin_class
@@ -80,14 +80,11 @@ parameter_list|()
 block|{
 name|super
 argument_list|(
-operator|new
-name|RelOptRuleOperand
+name|any
 argument_list|(
 name|CalcRel
 operator|.
 name|class
-argument_list|,
-name|ANY
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -105,15 +102,12 @@ block|{
 name|CalcRel
 name|calc
 init|=
-operator|(
-name|CalcRel
-operator|)
 name|call
 operator|.
-name|rels
-index|[
+name|rel
+argument_list|(
 literal|0
-index|]
+argument_list|)
 decl_stmt|;
 name|RexProgram
 name|program

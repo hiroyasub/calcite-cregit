@@ -62,7 +62,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * MergeProjectRule merges a {@link ProjectRel} into another {@link ProjectRel},  * provided the projects aren't projecting identical sets of input references.  *  * @author Zelaine Fong  * @version $Id$  */
+comment|/**  * MergeProjectRule merges a {@link ProjectRel} into another {@link ProjectRel},  * provided the projects aren't projecting identical sets of input references.  */
 end_comment
 
 begin_class
@@ -111,21 +111,17 @@ parameter_list|)
 block|{
 name|super
 argument_list|(
-operator|new
-name|RelOptRuleOperand
+name|some
 argument_list|(
 name|ProjectRel
 operator|.
 name|class
 argument_list|,
-operator|new
-name|RelOptRuleOperand
+name|any
 argument_list|(
 name|ProjectRel
 operator|.
 name|class
-argument_list|,
-name|ANY
 argument_list|)
 argument_list|)
 argument_list|,
@@ -160,28 +156,22 @@ block|{
 name|ProjectRel
 name|topProject
 init|=
-operator|(
-name|ProjectRel
-operator|)
 name|call
 operator|.
-name|rels
-index|[
+name|rel
+argument_list|(
 literal|0
-index|]
+argument_list|)
 decl_stmt|;
 name|ProjectRel
 name|bottomProject
 init|=
-operator|(
-name|ProjectRel
-operator|)
 name|call
 operator|.
-name|rels
-index|[
+name|rel
+argument_list|(
 literal|1
-index|]
+argument_list|)
 decl_stmt|;
 name|RexBuilder
 name|rexBuilder

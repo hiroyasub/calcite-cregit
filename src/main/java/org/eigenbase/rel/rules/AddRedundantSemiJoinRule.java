@@ -50,7 +50,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Rule to add a semijoin into a joinrel. Transformation is as follows:  *  *<p>JoinRel(X, Y) -> JoinRel(SemiJoinRel(X, Y), Y)  *  * @author Zelaine Fong  * @version $Id$  */
+comment|/**  * Rule to add a semijoin into a joinrel. Transformation is as follows:  *  *<p>JoinRel(X, Y) -> JoinRel(SemiJoinRel(X, Y), Y)  */
 end_comment
 
 begin_class
@@ -78,14 +78,11 @@ parameter_list|()
 block|{
 name|super
 argument_list|(
-operator|new
-name|RelOptRuleOperand
+name|any
 argument_list|(
 name|JoinRel
 operator|.
 name|class
-argument_list|,
-name|ANY
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -102,15 +99,12 @@ block|{
 name|JoinRel
 name|origJoinRel
 init|=
-operator|(
-name|JoinRel
-operator|)
 name|call
 operator|.
-name|rels
-index|[
+name|rel
+argument_list|(
 literal|0
-index|]
+argument_list|)
 decl_stmt|;
 if|if
 condition|(

@@ -100,7 +100,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * PullConstantsThroughAggregatesRule removes constant expressions from the  * group list of an {@link AggregateRel}.  *  *<h4>Effect of the rule</h4>  *  *<p>Since the transformed relational expression has to match the original  * relational expression, the constants are placed in a projection above the  * reduced aggregate. If those constants are not used, another rule will remove  * them from the project.  *  *<p>AggregateRel needs its group columns to be on the prefix of its input  * relational expression. Therefore, if a constant is not on the trailing edge  * of the group list, removing it will leave a hole. In this case, the rule adds  * a project before the aggregate to reorder the columns, and permutes them back  * afterwards.  *  * @author jhyde  * @version $Id$  */
+comment|/**  * PullConstantsThroughAggregatesRule removes constant expressions from the  * group list of an {@link AggregateRel}.  *  *<h4>Effect of the rule</h4>  *  *<p>Since the transformed relational expression has to match the original  * relational expression, the constants are placed in a projection above the  * reduced aggregate. If those constants are not used, another rule will remove  * them from the project.  *  *<p>AggregateRel needs its group columns to be on the prefix of its input  * relational expression. Therefore, if a constant is not on the trailing edge  * of the group list, removing it will leave a hole. In this case, the rule adds  * a project before the aggregate to reorder the columns, and permutes them back  * afterwards.  */
 end_comment
 
 begin_class
@@ -130,21 +130,17 @@ parameter_list|()
 block|{
 name|super
 argument_list|(
-operator|new
-name|RelOptRuleOperand
+name|some
 argument_list|(
 name|AggregateRel
 operator|.
 name|class
 argument_list|,
-operator|new
-name|RelOptRuleOperand
+name|any
 argument_list|(
 name|CalcRel
 operator|.
 name|class
-argument_list|,
-name|ANY
 argument_list|)
 argument_list|)
 argument_list|)
@@ -163,30 +159,22 @@ block|{
 name|AggregateRel
 name|aggregate
 init|=
-operator|(
-name|AggregateRel
-operator|)
 name|call
 operator|.
-name|getRels
-argument_list|()
-index|[
+name|rel
+argument_list|(
 literal|0
-index|]
+argument_list|)
 decl_stmt|;
 name|CalcRel
 name|child
 init|=
-operator|(
-name|CalcRel
-operator|)
 name|call
 operator|.
-name|getRels
-argument_list|()
-index|[
+name|rel
+argument_list|(
 literal|1
-index|]
+argument_list|)
 decl_stmt|;
 specifier|final
 name|RexProgram

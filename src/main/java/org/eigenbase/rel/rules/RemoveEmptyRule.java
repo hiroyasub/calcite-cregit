@@ -50,7 +50,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Collection of rules which remove sections of a query plan known never to  * produce any rows.  *  * @author Julian Hyde  * @version $Id$  * @see EmptyRel  */
+comment|/**  * Collection of rules which remove sections of a query plan known never to  * produce any rows.  *  * @see EmptyRel  */
 end_comment
 
 begin_class
@@ -100,15 +100,12 @@ block|{
 name|UnionRel
 name|union
 init|=
-operator|(
-name|UnionRel
-operator|)
 name|call
 operator|.
-name|rels
-index|[
+name|rel
+argument_list|(
 literal|0
-index|]
+argument_list|)
 decl_stmt|;
 specifier|final
 name|List
@@ -274,17 +271,11 @@ init|=
 operator|new
 name|RemoveEmptyRule
 argument_list|(
-operator|new
-name|RelOptRuleOperand
+name|some
 argument_list|(
 name|ProjectRel
 operator|.
 name|class
-argument_list|,
-operator|(
-name|RelTrait
-operator|)
-literal|null
 argument_list|,
 name|leaf
 argument_list|(
@@ -308,15 +299,12 @@ block|{
 name|ProjectRel
 name|project
 init|=
-operator|(
-name|ProjectRel
-operator|)
 name|call
 operator|.
-name|rels
-index|[
+name|rel
+argument_list|(
 literal|0
-index|]
+argument_list|)
 decl_stmt|;
 name|call
 operator|.
@@ -350,17 +338,11 @@ init|=
 operator|new
 name|RemoveEmptyRule
 argument_list|(
-operator|new
-name|RelOptRuleOperand
+name|some
 argument_list|(
 name|FilterRel
 operator|.
 name|class
-argument_list|,
-operator|(
-name|RelTrait
-operator|)
-literal|null
 argument_list|,
 name|leaf
 argument_list|(
@@ -384,15 +366,12 @@ block|{
 name|FilterRel
 name|filter
 init|=
-operator|(
-name|FilterRel
-operator|)
 name|call
 operator|.
-name|rels
-index|[
+name|rel
+argument_list|(
 literal|0
-index|]
+argument_list|)
 decl_stmt|;
 name|call
 operator|.

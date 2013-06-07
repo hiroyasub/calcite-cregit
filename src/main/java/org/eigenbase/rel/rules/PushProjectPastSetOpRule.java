@@ -62,7 +62,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * PushProjectPastSetOpRule implements the rule for pushing a {@link ProjectRel}  * past a {@link SetOpRel}. The children of the {@link SetOpRel} will project  * only the {@link RexInputRef}s referenced in the original {@link ProjectRel}.  *  * @author Zelaine Fong  * @version $Id$  */
+comment|/**  * PushProjectPastSetOpRule implements the rule for pushing a {@link ProjectRel}  * past a {@link SetOpRel}. The children of the {@link SetOpRel} will project  * only the {@link RexInputRef}s referenced in the original {@link ProjectRel}.  */
 end_comment
 
 begin_class
@@ -118,21 +118,17 @@ parameter_list|)
 block|{
 name|super
 argument_list|(
-operator|new
-name|RelOptRuleOperand
+name|some
 argument_list|(
 name|ProjectRel
 operator|.
 name|class
 argument_list|,
-operator|new
-name|RelOptRuleOperand
+name|any
 argument_list|(
 name|SetOpRel
 operator|.
 name|class
-argument_list|,
-name|ANY
 argument_list|)
 argument_list|)
 argument_list|)
@@ -157,28 +153,22 @@ block|{
 name|ProjectRel
 name|origProj
 init|=
-operator|(
-name|ProjectRel
-operator|)
 name|call
 operator|.
-name|rels
-index|[
+name|rel
+argument_list|(
 literal|0
-index|]
+argument_list|)
 decl_stmt|;
 name|SetOpRel
 name|setOpRel
 init|=
-operator|(
-name|SetOpRel
-operator|)
 name|call
 operator|.
-name|rels
-index|[
+name|rel
+argument_list|(
 literal|1
-index|]
+argument_list|)
 decl_stmt|;
 comment|// cannot push project past a distinct
 if|if

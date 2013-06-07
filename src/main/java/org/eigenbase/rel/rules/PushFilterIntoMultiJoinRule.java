@@ -40,7 +40,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * PushFilterIntoMultiJoinRule implements the rule for pushing a {@link  * FilterRel} into a {@link MultiJoinRel}.  *  * @author Zelaine Fong  * @version $Id$  */
+comment|/**  * PushFilterIntoMultiJoinRule implements the rule for pushing a {@link  * FilterRel} into a {@link MultiJoinRel}.  */
 end_comment
 
 begin_class
@@ -68,21 +68,17 @@ parameter_list|()
 block|{
 name|super
 argument_list|(
-operator|new
-name|RelOptRuleOperand
+name|some
 argument_list|(
 name|FilterRel
 operator|.
 name|class
 argument_list|,
-operator|new
-name|RelOptRuleOperand
+name|any
 argument_list|(
 name|MultiJoinRel
 operator|.
 name|class
-argument_list|,
-name|ANY
 argument_list|)
 argument_list|)
 argument_list|)
@@ -101,28 +97,22 @@ block|{
 name|FilterRel
 name|filterRel
 init|=
-operator|(
-name|FilterRel
-operator|)
 name|call
 operator|.
-name|rels
-index|[
+name|rel
+argument_list|(
 literal|0
-index|]
+argument_list|)
 decl_stmt|;
 name|MultiJoinRel
 name|multiJoinRel
 init|=
-operator|(
-name|MultiJoinRel
-operator|)
 name|call
 operator|.
-name|rels
-index|[
+name|rel
+argument_list|(
 literal|1
-index|]
+argument_list|)
 decl_stmt|;
 name|MultiJoinRel
 name|newMultiJoinRel

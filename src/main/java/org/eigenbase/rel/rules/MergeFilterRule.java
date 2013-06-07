@@ -52,7 +52,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * MergeFilterRule implements the rule for combining two {@link FilterRel}s  *  * @author Zelaine Fong  * @version $Id$  */
+comment|/**  * MergeFilterRule implements the rule for combining two {@link FilterRel}s  */
 end_comment
 
 begin_class
@@ -80,21 +80,17 @@ parameter_list|()
 block|{
 name|super
 argument_list|(
-operator|new
-name|RelOptRuleOperand
+name|some
 argument_list|(
 name|FilterRel
 operator|.
 name|class
 argument_list|,
-operator|new
-name|RelOptRuleOperand
+name|any
 argument_list|(
 name|FilterRel
 operator|.
 name|class
-argument_list|,
-name|ANY
 argument_list|)
 argument_list|)
 argument_list|)
@@ -113,28 +109,22 @@ block|{
 name|FilterRel
 name|topFilter
 init|=
-operator|(
-name|FilterRel
-operator|)
 name|call
 operator|.
-name|rels
-index|[
+name|rel
+argument_list|(
 literal|0
-index|]
+argument_list|)
 decl_stmt|;
 name|FilterRel
 name|bottomFilter
 init|=
-operator|(
-name|FilterRel
-operator|)
 name|call
 operator|.
-name|rels
-index|[
+name|rel
+argument_list|(
 literal|1
-index|]
+argument_list|)
 decl_stmt|;
 comment|// use RexPrograms to merge the two FilterRels into a single program
 comment|// so we can convert the two FilterRel conditions to directly

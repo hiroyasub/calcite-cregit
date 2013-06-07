@@ -74,7 +74,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Planner rule which merges a {@link ProjectRel} and a {@link CalcRel}. The  * resulting {@link CalcRel} has the same project list as the original {@link  * ProjectRel}, but expressed in terms of the original {@link CalcRel}'s inputs.  *  * @author jhyde  * @version $Id$  * @see MergeFilterOntoCalcRule  * @since Mar 7, 2004  */
+comment|/**  * Planner rule which merges a {@link ProjectRel} and a {@link CalcRel}. The  * resulting {@link CalcRel} has the same project list as the original {@link  * ProjectRel}, but expressed in terms of the original {@link CalcRel}'s inputs.  *  * @see MergeFilterOntoCalcRule  */
 end_comment
 
 begin_class
@@ -102,21 +102,17 @@ parameter_list|()
 block|{
 name|super
 argument_list|(
-operator|new
-name|RelOptRuleOperand
+name|some
 argument_list|(
 name|ProjectRel
 operator|.
 name|class
 argument_list|,
-operator|new
-name|RelOptRuleOperand
+name|any
 argument_list|(
 name|CalcRel
 operator|.
 name|class
-argument_list|,
-name|ANY
 argument_list|)
 argument_list|)
 argument_list|)
@@ -135,29 +131,23 @@ specifier|final
 name|ProjectRel
 name|project
 init|=
-operator|(
-name|ProjectRel
-operator|)
 name|call
 operator|.
-name|rels
-index|[
+name|rel
+argument_list|(
 literal|0
-index|]
+argument_list|)
 decl_stmt|;
 specifier|final
 name|CalcRel
 name|calc
 init|=
-operator|(
-name|CalcRel
-operator|)
 name|call
 operator|.
-name|rels
-index|[
+name|rel
+argument_list|(
 literal|1
-index|]
+argument_list|)
 decl_stmt|;
 comment|// Don't merge a project which contains windowed aggregates onto a
 comment|// calc. That would effectively be pushing a windowed aggregate down

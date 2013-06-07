@@ -74,7 +74,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Planner rule which converts a {@link FilterRel} to a {@link CalcRel}.  *  *<p>The rule does<em>NOT</em> fire if the child is a {@link FilterRel} or a  * {@link ProjectRel} (we assume they they will be converted using {@link  * FilterToCalcRule} or {@link ProjectToCalcRule}) or a {@link CalcRel}. This  * {@link FilterRel} will eventually be converted by {@link  * MergeFilterOntoCalcRule}.  *  * @author jhyde  * @version $Id$  * @since Mar 7, 2004  */
+comment|/**  * Planner rule which converts a {@link FilterRel} to a {@link CalcRel}.  *  *<p>The rule does<em>NOT</em> fire if the child is a {@link FilterRel} or a  * {@link ProjectRel} (we assume they they will be converted using {@link  * FilterToCalcRule} or {@link ProjectToCalcRule}) or a {@link CalcRel}. This  * {@link FilterRel} will eventually be converted by {@link  * MergeFilterOntoCalcRule}.  */
 end_comment
 
 begin_class
@@ -102,14 +102,11 @@ parameter_list|()
 block|{
 name|super
 argument_list|(
-operator|new
-name|RelOptRuleOperand
+name|any
 argument_list|(
 name|FilterRel
 operator|.
 name|class
-argument_list|,
-name|ANY
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -127,15 +124,12 @@ specifier|final
 name|FilterRel
 name|filter
 init|=
-operator|(
-name|FilterRel
-operator|)
 name|call
 operator|.
-name|rels
-index|[
+name|rel
+argument_list|(
 literal|0
-index|]
+argument_list|)
 decl_stmt|;
 specifier|final
 name|RelNode

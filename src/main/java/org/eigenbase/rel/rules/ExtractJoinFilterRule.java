@@ -62,7 +62,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Rule to convert an {@link JoinRel inner join} to a {@link FilterRel filter}  * on top of a {@link JoinRel cartesian inner join}.  *  *<p>One benefit of this transformation is that after it, the join condition  * can be combined with conditions and expressions above the join. It also makes  * the<code>FennelCartesianJoinRule</code> applicable.  *  * @author jhyde  * @version $Id$  * @since 3 February, 2006  */
+comment|/**  * Rule to convert an {@link JoinRel inner join} to a {@link FilterRel filter}  * on top of a {@link JoinRel cartesian inner join}.  *  *<p>One benefit of this transformation is that after it, the join condition  * can be combined with conditions and expressions above the join. It also makes  * the<code>FennelCartesianJoinRule</code> applicable.  */
 end_comment
 
 begin_class
@@ -93,14 +93,11 @@ parameter_list|()
 block|{
 name|super
 argument_list|(
-operator|new
-name|RelOptRuleOperand
+name|any
 argument_list|(
 name|JoinRel
 operator|.
 name|class
-argument_list|,
-name|ANY
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -117,15 +114,12 @@ block|{
 name|JoinRel
 name|joinRel
 init|=
-operator|(
-name|JoinRel
-operator|)
 name|call
 operator|.
-name|rels
-index|[
+name|rel
+argument_list|(
 literal|0
-index|]
+argument_list|)
 decl_stmt|;
 if|if
 condition|(

@@ -90,7 +90,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * PushAggregateThroughUnionRule implements the rule for pushing an  * {@link AggregateRel} past a non-distinct {@link UnionRel}.  *  * @author John Sichi  * @version $Id$  */
+comment|/**  * PushAggregateThroughUnionRule implements the rule for pushing an  * {@link AggregateRel} past a non-distinct {@link UnionRel}.  */
 end_comment
 
 begin_class
@@ -117,23 +117,17 @@ parameter_list|()
 block|{
 name|super
 argument_list|(
-operator|new
-name|RelOptRuleOperand
+name|some
 argument_list|(
 name|AggregateRel
 operator|.
 name|class
 argument_list|,
-operator|new
-name|RelOptRuleOperand
+name|any
 argument_list|(
 name|UnionRel
 operator|.
 name|class
-argument_list|,
-name|RelOptRule
-operator|.
-name|ANY
 argument_list|)
 argument_list|)
 argument_list|)
@@ -150,28 +144,22 @@ block|{
 name|AggregateRel
 name|aggRel
 init|=
-operator|(
-name|AggregateRel
-operator|)
 name|call
 operator|.
-name|rels
-index|[
+name|rel
+argument_list|(
 literal|0
-index|]
+argument_list|)
 decl_stmt|;
 name|UnionRel
 name|unionRel
 init|=
-operator|(
-name|UnionRel
-operator|)
 name|call
 operator|.
-name|rels
-index|[
+name|rel
+argument_list|(
 literal|1
-index|]
+argument_list|)
 decl_stmt|;
 if|if
 condition|(

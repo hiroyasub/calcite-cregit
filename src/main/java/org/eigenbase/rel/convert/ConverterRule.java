@@ -40,7 +40,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Abstract base class for a rule which converts from one calling convention to  * another without changing semantics.  *  * @author jhyde  * @version $Id$  * @since May 5, 2003  */
+comment|/**  * Abstract base class for a rule which converts from one calling convention to  * another without changing semantics.  */
 end_comment
 
 begin_class
@@ -226,10 +226,10 @@ name|rel
 init|=
 name|call
 operator|.
-name|rels
-index|[
+name|rel
+argument_list|(
 literal|0
-index|]
+argument_list|)
 decl_stmt|;
 if|if
 condition|(
@@ -302,6 +302,8 @@ argument_list|,
 name|RelOptRule
 operator|.
 name|ANY
+argument_list|,
+literal|null
 argument_list|)
 expr_stmt|;
 block|}

@@ -66,7 +66,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Rule to replace isNotDistinctFromOperator with logical equivalent conditions  * in a {@link FilterRel}.  *  * @author Rushan Chen  * @version $Id$  */
+comment|/**  * Rule to replace isNotDistinctFromOperator with logical equivalent conditions  * in a {@link FilterRel}.  */
 end_comment
 
 begin_class
@@ -96,14 +96,11 @@ parameter_list|()
 block|{
 name|super
 argument_list|(
-operator|new
-name|RelOptRuleOperand
+name|any
 argument_list|(
 name|FilterRel
 operator|.
 name|class
-argument_list|,
-name|ANY
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -120,15 +117,12 @@ block|{
 name|FilterRel
 name|oldFilterRel
 init|=
-operator|(
-name|FilterRel
-operator|)
 name|call
 operator|.
-name|rels
-index|[
+name|rel
+argument_list|(
 literal|0
-index|]
+argument_list|)
 decl_stmt|;
 name|RexNode
 name|oldFilterCond

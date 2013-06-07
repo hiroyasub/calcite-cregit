@@ -28,7 +28,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * RemoveSemiJoinRule implements the rule that removes semijoins from a join  * tree if it turns out it's not possible to convert a SemiJoinRel to an indexed  * scan on a join factor. Namely, if the join factor does not reduce to a single  * table that can be scanned using an index. This rule should only be applied  * after attempts have been made to convert SemiJoinRels.  *  * @author Zelaine Fong  * @version $Id$  */
+comment|/**  * RemoveSemiJoinRule implements the rule that removes semijoins from a join  * tree if it turns out it's not possible to convert a SemiJoinRel to an indexed  * scan on a join factor. Namely, if the join factor does not reduce to a single  * table that can be scanned using an index. This rule should only be applied  * after attempts have been made to convert SemiJoinRels.  */
 end_comment
 
 begin_class
@@ -56,14 +56,11 @@ parameter_list|()
 block|{
 name|super
 argument_list|(
-operator|new
-name|RelOptRuleOperand
+name|any
 argument_list|(
 name|SemiJoinRel
 operator|.
 name|class
-argument_list|,
-name|ANY
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -84,10 +81,10 @@ name|transformTo
 argument_list|(
 name|call
 operator|.
-name|rels
-index|[
+name|rel
+argument_list|(
 literal|0
-index|]
+argument_list|)
 operator|.
 name|getInput
 argument_list|(

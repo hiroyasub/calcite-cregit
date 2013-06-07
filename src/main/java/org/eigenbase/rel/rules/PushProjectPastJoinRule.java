@@ -74,7 +74,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * PushProjectPastJoinRule implements the rule for pushing a projection past a  * join by splitting the projection into a projection on top of each child of  * the join.  *  * @author Zelaine Fong  * @version $Id$  */
+comment|/**  * PushProjectPastJoinRule implements the rule for pushing a projection past a  * join by splitting the projection into a projection on top of each child of  * the join.  */
 end_comment
 
 begin_class
@@ -131,21 +131,17 @@ parameter_list|)
 block|{
 name|super
 argument_list|(
-operator|new
-name|RelOptRuleOperand
+name|some
 argument_list|(
 name|ProjectRel
 operator|.
 name|class
 argument_list|,
-operator|new
-name|RelOptRuleOperand
+name|any
 argument_list|(
 name|JoinRel
 operator|.
 name|class
-argument_list|,
-name|ANY
 argument_list|)
 argument_list|)
 argument_list|)
@@ -170,28 +166,22 @@ block|{
 name|ProjectRel
 name|origProj
 init|=
-operator|(
-name|ProjectRel
-operator|)
 name|call
 operator|.
-name|rels
-index|[
+name|rel
+argument_list|(
 literal|0
-index|]
+argument_list|)
 decl_stmt|;
 name|JoinRel
 name|joinRel
 init|=
-operator|(
-name|JoinRel
-operator|)
 name|call
 operator|.
-name|rels
-index|[
+name|rel
+argument_list|(
 literal|1
-index|]
+argument_list|)
 decl_stmt|;
 comment|// locate all fields referenced in the projection and join condition;
 comment|// determine which inputs are referenced in the projection and

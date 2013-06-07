@@ -40,7 +40,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * TraitMatchingRule adapts a converter rule, restricting it to fire only when  * its input already matches the expected output trait. This can be used with  * {@link org.eigenbase.relopt.hep.HepPlanner} in cases where alternate  * implementations are available and it is desirable to minimize converters.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  * TraitMatchingRule adapts a converter rule, restricting it to fire only when  * its input already matches the expected output trait. This can be used with  * {@link org.eigenbase.relopt.hep.HepPlanner} in cases where alternate  * implementations are available and it is desirable to minimize converters.  */
 end_comment
 
 begin_class
@@ -67,8 +67,7 @@ parameter_list|)
 block|{
 name|super
 argument_list|(
-operator|new
-name|RelOptRuleOperand
+name|some
 argument_list|(
 name|converterRule
 operator|.
@@ -78,14 +77,11 @@ operator|.
 name|getMatchedClass
 argument_list|()
 argument_list|,
-operator|new
-name|RelOptRuleOperand
+name|any
 argument_list|(
 name|RelNode
 operator|.
 name|class
-argument_list|,
-name|ANY
 argument_list|)
 argument_list|)
 argument_list|,
@@ -141,10 +137,10 @@ name|input
 init|=
 name|call
 operator|.
-name|rels
-index|[
+name|rel
+argument_list|(
 literal|1
-index|]
+argument_list|)
 decl_stmt|;
 if|if
 condition|(

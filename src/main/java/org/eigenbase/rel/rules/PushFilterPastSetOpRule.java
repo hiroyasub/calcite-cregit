@@ -84,7 +84,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * PushFilterPastSetOpRule implements the rule for pushing a {@link FilterRel}  * past a {@link SetOpRel}.  *  * @author Zelaine Fong  * @version $Id$  */
+comment|/**  * PushFilterPastSetOpRule implements the rule for pushing a {@link FilterRel}  * past a {@link SetOpRel}.  */
 end_comment
 
 begin_class
@@ -112,21 +112,17 @@ parameter_list|()
 block|{
 name|super
 argument_list|(
-operator|new
-name|RelOptRuleOperand
+name|some
 argument_list|(
 name|FilterRel
 operator|.
 name|class
 argument_list|,
-operator|new
-name|RelOptRuleOperand
+name|any
 argument_list|(
 name|SetOpRel
 operator|.
 name|class
-argument_list|,
-name|ANY
 argument_list|)
 argument_list|)
 argument_list|)
@@ -145,28 +141,22 @@ block|{
 name|FilterRel
 name|filterRel
 init|=
-operator|(
-name|FilterRel
-operator|)
 name|call
 operator|.
-name|rels
-index|[
+name|rel
+argument_list|(
 literal|0
-index|]
+argument_list|)
 decl_stmt|;
 name|SetOpRel
 name|setOpRel
 init|=
-operator|(
-name|SetOpRel
-operator|)
 name|call
 operator|.
-name|rels
-index|[
+name|rel
+argument_list|(
 literal|1
-index|]
+argument_list|)
 decl_stmt|;
 name|RelOptCluster
 name|cluster

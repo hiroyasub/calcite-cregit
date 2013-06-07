@@ -40,7 +40,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  *<code>UnionEliminatorRule</code> checks to see if its possible to optimize a  * Union call by eliminating the Union operator altogether in the case the call  * consists of only one input.  *  * @author Wael Chatila  * @version $Id$  * @since Feb 4, 2005  */
+comment|/**  *<code>UnionEliminatorRule</code> checks to see if its possible to optimize a  * Union call by eliminating the Union operator altogether in the case the call  * consists of only one input.  */
 end_comment
 
 begin_class
@@ -68,14 +68,11 @@ parameter_list|()
 block|{
 name|super
 argument_list|(
-operator|new
-name|RelOptRuleOperand
+name|any
 argument_list|(
 name|UnionRel
 operator|.
 name|class
-argument_list|,
-name|ANY
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -92,15 +89,12 @@ block|{
 name|UnionRel
 name|union
 init|=
-operator|(
-name|UnionRel
-operator|)
 name|call
 operator|.
-name|rels
-index|[
+name|rel
+argument_list|(
 literal|0
-index|]
+argument_list|)
 decl_stmt|;
 if|if
 condition|(

@@ -74,7 +74,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * PushSemiJoinPastProjectRule implements the rule for pushing semijoins down in  * a tree past a project in order to trigger other rules that will convert  * semijoins.  *  *<p>SemiJoinRel(ProjectRel(X), Y) --> ProjectRel(SemiJoinRel(X, Y))  *  * @author Zelaine Fong  * @version $Id$  */
+comment|/**  * PushSemiJoinPastProjectRule implements the rule for pushing semijoins down in  * a tree past a project in order to trigger other rules that will convert  * semijoins.  *  *<p>SemiJoinRel(ProjectRel(X), Y) --> ProjectRel(SemiJoinRel(X, Y))  */
 end_comment
 
 begin_class
@@ -102,21 +102,17 @@ parameter_list|()
 block|{
 name|super
 argument_list|(
-operator|new
-name|RelOptRuleOperand
+name|some
 argument_list|(
 name|SemiJoinRel
 operator|.
 name|class
 argument_list|,
-operator|new
-name|RelOptRuleOperand
+name|any
 argument_list|(
 name|ProjectRel
 operator|.
 name|class
-argument_list|,
-name|ANY
 argument_list|)
 argument_list|)
 argument_list|)
@@ -135,28 +131,22 @@ block|{
 name|SemiJoinRel
 name|semiJoin
 init|=
-operator|(
-name|SemiJoinRel
-operator|)
 name|call
 operator|.
-name|rels
-index|[
+name|rel
+argument_list|(
 literal|0
-index|]
+argument_list|)
 decl_stmt|;
 name|ProjectRel
 name|project
 init|=
-operator|(
-name|ProjectRel
-operator|)
 name|call
 operator|.
-name|rels
-index|[
+name|rel
+argument_list|(
 literal|1
-index|]
+argument_list|)
 decl_stmt|;
 comment|// convert the LHS semijoin keys to reference the child projection
 comment|// expression; all projection expressions must be RexInputRefs,
@@ -199,19 +189,9 @@ decl_stmt|;
 for|for
 control|(
 name|int
-name|i
-init|=
-literal|0
-init|;
-name|i
-operator|<
+name|leftKey
+range|:
 name|leftKeys
-operator|.
-name|size
-argument_list|()
-condition|;
-name|i
-operator|++
 control|)
 block|{
 name|RexInputRef
@@ -224,12 +204,7 @@ name|projExprs
 operator|.
 name|get
 argument_list|(
-name|leftKeys
-operator|.
-name|get
-argument_list|(
-name|i
-argument_list|)
+name|leftKey
 argument_list|)
 decl_stmt|;
 name|newLeftKeys

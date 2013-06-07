@@ -100,7 +100,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Rule to remove distinct aggregates from a {@link AggregateRel}.  *  * @author jhyde  * @version $Id$  * @since 3 February, 2006  */
+comment|/**  * Rule to remove distinct aggregates from a {@link AggregateRel}.  */
 end_comment
 
 begin_class
@@ -131,14 +131,11 @@ parameter_list|()
 block|{
 name|super
 argument_list|(
-operator|new
-name|RelOptRuleOperand
+name|any
 argument_list|(
 name|AggregateRel
 operator|.
 name|class
-argument_list|,
-name|ANY
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -155,15 +152,12 @@ block|{
 name|AggregateRel
 name|aggregate
 init|=
-operator|(
-name|AggregateRel
-operator|)
 name|call
 operator|.
-name|rels
-index|[
+name|rel
+argument_list|(
 literal|0
-index|]
+argument_list|)
 decl_stmt|;
 if|if
 condition|(

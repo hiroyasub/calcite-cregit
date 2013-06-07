@@ -74,7 +74,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Rule to flatten a tree of {@link JoinRel}s into a single {@link MultiJoinRel}  * with N inputs. An input is not flattened if the input is a null generating  * input in an outer join, i.e., either input in a full outer join, the right  * hand side of a left outer join, or the left hand side of a right outer join.  *  *<p>Join conditions are also pulled up from the inputs into the topmost {@link  * MultiJoinRel}, unless the input corresponds to a null generating input in an  * outer join,  *  *<p>Outer join information is also stored in the {@link MultiJoinRel}. A  * boolean flag indicates if the join is a full outer join, and in the case of  * left and right outer joins, the join type and outer join conditions are  * stored in arrays in the {@link MultiJoinRel}. This outer join information is  * associated with the null generating input in the outer join. So, in the case  * of a a left outer join between A and B, the information is associated with B,  * not A.  *  *<p>Here are examples of the {@link MultiJoinRel}s constructed after this rule  * has been applied on following join trees.  *  *<pre>  * A JOIN B -> MJ(A, B)  * A JOIN B JOIN C -> MJ(A, B, C)  * A LEFTOUTER B -> MJ(A, B), left outer join on input#1  * A RIGHTOUTER B -> MJ(A, B), right outer join on input#0  * A FULLOUTER B -> MJ[full](A, B)  * A LEFTOUTER (B JOIN C) -> MJ(A, MJ(B, C))), left outer join on input#1 in  * the outermost MultiJoinRel  * (A JOIN B) LEFTOUTER C -> MJ(A, B, C), left outer join on input#2  * A LEFTOUTER (B FULLOUTER C) -> MJ(A, MJ[full](B, C)), left outer join on  *      input#1 in the outermost MultiJoinRel  * (A LEFTOUTER B) FULLOUTER (C RIGHTOUTER D) ->  *      MJ[full](MJ(A, B), MJ(C, D)), left outer join on input #1 in the first  *      inner MultiJoinRel and right outer join on input#0 in the second inner  *      MultiJoinRel  *</pre>  *  * @author Zelaine Fong  * @version $Id$  */
+comment|/**  * Rule to flatten a tree of {@link JoinRel}s into a single {@link MultiJoinRel}  * with N inputs. An input is not flattened if the input is a null generating  * input in an outer join, i.e., either input in a full outer join, the right  * hand side of a left outer join, or the left hand side of a right outer join.  *  *<p>Join conditions are also pulled up from the inputs into the topmost {@link  * MultiJoinRel}, unless the input corresponds to a null generating input in an  * outer join,  *  *<p>Outer join information is also stored in the {@link MultiJoinRel}. A  * boolean flag indicates if the join is a full outer join, and in the case of  * left and right outer joins, the join type and outer join conditions are  * stored in arrays in the {@link MultiJoinRel}. This outer join information is  * associated with the null generating input in the outer join. So, in the case  * of a a left outer join between A and B, the information is associated with B,  * not A.  *  *<p>Here are examples of the {@link MultiJoinRel}s constructed after this rule  * has been applied on following join trees.  *  *<pre>  * A JOIN B -> MJ(A, B)  * A JOIN B JOIN C -> MJ(A, B, C)  * A LEFTOUTER B -> MJ(A, B), left outer join on input#1  * A RIGHTOUTER B -> MJ(A, B), right outer join on input#0  * A FULLOUTER B -> MJ[full](A, B)  * A LEFTOUTER (B JOIN C) -> MJ(A, MJ(B, C))), left outer join on input#1 in  * the outermost MultiJoinRel  * (A JOIN B) LEFTOUTER C -> MJ(A, B, C), left outer join on input#2  * A LEFTOUTER (B FULLOUTER C) -> MJ(A, MJ[full](B, C)), left outer join on  *      input#1 in the outermost MultiJoinRel  * (A LEFTOUTER B) FULLOUTER (C RIGHTOUTER D) ->  *      MJ[full](MJ(A, B), MJ(C, D)), left outer join on input #1 in the first  *      inner MultiJoinRel and right outer join on input#0 in the second inner  *      MultiJoinRel  *</pre>  */
 end_comment
 
 begin_class
@@ -102,31 +102,24 @@ parameter_list|()
 block|{
 name|super
 argument_list|(
-operator|new
-name|RelOptRuleOperand
+name|some
 argument_list|(
 name|JoinRel
 operator|.
 name|class
 argument_list|,
-operator|new
-name|RelOptRuleOperand
+name|any
 argument_list|(
 name|RelNode
 operator|.
 name|class
-argument_list|,
-name|ANY
 argument_list|)
 argument_list|,
-operator|new
-name|RelOptRuleOperand
+name|any
 argument_list|(
 name|RelNode
 operator|.
 name|class
-argument_list|,
-name|ANY
 argument_list|)
 argument_list|)
 argument_list|)
@@ -144,35 +137,32 @@ block|{
 name|JoinRel
 name|origJoinRel
 init|=
-operator|(
-name|JoinRel
-operator|)
 name|call
 operator|.
-name|rels
-index|[
+name|rel
+argument_list|(
 literal|0
-index|]
+argument_list|)
 decl_stmt|;
 name|RelNode
 name|left
 init|=
 name|call
 operator|.
-name|rels
-index|[
+name|rel
+argument_list|(
 literal|1
-index|]
+argument_list|)
 decl_stmt|;
 name|RelNode
 name|right
 init|=
 name|call
 operator|.
-name|rels
-index|[
+name|rel
+argument_list|(
 literal|2
-index|]
+argument_list|)
 decl_stmt|;
 comment|// combine the children MultiJoinRel inputs into an array of inputs
 comment|// for the new MultiJoinRel

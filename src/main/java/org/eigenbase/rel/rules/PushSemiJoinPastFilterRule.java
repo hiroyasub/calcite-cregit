@@ -40,7 +40,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * PushSemiJoinPastFilterRule implements the rule for pushing semijoins down in  * a tree past a filter in order to trigger other rules that will convert  * semijoins. SemiJoinRel(FilterRel(X), Y) --> FilterRel(SemiJoinRel(X, Y))  *  * @author Zelaine Fong  * @version $Id$  */
+comment|/**  * PushSemiJoinPastFilterRule implements the rule for pushing semijoins down in  * a tree past a filter in order to trigger other rules that will convert  * semijoins. SemiJoinRel(FilterRel(X), Y) --> FilterRel(SemiJoinRel(X, Y))  */
 end_comment
 
 begin_class
@@ -68,21 +68,17 @@ parameter_list|()
 block|{
 name|super
 argument_list|(
-operator|new
-name|RelOptRuleOperand
+name|some
 argument_list|(
 name|SemiJoinRel
 operator|.
 name|class
 argument_list|,
-operator|new
-name|RelOptRuleOperand
+name|any
 argument_list|(
 name|FilterRel
 operator|.
 name|class
-argument_list|,
-name|ANY
 argument_list|)
 argument_list|)
 argument_list|)
@@ -101,28 +97,22 @@ block|{
 name|SemiJoinRel
 name|semiJoin
 init|=
-operator|(
-name|SemiJoinRel
-operator|)
 name|call
 operator|.
-name|rels
-index|[
+name|rel
+argument_list|(
 literal|0
-index|]
+argument_list|)
 decl_stmt|;
 name|FilterRel
 name|filter
 init|=
-operator|(
-name|FilterRel
-operator|)
 name|call
 operator|.
-name|rels
-index|[
+name|rel
+argument_list|(
 literal|1
-index|]
+argument_list|)
 decl_stmt|;
 name|RelNode
 name|newSemiJoin

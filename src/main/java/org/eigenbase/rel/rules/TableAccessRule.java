@@ -54,7 +54,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * TableAccessRule converts a TableAccessRel to the result of calling {@link  * RelOptTable#toRel}.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  * TableAccessRule converts a TableAccessRel to the result of calling {@link  * RelOptTable#toRel}.  */
 end_comment
 
 begin_class
@@ -82,14 +82,11 @@ parameter_list|()
 block|{
 name|super
 argument_list|(
-operator|new
-name|RelOptRuleOperand
+name|any
 argument_list|(
 name|TableAccessRel
 operator|.
 name|class
-argument_list|,
-name|ANY
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -107,15 +104,12 @@ specifier|final
 name|TableAccessRel
 name|oldRel
 init|=
-operator|(
-name|TableAccessRel
-operator|)
 name|call
 operator|.
-name|rels
-index|[
+name|rel
+argument_list|(
 literal|0
-index|]
+argument_list|)
 decl_stmt|;
 name|RelNode
 name|newRel

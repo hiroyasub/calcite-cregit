@@ -74,7 +74,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Rule to convert a {@link ProjectRel} to a {@link CalcRel}  *  *<p>The rule does not fire if the child is a {@link ProjectRel}, {@link  * FilterRel} or {@link CalcRel}. If it did, then the same {@link CalcRel} would  * be formed via several transformation paths, which is a waste of effort.</p>  *  * @author jhyde  * @version $Id$  * @see FilterToCalcRule  * @since Mar 7, 2004  */
+comment|/**  * Rule to convert a {@link ProjectRel} to a {@link CalcRel}  *  *<p>The rule does not fire if the child is a {@link ProjectRel}, {@link  * FilterRel} or {@link CalcRel}. If it did, then the same {@link CalcRel} would  * be formed via several transformation paths, which is a waste of effort.</p>  *  * @see FilterToCalcRule  */
 end_comment
 
 begin_class
@@ -102,14 +102,11 @@ parameter_list|()
 block|{
 name|super
 argument_list|(
-operator|new
-name|RelOptRuleOperand
+name|any
 argument_list|(
 name|ProjectRel
 operator|.
 name|class
-argument_list|,
-name|ANY
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -127,15 +124,12 @@ specifier|final
 name|ProjectRel
 name|project
 init|=
-operator|(
-name|ProjectRel
-operator|)
 name|call
 operator|.
-name|rels
-index|[
+name|rel
+argument_list|(
 literal|0
-index|]
+argument_list|)
 decl_stmt|;
 specifier|final
 name|RelNode

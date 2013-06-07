@@ -62,7 +62,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Planner rule which merges a {@link FilterRel} and a {@link CalcRel}. The  * result is a {@link CalcRel} whose filter condition is the logical AND of the  * two.  *  * @author jhyde  * @version $Id$  * @see MergeFilterOntoCalcRule  * @since Mar 7, 2004  */
+comment|/**  * Planner rule which merges a {@link FilterRel} and a {@link CalcRel}. The  * result is a {@link CalcRel} whose filter condition is the logical AND of the  * two.  *  * @see MergeFilterOntoCalcRule  */
 end_comment
 
 begin_class
@@ -90,21 +90,17 @@ parameter_list|()
 block|{
 name|super
 argument_list|(
-operator|new
-name|RelOptRuleOperand
+name|some
 argument_list|(
 name|FilterRel
 operator|.
 name|class
 argument_list|,
-operator|new
-name|RelOptRuleOperand
+name|any
 argument_list|(
 name|CalcRel
 operator|.
 name|class
-argument_list|,
-name|ANY
 argument_list|)
 argument_list|)
 argument_list|)
@@ -123,29 +119,23 @@ specifier|final
 name|FilterRel
 name|filter
 init|=
-operator|(
-name|FilterRel
-operator|)
 name|call
 operator|.
-name|rels
-index|[
+name|rel
+argument_list|(
 literal|0
-index|]
+argument_list|)
 decl_stmt|;
 specifier|final
 name|CalcRel
 name|calc
 init|=
-operator|(
-name|CalcRel
-operator|)
 name|call
 operator|.
-name|rels
-index|[
+name|rel
+argument_list|(
 literal|1
-index|]
+argument_list|)
 decl_stmt|;
 comment|// Don't merge a filter onto a calc which contains windowed aggregates.
 comment|// That would effectively be pushing a multiset down through a filter.

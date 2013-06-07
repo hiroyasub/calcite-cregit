@@ -72,7 +72,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * CoerceInputsRule precasts inputs to a particular type. This can be used to  * assist operator implementations which impose requirements on their input  * types.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  * CoerceInputsRule precasts inputs to a particular type. This can be used to  * assist operator implementations which impose requirements on their input  * types.  */
 end_comment
 
 begin_class
@@ -112,12 +112,9 @@ parameter_list|)
 block|{
 name|super
 argument_list|(
-operator|new
-name|RelOptRuleOperand
+name|any
 argument_list|(
 name|consumerRelClass
-argument_list|,
-name|ANY
 argument_list|)
 argument_list|,
 literal|"CoerceInputsRule:"
@@ -168,10 +165,10 @@ name|consumerRel
 init|=
 name|call
 operator|.
-name|rels
-index|[
+name|rel
+argument_list|(
 literal|0
-index|]
+argument_list|)
 decl_stmt|;
 if|if
 condition|(

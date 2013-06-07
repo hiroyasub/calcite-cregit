@@ -86,7 +86,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  *<code>SwapJoinRule</code> permutes the inputs to a join. Outer joins cannot  * be permuted.  *  * @author jhyde  * @version $Id$  * @since Nov 26, 2003  */
+comment|/**  *<code>SwapJoinRule</code> permutes the inputs to a join. Outer joins cannot  * be permuted.  */
 end_comment
 
 begin_class
@@ -116,14 +116,11 @@ parameter_list|()
 block|{
 name|super
 argument_list|(
-operator|new
-name|RelOptRuleOperand
+name|any
 argument_list|(
 name|JoinRel
 operator|.
 name|class
-argument_list|,
-name|ANY
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -417,15 +414,12 @@ block|{
 name|JoinRel
 name|join
 init|=
-operator|(
-name|JoinRel
-operator|)
 name|call
 operator|.
-name|rels
-index|[
+name|rel
+argument_list|(
 literal|0
-index|]
+argument_list|)
 decl_stmt|;
 if|if
 condition|(
