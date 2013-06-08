@@ -281,6 +281,7 @@ return|return
 name|rels
 return|;
 block|}
+comment|/**      * Retrieves the {@code ordinal}th matched relational expression. This      * corresponds to the {@code ordinal}th operand of the rule.      *      * @param ordinal Ordinal      * @param<T> Type      * @return Relational expression      */
 specifier|public
 parameter_list|<
 name|T
@@ -294,6 +295,7 @@ name|int
 name|ordinal
 parameter_list|)
 block|{
+comment|//noinspection unchecked
 return|return
 operator|(
 name|T

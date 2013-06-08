@@ -3535,7 +3535,7 @@ argument_list|()
 argument_list|,
 name|Pair
 operator|.
-name|leftSlice
+name|left
 argument_list|(
 name|pairs
 argument_list|)

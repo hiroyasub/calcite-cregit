@@ -286,6 +286,10 @@ argument_list|,
 name|String
 operator|.
 name|class
+argument_list|,
+name|List
+operator|.
+name|class
 argument_list|)
 block|,
 name|MONGO_TABLE_AGGREGATE
@@ -296,10 +300,13 @@ name|class
 argument_list|,
 literal|"aggregate"
 argument_list|,
-name|String
-index|[]
+name|List
 operator|.
-expr|class
+name|class
+argument_list|,
+name|List
+operator|.
+name|class
 argument_list|)
 block|,
 name|JOIN

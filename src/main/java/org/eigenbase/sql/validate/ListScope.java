@@ -170,7 +170,7 @@ block|{
 return|return
 name|Pair
 operator|.
-name|rightSlice
+name|right
 argument_list|(
 name|children
 argument_list|)
@@ -493,7 +493,7 @@ name|i
 init|=
 name|Pair
 operator|.
-name|leftSlice
+name|left
 argument_list|(
 name|children
 argument_list|)

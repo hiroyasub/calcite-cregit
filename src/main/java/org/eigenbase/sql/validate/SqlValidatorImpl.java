@@ -53,18 +53,6 @@ name|org
 operator|.
 name|eigenbase
 operator|.
-name|relopt
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
 name|reltype
 operator|.
 name|*
@@ -11738,7 +11726,7 @@ name|firstDuplicate
 argument_list|(
 name|Pair
 operator|.
-name|leftSlice
+name|left
 argument_list|(
 name|children
 argument_list|)

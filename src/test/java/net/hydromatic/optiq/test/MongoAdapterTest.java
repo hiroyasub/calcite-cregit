@@ -164,228 +164,15 @@ literal|"   ]\n"
 operator|+
 literal|"}"
 decl_stmt|;
-comment|/** Disabled by default, because we do not expect Mongo to be installed and    * populated with the FoodMart data set. */
-specifier|private
-name|boolean
-name|enabled
-parameter_list|()
-block|{
-return|return
-literal|true
-return|;
-block|}
+comment|/** Connection factory based on the "mongo-zips" model. */
 specifier|public
-name|void
-name|testUnionPlan
-parameter_list|()
-block|{
-if|if
-condition|(
-operator|!
-name|enabled
-argument_list|()
-condition|)
-block|{
-return|return;
-block|}
+specifier|static
+specifier|final
 name|OptiqAssert
 operator|.
-name|assertThat
-argument_list|()
-operator|.
-name|withModel
-argument_list|(
-name|MONGO_FOODMART_MODEL
-argument_list|)
-operator|.
-name|query
-argument_list|(
-literal|"select * from \"sales_fact_1997\"\n"
-operator|+
-literal|"union all\n"
-operator|+
-literal|"select * from \"sales_fact_1998\""
-argument_list|)
-operator|.
-name|explainContains
-argument_list|(
-literal|"PLAN=EnumerableUnionRel(all=[true])\n"
-operator|+
-literal|"  EnumerableCalcRel(expr#0=[{inputs}], expr#1=['product_id'], expr#2=[ITEM($t0, $t1)], expr#3=[CAST($t2):DOUBLE NOT NULL], product_id=[$t3])\n"
-operator|+
-literal|"    EnumerableTableAccessRel(table=[[_foodmart, sales_fact_1997]])\n"
-operator|+
-literal|"  EnumerableCalcRel(expr#0=[{inputs}], expr#1=['product_id'], expr#2=[ITEM($t0, $t1)], expr#3=[CAST($t2):DOUBLE NOT NULL], product_id=[$t3])\n"
-operator|+
-literal|"    EnumerableTableAccessRel(table=[[_foodmart, sales_fact_1998]])"
-argument_list|)
-operator|.
-name|runs
-argument_list|()
-expr_stmt|;
-block|}
-specifier|public
-name|void
-name|testFilterUnionPlan
-parameter_list|()
-block|{
-if|if
-condition|(
-operator|!
-name|enabled
-argument_list|()
-condition|)
-block|{
-return|return;
-block|}
-name|OptiqAssert
-operator|.
-name|assertThat
-argument_list|()
-operator|.
-name|withModel
-argument_list|(
-name|MONGO_FOODMART_MODEL
-argument_list|)
-operator|.
-name|query
-argument_list|(
-literal|"select * from (\n"
-operator|+
-literal|"  select * from \"sales_fact_1997\"\n"
-operator|+
-literal|"  union all\n"
-operator|+
-literal|"  select * from \"sales_fact_1998\")\n"
-operator|+
-literal|"where \"product_id\" = 1"
-argument_list|)
-operator|.
-name|runs
-argument_list|()
-expr_stmt|;
-block|}
-specifier|public
-name|void
-name|testSelectWhere
-parameter_list|()
-block|{
-if|if
-condition|(
-operator|!
-name|enabled
-argument_list|()
-condition|)
-block|{
-return|return;
-block|}
-name|OptiqAssert
-operator|.
-name|assertThat
-argument_list|()
-operator|.
-name|withModel
-argument_list|(
-name|MONGO_FOODMART_MODEL
-argument_list|)
-operator|.
-name|query
-argument_list|(
-literal|"select * from \"warehouse\" where \"warehouse_state_province\" = 'CA'"
-argument_list|)
-operator|.
-name|explainContains
-argument_list|(
-literal|"PLAN=EnumerableCalcRel(expr#0=[{inputs}], expr#1=['warehouse_id'], expr#2=[ITEM($t0, $t1)], expr#3=[CAST($t2):DOUBLE NOT NULL], expr#4=['warehouse_state_province'], expr#5=[ITEM($t0, $t4)], expr#6=[CAST($t5):VARCHAR(20) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\" NOT NULL], expr#7=['CA'], expr#8=[=($t6, $t7)], warehouse_id=[$t3], warehouse_state_province=[$t6], $condition=[$t8])\n"
-operator|+
-literal|"  EnumerableTableAccessRel(table=[[_foodmart, warehouse]])"
-argument_list|)
-operator|.
-name|returns
-argument_list|(
-literal|"warehouse_id=6.0; warehouse_state_province=CA\n"
-operator|+
-literal|"warehouse_id=7.0; warehouse_state_province=CA\n"
-operator|+
-literal|"warehouse_id=14.0; warehouse_state_province=CA\n"
-operator|+
-literal|"warehouse_id=24.0; warehouse_state_province=CA\n"
-argument_list|)
-expr_stmt|;
-block|}
-specifier|public
-name|void
-name|testInPlan
-parameter_list|()
-block|{
-if|if
-condition|(
-operator|!
-name|enabled
-argument_list|()
-condition|)
-block|{
-return|return;
-block|}
-name|OptiqAssert
-operator|.
-name|assertThat
-argument_list|()
-operator|.
-name|withModel
-argument_list|(
-name|MONGO_FOODMART_MODEL
-argument_list|)
-operator|.
-name|query
-argument_list|(
-literal|"select \"store_id\", \"store_name\" from \"store\"\n"
-operator|+
-literal|"where \"store_name\" in ('Store 1', 'Store 10', 'Store 11', 'Store 15', 'Store 16', 'Store 24', 'Store 3', 'Store 7')"
-argument_list|)
-operator|.
-name|returns
-argument_list|(
-literal|"store_id=1.0; store_name=Store 1\n"
-operator|+
-literal|"store_id=3.0; store_name=Store 3\n"
-operator|+
-literal|"store_id=7.0; store_name=Store 7\n"
-operator|+
-literal|"store_id=10.0; store_name=Store 10\n"
-operator|+
-literal|"store_id=11.0; store_name=Store 11\n"
-operator|+
-literal|"store_id=15.0; store_name=Store 15\n"
-operator|+
-literal|"store_id=16.0; store_name=Store 16\n"
-operator|+
-literal|"store_id=24.0; store_name=Store 24\n"
-argument_list|)
-expr_stmt|;
-block|}
-comment|/** Query based on the "mongo-zips" model. */
-specifier|public
-name|void
-name|testZips
-parameter_list|()
-block|{
-if|if
-condition|(
-operator|!
-name|enabled
-argument_list|()
-condition|)
-block|{
-return|return;
-block|}
-name|OptiqAssert
-operator|.
-name|assertThat
-argument_list|()
-operator|.
-name|with
-argument_list|(
+name|ConnectionFactory
+name|ZIPS
+init|=
 operator|new
 name|OptiqAssert
 operator|.
@@ -438,6 +225,230 @@ argument_list|)
 return|;
 block|}
 block|}
+decl_stmt|;
+comment|/** Disabled by default, because we do not expect Mongo to be installed and    * populated with the FoodMart data set. */
+specifier|private
+name|boolean
+name|enabled
+parameter_list|()
+block|{
+return|return
+literal|true
+return|;
+block|}
+specifier|public
+name|void
+name|testUnionPlan
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|assertThat
+argument_list|()
+operator|.
+name|enable
+argument_list|(
+name|enabled
+argument_list|()
+argument_list|)
+operator|.
+name|withModel
+argument_list|(
+name|MONGO_FOODMART_MODEL
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select * from \"sales_fact_1997\"\n"
+operator|+
+literal|"union all\n"
+operator|+
+literal|"select * from \"sales_fact_1998\""
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|"PLAN=EnumerableUnionRel(all=[true])\n"
+operator|+
+literal|"  EnumerableCalcRel(expr#0=[{inputs}], product_id=[$t0])\n"
+operator|+
+literal|"    MongoToEnumerableConverter\n"
+operator|+
+literal|"      MongoTableScan(table=[[_foodmart, sales_fact_1997]], ops=[[<{product_id: 1}, {$project ...}>]])\n"
+operator|+
+literal|"  EnumerableCalcRel(expr#0=[{inputs}], product_id=[$t0])\n"
+operator|+
+literal|"    MongoToEnumerableConverter\n"
+operator|+
+literal|"      MongoTableScan(table=[[_foodmart, sales_fact_1998]], ops=[[<{product_id: 1}, {$project ...}>]])"
+argument_list|)
+operator|.
+name|limit
+argument_list|(
+literal|2
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"product_id=337.0\n"
+operator|+
+literal|"product_id=1512.0\n"
+argument_list|)
+expr_stmt|;
+block|}
+specifier|public
+name|void
+name|testFilterUnionPlan
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|assertThat
+argument_list|()
+operator|.
+name|enable
+argument_list|(
+name|enabled
+argument_list|()
+argument_list|)
+operator|.
+name|withModel
+argument_list|(
+name|MONGO_FOODMART_MODEL
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select * from (\n"
+operator|+
+literal|"  select * from \"sales_fact_1997\"\n"
+operator|+
+literal|"  union all\n"
+operator|+
+literal|"  select * from \"sales_fact_1998\")\n"
+operator|+
+literal|"where \"product_id\" = 1"
+argument_list|)
+operator|.
+name|runs
+argument_list|()
+expr_stmt|;
+block|}
+specifier|public
+name|void
+name|testSelectWhere
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|assertThat
+argument_list|()
+operator|.
+name|enable
+argument_list|(
+name|enabled
+argument_list|()
+argument_list|)
+operator|.
+name|withModel
+argument_list|(
+name|MONGO_FOODMART_MODEL
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select * from \"warehouse\" where \"warehouse_state_province\" = 'CA'"
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|"PLAN=EnumerableCalcRel(expr#0..1=[{inputs}], expr#2=['CA'], expr#3=[=($t1, $t2)], proj#0..1=[{exprs}], $condition=[$t3])\n"
+operator|+
+literal|"  MongoToEnumerableConverter\n"
+operator|+
+literal|"    MongoTableScan(table=[[_foodmart, warehouse]], ops=[[<{warehouse_id: 1, warehouse_state_province: 1}, {$project ...}>]])"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"warehouse_id=6.0; warehouse_state_province=CA\n"
+operator|+
+literal|"warehouse_id=7.0; warehouse_state_province=CA\n"
+operator|+
+literal|"warehouse_id=14.0; warehouse_state_province=CA\n"
+operator|+
+literal|"warehouse_id=24.0; warehouse_state_province=CA\n"
+argument_list|)
+expr_stmt|;
+block|}
+specifier|public
+name|void
+name|testInPlan
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|assertThat
+argument_list|()
+operator|.
+name|enable
+argument_list|(
+name|enabled
+argument_list|()
+argument_list|)
+operator|.
+name|withModel
+argument_list|(
+name|MONGO_FOODMART_MODEL
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select \"store_id\", \"store_name\" from \"store\"\n"
+operator|+
+literal|"where \"store_name\" in ('Store 1', 'Store 10', 'Store 11', 'Store 15', 'Store 16', 'Store 24', 'Store 3', 'Store 7')"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"store_id=1.0; store_name=Store 1\n"
+operator|+
+literal|"store_id=3.0; store_name=Store 3\n"
+operator|+
+literal|"store_id=7.0; store_name=Store 7\n"
+operator|+
+literal|"store_id=10.0; store_name=Store 10\n"
+operator|+
+literal|"store_id=11.0; store_name=Store 11\n"
+operator|+
+literal|"store_id=15.0; store_name=Store 15\n"
+operator|+
+literal|"store_id=16.0; store_name=Store 16\n"
+operator|+
+literal|"store_id=24.0; store_name=Store 24\n"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Query based on the "mongo-zips" model. */
+specifier|public
+name|void
+name|testZips
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|assertThat
+argument_list|()
+operator|.
+name|enable
+argument_list|(
+name|enabled
+argument_list|()
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|ZIPS
 argument_list|)
 operator|.
 name|query
@@ -454,11 +465,107 @@ name|explainContains
 argument_list|(
 literal|"PLAN=EnumerableAggregateRel(group=[{}], EXPR$0=[COUNT()])\n"
 operator|+
-literal|"  EnumerableCalcRel(expr#0=[{inputs}], expr#1=[0], $f0=[$t1])\n"
+literal|"  EnumerableCalcRel(expr#0..4=[{inputs}], expr#5=[0], $f0=[$t5])\n"
 operator|+
 literal|"    MongoToEnumerableConverter\n"
 operator|+
-literal|"      MongoTableScan(table=[[mongo_raw, zips]], ops=[[]])"
+literal|"      MongoTableScan(table=[[mongo_raw, zips]], ops=[[<{city: 1, loc: 1, pop: 1, state: 1, _id: 1}, {$project ...}>]])"
+argument_list|)
+expr_stmt|;
+block|}
+specifier|public
+name|void
+name|testProject
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|assertThat
+argument_list|()
+operator|.
+name|enable
+argument_list|(
+name|enabled
+argument_list|()
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|ZIPS
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select state, city from zips"
+argument_list|)
+operator|.
+name|limit
+argument_list|(
+literal|2
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"STATE=AL; CITY=ACMAR\n"
+operator|+
+literal|"STATE=AL; CITY=ADAMSVILLE\n"
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|"PLAN=EnumerableCalcRel(expr#0..4=[{inputs}], STATE=[$t3], CITY=[$t0])\n"
+operator|+
+literal|"  MongoToEnumerableConverter\n"
+operator|+
+literal|"    MongoTableScan(table=[[mongo_raw, zips]], ops=[[<{city: 1, loc: 1, pop: 1, state: 1, _id: 1}, {$project ...}>]])"
+argument_list|)
+expr_stmt|;
+block|}
+specifier|public
+name|void
+name|testFilter
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|assertThat
+argument_list|()
+operator|.
+name|enable
+argument_list|(
+name|enabled
+argument_list|()
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|ZIPS
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select state, city from zips where state = 'CA'"
+argument_list|)
+operator|.
+name|limit
+argument_list|(
+literal|2
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"STATE=CA; CITY=LOS ANGELES\n"
+operator|+
+literal|"STATE=CA; CITY=LOS ANGELES\n"
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|"PLAN=EnumerableCalcRel(expr#0..4=[{inputs}], expr#5=['CA'], expr#6=[=($t3, $t5)], STATE=[$t3], CITY=[$t0], $condition=[$t6])\n"
+operator|+
+literal|"  MongoToEnumerableConverter\n"
+operator|+
+literal|"    MongoTableScan(table=[[mongo_raw, zips]], ops=[[<{city: 1, loc: 1, pop: 1, state: 1, _id: 1}, {$project ...}>]])"
 argument_list|)
 expr_stmt|;
 block|}
