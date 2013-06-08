@@ -502,6 +502,33 @@ operator|+
 literal|"order by c.\"state_province\", 2"
 argument_list|)
 operator|.
+name|planHasSql
+argument_list|(
+literal|"SELECT * FROM (\n"
+operator|+
+literal|"    SELECT `state_province` AS `state_province`, `S` AS `S`, `DC` AS `DC`\n"
+operator|+
+literal|"    FROM (\n"
+operator|+
+literal|"        SELECT `state_province`, `country`, SUM(unit_sales) AS `S`, COUNT(DISTINCT customer_id0) AS `DC`\n"
+operator|+
+literal|"         FROM (\n"
+operator|+
+literal|"            SELECT `state_province` AS `state_province`, `country` AS `country`, `unit_sales` AS `unit_sales`, `customer_id0` AS `customer_id0`\n"
+operator|+
+literal|"            FROM (\n"
+operator|+
+literal|"                SELECT `t0`.`product_id`, `t0`.`time_id`, `t0`.`customer_id`, `t0`.`promotion_id`, `t0`.`store_id`, `t0`.`store_sales`, `t0`.`store_cost`, `t0`.`unit_sales`, `t1`.`customer_id` AS `customer_id0`, `t1`.`account_num`, `t1`.`lname`, `t1`.`fname`, `t1`.`mi`, `t1`.`address1`, `t1`.`address2`, `t1`.`address3`, `t1`.`address4`, `t1`.`city`, `t1`.`state_province`, `t1`.`postal_code`, `t1`.`country`, `t1`.`customer_region_id`, `t1`.`phone1`, `t1`.`phone2`, `t1`.`birthdate`, `t1`.`marital_status`, `t1`.`yearly_income`, `t1`.`gender`, `t1`.`total_children`, `t1`.`num_children_at_home`, `t1`.`education`, `t1`.`date_accnt_opened`, `t1`.`member_card`, `t1`.`occupation`, `t1`.`houseowner`, `t1`.`num_cars_owned`, `t1`.`fullname` FROM `foodmart`.`sales_fact_1997` AS `t0`\n"
+operator|+
+literal|"                JOIN `foodmart`.`customer` AS `t1`\n"
+operator|+
+literal|"                ON `t0`.`customer_id` = `t1`.`customer_id`) AS `t`) AS `t`\n"
+operator|+
+literal|"        GROUP BY `state_province`, `country`) AS `t`) AS `t`\n"
+operator|+
+literal|"ORDER BY 1, 2"
+argument_list|)
+operator|.
 name|returns
 argument_list|(
 literal|"state_province=CA; S=74748.0000; DC=2716\n"

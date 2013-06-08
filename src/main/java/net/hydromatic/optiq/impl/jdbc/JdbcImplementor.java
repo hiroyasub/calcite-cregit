@@ -128,6 +128,32 @@ name|String
 name|alias
 parameter_list|)
 block|{
+if|if
+condition|(
+name|e
+operator|instanceof
+name|JdbcTableScan
+condition|)
+block|{
+comment|// Generate "table" rather than "(select * from table)". MySQL planner
+comment|// chokes on the latter. (3:14 vs 0:00.39 for testDistinctCount.)
+operator|(
+operator|(
+name|JdbcTableScan
+operator|)
+name|e
+operator|)
+operator|.
+name|jdbcTable
+operator|.
+name|tableName
+argument_list|(
+name|buf
+argument_list|)
+expr_stmt|;
+block|}
+else|else
+block|{
 name|buf
 operator|.
 name|append
@@ -160,7 +186,15 @@ name|buf
 operator|.
 name|append
 argument_list|(
-literal|") AS "
+literal|")"
+argument_list|)
+expr_stmt|;
+block|}
+name|buf
+operator|.
+name|append
+argument_list|(
+literal|" AS "
 argument_list|)
 operator|.
 name|identifier
