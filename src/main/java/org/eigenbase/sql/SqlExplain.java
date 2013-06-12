@@ -96,7 +96,28 @@ block|,
 name|Logical
 block|,
 name|Physical
-block|,     }
+block|;
+comment|/** Creates a parse-tree node representing an occurrence of this symbol          * at a particular position in the parsed text. */
+specifier|public
+name|SqlLiteral
+name|symbol
+parameter_list|(
+name|SqlParserPos
+name|pos
+parameter_list|)
+block|{
+return|return
+name|SqlLiteral
+operator|.
+name|createSymbol
+argument_list|(
+name|this
+argument_list|,
+name|pos
+argument_list|)
+return|;
+block|}
+block|}
 comment|//~ Instance fields --------------------------------------------------------
 specifier|private
 specifier|final

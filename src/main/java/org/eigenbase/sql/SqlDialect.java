@@ -1420,6 +1420,20 @@ return|return
 name|databaseProduct
 return|;
 block|}
+comment|/** Returns whether the dialect supports character set names as part of a      * data type, for instance {@code VARCHAR(30) CHARACTER SET `ISO-8859-1`}.      */
+specifier|public
+name|boolean
+name|supportsCharSet
+parameter_list|()
+block|{
+return|return
+name|databaseProduct
+operator|!=
+name|DatabaseProduct
+operator|.
+name|MYSQL
+return|;
+block|}
 comment|/**      * A few utility functions copied from org.eigenbase.util.Util. We have      * copied them because we wish to keep SqlDialect's dependencies to a      * minimum.      */
 specifier|public
 specifier|static

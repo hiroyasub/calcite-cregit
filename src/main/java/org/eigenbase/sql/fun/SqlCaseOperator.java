@@ -956,7 +956,7 @@ name|pos
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates a call to the switched form of the case operator, viz:      *      *<blockquote><code>CASE caseIdentifier<br/>      * WHEN whenList[0] THEN thenList[0]<br/>      * WHEN whenList[1] THEN thenList[1]<br/>      * ...<br/>      * ELSE elseClause<br/>      * END</code></blockquote>      */
+comment|/**      * Creates a call to the switched form of the case operator, viz:      *      *<blockquote><code>CASE value<br/>      * WHEN whenList[0] THEN thenList[0]<br/>      * WHEN whenList[1] THEN thenList[1]<br/>      * ...<br/>      * ELSE elseClause<br/>      * END</code></blockquote>      */
 specifier|public
 name|SqlCase
 name|createSwitchedCall
@@ -965,7 +965,7 @@ name|SqlParserPos
 name|pos
 parameter_list|,
 name|SqlNode
-name|caseIdentifier
+name|value
 parameter_list|,
 name|SqlNodeList
 name|whenList
@@ -981,7 +981,7 @@ if|if
 condition|(
 literal|null
 operator|!=
-name|caseIdentifier
+name|value
 condition|)
 block|{
 name|List
@@ -1037,7 +1037,7 @@ name|createCall
 argument_list|(
 name|pos
 argument_list|,
-name|caseIdentifier
+name|value
 argument_list|,
 name|e
 argument_list|)
@@ -1069,6 +1069,8 @@ operator|)
 name|createCall
 argument_list|(
 name|pos
+argument_list|,
+literal|null
 argument_list|,
 name|whenList
 argument_list|,
@@ -1113,6 +1115,16 @@ argument_list|,
 literal|"END"
 argument_list|)
 decl_stmt|;
+name|SqlNode
+name|value
+init|=
+name|operands
+index|[
+name|SqlCase
+operator|.
+name|VALUE_OPERAND
+index|]
+decl_stmt|;
 name|SqlNodeList
 name|whenList
 init|=
@@ -1150,6 +1162,25 @@ operator|.
 name|size
 argument_list|()
 assert|;
+if|if
+condition|(
+name|value
+operator|!=
+literal|null
+condition|)
+block|{
+name|value
+operator|.
+name|unparse
+argument_list|(
+name|writer
+argument_list|,
+literal|0
+argument_list|,
+literal|0
+argument_list|)
+expr_stmt|;
+block|}
 for|for
 control|(
 name|Pair

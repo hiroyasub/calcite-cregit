@@ -19,6 +19,20 @@ name|org
 operator|.
 name|eigenbase
 operator|.
+name|sql
+operator|.
+name|parser
+operator|.
+name|SqlParserPos
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
 name|util
 operator|.
 name|*
@@ -26,7 +40,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Defines the keywords which can occur immediately after the "SELECT" keyword.  *  * @author jhyde  * @version $Id$  */
+comment|/**  * Defines the keywords which can occur immediately after the "SELECT" keyword.  */
 end_comment
 
 begin_class
@@ -146,6 +160,26 @@ block|{
 return|return
 name|getOrdinal
 argument_list|()
+return|;
+block|}
+comment|/** Creates a parse-tree node representing an occurrence of this keyword      * at a particular position in the parsed text. */
+specifier|public
+name|SqlLiteral
+name|symbol
+parameter_list|(
+name|SqlParserPos
+name|pos
+parameter_list|)
+block|{
+return|return
+name|SqlLiteral
+operator|.
+name|createSymbol
+argument_list|(
+name|this
+argument_list|,
+name|pos
+argument_list|)
 return|;
 block|}
 block|}

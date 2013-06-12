@@ -75,11 +75,15 @@ argument_list|)
 operator|.
 name|planHasSql
 argument_list|(
-literal|"SELECT * FROM `foodmart`.`sales_fact_1997`\n"
+literal|"SELECT *\n"
 operator|+
-literal|"UNION ALL \n"
+literal|"FROM `foodmart`.`sales_fact_1997`\n"
 operator|+
-literal|"SELECT * FROM `foodmart`.`sales_fact_1998`"
+literal|"UNION ALL\n"
+operator|+
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `foodmart`.`sales_fact_1998`"
 argument_list|)
 operator|.
 name|runs
@@ -120,15 +124,15 @@ name|planHasSql
 argument_list|(
 literal|"SELECT *\n"
 operator|+
-literal|"FROM `foodmart`.`sales_fact_1997` AS `t`\n"
+literal|"FROM `foodmart`.`sales_fact_1997`\n"
 operator|+
 literal|"WHERE `product_id` = 1\n"
 operator|+
-literal|"UNION ALL \n"
+literal|"UNION ALL\n"
 operator|+
 literal|"SELECT *\n"
 operator|+
-literal|"FROM `foodmart`.`sales_fact_1998` AS `t`\n"
+literal|"FROM `foodmart`.`sales_fact_1998`\n"
 operator|+
 literal|"WHERE `product_id` = 1"
 argument_list|)
@@ -163,9 +167,9 @@ argument_list|)
 operator|.
 name|planHasSql
 argument_list|(
-literal|"SELECT `store_id` AS `store_id`, `store_name` AS `store_name`\n"
+literal|"SELECT `store_id`, `store_name`\n"
 operator|+
-literal|"FROM `foodmart`.`store` AS `t`\n"
+literal|"FROM `foodmart`.`store`\n"
 operator|+
 literal|"WHERE `store_name` = 'Store 1' OR `store_name` = 'Store 10' OR `store_name` = 'Store 11' OR `store_name` = 'Store 15' OR `store_name` = 'Store 16' OR `store_name` = 'Store 24' OR `store_name` = 'Store 3' OR `store_name` = 'Store 7'"
 argument_list|)

@@ -1304,7 +1304,7 @@ argument_list|(
 name|Functions
 operator|.
 expr|<
-name|String
+name|ResultSet
 argument_list|,
 name|Void
 operator|>
@@ -1531,7 +1531,7 @@ argument_list|(
 name|Functions
 operator|.
 expr|<
-name|String
+name|ResultSet
 argument_list|,
 name|Void
 operator|>

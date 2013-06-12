@@ -426,10 +426,9 @@ name|SqlIdentifier
 argument_list|(
 literal|"*"
 argument_list|,
-name|selectClause
+name|SqlParserPos
 operator|.
-name|getParserPosition
-argument_list|()
+name|ZERO
 argument_list|)
 expr_stmt|;
 block|}

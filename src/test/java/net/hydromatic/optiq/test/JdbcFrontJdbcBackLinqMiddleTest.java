@@ -244,17 +244,17 @@ operator|+
 literal|"group by s"
 argument_list|)
 operator|.
-name|returns
+name|returnsUnordered
 argument_list|(
-literal|"S=T; C=2; MW=Thursday\n"
-operator|+
-literal|"S=F; C=1; MW=Friday\n"
-operator|+
-literal|"S=W; C=1; MW=Wednesday\n"
-operator|+
-literal|"S=S; C=2; MW=Saturday\n"
-operator|+
-literal|"S=M; C=1; MW=Monday\n"
+literal|"S=T; C=2; MW=Thursday"
+argument_list|,
+literal|"S=F; C=1; MW=Friday"
+argument_list|,
+literal|"S=W; C=1; MW=Wednesday"
+argument_list|,
+literal|"S=S; C=2; MW=Saturday"
+argument_list|,
+literal|"S=M; C=1; MW=Monday"
 argument_list|)
 expr_stmt|;
 block|}
@@ -428,36 +428,36 @@ literal|"from \"foodmart\".\"customer\" as c\n"
 operator|+
 literal|"group by c.\"state_province\", c.\"country\"\n"
 operator|+
-literal|"order by c.\"state_province\", 1"
+literal|"order by c, 1"
 argument_list|)
 operator|.
 name|returns
 argument_list|(
-literal|"C=1717; state_province=BC\n"
-operator|+
-literal|"C=4222; state_province=CA\n"
-operator|+
-literal|"C=347; state_province=DF\n"
-operator|+
-literal|"C=106; state_province=Guerrero\n"
-operator|+
-literal|"C=104; state_province=Jalisco\n"
-operator|+
-literal|"C=97; state_province=Mexico\n"
-operator|+
-literal|"C=1051; state_province=OR\n"
+literal|"C=78; state_province=Sinaloa\n"
 operator|+
 literal|"C=90; state_province=Oaxaca\n"
 operator|+
-literal|"C=78; state_province=Sinaloa\n"
-operator|+
 literal|"C=93; state_province=Veracruz\n"
 operator|+
-literal|"C=2086; state_province=WA\n"
+literal|"C=97; state_province=Mexico\n"
 operator|+
 literal|"C=99; state_province=Yucatan\n"
 operator|+
+literal|"C=104; state_province=Jalisco\n"
+operator|+
+literal|"C=106; state_province=Guerrero\n"
+operator|+
 literal|"C=191; state_province=Zacatecas\n"
+operator|+
+literal|"C=347; state_province=DF\n"
+operator|+
+literal|"C=1051; state_province=OR\n"
+operator|+
+literal|"C=1717; state_province=BC\n"
+operator|+
+literal|"C=2086; state_province=WA\n"
+operator|+
+literal|"C=4222; state_province=CA\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -504,29 +504,17 @@ argument_list|)
 operator|.
 name|planHasSql
 argument_list|(
-literal|"SELECT * FROM (\n"
+literal|"SELECT `state_province`, `S`, `DC`\n"
 operator|+
-literal|"    SELECT `state_province` AS `state_province`, `S` AS `S`, `DC` AS `DC`\n"
+literal|"FROM (SELECT `customer`.`state_province`, `customer`.`country`, SUM(`sales_fact_1997`.`unit_sales`) AS `S`, COUNT(DISTINCT `customer`.`customer_id`) AS `DC`\n"
 operator|+
-literal|"    FROM (\n"
+literal|"FROM `foodmart`.`sales_fact_1997`\n"
 operator|+
-literal|"        SELECT `state_province`, `country`, SUM(unit_sales) AS `S`, COUNT(DISTINCT customer_id0) AS `DC`\n"
+literal|"INNER JOIN `foodmart`.`customer` ON `sales_fact_1997`.`customer_id` = `customer`.`customer_id`\n"
 operator|+
-literal|"         FROM (\n"
+literal|"GROUP BY `customer`.`state_province`, `customer`.`country`) AS `t0`\n"
 operator|+
-literal|"            SELECT `state_province` AS `state_province`, `country` AS `country`, `unit_sales` AS `unit_sales`, `customer_id0` AS `customer_id0`\n"
-operator|+
-literal|"            FROM (\n"
-operator|+
-literal|"                SELECT `t0`.`product_id`, `t0`.`time_id`, `t0`.`customer_id`, `t0`.`promotion_id`, `t0`.`store_id`, `t0`.`store_sales`, `t0`.`store_cost`, `t0`.`unit_sales`, `t1`.`customer_id` AS `customer_id0`, `t1`.`account_num`, `t1`.`lname`, `t1`.`fname`, `t1`.`mi`, `t1`.`address1`, `t1`.`address2`, `t1`.`address3`, `t1`.`address4`, `t1`.`city`, `t1`.`state_province`, `t1`.`postal_code`, `t1`.`country`, `t1`.`customer_region_id`, `t1`.`phone1`, `t1`.`phone2`, `t1`.`birthdate`, `t1`.`marital_status`, `t1`.`yearly_income`, `t1`.`gender`, `t1`.`total_children`, `t1`.`num_children_at_home`, `t1`.`education`, `t1`.`date_accnt_opened`, `t1`.`member_card`, `t1`.`occupation`, `t1`.`houseowner`, `t1`.`num_cars_owned`, `t1`.`fullname` FROM `foodmart`.`sales_fact_1997` AS `t0`\n"
-operator|+
-literal|"                JOIN `foodmart`.`customer` AS `t1`\n"
-operator|+
-literal|"                ON `t0`.`customer_id` = `t1`.`customer_id`) AS `t`) AS `t`\n"
-operator|+
-literal|"        GROUP BY `state_province`, `country`) AS `t`) AS `t`\n"
-operator|+
-literal|"ORDER BY 1, 2"
+literal|"ORDER BY `state_province`, `S`"
 argument_list|)
 operator|.
 name|returns
@@ -541,7 +529,7 @@ expr_stmt|;
 block|}
 specifier|public
 name|void
-name|testPlan
+name|_testPlan
 parameter_list|()
 block|{
 name|assertThat
@@ -589,7 +577,7 @@ expr_stmt|;
 block|}
 specifier|public
 name|void
-name|testPlan2
+name|_testPlan2
 parameter_list|()
 block|{
 name|assertThat

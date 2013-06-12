@@ -37,9 +37,7 @@ name|eigenbase
 operator|.
 name|sql
 operator|.
-name|util
-operator|.
-name|SqlString
+name|SqlNode
 import|;
 end_import
 
@@ -54,7 +52,9 @@ name|JdbcRel
 extends|extends
 name|RelNode
 block|{
-name|SqlString
+name|JdbcImplementor
+operator|.
+name|Result
 name|implement
 parameter_list|(
 name|JdbcImplementor

@@ -33,6 +33,32 @@ name|*
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
+name|sql
+operator|.
+name|SqlLiteral
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
+name|sql
+operator|.
+name|parser
+operator|.
+name|SqlParserPos
+import|;
+end_import
+
 begin_comment
 comment|/**  *<code>Enum14</code> is a pre-JDK1.5-enum helper class for declaring a set of  * symbolic constants which have names, ordinals, and possibly descriptions. The  * ordinals do not have to be contiguous.  *  *<p>Typically, for a particular set of constants, you derive a class from this  * interface, and declare the constants as<code>public static final</code>  * members. Give it a private constructor, and a<code>public static final<i>  * ClassName</i> instance</code> member to hold the singleton instance.</p>  */
 end_comment

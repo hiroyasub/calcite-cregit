@@ -100,7 +100,28 @@ name|On
 block|,
 comment|/**          * Join clause has a USING condition, for example "FROM EMP JOIN DEPT          * USING (DEPTNO)"          */
 name|Using
-block|;     }
+block|;
+comment|/** Creates a parse-tree node representing an occurrence of this join          * type at a particular position in the parsed text. */
+specifier|public
+name|SqlLiteral
+name|symbol
+parameter_list|(
+name|SqlParserPos
+name|pos
+parameter_list|)
+block|{
+return|return
+name|SqlLiteral
+operator|.
+name|createSymbol
+argument_list|(
+name|this
+argument_list|,
+name|pos
+argument_list|)
+return|;
+block|}
+block|}
 comment|/**      * Enumerates the types of join.      */
 specifier|public
 enum|enum
@@ -127,7 +148,28 @@ name|Right
 block|,
 comment|/**          * Comma join: the good old-fashioned SQL<code>FROM</code> clause,          * where table expressions are specified with commas between them, and          * join conditions are specified in the<code>WHERE</code> clause.          */
 name|Comma
-block|;     }
+block|;
+comment|/** Creates a parse-tree node representing an occurrence of this          * condition type keyword at a particular position in the parsed          * text. */
+specifier|public
+name|SqlLiteral
+name|symbol
+parameter_list|(
+name|SqlParserPos
+name|pos
+parameter_list|)
+block|{
+return|return
+name|SqlLiteral
+operator|.
+name|createSymbol
+argument_list|(
+name|this
+argument_list|,
+name|pos
+argument_list|)
+return|;
+block|}
+block|}
 comment|//~ Constructors -----------------------------------------------------------
 specifier|public
 name|SqlJoinOperator
@@ -389,10 +431,6 @@ operator|.
 name|LEFT_OPERAND
 index|]
 decl_stmt|;
-comment|// REVIEW jvs 16-June-2006:  I commented out this and
-comment|// corresponding endList below because it is redundant
-comment|// with enclosing FROM frame pushed by SqlSelectOperator.
-comment|/*         final SqlWriter.Frame frame0 =          writer.startList(SqlWriter.FrameTypeEnum.FromList, "", "");          */
 name|left
 operator|.
 name|unparse
@@ -697,7 +735,6 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/*         writer.endList(frame0);          */
 block|}
 block|}
 end_class
