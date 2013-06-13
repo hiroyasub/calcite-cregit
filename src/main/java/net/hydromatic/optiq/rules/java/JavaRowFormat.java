@@ -552,12 +552,10 @@ name|fieldType
 parameter_list|)
 block|{
 return|return
-name|Types
+name|RexToLixTranslator
 operator|.
-name|castIfNecessary
+name|convert
 argument_list|(
-name|fieldType
-argument_list|,
 name|Expressions
 operator|.
 name|arrayIndex
@@ -571,6 +569,8 @@ argument_list|(
 name|field
 argument_list|)
 argument_list|)
+argument_list|,
+name|fieldType
 argument_list|)
 return|;
 block|}

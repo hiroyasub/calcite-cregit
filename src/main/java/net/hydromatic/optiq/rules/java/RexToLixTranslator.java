@@ -2012,7 +2012,7 @@ case|:
 case|case
 name|DOUBLE
 case|:
-comment|// Generate "SqlFunctions.parseChar(x)".
+comment|// Generate "SqlFunctions.toShort(x)".
 return|return
 name|Expressions
 operator|.
@@ -2022,7 +2022,7 @@ name|SqlFunctions
 operator|.
 name|class
 argument_list|,
-literal|"parse"
+literal|"to"
 operator|+
 name|SqlFunctions
 operator|.
@@ -2078,7 +2078,7 @@ block|{
 case|case
 name|CHAR
 case|:
-comment|// Generate "SqlFunctions.charValueOf(x)".
+comment|// Generate "SqlFunctions.toCharBoxed(x)".
 return|return
 name|Expressions
 operator|.
@@ -2088,11 +2088,18 @@ name|SqlFunctions
 operator|.
 name|class
 argument_list|,
+literal|"to"
+operator|+
+name|SqlFunctions
+operator|.
+name|initcap
+argument_list|(
 name|toBox
 operator|.
 name|primitiveName
+argument_list|)
 operator|+
-literal|"ValueOf"
+literal|"Boxed"
 argument_list|,
 name|operand
 argument_list|)
@@ -2147,46 +2154,10 @@ block|}
 if|if
 condition|(
 name|fromBox
-operator|==
+operator|!=
 literal|null
-operator|&&
-operator|!
-operator|(
-name|fromType
-operator|instanceof
-name|Class
-operator|&&
-name|Number
-operator|.
-name|class
-operator|.
-name|isAssignableFrom
-argument_list|(
-operator|(
-name|Class
-operator|)
-name|fromType
-argument_list|)
-operator|)
 condition|)
 block|{
-comment|// E.g. from "Object" to "short".
-comment|// Generate "((Short) x).shortValue()".
-name|operand
-operator|=
-name|Expressions
-operator|.
-name|convert_
-argument_list|(
-name|operand
-argument_list|,
-name|toPrimitive
-operator|.
-name|boxClass
-argument_list|)
-expr_stmt|;
-comment|// fall through
-block|}
 comment|// Generate "x.shortValue()".
 return|return
 name|Expressions
@@ -2198,6 +2169,35 @@ argument_list|,
 name|toPrimitive
 argument_list|)
 return|;
+block|}
+else|else
+block|{
+comment|// E.g. from "Object" to "short".
+comment|// Generate "SqlFunctions.toShort(x)"
+return|return
+name|Expressions
+operator|.
+name|call
+argument_list|(
+name|SqlFunctions
+operator|.
+name|class
+argument_list|,
+literal|"to"
+operator|+
+name|SqlFunctions
+operator|.
+name|initcap
+argument_list|(
+name|toPrimitive
+operator|.
+name|primitiveName
+argument_list|)
+argument_list|,
+name|operand
+argument_list|)
+return|;
+block|}
 block|}
 if|else if
 condition|(
@@ -2252,15 +2252,18 @@ return|;
 block|}
 if|else if
 condition|(
-name|fromBox
-operator|!=
-literal|null
-operator|&&
 name|toType
 operator|==
 name|BigDecimal
 operator|.
 name|class
+condition|)
+block|{
+if|if
+condition|(
+name|fromBox
+operator|!=
+literal|null
 condition|)
 block|{
 comment|// E.g. from "Integer" to "BigDecimal".
@@ -2313,17 +2316,11 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-if|else if
+if|if
 condition|(
 name|fromPrimitive
 operator|!=
 literal|null
-operator|&&
-name|toType
-operator|==
-name|BigDecimal
-operator|.
-name|class
 condition|)
 block|{
 comment|// E.g. from "int" to "BigDecimal".
@@ -2341,6 +2338,43 @@ name|Collections
 operator|.
 name|singletonList
 argument_list|(
+name|operand
+argument_list|)
+argument_list|)
+return|;
+block|}
+comment|// E.g. from "Object" to "BigDecimal".
+comment|// Generate "x == null ? null : SqlFunctions.toBigDecimal(x)"
+return|return
+name|Expressions
+operator|.
+name|condition
+argument_list|(
+name|Expressions
+operator|.
+name|equal
+argument_list|(
+name|operand
+argument_list|,
+name|RexImpTable
+operator|.
+name|NULL_EXPR
+argument_list|)
+argument_list|,
+name|RexImpTable
+operator|.
+name|NULL_EXPR
+argument_list|,
+name|Expressions
+operator|.
+name|call
+argument_list|(
+name|SqlFunctions
+operator|.
+name|class
+argument_list|,
+literal|"toBigDecimal"
+argument_list|,
 name|operand
 argument_list|)
 argument_list|)
