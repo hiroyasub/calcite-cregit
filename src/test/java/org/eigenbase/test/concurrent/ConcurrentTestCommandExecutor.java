@@ -46,7 +46,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * ConcurrentTestCommandExecutor is a thread that executes a sequence of  * {@link ConcurrentTestCommand commands} on a JDBC connection.  *  * @author Stephan Zuercher  */
+comment|/**  * ConcurrentTestCommandExecutor is a thread that executes a sequence of  * {@link ConcurrentTestCommand commands} on a JDBC connection.  */
 end_comment
 
 begin_class

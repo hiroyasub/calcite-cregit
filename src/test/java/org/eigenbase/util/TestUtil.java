@@ -27,16 +27,16 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
 name|junit
 operator|.
-name|framework
-operator|.
-name|*
+name|ComparisonFailure
 import|;
 end_import
 
 begin_comment
-comment|/**  * Static utilities for JUnit tests.  *  * @author John V. Sichi  */
+comment|/**  * Static utilities for JUnit tests.  */
 end_comment
 
 begin_class

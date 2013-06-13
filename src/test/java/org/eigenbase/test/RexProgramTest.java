@@ -35,46 +35,6 @@ end_import
 
 begin_import
 import|import
-name|junit
-operator|.
-name|framework
-operator|.
-name|TestCase
-import|;
-end_import
-
-begin_import
-import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|optiq
-operator|.
-name|impl
-operator|.
-name|java
-operator|.
-name|JavaTypeFactory
-import|;
-end_import
-
-begin_import
-import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|optiq
-operator|.
-name|jdbc
-operator|.
-name|JavaTypeFactoryImpl
-import|;
-end_import
-
-begin_import
-import|import
 name|org
 operator|.
 name|eigenbase
@@ -137,16 +97,64 @@ name|*
 import|;
 end_import
 
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|optiq
+operator|.
+name|impl
+operator|.
+name|java
+operator|.
+name|JavaTypeFactory
+import|;
+end_import
+
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|optiq
+operator|.
+name|jdbc
+operator|.
+name|JavaTypeFactoryImpl
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|Before
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|Test
+import|;
+end_import
+
 begin_comment
-comment|/**  * Unit tests for {@link RexProgram} and  * {@link org.eigenbase.rex.RexProgramBuilder}.  *  * @author jhyde  */
+comment|/**  * Unit tests for {@link RexProgram} and  * {@link org.eigenbase.rex.RexProgramBuilder}.  */
 end_comment
 
 begin_class
 specifier|public
 class|class
 name|RexProgramTest
-extends|extends
-name|TestCase
 block|{
 comment|//~ Instance fields --------------------------------------------------------
 specifier|private
@@ -167,26 +175,12 @@ name|super
 argument_list|()
 expr_stmt|;
 block|}
-comment|/**      * Creates a RexProgramTest with given name.      */
+annotation|@
+name|Before
 specifier|public
-name|RexProgramTest
-parameter_list|(
-name|String
-name|name
-parameter_list|)
-block|{
-name|super
-argument_list|(
-name|name
-argument_list|)
-expr_stmt|;
-block|}
-specifier|protected
 name|void
 name|setUp
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 name|typeFactory
 operator|=
@@ -204,6 +198,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/**      * Tests construction of a RexProgram.      */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testBuildProgram
@@ -291,6 +287,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/**      * Tests construction and normalization of a RexProgram.      */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testNormalize
@@ -334,6 +332,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/**      * Tests construction and normalization of a RexProgram.      */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testElimDups
@@ -414,6 +414,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/**      * Tests that AND(x, x) is translated to x.      */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testDuplicateAnd

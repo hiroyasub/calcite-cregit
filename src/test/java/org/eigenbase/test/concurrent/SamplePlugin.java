@@ -76,7 +76,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Sample mtsql plugin. To use add at start of script  * "@plugin org.eigenbase.test.concurrent.SamplePlugin".  After doing a prepare  * you can then do "@describeResultSet" to show columns returned by query.  *  * @author jhahn  */
+comment|/**  * Sample mtsql plugin. To use add at start of script  * "@plugin org.eigenbase.test.concurrent.SamplePlugin".  After doing a prepare  * you can then do "@describeResultSet" to show columns returned by query.  */
 end_comment
 
 begin_class

@@ -47,16 +47,6 @@ end_import
 
 begin_import
 import|import
-name|junit
-operator|.
-name|framework
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
 name|org
 operator|.
 name|eigenbase
@@ -81,8 +71,54 @@ name|*
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|*
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|runner
+operator|.
+name|RunWith
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|runners
+operator|.
+name|JUnit4
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|*
+import|;
+end_import
+
 begin_comment
-comment|/**  * DiffTestCase is an abstract base for JUnit tests which produce multi-line  * output to be verified by diffing against a pre-existing reference file.  *  * @author John V. Sichi  */
+comment|/**  * DiffTestCase is an abstract base for JUnit tests which produce multi-line  * output to be verified by diffing against a pre-existing reference file.  */
 end_comment
 
 begin_class
@@ -90,10 +126,13 @@ specifier|public
 specifier|abstract
 class|class
 name|DiffTestCase
-extends|extends
-name|TestCase
 block|{
 comment|//~ Instance fields --------------------------------------------------------
+specifier|private
+specifier|final
+name|String
+name|testCaseName
+decl_stmt|;
 comment|/**      * Name of current .log file.      */
 specifier|protected
 name|File
@@ -134,7 +173,7 @@ name|boolean
 name|verbose
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Initializes a new DiffTestCase.      *      * @param testCaseName JUnit test case name      */
+comment|/**      * Initializes a new DiffTestCase.      *      * @param testCaseName Test case name      */
 specifier|protected
 name|DiffTestCase
 parameter_list|(
@@ -144,10 +183,11 @@ parameter_list|)
 throws|throws
 name|Exception
 block|{
-name|super
-argument_list|(
+name|this
+operator|.
 name|testCaseName
-argument_list|)
+operator|=
+name|testCaseName
 expr_stmt|;
 comment|// diffMasks = new ArrayList();
 name|diffMasks
@@ -201,19 +241,13 @@ expr_stmt|;
 block|}
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|// implement TestCase
+annotation|@
+name|Before
 specifier|protected
 name|void
 name|setUp
 parameter_list|()
-throws|throws
-name|Exception
 block|{
-name|super
-operator|.
-name|setUp
-argument_list|()
-expr_stmt|;
 comment|// diffMasks.clear();
 name|diffMasks
 operator|=
@@ -236,15 +270,14 @@ operator|=
 literal|0
 expr_stmt|;
 block|}
-comment|// implement TestCase
+annotation|@
+name|After
 specifier|protected
 name|void
 name|tearDown
 parameter_list|()
 throws|throws
-name|Exception
-block|{
-try|try
+name|IOException
 block|{
 if|if
 condition|(
@@ -261,15 +294,6 @@ expr_stmt|;
 name|logOutputStream
 operator|=
 literal|null
-expr_stmt|;
-block|}
-block|}
-finally|finally
-block|{
-name|super
-operator|.
-name|tearDown
-argument_list|()
 expr_stmt|;
 block|}
 block|}
@@ -312,8 +336,7 @@ name|File
 argument_list|(
 name|testClassDir
 argument_list|,
-name|getName
-argument_list|()
+name|testCaseName
 argument_list|)
 decl_stmt|;
 return|return

@@ -26,7 +26,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Used to extend functionality of mtsql.  *  * @author jhahn  */
+comment|/**  * Used to extend functionality of mtsql.  */
 end_comment
 
 begin_class

@@ -25,16 +25,6 @@ end_import
 
 begin_import
 import|import
-name|junit
-operator|.
-name|framework
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
 name|org
 operator|.
 name|eigenbase
@@ -187,8 +177,20 @@ name|Prepare
 import|;
 end_import
 
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|*
+import|;
+end_import
+
 begin_comment
-comment|/**  * SqlToRelTestBase is an abstract base for tests which involve conversion from  * SQL to relational algebra.  *  *<p>SQL statements to be translated can use the schema defined in {@link  * MockCatalogReader}; note that this is slightly different from Farrago's SALES  * schema. If you get a parser or validator error from your test SQL, look down  * in the stack until you see "Caused by", which will usually tell you the real  * error.  *  * @author jhyde  */
+comment|/**  * SqlToRelTestBase is an abstract base for tests which involve conversion from  * SQL to relational algebra.  *  *<p>SQL statements to be translated can use the schema defined in {@link  * MockCatalogReader}; note that this is slightly different from Farrago's SALES  * schema. If you get a parser or validator error from your test SQL, look down  * in the stack until you see "Caused by", which will usually tell you the real  * error.  */
 end_comment
 
 begin_class
@@ -196,8 +198,6 @@ specifier|public
 specifier|abstract
 class|class
 name|SqlToRelTestBase
-extends|extends
-name|TestCase
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
 specifier|protected
@@ -229,19 +229,6 @@ parameter_list|()
 block|{
 name|super
 argument_list|()
-expr_stmt|;
-block|}
-specifier|public
-name|SqlToRelTestBase
-parameter_list|(
-name|String
-name|name
-parameter_list|)
-block|{
-name|super
-argument_list|(
-name|name
-argument_list|)
 expr_stmt|;
 block|}
 specifier|protected

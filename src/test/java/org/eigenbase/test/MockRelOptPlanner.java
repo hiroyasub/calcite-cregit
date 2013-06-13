@@ -48,7 +48,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * MockRelOptPlanner is a mock implementation of the {@link RelOptPlanner}  * interface.  *  * @author John V. Sichi  */
+comment|/**  * MockRelOptPlanner is a mock implementation of the {@link RelOptPlanner}  * interface.  */
 end_comment
 
 begin_class

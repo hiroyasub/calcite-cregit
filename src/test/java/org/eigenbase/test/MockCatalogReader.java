@@ -152,7 +152,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Mock implementation of {@link SqlValidatorCatalogReader} which returns tables  * "EMP", "DEPT", "BONUS", "SALGRADE" (same as Oracle's SCOTT schema).  *  * @author jhyde  */
+comment|/**  * Mock implementation of {@link SqlValidatorCatalogReader} which returns tables  * "EMP", "DEPT", "BONUS", "SALGRADE" (same as Oracle's SCOTT schema).  */
 end_comment
 
 begin_class

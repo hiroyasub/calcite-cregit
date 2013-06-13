@@ -45,16 +45,6 @@ end_import
 
 begin_import
 import|import
-name|junit
-operator|.
-name|framework
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
 name|org
 operator|.
 name|eigenbase
@@ -93,16 +83,24 @@ name|*
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|Test
+import|;
+end_import
+
 begin_comment
-comment|/**  * Unit test for SQL limits.  *  * @author jhyde  */
+comment|/**  * Unit test for SQL limits.  */
 end_comment
 
 begin_class
 specifier|public
 class|class
 name|SqlLimitsTest
-extends|extends
-name|TestCase
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
 specifier|private
@@ -401,16 +399,8 @@ block|}
 comment|//~ Constructors -----------------------------------------------------------
 specifier|public
 name|SqlLimitsTest
-parameter_list|(
-name|String
-name|name
-parameter_list|)
+parameter_list|()
 block|{
-name|super
-argument_list|(
-name|name
-argument_list|)
-expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
 specifier|protected
@@ -443,6 +433,8 @@ return|return
 name|typeList
 return|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testPrintLimits

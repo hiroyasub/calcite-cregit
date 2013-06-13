@@ -36,7 +36,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * ConcurrentTestTimedCommandGenerator extends {@link  * ConcurrentTestCommandGenerator} and repeats the configured command  * sequence until a certain amount of time has elapsed.  *  *<p>The command sequence is always completed in full, even if the time limit  * has been exceeded. Therefore, the time limit can only be considered the  * minimum length of time that the test will run and not a guarantee of how long  * the test will take.  *  * @author Stephan Zuercher  */
+comment|/**  * ConcurrentTestTimedCommandGenerator extends {@link  * ConcurrentTestCommandGenerator} and repeats the configured command  * sequence until a certain amount of time has elapsed.  *  *<p>The command sequence is always completed in full, even if the time limit  * has been exceeded. Therefore, the time limit can only be considered the  * minimum length of time that the test will run and not a guarantee of how long  * the test will take.  */
 end_comment
 
 begin_class

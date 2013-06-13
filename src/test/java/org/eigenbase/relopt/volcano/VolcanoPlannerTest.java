@@ -27,32 +27,6 @@ end_import
 
 begin_import
 import|import
-name|junit
-operator|.
-name|framework
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|optiq
-operator|.
-name|rules
-operator|.
-name|java
-operator|.
-name|EnumerableConvention
-import|;
-end_import
-
-begin_import
-import|import
 name|org
 operator|.
 name|eigenbase
@@ -153,6 +127,54 @@ name|*
 import|;
 end_import
 
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|optiq
+operator|.
+name|rules
+operator|.
+name|java
+operator|.
+name|EnumerableConvention
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|Ignore
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|Test
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|*
+import|;
+end_import
+
 begin_comment
 comment|/**  * Unit test for {@link VolcanoPlanner the optimizer}.  */
 end_comment
@@ -161,8 +183,6 @@ begin_class
 specifier|public
 class|class
 name|VolcanoPlannerTest
-extends|extends
-name|TestCase
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
 comment|/**      * Private calling convention representing a physical implementation.      */
@@ -187,16 +207,8 @@ decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 specifier|public
 name|VolcanoPlannerTest
-parameter_list|(
-name|String
-name|name
-parameter_list|)
+parameter_list|()
 block|{
-name|super
-argument_list|(
-name|name
-argument_list|)
-expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
 specifier|static
@@ -239,6 +251,8 @@ argument_list|)
 return|;
 block|}
 comment|/**      * Tests transformation of a leaf from NONE to PHYS.      */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testTransformLeaf
@@ -332,6 +346,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/**      * Tests transformation of a single+leaf from NONE to PHYS.      */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testTransformSingleGood
@@ -445,6 +461,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/**      * Tests transformation of a single+leaf from NONE to PHYS. In the past,      * this one didn't work due to the definition of ReformedSingleRule.      */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testTransformSingleReformed
@@ -796,6 +814,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|// NOTE:  this used to fail but now works
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testWithRemoveTrivialProject
@@ -809,6 +829,8 @@ expr_stmt|;
 block|}
 comment|// NOTE:  this always worked; it's here as constrast to
 comment|// testWithRemoveTrivialProject()
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testWithoutRemoveTrivialProject
@@ -821,6 +843,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/**      * Previously, this didn't work because ReformedRemoveSingleRule uses a      * pattern which spans calling conventions.      */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testRemoveSingleReformed
@@ -958,6 +982,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/**      * This always worked (in contrast to testRemoveSingleReformed) because it      * uses a completely-physical pattern (requiring GoodSingleRule to fire      * first).      */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testRemoveSingleGood
@@ -1104,6 +1130,10 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/**      * Tests whether planner correctly notifies listeners of events.      */
+annotation|@
+name|Ignore
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testListener

@@ -21,6 +21,8 @@ name|eigenbase
 operator|.
 name|rel
 operator|.
+name|rules
+operator|.
 name|*
 import|;
 end_import
@@ -29,18 +31,14 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|junit
 operator|.
-name|rel
-operator|.
-name|rules
-operator|.
-name|*
+name|Test
 import|;
 end_import
 
 begin_comment
-comment|/**  * Unit test for rules in {@link org.eigenbase.rel} and subpackages.  *  *<p>As input, the test supplies a SQL statement and a single rule; the SQL is  * translated into relational algebra and then fed into a {@link  * org.eigenbase.relopt.hep.HepPlanner}. The planner fires the rule on every  * pattern match in a depth-first left-to-right preorder traversal of the tree  * for as long as the rule continues to succeed in applying its transform. (For  * rules which call transformTo more than once, only the last result is used.)  * The plan before and after "optimization" is diffed against a .ref file using  * {@link DiffRepository}.  *  *<p>Procedure for adding a new test case:  *  *<ol>  *<li>Add a new public test method for your rule, following the existing  * examples. You'll have to come up with an SQL statement to which your rule  * will apply in a meaningful way. See {@link SqlToRelTestBase} class comments  * for details on the schema.  *<li>Run the test. It should fail. Inspect the output in  * RelOptRulesTest.log.xml; verify that the "planBefore" is the correct  * translation of your SQL, and that it contains the pattern on which your rule  * is supposed to fire. If all is well, check out RelOptRulesTest.ref.xml and  * replace it with the new .log.xml.  *<li>Run the test again. It should fail again, but this time it should contain  * a "planAfter" entry for your rule. Verify that your rule applied its  * transformation correctly, and then update the .ref.xml file again.  *<li>Run the test one last time; this time it should pass.  *</ol>  *  * @author John V. Sichi  */
+comment|/**  * Unit test for rules in {@link org.eigenbase.rel} and subpackages.  *  *<p>As input, the test supplies a SQL statement and a single rule; the SQL is  * translated into relational algebra and then fed into a {@link  * org.eigenbase.relopt.hep.HepPlanner}. The planner fires the rule on every  * pattern match in a depth-first left-to-right preorder traversal of the tree  * for as long as the rule continues to succeed in applying its transform. (For  * rules which call transformTo more than once, only the last result is used.)  * The plan before and after "optimization" is diffed against a .ref file using  * {@link DiffRepository}.  *  *<p>Procedure for adding a new test case:  *  *<ol>  *<li>Add a new public test method for your rule, following the existing  * examples. You'll have to come up with an SQL statement to which your rule  * will apply in a meaningful way. See {@link SqlToRelTestBase} class comments  * for details on the schema.  *<li>Run the test. It should fail. Inspect the output in  * RelOptRulesTest.log.xml; verify that the "planBefore" is the correct  * translation of your SQL, and that it contains the pattern on which your rule  * is supposed to fire. If all is well, check out RelOptRulesTest.ref.xml and  * replace it with the new .log.xml.  *<li>Run the test again. It should fail again, but this time it should contain  * a "planAfter" entry for your rule. Verify that your rule applied its  * transformation correctly, and then update the .ref.xml file again.  *<li>Run the test one last time; this time it should pass.  *</ol>  */
 end_comment
 
 begin_class
@@ -67,6 +65,8 @@ name|class
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testUnionToDistinctRule
@@ -82,6 +82,8 @@ literal|"select * from dept union select * from dept"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testExtractJoinFilterRule
@@ -97,6 +99,8 @@ literal|"select 1 from emp inner join dept on emp.deptno=dept.deptno"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testAddRedundantSemiJoinRule
@@ -112,6 +116,8 @@ literal|"select 1 from emp inner join dept on emp.deptno = dept.deptno"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testPushFilterThroughOuterJoin
@@ -131,6 +137,8 @@ literal|" where d.name = 'Charlie'"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testReduceAverage
@@ -148,6 +156,8 @@ literal|" from sales.dept group by name"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testPushProjectPastFilter
@@ -165,6 +175,8 @@ literal|"and upper(ename) = 'FOO'"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testPushProjectPastJoin
@@ -182,6 +194,8 @@ literal|"on e.ename = b.ename and e.deptno = 10"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testPushProjectPastSetOp
@@ -199,6 +213,8 @@ literal|"(select * from emp e1 union all select * from emp e2)"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testPushJoinThroughUnionOnLeft
@@ -218,6 +234,8 @@ literal|"emp r2"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testPushJoinThroughUnionOnRight

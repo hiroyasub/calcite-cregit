@@ -27,32 +27,6 @@ end_import
 
 begin_import
 import|import
-name|junit
-operator|.
-name|framework
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|optiq
-operator|.
-name|rules
-operator|.
-name|java
-operator|.
-name|EnumerableConvention
-import|;
-end_import
-
-begin_import
-import|import
 name|org
 operator|.
 name|eigenbase
@@ -113,6 +87,54 @@ name|*
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|Ignore
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|Test
+import|;
+end_import
+
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|optiq
+operator|.
+name|rules
+operator|.
+name|java
+operator|.
+name|EnumerableConvention
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|*
+import|;
+end_import
+
 begin_comment
 comment|/**  * Unit test for handling of traits by {@link VolcanoPlanner}.  */
 end_comment
@@ -121,8 +143,6 @@ begin_class
 specifier|public
 class|class
 name|VolcanoPlannerTraitTest
-extends|extends
-name|TestCase
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
 comment|/**      * Private calling convention representing a generic "physical" calling      * convention.      */
@@ -196,18 +216,14 @@ decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 specifier|public
 name|VolcanoPlannerTraitTest
-parameter_list|(
-name|String
-name|name
-parameter_list|)
+parameter_list|()
 block|{
-name|super
-argument_list|(
-name|name
-argument_list|)
-expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Ignore
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testDoubleConversion
@@ -479,6 +495,10 @@ name|PhysLeafRel
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Ignore
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testTraitPropagation

@@ -49,16 +49,6 @@ end_import
 
 begin_import
 import|import
-name|junit
-operator|.
-name|framework
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
 name|org
 operator|.
 name|eigenbase
@@ -95,8 +85,30 @@ name|*
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|*
+import|;
+end_import
+
 begin_comment
-comment|/**  * Abstract implementation of {@link SqlTester}. A derived class only needs to  * implement {@link #check}, {@link #checkColumnType} and {@link #checkFails}.  *  * @author wael  * @since May 22, 2004  */
+comment|/**  * Abstract implementation of {@link SqlTester}. A derived class only needs to  * implement {@link #check}, {@link #checkColumnType} and {@link #checkFails}.  */
 end_comment
 
 begin_class
@@ -197,7 +209,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|AssertionFailedError
+name|AssertionError
 argument_list|(
 literal|"isFor() called twice"
 argument_list|)
@@ -980,8 +992,6 @@ name|SqlOperator
 name|getFor
 parameter_list|()
 block|{
-name|Assert
-operator|.
 name|assertNotNull
 argument_list|(
 literal|"Must call setFor()"
@@ -1616,8 +1626,6 @@ name|RelDataType
 name|type
 parameter_list|)
 block|{
-name|TestCase
-operator|.
 name|assertEquals
 argument_list|(
 name|typeName
@@ -1676,8 +1684,6 @@ argument_list|(
 name|type
 argument_list|)
 decl_stmt|;
-name|TestCase
-operator|.
 name|assertEquals
 argument_list|(
 name|expected

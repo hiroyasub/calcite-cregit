@@ -69,16 +69,6 @@ end_import
 
 begin_import
 import|import
-name|junit
-operator|.
-name|framework
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
 name|org
 operator|.
 name|eigenbase
@@ -185,8 +175,40 @@ name|*
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|Before
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|Test
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|*
+import|;
+end_import
+
 begin_comment
-comment|/**  * Contains unit tests for all operators. Each of the methods is named after an  * operator.  *  *<p>The class is abstract. It contains a test for every operator, but does not  * provide a mechanism to execute the tests: parse, validate, and execute  * expressions on the operators. This is left to a {@link SqlTester} object  * which the derived class must provide.  *  *<p>Different implementations of {@link SqlTester} are possible, such as:  *  *<ul>  *<li>Execute against a real farrago database  *<li>Execute in pure java (parsing and validation can be done, but expression  * evaluation is not possible)  *<li>Generate a SQL script.  *<li>Analyze which operators are adequately tested.  *</ul>  *  *<p>A typical method will be named after the operator it is testing (say  *<code>testSubstringFunc</code>). It first calls {@link  * SqlTester#setFor(org.eigenbase.sql.SqlOperator,  * org.eigenbase.sql.test.SqlTester.VmName...)} to declare which operator it is  * testing.<blockqoute>  *  *<pre><code>  * public void testSubstringFunc() {  *     getTester().setFor(SqlStdOperatorTable.substringFunc);  *     getTester().checkScalar("sin(0)", "0");  *     getTester().checkScalar("sin(1.5707)", "1");  * }</code></pre>  *  *</blockqoute> The rest of the method contains calls to the various<code>  * checkXxx</code> methods in the {@link SqlTester} interface. For an operator  * to be adequately tested, there need to be tests for:  *  *<ul>  *<li>Parsing all of its the syntactic variants.  *<li>Deriving the type of in all combinations of arguments.  *  *<ul>  *<li>Pay particular attention to nullability. For example, the result of the  * "+" operator is NOT NULL if and only if both of its arguments are NOT  * NULL.</li>  *<li>Also pay attention to precsion/scale/length. For example, the maximum  * length of the "||" operator is the sum of the maximum lengths of its  * arguments.</li>  *</ul>  *</li>  *<li>Executing the function. Pay particular attention to corner cases such as  * null arguments or null results.</li>  *</ul>  *  * @author Julian Hyde  * @since October 1, 2004  */
+comment|/**  * Contains unit tests for all operators. Each of the methods is named after an  * operator.  *  *<p>The class is abstract. It contains a test for every operator, but does not  * provide a mechanism to execute the tests: parse, validate, and execute  * expressions on the operators. This is left to a {@link SqlTester} object  * which the derived class must provide.  *  *<p>Different implementations of {@link SqlTester} are possible, such as:  *  *<ul>  *<li>Execute against a real farrago database  *<li>Execute in pure java (parsing and validation can be done, but expression  * evaluation is not possible)  *<li>Generate a SQL script.  *<li>Analyze which operators are adequately tested.  *</ul>  *  *<p>A typical method will be named after the operator it is testing (say  *<code>testSubstringFunc</code>). It first calls {@link  * SqlTester#setFor(org.eigenbase.sql.SqlOperator,  * org.eigenbase.sql.test.SqlTester.VmName...)} to declare which operator it is  * testing.<blockqoute>  *  *<pre><code>  * @Test public void testSubstringFunc() {  *     getTester().setFor(SqlStdOperatorTable.substringFunc);  *     getTester().checkScalar("sin(0)", "0");  *     getTester().checkScalar("sin(1.5707)", "1");  * }</code></pre>  *  *</blockqoute> The rest of the method contains calls to the various<code>  * checkXxx</code> methods in the {@link SqlTester} interface. For an operator  * to be adequately tested, there need to be tests for:  *  *<ul>  *<li>Parsing all of its the syntactic variants.  *<li>Deriving the type of in all combinations of arguments.  *  *<ul>  *<li>Pay particular attention to nullability. For example, the result of the  * "+" operator is NOT NULL if and only if both of its arguments are NOT  * NULL.</li>  *<li>Also pay attention to precsion/scale/length. For example, the maximum  * length of the "||" operator is the sum of the maximum lengths of its  * arguments.</li>  *</ul>  *</li>  *<li>Executing the function. Pay particular attention to corner cases such as  * null arguments or null results.</li>  *</ul>  */
 end_comment
 
 begin_class
@@ -194,8 +216,6 @@ specifier|public
 specifier|abstract
 class|class
 name|SqlOperatorBaseTest
-extends|extends
-name|TestCase
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
 specifier|public
@@ -786,15 +806,10 @@ decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 specifier|public
 name|SqlOperatorBaseTest
-parameter_list|(
-name|String
-name|testName
-parameter_list|)
+parameter_list|()
 block|{
 name|this
 argument_list|(
-name|testName
-argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
@@ -802,18 +817,10 @@ block|}
 specifier|protected
 name|SqlOperatorBaseTest
 parameter_list|(
-name|String
-name|testName
-parameter_list|,
 name|boolean
 name|enable
 parameter_list|)
 block|{
-name|super
-argument_list|(
-name|testName
-argument_list|)
-expr_stmt|;
 name|this
 operator|.
 name|enable
@@ -829,7 +836,9 @@ name|SqlTester
 name|getTester
 parameter_list|()
 function_decl|;
-specifier|protected
+annotation|@
+name|Before
+specifier|public
 name|void
 name|setUp
 parameter_list|()
@@ -847,6 +856,8 @@ expr_stmt|;
 block|}
 comment|//--- Tests -----------------------------------------------------------
 comment|/** For development. Put any old code in here. */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testDummy
@@ -862,6 +873,8 @@ literal|"1"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testBetween
@@ -1152,6 +1165,8 @@ literal|"1 between cast(null as integer) and 1"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testNotBetween
@@ -1646,6 +1661,8 @@ name|spaces
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCastToString
@@ -2072,6 +2089,8 @@ literal|true
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCastExactNumericLimits
@@ -2378,6 +2397,8 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCastToExactNumeric
@@ -2551,6 +2572,8 @@ literal|"654342432412312"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCastStringToDecimal
@@ -2660,6 +2683,8 @@ literal|true
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCastIntervalToNumeric
@@ -2891,6 +2916,8 @@ literal|"5"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCastToInterval
@@ -3035,6 +3062,8 @@ literal|"INTERVAL MINUTE(4) NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCastWithRoundingToScalar
@@ -3288,6 +3317,8 @@ literal|true
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCastDecimalToDoubleToInteger
@@ -3372,6 +3403,8 @@ literal|"-2"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCastApproxNumericLimits
@@ -3812,6 +3845,8 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCastToApproxNumeric
@@ -3907,6 +3942,8 @@ literal|0
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCastNull
@@ -4032,6 +4069,8 @@ literal|"cast(null as boolean)"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCastDateTime
@@ -4857,6 +4896,8 @@ throw|;
 block|}
 block|}
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCastToBoolean
@@ -4970,6 +5011,8 @@ literal|true
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCase
@@ -5201,6 +5244,8 @@ expr_stmt|;
 block|}
 comment|// TODO: Check case with multisets
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCaseType
@@ -5268,6 +5313,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/**      * Tests support for JDBC functions.      *      *<p>See FRG-97 "Support for JDBC escape syntax is incomplete".      */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testJdbcFn
@@ -6368,6 +6415,8 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testSelect
@@ -6507,6 +6556,8 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testLiteralChain
@@ -6605,6 +6656,8 @@ name|TRUE
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testRow
@@ -6623,6 +6676,8 @@ name|VM_FENNEL
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testAndOperator
@@ -6707,6 +6762,8 @@ name|TRUE
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testAndOperator2
@@ -6749,6 +6806,8 @@ name|TRUE
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testAndOperatorLazy
@@ -6792,6 +6851,8 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testConcatOperator
@@ -6871,6 +6932,8 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testDivideOperator
@@ -7033,6 +7096,8 @@ literal|true
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testDivideOperatorIntervals
@@ -7117,6 +7182,8 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testEqualsOperator
@@ -7301,6 +7368,8 @@ literal|"cast(null as varchar(10))='a'"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testEqualsOperatorInterval
@@ -7360,6 +7429,8 @@ literal|"cast(null as interval hour) = interval '2' minute"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testGreaterThanOperator
@@ -7610,6 +7681,8 @@ literal|null
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testGreaterThanOperatorIntervals
@@ -7736,6 +7809,8 @@ literal|"interval '2:2' hour to minute> cast(null as interval second)"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testIsDistinctFromOperator
@@ -7910,6 +7985,8 @@ name|FALSE
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testIsNotDistinctFromOperator
@@ -8084,6 +8161,8 @@ name|TRUE
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testGreaterThanOrEqualOperator
@@ -8300,6 +8379,8 @@ literal|"cast(null as real)>=999"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testGreaterThanOrEqualOperatorIntervals
@@ -8426,6 +8507,8 @@ literal|"interval '2:2' hour to minute>= cast(null as interval second)"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testInOperator
@@ -8553,6 +8636,8 @@ literal|false
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testNotInOperator
@@ -8680,6 +8765,8 @@ literal|false
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testOverlapsOperator
@@ -8850,6 +8937,8 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testLessThanOperator
@@ -9082,6 +9171,8 @@ literal|"cast(null as integer)<1.32"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testLessThanOperatorInterval
@@ -9208,6 +9299,8 @@ literal|"interval '2:2' hour to minute< cast(null as interval second)"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testLessThanOrEqualOperator
@@ -9448,6 +9541,8 @@ literal|"cast(null as integer)<=1.32"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testLessThanOrEqualOperatorInterval
@@ -9574,6 +9669,8 @@ literal|"interval '2:2' hour to minute<= cast(null as interval second)"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testMinusOperator
@@ -9795,6 +9892,8 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testMinusIntervalOperator
@@ -9913,6 +10012,8 @@ argument_list|)
 expr_stmt|;
 comment|// TODO: Tests with interval year months (not supported)
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testMinusDateOperator
@@ -10091,6 +10192,8 @@ expr_stmt|;
 block|}
 comment|// TODO: Add tests for year month intervals (currently not supported)
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testMultiplyOperator
@@ -10318,6 +10421,8 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testMultiplyIntervals
@@ -10402,6 +10507,8 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testNotEqualsOperator
@@ -10462,6 +10569,8 @@ literal|"'a'<>cast(null as varchar(1))"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testNotEqualsOperatorIntervals
@@ -10533,6 +10642,8 @@ literal|false
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testOrOperator
@@ -10593,6 +10704,8 @@ literal|"false or cast(null as boolean)"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testOrOperatorLazy
@@ -10700,6 +10813,8 @@ name|TRUE
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testPlusOperator
@@ -10921,6 +11036,8 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testPlusIntervalOperator
@@ -11039,6 +11156,8 @@ argument_list|)
 expr_stmt|;
 comment|// TODO: Tests with interval year months (not supported)
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testDescendingOperator
@@ -11057,6 +11176,8 @@ name|VM_EXPAND
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testIsNotNullOperator
@@ -11097,6 +11218,8 @@ name|FALSE
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testIsNullOperator
@@ -11137,6 +11260,8 @@ name|TRUE
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testIsNotTrueOperator
@@ -11201,6 +11326,8 @@ literal|false
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testIsTrueOperator
@@ -11253,6 +11380,8 @@ name|FALSE
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testIsNotFalseOperator
@@ -11305,6 +11434,8 @@ name|TRUE
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testIsFalseOperator
@@ -11357,6 +11488,8 @@ name|FALSE
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testIsNotUnknownOperator
@@ -11435,6 +11568,8 @@ literal|false
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testIsUnknownOperator
@@ -11513,6 +11648,8 @@ literal|false
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testIsASetOperator
@@ -11531,6 +11668,8 @@ name|VM_EXPAND
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testExistsOperator
@@ -11549,6 +11688,8 @@ name|VM_EXPAND
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testNotOperator
@@ -11607,6 +11748,8 @@ literal|"not cast(null as boolean)"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testPrefixMinusOperator
@@ -11688,6 +11831,8 @@ literal|"-cast(null as tinyint)"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testPrefixMinusOperatorIntervals
@@ -11746,6 +11891,8 @@ literal|"-cast(null as interval day to minute)"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testPrefixPlusOperator
@@ -11816,6 +11963,8 @@ literal|"+cast(null as tinyint)"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testPrefixPlusOperatorIntervals
@@ -11894,6 +12043,8 @@ literal|"+cast(null as interval day to minute)"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testExplicitTableOperator
@@ -11912,6 +12063,8 @@ name|VM_EXPAND
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testValuesOperator
@@ -11950,6 +12103,8 @@ literal|0
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testNotLikeOperator
@@ -11980,6 +12135,8 @@ name|FALSE
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testLikeOperator
@@ -12176,6 +12333,8 @@ name|TRUE
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testNotSimilarToOperator
@@ -12254,6 +12413,8 @@ literal|null
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testSimilarToOperator
@@ -13558,6 +13719,8 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testEscapeOperator
@@ -13576,6 +13739,8 @@ name|VM_EXPAND
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testConvertFunc
@@ -13596,6 +13761,8 @@ name|VM_JAVA
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testTranslateFunc
@@ -13616,6 +13783,8 @@ name|VM_JAVA
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testOverlayFunc
@@ -13723,6 +13892,8 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testPositionFunc
@@ -13806,6 +13977,8 @@ literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCharLengthFunc
@@ -13840,6 +14013,8 @@ literal|"char_length(cast(null as varchar(1)))"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCharacterLengthFunc
@@ -13874,6 +14049,8 @@ literal|"CHARACTER_LENGTH(cast(null as varchar(1)))"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testUpperFunc
@@ -13946,6 +14123,8 @@ literal|"upper(cast(null as varchar(1)))"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testLowerFunc
@@ -14019,6 +14198,8 @@ literal|"lower(cast(null as varchar(1)))"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testInitcapFunc
@@ -14109,6 +14290,8 @@ literal|false
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testPowerFunc
@@ -14176,6 +14359,8 @@ literal|false
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testSqrtFunc
@@ -14270,6 +14455,8 @@ literal|"sqrt(cast(null as double))"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testExpFunc
@@ -14341,6 +14528,8 @@ literal|"exp(cast(null as double))"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testModFunc
@@ -14479,6 +14668,8 @@ literal|"mod(4,cast(null as decimal(12,0)))"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testModFuncDivByZero
@@ -14503,6 +14694,8 @@ literal|true
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testLnFunc
@@ -14563,6 +14756,8 @@ literal|"ln(cast(null as tinyint))"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testLogFunc
@@ -14666,6 +14861,8 @@ literal|"log10(cast(null as real))"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testAbsFunc
@@ -14836,6 +15033,8 @@ literal|"abs(cast(null as double))"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testAbsFuncIntervals
@@ -14882,6 +15081,8 @@ literal|"abs(cast(null as interval hour))"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testNullifFunc
@@ -15108,6 +15309,8 @@ literal|false
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testNullIfOperatorIntervals
@@ -15154,6 +15357,8 @@ literal|"nullif(interval '3' day, interval '3' day)"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCoalesceFunc
@@ -15206,6 +15411,8 @@ literal|false
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testUserFunc
@@ -15244,6 +15451,8 @@ literal|"VARCHAR(2000) NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCurrentUserFunc
@@ -15282,6 +15491,8 @@ literal|"VARCHAR(2000) NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testSessionUserFunc
@@ -15320,6 +15531,8 @@ literal|"VARCHAR(2000) NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testSystemUserFunc
@@ -15369,6 +15582,8 @@ literal|"VARCHAR(2000) NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCurrentPathFunc
@@ -15407,6 +15622,8 @@ literal|"VARCHAR(2000) NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCurrentRoleFunc
@@ -15447,6 +15664,8 @@ literal|"VARCHAR(2000) NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testLocalTimeFunc
@@ -15534,6 +15753,8 @@ literal|"VARCHAR(30) NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testLocalTimestampFunc
@@ -15630,6 +15851,8 @@ literal|"VARCHAR(30) NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCurrentTimeFunc
@@ -15727,6 +15950,8 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCurrentTimestampFunc
@@ -15883,6 +16108,8 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCurrentDateFunc
@@ -15978,6 +16205,8 @@ literal|"VARCHAR(30) NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testSubstringFunction
@@ -16047,6 +16276,8 @@ literal|"substring(cast(null as varchar(1)),1,2)"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testTrimFunc
@@ -16199,6 +16430,8 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testWindow
@@ -16247,6 +16480,8 @@ literal|0
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testElementFunc
@@ -16293,6 +16528,8 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCardinalityFunc
@@ -16359,6 +16596,8 @@ literal|"2"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testMemberOfOperator
@@ -16445,6 +16684,8 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCollectFunc
@@ -16465,6 +16706,8 @@ name|VM_JAVA
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testFusionFunc
@@ -16485,6 +16728,8 @@ name|VM_JAVA
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testExtractFunc
@@ -16594,6 +16839,8 @@ literal|"extract(month from cast(null as interval year))"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testArrayValueConstructor
@@ -16636,6 +16883,8 @@ literal|false
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testItemOp
@@ -16785,6 +17034,8 @@ literal|null
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testMapValueConstructor
@@ -16851,6 +17102,8 @@ literal|"{washington=1, obama=44}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCeilFunc
@@ -16958,6 +17211,8 @@ literal|"ceiling(cast(null as double))"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCeilFuncInterval
@@ -17028,6 +17283,8 @@ literal|"ceil(cast(null as interval year))"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testFloorFunc
@@ -17135,6 +17392,8 @@ literal|"floor(cast(null as real))"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testFloorFuncInterval
@@ -17205,6 +17464,8 @@ literal|"floor(cast(null as interval year))"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testDenseRankFunc
@@ -17225,6 +17486,8 @@ name|VM_JAVA
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testPercentRankFunc
@@ -17245,6 +17508,8 @@ name|VM_JAVA
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testRankFunc
@@ -17265,6 +17530,8 @@ name|VM_JAVA
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCumeDistFunc
@@ -17285,6 +17552,8 @@ name|VM_JAVA
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testRowNumberFunc
@@ -17305,6 +17574,8 @@ name|VM_JAVA
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCountFunc
@@ -17553,6 +17824,8 @@ literal|0
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testSumFunc
@@ -17764,6 +18037,8 @@ literal|0
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testAvgFunc
@@ -17897,6 +18172,8 @@ literal|0d
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testStddevPopFunc
@@ -18064,6 +18341,8 @@ literal|0d
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testStddevSampFunc
@@ -18231,6 +18510,8 @@ literal|0d
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testVarPopFunc
@@ -18398,6 +18679,8 @@ literal|0d
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testVarSampFunc
@@ -18565,6 +18848,8 @@ literal|0d
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testMinFunc
@@ -18728,6 +19013,8 @@ literal|0d
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testMaxFunc
@@ -18891,6 +19178,8 @@ literal|0d
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testLastValueFunc
@@ -19033,6 +19322,8 @@ literal|0d
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testFirstValueFunc
@@ -19168,6 +19459,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/**      * Tests that CAST fails when given a value just outside the valid range for      * that type. For example,      *      *<ul>      *<li>CAST(-200 AS TINYINT) fails because the value is less than -128;      *<li>CAST(1E-999 AS FLOAT) fails because the value underflows;      *<li>CAST(123.4567891234567 AS FLOAT) fails because the value loses      * precision.      *</ul>      */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testLiteralAtLimit
@@ -19384,6 +19677,8 @@ block|}
 block|}
 block|}
 comment|/**      * Tests that CAST fails when given a value just outside the valid range for      * that type. For example,      *      *<ul>      *<li>CAST(-200 AS TINYINT) fails because the value is less than -128;      *<li>CAST(1E-999 AS FLOAT) fails because the value underflows;      *<li>CAST(123.4567891234567 AS FLOAT) fails because the value loses      * precision.      *</ul>      */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testLiteralBeyondLimit
@@ -19596,6 +19891,8 @@ block|}
 block|}
 block|}
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCastTruncates

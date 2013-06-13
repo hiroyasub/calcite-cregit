@@ -45,11 +45,35 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
 name|junit
 operator|.
-name|framework
+name|Test
+import|;
+end_import
+
+begin_import
+import|import
+name|org
 operator|.
-name|TestCase
+name|junit
+operator|.
+name|runner
+operator|.
+name|RunWith
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|runners
+operator|.
+name|JUnit4
 import|;
 end_import
 
@@ -70,6 +94,18 @@ operator|.
 name|sql
 operator|.
 name|SQLException
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|*
 import|;
 end_import
 
@@ -97,9 +133,9 @@ begin_class
 specifier|public
 class|class
 name|JdbcFrontJdbcBackTest
-extends|extends
-name|TestCase
 block|{
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testWhere2
@@ -130,6 +166,8 @@ literal|"day=2; week_day=Monday\n"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testTables
@@ -255,6 +293,8 @@ block|}
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testTablesByType
@@ -385,6 +425,8 @@ block|}
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testColumns
@@ -511,6 +553,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/** Tests a JDBC method known to be not implemented (as it happens,    * {@link java.sql.DatabaseMetaData#getPrimaryKeys}) that therefore uses    * empty result set. */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testEmpty
@@ -599,6 +643,8 @@ block|}
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCase

@@ -43,16 +43,6 @@ end_import
 
 begin_import
 import|import
-name|junit
-operator|.
-name|framework
-operator|.
-name|TestCase
-import|;
-end_import
-
-begin_import
-import|import
 name|org
 operator|.
 name|eigenbase
@@ -60,6 +50,16 @@ operator|.
 name|util
 operator|.
 name|Pair
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|Test
 import|;
 end_import
 
@@ -101,8 +101,6 @@ begin_class
 specifier|public
 class|class
 name|MongoAdapterTest
-extends|extends
-name|TestCase
 block|{
 specifier|public
 specifier|static
@@ -332,6 +330,8 @@ return|return
 literal|true
 return|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testUnionPlan
@@ -392,6 +392,8 @@ literal|"product_id=1512.0\n"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testFilterUnionPlan
@@ -430,6 +432,8 @@ name|runs
 argument_list|()
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testSelectWhere
@@ -477,6 +481,8 @@ literal|"warehouse_id=24.0; warehouse_state_province=CA\n"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testInPlan
@@ -526,6 +532,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/** Query based on the "mongo-zips" model. */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testZips
@@ -569,6 +577,8 @@ literal|"      MongoTableScan(table=[[mongo_raw, zips]], ops=[[<{city: 1, loc: 1
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testProject
@@ -617,6 +627,8 @@ literal|"    MongoTableScan(table=[[mongo_raw, zips]], ops=[[<{city: 1, loc: 1, 
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testFilter

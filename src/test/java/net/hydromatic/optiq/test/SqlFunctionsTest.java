@@ -45,11 +45,35 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
 name|junit
 operator|.
-name|framework
+name|Test
+import|;
+end_import
+
+begin_import
+import|import
+name|org
 operator|.
-name|TestCase
+name|junit
+operator|.
+name|runner
+operator|.
+name|RunWith
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|runners
+operator|.
+name|JUnit4
 import|;
 end_import
 
@@ -79,6 +103,18 @@ name|*
 import|;
 end_import
 
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|*
+import|;
+end_import
+
 begin_comment
 comment|/**  * Unit test for the methods in {@link SqlFunctions} that implement SQL  * functions.  */
 end_comment
@@ -87,9 +123,9 @@ begin_class
 specifier|public
 class|class
 name|SqlFunctionsTest
-extends|extends
-name|TestCase
 block|{
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCharLength
@@ -106,6 +142,8 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testConcat
@@ -163,6 +201,8 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testLower
@@ -179,6 +219,8 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testUpper
@@ -195,6 +237,8 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testInitcap
@@ -271,6 +315,8 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testLesser
@@ -354,6 +400,8 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testGreater
@@ -438,6 +486,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/** Test for {@link SqlFunctions#rtrim}. */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testRtrim
@@ -515,6 +565,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/** Test for {@link SqlFunctions#ltrim}. */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testLtrim
@@ -592,6 +644,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/** Test for {@link SqlFunctions#trim}. */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testTrim
@@ -668,6 +722,8 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testUnixDateToString
@@ -819,6 +875,8 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testYmdToUnixDate
@@ -897,6 +955,8 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testDateToString
@@ -929,6 +989,8 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testTimeToString
@@ -957,6 +1019,8 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testTimestampToString
@@ -989,6 +1053,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/** Unit test for    * {@link Utilities#compare(java.util.List, java.util.List)}. */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCompare
@@ -1176,6 +1242,8 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testTruncateLong
@@ -1302,6 +1370,8 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testTruncateInt

@@ -15,16 +15,6 @@ end_package
 
 begin_import
 import|import
-name|junit
-operator|.
-name|framework
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
 name|org
 operator|.
 name|eigenbase
@@ -61,32 +51,46 @@ name|*
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|Test
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|*
+import|;
+end_import
+
 begin_comment
-comment|/**  * Unit test for {@link RelOptUtil} and other classes in this package.  *  * @author jhyde  */
+comment|/**  * Unit test for {@link RelOptUtil} and other classes in this package.  */
 end_comment
 
 begin_class
 specifier|public
 class|class
 name|RelOptUtilTest
-extends|extends
-name|TestCase
 block|{
 comment|//~ Constructors -----------------------------------------------------------
 specifier|public
 name|RelOptUtilTest
-parameter_list|(
-name|String
-name|name
-parameter_list|)
+parameter_list|()
 block|{
-name|super
-argument_list|(
-name|name
-argument_list|)
-expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testTypeDump
@@ -241,6 +245,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/**      * Tests the rules for how we name rules.      */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testRuleGuessDescription

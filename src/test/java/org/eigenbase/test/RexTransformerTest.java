@@ -15,30 +15,6 @@ end_package
 
 begin_import
 import|import
-name|junit
-operator|.
-name|framework
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|optiq
-operator|.
-name|jdbc
-operator|.
-name|JavaTypeFactoryImpl
-import|;
-end_import
-
-begin_import
-import|import
 name|org
 operator|.
 name|eigenbase
@@ -89,16 +65,60 @@ name|*
 import|;
 end_import
 
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|optiq
+operator|.
+name|jdbc
+operator|.
+name|JavaTypeFactoryImpl
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|Before
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|Test
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|*
+import|;
+end_import
+
 begin_comment
-comment|/**  * Tests transformations on rex nodes.  *  * @author wael  * @since Mar 9, 2004  */
+comment|/**  * Tests transformations on rex nodes.  */
 end_comment
 
 begin_class
 specifier|public
 class|class
 name|RexTransformerTest
-extends|extends
-name|TestCase
 block|{
 comment|//~ Instance fields --------------------------------------------------------
 name|RexBuilder
@@ -128,12 +148,12 @@ name|RelDataTypeFactory
 name|typeFactory
 decl_stmt|;
 comment|//~ Methods ----------------------------------------------------------------
-specifier|protected
+annotation|@
+name|Before
+specifier|public
 name|void
 name|setUp
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 name|typeFactory
 operator|=
@@ -286,7 +306,7 @@ expr_stmt|;
 block|}
 else|else
 block|{
-comment|//if (encapsulateType.equals(Boolean.FALSE))
+comment|// encapsulateType.equals(Boolean.FALSE)
 name|root
 operator|=
 name|rexBuilder
@@ -359,12 +379,14 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testPreTests
 parameter_list|()
 block|{
-comment|//can make variable nullable?
+comment|// can make variable nullable?
 name|RexNode
 name|node
 init|=
@@ -401,7 +423,7 @@ name|isNullable
 argument_list|()
 argument_list|)
 expr_stmt|;
-comment|//can make variable not nullable?
+comment|// can make variable not nullable?
 name|node
 operator|=
 operator|new
@@ -438,6 +460,8 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testNonBooleans
@@ -500,6 +524,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/**      * the or operator should pass through unchanged since e.g. x OR y should      * return true if x=null and y=true if it was transformed into something      * like (x ISNOTNULL) AND (y ISNOTNULL) AND (x OR y) an incorrect result      * could be produced      */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testOrUnchanged
@@ -561,6 +587,8 @@ name|expected
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testSimpleAnd
@@ -594,6 +622,8 @@ literal|"AND(AND(IS NOT NULL($0), IS NOT NULL($1)), AND($0, $1))"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testSimpleEquals
@@ -627,6 +657,8 @@ literal|"AND(AND(IS NOT NULL($0), IS NOT NULL($1)), =($0, $1))"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testSimpleNotEquals
@@ -660,6 +692,8 @@ literal|"AND(AND(IS NOT NULL($0), IS NOT NULL($1)),<>($0, $1))"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testSimpleGreaterThan
@@ -693,6 +727,8 @@ literal|"AND(AND(IS NOT NULL($0), IS NOT NULL($1)),>($0, $1))"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testSimpleGreaterEquals
@@ -726,6 +762,8 @@ literal|"AND(AND(IS NOT NULL($0), IS NOT NULL($1)),>=($0, $1))"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testSimpleLessThan
@@ -759,6 +797,8 @@ literal|"AND(AND(IS NOT NULL($0), IS NOT NULL($1)),<($0, $1))"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testSimpleLessEqual
@@ -792,6 +832,8 @@ literal|"AND(AND(IS NOT NULL($0), IS NOT NULL($1)),<=($0, $1))"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testOptimizeNonNullLiterals
@@ -851,6 +893,8 @@ literal|"AND(IS NOT NULL($0),<=(true, $0))"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testSimpleIdentifier
@@ -880,12 +924,14 @@ literal|"=(IS TRUE($0), true)"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testMixed1
 parameter_list|()
 block|{
-comment|//x=true AND y
+comment|// x=true AND y
 name|RexNode
 name|op1
 init|=
@@ -930,12 +976,14 @@ literal|"AND(IS NOT NULL($1), AND(AND(IS NOT NULL($0), =($0, true)), $1))"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testMixed2
 parameter_list|()
 block|{
-comment|//x!=true AND y>z
+comment|// x!=true AND y>z
 name|RexNode
 name|op1
 init|=
@@ -996,12 +1044,14 @@ literal|"AND(AND(IS NOT NULL($0),<>($0, true)), AND(AND(IS NOT NULL($1), IS NOT 
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testMixed3
 parameter_list|()
 block|{
-comment|//x=y AND false>z
+comment|// x=y AND false>z
 name|RexNode
 name|op1
 init|=

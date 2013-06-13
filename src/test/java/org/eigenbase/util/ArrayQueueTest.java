@@ -25,40 +25,44 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
 name|junit
 operator|.
-name|framework
+name|Test
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
 operator|.
 name|*
 import|;
 end_import
 
 begin_comment
-comment|/**  * Unit test for {@link ArrayQueue}.  *  * @author Stephan Zuercher  * @since Sep 16, 2004  */
+comment|/**  * Unit test for {@link ArrayQueue}.  */
 end_comment
 
 begin_class
 specifier|public
 class|class
 name|ArrayQueueTest
-extends|extends
-name|TestCase
 block|{
 comment|//~ Constructors -----------------------------------------------------------
 specifier|public
 name|ArrayQueueTest
-parameter_list|(
-name|String
-name|name
-parameter_list|)
+parameter_list|()
 block|{
-name|super
-argument_list|(
-name|name
-argument_list|)
-expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testOfferPoll
@@ -174,6 +178,8 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testRepeatedOfferPoll
@@ -325,6 +331,8 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testEmptyAndClear
@@ -445,6 +453,8 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testAddAddAllRemove
@@ -667,6 +677,8 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testExceptions
@@ -821,6 +833,8 @@ parameter_list|)
 block|{
 block|}
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testPeek
@@ -966,6 +980,8 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testIterator
@@ -1157,6 +1173,8 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testConstructors
@@ -1214,6 +1232,8 @@ block|{
 comment|// ok
 block|}
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testEquals
@@ -1355,6 +1375,8 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testToString
@@ -1405,6 +1427,8 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testToArray
@@ -1536,6 +1560,8 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testOfferNull

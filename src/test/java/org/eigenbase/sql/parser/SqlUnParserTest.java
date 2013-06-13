@@ -16,7 +16,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * Extension to {@link SqlParserTest} which ensures that every expression can  * un-parse successfully.  *  * @author jhyde  * @since Oct 12, 2005  */
+comment|/**  * Extension to {@link SqlParserTest} which ensures that every expression can  * un-parse successfully.  */
 end_comment
 
 begin_class
@@ -29,16 +29,8 @@ block|{
 comment|//~ Constructors -----------------------------------------------------------
 specifier|public
 name|SqlUnParserTest
-parameter_list|(
-name|String
-name|name
-parameter_list|)
+parameter_list|()
 block|{
-name|super
-argument_list|(
-name|name
-argument_list|)
-expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
 specifier|protected

@@ -35,16 +35,6 @@ end_import
 
 begin_import
 import|import
-name|junit
-operator|.
-name|framework
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
 name|org
 operator|.
 name|eigenbase
@@ -55,19 +45,65 @@ name|*
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|Test
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|runner
+operator|.
+name|RunWith
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|runners
+operator|.
+name|JUnit4
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|*
+import|;
+end_import
+
 begin_comment
-comment|/**  * Unit test for JDBC connect string parser, {@link ConnectStringParser}. The  * ConnectStringParser is adapted from code in Mondrian, but most of the tests  * below were unfortunately "reinvented" prior to having the Mondrian unit tests  * in hand.  *  * @author Steve Herskovitz  * @since Apr 3, 2006  */
+comment|/**  * Unit test for JDBC connect string parser, {@link ConnectStringParser}. The  * ConnectStringParser is adapted from code in Mondrian, but most of the tests  * below were unfortunately "reinvented" prior to having the Mondrian unit tests  * in hand.  */
 end_comment
 
 begin_class
 specifier|public
 class|class
 name|ConnectStringParserTest
-extends|extends
-name|TestCase
 block|{
 comment|//~ Methods ----------------------------------------------------------------
 comment|/**      * tests simple connect string, adapted from Mondrian tests.      */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testSimpleStrings
@@ -193,6 +229,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/**      * tests complex connect strings, adapted directly from Mondrian tests.      */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testComplexStrings
@@ -459,6 +497,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/**      * tests for specific errors thrown by the parser.      */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testConnectStringErrors
@@ -527,6 +567,8 @@ expr_stmt|;
 block|}
 block|}
 comment|/**      * Tests most of the examples from the<a      * href="http://msdn.microsoft.com/library/default.asp?url=/library/en-us/oledb/htm/oledbconnectionstringsyntax.asp">      * OLE DB spec</a>. Omitted are cases for Window handles, returning multiple      * values, and special handling of "Provider" keyword.      *      * @throws Throwable      */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testOleDbExamples

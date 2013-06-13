@@ -27,16 +27,6 @@ end_import
 
 begin_import
 import|import
-name|junit
-operator|.
-name|framework
-operator|.
-name|TestCase
-import|;
-end_import
-
-begin_import
-import|import
 name|org
 operator|.
 name|eigenbase
@@ -49,17 +39,39 @@ name|*
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|Test
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|*
+import|;
+end_import
+
 begin_comment
-comment|/**  * Tests types supported by SqlTypeName.java.  */
+comment|/**  * Tests types supported by {@link SqlTypeName}.  */
 end_comment
 
 begin_class
 specifier|public
 class|class
 name|SqlTypeNameTest
-extends|extends
-name|TestCase
 block|{
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testBit
@@ -89,6 +101,8 @@ name|tn
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testTinyint
@@ -118,6 +132,8 @@ name|tn
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testSmallint
@@ -147,6 +163,8 @@ name|tn
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testInteger
@@ -176,6 +194,8 @@ name|tn
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testBigint
@@ -205,6 +225,8 @@ name|tn
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testFloat
@@ -234,6 +256,8 @@ name|tn
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testReal
@@ -263,6 +287,8 @@ name|tn
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testDouble
@@ -292,6 +318,8 @@ name|tn
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testNumeric
@@ -321,6 +349,8 @@ name|tn
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testDecimal
@@ -350,6 +380,8 @@ name|tn
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testChar
@@ -379,6 +411,8 @@ name|tn
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testVarchar
@@ -408,6 +442,8 @@ name|tn
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testLongvarchar
@@ -435,6 +471,8 @@ name|tn
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testDate
@@ -464,6 +502,8 @@ name|tn
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testTime
@@ -493,6 +533,8 @@ name|tn
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testTimestamp
@@ -522,6 +564,8 @@ name|tn
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testBinary
@@ -551,6 +595,8 @@ name|tn
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testVarbinary
@@ -580,6 +626,8 @@ name|tn
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testLongvarbinary
@@ -607,6 +655,8 @@ name|tn
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testNull
@@ -634,6 +684,8 @@ name|tn
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testOther
@@ -661,6 +713,8 @@ name|tn
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testJavaobject
@@ -688,6 +742,8 @@ name|tn
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testDistinct
@@ -717,6 +773,8 @@ name|tn
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testStruct
@@ -746,6 +804,8 @@ name|tn
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testArray
@@ -773,6 +833,8 @@ name|tn
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testBlob
@@ -800,6 +862,8 @@ name|tn
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testClob
@@ -827,6 +891,8 @@ name|tn
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testRef
@@ -854,6 +920,8 @@ name|tn
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testDatalink
@@ -881,6 +949,8 @@ name|tn
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testBoolean
@@ -910,6 +980,8 @@ name|tn
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testRowid
@@ -927,7 +999,7 @@ operator|.
 name|ROWID
 argument_list|)
 decl_stmt|;
-comment|//ROWID not supported yet
+comment|// ROWID not supported yet
 name|assertEquals
 argument_list|(
 literal|"ROWID maps to non-null type"
@@ -938,6 +1010,8 @@ name|tn
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testNchar
@@ -955,7 +1029,7 @@ operator|.
 name|NCHAR
 argument_list|)
 decl_stmt|;
-comment|//NCHAR not supported yet, currently maps to CHAR
+comment|// NCHAR not supported yet, currently maps to CHAR
 name|assertEquals
 argument_list|(
 literal|"NCHAR did not map to CHAR"
@@ -968,6 +1042,8 @@ name|tn
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testNvarchar
@@ -985,7 +1061,7 @@ operator|.
 name|NVARCHAR
 argument_list|)
 decl_stmt|;
-comment|//NVARCHAR not supported yet, currently maps to VARCHAR
+comment|// NVARCHAR not supported yet, currently maps to VARCHAR
 name|assertEquals
 argument_list|(
 literal|"NVARCHAR did not map to VARCHAR"
@@ -998,6 +1074,8 @@ name|tn
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testLongnvarchar
@@ -1015,7 +1093,7 @@ operator|.
 name|LONGNVARCHAR
 argument_list|)
 decl_stmt|;
-comment|//LONGNVARCHAR not supported yet
+comment|// LONGNVARCHAR not supported yet
 name|assertEquals
 argument_list|(
 literal|"LONGNVARCHAR maps to non-null type"
@@ -1026,6 +1104,8 @@ name|tn
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testNclob
@@ -1043,7 +1123,7 @@ operator|.
 name|NCLOB
 argument_list|)
 decl_stmt|;
-comment|//NCLOB not supported yet
+comment|// NCLOB not supported yet
 name|assertEquals
 argument_list|(
 literal|"NCLOB maps to non-null type"
@@ -1054,6 +1134,8 @@ name|tn
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testSqlxml
@@ -1071,7 +1153,7 @@ operator|.
 name|SQLXML
 argument_list|)
 decl_stmt|;
-comment|//SQLXML not supported yet
+comment|// SQLXML not supported yet
 name|assertEquals
 argument_list|(
 literal|"SQLXML maps to non-null type"

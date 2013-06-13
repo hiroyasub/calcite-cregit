@@ -76,7 +76,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Mock operator table for testing purposes. Contains the standard SQL operator  * table, plus a list of operators.  *  * @author jhyde  */
+comment|/**  * Mock operator table for testing purposes. Contains the standard SQL operator  * table, plus a list of operators.  */
 end_comment
 
 begin_class

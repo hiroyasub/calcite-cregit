@@ -25,16 +25,6 @@ end_import
 
 begin_import
 import|import
-name|junit
-operator|.
-name|framework
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
 name|org
 operator|.
 name|eigenbase
@@ -97,16 +87,46 @@ name|*
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|Before
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|Test
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|*
+import|;
+end_import
+
 begin_comment
-comment|/**  * SargTest tests the {@link org.eigenbase.sarg} class library.  *  *<p>NOTE jvs 17-Jan-2006: This class lives in org.eigenbase.test rather than  * org.eigenbase.sarg by design: we want to make sure we're only testing via the  * public interface.  *  * @author John V. Sichi  */
+comment|/**  * Tests for the {@link org.eigenbase.sarg} class library.  *  *<p>NOTE: This class lives in org.eigenbase.test rather than  * org.eigenbase.sarg by design: we want to make sure we're only testing via the  * public interface.  */
 end_comment
 
 begin_class
 specifier|public
 class|class
 name|SargTest
-extends|extends
-name|TestCase
 block|{
 comment|//~ Enums ------------------------------------------------------------------
 enum|enum
@@ -171,24 +191,15 @@ index|[]
 name|exprs
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Initializes a new SargTest.      *      * @param testCaseName JUnit test case name      */
+comment|/**      * Creates a SargTest.      */
 specifier|public
 name|SargTest
-parameter_list|(
-name|String
-name|testCaseName
-parameter_list|)
-throws|throws
-name|Exception
+parameter_list|()
 block|{
-name|super
-argument_list|(
-name|testCaseName
-argument_list|)
-expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|// implement TestCase
+annotation|@
+name|Before
 specifier|public
 name|void
 name|setUp
@@ -310,6 +321,8 @@ name|rexBuilder
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testDefaultEndpoint
@@ -336,6 +349,8 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testInfiniteEndpoint
@@ -387,6 +402,8 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testFiniteEndpoint
@@ -605,6 +622,8 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testNullEndpoint
@@ -649,6 +668,8 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testTouchingEndpoint
@@ -854,6 +875,8 @@ literal|0
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testDefaultIntervalExpr
@@ -880,6 +903,8 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testPointExpr
@@ -950,6 +975,8 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testRangeIntervalExpr
@@ -1204,6 +1231,8 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testNullExpr
@@ -1272,6 +1301,8 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testEmptyExpr
@@ -1332,6 +1363,8 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testUnconstrainedExpr
@@ -1405,6 +1438,8 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testSetExpr
@@ -1602,6 +1637,8 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testComplement
@@ -2023,6 +2060,8 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testUnion
@@ -2441,6 +2480,8 @@ literal|"UNION( ['ARIES', 'GEMINI') ('GEMINI', +infinity) )"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testIntersection
@@ -2962,6 +3003,8 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testRexAnalyzer

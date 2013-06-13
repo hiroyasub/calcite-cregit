@@ -26,7 +26,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * MockRelOptCost is a mock implementation of the {@link RelOptCost} interface.  * TODO: constructors for various scenarios  *  * @author John V. Sichi  */
+comment|/**  * MockRelOptCost is a mock implementation of the {@link RelOptCost} interface.  * TODO: constructors for various scenarios  */
 end_comment
 
 begin_class

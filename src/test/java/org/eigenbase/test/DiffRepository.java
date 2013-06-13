@@ -47,16 +47,6 @@ end_import
 
 begin_import
 import|import
-name|junit
-operator|.
-name|framework
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
 name|org
 operator|.
 name|eigenbase
@@ -76,6 +66,40 @@ operator|.
 name|xom
 operator|.
 name|*
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|*
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|runner
+operator|.
+name|RunWith
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|runners
+operator|.
+name|JUnit4
 import|;
 end_import
 
@@ -103,8 +127,20 @@ name|*
 import|;
 end_import
 
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|*
+import|;
+end_import
+
 begin_comment
-comment|/**  * A collection of resources used by tests.  *  *<p>Loads files containing test input and output into memory. If there are  * differences, writes out a log file containing the actual output.  *  *<p>Typical usage is as follows:  *  *<ol>  *<li>A testcase class defines a method  *  *<blockquote><code>  *<pre>  *  * package com.acme.test;  *  * public class MyTest extends TestCase {  *     public DiffRepository getDiffRepos() {  *         return DiffRepository.lookup(MyTest.class);  *     }  *  *     public void testToUpper() {  *          getDiffRepos().assertEquals("${result}", "${string}");  *     }   *     public void testToLower() {  *          getDiffRepos().assertEquals("Multi-line\nstring", "${string}");  *     }  * }</pre>  *</code></blockquote>  *  * There is an accompanying reference file named after the class,<code>  * com/acme/test/MyTest.ref.xml</code>:  *  *<blockquote><code>  *<pre>  *&lt;Root&gt;  *&lt;TestCase name="testToUpper"&gt;  *&lt;Resource name="string"&gt;  *&lt;![CDATA[String to be converted to upper case]]&gt;  *&lt;/Resource&gt;  *&lt;Resource name="result"&gt;  *&lt;![CDATA[STRING TO BE CONVERTED TO UPPER CASE]]&gt;  *&lt;/Resource&gt;  *&lt;/TestCase&gt;  *&lt;TestCase name="testToLower"&gt;  *&lt;Resource name="result"&gt;  *&lt;![CDATA[multi-line  * string]]&gt;  *&lt;/Resource&gt;  *&lt;/TestCase&gt;  *&lt;/Root&gt;  *</pre>  *</code></blockquote>  *  *<p>If any of the testcases fails, a log file is generated, called<code>  * com/acme/test/MyTest.log.xml</code> containing the actual output. The log  * file is otherwise identical to the reference log, so once the log file has  * been verified, it can simply be copied over to become the new reference  * log.</p>  *  *<p>If a resource or testcase does not exist,<code>DiffRepository</code>  * creates them in the log file. Because DiffRepository is so forgiving, it is  * very easy to create new tests and testcases.</p>  *  *<p>The {@link #lookup} method ensures that all test cases share the same  * instance of the repository. This is important more than one one test case  * fails. The shared instance ensures that the generated<code>.log.xml</code>  * file contains the actual for<em>both</em> test cases.  *  * @author jhyde  */
+comment|/**  * A collection of resources used by tests.  *  *<p>Loads files containing test input and output into memory. If there are  * differences, writes out a log file containing the actual output.  *  *<p>Typical usage is as follows:  *  *<ol>  *<li>A testcase class defines a method  *  *<blockquote><code>  *<pre>  *  * package com.acme.test;  *  * public class MyTest extends TestCase {  *     public DiffRepository getDiffRepos() {  *         return DiffRepository.lookup(MyTest.class);  *     }  *  *     @Test public void testToUpper() {  *          getDiffRepos().assertEquals("${result}", "${string}");  *     }   *     @Test public void testToLower() {  *          getDiffRepos().assertEquals("Multi-line\nstring", "${string}");  *     }  * }</pre>  *</code></blockquote>  *  * There is an accompanying reference file named after the class,<code>  * com/acme/test/MyTest.ref.xml</code>:  *  *<blockquote><code>  *<pre>  *&lt;Root&gt;  *&lt;TestCase name="testToUpper"&gt;  *&lt;Resource name="string"&gt;  *&lt;![CDATA[String to be converted to upper case]]&gt;  *&lt;/Resource&gt;  *&lt;Resource name="result"&gt;  *&lt;![CDATA[STRING TO BE CONVERTED TO UPPER CASE]]&gt;  *&lt;/Resource&gt;  *&lt;/TestCase&gt;  *&lt;TestCase name="testToLower"&gt;  *&lt;Resource name="result"&gt;  *&lt;![CDATA[multi-line  * string]]&gt;  *&lt;/Resource&gt;  *&lt;/TestCase&gt;  *&lt;/Root&gt;  *</pre>  *</code></blockquote>  *  *<p>If any of the testcases fails, a log file is generated, called<code>  * com/acme/test/MyTest.log.xml</code> containing the actual output. The log  * file is otherwise identical to the reference log, so once the log file has  * been verified, it can simply be copied over to become the new reference  * log.</p>  *  *<p>If a resource or testcase does not exist,<code>DiffRepository</code>  * creates them in the log file. Because DiffRepository is so forgiving, it is  * very easy to create new tests and testcases.</p>  *  *<p>The {@link #lookup} method ensures that all test cases share the same  * instance of the repository. This is important more than one one test case  * fails. The shared instance ensures that the generated<code>.log.xml</code>  * file contains the actual for<em>both</em> test cases.  */
 end_comment
 
 begin_class
@@ -1542,7 +1578,7 @@ argument_list|)
 expr_stmt|;
 throw|throw
 operator|new
-name|AssertionFailedError
+name|AssertionError
 argument_list|(
 literal|"reference file does not contain resource '"
 operator|+
@@ -1665,7 +1701,7 @@ name|length
 operator|==
 name|count
 assert|;
-name|AssertionFailedError
+name|AssertionError
 name|e0
 init|=
 literal|null
@@ -1759,11 +1795,11 @@ argument_list|,
 name|actual
 argument_list|)
 expr_stmt|;
-name|AssertionFailedError
+name|AssertionError
 name|e
 init|=
 operator|new
-name|AssertionFailedError
+name|AssertionError
 argument_list|(
 literal|"reference file does not contain resource '"
 operator|+

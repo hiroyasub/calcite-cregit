@@ -53,8 +53,42 @@ name|*
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|Test
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|runner
+operator|.
+name|RunWith
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|runners
+operator|.
+name|JUnit4
+import|;
+end_import
+
 begin_comment
-comment|/**  * HepPlannerTest is a unit test for {@link HepPlanner}. See {@link  * RelOptRulesTest} for an explanation of how to add tests; the tests in this  * class are targeted at exercising the planner, and use specific rules for  * convenience only, whereas the tests in that class are targeted at exercising  * specific rules, and use the planner for convenience only. Hence the split.  *  * @author John V. Sichi  */
+comment|/**  * HepPlannerTest is a unit test for {@link HepPlanner}. See {@link  * RelOptRulesTest} for an explanation of how to add tests; the tests in this  * class are targeted at exercising the planner, and use specific rules for  * convenience only, whereas the tests in that class are targeted at exercising  * specific rules, and use the planner for convenience only. Hence the split.  */
 end_comment
 
 begin_class
@@ -92,6 +126,8 @@ name|class
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testRuleClass
@@ -168,6 +204,8 @@ literal|" intersect (select fname from customer.contact)"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testRuleDescription
@@ -219,6 +257,8 @@ literal|"select name from sales.dept where deptno=12"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testMatchLimitOneTopDown
@@ -270,6 +310,8 @@ name|unionTree
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testMatchLimitOneBottomUp
@@ -321,6 +363,8 @@ name|unionTree
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testMatchUntilFixpoint
@@ -365,6 +409,8 @@ name|unionTree
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testReplaceCommonSubexpression
@@ -390,6 +436,8 @@ literal|" (select * from dept) d2"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testSubprogram
@@ -470,6 +518,8 @@ literal|"select upper(ename) from (select lower(ename) as ename from emp)"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testGroup

@@ -108,7 +108,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Utility to generate a SQL script from validator test.  *  * @author jhyde  * @since Nov 10, 2004  */
+comment|/**  * Utility to generate a SQL script from validator test.  */
 end_comment
 
 begin_class
@@ -190,29 +190,12 @@ argument_list|)
 decl_stmt|;
 for|for
 control|(
-name|int
-name|i
-init|=
-literal|0
-init|;
-name|i
-operator|<
-name|methods
-operator|.
-name|length
-condition|;
-name|i
-operator|++
-control|)
-block|{
 name|Method
 name|method
-init|=
+range|:
 name|methods
-index|[
-name|i
-index|]
-decl_stmt|;
+control|)
+block|{
 specifier|final
 name|SqlValidatorSpooler
 name|test
@@ -220,11 +203,6 @@ init|=
 operator|new
 name|SqlValidatorSpooler
 argument_list|(
-name|method
-operator|.
-name|getName
-argument_list|()
-argument_list|,
 name|pw
 argument_list|)
 decl_stmt|;
@@ -237,12 +215,6 @@ operator|.
 name|invoke
 argument_list|(
 name|test
-argument_list|,
-operator|new
-name|Object
-index|[
-literal|0
-index|]
 argument_list|)
 decl_stmt|;
 assert|assert
@@ -485,7 +457,7 @@ argument_list|)
 return|;
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------
-comment|/**      * Subversive subclass, which spools restuls to a writer rather than running      * tests. It is not a valid JUnit test because it does not have a public      * constructor.      */
+comment|/**      * Subversive subclass, which spools results to a writer rather than running      * tests.      */
 specifier|private
 specifier|static
 class|class
@@ -501,18 +473,10 @@ decl_stmt|;
 specifier|private
 name|SqlValidatorSpooler
 parameter_list|(
-name|String
-name|testName
-parameter_list|,
 name|PrintWriter
 name|pw
 parameter_list|)
 block|{
-name|super
-argument_list|(
-name|testName
-argument_list|)
-expr_stmt|;
 name|this
 operator|.
 name|pw
@@ -574,9 +538,7 @@ operator|.
 name|println
 argument_list|(
 literal|"-- "
-operator|+
-name|getName
-argument_list|()
+comment|/* + getName() */
 argument_list|)
 expr_stmt|;
 name|pw

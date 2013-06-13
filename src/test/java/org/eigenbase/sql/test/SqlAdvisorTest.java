@@ -143,8 +143,40 @@ name|*
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|Test
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|*
+import|;
+end_import
+
 begin_comment
-comment|/**  * Concrete child class of {@link SqlValidatorTestCase}, containing unit tests  * for SqlAdvisor.  *  * @author Tim Leung  * @since Jan 16, 2005  */
+comment|/**  * Concrete child class of {@link SqlValidatorTestCase}, containing unit tests  * for SqlAdvisor.  */
 end_comment
 
 begin_class
@@ -319,6 +351,8 @@ argument_list|,
 literal|"Keyword(?)"
 argument_list|,
 literal|"Keyword(ABS)"
+argument_list|,
+literal|"Keyword(ARRAY)"
 argument_list|,
 literal|"Keyword(AVG)"
 argument_list|,
@@ -505,6 +539,8 @@ argument_list|,
 literal|"Keyword(ASC)"
 argument_list|,
 literal|"Keyword(DESC)"
+argument_list|,
+literal|"Keyword(NULLS)"
 argument_list|)
 decl_stmt|;
 specifier|private
@@ -616,6 +652,8 @@ literal|"Keyword(SIMILAR)"
 argument_list|,
 literal|"Keyword(SUBMULTISET)"
 argument_list|,
+literal|"Keyword([)"
+argument_list|,
 literal|"Keyword(||)"
 argument_list|)
 decl_stmt|;
@@ -719,6 +757,28 @@ argument_list|,
 literal|"Keyword(WHERE)"
 argument_list|)
 decl_stmt|;
+specifier|private
+specifier|static
+specifier|final
+name|List
+argument_list|<
+name|String
+argument_list|>
+name|SETOPS
+init|=
+name|Arrays
+operator|.
+name|asList
+argument_list|(
+literal|"Keyword(EXCEPT)"
+argument_list|,
+literal|"Keyword(INTERSECT)"
+argument_list|,
+literal|"Keyword(ORDER)"
+argument_list|,
+literal|"Keyword(UNION)"
+argument_list|)
+decl_stmt|;
 comment|//~ Instance fields --------------------------------------------------------
 specifier|public
 specifier|final
@@ -739,14 +799,11 @@ decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 specifier|public
 name|SqlAdvisorTest
-parameter_list|(
-name|String
-name|name
-parameter_list|)
+parameter_list|()
 block|{
 name|super
 argument_list|(
-name|name
+literal|null
 argument_list|)
 expr_stmt|;
 block|}
@@ -872,6 +929,8 @@ name|NL
 argument_list|)
 expr_stmt|;
 block|}
+name|Assert
+operator|.
 name|assertEquals
 argument_list|(
 name|expected
@@ -1000,6 +1059,8 @@ operator|.
 name|pos
 argument_list|)
 decl_stmt|;
+name|Assert
+operator|.
 name|assertEquals
 argument_list|(
 name|expectedResults
@@ -1077,6 +1138,8 @@ operator|.
 name|cursor
 argument_list|)
 decl_stmt|;
+name|Assert
+operator|.
 name|assertEquals
 argument_list|(
 name|expected
@@ -1232,6 +1295,8 @@ argument_list|(
 name|results
 argument_list|)
 expr_stmt|;
+name|Assert
+operator|.
 name|assertEquals
 argument_list|(
 name|expectedResults
@@ -1249,6 +1314,8 @@ operator|!=
 literal|null
 condition|)
 block|{
+name|Assert
+operator|.
 name|assertEquals
 argument_list|(
 name|expectedWord
@@ -1568,6 +1635,8 @@ return|return
 name|result
 return|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testFrom
@@ -1666,6 +1735,8 @@ argument_list|)
 expr_stmt|;
 comment|// join
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testFromComplete
@@ -1685,6 +1756,8 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testGroup
@@ -1710,6 +1783,8 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testJoin
@@ -1820,6 +1895,8 @@ argument_list|)
 expr_stmt|;
 comment|// join
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testJoinKeywords
@@ -1855,6 +1932,8 @@ name|list
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testOnCondition
@@ -1940,6 +2019,8 @@ argument_list|)
 expr_stmt|;
 comment|// on right
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testFromWhere
@@ -2030,6 +2111,8 @@ name|EXPR_KEYWORDS
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testWhereList
@@ -2117,6 +2200,8 @@ name|WHERE_KEYWORDS
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testSelectList
@@ -2143,6 +2228,8 @@ argument_list|,
 name|EXPR_KEYWORDS
 argument_list|,
 name|AB_TABLES
+argument_list|,
+name|SETOPS
 argument_list|)
 expr_stmt|;
 name|sql
@@ -2157,6 +2244,8 @@ name|getSelectKeywords
 argument_list|()
 argument_list|,
 name|EXPR_KEYWORDS
+argument_list|,
+name|SETOPS
 argument_list|,
 name|Arrays
 operator|.
@@ -2181,6 +2270,8 @@ argument_list|()
 argument_list|,
 name|EXPR_KEYWORDS
 argument_list|,
+name|SETOPS
+argument_list|,
 name|Arrays
 operator|.
 name|asList
@@ -2203,6 +2294,8 @@ name|getSelectKeywords
 argument_list|()
 argument_list|,
 name|EXPR_KEYWORDS
+argument_list|,
+name|SETOPS
 argument_list|,
 name|AB_TABLES
 argument_list|)
@@ -2266,6 +2359,8 @@ name|EXPR_KEYWORDS
 argument_list|,
 name|EMP_COLUMNS
 argument_list|,
+name|SETOPS
+argument_list|,
 name|Arrays
 operator|.
 name|asList
@@ -2288,6 +2383,8 @@ name|STAR_KEYWORD
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testOrderByList
@@ -2389,6 +2486,8 @@ name|ORDER_KEYWORDS
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testSubQuery
@@ -2445,6 +2544,8 @@ argument_list|,
 name|xyColumns
 argument_list|,
 name|tTable
+argument_list|,
+name|SETOPS
 argument_list|)
 expr_stmt|;
 name|sql
@@ -2558,6 +2659,8 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testSubQueryInWhere
@@ -2604,6 +2707,8 @@ name|EXPR_KEYWORDS
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testSimpleParserTokenizer
@@ -2790,6 +2895,8 @@ literal|"ID(123)\n"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testSimpleParser
@@ -3252,6 +3359,8 @@ name|expected
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testSimpleParserQuotedId
@@ -3312,6 +3421,8 @@ name|expected
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testPartialIdentifier
@@ -3472,6 +3583,8 @@ name|STAR_KEYWORD
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testInsert
@@ -3498,6 +3611,8 @@ argument_list|,
 name|A_TABLE
 argument_list|,
 name|DEPT_COLUMNS
+argument_list|,
+name|SETOPS
 argument_list|)
 expr_stmt|;
 name|sql
@@ -3528,6 +3643,8 @@ literal|null
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testUnion

@@ -25,38 +25,42 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
 name|junit
 operator|.
-name|framework
+name|Test
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
 operator|.
-name|TestCase
+name|junit
+operator|.
+name|Assert
+operator|.
+name|*
 import|;
 end_import
 
 begin_comment
-comment|/**  * Unit test for {@link Graph}.  *  * @author jhyde  */
+comment|/**  * Unit test for {@link Graph}.  */
 end_comment
 
 begin_class
 specifier|public
 class|class
 name|GraphTest
-extends|extends
-name|TestCase
 block|{
 specifier|public
 name|GraphTest
-parameter_list|(
-name|String
-name|name
-parameter_list|)
+parameter_list|()
 block|{
-name|super
-argument_list|(
-name|name
-argument_list|)
-expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|test

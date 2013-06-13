@@ -129,8 +129,18 @@ name|*
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|Test
+import|;
+end_import
+
 begin_comment
-comment|/**  * SqlValidatorFeatureTest verifies that features can be independently enabled  * or disabled.  *  * @author John V. Sichi  */
+comment|/**  * SqlValidatorFeatureTest verifies that features can be independently enabled  * or disabled.  */
 end_comment
 
 begin_class
@@ -157,14 +167,11 @@ decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 specifier|public
 name|SqlValidatorFeatureTest
-parameter_list|(
-name|String
-name|name
-parameter_list|)
+parameter_list|()
 block|{
 name|super
 argument_list|(
-name|name
+literal|null
 argument_list|)
 expr_stmt|;
 block|}
@@ -185,6 +192,8 @@ name|conformance
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testDistinct
@@ -203,6 +212,8 @@ name|SQLFeature_E051_01
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testOrderByDesc
@@ -223,6 +234,8 @@ expr_stmt|;
 block|}
 comment|// NOTE jvs 6-Mar-2006:  carets don't come out properly placed
 comment|// for INTERSECT/EXCEPT, so don't bother
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testIntersect
@@ -241,6 +254,8 @@ name|SQLFeature_F302
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testExcept
@@ -259,6 +274,8 @@ name|SQLFeature_E071_03
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testMultiset
@@ -289,6 +306,8 @@ name|SQLFeature_S271
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testTablesample

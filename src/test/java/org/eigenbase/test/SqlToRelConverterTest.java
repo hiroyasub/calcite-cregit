@@ -71,8 +71,18 @@ name|*
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|Test
+import|;
+end_import
+
 begin_comment
-comment|/**  * Unit test for {@link org.eigenbase.sql2rel.SqlToRelConverter}.  *  * @author jhyde  */
+comment|/**  * Unit test for {@link org.eigenbase.sql2rel.SqlToRelConverter}.  */
 end_comment
 
 begin_class
@@ -89,19 +99,6 @@ parameter_list|()
 block|{
 name|super
 argument_list|()
-expr_stmt|;
-block|}
-specifier|public
-name|SqlToRelConverterTest
-parameter_list|(
-name|String
-name|name
-parameter_list|)
-block|{
-name|super
-argument_list|(
-name|name
-argument_list|)
 expr_stmt|;
 block|}
 specifier|protected
@@ -142,6 +139,8 @@ name|plan
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testIntegerLiteral
@@ -155,6 +154,8 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testAliasList
@@ -174,6 +175,8 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testAliasList2
@@ -193,6 +196,8 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testJoinOn
@@ -206,6 +211,8 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testJoinOnIn
@@ -221,6 +228,8 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testJoinUsing
@@ -234,6 +243,8 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testJoinUsingCompound
@@ -251,6 +262,8 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testJoinNatural
@@ -264,6 +277,8 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testJoinNaturalNoCommonColumn
@@ -277,6 +292,8 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testJoinNaturalMultipleCommonColumn
@@ -290,6 +307,8 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testJoinWithUnion
@@ -307,6 +326,8 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testGroup
@@ -320,6 +341,8 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testGroupJustOneAgg
@@ -334,6 +357,8 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testGroupExpressionsInsideAndOut
@@ -349,6 +374,8 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testHaving
@@ -363,6 +390,8 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testGroupBug281
@@ -379,6 +408,8 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testGroupBug281b
@@ -399,6 +430,8 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testAggDistinct
@@ -416,6 +449,8 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testSelectDistinct
@@ -429,6 +464,8 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testSelectDistinctGroup
@@ -443,6 +480,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/**      * Tests that if the clause of SELECT DISTINCT contains duplicate      * expressions, they are only aggregated once.      */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testSelectDistinctDup
@@ -456,6 +495,8 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testOrder
@@ -469,6 +510,8 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testOrderDescNullsLast
@@ -482,6 +525,8 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testOrderByOrdinalDesc
@@ -519,6 +564,8 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testOrderDistinct
@@ -534,6 +581,8 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testOrderByNegativeOrdinal
@@ -549,6 +598,8 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testOrderByOrdinalInExpr
@@ -564,6 +615,8 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testOrderByIdenticalExpr
@@ -579,6 +632,8 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testOrderByAlias
@@ -592,6 +647,8 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testOrderByAliasInExpr
@@ -605,6 +662,8 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testOrderByAliasOverrides
@@ -633,6 +692,8 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testOrderByAliasDoesNotOverride
@@ -660,6 +721,8 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testOrderBySameExpr
@@ -673,6 +736,8 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testOrderUnion
@@ -692,6 +757,8 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testOrderUnionOrdinal
@@ -725,6 +792,8 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testOrderUnionExprs
@@ -744,6 +813,8 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testOrderGroup
@@ -763,6 +834,8 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCountNoGroup
@@ -780,6 +853,8 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testExplicitTable
@@ -793,6 +868,8 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCollectionTable
@@ -806,6 +883,8 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testSample
@@ -819,6 +898,8 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testSampleQuery
@@ -840,6 +921,8 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testSampleBernoulli
@@ -853,6 +936,8 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testSampleBernoulliQuery
@@ -874,6 +959,8 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testSampleSystem
@@ -887,6 +974,8 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testSampleSystemQuery
@@ -908,6 +997,8 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCollectionTableWithCursorParam
@@ -925,6 +1016,8 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testUnnest
@@ -938,6 +1031,8 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testUnnestSubquery
@@ -951,6 +1046,8 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testMultisetSubquery
@@ -964,6 +1061,8 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testMultiset
@@ -977,6 +1076,8 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testMultisetOfColumns
@@ -990,6 +1091,8 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCorrelationJoin
@@ -1009,6 +1112,8 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testExists
@@ -1022,6 +1127,8 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testExistsCorrelated
@@ -1035,6 +1142,8 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testInValueListShort
@@ -1048,6 +1157,8 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testInValueListLong
@@ -1068,6 +1179,8 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testInUncorrelatedSubquery
@@ -1083,6 +1196,8 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testUnnestSelect
@@ -1096,6 +1211,8 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testLateral
@@ -1109,6 +1226,8 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testElement
@@ -1122,6 +1241,8 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testElementInValues
@@ -1135,6 +1256,8 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testUnionAll
@@ -1149,6 +1272,8 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testUnion
@@ -1163,6 +1288,8 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testUnionValues
@@ -1183,6 +1310,8 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testUnionSubquery
@@ -1203,6 +1332,8 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testIsDistinctFrom
@@ -1216,6 +1347,8 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testIsNotDistinctFrom
@@ -1229,6 +1362,8 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testNotLike
@@ -1243,6 +1378,8 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testOverMultiple
@@ -1271,6 +1408,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/**      * Test one of the custom conversions which is recognized by the class of      * the operator (in this case, {@link      * org.eigenbase.sql.fun.SqlCaseOperator}).      */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCase
@@ -1285,6 +1424,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/**      * Tests one of the custom conversions which is recognized by the identity      * of the operator (in this case, {@link      * org.eigenbase.sql.fun.SqlStdOperatorTable#characterLengthFunc}).      */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCharLength
@@ -1299,6 +1440,8 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testOverAvg
@@ -1321,6 +1464,8 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testOverAvg2
@@ -1343,6 +1488,8 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testOverCountStar
@@ -1363,6 +1510,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/**      * Tests that a window containing only ORDER BY is implicitly CURRENT ROW.      */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testOverOrderWindow
@@ -1391,6 +1540,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/**      * Tests that a window with a FOLLOWING bound becomes BETWEEN CURRENT ROW      * AND FOLLOWING.      */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testOverOrderFollowingWindow
@@ -1419,12 +1570,14 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testInterval
 parameter_list|()
-comment|// temporarily disabled per DTbug 1212
 block|{
+comment|// temporarily disabled per DTbug 1212
 if|if
 condition|(
 name|Bug
@@ -1441,6 +1594,8 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testExplainAsXml

@@ -65,8 +65,20 @@ name|*
 import|;
 end_import
 
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|*
+import|;
+end_import
+
 begin_comment
-comment|/**  * RelOptTestBase is an abstract base for tests which exercise a planner and/or  * rules via {@link DiffRepository}.  *  * @author John V. Sichi  */
+comment|/**  * RelOptTestBase is an abstract base for tests which exercise a planner and/or  * rules via {@link DiffRepository}.  */
 end_comment
 
 begin_class

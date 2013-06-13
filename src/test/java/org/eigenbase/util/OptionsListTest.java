@@ -25,24 +25,44 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
 name|junit
 operator|.
-name|framework
+name|Ignore
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|Test
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
 operator|.
 name|*
 import|;
 end_import
 
 begin_comment
-comment|/**  * Unit test for {@link OptionsList}.  *  * @author Julian Hyde  * @since Sep 4, 2003  */
+comment|/**  * Unit test for {@link OptionsList}.  */
 end_comment
 
 begin_class
 specifier|public
 class|class
 name|OptionsListTest
-extends|extends
-name|TestCase
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
 specifier|private
@@ -59,14 +79,16 @@ literal|"line.separator"
 argument_list|)
 decl_stmt|;
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Test
 specifier|public
 name|void
-name|_testBooleanArg
+name|testBooleanArg
 parameter_list|()
 block|{
 name|checkIt
 argument_list|(
-literal|"flag=true"
+literal|"flag=true\n"
 argument_list|,
 operator|new
 name|OptionsList
@@ -90,8 +112,6 @@ argument_list|,
 literal|false
 argument_list|,
 literal|false
-argument_list|,
-literal|null
 argument_list|)
 block|}
 argument_list|,
@@ -104,14 +124,16 @@ block|}
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
-name|_testBooleanArgMissing
+name|testBooleanArgMissing
 parameter_list|()
 block|{
 name|checkIt
 argument_list|(
-literal|""
+literal|"flag=false (default)\n"
 argument_list|,
 operator|new
 name|OptionsList
@@ -135,8 +157,6 @@ argument_list|,
 literal|false
 argument_list|,
 literal|false
-argument_list|,
-literal|null
 argument_list|)
 block|}
 argument_list|,
@@ -147,9 +167,13 @@ block|{}
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Ignore
+annotation|@
+name|Test
 specifier|public
 name|void
-name|_testUnknownArg
+name|testUnknownArg
 parameter_list|()
 block|{
 name|checkIt
@@ -178,8 +202,6 @@ argument_list|,
 literal|false
 argument_list|,
 literal|false
-argument_list|,
-literal|null
 argument_list|)
 block|}
 argument_list|,
@@ -192,9 +214,13 @@ block|}
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Ignore
+annotation|@
+name|Test
 specifier|public
 name|void
-name|_testUnknownArgWithEqualsSyntax
+name|testUnknownArgWithEqualsSyntax
 parameter_list|()
 block|{
 name|checkIt
@@ -223,8 +249,6 @@ argument_list|,
 literal|false
 argument_list|,
 literal|false
-argument_list|,
-literal|null
 argument_list|)
 block|}
 argument_list|,
@@ -237,9 +261,13 @@ block|}
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Ignore
+annotation|@
+name|Test
 specifier|public
 name|void
-name|_testStringArgSameAsDefault
+name|testStringArgSameAsDefault
 parameter_list|()
 block|{
 name|checkIt
@@ -268,8 +296,6 @@ argument_list|,
 literal|false
 argument_list|,
 literal|"default"
-argument_list|,
-literal|null
 argument_list|)
 block|}
 argument_list|,
@@ -282,9 +308,13 @@ block|}
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Ignore
+annotation|@
+name|Test
 specifier|public
 name|void
-name|_testStringArgUsesDefaultValue
+name|testStringArgUsesDefaultValue
 parameter_list|()
 block|{
 name|checkIt
@@ -313,8 +343,6 @@ argument_list|,
 literal|false
 argument_list|,
 literal|"default"
-argument_list|,
-literal|null
 argument_list|)
 block|}
 argument_list|,
@@ -327,9 +355,13 @@ block|}
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Ignore
+annotation|@
+name|Test
 specifier|public
 name|void
-name|_testEnumeratedArgShort
+name|testEnumeratedArgShort
 parameter_list|()
 block|{
 name|checkIt
@@ -367,8 +399,6 @@ name|RED
 operator|.
 name|getEnumeratedType
 argument_list|()
-argument_list|,
-literal|null
 argument_list|)
 block|}
 argument_list|,
@@ -381,9 +411,13 @@ block|}
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Ignore
+annotation|@
+name|Test
 specifier|public
 name|void
-name|_testEnumeratedArgLong
+name|testEnumeratedArgLong
 parameter_list|()
 block|{
 name|checkIt
@@ -421,8 +455,6 @@ name|RED
 operator|.
 name|getEnumeratedType
 argument_list|()
-argument_list|,
-literal|null
 argument_list|)
 block|}
 argument_list|,
@@ -435,9 +467,13 @@ block|}
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Ignore
+annotation|@
+name|Test
 specifier|public
 name|void
-name|_testEnumeratedArgWrong
+name|testEnumeratedArgWrong
 parameter_list|()
 block|{
 name|checkIt
@@ -475,8 +511,6 @@ name|RED
 operator|.
 name|getEnumeratedType
 argument_list|()
-argument_list|,
-literal|null
 argument_list|)
 block|}
 argument_list|,
@@ -489,9 +523,13 @@ block|}
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Ignore
+annotation|@
+name|Test
 specifier|public
 name|void
-name|_testEnumeratedArgDefault
+name|testEnumeratedArgDefault
 parameter_list|()
 block|{
 name|checkIt
@@ -529,8 +567,6 @@ name|RED
 operator|.
 name|getEnumeratedType
 argument_list|()
-argument_list|,
-literal|null
 argument_list|)
 block|,
 operator|new
@@ -549,8 +585,6 @@ argument_list|,
 literal|false
 argument_list|,
 literal|null
-argument_list|,
-literal|null
 argument_list|)
 block|}
 argument_list|,
@@ -563,9 +597,13 @@ block|}
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Ignore
+annotation|@
+name|Test
 specifier|public
 name|void
-name|_testMissingMandatory
+name|testMissingMandatory
 parameter_list|()
 block|{
 name|checkIt
@@ -594,8 +632,6 @@ argument_list|,
 literal|false
 argument_list|,
 literal|null
-argument_list|,
-literal|null
 argument_list|)
 block|}
 argument_list|,
@@ -606,9 +642,13 @@ block|{}
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Ignore
+annotation|@
+name|Test
 specifier|public
 name|void
-name|_testGroupOptionsMustBeOptional
+name|testGroupOptionsMustBeOptional
 parameter_list|()
 block|{
 specifier|final
@@ -633,8 +673,6 @@ argument_list|,
 literal|false
 argument_list|,
 literal|null
-argument_list|,
-literal|null
 argument_list|)
 decl_stmt|;
 specifier|final
@@ -657,8 +695,6 @@ argument_list|,
 literal|true
 argument_list|,
 literal|false
-argument_list|,
-literal|null
 argument_list|,
 literal|null
 argument_list|)
@@ -729,9 +765,13 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|Ignore
+annotation|@
+name|Test
 specifier|public
 name|void
-name|_testGroupMissing
+name|testGroupMissing
 parameter_list|()
 block|{
 specifier|final
@@ -764,8 +804,6 @@ argument_list|,
 literal|false
 argument_list|,
 literal|null
-argument_list|,
-literal|null
 argument_list|)
 decl_stmt|;
 specifier|final
@@ -790,8 +828,6 @@ argument_list|,
 literal|false
 argument_list|,
 literal|null
-argument_list|,
-literal|null
 argument_list|)
 decl_stmt|;
 specifier|final
@@ -814,8 +850,6 @@ argument_list|,
 literal|false
 argument_list|,
 literal|false
-argument_list|,
-literal|null
 argument_list|,
 literal|null
 argument_list|)
@@ -886,9 +920,13 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Ignore
+annotation|@
+name|Test
 specifier|public
 name|void
-name|_testAnonymousOption
+name|testAnonymousOption
 parameter_list|()
 block|{
 name|checkIt
@@ -921,8 +959,6 @@ argument_list|,
 literal|false
 argument_list|,
 literal|false
-argument_list|,
-literal|null
 argument_list|)
 block|,
 operator|new
@@ -941,8 +977,6 @@ argument_list|,
 literal|true
 argument_list|,
 literal|"foo.txt"
-argument_list|,
-literal|null
 argument_list|)
 block|}
 argument_list|,
@@ -957,9 +991,13 @@ block|}
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Ignore
+annotation|@
+name|Test
 specifier|public
 name|void
-name|_testRepeatingOption
+name|testRepeatingOption
 parameter_list|()
 block|{
 name|checkIt
@@ -996,8 +1034,6 @@ argument_list|,
 literal|false
 argument_list|,
 literal|false
-argument_list|,
-literal|null
 argument_list|)
 block|,
 operator|new
@@ -1016,8 +1052,6 @@ argument_list|,
 literal|true
 argument_list|,
 literal|"foo.txt"
-argument_list|,
-literal|null
 argument_list|)
 block|}
 argument_list|,
@@ -1037,14 +1071,6 @@ literal|"bar.txt"
 block|}
 argument_list|)
 expr_stmt|;
-block|}
-specifier|public
-name|void
-name|testAlwaysSucceeds
-parameter_list|()
-block|{
-comment|// TODO enable the other tests, and remove this test -- it only exists
-comment|//   to stop junit complaining that there are no tests!
 block|}
 comment|// -------------------------------------------------------------------------
 comment|// Utility methods and classes
@@ -1125,25 +1151,15 @@ argument_list|()
 decl_stmt|;
 for|for
 control|(
-name|int
-name|i
-init|=
-literal|0
-init|;
-name|i
-operator|<
-name|options
+name|OptionsList
 operator|.
-name|length
-condition|;
-name|i
-operator|++
+name|Option
+name|option
+range|:
+name|options
 control|)
 block|{
-name|options
-index|[
-name|i
-index|]
+name|option
 operator|.
 name|setHandler
 argument_list|(
@@ -1154,10 +1170,7 @@ name|optionsList
 operator|.
 name|add
 argument_list|(
-name|options
-index|[
-name|i
-index|]
+name|option
 argument_list|)
 expr_stmt|;
 block|}

@@ -27,16 +27,6 @@ end_import
 
 begin_import
 import|import
-name|junit
-operator|.
-name|framework
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
 name|org
 operator|.
 name|eigenbase
@@ -99,16 +89,36 @@ name|*
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|Test
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|*
+import|;
+end_import
+
 begin_comment
-comment|/**  * A<code>SqlParserTest</code> is a unit-test for {@link SqlParser the SQL  * parser}.  *  * @author jhyde  * @since Mar 19, 2003  */
+comment|/**  * A<code>SqlParserTest</code> is a unit-test for {@link SqlParser the SQL  * parser}.  */
 end_comment
 
 begin_class
 specifier|public
 class|class
 name|SqlParserTest
-extends|extends
-name|TestCase
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
 specifier|private
@@ -122,16 +132,8 @@ decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 specifier|public
 name|SqlParserTest
-parameter_list|(
-name|String
-name|name
-parameter_list|)
+parameter_list|()
 block|{
-name|super
-argument_list|(
-name|name
-argument_list|)
-expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
 comment|// Helper functions -------------------------------------------------------
@@ -310,6 +312,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/**      * Tests that when there is an error, non-reserved keywords such as "A",      * "ABSOLUTE" (which naturally arise whenever a production uses      * "&lt;IDENTIFIER&gt;") are removed, but reserved words such as "AND"      * remain.      */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testExceptionCleanup
@@ -337,6 +341,8 @@ literal|".*"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testInvalidToken
@@ -432,6 +438,8 @@ literal|"foo"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testColumnAliasWithAs
@@ -447,6 +455,8 @@ literal|"FROM `EMP`"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testColumnAliasWithoutAs
@@ -462,6 +472,8 @@ literal|"FROM `EMP`"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testEmbeddedDate
@@ -475,6 +487,8 @@ literal|"DATE '1998-10-22'"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testEmbeddedTime
@@ -488,6 +502,8 @@ literal|"TIME '16:22:34'"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testEmbeddedTimestamp
@@ -501,6 +517,8 @@ literal|"TIMESTAMP '1998-10-22 16:22:34'"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testNot
@@ -516,6 +534,8 @@ literal|"FROM `T`"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testBooleanPrecedenceAndAssociativity
@@ -566,6 +586,8 @@ literal|"WHERE (1 AND TRUE)"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testIsBooleans
@@ -629,6 +651,8 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testIsBooleanPrecedenceAndAssociativity
@@ -682,6 +706,8 @@ literal|"WHERE ((((`X` IS UNKNOWN) IS FALSE) AND ((`X` IS UNKNOWN) IS TRUE)) OR 
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testEqualNotEqual
@@ -716,6 +742,8 @@ literal|"(('abc'<> 123) = ('def'<> 456))"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testBangEqualIsBad
@@ -736,6 +764,8 @@ literal|"Lexical error at line 1, column 6\\.  Encountered: \"!\" \\(33\\), afte
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testBetween
@@ -871,6 +901,8 @@ literal|"(VALUES (ROW((`A` BETWEEN ASYMMETRIC ((`B` OR (`C` AND `D`)) OR `E`) AN
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testOperateOnColumn
@@ -886,6 +918,8 @@ literal|"FROM `T`"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testRow
@@ -929,6 +963,8 @@ literal|"FROM `SALES`.`DEPTS`) AS `T`"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testOverlaps
@@ -977,6 +1013,8 @@ literal|"(?s).*Illegal overlaps expression.*"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testIsDistinctFrom
@@ -1036,6 +1074,8 @@ literal|"WHERE ((TRUE IS DISTINCT FROM TRUE) IS TRUE)"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testIsNotDistinct
@@ -1062,6 +1102,8 @@ literal|"WHERE (TRUE IS NOT DISTINCT FROM TRUE)"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCast
@@ -1215,12 +1257,16 @@ literal|"CAST('foo' AS `BAR`)"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCastFails
 parameter_list|()
 block|{
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testLikeAndSimilar
@@ -1414,12 +1460,16 @@ literal|"WHERE (`A` LIKE `B` ESCAPE `C`)) ESCAPE `D`))))"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testFoo
 parameter_list|()
 block|{
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testArthimeticOperators
@@ -1468,6 +1518,8 @@ literal|"LOG10((- -0.2))"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testExists
@@ -1489,6 +1541,8 @@ literal|"WHERE (`EMP`.`DEPTNO` = `DEPT`.`DEPTNO`)))"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testExistsInWhere
@@ -1508,6 +1562,8 @@ literal|"FROM `DEPT`))) AND (3 = 4))"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testFromWithAs
@@ -1525,6 +1581,8 @@ literal|"WHERE 1"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testConcat
@@ -1538,6 +1596,8 @@ literal|"('a' || 'b')"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testReverseSolidus
@@ -1551,6 +1611,8 @@ literal|"'\\'"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testSubstring
@@ -1599,6 +1661,8 @@ literal|"SUBSTRING('a' FROM 1)"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testFunction
@@ -1621,6 +1685,8 @@ literal|"(LOG10(1) + (POWER(2, ((MOD(3, LN(4)) * LOG10(5)) - (6 * LOG10(((7 / AB
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testFunctionWithDistinct
@@ -1657,6 +1723,8 @@ literal|"FROM `EMP`"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testFunctionInFunction
@@ -1670,6 +1738,8 @@ literal|"LN(POWER(2, 2))"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testGroup
@@ -1687,6 +1757,8 @@ literal|"GROUP BY `DEPTNO`, `GENDER`"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testGroupEmpty
@@ -1745,6 +1817,8 @@ literal|"GROUP BY (`EMPNO` + `DEPTNO`)"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testHavingAfterGroup
@@ -1766,6 +1840,8 @@ literal|"ORDER BY 5, 2"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testHavingBeforeGroupFails
@@ -1779,6 +1855,8 @@ literal|"(?s).*Encountered \"group\" at .*"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testHavingNoGroup
@@ -1796,6 +1874,8 @@ literal|"HAVING (COUNT(*)> 5)"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testIdentifier
@@ -1823,6 +1903,8 @@ literal|"`x``y``z`"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testInList
@@ -1840,6 +1922,8 @@ literal|"WHERE ((`DEPTNO` IN (10, 20)) AND (`GENDER` = 'F'))"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testInListEmptyFails
@@ -1853,6 +1937,8 @@ literal|"(?s).*Encountered \"\\)\" at line 1, column 36\\..*"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testInQuery
@@ -1873,6 +1959,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/** Tricky for the parser - looks like "IN (scalar, scalar)" but isn't. */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testInQueryWithComma
@@ -1894,6 +1982,8 @@ literal|"GROUP BY 1, 2))"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testInSetop
@@ -1927,6 +2017,8 @@ literal|"FROM `DEPT`)) AND FALSE)"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testUnion
@@ -1978,6 +2070,8 @@ literal|"FROM `A`)"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testUnionOrder
@@ -2007,6 +2101,8 @@ literal|"ORDER BY 1, 2 DESC"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testUnionOfNonQueryFails
@@ -2021,6 +2117,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/**      * In modern SQL, a query can occur almost everywhere that an expression      * can. This test tests the few exceptions.      */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testQueryInIllegalContext
@@ -2041,6 +2139,8 @@ literal|"Query expression encountered in illegal context"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testExcept
@@ -2092,6 +2192,8 @@ literal|"FROM `A`)"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testIntersect
@@ -2143,6 +2245,8 @@ literal|"FROM `A`)"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testJoinCross
@@ -2160,6 +2264,8 @@ literal|"CROSS JOIN `B`"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testJoinOn
@@ -2179,6 +2285,8 @@ literal|"WHERE (3 = 3)"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testJoinOnParentheses
@@ -2213,6 +2321,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/** Same as {@link #testJoinOnParentheses()} but fancy aliases. */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testJoinOnParenthesesPlus
@@ -2248,6 +2358,8 @@ literal|"WHERE (3 = 3)"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testExplicitTableInJoin
@@ -2267,6 +2379,8 @@ literal|"WHERE (3 = 3)"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testSubqueryInJoin
@@ -2304,6 +2418,8 @@ literal|"WHERE (4 = 4)"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testOuterJoinNoiseWord
@@ -2323,6 +2439,8 @@ literal|"WHERE (3 = 3)"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testJoinQuery
@@ -2342,6 +2460,8 @@ literal|"FROM `B`) AS `B2` ON TRUE"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testFullInnerJoinFails
@@ -2356,6 +2476,8 @@ literal|"(?s).*Encountered \"full inner\" at line 1, column 17.*"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testFullOuterJoin
@@ -2374,6 +2496,8 @@ literal|"FULL JOIN `B`"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testInnerOuterJoinFails
@@ -2427,6 +2551,8 @@ block|}
 comment|// Note: "select * from a natural cross join b" is actually illegal SQL
 comment|// ("cross" is the only join type which cannot be modified with the
 comment|// "natural") but the parser allows it; we and catch it at validate time
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testNaturalCrossJoin
@@ -2444,6 +2570,8 @@ literal|"NATURAL CROSS JOIN `B`"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testJoinUsing
@@ -2468,6 +2596,8 @@ literal|"(?s).*Encountered \"[)]\" at line 1, column 31.*"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testTableSample
@@ -2527,6 +2657,8 @@ literal|"FROM `EMP` AS `X` TABLESAMPLE BERNOULLI(50.0)"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testLiteral
@@ -2603,6 +2735,8 @@ literal|"NULL"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testContinuedLiteral
@@ -2652,6 +2786,8 @@ literal|"Binary literal string must contain only characters '0' - '9', 'A' - 'F'
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testMixedFrom
@@ -2674,6 +2810,8 @@ literal|"INNER JOIN `D` USING (`Y`)"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testMixedStar
@@ -2691,6 +2829,8 @@ literal|"`DEPT`"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testNotExists
@@ -2710,6 +2850,8 @@ literal|"FROM `EMP`)))) AND TRUE)"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testOrder
@@ -2727,6 +2869,8 @@ literal|"ORDER BY `EMPNO`, `GENDER` DESC, `DEPTNO`, `EMPNO`, `NAME` DESC"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testOrderNullsFirst
@@ -2744,6 +2888,8 @@ literal|"ORDER BY `GENDER` DESC NULLS LAST, `DEPTNO` NULLS FIRST, `EMPNO` NULLS 
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testOrderInternal
@@ -2782,6 +2928,8 @@ literal|"WHERE (`A` = `B`)"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testOrderIllegalInExpression
@@ -2810,6 +2958,8 @@ literal|"ORDER BY unexpected"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testSqlInlineComment
@@ -2847,6 +2997,8 @@ literal|"WHERE (`A`> `B`)"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testMultilineComment
@@ -3042,6 +3194,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|// expressions
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testParseNumber
@@ -3256,6 +3410,8 @@ literal|"(1 + ((-2 * -3E-1) / -4))"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testParseNumberFails
@@ -3269,6 +3425,8 @@ literal|"(?s).*Encountered .*\\.1.* at line 1.*"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testMinusPrefixInExpression
@@ -3283,6 +3441,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|// operator precedence
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testPrecedence0
@@ -3296,6 +3456,8 @@ literal|"((1 + ((2 * 3) * 4)) + 5)"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testPrecedence1
@@ -3309,6 +3471,8 @@ literal|"(1 + (2 * (3 * (4 + 5))))"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testPrecedence2
@@ -3323,6 +3487,8 @@ argument_list|)
 expr_stmt|;
 comment|// two prefices
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testPrecedence3
@@ -3337,6 +3503,8 @@ argument_list|)
 expr_stmt|;
 comment|// prefix vs. postfix
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testPrecedence4
@@ -3351,6 +3519,8 @@ argument_list|)
 expr_stmt|;
 comment|// infix, prefix '-'
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testPrecedence5
@@ -3373,6 +3543,8 @@ argument_list|)
 expr_stmt|;
 comment|// infix, prefix '+'
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testPrecedenceSetOps
@@ -3436,6 +3608,8 @@ literal|"FROM `G`)"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testQueryInFrom
@@ -3458,6 +3632,8 @@ literal|"FROM `DEPT`) AS `D`"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testQuotesInString
@@ -3492,6 +3668,8 @@ literal|"'Quoted strings aren''t \"hard\"'"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testScalarQueryInWhere
@@ -3513,6 +3691,8 @@ literal|"WHERE (`DEPT`.`DEPTNO` = `EMP`.`DEPTNO`)))"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testScalarQueryInSelect
@@ -3532,6 +3712,8 @@ literal|"FROM `EMP`"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testSelectList
@@ -3549,6 +3731,8 @@ literal|"`DEPT`"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testSelectList3
@@ -3564,6 +3748,8 @@ literal|"FROM `EMP`"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testSelectList4
@@ -3577,6 +3763,8 @@ literal|"(?s).*Encountered \"from\" at line .*"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testStar
@@ -3592,6 +3780,8 @@ literal|"FROM `EMP`"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testSelectDistinct
@@ -3607,6 +3797,8 @@ literal|"FROM `BAR`"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testSelectAll
@@ -3625,6 +3817,8 @@ literal|"FROM `BAR`) AS `XYZ`"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testWhere
@@ -3642,6 +3836,8 @@ literal|"WHERE ((`EMPNO`> 5) AND (`GENDER` = 'F'))"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testNestedSelect
@@ -3659,6 +3855,8 @@ literal|"FROM `EMP`)"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testValues
@@ -3672,6 +3870,8 @@ literal|"(VALUES (ROW(1, 'two')))"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testValuesExplicitRow
@@ -3685,6 +3885,8 @@ literal|"(VALUES (ROW(1, 'two')))"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testFromValues
@@ -3700,6 +3902,8 @@ literal|"FROM (VALUES (ROW(1, 'two')), (ROW(3)), (ROW(4, 'five')))"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testFromValuesWithoutParens
@@ -3731,6 +3935,8 @@ literal|"    "
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testEmptyValues
@@ -3744,6 +3950,8 @@ literal|"(?s).*Encountered \"\\( \\)\" at .*"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testExplicitTable
@@ -3765,6 +3973,8 @@ literal|"(?s)Encountered \"table 123\" at line 1, column 1\\.\n.*"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testExplicitTableOrdered
@@ -3780,6 +3990,8 @@ literal|"ORDER BY `NAME`"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testSelectFromExplicitTable
@@ -3795,6 +4007,8 @@ literal|"FROM (TABLE `EMP`)"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testSelectFromBareExplicitTableFails
@@ -3816,6 +4030,8 @@ literal|"(?s)Encountered \"table \\(\".*"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCollectionTable
@@ -3831,6 +4047,8 @@ literal|"FROM TABLE(`RAMP`(3, 4))"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCollectionTableWithCursorParam
@@ -3848,6 +4066,8 @@ literal|"FROM `EMPS`))), 'name'))"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCollectionTableWithColumnListParam
@@ -3867,6 +4087,8 @@ literal|"FROM `EMPS`))), (ROW(`EMPNO`, `NAME`))))"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testIllegalCursors
@@ -3894,6 +4116,8 @@ literal|"CURSOR expression encountered in illegal context"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testExplain
@@ -3911,6 +4135,8 @@ literal|"FROM `EMPS`"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testExplainWithImpl
@@ -3928,6 +4154,8 @@ literal|"FROM `EMPS`"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testExplainWithoutImpl
@@ -3945,6 +4173,8 @@ literal|"FROM `EMPS`"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testExplainWithType
@@ -3960,6 +4190,8 @@ literal|"(VALUES (ROW(TRUE)))"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testInsertSelect
@@ -3977,6 +4209,8 @@ literal|"FROM `EMPS`)"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testInsertUnion
@@ -4000,6 +4234,8 @@ literal|"FROM `EMPS2`)"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testInsertValues
@@ -4015,6 +4251,8 @@ literal|"(VALUES (ROW(1, 'Fredkin')))"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testInsertColumnList
@@ -4032,6 +4270,8 @@ literal|"FROM `EMPS`)"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testExplainInsert
@@ -4051,6 +4291,8 @@ literal|"FROM `EMPS2`)"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testDelete
@@ -4064,6 +4306,8 @@ literal|"DELETE FROM `EMPS`"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testDeleteWhere
@@ -4079,6 +4323,8 @@ literal|"WHERE (`EMPNO` = 12)"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testMergeSelectSource
@@ -4122,6 +4368,8 @@ literal|"(VALUES (ROW(`T`.`NAME`, 10, (`T`.`SALARY` * 0.15))))"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testMergeTableRefSource
@@ -4161,6 +4409,8 @@ literal|"(VALUES (ROW(`T`.`NAME`, 10, (`T`.`SALARY` * 0.15))))"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testBitStringNotImplemented
@@ -4175,6 +4425,8 @@ literal|"(?s).*Encountered \"\\\\'1011\\\\'\" at line 1, column 9.*"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testHexAndBinaryString
@@ -4232,6 +4484,8 @@ literal|"(X'001' = X'000102')"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testHexAndBinaryStringFails
@@ -4271,6 +4525,8 @@ literal|"FROM `T`"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testStringLiteral
@@ -4362,6 +4618,8 @@ literal|"'foo\r\nbar'"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testStringLiteralFails
@@ -4399,6 +4657,8 @@ literal|"FROM `T`"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testStringLiteralChain
@@ -4467,6 +4727,8 @@ name|fooBar
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCaseExpression
@@ -4534,6 +4796,8 @@ literal|"FROM `EMP`) END)"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCaseExpressionFails
@@ -4556,6 +4820,8 @@ literal|"(?s).*when1.*"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testNullIf
@@ -4576,6 +4842,8 @@ literal|"(?s)Encountered \"\\+ nullif \\+\" at line 1, column 3.*"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCoalesce
@@ -4603,6 +4871,8 @@ literal|"COALESCE(`V1`, `V2`, `V3`)"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testLiteralCollate
@@ -4668,6 +4938,8 @@ literal|"('str1' COLLATE ISO-8859-1$sv_SE$primary<= 'str2' COLLATE ISO-8859-1$sv
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCharLength
@@ -4688,6 +4960,8 @@ literal|"CHARACTER_LENGTH('string')"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testPosition
@@ -4702,6 +4976,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|// check date/time functions.
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testTimeDate
@@ -4914,6 +5190,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/**      * Tests for casting to/from date/time types.      */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testDateTimeCast
@@ -4957,6 +5235,8 @@ literal|"CAST(DATE '2004-12-21' AS VARCHAR(10))"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testTrim
@@ -5023,6 +5303,8 @@ literal|"(?s).*'FROM' without operands preceding it is illegal.*"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testConvertAndTranslate
@@ -5043,6 +5325,8 @@ literal|"TRANSLATE('abc' USING `LAZY_TRANSLATION`)"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testOverlay
@@ -5063,6 +5347,8 @@ literal|"OVERLAY('ABCdef' PLACING 'abc' FROM 1 FOR 3)"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testJdbcFunctionCall
@@ -5104,6 +5390,8 @@ literal|"{fn INSERT() }"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testWindowReference
@@ -5125,6 +5413,8 @@ literal|"(?s)Encountered \"w1\" at.*"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testWindowInSubquery
@@ -5144,6 +5434,8 @@ literal|"WINDOW `W` AS (RANGE INTERVAL '1' MINUTE PRECEDING))"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testWindowSpec
@@ -5241,6 +5533,8 @@ literal|"(?s).*Encountered \"order\".*"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testWindowSpecPartial
@@ -5285,6 +5579,8 @@ literal|"FROM `BIDS`"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testAs
@@ -5372,6 +5668,8 @@ literal|"(?s).*Encountered \"over\".*"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testAsAliases
@@ -5432,6 +5730,8 @@ literal|"    \",\" \\.\\.\\..*"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testOver
@@ -5536,6 +5836,8 @@ literal|"(SUM(`SAL`) OVER (RANGE BETWEEN INTERVAL '1' SECOND FOLLOWING AND INTER
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testElementFunc
@@ -5549,6 +5851,8 @@ literal|"ELEMENT(`A`)"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCardinalityFunc
@@ -5562,6 +5866,8 @@ literal|"CARDINALITY(`A`)"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testMemberOf
@@ -5582,6 +5888,8 @@ literal|"(`A` MEMBER OF (MULTISET [`B`]))"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testSubMultisetrOf
@@ -5595,6 +5903,8 @@ literal|"(`A` SUBMULTISET OF `B`)"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testIsASet
@@ -5615,6 +5925,8 @@ literal|"(`A` IS A SET)"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testMultiset
@@ -5665,6 +5977,8 @@ literal|"FROM `T`)))"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testMultisetUnion
@@ -5692,6 +6006,8 @@ literal|"(`A` MULTISET UNION `B`)"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testMultisetExcept
@@ -5719,6 +6035,8 @@ literal|"(`A` MULTISET EXCEPT `B`)"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testMultisetIntersect
@@ -5746,6 +6064,8 @@ literal|"(`A` MULTISET INTERSECT `B`)"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testMultisetMixed
@@ -5766,6 +6086,8 @@ literal|"(((`A` MULTISET UNION (`B` MULTISET INTERSECT `C`)) MULTISET EXCEPT `D`
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testMapElement
@@ -5800,6 +6122,8 @@ literal|"`A` ['foo'] ['bar']"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testArrayElement
@@ -5827,6 +6151,8 @@ literal|"`A` [(`B` [(1 + 2)] + 3)]"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testArrayValueConstructor
@@ -5863,6 +6189,8 @@ literal|"(ARRAY [(ROW(1, 'a')), (ROW(2, 'b'))])"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testMapValueConstructor
@@ -9875,6 +10203,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/**      * Runs tests for each of the thirteen different main types of INTERVAL      * qualifiers (YEAR, YEAR TO MONTH, etc.) Tests in this section fall into      * two categories:      *      *<ul>      *<li>xxxPositive: tests that should pass parser and validator</li>      *<li>xxxFailsValidation: tests that should pass parser but fail validator      *</li>      *</ul>      *      * A substantially identical set of tests exists in SqlValidatorTest, and      * any changes here should be synchronized there.      */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testIntervalLiterals
@@ -9959,6 +10289,8 @@ name|subTestIntervalSecondFailsValidation
 argument_list|()
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testUnparseableIntervalQualifiers
@@ -11095,6 +11427,8 @@ name|ANY
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testMiscIntervalQualifier
@@ -11136,6 +11470,8 @@ literal|"INTERVAL '1:x:2' HOUR TO SECOND"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testIntervalOperators
@@ -11192,6 +11528,8 @@ argument_list|)
 expr_stmt|;
 comment|// ok in parser, not in validator
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testDateMinusDate
@@ -11233,6 +11571,8 @@ literal|"(?s).*Illegal expression. Was expecting ..DATETIME - DATETIME. INTERVAL
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testExtract
@@ -11288,6 +11628,8 @@ literal|"(?s)Encountered \"to\".*"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testIntervalArithmetics
@@ -11364,6 +11706,8 @@ literal|"(INTERVAL '1' HOUR / 8)"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testIntervalCompare
@@ -11412,6 +11756,8 @@ literal|"(INTERVAL '1' HOUR>= INTERVAL '1' SECOND)"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCastToInterval
@@ -11509,6 +11855,8 @@ literal|"CAST(`X` AS INTERVAL MINUTE TO SECOND)"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testUnnest
@@ -11541,6 +11889,8 @@ literal|"(?s)Encountered \"unnest\" at.*"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testParensInFrom
@@ -11602,6 +11952,8 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testProcedureCall
@@ -11629,6 +11981,8 @@ literal|"(CALL `WHALE`.`BLUBBER`(5))"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testNewSpecification
@@ -11663,6 +12017,8 @@ literal|"(1 + (NEW `UDT`()))"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testMultisetCast
@@ -11676,6 +12032,8 @@ literal|"CAST((MULTISET [1]) AS DOUBLE MULTISET)"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testAddCarets
@@ -11742,6 +12100,8 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testMetadata
@@ -12041,6 +12401,8 @@ literal|0
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testTabStop
@@ -12065,6 +12427,8 @@ literal|"(?s).*Encountered \"= =\" at line 1, column 32\\..*"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testLongIdentifiers
@@ -12214,6 +12578,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/**      * Tests that you can't quote the names of builtin functions.      *      * @see org.eigenbase.test.SqlValidatorTest#testQuotedFunction()      */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testQuotedFunction
@@ -12248,6 +12614,8 @@ literal|"(?s).*Encountered \"from\" at .*"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testUnicodeLiteral
@@ -12349,6 +12717,8 @@ name|out3
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testUnicodeEscapedLiteral
@@ -12404,6 +12774,8 @@ name|out
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testIllegalUnicodeEscape
@@ -12638,7 +13010,7 @@ argument_list|()
 decl_stmt|;
 throw|throw
 operator|new
-name|AssertionFailedError
+name|AssertionError
 argument_list|(
 name|message
 argument_list|)

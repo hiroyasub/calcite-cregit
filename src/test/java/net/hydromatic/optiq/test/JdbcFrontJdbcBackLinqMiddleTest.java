@@ -17,11 +17,11 @@ end_package
 
 begin_import
 import|import
+name|org
+operator|.
 name|junit
 operator|.
-name|framework
-operator|.
-name|TestCase
+name|Test
 import|;
 end_import
 
@@ -49,9 +49,9 @@ begin_class
 specifier|public
 class|class
 name|JdbcFrontJdbcBackLinqMiddleTest
-extends|extends
-name|TestCase
 block|{
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testTable
@@ -92,6 +92,8 @@ literal|"day=7; week_day=Saturday\n"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testWhere
@@ -122,6 +124,8 @@ literal|"day=2; week_day=Monday\n"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testWhere2
@@ -162,6 +166,8 @@ literal|"day=7; week_day=Saturday\n"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCase
@@ -214,6 +220,8 @@ literal|"day=7; week_day=Saturday; D=Saturday\n"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testGroup
@@ -258,6 +266,8 @@ literal|"S=M; C=1; MW=Monday"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testGroupEmpty
@@ -289,6 +299,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/** Tests that a theta join (a join whose condition cannot be decomposed    * into input0.x = input1.x and ... input0.z = input1.z) throws a reasonably    * civilized "cannot be implemented" exception. Of course, we'd like to be    * able to implement it one day. */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testJoinTheta
@@ -325,6 +337,8 @@ literal|" could not be implemented"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testJoinGroupByEmpty
@@ -361,6 +375,8 @@ literal|"EXPR$0=86837\n"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testJoinGroupByOrderBy
@@ -403,6 +419,8 @@ literal|"EXPR$0=40784; state_province=WA; S=124366.0000\n"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCompositeGroupBy
@@ -461,6 +479,8 @@ literal|"C=4222; state_province=CA\n"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testDistinctCount
@@ -638,6 +658,8 @@ literal|"          }\n"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testPlan3

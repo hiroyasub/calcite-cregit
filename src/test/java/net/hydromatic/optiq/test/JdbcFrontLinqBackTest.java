@@ -97,11 +97,35 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
 name|junit
 operator|.
-name|framework
+name|Test
+import|;
+end_import
+
+begin_import
+import|import
+name|org
 operator|.
-name|TestCase
+name|junit
+operator|.
+name|runner
+operator|.
+name|RunWith
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|runners
+operator|.
+name|JUnit4
 import|;
 end_import
 
@@ -161,6 +185,18 @@ name|assertThat
 import|;
 end_import
 
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|*
+import|;
+end_import
+
 begin_comment
 comment|/**  * Tests for a JDBC front-end (with some quite complex SQL) and Linq4j back-end  * (based on in-memory collections).  */
 end_comment
@@ -169,10 +205,10 @@ begin_class
 specifier|public
 class|class
 name|JdbcFrontLinqBackTest
-extends|extends
-name|TestCase
 block|{
 comment|/**    * Runs a simple query that reads from a table in an in-memory schema.    */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testSelect
@@ -197,6 +233,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/**    * Runs a simple query that joins between two in-memory schemas.    */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testJoin
@@ -225,6 +263,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/**    * Simple GROUP BY.    */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testGroupBy
@@ -251,6 +291,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/**    * Simple ORDER BY.    */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testOrderBy
@@ -279,6 +321,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/**    * Simple UNION, plus ORDER BY.    *    *<p>Also tests a query that returns a single column. We optimize this case    * internally, using non-array representations for rows.</p>    */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testUnionAllOrderBy
@@ -319,6 +363,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/**    * Tests UNION.    */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testUnion
@@ -355,6 +401,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/**    * Tests INTERSECT.    */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testIntersect
@@ -383,6 +431,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/**    * Tests EXCEPT.    */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testExcept
@@ -412,6 +462,8 @@ literal|"X=B\n"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testWhereBad
@@ -436,6 +488,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/** Test case for https://github.com/julianhyde/optiq/issues/9. */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testWhereOr
@@ -459,6 +513,8 @@ literal|"empid=100; deptno=10; name=Bill; commission=1000\n"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testWhereLike
@@ -490,6 +546,8 @@ literal|"cust_id=150; prod_id=20; empid=150; name=Sebastian\n"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testInsert
@@ -789,6 +847,8 @@ block|}
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testInsert2
@@ -886,6 +946,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/** Some of the rows have the wrong number of columns. */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testInsertMultipleRowMismatch

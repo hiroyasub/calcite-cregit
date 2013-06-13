@@ -89,8 +89,40 @@ name|*
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|Ignore
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|Test
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|*
+import|;
+end_import
+
 begin_comment
-comment|/**  * Concrete child class of {@link SqlValidatorTestCase}, containing lots of unit  * tests.  *  *<p>If you want to run these same tests in a different environment, create a  * derived class whose {@link #getTester} returns a different implementation of  * {@link org.eigenbase.test.SqlValidatorTestCase.Tester}.  *  * @author Wael Chatila  * @since Jan 14, 2004  */
+comment|/**  * Concrete child class of {@link SqlValidatorTestCase}, containing lots of unit  * tests.  *  *<p>If you want to run these same tests in a different environment, create a  * derived class whose {@link #getTester} returns a different implementation of  * {@link org.eigenbase.test.SqlValidatorTestCase.Tester}.  */
 end_comment
 
 begin_class
@@ -160,18 +192,17 @@ decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 specifier|public
 name|SqlValidatorTest
-parameter_list|(
-name|String
-name|name
-parameter_list|)
+parameter_list|()
 block|{
 name|super
 argument_list|(
-name|name
+literal|null
 argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testMultipleSameAsPass
@@ -183,6 +214,8 @@ literal|"select 1 as again,2 as \"again\", 3 as AGAiN from (values (true))"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testMultipleDifferentAs
@@ -194,6 +227,8 @@ literal|"select 1 as c1,2 as c2 from (values(true))"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testTypeOfAs
@@ -228,6 +263,8 @@ literal|"BOOLEAN"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testTypesLiterals
@@ -401,6 +438,8 @@ literal|"BOOLEAN"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testBooleans
@@ -432,6 +471,8 @@ literal|"select not false from (values(true))"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testAndOrIllegalTypesFails
@@ -480,6 +521,8 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testNotIllegalTypeFails
@@ -507,6 +550,8 @@ name|ANY
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testIs
@@ -575,6 +620,8 @@ literal|"(?s).*Cannot apply.*"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testIsFails
@@ -609,6 +656,8 @@ name|ANY
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testScalars
@@ -695,6 +744,8 @@ literal|"select 1.2/3.4 from (values(true))"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testScalarsFails
@@ -708,6 +759,8 @@ literal|"(?s).*Cannot apply '\\+' to arguments of type '<INTEGER> \\+<BOOLEAN>'\
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testNumbers
@@ -719,6 +772,8 @@ literal|"select 1+-2.*-3.e-1/-4>+5 AND true from (values(true))"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testPrefix
@@ -753,6 +808,8 @@ literal|"(?s).*Cannot apply '\\+' to arguments of type '\\+<CHAR.3.>'.*"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testEqualNotEqual
@@ -954,6 +1011,8 @@ literal|"1.1e-1<>1e1"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testEqualNotEqualFails
@@ -1030,6 +1089,8 @@ literal|"(?s).*Cannot apply '<>' to arguments of type '<BINARY.2.><><INTEGER>'.*
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testBinaryString
@@ -1046,6 +1107,8 @@ literal|"select x'ff'=X'' from (values(true))"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testBinaryStringFails
@@ -1080,6 +1143,8 @@ literal|"(?s).*Cannot apply '<>' to arguments of type '<BINARY.0.><><DECIMAL.2, 
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testStringLiteral
@@ -1096,6 +1161,8 @@ literal|"select N'f'<>'''' from (values(true))"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testStringLiteralBroken
@@ -1150,6 +1217,8 @@ literal|"String literal continued on same line"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testArithmeticOperators
@@ -1196,6 +1265,8 @@ literal|"exp(3.67)"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testArithmeticOperatorsFails
@@ -1258,6 +1329,8 @@ literal|"(?s).*Cannot apply 'EXP' to arguments of type 'EXP.<CHAR.3.>.*"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCaseExpression
@@ -1314,6 +1387,8 @@ literal|"CASE 1 WHEN 1 THEN cast(null as integer) WHEN 2 THEN cast(cast(null as 
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCaseExpressionTypes
@@ -1390,6 +1465,8 @@ literal|"INTEGER"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCaseExpressionFails
@@ -1435,6 +1512,8 @@ literal|"Illegal mixing of types in CASE or COALESCE statement"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testNullIf
@@ -1481,6 +1560,8 @@ literal|"Invalid number of arguments to function 'NULLIF'. Was expecting 2 argum
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCoalesce
@@ -1499,6 +1580,8 @@ literal|"CHAR(1) NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCoalesceFails
@@ -1519,6 +1602,8 @@ literal|"Illegal mixing of types in CASE or COALESCE statement"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testStringCompare
@@ -1585,6 +1670,8 @@ literal|"cast('' as varchar(1))<>cast('' as char(1))"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testStringCompareType
@@ -1640,6 +1727,8 @@ literal|"BOOLEAN"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testConcat
@@ -1703,6 +1792,8 @@ literal|"_UTF16'a'||_UTF16'b'||_UTF16'c'"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testConcatWithCharset
@@ -1721,6 +1812,8 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testConcatFails
@@ -1736,6 +1829,8 @@ literal|".*Supported form.s.: '<STRING> \\|\\|<STRING>.*'"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testBetween
@@ -1759,6 +1854,8 @@ literal|"(?s).*Cannot apply 'BETWEEN' to arguments of type.*"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCharsetMismatch
@@ -1969,6 +2066,8 @@ name|Explicit
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCharLength
@@ -2004,6 +2103,8 @@ literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testUpperLower
@@ -2034,6 +2135,8 @@ literal|"(?s).*Cannot apply 'UPPER' to arguments of type 'UPPER.<INTEGER>.'.*"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testPosition
@@ -2069,6 +2172,8 @@ literal|"Parameters must be of the same type"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testTrim
@@ -2139,6 +2244,8 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testTrimFails
@@ -2182,6 +2289,8 @@ literal|"translate('abc' using translation)"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testOverlay
@@ -2245,6 +2354,8 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testSubstring
@@ -2331,6 +2442,8 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testSubstringFails
@@ -2365,6 +2478,8 @@ literal|"(?s).* not comparable to each other.*"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testLikeAndSimilar
@@ -2418,6 +2533,8 @@ literal|"(?s).*Operands _ISO-8859-1.a. COLLATE ISO-8859-1.en_US.primary, _ISO-88
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testNull
@@ -2462,6 +2579,8 @@ literal|"Values passed to IN operator must have compatible types"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testNullCast
@@ -2585,6 +2704,8 @@ literal|"cast(null as integer), cast(null as char(1))"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCastTypeToType
@@ -2822,6 +2943,8 @@ literal|"INTEGER NOT NULL MULTISET NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCastFails
@@ -2891,6 +3014,8 @@ literal|"cast(true as char(3))"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCastBinaryLiteral
@@ -2904,6 +3029,8 @@ literal|"Binary literal string must contain an even number of hexits"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testDateTime
@@ -3270,6 +3397,8 @@ comment|// REVIEW: Can't think of any date/time/ts literals that will parse,
 comment|// but not validate.
 block|}
 comment|/**      * Tests casting to/from date/time types.      */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testDateTimeCast
@@ -3313,6 +3442,8 @@ literal|"CAST( '2004-12-21 10:12:21' AS TIMESTAMP)"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testInvalidFunction
@@ -3333,6 +3464,8 @@ literal|"Invalid number of arguments to function 'MOD'. Was expecting 2 argument
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testJdbcFunctionCall
@@ -3424,6 +3557,8 @@ literal|"(?s).*Function '.fn HAHAHA.' is not defined.*"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testQuotedFunction
@@ -3490,6 +3625,8 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testRowtype
@@ -3547,6 +3684,8 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testRow
@@ -3563,6 +3702,8 @@ literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testMultiset
@@ -3655,6 +3796,8 @@ literal|" BOOLEAN NOT NULL SLACKER) NOT NULL MULTISET NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testMultisetSetOperators
@@ -3730,6 +3873,8 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testSubMultisetOf
@@ -3762,6 +3907,8 @@ literal|"multiset[ROW(1,2)] submultiset of multiset[row(3,4)]"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testElement
@@ -3803,6 +3950,8 @@ literal|"TINYINT MULTISET NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testMemberOf
@@ -3823,6 +3972,8 @@ literal|"Cannot compare values of types 'INTEGER', 'CHAR\\(1\\)'"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testIsASet
@@ -3846,6 +3997,8 @@ literal|".*Cannot apply 'IS A SET' to.*"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCardinality
@@ -3877,6 +4030,8 @@ literal|"'CARDINALITY\\(<MAP>\\)'"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testIntervalTimeUnitEnumeration
@@ -4080,6 +4235,8 @@ name|b
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testIntervalMonthsConversion
@@ -4114,6 +4271,8 @@ literal|"-64"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testIntervalMillisConversion
@@ -8231,6 +8390,8 @@ literal|" INTERVAL SECOND\\(1, 0\\)"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testIntervalLiterals
@@ -8489,6 +8650,8 @@ literal|"INTERVAL MONTH(3) NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testIntervalOperators
@@ -8683,6 +8846,8 @@ literal|"(?s).*Cannot apply '/' to arguments of type '<DECIMAL.4, 3.> /<INTERVAL
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testNumericOperators
@@ -9205,6 +9370,8 @@ literal|"DECIMAL(19, 0) NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testFloorCeil
@@ -9401,6 +9568,8 @@ argument_list|)
 expr_stmt|;
 comment|// Test specified collation, window clause syntax rule 4,5.
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testWindowFunctions
@@ -9480,6 +9649,16 @@ argument_list|,
 literal|null
 argument_list|)
 expr_stmt|;
+block|}
+annotation|@
+name|Ignore
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWindowFunctions2
+parameter_list|()
+block|{
 if|if
 condition|(
 name|Bug
@@ -9701,6 +9880,8 @@ literal|"Referenced window cannot have framing declarations"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testInlineWinDef
@@ -9968,6 +10149,8 @@ literal|"Window 'W1' not found"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testPartitionByExpr
@@ -9988,6 +10171,8 @@ literal|"(?s)Cannot apply '\\+' to arguments of type '<INTEGER> \\+<VARCHAR\\(20
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testWindowClause
@@ -10297,6 +10482,8 @@ literal|"Column 'NON_EXIST_COL' not found in any table"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testWindowClause2
@@ -10317,6 +10504,8 @@ literal|"Duplicate window specification not allowed in the same window clause"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testWindowClauseWithSubquery
@@ -10352,6 +10541,8 @@ literal|"Column 'HIREDATE' not found in any table"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testWindowNegative
@@ -10489,6 +10680,8 @@ name|msg
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testWindowPartial
@@ -10522,6 +10715,8 @@ literal|"Cannot use DISALLOW PARTIAL with window based on RANGE"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testOneWinFunc
@@ -10535,6 +10730,8 @@ literal|null
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testNameResolutionInValuesClause
@@ -10720,6 +10917,8 @@ literal|"Table 'E' not found"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testNestedFrom
@@ -10773,6 +10972,8 @@ literal|"BOOLEAN NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testAmbiguousColumn
@@ -10900,6 +11101,8 @@ literal|"Table 'E' not found"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testExpandStar
@@ -10933,6 +11136,8 @@ literal|"Unknown identifier 'EMPNO'"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testAsColumnList
@@ -11011,6 +11216,8 @@ literal|"  select e.deptno from (values(true)))"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testInList
@@ -11148,6 +11355,8 @@ name|ERR_IN_OPERANDS_INCOMPATIBLE
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testInSubquery
@@ -11178,6 +11387,8 @@ literal|"Values passed to IN operator must have compatible types"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testDoubleNoAlias
@@ -11199,6 +11410,8 @@ literal|"select * from emp cross join dept"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testDuplicateColumnAliasIsOK
@@ -11211,6 +11424,8 @@ literal|"select 1 as a, 2 as b, 3 as a from emp"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testDuplicateTableAliasFails
@@ -11301,6 +11516,8 @@ literal|"  select 1 from emp where emp.empno = emp.deptno)"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testInvalidGroupBy
@@ -11314,6 +11531,8 @@ literal|"Expression 'EMPNO' is not being grouped"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testSingleNoAlias
@@ -11325,6 +11544,8 @@ literal|"select * from emp"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testObscuredAliasFails
@@ -11344,6 +11565,8 @@ literal|"Table 'EMP' not found"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testFromReferenceFails
@@ -11367,6 +11590,8 @@ literal|"Table 'E2' not found"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testWhereReference
@@ -11390,6 +11615,8 @@ literal|"    (select * from dept where dept.deptno = e1.deptno))"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testUnionNameResolution
@@ -11434,6 +11661,8 @@ literal|"Column 'EMPNO' not found in any table"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testUnionCountMismatchFails
@@ -11455,6 +11684,8 @@ literal|"Column count mismatch in UNION"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testUnionCountMismatcWithValuesFails
@@ -11506,6 +11737,8 @@ literal|"Column count mismatch in UNION"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testUnionTypeMismatchFails
@@ -11526,6 +11759,8 @@ literal|"Type mismatch in column 1 of UNION"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testUnionTypeMismatchWithStarFails
@@ -11546,6 +11781,8 @@ literal|"Type mismatch in column 2 of UNION"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testUnionTypeMismatchWithValuesFails
@@ -11585,6 +11822,8 @@ literal|"Type mismatch in column 1 of UNION"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testValuesTypeMismatchFails
@@ -11598,6 +11837,8 @@ literal|"Values passed to VALUES operator must have compatible types"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testNaturalCrossJoinFails
@@ -11611,6 +11852,8 @@ literal|"Cannot specify condition \\(NATURAL keyword, or ON or USING clause\\) f
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCrossJoinUsingFails
@@ -11624,6 +11867,8 @@ literal|"Cannot specify condition \\(NATURAL keyword, or ON or USING clause\\) f
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testJoinUsing
@@ -11676,6 +11921,8 @@ literal|"Column 'DEPTNO' not found in any table"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCrossJoinOnFails
@@ -11693,6 +11940,8 @@ literal|"Cannot specify condition \\(NATURAL keyword, or ON or USING clause\\) f
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testInnerJoinWithoutUsingOrOnFails
@@ -11710,6 +11959,8 @@ literal|"INNER, LEFT, RIGHT or FULL join requires a condition \\(NATURAL keyword
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testNaturalJoinWithOnFails
@@ -11723,6 +11974,8 @@ literal|"Cannot specify NATURAL keyword with ON or USING clause"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testNaturalJoinWithUsing
@@ -11736,6 +11989,8 @@ literal|"Cannot specify NATURAL keyword with ON or USING clause"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testNaturalJoinIncompatibleDatatype
@@ -11760,6 +12015,8 @@ literal|" (select deptno, name as sal, 'foo' as sal from dept)"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testJoinUsingIncompatibleDatatype
@@ -11773,6 +12030,8 @@ literal|"Column 'SAL' matched using NATURAL keyword or USING clause has incompat
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testJoinUsingInvalidColsFails
@@ -11787,6 +12046,8 @@ literal|"Column 'GENDER' not found in any table"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testJoinUsingDupColsFails
@@ -11800,6 +12061,8 @@ literal|"Column name 'DEPTNO' in USING clause is not unique on one side of join"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testJoinRowType
@@ -11940,6 +12203,8 @@ literal|"ambig"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testWhere
@@ -11953,6 +12218,8 @@ literal|"WHERE clause must be a condition"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testOn
@@ -11966,6 +12233,8 @@ literal|"ON clause must be a condition"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testHaving
@@ -11999,6 +12268,8 @@ literal|"Expression 'SAL' is not being grouped"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testHavingBetween
@@ -12018,6 +12289,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/**      * Tests a large scalar expression, which will expose any O(n^2) algorithms      * lurking in the validation process.      */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testLarge
@@ -12277,6 +12550,8 @@ name|toString
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testOrder
@@ -12505,6 +12780,8 @@ literal|"(?s)Cannot apply '\\+' to arguments of type '<CHAR\\(3\\)> \\+<INTEGER>
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testOrderUnion
@@ -12627,6 +12904,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/**      * Tests validation of the ORDER BY clause when GROUP BY is present.      */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testOrderGroup
@@ -12888,6 +13167,8 @@ literal|"Column 'ENO' not found in any table"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testGroup
@@ -12986,6 +13267,8 @@ literal|"select localtime, deptno + 3 from emp group by deptno"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testGroupByCorrelatedColumnFails
@@ -13005,6 +13288,8 @@ literal|"Table 'EMP' not found"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testGroupExpressionEquivalence
@@ -13037,6 +13322,8 @@ literal|"Expression 'EMPNO' is not being grouped"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testGroupExpressionEquivalenceId
@@ -13121,6 +13408,8 @@ literal|"select cast(? as integer) from emp group by cast(? as integer)"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testGroupExpressionEquivalenceLiteral
@@ -13185,6 +13474,8 @@ literal|"group by case empno when 10 then timestamp '1969-04-29 12:34:56' else n
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testGroupExpressionEquivalenceStringLiteral
@@ -13239,6 +13530,8 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testGroupAgg
@@ -13251,6 +13544,8 @@ literal|"select deptno as d, count(*) as c from emp group by deptno"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testNestedAggFails
@@ -13321,6 +13616,8 @@ name|ERR_NESTED_AGG
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testAggregateInGroupByFails
@@ -13339,6 +13636,8 @@ name|ERR_AGG_IN_GROUP_BY
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testAggregateInOrderByFails
@@ -13369,6 +13668,8 @@ literal|"select sum(empno) from emp order by sum(empno)"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCorrelatingVariables
@@ -13395,6 +13696,8 @@ literal|"select * from dept where deptno = emp.sal)"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testIntervalCompare
@@ -13485,6 +13788,8 @@ literal|"(?s).*Cannot apply '=' to arguments of type '<INTERVAL MONTH> =<INTERVA
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testOverlaps
@@ -13534,6 +13839,8 @@ literal|"(?s).*Cannot apply 'OVERLAPS' to arguments of type '.<TIME.0.>,<TIME.0.
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testExtract
@@ -13568,6 +13875,8 @@ literal|"(?s).*Cannot apply.*"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCastToInterval
@@ -13637,6 +13946,8 @@ literal|"Cast function cannot convert value of type INTERVAL YEAR TO MONTH to ty
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testMinusDateOperator
@@ -13664,6 +13975,8 @@ literal|"(?s).*Parameters must be of the same type.*"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testBind
@@ -13718,6 +14031,8 @@ literal|"select 1 from emp having sum(sal)< ?"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testUnnest
@@ -13792,6 +14107,8 @@ literal|"select*from unnest(multiset(select*from dept))"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCorrelationJoin
@@ -13819,6 +14136,8 @@ literal|"select*from unnest(select multiset[deptno] from dept)"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testStructuredTypes
@@ -13853,6 +14172,8 @@ literal|"VARCHAR(20) NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testLateral
@@ -13881,6 +14202,8 @@ literal|"select * from emp, LATERAL (select * from dept where emp.deptno=dept.de
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCollect
@@ -13900,6 +14223,8 @@ comment|// todo. COLLECT is an aggregate function. test that validator only can
 comment|// take set operators in its select list once aggregation support is
 comment|// complete
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testFusion
@@ -13921,6 +14246,8 @@ comment|// todo. FUSION is an aggregate function. test that validator only can
 comment|// take set operators in its select list once aggregation support is
 comment|// complete
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCountFunction
@@ -13954,6 +14281,8 @@ literal|"Invalid number of arguments to function 'COUNT'. Was expecting 1 argume
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testLastFunction
@@ -13980,6 +14309,8 @@ literal|"select FIRST_VALUE(ename) over (order by empno) from emp"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testMinMaxFunctions
@@ -14016,6 +14347,8 @@ literal|"SELECT MAX(5) FROM emp"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testFunctionalDistinct
@@ -14034,6 +14367,8 @@ literal|"DISTINCT/ALL not allowed with COALESCE function"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testSelectDistinct
@@ -14163,6 +14498,8 @@ literal|"SELECT DISTINCT 5, 10+5, 'string' from emp"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testExplicitTable
@@ -14212,6 +14549,8 @@ literal|"Table 'NONEXISTENT' not found"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCollectionTable
@@ -14239,6 +14578,8 @@ literal|"No match found for function signature NONEXISTENTRAMP\\(<CHARACTER>\\)"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCollectionTableWithCursorParam
@@ -14259,6 +14600,8 @@ literal|"Table 'BLOOP' not found"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testScalarSubQuery
@@ -14325,6 +14668,8 @@ literal|"select min(deptno) from dept as depts2)"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testRecordType
@@ -14362,6 +14707,8 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testSample
@@ -14502,6 +14849,8 @@ literal|") tablesample system(10)"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testRewriteWithoutIdentifierExpansion
@@ -14538,6 +14887,8 @@ literal|"FROM `DEPT`"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testRewriteWithIdentifierExpansion
@@ -14574,6 +14925,8 @@ literal|"FROM `CATALOG`.`SALES`.`DEPT` AS `DEPT`"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testRewriteWithColumnReferenceExpansion
@@ -14633,6 +14986,8 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testRewriteWithColumnReferenceExpansionAndFromAlias
@@ -14696,6 +15051,8 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCoalesceWithoutRewrite
@@ -14762,6 +15119,8 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCoalesceWithRewrite
@@ -14843,6 +15202,8 @@ literal|"Call to xxx is invalid\\. Direct calls to aggregate functions not allow
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testFieldOrigin
@@ -14897,6 +15258,8 @@ literal|" null}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testNew

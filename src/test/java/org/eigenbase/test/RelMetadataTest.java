@@ -61,8 +61,40 @@ name|*
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|Ignore
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|Test
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|*
+import|;
+end_import
+
 begin_comment
-comment|/**  * Unit test for {@link DefaultRelMetadataProvider}. See {@link  * SqlToRelTestBase} class comments for details on the schema used. Note that no  * optimizer rules are fired on the translation of the SQL into relational  * algebra (e.g. join conditions in the WHERE clause will look like filters), so  * it's necessary to phrase the SQL carefully.  *  * @author John V. Sichi  */
+comment|/**  * Unit test for {@link DefaultRelMetadataProvider}. See {@link  * SqlToRelTestBase} class comments for details on the schema used. Note that no  * optimizer rules are fired on the translation of the SQL into relational  * algebra (e.g. join conditions in the WHERE clause will look like filters), so  * it's necessary to phrase the SQL carefully.  */
 end_comment
 
 begin_class
@@ -255,6 +287,8 @@ name|epsilon
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testPercentageOriginalRowsTableOnly
@@ -268,6 +302,8 @@ literal|1.0
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testPercentageOriginalRowsAgg
@@ -281,6 +317,10 @@ literal|1.0
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Ignore
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testPercentageOriginalRowsOneFilter
@@ -294,6 +334,10 @@ name|DEFAULT_EQUAL_SELECTIVITY
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Ignore
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testPercentageOriginalRowsTwoFilters
@@ -309,6 +353,10 @@ name|DEFAULT_EQUAL_SELECTIVITY_SQUARED
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Ignore
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testPercentageOriginalRowsRedundantFilter
@@ -324,6 +372,8 @@ name|DEFAULT_EQUAL_SELECTIVITY
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testPercentageOriginalRowsJoin
@@ -337,6 +387,10 @@ literal|1.0
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Ignore
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testPercentageOriginalRowsJoinTwoFilters
@@ -354,6 +408,8 @@ name|DEFAULT_EQUAL_SELECTIVITY_SQUARED
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testPercentageOriginalRowsUnionNoFilter
@@ -367,6 +423,10 @@ literal|1.0
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Ignore
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testPercentageOriginalRowsUnionLittleFilter
@@ -396,6 +456,10 @@ operator|)
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Ignore
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testPercentageOriginalRowsUnionBigFilter
@@ -770,6 +834,8 @@ expr_stmt|;
 block|}
 block|}
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testColumnOriginsTableOnly
@@ -787,6 +853,8 @@ literal|false
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testColumnOriginsExpression
@@ -804,6 +872,8 @@ literal|true
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testColumnOriginsDyadicExpression
@@ -825,6 +895,8 @@ literal|true
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testColumnOriginsConstant
@@ -836,6 +908,8 @@ literal|"select 'Minstrelsy' as dname from dept"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testColumnOriginsFilter
@@ -853,6 +927,8 @@ literal|false
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testColumnOriginsJoinLeft
@@ -870,6 +946,8 @@ literal|false
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testColumnOriginsJoinRight
@@ -887,6 +965,8 @@ literal|false
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testColumnOriginsJoinOuter
@@ -906,6 +986,8 @@ literal|true
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testColumnOriginsJoinFullOuter
@@ -925,6 +1007,8 @@ literal|true
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testColumnOriginsAggKey
@@ -942,6 +1026,8 @@ literal|false
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testColumnOriginsAggMeasure
@@ -959,6 +1045,8 @@ literal|true
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testColumnOriginsAggCountStar
@@ -970,6 +1058,8 @@ literal|"select count(*),name from dept group by name"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testColumnOriginsValues
@@ -981,6 +1071,8 @@ literal|"values(1,2,3)"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testColumnOriginsUnion
@@ -1002,6 +1094,8 @@ literal|false
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testColumnOriginsSelfUnion
@@ -1063,9 +1157,15 @@ name|result
 operator|.
 name|doubleValue
 argument_list|()
+argument_list|,
+literal|0d
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Ignore
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testRowCountEmp
@@ -1079,6 +1179,10 @@ name|EMP_SIZE
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Ignore
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testRowCountDept
@@ -1092,6 +1196,10 @@ name|DEPT_SIZE
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Ignore
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testRowCountCartesian
@@ -1107,6 +1215,10 @@ name|DEPT_SIZE
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Ignore
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testRowCountJoin
@@ -1124,6 +1236,10 @@ name|DEFAULT_EQUAL_SELECTIVITY
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Ignore
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testRowCountUnion
@@ -1139,6 +1255,10 @@ name|DEPT_SIZE
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Ignore
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testRowCountFilter
@@ -1154,6 +1274,10 @@ name|DEFAULT_EQUAL_SELECTIVITY
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Ignore
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testRowCountSort
@@ -1218,6 +1342,8 @@ name|EPSILON
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testSelectivityIsNotNullFilter
@@ -1231,6 +1357,8 @@ name|DEFAULT_NOTNULL_SELECTIVITY
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testSelectivityComparisonFilter
@@ -1244,6 +1372,8 @@ name|DEFAULT_COMP_SELECTIVITY
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testSelectivityAndFilter
@@ -1257,6 +1387,8 @@ name|DEFAULT_EQUAL_SELECTIVITY_SQUARED
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testSelectivityOrFilter
@@ -1313,6 +1445,8 @@ name|EPSILON
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testSelectivityRedundantFilter
@@ -1334,6 +1468,8 @@ name|DEFAULT_EQUAL_SELECTIVITY
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testSelectivitySort
@@ -1357,6 +1493,8 @@ name|DEFAULT_EQUAL_SELECTIVITY
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testSelectivityUnion
@@ -1380,6 +1518,8 @@ name|DEFAULT_EQUAL_SELECTIVITY
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testSelectivityAgg
@@ -1405,6 +1545,8 @@ name|DEFAULT_EQUAL_SELECTIVITY
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testDistinctRowCountTable

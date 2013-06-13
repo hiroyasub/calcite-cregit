@@ -139,11 +139,11 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
 name|junit
 operator|.
-name|framework
-operator|.
-name|TestCase
+name|Test
 import|;
 end_import
 
@@ -205,6 +205,18 @@ name|Employee
 import|;
 end_import
 
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|*
+import|;
+end_import
+
 begin_comment
 comment|/**  * Unit tests for {@link ReflectiveSchema}.  */
 end_comment
@@ -213,8 +225,6 @@ begin_class
 specifier|public
 class|class
 name|ReflectiveSchemaTest
-extends|extends
-name|TestCase
 block|{
 specifier|public
 specifier|static
@@ -239,6 +249,8 @@ expr|class
 argument_list|)
 decl_stmt|;
 comment|/**    * Test that uses a JDBC connection as a linq4j {@link net.hydromatic.linq4j.QueryProvider}.    *    * @throws Exception on error    */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testQueryProvider
@@ -584,6 +596,8 @@ index|]
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testQueryProviderSingleColumn
@@ -912,6 +926,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/**    * Tests a view.    */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testView
@@ -1042,6 +1058,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/** Tests column based on java.sql.Date field. */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testDateColumn
@@ -1077,6 +1095,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/** Tests querying an object that has no public fields. */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testNoPublicFields
@@ -1130,6 +1150,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/** Tests columns based on types such as java.sql.Date and java.util.Date.    *    * @see CatchallSchema#everyTypes */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testColumnTypes
@@ -1187,6 +1209,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/** Tests columns based on types such as java.sql.Date and java.util.Date.    *    * @see CatchallSchema#everyTypes */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testAggregateFunctions
@@ -1314,6 +1338,8 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testDivide
@@ -1380,6 +1406,8 @@ literal|"C=null\n"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testOp
@@ -1542,6 +1570,8 @@ expr_stmt|;
 block|}
 block|}
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCastFromString
@@ -1636,6 +1666,8 @@ comment|// e.g. BigDecimal
 block|}
 block|}
 comment|/** Tests that if a field of a relation has an unrecognized type (in this    * case a {@link BitSet}) then it is treated as an object.    *    * @see CatchallSchema#badTypes */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testTableFieldHasBadType
@@ -1669,6 +1701,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/** Tests that a schema with a field whose type cannot be recognized    * throws an informative exception.    *    * @see CatchallSchema#enumerable    * @see CatchallSchema#list */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testSchemaFieldHasBadType
@@ -1746,6 +1780,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/** Test case for a bug where a Java string 'Abc' compared to a char 'Ab'    * would be truncated to the char precision and falsely match. */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testPrefix

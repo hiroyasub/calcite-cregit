@@ -25,16 +25,6 @@ end_import
 
 begin_import
 import|import
-name|junit
-operator|.
-name|framework
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
 name|org
 operator|.
 name|eigenbase
@@ -45,33 +35,47 @@ name|*
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|Test
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|*
+import|;
+end_import
+
 begin_comment
-comment|/**  * Tests generated package org.eigenbase.resource (mostly a sanity check for  * resgen infrastructure).  *  * @author John V. Sichi  */
+comment|/**  * Tests generated package org.eigenbase.resource (mostly a sanity check for  * resgen infrastructure).  */
 end_comment
 
 begin_class
 specifier|public
 class|class
 name|EigenbaseResourceTest
-extends|extends
-name|TestCase
 block|{
 comment|//~ Constructors -----------------------------------------------------------
 specifier|public
 name|EigenbaseResourceTest
-parameter_list|(
-name|String
-name|name
-parameter_list|)
+parameter_list|()
 block|{
-name|super
-argument_list|(
-name|name
-argument_list|)
-expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
 comment|/**      * Verifies that resource properties such as SQLSTATE are available at      * runtime.      */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testSqlstateProperty

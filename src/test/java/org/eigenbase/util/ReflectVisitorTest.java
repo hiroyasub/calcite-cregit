@@ -25,41 +25,45 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
 name|junit
 operator|.
-name|framework
+name|Test
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
 operator|.
 name|*
 import|;
 end_import
 
 begin_comment
-comment|/**  * ReflectVisitorTest tests {@link ReflectUtil#invokeVisitor} and {@link  * ReflectiveVisitor} and provides a contrived example of how to use them.  *  * @author John V. Sichi  */
+comment|/**  * ReflectVisitorTest tests {@link ReflectUtil#invokeVisitor} and {@link  * ReflectiveVisitor} and provides a contrived example of how to use them.  */
 end_comment
 
 begin_class
 specifier|public
 class|class
 name|ReflectVisitorTest
-extends|extends
-name|TestCase
 block|{
 comment|//~ Constructors -----------------------------------------------------------
 specifier|public
 name|ReflectVisitorTest
-parameter_list|(
-name|String
-name|name
-parameter_list|)
+parameter_list|()
 block|{
-name|super
-argument_list|(
-name|name
-argument_list|)
-expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
 comment|/**      * Tests CarelessNumberNegater.      */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCarelessNegater
@@ -102,6 +106,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/**      * Tests CarefulNumberNegater.      */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCarefulNegater
@@ -179,6 +185,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/**      * Tests CluelessNumberNegater.      */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCluelessNegater
@@ -253,6 +261,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/**      * Tests for ambiguity detection in method lookup.      */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testAmbiguity
@@ -314,6 +324,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/**      * Tests that ambiguity detection in method lookup does not kick in when a      * better match is available.      */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testNonAmbiguity

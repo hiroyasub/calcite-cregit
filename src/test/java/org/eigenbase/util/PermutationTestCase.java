@@ -15,40 +15,44 @@ end_package
 
 begin_import
 import|import
+name|org
+operator|.
 name|junit
 operator|.
-name|framework
+name|Test
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
 operator|.
 name|*
 import|;
 end_import
 
 begin_comment
-comment|/**  * Unit test for {@link Permutation}.  *  * @author Julian Hyde  */
+comment|/**  * Unit test for {@link Permutation}.  */
 end_comment
 
 begin_class
 specifier|public
 class|class
 name|PermutationTestCase
-extends|extends
-name|TestCase
 block|{
 comment|//~ Constructors -----------------------------------------------------------
 specifier|public
 name|PermutationTestCase
-parameter_list|(
-name|String
-name|name
-parameter_list|)
+parameter_list|()
 block|{
-name|super
-argument_list|(
-name|name
-argument_list|)
-expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testOne
@@ -172,6 +176,8 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testTwo
@@ -317,6 +323,8 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testInsert
@@ -469,6 +477,8 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testEmpty

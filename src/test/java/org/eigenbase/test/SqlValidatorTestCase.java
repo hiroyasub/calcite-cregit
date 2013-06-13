@@ -49,16 +49,6 @@ end_import
 
 begin_import
 import|import
-name|junit
-operator|.
-name|framework
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
 name|org
 operator|.
 name|eigenbase
@@ -163,16 +153,26 @@ name|*
 import|;
 end_import
 
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|*
+import|;
+end_import
+
 begin_comment
-comment|/**  * An abstract base class for implementing tests against {@link SqlValidator}.  *  *<p>A derived class can refine this test in two ways. First, it can add<code>  * testXxx()</code> methods, to test more functionality.  *  *<p>Second, it can override the {@link #getTester} method to return a  * different implementation of the {@link Tester} object. This encapsulates the  * differences between test environments, for example, which SQL parser or  * validator to use.</p>  *  * @author Wael Chatila  * @since Jan 12, 2004  */
+comment|/**  * An abstract base class for implementing tests against {@link SqlValidator}.  *  *<p>A derived class can refine this test in two ways. First, it can add<code>  * testXxx()</code> methods, to test more functionality.  *  *<p>Second, it can override the {@link #getTester} method to return a  * different implementation of the {@link Tester} object. This encapsulates the  * differences between test environments, for example, which SQL parser or  * validator to use.</p>  */
 end_comment
 
 begin_class
 specifier|public
 class|class
 name|SqlValidatorTestCase
-extends|extends
-name|TestCase
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
 specifier|protected
@@ -221,30 +221,14 @@ name|Tester
 name|tester
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a testcase.      *      *<p>If name is of the form "compatible:testCase", invokes sets the      * compatibility to "compatible".      *      * @param name Name; examples "Sql2003:testGroup", "testGroup"      */
+comment|/**      * Creates a test case.      */
 specifier|public
 name|SqlValidatorTestCase
 parameter_list|(
-name|String
-name|name
-parameter_list|)
-block|{
-name|super
-argument_list|(
-name|splitName
-argument_list|(
-name|name
-argument_list|)
-argument_list|)
-expr_stmt|;
 name|SqlConformance
 name|conformance
-init|=
-name|splitConformance
-argument_list|(
-name|name
-argument_list|)
-decl_stmt|;
+parameter_list|)
+block|{
 if|if
 condition|(
 name|conformance
@@ -270,102 +254,6 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-specifier|private
-specifier|static
-name|String
-name|splitName
-parameter_list|(
-name|String
-name|name
-parameter_list|)
-block|{
-name|int
-name|colon
-init|=
-name|name
-operator|.
-name|indexOf
-argument_list|(
-literal|':'
-argument_list|)
-decl_stmt|;
-if|if
-condition|(
-name|colon
-operator|<
-literal|0
-condition|)
-block|{
-return|return
-name|name
-return|;
-block|}
-else|else
-block|{
-return|return
-name|name
-operator|.
-name|substring
-argument_list|(
-name|colon
-argument_list|)
-return|;
-block|}
-block|}
-specifier|private
-specifier|static
-name|SqlConformance
-name|splitConformance
-parameter_list|(
-name|String
-name|name
-parameter_list|)
-block|{
-name|int
-name|colon
-init|=
-name|name
-operator|.
-name|indexOf
-argument_list|(
-literal|':'
-argument_list|)
-decl_stmt|;
-if|if
-condition|(
-name|colon
-operator|<
-literal|0
-condition|)
-block|{
-return|return
-literal|null
-return|;
-block|}
-else|else
-block|{
-name|String
-name|conformanceName
-init|=
-name|name
-operator|.
-name|substring
-argument_list|(
-literal|0
-argument_list|,
-name|colon
-argument_list|)
-decl_stmt|;
-return|return
-name|SqlConformance
-operator|.
-name|valueOf
-argument_list|(
-name|conformanceName
-argument_list|)
-return|;
-block|}
-block|}
 comment|/**      * Returns a tester. Derived classes should override this method to run the      * same set of tests in a different testing environment.      *      * @param conformance Language version tests should check compatibility with      */
 specifier|public
 name|Tester
@@ -715,7 +603,7 @@ else|else
 block|{
 throw|throw
 operator|new
-name|AssertionFailedError
+name|AssertionError
 argument_list|(
 literal|"Expected query to throw exception, but it did not; "
 operator|+
@@ -1310,7 +1198,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|AssertionFailedError
+name|AssertionError
 argument_list|(
 literal|"Expected error to have position,"
 operator|+
@@ -1377,7 +1265,7 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|AssertionFailedError
+name|AssertionError
 argument_list|(
 literal|"Actual error had a position, but expected error"
 operator|+
@@ -1924,7 +1812,7 @@ argument_list|()
 expr_stmt|;
 throw|throw
 operator|new
-name|AssertionFailedError
+name|AssertionError
 argument_list|(
 literal|"Error while parsing query ["
 operator|+
@@ -1960,7 +1848,7 @@ argument_list|()
 expr_stmt|;
 throw|throw
 operator|new
-name|AssertionFailedError
+name|AssertionError
 argument_list|(
 literal|"Error did not match expected ["
 operator|+
@@ -1991,7 +1879,7 @@ argument_list|()
 expr_stmt|;
 throw|throw
 operator|new
-name|AssertionFailedError
+name|AssertionError
 argument_list|(
 literal|"Error while parsing query ["
 operator|+
@@ -2199,7 +2087,7 @@ argument_list|()
 expr_stmt|;
 throw|throw
 operator|new
-name|AssertionFailedError
+name|AssertionError
 argument_list|(
 literal|"Error while parsing query ["
 operator|+

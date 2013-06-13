@@ -50,7 +50,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * SqlTester defines a callback for testing SQL queries and expressions.  *  *<p>The idea is that when you define an operator (or another piece of SQL  * functionality), you can define the logical behavior of that operator once, as  * part of that operator. Later you can define one or more physical  * implementations of that operator, and test them all using the same set of  * tests.  *  *<p>Specific implementations of<code>SqlTestser</code> might evaluate the  * queries in different ways, for example, using a C++ versus Java calculator.  * An implementation might even ignore certain calls altogether.  *  * @author Wael Chatila  * @since May 22, 2004  */
+comment|/**  * SqlTester defines a callback for testing SQL queries and expressions.  *  *<p>The idea is that when you define an operator (or another piece of SQL  * functionality), you can define the logical behavior of that operator once, as  * part of that operator. Later you can define one or more physical  * implementations of that operator, and test them all using the same set of  * tests.  *  *<p>Specific implementations of<code>SqlTestser</code> might evaluate the  * queries in different ways, for example, using a C++ versus Java calculator.  * An implementation might even ignore certain calls altogether.  */
 end_comment
 
 begin_interface

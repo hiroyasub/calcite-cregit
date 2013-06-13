@@ -42,7 +42,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Concrete subclass of {@link SqlOperatorBaseTest} which checks against  * a {@link SqlValidator}. Tests that involve execution trivially succeed.  *  * @author Julian Hyde  * @since July 7, 2005  */
+comment|/**  * Concrete subclass of {@link SqlOperatorBaseTest} which checks against  * a {@link SqlValidator}. Tests that involve execution trivially succeed.  */
 end_comment
 
 begin_class
@@ -63,7 +63,7 @@ operator|)
 operator|new
 name|SqlValidatorTestCase
 argument_list|(
-literal|"dummy"
+literal|null
 argument_list|)
 operator|.
 name|getTester
@@ -76,15 +76,10 @@ decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 specifier|public
 name|SqlOperatorTest
-parameter_list|(
-name|String
-name|testName
-parameter_list|)
+parameter_list|()
 block|{
 name|super
 argument_list|(
-name|testName
-argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;

@@ -16,7 +16,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * ConcurrentTestCommand represents a command, sequentially executed by  * {@link ConcurrentTestCommandExecutor}, during a concurrency test  *  *<p>ConcurrentTestCommand instances are normally instantiated by the  * {@link ConcurrentTestCommandGenerator} class.  *  * @author Stephan Zuercher  */
+comment|/**  * ConcurrentTestCommand represents a command, sequentially executed by  * {@link ConcurrentTestCommandExecutor}, during a concurrency test  *  *<p>ConcurrentTestCommand instances are normally instantiated by the  * {@link ConcurrentTestCommandGenerator} class.  */
 end_comment
 
 begin_interface

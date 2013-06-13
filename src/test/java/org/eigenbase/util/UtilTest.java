@@ -77,26 +77,6 @@ end_import
 
 begin_import
 import|import
-name|junit
-operator|.
-name|framework
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
-name|junit
-operator|.
-name|textui
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
 name|org
 operator|.
 name|eigenbase
@@ -133,60 +113,46 @@ name|*
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|Test
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|*
+import|;
+end_import
+
 begin_comment
-comment|/**  * Unit test for {@link Util} and other classes in this package.  *  * @author jhyde  * @since Jul 12, 2004  */
+comment|/**  * Unit test for {@link Util} and other classes in this package.  */
 end_comment
 
 begin_class
 specifier|public
 class|class
 name|UtilTest
-extends|extends
-name|TestCase
 block|{
 comment|//~ Constructors -----------------------------------------------------------
 specifier|public
 name|UtilTest
-parameter_list|(
-name|String
-name|name
-parameter_list|)
+parameter_list|()
 block|{
-name|super
-argument_list|(
-name|name
-argument_list|)
-expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-specifier|public
-specifier|static
+annotation|@
 name|Test
-name|suite
-parameter_list|()
-throws|throws
-name|Exception
-block|{
-name|TestSuite
-name|suite
-init|=
-operator|new
-name|TestSuite
-argument_list|()
-decl_stmt|;
-name|suite
-operator|.
-name|addTestSuite
-argument_list|(
-name|UtilTest
-operator|.
-name|class
-argument_list|)
-expr_stmt|;
-return|return
-name|suite
-return|;
-block|}
 specifier|public
 name|void
 name|testPrintEquals
@@ -202,6 +168,8 @@ literal|true
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testPrintEquals2
@@ -217,6 +185,8 @@ literal|false
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testPrintEquals3
@@ -232,6 +202,8 @@ literal|true
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testPrintEquals4
@@ -247,6 +219,8 @@ literal|false
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testPrintEquals5
@@ -262,6 +236,8 @@ literal|true
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testScientificNotation
@@ -514,6 +490,8 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testToJavaId
@@ -806,6 +784,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/**      * Tests whether {@link EnumeratedValues} serialize correctly.      */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testSerializeEnumeratedValues
@@ -935,6 +915,8 @@ name|o
 return|;
 block|}
 comment|/**      * Unit-test for {@link BitString}.      */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testBitString
@@ -1552,6 +1534,8 @@ argument_list|()
 return|;
 block|}
 comment|/**      * Tests {@link CastingList} and {@link Util#cast}.      */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCastingList
@@ -1746,6 +1730,8 @@ block|{
 comment|// ok
 block|}
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testIterableProperties
@@ -1931,6 +1917,8 @@ comment|// ok
 block|}
 block|}
 comment|/**      * Tests the difference engine, {@link DiffTestCase#diff}.      */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testDiffLines
@@ -2022,6 +2010,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/**      * Tests the {@link Util#toPosix(TimeZone, boolean)} method.      */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testPosixTimeZone
@@ -2195,6 +2185,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/**      * Tests the methods {@link Util#enumConstants(Class)} and {@link      * Util#enumVal(Class, String)}.      */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testEnumConstants
@@ -2330,6 +2322,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/**      * Tests the method {@link Util#toIter(java.util.BitSet)}.      */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testToIterBitSet
@@ -2473,6 +2467,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/**      * Tests the method {@link Util#toList(java.util.BitSet)}.      */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testToListBitSet
@@ -2557,6 +2553,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/**      * Tests the method {@link Util#bitSetOf(int...)}.      */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testBitSetOf
@@ -2615,6 +2613,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/**      * Tests the method {@link Util#bitSetBetween(int, int)}.      */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testBitSetBetween
@@ -2705,6 +2705,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/**      * Tests SQL builders.      */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testSqlBuilder
@@ -2978,6 +2980,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/**      * Unit test for {@link org.eigenbase.util.CompositeList}.      */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCompositeList
@@ -3367,6 +3371,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/**      * Unit test for {@link Template}.      */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testTemplate
@@ -3655,6 +3661,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/**      * Unit test for {@link Util#parseLocale(String)} method.      */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testParseLocale
@@ -3755,6 +3763,8 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testStringChunker
@@ -4210,6 +4220,8 @@ block|{
 comment|// OK
 block|}
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testSpaces
@@ -4292,6 +4304,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/** Unit test for {@link Pair#zip(java.util.List, java.util.List)}. */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testPairZip
@@ -4436,6 +4450,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/** Unit test for {@link Util#quotientList(java.util.List, int, int)}. */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testQuotientList
@@ -4787,6 +4803,8 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testImmutableIntList
@@ -4934,6 +4952,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/** Unit test for      * {@link Util#isSupersetOf(java.util.BitSet, java.util.BitSet)}. */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testIsSupersetOf
@@ -5105,28 +5125,6 @@ argument_list|,
 literal|7
 argument_list|)
 argument_list|)
-argument_list|)
-expr_stmt|;
-block|}
-comment|/**      * Runs the test suite.      */
-specifier|public
-specifier|static
-name|void
-name|main
-parameter_list|(
-name|String
-index|[]
-name|args
-parameter_list|)
-throws|throws
-name|Exception
-block|{
-name|TestRunner
-operator|.
-name|run
-argument_list|(
-name|suite
-argument_list|()
 argument_list|)
 expr_stmt|;
 block|}

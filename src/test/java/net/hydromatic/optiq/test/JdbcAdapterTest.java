@@ -17,11 +17,11 @@ end_package
 
 begin_import
 import|import
+name|org
+operator|.
 name|junit
 operator|.
-name|framework
-operator|.
-name|TestCase
+name|Test
 import|;
 end_import
 
@@ -33,9 +33,9 @@ begin_class
 specifier|public
 class|class
 name|JdbcAdapterTest
-extends|extends
-name|TestCase
 block|{
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testUnionPlan
@@ -90,6 +90,8 @@ name|runs
 argument_list|()
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testFilterUnionPlan
@@ -141,6 +143,8 @@ name|runs
 argument_list|()
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testInPlan

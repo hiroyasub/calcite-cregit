@@ -27,16 +27,6 @@ end_import
 
 begin_import
 import|import
-name|junit
-operator|.
-name|framework
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
 name|org
 operator|.
 name|eigenbase
@@ -87,16 +77,36 @@ name|*
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|Test
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|*
+import|;
+end_import
+
 begin_comment
-comment|/**  * Unit test for {@link SqlPrettyWriter}.  *  *<p>You must provide the system property "source.dir".  *  * @author Julian Hyde  * @since 2005/8/24  */
+comment|/**  * Unit test for {@link SqlPrettyWriter}.  *  *<p>You must provide the system property "source.dir".  */
 end_comment
 
 begin_class
 specifier|public
 class|class
 name|SqlPrettyWriterTest
-extends|extends
-name|TestCase
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
 specifier|public
@@ -115,18 +125,8 @@ decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 specifier|public
 name|SqlPrettyWriterTest
-parameter_list|(
-name|String
-name|testCaseName
-parameter_list|)
-throws|throws
-name|Exception
+parameter_list|()
 block|{
-name|super
-argument_list|(
-name|testCaseName
-argument_list|)
-expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
 comment|// ~ Helper methods -------------------------------------------------------
@@ -196,7 +196,7 @@ argument_list|()
 decl_stmt|;
 throw|throw
 operator|new
-name|AssertionFailedError
+name|AssertionError
 argument_list|(
 name|message
 argument_list|)
@@ -603,6 +603,8 @@ name|actual
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testDefault
@@ -632,6 +634,8 @@ literal|"${formatted}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testIndent8
@@ -668,6 +672,8 @@ literal|"${formatted}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testClausesNotOnNewLine
@@ -704,6 +710,8 @@ literal|"${formatted}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testSelectListItemsOnSeparateLines
@@ -740,6 +748,8 @@ literal|"${formatted}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testSelectListExtraIndentFlag
@@ -783,6 +793,8 @@ literal|"${formatted}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testKeywordsLowerCase
@@ -819,6 +831,8 @@ literal|"${formatted}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testParenthesizeAllExprs
@@ -855,6 +869,8 @@ literal|"${formatted}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testOnlyQuoteIdentifiersWhichNeedIt
@@ -891,6 +907,8 @@ literal|"${formatted}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testDamiansSubqueryStyle
@@ -949,6 +967,8 @@ literal|"foo"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCase
@@ -1007,6 +1027,8 @@ literal|"END"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCase2
@@ -1022,6 +1044,8 @@ literal|"CASE WHEN 1 = 2 + 3 THEN 4 WHEN 1 = CASE WHEN `A` = `B` THEN `C` ELSE `
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testBetween
@@ -1039,6 +1063,8 @@ expr_stmt|;
 comment|// todo: remove leading
 comment|// space
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCast
@@ -1054,6 +1080,8 @@ literal|"CAST(`X` + `Y` AS DECIMAL(5, 10))"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testLiteralChain
@@ -1081,6 +1109,8 @@ literal|"'z'"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testOverlaps
@@ -1096,6 +1126,8 @@ literal|"(`X`, `XX`) OVERLAPS (`Y`, `YY`) OR `X` IS NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testUnion
@@ -1125,6 +1157,8 @@ literal|"${formatted}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testMultiset
@@ -1140,6 +1174,8 @@ literal|"${formatted}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testInnerJoin
@@ -1155,6 +1191,8 @@ literal|"${formatted}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testWhereListItemsOnSeparateLinesOr
@@ -1176,6 +1214,8 @@ literal|" or x<> z"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testWhereListItemsOnSeparateLinesAnd
