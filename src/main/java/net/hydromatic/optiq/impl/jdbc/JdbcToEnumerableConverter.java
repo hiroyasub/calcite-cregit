@@ -464,6 +464,15 @@ operator|new
 name|JdbcImplementor
 argument_list|(
 name|dialect
+argument_list|,
+operator|(
+name|JavaTypeFactory
+operator|)
+name|getCluster
+argument_list|()
+operator|.
+name|getTypeFactory
+argument_list|()
 argument_list|)
 decl_stmt|;
 specifier|final

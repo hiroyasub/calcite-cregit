@@ -629,6 +629,32 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+if|else if
+condition|(
+name|name
+operator|.
+name|startsWith
+argument_list|(
+literal|"_"
+argument_list|)
+condition|)
+block|{
+comment|// We're generating a type for an alien system. For example,
+comment|// UNSIGNED is a built-in type in MySQL.
+comment|// (Need a more elegant way than '_' of flagging this.)
+name|writer
+operator|.
+name|keyword
+argument_list|(
+name|name
+operator|.
+name|substring
+argument_list|(
+literal|1
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
 else|else
 block|{
 comment|// else we have a user defined type

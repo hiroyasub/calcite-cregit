@@ -463,13 +463,6 @@ argument_list|(
 name|selectListFrame
 argument_list|)
 expr_stmt|;
-name|writer
-operator|.
-name|sep
-argument_list|(
-literal|"FROM"
-argument_list|)
-expr_stmt|;
 name|SqlNode
 name|fromClause
 init|=
@@ -480,8 +473,23 @@ operator|.
 name|FROM_OPERAND
 index|]
 decl_stmt|;
+if|if
+condition|(
+name|fromClause
+operator|!=
+literal|null
+condition|)
+block|{
+comment|// Optiq SQL requires FROM but MySQL does not.
+name|writer
+operator|.
+name|sep
+argument_list|(
+literal|"FROM"
+argument_list|)
+expr_stmt|;
 comment|// for FROM clause, use precedence just below join operator to make
-comment|// sure that an unjoined nested select will be properly
+comment|// sure that an un-joined nested select will be properly
 comment|// parenthesized
 specifier|final
 name|SqlWriter
@@ -532,6 +540,7 @@ argument_list|(
 name|fromFrame
 argument_list|)
 expr_stmt|;
+block|}
 name|SqlNode
 name|whereClause
 init|=
@@ -586,12 +595,7 @@ operator|instanceof
 name|SqlCall
 operator|)
 operator|&&
-operator|(
-operator|(
-name|SqlCall
-operator|)
 name|node
-operator|)
 operator|.
 name|getKind
 argument_list|()
@@ -633,12 +637,7 @@ name|SqlCall
 operator|)
 operator|&&
 operator|(
-operator|(
-operator|(
-name|SqlCall
-operator|)
 name|node
-operator|)
 operator|.
 name|getKind
 argument_list|()
