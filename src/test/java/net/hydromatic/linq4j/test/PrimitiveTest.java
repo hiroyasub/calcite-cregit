@@ -31,11 +31,11 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
 name|junit
 operator|.
-name|framework
-operator|.
-name|TestCase
+name|Test
 import|;
 end_import
 
@@ -59,6 +59,18 @@ name|List
 import|;
 end_import
 
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|*
+import|;
+end_import
+
 begin_comment
 comment|/**  * Unit test for {@link Primitive}.  */
 end_comment
@@ -67,9 +79,9 @@ begin_class
 specifier|public
 class|class
 name|PrimitiveTest
-extends|extends
-name|TestCase
 block|{
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testIsAssignableFrom
@@ -400,6 +412,8 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testBox
@@ -472,6 +486,8 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testOfBox
@@ -531,6 +547,8 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testOfBoxOr
@@ -591,6 +609,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/** Tests the {@link Primitive#number(Number)} method. */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testNumber
@@ -661,6 +681,8 @@ name|number
 operator|.
 name|doubleValue
 argument_list|()
+argument_list|,
+literal|0d
 argument_list|)
 expr_stmt|;
 try|try
@@ -754,6 +776,8 @@ comment|// ok
 block|}
 block|}
 comment|/** Test for {@link Primitive#send(net.hydromatic.linq4j.expressions.Primitive.Source, net.hydromatic.linq4j.expressions.Primitive.Sink)}. */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testSendSource
@@ -1223,6 +1247,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/** Test for {@link Primitive#permute(Object, int[])}. */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testPermute

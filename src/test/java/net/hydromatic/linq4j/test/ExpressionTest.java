@@ -45,11 +45,11 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
 name|junit
 operator|.
-name|framework
-operator|.
-name|TestCase
+name|Test
 import|;
 end_import
 
@@ -97,6 +97,18 @@ name|*
 import|;
 end_import
 
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|*
+import|;
+end_import
+
 begin_comment
 comment|/**  * Unit test for {@link net.hydromatic.linq4j.expressions.Expression}  * and subclasses.  */
 end_comment
@@ -105,9 +117,9 @@ begin_class
 specifier|public
 class|class
 name|ExpressionTest
-extends|extends
-name|TestCase
 block|{
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testLambdaCallsBinaryOp
@@ -228,9 +240,13 @@ argument_list|(
 literal|3.5D
 argument_list|,
 name|n
+argument_list|,
+literal|0d
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testLambdaPrimitiveTwoArgs
@@ -348,6 +364,8 @@ name|s
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testLambdaCallsTwoArgMethod
@@ -471,6 +489,8 @@ name|s
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testFoldAnd
@@ -784,6 +804,8 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testWrite
@@ -1562,6 +1584,8 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testWriteConstant
@@ -2049,6 +2073,8 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testWriteArray
@@ -2117,6 +2143,8 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testWriteAnonymousClass
@@ -2446,6 +2474,8 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testWriteWhile
@@ -2560,6 +2590,8 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testType
@@ -2712,6 +2744,8 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCompile
@@ -2801,6 +2835,8 @@ name|x
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testBlockBuilder
@@ -3006,6 +3042,8 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testBlockBuilder2
@@ -3129,6 +3167,8 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testClassDecl
@@ -3293,6 +3333,8 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testReturn
@@ -3333,6 +3375,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/** Test for common sub-expression elimination. */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testSubExpressionElimination
