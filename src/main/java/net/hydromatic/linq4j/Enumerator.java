@@ -24,6 +24,8 @@ name|Enumerator
 parameter_list|<
 name|T
 parameter_list|>
+extends|extends
+name|AutoCloseable
 block|{
 comment|/**    * Gets the current element in the collection.    *    *<p>After an enumerator is created or after the {@link #reset} method is    * called, the {@link #moveNext} method must be called to advance the    * enumerator to the first element of the collection before reading the    * value of the {@code current} property; otherwise, {@code current} is    * undefined.</p>    *    *<p>This method also throws {@link java.util.NoSuchElementException} if    * the last call to {@code moveNext} returned {@code false}, which indicates    * the end of the collection.</p>    *    *<p>This method does not move the position of the enumerator, and    * consecutive calls to {@code current} return the same object until either    * {@code moveNext} or {@code reset} is called.</p>    *    *<p>An enumerator remains valid as long as the collection remains    * unchanged. If changes are made to the collection, such as adding,    * modifying, or deleting elements, the enumerator is irrecoverably    * invalidated. The next call to {@code moveNext} or {@code reset} may,    * at the discretion of the implementation, throw a    * {@link java.util.ConcurrentModificationException}. If the collection is    * modified between {@code moveNext} and {@code current}, {@code current}    * returns the element that it is set to, even if the enumerator is already    * invalidated.    *    * @return Current element    * @throws java.util.ConcurrentModificationException    *          if collection has    *          been modified    * @throws java.util.NoSuchElementException    *          if {@code moveToNext} has not    *          been called, has not been called since the most recent call to    *          {@code reset}, or returned false    */
 name|T
@@ -38,6 +40,11 @@ function_decl|;
 comment|/**    * Sets the enumerator to its initial position, which is before the first    * element in the collection.    *    *<p>An enumerator remains valid as long as the collection remains    * unchanged. If changes are made to the collection, such as adding,    * modifying, or deleting elements, the enumerator is irrecoverably    * invalidated. The next call to {@link #moveNext} or {@code reset} may,    * at the discretion of the implementation, throw a    * {@link java.util.ConcurrentModificationException}.</p>    *    *<p>This method is optional; it may throw    * {@link UnsupportedOperationException}.</p>    *    *<h3>Notes to Implementers</h3>    *    *<p>All calls to Reset must result in the same state for the enumerator.    * The preferred implementation is to move the enumerator to the beginning    * of the collection, before the first element. This invalidates the    * enumerator if the collection has been modified since the enumerator was    * created, which is consistent with {@link #moveNext()} and    * {@link #current()}.</p>    */
 name|void
 name|reset
+parameter_list|()
+function_decl|;
+comment|/**    * Closes this enumerable and releases resources.    *    *<p>This method is idempotent. Calling it multiple times has the same effect    * as calling it once.</p>    */
+name|void
+name|close
 parameter_list|()
 function_decl|;
 block|}

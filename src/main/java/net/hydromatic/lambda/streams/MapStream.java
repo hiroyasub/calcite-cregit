@@ -905,6 +905,17 @@ name|reset
 argument_list|()
 expr_stmt|;
 block|}
+specifier|public
+name|void
+name|close
+parameter_list|()
+block|{
+name|enumerator
+operator|.
+name|close
+argument_list|()
+expr_stmt|;
+block|}
 block|}
 decl_stmt|;
 return|return
