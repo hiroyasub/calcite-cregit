@@ -2641,7 +2641,7 @@ argument_list|,
 literal|"\\\\n"
 argument_list|)
 operator|+
-literal|"\")"
+literal|"\""
 argument_list|)
 return|;
 block|}

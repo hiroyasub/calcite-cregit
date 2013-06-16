@@ -874,6 +874,12 @@ operator|-
 literal|1
 expr_stmt|;
 block|}
+specifier|public
+name|void
+name|close
+parameter_list|()
+block|{
+block|}
 block|}
 return|;
 block|}

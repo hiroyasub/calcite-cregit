@@ -71,20 +71,6 @@ end_import
 
 begin_import
 import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|optiq
-operator|.
-name|jdbc
-operator|.
-name|OptiqConnection
-import|;
-end_import
-
-begin_import
-import|import
 name|org
 operator|.
 name|eigenbase

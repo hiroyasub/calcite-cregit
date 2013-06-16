@@ -269,6 +269,11 @@ argument_list|,
 name|String
 operator|.
 name|class
+argument_list|,
+name|Primitive
+index|[]
+operator|.
+expr|class
 argument_list|)
 block|,
 name|MONGO_TABLE_FIND
@@ -670,6 +675,15 @@ operator|.
 name|class
 argument_list|,
 literal|"moveNext"
+argument_list|)
+block|,
+name|ENUMERATOR_CLOSE
+argument_list|(
+name|Enumerator
+operator|.
+name|class
+argument_list|,
+literal|"close"
 argument_list|)
 block|,
 name|ENUMERATOR_RESET

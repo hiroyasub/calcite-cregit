@@ -517,6 +517,13 @@ operator|-
 literal|1
 expr_stmt|;
 block|}
+specifier|public
+name|void
+name|close
+parameter_list|()
+block|{
+comment|// no resources
+block|}
 block|}
 return|;
 block|}

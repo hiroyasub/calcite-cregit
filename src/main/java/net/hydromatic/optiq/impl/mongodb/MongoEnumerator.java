@@ -212,6 +212,32 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+specifier|public
+name|void
+name|close
+parameter_list|()
+block|{
+if|if
+condition|(
+name|cursor
+operator|instanceof
+name|DBCursor
+condition|)
+block|{
+operator|(
+operator|(
+name|DBCursor
+operator|)
+name|cursor
+operator|)
+operator|.
+name|close
+argument_list|()
+expr_stmt|;
+block|}
+comment|// AggregationOutput implements Iterator but not DBCursor. There is no
+comment|// available close() method -- apparently there is no open resource.
+block|}
 specifier|static
 name|Function1
 argument_list|<
