@@ -1610,7 +1610,7 @@ name|type
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates a ConstantExpression that has the Value property set    * to the specified value.    */
+comment|/**    * Creates a ConstantExpression that has the Value property set    * to the specified value.    *    *<p>Does the right thing for null, String, primitive values (e.g. int 12,    * short 12, double 3.14 and boolean false), boxed primitives    * (e.g. Integer.valueOf(12)), enums, classes, BigDecimal, BigInteger,    * classes that have a constructor with a parameter for each field, and    * arrays.</p>    */
 specifier|public
 specifier|static
 name|ConstantExpression
