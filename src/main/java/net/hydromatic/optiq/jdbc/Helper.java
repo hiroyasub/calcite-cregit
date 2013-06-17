@@ -299,6 +299,13 @@ return|return
 literal|false
 return|;
 block|}
+specifier|public
+name|void
+name|close
+parameter_list|()
+block|{
+comment|// no resources to release
+block|}
 block|}
 return|;
 block|}

@@ -99,8 +99,6 @@ operator|=
 name|clazz
 expr_stmt|;
 block|}
-annotation|@
-name|Override
 specifier|protected
 name|Getter
 name|createGetter
@@ -123,8 +121,6 @@ index|]
 argument_list|)
 return|;
 block|}
-annotation|@
-name|Override
 specifier|public
 name|boolean
 name|next
@@ -136,6 +132,17 @@ operator|.
 name|moveNext
 argument_list|()
 return|;
+block|}
+specifier|public
+name|void
+name|close
+parameter_list|()
+block|{
+name|enumerator
+operator|.
+name|close
+argument_list|()
+expr_stmt|;
 block|}
 class|class
 name|RecordEnumeratorGetter

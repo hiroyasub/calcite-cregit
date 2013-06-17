@@ -415,6 +415,33 @@ name|closed
 operator|=
 literal|true
 expr_stmt|;
+specifier|final
+name|Cursor
+name|cursor
+init|=
+name|this
+operator|.
+name|cursor
+decl_stmt|;
+if|if
+condition|(
+name|cursor
+operator|!=
+literal|null
+condition|)
+block|{
+name|this
+operator|.
+name|cursor
+operator|=
+literal|null
+expr_stmt|;
+name|cursor
+operator|.
+name|close
+argument_list|()
+expr_stmt|;
+block|}
 comment|// TODO: for timeout, see IteratorResultSet.close
 comment|/*         if (timeoutCursor != null) {             final long noTimeout = 0;             timeoutCursor.close(noTimeout);             timeoutCursor = null;         } */
 block|}

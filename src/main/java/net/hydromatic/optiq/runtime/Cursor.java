@@ -21,17 +21,7 @@ name|java
 operator|.
 name|io
 operator|.
-name|InputStream
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|io
-operator|.
-name|Reader
+name|*
 import|;
 end_import
 
@@ -103,6 +93,8 @@ begin_interface
 specifier|public
 interface|interface
 name|Cursor
+extends|extends
+name|Closeable
 block|{
 comment|/**    * Creates a list of accessors, one per column.    *    * @param types List of column types, per {@link java.sql.Types}.    * @return List of column accessors    */
 name|List
@@ -121,6 +113,11 @@ function_decl|;
 comment|/**    * Moves to the next row.    *    * @return Whether moved    */
 name|boolean
 name|next
+parameter_list|()
+function_decl|;
+comment|/**    * Closes this cursor and releases resources.    */
+name|void
+name|close
 parameter_list|()
 function_decl|;
 comment|/**    * Accessor of a column value.    */

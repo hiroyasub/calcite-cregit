@@ -2522,6 +2522,17 @@ name|moveNext
 argument_list|()
 return|;
 block|}
+specifier|public
+name|void
+name|close
+parameter_list|()
+block|{
+name|enumerator
+operator|.
+name|close
+argument_list|()
+expr_stmt|;
+block|}
 block|}
 return|;
 block|}
