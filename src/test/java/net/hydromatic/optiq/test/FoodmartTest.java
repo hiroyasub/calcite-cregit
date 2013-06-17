@@ -816,10 +816,6 @@ block|,
 literal|6269
 block|,
 comment|// failed
-literal|5618
-block|,
-literal|5619
-block|,
 literal|5677
 block|,
 literal|5681
@@ -1037,7 +1033,6 @@ literal|6739
 block|,   }
 decl_stmt|;
 comment|// Interesting tests. (We need to fix and remove from the disabled list.)
-comment|// 5618, 5619 only: data type mismatch (in AVG?)
 comment|// 5677, 5681 only: assert into Context.toSql
 comment|// 2452, 2453, 2454, 2457 only: RTRIM
 comment|// 2436-2453,2455: agg_
@@ -1214,6 +1209,14 @@ name|disabledId
 argument_list|)
 expr_stmt|;
 block|}
+name|buf
+operator|.
+name|setLength
+argument_list|(
+literal|0
+argument_list|)
+expr_stmt|;
+comment|// disable disable
 for|for
 control|(
 name|Integer
@@ -1256,10 +1259,7 @@ name|Object
 index|[]
 block|{
 name|id
-block|,
-name|query1
-operator|.
-name|sql
+comment|/*, query1.sql */
 block|}
 argument_list|)
 expr_stmt|;
@@ -1290,10 +1290,7 @@ block|{
 name|query1
 operator|.
 name|id
-block|,
-name|query1
-operator|.
-name|sql
+comment|/*, query1.sql */
 block|}
 argument_list|)
 expr_stmt|;
@@ -1308,9 +1305,6 @@ name|FoodmartTest
 parameter_list|(
 name|int
 name|id
-parameter_list|,
-name|String
-name|sql
 parameter_list|)
 block|{
 name|this
@@ -1398,12 +1392,19 @@ operator|+
 name|query
 operator|.
 name|id
+operator|+
+literal|", sql="
+operator|+
+name|query
+operator|.
+name|sql
 argument_list|,
 name|e
 argument_list|)
 throw|;
 block|}
 block|}
+comment|// JSON class
 specifier|public
 specifier|static
 class|class
@@ -1425,6 +1426,7 @@ argument_list|>
 argument_list|()
 decl_stmt|;
 block|}
+comment|// JSON class
 specifier|public
 specifier|static
 class|class
@@ -1469,6 +1471,7 @@ argument_list|>
 argument_list|()
 decl_stmt|;
 block|}
+comment|// JSON class
 specifier|public
 specifier|static
 class|class

@@ -88,7 +88,7 @@ name|OTHER_FUNCTION
 argument_list|,
 name|SqlTypeStrategies
 operator|.
-name|rtiFirstArgTypeForceNullable
+name|rtiFirstArgType
 argument_list|,
 literal|null
 argument_list|,

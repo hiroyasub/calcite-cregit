@@ -17874,7 +17874,7 @@ name|checkType
 argument_list|(
 literal|"sum(1)"
 argument_list|,
-literal|"INTEGER"
+literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
 name|getTester
@@ -17884,7 +17884,7 @@ name|checkType
 argument_list|(
 literal|"sum(1.2)"
 argument_list|,
-literal|"DECIMAL(2, 1)"
+literal|"DECIMAL(2, 1) NOT NULL"
 argument_list|)
 expr_stmt|;
 name|getTester
@@ -17894,7 +17894,7 @@ name|checkType
 argument_list|(
 literal|"sum(DISTINCT 1.5)"
 argument_list|,
-literal|"DECIMAL(2, 1)"
+literal|"DECIMAL(2, 1) NOT NULL"
 argument_list|)
 expr_stmt|;
 name|getTester
@@ -18097,7 +18097,7 @@ name|checkType
 argument_list|(
 literal|"AVG(DISTINCT 1.5)"
 argument_list|,
-literal|"DECIMAL(2, 1)"
+literal|"DECIMAL(2, 1) NOT NULL"
 argument_list|)
 expr_stmt|;
 if|if
@@ -18232,7 +18232,7 @@ name|checkType
 argument_list|(
 literal|"stddev_pop(DISTINCT 1.5)"
 argument_list|,
-literal|"DECIMAL(2, 1)"
+literal|"DECIMAL(2, 1) NOT NULL"
 argument_list|)
 expr_stmt|;
 specifier|final
@@ -18401,7 +18401,7 @@ name|checkType
 argument_list|(
 literal|"stddev_samp(DISTINCT 1.5)"
 argument_list|,
-literal|"DECIMAL(2, 1)"
+literal|"DECIMAL(2, 1) NOT NULL"
 argument_list|)
 expr_stmt|;
 specifier|final
@@ -18570,7 +18570,7 @@ name|checkType
 argument_list|(
 literal|"var_pop(DISTINCT 1.5)"
 argument_list|,
-literal|"DECIMAL(2, 1)"
+literal|"DECIMAL(2, 1) NOT NULL"
 argument_list|)
 expr_stmt|;
 specifier|final
@@ -18739,7 +18739,7 @@ name|checkType
 argument_list|(
 literal|"var_samp(DISTINCT 1.5)"
 argument_list|,
-literal|"DECIMAL(2, 1)"
+literal|"DECIMAL(2, 1) NOT NULL"
 argument_list|)
 expr_stmt|;
 specifier|final
@@ -18886,7 +18886,7 @@ name|checkType
 argument_list|(
 literal|"min(1)"
 argument_list|,
-literal|"INTEGER"
+literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
 name|getTester
@@ -18896,7 +18896,7 @@ name|checkType
 argument_list|(
 literal|"min(1.2)"
 argument_list|,
-literal|"DECIMAL(2, 1)"
+literal|"DECIMAL(2, 1) NOT NULL"
 argument_list|)
 expr_stmt|;
 name|getTester
@@ -18906,7 +18906,7 @@ name|checkType
 argument_list|(
 literal|"min(DISTINCT 1.5)"
 argument_list|,
-literal|"DECIMAL(2, 1)"
+literal|"DECIMAL(2, 1) NOT NULL"
 argument_list|)
 expr_stmt|;
 name|getTester
@@ -19051,7 +19051,7 @@ name|checkType
 argument_list|(
 literal|"max(1)"
 argument_list|,
-literal|"INTEGER"
+literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
 name|getTester
@@ -19061,7 +19061,7 @@ name|checkType
 argument_list|(
 literal|"max(1.2)"
 argument_list|,
-literal|"DECIMAL(2, 1)"
+literal|"DECIMAL(2, 1) NOT NULL"
 argument_list|)
 expr_stmt|;
 name|getTester
@@ -19071,7 +19071,7 @@ name|checkType
 argument_list|(
 literal|"max(DISTINCT 1.5)"
 argument_list|,
-literal|"DECIMAL(2, 1)"
+literal|"DECIMAL(2, 1) NOT NULL"
 argument_list|)
 expr_stmt|;
 name|getTester

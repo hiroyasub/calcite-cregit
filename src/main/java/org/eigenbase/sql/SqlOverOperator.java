@@ -109,7 +109,7 @@ literal|true
 argument_list|,
 name|SqlTypeStrategies
 operator|.
-name|rtiFirstArgType
+name|rtiFirstArgTypeForceNullable
 argument_list|,
 literal|null
 argument_list|,
@@ -255,7 +255,7 @@ name|call
 argument_list|)
 return|;
 block|}
-comment|/*      * Accepts a {@link SqlVisitor}, and tells it to visit each child.      *      * @param visitor Visitor.      */
+comment|/**      * Accepts a {@link SqlVisitor}, and tells it to visit each child.      *      * @param visitor Visitor      */
 specifier|public
 parameter_list|<
 name|R

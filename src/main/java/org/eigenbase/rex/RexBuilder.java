@@ -934,6 +934,18 @@ argument_list|,
 name|physical
 argument_list|)
 decl_stmt|;
+comment|// Windowed aggregates are nullable, because the window might be empty.
+name|type
+operator|=
+name|typeFactory
+operator|.
+name|createTypeWithNullability
+argument_list|(
+name|type
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
 specifier|final
 name|RexOver
 name|over
