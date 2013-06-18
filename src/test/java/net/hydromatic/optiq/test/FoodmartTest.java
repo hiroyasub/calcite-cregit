@@ -23,7 +23,7 @@ name|test
 operator|.
 name|data
 operator|.
-name|FoodMartData
+name|FoodMartQuery
 import|;
 end_import
 
@@ -1033,7 +1033,6 @@ literal|6739
 block|,   }
 decl_stmt|;
 comment|// Interesting tests. (We need to fix and remove from the disabled list.)
-comment|// 5677, 5681 only: assert into Context.toSql
 comment|// 2452, 2453, 2454, 2457 only: RTRIM
 comment|// 2436-2453,2455: agg_
 comment|// 2518, 5960 only: "every derived table must have its own alias"
@@ -1105,7 +1104,7 @@ name|InputStream
 name|inputStream
 init|=
 operator|new
-name|FoodMartData
+name|FoodMartQuery
 argument_list|()
 operator|.
 name|getQueries
