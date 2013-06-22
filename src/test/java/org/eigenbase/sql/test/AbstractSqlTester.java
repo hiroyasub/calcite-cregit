@@ -120,7 +120,6 @@ implements|implements
 name|SqlTester
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
-comment|// ~ Constants ------------------------------------------------------------
 specifier|public
 specifier|static
 specifier|final
@@ -172,12 +171,19 @@ block|}
 block|}
 decl_stmt|;
 comment|//~ Instance fields --------------------------------------------------------
-comment|// ~ Members --------------------------------------------------------------
 specifier|private
 name|SqlOperator
 name|operator
 decl_stmt|;
 comment|//~ Methods ----------------------------------------------------------------
+comment|/** {@inheritDoc}      *      * This default implementation does nothing.      */
+specifier|public
+name|void
+name|close
+parameter_list|()
+block|{
+comment|// no resources to release
+block|}
 specifier|public
 name|void
 name|setFor

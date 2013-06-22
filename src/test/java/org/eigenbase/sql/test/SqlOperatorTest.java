@@ -52,10 +52,11 @@ name|SqlOperatorTest
 extends|extends
 name|SqlOperatorBaseTest
 block|{
-comment|//~ Instance fields --------------------------------------------------------
 specifier|private
+specifier|static
+specifier|final
 name|SqlTester
-name|tester
+name|DEFAULT_TESTER
 init|=
 operator|(
 name|SqlTester
@@ -73,7 +74,7 @@ operator|.
 name|Default
 argument_list|)
 decl_stmt|;
-comment|//~ Constructors -----------------------------------------------------------
+comment|/** Creates a SqlOperatorTest. */
 specifier|public
 name|SqlOperatorTest
 parameter_list|()
@@ -81,18 +82,10 @@ block|{
 name|super
 argument_list|(
 literal|false
+argument_list|,
+name|DEFAULT_TESTER
 argument_list|)
 expr_stmt|;
-block|}
-comment|//~ Methods ----------------------------------------------------------------
-specifier|protected
-name|SqlTester
-name|getTester
-parameter_list|()
-block|{
-return|return
-name|tester
-return|;
 block|}
 block|}
 end_class

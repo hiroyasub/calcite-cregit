@@ -157,6 +157,20 @@ name|org
 operator|.
 name|eigenbase
 operator|.
+name|sql
+operator|.
+name|validate
+operator|.
+name|SqlConformance
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
 name|test
 operator|.
 name|*
@@ -208,7 +222,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Contains unit tests for all operators. Each of the methods is named after an  * operator.  *  *<p>The class is abstract. It contains a test for every operator, but does not  * provide a mechanism to execute the tests: parse, validate, and execute  * expressions on the operators. This is left to a {@link SqlTester} object  * which the derived class must provide.  *  *<p>Different implementations of {@link SqlTester} are possible, such as:  *  *<ul>  *<li>Execute against a real farrago database  *<li>Execute in pure java (parsing and validation can be done, but expression  * evaluation is not possible)  *<li>Generate a SQL script.  *<li>Analyze which operators are adequately tested.  *</ul>  *  *<p>A typical method will be named after the operator it is testing (say  *<code>testSubstringFunc</code>). It first calls {@link  * SqlTester#setFor(org.eigenbase.sql.SqlOperator,  * org.eigenbase.sql.test.SqlTester.VmName...)} to declare which operator it is  * testing.<blockqoute>  *  *<pre><code>  * @Test public void testSubstringFunc() {  *     getTester().setFor(SqlStdOperatorTable.substringFunc);  *     getTester().checkScalar("sin(0)", "0");  *     getTester().checkScalar("sin(1.5707)", "1");  * }</code></pre>  *  *</blockqoute> The rest of the method contains calls to the various<code>  * checkXxx</code> methods in the {@link SqlTester} interface. For an operator  * to be adequately tested, there need to be tests for:  *  *<ul>  *<li>Parsing all of its the syntactic variants.  *<li>Deriving the type of in all combinations of arguments.  *  *<ul>  *<li>Pay particular attention to nullability. For example, the result of the  * "+" operator is NOT NULL if and only if both of its arguments are NOT  * NULL.</li>  *<li>Also pay attention to precsion/scale/length. For example, the maximum  * length of the "||" operator is the sum of the maximum lengths of its  * arguments.</li>  *</ul>  *</li>  *<li>Executing the function. Pay particular attention to corner cases such as  * null arguments or null results.</li>  *</ul>  */
+comment|/**  * Contains unit tests for all operators. Each of the methods is named after an  * operator.  *  *<p>The class is abstract. It contains a test for every operator, but does not  * provide a mechanism to execute the tests: parse, validate, and execute  * expressions on the operators. This is left to a {@link SqlTester} object  * which the derived class must provide.  *  *<p>Different implementations of {@link SqlTester} are possible, such as:  *  *<ul>  *<li>Execute against a real farrago database  *<li>Execute in pure java (parsing and validation can be done, but expression  * evaluation is not possible)  *<li>Generate a SQL script.  *<li>Analyze which operators are adequately tested.  *</ul>  *  *<p>A typical method will be named after the operator it is testing (say  *<code>testSubstringFunc</code>). It first calls {@link  * SqlTester#setFor(org.eigenbase.sql.SqlOperator,  * org.eigenbase.sql.test.SqlTester.VmName...)} to declare which operator it is  * testing.<blockqoute>  *  *<pre><code>  * public void testSubstringFunc() {  *     tester.setFor(SqlStdOperatorTable.substringFunc);  *     tester.checkScalar("sin(0)", "0");  *     tester.checkScalar("sin(1.5707)", "1");  * }</code></pre>  *  *</blockqoute> The rest of the method contains calls to the various<code>  * checkXxx</code> methods in the {@link SqlTester} interface. For an operator  * to be adequately tested, there need to be tests for:  *  *<ul>  *<li>Parsing all of its the syntactic variants.  *<li>Deriving the type of in all combinations of arguments.  *  *<ul>  *<li>Pay particular attention to nullability. For example, the result of the  * "+" operator is NOT NULL if and only if both of its arguments are NOT  * NULL.</li>  *<li>Also pay attention to precision/scale/length. For example, the maximum  * length of the "||" operator is the sum of the maximum lengths of its  * arguments.</li>  *</ul>  *</li>  *<li>Executing the function. Pay particular attention to corner cases such as  * null arguments or null results.</li>  *</ul>  */
 end_comment
 
 begin_class
@@ -797,28 +811,26 @@ name|INTERVAL
 init|=
 literal|false
 decl_stmt|;
-comment|/** Whether to run "failing" tests. */
 specifier|private
 specifier|final
 name|boolean
 name|enable
 decl_stmt|;
+specifier|protected
+specifier|final
+name|SqlTester
+name|tester
+decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-specifier|public
-name|SqlOperatorBaseTest
-parameter_list|()
-block|{
-name|this
-argument_list|(
-literal|true
-argument_list|)
-expr_stmt|;
-block|}
+comment|/** Creates a SqlOperatorBaseTest.    *    * @param enable Whether to run "failing" tests.    * @param tester Means to validate, execute various statements.    */
 specifier|protected
 name|SqlOperatorBaseTest
 parameter_list|(
 name|boolean
 name|enable
+parameter_list|,
+name|SqlTester
+name|tester
 parameter_list|)
 block|{
 name|this
@@ -827,15 +839,19 @@ name|enable
 operator|=
 name|enable
 expr_stmt|;
+name|this
+operator|.
+name|tester
+operator|=
+name|tester
+expr_stmt|;
+assert|assert
+name|tester
+operator|!=
+literal|null
+assert|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Derived class must implement this method to provide a means to validate,      * execute various statements.      */
-specifier|protected
-specifier|abstract
-name|SqlTester
-name|getTester
-parameter_list|()
-function_decl|;
 annotation|@
 name|Before
 specifier|public
@@ -845,8 +861,7 @@ parameter_list|()
 throws|throws
 name|Exception
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -880,8 +895,7 @@ name|void
 name|testBetween
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -896,8 +910,7 @@ operator|.
 name|EXPAND
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -908,8 +921,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -920,8 +932,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -932,8 +943,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -944,8 +954,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -956,8 +965,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -968,8 +976,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -980,8 +987,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -992,8 +998,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -1004,8 +1009,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -1016,8 +1020,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -1028,8 +1031,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -1040,8 +1042,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -1052,8 +1053,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -1064,8 +1064,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -1076,8 +1075,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -1088,8 +1086,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -1100,8 +1097,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -1120,8 +1116,7 @@ condition|)
 block|{
 return|return;
 block|}
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -1132,32 +1127,28 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
 literal|"cast(null as integer) between -1 and 2"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
 literal|"1 between -1 and cast(null as integer)"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
 literal|"1 between cast(null as integer) and cast(null as integer)"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
@@ -1172,8 +1163,7 @@ name|void
 name|testNotBetween
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -1184,8 +1174,7 @@ argument_list|,
 name|VM_EXPAND
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -1196,8 +1185,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -1208,8 +1196,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -1220,8 +1207,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -1232,8 +1218,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -1244,8 +1229,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -1256,8 +1240,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -1326,8 +1309,7 @@ name|double
 name|delta
 parameter_list|)
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -1364,8 +1346,7 @@ name|String
 name|expected
 parameter_list|)
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkString
 argument_list|(
@@ -1400,8 +1381,7 @@ name|String
 name|expected
 parameter_list|)
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -1460,8 +1440,7 @@ name|boolean
 name|runtime
 parameter_list|)
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -1668,8 +1647,7 @@ name|void
 name|testCastToString
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -1734,8 +1712,7 @@ argument_list|,
 literal|"-123.4"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkString
 argument_list|(
@@ -1746,8 +1723,7 @@ argument_list|,
 literal|"VARCHAR(10) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkString
 argument_list|(
@@ -1758,8 +1734,7 @@ argument_list|,
 literal|"VARCHAR(10) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -1770,8 +1745,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkString
 argument_list|(
@@ -1782,8 +1756,7 @@ argument_list|,
 literal|"VARCHAR(10) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkString
 argument_list|(
@@ -1876,8 +1849,7 @@ literal|"-1E-1"
 argument_list|)
 expr_stmt|;
 block|}
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -1888,8 +1860,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -1970,8 +1941,7 @@ if|if
 condition|(
 operator|!
 operator|(
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|isVm
 argument_list|(
@@ -2040,8 +2010,7 @@ argument_list|,
 literal|"FALSE"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -2052,8 +2021,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -2064,8 +2032,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -2076,8 +2043,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -2096,8 +2062,7 @@ name|void
 name|testCastExactNumericLimits
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -2404,8 +2369,7 @@ name|void
 name|testCastToExactNumeric
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -2539,8 +2503,7 @@ literal|"0"
 argument_list|)
 expr_stmt|;
 comment|// string to integer
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -2549,8 +2512,7 @@ argument_list|,
 literal|"6543"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -2559,8 +2521,7 @@ argument_list|,
 literal|"-123"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -2579,8 +2540,7 @@ name|void
 name|testCastStringToDecimal
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -2598,8 +2558,7 @@ block|{
 return|return;
 block|}
 comment|// string to decimal
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -2610,8 +2569,7 @@ argument_list|,
 literal|"1.3"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -2622,8 +2580,7 @@ argument_list|,
 literal|"1.3"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -2634,8 +2591,7 @@ argument_list|,
 literal|"1.2"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -2646,8 +2602,7 @@ argument_list|,
 literal|"-1.3"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -2658,8 +2613,7 @@ argument_list|,
 literal|"-1.3"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -2670,8 +2624,7 @@ argument_list|,
 literal|"-1.2"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -2690,8 +2643,7 @@ name|void
 name|testCastIntervalToNumeric
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -2709,8 +2661,7 @@ block|{
 return|return;
 block|}
 comment|// interval to decimal
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -2721,8 +2672,7 @@ argument_list|,
 literal|"1.3"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -2733,8 +2683,7 @@ argument_list|,
 literal|"1.3"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -2745,8 +2694,7 @@ argument_list|,
 literal|"-1.3"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -2757,8 +2705,7 @@ argument_list|,
 literal|"-1.3"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -2769,8 +2716,7 @@ argument_list|,
 literal|"-1.2"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -2781,8 +2727,7 @@ argument_list|,
 literal|"5.0"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -2793,8 +2738,7 @@ argument_list|,
 literal|"5.0"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -2805,8 +2749,7 @@ argument_list|,
 literal|"5.0"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -2817,8 +2760,7 @@ argument_list|,
 literal|"5.0"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -2829,8 +2771,7 @@ argument_list|,
 literal|"5.0"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -2842,8 +2783,7 @@ literal|"-5.0"
 argument_list|)
 expr_stmt|;
 comment|// Interval to bigint
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -2854,8 +2794,7 @@ argument_list|,
 literal|"1"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -2866,8 +2805,7 @@ argument_list|,
 literal|"-1"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -2879,8 +2817,7 @@ literal|"5"
 argument_list|)
 expr_stmt|;
 comment|// Interval to integer
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -2891,8 +2828,7 @@ argument_list|,
 literal|"1"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -2903,8 +2839,7 @@ argument_list|,
 literal|"-1"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -2923,8 +2858,7 @@ name|void
 name|testCastToInterval
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -2941,8 +2875,7 @@ condition|)
 block|{
 return|return;
 block|}
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -2953,8 +2886,7 @@ argument_list|,
 literal|"INTERVAL SECOND NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -2965,8 +2897,7 @@ argument_list|,
 literal|"INTERVAL MINUTE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -2977,8 +2908,7 @@ argument_list|,
 literal|"INTERVAL HOUR NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -2989,8 +2919,7 @@ argument_list|,
 literal|"INTERVAL DAY NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -3001,8 +2930,7 @@ argument_list|,
 literal|"INTERVAL MONTH NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -3013,8 +2941,7 @@ argument_list|,
 literal|"INTERVAL YEAR NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -3025,8 +2952,7 @@ argument_list|,
 literal|"INTERVAL DAY NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -3037,8 +2963,7 @@ argument_list|,
 literal|"INTERVAL DAY NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -3049,8 +2974,7 @@ argument_list|,
 literal|"INTERVAL MONTH(4) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -3069,8 +2993,7 @@ name|void
 name|testCastWithRoundingToScalar
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -3304,8 +3227,7 @@ literal|"-2.0000"
 argument_list|)
 expr_stmt|;
 comment|// 9.99 round to 10.0, should give out of range error
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -3324,8 +3246,7 @@ name|void
 name|testCastDecimalToDoubleToInteger
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -3334,8 +3255,7 @@ operator|.
 name|castFunc
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -3344,8 +3264,7 @@ argument_list|,
 literal|"1"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -3362,8 +3281,7 @@ condition|)
 block|{
 return|return;
 block|}
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -3372,8 +3290,7 @@ argument_list|,
 literal|"2"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -3382,8 +3299,7 @@ argument_list|,
 literal|"-2"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -3392,8 +3308,7 @@ argument_list|,
 literal|"2"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -3410,8 +3325,7 @@ name|void
 name|testCastApproxNumericLimits
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -3852,8 +3766,7 @@ name|void
 name|testCastToApproxNumeric
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -3949,8 +3862,7 @@ name|void
 name|testCastNull
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -3960,8 +3872,7 @@ name|castFunc
 argument_list|)
 expr_stmt|;
 comment|// null
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
@@ -3973,8 +3884,7 @@ condition|(
 name|DECIMAL
 condition|)
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
@@ -3982,24 +3892,21 @@ literal|"cast(null as decimal(4,3))"
 argument_list|)
 expr_stmt|;
 block|}
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
 literal|"cast(null as double)"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
 literal|"cast(null as varchar(10))"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
@@ -4014,24 +3921,21 @@ condition|)
 block|{
 return|return;
 block|}
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
 literal|"cast(null as date)"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
 literal|"cast(null as time)"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
@@ -4043,16 +3947,14 @@ condition|(
 name|INTERVAL
 condition|)
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
 literal|"cast(null as interval year to month)"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
@@ -4060,8 +3962,7 @@ literal|"cast(null as interval day to second(3))"
 argument_list|)
 expr_stmt|;
 block|}
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
@@ -4077,8 +3978,7 @@ name|testCastDateTime
 parameter_list|()
 block|{
 comment|// Test cast for date/time/timestamp
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -4087,8 +3987,7 @@ operator|.
 name|castFunc
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -4099,8 +3998,7 @@ argument_list|,
 literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -4112,8 +4010,7 @@ literal|"TIME(0) NOT NULL"
 argument_list|)
 expr_stmt|;
 comment|// test rounding
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -4132,8 +4029,7 @@ name|Frg282Fixed
 condition|)
 block|{
 comment|// test precision
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -4145,8 +4041,7 @@ literal|"TIME(2) NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -4158,8 +4053,7 @@ literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
 comment|// timestamp<-> time
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -4221,8 +4115,7 @@ name|getTime
 argument_list|()
 argument_list|)
 decl_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -4244,8 +4137,7 @@ block|}
 comment|// Note: Casting to time(0) should lose date info and fractional
 comment|// seconds, then casting back to timestamp should initialize to
 comment|// current_date.
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -4258,8 +4150,7 @@ argument_list|,
 literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -4273,8 +4164,7 @@ literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
 expr_stmt|;
 comment|// timestamp<-> date
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -4286,8 +4176,7 @@ literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
 comment|// Note: casting to Date discards Time fields
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -4298,8 +4187,7 @@ argument_list|,
 literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -4310,8 +4198,7 @@ argument_list|,
 literal|"TIME(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -4322,8 +4209,7 @@ argument_list|,
 literal|"TIME(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -4334,8 +4220,7 @@ argument_list|,
 literal|"TIME(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -4346,8 +4231,7 @@ argument_list|,
 literal|"TIME(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -4365,8 +4249,7 @@ operator|.
 name|Frg282Fixed
 condition|)
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -4378,8 +4261,7 @@ literal|"TIME(2) NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -4390,8 +4272,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -4402,8 +4283,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -4440,8 +4320,7 @@ literal|"1945-02-24 12:42:25.34"
 argument_list|)
 expr_stmt|;
 block|}
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -4452,8 +4331,7 @@ argument_list|,
 literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -4464,8 +4342,7 @@ argument_list|,
 literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -4476,8 +4353,7 @@ argument_list|,
 literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -4495,8 +4371,7 @@ operator|.
 name|Frg282Fixed
 condition|)
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -4508,8 +4383,7 @@ literal|"TIMESTAMP(2) NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -4520,8 +4394,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -4532,8 +4405,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -4544,8 +4416,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -4575,8 +4446,7 @@ argument_list|,
 literal|"1945-02-24"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -4587,8 +4457,7 @@ argument_list|,
 literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -4599,8 +4468,7 @@ argument_list|,
 literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -4611,8 +4479,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -4623,8 +4490,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -4636,80 +4502,70 @@ literal|true
 argument_list|)
 expr_stmt|;
 comment|// cast null
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
 literal|"cast(null as date)"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
 literal|"cast(null as timestamp)"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
 literal|"cast(null as time)"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
 literal|"cast(cast(null as varchar(10)) as time)"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
 literal|"cast(cast(null as varchar(10)) as date)"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
 literal|"cast(cast(null as varchar(10)) as timestamp)"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
 literal|"cast(cast(null as date) as timestamp)"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
 literal|"cast(cast(null as time) as timestamp)"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
 literal|"cast(cast(null as timestamp) as date)"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
@@ -4903,8 +4759,7 @@ name|void
 name|testCastToBoolean
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -4914,8 +4769,7 @@ name|castFunc
 argument_list|)
 expr_stmt|;
 comment|// string to boolean
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -4926,8 +4780,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -4938,8 +4791,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -4950,8 +4802,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -4962,8 +4813,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -4974,8 +4824,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -4986,8 +4835,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -4998,8 +4846,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -5018,8 +4865,7 @@ name|void
 name|testCase
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -5028,8 +4874,7 @@ operator|.
 name|caseOperator
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -5038,8 +4883,7 @@ argument_list|,
 literal|"1"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkString
 argument_list|(
@@ -5050,8 +4894,7 @@ argument_list|,
 literal|"CHAR(3)"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkString
 argument_list|(
@@ -5062,8 +4905,7 @@ argument_list|,
 literal|"CHAR(3)"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkString
 argument_list|(
@@ -5081,8 +4923,7 @@ condition|(
 name|DECIMAL
 condition|)
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -5093,8 +4934,7 @@ argument_list|,
 literal|"4.543"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -5106,8 +4946,7 @@ literal|"11.200"
 argument_list|)
 expr_stmt|;
 block|}
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -5116,8 +4955,7 @@ argument_list|,
 literal|"1"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -5130,8 +4968,7 @@ argument_list|,
 literal|0
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -5144,8 +4981,7 @@ argument_list|,
 literal|0
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -5158,8 +4994,7 @@ argument_list|,
 literal|0
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -5172,8 +5007,7 @@ argument_list|,
 literal|0
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -5186,8 +5020,7 @@ argument_list|,
 literal|0
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
@@ -5202,8 +5035,7 @@ condition|)
 block|{
 return|return;
 block|}
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -5217,8 +5049,7 @@ condition|(
 name|todo
 condition|)
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -5229,8 +5060,7 @@ argument_list|,
 literal|"row(1,2)"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -5251,8 +5081,7 @@ name|void
 name|testCaseType
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -5261,8 +5090,7 @@ operator|.
 name|caseOperator
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkType
 argument_list|(
@@ -5271,8 +5099,7 @@ argument_list|,
 literal|"TIMESTAMP(0)"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkType
 argument_list|(
@@ -5281,8 +5108,7 @@ argument_list|,
 literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkType
 argument_list|(
@@ -5291,8 +5117,7 @@ argument_list|,
 literal|"TIMESTAMP(0)"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkType
 argument_list|(
@@ -5301,8 +5126,7 @@ argument_list|,
 literal|"TIMESTAMP(0)"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkType
 argument_list|(
@@ -5320,8 +5144,7 @@ name|void
 name|testJdbcFn
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -5344,8 +5167,7 @@ condition|)
 block|{
 return|return;
 block|}
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -5361,8 +5183,7 @@ condition|(
 literal|false
 condition|)
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -5379,8 +5200,7 @@ condition|(
 literal|false
 condition|)
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -5397,8 +5217,7 @@ condition|(
 literal|false
 condition|)
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -5415,8 +5234,7 @@ condition|(
 literal|false
 condition|)
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -5433,8 +5251,7 @@ condition|(
 literal|false
 condition|)
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -5451,8 +5268,7 @@ condition|(
 literal|false
 condition|)
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -5469,8 +5285,7 @@ condition|(
 literal|false
 condition|)
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -5487,8 +5302,7 @@ condition|(
 literal|false
 condition|)
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -5500,8 +5314,7 @@ literal|""
 argument_list|)
 expr_stmt|;
 block|}
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -5519,8 +5332,7 @@ condition|(
 literal|false
 condition|)
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -5532,8 +5344,7 @@ literal|"DOUBLE NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -5546,8 +5357,7 @@ argument_list|,
 literal|0.001
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -5560,8 +5370,7 @@ argument_list|,
 literal|0
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -5577,8 +5386,7 @@ condition|(
 literal|false
 condition|)
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -5590,8 +5398,7 @@ literal|""
 argument_list|)
 expr_stmt|;
 block|}
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -5607,8 +5414,7 @@ condition|(
 literal|false
 condition|)
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -5625,8 +5431,7 @@ condition|(
 literal|false
 condition|)
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -5643,8 +5448,7 @@ condition|(
 literal|false
 condition|)
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -5661,8 +5465,7 @@ condition|(
 literal|false
 condition|)
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -5679,8 +5482,7 @@ condition|(
 literal|false
 condition|)
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -5697,8 +5499,7 @@ condition|(
 literal|false
 condition|)
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -5715,8 +5516,7 @@ condition|(
 literal|false
 condition|)
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -5733,8 +5533,7 @@ condition|(
 literal|false
 condition|)
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -5752,8 +5551,7 @@ condition|(
 literal|false
 condition|)
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -5770,8 +5568,7 @@ condition|(
 literal|false
 condition|)
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -5783,8 +5580,7 @@ literal|""
 argument_list|)
 expr_stmt|;
 block|}
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -5800,8 +5596,7 @@ condition|(
 literal|false
 condition|)
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -5814,8 +5609,7 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|// REVIEW: is this result correct? I think it should be "abcCdef"
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -5826,8 +5620,7 @@ argument_list|,
 literal|"VARCHAR(9) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -5843,8 +5636,7 @@ condition|(
 literal|false
 condition|)
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -5861,8 +5653,7 @@ condition|(
 literal|false
 condition|)
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -5874,8 +5665,7 @@ literal|""
 argument_list|)
 expr_stmt|;
 block|}
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -5892,8 +5682,7 @@ condition|(
 literal|false
 condition|)
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -5911,8 +5700,7 @@ condition|(
 literal|false
 condition|)
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -5929,8 +5717,7 @@ condition|(
 literal|false
 condition|)
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -5947,8 +5734,7 @@ condition|(
 literal|false
 condition|)
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -5965,8 +5751,7 @@ condition|(
 literal|false
 condition|)
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -5984,8 +5769,7 @@ condition|(
 literal|false
 condition|)
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -6002,8 +5786,7 @@ condition|(
 literal|false
 condition|)
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -6020,8 +5803,7 @@ condition|(
 literal|false
 condition|)
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -6033,8 +5815,7 @@ literal|""
 argument_list|)
 expr_stmt|;
 block|}
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -6045,8 +5826,7 @@ argument_list|,
 literal|"VARCHAR(6) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -6058,8 +5838,7 @@ literal|"CHAR(3) NOT NULL"
 argument_list|)
 expr_stmt|;
 comment|// Time and Date Functions
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkType
 argument_list|(
@@ -6068,8 +5847,7 @@ argument_list|,
 literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkType
 argument_list|(
@@ -6083,8 +5861,7 @@ condition|(
 literal|false
 condition|)
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -6101,8 +5878,7 @@ condition|(
 literal|false
 condition|)
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -6119,8 +5895,7 @@ condition|(
 literal|false
 condition|)
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -6137,8 +5912,7 @@ condition|(
 literal|false
 condition|)
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -6155,8 +5929,7 @@ condition|(
 literal|false
 condition|)
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -6173,8 +5946,7 @@ condition|(
 literal|false
 condition|)
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -6191,8 +5963,7 @@ condition|(
 literal|false
 condition|)
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -6209,8 +5980,7 @@ condition|(
 literal|false
 condition|)
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -6222,8 +5992,7 @@ literal|""
 argument_list|)
 expr_stmt|;
 block|}
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkType
 argument_list|(
@@ -6237,8 +6006,7 @@ condition|(
 literal|false
 condition|)
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -6255,8 +6023,7 @@ condition|(
 literal|false
 condition|)
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -6273,8 +6040,7 @@ condition|(
 literal|false
 condition|)
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -6291,8 +6057,7 @@ condition|(
 literal|false
 condition|)
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -6309,8 +6074,7 @@ condition|(
 literal|false
 condition|)
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -6327,8 +6091,7 @@ condition|(
 literal|false
 condition|)
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -6346,8 +6109,7 @@ condition|(
 literal|false
 condition|)
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -6364,8 +6126,7 @@ condition|(
 literal|false
 condition|)
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -6382,8 +6143,7 @@ condition|(
 literal|false
 condition|)
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -6401,8 +6161,7 @@ condition|(
 literal|false
 condition|)
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -6422,8 +6181,7 @@ name|void
 name|testSelect
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -6434,8 +6192,7 @@ argument_list|,
 name|VM_EXPAND
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|check
 argument_list|(
@@ -6474,8 +6231,7 @@ operator|.
 name|TodoFixed
 condition|)
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkType
 argument_list|(
@@ -6484,8 +6240,7 @@ argument_list|,
 literal|"RecordType(INTEGER NOT NULL EXPR$0, INTEGER EXPR$1) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkType
 argument_list|(
@@ -6496,8 +6251,7 @@ argument_list|,
 literal|"RecordType(BIGINT NOT NULL EXPR$0, BIGINT EXPR$1) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkType
 argument_list|(
@@ -6506,8 +6260,7 @@ argument_list|,
 literal|"RecordType(DECIMAL(3, 1) NOT NULL EXPR$0, DECIMAL(3, 1) EXPR$1) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkType
 argument_list|(
@@ -6518,8 +6271,7 @@ argument_list|,
 literal|"RecordType(CHAR(18) NOT NULL EXPR$0, CHAR(14) EXPR$1) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkType
 argument_list|(
@@ -6528,8 +6280,7 @@ argument_list|,
 literal|"RecordType(BOOLEAN NOT NULL EXPR$0, BOOLEAN EXPR$1) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkType
 argument_list|(
@@ -6540,8 +6291,7 @@ argument_list|,
 literal|"RecordType(VARCHAR(10) NOT NULL EXPR$0, VARCHAR(10) EXPR$1) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkType
 argument_list|(
@@ -6563,8 +6313,7 @@ name|void
 name|testLiteralChain
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -6575,8 +6324,7 @@ argument_list|,
 name|VM_EXPAND
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkString
 argument_list|(
@@ -6587,8 +6335,7 @@ argument_list|,
 literal|"CHAR(14) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkString
 argument_list|(
@@ -6599,8 +6346,7 @@ argument_list|,
 literal|"CHAR(18) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkString
 argument_list|(
@@ -6619,8 +6365,7 @@ condition|)
 block|{
 return|return;
 block|}
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -6631,8 +6376,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -6643,8 +6387,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -6663,8 +6406,7 @@ name|void
 name|testRow
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -6683,8 +6425,7 @@ name|void
 name|testAndOperator
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -6693,8 +6434,7 @@ operator|.
 name|andOperator
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -6705,8 +6445,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -6717,8 +6456,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -6729,8 +6467,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -6741,16 +6478,14 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
 literal|"cast(null as boolean) and true"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -6769,8 +6504,7 @@ name|void
 name|testAndOperator2
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -6781,8 +6515,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -6793,8 +6526,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -6813,8 +6545,7 @@ name|void
 name|testAndOperatorLazy
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -6826,8 +6557,7 @@ expr_stmt|;
 comment|// lazy eval returns FALSE;
 comment|// eager eval executes RHS of AND and throws;
 comment|// both are valid
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|check
 argument_list|(
@@ -6858,8 +6588,7 @@ name|void
 name|testConcatOperator
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -6868,8 +6597,7 @@ operator|.
 name|concatOperator
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkString
 argument_list|(
@@ -6880,24 +6608,21 @@ argument_list|,
 literal|"CHAR(2) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
 literal|" 'a' || cast(null as char(2)) "
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
 literal|" cast(null as char(2)) || 'b' "
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
@@ -6910,8 +6635,7 @@ name|todo
 condition|)
 block|{
 comment|// not yet implemented
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkString
 argument_list|(
@@ -6922,8 +6646,7 @@ argument_list|,
 literal|"BINARY(1) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
@@ -6939,8 +6662,7 @@ name|void
 name|testDivideOperator
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -6949,8 +6671,7 @@ operator|.
 name|divideOperator
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -6959,8 +6680,7 @@ argument_list|,
 literal|"2"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -6969,8 +6689,7 @@ argument_list|,
 literal|"-2"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -6979,8 +6698,7 @@ argument_list|,
 literal|"0"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -6993,8 +6711,7 @@ argument_list|,
 literal|0
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -7007,8 +6724,7 @@ argument_list|,
 literal|0
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -7021,8 +6737,7 @@ argument_list|,
 literal|0
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -7038,8 +6753,7 @@ condition|(
 name|DECIMAL
 condition|)
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -7050,8 +6764,7 @@ argument_list|,
 literal|"0.333333"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -7062,8 +6775,7 @@ argument_list|,
 literal|"1001000.0000000"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -7075,16 +6787,14 @@ literal|"10010000000.00000000"
 argument_list|)
 expr_stmt|;
 block|}
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
 literal|"1e1 / cast(null as float)"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -7111,8 +6821,7 @@ condition|)
 block|{
 return|return;
 block|}
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -7123,8 +6832,7 @@ argument_list|,
 literal|"INTERVAL HOUR TO MINUTE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -7135,16 +6843,14 @@ argument_list|,
 literal|"INTERVAL HOUR TO SECOND NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
 literal|"interval '2' day / cast(null as bigint)"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
@@ -7156,8 +6862,7 @@ condition|(
 name|todo
 condition|)
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -7168,8 +6873,7 @@ argument_list|,
 literal|"INTERVAL YEAR TO MONTH NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -7189,8 +6893,7 @@ name|void
 name|testEqualsOperator
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -7199,8 +6902,7 @@ operator|.
 name|equalsOperator
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -7211,8 +6913,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -7223,8 +6924,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -7235,8 +6935,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -7247,8 +6946,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -7259,8 +6957,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -7271,8 +6968,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -7283,8 +6979,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -7295,8 +6990,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -7307,8 +7001,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -7319,8 +7012,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -7331,8 +7023,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -7343,24 +7034,21 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
 literal|"cast(null as boolean)=cast(null as boolean)"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
 literal|"cast(null as integer)=1"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
@@ -7384,8 +7072,7 @@ condition|)
 block|{
 return|return;
 block|}
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -7396,8 +7083,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -7408,8 +7094,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -7420,8 +7105,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
@@ -7436,8 +7120,7 @@ name|void
 name|testGreaterThanOperator
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -7446,8 +7129,7 @@ operator|.
 name|greaterThanOperator
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -7458,8 +7140,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -7470,8 +7151,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -7482,8 +7162,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -7494,8 +7173,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -7506,8 +7184,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -7518,8 +7195,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -7530,8 +7206,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -7542,8 +7217,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -7554,8 +7228,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -7566,8 +7239,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -7578,8 +7250,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -7590,8 +7261,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -7602,8 +7272,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -7614,8 +7283,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -7626,8 +7294,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -7638,8 +7305,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -7650,16 +7316,14 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
 literal|"3.0>cast(null as double)"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -7670,8 +7334,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -7696,8 +7359,7 @@ condition|)
 block|{
 return|return;
 block|}
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -7708,8 +7370,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -7720,8 +7381,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -7732,8 +7392,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -7744,8 +7403,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -7756,8 +7414,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -7768,8 +7425,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -7780,8 +7436,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -7792,16 +7447,14 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
 literal|"cast(null as interval hour)> interval '2' minute"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
@@ -7816,8 +7469,7 @@ name|void
 name|testIsDistinctFromOperator
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -7828,8 +7480,7 @@ argument_list|,
 name|VM_EXPAND
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -7848,8 +7499,7 @@ condition|)
 block|{
 return|return;
 block|}
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -7860,8 +7510,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -7872,8 +7521,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -7884,8 +7532,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -7896,8 +7543,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -7908,8 +7554,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -7920,8 +7565,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -7938,8 +7582,7 @@ condition|(
 literal|false
 condition|)
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -7948,8 +7591,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -7960,8 +7602,7 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|// Intervals
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -7972,8 +7613,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -7992,8 +7632,7 @@ name|void
 name|testIsNotDistinctFromOperator
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -8004,8 +7643,7 @@ argument_list|,
 name|VM_EXPAND
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -8016,8 +7654,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -8028,8 +7665,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -8040,8 +7676,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -8052,8 +7687,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -8064,8 +7698,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -8076,8 +7709,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -8088,8 +7720,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -8106,8 +7737,7 @@ condition|(
 literal|false
 condition|)
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -8116,8 +7746,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -8136,8 +7765,7 @@ block|{
 return|return;
 block|}
 comment|// Intervals
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -8148,8 +7776,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -8168,8 +7795,7 @@ name|void
 name|testGreaterThanOrEqualOperator
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -8178,8 +7804,7 @@ operator|.
 name|greaterThanOrEqualOperator
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -8190,8 +7815,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -8202,8 +7826,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -8214,8 +7837,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -8226,8 +7848,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -8238,8 +7859,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -8250,8 +7870,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -8262,8 +7881,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -8274,8 +7892,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -8286,8 +7903,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -8298,8 +7914,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -8310,8 +7925,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -8322,8 +7936,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -8334,8 +7947,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -8346,8 +7958,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -8358,8 +7969,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -8370,8 +7980,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
@@ -8394,8 +8003,7 @@ condition|)
 block|{
 return|return;
 block|}
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -8406,8 +8014,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -8418,8 +8025,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -8430,8 +8036,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -8442,8 +8047,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -8454,8 +8058,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -8466,8 +8069,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -8478,8 +8080,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -8490,16 +8091,14 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
 literal|"cast(null as interval hour)>= interval '2' minute"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
@@ -8514,8 +8113,7 @@ name|void
 name|testInOperator
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -8526,8 +8124,7 @@ argument_list|,
 name|VM_EXPAND
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -8536,8 +8133,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -8546,8 +8142,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -8556,8 +8151,7 @@ argument_list|,
 literal|null
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -8573,8 +8167,7 @@ operator|.
 name|Frg327Fixed
 condition|)
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -8583,8 +8176,7 @@ argument_list|,
 literal|null
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -8603,8 +8195,7 @@ block|{
 return|return;
 block|}
 comment|// AND has lower precedence than IN
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -8623,8 +8214,7 @@ condition|)
 block|{
 return|return;
 block|}
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -8643,8 +8233,7 @@ name|void
 name|testNotInOperator
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -8655,8 +8244,7 @@ argument_list|,
 name|VM_EXPAND
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -8665,8 +8253,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -8683,8 +8270,7 @@ condition|)
 block|{
 return|return;
 block|}
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -8693,8 +8279,7 @@ argument_list|,
 literal|null
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -8710,8 +8295,7 @@ operator|.
 name|Frg327Fixed
 condition|)
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -8720,8 +8304,7 @@ argument_list|,
 literal|null
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -8732,8 +8315,7 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|// AND has lower precedence than NOT IN
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -8752,8 +8334,7 @@ condition|)
 block|{
 return|return;
 block|}
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -8772,8 +8353,7 @@ name|void
 name|testOverlapsOperator
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -8791,8 +8371,7 @@ operator|.
 name|Frg187Fixed
 condition|)
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -8803,8 +8382,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -8815,8 +8393,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -8827,24 +8404,21 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
 literal|"(cast(null as date), date '1-2-3') overlaps (date '1-2-3', interval '1' year)"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
 literal|"(date '1-2-3', date '1-2-3') overlaps (date '1-2-3', cast(null as date))"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -8855,8 +8429,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -8867,8 +8440,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -8879,24 +8451,21 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
 literal|"(time '1:2:3', cast(null as time)) overlaps (time '23:59:59', time '1:2:3')"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
 literal|"(time '1:2:3', interval '1' second) overlaps (time '23:59:59', cast(null as interval hour))"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -8907,8 +8476,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -8919,16 +8487,14 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
 literal|"(timestamp '1-2-3 4:5:6', cast(null as interval day) ) overlaps (timestamp '1-2-3 4:5:6', interval '1 2:3:4.5' day to second)"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
@@ -8944,8 +8510,7 @@ name|void
 name|testLessThanOperator
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -8954,8 +8519,7 @@ operator|.
 name|lessThanOperator
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -8966,8 +8530,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -8978,8 +8541,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -8990,8 +8552,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -9002,8 +8563,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -9014,8 +8574,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -9026,8 +8585,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -9038,8 +8596,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -9050,8 +8607,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -9062,8 +8618,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -9074,8 +8629,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -9086,8 +8640,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -9098,8 +8651,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -9110,8 +8662,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -9122,8 +8673,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -9134,8 +8684,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -9146,24 +8695,21 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
 literal|"123<cast(null as bigint)"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
 literal|"cast(null as tinyint)<123"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
@@ -9186,8 +8732,7 @@ condition|)
 block|{
 return|return;
 block|}
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -9198,8 +8743,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -9210,8 +8754,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -9222,8 +8765,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -9234,8 +8776,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -9246,8 +8787,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -9258,8 +8798,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -9270,8 +8809,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -9282,16 +8820,14 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
 literal|"cast(null as interval hour)< interval '2' minute"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
@@ -9306,8 +8842,7 @@ name|void
 name|testLessThanOrEqualOperator
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -9316,8 +8851,7 @@ operator|.
 name|lessThanOrEqualOperator
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -9328,8 +8862,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -9340,8 +8873,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -9352,8 +8884,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -9364,8 +8895,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -9376,8 +8906,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -9388,8 +8917,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -9400,8 +8928,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -9412,8 +8939,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -9424,8 +8950,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -9436,8 +8961,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -9448,8 +8972,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -9460,8 +8983,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -9472,8 +8994,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -9484,8 +9005,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -9496,8 +9016,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -9508,32 +9027,28 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
 literal|"cast(null as real)<=cast(1 as real)"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
 literal|"cast(null as integer)<=3"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
 literal|"3<=cast(null as smallint)"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
@@ -9556,8 +9071,7 @@ condition|)
 block|{
 return|return;
 block|}
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -9568,8 +9082,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -9580,8 +9093,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -9592,8 +9104,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -9604,8 +9115,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -9616,8 +9126,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -9628,8 +9137,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -9640,8 +9148,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -9652,16 +9159,14 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
 literal|"cast(null as interval hour)<= interval '2' minute"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
@@ -9676,8 +9181,7 @@ name|void
 name|testMinusOperator
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -9686,8 +9190,7 @@ operator|.
 name|minusOperator
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -9696,8 +9199,7 @@ argument_list|,
 literal|"-3"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -9706,8 +9208,7 @@ argument_list|,
 literal|"-8"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -9716,8 +9217,7 @@ argument_list|,
 literal|"1"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -9730,8 +9230,7 @@ argument_list|,
 literal|0
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -9745,8 +9244,7 @@ argument_list|,
 literal|0
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -9759,8 +9257,7 @@ argument_list|,
 literal|0.00000001
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -9769,8 +9266,7 @@ argument_list|,
 literal|"-1"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -9781,8 +9277,7 @@ argument_list|,
 literal|"5.0"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -9793,16 +9288,14 @@ argument_list|,
 literal|"15.48"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
 literal|"1e1-cast(null as double)"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
@@ -9818,8 +9311,7 @@ name|Fnl25Fixed
 condition|)
 block|{
 comment|// Should throw out of range error
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -9830,8 +9322,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -9842,8 +9333,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -9854,8 +9344,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -9866,8 +9355,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -9878,8 +9366,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -9899,8 +9386,7 @@ name|void
 name|testMinusIntervalOperator
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -9917,8 +9403,7 @@ condition|)
 block|{
 return|return;
 block|}
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -9929,8 +9414,7 @@ argument_list|,
 literal|"INTERVAL DAY NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -9941,8 +9425,7 @@ argument_list|,
 literal|"INTERVAL DAY TO MINUTE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -9953,8 +9436,7 @@ argument_list|,
 literal|"INTERVAL YEAR TO MONTH NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -9965,8 +9447,7 @@ argument_list|,
 literal|"INTERVAL YEAR TO MONTH NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
@@ -9974,8 +9455,7 @@ literal|"cast(null as interval day) + interval '2' hour"
 argument_list|)
 expr_stmt|;
 comment|// Datetime minus interval
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -9986,8 +9466,7 @@ argument_list|,
 literal|"TIME(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -9998,8 +9477,7 @@ argument_list|,
 literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -10019,8 +9497,7 @@ name|void
 name|testMinusDateOperator
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -10037,8 +9514,7 @@ condition|)
 block|{
 return|return;
 block|}
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -10049,8 +9525,7 @@ argument_list|,
 literal|"INTERVAL MINUTE TO SECOND NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -10061,8 +9536,7 @@ argument_list|,
 literal|"INTERVAL MINUTE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -10073,8 +9547,7 @@ argument_list|,
 literal|"INTERVAL MINUTE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -10085,8 +9558,7 @@ argument_list|,
 literal|"INTERVAL DAY TO SECOND NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -10097,8 +9569,7 @@ argument_list|,
 literal|"INTERVAL DAY TO HOUR NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -10109,8 +9580,7 @@ argument_list|,
 literal|"INTERVAL DAY NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
@@ -10118,8 +9588,7 @@ literal|"(cast(null as date) - date '2003-12-01') day"
 argument_list|)
 expr_stmt|;
 comment|// combine '<datetime> +<interval>' with '<datetime> -<datetime>'
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -10134,8 +9603,7 @@ argument_list|,
 literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -10150,8 +9618,7 @@ argument_list|,
 literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -10173,8 +9640,7 @@ operator|.
 name|Dt1684Fixed
 condition|)
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -10199,8 +9665,7 @@ name|void
 name|testMultiplyOperator
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -10209,8 +9674,7 @@ operator|.
 name|multiplyOperator
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -10219,8 +9683,7 @@ argument_list|,
 literal|"6"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -10229,8 +9692,7 @@ argument_list|,
 literal|"-6"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -10239,8 +9701,7 @@ argument_list|,
 literal|"6"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -10249,8 +9710,7 @@ argument_list|,
 literal|"0"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -10263,8 +9723,7 @@ argument_list|,
 literal|0
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -10277,8 +9736,7 @@ argument_list|,
 literal|0
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -10291,8 +9749,7 @@ argument_list|,
 literal|0
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -10303,8 +9760,7 @@ argument_list|,
 literal|"50.00"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -10315,24 +9771,21 @@ argument_list|,
 literal|"82.656"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
 literal|"cast(1 as real)*cast(null as real)"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
 literal|"2e-3*cast(null as integer)"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
@@ -10347,8 +9800,7 @@ name|Fnl25Fixed
 condition|)
 block|{
 comment|// Should throw out of range error
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -10359,8 +9811,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -10371,8 +9822,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -10383,8 +9833,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -10395,8 +9844,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -10407,8 +9855,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -10436,8 +9883,7 @@ condition|)
 block|{
 return|return;
 block|}
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -10448,8 +9894,7 @@ argument_list|,
 literal|"INTERVAL HOUR TO MINUTE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -10460,16 +9905,14 @@ argument_list|,
 literal|"INTERVAL HOUR TO SECOND NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
 literal|"interval '2' day * cast(null as bigint)"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
@@ -10481,8 +9924,7 @@ condition|(
 name|todo
 condition|)
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -10493,8 +9935,7 @@ argument_list|,
 literal|"INTERVAL YEAR TO MONTH NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -10514,8 +9955,7 @@ name|void
 name|testNotEqualsOperator
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -10524,8 +9964,7 @@ operator|.
 name|notEqualsOperator
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -10536,8 +9975,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -10548,8 +9986,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -10560,8 +9997,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
@@ -10584,8 +10020,7 @@ condition|)
 block|{
 return|return;
 block|}
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -10596,8 +10031,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -10608,8 +10042,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -10620,8 +10053,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
@@ -10629,8 +10061,7 @@ literal|"cast(null as interval hour)<> interval '2' minute"
 argument_list|)
 expr_stmt|;
 comment|// "!=" is not an acceptable alternative to "<>"
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -10649,8 +10080,7 @@ name|void
 name|testOrOperator
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -10659,8 +10089,7 @@ operator|.
 name|orOperator
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -10671,8 +10100,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -10683,8 +10111,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -10695,8 +10122,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
@@ -10711,8 +10137,7 @@ name|void
 name|testOrOperatorLazy
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -10723,8 +10148,7 @@ argument_list|)
 expr_stmt|;
 comment|// need to evaluate 2nd argument if first evaluates to null, therefore
 comment|// get error
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|check
 argument_list|(
@@ -10749,8 +10173,7 @@ comment|// Do not need to evaluate 2nd argument if first evaluates to true.
 comment|// In eager evaluation, get error;
 comment|// lazy evaluation returns true;
 comment|// both are valid.
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|check
 argument_list|(
@@ -10777,8 +10200,7 @@ comment|// NULL OR FALSE --> NULL
 comment|// In eager evaluation, get error;
 comment|// lazy evaluation returns NULL;
 comment|// both are valid.
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|check
 argument_list|(
@@ -10800,8 +10222,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 comment|// NULL OR TRUE --> TRUE
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -10820,8 +10241,7 @@ name|void
 name|testPlusOperator
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -10830,8 +10250,7 @@ operator|.
 name|plusOperator
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -10840,8 +10259,7 @@ argument_list|,
 literal|"3"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -10850,8 +10268,7 @@ argument_list|,
 literal|"1"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -10860,8 +10277,7 @@ argument_list|,
 literal|"6"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -10874,8 +10290,7 @@ argument_list|,
 literal|0
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -10888,8 +10303,7 @@ argument_list|,
 literal|0
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -10900,8 +10314,7 @@ argument_list|,
 literal|"15.0"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -10912,8 +10325,7 @@ argument_list|,
 literal|"23.88"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -10924,8 +10336,7 @@ argument_list|,
 literal|"29.88"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -10938,16 +10349,14 @@ argument_list|,
 literal|0.02
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
 literal|"cast(null as tinyint)+1"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
@@ -10962,8 +10371,7 @@ name|Fnl25Fixed
 condition|)
 block|{
 comment|// Should throw out of range error
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -10974,8 +10382,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -10986,8 +10393,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -10998,8 +10404,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -11010,8 +10415,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -11022,8 +10426,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -11043,8 +10446,7 @@ name|void
 name|testPlusIntervalOperator
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -11061,8 +10463,7 @@ condition|)
 block|{
 return|return;
 block|}
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -11073,8 +10474,7 @@ argument_list|,
 literal|"INTERVAL DAY NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -11085,8 +10485,7 @@ argument_list|,
 literal|"INTERVAL DAY TO MINUTE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -11097,8 +10496,7 @@ argument_list|,
 literal|"INTERVAL DAY TO SECOND NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -11109,8 +10507,7 @@ argument_list|,
 literal|"INTERVAL YEAR TO MONTH NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
@@ -11118,8 +10515,7 @@ literal|"interval '2' year + cast(null as interval month)"
 argument_list|)
 expr_stmt|;
 comment|// Datetime plus interval
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -11130,8 +10526,7 @@ argument_list|,
 literal|"TIME(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -11142,8 +10537,7 @@ argument_list|,
 literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -11163,8 +10557,7 @@ name|void
 name|testDescendingOperator
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -11183,8 +10576,7 @@ name|void
 name|testIsNotNullOperator
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -11193,8 +10585,7 @@ operator|.
 name|isNotNullOperator
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -11205,8 +10596,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -11225,8 +10615,7 @@ name|void
 name|testIsNullOperator
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -11235,8 +10624,7 @@ operator|.
 name|isNullOperator
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -11247,8 +10635,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -11267,8 +10654,7 @@ name|void
 name|testIsNotTrueOperator
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -11277,8 +10663,7 @@ operator|.
 name|isNotTrueOperator
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -11289,8 +10674,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -11301,8 +10685,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -11313,8 +10696,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -11333,8 +10715,7 @@ name|void
 name|testIsTrueOperator
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -11343,8 +10724,7 @@ operator|.
 name|isTrueOperator
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -11355,8 +10735,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -11367,8 +10746,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -11387,8 +10765,7 @@ name|void
 name|testIsNotFalseOperator
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -11397,8 +10774,7 @@ operator|.
 name|isNotFalseOperator
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -11409,8 +10785,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -11421,8 +10796,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -11441,8 +10815,7 @@ name|void
 name|testIsFalseOperator
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -11451,8 +10824,7 @@ operator|.
 name|isFalseOperator
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -11463,8 +10835,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -11475,8 +10846,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -11495,8 +10865,7 @@ name|void
 name|testIsNotUnknownOperator
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -11507,8 +10876,7 @@ argument_list|,
 name|VM_EXPAND
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -11519,8 +10887,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -11531,8 +10898,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -11543,8 +10909,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -11555,8 +10920,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -11575,8 +10939,7 @@ name|void
 name|testIsUnknownOperator
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -11587,8 +10950,7 @@ argument_list|,
 name|VM_EXPAND
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -11599,8 +10961,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -11611,8 +10972,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -11623,8 +10983,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -11635,8 +10994,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -11655,8 +11013,7 @@ name|void
 name|testIsASetOperator
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -11675,8 +11032,7 @@ name|void
 name|testExistsOperator
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -11695,8 +11051,7 @@ name|void
 name|testNotOperator
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -11705,8 +11060,7 @@ operator|.
 name|notOperator
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -11717,8 +11071,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -11729,8 +11082,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -11739,8 +11091,7 @@ argument_list|,
 literal|null
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
@@ -11755,8 +11106,7 @@ name|void
 name|testPrefixMinusOperator
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -11765,8 +11115,7 @@ operator|.
 name|prefixMinusOperator
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -11777,8 +11126,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -11787,8 +11135,7 @@ argument_list|,
 literal|"-1"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -11799,8 +11146,7 @@ argument_list|,
 literal|"-1.23"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -11814,16 +11160,14 @@ argument_list|,
 literal|0
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
 literal|"-cast(null as integer)"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
@@ -11846,8 +11190,7 @@ condition|)
 block|{
 return|return;
 block|}
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -11858,8 +11201,7 @@ argument_list|,
 literal|"INTERVAL HOUR TO SECOND NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -11870,8 +11212,7 @@ argument_list|,
 literal|"INTERVAL HOUR TO SECOND NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -11882,8 +11223,7 @@ argument_list|,
 literal|"INTERVAL MONTH NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
@@ -11898,8 +11238,7 @@ name|void
 name|testPrefixPlusOperator
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -11910,8 +11249,7 @@ argument_list|,
 name|VM_EXPAND
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -11920,8 +11258,7 @@ argument_list|,
 literal|"1"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -11932,8 +11269,7 @@ argument_list|,
 literal|"1.23"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -11946,16 +11282,14 @@ argument_list|,
 literal|0
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
 literal|"+cast(null as integer)"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
@@ -11978,8 +11312,7 @@ condition|)
 block|{
 return|return;
 block|}
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -11990,8 +11323,7 @@ argument_list|,
 literal|"INTERVAL HOUR TO SECOND NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -12009,8 +11341,7 @@ operator|.
 name|Frg254Fixed
 condition|)
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -12022,8 +11353,7 @@ literal|"INTERVAL HOUR TO SECOND NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -12034,8 +11364,7 @@ argument_list|,
 literal|"INTERVAL MONTH NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
@@ -12050,8 +11379,7 @@ name|void
 name|testExplicitTableOperator
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -12070,8 +11398,7 @@ name|void
 name|testValuesOperator
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -12082,8 +11409,7 @@ argument_list|,
 name|VM_EXPAND
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|check
 argument_list|(
@@ -12110,8 +11436,7 @@ name|void
 name|testNotLikeOperator
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -12122,8 +11447,7 @@ argument_list|,
 name|VM_EXPAND
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -12142,8 +11466,7 @@ name|void
 name|testLikeOperator
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -12152,8 +11475,7 @@ operator|.
 name|likeOperator
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -12164,8 +11486,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -12176,8 +11497,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -12188,8 +11508,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -12200,8 +11519,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -12212,8 +11530,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -12224,8 +11541,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -12236,8 +11552,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -12248,8 +11563,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -12260,8 +11574,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -12272,8 +11585,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -12284,8 +11596,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -12296,8 +11607,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -12308,8 +11618,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -12320,8 +11629,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -12340,8 +11648,7 @@ name|void
 name|testNotSimilarToOperator
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -12352,8 +11659,7 @@ argument_list|,
 name|VM_EXPAND
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -12362,8 +11668,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -12372,8 +11677,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -12382,8 +11686,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -12392,8 +11695,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -12402,8 +11704,7 @@ argument_list|,
 literal|null
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -12420,8 +11721,7 @@ name|void
 name|testSimilarToOperator
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -12431,8 +11731,7 @@ name|similarOperator
 argument_list|)
 expr_stmt|;
 comment|// like LIKE
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -12443,8 +11742,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -12455,8 +11753,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -12467,8 +11764,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -12479,8 +11775,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -12491,8 +11786,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -12503,8 +11797,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -12515,8 +11808,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -12527,8 +11819,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -12539,8 +11830,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -12551,8 +11841,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -12563,8 +11852,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -12575,8 +11863,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -12587,8 +11874,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -12599,8 +11885,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -12613,8 +11898,7 @@ argument_list|)
 expr_stmt|;
 comment|// simple regular expressions
 comment|// ab*c+d matches acd, abcd, acccd, abcccd but not abd, aabc
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -12625,8 +11909,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -12637,8 +11920,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -12649,8 +11931,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -12661,8 +11942,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -12673,8 +11953,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -12687,8 +11966,7 @@ argument_list|)
 expr_stmt|;
 comment|// compound regular expressions
 comment|// x(ab|c)*y matches xy, xccy, xababcy but not xbcy
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -12699,8 +11977,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -12711,8 +11988,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -12723,8 +11999,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -12736,8 +12011,7 @@ name|FALSE
 argument_list|)
 expr_stmt|;
 comment|// x(ab|c)+y matches xccy, xababcy but not xy, xbcy
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -12748,8 +12022,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -12760,8 +12033,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -12772,8 +12044,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -12784,8 +12055,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -12796,8 +12066,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -12808,8 +12077,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -12820,8 +12088,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -12832,8 +12099,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -12844,8 +12110,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -12856,8 +12121,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -12868,8 +12132,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -12880,8 +12143,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -12892,8 +12154,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -12904,8 +12165,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -12916,8 +12176,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -12928,8 +12187,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -12940,8 +12198,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -12952,8 +12209,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -12964,8 +12220,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -12976,8 +12231,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -12988,8 +12242,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -13000,8 +12253,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -13012,8 +12264,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -13024,8 +12275,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -13036,8 +12286,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -13048,8 +12297,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -13060,8 +12308,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -13072,8 +12319,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -13084,8 +12330,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -13096,8 +12341,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -13108,8 +12352,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -13120,8 +12363,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -13132,8 +12374,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -13144,8 +12385,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -13156,8 +12396,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -13168,8 +12407,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -13180,8 +12418,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -13192,8 +12429,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -13204,8 +12440,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -13216,8 +12451,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -13228,8 +12462,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -13240,8 +12473,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -13252,8 +12484,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -13264,8 +12495,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -13276,8 +12506,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -13288,8 +12517,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -13301,8 +12529,7 @@ name|TRUE
 argument_list|)
 expr_stmt|;
 comment|// range must be specified in []
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -13313,8 +12540,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -13325,8 +12551,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -13337,8 +12562,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -13349,8 +12573,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -13361,8 +12584,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -13373,8 +12595,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -13385,8 +12606,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -13397,8 +12617,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -13416,8 +12635,7 @@ condition|(
 name|enable
 condition|)
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -13428,8 +12646,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -13442,8 +12659,7 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|// some negative tests
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -13459,8 +12675,7 @@ literal|true
 argument_list|)
 expr_stmt|;
 comment|// illegal range
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -13475,8 +12690,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -13487,8 +12701,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -13508,8 +12721,7 @@ operator|.
 name|Frg375Fixed
 condition|)
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -13531,8 +12743,7 @@ operator|.
 name|Frg377Fixed
 condition|)
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -13543,8 +12754,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -13555,8 +12765,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -13567,8 +12776,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -13579,8 +12787,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -13591,8 +12798,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -13603,8 +12809,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -13615,8 +12820,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -13627,8 +12831,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -13639,8 +12842,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -13651,8 +12853,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -13663,8 +12864,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -13677,8 +12877,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -13689,8 +12888,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -13703,8 +12901,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -13726,8 +12923,7 @@ name|void
 name|testEscapeOperator
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -13746,8 +12942,7 @@ name|void
 name|testConvertFunc
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -13768,8 +12963,7 @@ name|void
 name|testTranslateFunc
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -13790,8 +12984,7 @@ name|void
 name|testOverlayFunc
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -13800,8 +12993,7 @@ operator|.
 name|overlayFunc
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkString
 argument_list|(
@@ -13812,8 +13004,7 @@ argument_list|,
 literal|"VARCHAR(9) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkString
 argument_list|(
@@ -13832,8 +13023,7 @@ condition|)
 block|{
 return|return;
 block|}
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkString
 argument_list|(
@@ -13846,8 +13036,7 @@ argument_list|,
 literal|"VARCHAR(15) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkString
 argument_list|(
@@ -13860,16 +13049,14 @@ argument_list|,
 literal|"VARCHAR(15) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
 literal|"overlay('ABCdef' placing 'abc' from 1 for cast(null as integer))"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
@@ -13882,8 +13069,7 @@ literal|false
 condition|)
 block|{
 comment|// hex strings not yet implemented in calc
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
@@ -13899,8 +13085,7 @@ name|void
 name|testPositionFunc
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -13917,8 +13102,7 @@ condition|)
 block|{
 return|return;
 block|}
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -13927,8 +13111,7 @@ argument_list|,
 literal|"2"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -13938,8 +13121,7 @@ literal|"1"
 argument_list|)
 expr_stmt|;
 comment|// FRG-211
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -13948,24 +13130,21 @@ argument_list|,
 literal|"10"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
 literal|"position(cast(null as varchar(1)) in '0010')"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
 literal|"position('a' in cast(null as varchar(1)))"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -13984,8 +13163,7 @@ name|void
 name|testCharLengthFunc
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -13994,8 +13172,7 @@ operator|.
 name|charLengthFunc
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -14004,8 +13181,7 @@ argument_list|,
 literal|"3"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
@@ -14020,8 +13196,7 @@ name|void
 name|testCharacterLengthFunc
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -14030,8 +13205,7 @@ operator|.
 name|characterLengthFunc
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -14040,8 +13214,7 @@ argument_list|,
 literal|"3"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
@@ -14056,8 +13229,7 @@ name|void
 name|testUpperFunc
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -14066,8 +13238,7 @@ operator|.
 name|upperFunc
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkString
 argument_list|(
@@ -14078,8 +13249,7 @@ argument_list|,
 literal|"CHAR(1) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkString
 argument_list|(
@@ -14090,8 +13260,7 @@ argument_list|,
 literal|"CHAR(1) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkString
 argument_list|(
@@ -14102,8 +13271,7 @@ argument_list|,
 literal|"CHAR(1) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkString
 argument_list|(
@@ -14114,8 +13282,7 @@ argument_list|,
 literal|"CHAR(2) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
@@ -14130,8 +13297,7 @@ name|void
 name|testLowerFunc
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -14141,8 +13307,7 @@ name|lowerFunc
 argument_list|)
 expr_stmt|;
 comment|// SQL:2003 6.29.8 The type of lower is the type of its argument
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkString
 argument_list|(
@@ -14153,8 +13318,7 @@ argument_list|,
 literal|"CHAR(1) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkString
 argument_list|(
@@ -14165,8 +13329,7 @@ argument_list|,
 literal|"CHAR(1) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkString
 argument_list|(
@@ -14177,8 +13340,7 @@ argument_list|,
 literal|"CHAR(1) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkString
 argument_list|(
@@ -14189,8 +13351,7 @@ argument_list|,
 literal|"CHAR(2) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
@@ -14208,8 +13369,7 @@ block|{
 comment|// Note: the initcap function is an Oracle defined function and is not
 comment|// defined in the SQL:2003 standard
 comment|// todo: implement in fennel
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -14220,8 +13380,7 @@ argument_list|,
 name|VM_FENNEL
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkString
 argument_list|(
@@ -14232,8 +13391,7 @@ argument_list|,
 literal|"CHAR(2) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkString
 argument_list|(
@@ -14244,8 +13402,7 @@ argument_list|,
 literal|"CHAR(2) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkString
 argument_list|(
@@ -14256,8 +13413,7 @@ argument_list|,
 literal|"CHAR(2) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkString
 argument_list|(
@@ -14268,8 +13424,7 @@ argument_list|,
 literal|"CHAR(11) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
@@ -14277,8 +13432,7 @@ literal|"initcap(cast(null as varchar(1)))"
 argument_list|)
 expr_stmt|;
 comment|// dtbug 232
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -14297,8 +13451,7 @@ name|void
 name|testPowerFunc
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -14315,8 +13468,7 @@ condition|)
 block|{
 return|return;
 block|}
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -14329,16 +13481,14 @@ argument_list|,
 literal|0
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
 literal|"power(cast(null as integer),2)"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
@@ -14346,8 +13496,7 @@ literal|"power(2,cast(null as double))"
 argument_list|)
 expr_stmt|;
 comment|// 'pow' is an obsolete form of the 'power' function
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -14366,8 +13515,7 @@ name|void
 name|testSqrtFunc
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -14382,8 +13530,7 @@ operator|.
 name|EXPAND
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkType
 argument_list|(
@@ -14392,8 +13539,7 @@ argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkType
 argument_list|(
@@ -14402,8 +13548,7 @@ argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkType
 argument_list|(
@@ -14412,8 +13557,7 @@ argument_list|,
 literal|"DOUBLE"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -14424,8 +13568,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -14438,16 +13581,14 @@ argument_list|,
 literal|0.0001d
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
 literal|"sqrt(cast(null as integer))"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
@@ -14463,8 +13604,7 @@ name|testExpFunc
 parameter_list|()
 block|{
 comment|// todo: implement in fennel
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -14483,8 +13623,7 @@ condition|)
 block|{
 return|return;
 block|}
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -14497,8 +13636,7 @@ argument_list|,
 literal|0.000001
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -14511,16 +13649,14 @@ argument_list|,
 literal|0.0001
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
 literal|"exp(cast(null as integer))"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
@@ -14535,8 +13671,7 @@ name|void
 name|testModFunc
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -14545,8 +13680,7 @@ operator|.
 name|modFunc
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -14555,8 +13689,7 @@ argument_list|,
 literal|"0"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -14565,8 +13698,7 @@ argument_list|,
 literal|"3"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -14575,8 +13707,7 @@ argument_list|,
 literal|"-5"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -14585,8 +13716,7 @@ argument_list|,
 literal|"-5"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -14595,8 +13725,7 @@ argument_list|,
 literal|"5"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -14607,8 +13736,7 @@ argument_list|,
 literal|"5"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -14619,8 +13747,7 @@ argument_list|,
 literal|"2"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -14631,8 +13758,7 @@ argument_list|,
 literal|"7"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -14643,24 +13769,21 @@ argument_list|,
 literal|"-2"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
 literal|"mod(cast(null as integer),2)"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
 literal|"mod(4,cast(null as tinyint))"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
@@ -14681,8 +13804,7 @@ comment|// compiling the expression.  The test frame work would then issue
 comment|// unexpected exception occurred during "validation".  You cannot
 comment|// submit as non-runtime because the janino exception does not have
 comment|// error position information and the framework is unhappy with that.
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -14701,8 +13823,7 @@ name|void
 name|testLnFunc
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -14719,8 +13840,7 @@ condition|)
 block|{
 return|return;
 block|}
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -14733,8 +13853,7 @@ argument_list|,
 literal|0.000001
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -14747,8 +13866,7 @@ argument_list|,
 literal|0.0000001
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
@@ -14763,8 +13881,7 @@ name|void
 name|testLogFunc
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -14781,8 +13898,7 @@ condition|)
 block|{
 return|return;
 block|}
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -14795,8 +13911,7 @@ argument_list|,
 literal|0.000001
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -14809,8 +13924,7 @@ argument_list|,
 literal|0.000001
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -14823,8 +13937,7 @@ argument_list|,
 literal|0.000001
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -14837,8 +13950,7 @@ argument_list|,
 literal|0.000001
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -14852,8 +13964,7 @@ argument_list|,
 literal|0.000001
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
@@ -14868,8 +13979,7 @@ name|void
 name|testAbsFunc
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -14886,8 +13996,7 @@ condition|)
 block|{
 return|return;
 block|}
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -14896,8 +14005,7 @@ argument_list|,
 literal|"1"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -14908,8 +14016,7 @@ argument_list|,
 literal|"10"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -14920,8 +14027,7 @@ argument_list|,
 literal|"20"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -14932,8 +14038,7 @@ argument_list|,
 literal|"100"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -14944,8 +14049,7 @@ argument_list|,
 literal|"1000"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -14956,8 +14060,7 @@ argument_list|,
 literal|"54.4"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -14968,8 +14071,7 @@ argument_list|,
 literal|"54.4"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -14982,8 +14084,7 @@ argument_list|,
 literal|0
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -14996,8 +14097,7 @@ argument_list|,
 literal|0
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -15010,8 +14110,7 @@ argument_list|,
 literal|0
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -15024,8 +14123,7 @@ argument_list|,
 literal|0
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
@@ -15048,8 +14146,7 @@ condition|)
 block|{
 return|return;
 block|}
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -15060,8 +14157,7 @@ argument_list|,
 literal|"INTERVAL DAY NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -15072,8 +14168,7 @@ argument_list|,
 literal|"INTERVAL YEAR TO MONTH NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
@@ -15088,8 +14183,7 @@ name|void
 name|testNullifFunc
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -15100,8 +14194,7 @@ argument_list|,
 name|VM_EXPAND
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
@@ -15116,8 +14209,7 @@ condition|)
 block|{
 return|return;
 block|}
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -15128,8 +14220,7 @@ argument_list|,
 literal|"1.5"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -15140,8 +14231,7 @@ argument_list|,
 literal|"13.56"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -15152,8 +14242,7 @@ argument_list|,
 literal|"1.5"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -15164,8 +14253,7 @@ argument_list|,
 literal|"3"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -15178,8 +14266,7 @@ argument_list|,
 literal|0
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -15192,8 +14279,7 @@ argument_list|,
 literal|0
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -15204,8 +14290,7 @@ argument_list|,
 literal|"3"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -15216,8 +14301,7 @@ argument_list|,
 literal|"3"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -15230,8 +14314,7 @@ argument_list|,
 literal|0
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -15242,8 +14325,7 @@ argument_list|,
 literal|"3.4"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkString
 argument_list|(
@@ -15254,8 +14336,7 @@ argument_list|,
 literal|"CHAR(1)"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkString
 argument_list|(
@@ -15266,16 +14347,14 @@ argument_list|,
 literal|"CHAR(1)"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
 literal|"nullif(cast(null as varchar(1)),'a')"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
@@ -15284,8 +14363,7 @@ argument_list|)
 expr_stmt|;
 comment|// Error message reflects the fact that Nullif is expanded before it is
 comment|// validated (like a C macro). Not perfect, but good enough.
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -15296,8 +14374,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -15324,8 +14401,7 @@ condition|)
 block|{
 return|return;
 block|}
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -15336,8 +14412,7 @@ argument_list|,
 literal|"INTERVAL MONTH"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -15348,8 +14423,7 @@ argument_list|,
 literal|"INTERVAL DAY TO HOUR"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
@@ -15364,8 +14438,7 @@ name|void
 name|testCoalesceFunc
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -15376,8 +14449,7 @@ argument_list|,
 name|VM_EXPAND
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkString
 argument_list|(
@@ -15388,8 +14460,7 @@ argument_list|,
 literal|"CHAR(1) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -15398,8 +14469,7 @@ argument_list|,
 literal|"3"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -15418,8 +14488,7 @@ name|void
 name|testUserFunc
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -15438,8 +14507,7 @@ condition|)
 block|{
 return|return;
 block|}
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkString
 argument_list|(
@@ -15458,8 +14526,7 @@ name|void
 name|testCurrentUserFunc
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -15478,8 +14545,7 @@ condition|)
 block|{
 return|return;
 block|}
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkString
 argument_list|(
@@ -15498,8 +14564,7 @@ name|void
 name|testSessionUserFunc
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -15518,8 +14583,7 @@ condition|)
 block|{
 return|return;
 block|}
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkString
 argument_list|(
@@ -15538,8 +14602,7 @@ name|void
 name|testSystemUserFunc
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -15569,8 +14632,7 @@ literal|"user.name"
 argument_list|)
 decl_stmt|;
 comment|// e.g. "jhyde"
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkString
 argument_list|(
@@ -15589,8 +14651,7 @@ name|void
 name|testCurrentPathFunc
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -15609,8 +14670,7 @@ condition|)
 block|{
 return|return;
 block|}
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkString
 argument_list|(
@@ -15629,8 +14689,7 @@ name|void
 name|testCurrentRoleFunc
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -15651,8 +14710,7 @@ return|return;
 block|}
 comment|// By default, the CURRENT_ROLE function returns
 comment|// the empty string because a role has to be set explicitly.
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkString
 argument_list|(
@@ -15671,8 +14729,7 @@ name|void
 name|testLocalTimeFunc
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -15689,8 +14746,7 @@ condition|)
 block|{
 return|return;
 block|}
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -15701,8 +14757,7 @@ argument_list|,
 literal|"TIME(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -15713,8 +14768,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -15725,8 +14779,7 @@ argument_list|,
 literal|"TIME(1) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -15760,8 +14813,7 @@ name|void
 name|testLocalTimestampFunc
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -15778,8 +14830,7 @@ condition|)
 block|{
 return|return;
 block|}
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -15790,8 +14841,7 @@ argument_list|,
 literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -15802,8 +14852,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -15814,8 +14863,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -15828,8 +14876,7 @@ argument_list|)
 expr_stmt|;
 comment|// Check that timestamp is being generated in the right timezone by
 comment|// generating a specific timestamp.
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -15858,8 +14905,7 @@ name|void
 name|testCurrentTimeFunc
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -15876,8 +14922,7 @@ condition|)
 block|{
 return|return;
 block|}
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -15888,8 +14933,7 @@ argument_list|,
 literal|"TIME(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -15900,8 +14944,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -15921,8 +14964,7 @@ condition|)
 block|{
 comment|// Currently works with Java calc, but fennel calc returns time in
 comment|// GMT time zone.
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -15957,8 +14999,7 @@ name|void
 name|testCurrentTimestampFunc
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -15975,8 +15016,7 @@ condition|)
 block|{
 return|return;
 block|}
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -15987,8 +15027,7 @@ argument_list|,
 literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -15999,8 +15038,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -16011,8 +15049,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -16035,8 +15072,7 @@ condition|)
 block|{
 comment|// Currently works with Java calc, but fennel calc returns time in
 comment|// GMT time zone.
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -16115,8 +15151,7 @@ name|void
 name|testCurrentDateFunc
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -16135,8 +15170,7 @@ condition|)
 block|{
 return|return;
 block|}
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -16147,8 +15181,7 @@ argument_list|,
 literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -16159,8 +15192,7 @@ argument_list|,
 literal|"INTERVAL DAY NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -16169,8 +15201,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -16182,8 +15213,7 @@ literal|false
 argument_list|)
 expr_stmt|;
 comment|// Check the actual value.
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -16212,8 +15242,7 @@ name|void
 name|testSubstringFunction
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -16222,8 +15251,7 @@ operator|.
 name|substringFunc
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkString
 argument_list|(
@@ -16234,8 +15262,7 @@ argument_list|,
 literal|"VARCHAR(3) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkString
 argument_list|(
@@ -16254,8 +15281,7 @@ name|Frg296Fixed
 condition|)
 block|{
 comment|// substring regexp not supported yet
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkString
 argument_list|(
@@ -16267,8 +15293,7 @@ literal|"xx"
 argument_list|)
 expr_stmt|;
 block|}
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
@@ -16283,8 +15308,7 @@ name|void
 name|testTrimFunc
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -16302,8 +15326,7 @@ block|{
 return|return;
 block|}
 comment|// SQL:2003 6.29.11 Trimming a CHAR yields a VARCHAR
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkString
 argument_list|(
@@ -16314,8 +15337,7 @@ argument_list|,
 literal|"VARCHAR(3) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkString
 argument_list|(
@@ -16326,8 +15348,7 @@ argument_list|,
 literal|"VARCHAR(3) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkString
 argument_list|(
@@ -16338,8 +15359,7 @@ argument_list|,
 literal|"VARCHAR(3) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkString
 argument_list|(
@@ -16350,16 +15370,14 @@ argument_list|,
 literal|"VARCHAR(3) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
 literal|"trim(cast(null as varchar(1)) from 'a')"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
@@ -16380,8 +15398,7 @@ comment|// TODO: Change message to "Invalid argument\(s\) for
 comment|// 'TRIM' function".
 comment|// The message should come from a resource file, and should still
 comment|// have the SQL error code 22027.
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -16404,8 +15421,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -16437,8 +15453,7 @@ name|void
 name|testWindow
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -16459,8 +15474,7 @@ condition|)
 block|{
 return|return;
 block|}
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|check
 argument_list|(
@@ -16487,8 +15501,7 @@ name|void
 name|testElementFunc
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -16506,8 +15519,7 @@ condition|(
 name|todo
 condition|)
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkString
 argument_list|(
@@ -16518,8 +15530,7 @@ argument_list|,
 literal|"char(3) not null"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
@@ -16535,8 +15546,7 @@ name|void
 name|testCardinalityFunc
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -16554,8 +15564,7 @@ condition|(
 name|todo
 condition|)
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -16574,8 +15583,7 @@ block|{
 return|return;
 block|}
 comment|// applied to array
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -16585,8 +15593,7 @@ literal|"2"
 argument_list|)
 expr_stmt|;
 comment|// applied to map
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -16603,8 +15610,7 @@ name|void
 name|testMemberOfOperator
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -16622,8 +15628,7 @@ condition|(
 name|todo
 condition|)
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -16634,8 +15639,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -16646,8 +15650,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -16658,8 +15661,7 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -16670,8 +15672,7 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkBoolean
 argument_list|(
@@ -16691,8 +15692,7 @@ name|void
 name|testCollectFunc
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -16713,8 +15713,7 @@ name|void
 name|testFusionFunc
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -16735,8 +15734,7 @@ name|void
 name|testExtractFunc
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -16757,8 +15755,7 @@ condition|)
 block|{
 return|return;
 block|}
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -16769,8 +15766,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -16781,8 +15777,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -16794,8 +15789,7 @@ literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
 comment|// TODO: Seconds should include precision
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -16806,8 +15800,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -16818,8 +15811,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -16830,8 +15822,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
@@ -16846,8 +15837,7 @@ name|void
 name|testArrayValueConstructor
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -16856,8 +15846,7 @@ operator|.
 name|arrayValueConstructor
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -16870,8 +15859,7 @@ argument_list|)
 expr_stmt|;
 comment|// empty array is illegal per SQL spec. presumably because one can't
 comment|// infer type
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -16890,8 +15878,7 @@ name|void
 name|testItemOp
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -16900,8 +15887,7 @@ operator|.
 name|itemOp
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -16912,8 +15898,7 @@ argument_list|,
 literal|"CHAR(3) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -16924,8 +15909,7 @@ argument_list|,
 literal|"CHAR(3) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -16936,8 +15920,7 @@ argument_list|,
 literal|"CHAR(3) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -16948,16 +15931,14 @@ argument_list|,
 literal|"CHAR(3) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
 literal|"ARRAY ['foo', 'bar'][1 + CAST(NULL AS INTEGER)]"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -16972,8 +15953,7 @@ argument_list|)
 expr_stmt|;
 comment|// Array of INTEGER NOT NULL is interesting because we might be tempted
 comment|// to represent the result as Java "int".
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -16984,8 +15964,7 @@ argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -16997,8 +15976,7 @@ literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
 comment|// Map item
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -17009,8 +15987,7 @@ argument_list|,
 literal|"7"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -17021,8 +15998,7 @@ argument_list|,
 literal|"7"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -17041,8 +16017,7 @@ name|void
 name|testMapValueConstructor
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -17053,8 +16028,7 @@ argument_list|,
 name|VM_JAVA
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -17065,8 +16039,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -17077,8 +16050,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -17089,8 +16061,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -17109,8 +16080,7 @@ name|void
 name|testCeilFunc
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -17129,8 +16099,7 @@ condition|)
 block|{
 return|return;
 block|}
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -17143,8 +16112,7 @@ argument_list|,
 literal|0
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -17158,8 +16126,7 @@ argument_list|,
 literal|0
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -17170,8 +16137,7 @@ argument_list|,
 literal|"100"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -17182,8 +16148,7 @@ argument_list|,
 literal|"2"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -17194,16 +16159,14 @@ argument_list|,
 literal|"-1"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
 literal|"ceiling(cast(null as decimal(2,0)))"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
@@ -17226,8 +16189,7 @@ condition|)
 block|{
 return|return;
 block|}
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -17238,8 +16200,7 @@ argument_list|,
 literal|"INTERVAL HOUR TO SECOND NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -17250,8 +16211,7 @@ argument_list|,
 literal|"INTERVAL SECOND NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -17262,8 +16222,7 @@ argument_list|,
 literal|"INTERVAL YEAR TO MONTH NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -17274,8 +16233,7 @@ argument_list|,
 literal|"INTERVAL YEAR TO MONTH NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
@@ -17290,8 +16248,7 @@ name|void
 name|testFloorFunc
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -17310,8 +16267,7 @@ condition|)
 block|{
 return|return;
 block|}
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -17324,8 +16280,7 @@ argument_list|,
 literal|0
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -17339,8 +16294,7 @@ argument_list|,
 literal|0
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -17351,8 +16305,7 @@ argument_list|,
 literal|"100"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -17363,8 +16316,7 @@ argument_list|,
 literal|"1"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -17375,16 +16327,14 @@ argument_list|,
 literal|"-2"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
 literal|"floor(cast(null as decimal(2,0)))"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
@@ -17407,8 +16357,7 @@ condition|)
 block|{
 return|return;
 block|}
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -17419,8 +16368,7 @@ argument_list|,
 literal|"INTERVAL HOUR TO SECOND NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -17431,8 +16379,7 @@ argument_list|,
 literal|"INTERVAL SECOND NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -17443,8 +16390,7 @@ argument_list|,
 literal|"INTERVAL YEAR TO MONTH NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkScalar
 argument_list|(
@@ -17455,8 +16401,7 @@ argument_list|,
 literal|"INTERVAL YEAR TO MONTH NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkNull
 argument_list|(
@@ -17471,8 +16416,7 @@ name|void
 name|testDenseRankFunc
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -17493,8 +16437,7 @@ name|void
 name|testPercentRankFunc
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -17515,8 +16458,7 @@ name|void
 name|testRankFunc
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -17537,8 +16479,7 @@ name|void
 name|testCumeDistFunc
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -17559,8 +16500,7 @@ name|void
 name|testRowNumberFunc
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -17581,8 +16521,7 @@ name|void
 name|testCountFunc
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -17593,8 +16532,7 @@ argument_list|,
 name|VM_EXPAND
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkType
 argument_list|(
@@ -17603,8 +16541,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkType
 argument_list|(
@@ -17613,8 +16550,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkType
 argument_list|(
@@ -17623,8 +16559,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkType
 argument_list|(
@@ -17633,8 +16568,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkType
 argument_list|(
@@ -17643,8 +16577,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -17655,8 +16588,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -17682,8 +16614,7 @@ block|,
 literal|"0"
 block|}
 decl_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkAgg
 argument_list|(
@@ -17707,8 +16638,7 @@ condition|)
 block|{
 return|return;
 block|}
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkAgg
 argument_list|(
@@ -17724,8 +16654,7 @@ operator|)
 literal|0
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkAgg
 argument_list|(
@@ -17755,8 +16684,7 @@ block|,
 literal|"''"
 block|}
 decl_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkAgg
 argument_list|(
@@ -17772,8 +16700,7 @@ operator|)
 literal|0
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkAgg
 argument_list|(
@@ -17789,8 +16716,7 @@ operator|)
 literal|0
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkAgg
 argument_list|(
@@ -17806,8 +16732,7 @@ operator|)
 literal|0
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkAgg
 argument_list|(
@@ -17831,8 +16756,7 @@ name|void
 name|testSumFunc
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -17843,8 +16767,7 @@ argument_list|,
 name|VM_EXPAND
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -17855,8 +16778,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -17867,8 +16789,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkType
 argument_list|(
@@ -17877,8 +16798,7 @@ argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkType
 argument_list|(
@@ -17887,8 +16807,7 @@ argument_list|,
 literal|"DECIMAL(2, 1) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkType
 argument_list|(
@@ -17897,8 +16816,7 @@ argument_list|,
 literal|"DECIMAL(2, 1) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -17909,8 +16827,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -17921,8 +16838,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -17948,8 +16864,7 @@ block|,
 literal|"2"
 block|}
 decl_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkAgg
 argument_list|(
@@ -17979,8 +16894,7 @@ condition|)
 block|{
 return|return;
 block|}
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkAgg
 argument_list|(
@@ -18002,8 +16916,7 @@ init|=
 operator|-
 literal|1
 decl_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkAgg
 argument_list|(
@@ -18019,8 +16932,7 @@ operator|)
 literal|0
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkAgg
 argument_list|(
@@ -18044,8 +16956,7 @@ name|void
 name|testAvgFunc
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -18056,8 +16967,7 @@ argument_list|,
 name|VM_EXPAND
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -18068,8 +16978,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -18080,8 +16989,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkType
 argument_list|(
@@ -18090,8 +16998,7 @@ argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkType
 argument_list|(
@@ -18123,8 +17030,7 @@ block|,
 literal|"3"
 block|}
 decl_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkAgg
 argument_list|(
@@ -18137,8 +17043,7 @@ argument_list|,
 literal|0d
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkAgg
 argument_list|(
@@ -18157,8 +17062,7 @@ init|=
 operator|-
 literal|1
 decl_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkAgg
 argument_list|(
@@ -18179,8 +17083,7 @@ name|void
 name|testStddevPopFunc
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -18191,8 +17094,7 @@ argument_list|,
 name|VM_EXPAND
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -18203,8 +17105,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -18215,8 +17116,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkType
 argument_list|(
@@ -18225,8 +17125,7 @@ argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkType
 argument_list|(
@@ -18258,8 +17157,7 @@ condition|)
 block|{
 return|return;
 block|}
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkAgg
 argument_list|(
@@ -18273,8 +17171,7 @@ comment|// verified on Oracle 10g
 literal|0.000000000000001d
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkAgg
 argument_list|(
@@ -18288,8 +17185,7 @@ argument_list|,
 literal|0d
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkAgg
 argument_list|(
@@ -18303,8 +17199,7 @@ literal|0d
 argument_list|)
 expr_stmt|;
 comment|// with one value
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkAgg
 argument_list|(
@@ -18323,8 +17218,7 @@ literal|0d
 argument_list|)
 expr_stmt|;
 comment|// with zero values
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkAgg
 argument_list|(
@@ -18348,8 +17242,7 @@ name|void
 name|testStddevSampFunc
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -18360,8 +17253,7 @@ argument_list|,
 name|VM_EXPAND
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -18372,8 +17264,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -18384,8 +17275,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkType
 argument_list|(
@@ -18394,8 +17284,7 @@ argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkType
 argument_list|(
@@ -18427,8 +17316,7 @@ condition|)
 block|{
 return|return;
 block|}
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkAgg
 argument_list|(
@@ -18442,8 +17330,7 @@ comment|// verified on Oracle 10g
 literal|0.000000000000001d
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkAgg
 argument_list|(
@@ -18457,8 +17344,7 @@ argument_list|,
 literal|0.000000000000001d
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkAgg
 argument_list|(
@@ -18472,8 +17358,7 @@ literal|0d
 argument_list|)
 expr_stmt|;
 comment|// with one value
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkAgg
 argument_list|(
@@ -18492,8 +17377,7 @@ literal|0d
 argument_list|)
 expr_stmt|;
 comment|// with zero values
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkAgg
 argument_list|(
@@ -18517,8 +17401,7 @@ name|void
 name|testVarPopFunc
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -18529,8 +17412,7 @@ argument_list|,
 name|VM_EXPAND
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -18541,8 +17423,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -18553,8 +17434,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkType
 argument_list|(
@@ -18563,8 +17443,7 @@ argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkType
 argument_list|(
@@ -18596,8 +17475,7 @@ condition|)
 block|{
 return|return;
 block|}
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkAgg
 argument_list|(
@@ -18611,8 +17489,7 @@ comment|// verified on Oracle 10g
 literal|0d
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkAgg
 argument_list|(
@@ -18626,8 +17503,7 @@ argument_list|,
 literal|0.0001d
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkAgg
 argument_list|(
@@ -18641,8 +17517,7 @@ literal|0d
 argument_list|)
 expr_stmt|;
 comment|// with one value
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkAgg
 argument_list|(
@@ -18661,8 +17536,7 @@ literal|0d
 argument_list|)
 expr_stmt|;
 comment|// with zero values
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkAgg
 argument_list|(
@@ -18686,8 +17560,7 @@ name|void
 name|testVarSampFunc
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -18698,8 +17571,7 @@ argument_list|,
 name|VM_EXPAND
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -18710,8 +17582,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -18722,8 +17593,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkType
 argument_list|(
@@ -18732,8 +17602,7 @@ argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkType
 argument_list|(
@@ -18765,8 +17634,7 @@ condition|)
 block|{
 return|return;
 block|}
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkAgg
 argument_list|(
@@ -18780,8 +17648,7 @@ comment|// verified on Oracle 10g
 literal|0d
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkAgg
 argument_list|(
@@ -18795,8 +17662,7 @@ argument_list|,
 literal|0.0001d
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkAgg
 argument_list|(
@@ -18810,8 +17676,7 @@ literal|0d
 argument_list|)
 expr_stmt|;
 comment|// with one value
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkAgg
 argument_list|(
@@ -18830,8 +17695,7 @@ literal|0d
 argument_list|)
 expr_stmt|;
 comment|// with zero values
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkAgg
 argument_list|(
@@ -18855,8 +17719,7 @@ name|void
 name|testMinFunc
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -18867,8 +17730,7 @@ argument_list|,
 name|VM_EXPAND
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -18879,8 +17741,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkType
 argument_list|(
@@ -18889,8 +17750,7 @@ argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkType
 argument_list|(
@@ -18899,8 +17759,7 @@ argument_list|,
 literal|"DECIMAL(2, 1) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkType
 argument_list|(
@@ -18909,8 +17768,7 @@ argument_list|,
 literal|"DECIMAL(2, 1) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -18921,8 +17779,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -18956,8 +17813,7 @@ condition|)
 block|{
 return|return;
 block|}
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkAgg
 argument_list|(
@@ -18970,8 +17826,7 @@ argument_list|,
 literal|0d
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkAgg
 argument_list|(
@@ -18984,8 +17839,7 @@ argument_list|,
 literal|0d
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkAgg
 argument_list|(
@@ -18998,8 +17852,7 @@ argument_list|,
 literal|0d
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkAgg
 argument_list|(
@@ -19020,8 +17873,7 @@ name|void
 name|testMaxFunc
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -19032,8 +17884,7 @@ argument_list|,
 name|VM_EXPAND
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -19044,8 +17895,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkType
 argument_list|(
@@ -19054,8 +17904,7 @@ argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkType
 argument_list|(
@@ -19064,8 +17913,7 @@ argument_list|,
 literal|"DECIMAL(2, 1) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkType
 argument_list|(
@@ -19074,8 +17922,7 @@ argument_list|,
 literal|"DECIMAL(2, 1) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -19086,8 +17933,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkFails
 argument_list|(
@@ -19121,8 +17967,7 @@ condition|)
 block|{
 return|return;
 block|}
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkAgg
 argument_list|(
@@ -19135,8 +17980,7 @@ argument_list|,
 literal|0d
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkAgg
 argument_list|(
@@ -19149,8 +17993,7 @@ argument_list|,
 literal|0d
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkAgg
 argument_list|(
@@ -19163,8 +18006,7 @@ argument_list|,
 literal|0d
 argument_list|)
 expr_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkAgg
 argument_list|(
@@ -19185,8 +18027,7 @@ name|void
 name|testLastValueFunc
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -19220,8 +18061,7 @@ condition|)
 block|{
 return|return;
 block|}
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkWinAgg
 argument_list|(
@@ -19256,8 +18096,7 @@ block|,
 literal|"1.2"
 block|}
 decl_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkWinAgg
 argument_list|(
@@ -19294,8 +18133,7 @@ block|,
 literal|"'name'"
 block|}
 decl_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkWinAgg
 argument_list|(
@@ -19329,8 +18167,7 @@ name|void
 name|testFirstValueFunc
 parameter_list|()
 block|{
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|setFor
 argument_list|(
@@ -19364,8 +18201,7 @@ condition|)
 block|{
 return|return;
 block|}
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkWinAgg
 argument_list|(
@@ -19398,8 +18234,7 @@ block|,
 literal|"1.2"
 block|}
 decl_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkWinAgg
 argument_list|(
@@ -19434,8 +18269,7 @@ block|,
 literal|"'name'"
 block|}
 decl_stmt|;
-name|getTester
-argument_list|()
+name|tester
 operator|.
 name|checkWinAgg
 argument_list|(
@@ -19466,13 +18300,6 @@ name|void
 name|testLiteralAtLimit
 parameter_list|()
 block|{
-specifier|final
-name|SqlTester
-name|tester
-init|=
-name|getTester
-argument_list|()
-decl_stmt|;
 name|tester
 operator|.
 name|setFor
@@ -19684,13 +18511,6 @@ name|void
 name|testLiteralBeyondLimit
 parameter_list|()
 block|{
-specifier|final
-name|SqlTester
-name|tester
-init|=
-name|getTester
-argument_list|()
-decl_stmt|;
 name|tester
 operator|.
 name|setFor
@@ -19898,13 +18718,6 @@ name|void
 name|testCastTruncates
 parameter_list|()
 block|{
-specifier|final
-name|SqlTester
-name|tester
-init|=
-name|getTester
-argument_list|()
-decl_stmt|;
 name|tester
 operator|.
 name|setFor
@@ -20360,6 +19173,190 @@ operator|+
 name|stack
 argument_list|)
 expr_stmt|;
+block|}
+block|}
+block|}
+comment|/** Creates a {@link org.eigenbase.sql.test.SqlTester} based on a JDBC      * connection. */
+specifier|public
+specifier|static
+name|SqlTester
+name|tester
+parameter_list|(
+name|Connection
+name|connection
+parameter_list|)
+block|{
+return|return
+operator|new
+name|TesterImpl
+argument_list|(
+name|connection
+argument_list|)
+return|;
+block|}
+comment|/** Implementation of {@link org.eigenbase.sql.test.SqlTester} based on a      * JDBC connection. */
+specifier|protected
+specifier|static
+class|class
+name|TesterImpl
+extends|extends
+name|SqlValidatorTestCase
+operator|.
+name|TesterImpl
+block|{
+specifier|final
+name|Connection
+name|connection
+decl_stmt|;
+specifier|public
+name|TesterImpl
+parameter_list|(
+name|Connection
+name|connection
+parameter_list|)
+block|{
+name|super
+argument_list|(
+name|SqlConformance
+operator|.
+name|Default
+argument_list|)
+expr_stmt|;
+name|this
+operator|.
+name|connection
+operator|=
+name|connection
+expr_stmt|;
+block|}
+annotation|@
+name|Override
+specifier|public
+name|void
+name|check
+parameter_list|(
+name|String
+name|query
+parameter_list|,
+name|TypeChecker
+name|typeChecker
+parameter_list|,
+name|ResultChecker
+name|resultChecker
+parameter_list|)
+block|{
+name|super
+operator|.
+name|check
+argument_list|(
+name|query
+argument_list|,
+name|typeChecker
+argument_list|,
+name|resultChecker
+argument_list|)
+expr_stmt|;
+name|Statement
+name|statement
+init|=
+literal|null
+decl_stmt|;
+try|try
+block|{
+name|statement
+operator|=
+name|connection
+operator|.
+name|createStatement
+argument_list|()
+expr_stmt|;
+specifier|final
+name|ResultSet
+name|resultSet
+init|=
+name|statement
+operator|.
+name|executeQuery
+argument_list|(
+name|query
+argument_list|)
+decl_stmt|;
+name|resultChecker
+operator|.
+name|checkResult
+argument_list|(
+name|resultSet
+argument_list|)
+expr_stmt|;
+block|}
+catch|catch
+parameter_list|(
+name|Exception
+name|e
+parameter_list|)
+block|{
+throw|throw
+operator|new
+name|RuntimeException
+argument_list|(
+name|e
+argument_list|)
+throw|;
+block|}
+finally|finally
+block|{
+if|if
+condition|(
+name|statement
+operator|!=
+literal|null
+condition|)
+block|{
+try|try
+block|{
+name|statement
+operator|.
+name|close
+argument_list|()
+expr_stmt|;
+block|}
+catch|catch
+parameter_list|(
+name|SQLException
+name|e
+parameter_list|)
+block|{
+comment|// ignore
+block|}
+block|}
+block|}
+block|}
+specifier|public
+name|void
+name|close
+parameter_list|()
+block|{
+try|try
+block|{
+name|connection
+operator|.
+name|close
+argument_list|()
+expr_stmt|;
+block|}
+catch|catch
+parameter_list|(
+name|SQLException
+name|e
+parameter_list|)
+block|{
+throw|throw
+operator|new
+name|RuntimeException
+argument_list|(
+name|e
+argument_list|)
+throw|;
 block|}
 block|}
 block|}

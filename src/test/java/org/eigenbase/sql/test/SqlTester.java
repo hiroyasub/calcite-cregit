@@ -19,6 +19,16 @@ begin_import
 import|import
 name|java
 operator|.
+name|io
+operator|.
+name|Closeable
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
 name|sql
 operator|.
 name|ResultSet
@@ -57,6 +67,8 @@ begin_interface
 specifier|public
 interface|interface
 name|SqlTester
+extends|extends
+name|Closeable
 block|{
 comment|//~ Enums ------------------------------------------------------------------
 comment|/**      * Name of a virtual machine that can potentially implement an operator.      */

@@ -1671,6 +1671,14 @@ name|createOperatorTable
 argument_list|()
 expr_stmt|;
 block|}
+comment|/** {@inheritDoc}          *          * This default implementation does nothing.          */
+specifier|public
+name|void
+name|close
+parameter_list|()
+block|{
+comment|// no resources to release
+block|}
 specifier|public
 name|SqlConformance
 name|getConformance
