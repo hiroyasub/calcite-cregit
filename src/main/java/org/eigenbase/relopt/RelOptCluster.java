@@ -121,6 +121,9 @@ name|typeFactory
 parameter_list|,
 name|RexBuilder
 name|rexBuilder
+parameter_list|,
+name|RelTraitSet
+name|emptyTraitSet
 parameter_list|)
 block|{
 assert|assert
@@ -176,12 +179,11 @@ operator|new
 name|DefaultRelMetadataProvider
 argument_list|()
 expr_stmt|;
+name|this
+operator|.
 name|emptyTraitSet
 operator|=
-name|RelTraitSet
-operator|.
-name|createEmpty
-argument_list|()
+name|emptyTraitSet
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------

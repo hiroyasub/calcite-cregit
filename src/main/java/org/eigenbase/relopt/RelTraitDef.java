@@ -113,6 +113,16 @@ argument_list|()
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+comment|/**      * Whether a relational expression may possess more than one instance of      * this trait simultaneously.      *      *<p>A subset has only one instance of a trait.</p>      */
+specifier|public
+name|boolean
+name|multiple
+parameter_list|()
+block|{
+return|return
+literal|false
+return|;
+block|}
 comment|/**      * @return the specific RelTrait type associated with this RelTraitDef.      */
 specifier|public
 specifier|abstract
@@ -123,7 +133,7 @@ argument_list|>
 name|getTraitClass
 parameter_list|()
 function_decl|;
-comment|/**      * @return a simple name for this RelTraitDef (for use in {@link      * org.eigenbase.rel.RelNode#explainTerms(RelOptPlanWriter)}).      */
+comment|/**      * @return a simple name for this RelTraitDef (for use in      * {@link org.eigenbase.rel.RelNode#explain(RelOptPlanWriter)}).      */
 specifier|public
 specifier|abstract
 name|String

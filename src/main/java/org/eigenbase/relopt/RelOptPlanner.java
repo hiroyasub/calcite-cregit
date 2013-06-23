@@ -327,6 +327,11 @@ name|RelNode
 name|node
 parameter_list|)
 function_decl|;
+comment|/**      * Creates an empty trait set. It contains all registered traits, and the      * default values of any traits that have them.      *      *<p>The empty trait set acts as the prototype (a kind of factory) for all      * subsequently created trait sets.</p>      *      * @return Empty trait set      */
+name|RelTraitSet
+name|emptyTraitSet
+parameter_list|()
+function_decl|;
 comment|/** Thrown by {@link org.eigenbase.relopt.RelOptPlanner#findBestExp()}. */
 class|class
 name|CannotPlanException

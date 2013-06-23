@@ -247,6 +247,11 @@ name|RexBuilder
 argument_list|(
 name|typeFactory
 argument_list|)
+argument_list|,
+name|RelTraitSet
+operator|.
+name|createEmpty
+argument_list|()
 argument_list|)
 return|;
 block|}

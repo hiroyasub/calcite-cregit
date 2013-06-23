@@ -198,7 +198,7 @@ return|return
 name|mapDeferredToCorrel
 return|;
 block|}
-comment|/**      * Creates a cluster.      *      * @param typeFactory Type factory      * @param rexBuilder Expression builder      *      * @return New cluster      */
+comment|/**      * Creates a cluster.      *      * @param typeFactory Type factory      * @param rexBuilder Expression builder      * @param emptyTraitSet Empty trait set. The prototype for other trait sets      * @return New cluster      */
 specifier|public
 name|RelOptCluster
 name|createCluster
@@ -208,6 +208,9 @@ name|typeFactory
 parameter_list|,
 name|RexBuilder
 name|rexBuilder
+parameter_list|,
+name|RelTraitSet
+name|emptyTraitSet
 parameter_list|)
 block|{
 return|return
@@ -221,6 +224,8 @@ argument_list|,
 name|typeFactory
 argument_list|,
 name|rexBuilder
+argument_list|,
+name|emptyTraitSet
 argument_list|)
 return|;
 block|}

@@ -673,6 +673,15 @@ argument_list|(
 name|planner
 argument_list|)
 decl_stmt|;
+specifier|final
+name|RelTraitSet
+name|emptyTraitSet
+init|=
+name|planner
+operator|.
+name|emptyTraitSet
+argument_list|()
+decl_stmt|;
 name|this
 operator|.
 name|cluster
@@ -684,6 +693,8 @@ argument_list|(
 name|typeFactory
 argument_list|,
 name|rexBuilder
+argument_list|,
+name|emptyTraitSet
 argument_list|)
 expr_stmt|;
 name|this
@@ -1619,6 +1630,16 @@ argument_list|,
 name|collationList
 argument_list|)
 expr_stmt|;
+specifier|final
+name|RelCollationImpl
+name|collation
+init|=
+operator|new
+name|RelCollationImpl
+argument_list|(
+name|collationList
+argument_list|)
+decl_stmt|;
 if|if
 condition|(
 name|validator
@@ -1673,7 +1694,7 @@ name|select
 argument_list|,
 name|bb
 argument_list|,
-name|collationList
+name|collation
 argument_list|,
 name|orderExprList
 argument_list|)
@@ -2253,7 +2274,7 @@ operator|-
 literal|1
 return|;
 block|}
-comment|/**      * Converts a query's ORDER BY clause, if any.      *      * @param select Query      * @param bb Blackboard      * @param collationList Collation list      * @param orderExprList Method populates this list with orderBy expressions      *   not present in selectList      */
+comment|/**      * Converts a query's ORDER BY clause, if any.      *      * @param select Query      * @param bb Blackboard      * @param collation Collation list      * @param orderExprList Method populates this list with orderBy expressions      *   not present in selectList      */
 specifier|protected
 name|void
 name|convertOrder
@@ -2264,11 +2285,8 @@ parameter_list|,
 name|Blackboard
 name|bb
 parameter_list|,
-name|List
-argument_list|<
-name|RelFieldCollation
-argument_list|>
-name|collationList
+name|RelCollation
+name|collation
 parameter_list|,
 name|List
 argument_list|<
@@ -2288,7 +2306,10 @@ literal|null
 condition|)
 block|{
 assert|assert
-name|collationList
+name|collation
+operator|.
+name|getFieldCollations
+argument_list|()
 operator|.
 name|isEmpty
 argument_list|()
@@ -2318,7 +2339,7 @@ name|bb
 operator|.
 name|root
 argument_list|,
-name|collationList
+name|collation
 argument_list|)
 argument_list|,
 literal|false

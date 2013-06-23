@@ -382,7 +382,7 @@ operator|!=
 literal|null
 assert|;
 block|}
-comment|/**      * Creates an operand that matches any number of children.      *      * @param clazz Class of relational expression to match (must not be null)      * @param dummy Dummy argument to distinguish this constructor from other      * overloaded forms. Must be ANY.      *      * @deprecated Use {@link RelOptRule#any} or {@link RelOptRule#leaf}      */
+comment|/**      * Creates an operand that matches any number of children.      *      *<p>Example:</p>      *<li><code>RelOptRuleOperand(X.class, ANY)</code> is equivalent to      *<code>RelOptRuleOperand(X.class, null)</code></li>      *<li><code>RelOptRuleOperand(X.class, NONE)</code> is equivalent to      *<code>RelOptRuleOperand(X.class, new RelOptRuleOperand[0])</code>      *</li>      *      * @param clazz Class of relational expression to match (must not be null)      * @param dummy Dummy argument to distinguish this constructor from other      * overloaded forms. Must be ANY.      *      * @deprecated Use {@link RelOptRule#any} or {@link RelOptRule#leaf}      */
 specifier|public
 name|RelOptRuleOperand
 parameter_list|(

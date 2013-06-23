@@ -543,6 +543,18 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+specifier|public
+name|RelTraitSet
+name|emptyTraitSet
+parameter_list|()
+block|{
+return|return
+name|RelTraitSet
+operator|.
+name|createEmpty
+argument_list|()
+return|;
+block|}
 comment|// implement RelOptPlanner
 specifier|public
 name|RelOptCost

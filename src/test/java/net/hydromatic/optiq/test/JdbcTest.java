@@ -3383,6 +3383,89 @@ literal|"store_id=0; grocery_sqft=null\n"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Tests sorting by a column that is already sorted. */
+specifier|public
+name|void
+name|testOrderByOnSortedTable
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|assertThat
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|FOODMART_CLONE
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select * from \"time_by_day\"\n"
+operator|+
+literal|"order by \"time_id\""
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|"PLAN=EnumerableSortRel(sort0=[$0], dir0=[Ascending])\n"
+operator|+
+literal|"  EnumerableTableAccessRel(table=[[foodmart2, time_by_day]])\n\n"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests sorting by a column that is already sorted. */
+specifier|public
+name|void
+name|testOrderByOnSortedTable2
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|assertThat
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|FOODMART_CLONE
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select \"time_id\", \"the_date\" from \"time_by_day\"\n"
+operator|+
+literal|"where \"time_id\"< 370\n"
+operator|+
+literal|"order by \"time_id\""
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"time_id=367; the_date=1997-01-01 00:00:00.0\n"
+operator|+
+literal|"time_id=368; the_date=1997-01-02 00:00:00.0\n"
+operator|+
+literal|"time_id=369; the_date=1997-01-03 00:00:00.0\n"
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|"PLAN=EnumerableSortRel(sort0=[$0], dir0=[Ascending])\n"
+operator|+
+literal|"  EnumerableCalcRel(expr#0..9=[{inputs}], expr#10=[370], expr#11=[<($t0, $t10)], proj#0..1=[{exprs}], $condition=[$t11])\n"
+operator|+
+literal|"    EnumerableTableAccessRel(table=[[foodmart2, time_by_day]])\n\n"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Tests WHERE comparing a nullable integer with an integer literal. */
 annotation|@
 name|Test

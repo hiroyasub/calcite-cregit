@@ -2136,7 +2136,7 @@ argument_list|)
 argument_list|,
 name|sortRel
 operator|.
-name|getCollations
+name|getCollation
 argument_list|()
 argument_list|)
 return|;
@@ -4759,7 +4759,7 @@ argument_list|)
 argument_list|,
 name|sort
 operator|.
-name|getCollations
+name|getCollation
 argument_list|()
 argument_list|)
 return|;
@@ -4791,11 +4791,8 @@ parameter_list|,
 name|RelNode
 name|child
 parameter_list|,
-name|List
-argument_list|<
-name|RelFieldCollation
-argument_list|>
-name|collations
+name|RelCollation
+name|collation
 parameter_list|)
 block|{
 name|super
@@ -4806,7 +4803,7 @@ name|traitSet
 argument_list|,
 name|child
 argument_list|,
-name|collations
+name|collation
 argument_list|)
 expr_stmt|;
 assert|assert
@@ -4863,11 +4860,8 @@ parameter_list|,
 name|RelNode
 name|newInput
 parameter_list|,
-name|List
-argument_list|<
-name|RelFieldCollation
-argument_list|>
-name|newCollations
+name|RelCollation
+name|newCollation
 parameter_list|)
 block|{
 return|return
@@ -4881,7 +4875,7 @@ name|traitSet
 argument_list|,
 name|newInput
 argument_list|,
-name|newCollations
+name|newCollation
 argument_list|)
 return|;
 block|}
@@ -4962,7 +4956,10 @@ name|inputPhysType
 operator|.
 name|generateCollationKey
 argument_list|(
-name|collations
+name|collation
+operator|.
+name|getFieldCollations
+argument_list|()
 argument_list|)
 decl_stmt|;
 specifier|final
