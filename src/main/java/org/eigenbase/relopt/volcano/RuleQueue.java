@@ -226,7 +226,7 @@ operator|new
 name|RelImportanceComparator
 argument_list|()
 decl_stmt|;
-comment|/*      * Maps a {@link VolcanoPlannerPhase} to a set of rule names.  Named rules      * may be invoked in their corresponding phase.      */
+comment|/**      * Maps a {@link VolcanoPlannerPhase} to a set of rule names.  Named rules      * may be invoked in their corresponding phase.      */
 specifier|private
 specifier|final
 name|Map
@@ -763,7 +763,8 @@ name|rel
 range|:
 name|subset
 operator|.
-name|rels
+name|getRels
+argument_list|()
 control|)
 block|{
 name|count
@@ -1228,7 +1229,9 @@ range|:
 name|subset
 operator|.
 name|getParentSubsets
-argument_list|()
+argument_list|(
+name|planner
+argument_list|)
 control|)
 block|{
 specifier|final

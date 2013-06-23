@@ -29,6 +29,18 @@ name|org
 operator|.
 name|eigenbase
 operator|.
+name|relopt
+operator|.
+name|RelTraitDef
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
 name|reltype
 operator|.
 name|*
@@ -90,6 +102,17 @@ name|fieldCollations
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+specifier|public
+name|RelTraitDef
+name|getTraitDef
+parameter_list|()
+block|{
+return|return
+name|RelCollationTraitDef
+operator|.
+name|INSTANCE
+return|;
+block|}
 specifier|public
 name|List
 argument_list|<

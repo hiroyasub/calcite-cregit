@@ -23,6 +23,18 @@ name|*
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
+name|relopt
+operator|.
+name|RelTrait
+import|;
+end_import
+
 begin_comment
 comment|/**  * Description of the physical ordering of a relational expression.  *  *<p>An ordering consists of a list of one or more column ordinals and the  * direction of the ordering.  *  * @author jhyde  * @version $Id$  * @since March 6, 2006  */
 end_comment
@@ -31,6 +43,8 @@ begin_interface
 specifier|public
 interface|interface
 name|RelCollation
+extends|extends
+name|RelTrait
 block|{
 comment|//~ Methods ----------------------------------------------------------------
 comment|/**      * Returns the ordinals and directions of the columns in this ordering.      */
