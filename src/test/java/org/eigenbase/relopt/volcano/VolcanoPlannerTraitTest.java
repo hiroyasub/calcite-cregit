@@ -1017,6 +1017,15 @@ literal|"alt_phys"
 return|;
 block|}
 specifier|public
+name|AltTrait
+name|getDefault
+parameter_list|()
+block|{
+return|return
+name|ALT_TRAIT
+return|;
+block|}
+specifier|public
 name|RelNode
 name|convert
 parameter_list|(
@@ -1026,7 +1035,7 @@ parameter_list|,
 name|RelNode
 name|rel
 parameter_list|,
-name|RelTrait
+name|AltTrait
 name|toTrait
 parameter_list|,
 name|boolean
@@ -1147,10 +1156,10 @@ parameter_list|(
 name|RelOptPlanner
 name|planner
 parameter_list|,
-name|RelTrait
+name|AltTrait
 name|fromTrait
 parameter_list|,
-name|RelTrait
+name|AltTrait
 name|toTrait
 parameter_list|)
 block|{

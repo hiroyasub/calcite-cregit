@@ -74,6 +74,25 @@ argument_list|(
 literal|0
 argument_list|)
 decl_stmt|;
+comment|/**      * A collation indicating that a relation is not sorted. Ordering by no      * columns.      */
+specifier|public
+specifier|static
+specifier|final
+name|RelCollation
+name|EMPTY
+init|=
+operator|new
+name|RelCollationImpl
+argument_list|(
+name|Collections
+operator|.
+expr|<
+name|RelFieldCollation
+operator|>
+name|emptyList
+argument_list|()
+argument_list|)
+decl_stmt|;
 comment|//~ Instance fields --------------------------------------------------------
 specifier|private
 specifier|final

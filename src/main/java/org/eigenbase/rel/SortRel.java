@@ -280,7 +280,7 @@ block|{
 assert|assert
 name|traitSet
 operator|.
-name|comprises
+name|contains
 argument_list|(
 name|Convention
 operator|.
@@ -294,15 +294,7 @@ argument_list|(
 name|getCluster
 argument_list|()
 argument_list|,
-name|getCluster
-argument_list|()
-operator|.
-name|traitSetOf
-argument_list|(
-name|Convention
-operator|.
-name|NONE
-argument_list|)
+name|traitSet
 argument_list|,
 name|newInput
 argument_list|,

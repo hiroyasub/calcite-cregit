@@ -666,6 +666,18 @@ block|{
 comment|// TODO: restructure RelTraitSet to allow a list of entries
 comment|//  for any given trait
 block|}
+name|traitSet
+operator|=
+name|traitSet
+operator|.
+name|plus
+argument_list|(
+name|traitDef
+operator|.
+name|getDefault
+argument_list|()
+argument_list|)
+expr_stmt|;
 block|}
 return|return
 name|traitSet

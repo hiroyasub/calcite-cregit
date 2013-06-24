@@ -1934,9 +1934,9 @@ specifier|final
 name|RelTraitSet
 name|emptyTraitSet
 init|=
-name|RelTraitSet
+name|planner
 operator|.
-name|createEmpty
+name|emptyTraitSet
 argument_list|()
 decl_stmt|;
 specifier|final

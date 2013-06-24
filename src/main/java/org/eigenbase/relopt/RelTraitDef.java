@@ -266,7 +266,7 @@ parameter_list|,
 name|RelNode
 name|rel
 parameter_list|,
-name|RelTrait
+name|T
 name|toTrait
 parameter_list|,
 name|boolean
@@ -282,10 +282,10 @@ parameter_list|(
 name|RelOptPlanner
 name|planner
 parameter_list|,
-name|RelTrait
+name|T
 name|fromTrait
 parameter_list|,
-name|RelTrait
+name|T
 name|toTrait
 parameter_list|)
 function_decl|;
@@ -315,6 +315,13 @@ name|converterRule
 parameter_list|)
 block|{
 block|}
+comment|/**      * Returns the default member of this trait.      */
+specifier|public
+specifier|abstract
+name|T
+name|getDefault
+parameter_list|()
+function_decl|;
 block|}
 end_class
 

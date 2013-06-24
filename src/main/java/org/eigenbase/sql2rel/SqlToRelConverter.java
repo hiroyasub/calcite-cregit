@@ -2334,6 +2334,11 @@ name|Convention
 operator|.
 name|NONE
 argument_list|)
+operator|.
+name|plus
+argument_list|(
+name|collation
+argument_list|)
 argument_list|,
 name|bb
 operator|.
