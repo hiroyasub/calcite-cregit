@@ -2074,13 +2074,11 @@ name|compareRels
 argument_list|(
 name|match1
 operator|.
-name|getRels
-argument_list|()
+name|rels
 argument_list|,
 name|match2
 operator|.
-name|getRels
-argument_list|()
+name|rels
 argument_list|)
 expr_stmt|;
 block|}

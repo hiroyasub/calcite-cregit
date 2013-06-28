@@ -710,6 +710,21 @@ return|return
 literal|false
 return|;
 block|}
+specifier|public
+name|List
+argument_list|<
+name|RelTraitDef
+argument_list|>
+name|getRelTraitDefs
+parameter_list|()
+block|{
+return|return
+name|Collections
+operator|.
+name|emptyList
+argument_list|()
+return|;
+block|}
 comment|/**      * Fires a rule, taking care of tracing and listener notification.      *      * @param ruleCall description of rule call      *      * @pre ruleCall.getRule().matches(ruleCall)      */
 specifier|protected
 name|void
@@ -806,8 +821,7 @@ name|toString
 argument_list|(
 name|ruleCall
 operator|.
-name|getRels
-argument_list|()
+name|rels
 argument_list|)
 operator|+
 literal|"]"
@@ -835,11 +849,10 @@ name|this
 argument_list|,
 name|ruleCall
 operator|.
-name|getRels
-argument_list|()
-index|[
+name|rel
+argument_list|(
 literal|0
-index|]
+argument_list|)
 argument_list|,
 name|ruleCall
 argument_list|,
@@ -885,11 +898,10 @@ name|this
 argument_list|,
 name|ruleCall
 operator|.
-name|getRels
-argument_list|()
-index|[
+name|rel
+argument_list|(
 literal|0
-index|]
+argument_list|)
 argument_list|,
 name|ruleCall
 argument_list|,
@@ -953,8 +965,7 @@ name|toString
 argument_list|(
 name|ruleCall
 operator|.
-name|getRels
-argument_list|()
+name|rels
 argument_list|)
 operator|+
 literal|" produced "

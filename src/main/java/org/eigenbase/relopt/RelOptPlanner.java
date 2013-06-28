@@ -19,6 +19,16 @@ name|java
 operator|.
 name|util
 operator|.
+name|List
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
 name|logging
 operator|.
 name|*
@@ -132,6 +142,15 @@ parameter_list|(
 name|RelTraitDef
 name|relTraitDef
 parameter_list|)
+function_decl|;
+comment|/**      * Returns the list of active trait types.      */
+specifier|public
+name|List
+argument_list|<
+name|RelTraitDef
+argument_list|>
+name|getRelTraitDefs
+parameter_list|()
 function_decl|;
 comment|/**      * Registers a rule. If the rule has already been registered, does nothing.      * This method should determine if the given rule is a {@link      * org.eigenbase.rel.convert.ConverterRule} and pass the ConverterRule to      * all {@link #addRelTraitDef(RelTraitDef) registered} RelTraitDef      * instances.      *      * @return whether the rule was added, as per {@link      * java.util.Collection#add}      */
 specifier|public

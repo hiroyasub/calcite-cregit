@@ -291,7 +291,10 @@ name|traits
 parameter_list|)
 block|{
 return|return
+name|planner
+operator|.
 name|emptyTraitSet
+argument_list|()
 operator|.
 name|plusAll
 argument_list|(

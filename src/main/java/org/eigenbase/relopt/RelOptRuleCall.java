@@ -270,7 +270,7 @@ return|return
 name|rule
 return|;
 block|}
-comment|/**      * Returns a list of matched relational expressions.      *      * @return matched relational expressions      */
+comment|/**      * Returns a list of matched relational expressions.      *      * @return matched relational expressions      *      * @deprecated Use {@link #getRelList()} or {@link #rel(int)}      */
 specifier|public
 name|RelNode
 index|[]
@@ -279,6 +279,29 @@ parameter_list|()
 block|{
 return|return
 name|rels
+return|;
+block|}
+comment|/**      * Returns a list of matched relational expressions.      *      * @return matched relational expressions      * @see #rel(int)      */
+specifier|public
+name|List
+argument_list|<
+name|RelNode
+argument_list|>
+name|getRelList
+parameter_list|()
+block|{
+return|return
+name|Collections
+operator|.
+name|unmodifiableList
+argument_list|(
+name|Arrays
+operator|.
+name|asList
+argument_list|(
+name|rels
+argument_list|)
+argument_list|)
 return|;
 block|}
 comment|/**      * Retrieves the {@code ordinal}th matched relational expression. This      * corresponds to the {@code ordinal}th operand of the rule.      *      * @param ordinal Ordinal      * @param<T> Type      * @return Relational expression      */
