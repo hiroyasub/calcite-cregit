@@ -38,7 +38,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Builder for {@link BlockExpression}.  *  *<p>Has methods that help ensure that variable names are unique.</p>  *  * @author jhyde  */
+comment|/**  * Builder for {@link BlockExpression}.  *  *<p>Has methods that help ensure that variable names are unique.</p>  */
 end_comment
 
 begin_class
@@ -226,6 +226,7 @@ name|result
 init|=
 literal|null
 decl_stmt|;
+specifier|final
 name|Map
 argument_list|<
 name|ParameterExpression
@@ -334,6 +335,9 @@ name|name
 argument_list|)
 condition|)
 block|{
+name|Expression
+name|x
+init|=
 name|append
 argument_list|(
 name|newName
@@ -351,33 +355,15 @@ name|declaration
 operator|.
 name|initializer
 argument_list|)
-expr_stmt|;
+decl_stmt|;
 name|statement
 operator|=
-name|statements
-operator|.
-name|get
-argument_list|(
-name|statements
-operator|.
-name|size
-argument_list|()
-operator|-
-literal|1
-argument_list|)
+literal|null
 expr_stmt|;
-name|ParameterExpression
-name|parameter2
-init|=
-operator|(
-operator|(
-name|DeclarationExpression
-operator|)
-name|statement
-operator|)
-operator|.
-name|parameter
-decl_stmt|;
+name|result
+operator|=
+name|x
+expr_stmt|;
 name|replacements
 operator|.
 name|put
@@ -386,7 +372,7 @@ name|declaration
 operator|.
 name|parameter
 argument_list|,
-name|parameter2
+name|x
 argument_list|)
 expr_stmt|;
 block|}
