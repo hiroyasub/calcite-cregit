@@ -2403,6 +2403,36 @@ block|,
 literal|"select \"time_by_day\".\"the_year\" as \"c0\", \"product_class\".\"product_family\" as \"c1\", \"customer\".\"state_province\" as \"c2\", \"customer\".\"city\" as \"c3\", sum(\"sales_fact_1997\".\"unit_sales\") as \"m0\" from \"time_by_day\" as \"time_by_day\", \"sales_fact_1997\" as \"sales_fact_1997\", \"product_class\" as \"product_class\", \"product\" as \"product\", \"customer\" as \"customer\" where \"sales_fact_1997\".\"time_id\" = \"time_by_day\".\"time_id\" and \"time_by_day\".\"the_year\" = 1997 and \"sales_fact_1997\".\"product_id\" = \"product\".\"product_id\" and \"product\".\"product_class_id\" = \"product_class\".\"product_class_id\" and \"product_class\".\"product_family\" = 'Drink' and \"sales_fact_1997\".\"customer_id\" = \"customer\".\"customer_id\" and \"customer\".\"state_province\" = 'WA' and \"customer\".\"city\" in ('Anacortes', 'Ballard', 'Bellingham', 'Bremerton', 'Burien', 'Edmonds', 'Everett', 'Issaquah', 'Kirkland', 'Lynnwood', 'Marysville', 'Olympia', 'Port Orchard', 'Puyallup', 'Redmond', 'Renton', 'Seattle', 'Sedro Woolley', 'Spokane', 'Tacoma', 'Walla Walla', 'Yakima') group by \"time_by_day\".\"the_year\", \"product_class\".\"product_family\", \"customer\".\"state_province\", \"customer\".\"city\""
 block|,
 literal|"c0=1997; c1=Drink; c2=WA; c3=Sedro Woolley; m0=58.0000\n"
+block|,
+literal|"select \"store\".\"store_country\" as \"c0\",\n"
+operator|+
+literal|" \"time_by_day\".\"the_year\" as \"c1\",\n"
+operator|+
+literal|" sum(\"sales_fact_1997\".\"store_cost\") as \"m0\",\n"
+operator|+
+literal|" count(\"sales_fact_1997\".\"product_id\") as \"m1\",\n"
+operator|+
+literal|" count(distinct \"sales_fact_1997\".\"customer_id\") as \"m2\",\n"
+operator|+
+literal|" sum((case when \"sales_fact_1997\".\"promotion_id\" = 0 then 0\n"
+operator|+
+literal|"     else \"sales_fact_1997\".\"store_sales\" end)) as \"m3\"\n"
+operator|+
+literal|"from \"store\" as \"store\",\n"
+operator|+
+literal|" \"sales_fact_1997\" as \"sales_fact_1997\",\n"
+operator|+
+literal|" \"time_by_day\" as \"time_by_day\"\n"
+operator|+
+literal|"where \"sales_fact_1997\".\"store_id\" = \"store\".\"store_id\"\n"
+operator|+
+literal|"and \"sales_fact_1997\".\"time_id\" = \"time_by_day\".\"time_id\"\n"
+operator|+
+literal|"and \"time_by_day\".\"the_year\" = 1997\n"
+operator|+
+literal|"group by \"store\".\"store_country\", \"time_by_day\".\"the_year\""
+block|,
+literal|"c0=USA; c1=1997; m0=225627.2336; m1=86837; m2=5581; m3=151211.2100\n"
 block|,   }
 decl_stmt|;
 comment|/** Test case for    *<a href="https://github.com/julianhyde/optiq/issues/35">issue #35</a>. */
@@ -2706,7 +2736,7 @@ block|{
 try|try
 block|{
 comment|// uncomment to run specific queries:
-comment|//      if (i != queries.size() - 1) continue;
+comment|//      if (query.i != queries.size() - 1) continue;
 specifier|final
 name|String
 name|sql
@@ -2785,6 +2815,63 @@ argument_list|)
 throw|;
 block|}
 block|}
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFoo
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|assertThat
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|FOODMART_CLONE
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select \"store\".\"store_country\" as \"c0\",\n"
+operator|+
+literal|" \"time_by_day\".\"the_year\" as \"c1\",\n"
+operator|+
+literal|" sum(\"sales_fact_1997\".\"store_cost\") as \"m0\",\n"
+operator|+
+literal|" count(\"sales_fact_1997\".\"product_id\") as \"m1\",\n"
+operator|+
+literal|" count(distinct \"sales_fact_1997\".\"customer_id\") as \"m2\",\n"
+operator|+
+literal|" sum((case when \"sales_fact_1997\".\"promotion_id\" = 0 then 0\n"
+operator|+
+literal|"     else \"sales_fact_1997\".\"store_sales\" end)) as \"m3\"\n"
+operator|+
+literal|"from \"store\" as \"store\",\n"
+operator|+
+literal|" \"sales_fact_1997\" as \"sales_fact_1997\",\n"
+operator|+
+literal|" \"time_by_day\" as \"time_by_day\"\n"
+operator|+
+literal|"where \"sales_fact_1997\".\"store_id\" = \"store\".\"store_id\"\n"
+operator|+
+literal|"and \"sales_fact_1997\".\"time_id\" = \"time_by_day\".\"time_id\"\n"
+operator|+
+literal|"and \"time_by_day\".\"the_year\" = 1997\n"
+operator|+
+literal|"group by \"store\".\"store_country\", \"time_by_day\".\"the_year\""
+argument_list|)
+comment|//        .explainContains("xxx")
+operator|.
+name|runs
+argument_list|()
+expr_stmt|;
 block|}
 comment|/** There was a bug representing a nullable timestamp using a {@link Long}    * internally. */
 annotation|@
