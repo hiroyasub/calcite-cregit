@@ -1922,15 +1922,6 @@ name|planner
 argument_list|)
 decl_stmt|;
 specifier|final
-name|RelTraitSet
-name|emptyTraitSet
-init|=
-name|planner
-operator|.
-name|emptyTraitSet
-argument_list|()
-decl_stmt|;
-specifier|final
 name|RelOptCluster
 name|cluster
 init|=
@@ -1944,8 +1935,6 @@ name|getTypeFactory
 argument_list|()
 argument_list|,
 name|rexBuilder
-argument_list|,
-name|emptyTraitSet
 argument_list|)
 decl_stmt|;
 name|RelNode

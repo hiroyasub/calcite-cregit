@@ -59,21 +59,6 @@ implements|implements
 name|RelCollation
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
-comment|/**      * An ordering by the zeroth column.      */
-specifier|public
-specifier|static
-specifier|final
-name|List
-argument_list|<
-name|RelCollation
-argument_list|>
-name|Singleton0
-init|=
-name|createSingleton
-argument_list|(
-literal|0
-argument_list|)
-decl_stmt|;
 comment|/**      * A collation indicating that a relation is not sorted. Ordering by no      * columns.      */
 specifier|public
 specifier|static
@@ -92,6 +77,40 @@ operator|>
 name|emptyList
 argument_list|()
 argument_list|)
+decl_stmt|;
+comment|/**      * A collation that cannot be replicated by applying a sort. The only      * implementation choice is to apply operations that preserve order.      */
+specifier|public
+specifier|static
+specifier|final
+name|RelCollation
+name|PRESERVE
+init|=
+operator|new
+name|RelCollationImpl
+argument_list|(
+name|Collections
+operator|.
+name|singletonList
+argument_list|(
+operator|new
+name|RelFieldCollation
+argument_list|(
+operator|-
+literal|1
+argument_list|)
+argument_list|)
+argument_list|)
+block|{
+specifier|public
+name|String
+name|toString
+parameter_list|()
+block|{
+return|return
+literal|"PRESERVE"
+return|;
+block|}
+block|}
 decl_stmt|;
 comment|//~ Instance fields --------------------------------------------------------
 specifier|private

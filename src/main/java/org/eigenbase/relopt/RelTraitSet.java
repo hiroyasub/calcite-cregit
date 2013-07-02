@@ -23,18 +23,6 @@ name|*
 import|;
 end_import
 
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
-name|util
-operator|.
-name|*
-import|;
-end_import
-
 begin_comment
 comment|/**  * RelTraitSet represents an ordered set of {@link RelTrait}s.  *  * @author Stephan Zuercher  * @version $Id$  */
 end_comment
@@ -50,7 +38,7 @@ argument_list|<
 name|RelTrait
 argument_list|>
 block|{
-specifier|public
+specifier|private
 specifier|static
 specifier|final
 name|RelTrait
@@ -105,7 +93,7 @@ name|traits
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Creates an empty trait set.      */
+comment|/**      * Creates an empty trait set.      *      *<p>It has a new cache, which will be shared by any trait set created from      * it. Thus each empty trait set is the start of a new ancestral line.      */
 specifier|public
 specifier|static
 name|RelTraitSet
@@ -283,7 +271,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**      * Returns a trait set consisting of the current set plus a new trait.      * This set must already contain a trait of the same {@link RelTraitDef}.      *      * @param trait the new trait      * @return New set      *      * @see #plus(RelTrait)      */
+comment|/**      * Returns a trait set consisting of the current set plus a new trait.      *      *<p>If the set does not contain a trait of the same {@link RelTraitDef},      * the trait is ignored, and this trait set is returned.      *      * @param trait the new trait      * @return New set      *      * @see #plus(RelTrait)      */
 specifier|public
 name|RelTraitSet
 name|replace
@@ -292,37 +280,15 @@ name|RelTrait
 name|trait
 parameter_list|)
 block|{
-return|return
-name|replace
-argument_list|(
-name|trait
-operator|.
-name|getTraitDef
-argument_list|()
-argument_list|,
-name|trait
-argument_list|)
-return|;
-block|}
-specifier|public
-name|RelTraitSet
-name|replace
-parameter_list|(
+specifier|final
 name|RelTraitDef
 name|traitDef
-parameter_list|,
-name|RelTrait
-name|trait
-parameter_list|)
-block|{
-assert|assert
+init|=
 name|trait
 operator|.
 name|getTraitDef
 argument_list|()
-operator|==
-name|traitDef
-assert|;
+decl_stmt|;
 name|int
 name|index
 init|=
@@ -331,17 +297,18 @@ argument_list|(
 name|traitDef
 argument_list|)
 decl_stmt|;
-name|Util
-operator|.
-name|permAssert
-argument_list|(
+if|if
+condition|(
 name|index
-operator|>=
+operator|<
 literal|0
-argument_list|,
-literal|"Could not find RelTraitDef"
-argument_list|)
-expr_stmt|;
+condition|)
+block|{
+comment|// Trait is not present. Ignore it.
+return|return
+name|this
+return|;
+block|}
 return|return
 name|replace
 argument_list|(

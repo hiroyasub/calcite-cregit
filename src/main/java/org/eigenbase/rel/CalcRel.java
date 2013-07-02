@@ -469,7 +469,7 @@ literal|null
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates a relational expression which projects a set of expressions.      *      *<p>The result may not be a {@link ProjectRel}. If the projection is      * trivial,<code>child</code> is returned directly; and future versions may      * return other forumlations of expressions, such as {@link CalcRel}.      *      * @param child input relational expression      * @param exprs set of expressions for the input columns      * @param fieldNames aliases of the expressions, or null to generate      * @param optimize Whether to return<code>child</code> unchanged if the      * projections are trivial.      */
+comment|/**      * Creates a relational expression which projects a set of expressions.      *      *<p>The result may not be a {@link ProjectRel}. If the projection is      * trivial,<code>child</code> is returned directly; and future versions may      * return other formulations of expressions, such as {@link CalcRel}.      *      * @param child input relational expression      * @param exprs set of expressions for the input columns      * @param fieldNames aliases of the expressions, or null to generate      * @param optimize Whether to return<code>child</code> unchanged if the      * projections are trivial.      */
 specifier|public
 specifier|static
 name|RelNode
@@ -509,11 +509,21 @@ operator|)
 operator|:
 literal|"fieldNames="
 operator|+
+name|Arrays
+operator|.
+name|toString
+argument_list|(
 name|fieldNames
+argument_list|)
 operator|+
 literal|", exprs="
 operator|+
+name|Arrays
+operator|.
+name|toString
+argument_list|(
 name|exprs
+argument_list|)
 assert|;
 specifier|final
 name|RelOptCluster
@@ -658,9 +668,25 @@ operator|.
 name|getTypeFactory
 argument_list|()
 argument_list|,
+name|Arrays
+operator|.
+name|asList
+argument_list|(
 name|exprs
+argument_list|)
 argument_list|,
 name|fieldNames
+operator|==
+literal|null
+condition|?
+literal|null
+else|:
+name|Arrays
+operator|.
+name|asList
+argument_list|(
+name|fieldNames
+argument_list|)
 argument_list|)
 decl_stmt|;
 if|if
@@ -671,7 +697,12 @@ name|RemoveTrivialProjectRule
 operator|.
 name|isIdentity
 argument_list|(
+name|Arrays
+operator|.
+name|asList
+argument_list|(
 name|exprs
+argument_list|)
 argument_list|,
 name|rowType
 argument_list|,
@@ -686,10 +717,7 @@ return|return
 name|child
 return|;
 block|}
-specifier|final
-name|ProjectRel
-name|project
-init|=
+return|return
 operator|new
 name|ProjectRel
 argument_list|(
@@ -700,7 +728,12 @@ argument_list|()
 argument_list|,
 name|child
 argument_list|,
+name|Arrays
+operator|.
+name|asList
+argument_list|(
 name|exprs
+argument_list|)
 argument_list|,
 name|rowType
 argument_list|,
@@ -712,9 +745,6 @@ name|Boxed
 argument_list|,
 name|collationList
 argument_list|)
-decl_stmt|;
-return|return
-name|project
 return|;
 block|}
 block|}

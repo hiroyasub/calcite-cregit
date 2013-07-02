@@ -216,12 +216,9 @@ argument_list|()
 argument_list|,
 name|mergedProgram
 argument_list|,
-name|Collections
+name|topCalc
 operator|.
-expr|<
-name|RelCollation
-operator|>
-name|emptyList
+name|getCollationList
 argument_list|()
 argument_list|)
 decl_stmt|;

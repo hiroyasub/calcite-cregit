@@ -8757,7 +8757,7 @@ operator|.
 name|getTraitSet
 argument_list|()
 operator|.
-name|plus
+name|replace
 argument_list|(
 name|trait
 argument_list|)

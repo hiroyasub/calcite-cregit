@@ -120,7 +120,7 @@ specifier|protected
 name|int
 name|flags
 decl_stmt|;
-specifier|private
+specifier|protected
 specifier|final
 name|List
 argument_list|<
@@ -129,7 +129,7 @@ argument_list|>
 name|collationList
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a Project.      *      * @param cluster Cluster this relational expression belongs to      * @param traits traits of this rel      * @param child input relational expression      * @param exps set of expressions for the input columns      * @param rowType output row type      * @param flags values as in {@link Flags}      * @param collationList List of sort keys      */
+comment|/**      * Creates a Project.      *      * @param cluster Cluster this relational expression belongs to      * @param traits traits of this rel      * @param child input relational expression      * @param exps List of expressions for the input columns      * @param rowType output row type      * @param flags values as in {@link Flags}      * @param collationList List of sort keys      */
 specifier|protected
 name|ProjectRelBase
 parameter_list|(
@@ -142,8 +142,10 @@ parameter_list|,
 name|RelNode
 name|child
 parameter_list|,
+name|List
+argument_list|<
 name|RexNode
-index|[]
+argument_list|>
 name|exps
 parameter_list|,
 name|RelDataType
@@ -184,6 +186,18 @@ operator|.
 name|exps
 operator|=
 name|exps
+operator|.
+name|toArray
+argument_list|(
+operator|new
+name|RexNode
+index|[
+name|exps
+operator|.
+name|size
+argument_list|()
+index|]
+argument_list|)
 expr_stmt|;
 name|this
 operator|.

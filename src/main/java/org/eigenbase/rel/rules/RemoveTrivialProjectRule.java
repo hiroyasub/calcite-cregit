@@ -17,6 +17,16 @@ end_package
 
 begin_import
 import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|eigenbase
@@ -166,7 +176,7 @@ name|isIdentity
 argument_list|(
 name|project
 operator|.
-name|getProjectExps
+name|getProjectExpList
 argument_list|()
 argument_list|,
 name|project
@@ -215,8 +225,10 @@ specifier|static
 name|boolean
 name|isIdentity
 parameter_list|(
+name|List
+argument_list|<
 name|RexNode
-index|[]
+argument_list|>
 name|exps
 parameter_list|,
 name|RelDataType
@@ -255,7 +267,8 @@ if|if
 condition|(
 name|exps
 operator|.
-name|length
+name|size
+argument_list|()
 operator|!=
 name|fieldCount
 condition|)
@@ -275,7 +288,8 @@ name|i
 operator|<
 name|exps
 operator|.
-name|length
+name|size
+argument_list|()
 condition|;
 name|i
 operator|++
@@ -285,9 +299,11 @@ name|RexNode
 name|exp
 init|=
 name|exps
-index|[
+operator|.
+name|get
+argument_list|(
 name|i
-index|]
+argument_list|)
 decl_stmt|;
 if|if
 condition|(

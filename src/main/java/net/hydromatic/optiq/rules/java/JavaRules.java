@@ -1832,6 +1832,9 @@ argument_list|()
 argument_list|,
 name|calc
 operator|.
+name|getChild
+argument_list|()
+operator|.
 name|getTraitSet
 argument_list|()
 operator|.
@@ -2092,10 +2095,6 @@ argument_list|()
 operator|.
 name|replace
 argument_list|(
-name|ConventionTraitDef
-operator|.
-name|instance
-argument_list|,
 name|getOutTrait
 argument_list|()
 argument_list|)
@@ -6961,7 +6960,7 @@ operator|.
 name|getTraitSet
 argument_list|()
 operator|.
-name|plus
+name|replace
 argument_list|(
 name|EnumerableConvention
 operator|.
@@ -7115,7 +7114,7 @@ operator|.
 name|getTraitSet
 argument_list|()
 operator|.
-name|plus
+name|replace
 argument_list|(
 name|EnumerableConvention
 operator|.

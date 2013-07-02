@@ -146,10 +146,6 @@ argument_list|()
 operator|.
 name|replace
 argument_list|(
-name|ConventionTraitDef
-operator|.
-name|instance
-argument_list|,
 name|getOutConvention
 argument_list|()
 argument_list|)

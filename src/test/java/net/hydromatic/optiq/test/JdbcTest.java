@@ -1998,9 +1998,11 @@ name|returns
 argument_list|(
 literal|"PLAN=EnumerableAggregateRel(group=[{0, 1, 2}], m0=[SUM($3)])\n"
 operator|+
-literal|"  EnumerableCalcRel(expr#0..37=[{inputs}], c0=[$t4], c1=[$t8], c2=[$t22], unit_sales=[$t17])\n"
+literal|"  EnumerableCalcRel(expr#0..37=[{inputs}], c0=[$t19], c1=[$t23], c2=[$t37], unit_sales=[$t32])\n"
 operator|+
-literal|"    EnumerableJoinRel(condition=[AND(=($10, $24), =($23, $18))], joinType=[inner])\n"
+literal|"    EnumerableJoinRel(condition=[AND(=($25, $1), =($0, $33))], joinType=[inner])\n"
+operator|+
+literal|"      EnumerableTableAccessRel(table=[[foodmart2, product]])\n"
 operator|+
 literal|"      EnumerableJoinRel(condition=[true], joinType=[inner])\n"
 operator|+
@@ -2013,8 +2015,6 @@ operator|+
 literal|"          EnumerableTableAccessRel(table=[[foodmart2, sales_fact_1997]])\n"
 operator|+
 literal|"        EnumerableTableAccessRel(table=[[foodmart2, product_class]])\n"
-operator|+
-literal|"      EnumerableTableAccessRel(table=[[foodmart2, product]])\n"
 operator|+
 literal|"\n"
 argument_list|)
@@ -2777,6 +2777,16 @@ operator|!=
 literal|null
 condition|)
 block|{
+if|if
+condition|(
+name|sql
+operator|.
+name|contains
+argument_list|(
+literal|"order by"
+argument_list|)
+condition|)
+block|{
 name|query1
 operator|.
 name|returns
@@ -2784,6 +2794,22 @@ argument_list|(
 name|expected
 argument_list|)
 expr_stmt|;
+block|}
+else|else
+block|{
+name|query1
+operator|.
+name|returnsUnordered
+argument_list|(
+name|expected
+operator|.
+name|split
+argument_list|(
+literal|"\n"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 else|else
 block|{

@@ -107,30 +107,6 @@ end_import
 
 begin_import
 import|import
-name|org
-operator|.
-name|junit
-operator|.
-name|runner
-operator|.
-name|RunWith
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|junit
-operator|.
-name|runners
-operator|.
-name|JUnit4
-import|;
-end_import
-
-begin_import
-import|import
 name|java
 operator|.
 name|sql
@@ -182,18 +158,6 @@ operator|.
 name|OptiqAssert
 operator|.
 name|assertThat
-import|;
-end_import
-
-begin_import
-import|import static
-name|org
-operator|.
-name|junit
-operator|.
-name|Assert
-operator|.
-name|*
 import|;
 end_import
 
@@ -520,12 +484,6 @@ name|void
 name|testWhereLike
 parameter_list|()
 block|{
-if|if
-condition|(
-literal|false
-condition|)
-comment|// TODO: fix current error "Operands E.name, 'B%' not comparable to
-comment|// each other"
 name|assertThat
 argument_list|()
 operator|.
@@ -535,14 +493,14 @@ literal|"select *\n"
 operator|+
 literal|"from \"hr\".\"emps\" as e\n"
 operator|+
-literal|"where e.\"empid\"> 120 and e.\"name\" like 'B%'"
+literal|"where e.\"empid\"< 120 or e.\"name\" like 'S%'"
 argument_list|)
 operator|.
 name|returns
 argument_list|(
-literal|"cust_id=100; prod_id=10; empid=100; name=Bill\n"
+literal|"empid=100; deptno=10; name=Bill; commission=1000\n"
 operator|+
-literal|"cust_id=150; prod_id=20; empid=150; name=Sebastian\n"
+literal|"empid=150; deptno=10; name=Sebastian; commission=null\n"
 argument_list|)
 expr_stmt|;
 block|}

@@ -1100,12 +1100,15 @@ argument_list|()
 argument_list|,
 name|newInput
 argument_list|,
-operator|new
+name|Collections
+operator|.
+expr|<
 name|RexNode
-index|[]
-block|{
+operator|>
+name|singletonList
+argument_list|(
 name|expr
-block|}
+argument_list|)
 argument_list|,
 name|newRowType
 argument_list|,
@@ -1324,7 +1327,7 @@ name|RemoveTrivialProjectRule
 operator|.
 name|isIdentity
 argument_list|(
-name|newProjectExprs
+name|newProjectExprList
 argument_list|,
 name|newRowType
 argument_list|,
@@ -1356,7 +1359,7 @@ argument_list|()
 argument_list|,
 name|newInput
 argument_list|,
-name|newProjectExprs
+name|newProjectExprList
 argument_list|,
 name|newRowType
 argument_list|,
