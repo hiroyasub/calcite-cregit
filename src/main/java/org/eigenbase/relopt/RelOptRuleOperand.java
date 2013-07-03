@@ -217,8 +217,8 @@ assert|assert
 name|children
 operator|.
 name|length
-operator|==
-literal|1
+operator|>
+literal|0
 assert|;
 block|}
 name|this

@@ -331,11 +331,16 @@ name|length
 return|;
 block|}
 comment|/**      * Converts a trait to canonical form.      *      *<p>After canonization, t1.equals(t2) if and only if t1 == t2.      *      * @param trait Trait      *      * @return Trait in canonical form      */
-specifier|private
+specifier|public
+parameter_list|<
+name|T
+extends|extends
 name|RelTrait
+parameter_list|>
+name|T
 name|canonize
 parameter_list|(
-name|RelTrait
+name|T
 name|trait
 parameter_list|)
 block|{
@@ -351,6 +356,9 @@ literal|null
 return|;
 block|}
 return|return
+operator|(
+name|T
+operator|)
 name|trait
 operator|.
 name|getTraitDef
@@ -530,6 +538,38 @@ block|}
 block|}
 return|return
 literal|false
+return|;
+block|}
+comment|/**      * Returns whether this trait set contains the given trait, or whether the      * trait is not present because its {@link RelTraitDef} is not enabled.      * Returns false if another trait of the same {@code RelTraitDef} is      * present.      *      * @param trait Trait      * @return Whether trait is present, or is absent because disabled      */
+specifier|public
+name|boolean
+name|containsIfApplicable
+parameter_list|(
+name|RelTrait
+name|trait
+parameter_list|)
+block|{
+comment|// Note that '==' is sufficient, because trait should be canonized.
+specifier|final
+name|RelTrait
+name|trait1
+init|=
+name|getTrait
+argument_list|(
+name|trait
+operator|.
+name|getTraitDef
+argument_list|()
+argument_list|)
+decl_stmt|;
+return|return
+name|trait1
+operator|==
+literal|null
+operator|||
+name|trait1
+operator|==
+name|trait
 return|;
 block|}
 comment|/**      * Returns whether this trait set comprises precisely the list of given      * traits.      *      * @param relTraits Traits      * @return Whether this trait set's traits are the same as the argument      */

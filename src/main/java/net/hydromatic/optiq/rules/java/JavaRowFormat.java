@@ -374,7 +374,6 @@ block|}
 block|}
 block|,
 name|EMPTY_LIST
-parameter_list|()
 block|{
 name|Type
 name|javaRowClass

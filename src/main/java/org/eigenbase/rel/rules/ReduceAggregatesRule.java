@@ -880,13 +880,9 @@ name|avgInputType
 operator|.
 name|isNullable
 argument_list|()
-operator|||
-name|nGroups
-operator|==
-literal|0
 argument_list|)
 decl_stmt|;
-name|SqlSumAggFunction
+name|SqlAggFunction
 name|sumAgg
 init|=
 operator|new
