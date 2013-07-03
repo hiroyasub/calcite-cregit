@@ -49,15 +49,7 @@ name|RelNode
 name|child
 parameter_list|)
 function_decl|;
-comment|/**      * Called from {@link #visitChild} after the frame has been set up. Specific      * implementors should override this method.      *      * @param child Child relational expression      *      * @return Interpretation of the return value is left to the implementor      */
-name|Object
-name|visitChildInternal
-parameter_list|(
-name|RelNode
-name|child
-parameter_list|)
-function_decl|;
-comment|/**      * Called from {@link #visitChild} after the frame has been set up. Specific      * implementors should override this method.      *      * @param child Child relational expression      * @param ordinal Ordinal of child within its parent      *      * @return Interpretation of the return value is left to the implementor      */
+comment|/**      * Called from {@link #visitChild} after the frame has been set up. Specific      * implementors should override this method.      *      * @param child Child relational expression      * @param ordinal Ordinal of child within its parent      * @param arg Additional parameter; type depends on implementor      * @return Interpretation of the return value is left to the implementor      */
 name|Object
 name|visitChildInternal
 parameter_list|(
@@ -66,6 +58,9 @@ name|child
 parameter_list|,
 name|int
 name|ordinal
+parameter_list|,
+name|Object
+name|arg
 parameter_list|)
 function_decl|;
 block|}
