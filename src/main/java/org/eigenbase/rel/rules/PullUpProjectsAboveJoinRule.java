@@ -84,7 +84,6 @@ name|PullUpProjectsAboveJoinRule
 extends|extends
 name|RelOptRule
 block|{
-comment|// ~ Static fields/initializers --------------------------------------------
 comment|//~ Static fields/initializers ---------------------------------------------
 specifier|public
 specifier|static
@@ -357,7 +356,7 @@ comment|// Construct two RexPrograms and combine them.  The bottom program
 comment|// is a join of the projection expressions from the left and/or
 comment|// right projects that feed into the join.  The top program contains
 comment|// the join condition.
-comment|// Create a row type representing a concatentation of the inputs
+comment|// Create a row type representing a concatenation of the inputs
 comment|// underneath the projects that feed into the join.  This is the input
 comment|// into the bottom RexProgram.  Note that the join type is an inner
 comment|// join because the inputs haven't actually been joined yet.
@@ -693,15 +692,18 @@ argument_list|)
 decl_stmt|;
 comment|// expand out the new projection expressions; if the join is an
 comment|// outer join, modify the expressions to reference the join output
+name|List
+argument_list|<
 name|RexNode
-index|[]
+argument_list|>
 name|newProjExprs
 init|=
 operator|new
+name|ArrayList
+argument_list|<
 name|RexNode
-index|[
-name|nProjExprs
-index|]
+argument_list|>
+argument_list|()
 decl_stmt|;
 name|List
 argument_list|<
@@ -776,26 +778,13 @@ decl_stmt|;
 if|if
 condition|(
 name|joinType
-operator|==
+operator|!=
 name|JoinRelType
 operator|.
 name|INNER
 condition|)
 block|{
-name|newProjExprs
-index|[
-name|i
-index|]
-operator|=
 name|newExpr
-expr_stmt|;
-block|}
-else|else
-block|{
-name|newProjExprs
-index|[
-name|i
-index|]
 operator|=
 name|newExpr
 operator|.
@@ -820,6 +809,13 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+name|newProjExprs
+operator|.
+name|add
+argument_list|(
+name|newExpr
+argument_list|)
+expr_stmt|;
 block|}
 comment|// finally, create the projection on top of the join
 name|RelNode
@@ -833,7 +829,12 @@ name|newJoinRel
 argument_list|,
 name|newProjExprs
 argument_list|,
+name|Arrays
+operator|.
+name|asList
+argument_list|(
 name|fieldNames
+argument_list|)
 argument_list|)
 decl_stmt|;
 name|call
@@ -925,7 +926,7 @@ name|getChild
 argument_list|()
 return|;
 block|}
-comment|/**      * Creates projection expressions corresponding to one of the inputs into      * the join      *      * @param projRel the projection input into the join (if it exists)      * @param joinChild the child of the projection input (if there is a      * projection); otherwise, this is the join input      * @param adjustmentAmount the amount the expressions need to be shifted by      * @param rexBuilder rex builder      * @param joinChildrenFields concatentation of the fields from the left and      * right join inputs (once the projections have been removed)      * @param projExprs array of projection expressions to be created      * @param fieldNames array of the names of the projection fields      * @param offset starting index in the arrays to be filled in      */
+comment|/**      * Creates projection expressions corresponding to one of the inputs into      * the join      *      * @param projRel the projection input into the join (if it exists)      * @param joinChild the child of the projection input (if there is a      * projection); otherwise, this is the join input      * @param adjustmentAmount the amount the expressions need to be shifted by      * @param rexBuilder rex builder      * @param joinChildrenFields concatenation of the fields from the left and      * right join inputs (once the projections have been removed)      * @param projExprs array of projection expressions to be created      * @param fieldNames array of the names of the projection fields      * @param offset starting index in the arrays to be filled in      */
 specifier|private
 name|void
 name|createProjectExprs

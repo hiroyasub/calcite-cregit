@@ -254,8 +254,10 @@ block|}
 comment|/**      * Generates a cast from one row type to another      *      * @param rexBuilder RexBuilder to use for constructing casts      * @param lhsRowType target row type      * @param rhsRowType source row type; fields must be 1-to-1 with lhsRowType,      * in same order      *      * @return cast expressions      */
 specifier|public
 specifier|static
+name|List
+argument_list|<
 name|RexNode
-index|[]
+argument_list|>
 name|generateCastExpressions
 parameter_list|(
 name|RexBuilder
@@ -344,6 +346,10 @@ argument_list|)
 expr_stmt|;
 block|}
 return|return
+name|Arrays
+operator|.
+name|asList
+argument_list|(
 name|generateCastExpressions
 argument_list|(
 name|rexBuilder
@@ -351,6 +357,7 @@ argument_list|,
 name|lhsRowType
 argument_list|,
 name|rhsExps
+argument_list|)
 argument_list|)
 return|;
 block|}
