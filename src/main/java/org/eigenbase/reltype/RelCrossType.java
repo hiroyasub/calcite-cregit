@@ -150,9 +150,11 @@ argument_list|)
 throw|;
 block|}
 specifier|public
+name|List
+argument_list|<
 name|RelDataTypeField
-index|[]
-name|getFields
+argument_list|>
+name|getFieldList
 parameter_list|()
 block|{
 throw|throw

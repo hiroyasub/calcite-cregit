@@ -463,14 +463,10 @@ block|}
 comment|// permanently updates a call in place
 name|apply
 argument_list|(
-name|Arrays
-operator|.
-name|asList
-argument_list|(
 name|call
 operator|.
-name|operands
-argument_list|)
+name|getOperandList
+argument_list|()
 argument_list|)
 expr_stmt|;
 name|RexNode

@@ -769,14 +769,10 @@ name|allOperands
 operator|.
 name|addAll
 argument_list|(
-name|Arrays
-operator|.
-name|asList
-argument_list|(
 name|rule
 operator|.
-name|operands
-argument_list|)
+name|getOperands
+argument_list|()
 argument_list|)
 expr_stmt|;
 comment|// If this is a converter rule, check that it operates on one of the

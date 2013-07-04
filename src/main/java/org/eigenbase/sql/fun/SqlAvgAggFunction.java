@@ -17,6 +17,16 @@ end_package
 
 begin_import
 import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|eigenbase
@@ -50,6 +60,20 @@ operator|.
 name|type
 operator|.
 name|*
+import|;
+end_import
+
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|ImmutableList
 import|;
 end_import
 
@@ -128,8 +152,10 @@ expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
 specifier|public
+name|List
+argument_list|<
 name|RelDataType
-index|[]
+argument_list|>
 name|getParameterTypes
 parameter_list|(
 name|RelDataTypeFactory
@@ -137,12 +163,12 @@ name|typeFactory
 parameter_list|)
 block|{
 return|return
-operator|new
-name|RelDataType
-index|[]
-block|{
+name|ImmutableList
+operator|.
+name|of
+argument_list|(
 name|type
-block|}
+argument_list|)
 return|;
 block|}
 specifier|public

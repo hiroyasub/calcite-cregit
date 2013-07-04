@@ -907,7 +907,7 @@ literal|", args "
 operator|+
 name|Arrays
 operator|.
-name|asList
+name|toString
 argument_list|(
 name|rels
 argument_list|)

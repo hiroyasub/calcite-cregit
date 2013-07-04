@@ -15,6 +15,16 @@ end_package
 
 begin_import
 import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|eigenbase
@@ -289,8 +299,10 @@ specifier|static
 name|boolean
 name|containsOver
 parameter_list|(
+name|List
+argument_list|<
 name|RexNode
-index|[]
+argument_list|>
 name|exprs
 parameter_list|,
 name|RexNode
@@ -308,7 +320,8 @@ name|i
 operator|<
 name|exprs
 operator|.
-name|length
+name|size
+argument_list|()
 condition|;
 name|i
 operator|++
@@ -323,9 +336,11 @@ operator|.
 name|containsOver
 argument_list|(
 name|exprs
-index|[
+operator|.
+name|get
+argument_list|(
 name|i
-index|]
+argument_list|)
 argument_list|)
 condition|)
 block|{

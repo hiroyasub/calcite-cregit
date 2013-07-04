@@ -15,6 +15,16 @@ end_package
 
 begin_import
 import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|eigenbase
@@ -35,12 +45,14 @@ interface|interface
 name|RelOptSchema
 block|{
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Retrieves a {@link RelOptTable} based upon a member access.      *      *<p>For example, the Saffron expression<code>salesSchema.emps</code>      * would be resolved using a call to<code>salesSchema.getTableForMember(new      * String[]{"emps" })</code>.</p>      *      *<p>Note that name.length is only greater than 1 for queries originating      * from JDBC.</p>      */
+comment|/**      * Retrieves a {@link RelOptTable} based upon a member access.      *      *<p>For example, the Saffron expression<code>salesSchema.emps</code>      * would be resolved using a call to<code>salesSchema.getTableForMember(new      * String[]{"emps" })</code>.</p>      *      *<p>Note that name.length is only greater than 1 for queries originating      * from JDBC.</p>      *      * @param names Qualified name      */
 name|RelOptTable
 name|getTableForMember
 parameter_list|(
+name|List
+argument_list|<
 name|String
-index|[]
+argument_list|>
 name|names
 parameter_list|)
 function_decl|;

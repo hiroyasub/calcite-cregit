@@ -125,6 +125,20 @@ name|Ord
 import|;
 end_import
 
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|ImmutableList
+import|;
+end_import
+
 begin_comment
 comment|/**  *<code>AggregateRelBase</code> is an abstract base class for implementations  * of {@link AggregateRel}.  *  * @author John V. Sichi  * @version $Id$  */
 end_comment
@@ -199,7 +213,12 @@ name|this
 operator|.
 name|aggCalls
 operator|=
+name|ImmutableList
+operator|.
+name|copyOf
+argument_list|(
 name|aggCalls
+argument_list|)
 expr_stmt|;
 name|this
 operator|.
@@ -848,11 +867,13 @@ decl_stmt|;
 return|return
 name|childType
 operator|.
-name|getFields
+name|getFieldList
 argument_list|()
-index|[
+operator|.
+name|get
+argument_list|(
 name|operand
-index|]
+argument_list|)
 operator|.
 name|getType
 argument_list|()

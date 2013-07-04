@@ -413,7 +413,7 @@ name|i
 index|]
 return|;
 block|}
-comment|/**      * Copies names and components from another identifier. Does not modify the      * cross-component parser position.      *      * @param other identifer from which to copy      */
+comment|/**      * Copies names and components from another identifier. Does not modify the      * cross-component parser position.      *      * @param other identifier from which to copy      */
 specifier|public
 name|void
 name|assignNamesFrom

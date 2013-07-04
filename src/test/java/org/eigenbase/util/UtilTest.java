@@ -3451,8 +3451,9 @@ specifier|final
 name|Template
 name|template
 init|=
-operator|new
 name|Template
+operator|.
+name|of
 argument_list|(
 literal|"Happy {age,number,#.00}th birthday, {person}!"
 argument_list|)
@@ -3602,8 +3603,9 @@ specifier|final
 name|Template
 name|template2
 init|=
-operator|new
 name|Template
+operator|.
+name|of
 argument_list|(
 literal|"Don''t expand 'this {brace}'."
 argument_list|)

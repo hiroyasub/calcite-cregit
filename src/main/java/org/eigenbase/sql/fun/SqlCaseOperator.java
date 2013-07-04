@@ -117,13 +117,15 @@ end_import
 
 begin_import
 import|import
-name|org
+name|com
 operator|.
-name|eigenbase
+name|google
 operator|.
-name|util
+name|common
 operator|.
-name|Util
+name|collect
+operator|.
+name|Iterables
 import|;
 end_import
 
@@ -884,9 +886,9 @@ name|thenTypes
 operator|.
 name|add
 argument_list|(
-name|Util
+name|Iterables
 operator|.
-name|last
+name|getLast
 argument_list|(
 name|argTypes
 argument_list|)

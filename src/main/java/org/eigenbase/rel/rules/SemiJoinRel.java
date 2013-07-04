@@ -87,6 +87,18 @@ name|*
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
+name|util
+operator|.
+name|ImmutableIntList
+import|;
+end_import
+
 begin_comment
 comment|/**  * A SemiJoinRel represents two relational expressions joined according to some  * condition, where the output only contains the columns from the left join  * input.  *  * @author Zelaine Fong  * @version $Id$  */
 end_comment
@@ -101,17 +113,13 @@ name|JoinRelBase
 block|{
 comment|//~ Instance fields --------------------------------------------------------
 specifier|private
-name|List
-argument_list|<
-name|Integer
-argument_list|>
+specifier|final
+name|ImmutableIntList
 name|leftKeys
 decl_stmt|;
 specifier|private
-name|List
-argument_list|<
-name|Integer
-argument_list|>
+specifier|final
+name|ImmutableIntList
 name|rightKeys
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
@@ -180,13 +188,23 @@ name|this
 operator|.
 name|leftKeys
 operator|=
+name|ImmutableIntList
+operator|.
+name|copyOf
+argument_list|(
 name|leftKeys
+argument_list|)
 expr_stmt|;
 name|this
 operator|.
 name|rightKeys
 operator|=
+name|ImmutableIntList
+operator|.
+name|copyOf
+argument_list|(
 name|rightKeys
+argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
@@ -222,25 +240,11 @@ name|right
 argument_list|,
 name|conditionExpr
 argument_list|,
-operator|new
-name|ArrayList
-argument_list|<
-name|Integer
-argument_list|>
-argument_list|(
 name|getLeftKeys
 argument_list|()
-argument_list|)
 argument_list|,
-operator|new
-name|ArrayList
-argument_list|<
-name|Integer
-argument_list|>
-argument_list|(
 name|getRightKeys
 argument_list|()
-argument_list|)
 argument_list|)
 return|;
 block|}

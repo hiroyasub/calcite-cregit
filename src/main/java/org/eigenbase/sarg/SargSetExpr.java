@@ -59,6 +59,20 @@ name|*
 import|;
 end_import
 
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|ImmutableList
+import|;
+end_import
+
 begin_comment
 comment|/**  * SargSetExpr represents the application of a {@link SargSetOperator set  * operator} to zero or more child {@link SargExpr sarg expressions}.  *  * @author John V. Sichi  * @version $Id$  */
 end_comment
@@ -147,9 +161,9 @@ name|getChildren
 parameter_list|()
 block|{
 return|return
-name|Collections
+name|ImmutableList
 operator|.
-name|unmodifiableList
+name|copyOf
 argument_list|(
 name|children
 argument_list|)

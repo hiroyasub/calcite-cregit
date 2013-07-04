@@ -121,6 +121,20 @@ name|Ord
 import|;
 end_import
 
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|ImmutableList
+import|;
+end_import
+
 begin_comment
 comment|/**  * Callback for an expression to dump itself to.  */
 end_comment
@@ -782,16 +796,9 @@ argument_list|>
 argument_list|>
 name|valuesCopy
 init|=
-operator|new
-name|ArrayList
-argument_list|<
-name|Pair
-argument_list|<
-name|String
-argument_list|,
-name|Object
-argument_list|>
-argument_list|>
+name|ImmutableList
+operator|.
+name|copyOf
 argument_list|(
 name|values
 argument_list|)

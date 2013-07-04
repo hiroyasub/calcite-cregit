@@ -73,6 +73,20 @@ name|Ord
 import|;
 end_import
 
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|ImmutableList
+import|;
+end_import
+
 begin_comment
 comment|/**  *<code>SetOpRel</code> is an abstract base for relational set operators such  * as UNION, MINUS (aka EXCEPT), and INTERSECT.  *  * @author John V. Sichi  * @version $Id$  */
 end_comment
@@ -129,7 +143,12 @@ name|this
 operator|.
 name|inputs
 operator|=
+name|ImmutableList
+operator|.
+name|copyOf
+argument_list|(
 name|inputs
+argument_list|)
 expr_stmt|;
 name|this
 operator|.

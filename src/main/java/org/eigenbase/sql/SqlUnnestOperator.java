@@ -108,11 +108,13 @@ name|type
 operator|=
 name|type
 operator|.
-name|getFields
+name|getFieldList
 argument_list|()
-index|[
+operator|.
+name|get
+argument_list|(
 literal|0
-index|]
+argument_list|)
 operator|.
 name|getType
 argument_list|()

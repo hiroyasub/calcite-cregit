@@ -196,13 +196,15 @@ argument_list|)
 expr_stmt|;
 comment|// Each operand must have the same number of columns.
 specifier|final
+name|List
+argument_list|<
 name|RelDataTypeField
-index|[]
+argument_list|>
 name|fields
 init|=
 name|argType
 operator|.
-name|getFields
+name|getFieldList
 argument_list|()
 decl_stmt|;
 if|if
@@ -216,7 +218,8 @@ name|colCount
 operator|=
 name|fields
 operator|.
-name|length
+name|size
+argument_list|()
 expr_stmt|;
 continue|continue;
 block|}
@@ -224,7 +227,8 @@ if|if
 condition|(
 name|fields
 operator|.
-name|length
+name|size
+argument_list|()
 operator|!=
 name|colCount
 condition|)
@@ -359,11 +363,13 @@ index|[
 name|index
 index|]
 operator|.
-name|getFields
+name|getFieldList
 argument_list|()
-index|[
+operator|.
+name|get
+argument_list|(
 name|i2
-index|]
+argument_list|)
 operator|.
 name|getType
 argument_list|()

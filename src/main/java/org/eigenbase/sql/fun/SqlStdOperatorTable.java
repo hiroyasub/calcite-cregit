@@ -67,6 +67,20 @@ name|*
 import|;
 end_import
 
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|ImmutableList
+import|;
+end_import
+
 begin_comment
 comment|/**  * Implementation of {@link org.eigenbase.sql.SqlOperatorTable} containing the  * standard operators and functions.  *  * @author jhyde  * @version $Id$  * @since May 28, 2004  */
 end_comment
@@ -1547,11 +1561,13 @@ init|=
 operator|new
 name|SqlMinMaxAggFunction
 argument_list|(
-operator|new
+name|ImmutableList
+operator|.
+expr|<
 name|RelDataType
-index|[
-literal|0
-index|]
+operator|>
+name|of
+argument_list|()
 argument_list|,
 literal|true
 argument_list|,
@@ -1570,11 +1586,13 @@ init|=
 operator|new
 name|SqlMinMaxAggFunction
 argument_list|(
-operator|new
+name|ImmutableList
+operator|.
+expr|<
 name|RelDataType
-index|[
-literal|0
-index|]
+operator|>
+name|of
+argument_list|()
 argument_list|,
 literal|false
 argument_list|,

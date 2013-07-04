@@ -73,6 +73,20 @@ name|*
 import|;
 end_import
 
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|ImmutableList
+import|;
+end_import
+
 begin_comment
 comment|/**  * A<code>RelSet</code> is an equivalence-set of expressions; that is, a set of  * expressions which have identical semantics. We are generally interested in  * using the expression which has the lowest cost.  *  *<p>All of the expressions in an<code>RelSet</code> have the same calling  * convention.</p>  *  * @author jhyde  * @version $Id$  * @since 16 December, 2001  */
 end_comment
@@ -876,11 +890,9 @@ name|RelNode
 argument_list|>
 name|previousParents
 init|=
-operator|new
-name|ArrayList
-argument_list|<
-name|RelNode
-argument_list|>
+name|ImmutableList
+operator|.
+name|copyOf
 argument_list|(
 name|otherSet
 operator|.

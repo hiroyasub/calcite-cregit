@@ -239,7 +239,7 @@ name|containsOver
 argument_list|(
 name|origProj
 operator|.
-name|getProjectExps
+name|getProjects
 argument_list|()
 argument_list|,
 literal|null

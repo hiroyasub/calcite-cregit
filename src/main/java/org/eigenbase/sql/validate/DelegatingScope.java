@@ -75,18 +75,6 @@ name|*
 import|;
 end_import
 
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
-name|util
-operator|.
-name|*
-import|;
-end_import
-
 begin_comment
 comment|/**  * A scope which delegates all requests to its parent scope. Use this as a base  * class for defining nested scopes.  *  * @author jhyde  * @version $Id$  * @since Mar 25, 2003  */
 end_comment
@@ -122,17 +110,11 @@ block|{
 name|super
 argument_list|()
 expr_stmt|;
-name|Util
-operator|.
-name|pre
-argument_list|(
+assert|assert
 name|parent
 operator|!=
 literal|null
-argument_list|,
-literal|"parent != null"
-argument_list|)
-expr_stmt|;
+assert|;
 name|this
 operator|.
 name|validator
@@ -238,41 +220,17 @@ block|{
 comment|// namespace is not good - bail out.
 return|return;
 block|}
-specifier|final
-name|RelDataTypeField
-index|[]
-name|fields
-init|=
-name|rowType
-operator|.
-name|getFields
-argument_list|()
-decl_stmt|;
 for|for
 control|(
-name|int
-name|i
-init|=
-literal|0
-init|;
-name|i
-operator|<
-name|fields
-operator|.
-name|length
-condition|;
-name|i
-operator|++
-control|)
-block|{
 name|RelDataTypeField
 name|field
-init|=
-name|fields
-index|[
-name|i
-index|]
-decl_stmt|;
+range|:
+name|rowType
+operator|.
+name|getFieldList
+argument_list|()
+control|)
+block|{
 name|colNames
 operator|.
 name|add
@@ -472,7 +430,7 @@ argument_list|,
 name|identifier
 argument_list|)
 expr_stmt|;
-comment|//todo: do implicit collation here
+comment|// todo: do implicit collation here
 specifier|final
 name|SqlParserPos
 name|pos

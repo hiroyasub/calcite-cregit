@@ -72,8 +72,10 @@ name|RelOptTable
 block|{
 comment|//~ Methods ----------------------------------------------------------------
 comment|/**      * Obtains an identifier for this table. The identifier must be unique with      * respect to the Connection producing this table.      *      * @return qualified name      */
+name|List
+argument_list|<
 name|String
-index|[]
+argument_list|>
 name|getQualifiedName
 parameter_list|()
 function_decl|;

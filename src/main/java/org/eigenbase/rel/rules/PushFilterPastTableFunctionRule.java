@@ -321,8 +321,10 @@ operator|.
 name|getRexBuilder
 argument_list|()
 decl_stmt|;
+name|List
+argument_list|<
 name|RelDataTypeField
-index|[]
+argument_list|>
 name|origFields
 init|=
 name|funcRel
@@ -330,7 +332,7 @@ operator|.
 name|getRowType
 argument_list|()
 operator|.
-name|getFields
+name|getFieldList
 argument_list|()
 decl_stmt|;
 comment|// TODO:  these need to be non-zero once we
@@ -344,7 +346,8 @@ name|int
 index|[
 name|origFields
 operator|.
-name|length
+name|size
+argument_list|()
 index|]
 decl_stmt|;
 for|for
@@ -376,7 +379,7 @@ operator|.
 name|getRowType
 argument_list|()
 operator|.
-name|getFields
+name|getFieldList
 argument_list|()
 argument_list|,
 name|adjustments

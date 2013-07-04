@@ -453,11 +453,13 @@ name|rexNode
 init|=
 name|rel
 operator|.
-name|getProjectExps
+name|getProjects
 argument_list|()
-index|[
+operator|.
+name|get
+argument_list|(
 name|iOutputColumn
-index|]
+argument_list|)
 decl_stmt|;
 if|if
 condition|(

@@ -160,7 +160,7 @@ name|argList
 operator|=
 name|ImmutableIntList
 operator|.
-name|of
+name|copyOf
 argument_list|(
 name|argList
 argument_list|)

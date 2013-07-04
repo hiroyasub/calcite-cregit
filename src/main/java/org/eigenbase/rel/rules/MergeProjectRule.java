@@ -226,7 +226,7 @@ argument_list|()
 argument_list|,
 name|bottomProject
 operator|.
-name|getProjectExps
+name|getProjects
 argument_list|()
 argument_list|,
 literal|null
@@ -240,13 +240,15 @@ name|rexBuilder
 argument_list|)
 decl_stmt|;
 comment|// create a RexProgram for the topmost project
+name|List
+argument_list|<
 name|RexNode
-index|[]
+argument_list|>
 name|projExprs
 init|=
 name|topProject
 operator|.
-name|getProjectExps
+name|getProjects
 argument_list|()
 decl_stmt|;
 name|RexProgram
@@ -295,7 +297,8 @@ name|nProjExprs
 init|=
 name|projExprs
 operator|.
-name|length
+name|size
+argument_list|()
 decl_stmt|;
 name|List
 argument_list|<

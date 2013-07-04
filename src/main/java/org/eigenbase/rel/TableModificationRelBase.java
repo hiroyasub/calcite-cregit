@@ -582,15 +582,10 @@ name|item
 argument_list|(
 literal|"table"
 argument_list|,
-name|Arrays
-operator|.
-name|asList
-argument_list|(
 name|table
 operator|.
 name|getQualifiedName
 argument_list|()
-argument_list|)
 argument_list|)
 operator|.
 name|item

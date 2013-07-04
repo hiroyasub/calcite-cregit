@@ -23,6 +23,20 @@ name|*
 import|;
 end_import
 
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|ImmutableList
+import|;
+end_import
+
 begin_comment
 comment|/**  * SargIntervalSequence represents the union of a set of disjoint {@link  * SargInterval} instances. (If any adjacent intervals weren't disjoint, they  * would have been combined into one bigger one before creation of the  * sequence.) Intervals are maintained in coordinate order.  *  * @author John V. Sichi  * @version $Id$  */
 end_comment
@@ -163,9 +177,9 @@ name|getList
 parameter_list|()
 block|{
 return|return
-name|Collections
+name|ImmutableList
 operator|.
-name|unmodifiableList
+name|copyOf
 argument_list|(
 name|list
 argument_list|)

@@ -13,6 +13,16 @@ name|relopt
 package|;
 end_package
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
+import|;
+end_import
+
 begin_comment
 comment|/**  * Extension to {@link RelOptSchema} with support for sample data-sets.  *  * @author jhyde  * @see RelOptSchema  */
 end_comment
@@ -29,8 +39,10 @@ comment|/**      * Retrieves a {@link RelOptTable} based upon a member access, u
 name|RelOptTable
 name|getTableForMember
 parameter_list|(
+name|List
+argument_list|<
 name|String
-index|[]
+argument_list|>
 name|names
 parameter_list|,
 name|String

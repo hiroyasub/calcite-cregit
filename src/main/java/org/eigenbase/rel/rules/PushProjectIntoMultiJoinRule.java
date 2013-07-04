@@ -196,7 +196,7 @@ name|newMultiJoin
 argument_list|,
 name|project
 operator|.
-name|getProjectExpList
+name|getProjects
 argument_list|()
 argument_list|,
 name|project

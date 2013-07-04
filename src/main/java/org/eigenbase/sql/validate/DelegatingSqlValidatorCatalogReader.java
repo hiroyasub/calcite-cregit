@@ -85,8 +85,10 @@ specifier|public
 name|SqlValidatorTable
 name|getTable
 parameter_list|(
+name|List
+argument_list|<
 name|String
-index|[]
+argument_list|>
 name|names
 parameter_list|)
 block|{

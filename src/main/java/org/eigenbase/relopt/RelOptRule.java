@@ -35,6 +35,20 @@ name|*
 import|;
 end_import
 
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|ImmutableList
+import|;
+end_import
+
 begin_comment
 comment|/**  * A<code>RelOptRule</code> transforms an expression into another. It has a  * list of {@link RelOptRuleOperand}s, which determine whether the rule can be  * applied to a particular section of the tree.  *  *<p>The optimizer figures out which rules are applicable, then calls {@link  * #onMatch} on each of them.</p>  */
 end_comment
@@ -825,16 +839,11 @@ name|getOperands
 parameter_list|()
 block|{
 return|return
-name|Collections
+name|ImmutableList
 operator|.
-name|unmodifiableList
-argument_list|(
-name|Arrays
-operator|.
-name|asList
+name|copyOf
 argument_list|(
 name|operands
-argument_list|)
 argument_list|)
 return|;
 block|}

@@ -59,12 +59,14 @@ interface|interface
 name|SqlValidatorCatalogReader
 block|{
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Finds a table with the given name, possibly qualified.      *      * @param names Name of table      *      * @return named table, or null if not found      */
+comment|/**      * Finds a table with the given name, possibly qualified.      *      * @param names Qualified name of table      *      * @return named table, or null if not found      */
 name|SqlValidatorTable
 name|getTable
 parameter_list|(
+name|List
+argument_list|<
 name|String
-index|[]
+argument_list|>
 name|names
 parameter_list|)
 function_decl|;

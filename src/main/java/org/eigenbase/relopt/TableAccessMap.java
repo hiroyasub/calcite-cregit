@@ -345,15 +345,10 @@ name|table
 parameter_list|)
 block|{
 return|return
-name|Arrays
-operator|.
-name|asList
-argument_list|(
 name|table
 operator|.
 name|getQualifiedName
 argument_list|()
-argument_list|)
 return|;
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------

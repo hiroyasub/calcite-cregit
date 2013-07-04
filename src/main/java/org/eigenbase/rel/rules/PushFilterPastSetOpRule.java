@@ -187,8 +187,10 @@ operator|.
 name|getRexBuilder
 argument_list|()
 decl_stmt|;
+name|List
+argument_list|<
 name|RelDataTypeField
-index|[]
+argument_list|>
 name|origFields
 init|=
 name|setOpRel
@@ -196,7 +198,7 @@ operator|.
 name|getRowType
 argument_list|()
 operator|.
-name|getFields
+name|getFieldList
 argument_list|()
 decl_stmt|;
 name|int
@@ -208,7 +210,8 @@ name|int
 index|[
 name|origFields
 operator|.
-name|length
+name|size
+argument_list|()
 index|]
 decl_stmt|;
 name|List
@@ -256,7 +259,7 @@ operator|.
 name|getRowType
 argument_list|()
 operator|.
-name|getFields
+name|getFieldList
 argument_list|()
 argument_list|,
 name|adjustments

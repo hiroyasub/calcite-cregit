@@ -1161,8 +1161,10 @@ parameter_list|(
 name|RelDataTypeFactory
 name|typeFactory
 parameter_list|,
+name|List
+argument_list|<
 name|RelDataType
-index|[]
+argument_list|>
 name|operandTypes
 parameter_list|)
 block|{
@@ -1176,12 +1178,7 @@ name|typeFactory
 argument_list|,
 name|this
 argument_list|,
-name|Arrays
-operator|.
-name|asList
-argument_list|(
 name|operandTypes
-argument_list|)
 argument_list|)
 argument_list|)
 return|;

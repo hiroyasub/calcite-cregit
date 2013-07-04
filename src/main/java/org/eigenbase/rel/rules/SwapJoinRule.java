@@ -583,14 +583,18 @@ name|rexBuilder
 decl_stmt|;
 specifier|private
 specifier|final
+name|List
+argument_list|<
 name|RelDataTypeField
-index|[]
+argument_list|>
 name|leftFields
 decl_stmt|;
 specifier|private
 specifier|final
+name|List
+argument_list|<
 name|RelDataTypeField
-index|[]
+argument_list|>
 name|rightFields
 decl_stmt|;
 name|VariableReplacer
@@ -617,7 +621,7 @@ name|leftFields
 operator|=
 name|leftType
 operator|.
-name|getFields
+name|getFieldList
 argument_list|()
 expr_stmt|;
 name|this
@@ -626,7 +630,7 @@ name|rightFields
 operator|=
 name|rightType
 operator|.
-name|getFields
+name|getFieldList
 argument_list|()
 expr_stmt|;
 block|}
@@ -727,7 +731,8 @@ name|index
 operator|<
 name|leftFields
 operator|.
-name|length
+name|size
+argument_list|()
 condition|)
 block|{
 comment|// Field came from left side of join. Move it to the right.
@@ -737,16 +742,19 @@ operator|.
 name|makeInputRef
 argument_list|(
 name|leftFields
-index|[
+operator|.
+name|get
+argument_list|(
 name|index
-index|]
+argument_list|)
 operator|.
 name|getType
 argument_list|()
 argument_list|,
 name|rightFields
 operator|.
-name|length
+name|size
+argument_list|()
 operator|+
 name|index
 argument_list|)
@@ -756,7 +764,8 @@ name|index
 operator|-=
 name|leftFields
 operator|.
-name|length
+name|size
+argument_list|()
 expr_stmt|;
 if|if
 condition|(
@@ -764,7 +773,8 @@ name|index
 operator|<
 name|rightFields
 operator|.
-name|length
+name|size
+argument_list|()
 condition|)
 block|{
 comment|// Field came from right side of join. Move it to the left.
@@ -774,9 +784,11 @@ operator|.
 name|makeInputRef
 argument_list|(
 name|rightFields
-index|[
+operator|.
+name|get
+argument_list|(
 name|index
-index|]
+argument_list|)
 operator|.
 name|getType
 argument_list|()
@@ -801,13 +813,15 @@ literal|", leftFieldCount="
 operator|+
 name|leftFields
 operator|.
-name|length
+name|size
+argument_list|()
 operator|+
 literal|", rightFieldCount="
 operator|+
 name|rightFields
 operator|.
-name|length
+name|size
+argument_list|()
 argument_list|)
 throw|;
 block|}

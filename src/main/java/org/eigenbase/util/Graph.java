@@ -15,6 +15,20 @@ end_package
 
 begin_import
 import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|ImmutableList
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -657,17 +671,19 @@ condition|)
 block|{
 comment|// Take a copy of the map's keys to avoid
 comment|// ConcurrentModificationExceptions.
-name|ArrayList
+specifier|final
+name|List
 argument_list|<
 name|Arc
+argument_list|<
+name|T
+argument_list|>
 argument_list|>
 name|previous
 init|=
-operator|new
-name|ArrayList
-argument_list|<
-name|Arc
-argument_list|>
+name|ImmutableList
+operator|.
+name|copyOf
 argument_list|(
 name|shortestPath
 operator|.

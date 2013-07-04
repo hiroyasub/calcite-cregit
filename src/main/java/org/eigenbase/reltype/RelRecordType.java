@@ -29,16 +29,6 @@ name|java
 operator|.
 name|util
 operator|.
-name|Arrays
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
 name|List
 import|;
 end_import
@@ -81,7 +71,6 @@ extends|extends
 name|RelDataTypeImpl
 implements|implements
 name|Serializable
-comment|/* , Type, Types.RecordType */
 block|{
 comment|//~ Constructors -----------------------------------------------------------
 comment|/**      * Creates a<code>RecordType</code>. This should only be called from a      * factory method.      */
@@ -267,7 +256,7 @@ return|return
 operator|new
 name|SerializableRelRecordType
 argument_list|(
-name|fields
+name|fieldList
 argument_list|)
 return|;
 block|}
@@ -281,15 +270,19 @@ implements|implements
 name|Serializable
 block|{
 specifier|private
+name|List
+argument_list|<
 name|RelDataTypeField
-index|[]
+argument_list|>
 name|fields
 decl_stmt|;
 specifier|private
 name|SerializableRelRecordType
 parameter_list|(
+name|List
+argument_list|<
 name|RelDataTypeField
-index|[]
+argument_list|>
 name|fields
 parameter_list|)
 block|{
@@ -310,12 +303,7 @@ return|return
 operator|new
 name|RelRecordType
 argument_list|(
-name|Arrays
-operator|.
-name|asList
-argument_list|(
 name|fields
-argument_list|)
 argument_list|)
 return|;
 block|}

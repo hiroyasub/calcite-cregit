@@ -727,7 +727,7 @@ name|leftKeys
 operator|=
 name|ImmutableIntList
 operator|.
-name|of
+name|copyOf
 argument_list|(
 name|leftKeys
 argument_list|)
@@ -738,7 +738,7 @@ name|rightKeys
 operator|=
 name|ImmutableIntList
 operator|.
-name|of
+name|copyOf
 argument_list|(
 name|rightKeys
 argument_list|)

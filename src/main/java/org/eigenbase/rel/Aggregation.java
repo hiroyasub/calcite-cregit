@@ -15,6 +15,16 @@ end_package
 
 begin_import
 import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|eigenbase
@@ -36,8 +46,10 @@ name|Aggregation
 block|{
 comment|//~ Methods ----------------------------------------------------------------
 comment|/**      * Returns the parameter types accepted by this Aggregation.      *      * @param typeFactory Type factory to create the types      *      * @return Array of parameter types      */
+name|List
+argument_list|<
 name|RelDataType
-index|[]
+argument_list|>
 name|getParameterTypes
 parameter_list|(
 name|RelDataTypeFactory

@@ -59,6 +59,20 @@ name|*
 import|;
 end_import
 
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|ImmutableList
+import|;
+end_import
+
 begin_comment
 comment|/**  * A<code>RelOptRuleCall</code> is an invocation of a {@link RelOptRule} with a  * set of {@link RelNode relational expression}s as arguments.  */
 end_comment
@@ -291,16 +305,11 @@ name|getRelList
 parameter_list|()
 block|{
 return|return
-name|Collections
+name|ImmutableList
 operator|.
-name|unmodifiableList
-argument_list|(
-name|Arrays
-operator|.
-name|asList
+name|copyOf
 argument_list|(
 name|rels
-argument_list|)
 argument_list|)
 return|;
 block|}

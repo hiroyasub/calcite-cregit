@@ -256,7 +256,7 @@ operator|.
 name|getRowType
 argument_list|()
 operator|.
-name|getFields
+name|getFieldList
 argument_list|()
 argument_list|,
 name|adjustments

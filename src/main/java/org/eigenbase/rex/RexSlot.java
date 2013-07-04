@@ -47,18 +47,6 @@ name|*
 import|;
 end_import
 
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
-name|util
-operator|.
-name|*
-import|;
-end_import
-
 begin_comment
 comment|/**  * Abstract base class for {@link RexInputRef} and {@link RexLocalRef}.  *  * @author jhyde  * @version $Id$  * @since Oct 25, 2005  */
 end_comment
@@ -78,7 +66,7 @@ name|int
 name|index
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a slot.      *      * @param index Index of the field in the underlying rowtype      * @param type Type of the column      *      * @pre type != null      * @pre index>= 0      */
+comment|/**      * Creates a slot.      *      * @param index Index of the field in the underlying rowtype      * @param type Type of the column      */
 specifier|protected
 name|RexSlot
 parameter_list|(
@@ -99,28 +87,11 @@ argument_list|,
 name|type
 argument_list|)
 expr_stmt|;
-name|Util
-operator|.
-name|pre
-argument_list|(
-name|type
-operator|!=
-literal|null
-argument_list|,
-literal|"type != null"
-argument_list|)
-expr_stmt|;
-name|Util
-operator|.
-name|pre
-argument_list|(
+assert|assert
 name|index
 operator|>=
 literal|0
-argument_list|,
-literal|"index>= 0"
-argument_list|)
-expr_stmt|;
+assert|;
 name|this
 operator|.
 name|index

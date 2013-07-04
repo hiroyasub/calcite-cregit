@@ -17,6 +17,16 @@ end_package
 
 begin_import
 import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|eigenbase
@@ -53,8 +63,10 @@ name|RelDataType
 name|getRowType
 parameter_list|()
 function_decl|;
+name|List
+argument_list|<
 name|String
-index|[]
+argument_list|>
 name|getQualifiedName
 parameter_list|()
 function_decl|;

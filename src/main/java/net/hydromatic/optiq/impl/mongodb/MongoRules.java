@@ -307,7 +307,7 @@ name|rex
 range|:
 name|project
 operator|.
-name|getProjectExps
+name|getProjects
 argument_list|()
 control|)
 block|{

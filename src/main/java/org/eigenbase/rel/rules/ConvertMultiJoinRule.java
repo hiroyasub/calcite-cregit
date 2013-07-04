@@ -965,7 +965,7 @@ operator|.
 name|getRowType
 argument_list|()
 operator|.
-name|getFields
+name|getFieldList
 argument_list|()
 argument_list|,
 name|joinRel
@@ -973,7 +973,7 @@ operator|.
 name|getRowType
 argument_list|()
 operator|.
-name|getFields
+name|getFieldList
 argument_list|()
 argument_list|)
 expr_stmt|;
@@ -1098,7 +1098,7 @@ operator|.
 name|getRowType
 argument_list|()
 operator|.
-name|getFields
+name|getFieldList
 argument_list|()
 argument_list|,
 name|joinRel
@@ -1106,7 +1106,7 @@ operator|.
 name|getRowType
 argument_list|()
 operator|.
-name|getFields
+name|getFieldList
 argument_list|()
 argument_list|)
 expr_stmt|;
@@ -1128,7 +1128,7 @@ return|return
 name|combinedConds
 return|;
 block|}
-comment|/**      * Copies outer join data from a source MultiJoinRel to a new set of arrays.      * Also adjusts the conditions to reflect the new position of an input if      * that input ends up being shifted to the right.      *      * @param multiJoinRel the source MultiJoinRel      * @param destConds the array where the join conditions will be copied      * @param destJoinTypes the array where the join types will be copied      * @param destPos starting position in the array where the copying starts      * @param adjustmentAmount if> 0, the amount the RexInputRefs in the join      * conditions need to be adjusted by      * @param srcFields the source fields that the original join conditions are      * referencing      * @param destFields the destination fields that the new join conditions      * will be referencing      */
+comment|/**      * Copies outer join data from a source MultiJoinRel to a new set of arrays.      * Also adjusts the conditions to reflect the new position of an input if      * that input ends up being shifted to the right.      *      * @param multiJoinRel the source MultiJoinRel      * @param destConds the array where the join conditions will be copied      * @param destJoinTypes the array where the join types will be copied      * @param destPos starting position in the array where the copying starts      * @param adjustmentAmount if> 0, the amount the RexInputRefs in the join * conditions need to be adjusted by      * @param srcFields the source fields that the original join conditions are * referencing      * @param destFields the destination fields that the new join conditions      */
 specifier|private
 name|void
 name|copyOuterJoinInfo
@@ -1150,12 +1150,16 @@ parameter_list|,
 name|int
 name|adjustmentAmount
 parameter_list|,
+name|List
+argument_list|<
 name|RelDataTypeField
-index|[]
+argument_list|>
 name|srcFields
 parameter_list|,
+name|List
+argument_list|<
 name|RelDataTypeField
-index|[]
+argument_list|>
 name|destFields
 parameter_list|)
 block|{
@@ -1240,7 +1244,8 @@ name|nFields
 init|=
 name|srcFields
 operator|.
-name|length
+name|size
+argument_list|()
 decl_stmt|;
 name|int
 index|[]
@@ -1577,10 +1582,11 @@ operator|.
 name|getRowType
 argument_list|()
 operator|.
-name|getFields
+name|getFieldList
 argument_list|()
 operator|.
-name|length
+name|size
+argument_list|()
 decl_stmt|;
 name|int
 name|nFieldsOnRight
@@ -1590,10 +1596,11 @@ operator|.
 name|getRowType
 argument_list|()
 operator|.
-name|getFields
+name|getFieldList
 argument_list|()
 operator|.
-name|length
+name|size
+argument_list|()
 decl_stmt|;
 name|int
 index|[]
@@ -1652,7 +1659,7 @@ operator|.
 name|getRowType
 argument_list|()
 operator|.
-name|getFields
+name|getFieldList
 argument_list|()
 argument_list|,
 name|joinRel
@@ -1660,7 +1667,7 @@ operator|.
 name|getRowType
 argument_list|()
 operator|.
-name|getFields
+name|getFieldList
 argument_list|()
 argument_list|,
 name|adjustments

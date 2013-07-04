@@ -47,6 +47,20 @@ name|*
 import|;
 end_import
 
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|ImmutableList
+import|;
+end_import
+
 begin_comment
 comment|/**  * A<code>RelOptAbstractTable</code> is a partial implementation of {@link  * RelOptTable}.  *  * @author jhyde  * @version $Id$  * @since May 3, 2002  */
 end_comment
@@ -116,18 +130,20 @@ name|name
 return|;
 block|}
 specifier|public
+name|List
+argument_list|<
 name|String
-index|[]
+argument_list|>
 name|getQualifiedName
 parameter_list|()
 block|{
 return|return
-operator|new
-name|String
-index|[]
-block|{
+name|ImmutableList
+operator|.
+name|of
+argument_list|(
 name|name
-block|}
+argument_list|)
 return|;
 block|}
 specifier|public

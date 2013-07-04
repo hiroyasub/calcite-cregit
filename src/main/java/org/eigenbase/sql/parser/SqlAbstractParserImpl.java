@@ -85,6 +85,20 @@ name|*
 import|;
 end_import
 
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|ImmutableList
+import|;
+end_import
+
 begin_comment
 comment|/**  * Abstract base for parsers generated from CommonParser.jj.  *  * @author John V. Sichi  * @version $Id$  */
 end_comment
@@ -2135,18 +2149,11 @@ argument_list|)
 expr_stmt|;
 name|tokenList
 operator|=
-name|Collections
+name|ImmutableList
 operator|.
-name|unmodifiableList
-argument_list|(
-operator|new
-name|ArrayList
-argument_list|<
-name|String
-argument_list|>
+name|copyOf
 argument_list|(
 name|tokenSet
-argument_list|)
 argument_list|)
 expr_stmt|;
 name|sql92ReservedWords

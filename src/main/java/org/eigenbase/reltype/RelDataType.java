@@ -114,13 +114,6 @@ argument_list|>
 name|getFieldNames
 parameter_list|()
 function_decl|;
-comment|/**      * Gets the fields in a struct type. The field count is equal to the length      * of the returned array.      *      *<p>NOTE jvs 17-Dec-2004: this method will become deprecated once we move      * to Java generics, and eventually eliminated      *      * @return array of fields      *      * @pre this.isStruct()      */
-specifier|public
-name|RelDataTypeField
-index|[]
-name|getFields
-parameter_list|()
-function_decl|;
 comment|/**      * Returns the number of fields in a struct type.      *      *<p>This method is equivalent to<code>{@link #getFieldList}      * ().size()</code>.      */
 specifier|public
 name|int
