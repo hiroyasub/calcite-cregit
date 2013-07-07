@@ -482,6 +482,15 @@ argument_list|)
 return|;
 block|}
 specifier|public
+name|JavaRowFormat
+name|getFormat
+parameter_list|()
+block|{
+return|return
+name|format
+return|;
+block|}
+specifier|public
 name|PhysType
 name|project
 parameter_list|(
@@ -566,8 +575,6 @@ name|typeFactory
 argument_list|,
 name|projectedRowType
 argument_list|,
-name|this
-operator|.
 name|format
 operator|.
 name|optimize
@@ -602,8 +609,7 @@ name|format
 argument_list|)
 return|;
 block|}
-comment|/** Generates a selector for the given fields from an expression. */
-specifier|protected
+specifier|public
 name|Expression
 name|generateSelector
 parameter_list|(
@@ -636,7 +642,7 @@ name|targetFormat
 operator|=
 name|JavaRowFormat
 operator|.
-name|EMPTY_LIST
+name|LIST
 expr_stmt|;
 break|break;
 case|case

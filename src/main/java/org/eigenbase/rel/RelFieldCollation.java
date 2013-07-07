@@ -242,6 +242,14 @@ name|other
 operator|.
 name|direction
 operator|)
+operator|&&
+operator|(
+name|nullDirection
+operator|==
+name|other
+operator|.
+name|nullDirection
+operator|)
 return|;
 block|}
 comment|// implement Object
@@ -251,6 +259,10 @@ name|hashCode
 parameter_list|()
 block|{
 return|return
+name|this
+operator|.
+name|fieldIndex
+operator||
 operator|(
 name|this
 operator|.
@@ -262,9 +274,16 @@ operator|<<
 literal|4
 operator|)
 operator||
+operator|(
 name|this
 operator|.
-name|fieldIndex
+name|nullDirection
+operator|.
+name|ordinal
+argument_list|()
+operator|<<
+literal|8
+operator|)
 return|;
 block|}
 specifier|public

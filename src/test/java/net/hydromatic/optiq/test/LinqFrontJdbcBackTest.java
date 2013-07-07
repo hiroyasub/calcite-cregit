@@ -130,6 +130,16 @@ import|;
 end_import
 
 begin_import
+import|import
+name|java
+operator|.
+name|sql
+operator|.
+name|SQLException
+import|;
+end_import
+
+begin_import
 import|import static
 name|org
 operator|.
@@ -156,8 +166,10 @@ specifier|public
 name|void
 name|testTableWhere
 parameter_list|()
-block|{
-try|try
+throws|throws
+name|SQLException
+throws|,
+name|ClassNotFoundException
 block|{
 specifier|final
 name|OptiqConnection
@@ -269,21 +281,6 @@ argument_list|(
 name|s
 argument_list|)
 expr_stmt|;
-block|}
-catch|catch
-parameter_list|(
-name|Exception
-name|e
-parameter_list|)
-block|{
-throw|throw
-operator|new
-name|RuntimeException
-argument_list|(
-name|e
-argument_list|)
-throw|;
-block|}
 block|}
 block|}
 end_class

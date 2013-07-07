@@ -149,7 +149,7 @@ name|int
 name|field
 parameter_list|)
 function_decl|;
-comment|/** Generates an accessor function for a given list of fields.    *    *<p>For example:</p>    *<pre>{@code    * new Function1<Employee, Object[]> {    *    public Object[] apply(Employee v1) {    *        return new Object[] {v1.<fieldN>, v1.<fieldM>};    *    }    * }    * }</pre>    */
+comment|/** Generates an accessor function for a given list of fields.    * The resulting object is a {@link List} (implementing {@link #hashCode()}    * and {@link #equals(Object)} per that interface) and also implements    * {@link Comparable}.    *    *<p>For example:</p>    *<pre>{@code    * new Function1<Employee, Object[]> {    *    public Object[] apply(Employee v1) {    *        return FlatLists.of(v1.<fieldN>, v1.<fieldM>);    *    }    * }    * }</pre>    */
 name|Expression
 name|generateAccessor
 parameter_list|(
@@ -160,7 +160,7 @@ argument_list|>
 name|fields
 parameter_list|)
 function_decl|;
-comment|/** Generates a selector with the default row format. */
+comment|/** Generates a selector for the given fields from an expression, with the    * default row format. */
 name|Expression
 name|generateSelector
 parameter_list|(
@@ -172,6 +172,23 @@ argument_list|<
 name|Integer
 argument_list|>
 name|fields
+parameter_list|)
+function_decl|;
+comment|/** Generates a selector for the given fields from an expression. */
+name|Expression
+name|generateSelector
+parameter_list|(
+name|ParameterExpression
+name|parameter
+parameter_list|,
+name|List
+argument_list|<
+name|Integer
+argument_list|>
+name|fields
+parameter_list|,
+name|JavaRowFormat
+name|targetFormat
 parameter_list|)
 function_decl|;
 comment|/** Projects a given collection of fields from this input record, into    * a particular preferred output format. The output format is optimized    * if there are 0 or 1 fields. */
@@ -219,6 +236,11 @@ name|Expression
 argument_list|>
 name|expressions
 parameter_list|)
+function_decl|;
+comment|/** Returns the format. */
+name|JavaRowFormat
+name|getFormat
+parameter_list|()
 function_decl|;
 block|}
 end_interface

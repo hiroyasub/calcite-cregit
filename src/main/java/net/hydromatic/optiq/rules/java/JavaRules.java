@@ -1058,7 +1058,7 @@ name|leftKeys
 argument_list|,
 name|JavaRowFormat
 operator|.
-name|CUSTOM
+name|LIST
 argument_list|)
 decl_stmt|;
 return|return
@@ -2453,9 +2453,14 @@ argument_list|,
 name|getRowType
 argument_list|()
 argument_list|,
+name|pref
+operator|.
+name|prefer
+argument_list|(
 name|result
 operator|.
 name|format
+argument_list|)
 argument_list|)
 decl_stmt|;
 comment|// final Enumerable<Employee> inputEnumerable =<<child impl>>;
@@ -3422,9 +3427,10 @@ argument_list|,
 name|getRowType
 argument_list|()
 argument_list|,
-name|result
+name|pref
 operator|.
-name|format
+name|preferCustom
+argument_list|()
 argument_list|)
 decl_stmt|;
 comment|// final Enumerable<Employee> child =<<child impl>>;
@@ -3518,7 +3524,7 @@ argument_list|)
 argument_list|,
 name|JavaRowFormat
 operator|.
-name|CUSTOM
+name|LIST
 argument_list|)
 decl_stmt|;
 specifier|final
@@ -3580,6 +3586,11 @@ name|toList
 argument_list|(
 name|groupSet
 argument_list|)
+argument_list|,
+name|keyPhysType
+operator|.
+name|getFormat
+argument_list|()
 argument_list|)
 argument_list|)
 decl_stmt|;

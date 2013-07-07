@@ -801,7 +801,7 @@ literal|1
 else|:
 name|FlatLists
 operator|.
-name|ComparableList
+name|ComparableListImpl
 operator|.
 name|compare
 argument_list|(

@@ -270,7 +270,7 @@ condition|)
 block|{
 return|return
 operator|new
-name|ComparableList
+name|ComparableListImpl
 argument_list|(
 name|Arrays
 operator|.
@@ -288,7 +288,7 @@ else|else
 block|{
 return|return
 operator|new
-name|ComparableList
+name|ComparableListImpl
 argument_list|(
 name|Arrays
 operator|.
@@ -414,7 +414,7 @@ comment|//   bit.
 comment|//noinspection unchecked
 return|return
 operator|new
-name|ComparableList
+name|ComparableListImpl
 argument_list|(
 name|Arrays
 operator|.
@@ -788,7 +788,7 @@ argument_list|<
 name|T
 argument_list|>
 implements|implements
-name|Comparable
+name|ComparableList
 argument_list|<
 name|T
 argument_list|>
@@ -1181,7 +1181,7 @@ specifier|public
 name|int
 name|compareTo
 parameter_list|(
-name|T
+name|List
 name|o
 parameter_list|)
 block|{
@@ -1265,7 +1265,7 @@ argument_list|<
 name|T
 argument_list|>
 implements|implements
-name|Comparable
+name|ComparableList
 argument_list|<
 name|T
 argument_list|>
@@ -1746,7 +1746,7 @@ specifier|public
 name|int
 name|compareTo
 parameter_list|(
-name|T
+name|List
 name|o
 parameter_list|)
 block|{
@@ -1958,9 +1958,27 @@ literal|1
 return|;
 block|}
 block|}
+comment|/** List that is also comparable.    *    *<p>You can create an instance whose type    * parameter {@code T} does not extend {@link Comparable}, but you will get a    * {@link ClassCastException} at runtime when you call    * {@link #compareTo(Object)} if the elements of the list do not implement    * {@code Comparable}.    */
+specifier|public
+interface|interface
+name|ComparableList
+parameter_list|<
+name|T
+parameter_list|>
+extends|extends
+name|List
+argument_list|<
+name|T
+argument_list|>
+extends|,
+name|Comparable
+argument_list|<
+name|List
+argument_list|>
+block|{   }
 specifier|static
 class|class
-name|ComparableList
+name|ComparableListImpl
 parameter_list|<
 name|T
 extends|extends
@@ -1975,12 +1993,9 @@ argument_list|<
 name|T
 argument_list|>
 implements|implements
-name|Comparable
-argument_list|<
-name|List
+name|ComparableList
 argument_list|<
 name|T
-argument_list|>
 argument_list|>
 block|{
 specifier|private
@@ -1992,7 +2007,7 @@ argument_list|>
 name|list
 decl_stmt|;
 specifier|protected
-name|ComparableList
+name|ComparableListImpl
 parameter_list|(
 name|List
 argument_list|<
@@ -2042,9 +2057,6 @@ name|int
 name|compareTo
 parameter_list|(
 name|List
-argument_list|<
-name|T
-argument_list|>
 name|o
 parameter_list|)
 block|{

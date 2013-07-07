@@ -318,6 +318,11 @@ name|implementRoot
 parameter_list|(
 name|EnumerableRel
 name|rootRel
+parameter_list|,
+name|EnumerableRel
+operator|.
+name|Prefer
+name|prefer
 parameter_list|)
 block|{
 specifier|final
@@ -332,11 +337,7 @@ name|implement
 argument_list|(
 name|this
 argument_list|,
-name|EnumerableRel
-operator|.
-name|Prefer
-operator|.
-name|ANY
+name|prefer
 argument_list|)
 decl_stmt|;
 name|List
