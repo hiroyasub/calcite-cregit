@@ -138,7 +138,7 @@ name|rowType
 decl_stmt|;
 specifier|protected
 specifier|final
-name|List
+name|ImmutableList
 argument_list|<
 name|RelNode
 argument_list|>
@@ -146,7 +146,7 @@ name|inputs
 decl_stmt|;
 specifier|protected
 specifier|final
-name|Set
+name|ImmutableSet
 argument_list|<
 name|RelColumnMapping
 argument_list|>
@@ -216,6 +216,12 @@ name|this
 operator|.
 name|columnMappings
 operator|=
+name|columnMappings
+operator|==
+literal|null
+condition|?
+literal|null
+else|:
 name|ImmutableSet
 operator|.
 name|copyOf
