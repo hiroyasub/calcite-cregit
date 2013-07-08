@@ -49,13 +49,15 @@ end_import
 
 begin_import
 import|import
-name|org
+name|com
 operator|.
-name|eigenbase
+name|google
 operator|.
-name|util
+name|common
 operator|.
-name|*
+name|collect
+operator|.
+name|ImmutableList
 import|;
 end_import
 
@@ -89,9 +91,11 @@ specifier|final
 name|String
 name|name
 decl_stmt|;
+comment|// We considered using ImmutableIntList but we would not save much memory:
+comment|// since all values are small, ImmutableList uses cached Integer values.
 specifier|private
 specifier|final
-name|List
+name|ImmutableList
 argument_list|<
 name|Integer
 argument_list|>
@@ -158,7 +162,7 @@ name|this
 operator|.
 name|argList
 operator|=
-name|ImmutableIntList
+name|ImmutableList
 operator|.
 name|copyOf
 argument_list|(

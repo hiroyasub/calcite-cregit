@@ -15,6 +15,16 @@ end_package
 
 begin_import
 import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|eigenbase
@@ -77,6 +87,20 @@ name|*
 import|;
 end_import
 
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|ImmutableList
+import|;
+end_import
+
 begin_comment
 comment|/**  *<code>RexCallBinding</code> implements {@link SqlOperatorBinding} by  * referring to an underlying collection of {@link RexNode} operands.  *  * @author Wael Chatila  * @version $Id$  */
 end_comment
@@ -91,8 +115,10 @@ block|{
 comment|//~ Instance fields --------------------------------------------------------
 specifier|private
 specifier|final
+name|List
+argument_list|<
 name|RexNode
-index|[]
+argument_list|>
 name|operands
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
@@ -105,8 +131,12 @@ parameter_list|,
 name|SqlOperator
 name|sqlOperator
 parameter_list|,
+name|List
+argument_list|<
+name|?
+extends|extends
 name|RexNode
-index|[]
+argument_list|>
 name|operands
 parameter_list|)
 block|{
@@ -121,7 +151,12 @@ name|this
 operator|.
 name|operands
 operator|=
+name|ImmutableList
+operator|.
+name|copyOf
+argument_list|(
 name|operands
+argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
@@ -140,9 +175,11 @@ operator|.
 name|stringValue
 argument_list|(
 name|operands
-index|[
+operator|.
+name|get
+argument_list|(
 name|ordinal
-index|]
+argument_list|)
 argument_list|)
 return|;
 block|}
@@ -161,9 +198,11 @@ operator|.
 name|intValue
 argument_list|(
 name|operands
-index|[
+operator|.
+name|get
+argument_list|(
 name|ordinal
-index|]
+argument_list|)
 argument_list|)
 return|;
 block|}
@@ -185,9 +224,11 @@ operator|.
 name|isNullLiteral
 argument_list|(
 name|operands
-index|[
+operator|.
+name|get
+argument_list|(
 name|ordinal
-index|]
+argument_list|)
 argument_list|,
 name|allowCast
 argument_list|)
@@ -202,7 +243,8 @@ block|{
 return|return
 name|operands
 operator|.
-name|length
+name|size
+argument_list|()
 return|;
 block|}
 comment|// implement SqlOperatorBinding
@@ -216,9 +258,11 @@ parameter_list|)
 block|{
 return|return
 name|operands
-index|[
+operator|.
+name|get
+argument_list|(
 name|ordinal
-index|]
+argument_list|)
 operator|.
 name|getType
 argument_list|()

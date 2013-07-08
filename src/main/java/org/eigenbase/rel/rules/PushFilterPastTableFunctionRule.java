@@ -270,7 +270,7 @@ if|if
 condition|(
 name|mapping
 operator|.
-name|isDerived
+name|derived
 condition|)
 block|{
 return|return;

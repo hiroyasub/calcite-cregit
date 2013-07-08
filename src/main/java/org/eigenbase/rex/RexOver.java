@@ -86,8 +86,10 @@ parameter_list|,
 name|SqlAggFunction
 name|op
 parameter_list|,
+name|List
+argument_list|<
 name|RexNode
-index|[]
+argument_list|>
 name|operands
 parameter_list|,
 name|RexWindow
@@ -110,11 +112,6 @@ name|isAggregator
 argument_list|()
 operator|:
 literal|"precondition: op.isAggregator()"
-assert|;
-assert|assert
-name|op
-operator|instanceof
-name|SqlAggFunction
 assert|;
 assert|assert
 name|window

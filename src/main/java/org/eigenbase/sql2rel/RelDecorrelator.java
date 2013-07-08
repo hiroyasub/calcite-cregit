@@ -6225,11 +6225,13 @@ block|{
 literal|false
 block|}
 decl_stmt|;
+name|List
+argument_list|<
 name|RexNode
-index|[]
+argument_list|>
 name|clonedOperands
 init|=
-name|visitArray
+name|visitList
 argument_list|(
 name|call
 operator|.
@@ -6292,7 +6294,8 @@ name|call
 operator|.
 name|operands
 operator|.
-name|length
+name|size
+argument_list|()
 operator|<
 literal|2
 condition|)

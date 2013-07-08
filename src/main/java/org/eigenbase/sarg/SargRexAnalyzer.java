@@ -1852,7 +1852,8 @@ operator|.
 name|getOperands
 argument_list|()
 operator|.
-name|length
+name|size
+argument_list|()
 decl_stmt|;
 assert|assert
 operator|(

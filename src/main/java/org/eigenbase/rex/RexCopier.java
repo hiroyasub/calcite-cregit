@@ -105,7 +105,7 @@ operator|.
 name|getOperator
 argument_list|()
 argument_list|,
-name|visitArray
+name|visitList
 argument_list|(
 name|call
 operator|.

@@ -16,7 +16,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * RelColumnMapping records a mapping from an input column of a RelNode to one  * of its output columns.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  * Mapping from an input column of a {@link org.eigenbase.rel.RelNode} to one  * of its output columns.  *  * @author John V. Sichi  * @version $Id$  */
 end_comment
 
 begin_class
@@ -24,26 +24,71 @@ specifier|public
 class|class
 name|RelColumnMapping
 block|{
+specifier|public
+name|RelColumnMapping
+parameter_list|(
+name|int
+name|iOutputColumn
+parameter_list|,
+name|int
+name|iInputRel
+parameter_list|,
+name|int
+name|iInputColumn
+parameter_list|,
+name|boolean
+name|derived
+parameter_list|)
+block|{
+name|this
+operator|.
+name|iOutputColumn
+operator|=
+name|iOutputColumn
+expr_stmt|;
+name|this
+operator|.
+name|iInputRel
+operator|=
+name|iInputRel
+expr_stmt|;
+name|this
+operator|.
+name|iInputColumn
+operator|=
+name|iInputColumn
+expr_stmt|;
+name|this
+operator|.
+name|derived
+operator|=
+name|derived
+expr_stmt|;
+block|}
 comment|//~ Instance fields --------------------------------------------------------
 comment|/**      * 0-based ordinal of mapped output column.      */
 specifier|public
+specifier|final
 name|int
 name|iOutputColumn
 decl_stmt|;
 comment|/**      * 0-based ordinal of mapped input rel.      */
 specifier|public
+specifier|final
 name|int
 name|iInputRel
 decl_stmt|;
 comment|/**      * 0-based ordinal of mapped column within input rel.      */
 specifier|public
+specifier|final
 name|int
 name|iInputColumn
 decl_stmt|;
 comment|/**      * Whether the column mapping transforms the input.      */
 specifier|public
+specifier|final
 name|boolean
-name|isDerived
+name|derived
 decl_stmt|;
 block|}
 end_class

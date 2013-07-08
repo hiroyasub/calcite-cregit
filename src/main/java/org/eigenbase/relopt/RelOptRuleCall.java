@@ -211,7 +211,6 @@ operator|=
 name|parents
 expr_stmt|;
 assert|assert
-operator|(
 name|rels
 operator|.
 name|length
@@ -220,8 +219,8 @@ name|rule
 operator|.
 name|operands
 operator|.
-name|length
-operator|)
+name|size
+argument_list|()
 assert|;
 block|}
 specifier|protected

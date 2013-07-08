@@ -147,9 +147,11 @@ name|multiJoin
 operator|.
 name|getProjFields
 argument_list|()
-index|[
+operator|.
+name|get
+argument_list|(
 name|i
-index|]
+argument_list|)
 operator|==
 literal|null
 condition|)

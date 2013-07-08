@@ -73,6 +73,20 @@ name|*
 import|;
 end_import
 
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|ImmutableList
+import|;
+end_import
+
 begin_comment
 comment|/**  * SqlTypeStrategies defines singleton instances of strategy objects for operand  * type checking (member prefix<code>otc</code>), operand type inference  * (member prefix<code>oti</code>), and operator return type inference (member  * prefix<code>rti</code>). For otc members, the convention<code>  * otcSometypeX2</code> means two operands of type<code>Sometype</code>. The  * convention<code>otcSometypeLit</code> means a literal operand of type<code>  * Sometype</code>.  *  *<p>NOTE: avoid anonymous inner classes here except for unique,  * non-generalizable strategies; anything else belongs in a reusable top-level  * class. If you find yourself copying and pasting an existing strategy's  * anonymous inner class, you're making a mistake.  *  * @author Wael Chatila  * @version $Id$  */
 end_comment
@@ -98,9 +112,9 @@ return|return
 operator|new
 name|FamilyOperandTypeChecker
 argument_list|(
-name|Arrays
+name|ImmutableList
 operator|.
-name|asList
+name|copyOf
 argument_list|(
 name|families
 argument_list|)
@@ -149,7 +163,12 @@ name|Composition
 operator|.
 name|OR
 argument_list|,
+name|ImmutableList
+operator|.
+name|copyOf
+argument_list|(
 name|rules
+argument_list|)
 argument_list|)
 return|;
 block|}
@@ -174,7 +193,12 @@ name|Composition
 operator|.
 name|AND
 argument_list|,
+name|ImmutableList
+operator|.
+name|copyOf
+argument_list|(
 name|rules
+argument_list|)
 argument_list|)
 return|;
 block|}

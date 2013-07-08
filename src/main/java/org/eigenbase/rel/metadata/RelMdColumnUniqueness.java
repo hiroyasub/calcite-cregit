@@ -399,9 +399,11 @@ name|call
 operator|.
 name|getOperands
 argument_list|()
-index|[
+operator|.
+name|get
+argument_list|(
 literal|0
-index|]
+argument_list|)
 decl_stmt|;
 if|if
 condition|(

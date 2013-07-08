@@ -77,6 +77,20 @@ name|*
 import|;
 end_import
 
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|ImmutableList
+import|;
+end_import
+
 begin_comment
 comment|/**  * A<code>SqlCall</code> is a call to an {@link SqlOperator operator}.  * (Operators can be used to describe any syntactic construct, so in practice,  * every non-leaf node in a SQL parse tree is a<code>SqlCall</code> of some  * kind.)  */
 end_comment
@@ -264,6 +278,23 @@ parameter_list|()
 block|{
 return|return
 name|operands
+return|;
+block|}
+specifier|public
+name|List
+argument_list|<
+name|SqlNode
+argument_list|>
+name|getOperandList
+parameter_list|()
+block|{
+return|return
+name|ImmutableList
+operator|.
+name|copyOf
+argument_list|(
+name|operands
+argument_list|)
 return|;
 block|}
 specifier|public

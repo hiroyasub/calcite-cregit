@@ -90,8 +90,10 @@ name|operand
 decl_stmt|;
 comment|/**      * Flattened list of operands.      */
 specifier|public
+name|List
+argument_list|<
 name|RelOptRuleOperand
-index|[]
+argument_list|>
 name|operands
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
@@ -503,8 +505,10 @@ return|;
 block|}
 comment|/**      * Creates a flattened list of this operand and its descendants in prefix      * order.      *      * @param rootOperand Root operand      *      * @return Flattened list of operands      */
 specifier|private
+name|List
+argument_list|<
 name|RelOptRuleOperand
-index|[]
+argument_list|>
 name|flattenOperands
 parameter_list|(
 name|RelOptRuleOperand
@@ -569,18 +573,11 @@ name|rootOperand
 argument_list|)
 expr_stmt|;
 return|return
-name|operandList
+name|ImmutableList
 operator|.
-name|toArray
+name|copyOf
 argument_list|(
-operator|new
-name|RelOptRuleOperand
-index|[
 name|operandList
-operator|.
-name|size
-argument_list|()
-index|]
 argument_list|)
 return|;
 block|}
@@ -696,7 +693,8 @@ name|int
 index|[
 name|operands
 operator|.
-name|length
+name|size
+argument_list|()
 index|]
 expr_stmt|;
 name|int
@@ -747,7 +745,8 @@ name|k
 operator|<
 name|operands
 operator|.
-name|length
+name|size
+argument_list|()
 condition|;
 name|k
 operator|++
@@ -815,7 +814,8 @@ name|m
 operator|==
 name|operands
 operator|.
-name|length
+name|size
+argument_list|()
 assert|;
 block|}
 block|}

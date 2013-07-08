@@ -77,18 +77,6 @@ name|*
 import|;
 end_import
 
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
-name|util
-operator|.
-name|*
-import|;
-end_import
-
 begin_comment
 comment|/**  * Standard implementation of {@link RexSqlConvertletTable}.  */
 end_comment
@@ -595,8 +583,10 @@ name|getOperator
 argument_list|()
 decl_stmt|;
 specifier|final
+name|List
+argument_list|<
 name|RexNode
-index|[]
+argument_list|>
 name|operands
 init|=
 name|call
@@ -649,8 +639,10 @@ parameter_list|(
 name|RexToSqlNodeConverter
 name|converter
 parameter_list|,
+name|List
+argument_list|<
 name|RexNode
-index|[]
+argument_list|>
 name|nodes
 parameter_list|)
 block|{
@@ -664,7 +656,8 @@ name|SqlNode
 index|[
 name|nodes
 operator|.
-name|length
+name|size
+argument_list|()
 index|]
 decl_stmt|;
 for|for
@@ -678,7 +671,8 @@ name|i
 operator|<
 name|nodes
 operator|.
-name|length
+name|size
+argument_list|()
 condition|;
 name|i
 operator|++
@@ -688,9 +682,11 @@ name|RexNode
 name|node
 init|=
 name|nodes
-index|[
+operator|.
+name|get
+argument_list|(
 name|i
-index|]
+argument_list|)
 decl_stmt|;
 name|exprs
 index|[

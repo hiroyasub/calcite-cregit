@@ -61,6 +61,20 @@ name|Ord
 import|;
 end_import
 
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|ImmutableList
+import|;
+end_import
+
 begin_comment
 comment|/**  * This class allows multiple existing {@link SqlOperandTypeChecker} rules to be  * combined into one rule. For example, allowing an operand to be either string  * or numeric could be done by:  *  *<blockquote>  *<pre><code>  *  * CompositeOperandsTypeChecking newCompositeRule =  *  new CompositeOperandsTypeChecking(  *    Composition.OR,  *    new SqlOperandTypeChecker[]{stringRule, numericRule});  *  *</code></pre>  *</blockquote>  *  * Similary a rule that would only allow a numeric literal can be done by:  *  *<blockquote>  *<pre><code>  *  * CompositeOperandsTypeChecking newCompositeRule =  *  new CompositeOperandsTypeChecking(  *    Composition.AND,  *    new SqlOperandTypeChecker[]{numericRule, literalRule});  *  *</code></pre>  *</blockquote>  *  *<p>Finally, creating a signature expecting a string for the first operand and  * a numeric for the second operand can be done by:  *  *<blockquote>  *<pre><code>  *  * CompositeOperandsTypeChecking newCompositeRule =  *  new CompositeOperandsTypeChecking(  *    Composition.SEQUENCE,  *    new SqlOperandTypeChecker[]{stringRule, numericRule});  *  *</code></pre>  *</blockquote>  *  *<p>For SEQUENCE composition, the rules must be instances of  * SqlSingleOperandTypeChecker, and signature generation is not supported. For  * AND composition, only the first rule is used for signature generation.  *  * @author Wael Chatila  * @version $Id$  */
 end_comment
@@ -86,8 +100,10 @@ block|}
 comment|//~ Instance fields --------------------------------------------------------
 specifier|private
 specifier|final
+name|ImmutableList
+argument_list|<
 name|SqlSingleOperandTypeChecker
-index|[]
+argument_list|>
 name|allowedRules
 decl_stmt|;
 specifier|private
@@ -102,8 +118,10 @@ parameter_list|(
 name|Composition
 name|composition
 parameter_list|,
+name|ImmutableList
+argument_list|<
 name|SqlSingleOperandTypeChecker
-modifier|...
+argument_list|>
 name|allowedRules
 parameter_list|)
 block|{
@@ -115,7 +133,8 @@ assert|;
 assert|assert
 name|allowedRules
 operator|.
-name|length
+name|size
+argument_list|()
 operator|>
 literal|1
 assert|;
@@ -134,8 +153,10 @@ expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
 specifier|public
-name|SqlOperandTypeChecker
-index|[]
+name|ImmutableList
+argument_list|<
+name|SqlSingleOperandTypeChecker
+argument_list|>
 name|getRules
 parameter_list|()
 block|{
@@ -269,7 +290,8 @@ name|of
 argument_list|(
 name|allowedRules
 operator|.
-name|length
+name|size
+argument_list|()
 argument_list|)
 return|;
 case|case
@@ -303,9 +325,11 @@ parameter_list|)
 block|{
 return|return
 name|allowedRules
-index|[
+operator|.
+name|get
+argument_list|(
 name|index
-index|]
+argument_list|)
 operator|.
 name|getOperandCountRange
 argument_list|()
@@ -319,7 +343,8 @@ block|{
 return|return
 name|allowedRules
 operator|.
-name|length
+name|size
+argument_list|()
 return|;
 block|}
 block|}
@@ -635,7 +660,8 @@ block|{
 assert|assert
 name|allowedRules
 operator|.
-name|length
+name|size
+argument_list|()
 operator|>=
 literal|1
 assert|;
@@ -650,9 +676,11 @@ condition|)
 block|{
 return|return
 name|allowedRules
-index|[
+operator|.
+name|get
+argument_list|(
 name|iFormalOperand
-index|]
+argument_list|)
 operator|.
 name|checkSingleOperandType
 argument_list|(
@@ -742,7 +770,8 @@ name|typeErrorCount
 operator|<
 name|allowedRules
 operator|.
-name|length
+name|size
+argument_list|()
 operator|)
 expr_stmt|;
 break|break;
@@ -952,7 +981,8 @@ name|typeErrorCount
 operator|==
 name|allowedRules
 operator|.
-name|length
+name|size
+argument_list|()
 operator|)
 expr_stmt|;
 break|break;

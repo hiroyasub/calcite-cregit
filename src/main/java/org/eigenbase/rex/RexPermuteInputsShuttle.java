@@ -229,9 +229,11 @@ name|call
 operator|.
 name|getOperands
 argument_list|()
-index|[
+operator|.
+name|get
+argument_list|(
 literal|1
-index|]
+argument_list|)
 operator|)
 operator|.
 name|getValue2

@@ -1858,9 +1858,11 @@ name|call
 operator|.
 name|getOperands
 argument_list|()
-index|[
+operator|.
+name|get
+argument_list|(
 literal|0
-index|]
+argument_list|)
 argument_list|)
 return|;
 block|}
@@ -1886,9 +1888,11 @@ name|call
 operator|.
 name|getOperands
 argument_list|()
-index|[
+operator|.
+name|get
+argument_list|(
 literal|0
-index|]
+argument_list|)
 argument_list|)
 decl_stmt|;
 return|return

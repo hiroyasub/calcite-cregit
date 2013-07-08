@@ -777,7 +777,7 @@ name|aggregateRel
 decl_stmt|;
 specifier|private
 specifier|final
-name|List
+name|ImmutableList
 argument_list|<
 name|Integer
 argument_list|>
@@ -795,7 +795,7 @@ parameter_list|,
 name|AggregateRelBase
 name|aggregateRel
 parameter_list|,
-name|List
+name|ImmutableList
 argument_list|<
 name|Integer
 argument_list|>

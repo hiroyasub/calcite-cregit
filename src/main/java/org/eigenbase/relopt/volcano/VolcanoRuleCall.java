@@ -169,7 +169,8 @@ argument_list|()
 operator|.
 name|operands
 operator|.
-name|length
+name|size
+argument_list|()
 index|]
 argument_list|)
 expr_stmt|;
@@ -703,7 +704,7 @@ operator|+
 name|getRule
 argument_list|()
 operator|+
-literal|"] to ["
+literal|"] to "
 operator|+
 name|RelOptUtil
 operator|.
@@ -711,8 +712,6 @@ name|toString
 argument_list|(
 name|rels
 argument_list|)
-operator|+
-literal|"]"
 argument_list|)
 expr_stmt|;
 block|}
@@ -986,7 +985,8 @@ argument_list|()
 operator|.
 name|operands
 operator|.
-name|length
+name|size
+argument_list|()
 condition|)
 block|{
 comment|// We have matched all operands. Now ask the rule whether it
@@ -1048,9 +1048,11 @@ name|getRule
 argument_list|()
 operator|.
 name|operands
-index|[
+operator|.
+name|get
+argument_list|(
 name|previousOperandOrdinal
-index|]
+argument_list|)
 decl_stmt|;
 name|RelOptRuleOperand
 name|operand
@@ -1059,9 +1061,11 @@ name|getRule
 argument_list|()
 operator|.
 name|operands
-index|[
+operator|.
+name|get
+argument_list|(
 name|operandOrdinal
-index|]
+argument_list|)
 decl_stmt|;
 name|List
 argument_list|<

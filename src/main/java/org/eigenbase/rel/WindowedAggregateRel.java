@@ -218,7 +218,8 @@ name|over
 operator|.
 name|operands
 operator|.
-name|length
+name|size
+argument_list|()
 condition|;
 name|j
 operator|++
@@ -230,9 +231,11 @@ init|=
 name|over
 operator|.
 name|operands
-index|[
+operator|.
+name|get
+argument_list|(
 name|j
-index|]
+argument_list|)
 decl_stmt|;
 if|if
 condition|(

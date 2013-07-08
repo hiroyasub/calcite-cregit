@@ -61,6 +61,20 @@ name|*
 import|;
 end_import
 
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|ImmutableList
+import|;
+end_import
+
 begin_comment
 comment|/**  * Operand type-checking strategy which checks operands for inclusion in type  * families.  *  * @author John V. Sichi  * @version $Id$  */
 end_comment
@@ -75,7 +89,7 @@ block|{
 comment|//~ Instance fields --------------------------------------------------------
 specifier|protected
 specifier|final
-name|List
+name|ImmutableList
 argument_list|<
 name|SqlTypeFamily
 argument_list|>
@@ -96,7 +110,12 @@ name|this
 operator|.
 name|families
 operator|=
+name|ImmutableList
+operator|.
+name|copyOf
+argument_list|(
 name|families
+argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------

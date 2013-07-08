@@ -17,6 +17,16 @@ end_package
 
 begin_import
 import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|eigenbase
@@ -39,6 +49,20 @@ name|*
 import|;
 end_import
 
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|ImmutableList
+import|;
+end_import
+
 begin_comment
 comment|/**  * ExplicitOperandTypeInferences implements {@link SqlOperandTypeInference} by  * explicity supplying a type for each parameter.  *  * @author John V. Sichi  * @version $Id$  */
 end_comment
@@ -53,16 +77,20 @@ block|{
 comment|//~ Instance fields --------------------------------------------------------
 specifier|private
 specifier|final
+name|ImmutableList
+argument_list|<
 name|RelDataType
-index|[]
+argument_list|>
 name|paramTypes
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 specifier|public
 name|ExplicitOperandTypeInference
 parameter_list|(
+name|List
+argument_list|<
 name|RelDataType
-index|[]
+argument_list|>
 name|paramTypes
 parameter_list|)
 block|{
@@ -70,7 +98,12 @@ name|this
 operator|.
 name|paramTypes
 operator|=
+name|ImmutableList
+operator|.
+name|copyOf
+argument_list|(
 name|paramTypes
+argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
@@ -89,21 +122,21 @@ index|[]
 name|operandTypes
 parameter_list|)
 block|{
-name|System
-operator|.
-name|arraycopy
-argument_list|(
-name|paramTypes
-argument_list|,
-literal|0
-argument_list|,
+assert|assert
 name|operandTypes
-argument_list|,
-literal|0
-argument_list|,
-name|paramTypes
 operator|.
 name|length
+operator|==
+name|paramTypes
+operator|.
+name|size
+argument_list|()
+assert|;
+name|paramTypes
+operator|.
+name|toArray
+argument_list|(
+name|operandTypes
 argument_list|)
 expr_stmt|;
 block|}
