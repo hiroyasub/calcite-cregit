@@ -99,6 +99,20 @@ name|*
 import|;
 end_import
 
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|ImmutableList
+import|;
+end_import
+
 begin_comment
 comment|/**  *<code>JoinRelBase</code> is an abstract base class for implementations of  * {@link JoinRel}.  *  * @author John V. Sichi  * @version $Id$  */
 end_comment
@@ -220,19 +234,23 @@ name|joinType
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
 specifier|public
+name|List
+argument_list|<
 name|RexNode
-index|[]
+argument_list|>
 name|getChildExps
 parameter_list|()
 block|{
 return|return
-operator|new
-name|RexNode
-index|[]
-block|{
+name|ImmutableList
+operator|.
+name|of
+argument_list|(
 name|condition
-block|}
+argument_list|)
 return|;
 block|}
 specifier|public

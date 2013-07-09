@@ -290,27 +290,18 @@ operator|.
 name|Boxed
 return|;
 block|}
-comment|// override AbstractRelNode
+annotation|@
+name|Override
 specifier|public
+name|List
+argument_list|<
 name|RexNode
-index|[]
+argument_list|>
 name|getChildExps
 parameter_list|()
 block|{
 return|return
 name|exps
-operator|.
-name|toArray
-argument_list|(
-operator|new
-name|RexNode
-index|[
-name|exps
-operator|.
-name|size
-argument_list|()
-index|]
-argument_list|)
 return|;
 block|}
 comment|/**      * Returns the project expressions.      */

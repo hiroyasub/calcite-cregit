@@ -131,6 +131,20 @@ name|*
 import|;
 end_import
 
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|ImmutableList
+import|;
+end_import
+
 begin_comment
 comment|/**  * Base class for every relational expression ({@link RelNode}).  */
 end_comment
@@ -374,15 +388,18 @@ argument_list|)
 return|;
 block|}
 specifier|public
+name|List
+argument_list|<
 name|RexNode
-index|[]
+argument_list|>
 name|getChildExps
 parameter_list|()
 block|{
 return|return
-name|RexUtil
+name|ImmutableList
 operator|.
-name|emptyExpressionArray
+name|of
+argument_list|()
 return|;
 block|}
 specifier|public
