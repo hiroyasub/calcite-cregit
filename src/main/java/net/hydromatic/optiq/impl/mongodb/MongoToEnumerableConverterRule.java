@@ -67,24 +67,12 @@ name|eigenbase
 operator|.
 name|relopt
 operator|.
-name|ConventionTraitDef
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
-name|relopt
-operator|.
 name|RelTraitSet
 import|;
 end_import
 
 begin_comment
-comment|/**  * Rule to convert a relational expression from  * {@link MongoRel#CONVENTION} to  * {@link EnumerableConvention#ARRAY}.  */
+comment|/**  * Rule to convert a relational expression from  * {@link MongoRel#CONVENTION} to {@link EnumerableConvention}.  */
 end_comment
 
 begin_class
@@ -120,7 +108,7 @@ name|CONVENTION
 argument_list|,
 name|EnumerableConvention
 operator|.
-name|ARRAY
+name|INSTANCE
 argument_list|,
 literal|"MongoToEnumerableConverterRule"
 argument_list|)

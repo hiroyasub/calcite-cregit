@@ -355,7 +355,7 @@ name|traitSetOf
 argument_list|(
 name|EnumerableConvention
 operator|.
-name|ARRAY
+name|INSTANCE
 argument_list|,
 name|ALT_TRAIT2
 argument_list|)
@@ -390,7 +390,7 @@ name|assertEquals
 argument_list|(
 name|EnumerableConvention
 operator|.
-name|ARRAY
+name|INSTANCE
 argument_list|,
 name|result
 operator|.
@@ -630,7 +630,7 @@ name|traitSetOf
 argument_list|(
 name|EnumerableConvention
 operator|.
-name|ARRAY
+name|INSTANCE
 argument_list|,
 name|ALT_TRAIT2
 argument_list|)
@@ -665,7 +665,7 @@ name|assertEquals
 argument_list|(
 name|EnumerableConvention
 operator|.
-name|ARRAY
+name|INSTANCE
 argument_list|,
 name|result
 operator|.
@@ -719,7 +719,7 @@ name|assertEquals
 argument_list|(
 name|EnumerableConvention
 operator|.
-name|ARRAY
+name|INSTANCE
 argument_list|,
 name|child
 operator|.
@@ -1707,7 +1707,7 @@ name|traitSetOf
 argument_list|(
 name|EnumerableConvention
 operator|.
-name|ARRAY
+name|INSTANCE
 argument_list|)
 argument_list|,
 name|child
@@ -1751,7 +1751,7 @@ name|comprises
 argument_list|(
 name|EnumerableConvention
 operator|.
-name|ARRAY
+name|INSTANCE
 argument_list|)
 assert|;
 return|return
@@ -1882,7 +1882,7 @@ block|{
 return|return
 name|EnumerableConvention
 operator|.
-name|ARRAY
+name|INSTANCE
 return|;
 block|}
 specifier|public
@@ -1986,7 +1986,7 @@ block|{
 return|return
 name|EnumerableConvention
 operator|.
-name|ARRAY
+name|INSTANCE
 return|;
 block|}
 specifier|public
@@ -2258,7 +2258,7 @@ name|PHYS_CALLING_CONVENTION
 argument_list|,
 name|EnumerableConvention
 operator|.
-name|ARRAY
+name|INSTANCE
 argument_list|,
 literal|"PhysToIteratorRule"
 argument_list|)
@@ -2320,7 +2320,7 @@ name|replace
 argument_list|(
 name|EnumerableConvention
 operator|.
-name|ARRAY
+name|INSTANCE
 argument_list|)
 argument_list|,
 name|child

@@ -662,7 +662,7 @@ name|PHYS_CALLING_CONVENTION
 argument_list|,
 name|EnumerableConvention
 operator|.
-name|ARRAY
+name|INSTANCE
 argument_list|,
 literal|"PhysToIteratorRule"
 argument_list|)
@@ -778,7 +778,7 @@ name|traitSetOf
 argument_list|(
 name|EnumerableConvention
 operator|.
-name|ARRAY
+name|INSTANCE
 argument_list|)
 argument_list|)
 decl_stmt|;
@@ -2064,7 +2064,7 @@ name|traitSetOf
 argument_list|(
 name|EnumerableConvention
 operator|.
-name|ARRAY
+name|INSTANCE
 argument_list|)
 argument_list|,
 name|child
@@ -2092,7 +2092,7 @@ name|comprises
 argument_list|(
 name|EnumerableConvention
 operator|.
-name|ARRAY
+name|INSTANCE
 argument_list|)
 assert|;
 return|return
