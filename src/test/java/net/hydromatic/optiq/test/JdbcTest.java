@@ -3565,1630 +3565,9 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/** Tests windowed aggregation. */
-annotation|@
-name|Ignore
-annotation|@
-name|Test
-specifier|public
-name|void
-name|testWinAgg
-parameter_list|()
-block|{
-name|OptiqAssert
-operator|.
-name|assertThat
-argument_list|()
-operator|.
-name|with
-argument_list|(
-name|OptiqAssert
-operator|.
-name|Config
-operator|.
-name|REGULAR
-argument_list|)
-operator|.
-name|query
-argument_list|(
-literal|"select sum(\"salary\") over w, min(\"salary\") over w\n"
-operator|+
-literal|"from \"hr\".\"emps\"\n"
-operator|+
-literal|"window w as (partition by \"deptno\" order by \"empid\" rows 3 preceding)"
-argument_list|)
-operator|.
-name|returns
-argument_list|(
-literal|"empid=100; deptno=10; name=Bill; commission=1000\n"
-argument_list|)
-expr_stmt|;
-block|}
-comment|/** Tests WHERE comparing a nullable integer with an integer literal. */
-annotation|@
-name|Test
-specifier|public
-name|void
-name|testWhereNullable
-parameter_list|()
-block|{
-name|OptiqAssert
-operator|.
-name|assertThat
-argument_list|()
-operator|.
-name|with
-argument_list|(
-name|OptiqAssert
-operator|.
-name|Config
-operator|.
-name|REGULAR
-argument_list|)
-operator|.
-name|query
-argument_list|(
-literal|"select * from \"hr\".\"emps\"\n"
-operator|+
-literal|"where \"commission\"> 800"
-argument_list|)
-operator|.
-name|returns
-argument_list|(
-literal|"empid=100; deptno=10; name=Bill; salary=10000.0; commission=1000\n"
-argument_list|)
-expr_stmt|;
-block|}
-comment|/** Tests the LIKE operator. */
-annotation|@
-name|Test
-specifier|public
-name|void
-name|testLike
-parameter_list|()
-block|{
-name|OptiqAssert
-operator|.
-name|assertThat
-argument_list|()
-operator|.
-name|with
-argument_list|(
-name|OptiqAssert
-operator|.
-name|Config
-operator|.
-name|REGULAR
-argument_list|)
-operator|.
-name|query
-argument_list|(
-literal|"select * from \"hr\".\"emps\"\n"
-operator|+
-literal|"where \"name\" like '%i__'"
-argument_list|)
-operator|.
-name|returns
-argument_list|(
-literal|"empid=100; deptno=10; name=Bill; salary=10000.0; commission=1000\n"
-operator|+
-literal|"empid=150; deptno=10; name=Sebastian; salary=7000.0; commission=null\n"
-argument_list|)
-expr_stmt|;
-block|}
-comment|/** Tests array index. */
-annotation|@
-name|Test
-specifier|public
-name|void
-name|testArray
-parameter_list|()
-block|{
-name|OptiqAssert
-operator|.
-name|assertThat
-argument_list|()
-operator|.
-name|with
-argument_list|(
-name|OptiqAssert
-operator|.
-name|Config
-operator|.
-name|REGULAR
-argument_list|)
-operator|.
-name|query
-argument_list|(
-literal|"select \"deptno\", \"employees\"[1] as e from \"hr\".\"depts\"\n"
-argument_list|)
-operator|.
-name|returns
-argument_list|(
-literal|"deptno=10; E=Employee [empid: 100, deptno: 10, name: Bill]\n"
-operator|+
-literal|"deptno=30; E=null\n"
-operator|+
-literal|"deptno=40; E=Employee [empid: 200, deptno: 20, name: Eric]\n"
-argument_list|)
-expr_stmt|;
-block|}
-comment|/** Tests the NOT IN operator. Problems arose in code-generation because    * the column allows nulls. */
-annotation|@
-name|Test
-specifier|public
-name|void
-name|testNotIn
-parameter_list|()
-block|{
-name|predicate
-argument_list|(
-literal|"\"name\" not in ('a', 'b') or \"name\" is null"
-argument_list|)
-operator|.
-name|returns
-argument_list|(
-literal|"empid=100; deptno=10; name=Bill; salary=10000.0; commission=1000\n"
-operator|+
-literal|"empid=200; deptno=20; name=Eric; salary=8000.0; commission=500\n"
-operator|+
-literal|"empid=150; deptno=10; name=Sebastian; salary=7000.0; commission=null\n"
-operator|+
-literal|"empid=110; deptno=10; name=Theodore; salary=11500.0; commission=250\n"
-argument_list|)
-expr_stmt|;
-comment|// And some similar combinations...
-name|predicate
-argument_list|(
-literal|"\"name\" in ('a', 'b') or \"name\" is null"
-argument_list|)
-expr_stmt|;
-name|predicate
-argument_list|(
-literal|"\"name\" in ('a', 'b', null) or \"name\" is null"
-argument_list|)
-expr_stmt|;
-name|predicate
-argument_list|(
-literal|"\"name\" in ('a', 'b') or \"name\" is not null"
-argument_list|)
-expr_stmt|;
-name|predicate
-argument_list|(
-literal|"\"name\" in ('a', 'b', null) or \"name\" is not null"
-argument_list|)
-expr_stmt|;
-name|predicate
-argument_list|(
-literal|"\"name\" not in ('a', 'b', null) or \"name\" is not null"
-argument_list|)
-expr_stmt|;
-name|predicate
-argument_list|(
-literal|"\"name\" not in ('a', 'b', null) and \"name\" is not null"
-argument_list|)
-expr_stmt|;
-block|}
-specifier|private
-name|OptiqAssert
-operator|.
-name|AssertQuery
-name|predicate
-parameter_list|(
-name|String
-name|foo
-parameter_list|)
-block|{
-return|return
-name|OptiqAssert
-operator|.
-name|assertThat
-argument_list|()
-operator|.
-name|with
-argument_list|(
-name|OptiqAssert
-operator|.
-name|Config
-operator|.
-name|REGULAR
-argument_list|)
-operator|.
-name|query
-argument_list|(
-literal|"select * from \"hr\".\"emps\"\n"
-operator|+
-literal|"where "
-operator|+
-name|foo
-argument_list|)
-operator|.
-name|runs
-argument_list|()
-return|;
-block|}
-comment|/** Tests the TABLES table in the information schema. */
-annotation|@
-name|Test
-specifier|public
-name|void
-name|testMetaTables
-parameter_list|()
-block|{
-name|OptiqAssert
-operator|.
-name|assertThat
-argument_list|()
-operator|.
-name|with
-argument_list|(
-name|OptiqAssert
-operator|.
-name|Config
-operator|.
-name|REGULAR_PLUS_METADATA
-argument_list|)
-operator|.
-name|query
-argument_list|(
-literal|"select * from \"metadata\".TABLES"
-argument_list|)
-operator|.
-name|returns
-argument_list|(
-name|OptiqAssert
-operator|.
-name|checkResultContains
-argument_list|(
-literal|"tableSchem=metadata; tableName=COLUMNS; tableType=SYSTEM_TABLE; "
-argument_list|)
-argument_list|)
-expr_stmt|;
-name|OptiqAssert
-operator|.
-name|assertThat
-argument_list|()
-operator|.
-name|with
-argument_list|(
-name|OptiqAssert
-operator|.
-name|Config
-operator|.
-name|REGULAR_PLUS_METADATA
-argument_list|)
-operator|.
-name|query
-argument_list|(
-literal|"select count(distinct \"tableSchem\") as c\n"
-operator|+
-literal|"from \"metadata\".TABLES"
-argument_list|)
-operator|.
-name|returns
-argument_list|(
-literal|"C=3\n"
-argument_list|)
-expr_stmt|;
-block|}
-comment|/** Tests that {@link java.sql.Statement#setMaxRows(int)} is honored. */
-annotation|@
-name|Test
-specifier|public
-name|void
-name|testSetMaxRows
-parameter_list|()
-throws|throws
-name|Exception
-block|{
-name|OptiqAssert
-operator|.
-name|assertThat
-argument_list|()
-operator|.
-name|with
-argument_list|(
-name|OptiqAssert
-operator|.
-name|Config
-operator|.
-name|REGULAR
-argument_list|)
-operator|.
-name|doWithConnection
-argument_list|(
-operator|new
-name|Function1
-argument_list|<
-name|OptiqConnection
-argument_list|,
-name|Object
-argument_list|>
-argument_list|()
-block|{
-specifier|public
-name|Object
-name|apply
-parameter_list|(
-name|OptiqConnection
-name|a0
-parameter_list|)
-block|{
-try|try
-block|{
-specifier|final
-name|Statement
-name|statement
-init|=
-name|a0
-operator|.
-name|createStatement
-argument_list|()
-decl_stmt|;
-try|try
-block|{
-name|statement
-operator|.
-name|setMaxRows
-argument_list|(
-operator|-
-literal|1
-argument_list|)
-expr_stmt|;
-name|fail
-argument_list|(
-literal|"expected error"
-argument_list|)
-expr_stmt|;
-block|}
-catch|catch
-parameter_list|(
-name|SQLException
-name|e
-parameter_list|)
-block|{
-name|assertEquals
-argument_list|(
-name|e
-operator|.
-name|getMessage
-argument_list|()
-argument_list|,
-literal|"illegal maxRows value: -1"
-argument_list|)
-expr_stmt|;
-block|}
-name|statement
-operator|.
-name|setMaxRows
-argument_list|(
-literal|2
-argument_list|)
-expr_stmt|;
-name|assertEquals
-argument_list|(
-literal|2
-argument_list|,
-name|statement
-operator|.
-name|getMaxRows
-argument_list|()
-argument_list|)
-expr_stmt|;
-specifier|final
-name|ResultSet
-name|resultSet
-init|=
-name|statement
-operator|.
-name|executeQuery
-argument_list|(
-literal|"select * from \"hr\".\"emps\""
-argument_list|)
-decl_stmt|;
-name|assertTrue
-argument_list|(
-name|resultSet
-operator|.
-name|next
-argument_list|()
-argument_list|)
-expr_stmt|;
-name|assertTrue
-argument_list|(
-name|resultSet
-operator|.
-name|next
-argument_list|()
-argument_list|)
-expr_stmt|;
-name|assertFalse
-argument_list|(
-name|resultSet
-operator|.
-name|next
-argument_list|()
-argument_list|)
-expr_stmt|;
-name|resultSet
-operator|.
-name|close
-argument_list|()
-expr_stmt|;
-name|statement
-operator|.
-name|close
-argument_list|()
-expr_stmt|;
-return|return
-literal|null
-return|;
-block|}
-catch|catch
-parameter_list|(
-name|SQLException
-name|e
-parameter_list|)
-block|{
-throw|throw
-operator|new
-name|RuntimeException
-argument_list|(
-name|e
-argument_list|)
-throw|;
-block|}
-block|}
-block|}
-argument_list|)
-expr_stmt|;
-block|}
-comment|/** Tests a JDBC connection that provides a model (a single schema based on    * a JDBC database). */
-annotation|@
-name|Test
-specifier|public
-name|void
-name|testModel
-parameter_list|()
-block|{
-name|OptiqAssert
-operator|.
-name|assertThat
-argument_list|()
-operator|.
-name|withModel
-argument_list|(
-name|FOODMART_MODEL
-argument_list|)
-operator|.
-name|query
-argument_list|(
-literal|"select count(*) as c from \"foodmart\".\"time_by_day\""
-argument_list|)
-operator|.
-name|returns
-argument_list|(
-literal|"C=730\n"
-argument_list|)
-expr_stmt|;
-block|}
-comment|/** Tests a JDBC connection that provides a model that contains custom    * tables. */
-annotation|@
-name|Test
-specifier|public
-name|void
-name|testModelCustomTable
-parameter_list|()
-block|{
-name|OptiqAssert
-operator|.
-name|assertThat
-argument_list|()
-operator|.
-name|withModel
-argument_list|(
-literal|"{\n"
-operator|+
-literal|"  version: '1.0',\n"
-operator|+
-literal|"   schemas: [\n"
-operator|+
-literal|"     {\n"
-operator|+
-literal|"       name: 'adhoc',\n"
-operator|+
-literal|"       tables: [\n"
-operator|+
-literal|"         {\n"
-operator|+
-literal|"           name: 'EMPLOYEES',\n"
-operator|+
-literal|"           type: 'custom',\n"
-operator|+
-literal|"           factory: '"
-operator|+
-name|EmpDeptTableFactory
-operator|.
-name|class
-operator|.
-name|getName
-argument_list|()
-operator|+
-literal|"',\n"
-operator|+
-literal|"           operand: {'foo': 1, 'bar': [345, 357] }\n"
-operator|+
-literal|"         }\n"
-operator|+
-literal|"       ]\n"
-operator|+
-literal|"     }\n"
-operator|+
-literal|"   ]\n"
-operator|+
-literal|"}"
-argument_list|)
-operator|.
-name|query
-argument_list|(
-literal|"select * from \"adhoc\".EMPLOYEES where \"deptno\" = 10"
-argument_list|)
-operator|.
-name|returns
-argument_list|(
-literal|"empid=100; deptno=10; name=Bill; salary=10000.0; commission=1000\n"
-operator|+
-literal|"empid=150; deptno=10; name=Sebastian; salary=7000.0; commission=null\n"
-operator|+
-literal|"empid=110; deptno=10; name=Theodore; salary=11500.0; commission=250\n"
-argument_list|)
-expr_stmt|;
-block|}
-comment|/** Tests a JDBC connection that provides a model that contains custom    * tables. */
-annotation|@
-name|Test
-specifier|public
-name|void
-name|testModelCustomTable2
-parameter_list|()
-block|{
-name|OptiqAssert
-operator|.
-name|assertThat
-argument_list|()
-operator|.
-name|withModel
-argument_list|(
-literal|"{\n"
-operator|+
-literal|"  version: '1.0',\n"
-operator|+
-literal|"   schemas: [\n"
-operator|+
-literal|"     {\n"
-operator|+
-literal|"       name: 'MATH',\n"
-operator|+
-literal|"       tables: [\n"
-operator|+
-literal|"         {\n"
-operator|+
-literal|"           name: 'INTEGERS',\n"
-operator|+
-literal|"           type: 'custom',\n"
-operator|+
-literal|"           factory: '"
-operator|+
-name|RangeTable
-operator|.
-name|Factory
-operator|.
-name|class
-operator|.
-name|getName
-argument_list|()
-operator|+
-literal|"',\n"
-operator|+
-literal|"           operand: {'column': 'N', 'start': 3, 'end': 7 }\n"
-operator|+
-literal|"         }\n"
-operator|+
-literal|"       ]\n"
-operator|+
-literal|"     }\n"
-operator|+
-literal|"   ]\n"
-operator|+
-literal|"}"
-argument_list|)
-operator|.
-name|query
-argument_list|(
-literal|"select * from math.integers"
-argument_list|)
-operator|.
-name|returns
-argument_list|(
-literal|"N=3\n"
-operator|+
-literal|"N=4\n"
-operator|+
-literal|"N=5\n"
-operator|+
-literal|"N=6\n"
-argument_list|)
-expr_stmt|;
-block|}
-comment|/** Tests a JDBC connection that provides a model that contains a custom    * schema. */
-annotation|@
-name|Test
-specifier|public
-name|void
-name|testModelCustomSchema
-parameter_list|()
-throws|throws
-name|Exception
-block|{
-specifier|final
-name|OptiqAssert
-operator|.
-name|AssertThat
-name|that
-init|=
-name|OptiqAssert
-operator|.
-name|assertThat
-argument_list|()
-operator|.
-name|withModel
-argument_list|(
-literal|"{\n"
-operator|+
-literal|"  version: '1.0',\n"
-operator|+
-literal|"  defaultSchema: 'adhoc',\n"
-operator|+
-literal|"  schemas: [\n"
-operator|+
-literal|"    {\n"
-operator|+
-literal|"      name: 'empty'\n"
-operator|+
-literal|"    },\n"
-operator|+
-literal|"    {\n"
-operator|+
-literal|"      name: 'adhoc',\n"
-operator|+
-literal|"      type: 'custom',\n"
-operator|+
-literal|"      factory: '"
-operator|+
-name|MySchemaFactory
-operator|.
-name|class
-operator|.
-name|getName
-argument_list|()
-operator|+
-literal|"',\n"
-operator|+
-literal|"      operand: {'tableName': 'ELVIS'}\n"
-operator|+
-literal|"    }\n"
-operator|+
-literal|"  ]\n"
-operator|+
-literal|"}"
-argument_list|)
-decl_stmt|;
-comment|// check that the specified 'defaultSchema' was used
-name|that
-operator|.
-name|doWithConnection
-argument_list|(
-operator|new
-name|Function1
-argument_list|<
-name|OptiqConnection
-argument_list|,
-name|Object
-argument_list|>
-argument_list|()
-block|{
-specifier|public
-name|Object
-name|apply
-parameter_list|(
-name|OptiqConnection
-name|connection
-parameter_list|)
-block|{
-try|try
-block|{
-name|assertEquals
-argument_list|(
-literal|"adhoc"
-argument_list|,
-name|connection
-operator|.
-name|getSchema
-argument_list|()
-argument_list|)
-expr_stmt|;
-return|return
-literal|null
-return|;
-block|}
-catch|catch
-parameter_list|(
-name|SQLException
-name|e
-parameter_list|)
-block|{
-throw|throw
-operator|new
-name|RuntimeException
-argument_list|(
-name|e
-argument_list|)
-throw|;
-block|}
-block|}
-block|}
-argument_list|)
-expr_stmt|;
-name|that
-operator|.
-name|query
-argument_list|(
-literal|"select * from \"adhoc\".ELVIS where \"deptno\" = 10"
-argument_list|)
-operator|.
-name|returns
-argument_list|(
-literal|"empid=100; deptno=10; name=Bill; salary=10000.0; commission=1000\n"
-operator|+
-literal|"empid=150; deptno=10; name=Sebastian; salary=7000.0; commission=null\n"
-operator|+
-literal|"empid=110; deptno=10; name=Theodore; salary=11500.0; commission=250\n"
-argument_list|)
-expr_stmt|;
-name|that
-operator|.
-name|query
-argument_list|(
-literal|"select * from \"adhoc\".EMPLOYEES"
-argument_list|)
-operator|.
-name|throws_
-argument_list|(
-literal|"Table 'adhoc.EMPLOYEES' not found"
-argument_list|)
-expr_stmt|;
-block|}
-comment|/** Tests that an immutable schema in a model cannot contain a view. */
-annotation|@
-name|Test
-specifier|public
-name|void
-name|testModelImmutableSchemaCannotContainView
-parameter_list|()
-throws|throws
-name|Exception
-block|{
-specifier|final
-name|OptiqAssert
-operator|.
-name|AssertThat
-name|that
-init|=
-name|OptiqAssert
-operator|.
-name|assertThat
-argument_list|()
-operator|.
-name|withModel
-argument_list|(
-literal|"{\n"
-operator|+
-literal|"  version: '1.0',\n"
-operator|+
-literal|"  defaultSchema: 'adhoc',\n"
-operator|+
-literal|"  schemas: [\n"
-operator|+
-literal|"    {\n"
-operator|+
-literal|"      name: 'empty'\n"
-operator|+
-literal|"    },\n"
-operator|+
-literal|"    {\n"
-operator|+
-literal|"      name: 'adhoc',\n"
-operator|+
-literal|"      type: 'custom',\n"
-operator|+
-literal|"      tables: [\n"
-operator|+
-literal|"        {\n"
-operator|+
-literal|"          name: 'v',\n"
-operator|+
-literal|"          type: 'view',\n"
-operator|+
-literal|"          sql: 'values (1)'\n"
-operator|+
-literal|"        }\n"
-operator|+
-literal|"      ],\n"
-operator|+
-literal|"      factory: '"
-operator|+
-name|MySchemaFactory
-operator|.
-name|class
-operator|.
-name|getName
-argument_list|()
-operator|+
-literal|"',\n"
-operator|+
-literal|"      operand: {\n"
-operator|+
-literal|"           'tableName': 'ELVIS',\n"
-operator|+
-literal|"           'mutable': false\n"
-operator|+
-literal|"      }\n"
-operator|+
-literal|"    }\n"
-operator|+
-literal|"  ]\n"
-operator|+
-literal|"}"
-argument_list|)
-decl_stmt|;
-name|that
-operator|.
-name|connectThrows
-argument_list|(
-literal|"Cannot define view; parent schema "
-operator|+
-literal|"DelegatingSchema(delegate=ReflectiveSchema(target=HrSchema)) is "
-operator|+
-literal|"not mutable"
-argument_list|)
-expr_stmt|;
-block|}
-comment|/** Tests a JDBC connection that provides a model that contains a view. */
-annotation|@
-name|Test
-specifier|public
-name|void
-name|testModelView
-parameter_list|()
-throws|throws
-name|Exception
-block|{
-specifier|final
-name|OptiqAssert
-operator|.
-name|AssertThat
-name|with
-init|=
-name|OptiqAssert
-operator|.
-name|assertThat
-argument_list|()
-operator|.
-name|withModel
-argument_list|(
-literal|"{\n"
-operator|+
-literal|"  version: '1.0',\n"
-operator|+
-literal|"   schemas: [\n"
-operator|+
-literal|"     {\n"
-operator|+
-literal|"       name: 'adhoc',\n"
-operator|+
-literal|"       tables: [\n"
-operator|+
-literal|"         {\n"
-operator|+
-literal|"           name: 'EMPLOYEES',\n"
-operator|+
-literal|"           type: 'custom',\n"
-operator|+
-literal|"           factory: '"
-operator|+
-name|EmpDeptTableFactory
-operator|.
-name|class
-operator|.
-name|getName
-argument_list|()
-operator|+
-literal|"',\n"
-operator|+
-literal|"           operand: {'foo': true, 'bar': 345}\n"
-operator|+
-literal|"         },\n"
-operator|+
-literal|"         {\n"
-operator|+
-literal|"           name: 'V',\n"
-operator|+
-literal|"           type: 'view',\n"
-operator|+
-literal|"           sql: 'select * from \"EMPLOYEES\" where \"deptno\" = 10'\n"
-operator|+
-literal|"         }\n"
-operator|+
-literal|"       ]\n"
-operator|+
-literal|"     }\n"
-operator|+
-literal|"   ]\n"
-operator|+
-literal|"}"
-argument_list|)
-decl_stmt|;
-name|with
-operator|.
-name|query
-argument_list|(
-literal|"select * from \"adhoc\".V order by \"name\" desc"
-argument_list|)
-operator|.
-name|returns
-argument_list|(
-literal|"empid=110; deptno=10; name=Theodore; salary=11500.0; commission=250\n"
-operator|+
-literal|"empid=150; deptno=10; name=Sebastian; salary=7000.0; commission=null\n"
-operator|+
-literal|"empid=100; deptno=10; name=Bill; salary=10000.0; commission=1000\n"
-argument_list|)
-expr_stmt|;
-comment|// Make sure that views appear in metadata.
-name|with
-operator|.
-name|doWithConnection
-argument_list|(
-operator|new
-name|Function1
-argument_list|<
-name|OptiqConnection
-argument_list|,
-name|Void
-argument_list|>
-argument_list|()
-block|{
-specifier|public
-name|Void
-name|apply
-parameter_list|(
-name|OptiqConnection
-name|a0
-parameter_list|)
-block|{
-try|try
-block|{
-specifier|final
-name|DatabaseMetaData
-name|metaData
-init|=
-name|a0
-operator|.
-name|getMetaData
-argument_list|()
-decl_stmt|;
-comment|// all table types
-name|assertEquals
-argument_list|(
-literal|"TABLE_CAT=null; TABLE_SCHEM=adhoc; TABLE_NAME=EMPLOYEES; TABLE_TYPE=TABLE; REMARKS=null; TYPE_CAT=null; TYPE_SCHEM=null; TYPE_NAME=null; SELF_REFERENCING_COL_NAME=null; REF_GENERATION=null\n"
-operator|+
-literal|"TABLE_CAT=null; TABLE_SCHEM=adhoc; TABLE_NAME=V; TABLE_TYPE=VIEW; REMARKS=null; TYPE_CAT=null; TYPE_SCHEM=null; TYPE_NAME=null; SELF_REFERENCING_COL_NAME=null; REF_GENERATION=null\n"
-argument_list|,
-name|JdbcTest
-operator|.
-name|toString
-argument_list|(
-name|metaData
-operator|.
-name|getTables
-argument_list|(
-literal|null
-argument_list|,
-literal|"adhoc"
-argument_list|,
-literal|null
-argument_list|,
-literal|null
-argument_list|)
-argument_list|)
-argument_list|)
-expr_stmt|;
-comment|// views only
-name|assertEquals
-argument_list|(
-literal|"TABLE_CAT=null; TABLE_SCHEM=adhoc; TABLE_NAME=V; TABLE_TYPE=VIEW; REMARKS=null; TYPE_CAT=null; TYPE_SCHEM=null; TYPE_NAME=null; SELF_REFERENCING_COL_NAME=null; REF_GENERATION=null\n"
-argument_list|,
-name|JdbcTest
-operator|.
-name|toString
-argument_list|(
-name|metaData
-operator|.
-name|getTables
-argument_list|(
-literal|null
-argument_list|,
-literal|"adhoc"
-argument_list|,
-literal|null
-argument_list|,
-operator|new
-name|String
-index|[]
-block|{
-name|Schema
-operator|.
-name|TableType
-operator|.
-name|VIEW
-operator|.
-name|name
-argument_list|()
-block|}
-argument_list|)
-argument_list|)
-argument_list|)
-expr_stmt|;
-return|return
-literal|null
-return|;
-block|}
-catch|catch
-parameter_list|(
-name|SQLException
-name|e
-parameter_list|)
-block|{
-throw|throw
-operator|new
-name|RuntimeException
-argument_list|(
-name|e
-argument_list|)
-throw|;
-block|}
-block|}
-block|}
-argument_list|)
-expr_stmt|;
-block|}
-comment|/** Tests saving query results into temporary tables, per    * {@link net.hydromatic.optiq.jdbc.Handler.ResultSink}. */
-annotation|@
-name|Test
-specifier|public
-name|void
-name|testAutomaticTemporaryTable
-parameter_list|()
-throws|throws
-name|Exception
-block|{
-specifier|final
-name|List
-argument_list|<
-name|Object
-argument_list|>
-name|objects
-init|=
-operator|new
-name|ArrayList
-argument_list|<
-name|Object
-argument_list|>
-argument_list|()
-decl_stmt|;
-name|OptiqAssert
-operator|.
-name|assertThat
-argument_list|()
-operator|.
-name|with
-argument_list|(
-operator|new
-name|OptiqAssert
-operator|.
-name|ConnectionFactory
-argument_list|()
-block|{
-specifier|public
-name|OptiqConnection
-name|createConnection
-parameter_list|()
-throws|throws
-name|Exception
-block|{
-name|OptiqConnection
-name|connection
-init|=
-operator|(
-name|OptiqConnection
-operator|)
-operator|new
-name|AutoTempDriver
-argument_list|(
-name|objects
-argument_list|)
-operator|.
-name|connect
-argument_list|(
-literal|"jdbc:optiq:"
-argument_list|,
-operator|new
-name|Properties
-argument_list|()
-argument_list|)
-decl_stmt|;
-name|MutableSchema
-name|rootSchema
-init|=
-name|connection
-operator|.
-name|getRootSchema
-argument_list|()
-decl_stmt|;
-name|ReflectiveSchema
-operator|.
-name|create
-argument_list|(
-name|rootSchema
-argument_list|,
-literal|"hr"
-argument_list|,
-operator|new
-name|HrSchema
-argument_list|()
-argument_list|)
-expr_stmt|;
-name|connection
-operator|.
-name|setSchema
-argument_list|(
-literal|"hr"
-argument_list|)
-expr_stmt|;
-return|return
-name|connection
-return|;
-block|}
-block|}
-argument_list|)
-operator|.
-name|doWithConnection
-argument_list|(
-operator|new
-name|Function1
-argument_list|<
-name|OptiqConnection
-argument_list|,
-name|Object
-argument_list|>
-argument_list|()
-block|{
-specifier|public
-name|Object
-name|apply
-parameter_list|(
-name|OptiqConnection
-name|a0
-parameter_list|)
-block|{
-try|try
-block|{
-name|a0
-operator|.
-name|createStatement
-argument_list|()
-operator|.
-name|executeQuery
-argument_list|(
-literal|"select * from \"hr\".\"emps\" "
-operator|+
-literal|"where \"deptno\" = 10"
-argument_list|)
-expr_stmt|;
-name|assertEquals
-argument_list|(
-literal|1
-argument_list|,
-name|objects
-operator|.
-name|size
-argument_list|()
-argument_list|)
-expr_stmt|;
-return|return
-literal|null
-return|;
-block|}
-catch|catch
-parameter_list|(
-name|SQLException
-name|e
-parameter_list|)
-block|{
-throw|throw
-operator|new
-name|RuntimeException
-argument_list|(
-name|e
-argument_list|)
-throw|;
-block|}
-block|}
-block|}
-argument_list|)
-expr_stmt|;
-block|}
-annotation|@
-name|Test
-specifier|public
-name|void
-name|testExplain
-parameter_list|()
-block|{
-specifier|final
-name|OptiqAssert
-operator|.
-name|AssertThat
-name|with
-init|=
-name|OptiqAssert
-operator|.
-name|assertThat
-argument_list|()
-operator|.
-name|with
-argument_list|(
-name|OptiqAssert
-operator|.
-name|Config
-operator|.
-name|FOODMART_CLONE
-argument_list|)
-decl_stmt|;
-name|with
-operator|.
-name|query
-argument_list|(
-literal|"explain plan for values (1, 'ab')"
-argument_list|)
-operator|.
-name|returns
-argument_list|(
-literal|"PLAN=EnumerableValuesRel(tuples=[[{ 1, 'ab' }]])\n\n"
-argument_list|)
-expr_stmt|;
-name|with
-operator|.
-name|query
-argument_list|(
-literal|"explain plan with implementation for values (1, 'ab')"
-argument_list|)
-operator|.
-name|returns
-argument_list|(
-literal|"PLAN=EnumerableValuesRel(tuples=[[{ 1, 'ab' }]])\n\n"
-argument_list|)
-expr_stmt|;
-name|with
-operator|.
-name|query
-argument_list|(
-literal|"explain plan without implementation for values (1, 'ab')"
-argument_list|)
-operator|.
-name|returns
-argument_list|(
-literal|"PLAN=ValuesRel(tuples=[[{ 1, 'ab' }]])\n\n"
-argument_list|)
-expr_stmt|;
-name|with
-operator|.
-name|query
-argument_list|(
-literal|"explain plan with type for values (1, 'ab')"
-argument_list|)
-operator|.
-name|returns
-argument_list|(
-literal|"PLAN=EXPR$0 INTEGER NOT NULL,\n"
-operator|+
-literal|"EXPR$1 CHAR(2) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\" NOT NULL\n"
-argument_list|)
-expr_stmt|;
-block|}
-comment|/** Test case for bug where if two tables have different element classes    * but those classes have identical fields, Optiq would generate code to use    * the wrong element class; a {@link ClassCastException} would ensue. */
-annotation|@
-name|Test
-specifier|public
-name|void
-name|testDifferentTypesSameFields
-parameter_list|()
-throws|throws
-name|Exception
-block|{
-name|Class
-operator|.
-name|forName
-argument_list|(
-literal|"net.hydromatic.optiq.jdbc.Driver"
-argument_list|)
-expr_stmt|;
-name|Connection
-name|connection
-init|=
-name|DriverManager
-operator|.
-name|getConnection
-argument_list|(
-literal|"jdbc:optiq:"
-argument_list|)
-decl_stmt|;
-name|OptiqConnection
-name|optiqConnection
-init|=
-name|connection
-operator|.
-name|unwrap
-argument_list|(
-name|OptiqConnection
-operator|.
-name|class
-argument_list|)
-decl_stmt|;
-specifier|final
-name|MutableSchema
-name|rootSchema
-init|=
-name|optiqConnection
-operator|.
-name|getRootSchema
-argument_list|()
-decl_stmt|;
-name|ReflectiveSchema
-operator|.
-name|create
-argument_list|(
-name|rootSchema
-argument_list|,
-literal|"TEST"
-argument_list|,
-operator|new
-name|MySchema
-argument_list|()
-argument_list|)
-expr_stmt|;
-name|Statement
-name|statement
-init|=
-name|optiqConnection
-operator|.
-name|createStatement
-argument_list|()
-decl_stmt|;
-name|ResultSet
-name|resultSet
-init|=
-name|statement
-operator|.
-name|executeQuery
-argument_list|(
-literal|"SELECT \"myvalue\" from TEST.\"mytable2\""
-argument_list|)
-decl_stmt|;
-name|assertEquals
-argument_list|(
-literal|"myvalue=2\n"
-argument_list|,
-name|toString
-argument_list|(
-name|resultSet
-argument_list|)
-argument_list|)
-expr_stmt|;
-name|resultSet
-operator|.
-name|close
-argument_list|()
-expr_stmt|;
-name|statement
-operator|.
-name|close
-argument_list|()
-expr_stmt|;
-name|connection
-operator|.
-name|close
-argument_list|()
-expr_stmt|;
-block|}
-specifier|public
-specifier|static
-class|class
-name|HrSchema
-block|{
-annotation|@
-name|Override
-specifier|public
-name|String
-name|toString
-parameter_list|()
-block|{
-return|return
-literal|"HrSchema"
-return|;
-block|}
 specifier|public
 specifier|final
-name|Employee
-index|[]
-name|emps
-init|=
-block|{
-operator|new
-name|Employee
-argument_list|(
-literal|100
-argument_list|,
-literal|10
-argument_list|,
-literal|"Bill"
-argument_list|,
-literal|10000
-argument_list|,
-literal|1000
-argument_list|)
-block|,
-operator|new
-name|Employee
-argument_list|(
-literal|200
-argument_list|,
-literal|20
-argument_list|,
-literal|"Eric"
-argument_list|,
-literal|8000
-argument_list|,
-literal|500
-argument_list|)
-block|,
-operator|new
-name|Employee
-argument_list|(
-literal|150
-argument_list|,
-literal|10
-argument_list|,
-literal|"Sebastian"
-argument_list|,
-literal|7000
-argument_list|,
-literal|null
-argument_list|)
-block|,
-operator|new
-name|Employee
-argument_list|(
-literal|110
-argument_list|,
-literal|10
-argument_list|,
-literal|"Theodore"
-argument_list|,
-literal|11500
-argument_list|,
-literal|250
-argument_list|)
-block|,     }
-decl_stmt|;
-specifier|public
-specifier|final
-name|Department
-index|[]
-name|depts
-init|=
-block|{
-operator|new
-name|Department
-argument_list|(
-literal|10
-argument_list|,
-literal|"Sales"
-argument_list|,
-name|Arrays
-operator|.
-name|asList
-argument_list|(
-name|emps
-index|[
-literal|0
-index|]
-argument_list|,
-name|emps
-index|[
-literal|2
-index|]
-argument_list|)
-argument_list|)
-block|,
-operator|new
-name|Department
-argument_list|(
-literal|30
-argument_list|,
-literal|"Marketing"
-argument_list|,
-name|Collections
-operator|.
-expr|<
-name|Employee
-operator|>
-name|emptyList
-argument_list|()
-argument_list|)
-block|,
-operator|new
-name|Department
-argument_list|(
-literal|40
-argument_list|,
-literal|"HR"
-argument_list|,
-name|Collections
-operator|.
-name|singletonList
-argument_list|(
-name|emps
-index|[
-literal|1
-index|]
-argument_list|)
-argument_list|)
-block|,     }
-decl_stmt|;
-block|}
-specifier|public
-specifier|static
-class|class
-name|Employee
-block|{
-specifier|public
-specifier|final
-name|int
-name|empid
-decl_stmt|;
-specifier|public
-specifier|final
-name|int
-name|deptno
-decl_stmt|;
-specifier|public
-specifier|final
-name|String
-name|name
-decl_stmt|;
-specifier|public
-specifier|final
-name|double
+name|float
 name|salary
 decl_stmt|;
 specifier|public
@@ -5196,7 +3575,6 @@ specifier|final
 name|Integer
 name|commission
 decl_stmt|;
-comment|/** @see Bug#TodoFixed change salary to "float" when have linq4j-0.1.8 */
 specifier|public
 name|Employee
 parameter_list|(
@@ -5209,7 +3587,7 @@ parameter_list|,
 name|String
 name|name
 parameter_list|,
-name|double
+name|float
 name|salary
 parameter_list|,
 name|Integer
@@ -5269,6 +3647,9 @@ literal|"]"
 return|;
 block|}
 block|}
+end_class
+
+begin_class
 specifier|public
 specifier|static
 class|class
@@ -5349,6 +3730,9 @@ literal|"]"
 return|;
 block|}
 block|}
+end_class
+
+begin_class
 specifier|public
 specifier|static
 class|class
@@ -5379,6 +3763,9 @@ argument_list|)
 block|,     }
 decl_stmt|;
 block|}
+end_class
+
+begin_class
 specifier|public
 specifier|static
 class|class
@@ -5409,6 +3796,9 @@ argument_list|)
 block|}
 decl_stmt|;
 block|}
+end_class
+
+begin_class
 specifier|public
 specifier|static
 class|class
@@ -5448,6 +3838,9 @@ name|DEPTNO
 expr_stmt|;
 block|}
 block|}
+end_class
+
+begin_class
 specifier|public
 specifier|static
 class|class
@@ -5518,6 +3911,9 @@ name|class
 argument_list|)
 decl_stmt|;
 block|}
+end_class
+
+begin_class
 specifier|public
 specifier|static
 class|class
@@ -5543,6 +3939,9 @@ name|customer_id
 expr_stmt|;
 block|}
 block|}
+end_class
+
+begin_class
 specifier|public
 specifier|static
 class|class
@@ -5582,6 +3981,9 @@ name|prod_id
 expr_stmt|;
 block|}
 block|}
+end_class
+
+begin_class
 specifier|public
 specifier|static
 class|class
@@ -5607,6 +4009,9 @@ name|n
 expr_stmt|;
 block|}
 block|}
+end_class
+
+begin_class
 specifier|public
 specifier|static
 class|class
@@ -5663,6 +4068,9 @@ literal|"}"
 return|;
 block|}
 block|}
+end_class
+
+begin_class
 specifier|public
 specifier|static
 specifier|abstract
@@ -5764,6 +4172,9 @@ argument_list|)
 return|;
 block|}
 block|}
+end_class
+
+begin_class
 specifier|public
 specifier|static
 class|class
@@ -5891,6 +4302,9 @@ block|}
 return|;
 block|}
 block|}
+end_class
+
+begin_class
 specifier|public
 specifier|static
 class|class
@@ -6025,7 +4439,13 @@ return|;
 block|}
 block|}
 block|}
+end_class
+
+begin_comment
 comment|/** Mock driver that has a handler that stores the results of each query in    * a temporary table. */
+end_comment
+
+begin_class
 specifier|public
 specifier|static
 class|class
@@ -6114,6 +4534,9 @@ block|}
 return|;
 block|}
 block|}
+end_class
+
+begin_class
 specifier|public
 specifier|static
 class|class
@@ -6132,6 +4555,9 @@ init|=
 literal|1
 decl_stmt|;
 block|}
+end_class
+
+begin_class
 specifier|public
 specifier|static
 class|class
@@ -6150,6 +4576,9 @@ init|=
 literal|2
 decl_stmt|;
 block|}
+end_class
+
+begin_class
 specifier|public
 specifier|static
 class|class
@@ -6178,10 +4607,10 @@ argument_list|()
 block|}
 decl_stmt|;
 block|}
-block|}
 end_class
 
 begin_comment
+unit|}
 comment|// End JdbcTest.java
 end_comment
 

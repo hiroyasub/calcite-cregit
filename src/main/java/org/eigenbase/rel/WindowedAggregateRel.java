@@ -60,7 +60,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A relational expression representing a set of window aggregates.  *  *<p>Rules:  *  *<ul>  *<li>Created by {@code  * net.sf.farrago.fennel.rel.WindowedAggSplitterRule}.  *<li>Triggers {@code net.sf.farrago.fennel.rel.FennelWindowRule}.  */
+comment|/**  * A relational expression representing a set of window aggregates.  *  *<p>Rules:  *  *<ul>  *<li>Created by {@link org.eigenbase.rel.rules.WindowedAggSplitterRule}.  *<li>Triggers {@link net.sf.farrago.fennel.rel.FennelWindowRule}.  */
 end_comment
 
 begin_class
