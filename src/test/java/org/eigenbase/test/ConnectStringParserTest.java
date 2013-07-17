@@ -19,7 +19,7 @@ name|java
 operator|.
 name|sql
 operator|.
-name|*
+name|SQLException
 import|;
 end_import
 
@@ -29,7 +29,7 @@ name|java
 operator|.
 name|util
 operator|.
-name|*
+name|Properties
 import|;
 end_import
 
@@ -41,7 +41,7 @@ name|eigenbase
 operator|.
 name|util14
 operator|.
-name|*
+name|ConnectStringParser
 import|;
 end_import
 
@@ -52,30 +52,6 @@ operator|.
 name|junit
 operator|.
 name|Test
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|junit
-operator|.
-name|runner
-operator|.
-name|RunWith
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|junit
-operator|.
-name|runners
-operator|.
-name|JUnit4
 import|;
 end_import
 

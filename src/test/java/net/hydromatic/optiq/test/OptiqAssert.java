@@ -2065,6 +2065,17 @@ literal|"metadata"
 argument_list|)
 return|;
 case|case
+name|LINGUAL
+case|:
+return|return
+name|JdbcTest
+operator|.
+name|getConnection
+argument_list|(
+literal|"lingual"
+argument_list|)
+return|;
+case|case
 name|JDBC_FOODMART2
 case|:
 return|return
@@ -2725,6 +2736,9 @@ name|Config
 block|{
 comment|/**      * Configuration that creates a connection with two in-memory data sets:      * {@link net.hydromatic.optiq.test.JdbcTest.HrSchema} and      * {@link net.hydromatic.optiq.test.JdbcTest.FoodmartSchema}.      */
 name|REGULAR
+block|,
+comment|/**      * Configuration that creates a connection with an in-memory data set      * similar to the smoke test in Cascading Lingual.      */
+name|LINGUAL
 block|,
 comment|/**      * Configuration that creates a connection to a MySQL server. Tables      * such as "customer" and "sales_fact_1997" are available. Queries      * are processed by generating Java that calls linq4j operators      * such as      * {@link net.hydromatic.linq4j.Enumerable#where(net.hydromatic.linq4j.function.Predicate1)}.      */
 name|JDBC_FOODMART

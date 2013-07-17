@@ -87,6 +87,18 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
+name|util
+operator|.
+name|Pair
+import|;
+end_import
+
+begin_import
+import|import
 name|com
 operator|.
 name|google
@@ -114,7 +126,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * RelDataTypeImpl is an abstract base for implementations of {@link  * RelDataType}.  *  *<p>Identity is based upon the {@link #digest} field, which each derived class  * should set during construction.</p>  *  * @author jhyde  * @version $Id$  */
+comment|/**  * RelDataTypeImpl is an abstract base for implementations of  * {@link RelDataType}.  *  *<p>Identity is based upon the {@link #digest} field, which each derived class  * should set during construction.</p>  *  * @author jhyde  * @version $Id$  */
 end_comment
 
 begin_class
@@ -357,10 +369,8 @@ name|getFieldList
 parameter_list|()
 block|{
 assert|assert
-operator|(
 name|isStruct
 argument_list|()
-operator|)
 assert|;
 return|return
 name|fieldList
@@ -375,46 +385,12 @@ name|getFieldNames
 parameter_list|()
 block|{
 return|return
-operator|new
-name|AbstractList
-argument_list|<
-name|String
-argument_list|>
-argument_list|()
-block|{
-specifier|public
-name|String
-name|get
-parameter_list|(
-name|int
-name|index
-parameter_list|)
-block|{
-return|return
-name|fieldList
+name|Pair
 operator|.
-name|get
+name|left
 argument_list|(
-name|index
-argument_list|)
-operator|.
-name|getName
-argument_list|()
-return|;
-block|}
-specifier|public
-name|int
-name|size
-parameter_list|()
-block|{
-return|return
 name|fieldList
-operator|.
-name|size
-argument_list|()
-return|;
-block|}
-block|}
+argument_list|)
 return|;
 block|}
 comment|// implement RelDataType
