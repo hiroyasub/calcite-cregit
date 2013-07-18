@@ -3566,6 +3566,8 @@ expr_stmt|;
 block|}
 comment|/** Tests windowed aggregation. */
 annotation|@
+name|Ignore
+annotation|@
 name|Test
 specifier|public
 name|void
@@ -5352,7 +5354,7 @@ name|name
 decl_stmt|;
 specifier|public
 specifier|final
-name|float
+name|double
 name|salary
 decl_stmt|;
 specifier|public
@@ -5360,6 +5362,7 @@ specifier|final
 name|Integer
 name|commission
 decl_stmt|;
+comment|/** @see Bug#TodoFixed change salary to "float" when have linq4j-0.1.8 */
 specifier|public
 name|Employee
 parameter_list|(
@@ -5372,7 +5375,7 @@ parameter_list|,
 name|String
 name|name
 parameter_list|,
-name|float
+name|double
 name|salary
 parameter_list|,
 name|Integer
