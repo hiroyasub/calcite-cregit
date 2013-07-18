@@ -3564,6 +3564,45 @@ literal|"    EnumerableTableAccessRel(table=[[foodmart2, time_by_day]])\n\n"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Tests windowed aggregation. */
+annotation|@
+name|Ignore
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWinAgg
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|assertThat
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select sum(\"salary\") over w, min(\"salary\") over w\n"
+operator|+
+literal|"from \"hr\".\"emps\"\n"
+operator|+
+literal|"window w as (partition by \"deptno\" order by \"empid\" rows 3 preceding)"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"empid=100; deptno=10; name=Bill; commission=1000\n"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Tests WHERE comparing a nullable integer with an integer literal. */
 annotation|@
 name|Test
@@ -3595,7 +3634,7 @@ argument_list|)
 operator|.
 name|returns
 argument_list|(
-literal|"empid=100; deptno=10; name=Bill; commission=1000\n"
+literal|"empid=100; deptno=10; name=Bill; salary=10000.0; commission=1000\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -3630,9 +3669,9 @@ argument_list|)
 operator|.
 name|returns
 argument_list|(
-literal|"empid=100; deptno=10; name=Bill; commission=1000\n"
+literal|"empid=100; deptno=10; name=Bill; salary=10000.0; commission=1000\n"
 operator|+
-literal|"empid=150; deptno=10; name=Sebastian; commission=null\n"
+literal|"empid=150; deptno=10; name=Sebastian; salary=7000.0; commission=null\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -3688,11 +3727,13 @@ argument_list|)
 operator|.
 name|returns
 argument_list|(
-literal|"empid=100; deptno=10; name=Bill; commission=1000\n"
+literal|"empid=100; deptno=10; name=Bill; salary=10000.0; commission=1000\n"
 operator|+
-literal|"empid=200; deptno=20; name=Eric; commission=500\n"
+literal|"empid=200; deptno=20; name=Eric; salary=8000.0; commission=500\n"
 operator|+
-literal|"empid=150; deptno=10; name=Sebastian; commission=null\n"
+literal|"empid=150; deptno=10; name=Sebastian; salary=7000.0; commission=null\n"
+operator|+
+literal|"empid=110; deptno=10; name=Theodore; salary=11500.0; commission=250\n"
 argument_list|)
 expr_stmt|;
 comment|// And some similar combinations...
@@ -4094,9 +4135,11 @@ argument_list|)
 operator|.
 name|returns
 argument_list|(
-literal|"empid=100; deptno=10; name=Bill; commission=1000\n"
+literal|"empid=100; deptno=10; name=Bill; salary=10000.0; commission=1000\n"
 operator|+
-literal|"empid=150; deptno=10; name=Sebastian; commission=null\n"
+literal|"empid=150; deptno=10; name=Sebastian; salary=7000.0; commission=null\n"
+operator|+
+literal|"empid=110; deptno=10; name=Theodore; salary=11500.0; commission=250\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -4304,9 +4347,11 @@ argument_list|)
 operator|.
 name|returns
 argument_list|(
-literal|"empid=100; deptno=10; name=Bill; commission=1000\n"
+literal|"empid=100; deptno=10; name=Bill; salary=10000.0; commission=1000\n"
 operator|+
-literal|"empid=150; deptno=10; name=Sebastian; commission=null\n"
+literal|"empid=150; deptno=10; name=Sebastian; salary=7000.0; commission=null\n"
+operator|+
+literal|"empid=110; deptno=10; name=Theodore; salary=11500.0; commission=250\n"
 argument_list|)
 expr_stmt|;
 name|that
@@ -4501,9 +4546,11 @@ argument_list|)
 operator|.
 name|returns
 argument_list|(
-literal|"empid=150; deptno=10; name=Sebastian; commission=null\n"
+literal|"empid=110; deptno=10; name=Theodore; salary=11500.0; commission=250\n"
 operator|+
-literal|"empid=100; deptno=10; name=Bill; commission=1000\n"
+literal|"empid=150; deptno=10; name=Sebastian; salary=7000.0; commission=null\n"
+operator|+
+literal|"empid=100; deptno=10; name=Bill; salary=10000.0; commission=1000\n"
 argument_list|)
 expr_stmt|;
 comment|// Make sure that views appear in metadata.
@@ -5005,6 +5052,8 @@ literal|10
 argument_list|,
 literal|"Bill"
 argument_list|,
+literal|10000
+argument_list|,
 literal|1000
 argument_list|)
 block|,
@@ -5016,6 +5065,8 @@ argument_list|,
 literal|20
 argument_list|,
 literal|"Eric"
+argument_list|,
+literal|8000
 argument_list|,
 literal|500
 argument_list|)
@@ -5029,7 +5080,23 @@ literal|10
 argument_list|,
 literal|"Sebastian"
 argument_list|,
+literal|7000
+argument_list|,
 literal|null
+argument_list|)
+block|,
+operator|new
+name|Employee
+argument_list|(
+literal|110
+argument_list|,
+literal|10
+argument_list|,
+literal|"Theodore"
+argument_list|,
+literal|11500
+argument_list|,
+literal|250
 argument_list|)
 block|,     }
 decl_stmt|;
@@ -5121,9 +5188,15 @@ name|name
 decl_stmt|;
 specifier|public
 specifier|final
+name|double
+name|salary
+decl_stmt|;
+specifier|public
+specifier|final
 name|Integer
 name|commission
 decl_stmt|;
+comment|/** @see Bug#TodoFixed change salary to "float" when have linq4j-0.1.8 */
 specifier|public
 name|Employee
 parameter_list|(
@@ -5135,6 +5208,9 @@ name|deptno
 parameter_list|,
 name|String
 name|name
+parameter_list|,
+name|double
+name|salary
 parameter_list|,
 name|Integer
 name|commission
@@ -5157,6 +5233,12 @@ operator|.
 name|name
 operator|=
 name|name
+expr_stmt|;
+name|this
+operator|.
+name|salary
+operator|=
+name|salary
 expr_stmt|;
 name|this
 operator|.

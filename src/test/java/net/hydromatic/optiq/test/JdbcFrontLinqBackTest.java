@@ -220,9 +220,9 @@ argument_list|)
 operator|.
 name|returns
 argument_list|(
-literal|"cust_id=100; prod_id=10; empid=100; deptno=10; name=Bill; commission=1000\n"
+literal|"cust_id=100; prod_id=10; empid=100; deptno=10; name=Bill; salary=10000.0; commission=1000\n"
 operator|+
-literal|"cust_id=150; prod_id=20; empid=150; deptno=10; name=Sebastian; commission=null\n"
+literal|"cust_id=150; prod_id=20; empid=150; deptno=10; name=Sebastian; salary=7000.0; commission=null\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -250,7 +250,7 @@ name|returns
 argument_list|(
 literal|"deptno=20; S=200; C=1\n"
 operator|+
-literal|"deptno=10; S=250; C=2\n"
+literal|"deptno=10; S=360; C=3\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -276,6 +276,8 @@ argument_list|)
 operator|.
 name|returns
 argument_list|(
+literal|"UN=THEODORE; deptno=10\n"
+operator|+
 literal|"UN=SEBASTIAN; deptno=10\n"
 operator|+
 literal|"UN=BILL; deptno=10\n"
@@ -312,6 +314,8 @@ argument_list|)
 operator|.
 name|returns
 argument_list|(
+literal|"name=Theodore\n"
+operator|+
 literal|"name=Sebastian\n"
 operator|+
 literal|"name=Sales\n"
@@ -352,6 +356,8 @@ argument_list|)
 operator|.
 name|returns
 argument_list|(
+literal|"X=T\n"
+operator|+
 literal|"X=E\n"
 operator|+
 literal|"X=S\n"
@@ -420,6 +426,8 @@ argument_list|)
 operator|.
 name|returns
 argument_list|(
+literal|"X=T\n"
+operator|+
 literal|"X=E\n"
 operator|+
 literal|"X=B\n"
@@ -473,7 +481,7 @@ argument_list|)
 operator|.
 name|returns
 argument_list|(
-literal|"empid=100; deptno=10; name=Bill; commission=1000\n"
+literal|"empid=100; deptno=10; name=Bill; salary=10000.0; commission=1000\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -498,9 +506,11 @@ argument_list|)
 operator|.
 name|returns
 argument_list|(
-literal|"empid=100; deptno=10; name=Bill; commission=1000\n"
+literal|"empid=100; deptno=10; name=Bill; salary=10000.0; commission=1000\n"
 operator|+
-literal|"empid=150; deptno=10; name=Sebastian; commission=null\n"
+literal|"empid=150; deptno=10; name=Sebastian; salary=7000.0; commission=null\n"
+operator|+
+literal|"empid=110; deptno=10; name=Theodore; salary=11500.0; commission=250\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -548,7 +558,7 @@ argument_list|)
 operator|.
 name|returns
 argument_list|(
-literal|"empid=0; deptno=0; name=first; commission=null\n"
+literal|"empid=0; deptno=0; name=first; salary=0.0; commission=null\n"
 argument_list|)
 expr_stmt|;
 name|with
@@ -560,7 +570,7 @@ argument_list|)
 operator|.
 name|returns
 argument_list|(
-literal|"ROWCOUNT=3\n"
+literal|"ROWCOUNT=4\n"
 argument_list|)
 expr_stmt|;
 name|with
@@ -572,7 +582,7 @@ argument_list|)
 operator|.
 name|returns
 argument_list|(
-literal|"C=4\n"
+literal|"C=5\n"
 argument_list|)
 expr_stmt|;
 name|with
@@ -586,7 +596,7 @@ argument_list|)
 operator|.
 name|returns
 argument_list|(
-literal|"ROWCOUNT=2\n"
+literal|"ROWCOUNT=3\n"
 argument_list|)
 expr_stmt|;
 name|with
@@ -603,6 +613,8 @@ argument_list|(
 literal|"name=Bill; C=2\n"
 operator|+
 literal|"name=Eric; C=1\n"
+operator|+
+literal|"name=Theodore; C=2\n"
 operator|+
 literal|"name=first; C=1\n"
 operator|+
@@ -640,6 +652,8 @@ argument_list|,
 literal|0
 argument_list|,
 literal|"first"
+argument_list|,
+literal|0f
 argument_list|,
 literal|null
 argument_list|)
@@ -844,7 +858,7 @@ name|with
 operator|.
 name|query
 argument_list|(
-literal|"insert into \"foo\".\"bar\" values (1, 1, 'second', 2)"
+literal|"insert into \"foo\".\"bar\" values (1, 1, 'second', 2, 2)"
 argument_list|)
 operator|.
 name|returns
@@ -858,7 +872,7 @@ name|query
 argument_list|(
 literal|"insert into \"foo\".\"bar\"\n"
 operator|+
-literal|"values (1, 3, 'third', 3), (1, 4, 'fourth', 4), (1, 5, 'fifth ', 3)"
+literal|"values (1, 3, 'third', 0, 3), (1, 4, 'fourth', 0, 4), (1, 5, 'fifth ', 0, 3)"
 argument_list|)
 operator|.
 name|returns
@@ -882,7 +896,7 @@ name|with
 operator|.
 name|query
 argument_list|(
-literal|"insert into \"foo\".\"bar\" values (1, 6, null, null)"
+literal|"insert into \"foo\".\"bar\" values (1, 6, null, 0, null)"
 argument_list|)
 operator|.
 name|returns

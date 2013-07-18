@@ -771,6 +771,8 @@ argument_list|,
 literal|200
 argument_list|,
 literal|150
+argument_list|,
+literal|110
 argument_list|)
 argument_list|,
 name|list
@@ -1046,7 +1048,9 @@ argument_list|)
 decl_stmt|;
 name|assertEquals
 argument_list|(
-literal|"empid=100; deptno=10; name=Bill; commission=1000\n"
+literal|"empid=100; deptno=10; name=Bill; salary=10000.0; commission=1000\n"
+operator|+
+literal|"empid=110; deptno=10; name=Theodore; salary=11500.0; commission=250\n"
 argument_list|,
 name|JdbcTest
 operator|.
@@ -1088,9 +1092,9 @@ argument_list|)
 operator|.
 name|returns
 argument_list|(
-literal|"hireDate=1970-01-01; empid=10; deptno=20; name=fred; commission=null\n"
+literal|"hireDate=1970-01-01; empid=10; deptno=20; name=fred; salary=0.0; commission=null\n"
 operator|+
-literal|"hireDate=1970-01-01; empid=10; deptno=20; name=bill; commission=null\n"
+literal|"hireDate=1970-01-01; empid=10; deptno=20; name=bill; salary=0.0; commission=null\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -1759,6 +1763,8 @@ operator|+
 literal|"\n"
 operator|+
 literal|"\n"
+operator|+
+literal|"\n"
 argument_list|)
 expr_stmt|;
 comment|// List is implicitly converted to Enumerable
@@ -1771,6 +1777,8 @@ argument_list|)
 operator|.
 name|returns
 argument_list|(
+literal|"\n"
+operator|+
 literal|"\n"
 operator|+
 literal|"\n"
@@ -1810,9 +1818,9 @@ argument_list|)
 operator|.
 name|returns
 argument_list|(
-literal|"empid=2; deptno=10; name=Ab; commission=null\n"
+literal|"empid=2; deptno=10; name=Ab; salary=0.0; commission=null\n"
 operator|+
-literal|"empid=4; deptno=10; name=Abd; commission=null\n"
+literal|"empid=4; deptno=10; name=Abd; salary=0.0; commission=null\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -1844,6 +1852,9 @@ parameter_list|,
 name|String
 name|name
 parameter_list|,
+name|float
+name|salary
+parameter_list|,
 name|Integer
 name|commission
 parameter_list|,
@@ -1862,6 +1873,8 @@ argument_list|,
 name|deptno
 argument_list|,
 name|name
+argument_list|,
+name|salary
 argument_list|,
 name|commission
 argument_list|)
@@ -2547,6 +2560,8 @@ literal|10
 argument_list|,
 literal|"A"
 argument_list|,
+literal|0f
+argument_list|,
 literal|null
 argument_list|)
 block|,
@@ -2558,6 +2573,8 @@ argument_list|,
 literal|10
 argument_list|,
 literal|"Ab"
+argument_list|,
+literal|0f
 argument_list|,
 literal|null
 argument_list|)
@@ -2571,6 +2588,8 @@ literal|10
 argument_list|,
 literal|"Abc"
 argument_list|,
+literal|0f
+argument_list|,
 literal|null
 argument_list|)
 block|,
@@ -2582,6 +2601,8 @@ argument_list|,
 literal|10
 argument_list|,
 literal|"Abd"
+argument_list|,
+literal|0f
 argument_list|,
 literal|null
 argument_list|)
@@ -2609,6 +2630,8 @@ literal|20
 argument_list|,
 literal|"fred"
 argument_list|,
+literal|0f
+argument_list|,
 literal|null
 argument_list|,
 operator|new
@@ -2630,6 +2653,8 @@ argument_list|,
 literal|20
 argument_list|,
 literal|"bill"
+argument_list|,
+literal|0f
 argument_list|,
 literal|null
 argument_list|,
