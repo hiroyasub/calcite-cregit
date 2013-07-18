@@ -122,7 +122,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A relational expression representing a set of window aggregates.  *  *<p>A window rel can handle several window aggregate functions, over several  * partitions, with pre- and post-expressions, and an optional post-filter.  * Each of the partitions is defined by a partition key (zero or more columns)  * and a range (logical or physical). The partitions expect the data to be  * sorted correctly on input to the relational expression.  *  *<p>Each {@link org.eigenbase.rel.WindowRelBase.Window} has a set of {@link org.eigenbase.rel.WindowRelBase.Partition} objects, and each  * {@link org.eigenbase.rel.WindowRelBase.Partition} object has a set of {@link org.eigenbase.rex.RexOver} objects.  *  *<p>Created by {@link org.eigenbase.rel.rules.WindowedAggSplitterRule}.  */
+comment|/**  * A relational expression representing a set of window aggregates.  *  *<p>A window rel can handle several window aggregate functions, over several  * partitions, with pre- and post-expressions, and an optional post-filter.  * Each of the partitions is defined by a partition key (zero or more columns)  * and a range (logical or physical). The partitions expect the data to be  * sorted correctly on input to the relational expression.  *  *<p>Each {@link org.eigenbase.rel.WindowRelBase.Window} has a set of  * {@link org.eigenbase.rel.WindowRelBase.Partition} objects, and each partition  * has a set of {@link org.eigenbase.rex.RexOver} objects.  *  *<p>Created by {@link org.eigenbase.rel.rules.WindowedAggSplitterRule}.  */
 end_comment
 
 begin_class
@@ -373,14 +373,17 @@ name|Partition
 argument_list|>
 argument_list|()
 decl_stmt|;
+specifier|public
 specifier|final
 name|boolean
 name|physical
 decl_stmt|;
+specifier|public
 specifier|final
 name|SqlNode
 name|lowerBound
 decl_stmt|;
+specifier|public
 specifier|final
 name|SqlNode
 name|upperBound
@@ -394,6 +397,7 @@ specifier|private
 name|String
 name|digest
 decl_stmt|;
+specifier|public
 name|Window
 parameter_list|(
 name|boolean
@@ -405,8 +409,7 @@ parameter_list|,
 name|SqlNode
 name|upperBound
 parameter_list|,
-name|Integer
-index|[]
+name|ImmutableIntList
 name|ordinals
 parameter_list|)
 block|{
@@ -743,8 +746,7 @@ specifier|public
 name|Partition
 name|lookupOrCreatePartition
 parameter_list|(
-name|Integer
-index|[]
+name|ImmutableIntList
 name|partitionKeys
 parameter_list|)
 block|{
@@ -758,14 +760,12 @@ control|)
 block|{
 if|if
 condition|(
-name|Arrays
-operator|.
-name|equals
-argument_list|(
 name|partition
 operator|.
 name|partitionKeys
-argument_list|,
+operator|.
+name|equals
+argument_list|(
 name|partitionKeys
 argument_list|)
 condition|)
@@ -825,8 +825,7 @@ name|partitionKeys
 decl_stmt|;
 name|Partition
 parameter_list|(
-name|Integer
-index|[]
+name|ImmutableIntList
 name|partitionKeys
 parameter_list|)
 block|{
@@ -1015,10 +1014,9 @@ argument_list|)
 expr_stmt|;
 block|}
 name|clonedOperands
-index|[
-name|i
-index|]
-operator|=
+operator|.
+name|add
+argument_list|(
 operator|new
 name|RexInputRef
 argument_list|(
@@ -1028,6 +1026,7 @@ name|operand
 operator|.
 name|getType
 argument_list|()
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}

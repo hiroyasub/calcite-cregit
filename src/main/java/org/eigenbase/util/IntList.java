@@ -185,6 +185,20 @@ block|}
 block|}
 return|;
 block|}
+specifier|public
+name|ImmutableIntList
+name|asImmutable
+parameter_list|()
+block|{
+return|return
+name|ImmutableIntList
+operator|.
+name|copyOf
+argument_list|(
+name|this
+argument_list|)
+return|;
+block|}
 block|}
 end_class
 
