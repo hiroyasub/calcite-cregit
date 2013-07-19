@@ -17821,6 +17821,14 @@ name|HistogramShuttle
 extends|extends
 name|RexShuttle
 block|{
+comment|/** Whether to convert calls to MIN(x) to HISTOGRAM_MIN(HISTOGRAM(x)).          * Histograms allow rolling computation, but require more space. */
+specifier|static
+specifier|final
+name|boolean
+name|ENABLE_HISTOGRAM_AGG
+init|=
+literal|false
+decl_stmt|;
 specifier|private
 specifier|final
 name|List
@@ -17966,6 +17974,9 @@ name|SqlFunction
 name|histogramOp
 init|=
 name|isUnboundedPreceding
+operator|||
+operator|!
+name|ENABLE_HISTOGRAM_AGG
 condition|?
 literal|null
 else|:
