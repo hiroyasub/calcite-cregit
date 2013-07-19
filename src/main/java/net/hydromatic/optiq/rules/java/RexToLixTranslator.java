@@ -1432,6 +1432,13 @@ name|BigDecimal
 operator|.
 name|class
 assert|;
+name|Bug
+operator|.
+name|remark
+argument_list|(
+literal|"remove asList after upgrading linq4j"
+argument_list|)
+expr_stmt|;
 return|return
 name|Expressions
 operator|.
@@ -2268,6 +2275,13 @@ condition|)
 block|{
 comment|// E.g. from "Integer" to "BigDecimal".
 comment|// Generate "x == null ? null : new BigDecimal(x.intValue())"
+name|Bug
+operator|.
+name|remark
+argument_list|(
+literal|"remove asList after upgrading linq4j"
+argument_list|)
+expr_stmt|;
 return|return
 name|Expressions
 operator|.
@@ -2325,6 +2339,13 @@ condition|)
 block|{
 comment|// E.g. from "int" to "BigDecimal".
 comment|// Generate "new BigDecimal(x)"
+name|Bug
+operator|.
+name|remark
+argument_list|(
+literal|"remove singletonList after upgrading linq4j"
+argument_list|)
+expr_stmt|;
 return|return
 name|Expressions
 operator|.

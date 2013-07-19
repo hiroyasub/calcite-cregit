@@ -1265,13 +1265,6 @@ name|COMPARATOR_COMPARE
 operator|.
 name|method
 argument_list|,
-name|Arrays
-operator|.
-expr|<
-name|Expression
-operator|>
-name|asList
-argument_list|(
 name|Expressions
 operator|.
 name|convert_
@@ -1288,7 +1281,6 @@ argument_list|(
 name|parameterO1
 argument_list|,
 name|javaRowClass
-argument_list|)
 argument_list|)
 argument_list|)
 argument_list|)

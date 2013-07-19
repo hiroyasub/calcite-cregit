@@ -217,7 +217,7 @@ name|Frg375Fixed
 init|=
 literal|false
 decl_stmt|;
-comment|/**      * Whether<a href="http://issues.eigenbase.org/browse/FRG-378">issue      * FRG-378: Regular expressions in SIMILAR TO predicates      * potentially dont match SQL:2008 spec in a few cases.</a> is fixed.      */
+comment|/**      * Whether<a href="http://issues.eigenbase.org/browse/FRG-378">issue      * FRG-378: Regular expressions in SIMILAR TO predicates      * potentially don't match SQL:2008 spec in a few cases.</a> is fixed.      */
 specifier|public
 specifier|static
 specifier|final
@@ -226,7 +226,7 @@ name|Frg378Fixed
 init|=
 literal|true
 decl_stmt|;
-comment|/** Temporary. */
+comment|/** Use this to flag temporary code. */
 specifier|public
 specifier|static
 specifier|final
@@ -235,6 +235,27 @@ name|TodoFixed
 init|=
 literal|false
 decl_stmt|;
+comment|/** Use this method to flag temporary code. */
+specifier|public
+specifier|static
+name|boolean
+name|remark
+parameter_list|(
+name|String
+name|remark
+parameter_list|)
+block|{
+name|Util
+operator|.
+name|discard
+argument_list|(
+name|remark
+argument_list|)
+expr_stmt|;
+return|return
+literal|false
+return|;
+block|}
 block|}
 end_class
 
