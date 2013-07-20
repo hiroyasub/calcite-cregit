@@ -3608,7 +3608,7 @@ name|explainContains
 argument_list|(
 literal|"EnumerableCalcRel(expr#0..2=[{inputs}], expr#3=[0], expr#4=[>($t0, $t3)], expr#5=[null], expr#6=[CASE($t4, $t1, $t5)], expr#7=[CAST($t6):JavaType(class java.lang.Double)], expr#8=[5], expr#9=[CAST($t2):JavaType(class java.lang.Double)], S=[$t7], FIVE=[$t8], M=[$t9])\n"
 operator|+
-literal|"  EnumerableWindowRel(window#0=[window(order by [0] rows between 1 PRECEDING and CURRENT ROW partitions [partition(key [1] aggs [COUNT($3), $SUM0($3), MIN($2)]), partition(key [1] aggs [COUNT($3), $SUM0($3), MIN($2)]), partition(key [1] aggs [COUNT($3), $SUM0($3), MIN($2)])])])\n"
+literal|"  EnumerableWindowRel(window#0=[window(order by [0 Ascending] rows between 1 PRECEDING and CURRENT ROW partitions [partition(key [1] aggs [COUNT($3), $SUM0($3), MIN($2)]), partition(key [1] aggs [COUNT($3), $SUM0($3), MIN($2)]), partition(key [1] aggs [COUNT($3), $SUM0($3), MIN($2)])])])\n"
 operator|+
 literal|"    EnumerableCalcRel(expr#0..4=[{inputs}], expr#5=[+($t3, $t0)], proj#0..1=[{exprs}], salary=[$t3], $3=[$t5])\n"
 operator|+

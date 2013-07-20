@@ -1603,7 +1603,7 @@ name|collationList
 argument_list|)
 expr_stmt|;
 specifier|final
-name|RelCollationImpl
+name|RelCollation
 name|collation
 init|=
 name|cluster
@@ -1613,8 +1613,9 @@ argument_list|()
 operator|.
 name|canonize
 argument_list|(
-operator|new
 name|RelCollationImpl
+operator|.
+name|of
 argument_list|(
 name|collationList
 argument_list|)

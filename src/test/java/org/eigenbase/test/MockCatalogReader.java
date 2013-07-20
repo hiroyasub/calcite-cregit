@@ -1373,12 +1373,9 @@ name|collationList
 operator|.
 name|add
 argument_list|(
-operator|new
 name|RelCollationImpl
-argument_list|(
-name|Collections
 operator|.
-name|singletonList
+name|of
 argument_list|(
 operator|new
 name|RelFieldCollation
@@ -1392,7 +1389,6 @@ operator|.
 name|NullDirection
 operator|.
 name|UNSPECIFIED
-argument_list|)
 argument_list|)
 argument_list|)
 argument_list|)

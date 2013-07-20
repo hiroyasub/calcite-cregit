@@ -1875,8 +1875,9 @@ name|outputCollations
 operator|.
 name|add
 argument_list|(
-operator|new
 name|RelCollationImpl
+operator|.
+name|of
 argument_list|(
 name|fieldCollations
 argument_list|)

@@ -53,6 +53,18 @@ name|eigenbase
 operator|.
 name|rel
 operator|.
+name|RelCollation
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
+name|rel
+operator|.
 name|RelFieldCollation
 import|;
 end_import
@@ -242,11 +254,8 @@ comment|/** Returns a comparator. Unlike the comparator returned by    * {@link 
 name|Expression
 name|generateComparator
 parameter_list|(
-name|List
-argument_list|<
-name|RelFieldCollation
-argument_list|>
-name|collations
+name|RelCollation
+name|collation
 parameter_list|)
 function_decl|;
 comment|/** Returns a expression that yields a comparer, or null if this type    * is comparable. */

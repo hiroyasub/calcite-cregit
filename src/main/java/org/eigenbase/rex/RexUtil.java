@@ -134,20 +134,6 @@ specifier|public
 class|class
 name|RexUtil
 block|{
-comment|//~ Static fields/initializers ---------------------------------------------
-specifier|public
-specifier|static
-specifier|final
-name|RexNode
-index|[]
-name|emptyExpressionArray
-init|=
-operator|new
-name|RexNode
-index|[
-literal|0
-index|]
-decl_stmt|;
 comment|//~ Methods ----------------------------------------------------------------
 comment|/**      * Returns a guess for the selectivity of an expression.      *      * @param exp expression of interest, or null for none (implying a      * selectivity of 1.0)      *      * @return guessed selectivity      */
 specifier|public
@@ -2542,11 +2528,12 @@ argument_list|()
 condition|)
 block|{
 specifier|final
-name|RelCollationImpl
+name|RelCollation
 name|newCollation
 init|=
-operator|new
 name|RelCollationImpl
+operator|.
+name|of
 argument_list|(
 name|newFieldCollationList
 argument_list|)
@@ -2623,8 +2610,9 @@ argument_list|)
 condition|?
 name|collation
 else|:
-operator|new
 name|RelCollationImpl
+operator|.
+name|of
 argument_list|(
 name|fieldCollations
 argument_list|)
