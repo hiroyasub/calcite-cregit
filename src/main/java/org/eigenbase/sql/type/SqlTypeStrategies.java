@@ -3014,14 +3014,9 @@ name|SqlTypeTransformCascade
 argument_list|(
 name|rtiDyadicStringSumPrecision
 argument_list|,
-operator|new
-name|SqlTypeTransform
-index|[]
-block|{
 name|SqlTypeTransforms
 operator|.
 name|toNullable
-block|}
 argument_list|)
 decl_stmt|;
 comment|/**      * Same as {@link #rtiDyadicStringSumPrecision} and using {@link      * SqlTypeTransforms#toNullable}, {@link SqlTypeTransforms#toVarying}.      */
@@ -3036,18 +3031,13 @@ name|SqlTypeTransformCascade
 argument_list|(
 name|rtiDyadicStringSumPrecision
 argument_list|,
-operator|new
-name|SqlTypeTransform
-index|[]
-block|{
 name|SqlTypeTransforms
 operator|.
 name|toNullable
-block|,
+argument_list|,
 name|SqlTypeTransforms
 operator|.
 name|toVarying
-block|}
 argument_list|)
 decl_stmt|;
 comment|/**      * Type-inference strategy where the expression is assumed to be registered      * as a {@link org.eigenbase.sql.validate.SqlValidatorNamespace}, and      * therefore the result type of the call is the type of that namespace.      */

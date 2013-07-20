@@ -2309,8 +2309,9 @@ name|mod
 argument_list|(
 name|b0
 argument_list|,
-operator|new
 name|BigDecimal
+operator|.
+name|valueOf
 argument_list|(
 name|b1
 argument_list|)

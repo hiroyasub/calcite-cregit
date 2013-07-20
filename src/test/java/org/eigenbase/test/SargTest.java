@@ -273,8 +273,9 @@ name|rexBuilder
 operator|.
 name|makeExactLiteral
 argument_list|(
-operator|new
 name|BigDecimal
+operator|.
+name|valueOf
 argument_list|(
 literal|7
 argument_list|)
@@ -288,8 +289,9 @@ name|rexBuilder
 operator|.
 name|makeExactLiteral
 argument_list|(
-operator|new
 name|BigDecimal
+operator|.
+name|valueOf
 argument_list|(
 literal|490
 argument_list|)

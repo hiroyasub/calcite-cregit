@@ -85,6 +85,20 @@ name|*
 import|;
 end_import
 
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|linq4j
+operator|.
+name|expressions
+operator|.
+name|Primitive
+import|;
+end_import
+
 begin_comment
 comment|/**  * Abstract base for implementations of {@link RelDataTypeFactory}.  *  * @author jhyde  * @version $Id$  * @since May 31, 2003  */
 end_comment
@@ -899,9 +913,25 @@ return|return
 operator|new
 name|JavaType
 argument_list|(
+name|nullable
+condition|?
+name|Primitive
+operator|.
+name|box
+argument_list|(
 name|javaType
 operator|.
 name|clazz
+argument_list|)
+else|:
+name|Primitive
+operator|.
+name|unbox
+argument_list|(
+name|javaType
+operator|.
+name|clazz
+argument_list|)
 argument_list|,
 name|nullable
 argument_list|)

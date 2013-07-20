@@ -62,7 +62,7 @@ name|int
 name|fieldIndex
 decl_stmt|;
 comment|/**      * Direction of sorting.      */
-specifier|private
+specifier|public
 specifier|final
 name|Direction
 name|direction

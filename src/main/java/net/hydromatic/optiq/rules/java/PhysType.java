@@ -174,9 +174,26 @@ argument_list|>
 name|fields
 parameter_list|)
 function_decl|;
-comment|/** Generates a selector for the given fields from an expression. */
+comment|/** Generates a lambda expression that is a selector for the given fields from    * an expression. */
 name|Expression
 name|generateSelector
+parameter_list|(
+name|ParameterExpression
+name|parameter
+parameter_list|,
+name|List
+argument_list|<
+name|Integer
+argument_list|>
+name|fields
+parameter_list|,
+name|JavaRowFormat
+name|targetFormat
+parameter_list|)
+function_decl|;
+comment|/** Generates a selector for the given fields from an expression. */
+name|Expression
+name|selector
 parameter_list|(
 name|ParameterExpression
 name|parameter
@@ -213,6 +230,17 @@ argument_list|,
 name|Expression
 argument_list|>
 name|generateCollationKey
+parameter_list|(
+name|List
+argument_list|<
+name|RelFieldCollation
+argument_list|>
+name|collations
+parameter_list|)
+function_decl|;
+comment|/** Returns a comparator. Unlike the comparator returned by    * {@link #generateCollationKey(java.util.List)}, this comparator acts on the    * whole element. */
+name|Expression
+name|generateComparator
 parameter_list|(
 name|List
 argument_list|<

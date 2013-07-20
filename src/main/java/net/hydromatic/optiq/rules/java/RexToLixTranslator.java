@@ -2934,6 +2934,12 @@ name|boolean
 name|nullable
 parameter_list|)
 block|{
+if|if
+condition|(
+operator|!
+name|nullable
+condition|)
+block|{
 specifier|final
 name|Primitive
 name|primitive
@@ -2961,8 +2967,7 @@ name|primitiveClass
 argument_list|)
 return|;
 block|}
-else|else
-block|{
+block|}
 return|return
 name|typeFactory
 operator|.
@@ -2973,7 +2978,6 @@ argument_list|,
 name|nullable
 argument_list|)
 return|;
-block|}
 block|}
 specifier|private
 name|Primitive
