@@ -27,7 +27,7 @@ name|linq4j
 operator|.
 name|expressions
 operator|.
-name|BlockExpression
+name|BlockStatement
 import|;
 end_import
 
@@ -179,8 +179,8 @@ name|Result
 block|{
 specifier|public
 specifier|final
-name|BlockExpression
-name|expression
+name|BlockStatement
+name|block
 decl_stmt|;
 comment|/**      * Describes the Java type returned by this relational expression, and the      * mapping between it and the fields of the logical row type.      */
 specifier|public
@@ -196,8 +196,8 @@ decl_stmt|;
 specifier|public
 name|Result
 parameter_list|(
-name|BlockExpression
-name|expression
+name|BlockStatement
+name|block
 parameter_list|,
 name|PhysType
 name|physType
@@ -208,9 +208,9 @@ parameter_list|)
 block|{
 name|this
 operator|.
-name|expression
+name|block
 operator|=
-name|expression
+name|block
 expr_stmt|;
 name|this
 operator|.

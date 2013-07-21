@@ -329,7 +329,7 @@ specifier|final
 name|EnumerableRel
 operator|.
 name|Result
-name|implement
+name|result
 init|=
 name|rootRel
 operator|.
@@ -355,9 +355,9 @@ argument_list|()
 decl_stmt|;
 name|declareSyntheticClasses
 argument_list|(
-name|implement
+name|result
 operator|.
-name|expression
+name|block
 argument_list|,
 name|memberDeclarations
 argument_list|)
@@ -412,9 +412,9 @@ argument_list|(
 name|root
 argument_list|)
 argument_list|,
-name|implement
+name|result
 operator|.
-name|expression
+name|block
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -465,7 +465,7 @@ name|Expressions
 operator|.
 name|constant
 argument_list|(
-name|implement
+name|result
 operator|.
 name|physType
 operator|.
@@ -510,8 +510,8 @@ specifier|private
 name|void
 name|declareSyntheticClasses
 parameter_list|(
-name|BlockExpression
-name|implement
+name|BlockStatement
+name|block
 parameter_list|,
 name|List
 argument_list|<
@@ -534,7 +534,7 @@ name|Type
 argument_list|>
 argument_list|()
 decl_stmt|;
-name|implement
+name|block
 operator|.
 name|accept
 argument_list|(
@@ -1704,8 +1704,8 @@ parameter_list|(
 name|PhysType
 name|physType
 parameter_list|,
-name|BlockExpression
-name|expression
+name|BlockStatement
+name|block
 parameter_list|)
 block|{
 return|return
@@ -1714,7 +1714,7 @@ name|EnumerableRel
 operator|.
 name|Result
 argument_list|(
-name|expression
+name|block
 argument_list|,
 name|physType
 argument_list|,

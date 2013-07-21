@@ -3699,8 +3699,8 @@ block|{
 name|RexNode
 name|toRex
 parameter_list|(
-name|BlockExpression
-name|expression
+name|BlockStatement
+name|statement
 parameter_list|)
 function_decl|;
 name|List
@@ -3709,8 +3709,8 @@ name|RexNode
 argument_list|>
 name|toRexList
 parameter_list|(
-name|BlockExpression
-name|expression
+name|BlockStatement
+name|statement
 parameter_list|)
 function_decl|;
 name|RexNode
@@ -3786,8 +3786,8 @@ name|RexNode
 argument_list|>
 name|toRexList
 parameter_list|(
-name|BlockExpression
-name|expression
+name|BlockStatement
+name|statement
 parameter_list|)
 block|{
 specifier|final
@@ -3799,7 +3799,7 @@ name|simpleList
 init|=
 name|simpleList
 argument_list|(
-name|expression
+name|statement
 argument_list|)
 decl_stmt|;
 specifier|final
@@ -3843,8 +3843,8 @@ specifier|public
 name|RexNode
 name|toRex
 parameter_list|(
-name|BlockExpression
-name|expression
+name|BlockStatement
+name|statement
 parameter_list|)
 block|{
 return|return
@@ -3854,7 +3854,7 @@ name|Blocks
 operator|.
 name|simple
 argument_list|(
-name|expression
+name|statement
 argument_list|)
 argument_list|)
 return|;
@@ -3867,8 +3867,8 @@ name|Expression
 argument_list|>
 name|simpleList
 parameter_list|(
-name|BlockExpression
-name|expression
+name|BlockStatement
+name|statement
 parameter_list|)
 block|{
 name|Expression
@@ -3878,7 +3878,7 @@ name|Blocks
 operator|.
 name|simple
 argument_list|(
-name|expression
+name|statement
 argument_list|)
 decl_stmt|;
 if|if

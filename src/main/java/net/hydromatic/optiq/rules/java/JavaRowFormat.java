@@ -533,13 +533,6 @@ name|ARRAYS_AS_LIST
 operator|.
 name|method
 argument_list|,
-name|Collections
-operator|.
-expr|<
-name|Expression
-operator|>
-name|singletonList
-argument_list|(
 name|Expressions
 operator|.
 name|newArrayInit
@@ -549,7 +542,6 @@ operator|.
 name|class
 argument_list|,
 name|expressions
-argument_list|)
 argument_list|)
 argument_list|)
 argument_list|,
