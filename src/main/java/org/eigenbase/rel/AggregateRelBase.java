@@ -345,8 +345,7 @@ name|ord
 operator|.
 name|e
 operator|.
-name|getName
-argument_list|()
+name|name
 operator|!=
 literal|null
 condition|)
@@ -357,8 +356,7 @@ name|ord
 operator|.
 name|e
 operator|.
-name|getName
-argument_list|()
+name|name
 expr_stmt|;
 block|}
 else|else
@@ -602,8 +600,7 @@ if|if
 condition|(
 name|aggCall
 operator|.
-name|getName
-argument_list|()
+name|name
 operator|!=
 literal|null
 condition|)
@@ -612,8 +609,7 @@ name|name
 operator|=
 name|aggCall
 operator|.
-name|getName
-argument_list|()
+name|name
 expr_stmt|;
 block|}
 else|else
@@ -650,8 +646,7 @@ name|index
 argument_list|,
 name|aggCall
 operator|.
-name|getType
-argument_list|()
+name|type
 argument_list|)
 return|;
 block|}
@@ -710,8 +705,7 @@ name|expectedType
 init|=
 name|aggCall
 operator|.
-name|getType
-argument_list|()
+name|type
 decl_stmt|;
 return|return
 name|RelOptUtil

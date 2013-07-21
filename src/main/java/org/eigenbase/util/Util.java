@@ -6731,6 +6731,31 @@ return|return
 literal|true
 return|;
 block|}
+specifier|public
+specifier|static
+parameter_list|<
+name|T
+parameter_list|>
+name|T
+name|first
+parameter_list|(
+name|T
+name|t0
+parameter_list|,
+name|T
+name|t1
+parameter_list|)
+block|{
+return|return
+name|t0
+operator|!=
+literal|null
+condition|?
+name|t0
+else|:
+name|t1
+return|;
+block|}
 comment|//~ Inner Classes ----------------------------------------------------------
 comment|/**      * Exception used to interrupt a tree walk of any kind.      */
 specifier|public

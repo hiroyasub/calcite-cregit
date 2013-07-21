@@ -279,6 +279,22 @@ name|JavaRowFormat
 name|getFormat
 parameter_list|()
 function_decl|;
+name|List
+argument_list|<
+name|Expression
+argument_list|>
+name|accessors
+parameter_list|(
+name|Expression
+name|parameter
+parameter_list|,
+name|List
+argument_list|<
+name|Integer
+argument_list|>
+name|argList
+parameter_list|)
+function_decl|;
 block|}
 end_interface
 

@@ -2788,7 +2788,7 @@ name|lyst
 argument_list|,
 name|BuiltinMethod
 operator|.
-name|LIST_ADD
+name|COLLECTION_ADD
 operator|.
 name|method
 argument_list|,

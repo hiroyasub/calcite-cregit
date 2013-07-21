@@ -98,7 +98,7 @@ decl_stmt|;
 specifier|private
 specifier|final
 name|boolean
-name|physical
+name|isRows
 decl_stmt|;
 specifier|private
 specifier|final
@@ -128,7 +128,7 @@ name|SqlNode
 name|upperBound
 parameter_list|,
 name|boolean
-name|physical
+name|isRows
 parameter_list|)
 block|{
 assert|assert
@@ -177,9 +177,9 @@ name|upperBound
 expr_stmt|;
 name|this
 operator|.
-name|physical
+name|isRows
 operator|=
-name|physical
+name|isRows
 expr_stmt|;
 name|this
 operator|.
@@ -191,7 +191,7 @@ expr_stmt|;
 if|if
 condition|(
 operator|!
-name|physical
+name|isRows
 condition|)
 block|{
 assert|assert
@@ -502,7 +502,7 @@ expr_stmt|;
 block|}
 if|if
 condition|(
-name|physical
+name|isRows
 condition|)
 block|{
 name|pw
@@ -554,7 +554,7 @@ expr_stmt|;
 block|}
 if|if
 condition|(
-name|physical
+name|isRows
 condition|)
 block|{
 name|pw
@@ -634,7 +634,7 @@ name|isRows
 parameter_list|()
 block|{
 return|return
-name|physical
+name|isRows
 return|;
 block|}
 specifier|public

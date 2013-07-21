@@ -1070,6 +1070,17 @@ name|SumImplementor2
 argument_list|()
 argument_list|)
 expr_stmt|;
+name|agg2Map
+operator|.
+name|put
+argument_list|(
+name|sumEmptyIsZeroOperator
+argument_list|,
+operator|new
+name|SumImplementor2
+argument_list|()
+argument_list|)
+expr_stmt|;
 specifier|final
 name|MinMaxImplementor2
 name|minMax

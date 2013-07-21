@@ -1172,7 +1172,7 @@ return|return
 name|result
 return|;
 block|}
-comment|/**      * Creates a window specification.      *      * @param partitionKeys Partition keys      * @param orderKeys Order keys      * @param lowerBound Lower bound      * @param upperBound Upper bound      * @param physical Whether physical. True if row-based, false if range-based      * @return window specification      */
+comment|/**      * Creates a window specification.      *      * @param partitionKeys Partition keys      * @param orderKeys Order keys      * @param lowerBound Lower bound      * @param upperBound Upper bound      * @param isRows Whether physical. True if row-based, false if range-based      * @return window specification      */
 specifier|public
 name|RexWindow
 name|makeWindow
@@ -1196,7 +1196,7 @@ name|SqlNode
 name|upperBound
 parameter_list|,
 name|boolean
-name|physical
+name|isRows
 parameter_list|)
 block|{
 return|return
@@ -1211,7 +1211,7 @@ name|lowerBound
 argument_list|,
 name|upperBound
 argument_list|,
-name|physical
+name|isRows
 argument_list|)
 return|;
 block|}

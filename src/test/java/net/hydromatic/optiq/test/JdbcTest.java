@@ -3592,7 +3592,12 @@ literal|"select sum(\"salary\" + \"empid\") over w as s,\n"
 operator|+
 literal|" 5 as five,\n"
 operator|+
-literal|" min(\"salary\") over w as m\n"
+literal|" min(\"salary\") over w as m,\n"
+comment|// + " count(*) over w as m,\n"
+operator|+
+literal|" \"deptno\",\n"
+operator|+
+literal|" \"empid\"\n"
 operator|+
 literal|"from \"hr\".\"emps\"\n"
 operator|+
@@ -3601,21 +3606,31 @@ argument_list|)
 operator|.
 name|typeIs
 argument_list|(
-literal|"[S DOUBLE, FIVE INTEGER NOT NULL, M DOUBLE]"
+literal|"[S DOUBLE, FIVE INTEGER NOT NULL, M DOUBLE, deptno INTEGER NOT NULL, empid INTEGER NOT NULL]"
 argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"EnumerableCalcRel(expr#0..2=[{inputs}], expr#3=[0], expr#4=[>($t0, $t3)], expr#5=[null], expr#6=[CASE($t4, $t1, $t5)], expr#7=[CAST($t6):JavaType(class java.lang.Double)], expr#8=[5], expr#9=[CAST($t2):JavaType(class java.lang.Double)], S=[$t7], FIVE=[$t8], M=[$t9])\n"
+literal|"EnumerableCalcRel(expr#0..6=[{inputs}], expr#7=[0], expr#8=[>($t4, $t7)], expr#9=[null], expr#10=[CASE($t8, $t5, $t9)], expr#11=[CAST($t10):JavaType(class java.lang.Double)], expr#12=[5], expr#13=[CAST($t6):JavaType(class java.lang.Double)], S=[$t11], FIVE=[$t12], M=[$t13], deptno=[$t1], empid=[$t0])\n"
 operator|+
-literal|"  EnumerableWindowRel(window#0=[window(order by [0 Ascending] rows between 1 PRECEDING and CURRENT ROW partitions [partition(key [1] aggs [COUNT($3), $SUM0($3), MIN($2)]), partition(key [1] aggs [COUNT($3), $SUM0($3), MIN($2)]), partition(key [1] aggs [COUNT($3), $SUM0($3), MIN($2)])])])\n"
+literal|"  EnumerableWindowRel(window#0=[window(partition {1} order by [0 Ascending] rows between 1 PRECEDING and CURRENT ROW aggs [COUNT($3), $SUM0($3), MIN($2)])])\n"
 operator|+
 literal|"    EnumerableCalcRel(expr#0..4=[{inputs}], expr#5=[+($t3, $t0)], proj#0..1=[{exprs}], salary=[$t3], $3=[$t5])\n"
 operator|+
 literal|"      EnumerableTableAccessRel(table=[[hr, emps]])\n"
 argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"S=8200.0; FIVE=5; M=8000.0; deptno=20; empid=200\n"
+operator|+
+literal|"S=10100.0; FIVE=5; M=10000.0; deptno=10; empid=100\n"
+operator|+
+literal|"S=23220.0; FIVE=5; M=11500.0; deptno=10; empid=110\n"
+operator|+
+literal|"S=14300.0; FIVE=5; M=7000.0; deptno=10; empid=150\n"
+argument_list|)
 expr_stmt|;
-comment|/*         .returns(             "xxx\n"); */
 block|}
 comment|/** Tests WHERE comparing a nullable integer with an integer literal. */
 annotation|@

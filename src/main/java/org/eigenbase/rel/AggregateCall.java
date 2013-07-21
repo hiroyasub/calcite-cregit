@@ -81,12 +81,12 @@ specifier|final
 name|boolean
 name|distinct
 decl_stmt|;
-specifier|private
+specifier|public
 specifier|final
 name|RelDataType
 name|type
 decl_stmt|;
-specifier|private
+specifier|public
 specifier|final
 name|String
 name|name
