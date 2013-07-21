@@ -64,7 +64,7 @@ end_comment
 begin_class
 specifier|public
 class|class
-name|BlockExpression
+name|BlockStatement
 extends|extends
 name|Statement
 block|{
@@ -76,7 +76,7 @@ name|Statement
 argument_list|>
 name|statements
 decl_stmt|;
-name|BlockExpression
+name|BlockStatement
 parameter_list|(
 name|List
 argument_list|<
@@ -143,7 +143,7 @@ if|if
 condition|(
 name|statement
 operator|instanceof
-name|DeclarationExpression
+name|DeclarationStatement
 condition|)
 block|{
 name|String
@@ -151,7 +151,7 @@ name|name
 init|=
 operator|(
 operator|(
-name|DeclarationExpression
+name|DeclarationStatement
 operator|)
 name|statement
 operator|)
@@ -192,7 +192,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
-name|BlockExpression
+name|BlockStatement
 name|accept
 parameter_list|(
 name|Visitor
@@ -327,7 +327,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End BlockExpression.java
+comment|// End BlockStatement.java
 end_comment
 
 end_unit

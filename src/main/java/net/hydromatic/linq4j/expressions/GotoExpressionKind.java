@@ -16,7 +16,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * Specifies what kind of jump a {@link GotoExpression} represents.  */
+comment|/**  * Specifies what kind of jump a {@link GotoStatement} represents.  */
 end_comment
 
 begin_enum

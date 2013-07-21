@@ -95,7 +95,7 @@ name|parameters
 decl_stmt|;
 specifier|public
 specifier|final
-name|BlockExpression
+name|BlockStatement
 name|body
 decl_stmt|;
 specifier|public
@@ -116,7 +116,7 @@ name|ParameterExpression
 argument_list|>
 name|parameters
 parameter_list|,
-name|BlockExpression
+name|BlockStatement
 name|body
 parameter_list|)
 block|{
@@ -163,7 +163,7 @@ parameter_list|)
 block|{
 comment|// do not visit parameters
 specifier|final
-name|BlockExpression
+name|BlockStatement
 name|body
 init|=
 name|this

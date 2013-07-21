@@ -22,7 +22,7 @@ end_comment
 begin_class
 specifier|public
 class|class
-name|GotoExpression
+name|GotoStatement
 extends|extends
 name|Statement
 block|{
@@ -41,7 +41,7 @@ specifier|final
 name|Expression
 name|expression
 decl_stmt|;
-name|GotoExpression
+name|GotoStatement
 parameter_list|(
 name|GotoExpressionKind
 name|kind
@@ -157,10 +157,14 @@ name|visitor
 parameter_list|)
 block|{
 name|Expression
-name|expression
+name|expression1
 init|=
-name|this
-operator|.
+name|expression
+operator|==
+literal|null
+condition|?
+literal|null
+else|:
 name|expression
 operator|.
 name|accept
@@ -175,7 +179,7 @@ name|visit
 argument_list|(
 name|this
 argument_list|,
-name|expression
+name|expression1
 argument_list|)
 return|;
 block|}
@@ -346,7 +350,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End GotoExpression.java
+comment|// End GotoStatement.java
 end_comment
 
 end_unit

@@ -28,13 +28,13 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Expression that declares and optionally initializes a variable.  *  * @author jhyde  */
+comment|/**  * Expression that declares and optionally initializes a variable.  */
 end_comment
 
 begin_class
 specifier|public
 class|class
-name|DeclarationExpression
+name|DeclarationStatement
 extends|extends
 name|Statement
 block|{
@@ -54,7 +54,7 @@ name|Expression
 name|initializer
 decl_stmt|;
 specifier|public
-name|DeclarationExpression
+name|DeclarationStatement
 parameter_list|(
 name|int
 name|modifiers
@@ -99,7 +99,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
-name|Statement
+name|DeclarationStatement
 name|accept
 parameter_list|(
 name|Visitor
@@ -238,11 +238,117 @@ name|newlineAndIndent
 argument_list|()
 expr_stmt|;
 block|}
+specifier|public
+name|void
+name|accept2
+parameter_list|(
+name|ExpressionWriter
+name|writer
+parameter_list|,
+name|boolean
+name|withType
+parameter_list|)
+block|{
+if|if
+condition|(
+name|withType
+condition|)
+block|{
+specifier|final
+name|String
+name|modifiers
+init|=
+name|Modifier
+operator|.
+name|toString
+argument_list|(
+name|this
+operator|.
+name|modifiers
+argument_list|)
+decl_stmt|;
+if|if
+condition|(
+operator|!
+name|modifiers
+operator|.
+name|isEmpty
+argument_list|()
+condition|)
+block|{
+name|writer
+operator|.
+name|append
+argument_list|(
+name|modifiers
+argument_list|)
+operator|.
+name|append
+argument_list|(
+literal|' '
+argument_list|)
+expr_stmt|;
+block|}
+name|writer
+operator|.
+name|append
+argument_list|(
+name|parameter
+operator|.
+name|type
+argument_list|)
+operator|.
+name|append
+argument_list|(
+literal|' '
+argument_list|)
+expr_stmt|;
+block|}
+else|else
+block|{
+name|writer
+operator|.
+name|append
+argument_list|(
+literal|", "
+argument_list|)
+expr_stmt|;
+block|}
+name|writer
+operator|.
+name|append
+argument_list|(
+name|parameter
+operator|.
+name|name
+argument_list|)
+expr_stmt|;
+if|if
+condition|(
+name|initializer
+operator|!=
+literal|null
+condition|)
+block|{
+name|writer
+operator|.
+name|append
+argument_list|(
+literal|" = "
+argument_list|)
+operator|.
+name|append
+argument_list|(
+name|initializer
+argument_list|)
+expr_stmt|;
+block|}
+block|}
 block|}
 end_class
 
 begin_comment
-comment|// End DeclarationExpression.java
+comment|// End DeclarationStatement.java
 end_comment
 
 end_unit

@@ -16,7 +16,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  *<p>Helper methods concerning {@link BlockExpression}s.</p>  *  * @author jhyde  * @see BlockBuilder  */
+comment|/**  *<p>Helper methods concerning {@link BlockStatement}s.</p>  *  * @see BlockBuilder  */
 end_comment
 
 begin_class
@@ -39,7 +39,7 @@ throw|;
 block|}
 specifier|private
 specifier|static
-name|BlockExpression
+name|BlockStatement
 name|toFunctionBlock
 parameter_list|(
 name|Node
@@ -53,12 +53,12 @@ if|if
 condition|(
 name|body
 operator|instanceof
-name|BlockExpression
+name|BlockStatement
 condition|)
 block|{
 return|return
 operator|(
-name|BlockExpression
+name|BlockStatement
 operator|)
 name|body
 return|;
@@ -163,7 +163,7 @@ return|;
 block|}
 specifier|public
 specifier|static
-name|BlockExpression
+name|BlockStatement
 name|toFunctionBlock
 parameter_list|(
 name|Node
@@ -181,7 +181,7 @@ return|;
 block|}
 specifier|public
 specifier|static
-name|BlockExpression
+name|BlockStatement
 name|toBlock
 parameter_list|(
 name|Node
@@ -200,13 +200,13 @@ block|}
 comment|/**    * Prepends a statement to a block.    */
 specifier|public
 specifier|static
-name|BlockExpression
+name|BlockStatement
 name|create
 parameter_list|(
 name|Statement
 name|statement
 parameter_list|,
-name|BlockExpression
+name|BlockStatement
 name|block
 parameter_list|)
 block|{
@@ -237,7 +237,7 @@ specifier|static
 name|Expression
 name|simple
 parameter_list|(
-name|BlockExpression
+name|BlockStatement
 name|block
 parameter_list|)
 block|{
@@ -269,13 +269,13 @@ if|if
 condition|(
 name|statement
 operator|instanceof
-name|GotoExpression
+name|GotoStatement
 condition|)
 block|{
 return|return
 operator|(
 operator|(
-name|GotoExpression
+name|GotoStatement
 operator|)
 name|statement
 operator|)

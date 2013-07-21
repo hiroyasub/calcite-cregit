@@ -78,7 +78,7 @@ name|function
 decl_stmt|;
 specifier|public
 specifier|final
-name|BlockExpression
+name|BlockStatement
 name|body
 decl_stmt|;
 specifier|public
@@ -105,7 +105,7 @@ parameter_list|,
 name|F
 name|function
 parameter_list|,
-name|BlockExpression
+name|BlockStatement
 name|body
 parameter_list|,
 name|List
@@ -197,7 +197,7 @@ name|F
 argument_list|>
 name|type
 parameter_list|,
-name|BlockExpression
+name|BlockStatement
 name|body
 parameter_list|,
 name|List
@@ -229,7 +229,7 @@ name|Visitor
 name|visitor
 parameter_list|)
 block|{
-name|BlockExpression
+name|BlockStatement
 name|body
 init|=
 name|this

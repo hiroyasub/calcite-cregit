@@ -38,7 +38,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Builder for {@link BlockExpression}.  *  *<p>Has methods that help ensure that variable names are unique.</p>  */
+comment|/**  * Builder for {@link BlockStatement}.  *  *<p>Has methods that help ensure that variable names are unique.</p>  */
 end_comment
 
 begin_class
@@ -130,7 +130,7 @@ parameter_list|(
 name|String
 name|name
 parameter_list|,
-name|BlockExpression
+name|BlockStatement
 name|block
 parameter_list|)
 block|{
@@ -153,7 +153,7 @@ parameter_list|(
 name|String
 name|name
 parameter_list|,
-name|BlockExpression
+name|BlockStatement
 name|block
 parameter_list|,
 name|boolean
@@ -189,7 +189,7 @@ if|if
 condition|(
 name|lastStatement
 operator|instanceof
-name|GotoExpression
+name|GotoStatement
 condition|)
 block|{
 comment|// convert "return expr;" into "expr;"
@@ -210,7 +210,7 @@ name|statement
 argument_list|(
 operator|(
 operator|(
-name|GotoExpression
+name|GotoStatement
 operator|)
 name|lastStatement
 operator|)
@@ -310,14 +310,14 @@ if|if
 condition|(
 name|statement
 operator|instanceof
-name|DeclarationExpression
+name|DeclarationStatement
 condition|)
 block|{
-name|DeclarationExpression
+name|DeclarationStatement
 name|declaration
 init|=
 operator|(
-name|DeclarationExpression
+name|DeclarationStatement
 operator|)
 name|statement
 decl_stmt|;
@@ -411,14 +411,14 @@ if|if
 condition|(
 name|statement
 operator|instanceof
-name|DeclarationExpression
+name|DeclarationStatement
 condition|)
 block|{
 name|result
 operator|=
 operator|(
 operator|(
-name|DeclarationExpression
+name|DeclarationStatement
 operator|)
 name|statement
 operator|)
@@ -430,7 +430,7 @@ if|else if
 condition|(
 name|statement
 operator|instanceof
-name|GotoExpression
+name|GotoStatement
 condition|)
 block|{
 name|statements
@@ -453,7 +453,7 @@ name|name
 argument_list|,
 operator|(
 operator|(
-name|GotoExpression
+name|GotoStatement
 operator|)
 name|statement
 operator|)
@@ -479,7 +479,7 @@ comment|// even to evaluate the expression
 block|}
 else|else
 block|{
-name|DeclarationExpression
+name|DeclarationStatement
 name|declare
 init|=
 name|Expressions
@@ -546,6 +546,40 @@ literal|true
 argument_list|)
 return|;
 block|}
+comment|/**    * Appends an expression to a list of statements, if it is not null.    */
+specifier|public
+name|Expression
+name|appendIfNotNull
+parameter_list|(
+name|String
+name|name
+parameter_list|,
+name|Expression
+name|expression
+parameter_list|)
+block|{
+if|if
+condition|(
+name|expression
+operator|==
+literal|null
+condition|)
+block|{
+return|return
+literal|null
+return|;
+block|}
+return|return
+name|append
+argument_list|(
+name|name
+argument_list|,
+name|expression
+argument_list|,
+literal|true
+argument_list|)
+return|;
+block|}
 comment|/**    * Appends an expression to a list of statements, optionally optimizing if    * the expression is used more than once.    */
 specifier|public
 name|Expression
@@ -590,7 +624,7 @@ if|if
 condition|(
 name|lastStatement
 operator|instanceof
-name|GotoExpression
+name|GotoStatement
 condition|)
 block|{
 comment|// convert "return expr;" into "expr;"
@@ -611,7 +645,7 @@ name|statement
 argument_list|(
 operator|(
 operator|(
-name|GotoExpression
+name|GotoStatement
 operator|)
 name|lastStatement
 operator|)
@@ -705,14 +739,14 @@ if|if
 condition|(
 name|statement
 operator|instanceof
-name|DeclarationExpression
+name|DeclarationStatement
 condition|)
 block|{
-name|DeclarationExpression
+name|DeclarationStatement
 name|decl
 init|=
 operator|(
-name|DeclarationExpression
+name|DeclarationStatement
 operator|)
 name|statement
 decl_stmt|;
@@ -755,7 +789,7 @@ block|}
 block|}
 block|}
 block|}
-name|DeclarationExpression
+name|DeclarationStatement
 name|declare
 init|=
 name|Expressions
@@ -806,7 +840,7 @@ if|if
 condition|(
 name|statement
 operator|instanceof
-name|DeclarationExpression
+name|DeclarationStatement
 condition|)
 block|{
 name|String
@@ -814,7 +848,7 @@ name|name
 init|=
 operator|(
 operator|(
-name|DeclarationExpression
+name|DeclarationStatement
 operator|)
 name|statement
 operator|)
@@ -869,7 +903,7 @@ expr_stmt|;
 block|}
 comment|/**    * Returns a block consisting of the current list of statements.    */
 specifier|public
-name|BlockExpression
+name|BlockStatement
 name|toBlock
 parameter_list|()
 block|{
@@ -930,7 +964,7 @@ if|if
 condition|(
 name|statement
 operator|instanceof
-name|DeclarationExpression
+name|DeclarationStatement
 condition|)
 block|{
 specifier|final
@@ -941,7 +975,7 @@ operator|new
 name|Slot
 argument_list|(
 operator|(
-name|DeclarationExpression
+name|DeclarationStatement
 operator|)
 name|statement
 argument_list|)
@@ -1045,14 +1079,14 @@ if|if
 condition|(
 name|oldStatement
 operator|instanceof
-name|DeclarationExpression
+name|DeclarationStatement
 condition|)
 block|{
-name|DeclarationExpression
+name|DeclarationStatement
 name|statement
 init|=
 operator|(
-name|DeclarationExpression
+name|DeclarationStatement
 operator|)
 name|oldStatement
 decl_stmt|;
@@ -1255,7 +1289,7 @@ expr_stmt|;
 block|}
 block|}
 block|}
-comment|/**    * Creates a name for a new variable, unique within this block.    */
+comment|/**    * Creates a name for a new variable, unique within this block, controlling    * whether the variable can be inlined later.    */
 specifier|private
 name|String
 name|newName
@@ -1289,6 +1323,22 @@ operator|+
 name|suggestion
 expr_stmt|;
 block|}
+return|return
+name|newName
+argument_list|(
+name|suggestion
+argument_list|)
+return|;
+block|}
+comment|/**    * Creates a name for a new variable, unique within this block.    */
+specifier|public
+name|String
+name|newName
+parameter_list|(
+name|String
+name|suggestion
+parameter_list|)
+block|{
 name|int
 name|i
 init|=
@@ -1594,15 +1644,15 @@ decl_stmt|;
 specifier|public
 name|Slot
 parameter_list|(
-name|DeclarationExpression
-name|declarationExpression
+name|DeclarationStatement
+name|declarationStatement
 parameter_list|)
 block|{
 name|this
 operator|.
 name|parameter
 operator|=
-name|declarationExpression
+name|declarationStatement
 operator|.
 name|parameter
 expr_stmt|;
@@ -1610,7 +1660,7 @@ name|this
 operator|.
 name|expression
 operator|=
-name|declarationExpression
+name|declarationStatement
 operator|.
 name|initializer
 expr_stmt|;

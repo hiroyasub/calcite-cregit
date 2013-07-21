@@ -763,6 +763,8 @@ block|,
 comment|/**    * Declaration of a variable.    */
 name|Declaration
 block|,
+name|For
+block|,
 name|While
 block|;
 specifier|final

@@ -16,7 +16,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * Used to represent the target of a {@link GotoExpression}.  */
+comment|/**  * Used to represent the target of a {@link GotoStatement}.  */
 end_comment
 
 begin_class

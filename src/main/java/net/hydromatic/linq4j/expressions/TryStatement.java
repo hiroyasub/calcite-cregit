@@ -16,18 +16,18 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * Represents an infinite loop. It can be exited with "break".  */
+comment|/**  * Represents a try/catch/finally/fault block.  */
 end_comment
 
 begin_class
 specifier|public
 class|class
-name|LoopExpression
+name|TryStatement
 extends|extends
 name|Statement
 block|{
 specifier|public
-name|LoopExpression
+name|TryStatement
 parameter_list|(
 name|ExpressionType
 name|nodeType
@@ -46,7 +46,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
-name|LoopExpression
+name|Statement
 name|accept
 parameter_list|(
 name|Visitor
@@ -66,7 +66,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End LoopExpression.java
+comment|// End TryStatement.java
 end_comment
 
 end_unit

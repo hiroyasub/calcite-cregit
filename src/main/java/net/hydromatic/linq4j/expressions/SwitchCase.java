@@ -16,7 +16,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * Represents one case of a {@link SwitchExpression}.  */
+comment|/**  * Represents one case of a {@link SwitchStatement}.  */
 end_comment
 
 begin_class

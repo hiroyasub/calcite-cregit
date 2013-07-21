@@ -16,27 +16,19 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * Represents a label, which can be put in any {@link Expression} context. If it  * is jumped to, it will get the value provided by the corresponding  * {@link GotoExpression}. Otherwise, it receives the value in  * {@link #defaultValue}. If the Type equals {@link Void}, no value should be  * provided.  */
+comment|/**  * Represents a control expression that handles multiple selections by passing  * control to {@link SwitchCase}.  */
 end_comment
 
 begin_class
 specifier|public
 class|class
-name|LabelExpression
+name|SwitchStatement
 extends|extends
 name|Statement
 block|{
 specifier|public
-specifier|final
-name|Expression
-name|defaultValue
-decl_stmt|;
-specifier|public
-name|LabelExpression
+name|SwitchStatement
 parameter_list|(
-name|Expression
-name|defaultValue
-parameter_list|,
 name|ExpressionType
 name|nodeType
 parameter_list|)
@@ -50,17 +42,11 @@ operator|.
 name|TYPE
 argument_list|)
 expr_stmt|;
-name|this
-operator|.
-name|defaultValue
-operator|=
-name|defaultValue
-expr_stmt|;
 block|}
 annotation|@
 name|Override
 specifier|public
-name|LabelExpression
+name|Statement
 name|accept
 parameter_list|(
 name|Visitor
@@ -80,7 +66,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End LabelExpression.java
+comment|// End SwitchStatement.java
 end_comment
 
 end_unit

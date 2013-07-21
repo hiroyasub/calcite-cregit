@@ -717,28 +717,7 @@ block|}
 comment|/**    * Creates a BlockExpression that contains the given statements.    */
 specifier|public
 specifier|static
-name|BlockExpression
-name|block
-parameter_list|(
-name|Statement
-modifier|...
-name|statements
-parameter_list|)
-block|{
-return|return
-name|block
-argument_list|(
-name|toList
-argument_list|(
-name|statements
-argument_list|)
-argument_list|)
-return|;
-block|}
-comment|/**    * Creates a BlockExpression that contains the given statements.    */
-specifier|public
-specifier|static
-name|BlockExpression
+name|BlockStatement
 name|block
 parameter_list|(
 name|Iterable
@@ -762,10 +741,31 @@ name|statements
 argument_list|)
 return|;
 block|}
+comment|/**    * Creates a BlockExpression that contains the given statements,    * using varargs.    */
+specifier|public
+specifier|static
+name|BlockStatement
+name|block
+parameter_list|(
+name|Statement
+modifier|...
+name|statements
+parameter_list|)
+block|{
+return|return
+name|block
+argument_list|(
+name|toList
+argument_list|(
+name|statements
+argument_list|)
+argument_list|)
+return|;
+block|}
 comment|/**    * Creates a BlockExpression that contains the given expressions,    * has no variables and has specific result type.    */
 specifier|public
 specifier|static
-name|BlockExpression
+name|BlockStatement
 name|block
 parameter_list|(
 name|Type
@@ -838,7 +838,7 @@ block|}
 block|}
 return|return
 operator|new
-name|BlockExpression
+name|BlockStatement
 argument_list|(
 name|list
 argument_list|,
@@ -846,10 +846,10 @@ name|type
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates a BlockExpression that contains the given statements    * and has a specific result type.    */
+comment|/**    * Creates a BlockExpression that contains the given statements    * and has a specific result type, using varargs.    */
 specifier|public
 specifier|static
-name|BlockExpression
+name|BlockStatement
 name|block
 parameter_list|(
 name|Type
@@ -875,24 +875,31 @@ block|}
 comment|/**    * Creates a GotoExpression representing a break statement.    */
 specifier|public
 specifier|static
-name|GotoExpression
+name|GotoStatement
 name|break_
 parameter_list|(
 name|LabelTarget
 name|labelTarget
 parameter_list|)
 block|{
-throw|throw
-name|Extensions
+return|return
+operator|new
+name|GotoStatement
+argument_list|(
+name|GotoExpressionKind
 operator|.
-name|todo
-argument_list|()
-throw|;
+name|Break
+argument_list|,
+literal|null
+argument_list|,
+literal|null
+argument_list|)
+return|;
 block|}
 comment|/**    * Creates a GotoExpression representing a break statement. The    * value passed to the label upon jumping can be specified.    */
 specifier|public
 specifier|static
-name|GotoExpression
+name|GotoStatement
 name|break_
 parameter_list|(
 name|LabelTarget
@@ -902,17 +909,24 @@ name|Expression
 name|expression
 parameter_list|)
 block|{
-throw|throw
-name|Extensions
+return|return
+operator|new
+name|GotoStatement
+argument_list|(
+name|GotoExpressionKind
 operator|.
-name|todo
-argument_list|()
-throw|;
+name|Break
+argument_list|,
+literal|null
+argument_list|,
+name|expression
+argument_list|)
+return|;
 block|}
 comment|/**    * Creates a GotoExpression representing a break statement with    * the specified type.    */
 specifier|public
 specifier|static
-name|GotoExpression
+name|GotoStatement
 name|break_
 parameter_list|(
 name|LabelTarget
@@ -932,7 +946,7 @@ block|}
 comment|/**    * Creates a GotoExpression representing a break statement with    * the specified type. The value passed to the label upon jumping    * can be specified.    */
 specifier|public
 specifier|static
-name|GotoExpression
+name|GotoStatement
 name|break_
 parameter_list|(
 name|LabelTarget
@@ -952,7 +966,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/**    * Creates a MethodCallExpression that represents a call to a    * static method.    */
+comment|/**    * Creates a MethodCallExpression that represents a call to a    * static method that has arguments.    */
 specifier|public
 specifier|static
 name|MethodCallExpression
@@ -963,9 +977,11 @@ name|method
 parameter_list|,
 name|Iterable
 argument_list|<
+name|?
+extends|extends
 name|Expression
 argument_list|>
-name|expressions
+name|arguments
 parameter_list|)
 block|{
 return|return
@@ -978,12 +994,12 @@ literal|null
 argument_list|,
 name|toList
 argument_list|(
-name|expressions
+name|arguments
 argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates a MethodCallExpression that represents a call to a    * static method that has arguments.    */
+comment|/**    * Creates a MethodCallExpression that represents a call to a    * static method that has arguments, using varargs.    */
 specifier|public
 specifier|static
 name|MethodCallExpression
@@ -1026,8 +1042,42 @@ name|method
 parameter_list|,
 name|Iterable
 argument_list|<
+name|?
+extends|extends
 name|Expression
 argument_list|>
+name|arguments
+parameter_list|)
+block|{
+return|return
+operator|new
+name|MethodCallExpression
+argument_list|(
+name|method
+argument_list|,
+name|expression
+argument_list|,
+name|toList
+argument_list|(
+name|arguments
+argument_list|)
+argument_list|)
+return|;
+block|}
+comment|/**    * Creates a MethodCallExpression that represents a call to a    * method that takes arguments, using varargs.    */
+specifier|public
+specifier|static
+name|MethodCallExpression
+name|call
+parameter_list|(
+name|Expression
+name|expression
+parameter_list|,
+name|Method
+name|method
+parameter_list|,
+name|Expression
+modifier|...
 name|arguments
 parameter_list|)
 block|{
@@ -1063,6 +1113,8 @@ name|method
 parameter_list|,
 name|Iterable
 argument_list|<
+name|?
+extends|extends
 name|Expression
 argument_list|>
 name|arguments
@@ -1085,12 +1137,15 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates a MethodCallExpression that represents a call to a    * method that takes arguments.    */
+comment|/**    * Creates a MethodCallExpression that represents a call to a    * method that takes arguments, with an explicit return type, with varargs.    *    *<p>The return type must be consistent with the return type of the method,    * but may contain extra information, such as type parameters.</p>    *    *<p>The {@code expression} argument may be null if and only if the method    * is static.</p>    */
 specifier|public
 specifier|static
 name|MethodCallExpression
 name|call
 parameter_list|(
+name|Type
+name|returnType
+parameter_list|,
 name|Expression
 name|expression
 parameter_list|,
@@ -1106,6 +1161,8 @@ return|return
 operator|new
 name|MethodCallExpression
 argument_list|(
+name|returnType
+argument_list|,
 name|method
 argument_list|,
 name|expression
@@ -1124,13 +1181,15 @@ name|MethodCallExpression
 name|call
 parameter_list|(
 name|Expression
-name|expression
+name|target
 parameter_list|,
 name|String
 name|methodName
 parameter_list|,
 name|Iterable
 argument_list|<
+name|?
+extends|extends
 name|Expression
 argument_list|>
 name|arguments
@@ -1141,13 +1200,14 @@ name|method
 decl_stmt|;
 try|try
 block|{
+comment|//noinspection unchecked
 name|method
 operator|=
 name|Types
 operator|.
 name|toClass
 argument_list|(
-name|expression
+name|target
 operator|.
 name|getType
 argument_list|()
@@ -1182,7 +1242,7 @@ name|methodName
 operator|+
 literal|"' in class "
 operator|+
-name|expression
+name|target
 operator|.
 name|getType
 argument_list|()
@@ -1194,7 +1254,7 @@ block|}
 return|return
 name|call
 argument_list|(
-name|expression
+name|target
 argument_list|,
 name|method
 argument_list|,
@@ -1202,7 +1262,7 @@ name|arguments
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates a MethodCallExpression that represents a call to an    * instance method by calling the appropriate factory method.    */
+comment|/**    * Creates a MethodCallExpression that represents a call to an    * instance method by calling the appropriate factory method, using varargs.    */
 specifier|public
 specifier|static
 name|MethodCallExpression
@@ -1226,12 +1286,7 @@ name|target
 argument_list|,
 name|methodName
 argument_list|,
-name|Arrays
-operator|.
-expr|<
-name|Expression
-operator|>
-name|asList
+name|toList
 argument_list|(
 name|arguments
 argument_list|)
@@ -1252,6 +1307,8 @@ name|methodName
 parameter_list|,
 name|Iterable
 argument_list|<
+name|?
+extends|extends
 name|Expression
 argument_list|>
 name|arguments
@@ -1296,7 +1353,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates a MethodCallExpression that represents a call to a    * static method by calling the    * appropriate factory method.    */
+comment|/**    * Creates a MethodCallExpression that represents a call to a    * static method by calling the    * appropriate factory method, using varargs.    */
 specifier|public
 specifier|static
 name|MethodCallExpression
@@ -1320,12 +1377,7 @@ name|type
 argument_list|,
 name|methodName
 argument_list|,
-name|Arrays
-operator|.
-expr|<
-name|Expression
-operator|>
-name|asList
+name|toList
 argument_list|(
 name|arguments
 argument_list|)
@@ -1729,7 +1781,7 @@ name|primitive
 init|=
 name|Primitive
 operator|.
-name|of
+name|ofBoxOr
 argument_list|(
 name|clazz
 argument_list|)
@@ -1837,7 +1889,7 @@ block|}
 comment|/**    * Creates a GotoExpression representing a continue statement.    */
 specifier|public
 specifier|static
-name|GotoExpression
+name|GotoStatement
 name|continue_
 parameter_list|(
 name|LabelTarget
@@ -1854,7 +1906,7 @@ block|}
 comment|/**    * Creates a GotoExpression representing a continue statement    * with the specified type.    */
 specifier|public
 specifier|static
-name|GotoExpression
+name|GotoStatement
 name|continue_
 parameter_list|(
 name|LabelTarget
@@ -2184,6 +2236,8 @@ name|type
 parameter_list|,
 name|Iterable
 argument_list|<
+name|?
+extends|extends
 name|Expression
 argument_list|>
 name|expressions
@@ -2196,30 +2250,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/**    * Creates a DynamicExpression that represents a dynamic    * operation bound by the provided CallSiteBinder.    */
-specifier|public
-specifier|static
-name|DynamicExpression
-name|dynamic
-parameter_list|(
-name|CallSiteBinder
-name|binder
-parameter_list|,
-name|Type
-name|type
-parameter_list|,
-name|Expression
-name|expression
-parameter_list|)
-block|{
-throw|throw
-name|Extensions
-operator|.
-name|todo
-argument_list|()
-throw|;
-block|}
-comment|/**    * Creates a DynamicExpression that represents a dynamic    * operation bound by the provided CallSiteBinder.    */
+comment|/**    * Creates a DynamicExpression that represents a dynamic    * operation bound by the provided CallSiteBinder, using varargs.    */
 specifier|public
 specifier|static
 name|DynamicExpression
@@ -2254,6 +2285,8 @@ name|method
 parameter_list|,
 name|Iterable
 argument_list|<
+name|?
+extends|extends
 name|Expression
 argument_list|>
 name|expressions
@@ -2266,7 +2299,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/**    * Creates an ElementInit, given an array of values as the second    * argument.    */
+comment|/**    * Creates an ElementInit, given an array of values as the second    * argument, using varargs.    */
 specifier|public
 specifier|static
 name|ElementInit
@@ -2657,7 +2690,7 @@ block|}
 comment|/**    * Creates a GotoExpression representing a "go to" statement.    */
 specifier|public
 specifier|static
-name|GotoExpression
+name|GotoStatement
 name|goto_
 parameter_list|(
 name|LabelTarget
@@ -2674,7 +2707,7 @@ block|}
 comment|/**    * Creates a GotoExpression representing a "go to" statement. The    * value passed to the label upon jumping can be specified.    */
 specifier|public
 specifier|static
-name|GotoExpression
+name|GotoStatement
 name|goto_
 parameter_list|(
 name|LabelTarget
@@ -2694,7 +2727,7 @@ block|}
 comment|/**    * Creates a GotoExpression representing a "go to" statement with    * the specified type.    */
 specifier|public
 specifier|static
-name|GotoExpression
+name|GotoStatement
 name|goto_
 parameter_list|(
 name|LabelTarget
@@ -2714,7 +2747,7 @@ block|}
 comment|/**    * Creates a GotoExpression representing a "go to" statement with    * the specified type. The value passed to the label upon jumping    * can be specified.    */
 specifier|public
 specifier|static
-name|GotoExpression
+name|GotoStatement
 name|goto_
 parameter_list|(
 name|LabelTarget
@@ -2953,6 +2986,8 @@ name|expression
 parameter_list|,
 name|Iterable
 argument_list|<
+name|?
+extends|extends
 name|Expression
 argument_list|>
 name|arguments
@@ -2965,7 +3000,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/**    * Creates an InvocationExpression that applies a delegate or    * lambda expression to a list of argument expressions.    */
+comment|/**    * Creates an InvocationExpression that applies a delegate or    * lambda expression to a list of argument expressions, using varargs.    */
 specifier|public
 specifier|static
 name|InvocationExpression
@@ -3077,7 +3112,7 @@ block|}
 comment|/**    * Creates a LabelExpression representing a label without a    * default value.    */
 specifier|public
 specifier|static
-name|LabelExpression
+name|LabelStatement
 name|label
 parameter_list|(
 name|LabelTarget
@@ -3128,7 +3163,7 @@ block|}
 comment|/**    * Creates a LabelExpression representing a label with the given    * default value.    */
 specifier|public
 specifier|static
-name|LabelExpression
+name|LabelStatement
 name|label
 parameter_list|(
 name|LabelTarget
@@ -3217,11 +3252,13 @@ name|F
 argument_list|>
 name|lambda
 parameter_list|(
-name|BlockExpression
+name|BlockStatement
 name|body
 parameter_list|,
 name|Iterable
 argument_list|<
+name|?
+extends|extends
 name|ParameterExpression
 argument_list|>
 name|parameters
@@ -3239,6 +3276,11 @@ argument_list|(
 name|parameters
 argument_list|)
 decl_stmt|;
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unchecked"
+argument_list|)
 name|Class
 argument_list|<
 name|F
@@ -3270,7 +3312,44 @@ name|parameterList
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates a LambdaExpression by first constructing a delegate    * type.    */
+comment|/**    * Creates a LambdaExpression by first constructing a delegate    * type, using varargs.    */
+specifier|public
+specifier|static
+parameter_list|<
+name|F
+extends|extends
+name|Function
+argument_list|<
+name|?
+argument_list|>
+parameter_list|>
+name|FunctionExpression
+argument_list|<
+name|F
+argument_list|>
+name|lambda
+parameter_list|(
+name|BlockStatement
+name|body
+parameter_list|,
+name|ParameterExpression
+modifier|...
+name|parameters
+parameter_list|)
+block|{
+return|return
+name|lambda
+argument_list|(
+name|body
+argument_list|,
+name|toList
+argument_list|(
+name|parameters
+argument_list|)
+argument_list|)
+return|;
+block|}
+comment|/**    * Creates an Expression where the delegate type {@code F} is    * known at compile time.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -3292,6 +3371,8 @@ name|body
 parameter_list|,
 name|Iterable
 argument_list|<
+name|?
+extends|extends
 name|ParameterExpression
 argument_list|>
 name|parameters
@@ -3311,11 +3392,11 @@ name|parameters
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates an Expression<TDelegate> where the delegate type is    * known at compile time.    */
+comment|/**    * Creates an Expression where the delegate type {@code F} is    * known at compile time, using varargs.    */
 specifier|public
 specifier|static
 parameter_list|<
-name|TDelegate
+name|F
 extends|extends
 name|Function
 argument_list|<
@@ -3324,44 +3405,7 @@ argument_list|>
 parameter_list|>
 name|FunctionExpression
 argument_list|<
-name|TDelegate
-argument_list|>
-name|lambda
-parameter_list|(
-name|BlockExpression
-name|body
-parameter_list|,
-name|ParameterExpression
-modifier|...
-name|parameters
-parameter_list|)
-block|{
-return|return
-name|lambda
-argument_list|(
-name|body
-argument_list|,
-name|toList
-argument_list|(
-name|parameters
-argument_list|)
-argument_list|)
-return|;
-block|}
-comment|/**    * Creates an Expression<TDelegate> where the delegate type is    * known at compile time.    */
-specifier|public
-specifier|static
-parameter_list|<
-name|TDelegate
-extends|extends
-name|Function
-argument_list|<
-name|?
-argument_list|>
-parameter_list|>
-name|FunctionExpression
-argument_list|<
-name|TDelegate
+name|F
 argument_list|>
 name|lambda
 parameter_list|(
@@ -3390,7 +3434,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates a LambdaExpression by first constructing a delegate    * type. It can be used when the delegate type is not known at    * compile time.    */
+comment|/**    * Creates a LambdaExpression by first constructing a delegate    * type.    *    *<p>It can be used when the delegate type is not known at compile time.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -3417,11 +3461,13 @@ name|F
 argument_list|>
 name|type
 parameter_list|,
-name|BlockExpression
+name|BlockStatement
 name|body
 parameter_list|,
 name|Iterable
 argument_list|<
+name|?
+extends|extends
 name|ParameterExpression
 argument_list|>
 name|parameters
@@ -3445,7 +3491,56 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates a LambdaExpression by first constructing a delegate    * type. It can be used when the delegate type is not known at    * compile time.    */
+comment|/**    * Creates a LambdaExpression by first constructing a delegate    * type, using varargs.    *    *<p>It can be used when the delegate type is not known at compile time.    */
+specifier|public
+specifier|static
+parameter_list|<
+name|T
+parameter_list|,
+name|F
+extends|extends
+name|Function
+argument_list|<
+name|?
+extends|extends
+name|T
+argument_list|>
+parameter_list|>
+name|FunctionExpression
+argument_list|<
+name|F
+argument_list|>
+name|lambda
+parameter_list|(
+name|Class
+argument_list|<
+name|F
+argument_list|>
+name|type
+parameter_list|,
+name|BlockStatement
+name|body
+parameter_list|,
+name|ParameterExpression
+modifier|...
+name|parameters
+parameter_list|)
+block|{
+return|return
+name|lambda
+argument_list|(
+name|type
+argument_list|,
+name|body
+argument_list|,
+name|toList
+argument_list|(
+name|parameters
+argument_list|)
+argument_list|)
+return|;
+block|}
+comment|/**    * Creates a LambdaExpression by first constructing a delegate    * type.    *    *<p>It can be used when the delegate type is not known at compile time.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -3477,6 +3572,8 @@ name|body
 parameter_list|,
 name|Iterable
 argument_list|<
+name|?
+extends|extends
 name|ParameterExpression
 argument_list|>
 name|parameters
@@ -3501,56 +3598,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates a LambdaExpression by first constructing a delegate    * type. It can be used when the delegate type is not known at    * compile time.    */
-specifier|public
-specifier|static
-parameter_list|<
-name|T
-parameter_list|,
-name|F
-extends|extends
-name|Function
-argument_list|<
-name|?
-extends|extends
-name|T
-argument_list|>
-parameter_list|>
-name|FunctionExpression
-argument_list|<
-name|F
-argument_list|>
-name|lambda
-parameter_list|(
-name|Class
-argument_list|<
-name|F
-argument_list|>
-name|type
-parameter_list|,
-name|BlockExpression
-name|body
-parameter_list|,
-name|ParameterExpression
-modifier|...
-name|parameters
-parameter_list|)
-block|{
-return|return
-name|lambda
-argument_list|(
-name|type
-argument_list|,
-name|body
-argument_list|,
-name|toList
-argument_list|(
-name|parameters
-argument_list|)
-argument_list|)
-return|;
-block|}
-comment|/**    * Creates a LambdaExpression by first constructing a delegate    * type. It can be used when the delegate type is not known at    * compile time.    */
+comment|/**    * Creates a LambdaExpression by first constructing a delegate    * type, using varargs.    *    *<p>It can be used when the delegate type is not known at compile time.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -3590,7 +3638,12 @@ name|lambda
 argument_list|(
 name|type
 argument_list|,
+name|Blocks
+operator|.
+name|toFunctionBlock
+argument_list|(
 name|body
+argument_list|)
 argument_list|,
 name|toList
 argument_list|(
@@ -3598,50 +3651,6 @@ name|parameters
 argument_list|)
 argument_list|)
 return|;
-block|}
-comment|/**    * Creates a LambdaExpression by first constructing a delegate    * type.    */
-specifier|public
-specifier|static
-parameter_list|<
-name|T
-parameter_list|,
-name|F
-extends|extends
-name|Function
-argument_list|<
-name|?
-extends|extends
-name|T
-argument_list|>
-parameter_list|>
-name|FunctionExpression
-argument_list|<
-name|F
-argument_list|>
-name|lambda
-parameter_list|(
-name|Type
-name|type
-parameter_list|,
-name|BlockExpression
-name|body
-parameter_list|,
-name|String
-name|name
-parameter_list|,
-name|Iterable
-argument_list|<
-name|ParameterExpression
-argument_list|>
-name|parameters
-parameter_list|)
-block|{
-throw|throw
-name|Extensions
-operator|.
-name|todo
-argument_list|()
-throw|;
 block|}
 comment|/**    * Creates a BinaryExpression that represents a bitwise    * left-shift operation.    */
 specifier|public
@@ -3882,6 +3891,8 @@ name|member
 parameter_list|,
 name|Iterable
 argument_list|<
+name|?
+extends|extends
 name|ElementInit
 argument_list|>
 name|elementInits
@@ -3894,7 +3905,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/**    * Creates a MemberListBinding where the member is a field or    * property.    */
+comment|/**    * Creates a MemberListBinding where the member is a field or    * property, using varargs.    */
 specifier|public
 specifier|static
 name|MemberListBinding
@@ -3926,6 +3937,8 @@ name|method
 parameter_list|,
 name|Iterable
 argument_list|<
+name|?
+extends|extends
 name|ElementInit
 argument_list|>
 name|elementInits
@@ -3938,7 +3951,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/**    * Creates a MemberListBinding object based on a specified    * property accessor method.    */
+comment|/**    * Creates a MemberListBinding object based on a specified    * property accessor method, using varargs.    */
 specifier|public
 specifier|static
 name|MemberListBinding
@@ -3970,8 +3983,31 @@ name|newExpression
 parameter_list|,
 name|Iterable
 argument_list|<
+name|?
+extends|extends
 name|ElementInit
 argument_list|>
+name|elementInits
+parameter_list|)
+block|{
+throw|throw
+name|Extensions
+operator|.
+name|todo
+argument_list|()
+throw|;
+block|}
+comment|/**    * Creates a ListInitExpression that uses specified ElementInit    * objects to initialize a collection, using varargs.    */
+specifier|public
+specifier|static
+name|ListInitExpression
+name|listInit
+parameter_list|(
+name|NewExpression
+name|newExpression
+parameter_list|,
+name|ElementInit
+modifier|...
 name|elementInits
 parameter_list|)
 block|{
@@ -3993,6 +4029,8 @@ name|newExpression
 parameter_list|,
 name|Iterable
 argument_list|<
+name|?
+extends|extends
 name|Expression
 argument_list|>
 name|arguments
@@ -4005,28 +4043,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/**    * Creates a ListInitExpression that uses specified ElementInit    * objects to initialize a collection.    */
-specifier|public
-specifier|static
-name|ListInitExpression
-name|listInit
-parameter_list|(
-name|NewExpression
-name|newExpression
-parameter_list|,
-name|ElementInit
-modifier|...
-name|elementInits
-parameter_list|)
-block|{
-throw|throw
-name|Extensions
-operator|.
-name|todo
-argument_list|()
-throw|;
-block|}
-comment|/**    * Creates a ListInitExpression that uses a method named "Add" to    * add elements to a collection.    */
+comment|/**    * Creates a ListInitExpression that uses a method named "Add" to    * add elements to a collection, using varargs.    */
 specifier|public
 specifier|static
 name|ListInitExpression
@@ -4061,6 +4078,8 @@ name|method
 parameter_list|,
 name|Iterable
 argument_list|<
+name|?
+extends|extends
 name|Expression
 argument_list|>
 name|arguments
@@ -4073,7 +4092,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/**    * Creates a ListInitExpression that uses a specified method to    * add elements to a collection.    */
+comment|/**    * Creates a ListInitExpression that uses a specified method to    * add elements to a collection, using varargs.    */
 specifier|public
 specifier|static
 name|ListInitExpression
@@ -4100,62 +4119,81 @@ block|}
 comment|/**    * Creates a LoopExpression with the given body.    */
 specifier|public
 specifier|static
-name|LoopExpression
-name|loop
+name|ForStatement
+name|for_
 parameter_list|(
-name|Expression
-name|body
-parameter_list|)
-block|{
-throw|throw
-name|Extensions
-operator|.
-name|todo
-argument_list|()
-throw|;
-block|}
-comment|/**    * Creates a LoopExpression with the given body and break    * target.    */
-specifier|public
-specifier|static
-name|LoopExpression
-name|loop
-parameter_list|(
-name|Expression
-name|body
+name|Iterable
+argument_list|<
+name|?
+extends|extends
+name|DeclarationStatement
+argument_list|>
+name|declarations
 parameter_list|,
-name|LabelTarget
-name|breakTarget
+name|Expression
+name|condition
+parameter_list|,
+name|Expression
+name|post
+parameter_list|,
+name|Statement
+name|body
 parameter_list|)
 block|{
-throw|throw
-name|Extensions
-operator|.
-name|todo
-argument_list|()
-throw|;
+return|return
+operator|new
+name|ForStatement
+argument_list|(
+name|toList
+argument_list|(
+name|declarations
+argument_list|)
+argument_list|,
+name|condition
+argument_list|,
+name|post
+argument_list|,
+name|body
+argument_list|)
+return|;
 block|}
 comment|/**    * Creates a LoopExpression with the given body.    */
 specifier|public
 specifier|static
-name|LoopExpression
-name|loop
+name|ForStatement
+name|for_
 parameter_list|(
+name|DeclarationStatement
+name|declaration
+parameter_list|,
 name|Expression
+name|condition
+parameter_list|,
+name|Expression
+name|post
+parameter_list|,
+name|Statement
 name|body
-parameter_list|,
-name|LabelTarget
-name|breakTarget
-parameter_list|,
-name|LabelTarget
-name|continueTarget
 parameter_list|)
 block|{
-throw|throw
-name|Extensions
+return|return
+operator|new
+name|ForStatement
+argument_list|(
+name|Collections
 operator|.
-name|todo
-argument_list|()
-throw|;
+name|singletonList
+argument_list|(
+name|declaration
+argument_list|)
+argument_list|,
+name|condition
+argument_list|,
+name|post
+argument_list|,
+name|body
+argument_list|)
+return|;
 block|}
 comment|/**    * Creates a BinaryExpression, given the left and right operands,    * by calling an appropriate factory method.    */
 specifier|public
@@ -4753,6 +4791,8 @@ name|binder
 parameter_list|,
 name|Iterable
 argument_list|<
+name|?
+extends|extends
 name|Expression
 argument_list|>
 name|arguments
@@ -4765,30 +4805,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/**    * Creates a DynamicExpression that represents a dynamic    * operation bound by the provided CallSiteBinder and one    * argument.    */
-specifier|public
-specifier|static
-name|DynamicExpression
-name|makeDynamic
-parameter_list|(
-name|Type
-name|type
-parameter_list|,
-name|CallSiteBinder
-name|binder
-parameter_list|,
-name|Expression
-name|argument
-parameter_list|)
-block|{
-throw|throw
-name|Extensions
-operator|.
-name|todo
-argument_list|()
-throw|;
-block|}
-comment|/**    * Creates a DynamicExpression that represents a dynamic    * operation bound by the provided CallSiteBinder.    */
+comment|/**    * Creates a DynamicExpression that represents a dynamic    * operation bound by the provided CallSiteBinder, using varargs.    */
 specifier|public
 specifier|static
 name|DynamicExpression
@@ -4815,7 +4832,7 @@ block|}
 comment|/**    * Creates a GotoExpression representing a jump of the specified    * GotoExpressionKind. The value passed to the label upon jumping    * can also be specified.    */
 specifier|public
 specifier|static
-name|GotoExpression
+name|GotoStatement
 name|makeGoto
 parameter_list|(
 name|GotoExpressionKind
@@ -4829,32 +4846,6 @@ name|value
 parameter_list|,
 name|Type
 name|type
-parameter_list|)
-block|{
-throw|throw
-name|Extensions
-operator|.
-name|todo
-argument_list|()
-throw|;
-block|}
-comment|/**    * Creates an IndexExpression that represents accessing an    * indexed property in an object.    */
-specifier|public
-specifier|static
-name|IndexExpression
-name|makeIndex
-parameter_list|(
-name|Expression
-name|instance
-parameter_list|,
-name|PropertyInfo
-name|indexer
-parameter_list|,
-name|Iterable
-argument_list|<
-name|Expression
-argument_list|>
-name|arguments
 parameter_list|)
 block|{
 throw|throw
@@ -4890,7 +4881,7 @@ block|}
 comment|/**    * Creates a TryExpression representing a try block with the    * specified elements.    */
 specifier|public
 specifier|static
-name|TryExpression
+name|TryStatement
 name|makeTry
 parameter_list|(
 name|Type
@@ -4907,8 +4898,40 @@ name|fault
 parameter_list|,
 name|Iterable
 argument_list|<
+name|?
+extends|extends
 name|CatchBlock
 argument_list|>
+name|handlers
+parameter_list|)
+block|{
+throw|throw
+name|Extensions
+operator|.
+name|todo
+argument_list|()
+throw|;
+block|}
+comment|/**    * Creates a TryExpression representing a try block with the    * specified elements, using varargs.    */
+specifier|public
+specifier|static
+name|TryStatement
+name|makeTry
+parameter_list|(
+name|Type
+name|type
+parameter_list|,
+name|Expression
+name|body
+parameter_list|,
+name|Expression
+name|finally_
+parameter_list|,
+name|Expression
+name|fault
+parameter_list|,
+name|CatchBlock
+modifier|...
 name|handlers
 parameter_list|)
 block|{
@@ -4994,6 +5017,8 @@ name|member
 parameter_list|,
 name|Iterable
 argument_list|<
+name|?
+extends|extends
 name|MemberBinding
 argument_list|>
 name|bindings
@@ -5006,7 +5031,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/**    * Creates a MemberMemberBinding that represents the recursive    * initialization of members of a field or property.    */
+comment|/**    * Creates a MemberMemberBinding that represents the recursive    * initialization of members of a field or property, using varargs.    */
 specifier|public
 specifier|static
 name|MemberMemberBinding
@@ -5043,6 +5068,8 @@ name|method
 parameter_list|,
 name|Iterable
 argument_list|<
+name|?
+extends|extends
 name|MemberBinding
 argument_list|>
 name|bindings
@@ -5055,7 +5082,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/**    * Creates a MemberMemberBinding that represents the recursive    * initialization of members of a member that is accessed by using    * a property accessor method.    */
+comment|/**    * Creates a MemberMemberBinding that represents the recursive    * initialization of members of a member that is accessed by using    * a property accessor method, using varargs.    */
 specifier|public
 specifier|static
 name|MemberMemberBinding
@@ -5092,6 +5119,8 @@ name|newExpression
 parameter_list|,
 name|Iterable
 argument_list|<
+name|?
+extends|extends
 name|MemberBinding
 argument_list|>
 name|bindings
@@ -5104,7 +5133,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/**    * Creates a MemberInitExpression.    */
+comment|/**    * Represents an expression that creates a new object and    * initializes a property of the object, using varargs.    */
 specifier|public
 specifier|static
 name|MemberInitExpression
@@ -5147,11 +5176,13 @@ name|name
 parameter_list|,
 name|Iterable
 argument_list|<
+name|?
+extends|extends
 name|ParameterExpression
 argument_list|>
 name|parameters
 parameter_list|,
-name|BlockExpression
+name|BlockStatement
 name|body
 parameter_list|)
 block|{
@@ -5188,11 +5219,13 @@ name|declaredAgainst
 parameter_list|,
 name|Iterable
 argument_list|<
+name|?
+extends|extends
 name|ParameterExpression
 argument_list|>
 name|parameters
 parameter_list|,
-name|BlockExpression
+name|BlockStatement
 name|body
 parameter_list|)
 block|{
@@ -5936,6 +5969,8 @@ name|type
 parameter_list|,
 name|Iterable
 argument_list|<
+name|?
+extends|extends
 name|Expression
 argument_list|>
 name|arguments
@@ -5944,11 +5979,46 @@ block|{
 comment|// Note that the last argument is not an empty list. That would cause
 comment|// an anonymous inner-class with no members to be generated.
 return|return
-name|new_
+operator|new
+name|NewExpression
 argument_list|(
 name|type
 argument_list|,
+name|toList
+argument_list|(
 name|arguments
+argument_list|)
+argument_list|,
+literal|null
+argument_list|)
+return|;
+block|}
+comment|/**    * Creates a NewExpression that represents calling the constructor of the    * specified type whose parameters are assignable from the specified    * arguments, using varargs.    */
+specifier|public
+specifier|static
+name|NewExpression
+name|new_
+parameter_list|(
+name|Type
+name|type
+parameter_list|,
+name|Expression
+modifier|...
+name|arguments
+parameter_list|)
+block|{
+comment|// Note that the last argument is not an empty list. That would cause
+comment|// an anonymous inner-class with no members to be generated.
+return|return
+operator|new
+name|NewExpression
+argument_list|(
+name|type
+argument_list|,
+name|toList
+argument_list|(
+name|arguments
+argument_list|)
 argument_list|,
 literal|null
 argument_list|)
@@ -5965,14 +6035,58 @@ name|type
 parameter_list|,
 name|Iterable
 argument_list|<
+name|?
+extends|extends
 name|Expression
 argument_list|>
 name|arguments
 parameter_list|,
 name|Iterable
 argument_list|<
+name|?
+extends|extends
 name|MemberDeclaration
 argument_list|>
+name|memberDeclarations
+parameter_list|)
+block|{
+return|return
+operator|new
+name|NewExpression
+argument_list|(
+name|type
+argument_list|,
+name|toList
+argument_list|(
+name|arguments
+argument_list|)
+argument_list|,
+name|toList
+argument_list|(
+name|memberDeclarations
+argument_list|)
+argument_list|)
+return|;
+block|}
+comment|/**    * Creates a NewExpression that represents calling the constructor of the    * specified type whose parameters are assignable from the specified    * arguments, using varargs.    */
+specifier|public
+specifier|static
+name|NewExpression
+name|new_
+parameter_list|(
+name|Type
+name|type
+parameter_list|,
+name|Iterable
+argument_list|<
+name|?
+extends|extends
+name|Expression
+argument_list|>
+name|arguments
+parameter_list|,
+name|MemberDeclaration
+modifier|...
 name|memberDeclarations
 parameter_list|)
 block|{
@@ -6005,6 +6119,8 @@ name|constructor
 parameter_list|,
 name|Iterable
 argument_list|<
+name|?
+extends|extends
 name|Expression
 argument_list|>
 name|expressions
@@ -6013,20 +6129,24 @@ block|{
 comment|// Note that the last argument is not an empty list. That would cause
 comment|// an anonymous inner-class with no members to be generated.
 return|return
-name|new_
+operator|new
+name|NewExpression
 argument_list|(
 name|constructor
 operator|.
 name|getDeclaringClass
 argument_list|()
 argument_list|,
+name|toList
+argument_list|(
 name|expressions
+argument_list|)
 argument_list|,
 literal|null
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates a NewExpression that represents calling the specified    * constructor with the specified arguments.    */
+comment|/**    * Creates a NewExpression that represents calling the specified    * constructor with the specified arguments, using varargs.    */
 specifier|public
 specifier|static
 name|NewExpression
@@ -6041,18 +6161,24 @@ name|expressions
 parameter_list|)
 block|{
 return|return
-name|new_
+operator|new
+name|NewExpression
 argument_list|(
 name|constructor
+operator|.
+name|getDeclaringClass
+argument_list|()
 argument_list|,
 name|toList
 argument_list|(
 name|expressions
 argument_list|)
+argument_list|,
+literal|null
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates a NewExpression that represents calling the specified    * constructor with the specified arguments. The members that    * access the constructor initialized fields are specified.    */
+comment|/**    * Creates a NewExpression that represents calling the specified    * constructor with the specified arguments.    *    *<p>The members that access the constructor initialized fields are    * specified.    */
 specifier|public
 specifier|static
 name|NewExpression
@@ -6063,14 +6189,60 @@ name|constructor
 parameter_list|,
 name|Iterable
 argument_list|<
+name|?
+extends|extends
 name|Expression
 argument_list|>
 name|expressions
 parameter_list|,
 name|Iterable
 argument_list|<
+name|?
+extends|extends
 name|MemberDeclaration
 argument_list|>
+name|memberDeclarations
+parameter_list|)
+block|{
+return|return
+name|new_
+argument_list|(
+name|constructor
+operator|.
+name|getDeclaringClass
+argument_list|()
+argument_list|,
+name|toList
+argument_list|(
+name|expressions
+argument_list|)
+argument_list|,
+name|toList
+argument_list|(
+name|memberDeclarations
+argument_list|)
+argument_list|)
+return|;
+block|}
+comment|/**    * Creates a NewExpression that represents calling the specified    * constructor with the specified arguments, using varargs.    *    *<p>The members that access the constructor initialized fields are    * specified.    */
+specifier|public
+specifier|static
+name|NewExpression
+name|new_
+parameter_list|(
+name|Constructor
+name|constructor
+parameter_list|,
+name|Iterable
+argument_list|<
+name|?
+extends|extends
+name|Expression
+argument_list|>
+name|expressions
+parameter_list|,
+name|MemberDeclaration
+modifier|...
 name|memberDeclarations
 parameter_list|)
 block|{
@@ -6105,6 +6277,8 @@ name|type
 parameter_list|,
 name|Iterable
 argument_list|<
+name|?
+extends|extends
 name|Expression
 argument_list|>
 name|expressions
@@ -6117,7 +6291,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/**    * Creates a NewArrayExpression that represents creating an array    * that has a specified rank.    */
+comment|/**    * Creates a NewArrayExpression that represents creating an array    * that has a specified rank, using varargs.    */
 specifier|public
 specifier|static
 name|NewArrayExpression
@@ -6154,6 +6328,8 @@ name|type
 parameter_list|,
 name|Iterable
 argument_list|<
+name|?
+extends|extends
 name|Expression
 argument_list|>
 name|expressions
@@ -6172,7 +6348,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates a NewArrayExpression that represents creating a    * one-dimensional array and initializing it from a list of    * elements.    */
+comment|/**    * Creates a NewArrayExpression that represents creating a    * one-dimensional array and initializing it from a list of    * elements, using varargs.    *    * @param type Element type of the array.    */
 specifier|public
 specifier|static
 name|NewArrayExpression
@@ -7045,6 +7221,8 @@ name|property
 parameter_list|,
 name|Iterable
 argument_list|<
+name|?
+extends|extends
 name|Expression
 argument_list|>
 name|arguments
@@ -7057,7 +7235,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/**    * Creates an IndexExpression representing the access to an    * indexed property.    */
+comment|/**    * Creates an IndexExpression representing the access to an    * indexed property, using varargs.    */
 comment|// REVIEW: No equivalent to properties in Java.
 specifier|public
 specifier|static
@@ -7309,7 +7487,7 @@ block|}
 comment|/**    * Creates a GotoExpression representing a return statement.    */
 specifier|public
 specifier|static
-name|GotoExpression
+name|GotoStatement
 name|return_
 parameter_list|(
 name|LabelTarget
@@ -7331,7 +7509,7 @@ block|}
 comment|/**    * Creates a GotoExpression representing a return statement. The    * value passed to the label upon jumping can be specified.    */
 specifier|public
 specifier|static
-name|GotoExpression
+name|GotoStatement
 name|return_
 parameter_list|(
 name|LabelTarget
@@ -7356,7 +7534,7 @@ return|;
 block|}
 specifier|public
 specifier|static
-name|GotoExpression
+name|GotoStatement
 name|makeGoto
 parameter_list|(
 name|GotoExpressionKind
@@ -7371,7 +7549,7 @@ parameter_list|)
 block|{
 return|return
 operator|new
-name|GotoExpression
+name|GotoStatement
 argument_list|(
 name|kind
 argument_list|,
@@ -7384,7 +7562,7 @@ block|}
 comment|/**    * Creates a GotoExpression representing a return statement with    * the specified type.    */
 specifier|public
 specifier|static
-name|GotoExpression
+name|GotoStatement
 name|return_
 parameter_list|(
 name|LabelTarget
@@ -7404,7 +7582,7 @@ block|}
 comment|/**    * Creates a GotoExpression representing a return statement with    * the specified type. The value passed to the label upon jumping    * can be specified.    */
 specifier|public
 specifier|static
-name|GotoExpression
+name|GotoStatement
 name|return_
 parameter_list|(
 name|LabelTarget
@@ -7588,6 +7766,8 @@ name|runtimeVariables
 parameter_list|(
 name|Iterable
 argument_list|<
+name|?
+extends|extends
 name|ParameterExpression
 argument_list|>
 name|expressions
@@ -7600,7 +7780,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/**    * Creates an instance of RuntimeVariablesExpression.    */
+comment|/**    * Creates an instance of RuntimeVariablesExpression, using varargs.    */
 specifier|public
 specifier|static
 name|RuntimeVariablesExpression
@@ -7947,7 +8127,7 @@ block|}
 comment|/**    * Creates a SwitchExpression that represents a switch statement    * without a default case.    */
 specifier|public
 specifier|static
-name|SwitchExpression
+name|SwitchStatement
 name|switch_
 parameter_list|(
 name|Expression
@@ -7977,7 +8157,7 @@ block|}
 comment|/**    * Creates a SwitchExpression that represents a switch statement    * that has a default case.    */
 specifier|public
 specifier|static
-name|SwitchExpression
+name|SwitchStatement
 name|switch_
 parameter_list|(
 name|Expression
@@ -8010,7 +8190,7 @@ block|}
 comment|/**    * Creates a SwitchExpression that represents a switch statement    * that has a default case.    */
 specifier|public
 specifier|static
-name|SwitchExpression
+name|SwitchStatement
 name|switch_
 parameter_list|(
 name|Expression
@@ -8024,6 +8204,8 @@ name|method
 parameter_list|,
 name|Iterable
 argument_list|<
+name|?
+extends|extends
 name|SwitchCase
 argument_list|>
 name|cases
@@ -8036,10 +8218,10 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/**    * Creates a SwitchExpression that represents a switch statement    * that has a default case.    */
+comment|/**    * Creates a SwitchExpression that represents a switch statement    * that has a default case, using varargs.    */
 specifier|public
 specifier|static
-name|SwitchExpression
+name|SwitchStatement
 name|switch_
 parameter_list|(
 name|Expression
@@ -8075,7 +8257,7 @@ block|}
 comment|/**    * Creates a SwitchExpression that represents a switch statement    * that has a default case.    */
 specifier|public
 specifier|static
-name|SwitchExpression
+name|SwitchStatement
 name|switch_
 parameter_list|(
 name|Type
@@ -8092,6 +8274,8 @@ name|method
 parameter_list|,
 name|Iterable
 argument_list|<
+name|?
+extends|extends
 name|SwitchCase
 argument_list|>
 name|cases
@@ -8104,10 +8288,10 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/**    * Creates a SwitchExpression that represents a switch statement    * that has a default case..    */
+comment|/**    * Creates a SwitchExpression that represents a switch statement    * that has a default case, using varargs.    */
 specifier|public
 specifier|static
-name|SwitchExpression
+name|SwitchStatement
 name|switch_
 parameter_list|(
 name|Type
@@ -8145,7 +8329,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates a SwitchCase object to be used in a SwitchExpression    * object.    */
+comment|/**    * Creates a SwitchCase for use in a SwitchExpression.    */
 specifier|public
 specifier|static
 name|SwitchCase
@@ -8156,6 +8340,8 @@ name|expression
 parameter_list|,
 name|Iterable
 argument_list|<
+name|?
+extends|extends
 name|Expression
 argument_list|>
 name|body
@@ -8168,7 +8354,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/**    * Creates a SwitchCase for use in a SwitchExpression.    */
+comment|/**    * Creates a SwitchCase for use in a SwitchExpression, with varargs.    */
 specifier|public
 specifier|static
 name|SwitchCase
@@ -8320,7 +8506,7 @@ block|}
 comment|/**    * Creates a TryExpression representing a try block with any    * number of catch statements and neither a fault nor finally    * block.    */
 specifier|public
 specifier|static
-name|TryExpression
+name|TryStatement
 name|tryCatch
 parameter_list|(
 name|Expression
@@ -8341,7 +8527,7 @@ block|}
 comment|/**    * Creates a TryExpression representing a try block with any    * number of catch statements and a finally block.    */
 specifier|public
 specifier|static
-name|TryExpression
+name|TryStatement
 name|tryCatchFinally
 parameter_list|(
 name|Expression
@@ -8362,7 +8548,7 @@ block|}
 comment|/**    * Creates a TryExpression representing a try block with a fault    * block and no catch statements.    */
 specifier|public
 specifier|static
-name|TryExpression
+name|TryStatement
 name|tryFault
 parameter_list|(
 name|Expression
@@ -8382,7 +8568,7 @@ block|}
 comment|/**    * Creates a TryExpression representing a try block with a    * finally block and no catch statements.    */
 specifier|public
 specifier|static
-name|TryExpression
+name|TryStatement
 name|tryFinally
 parameter_list|(
 name|Expression
@@ -8651,7 +8837,7 @@ block|}
 comment|/**    * Creates a WhileExpression representing a while loop.    */
 specifier|public
 specifier|static
-name|WhileExpression
+name|WhileStatement
 name|while_
 parameter_list|(
 name|Expression
@@ -8663,7 +8849,7 @@ parameter_list|)
 block|{
 return|return
 operator|new
-name|WhileExpression
+name|WhileStatement
 argument_list|(
 name|condition
 argument_list|,
@@ -8674,7 +8860,7 @@ block|}
 comment|/**    * Creates a statement that declares a variable.    */
 specifier|public
 specifier|static
-name|DeclarationExpression
+name|DeclarationStatement
 name|declare
 parameter_list|(
 name|int
@@ -8689,7 +8875,7 @@ parameter_list|)
 block|{
 return|return
 operator|new
-name|DeclarationExpression
+name|DeclarationStatement
 argument_list|(
 name|modifiers
 argument_list|,
@@ -8699,10 +8885,10 @@ name|initializer
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates an expression that declares and initializes a variable. No    * type is required; it is assumed that the variable is the same type as    * the initializer. You can retrieve the {@link ParameterExpression} from    * the {@link DeclarationExpression#parameter} field of the result.    */
+comment|/**    * Creates an expression that declares and initializes a variable. No    * type is required; it is assumed that the variable is the same type as    * the initializer. You can retrieve the {@link ParameterExpression} from    * the {@link DeclarationStatement#parameter} field of the result.    */
 specifier|public
 specifier|static
-name|DeclarationExpression
+name|DeclarationStatement
 name|declare
 parameter_list|(
 name|int
@@ -8746,7 +8932,7 @@ parameter_list|)
 block|{
 return|return
 operator|new
-name|GotoExpression
+name|GotoStatement
 argument_list|(
 name|GotoExpressionKind
 operator|.
@@ -9019,7 +9205,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates a fluent list with given elements.    */
+comment|/**    * Creates a fluent list with elements from the given collection.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -9628,6 +9814,79 @@ expr_stmt|;
 block|}
 return|return
 name|parameterExpressions1
+return|;
+block|}
+specifier|static
+name|List
+argument_list|<
+name|DeclarationStatement
+argument_list|>
+name|acceptDeclarations
+parameter_list|(
+name|List
+argument_list|<
+name|DeclarationStatement
+argument_list|>
+name|declarations
+parameter_list|,
+name|Visitor
+name|visitor
+parameter_list|)
+block|{
+if|if
+condition|(
+name|declarations
+operator|==
+literal|null
+operator|||
+name|declarations
+operator|.
+name|isEmpty
+argument_list|()
+condition|)
+block|{
+return|return
+name|declarations
+return|;
+comment|// short cut
+block|}
+specifier|final
+name|List
+argument_list|<
+name|DeclarationStatement
+argument_list|>
+name|declarations1
+init|=
+operator|new
+name|ArrayList
+argument_list|<
+name|DeclarationStatement
+argument_list|>
+argument_list|()
+decl_stmt|;
+for|for
+control|(
+name|DeclarationStatement
+name|declaration
+range|:
+name|declarations
+control|)
+block|{
+name|declarations1
+operator|.
+name|add
+argument_list|(
+name|declaration
+operator|.
+name|accept
+argument_list|(
+name|visitor
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+return|return
+name|declarations1
 return|;
 block|}
 specifier|static
