@@ -568,7 +568,7 @@ name|traitSetOf
 argument_list|(
 name|EnumerableConvention
 operator|.
-name|ARRAY
+name|INSTANCE
 argument_list|)
 argument_list|,
 name|relOptTable

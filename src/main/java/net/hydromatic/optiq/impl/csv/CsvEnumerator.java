@@ -548,6 +548,36 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+specifier|public
+name|void
+name|close
+parameter_list|()
+block|{
+try|try
+block|{
+name|reader
+operator|.
+name|close
+argument_list|()
+expr_stmt|;
+block|}
+catch|catch
+parameter_list|(
+name|IOException
+name|e
+parameter_list|)
+block|{
+throw|throw
+operator|new
+name|RuntimeException
+argument_list|(
+literal|"Error closing CSV reader"
+argument_list|,
+name|e
+argument_list|)
+throw|;
+block|}
+block|}
 comment|/** Returns an array of integers {0, ..., n - 1}. */
 specifier|static
 name|int

@@ -31,11 +31,31 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
 name|junit
 operator|.
-name|framework
+name|Assert
+import|;
+end_import
+
+begin_import
+import|import
+name|org
 operator|.
-name|TestCase
+name|junit
+operator|.
+name|Ignore
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|Test
 import|;
 end_import
 
@@ -77,8 +97,6 @@ begin_class
 specifier|public
 class|class
 name|CsvTest
-extends|extends
-name|TestCase
 block|{
 specifier|private
 name|void
@@ -141,9 +159,13 @@ block|}
 block|}
 block|}
 comment|/**    * Tests the vanity driver.    */
+annotation|@
+name|Ignore
+annotation|@
+name|Test
 specifier|public
 name|void
-name|_testVanityDriver
+name|testVanityDriver
 parameter_list|()
 throws|throws
 name|SQLException
@@ -174,9 +196,13 @@ argument_list|()
 expr_stmt|;
 block|}
 comment|/**    * Tests the vanity driver with properties in the URL.    */
+annotation|@
+name|Ignore
+annotation|@
+name|Test
 specifier|public
 name|void
-name|_testVanityDriverArgsInUrl
+name|testVanityDriverArgsInUrl
 parameter_list|()
 throws|throws
 name|SQLException
@@ -200,6 +226,8 @@ argument_list|()
 expr_stmt|;
 block|}
 comment|/**    * Reads from a table.    */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testSelect
@@ -215,6 +243,8 @@ literal|"select * from EMPS"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testCustomTable
@@ -230,6 +260,8 @@ literal|"select * from CUSTOM_TABLE.EMPS"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testPushDownProjectDumb
@@ -244,14 +276,14 @@ literal|"model"
 argument_list|,
 literal|"explain plan for select * from EMPS"
 argument_list|,
-literal|"PLAN=EnumerableCalcRel(expr#0..9=[{inputs}], proj#0..9=[{exprs}])\n"
-operator|+
-literal|"  EnumerableTableAccessRel(table=[[SALES, EMPS]])\n"
+literal|"PLAN=EnumerableTableAccessRel(table=[[SALES, EMPS]])\n"
 operator|+
 literal|"\n"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testPushDownProject
@@ -271,6 +303,8 @@ literal|"\n"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testPushDownProject2
@@ -430,6 +464,8 @@ argument_list|(
 name|resultSet
 argument_list|)
 decl_stmt|;
+name|Assert
+operator|.
 name|assertEquals
 argument_list|(
 name|expected
