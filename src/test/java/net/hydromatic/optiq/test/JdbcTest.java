@@ -2472,6 +2472,8 @@ decl_stmt|;
 comment|/** Test case for    *<a href="https://github.com/julianhyde/optiq/issues/35">issue #35</a>. */
 annotation|@
 name|Ignore
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testJoinJoin
@@ -3565,8 +3567,6 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/** Tests windowed aggregation. */
-annotation|@
-name|Ignore
 annotation|@
 name|Test
 specifier|public
@@ -5354,7 +5354,7 @@ name|name
 decl_stmt|;
 specifier|public
 specifier|final
-name|double
+name|float
 name|salary
 decl_stmt|;
 specifier|public
@@ -5362,7 +5362,6 @@ specifier|final
 name|Integer
 name|commission
 decl_stmt|;
-comment|/** @see Bug#TodoFixed change salary to "float" when have linq4j-0.1.8 */
 specifier|public
 name|Employee
 parameter_list|(
@@ -5375,7 +5374,7 @@ parameter_list|,
 name|String
 name|name
 parameter_list|,
-name|double
+name|float
 name|salary
 parameter_list|,
 name|Integer
