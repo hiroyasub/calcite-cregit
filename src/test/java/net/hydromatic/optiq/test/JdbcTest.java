@@ -3633,6 +3633,140 @@ literal|"S=14300.0; FIVE=5; M=7000.0; C=2; deptno=10; empid=150\n"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Tests windowed aggregation with multiple windows.    * One window straddles the current row.    * Some windows have no PARTITION BY clause. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWinAgg2
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|assertThat
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select sum(\"salary\" + \"empid\") over w as s,\n"
+operator|+
+literal|" 5 as five,\n"
+operator|+
+literal|" min(\"salary\") over w as m,\n"
+operator|+
+literal|" count(*) over w as c,\n"
+operator|+
+literal|" count(*) over w2 as c2,\n"
+operator|+
+literal|" count(*) over w11 as c11,\n"
+operator|+
+literal|" count(*) over w11dept as c11dept,\n"
+operator|+
+literal|" \"deptno\",\n"
+operator|+
+literal|" \"empid\"\n"
+operator|+
+literal|"from \"hr\".\"emps\"\n"
+operator|+
+literal|"window w as (order by \"empid\" rows 1 preceding),\n"
+operator|+
+literal|" w2 as (order by \"empid\" rows 2 preceding),\n"
+operator|+
+literal|" w11 as (order by \"empid\" rows between 1 preceding and 1 following),\n"
+operator|+
+literal|" w11dept as (partition by \"deptno\" order by \"empid\" rows between 1 preceding and 1 following)"
+argument_list|)
+operator|.
+name|typeIs
+argument_list|(
+literal|"[S DOUBLE, FIVE INTEGER NOT NULL, M DOUBLE, C BIGINT, C2 BIGINT, C11 BIGINT, C11DEPT BIGINT, deptno INTEGER NOT NULL, empid INTEGER NOT NULL]"
+argument_list|)
+comment|// Check that optimizes for window whose PARTITION KEY is empty
+operator|.
+name|planContains
+argument_list|(
+literal|"tempList.size()"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"S=16400.0; FIVE=5; M=8000.0; C=2; C2=3; C11=2; C11DEPT=1; deptno=20; empid=200\n"
+operator|+
+literal|"S=10100.0; FIVE=5; M=10000.0; C=1; C2=1; C11=2; C11DEPT=2; deptno=10; empid=100\n"
+operator|+
+literal|"S=23220.0; FIVE=5; M=11500.0; C=2; C2=2; C11=3; C11DEPT=3; deptno=10; empid=110\n"
+operator|+
+literal|"S=14300.0; FIVE=5; M=7000.0; C=2; C2=3; C11=3; C11DEPT=2; deptno=10; empid=150\n"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests for RANK and ORDER BY ... DESCENDING, NULLS FIRST, NULLS LAST. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWinAggRank
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|assertThat
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select  \"deptno\",\n"
+operator|+
+literal|" \"empid\",\n"
+operator|+
+literal|" \"commission\",\n"
+operator|+
+literal|" rank() over (partition by \"deptno\" order by \"commission\" desc nulls first) as rcnf,\n"
+operator|+
+literal|" rank() over (partition by \"deptno\" order by \"commission\" desc nulls last) as rcnl,\n"
+operator|+
+literal|" rank() over (partition by \"deptno\" order by \"empid\") as r,\n"
+operator|+
+literal|" rank() over (partition by \"deptno\" order by \"empid\" desc) as rd\n"
+operator|+
+literal|"from \"hr\".\"emps\""
+argument_list|)
+operator|.
+name|typeIs
+argument_list|(
+literal|"[deptno INTEGER NOT NULL, empid INTEGER NOT NULL, commission INTEGER, RCNF INTEGER, RCNL INTEGER, R INTEGER, RD INTEGER]"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"deptno=20; empid=200; commission=500; RCNF=1; RCNL=1; R=1; RD=1\n"
+operator|+
+literal|"deptno=10; empid=150; commission=null; RCNF=3; RCNL=3; R=3; RD=1\n"
+operator|+
+literal|"deptno=10; empid=110; commission=250; RCNF=2; RCNL=2; R=2; RD=2\n"
+operator|+
+literal|"deptno=10; empid=100; commission=1000; RCNF=1; RCNL=1; R=1; RD=3\n"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Tests WHERE comparing a nullable integer with an integer literal. */
 annotation|@
 name|Test

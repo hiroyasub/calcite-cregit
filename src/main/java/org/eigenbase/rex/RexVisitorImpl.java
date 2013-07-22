@@ -135,7 +135,7 @@ argument_list|()
 decl_stmt|;
 for|for
 control|(
-name|RexNode
+name|RexFieldCollation
 name|orderKey
 range|:
 name|window
@@ -144,6 +144,8 @@ name|orderKeys
 control|)
 block|{
 name|orderKey
+operator|.
+name|left
 operator|.
 name|accept
 argument_list|(

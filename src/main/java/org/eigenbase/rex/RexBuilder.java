@@ -911,9 +911,9 @@ name|RexNode
 argument_list|>
 name|partitionKeys
 parameter_list|,
-name|List
+name|ImmutableList
 argument_list|<
-name|RexNode
+name|RexFieldCollation
 argument_list|>
 name|orderKeys
 parameter_list|,
@@ -1172,7 +1172,7 @@ return|return
 name|result
 return|;
 block|}
-comment|/**      * Creates a window specification.      *      * @param partitionKeys Partition keys      * @param orderKeys Order keys      * @param lowerBound Lower bound      * @param upperBound Upper bound      * @param isRows Whether physical. True if row-based, false if range-based      * @return window specification      */
+comment|/**      * Creates a window specification.      *      *      * @param partitionKeys Partition keys      * @param orderKeys Order keys      * @param lowerBound Lower bound      * @param upperBound Upper bound      * @param isRows Whether physical. True if row-based, false if range-based      * @return window specification      */
 specifier|public
 name|RexWindow
 name|makeWindow
@@ -1183,9 +1183,9 @@ name|RexNode
 argument_list|>
 name|partitionKeys
 parameter_list|,
-name|List
+name|ImmutableList
 argument_list|<
-name|RexNode
+name|RexFieldCollation
 argument_list|>
 name|orderKeys
 parameter_list|,
