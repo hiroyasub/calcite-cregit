@@ -1229,8 +1229,6 @@ argument_list|)
 condition|?
 operator|(
 name|nullsFirst
-operator|!=
-name|descending
 condition|?
 literal|"compareNullsFirst"
 else|:

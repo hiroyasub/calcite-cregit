@@ -3759,11 +3759,11 @@ name|returns
 argument_list|(
 literal|"deptno=20; empid=200; commission=500; RCNF=1; RCNL=1; R=1; RD=1\n"
 operator|+
-literal|"deptno=10; empid=150; commission=null; RCNF=3; RCNL=3; R=3; RD=1\n"
+literal|"deptno=10; empid=150; commission=null; RCNF=1; RCNL=3; R=3; RD=1\n"
 operator|+
-literal|"deptno=10; empid=110; commission=250; RCNF=2; RCNL=2; R=2; RD=2\n"
+literal|"deptno=10; empid=110; commission=250; RCNF=3; RCNL=2; R=2; RD=2\n"
 operator|+
-literal|"deptno=10; empid=100; commission=1000; RCNF=1; RCNL=1; R=1; RD=3\n"
+literal|"deptno=10; empid=100; commission=1000; RCNF=2; RCNL=1; R=1; RD=3\n"
 argument_list|)
 expr_stmt|;
 block|}
