@@ -3607,12 +3607,12 @@ argument_list|)
 operator|.
 name|typeIs
 argument_list|(
-literal|"[S DOUBLE, FIVE INTEGER NOT NULL, M DOUBLE, C BIGINT, deptno INTEGER NOT NULL, empid INTEGER NOT NULL]"
+literal|"[S REAL, FIVE INTEGER NOT NULL, M REAL, C BIGINT, deptno INTEGER NOT NULL, empid INTEGER NOT NULL]"
 argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"EnumerableCalcRel(expr#0..7=[{inputs}], expr#8=[0], expr#9=[>($t4, $t8)], expr#10=[null], expr#11=[CASE($t9, $t5, $t10)], expr#12=[CAST($t11):JavaType(class java.lang.Double)], expr#13=[5], expr#14=[CAST($t6):JavaType(class java.lang.Double)], expr#15=[CAST($t7):BIGINT], S=[$t12], FIVE=[$t13], M=[$t14], C=[$t15], deptno=[$t1], empid=[$t0])\n"
+literal|"EnumerableCalcRel(expr#0..7=[{inputs}], expr#8=[0], expr#9=[>($t4, $t8)], expr#10=[null], expr#11=[CASE($t9, $t5, $t10)], expr#12=[CAST($t11):JavaType(class java.lang.Float)], expr#13=[5], expr#14=[CAST($t6):JavaType(class java.lang.Float)], expr#15=[CAST($t7):BIGINT], S=[$t12], FIVE=[$t13], M=[$t14], C=[$t15], deptno=[$t1], empid=[$t0])\n"
 operator|+
 literal|"  EnumerableWindowRel(window#0=[window(partition {1} order by [0 Ascending] rows between 1 PRECEDING and CURRENT ROW aggs [COUNT($3), $SUM0($3), MIN($2), COUNT()])])\n"
 operator|+
@@ -3688,7 +3688,7 @@ argument_list|)
 operator|.
 name|typeIs
 argument_list|(
-literal|"[S DOUBLE, FIVE INTEGER NOT NULL, M DOUBLE, C BIGINT, C2 BIGINT, C11 BIGINT, C11DEPT BIGINT, deptno INTEGER NOT NULL, empid INTEGER NOT NULL]"
+literal|"[S REAL, FIVE INTEGER NOT NULL, M REAL, C BIGINT, C2 BIGINT, C11 BIGINT, C11DEPT BIGINT, deptno INTEGER NOT NULL, empid INTEGER NOT NULL]"
 argument_list|)
 comment|// Check that optimizes for window whose PARTITION KEY is empty
 operator|.
@@ -5352,7 +5352,7 @@ name|name
 decl_stmt|;
 specifier|public
 specifier|final
-name|double
+name|float
 name|salary
 decl_stmt|;
 specifier|public
@@ -5360,7 +5360,6 @@ specifier|final
 name|Integer
 name|commission
 decl_stmt|;
-comment|/** @see Bug#TodoFixed change salary to "float" when have linq4j-0.1.8 */
 specifier|public
 name|Employee
 parameter_list|(
@@ -5373,7 +5372,7 @@ parameter_list|,
 name|String
 name|name
 parameter_list|,
-name|double
+name|float
 name|salary
 parameter_list|,
 name|Integer
