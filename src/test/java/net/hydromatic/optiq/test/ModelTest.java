@@ -41,30 +41,6 @@ end_import
 
 begin_import
 import|import
-name|org
-operator|.
-name|junit
-operator|.
-name|runner
-operator|.
-name|RunWith
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|junit
-operator|.
-name|runners
-operator|.
-name|JUnit4
-import|;
-end_import
-
-begin_import
-import|import
 name|com
 operator|.
 name|fasterxml
@@ -691,6 +667,99 @@ name|get
 argument_list|(
 literal|1
 argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests that an immutable schema in a model cannot contain a    * materialization. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testModelImmutableSchemaCannotContainMaterialization
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|OptiqAssert
+operator|.
+name|AssertThat
+name|that
+init|=
+name|OptiqAssert
+operator|.
+name|assertThat
+argument_list|()
+operator|.
+name|withModel
+argument_list|(
+literal|"{\n"
+operator|+
+literal|"  version: '1.0',\n"
+operator|+
+literal|"  defaultSchema: 'adhoc',\n"
+operator|+
+literal|"  schemas: [\n"
+operator|+
+literal|"    {\n"
+operator|+
+literal|"      name: 'empty'\n"
+operator|+
+literal|"    },\n"
+operator|+
+literal|"    {\n"
+operator|+
+literal|"      name: 'adhoc',\n"
+operator|+
+literal|"      type: 'custom',\n"
+operator|+
+literal|"      factory: '"
+operator|+
+name|JdbcTest
+operator|.
+name|MySchemaFactory
+operator|.
+name|class
+operator|.
+name|getName
+argument_list|()
+operator|+
+literal|"',\n"
+operator|+
+literal|"      operand: {\n"
+operator|+
+literal|"           'tableName': 'ELVIS',\n"
+operator|+
+literal|"           'mutable': false\n"
+operator|+
+literal|"      },\n"
+operator|+
+literal|"      materializations: [\n"
+operator|+
+literal|"        {\n"
+operator|+
+literal|"          table: 'v',\n"
+operator|+
+literal|"          sql: 'values (1)'\n"
+operator|+
+literal|"        }\n"
+operator|+
+literal|"      ]\n"
+operator|+
+literal|"    }\n"
+operator|+
+literal|"  ]\n"
+operator|+
+literal|"}"
+argument_list|)
+decl_stmt|;
+name|that
+operator|.
+name|connectThrows
+argument_list|(
+literal|"Cannot define materialization; parent schema 'adhoc' is not a "
+operator|+
+literal|"SemiMutableSchema"
 argument_list|)
 expr_stmt|;
 block|}

@@ -205,6 +205,17 @@ name|RelOptPlanner
 name|chooseDelegate
 parameter_list|()
 function_decl|;
+comment|/**      * Defines a pair of relational expressions that are equivalent.      *      *<p>Typically {@code tableRel} is a {@link TableAccessRel} representing a      * table that is a materialized view and {@code queryRel} is the SQL      * expression that populates that view. The intention is that      * {@code tableRel} is cheaper to evaluate and therefore if the query being      * optimized uses (or can be rewritten to use) {@code queryRel} as a      * sub-expression then it can be optimized by using {@code tableRel}      * instead.</p>      *      * @param tableRel Relational expression representing the table holding      * the materialization      * @param queryRel Relational expression representing the query      */
+name|void
+name|addMaterialization
+parameter_list|(
+name|RelNode
+name|tableRel
+parameter_list|,
+name|RelNode
+name|queryRel
+parameter_list|)
+function_decl|;
 comment|/**      * Finds the most efficient expression to implement this query.      *      * @throws CannotPlanException if cannot find a plan      */
 specifier|public
 name|RelNode

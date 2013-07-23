@@ -140,6 +140,19 @@ argument_list|(
 name|opBinding
 argument_list|)
 decl_stmt|;
+if|if
+condition|(
+name|ret
+operator|==
+literal|null
+condition|)
+block|{
+comment|// inferReturnType may return null; transformType does not accept or
+comment|// return null types
+return|return
+literal|null
+return|;
+block|}
 for|for
 control|(
 name|SqlTypeTransform

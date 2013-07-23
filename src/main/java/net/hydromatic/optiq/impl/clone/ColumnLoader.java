@@ -25,6 +25,18 @@ name|hydromatic
 operator|.
 name|linq4j
 operator|.
+name|Enumerable
+import|;
+end_import
+
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|linq4j
+operator|.
 name|Ord
 import|;
 end_import
@@ -68,18 +80,6 @@ operator|.
 name|function
 operator|.
 name|Functions
-import|;
-end_import
-
-begin_import
-import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|optiq
-operator|.
-name|Table
 import|;
 end_import
 
@@ -455,7 +455,7 @@ parameter_list|(
 name|JavaTypeFactory
 name|typeFactory
 parameter_list|,
-name|Table
+name|Enumerable
 argument_list|<
 name|T
 argument_list|>

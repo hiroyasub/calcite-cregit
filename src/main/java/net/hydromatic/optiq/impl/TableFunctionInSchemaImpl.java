@@ -10,6 +10,8 @@ operator|.
 name|hydromatic
 operator|.
 name|optiq
+operator|.
+name|impl
 package|;
 end_package
 
@@ -19,68 +21,85 @@ name|net
 operator|.
 name|hydromatic
 operator|.
-name|linq4j
+name|optiq
 operator|.
-name|expressions
-operator|.
-name|Expression
+name|*
 import|;
 end_import
 
 begin_comment
-comment|/**  * Schema that can be modified.  */
+comment|/**  * Implementation of {@link net.hydromatic.optiq.Schema.TableFunctionInSchema}  * where all properties are held in fields.  */
 end_comment
 
-begin_interface
+begin_class
 specifier|public
-interface|interface
-name|MutableSchema
+class|class
+name|TableFunctionInSchemaImpl
 extends|extends
 name|Schema
-block|{
-comment|/** Defines a table-function in this schema. There can be multiple    * table-functions with the same name; this method will not remove a    * table-function with the same name, just define another overloading. */
-name|void
-name|addTableFunction
-parameter_list|(
+operator|.
 name|TableFunctionInSchema
-name|tableFunctionInSchema
-parameter_list|)
-function_decl|;
-comment|/** Defines a table within this schema. */
-name|void
-name|addTable
+block|{
+specifier|private
+specifier|final
+name|TableFunction
+name|tableFunction
+decl_stmt|;
+comment|/** Creates a TableFunctionInSchemaImpl. */
+specifier|public
+name|TableFunctionInSchemaImpl
 parameter_list|(
-name|TableInSchema
-name|table
-parameter_list|)
-function_decl|;
-comment|/** Adds a child schema of this schema. */
-name|void
-name|addSchema
-parameter_list|(
-name|String
-name|name
-parameter_list|,
 name|Schema
 name|schema
-parameter_list|)
-function_decl|;
-comment|/** Returns the expression with which a sub-schema of this schema with a    * given name and type should be accessed. */
-name|Expression
-name|getSubSchemaExpression
-parameter_list|(
+parameter_list|,
 name|String
 name|name
 parameter_list|,
-name|Class
-name|type
+name|TableFunction
+name|tableFunction
 parameter_list|)
-function_decl|;
+block|{
+name|super
+argument_list|(
+name|schema
+argument_list|,
+name|name
+argument_list|)
+expr_stmt|;
+name|this
+operator|.
+name|tableFunction
+operator|=
+name|tableFunction
+expr_stmt|;
 block|}
-end_interface
+specifier|public
+name|TableFunction
+name|getTableFunction
+parameter_list|()
+block|{
+return|return
+name|tableFunction
+return|;
+block|}
+specifier|public
+name|boolean
+name|isMaterialization
+parameter_list|()
+block|{
+return|return
+name|tableFunction
+operator|instanceof
+name|MaterializedViewTable
+operator|.
+name|MaterializedViewTableFunction
+return|;
+block|}
+block|}
+end_class
 
 begin_comment
-comment|// End MutableSchema.java
+comment|// End TableFunctionInSchemaImpl.java
 end_comment
 
 end_unit

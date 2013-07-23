@@ -21,6 +21,16 @@ name|org
 operator|.
 name|junit
 operator|.
+name|Ignore
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
 name|Test
 import|;
 end_import
@@ -547,9 +557,13 @@ literal|"state_province=WA; S=124366.0000; DC=1828\n"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Ignore
+annotation|@
+name|Test
 specifier|public
 name|void
-name|_testPlan
+name|testPlan
 parameter_list|()
 block|{
 name|assertThat
@@ -595,9 +609,13 @@ literal|"            }\n"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Ignore
+annotation|@
+name|Test
 specifier|public
 name|void
-name|_testPlan2
+name|testPlan2
 parameter_list|()
 block|{
 name|assertThat
@@ -687,7 +705,7 @@ argument_list|)
 operator|.
 name|planContains
 argument_list|(
-literal|"  final net.hydromatic.linq4j.Enumerable _inputEnumerable = root.getSubSchema(\"foodmart2\").getTable(\"store\", java.lang.Object.class).join(root.getSubSchema(\"foodmart2\").getTable(\"inventory_fact_1997\", java.lang.Object.class), new net.hydromatic.linq4j.function.Function1() {\n"
+literal|"  final net.hydromatic.linq4j.Enumerable _inputEnumerable = root.getSubSchema(\"foodmart2\").getTable(\"store\", java.lang.Object[].class).join(root.getSubSchema(\"foodmart2\").getTable(\"inventory_fact_1997\", java.lang.Object[].class), new net.hydromatic.linq4j.function.Function1() {\n"
 argument_list|)
 expr_stmt|;
 block|}

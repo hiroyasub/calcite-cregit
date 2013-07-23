@@ -289,20 +289,6 @@ name|ImmutableList
 import|;
 end_import
 
-begin_import
-import|import
-name|com
-operator|.
-name|google
-operator|.
-name|common
-operator|.
-name|collect
-operator|.
-name|ImmutableSet
-import|;
-end_import
-
 begin_comment
 comment|/**  * Converts a SQL parse tree (consisting of {@link org.eigenbase.sql.SqlNode}  * objects) into a relational algebra expression (consisting of {@link  * org.eigenbase.rel.RelNode} objects).  *  *<p>The public entry points are: {@link #convertQuery}, {@link  * #convertExpression(SqlNode)}.  *  * @author jhyde  * @version $Id$  * @since Oct 10, 2003  */
 end_comment
@@ -10562,7 +10548,7 @@ literal|false
 argument_list|)
 return|;
 block|}
-specifier|private
+specifier|public
 name|RelOptTable
 operator|.
 name|ToRelContext

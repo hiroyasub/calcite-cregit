@@ -500,6 +500,68 @@ literal|"   ]\n"
 operator|+
 literal|"}"
 decl_stmt|;
+specifier|public
+specifier|static
+specifier|final
+name|String
+name|HR_SCHEMA
+init|=
+literal|"     {\n"
+operator|+
+literal|"       type: 'custom',\n"
+operator|+
+literal|"       name: 'hr',\n"
+operator|+
+literal|"       factory: '"
+operator|+
+name|ReflectiveSchema
+operator|.
+name|Factory
+operator|.
+name|class
+operator|.
+name|getName
+argument_list|()
+operator|+
+literal|"',\n"
+operator|+
+literal|"       operand: {\n"
+operator|+
+literal|"         class: '"
+operator|+
+name|HrSchema
+operator|.
+name|class
+operator|.
+name|getName
+argument_list|()
+operator|+
+literal|"'\n"
+operator|+
+literal|"       }\n"
+operator|+
+literal|"     }\n"
+decl_stmt|;
+specifier|public
+specifier|static
+specifier|final
+name|String
+name|HR_MODEL
+init|=
+literal|"{\n"
+operator|+
+literal|"  version: '1.0',\n"
+operator|+
+literal|"  defaultSchema: 'hr',\n"
+operator|+
+literal|"   schemas: [\n"
+operator|+
+name|HR_SCHEMA
+operator|+
+literal|"   ]\n"
+operator|+
+literal|"}"
+decl_stmt|;
 specifier|static
 name|String
 name|toString
@@ -612,9 +674,13 @@ argument_list|()
 return|;
 block|}
 comment|/**    * Tests a relation that is accessed via method syntax.    * The function returns a {@link Queryable}.    */
+annotation|@
+name|Ignore
+annotation|@
+name|Test
 specifier|public
 name|void
-name|_testFunction
+name|testFunction
 parameter_list|()
 throws|throws
 name|SQLException
@@ -678,12 +744,13 @@ argument_list|,
 literal|"s"
 argument_list|)
 decl_stmt|;
-name|rootSchema
-operator|.
-name|addTableFunction
-argument_list|(
-literal|"GenerateStrings"
-argument_list|,
+specifier|final
+name|TableFunction
+argument_list|<
+name|Object
+argument_list|>
+name|tableFunction
+init|=
 name|Schemas
 operator|.
 name|methodMember
@@ -691,6 +758,20 @@ argument_list|(
 name|GENERATE_STRINGS_METHOD
 argument_list|,
 name|typeFactory
+argument_list|)
+decl_stmt|;
+name|rootSchema
+operator|.
+name|addTableFunction
+argument_list|(
+operator|new
+name|TableFunctionInSchemaImpl
+argument_list|(
+name|schema
+argument_list|,
+literal|"GenerateStrings"
+argument_list|,
+name|tableFunction
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1948,9 +2029,13 @@ literal|"the_year=1998; C=365; M=April\n"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Ignore
+annotation|@
+name|Test
 specifier|public
 name|void
-name|_testCloneGroupBy2
+name|testCloneGroupBy2
 parameter_list|()
 block|{
 name|OptiqAssert
@@ -3484,6 +3569,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/** Tests sorting by a column that is already sorted. */
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testOrderByOnSortedTable
@@ -3519,6 +3606,13 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/** Tests sorting by a column that is already sorted. */
+annotation|@
+name|Ignore
+argument_list|(
+literal|"fix output for timezone"
+argument_list|)
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testOrderByOnSortedTable2
@@ -4235,6 +4329,82 @@ name|returns
 argument_list|(
 literal|"C=730\n"
 argument_list|)
+expr_stmt|;
+block|}
+comment|/** Defines a materialized view and tests that the query is rewritten to use    * it, and that the query produces the same result with and without it. There    * are more comprehensive tests in {@link MaterializationTest}. */
+annotation|@
+name|Ignore
+argument_list|(
+literal|"until JdbcSchema can define materialized views"
+argument_list|)
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testModelWithMaterializedView
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|assertThat
+argument_list|()
+operator|.
+name|withModel
+argument_list|(
+name|FOODMART_MODEL
+argument_list|)
+operator|.
+name|enable
+argument_list|(
+literal|false
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select count(*) as c from \"foodmart\".\"sales_fact_1997\" join \"foodmart\".\"time_by_day\" using (\"time_id\")"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"C=86837\n"
+argument_list|)
+expr_stmt|;
+name|OptiqAssert
+operator|.
+name|assertThat
+argument_list|()
+operator|.
+name|withMaterializations
+argument_list|(
+name|FOODMART_MODEL
+argument_list|,
+literal|"agg_c_10_sales_fact_1997"
+argument_list|,
+literal|"select t.`month_of_year`, t.`quarter`, t.`the_year`, sum(s.`store_sales`) as `store_sales`, sum(s.`store_cost`), sum(s.`unit_sales`), count(distinct s.`customer_id`), count(*) as `fact_count` from `time_by_day` as t join `sales_fact_1997` as s using (`time_id`) group by t.`month_of_year`, t.`quarter`, t.`the_year`"
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select t.\"month_of_year\", t.\"quarter\", t.\"the_year\", sum(s.\"store_sales\") as \"store_sales\", sum(s.\"store_cost\"), sum(s.\"unit_sales\"), count(distinct s.\"customer_id\"), count(*) as \"fact_count\" from \"time_by_day\" as t join \"sales_fact_1997\" as s using (\"time_id\") group by t.\"month_of_year\", t.\"quarter\", t.\"the_year\""
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|"JdbcTableScan(table=[[foodmart, agg_c_10_sales_fact_1997]])"
+argument_list|)
+operator|.
+name|enableMaterializations
+argument_list|(
+literal|false
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|"JdbcTableScan(table=[[foodmart, sales_fact_1997]])"
+argument_list|)
+operator|.
+name|sameResultWithMaterializationsDisabled
+argument_list|()
 expr_stmt|;
 block|}
 comment|/** Tests a JDBC connection that provides a model that contains custom    * tables. */
@@ -5623,8 +5793,8 @@ block|{
 specifier|public
 name|FoodmartJdbcSchema
 parameter_list|(
-name|QueryProvider
-name|queryProvider
+name|MutableSchema
+name|parentSchema
 parameter_list|,
 name|DataSource
 name|dataSource
@@ -5647,7 +5817,12 @@ parameter_list|)
 block|{
 name|super
 argument_list|(
-name|queryProvider
+name|parentSchema
+operator|.
+name|getQueryProvider
+argument_list|()
+argument_list|,
+name|parentSchema
 argument_list|,
 literal|"FoodMart"
 argument_list|,

@@ -115,6 +115,20 @@ name|hydromatic
 operator|.
 name|optiq
 operator|.
+name|prepare
+operator|.
+name|Prepare
+import|;
+end_import
+
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|optiq
+operator|.
 name|runtime
 operator|.
 name|ColumnMetaData
@@ -211,9 +225,9 @@ begin_import
 import|import
 name|java
 operator|.
-name|util
+name|sql
 operator|.
-name|Calendar
+name|Date
 import|;
 end_import
 
@@ -223,7 +237,7 @@ name|java
 operator|.
 name|util
 operator|.
-name|List
+name|*
 import|;
 end_import
 
@@ -338,6 +352,12 @@ argument_list|>
 name|getDefaultSchemaPath
 parameter_list|()
 function_decl|;
+name|ConnectionProperty
+operator|.
+name|ConnectionConfig
+name|config
+parameter_list|()
+function_decl|;
 block|}
 specifier|public
 specifier|static
@@ -420,6 +440,11 @@ name|parameterList
 decl_stmt|;
 specifier|public
 specifier|final
+name|RelDataType
+name|rowType
+decl_stmt|;
+specifier|public
+specifier|final
 name|List
 argument_list|<
 name|ColumnMetaData
@@ -451,6 +476,9 @@ name|Parameter
 argument_list|>
 name|parameterList
 parameter_list|,
+name|RelDataType
+name|rowType
+parameter_list|,
 name|List
 argument_list|<
 name|ColumnMetaData
@@ -481,6 +509,12 @@ operator|.
 name|parameterList
 operator|=
 name|parameterList
+expr_stmt|;
+name|this
+operator|.
+name|rowType
+operator|=
+name|rowType
 expr_stmt|;
 name|this
 operator|.

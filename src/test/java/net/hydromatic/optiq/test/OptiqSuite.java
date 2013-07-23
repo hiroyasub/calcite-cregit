@@ -253,6 +253,10 @@ name|RelOptRulesTest
 operator|.
 name|class
 block|,
+name|MaterializationTest
+operator|.
+name|class
+block|,
 name|SargTest
 operator|.
 name|class

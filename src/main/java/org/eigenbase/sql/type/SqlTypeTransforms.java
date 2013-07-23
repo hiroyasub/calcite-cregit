@@ -61,6 +61,20 @@ name|*
 import|;
 end_import
 
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|base
+operator|.
+name|Preconditions
+import|;
+end_import
+
 begin_comment
 comment|/**  * SqlTypeTransforms defines a number of reusable instances of {@link  * SqlTypeTransform}.  *  *<p>NOTE: avoid anonymous inner classes here except for unique,  * non-generalizable strategies; anything else belongs in a reusable top-level  * class. If you find yourself copying and pasting an existing strategy's  * anonymous inner class, you're making a mistake.  *  * @author Wael Chatila  * @version $Id$  */
 end_comment
@@ -109,7 +123,12 @@ operator|.
 name|collectOperandTypes
 argument_list|()
 argument_list|,
+name|Preconditions
+operator|.
+name|checkNotNull
+argument_list|(
 name|typeToTransform
+argument_list|)
 argument_list|)
 return|;
 block|}
@@ -145,7 +164,12 @@ argument_list|()
 operator|.
 name|createTypeWithNullability
 argument_list|(
+name|Preconditions
+operator|.
+name|checkNotNull
+argument_list|(
 name|typeToTransform
+argument_list|)
 argument_list|,
 literal|false
 argument_list|)
@@ -183,7 +207,12 @@ argument_list|()
 operator|.
 name|createTypeWithNullability
 argument_list|(
+name|Preconditions
+operator|.
+name|checkNotNull
+argument_list|(
 name|typeToTransform
+argument_list|)
 argument_list|,
 literal|true
 argument_list|)

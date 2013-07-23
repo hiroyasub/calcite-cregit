@@ -326,6 +326,19 @@ return|return
 name|root
 return|;
 block|}
+specifier|public
+name|void
+name|addMaterialization
+parameter_list|(
+name|RelNode
+name|tableRel
+parameter_list|,
+name|RelNode
+name|queryRel
+parameter_list|)
+block|{
+comment|// ignore - this planner does not support materializations
+block|}
 comment|// implement RelOptPlanner
 specifier|public
 name|boolean
@@ -1476,7 +1489,7 @@ name|root
 operator|)
 assert|;
 comment|// see above
-comment|/*         collectGarbage();         */
+comment|/*         collectGarbage(); */
 name|Iterator
 argument_list|<
 name|HepRelVertex

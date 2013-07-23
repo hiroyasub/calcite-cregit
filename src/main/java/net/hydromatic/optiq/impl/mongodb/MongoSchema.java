@@ -156,12 +156,15 @@ specifier|final
 name|DB
 name|mongoDb
 decl_stmt|;
-comment|/**    * Creates a MONGO schema.    *    * @param parentSchema Parent schema    * @param host Mongo host, e.g. "localhost"    * @param database Mongo database name, e.g. "foodmart"    */
+comment|/**    * Creates a MONGO schema.    *    * @param parentSchema Parent schema    * @param name Name of schema    * @param host Mongo host, e.g. "localhost"    * @param database Mongo database name, e.g. "foodmart"    */
 specifier|public
 name|MongoSchema
 parameter_list|(
 name|Schema
 name|parentSchema
+parameter_list|,
+name|String
+name|name
 parameter_list|,
 name|String
 name|host
@@ -176,6 +179,8 @@ block|{
 name|super
 argument_list|(
 name|parentSchema
+argument_list|,
+name|name
 argument_list|,
 name|expression
 argument_list|)

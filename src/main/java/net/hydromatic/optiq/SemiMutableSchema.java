@@ -10,86 +10,24 @@ operator|.
 name|hydromatic
 operator|.
 name|optiq
-operator|.
-name|rules
-operator|.
-name|java
 package|;
 end_package
 
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
-name|relopt
-operator|.
-name|*
-import|;
-end_import
-
 begin_comment
-comment|/**  * Family of calling conventions that return results as an  * {@link net.hydromatic.linq4j.Enumerable}.  */
+comment|/**  * Schema to which materializations can be added.  */
 end_comment
 
-begin_enum
+begin_interface
 specifier|public
-enum|enum
-name|EnumerableConvention
-implements|implements
-name|Convention
-block|{
-name|INSTANCE
-block|;
-annotation|@
-name|Override
-specifier|public
-name|String
-name|toString
-parameter_list|()
-block|{
-return|return
-name|getName
-argument_list|()
-return|;
-block|}
-specifier|public
-name|Class
-name|getInterface
-parameter_list|()
-block|{
-return|return
-name|EnumerableRel
-operator|.
-name|class
-return|;
-block|}
-specifier|public
-name|String
-name|getName
-parameter_list|()
-block|{
-return|return
-literal|"ENUMERABLE"
-return|;
-block|}
-specifier|public
-name|RelTraitDef
-name|getTraitDef
-parameter_list|()
-block|{
-return|return
-name|ConventionTraitDef
-operator|.
-name|instance
-return|;
-block|}
-block|}
-end_enum
+interface|interface
+name|SemiMutableSchema
+extends|extends
+name|Schema
+block|{ }
+end_interface
 
 begin_comment
-comment|// End EnumerableConvention.java
+comment|// End SemiMutableSchema.java
 end_comment
 
 end_unit

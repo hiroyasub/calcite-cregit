@@ -49,7 +49,7 @@ interface|interface
 name|SqlTypeTransform
 block|{
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Transforms a type.      *      * @param opBinding call context in which transformation is being performed      * @param typeToTransform type to be transformed      *      * @return transformed type      */
+comment|/**      * Transforms a type.      *      * @param opBinding call context in which transformation is being performed      * @param typeToTransform type to be transformed, never null      *      * @return transformed type, never null      */
 specifier|public
 name|RelDataType
 name|transformType

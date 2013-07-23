@@ -196,7 +196,7 @@ name|RelDataType
 name|type
 parameter_list|)
 function_decl|;
-comment|/**      * Creates a type which is the same as another type but with possibly      * different nullability. The output type may be identical to the input      * type. For type systems without a concept of nullability, the return value      * is always the same as the input.      *      * @param type input type      * @param nullable true to request a nullable type; false to request a NOT      * NULL type      *      * @return output type, same as input type except with specified nullability      */
+comment|/**      * Creates a type which is the same as another type but with possibly      * different nullability. The output type may be identical to the input      * type. For type systems without a concept of nullability, the return value      * is always the same as the input.      *      * @param type input type      * @param nullable true to request a nullable type; false to request a NOT      * NULL type      *      * @throws NullPointerException if type is null      *      * @return output type, same as input type except with specified nullability      */
 specifier|public
 name|RelDataType
 name|createTypeWithNullability
