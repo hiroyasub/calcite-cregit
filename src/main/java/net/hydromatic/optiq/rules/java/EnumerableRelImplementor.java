@@ -103,7 +103,7 @@ name|optiq
 operator|.
 name|runtime
 operator|.
-name|Executable
+name|Bindable
 import|;
 end_import
 
@@ -398,7 +398,7 @@ name|class
 argument_list|,
 name|BuiltinMethod
 operator|.
-name|EXECUTABLE_EXECUTE
+name|BINDABLE_BIND
 operator|.
 name|method
 operator|.
@@ -497,7 +497,7 @@ name|Type
 operator|>
 name|singletonList
 argument_list|(
-name|Executable
+name|Bindable
 operator|.
 name|class
 argument_list|)

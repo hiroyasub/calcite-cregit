@@ -1327,7 +1327,7 @@ block|}
 specifier|public
 specifier|abstract
 name|Object
-name|execute
+name|bind
 parameter_list|()
 function_decl|;
 block|}
@@ -1366,7 +1366,7 @@ parameter_list|()
 function_decl|;
 comment|/**      * Executes the prepared result.      *      * @return producer of rows resulting from execution      */
 name|Object
-name|execute
+name|bind
 parameter_list|()
 function_decl|;
 block|}
@@ -1535,7 +1535,7 @@ block|}
 specifier|public
 specifier|abstract
 name|Object
-name|execute
+name|bind
 parameter_list|()
 function_decl|;
 block|}

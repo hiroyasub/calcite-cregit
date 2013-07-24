@@ -1328,7 +1328,7 @@ name|enumerator
 init|=
 name|prepareResult
 operator|.
-name|execute
+name|enumerator
 argument_list|()
 decl_stmt|;
 comment|//noinspection unchecked

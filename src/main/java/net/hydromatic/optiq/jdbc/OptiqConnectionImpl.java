@@ -650,7 +650,7 @@ argument_list|>
 operator|)
 name|enumerable
 operator|.
-name|execute
+name|enumerator
 argument_list|()
 return|;
 block|}

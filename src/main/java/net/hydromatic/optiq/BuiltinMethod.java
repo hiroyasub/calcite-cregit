@@ -739,13 +739,13 @@ argument_list|,
 literal|"getElementType"
 argument_list|)
 block|,
-name|EXECUTABLE_EXECUTE
+name|BINDABLE_BIND
 argument_list|(
-name|Executable
+name|Bindable
 operator|.
 name|class
 argument_list|,
-literal|"execute"
+literal|"bind"
 argument_list|,
 name|DataContext
 operator|.

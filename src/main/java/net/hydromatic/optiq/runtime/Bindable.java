@@ -40,17 +40,17 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Executable statement.  */
+comment|/**  * Statement that can be bound to a {@link DataContext} and then executed.  */
 end_comment
 
 begin_interface
 specifier|public
 interface|interface
-name|Executable
+name|Bindable
 block|{
 comment|/**    * Executes this statement and returns an enumerable which will yield rows.    * The {@code environment} parameter provides the values in the root of the    * environment (usually schemas).    *    * @param dataContext Environment that provides tables    * @return Enumerable over rows    */
 name|Enumerable
-name|execute
+name|bind
 parameter_list|(
 name|DataContext
 name|dataContext
@@ -60,7 +60,7 @@ block|}
 end_interface
 
 begin_comment
-comment|// End Executable.java
+comment|// End Bindable.java
 end_comment
 
 end_unit
