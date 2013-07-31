@@ -599,6 +599,16 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+comment|/** Returns the executable object. You may use this method to access the      * result of the preparation, but if you need to execute it please call      * {@link #enumerator()} or {@link #iterator()}. */
+specifier|public
+name|Object
+name|getExecutable
+parameter_list|()
+block|{
+return|return
+name|enumerable
+return|;
+block|}
 block|}
 comment|/**    * Metadata for a parameter. Plus a slot to hold its value.    */
 specifier|public
