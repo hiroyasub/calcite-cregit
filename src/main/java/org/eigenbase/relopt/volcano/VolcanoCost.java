@@ -282,26 +282,8 @@ name|that
 operator|.
 name|dRows
 operator|)
-operator|&&
-operator|(
-name|this
-operator|.
-name|dCpu
-operator|<=
-name|that
-operator|.
-name|dCpu
-operator|)
-operator|&&
-operator|(
-name|this
-operator|.
-name|dIo
-operator|<=
-name|that
-operator|.
-name|dIo
-operator|)
+comment|//&& (this.dCpu<= that.dCpu)
+comment|//&& (this.dIo<= that.dIo)
 operator|)
 return|;
 block|}
