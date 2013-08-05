@@ -442,6 +442,13 @@ name|close
 argument_list|()
 expr_stmt|;
 block|}
+name|statement
+operator|.
+name|onResultSetClose
+argument_list|(
+name|this
+argument_list|)
+expr_stmt|;
 comment|// TODO: for timeout, see IteratorResultSet.close
 comment|/*         if (timeoutCursor != null) {             final long noTimeout = 0;             timeoutCursor.close(noTimeout);             timeoutCursor = null;         } */
 block|}

@@ -50,6 +50,18 @@ comment|// nothing
 block|}
 specifier|public
 name|void
+name|onConnectionClose
+parameter_list|(
+name|OptiqConnection
+name|connection
+parameter_list|)
+throws|throws
+name|RuntimeException
+block|{
+comment|// nothing
+block|}
+specifier|public
+name|void
 name|onStatementExecute
 parameter_list|(
 name|OptiqStatement
@@ -57,6 +69,18 @@ name|statement
 parameter_list|,
 name|ResultSink
 name|resultSink
+parameter_list|)
+throws|throws
+name|RuntimeException
+block|{
+comment|// nothing
+block|}
+specifier|public
+name|void
+name|onStatementClose
+parameter_list|(
+name|OptiqStatement
+name|statement
 parameter_list|)
 throws|throws
 name|RuntimeException
