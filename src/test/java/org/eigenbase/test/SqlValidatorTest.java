@@ -12299,7 +12299,7 @@ block|{
 name|int
 name|x
 init|=
-literal|1000
+literal|700
 decl_stmt|;
 if|if
 condition|(

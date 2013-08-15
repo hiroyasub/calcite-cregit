@@ -246,6 +246,14 @@ argument_list|>
 name|fieldOrigins
 decl_stmt|;
 specifier|public
+specifier|static
+name|boolean
+name|TRIM
+init|=
+literal|false
+decl_stmt|;
+comment|// temporary. for testing.
+specifier|public
 name|Prepare
 parameter_list|(
 name|CatalogReader
@@ -1065,7 +1073,10 @@ name|RelNode
 name|rootRel
 parameter_list|)
 block|{
-return|return
+specifier|final
+name|SqlToRelConverter
+name|converter
+init|=
 name|getSqlToRelConverter
 argument_list|(
 name|getSqlValidator
@@ -1073,6 +1084,16 @@ argument_list|()
 argument_list|,
 name|catalogReader
 argument_list|)
+decl_stmt|;
+name|converter
+operator|.
+name|setTrimUnusedFields
+argument_list|(
+name|TRIM
+argument_list|)
+expr_stmt|;
+return|return
+name|converter
 operator|.
 name|trimUnusedFields
 argument_list|(

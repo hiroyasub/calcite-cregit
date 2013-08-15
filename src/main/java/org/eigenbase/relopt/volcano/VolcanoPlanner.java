@@ -640,6 +640,41 @@ name|Materialization
 name|materialization
 parameter_list|)
 block|{
+comment|// Try to rewrite the original root query in terms of the materialized
+comment|// query. If that is possible, register the remnant query as equivalent
+comment|// to the root.
+comment|//
+name|RelNode
+name|sub
+init|=
+name|substitute
+argument_list|(
+name|originalRoot
+argument_list|,
+name|materialization
+argument_list|)
+decl_stmt|;
+if|if
+condition|(
+name|sub
+operator|!=
+literal|null
+condition|)
+block|{
+comment|// TODO: try to substitute other materializations in the remnant.
+comment|// Useful for big queries, e.g.
+comment|//   (t1 group by c1) join (t2 group by c2).
+name|registerImpl
+argument_list|(
+name|sub
+argument_list|,
+name|root
+operator|.
+name|set
+argument_list|)
+expr_stmt|;
+return|return;
+block|}
 name|RelSubset
 name|subset
 init|=
@@ -682,6 +717,36 @@ operator|.
 name|set
 argument_list|)
 expr_stmt|;
+block|}
+specifier|private
+name|RelNode
+name|substitute
+parameter_list|(
+name|RelNode
+name|root
+parameter_list|,
+name|Materialization
+name|materialization
+parameter_list|)
+block|{
+return|return
+operator|new
+name|SubstitutionVisitor
+argument_list|(
+name|materialization
+operator|.
+name|queryRel
+argument_list|,
+name|root
+argument_list|)
+operator|.
+name|go
+argument_list|(
+name|materialization
+operator|.
+name|tableRel
+argument_list|)
+return|;
 block|}
 specifier|private
 name|void

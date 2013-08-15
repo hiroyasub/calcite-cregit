@@ -487,6 +487,12 @@ name|savedResult
 return|;
 block|}
 comment|// permanently updates a call in place
+name|List
+argument_list|<
+name|RexNode
+argument_list|>
+name|newOperands
+init|=
 name|apply
 argument_list|(
 name|call
@@ -494,7 +500,20 @@ operator|.
 name|getOperands
 argument_list|()
 argument_list|)
-expr_stmt|;
+decl_stmt|;
+if|if
+condition|(
+literal|true
+condition|)
+block|{
+comment|// FIXME: Operands are now immutable. Create a new call with
+comment|//   new operands?
+throw|throw
+operator|new
+name|AssertionError
+argument_list|()
+throw|;
+block|}
 name|RexNode
 name|newCall
 init|=

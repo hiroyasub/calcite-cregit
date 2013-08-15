@@ -725,6 +725,12 @@ literal|" != "
 operator|+
 name|newFieldCount
 assert|;
+if|if
+condition|(
+name|Bug
+operator|.
+name|TodoFixed
+condition|)
 assert|assert
 name|newFieldCount
 operator|>
