@@ -2517,13 +2517,11 @@ operator|.
 name|append
 argument_list|(
 name|table
-operator|+
-literal|"v"
 argument_list|)
 operator|.
 name|append
 argument_list|(
-literal|"',\n"
+literal|"v',\n"
 argument_list|)
 expr_stmt|;
 name|String
