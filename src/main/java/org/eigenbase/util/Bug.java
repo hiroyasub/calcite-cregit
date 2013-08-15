@@ -256,6 +256,27 @@ return|return
 literal|false
 return|;
 block|}
+comment|/** Use this method to flag code that should be re-visited after upgrading      * a component. */
+specifier|public
+specifier|static
+name|boolean
+name|upgrade
+parameter_list|(
+name|String
+name|remark
+parameter_list|)
+block|{
+name|Util
+operator|.
+name|discard
+argument_list|(
+name|remark
+argument_list|)
+expr_stmt|;
+return|return
+literal|false
+return|;
+block|}
 block|}
 end_class
 
