@@ -120,6 +120,24 @@ argument_list|(
 literal|0
 argument_list|)
 decl_stmt|;
+if|if
+condition|(
+name|sort
+operator|.
+name|offset
+operator|!=
+literal|null
+operator|||
+name|sort
+operator|.
+name|fetch
+operator|!=
+literal|null
+condition|)
+block|{
+comment|// Don't remove sort if would also remove OFFSET or LIMIT.
+return|return;
+block|}
 specifier|final
 name|RelCollation
 name|collation

@@ -2474,6 +2474,26 @@ name|SortRel
 operator|)
 name|rel
 decl_stmt|;
+if|if
+condition|(
+name|sort
+operator|.
+name|offset
+operator|!=
+literal|null
+operator|||
+name|sort
+operator|.
+name|fetch
+operator|!=
+literal|null
+condition|)
+block|{
+comment|// Cannot implement "OFFSET n FETCH n" currently.
+return|return
+literal|null
+return|;
+block|}
 specifier|final
 name|RelTraitSet
 name|traitSet
@@ -4127,6 +4147,10 @@ name|selectList
 argument_list|,
 name|POS
 argument_list|)
+argument_list|,
+literal|null
+argument_list|,
+literal|null
 argument_list|,
 literal|null
 argument_list|,

@@ -1678,6 +1678,16 @@ argument_list|,
 name|collation
 argument_list|,
 name|orderExprList
+argument_list|,
+name|select
+operator|.
+name|getOffset
+argument_list|()
+argument_list|,
+name|select
+operator|.
+name|getFetch
+argument_list|()
 argument_list|)
 expr_stmt|;
 name|bb
@@ -2261,7 +2271,7 @@ operator|-
 literal|1
 return|;
 block|}
-comment|/**      * Converts a query's ORDER BY clause, if any.      *      * @param select Query      * @param bb Blackboard      * @param collation Collation list      * @param orderExprList Method populates this list with orderBy expressions      *   not present in selectList      */
+comment|/**      * Converts a query's ORDER BY clause, if any.      *      * @param select Query      * @param bb Blackboard      * @param collation Collation list      * @param orderExprList Method populates this list with orderBy expressions      *   not present in selectList      * @param offset Expression for number of rows to discard before returning      *               first row      * @param fetch Expression for number of rows to fetch      */
 specifier|protected
 name|void
 name|convertOrder
@@ -2280,6 +2290,12 @@ argument_list|<
 name|SqlNode
 argument_list|>
 name|orderExprList
+parameter_list|,
+name|SqlNode
+name|offset
+parameter_list|,
+name|SqlNode
+name|fetch
 parameter_list|)
 block|{
 if|if
@@ -2301,7 +2317,19 @@ operator|.
 name|isEmpty
 argument_list|()
 assert|;
+if|if
+condition|(
+name|offset
+operator|==
+literal|null
+operator|&&
+name|fetch
+operator|==
+literal|null
+condition|)
+block|{
 return|return;
+block|}
 block|}
 comment|// Create a sorter using the previously constructed collations.
 name|bb
@@ -2329,6 +2357,28 @@ operator|.
 name|root
 argument_list|,
 name|collation
+argument_list|,
+name|offset
+operator|==
+literal|null
+condition|?
+literal|null
+else|:
+name|convertExpression
+argument_list|(
+name|offset
+argument_list|)
+argument_list|,
+name|fetch
+operator|==
+literal|null
+condition|?
+literal|null
+else|:
+name|convertExpression
+argument_list|(
+name|fetch
+argument_list|)
 argument_list|)
 argument_list|,
 literal|false

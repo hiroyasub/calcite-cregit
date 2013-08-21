@@ -83,6 +83,12 @@ block|,
 comment|/**          * ORDER BY list.          *          *<p>Example:          *<li>ORDER BY x, y DESC, z          */
 name|OrderByList
 block|,
+comment|/**          * OFFSET clause.          *          *<p>Example:          *<li>OFFSET 10 ROWS</li></p>          */
+name|Offset
+block|,
+comment|/**          * FETCH clause.          *          *<p>Example:          *<li>FETCH FIRST 3 ROWS ONLY</li></p>          */
+name|Fetch
+block|,
 comment|/**          * GROUP BY list.          *          *<p>Example:          *<li>GROUP BY x, FLOOR(y)          */
 name|GroupByList
 block|,

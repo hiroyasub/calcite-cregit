@@ -4109,6 +4109,169 @@ literal|"store_id=0; grocery_sqft=null\n"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Tests ORDER BY ... FETCH. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testOrderByFetch
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|assertThat
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|FOODMART_CLONE
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select \"store_id\", \"grocery_sqft\" from \"store\"\n"
+operator|+
+literal|"where \"store_id\"< 10\n"
+operator|+
+literal|"order by 1 fetch first 5 rows only"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"store_id=0; grocery_sqft=null\n"
+operator|+
+literal|"store_id=1; grocery_sqft=17475\n"
+operator|+
+literal|"store_id=2; grocery_sqft=22271\n"
+operator|+
+literal|"store_id=3; grocery_sqft=24390\n"
+operator|+
+literal|"store_id=4; grocery_sqft=16844\n"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests ORDER BY ... OFFSET ... FETCH. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testOrderByOffsetFetch
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|assertThat
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|FOODMART_CLONE
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select \"store_id\", \"grocery_sqft\" from \"store\"\n"
+operator|+
+literal|"where \"store_id\"< 10\n"
+operator|+
+literal|"order by 1 offset 2 rows fetch next 5 rows only"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"store_id=2; grocery_sqft=22271\n"
+operator|+
+literal|"store_id=3; grocery_sqft=24390\n"
+operator|+
+literal|"store_id=4; grocery_sqft=16844\n"
+operator|+
+literal|"store_id=5; grocery_sqft=15012\n"
+operator|+
+literal|"store_id=6; grocery_sqft=15337\n"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests FETCH with no ORDER BY. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFetch
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|assertThat
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select \"empid\" from \"hr\".\"emps\"\n"
+operator|+
+literal|"fetch first 2 rows only"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"empid=100\n"
+operator|+
+literal|"empid=200\n"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFetchStar
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|assertThat
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select * from \"hr\".\"emps\"\n"
+operator|+
+literal|"fetch first 2 rows only"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"empid=100; deptno=10; name=Bill; salary=10000.0; commission=1000\n"
+operator|+
+literal|"empid=200; deptno=20; name=Eric; salary=8000.0; commission=500\n"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Tests sorting by a column that is already sorted. */
 annotation|@
 name|Test

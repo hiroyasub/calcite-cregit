@@ -2962,6 +2962,197 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testOrderOffsetFetch
+parameter_list|()
+block|{
+name|check
+argument_list|(
+literal|"select a from foo order by b, c offset 1 row fetch first 2 row only"
+argument_list|,
+literal|"SELECT `A`\n"
+operator|+
+literal|"FROM `FOO`\n"
+operator|+
+literal|"ORDER BY `B`, `C`\n"
+operator|+
+literal|"OFFSET 1 ROWS\n"
+operator|+
+literal|"FETCH NEXT 2 ROWS ONLY"
+argument_list|)
+expr_stmt|;
+comment|// as above, but ROWS rather than ROW
+name|check
+argument_list|(
+literal|"select a from foo order by b, c offset 1 rows fetch first 2 rows only"
+argument_list|,
+literal|"SELECT `A`\n"
+operator|+
+literal|"FROM `FOO`\n"
+operator|+
+literal|"ORDER BY `B`, `C`\n"
+operator|+
+literal|"OFFSET 1 ROWS\n"
+operator|+
+literal|"FETCH NEXT 2 ROWS ONLY"
+argument_list|)
+expr_stmt|;
+comment|// as above, but NEXT (means same as FIRST)
+name|check
+argument_list|(
+literal|"select a from foo order by b, c offset 1 rows fetch next 3 rows only"
+argument_list|,
+literal|"SELECT `A`\n"
+operator|+
+literal|"FROM `FOO`\n"
+operator|+
+literal|"ORDER BY `B`, `C`\n"
+operator|+
+literal|"OFFSET 1 ROWS\n"
+operator|+
+literal|"FETCH NEXT 3 ROWS ONLY"
+argument_list|)
+expr_stmt|;
+comment|// as above, but omit the ROWS noise word after OFFSET. This is not
+comment|// compatible with SQL:2008 but allows the Postgres syntax
+comment|// "LIMIT ... OFFSET".
+name|check
+argument_list|(
+literal|"select a from foo order by b, c offset 1 fetch next 3 rows only"
+argument_list|,
+literal|"SELECT `A`\n"
+operator|+
+literal|"FROM `FOO`\n"
+operator|+
+literal|"ORDER BY `B`, `C`\n"
+operator|+
+literal|"OFFSET 1 ROWS\n"
+operator|+
+literal|"FETCH NEXT 3 ROWS ONLY"
+argument_list|)
+expr_stmt|;
+comment|// as above, omit OFFSET
+name|check
+argument_list|(
+literal|"select a from foo order by b, c fetch next 3 rows only"
+argument_list|,
+literal|"SELECT `A`\n"
+operator|+
+literal|"FROM `FOO`\n"
+operator|+
+literal|"ORDER BY `B`, `C`\n"
+operator|+
+literal|"FETCH NEXT 3 ROWS ONLY"
+argument_list|)
+expr_stmt|;
+comment|// FETCH, no ORDER BY or OFFSET
+name|check
+argument_list|(
+literal|"select a from foo fetch next 4 rows only"
+argument_list|,
+literal|"SELECT `A`\n"
+operator|+
+literal|"FROM `FOO`\n"
+operator|+
+literal|"FETCH NEXT 4 ROWS ONLY"
+argument_list|)
+expr_stmt|;
+comment|// OFFSET, no ORDER BY or FETCH
+name|check
+argument_list|(
+literal|"select a from foo offset 1 row"
+argument_list|,
+literal|"SELECT `A`\n"
+operator|+
+literal|"FROM `FOO`\n"
+operator|+
+literal|"OFFSET 1 ROWS"
+argument_list|)
+expr_stmt|;
+comment|// OFFSET and FETCH, no ORDER BY
+name|check
+argument_list|(
+literal|"select a from foo offset 1 row fetch next 3 rows only"
+argument_list|,
+literal|"SELECT `A`\n"
+operator|+
+literal|"FROM `FOO`\n"
+operator|+
+literal|"OFFSET 1 ROWS\n"
+operator|+
+literal|"FETCH NEXT 3 ROWS ONLY"
+argument_list|)
+expr_stmt|;
+comment|// missing ROWS after FETCH
+name|checkFails
+argument_list|(
+literal|"select a from foo offset 1 fetch next 3 ^only^"
+argument_list|,
+literal|"(?s).*Encountered \"only\" at .*"
+argument_list|)
+expr_stmt|;
+comment|// FETCH before OFFSET is illegal
+name|checkFails
+argument_list|(
+literal|"select a from foo fetch next 3 rows only ^offset^ 1"
+argument_list|,
+literal|"(?s).*Encountered \"offset\" at .*"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** "LIMIT ... OFFSET ..." is the postgres equivalent of SQL:2008      * "OFFSET ... FETCH". It all maps down to a parse tree that looks like      * SQL:2008. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testLimit
+parameter_list|()
+block|{
+name|check
+argument_list|(
+literal|"select a from foo order by b, c limit 2 offset 1"
+argument_list|,
+literal|"SELECT `A`\n"
+operator|+
+literal|"FROM `FOO`\n"
+operator|+
+literal|"ORDER BY `B`, `C`\n"
+operator|+
+literal|"OFFSET 1 ROWS\n"
+operator|+
+literal|"FETCH NEXT 2 ROWS ONLY"
+argument_list|)
+expr_stmt|;
+name|check
+argument_list|(
+literal|"select a from foo order by b, c limit 2"
+argument_list|,
+literal|"SELECT `A`\n"
+operator|+
+literal|"FROM `FOO`\n"
+operator|+
+literal|"ORDER BY `B`, `C`\n"
+operator|+
+literal|"FETCH NEXT 2 ROWS ONLY"
+argument_list|)
+expr_stmt|;
+name|check
+argument_list|(
+literal|"select a from foo order by b, c offset 1"
+argument_list|,
+literal|"SELECT `A`\n"
+operator|+
+literal|"FROM `FOO`\n"
+operator|+
+literal|"ORDER BY `B`, `C`\n"
+operator|+
+literal|"OFFSET 1 ROWS"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testSqlInlineComment
 parameter_list|()
 block|{

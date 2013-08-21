@@ -1448,6 +1448,12 @@ block|}
 case|case
 name|OrderBy
 case|:
+case|case
+name|Offset
+case|:
+case|case
+name|Fetch
+case|:
 return|return
 operator|new
 name|FrameImpl
