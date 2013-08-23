@@ -2352,7 +2352,7 @@ return|return
 name|projectRefList
 return|;
 block|}
-comment|/**      * Removes all project items.      */
+comment|/**      * Removes all project items.      *      *<p>After calling this method, you may need to re-normalize.</p>      */
 specifier|public
 name|void
 name|clearProjects
@@ -2367,6 +2367,17 @@ name|projectNameList
 operator|.
 name|clear
 argument_list|()
+expr_stmt|;
+block|}
+comment|/**      * Clears the condition.      *      *<p>After calling this method, you may need to re-normalize.</p>      */
+specifier|public
+name|void
+name|clearCondition
+parameter_list|()
+block|{
+name|conditionRef
+operator|=
+literal|null
 expr_stmt|;
 block|}
 comment|/**      * Adds a project item for every input field.      *      *<p>You cannot call this method if there are other project items.      *      * @pre projectRefList.isEmpty()      */
