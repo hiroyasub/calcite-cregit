@@ -17558,6 +17558,14 @@ operator|.
 name|operands
 control|)
 block|{
+comment|// Operands are occasionally null, e.g. switched CASE arg 0.
+if|if
+condition|(
+name|operand
+operator|!=
+literal|null
+condition|)
+block|{
 name|operand
 operator|.
 name|accept
@@ -17565,6 +17573,7 @@ argument_list|(
 name|this
 argument_list|)
 expr_stmt|;
+block|}
 block|}
 block|}
 return|return
