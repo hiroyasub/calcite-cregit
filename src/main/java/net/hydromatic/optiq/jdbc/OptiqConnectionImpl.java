@@ -979,11 +979,7 @@ parameter_list|()
 throws|throws
 name|SQLException
 block|{
-throw|throw
-operator|new
-name|UnsupportedOperationException
-argument_list|()
-throw|;
+comment|// no-op since connection pooling often calls this.
 block|}
 specifier|public
 name|Statement
