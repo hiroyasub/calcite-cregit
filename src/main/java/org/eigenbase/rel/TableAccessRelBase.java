@@ -98,6 +98,7 @@ block|{
 comment|//~ Instance fields --------------------------------------------------------
 comment|/**      * The table definition.      */
 specifier|protected
+specifier|final
 name|RelOptTable
 name|table
 decl_stmt|;

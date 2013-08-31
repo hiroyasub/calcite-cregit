@@ -15,6 +15,20 @@ name|server
 package|;
 end_package
 
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|optiq
+operator|.
+name|jdbc
+operator|.
+name|OptiqPrepare
+import|;
+end_import
+
 begin_comment
 comment|/**  * Statement within an Optiq server.  */
 end_comment
@@ -23,7 +37,15 @@ begin_interface
 specifier|public
 interface|interface
 name|OptiqServerStatement
-block|{ }
+block|{
+comment|/** Creates a context for preparing a statement for execution. */
+name|OptiqPrepare
+operator|.
+name|Context
+name|createPrepareContext
+parameter_list|()
+function_decl|;
+block|}
 end_interface
 
 begin_comment
