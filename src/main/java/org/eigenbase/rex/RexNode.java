@@ -77,6 +77,16 @@ return|return
 literal|false
 return|;
 block|}
+comment|/**      * Returns whether this expression always returns false. (Such as if this      * expression is equal to the literal<code>FALSE</code>.)      */
+specifier|public
+name|boolean
+name|isAlwaysFalse
+parameter_list|()
+block|{
+return|return
+literal|false
+return|;
+block|}
 specifier|public
 name|boolean
 name|isA

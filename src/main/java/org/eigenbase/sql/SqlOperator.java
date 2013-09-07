@@ -425,7 +425,7 @@ name|getOperandCountRange
 argument_list|()
 return|;
 block|}
-comment|// If you see this error you need to overide this method
+comment|// If you see this error you need to override this method
 comment|// or give operandTypeChecker a value.
 throw|throw
 name|Util
@@ -1332,6 +1332,22 @@ argument_list|()
 argument_list|)
 throw|;
 block|}
+block|}
+comment|/** Returns whether the given operands are valid. If not valid and      * {@code fail}, throws an assertion error.      *      *<p>Similar to {@link #checkOperandCount}, but some operators may have      * different valid operands in {@link SqlNode} and {@code RexNode} formats      * (some examples are CAST and AND), and this method throws internal errors,      * not user errors.</p>      */
+specifier|public
+name|boolean
+name|validRexOperands
+parameter_list|(
+name|int
+name|count
+parameter_list|,
+name|boolean
+name|fail
+parameter_list|)
+block|{
+return|return
+literal|true
+return|;
 block|}
 comment|/**      * Returns a template describing how the operator signature is to be built.      * E.g for the binary + operator the template looks like "{1} {0} {2}" {0}      * is the operator, subsequent numbers are operands.      *      * @param operandsCount is used with functions that can take a variable      * number of operands      *      * @return signature template, or null to indicate that a default template      * will suffice      */
 specifier|public

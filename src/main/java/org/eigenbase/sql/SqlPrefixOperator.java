@@ -329,6 +329,46 @@ name|scope
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
+specifier|public
+name|boolean
+name|validRexOperands
+parameter_list|(
+name|int
+name|count
+parameter_list|,
+name|boolean
+name|fail
+parameter_list|)
+block|{
+if|if
+condition|(
+name|count
+operator|!=
+literal|1
+condition|)
+block|{
+assert|assert
+operator|!
+name|fail
+operator|:
+literal|"wrong operand count "
+operator|+
+name|count
+operator|+
+literal|" for "
+operator|+
+name|this
+assert|;
+return|return
+literal|false
+return|;
+block|}
+return|return
+literal|true
+return|;
+block|}
 block|}
 end_class
 

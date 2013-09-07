@@ -201,28 +201,21 @@ argument_list|(
 literal|true
 argument_list|)
 expr_stmt|;
-comment|// TODO zfong 11/19/07 - Extend the check below to all types of
-comment|// operators, similar to SqlOperator.checkOperandCount.  However,
-comment|// that method operates on SqlCalls, which may have not have the
-comment|// same number of operands as their corresponding RexCalls.  One
-comment|// example is the CAST operator, which is originally a 2-operand
-comment|// SqlCall, but is later converted to a 1-operand RexCall.
-if|if
-condition|(
-name|op
-operator|instanceof
-name|SqlBinaryOperator
-condition|)
-block|{
 assert|assert
+name|op
+operator|.
+name|validRexOperands
+argument_list|(
 name|operands
 operator|.
 name|size
 argument_list|()
-operator|==
-literal|2
+argument_list|,
+literal|true
+argument_list|)
+operator|:
+name|this
 assert|;
-block|}
 block|}
 comment|//~ Methods ----------------------------------------------------------------
 comment|/**      * Returns the {@link RexKind} corresponding to a {@link SqlKind}. Fails if      * there is none. Never returns null.      */

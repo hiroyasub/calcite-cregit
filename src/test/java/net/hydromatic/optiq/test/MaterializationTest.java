@@ -668,8 +668,6 @@ block|{
 block|}
 comment|/** Unit test for logic functions    * {@link org.eigenbase.relopt.SubstitutionVisitor#mayBeSatisfiable} and    * {@link org.eigenbase.relopt.SubstitutionVisitor#simplify}. */
 annotation|@
-name|Ignore
-annotation|@
 name|Test
 specifier|public
 name|void
@@ -1037,7 +1035,7 @@ argument_list|,
 literal|"AND(=($0, 0), NOT(AND(=($0, 0), =($1, 1))))"
 argument_list|)
 expr_stmt|;
-comment|// "$0 = 0 AND $1 = 1 NOT ($0 = 0)" may be satisfiable. Can simplify.
+comment|// "$0 = 0 AND ($1 = 1 AND NOT ($0 = 0))" is not satisfiable.
 specifier|final
 name|RexNode
 name|e7
@@ -1075,11 +1073,9 @@ argument_list|)
 argument_list|)
 argument_list|)
 decl_stmt|;
-name|checkSatisfiable
+name|checkNotSatisfiable
 argument_list|(
 name|e7
-argument_list|,
-literal|"AND(=($0, 0), NOT(AND(=($0, 0), =($1, 1))))"
 argument_list|)
 expr_stmt|;
 comment|// The expression "$2".

@@ -67,6 +67,20 @@ name|eigenbase
 operator|.
 name|sql
 operator|.
+name|fun
+operator|.
+name|SqlStdOperatorTable
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
+name|sql
+operator|.
 name|type
 operator|.
 name|*
@@ -193,7 +207,7 @@ argument_list|(
 name|operandsCount
 argument_list|)
 expr_stmt|;
-comment|//op0 opname op1
+comment|// op0 opname op1
 return|return
 literal|"{1} {0} {2}"
 return|;
@@ -381,7 +395,7 @@ operator|)
 operator|:
 literal|"An implicit or explicit collation should have been set"
 assert|;
-comment|//validation will occur inside getCoercibilityDyadicOperator...
+comment|// validation will occur inside getCoercibilityDyadicOperator...
 name|SqlCollation
 name|resultCol
 init|=
@@ -609,7 +623,7 @@ operator|)
 operator|:
 literal|"An implicit or explicit collation should have been set"
 assert|;
-comment|//validation will occur inside getCoercibilityDyadicOperator...
+comment|// validation will occur inside getCoercibilityDyadicOperator...
 name|SqlCollation
 name|resultCol
 init|=
@@ -808,6 +822,72 @@ name|call
 argument_list|,
 name|scope
 argument_list|)
+return|;
+block|}
+annotation|@
+name|Override
+specifier|public
+name|boolean
+name|validRexOperands
+parameter_list|(
+name|int
+name|count
+parameter_list|,
+name|boolean
+name|fail
+parameter_list|)
+block|{
+if|if
+condition|(
+name|count
+operator|!=
+literal|2
+condition|)
+block|{
+comment|// Special exception for AND and OR.
+if|if
+condition|(
+operator|(
+name|this
+operator|==
+name|SqlStdOperatorTable
+operator|.
+name|andOperator
+operator|||
+name|this
+operator|==
+name|SqlStdOperatorTable
+operator|.
+name|orOperator
+operator|)
+operator|&&
+name|count
+operator|>
+literal|2
+condition|)
+block|{
+return|return
+literal|true
+return|;
+block|}
+assert|assert
+operator|!
+name|fail
+operator|:
+literal|"wrong operand count "
+operator|+
+name|count
+operator|+
+literal|" for "
+operator|+
+name|this
+assert|;
+return|return
+literal|false
+return|;
+block|}
+return|return
+literal|true
 return|;
 block|}
 block|}
