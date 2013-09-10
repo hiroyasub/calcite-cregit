@@ -33,6 +33,22 @@ end_import
 
 begin_import
 import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|optiq
+operator|.
+name|util
+operator|.
+name|graph
+operator|.
+name|DirectedGraphTest
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|eigenbase
@@ -173,7 +189,7 @@ name|ArrayQueueTest
 operator|.
 name|class
 block|,
-name|GraphTest
+name|DirectedGraphTest
 operator|.
 name|class
 block|,

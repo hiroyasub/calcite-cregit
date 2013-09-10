@@ -143,6 +143,22 @@ name|net
 operator|.
 name|hydromatic
 operator|.
+name|optiq
+operator|.
+name|util
+operator|.
+name|graph
+operator|.
+name|*
+import|;
+end_import
+
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
 name|linq4j
 operator|.
 name|expressions
@@ -759,17 +775,20 @@ comment|//   T2 = T Group by C1
 comment|// graph will contain
 comment|//   (T, Emps), (T, Depts), (T2, T)
 comment|// and therefore we can deduce T2 uses Emps.
-name|Graph
+name|DirectedGraph
 argument_list|<
 name|List
+argument_list|<
+name|String
+argument_list|>
+argument_list|,
+name|DefaultEdge
 argument_list|>
 name|usesGraph
 init|=
-operator|new
-name|Graph
-argument_list|<
-name|List
-argument_list|>
+name|DefaultDirectedGraph
+operator|.
+name|create
 argument_list|()
 decl_stmt|;
 for|for
@@ -804,7 +823,7 @@ control|)
 block|{
 name|usesGraph
 operator|.
-name|createArc
+name|addEdge
 argument_list|(
 name|materialization
 operator|.
@@ -825,6 +844,27 @@ block|}
 comment|// Use a materialization if uses at least one of the tables are used by
 comment|// the query. (Simple rule that includes some materializations we won't
 comment|// actually use.)
+specifier|final
+name|Graphs
+operator|.
+name|FrozenGraph
+argument_list|<
+name|List
+argument_list|<
+name|String
+argument_list|>
+argument_list|,
+name|DefaultEdge
+argument_list|>
+name|frozenGraph
+init|=
+name|Graphs
+operator|.
+name|makeImmutable
+argument_list|(
+name|usesGraph
+argument_list|)
+decl_stmt|;
 specifier|final
 name|Set
 argument_list|<
@@ -864,7 +904,7 @@ name|table
 argument_list|,
 name|queryTables
 argument_list|,
-name|usesGraph
+name|frozenGraph
 argument_list|)
 condition|)
 block|{
@@ -891,9 +931,16 @@ name|RelOptTable
 argument_list|>
 name|usedTables
 parameter_list|,
-name|Graph
+name|Graphs
+operator|.
+name|FrozenGraph
 argument_list|<
 name|List
+argument_list|<
+name|String
+argument_list|>
+argument_list|,
+name|DefaultEdge
 argument_list|>
 name|usesGraph
 parameter_list|)

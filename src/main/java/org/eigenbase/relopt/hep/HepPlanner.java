@@ -234,22 +234,10 @@ argument_list|()
 expr_stmt|;
 name|graph
 operator|=
-operator|new
 name|DefaultDirectedGraph
-argument_list|<
-name|HepRelVertex
-argument_list|,
-name|DefaultEdge
-argument_list|>
-argument_list|(
-name|DefaultEdge
 operator|.
-expr|<
-name|HepRelVertex
-operator|>
-name|factory
+name|create
 argument_list|()
-argument_list|)
 expr_stmt|;
 comment|// NOTE jvs 24-Apr-2006:  We use LinkedHashSet here and below
 comment|// in order to provide deterministic behavior.
