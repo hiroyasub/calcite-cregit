@@ -63,30 +63,6 @@ name|Test
 import|;
 end_import
 
-begin_import
-import|import
-name|org
-operator|.
-name|junit
-operator|.
-name|runner
-operator|.
-name|RunWith
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|junit
-operator|.
-name|runners
-operator|.
-name|JUnit4
-import|;
-end_import
-
 begin_comment
 comment|/**  * HepPlannerTest is a unit test for {@link HepPlanner}. See {@link  * RelOptRulesTest} for an explanation of how to add tests; the tests in this  * class are targeted at exercising the planner, and use specific rules for  * convenience only, whereas the tests in that class are targeted at exercising  * specific rules, and use the planner for convenience only. Hence the split.  */
 end_comment
