@@ -235,6 +235,7 @@ specifier|final
 name|Expression
 name|expression
 decl_stmt|;
+specifier|public
 specifier|final
 name|SqlDialect
 name|dialect

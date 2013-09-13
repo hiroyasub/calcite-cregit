@@ -2318,6 +2318,7 @@ argument_list|)
 return|;
 block|}
 comment|/** Converts a non-query node into a SELECT node. Set operators (UNION,      * INTERSECT, EXCEPT) remain as is. */
+specifier|public
 name|SqlNode
 name|asQuery
 parameter_list|()

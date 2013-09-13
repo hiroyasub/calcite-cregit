@@ -1034,7 +1034,7 @@ literal|"empid=100; deptno=10; name=Bill; salary=10000.0; commission=1000\n"
 operator|+
 literal|"empid=110; deptno=10; name=Theodore; salary=11500.0; commission=250\n"
 argument_list|,
-name|JdbcTest
+name|OptiqAssert
 operator|.
 name|toString
 argument_list|(
