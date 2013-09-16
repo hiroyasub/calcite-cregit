@@ -4419,6 +4419,49 @@ literal|"empid=200; deptno=20; name=Eric; salary=8000.0; commission=500\n"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Tests composite GROUP BY where one of the columns has NULL values. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testGroupByNull
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|assertThat
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select \"deptno\", \"commission\", sum(\"salary\") s\n"
+operator|+
+literal|"from \"hr\".\"emps\"\n"
+operator|+
+literal|"group by \"deptno\", \"commission\""
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"deptno=10; commission=null; S=7000.0\n"
+operator|+
+literal|"deptno=20; commission=500; S=8000.0\n"
+operator|+
+literal|"deptno=10; commission=1000; S=10000.0\n"
+operator|+
+literal|"deptno=10; commission=250; S=11500.0\n"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Tests sorting by a column that is already sorted. */
 annotation|@
 name|Test
