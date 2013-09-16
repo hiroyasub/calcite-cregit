@@ -61,13 +61,15 @@ parameter_list|,
 name|E
 parameter_list|>
 block|{
-name|void
+comment|/** Adds a vertex to this graph.    *    * @param vertex Vertex    * @return Whether vertex was added    */
+name|boolean
 name|addVertex
 parameter_list|(
 name|V
 name|vertex
 parameter_list|)
 function_decl|;
+comment|/** Adds an edge to this graph.    *    * @param vertex Source vertex    * @param targetVertex Target vertex    * @return New edge, if added, otherwise null    * @throws IllegalArgumentException if either vertex is not already in graph    */
 name|E
 name|addEdge
 parameter_list|(
