@@ -2878,6 +2878,7 @@ name|current
 parameter_list|)
 function_decl|;
 block|}
+specifier|public
 enum|enum
 name|NullAs
 block|{

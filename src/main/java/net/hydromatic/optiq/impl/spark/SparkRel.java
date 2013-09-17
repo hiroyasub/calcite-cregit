@@ -144,7 +144,27 @@ block|}
 specifier|public
 class|class
 name|Result
-block|{   }
+block|{
+specifier|public
+specifier|final
+name|BlockStatement
+name|block
+decl_stmt|;
+specifier|public
+name|Result
+parameter_list|(
+name|BlockStatement
+name|block
+parameter_list|)
+block|{
+name|this
+operator|.
+name|block
+operator|=
+name|block
+expr_stmt|;
+block|}
+block|}
 block|}
 end_interface
 

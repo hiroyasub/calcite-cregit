@@ -341,6 +341,10 @@ name|JdbcAdapterTest
 operator|.
 name|class
 block|,
+name|SparkAdapterTest
+operator|.
+name|class
+block|,
 name|JdbcTest
 operator|.
 name|class
