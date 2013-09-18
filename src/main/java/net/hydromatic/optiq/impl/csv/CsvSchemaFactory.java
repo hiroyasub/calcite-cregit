@@ -133,6 +133,8 @@ name|CsvSchema
 argument_list|(
 name|parentSchema
 argument_list|,
+name|name
+argument_list|,
 operator|new
 name|File
 argument_list|(

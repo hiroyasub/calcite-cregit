@@ -125,12 +125,15 @@ specifier|final
 name|boolean
 name|smart
 decl_stmt|;
-comment|/**    * Creates a CSV schema.    *    * @param parentSchema Parent schema    * @param directoryFile Directory that holds .csv files    * @param expression Java expression to create an instance of this schema    *                   in generated code    * @param smart      Whether to instantiate smart tables that undergo    *                   query optimization    */
+comment|/**    * Creates a CSV schema.    *    * @param parentSchema Parent schema    * @param name Schema name    * @param directoryFile Directory that holds .csv files    * @param expression Java expression to create an instance of this schema    *                   in generated code    * @param smart      Whether to instantiate smart tables that undergo    *                   query optimization    */
 specifier|public
 name|CsvSchema
 parameter_list|(
 name|Schema
 name|parentSchema
+parameter_list|,
+name|String
+name|name
 parameter_list|,
 name|File
 name|directoryFile
@@ -145,6 +148,8 @@ block|{
 name|super
 argument_list|(
 name|parentSchema
+argument_list|,
+name|name
 argument_list|,
 name|expression
 argument_list|)
