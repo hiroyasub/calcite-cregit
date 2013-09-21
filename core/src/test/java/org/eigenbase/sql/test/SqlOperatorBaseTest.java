@@ -4595,6 +4595,7 @@ condition|(
 literal|true
 condition|)
 block|{
+specifier|final
 name|Calendar
 name|cal
 init|=
@@ -4602,10 +4603,6 @@ name|Calendar
 operator|.
 name|getInstance
 argument_list|()
-decl_stmt|;
-specifier|final
-name|Calendar
-name|fcal
 decl_stmt|;
 try|try
 block|{
@@ -4619,9 +4616,8 @@ name|Calendar
 operator|.
 name|DAY_OF_MONTH
 case|:
-comment|// Within two minutes of the end of the day.
-comment|// Wait 2 minutes to force calendar into next
-comment|// day, then get a new instance to return
+comment|// Within two minutes of the end of the day. Wait in 10s
+comment|// increments until calendar moves into the next next day.
 if|if
 condition|(
 operator|(
@@ -4655,37 +4651,23 @@ name|Thread
 operator|.
 name|sleep
 argument_list|(
-literal|2
-operator|*
-literal|60
+literal|10
 operator|*
 literal|1000
 argument_list|)
 expr_stmt|;
-name|cal
-operator|=
-name|Calendar
-operator|.
-name|getInstance
-argument_list|()
-expr_stmt|;
 continue|continue;
 block|}
-name|fcal
-operator|=
-name|cal
-expr_stmt|;
 return|return
-name|fcal
+name|cal
 return|;
 case|case
 name|Calendar
 operator|.
 name|HOUR_OF_DAY
 case|:
-comment|// Within two minutes of the top of the hour.
-comment|// Wait 2 minutes to force calendar into next
-comment|// hour, then get a new instance to return
+comment|// Within two minutes of the top of the hour. Wait in 10s
+comment|// increments until calendar moves into the next next day.
 if|if
 condition|(
 operator|(
@@ -4706,28 +4688,15 @@ name|Thread
 operator|.
 name|sleep
 argument_list|(
-literal|2
-operator|*
-literal|60
+literal|10
 operator|*
 literal|1000
 argument_list|)
 expr_stmt|;
-name|cal
-operator|=
-name|Calendar
-operator|.
-name|getInstance
-argument_list|()
-expr_stmt|;
 continue|continue;
 block|}
-name|fcal
-operator|=
-name|cal
-expr_stmt|;
 return|return
-name|fcal
+name|cal
 return|;
 default|default:
 throw|throw

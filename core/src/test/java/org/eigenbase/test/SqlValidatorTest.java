@@ -3604,18 +3604,23 @@ expr_stmt|;
 block|}
 else|else
 block|{
-comment|// Very poor error message. JVS's above remarks notwithstanding,
-comment|// the parser creates a call to TRIM with 1 rather than the
-comment|// expected 3 args, and the remaining two args are filled in with
-comment|// NULL literals so that we get as far as validation.
 name|checkExpFails
 argument_list|(
-literal|"^\"TRIM\"('b')^"
+literal|"^\"TRIM\"('b' FROM 'a')^"
 argument_list|,
-literal|"No match found for function signature TRIM\\(<CHARACTER>\\)"
+literal|"(?s).*Encountered \"FROM\" at .*"
 argument_list|)
 expr_stmt|;
-comment|// It's OK if the function name is not quoted
+comment|// Without the "FROM" noise word, TRIM is parsed as a regular
+comment|// function, not as a built-in. So we can parse with and without
+comment|// quoting.
+name|checkExpType
+argument_list|(
+literal|"\"TRIM\"('b')"
+argument_list|,
+literal|"VARCHAR(1) NOT NULL"
+argument_list|)
+expr_stmt|;
 name|checkExpType
 argument_list|(
 literal|"TRIM('b')"
