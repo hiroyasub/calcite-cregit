@@ -702,7 +702,7 @@ decl_stmt|;
 comment|// if we have a match on function name and parameter count, but
 comment|// couldn't find a function with  a COLUMN_LIST type, retry, but
 comment|// this time, don't convert the row argument to a COLUMN_LIST type;
-comment|// if we did find a match, go back and revalidate the row operands
+comment|// if we did find a match, go back and re-validate the row operands
 comment|// (corresponding to column references), now that we can set the
 comment|// scope to that of the source cursor referenced by that ColumnList
 comment|// type
@@ -739,7 +739,7 @@ argument_list|)
 condition|)
 block|{
 comment|// remove the already validated node types corresponding to
-comment|// row arguments before revalidating
+comment|// row arguments before re-validating
 for|for
 control|(
 name|SqlNode

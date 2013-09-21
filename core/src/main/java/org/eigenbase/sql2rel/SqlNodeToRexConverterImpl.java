@@ -123,6 +123,20 @@ name|*
 import|;
 end_import
 
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|optiq
+operator|.
+name|runtime
+operator|.
+name|ByteString
+import|;
+end_import
+
 begin_comment
 comment|/**  * Standard implementation of {@link SqlNodeToRexConverter}.  *  * @author jhyde  * @version $Id$  * @since 2005/8/4  */
 end_comment
@@ -476,21 +490,24 @@ argument_list|)
 expr_stmt|;
 comment|// An even number of hexits (e.g. X'ABCD') makes whole number
 comment|// of bytes.
-name|byte
-index|[]
-name|bytes
+name|ByteString
+name|byteString
 init|=
+operator|new
+name|ByteString
+argument_list|(
 name|bitString
 operator|.
 name|getAsByteArray
 argument_list|()
+argument_list|)
 decl_stmt|;
 return|return
 name|rexBuilder
 operator|.
 name|makeBinaryLiteral
 argument_list|(
-name|bytes
+name|byteString
 argument_list|)
 return|;
 case|case

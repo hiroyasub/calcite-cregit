@@ -398,7 +398,7 @@ specifier|private
 specifier|static
 class|class
 name|SparkImplementorImpl
-implements|implements
+extends|extends
 name|SparkRel
 operator|.
 name|Implementor
@@ -415,6 +415,14 @@ name|EnumerableRelImplementor
 name|implementor
 parameter_list|)
 block|{
+name|super
+argument_list|(
+name|implementor
+operator|.
+name|getRexBuilder
+argument_list|()
+argument_list|)
+expr_stmt|;
 name|this
 operator|.
 name|implementor

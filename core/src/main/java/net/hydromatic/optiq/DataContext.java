@@ -83,6 +83,14 @@ name|JavaTypeFactory
 name|getTypeFactory
 parameter_list|()
 function_decl|;
+comment|/**    * Returns a context variable.    *    *<p>Supported variables include: "sparkContext", "currentTimestamp",    * "localTimestamp".</p>    *    * @param name Name of variable    */
+name|Object
+name|get
+parameter_list|(
+name|String
+name|name
+parameter_list|)
+function_decl|;
 block|}
 end_interface
 

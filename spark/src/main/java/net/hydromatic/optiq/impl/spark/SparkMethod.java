@@ -45,6 +45,18 @@ end_import
 
 begin_import
 import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|optiq
+operator|.
+name|DataContext
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|apache
@@ -161,6 +173,10 @@ operator|.
 name|class
 argument_list|,
 literal|"getSparkContext"
+argument_list|,
+name|DataContext
+operator|.
+name|class
 argument_list|)
 block|;
 specifier|public

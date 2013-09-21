@@ -1773,7 +1773,7 @@ argument_list|()
 return|;
 block|}
 block|}
-comment|/**    * Accessor that assumes that the underlying value is a {@link Float};    * corresponds to {@link java.sql.Types#FLOAT}.    */
+comment|/**    * Accessor that assumes that the underlying value is a {@link Double};    * corresponds to {@link java.sql.Types#DOUBLE}.    */
 specifier|private
 specifier|static
 class|class
@@ -2080,7 +2080,7 @@ argument_list|()
 return|;
 block|}
 block|}
-comment|/**    * Accessor that assumes that the underlying value is a {@link String};    * corresponds to {@link java.sql.Types#CHAR} and {@link java.sql.Types#VARCHAR}.    */
+comment|/**    * Accessor that assumes that the underlying value is a {@link String};    * corresponds to {@link java.sql.Types#CHAR}    * and {@link java.sql.Types#VARCHAR}.    */
 specifier|private
 specifier|static
 class|class
@@ -2188,7 +2188,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**    * Accessor that assumes that the underlying value is an array of    * {@code byte} values;    * corresponds to {@link java.sql.Types#BINARY} and {@link java.sql.Types#VARBINARY}.    */
+comment|/**    * Accessor that assumes that the underlying value is an array of    * {@link ByteString} values;    * corresponds to {@link java.sql.Types#BINARY}    * and {@link java.sql.Types#VARBINARY}.    */
 specifier|private
 specifier|static
 class|class
@@ -2215,42 +2215,27 @@ index|[]
 name|getBytes
 parameter_list|()
 block|{
-return|return
+specifier|final
+name|ByteString
+name|o
+init|=
 operator|(
-name|byte
-index|[]
+name|ByteString
 operator|)
 name|getObject
 argument_list|()
-return|;
-block|}
-annotation|@
-name|Override
-specifier|public
-name|String
-name|getString
-parameter_list|()
-block|{
-name|byte
-index|[]
-name|bytes
-init|=
-name|getBytes
-argument_list|()
 decl_stmt|;
 return|return
-name|bytes
+name|o
 operator|==
 literal|null
 condition|?
 literal|null
 else|:
-name|ByteString
+name|o
 operator|.
-name|toString
-argument_list|(
-name|bytes
-argument_list|)
+name|getBytes
+argument_list|()
 return|;
 block|}
 block|}

@@ -190,15 +190,6 @@ name|Frg282Fixed
 init|=
 literal|false
 decl_stmt|;
-comment|/**      * Whether<a href="http://issues.eigenbase.org/browse/FRG-283">issue      * FRG-283: Calc cannot cast VARBINARY values</a> is fixed.      */
-specifier|public
-specifier|static
-specifier|final
-name|boolean
-name|Frg283Fixed
-init|=
-literal|false
-decl_stmt|;
 comment|/**      * Whether<a href="http://issues.eigenbase.org/browse/FRG-296">issue      * FRG-296: SUBSTRING(string FROM regexp FOR regexp)</a> is fixed.      */
 specifier|public
 specifier|static

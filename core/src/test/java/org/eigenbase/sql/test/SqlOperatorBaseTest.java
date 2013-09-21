@@ -365,7 +365,7 @@ name|compile
 argument_list|(
 literal|"[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9] "
 operator|+
-literal|"[0-9][0-9]:[0-9][0-9]:[0-9][0-9]"
+literal|"[0-9][0-9]:[0-9][0-9]:[0-9][0-9].[0-9][0-9][0-9]"
 argument_list|)
 decl_stmt|;
 comment|/**      * Regular expression for a SQL DATE value.      */
@@ -747,7 +747,7 @@ specifier|protected
 specifier|static
 specifier|final
 name|TimeZone
-name|gmtTimeZone
+name|UTC_TZ
 init|=
 name|TimeZone
 operator|.
@@ -756,16 +756,26 @@ argument_list|(
 literal|"GMT"
 argument_list|)
 decl_stmt|;
+comment|// time zone for the LOCAL_{DATE,TIME,TIMESTAMP} functions
 specifier|protected
 specifier|static
 specifier|final
 name|TimeZone
-name|defaultTimeZone
+name|LOCAL_TZ
 init|=
 name|TimeZone
 operator|.
 name|getDefault
 argument_list|()
+decl_stmt|;
+comment|// time zone for the CURRENT{DATE,TIME,TIMESTAMP} functions
+specifier|protected
+specifier|static
+specifier|final
+name|TimeZone
+name|CURRENT_TZ
+init|=
+name|LOCAL_TZ
 decl_stmt|;
 specifier|private
 specifier|static
@@ -878,14 +888,19 @@ name|void
 name|testDummy
 parameter_list|()
 block|{
-name|checkCastToScalarOkay
+name|tester
+operator|.
+name|checkString
 argument_list|(
-literal|"'1'"
+literal|"trim(leading 'a' from 'aAa')"
 argument_list|,
-literal|"INTEGER"
+literal|"Aa"
 argument_list|,
-literal|"1"
+literal|"VARCHAR(3) NOT NULL"
 argument_list|)
+expr_stmt|;
+name|testTrimFunc
+argument_list|()
 expr_stmt|;
 block|}
 annotation|@
@@ -1108,14 +1123,6 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-operator|!
-name|enable
-condition|)
-block|{
-return|return;
-block|}
 name|tester
 operator|.
 name|checkBoolean
@@ -5027,14 +5034,21 @@ argument_list|(
 literal|"case 'a' when 'b' then 1 end"
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-operator|!
-name|enable
-condition|)
-block|{
-return|return;
-block|}
+comment|// Per spec, 'case x when y then ...'
+comment|// translates to 'case when x = y then ...'
+comment|// so nulls do not match.
+comment|// (Unlike Oracle's 'decode(null, null, ...)', by the way.)
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"case cast(null as int) when cast(null as int) then 'nulls match' else 'nulls do not match' end"
+argument_list|,
+literal|"nulls do not match"
+argument_list|,
+literal|"CHAR(18) NOT NULL"
+argument_list|)
+expr_stmt|;
 name|tester
 operator|.
 name|checkScalarExact
@@ -5042,6 +5056,18 @@ argument_list|(
 literal|"case when 'a'=cast(null as varchar(1)) then 1 else 2 end"
 argument_list|,
 literal|"2"
+argument_list|)
+expr_stmt|;
+comment|// equivalent to "nullif('a',cast(null as varchar(1)))"
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"case when 'a' = cast(null as varchar(1)) then null else 'a' end"
+argument_list|,
+literal|"a"
+argument_list|,
+literal|"CHAR(1)"
 argument_list|)
 expr_stmt|;
 if|if
@@ -5069,6 +5095,92 @@ argument_list|,
 literal|"ROW(CHAR(2) NOT NULL, CHAR(2) NOT NULL)"
 argument_list|,
 literal|"row('a ','b ')"
+argument_list|)
+expr_stmt|;
+comment|// multiple values in some cases (introduced in SQL:2011)
+comment|// https://github.com/julianhyde/optiq/issues/53
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"case 1 "
+operator|+
+literal|"when 1, 2 then '1 or 2' "
+operator|+
+literal|"when 2 then 'not possible' end"
+operator|+
+literal|"when 3, 2 then '3' "
+operator|+
+literal|"else 'none of the above' "
+operator|+
+literal|"end"
+argument_list|,
+literal|"a"
+argument_list|,
+literal|"VARCHAR(3)"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"case 2 "
+operator|+
+literal|"when 1, 2 then '1 or 2' "
+operator|+
+literal|"when 2 then 'not possible' end"
+operator|+
+literal|"when 3, 2 then '3' "
+operator|+
+literal|"else 'none of the above' "
+operator|+
+literal|"end"
+argument_list|,
+literal|"1 or 2"
+argument_list|,
+literal|"VARCHAR(3)"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"case 3 "
+operator|+
+literal|"when 1, 2 then '1 or 2' "
+operator|+
+literal|"when 2 then 'not possible' end"
+operator|+
+literal|"when 3, 2 then '3' "
+operator|+
+literal|"else 'none of the above' "
+operator|+
+literal|"end"
+argument_list|,
+literal|"3"
+argument_list|,
+literal|"VARCHAR(3)"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"case 4 "
+operator|+
+literal|"when 1, 2 then '1 or 2' "
+operator|+
+literal|"when 2 then 'not possible' end"
+operator|+
+literal|"when 3, 2 then '3' "
+operator|+
+literal|"else 'none of the above' "
+operator|+
+literal|"end"
+argument_list|,
+literal|"none of the above"
+argument_list|,
+literal|"VARCHAR(3)"
 argument_list|)
 expr_stmt|;
 block|}
@@ -6357,14 +6469,6 @@ argument_list|,
 literal|"CHAR(25) NOT NULL"
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-operator|!
-name|enable
-condition|)
-block|{
-return|return;
-block|}
 name|tester
 operator|.
 name|checkBoolean
@@ -6629,21 +6733,15 @@ argument_list|(
 literal|" cast(null as char(1)) || cast(null as char(2)) "
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-name|todo
-condition|)
-block|{
-comment|// not yet implemented
 name|tester
 operator|.
 name|checkString
 argument_list|(
-literal|" x'f'||x'f' "
+literal|" x'fe'||x'df' "
 argument_list|,
-literal|"X'FF"
+literal|"fedf"
 argument_list|,
-literal|"BINARY(1) NOT NULL"
+literal|"BINARY(2) NOT NULL"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -6653,7 +6751,6 @@ argument_list|(
 literal|"x'ff' || cast(null as varbinary)"
 argument_list|)
 expr_stmt|;
-block|}
 block|}
 annotation|@
 name|Test
@@ -6988,6 +7085,50 @@ argument_list|,
 name|Boolean
 operator|.
 name|FALSE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"true = true"
+argument_list|,
+name|Boolean
+operator|.
+name|TRUE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"true = false"
+argument_list|,
+name|Boolean
+operator|.
+name|FALSE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"false = true"
+argument_list|,
+name|Boolean
+operator|.
+name|FALSE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"false = false"
+argument_list|,
+name|Boolean
+operator|.
+name|TRUE
 argument_list|)
 expr_stmt|;
 name|tester
@@ -7491,14 +7632,6 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-operator|!
-name|enable
-condition|)
-block|{
-return|return;
-block|}
 name|tester
 operator|.
 name|checkBoolean
@@ -7602,6 +7735,14 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|// Intervals
+if|if
+condition|(
+operator|!
+name|INTERVAL
+condition|)
+block|{
+return|return;
+block|}
 name|tester
 operator|.
 name|checkBoolean
@@ -7759,7 +7900,7 @@ block|}
 if|if
 condition|(
 operator|!
-name|enable
+name|INTERVAL
 condition|)
 block|{
 return|return;
@@ -13017,12 +13158,8 @@ argument_list|)
 expr_stmt|;
 if|if
 condition|(
-operator|!
 name|enable
 condition|)
-block|{
-return|return;
-block|}
 name|tester
 operator|.
 name|checkString
@@ -13036,6 +13173,10 @@ argument_list|,
 literal|"VARCHAR(15) NOT NULL"
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+name|enable
+condition|)
 name|tester
 operator|.
 name|checkString
@@ -13063,20 +13204,83 @@ argument_list|(
 literal|"overlay(cast(null as varchar(1)) placing 'abc' from 1)"
 argument_list|)
 expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"overlay(x'ABCdef' placing x'abcd' from 1)"
+argument_list|,
+literal|"abcdef"
+argument_list|,
+literal|"VARBINARY(5) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"overlay(x'ABCDEF1234' placing x'2345' from 1 for 2)"
+argument_list|,
+literal|"2345ef1234"
+argument_list|,
+literal|"VARBINARY(7) NOT NULL"
+argument_list|)
+expr_stmt|;
 if|if
 condition|(
-literal|false
+name|enable
 condition|)
-block|{
-comment|// hex strings not yet implemented in calc
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"overlay(cast(x'ABCdef' as varbinary(5)) placing "
+operator|+
+literal|"cast(x'abcd' as binary(3)) from 1 for 2)"
+argument_list|,
+literal|"abc  Cdef"
+argument_list|,
+literal|"VARBINARY(8) NOT NULL"
+argument_list|)
+expr_stmt|;
+if|if
+condition|(
+name|enable
+condition|)
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"overlay(cast(x'ABCdef' as binary(5)) placing "
+operator|+
+literal|"cast(x'abcd' as binary(3)) from 1 for 2)"
+argument_list|,
+literal|"abc  Cdef    "
+argument_list|,
+literal|"VARBINARY(8) NOT NULL"
+argument_list|)
+expr_stmt|;
 name|tester
 operator|.
 name|checkNull
 argument_list|(
-literal|"overlay(x'abc' placing x'abc' from cast(null as integer))"
+literal|"overlay(x'ABCdef' placing x'abcd' from 1 for cast(null as integer))"
 argument_list|)
 expr_stmt|;
-block|}
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"overlay(cast(null as varbinary(1)) placing x'abcd' from 1)"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"overlay(x'abcd' placing x'abcd' from cast(null as integer))"
+argument_list|)
+expr_stmt|;
 block|}
 annotation|@
 name|Test
@@ -13094,14 +13298,6 @@ operator|.
 name|positionFunc
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-operator|!
-name|enable
-condition|)
-block|{
-return|return;
-block|}
 name|tester
 operator|.
 name|checkScalarExact
@@ -13460,14 +13656,6 @@ operator|.
 name|powerFunc
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-operator|!
-name|enable
-condition|)
-block|{
-return|return;
-block|}
 name|tester
 operator|.
 name|checkScalarApprox
@@ -13603,7 +13791,6 @@ name|void
 name|testExpFunc
 parameter_list|()
 block|{
-comment|// todo: implement in fennel
 name|tester
 operator|.
 name|setFor
@@ -13615,14 +13802,6 @@ argument_list|,
 name|VM_FENNEL
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-operator|!
-name|enable
-condition|)
-block|{
-return|return;
-block|}
 name|tester
 operator|.
 name|checkScalarApprox
@@ -13832,14 +14011,6 @@ operator|.
 name|lnFunc
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-operator|!
-name|enable
-condition|)
-block|{
-return|return;
-block|}
 name|tester
 operator|.
 name|checkScalarApprox
@@ -13890,14 +14061,6 @@ operator|.
 name|log10Func
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-operator|!
-name|enable
-condition|)
-block|{
-return|return;
-block|}
 name|tester
 operator|.
 name|checkScalarApprox
@@ -13988,14 +14151,6 @@ operator|.
 name|absFunc
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-operator|!
-name|enable
-condition|)
-block|{
-return|return;
-block|}
 name|tester
 operator|.
 name|checkScalarExact
@@ -14201,14 +14356,6 @@ argument_list|(
 literal|"nullif(1,1)"
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-operator|!
-name|enable
-condition|)
-block|{
-return|return;
-block|}
 name|tester
 operator|.
 name|checkScalarExact
@@ -14499,14 +14646,6 @@ argument_list|,
 name|VM_FENNEL
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-operator|!
-name|enable
-condition|)
-block|{
-return|return;
-block|}
 name|tester
 operator|.
 name|checkString
@@ -14537,14 +14676,6 @@ argument_list|,
 name|VM_FENNEL
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-operator|!
-name|enable
-condition|)
-block|{
-return|return;
-block|}
 name|tester
 operator|.
 name|checkString
@@ -14575,14 +14706,6 @@ argument_list|,
 name|VM_FENNEL
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-operator|!
-name|enable
-condition|)
-block|{
-return|return;
-block|}
 name|tester
 operator|.
 name|checkString
@@ -14613,14 +14736,6 @@ argument_list|,
 name|VM_FENNEL
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-operator|!
-name|enable
-condition|)
-block|{
-return|return;
-block|}
 name|String
 name|user
 init|=
@@ -14662,14 +14777,6 @@ argument_list|,
 name|VM_FENNEL
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-operator|!
-name|enable
-condition|)
-block|{
-return|return;
-block|}
 name|tester
 operator|.
 name|checkString
@@ -14700,14 +14807,6 @@ argument_list|,
 name|VM_FENNEL
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-operator|!
-name|enable
-condition|)
-block|{
-return|return;
-block|}
 comment|// By default, the CURRENT_ROLE function returns
 comment|// the empty string because a role has to be set explicitly.
 name|tester
@@ -14738,14 +14837,6 @@ operator|.
 name|localTimeFunc
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-operator|!
-name|enable
-condition|)
-block|{
-return|return;
-block|}
 name|tester
 operator|.
 name|checkScalar
@@ -14791,7 +14882,7 @@ name|compile
 argument_list|(
 name|currentTimeString
 argument_list|(
-name|defaultTimeZone
+name|LOCAL_TZ
 argument_list|)
 operator|.
 name|substring
@@ -14822,14 +14913,6 @@ operator|.
 name|localTimestampFunc
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-operator|!
-name|enable
-condition|)
-block|{
-return|return;
-block|}
 name|tester
 operator|.
 name|checkScalar
@@ -14888,7 +14971,7 @@ name|compile
 argument_list|(
 name|currentTimeString
 argument_list|(
-name|defaultTimeZone
+name|LOCAL_TZ
 argument_list|)
 operator|+
 literal|"[0-9][0-9]:[0-9][0-9]"
@@ -14914,14 +14997,6 @@ operator|.
 name|currentTimeFunc
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-operator|!
-name|enable
-condition|)
-block|{
-return|return;
-block|}
 name|tester
 operator|.
 name|checkScalar
@@ -14955,15 +15030,6 @@ argument_list|,
 literal|"TIME(1) NOT NULL"
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-name|Bug
-operator|.
-name|Fnl77Fixed
-condition|)
-block|{
-comment|// Currently works with Java calc, but fennel calc returns time in
-comment|// GMT time zone.
 name|tester
 operator|.
 name|checkScalar
@@ -14976,7 +15042,7 @@ name|compile
 argument_list|(
 name|currentTimeString
 argument_list|(
-name|defaultTimeZone
+name|CURRENT_TZ
 argument_list|)
 operator|.
 name|substring
@@ -14990,7 +15056,6 @@ argument_list|,
 literal|"VARCHAR(30) NOT NULL"
 argument_list|)
 expr_stmt|;
-block|}
 block|}
 annotation|@
 name|Test
@@ -15008,14 +15073,6 @@ operator|.
 name|currentTimestampFunc
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-operator|!
-name|enable
-condition|)
-block|{
-return|return;
-block|}
 name|tester
 operator|.
 name|checkScalar
@@ -15060,18 +15117,6 @@ argument_list|,
 literal|"TIMESTAMP(1) NOT NULL"
 argument_list|)
 expr_stmt|;
-comment|// Check that timestamp is being generated in the right timezone by
-comment|// generating a specific timestamp. We truncate to hours so that minor
-comment|// delays don't generate false negatives.
-if|if
-condition|(
-name|Bug
-operator|.
-name|Fnl77Fixed
-condition|)
-block|{
-comment|// Currently works with Java calc, but fennel calc returns time in
-comment|// GMT time zone.
 name|tester
 operator|.
 name|checkScalar
@@ -15084,7 +15129,7 @@ name|compile
 argument_list|(
 name|currentTimeString
 argument_list|(
-name|defaultTimeZone
+name|CURRENT_TZ
 argument_list|)
 operator|+
 literal|"[0-9][0-9]:[0-9][0-9]"
@@ -15093,7 +15138,6 @@ argument_list|,
 literal|"VARCHAR(30) NOT NULL"
 argument_list|)
 expr_stmt|;
-block|}
 block|}
 comment|/**      * Returns a time string, in GMT, that will be valid for at least 2 minutes.      *      *<p>For example, at "2005-01-01 12:34:56 PST", returns "2005-01-01 20:".      * At "2005-01-01 12:34:59 PST", waits a minute, then returns "2005-01-01      * 21:".      *      * @param tz Time zone      *      * @return Time string      */
 specifier|protected
@@ -15162,14 +15206,6 @@ argument_list|,
 name|VM_FENNEL
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-operator|!
-name|enable
-condition|)
-block|{
-return|return;
-block|}
 name|tester
 operator|.
 name|checkScalar
@@ -15181,6 +15217,10 @@ argument_list|,
 literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+name|INTERVAL
+condition|)
 name|tester
 operator|.
 name|checkScalar
@@ -15203,6 +15243,24 @@ argument_list|)
 expr_stmt|;
 name|tester
 operator|.
+name|checkBoolean
+argument_list|(
+literal|"CURRENT_DATE IS NOT NULL"
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"NOT (CURRENT_DATE IS NULL)"
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
 name|checkFails
 argument_list|(
 literal|"^CURRENT_DATE()^"
@@ -15221,7 +15279,7 @@ literal|"CAST(CURRENT_DATE AS VARCHAR(30))"
 argument_list|,
 name|currentTimeString
 argument_list|(
-name|defaultTimeZone
+name|LOCAL_TZ
 argument_list|)
 operator|.
 name|substring
@@ -15314,17 +15372,9 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|trimBothFunc
+name|trimFunc
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-operator|!
-name|enable
-condition|)
-block|{
-return|return;
-block|}
 comment|// SQL:2003 6.29.11 Trimming a CHAR yields a VARCHAR
 name|tester
 operator|.
@@ -18384,27 +18434,6 @@ name|type
 operator|+
 literal|")"
 decl_stmt|;
-if|if
-condition|(
-operator|(
-name|type
-operator|.
-name|getSqlTypeName
-argument_list|()
-operator|==
-name|SqlTypeName
-operator|.
-name|VARBINARY
-operator|)
-operator|&&
-operator|!
-name|Bug
-operator|.
-name|Frg283Fixed
-condition|)
-block|{
-continue|continue;
-block|}
 try|try
 block|{
 name|tester
@@ -18749,6 +18778,28 @@ argument_list|,
 literal|"VARCHAR(2) NOT NULL"
 argument_list|)
 expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"CAST(x'ABCDEF12' AS BINARY(2))"
+argument_list|,
+literal|"abcd"
+argument_list|,
+literal|"BINARY(2) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"CAST(x'ABCDEF12' AS VARBINARY(2))"
+argument_list|,
+literal|"abcd"
+argument_list|,
+literal|"VARBINARY(2) NOT NULL"
+argument_list|)
+expr_stmt|;
 if|if
 condition|(
 operator|!
@@ -18756,36 +18807,6 @@ name|enable
 condition|)
 block|{
 return|return;
-block|}
-name|tester
-operator|.
-name|checkScalar
-argument_list|(
-literal|"CAST(x'ABCDEF12' AS BINARY(2))"
-argument_list|,
-literal|"ABCD"
-argument_list|,
-literal|"BINARY(2) NOT NULL"
-argument_list|)
-expr_stmt|;
-if|if
-condition|(
-name|Bug
-operator|.
-name|Frg283Fixed
-condition|)
-block|{
-name|tester
-operator|.
-name|checkScalar
-argument_list|(
-literal|"CAST(x'ABCDEF12' AS VARBINARY(2))"
-argument_list|,
-literal|"ABCD"
-argument_list|,
-literal|"VARBINARY(2) NOT NULL"
-argument_list|)
-expr_stmt|;
 block|}
 name|tester
 operator|.

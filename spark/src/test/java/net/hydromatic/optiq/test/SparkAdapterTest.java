@@ -21,16 +21,6 @@ name|org
 operator|.
 name|junit
 operator|.
-name|Ignore
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|junit
-operator|.
 name|Test
 import|;
 end_import
@@ -53,7 +43,7 @@ name|junit
 operator|.
 name|Assert
 operator|.
-name|assertTrue
+name|assertEquals
 import|;
 end_import
 
@@ -67,9 +57,6 @@ class|class
 name|SparkAdapterTest
 block|{
 comment|/**    * Tests a VALUES query evaluated using Spark.    * There are no data sources.    */
-annotation|@
-name|Ignore
-comment|// currently DAGScheduler gives ClassNotFoundException
 annotation|@
 name|Test
 specifier|public
@@ -113,12 +100,18 @@ operator|+
 literal|"from (values (1, 'a'), (2, 'b'))"
 argument_list|)
 decl_stmt|;
-name|assertTrue
+name|assertEquals
+argument_list|(
+literal|"EXPR$0=1; EXPR$1=a\n"
+operator|+
+literal|"EXPR$0=2; EXPR$1=b\n"
+argument_list|,
+name|OptiqAssert
+operator|.
+name|toString
 argument_list|(
 name|resultSet
-operator|.
-name|next
-argument_list|()
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
