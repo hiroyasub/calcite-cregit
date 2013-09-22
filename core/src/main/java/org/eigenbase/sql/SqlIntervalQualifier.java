@@ -125,6 +125,20 @@ name|*
 import|;
 end_import
 
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|optiq
+operator|.
+name|runtime
+operator|.
+name|SqlFunctions
+import|;
+end_import
+
 begin_comment
 comment|/**  * Represents an INTERVAL qualifier.  *  *<p>INTERVAL qualifier is defined as follows:  *  *<blockquote><code>  *  *&lt;interval qualifier&gt; ::=<br/>  *&nbsp;&nbsp;&lt;start field&gt; TO&lt;end field&gt;<br/>  *&nbsp;&nbsp;|&lt;single datetime field&gt;<br/>  *&lt;start field&gt; ::=<br/>  *&nbsp;&nbsp;&lt;non-second primary datetime field&gt;<br/>  *&nbsp;&nbsp; [&lt;left paren&gt;&lt;interval leading field precision&gt;  *&lt;right paren&gt; ]<br/>  *&lt;end field&gt; ::=<br/>  *&nbsp;&nbsp;&lt;non-second primary datetime field&gt;<br/>  *&nbsp;&nbsp;| SECOND [&lt;left paren&gt;  *&lt;interval fractional seconds precision&gt;&lt;right paren&gt; ]<br/>  *&lt;single datetime field&gt; ::=<br/>  *&nbsp;&nbsp;&lt;non-second primary datetime field&gt;<br/>  *&nbsp;&nbsp;[&lt;left paren&gt;&lt;interval leading field precision&gt;  *&lt;right paren&gt; ]<br/>  *&nbsp;&nbsp;| SECOND [&lt;left paren&gt;  *&lt;interval leading field precision&gt;<br/>  *&nbsp;&nbsp;[&lt;comma&gt;&lt;interval fractional seconds precision&gt; ]  *&lt;right paren&gt; ]<br/>  *&lt;primary datetime field&gt; ::=<br/>  *&nbsp;&nbsp;&lt;non-second primary datetime field&gt;<br/>  *&nbsp;&nbsp;| SECOND<br/>  *&lt;non-second primary datetime field&gt; ::= YEAR | MONTH | DAY | HOUR  * | MINUTE<br/>  *&lt;interval fractional seconds precision&gt; ::=  *&lt;unsigned integer&gt;<br/>  *&lt;interval leading field precision&gt; ::=&lt;unsigned integer&gt;  *  *</code></blockquote>  *  *<p>Examples include:  *  *<ul>  *<li><code>INTERVAL '1:23:45.678' HOUR TO SECOND</code></li>  *<li><code>INTERVAL '1 2:3:4' DAY TO SECOND</code></li>  *<li><code>INTERVAL '1 2:3:4' DAY(4) TO SECOND(4)</code></li>  *</ul>  *  * An instance of this class is immutable.  *  * @author Wael Chatila  * @version $Id$  * @since Oct 31, 2004  */
 end_comment
@@ -933,6 +947,27 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+specifier|public
+name|SqlFunctions
+operator|.
+name|TimeUnitRange
+name|foo
+parameter_list|()
+block|{
+return|return
+name|SqlFunctions
+operator|.
+name|TimeUnitRange
+operator|.
+name|valueOf
+argument_list|(
+name|timeUnitRange
+operator|.
+name|name
+argument_list|()
+argument_list|)
+return|;
+block|}
 specifier|public
 name|void
 name|validate

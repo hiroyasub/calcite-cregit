@@ -10283,12 +10283,7 @@ name|SqlIntervalLiteral
 operator|.
 name|IntervalValue
 operator|)
-operator|(
-operator|(
-name|SqlIntervalLiteral
-operator|)
 name|literal
-operator|)
 operator|.
 name|getValue
 argument_list|()

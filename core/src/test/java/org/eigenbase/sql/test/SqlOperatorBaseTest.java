@@ -115,22 +115,6 @@ name|eigenbase
 operator|.
 name|sql
 operator|.
-name|test
-operator|.
-name|SqlTester
-operator|.
-name|VmName
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
-name|sql
-operator|.
 name|type
 operator|.
 name|*
@@ -890,17 +874,10 @@ parameter_list|()
 block|{
 name|tester
 operator|.
-name|checkString
+name|checkNull
 argument_list|(
-literal|"trim(leading 'a' from 'aAa')"
-argument_list|,
-literal|"Aa"
-argument_list|,
-literal|"VARCHAR(3) NOT NULL"
+literal|"cast(null as interval day to second(3))"
 argument_list|)
-expr_stmt|;
-name|testTrimFunc
-argument_list|()
 expr_stmt|;
 block|}
 annotation|@
@@ -1943,24 +1920,6 @@ argument_list|,
 literal|"2008-01-01 01:02:03"
 argument_list|)
 expr_stmt|;
-comment|// todo: cast of intervals to strings not supported in fennel
-if|if
-condition|(
-operator|!
-operator|(
-name|tester
-operator|.
-name|isVm
-argument_list|(
-name|VmName
-operator|.
-name|FENNEL
-argument_list|)
-operator|)
-operator|&&
-name|INTERVAL
-condition|)
-block|{
 name|checkCastToString
 argument_list|(
 literal|"interval '3-2' year to month"
@@ -1997,7 +1956,6 @@ argument_list|,
 literal|"+1234.56"
 argument_list|)
 expr_stmt|;
-block|}
 comment|// boolean
 name|checkCastToString
 argument_list|(
@@ -2659,15 +2617,12 @@ operator|.
 name|castFunc
 argument_list|)
 expr_stmt|;
+comment|// interval to decimal
 if|if
 condition|(
-operator|!
-name|INTERVAL
+name|DECIMAL
 condition|)
 block|{
-return|return;
-block|}
-comment|// interval to decimal
 name|tester
 operator|.
 name|checkScalarExact
@@ -2789,6 +2744,15 @@ argument_list|,
 literal|"-5.0"
 argument_list|)
 expr_stmt|;
+block|}
+if|if
+condition|(
+operator|!
+name|INTERVAL
+condition|)
+block|{
+return|return;
+block|}
 comment|// Interval to bigint
 name|tester
 operator|.
@@ -3920,14 +3884,6 @@ argument_list|(
 literal|"cast(null as char(10))"
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-operator|!
-name|enable
-condition|)
-block|{
-return|return;
-block|}
 name|tester
 operator|.
 name|checkNull
@@ -3949,11 +3905,6 @@ argument_list|(
 literal|"cast(null as timestamp)"
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-name|INTERVAL
-condition|)
-block|{
 name|tester
 operator|.
 name|checkNull
@@ -3968,7 +3919,6 @@ argument_list|(
 literal|"cast(null as interval day to second(3))"
 argument_list|)
 expr_stmt|;
-block|}
 name|tester
 operator|.
 name|checkNull
@@ -6879,14 +6829,6 @@ name|void
 name|testDivideOperatorIntervals
 parameter_list|()
 block|{
-if|if
-condition|(
-operator|!
-name|INTERVAL
-condition|)
-block|{
-return|return;
-block|}
 name|tester
 operator|.
 name|checkScalar
@@ -6904,7 +6846,7 @@ name|checkScalar
 argument_list|(
 literal|"interval '2:5:12' hour to second / 2 / -3"
 argument_list|,
-literal|"-0:20:52"
+literal|"-0:20:52.000000"
 argument_list|,
 literal|"INTERVAL HOUR TO SECOND NOT NULL"
 argument_list|)
@@ -7173,15 +7115,6 @@ name|void
 name|testEqualsOperatorInterval
 parameter_list|()
 block|{
-comment|// Intervals
-if|if
-condition|(
-operator|!
-name|INTERVAL
-condition|)
-block|{
-return|return;
-block|}
 name|tester
 operator|.
 name|checkBoolean
@@ -7461,14 +7394,6 @@ name|void
 name|testGreaterThanOperatorIntervals
 parameter_list|()
 block|{
-if|if
-condition|(
-operator|!
-name|INTERVAL
-condition|)
-block|{
-return|return;
-block|}
 name|tester
 operator|.
 name|checkBoolean
@@ -7704,14 +7629,6 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|// Intervals
-if|if
-condition|(
-operator|!
-name|INTERVAL
-condition|)
-block|{
-return|return;
-block|}
 name|tester
 operator|.
 name|checkBoolean
@@ -7865,14 +7782,6 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-block|}
-if|if
-condition|(
-operator|!
-name|INTERVAL
-condition|)
-block|{
-return|return;
 block|}
 comment|// Intervals
 name|tester
@@ -8105,14 +8014,6 @@ name|void
 name|testGreaterThanOrEqualOperatorIntervals
 parameter_list|()
 block|{
-if|if
-condition|(
-operator|!
-name|INTERVAL
-condition|)
-block|{
-return|return;
-block|}
 name|tester
 operator|.
 name|checkBoolean
@@ -9173,14 +9074,6 @@ name|void
 name|testLessThanOrEqualOperatorInterval
 parameter_list|()
 block|{
-if|if
-condition|(
-operator|!
-name|INTERVAL
-condition|)
-block|{
-return|return;
-block|}
 name|tester
 operator|.
 name|checkBoolean
@@ -9505,14 +9398,6 @@ operator|.
 name|minusOperator
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-operator|!
-name|INTERVAL
-condition|)
-block|{
-return|return;
-block|}
 name|tester
 operator|.
 name|checkScalar
@@ -9576,6 +9461,14 @@ argument_list|,
 literal|"TIME(0) NOT NULL"
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+operator|!
+name|INTERVAL
+condition|)
+block|{
+return|return;
+block|}
 name|tester
 operator|.
 name|checkScalar
@@ -9985,14 +9878,6 @@ name|void
 name|testMultiplyIntervals
 parameter_list|()
 block|{
-if|if
-condition|(
-operator|!
-name|INTERVAL
-condition|)
-block|{
-return|return;
-block|}
 name|tester
 operator|.
 name|checkScalar
@@ -10010,7 +9895,7 @@ name|checkScalar
 argument_list|(
 literal|"3 * 2 * interval '2:5:12' hour to second"
 argument_list|,
-literal|"+12:31:12"
+literal|"+12:31:12.000000"
 argument_list|,
 literal|"INTERVAL HOUR TO SECOND NOT NULL"
 argument_list|)
@@ -10122,14 +10007,6 @@ name|void
 name|testNotEqualsOperatorIntervals
 parameter_list|()
 block|{
-if|if
-condition|(
-operator|!
-name|INTERVAL
-condition|)
-block|{
-return|return;
-block|}
 name|tester
 operator|.
 name|checkBoolean
@@ -10565,14 +10442,6 @@ operator|.
 name|plusOperator
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-operator|!
-name|INTERVAL
-condition|)
-block|{
-return|return;
-block|}
 name|tester
 operator|.
 name|checkScalar
@@ -10601,7 +10470,7 @@ name|checkScalar
 argument_list|(
 literal|"interval '2' day + interval '5' minute + interval '-3' second"
 argument_list|,
-literal|"+2 00:04:57"
+literal|"+2 00:04:57.000000"
 argument_list|,
 literal|"INTERVAL DAY TO SECOND NOT NULL"
 argument_list|)
@@ -10636,6 +10505,14 @@ argument_list|,
 literal|"TIME(0) NOT NULL"
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+operator|!
+name|INTERVAL
+condition|)
+block|{
+return|return;
+block|}
 name|tester
 operator|.
 name|checkScalar
@@ -11292,21 +11169,13 @@ name|void
 name|testPrefixMinusOperatorIntervals
 parameter_list|()
 block|{
-if|if
-condition|(
-operator|!
-name|INTERVAL
-condition|)
-block|{
-return|return;
-block|}
 name|tester
 operator|.
 name|checkScalar
 argument_list|(
 literal|"-interval '-6:2:8' hour to second"
 argument_list|,
-literal|"+6:02:08"
+literal|"+6:02:08.000000"
 argument_list|,
 literal|"INTERVAL HOUR TO SECOND NOT NULL"
 argument_list|)
@@ -11317,7 +11186,7 @@ name|checkScalar
 argument_list|(
 literal|"- -interval '-6:2:8' hour to second"
 argument_list|,
-literal|"-6:02:08"
+literal|"-6:02:08.000000"
 argument_list|,
 literal|"INTERVAL HOUR TO SECOND NOT NULL"
 argument_list|)
@@ -11414,21 +11283,13 @@ name|void
 name|testPrefixPlusOperatorIntervals
 parameter_list|()
 block|{
-if|if
-condition|(
-operator|!
-name|INTERVAL
-condition|)
-block|{
-return|return;
-block|}
 name|tester
 operator|.
 name|checkScalar
 argument_list|(
 literal|"+interval '-6:2:8' hour to second"
 argument_list|,
-literal|"-6:02:08"
+literal|"-6:02:08.000000"
 argument_list|,
 literal|"INTERVAL HOUR TO SECOND NOT NULL"
 argument_list|)
@@ -11439,7 +11300,7 @@ name|checkScalar
 argument_list|(
 literal|"++interval '-6:2:8' hour to second"
 argument_list|,
-literal|"-6:02:08"
+literal|"-6:02:08.000000"
 argument_list|,
 literal|"INTERVAL HOUR TO SECOND NOT NULL"
 argument_list|)
@@ -14262,14 +14123,6 @@ name|void
 name|testAbsFuncIntervals
 parameter_list|()
 block|{
-if|if
-condition|(
-operator|!
-name|INTERVAL
-condition|)
-block|{
-return|return;
-block|}
 name|tester
 operator|.
 name|checkScalar
@@ -14509,14 +14362,6 @@ name|void
 name|testNullIfOperatorIntervals
 parameter_list|()
 block|{
-if|if
-condition|(
-operator|!
-name|INTERVAL
-condition|)
-block|{
-return|return;
-block|}
 name|tester
 operator|.
 name|checkScalar
@@ -15186,10 +15031,6 @@ argument_list|,
 literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-name|INTERVAL
-condition|)
 name|tester
 operator|.
 name|checkScalar
@@ -15766,14 +15607,6 @@ argument_list|,
 name|VM_JAVA
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-operator|!
-name|INTERVAL
-condition|)
-block|{
-return|return;
-block|}
 name|tester
 operator|.
 name|checkScalar
@@ -15830,6 +15663,14 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+operator|!
+name|INTERVAL
+condition|)
+block|{
+return|return;
+block|}
 name|tester
 operator|.
 name|checkScalar
@@ -16200,21 +16041,13 @@ name|void
 name|testCeilFuncInterval
 parameter_list|()
 block|{
-if|if
-condition|(
-operator|!
-name|INTERVAL
-condition|)
-block|{
-return|return;
-block|}
 name|tester
 operator|.
 name|checkScalar
 argument_list|(
 literal|"ceil(interval '3:4:5' hour to second)"
 argument_list|,
-literal|"+4:00:00"
+literal|"+4:00:00.000000"
 argument_list|,
 literal|"INTERVAL HOUR TO SECOND NOT NULL"
 argument_list|)
@@ -16225,7 +16058,7 @@ name|checkScalar
 argument_list|(
 literal|"ceil(interval '-6.3' second)"
 argument_list|,
-literal|"-6"
+literal|"-6.000000"
 argument_list|,
 literal|"INTERVAL SECOND NOT NULL"
 argument_list|)
@@ -16368,21 +16201,13 @@ name|void
 name|testFloorFuncInterval
 parameter_list|()
 block|{
-if|if
-condition|(
-operator|!
-name|INTERVAL
-condition|)
-block|{
-return|return;
-block|}
 name|tester
 operator|.
 name|checkScalar
 argument_list|(
 literal|"floor(interval '3:4:5' hour to second)"
 argument_list|,
-literal|"+3:00:00"
+literal|"+3:00:00.000000"
 argument_list|,
 literal|"INTERVAL HOUR TO SECOND NOT NULL"
 argument_list|)
@@ -16393,7 +16218,7 @@ name|checkScalar
 argument_list|(
 literal|"floor(interval '-6.3' second)"
 argument_list|,
-literal|"-7"
+literal|"-7.000000"
 argument_list|,
 literal|"INTERVAL SECOND NOT NULL"
 argument_list|)

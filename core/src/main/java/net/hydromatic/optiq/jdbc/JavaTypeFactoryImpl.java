@@ -699,6 +699,10 @@ condition|(
 name|type
 operator|instanceof
 name|BasicSqlType
+operator|||
+name|type
+operator|instanceof
+name|IntervalSqlType
 condition|)
 block|{
 switch|switch
@@ -729,6 +733,9 @@ case|:
 case|case
 name|INTEGER
 case|:
+case|case
+name|INTERVAL_YEAR_MONTH
+case|:
 return|return
 name|type
 operator|.
@@ -748,6 +755,9 @@ name|TIMESTAMP
 case|:
 case|case
 name|BIGINT
+case|:
+case|case
+name|INTERVAL_DAY_TIME
 case|:
 return|return
 name|type
