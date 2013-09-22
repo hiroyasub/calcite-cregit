@@ -1239,6 +1239,34 @@ argument_list|)
 argument_list|)
 argument_list|)
 expr_stmt|;
+comment|// "--5" would be a syntax error
+name|assertEquals
+argument_list|(
+literal|"- - 5"
+argument_list|,
+name|Expressions
+operator|.
+name|toString
+argument_list|(
+name|Expressions
+operator|.
+name|negate
+argument_list|(
+name|Expressions
+operator|.
+name|negate
+argument_list|(
+name|Expressions
+operator|.
+name|constant
+argument_list|(
+literal|5
+argument_list|)
+argument_list|)
+argument_list|)
+argument_list|)
+argument_list|)
+expr_stmt|;
 name|assertEquals
 argument_list|(
 literal|"a.empno"

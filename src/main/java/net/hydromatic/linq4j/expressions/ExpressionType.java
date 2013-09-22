@@ -322,7 +322,7 @@ block|,
 comment|/**    * An arithmetic negation operation, such as (-a). The object    * a should not be modified in place.    */
 name|Negate
 argument_list|(
-literal|"-"
+literal|"- "
 argument_list|,
 literal|false
 argument_list|,
@@ -334,7 +334,7 @@ block|,
 comment|/**    * A unary plus operation, such as (+a). The result of a    * predefined unary plus operation is the value of the    * operand, but user-defined implementations might have    * unusual results.    */
 name|UnaryPlus
 argument_list|(
-literal|"+"
+literal|"+ "
 argument_list|,
 literal|false
 argument_list|,

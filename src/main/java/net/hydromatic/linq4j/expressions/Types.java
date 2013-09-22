@@ -1549,6 +1549,13 @@ literal|"while resolving method '"
 operator|+
 name|methodName
 operator|+
+name|Arrays
+operator|.
+name|toString
+argument_list|(
+name|argumentTypes
+argument_list|)
+operator|+
 literal|"' in class "
 operator|+
 name|clazz

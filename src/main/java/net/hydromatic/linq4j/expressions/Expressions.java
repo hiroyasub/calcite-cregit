@@ -8944,7 +8944,7 @@ name|expression
 argument_list|)
 return|;
 block|}
-comment|/** Combines a list of expressions using AND. Returns TRUE if the list is    * empty. */
+comment|/** Combines a list of expressions using AND.    * Returns TRUE if the list is empty.    * Returns FALSE if any of the conditions are constant FALSE;    * otherwise returns NULL if any of the conditions are constant NULL. */
 specifier|public
 specifier|static
 name|Expression
@@ -8962,6 +8962,11 @@ name|e
 init|=
 literal|null
 decl_stmt|;
+name|int
+name|nullCount
+init|=
+literal|0
+decl_stmt|;
 for|for
 control|(
 name|Expression
@@ -8977,8 +8982,10 @@ operator|instanceof
 name|ConstantExpression
 condition|)
 block|{
-if|if
-condition|(
+specifier|final
+name|Boolean
+name|value
+init|=
 operator|(
 name|Boolean
 operator|)
@@ -8989,6 +8996,22 @@ operator|)
 name|condition
 operator|)
 operator|.
+name|value
+decl_stmt|;
+if|if
+condition|(
+name|value
+operator|==
+literal|null
+condition|)
+block|{
+operator|++
+name|nullCount
+expr_stmt|;
+continue|continue;
+block|}
+if|else if
+condition|(
 name|value
 condition|)
 block|{
@@ -9031,6 +9054,20 @@ block|}
 block|}
 if|if
 condition|(
+name|nullCount
+operator|>
+literal|0
+condition|)
+block|{
+return|return
+name|constant
+argument_list|(
+literal|null
+argument_list|)
+return|;
+block|}
+if|if
+condition|(
 name|e
 operator|==
 literal|null
@@ -9047,7 +9084,7 @@ return|return
 name|e
 return|;
 block|}
-comment|/** Combines a list of expressions using OR. Returns FALSE if the list is    * empty. */
+comment|/** Combines a list of expressions using OR.    * Returns FALSE if the list is empty.    * Returns TRUE if any of the conditions are constant TRUE;    * otherwise returns NULL if all of the conditions are constant NULL. */
 specifier|public
 specifier|static
 name|Expression
@@ -9065,6 +9102,11 @@ name|e
 init|=
 literal|null
 decl_stmt|;
+name|int
+name|nullCount
+init|=
+literal|0
+decl_stmt|;
 for|for
 control|(
 name|Expression
@@ -9080,8 +9122,10 @@ operator|instanceof
 name|ConstantExpression
 condition|)
 block|{
-if|if
-condition|(
+specifier|final
+name|Boolean
+name|value
+init|=
 operator|(
 name|Boolean
 operator|)
@@ -9092,6 +9136,22 @@ operator|)
 name|condition
 operator|)
 operator|.
+name|value
+decl_stmt|;
+if|if
+condition|(
+name|value
+operator|==
+literal|null
+condition|)
+block|{
+operator|++
+name|nullCount
+expr_stmt|;
+continue|continue;
+block|}
+if|else if
+condition|(
 name|value
 condition|)
 block|{
@@ -9139,6 +9199,20 @@ operator|==
 literal|null
 condition|)
 block|{
+if|if
+condition|(
+name|nullCount
+operator|>
+literal|0
+condition|)
+block|{
+return|return
+name|constant
+argument_list|(
+literal|null
+argument_list|)
+return|;
+block|}
 return|return
 name|constant
 argument_list|(
