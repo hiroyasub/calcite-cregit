@@ -609,7 +609,12 @@ name|rexBuilder
 operator|.
 name|makeIntervalLiteral
 argument_list|(
+name|BigDecimal
+operator|.
+name|valueOf
+argument_list|(
 name|l
+argument_list|)
 argument_list|,
 name|intervalValue
 operator|.
@@ -643,7 +648,12 @@ name|rexBuilder
 operator|.
 name|makeIntervalLiteral
 argument_list|(
+name|BigDecimal
+operator|.
+name|valueOf
+argument_list|(
 name|l
+argument_list|)
 argument_list|,
 name|intervalValue
 operator|.

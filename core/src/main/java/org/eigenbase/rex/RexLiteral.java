@@ -325,7 +325,7 @@ case|:
 return|return
 literal|false
 return|;
-comment|// value should have been false
+comment|// value should have been null
 case|case
 name|INTEGER
 case|:
@@ -719,10 +719,6 @@ operator|)
 operator|.
 name|booleanValue
 argument_list|()
-condition|?
-literal|"true"
-else|:
-literal|"false"
 argument_list|)
 expr_stmt|;
 break|break;
@@ -766,6 +762,37 @@ name|BigDecimal
 operator|)
 name|value
 argument_list|)
+argument_list|)
+expr_stmt|;
+break|break;
+case|case
+name|BIGINT
+case|:
+assert|assert
+name|value
+operator|instanceof
+name|BigDecimal
+assert|;
+name|pw
+operator|.
+name|print
+argument_list|(
+operator|(
+operator|(
+name|BigDecimal
+operator|)
+name|value
+operator|)
+operator|.
+name|longValue
+argument_list|()
+argument_list|)
+expr_stmt|;
+name|pw
+operator|.
+name|print
+argument_list|(
+literal|'L'
 argument_list|)
 expr_stmt|;
 break|break;

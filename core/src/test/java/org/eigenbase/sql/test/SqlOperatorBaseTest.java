@@ -349,7 +349,7 @@ name|compile
 argument_list|(
 literal|"[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9] "
 operator|+
-literal|"[0-9][0-9]:[0-9][0-9]:[0-9][0-9].[0-9][0-9][0-9]"
+literal|"[0-9][0-9]:[0-9][0-9]:[0-9][0-9]"
 argument_list|)
 decl_stmt|;
 comment|/**      * Regular expression for a SQL DATE value.      */
@@ -872,13 +872,6 @@ name|void
 name|testDummy
 parameter_list|()
 block|{
-name|tester
-operator|.
-name|checkNull
-argument_list|(
-literal|"cast(null as interval day to second(3))"
-argument_list|)
-expr_stmt|;
 block|}
 annotation|@
 name|Test
@@ -2745,14 +2738,6 @@ literal|"-5.0"
 argument_list|)
 expr_stmt|;
 block|}
-if|if
-condition|(
-operator|!
-name|INTERVAL
-condition|)
-block|{
-return|return;
-block|}
 comment|// Interval to bigint
 name|tester
 operator|.
@@ -2838,21 +2823,13 @@ operator|.
 name|castFunc
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-operator|!
-name|INTERVAL
-condition|)
-block|{
-return|return;
-block|}
 name|tester
 operator|.
 name|checkScalar
 argument_list|(
 literal|"cast(5 as interval second)"
 argument_list|,
-literal|"+5"
+literal|"+5.000000"
 argument_list|,
 literal|"INTERVAL SECOND NOT NULL"
 argument_list|)
@@ -4540,11 +4517,6 @@ name|int
 name|timeUnit
 parameter_list|)
 block|{
-while|while
-condition|(
-literal|true
-condition|)
-block|{
 specifier|final
 name|Calendar
 name|cal
@@ -4554,6 +4526,21 @@ operator|.
 name|getInstance
 argument_list|()
 decl_stmt|;
+while|while
+condition|(
+literal|true
+condition|)
+block|{
+name|cal
+operator|.
+name|setTimeInMillis
+argument_list|(
+name|System
+operator|.
+name|currentTimeMillis
+argument_list|()
+argument_list|)
+expr_stmt|;
 try|try
 block|{
 switch|switch
