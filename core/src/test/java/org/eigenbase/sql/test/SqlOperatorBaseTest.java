@@ -2740,6 +2740,14 @@ literal|"-5.0"
 argument_list|)
 expr_stmt|;
 block|}
+if|if
+condition|(
+operator|!
+name|INTERVAL
+condition|)
+block|{
+return|return;
+block|}
 comment|// Interval to bigint
 name|tester
 operator|.
@@ -2825,6 +2833,14 @@ operator|.
 name|castFunc
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+operator|!
+name|INTERVAL
+condition|)
+block|{
+return|return;
+block|}
 name|tester
 operator|.
 name|checkScalar
@@ -3973,6 +3989,10 @@ literal|"TIME(0) NOT NULL"
 argument_list|)
 expr_stmt|;
 comment|// test rounding
+if|if
+condition|(
+name|enable
+condition|)
 name|tester
 operator|.
 name|checkScalar
@@ -4016,6 +4036,10 @@ literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
 comment|// timestamp<-> time
+if|if
+condition|(
+name|enable
+condition|)
 name|tester
 operator|.
 name|checkScalar
@@ -4078,6 +4102,10 @@ name|getTime
 argument_list|()
 argument_list|)
 decl_stmt|;
+if|if
+condition|(
+name|enable
+condition|)
 name|tester
 operator|.
 name|checkScalar
@@ -16067,6 +16095,14 @@ name|void
 name|testCeilFuncInterval
 parameter_list|()
 block|{
+if|if
+condition|(
+operator|!
+name|enable
+condition|)
+block|{
+return|return;
+block|}
 name|tester
 operator|.
 name|checkScalar
@@ -16227,6 +16263,14 @@ name|void
 name|testFloorFuncInterval
 parameter_list|()
 block|{
+if|if
+condition|(
+operator|!
+name|enable
+condition|)
+block|{
+return|return;
+block|}
 name|tester
 operator|.
 name|checkScalar

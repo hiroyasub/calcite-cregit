@@ -1673,15 +1673,6 @@ specifier|final
 name|SqlConformance
 name|conformance
 decl_stmt|;
-comment|/** Whether to generate queries with literals extracted as columns.          * After we have fixed tests, we want this to be true. */
-specifier|public
-specifier|static
-specifier|final
-name|boolean
-name|PARAMETERIZE
-init|=
-literal|false
-decl_stmt|;
 specifier|public
 name|TesterImpl
 parameter_list|(
@@ -4162,15 +4153,9 @@ name|hasNext
 parameter_list|()
 block|{
 return|return
-name|PARAMETERIZE
-condition|?
 name|i
 operator|<
 literal|2
-else|:
-name|i
-operator|<
-literal|1
 return|;
 block|}
 block|}
