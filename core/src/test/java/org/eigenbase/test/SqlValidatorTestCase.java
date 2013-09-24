@@ -169,6 +169,20 @@ end_import
 
 begin_import
 import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|optiq
+operator|.
+name|runtime
+operator|.
+name|Utilities
+import|;
+end_import
+
+begin_import
+import|import
 name|com
 operator|.
 name|google
@@ -3786,7 +3800,7 @@ name|int
 name|c
 init|=
 operator|-
-name|Integer
+name|Utilities
 operator|.
 name|compare
 argument_list|(
@@ -3814,7 +3828,7 @@ return|;
 block|}
 return|return
 operator|-
-name|Integer
+name|Utilities
 operator|.
 name|compare
 argument_list|(
