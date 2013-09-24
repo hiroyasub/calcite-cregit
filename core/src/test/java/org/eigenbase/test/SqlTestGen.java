@@ -594,7 +594,7 @@ name|void
 name|checkCollation
 parameter_list|(
 name|String
-name|sql
+name|expression
 parameter_list|,
 name|String
 name|expectedCollationName
@@ -613,7 +613,7 @@ name|void
 name|checkCharset
 parameter_list|(
 name|String
-name|sql
+name|expression
 parameter_list|,
 name|Charset
 name|expectedCharset

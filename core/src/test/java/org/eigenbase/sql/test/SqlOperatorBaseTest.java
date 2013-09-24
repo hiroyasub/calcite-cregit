@@ -872,6 +872,8 @@ name|void
 name|testDummy
 parameter_list|()
 block|{
+comment|//testNullIfOperatorIntervals();
+comment|//testCastIntervalToInterval();
 block|}
 annotation|@
 name|Test
@@ -2938,6 +2940,33 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testCastIntervalToInterval
+parameter_list|()
+block|{
+if|if
+condition|(
+operator|!
+name|INTERVAL
+condition|)
+block|{
+return|return;
+block|}
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"cast(interval '2 5' day to hour as interval hour to minute)"
+argument_list|,
+literal|"+29:00"
+argument_list|,
+literal|"INTERVAL HOUR TO MINUTE NOT NULL"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testCastWithRoundingToScalar
 parameter_list|()
 block|{
@@ -3927,7 +3956,7 @@ name|checkScalar
 argument_list|(
 literal|"cast(TIMESTAMP '1945-02-24 12:42:25.34' as TIMESTAMP)"
 argument_list|,
-literal|"1945-02-24 12:42:25.0"
+literal|"1945-02-24 12:42:25"
 argument_list|,
 literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
@@ -4055,7 +4084,7 @@ name|checkScalar
 argument_list|(
 literal|"cast(DATE '1945-02-24' as TIMESTAMP)"
 argument_list|,
-literal|"1945-02-24 00:00:00.0"
+literal|"1945-02-24 00:00:00"
 argument_list|,
 literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
@@ -6822,7 +6851,7 @@ name|checkScalar
 argument_list|(
 literal|"interval '-2:2' hour to minute / 3"
 argument_list|,
-literal|"-0:40"
+literal|"-0:41"
 argument_list|,
 literal|"INTERVAL HOUR TO MINUTE NOT NULL"
 argument_list|)
@@ -6854,9 +6883,12 @@ argument_list|)
 expr_stmt|;
 if|if
 condition|(
-name|todo
+operator|!
+name|INTERVAL
 condition|)
 block|{
+return|return;
+block|}
 name|tester
 operator|.
 name|checkScalar
@@ -6879,7 +6911,6 @@ argument_list|,
 literal|"INTERVAL YEAR TO MONTH NOT NULL"
 argument_list|)
 expr_stmt|;
-block|}
 block|}
 annotation|@
 name|Test
@@ -14360,6 +14391,14 @@ argument_list|,
 literal|"INTERVAL MONTH"
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+operator|!
+name|INTERVAL
+condition|)
+block|{
+return|return;
+block|}
 name|tester
 operator|.
 name|checkScalar
