@@ -1023,6 +1023,17 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+specifier|public
+name|OptiqPrepare
+operator|.
+name|SparkHandler
+name|spark
+parameter_list|()
+block|{
+return|return
+literal|null
+return|;
+block|}
 block|}
 return|;
 block|}

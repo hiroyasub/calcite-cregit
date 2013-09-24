@@ -802,6 +802,10 @@ operator|.
 name|GET_SPARK_CONTEXT
 operator|.
 name|method
+argument_list|,
+name|implementor
+operator|.
+name|root
 argument_list|)
 argument_list|,
 name|Expressions
