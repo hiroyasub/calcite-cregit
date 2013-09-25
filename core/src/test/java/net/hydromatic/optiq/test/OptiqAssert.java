@@ -2307,6 +2307,20 @@ name|ClassNotFoundException
 throws|,
 name|SQLException
 block|{
+specifier|final
+name|List
+argument_list|<
+name|String
+argument_list|>
+name|schemaList
+init|=
+name|Arrays
+operator|.
+name|asList
+argument_list|(
+name|schema
+argument_list|)
+decl_stmt|;
 name|Class
 operator|.
 name|forName
@@ -2314,6 +2328,20 @@ argument_list|(
 literal|"net.hydromatic.optiq.jdbc.Driver"
 argument_list|)
 expr_stmt|;
+name|String
+name|suffix
+init|=
+name|schemaList
+operator|.
+name|contains
+argument_list|(
+literal|"spark"
+argument_list|)
+condition|?
+literal|"spark=true"
+else|:
+literal|""
+decl_stmt|;
 name|Connection
 name|connection
 init|=
@@ -2322,6 +2350,8 @@ operator|.
 name|getConnection
 argument_list|(
 literal|"jdbc:optiq:"
+operator|+
+name|suffix
 argument_list|)
 decl_stmt|;
 name|OptiqConnection
@@ -2343,20 +2373,6 @@ name|optiqConnection
 operator|.
 name|getRootSchema
 argument_list|()
-decl_stmt|;
-specifier|final
-name|List
-argument_list|<
-name|String
-argument_list|>
-name|schemaList
-init|=
-name|Arrays
-operator|.
-name|asList
-argument_list|(
-name|schema
-argument_list|)
 decl_stmt|;
 if|if
 condition|(
@@ -3396,6 +3412,15 @@ argument_list|,
 literal|true
 argument_list|)
 return|;
+case|case
+name|SPARK
+case|:
+return|return
+name|getConnection
+argument_list|(
+literal|"spark"
+argument_list|)
+return|;
 default|default:
 throw|throw
 name|Util
@@ -4183,6 +4208,9 @@ name|FOODMART_CLONE
 block|,
 comment|/** Configuration that includes the metadata schema. */
 name|REGULAR_PLUS_METADATA
+block|,
+comment|/** Configuration that loads Spark. */
+name|SPARK
 block|,   }
 block|}
 end_class

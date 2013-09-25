@@ -35,18 +35,6 @@ name|*
 import|;
 end_import
 
-begin_import
-import|import static
-name|org
-operator|.
-name|junit
-operator|.
-name|Assert
-operator|.
-name|assertEquals
-import|;
-end_import
-
 begin_comment
 comment|/**  * Tests for using Optiq with Spark as an internal engine, as implemented by  * the {@link net.hydromatic.optiq.impl.spark} package.  */
 end_comment
@@ -65,53 +53,72 @@ name|testValues
 parameter_list|()
 throws|throws
 name|SQLException
-throws|,
-name|ClassNotFoundException
 block|{
-name|Class
+name|OptiqAssert
 operator|.
-name|forName
-argument_list|(
-literal|"net.hydromatic.optiq.jdbc.Driver"
-argument_list|)
-expr_stmt|;
-name|Connection
-name|connection
-init|=
-name|DriverManager
-operator|.
-name|getConnection
-argument_list|(
-literal|"jdbc:optiq:spark=true"
-argument_list|)
-decl_stmt|;
-name|ResultSet
-name|resultSet
-init|=
-name|connection
-operator|.
-name|createStatement
+name|assertThat
 argument_list|()
 operator|.
-name|executeQuery
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|SPARK
+argument_list|)
+operator|.
+name|query
 argument_list|(
 literal|"select *\n"
 operator|+
 literal|"from (values (1, 'a'), (2, 'b'))"
 argument_list|)
-decl_stmt|;
-name|assertEquals
+operator|.
+name|returns
 argument_list|(
 literal|"EXPR$0=1; EXPR$1=a\n"
 operator|+
 literal|"EXPR$0=2; EXPR$1=b\n"
-argument_list|,
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests values followed by filter, evaluated by Spark. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testValuesFilter
+parameter_list|()
+throws|throws
+name|SQLException
+block|{
 name|OptiqAssert
 operator|.
-name|toString
+name|assertThat
+argument_list|()
+operator|.
+name|with
 argument_list|(
-name|resultSet
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|SPARK
 argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select *\n"
+operator|+
+literal|"from (values (1, 'a'), (2, 'b')) as t(x, y)\n"
+operator|+
+literal|"where x< 2"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"X=1; Y=a\n"
 argument_list|)
 expr_stmt|;
 block|}
