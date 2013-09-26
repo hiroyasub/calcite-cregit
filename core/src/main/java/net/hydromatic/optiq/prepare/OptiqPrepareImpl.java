@@ -986,6 +986,16 @@ name|planner
 operator|.
 name|addRule
 argument_list|(
+name|PushJoinThroughJoinRule
+operator|.
+name|RIGHT
+argument_list|)
+expr_stmt|;
+comment|//    planner.addRule(PushJoinThroughJoinRule.LEFT);
+name|planner
+operator|.
+name|addRule
+argument_list|(
 name|WindowedAggSplitterRule
 operator|.
 name|INSTANCE

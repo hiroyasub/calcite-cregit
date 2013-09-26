@@ -1031,7 +1031,12 @@ name|spark
 parameter_list|()
 block|{
 return|return
-literal|null
+name|OptiqPrepare
+operator|.
+name|Dummy
+operator|.
+name|getSparkHandler
+argument_list|()
 return|;
 block|}
 block|}

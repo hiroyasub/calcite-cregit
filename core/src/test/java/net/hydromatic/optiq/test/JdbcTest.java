@@ -2344,7 +2344,6 @@ name|void
 name|testCloneGroupBy2Plan
 parameter_list|()
 block|{
-comment|// NOTE: Plan is nowhere near optimal yet.
 name|OptiqAssert
 operator|.
 name|assertThat
@@ -2368,13 +2367,13 @@ name|returns
 argument_list|(
 literal|"PLAN=EnumerableAggregateRel(group=[{0, 1, 2}], m0=[SUM($3)])\n"
 operator|+
-literal|"  EnumerableCalcRel(expr#0..37=[{inputs}], c0=[$t19], c1=[$t23], c2=[$t37], unit_sales=[$t32])\n"
+literal|"  EnumerableCalcRel(expr#0..37=[{inputs}], c0=[$t9], c1=[$t13], c2=[$t4], unit_sales=[$t22])\n"
 operator|+
-literal|"    EnumerableJoinRel(condition=[AND(=($25, $1), =($0, $33))], joinType=[inner])\n"
+literal|"    EnumerableJoinRel(condition=[=($23, $0)], joinType=[inner])\n"
 operator|+
-literal|"      EnumerableTableAccessRel(table=[[foodmart2, product]])\n"
+literal|"      EnumerableTableAccessRel(table=[[foodmart2, product_class]])\n"
 operator|+
-literal|"      EnumerableJoinRel(condition=[true], joinType=[inner])\n"
+literal|"      EnumerableJoinRel(condition=[=($10, $19)], joinType=[inner])\n"
 operator|+
 literal|"        EnumerableJoinRel(condition=[=($11, $0)], joinType=[inner])\n"
 operator|+
@@ -2384,7 +2383,7 @@ literal|"            EnumerableTableAccessRel(table=[[foodmart2, time_by_day]])\
 operator|+
 literal|"          EnumerableTableAccessRel(table=[[foodmart2, sales_fact_1997]])\n"
 operator|+
-literal|"        EnumerableTableAccessRel(table=[[foodmart2, product_class]])\n"
+literal|"        EnumerableTableAccessRel(table=[[foodmart2, product]])\n"
 operator|+
 literal|"\n"
 argument_list|)
@@ -3281,9 +3280,13 @@ literal|" sum(\"sales_fact_1997\".\"store_cost\") as \"m0\",\n"
 operator|+
 literal|" count(\"sales_fact_1997\".\"product_id\") as \"m1\",\n"
 operator|+
-literal|" count(distinct \"sales_fact_1997\".\"customer_id\") as \"m2\",\n"
+literal|" count(distinct \"sales_fact_1997\".\"customer_id\") as "
 operator|+
-literal|" sum((case when \"sales_fact_1997\".\"promotion_id\" = 0 then 0\n"
+literal|"\"m2\",\n"
+operator|+
+literal|" sum((case when \"sales_fact_1997\".\"promotion_id\" = 0 then "
+operator|+
+literal|"0\n"
 operator|+
 literal|"     else \"sales_fact_1997\".\"store_sales\" end)) as \"m3\"\n"
 operator|+
@@ -3293,9 +3296,13 @@ literal|" \"sales_fact_1997\" as \"sales_fact_1997\",\n"
 operator|+
 literal|" \"time_by_day\" as \"time_by_day\"\n"
 operator|+
-literal|"where \"sales_fact_1997\".\"store_id\" = \"store\".\"store_id\"\n"
+literal|"where \"sales_fact_1997\".\"store_id\" = \"store\""
 operator|+
-literal|"and \"sales_fact_1997\".\"time_id\" = \"time_by_day\".\"time_id\"\n"
+literal|".\"store_id\"\n"
+operator|+
+literal|"and \"sales_fact_1997\".\"time_id\" = \"time_by_day\""
+operator|+
+literal|".\"time_id\"\n"
 operator|+
 literal|"and \"time_by_day\".\"the_year\" = 1997\n"
 operator|+

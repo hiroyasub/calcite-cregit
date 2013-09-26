@@ -344,21 +344,6 @@ specifier|public
 class|class
 name|JavaRules
 block|{
-specifier|private
-specifier|static
-specifier|final
-name|Constructor
-name|ABSTRACT_ENUMERABLE_CTOR
-init|=
-name|Types
-operator|.
-name|lookupConstructor
-argument_list|(
-name|AbstractEnumerable
-operator|.
-name|class
-argument_list|)
-decl_stmt|;
 specifier|protected
 specifier|static
 specifier|final
@@ -1455,6 +1440,7 @@ class|class
 name|EnumUtil
 block|{
 comment|/** Declares a method that overrides another method. */
+specifier|public
 specifier|static
 name|MethodDeclaration
 name|overridingMethodDecl
@@ -3002,7 +2988,11 @@ name|Expressions
 operator|.
 name|new_
 argument_list|(
+name|BuiltinMethod
+operator|.
 name|ABSTRACT_ENUMERABLE_CTOR
+operator|.
+name|constructor
 argument_list|,
 comment|// TODO: generics
 comment|//   Collections.singletonList(inputRowType),

@@ -355,8 +355,7 @@ name|event
 argument_list|)
 expr_stmt|;
 block|}
-name|getPlanner
-argument_list|()
+name|volcanoPlanner
 operator|.
 name|ensureRegistered
 argument_list|(
@@ -366,6 +365,8 @@ name|rels
 index|[
 literal|0
 index|]
+argument_list|,
+name|this
 argument_list|)
 expr_stmt|;
 if|if

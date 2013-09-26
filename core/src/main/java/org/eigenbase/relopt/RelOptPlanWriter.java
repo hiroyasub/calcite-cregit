@@ -195,10 +195,6 @@ argument_list|>
 argument_list|>
 argument_list|()
 decl_stmt|;
-specifier|private
-name|int
-name|subsetPrefixLength
-decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 specifier|public
 name|RelOptPlanWriter
@@ -498,6 +494,30 @@ name|rel
 argument_list|)
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+operator|!
+name|withIdPrefix
+condition|)
+block|{
+comment|// If we didn't print the rel id at the start of the line, print
+comment|// it at the end.
+name|s
+operator|.
+name|append
+argument_list|(
+literal|", id = "
+argument_list|)
+operator|.
+name|append
+argument_list|(
+name|rel
+operator|.
+name|getId
+argument_list|()
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 name|pw
 operator|.
@@ -922,21 +942,6 @@ operator|.
 name|toString
 argument_list|()
 return|;
-block|}
-specifier|public
-name|void
-name|setSubsetPrefixLength
-parameter_list|(
-name|int
-name|subsetPrefixLength
-parameter_list|)
-block|{
-name|this
-operator|.
-name|subsetPrefixLength
-operator|=
-name|subsetPrefixLength
-expr_stmt|;
 block|}
 block|}
 end_class
