@@ -775,7 +775,13 @@ name|tracer
 operator|.
 name|fine
 argument_list|(
-literal|"Rule ["
+literal|"call#"
+operator|+
+name|ruleCall
+operator|.
+name|id
+operator|+
+literal|": Rule ["
 operator|+
 name|ruleCall
 operator|.
@@ -806,16 +812,22 @@ name|tracer
 operator|.
 name|fine
 argument_list|(
-literal|"Apply rule ["
+literal|"call#"
+operator|+
+name|ruleCall
+operator|.
+name|id
+operator|+
+literal|": Apply rule ["
 operator|+
 name|ruleCall
 operator|.
 name|getRule
 argument_list|()
 operator|+
-literal|"] to ["
+literal|"] to "
 operator|+
-name|RelOptUtil
+name|Arrays
 operator|.
 name|toString
 argument_list|(
@@ -823,8 +835,6 @@ name|ruleCall
 operator|.
 name|rels
 argument_list|)
-operator|+
-literal|"]"
 argument_list|)
 expr_stmt|;
 block|}
@@ -950,7 +960,13 @@ name|tracer
 operator|.
 name|fine
 argument_list|(
-literal|"Rule "
+literal|"call#"
+operator|+
+name|ruleCall
+operator|.
+name|id
+operator|+
+literal|": Rule "
 operator|+
 name|ruleCall
 operator|.
@@ -959,7 +975,7 @@ argument_list|()
 operator|+
 literal|" arguments "
 operator|+
-name|RelOptUtil
+name|Arrays
 operator|.
 name|toString
 argument_list|(

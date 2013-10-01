@@ -95,7 +95,19 @@ operator|.
 name|getPlannerTracer
 argument_list|()
 decl_stmt|;
+comment|/** Generator for {@link #id} values. */
+specifier|static
+name|int
+name|nextId
+init|=
+literal|0
+decl_stmt|;
 comment|//~ Instance fields --------------------------------------------------------
+specifier|public
+specifier|final
+name|int
+name|id
+decl_stmt|;
 specifier|private
 specifier|final
 name|RelOptRuleOperand
@@ -114,7 +126,7 @@ argument_list|>
 argument_list|>
 name|nodeChildren
 decl_stmt|;
-specifier|private
+specifier|public
 specifier|final
 name|RelOptRule
 name|rule
@@ -171,6 +183,13 @@ argument_list|>
 name|parents
 parameter_list|)
 block|{
+name|this
+operator|.
+name|id
+operator|=
+name|nextId
+operator|++
+expr_stmt|;
 name|this
 operator|.
 name|planner

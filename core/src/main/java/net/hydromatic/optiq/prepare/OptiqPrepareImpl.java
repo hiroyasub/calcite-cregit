@@ -991,7 +991,15 @@ operator|.
 name|RIGHT
 argument_list|)
 expr_stmt|;
-comment|//    planner.addRule(PushJoinThroughJoinRule.LEFT);
+name|planner
+operator|.
+name|addRule
+argument_list|(
+name|PushJoinThroughJoinRule
+operator|.
+name|LEFT
+argument_list|)
+expr_stmt|;
 name|planner
 operator|.
 name|addRule

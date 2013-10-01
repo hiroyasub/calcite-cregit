@@ -562,6 +562,24 @@ literal|"   ]\n"
 operator|+
 literal|"}"
 decl_stmt|;
+specifier|public
+specifier|static
+name|List
+argument_list|<
+name|Pair
+argument_list|<
+name|String
+argument_list|,
+name|String
+argument_list|>
+argument_list|>
+name|getFoodmartQueries
+parameter_list|()
+block|{
+return|return
+name|FOODMART_QUERIES
+return|;
+block|}
 comment|/**    * Tests a relation that is accessed via method syntax.    * The function returns a {@link Queryable}.    */
 annotation|@
 name|Ignore
@@ -2338,6 +2356,8 @@ expr_stmt|;
 block|}
 comment|/** Tests plan for a query with 4 tables, 3 joins. */
 annotation|@
+name|Ignore
+annotation|@
 name|Test
 specifier|public
 name|void
@@ -2836,7 +2856,138 @@ operator|+
 literal|"group by \"store\".\"store_country\", \"time_by_day\".\"the_year\""
 block|,
 literal|"c0=USA; c1=1997; m0=225627.2336; m1=86837; m2=5581; m3=151211.2100\n"
+block|,
+comment|// query 6077
+literal|"select \"time_by_day\".\"the_year\" as \"c0\",\n"
+operator|+
+literal|" count(distinct \"sales_fact_1997\".\"customer_id\") as \"m0\"\n"
+operator|+
+literal|"from \"time_by_day\" as \"time_by_day\",\n"
+operator|+
+literal|" \"sales_fact_1997\" as \"sales_fact_1997\",\n"
+operator|+
+literal|" \"product_class\" as \"product_class\",\n"
+operator|+
+literal|" \"product\" as \"product\"\n"
+operator|+
+literal|"where \"sales_fact_1997\".\"time_id\" = \"time_by_day\".\"time_id\"\n"
+operator|+
+literal|"and \"time_by_day\".\"the_year\" = 1997\n"
+operator|+
+literal|"and \"sales_fact_1997\".\"product_id\" = \"product\".\"product_id\"\n"
+operator|+
+literal|"and \"product\".\"product_class_id\" = \"product_class\".\"product_class_id\"\n"
+operator|+
+literal|"and (((\"product\".\"brand_name\" = 'Cormorant'\n"
+operator|+
+literal|"   and \"product_class\".\"product_subcategory\" = 'Pot Scrubbers'\n"
+operator|+
+literal|"   and \"product_class\".\"product_category\" = 'Kitchen Products'\n"
+operator|+
+literal|"   and \"product_class\".\"product_department\" = 'Household'\n"
+operator|+
+literal|"   and \"product_class\".\"product_family\" = 'Non-Consumable')\n"
+operator|+
+literal|" or (\"product\".\"brand_name\" = 'Denny'\n"
+operator|+
+literal|"   and \"product_class\".\"product_subcategory\" = 'Pot Scrubbers'\n"
+operator|+
+literal|"   and \"product_class\".\"product_category\" = 'Kitchen Products'\n"
+operator|+
+literal|"   and \"product_class\".\"product_department\" = 'Household'\n"
+operator|+
+literal|"   and \"product_class\".\"product_family\" = 'Non-Consumable')\n"
+operator|+
+literal|" or (\"product\".\"brand_name\" = 'High Quality'\n"
+operator|+
+literal|"   and \"product_class\".\"product_subcategory\" = 'Pot Scrubbers'\n"
+operator|+
+literal|"   and \"product_class\".\"product_category\" = 'Kitchen Products'\n"
+operator|+
+literal|"   and \"product_class\".\"product_department\" = 'Household'\n"
+operator|+
+literal|"   and \"product_class\".\"product_family\" = 'Non-Consumable')\n"
+operator|+
+literal|" or (\"product\".\"brand_name\" = 'Red Wing'\n"
+operator|+
+literal|"   and \"product_class\".\"product_subcategory\" = 'Pot Scrubbers'\n"
+operator|+
+literal|"   and \"product_class\".\"product_category\" = 'Kitchen Products'\n"
+operator|+
+literal|"   and \"product_class\".\"product_department\" = 'Household'\n"
+operator|+
+literal|"   and \"product_class\".\"product_family\" = 'Non-Consumable'))\n"
+operator|+
+literal|" or (\"product_class\".\"product_subcategory\" = 'Pots and Pans'\n"
+operator|+
+literal|"   and \"product_class\".\"product_category\" = 'Kitchen Products'\n"
+operator|+
+literal|"   and \"product_class\".\"product_department\" = 'Household'\n"
+operator|+
+literal|"   and \"product_class\".\"product_family\" = 'Non-Consumable'))\n"
+operator|+
+literal|"group by \"time_by_day\".\"the_year\"\n"
+block|,
+literal|"xxtodo"
+block|,
+comment|// query 6077, simplified
+comment|//      "select count(distinct \"sales_fact_1997\".\"customer_id\") as \"m0\"\n"
+literal|"select count(\"sales_fact_1997\".\"customer_id\") as \"m0\"\n"
+operator|+
+literal|"from \"sales_fact_1997\" as \"sales_fact_1997\",\n"
+operator|+
+literal|" \"product_class\" as \"product_class\",\n"
+operator|+
+literal|" \"product\" as \"product\"\n"
+operator|+
+literal|"where \"sales_fact_1997\".\"product_id\" = \"product\".\"product_id\"\n"
+operator|+
+literal|"and \"product\".\"product_class_id\" = \"product_class\".\"product_class_id\"\n"
+operator|+
+literal|"and ((\"product\".\"brand_name\" = 'Cormorant'\n"
+operator|+
+literal|"   and \"product_class\".\"product_subcategory\" = 'Pot Scrubbers')\n"
+operator|+
+literal|" or (\"product_class\".\"product_subcategory\" = 'Pots and Pans'))\n"
+block|,
+literal|"xxxx"
+block|,
+comment|// query 6077, simplified further
+literal|"select count(distinct \"sales_fact_1997\".\"customer_id\") as \"m0\"\n"
+operator|+
+literal|"from \"sales_fact_1997\" as \"sales_fact_1997\",\n"
+operator|+
+literal|" \"product_class\" as \"product_class\",\n"
+operator|+
+literal|" \"product\" as \"product\"\n"
+operator|+
+literal|"where \"sales_fact_1997\".\"product_id\" = \"product\".\"product_id\"\n"
+operator|+
+literal|"and \"product\".\"product_class_id\" = \"product_class\".\"product_class_id\"\n"
+operator|+
+literal|"and \"product\".\"brand_name\" = 'Cormorant'\n"
+block|,
+literal|"xxxx"
 block|,   }
+decl_stmt|;
+specifier|public
+specifier|static
+specifier|final
+name|List
+argument_list|<
+name|Pair
+argument_list|<
+name|String
+argument_list|,
+name|String
+argument_list|>
+argument_list|>
+name|FOODMART_QUERIES
+init|=
+name|querify
+argument_list|(
+name|queries
+argument_list|)
 decl_stmt|;
 comment|/** Test case for    *<a href="https://github.com/julianhyde/optiq/issues/35">issue #35</a>. */
 annotation|@
@@ -2948,7 +3099,7 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/** Returns a list of (query, expected) pairs. The expected result is    * sometimes null. */
-specifier|public
+specifier|private
 specifier|static
 name|List
 argument_list|<
@@ -2959,8 +3110,12 @@ argument_list|,
 name|String
 argument_list|>
 argument_list|>
-name|getFoodmartQueries
-parameter_list|()
+name|querify
+parameter_list|(
+name|String
+index|[]
+name|queries1
+parameter_list|)
 block|{
 specifier|final
 name|List
@@ -2995,7 +3150,7 @@ literal|0
 init|;
 name|i
 operator|<
-name|queries
+name|queries1
 operator|.
 name|length
 condition|;
@@ -3006,7 +3161,7 @@ block|{
 name|String
 name|query
 init|=
-name|queries
+name|queries1
 index|[
 name|i
 index|]
@@ -3022,11 +3177,11 @@ name|i
 operator|+
 literal|1
 operator|<
-name|queries
+name|queries1
 operator|.
 name|length
 operator|&&
-name|queries
+name|queries1
 index|[
 name|i
 operator|+
@@ -3036,7 +3191,7 @@ operator|!=
 literal|null
 operator|&&
 operator|!
-name|queries
+name|queries1
 index|[
 name|i
 operator|+
@@ -3051,7 +3206,7 @@ condition|)
 block|{
 name|expected
 operator|=
-name|queries
+name|queries1
 index|[
 operator|++
 name|i
@@ -3079,6 +3234,8 @@ return|;
 block|}
 comment|/** A selection of queries generated by Mondrian. */
 annotation|@
+name|Ignore
+annotation|@
 name|Test
 specifier|public
 name|void
@@ -3104,21 +3261,6 @@ operator|.
 name|FOODMART_CLONE
 argument_list|)
 decl_stmt|;
-specifier|final
-name|List
-argument_list|<
-name|Pair
-argument_list|<
-name|String
-argument_list|,
-name|String
-argument_list|>
-argument_list|>
-name|queries
-init|=
-name|getFoodmartQueries
-argument_list|()
-decl_stmt|;
 for|for
 control|(
 name|Ord
@@ -3136,14 +3278,14 @@ name|Ord
 operator|.
 name|zip
 argument_list|(
-name|queries
+name|FOODMART_QUERIES
 argument_list|)
 control|)
 block|{
 try|try
 block|{
 comment|// uncomment to run specific queries:
-comment|//      if (query.i != queries.size() - 1) continue;
+comment|//      if (query.i != FOODMART_QUERIES.size() - 1) continue;
 specifier|final
 name|String
 name|sql
@@ -3249,11 +3391,14 @@ throw|;
 block|}
 block|}
 block|}
+comment|/** Checks that a 3-way join is re-ordered so that join conditions can be    * applied. The plan must not contain cartesian joins.    * {@link org.eigenbase.rel.rules.PushJoinThroughJoinRule} makes this    * possible. */
+annotation|@
+name|Ignore
 annotation|@
 name|Test
 specifier|public
 name|void
-name|testFoo
+name|testExplainJoin
 parameter_list|()
 block|{
 name|OptiqAssert
@@ -3272,46 +3417,78 @@ argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"select \"store\".\"store_country\" as \"c0\",\n"
-operator|+
-literal|" \"time_by_day\".\"the_year\" as \"c1\",\n"
-operator|+
-literal|" sum(\"sales_fact_1997\".\"store_cost\") as \"m0\",\n"
-operator|+
-literal|" count(\"sales_fact_1997\".\"product_id\") as \"m1\",\n"
-operator|+
-literal|" count(distinct \"sales_fact_1997\".\"customer_id\") as "
-operator|+
-literal|"\"m2\",\n"
-operator|+
-literal|" sum((case when \"sales_fact_1997\".\"promotion_id\" = 0 then "
-operator|+
-literal|"0\n"
-operator|+
-literal|"     else \"sales_fact_1997\".\"store_sales\" end)) as \"m3\"\n"
-operator|+
-literal|"from \"store\" as \"store\",\n"
-operator|+
-literal|" \"sales_fact_1997\" as \"sales_fact_1997\",\n"
-operator|+
-literal|" \"time_by_day\" as \"time_by_day\"\n"
-operator|+
-literal|"where \"sales_fact_1997\".\"store_id\" = \"store\""
-operator|+
-literal|".\"store_id\"\n"
-operator|+
-literal|"and \"sales_fact_1997\".\"time_id\" = \"time_by_day\""
-operator|+
-literal|".\"time_id\"\n"
-operator|+
-literal|"and \"time_by_day\".\"the_year\" = 1997\n"
-operator|+
-literal|"group by \"store\".\"store_country\", \"time_by_day\".\"the_year\""
-argument_list|)
-comment|//        .explainContains("xxx")
+name|FOODMART_QUERIES
 operator|.
-name|runs
+name|get
+argument_list|(
+literal|48
+argument_list|)
+operator|.
+name|left
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|"EnumerableAggregateRel(group=[{}], m0=[COUNT($0)])\n"
+operator|+
+literal|"  EnumerableAggregateRel(group=[{0}])\n"
+operator|+
+literal|"    EnumerableCalcRel(expr#0..27=[{inputs}], customer_id=[$t7])\n"
+operator|+
+literal|"      EnumerableJoinRel(condition=[=($13, $0)], joinType=[inner])\n"
+operator|+
+literal|"        EnumerableTableAccessRel(table=[[foodmart2, product_class]])\n"
+operator|+
+literal|"        EnumerableJoinRel(condition=[=($0, $9)], joinType=[inner])\n"
+operator|+
+literal|"          EnumerableTableAccessRel(table=[[foodmart2, sales_fact_1997]])\n"
+operator|+
+literal|"          EnumerableCalcRel(expr#0..14=[{inputs}], expr#15=['Cormorant'], expr#16=[=($t2, $t15)], proj#0..14=[{exprs}], $condition=[$t16])\n"
+operator|+
+literal|"            EnumerableTableAccessRel(table=[[foodmart2, product]]"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Condition involving OR makes this more complex than    * {@link #testExplainJoin()}. */
+annotation|@
+name|Ignore
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testExplainJoinOrderingWithOr
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|assertThat
 argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|FOODMART_CLONE
+argument_list|)
+operator|.
+name|query
+argument_list|(
+name|FOODMART_QUERIES
+operator|.
+name|get
+argument_list|(
+literal|47
+argument_list|)
+operator|.
+name|left
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|"xxx"
+argument_list|)
 expr_stmt|;
 block|}
 comment|/** There was a bug representing a nullable timestamp using a {@link Long}    * internally. */
@@ -3578,7 +3755,17 @@ literal|"and \"customer\".\"country\" = 'USA'\n"
 operator|+
 literal|"and \"customer\".\"state_province\" = 'WA'\n"
 operator|+
-literal|"and \"customer\".\"city\" in ('Anacortes', 'Ballard', 'Bellingham', 'Bremerton', 'Burien', 'Edmonds', 'Everett', 'Issaquah', 'Kirkland', 'Lynnwood', 'Marysville', 'Olympia', 'Port Orchard', 'Puyallup', 'Redmond', 'Renton', 'Seattle', 'Sedro Woolley', 'Spokane', 'Tacoma', 'Walla Walla', 'Yakima') group by \"time_by_day\".\"the_year\", \"product_class\".\"product_family\", \"customer\".\"country\", \"customer\".\"state_province\", \"customer\".\"city\""
+literal|"and \"customer\".\"city\" in ('Anacortes', 'Ballard', 'Bellingham', 'Bremerton', 'Burien', 'Edmonds', 'Everett', 'Issaquah', 'Kirkland', 'Lynnwood', 'Marysville', 'Olympia', 'Port Orchard', 'Puyallup', 'Redmond', 'Renton', 'Seattle', 'Sedro Woolley', 'Spokane', 'Tacoma', 'Walla Walla', 'Yakima')\n"
+operator|+
+literal|"group by \"time_by_day\".\"the_year\",\n"
+operator|+
+literal|" \"product_class\".\"product_family\",\n"
+operator|+
+literal|" \"customer\".\"country\",\n"
+operator|+
+literal|" \"customer\".\"state_province\",\n"
+operator|+
+literal|" \"customer\".\"city\""
 argument_list|)
 operator|.
 name|returns

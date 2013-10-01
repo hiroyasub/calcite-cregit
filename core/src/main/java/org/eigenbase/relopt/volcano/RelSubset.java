@@ -1597,7 +1597,13 @@ name|put
 argument_list|(
 name|p
 argument_list|,
+operator|new
+name|VolcanoPlanner
+operator|.
+name|DirectProvenance
+argument_list|(
 name|pOld
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}

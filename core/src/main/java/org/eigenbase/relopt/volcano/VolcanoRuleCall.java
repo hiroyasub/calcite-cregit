@@ -297,14 +297,18 @@ name|tracer
 operator|.
 name|finest
 argument_list|(
-literal|"Rule "
+literal|"call#"
+operator|+
+name|id
+operator|+
+literal|": Rule "
 operator|+
 name|getRule
 argument_list|()
 operator|+
 literal|" arguments "
 operator|+
-name|RelOptUtil
+name|Arrays
 operator|.
 name|toString
 argument_list|(
@@ -700,14 +704,18 @@ name|tracer
 operator|.
 name|fine
 argument_list|(
-literal|"Apply rule ["
+literal|"call#"
+operator|+
+name|id
+operator|+
+literal|": Apply rule ["
 operator|+
 name|getRule
 argument_list|()
 operator|+
 literal|"] to "
 operator|+
-name|RelOptUtil
+name|Arrays
 operator|.
 name|toString
 argument_list|(
@@ -813,7 +821,11 @@ name|tracer
 operator|.
 name|fine
 argument_list|(
-literal|"Match generated 0 successors."
+literal|"call#"
+operator|+
+name|id
+operator|+
+literal|" generated 0 successors."
 argument_list|)
 expr_stmt|;
 block|}
@@ -823,7 +835,11 @@ name|tracer
 operator|.
 name|fine
 argument_list|(
-literal|"Match generated "
+literal|"call#"
+operator|+
+name|id
+operator|+
+literal|" generated "
 operator|+
 name|generatedRelList
 operator|.
