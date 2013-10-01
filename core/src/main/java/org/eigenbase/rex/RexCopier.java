@@ -82,6 +82,13 @@ name|RexCall
 name|call
 parameter_list|)
 block|{
+specifier|final
+name|boolean
+index|[]
+name|update
+init|=
+literal|null
+decl_stmt|;
 return|return
 name|builder
 operator|.
@@ -112,7 +119,7 @@ operator|.
 name|getOperands
 argument_list|()
 argument_list|,
-literal|null
+name|update
 argument_list|)
 argument_list|)
 return|;
