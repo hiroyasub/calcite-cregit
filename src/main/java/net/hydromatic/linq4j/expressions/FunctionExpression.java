@@ -722,6 +722,12 @@ name|getType
 argument_list|()
 expr_stmt|;
 block|}
+name|String
+name|methodName
+init|=
+name|getAbstractMethodName
+argument_list|()
+decl_stmt|;
 name|writer
 operator|.
 name|append
@@ -761,7 +767,11 @@ argument_list|)
 operator|.
 name|list
 argument_list|(
-literal|" apply("
+literal|" "
+operator|+
+name|methodName
+operator|+
+literal|"("
 argument_list|,
 literal|", "
 argument_list|,
@@ -812,7 +822,11 @@ argument_list|)
 operator|.
 name|list
 argument_list|(
-literal|" apply("
+literal|" "
+operator|+
+name|methodName
+operator|+
+literal|"("
 argument_list|,
 literal|", "
 argument_list|,
@@ -828,7 +842,11 @@ argument_list|)
 operator|.
 name|list
 argument_list|(
-literal|"return apply(\n"
+literal|"return "
+operator|+
+name|methodName
+operator|+
+literal|"(\n"
 argument_list|,
 literal|",\n"
 argument_list|,
@@ -878,7 +896,11 @@ argument_list|)
 operator|.
 name|list
 argument_list|(
-literal|" apply("
+literal|" "
+operator|+
+name|methodName
+operator|+
+literal|"("
 argument_list|,
 literal|", "
 argument_list|,
@@ -894,7 +916,11 @@ argument_list|)
 operator|.
 name|list
 argument_list|(
-literal|"return apply(\n"
+literal|"return "
+operator|+
+name|methodName
+operator|+
+literal|"(\n"
 argument_list|,
 literal|",\n"
 argument_list|,
@@ -916,6 +942,33 @@ argument_list|(
 literal|"}\n"
 argument_list|)
 expr_stmt|;
+block|}
+specifier|private
+name|String
+name|getAbstractMethodName
+parameter_list|()
+block|{
+if|if
+condition|(
+name|type
+operator|.
+name|toString
+argument_list|()
+operator|.
+name|contains
+argument_list|(
+literal|"OptiqFlatMapFunction"
+argument_list|)
+condition|)
+block|{
+return|return
+literal|"call"
+return|;
+comment|// FIXME
+block|}
+return|return
+literal|"apply"
+return|;
 block|}
 specifier|public
 interface|interface
