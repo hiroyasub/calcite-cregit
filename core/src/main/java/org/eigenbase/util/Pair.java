@@ -17,6 +17,16 @@ begin_import
 import|import
 name|java
 operator|.
+name|io
+operator|.
+name|Serializable
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
 name|util
 operator|.
 name|*
@@ -55,6 +65,8 @@ name|T1
 argument_list|,
 name|T2
 argument_list|>
+implements|,
+name|Serializable
 block|{
 comment|//~ Instance fields --------------------------------------------------------
 specifier|public

@@ -21,6 +21,16 @@ name|org
 operator|.
 name|junit
 operator|.
+name|Ignore
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
 name|Test
 import|;
 end_import
@@ -81,6 +91,13 @@ literal|"EXPR$0=1; EXPR$1=a\n"
 operator|+
 literal|"EXPR$0=2; EXPR$1=b\n"
 argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|"SparkToEnumerableConverter\n"
+operator|+
+literal|"  SparkValuesRel(tuples=[[{ 1, 'a' }, { 2, 'b' }]])"
+argument_list|)
 expr_stmt|;
 block|}
 comment|/** Tests values followed by filter, evaluated by Spark. */
@@ -119,6 +136,15 @@ operator|.
 name|returns
 argument_list|(
 literal|"X=1; Y=a\n"
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|"PLAN=SparkToEnumerableConverter\n"
+operator|+
+literal|"  SparkCalcRel(expr#0..1=[{inputs}], expr#2=[2], expr#3=[<($t0, $t2)], proj#0..1=[{exprs}], $condition=[$t3])\n"
+operator|+
+literal|"    SparkValuesRel(tuples=[[{ 1, 'a' }, { 2, 'b' }]])\n"
 argument_list|)
 expr_stmt|;
 block|}

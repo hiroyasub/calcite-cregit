@@ -189,6 +189,16 @@ begin_import
 import|import
 name|java
 operator|.
+name|io
+operator|.
+name|Serializable
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
 name|util
 operator|.
 name|Calendar
@@ -562,6 +572,15 @@ operator|+
 literal|", "
 operator|+
 name|Typed
+operator|.
+name|class
+operator|.
+name|getName
+argument_list|()
+operator|+
+literal|", "
+operator|+
+name|Serializable
 operator|.
 name|class
 operator|.

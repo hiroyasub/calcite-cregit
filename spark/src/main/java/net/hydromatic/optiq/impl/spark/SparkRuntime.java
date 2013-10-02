@@ -87,6 +87,24 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|spark
+operator|.
+name|api
+operator|.
+name|java
+operator|.
+name|function
+operator|.
+name|FlatMapFunction
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -244,6 +262,35 @@ name|sparkContext
 argument_list|()
 return|;
 block|}
+comment|/** Combines linq4j {@link net.hydromatic.linq4j.function.Function}    * and Spark {@link org.apache.spark.api.java.function.FlatMapFunction}. */
+specifier|public
+specifier|static
+specifier|abstract
+class|class
+name|OptiqFlatMapFunction
+parameter_list|<
+name|T
+parameter_list|,
+name|R
+parameter_list|>
+extends|extends
+name|FlatMapFunction
+argument_list|<
+name|T
+argument_list|,
+name|R
+argument_list|>
+implements|implements
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|linq4j
+operator|.
+name|function
+operator|.
+name|Function
+block|{   }
 block|}
 end_class
 

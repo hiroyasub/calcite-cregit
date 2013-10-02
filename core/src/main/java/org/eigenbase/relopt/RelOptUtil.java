@@ -6482,6 +6482,17 @@ name|SqlExplainLevel
 name|detailLevel
 parameter_list|)
 block|{
+if|if
+condition|(
+name|rel
+operator|==
+literal|null
+condition|)
+block|{
+return|return
+literal|null
+return|;
+block|}
 specifier|final
 name|StringWriter
 name|sw
