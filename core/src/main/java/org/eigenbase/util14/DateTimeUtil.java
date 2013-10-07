@@ -100,21 +100,44 @@ operator|.
 name|getDefault
 argument_list|()
 decl_stmt|;
-comment|/**      * The number of milliseconds in a day.      *      *<p>In the fennel calculator, this is the modulo 'mask' when converting      * TIMESTAMP values to DATE and TIME values.      */
+comment|/** The number of milliseconds in a second. */
+specifier|public
+specifier|static
+specifier|final
+name|long
+name|MILLIS_PER_SECOND
+init|=
+literal|1000L
+decl_stmt|;
+comment|/** The number of milliseconds in a minute. */
+specifier|public
+specifier|static
+specifier|final
+name|long
+name|MILLIS_PER_MINUTE
+init|=
+literal|60000L
+decl_stmt|;
+comment|/** The number of milliseconds in an hour. */
+specifier|public
+specifier|static
+specifier|final
+name|long
+name|MILLIS_PER_HOUR
+init|=
+literal|3600000L
+decl_stmt|;
+comment|// = 60 * 60 * 1000
+comment|/**      * The number of milliseconds in a day.      *      *<p>This is the modulo 'mask' used when converting      * TIMESTAMP values to DATE and TIME values.      */
 specifier|public
 specifier|static
 specifier|final
 name|long
 name|MILLIS_PER_DAY
 init|=
-literal|24
-operator|*
-literal|60
-operator|*
-literal|60
-operator|*
-literal|1000
+literal|86400000
 decl_stmt|;
+comment|// = 24 * 60 * 60 * 1000
 comment|/**      * Calendar set to the epoch (1970-01-01 00:00:00 UTC). Useful for      * initializing other values. Calendars are not immutable, so be careful not      * to screw up this object for everyone else.      */
 specifier|public
 specifier|static

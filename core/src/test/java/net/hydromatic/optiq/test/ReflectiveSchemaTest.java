@@ -155,6 +155,18 @@ begin_import
 import|import
 name|org
 operator|.
+name|eigenbase
+operator|.
+name|util14
+operator|.
+name|DateTimeUtil
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
 name|junit
 operator|.
 name|Ignore
@@ -1354,7 +1366,7 @@ name|returns
 argument_list|(
 literal|"hireDate=1970-01-01; empid=10; deptno=20; name=fred; salary=0.0; commission=null\n"
 operator|+
-literal|"hireDate=1970-01-01; empid=10; deptno=20; name=bill; salary=0.0; commission=null\n"
+literal|"hireDate=1970-04-11; empid=10; deptno=20; name=bill; salary=0.0; commission=null\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -1466,7 +1478,7 @@ argument_list|)
 operator|.
 name|returns
 argument_list|(
-literal|"primitiveBoolean=false; primitiveByte=0; primitiveChar=\u0000; primitiveShort=0; primitiveInt=0; primitiveLong=0; primitiveFloat=0.0; primitiveDouble=0.0; wrapperBoolean=false; wrapperByte=0; wrapperCharacter=\u0000; wrapperShort=0; wrapperInteger=0; wrapperLong=0; wrapperFloat=0.0; wrapperDouble=0.0; sqlDate=1970-01-01; sqlTime=00:00:00; sqlTimestamp=1970-01-01T00:00:00Z; utilDate=1970-01-01T00:00:00Z; string=1\n"
+literal|"primitiveBoolean=false; primitiveByte=0; primitiveChar=\u0000; primitiveShort=0; primitiveInt=0; primitiveLong=0; primitiveFloat=0.0; primitiveDouble=0.0; wrapperBoolean=false; wrapperByte=0; wrapperCharacter=\u0000; wrapperShort=0; wrapperInteger=0; wrapperLong=0; wrapperFloat=0.0; wrapperDouble=0.0; sqlDate=1970-01-01; sqlTime=00:00:00; sqlTimestamp=1970-01-01 00:00:00; utilDate=1970-01-01 00:00:00; string=1\n"
 operator|+
 literal|"primitiveBoolean=true; primitiveByte=127; primitiveChar=\uffff; primitiveShort=32767; primitiveInt=2147483647; primitiveLong=9223372036854775807; primitiveFloat=3.4028235E38; primitiveDouble=1.7976931348623157E308; wrapperBoolean=null; wrapperByte=null; wrapperCharacter=null; wrapperShort=null; wrapperInteger=null; wrapperLong=null; wrapperFloat=null; wrapperDouble=null; sqlDate=null; sqlTime=null; sqlTimestamp=null; utilDate=null; string=null\n"
 argument_list|)
@@ -2905,6 +2917,7 @@ literal|0
 argument_list|)
 argument_list|)
 block|,
+comment|// 1970-1-1
 operator|new
 name|EmployeeWithHireDate
 argument_list|(
@@ -2926,8 +2939,13 @@ operator|.
 name|Date
 argument_list|(
 literal|100
+operator|*
+name|DateTimeUtil
+operator|.
+name|MILLIS_PER_DAY
 argument_list|)
 argument_list|)
+comment|// 1970-04-11
 block|}
 decl_stmt|;
 block|}

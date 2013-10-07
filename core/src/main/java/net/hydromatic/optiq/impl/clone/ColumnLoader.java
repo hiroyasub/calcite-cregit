@@ -125,6 +125,18 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
+name|util14
+operator|.
+name|DateTimeUtil
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|lang
@@ -349,7 +361,9 @@ operator|.
 name|getTime
 argument_list|()
 operator|%
-literal|86400000
+name|DateTimeUtil
+operator|.
+name|MILLIS_PER_DAY
 operator|)
 return|;
 block|}
@@ -399,7 +413,9 @@ operator|.
 name|getTime
 argument_list|()
 operator|/
-literal|86400000
+name|DateTimeUtil
+operator|.
+name|MILLIS_PER_DAY
 operator|)
 return|;
 block|}
@@ -1341,14 +1357,7 @@ name|RelDataType
 name|type
 parameter_list|)
 block|{
-if|if
-condition|(
-name|type
-operator|.
-name|isNullable
-argument_list|()
-condition|)
-block|{
+comment|//    if (type.isNullable()) {
 switch|switch
 condition|(
 name|type
@@ -1397,7 +1406,7 @@ name|DATE_TO_INT
 argument_list|)
 return|;
 block|}
-block|}
+comment|//    }
 return|return
 name|list
 return|;

@@ -120,6 +120,11 @@ name|void
 name|close
 parameter_list|()
 function_decl|;
+comment|/**    * Returns whether the last value returned was null.    */
+name|boolean
+name|wasNull
+parameter_list|()
+function_decl|;
 comment|/**    * Accessor of a column value.    */
 interface|interface
 name|Accessor

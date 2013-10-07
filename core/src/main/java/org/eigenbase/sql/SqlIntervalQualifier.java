@@ -127,6 +127,18 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
+name|util14
+operator|.
+name|DateTimeUtil
+import|;
+end_import
+
+begin_import
+import|import
 name|net
 operator|.
 name|hydromatic
@@ -250,8 +262,9 @@ literal|false
 argument_list|,
 literal|'-'
 argument_list|,
-literal|86400000
-comment|/* millis = 24 * 3600000 */
+name|DateTimeUtil
+operator|.
+name|MILLIS_PER_DAY
 argument_list|,
 literal|null
 argument_list|)
@@ -262,8 +275,9 @@ literal|false
 argument_list|,
 literal|' '
 argument_list|,
-literal|3600000
-comment|/* millis */
+name|DateTimeUtil
+operator|.
+name|MILLIS_PER_HOUR
 argument_list|,
 name|BigDecimal
 operator|.
@@ -279,8 +293,9 @@ literal|false
 argument_list|,
 literal|':'
 argument_list|,
-literal|60000
-comment|/* millis */
+name|DateTimeUtil
+operator|.
+name|MILLIS_PER_MINUTE
 argument_list|,
 name|BigDecimal
 operator|.
@@ -296,8 +311,9 @@ literal|false
 argument_list|,
 literal|':'
 argument_list|,
-literal|1000
-comment|/* millis */
+name|DateTimeUtil
+operator|.
+name|MILLIS_PER_SECOND
 argument_list|,
 name|BigDecimal
 operator|.

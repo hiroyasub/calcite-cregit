@@ -29,6 +29,18 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
+name|util14
+operator|.
+name|DateTimeUtil
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|math
@@ -5021,7 +5033,9 @@ operator|)
 operator|(
 name|timestamp
 operator|/
-literal|86400000
+name|DateTimeUtil
+operator|.
+name|MILLIS_PER_DAY
 operator|)
 argument_list|)
 expr_stmt|;
@@ -5042,7 +5056,9 @@ operator|)
 operator|(
 name|timestamp
 operator|%
-literal|86400000
+name|DateTimeUtil
+operator|.
+name|MILLIS_PER_DAY
 operator|)
 argument_list|)
 expr_stmt|;
@@ -5219,7 +5235,9 @@ argument_list|(
 name|root
 argument_list|)
 operator|%
-literal|86400000
+name|DateTimeUtil
+operator|.
+name|MILLIS_PER_DAY
 operator|)
 return|;
 block|}
@@ -5243,7 +5261,9 @@ argument_list|(
 name|root
 argument_list|)
 operator|/
-literal|86400000
+name|DateTimeUtil
+operator|.
+name|MILLIS_PER_DAY
 operator|)
 return|;
 block|}
@@ -5289,7 +5309,9 @@ argument_list|(
 name|root
 argument_list|)
 operator|%
-literal|86400000
+name|DateTimeUtil
+operator|.
+name|MILLIS_PER_DAY
 operator|)
 return|;
 block|}
