@@ -271,7 +271,7 @@ return|;
 block|}
 block|}
 decl_stmt|;
-comment|/**    * Adapter that converts an enumerator into an iterator.    *    * @param enumerator Enumerator    * @param<T> Element type    *    * @return Iterator    */
+comment|/**    * Adapter that converts an enumerator into an iterator.    *    *<p><b>WARNING</b>: The iterator returned by this method does not call    * {@link net.hydromatic.linq4j.Enumerator#close()}, so it is not safe to use    * with an enumerator that allocates resources.</p>    *    * @param enumerator Enumerator    * @param<T> Element type    *    * @return Iterator    */
 specifier|public
 specifier|static
 parameter_list|<
