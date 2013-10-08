@@ -376,14 +376,8 @@ name|initialTables
 argument_list|()
 control|)
 block|{
-name|tableMap
-operator|.
-name|put
+name|addTable
 argument_list|(
-name|tableInSchema
-operator|.
-name|name
-argument_list|,
 name|tableInSchema
 argument_list|)
 expr_stmt|;
