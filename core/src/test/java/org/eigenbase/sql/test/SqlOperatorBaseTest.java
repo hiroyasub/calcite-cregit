@@ -14764,6 +14764,32 @@ argument_list|,
 literal|"VARCHAR(30) NOT NULL"
 argument_list|)
 expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"LOCALTIME"
+argument_list|,
+name|Pattern
+operator|.
+name|compile
+argument_list|(
+name|currentTimeString
+argument_list|(
+name|LOCAL_TZ
+argument_list|)
+operator|.
+name|substring
+argument_list|(
+literal|11
+argument_list|)
+operator|+
+literal|"[0-9][0-9]:[0-9][0-9]"
+argument_list|)
+argument_list|,
+literal|"TIME(0) NOT NULL"
+argument_list|)
+expr_stmt|;
 block|}
 annotation|@
 name|Test
@@ -14848,6 +14874,27 @@ argument_list|,
 literal|"VARCHAR(30) NOT NULL"
 argument_list|)
 expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"LOCALTIMESTAMP"
+argument_list|,
+name|Pattern
+operator|.
+name|compile
+argument_list|(
+name|currentTimeString
+argument_list|(
+name|LOCAL_TZ
+argument_list|)
+operator|+
+literal|"[0-9][0-9]:[0-9][0-9]"
+argument_list|)
+argument_list|,
+literal|"TIMESTAMP(0) NOT NULL"
+argument_list|)
+expr_stmt|;
 block|}
 annotation|@
 name|Test
@@ -14922,6 +14969,32 @@ literal|"[0-9][0-9]:[0-9][0-9]"
 argument_list|)
 argument_list|,
 literal|"VARCHAR(30) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"CURRENT_TIME"
+argument_list|,
+name|Pattern
+operator|.
+name|compile
+argument_list|(
+name|currentTimeString
+argument_list|(
+name|CURRENT_TZ
+argument_list|)
+operator|.
+name|substring
+argument_list|(
+literal|11
+argument_list|)
+operator|+
+literal|"[0-9][0-9]:[0-9][0-9]"
+argument_list|)
+argument_list|,
+literal|"TIME(0) NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
@@ -15004,6 +15077,27 @@ literal|"[0-9][0-9]:[0-9][0-9]"
 argument_list|)
 argument_list|,
 literal|"VARCHAR(30) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"CURRENT_TIMESTAMP"
+argument_list|,
+name|Pattern
+operator|.
+name|compile
+argument_list|(
+name|currentTimeString
+argument_list|(
+name|CURRENT_TZ
+argument_list|)
+operator|+
+literal|"[0-9][0-9]:[0-9][0-9]"
+argument_list|)
+argument_list|,
+literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
@@ -15154,6 +15248,27 @@ literal|10
 argument_list|)
 argument_list|,
 literal|"VARCHAR(30) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"CURRENT_DATE"
+argument_list|,
+name|currentTimeString
+argument_list|(
+name|LOCAL_TZ
+argument_list|)
+operator|.
+name|substring
+argument_list|(
+literal|0
+argument_list|,
+literal|10
+argument_list|)
+argument_list|,
+literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}

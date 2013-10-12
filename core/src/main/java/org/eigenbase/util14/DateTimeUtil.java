@@ -166,6 +166,18 @@ literal|0
 argument_list|)
 expr_stmt|;
 block|}
+comment|/**      * Calendar set to local time.      */
+specifier|private
+specifier|static
+specifier|final
+name|Calendar
+name|LOCAL_CALENDAR
+init|=
+name|Calendar
+operator|.
+name|getInstance
+argument_list|()
+decl_stmt|;
 comment|//~ Methods ----------------------------------------------------------------
 comment|/**      * Parses a string using {@link SimpleDateFormat} and a given pattern. This      * method parses a string at the specified parse position and if successful,      * updates the parse position to the index after the last character used.      * The parsing is strict and requires months to be less than 12, days to be      * less than 31, etc.      *      * @param s string to be parsed      * @param pattern {@link SimpleDateFormat}  pattern      * @param tz time zone in which to interpret string. Defaults to the Java      * default time zone      * @param pp position to start parsing from      *      * @return a Calendar initialized with the parsed value, or null if parsing      * failed. If returned, the Calendar is configured to the GMT time zone.      *      * @pre pattern != null      */
 specifier|private

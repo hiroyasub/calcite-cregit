@@ -83,17 +83,7 @@ name|java
 operator|.
 name|util
 operator|.
-name|Collections
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|List
+name|*
 import|;
 end_import
 
@@ -275,6 +265,9 @@ argument_list|<
 name|ColumnMetaData
 argument_list|>
 name|types
+parameter_list|,
+name|Calendar
+name|localCalendar
 parameter_list|)
 block|{
 assert|assert

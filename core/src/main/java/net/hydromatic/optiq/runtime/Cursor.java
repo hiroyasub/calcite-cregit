@@ -96,7 +96,7 @@ name|Cursor
 extends|extends
 name|Closeable
 block|{
-comment|/**    * Creates a list of accessors, one per column.    *    * @param types List of column types, per {@link java.sql.Types}.    * @return List of column accessors    */
+comment|/**    * Creates a list of accessors, one per column.    *    *    * @param types List of column types, per {@link java.sql.Types}.    * @param localCalendar Calendar in local timezone    * @return List of column accessors    */
 name|List
 argument_list|<
 name|Accessor
@@ -108,6 +108,9 @@ argument_list|<
 name|ColumnMetaData
 argument_list|>
 name|types
+parameter_list|,
+name|Calendar
+name|localCalendar
 parameter_list|)
 function_decl|;
 comment|/**    * Moves to the next row.    *    * @return Whether moved    */
@@ -129,6 +132,10 @@ comment|/**    * Accessor of a column value.    */
 interface|interface
 name|Accessor
 block|{
+name|boolean
+name|wasNull
+parameter_list|()
+function_decl|;
 name|String
 name|getString
 parameter_list|()
@@ -175,18 +182,6 @@ function_decl|;
 name|byte
 index|[]
 name|getBytes
-parameter_list|()
-function_decl|;
-name|Date
-name|getDate
-parameter_list|()
-function_decl|;
-name|Time
-name|getTime
-parameter_list|()
-function_decl|;
-name|Timestamp
-name|getTimestamp
 parameter_list|()
 function_decl|;
 name|InputStream
@@ -244,21 +239,21 @@ name|Date
 name|getDate
 parameter_list|(
 name|Calendar
-name|cal
+name|calendar
 parameter_list|)
 function_decl|;
 name|Time
 name|getTime
 parameter_list|(
 name|Calendar
-name|cal
+name|calendar
 parameter_list|)
 function_decl|;
 name|Timestamp
 name|getTimestamp
 parameter_list|(
 name|Calendar
-name|cal
+name|calendar
 parameter_list|)
 function_decl|;
 name|URL

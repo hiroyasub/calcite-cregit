@@ -93,6 +93,18 @@ name|BOOLEAN
 argument_list|,
 literal|"false"
 argument_list|)
+block|,
+comment|/** Timezone, for example 'gmt-3'. Default is the JVM's time zone. */
+name|TIMEZONE
+argument_list|(
+literal|"timezone"
+argument_list|,
+name|Type
+operator|.
+name|STRING
+argument_list|,
+literal|null
+argument_list|)
 block|;
 specifier|private
 specifier|final
