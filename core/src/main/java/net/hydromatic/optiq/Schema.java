@@ -21,19 +21,7 @@ name|hydromatic
 operator|.
 name|linq4j
 operator|.
-name|Linq4j
-import|;
-end_import
-
-begin_import
-import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|linq4j
-operator|.
-name|QueryProvider
+name|*
 import|;
 end_import
 
@@ -48,6 +36,22 @@ operator|.
 name|expressions
 operator|.
 name|Expression
+import|;
+end_import
+
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|optiq
+operator|.
+name|impl
+operator|.
+name|java
+operator|.
+name|JavaTypeFactory
 import|;
 end_import
 
@@ -83,8 +87,6 @@ begin_interface
 specifier|public
 interface|interface
 name|Schema
-extends|extends
-name|DataContext
 block|{
 comment|/**    * Returns the parent schema, or null if this schema has no parent.    */
 name|Schema
@@ -107,7 +109,7 @@ name|String
 name|name
 parameter_list|)
 function_decl|;
-comment|/**    * Returns a table with the given name, or null.    *    * @param name Table name    * @param elementType Element type    * @return Table, or null    */
+comment|/**    * Returns a table with a given name and element type, or null if not found.    *    * @param name Table name    * @param elementType Element type    * @return Table, or null    */
 parameter_list|<
 name|E
 parameter_list|>
@@ -144,6 +146,14 @@ argument_list|>
 name|getTableFunctions
 parameter_list|()
 function_decl|;
+comment|/**    * Returns a sub-schema with a given name, or null.    */
+name|Schema
+name|getSubSchema
+parameter_list|(
+name|String
+name|name
+parameter_list|)
+function_decl|;
 name|Collection
 argument_list|<
 name|String
@@ -158,6 +168,10 @@ argument_list|,
 name|TableInSchema
 argument_list|>
 name|getTables
+parameter_list|()
+function_decl|;
+name|JavaTypeFactory
+name|getTypeFactory
 parameter_list|()
 function_decl|;
 specifier|abstract

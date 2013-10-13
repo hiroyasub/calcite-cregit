@@ -281,15 +281,6 @@ argument_list|()
 assert|;
 block|}
 specifier|public
-name|DataContext
-name|getDataContext
-parameter_list|()
-block|{
-return|return
-name|schema
-return|;
-block|}
-specifier|public
 name|RelDataType
 name|getRowType
 parameter_list|()

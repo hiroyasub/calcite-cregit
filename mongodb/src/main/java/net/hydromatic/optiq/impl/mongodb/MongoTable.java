@@ -270,15 +270,6 @@ argument_list|()
 return|;
 block|}
 specifier|public
-name|MongoSchema
-name|getDataContext
-parameter_list|()
-block|{
-return|return
-name|schema
-return|;
-block|}
-specifier|public
 name|Class
 name|getElementType
 parameter_list|()

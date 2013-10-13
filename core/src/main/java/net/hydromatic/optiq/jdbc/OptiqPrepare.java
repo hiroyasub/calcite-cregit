@@ -451,6 +451,10 @@ name|SparkHandler
 name|spark
 parameter_list|()
 function_decl|;
+name|DataContext
+name|createDataContext
+parameter_list|()
+function_decl|;
 block|}
 comment|/** Callback to register Spark as the main engine. */
 specifier|public

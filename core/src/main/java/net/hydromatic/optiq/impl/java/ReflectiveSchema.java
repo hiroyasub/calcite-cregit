@@ -399,7 +399,7 @@ operator|+
 literal|")"
 return|;
 block|}
-comment|/** Returns the wrapped object. (May not appear to be used, but is used in    * generated code via {@link BuiltinMethod#GET_TARGET}.) */
+comment|/** Returns the wrapped object. (May not appear to be used, but is used in    * generated code via {@link BuiltinMethod#REFLECTIVE_SCHEMA_GET_TARGET}.) */
 specifier|public
 name|Object
 name|getTarget
@@ -776,7 +776,7 @@ argument_list|)
 argument_list|,
 name|BuiltinMethod
 operator|.
-name|GET_TARGET
+name|REFLECTIVE_SCHEMA_GET_TARGET
 operator|.
 name|method
 argument_list|)
@@ -1152,15 +1152,6 @@ name|relDataType
 operator|=
 name|relDataType
 expr_stmt|;
-block|}
-specifier|public
-name|DataContext
-name|getDataContext
-parameter_list|()
-block|{
-return|return
-name|schema
-return|;
 block|}
 specifier|public
 name|RelDataType

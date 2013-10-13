@@ -217,15 +217,6 @@ name|getQueryProvider
 argument_list|()
 return|;
 block|}
-specifier|public
-name|DataContext
-name|getDataContext
-parameter_list|()
-block|{
-return|return
-name|schema
-return|;
-block|}
 comment|// Default implementation. Override if you have statistics.
 specifier|public
 name|Statistic
@@ -273,7 +264,7 @@ argument_list|()
 argument_list|,
 name|BuiltinMethod
 operator|.
-name|DATA_CONTEXT_GET_TABLE
+name|SCHEMA_GET_TABLE
 operator|.
 name|method
 argument_list|,

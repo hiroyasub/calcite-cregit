@@ -425,7 +425,7 @@ argument_list|()
 argument_list|,
 name|BuiltinMethod
 operator|.
-name|DATA_CONTEXT_GET_TABLE
+name|SCHEMA_GET_TABLE
 operator|.
 name|method
 argument_list|,

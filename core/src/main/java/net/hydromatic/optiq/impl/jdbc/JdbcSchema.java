@@ -637,23 +637,6 @@ return|return
 name|name
 return|;
 block|}
-specifier|public
-name|Object
-name|get
-parameter_list|(
-name|String
-name|name
-parameter_list|)
-block|{
-return|return
-name|parentSchema
-operator|.
-name|get
-argument_list|(
-name|name
-argument_list|)
-return|;
-block|}
 comment|// Used by generated code.
 specifier|public
 name|DataSource

@@ -264,15 +264,6 @@ name|queryProvider
 return|;
 block|}
 specifier|public
-name|DataContext
-name|getDataContext
-parameter_list|()
-block|{
-return|return
-name|schema
-return|;
-block|}
-specifier|public
 name|Type
 name|getElementType
 parameter_list|()

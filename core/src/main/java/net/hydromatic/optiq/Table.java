@@ -54,10 +54,6 @@ argument_list|<
 name|T
 argument_list|>
 block|{
-name|DataContext
-name|getDataContext
-parameter_list|()
-function_decl|;
 name|RelDataType
 name|getRowType
 parameter_list|()

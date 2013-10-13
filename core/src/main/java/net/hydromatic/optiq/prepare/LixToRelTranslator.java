@@ -488,7 +488,7 @@ argument_list|)
 argument_list|)
 return|;
 case|case
-name|DATA_CONTEXT_GET_TABLE
+name|SCHEMA_GET_TABLE
 case|:
 return|return
 operator|new
