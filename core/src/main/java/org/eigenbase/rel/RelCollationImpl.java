@@ -80,6 +80,12 @@ specifier|final
 name|RelCollation
 name|EMPTY
 init|=
+name|RelCollationTraitDef
+operator|.
+name|INSTANCE
+operator|.
+name|canonize
+argument_list|(
 operator|new
 name|RelCollationImpl
 argument_list|(
@@ -91,6 +97,7 @@ operator|>
 name|of
 argument_list|()
 argument_list|)
+argument_list|)
 decl_stmt|;
 comment|/**      * A collation that cannot be replicated by applying a sort. The only      * implementation choice is to apply operations that preserve order.      */
 specifier|public
@@ -99,6 +106,12 @@ specifier|final
 name|RelCollation
 name|PRESERVE
 init|=
+name|RelCollationTraitDef
+operator|.
+name|INSTANCE
+operator|.
+name|canonize
+argument_list|(
 operator|new
 name|RelCollationImpl
 argument_list|(
@@ -128,6 +141,7 @@ literal|"PRESERVE"
 return|;
 block|}
 block|}
+argument_list|)
 decl_stmt|;
 comment|//~ Instance fields --------------------------------------------------------
 specifier|private

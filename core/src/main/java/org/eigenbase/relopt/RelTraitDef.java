@@ -143,10 +143,10 @@ function_decl|;
 comment|/**      * Takes an arbitrary RelTrait and returns the canonical representation of      * that RelTrait. Canonized RelTrait objects may always be compared using      * the equality operator (<code>==</code>).      *      *<p>If an equal RelTrait has already been canonized and is still in use,      * it will be returned. Otherwise, the given RelTrait is made canonical and      * returned.      *      * @param trait a possibly non-canonical RelTrait      *      * @return a canonical RelTrait.      */
 specifier|public
 specifier|final
-name|RelTrait
+name|T
 name|canonize
 parameter_list|(
-name|RelTrait
+name|T
 name|trait
 parameter_list|)
 block|{
@@ -207,9 +207,17 @@ condition|)
 block|{
 comment|// Make sure the canonical trait didn't disappear between
 comment|// containsKey and get.
-name|RelTrait
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unchecked"
+argument_list|)
+name|T
 name|canonicalTrait
 init|=
+operator|(
+name|T
+operator|)
 name|canonicalTraitRef
 operator|.
 name|get
