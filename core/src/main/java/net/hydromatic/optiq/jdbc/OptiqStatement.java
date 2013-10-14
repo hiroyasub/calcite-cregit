@@ -59,6 +59,20 @@ name|net
 operator|.
 name|hydromatic
 operator|.
+name|linq4j
+operator|.
+name|function
+operator|.
+name|Function1
+import|;
+end_import
+
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
 name|optiq
 operator|.
 name|DataContext
@@ -1352,8 +1366,10 @@ return|;
 block|}
 specifier|private
 specifier|static
-name|Function0
+name|Function1
 argument_list|<
+name|DataContext
+argument_list|,
 name|Cursor
 argument_list|>
 name|getCursorFactory
@@ -1367,8 +1383,10 @@ parameter_list|)
 block|{
 return|return
 operator|new
-name|Function0
+name|Function1
 argument_list|<
+name|DataContext
+argument_list|,
 name|Cursor
 argument_list|>
 argument_list|()
@@ -1376,7 +1394,10 @@ block|{
 specifier|public
 name|Cursor
 name|apply
-parameter_list|()
+parameter_list|(
+name|DataContext
+name|dataContext
+parameter_list|)
 block|{
 name|Enumerator
 argument_list|<
@@ -1387,7 +1408,9 @@ init|=
 name|prepareResult
 operator|.
 name|enumerator
-argument_list|()
+argument_list|(
+name|dataContext
+argument_list|)
 decl_stmt|;
 comment|//noinspection unchecked
 return|return
@@ -1542,6 +1565,9 @@ parameter_list|>
 name|OptiqPrepare
 operator|.
 name|PrepareResult
+argument_list|<
+name|T
+argument_list|>
 name|prepare
 parameter_list|(
 name|Queryable

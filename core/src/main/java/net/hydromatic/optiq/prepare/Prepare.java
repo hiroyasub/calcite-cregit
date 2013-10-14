@@ -37,6 +37,20 @@ name|optiq
 operator|.
 name|runtime
 operator|.
+name|Bindable
+import|;
+end_import
+
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|optiq
+operator|.
+name|runtime
+operator|.
 name|Typed
 import|;
 end_import
@@ -1347,8 +1361,8 @@ return|;
 block|}
 specifier|public
 specifier|abstract
-name|Object
-name|bind
+name|Bindable
+name|getBindable
 parameter_list|()
 function_decl|;
 block|}
@@ -1386,8 +1400,8 @@ name|getFieldOrigins
 parameter_list|()
 function_decl|;
 comment|/**      * Executes the prepared result.      *      * @return producer of rows resulting from execution      */
-name|Object
-name|bind
+name|Bindable
+name|getBindable
 parameter_list|()
 function_decl|;
 block|}
@@ -1555,8 +1569,8 @@ return|;
 block|}
 specifier|public
 specifier|abstract
-name|Object
-name|bind
+name|Bindable
+name|getBindable
 parameter_list|()
 function_decl|;
 block|}

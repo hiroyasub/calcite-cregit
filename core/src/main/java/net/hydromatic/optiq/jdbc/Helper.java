@@ -25,7 +25,19 @@ name|linq4j
 operator|.
 name|function
 operator|.
-name|Function0
+name|Function1
+import|;
+end_import
+
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|optiq
+operator|.
+name|DataContext
 import|;
 end_import
 
@@ -237,8 +249,10 @@ name|emptyList
 argument_list|()
 argument_list|,
 operator|new
-name|Function0
+name|Function1
 argument_list|<
+name|DataContext
+argument_list|,
 name|Cursor
 argument_list|>
 argument_list|()
@@ -246,7 +260,10 @@ block|{
 specifier|public
 name|Cursor
 name|apply
-parameter_list|()
+parameter_list|(
+name|DataContext
+name|dataContext
+parameter_list|)
 block|{
 return|return
 operator|new

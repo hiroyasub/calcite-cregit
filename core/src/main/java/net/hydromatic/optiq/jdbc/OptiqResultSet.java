@@ -25,7 +25,7 @@ name|linq4j
 operator|.
 name|function
 operator|.
-name|Function0
+name|Function1
 import|;
 end_import
 
@@ -151,8 +151,10 @@ name|columnMetaDataList
 decl_stmt|;
 specifier|private
 specifier|final
-name|Function0
+name|Function1
 argument_list|<
+name|DataContext
+argument_list|,
 name|Cursor
 argument_list|>
 name|cursorFactory
@@ -278,8 +280,10 @@ parameter_list|,
 name|ResultSetMetaData
 name|resultSetMetaData
 parameter_list|,
-name|Function0
+name|Function1
 argument_list|<
+name|DataContext
+argument_list|,
 name|Cursor
 argument_list|>
 name|cursorFactory
@@ -605,6 +609,17 @@ argument_list|,
 name|resultSink
 argument_list|)
 expr_stmt|;
+specifier|final
+name|DataContext
+name|dataContext
+init|=
+name|statement
+operator|.
+name|connection
+operator|.
+name|createDataContext
+argument_list|()
+decl_stmt|;
 name|this
 operator|.
 name|cursor
@@ -612,7 +627,9 @@ operator|=
 name|cursorFactory
 operator|.
 name|apply
-argument_list|()
+argument_list|(
+name|dataContext
+argument_list|)
 expr_stmt|;
 name|this
 operator|.

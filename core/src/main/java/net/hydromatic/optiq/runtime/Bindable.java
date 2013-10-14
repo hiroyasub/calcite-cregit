@@ -33,6 +33,18 @@ name|net
 operator|.
 name|hydromatic
 operator|.
+name|linq4j
+operator|.
+name|RawEnumerable
+import|;
+end_import
+
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
 name|optiq
 operator|.
 name|DataContext
@@ -47,9 +59,15 @@ begin_interface
 specifier|public
 interface|interface
 name|Bindable
+parameter_list|<
+name|T
+parameter_list|>
 block|{
 comment|/**    * Executes this statement and returns an enumerable which will yield rows.    * The {@code environment} parameter provides the values in the root of the    * environment (usually schemas).    *    * @param dataContext Environment that provides tables    * @return Enumerable over rows    */
 name|Enumerable
+argument_list|<
+name|T
+argument_list|>
 name|bind
 parameter_list|(
 name|DataContext
