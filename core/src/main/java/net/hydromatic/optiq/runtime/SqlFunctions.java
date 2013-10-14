@@ -5230,7 +5230,11 @@ name|DataContext
 name|root
 parameter_list|)
 block|{
+comment|// Cast required for JDK 1.6.
 return|return
+operator|(
+name|Long
+operator|)
 name|DataContext
 operator|.
 name|Variable
@@ -5361,7 +5365,11 @@ name|DataContext
 name|root
 parameter_list|)
 block|{
+comment|// Cast required for JDK 1.6.
 return|return
+operator|(
+name|Long
+operator|)
 name|DataContext
 operator|.
 name|Variable
