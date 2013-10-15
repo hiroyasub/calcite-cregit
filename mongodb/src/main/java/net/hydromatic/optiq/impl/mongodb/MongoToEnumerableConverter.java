@@ -567,6 +567,20 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+comment|//    // Add sorting to the enumerable
+comment|//    if (mongoImplementor.sort.size()> 0) {
+comment|//        final Expression sortOps =
+comment|//            list.append(
+comment|//                "sortOps",
+comment|//                constantArrayList(Pair.right(mongoImplementor.sort)));
+comment|//        enumerable =
+comment|//            list.append(
+comment|//                "sortedEnumerable",
+comment|//                Expressions.call(
+comment|//                    enumerable,
+comment|//                    "sort",
+comment|//                    sortOps));
+comment|//    }
 name|list
 operator|.
 name|add

@@ -1025,6 +1025,15 @@ name|planner
 operator|.
 name|addRule
 argument_list|(
+name|PushProjectPastSortRule
+operator|.
+name|INSTANCE
+argument_list|)
+expr_stmt|;
+name|planner
+operator|.
+name|addRule
+argument_list|(
 name|WindowedAggSplitterRule
 operator|.
 name|INSTANCE

@@ -334,6 +334,46 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testSort
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|assertThat
+argument_list|()
+operator|.
+name|enable
+argument_list|(
+name|enabled
+argument_list|()
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|ZIPS
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select * from zips order by state"
+argument_list|)
+comment|//      .returns("EXPR$0=29467\n")
+operator|.
+name|explainContains
+argument_list|(
+literal|"Bacon"
+argument_list|)
+expr_stmt|;
+comment|//          "PLAN=EnumerableAggregateRel(group=[{}], EXPR$0=[COUNT()])\n"
+comment|//          + "  EnumerableCalcRel(expr#0..4=[{inputs}], expr#5=[0], $f0=[$t5])\n"
+comment|//          + "    MongoToEnumerableConverter\n"
+comment|//          + "      MongoTableScan(table=[[mongo_raw, zips]], ops=[[<{city: 1, loc: 1, pop: 1, state: 1, _id: 1}, {$project ...}>]])");
+empty_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testUnionPlan
 parameter_list|()
 block|{
