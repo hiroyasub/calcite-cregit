@@ -4465,12 +4465,14 @@ operator|.
 name|iterator
 argument_list|()
 decl_stmt|;
-assert|assert
+if|if
+condition|(
 name|rels
 operator|.
 name|hasNext
 argument_list|()
-assert|;
+condition|)
+block|{
 name|input
 operator|=
 name|rels
@@ -4512,6 +4514,7 @@ argument_list|(
 name|inputSubset
 argument_list|)
 assert|;
+block|}
 block|}
 block|}
 name|Double

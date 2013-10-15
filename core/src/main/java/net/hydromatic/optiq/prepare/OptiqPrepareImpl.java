@@ -953,6 +953,15 @@ name|planner
 operator|.
 name|addRule
 argument_list|(
+name|MergeProjectRule
+operator|.
+name|instance
+argument_list|)
+expr_stmt|;
+name|planner
+operator|.
+name|addRule
+argument_list|(
 name|PushFilterPastProjectRule
 operator|.
 name|instance

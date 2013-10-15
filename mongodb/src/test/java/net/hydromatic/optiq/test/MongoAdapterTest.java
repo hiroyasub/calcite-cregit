@@ -619,11 +619,9 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"PLAN=EnumerableCalcRel(expr#0..4=[{inputs}], STATE=[$t3], CITY=[$t0])\n"
+literal|"PLAN=MongoToEnumerableConverter\n"
 operator|+
-literal|"  MongoToEnumerableConverter\n"
-operator|+
-literal|"    MongoTableScan(table=[[mongo_raw, zips]], ops=[[<{city: 1, loc: 1, pop: 1, state: 1, _id: 1}, {$project ...}>]])"
+literal|"  MongoTableScan(table=[[mongo_raw, zips]], ops=[[<{state: 1, city: 1}, {$project ...}>]])"
 argument_list|)
 expr_stmt|;
 block|}
