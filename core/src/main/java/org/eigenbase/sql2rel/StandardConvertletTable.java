@@ -3108,7 +3108,7 @@ block|}
 return|return
 name|rexBuilder
 operator|.
-name|makeCall
+name|makeFlatCall
 argument_list|(
 name|op
 argument_list|,

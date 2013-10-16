@@ -126,6 +126,16 @@ name|condition
 operator|=
 name|condition
 expr_stmt|;
+assert|assert
+name|RexUtil
+operator|.
+name|isFlat
+argument_list|(
+name|condition
+argument_list|)
+operator|:
+name|condition
+assert|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
 annotation|@

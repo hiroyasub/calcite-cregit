@@ -196,6 +196,28 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Tests that AND(x, AND(y, z)) gets flattened to AND(x, y, z). */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMultiAnd
+parameter_list|()
+block|{
+name|check
+argument_list|(
+literal|"select * from emp\n"
+operator|+
+literal|"where deptno< 10\n"
+operator|+
+literal|"and deptno> 5\n"
+operator|+
+literal|"and (deptno = 8 or empno< 100)"
+argument_list|,
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public

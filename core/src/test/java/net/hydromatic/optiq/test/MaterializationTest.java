@@ -1219,7 +1219,7 @@ name|checkSatisfiable
 argument_list|(
 name|e8
 argument_list|,
-literal|"AND(AND(AND(AND(=($0, 0), $2), $3), NOT(AND($2, $3, $4))), NOT($4))"
+literal|"AND(=($0, 0), $2, $3, NOT(AND($2, $3, $4)), NOT($4))"
 argument_list|)
 expr_stmt|;
 block|}
