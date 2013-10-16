@@ -31,6 +31,20 @@ end_import
 
 begin_import
 import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|linq4j
+operator|.
+name|function
+operator|.
+name|FunctionTest
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|junit
@@ -80,6 +94,10 @@ operator|.
 name|class
 block|,
 name|ExpressionTest
+operator|.
+name|class
+block|,
+name|FunctionTest
 operator|.
 name|class
 block|,
