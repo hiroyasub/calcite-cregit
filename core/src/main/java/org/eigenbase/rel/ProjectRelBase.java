@@ -99,6 +99,18 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
+name|util
+operator|.
+name|Util
+import|;
+end_import
+
+begin_import
+import|import
 name|net
 operator|.
 name|hydromatic
@@ -106,6 +118,34 @@ operator|.
 name|linq4j
 operator|.
 name|Ord
+import|;
+end_import
+
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|linq4j
+operator|.
+name|function
+operator|.
+name|Function1
+import|;
+end_import
+
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|linq4j
+operator|.
+name|function
+operator|.
+name|Functions
 import|;
 end_import
 
@@ -498,11 +538,101 @@ return|return
 literal|false
 return|;
 block|}
+if|if
+condition|(
+operator|!
+name|Util
+operator|.
+name|isDistinct
+argument_list|(
+name|rowType
+operator|.
+name|getFieldNames
+argument_list|()
+argument_list|)
+condition|)
+block|{
+assert|assert
+operator|!
+name|fail
+assert|;
+return|return
+literal|false
+return|;
+block|}
+if|if
+condition|(
+literal|false
+operator|&&
+operator|!
+name|Util
+operator|.
+name|isDistinct
+argument_list|(
+name|Functions
+operator|.
+name|adapt
+argument_list|(
+name|exps
+argument_list|,
+operator|new
+name|Function1
+argument_list|<
+name|RexNode
+argument_list|,
+name|Object
+argument_list|>
+argument_list|()
+block|{
+specifier|public
+name|Object
+name|apply
+parameter_list|(
+name|RexNode
+name|a0
+parameter_list|)
+block|{
+return|return
+name|a0
+operator|.
+name|toString
+argument_list|()
+return|;
+block|}
+block|}
+block_content|)
+block|)
+end_class
+
+begin_block
+unit|)
+block|{
+comment|// Projecting the same expression twice is usually a bad idea,
+comment|// because it may create expressions downstream which are equivalent
+comment|// but which look different. We can't ban duplicate projects,
+comment|// because we need to allow
+comment|//
+comment|//  SELECT a, b FROM c UNION SELECT x, x FROM z
+assert|assert
+operator|!
+name|fail
+operator|:
+name|exps
+assert|;
+return|return
+literal|false
+return|;
+block|}
+end_block
+
+begin_return
 return|return
 literal|true
 return|;
-block|}
-specifier|public
+end_return
+
+begin_function
+unit|}      public
 name|RelOptCost
 name|computeSelfCost
 parameter_list|(
@@ -549,6 +679,9 @@ name|dIo
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_function
 specifier|public
 name|RelOptPlanWriter
 name|explainTerms
@@ -660,7 +793,13 @@ return|return
 name|pw
 return|;
 block|}
+end_function
+
+begin_comment
 comment|//~ Inner Interfaces -------------------------------------------------------
+end_comment
+
+begin_interface
 specifier|public
 interface|interface
 name|Flags
@@ -682,8 +821,17 @@ init|=
 literal|0
 decl_stmt|;
 block|}
+end_interface
+
+begin_comment
 comment|//~ Inner Classes ----------------------------------------------------------
+end_comment
+
+begin_comment
 comment|/**      * Visitor which walks over a program and checks validity.      */
+end_comment
+
+begin_class
 specifier|private
 specifier|static
 class|class
@@ -1000,10 +1148,10 @@ literal|true
 return|;
 block|}
 block|}
-block|}
 end_class
 
 begin_comment
+unit|}
 comment|// End ProjectRelBase.java
 end_comment
 
