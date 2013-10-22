@@ -226,6 +226,35 @@ block|}
 block|}
 argument_list|)
 decl_stmt|;
+if|if
+condition|(
+name|files
+operator|==
+literal|null
+condition|)
+block|{
+name|System
+operator|.
+name|out
+operator|.
+name|println
+argument_list|(
+literal|"directory "
+operator|+
+name|directoryFile
+operator|+
+literal|" not found"
+argument_list|)
+expr_stmt|;
+name|files
+operator|=
+operator|new
+name|File
+index|[
+literal|0
+index|]
+expr_stmt|;
+block|}
 for|for
 control|(
 name|File

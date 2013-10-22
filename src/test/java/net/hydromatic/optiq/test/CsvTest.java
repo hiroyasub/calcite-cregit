@@ -225,6 +225,106 @@ name|close
 argument_list|()
 expr_stmt|;
 block|}
+comment|/** Tests an inline schema with a non-existent directory. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testBadDirectory
+parameter_list|()
+throws|throws
+name|SQLException
+block|{
+name|Properties
+name|info
+init|=
+operator|new
+name|Properties
+argument_list|()
+decl_stmt|;
+name|info
+operator|.
+name|put
+argument_list|(
+literal|"model"
+argument_list|,
+literal|"inline:"
+operator|+
+literal|"{\n"
+operator|+
+literal|"  version: '1.0',\n"
+operator|+
+literal|"   schemas: [\n"
+operator|+
+literal|"     {\n"
+operator|+
+literal|"       type: 'custom',\n"
+operator|+
+literal|"       name: 'bad',\n"
+operator|+
+literal|"       factory: 'net.hydromatic.optiq.impl.csv.CsvSchemaFactory',\n"
+operator|+
+literal|"       operand: {\n"
+operator|+
+literal|"         directory: '/does/not/exist'\n"
+operator|+
+literal|"       }\n"
+operator|+
+literal|"     }\n"
+operator|+
+literal|"   ]\n"
+operator|+
+literal|"}"
+argument_list|)
+expr_stmt|;
+name|Connection
+name|connection
+init|=
+name|DriverManager
+operator|.
+name|getConnection
+argument_list|(
+literal|"jdbc:optiq:"
+argument_list|,
+name|info
+argument_list|)
+decl_stmt|;
+comment|// must print "directory ... not found" to stdout, but not fail
+name|ResultSet
+name|tables
+init|=
+name|connection
+operator|.
+name|getMetaData
+argument_list|()
+operator|.
+name|getTables
+argument_list|(
+literal|null
+argument_list|,
+literal|null
+argument_list|,
+literal|null
+argument_list|,
+literal|null
+argument_list|)
+decl_stmt|;
+name|tables
+operator|.
+name|next
+argument_list|()
+expr_stmt|;
+name|tables
+operator|.
+name|close
+argument_list|()
+expr_stmt|;
+name|connection
+operator|.
+name|close
+argument_list|()
+expr_stmt|;
+block|}
 comment|/**    * Reads from a table.    */
 annotation|@
 name|Test
