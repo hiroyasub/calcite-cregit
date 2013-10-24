@@ -354,19 +354,19 @@ operator|+
 literal|"from \"hr\".\"depts\""
 argument_list|)
 operator|.
-name|returns
+name|returnsUnordered
 argument_list|(
-literal|"X=T\n"
-operator|+
-literal|"X=E\n"
-operator|+
-literal|"X=S\n"
-operator|+
-literal|"X=B\n"
-operator|+
-literal|"X=M\n"
-operator|+
-literal|"X=H\n"
+literal|"X=T"
+argument_list|,
+literal|"X=E"
+argument_list|,
+literal|"X=S"
+argument_list|,
+literal|"X=B"
+argument_list|,
+literal|"X=M"
+argument_list|,
+literal|"X=H"
 argument_list|)
 expr_stmt|;
 block|}
@@ -424,13 +424,13 @@ operator|+
 literal|"from \"hr\".\"depts\""
 argument_list|)
 operator|.
-name|returns
+name|returnsUnordered
 argument_list|(
-literal|"X=T\n"
-operator|+
-literal|"X=E\n"
-operator|+
-literal|"X=B\n"
+literal|"X=T"
+argument_list|,
+literal|"X=E"
+argument_list|,
+literal|"X=B"
 argument_list|)
 expr_stmt|;
 block|}
@@ -608,17 +608,17 @@ operator|+
 literal|"group by \"name\""
 argument_list|)
 operator|.
-name|returns
+name|returnsUnordered
 argument_list|(
-literal|"name=Bill; C=2\n"
-operator|+
-literal|"name=Eric; C=1\n"
-operator|+
-literal|"name=Theodore; C=2\n"
-operator|+
-literal|"name=first; C=1\n"
-operator|+
-literal|"name=Sebastian; C=2\n"
+literal|"name=Bill; C=2"
+argument_list|,
+literal|"name=Eric; C=1"
+argument_list|,
+literal|"name=Theodore; C=2"
+argument_list|,
+literal|"name=first; C=1"
+argument_list|,
+literal|"name=Sebastian; C=2"
 argument_list|)
 expr_stmt|;
 block|}

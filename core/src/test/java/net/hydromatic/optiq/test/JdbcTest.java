@@ -3697,6 +3697,8 @@ expr_stmt|;
 block|}
 comment|/** A difficult query: an IN list so large that the planner promotes it    * to a semi-join against a VALUES relation. */
 annotation|@
+name|Ignore
+annotation|@
 name|Test
 specifier|public
 name|void
@@ -3888,6 +3890,84 @@ operator|+
 literal|"| Drink | Dairy               | USA | WA   | Bellingham |\n"
 operator|+
 literal|"+-------+---------------------+-----+------+------------+\n"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests ORDER BY with no options. Nulls come last.    *    * @see net.hydromatic.optiq.jdbc.OptiqDatabaseMetaData#nullsAreSortedAtEnd()    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testOrderBy
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|assertThat
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|FOODMART_CLONE
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select \"store_id\", \"grocery_sqft\" from \"store\"\n"
+operator|+
+literal|"where \"store_id\"< 3 order by 2"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"store_id=1; grocery_sqft=17475\n"
+operator|+
+literal|"store_id=2; grocery_sqft=22271\n"
+operator|+
+literal|"store_id=0; grocery_sqft=null\n"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests ORDER BY ... DESC. Nulls come last, as for ASC. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testOrderByDesc
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|assertThat
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|FOODMART_CLONE
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select \"store_id\", \"grocery_sqft\" from \"store\"\n"
+operator|+
+literal|"where \"store_id\"< 3 order by 2 desc"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"store_id=2; grocery_sqft=22271\n"
+operator|+
+literal|"store_id=1; grocery_sqft=17475\n"
+operator|+
+literal|"store_id=0; grocery_sqft=null\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -4241,15 +4321,15 @@ operator|+
 literal|"group by \"deptno\", \"commission\""
 argument_list|)
 operator|.
-name|returns
+name|returnsUnordered
 argument_list|(
-literal|"deptno=10; commission=null; S=7000.0\n"
-operator|+
-literal|"deptno=20; commission=500; S=8000.0\n"
-operator|+
-literal|"deptno=10; commission=1000; S=10000.0\n"
-operator|+
-literal|"deptno=10; commission=250; S=11500.0\n"
+literal|"deptno=10; commission=null; S=7000.0"
+argument_list|,
+literal|"deptno=20; commission=500; S=8000.0"
+argument_list|,
+literal|"deptno=10; commission=1000; S=10000.0"
+argument_list|,
+literal|"deptno=10; commission=250; S=11500.0"
 argument_list|)
 expr_stmt|;
 block|}
@@ -5698,6 +5778,78 @@ literal|"V"
 argument_list|,
 literal|null
 argument_list|)
+argument_list|)
+argument_list|)
+expr_stmt|;
+comment|// catalog
+name|assertEquals
+argument_list|(
+literal|"TABLE_CATALOG=null\n"
+argument_list|,
+name|OptiqAssert
+operator|.
+name|toString
+argument_list|(
+name|metaData
+operator|.
+name|getCatalogs
+argument_list|()
+argument_list|)
+argument_list|)
+expr_stmt|;
+comment|// schemas
+name|assertEquals
+argument_list|(
+literal|"TABLE_SCHEM=adhoc; TABLE_CATALOG=null\n"
+operator|+
+literal|"TABLE_SCHEM=metadata; TABLE_CATALOG=null\n"
+argument_list|,
+name|OptiqAssert
+operator|.
+name|toString
+argument_list|(
+name|metaData
+operator|.
+name|getSchemas
+argument_list|()
+argument_list|)
+argument_list|)
+expr_stmt|;
+comment|// schemas (qualified)
+name|assertEquals
+argument_list|(
+literal|"TABLE_SCHEM=adhoc; TABLE_CATALOG=null\n"
+argument_list|,
+name|OptiqAssert
+operator|.
+name|toString
+argument_list|(
+name|metaData
+operator|.
+name|getSchemas
+argument_list|(
+literal|null
+argument_list|,
+literal|"adhoc"
+argument_list|)
+argument_list|)
+argument_list|)
+expr_stmt|;
+comment|// table types
+name|assertEquals
+argument_list|(
+literal|"TABLE_TYPE=TABLE\n"
+operator|+
+literal|"TABLE_TYPE=VIEW\n"
+argument_list|,
+name|OptiqAssert
+operator|.
+name|toString
+argument_list|(
+name|metaData
+operator|.
+name|getTableTypes
+argument_list|()
 argument_list|)
 argument_list|)
 expr_stmt|;
