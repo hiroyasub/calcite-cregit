@@ -1443,11 +1443,10 @@ parameter_list|()
 throws|throws
 name|SQLException
 block|{
-throw|throw
-operator|new
-name|UnsupportedOperationException
-argument_list|()
-throw|;
+return|return
+literal|null
+return|;
+comment|// no warnings, since warnings are not supported
 block|}
 specifier|public
 name|void
@@ -1456,11 +1455,7 @@ parameter_list|()
 throws|throws
 name|SQLException
 block|{
-throw|throw
-operator|new
-name|UnsupportedOperationException
-argument_list|()
-throw|;
+comment|// no-op since warnings are not supported
 block|}
 specifier|public
 name|String

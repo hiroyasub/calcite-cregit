@@ -49,20 +49,6 @@ name|linq4j
 operator|.
 name|function
 operator|.
-name|Function0
-import|;
-end_import
-
-begin_import
-import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|linq4j
-operator|.
-name|function
-operator|.
 name|Function1
 import|;
 end_import
@@ -718,6 +704,7 @@ block|{
 return|return
 literal|null
 return|;
+comment|// no warnings, since warnings are not supported
 block|}
 specifier|public
 name|void
@@ -726,11 +713,7 @@ parameter_list|()
 throws|throws
 name|SQLException
 block|{
-throw|throw
-operator|new
-name|UnsupportedOperationException
-argument_list|()
-throw|;
+comment|// no-op since warnings are not supported
 block|}
 specifier|public
 name|void
@@ -799,11 +782,10 @@ parameter_list|()
 throws|throws
 name|SQLException
 block|{
-throw|throw
-operator|new
-name|UnsupportedOperationException
-argument_list|()
-throw|;
+return|return
+operator|-
+literal|1
+return|;
 block|}
 specifier|public
 name|boolean

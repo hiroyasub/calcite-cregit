@@ -332,12 +332,10 @@ name|OptiqPrepare
 argument_list|>
 name|prepareFactory
 decl_stmt|;
-specifier|private
 specifier|final
 name|String
 name|url
 decl_stmt|;
-specifier|private
 specifier|final
 name|Properties
 name|info

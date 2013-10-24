@@ -911,10 +911,12 @@ comment|// Apply limit. In JDBC 0 means "no limit". But for us, -1 means
 comment|// "no limit", and 0 is a valid limit.
 name|enumerable
 operator|=
-name|enumerable
+name|EnumerableDefaults
 operator|.
 name|take
 argument_list|(
+name|enumerable
+argument_list|,
 name|maxRowCount
 argument_list|)
 expr_stmt|;
