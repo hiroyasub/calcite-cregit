@@ -264,16 +264,9 @@ name|this
 operator|.
 name|joinType
 argument_list|,
-operator|new
-name|HashSet
-argument_list|<
-name|String
-argument_list|>
-argument_list|(
 name|this
 operator|.
 name|variablesStopped
-argument_list|)
 argument_list|,
 name|this
 operator|.

@@ -1036,12 +1036,26 @@ literal|1
 operator|)
 return|;
 block|}
-comment|/**      * Creates a copy of this program.      */
+comment|/**      * Creates a copy of this program.      *      * @deprecated Method not necessary because RexProgram is immutable      */
 specifier|public
 name|RexProgram
 name|copy
 parameter_list|()
 block|{
+if|if
+condition|(
+name|Bug
+operator|.
+name|upgrade
+argument_list|(
+literal|"remove after optiq-0.4.16"
+argument_list|)
+condition|)
+block|{
+return|return
+name|this
+return|;
+block|}
 return|return
 operator|new
 name|RexProgram

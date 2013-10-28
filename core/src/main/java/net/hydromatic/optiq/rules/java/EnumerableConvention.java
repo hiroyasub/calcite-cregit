@@ -85,6 +85,20 @@ operator|.
 name|instance
 return|;
 block|}
+specifier|public
+name|boolean
+name|subsumes
+parameter_list|(
+name|RelTrait
+name|trait
+parameter_list|)
+block|{
+return|return
+name|this
+operator|==
+name|trait
+return|;
+block|}
 block|}
 end_enum
 

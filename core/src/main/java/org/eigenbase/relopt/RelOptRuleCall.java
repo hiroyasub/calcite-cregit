@@ -73,6 +73,20 @@ name|ImmutableList
 import|;
 end_import
 
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|ImmutableMap
+import|;
+end_import
+
 begin_comment
 comment|/**  * A<code>RelOptRuleCall</code> is an invocation of a {@link RelOptRule} with a  * set of {@link RelNode relational expression}s as arguments.  */
 end_comment
@@ -400,7 +414,7 @@ return|return
 name|parents
 return|;
 block|}
-comment|/**      * Called by the rule whenever it finds a match. The implementation of this      * method will guarantee that the original relational expression (e.g.,      *<code>this.rels[0]</code>) has its traits propagated to the new      * relational expression (<code>rel</code>) and its unregistered children.      * Any trait not specifically set in the RelTraitSet returned by<code>      * rel.getTraits()</code> will be copied from<code>      * this.rels[0].getTraitSet()</code>.      */
+comment|/**      * Registers that a rule has produced an equivalent relational expression.      *      *<p>Called by the rule whenever it finds a match. The implementation of      * this method guarantees that the original relational expression (that is,      *<code>this.rels[0]</code>) has its traits propagated to the new      * relational expression (<code>rel</code>) and its unregistered children.      * Any trait not specifically set in the RelTraitSet returned by<code>      * rel.getTraits()</code> will be copied from<code>      * this.rels[0].getTraitSet()</code>.      *      * @param rel Relational expression equivalent to the root relational      *            expression of the rule call, {@code call.rels(0)}      * @param equiv Map of other equivalences      */
 specifier|public
 specifier|abstract
 name|void
@@ -408,8 +422,42 @@ name|transformTo
 parameter_list|(
 name|RelNode
 name|rel
+parameter_list|,
+name|Map
+argument_list|<
+name|RelNode
+argument_list|,
+name|RelNode
+argument_list|>
+name|equiv
 parameter_list|)
 function_decl|;
+comment|/**      * Registers that a rule has produced an equivalent relational expression,      * but no other equivalences.      *      * @param rel Relational expression equivalent to the root relational      *            expression of the rule call, {@code call.rels(0)}      */
+specifier|public
+specifier|final
+name|void
+name|transformTo
+parameter_list|(
+name|RelNode
+name|rel
+parameter_list|)
+block|{
+name|transformTo
+argument_list|(
+name|rel
+argument_list|,
+name|ImmutableMap
+operator|.
+expr|<
+name|RelNode
+argument_list|,
+name|RelNode
+operator|>
+name|of
+argument_list|()
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 end_class
 

@@ -425,7 +425,6 @@ name|getExpression
 argument_list|()
 argument_list|)
 decl_stmt|;
-specifier|final
 name|Expression
 name|enumerable
 decl_stmt|;

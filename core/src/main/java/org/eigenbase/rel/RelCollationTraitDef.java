@@ -129,6 +129,22 @@ return|return
 literal|null
 return|;
 block|}
+if|if
+condition|(
+name|toCollation
+operator|.
+name|getFieldCollations
+argument_list|()
+operator|.
+name|isEmpty
+argument_list|()
+condition|)
+block|{
+comment|// An empty sort doesn't make sense.
+return|return
+literal|null
+return|;
+block|}
 comment|// Create a logical sort, then ask the planner to convert its remaining
 comment|// traits (e.g. convert it to an EnumerableSortRel if rel is enumerable
 comment|// convention)

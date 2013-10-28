@@ -130,6 +130,14 @@ name|transformTo
 parameter_list|(
 name|RelNode
 name|rel
+parameter_list|,
+name|Map
+argument_list|<
+name|RelNode
+argument_list|,
+name|RelNode
+argument_list|>
+name|equiv
 parameter_list|)
 block|{
 specifier|final

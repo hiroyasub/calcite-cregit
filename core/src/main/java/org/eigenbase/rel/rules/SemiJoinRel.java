@@ -99,6 +99,20 @@ name|ImmutableIntList
 import|;
 end_import
 
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|ImmutableSet
+import|;
+end_import
+
 begin_comment
 comment|/**  * A SemiJoinRel represents two relational expressions joined according to some  * condition, where the output only contains the columns from the left join  * input.  *  * @author Zelaine Fong  * @version $Id$  */
 end_comment
@@ -175,12 +189,12 @@ name|JoinRelType
 operator|.
 name|INNER
 argument_list|,
-name|Collections
+name|ImmutableSet
 operator|.
 expr|<
 name|String
 operator|>
-name|emptySet
+name|of
 argument_list|()
 argument_list|)
 expr_stmt|;

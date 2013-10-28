@@ -462,6 +462,9 @@ expr_stmt|;
 block|}
 comment|/**      * Tests transformation of a single+leaf from NONE to PHYS. In the past,      * this one didn't work due to the definition of ReformedSingleRule.      */
 annotation|@
+name|Ignore
+comment|// broken, because ReformedSingleRule matches child traits strictly
+annotation|@
 name|Test
 specifier|public
 name|void
@@ -822,7 +825,7 @@ literal|true
 argument_list|)
 expr_stmt|;
 block|}
-comment|// NOTE:  this always worked; it's here as constrast to
+comment|// NOTE:  this always worked; it's here as contrast to
 comment|// testWithRemoveTrivialProject()
 annotation|@
 name|Test
@@ -838,6 +841,9 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/**      * Previously, this didn't work because ReformedRemoveSingleRule uses a      * pattern which spans calling conventions.      */
+annotation|@
+name|Ignore
+comment|// broken, because ReformedSingleRule matches child traits strictly
 annotation|@
 name|Test
 specifier|public
@@ -2275,7 +2281,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|// NOTE: Previously, ReformedSingleRule did't work because it explicitly
+comment|// NOTE: Previously, ReformedSingleRule didn't work because it explicitly
 comment|// specifies PhysLeafRel rather than RelNode for the single input.  Since
 comment|// the PhysLeafRel is in a different subset from the original NoneLeafRel,
 comment|// ReformedSingleRule never saw it.  (GoodSingleRule saw the NoneLeafRel

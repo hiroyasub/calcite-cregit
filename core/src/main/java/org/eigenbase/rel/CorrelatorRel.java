@@ -47,6 +47,20 @@ name|*
 import|;
 end_import
 
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|ImmutableSet
+import|;
+end_import
+
 begin_comment
 comment|/**  * A<code>CorrelatorRel</code> behaves like a kind of {@link JoinRel}, but  * works by setting variables in its environment and restarting its right-hand  * input.  *  *<p>A CorrelatorRel is used to represent a correlated query. One  * implementation strategy is to de-correlate the expression.  *  * @author jhyde  * @version $Id$  * @since 23 September, 2001  */
 end_comment
@@ -116,12 +130,12 @@ name|joinCond
 argument_list|,
 name|joinType
 argument_list|,
-name|Collections
+name|ImmutableSet
 operator|.
 expr|<
 name|String
 operator|>
-name|emptySet
+name|of
 argument_list|()
 argument_list|)
 expr_stmt|;
