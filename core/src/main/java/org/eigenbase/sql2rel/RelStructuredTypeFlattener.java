@@ -137,6 +137,20 @@ name|Mappings
 import|;
 end_import
 
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|linq4j
+operator|.
+name|function
+operator|.
+name|Function1
+import|;
+end_import
+
 begin_comment
 comment|// TODO jvs 10-Feb-2005:  factor out generic rewrite helper, with the
 end_comment
@@ -949,8 +963,6 @@ operator|.
 name|target
 argument_list|(
 operator|new
-name|Util
-operator|.
 name|Function1
 argument_list|<
 name|Integer

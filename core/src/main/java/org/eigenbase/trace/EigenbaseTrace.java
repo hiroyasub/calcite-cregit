@@ -67,7 +67,7 @@ name|eigenbase
 operator|.
 name|util
 operator|.
-name|Util
+name|Bug
 import|;
 end_import
 
@@ -99,6 +99,20 @@ name|Prepare
 import|;
 end_import
 
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|linq4j
+operator|.
+name|function
+operator|.
+name|Function2
+import|;
+end_import
+
 begin_comment
 comment|/**  * Contains all of the {@link java.util.logging.Logger tracers} used within  * org.eigenbase class libraries.  *  *<h3>Note to developers</h3>  *  *<p>Please ensure that every tracer used in org.eigenbase is added to this  * class as a<em>public static final</em> member called<code>  *<i>component</i>Tracer</code>. For example, {@link #getPlannerTracer} is the  * tracer used by all classes which take part in the query planning process.  *  *<p>The javadoc in this file is the primary source of information on what  * tracers are available, so the javadoc against each tracer member must be an  * up-to-date description of what that tracer does. Be sure to describe what  * {@link Level tracing level} is required to obtain each category of tracing.  *  *<p>In the class where the tracer is used, create a<em>private</em> (or  * perhaps<em>protected</em>)<em>static final</em> member called<code>  * tracer</code>.  *  * @author jhyde  * @version $Id$  * @since May 24, 2004  */
 end_comment
@@ -125,8 +139,6 @@ specifier|static
 specifier|final
 name|ThreadLocal
 argument_list|<
-name|Util
-operator|.
 name|Function2
 argument_list|<
 name|Void
@@ -141,8 +153,6 @@ init|=
 operator|new
 name|ThreadLocal
 argument_list|<
-name|Util
-operator|.
 name|Function2
 argument_list|<
 name|Void
@@ -157,8 +167,6 @@ block|{
 annotation|@
 name|Override
 specifier|protected
-name|Util
-operator|.
 name|Function2
 argument_list|<
 name|Void
@@ -171,12 +179,40 @@ name|initialValue
 parameter_list|()
 block|{
 return|return
-name|Util
-operator|.
-name|Functions
-operator|.
-name|ignore2
+operator|new
+name|Function2
+argument_list|<
+name|Void
+argument_list|,
+name|File
+argument_list|,
+name|String
+argument_list|>
 argument_list|()
+block|{
+specifier|public
+name|String
+name|apply
+parameter_list|(
+name|Void
+name|v1
+parameter_list|,
+name|File
+name|v2
+parameter_list|)
+block|{
+name|Bug
+operator|.
+name|upgrade
+argument_list|(
+literal|"remove when upgrade to linq4j-0.1.11"
+argument_list|)
+expr_stmt|;
+return|return
+literal|null
+return|;
+block|}
+block|}
 return|;
 block|}
 block|}
@@ -335,8 +371,6 @@ specifier|public
 specifier|static
 name|ThreadLocal
 argument_list|<
-name|Util
-operator|.
 name|Function2
 argument_list|<
 name|Void

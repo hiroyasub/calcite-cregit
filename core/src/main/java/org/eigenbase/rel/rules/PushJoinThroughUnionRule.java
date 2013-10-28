@@ -49,6 +49,20 @@ name|*
 import|;
 end_import
 
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|ImmutableSet
+import|;
+end_import
+
 begin_comment
 comment|/**  * PushJoinThroughUnionRule implements the rule for pushing a  * {@link JoinRel} past a non-distinct {@link UnionRel}.  */
 end_comment
@@ -381,12 +395,12 @@ operator|.
 name|getJoinType
 argument_list|()
 argument_list|,
-name|Collections
+name|ImmutableSet
 operator|.
 expr|<
 name|String
 operator|>
-name|emptySet
+name|of
 argument_list|()
 argument_list|)
 argument_list|)

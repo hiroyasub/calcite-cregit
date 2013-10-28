@@ -99,6 +99,20 @@ name|*
 import|;
 end_import
 
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|ImmutableSet
+import|;
+end_import
+
 begin_comment
 comment|/**  * Rule to remove distinct aggregates from a {@link AggregateRel}.  */
 end_comment
@@ -1285,22 +1299,7 @@ expr_stmt|;
 block|}
 block|}
 comment|// Join in the new 'select distinct' relation.
-specifier|final
-name|Set
-argument_list|<
-name|String
-argument_list|>
-name|variablesStopped
-init|=
-name|Collections
-operator|.
-name|emptySet
-argument_list|()
-decl_stmt|;
-specifier|final
-name|RelNode
-name|join
-init|=
+return|return
 operator|new
 name|JoinRel
 argument_list|(
@@ -1319,11 +1318,14 @@ name|JoinRelType
 operator|.
 name|INNER
 argument_list|,
-name|variablesStopped
+name|ImmutableSet
+operator|.
+expr|<
+name|String
+operator|>
+name|of
+argument_list|()
 argument_list|)
-decl_stmt|;
-return|return
-name|join
 return|;
 block|}
 specifier|private

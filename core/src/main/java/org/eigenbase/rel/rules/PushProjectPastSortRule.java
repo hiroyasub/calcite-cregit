@@ -17,16 +17,6 @@ end_package
 
 begin_import
 import|import
-name|java
-operator|.
-name|util
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
 name|org
 operator|.
 name|eigenbase
@@ -51,18 +41,6 @@ end_import
 
 begin_import
 import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
-name|rex
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
 name|com
 operator|.
 name|google
@@ -76,7 +54,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * PushProjectPastSortRule implements the rule for pushing a {@link ProjectRel}  * past a {@link SortRel}. The children of the {@link SortRel} will project  * only the {@link RexInputRef}s referenced in the original {@link ProjectRel}.  */
+comment|/**  * Planner rule that pushes a {@link ProjectRel} past a {@link SortRel}.  */
 end_comment
 
 begin_class
@@ -96,39 +74,11 @@ operator|new
 name|PushProjectPastSortRule
 argument_list|()
 decl_stmt|;
-comment|//~ Instance fields --------------------------------------------------------
-comment|/**      * Expressions that should be preserved in the projection      */
-specifier|private
-name|PushProjector
-operator|.
-name|ExprCondition
-name|preserveExprCondition
-decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 comment|/**      * Creates a PushProjectPastSortRule.      */
 specifier|private
 name|PushProjectPastSortRule
 parameter_list|()
-block|{
-name|this
-argument_list|(
-name|PushProjector
-operator|.
-name|ExprCondition
-operator|.
-name|FALSE
-argument_list|)
-expr_stmt|;
-block|}
-comment|/**      * Creates a PushProjectPastSortRule with an explicit condition whether      * to preserve expressions.      *      * @param preserveExprCondition Condition whether to preserve expressions      */
-specifier|public
-name|PushProjectPastSortRule
-parameter_list|(
-name|PushProjector
-operator|.
-name|ExprCondition
-name|preserveExprCondition
-parameter_list|)
 block|{
 name|super
 argument_list|(
@@ -147,12 +97,6 @@ argument_list|)
 argument_list|)
 argument_list|)
 expr_stmt|;
-name|this
-operator|.
-name|preserveExprCondition
-operator|=
-name|preserveExprCondition
-expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
 comment|// implement RelOptRule
@@ -165,7 +109,7 @@ name|call
 parameter_list|)
 block|{
 name|ProjectRel
-name|origProj
+name|project
 init|=
 name|call
 operator|.
@@ -195,86 +139,35 @@ name|SortRel
 operator|.
 name|class
 condition|)
-return|return;
-if|if
-condition|(
-literal|false
-condition|)
 block|{
-comment|// TODO: rule can't fire if sort is on a non-trivial
-comment|// projected expression
 return|return;
 block|}
-comment|// locate all fields referenced in the projection
-name|PushProjector
-name|pushProject
+name|RelNode
+name|newProject
 init|=
-operator|new
-name|PushProjector
+name|project
+operator|.
+name|copy
 argument_list|(
-name|origProj
-argument_list|,
-literal|null
-argument_list|,
-name|sort
-argument_list|,
-name|preserveExprCondition
-argument_list|)
-decl_stmt|;
-name|pushProject
+name|project
 operator|.
-name|locateAllRefs
+name|getTraitSet
 argument_list|()
-expr_stmt|;
-name|List
-argument_list|<
-name|RelNode
-argument_list|>
-name|newSortInputs
-init|=
-operator|new
-name|ArrayList
-argument_list|<
-name|RelNode
-argument_list|>
-argument_list|()
-decl_stmt|;
-name|int
-index|[]
-name|adjustments
-init|=
-name|pushProject
+argument_list|,
+name|ImmutableList
 operator|.
-name|getAdjustments
-argument_list|()
-decl_stmt|;
-comment|// push the projects completely below the Sort; this
-comment|// is different from pushing below a join, where we decompose
-comment|// to try to keep expensive expressions above the join,
-comment|// because UNION ALL does not have any filtering effect,
-comment|// and it is the only operator this rule currently acts on
-comment|// be lazy:  produce two ProjectRels, and let another rule
-comment|// merge them (could probably just clone origProj instead?)
-name|ProjectRel
-name|p
-init|=
-name|pushProject
-operator|.
-name|createProjectRefsAndExprs
+name|of
 argument_list|(
 name|sort
 operator|.
 name|getChild
 argument_list|()
-argument_list|,
-literal|true
-argument_list|,
-literal|false
+argument_list|)
 argument_list|)
 decl_stmt|;
-comment|// create a new Sort whose children are the ProjectRels created above
+specifier|final
 name|SortRel
-name|newSortRel
+name|newSort
 init|=
 name|sort
 operator|.
@@ -285,22 +178,27 @@ operator|.
 name|getTraitSet
 argument_list|()
 argument_list|,
-name|ImmutableList
+name|newProject
+argument_list|,
+name|sort
 operator|.
-expr|<
-name|RelNode
-operator|>
-name|of
-argument_list|(
-name|p
-argument_list|)
+name|getCollation
+argument_list|()
+argument_list|,
+name|sort
+operator|.
+name|offset
+argument_list|,
+name|sort
+operator|.
+name|fetch
 argument_list|)
 decl_stmt|;
 name|call
 operator|.
 name|transformTo
 argument_list|(
-name|newSortRel
+name|newSort
 argument_list|)
 expr_stmt|;
 block|}

@@ -17,16 +17,6 @@ end_package
 
 begin_import
 import|import
-name|java
-operator|.
-name|util
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
 name|org
 operator|.
 name|eigenbase
@@ -194,12 +184,12 @@ init|=
 operator|new
 name|CalcRel
 argument_list|(
-name|bottomCalc
+name|topCalc
 operator|.
 name|getCluster
 argument_list|()
 argument_list|,
-name|bottomCalc
+name|topCalc
 operator|.
 name|getTraitSet
 argument_list|()

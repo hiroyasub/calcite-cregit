@@ -3716,11 +3716,15 @@ operator|.
 name|getTraitDef
 argument_list|()
 assert|;
+comment|//            if (fromTrait.subsumes(toTrait)) {
 if|if
 condition|(
 name|fromTrait
-operator|==
+operator|.
+name|equals
+argument_list|(
 name|toTrait
+argument_list|)
 condition|)
 block|{
 comment|// No need to convert; it's already correct.
@@ -4481,14 +4485,14 @@ name|next
 argument_list|()
 expr_stmt|;
 assert|assert
-name|inputSubset
+name|input
 operator|.
 name|getTraitSet
 argument_list|()
 operator|.
-name|equals
+name|subsumes
 argument_list|(
-name|input
+name|inputSubset
 operator|.
 name|getTraitSet
 argument_list|()

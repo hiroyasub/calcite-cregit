@@ -4078,6 +4078,17 @@ operator|+
 literal|"order by 1 fetch first 5 rows only"
 argument_list|)
 operator|.
+name|explainContains
+argument_list|(
+literal|"PLAN=EnumerableLimitRel(fetch=[5])\n"
+operator|+
+literal|"  EnumerableSortRel(sort0=[$0], dir0=[Ascending])\n"
+operator|+
+literal|"    EnumerableCalcRel(expr#0..23=[{inputs}], expr#24=[10], expr#25=[<($t0, $t24)], store_id=[$t0], grocery_sqft=[$t16], $condition=[$t25])\n"
+operator|+
+literal|"      EnumerableTableAccessRel(table=[[foodmart2, store]])\n"
+argument_list|)
+operator|.
 name|returns
 argument_list|(
 literal|"store_id=0; grocery_sqft=null\n"

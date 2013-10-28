@@ -443,7 +443,11 @@ specifier|final
 name|String
 name|aggregateString
 init|=
-literal|"{$project ...}"
+literal|"{$project: "
+operator|+
+name|findString
+operator|+
+literal|"}"
 decl_stmt|;
 name|ops
 operator|.
@@ -1076,7 +1080,6 @@ name|RelNode
 name|rel
 parameter_list|)
 block|{
-comment|//       System.out.print("CONVERT-------!");
 specifier|final
 name|SortRel
 name|sort
@@ -1086,7 +1089,6 @@ name|SortRel
 operator|)
 name|rel
 decl_stmt|;
-comment|// TODO: if (sort.fetch != null || sort.offset != null) return;
 specifier|final
 name|RelTraitSet
 name|traitSet
@@ -1099,6 +1101,14 @@ operator|.
 name|replace
 argument_list|(
 name|out
+argument_list|)
+operator|.
+name|replace
+argument_list|(
+name|sort
+operator|.
+name|getCollation
+argument_list|()
 argument_list|)
 decl_stmt|;
 return|return
@@ -1254,6 +1264,30 @@ name|Implementor
 name|implementor
 parameter_list|)
 block|{
+name|implementor
+operator|.
+name|visitChild
+argument_list|(
+literal|0
+argument_list|,
+name|getChild
+argument_list|()
+argument_list|)
+expr_stmt|;
+specifier|final
+name|List
+argument_list|<
+name|String
+argument_list|>
+name|keys
+init|=
+operator|new
+name|ArrayList
+argument_list|<
+name|String
+argument_list|>
+argument_list|()
+decl_stmt|;
 for|for
 control|(
 name|int
@@ -1307,6 +1341,93 @@ operator|.
 name|getName
 argument_list|()
 decl_stmt|;
+name|keys
+operator|.
+name|add
+argument_list|(
+name|name
+operator|+
+literal|": "
+operator|+
+name|direction
+argument_list|(
+name|fieldCollation
+argument_list|)
+argument_list|)
+expr_stmt|;
+if|if
+condition|(
+literal|false
+condition|)
+comment|// TODO:
+switch|switch
+condition|(
+name|fieldCollation
+operator|.
+name|nullDirection
+condition|)
+block|{
+case|case
+name|FIRST
+case|:
+break|break;
+case|case
+name|LAST
+case|:
+break|break;
+block|}
+block|}
+name|implementor
+operator|.
+name|add
+argument_list|(
+literal|null
+argument_list|,
+literal|"{$sort: "
+operator|+
+name|Util
+operator|.
+name|toString
+argument_list|(
+name|keys
+argument_list|,
+literal|"{"
+argument_list|,
+literal|", "
+argument_list|,
+literal|"}"
+argument_list|)
+operator|+
+literal|"}"
+argument_list|)
+expr_stmt|;
+if|if
+condition|(
+name|fetch
+operator|!=
+literal|null
+operator|||
+name|offset
+operator|!=
+literal|null
+condition|)
+block|{
+comment|// TODO: generate calls to DBCursor.skip() and limit(int).
+throw|throw
+operator|new
+name|UnsupportedOperationException
+argument_list|()
+throw|;
+block|}
+block|}
+specifier|private
+name|int
+name|direction
+parameter_list|(
+name|RelFieldCollation
+name|fieldCollation
+parameter_list|)
+block|{
 switch|switch
 condition|(
 name|fieldCollation
@@ -1321,42 +1442,20 @@ case|:
 case|case
 name|StrictlyDescending
 case|:
-name|implementor
-operator|.
-name|sort
-argument_list|(
-name|name
-argument_list|,
+return|return
 operator|-
 literal|1
-argument_list|)
-expr_stmt|;
-break|break;
+return|;
 case|case
 name|Ascending
 case|:
 case|case
 name|StrictlyAscending
 case|:
-name|implementor
-operator|.
-name|sort
-argument_list|(
-name|name
-argument_list|,
+default|default:
+return|return
 literal|1
-argument_list|)
-expr_stmt|;
-break|break;
-block|}
-comment|//             switch (collation.nullDirection) {
-comment|//             case FIRST:
-comment|//
-comment|//               break;
-comment|//             case LAST:
-comment|//
-comment|//               break;
-comment|//             }
+return|;
 block|}
 block|}
 block|}
