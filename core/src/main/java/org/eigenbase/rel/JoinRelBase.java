@@ -101,6 +101,20 @@ end_import
 
 begin_import
 import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|optiq
+operator|.
+name|runtime
+operator|.
+name|FlatLists
+import|;
+end_import
+
+begin_import
+import|import
 name|com
 operator|.
 name|google
@@ -287,9 +301,9 @@ name|getInputs
 parameter_list|()
 block|{
 return|return
-name|Arrays
+name|FlatLists
 operator|.
-name|asList
+name|of
 argument_list|(
 name|left
 argument_list|,

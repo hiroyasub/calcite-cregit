@@ -53,20 +53,6 @@ name|net
 operator|.
 name|hydromatic
 operator|.
-name|optiq
-operator|.
-name|runtime
-operator|.
-name|FlatLists
-import|;
-end_import
-
-begin_import
-import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
 name|linq4j
 operator|.
 name|Ord
@@ -101,7 +87,7 @@ name|AbstractRelNode
 block|{
 comment|//~ Instance fields --------------------------------------------------------
 specifier|protected
-name|List
+name|ImmutableList
 argument_list|<
 name|RelNode
 argument_list|>
@@ -241,9 +227,9 @@ argument_list|)
 expr_stmt|;
 name|inputs
 operator|=
-name|FlatLists
+name|ImmutableList
 operator|.
-name|of
+name|copyOf
 argument_list|(
 name|newInputs
 argument_list|)

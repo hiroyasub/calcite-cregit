@@ -88,7 +88,7 @@ extends|extends
 name|SingleRel
 block|{
 comment|//~ Instance fields --------------------------------------------------------
-specifier|private
+specifier|protected
 specifier|final
 name|RexNode
 name|condition

@@ -806,12 +806,7 @@ name|getOperands
 parameter_list|()
 block|{
 return|return
-name|ImmutableList
-operator|.
-name|copyOf
-argument_list|(
 name|operands
-argument_list|)
 return|;
 block|}
 specifier|public
