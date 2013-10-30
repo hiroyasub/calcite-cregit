@@ -91,6 +91,20 @@ end_import
 
 begin_import
 import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|optiq
+operator|.
+name|runtime
+operator|.
+name|Hook
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|eigenbase
@@ -357,6 +371,15 @@ literal|"]"
 argument_list|)
 expr_stmt|;
 block|}
+name|Hook
+operator|.
+name|QUERY_PLAN
+operator|.
+name|run
+argument_list|(
+name|sql
+argument_list|)
+expr_stmt|;
 specifier|final
 name|Expression
 name|sqlLiteral

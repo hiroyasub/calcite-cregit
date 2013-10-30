@@ -33,6 +33,20 @@ name|net
 operator|.
 name|hydromatic
 operator|.
+name|linq4j
+operator|.
+name|function
+operator|.
+name|Function1
+import|;
+end_import
+
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
 name|optiq
 operator|.
 name|jdbc
@@ -50,6 +64,30 @@ operator|.
 name|util
 operator|.
 name|Pair
+import|;
+end_import
+
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|ImmutableList
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
 import|;
 end_import
 
@@ -330,6 +368,74 @@ return|return
 literal|true
 return|;
 block|}
+comment|/** Returns a function that checks that a particular MongoDB pipeline is    * generated to implement a query. */
+specifier|private
+specifier|static
+name|Function1
+argument_list|<
+name|List
+argument_list|,
+name|Void
+argument_list|>
+name|mongoChecker
+parameter_list|(
+specifier|final
+name|String
+modifier|...
+name|strings
+parameter_list|)
+block|{
+return|return
+operator|new
+name|Function1
+argument_list|<
+name|List
+argument_list|,
+name|Void
+argument_list|>
+argument_list|()
+block|{
+specifier|public
+name|Void
+name|apply
+parameter_list|(
+name|List
+name|actual
+parameter_list|)
+block|{
+if|if
+condition|(
+operator|!
+name|actual
+operator|.
+name|contains
+argument_list|(
+name|ImmutableList
+operator|.
+name|copyOf
+argument_list|(
+name|strings
+argument_list|)
+argument_list|)
+condition|)
+block|{
+name|Assert
+operator|.
+name|fail
+argument_list|(
+literal|"expected MongoDB query not found; actual: "
+operator|+
+name|actual
+argument_list|)
+expr_stmt|;
+block|}
+return|return
+literal|null
+return|;
+block|}
+block|}
+return|;
+block|}
 annotation|@
 name|Test
 specifier|public
@@ -402,7 +508,7 @@ name|query
 argument_list|(
 literal|"select * from zips\n"
 operator|+
-literal|"where city = 'SPRINGFIELD' and id between 20000 and 30000\n"
+literal|"where city = 'SPRINGFIELD' and id between '20000' and '30000'\n"
 operator|+
 literal|"order by state"
 argument_list|)
@@ -417,17 +523,18 @@ literal|"CITY=SPRINGFIELD; LONGITUDE=-77.23702; LATITUDE=38.744858; POP=32161; S
 operator|+
 literal|"CITY=SPRINGFIELD; LONGITUDE=-78.69502; LATITUDE=39.462997; POP=1321; STATE=WV; ID=26763\n"
 argument_list|)
-comment|// ideal plan would have MongoSortRel, not EnumerableSortRel
 operator|.
 name|explainContains
 argument_list|(
-literal|"PLAN=EnumerableSortRel(sort0=[$4], dir0=[Ascending])\n"
+literal|"PLAN=EnumerableCalcRel(expr#0..4=[{inputs}], expr#5=[0], expr#6=[ITEM($t1, $t5)], expr#7=[CAST($t6):FLOAT NOT NULL], expr#8=[1], expr#9=[ITEM($t1, $t8)], expr#10=[CAST($t9):FLOAT NOT NULL], CITY=[$t0], LONGITUDE=[$t7], LATITUDE=[$t10], POP=[$t2], STATE=[$t3], ID=[$t4])\n"
 operator|+
-literal|"  EnumerableCalcRel(expr#0..4=[{inputs}], expr#5=[0], expr#6=[ITEM($t1, $t5)], expr#7=[CAST($t6):FLOAT NOT NULL], expr#8=[1], expr#9=[ITEM($t1, $t8)], expr#10=[CAST($t9):FLOAT NOT NULL], expr#11=['SPRINGFIELD'], expr#12=[=($t0, $t11)], expr#13=[20000], expr#14=[>=($t4, $t13)], expr#15=[30000], expr#16=[<=($t4, $t15)], expr#17=[AND($t14, $t16)], expr#18=[AND($t12, $t17)], CITY=[$t0], LONGITUDE=[$t7], LATITUDE=[$t10], POP=[$t2], STATE=[$t3], ID=[$t4], $condition=[$t18])\n"
+literal|"  MongoToEnumerableConverter\n"
 operator|+
-literal|"    MongoToEnumerableConverter\n"
+literal|"    MongoSortRel(sort0=[$3], dir0=[Ascending])\n"
 operator|+
-literal|"      MongoTableScan(table=[[mongo_raw, zips]], ops=[[<{city: 1, loc: 1, pop: 1, state: 1, _id: 1}, {$project: {city: 1, loc: 1, pop: 1, state: 1, _id: 1}}>]])"
+literal|"      MongoFilterRel(condition=[AND(=($0, 'SPRINGFIELD'),>=($4, '20000'),<=($4, '30000'))])\n"
+operator|+
+literal|"        MongoTableScan(table=[[mongo_raw, zips]], ops=[[<{city: 1, loc: 1, pop: 1, state: 1, _id: 1}, {$project: {city: 1, loc: 1, pop: 1, state: 1, _id: 1}}>]])"
 argument_list|)
 expr_stmt|;
 block|}
@@ -529,6 +636,57 @@ name|runs
 argument_list|()
 expr_stmt|;
 block|}
+comment|/** Tests that we don't generate multiple constraints on the same column.    * MongoDB doesn't like it. If there is an '=', it supersedes all other    * operators. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFilterRedundant
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|assertThat
+argument_list|()
+operator|.
+name|enable
+argument_list|(
+name|enabled
+argument_list|()
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|ZIPS
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select * from zips where state> 'CA' and state< 'AZ' and state = 'OK'"
+argument_list|)
+operator|.
+name|runs
+argument_list|()
+operator|.
+name|queryContains
+argument_list|(
+name|mongoChecker
+argument_list|(
+literal|"{$project: {city: 1, loc: 1, pop: 1, state: 1, _id: 1}}"
+argument_list|,
+literal|"{\n"
+operator|+
+literal|"  $match: {\n"
+operator|+
+literal|"    state: \"OK\"\n"
+operator|+
+literal|"  }\n"
+operator|+
+literal|"}"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public
@@ -559,22 +717,40 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"PLAN=EnumerableCalcRel(expr#0..1=[{inputs}], expr#2=['CA'], expr#3=[=($t1, $t2)], proj#0..1=[{exprs}], $condition=[$t3])\n"
+literal|"PLAN=MongoToEnumerableConverter\n"
 operator|+
-literal|"  MongoToEnumerableConverter\n"
+literal|"  MongoFilterRel(condition=[=($1, 'CA')])\n"
 operator|+
 literal|"    MongoTableScan(table=[[_foodmart, warehouse]], ops=[[<{warehouse_id: 1, warehouse_state_province: 1}, {$project: {warehouse_id: 1, warehouse_state_province: 1}}>]])"
 argument_list|)
 operator|.
 name|returns
 argument_list|(
-literal|"warehouse_id=6.0; warehouse_state_province=CA\n"
+literal|"warehouse_id=6; warehouse_state_province=CA\n"
 operator|+
-literal|"warehouse_id=7.0; warehouse_state_province=CA\n"
+literal|"warehouse_id=7; warehouse_state_province=CA\n"
 operator|+
-literal|"warehouse_id=14.0; warehouse_state_province=CA\n"
+literal|"warehouse_id=14; warehouse_state_province=CA\n"
 operator|+
-literal|"warehouse_id=24.0; warehouse_state_province=CA\n"
+literal|"warehouse_id=24; warehouse_state_province=CA\n"
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|mongoChecker
+argument_list|(
+literal|"{$project: {warehouse_id: 1, warehouse_state_province: 1}}"
+argument_list|,
+literal|"{\n"
+operator|+
+literal|"  $match: {\n"
+operator|+
+literal|"    warehouse_state_province: \"CA\"\n"
+operator|+
+literal|"  }\n"
+operator|+
+literal|"}"
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -610,21 +786,31 @@ argument_list|)
 operator|.
 name|returns
 argument_list|(
-literal|"store_id=1.0; store_name=Store 1\n"
+literal|"store_id=1; store_name=Store 1\n"
 operator|+
-literal|"store_id=3.0; store_name=Store 3\n"
+literal|"store_id=3; store_name=Store 3\n"
 operator|+
-literal|"store_id=7.0; store_name=Store 7\n"
+literal|"store_id=7; store_name=Store 7\n"
 operator|+
-literal|"store_id=10.0; store_name=Store 10\n"
+literal|"store_id=10; store_name=Store 10\n"
 operator|+
-literal|"store_id=11.0; store_name=Store 11\n"
+literal|"store_id=11; store_name=Store 11\n"
 operator|+
-literal|"store_id=15.0; store_name=Store 15\n"
+literal|"store_id=15; store_name=Store 15\n"
 operator|+
-literal|"store_id=16.0; store_name=Store 16\n"
+literal|"store_id=16; store_name=Store 16\n"
 operator|+
-literal|"store_id=24.0; store_name=Store 24\n"
+literal|"store_id=24; store_name=Store 24\n"
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|mongoChecker
+argument_list|(
+literal|"{$project: {store_id: 1, store_name: 1}}"
+argument_list|,
+literal|"{\n  $match: {\n    $or: [\n      {\n        store_name: \"Store 1\"\n      },\n      {\n        store_name: \"Store 10\"\n      },\n      {\n        store_name: \"Store 11\"\n      },\n      {\n        store_name: \"Store 15\"\n      },\n      {\n        store_name: \"Store 16\"\n      },\n      {\n        store_name: \"Store 24\"\n      },\n      {\n        store_name: \"Store 3\"\n      },\n      {\n        store_name: \"Store 7\"\n      }\n    ]\n  }\n}"
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -764,11 +950,13 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"PLAN=EnumerableCalcRel(expr#0..4=[{inputs}], expr#5=['CA'], expr#6=[=($t3, $t5)], STATE=[$t3], CITY=[$t0], $condition=[$t6])\n"
+literal|"PLAN=EnumerableCalcRel(expr#0..4=[{inputs}], STATE=[$t3], CITY=[$t0])\n"
 operator|+
 literal|"  MongoToEnumerableConverter\n"
 operator|+
-literal|"    MongoTableScan(table=[[mongo_raw, zips]], ops=[[<{city: 1, loc: 1, pop: 1, state: 1, _id: 1}, {$project: {city: 1, loc: 1, pop: 1, state: 1, _id: 1}}>]])"
+literal|"    MongoFilterRel(condition=[=($3, 'CA')])\n"
+operator|+
+literal|"      MongoTableScan(table=[[mongo_raw, zips]], ops=[[<{city: 1, loc: 1, pop: 1, state: 1, _id: 1}, {$project: {city: 1, loc: 1, pop: 1, state: 1, _id: 1}}>]])"
 argument_list|)
 expr_stmt|;
 block|}

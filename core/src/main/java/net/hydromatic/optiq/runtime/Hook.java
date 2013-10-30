@@ -62,6 +62,9 @@ name|Hook
 block|{
 comment|/** Called with the generated Java plan, just before it is compiled by    * Janino. */
 name|JAVA_PLAN
+block|,
+comment|/** Called with a query that has been generated to send to a back-end system.    * The query might be a SQL string (for the JDBC adapter), a list of Mongo    * pipeline expressions (for the MongoDB adapter), et cetera. */
+name|QUERY_PLAN
 block|;
 specifier|private
 specifier|final
