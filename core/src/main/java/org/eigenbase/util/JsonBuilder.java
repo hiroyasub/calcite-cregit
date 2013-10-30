@@ -241,6 +241,21 @@ block|{
 if|if
 condition|(
 name|o
+operator|==
+literal|null
+condition|)
+block|{
+name|buf
+operator|.
+name|append
+argument_list|(
+literal|"null"
+argument_list|)
+expr_stmt|;
+block|}
+if|else if
+condition|(
+name|o
 operator|instanceof
 name|Map
 condition|)
