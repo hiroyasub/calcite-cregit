@@ -101,6 +101,16 @@ name|org
 operator|.
 name|junit
 operator|.
+name|Ignore
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
 name|Test
 import|;
 end_import
@@ -372,6 +382,8 @@ expr_stmt|;
 block|}
 comment|/**    * Tests INTERSECT.    */
 annotation|@
+name|Ignore
+annotation|@
 name|Test
 specifier|public
 name|void
@@ -401,6 +413,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/**    * Tests EXCEPT.    */
+annotation|@
+name|Ignore
 annotation|@
 name|Test
 specifier|public
