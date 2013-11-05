@@ -8357,7 +8357,7 @@ parameter_list|(
 name|RelNode
 name|newJoin
 parameter_list|,
-name|JoinRel
+name|JoinRelBase
 name|origJoin
 parameter_list|,
 name|boolean
