@@ -233,6 +233,21 @@ operator|.
 name|getSqlTypeName
 argument_list|()
 decl_stmt|;
+comment|/* Pass type checking for operators if its of type 'ANY' */
+if|if
+condition|(
+name|typeName
+operator|.
+name|getFamily
+argument_list|()
+operator|==
+name|SqlTypeFamily
+operator|.
+name|ANY
+condition|)
+return|return
+literal|true
+return|;
 if|if
 condition|(
 operator|!
