@@ -654,9 +654,9 @@ init|=
 operator|new
 name|SqlPrettyWriter
 argument_list|(
-name|SqlDialect
+name|schema
 operator|.
-name|DUMMY
+name|dialect
 argument_list|)
 decl_stmt|;
 name|node

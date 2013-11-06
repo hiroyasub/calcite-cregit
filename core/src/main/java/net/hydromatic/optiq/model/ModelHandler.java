@@ -870,6 +870,15 @@ operator|.
 name|jdbcPassword
 argument_list|)
 expr_stmt|;
+name|dataSource
+operator|.
+name|setDriverClassName
+argument_list|(
+name|jsonJdbcSchema
+operator|.
+name|jdbcDriver
+argument_list|)
+expr_stmt|;
 return|return
 name|dataSource
 return|;

@@ -409,7 +409,13 @@ literal|"       jdbcUser: 'foodmart',\n"
 operator|+
 literal|"       jdbcPassword: 'foodmart',\n"
 operator|+
-literal|"       jdbcUrl: 'jdbc:mysql://localhost',\n"
+literal|"       jdbcUrl: '"
+operator|+
+name|OptiqAssert
+operator|.
+name|JDBC_URL
+operator|+
+literal|"',\n"
 operator|+
 literal|"       jdbcCatalog: 'foodmart',\n"
 operator|+

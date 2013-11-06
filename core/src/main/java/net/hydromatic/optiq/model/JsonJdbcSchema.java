@@ -28,6 +28,10 @@ name|JsonSchema
 block|{
 specifier|public
 name|String
+name|jdbcDriver
+decl_stmt|;
+specifier|public
+name|String
 name|jdbcUrl
 decl_stmt|;
 specifier|public

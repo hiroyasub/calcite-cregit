@@ -468,15 +468,29 @@ literal|"       type: 'jdbc',\n"
 operator|+
 literal|"       name: 'foodmart',\n"
 operator|+
+literal|"       jdbcDriver: '"
+operator|+
+name|OptiqAssert
+operator|.
+name|JDBC_DRIVER
+operator|+
+literal|"',\n"
+operator|+
 literal|"       jdbcUser: 'foodmart',\n"
 operator|+
 literal|"       jdbcPassword: 'foodmart',\n"
 operator|+
-literal|"       jdbcUrl: 'jdbc:mysql://localhost',\n"
+literal|"       jdbcUrl: '"
 operator|+
-literal|"       jdbcCatalog: 'foodmart',\n"
+name|OptiqAssert
+operator|.
+name|JDBC_URL
 operator|+
-literal|"       jdbcSchema: null\n"
+literal|"',\n"
+operator|+
+literal|"       jdbcCatalog: null,\n"
+operator|+
+literal|"       jdbcSchema: 'foodmart'\n"
 operator|+
 literal|"     }\n"
 decl_stmt|;
