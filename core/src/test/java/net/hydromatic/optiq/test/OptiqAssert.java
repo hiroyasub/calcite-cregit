@@ -328,7 +328,7 @@ operator|=
 operator|new
 name|SimpleDateFormat
 argument_list|(
-literal|"YYYY-MM-dd"
+literal|"yyyy-MM-dd"
 argument_list|)
 expr_stmt|;
 name|UTC_DATE_FORMAT
@@ -358,7 +358,7 @@ operator|=
 operator|new
 name|SimpleDateFormat
 argument_list|(
-literal|"YYYY-MM-dd'T'HH:mm:ss'Z'"
+literal|"yyyy-MM-dd'T'HH:mm:ss'Z'"
 argument_list|)
 expr_stmt|;
 name|UTC_TIMESTAMP_FORMAT
