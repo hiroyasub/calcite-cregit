@@ -1783,6 +1783,12 @@ parameter_list|(
 name|NewArrayExpression
 name|newArrayExpression
 parameter_list|,
+name|int
+name|dimension
+parameter_list|,
+name|Expression
+name|bound
+parameter_list|,
 name|List
 argument_list|<
 name|Expression
@@ -1841,6 +1847,10 @@ operator|.
 name|visit
 argument_list|(
 name|newArrayExpression
+argument_list|,
+name|dimension
+argument_list|,
+name|bound
 argument_list|,
 name|expressions
 argument_list|)
