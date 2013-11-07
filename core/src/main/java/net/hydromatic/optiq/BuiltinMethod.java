@@ -1588,7 +1588,7 @@ name|SqlFunctions
 operator|.
 name|class
 argument_list|,
-literal|"toInt"
+literal|"toLong"
 argument_list|,
 name|Timestamp
 operator|.

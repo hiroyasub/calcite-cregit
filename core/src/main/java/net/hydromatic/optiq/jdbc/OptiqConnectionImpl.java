@@ -2084,15 +2084,6 @@ name|name
 argument_list|)
 return|;
 block|}
-specifier|public
-name|Schema
-name|getRootSchema
-parameter_list|()
-block|{
-return|return
-name|this
-return|;
-block|}
 block|}
 specifier|static
 class|class

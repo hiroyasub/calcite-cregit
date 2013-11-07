@@ -1357,7 +1357,14 @@ name|RelDataType
 name|type
 parameter_list|)
 block|{
-comment|//    if (type.isNullable()) {
+if|if
+condition|(
+name|type
+operator|.
+name|isNullable
+argument_list|()
+condition|)
+block|{
 switch|switch
 condition|(
 name|type
@@ -1406,7 +1413,7 @@ name|DATE_TO_INT
 argument_list|)
 return|;
 block|}
-comment|//    }
+block|}
 return|return
 name|list
 return|;

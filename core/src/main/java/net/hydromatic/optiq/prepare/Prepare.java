@@ -209,14 +209,6 @@ specifier|abstract
 class|class
 name|Prepare
 block|{
-specifier|public
-specifier|static
-specifier|final
-name|String
-name|connectionVariable
-init|=
-literal|"connection"
-decl_stmt|;
 specifier|protected
 specifier|static
 specifier|final

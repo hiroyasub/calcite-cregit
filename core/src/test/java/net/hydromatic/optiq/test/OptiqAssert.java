@@ -2369,14 +2369,14 @@ name|dataSource
 operator|.
 name|setUsername
 argument_list|(
-literal|"foodmart"
+literal|"FOODMART"
 argument_list|)
 expr_stmt|;
 name|dataSource
 operator|.
 name|setPassword
 argument_list|(
-literal|"foodmart"
+literal|"FOODMART"
 argument_list|)
 expr_stmt|;
 name|JdbcSchema
