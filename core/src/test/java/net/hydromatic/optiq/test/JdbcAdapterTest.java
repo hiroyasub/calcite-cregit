@@ -73,6 +73,23 @@ operator|+
 literal|"    JdbcTableScan(table=[[foodmart, sales_fact_1998]])"
 argument_list|)
 operator|.
+name|runs
+argument_list|()
+operator|.
+name|enable
+argument_list|(
+name|OptiqAssert
+operator|.
+name|CONNECTION_SPEC
+operator|.
+name|url
+operator|.
+name|startsWith
+argument_list|(
+literal|"jdbc:hsqldb:"
+argument_list|)
+argument_list|)
+operator|.
 name|planHasSql
 argument_list|(
 literal|"SELECT *\n"
@@ -85,9 +102,6 @@ literal|"SELECT *\n"
 operator|+
 literal|"FROM \"foodmart\".\"sales_fact_1998\""
 argument_list|)
-operator|.
-name|runs
-argument_list|()
 expr_stmt|;
 block|}
 annotation|@
@@ -122,6 +136,23 @@ operator|+
 literal|"where \"product_id\" = 1"
 argument_list|)
 operator|.
+name|runs
+argument_list|()
+operator|.
+name|enable
+argument_list|(
+name|OptiqAssert
+operator|.
+name|CONNECTION_SPEC
+operator|.
+name|url
+operator|.
+name|startsWith
+argument_list|(
+literal|"jdbc:hsqldb:"
+argument_list|)
+argument_list|)
+operator|.
 name|planHasSql
 argument_list|(
 literal|"SELECT *\n"
@@ -138,9 +169,6 @@ literal|"FROM \"foodmart\".\"sales_fact_1998\"\n"
 operator|+
 literal|"WHERE \"product_id\" = 1"
 argument_list|)
-operator|.
-name|runs
-argument_list|()
 expr_stmt|;
 block|}
 annotation|@
@@ -167,6 +195,23 @@ argument_list|(
 literal|"select \"store_id\", \"store_name\" from \"store\"\n"
 operator|+
 literal|"where \"store_name\" in ('Store 1', 'Store 10', 'Store 11', 'Store 15', 'Store 16', 'Store 24', 'Store 3', 'Store 7')"
+argument_list|)
+operator|.
+name|runs
+argument_list|()
+operator|.
+name|enable
+argument_list|(
+name|OptiqAssert
+operator|.
+name|CONNECTION_SPEC
+operator|.
+name|url
+operator|.
+name|startsWith
+argument_list|(
+literal|"jdbc:hsqldb:"
+argument_list|)
 argument_list|)
 operator|.
 name|planHasSql

@@ -405,19 +405,13 @@ literal|"       type: 'jdbc',\n"
 operator|+
 literal|"       name: 'FoodMart',\n"
 operator|+
-literal|"       jdbcUser: 'foodmart',\n"
+literal|"       jdbcUser: 'u_baz',\n"
 operator|+
-literal|"       jdbcPassword: 'foodmart',\n"
+literal|"       jdbcPassword: 'p_baz',\n"
 operator|+
-literal|"       jdbcUrl: '"
+literal|"       jdbcUrl: 'jdbc:baz',\n"
 operator|+
-name|OptiqAssert
-operator|.
-name|JDBC_URL
-operator|+
-literal|"',\n"
-operator|+
-literal|"       jdbcCatalog: 'foodmart',\n"
+literal|"       jdbcCatalog: 'cat_baz',\n"
 operator|+
 literal|"       jdbcSchema: ''\n"
 operator|+

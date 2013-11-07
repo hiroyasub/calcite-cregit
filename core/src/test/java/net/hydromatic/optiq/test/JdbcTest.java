@@ -472,19 +472,39 @@ literal|"       jdbcDriver: '"
 operator|+
 name|OptiqAssert
 operator|.
-name|JDBC_DRIVER
+name|CONNECTION_SPEC
+operator|.
+name|driver
 operator|+
 literal|"',\n"
 operator|+
-literal|"       jdbcUser: 'FOODMART',\n"
+literal|"       jdbcUser: '"
 operator|+
-literal|"       jdbcPassword: 'FOODMART',\n"
+name|OptiqAssert
+operator|.
+name|CONNECTION_SPEC
+operator|.
+name|username
+operator|+
+literal|"',\n"
+operator|+
+literal|"       jdbcPassword: '"
+operator|+
+name|OptiqAssert
+operator|.
+name|CONNECTION_SPEC
+operator|.
+name|password
+operator|+
+literal|"',\n"
 operator|+
 literal|"       jdbcUrl: '"
 operator|+
 name|OptiqAssert
 operator|.
-name|JDBC_URL
+name|CONNECTION_SPEC
+operator|.
+name|url
 operator|+
 literal|"',\n"
 operator|+
