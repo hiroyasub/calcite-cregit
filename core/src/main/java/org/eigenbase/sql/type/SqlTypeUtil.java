@@ -4355,6 +4355,24 @@ return|return
 literal|true
 return|;
 block|}
+comment|/* If one of the operators is of type 'ANY', return true */
+if|if
+condition|(
+name|family1
+operator|==
+name|SqlTypeFamily
+operator|.
+name|ANY
+operator|||
+name|family2
+operator|==
+name|SqlTypeFamily
+operator|.
+name|ANY
+condition|)
+return|return
+literal|true
+return|;
 return|return
 literal|false
 return|;

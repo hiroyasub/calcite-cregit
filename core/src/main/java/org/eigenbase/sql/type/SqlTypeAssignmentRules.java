@@ -1795,6 +1795,36 @@ argument_list|,
 name|rule
 argument_list|)
 expr_stmt|;
+comment|/* Any is assignable from Any */
+name|rule
+operator|=
+operator|new
+name|HashSet
+argument_list|<
+name|SqlTypeName
+argument_list|>
+argument_list|()
+expr_stmt|;
+name|rule
+operator|.
+name|add
+argument_list|(
+name|SqlTypeName
+operator|.
+name|ANY
+argument_list|)
+expr_stmt|;
+name|rules
+operator|.
+name|put
+argument_list|(
+name|SqlTypeName
+operator|.
+name|ANY
+argument_list|,
+name|rule
+argument_list|)
+expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
 specifier|public
