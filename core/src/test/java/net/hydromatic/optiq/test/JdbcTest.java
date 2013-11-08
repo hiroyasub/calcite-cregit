@@ -3880,28 +3880,13 @@ name|void
 name|testNullableTimestamp
 parameter_list|()
 block|{
-name|OptiqAssert
-operator|.
-name|assertThat
-argument_list|()
-operator|.
-name|with
+name|checkNullableTimestamp
 argument_list|(
 name|OptiqAssert
 operator|.
 name|Config
 operator|.
 name|FOODMART_CLONE
-argument_list|)
-operator|.
-name|query
-argument_list|(
-literal|"select \"hire_date\" from \"employee\" where \"employee_id\" = 1"
-argument_list|)
-operator|.
-name|returns
-argument_list|(
-literal|"hire_date=1994-12-01 00:00:00\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -3913,12 +3898,7 @@ name|void
 name|testNullableTimestamp2
 parameter_list|()
 block|{
-name|OptiqAssert
-operator|.
-name|assertThat
-argument_list|()
-operator|.
-name|with
+name|checkNullableTimestamp
 argument_list|(
 name|OptiqAssert
 operator|.
@@ -3926,15 +3906,36 @@ name|Config
 operator|.
 name|JDBC_FOODMART
 argument_list|)
+expr_stmt|;
+block|}
+specifier|private
+name|void
+name|checkNullableTimestamp
+parameter_list|(
+name|OptiqAssert
+operator|.
+name|Config
+name|config
+parameter_list|)
+block|{
+name|OptiqAssert
+operator|.
+name|assertThat
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|config
+argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"select \"hire_date\" from \"foodmart\".\"employee\" where \"employee_id\" = 1"
+literal|"select \"hire_date\", \"end_date\", \"birth_date\" from \"foodmart\".\"employee\" where \"employee_id\" = 1"
 argument_list|)
 operator|.
 name|returns
 argument_list|(
-literal|"hire_date=1994-12-01 00:00:00\n"
+literal|"hire_date=1994-12-01 00:00:00; end_date=null; birth_date=1961-08-26\n"
 argument_list|)
 expr_stmt|;
 block|}
