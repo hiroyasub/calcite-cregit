@@ -200,6 +200,13 @@ operator|.
 name|MAP
 argument_list|)
 block|,
+name|NULL
+argument_list|(
+name|SqlTypeName
+operator|.
+name|NULL
+argument_list|)
+block|,
 name|ANY
 argument_list|(
 name|SqlTypeName
@@ -739,7 +746,7 @@ name|ordinal
 argument_list|()
 index|]
 operator|=
-name|ANY
+name|NULL
 expr_stmt|;
 name|sqlTypeToFamily
 index|[

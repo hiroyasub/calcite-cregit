@@ -247,6 +247,13 @@ operator|.
 name|isNullable
 argument_list|()
 assert|;
+assert|assert
+name|typeName
+operator|!=
+name|SqlTypeName
+operator|.
+name|ANY
+assert|;
 name|this
 operator|.
 name|value
@@ -499,6 +506,14 @@ name|value
 operator|instanceof
 name|Enum
 operator|)
+return|;
+case|case
+name|ANY
+case|:
+comment|// Literal of type ANY is not legal. "CAST(2 AS ANY)" remains
+comment|// an integer literal surrounded by a cast function.
+return|return
+literal|false
 return|;
 default|default:
 throw|throw

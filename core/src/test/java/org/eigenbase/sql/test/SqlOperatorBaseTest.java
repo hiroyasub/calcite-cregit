@@ -10476,6 +10476,34 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testPlusOperatorAny
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|setFor
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|plusOperator
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"1+CAST(2 AS ANY)"
+argument_list|,
+literal|"3"
+argument_list|,
+literal|"ANY NOT NULL"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testPlusIntervalOperator
 parameter_list|()
 block|{

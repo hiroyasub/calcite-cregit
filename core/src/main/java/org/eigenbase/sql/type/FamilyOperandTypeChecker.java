@@ -233,7 +233,7 @@ operator|.
 name|getSqlTypeName
 argument_list|()
 decl_stmt|;
-comment|/* Pass type checking for operators if its of type 'ANY' */
+comment|// Pass type checking for operators if it's of type 'ANY'.
 if|if
 condition|(
 name|typeName
@@ -245,9 +245,11 @@ name|SqlTypeFamily
 operator|.
 name|ANY
 condition|)
+block|{
 return|return
 literal|true
 return|;
+block|}
 if|if
 condition|(
 operator|!

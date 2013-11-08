@@ -660,6 +660,14 @@ argument_list|()
 condition|)
 block|{
 case|case
+name|ANY
+case|:
+name|convert
+operator|=
+name|operand
+expr_stmt|;
+break|break;
+case|case
 name|BOOLEAN
 case|:
 switch|switch
