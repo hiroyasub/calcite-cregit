@@ -137,7 +137,7 @@ name|SqlKind
 operator|.
 name|OTHER_FUNCTION
 argument_list|,
-literal|4
+literal|100
 argument_list|,
 literal|true
 argument_list|,
@@ -148,17 +148,6 @@ argument_list|,
 literal|null
 argument_list|)
 expr_stmt|;
-block|}
-annotation|@
-name|Override
-specifier|public
-name|int
-name|getRightPrec
-parameter_list|()
-block|{
-return|return
-literal|100
-return|;
 block|}
 annotation|@
 name|Override

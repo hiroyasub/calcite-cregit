@@ -2408,6 +2408,13 @@ name|s
 operator|.
 name|equals
 argument_list|(
+literal|"["
+argument_list|)
+operator|||
+name|s
+operator|.
+name|equals
+argument_list|(
 literal|"]"
 argument_list|)
 operator|||

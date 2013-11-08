@@ -6075,7 +6075,7 @@ name|checkExp
 argument_list|(
 literal|"a member of multiset[b]"
 argument_list|,
-literal|"(`A` MEMBER OF (MULTISET [`B`]))"
+literal|"(`A` MEMBER OF (MULTISET[`B`]))"
 argument_list|)
 expr_stmt|;
 block|}
@@ -6127,35 +6127,35 @@ name|checkExp
 argument_list|(
 literal|"multiset[1]"
 argument_list|,
-literal|"(MULTISET [1])"
+literal|"(MULTISET[1])"
 argument_list|)
 expr_stmt|;
 name|checkExp
 argument_list|(
 literal|"multiset[1,2.3]"
 argument_list|,
-literal|"(MULTISET [1, 2.3])"
+literal|"(MULTISET[1, 2.3])"
 argument_list|)
 expr_stmt|;
 name|checkExp
 argument_list|(
 literal|"multiset[1,    '2']"
 argument_list|,
-literal|"(MULTISET [1, '2'])"
+literal|"(MULTISET[1, '2'])"
 argument_list|)
 expr_stmt|;
 name|checkExp
 argument_list|(
 literal|"multiset[ROW(1,2)]"
 argument_list|,
-literal|"(MULTISET [(ROW(1, 2))])"
+literal|"(MULTISET[(ROW(1, 2))])"
 argument_list|)
 expr_stmt|;
 name|checkExp
 argument_list|(
 literal|"multiset[ROW(1,2),ROW(3,4)]"
 argument_list|,
-literal|"(MULTISET [(ROW(1, 2)), (ROW(3, 4))])"
+literal|"(MULTISET[(ROW(1, 2)), (ROW(3, 4))])"
 argument_list|)
 expr_stmt|;
 name|checkExp
@@ -6266,7 +6266,7 @@ name|checkExp
 argument_list|(
 literal|"multiset[1] MULTISET union b"
 argument_list|,
-literal|"((MULTISET [1]) MULTISET UNION `B`)"
+literal|"((MULTISET[1]) MULTISET UNION `B`)"
 argument_list|)
 expr_stmt|;
 name|checkExp
@@ -6281,35 +6281,71 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testMapElement
+name|testMapItem
 parameter_list|()
 block|{
 name|checkExp
 argument_list|(
 literal|"a['foo']"
 argument_list|,
-literal|"`A` ['foo']"
+literal|"`A`['foo']"
 argument_list|)
 expr_stmt|;
 name|checkExp
 argument_list|(
 literal|"a['x' || 'y']"
 argument_list|,
-literal|"`A` [('x' || 'y')]"
+literal|"`A`[('x' || 'y')]"
 argument_list|)
 expr_stmt|;
 name|checkExp
 argument_list|(
 literal|"a['foo'] ['bar']"
 argument_list|,
-literal|"`A` ['foo'] ['bar']"
+literal|"`A`['foo']['bar']"
 argument_list|)
 expr_stmt|;
 name|checkExp
 argument_list|(
 literal|"a['foo']['bar']"
 argument_list|,
-literal|"`A` ['foo'] ['bar']"
+literal|"`A`['foo']['bar']"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMapItemPrecedence
+parameter_list|()
+block|{
+name|checkExp
+argument_list|(
+literal|"1 + a['foo'] * 3"
+argument_list|,
+literal|"(1 + (`A`['foo'] * 3))"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"1 * a['foo'] + 3"
+argument_list|,
+literal|"((1 * `A`['foo']) + 3)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"a['foo']['bar']"
+argument_list|,
+literal|"`A`['foo']['bar']"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"a[b['foo' || 'bar']]"
+argument_list|,
+literal|"`A`[`B`[('foo' || 'bar')]]"
 argument_list|)
 expr_stmt|;
 block|}
@@ -6324,21 +6360,21 @@ name|checkExp
 argument_list|(
 literal|"a[1]"
 argument_list|,
-literal|"`A` [1]"
+literal|"`A`[1]"
 argument_list|)
 expr_stmt|;
 name|checkExp
 argument_list|(
 literal|"a[b[1]]"
 argument_list|,
-literal|"`A` [`B` [1]]"
+literal|"`A`[`B`[1]]"
 argument_list|)
 expr_stmt|;
 name|checkExp
 argument_list|(
 literal|"a[b[1 + 2] + 3]"
 argument_list|,
-literal|"`A` [(`B` [(1 + 2)] + 3)]"
+literal|"`A`[(`B`[(1 + 2)] + 3)]"
 argument_list|)
 expr_stmt|;
 block|}
@@ -6353,14 +6389,14 @@ name|checkExp
 argument_list|(
 literal|"array[1, 2]"
 argument_list|,
-literal|"(ARRAY [1, 2])"
+literal|"(ARRAY[1, 2])"
 argument_list|)
 expr_stmt|;
 name|checkExp
 argument_list|(
 literal|"array [1, 2]"
 argument_list|,
-literal|"(ARRAY [1, 2])"
+literal|"(ARRAY[1, 2])"
 argument_list|)
 expr_stmt|;
 comment|// with space
@@ -6369,14 +6405,14 @@ name|checkExp
 argument_list|(
 literal|"array[]"
 argument_list|,
-literal|"(ARRAY [])"
+literal|"(ARRAY[])"
 argument_list|)
 expr_stmt|;
 name|checkExp
 argument_list|(
 literal|"array[(1, 'a'), (2, 'b')]"
 argument_list|,
-literal|"(ARRAY [(ROW(1, 'a')), (ROW(2, 'b'))])"
+literal|"(ARRAY[(ROW(1, 'a')), (ROW(2, 'b'))])"
 argument_list|)
 expr_stmt|;
 block|}
@@ -6391,21 +6427,21 @@ name|checkExp
 argument_list|(
 literal|"map[1, 'x', 2, 'y']"
 argument_list|,
-literal|"(MAP [1, 'x', 2, 'y'])"
+literal|"(MAP[1, 'x', 2, 'y'])"
 argument_list|)
 expr_stmt|;
 name|checkExp
 argument_list|(
 literal|"map [1, 'x', 2, 'y']"
 argument_list|,
-literal|"(MAP [1, 'x', 2, 'y'])"
+literal|"(MAP[1, 'x', 2, 'y'])"
 argument_list|)
 expr_stmt|;
 name|checkExp
 argument_list|(
 literal|"map[]"
 argument_list|,
-literal|"(MAP [])"
+literal|"(MAP[])"
 argument_list|)
 expr_stmt|;
 block|}
@@ -12219,7 +12255,7 @@ name|checkExp
 argument_list|(
 literal|"cast(multiset[1] as double multiset)"
 argument_list|,
-literal|"CAST((MULTISET [1]) AS DOUBLE MULTISET)"
+literal|"CAST((MULTISET[1]) AS DOUBLE MULTISET)"
 argument_list|)
 expr_stmt|;
 block|}
