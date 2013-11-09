@@ -1144,7 +1144,7 @@ argument_list|(
 name|operandOrdinal
 argument_list|)
 decl_stmt|;
-name|List
+name|Collection
 argument_list|<
 name|RelNode
 argument_list|>

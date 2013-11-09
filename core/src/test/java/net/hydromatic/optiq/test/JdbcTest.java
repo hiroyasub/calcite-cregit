@@ -3370,6 +3370,86 @@ argument_list|(
 name|queries
 argument_list|)
 decl_stmt|;
+comment|/** Unit test for self-join. Left and right children of the join are the same    * relational expression. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSelfJoin
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|assertThat
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|JDBC_FOODMART2
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select count(*) as c from (\n"
+operator|+
+literal|"  select 1 from \"foodmart\".\"employee\" as e1\n"
+operator|+
+literal|"  join \"foodmart\".\"employee\" as e2 using (\"position_title\"))"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"C=247149\n"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Self-join on different columns, select a different column, and sort and    * limit on yet another column. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSelfJoinDifferentColumns
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|assertThat
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|JDBC_FOODMART2
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select e1.\"full_name\"\n"
+operator|+
+literal|"  from \"foodmart\".\"employee\" as e1\n"
+operator|+
+literal|"  join \"foodmart\".\"employee\" as e2 on e1.\"first_name\" = e2.\"last_name\"\n"
+operator|+
+literal|"order by e1.\"last_name\" limit 3"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"full_name=James Aguilar\n"
+operator|+
+literal|"full_name=Carol Amyotte\n"
+operator|+
+literal|"full_name=Terry Anderson\n"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Test case for    *<a href="https://github.com/julianhyde/optiq/issues/35">issue #35</a>. */
 annotation|@
 name|Ignore

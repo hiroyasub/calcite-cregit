@@ -788,7 +788,7 @@ return|;
 block|}
 comment|/** Returns a list of relational expressions one of whose children is this      * subset. The elements of the list are distinct. */
 specifier|public
-name|List
+name|Collection
 argument_list|<
 name|RelNode
 argument_list|>
@@ -796,14 +796,14 @@ name|getParentRels
 parameter_list|()
 block|{
 specifier|final
-name|List
+name|Set
 argument_list|<
 name|RelNode
 argument_list|>
 name|list
 init|=
 operator|new
-name|ArrayList
+name|LinkedHashSet
 argument_list|<
 name|RelNode
 argument_list|>
@@ -865,14 +865,6 @@ continue|;
 block|}
 block|}
 block|}
-assert|assert
-name|Util
-operator|.
-name|isDistinct
-argument_list|(
-name|list
-argument_list|)
-assert|;
 return|return
 name|list
 return|;

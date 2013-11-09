@@ -122,6 +122,7 @@ name|RelNode
 argument_list|>
 argument_list|()
 decl_stmt|;
+comment|/** Relational expressions that have a subset in this set as a child. This      * is a multi-set. If multiple relational expressions in this set have the      * same parent, there will be multiple entries. */
 specifier|final
 name|List
 argument_list|<
