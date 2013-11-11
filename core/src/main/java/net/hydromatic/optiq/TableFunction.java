@@ -50,6 +50,12 @@ block|{
 comment|/**    * Returns the parameters of this table function.    *    * @return Parameters; never null    */
 name|List
 argument_list|<
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|optiq
+operator|.
 name|Parameter
 argument_list|>
 name|getParameters

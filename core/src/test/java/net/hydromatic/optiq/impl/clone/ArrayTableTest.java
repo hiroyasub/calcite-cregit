@@ -57,6 +57,20 @@ end_import
 
 begin_import
 import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|optiq
+operator|.
+name|runtime
+operator|.
+name|ColumnMetaData
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|eigenbase
@@ -96,6 +110,16 @@ operator|.
 name|util
 operator|.
 name|Arrays
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Collections
 import|;
 end_import
 
@@ -2189,6 +2213,8 @@ argument_list|,
 name|enumerable
 argument_list|,
 name|rowType
+argument_list|,
+literal|null
 argument_list|)
 decl_stmt|;
 name|checkColumn
@@ -2407,6 +2433,8 @@ argument_list|,
 name|enumerable
 argument_list|,
 name|rowType
+argument_list|,
+literal|null
 argument_list|)
 decl_stmt|;
 comment|// Note that values have been sorted with {20, 200, Eric} last because the

@@ -103,6 +103,20 @@ end_import
 
 begin_import
 import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|optiq
+operator|.
+name|runtime
+operator|.
+name|ColumnMetaData
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|eigenbase
@@ -122,6 +136,16 @@ operator|.
 name|reflect
 operator|.
 name|Type
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
 import|;
 end_import
 
@@ -313,6 +337,8 @@ operator|.
 name|getRowType
 argument_list|()
 argument_list|,
+literal|null
+argument_list|,
 name|sourceTable
 argument_list|)
 decl_stmt|;
@@ -347,6 +373,14 @@ parameter_list|,
 name|RelDataType
 name|rowType
 parameter_list|,
+name|List
+argument_list|<
+name|ColumnMetaData
+operator|.
+name|Rep
+argument_list|>
+name|repList
+parameter_list|,
 name|Enumerable
 argument_list|<
 name|T
@@ -372,6 +406,8 @@ argument_list|,
 name|source
 argument_list|,
 name|rowType
+argument_list|,
+name|repList
 argument_list|)
 decl_stmt|;
 specifier|final

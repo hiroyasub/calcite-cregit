@@ -269,9 +269,9 @@ specifier|final
 name|ConnectionSpec
 name|CONNECTION_SPEC
 init|=
-literal|"mysql"
+name|Util
 operator|.
-name|equals
+name|first
 argument_list|(
 name|System
 operator|.
@@ -279,6 +279,13 @@ name|getProperty
 argument_list|(
 literal|"optiq.test.db"
 argument_list|)
+argument_list|,
+literal|"hsqldb"
+argument_list|)
+operator|.
+name|equals
+argument_list|(
+literal|"mysql"
 argument_list|)
 condition|?
 name|ConnectionSpec

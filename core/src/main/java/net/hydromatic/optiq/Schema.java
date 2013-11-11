@@ -345,12 +345,16 @@ block|}
 enum|enum
 name|TableType
 block|{
+comment|/** A regular table. */
 name|TABLE
 block|,
+comment|/** A relation whose contents are calculated by evaluating a SQL      * expression. */
 name|VIEW
 block|,
+comment|/** A table maintained by the system. Data dictionary tables, such as the      * "TABLES" and "COLUMNS" table in the "metamodel" schema, examples of      * system tables. */
 name|SYSTEM_TABLE
 block|,
+comment|/** A table that is only visible to one connection. */
 name|LOCAL_TEMPORARY
 block|,   }
 block|}

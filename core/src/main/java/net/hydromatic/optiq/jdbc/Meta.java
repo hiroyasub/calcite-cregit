@@ -3207,6 +3207,11 @@ name|optiqTable
 operator|=
 name|optiqTable
 expr_stmt|;
+assert|assert
+name|optiqTable
+operator|!=
+literal|null
+assert|;
 name|this
 operator|.
 name|tableCat

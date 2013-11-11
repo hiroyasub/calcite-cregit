@@ -322,7 +322,14 @@ name|replace
 argument_list|(
 literal|"\""
 argument_list|,
-literal|"\\\\"
+literal|"\\\""
+argument_list|)
+operator|.
+name|replace
+argument_list|(
+literal|"\n"
+argument_list|,
+literal|"\\n"
 argument_list|)
 argument_list|)
 operator|.
