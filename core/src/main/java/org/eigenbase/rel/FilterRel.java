@@ -94,6 +94,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
 specifier|public
 name|RelNode
 name|copy
@@ -132,6 +134,25 @@ argument_list|)
 argument_list|,
 name|getCondition
 argument_list|()
+argument_list|)
+return|;
+block|}
+annotation|@
+name|Override
+specifier|public
+name|RelNode
+name|accept
+parameter_list|(
+name|RelShuttle
+name|shuttle
+parameter_list|)
+block|{
+return|return
+name|shuttle
+operator|.
+name|visit
+argument_list|(
+name|this
 argument_list|)
 return|;
 block|}

@@ -887,6 +887,25 @@ expr_stmt|;
 block|}
 block|}
 specifier|public
+name|RelNode
+name|accept
+parameter_list|(
+name|RelShuttle
+name|shuttle
+parameter_list|)
+block|{
+comment|// Call fall-back method. Specific logical types (such as ProjectRel
+comment|// and JoinRel) have their own RelShuttle.visit methods.
+return|return
+name|shuttle
+operator|.
+name|visit
+argument_list|(
+name|this
+argument_list|)
+return|;
+block|}
+specifier|public
 name|RelOptCost
 name|computeSelfCost
 parameter_list|(

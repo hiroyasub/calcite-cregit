@@ -686,6 +686,8 @@ block|{
 assert|assert
 operator|!
 name|fail
+operator|:
+name|rowType
 assert|;
 return|return
 literal|false

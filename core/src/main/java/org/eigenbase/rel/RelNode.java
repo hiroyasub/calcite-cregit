@@ -330,6 +330,14 @@ name|BitSet
 name|columns
 parameter_list|)
 function_decl|;
+comment|/**      * Accepts a visit from a shuttle.      *      * @param shuttle Shuttle      * @return A copy of this node incorporating changes made by the shuttle to      *   this node's children      */
+name|RelNode
+name|accept
+parameter_list|(
+name|RelShuttle
+name|shuttle
+parameter_list|)
+function_decl|;
 block|}
 end_interface
 

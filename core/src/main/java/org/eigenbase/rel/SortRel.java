@@ -311,6 +311,8 @@ argument_list|()
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
 specifier|public
 name|SortRel
 name|copy
@@ -414,6 +416,25 @@ argument_list|,
 name|offset
 argument_list|,
 name|fetch
+argument_list|)
+return|;
+block|}
+annotation|@
+name|Override
+specifier|public
+name|RelNode
+name|accept
+parameter_list|(
+name|RelShuttle
+name|shuttle
+parameter_list|)
+block|{
+return|return
+name|shuttle
+operator|.
+name|visit
+argument_list|(
+name|this
 argument_list|)
 return|;
 block|}
