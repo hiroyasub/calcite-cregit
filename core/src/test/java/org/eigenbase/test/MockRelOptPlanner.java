@@ -102,11 +102,8 @@ specifier|public
 name|void
 name|addMaterialization
 parameter_list|(
-name|RelNode
-name|tableRel
-parameter_list|,
-name|RelNode
-name|queryRel
+name|RelOptMaterialization
+name|materialization
 parameter_list|)
 block|{
 comment|// ignore - this planner does not support materializations

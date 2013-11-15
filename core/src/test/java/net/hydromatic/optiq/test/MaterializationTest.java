@@ -316,6 +316,33 @@ name|String
 name|query
 parameter_list|)
 block|{
+name|checkMaterialize
+argument_list|(
+name|materialize
+argument_list|,
+name|query
+argument_list|,
+name|JdbcTest
+operator|.
+name|HR_MODEL
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Checks that a given query can use a materialized view with a given    * definition. */
+specifier|private
+name|void
+name|checkMaterialize
+parameter_list|(
+name|String
+name|materialize
+parameter_list|,
+name|String
+name|query
+parameter_list|,
+name|String
+name|model
+parameter_list|)
+block|{
 try|try
 block|{
 name|Prepare
@@ -340,9 +367,7 @@ argument_list|)
 operator|.
 name|withMaterializations
 argument_list|(
-name|JdbcTest
-operator|.
-name|HR_MODEL
+name|model
 argument_list|,
 literal|"m0"
 argument_list|,
@@ -395,6 +420,9 @@ name|materialize
 parameter_list|,
 name|String
 name|query
+parameter_list|,
+name|String
+name|model
 parameter_list|)
 block|{
 try|try
@@ -421,9 +449,7 @@ argument_list|)
 operator|.
 name|withMaterializations
 argument_list|(
-name|JdbcTest
-operator|.
-name|HR_MODEL
+name|model
 argument_list|,
 literal|"m0"
 argument_list|,
@@ -542,6 +568,10 @@ argument_list|(
 literal|"select \"deptno\" - 10 as \"x\", \"empid\" + 1, \"name\" from \"emps\""
 argument_list|,
 literal|"select \"name\" from \"emps\" where \"deptno\" + 10 = 20"
+argument_list|,
+name|JdbcTest
+operator|.
+name|HR_MODEL
 argument_list|)
 expr_stmt|;
 block|}
@@ -1307,6 +1337,140 @@ name|simple
 operator|.
 name|toString
 argument_list|()
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests a complicated star-join query on a complicated materialized    * star-join query. Some of the features:    *    * 1. query joins in different order;    * 2. query's join conditions are in where clause;    * 3. query does not use all join tables (safe to omit them because they are    *    many-to-mandatory-one joins);    * 4. query is at higher granularity, therefore needs to roll up;    * 5. query has a condition on one of the materialization's grouping columns.    */
+annotation|@
+name|Ignore
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFilterGroupQueryOnStar
+parameter_list|()
+block|{
+name|checkMaterialize
+argument_list|(
+literal|"select p.\"product_name\", t.\"the_year\", sum(f.\"unit_sales\") as \"sum_unit_sales\", count(*) as \"c\"\n"
+operator|+
+literal|"from \"foodmart\".\"sales_fact_1997\" as f\n"
+operator|+
+literal|"join (\n"
+operator|+
+literal|"    select \"time_id\", \"the_year\", \"the_month\"\n"
+operator|+
+literal|"    from \"foodmart\".\"time_by_day\") as t\n"
+operator|+
+literal|"  on f.\"time_id\" = t.\"time_id\"\n"
+operator|+
+literal|"join \"foodmart\".\"product\" as p\n"
+operator|+
+literal|"  on f.\"product_id\" = p.\"product_id\"\n"
+operator|+
+literal|"join \"foodmart\".\"product_class\" as pc"
+operator|+
+literal|"  on p.\"product_class_id\" = pc.\"product_class_id\"\n"
+operator|+
+literal|"group by t.\"the_year\",\n"
+operator|+
+literal|" t.\"the_month\",\n"
+operator|+
+literal|" pc.\"product_department\",\n"
+operator|+
+literal|" pc.\"product_category\",\n"
+operator|+
+literal|" p.\"product_name\""
+argument_list|,
+literal|"select t.\"the_month\", count(*) as x\n"
+operator|+
+literal|"from (\n"
+operator|+
+literal|"  select \"time_id\", \"the_year\", \"the_month\"\n"
+operator|+
+literal|"  from \"foodmart\".\"time_by_day\") as t,\n"
+operator|+
+literal|" \"foodmart\".\"sales_fact_1997\" as f\n"
+operator|+
+literal|"where t.\"the_year\" = 1997\n"
+operator|+
+literal|"and t.\"time_id\" = f.\"time_id\"\n"
+operator|+
+literal|"group by t.\"the_year\",\n"
+operator|+
+literal|" t.\"the_month\"\n"
+argument_list|,
+name|JdbcTest
+operator|.
+name|FOODMART_MODEL
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Simpler than {@link #testFilterGroupQueryOnStar()}, tests a query on a    * materialization that is just a join. */
+annotation|@
+name|Ignore
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testQueryOnStar
+parameter_list|()
+block|{
+name|String
+name|q
+init|=
+literal|"select *\n"
+operator|+
+literal|"from \"foodmart\".\"sales_fact_1997\" as f\n"
+operator|+
+literal|"join \"foodmart\".\"time_by_day\" as t on f.\"time_id\" = t.\"time_id\"\n"
+operator|+
+literal|"join \"foodmart\".\"product\" as p on f.\"product_id\" = p.\"product_id\"\n"
+operator|+
+literal|"join \"foodmart\".\"product_class\" as pc on p.\"product_class_id\" = pc.\"product_class_id\"\n"
+decl_stmt|;
+name|checkMaterialize
+argument_list|(
+name|q
+argument_list|,
+name|q
+operator|+
+literal|"where t.\"month_of_year\" = 10"
+argument_list|,
+name|JdbcTest
+operator|.
+name|FOODMART_MODEL
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** A materialization that is a join of a union cannot at present be converted    * to a star table and therefore cannot be recognized. This test checks that    * nothing unpleasant happens. */
+annotation|@
+name|Ignore
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJoinOnUnionMaterialization
+parameter_list|()
+block|{
+name|String
+name|q
+init|=
+literal|"select *\n"
+operator|+
+literal|"from (select * from \"emps\" union all select * from \"emps\")\n"
+operator|+
+literal|"join \"depts\" using (\"deptno\")"
+decl_stmt|;
+name|checkNoMaterialize
+argument_list|(
+name|q
+argument_list|,
+name|q
+argument_list|,
+name|JdbcTest
+operator|.
+name|HR_MODEL
 argument_list|)
 expr_stmt|;
 block|}

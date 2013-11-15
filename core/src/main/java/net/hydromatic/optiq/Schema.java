@@ -356,6 +356,9 @@ name|SYSTEM_TABLE
 block|,
 comment|/** A table that is only visible to one connection. */
 name|LOCAL_TEMPORARY
+block|,
+comment|/** A structure, similar to a view, that is the basis for auto-generated      * materializations. It is either a single table or a collection of tables      * that are joined via many-to-one relationships from a central hub table.      * It is not available for queries, but is just used as an intermediate      * structure during query planning. */
+name|STAR
 block|,   }
 block|}
 end_interface

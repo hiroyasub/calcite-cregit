@@ -153,19 +153,7 @@ name|eigenbase
 operator|.
 name|util
 operator|.
-name|Pair
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
-name|util
-operator|.
-name|Util
+name|*
 import|;
 end_import
 
@@ -2679,14 +2667,24 @@ operator|==
 literal|0
 assert|;
 specifier|final
-name|StringBuilder
-name|buf
+name|JsonBuilder
+name|builder
 init|=
 operator|new
-name|StringBuilder
-argument_list|(
-literal|"materializations: [\n"
-argument_list|)
+name|JsonBuilder
+argument_list|()
+decl_stmt|;
+specifier|final
+name|List
+argument_list|<
+name|Object
+argument_list|>
+name|list
+init|=
+name|builder
+operator|.
+name|list
+argument_list|()
 decl_stmt|;
 for|for
 control|(
@@ -2714,41 +2712,38 @@ name|i
 operator|++
 index|]
 decl_stmt|;
-name|buf
+specifier|final
+name|Map
+argument_list|<
+name|String
+argument_list|,
+name|Object
+argument_list|>
+name|map
+init|=
+name|builder
 operator|.
-name|append
-argument_list|(
-literal|"    {\n"
-argument_list|)
+name|map
+argument_list|()
+decl_stmt|;
+name|map
 operator|.
-name|append
+name|put
 argument_list|(
-literal|"      table: '"
-argument_list|)
-operator|.
-name|append
-argument_list|(
+literal|"table"
+argument_list|,
 name|table
 argument_list|)
+expr_stmt|;
+name|map
 operator|.
-name|append
+name|put
 argument_list|(
-literal|"',\n"
-argument_list|)
-operator|.
-name|append
-argument_list|(
-literal|"      view: '"
-argument_list|)
-operator|.
-name|append
-argument_list|(
+literal|"view"
+argument_list|,
 name|table
-argument_list|)
-operator|.
-name|append
-argument_list|(
-literal|"v',\n"
+operator|+
+literal|"v"
 argument_list|)
 expr_stmt|;
 name|String
@@ -2771,54 +2766,37 @@ literal|"`"
 argument_list|,
 literal|"\""
 argument_list|)
-operator|.
-name|replaceAll
-argument_list|(
-literal|"'"
-argument_list|,
-literal|"''"
-argument_list|)
 decl_stmt|;
-name|buf
+name|map
 operator|.
-name|append
+name|put
 argument_list|(
-literal|"      sql: '"
-argument_list|)
-operator|.
-name|append
-argument_list|(
+literal|"sql"
+argument_list|,
 name|sql2
 argument_list|)
+expr_stmt|;
+name|list
 operator|.
-name|append
+name|add
 argument_list|(
-literal|"'\n"
-argument_list|)
-operator|.
-name|append
-argument_list|(
-name|i
-operator|>=
-name|materializations
-operator|.
-name|length
-operator|-
-literal|1
-condition|?
-literal|"}\n"
-else|:
-literal|"},\n"
+name|map
 argument_list|)
 expr_stmt|;
 block|}
+specifier|final
+name|String
 name|buf
+init|=
+literal|"materializations: "
+operator|+
+name|builder
 operator|.
-name|append
+name|toJsonString
 argument_list|(
-literal|"  ],\n"
+name|list
 argument_list|)
-expr_stmt|;
+decl_stmt|;
 specifier|final
 name|String
 name|model2
@@ -2829,7 +2807,7 @@ name|model
 operator|.
 name|contains
 argument_list|(
-literal|"jdbcSchema: "
+literal|"defaultSchema: 'foodmart'"
 argument_list|)
 condition|)
 block|{
@@ -2839,11 +2817,15 @@ name|model
 operator|.
 name|replace
 argument_list|(
-literal|"jdbcSchema: "
+literal|"]"
 argument_list|,
+literal|", { name: 'mat', "
+operator|+
 name|buf
 operator|+
-literal|"jdbcSchema: "
+literal|"}\n"
+operator|+
+literal|"]"
 argument_list|)
 expr_stmt|;
 block|}
@@ -2866,6 +2848,8 @@ argument_list|(
 literal|"type: "
 argument_list|,
 name|buf
+operator|+
+literal|",\n"
 operator|+
 literal|"type: "
 argument_list|)
