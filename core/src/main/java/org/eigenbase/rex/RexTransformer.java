@@ -365,9 +365,9 @@ name|node
 operator|.
 name|isA
 argument_list|(
-name|RexKind
+name|SqlKind
 operator|.
-name|IsTrue
+name|IS_TRUE
 argument_list|)
 condition|)
 block|{
@@ -387,9 +387,9 @@ name|node
 operator|.
 name|isA
 argument_list|(
-name|RexKind
+name|SqlKind
 operator|.
-name|IsFalse
+name|IS_FALSE
 argument_list|)
 condition|)
 block|{

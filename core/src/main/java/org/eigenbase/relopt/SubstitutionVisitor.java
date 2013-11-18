@@ -69,6 +69,18 @@ name|eigenbase
 operator|.
 name|sql
 operator|.
+name|SqlKind
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
+name|sql
+operator|.
 name|fun
 operator|.
 name|SqlStdOperatorTable
@@ -853,7 +865,7 @@ argument_list|()
 condition|)
 block|{
 case|case
-name|Literal
+name|LITERAL
 case|:
 if|if
 condition|(
@@ -889,7 +901,7 @@ argument_list|()
 condition|)
 block|{
 case|case
-name|Literal
+name|LITERAL
 case|:
 if|if
 condition|(
@@ -1072,7 +1084,7 @@ name|i
 argument_list|)
 decl_stmt|;
 specifier|final
-name|RexKind
+name|SqlKind
 name|kind
 init|=
 name|disjunction
@@ -1086,7 +1098,7 @@ name|kind
 condition|)
 block|{
 case|case
-name|Not
+name|NOT
 case|:
 name|notDisjunctions
 operator|.
@@ -1120,7 +1132,7 @@ name|i
 expr_stmt|;
 break|break;
 case|case
-name|Literal
+name|LITERAL
 case|:
 if|if
 condition|(

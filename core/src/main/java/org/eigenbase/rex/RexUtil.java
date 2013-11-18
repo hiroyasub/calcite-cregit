@@ -675,9 +675,9 @@ name|node
 operator|.
 name|isA
 argument_list|(
-name|RexKind
+name|SqlKind
 operator|.
-name|Cast
+name|CAST
 argument_list|)
 condition|)
 block|{
@@ -743,9 +743,9 @@ operator|.
 name|getKind
 argument_list|()
 operator|==
-name|RexKind
+name|SqlKind
 operator|.
-name|Cast
+name|CAST
 operator|)
 operator|&&
 name|isNull
@@ -1088,10 +1088,10 @@ argument_list|()
 condition|)
 block|{
 case|case
-name|Reinterpret
+name|REINTERPRET
 case|:
 case|case
-name|IsNull
+name|IS_NULL
 case|:
 name|localCheck
 operator|=
@@ -1099,7 +1099,7 @@ literal|false
 expr_stmt|;
 break|break;
 case|case
-name|Cast
+name|CAST
 case|:
 name|RelDataType
 name|lhsType
@@ -1400,16 +1400,14 @@ name|call
 parameter_list|)
 block|{
 assert|assert
-operator|(
 name|call
 operator|.
 name|isA
 argument_list|(
-name|RexKind
+name|SqlKind
 operator|.
-name|Reinterpret
+name|REINTERPRET
 argument_list|)
-operator|)
 operator|:
 literal|"call is not a reinterpret"
 assert|;

@@ -25,6 +25,18 @@ name|*
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
+name|sql
+operator|.
+name|SqlKind
+import|;
+end_import
+
 begin_comment
 comment|/**  * Dynamic parameter reference in a row-expression.  *  * @author John V. Sichi  * @version $Id$  */
 end_comment
@@ -87,14 +99,14 @@ argument_list|)
 return|;
 block|}
 specifier|public
-name|RexKind
+name|SqlKind
 name|getKind
 parameter_list|()
 block|{
 return|return
-name|RexKind
+name|SqlKind
 operator|.
-name|DynamicParam
+name|DYNAMIC_PARAM
 return|;
 block|}
 specifier|public

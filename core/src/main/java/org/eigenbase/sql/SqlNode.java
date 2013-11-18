@@ -257,10 +257,6 @@ name|SqlNode
 index|[]
 name|clones
 init|=
-operator|(
-name|SqlNode
-index|[]
-operator|)
 name|nodes
 operator|.
 name|clone

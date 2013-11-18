@@ -1050,9 +1050,9 @@ name|e
 operator|.
 name|isA
 argument_list|(
-name|RexKind
+name|SqlKind
 operator|.
-name|Cast
+name|CAST
 argument_list|)
 condition|)
 block|{
@@ -2410,9 +2410,9 @@ operator|.
 name|getKind
 argument_list|()
 operator|!=
-name|RexKind
+name|SqlKind
 operator|.
-name|Equals
+name|EQUALS
 condition|)
 block|{
 return|return
@@ -6798,9 +6798,9 @@ name|rexPredicate
 operator|.
 name|isA
 argument_list|(
-name|RexKind
+name|SqlKind
 operator|.
-name|And
+name|AND
 argument_list|)
 condition|)
 block|{
@@ -6885,7 +6885,7 @@ argument_list|()
 condition|)
 block|{
 case|case
-name|And
+name|AND
 case|:
 for|for
 control|(
@@ -6915,7 +6915,7 @@ expr_stmt|;
 block|}
 break|break;
 case|case
-name|Not
+name|NOT
 case|:
 specifier|final
 name|RexNode
@@ -7001,9 +7001,9 @@ name|rexPredicate
 operator|.
 name|isA
 argument_list|(
-name|RexKind
+name|SqlKind
 operator|.
-name|Or
+name|OR
 argument_list|)
 condition|)
 block|{

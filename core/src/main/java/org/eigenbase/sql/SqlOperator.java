@@ -156,7 +156,7 @@ name|String
 name|name
 decl_stmt|;
 comment|/**      * See {@link SqlKind}. It's possible to have a name that doesn't match the      * kind      */
-specifier|private
+specifier|public
 specifier|final
 name|SqlKind
 name|kind

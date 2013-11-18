@@ -1494,14 +1494,14 @@ name|type
 return|;
 block|}
 specifier|public
-name|RexKind
+name|SqlKind
 name|getKind
 parameter_list|()
 block|{
 return|return
-name|RexKind
+name|SqlKind
 operator|.
-name|Literal
+name|LITERAL
 return|;
 block|}
 comment|/**      * Returns the value of this literal.      */

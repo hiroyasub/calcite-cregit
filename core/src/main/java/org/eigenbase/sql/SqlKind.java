@@ -19,6 +19,16 @@ name|java
 operator|.
 name|util
 operator|.
+name|Collection
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
 name|EnumSet
 import|;
 end_import
@@ -34,7 +44,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Enumerates the possible types of {@link SqlNode}.  *  *<p>Only commonly-used nodes have their own type; other nodes are of type  * {@link #OTHER}. Some of the values, such as {@link #SET_QUERY}, represent  * aggregates.</p>  *  * @author jhyde  * @version $Id$  * @since Dec 12, 2003  */
+comment|/**  * Enumerates the possible types of {@link SqlNode}.  *  *<p>The values are immutable, canonical constants, so you can use Kinds to  * find particular types of expressions quickly. To identity a call to a common  * operator such as '=', use {@link org.eigenbase.sql.SqlNode#isA}:  *  *<blockquote>  *<pre>exp.{@link org.eigenbase.sql.SqlNode#isA isA}({@link #EQUALS})</pre>  *</blockquote>  *  *<p>Only commonly-used nodes have their own type; other nodes are of type  * {@link #OTHER}. Some of the values, such as {@link #SET_QUERY}, represent  * aggregates.</p>  *  *<p>To identify a category of expressions, you can use  * {@link org.eigenbase.sql.SqlNode#isA} with  * an aggregate SqlKind. The following expression will return<code>true</code>  * for calls to '=' and '&gt;=', but<code>false</code> for the constant '5', or  * a call to '+':</p>  *  *<blockquote>  *<pre>exp.{@link org.eigenbase.sql.SqlNode#isA isA}({@link #COMPARISON SqlKind.Comparison})</pre>  *</blockquote>  *  * To quickly choose between a number of options, use a switch statement:  *  *<blockquote>  *<pre>switch (exp.getKind()) {  * case {@link #EQUALS}:  *     ...;  * case {@link #NOT_EQUALS}:  *     ...;  * default:  *     throw {@link org.eigenbase.util.Util#unexpected Util.unexpected}(exp.getKind());  * }</pre>  *</blockquote>  *</p>  *  * @author jhyde  * @version $Id$  * @since Dec 12, 2003  */
 end_comment
 
 begin_enum
@@ -44,10 +54,10 @@ name|SqlKind
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
 comment|// the basics
-comment|/**      * Other      */
+comment|/**      * Expression not covered by any other {@link SqlKind} value.      *      * @see #OTHER_FUNCTION      */
 name|OTHER
 block|,
-comment|/**      * SELECT statement or sub-query      */
+comment|/**      * SELECT statement or sub-query.      */
 name|SELECT
 block|,
 comment|/**      * JOIN operator or compound FROM clause.      *      *<p>A FROM clause with more than one table is represented as if it were a      * join. For example, "FROM x, y, z" is represented as "JOIN(x, JOIN(x,      * y))".</p>      */
@@ -56,7 +66,7 @@ block|,
 comment|/**      * Identifier      */
 name|IDENTIFIER
 block|,
-comment|/**      * Literal      */
+comment|/**      * A literal.      */
 name|LITERAL
 block|,
 comment|/**      * Function that is not a special function.      *      * @see #FUNCTION      */
@@ -74,10 +84,10 @@ block|,
 comment|/**      * UPDATE statement      */
 name|UPDATE
 block|,
-comment|/**      * Dynamic Param      */
+comment|/**      * A dynamic parameter.      */
 name|DYNAMIC_PARAM
 block|,
-comment|/**      * ORDER BY clause      */
+comment|/**      * ORDER BY clause.      *      * @see #DESCENDING      * @see #NULLS_FIRST      * @see #NULLS_LAST      */
 name|ORDER_BY
 block|,
 comment|/**      * Union      */
@@ -105,79 +115,79 @@ comment|/**      * TABLESAMPLE operator      */
 name|TABLESAMPLE
 block|,
 comment|// binary operators
-comment|/**      * Times      */
+comment|/**      * The arithmetic multiplication operator, "*".      */
 name|TIMES
 block|,
-comment|/**      * Divide      */
+comment|/**      * The arithmetic division operator, "/".      */
 name|DIVIDE
 block|,
-comment|/**      * Plus      */
+comment|/**      * The arithmetic plus operator, "+".      *      * @see #PLUS_PREFIX      */
 name|PLUS
 block|,
-comment|/**      * Minus      */
+comment|/**      * The arithmetic minus operator, "-".      *      * @see #MINUS_PREFIX      */
 name|MINUS
 block|,
 comment|// comparison operators
-comment|/**      * In      */
+comment|/**      * The "IN" operator.      */
 name|IN
 block|,
-comment|/**      * LessThan      */
+comment|/**      * The less-than operator, "&lt;".      */
 name|LESS_THAN
 block|,
-comment|/**      * Greater Than      */
+comment|/**      * The greater-than operator, "&gt;".      */
 name|GREATER_THAN
 block|,
-comment|/**      * Less Than Or Equal      */
+comment|/**      * The less-than-or-equal operator, "&lt;=".      */
 name|LESS_THAN_OR_EQUAL
 block|,
-comment|/**      * Greater Than Or Equal      */
+comment|/**      * The greater-than-or-equal operator, "&gt;=".      */
 name|GREATER_THAN_OR_EQUAL
 block|,
-comment|/**      * Equals      */
+comment|/**      * The equals operator, "=".      */
 name|EQUALS
 block|,
-comment|/**      * Not Equals      */
+comment|/**      * The not-equals operator, "&#33;=" or "&lt;&gt;".      */
 name|NOT_EQUALS
 block|,
-comment|/**      * Or      */
+comment|/**      * The logical "OR" operator.      */
 name|OR
 block|,
-comment|/**      * And      */
+comment|/**      * The logical "AND" operator.      */
 name|AND
 block|,
 comment|// other infix
 comment|/**      * Dot      */
 name|DOT
 block|,
-comment|/**      * Overlaps      */
+comment|/**      * The "OVERLAPS" operator.      */
 name|OVERLAPS
 block|,
-comment|/**      * Like      */
+comment|/**      * The "LIKE" operator.      */
 name|LIKE
 block|,
-comment|/**      * Similar      */
+comment|/**      * The "SIMILAR" operator.      */
 name|SIMILAR
 block|,
-comment|/**      * Between      */
+comment|/**      * The "BETWEEN" operator.      */
 name|BETWEEN
 block|,
-comment|/**      * CASE      */
+comment|/**      * A "CASE" expression.      */
 name|CASE
 block|,
 comment|// prefix operators
-comment|/**      * Not      */
+comment|/**      * The logical "NOT" operator.      */
 name|NOT
 block|,
-comment|/**      * PlusPrefix      */
+comment|/**      * The unary plus operator, as in "+1".      *      * @see #PLUS      */
 name|PLUS_PREFIX
 block|,
-comment|/**      * MinusPrefix      */
+comment|/**      * The unary minus operator, as in "-1".      *      * @see #MINUS      */
 name|MINUS_PREFIX
 block|,
-comment|/**      * Exists      */
+comment|/**      * The "EXISTS" operator.      */
 name|EXISTS
 block|,
-comment|/**      * Values      */
+comment|/**      * The "VALUES" operator.      */
 name|VALUES
 block|,
 comment|/**      * Explicit table, e.g.<code>select * from (TABLE t)</code> or<code>TABLE      * t</code>. See also {@link #COLLECTION_TABLE}.      */
@@ -202,50 +212,53 @@ block|,
 comment|/**      * NULLS LAST clause in ORDER BY. A parse tree, not a true expression.      */
 name|NULLS_LAST
 block|,
-comment|/**      * IS TRUE operator.      */
+comment|/**      * The "IS TRUE" operator.      */
 name|IS_TRUE
 block|,
-comment|/**      * IS FALSE operator.      */
+comment|/**      * The "IS FALSE" operator.      */
 name|IS_FALSE
 block|,
-comment|/**      * IS UNKNOWN operator.      */
+comment|/**      * The "IS UNKNOWN" operator.      */
 name|IS_UNKNOWN
 block|,
-comment|/**      * IS NULL operator.      */
+comment|/**      * The "IS NULL" operator.      */
 name|IS_NULL
 block|,
-comment|/**      * PRECEDING      */
+comment|/**      * The "PRECEDING" qualifier of an interval end-point in a window      * specification.      */
 name|PRECEDING
 block|,
-comment|/**      * FOLLOWING      */
+comment|/**      * The "FOLLOWING" qualifier of an interval end-point in a window      * specification.      */
 name|FOLLOWING
 block|,
+comment|/**      * The field access operator, ".". (Only used at the RexNode level; at      * SqlNode level, a field-access is part of an identifier.)      */
+name|FIELD_ACCESS
+block|,
 comment|// functions
-comment|/**      * ROW function.      */
+comment|/**      * The row-constructor function. May be explicit or implicit:      * {@code VALUES 1, ROW (2)}.      */
 name|ROW
 block|,
-comment|/**      * The non-standard constructor used to pass a      * COLUMN_LIST parameter to a UDX.      */
+comment|/**      * The non-standard constructor used to pass a      * COLUMN_LIST parameter to a user-defined transform.      */
 name|COLUMN_LIST
 block|,
-comment|/**      * CAST operator.      */
+comment|/**      * The "CAST" operator.      */
 name|CAST
 block|,
-comment|/**      * TRIM function.      */
+comment|/**      * The "TRIM" function.      */
 name|TRIM
 block|,
 comment|/**      * Call to a function using JDBC function syntax.      */
 name|JDBC_FN
 block|,
-comment|/**      * Multiset Value Constructor.      */
+comment|/**      * The MULTISET value constructor.      */
 name|MULTISET_VALUE_CONSTRUCTOR
 block|,
-comment|/**      * Multiset Query Constructor.      */
+comment|/**      * The MULTISET query constructor.      */
 name|MULTISET_QUERY_CONSTRUCTOR
 block|,
-comment|/**      * Unnest      */
+comment|/**      * The "UNNEST" operator.      */
 name|UNNEST
 block|,
-comment|/**      * Lateral      */
+comment|/**      * The "LATERAL" qualifier to relations in the FROM clause.      */
 name|LATERAL
 block|,
 comment|/**      * Table operator which converts user-defined transform into a relation, for      * example,<code>select * from TABLE(udx(x, y, z))</code>. See also the      * {@link #EXPLICIT_TABLE} prefix operator.      */
@@ -267,13 +280,13 @@ comment|/**      * CURSOR constructor, for example,<code>select * from      * TA
 name|CURSOR
 block|,
 comment|// internal operators (evaluated in validator) 200-299
-comment|/**      * LiteralChain operator (for composite string literals)      */
+comment|/**      * Literal chain operator (for composite string literals).      * An internal operator that does not appear in SQL syntax.      */
 name|LITERAL_CHAIN
 block|,
-comment|/**      * Escape operator (always part of LIKE or SIMILAR TO expression)      */
+comment|/**      * Escape operator (always part of LIKE or SIMILAR TO expression).      * An internal operator that does not appear in SQL syntax.      */
 name|ESCAPE
 block|,
-comment|/**      * Reinterpret operator (a reinterpret cast)      */
+comment|/**      * The internal REINTERPRET operator (meaning a reinterpret cast).      * An internal operator that does not appear in SQL syntax.      */
 name|REINTERPRET
 block|;
 comment|//~ Static fields/initializers ---------------------------------------------
@@ -435,7 +448,7 @@ name|DML
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Category consisting of regular and special functions.      *      *<p>Consists of regular functions {@link #OTHER_FUNCTION} and specical      * functions {@link #ROW}, {@link #TRIM}, {@link #CAST}, {@link #JDBC_FN}.      */
+comment|/**      * Category consisting of regular and special functions.      *      *<p>Consists of regular functions {@link #OTHER_FUNCTION} and special      * functions {@link #ROW}, {@link #TRIM}, {@link #CAST}, {@link #JDBC_FN}.      */
 specifier|public
 specifier|static
 specifier|final
@@ -489,13 +502,13 @@ argument_list|,
 name|LESS_THAN_OR_EQUAL
 argument_list|)
 decl_stmt|;
-comment|/**      * Returns whether this {@code SqlKind} belongs to a given category.      *      *<p>A category is a collection of kinds, not necessarily disjoint. For      * example, QUERY is { SELECT, UNION, INTERSECT, EXCEPT, VALUES, ORDER_BY,      * EXPLICIT_TABLE }.      *      * @param category Category      * @return Whether this kind belongs to the given cateogry      */
+comment|/**      * Returns whether this {@code SqlKind} belongs to a given category.      *      *<p>A category is a collection of kinds, not necessarily disjoint. For      * example, QUERY is { SELECT, UNION, INTERSECT, EXCEPT, VALUES, ORDER_BY,      * EXPLICIT_TABLE }.      *      * @param category Category      * @return Whether this kind belongs to the given category      */
 specifier|public
 specifier|final
 name|boolean
 name|belongsTo
 parameter_list|(
-name|Set
+name|Collection
 argument_list|<
 name|SqlKind
 argument_list|>

@@ -1810,9 +1810,9 @@ operator|.
 name|getKind
 argument_list|()
 operator|==
-name|RexKind
+name|SqlKind
 operator|.
-name|Cast
+name|CAST
 condition|)
 block|{
 return|return

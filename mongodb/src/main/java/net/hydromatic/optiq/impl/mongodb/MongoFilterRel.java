@@ -723,7 +723,7 @@ argument_list|()
 condition|)
 block|{
 case|case
-name|Equals
+name|EQUALS
 case|:
 return|return
 name|translateOp
@@ -742,7 +742,7 @@ argument_list|()
 argument_list|)
 return|;
 case|case
-name|LessThan
+name|LESS_THAN
 case|:
 return|return
 name|translateOp
@@ -761,7 +761,7 @@ argument_list|()
 argument_list|)
 return|;
 case|case
-name|LessThanOrEqual
+name|LESS_THAN_OR_EQUAL
 case|:
 return|return
 name|translateOp
@@ -780,7 +780,7 @@ argument_list|()
 argument_list|)
 return|;
 case|case
-name|NotEquals
+name|NOT_EQUALS
 case|:
 return|return
 name|translateOp
@@ -799,7 +799,7 @@ argument_list|()
 argument_list|)
 return|;
 case|case
-name|GreaterThan
+name|GREATER_THAN
 case|:
 return|return
 name|translateOp
@@ -818,7 +818,7 @@ argument_list|()
 argument_list|)
 return|;
 case|case
-name|GreaterThanOrEqual
+name|GREATER_THAN_OR_EQUAL
 case|:
 return|return
 name|translateOp
