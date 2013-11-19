@@ -265,6 +265,10 @@ argument_list|>
 argument_list|>
 name|fieldOrigins
 decl_stmt|;
+specifier|protected
+name|RelDataType
+name|parameterRowType
+decl_stmt|;
 specifier|public
 specifier|static
 name|boolean
@@ -303,6 +307,9 @@ name|createPreparedExplanation
 parameter_list|(
 name|RelDataType
 name|resultType
+parameter_list|,
+name|RelDataType
+name|parameterRowType
 parameter_list|,
 name|RelNode
 name|rootRel
@@ -723,6 +730,15 @@ operator|.
 name|getFieldCount
 argument_list|()
 assert|;
+name|parameterRowType
+operator|=
+name|validator
+operator|.
+name|getParameterRowType
+argument_list|(
+name|sqlQuery
+argument_list|)
+expr_stmt|;
 comment|// Display logical plans before view expansion, plugging in physical
 comment|// storage and decorrelation
 if|if
@@ -771,6 +787,8 @@ name|createPreparedExplanation
 argument_list|(
 name|resultType
 argument_list|,
+name|parameterRowType
+argument_list|,
 literal|null
 argument_list|,
 name|explainAsXml
@@ -785,6 +803,8 @@ return|return
 name|createPreparedExplanation
 argument_list|(
 literal|null
+argument_list|,
+name|parameterRowType
 argument_list|,
 name|rootRel
 argument_list|,
@@ -886,6 +906,8 @@ return|return
 name|createPreparedExplanation
 argument_list|(
 literal|null
+argument_list|,
+name|parameterRowType
 argument_list|,
 name|rootRel
 argument_list|,
@@ -1221,6 +1243,11 @@ name|rowType
 decl_stmt|;
 specifier|private
 specifier|final
+name|RelDataType
+name|parameterRowType
+decl_stmt|;
+specifier|private
+specifier|final
 name|RelNode
 name|rel
 decl_stmt|;
@@ -1240,6 +1267,9 @@ parameter_list|(
 name|RelDataType
 name|rowType
 parameter_list|,
+name|RelDataType
+name|parameterRowType
+parameter_list|,
 name|RelNode
 name|rel
 parameter_list|,
@@ -1255,6 +1285,12 @@ operator|.
 name|rowType
 operator|=
 name|rowType
+expr_stmt|;
+name|this
+operator|.
+name|parameterRowType
+operator|=
+name|parameterRowType
 expr_stmt|;
 name|this
 operator|.
@@ -1313,6 +1349,15 @@ name|detailLevel
 argument_list|)
 return|;
 block|}
+block|}
+specifier|public
+name|RelDataType
+name|getParameterRowType
+parameter_list|()
+block|{
+return|return
+name|parameterRowType
+return|;
 block|}
 specifier|public
 name|boolean
@@ -1413,6 +1458,11 @@ argument_list|>
 name|getFieldOrigins
 parameter_list|()
 function_decl|;
+comment|/**      * Returns a record type whose fields are the parameters of this statement.      */
+name|RelDataType
+name|getParameterRowType
+parameter_list|()
+function_decl|;
 comment|/**      * Executes the prepared result.      *      * @return producer of rows resulting from execution      */
 name|Bindable
 name|getBindable
@@ -1434,6 +1484,11 @@ specifier|protected
 specifier|final
 name|RelNode
 name|rootRel
+decl_stmt|;
+specifier|protected
+specifier|final
+name|RelDataType
+name|parameterRowType
 decl_stmt|;
 specifier|protected
 specifier|final
@@ -1469,6 +1524,9 @@ parameter_list|(
 name|RelDataType
 name|rowType
 parameter_list|,
+name|RelDataType
+name|parameterRowType
+parameter_list|,
 name|List
 argument_list|<
 name|List
@@ -1490,11 +1548,37 @@ name|boolean
 name|isDml
 parameter_list|)
 block|{
+assert|assert
+name|rowType
+operator|!=
+literal|null
+assert|;
+assert|assert
+name|parameterRowType
+operator|!=
+literal|null
+assert|;
+assert|assert
+name|fieldOrigins
+operator|!=
+literal|null
+assert|;
+assert|assert
+name|rootRel
+operator|!=
+literal|null
+assert|;
 name|this
 operator|.
 name|rowType
 operator|=
 name|rowType
+expr_stmt|;
+name|this
+operator|.
+name|parameterRowType
+operator|=
+name|parameterRowType
 expr_stmt|;
 name|this
 operator|.
@@ -1554,6 +1638,15 @@ parameter_list|()
 block|{
 return|return
 name|fieldOrigins
+return|;
+block|}
+specifier|public
+name|RelDataType
+name|getParameterRowType
+parameter_list|()
+block|{
+return|return
+name|parameterRowType
 return|;
 block|}
 comment|/**      * Returns the physical row type of this prepared statement. May not be      * identical to the row type returned by the validator; for example, the      * field names may have been made unique.      */

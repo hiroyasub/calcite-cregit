@@ -585,6 +585,14 @@ name|SqlNode
 name|sqlQuery
 parameter_list|)
 function_decl|;
+comment|/**      * Returns a record type that contains the name and type of each parameter.      * Returns a record type with no fields if there are no parameters.      *      * @param sqlQuery Query      * @return Record type      */
+name|RelDataType
+name|getParameterRowType
+parameter_list|(
+name|SqlNode
+name|sqlQuery
+parameter_list|)
+function_decl|;
 comment|/**      * Returns the scope of an OVER or VALUES node.      *      * @param node Node      * @return Scope      */
 name|SqlValidatorScope
 name|getOverScope

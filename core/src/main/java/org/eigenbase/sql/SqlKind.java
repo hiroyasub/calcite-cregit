@@ -230,8 +230,14 @@ block|,
 comment|/**      * The "FOLLOWING" qualifier of an interval end-point in a window      * specification.      */
 name|FOLLOWING
 block|,
-comment|/**      * The field access operator, ".". (Only used at the RexNode level; at      * SqlNode level, a field-access is part of an identifier.)      */
+comment|/**      * The field access operator, ".".      *      *<p>(Only used at the RexNode level; at      * SqlNode level, a field-access is part of an identifier.)</p>      */
 name|FIELD_ACCESS
+block|,
+comment|/**      * Reference to an input field.      *      *<p>(Only used at the RexNode level.)</p>      */
+name|INPUT_REF
+block|,
+comment|/**      * Reference to a sub-expression computed within the current relational      * operator.      *      *<p>(Only used at the RexNode level.)</p>      */
+name|LOCAL_REF
 block|,
 comment|// functions
 comment|/**      * The row-constructor function. May be explicit or implicit:      * {@code VALUES 1, ROW (2)}.      */

@@ -1493,6 +1493,8 @@ return|return
 name|type
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlKind
 name|getKind
