@@ -9,9 +9,7 @@ name|net
 operator|.
 name|hydromatic
 operator|.
-name|optiq
-operator|.
-name|runtime
+name|avatica
 package|;
 end_package
 

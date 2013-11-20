@@ -21,6 +21,18 @@ name|net
 operator|.
 name|hydromatic
 operator|.
+name|avatica
+operator|.
+name|*
+import|;
+end_import
+
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
 name|linq4j
 operator|.
 name|*
@@ -918,7 +930,7 @@ block|}
 block|}
 return|;
 block|}
-comment|/** Tests {@link Handler#onConnectionClose}    * and  {@link Handler#onStatementClose}. */
+comment|/** Tests {@link net.hydromatic.avatica.Handler#onConnectionClose}    * and  {@link net.hydromatic.avatica.Handler#onStatementClose}. */
 annotation|@
 name|Test
 specifier|public
@@ -962,7 +974,7 @@ specifier|public
 name|void
 name|onConnectionClose
 parameter_list|(
-name|OptiqConnection
+name|AvaticaConnection
 name|connection
 parameter_list|)
 block|{
@@ -984,7 +996,7 @@ specifier|public
 name|void
 name|onStatementClose
 parameter_list|(
-name|OptiqStatement
+name|AvaticaStatement
 name|statement
 parameter_list|)
 block|{
@@ -2129,7 +2141,7 @@ name|close
 argument_list|()
 expr_stmt|;
 block|}
-comment|/** Unit test for {@link Meta#likeToRegex(String)}. */
+comment|/** Unit test for    * {@link net.hydromatic.optiq.jdbc.MetaImpl#likeToRegex(net.hydromatic.avatica.Meta.Pat)}. */
 annotation|@
 name|Test
 specifier|public
@@ -2308,11 +2320,18 @@ name|assertTrue
 argument_list|(
 name|b
 operator|==
-name|Meta
+name|MetaImpl
 operator|.
 name|likeToRegex
 argument_list|(
+name|Meta
+operator|.
+name|Pat
+operator|.
+name|of
+argument_list|(
 name|pattern
+argument_list|)
 argument_list|)
 operator|.
 name|matcher
@@ -4388,7 +4407,7 @@ literal|"+-------+---------------------+-----+------+------------+\n"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Tests ORDER BY with no options. Nulls come last.    *    * @see net.hydromatic.optiq.jdbc.OptiqDatabaseMetaData#nullsAreSortedAtEnd()    */
+comment|/** Tests ORDER BY with no options. Nulls come last.    *    * @see net.hydromatic.avatica.AvaticaDatabaseMetaData#nullsAreSortedAtEnd()    */
 annotation|@
 name|Test
 specifier|public
@@ -6561,7 +6580,7 @@ block|}
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Tests saving query results into temporary tables, per    * {@link net.hydromatic.optiq.jdbc.Handler.ResultSink}. */
+comment|/** Tests saving query results into temporary tables, per    * {@link net.hydromatic.avatica.Handler.ResultSink}. */
 annotation|@
 name|Test
 specifier|public
@@ -9277,7 +9296,7 @@ specifier|public
 name|void
 name|onStatementExecute
 parameter_list|(
-name|OptiqStatement
+name|AvaticaStatement
 name|statement
 parameter_list|,
 name|ResultSink

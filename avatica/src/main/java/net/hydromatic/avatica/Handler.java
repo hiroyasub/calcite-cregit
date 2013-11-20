@@ -9,9 +9,7 @@ name|net
 operator|.
 name|hydromatic
 operator|.
-name|optiq
-operator|.
-name|jdbc
+name|avatica
 package|;
 end_package
 
@@ -34,31 +32,31 @@ specifier|public
 interface|interface
 name|Handler
 block|{
-comment|/** Called by Optiq server when a connection is being created.    *    *<p>If the implementation of this method throws, the connection    * will not be created.</p>    *    * @param connection Connection    * @throws SQLException on error    */
+comment|/** Called by container when a connection is being created.    *    *<p>If the implementation of this method throws, the connection    * will not be created.</p>    *    * @param connection Connection    * @throws SQLException on error    */
 name|void
 name|onConnectionInit
 parameter_list|(
-name|OptiqConnection
+name|AvaticaConnection
 name|connection
 parameter_list|)
 throws|throws
 name|SQLException
 function_decl|;
-comment|/** Called by Optiq server when a connection is being closed.    *    *<p>If the implementation of this method throws, the call to    * {@link java.sql.Connection#close} that triggered this method will throw an    * exception, but the connection will still be marked closed.</p>    *    * @param connection Connection    */
+comment|/** Called by container when a connection is being closed.    *    *<p>If the implementation of this method throws, the call to    * {@link java.sql.Connection#close} that triggered this method will throw an    * exception, but the connection will still be marked closed.</p>    *    * @param connection Connection    */
 name|void
 name|onConnectionClose
 parameter_list|(
-name|OptiqConnection
+name|AvaticaConnection
 name|connection
 parameter_list|)
 throws|throws
 name|RuntimeException
 function_decl|;
-comment|/** Called by Optiq server when a statement is being executed.    *    *<p>If the session would like the statement results stored in a temporary    * table, {@code resultSink} is not null.    * The provider must call its {@link ResultSink#toBeCompleted}    * method at some point during execution (not necessarily before the call to    * this method returns).</p>    *    * @param statement Statement    * @param resultSink Place to put result of query. Null if Optiq does not    *                   want results stored to a temporary table    * @throws RuntimeException on error    */
+comment|/** Called by container when a statement is being executed.    *    *<p>If the session would like the statement results stored in a temporary    * table, {@code resultSink} is not null.    * The provider must call its {@link ResultSink#toBeCompleted}    * method at some point during execution (not necessarily before the call to    * this method returns).</p>    *    * @param statement Statement    * @param resultSink Place to put result of query. Null if container does not    *                   want results stored to a temporary table    * @throws RuntimeException on error    */
 name|void
 name|onStatementExecute
 parameter_list|(
-name|OptiqStatement
+name|AvaticaStatement
 name|statement
 parameter_list|,
 name|ResultSink
@@ -67,11 +65,11 @@ parameter_list|)
 throws|throws
 name|RuntimeException
 function_decl|;
-comment|/** Called by Optiq server when a statement is being closed.    *    *<p>This method is called after marking the statement closed, and after    * closing any open {@link java.sql.ResultSet} objects.</p>    *    *<p>If the implementation of this method throws, the call to    * {@link java.sql.Statement#close} that triggered this method will throw an    * exception, but the statement will still be marked closed.    *    * @param statement Statement    * @throws RuntimeException on error    */
+comment|/** Called by container when a statement is being closed.    *    *<p>This method is called after marking the statement closed, and after    * closing any open {@link java.sql.ResultSet} objects.</p>    *    *<p>If the implementation of this method throws, the call to    * {@link java.sql.Statement#close} that triggered this method will throw an    * exception, but the statement will still be marked closed.    *    * @param statement Statement    * @throws RuntimeException on error    */
 name|void
 name|onStatementClose
 parameter_list|(
-name|OptiqStatement
+name|AvaticaStatement
 name|statement
 parameter_list|)
 throws|throws

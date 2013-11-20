@@ -5,11 +5,11 @@ end_comment
 
 begin_package
 package|package
-name|org
+name|net
 operator|.
-name|eigenbase
+name|hydromatic
 operator|.
-name|util14
+name|avatica
 package|;
 end_package
 
@@ -43,20 +43,8 @@ name|Properties
 import|;
 end_import
 
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
-name|util
-operator|.
-name|Util
-import|;
-end_import
-
 begin_comment
-comment|/**  * ConnectStringParser is a utility class that parses or creates a JDBC connect  * string according to the OLE DB connect string syntax described at<a  * href="http://msdn.microsoft.com/library/default.asp?url=/library/en-us/oledb/htm/oledbconnectionstringsyntax.asp">  * OLE DB Connection String Syntax</a>.  *  *<p>This code was adapted from Mondrian's mondrian.olap.Util class.  * The primary differences between this and its Mondrian progenitor are:  *  *<ul>  *<li>use of regular {@link Properties} for compatibility with the JDBC API  * (replaces Mondrian's use of its own order-preserving and case-insensitive  * PropertyList, found in Util.java at link above)</li>  *<li>ability to pass to {@link #parse} a pre-existing Properties object into  * which properties are to be parsed, possibly overriding prior values</li>  *<li>use of {@link SQLException}s rather than unchecked {@link  * RuntimeException}s</li>  *<li>static members for parsing and creating connect strings</li>  *</ul>  *  *<p>ConnectStringParser has a private constructor. Callers use the static  * members:  *  *<dl>  *<dt>{@link #parse(String)}</dt>  *<dd>Parses the connect string into a new Properties object.</dd>  *  *<dt>{@link #parse(String, Properties)}</dt>  *<dd>Parses the connect string into an existing Properties object.</dd>  *  *<dt>{@link #getParamString(Properties)}</dt>  *<dd>Returns a param string, quoted and escaped as needed, to represent the  * supplied name-value pairs.</dd>  *</dl>  *  * @author adapted by Steve Herskovitz from Mondrian  * @version $Id$  * @since Apr 03, 2006  */
+comment|/**  * ConnectStringParser is a utility class that parses or creates a JDBC connect  * string according to the OLE DB connect string syntax described at<a  * href="http://msdn.microsoft.com/library/default.asp?url=/library/en-us/oledb/htm/oledbconnectionstringsyntax.asp">  * OLE DB Connection String Syntax</a>.  *  *<p>This code was adapted from Mondrian's mondrian.olap.Util class.  * The primary differences between this and its Mondrian progenitor are:  *  *<ul>  *<li>use of regular {@link Properties} for compatibility with the JDBC API  * (replaces Mondrian's use of its own order-preserving and case-insensitive  * PropertyList, found in Util.java at link above)</li>  *<li>ability to pass to {@link #parse} a pre-existing Properties object into  * which properties are to be parsed, possibly overriding prior values</li>  *<li>use of {@link SQLException}s rather than unchecked {@link  * RuntimeException}s</li>  *<li>static members for parsing and creating connect strings</li>  *</ul>  *  *<p>ConnectStringParser has a private constructor. Callers use the static  * members:  *  *<dl>  *<dt>{@link #parse(String)}</dt>  *<dd>Parses the connect string into a new Properties object.</dd>  *  *<dt>{@link #parse(String, Properties)}</dt>  *<dd>Parses the connect string into an existing Properties object.</dd>  *  *<dt>{@link #getParamString(Properties)}</dt>  *<dd>Returns a param string, quoted and escaped as needed, to represent the  * supplied name-value pairs.</dd>  *</dl>  */
 end_comment
 
 begin_class
@@ -98,7 +86,7 @@ name|StringBuilder
 argument_list|()
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a new connect string parser.      *      * @param s connect string to parse      *      * @see #parse(String)      * @see #parse(String, Properties)      */
+comment|/**    * Creates a new connect string parser.    *    * @param s connect string to parse    *    * @see #parse(String)    * @see #parse(String, Properties)    */
 specifier|private
 name|ConnectStringParser
 parameter_list|(
@@ -129,7 +117,7 @@ argument_list|()
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Parses the connect string into a new Properties object.      *      * @param s connect string to parse      *      * @return properties object with parsed params      *      * @throws SQLException error parsing name-value pairs      */
+comment|/**    * Parses the connect string into a new Properties object.    *    * @param s connect string to parse    *    * @return properties object with parsed params    *    * @throws SQLException error parsing name-value pairs    */
 specifier|public
 specifier|static
 name|Properties
@@ -154,7 +142,7 @@ literal|null
 argument_list|)
 return|;
 block|}
-comment|/**      * Parses the connect string into an existing Properties object.      *      * @param s connect string to parse      * @param props optional properties object, may be<code>null</code>      *      * @return properties object with parsed params; if an input<code>      * props</code> was supplied, any duplicate properties will have been      * replaced by those from the connect string.      *      * @throws SQLException error parsing name-value pairs      */
+comment|/**    * Parses the connect string into an existing Properties object.    *    * @param s connect string to parse    * @param props optional properties object, may be<code>null</code>    *    * @return properties object with parsed params; if an input<code>    * props</code> was supplied, any duplicate properties will have been    * replaced by those from the connect string.    *    * @throws SQLException error parsing name-value pairs    */
 specifier|public
 specifier|static
 name|Properties
@@ -182,7 +170,7 @@ name|props
 argument_list|)
 return|;
 block|}
-comment|/**      * Parses the connect string into a Properties object. Note that the string      * can only be parsed once. Subsequent calls return empty/unchanged      * Properties.      *      * @param props optional properties object, may be<code>null</code>      *      * @return properties object with parsed params; if an input<code>      * props</code> was supplied, any duplicate properties will have been      * replaced by those from the connect string.      *      * @throws SQLException error parsing name-value pairs      */
+comment|/**    * Parses the connect string into a Properties object. Note that the string    * can only be parsed once. Subsequent calls return empty/unchanged    * Properties.    *    * @param props optional properties object, may be<code>null</code>    *    * @return properties object with parsed params; if an input<code>    * props</code> was supplied, any duplicate properties will have been    * replaced by those from the connect string.    *    * @throws SQLException error parsing name-value pairs    */
 name|Properties
 name|parse_
 parameter_list|(
@@ -223,7 +211,7 @@ return|return
 name|props
 return|;
 block|}
-comment|/**      * Reads "name=value;" or "name=value<EOF>".      *      * @throws SQLException error parsing value      */
+comment|/**    * Reads "name=value;" or "name=value<EOF>".    *    * @throws SQLException error parsing value    */
 name|void
 name|parsePair
 parameter_list|(
@@ -292,7 +280,7 @@ name|value
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Reads "name=". Name can contain equals sign if equals sign is doubled.      */
+comment|/**    * Reads "name=". Name can contain equals sign if equals sign is doubled.    */
 name|String
 name|parseName
 parameter_list|()
@@ -439,7 +427,7 @@ block|}
 block|}
 block|}
 block|}
-comment|/**      * Reads "value;" or "value<EOF>"      *      * @throws SQLException if find an unterminated quoted value      */
+comment|/**    * Reads "value;" or "value<EOF>"    *    * @throws SQLException if find an unterminated quoted value    */
 name|String
 name|parseValue
 parameter_list|()
@@ -648,7 +636,7 @@ argument_list|()
 return|;
 block|}
 block|}
-comment|/**      * Reads a string quoted by a given character. Occurrences of the quoting      * character must be doubled. For example,<code>parseQuoted('"')</code>      * reads<code>"a ""new"" string"</code> and returns<code>a "new"      * string</code>.      *      * @throws SQLException if find an unterminated quoted value      */
+comment|/**    * Reads a string quoted by a given character. Occurrences of the quoting    * character must be doubled. For example,<code>parseQuoted('"')</code>    * reads<code>"a ""new"" string"</code> and returns<code>a "new"    * string</code>.    *    * @throws SQLException if find an unterminated quoted value    */
 name|String
 name|parseQuoted
 parameter_list|(
@@ -799,7 +787,7 @@ literal|"'"
 argument_list|)
 throw|;
 block|}
-comment|/**      * Returns a param string, quoted and escaped as needed, to represent the      * supplied name-value pairs.      *      * @param props name-value pairs      *      * @return param string, never<code>null</code>      */
+comment|/**    * Returns a param string, quoted and escaped as needed, to represent the    * supplied name-value pairs.    *    * @param props name-value pairs    *    * @return param string, never<code>null</code>    */
 specifier|public
 specifier|static
 name|String
@@ -839,8 +827,6 @@ name|String
 argument_list|>
 name|entry
 range|:
-name|Util
-operator|.
 name|toMap
 argument_list|(
 name|props
@@ -1213,6 +1199,29 @@ name|buf
 operator|.
 name|toString
 argument_list|()
+return|;
+block|}
+comment|/**    * Converts a {@link Properties} object to a<code>{@link Map}&lt;String,    * String&gt;</code>.    *    *<p>This is necessary because {@link Properties} is a dinosaur class. It    * ought to extend<code>Map&lt;String,String&gt;</code>, but instead    * extends<code>{@link java.util.Hashtable}&lt;Object,Object&gt;</code>.    *    *<p>Typical usage, to iterate over a {@link Properties}:    *    *<blockquote>    *<code>    * Properties properties;<br/>    * for (Map.Entry&lt;String, String&gt; entry =    * Util.toMap(properties).entrySet()) {<br/>    *   println("key=" + entry.getKey() + ", value=" + entry.getValue());<br/>    * }    *</code>    *</blockquote>    */
+specifier|public
+specifier|static
+name|Map
+argument_list|<
+name|String
+argument_list|,
+name|String
+argument_list|>
+name|toMap
+parameter_list|(
+specifier|final
+name|Properties
+name|properties
+parameter_list|)
+block|{
+return|return
+operator|(
+name|Map
+operator|)
+name|properties
 return|;
 block|}
 block|}

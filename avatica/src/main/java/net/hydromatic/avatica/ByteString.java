@@ -9,9 +9,7 @@ name|net
 operator|.
 name|hydromatic
 operator|.
-name|optiq
-operator|.
-name|runtime
+name|avatica
 package|;
 end_package
 
@@ -36,7 +34,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Collection of bytes.  *  *<p>ByteString is to bytes what {@link String} is to chars: It is immutable,  * implements equality (hashCode and equals), comparison (compareTo) and  * serialization correctly.</p>  */
+comment|/**  * Collection of bytes.  *  *<p>ByteString is to bytes what {@link String} is to chars: It is immutable,  * implements equality ({@link #hashCode} and {@link #equals}),  * comparison ({@link #compareTo}) and  * {@link Serializable serialization} correctly.</p>  */
 end_comment
 
 begin_class

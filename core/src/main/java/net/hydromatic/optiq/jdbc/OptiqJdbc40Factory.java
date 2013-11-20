@@ -11,57 +11,31 @@ name|hydromatic
 operator|.
 name|optiq
 operator|.
-name|impl
-operator|.
-name|splunk
+name|jdbc
 package|;
 end_package
 
-begin_import
-import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|avatica
-operator|.
-name|DriverVersion
-import|;
-end_import
-
 begin_comment
-comment|/**  * Version information for Optiq JDBC Driver for Splunk.  */
+comment|/**  * Implementation of {@link net.hydromatic.avatica.AvaticaFactory}  * for Optiq and JDBC 4.0 (corresponds to JDK 1.6).  */
 end_comment
 
 begin_class
+specifier|public
 class|class
-name|SplunkDriverVersion
+name|OptiqJdbc40Factory
 extends|extends
-name|DriverVersion
+name|OptiqJdbc41Factory
 block|{
-comment|/** Creates an OptiqDriverVersion. */
-name|SplunkDriverVersion
+comment|/** Creates a JDBC factory. */
+specifier|public
+name|OptiqJdbc40Factory
 parameter_list|()
 block|{
 name|super
 argument_list|(
-literal|"Optiq JDBC Driver for Splunk"
-argument_list|,
-literal|"0.2"
-argument_list|,
-literal|"Optiq-Splunk"
-argument_list|,
-literal|"0.2"
-argument_list|,
-literal|true
+literal|4
 argument_list|,
 literal|0
-argument_list|,
-literal|1
-argument_list|,
-literal|0
-argument_list|,
-literal|1
 argument_list|)
 expr_stmt|;
 block|}
@@ -69,7 +43,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End SplunkDriverVersion.java
+comment|// End OptiqJdbc40Factory.java
 end_comment
 
 end_unit

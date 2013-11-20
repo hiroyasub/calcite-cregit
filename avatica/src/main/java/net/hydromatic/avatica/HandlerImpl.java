@@ -9,9 +9,7 @@ name|net
 operator|.
 name|hydromatic
 operator|.
-name|optiq
-operator|.
-name|jdbc
+name|avatica
 package|;
 end_package
 
@@ -40,7 +38,7 @@ specifier|public
 name|void
 name|onConnectionInit
 parameter_list|(
-name|OptiqConnection
+name|AvaticaConnection
 name|connection
 parameter_list|)
 throws|throws
@@ -52,7 +50,7 @@ specifier|public
 name|void
 name|onConnectionClose
 parameter_list|(
-name|OptiqConnection
+name|AvaticaConnection
 name|connection
 parameter_list|)
 throws|throws
@@ -64,7 +62,7 @@ specifier|public
 name|void
 name|onStatementExecute
 parameter_list|(
-name|OptiqStatement
+name|AvaticaStatement
 name|statement
 parameter_list|,
 name|ResultSink
@@ -79,7 +77,7 @@ specifier|public
 name|void
 name|onStatementClose
 parameter_list|(
-name|OptiqStatement
+name|AvaticaStatement
 name|statement
 parameter_list|)
 throws|throws

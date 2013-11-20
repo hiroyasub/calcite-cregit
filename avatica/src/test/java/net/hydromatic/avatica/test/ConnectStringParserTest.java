@@ -5,13 +5,37 @@ end_comment
 
 begin_package
 package|package
-name|org
+name|net
 operator|.
-name|eigenbase
+name|hydromatic
+operator|.
+name|avatica
 operator|.
 name|test
 package|;
 end_package
+
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|avatica
+operator|.
+name|ConnectStringParser
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|Test
+import|;
+end_import
 
 begin_import
 import|import
@@ -30,28 +54,6 @@ operator|.
 name|util
 operator|.
 name|Properties
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
-name|util14
-operator|.
-name|ConnectStringParser
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|junit
-operator|.
-name|Test
 import|;
 end_import
 
@@ -76,8 +78,7 @@ specifier|public
 class|class
 name|ConnectStringParserTest
 block|{
-comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * tests simple connect string, adapted from Mondrian tests.      */
+comment|/**    * Tests simple connect string. Adapted from Mondrian tests.    */
 annotation|@
 name|Test
 specifier|public
@@ -204,7 +205,7 @@ name|synthProps
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * tests complex connect strings, adapted directly from Mondrian tests.      */
+comment|/**    * Tests complex connect strings. Adapted directly from Mondrian tests.    */
 annotation|@
 name|Test
 specifier|public
@@ -472,7 +473,7 @@ literal|"one; two \"three'four=five"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * tests for specific errors thrown by the parser.      */
+comment|/**    * Tests for specific errors thrown by the parser.    */
 annotation|@
 name|Test
 specifier|public
@@ -542,7 +543,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Tests most of the examples from the<a      * href="http://msdn.microsoft.com/library/default.asp?url=/library/en-us/oledb/htm/oledbconnectionstringsyntax.asp">      * OLE DB spec</a>. Omitted are cases for Window handles, returning multiple      * values, and special handling of "Provider" keyword.      *      * @throws Throwable      */
+comment|/**    * Tests most of the examples from the<a    * href="http://msdn.microsoft.com/library/default.asp?url=/library/en-us/oledb/htm/oledbconnectionstringsyntax.asp">    * OLE DB spec</a>. Omitted are cases for Window handles, returning multiple    * values, and special handling of "Provider" keyword.    *    * @throws Throwable    */
 annotation|@
 name|Test
 specifier|public
@@ -553,226 +554,201 @@ throws|throws
 name|Throwable
 block|{
 comment|// test the parser with examples from OLE DB documentation
-name|String
-index|[]
+name|Quad
 index|[]
 name|quads
 init|=
 block|{
 comment|// {reason for test, key, val, string to parse},
-block|{
+operator|new
+name|Quad
+argument_list|(
 literal|"printable chars"
-block|,
+argument_list|,
 literal|"Jet OLE DB:System Database"
-block|,
+argument_list|,
 literal|"c:\\system.mda"
-block|,
+argument_list|,
 literal|"Jet OLE DB:System Database=c:\\system.mda"
-block|}
+argument_list|)
 block|,
-block|{
+operator|new
+name|Quad
+argument_list|(
 literal|"key embedded semi"
-block|,
+argument_list|,
 literal|"Authentication;Info"
-block|,
+argument_list|,
 literal|"Column 5"
-block|,
+argument_list|,
 literal|"Authentication;Info=Column 5"
-block|}
+argument_list|)
 block|,
-block|{
+operator|new
+name|Quad
+argument_list|(
 literal|"key embedded equal"
-block|,
+argument_list|,
 literal|"Verification=Security"
-block|,
+argument_list|,
 literal|"True"
-block|,
+argument_list|,
 literal|"Verification==Security=True"
-block|}
+argument_list|)
 block|,
-block|{
+operator|new
+name|Quad
+argument_list|(
 literal|"key many equals"
-block|,
+argument_list|,
 literal|"Many==One"
-block|,
+argument_list|,
 literal|"Valid"
-block|,
+argument_list|,
 literal|"Many====One=Valid"
-block|}
+argument_list|)
 block|,
-block|{
+operator|new
+name|Quad
+argument_list|(
 literal|"key too many equal"
-block|,
+argument_list|,
 literal|"TooMany="
-block|,
+argument_list|,
 literal|"False"
-block|,
+argument_list|,
 literal|"TooMany===False"
-block|}
+argument_list|)
 block|,
-block|{
+operator|new
+name|Quad
+argument_list|(
 literal|"value embedded quote and semi"
-block|,
+argument_list|,
 literal|"ExtProps"
-block|,
+argument_list|,
 literal|"Data Source='localhost';Key Two='value 2'"
-block|,
+argument_list|,
 literal|"ExtProps=\"Data Source='localhost';Key Two='value 2'\""
-block|}
+argument_list|)
 block|,
-block|{
+operator|new
+name|Quad
+argument_list|(
 literal|"value embedded double quote and semi"
-block|,
+argument_list|,
 literal|"ExtProps"
-block|,
+argument_list|,
 literal|"Integrated Security=\"SSPI\";Key Two=\"value 2\""
-block|,
+argument_list|,
 literal|"ExtProps='Integrated Security=\"SSPI\";Key Two=\"value 2\"'"
-block|}
+argument_list|)
 block|,
-block|{
+operator|new
+name|Quad
+argument_list|(
 literal|"value double quoted"
-block|,
+argument_list|,
 literal|"DataSchema"
-block|,
+argument_list|,
 literal|"\"MyCustTable\""
-block|,
+argument_list|,
 literal|"DataSchema='\"MyCustTable\"'"
-block|}
+argument_list|)
 block|,
-block|{
+operator|new
+name|Quad
+argument_list|(
 literal|"value single quoted"
-block|,
+argument_list|,
 literal|"DataSchema"
-block|,
+argument_list|,
 literal|"'MyCustTable'"
-block|,
+argument_list|,
 literal|"DataSchema=\"'MyCustTable'\""
-block|}
+argument_list|)
 block|,
-block|{
+operator|new
+name|Quad
+argument_list|(
 literal|"value double quoted double trouble"
-block|,
+argument_list|,
 literal|"Caption"
-block|,
+argument_list|,
 literal|"\"Company's \"new\" customer\""
-block|,
+argument_list|,
 literal|"Caption=\"\"\"Company's \"\"new\"\" customer\"\"\""
-block|}
+argument_list|)
 block|,
-block|{
+operator|new
+name|Quad
+argument_list|(
 literal|"value single quoted double trouble"
-block|,
+argument_list|,
 literal|"Caption"
-block|,
+argument_list|,
 literal|"\"Company's \"new\" customer\""
-block|,
+argument_list|,
 literal|"Caption='\"Company''s \"new\" customer\"'"
-block|}
+argument_list|)
 block|,
-block|{
+operator|new
+name|Quad
+argument_list|(
 literal|"embedded blanks and trim"
-block|,
+argument_list|,
 literal|"My Keyword"
-block|,
+argument_list|,
 literal|"My Value"
-block|,
+argument_list|,
 literal|" My Keyword = My Value ;MyNextValue=Value"
-block|}
+argument_list|)
 block|,
-block|{
+operator|new
+name|Quad
+argument_list|(
 literal|"value single quotes preserve blanks"
-block|,
+argument_list|,
 literal|"My Keyword"
-block|,
+argument_list|,
 literal|" My Value "
-block|,
+argument_list|,
 literal|" My Keyword =' My Value ';MyNextValue=Value"
-block|}
+argument_list|)
 block|,
-block|{
+operator|new
+name|Quad
+argument_list|(
 literal|"value double quotes preserve blanks"
-block|,
+argument_list|,
 literal|"My Keyword"
-block|,
+argument_list|,
 literal|" My Value "
-block|,
+argument_list|,
 literal|" My Keyword =\" My Value \";MyNextValue=Value"
-block|}
+argument_list|)
 block|,
-block|{
+operator|new
+name|Quad
+argument_list|(
 literal|"last redundant key wins"
-block|,
+argument_list|,
 literal|"SomeKey"
-block|,
+argument_list|,
 literal|"NextValue"
-block|,
+argument_list|,
 literal|"SomeKey=FirstValue;SomeKey=NextValue"
-block|}
-block|,         }
+argument_list|)
+block|,     }
 decl_stmt|;
 for|for
 control|(
-name|int
-name|i
-init|=
-literal|0
-init|;
-name|i
-operator|<
+name|Quad
+name|quad
+range|:
 name|quads
-operator|.
-name|length
-condition|;
-operator|++
-name|i
 control|)
 block|{
-name|String
-name|why
-init|=
-name|quads
-index|[
-name|i
-index|]
-index|[
-literal|0
-index|]
-decl_stmt|;
-name|String
-name|key
-init|=
-name|quads
-index|[
-name|i
-index|]
-index|[
-literal|1
-index|]
-decl_stmt|;
-name|String
-name|val
-init|=
-name|quads
-index|[
-name|i
-index|]
-index|[
-literal|2
-index|]
-decl_stmt|;
-name|String
-name|str
-init|=
-name|quads
-index|[
-name|i
-index|]
-index|[
-literal|3
-index|]
-decl_stmt|;
-comment|//            tracer.info("parse: " +str);
 name|Properties
 name|props
 init|=
@@ -780,20 +756,27 @@ name|ConnectStringParser
 operator|.
 name|parse
 argument_list|(
+name|quad
+operator|.
 name|str
 argument_list|)
 decl_stmt|;
-comment|//            tracer.info("props: " +toStringProperties(props));
 name|assertEquals
 argument_list|(
+name|quad
+operator|.
 name|why
 argument_list|,
+name|quad
+operator|.
 name|val
 argument_list|,
 name|props
 operator|.
 name|get
 argument_list|(
+name|quad
+operator|.
 name|key
 argument_list|)
 argument_list|)
@@ -808,15 +791,18 @@ argument_list|(
 name|props
 argument_list|)
 decl_stmt|;
-comment|//            tracer.info("synth: " +synth);
 try|try
 block|{
 name|assertEquals
 argument_list|(
 literal|"reversible "
 operator|+
+name|quad
+operator|.
 name|why
 argument_list|,
+name|quad
+operator|.
 name|str
 argument_list|,
 name|synth
@@ -846,6 +832,8 @@ name|assertEquals
 argument_list|(
 literal|"equivalent "
 operator|+
+name|quad
+operator|.
 name|why
 argument_list|,
 name|props
@@ -915,6 +903,71 @@ name|expectedPattern
 operator|+
 literal|"'"
 argument_list|)
+expr_stmt|;
+block|}
+block|}
+specifier|static
+class|class
+name|Quad
+block|{
+specifier|private
+specifier|final
+name|String
+name|why
+decl_stmt|;
+specifier|private
+specifier|final
+name|String
+name|key
+decl_stmt|;
+specifier|private
+specifier|final
+name|String
+name|val
+decl_stmt|;
+specifier|private
+specifier|final
+name|String
+name|str
+decl_stmt|;
+name|Quad
+parameter_list|(
+name|String
+name|why
+parameter_list|,
+name|String
+name|key
+parameter_list|,
+name|String
+name|val
+parameter_list|,
+name|String
+name|str
+parameter_list|)
+block|{
+name|this
+operator|.
+name|why
+operator|=
+name|why
+expr_stmt|;
+name|this
+operator|.
+name|key
+operator|=
+name|key
+expr_stmt|;
+name|this
+operator|.
+name|val
+operator|=
+name|val
+expr_stmt|;
+name|this
+operator|.
+name|str
+operator|=
+name|str
 expr_stmt|;
 block|}
 block|}

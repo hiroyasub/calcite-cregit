@@ -9,25 +9,9 @@ name|net
 operator|.
 name|hydromatic
 operator|.
-name|optiq
-operator|.
-name|jdbc
+name|avatica
 package|;
 end_package
-
-begin_import
-import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|optiq
-operator|.
-name|runtime
-operator|.
-name|ColumnMetaData
-import|;
-end_import
 
 begin_import
 import|import
@@ -60,17 +44,18 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Implementation of {@link ResultSetMetaData}  * for the Optiq engine.  */
+comment|/**  * Implementation of {@link ResultSetMetaData}  * for the Avatica framework.  */
 end_comment
 
 begin_class
+specifier|public
 class|class
-name|OptiqResultSetMetaData
+name|AvaticaResultSetMetaData
 implements|implements
 name|ResultSetMetaData
 block|{
 specifier|final
-name|OptiqStatement
+name|AvaticaStatement
 name|statement
 decl_stmt|;
 specifier|final
@@ -84,9 +69,10 @@ name|ColumnMetaData
 argument_list|>
 name|columnMetaDataList
 decl_stmt|;
-name|OptiqResultSetMetaData
+specifier|public
+name|AvaticaResultSetMetaData
 parameter_list|(
-name|OptiqStatement
+name|AvaticaStatement
 name|statement
 parameter_list|,
 name|Object
@@ -611,7 +597,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End OptiqResultSetMetaData.java
+comment|// End AvaticaResultSetMetaData.java
 end_comment
 
 end_unit

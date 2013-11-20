@@ -250,10 +250,6 @@ name|OptionsListTest
 operator|.
 name|class
 block|,
-name|ConnectStringParserTest
-operator|.
-name|class
-block|,
 name|PermutationTestCase
 operator|.
 name|class

@@ -11,65 +11,44 @@ name|hydromatic
 operator|.
 name|optiq
 operator|.
-name|impl
-operator|.
-name|splunk
+name|jdbc
 package|;
 end_package
 
-begin_import
-import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|avatica
-operator|.
-name|DriverVersion
-import|;
-end_import
-
 begin_comment
-comment|/**  * Version information for Optiq JDBC Driver for Splunk.  */
+comment|/** Interface for reading connection properties within Optiq code. There is  * a method for every property. At some point there will be similar config  * classes for system and statement properties. */
 end_comment
 
-begin_class
-class|class
-name|SplunkDriverVersion
-extends|extends
-name|DriverVersion
+begin_interface
+specifier|public
+interface|interface
+name|ConnectionConfig
 block|{
-comment|/** Creates an OptiqDriverVersion. */
-name|SplunkDriverVersion
+name|boolean
+name|autoTemp
 parameter_list|()
-block|{
-name|super
-argument_list|(
-literal|"Optiq JDBC Driver for Splunk"
-argument_list|,
-literal|"0.2"
-argument_list|,
-literal|"Optiq-Splunk"
-argument_list|,
-literal|"0.2"
-argument_list|,
-literal|true
-argument_list|,
-literal|0
-argument_list|,
-literal|1
-argument_list|,
-literal|0
-argument_list|,
-literal|1
-argument_list|)
-expr_stmt|;
+function_decl|;
+name|boolean
+name|materializationsEnabled
+parameter_list|()
+function_decl|;
+name|String
+name|model
+parameter_list|()
+function_decl|;
+name|String
+name|schema
+parameter_list|()
+function_decl|;
+name|boolean
+name|spark
+parameter_list|()
+function_decl|;
 block|}
-block|}
-end_class
+end_interface
 
 begin_comment
-comment|// End SplunkDriverVersion.java
+comment|// End ConnectionConfig.java
 end_comment
 
 end_unit

@@ -9,9 +9,7 @@ name|net
 operator|.
 name|hydromatic
 operator|.
-name|optiq
-operator|.
-name|jdbc
+name|avatica
 package|;
 end_package
 
@@ -46,7 +44,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Driver version information.  *  *<p>Each driver implementation must provide an instance of this class, in  * order to implement {@link Driver#createDriverVersion()}.</p>  *  *<p>There are two typical ways for a driver to instantiate its version  * information:</p>  *  *<ul>  *  *<li>A driver might create a subclass in a with a constructor that provides  * all of the arguments for the base class. The instance is held in a separate  * file, so that that version information can be generated.</li>  *  *<li>A driver might store the version information in a .properties file and  * load it using {@link #load}.</li>  *  *</ul>  */
+comment|/**  * Driver version information.  *  *<p>Each driver implementation must provide an instance of this class, in  * order to implement {@link UnregisteredDriver#createDriverVersion()}.</p>  *  *<p>There are two typical ways for a driver to instantiate its version  * information:</p>  *  *<ul>  *  *<li>A driver might create a subclass in a with a constructor that provides  * all of the arguments for the base class. The instance is held in a separate  * file, so that that version information can be generated.</li>  *  *<li>A driver might store the version information in a .properties file and  * load it using {@link #load}.</li>  *  *</ul>  */
 end_comment
 
 begin_class
@@ -194,7 +192,9 @@ name|load
 parameter_list|(
 name|Class
 argument_list|<
-name|Driver
+name|?
+extends|extends
+name|UnregisteredDriver
 argument_list|>
 name|driverClass
 parameter_list|,

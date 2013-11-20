@@ -9,37 +9,9 @@ name|net
 operator|.
 name|hydromatic
 operator|.
-name|optiq
-operator|.
-name|jdbc
+name|avatica
 package|;
 end_package
-
-begin_import
-import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|linq4j
-operator|.
-name|function
-operator|.
-name|Function0
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
-name|util14
-operator|.
-name|ConnectStringParser
-import|;
-end_import
 
 begin_import
 import|import
@@ -104,7 +76,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Implementation of Optiq JDBC driver that does not register itself.  *  *<p>You can easily create a "vanity driver" that recognizes its own  * URL prefix as a sub-class of this class. Per the JDBC specification it  * must register itself when the class is loaded.</p>  *  *<p>Derived classes must implement {@link #createDriverVersion()} and  * {@link #getConnectStringPrefix()}, and may override  * {@link #createFactory()}.</p>  */
+comment|/**  * Implementation of JDBC driver that does not register itself.  *  *<p>You can easily create a "vanity driver" that recognizes its own  * URL prefix as a sub-class of this class. Per the JDBC specification it  * must register itself when the class is loaded.</p>  *  *<p>Derived classes must implement {@link #createDriverVersion()} and  * {@link #getConnectStringPrefix()}, and may override  * {@link #createFactory()}.</p>  *  *<p>The provider must implement:</p>  *<ul>  *<li>{@link AvaticaStatement#parseQuery(String)}</li>  *<li>{@link AvaticaResultSet#execute()}</li>  *</ul>  */
 end_comment
 
 begin_class
@@ -124,16 +96,10 @@ name|DriverVersion
 name|version
 decl_stmt|;
 specifier|final
-name|Factory
+name|AvaticaFactory
 name|factory
 decl_stmt|;
-specifier|final
-name|Function0
-argument_list|<
-name|OptiqPrepare
-argument_list|>
-name|prepareFactory
-decl_stmt|;
+specifier|public
 specifier|final
 name|Handler
 name|handler
@@ -151,13 +117,6 @@ argument_list|()
 expr_stmt|;
 name|this
 operator|.
-name|prepareFactory
-operator|=
-name|createPrepareFactory
-argument_list|()
-expr_stmt|;
-name|this
-operator|.
 name|version
 operator|=
 name|createDriverVersion
@@ -171,23 +130,9 @@ name|createHandler
 argument_list|()
 expr_stmt|;
 block|}
-specifier|protected
-name|Function0
-argument_list|<
-name|OptiqPrepare
-argument_list|>
-name|createPrepareFactory
-parameter_list|()
-block|{
-return|return
-name|OptiqPrepare
-operator|.
-name|DEFAULT_FACTORY
-return|;
-block|}
 comment|/**    * Creates a factory for JDBC objects (connection, statement).    * Called from the driver constructor.    *    *<p>The default implementation calls {@link JdbcVersion#current},    * then {@link #getFactoryClassName} with that version,    * then passes that class name to {@link #instantiateFactory(String)}.    * This approach is recommended it does not include in the code references    * to classes that may not be instantiable in all JDK versions.    * But drivers are free to do it their own way.</p>    *    * @return JDBC object factory    */
 specifier|protected
-name|Factory
+name|AvaticaFactory
 name|createFactory
 parameter_list|()
 block|{
@@ -234,20 +179,20 @@ case|case
 name|JDBC_30
 case|:
 return|return
-literal|"net.hydromatic.optiq.jdbc.FactoryJdbc3Impl"
+literal|"net.hydromatic.avatica.AvaticaFactoryJdbc3Impl"
 return|;
 case|case
 name|JDBC_40
 case|:
 return|return
-literal|"net.hydromatic.optiq.jdbc.FactoryJdbc4Impl"
+literal|"net.hydromatic.avatica.AvaticaFactoryJdbc4Impl"
 return|;
 case|case
 name|JDBC_41
 case|:
 default|default:
 return|return
-literal|"net.hydromatic.optiq.jdbc.FactoryJdbc41"
+literal|"net.hydromatic.avatica.AvaticaFactoryJdbc41"
 return|;
 block|}
 block|}
@@ -261,7 +206,7 @@ function_decl|;
 comment|/** Helper method for creating factories. */
 specifier|protected
 specifier|static
-name|Factory
+name|AvaticaFactory
 name|instantiateFactory
 parameter_list|(
 name|String
@@ -286,7 +231,7 @@ argument_list|)
 decl_stmt|;
 return|return
 operator|(
-name|Factory
+name|AvaticaFactory
 operator|)
 name|clazz
 operator|.
@@ -406,7 +351,7 @@ name|info
 argument_list|)
 decl_stmt|;
 specifier|final
-name|OptiqConnectionImpl
+name|AvaticaConnection
 name|connection
 init|=
 name|factory
@@ -416,8 +361,6 @@ argument_list|(
 name|this
 argument_list|,
 name|factory
-argument_list|,
-name|prepareFactory
 argument_list|,
 name|url
 argument_list|,

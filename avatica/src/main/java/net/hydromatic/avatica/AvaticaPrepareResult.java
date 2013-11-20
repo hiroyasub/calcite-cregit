@@ -9,40 +9,52 @@ name|net
 operator|.
 name|hydromatic
 operator|.
-name|optiq
-operator|.
-name|jdbc
+name|avatica
 package|;
 end_package
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
+import|;
+end_import
+
 begin_comment
-comment|/**  * Implementation of {@link Factory} for JDBC 4.0 (corresponds to JDK 1.6).  */
+comment|/**  * Result of preparing a statement.  */
 end_comment
 
-begin_class
+begin_interface
 specifier|public
-class|class
-name|FactoryJdbc4Impl
-extends|extends
-name|FactoryJdbc41
+interface|interface
+name|AvaticaPrepareResult
 block|{
-comment|/** Creates a JDBC factory. */
-name|FactoryJdbc4Impl
+name|List
+argument_list|<
+name|ColumnMetaData
+argument_list|>
+name|getColumnList
 parameter_list|()
-block|{
-name|super
-argument_list|(
-literal|4
-argument_list|,
-literal|0
-argument_list|)
-expr_stmt|;
+function_decl|;
+name|String
+name|getSql
+parameter_list|()
+function_decl|;
+name|List
+argument_list|<
+name|AvaticaParameter
+argument_list|>
+name|getParameterList
+parameter_list|()
+function_decl|;
 block|}
-block|}
-end_class
+end_interface
 
 begin_comment
-comment|// End FactoryJdbc4Impl.java
+comment|// End AvaticaPrepareResult.java
 end_comment
 
 end_unit

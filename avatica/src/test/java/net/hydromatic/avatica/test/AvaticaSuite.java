@@ -9,67 +9,67 @@ name|net
 operator|.
 name|hydromatic
 operator|.
-name|optiq
+name|avatica
 operator|.
-name|impl
-operator|.
-name|splunk
+name|test
 package|;
 end_package
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|junit
 operator|.
-name|avatica
+name|runner
 operator|.
-name|DriverVersion
+name|RunWith
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|runners
+operator|.
+name|Suite
 import|;
 end_import
 
 begin_comment
-comment|/**  * Version information for Optiq JDBC Driver for Splunk.  */
+comment|/**  * Avatica test suite.  */
 end_comment
 
 begin_class
-class|class
-name|SplunkDriverVersion
-extends|extends
-name|DriverVersion
-block|{
-comment|/** Creates an OptiqDriverVersion. */
-name|SplunkDriverVersion
-parameter_list|()
-block|{
-name|super
+annotation|@
+name|RunWith
 argument_list|(
-literal|"Optiq JDBC Driver for Splunk"
-argument_list|,
-literal|"0.2"
-argument_list|,
-literal|"Optiq-Splunk"
-argument_list|,
-literal|"0.2"
-argument_list|,
-literal|true
-argument_list|,
-literal|0
-argument_list|,
-literal|1
-argument_list|,
-literal|0
-argument_list|,
-literal|1
+name|Suite
+operator|.
+name|class
 argument_list|)
-expr_stmt|;
+annotation|@
+name|Suite
+operator|.
+name|SuiteClasses
+argument_list|(
+block|{
+name|ConnectStringParserTest
+operator|.
+name|class
 block|}
-block|}
+argument_list|)
+specifier|public
+class|class
+name|AvaticaSuite
+block|{ }
 end_class
 
 begin_comment
-comment|// End SplunkDriverVersion.java
+comment|// End AvaticaSuite.java
 end_comment
 
 end_unit

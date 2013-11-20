@@ -130,6 +130,11 @@ parameter_list|()
 throws|throws
 name|SQLException
 function_decl|;
+comment|/** Returns a view onto this connection's configuration properties. Code    * within Optiq should use this view rather than calling    * {@link java.util.Properties#getProperty(String)}. */
+name|ConnectionConfig
+name|config
+parameter_list|()
+function_decl|;
 block|}
 end_interface
 

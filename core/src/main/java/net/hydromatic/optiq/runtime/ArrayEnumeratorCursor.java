@@ -28,7 +28,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Implementation of {@link Cursor} on top of an  * {@link net.hydromatic.linq4j.Enumerator} that  * returns an array of {@link Object} for each row.  */
+comment|/**  * Implementation of {@link net.hydromatic.avatica.Cursor} on top of an  * {@link net.hydromatic.linq4j.Enumerator} that  * returns an array of {@link Object} for each row.  */
 end_comment
 
 begin_class

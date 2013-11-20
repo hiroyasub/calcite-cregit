@@ -17,6 +17,42 @@ end_package
 
 begin_import
 import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|avatica
+operator|.
+name|ByteString
+import|;
+end_import
+
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|avatica
+operator|.
+name|ColumnMetaData
+import|;
+end_import
+
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|avatica
+operator|.
+name|Cursor
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|eigenbase
@@ -2529,7 +2565,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**    * Accessor that assumes that the underlying value is an array of    * {@link ByteString} values;    * corresponds to {@link java.sql.Types#BINARY}    * and {@link java.sql.Types#VARBINARY}.    */
+comment|/**    * Accessor that assumes that the underlying value is an array of    * {@link net.hydromatic.avatica.ByteString} values;    * corresponds to {@link java.sql.Types#BINARY}    * and {@link java.sql.Types#VARBINARY}.    */
 specifier|private
 specifier|static
 class|class
