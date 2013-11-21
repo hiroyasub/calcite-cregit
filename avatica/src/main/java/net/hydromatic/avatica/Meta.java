@@ -27,16 +27,6 @@ begin_import
 import|import
 name|java
 operator|.
-name|sql
-operator|.
-name|SQLException
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
 name|util
 operator|.
 name|List
@@ -44,7 +34,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Command handler for getting various metadata. Should be implemented by each  * driver.  */
+comment|/**  * Command handler for getting various metadata. Should be implemented by each  * driver.  *  *<p>Also holds other abstract methods that are not related to metadata  * that each provider must implement. This is not ideal.</p>  */
 end_comment
 
 begin_interface
@@ -405,6 +395,24 @@ name|tableNamePattern
 parameter_list|,
 name|Pat
 name|columnNamePattern
+parameter_list|)
+function_decl|;
+comment|/** Creates a cursor for a result set. */
+name|Cursor
+name|createCursor
+parameter_list|(
+name|AvaticaResultSet
+name|resultSet
+parameter_list|)
+function_decl|;
+name|AvaticaPrepareResult
+name|prepare
+parameter_list|(
+name|AvaticaStatement
+name|statement
+parameter_list|,
+name|String
+name|sql
 parameter_list|)
 function_decl|;
 comment|/** Wrapper to remind API calls that a parameter is a pattern (allows '%' and    * '_' wildcards, per the JDBC spec) rather than a string to be matched    * exactly. */

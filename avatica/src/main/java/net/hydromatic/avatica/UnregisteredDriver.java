@@ -76,7 +76,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Implementation of JDBC driver that does not register itself.  *  *<p>You can easily create a "vanity driver" that recognizes its own  * URL prefix as a sub-class of this class. Per the JDBC specification it  * must register itself when the class is loaded.</p>  *  *<p>Derived classes must implement {@link #createDriverVersion()} and  * {@link #getConnectStringPrefix()}, and may override  * {@link #createFactory()}.</p>  *  *<p>The provider must implement:</p>  *<ul>  *<li>{@link AvaticaStatement#parseQuery(String)}</li>  *<li>{@link AvaticaResultSet#execute()}</li>  *</ul>  */
+comment|/**  * Implementation of JDBC driver that does not register itself.  *  *<p>You can easily create a "vanity driver" that recognizes its own  * URL prefix as a sub-class of this class. Per the JDBC specification it  * must register itself when the class is loaded.</p>  *  *<p>Derived classes must implement {@link #createDriverVersion()} and  * {@link #getConnectStringPrefix()}, and may override  * {@link #createFactory()}.</p>  *  *<p>The provider must implement:</p>  *<ul>  *<li>{@link net.hydromatic.avatica.Meta#prepare(AvaticaStatement, String)}</li>  *<li>{@link net.hydromatic.avatica.Meta#createCursor(AvaticaResultSet)}</li>  *</ul>  */
 end_comment
 
 begin_class
