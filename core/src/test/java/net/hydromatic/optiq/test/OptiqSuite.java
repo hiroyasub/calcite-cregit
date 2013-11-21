@@ -372,6 +372,11 @@ name|JdbcTest
 operator|.
 name|class
 block|,
+comment|// test cases
+name|TableInRootSchemaTest
+operator|.
+name|class
+block|,
 comment|// slow tests that don't break often
 name|PartiallyOrderedSetTest
 operator|.
