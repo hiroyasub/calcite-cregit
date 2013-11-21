@@ -1156,8 +1156,8 @@ argument_list|()
 expr_stmt|;
 block|}
 block|}
-comment|/** Returns the list of values of this statement's parameters.    *    *<p>Called at execute time. Not a public API.</p>    *    *<p>The default implementation returns the empty list, because non-prepared    * statements have no parameters.</p>    */
-specifier|public
+comment|/** Returns the list of values of this statement's parameters.    *    *<p>Called at execute time. Not a public API.</p>    *    *<p>The default implementation returns the empty list, because non-prepared    * statements have no parameters.</p>    *    * @see net.hydromatic.avatica.AvaticaConnection.Trojan#getParameterValues(AvaticaStatement)    */
+specifier|protected
 name|List
 argument_list|<
 name|Object

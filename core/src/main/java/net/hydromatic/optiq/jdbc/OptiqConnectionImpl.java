@@ -288,6 +288,15 @@ operator|new
 name|OptiqServerImpl
 argument_list|()
 decl_stmt|;
+comment|// must be package-protected
+specifier|static
+specifier|final
+name|Trojan
+name|TROJAN
+init|=
+name|createTrojan
+argument_list|()
+decl_stmt|;
 comment|/**    * Creates an OptiqConnectionImpl.    *    *<p>Not public; method is called only from the driver.</p>    *    * @param driver Driver    * @param factory Factory for JDBC objects    * @param url Server URL    * @param info Other connection properties    */
 name|OptiqConnectionImpl
 parameter_list|(
@@ -964,6 +973,24 @@ name|rootSchema
 argument_list|,
 name|parameterValues
 argument_list|)
+return|;
+block|}
+comment|// do not make public
+name|UnregisteredDriver
+name|getDriver
+parameter_list|()
+block|{
+return|return
+name|driver
+return|;
+block|}
+comment|// do not make public
+name|AvaticaFactory
+name|getFactory
+parameter_list|()
+block|{
+return|return
+name|factory
 return|;
 block|}
 specifier|static

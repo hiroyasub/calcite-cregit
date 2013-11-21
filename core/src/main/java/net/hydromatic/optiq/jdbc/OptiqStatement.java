@@ -187,12 +187,16 @@ name|closed
 operator|=
 literal|true
 expr_stmt|;
-operator|(
+specifier|final
+name|OptiqConnectionImpl
+name|connection1
+init|=
 operator|(
 name|OptiqConnectionImpl
 operator|)
 name|connection
-operator|)
+decl_stmt|;
+name|connection1
 operator|.
 name|server
 operator|.
@@ -225,9 +229,10 @@ expr_stmt|;
 block|}
 comment|// If onStatementClose throws, this method will throw an exception (later
 comment|// converted to SQLException), but this statement still gets closed.
-name|connection
+name|connection1
 operator|.
-name|driver
+name|getDriver
+argument_list|()
 operator|.
 name|handler
 operator|.

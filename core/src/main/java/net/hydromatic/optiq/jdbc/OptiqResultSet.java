@@ -29,18 +29,6 @@ end_import
 
 begin_import
 import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|optiq
-operator|.
-name|DataContext
-import|;
-end_import
-
-begin_import
-import|import
 name|java
 operator|.
 name|sql
@@ -101,7 +89,7 @@ expr_stmt|;
 block|}
 annotation|@
 name|Override
-specifier|public
+specifier|protected
 name|OptiqResultSet
 name|execute
 parameter_list|()
@@ -156,7 +144,8 @@ expr_stmt|;
 block|}
 name|connection
 operator|.
-name|driver
+name|getDriver
+argument_list|()
 operator|.
 name|handler
 operator|.

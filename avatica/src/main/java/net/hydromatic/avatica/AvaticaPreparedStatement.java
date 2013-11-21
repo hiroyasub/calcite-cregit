@@ -177,7 +177,7 @@ expr_stmt|;
 block|}
 annotation|@
 name|Override
-specifier|public
+specifier|protected
 name|List
 argument_list|<
 name|Object
@@ -1104,47 +1104,6 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|// implement ParameterMetaData
-comment|// not JDBC
-specifier|public
-name|String
-name|getParameterName
-parameter_list|(
-name|int
-name|index
-parameter_list|)
-throws|throws
-name|SQLException
-block|{
-return|return
-name|getParameter
-argument_list|(
-name|index
-argument_list|)
-operator|.
-name|name
-return|;
-block|}
-comment|// not JDBC
-specifier|public
-name|boolean
-name|isSet
-parameter_list|(
-name|int
-name|index
-parameter_list|)
-throws|throws
-name|SQLException
-block|{
-return|return
-name|getParameter
-argument_list|(
-name|index
-argument_list|)
-operator|.
-name|isSet
-argument_list|()
-return|;
-block|}
 specifier|protected
 name|AvaticaParameter
 name|getParameter
