@@ -265,6 +265,28 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for<a href="https://github.com/julianhyde/optiq/issues/74">      * JOIN ... USING fails in 3-way join with      * UnsupportedOperationException</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJoinUsingThreeWay
+parameter_list|()
+block|{
+name|check
+argument_list|(
+literal|"select *\n"
+operator|+
+literal|"from emp as e\n"
+operator|+
+literal|"join dept as d using (deptno)\n"
+operator|+
+literal|"join emp as e2 using (empno)"
+argument_list|,
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public

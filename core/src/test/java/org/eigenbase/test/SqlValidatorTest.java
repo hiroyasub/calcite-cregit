@@ -12212,6 +12212,38 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testJoinUsingThreeWay
+parameter_list|()
+block|{
+name|check
+argument_list|(
+literal|"select *\n"
+operator|+
+literal|"from emp as e\n"
+operator|+
+literal|"join dept as d using (deptno)\n"
+operator|+
+literal|"join emp as e2 using (empno)"
+argument_list|)
+expr_stmt|;
+name|checkFails
+argument_list|(
+literal|"select *\n"
+operator|+
+literal|"from emp as e\n"
+operator|+
+literal|"join dept as d using (deptno)\n"
+operator|+
+literal|"join dept as d2 using (^deptno^)"
+argument_list|,
+literal|"Column name 'DEPTNO' in USING clause is not unique on one side of join"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testWhere
 parameter_list|()
 block|{
