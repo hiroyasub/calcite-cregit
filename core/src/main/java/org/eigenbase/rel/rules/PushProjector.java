@@ -99,13 +99,13 @@ end_import
 
 begin_import
 import|import
-name|org
+name|net
 operator|.
-name|eigenbase
+name|hydromatic
 operator|.
-name|util
+name|linq4j
 operator|.
-name|Util
+name|Ord
 import|;
 end_import
 
@@ -115,9 +115,11 @@ name|net
 operator|.
 name|hydromatic
 operator|.
-name|linq4j
+name|optiq
 operator|.
-name|Ord
+name|util
+operator|.
+name|BitSets
 import|;
 end_import
 
@@ -197,6 +199,7 @@ name|BitSet
 name|childBitmap
 decl_stmt|;
 comment|/**      * Bitmap containing the fields in the right hand side of a join, in the      * case where the projection is being pushed past a join. Not used      * otherwise.      */
+specifier|final
 name|BitSet
 name|rightBitmap
 decl_stmt|;
@@ -404,22 +407,6 @@ operator|.
 name|size
 argument_list|()
 expr_stmt|;
-name|childBitmap
-operator|=
-operator|new
-name|BitSet
-argument_list|(
-name|nFields
-argument_list|)
-expr_stmt|;
-name|rightBitmap
-operator|=
-operator|new
-name|BitSet
-argument_list|(
-name|nFieldsRight
-argument_list|)
-expr_stmt|;
 name|nSysFields
 operator|=
 name|joinRel
@@ -430,12 +417,12 @@ operator|.
 name|size
 argument_list|()
 expr_stmt|;
-name|RelOptUtil
-operator|.
-name|setRexInputBitmap
-argument_list|(
 name|childBitmap
-argument_list|,
+operator|=
+name|BitSets
+operator|.
+name|range
+argument_list|(
 name|nSysFields
 argument_list|,
 name|nFields
@@ -443,12 +430,12 @@ operator|+
 name|nSysFields
 argument_list|)
 expr_stmt|;
-name|RelOptUtil
-operator|.
-name|setRexInputBitmap
-argument_list|(
 name|rightBitmap
-argument_list|,
+operator|=
+name|BitSets
+operator|.
+name|range
+argument_list|(
 name|nFields
 operator|+
 name|nSysFields
@@ -469,26 +456,20 @@ literal|0
 expr_stmt|;
 name|childBitmap
 operator|=
-operator|new
-name|BitSet
+name|BitSets
+operator|.
+name|range
 argument_list|(
 name|nChildFields
 argument_list|)
+expr_stmt|;
+name|rightBitmap
+operator|=
+literal|null
 expr_stmt|;
 name|nSysFields
 operator|=
 literal|0
-expr_stmt|;
-name|RelOptUtil
-operator|.
-name|setRexInputBitmap
-argument_list|(
-name|childBitmap
-argument_list|,
-literal|0
-argument_list|,
-name|nChildFields
-argument_list|)
 expr_stmt|;
 block|}
 assert|assert
@@ -570,17 +551,25 @@ return|;
 block|}
 comment|// even though there is no projection, this is the same as
 comment|// selecting all fields
-name|RelOptUtil
-operator|.
-name|setRexInputBitmap
-argument_list|(
+if|if
+condition|(
+name|nChildFields
+operator|>
+literal|0
+condition|)
+block|{
+comment|// Calling with nChildFields == 0 should be safe but hits
+comment|// http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=6222207
 name|projRefs
-argument_list|,
+operator|.
+name|set
+argument_list|(
 literal|0
 argument_list|,
 name|nChildFields
 argument_list|)
 expr_stmt|;
+block|}
 name|nProject
 operator|=
 name|nChildFields
@@ -769,6 +758,10 @@ name|boolean
 name|locateAllRefs
 parameter_list|()
 block|{
+name|RexUtil
+operator|.
+name|apply
+argument_list|(
 operator|new
 name|InputSpecialOpFinder
 argument_list|(
@@ -784,14 +777,45 @@ name|childPreserveExprs
 argument_list|,
 name|rightPreserveExprs
 argument_list|)
-operator|.
-name|apply
-argument_list|(
+argument_list|,
 name|origProjExprs
 argument_list|,
 name|origFilter
 argument_list|)
 expr_stmt|;
+comment|// The system fields of each child are always used by the join, even if
+comment|// they are not projected out of it.
+name|projRefs
+operator|.
+name|set
+argument_list|(
+name|nSysFields
+argument_list|,
+name|nSysFields
+operator|+
+name|nSysFields
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+name|projRefs
+operator|.
+name|set
+argument_list|(
+name|nSysFields
+operator|+
+name|nFields
+argument_list|,
+name|nSysFields
+operator|+
+name|nFields
+operator|+
+name|nSysFields
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+comment|// Count how many fields are projected.
 name|nSystemProject
 operator|=
 literal|0
@@ -809,7 +833,7 @@ control|(
 name|int
 name|bit
 range|:
-name|Util
+name|BitSets
 operator|.
 name|toIter
 argument_list|(
@@ -1369,27 +1393,12 @@ for|for
 control|(
 name|int
 name|pos
-init|=
-name|projRefs
+range|:
+name|BitSets
 operator|.
-name|nextSetBit
+name|toIter
 argument_list|(
-literal|0
-argument_list|)
-init|;
-name|pos
-operator|>=
-literal|0
-condition|;
-name|pos
-operator|=
 name|projRefs
-operator|.
-name|nextSetBit
-argument_list|(
-name|pos
-operator|+
-literal|1
 argument_list|)
 control|)
 block|{
@@ -1430,7 +1439,7 @@ return|return
 name|adjustments
 return|;
 block|}
-comment|/**      * Clones an expression tree and walks through it, adjusting each      * RexInputRef index by some amount, and converting expressions that need to      * be preserved to field references.      *      *      * @param rex the expression      * @param destFields fields that the new expressions will be referencing      * @param adjustments the amount each input reference index needs to be      * adjusted by      *      * @return modified expression tree      */
+comment|/**      * Clones an expression tree and walks through it, adjusting each      * RexInputRef index by some amount, and converting expressions that need to      * be preserved to field references.      *      * @param rex the expression      * @param destFields fields that the new expressions will be referencing      * @param adjustments the amount each input reference index needs to be      * adjusted by      *      * @return modified expression tree      */
 specifier|public
 name|RexNode
 name|convertRefsAndExprs
@@ -1483,7 +1492,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates a new projection based on the original projection, adjusting all      * input refs using an adjustment array passed in. If there was no original      * projection, create a new one that selects every field from the underlying      * rel      *      * @param projChild child of the new project      * @param adjustments array indicating how much each input reference should      * be adjusted by      *      * @return the created projection      */
+comment|/**      * Creates a new projection based on the original projection, adjusting all      * input refs using an adjustment array passed in. If there was no original      * projection, create a new one that selects every field from the underlying      * rel.      *      *<p>If the resulting projection would be trivial, return the child.      *      * @param projChild child of the new project      * @param adjustments array indicating how much each input reference should      * be adjusted by      *      * @return the created projection      */
 specifier|public
 name|ProjectRel
 name|createNewProject
@@ -1851,7 +1860,7 @@ condition|)
 block|{
 if|if
 condition|(
-name|RelOptUtil
+name|BitSets
 operator|.
 name|contains
 argument_list|(
@@ -1874,7 +1883,7 @@ return|;
 block|}
 if|else if
 condition|(
-name|RelOptUtil
+name|BitSets
 operator|.
 name|contains
 argument_list|(
@@ -1933,33 +1942,6 @@ expr_stmt|;
 return|return
 literal|null
 return|;
-block|}
-comment|/**          * Applies this visitor to an array of expressions and an optional          * single expression.          */
-specifier|public
-name|void
-name|apply
-parameter_list|(
-name|List
-argument_list|<
-name|RexNode
-argument_list|>
-name|exprs
-parameter_list|,
-name|RexNode
-name|expr
-parameter_list|)
-block|{
-name|RexProgram
-operator|.
-name|apply
-argument_list|(
-name|this
-argument_list|,
-name|exprs
-argument_list|,
-name|expr
-argument_list|)
-expr_stmt|;
 block|}
 comment|/**          * Adds an expression to a list if the same expression isn't already in          * the list. Expressions are identical if their digests are the same.          *          * @param exprList current list of expressions          * @param newExpr new expression to be added          */
 specifier|private

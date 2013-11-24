@@ -133,6 +133,20 @@ end_import
 
 begin_import
 import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|optiq
+operator|.
+name|util
+operator|.
+name|BitSets
+import|;
+end_import
+
+begin_import
+import|import
 name|com
 operator|.
 name|google
@@ -470,12 +484,10 @@ block|{
 return|return
 name|isKey
 argument_list|(
-name|Util
+name|BitSets
 operator|.
-name|bitSetBetween
+name|range
 argument_list|(
-literal|0
-argument_list|,
 name|getRowType
 argument_list|()
 operator|.

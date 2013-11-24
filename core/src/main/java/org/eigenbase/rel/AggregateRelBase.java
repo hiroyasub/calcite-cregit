@@ -127,6 +127,20 @@ end_import
 
 begin_import
 import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|optiq
+operator|.
+name|util
+operator|.
+name|BitSets
+import|;
+end_import
+
+begin_import
+import|import
 name|com
 operator|.
 name|google
@@ -538,7 +552,7 @@ argument_list|()
 operator|.
 name|get
 argument_list|(
-name|Util
+name|BitSets
 operator|.
 name|toList
 argument_list|(

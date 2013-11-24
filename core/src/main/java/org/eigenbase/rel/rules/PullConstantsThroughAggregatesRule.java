@@ -99,6 +99,20 @@ name|*
 import|;
 end_import
 
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|optiq
+operator|.
+name|util
+operator|.
+name|BitSets
+import|;
+end_import
+
 begin_comment
 comment|/**  * PullConstantsThroughAggregatesRule removes constant expressions from the  * group list of an {@link AggregateRel}.  *  *<h4>Effect of the rule</h4>  *  *<p>Since the transformed relational expression has to match the original  * relational expression, the constants are placed in a projection above the  * reduced aggregate. If those constants are not used, another rule will remove  * them from the project.  *  *<p>AggregateRel needs its group columns to be on the prefix of its input  * relational expression. Therefore, if a constant is not on the trailing edge  * of the group list, removing it will leave a hole. In this case, the rule adds  * a project before the aggregate to reorder the columns, and permutes them back  * afterwards.  */
 end_comment
@@ -235,7 +249,7 @@ control|(
 name|int
 name|i
 range|:
-name|Util
+name|BitSets
 operator|.
 name|toIter
 argument_list|(
@@ -408,12 +422,10 @@ argument_list|()
 argument_list|,
 name|child
 argument_list|,
-name|Util
+name|BitSets
 operator|.
-name|bitSetBetween
+name|range
 argument_list|(
-literal|0
-argument_list|,
 name|newGroupCount
 argument_list|)
 argument_list|,
@@ -673,12 +685,10 @@ argument_list|()
 argument_list|,
 name|project
 argument_list|,
-name|Util
+name|BitSets
 operator|.
-name|bitSetBetween
+name|range
 argument_list|(
-literal|0
-argument_list|,
 name|newGroupCount
 argument_list|)
 argument_list|,

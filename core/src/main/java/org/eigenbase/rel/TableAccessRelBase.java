@@ -73,13 +73,15 @@ end_import
 
 begin_import
 import|import
-name|org
+name|net
 operator|.
-name|eigenbase
+name|hydromatic
+operator|.
+name|optiq
 operator|.
 name|util
 operator|.
-name|Util
+name|BitSets
 import|;
 end_import
 
@@ -322,12 +324,10 @@ name|fieldsUsed
 operator|.
 name|equals
 argument_list|(
-name|Util
+name|BitSets
 operator|.
-name|bitSetBetween
+name|range
 argument_list|(
-literal|0
-argument_list|,
 name|fieldCount
 argument_list|)
 argument_list|)
@@ -396,7 +396,7 @@ control|(
 name|int
 name|i
 range|:
-name|Util
+name|BitSets
 operator|.
 name|toIter
 argument_list|(

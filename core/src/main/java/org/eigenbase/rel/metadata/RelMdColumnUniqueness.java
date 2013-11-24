@@ -57,18 +57,6 @@ name|org
 operator|.
 name|eigenbase
 operator|.
-name|relopt
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
 name|reltype
 operator|.
 name|*
@@ -103,13 +91,15 @@ end_import
 
 begin_import
 import|import
-name|org
+name|net
 operator|.
-name|eigenbase
+name|hydromatic
+operator|.
+name|optiq
 operator|.
 name|util
 operator|.
-name|Util
+name|BitSets
 import|;
 end_import
 
@@ -315,7 +305,7 @@ control|(
 name|int
 name|bit
 range|:
-name|Util
+name|BitSets
 operator|.
 name|toIter
 argument_list|(
@@ -599,7 +589,7 @@ control|(
 name|int
 name|bit
 range|:
-name|Util
+name|BitSets
 operator|.
 name|toIter
 argument_list|(
@@ -984,7 +974,7 @@ argument_list|)
 expr_stmt|;
 block|}
 return|return
-name|RelOptUtil
+name|BitSets
 operator|.
 name|contains
 argument_list|(

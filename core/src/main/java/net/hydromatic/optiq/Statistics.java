@@ -15,13 +15,15 @@ end_package
 
 begin_import
 import|import
-name|org
+name|net
 operator|.
-name|eigenbase
+name|hydromatic
+operator|.
+name|optiq
 operator|.
 name|util
 operator|.
-name|Util
+name|BitSets
 import|;
 end_import
 
@@ -128,9 +130,9 @@ control|)
 block|{
 if|if
 condition|(
-name|Util
+name|BitSets
 operator|.
-name|isSupersetOf
+name|contains
 argument_list|(
 name|columns
 argument_list|,

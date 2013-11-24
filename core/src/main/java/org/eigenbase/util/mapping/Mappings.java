@@ -51,6 +51,20 @@ name|Function1
 import|;
 end_import
 
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|optiq
+operator|.
+name|util
+operator|.
+name|BitSets
+import|;
+end_import
+
 begin_comment
 comment|/**  * Utility functions related to mappings.  *  * @author jhyde  * @version $Id$  * @see MappingType  * @see Mapping  * @see Permutation  * @since Mar 24, 2006  */
 end_comment
@@ -463,7 +477,7 @@ control|(
 name|int
 name|source
 range|:
-name|Util
+name|BitSets
 operator|.
 name|toIter
 argument_list|(

@@ -89,6 +89,20 @@ name|*
 import|;
 end_import
 
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|optiq
+operator|.
+name|util
+operator|.
+name|BitSets
+import|;
+end_import
+
 begin_comment
 comment|/**  * RelMdSelectivity supplies a default implementation of {@link  * RelMetadataQuery#getSelectivity} for the standard logical algebra.  *  * @author Zelaine Fong  * @version $Id$  */
 end_comment
@@ -517,7 +531,7 @@ name|splitFilters
 argument_list|(
 name|rel
 operator|.
-name|getGroupCount
+name|getGroupSet
 argument_list|()
 argument_list|,
 name|predicate
@@ -648,6 +662,10 @@ name|RelOptUtil
 operator|.
 name|splitFilters
 argument_list|(
+name|BitSets
+operator|.
+name|range
+argument_list|(
 name|rel
 operator|.
 name|getRowType
@@ -655,6 +673,7 @@ argument_list|()
 operator|.
 name|getFieldCount
 argument_list|()
+argument_list|)
 argument_list|,
 name|predicate
 argument_list|,

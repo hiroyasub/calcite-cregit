@@ -71,6 +71,20 @@ end_import
 
 begin_import
 import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|optiq
+operator|.
+name|util
+operator|.
+name|BitSets
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|eigenbase
@@ -339,9 +353,9 @@ name|keys
 operator|.
 name|add
 argument_list|(
-name|Util
+name|BitSets
 operator|.
-name|bitSetOf
+name|of
 argument_list|(
 name|ord
 operator|.

@@ -69,21 +69,23 @@ name|eigenbase
 operator|.
 name|util
 operator|.
-name|Util
+name|mapping
+operator|.
+name|Mappings
 import|;
 end_import
 
 begin_import
 import|import
-name|org
+name|net
 operator|.
-name|eigenbase
+name|hydromatic
+operator|.
+name|optiq
 operator|.
 name|util
 operator|.
-name|mapping
-operator|.
-name|Mappings
+name|BitSets
 import|;
 end_import
 
@@ -329,9 +331,9 @@ specifier|final
 name|BitSet
 name|bBitSet
 init|=
-name|Util
+name|BitSets
 operator|.
-name|bitSetBetween
+name|range
 argument_list|(
 name|aCount
 argument_list|,
@@ -891,12 +893,10 @@ specifier|final
 name|BitSet
 name|aBitSet
 init|=
-name|Util
+name|BitSets
 operator|.
-name|bitSetBetween
+name|range
 argument_list|(
-literal|0
-argument_list|,
 name|aCount
 argument_list|)
 decl_stmt|;

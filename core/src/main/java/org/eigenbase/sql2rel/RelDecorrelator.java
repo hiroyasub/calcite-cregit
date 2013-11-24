@@ -211,6 +211,20 @@ name|Ord
 import|;
 end_import
 
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|optiq
+operator|.
+name|util
+operator|.
+name|BitSets
+import|;
+end_import
+
 begin_comment
 comment|/**  * RelDecorrelator replaces all correlated expressions(corExp) in a relational  * expression (RelNode) tree with non-correlated expressions that are produced  * from joining the RelNode that produces the corExp with the RelNode that  * references it.  */
 end_comment
@@ -1877,12 +1891,10 @@ argument_list|()
 argument_list|,
 name|newProjectRel
 argument_list|,
-name|Util
+name|BitSets
 operator|.
-name|bitSetBetween
+name|range
 argument_list|(
-literal|0
-argument_list|,
 name|newGroupKeyCount
 argument_list|)
 argument_list|,
@@ -8056,12 +8068,10 @@ decl_stmt|;
 name|BitSet
 name|allCols
 init|=
-name|Util
+name|BitSets
 operator|.
-name|bitSetBetween
+name|range
 argument_list|(
-literal|0
-argument_list|,
 name|nFields
 argument_list|)
 decl_stmt|;
@@ -8543,12 +8553,10 @@ block|}
 name|BitSet
 name|groupSet
 init|=
-name|Util
+name|BitSets
 operator|.
-name|bitSetBetween
+name|range
 argument_list|(
-literal|0
-argument_list|,
 name|groupCount
 argument_list|)
 decl_stmt|;
@@ -8585,7 +8593,7 @@ control|(
 name|int
 name|i
 range|:
-name|Util
+name|BitSets
 operator|.
 name|toIter
 argument_list|(

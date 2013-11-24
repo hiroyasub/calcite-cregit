@@ -95,21 +95,23 @@ name|org
 operator|.
 name|eigenbase
 operator|.
-name|util
+name|util14
 operator|.
-name|Util
+name|*
 import|;
 end_import
 
 begin_import
 import|import
-name|org
+name|net
 operator|.
-name|eigenbase
+name|hydromatic
 operator|.
-name|util14
+name|optiq
 operator|.
-name|*
+name|util
+operator|.
+name|BitSets
 import|;
 end_import
 
@@ -559,7 +561,7 @@ name|splitFilters
 argument_list|(
 name|rel
 operator|.
-name|getGroupCount
+name|getGroupSet
 argument_list|()
 argument_list|,
 name|predicate
@@ -812,6 +814,10 @@ name|RelOptUtil
 operator|.
 name|splitFilters
 argument_list|(
+name|BitSets
+operator|.
+name|range
+argument_list|(
 name|rel
 operator|.
 name|getRowType
@@ -819,6 +825,7 @@ argument_list|()
 operator|.
 name|getFieldCount
 argument_list|()
+argument_list|)
 argument_list|,
 name|predicate
 argument_list|,
@@ -968,7 +975,7 @@ control|(
 name|int
 name|bit
 range|:
-name|Util
+name|BitSets
 operator|.
 name|toIter
 argument_list|(

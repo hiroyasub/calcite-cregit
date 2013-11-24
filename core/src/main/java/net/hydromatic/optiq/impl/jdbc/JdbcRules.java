@@ -71,6 +71,20 @@ end_import
 
 begin_import
 import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|optiq
+operator|.
+name|util
+operator|.
+name|BitSets
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|eigenbase
@@ -1086,9 +1100,9 @@ name|left
 operator|.
 name|isKey
 argument_list|(
-name|Util
+name|BitSets
 operator|.
-name|bitSetOf
+name|of
 argument_list|(
 name|leftKeys
 argument_list|)
@@ -1102,9 +1116,9 @@ name|right
 operator|.
 name|isKey
 argument_list|(
-name|Util
+name|BitSets
 operator|.
-name|bitSetOf
+name|of
 argument_list|(
 name|rightKeys
 argument_list|)
@@ -2311,7 +2325,7 @@ control|(
 name|int
 name|group
 range|:
-name|Util
+name|BitSets
 operator|.
 name|toIter
 argument_list|(

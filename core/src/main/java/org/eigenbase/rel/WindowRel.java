@@ -109,6 +109,20 @@ end_import
 
 begin_import
 import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|optiq
+operator|.
+name|util
+operator|.
+name|BitSets
+import|;
+end_import
+
+begin_import
+import|import
 name|com
 operator|.
 name|google
@@ -1339,9 +1353,9 @@ decl_stmt|;
 name|BitSet
 name|groupSet
 init|=
-name|Util
+name|BitSets
 operator|.
-name|bitSetOf
+name|of
 argument_list|(
 name|getProjectOrdinals
 argument_list|(
