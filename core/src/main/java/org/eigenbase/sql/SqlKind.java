@@ -149,6 +149,12 @@ block|,
 comment|/**      * The not-equals operator, "&#33;=" or "&lt;&gt;".      */
 name|NOT_EQUALS
 block|,
+comment|/**      * The is-distinct-from operator.      */
+name|IS_DISTINCT_FROM
+block|,
+comment|/**      * The is-not-distinct-from operator.      */
+name|IS_NOT_DISTINCT_FROM
+block|,
 comment|/**      * The logical "OR" operator.      */
 name|OR
 block|,

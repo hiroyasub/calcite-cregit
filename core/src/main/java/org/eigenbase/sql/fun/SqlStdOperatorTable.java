@@ -582,7 +582,7 @@ literal|"IS DISTINCT FROM"
 argument_list|,
 name|SqlKind
 operator|.
-name|OTHER
+name|IS_DISTINCT_FROM
 argument_list|,
 literal|30
 argument_list|,
@@ -615,7 +615,7 @@ literal|"IS NOT DISTINCT FROM"
 argument_list|,
 name|SqlKind
 operator|.
-name|OTHER
+name|IS_NOT_DISTINCT_FROM
 argument_list|,
 literal|30
 argument_list|,
