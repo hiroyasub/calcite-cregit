@@ -237,6 +237,21 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testJoinOnExpression
+parameter_list|()
+block|{
+name|check
+argument_list|(
+literal|"SELECT * FROM emp JOIN dept on emp.deptno + 1 = dept.deptno - 2"
+argument_list|,
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testJoinOnIn
 parameter_list|()
 block|{
