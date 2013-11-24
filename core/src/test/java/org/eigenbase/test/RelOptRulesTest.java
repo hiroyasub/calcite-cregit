@@ -127,7 +127,7 @@ name|checkPlanning
 argument_list|(
 name|PushFilterPastJoinRule
 operator|.
-name|instance
+name|FILTER_ON_JOIN
 argument_list|,
 literal|"select 1 from sales.dept d left outer join sales.emp e"
 operator|+

@@ -983,7 +983,7 @@ name|addRule
 argument_list|(
 name|PushFilterPastJoinRule
 operator|.
-name|instance
+name|FILTER_ON_JOIN
 argument_list|)
 expr_stmt|;
 name|planner
