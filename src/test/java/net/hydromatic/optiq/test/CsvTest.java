@@ -899,6 +899,25 @@ block|}
 block|}
 block|}
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJoinOnString
+parameter_list|()
+throws|throws
+name|SQLException
+block|{
+name|checkSql
+argument_list|(
+literal|"smart"
+argument_list|,
+literal|"select * from emps join depts on emps.name = depts.name"
+argument_list|,
+literal|""
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 end_class
 
