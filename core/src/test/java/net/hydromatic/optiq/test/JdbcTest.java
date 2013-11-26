@@ -3996,6 +3996,122 @@ literal|"+-------+---------------------+-----+------+------------+"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Four-way join. Used to take 80 seconds. */
+annotation|@
+name|Ignore
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJoinFiveWay
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|assertThat
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|FOODMART_CLONE
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select \"store\".\"store_country\" as \"c0\",\n"
+operator|+
+literal|" \"time_by_day\".\"the_year\" as \"c1\",\n"
+operator|+
+literal|" \"product_class\".\"product_family\" as \"c2\",\n"
+operator|+
+literal|" count(\"sales_fact_1997\".\"product_id\") as \"m0\"\n"
+operator|+
+literal|"from \"store\" as \"store\",\n"
+operator|+
+literal|" \"sales_fact_1997\" as \"sales_fact_1997\",\n"
+operator|+
+literal|" \"time_by_day\" as \"time_by_day\",\n"
+operator|+
+literal|" \"product_class\" as \"product_class\",\n"
+operator|+
+literal|" \"product\" as \"product\"\n"
+operator|+
+literal|"where \"sales_fact_1997\".\"store_id\" = \"store\".\"store_id\"\n"
+operator|+
+literal|"and \"store\".\"store_country\" = 'USA'\n"
+operator|+
+literal|"and \"sales_fact_1997\".\"time_id\" = \"time_by_day\".\"time_id\"\n"
+operator|+
+literal|"and \"time_by_day\".\"the_year\" = 1997\n"
+operator|+
+literal|"and \"sales_fact_1997\".\"product_id\" = \"product\".\"product_id\"\n"
+operator|+
+literal|"and \"product\".\"product_class_id\" = \"product_class\".\"product_class_id\"\n"
+operator|+
+literal|"group by \"store\".\"store_country\",\n"
+operator|+
+literal|" \"time_by_day\".\"the_year\",\n"
+operator|+
+literal|" \"product_class\".\"product_family\""
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|"EnumerableAggregateRel(group=[{0, 1, 2}], m0=[COUNT($3)])\n"
+operator|+
+literal|"  EnumerableCalcRel(expr#0..61=[{inputs}], c0=[$t19], c1=[$t4], c2=[$t46], product_id=[$t34])\n"
+operator|+
+literal|"    EnumerableJoinRel(condition=[=($35, $0)], joinType=[inner])\n"
+operator|+
+literal|"      EnumerableCalcRel(expr#0..9=[{inputs}], expr#10=[CAST($t4):INTEGER], expr#11=[1997], expr#12=[=($t10, $t11)], proj#0..9=[{exprs}], $condition=[$t12])\n"
+operator|+
+literal|"        EnumerableTableAccessRel(table=[[foodmart2, time_by_day]])\n"
+operator|+
+literal|"      EnumerableCalcRel(expr#0..51=[{inputs}], proj#0..23=[{exprs}], product_id=[$t44], time_id=[$t45], customer_id=[$t46], promotion_id=[$t47], store_id0=[$t48], store_sales=[$t49], store_cost=[$t50], unit_sales=[$t51], product_class_id=[$t24], product_subcategory=[$t25], product_category=[$t26], product_department=[$t27], product_family=[$t28], product_class_id0=[$t29], product_id0=[$t30], brand_name=[$t31], product_name=[$t32], SKU=[$t33], SRP=[$t34], gross_weight=[$t35], net_weight=[$t36], recyclable_package=[$t37], low_fat=[$t38], units_per_case=[$t39], cases_per_pallet=[$t40], shelf_width=[$t41], shelf_height=[$t42], shelf_depth=[$t43])\n"
+operator|+
+literal|"        EnumerableJoinRel(condition=[=($48, $0)], joinType=[inner])\n"
+operator|+
+literal|"          EnumerableCalcRel(expr#0..23=[{inputs}], expr#24=['USA'], expr#25=[=($t9, $t24)], proj#0..23=[{exprs}], $condition=[$t25])\n"
+operator|+
+literal|"            EnumerableTableAccessRel(table=[[foodmart2, store]])\n"
+operator|+
+literal|"          EnumerableCalcRel(expr#0..27=[{inputs}], proj#0..4=[{exprs}], product_class_id0=[$t13], product_id=[$t14], brand_name=[$t15], product_name=[$t16], SKU=[$t17], SRP=[$t18], gross_weight=[$t19], net_weight=[$t20], recyclable_package=[$t21], low_fat=[$t22], units_per_case=[$t23], cases_per_pallet=[$t24], shelf_width=[$t25], shelf_height=[$t26], shelf_depth=[$t27], product_id0=[$t5], time_id=[$t6], customer_id=[$t7], promotion_id=[$t8], store_id=[$t9], store_sales=[$t10], store_cost=[$t11], unit_sales=[$t12])\n"
+operator|+
+literal|"            EnumerableJoinRel(condition=[=($13, $0)], joinType=[inner])\n"
+operator|+
+literal|"              EnumerableTableAccessRel(table=[[foodmart2, product_class]])\n"
+operator|+
+literal|"              EnumerableJoinRel(condition=[=($0, $9)], joinType=[inner])\n"
+operator|+
+literal|"                EnumerableTableAccessRel(table=[[foodmart2, sales_fact_1997]])\n"
+operator|+
+literal|"                EnumerableTableAccessRel(table=[[foodmart2, product]])\n"
+operator|+
+literal|"\n"
+operator|+
+literal|"]>"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"+-------+---------------------+-----+------+------------+\n"
+operator|+
+literal|"| c0    | c1                  | c2  | c3   | c4         |\n"
+operator|+
+literal|"+-------+---------------------+-----+------+------------+\n"
+operator|+
+literal|"| Drink | Alcoholic Beverages | USA | WA   | Bellingham |\n"
+operator|+
+literal|"| Drink | Dairy               | USA | WA   | Bellingham |\n"
+operator|+
+literal|"+-------+---------------------+-----+------+------------+"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Returns a list of (query, expected) pairs. The expected result is    * sometimes null. */
 specifier|private
 specifier|static
