@@ -2413,6 +2413,12 @@ name|Expressions
 operator|.
 name|call
 argument_list|(
+name|List
+operator|.
+name|class
+argument_list|,
+literal|null
+argument_list|,
 name|BuiltinMethod
 operator|.
 name|ARRAYS_AS_LIST
