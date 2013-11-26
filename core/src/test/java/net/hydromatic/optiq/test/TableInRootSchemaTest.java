@@ -193,6 +193,20 @@ end_import
 
 begin_import
 import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|ImmutableMultiset
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|junit
@@ -321,15 +335,20 @@ argument_list|)
 decl_stmt|;
 name|assertThat
 argument_list|(
-literal|"A=foo; EXPR$1=8\n"
-operator|+
-literal|"A=bar; EXPR$1=4\n"
+name|ImmutableMultiset
+operator|.
+name|of
+argument_list|(
+literal|"A=foo; EXPR$1=8"
+argument_list|,
+literal|"A=bar; EXPR$1=4"
+argument_list|)
 argument_list|,
 name|equalTo
 argument_list|(
 name|OptiqAssert
 operator|.
-name|toString
+name|toSet
 argument_list|(
 name|resultSet
 argument_list|)
