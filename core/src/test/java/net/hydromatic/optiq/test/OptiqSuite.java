@@ -351,6 +351,10 @@ name|RexTransformerTest
 operator|.
 name|class
 block|,
+name|ChunkListTest
+operator|.
+name|class
+block|,
 comment|// slow tests (above 1s)
 name|JdbcAdapterTest
 operator|.
