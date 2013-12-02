@@ -563,6 +563,9 @@ argument_list|>
 name|distinct
 parameter_list|(
 name|EqualityComparer
+argument_list|<
+name|T
+argument_list|>
 name|comparer
 parameter_list|)
 block|{
