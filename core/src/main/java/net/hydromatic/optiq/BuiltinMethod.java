@@ -223,6 +223,15 @@ operator|.
 name|class
 argument_list|)
 block|,
+name|QUERYABLE_AS_ENUMERABLE
+argument_list|(
+name|Queryable
+operator|.
+name|class
+argument_list|,
+literal|"asEnumerable"
+argument_list|)
+block|,
 name|AS_QUERYABLE
 argument_list|(
 name|Enumerable

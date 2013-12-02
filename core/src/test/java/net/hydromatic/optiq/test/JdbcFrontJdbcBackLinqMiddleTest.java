@@ -707,7 +707,7 @@ argument_list|)
 operator|.
 name|planContains
 argument_list|(
-literal|"  final net.hydromatic.linq4j.Enumerable _inputEnumerable = root.getRootSchema().getSubSchema(\"foodmart2\").getTable(\"store\", java.lang.Object[].class).join(root.getRootSchema().getSubSchema(\"foodmart2\").getTable(\"inventory_fact_1997\", java.lang.Object[].class), new net.hydromatic.linq4j.function.Function1() {\n"
+literal|"  final net.hydromatic.linq4j.Enumerable _inputEnumerable = root.getRootSchema().getSubSchema(\"foodmart2\").getTable(\"store\", java.lang.Object[].class).asEnumerable().join(root.getRootSchema().getSubSchema(\"foodmart2\").getTable(\"inventory_fact_1997\", java.lang.Object[].class).asEnumerable(), new net.hydromatic.linq4j.function.Function1() {\n"
 argument_list|)
 expr_stmt|;
 block|}

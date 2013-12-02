@@ -6078,6 +6078,80 @@ literal|"empid=200; deptno=20; name=Eric; salary=8000.0; commission=500\n"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Alternative formulation for {@link #testFetchStar()}. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testLimitStar
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|assertThat
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select * from \"hr\".\"emps\"\n"
+operator|+
+literal|"limit 2"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"empid=100; deptno=10; name=Bill; salary=10000.0; commission=1000\n"
+operator|+
+literal|"empid=200; deptno=20; name=Eric; salary=8000.0; commission=500\n"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Limit implemented using {@link Queryable#take}. Test case for    *<a href="https://github.com/julianhyde/optiq/issues/96">issue #96</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testLimitOnQueryableTable
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|assertThat
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|FOODMART_CLONE
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select * from \"days\"\n"
+operator|+
+literal|"limit 2"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"day=1; week_day=Sunday\n"
+operator|+
+literal|"day=2; week_day=Monday\n"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Tests composite GROUP BY where one of the columns has NULL values. */
 annotation|@
 name|Test
