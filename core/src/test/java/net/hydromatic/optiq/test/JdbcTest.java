@@ -6152,6 +6152,60 @@ literal|"day=2; week_day=Monday\n"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Limit implemented using {@link Queryable#take}. Test case for    *<a href="https://github.com/julianhyde/optiq/issues/70">issue #70</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSelfJoinCount
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|assertThat
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|JDBC_FOODMART
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select count(*) as c from \"foodmart\".\"sales_fact_1997\" as p1 join \"foodmart\".\"sales_fact_1997\" as p2 using (\"store_id\")"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"C=749681031\n"
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|"EnumerableAggregateRel(group=[{}], C=[COUNT()])\n"
+operator|+
+literal|"  EnumerableCalcRel(expr#0..1=[{inputs}], expr#2=[0], DUMMY=[$t2])\n"
+operator|+
+literal|"    EnumerableJoinRel(condition=[=($0, $1)], joinType=[inner])\n"
+operator|+
+literal|"      JdbcToEnumerableConverter\n"
+operator|+
+literal|"        JdbcCalcRel(expr#0..7=[{inputs}], store_id=[$t4])\n"
+operator|+
+literal|"          JdbcTableScan(table=[[foodmart, sales_fact_1997]])\n"
+operator|+
+literal|"      JdbcToEnumerableConverter\n"
+operator|+
+literal|"        JdbcCalcRel(expr#0..7=[{inputs}], store_id=[$t4])\n"
+operator|+
+literal|"          JdbcTableScan(table=[[foodmart, sales_fact_1997]])\n"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Tests composite GROUP BY where one of the columns has NULL values. */
 annotation|@
 name|Test
