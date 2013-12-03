@@ -688,6 +688,8 @@ block|{
 comment|// Plan should contain 'join'. If it doesn't, maybe int-vs-Integer
 comment|// data type incompatibility has caused it to use a cartesian product
 comment|// instead, and that would be wrong.
+comment|//
+comment|// inventory_fact_1997 is on the LHS because it is larger than store.
 name|assertThat
 argument_list|()
 operator|.

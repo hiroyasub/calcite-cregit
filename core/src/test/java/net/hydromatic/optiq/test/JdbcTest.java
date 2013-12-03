@@ -355,6 +355,16 @@ begin_import
 import|import
 name|java
 operator|.
+name|io
+operator|.
+name|IOException
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
 name|lang
 operator|.
 name|reflect
@@ -4467,6 +4477,144 @@ throw|;
 block|}
 block|}
 block|}
+specifier|private
+name|OptiqAssert
+operator|.
+name|AssertQuery
+name|withFoodMartQuery
+parameter_list|(
+name|int
+name|id
+parameter_list|)
+throws|throws
+name|IOException
+block|{
+specifier|final
+name|FoodmartTest
+operator|.
+name|FoodMartQuerySet
+name|set
+init|=
+name|FoodmartTest
+operator|.
+name|FoodMartQuerySet
+operator|.
+name|instance
+argument_list|()
+decl_stmt|;
+return|return
+name|OptiqAssert
+operator|.
+name|assertThat
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|FOODMART_CLONE
+argument_list|)
+operator|.
+name|query
+argument_list|(
+name|set
+operator|.
+name|queries
+operator|.
+name|get
+argument_list|(
+name|id
+argument_list|)
+operator|.
+name|sql
+argument_list|)
+return|;
+block|}
+comment|/** Makes sure that a projection introduced by a call to    * {@link org.eigenbase.rel.rules.SwapJoinRule} does not manifest as an    * {@link net.hydromatic.optiq.rules.java.JavaRules.EnumerableCalcRel} in the    * plan.    *    *<p>Test case for (not yet fixed)    *<a href="https://github.com/julianhyde/optiq/issues/92">#92</a>, "Project    * should be optimized away, not converted to EnumerableCalcRel".</p>    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testNoCalcBetweenJoins
+parameter_list|()
+throws|throws
+name|IOException
+block|{
+specifier|final
+name|FoodmartTest
+operator|.
+name|FoodMartQuerySet
+name|set
+init|=
+name|FoodmartTest
+operator|.
+name|FoodMartQuerySet
+operator|.
+name|instance
+argument_list|()
+decl_stmt|;
+name|OptiqAssert
+operator|.
+name|assertThat
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|FOODMART_CLONE
+argument_list|)
+operator|.
+name|query
+argument_list|(
+name|set
+operator|.
+name|queries
+operator|.
+name|get
+argument_list|(
+literal|16
+argument_list|)
+operator|.
+name|sql
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|"EnumerableSortRel(sort0=[$0], sort1=[$1], sort2=[$2], sort3=[$4], sort4=[$10], sort5=[$11], sort6=[$12], sort7=[$13], sort8=[$22], sort9=[$23], sort10=[$24], sort11=[$25], sort12=[$26], sort13=[$27], dir0=[Ascending-nulls-last], dir1=[Ascending-nulls-last], dir2=[Ascending-nulls-last], dir3=[Ascending-nulls-last], dir4=[Ascending-nulls-last], dir5=[Ascending-nulls-last], dir6=[Ascending-nulls-last], dir7=[Ascending-nulls-last], dir8=[Ascending-nulls-last], dir9=[Ascending-nulls-last], dir10=[Ascending-nulls-last], dir11=[Ascending-nulls-last], dir12=[Ascending-nulls-last], dir13=[Ascending-nulls-last])\n"
+operator|+
+literal|"  EnumerableCalcRel(expr#0..26=[{inputs}], proj#0..4=[{exprs}], c5=[$t4], c6=[$t5], c7=[$t6], c8=[$t7], c9=[$t8], c10=[$t9], c11=[$t10], c12=[$t11], c13=[$t12], c14=[$t13], c15=[$t14], c16=[$t15], c17=[$t16], c18=[$t17], c19=[$t18], c20=[$t19], c21=[$t20], c22=[$t21], c23=[$t22], c24=[$t23], c25=[$t24], c26=[$t25], c27=[$t26])\n"
+operator|+
+literal|"    EnumerableAggregateRel(group=[{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26}])\n"
+operator|+
+literal|"      EnumerableCalcRel(expr#0..80=[{inputs}], c0=[$t12], c1=[$t10], c2=[$t9], c3=[$t0], fullname=[$t28], c6=[$t19], c7=[$t17], c8=[$t22], c9=[$t18], c10=[$t46], c11=[$t44], c12=[$t43], c13=[$t40], c14=[$t38], c15=[$t47], c16=[$t52], c17=[$t53], c18=[$t54], c19=[$t55], c20=[$t56], c21=[$t42], c22=[$t80], c23=[$t79], c24=[$t78], c25=[$t77], c26=[$t63], c27=[$t64])\n"
+operator|+
+literal|"        EnumerableJoinRel(condition=[=($61, $76)], joinType=[inner])\n"
+operator|+
+literal|"          EnumerableJoinRel(condition=[=($29, $62)], joinType=[inner])\n"
+operator|+
+literal|"            EnumerableJoinRel(condition=[=($33, $37)], joinType=[inner])\n"
+operator|+
+literal|"              EnumerableCalcRel(expr#0..36=[{inputs}], customer_id=[$t8], account_num=[$t9], lname=[$t10], fname=[$t11], mi=[$t12], address1=[$t13], address2=[$t14], address3=[$t15], address4=[$t16], city=[$t17], state_province=[$t18], postal_code=[$t19], country=[$t20], customer_region_id=[$t21], phone1=[$t22], phone2=[$t23], birthdate=[$t24], marital_status=[$t25], yearly_income=[$t26], gender=[$t27], total_children=[$t28], num_children_at_home=[$t29], education=[$t30], date_accnt_opened=[$t31], member_card=[$t32], occupation=[$t33], houseowner=[$t34], num_cars_owned=[$t35], fullname=[$t36], product_id=[$t0], time_id=[$t1], customer_id0=[$t2], promotion_id=[$t3], store_id=[$t4], store_sales=[$t5], store_cost=[$t6], unit_sales=[$t7])\n"
+operator|+
+literal|"                EnumerableJoinRel(condition=[=($2, $8)], joinType=[inner])\n"
+operator|+
+literal|"                  EnumerableTableAccessRel(table=[[foodmart2, sales_fact_1997]])\n"
+operator|+
+literal|"                  EnumerableTableAccessRel(table=[[foodmart2, customer]])\n"
+operator|+
+literal|"              EnumerableTableAccessRel(table=[[foodmart2, store]])\n"
+operator|+
+literal|"            EnumerableTableAccessRel(table=[[foodmart2, product]])\n"
+operator|+
+literal|"          EnumerableTableAccessRel(table=[[foodmart2, product_class]])\n"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Checks that a 3-way join is re-ordered so that join conditions can be    * applied. The plan must not contain cartesian joins.    * {@link org.eigenbase.rel.rules.PushJoinThroughJoinRule} makes this    * possible. */
 annotation|@
 name|Ignore
@@ -4523,6 +4671,52 @@ literal|"          EnumerableCalcRel(expr#0..14=[{inputs}], expr#15=['Cormorant'
 operator|+
 literal|"            EnumerableTableAccessRel(table=[[foodmart2, product]]"
 argument_list|)
+expr_stmt|;
+block|}
+comment|/** Checks that a 3-way join is re-ordered so that join conditions can be    * applied. The plan is left-deep (agg_c_14_sales_fact_1997 the most    * rows, then time_by_day, then store). This makes for efficient    * hash-joins. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testExplainJoin2
+parameter_list|()
+throws|throws
+name|IOException
+block|{
+name|withFoodMartQuery
+argument_list|(
+literal|2482
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|"EnumerableSortRel(sort0=[$0], sort1=[$1], dir0=[Ascending-nulls-last], dir1=[Ascending-nulls-last])\n"
+operator|+
+literal|"  EnumerableAggregateRel(group=[{0, 1}])\n"
+operator|+
+literal|"    EnumerableCalcRel(expr#0..5=[{inputs}], c0=[$t4], c1=[$t1])\n"
+operator|+
+literal|"      EnumerableJoinRel(condition=[=($3, $5)], joinType=[inner])\n"
+operator|+
+literal|"        EnumerableCalcRel(expr#0..3=[{inputs}], store_id=[$t2], store_country=[$t3], store_id0=[$t0], month_of_year=[$t1])\n"
+operator|+
+literal|"          EnumerableJoinRel(condition=[=($0, $2)], joinType=[inner])\n"
+operator|+
+literal|"            EnumerableCalcRel(expr#0..10=[{inputs}], store_id=[$t2], month_of_year=[$t4])\n"
+operator|+
+literal|"              EnumerableTableAccessRel(table=[[foodmart2, agg_c_14_sales_fact_1997]])\n"
+operator|+
+literal|"            EnumerableCalcRel(expr#0..23=[{inputs}], store_id=[$t0], store_country=[$t9])\n"
+operator|+
+literal|"              EnumerableTableAccessRel(table=[[foodmart2, store]])\n"
+operator|+
+literal|"        EnumerableCalcRel(expr#0..9=[{inputs}], the_year=[$t4], month_of_year=[$t7])\n"
+operator|+
+literal|"          EnumerableTableAccessRel(table=[[foodmart2, time_by_day]])\n"
+argument_list|)
+operator|.
+name|runs
+argument_list|()
 expr_stmt|;
 block|}
 comment|/** Condition involving OR makes this more complex than    * {@link #testExplainJoin()}. */
