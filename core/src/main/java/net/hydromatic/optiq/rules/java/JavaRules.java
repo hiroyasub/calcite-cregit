@@ -3629,7 +3629,24 @@ comment|//       accumulatorInitializer.apply(),
 comment|//       accumulatorAdder,
 comment|//       resultSelector);
 comment|//
-comment|// with a slightly different resultSelector.
+comment|// with a slightly different resultSelector; or if there are no aggregate
+comment|// functions
+comment|//
+comment|// final Enumerable<Employee> child =<<child impl>>;
+comment|// Function1<Employee, Integer> keySelector =
+comment|//     new Function1<Employee, Integer>() {
+comment|//         public Integer apply(Employee a0) {
+comment|//             return a0.deptno;
+comment|//         }
+comment|//     };
+comment|// EqualityComparer<Employee> equalityComparer =
+comment|//     new EqualityComparer<Employee>() {
+comment|//         boolean equal(Employee a0, Employee a1) {
+comment|//             return a0.deptno;
+comment|//         }
+comment|//     };
+comment|// return child
+comment|//     .distinct(equalityComparer);
 name|PhysType
 name|inputPhysType
 init|=
@@ -4499,6 +4516,56 @@ argument_list|,
 name|accumulatorAdder
 argument_list|,
 name|resultSelector
+argument_list|)
+argument_list|)
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+if|else if
+condition|(
+name|aggCalls
+operator|.
+name|isEmpty
+argument_list|()
+condition|)
+block|{
+name|builder
+operator|.
+name|add
+argument_list|(
+name|Expressions
+operator|.
+name|return_
+argument_list|(
+literal|null
+argument_list|,
+name|Expressions
+operator|.
+name|call
+argument_list|(
+name|childExp
+argument_list|,
+name|BuiltinMethod
+operator|.
+name|DISTINCT
+operator|.
+name|method
+argument_list|,
+name|Expressions
+operator|.
+expr|<
+name|Expression
+operator|>
+name|list
+argument_list|()
+operator|.
+name|appendIfNotNull
+argument_list|(
+name|keyPhysType
+operator|.
+name|comparer
+argument_list|()
 argument_list|)
 argument_list|)
 argument_list|)

@@ -5702,7 +5702,7 @@ literal|"EXPR$0=2; EXPR$1=abc\n"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Tests inner join to an inline table ({@code VALUES} clause).    *    *<p>Also tests that Optiq uses Unit rather than generating class Record0_0    * with no fields.</p> */
+comment|/** Tests inner join to an inline table ({@code VALUES} clause). */
 annotation|@
 name|Test
 specifier|public
@@ -5737,10 +5737,44 @@ name|returns
 argument_list|(
 literal|"EMPNO=1; DESC=SameName\n"
 argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests a cartesian product aka cross join. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testCartesianJoin
+parameter_list|()
+block|{
+name|OptiqAssert
 operator|.
-name|planContains
+name|assertThat
+argument_list|()
+operator|.
+name|with
 argument_list|(
-literal|"Unit.INSTANCE"
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select * from \"hr\".\"emps\", \"hr\".\"depts\" where \"emps\".\"empid\"< 140 and \"depts\".\"deptno\"> 20"
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"empid=100; deptno=10; name=Bill; salary=10000.0; commission=1000; deptno0=30; name0=Marketing; employees=[]"
+argument_list|,
+literal|"empid=100; deptno=10; name=Bill; salary=10000.0; commission=1000; deptno0=40; name0=HR; employees=[Employee [empid: 200, deptno: 20, name: Eric]]"
+argument_list|,
+literal|"empid=110; deptno=10; name=Theodore; salary=11500.0; commission=250; deptno0=30; name0=Marketing; employees=[]"
+argument_list|,
+literal|"empid=110; deptno=10; name=Theodore; salary=11500.0; commission=250; deptno0=40; name0=HR; employees=[Employee [empid: 200, deptno: 20, name: Eric]]"
 argument_list|)
 expr_stmt|;
 block|}
@@ -6556,6 +6590,135 @@ argument_list|,
 literal|"deptno=10; commission=1000; S=10000.0"
 argument_list|,
 literal|"deptno=10; commission=250; S=11500.0"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSelectDistinct
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|assertThat
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select distinct \"deptno\"\n"
+operator|+
+literal|"from \"hr\".\"emps\"\n"
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"deptno=10"
+argument_list|,
+literal|"deptno=20"
+argument_list|)
+operator|.
+name|planContains
+argument_list|(
+literal|".distinct("
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Select distinct on composite key, one column of which is boolean to    * boot. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSelectDistinctComposite
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|assertThat
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select distinct \"empid\"> 140 as c, \"deptno\"\n"
+operator|+
+literal|"from \"hr\".\"emps\"\n"
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"C=false; deptno=10"
+argument_list|,
+literal|"C=true; deptno=10"
+argument_list|,
+literal|"C=true; deptno=20"
+argument_list|)
+operator|.
+name|planContains
+argument_list|(
+literal|".distinct("
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Same result (and plan) as {@link #testSelectDistinct}. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testGroupByNoAggregates
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|assertThat
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select \"deptno\"\n"
+operator|+
+literal|"from \"hr\".\"emps\"\n"
+operator|+
+literal|"group by \"deptno\""
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"deptno=10"
+argument_list|,
+literal|"deptno=20"
+argument_list|)
+operator|.
+name|planContains
+argument_list|(
+literal|".distinct("
 argument_list|)
 expr_stmt|;
 block|}
