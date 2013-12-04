@@ -5702,6 +5702,7 @@ literal|"EXPR$0=2; EXPR$1=abc\n"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Tests inner join to an inline table ({@code VALUES} clause).    *    *<p>Also tests that Optiq uses Unit rather than generating class Record0_0    * with no fields.</p> */
 annotation|@
 name|Test
 specifier|public
@@ -5735,6 +5736,11 @@ operator|.
 name|returns
 argument_list|(
 literal|"EMPNO=1; DESC=SameName\n"
+argument_list|)
+operator|.
+name|planContains
+argument_list|(
+literal|"Unit.INSTANCE"
 argument_list|)
 expr_stmt|;
 block|}

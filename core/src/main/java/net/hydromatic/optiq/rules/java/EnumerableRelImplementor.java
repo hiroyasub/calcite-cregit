@@ -624,9 +624,10 @@ name|Expressions
 operator|.
 name|fieldDecl
 argument_list|(
-name|Modifier
+name|field
 operator|.
-name|PUBLIC
+name|getModifiers
+argument_list|()
 argument_list|,
 name|Expressions
 operator|.

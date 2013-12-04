@@ -113,6 +113,20 @@ end_import
 
 begin_import
 import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|optiq
+operator|.
+name|runtime
+operator|.
+name|Unit
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|eigenbase
@@ -1041,6 +1055,22 @@ argument_list|>
 name|types
 parameter_list|)
 block|{
+if|if
+condition|(
+name|types
+operator|.
+name|isEmpty
+argument_list|()
+condition|)
+block|{
+comment|// Unit is a pre-defined synthetic type to be used when there are 0
+comment|// fields. Because all instances are the same, we use a singleton.
+return|return
+name|Unit
+operator|.
+name|class
+return|;
+block|}
 specifier|final
 name|String
 name|name
@@ -1118,6 +1148,10 @@ name|ord
 operator|.
 name|e
 argument_list|)
+argument_list|,
+name|Modifier
+operator|.
+name|PUBLIC
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1358,6 +1392,10 @@ name|is
 argument_list|(
 name|javaClass
 argument_list|)
+argument_list|,
+name|Modifier
+operator|.
+name|PUBLIC
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1509,6 +1547,11 @@ specifier|final
 name|boolean
 name|nullable
 decl_stmt|;
+specifier|private
+specifier|final
+name|int
+name|modifiers
+decl_stmt|;
 specifier|public
 name|RecordFieldImpl
 parameter_list|(
@@ -1523,6 +1566,9 @@ name|type
 parameter_list|,
 name|boolean
 name|nullable
+parameter_list|,
+name|int
+name|modifiers
 parameter_list|)
 block|{
 name|this
@@ -1548,6 +1594,12 @@ operator|.
 name|nullable
 operator|=
 name|nullable
+expr_stmt|;
+name|this
+operator|.
+name|modifiers
+operator|=
+name|modifiers
 expr_stmt|;
 assert|assert
 name|syntheticType
@@ -1608,9 +1660,7 @@ name|getModifiers
 parameter_list|()
 block|{
 return|return
-name|Modifier
-operator|.
-name|PUBLIC
+name|modifiers
 return|;
 block|}
 specifier|public
