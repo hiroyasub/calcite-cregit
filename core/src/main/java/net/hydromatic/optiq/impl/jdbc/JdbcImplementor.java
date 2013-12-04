@@ -342,6 +342,10 @@ argument_list|(
 name|alias3
 argument_list|,
 name|aliasSet
+argument_list|,
+name|SqlValidatorUtil
+operator|.
+name|EXPR_SUGGESTER
 argument_list|)
 decl_stmt|;
 specifier|final

@@ -7033,6 +7033,10 @@ argument_list|(
 name|alias
 argument_list|,
 name|aliases
+argument_list|,
+name|SqlValidatorUtil
+operator|.
+name|EXPR_SUGGESTER
 argument_list|)
 decl_stmt|;
 if|if

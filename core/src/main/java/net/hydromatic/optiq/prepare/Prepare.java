@@ -832,6 +832,8 @@ name|rootRel
 operator|=
 name|decorrelate
 argument_list|(
+name|sqlToRelConverter
+argument_list|,
 name|sqlQuery
 argument_list|,
 name|rootRel
@@ -1107,6 +1109,9 @@ specifier|abstract
 name|RelNode
 name|decorrelate
 parameter_list|(
+name|SqlToRelConverter
+name|sqlToRelConverter
+parameter_list|,
 name|SqlNode
 name|query
 parameter_list|,
@@ -1173,7 +1178,7 @@ argument_list|(
 name|rootRel
 argument_list|)
 operator|<
-literal|3
+literal|2
 return|;
 block|}
 comment|/** Returns the number of {@link JoinRelBase} nodes in a tree. */

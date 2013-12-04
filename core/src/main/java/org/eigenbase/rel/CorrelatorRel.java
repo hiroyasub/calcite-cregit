@@ -57,6 +57,20 @@ name|common
 operator|.
 name|collect
 operator|.
+name|ImmutableList
+import|;
+end_import
+
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
 name|ImmutableSet
 import|;
 end_import
@@ -76,7 +90,7 @@ block|{
 comment|//~ Instance fields --------------------------------------------------------
 specifier|protected
 specifier|final
-name|List
+name|ImmutableList
 argument_list|<
 name|Correlation
 argument_list|>
@@ -143,7 +157,12 @@ name|this
 operator|.
 name|correlations
 operator|=
+name|ImmutableList
+operator|.
+name|copyOf
+argument_list|(
 name|correlations
+argument_list|)
 expr_stmt|;
 assert|assert
 operator|(
@@ -233,7 +252,7 @@ block|{
 assert|assert
 name|traitSet
 operator|.
-name|comprises
+name|containsIfApplicable
 argument_list|(
 name|Convention
 operator|.

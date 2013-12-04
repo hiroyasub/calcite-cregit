@@ -3264,6 +3264,9 @@ specifier|protected
 name|RelNode
 name|decorrelate
 parameter_list|(
+name|SqlToRelConverter
+name|sqlToRelConverter
+parameter_list|,
 name|SqlNode
 name|query
 parameter_list|,
@@ -3272,7 +3275,14 @@ name|rootRel
 parameter_list|)
 block|{
 return|return
+name|sqlToRelConverter
+operator|.
+name|decorrelate
+argument_list|(
+name|query
+argument_list|,
 name|rootRel
+argument_list|)
 return|;
 block|}
 annotation|@

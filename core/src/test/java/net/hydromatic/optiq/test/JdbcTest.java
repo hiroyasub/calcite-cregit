@@ -7220,6 +7220,46 @@ name|runs
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testExistsCorrelated
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|assertThat
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select*from \"hr\".\"emps\" where exists (\n"
+operator|+
+literal|" select 1 from \"hr\".\"depts\"\n"
+operator|+
+literal|" where \"emps\".\"deptno\"=\"depts\".\"deptno\")"
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"empid=100; deptno=10; name=Bill; salary=10000.0; commission=1000"
+argument_list|,
+literal|"empid=150; deptno=10; name=Sebastian; salary=7000.0; commission=null"
+argument_list|,
+literal|"empid=110; deptno=10; name=Theodore; salary=11500.0; commission=250"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Tests the TABLES table in the information schema. */
 annotation|@
 name|Test
@@ -8132,8 +8172,6 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/** Tests a JDBC connection that provides a model that contains a view. */
-annotation|@
-name|Ignore
 annotation|@
 name|Test
 specifier|public
