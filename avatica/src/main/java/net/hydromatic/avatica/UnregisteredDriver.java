@@ -185,14 +185,14 @@ case|case
 name|JDBC_40
 case|:
 return|return
-literal|"net.hydromatic.avatica.AvaticaFactoryJdbc4Impl"
+literal|"net.hydromatic.avatica.AvaticaJdbc40Factory"
 return|;
 case|case
 name|JDBC_41
 case|:
 default|default:
 return|return
-literal|"net.hydromatic.avatica.AvaticaFactoryJdbc41"
+literal|"net.hydromatic.avatica.AvaticaJdbc41Factory"
 return|;
 block|}
 block|}
