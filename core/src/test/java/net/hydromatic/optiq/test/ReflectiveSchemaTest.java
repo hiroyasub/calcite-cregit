@@ -1057,6 +1057,8 @@ expr_stmt|;
 block|}
 comment|/**    * Tests a view with a path.    */
 annotation|@
+name|Ignore
+annotation|@
 name|Test
 specifier|public
 name|void
