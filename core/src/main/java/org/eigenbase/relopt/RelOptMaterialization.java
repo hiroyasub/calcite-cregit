@@ -63,7 +63,7 @@ name|relopt
 operator|.
 name|hep
 operator|.
-name|HepProgramBuilder
+name|HepProgram
 import|;
 end_import
 
@@ -128,20 +128,6 @@ operator|.
 name|impl
 operator|.
 name|StarTable
-import|;
-end_import
-
-begin_import
-import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|optiq
-operator|.
-name|prepare
-operator|.
-name|OptiqPrepareImpl
 import|;
 end_import
 
@@ -1024,15 +1010,13 @@ name|RelNode
 name|rel
 parameter_list|)
 block|{
-specifier|final
-name|HepProgramBuilder
-name|programBuilder
+name|HepProgram
+name|program
 init|=
-operator|new
-name|HepProgramBuilder
+name|HepProgram
+operator|.
+name|builder
 argument_list|()
-decl_stmt|;
-name|programBuilder
 operator|.
 name|addRuleInstance
 argument_list|(
@@ -1040,8 +1024,6 @@ name|PullUpProjectsAboveJoinRule
 operator|.
 name|instanceRightProjectChild
 argument_list|)
-expr_stmt|;
-name|programBuilder
 operator|.
 name|addRuleInstance
 argument_list|(
@@ -1049,7 +1031,10 @@ name|PullUpProjectsAboveJoinRule
 operator|.
 name|instanceLeftProjectChild
 argument_list|)
-expr_stmt|;
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
 specifier|final
 name|HepPlanner
 name|planner
@@ -1057,10 +1042,7 @@ init|=
 operator|new
 name|HepPlanner
 argument_list|(
-name|programBuilder
-operator|.
-name|createProgram
-argument_list|()
+name|program
 argument_list|)
 decl_stmt|;
 name|planner

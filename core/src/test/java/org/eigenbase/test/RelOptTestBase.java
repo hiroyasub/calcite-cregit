@@ -104,8 +104,9 @@ block|{
 name|HepProgramBuilder
 name|programBuilder
 init|=
-operator|new
-name|HepProgramBuilder
+name|HepProgram
+operator|.
+name|builder
 argument_list|()
 decl_stmt|;
 name|programBuilder
@@ -119,7 +120,7 @@ name|checkPlanning
 argument_list|(
 name|programBuilder
 operator|.
-name|createProgram
+name|build
 argument_list|()
 argument_list|,
 name|sql
@@ -190,8 +191,9 @@ block|{
 name|HepProgramBuilder
 name|programBuilder
 init|=
-operator|new
-name|HepProgramBuilder
+name|HepProgram
+operator|.
+name|builder
 argument_list|()
 decl_stmt|;
 name|programBuilder
@@ -210,7 +212,7 @@ name|HepPlanner
 argument_list|(
 name|programBuilder
 operator|.
-name|createProgram
+name|build
 argument_list|()
 argument_list|)
 decl_stmt|;
@@ -438,8 +440,9 @@ specifier|final
 name|HepProgramBuilder
 name|builder
 init|=
-operator|new
-name|HepProgramBuilder
+name|HepProgram
+operator|.
+name|builder
 argument_list|()
 decl_stmt|;
 for|for
@@ -461,7 +464,7 @@ block|}
 return|return
 name|builder
 operator|.
-name|createProgram
+name|build
 argument_list|()
 return|;
 block|}

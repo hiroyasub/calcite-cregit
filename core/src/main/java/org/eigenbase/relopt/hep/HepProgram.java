@@ -25,6 +25,20 @@ name|*
 import|;
 end_import
 
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|ImmutableList
+import|;
+end_import
+
 begin_comment
 comment|/**  * HepProgram specifies the order in which rules should be attempted by {@link  * HepPlanner}. Use {@link HepProgramBuilder} to create a new instance of  * HepProgram.  *  *<p>Note that the structure of a program is immutable, but the planner uses it  * as read/write during planning, so a program can only be in use by a single  * planner at a time.  *  * @author John V. Sichi  * @version $Id$  */
 end_comment
@@ -48,7 +62,7 @@ name|MAX_VALUE
 decl_stmt|;
 comment|//~ Instance fields --------------------------------------------------------
 specifier|final
-name|List
+name|ImmutableList
 argument_list|<
 name|HepInstruction
 argument_list|>
@@ -80,8 +94,25 @@ name|this
 operator|.
 name|instructions
 operator|=
+name|ImmutableList
+operator|.
+name|copyOf
+argument_list|(
 name|instructions
+argument_list|)
 expr_stmt|;
+block|}
+specifier|public
+specifier|static
+name|HepProgramBuilder
+name|builder
+parameter_list|()
+block|{
+return|return
+operator|new
+name|HepProgramBuilder
+argument_list|()
+return|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
 name|void

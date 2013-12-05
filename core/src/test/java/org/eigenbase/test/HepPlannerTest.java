@@ -115,8 +115,9 @@ comment|// Verify that an entire class of rules can be applied.
 name|HepProgramBuilder
 name|programBuilder
 init|=
-operator|new
-name|HepProgramBuilder
+name|HepProgram
+operator|.
+name|builder
 argument_list|()
 decl_stmt|;
 name|programBuilder
@@ -136,7 +137,7 @@ name|HepPlanner
 argument_list|(
 name|programBuilder
 operator|.
-name|createProgram
+name|build
 argument_list|()
 argument_list|)
 decl_stmt|;
@@ -193,8 +194,9 @@ comment|// Verify that a rule can be applied via its description.
 name|HepProgramBuilder
 name|programBuilder
 init|=
-operator|new
-name|HepProgramBuilder
+name|HepProgram
+operator|.
+name|builder
 argument_list|()
 decl_stmt|;
 name|programBuilder
@@ -212,7 +214,7 @@ name|HepPlanner
 argument_list|(
 name|programBuilder
 operator|.
-name|createProgram
+name|build
 argument_list|()
 argument_list|)
 decl_stmt|;
@@ -246,8 +248,9 @@ comment|// Verify that only the top union gets rewritten.
 name|HepProgramBuilder
 name|programBuilder
 init|=
-operator|new
-name|HepProgramBuilder
+name|HepProgram
+operator|.
+name|builder
 argument_list|()
 decl_stmt|;
 name|programBuilder
@@ -279,7 +282,7 @@ name|checkPlanning
 argument_list|(
 name|programBuilder
 operator|.
-name|createProgram
+name|build
 argument_list|()
 argument_list|,
 name|unionTree
@@ -299,8 +302,9 @@ comment|// Verify that only the bottom union gets rewritten.
 name|HepProgramBuilder
 name|programBuilder
 init|=
-operator|new
-name|HepProgramBuilder
+name|HepProgram
+operator|.
+name|builder
 argument_list|()
 decl_stmt|;
 name|programBuilder
@@ -332,7 +336,7 @@ name|checkPlanning
 argument_list|(
 name|programBuilder
 operator|.
-name|createProgram
+name|build
 argument_list|()
 argument_list|,
 name|unionTree
@@ -352,8 +356,9 @@ comment|// Verify that both unions get rewritten.
 name|HepProgramBuilder
 name|programBuilder
 init|=
-operator|new
-name|HepProgramBuilder
+name|HepProgram
+operator|.
+name|builder
 argument_list|()
 decl_stmt|;
 name|programBuilder
@@ -378,7 +383,7 @@ name|checkPlanning
 argument_list|(
 name|programBuilder
 operator|.
-name|createProgram
+name|build
 argument_list|()
 argument_list|,
 name|unionTree
@@ -428,8 +433,9 @@ comment|// a second calc, and then merge them.
 name|HepProgramBuilder
 name|subprogramBuilder
 init|=
-operator|new
-name|HepProgramBuilder
+name|HepProgram
+operator|.
+name|builder
 argument_list|()
 decl_stmt|;
 name|subprogramBuilder
@@ -469,8 +475,9 @@ expr_stmt|;
 name|HepProgramBuilder
 name|programBuilder
 init|=
-operator|new
-name|HepProgramBuilder
+name|HepProgram
+operator|.
+name|builder
 argument_list|()
 decl_stmt|;
 name|programBuilder
@@ -479,7 +486,7 @@ name|addSubprogram
 argument_list|(
 name|subprogramBuilder
 operator|.
-name|createProgram
+name|build
 argument_list|()
 argument_list|)
 expr_stmt|;
@@ -487,7 +494,7 @@ name|checkPlanning
 argument_list|(
 name|programBuilder
 operator|.
-name|createProgram
+name|build
 argument_list|()
 argument_list|,
 literal|"select upper(ename) from (select lower(ename) as ename from emp)"
@@ -509,8 +516,9 @@ comment|// that order doesn't matter within the group.
 name|HepProgramBuilder
 name|programBuilder
 init|=
-operator|new
-name|HepProgramBuilder
+name|HepProgram
+operator|.
+name|builder
 argument_list|()
 decl_stmt|;
 name|programBuilder
@@ -554,7 +562,7 @@ name|checkPlanning
 argument_list|(
 name|programBuilder
 operator|.
-name|createProgram
+name|build
 argument_list|()
 argument_list|,
 literal|"select upper(name) from dept where deptno=20"
