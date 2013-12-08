@@ -4725,6 +4725,9 @@ expr_stmt|;
 block|}
 comment|/** One of the most expensive foodmart queries. */
 annotation|@
+name|Ignore
+comment|// OOME on Travis; works on most other machines
+annotation|@
 name|Test
 specifier|public
 name|void
