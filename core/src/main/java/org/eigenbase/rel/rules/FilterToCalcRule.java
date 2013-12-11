@@ -17,16 +17,6 @@ end_package
 
 begin_import
 import|import
-name|java
-operator|.
-name|util
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
 name|org
 operator|.
 name|eigenbase
@@ -70,6 +60,20 @@ operator|.
 name|rex
 operator|.
 name|*
+import|;
+end_import
+
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|ImmutableList
 import|;
 end_import
 
@@ -179,16 +183,6 @@ operator|.
 name|addIdentity
 argument_list|()
 expr_stmt|;
-if|if
-condition|(
-name|filter
-operator|.
-name|getCondition
-argument_list|()
-operator|!=
-literal|null
-condition|)
-block|{
 name|programBuilder
 operator|.
 name|addCondition
@@ -199,7 +193,6 @@ name|getCondition
 argument_list|()
 argument_list|)
 expr_stmt|;
-block|}
 specifier|final
 name|RexProgram
 name|program
@@ -232,12 +225,12 @@ name|inputRowType
 argument_list|,
 name|program
 argument_list|,
-name|Collections
+name|ImmutableList
 operator|.
 expr|<
 name|RelCollation
 operator|>
-name|emptyList
+name|of
 argument_list|()
 argument_list|)
 decl_stmt|;

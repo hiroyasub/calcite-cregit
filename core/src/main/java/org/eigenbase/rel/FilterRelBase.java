@@ -120,12 +120,11 @@ argument_list|,
 name|child
 argument_list|)
 expr_stmt|;
-name|this
-operator|.
+assert|assert
 name|condition
-operator|=
-name|condition
-expr_stmt|;
+operator|!=
+literal|null
+assert|;
 assert|assert
 name|RexUtil
 operator|.
@@ -136,6 +135,12 @@ argument_list|)
 operator|:
 name|condition
 assert|;
+name|this
+operator|.
+name|condition
+operator|=
+name|condition
+expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
 annotation|@

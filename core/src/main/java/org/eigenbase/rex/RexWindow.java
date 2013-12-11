@@ -71,7 +71,7 @@ block|{
 comment|//~ Instance fields --------------------------------------------------------
 specifier|public
 specifier|final
-name|List
+name|ImmutableList
 argument_list|<
 name|RexNode
 argument_list|>

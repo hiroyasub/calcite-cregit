@@ -6541,13 +6541,13 @@ literal|"    EnumerableJoinRel(condition=[=($0, $1)], joinType=[inner])\n"
 operator|+
 literal|"      JdbcToEnumerableConverter\n"
 operator|+
-literal|"        JdbcCalcRel(expr#0..7=[{inputs}], store_id=[$t4])\n"
+literal|"        JdbcProjectRel(store_id=[$4])\n"
 operator|+
 literal|"          JdbcTableScan(table=[[foodmart, sales_fact_1997]])\n"
 operator|+
 literal|"      JdbcToEnumerableConverter\n"
 operator|+
-literal|"        JdbcCalcRel(expr#0..7=[{inputs}], store_id=[$t4])\n"
+literal|"        JdbcProjectRel(store_id=[$4])\n"
 operator|+
 literal|"          JdbcTableScan(table=[[foodmart, sales_fact_1997]])\n"
 argument_list|)

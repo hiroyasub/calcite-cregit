@@ -184,11 +184,6 @@ specifier|final
 name|RelDataType
 name|inputRowType
 decl_stmt|;
-comment|/**      * Whether this program contains aggregates. TODO: obsolete this      */
-specifier|private
-name|boolean
-name|aggs
-decl_stmt|;
 specifier|private
 specifier|final
 name|RelDataType
@@ -1288,8 +1283,6 @@ name|containsAggs
 parameter_list|()
 block|{
 return|return
-name|aggs
-operator|||
 name|RexOver
 operator|.
 name|containsOver
@@ -1297,21 +1290,6 @@ argument_list|(
 name|this
 argument_list|)
 return|;
-block|}
-specifier|public
-name|void
-name|setAggs
-parameter_list|(
-name|boolean
-name|aggs
-parameter_list|)
-block|{
-name|this
-operator|.
-name|aggs
-operator|=
-name|aggs
-expr_stmt|;
 block|}
 comment|/**      * Returns the type of the output row from this program.      *      * @return output row type      */
 specifier|public
@@ -2228,24 +2206,12 @@ return|return
 literal|true
 return|;
 block|}
-comment|/**      * Returns whether this program returns its input exactly.      *      *<p>This is a stronger condition than {@link #projectsIdentity(boolean)}.      */
+comment|/**      * Returns whether this program projects precisely its input fields. It may      * or may not apply a condition.      */
 specifier|public
 name|boolean
-name|isTrivial
+name|projectsOnlyIdentity
 parameter_list|()
 block|{
-if|if
-condition|(
-name|getCondition
-argument_list|()
-operator|!=
-literal|null
-condition|)
-block|{
-return|return
-literal|false
-return|;
-block|}
 if|if
 condition|(
 name|projects
@@ -2307,6 +2273,22 @@ block|}
 block|}
 return|return
 literal|true
+return|;
+block|}
+comment|/**      * Returns whether this program returns its input exactly.      *      *<p>This is a stronger condition than {@link #projectsIdentity(boolean)}.      */
+specifier|public
+name|boolean
+name|isTrivial
+parameter_list|()
+block|{
+return|return
+name|getCondition
+argument_list|()
+operator|==
+literal|null
+operator|&&
+name|projectsOnlyIdentity
+argument_list|()
 return|;
 block|}
 comment|/**      * Gets reference counts for each expression in the program, where the      * references are detected from later expressions in the same program, as      * well as the project list and condition. Expressions with references      * counts greater than 1 are true common sub-expressions.      *      * @return array of reference counts; the ith element in the returned array      * is the number of references to getExprList()[i]      */

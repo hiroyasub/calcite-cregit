@@ -82,13 +82,13 @@ name|super
 argument_list|(
 name|some
 argument_list|(
-name|CalcRel
+name|CalcRelBase
 operator|.
 name|class
 argument_list|,
 name|any
 argument_list|(
-name|CalcRel
+name|CalcRelBase
 operator|.
 name|class
 argument_list|)
@@ -106,7 +106,7 @@ name|call
 parameter_list|)
 block|{
 specifier|final
-name|CalcRel
+name|CalcRelBase
 name|topCalc
 init|=
 name|call
@@ -117,7 +117,7 @@ literal|0
 argument_list|)
 decl_stmt|;
 specifier|final
-name|CalcRel
+name|CalcRelBase
 name|bottomCalc
 init|=
 name|call
@@ -131,7 +131,7 @@ comment|// Don't merge a calc which contains windowed aggregates onto a
 comment|// calc. That would effectively be pushing a windowed aggregate down
 comment|// through a filter.
 name|RexProgram
-name|program
+name|topProgram
 init|=
 name|topCalc
 operator|.
@@ -144,7 +144,7 @@ name|RexOver
 operator|.
 name|containsOver
 argument_list|(
-name|program
+name|topProgram
 argument_list|)
 condition|)
 block|{
@@ -177,18 +177,25 @@ name|getRexBuilder
 argument_list|()
 argument_list|)
 decl_stmt|;
+assert|assert
+name|mergedProgram
+operator|.
+name|getOutputRowType
+argument_list|()
+operator|==
+name|topProgram
+operator|.
+name|getOutputRowType
+argument_list|()
+assert|;
 specifier|final
-name|CalcRel
+name|CalcRelBase
 name|newCalc
 init|=
-operator|new
-name|CalcRel
-argument_list|(
 name|topCalc
 operator|.
-name|getCluster
-argument_list|()
-argument_list|,
+name|copy
+argument_list|(
 name|topCalc
 operator|.
 name|getTraitSet
@@ -197,11 +204,6 @@ argument_list|,
 name|bottomCalc
 operator|.
 name|getChild
-argument_list|()
-argument_list|,
-name|topCalc
-operator|.
-name|getRowType
 argument_list|()
 argument_list|,
 name|mergedProgram

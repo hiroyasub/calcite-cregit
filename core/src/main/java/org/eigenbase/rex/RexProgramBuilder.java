@@ -2193,6 +2193,17 @@ argument_list|(
 literal|true
 argument_list|)
 assert|;
+assert|assert
+name|mergedProg
+operator|.
+name|getOutputRowType
+argument_list|()
+operator|==
+name|topProgram
+operator|.
+name|getOutputRowType
+argument_list|()
+assert|;
 return|return
 name|mergedProg
 return|;

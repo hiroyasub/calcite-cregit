@@ -17,16 +17,6 @@ end_package
 
 begin_import
 import|import
-name|java
-operator|.
-name|util
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
 name|org
 operator|.
 name|eigenbase
@@ -70,6 +60,20 @@ operator|.
 name|rex
 operator|.
 name|*
+import|;
+end_import
+
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|ImmutableList
 import|;
 end_import
 
@@ -206,12 +210,12 @@ name|rowType
 argument_list|,
 name|program
 argument_list|,
-name|Collections
+name|ImmutableList
 operator|.
 expr|<
 name|RelCollation
 operator|>
-name|emptyList
+name|of
 argument_list|()
 argument_list|)
 decl_stmt|;

@@ -92,7 +92,7 @@ name|super
 argument_list|(
 name|some
 argument_list|(
-name|FilterRel
+name|FilterRelBase
 operator|.
 name|class
 argument_list|,
