@@ -299,11 +299,8 @@ name|clazz
 argument_list|,
 name|in
 argument_list|,
-name|RelOptRule
-operator|.
-name|ANY
-argument_list|,
-literal|null
+name|any
+argument_list|()
 argument_list|)
 expr_stmt|;
 block|}

@@ -370,7 +370,7 @@ name|ordinal
 index|]
 return|;
 block|}
-comment|/**      * Returns the children of a given relational expression node matched in a      * rule.      *      *<p>If the operand which caused the match has {@link      * RelOptRuleOperand#matchAnyChildren}=false, the children will have their      * own operands and therefore be easily available in the array returned by      * the {@link #getRels} method, so this method returns null.      *      *<p>This method is for {@link RelOptRuleOperand#matchAnyChildren}=true,      * which is generally used when a node can have a variable number of      * children, and hence where the matched children are not retrievable by any      * other means.      *      * @param rel Relational expression      *      * @return Children of relational expression      */
+comment|/**      * Returns the children of a given relational expression node matched in a      * rule.      *      *<p>If the policy of the operand which caused the match is not      * {@link org.eigenbase.relopt.RelOptRuleOperandChildPolicy#ANY},      * the children will have their      * own operands and therefore be easily available in the array returned by      * the {@link #getRels} method, so this method returns null.      *      *<p>This method is for      * {@link org.eigenbase.relopt.RelOptRuleOperandChildPolicy#ANY},      * which is generally used when a node can have a variable number of      * children, and hence where the matched children are not retrievable by any      * other means.      *      * @param rel Relational expression      *      * @return Children of relational expression      */
 specifier|public
 name|List
 argument_list|<
