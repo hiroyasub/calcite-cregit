@@ -229,11 +229,11 @@ name|project
 argument_list|)
 condition|?
 name|project
-else|:
-name|project
 operator|.
 name|getChild
 argument_list|()
+else|:
+name|project
 return|;
 block|}
 specifier|public
