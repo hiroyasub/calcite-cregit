@@ -143,11 +143,14 @@ init|=
 operator|new
 name|ReduceAggregatesRule
 argument_list|(
-name|any
+name|operand
 argument_list|(
 name|AggregateRel
 operator|.
 name|class
+argument_list|,
+name|any
+argument_list|()
 argument_list|)
 argument_list|)
 decl_stmt|;

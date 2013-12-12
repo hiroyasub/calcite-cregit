@@ -74,17 +74,20 @@ comment|// distinct to make it correct up-front, we can get rid of the reference
 comment|// to the child here.
 name|super
 argument_list|(
-name|some
+name|operand
 argument_list|(
 name|AggregateRel
 operator|.
 name|class
 argument_list|,
-name|any
+name|operand
 argument_list|(
 name|RelNode
 operator|.
 name|class
+argument_list|,
+name|any
+argument_list|()
 argument_list|)
 argument_list|)
 argument_list|)

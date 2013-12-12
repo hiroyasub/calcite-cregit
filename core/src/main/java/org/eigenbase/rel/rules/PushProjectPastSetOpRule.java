@@ -80,7 +80,13 @@ name|instance
 init|=
 operator|new
 name|PushProjectPastSetOpRule
-argument_list|()
+argument_list|(
+name|PushProjector
+operator|.
+name|ExprCondition
+operator|.
+name|FALSE
+argument_list|)
 decl_stmt|;
 comment|//~ Instance fields --------------------------------------------------------
 comment|/**      * Expressions that should be preserved in the projection      */
@@ -91,21 +97,6 @@ name|ExprCondition
 name|preserveExprCondition
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a PushProjectPastSetOpRule.      */
-specifier|private
-name|PushProjectPastSetOpRule
-parameter_list|()
-block|{
-name|this
-argument_list|(
-name|PushProjector
-operator|.
-name|ExprCondition
-operator|.
-name|FALSE
-argument_list|)
-expr_stmt|;
-block|}
 comment|/**      * Creates a PushProjectPastSetOpRule with an explicit condition whether      * to preserve expressions.      *      * @param preserveExprCondition Condition whether to preserve expressions      */
 specifier|public
 name|PushProjectPastSetOpRule
@@ -118,17 +109,20 @@ parameter_list|)
 block|{
 name|super
 argument_list|(
-name|some
+name|operand
 argument_list|(
 name|ProjectRel
 operator|.
 name|class
 argument_list|,
-name|any
+name|operand
 argument_list|(
 name|SetOpRel
 operator|.
 name|class
+argument_list|,
+name|any
+argument_list|()
 argument_list|)
 argument_list|)
 argument_list|)

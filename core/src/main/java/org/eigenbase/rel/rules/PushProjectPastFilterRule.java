@@ -70,7 +70,13 @@ name|instance
 init|=
 operator|new
 name|PushProjectPastFilterRule
-argument_list|()
+argument_list|(
+name|PushProjector
+operator|.
+name|ExprCondition
+operator|.
+name|FALSE
+argument_list|)
 decl_stmt|;
 comment|//~ Instance fields --------------------------------------------------------
 comment|/**      * Expressions that should be preserved in the projection      */
@@ -82,62 +88,34 @@ name|ExprCondition
 name|preserveExprCondition
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a PushProjectPastFilterRule.      */
+comment|/**      * Creates a PushProjectPastFilterRule.      *      * @param preserveExprCondition Condition for expressions that should be      * preserved in the projection      */
 specifier|private
 name|PushProjectPastFilterRule
-parameter_list|()
-block|{
-name|super
-argument_list|(
-name|some
-argument_list|(
-name|ProjectRel
-operator|.
-name|class
-argument_list|,
-name|any
-argument_list|(
-name|FilterRel
-operator|.
-name|class
-argument_list|)
-argument_list|)
-argument_list|)
-expr_stmt|;
-name|this
-operator|.
-name|preserveExprCondition
-operator|=
-name|PushProjector
-operator|.
-name|ExprCondition
-operator|.
-name|FALSE
-expr_stmt|;
-block|}
-comment|/**      * Creates a PushProjectPastFilterRule with an explicit root operand      * and condition to preserve operands.      *      * @param operand root operand, must not be null      *      * @param id Part of description      */
-specifier|public
-name|PushProjectPastFilterRule
 parameter_list|(
-name|RelOptRuleOperand
-name|operand
-parameter_list|,
 name|PushProjector
 operator|.
 name|ExprCondition
 name|preserveExprCondition
-parameter_list|,
-name|String
-name|id
 parameter_list|)
 block|{
 name|super
 argument_list|(
 name|operand
+argument_list|(
+name|ProjectRel
+operator|.
+name|class
 argument_list|,
-literal|"PushProjectPastFilterRule: "
-operator|+
-name|id
+name|operand
+argument_list|(
+name|FilterRel
+operator|.
+name|class
+argument_list|,
+name|any
+argument_list|()
+argument_list|)
+argument_list|)
 argument_list|)
 expr_stmt|;
 name|this

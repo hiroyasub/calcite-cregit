@@ -293,7 +293,7 @@ argument_list|)
 return|;
 block|}
 comment|//~ Methods for creating lists of child operands ---------------------------
-comment|/**      * Creates a list of child operands that matches child relational      * expressions in the order they appear.      *      * @param first First child operand      * @param rest Remaining child operands      */
+comment|/**      * Creates a list of child operands that matches child relational      * expressions in the order they appear.      *      * @param first First child operand      * @param rest Remaining child operands (may be empty)      */
 specifier|public
 specifier|static
 name|RelOptRuleOperandChildren
@@ -338,7 +338,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates a list of child operands that matches child relational      * expressions in any order.      *      * @param first First child operand      * @param rest Remaining child operands      */
+comment|/**      * Creates a list of child operands that matches child relational      * expressions in any order.      *      *<p>This is useful when matching a relational expression which      * can have a variable number of children. For example, the rule to      * eliminate empty children of a Union would have operands      *      *<blockquote>Operand(UnionRel, true, Operand(EmptyRel))</blockquote>      *      * and given the relational expressions      *      *<blockquote>UnionRel(FilterRel, EmptyRel, ProjectRel)</blockquote>      *      * would fire the rule with arguments      *      *<blockquote>{Union, Empty}</blockquote>      *      * It is up to the rule to deduce the other children, or indeed the position      * of the matched child.</p>      *      * @param first First child operand      * @param rest Remaining child operands (may be empty)      */
 specifier|public
 specifier|static
 name|RelOptRuleOperandChildren
@@ -391,21 +391,9 @@ name|none
 parameter_list|()
 block|{
 return|return
-operator|new
 name|RelOptRuleOperandChildren
-argument_list|(
-name|RelOptRuleOperandChildPolicy
 operator|.
-name|LEAF
-argument_list|,
-name|ImmutableList
-operator|.
-expr|<
-name|RelOptRuleOperand
-operator|>
-name|of
-argument_list|()
-argument_list|)
+name|LEAF_CHILDREN
 return|;
 block|}
 comment|/**      * Creates a list of child operands that signifies that the operand matches      * any number of child relational expressions.      */
@@ -416,21 +404,9 @@ name|any
 parameter_list|()
 block|{
 return|return
-operator|new
 name|RelOptRuleOperandChildren
-argument_list|(
-name|RelOptRuleOperandChildPolicy
 operator|.
-name|ANY
-argument_list|,
-name|ImmutableList
-operator|.
-expr|<
-name|RelOptRuleOperand
-operator|>
-name|of
-argument_list|()
-argument_list|)
+name|ANY_CHILDREN
 return|;
 block|}
 comment|//~ Obsolete methods for creating operands ---------------------------------

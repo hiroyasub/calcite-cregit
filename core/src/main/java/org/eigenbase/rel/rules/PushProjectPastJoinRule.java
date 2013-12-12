@@ -92,7 +92,13 @@ name|instance
 init|=
 operator|new
 name|PushProjectPastJoinRule
-argument_list|()
+argument_list|(
+name|PushProjector
+operator|.
+name|ExprCondition
+operator|.
+name|FALSE
+argument_list|)
 decl_stmt|;
 comment|//~ Instance fields --------------------------------------------------------
 comment|/**      * Condition for expressions that should be preserved in the projection.      */
@@ -104,23 +110,8 @@ name|ExprCondition
 name|preserveExprCondition
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a PushProjectPastJoinRule.      */
-specifier|private
-name|PushProjectPastJoinRule
-parameter_list|()
-block|{
-name|this
-argument_list|(
-name|PushProjector
-operator|.
-name|ExprCondition
-operator|.
-name|FALSE
-argument_list|)
-expr_stmt|;
-block|}
 comment|/**      * Creates a PushProjectPastJoinRule with an explicit condition.      *      * @param preserveExprCondition Condition for expressions that should be      * preserved in the projection      */
-specifier|public
+specifier|private
 name|PushProjectPastJoinRule
 parameter_list|(
 name|PushProjector
@@ -131,17 +122,20 @@ parameter_list|)
 block|{
 name|super
 argument_list|(
-name|some
+name|operand
 argument_list|(
 name|ProjectRel
 operator|.
 name|class
 argument_list|,
-name|any
+name|operand
 argument_list|(
 name|JoinRel
 operator|.
 name|class
+argument_list|,
+name|any
+argument_list|()
 argument_list|)
 argument_list|)
 argument_list|)

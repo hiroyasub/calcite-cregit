@@ -112,9 +112,12 @@ parameter_list|)
 block|{
 name|super
 argument_list|(
-name|any
+name|operand
 argument_list|(
 name|consumerRelClass
+argument_list|,
+name|any
+argument_list|()
 argument_list|)
 argument_list|,
 literal|"CoerceInputsRule:"
