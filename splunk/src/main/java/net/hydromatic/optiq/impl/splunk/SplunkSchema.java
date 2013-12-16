@@ -317,12 +317,7 @@ name|rowType
 init|=
 name|typeFactory
 operator|.
-name|createStructType
-argument_list|(
-operator|new
-name|RelDataTypeFactory
-operator|.
-name|FieldInfoBuilder
+name|builder
 argument_list|()
 operator|.
 name|add
@@ -345,7 +340,9 @@ literal|"_extra"
 argument_list|,
 name|stringType
 argument_list|)
-argument_list|)
+operator|.
+name|build
+argument_list|()
 decl_stmt|;
 specifier|final
 name|Type

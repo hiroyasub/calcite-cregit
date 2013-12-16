@@ -456,13 +456,10 @@ operator|.
 name|getTypeFactory
 argument_list|()
 operator|.
-name|createStructType
-argument_list|(
-name|RelDataTypeFactory
+name|builder
+argument_list|()
 operator|.
-name|FieldInfoBuilder
-operator|.
-name|of
+name|addAll
 argument_list|(
 name|getSystemFieldList
 argument_list|()
@@ -491,7 +488,9 @@ operator|.
 name|getFieldList
 argument_list|()
 argument_list|)
-argument_list|)
+operator|.
+name|build
+argument_list|()
 argument_list|,
 name|fail
 argument_list|)

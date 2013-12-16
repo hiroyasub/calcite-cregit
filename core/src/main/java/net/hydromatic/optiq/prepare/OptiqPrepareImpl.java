@@ -2675,19 +2675,18 @@ block|}
 return|return
 name|typeFactory
 operator|.
-name|createStructType
-argument_list|(
-name|RelDataTypeFactory
+name|builder
+argument_list|()
 operator|.
-name|FieldInfoBuilder
-operator|.
-name|of
+name|add
 argument_list|(
 literal|"$0"
 argument_list|,
 name|type
 argument_list|)
-argument_list|)
+operator|.
+name|build
+argument_list|()
 return|;
 block|}
 comment|/** Executes an optimize action. */

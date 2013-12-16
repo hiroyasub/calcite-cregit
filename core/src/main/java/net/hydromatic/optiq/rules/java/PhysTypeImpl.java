@@ -381,10 +381,9 @@ operator|.
 name|FieldInfoBuilder
 name|builder
 init|=
-operator|new
-name|RelDataTypeFactory
+name|typeFactory
 operator|.
-name|FieldInfoBuilder
+name|builder
 argument_list|()
 decl_stmt|;
 if|if
@@ -447,12 +446,10 @@ block|}
 name|RelDataType
 name|rowType
 init|=
-name|typeFactory
-operator|.
-name|createStructType
-argument_list|(
 name|builder
-argument_list|)
+operator|.
+name|build
+argument_list|()
 decl_stmt|;
 comment|// Do not optimize if there are 0 or 1 fields.
 return|return

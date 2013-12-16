@@ -2066,6 +2066,19 @@ name|getDefaultCharset
 argument_list|()
 return|;
 block|}
+specifier|public
+name|FieldInfoBuilder
+name|builder
+parameter_list|()
+block|{
+return|return
+operator|new
+name|FieldInfoBuilder
+argument_list|(
+name|this
+argument_list|)
+return|;
+block|}
 comment|//~ Inner Classes ----------------------------------------------------------
 comment|// TODO jvs 13-Dec-2004:  move to OJTypeFactoryImpl?
 comment|/**      * Type which is based upon a Java class.      */
