@@ -3084,7 +3084,7 @@ name|fieldNames
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates a record type with anonymous field names.      */
+comment|/**      * Creates a record type with anonymous field names.      *      * @deprecated not used      * @see Bug#upgrade(String) to be removed in optiq-0.4.18      */
 specifier|public
 specifier|static
 name|RelDataType
@@ -3878,7 +3878,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**      * Adds a field to a record type at a specified position.      *      *<p>For example, if type is<code>(A integer, B boolean)</code>, and      * fieldType is<code>varchar(10)</code>, then<code>prepend(typeFactory,      * type, 0, "Z", fieldType)</code> will return<code>(Z varchar(10), A      * integer, B boolean)</code>.      *      * @param typeFactory Type factory      * @param type Record type      * @param at Ordinal to add field      * @param fieldName Name of new field      * @param fieldType Type of new field      *      * @return Extended record type      */
+comment|/**      * Adds a field to a record type at a specified position.      *      *<p>For example, if type is<code>(A integer, B boolean)</code>, and      * fieldType is<code>varchar(10)</code>, then<code>prepend(typeFactory,      * type, 0, "Z", fieldType)</code> will return<code>(Z varchar(10), A      * integer, B boolean)</code>.      *      * @param typeFactory Type factory      * @param type Record type      * @param at Ordinal to add field      * @param fieldName Name of new field      * @param fieldType Type of new field      *      * @return Extended record type      *      * @deprecated not used      * @see Bug#upgrade(String) to be removed in optiq-0.4.18      */
 specifier|public
 specifier|static
 name|RelDataType
