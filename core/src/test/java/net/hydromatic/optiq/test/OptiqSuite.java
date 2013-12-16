@@ -81,6 +81,18 @@ name|eigenbase
 operator|.
 name|relopt
 operator|.
+name|RelWriterTest
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
+name|relopt
+operator|.
 name|volcano
 operator|.
 name|VolcanoPlannerTest
@@ -286,6 +298,10 @@ name|SqlPrettyWriterTest
 operator|.
 name|class
 block|,
+name|RelWriterTest
+operator|.
+name|class
+block|,
 name|RexProgramTest
 operator|.
 name|class
@@ -382,6 +398,10 @@ operator|.
 name|class
 block|,
 comment|// slow tests that don't break often
+name|SqlToRelConverterExtendedTest
+operator|.
+name|class
+block|,
 name|PartiallyOrderedSetTest
 operator|.
 name|class

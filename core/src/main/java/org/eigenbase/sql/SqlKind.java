@@ -245,6 +245,9 @@ block|,
 comment|/**      * Reference to a sub-expression computed within the current relational      * operator.      *      *<p>(Only used at the RexNode level.)</p>      */
 name|LOCAL_REF
 block|,
+comment|/**      * Reference to correlation variable.      *      *<p>(Only used at the RexNode level.)</p>      */
+name|CORREL_VARIABLE
+block|,
 comment|// functions
 comment|/**      * The row-constructor function. May be explicit or implicit:      * {@code VALUES 1, ROW (2)}.      */
 name|ROW

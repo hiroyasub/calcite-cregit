@@ -405,7 +405,7 @@ specifier|public
 name|void
 name|explain
 parameter_list|(
-name|RelOptPlanWriter
+name|RelWriter
 name|pw
 parameter_list|)
 block|{

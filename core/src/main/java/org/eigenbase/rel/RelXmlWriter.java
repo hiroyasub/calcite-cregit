@@ -9,7 +9,7 @@ name|org
 operator|.
 name|eigenbase
 operator|.
-name|relopt
+name|rel
 package|;
 end_package
 
@@ -28,18 +28,6 @@ import|import
 name|java
 operator|.
 name|util
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
-name|rel
 operator|.
 name|*
 import|;
@@ -88,9 +76,9 @@ end_comment
 begin_class
 specifier|public
 class|class
-name|RelOptXmlPlanWriter
+name|RelXmlWriter
 extends|extends
-name|RelOptPlanWriter
+name|RelWriterImpl
 block|{
 comment|//~ Instance fields --------------------------------------------------------
 specifier|private
@@ -108,7 +96,7 @@ comment|// TODO jvs 23-Dec-2005:  honor detail level.  The current inheritance
 comment|// structure makes this difficult without duplication; need to factor
 comment|// out the filtering of attributes before rendering.
 specifier|public
-name|RelOptXmlPlanWriter
+name|RelXmlWriter
 parameter_list|(
 name|PrintWriter
 name|pw
@@ -122,6 +110,8 @@ argument_list|(
 name|pw
 argument_list|,
 name|detailLevel
+argument_list|,
+literal|true
 argument_list|)
 expr_stmt|;
 name|xmlOutput
@@ -538,7 +528,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End RelOptXmlPlanWriter.java
+comment|// End RelXmlWriter.java
 end_comment
 
 end_unit

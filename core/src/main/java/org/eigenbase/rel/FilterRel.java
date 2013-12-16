@@ -93,6 +93,20 @@ name|condition
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Creates a FilterRel by parsing serialized output. */
+specifier|public
+name|FilterRel
+parameter_list|(
+name|RelInput
+name|input
+parameter_list|)
+block|{
+name|super
+argument_list|(
+name|input
+argument_list|)
+expr_stmt|;
+block|}
 comment|//~ Methods ----------------------------------------------------------------
 annotation|@
 name|Override

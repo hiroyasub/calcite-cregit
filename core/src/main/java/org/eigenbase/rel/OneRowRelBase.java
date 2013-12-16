@@ -83,6 +83,28 @@ name|traits
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Creates a OneRowRelBase by parsing serialized output. */
+specifier|protected
+name|OneRowRelBase
+parameter_list|(
+name|RelInput
+name|input
+parameter_list|)
+block|{
+name|this
+argument_list|(
+name|input
+operator|.
+name|getCluster
+argument_list|()
+argument_list|,
+name|input
+operator|.
+name|getTraitSet
+argument_list|()
+argument_list|)
+expr_stmt|;
+block|}
 comment|//~ Methods ----------------------------------------------------------------
 specifier|public
 name|RelOptCost

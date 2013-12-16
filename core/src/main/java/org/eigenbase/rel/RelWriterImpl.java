@@ -9,7 +9,7 @@ name|org
 operator|.
 name|eigenbase
 operator|.
-name|relopt
+name|rel
 package|;
 end_package
 
@@ -28,18 +28,6 @@ import|import
 name|java
 operator|.
 name|util
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
-name|rel
 operator|.
 name|*
 import|;
@@ -136,21 +124,17 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Callback for an expression to dump itself to.  */
+comment|/**  * Implementation of {@link org.eigenbase.rel.RelWriter}.  */
 end_comment
 
 begin_class
 specifier|public
 class|class
-name|RelOptPlanWriter
+name|RelWriterImpl
+implements|implements
+name|RelWriter
 block|{
 comment|//~ Instance fields --------------------------------------------------------
-specifier|private
-name|boolean
-name|withIdPrefix
-init|=
-literal|true
-decl_stmt|;
 specifier|protected
 specifier|final
 name|PrintWriter
@@ -160,6 +144,11 @@ specifier|private
 specifier|final
 name|SqlExplainLevel
 name|detailLevel
+decl_stmt|;
+specifier|private
+specifier|final
+name|boolean
+name|withIdPrefix
 decl_stmt|;
 specifier|protected
 specifier|final
@@ -197,7 +186,7 @@ argument_list|()
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 specifier|public
-name|RelOptPlanWriter
+name|RelWriterImpl
 parameter_list|(
 name|PrintWriter
 name|pw
@@ -210,17 +199,22 @@ argument_list|,
 name|SqlExplainLevel
 operator|.
 name|EXPPLAN_ATTRIBUTES
+argument_list|,
+literal|true
 argument_list|)
 expr_stmt|;
 block|}
 specifier|public
-name|RelOptPlanWriter
+name|RelWriterImpl
 parameter_list|(
 name|PrintWriter
 name|pw
 parameter_list|,
 name|SqlExplainLevel
 name|detailLevel
+parameter_list|,
+name|boolean
+name|withIdPrefix
 parameter_list|)
 block|{
 name|this
@@ -234,22 +228,15 @@ operator|.
 name|detailLevel
 operator|=
 name|detailLevel
+expr_stmt|;
+name|this
+operator|.
+name|withIdPrefix
+operator|=
+name|withIdPrefix
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-specifier|public
-name|void
-name|setIdPrefix
-parameter_list|(
-name|boolean
-name|b
-parameter_list|)
-block|{
-name|withIdPrefix
-operator|=
-name|b
-expr_stmt|;
-block|}
 specifier|protected
 name|void
 name|explain_
@@ -574,7 +561,6 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Prints an explanation of a node, with a list of (term, value) pairs.      *      *<p>The term-value pairs are generally gathered by calling      * {@link RelNode#explain(RelOptPlanWriter)}. Each sub-class of      * {@link RelNode} calls {@link #input(String, org.eigenbase.rel.RelNode)}      * and {@link #item(String, Object)} to declare term-value pairs.</p>      *      * @param rel Relational expression      * @param valueList List of term-value pairs      */
 specifier|public
 specifier|final
 name|void
@@ -603,7 +589,6 @@ name|valueList
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * @return detail level at which plan should be generated      */
 specifier|public
 name|SqlExplainLevel
 name|getDetailLevel
@@ -613,9 +598,8 @@ return|return
 name|detailLevel
 return|;
 block|}
-comment|/** Adds an input to the explanation of the current node.      *      * @param term Term for input, e.g. "left" or "input #1".      * @param input Input relational expression      */
 specifier|public
-name|RelOptPlanWriter
+name|RelWriter
 name|input
 parameter_list|(
 name|String
@@ -646,9 +630,8 @@ return|return
 name|this
 return|;
 block|}
-comment|/** Adds an attribute to the explanation of the current node.      *      * @param term Term for attribute, e.g. "joinType"      * @param value Attribute value      */
 specifier|public
-name|RelOptPlanWriter
+name|RelWriter
 name|item
 parameter_list|(
 name|String
@@ -676,9 +659,8 @@ return|return
 name|this
 return|;
 block|}
-comment|/** Adds an input to the explanation of the current node, if a condition      * holds. */
 specifier|public
-name|RelOptPlanWriter
+name|RelWriter
 name|itemIf
 parameter_list|(
 name|String
@@ -708,9 +690,8 @@ return|return
 name|this
 return|;
 block|}
-comment|/** Writes the completed explanation. */
 specifier|public
-name|RelOptPlanWriter
+name|RelWriter
 name|done
 parameter_list|(
 name|RelNode
@@ -844,6 +825,15 @@ return|return
 name|this
 return|;
 block|}
+specifier|public
+name|boolean
+name|nest
+parameter_list|()
+block|{
+return|return
+literal|false
+return|;
+block|}
 comment|/** Converts the collected terms and values to a string. Does not write to      * the parent writer. */
 specifier|public
 name|String
@@ -947,7 +937,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End RelOptPlanWriter.java
+comment|// End RelWriterImpl.java
 end_comment
 
 end_unit

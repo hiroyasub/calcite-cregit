@@ -350,6 +350,20 @@ name|collationList
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Creates a ProjectRel by parsing serialized output. */
+specifier|public
+name|ProjectRel
+parameter_list|(
+name|RelInput
+name|input
+parameter_list|)
+block|{
+name|super
+argument_list|(
+name|input
+argument_list|)
+expr_stmt|;
+block|}
 comment|//~ Methods ----------------------------------------------------------------
 annotation|@
 name|Override

@@ -958,7 +958,7 @@ specifier|public
 name|void
 name|explain
 parameter_list|(
-name|RelOptPlanWriter
+name|RelWriter
 name|pw
 parameter_list|)
 block|{
@@ -973,12 +973,12 @@ name|this
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Describes the inputs and attributes of this relational expression.      * Each node should call {@code super.explainTerms}, then call the      * {@link RelOptPlanWriter#input(String, RelNode)}      * and {@link RelOptPlanWriter#item(String, Object)} methods for each input      * and attribute.      *      * @param pw Plan writer      */
+comment|/** Describes the inputs and attributes of this relational expression.      * Each node should call {@code super.explainTerms}, then call the      * {@link RelWriterImpl#input(String, RelNode)}      * and {@link RelWriterImpl#item(String, Object)} methods for each input      * and attribute.      *      * @param pw Plan writer      */
 specifier|public
-name|RelOptPlanWriter
+name|RelWriter
 name|explainTerms
 parameter_list|(
-name|RelOptPlanWriter
+name|RelWriter
 name|pw
 parameter_list|)
 block|{
@@ -1293,11 +1293,11 @@ operator|new
 name|StringWriter
 argument_list|()
 decl_stmt|;
-name|RelOptPlanWriter
+name|RelWriter
 name|pw
 init|=
 operator|new
-name|RelOptPlanWriter
+name|RelWriterImpl
 argument_list|(
 operator|new
 name|PrintWriter
@@ -1308,6 +1308,8 @@ argument_list|,
 name|SqlExplainLevel
 operator|.
 name|DIGEST_ATTRIBUTES
+argument_list|,
+literal|false
 argument_list|)
 block|{
 specifier|protected

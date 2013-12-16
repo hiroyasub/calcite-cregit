@@ -114,7 +114,22 @@ name|all
 argument_list|)
 expr_stmt|;
 block|}
-comment|// implement RelNode
+comment|/** Creates a MinusRelBase by parsing serialized output. */
+specifier|protected
+name|MinusRelBase
+parameter_list|(
+name|RelInput
+name|input
+parameter_list|)
+block|{
+name|super
+argument_list|(
+name|input
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Override
 specifier|public
 name|double
 name|getRows

@@ -89,6 +89,20 @@ name|aggCalls
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Creates an AggregateRel by parsing serialized output. */
+specifier|public
+name|AggregateRel
+parameter_list|(
+name|RelInput
+name|input
+parameter_list|)
+block|{
+name|super
+argument_list|(
+name|input
+argument_list|)
+expr_stmt|;
+block|}
 comment|//~ Methods ----------------------------------------------------------------
 annotation|@
 name|Override

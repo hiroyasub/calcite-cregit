@@ -83,6 +83,20 @@ name|*
 import|;
 end_import
 
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|ImmutableSet
+import|;
+end_import
+
 begin_comment
 comment|/**  *<code>TableFunctionRel</code> represents a call to a function which returns a  * result set. Currently, it can only appear as a leaf in a query tree, but  * eventually we will extend it to take relational inputs.  *  * @author John V. Sichi  * @version $Id$  */
 end_comment
@@ -141,6 +155,20 @@ argument_list|,
 name|rowType
 argument_list|,
 name|columnMappings
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Creates a TableFunctionRel by parsing serialized output. */
+specifier|public
+name|TableFunctionRel
+parameter_list|(
+name|RelInput
+name|input
+parameter_list|)
+block|{
+name|super
+argument_list|(
+name|input
 argument_list|)
 expr_stmt|;
 block|}

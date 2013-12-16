@@ -25,6 +25,18 @@ name|*
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
+name|sql
+operator|.
+name|SqlKind
+import|;
+end_import
+
 begin_comment
 comment|/**  * Reference to the current row of a correlating relational expression.  *  *<p>Correlating variables are introduced when performing nested loop joins.  * Each row is received from one side of the join, a correlating variable is  * assigned a value, and the other side of the join is restarted.</p>  *  * @author jhyde  * @version $Id$  * @since Nov 24, 2003  */
 end_comment
@@ -91,6 +103,19 @@ name|visitCorrelVariable
 argument_list|(
 name|this
 argument_list|)
+return|;
+block|}
+annotation|@
+name|Override
+specifier|public
+name|SqlKind
+name|getKind
+parameter_list|()
+block|{
+return|return
+name|SqlKind
+operator|.
+name|CORREL_VARIABLE
 return|;
 block|}
 block|}

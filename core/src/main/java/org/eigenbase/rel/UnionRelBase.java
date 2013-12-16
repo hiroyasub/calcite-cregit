@@ -93,6 +93,20 @@ name|all
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Creates a UnionRelBase by parsing serialized output. */
+specifier|protected
+name|UnionRelBase
+parameter_list|(
+name|RelInput
+name|input
+parameter_list|)
+block|{
+name|super
+argument_list|(
+name|input
+argument_list|)
+expr_stmt|;
+block|}
 comment|//~ Methods ----------------------------------------------------------------
 comment|// implement RelNode
 specifier|public

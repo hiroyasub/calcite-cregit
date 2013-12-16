@@ -133,7 +133,7 @@ argument_list|>
 name|getTraitClass
 parameter_list|()
 function_decl|;
-comment|/**      * @return a simple name for this RelTraitDef (for use in      * {@link org.eigenbase.rel.RelNode#explain(RelOptPlanWriter)}).      */
+comment|/**      * @return a simple name for this RelTraitDef (for use in      * {@link org.eigenbase.rel.RelNode#explain(RelWriter)}).      */
 specifier|public
 specifier|abstract
 name|String

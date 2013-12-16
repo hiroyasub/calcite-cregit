@@ -590,11 +590,11 @@ block|{
 comment|// Intended to produce similar output to explainCalc,
 comment|// but without requiring a RelNode or RelOptPlanWriter.
 specifier|final
-name|RelOptPlanWriter
+name|RelWriterImpl
 name|pw
 init|=
 operator|new
-name|RelOptPlanWriter
+name|RelWriterImpl
 argument_list|(
 operator|new
 name|PrintWriter
@@ -621,10 +621,10 @@ return|;
 block|}
 comment|/**      * Writes an explanation of the expressions in this program to a plan      * writer.      *      * @param pw Plan writer      */
 specifier|public
-name|RelOptPlanWriter
+name|RelWriter
 name|explainCalc
 parameter_list|(
-name|RelOptPlanWriter
+name|RelWriter
 name|pw
 parameter_list|)
 block|{
@@ -643,13 +643,13 @@ argument_list|)
 return|;
 block|}
 specifier|public
-name|RelOptPlanWriter
+name|RelWriter
 name|collectExplainTerms
 parameter_list|(
 name|String
 name|prefix
 parameter_list|,
-name|RelOptPlanWriter
+name|RelWriter
 name|pw
 parameter_list|)
 block|{
@@ -668,13 +668,13 @@ return|;
 block|}
 comment|/**      * Collects the expressions in this program into a list of terms and values.      *      * @param prefix Prefix for term names, usually the empty string, but useful      * if a relational expression contains more than one program      * @param pw Plan writer      */
 specifier|public
-name|RelOptPlanWriter
+name|RelWriter
 name|collectExplainTerms
 parameter_list|(
 name|String
 name|prefix
 parameter_list|,
-name|RelOptPlanWriter
+name|RelWriter
 name|pw
 parameter_list|,
 name|SqlExplainLevel

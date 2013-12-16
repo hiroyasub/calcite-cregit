@@ -83,6 +83,20 @@ name|all
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Creates a MinusRel by parsing serialized output. */
+specifier|public
+name|MinusRel
+parameter_list|(
+name|RelInput
+name|input
+parameter_list|)
+block|{
+name|super
+argument_list|(
+name|input
+argument_list|)
+expr_stmt|;
+block|}
 comment|//~ Methods ----------------------------------------------------------------
 annotation|@
 name|Override

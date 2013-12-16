@@ -99,6 +99,7 @@ name|boolean
 name|all
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
+comment|/** Creates a SetOpRel. */
 specifier|protected
 name|SetOpRel
 parameter_list|(
@@ -141,6 +142,40 @@ operator|.
 name|all
 operator|=
 name|all
+expr_stmt|;
+block|}
+comment|/** Creates a SetOpRel by parsing serialized output. */
+specifier|protected
+name|SetOpRel
+parameter_list|(
+name|RelInput
+name|input
+parameter_list|)
+block|{
+name|this
+argument_list|(
+name|input
+operator|.
+name|getCluster
+argument_list|()
+argument_list|,
+name|input
+operator|.
+name|getTraitSet
+argument_list|()
+argument_list|,
+name|input
+operator|.
+name|getInputs
+argument_list|()
+argument_list|,
+name|input
+operator|.
+name|getBoolean
+argument_list|(
+literal|"all"
+argument_list|)
+argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
@@ -281,10 +316,10 @@ name|inputs
 return|;
 block|}
 specifier|public
-name|RelOptPlanWriter
+name|RelWriter
 name|explainTerms
 parameter_list|(
-name|RelOptPlanWriter
+name|RelWriter
 name|pw
 parameter_list|)
 block|{

@@ -5808,10 +5808,10 @@ block|}
 annotation|@
 name|Override
 specifier|public
-name|RelOptPlanWriter
+name|RelWriter
 name|explainTerms
 parameter_list|(
-name|RelOptPlanWriter
+name|RelWriter
 name|pw
 parameter_list|)
 block|{

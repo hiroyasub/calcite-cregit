@@ -110,6 +110,20 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Creates a ValuesRel by parsing serialized output. */
+specifier|public
+name|ValuesRel
+parameter_list|(
+name|RelInput
+name|input
+parameter_list|)
+block|{
+name|super
+argument_list|(
+name|input
+argument_list|)
+expr_stmt|;
+block|}
 specifier|public
 name|RelNode
 name|copy

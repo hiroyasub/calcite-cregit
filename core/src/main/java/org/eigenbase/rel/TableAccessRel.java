@@ -25,6 +25,16 @@ end_import
 
 begin_import
 import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Map
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|eigenbase
@@ -73,6 +83,20 @@ name|NONE
 argument_list|)
 argument_list|,
 name|table
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Creates a TableAccessRel by parsing serialized output. */
+specifier|public
+name|TableAccessRel
+parameter_list|(
+name|RelInput
+name|input
+parameter_list|)
+block|{
+name|super
+argument_list|(
+name|input
 argument_list|)
 expr_stmt|;
 block|}
