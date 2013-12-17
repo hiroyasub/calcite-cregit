@@ -688,7 +688,7 @@ name|that
 init|=
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|withModel

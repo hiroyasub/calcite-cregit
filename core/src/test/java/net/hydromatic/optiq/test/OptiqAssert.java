@@ -578,10 +578,11 @@ return|;
 block|}
 block|}
 decl_stmt|;
+comment|/** Creates an instance of {@code OptiqAssert} with the regular    * configuration. */
 specifier|public
 specifier|static
 name|AssertThat
-name|assertThat
+name|that
 parameter_list|()
 block|{
 return|return
@@ -2479,7 +2480,7 @@ return|return
 name|optiqConnection
 return|;
 block|}
-comment|/**    * Result of calling {@link OptiqAssert#assertThat}.    */
+comment|/**    * Result of calling {@link OptiqAssert#that}.    */
 specifier|public
 specifier|static
 class|class

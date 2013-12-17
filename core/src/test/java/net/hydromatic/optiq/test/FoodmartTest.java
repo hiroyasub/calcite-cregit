@@ -1280,7 +1280,7 @@ try|try
 block|{
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 comment|//          .withModel(JdbcTest.FOODMART_MODEL)
 operator|.

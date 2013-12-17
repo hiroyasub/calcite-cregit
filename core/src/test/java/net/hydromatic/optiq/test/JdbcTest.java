@@ -2581,7 +2581,7 @@ parameter_list|()
 block|{
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
@@ -2619,7 +2619,7 @@ comment|// insensitive. If a select list contains the same column more than once
 comment|// the first instance of the column will be returned."
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|doWithConnection
@@ -3095,7 +3095,7 @@ parameter_list|()
 block|{
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
@@ -3137,7 +3137,7 @@ parameter_list|()
 block|{
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
@@ -3194,7 +3194,7 @@ parameter_list|()
 block|{
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
@@ -3246,7 +3246,7 @@ parameter_list|()
 block|{
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
@@ -3877,7 +3877,7 @@ parameter_list|()
 block|{
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
@@ -3914,7 +3914,7 @@ parameter_list|()
 block|{
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
@@ -3959,7 +3959,7 @@ parameter_list|()
 block|{
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
@@ -4068,7 +4068,7 @@ parameter_list|()
 block|{
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
@@ -4323,7 +4323,7 @@ name|with
 init|=
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
@@ -4505,7 +4505,7 @@ decl_stmt|;
 return|return
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
@@ -4559,7 +4559,7 @@ argument_list|()
 decl_stmt|;
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
@@ -4629,7 +4629,7 @@ parameter_list|()
 block|{
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
@@ -4844,7 +4844,7 @@ parameter_list|()
 block|{
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
@@ -4922,7 +4922,7 @@ parameter_list|)
 block|{
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
@@ -4950,7 +4950,7 @@ parameter_list|()
 block|{
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|query
@@ -4975,7 +4975,7 @@ parameter_list|()
 block|{
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|query
@@ -4998,7 +4998,7 @@ parameter_list|()
 block|{
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|query
@@ -5689,7 +5689,7 @@ parameter_list|()
 block|{
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|query
@@ -5715,7 +5715,7 @@ parameter_list|()
 block|{
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
@@ -5752,7 +5752,7 @@ parameter_list|()
 block|{
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
@@ -5796,7 +5796,7 @@ literal|"select \"time_by_day\".\"the_year\" as \"c0\", sum(\"sales_fact_1997\".
 decl_stmt|;
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
@@ -5831,7 +5831,7 @@ parameter_list|()
 block|{
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
@@ -5920,7 +5920,7 @@ return|return;
 block|}
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
@@ -6027,7 +6027,7 @@ parameter_list|()
 block|{
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
@@ -6066,7 +6066,7 @@ parameter_list|()
 block|{
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
@@ -6105,7 +6105,7 @@ parameter_list|()
 block|{
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
@@ -6144,7 +6144,7 @@ parameter_list|()
 block|{
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
@@ -6183,7 +6183,7 @@ parameter_list|()
 block|{
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
@@ -6222,7 +6222,7 @@ parameter_list|()
 block|{
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
@@ -6261,7 +6261,7 @@ parameter_list|()
 block|{
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
@@ -6317,7 +6317,7 @@ parameter_list|()
 block|{
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
@@ -6362,7 +6362,7 @@ parameter_list|()
 block|{
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
@@ -6398,7 +6398,7 @@ parameter_list|()
 block|{
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
@@ -6435,7 +6435,7 @@ parameter_list|()
 block|{
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
@@ -6472,7 +6472,7 @@ parameter_list|()
 block|{
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
@@ -6509,7 +6509,7 @@ parameter_list|()
 block|{
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
@@ -6563,7 +6563,7 @@ parameter_list|()
 block|{
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
@@ -6605,7 +6605,7 @@ parameter_list|()
 block|{
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
@@ -6647,7 +6647,7 @@ parameter_list|()
 block|{
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
@@ -6691,7 +6691,7 @@ parameter_list|()
 block|{
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
@@ -6735,7 +6735,7 @@ parameter_list|()
 block|{
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
@@ -6777,7 +6777,7 @@ parameter_list|()
 block|{
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
@@ -6827,7 +6827,7 @@ parameter_list|()
 block|{
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
@@ -6896,7 +6896,7 @@ parameter_list|()
 block|{
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
@@ -6972,7 +6972,7 @@ parameter_list|()
 block|{
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
@@ -7030,7 +7030,7 @@ parameter_list|()
 block|{
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
@@ -7065,7 +7065,7 @@ parameter_list|()
 block|{
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
@@ -7102,7 +7102,7 @@ parameter_list|()
 block|{
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
@@ -7198,7 +7198,7 @@ block|{
 return|return
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
@@ -7232,7 +7232,7 @@ parameter_list|()
 block|{
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
@@ -7273,7 +7273,7 @@ parameter_list|()
 block|{
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
@@ -7302,7 +7302,7 @@ argument_list|)
 expr_stmt|;
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
@@ -7339,7 +7339,7 @@ name|Exception
 block|{
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
@@ -7511,7 +7511,7 @@ name|Exception
 block|{
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
@@ -7688,7 +7688,7 @@ parameter_list|()
 block|{
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|withModel
@@ -7722,7 +7722,7 @@ parameter_list|()
 block|{
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|withModel
@@ -7747,7 +7747,7 @@ argument_list|)
 expr_stmt|;
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|withMaterializations
@@ -7793,7 +7793,7 @@ parameter_list|()
 block|{
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|withModel
@@ -7865,7 +7865,7 @@ parameter_list|()
 block|{
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|withModel
@@ -7949,7 +7949,7 @@ name|that
 init|=
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|withModel
@@ -8097,7 +8097,7 @@ name|that
 init|=
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|withModel
@@ -8192,7 +8192,7 @@ name|with
 init|=
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|withModel
@@ -8513,7 +8513,7 @@ argument_list|()
 decl_stmt|;
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
@@ -8668,7 +8668,7 @@ name|with
 init|=
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
@@ -8850,7 +8850,7 @@ name|Exception
 block|{
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
@@ -9095,7 +9095,7 @@ name|Exception
 block|{
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with

@@ -47,7 +47,7 @@ name|test
 operator|.
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 import|;
 end_import
 
@@ -67,7 +67,7 @@ name|void
 name|testTable
 parameter_list|()
 block|{
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
@@ -109,7 +109,7 @@ name|void
 name|testWhere
 parameter_list|()
 block|{
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
@@ -141,7 +141,7 @@ name|void
 name|testWhere2
 parameter_list|()
 block|{
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
@@ -183,7 +183,7 @@ name|void
 name|testCase
 parameter_list|()
 block|{
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
@@ -237,7 +237,7 @@ name|void
 name|testGroup
 parameter_list|()
 block|{
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
@@ -283,7 +283,7 @@ name|void
 name|testGroupEmpty
 parameter_list|()
 block|{
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
@@ -316,7 +316,7 @@ name|void
 name|testJoinTheta
 parameter_list|()
 block|{
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
@@ -354,7 +354,7 @@ name|void
 name|testJoinGroupByEmpty
 parameter_list|()
 block|{
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
@@ -392,7 +392,7 @@ name|void
 name|testJoinGroupByOrderBy
 parameter_list|()
 block|{
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
@@ -436,7 +436,7 @@ name|void
 name|testCompositeGroupBy
 parameter_list|()
 block|{
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
@@ -503,7 +503,7 @@ comment|// Composite GROUP BY key
 comment|// Order by select item, referenced by ordinal
 comment|// Distinct count
 comment|// Not all GROUP columns are projected
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
@@ -568,7 +568,7 @@ name|void
 name|testPlan
 parameter_list|()
 block|{
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
@@ -620,7 +620,7 @@ name|void
 name|testPlan2
 parameter_list|()
 block|{
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
@@ -690,7 +690,7 @@ comment|// data type incompatibility has caused it to use a cartesian product
 comment|// instead, and that would be wrong.
 comment|//
 comment|// inventory_fact_1997 is on the LHS because it is larger than store.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with

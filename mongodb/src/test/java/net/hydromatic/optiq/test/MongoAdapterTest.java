@@ -132,7 +132,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Tests for the {@link net.hydromatic.optiq.impl.mongodb} package.  *  *<p>Before calling this test, you need to populate MongoDB with the "zips"  * data set (as described in HOWTO.md)  * and "foodmart" data set, as follows:</p>  *  *<blockquote><pre>  * JAR=~/.m2/repository/pentaho/mondrian-data-foodmart-json/0.2/mondrian-data-foodmart-json-0.2.jar  * mkdir /tmp/foodmart  * cd /tmp/foodmart  * jar xvf $JAR  * for i in *.json; do  *   mongoimport --db foodmart --collection ${i/.json/} --file $i  * done  *</pre></blockquote>  */
+comment|/**  * Tests for the {@link net.hydromatic.optiq.impl.mongodb} package.  *  *<p>Before calling this test, you need to populate MongoDB with the "zips"  * data set (as described in HOWTO.md)  * and "foodmart" data set, as follows:</p>  *  *<blockquote><pre>  * JAR=~/.m2/repository/pentaho/mondrian-data-foodmart-json/0.3/mondrian-data-foodmart-json-0.3.jar  * mkdir /tmp/foodmart  * cd /tmp/foodmart  * jar xvf $JAR  * for i in *.json; do  *   mongoimport --db foodmart --collection ${i/.json/} --file $i  * done  *</pre></blockquote>  */
 end_comment
 
 begin_class
@@ -445,7 +445,7 @@ parameter_list|()
 block|{
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|enable
@@ -490,7 +490,7 @@ parameter_list|()
 block|{
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|enable
@@ -547,7 +547,7 @@ parameter_list|()
 block|{
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|enable
@@ -605,7 +605,7 @@ parameter_list|()
 block|{
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|enable
@@ -646,7 +646,7 @@ parameter_list|()
 block|{
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|enable
@@ -696,7 +696,7 @@ parameter_list|()
 block|{
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|enable
@@ -763,7 +763,7 @@ parameter_list|()
 block|{
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|enable
@@ -824,7 +824,7 @@ parameter_list|()
 block|{
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|enable
@@ -869,7 +869,7 @@ parameter_list|()
 block|{
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|enable
@@ -917,7 +917,7 @@ parameter_list|()
 block|{
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|enable
@@ -1028,7 +1028,7 @@ name|query1
 init|=
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|enable

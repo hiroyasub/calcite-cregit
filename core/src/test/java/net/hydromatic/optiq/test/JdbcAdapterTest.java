@@ -43,7 +43,7 @@ parameter_list|()
 block|{
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|withModel
@@ -113,7 +113,7 @@ parameter_list|()
 block|{
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|withModel
@@ -180,7 +180,7 @@ parameter_list|()
 block|{
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|withModel

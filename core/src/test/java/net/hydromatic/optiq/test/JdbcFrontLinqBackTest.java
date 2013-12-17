@@ -167,7 +167,7 @@ name|test
 operator|.
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 import|;
 end_import
 
@@ -188,7 +188,7 @@ name|void
 name|testSelect
 parameter_list|()
 block|{
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|query
@@ -214,7 +214,7 @@ name|void
 name|testJoin
 parameter_list|()
 block|{
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|query
@@ -244,7 +244,7 @@ name|void
 name|testGroupBy
 parameter_list|()
 block|{
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|query
@@ -272,7 +272,7 @@ name|void
 name|testOrderBy
 parameter_list|()
 block|{
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|query
@@ -304,7 +304,7 @@ name|void
 name|testUnionAllOrderBy
 parameter_list|()
 block|{
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|query
@@ -348,7 +348,7 @@ name|void
 name|testUnion
 parameter_list|()
 block|{
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|query
@@ -390,7 +390,7 @@ name|void
 name|testIntersect
 parameter_list|()
 block|{
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|query
@@ -422,7 +422,7 @@ name|void
 name|testExcept
 parameter_list|()
 block|{
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|query
@@ -455,7 +455,7 @@ name|void
 name|testWhereBad
 parameter_list|()
 block|{
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|query
@@ -481,7 +481,7 @@ name|void
 name|testWhereOr
 parameter_list|()
 block|{
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|query
@@ -506,7 +506,7 @@ name|void
 name|testWhereLike
 parameter_list|()
 block|{
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|query
@@ -674,7 +674,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 return|return
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with

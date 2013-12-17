@@ -175,7 +175,7 @@ try|try
 block|{
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
@@ -245,7 +245,7 @@ literal|true
 expr_stmt|;
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
@@ -353,7 +353,7 @@ literal|true
 expr_stmt|;
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
@@ -435,7 +435,7 @@ literal|true
 expr_stmt|;
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with

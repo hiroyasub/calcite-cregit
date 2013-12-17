@@ -1345,7 +1345,7 @@ name|Exception
 block|{
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
@@ -1388,7 +1388,7 @@ name|with
 init|=
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
@@ -1443,7 +1443,7 @@ name|with
 init|=
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
@@ -1502,7 +1502,7 @@ name|with
 init|=
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
@@ -1631,7 +1631,7 @@ name|with
 init|=
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
@@ -1699,7 +1699,7 @@ name|with
 init|=
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
@@ -1855,7 +1855,7 @@ parameter_list|()
 block|{
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
@@ -1953,7 +1953,7 @@ name|Exception
 block|{
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
@@ -1994,7 +1994,7 @@ name|with
 init|=
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
@@ -2071,7 +2071,7 @@ name|Exception
 block|{
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with

@@ -107,7 +107,7 @@ name|test
 operator|.
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 import|;
 end_import
 
@@ -127,7 +127,7 @@ name|void
 name|testWhere2
 parameter_list|()
 block|{
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
@@ -163,7 +163,7 @@ parameter_list|()
 throws|throws
 name|Exception
 block|{
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
@@ -290,7 +290,7 @@ parameter_list|()
 throws|throws
 name|Exception
 block|{
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
@@ -422,7 +422,7 @@ parameter_list|()
 throws|throws
 name|Exception
 block|{
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
@@ -550,7 +550,7 @@ parameter_list|()
 throws|throws
 name|Exception
 block|{
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
@@ -638,7 +638,7 @@ name|void
 name|testCase
 parameter_list|()
 block|{
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
