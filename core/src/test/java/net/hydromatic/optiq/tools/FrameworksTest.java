@@ -201,6 +201,18 @@ name|eigenbase
 operator|.
 name|sql
 operator|.
+name|SqlExplainLevel
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
+name|sql
+operator|.
 name|fun
 operator|.
 name|SqlStdOperatorTable
@@ -244,6 +256,18 @@ operator|.
 name|util
 operator|.
 name|List
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|hamcrest
+operator|.
+name|CoreMatchers
+operator|.
+name|*
 import|;
 end_import
 
@@ -619,14 +643,34 @@ block|}
 block|}
 argument_list|)
 decl_stmt|;
-name|assertEquals
+name|String
+name|s
+init|=
+name|RelOptUtil
+operator|.
+name|dumpPlan
 argument_list|(
-literal|"EnumerableCalcRel#12"
+literal|""
 argument_list|,
 name|x
+argument_list|,
+literal|false
+argument_list|,
+name|SqlExplainLevel
 operator|.
-name|toString
-argument_list|()
+name|DIGEST_ATTRIBUTES
+argument_list|)
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|s
+argument_list|,
+name|equalTo
+argument_list|(
+literal|"EnumerableFilterRel(condition=[>($1, 1)])\n"
+operator|+
+literal|"  EnumerableTableAccessRel(table=[[myTable]])\n"
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}

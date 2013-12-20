@@ -120,7 +120,18 @@ parameter_list|)
 block|{
 comment|// ignore - this planner does not support materializations
 block|}
-comment|// implement RelOptPlanner
+specifier|public
+name|void
+name|clearRules
+parameter_list|()
+block|{
+name|this
+operator|.
+name|rule
+operator|=
+literal|null
+expr_stmt|;
+block|}
 specifier|public
 name|boolean
 name|addRule
@@ -148,7 +159,6 @@ return|return
 literal|false
 return|;
 block|}
-comment|// implement RelOptPlanner
 specifier|public
 name|boolean
 name|removeRule

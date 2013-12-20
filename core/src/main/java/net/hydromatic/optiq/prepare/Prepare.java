@@ -1515,6 +1515,17 @@ argument_list|>
 name|names
 parameter_list|)
 function_decl|;
+comment|/** Returns a catalog reader the same as this one but with a possibly      * different schema path. */
+name|CatalogReader
+name|withSchemaPath
+parameter_list|(
+name|List
+argument_list|<
+name|String
+argument_list|>
+name|schemaPath
+parameter_list|)
+function_decl|;
 name|PreparingTable
 name|getTable
 parameter_list|(

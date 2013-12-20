@@ -370,9 +370,6 @@ return|return
 name|expandView
 argument_list|(
 name|context
-operator|.
-name|getPreparingStmt
-argument_list|()
 argument_list|,
 name|getRowType
 argument_list|()
@@ -385,7 +382,9 @@ specifier|private
 name|RelNode
 name|expandView
 parameter_list|(
-name|Prepare
+name|RelOptTable
+operator|.
+name|ToRelContext
 name|preparingStmt
 parameter_list|,
 name|RelDataType
@@ -446,17 +445,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|rel
-operator|=
-name|preparingStmt
-operator|.
-name|flattenTypes
-argument_list|(
-name|rel
-argument_list|,
-literal|false
-argument_list|)
-expr_stmt|;
+comment|//rel = viewExpander.flattenTypes(rel, false);
 return|return
 name|rel
 return|;

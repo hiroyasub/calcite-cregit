@@ -145,6 +145,20 @@ name|Functions
 import|;
 end_import
 
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|ImmutableList
+import|;
+end_import
+
 begin_comment
 comment|/**  * HepPlanner is a heuristic implementation of the {@link RelOptPlanner}  * interface.  *  * @author John V. Sichi  * @version $Id$  */
 end_comment
@@ -410,7 +424,31 @@ return|return
 name|added
 return|;
 block|}
-comment|// implement RelOptPlanner
+specifier|public
+name|void
+name|clearRules
+parameter_list|()
+block|{
+for|for
+control|(
+name|RelOptRule
+name|rule
+range|:
+name|ImmutableList
+operator|.
+name|copyOf
+argument_list|(
+name|allRules
+argument_list|)
+control|)
+block|{
+name|removeRule
+argument_list|(
+name|rule
+argument_list|)
+expr_stmt|;
+block|}
+block|}
 specifier|public
 name|boolean
 name|removeRule

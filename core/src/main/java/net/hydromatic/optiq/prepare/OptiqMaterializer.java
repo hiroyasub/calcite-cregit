@@ -339,14 +339,11 @@ name|materialization
 operator|.
 name|tableRel
 operator|=
-name|table
+name|sqlToRelConverter2
 operator|.
 name|toRel
 argument_list|(
-name|sqlToRelConverter2
-operator|.
-name|makeToRelContext
-argument_list|()
+name|table
 argument_list|)
 expr_stmt|;
 block|}

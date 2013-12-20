@@ -152,6 +152,11 @@ argument_list|>
 name|getRelTraitDefs
 parameter_list|()
 function_decl|;
+comment|/**      * Removes all rules.      */
+name|void
+name|clearRules
+parameter_list|()
+function_decl|;
 comment|/**      * Registers a rule. If the rule has already been registered, does nothing.      * This method should determine if the given rule is a {@link      * org.eigenbase.rel.convert.ConverterRule} and pass the ConverterRule to      * all {@link #addRelTraitDef(RelTraitDef) registered} RelTraitDef      * instances.      *      * @return whether the rule was added, as per {@link      * java.util.Collection#add}      */
 specifier|public
 name|boolean
