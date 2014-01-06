@@ -110,8 +110,7 @@ name|maps
 expr_stmt|;
 block|}
 comment|/** Creates a CompositeMap. */
-annotation|@
-name|SafeVarargs
+comment|// Would like to use '@SafeVarargs' but JDK 1.6 doesn't support it.
 annotation|@
 name|SuppressWarnings
 argument_list|(
