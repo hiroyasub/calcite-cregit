@@ -26,7 +26,7 @@ name|OptiqJdbc40Factory
 extends|extends
 name|OptiqJdbc41Factory
 block|{
-comment|/** Creates a JDBC factory. */
+comment|/** Creates a factory for JDBC version 4.1. */
 specifier|public
 name|OptiqJdbc40Factory
 parameter_list|()

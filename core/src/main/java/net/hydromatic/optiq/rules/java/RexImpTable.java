@@ -63,18 +63,6 @@ name|hydromatic
 operator|.
 name|optiq
 operator|.
-name|DataContext
-import|;
-end_import
-
-begin_import
-import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|optiq
-operator|.
 name|runtime
 operator|.
 name|SqlFunctions
@@ -255,6 +243,20 @@ end_import
 
 begin_import
 import|import static
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|optiq
+operator|.
+name|DataContext
+operator|.
+name|ROOT
+import|;
+end_import
+
+begin_import
+import|import static
 name|org
 operator|.
 name|eigenbase
@@ -278,23 +280,6 @@ specifier|public
 class|class
 name|RexImpTable
 block|{
-specifier|public
-specifier|static
-specifier|final
-name|ParameterExpression
-name|root
-init|=
-name|Expressions
-operator|.
-name|parameter
-argument_list|(
-name|DataContext
-operator|.
-name|class
-argument_list|,
-literal|"root"
-argument_list|)
-decl_stmt|;
 specifier|public
 specifier|static
 specifier|final
@@ -5821,7 +5806,7 @@ name|CURRENT_TIMESTAMP
 operator|.
 name|method
 argument_list|,
-name|root
+name|ROOT
 argument_list|)
 return|;
 block|}
@@ -5843,7 +5828,7 @@ name|CURRENT_TIME
 operator|.
 name|method
 argument_list|,
-name|root
+name|ROOT
 argument_list|)
 return|;
 block|}
@@ -5865,7 +5850,7 @@ name|CURRENT_DATE
 operator|.
 name|method
 argument_list|,
-name|root
+name|ROOT
 argument_list|)
 return|;
 block|}
@@ -5887,7 +5872,7 @@ name|LOCAL_TIMESTAMP
 operator|.
 name|method
 argument_list|,
-name|root
+name|ROOT
 argument_list|)
 return|;
 block|}
@@ -5909,7 +5894,7 @@ name|LOCAL_TIME
 operator|.
 name|method
 argument_list|,
-name|root
+name|ROOT
 argument_list|)
 return|;
 block|}

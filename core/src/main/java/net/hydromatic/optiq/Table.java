@@ -15,13 +15,13 @@ end_package
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|eigenbase
 operator|.
-name|linq4j
+name|reltype
 operator|.
-name|Queryable
+name|RelDataType
 import|;
 end_import
 
@@ -33,34 +33,37 @@ name|eigenbase
 operator|.
 name|reltype
 operator|.
-name|RelDataType
+name|RelDataTypeFactory
 import|;
 end_import
 
 begin_comment
-comment|/**  * Table.  *  * @see TableFunction  */
+comment|/**  * Table.  *  *<p>The typical way for a table to be created is when Optiq interrogates  * a user-defined schema in order to validate names appearing in a SQL query.  * Optiq finds the schema by calling {@link Schema#getSubSchema(String)} on the  * connection's root schema, then gets a table by calling  * {@link Schema#getTable(String)}.</p>  *  *<p>Note that a table does not know its name. It is in fact possible for  * a table to be used more than once, perhaps under multiple names or under  * multiple schemas. (Compare with the  *<a href="http://en.wikipedia.org/wiki/Inode">i-node</a> concept in the UNIX  * filesystem.)</p>  *  * @see TableFunction  */
 end_comment
 
 begin_interface
 specifier|public
 interface|interface
 name|Table
-parameter_list|<
-name|T
-parameter_list|>
-extends|extends
-name|Queryable
-argument_list|<
-name|T
-argument_list|>
 block|{
+comment|/** Returns this table's row type.    *    *<p>This is a struct type whose    * fields describe the names and types of the columns in this table.</p>    *    *<p>The implementer must use the type factory provided. This ensures that    * the type is converted into a canonical form; other equal types in the same    * query will use the same object.</p>    *    * @param typeFactory Type factory with which to create the type    * @return Row type    */
 name|RelDataType
 name|getRowType
-parameter_list|()
+parameter_list|(
+name|RelDataTypeFactory
+name|typeFactory
+parameter_list|)
 function_decl|;
 comment|/** Returns a provider of statistics about this table. */
 name|Statistic
 name|getStatistic
+parameter_list|()
+function_decl|;
+comment|/** Type of table. */
+name|Schema
+operator|.
+name|TableType
+name|getJdbcTableType
 parameter_list|()
 function_decl|;
 block|}

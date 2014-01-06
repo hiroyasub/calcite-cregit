@@ -53,11 +53,11 @@ name|net
 operator|.
 name|hydromatic
 operator|.
-name|optiq
+name|linq4j
 operator|.
-name|prepare
+name|expressions
 operator|.
-name|Prepare
+name|Expression
 import|;
 end_import
 
@@ -129,6 +129,14 @@ name|Class
 argument_list|<
 name|T
 argument_list|>
+name|clazz
+parameter_list|)
+function_decl|;
+comment|/**      * Generates code for this table.      *      * @param clazz The desired collection class; for example {@code Queryable}.      */
+name|Expression
+name|getExpression
+parameter_list|(
+name|Class
 name|clazz
 parameter_list|)
 function_decl|;

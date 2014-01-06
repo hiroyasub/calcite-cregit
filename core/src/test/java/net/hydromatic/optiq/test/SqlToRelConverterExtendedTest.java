@@ -37,7 +37,7 @@ name|hydromatic
 operator|.
 name|optiq
 operator|.
-name|Schema
+name|SchemaPlus
 import|;
 end_import
 
@@ -356,8 +356,8 @@ parameter_list|,
 name|RelOptSchema
 name|relOptSchema
 parameter_list|,
-name|Schema
-name|schema
+name|SchemaPlus
+name|rootSchema
 parameter_list|)
 block|{
 specifier|final
@@ -374,7 +374,7 @@ index|[
 literal|0
 index|]
 argument_list|,
-name|schema
+name|rootSchema
 argument_list|)
 decl_stmt|;
 try|try

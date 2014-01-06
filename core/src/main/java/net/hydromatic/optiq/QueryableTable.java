@@ -15,25 +15,39 @@ end_package
 
 begin_import
 import|import
-name|org
+name|net
 operator|.
-name|eigenbase
+name|hydromatic
 operator|.
-name|reltype
+name|linq4j
 operator|.
-name|RelDataType
+name|QueryProvider
 import|;
 end_import
 
 begin_import
 import|import
-name|org
+name|net
 operator|.
-name|eigenbase
+name|hydromatic
 operator|.
-name|reltype
+name|linq4j
 operator|.
-name|RelDataTypeFactory
+name|Queryable
+import|;
+end_import
+
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|linq4j
+operator|.
+name|expressions
+operator|.
+name|Expression
 import|;
 end_import
 
@@ -41,59 +55,69 @@ begin_import
 import|import
 name|java
 operator|.
-name|util
+name|lang
 operator|.
-name|List
+name|reflect
+operator|.
+name|Type
 import|;
 end_import
 
 begin_comment
-comment|/**  * Function that returns a {@link Table}.  */
+comment|/**  * Extension to {@link Table} that can translate itself to a {@link Queryable}.  */
 end_comment
 
 begin_interface
 specifier|public
 interface|interface
-name|TableFunction
+name|QueryableTable
+extends|extends
+name|Table
 block|{
-comment|/**    * Returns the parameters of this table function.    *    * @return Parameters; never null    */
-name|List
+comment|/** Converts this table into a {@link Queryable}. */
+parameter_list|<
+name|T
+parameter_list|>
+name|Queryable
 argument_list|<
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|optiq
-operator|.
-name|Parameter
+name|T
 argument_list|>
-name|getParameters
-parameter_list|()
-function_decl|;
-comment|/**    * Returns the record type of the table yielded by this function when    * applied to parameters of given types.    *    * @param typeFactory Type factory    */
-name|RelDataType
-name|getRowType
+name|asQueryable
 parameter_list|(
-name|RelDataTypeFactory
-name|typeFactory
+name|QueryProvider
+name|queryProvider
+parameter_list|,
+name|SchemaPlus
+name|schema
+parameter_list|,
+name|String
+name|tableName
 parameter_list|)
 function_decl|;
-comment|/**    * Applies arguments to yield a table.    *    * @param arguments Arguments    * @return Table    */
-name|Table
-name|apply
+comment|/** Returns the element type of the collection that will implement this    * table. */
+name|Type
+name|getElementType
+parameter_list|()
+function_decl|;
+comment|/** Generates an expression with which this table can be referenced in    * generated code.    *    * @param schema Schema    * @param tableName Table name (unique within schema)    * @param clazz The desired collection class; for example {@code Queryable}.    */
+name|Expression
+name|getExpression
 parameter_list|(
-name|List
-argument_list|<
-name|Object
-argument_list|>
-name|arguments
+name|SchemaPlus
+name|schema
+parameter_list|,
+name|String
+name|tableName
+parameter_list|,
+name|Class
+name|clazz
 parameter_list|)
 function_decl|;
 block|}
 end_interface
 
 begin_comment
-comment|// End TableFunction.java
+comment|// End QueryableTable.java
 end_comment
 
 end_unit

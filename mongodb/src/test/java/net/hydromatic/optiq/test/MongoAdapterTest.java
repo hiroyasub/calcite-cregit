@@ -852,11 +852,11 @@ name|explainContains
 argument_list|(
 literal|"PLAN=EnumerableAggregateRel(group=[{}], EXPR$0=[COUNT()])\n"
 operator|+
-literal|"  EnumerableCalcRel(expr#0..4=[{inputs}], expr#5=[0], $f0=[$t5])\n"
+literal|"  EnumerableCalcRel(expr#0=[{inputs}], expr#0=[0], DUMMY=[$t0])\n"
 operator|+
 literal|"    MongoToEnumerableConverter\n"
 operator|+
-literal|"      MongoTableScan(table=[[mongo_raw, zips]], ops=[[<{city: 1, loc: 1, pop: 1, state: 1, _id: 1}, {$project: {city: 1, loc: 1, pop: 1, state: 1, _id: 1}}>]])"
+literal|"      MongoTableScan(table=[[mongo_raw, zips]], ops=[[<{}, {$project: {}}>]])"
 argument_list|)
 expr_stmt|;
 block|}
@@ -902,9 +902,11 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"PLAN=MongoToEnumerableConverter\n"
+literal|"PLAN=EnumerableCalcRel(expr#0..1=[{inputs}], STATE=[$t1], CITY=[$t0])\n"
 operator|+
-literal|"  MongoTableScan(table=[[mongo_raw, zips]], ops=[[<{state: 1, city: 1}, {$project: {state: 1, city: 1}}>]])"
+literal|"  MongoToEnumerableConverter\n"
+operator|+
+literal|"    MongoTableScan(table=[[mongo_raw, zips]], ops=[[<{city: 1, state: 1}, {$project: {city: 1, state: 1}}>]])"
 argument_list|)
 expr_stmt|;
 block|}
@@ -950,13 +952,13 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"PLAN=EnumerableCalcRel(expr#0..4=[{inputs}], STATE=[$t3], CITY=[$t0])\n"
+literal|"PLAN=EnumerableCalcRel(expr#0..1=[{inputs}], STATE=[$t1], CITY=[$t0])\n"
 operator|+
 literal|"  MongoToEnumerableConverter\n"
 operator|+
-literal|"    MongoFilterRel(condition=[=($3, 'CA')])\n"
+literal|"    MongoFilterRel(condition=[=($1, 'CA')])\n"
 operator|+
-literal|"      MongoTableScan(table=[[mongo_raw, zips]], ops=[[<{city: 1, loc: 1, pop: 1, state: 1, _id: 1}, {$project: {city: 1, loc: 1, pop: 1, state: 1, _id: 1}}>]])"
+literal|"      MongoTableScan(table=[[mongo_raw, zips]], ops=[[<{city: 1, state: 1}, {$project: {city: 1, state: 1}}>]])"
 argument_list|)
 expr_stmt|;
 block|}

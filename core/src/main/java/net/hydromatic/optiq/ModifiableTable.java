@@ -91,14 +91,8 @@ begin_interface
 specifier|public
 interface|interface
 name|ModifiableTable
-parameter_list|<
-name|E
-parameter_list|>
 extends|extends
-name|Table
-argument_list|<
-name|E
-argument_list|>
+name|QueryableTable
 block|{
 comment|/** Returns the modifiable collection.    * Modifying the collection will change the table's contents. */
 name|Collection

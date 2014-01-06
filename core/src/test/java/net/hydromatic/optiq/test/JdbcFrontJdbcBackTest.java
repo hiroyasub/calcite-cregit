@@ -136,7 +136,7 @@ name|OptiqAssert
 operator|.
 name|Config
 operator|.
-name|JDBC_FOODMART2
+name|JDBC_FOODMART
 argument_list|)
 operator|.
 name|query
@@ -172,7 +172,7 @@ name|OptiqAssert
 operator|.
 name|Config
 operator|.
-name|JDBC_FOODMART2
+name|JDBC_FOODMART
 argument_list|)
 operator|.
 name|doWithConnection
@@ -431,7 +431,7 @@ name|OptiqAssert
 operator|.
 name|Config
 operator|.
-name|JDBC_FOODMART2
+name|JDBC_FOODMART
 argument_list|)
 operator|.
 name|doWithConnection
@@ -559,7 +559,7 @@ name|OptiqAssert
 operator|.
 name|Config
 operator|.
-name|JDBC_FOODMART2
+name|JDBC_FOODMART
 argument_list|)
 operator|.
 name|doWithConnection
@@ -647,7 +647,7 @@ name|OptiqAssert
 operator|.
 name|Config
 operator|.
-name|JDBC_FOODMART2
+name|JDBC_FOODMART
 argument_list|)
 operator|.
 name|withSchema

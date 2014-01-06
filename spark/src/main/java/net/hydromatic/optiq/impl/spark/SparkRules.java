@@ -911,7 +911,8 @@ name|method
 argument_list|,
 name|implementor
 operator|.
-name|root
+name|getRootExpression
+argument_list|()
 argument_list|)
 argument_list|,
 name|Expressions
@@ -1172,11 +1173,13 @@ name|getOutputRowType
 argument_list|()
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
-name|RelOptPlanWriter
+name|RelWriter
 name|explainTerms
 parameter_list|(
-name|RelOptPlanWriter
+name|RelWriter
 name|pw
 parameter_list|)
 block|{
@@ -1292,9 +1295,6 @@ name|inputs
 argument_list|)
 argument_list|,
 name|program
-operator|.
-name|copy
-argument_list|()
 argument_list|,
 name|getFlags
 argument_list|()

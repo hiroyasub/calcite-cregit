@@ -5,95 +5,48 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|eigenbase
 operator|.
-name|optiq
+name|reltype
 package|;
 end_package
 
 begin_import
 import|import
-name|org
+name|net
 operator|.
-name|eigenbase
+name|hydromatic
 operator|.
-name|reltype
+name|linq4j
 operator|.
-name|RelDataType
-import|;
-end_import
-
-begin_import
-import|import
-name|org
+name|function
 operator|.
-name|eigenbase
-operator|.
-name|reltype
-operator|.
-name|RelDataTypeFactory
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|List
+name|Function1
 import|;
 end_import
 
 begin_comment
-comment|/**  * Function that returns a {@link Table}.  */
+comment|/**  * Can be converted into a {@link RelDataType} given a  * {@link org.eigenbase.reltype.RelDataTypeFactory}.  *  * @see org.eigenbase.reltype.RelDataTypeImpl#proto  */
 end_comment
 
 begin_interface
 specifier|public
 interface|interface
-name|TableFunction
-block|{
-comment|/**    * Returns the parameters of this table function.    *    * @return Parameters; never null    */
-name|List
+name|RelProtoDataType
+extends|extends
+name|Function1
 argument_list|<
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|optiq
-operator|.
-name|Parameter
-argument_list|>
-name|getParameters
-parameter_list|()
-function_decl|;
-comment|/**    * Returns the record type of the table yielded by this function when    * applied to parameters of given types.    *    * @param typeFactory Type factory    */
-name|RelDataType
-name|getRowType
-parameter_list|(
 name|RelDataTypeFactory
-name|typeFactory
-parameter_list|)
-function_decl|;
-comment|/**    * Applies arguments to yield a table.    *    * @param arguments Arguments    * @return Table    */
-name|Table
-name|apply
-parameter_list|(
-name|List
-argument_list|<
-name|Object
+argument_list|,
+name|RelDataType
 argument_list|>
-name|arguments
-parameter_list|)
-function_decl|;
-block|}
+block|{ }
 end_interface
 
 begin_comment
-comment|// End TableFunction.java
+comment|// End RelProtoDataType.java
 end_comment
 
 end_unit

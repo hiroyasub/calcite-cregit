@@ -37,7 +37,7 @@ name|hydromatic
 operator|.
 name|optiq
 operator|.
-name|MutableSchema
+name|Schema
 import|;
 end_import
 
@@ -49,7 +49,7 @@ name|hydromatic
 operator|.
 name|optiq
 operator|.
-name|Schema
+name|SchemaPlus
 import|;
 end_import
 
@@ -78,6 +78,20 @@ operator|.
 name|java
 operator|.
 name|JavaTypeFactory
+import|;
+end_import
+
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|optiq
+operator|.
+name|jdbc
+operator|.
+name|OptiqSchema
 import|;
 end_import
 
@@ -224,7 +238,7 @@ specifier|private
 specifier|final
 name|Function1
 argument_list|<
-name|MutableSchema
+name|SchemaPlus
 argument_list|,
 name|Schema
 argument_list|>
@@ -254,7 +268,7 @@ name|open
 decl_stmt|;
 comment|// set in STATE_2_READY
 specifier|private
-name|MutableSchema
+name|SchemaPlus
 name|rootSchema
 decl_stmt|;
 specifier|private
@@ -292,7 +306,7 @@ name|PlannerImpl
 parameter_list|(
 name|Function1
 argument_list|<
-name|MutableSchema
+name|SchemaPlus
 argument_list|,
 name|Schema
 argument_list|>
@@ -507,24 +521,34 @@ parameter_list|,
 name|RelOptSchema
 name|relOptSchema
 parameter_list|,
-name|Schema
-name|schema
+name|SchemaPlus
+name|rootSchema
 parameter_list|)
 block|{
+name|PlannerImpl
+operator|.
+name|this
+operator|.
 name|rootSchema
 operator|=
-operator|(
-name|MutableSchema
-operator|)
-name|schema
+name|rootSchema
 expr_stmt|;
 name|defaultSchema
 operator|=
+name|rootSchema
+operator|.
+name|addRecursive
+argument_list|(
 name|schemaFactory
 operator|.
 name|apply
 argument_list|(
+name|PlannerImpl
+operator|.
+name|this
+operator|.
 name|rootSchema
+argument_list|)
 argument_list|)
 expr_stmt|;
 name|typeFactory
@@ -768,7 +792,12 @@ return|return
 operator|new
 name|OptiqCatalogReader
 argument_list|(
+name|OptiqSchema
+operator|.
+name|from
+argument_list|(
 name|rootSchema
+argument_list|)
 argument_list|,
 name|Schemas
 operator|.

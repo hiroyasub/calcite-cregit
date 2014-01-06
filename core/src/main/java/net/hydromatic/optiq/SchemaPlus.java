@@ -13,74 +13,85 @@ name|optiq
 package|;
 end_package
 
-begin_import
-import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|linq4j
-operator|.
-name|expressions
-operator|.
-name|Expression
-import|;
-end_import
-
 begin_comment
-comment|/**  * Schema that can be modified.  */
+comment|/**  * Extension to the {@link Schema} interface.  *  *<p>Given a user-defined schema that implements the {@link Schema} interface,  * Optiq creates a wrapper that implements the {@code SchemaPlus} interface.  * This provides extra functionality, such as access to tables that have been  * added explicitly.</p>  *  *<p>A user-defined schema does not need to implement this interface, but by  * the time a schema is passed to a method in a user-defined schema or  * user-defined table, it will have been wrapped in this interface.</p>  */
 end_comment
 
 begin_interface
 specifier|public
 interface|interface
-name|MutableSchema
+name|SchemaPlus
 extends|extends
 name|Schema
 block|{
-comment|/** Defines a table-function in this schema. There can be multiple    * table-functions with the same name; this method will not remove a    * table-function with the same name, just define another overloading. */
-name|void
-name|addTableFunction
-parameter_list|(
-name|TableFunctionInSchema
-name|tableFunctionInSchema
-parameter_list|)
-function_decl|;
-comment|/** Defines a table within this schema. */
-name|void
-name|addTable
-parameter_list|(
-name|TableInSchema
-name|table
-parameter_list|)
-function_decl|;
-comment|/** Adds a child schema of this schema. */
-name|void
-name|addSchema
+comment|// override with stricter return
+name|SchemaPlus
+name|getSubSchema
 parameter_list|(
 name|String
 name|name
-parameter_list|,
+parameter_list|)
+function_decl|;
+comment|/** Adds a schema as a sub-schema of this schema, and returns the wrapped    * object. */
+name|SchemaPlus
+name|add
+parameter_list|(
 name|Schema
 name|schema
 parameter_list|)
 function_decl|;
-comment|/** Returns the expression with which a sub-schema of this schema with a    * given name and type should be accessed. */
-name|Expression
-name|getSubSchemaExpression
+comment|/** Adds a table to this schema. */
+name|void
+name|add
 parameter_list|(
 name|String
 name|name
 parameter_list|,
+name|Table
+name|table
+parameter_list|)
+function_decl|;
+comment|/** Adds a table function to this schema. */
+name|void
+name|add
+parameter_list|(
+name|String
+name|name
+parameter_list|,
+name|TableFunction
+name|table
+parameter_list|)
+function_decl|;
+name|boolean
+name|isMutable
+parameter_list|()
+function_decl|;
+comment|/** Returns an underlying object. */
+parameter_list|<
+name|T
+parameter_list|>
+name|T
+name|unwrap
+parameter_list|(
 name|Class
-name|type
+argument_list|<
+name|T
+argument_list|>
+name|clazz
+parameter_list|)
+function_decl|;
+name|SchemaPlus
+name|addRecursive
+parameter_list|(
+name|Schema
+name|schema
 parameter_list|)
 function_decl|;
 block|}
 end_interface
 
 begin_comment
-comment|// End MutableSchema.java
+comment|// End SchemaPlus.java
 end_comment
 
 end_unit

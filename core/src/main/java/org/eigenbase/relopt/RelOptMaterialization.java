@@ -340,7 +340,7 @@ name|Mappings
 operator|.
 name|createShiftMapping
 argument_list|(
-name|starTable
+name|starRelOptTable
 operator|.
 name|getRowType
 argument_list|()
@@ -352,7 +352,7 @@ literal|0
 argument_list|,
 literal|0
 argument_list|,
-name|table
+name|relOptTable
 operator|.
 name|getRowType
 argument_list|()
@@ -884,7 +884,7 @@ argument_list|(
 name|rightTable
 argument_list|)
 argument_list|,
-name|leftTable
+name|leftRelOptTable
 operator|.
 name|getRowType
 argument_list|()

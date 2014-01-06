@@ -1481,16 +1481,9 @@ name|Expressions
 operator|.
 name|call
 argument_list|(
-name|Expressions
-operator|.
-name|variable
-argument_list|(
 name|DataContext
 operator|.
-name|class
-argument_list|,
-literal|"root"
-argument_list|)
+name|ROOT
 argument_list|,
 name|BuiltinMethod
 operator|.

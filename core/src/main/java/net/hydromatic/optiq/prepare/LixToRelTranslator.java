@@ -23,7 +23,7 @@ name|hydromatic
 operator|.
 name|optiq
 operator|.
-name|BuiltinMethod
+name|*
 import|;
 end_import
 
@@ -337,6 +337,7 @@ operator|instanceof
 name|MethodCallExpression
 condition|)
 block|{
+specifier|final
 name|MethodCallExpression
 name|call
 init|=
@@ -350,7 +351,9 @@ name|method
 init|=
 name|BuiltinMethod
 operator|.
-name|lookup
+name|MAP
+operator|.
+name|get
 argument_list|(
 name|call
 operator|.

@@ -53,7 +53,7 @@ comment|/** Creates a Table.    *    * @param schema Schema this table belongs t
 name|T
 name|create
 parameter_list|(
-name|Schema
+name|SchemaPlus
 name|schema
 parameter_list|,
 name|String

@@ -25,6 +25,18 @@ name|RelDataType
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
+name|reltype
+operator|.
+name|RelDataTypeFactory
+import|;
+end_import
+
 begin_comment
 comment|/**  * Parameter to a {@link TableFunction}.  */
 end_comment
@@ -44,10 +56,13 @@ name|String
 name|getName
 parameter_list|()
 function_decl|;
-comment|/**    * Returns the type of this parameter.    *    * @return Parameter type.    */
+comment|/**    * Returns the type of this parameter.    *    * @param typeFactory Type factory to be used to create the type    *    * @return Parameter type.    */
 name|RelDataType
 name|getType
-parameter_list|()
+parameter_list|(
+name|RelDataTypeFactory
+name|typeFactory
+parameter_list|)
 function_decl|;
 block|}
 end_interface

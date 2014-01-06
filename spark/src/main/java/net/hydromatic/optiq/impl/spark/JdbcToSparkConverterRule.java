@@ -35,22 +35,6 @@ end_import
 
 begin_import
 import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|optiq
-operator|.
-name|impl
-operator|.
-name|jdbc
-operator|.
-name|JdbcToEnumerableConverter
-import|;
-end_import
-
-begin_import
-import|import
 name|org
 operator|.
 name|eigenbase

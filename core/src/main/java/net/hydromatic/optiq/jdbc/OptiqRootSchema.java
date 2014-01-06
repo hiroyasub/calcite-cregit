@@ -11,7 +11,7 @@ name|hydromatic
 operator|.
 name|optiq
 operator|.
-name|impl
+name|jdbc
 package|;
 end_package
 
@@ -23,83 +23,49 @@ name|hydromatic
 operator|.
 name|optiq
 operator|.
-name|*
+name|Schema
 import|;
 end_import
 
 begin_comment
-comment|/**  * Implementation of {@link net.hydromatic.optiq.Schema.TableFunctionInSchema}  * where all properties are held in fields.  */
+comment|/**  * Root schema.  */
 end_comment
 
 begin_class
 specifier|public
 class|class
-name|TableFunctionInSchemaImpl
+name|OptiqRootSchema
 extends|extends
-name|Schema
-operator|.
-name|TableFunctionInSchema
+name|OptiqSchema
 block|{
-specifier|private
-specifier|final
-name|TableFunction
-name|tableFunction
-decl_stmt|;
-comment|/** Creates a TableFunctionInSchemaImpl. */
-specifier|public
-name|TableFunctionInSchemaImpl
+comment|/** Creates a root schema. */
+name|OptiqRootSchema
 parameter_list|(
 name|Schema
 name|schema
-parameter_list|,
-name|String
-name|name
-parameter_list|,
-name|TableFunction
-name|tableFunction
 parameter_list|)
 block|{
 name|super
 argument_list|(
-name|schema
+literal|null
 argument_list|,
-name|name
+name|schema
 argument_list|)
 expr_stmt|;
-name|this
+assert|assert
+name|schema
 operator|.
-name|tableFunction
-operator|=
-name|tableFunction
-expr_stmt|;
-block|}
-specifier|public
-name|TableFunction
-name|getTableFunction
-parameter_list|()
-block|{
-return|return
-name|tableFunction
-return|;
-block|}
-specifier|public
-name|boolean
-name|isMaterialization
-parameter_list|()
-block|{
-return|return
-name|tableFunction
-operator|instanceof
-name|MaterializedViewTable
-operator|.
-name|MaterializedViewTableFunction
-return|;
+name|getParentSchema
+argument_list|()
+operator|==
+literal|null
+assert|;
 block|}
 block|}
 end_class
 
 begin_comment
-comment|// End TableFunctionInSchemaImpl.java
+comment|// End OptiqRootSchema.java
 end_comment
 
 end_unit

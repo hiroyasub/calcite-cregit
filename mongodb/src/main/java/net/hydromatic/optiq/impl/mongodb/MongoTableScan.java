@@ -366,9 +366,15 @@ parameter_list|)
 block|{
 name|implementor
 operator|.
-name|table
+name|mongoTable
 operator|=
 name|mongoTable
+expr_stmt|;
+name|implementor
+operator|.
+name|table
+operator|=
+name|table
 expr_stmt|;
 for|for
 control|(

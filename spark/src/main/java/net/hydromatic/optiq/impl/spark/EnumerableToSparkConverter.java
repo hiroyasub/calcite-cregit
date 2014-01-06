@@ -264,7 +264,8 @@ name|method
 argument_list|,
 name|implementor
 operator|.
-name|root
+name|getRootExpression
+argument_list|()
 argument_list|)
 decl_stmt|;
 specifier|final

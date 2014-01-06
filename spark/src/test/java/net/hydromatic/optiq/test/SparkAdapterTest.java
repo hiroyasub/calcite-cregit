@@ -21,16 +21,6 @@ name|org
 operator|.
 name|junit
 operator|.
-name|Ignore
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|junit
-operator|.
 name|Test
 import|;
 end_import
@@ -66,7 +56,7 @@ name|SQLException
 block|{
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with
@@ -112,7 +102,7 @@ name|SQLException
 block|{
 name|OptiqAssert
 operator|.
-name|assertThat
+name|that
 argument_list|()
 operator|.
 name|with

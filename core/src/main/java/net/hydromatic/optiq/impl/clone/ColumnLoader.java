@@ -141,6 +141,18 @@ name|org
 operator|.
 name|eigenbase
 operator|.
+name|reltype
+operator|.
+name|RelProtoDataType
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
 name|util14
 operator|.
 name|DateTimeUtil
@@ -477,7 +489,7 @@ specifier|final
 name|int
 name|sortField
 decl_stmt|;
-comment|/** Creates a column loader, and performs the load.    *    * @param typeFactory Type factory    * @param sourceTable Source data    * @param elementType Logical row type    * @param repList Physical row types, or null if not known */
+comment|/** Creates a column loader, and performs the load.    *    * @param typeFactory Type factory    * @param sourceTable Source data    * @param protoRowType Logical row type    * @param repList Physical row types, or null if not known */
 name|ColumnLoader
 parameter_list|(
 name|JavaTypeFactory
@@ -489,8 +501,8 @@ name|T
 argument_list|>
 name|sourceTable
 parameter_list|,
-name|RelDataType
-name|elementType
+name|RelProtoDataType
+name|protoRowType
 parameter_list|,
 name|List
 argument_list|<
@@ -507,6 +519,17 @@ name|typeFactory
 operator|=
 name|typeFactory
 expr_stmt|;
+specifier|final
+name|RelDataType
+name|rowType
+init|=
+name|protoRowType
+operator|.
+name|apply
+argument_list|(
+name|typeFactory
+argument_list|)
+decl_stmt|;
 if|if
 condition|(
 name|repList
@@ -520,7 +543,7 @@ name|Collections
 operator|.
 name|nCopies
 argument_list|(
-name|elementType
+name|rowType
 operator|.
 name|getFieldCount
 argument_list|()
@@ -552,7 +575,7 @@ block|}
 decl_stmt|;
 name|load
 argument_list|(
-name|elementType
+name|rowType
 argument_list|,
 name|repList
 argument_list|,

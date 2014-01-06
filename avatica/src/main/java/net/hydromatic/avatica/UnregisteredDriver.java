@@ -95,6 +95,7 @@ specifier|final
 name|DriverVersion
 name|version
 decl_stmt|;
+specifier|protected
 specifier|final
 name|AvaticaFactory
 name|factory

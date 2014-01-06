@@ -37,7 +37,7 @@ name|hydromatic
 operator|.
 name|optiq
 operator|.
-name|MutableSchema
+name|Schema
 import|;
 end_import
 
@@ -49,7 +49,7 @@ name|hydromatic
 operator|.
 name|optiq
 operator|.
-name|Schema
+name|SchemaPlus
 import|;
 end_import
 
@@ -540,7 +540,7 @@ argument_list|(
 operator|new
 name|Function1
 argument_list|<
-name|MutableSchema
+name|SchemaPlus
 argument_list|,
 name|Schema
 argument_list|>
@@ -550,14 +550,13 @@ specifier|public
 name|Schema
 name|apply
 parameter_list|(
-name|MutableSchema
+name|SchemaPlus
 name|parentSchema
 parameter_list|)
 block|{
 return|return
+operator|new
 name|ReflectiveSchema
-operator|.
-name|create
 argument_list|(
 name|parentSchema
 argument_list|,

@@ -37,7 +37,7 @@ name|hydromatic
 operator|.
 name|optiq
 operator|.
-name|MutableSchema
+name|Schema
 import|;
 end_import
 
@@ -49,7 +49,7 @@ name|hydromatic
 operator|.
 name|optiq
 operator|.
-name|Schema
+name|SchemaPlus
 import|;
 end_import
 
@@ -198,7 +198,7 @@ name|getPlanner
 parameter_list|(
 name|Function1
 argument_list|<
-name|MutableSchema
+name|SchemaPlus
 argument_list|,
 name|Schema
 argument_list|>
@@ -246,8 +246,8 @@ parameter_list|,
 name|RelOptSchema
 name|relOptSchema
 parameter_list|,
-name|Schema
-name|schema
+name|SchemaPlus
+name|rootSchema
 parameter_list|)
 function_decl|;
 block|}

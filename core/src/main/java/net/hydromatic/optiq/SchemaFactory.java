@@ -24,7 +24,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Factory for {@link net.hydromatic.optiq.Schema} objects.  *  *<p>A schema factory allows you to include a custom schema in a model file.  * For example, here is a model that contains a custom schema whose tables  * read CSV files. (See the  *<a href="https://github.com/julianhyde/optiq-csv">optiq-csv</a> for more  * details about this particular adapter.)</p>  *  *<pre>{@code  * {  *   version: '1.0',  *   defaultSchema: 'SALES',  *   schemas: [  *     {  *       name: 'SALES',  *       type: 'custom',  *       factory: 'net.hydromatic.optiq.impl.csv.CsvSchemaFactory',  *       operand: {  *         directory: 'target/test-classes/sales'  *       },  *       tables: [  *         {  *           name: 'FEMALE_EMPS',  *           type: 'view',  *           sql: 'SELECT * FROM emps WHERE gender = \'F\''  *          }  *       ]  *     }  *   ]  * }  * }  *</pre>  *  *<p>If you wish to allow model authors to add additional tables (including  * views) to an instance of your schema, the class that implements  * {@link Schema} must implement {@link MutableSchema}. The previous example  * defines a view called 'FEMALE_EMPS' using the<code>tables: [ ... ]</code>  * property; this is possible only because<code>CsvSchema</code>, the class  * returned by<code>CsvSchemaFactory</code>, implements  *<code>MutableSchema</code>.</p>  *  *<p>A class that implements SchemaFactory specified in a schema must have a  * public default constructor.</p>  */
+comment|/**  * Factory for {@link net.hydromatic.optiq.Schema} objects.  *  *<p>A schema factory allows you to include a custom schema in a model file.  * For example, here is a model that contains a custom schema whose tables  * read CSV files. (See the  *<a href="https://github.com/julianhyde/optiq-csv">optiq-csv</a> for more  * details about this particular adapter.)</p>  *  *<pre>{@code  * {  *   version: '1.0',  *   defaultSchema: 'SALES',  *   schemas: [  *     {  *       name: 'SALES',  *       type: 'custom',  *       factory: 'net.hydromatic.optiq.impl.csv.CsvSchemaFactory',  *       mutable: true,  *       operand: {  *         directory: 'target/test-classes/sales'  *       },  *       tables: [  *         {  *           name: 'FEMALE_EMPS',  *           type: 'view',  *           sql: 'SELECT * FROM emps WHERE gender = \'F\''  *          }  *       ]  *     }  *   ]  * }  * }  *</pre>  *  *<p>If you do not wish to allow model authors to add additional tables  * (including views) to an instance of your schema, specify  * 'mutable: false'.</p>  *  *<p>A class that implements SchemaFactory specified in a schema must have a  * public default constructor.</p>  */
 end_comment
 
 begin_interface
@@ -32,12 +32,12 @@ specifier|public
 interface|interface
 name|SchemaFactory
 block|{
-comment|/** Creates a Schema.    *    *<p>The implementation must register the schema in the parent schema,    * by calling {@link MutableSchema#addSchema(String, Schema)}.</p>    *    * @param schema Parent schema    * @param name Name of this schema    * @param operand The "operand" JSON property    */
+comment|/** Creates a Schema.    *    * @param parentSchema Parent schema    * @param name Name of this schema    * @param operand The "operand" JSON property    */
 name|Schema
 name|create
 parameter_list|(
-name|MutableSchema
-name|schema
+name|SchemaPlus
+name|parentSchema
 parameter_list|,
 name|String
 name|name

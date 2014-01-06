@@ -37,7 +37,9 @@ name|hydromatic
 operator|.
 name|optiq
 operator|.
-name|Schema
+name|impl
+operator|.
+name|StarTable
 import|;
 end_import
 
@@ -49,9 +51,9 @@ name|hydromatic
 operator|.
 name|optiq
 operator|.
-name|impl
+name|jdbc
 operator|.
-name|StarTable
+name|OptiqSchema
 import|;
 end_import
 
@@ -2007,9 +2009,9 @@ name|Materialization
 block|{
 comment|/** The table that holds the materialized data. */
 specifier|final
-name|Schema
+name|OptiqSchema
 operator|.
-name|TableInSchema
+name|TableEntry
 name|materializedTable
 decl_stmt|;
 comment|/** The query that derives the data. */
@@ -2033,9 +2035,9 @@ decl_stmt|;
 specifier|public
 name|Materialization
 parameter_list|(
-name|Schema
+name|OptiqSchema
 operator|.
-name|TableInSchema
+name|TableEntry
 name|materializedTable
 parameter_list|,
 name|String

@@ -23,7 +23,7 @@ name|hydromatic
 operator|.
 name|optiq
 operator|.
-name|MutableSchema
+name|SchemaPlus
 import|;
 end_import
 
@@ -99,7 +99,7 @@ extends|,
 name|QueryProvider
 block|{
 comment|/**    * Returns the root schema.    *    *<p>You can define objects (such as relations) in this schema, and    * also nested schemas.</p>    *    * @return Root schema    */
-name|MutableSchema
+name|SchemaPlus
 name|getRootSchema
 parameter_list|()
 function_decl|;

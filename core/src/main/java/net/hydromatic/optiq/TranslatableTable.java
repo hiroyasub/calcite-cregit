@@ -45,14 +45,8 @@ begin_interface
 specifier|public
 interface|interface
 name|TranslatableTable
-parameter_list|<
-name|T
-parameter_list|>
 extends|extends
 name|Table
-argument_list|<
-name|T
-argument_list|>
 block|{
 comment|/** Converts this table into a {@link RelNode relational expression}. */
 name|RelNode
