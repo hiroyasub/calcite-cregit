@@ -28,7 +28,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Helpers for {@link SqlOperandCountRange}. */
+comment|/**  * Helpers for {@link SqlOperandCountRange}.  */
 end_comment
 
 begin_class

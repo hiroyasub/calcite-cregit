@@ -1145,7 +1145,7 @@ name|mapOldToNewOutputPos
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Rewrite SortRel.      *      * @param rel SortRel to be rewritten      */
+comment|/**    * Rewrite SortRel.    *    * @param rel SortRel to be rewritten    */
 specifier|public
 name|void
 name|decorrelateRel
@@ -1320,7 +1320,7 @@ name|childMapOldToNewOutputPos
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Rewrite AggregateRel.      *      * @param rel the project rel to rewrite      */
+comment|/**    * Rewrite AggregateRel.    *    * @param rel the project rel to rewrite    */
 specifier|public
 name|void
 name|decorrelateRel
@@ -2039,7 +2039,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Rewrite ProjectRel.      *      * @param rel the project rel to rewrite      */
+comment|/**    * Rewrite ProjectRel.    *    * @param rel the project rel to rewrite    */
 specifier|public
 name|void
 name|decorrelateRel
@@ -2435,7 +2435,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Create RelNode tree that produces a list of correlated variables.      *      * @param correlations correlated variables to generate      * @param valueGenFieldOffset offset in the output that generated columns      * will start      * @param mapCorVarToOutputPos output positions for the correlated variables      * generated      *      * @return RelNode the root of the resultant RelNode tree      */
+comment|/**    * Create RelNode tree that produces a list of correlated variables.    *    * @param correlations         correlated variables to generate    * @param valueGenFieldOffset  offset in the output that generated columns    *                             will start    * @param mapCorVarToOutputPos output positions for the correlated variables    *                             generated    * @return RelNode the root of the resultant RelNode tree    */
 specifier|private
 name|RelNode
 name|createValueGenerator
@@ -3230,7 +3230,7 @@ name|childMapOldToNewOutputPos
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Rewrite FilterRel.      *      * @param rel the filter rel to rewrite      */
+comment|/**    * Rewrite FilterRel.    *    * @param rel the filter rel to rewrite    */
 specifier|public
 name|void
 name|decorrelateRel
@@ -3409,7 +3409,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Rewrite CorrelatorRel into a left outer join.      *      * @param rel CorrelatorRel      */
+comment|/**    * Rewrite CorrelatorRel into a left outer join.    *    * @param rel CorrelatorRel    */
 specifier|public
 name|void
 name|decorrelateRel
@@ -4001,7 +4001,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Rewrite JoinRel.      *      * @param rel JoinRel      */
+comment|/**    * Rewrite JoinRel.    *    * @param rel JoinRel    */
 specifier|public
 name|void
 name|decorrelateRel
@@ -4631,7 +4631,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**      * Pull projRel above the joinRel from its RHS input. Enforce nullability      * for join output.      *      * @param joinRel Join      * @param projRel the orginal projRel as the RHS input of the join.      * @param nullIndicatorPos Position of null indicator      *      * @return the subtree with the new ProjectRel at the root      */
+comment|/**    * Pull projRel above the joinRel from its RHS input. Enforce nullability    * for join output.    *    * @param joinRel          Join    * @param projRel          the orginal projRel as the RHS input of the join.    * @param nullIndicatorPos Position of null indicator    * @return the subtree with the new ProjectRel at the root    */
 specifier|private
 name|RelNode
 name|projectJoinOutputWithNullability
@@ -4854,7 +4854,7 @@ return|return
 name|newProjRel
 return|;
 block|}
-comment|/**      * Pulls projRel above the joinRel from its RHS input. Enforces nullability      * for join output.      *      * @param corRel Correlator      * @param projRel the orginal ProjectRel as the RHS input of the join      * @param isCount Positions which are calls to the<code>COUNT</code>      * aggregation function      *      * @return the subtree with the new ProjectRel at the root      */
+comment|/**    * Pulls projRel above the joinRel from its RHS input. Enforces nullability    * for join output.    *    * @param corRel  Correlator    * @param projRel the orginal ProjectRel as the RHS input of the join    * @param isCount Positions which are calls to the<code>COUNT</code>    *                aggregation function    * @return the subtree with the new ProjectRel at the root    */
 specifier|private
 name|RelNode
 name|aggregateCorrelatorOutput
@@ -5032,7 +5032,7 @@ literal|false
 argument_list|)
 return|;
 block|}
-comment|/**      * Checks whether the correlations in projRel and filterRel are related to      * the correlated variables provided by corRel.      *      * @param corRel Correlator      * @param projRel the orginal ProjectRel as the RHS input of the join      * @param filterRel Filter      * @param correlatedJoinKeys Correlated join keys      *      * @return true if filter and proj only references corVar provided by corRel      */
+comment|/**    * Checks whether the correlations in projRel and filterRel are related to    * the correlated variables provided by corRel.    *    * @param corRel             Correlator    * @param projRel            the orginal ProjectRel as the RHS input of the    *                           join    * @param filterRel          Filter    * @param correlatedJoinKeys Correlated join keys    * @return true if filter and proj only references corVar provided by corRel    */
 specifier|private
 name|boolean
 name|checkCorVars
@@ -5240,7 +5240,7 @@ return|return
 literal|true
 return|;
 block|}
-comment|/**      * Remove correlated variables from the tree at root corRel      *      * @param corRel Correlator      */
+comment|/**    * Remove correlated variables from the tree at root corRel    *    * @param corRel Correlator    */
 specifier|private
 name|void
 name|removeCorVarFromTree
@@ -5308,7 +5308,7 @@ expr_stmt|;
 block|}
 block|}
 block|}
-comment|/**      * Project all childRel output fields plus the additional expressions.      *      * @param childRel Child relational expression      * @param additionalExprs Additional expressions and names      *      * @return the new ProjectRel      */
+comment|/**    * Project all childRel output fields plus the additional expressions.    *    * @param childRel        Child relational expression    * @param additionalExprs Additional expressions and names    * @return the new ProjectRel    */
 specifier|private
 name|RelNode
 name|createProjectWithAdditionalExprs
@@ -6523,7 +6523,7 @@ name|newCall
 return|;
 block|}
 block|}
-comment|/**      * Rule to remove single_value rel. For cases like      *      *<blockquote>AggRel single_value proj/filter/agg/ join on unique LHS key      * AggRel single group</blockquote>      */
+comment|/**    * Rule to remove single_value rel. For cases like    *    *<blockquote>AggRel single_value proj/filter/agg/ join on unique LHS key    * AggRel single group</blockquote>    */
 specifier|private
 specifier|final
 class|class

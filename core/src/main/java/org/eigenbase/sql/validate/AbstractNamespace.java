@@ -78,7 +78,7 @@ specifier|final
 name|SqlValidatorImpl
 name|validator
 decl_stmt|;
-comment|/**      * Whether this scope is currently being validated. Used to check for      * cycles.      */
+comment|/**    * Whether this scope is currently being validated. Used to check for    * cycles.    */
 specifier|private
 name|SqlValidatorImpl
 operator|.
@@ -91,7 +91,7 @@ name|Status
 operator|.
 name|Unvalidated
 decl_stmt|;
-comment|/**      * Type of the output row, which comprises the name and type of each output      * column. Set on validate.      */
+comment|/**    * Type of the output row, which comprises the name and type of each output    * column. Set on validate.    */
 specifier|protected
 name|RelDataType
 name|rowType
@@ -106,7 +106,7 @@ name|SqlNode
 name|enclosingNode
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates an AbstractNamespace.      *      * @param validator Validator      * @param enclosingNode Enclosing node      */
+comment|/**    * Creates an AbstractNamespace.    *    * @param validator     Validator    * @param enclosingNode Enclosing node    */
 name|AbstractNamespace
 parameter_list|(
 name|SqlValidatorImpl
@@ -252,7 +252,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**      * Validates this scope and returns the type of the records it returns.      * External users should call {@link #validate}, which uses the {@link      * #status} field to protect against cycles.      *      * @return record data type, never null      *      * @post return != null      */
+comment|/**    * Validates this scope and returns the type of the records it returns.    * External users should call {@link #validate}, which uses the {@link    * #status} field to protect against cycles.    *    * @return record data type, never null    * @post return != null    */
 specifier|protected
 specifier|abstract
 name|RelDataType

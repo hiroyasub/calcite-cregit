@@ -70,7 +70,7 @@ name|SqlIntervalQualifier
 name|intervalQualifier
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Constructs an IntervalSqlType. This should only be called from a factory      * method.      */
+comment|/**    * Constructs an IntervalSqlType. This should only be called from a factory    * method.    */
 specifier|public
 name|IntervalSqlType
 parameter_list|(
@@ -152,7 +152,7 @@ return|return
 name|intervalQualifier
 return|;
 block|}
-comment|/**      * Combines two IntervalTypes and returns the result. E.g. the result of      * combining<br>      *<code>INTERVAL DAY TO HOUR</code><br>      * with<br>      *<code>INTERVAL SECOND</code> is<br>      *<code>INTERVAL DAY TO SECOND</code>      */
+comment|/**    * Combines two IntervalTypes and returns the result. E.g. the result of    * combining<br>    *<code>INTERVAL DAY TO HOUR</code><br>    * with<br>    *<code>INTERVAL SECOND</code> is<br>    *<code>INTERVAL DAY TO SECOND</code>    */
 specifier|public
 name|IntervalSqlType
 name|combine

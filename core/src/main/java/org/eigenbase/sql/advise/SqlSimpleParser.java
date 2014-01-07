@@ -65,7 +65,7 @@ name|INTERSECT
 block|,
 name|EXCEPT
 block|,
-comment|/**          * left parenthesis          */
+comment|/**      * left parenthesis      */
 name|LPAREN
 block|{
 specifier|public
@@ -79,7 +79,7 @@ return|;
 block|}
 block|}
 block|,
-comment|/**          * right parenthesis          */
+comment|/**      * right parenthesis      */
 name|RPAREN
 block|{
 specifier|public
@@ -93,13 +93,13 @@ return|;
 block|}
 block|}
 block|,
-comment|/**          * identifier, or indeed any miscellaneous sequence of characters          */
+comment|/**      * identifier, or indeed any miscellaneous sequence of characters      */
 name|ID
 block|,
-comment|/**          * double-quoted identifier, e.g. "FOO""BAR"          */
+comment|/**      * double-quoted identifier, e.g. "FOO""BAR"      */
 name|DQID
 block|,
-comment|/**          * single-quoted string literal, e.g. 'foobar'          */
+comment|/**      * single-quoted string literal, e.g. 'foobar'      */
 name|SQID
 block|,
 name|COMMENT
@@ -117,7 +117,7 @@ return|;
 block|}
 block|}
 block|,
-comment|/**          * A token created by reducing an entire subquery.          */
+comment|/**      * A token created by reducing an entire subquery.      */
 name|QUERY
 block|;
 specifier|public
@@ -138,7 +138,7 @@ name|String
 name|hintToken
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a SqlSimpleParser      *      * @param hintToken Hint token      */
+comment|/**    * Creates a SqlSimpleParser    *    * @param hintToken Hint token    */
 specifier|public
 name|SqlSimpleParser
 parameter_list|(
@@ -154,7 +154,7 @@ name|hintToken
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Turns a partially completed or syntactically incorrect sql statement into      * a simplified, valid one that can be passed into getCompletionHints().      *      * @param sql A partial or syntatically incorrect sql statement      * @param cursor to indicate column position in the query at which      * completion hints need to be retrieved.      *      * @return a completed, valid (and possibly simplified SQL statement      */
+comment|/**    * Turns a partially completed or syntactically incorrect sql statement into    * a simplified, valid one that can be passed into getCompletionHints().    *    * @param sql    A partial or syntatically incorrect sql statement    * @param cursor to indicate column position in the query at which    *               completion hints need to be retrieved.    * @return a completed, valid (and possibly simplified SQL statement    */
 specifier|public
 name|String
 name|simplifySql
@@ -230,7 +230,7 @@ name|sql
 argument_list|)
 return|;
 block|}
-comment|/**      * Turns a partially completed or syntatically incorrect sql statement into      * a simplified, valid one that can be validated      *      * @param sql A partial or syntatically incorrect sql statement      *      * @return a completed, valid (and possibly simplified) SQL statement      */
+comment|/**    * Turns a partially completed or syntatically incorrect sql statement into    * a simplified, valid one that can be validated    *    * @param sql A partial or syntatically incorrect sql statement    * @return a completed, valid (and possibly simplified) SQL statement    */
 specifier|public
 name|String
 name|simplifySql

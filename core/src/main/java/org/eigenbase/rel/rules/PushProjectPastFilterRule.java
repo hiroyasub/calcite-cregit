@@ -79,7 +79,7 @@ name|FALSE
 argument_list|)
 decl_stmt|;
 comment|//~ Instance fields --------------------------------------------------------
-comment|/**      * Expressions that should be preserved in the projection      */
+comment|/**    * Expressions that should be preserved in the projection    */
 specifier|private
 specifier|final
 name|PushProjector
@@ -88,7 +88,7 @@ name|ExprCondition
 name|preserveExprCondition
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a PushProjectPastFilterRule.      *      * @param preserveExprCondition Condition for expressions that should be      * preserved in the projection      */
+comment|/**    * Creates a PushProjectPastFilterRule.    *    * @param preserveExprCondition Condition for expressions that should be    *                              preserved in the projection    */
 specifier|private
 name|PushProjectPastFilterRule
 parameter_list|(

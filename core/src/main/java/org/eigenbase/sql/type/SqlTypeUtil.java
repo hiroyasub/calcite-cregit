@@ -162,7 +162,7 @@ class|class
 name|SqlTypeUtil
 block|{
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Checks whether two types or more are char comparable.      *      * @return Returns true if all operands are of char type and if they are      * comparable, i.e. of the same charset and collation of same charset      *      * @pre argTypes != null      * @pre argTypes.length>= 2      */
+comment|/**    * Checks whether two types or more are char comparable.    *    * @return Returns true if all operands are of char type and if they are    * comparable, i.e. of the same charset and collation of same charset    * @pre argTypes != null    * @pre argTypes.length>= 2    */
 specifier|public
 specifier|static
 name|boolean
@@ -350,7 +350,7 @@ return|return
 literal|true
 return|;
 block|}
-comment|/**      * Returns whether the operands to a call are char type-comparable.      *      * @param binding Binding of call to operands      * @param operands Operands to check for compatibility; usually the operands      * of the bound call, but not always      * @param throwOnFailure Whether to throw an exception on failure      *      * @return whether operands are valid      *      * @pre null != operands      * @pre 2<= operands.length      */
+comment|/**    * Returns whether the operands to a call are char type-comparable.    *    * @param binding        Binding of call to operands    * @param operands       Operands to check for compatibility; usually the    *                       operands of the bound call, but not always    * @param throwOnFailure Whether to throw an exception on failure    * @return whether operands are valid    * @pre null != operands    * @pre 2<= operands.length    */
 specifier|public
 specifier|static
 name|boolean
@@ -494,7 +494,7 @@ return|return
 literal|true
 return|;
 block|}
-comment|/**      * Iterates over all operands, derives their types, and collects them into      * a list.      */
+comment|/**    * Iterates over all operands, derives their types, and collects them into    * a list.    */
 specifier|public
 specifier|static
 name|List
@@ -556,7 +556,7 @@ return|return
 name|types
 return|;
 block|}
-comment|/**      * Collects the row types of an array of relational expressions.      *      * @param rels array of relational expressions      *      * @return array of row types      */
+comment|/**    * Collects the row types of an array of relational expressions.    *    * @param rels array of relational expressions    * @return array of row types    */
 specifier|public
 specifier|static
 name|RelDataType
@@ -615,7 +615,7 @@ return|return
 name|types
 return|;
 block|}
-comment|/**      * Promotes a type to a row type (does nothing if it already is one).      *      * @param type type to be promoted      * @param fieldName name to give field in row type; null for default of      * "ROW_VALUE"      *      * @return row type      */
+comment|/**    * Promotes a type to a row type (does nothing if it already is one).    *    * @param type      type to be promoted    * @param fieldName name to give field in row type; null for default of    *                  "ROW_VALUE"    * @return row type    */
 specifier|public
 specifier|static
 name|RelDataType
@@ -678,7 +678,7 @@ return|return
 name|type
 return|;
 block|}
-comment|/**      * Recreates a given RelDataType with nullablility iff any of a calls      * operand types are nullable.      */
+comment|/**    * Recreates a given RelDataType with nullablility iff any of a calls    * operand types are nullable.    */
 specifier|public
 specifier|static
 name|RelDataType
@@ -756,7 +756,7 @@ return|return
 name|type
 return|;
 block|}
-comment|/**      * Recreates a given RelDataType with nullability iff any of the param      * argTypes are nullable.      */
+comment|/**    * Recreates a given RelDataType with nullability iff any of the param    * argTypes are nullable.    */
 specifier|public
 specifier|static
 name|RelDataType
@@ -808,7 +808,7 @@ return|return
 name|type
 return|;
 block|}
-comment|/**      * Returns whether one or more of an array of types is nullable.      */
+comment|/**    * Returns whether one or more of an array of types is nullable.    */
 specifier|public
 specifier|static
 name|boolean
@@ -846,7 +846,7 @@ return|return
 literal|false
 return|;
 block|}
-comment|/**      * Determines whether a type or any of its fields (if a structured type) are      * nullable.      */
+comment|/**    * Determines whether a type or any of its fields (if a structured type) are    * nullable.    */
 specifier|public
 specifier|static
 name|boolean
@@ -912,7 +912,7 @@ return|return
 literal|false
 return|;
 block|}
-comment|/**      * Returns typeName.equals(type.getSqlTypeName()). If      * typeName.equals(SqlTypeName.Any) true is always returned.      */
+comment|/**    * Returns typeName.equals(type.getSqlTypeName()). If    * typeName.equals(SqlTypeName.Any) true is always returned.    */
 specifier|public
 specifier|static
 name|boolean
@@ -946,7 +946,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**      * Returns true if any element in<code>typeNames</code> matches      * type.getSqlTypeName().      *      * @see #isOfSameTypeName(SqlTypeName, RelDataType)      */
+comment|/**    * Returns true if any element in<code>typeNames</code> matches    * type.getSqlTypeName().    *    * @see #isOfSameTypeName(SqlTypeName, RelDataType)    */
 specifier|public
 specifier|static
 name|boolean
@@ -989,7 +989,7 @@ return|return
 literal|false
 return|;
 block|}
-comment|/**      * @return true if type is DATE, TIME, or TIMESTAMP      */
+comment|/**    * @return true if type is DATE, TIME, or TIMESTAMP    */
 specifier|public
 specifier|static
 name|boolean
@@ -1010,7 +1010,7 @@ name|type
 argument_list|)
 return|;
 block|}
-comment|/**      * @return true if type is some kind of INTERVAL      */
+comment|/**    * @return true if type is some kind of INTERVAL    */
 specifier|public
 specifier|static
 name|boolean
@@ -1031,7 +1031,7 @@ name|type
 argument_list|)
 return|;
 block|}
-comment|/**      * @return true if type is in SqlTypeFamily.Character      */
+comment|/**    * @return true if type is in SqlTypeFamily.Character    */
 specifier|public
 specifier|static
 name|boolean
@@ -1052,7 +1052,7 @@ operator|.
 name|CHARACTER
 return|;
 block|}
-comment|/**      * @return true if type is in SqlTypeFamily.Character      */
+comment|/**    * @return true if type is in SqlTypeFamily.Character    */
 specifier|public
 specifier|static
 name|boolean
@@ -1075,7 +1075,7 @@ operator|.
 name|CHARACTER
 return|;
 block|}
-comment|/**      * @return true if type is in SqlTypeFamily.Boolean      */
+comment|/**    * @return true if type is in SqlTypeFamily.Boolean    */
 specifier|public
 specifier|static
 name|boolean
@@ -1096,7 +1096,7 @@ operator|.
 name|BOOLEAN
 return|;
 block|}
-comment|/**      * @return true if two types are in same type family      */
+comment|/**    * @return true if two types are in same type family    */
 specifier|public
 specifier|static
 name|boolean
@@ -1121,7 +1121,7 @@ name|getFamily
 argument_list|()
 return|;
 block|}
-comment|/**      * @return true if two types are in same type family, or one or the other is      * of type SqlTypeName.Null      */
+comment|/**    * @return true if two types are in same type family, or one or the other is    * of type SqlTypeName.Null    */
 specifier|public
 specifier|static
 name|boolean
@@ -1170,7 +1170,7 @@ argument_list|()
 operator|)
 return|;
 block|}
-comment|/**      * @return true if type family is either character or binary      */
+comment|/**    * @return true if type family is either character or binary    */
 specifier|public
 specifier|static
 name|boolean
@@ -1204,7 +1204,7 @@ name|BINARY
 operator|)
 return|;
 block|}
-comment|/**      * @return true if type is a LOB of some kind      */
+comment|/**    * @return true if type is a LOB of some kind    */
 specifier|public
 specifier|static
 name|boolean
@@ -1219,7 +1219,7 @@ return|return
 literal|false
 return|;
 block|}
-comment|/**      * @return true if type is variable width with bounded precision      */
+comment|/**    * @return true if type is variable width with bounded precision    */
 specifier|public
 specifier|static
 name|boolean
@@ -1272,7 +1272,7 @@ literal|false
 return|;
 block|}
 block|}
-comment|/**      * @return true if type is one of the integer types      */
+comment|/**    * @return true if type is one of the integer types    */
 specifier|public
 specifier|static
 name|boolean
@@ -1327,7 +1327,7 @@ literal|false
 return|;
 block|}
 block|}
-comment|/**      * @return true if type is decimal      */
+comment|/**    * @return true if type is decimal    */
 specifier|public
 specifier|static
 name|boolean
@@ -1364,7 +1364,7 @@ operator|.
 name|DECIMAL
 return|;
 block|}
-comment|/**      * @return true if type is bigint      */
+comment|/**    * @return true if type is bigint    */
 specifier|public
 specifier|static
 name|boolean
@@ -1401,7 +1401,7 @@ operator|.
 name|BIGINT
 return|;
 block|}
-comment|/**      * @return true if type is numeric with exact precision      */
+comment|/**    * @return true if type is numeric with exact precision    */
 specifier|public
 specifier|static
 name|boolean
@@ -1459,7 +1459,7 @@ literal|false
 return|;
 block|}
 block|}
-comment|/**      * Returns the maximum value of an integral type, as a long value      */
+comment|/**    * Returns the maximum value of an integral type, as a long value    */
 specifier|public
 specifier|static
 name|long
@@ -1533,7 +1533,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**      * @return true if type is numeric with approximate precision      */
+comment|/**    * @return true if type is numeric with approximate precision    */
 specifier|public
 specifier|static
 name|boolean
@@ -1585,7 +1585,7 @@ literal|false
 return|;
 block|}
 block|}
-comment|/**      * @return true if type is numeric      */
+comment|/**    * @return true if type is numeric    */
 specifier|public
 specifier|static
 name|boolean
@@ -1607,7 +1607,7 @@ name|type
 argument_list|)
 return|;
 block|}
-comment|/**      * Tests whether two types have the same name and structure, possibly with      * differing modifiers. For example, VARCHAR(1) and VARCHAR(10) are      * considered the same, while VARCHAR(1) and CHAR(1) are considered      * different. Likewise, VARCHAR(1) MULTISET and VARCHAR(10) MULTISET are      * considered the same.      *      * @return true if types have same name and structure      */
+comment|/**    * Tests whether two types have the same name and structure, possibly with    * differing modifiers. For example, VARCHAR(1) and VARCHAR(10) are    * considered the same, while VARCHAR(1) and CHAR(1) are considered    * different. Likewise, VARCHAR(1) MULTISET and VARCHAR(10) MULTISET are    * considered the same.    *    * @return true if types have same name and structure    */
 specifier|public
 specifier|static
 name|boolean
@@ -1823,7 +1823,7 @@ name|getSqlTypeName
 argument_list|()
 return|;
 block|}
-comment|/**      * Computes the maximum number of bytes required to represent a value of a      * type having user-defined precision. This computation assumes no overhead      * such as length indicators and NUL-terminators. Complex types for which      * multiple representations are possible (e.g. DECIMAL or TIMESTAMP) return      * 0.      *      * @param type type for which to compute storage      *      * @return maximum bytes, or 0 for a fixed-width type or type with unknown      * maximum      */
+comment|/**    * Computes the maximum number of bytes required to represent a value of a    * type having user-defined precision. This computation assumes no overhead    * such as length indicators and NUL-terminators. Complex types for which    * multiple representations are possible (e.g. DECIMAL or TIMESTAMP) return    * 0.    *    * @param type type for which to compute storage    * @return maximum bytes, or 0 for a fixed-width type or type with unknown    * maximum    */
 specifier|public
 specifier|static
 name|int
@@ -1921,7 +1921,7 @@ literal|0
 return|;
 block|}
 block|}
-comment|/**      * Determines the minimum unscaled value of a numeric type      *      * @param type a numeric type      */
+comment|/**    * Determines the minimum unscaled value of a numeric type    *    * @param type a numeric type    */
 specifier|public
 specifier|static
 name|long
@@ -2003,7 +2003,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**      * Determines the maximum unscaled value of a numeric type      *      * @param type a numeric type      */
+comment|/**    * Determines the maximum unscaled value of a numeric type    *    * @param type a numeric type    */
 specifier|public
 specifier|static
 name|long
@@ -2085,7 +2085,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**      * @return true if type has a representation as a Java primitive (ignoring      * nullability)      */
+comment|/**    * @return true if type has a representation as a Java primitive (ignoring    * nullability)    */
 specifier|public
 specifier|static
 name|boolean
@@ -2155,7 +2155,7 @@ literal|false
 return|;
 block|}
 block|}
-comment|/**      * @return class name of the wrapper for the primitive data type.      */
+comment|/**    * @return class name of the wrapper for the primitive data type.    */
 specifier|public
 specifier|static
 name|String
@@ -2215,7 +2215,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**      * @return class name of the numeric data type.      */
+comment|/**    * @return class name of the numeric data type.    */
 specifier|public
 specifier|static
 name|String
@@ -2308,7 +2308,7 @@ literal|null
 return|;
 block|}
 block|}
-comment|/**      * Tests assignability of a value to a site.      *      * @param toType type of the target site      * @param fromType type of the source value      *      * @return true iff assignable      */
+comment|/**    * Tests assignability of a value to a site.    *    * @param toType   type of the target site    * @param fromType type of the source value    * @return true iff assignable    */
 specifier|public
 specifier|static
 name|boolean
@@ -2371,7 +2371,7 @@ name|getFamily
 argument_list|()
 return|;
 block|}
-comment|/**      * Determines whether two types both have different character sets. If one      * or the other type has no character set (e.g. in cast from INT to      * VARCHAR), that is not a mismatch.      *      * @param t1 first type      * @param t2 second type      *      * @return true iff mismatched      */
+comment|/**    * Determines whether two types both have different character sets. If one    * or the other type has no character set (e.g. in cast from INT to    * VARCHAR), that is not a mismatch.    *    * @param t1 first type    * @param t2 second type    * @return true iff mismatched    */
 specifier|public
 specifier|static
 name|boolean
@@ -2435,7 +2435,7 @@ return|return
 literal|false
 return|;
 block|}
-comment|/**      * Compares two types and returns true if fromType can be cast to toType.      *      *<p>REVIEW jvs 17-Dec-2004: the coerce param below shouldn't really be      * necessary. We're using it as a hack because {@link      * SqlTypeFactoryImpl#leastRestrictiveSqlType} isn't complete enough yet.      * Once it is, this param (and the non-coerce rules of {@link      * SqlTypeAssignmentRules}) should go away.      *      * @param toType target of assignment      * @param fromType source of assignment      * @param coerce if true, the SQL rules for CAST are used; if false, the      * rules are similar to Java; e.g. you can't assign short x = (int) y, and      * you can't assign int x = (String) z.      *      * @return true iff cast is legal      */
+comment|/**    * Compares two types and returns true if fromType can be cast to toType.    *    *<p>REVIEW jvs 17-Dec-2004: the coerce param below shouldn't really be    * necessary. We're using it as a hack because {@link    * SqlTypeFactoryImpl#leastRestrictiveSqlType} isn't complete enough yet.    * Once it is, this param (and the non-coerce rules of {@link    * SqlTypeAssignmentRules}) should go away.    *    * @param toType   target of assignment    * @param fromType source of assignment    * @param coerce   if true, the SQL rules for CAST are used; if false, the    *                 rules are similar to Java; e.g. you can't assign short x =    *                 (int) y, and you can't assign int x = (String) z.    * @return true iff cast is legal    */
 specifier|public
 specifier|static
 name|boolean
@@ -2938,7 +2938,7 @@ name|coerce
 argument_list|)
 return|;
 block|}
-comment|/**      * Flattens a record type by recursively expanding any fields which are      * themselves record types. For each record type, a representative null      * value field is also prepended (with state NULL for a null value and FALSE      * for non-null), and all component types are asserted to be nullable, since      * SQL doesn't allow NOT NULL to be specified on attributes.      *      * @param typeFactory factory which should produced flattened type      * @param recordType type with possible nesting      * @param flatteningMap if non-null, receives map from unflattened ordinal      * to flattened ordinal (must have length at least      * recordType.getFieldList().size())      *      * @return flattened equivalent      */
+comment|/**    * Flattens a record type by recursively expanding any fields which are    * themselves record types. For each record type, a representative null    * value field is also prepended (with state NULL for a null value and FALSE    * for non-null), and all component types are asserted to be nullable, since    * SQL doesn't allow NOT NULL to be specified on attributes.    *    * @param typeFactory   factory which should produced flattened type    * @param recordType    type with possible nesting    * @param flatteningMap if non-null, receives map from unflattened ordinal    *                      to flattened ordinal (must have length at least    *                      recordType.getFieldList().size())    * @return flattened equivalent    */
 specifier|public
 specifier|static
 name|RelDataType
@@ -3084,7 +3084,7 @@ name|fieldNames
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates a record type with anonymous field names.      *      * @deprecated not used      * @see Bug#upgrade(String) to be removed in optiq-0.4.18      */
+comment|/**    * Creates a record type with anonymous field names.    *    * @see Bug#upgrade(String) to be removed in optiq-0.4.18    * @deprecated not used    */
 specifier|public
 specifier|static
 name|RelDataType
@@ -3431,7 +3431,7 @@ return|return
 name|nested
 return|;
 block|}
-comment|/**      * Converts an instance of RelDataType to an instance of SqlDataTypeSpec.      *      * @param type type descriptor      *      * @return corresponding parse representation      */
+comment|/**    * Converts an instance of RelDataType to an instance of SqlDataTypeSpec.    *    * @param type type descriptor    * @return corresponding parse representation    */
 specifier|public
 specifier|static
 name|SqlDataTypeSpec
@@ -3713,7 +3713,7 @@ name|nullable
 argument_list|)
 return|;
 block|}
-comment|/**      * Adds collation and charset to a character type, returns other types      * unchanged.      *      * @param type Type      * @param typeFactory Type factory      *      * @return Type with added charset and collation, or unchanged type if it is      * not a char type.      */
+comment|/**    * Adds collation and charset to a character type, returns other types    * unchanged.    *    * @param type        Type    * @param typeFactory Type factory    * @return Type with added charset and collation, or unchanged type if it is    * not a char type.    */
 specifier|public
 specifier|static
 name|RelDataType
@@ -3810,7 +3810,7 @@ return|return
 name|type
 return|;
 block|}
-comment|/**      * Returns whether two types are equal, ignoring nullability.      *      *<p>They need not come from the same factory.      *      * @param factory Type factory      * @param type1 First type      * @param type2 Second type      *      * @return whether types are equal, ignoring nullability      */
+comment|/**    * Returns whether two types are equal, ignoring nullability.    *    *<p>They need not come from the same factory.    *    * @param factory Type factory    * @param type1   First type    * @param type2   Second type    * @return whether types are equal, ignoring nullability    */
 specifier|public
 specifier|static
 name|boolean
@@ -3878,7 +3878,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**      * Adds a field to a record type at a specified position.      *      *<p>For example, if type is<code>(A integer, B boolean)</code>, and      * fieldType is<code>varchar(10)</code>, then<code>prepend(typeFactory,      * type, 0, "Z", fieldType)</code> will return<code>(Z varchar(10), A      * integer, B boolean)</code>.      *      * @param typeFactory Type factory      * @param type Record type      * @param at Ordinal to add field      * @param fieldName Name of new field      * @param fieldType Type of new field      *      * @return Extended record type      *      * @deprecated not used      * @see Bug#upgrade(String) to be removed in optiq-0.4.18      */
+comment|/**    * Adds a field to a record type at a specified position.    *    *<p>For example, if type is<code>(A integer, B boolean)</code>, and    * fieldType is<code>varchar(10)</code>, then<code>prepend(typeFactory,    * type, 0, "Z", fieldType)</code> will return<code>(Z varchar(10), A    * integer, B boolean)</code>.    *    * @param typeFactory Type factory    * @param type        Record type    * @param at          Ordinal to add field    * @param fieldName   Name of new field    * @param fieldType   Type of new field    * @return Extended record type    * @see Bug#upgrade(String) to be removed in optiq-0.4.18    * @deprecated not used    */
 specifier|public
 specifier|static
 name|RelDataType
@@ -4023,7 +4023,7 @@ block|}
 argument_list|)
 return|;
 block|}
-comment|/**      * Returns the ordinal of a given field in a record type, or -1 if the field      * is not found.      *      * @param type Record type      * @param fieldName Name of field      *      * @return Ordinal of field      */
+comment|/**    * Returns the ordinal of a given field in a record type, or -1 if the field    * is not found.    *    * @param type      Record type    * @param fieldName Name of field    * @return Ordinal of field    */
 specifier|public
 specifier|static
 name|int
@@ -4098,7 +4098,7 @@ operator|-
 literal|1
 return|;
 block|}
-comment|/**      * Records a struct type with no fields.      *      * @param typeFactory Type factory      *      * @return Struct type with no fields      */
+comment|/**    * Records a struct type with no fields.    *    * @param typeFactory Type factory    * @return Struct type with no fields    */
 specifier|public
 specifier|static
 name|RelDataType
@@ -4127,7 +4127,7 @@ index|]
 argument_list|)
 return|;
 block|}
-comment|/**      * Returns whether two types are comparable. They need to be scalar types of      * the same family, or struct types whose fields are pairwise comparable.      *      * @param type1 First type      * @param type2 Second type      *      * @return Whether types are comparable      */
+comment|/**    * Returns whether two types are comparable. They need to be scalar types of    * the same family, or struct types whose fields are pairwise comparable.    *    * @param type1 First type    * @param type2 Second type    * @return Whether types are comparable    */
 specifier|public
 specifier|static
 name|boolean
@@ -4362,7 +4362,7 @@ return|return
 literal|false
 return|;
 block|}
-comment|/**      * Checks whether a type represents Unicode character data.      *      * @param type type to test      *      * @return whether type represents Unicode character data      */
+comment|/**    * Checks whether a type represents Unicode character data.    *    * @param type type to test    * @return whether type represents Unicode character data    */
 specifier|public
 specifier|static
 name|boolean

@@ -53,7 +53,7 @@ name|int
 name|index
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * @pre name != null      * @pre type != null      */
+comment|/**    * @pre name != null    * @pre type != null    */
 specifier|public
 name|RelDataTypeFieldImpl
 parameter_list|(

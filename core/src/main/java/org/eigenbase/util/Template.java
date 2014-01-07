@@ -66,7 +66,7 @@ name|String
 argument_list|>
 name|parameterNames
 decl_stmt|;
-comment|/**      * Creates a Template for the default locale and the      * specified pattern.      *      * @param pattern the pattern for this message format      * @exception IllegalArgumentException if the pattern is invalid      */
+comment|/**    * Creates a Template for the default locale and the    * specified pattern.    *    * @param pattern the pattern for this message format    * @throws IllegalArgumentException if the pattern is invalid    */
 specifier|public
 specifier|static
 name|Template
@@ -88,7 +88,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates a Template for the specified locale and      * pattern.      *      * @param pattern the pattern for this message format      * @param locale the locale for this message format      * @exception IllegalArgumentException if the pattern is invalid      */
+comment|/**    * Creates a Template for the specified locale and    * pattern.    *    * @param pattern the pattern for this message format    * @param locale  the locale for this message format    * @throws IllegalArgumentException if the pattern is invalid    */
 specifier|public
 specifier|static
 name|Template
@@ -173,7 +173,7 @@ name|parameterNames
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Parses the pattern, populates the parameter names, and returns the      * pattern with parameter names converted to parameter ordinals.      *      *<p>To ensure that the same parsing rules apply, this code is copied from      * {@link java.text.MessageFormat#applyPattern(String)} but with different      * actions when a parameter is recognized.      *      * @param pattern Pattern      * @param parameterNames Names of parameters (output)      * @return Pattern with named parameters substituted with ordinals      */
+comment|/**    * Parses the pattern, populates the parameter names, and returns the    * pattern with parameter names converted to parameter ordinals.    *    *<p>To ensure that the same parsing rules apply, this code is copied from    * {@link java.text.MessageFormat#applyPattern(String)} but with different    * actions when a parameter is recognized.    *    * @param pattern        Pattern    * @param parameterNames Names of parameters (output)    * @return Pattern with named parameters substituted with ordinals    */
 specifier|private
 specifier|static
 name|String
@@ -543,7 +543,7 @@ name|toString
 argument_list|()
 return|;
 block|}
-comment|/**      * Called when a complete parameter has been seen.      *      * @param segments Comma-separated segments of the parameter definition      * @param parameterNames List of parameter names seen so far      */
+comment|/**    * Called when a complete parameter has been seen.    *    * @param segments       Comma-separated segments of the parameter definition    * @param parameterNames List of parameter names seen so far    */
 specifier|private
 specifier|static
 name|void
@@ -726,7 +726,7 @@ literal|0
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Formats a set of arguments to produce a string.      *      *<p>Arguments may appear in the map using named keys (of type String), or      * positional keys (0-based ordinals represented either as type String or      * Integer).      *      * @param argMap A map containing the arguments as (key, value) pairs      * @return       Formatted string.      * @exception IllegalArgumentException if the Format cannot format the given      *            object      */
+comment|/**    * Formats a set of arguments to produce a string.    *    *<p>Arguments may appear in the map using named keys (of type String), or    * positional keys (0-based ordinals represented either as type String or    * Integer).    *    * @param argMap A map containing the arguments as (key, value) pairs    * @return Formatted string.    * @throws IllegalArgumentException if the Format cannot format the given    *                                  object    */
 specifier|public
 name|String
 name|format
@@ -791,7 +791,7 @@ name|args
 argument_list|)
 return|;
 block|}
-comment|/**      * Returns the value of the {@code ordinal}th argument.      *      * @param argMap Map of argument values      * @param ordinal Ordinal of argument      * @return Value of argument      */
+comment|/**    * Returns the value of the {@code ordinal}th argument.    *    * @param argMap  Map of argument values    * @param ordinal Ordinal of argument    * @return Value of argument    */
 specifier|private
 name|Object
 name|getArg
@@ -873,7 +873,7 @@ literal|""
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates a Template with the given pattern and uses it      * to format the given arguments. This is equivalent to      *<blockquote>      *<code>{@link #of(String) Template}(pattern).{@link #format}(args)</code>      *</blockquote>      *      * @exception IllegalArgumentException if the pattern is invalid,      *            or if an argument in the<code>arguments</code> array      *            is not of the type expected by the format element(s)      *            that use it.      */
+comment|/**    * Creates a Template with the given pattern and uses it    * to format the given arguments. This is equivalent to    *<blockquote>    *<code>{@link #of(String) Template}(pattern).{@link #format}(args)</code>    *</blockquote>    *    * @throws IllegalArgumentException if the pattern is invalid,    *                                  or if an argument in the    *<code>arguments</code> array is not of the    *                                  type expected by the format element(s)    *                                  that use it.    */
 specifier|public
 specifier|static
 name|String
@@ -905,7 +905,7 @@ name|argMap
 argument_list|)
 return|;
 block|}
-comment|/**      * Returns the names of the parameters, in the order that they appeared in      * the template string.      *      * @return List of parameter names      */
+comment|/**    * Returns the names of the parameters, in the order that they appeared in    * the template string.    *    * @return List of parameter names    */
 specifier|public
 name|List
 argument_list|<

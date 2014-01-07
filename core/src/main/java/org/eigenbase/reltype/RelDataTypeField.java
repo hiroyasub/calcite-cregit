@@ -46,7 +46,6 @@ specifier|public
 interface|interface
 name|RelDataTypeField
 extends|extends
-comment|/*Types.RecordField, */
 name|Map
 operator|.
 name|Entry
@@ -57,19 +56,19 @@ name|RelDataType
 argument_list|>
 block|{
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Gets the name of this field, which is unique within its containing type.      *      * @return field name      */
+comment|/**    * Gets the name of this field, which is unique within its containing type.    *    * @return field name    */
 specifier|public
 name|String
 name|getName
 parameter_list|()
 function_decl|;
-comment|/**      * Gets the ordinal of this field within its containing type.      *      * @return 0-based ordinal      */
+comment|/**    * Gets the ordinal of this field within its containing type.    *    * @return 0-based ordinal    */
 specifier|public
 name|int
 name|getIndex
 parameter_list|()
 function_decl|;
-comment|/**      * Gets the type of this field.      *      * @return field type      */
+comment|/**    * Gets the type of this field.    *    * @return field type    */
 specifier|public
 name|RelDataType
 name|getType

@@ -91,7 +91,7 @@ name|phaseRuleMap
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Extend this method to provide phase-to-rule mappings beyond what is      * provided by this initializer's subordinate.      *      *<p>When this method is called, the map will already be pre-initialized      * with empty sets for each VolcanoPlannerPhase. Implementations must not      * return having added or removed keys from the map, although it is safe to      * temporarily add or remove keys.      *      * @param phaseRuleMap the {@link VolcanoPlannerPhase}-rule description map      *      * @see VolcanoPlannerPhaseRuleMappingInitializer      */
+comment|/**    * Extend this method to provide phase-to-rule mappings beyond what is    * provided by this initializer's subordinate.    *    *<p>When this method is called, the map will already be pre-initialized    * with empty sets for each VolcanoPlannerPhase. Implementations must not    * return having added or removed keys from the map, although it is safe to    * temporarily add or remove keys.    *    * @param phaseRuleMap the {@link VolcanoPlannerPhase}-rule description map    * @see VolcanoPlannerPhaseRuleMappingInitializer    */
 specifier|public
 specifier|abstract
 name|void

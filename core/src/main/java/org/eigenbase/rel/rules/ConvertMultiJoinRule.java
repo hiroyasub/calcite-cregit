@@ -107,7 +107,7 @@ name|ConvertMultiJoinRule
 argument_list|()
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a ConvertMultiJoinRule.      */
+comment|/**    * Creates a ConvertMultiJoinRule.    */
 specifier|private
 name|ConvertMultiJoinRule
 parameter_list|()
@@ -417,7 +417,7 @@ name|multiJoin
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Combines the inputs into a JoinRel into an array of inputs.      *      * @param join original join      * @param left left input into join      * @param right right input into join      * @param projFieldsList returns a list of the new combined projection      * fields      * @param joinFieldRefCountsList returns a list of the new combined join      * field reference counts      *      * @return combined left and right inputs in an array      */
+comment|/**    * Combines the inputs into a JoinRel into an array of inputs.    *    * @param join                   original join    * @param left                   left input into join    * @param right                  right input into join    * @param projFieldsList         returns a list of the new combined projection    *                               fields    * @param joinFieldRefCountsList returns a list of the new combined join    *                               field reference counts    * @return combined left and right inputs in an array    */
 specifier|private
 name|List
 argument_list|<
@@ -800,7 +800,7 @@ return|return
 name|newInputs
 return|;
 block|}
-comment|/**      * Combines the outer join conditions and join types from the left and right      * join inputs. If the join itself is either a left or right outer join,      * then the join condition corresponding to the join is also set in the      * position corresponding to the null-generating input into the join. The      * join type is also set.      *      * @param joinRel join rel      * @param combinedInputs the combined inputs to the join      * @param left left child of the joinrel      * @param right right child of the joinrel      * @param joinSpecs the list where the join types and conditions will be      *                  copied      */
+comment|/**    * Combines the outer join conditions and join types from the left and right    * join inputs. If the join itself is either a left or right outer join,    * then the join condition corresponding to the join is also set in the    * position corresponding to the null-generating input into the join. The    * join type is also set.    *    * @param joinRel        join rel    * @param combinedInputs the combined inputs to the join    * @param left           left child of the joinrel    * @param right          right child of the joinrel    * @param joinSpecs      the list where the join types and conditions will be    *                       copied    */
 specifier|private
 name|void
 name|combineOuterJoins
@@ -1128,7 +1128,7 @@ expr_stmt|;
 block|}
 block|}
 block|}
-comment|/**      * Copies outer join data from a source MultiJoinRel to a new set of arrays.      * Also adjusts the conditions to reflect the new position of an input if      * that input ends up being shifted to the right.      *      * @param multiJoinRel the source MultiJoinRel      * @param destJoinSpecs the list where the join types and conditions will be      *                      copied      * @param adjustmentAmount if> 0, the amount the RexInputRefs in the join      * conditions need to be adjusted by      * @param srcFields the source fields that the original join conditions are      * referencing      * @param destFields the destination fields that the new join conditions      */
+comment|/**    * Copies outer join data from a source MultiJoinRel to a new set of arrays.    * Also adjusts the conditions to reflect the new position of an input if    * that input ends up being shifted to the right.    *    * @param multiJoinRel     the source MultiJoinRel    * @param destJoinSpecs    the list where the join types and conditions will    *                         be copied    * @param adjustmentAmount if&gt; 0, the amount the RexInputRefs in the join    *                         conditions need to be adjusted by    * @param srcFields        the source fields that the original join conditions    *                         are referencing    * @param destFields       the destination fields that the new join conditions    */
 specifier|private
 name|void
 name|copyOuterJoinInfo
@@ -1313,7 +1313,7 @@ expr_stmt|;
 block|}
 block|}
 block|}
-comment|/**      * Combines the join filters from the left and right inputs (if they are      * MultiJoinRels) with the join filter in the joinrel into a single AND'd      * join filter, unless the inputs correspond to null generating inputs in an      * outer join      *      * @param joinRel join rel      * @param left left child of the joinrel      * @param right right child of the joinrel      *      * @return combined join filters AND'd together      */
+comment|/**    * Combines the join filters from the left and right inputs (if they are    * MultiJoinRels) with the join filter in the joinrel into a single AND'd    * join filter, unless the inputs correspond to null generating inputs in an    * outer join    *    * @param joinRel join rel    * @param left    left child of the joinrel    * @param right   right child of the joinrel    * @return combined join filters AND'd together    */
 specifier|private
 name|RexNode
 name|combineJoinFilters
@@ -1484,7 +1484,7 @@ return|return
 name|newFilter
 return|;
 block|}
-comment|/**      * @param input input into a join      * @param nullGenerating true if the input is null generating      *      * @return true if the input can be combined into a parent MultiJoinRel      */
+comment|/**    * @param input          input into a join    * @param nullGenerating true if the input is null generating    * @return true if the input can be combined into a parent MultiJoinRel    */
 specifier|private
 name|boolean
 name|canCombine
@@ -1520,7 +1520,7 @@ name|nullGenerating
 operator|)
 return|;
 block|}
-comment|/**      * Shifts a filter originating from the right child of the JoinRel to the      * right, to reflect the filter now being applied on the resulting      * MultiJoinRel.      *      * @param joinRel the original JoinRel      * @param left the left child of the JoinRel      * @param right the right child of the JoinRel      * @param rightFilter the filter originating from the right child      *      * @return the adjusted right filter      */
+comment|/**    * Shifts a filter originating from the right child of the JoinRel to the    * right, to reflect the filter now being applied on the resulting    * MultiJoinRel.    *    * @param joinRel     the original JoinRel    * @param left        the left child of the JoinRel    * @param right       the right child of the JoinRel    * @param rightFilter the filter originating from the right child    * @return the adjusted right filter    */
 specifier|private
 name|RexNode
 name|shiftRightFilter
@@ -1653,7 +1653,7 @@ return|return
 name|rightFilter
 return|;
 block|}
-comment|/**      * Adds on to the existing join condition reference counts the references      * from the new join condition.      *      * @param multiJoinInputs inputs into the new MultiJoinRel      * @param nTotalFields total number of fields in the MultiJoinRel      * @param joinCondition the new join condition      * @param origJoinFieldRefCounts existing join condition reference counts      * @param newJoinFieldRefCountsMap map containing the new join condition      */
+comment|/**    * Adds on to the existing join condition reference counts the references    * from the new join condition.    *    * @param multiJoinInputs          inputs into the new MultiJoinRel    * @param nTotalFields             total number of fields in the MultiJoinRel    * @param joinCondition            the new join condition    * @param origJoinFieldRefCounts   existing join condition reference counts    * @param newJoinFieldRefCountsMap map containing the new join condition    */
 specifier|private
 name|void
 name|addOnJoinFieldRefCounts
@@ -1858,7 +1858,7 @@ index|]
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Combines the post-join filters from the left and right inputs (if they      * are MultiJoinRels) into a single AND'd filter.      *      * @param joinRel the original JoinRel      * @param left left child of the JoinRel      * @param right right child of the JoinRel      *      * @return combined post-join filters AND'd together      */
+comment|/**    * Combines the post-join filters from the left and right inputs (if they    * are MultiJoinRels) into a single AND'd filter.    *    * @param joinRel the original JoinRel    * @param left    left child of the JoinRel    * @param right   right child of the JoinRel    * @return combined post-join filters AND'd together    */
 specifier|private
 name|RexNode
 name|combinePostJoinFilters
@@ -1977,7 +1977,7 @@ return|;
 block|}
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------
-comment|/**      * Visitor that keeps a reference count of the inputs used by an expression.      */
+comment|/**    * Visitor that keeps a reference count of the inputs used by an expression.    */
 specifier|private
 class|class
 name|InputReferenceCounter

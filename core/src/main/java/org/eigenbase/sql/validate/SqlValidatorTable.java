@@ -50,7 +50,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Supplies a {@link SqlValidator} with the metadata for a table.  * @see SqlValidatorCatalogReader  */
+comment|/**  * Supplies a {@link SqlValidator} with the metadata for a table.  *  * @see SqlValidatorCatalogReader  */
 end_comment
 
 begin_interface
@@ -70,7 +70,7 @@ argument_list|>
 name|getQualifiedName
 parameter_list|()
 function_decl|;
-comment|/**      * Returns whether a given column is monotonic.      */
+comment|/**    * Returns whether a given column is monotonic.    */
 name|SqlMonotonicity
 name|getMonotonicity
 parameter_list|(
@@ -78,7 +78,7 @@ name|String
 name|columnName
 parameter_list|)
 function_decl|;
-comment|/**      * Returns the access type of the table      */
+comment|/**    * Returns the access type of the table    */
 name|SqlAccessType
 name|getAllowedAccess
 parameter_list|()

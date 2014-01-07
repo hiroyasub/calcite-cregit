@@ -171,24 +171,24 @@ name|getPlannerTracer
 argument_list|()
 decl_stmt|;
 comment|//~ Instance fields --------------------------------------------------------
-comment|/**      * cost of best known plan (it may have improved since)      */
+comment|/**    * cost of best known plan (it may have improved since)    */
 name|RelOptCost
 name|bestCost
 decl_stmt|;
-comment|/**      * The set this subset belongs to.      */
+comment|/**    * The set this subset belongs to.    */
 specifier|final
 name|RelSet
 name|set
 decl_stmt|;
-comment|/**      * best known plan      */
+comment|/**    * best known plan    */
 name|RelNode
 name|best
 decl_stmt|;
-comment|/**      * Timestamp for metadata validity      */
+comment|/**    * Timestamp for metadata validity    */
 name|long
 name|timestamp
 decl_stmt|;
-comment|/**      * Flag indicating whether this RelSubset's importance was artificially      * boosted.      */
+comment|/**    * Flag indicating whether this RelSubset's importance was artificially    * boosted.    */
 name|boolean
 name|boosted
 decl_stmt|;
@@ -595,7 +595,7 @@ return|return
 literal|false
 return|;
 block|}
-comment|/** Returns the collection of RelNodes one of whose inputs is in this      * subset. */
+comment|/**    * Returns the collection of RelNodes one of whose inputs is in this    * subset.    */
 name|Set
 argument_list|<
 name|RelNode
@@ -672,7 +672,7 @@ return|return
 name|list
 return|;
 block|}
-comment|/** Returns the collection of distinct subsets that contain a RelNode one      * of whose inputs is in this subset. */
+comment|/**    * Returns the collection of distinct subsets that contain a RelNode one    * of whose inputs is in this subset.    */
 name|Set
 argument_list|<
 name|RelSubset
@@ -786,7 +786,7 @@ name|getInputs
 argument_list|()
 return|;
 block|}
-comment|/** Returns a list of relational expressions one of whose children is this      * subset. The elements of the list are distinct. */
+comment|/**    * Returns a list of relational expressions one of whose children is this    * subset. The elements of the list are distinct.    */
 specifier|public
 name|Collection
 argument_list|<
@@ -877,7 +877,7 @@ return|return
 name|set
 return|;
 block|}
-comment|/**      * Adds expression<code>rel</code> to this subset.      */
+comment|/**    * Adds expression<code>rel</code> to this subset.    */
 name|void
 name|add
 parameter_list|(
@@ -1067,7 +1067,7 @@ argument_list|)
 assert|;
 block|}
 block|}
-comment|/**      * Recursively builds a tree consisting of the cheapest plan at each node.      */
+comment|/**    * Recursively builds a tree consisting of the cheapest plan at each node.    */
 name|RelNode
 name|buildCheapestPlan
 parameter_list|(
@@ -1138,7 +1138,7 @@ return|return
 name|cheapest
 return|;
 block|}
-comment|/**      * Checks whether a relexp has made its subset cheaper, and if it so,      * recursively checks whether that subset's parents have gotten cheaper.      *      * @param planner Planner      * @param rel Relational expression whose cost has improved      * @param activeSet Set of active subsets, for cycle detection      */
+comment|/**    * Checks whether a relexp has made its subset cheaper, and if it so,    * recursively checks whether that subset's parents have gotten cheaper.    *    * @param planner   Planner    * @param rel       Relational expression whose cost has improved    * @param activeSet Set of active subsets, for cycle detection    */
 name|void
 name|propagateCostImprovements
 parameter_list|(
@@ -1451,7 +1451,7 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Returns the rel nodes in this rel subset.  All rels must have the same      * traits and are logically equivalent.      * @return all the rels in the subset      */
+comment|/**    * Returns the rel nodes in this rel subset.  All rels must have the same    * traits and are logically equivalent.    *    * @return all the rels in the subset    */
 specifier|public
 name|Iterable
 argument_list|<
@@ -1525,7 +1525,7 @@ block|}
 block|}
 return|;
 block|}
-comment|/** As {@link #getRels()} but returns a list. */
+comment|/**    * As {@link #getRels()} but returns a list.    */
 specifier|public
 name|List
 argument_list|<
@@ -1585,7 +1585,7 @@ name|list
 return|;
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------
-comment|/**      * Visitor which walks over a tree of {@link RelSet}s, replacing each node      * with the cheapest implementation of the expression.      */
+comment|/**    * Visitor which walks over a tree of {@link RelSet}s, replacing each node    * with the cheapest implementation of the expression.    */
 class|class
 name|CheapestPlanReplacer
 block|{

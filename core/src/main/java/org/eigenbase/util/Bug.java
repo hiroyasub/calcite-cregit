@@ -45,7 +45,7 @@ init|=
 literal|false
 decl_stmt|;
 comment|// angel
-comment|/**      * Whether dtbug1446 "Window Rank Functions not fully implemented" is fixed.      */
+comment|/**    * Whether dtbug1446 "Window Rank Functions not fully implemented" is fixed.    */
 specifier|public
 specifier|static
 specifier|final
@@ -55,7 +55,7 @@ init|=
 literal|false
 decl_stmt|;
 comment|// jhyde
-comment|/**      * Whether<a href="http://issues.eigenbase.org/browse/FNL-3">issue      * Fnl-3</a> is fixed.      */
+comment|/**    * Whether<a href="http://issues.eigenbase.org/browse/FNL-3">issue    * Fnl-3</a> is fixed.    */
 specifier|public
 specifier|static
 specifier|final
@@ -64,7 +64,7 @@ name|Fnl3Fixed
 init|=
 literal|false
 decl_stmt|;
-comment|/**      * Whether<a href="http://issues.eigenbase.org/browse/FNL-77">issue FNL-77:      * Fennel calc returns CURRENT_TIMESTAMP in UTC, should be local time</a> is      * fixed.      */
+comment|/**    * Whether<a href="http://issues.eigenbase.org/browse/FNL-77">issue FNL-77:    * Fennel calc returns CURRENT_TIMESTAMP in UTC, should be local time</a> is    * fixed.    */
 specifier|public
 specifier|static
 specifier|final
@@ -73,7 +73,7 @@ name|Fnl77Fixed
 init|=
 literal|false
 decl_stmt|;
-comment|/**      * Whether<a href="http://issues.eigenbase.org/browse/FRG-327">issue      * FRG-327: AssertionError while translating IN list that contains null</a>      * is fixed.      */
+comment|/**    * Whether<a href="http://issues.eigenbase.org/browse/FRG-327">issue    * FRG-327: AssertionError while translating IN list that contains null</a>    * is fixed.    */
 specifier|public
 specifier|static
 specifier|final
@@ -82,7 +82,7 @@ name|Frg327Fixed
 init|=
 literal|false
 decl_stmt|;
-comment|/**      * Whether<a href="http://issues.eigenbase.org/browse/FRG-377">issue      * FRG-377: Regular character set identifiers defined in SQL:2008 spec like      * :ALPHA:, * :UPPER:, :LOWER:, ... etc. are not yet implemented in      * SIMILAR TO expressions.</a> is fixed.      */
+comment|/**    * Whether<a href="http://issues.eigenbase.org/browse/FRG-377">issue    * FRG-377: Regular character set identifiers defined in SQL:2008 spec like    * :ALPHA:, * :UPPER:, :LOWER:, ... etc. are not yet implemented in    * SIMILAR TO expressions.</a> is fixed.    */
 specifier|public
 specifier|static
 specifier|final
@@ -91,7 +91,7 @@ name|Frg377Fixed
 init|=
 literal|false
 decl_stmt|;
-comment|/**      * Whether dtbug1684 "CURRENT_DATE not implemented in fennel calc" is fixed.      */
+comment|/**    * Whether dtbug1684 "CURRENT_DATE not implemented in fennel calc" is fixed.    */
 specifier|public
 specifier|static
 specifier|final
@@ -109,7 +109,7 @@ comment|// stephan
 comment|// tleung
 comment|// xluo
 comment|// zfong
-comment|/**      * Whether<a href="http://issues.eigenbase.org/browse/FNL-25">issue      * FNL-25</a> is fixed. (also filed as dtbug 153)      */
+comment|/**    * Whether<a href="http://issues.eigenbase.org/browse/FNL-25">issue    * FNL-25</a> is fixed. (also filed as dtbug 153)    */
 specifier|public
 specifier|static
 specifier|final
@@ -122,7 +122,7 @@ comment|// johnk
 comment|// jouellette
 comment|// jpham
 comment|// jvs
-comment|/**      * Whether<a href="http://issues.eigenbase.org/browse/FRG-73">issue FRG-73:      * miscellaneous bugs with nested comments</a> is fixed.      */
+comment|/**    * Whether<a href="http://issues.eigenbase.org/browse/FRG-73">issue FRG-73:    * miscellaneous bugs with nested comments</a> is fixed.    */
 specifier|public
 specifier|static
 specifier|final
@@ -131,7 +131,7 @@ name|Frg73Fixed
 init|=
 literal|false
 decl_stmt|;
-comment|/**      * Whether<a href="http://issues.eigenbase.org/browse/FRG-78">issue FRG-78:      * collation clause should be on expression instead of identifier</a> is      * fixed.      */
+comment|/**    * Whether<a href="http://issues.eigenbase.org/browse/FRG-78">issue FRG-78:    * collation clause should be on expression instead of identifier</a> is    * fixed.    */
 specifier|public
 specifier|static
 specifier|final
@@ -140,7 +140,7 @@ name|Frg78Fixed
 init|=
 literal|false
 decl_stmt|;
-comment|/**      * Whether<a href="http://issues.eigenbase.org/browse/FRG-140">issue      * FRG-140: validator does not accept column qualified by schema name</a> is      * fixed.      */
+comment|/**    * Whether<a href="http://issues.eigenbase.org/browse/FRG-140">issue    * FRG-140: validator does not accept column qualified by schema name</a> is    * fixed.    */
 specifier|public
 specifier|static
 specifier|final
@@ -149,7 +149,7 @@ name|Frg140Fixed
 init|=
 literal|false
 decl_stmt|;
-comment|/**      * Whether<a href="http://issues.eigenbase.org/browse/FRG-187">issue      * FRG-187: FarragoAutoVmOperatorTest.testOverlapsOperator fails</a> is      * fixed.      */
+comment|/**    * Whether<a href="http://issues.eigenbase.org/browse/FRG-187">issue    * FRG-187: FarragoAutoVmOperatorTest.testOverlapsOperator fails</a> is    * fixed.    */
 specifier|public
 specifier|static
 specifier|final
@@ -158,7 +158,7 @@ name|Frg187Fixed
 init|=
 literal|false
 decl_stmt|;
-comment|/**      * Whether<a href="http://issues.eigenbase.org/browse/FRG-189">issue      * FRG-189: FarragoAutoVmOperatorTest.testSelect fails</a> is fixed.      */
+comment|/**    * Whether<a href="http://issues.eigenbase.org/browse/FRG-189">issue    * FRG-189: FarragoAutoVmOperatorTest.testSelect fails</a> is fixed.    */
 specifier|public
 specifier|static
 specifier|final
@@ -172,7 +172,7 @@ comment|// fliang
 comment|// fzhang
 comment|// hersker
 comment|// jack
-comment|/**      * Whether<a href="http://issues.eigenbase.org/browse/FRG-254">issue      * FRG-254: environment-dependent failure for      * SqlOperatorTest.testPrefixPlusOperator</a> is fixed.      */
+comment|/**    * Whether<a href="http://issues.eigenbase.org/browse/FRG-254">issue    * FRG-254: environment-dependent failure for    * SqlOperatorTest.testPrefixPlusOperator</a> is fixed.    */
 specifier|public
 specifier|static
 specifier|final
@@ -181,7 +181,7 @@ name|Frg254Fixed
 init|=
 literal|false
 decl_stmt|;
-comment|/**      * Whether<a href="http://issues.eigenbase.org/browse/FRG-282">issue      * FRG-282: Support precision in TIME and TIMESTAMP data types</a> is fixed.      */
+comment|/**    * Whether<a href="http://issues.eigenbase.org/browse/FRG-282">issue    * FRG-282: Support precision in TIME and TIMESTAMP data types</a> is fixed.    */
 specifier|public
 specifier|static
 specifier|final
@@ -190,7 +190,7 @@ name|Frg282Fixed
 init|=
 literal|false
 decl_stmt|;
-comment|/**      * Whether<a href="http://issues.eigenbase.org/browse/FRG-296">issue      * FRG-296: SUBSTRING(string FROM regexp FOR regexp)</a> is fixed.      */
+comment|/**    * Whether<a href="http://issues.eigenbase.org/browse/FRG-296">issue    * FRG-296: SUBSTRING(string FROM regexp FOR regexp)</a> is fixed.    */
 specifier|public
 specifier|static
 specifier|final
@@ -199,7 +199,7 @@ name|Frg296Fixed
 init|=
 literal|false
 decl_stmt|;
-comment|/**      * Whether<a href="http://issues.eigenbase.org/browse/FRG-375">issue      * FRG-375: The expression VALUES ('cd' SIMILAR TO '[a-e^c]d') returns TRUE.      * It should return FALSE.</a> is fixed.      */
+comment|/**    * Whether<a href="http://issues.eigenbase.org/browse/FRG-375">issue    * FRG-375: The expression VALUES ('cd' SIMILAR TO '[a-e^c]d') returns TRUE.    * It should return FALSE.</a> is fixed.    */
 specifier|public
 specifier|static
 specifier|final
@@ -208,7 +208,7 @@ name|Frg375Fixed
 init|=
 literal|false
 decl_stmt|;
-comment|/**      * Whether<a href="http://issues.eigenbase.org/browse/FRG-378">issue      * FRG-378: Regular expressions in SIMILAR TO predicates      * potentially don't match SQL:2008 spec in a few cases.</a> is fixed.      */
+comment|/**    * Whether<a href="http://issues.eigenbase.org/browse/FRG-378">issue    * FRG-378: Regular expressions in SIMILAR TO predicates    * potentially don't match SQL:2008 spec in a few cases.</a> is fixed.    */
 specifier|public
 specifier|static
 specifier|final
@@ -217,7 +217,7 @@ name|Frg378Fixed
 init|=
 literal|true
 decl_stmt|;
-comment|/** Use this to flag temporary code. */
+comment|/**    * Use this to flag temporary code.    */
 specifier|public
 specifier|static
 specifier|final
@@ -226,7 +226,7 @@ name|TodoFixed
 init|=
 literal|false
 decl_stmt|;
-comment|/** Use this method to flag temporary code. */
+comment|/**    * Use this method to flag temporary code.    */
 specifier|public
 specifier|static
 name|boolean
@@ -247,7 +247,7 @@ return|return
 literal|false
 return|;
 block|}
-comment|/** Use this method to flag code that should be re-visited after upgrading      * a component. */
+comment|/**    * Use this method to flag code that should be re-visited after upgrading    * a component.    */
 specifier|public
 specifier|static
 name|boolean

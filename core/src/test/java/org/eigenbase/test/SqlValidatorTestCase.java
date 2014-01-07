@@ -263,7 +263,7 @@ name|Tester
 name|tester
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a test case.      */
+comment|/**    * Creates a test case.    */
 specifier|public
 name|SqlValidatorTestCase
 parameter_list|(
@@ -296,7 +296,7 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Returns a tester. Derived classes should override this method to run the      * same set of tests in a different testing environment.      *      * @param conformance Language version tests should check compatibility with      */
+comment|/**    * Returns a tester. Derived classes should override this method to run the    * same set of tests in a different testing environment.    *    * @param conformance Language version tests should check compatibility with    */
 specifier|public
 name|Tester
 name|getTester
@@ -354,7 +354,7 @@ literal|null
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Checks that a SQL query gives a particular error, or succeeds if {@code      * expected} is null.      */
+comment|/**    * Checks that a SQL query gives a particular error, or succeeds if {@code    * expected} is null.    */
 specifier|public
 specifier|final
 name|void
@@ -377,7 +377,7 @@ name|expected
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Checks that a SQL expression gives a particular error.      */
+comment|/**    * Checks that a SQL expression gives a particular error.    */
 specifier|public
 specifier|final
 name|void
@@ -405,7 +405,7 @@ name|expected
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Checks that a SQL expression gives a particular error, and that the      * location of the error is the whole expression.      */
+comment|/**    * Checks that a SQL expression gives a particular error, and that the    * location of the error is the whole expression.    */
 specifier|public
 specifier|final
 name|void
@@ -464,7 +464,7 @@ name|expected
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Checks that a query returns a single column, and that the column has the      * expected type. For example,      *      *<blockquote><code>checkColumnType("SELECT empno FROM Emp", "INTEGER NOT      * NULL");</code></blockquote>      *      * @param sql Query      * @param expected Expected type, including nullability      */
+comment|/**    * Checks that a query returns a single column, and that the column has the    * expected type. For example,    *    *<blockquote><code>checkColumnType("SELECT empno FROM Emp", "INTEGER NOT    * NULL");</code></blockquote>    *    * @param sql      Query    * @param expected Expected type, including nullability    */
 specifier|public
 name|void
 name|checkColumnType
@@ -486,7 +486,7 @@ name|expected
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Checks that a query returns a row of the expected type. For example,      *      *<blockquote><code>checkResultType("select empno, name from emp","{EMPNO      * INTEGER NOT NULL, NAME VARCHAR(10) NOT NULL}");</code></blockquote>      *      * @param sql Query      * @param expected Expected row type      */
+comment|/**    * Checks that a query returns a row of the expected type. For example,    *    *<blockquote><code>checkResultType("select empno, name from emp","{EMPNO    * INTEGER NOT NULL, NAME VARCHAR(10) NOT NULL}");</code></blockquote>    *    * @param sql      Query    * @param expected Expected row type    */
 specifier|public
 name|void
 name|checkResultType
@@ -508,7 +508,7 @@ name|expected
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Checks that the first column returned by a query has the expected type.      * For example,      *      *<blockquote><code>checkQueryType("SELECT empno FROM Emp", "INTEGER NOT      * NULL");</code></blockquote>      *      * @param sql Query      * @param expected Expected type, including nullability      */
+comment|/**    * Checks that the first column returned by a query has the expected type.    * For example,    *    *<blockquote><code>checkQueryType("SELECT empno FROM Emp", "INTEGER NOT    * NULL");</code></blockquote>    *    * @param sql      Query    * @param expected Expected type, including nullability    */
 specifier|public
 name|void
 name|checkIntervalConv
@@ -606,7 +606,7 @@ name|expectedCoercibility
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Checks whether an exception matches the expected pattern. If<code>      * sap</code> contains an error location, checks this too.      *      * @param ex Exception thrown      * @param expectedMsgPattern Expected pattern      * @param sap Query and (optional) position in query      */
+comment|/**    * Checks whether an exception matches the expected pattern. If<code>    * sap</code> contains an error location, checks this too.    *    * @param ex                 Exception thrown    * @param expectedMsgPattern Expected pattern    * @param sap                Query and (optional) position in query    */
 specifier|public
 specifier|static
 name|void
@@ -1515,7 +1515,7 @@ block|}
 block|}
 block|}
 comment|//~ Inner Interfaces -------------------------------------------------------
-comment|/**      * Encapsulates differences between test environments, for example, which      * SQL parser or validator to use.      *      *<p>It contains a mock schema with<code>EMP</code> and<code>DEPT</code>      * tables, which can run without having to start up Farrago.      */
+comment|/**    * Encapsulates differences between test environments, for example, which    * SQL parser or validator to use.    *    *<p>It contains a mock schema with<code>EMP</code> and<code>DEPT</code>    * tables, which can run without having to start up Farrago.    */
 specifier|public
 interface|interface
 name|Tester
@@ -1543,7 +1543,7 @@ name|SqlValidator
 name|getValidator
 parameter_list|()
 function_decl|;
-comment|/**          * Checks that a query is valid, or, if invalid, throws the right          * message at the right location.          *          *<p>If<code>expectedMsgPattern</code> is null, the query must          * succeed.          *          *<p>If<code>expectedMsgPattern</code> is not null, the query must          * fail, and give an error location of (expectedLine, expectedColumn)          * through (expectedEndLine, expectedEndColumn).          *          * @param sql SQL statement          * @param expectedMsgPattern If this parameter is null the query must be          * valid for the test to pass; If this parameter is not null the query          * must be malformed and the message given must match the pattern          */
+comment|/**      * Checks that a query is valid, or, if invalid, throws the right      * message at the right location.      *      *<p>If<code>expectedMsgPattern</code> is null, the query must      * succeed.      *      *<p>If<code>expectedMsgPattern</code> is not null, the query must      * fail, and give an error location of (expectedLine, expectedColumn)      * through (expectedEndLine, expectedEndColumn).      *      * @param sql                SQL statement      * @param expectedMsgPattern If this parameter is null the query must be      *                           valid for the test to pass; If this parameter      *                           is not null the query must be malformed and the      *                           message given must match the pattern      */
 name|void
 name|assertExceptionIsThrown
 parameter_list|(
@@ -1554,7 +1554,7 @@ name|String
 name|expectedMsgPattern
 parameter_list|)
 function_decl|;
-comment|/**          * Returns the data type of the sole column of a SQL query.          *          *<p>For example,<code>getResultType("VALUES (1")</code> returns          *<code>INTEGER</code>.          *          *<p>Fails if query returns more than one column.          *          * @see #getResultType(String)          */
+comment|/**      * Returns the data type of the sole column of a SQL query.      *      *<p>For example,<code>getResultType("VALUES (1")</code> returns      *<code>INTEGER</code>.      *      *<p>Fails if query returns more than one column.      *      * @see #getResultType(String)      */
 name|RelDataType
 name|getColumnType
 parameter_list|(
@@ -1562,7 +1562,7 @@ name|String
 name|sql
 parameter_list|)
 function_decl|;
-comment|/**          * Returns the data type of the row returned by a SQL query.          *          *<p>For example,<code>getResultType("VALUES (1, 'foo')")</code>          * returns<code>RecordType(INTEGER EXPR$0, CHAR(3) EXPR#1)</code>.          */
+comment|/**      * Returns the data type of the row returned by a SQL query.      *      *<p>For example,<code>getResultType("VALUES (1, 'foo')")</code>      * returns<code>RecordType(INTEGER EXPR$0, CHAR(3) EXPR#1)</code>.      */
 name|RelDataType
 name|getResultType
 parameter_list|(
@@ -1595,7 +1595,7 @@ name|Charset
 name|expectedCharset
 parameter_list|)
 function_decl|;
-comment|/**          * Checks that a query returns one column of an expected type. For          * example,<code>checkType("VALUES (1 + 2)", "INTEGER NOT          * NULL")</code>.          */
+comment|/**      * Checks that a query returns one column of an expected type. For      * example,<code>checkType("VALUES (1 + 2)", "INTEGER NOT      * NULL")</code>.      */
 name|void
 name|checkColumnType
 parameter_list|(
@@ -1606,7 +1606,7 @@ name|String
 name|expected
 parameter_list|)
 function_decl|;
-comment|/**          * Given a SQL query, returns a list of the origins of each result          * field.          *          * @param sql SQL query          * @param fieldOriginList Field origin list, e.g.          *   "{(CATALOG.SALES.EMP.EMPNO, null)}"          */
+comment|/**      * Given a SQL query, returns a list of the origins of each result      * field.      *      * @param sql             SQL query      * @param fieldOriginList Field origin list, e.g.      *                        "{(CATALOG.SALES.EMP.EMPNO, null)}"      */
 name|void
 name|checkFieldOrigin
 parameter_list|(
@@ -1617,7 +1617,7 @@ name|String
 name|fieldOriginList
 parameter_list|)
 function_decl|;
-comment|/**          * Checks that a query gets rewritten to an expected form.          *          * @param validator validator to use; null for default          * @param query query to test          * @param expectedRewrite expected SQL text after rewrite and unparse          */
+comment|/**      * Checks that a query gets rewritten to an expected form.      *      * @param validator       validator to use; null for default      * @param query           query to test      * @param expectedRewrite expected SQL text after rewrite and unparse      */
 name|void
 name|checkRewrite
 parameter_list|(
@@ -1631,7 +1631,7 @@ name|String
 name|expectedRewrite
 parameter_list|)
 function_decl|;
-comment|/**          * Checks that a query returns one column of an expected type. For          * example,<code>checkType("select empno, name from emp""{EMPNO INTEGER          * NOT NULL, NAME VARCHAR(10) NOT NULL}")</code>.          */
+comment|/**      * Checks that a query returns one column of an expected type. For      * example,<code>checkType("select empno, name from emp""{EMPNO INTEGER      * NOT NULL, NAME VARCHAR(10) NOT NULL}")</code>.      */
 name|void
 name|checkResultType
 parameter_list|(
@@ -1642,7 +1642,7 @@ name|String
 name|expected
 parameter_list|)
 function_decl|;
-comment|/**          * Checks if the interval value conversion to milliseconds is valid. For          * example,<code>checkIntervalConv(VALUES (INTERVAL '1' Minute),          * "60000")</code>.          */
+comment|/**      * Checks if the interval value conversion to milliseconds is valid. For      * example,<code>checkIntervalConv(VALUES (INTERVAL '1' Minute),      * "60000")</code>.      */
 name|void
 name|checkIntervalConv
 parameter_list|(
@@ -1653,7 +1653,7 @@ name|String
 name|expected
 parameter_list|)
 function_decl|;
-comment|/**          * Given a SQL query, returns the monotonicity of the first item in the          * SELECT clause.          *          * @param sql SQL query          *          * @return Monotonicity          */
+comment|/**      * Given a SQL query, returns the monotonicity of the first item in the      * SELECT clause.      *      * @param sql SQL query      * @return Monotonicity      */
 name|SqlMonotonicity
 name|getMonotonicity
 parameter_list|(
@@ -1667,7 +1667,7 @@ parameter_list|()
 function_decl|;
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------
-comment|/**      * Implementation of {@link org.eigenbase.test.SqlValidatorTestCase.Tester}      * which talks to a mock catalog.      *      *<p>It is also a pure-Java implementation of the {@link SqlTester} used by      * {@link SqlOperatorBaseTest}. It can parse and validate queries, but it      * does not invoke Farrago, so it is very fast but cannot execute functions.      */
+comment|/**    * Implementation of {@link org.eigenbase.test.SqlValidatorTestCase.Tester}    * which talks to a mock catalog.    *    *<p>It is also a pure-Java implementation of the {@link SqlTester} used by    * {@link SqlOperatorBaseTest}. It can parse and validate queries, but it    * does not invoke Farrago, so it is very fast but cannot execute functions.    */
 specifier|public
 specifier|static
 class|class
@@ -1713,7 +1713,7 @@ name|createOperatorTable
 argument_list|()
 expr_stmt|;
 block|}
-comment|/** {@inheritDoc}          *          * This default implementation does nothing.          */
+comment|/**      * {@inheritDoc}      *      * This default implementation does nothing.      */
 specifier|public
 name|void
 name|close
@@ -3480,7 +3480,7 @@ operator|+
 literal|")"
 return|;
 block|}
-comment|/**          * Builds a query that extracts all literals as columns in an underlying          * select.          *          *<p>For example,</p>          *          *<blockquote>{@code 1< 5}</blockquote>          *          *<p>becomes</p>          *          *<blockquote>{@code SELECT p0< p1          * FROM (VALUES (1, 5)) AS t(p0, p1)}</blockquote>          *          *<p>Null literals don't have enough type information to be extracted.          * We push down {@code CAST(NULL AS type)} but raw nulls such as          * {@code CASE 1 WHEN 2 THEN 'a' ELSE NULL END} are left as is.</p>          *          * @param expression Scalar expression          * @return Query that evaluates a scalar expression          */
+comment|/**      * Builds a query that extracts all literals as columns in an underlying      * select.      *      *<p>For example,</p>      *      *<blockquote>{@code 1< 5}</blockquote>      *      *<p>becomes</p>      *      *<blockquote>{@code SELECT p0< p1      * FROM (VALUES (1, 5)) AS t(p0, p1)}</blockquote>      *      *<p>Null literals don't have enough type information to be extracted.      * We push down {@code CAST(NULL AS type)} but raw nulls such as      * {@code CASE 1 WHEN 2 THEN 'a' ELSE NULL END} are left as is.</p>      *      * @param expression Scalar expression      * @return Query that evaluates a scalar expression      */
 specifier|private
 name|String
 name|buildQuery2
@@ -4068,7 +4068,7 @@ operator|+
 literal|")"
 return|;
 block|}
-comment|/**          * Converts a scalar expression into a list of SQL queries that          * evaluate it.          *          * @param expression Scalar expression          * @return List of queries that evaluate an expression          */
+comment|/**      * Converts a scalar expression into a list of SQL queries that      * evaluate it.      *      * @param expression Scalar expression      * @return List of queries that evaluate an expression      */
 specifier|private
 name|Iterable
 argument_list|<

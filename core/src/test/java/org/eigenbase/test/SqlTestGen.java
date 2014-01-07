@@ -325,7 +325,7 @@ block|}
 block|}
 block|}
 block|}
-comment|/**      * Returns a list of all of the Junit methods in a given class.      */
+comment|/**    * Returns a list of all of the Junit methods in a given class.    */
 specifier|private
 specifier|static
 name|Method
@@ -445,7 +445,7 @@ argument_list|)
 return|;
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------
-comment|/**      * Subversive subclass, which spools results to a writer rather than running      * tests.      */
+comment|/**    * Subversive subclass, which spools results to a writer rather than running    * tests.    */
 specifier|private
 specifier|static
 class|class
@@ -698,7 +698,7 @@ block|}
 block|}
 return|;
 block|}
-comment|/** Handles the methods in          * {@link org.eigenbase.sql.validate.SqlValidator} that are called          * from validator tests. */
+comment|/**      * Handles the methods in      * {@link org.eigenbase.sql.validate.SqlValidator} that are called      * from validator tests.      */
 specifier|public
 specifier|static
 class|class

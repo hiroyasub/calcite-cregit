@@ -593,31 +593,31 @@ literal|"ZONE"
 argument_list|)
 decl_stmt|;
 comment|//~ Enums ------------------------------------------------------------------
-comment|/**      * Type-safe enum for context of acceptable expressions.      */
+comment|/**    * Type-safe enum for context of acceptable expressions.    */
 specifier|protected
 enum|enum
 name|ExprContext
 block|{
-comment|/**          * Accept any kind of expression in this context.          */
+comment|/**      * Accept any kind of expression in this context.      */
 name|ACCEPT_ALL
 block|,
-comment|/**          * Accept any kind of expression in this context, with the exception of          * CURSOR constructors.          */
+comment|/**      * Accept any kind of expression in this context, with the exception of      * CURSOR constructors.      */
 name|ACCEPT_NONCURSOR
 block|,
-comment|/**          * Accept only query expressions in this context.          */
+comment|/**      * Accept only query expressions in this context.      */
 name|ACCEPT_QUERY
 block|,
-comment|/**          * Accept only non-query expressions in this context.          */
+comment|/**      * Accept only non-query expressions in this context.      */
 name|ACCEPT_NONQUERY
 block|,
-comment|/**          * Accept only parenthesized queries or non-query expressions in this          * context.          */
+comment|/**      * Accept only parenthesized queries or non-query expressions in this      * context.      */
 name|ACCEPT_SUBQUERY
 block|,
-comment|/**          * Accept only CURSOR constructors, parenthesized queries, or non-query          * expressions in this context.          */
+comment|/**      * Accept only CURSOR constructors, parenthesized queries, or non-query      * expressions in this context.      */
 name|ACCEPT_CURSOR
 block|}
 comment|//~ Instance fields --------------------------------------------------------
-comment|/**      * Operator table containing the standard SQL operators and functions.      */
+comment|/**    * Operator table containing the standard SQL operators and functions.    */
 specifier|protected
 specifier|final
 name|SqlStdOperatorTable
@@ -633,7 +633,7 @@ name|int
 name|nDynamicParams
 decl_stmt|;
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * @return immutable set of all reserved words defined by SQL-92      *      * @sql.92 Section 5.2      */
+comment|/**    * @return immutable set of all reserved words defined by SQL-92    * @sql.92 Section 5.2    */
 specifier|public
 specifier|static
 name|Set
@@ -647,7 +647,7 @@ return|return
 name|sql92ReservedWordSet
 return|;
 block|}
-comment|/**      * Creates a call.      *      * @param funName Name of function      * @param pos Position in source code      * @param funcType Type of function      * @param functionQualifier Qualifier      * @param operands Operands to call      *      * @return Call      */
+comment|/**    * Creates a call.    *    * @param funName           Name of function    * @param pos               Position in source code    * @param funcType          Type of function    * @param functionQualifier Qualifier    * @param operands          Operands to call    * @return Call    */
 specifier|protected
 name|SqlCall
 name|createCall
@@ -767,14 +767,14 @@ name|operands
 argument_list|)
 return|;
 block|}
-comment|/**      * Returns metadata about this parser: keywords, etc.      */
+comment|/**    * Returns metadata about this parser: keywords, etc.    */
 specifier|public
 specifier|abstract
 name|Metadata
 name|getMetadata
 parameter_list|()
 function_decl|;
-comment|/**      * Removes or transforms misleading information from a parse exception or      * error, and converts to {@link SqlParseException}.      *      * @param ex dirty excn      *      * @return clean excn      */
+comment|/**    * Removes or transforms misleading information from a parse exception or    * error, and converts to {@link SqlParseException}.    *    * @param ex dirty excn    * @return clean excn    */
 specifier|public
 specifier|abstract
 name|SqlParseException
@@ -784,7 +784,7 @@ name|Throwable
 name|ex
 parameter_list|)
 function_decl|;
-comment|/**      * Reinitializes parser with new input.      *      * @param reader provides new input      */
+comment|/**    * Reinitializes parser with new input.    *    * @param reader provides new input    */
 specifier|public
 specifier|abstract
 name|void
@@ -794,7 +794,7 @@ name|Reader
 name|reader
 parameter_list|)
 function_decl|;
-comment|/**      * Sets the tab stop size.      *      * @param tabSize Tab stop size      */
+comment|/**    * Sets the tab stop size.    *    * @param tabSize Tab stop size    */
 specifier|public
 specifier|abstract
 name|void
@@ -805,12 +805,12 @@ name|tabSize
 parameter_list|)
 function_decl|;
 comment|//~ Inner Interfaces -------------------------------------------------------
-comment|/**      * Metadata about the parser. For example:      *      *<ul>      *<li>"KEY" is a keyword: it is meaningful in certain contexts, such as      * "CREATE FOREIGN KEY", but can be used as an identifier, as in<code>      * "CREATE TABLE t (key INTEGER)"</code>.      *<li>"SELECT" is a reserved word. It can not be used as an identifier.      *<li>"CURRENT_USER" is the name of a context variable. It cannot be used      * as an identifier.      *<li>"ABS" is the name of a reserved function. It cannot be used as an      * identifier.      *<li>"DOMAIN" is a reserved word as specified by the SQL:92 standard.      *</ul>      */
+comment|/**    * Metadata about the parser. For example:    *    *<ul>    *<li>"KEY" is a keyword: it is meaningful in certain contexts, such as    * "CREATE FOREIGN KEY", but can be used as an identifier, as in<code>    * "CREATE TABLE t (key INTEGER)"</code>.    *<li>"SELECT" is a reserved word. It can not be used as an identifier.    *<li>"CURRENT_USER" is the name of a context variable. It cannot be used    * as an identifier.    *<li>"ABS" is the name of a reserved function. It cannot be used as an    * identifier.    *<li>"DOMAIN" is a reserved word as specified by the SQL:92 standard.    *</ul>    */
 specifier|public
 interface|interface
 name|Metadata
 block|{
-comment|/**          * Returns true if token is a keyword but not a reserved word. For          * example, "KEY".          */
+comment|/**      * Returns true if token is a keyword but not a reserved word. For      * example, "KEY".      */
 name|boolean
 name|isNonReservedKeyword
 parameter_list|(
@@ -818,7 +818,7 @@ name|String
 name|token
 parameter_list|)
 function_decl|;
-comment|/**          * Returns whether token is the name of a context variable such as          * "CURRENT_USER".          */
+comment|/**      * Returns whether token is the name of a context variable such as      * "CURRENT_USER".      */
 name|boolean
 name|isContextVariableName
 parameter_list|(
@@ -826,7 +826,7 @@ name|String
 name|token
 parameter_list|)
 function_decl|;
-comment|/**          * Returns whether token is a reserved function name such as          * "CURRENT_USER".          */
+comment|/**      * Returns whether token is a reserved function name such as      * "CURRENT_USER".      */
 name|boolean
 name|isReservedFunctionName
 parameter_list|(
@@ -834,7 +834,7 @@ name|String
 name|token
 parameter_list|)
 function_decl|;
-comment|/**          * Returns whether token is a keyword. (That is, a non-reserved keyword,          * a context variable, or a reserved function name.)          */
+comment|/**      * Returns whether token is a keyword. (That is, a non-reserved keyword,      * a context variable, or a reserved function name.)      */
 name|boolean
 name|isKeyword
 parameter_list|(
@@ -842,7 +842,7 @@ name|String
 name|token
 parameter_list|)
 function_decl|;
-comment|/**          * Returns whether token is a reserved word.          */
+comment|/**      * Returns whether token is a reserved word.      */
 name|boolean
 name|isReservedWord
 parameter_list|(
@@ -850,7 +850,7 @@ name|String
 name|token
 parameter_list|)
 function_decl|;
-comment|/**          * Returns whether token is a reserved word as specified by the SQL:92          * standard.          */
+comment|/**      * Returns whether token is a reserved word as specified by the SQL:92      * standard.      */
 name|boolean
 name|isSql92ReservedWord
 parameter_list|(
@@ -858,12 +858,12 @@ name|String
 name|token
 parameter_list|)
 function_decl|;
-comment|/**          * Returns comma-separated list of JDBC keywords.          */
+comment|/**      * Returns comma-separated list of JDBC keywords.      */
 name|String
 name|getJdbcKeywords
 parameter_list|()
 function_decl|;
-comment|/**          * Returns a list of all tokens in alphabetical order.          */
+comment|/**      * Returns a list of all tokens in alphabetical order.      */
 name|List
 argument_list|<
 name|String
@@ -873,7 +873,7 @@ parameter_list|()
 function_decl|;
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------
-comment|/**      * Default implementation of the {@link Metadata} interface.      */
+comment|/**    * Default implementation of the {@link Metadata} interface.    */
 specifier|public
 specifier|static
 class|class
@@ -926,7 +926,7 @@ name|String
 argument_list|>
 argument_list|()
 decl_stmt|;
-comment|/**          * Set of all tokens.          */
+comment|/**      * Set of all tokens.      */
 specifier|private
 specifier|final
 name|SortedSet
@@ -942,7 +942,7 @@ name|String
 argument_list|>
 argument_list|()
 decl_stmt|;
-comment|/**          * Immutable list of all tokens, in alphabetical order.          */
+comment|/**      * Immutable list of all tokens, in alphabetical order.      */
 specifier|private
 specifier|final
 name|List
@@ -971,7 +971,7 @@ specifier|final
 name|String
 name|sql92ReservedWords
 decl_stmt|;
-comment|/**          * Creates a MetadataImpl.          *          * @param sqlParser Parser          */
+comment|/**      * Creates a MetadataImpl.      *      * @param sqlParser Parser      */
 specifier|public
 name|MetadataImpl
 parameter_list|(
@@ -1055,7 +1055,7 @@ name|reservedWordSet
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**          * Initializes lists of keywords.          */
+comment|/**      * Initializes lists of keywords.      */
 specifier|private
 name|void
 name|initList
@@ -1264,7 +1264,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**          * Uses reflection to invoke a method on this parser. The method must be          * public and have no parameters.          *          * @param parserImpl Parser          * @param name Name of method. For example "ReservedFunctionName".          *          * @return Result of calling method          */
+comment|/**      * Uses reflection to invoke a method on this parser. The method must be      * public and have no parameters.      *      * @param parserImpl Parser      * @param name       Name of method. For example "ReservedFunctionName".      * @return Result of calling method      */
 specifier|private
 name|Object
 name|virtualCall
@@ -1377,7 +1377,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**          * Builds a comma-separated list of JDBC reserved words.          */
+comment|/**      * Builds a comma-separated list of JDBC reserved words.      */
 specifier|private
 name|String
 name|constructSql92ReservedWordList

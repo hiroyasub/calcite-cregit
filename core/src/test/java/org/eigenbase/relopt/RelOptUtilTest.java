@@ -137,7 +137,7 @@ name|VARCHAR
 argument_list|,
 literal|10
 argument_list|)
-block|,                 }
+block|,             }
 argument_list|,
 operator|new
 name|String
@@ -197,7 +197,7 @@ argument_list|,
 operator|-
 literal|1
 argument_list|)
-block|,                 }
+block|,             }
 argument_list|,
 operator|new
 name|String
@@ -244,7 +244,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Tests the rules for how we name rules.      */
+comment|/**    * Tests the rules for how we name rules.    */
 annotation|@
 name|Test
 specifier|public

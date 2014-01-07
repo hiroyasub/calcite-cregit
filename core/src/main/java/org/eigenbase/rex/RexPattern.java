@@ -23,7 +23,7 @@ interface|interface
 name|RexPattern
 block|{
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Calls<code>action</code> for every combination of tokens for which this      * pattern matches.      */
+comment|/**    * Calls<code>action</code> for every combination of tokens for which this    * pattern matches.    */
 name|void
 name|match
 parameter_list|(

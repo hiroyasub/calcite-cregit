@@ -88,7 +88,7 @@ name|clear
 argument_list|()
 expr_stmt|;
 block|}
-comment|/**      * Sets the arguments by parsing a standard java argument string.      *      *<p>A typical such string is<code>"-classpath<i>classpath</i> -d<i>      * dir</i> -verbose [<i>file</i>...]"</code>      */
+comment|/**    * Sets the arguments by parsing a standard java argument string.    *    *<p>A typical such string is<code>"-classpath<i>classpath</i> -d<i>    * dir</i> -verbose [<i>file</i>...]"</code>    */
 specifier|public
 name|void
 name|setString
@@ -156,7 +156,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Sets the arguments by parsing a standard java argument string. A typical      * such string is<code>"-classpath<i>classpath</i> -d<i>dir</i> -verbose      * [<i>file</i>...]"</code>      */
+comment|/**    * Sets the arguments by parsing a standard java argument string. A typical    * such string is<code>"-classpath<i>classpath</i> -d<i>dir</i> -verbose    * [<i>file</i>...]"</code>    */
 specifier|public
 name|void
 name|setStringArray
@@ -443,7 +443,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Sets the source code (that is, the full java program, generally starting      * with something like "package com.foo.bar;") and the file name.      *      *<p>This method is optional. It only works if the compiler supports      * in-memory compilation. If this compiler does not return in-memory      * compilation (which the base class does not), {@link #supportsSetSource}      * returns false, and this method throws {@link      * UnsupportedOperationException}.      */
+comment|/**    * Sets the source code (that is, the full java program, generally starting    * with something like "package com.foo.bar;") and the file name.    *    *<p>This method is optional. It only works if the compiler supports    * in-memory compilation. If this compiler does not return in-memory    * compilation (which the base class does not), {@link #supportsSetSource}    * returns false, and this method throws {@link    * UnsupportedOperationException}.    */
 specifier|public
 name|void
 name|setSource
@@ -461,7 +461,7 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
-comment|/**      * Returns whether {@link #setSource} will work.      */
+comment|/**    * Returns whether {@link #setSource} will work.    */
 specifier|public
 name|boolean
 name|supportsSetSource

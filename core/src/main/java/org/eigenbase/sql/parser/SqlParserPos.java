@@ -71,7 +71,7 @@ implements|implements
 name|Serializable
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
-comment|/**      * SqlParserPos representing line one, character one. Use this if the node      * doesn't correspond to a position in piece of SQL text.      */
+comment|/**    * SqlParserPos representing line one, character one. Use this if the node    * doesn't correspond to a position in piece of SQL text.    */
 specifier|public
 specifier|static
 specifier|final
@@ -116,7 +116,7 @@ name|int
 name|endColumnNumber
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a new parser position.      */
+comment|/**    * Creates a new parser position.    */
 specifier|public
 name|SqlParserPos
 parameter_list|(
@@ -152,7 +152,7 @@ operator|=
 name|columnNumber
 expr_stmt|;
 block|}
-comment|/**      * Creates a new parser range.      */
+comment|/**    * Creates a new parser range.    */
 specifier|public
 name|SqlParserPos
 parameter_list|(
@@ -295,7 +295,7 @@ literal|false
 return|;
 block|}
 block|}
-comment|/**      * @return 1-based starting line number      */
+comment|/**    * @return 1-based starting line number    */
 specifier|public
 name|int
 name|getLineNum
@@ -305,7 +305,7 @@ return|return
 name|lineNumber
 return|;
 block|}
-comment|/**      * @return 1-based starting column number      */
+comment|/**    * @return 1-based starting column number    */
 specifier|public
 name|int
 name|getColumnNum
@@ -315,7 +315,7 @@ return|return
 name|columnNumber
 return|;
 block|}
-comment|/**      * @return 1-based end line number (same as starting line number if the      * ParserPos is a point, not a range)      */
+comment|/**    * @return 1-based end line number (same as starting line number if the    * ParserPos is a point, not a range)    */
 specifier|public
 name|int
 name|getEndLineNum
@@ -325,7 +325,7 @@ return|return
 name|endLineNumber
 return|;
 block|}
-comment|/**      * @return 1-based end column number (same as starting column number if the      * ParserPos is a point, not a range)      */
+comment|/**    * @return 1-based end column number (same as starting column number if the    * ParserPos is a point, not a range)    */
 specifier|public
 name|int
 name|getEndColumnNum
@@ -357,7 +357,7 @@ name|columnNumber
 argument_list|)
 return|;
 block|}
-comment|/**      * Combines this parser position with another to create a position which      * spans from the first point in the first to the last point in the other.      */
+comment|/**    * Combines this parser position with another to create a position which    * spans from the first point in the first to the last point in the other.    */
 specifier|public
 name|SqlParserPos
 name|plus
@@ -388,7 +388,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**      * Combines this parser position with an array of positions to create a      * position which spans from the first point in the first to the last point      * in the other.      */
+comment|/**    * Combines this parser position with an array of positions to create a    * position which spans from the first point in the first to the last point    * in the other.    */
 specifier|public
 name|SqlParserPos
 name|plusAll
@@ -437,7 +437,7 @@ name|endColumn
 argument_list|)
 return|;
 block|}
-comment|/**      * Combines this parser position with a list of positions.      */
+comment|/**    * Combines this parser position with a list of positions.    */
 specifier|public
 name|SqlParserPos
 name|plusAll
@@ -475,7 +475,7 @@ name|nodes
 argument_list|)
 return|;
 block|}
-comment|/**      * Combines the parser positions of an array of nodes to create a position      * which spans from the beginning of the first to the end of the last.      */
+comment|/**    * Combines the parser positions of an array of nodes to create a position    * which spans from the beginning of the first to the end of the last.    */
 specifier|public
 specifier|static
 name|SqlParserPos
@@ -507,7 +507,7 @@ literal|1
 argument_list|)
 return|;
 block|}
-comment|/**      * Combines the parser positions of a list of nodes to create a position      * which spans from the beginning of the first to the end of the last.      */
+comment|/**    * Combines the parser positions of a list of nodes to create a position    * which spans from the beginning of the first to the end of the last.    */
 specifier|public
 specifier|static
 name|SqlParserPos
@@ -539,7 +539,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**      * Computes the parser position which is the sum of the positions of an      * array of parse tree nodes and of a parser position represented by (line,      * column, endLine, endColumn).      *      * @param nodes Array of parse tree nodes      * @param line Start line      * @param column Start column      * @param endLine End line      * @param endColumn End column      *      * @return Sum of parser positions      */
+comment|/**    * Computes the parser position which is the sum of the positions of an    * array of parse tree nodes and of a parser position represented by (line,    * column, endLine, endColumn).    *    * @param nodes     Array of parse tree nodes    * @param line      Start line    * @param column    Start column    * @param endLine   End line    * @param endColumn End column    * @return Sum of parser positions    */
 specifier|private
 specifier|static
 name|SqlParserPos
@@ -731,7 +731,7 @@ name|endColumn
 argument_list|)
 return|;
 block|}
-comment|/**      * Combines an array of parser positions to create a position which spans      * from the beginning of the first to the end of the last.      */
+comment|/**    * Combines an array of parser positions to create a position which spans    * from the beginning of the first to the end of the last.    */
 specifier|public
 specifier|static
 name|SqlParserPos
@@ -763,7 +763,7 @@ literal|1
 argument_list|)
 return|;
 block|}
-comment|/**      * Computes the parser position which is the sum of an array of parser      * positions and of a parser position represented by (line, column, endLine,      * endColumn).      *      * @param poses Array of parser positions      * @param line Start line      * @param column Start column      * @param endLine End line      * @param endColumn End column      *      * @return Sum of parser positions      */
+comment|/**    * Computes the parser position which is the sum of an array of parser    * positions and of a parser position represented by (line, column, endLine,    * endColumn).    *    * @param poses     Array of parser positions    * @param line      Start line    * @param column    Start column    * @param endLine   End line    * @param endColumn End column    * @return Sum of parser positions    */
 specifier|private
 specifier|static
 name|SqlParserPos

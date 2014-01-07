@@ -87,7 +87,7 @@ name|RexWindow
 name|window
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a RexOver.      *      *<p>For example, "SUM(x) OVER (ROWS 3 PRECEDING)" is represented as:      *      *<ul>      *<li>type = Integer,      *<li>op = {@link org.eigenbase.sql.fun.SqlStdOperatorTable#sumOperator},      *<li>operands = { {@link RexFieldAccess}("x") }      *<li>window = {@link SqlWindow}(ROWS 3 PRECEDING)      *</ul>      *      * @param type Result type      * @param op Aggregate operator      * @param operands Operands list      * @param window Window specification      *      * @pre op.isAggregator()      * @pre window != null      * @pre window.getRefName() == null      */
+comment|/**    * Creates a RexOver.    *    *<p>For example, "SUM(x) OVER (ROWS 3 PRECEDING)" is represented as:    *    *<ul>    *<li>type = Integer,    *<li>op = {@link org.eigenbase.sql.fun.SqlStdOperatorTable#sumOperator},    *<li>operands = { {@link RexFieldAccess}("x") }    *<li>window = {@link SqlWindow}(ROWS 3 PRECEDING)    *</ul>    *    * @param type     Result type    * @param op       Aggregate operator    * @param operands Operands list    * @param window   Window specification    * @pre op.isAggregator()    * @pre window != null    * @pre window.getRefName() == null    */
 name|RexOver
 parameter_list|(
 name|RelDataType
@@ -147,7 +147,7 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Returns the aggregate operator for this expression.      */
+comment|/**    * Returns the aggregate operator for this expression.    */
 specifier|public
 name|SqlAggFunction
 name|getAggOperator
@@ -226,7 +226,7 @@ name|this
 argument_list|)
 return|;
 block|}
-comment|/**      * Returns whether an expression contains an OVER clause.      */
+comment|/**    * Returns whether an expression contains an OVER clause.    */
 specifier|public
 specifier|static
 name|boolean
@@ -269,7 +269,7 @@ literal|true
 return|;
 block|}
 block|}
-comment|/**      * Returns whether a program contains an OVER clause.      */
+comment|/**    * Returns whether a program contains an OVER clause.    */
 specifier|public
 specifier|static
 name|boolean
@@ -319,7 +319,7 @@ literal|true
 return|;
 block|}
 block|}
-comment|/**      * Returns whether an expression list contains an OVER clause.      */
+comment|/**    * Returns whether an expression list contains an OVER clause.    */
 specifier|public
 specifier|static
 name|boolean
@@ -413,7 +413,7 @@ name|OverFound
 argument_list|()
 decl_stmt|;
 block|}
-comment|/**      * Visitor which detects a {@link RexOver} inside a {@link RexNode}      * expression.      *      *<p>It is re-entrant (two threads can use an instance at the same time)      * and it can be re-used for multiple visits.      */
+comment|/**    * Visitor which detects a {@link RexOver} inside a {@link RexNode}    * expression.    *    *<p>It is re-entrant (two threads can use an instance at the same time)    * and it can be re-used for multiple visits.    */
 specifier|private
 specifier|static
 class|class

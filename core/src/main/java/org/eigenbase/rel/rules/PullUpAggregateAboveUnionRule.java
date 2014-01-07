@@ -85,7 +85,7 @@ name|PullUpAggregateAboveUnionRule
 argument_list|()
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a PullUpAggregateAboveUnionRule.      */
+comment|/**    * Creates a PullUpAggregateAboveUnionRule.    */
 specifier|private
 name|PullUpAggregateAboveUnionRule
 parameter_list|()

@@ -101,35 +101,35 @@ argument_list|>
 block|{
 comment|// TODO jvs 16-Jan-2006:  special pattern prefix support for LIKE operator
 comment|//~ Instance fields --------------------------------------------------------
-comment|/**      * Factory which produced this endpoint.      */
+comment|/**    * Factory which produced this endpoint.    */
 specifier|protected
 specifier|final
 name|SargFactory
 name|factory
 decl_stmt|;
-comment|/**      * Datatype for endpoint value.      */
+comment|/**    * Datatype for endpoint value.    */
 specifier|protected
 specifier|final
 name|RelDataType
 name|dataType
 decl_stmt|;
-comment|/**      * Coordinate for this endpoint, constrained to be either {@link      * RexLiteral}, {@link RexInputRef}, {@link RexDynamicParam}, or null to      * represent infinity (positive or negative infinity is implied by      * boundType).      */
+comment|/**    * Coordinate for this endpoint, constrained to be either {@link    * RexLiteral}, {@link RexInputRef}, {@link RexDynamicParam}, or null to    * represent infinity (positive or negative infinity is implied by    * boundType).    */
 specifier|protected
 name|RexNode
 name|coordinate
 decl_stmt|;
-comment|/**      * @see #getBoundType      */
+comment|/**    * @see #getBoundType    */
 specifier|protected
 name|SargBoundType
 name|boundType
 decl_stmt|;
-comment|/**      * @see #getStrictness      */
+comment|/**    * @see #getStrictness    */
 specifier|protected
 name|SargStrictness
 name|strictness
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * @see SargFactory#newEndpoint      */
+comment|/**    * @see SargFactory#newEndpoint    */
 name|SargEndpoint
 parameter_list|(
 name|SargFactory
@@ -222,7 +222,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Sets this endpoint to either negative or positive infinity. An infinite      * endpoint implies an open bound (negative infinity implies a lower bound,      * while positive infinity implies an upper bound).      *      * @param infinitude either -1 or +1      */
+comment|/**    * Sets this endpoint to either negative or positive infinity. An infinite    * endpoint implies an open bound (negative infinity implies a lower bound,    * while positive infinity implies an upper bound).    *    * @param infinitude either -1 or +1    */
 name|void
 name|setInfinity
 parameter_list|(
@@ -281,7 +281,7 @@ operator|=
 literal|null
 expr_stmt|;
 block|}
-comment|/**      * Sets a finite value for this endpoint.      *      * @param boundType bound type (upper/lower)      * @param strictness boundary strictness      * @param coordinate endpoint position      */
+comment|/**    * Sets a finite value for this endpoint.    *    * @param boundType  bound type (upper/lower)    * @param strictness boundary strictness    * @param coordinate endpoint position    */
 name|void
 name|setFinite
 parameter_list|(
@@ -924,7 +924,7 @@ name|roundedValue
 argument_list|)
 return|;
 block|}
-comment|/**      * @return true if this endpoint represents a closed (exact) bound; false if      * open (strict)      */
+comment|/**    * @return true if this endpoint represents a closed (exact) bound; false if    * open (strict)    */
 specifier|public
 name|boolean
 name|isClosed
@@ -938,7 +938,7 @@ operator|.
 name|CLOSED
 return|;
 block|}
-comment|/**      * @return opposite of isClosed      */
+comment|/**    * @return opposite of isClosed    */
 specifier|public
 name|boolean
 name|isOpen
@@ -952,7 +952,7 @@ operator|.
 name|OPEN
 return|;
 block|}
-comment|/**      * @return false if this endpoint represents infinity (either positive or      * negative); true if a finite coordinate      */
+comment|/**    * @return false if this endpoint represents infinity (either positive or    * negative); true if a finite coordinate    */
 specifier|public
 name|boolean
 name|isFinite
@@ -964,7 +964,7 @@ operator|!=
 literal|null
 return|;
 block|}
-comment|/**      * @return -1 for negative infinity, +1 for positive infinity, 0 for a      * finite endpoint      */
+comment|/**    * @return -1 for negative infinity, +1 for positive infinity, 0 for a    * finite endpoint    */
 specifier|public
 name|int
 name|getInfinitude
@@ -1005,7 +1005,7 @@ literal|0
 return|;
 block|}
 block|}
-comment|/**      * @return coordinate of this endpoint      */
+comment|/**    * @return coordinate of this endpoint    */
 specifier|public
 name|RexNode
 name|getCoordinate
@@ -1015,7 +1015,7 @@ return|return
 name|coordinate
 return|;
 block|}
-comment|/**      * @return true if this endpoint has the null value for its coordinate      */
+comment|/**    * @return true if this endpoint has the null value for its coordinate    */
 specifier|public
 name|boolean
 name|isNull
@@ -1041,7 +1041,7 @@ name|coordinate
 argument_list|)
 return|;
 block|}
-comment|/**      * @return target datatype for coordinate      */
+comment|/**    * @return target datatype for coordinate    */
 specifier|public
 name|RelDataType
 name|getDataType
@@ -1051,7 +1051,7 @@ return|return
 name|dataType
 return|;
 block|}
-comment|/**      * @return boundary type this endpoint represents      */
+comment|/**    * @return boundary type this endpoint represents    */
 specifier|public
 name|SargBoundType
 name|getBoundType
@@ -1061,7 +1061,7 @@ return|return
 name|boundType
 return|;
 block|}
-comment|/**      * Tests whether this endpoint "touches" another one (not necessarily      * overlapping). For example, the upper bound of the interval (1, 10)      * touches the lower bound of the interval [10, 20), but not of the interval      * (10, 20).      *      * @param other the other endpoint to test      *      * @return true if touching; false if discontinuous      */
+comment|/**    * Tests whether this endpoint "touches" another one (not necessarily    * overlapping). For example, the upper bound of the interval (1, 10)    * touches the lower bound of the interval [10, 20), but not of the interval    * (10, 20).    *    * @param other the other endpoint to test    * @return true if touching; false if discontinuous    */
 specifier|public
 name|boolean
 name|isTouching
@@ -1598,7 +1598,7 @@ name|getStrictnessSign
 argument_list|()
 return|;
 block|}
-comment|/**      * @return SargStrictness of this bound      */
+comment|/**    * @return SargStrictness of this bound    */
 specifier|public
 name|SargStrictness
 name|getStrictness
@@ -1608,7 +1608,7 @@ return|return
 name|strictness
 return|;
 block|}
-comment|/**      * @return complement of SargStrictness of this bound      */
+comment|/**    * @return complement of SargStrictness of this bound    */
 specifier|public
 name|SargStrictness
 name|getStrictnessComplement
@@ -1632,7 +1632,7 @@ operator|.
 name|OPEN
 return|;
 block|}
-comment|/**      * @return -1 for infinitesimally below (open upper bound, strictly less      * than), 0 for exact equality (closed bound), 1 for infinitesimally above      * (open lower bound, strictly greater than)      */
+comment|/**    * @return -1 for infinitesimally below (open upper bound, strictly less    * than), 0 for exact equality (closed bound), 1 for infinitesimally above    * (open lower bound, strictly greater than)    */
 specifier|public
 name|int
 name|getStrictnessSign

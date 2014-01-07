@@ -38,7 +38,7 @@ comment|// dependencies on other Eigenbase code.
 end_comment
 
 begin_comment
-comment|/**  * Base class for all exceptions originating from Farrago.  * @see EigenbaseContextException  */
+comment|/**  * Base class for all exceptions originating from Farrago.  *  * @see EigenbaseContextException  */
 end_comment
 
 begin_class
@@ -49,7 +49,7 @@ extends|extends
 name|RuntimeException
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
-comment|/**      * SerialVersionUID created with JDK 1.5 serialver tool. Prevents      * incompatible class conflict when serialized from JDK 1.5-built server to      * JDK 1.4-built client.      */
+comment|/**    * SerialVersionUID created with JDK 1.5 serialver tool. Prevents    * incompatible class conflict when serialized from JDK 1.5-built server to    * JDK 1.4-built client.    */
 specifier|private
 specifier|static
 specifier|final
@@ -77,7 +77,7 @@ argument_list|()
 argument_list|)
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a new EigenbaseException object.      *      * @param message error message      * @param cause underlying cause      */
+comment|/**    * Creates a new EigenbaseException object.    *    * @param message error message    * @param cause   underlying cause    */
 specifier|public
 name|EigenbaseException
 parameter_list|(

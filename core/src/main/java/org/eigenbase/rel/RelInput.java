@@ -105,7 +105,7 @@ name|String
 name|table
 parameter_list|)
 function_decl|;
-comment|/** Returns the input relational expression. Throws if there is not precisely    * one input. */
+comment|/**    * Returns the input relational expression. Throws if there is not precisely    * one input.    */
 name|RelNode
 name|getInput
 parameter_list|()
@@ -117,7 +117,7 @@ argument_list|>
 name|getInputs
 parameter_list|()
 function_decl|;
-comment|/** Returns an expression. */
+comment|/**    * Returns an expression.    */
 name|RexNode
 name|getExpression
 parameter_list|(
@@ -149,7 +149,7 @@ name|String
 name|tag
 parameter_list|)
 function_decl|;
-comment|/** Returns a {@code float} value. Throws if wrong type. */
+comment|/**    * Returns a {@code float} value. Throws if wrong type.    */
 name|String
 name|getString
 parameter_list|(
@@ -157,7 +157,7 @@ name|String
 name|tag
 parameter_list|)
 function_decl|;
-comment|/** Returns a {@code float} value. Throws if not present or wrong type. */
+comment|/**    * Returns a {@code float} value. Throws if not present or wrong type.    */
 name|float
 name|getFloat
 parameter_list|(
@@ -165,7 +165,7 @@ name|String
 name|tag
 parameter_list|)
 function_decl|;
-comment|/** Returns an enum value. Throws if not a valid member. */
+comment|/**    * Returns an enum value. Throws if not a valid member.    */
 parameter_list|<
 name|E
 extends|extends

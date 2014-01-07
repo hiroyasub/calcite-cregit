@@ -44,7 +44,7 @@ argument_list|>
 name|listeners
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a new empty multicast listener.      */
+comment|/**    * Creates a new empty multicast listener.    */
 specifier|public
 name|MulticastRelOptListener
 parameter_list|()
@@ -60,7 +60,7 @@ argument_list|()
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Adds a listener which will receive multicast events.      *      * @param listener listener to add      */
+comment|/**    * Adds a listener which will receive multicast events.    *    * @param listener listener to add    */
 specifier|public
 name|void
 name|addListener

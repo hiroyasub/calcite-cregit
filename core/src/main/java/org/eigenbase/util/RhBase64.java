@@ -14,7 +14,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * Encodes and decodes to and from Base64 notation.  *  *<p>Change Log:</p>  *  *<ul>  *<li>v2.1 - Cleaned up javadoc comments and unused variables and methods.  * Added some convenience methods for reading and writing to and from  * files.</li>  *<li>v2.0.2 - Now specifies UTF-8 encoding in places where the code fails on  * systems with other encodings (like EBCDIC).</li>  *<li>v2.0.1 - Fixed an error when decoding a single byte, that is, when the  * encoded data was a single byte.</li>  *<li>v2.0 - I got rid of methods that used booleans to set options. Now  * everything is more consolidated and cleaner. The code now detects when data  * that's being decoded is gzip-compressed and will decompress it automatically.  * Generally things are cleaner. You'll probably have to change some method  * calls that you were making to support the new options format (<tt>int</tt>s  * that you "OR" together).</li>  *<li>v1.5.1 - Fixed bug when decompressing and decoding to a byte[] using<tt>  * decode( String s, boolean gzipCompressed )</tt>. Added the ability to  * "suspend" encoding in the Output Stream so you can turn on and off the  * encoding if you need to embed base64 data in an otherwise "normal" stream  * (like an XML file).</li>  *<li>v1.5 - Output stream pases on flush() command but doesn't do anything  * itself. This helps when using GZIP streams. Added the ability to  * GZip-compress objects before encoding them.</li>  *<li>v1.4 - Added helper methods to read/write files.</li>  *<li>v1.3.6 - Fixed OutputStream.flush() so that 'position' is reset.</li>  *<li>v1.3.5 - Added flag to turn on and off line breaks. Fixed bug in input  * stream where last buffer being read, if not completely full, was not  * returned.</li>  *<li>v1.3.4 - Fixed when "improperly padded stream" error was thrown at the  * wrong time.</li>  *<li>v1.3.3 - Fixed I/O streams which were totally messed up.</li>  *</ul>  *  *<p>I am placing this code in the Public Domain. Do with it as you will. This  * software comes with no guarantees or warranties but with plenty of  * well-wishing instead! Please visit<a href="http://iharder.net/base64">  * http://iharder.net/base64</a> periodically to check for updates or to  * contribute improvements.</p>  *  * @author Robert Harder  * @author rob@iharder.net  * @version 2.1  */
+comment|/**  * Encodes and decodes to and from Base64 notation.  *  *<p>Change Log:</p>  *  *<ul>  *<li>v2.1 - Cleaned up javadoc comments and unused variables and methods.  * Added some convenience methods for reading and writing to and from  * files.</li>  *<li>v2.0.2 - Now specifies UTF-8 encoding in places where the code fails on  * systems with other encodings (like EBCDIC).</li>  *<li>v2.0.1 - Fixed an error when decoding a single byte, that is, when the  * encoded data was a single byte.</li>  *<li>v2.0 - I got rid of methods that used booleans to set options. Now  * everything is more consolidated and cleaner. The code now detects when data  * that's being decoded is gzip-compressed and will decompress it automatically.  * Generally things are cleaner. You'll probably have to change some method  * calls that you were making to support the new options format (<tt>int</tt>s  * that you "OR" together).</li>  *<li>v1.5.1 - Fixed bug when decompressing and decoding to a byte[] using<tt>  * decode( String s, boolean gzipCompressed )</tt>. Added the ability to  * "suspend" encoding in the Output Stream so you can turn on and off the  * encoding if you need to embed base64 data in an otherwise "normal" stream  * (like an XML file).</li>  *<li>v1.5 - Output stream pases on flush() command but doesn't do anything  * itself. This helps when using GZIP streams. Added the ability to  * GZip-compress objects before encoding them.</li>  *<li>v1.4 - Added helper methods to read/write files.</li>  *<li>v1.3.6 - Fixed OutputStream.flush() so that 'position' is reset.</li>  *<li>v1.3.5 - Added flag to turn on and off line breaks. Fixed bug in input  * stream where last buffer being read, if not completely full, was not  * returned.</li>  *<li>v1.3.4 - Fixed when "improperly padded stream" error was thrown at the  * wrong time.</li>  *<li>v1.3.3 - Fixed I/O streams which were totally messed up.</li>  *</ul>  *  *<p>I am placing this code in the Public Domain. Do with it as you will. This  * software comes with no guarantees or warranties but with plenty of  * well-wishing instead! Please visit<a href="http://iharder.net/base64">  * http://iharder.net/base64</a> periodically to check for updates or to  * contribute improvements.</p>  *  *<p>Author: Robert Harder, rob@iharder.net</p>  *  * @version 2.1  */
 end_comment
 
 begin_class
@@ -24,7 +24,7 @@ name|RhBase64
 block|{
 comment|/* ********  P U B L I C   F I E L D S  ******** */
 comment|//~ Static fields/initializers ---------------------------------------------
-comment|/**      * No options specified. Value is zero.      */
+comment|/**    * No options specified. Value is zero.    */
 specifier|public
 specifier|static
 specifier|final
@@ -33,7 +33,7 @@ name|NO_OPTIONS
 init|=
 literal|0
 decl_stmt|;
-comment|/**      * Specify encoding.      */
+comment|/**    * Specify encoding.    */
 specifier|public
 specifier|static
 specifier|final
@@ -42,7 +42,7 @@ name|ENCODE
 init|=
 literal|1
 decl_stmt|;
-comment|/**      * Specify decoding.      */
+comment|/**    * Specify decoding.    */
 specifier|public
 specifier|static
 specifier|final
@@ -51,7 +51,7 @@ name|DECODE
 init|=
 literal|0
 decl_stmt|;
-comment|/**      * Specify that data should be gzip-compressed.      */
+comment|/**    * Specify that data should be gzip-compressed.    */
 specifier|public
 specifier|static
 specifier|final
@@ -60,7 +60,7 @@ name|GZIP
 init|=
 literal|2
 decl_stmt|;
-comment|/**      * Don't break lines when encoding (violates strict Base64 specification)      */
+comment|/**    * Don't break lines when encoding (violates strict Base64 specification)    */
 specifier|public
 specifier|static
 specifier|final
@@ -70,7 +70,7 @@ init|=
 literal|8
 decl_stmt|;
 comment|/* ********  P R I V A T E   F I E L D S  ******** */
-comment|/**      * Maximum line length (76) of Base64 output.      */
+comment|/**    * Maximum line length (76) of Base64 output.    */
 specifier|private
 specifier|static
 specifier|final
@@ -79,7 +79,7 @@ name|MAX_LINE_LENGTH
 init|=
 literal|76
 decl_stmt|;
-comment|/**      * The equals sign (=) as a byte.      */
+comment|/**    * The equals sign (=) as a byte.    */
 specifier|private
 specifier|static
 specifier|final
@@ -91,7 +91,7 @@ name|byte
 operator|)
 literal|'='
 decl_stmt|;
-comment|/**      * The new line character (\n) as a byte.      */
+comment|/**    * The new line character (\n) as a byte.    */
 specifier|private
 specifier|static
 specifier|final
@@ -103,7 +103,7 @@ name|byte
 operator|)
 literal|'\n'
 decl_stmt|;
-comment|/**      * Preferred encoding.      */
+comment|/**    * Preferred encoding.    */
 specifier|private
 specifier|static
 specifier|final
@@ -112,7 +112,7 @@ name|PREFERRED_ENCODING
 init|=
 literal|"UTF-8"
 decl_stmt|;
-comment|/**      * The 64 valid Base64 values.      */
+comment|/**    * The 64 valid Base64 values.    */
 specifier|private
 specifier|static
 specifier|final
@@ -450,7 +450,7 @@ operator|)
 literal|'/'
 block|}
 decl_stmt|;
-comment|/**      * Determine which ALPHABET to use.      */
+comment|/**    * Determine which ALPHABET to use.    */
 static|static
 block|{
 name|byte
@@ -490,7 +490,7 @@ operator|=
 name|__bytes
 expr_stmt|;
 block|}
-comment|/**      * Translates a Base64 value to either its 6-bit reconstruction value or a      * negative number indicating some other meaning.      */
+comment|/**    * Translates a Base64 value to either its 6-bit reconstruction value or a    * negative number indicating some other meaning.    */
 specifier|private
 specifier|static
 specifier|final
@@ -672,8 +672,7 @@ literal|60
 block|,
 literal|61
 block|,
-comment|// Numbers zero through
-comment|// nine
+comment|// Numbers zero through nine
 operator|-
 literal|9
 block|,
@@ -726,8 +725,7 @@ literal|12
 block|,
 literal|13
 block|,
-comment|// Letters 'A'
-comment|// through 'N'
+comment|// Letters 'A' through 'N'
 literal|14
 block|,
 literal|15
@@ -752,8 +750,7 @@ literal|24
 block|,
 literal|25
 block|,
-comment|// Letters 'O' through
-comment|// 'Z'
+comment|// Letters 'O' through 'Z'
 operator|-
 literal|9
 block|,
@@ -869,7 +866,7 @@ decl_stmt|;
 comment|// Indicates equals sign in
 comment|// encoding
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Defeats instantiation.      */
+comment|/**    * Defeats instantiation.    */
 specifier|private
 name|RhBase64
 parameter_list|()
@@ -877,7 +874,7 @@ block|{
 block|}
 comment|//~ Methods ----------------------------------------------------------------
 comment|/* ********  E N C O D I N G   M E T H O D S  ******** */
-comment|/**      * Encodes up to the first three bytes of array<var>threeBytes</var> and      * returns a four-byte array in Base64 notation. The actual number of      * significant bytes in your array is given by<var>numSigBytes</var>. The      * array<var>threeBytes</var> needs only be as big as<var>      * numSigBytes</var>. Code can reuse a byte array by passing a four-byte      * array as<var>b4</var>.      *      * @param b4 A reusable byte array to reduce array instantiation      * @param threeBytes the array to convert      * @param numSigBytes the number of significant bytes in your array      *      * @return four byte array in Base64 notation.      *      * @since 1.5.1      */
+comment|/**    * Encodes up to the first three bytes of array<var>threeBytes</var> and    * returns a four-byte array in Base64 notation. The actual number of    * significant bytes in your array is given by<var>numSigBytes</var>. The    * array<var>threeBytes</var> needs only be as big as<var>    * numSigBytes</var>. Code can reuse a byte array by passing a four-byte    * array as<var>b4</var>.    *    * @param b4          A reusable byte array to reduce array instantiation    * @param threeBytes  the array to convert    * @param numSigBytes the number of significant bytes in your array    * @return four byte array in Base64 notation.    * @since 1.5.1    */
 specifier|private
 specifier|static
 name|byte
@@ -913,7 +910,7 @@ return|return
 name|b4
 return|;
 block|}
-comment|/**      * Encodes up to three bytes of the array<var>source</var> and writes the      * resulting four Base64 bytes to<var>destination</var>. The source and      * destination arrays can be manipulated anywhere along their length by      * specifying<var>srcOffset</var> and<var>destOffset</var>. This method      * does not check to make sure your arrays are large enough to accomodate      *<var>srcOffset</var> + 3 for the<var>source</var> array or<var>      * destOffset</var> + 4 for the<var>destination</var> array. The actual      * number of significant bytes in your array is given by<var>      * numSigBytes</var>.      *      * @param source the array to convert      * @param srcOffset the index where conversion begins      * @param numSigBytes the number of significant bytes in your array      * @param destination the array to hold the conversion      * @param destOffset the index where output will be put      *      * @return the<var>destination</var> array      *      * @since 1.3      */
+comment|/**    * Encodes up to three bytes of the array<var>source</var> and writes the    * resulting four Base64 bytes to<var>destination</var>. The source and    * destination arrays can be manipulated anywhere along their length by    * specifying<var>srcOffset</var> and<var>destOffset</var>. This method    * does not check to make sure your arrays are large enough to accomodate    *<var>srcOffset</var> + 3 for the<var>source</var> array or<var>    * destOffset</var> + 4 for the<var>destination</var> array. The actual    * number of significant bytes in your array is given by<var>    * numSigBytes</var>.    *    * @param source      the array to convert    * @param srcOffset   the index where conversion begins    * @param numSigBytes the number of significant bytes in your array    * @param destination the array to hold the conversion    * @param destOffset  the index where output will be put    * @return the<var>destination</var> array    * @since 1.3    */
 specifier|private
 specifier|static
 name|byte
@@ -1228,7 +1225,7 @@ name|destination
 return|;
 block|}
 block|}
-comment|/**      * Serializes an object and returns the Base64-encoded version of that      * serialized object. If the object cannot be serialized or there is another      * error, the method will return<tt>null</tt>. The object is not      * GZip-compressed before being encoded.      *      * @param serializableObject The object to encode      *      * @return The Base64-encoded object      *      * @since 1.4      */
+comment|/**    * Serializes an object and returns the Base64-encoded version of that    * serialized object. If the object cannot be serialized or there is another    * error, the method will return<tt>null</tt>. The object is not    * GZip-compressed before being encoded.    *    * @param serializableObject The object to encode    * @return The Base64-encoded object    * @since 1.4    */
 specifier|public
 specifier|static
 name|String
@@ -1251,7 +1248,7 @@ name|NO_OPTIONS
 argument_list|)
 return|;
 block|}
-comment|/**      * Serializes an object and returns the Base64-encoded version of that      * serialized object. If the object cannot be serialized or there is another      * error, the method will return<tt>null</tt>.      *      *<p>Valid options:      *      *<pre>      *   GZIP: gzip-compresses object before encoding it.      *   DONT_BREAK_LINES: don't break lines at 76 characters      *<i>Note: Technically, this makes your encoding non-compliant.</i>      *</pre>      *      *<p>Example:<code>encodeObject( myObj, RhBase64.GZIP )</code> or      *      *<p>Example:<code>encodeObject( myObj, RhBase64.GZIP |      * RhBase64.DONT_BREAK_LINES )</code>      *      * @param serializableObject The object to encode      * @param options Specified options      *      * @return The Base64-encoded object      *      * @see RhBase64#GZIP      * @see RhBase64#DONT_BREAK_LINES      * @since 2.0      */
+comment|/**    * Serializes an object and returns the Base64-encoded version of that    * serialized object. If the object cannot be serialized or there is another    * error, the method will return<tt>null</tt>.    *    *<p>Valid options:    *    *<pre>    *   GZIP: gzip-compresses object before encoding it.    *   DONT_BREAK_LINES: don't break lines at 76 characters    *<i>Note: Technically, this makes your encoding non-compliant.</i>    *</pre>    *    *<p>Example:<code>encodeObject( myObj, RhBase64.GZIP )</code> or    *    *<p>Example:<code>encodeObject( myObj, RhBase64.GZIP |    * RhBase64.DONT_BREAK_LINES )</code>    *    * @param serializableObject The object to encode    * @param options            Specified options    * @return The Base64-encoded object    * @see RhBase64#GZIP    * @see RhBase64#DONT_BREAK_LINES    * @since 2.0    */
 specifier|public
 specifier|static
 name|String
@@ -1531,7 +1528,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**      * Encodes a byte array into Base64 notation. Does not GZip-compress data.      *      * @param source The data to convert      *      * @since 1.4      */
+comment|/**    * Encodes a byte array into Base64 notation. Does not GZip-compress data.    *    * @param source The data to convert    * @since 1.4    */
 specifier|public
 specifier|static
 name|String
@@ -1557,7 +1554,7 @@ name|NO_OPTIONS
 argument_list|)
 return|;
 block|}
-comment|/**      * Encodes a byte array into Base64 notation.      *      *<p>Valid options:      *      *<pre>      *   GZIP: gzip-compresses object before encoding it.      *   DONT_BREAK_LINES: don't break lines at 76 characters      *<i>Note: Technically, this makes your encoding non-compliant.</i>      *</pre>      *      *<p>Example:<code>encodeBytes( myData, RhBase64.GZIP )</code> or      *      *<p>Example:<code>encodeBytes( myData, RhBase64.GZIP |      * RhBase64.DONT_BREAK_LINES )</code>      *      * @param source The data to convert      * @param options Specified options      *      * @see RhBase64#GZIP      * @see RhBase64#DONT_BREAK_LINES      * @since 2.0      */
+comment|/**    * Encodes a byte array into Base64 notation.    *    *<p>Valid options:    *    *<pre>    *   GZIP: gzip-compresses object before encoding it.    *   DONT_BREAK_LINES: don't break lines at 76 characters    *<i>Note: Technically, this makes your encoding non-compliant.</i>    *</pre>    *    *<p>Example:<code>encodeBytes( myData, RhBase64.GZIP )</code> or    *    *<p>Example:<code>encodeBytes( myData, RhBase64.GZIP |    * RhBase64.DONT_BREAK_LINES )</code>    *    * @param source  The data to convert    * @param options Specified options    * @see RhBase64#GZIP    * @see RhBase64#DONT_BREAK_LINES    * @since 2.0    */
 specifier|public
 specifier|static
 name|String
@@ -1586,7 +1583,7 @@ name|options
 argument_list|)
 return|;
 block|}
-comment|/**      * Encodes a byte array into Base64 notation. Does not GZip-compress data.      *      * @param source The data to convert      * @param off Offset in array where conversion should begin      * @param len Length of data to convert      *      * @since 1.4      */
+comment|/**    * Encodes a byte array into Base64 notation. Does not GZip-compress data.    *    * @param source The data to convert    * @param off    Offset in array where conversion should begin    * @param len    Length of data to convert    * @since 1.4    */
 specifier|public
 specifier|static
 name|String
@@ -1616,7 +1613,7 @@ name|NO_OPTIONS
 argument_list|)
 return|;
 block|}
-comment|/**      * Encodes a byte array into Base64 notation.      *      *<p>Valid options:      *      *<pre>      *   GZIP: gzip-compresses object before encoding it.      *   DONT_BREAK_LINES: don't break lines at 76 characters      *<i>Note: Technically, this makes your encoding non-compliant.</i>      *</pre>      *      *<p>Example:<code>encodeBytes( myData, RhBase64.GZIP )</code> or      *      *<p>Example:<code>encodeBytes( myData, RhBase64.GZIP |      * RhBase64.DONT_BREAK_LINES )</code>      *      * @param source The data to convert      * @param off Offset in array where conversion should begin      * @param len Length of data to convert      * @param options Specified options      *      * @see RhBase64#GZIP      * @see RhBase64#DONT_BREAK_LINES      * @since 2.0      */
+comment|/**    * Encodes a byte array into Base64 notation.    *    *<p>Valid options:    *    *<pre>    *   GZIP: gzip-compresses object before encoding it.    *   DONT_BREAK_LINES: don't break lines at 76 characters    *<i>Note: Technically, this makes your encoding non-compliant.</i>    *</pre>    *    *<p>Example:<code>encodeBytes( myData, RhBase64.GZIP )</code> or    *    *<p>Example:<code>encodeBytes( myData, RhBase64.GZIP |    * RhBase64.DONT_BREAK_LINES )</code>    *    * @param source  The data to convert    * @param off     Offset in array where conversion should begin    * @param len     Length of data to convert    * @param options Specified options    * @see RhBase64#GZIP    * @see RhBase64#DONT_BREAK_LINES    * @since 2.0    */
 specifier|public
 specifier|static
 name|String
@@ -2074,7 +2071,7 @@ block|}
 block|}
 block|}
 comment|/* ********  D E C O D I N G   M E T H O D S  ******** */
-comment|/**      * Decodes four bytes from array<var>source</var> and writes the resulting      * bytes (up to three of them) to<var>destination</var>. The source and      * destination arrays can be manipulated anywhere along their length by      * specifying<var>srcOffset</var> and<var>destOffset</var>. This method      * does not check to make sure your arrays are large enough to accomodate      *<var>srcOffset</var> + 4 for the<var>source</var> array or<var>      * destOffset</var> + 3 for the<var>destination</var> array. This method      * returns the actual number of bytes that were converted from the Base64      * encoding.      *      * @param source the array to convert      * @param srcOffset the index where conversion begins      * @param destination the array to hold the conversion      * @param destOffset the index where output will be put      *      * @return the number of decoded bytes converted      *      * @since 1.3      */
+comment|/**    * Decodes four bytes from array<var>source</var> and writes the resulting    * bytes (up to three of them) to<var>destination</var>. The source and    * destination arrays can be manipulated anywhere along their length by    * specifying<var>srcOffset</var> and<var>destOffset</var>. This method    * does not check to make sure your arrays are large enough to accomodate    *<var>srcOffset</var> + 4 for the<var>source</var> array or<var>    * destOffset</var> + 3 for the<var>destination</var> array. This method    * returns the actual number of bytes that were converted from the Base64    * encoding.    *    * @param source      the array to convert    * @param srcOffset   the index where conversion begins    * @param destination the array to hold the conversion    * @param destOffset  the index where output will be put    * @return the number of decoded bytes converted    * @since 1.3    */
 specifier|private
 specifier|static
 name|int
@@ -2531,7 +2528,7 @@ return|;
 block|}
 block|}
 block|}
-comment|/**      * Very low-level access to decoding ASCII characters in the form of a byte      * array. Does not support automatically gunzipping or any other "fancy"      * features.      *      * @param source The Base64 encoded data      * @param off The offset of where to begin decoding      * @param len The length of characters to decode      *      * @return decoded data      *      * @since 1.3      */
+comment|/**    * Very low-level access to decoding ASCII characters in the form of a byte    * array. Does not support automatically gunzipping or any other "fancy"    * features.    *    * @param source The Base64 encoded data    * @param off    The offset of where to begin decoding    * @param len    The length of characters to decode    * @return decoded data    * @since 1.3    */
 specifier|public
 specifier|static
 name|byte
@@ -2760,7 +2757,7 @@ return|return
 name|out
 return|;
 block|}
-comment|/**      * Decodes data from Base64 notation, automatically detecting      * gzip-compressed data and decompressing it.      *      * @param s the string to decode      *      * @return the decoded data      *      * @since 1.4      */
+comment|/**    * Decodes data from Base64 notation, automatically detecting    * gzip-compressed data and decompressing it.    *    * @param s the string to decode    * @return the decoded data    * @since 1.4    */
 specifier|public
 specifier|static
 name|byte
@@ -3067,7 +3064,7 @@ return|return
 name|bytes
 return|;
 block|}
-comment|/**      * Attempts to decode Base64 data and deserialize a Java Object within.      * Returns<tt>null</tt> if there was an error.      *      * @param encodedObject The Base64 data to decode      *      * @return The decoded and deserialized object      *      * @since 1.5      */
+comment|/**    * Attempts to decode Base64 data and deserialize a Java Object within.    * Returns<tt>null</tt> if there was an error.    *    * @param encodedObject The Base64 data to decode    * @return The decoded and deserialized object    * @since 1.5    */
 specifier|public
 specifier|static
 name|Object
@@ -3221,7 +3218,7 @@ return|return
 name|obj
 return|;
 block|}
-comment|/**      * Convenience method for encoding data to a file.      *      * @param dataToEncode byte array of data to encode in base64 form      * @param filename Filename for saving encoded data      *      * @return<tt>true</tt> if successful,<tt>false</tt> otherwise      *      * @since 2.1      */
+comment|/**    * Convenience method for encoding data to a file.    *    * @param dataToEncode byte array of data to encode in base64 form    * @param filename     Filename for saving encoded data    * @return<tt>true</tt> if successful,<tt>false</tt> otherwise    * @since 2.1    */
 specifier|public
 specifier|static
 name|boolean
@@ -3320,7 +3317,7 @@ return|return
 name|success
 return|;
 block|}
-comment|/**      * Convenience method for decoding data to a file.      *      * @param dataToDecode Base64-encoded data as a string      * @param filename Filename for saving decoded data      *      * @return<tt>true</tt> if successful,<tt>false</tt> otherwise      *      * @since 2.1      */
+comment|/**    * Convenience method for decoding data to a file.    *    * @param dataToDecode Base64-encoded data as a string    * @param filename     Filename for saving decoded data    * @return<tt>true</tt> if successful,<tt>false</tt> otherwise    * @since 2.1    */
 specifier|public
 specifier|static
 name|boolean
@@ -3423,7 +3420,7 @@ return|return
 name|success
 return|;
 block|}
-comment|/**      * Convenience method for reading a base64-encoded file and decoding it.      *      * @param filename Filename for reading encoded data      *      * @return decoded byte array or null if unsuccessful      *      * @since 2.1      */
+comment|/**    * Convenience method for reading a base64-encoded file and decoding it.    *    * @param filename Filename for reading encoded data    * @return decoded byte array or null if unsuccessful    * @since 2.1    */
 specifier|public
 specifier|static
 name|byte
@@ -3656,7 +3653,7 @@ return|return
 name|decodedData
 return|;
 block|}
-comment|/**      * Convenience method for reading a binary file and base64-encoding it.      *      * @param filename Filename for reading binary data      *      * @return base64-encoded string or null if unsuccessful      *      * @since 2.1      */
+comment|/**    * Convenience method for reading a binary file and base64-encoding it.    *    * @param filename Filename for reading binary data    * @return base64-encoded string or null if unsuccessful    * @since 2.1    */
 specifier|public
 specifier|static
 name|String
@@ -3849,7 +3846,7 @@ return|;
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------
 comment|/* ********  I N N E R   C L A S S   I N P U T S T R E A M  ******** */
-comment|/**      * A {@link RhBase64.InputStream} will read data from another<tt>      * java.io.InputStream</tt>, given in the constructor, and encode/decode      * to/from Base64 notation on the fly.      *      * @see RhBase64      */
+comment|/**    * A {@link RhBase64.InputStream} will read data from another<tt>    * java.io.InputStream</tt>, given in the constructor, and encode/decode    * to/from Base64 notation on the fly.    *    * @see RhBase64    */
 specifier|public
 specifier|static
 class|class
@@ -3896,7 +3893,7 @@ name|boolean
 name|breakLines
 decl_stmt|;
 comment|// Break lines at less than 80 characters
-comment|/**          * Constructs a {@link RhBase64.InputStream} in DECODE mode.          *          * @param in the<tt>java.io.InputStream</tt> from which to read data.          *          * @since 1.3          */
+comment|/**      * Constructs a {@link RhBase64.InputStream} in DECODE mode.      *      * @param in the<tt>java.io.InputStream</tt> from which to read data.      * @since 1.3      */
 specifier|public
 name|InputStream
 parameter_list|(
@@ -3916,7 +3913,7 @@ name|DECODE
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**          * Constructs a {@link RhBase64.InputStream} in either ENCODE or DECODE          * mode.          *          *<p>Valid options:          *          *<pre>          *   ENCODE or DECODE: Encode or Decode as data is read.          *   DONT_BREAK_LINES: don't break lines at 76 characters          *     (only meaningful when encoding)          *<i>Note: Technically, this makes your encoding non-compliant.</i>          *</pre>          *          *<p>Example:<code>new RhBase64.InputStream( in, RhBase64.DECODE          * )</code>          *          * @param in the<tt>java.io.InputStream</tt> from which to read data.          * @param options Specified options          *          * @see RhBase64#ENCODE          * @see RhBase64#DECODE          * @see RhBase64#DONT_BREAK_LINES          * @since 2.0          */
+comment|/**      * Constructs a {@link RhBase64.InputStream} in either ENCODE or DECODE      * mode.      *      *<p>Valid options:      *      *<pre>      *   ENCODE or DECODE: Encode or Decode as data is read.      *   DONT_BREAK_LINES: don't break lines at 76 characters      *     (only meaningful when encoding)      *<i>Note: Technically, this makes your encoding non-compliant.</i>      *</pre>      *      *<p>Example:<code>new RhBase64.InputStream( in, RhBase64.DECODE      * )</code>      *      * @param in      the<tt>java.io.InputStream</tt> from which to read data.      * @param options Specified options      * @see RhBase64#ENCODE      * @see RhBase64#DECODE      * @see RhBase64#DONT_BREAK_LINES      * @since 2.0      */
 specifier|public
 name|InputStream
 parameter_list|(
@@ -3994,7 +3991,7 @@ operator|=
 literal|0
 expr_stmt|;
 block|}
-comment|/**          * Reads enough of the input stream to convert to/from Base64 and          * returns the next byte.          *          * @return next byte          *          * @since 1.3          */
+comment|/**      * Reads enough of the input stream to convert to/from Base64 and      * returns the next byte.      *      * @return next byte      * @since 1.3      */
 specifier|public
 name|int
 name|read
@@ -4384,7 +4381,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**          * Calls {@link #read()} repeatedly until the end of stream is reached          * or<var>len</var> bytes are read. Returns number of bytes read into          * array or -1 if end of stream is encountered.          *          * @param dest array to hold values          * @param off offset for array          * @param len max number of bytes to read into array          *          * @return bytes read into array or -1 if end of stream is encountered.          *          * @since 1.3          */
+comment|/**      * Calls {@link #read()} repeatedly until the end of stream is reached      * or<var>len</var> bytes are read. Returns number of bytes read into      * array or -1 if end of stream is encountered.      *      * @param dest array to hold values      * @param off  offset for array      * @param len  max number of bytes to read into array      * @return bytes read into array or -1 if end of stream is encountered.      * @since 1.3      */
 specifier|public
 name|int
 name|read
@@ -4475,7 +4472,7 @@ return|;
 block|}
 block|}
 comment|/* ********  I N N E R   C L A S S   O U T P U T S T R E A M  ******** */
-comment|/**      * A {@link RhBase64.OutputStream} will write data to another<tt>      * java.io.OutputStream</tt>, given in the constructor, and encode/decode      * to/from Base64 notation on the fly.      *      * @see RhBase64      * @since 1.3      */
+comment|/**    * A {@link RhBase64.OutputStream} will write data to another<tt>    * java.io.OutputStream</tt>, given in the constructor, and encode/decode    * to/from Base64 notation on the fly.    *    * @see RhBase64    * @since 1.3    */
 specifier|public
 specifier|static
 class|class
@@ -4522,7 +4519,7 @@ specifier|private
 name|boolean
 name|suspendEncoding
 decl_stmt|;
-comment|/**          * Constructs a {@link RhBase64.OutputStream} in ENCODE mode.          *          * @param out the<tt>java.io.OutputStream</tt> to which data will be          * written.          *          * @since 1.3          */
+comment|/**      * Constructs a {@link RhBase64.OutputStream} in ENCODE mode.      *      * @param out the<tt>java.io.OutputStream</tt> to which data will be      *            written.      * @since 1.3      */
 specifier|public
 name|OutputStream
 parameter_list|(
@@ -4542,7 +4539,7 @@ name|ENCODE
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**          * Constructs a {@link RhBase64.OutputStream} in either ENCODE or DECODE          * mode.          *          *<p>Valid options:          *          *<pre>          *   ENCODE or DECODE: Encode or Decode as data is read.          *   DONT_BREAK_LINES: don't break lines at 76 characters          *     (only meaningful when encoding)          *<i>Note: Technically, this makes your encoding non-compliant.</i>          *</pre>          *          *<p>Example:<code>new RhBase64.OutputStream( out, RhBase64.ENCODE          * )</code>          *          * @param out the<tt>java.io.OutputStream</tt> to which data will be          * written.          * @param options Specified options.          *          * @see RhBase64#ENCODE          * @see RhBase64#DECODE          * @see RhBase64#DONT_BREAK_LINES          * @since 1.3          */
+comment|/**      * Constructs a {@link RhBase64.OutputStream} in either ENCODE or DECODE      * mode.      *      *<p>Valid options:      *      *<pre>      *   ENCODE or DECODE: Encode or Decode as data is read.      *   DONT_BREAK_LINES: don't break lines at 76 characters      *     (only meaningful when encoding)      *<i>Note: Technically, this makes your encoding non-compliant.</i>      *</pre>      *      *<p>Example:<code>new RhBase64.OutputStream( out, RhBase64.ENCODE      * )</code>      *      * @param out     the<tt>java.io.OutputStream</tt> to which data will be      *                written.      * @param options Specified options.      * @see RhBase64#ENCODE      * @see RhBase64#DECODE      * @see RhBase64#DONT_BREAK_LINES      * @since 1.3      */
 specifier|public
 name|OutputStream
 parameter_list|(
@@ -4635,7 +4632,7 @@ literal|4
 index|]
 expr_stmt|;
 block|}
-comment|/**          * Writes the byte to the output stream after converting to/from Base64          * notation. When encoding, bytes are buffered three at a time before          * the output stream actually gets a write() call. When decoding, bytes          * are buffered four at a time.          *          * @param theByte the byte to write          *          * @since 1.3          */
+comment|/**      * Writes the byte to the output stream after converting to/from Base64      * notation. When encoding, bytes are buffered three at a time before      * the output stream actually gets a write() call. When decoding, bytes      * are buffered four at a time.      *      * @param theByte the byte to write      * @since 1.3      */
 specifier|public
 name|void
 name|write
@@ -4834,7 +4831,7 @@ throw|;
 block|}
 block|}
 block|}
-comment|/**          * Calls {@link #write(int)} repeatedly until<var>len</var> bytes are          * written.          *          * @param theBytes array from which to read bytes          * @param off offset for array          * @param len max number of bytes to read into array          *          * @since 1.3          */
+comment|/**      * Calls {@link #write(int)} repeatedly until<var>len</var> bytes are      * written.      *      * @param theBytes array from which to read bytes      * @param off      offset for array      * @param len      max number of bytes to read into array      * @since 1.3      */
 specifier|public
 name|void
 name|write
@@ -4904,7 +4901,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**          * Method added by PHIL. [Thanks, PHIL. -Rob] This pads the buffer          * without closing the stream.          */
+comment|/**      * Method added by PHIL. [Thanks, PHIL. -Rob] This pads the buffer      * without closing the stream.      */
 specifier|public
 name|void
 name|flushBase64
@@ -4963,7 +4960,7 @@ throw|;
 block|}
 block|}
 block|}
-comment|/**          * Flushes and closes (I think, in the superclass) the stream.          *          * @since 1.3          */
+comment|/**      * Flushes and closes (I think, in the superclass) the stream.      *      * @since 1.3      */
 specifier|public
 name|void
 name|close
@@ -4995,7 +4992,7 @@ operator|=
 literal|null
 expr_stmt|;
 block|}
-comment|/**          * Suspends encoding of the stream. May be helpful if you need to embed          * a piece of base640-encoded data in a stream.          *          * @since 1.5.1          */
+comment|/**      * Suspends encoding of the stream. May be helpful if you need to embed      * a piece of base640-encoded data in a stream.      *      * @since 1.5.1      */
 specifier|public
 name|void
 name|suspendEncoding
@@ -5017,7 +5014,7 @@ operator|=
 literal|true
 expr_stmt|;
 block|}
-comment|/**          * Resumes encoding of the stream. May be helpful if you need to embed a          * piece of base640-encoded data in a stream.          *          * @since 1.5.1          */
+comment|/**      * Resumes encoding of the stream. May be helpful if you need to embed a      * piece of base640-encoded data in a stream.      *      * @since 1.5.1      */
 specifier|public
 name|void
 name|resumeEncoding

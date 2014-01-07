@@ -61,7 +61,7 @@ parameter_list|()
 block|{
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Tests CarelessNumberNegater.      */
+comment|/**    * Tests CarelessNumberNegater.    */
 annotation|@
 name|Test
 specifier|public
@@ -105,7 +105,7 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Tests CarefulNumberNegater.      */
+comment|/**    * Tests CarefulNumberNegater.    */
 annotation|@
 name|Test
 specifier|public
@@ -184,7 +184,7 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Tests CluelessNumberNegater.      */
+comment|/**    * Tests CluelessNumberNegater.    */
 annotation|@
 name|Test
 specifier|public
@@ -260,7 +260,7 @@ name|result
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Tests for ambiguity detection in method lookup.      */
+comment|/**    * Tests for ambiguity detection in method lookup.    */
 annotation|@
 name|Test
 specifier|public
@@ -323,7 +323,7 @@ literal|"Expected failure due to ambiguity"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Tests that ambiguity detection in method lookup does not kick in when a      * better match is available.      */
+comment|/**    * Tests that ambiguity detection in method lookup does not kick in when a    * better match is available.    */
 annotation|@
 name|Test
 specifier|public
@@ -366,24 +366,24 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Inner Interfaces -------------------------------------------------------
-comment|/**      * An interface for introducing ambiguity into the class hierarchy.      */
+comment|/**    * An interface for introducing ambiguity into the class hierarchy.    */
 specifier|public
 interface|interface
 name|CrunchableNumber
-block|{     }
-comment|/**      * An interface for introducing ambiguity into the class hierarchy.      */
+block|{   }
+comment|/**    * An interface for introducing ambiguity into the class hierarchy.    */
 specifier|public
 interface|interface
 name|FudgeableNumber
-block|{     }
+block|{   }
 specifier|public
 interface|interface
 name|DiceyNumber
 extends|extends
 name|FudgeableNumber
-block|{     }
+block|{   }
 comment|//~ Inner Classes ----------------------------------------------------------
-comment|/**      * NumberNegater defines the abstract base for a computation object capable      * of negating an arbitrary number. Subclasses implement the computation by      * publishing methods with the signature "void visit(X x)" where X is a      * subclass of Number.      */
+comment|/**    * NumberNegater defines the abstract base for a computation object capable    * of negating an arbitrary number. Subclasses implement the computation by    * publishing methods with the signature "void visit(X x)" where X is a    * subclass of Number.    */
 specifier|public
 specifier|abstract
 class|class
@@ -418,7 +418,7 @@ operator|.
 name|class
 argument_list|)
 decl_stmt|;
-comment|/**          * Negates the given number.          *          * @param n the number to be negated          *          * @return the negated result; not guaranteed to be the same concrete          * type as n; null is returned if n's type wasn't handled          */
+comment|/**      * Negates the given number.      *      * @param n the number to be negated      * @return the negated result; not guaranteed to be the same concrete      * type as n; null is returned if n's type wasn't handled      */
 specifier|public
 name|Number
 name|negate
@@ -448,7 +448,7 @@ return|return
 name|result
 return|;
 block|}
-comment|/**          * Negates the given number without using a dispatcher object to cache          * applicable methods. The results should be the same as {@link          * #negate(Number)}.          *          * @param n the number to be negated          *          * @return the negated result; not guaranteed to be the same concrete          * type as n; null is returned if n's type wasn't handled          */
+comment|/**      * Negates the given number without using a dispatcher object to cache      * applicable methods. The results should be the same as {@link      * #negate(Number)}.      *      * @param n the number to be negated      * @return the negated result; not guaranteed to be the same concrete      * type as n; null is returned if n's type wasn't handled      */
 specifier|public
 name|Number
 name|negateWithoutDispatcher
@@ -483,7 +483,7 @@ name|result
 return|;
 block|}
 block|}
-comment|/**      * CarelessNumberNegater implements NumberNegater in a careless fashion by      * converting its input to a double and then negating that. This can lose      * precision for types such as BigInteger.      */
+comment|/**    * CarelessNumberNegater implements NumberNegater in a careless fashion by    * converting its input to a double and then negating that. This can lose    * precision for types such as BigInteger.    */
 specifier|public
 class|class
 name|CarelessNumberNegater
@@ -512,7 +512,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * CarefulNumberNegater implements NumberNegater in a careful fashion by      * providing overloads for each known subclass of Number and returning the      * same subclass for the result. Extends CarelessNumberNegater so that it      * can still handle unknown types of Number.      */
+comment|/**    * CarefulNumberNegater implements NumberNegater in a careful fashion by    * providing overloads for each known subclass of Number and returning the    * same subclass for the result. Extends CarelessNumberNegater so that it    * can still handle unknown types of Number.    */
 specifier|public
 class|class
 name|CarefulNumberNegater
@@ -568,7 +568,7 @@ expr_stmt|;
 block|}
 comment|// ... imagine implementations for other Number subclasses here ...
 block|}
-comment|/**      * CluelessNumberNegater implements NumberNegater in a very broken fashion;      * does the right thing for Shorts, but attempts to override visit(Object).      * This is just here for testing the hierarchyRoot parameter of      * invokeVisitor.      */
+comment|/**    * CluelessNumberNegater implements NumberNegater in a very broken fashion;    * does the right thing for Shorts, but attempts to override visit(Object).    * This is just here for testing the hierarchyRoot parameter of    * invokeVisitor.    */
 specifier|public
 class|class
 name|CluelessNumberNegater
@@ -619,7 +619,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * IndecisiveNumberNegater implements NumberNegater in such a way that it      * doesn't know what to do when presented with an AmbiguousNumber.      */
+comment|/**    * IndecisiveNumberNegater implements NumberNegater in such a way that it    * doesn't know what to do when presented with an AmbiguousNumber.    */
 specifier|public
 class|class
 name|IndecisiveNumberNegater
@@ -645,7 +645,7 @@ parameter_list|)
 block|{
 block|}
 block|}
-comment|/**      * SomewhatIndecisiveNumberNegater implements NumberNegater in such a way      * that it knows what to do when presented with a SomewhatAmbiguousNumber.      */
+comment|/**    * SomewhatIndecisiveNumberNegater implements NumberNegater in such a way    * that it knows what to do when presented with a SomewhatAmbiguousNumber.    */
 specifier|public
 class|class
 name|SomewhatIndecisiveNumberNegater
@@ -683,7 +683,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * A class inheriting two interfaces, leading to ambiguity.      */
+comment|/**    * A class inheriting two interfaces, leading to ambiguity.    */
 specifier|public
 class|class
 name|AmbiguousNumber
@@ -704,7 +704,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * A class inheriting a root interface (FudgeableNumber) two different ways,      * which should not lead to ambiguity in some cases.      */
+comment|/**    * A class inheriting a root interface (FudgeableNumber) two different ways,    * which should not lead to ambiguity in some cases.    */
 specifier|public
 class|class
 name|SomewhatAmbiguousNumber
@@ -712,7 +712,7 @@ extends|extends
 name|AmbiguousNumber
 implements|implements
 name|DiceyNumber
-block|{     }
+block|{   }
 block|}
 end_class
 

@@ -69,7 +69,7 @@ argument_list|()
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * @return true if this sequence represents a point range.      */
+comment|/**    * @return true if this sequence represents a point range.    */
 specifier|public
 name|boolean
 name|isPoint
@@ -98,7 +98,7 @@ argument_list|()
 operator|)
 return|;
 block|}
-comment|/**      * @return true if this sequence represents an empty range.      */
+comment|/**    * @return true if this sequence represents an empty range.    */
 specifier|public
 name|boolean
 name|isEmpty
@@ -127,7 +127,7 @@ argument_list|()
 operator|)
 return|;
 block|}
-comment|/**      * @return true if this sequence represents a non-point, non-empty range.      */
+comment|/**    * @return true if this sequence represents a non-point, non-empty range.    */
 specifier|public
 name|boolean
 name|isRange
@@ -167,7 +167,7 @@ operator|)
 operator|)
 return|;
 block|}
-comment|/**      * @return unmodifiable list representing this sequence      */
+comment|/**    * @return unmodifiable list representing this sequence    */
 specifier|public
 name|List
 argument_list|<

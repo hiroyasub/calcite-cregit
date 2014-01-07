@@ -30,7 +30,7 @@ name|RIGHT
 block|,
 name|FULL
 block|;
-comment|/**      * Returns whether a join of this type may generate NULL values on the      * right-hand side.      */
+comment|/**    * Returns whether a join of this type may generate NULL values on the    * right-hand side.    */
 specifier|public
 name|boolean
 name|generatesNullsOnRight
@@ -50,7 +50,7 @@ name|FULL
 operator|)
 return|;
 block|}
-comment|/**      * Returns whether a join of this type may generate NULL values on the      * left-hand side.      */
+comment|/**    * Returns whether a join of this type may generate NULL values on the    * left-hand side.    */
 specifier|public
 name|boolean
 name|generatesNullsOnLeft

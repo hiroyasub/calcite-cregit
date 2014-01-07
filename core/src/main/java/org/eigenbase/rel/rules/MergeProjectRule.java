@@ -83,14 +83,14 @@ name|MergeProjectRule
 argument_list|()
 decl_stmt|;
 comment|//~ Instance fields --------------------------------------------------------
-comment|/**      * if true, always merge projects      */
+comment|/**    * if true, always merge projects    */
 specifier|private
 specifier|final
 name|boolean
 name|force
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a MergeProjectRule.      */
+comment|/**    * Creates a MergeProjectRule.    */
 specifier|private
 name|MergeProjectRule
 parameter_list|()
@@ -101,7 +101,7 @@ literal|false
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Creates a MergeProjectRule, specifying whether to always merge projects.      *      * @param force Whether to always merge projects      */
+comment|/**    * Creates a MergeProjectRule, specifying whether to always merge projects.    *    * @param force Whether to always merge projects    */
 specifier|public
 name|MergeProjectRule
 parameter_list|(

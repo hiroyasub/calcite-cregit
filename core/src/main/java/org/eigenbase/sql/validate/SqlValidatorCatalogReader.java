@@ -59,7 +59,7 @@ interface|interface
 name|SqlValidatorCatalogReader
 block|{
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Finds a table with the given name, possibly qualified.      *      * @param names Qualified name of table      *      * @return named table, or null if not found      */
+comment|/**    * Finds a table with the given name, possibly qualified.    *    * @param names Qualified name of table    * @return named table, or null if not found    */
 name|SqlValidatorTable
 name|getTable
 parameter_list|(
@@ -70,7 +70,7 @@ argument_list|>
 name|names
 parameter_list|)
 function_decl|;
-comment|/**      * Finds a user-defined type with the given name, possibly qualified.      *      *<p>NOTE jvs 12-Feb-2005: the reason this method is defined here instead      * of on RelDataTypeFactory is that it has to take into account      * context-dependent information such as SQL schema path, whereas a type      * factory is context-independent.      *      * @param typeName Name of type      *      * @return named type, or null if not found      */
+comment|/**    * Finds a user-defined type with the given name, possibly qualified.    *    *<p>NOTE jvs 12-Feb-2005: the reason this method is defined here instead    * of on RelDataTypeFactory is that it has to take into account    * context-dependent information such as SQL schema path, whereas a type    * factory is context-independent.    *    * @param typeName Name of type    * @return named type, or null if not found    */
 name|RelDataType
 name|getNamedType
 parameter_list|(
@@ -78,7 +78,7 @@ name|SqlIdentifier
 name|typeName
 parameter_list|)
 function_decl|;
-comment|/**      * Gets schema object names as specified. They can be schema or table      * object. If names array contain 1 element, return all schema names and all      * table names under the default schema (if that is set) If names array      * contain 2 elements, treat 1st element as schema name and return all table      * names in this schema      *      * @param names the array contains either 2 elements representing a      * partially qualified object name in the format of 'schema.object', or an      * unqualified name in the format of 'object'      *      * @return the list of all object (schema and table) names under the above      * criteria      */
+comment|/**    * Gets schema object names as specified. They can be schema or table    * object. If names array contain 1 element, return all schema names and all    * table names under the default schema (if that is set) If names array    * contain 2 elements, treat 1st element as schema name and return all table    * names in this schema    *    * @param names the array contains either 2 elements representing a    *              partially qualified object name in the format of    *              'schema.object', or an unqualified name in the format of    *              'object'    * @return the list of all object (schema and table) names under the above    * criteria    */
 name|List
 argument_list|<
 name|SqlMoniker
@@ -92,7 +92,7 @@ argument_list|>
 name|names
 parameter_list|)
 function_decl|;
-comment|/**      * Returns the name of the current schema.      *      * @return name of the current schema      */
+comment|/**    * Returns the name of the current schema.    *    * @return name of the current schema    */
 name|String
 name|getSchemaName
 parameter_list|()

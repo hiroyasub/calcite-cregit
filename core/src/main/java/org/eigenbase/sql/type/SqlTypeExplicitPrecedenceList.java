@@ -49,7 +49,7 @@ implements|implements
 name|RelDataTypePrecedenceList
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
-comment|/**      * Map from SqlTypeName to corresponding precedence list.      *      * @sql.2003 Part 2 Section 9.5      */
+comment|/**    * Map from SqlTypeName to corresponding precedence list.    *    * @sql.2003 Part 2 Section 9.5    */
 specifier|private
 specifier|static
 specifier|final

@@ -45,7 +45,7 @@ interface|interface
 name|RelOptSchema
 block|{
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Retrieves a {@link RelOptTable} based upon a member access.      *      *<p>For example, the Saffron expression<code>salesSchema.emps</code>      * would be resolved using a call to<code>salesSchema.getTableForMember(new      * String[]{"emps" })</code>.</p>      *      *<p>Note that name.length is only greater than 1 for queries originating      * from JDBC.</p>      *      * @param names Qualified name      */
+comment|/**    * Retrieves a {@link RelOptTable} based upon a member access.    *    *<p>For example, the Saffron expression<code>salesSchema.emps</code>    * would be resolved using a call to<code>salesSchema.getTableForMember(new    * String[]{"emps" })</code>.</p>    *    *<p>Note that name.length is only greater than 1 for queries originating    * from JDBC.</p>    *    * @param names Qualified name    */
 name|RelOptTable
 name|getTableForMember
 parameter_list|(
@@ -56,12 +56,12 @@ argument_list|>
 name|names
 parameter_list|)
 function_decl|;
-comment|/**      * Returns the {@link RelDataTypeFactory type factory} used to generate      * types for this schema.      */
+comment|/**    * Returns the {@link RelDataTypeFactory type factory} used to generate    * types for this schema.    */
 name|RelDataTypeFactory
 name|getTypeFactory
 parameter_list|()
 function_decl|;
-comment|/**      * Registers all of the rules supported by this schema. Only called by      * {@link RelOptPlanner#registerSchema}.      */
+comment|/**    * Registers all of the rules supported by this schema. Only called by    * {@link RelOptPlanner#registerSchema}.    */
 name|void
 name|registerRules
 parameter_list|(

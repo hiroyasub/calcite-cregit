@@ -34,12 +34,12 @@ name|Decreasing
 block|,
 name|Constant
 block|,
-comment|/**      * Catch-all value for expressions that have some monotonic properties.      * Maybe it isn't known whether the expression is increasing or decreasing;      * or maybe the value is neither increasing nor decreasing but the value      * never repeats.      */
+comment|/**    * Catch-all value for expressions that have some monotonic properties.    * Maybe it isn't known whether the expression is increasing or decreasing;    * or maybe the value is neither increasing nor decreasing but the value    * never repeats.    */
 name|Monotonic
 block|,
 name|NotMonotonic
 block|;
-comment|/**      * If this is a strict monotonicity (StrictlyIncreasing, StrictlyDecreasing)      * returns the non-strict equivalent (Increasing, Decreasing).      *      * @return non-strict equivalent monotonicity      */
+comment|/**    * If this is a strict monotonicity (StrictlyIncreasing, StrictlyDecreasing)    * returns the non-strict equivalent (Increasing, Decreasing).    *    * @return non-strict equivalent monotonicity    */
 specifier|public
 name|SqlMonotonicity
 name|unstrict
@@ -68,7 +68,7 @@ name|this
 return|;
 block|}
 block|}
-comment|/**      * Returns the reverse monotonicity.      *      * @return reverse monotonicity      */
+comment|/**    * Returns the reverse monotonicity.    *    * @return reverse monotonicity    */
 specifier|public
 name|SqlMonotonicity
 name|reverse
@@ -109,7 +109,7 @@ name|this
 return|;
 block|}
 block|}
-comment|/**      * Whether values of this monotonicity are decreasing. That is, if a value      * at a given point in a sequence is X, no point later in the sequence will      * have a value greater than X.      *      * @return whether values are decreasing      */
+comment|/**    * Whether values of this monotonicity are decreasing. That is, if a value    * at a given point in a sequence is X, no point later in the sequence will    * have a value greater than X.    *    * @return whether values are decreasing    */
 specifier|public
 name|boolean
 name|isDecreasing
@@ -135,7 +135,7 @@ literal|false
 return|;
 block|}
 block|}
-comment|/**      * Returns whether values of this monotonicity may ever repeat after moving      * to another value: true for {@link #NotMonotonic} and {@link #Constant},      * false otherwise.      *      *<p>If a column is known not to repeat, a sort on that column can make      * progress before all of the input has been seen.      *      * @return whether values repeat      */
+comment|/**    * Returns whether values of this monotonicity may ever repeat after moving    * to another value: true for {@link #NotMonotonic} and {@link #Constant},    * false otherwise.    *    *<p>If a column is known not to repeat, a sort on that column can make    * progress before all of the input has been seen.    *    * @return whether values repeat    */
 specifier|public
 name|boolean
 name|mayRepeat

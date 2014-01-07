@@ -64,7 +64,7 @@ name|logger
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Conditionally logs a message with two Object parameters      */
+comment|/**    * Conditionally logs a message with two Object parameters    */
 specifier|public
 name|void
 name|log
@@ -112,7 +112,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Conditionally logs a message with three Object parameters      */
+comment|/**    * Conditionally logs a message with three Object parameters    */
 specifier|public
 name|void
 name|log
@@ -165,7 +165,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Conditionally logs a message with four Object parameters      */
+comment|/**    * Conditionally logs a message with four Object parameters    */
 specifier|public
 name|void
 name|log

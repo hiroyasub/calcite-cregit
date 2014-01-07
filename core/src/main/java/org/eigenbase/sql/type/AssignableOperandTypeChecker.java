@@ -58,7 +58,7 @@ index|[]
 name|paramTypes
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Instantiates this strategy with a specific set of parameter types.      *      * @param paramTypes parameter types for operands; index in this array      * corresponds to operand number      */
+comment|/**    * Instantiates this strategy with a specific set of parameter types.    *    * @param paramTypes parameter types for operands; index in this array    *                   corresponds to operand number    */
 specifier|public
 name|AssignableOperandTypeChecker
 parameter_list|(

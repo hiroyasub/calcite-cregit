@@ -70,7 +70,7 @@ name|RexNode
 name|rexNull
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a new SargFactory.      *      * @param rexBuilder factory for instances of {@link RexNode}, needed      * internally in the sarg representation, and also for recomposing sargs      * into equivalent rex trees      */
+comment|/**    * Creates a new SargFactory.    *    * @param rexBuilder factory for instances of {@link RexNode}, needed    *                   internally in the sarg representation, and also for    *                   recomposing sargs into equivalent rex trees    */
 specifier|public
 name|SargFactory
 parameter_list|(
@@ -93,7 +93,7 @@ argument_list|()
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Creates a new endpoint. Initially, the endpoint represents a lower bound      * of negative infinity.      *      * @param dataType datatype for domain      *      * @return new endpoint      */
+comment|/**    * Creates a new endpoint. Initially, the endpoint represents a lower bound    * of negative infinity.    *    * @param dataType datatype for domain    * @return new endpoint    */
 specifier|public
 name|SargMutableEndpoint
 name|newEndpoint
@@ -112,7 +112,7 @@ name|dataType
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates a new interval expression. The interval starts out as unbounded      * (meaning it includes every non-null value of the datatype), with      * SqlNullSemantics.NULL_MATCHES_NOTHING.      *      * @param dataType datatype for domain      */
+comment|/**    * Creates a new interval expression. The interval starts out as unbounded    * (meaning it includes every non-null value of the datatype), with    * SqlNullSemantics.NULL_MATCHES_NOTHING.    *    * @param dataType datatype for domain    */
 specifier|public
 name|SargIntervalExpr
 name|newIntervalExpr
@@ -132,7 +132,7 @@ name|NULL_MATCHES_NOTHING
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates a new unbounded interval expression with non-default null      * semantics.      *      * @param dataType datatype for domain      * @param nullSemantics null semantics governing searches on this interval      */
+comment|/**    * Creates a new unbounded interval expression with non-default null    * semantics.    *    * @param dataType      datatype for domain    * @param nullSemantics null semantics governing searches on this interval    */
 specifier|public
 name|SargIntervalExpr
 name|newIntervalExpr
@@ -156,7 +156,7 @@ name|nullSemantics
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates a new set expression, initially with no children.      *      * @param dataType datatype for domain      * @param setOp set operator      */
+comment|/**    * Creates a new set expression, initially with no children.    *    * @param dataType datatype for domain    * @param setOp    set operator    */
 specifier|public
 name|SargSetExpr
 name|newSetExpr
@@ -180,7 +180,7 @@ name|setOp
 argument_list|)
 return|;
 block|}
-comment|/**      * @return new analyzer for rex expressions      */
+comment|/**    * @return new analyzer for rex expressions    */
 specifier|public
 name|SargRexAnalyzer
 name|newRexAnalyzer
@@ -196,7 +196,7 @@ literal|false
 argument_list|)
 return|;
 block|}
-comment|/**      * @param simpleMode if true, the analyzer restricts the types of predicates      * it allows; the following are disallowed - conjuntions on the same      * RexInputRef, more than one range predicate, and all disjunctions      *      * @return new analyzer for rex expressions      */
+comment|/**    * @param simpleMode if true, the analyzer restricts the types of predicates    *                   it allows; the following are disallowed - conjuntions on    *                   the same RexInputRef, more than one range predicate, and    *                   all disjunctions    * @return new analyzer for rex expressions    */
 specifier|public
 name|SargRexAnalyzer
 name|newRexAnalyzer
@@ -215,7 +215,7 @@ name|simpleMode
 argument_list|)
 return|;
 block|}
-comment|/**      * @param lowerRexInputIdx if>= 0, treat RexInputRefs whose index is within      * the range [lowerRexInputIdx, upperRexInputIdx) as coordinates in      * expressions      * @param upperRexInputIdx if>= 0, treat RexInputRefs whose index is within      * the range [lowerRexInputIdx, upperRexInputIdx) as coordinates in      * expressions      *      * @return new analyzer for rex expressions      */
+comment|/**    * @param lowerRexInputIdx if&ge; 0, treat RexInputRefs whose index is within    *                         the range [lowerRexInputIdx, upperRexInputIdx) as    *                         coordinates in expressions    * @param upperRexInputIdx if&ge; 0, treat RexInputRefs whose index is within    *                         the range [lowerRexInputIdx, upperRexInputIdx) as    *                         coordinates in expressions    * @return new analyzer for rex expressions    */
 specifier|public
 name|SargRexAnalyzer
 name|newRexAnalyzer
@@ -241,7 +241,7 @@ name|upperRexInputIdx
 argument_list|)
 return|;
 block|}
-comment|/**      * @return the null literal, which can be used to represent a range matching      * the null value      */
+comment|/**    * @return the null literal, which can be used to represent a range matching    * the null value    */
 specifier|public
 name|RexNode
 name|newNullLiteral
@@ -251,7 +251,7 @@ return|return
 name|rexNull
 return|;
 block|}
-comment|/**      * @return RexBuilder used by this factory      */
+comment|/**    * @return RexBuilder used by this factory    */
 specifier|public
 name|RexBuilder
 name|getRexBuilder

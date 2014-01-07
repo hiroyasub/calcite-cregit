@@ -163,20 +163,20 @@ extends|extends
 name|SqlNode
 block|{
 comment|//~ Instance fields --------------------------------------------------------
-comment|/**      * The type with which this literal was declared. This type is very      * approximate: the literal may have a different type once validated. For      * example, all numeric literals have a type name of {@link      * SqlTypeName#DECIMAL}, but on validation may become {@link      * SqlTypeName#INTEGER}.      */
+comment|/**    * The type with which this literal was declared. This type is very    * approximate: the literal may have a different type once validated. For    * example, all numeric literals have a type name of {@link    * SqlTypeName#DECIMAL}, but on validation may become {@link    * SqlTypeName#INTEGER}.    */
 specifier|private
 specifier|final
 name|SqlTypeName
 name|typeName
 decl_stmt|;
-comment|/**      * The value of this literal. The type of the value must be appropriate for      * the typeName, as defined by the {@link #valueMatchesType} method.      */
+comment|/**    * The value of this literal. The type of the value must be appropriate for    * the typeName, as defined by the {@link #valueMatchesType} method.    */
 specifier|protected
 specifier|final
 name|Object
 name|value
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a<code>SqlLiteral</code>.      *      * @pre typeName != null      * @pre valueMatchesType(value,typeName)      */
+comment|/**    * Creates a<code>SqlLiteral</code>.    *    * @pre typeName != null    * @pre valueMatchesType(value, typeName)    */
 specifier|protected
 name|SqlLiteral
 parameter_list|(
@@ -234,7 +234,7 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * @return value of {@link #typeName}      */
+comment|/**    * @return value of {@link #typeName}    */
 specifier|public
 name|SqlTypeName
 name|getTypeName
@@ -244,7 +244,7 @@ return|return
 name|typeName
 return|;
 block|}
-comment|/**      * @return whether value is appropriate for its type (we have rules about      * these things)      */
+comment|/**    * @return whether value is appropriate for its type (we have rules about    * these things)    */
 specifier|public
 specifier|static
 name|boolean
@@ -416,7 +416,7 @@ operator|.
 name|LITERAL
 return|;
 block|}
-comment|/**      * Returns the value of this literal.      *      *<p>Try not to use this method! There are so many different kinds of      * values, it's better to to let SqlLiteral do whatever it is you want to      * do.      *      * @see #booleanValue(SqlNode)      * @see #symbolValue(SqlNode)      */
+comment|/**    * Returns the value of this literal.    *    *<p>Try not to use this method! There are so many different kinds of    * values, it's better to to let SqlLiteral do whatever it is you want to    * do.    *    * @see #booleanValue(SqlNode)    * @see #symbolValue(SqlNode)    */
 specifier|public
 name|Object
 name|getValue
@@ -426,7 +426,7 @@ return|return
 name|value
 return|;
 block|}
-comment|/**      * Converts extracts the value from a boolean literal.      *      * @throws ClassCastException if the value is not a boolean literal      */
+comment|/**    * Converts extracts the value from a boolean literal.    *    * @throws ClassCastException if the value is not a boolean literal    */
 specifier|public
 specifier|static
 name|boolean
@@ -455,7 +455,7 @@ name|booleanValue
 argument_list|()
 return|;
 block|}
-comment|/**      * Extracts the enumerated value from a symbol literal.      *      * @throws ClassCastException if the value is not a symbol literal      *      * @see #createSymbol(SqlSymbol, SqlParserPos)      */
+comment|/**    * Extracts the enumerated value from a symbol literal.    *    * @throws ClassCastException if the value is not a symbol literal    * @see #createSymbol(SqlSymbol, SqlParserPos)    */
 specifier|public
 specifier|static
 name|SqlSymbol
@@ -479,7 +479,7 @@ operator|.
 name|value
 return|;
 block|}
-comment|/**      * Extracts the {@link SqlSampleSpec} value from a symbol literal.      *      * @throws ClassCastException if the value is not a symbol literal      *      * @see #createSymbol(SqlSymbol, SqlParserPos)      */
+comment|/**    * Extracts the {@link SqlSampleSpec} value from a symbol literal.    *    * @throws ClassCastException if the value is not a symbol literal    * @see #createSymbol(SqlSymbol, SqlParserPos)    */
 specifier|public
 specifier|static
 name|SqlSampleSpec
@@ -503,7 +503,7 @@ operator|.
 name|value
 return|;
 block|}
-comment|/**      * Extracts the string value from a string literal, a chain of string      * literals, or a CAST of a string literal.      */
+comment|/**    * Extracts the string value from a string literal, a chain of string    * literals, or a CAST of a string literal.    */
 specifier|public
 specifier|static
 name|String
@@ -645,7 +645,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**      * Converts a chained string literals into regular literals; returns regular      * literals unchanged.      */
+comment|/**    * Converts a chained string literals into regular literals; returns regular    * literals unchanged.    */
 specifier|public
 specifier|static
 name|SqlLiteral
@@ -705,7 +705,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**      * For calc program builder - value may be different than {@link #unparse}      * Typical values:      *      *<ul>      *<li>Hello, world!</li>      *<li>12.34</li>      *<li>{null}</li>      *<li>1969-04-29</li>      *</ul>      *      * @return string representation of the value      */
+comment|/**    * For calc program builder - value may be different than {@link #unparse}    * Typical values:    *    *<ul>    *<li>Hello, world!</li>    *<li>12.34</li>    *<li>{null}</li>    *<li>1969-04-29</li>    *</ul>    *    * @return string representation of the value    */
 specifier|public
 name|String
 name|toValue
@@ -879,7 +879,7 @@ operator|.
 name|Constant
 return|;
 block|}
-comment|/**      * Creates a NULL literal.      *      *<p>There's no singleton constant for a NULL literal. Instead, nulls must      * be instantiated via createNull(), because different instances have      * different context-dependent types.      */
+comment|/**    * Creates a NULL literal.    *    *<p>There's no singleton constant for a NULL literal. Instead, nulls must    * be instantiated via createNull(), because different instances have    * different context-dependent types.    */
 specifier|public
 specifier|static
 name|SqlLiteral
@@ -903,7 +903,7 @@ name|pos
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates a boolean literal.      */
+comment|/**    * Creates a boolean literal.    */
 specifier|public
 specifier|static
 name|SqlLiteral
@@ -971,7 +971,7 @@ name|pos
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates a literal which represents a parser symbol, for example the      *<code>TRAILING</code> keyword in the call<code>Trim(TRAILING 'x' FROM      * 'Hello world!')</code>.      *      * @see #symbolValue(SqlNode)      */
+comment|/**    * Creates a literal which represents a parser symbol, for example the    *<code>TRAILING</code> keyword in the call<code>Trim(TRAILING 'x' FROM    * 'Hello world!')</code>.    *    * @see #symbolValue(SqlNode)    */
 specifier|public
 specifier|static
 name|SqlLiteral
@@ -1000,7 +1000,7 @@ name|pos
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates a literal which represents a sample specification.      */
+comment|/**    * Creates a literal which represents a sample specification.    */
 specifier|public
 specifier|static
 name|SqlLiteral
@@ -1090,7 +1090,7 @@ name|hashCode
 argument_list|()
 return|;
 block|}
-comment|/**      * Returns the integer value of this literal.      *      * @param exact Whether the value has to be exact. If true, and the literal      * is a fraction (e.g. 3.14), throws. If false, discards the fractional part      * of the value.      *      * @return Integer value of this literal      */
+comment|/**    * Returns the integer value of this literal.    *    * @param exact Whether the value has to be exact. If true, and the literal    *              is a fraction (e.g. 3.14), throws. If false, discards the    *              fractional part of the value.    * @return Integer value of this literal    */
 specifier|public
 name|int
 name|intValue
@@ -1184,7 +1184,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**      * Returns the long value of this literal.      *      * @param exact Whether the value has to be exact. If true, and the literal      * is a fraction (e.g. 3.14), throws. If false, discards the fractional part      * of the value.      *      * @return Long value of this literal      */
+comment|/**    * Returns the long value of this literal.    *    * @param exact Whether the value has to be exact. If true, and the literal    *              is a fraction (e.g. 3.14), throws. If false, discards the    *              fractional part of the value.    * @return Long value of this literal    */
 specifier|public
 name|long
 name|longValue
@@ -1278,7 +1278,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**      * Returns sign of value.      *      * @return -1, 0 or 1      */
+comment|/**    * Returns sign of value.    *    * @return -1, 0 or 1    */
 specifier|public
 name|int
 name|signum
@@ -1296,7 +1296,7 @@ name|ZERO
 argument_list|)
 return|;
 block|}
-comment|/**      * Returns a numeric literal's value as a {@link BigDecimal}.      */
+comment|/**    * Returns a numeric literal's value as a {@link BigDecimal}.    */
 specifier|public
 name|BigDecimal
 name|bigDecimalValue
@@ -1850,7 +1850,7 @@ name|pos
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates an interval literal.      *      * @param intervalStr input string of '1:23:04'      * @param intervalQualifier describes the interval type and precision      * @param pos Parser position      */
+comment|/**    * Creates an interval literal.    *    * @param intervalStr       input string of '1:23:04'    * @param intervalQualifier describes the interval type and precision    * @param pos               Parser position    */
 specifier|public
 specifier|static
 name|SqlIntervalLiteral
@@ -2171,7 +2171,7 @@ name|pos
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates a literal like X'ABAB'. Although it matters when we derive a type      * for this beastie, we don't care at this point whether the number of      * hexits is odd or even.      */
+comment|/**    * Creates a literal like X'ABAB'. Although it matters when we derive a type    * for this beastie, we don't care at this point whether the number of    * hexits is odd or even.    */
 specifier|public
 specifier|static
 name|SqlBinaryStringLiteral
@@ -2234,7 +2234,7 @@ name|pos
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates a literal like X'ABAB' from an array of bytes.      *      * @param bytes Contents of binary literal      * @param pos Parser position      *      * @return Binary string literal      */
+comment|/**    * Creates a literal like X'ABAB' from an array of bytes.    *    * @param bytes Contents of binary literal    * @param pos   Parser position    * @return Binary string literal    */
 specifier|public
 specifier|static
 name|SqlBinaryStringLiteral
@@ -2298,7 +2298,7 @@ name|pos
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates a string literal in the system character set.      *      * @param s a string (without the sql single quotes)      * @param pos Parser position      */
+comment|/**    * Creates a string literal in the system character set.    *    * @param s   a string (without the sql single quotes)    * @param pos Parser position    */
 specifier|public
 specifier|static
 name|SqlCharStringLiteral
@@ -2323,7 +2323,7 @@ name|pos
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates a string literal, with optional character-set.      *      * @param s a string (without the sql single quotes)      * @param charSet character set name, null means take system default      * @param pos Parser position      *      * @return A string literal      *      * @throws UnsupportedCharsetException if charSet is not null but there is      * no character set with that name in this environment      */
+comment|/**    * Creates a string literal, with optional character-set.    *    * @param s       a string (without the sql single quotes)    * @param charSet character set name, null means take system default    * @param pos     Parser position    * @return A string literal    * @throws UnsupportedCharsetException if charSet is not null but there is    *                                     no character set with that name in this    *                                     environment    */
 specifier|public
 specifier|static
 name|SqlCharStringLiteral
@@ -2362,7 +2362,7 @@ name|pos
 argument_list|)
 return|;
 block|}
-comment|/**      * Transforms this literal (which must be of type character) into a new one      * in which 4-digit Unicode escape sequences have been replaced with the      * corresponding Unicode characters.      *      * @param unicodeEscapeChar escape character (e.g. backslash) for Unicode      * numeric sequences; 0 implies no transformation      *      * @return transformed literal      */
+comment|/**    * Transforms this literal (which must be of type character) into a new one    * in which 4-digit Unicode escape sequences have been replaced with the    * corresponding Unicode characters.    *    * @param unicodeEscapeChar escape character (e.g. backslash) for Unicode    *                          numeric sequences; 0 implies no transformation    * @return transformed literal    */
 specifier|public
 name|SqlLiteral
 name|unescapeUnicode
@@ -2648,7 +2648,7 @@ argument_list|)
 return|;
 block|}
 comment|//~ Inner Interfaces -------------------------------------------------------
-comment|/**      * A value must implement this interface if it is to be embedded as a      * SqlLiteral of type SYMBOL. If the class is an {@link Enum} it trivially      * implements this interface.      *      *<p>The {@link #toString()} method should return how the symbol should be      * unparsed, which is sometimes not the same as the enumerated value's name      * (e.g. "UNBOUNDED PRECEDING" versus "UnboundedPreceeding").      */
+comment|/**    * A value must implement this interface if it is to be embedded as a    * SqlLiteral of type SYMBOL. If the class is an {@link Enum} it trivially    * implements this interface.    *    *<p>The {@link #toString()} method should return how the symbol should be    * unparsed, which is sometimes not the same as the enumerated value's name    * (e.g. "UNBOUNDED PRECEDING" versus "UnboundedPreceeding").    */
 specifier|public
 interface|interface
 name|SqlSymbol

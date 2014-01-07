@@ -78,7 +78,7 @@ name|SqlNullSemantics
 name|nullSemantics
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * @see SargFactory#newIntervalExpr      */
+comment|/**    * @see SargFactory#newIntervalExpr    */
 name|SargIntervalExpr
 parameter_list|(
 name|SargFactory
@@ -106,7 +106,7 @@ name|nullSemantics
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * @return null semantics which apply for searches on this interval      */
+comment|/**    * @return null semantics which apply for searches on this interval    */
 specifier|public
 name|SqlNullSemantics
 name|getNullSemantics

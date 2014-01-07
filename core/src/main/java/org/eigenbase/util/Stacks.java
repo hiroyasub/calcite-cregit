@@ -37,7 +37,7 @@ name|Stacks
 parameter_list|()
 block|{
 block|}
-comment|/** Returns the most recently added element in the stack. Throws if the      * stack is empty. */
+comment|/**    * Returns the most recently added element in the stack. Throws if the    * stack is empty.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -67,7 +67,7 @@ literal|1
 argument_list|)
 return|;
 block|}
-comment|/** Adds an element to the stack. */
+comment|/**    * Adds an element to the stack.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -94,7 +94,7 @@ name|element
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Removes an element from the stack. Asserts of the element is not the      * one last added; throws if the stack is empty. */
+comment|/**    * Removes an element from the stack. Asserts of the element is not the    * one last added; throws if the stack is empty.    */
 specifier|public
 specifier|static
 parameter_list|<

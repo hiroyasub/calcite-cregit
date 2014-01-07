@@ -14,7 +14,7 @@ package|;
 end_package
 
 begin_comment
-comment|/** Visitor that has methods for the common logical relational expressions. */
+comment|/**  * Visitor that has methods for the common logical relational expressions.  */
 end_comment
 
 begin_interface

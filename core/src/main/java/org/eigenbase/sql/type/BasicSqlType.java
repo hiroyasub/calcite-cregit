@@ -81,7 +81,7 @@ name|SerializableCharset
 name|wrappedCharset
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Constructs a type with no parameters. This should only be called from a      * factory method.      *      * @param typeName Type name      *      * @pre typeName.allowsNoPrecNoScale(false,false)      */
+comment|/**    * Constructs a type with no parameters. This should only be called from a    * factory method.    *    * @param typeName Type name    * @pre typeName.allowsNoPrecNoScale(false, false)    */
 specifier|public
 name|BasicSqlType
 parameter_list|(
@@ -135,7 +135,7 @@ name|computeDigest
 argument_list|()
 expr_stmt|;
 block|}
-comment|/**      * Constructs a type with precision/length but no scale.      *      * @param typeName Type name      *      * @pre typeName.allowsPrecNoScale(true,false)      */
+comment|/**    * Constructs a type with precision/length but no scale.    *    * @param typeName Type name    * @pre typeName.allowsPrecNoScale(true, false)    */
 specifier|public
 name|BasicSqlType
 parameter_list|(
@@ -187,7 +187,7 @@ name|computeDigest
 argument_list|()
 expr_stmt|;
 block|}
-comment|/**      * Constructs a type with precision/length and scale.      *      * @param typeName Type name      *      * @pre typeName.allowsPrecScale(true,true)      */
+comment|/**    * Constructs a type with precision/length and scale.    *    * @param typeName Type name    * @pre typeName.allowsPrecScale(true, true)    */
 specifier|public
 name|BasicSqlType
 parameter_list|(
@@ -243,7 +243,7 @@ argument_list|()
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Constructs a type with nullablity      */
+comment|/**    * Constructs a type with nullablity    */
 name|BasicSqlType
 name|createWithNullability
 parameter_list|(
@@ -297,7 +297,7 @@ return|return
 name|ret
 return|;
 block|}
-comment|/**      * Constructs a type with charset and collation      *      * @pre SqlTypeUtil.inCharFamily(this)      */
+comment|/**    * Constructs a type with charset and collation    *    * @pre SqlTypeUtil.inCharFamily(this)    */
 name|BasicSqlType
 name|createWithCharsetAndCollation
 parameter_list|(
@@ -783,7 +783,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Returns a value which is a limit for this type.      *      *<p>For example,      *      *<table border="1">      *<tr>      *<th>Datatype</th>      *<th>sign</th>      *<th>limit</th>      *<th>beyond</th>      *<th>precision</th>      *<th>scale</th>      *<th>Returns</th>      *</tr>      *<tr>      *<td>Integer</th>      *<td>true</td>      *<td>true</td>      *<td>false</td>      *<td>-1</td>      *<td>-1</td>      *<td>2147483647 (2 ^ 31 -1 = MAXINT)</td>      *</tr>      *<tr>      *<td>Integer</th>      *<td>true</td>      *<td>true</td>      *<td>true</td>      *<td>-1</td>      *<td>-1</td>      *<td>2147483648 (2 ^ 31 = MAXINT + 1)</td>      *</tr>      *<tr>      *<td>Integer</th>      *<td>false</td>      *<td>true</td>      *<td>false</td>      *<td>-1</td>      *<td>-1</td>      *<td>-2147483648 (-2 ^ 31 = MININT)</td>      *</tr>      *<tr>      *<td>Boolean</th>      *<td>true</td>      *<td>true</td>      *<td>false</td>      *<td>-1</td>      *<td>-1</td>      *<td>TRUE</td>      *</tr>      *<tr>      *<td>Varchar</th>      *<td>true</td>      *<td>true</td>      *<td>false</td>      *<td>10</td>      *<td>-1</td>      *<td>'ZZZZZZZZZZ'</td>      *</tr>      *</table>      *      * @param sign If true, returns upper limit, otherwise lower limit      * @param limit If true, returns value at or near to overflow; otherwise      * value at or near to underflow      * @param beyond If true, returns the value just beyond the limit, otherwise      * the value at the limit      *      * @return Limit value      */
+comment|/**    * Returns a value which is a limit for this type.    *    *<p>For example,    *    *<table border="1">    *<tr>    *<th>Datatype</th>    *<th>sign</th>    *<th>limit</th>    *<th>beyond</th>    *<th>precision</th>    *<th>scale</th>    *<th>Returns</th>    *</tr>    *<tr>    *<td>Integer</th>    *<td>true</td>    *<td>true</td>    *<td>false</td>    *<td>-1</td>    *<td>-1</td>    *<td>2147483647 (2 ^ 31 -1 = MAXINT)</td>    *</tr>    *<tr>    *<td>Integer</th>    *<td>true</td>    *<td>true</td>    *<td>true</td>    *<td>-1</td>    *<td>-1</td>    *<td>2147483648 (2 ^ 31 = MAXINT + 1)</td>    *</tr>    *<tr>    *<td>Integer</th>    *<td>false</td>    *<td>true</td>    *<td>false</td>    *<td>-1</td>    *<td>-1</td>    *<td>-2147483648 (-2 ^ 31 = MININT)</td>    *</tr>    *<tr>    *<td>Boolean</th>    *<td>true</td>    *<td>true</td>    *<td>false</td>    *<td>-1</td>    *<td>-1</td>    *<td>TRUE</td>    *</tr>    *<tr>    *<td>Varchar</th>    *<td>true</td>    *<td>true</td>    *<td>false</td>    *<td>10</td>    *<td>-1</td>    *<td>'ZZZZZZZZZZ'</td>    *</tr>    *</table>    *    * @param sign   If true, returns upper limit, otherwise lower limit    * @param limit  If true, returns value at or near to overflow; otherwise    *               value at or near to underflow    * @param beyond If true, returns the value just beyond the limit, otherwise    *               the value at the limit    * @return Limit value    */
 specifier|public
 name|Object
 name|getLimit

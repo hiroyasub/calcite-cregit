@@ -124,7 +124,7 @@ extends|extends
 name|ProjectRelBase
 block|{
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a ProjectRel with no sort keys.      *      * @param cluster Cluster this relational expression belongs to      * @param child input relational expression      * @param exps set of expressions for the input columns      * @param fieldNames aliases of the expressions      * @param flags values as in {@link ProjectRelBase.Flags}      */
+comment|/**    * Creates a ProjectRel with no sort keys.    *    * @param cluster    Cluster this relational expression belongs to    * @param child      input relational expression    * @param exps       set of expressions for the input columns    * @param fieldNames aliases of the expressions    * @param flags      values as in {@link ProjectRelBase.Flags}    */
 specifier|public
 name|ProjectRel
 parameter_list|(
@@ -185,7 +185,7 @@ name|flags
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Creates a ProjectRel, deriving a trait set.      *      * @param cluster Cluster this relational expression belongs to      * @param child input relational expression      * @param exps List of expressions for the input columns      * @param rowType output row type      * @param flags values as in {@link ProjectRelBase.Flags}      * @param collationList List of sort keys      *      * @deprecated Use constructor without explicit collation-list;      * collations can be derived from the trait-set;      * this constructor will be removed after optiq-0.4.16.      */
+comment|/**    * Creates a ProjectRel, deriving a trait set.    *    * @param cluster       Cluster this relational expression belongs to    * @param child         input relational expression    * @param exps          List of expressions for the input columns    * @param rowType       output row type    * @param flags         values as in {@link ProjectRelBase.Flags}    * @param collationList List of sort keys    * @deprecated Use constructor without explicit collation-list;    * collations can be derived from the trait-set;    * this constructor will be removed after optiq-0.4.16.    */
 specifier|public
 name|ProjectRel
 parameter_list|(
@@ -257,7 +257,7 @@ literal|"remove after optiq-0.4.16"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Creates a ProjectRel.      *      * @param cluster Cluster this relational expression belongs to      * @param traitSet traits of this rel      * @param child input relational expression      * @param exps List of expressions for the input columns      * @param rowType output row type      * @param flags values as in {@link ProjectRelBase.Flags}      */
+comment|/**    * Creates a ProjectRel.    *    * @param cluster  Cluster this relational expression belongs to    * @param traitSet traits of this rel    * @param child    input relational expression    * @param exps     List of expressions for the input columns    * @param rowType  output row type    * @param flags    values as in {@link ProjectRelBase.Flags}    */
 specifier|public
 name|ProjectRel
 parameter_list|(
@@ -299,7 +299,7 @@ name|flags
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Creates a ProjectRel.      *      * @param cluster Cluster this relational expression belongs to      * @param traitSet traits of this rel      * @param child input relational expression      * @param exps List of expressions for the input columns      * @param rowType output row type      * @param flags values as in {@link ProjectRelBase.Flags}      * @param collationList List of sort keys      *      * @deprecated Use constructor without explicit collation-list;      * collations can be derived from the trait-set;      * this constructor will be removed after optiq-0.4.16.      */
+comment|/**    * Creates a ProjectRel.    *    * @param cluster       Cluster this relational expression belongs to    * @param traitSet      traits of this rel    * @param child         input relational expression    * @param exps          List of expressions for the input columns    * @param rowType       output row type    * @param flags         values as in {@link ProjectRelBase.Flags}    * @param collationList List of sort keys    * @deprecated Use constructor without explicit collation-list;    * collations can be derived from the trait-set;    * this constructor will be removed after optiq-0.4.16.    */
 specifier|public
 name|ProjectRel
 parameter_list|(
@@ -350,7 +350,7 @@ name|collationList
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Creates a ProjectRel by parsing serialized output. */
+comment|/**    * Creates a ProjectRel by parsing serialized output.    */
 specifier|public
 name|ProjectRel
 parameter_list|(
@@ -434,7 +434,7 @@ name|this
 argument_list|)
 return|;
 block|}
-comment|/**      * Returns a permutation, if this projection is merely a permutation of its      * input fields, otherwise null.      */
+comment|/**    * Returns a permutation, if this projection is merely a permutation of its    * input fields, otherwise null.    */
 specifier|public
 name|Permutation
 name|getPermutation
@@ -544,7 +544,7 @@ return|return
 name|permutation
 return|;
 block|}
-comment|/**      * Checks whether this is a functional mapping.      * Every output is a source field, but      * a source field may appear as zero, one, or more output fields.      */
+comment|/**    * Checks whether this is a functional mapping.    * Every output is a source field, but    * a source field may appear as zero, one, or more output fields.    */
 specifier|public
 name|boolean
 name|isMapping
@@ -577,7 +577,7 @@ return|return
 literal|true
 return|;
 block|}
-comment|/**      * Returns a mapping, or null if this projection is not a mapping.      *      *<p>The mapping is an inverse surjection.      * Every target has a source field, but      * a source field may appear as zero, one, or more target fields.      * Thus you can safely call      * {@link org.eigenbase.util.mapping.Mappings.TargetMapping#getTarget(int)}      */
+comment|/**    * Returns a mapping, or null if this projection is not a mapping.    *    *<p>The mapping is an inverse surjection.    * Every target has a source field, but    * a source field may appear as zero, one, or more target fields.    * Thus you can safely call    * {@link org.eigenbase.util.mapping.Mappings.TargetMapping#getTarget(int)}    */
 specifier|public
 name|Mappings
 operator|.

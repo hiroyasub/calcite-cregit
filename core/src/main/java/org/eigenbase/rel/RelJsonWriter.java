@@ -729,7 +729,7 @@ return|return
 literal|true
 return|;
 block|}
-comment|/** Returns a JSON string describing the relational expressions that were just    * explained. */
+comment|/**    * Returns a JSON string describing the relational expressions that were just    * explained.    */
 specifier|public
 name|String
 name|asString

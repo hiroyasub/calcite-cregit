@@ -28,7 +28,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Visitor class, follows the {@link org.eigenbase.util.Glossary#VisitorPattern  * visitor pattern}.  *  *<p>The type parameter<code>R</code> is the return type of each<code>  * visit()</code> method. If the methods do not need to return a value, use  * {@link Void}.  * @see SqlBasicVisitor  * @see SqlNode#accept(SqlVisitor)  * @see SqlOperator#acceptCall  */
+comment|/**  * Visitor class, follows the {@link org.eigenbase.util.Glossary#VisitorPattern  * visitor pattern}.  *  *<p>The type parameter<code>R</code> is the return type of each<code>  * visit()</code> method. If the methods do not need to return a value, use  * {@link Void}.  *  * @see SqlBasicVisitor  * @see SqlNode#accept(SqlVisitor)  * @see SqlOperator#acceptCall  */
 end_comment
 
 begin_interface
@@ -40,7 +40,7 @@ name|R
 parameter_list|>
 block|{
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Visits a literal.      *      * @param literal Literal      *      * @see SqlLiteral#accept(SqlVisitor)      */
+comment|/**    * Visits a literal.    *    * @param literal Literal    * @see SqlLiteral#accept(SqlVisitor)    */
 name|R
 name|visit
 parameter_list|(
@@ -48,7 +48,7 @@ name|SqlLiteral
 name|literal
 parameter_list|)
 function_decl|;
-comment|/**      * Visits a call to a {@link SqlOperator}.      *      * @param call Call      *      * @see SqlCall#accept(SqlVisitor)      */
+comment|/**    * Visits a call to a {@link SqlOperator}.    *    * @param call Call    * @see SqlCall#accept(SqlVisitor)    */
 name|R
 name|visit
 parameter_list|(
@@ -56,7 +56,7 @@ name|SqlCall
 name|call
 parameter_list|)
 function_decl|;
-comment|/**      * Visits a list of {@link SqlNode} objects.      *      * @param nodeList list of nodes      *      * @see SqlNodeList#accept(SqlVisitor)      */
+comment|/**    * Visits a list of {@link SqlNode} objects.    *    * @param nodeList list of nodes    * @see SqlNodeList#accept(SqlVisitor)    */
 name|R
 name|visit
 parameter_list|(
@@ -64,7 +64,7 @@ name|SqlNodeList
 name|nodeList
 parameter_list|)
 function_decl|;
-comment|/**      * Visits an identifier.      *      * @param id identifier      *      * @see SqlIdentifier#accept(SqlVisitor)      */
+comment|/**    * Visits an identifier.    *    * @param id identifier    * @see SqlIdentifier#accept(SqlVisitor)    */
 name|R
 name|visit
 parameter_list|(
@@ -72,7 +72,7 @@ name|SqlIdentifier
 name|id
 parameter_list|)
 function_decl|;
-comment|/**      * Visits a datatype specification.      *      * @param type datatype specification      *      * @see SqlDataTypeSpec#accept(SqlVisitor)      */
+comment|/**    * Visits a datatype specification.    *    * @param type datatype specification    * @see SqlDataTypeSpec#accept(SqlVisitor)    */
 name|R
 name|visit
 parameter_list|(
@@ -80,7 +80,7 @@ name|SqlDataTypeSpec
 name|type
 parameter_list|)
 function_decl|;
-comment|/**      * Visits a dynamic parameter.      *      * @param param Dynamic parameter      *      * @see SqlDynamicParam#accept(SqlVisitor)      */
+comment|/**    * Visits a dynamic parameter.    *    * @param param Dynamic parameter    * @see SqlDynamicParam#accept(SqlVisitor)    */
 name|R
 name|visit
 parameter_list|(
@@ -88,7 +88,7 @@ name|SqlDynamicParam
 name|param
 parameter_list|)
 function_decl|;
-comment|/**      * Visits an interval qualifier      *      * @param intervalQualifier Interval qualifier      *      * @see SqlIntervalQualifier#accept(SqlVisitor)      */
+comment|/**    * Visits an interval qualifier    *    * @param intervalQualifier Interval qualifier    * @see SqlIntervalQualifier#accept(SqlVisitor)    */
 name|R
 name|visit
 parameter_list|(

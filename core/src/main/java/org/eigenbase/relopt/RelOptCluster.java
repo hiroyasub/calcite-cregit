@@ -107,7 +107,7 @@ name|RelTraitSet
 name|emptyTraitSet
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a cluster.      */
+comment|/**    * Creates a cluster.    */
 name|RelOptCluster
 parameter_list|(
 name|RelOptQuery
@@ -256,7 +256,7 @@ return|return
 name|metadataProvider
 return|;
 block|}
-comment|/**      * Overrides the default metadata provider for this cluster.      *      * @param metadataProvider custom provider      */
+comment|/**    * Overrides the default metadata provider for this cluster.    *    * @param metadataProvider custom provider    */
 specifier|public
 name|void
 name|setMetadataProvider

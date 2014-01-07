@@ -785,7 +785,7 @@ name|newProject
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Similar to {@link #onMatch}, but swaps the upper sibling with the left      * of the two lower siblings, rather than the right. */
+comment|/**    * Similar to {@link #onMatch}, but swaps the upper sibling with the left    * of the two lower siblings, rather than the right.    */
 specifier|private
 name|void
 name|onMatchLeft
@@ -1344,7 +1344,7 @@ name|newProject
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Splits a condition into conjunctions that do or do not intersect with      * a given bit set. */
+comment|/**    * Splits a condition into conjunctions that do or do not intersect with    * a given bit set.    */
 specifier|static
 name|void
 name|split

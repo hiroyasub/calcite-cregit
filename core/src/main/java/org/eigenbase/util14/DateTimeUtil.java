@@ -43,7 +43,7 @@ class|class
 name|DateTimeUtil
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
-comment|/**      * the SimpleDateFormat string for ISO dates, "yyyy-MM-dd"      */
+comment|/**    * the SimpleDateFormat string for ISO dates, "yyyy-MM-dd"    */
 specifier|public
 specifier|static
 specifier|final
@@ -52,7 +52,7 @@ name|DateFormatStr
 init|=
 literal|"yyyy-MM-dd"
 decl_stmt|;
-comment|/**      * the SimpleDateFormat string for ISO times, "HH:mm:ss"      */
+comment|/**    * the SimpleDateFormat string for ISO times, "HH:mm:ss"    */
 specifier|public
 specifier|static
 specifier|final
@@ -61,7 +61,7 @@ name|TimeFormatStr
 init|=
 literal|"HH:mm:ss"
 decl_stmt|;
-comment|/**      * the SimpleDateFormat string for ISO timestamps, "yyyy-MM-dd HH:mm:ss"      */
+comment|/**    * the SimpleDateFormat string for ISO timestamps, "yyyy-MM-dd HH:mm:ss"    */
 specifier|public
 specifier|static
 specifier|final
@@ -74,7 +74,7 @@ literal|" "
 operator|+
 name|TimeFormatStr
 decl_stmt|;
-comment|/**      * the GMT time zone      */
+comment|/**    * the GMT time zone    */
 specifier|public
 specifier|static
 specifier|final
@@ -88,7 +88,7 @@ argument_list|(
 literal|"GMT"
 argument_list|)
 decl_stmt|;
-comment|/**      * the Java default time zone      */
+comment|/**    * the Java default time zone    */
 specifier|public
 specifier|static
 specifier|final
@@ -100,7 +100,7 @@ operator|.
 name|getDefault
 argument_list|()
 decl_stmt|;
-comment|/** The number of milliseconds in a second. */
+comment|/**    * The number of milliseconds in a second.    */
 specifier|public
 specifier|static
 specifier|final
@@ -109,7 +109,7 @@ name|MILLIS_PER_SECOND
 init|=
 literal|1000L
 decl_stmt|;
-comment|/** The number of milliseconds in a minute. */
+comment|/**    * The number of milliseconds in a minute.    */
 specifier|public
 specifier|static
 specifier|final
@@ -118,7 +118,7 @@ name|MILLIS_PER_MINUTE
 init|=
 literal|60000L
 decl_stmt|;
-comment|/** The number of milliseconds in an hour. */
+comment|/**    * The number of milliseconds in an hour.    */
 specifier|public
 specifier|static
 specifier|final
@@ -128,7 +128,7 @@ init|=
 literal|3600000L
 decl_stmt|;
 comment|// = 60 * 60 * 1000
-comment|/**      * The number of milliseconds in a day.      *      *<p>This is the modulo 'mask' used when converting      * TIMESTAMP values to DATE and TIME values.      */
+comment|/**    * The number of milliseconds in a day.    *    *<p>This is the modulo 'mask' used when converting    * TIMESTAMP values to DATE and TIME values.    */
 specifier|public
 specifier|static
 specifier|final
@@ -138,7 +138,7 @@ init|=
 literal|86400000
 decl_stmt|;
 comment|// = 24 * 60 * 60 * 1000
-comment|/**      * Calendar set to the epoch (1970-01-01 00:00:00 UTC). Useful for      * initializing other values. Calendars are not immutable, so be careful not      * to screw up this object for everyone else.      */
+comment|/**    * Calendar set to the epoch (1970-01-01 00:00:00 UTC). Useful for    * initializing other values. Calendars are not immutable, so be careful not    * to screw up this object for everyone else.    */
 specifier|public
 specifier|static
 specifier|final
@@ -166,7 +166,7 @@ literal|0
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Calendar set to local time.      */
+comment|/**    * Calendar set to local time.    */
 specifier|private
 specifier|static
 specifier|final
@@ -179,7 +179,7 @@ name|getInstance
 argument_list|()
 decl_stmt|;
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Parses a string using {@link SimpleDateFormat} and a given pattern. This      * method parses a string at the specified parse position and if successful,      * updates the parse position to the index after the last character used.      * The parsing is strict and requires months to be less than 12, days to be      * less than 31, etc.      *      * @param s string to be parsed      * @param pattern {@link SimpleDateFormat}  pattern      * @param tz time zone in which to interpret string. Defaults to the Java      * default time zone      * @param pp position to start parsing from      *      * @return a Calendar initialized with the parsed value, or null if parsing      * failed. If returned, the Calendar is configured to the GMT time zone.      *      * @pre pattern != null      */
+comment|/**    * Parses a string using {@link SimpleDateFormat} and a given pattern. This    * method parses a string at the specified parse position and if successful,    * updates the parse position to the index after the last character used.    * The parsing is strict and requires months to be less than 12, days to be    * less than 31, etc.    *    * @param s       string to be parsed    * @param pattern {@link SimpleDateFormat}  pattern    * @param tz      time zone in which to interpret string. Defaults to the Java    *                default time zone    * @param pp      position to start parsing from    * @return a Calendar initialized with the parsed value, or null if parsing    * failed. If returned, the Calendar is configured to the GMT time zone.    * @pre pattern != null    */
 specifier|private
 specifier|static
 name|Calendar
@@ -295,7 +295,7 @@ return|return
 name|ret
 return|;
 block|}
-comment|/**      * Parses a string using {@link SimpleDateFormat} and a given pattern. The      * entire string must match the pattern specified.      *      * @param s string to be parsed      * @param pattern {@link SimpleDateFormat}  pattern      * @param tz time zone in which to interpret string. Defaults to the Java      * default time zone      *      * @return a Calendar initialized with the parsed value, or null if parsing      * failed. If returned, the Calendar is configured to the GMT time zone.      *      * @pre pattern != null      */
+comment|/**    * Parses a string using {@link SimpleDateFormat} and a given pattern. The    * entire string must match the pattern specified.    *    * @param s       string to be parsed    * @param pattern {@link SimpleDateFormat}  pattern    * @param tz      time zone in which to interpret string. Defaults to the Java    *                default time zone    * @return a Calendar initialized with the parsed value, or null if parsing    * failed. If returned, the Calendar is configured to the GMT time zone.    * @pre pattern != null    */
 specifier|public
 specifier|static
 name|Calendar
@@ -363,7 +363,7 @@ return|return
 name|ret
 return|;
 block|}
-comment|/**      * Parses a string using {@link SimpleDateFormat} and a given pattern, and      * if present, parses a fractional seconds component. The fractional seconds      * component must begin with a decimal point ('.') followed by numeric      * digits. The precision is rounded to a maximum of 3 digits of fractional      * seconds precision (to obtain milliseconds).      *      * @param s string to be parsed      * @param pattern {@link SimpleDateFormat}  pattern      * @param tz time zone in which to interpret string. Defaults to the local      * time zone      *      * @return a {@link DateTimeUtil.PrecisionTime PrecisionTime} initialized      * with the parsed value, or null if parsing failed. The PrecisionTime      * contains a GMT Calendar and a precision.      *      * @pre pattern != null      */
+comment|/**    * Parses a string using {@link SimpleDateFormat} and a given pattern, and    * if present, parses a fractional seconds component. The fractional seconds    * component must begin with a decimal point ('.') followed by numeric    * digits. The precision is rounded to a maximum of 3 digits of fractional    * seconds precision (to obtain milliseconds).    *    * @param s       string to be parsed    * @param pattern {@link SimpleDateFormat}  pattern    * @param tz      time zone in which to interpret string. Defaults to the    *                local time zone    * @return a {@link DateTimeUtil.PrecisionTime PrecisionTime} initialized    * with the parsed value, or null if parsing failed. The PrecisionTime    * contains a GMT Calendar and a precision.    * @pre pattern != null    */
 specifier|public
 specifier|static
 name|PrecisionTime
@@ -644,7 +644,7 @@ return|return
 name|ret
 return|;
 block|}
-comment|/**      * Gets the active time zone based on a Calendar argument      */
+comment|/**    * Gets the active time zone based on a Calendar argument    */
 specifier|public
 specifier|static
 name|TimeZone
@@ -672,7 +672,7 @@ name|getTimeZone
 argument_list|()
 return|;
 block|}
-comment|/**      * Checks if the date/time format is valid      *      * @param pattern {@link SimpleDateFormat}  pattern      *      * @throws IllegalArgumentException if the given pattern is invalid      */
+comment|/**    * Checks if the date/time format is valid    *    * @param pattern {@link SimpleDateFormat}  pattern    * @throws IllegalArgumentException if the given pattern is invalid    */
 specifier|public
 specifier|static
 name|void
@@ -689,7 +689,7 @@ name|pattern
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Creates a new date formatter with Farrago specific options. Farrago      * parsing is strict and does not allow values such as day 0, month 13, etc.      *      * @param format {@link SimpleDateFormat}  pattern      */
+comment|/**    * Creates a new date formatter with Farrago specific options. Farrago    * parsing is strict and does not allow values such as day 0, month 13, etc.    *    * @param format {@link SimpleDateFormat}  pattern    */
 specifier|public
 specifier|static
 name|SimpleDateFormat
@@ -720,7 +720,7 @@ name|sdf
 return|;
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------
-comment|/**      * Helper class for {@link DateTimeUtil#parsePrecisionDateTimeLiteral}      */
+comment|/**    * Helper class for {@link DateTimeUtil#parsePrecisionDateTimeLiteral}    */
 specifier|public
 specifier|static
 class|class

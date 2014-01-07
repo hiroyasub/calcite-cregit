@@ -83,7 +83,7 @@ name|SqlOperator
 name|sqlOperator
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a SqlOperatorBinding.      *      * @param typeFactory Type factory      * @param sqlOperator Operator which is subject of this call      */
+comment|/**    * Creates a SqlOperatorBinding.    *    * @param typeFactory Type factory    * @param sqlOperator Operator which is subject of this call    */
 specifier|protected
 name|SqlOperatorBinding
 parameter_list|(
@@ -108,7 +108,7 @@ name|sqlOperator
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * @return bound operator      */
+comment|/**    * @return bound operator    */
 specifier|public
 name|SqlOperator
 name|getOperator
@@ -118,7 +118,7 @@ return|return
 name|sqlOperator
 return|;
 block|}
-comment|/**      * @return factory for type creation      */
+comment|/**    * @return factory for type creation    */
 specifier|public
 name|RelDataTypeFactory
 name|getTypeFactory
@@ -128,7 +128,7 @@ return|return
 name|typeFactory
 return|;
 block|}
-comment|/**      * Gets the string value of a string literal operand.      *      * @param ordinal zero-based ordinal of operand of interest      *      * @return string value      */
+comment|/**    * Gets the string value of a string literal operand.    *    * @param ordinal zero-based ordinal of operand of interest    * @return string value    */
 specifier|public
 name|String
 name|getStringLiteralOperand
@@ -143,7 +143,7 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
-comment|/**      * Gets the integer value of a numeric literal operand.      *      * @param ordinal zero-based ordinal of operand of interest      *      * @return integer value      */
+comment|/**    * Gets the integer value of a numeric literal operand.    *    * @param ordinal zero-based ordinal of operand of interest    * @return integer value    */
 specifier|public
 name|int
 name|getIntLiteralOperand
@@ -158,7 +158,7 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
-comment|/**      * Determines whether a bound operand is NULL.      *      *<p>This is only relevant for SQL validation.      *      * @param ordinal zero-based ordinal of operand of interest      * @param allowCast whether to regard CAST(constant) as a constant      *      * @return whether operand is null; false for everything except SQL      * validation      */
+comment|/**    * Determines whether a bound operand is NULL.    *    *<p>This is only relevant for SQL validation.    *    * @param ordinal   zero-based ordinal of operand of interest    * @param allowCast whether to regard CAST(constant) as a constant    * @return whether operand is null; false for everything except SQL    * validation    */
 specifier|public
 name|boolean
 name|isOperandNull
@@ -176,14 +176,14 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
-comment|/**      * @return the number of bound operands      */
+comment|/**    * @return the number of bound operands    */
 specifier|public
 specifier|abstract
 name|int
 name|getOperandCount
 parameter_list|()
 function_decl|;
-comment|/**      * Gets the type of a bound operand.      *      * @param ordinal zero-based ordinal of operand of interest      *      * @return bound operand type      */
+comment|/**    * Gets the type of a bound operand.    *    * @param ordinal zero-based ordinal of operand of interest    * @return bound operand type    */
 specifier|public
 specifier|abstract
 name|RelDataType
@@ -193,7 +193,7 @@ name|int
 name|ordinal
 parameter_list|)
 function_decl|;
-comment|/**      * Collects the types of the bound operands into a list.      *      * @return collected list      */
+comment|/**    * Collects the types of the bound operands into a list.    *    * @return collected list    */
 specifier|public
 name|List
 argument_list|<
@@ -238,7 +238,7 @@ block|}
 block|}
 return|;
 block|}
-comment|/**      * Returns the rowtype of the<code>ordinal</code>th operand, which is a      * cursor.      *      *<p>This is only implemented for {@link SqlCallBinding}.      *      * @param ordinal Ordinal of the operand      *      * @return Rowtype of the query underlying the cursor      */
+comment|/**    * Returns the rowtype of the<code>ordinal</code>th operand, which is a    * cursor.    *    *<p>This is only implemented for {@link SqlCallBinding}.    *    * @param ordinal Ordinal of the operand    * @return Rowtype of the query underlying the cursor    */
 specifier|public
 name|RelDataType
 name|getCursorOperand
@@ -253,7 +253,7 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
-comment|/**      * Retrieves information about a column list parameter.      *      * @param ordinal ordinal position of the column list parameter      * @param paramName name of the column list parameter      * @param columnList returns a list of the column names that are referenced      * in the column list parameter      *      * @return the name of the parent cursor referenced by the column list      * parameter if it is a column list parameter; otherwise, null is returned      */
+comment|/**    * Retrieves information about a column list parameter.    *    * @param ordinal    ordinal position of the column list parameter    * @param paramName  name of the column list parameter    * @param columnList returns a list of the column names that are referenced    *                   in the column list parameter    * @return the name of the parent cursor referenced by the column list    * parameter if it is a column list parameter; otherwise, null is returned    */
 specifier|public
 name|String
 name|getColumnListParamInfo
@@ -277,7 +277,7 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
-comment|/**      * Wraps a validation error with context appropriate to this operator call.      *      * @param e Validation error      *      * @return Error wrapped, if possible, with positional information      *      * @pre node != null      * @post return != null      */
+comment|/**    * Wraps a validation error with context appropriate to this operator call.    *    * @param e Validation error    * @return Error wrapped, if possible, with positional information    * @pre node != null    * @post return != null    */
 specifier|public
 specifier|abstract
 name|EigenbaseException

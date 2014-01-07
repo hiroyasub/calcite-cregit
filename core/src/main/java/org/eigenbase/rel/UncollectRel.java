@@ -98,7 +98,7 @@ extends|extends
 name|SingleRel
 block|{
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates an UncollectRel.      *      *<p>The row type of the child relational expression must contain precisely      * one column, that column must be a multiset of records.      *      * @param cluster Cluster the relational expression belongs to      * @param child Child relational expression      */
+comment|/**    * Creates an UncollectRel.    *    *<p>The row type of the child relational expression must contain precisely    * one column, that column must be a multiset of records.    *    * @param cluster Cluster the relational expression belongs to    * @param child   Child relational expression    */
 specifier|public
 name|UncollectRel
 parameter_list|(
@@ -134,7 +134,7 @@ operator|:
 literal|"invalid child rowtype"
 assert|;
 block|}
-comment|/** Creates an UncollectRel by parsing serialized output. */
+comment|/**    * Creates an UncollectRel by parsing serialized output.    */
 specifier|public
 name|UncollectRel
 parameter_list|(
@@ -208,7 +208,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**      * Returns the row type returned by applying the 'UNNEST' operation to a      * relational expression. The relational expression must have precisely one      * column, whose type must be a multiset of structs. The return type is the      * type of that column.      */
+comment|/**    * Returns the row type returned by applying the 'UNNEST' operation to a    * relational expression. The relational expression must have precisely one    * column, whose type must be a multiset of structs. The return type is the    * type of that column.    */
 specifier|public
 specifier|static
 name|RelDataType

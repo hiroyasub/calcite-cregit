@@ -50,7 +50,7 @@ extends|extends
 name|AbstractNamespace
 block|{
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a FieldNamespace.      *      * @param validator Validator      * @param dataType Data type of field      */
+comment|/**    * Creates a FieldNamespace.    *    * @param validator Validator    * @param dataType  Data type of field    */
 name|FieldNamespace
 parameter_list|(
 name|SqlValidatorImpl

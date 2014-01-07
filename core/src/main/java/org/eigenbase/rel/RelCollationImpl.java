@@ -85,7 +85,7 @@ implements|implements
 name|RelCollation
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
-comment|/**      * A collation indicating that a relation is not sorted. Ordering by no      * columns.      */
+comment|/**    * A collation indicating that a relation is not sorted. Ordering by no    * columns.    */
 specifier|public
 specifier|static
 specifier|final
@@ -111,7 +111,7 @@ argument_list|()
 argument_list|)
 argument_list|)
 decl_stmt|;
-comment|/**      * A collation that cannot be replicated by applying a sort. The only      * implementation choice is to apply operations that preserve order.      */
+comment|/**    * A collation that cannot be replicated by applying a sort. The only    * implementation choice is to apply operations that preserve order.    */
 specifier|public
 specifier|static
 specifier|final
@@ -418,7 +418,7 @@ name|toString
 argument_list|()
 return|;
 block|}
-comment|/**      * Creates a list containing one collation containing one field.      */
+comment|/**    * Creates a list containing one collation containing one field.    */
 specifier|public
 specifier|static
 name|List
@@ -464,7 +464,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**      * Checks that a collection of collations is valid.      *      * @param rowType Row type of the relational expression      * @param collationList List of collations      * @param fail Whether to fail if invalid      *      * @return Whether valid      */
+comment|/**    * Checks that a collection of collations is valid.    *    * @param rowType       Row type of the relational expression    * @param collationList List of collations    * @param fail          Whether to fail if invalid    * @return Whether valid    */
 specifier|public
 specifier|static
 name|boolean

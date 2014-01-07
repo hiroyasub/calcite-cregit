@@ -148,7 +148,7 @@ argument_list|>
 name|columnMappings
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a<code>TableFunctionRelBase</code>.      *      * @param cluster Cluster that this relational expression belongs to      * @param inputs 0 or more relational inputs      * @param rexCall function invocation expression      * @param rowType row type produced by function      * @param columnMappings column mappings associated with this function      */
+comment|/**    * Creates a<code>TableFunctionRelBase</code>.    *    * @param cluster        Cluster that this relational expression belongs to    * @param inputs         0 or more relational inputs    * @param rexCall        function invocation expression    * @param rowType        row type produced by function    * @param columnMappings column mappings associated with this function    */
 specifier|protected
 name|TableFunctionRelBase
 parameter_list|(
@@ -225,7 +225,7 @@ name|columnMappings
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Creates a TableFunctionRelBase by parsing serialized output. */
+comment|/**    * Creates a TableFunctionRelBase by parsing serialized output.    */
 specifier|protected
 name|TableFunctionRelBase
 parameter_list|(
@@ -454,7 +454,7 @@ name|rowType
 argument_list|)
 return|;
 block|}
-comment|/**      * @return set of mappings known for this table function, or null if unknown      * (not the same as empty!)      */
+comment|/**    * @return set of mappings known for this table function, or null if unknown    * (not the same as empty!)    */
 specifier|public
 name|Set
 argument_list|<

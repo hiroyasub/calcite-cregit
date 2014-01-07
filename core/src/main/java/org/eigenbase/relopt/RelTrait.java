@@ -23,17 +23,17 @@ interface|interface
 name|RelTrait
 block|{
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Returns the RelTraitDef that defines this RelTrait.      *      * @return the RelTraitDef that defines this RelTrait      */
+comment|/**    * Returns the RelTraitDef that defines this RelTrait.    *    * @return the RelTraitDef that defines this RelTrait    */
 name|RelTraitDef
 name|getTraitDef
 parameter_list|()
 function_decl|;
-comment|/**      * See<a href="#EqualsHashCodeNote">note about equals() and hashCode()</a>.      */
+comment|/**    * See<a href="#EqualsHashCodeNote">note about equals() and hashCode()</a>.    */
 name|int
 name|hashCode
 parameter_list|()
 function_decl|;
-comment|/**      * See<a href="#EqualsHashCodeNote">note about equals() and hashCode()</a>.      */
+comment|/**    * See<a href="#EqualsHashCodeNote">note about equals() and hashCode()</a>.    */
 name|boolean
 name|equals
 parameter_list|(
@@ -41,7 +41,7 @@ name|Object
 name|o
 parameter_list|)
 function_decl|;
-comment|/**      * Returns whether this trait subsumes a given trait.      *      *<p>Must form a partial order: must be reflective (t subsumes t),      * anti-symmetric (if t1 subsumes t2 and t1 != t2 then t2 does not subsume      * t1),      * and transitive (if t1 subsumes t2 and t2 subsumes t3, then t1 subsumes      * t3)</p>      *      *<p>May traits cannot be substituted, in which case, this method should      * return {@code equals(trait)}.</p>      */
+comment|/**    * Returns whether this trait subsumes a given trait.    *    *<p>Must form a partial order: must be reflective (t subsumes t),    * anti-symmetric (if t1 subsumes t2 and t1 != t2 then t2 does not subsume    * t1),    * and transitive (if t1 subsumes t2 and t2 subsumes t3, then t1 subsumes    * t3)</p>    *    *<p>May traits cannot be substituted, in which case, this method should    * return {@code equals(trait)}.</p>    */
 name|boolean
 name|subsumes
 parameter_list|(
@@ -49,7 +49,7 @@ name|RelTrait
 name|trait
 parameter_list|)
 function_decl|;
-comment|/**      * Returns a succinct name for this trait. The planner may use this String      * to describe the trait.      */
+comment|/**    * Returns a succinct name for this trait. The planner may use this String    * to describe the trait.    */
 name|String
 name|toString
 parameter_list|()

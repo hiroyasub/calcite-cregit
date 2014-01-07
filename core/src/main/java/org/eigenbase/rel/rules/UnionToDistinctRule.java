@@ -61,7 +61,7 @@ name|UnionToDistinctRule
 argument_list|()
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a UnionToDistinctRule.      */
+comment|/**    * Creates a UnionToDistinctRule.    */
 specifier|private
 name|UnionToDistinctRule
 parameter_list|()

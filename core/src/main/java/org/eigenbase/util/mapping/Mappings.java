@@ -66,7 +66,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Utility functions related to mappings.  * @see MappingType  * @see Mapping  * @see Permutation  */
+comment|/**  * Utility functions related to mappings.  *  * @see MappingType  * @see Mapping  * @see Permutation  */
 end_comment
 
 begin_class
@@ -82,7 +82,7 @@ parameter_list|()
 block|{
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Creates a mapping with required properties.      */
+comment|/**    * Creates a mapping with required properties.    */
 specifier|public
 specifier|static
 name|Mapping
@@ -207,7 +207,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**      * Creates the identity mapping.      *      *<p>For example, {@code createIdentity(2)} returns the mapping      * {0:0, 1:1, 2:2}.      *      * @param fieldCount Number of sources/targets      * @return Identity mapping      */
+comment|/**    * Creates the identity mapping.    *    *<p>For example, {@code createIdentity(2)} returns the mapping    * {0:0, 1:1, 2:2}.    *    * @param fieldCount Number of sources/targets    * @return Identity mapping    */
 specifier|public
 specifier|static
 name|IdentityMapping
@@ -227,7 +227,7 @@ name|fieldCount
 argument_list|)
 return|;
 block|}
-comment|/**      * Divides one mapping by another.      *      *<p>{@code divide(A, B)} returns a mapping C such that B . C (the mapping      * B followed by the mapping C) is equivalent to A.      *      * @param mapping1 First mapping      * @param mapping2 Second mapping      * @return Mapping mapping3 such that mapping1 = mapping2 . mapping3      */
+comment|/**    * Divides one mapping by another.    *    *<p>{@code divide(A, B)} returns a mapping C such that B . C (the mapping    * B followed by the mapping C) is equivalent to A.    *    * @param mapping1 First mapping    * @param mapping2 Second mapping    * @return Mapping mapping3 such that mapping1 = mapping2 . mapping3    */
 specifier|public
 specifier|static
 name|Mapping
@@ -339,7 +339,7 @@ return|return
 name|remaining
 return|;
 block|}
-comment|/**      * Multiplies one mapping by another.      *      *<p>{@code divide(A, B)} returns a mapping C such that B . C (the mapping      * B followed by the mapping C) is equivalent to A.      *      * @param mapping1 First mapping      * @param mapping2 Second mapping      * @return Mapping mapping3 such that mapping1 = mapping2 . mapping3      */
+comment|/**    * Multiplies one mapping by another.    *    *<p>{@code divide(A, B)} returns a mapping C such that B . C (the mapping    * B followed by the mapping C) is equivalent to A.    *    * @param mapping1 First mapping    * @param mapping2 Second mapping    * @return Mapping mapping3 such that mapping1 = mapping2 . mapping3    */
 specifier|public
 specifier|static
 name|Mapping
@@ -451,7 +451,7 @@ return|return
 name|product
 return|;
 block|}
-comment|/**      * Applies a mapping to a BitSet.      *      *<p>If the mapping does not affect the bit set, returns the original.      * Never changes the original.      *      * @param mapping Mapping      * @param bitSet Bit set      * @return Bit set with mapping applied      */
+comment|/**    * Applies a mapping to a BitSet.    *    *<p>If the mapping does not affect the bit set, returns the original.    * Never changes the original.    *    * @param mapping Mapping    * @param bitSet  Bit set    * @return Bit set with mapping applied    */
 specifier|public
 specifier|static
 name|BitSet
@@ -522,7 +522,7 @@ return|return
 name|newBitSet
 return|;
 block|}
-comment|/**      * Applies a mapping to a list.      *      * @param mapping Mapping      * @param list List      * @param<T> Element type      * @return List with elements permuted according to mapping      */
+comment|/**    * Applies a mapping to a list.    *    * @param mapping Mapping    * @param list    List    * @param<T>     Element type    * @return List with elements permuted according to mapping    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -719,7 +719,7 @@ block|}
 block|}
 return|;
 block|}
-comment|/**      * Creates a view of a list, permuting according to a mapping.      *      * @param mapping Mapping      * @param list List      * @param<T> Element type      * @return Permuted view of list      */
+comment|/**    * Creates a view of a list, permuting according to a mapping.    *    * @param mapping Mapping    * @param list    List    * @param<T>     Element type    * @return Permuted view of list    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -792,7 +792,7 @@ block|}
 block|}
 return|;
 block|}
-comment|/** Returns a mapping as a list such that {@code list.get(source)} is      * {@code mapping.getTarget(source)} and {@code list.size()} is      * {@code mapping.getSourceCount()}. */
+comment|/**    * Returns a mapping as a list such that {@code list.get(source)} is    * {@code mapping.getTarget(source)} and {@code list.size()} is    * {@code mapping.getSourceCount()}.    */
 specifier|public
 specifier|static
 name|List
@@ -857,7 +857,7 @@ block|}
 block|}
 return|;
 block|}
-comment|/** Converts a {@link Map} of integers to a {@link TargetMapping}. */
+comment|/**    * Converts a {@link Map} of integers to a {@link TargetMapping}.    */
 specifier|public
 specifier|static
 name|TargetMapping
@@ -1015,7 +1015,7 @@ return|return
 name|mapping
 return|;
 block|}
-comment|/** Returns whether a mapping is the identity. */
+comment|/**    * Returns whether a mapping is the identity.    */
 specifier|public
 specifier|static
 name|boolean
@@ -1081,7 +1081,7 @@ return|return
 literal|true
 return|;
 block|}
-comment|/** Creates a mapping that consists of a set of contiguous ranges.      *      *<p>For example,</p>      *      *<pre>createShiftMapping(60,      *     100, 0, 3,      *     200, 50, 5);      *</pre>      *      *<p>creates</p>      *      *<table>      *<tr><th>Source</th><th>Target</th></tr>      *<tr><td>0</td><td>100</td></tr>      *<tr><td>1</td><td>101</td></tr>      *<tr><td>2</td><td>102</td></tr>      *<tr><td>3</td><td>-1</td></tr>      *<tr><td>...</td><td>-1</td></tr>      *<tr><td>50</td><td>200</td></tr>      *<tr><td>51</td><td>201</td></tr>      *<tr><td>52</td><td>202</td></tr>      *<tr><td>53</td><td>203</td></tr>      *<tr><td>54</td><td>204</td></tr>      *<tr><td>55</td><td>-1</td></tr>      *<tr><td>...</td><td>-1</td></tr>      *<tr><td>59</td><td>-1</td></tr>      *</table></p>      *      * @param sourceCount Maximum value of {@code source}      * @param ints Collection of ranges, each {@code (target, source, count)}      * @return Mapping that maps from source ranges to target ranges      */
+comment|/**    * Creates a mapping that consists of a set of contiguous ranges.    *    *<p>For example,</p>    *    *<pre>createShiftMapping(60,    *     100, 0, 3,    *     200, 50, 5);    *</pre>    *    *<p>creates</p>    *    *<table>    *<tr><th>Source</th><th>Target</th></tr>    *<tr><td>0</td><td>100</td></tr>    *<tr><td>1</td><td>101</td></tr>    *<tr><td>2</td><td>102</td></tr>    *<tr><td>3</td><td>-1</td></tr>    *<tr><td>...</td><td>-1</td></tr>    *<tr><td>50</td><td>200</td></tr>    *<tr><td>51</td><td>201</td></tr>    *<tr><td>52</td><td>202</td></tr>    *<tr><td>53</td><td>203</td></tr>    *<tr><td>54</td><td>204</td></tr>    *<tr><td>55</td><td>-1</td></tr>    *<tr><td>...</td><td>-1</td></tr>    *<tr><td>59</td><td>-1</td></tr>    *</table></p>    *    * @param sourceCount Maximum value of {@code source}    * @param ints        Collection of ranges, each    *                    {@code (target, source, count)}    * @return Mapping that maps from source ranges to target ranges    */
 specifier|public
 specifier|static
 name|TargetMapping
@@ -1287,7 +1287,7 @@ return|return
 name|mapping
 return|;
 block|}
-comment|/** Creates a mapping by appending two mappings. */
+comment|/**    * Creates a mapping by appending two mappings.    */
 specifier|public
 specifier|static
 name|TargetMapping
@@ -1449,7 +1449,7 @@ return|return
 name|mapping
 return|;
 block|}
-comment|/** Creates a mapping by merging two mappings. There must be no clashes. */
+comment|/**    * Creates a mapping by merging two mappings. There must be no clashes.    */
 specifier|public
 specifier|static
 name|TargetMapping
@@ -1611,7 +1611,7 @@ return|return
 name|mapping
 return|;
 block|}
-comment|/** Returns a mapping that shifts a given mapping's source by a given      * offset.      *      *<p>For example, given {@code mapping} with sourceCount=2, targetCount=8,      * and (source, target) entries {[0: 5], [1: 7]}, offsetSource(mapping, 3)      * returns a mapping with sourceCount=5, targetCount=8,      * and (source, target) entries {[3: 5], [4: 7]}.      *      * @param mapping Input mapping      * @param offset Offset to be applied to each source      * @param sourceCount New source count; must be at least {@code mapping}'s      * source count plus {@code offset}      * @return Shifted mapping      */
+comment|/**    * Returns a mapping that shifts a given mapping's source by a given    * offset.    *    *<p>For example, given {@code mapping} with sourceCount=2, targetCount=8,    * and (source, target) entries {[0: 5], [1: 7]}, offsetSource(mapping, 3)    * returns a mapping with sourceCount=5, targetCount=8,    * and (source, target) entries {[3: 5], [4: 7]}.    *    * @param mapping     Input mapping    * @param offset      Offset to be applied to each source    * @param sourceCount New source count; must be at least {@code mapping}'s    *                    source count plus {@code offset}    * @return Shifted mapping    */
 specifier|public
 specifier|static
 name|TargetMapping
@@ -1710,7 +1710,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/** Returns a mapping that shifts a given mapping's source and target by a      * given offset.      *      *<p>For example, given {@code mapping} with sourceCount=2, targetCount=8,      * and (source, target) entries {[0: 5], [1: 7]}, offsetSource(mapping, 3)      * returns a mapping with sourceCount=5, targetCount=8,      * and (source, target) entries {[3: 8], [4: 10]}.      *      * @param mapping Input mapping      * @param offset Offset to be applied to each source      * @param sourceCount New source count; must be at least {@code mapping}'s      * source count plus {@code offset}      * @return Shifted mapping      */
+comment|/**    * Returns a mapping that shifts a given mapping's source and target by a    * given offset.    *    *<p>For example, given {@code mapping} with sourceCount=2, targetCount=8,    * and (source, target) entries {[0: 5], [1: 7]}, offsetSource(mapping, 3)    * returns a mapping with sourceCount=5, targetCount=8,    * and (source, target) entries {[3: 8], [4: 10]}.    *    * @param mapping     Input mapping    * @param offset      Offset to be applied to each source    * @param sourceCount New source count; must be at least {@code mapping}'s    *                    source count plus {@code offset}    * @return Shifted mapping    */
 specifier|public
 specifier|static
 name|TargetMapping
@@ -1836,7 +1836,7 @@ argument_list|)
 return|;
 block|}
 comment|//~ Inner Interfaces -------------------------------------------------------
-comment|/**      * Core interface of all mappings.      */
+comment|/**    * Core interface of all mappings.    */
 specifier|public
 specifier|static
 interface|interface
@@ -1847,18 +1847,18 @@ argument_list|<
 name|IntPair
 argument_list|>
 block|{
-comment|/**          * Returns the mapping type.          *          * @return Mapping type          */
+comment|/**      * Returns the mapping type.      *      * @return Mapping type      */
 name|MappingType
 name|getMappingType
 parameter_list|()
 function_decl|;
-comment|/**          * Returns the number of elements in the mapping.          */
+comment|/**      * Returns the number of elements in the mapping.      */
 name|int
 name|size
 parameter_list|()
 function_decl|;
 block|}
-comment|/**      * Mapping where every source has a target. But:      *      *<ul>      *<li>A target may not have a source.      *<li>May not be finite.      *</ul>      */
+comment|/**    * Mapping where every source has a target. But:    *    *<ul>    *<li>A target may not have a source.    *<li>May not be finite.    *</ul>    */
 specifier|public
 specifier|static
 interface|interface
@@ -1866,7 +1866,7 @@ name|FunctionMapping
 extends|extends
 name|CoreMapping
 block|{
-comment|/**          * Returns the target that a source maps to, or -1 if it is not mapped.          */
+comment|/**      * Returns the target that a source maps to, or -1 if it is not mapped.      */
 name|int
 name|getTargetOpt
 parameter_list|(
@@ -1874,7 +1874,7 @@ name|int
 name|source
 parameter_list|)
 function_decl|;
-comment|/**          * Returns the target that a source maps to.          *          * @param source source          *          * @return target          *          * @throws NoElementException if source is not mapped          */
+comment|/**      * Returns the target that a source maps to.      *      * @param source source      * @return target      * @throws NoElementException if source is not mapped      */
 name|int
 name|getTarget
 parameter_list|(
@@ -1891,7 +1891,7 @@ name|getSourceCount
 parameter_list|()
 function_decl|;
 block|}
-comment|/**      * Mapping suitable for sourcing columns.      *      *<p>Properties:      *      *<ul>      *<li>It has a finite number of sources and targets      *<li>Each target has exactly one source      *<li>Each source has at most one target      *</ul>      *      *<p>TODO: figure out which interfaces this should extend      */
+comment|/**    * Mapping suitable for sourcing columns.    *    *<p>Properties:    *    *<ul>    *<li>It has a finite number of sources and targets    *<li>Each target has exactly one source    *<li>Each source has at most one target    *</ul>    *    *<p>TODO: figure out which interfaces this should extend    */
 specifier|public
 specifier|static
 interface|interface
@@ -1941,7 +1941,7 @@ name|inverse
 parameter_list|()
 function_decl|;
 block|}
-comment|/**      * Mapping suitable for mapping columns to a target.      *      *<p>Properties:      *      *<ul>      *<li>It has a finite number of sources and targets      *<li>Each target has at most one source      *<li>Each source has exactly one target      *</ul>      *      *<p>TODO: figure out which interfaces this should extend      */
+comment|/**    * Mapping suitable for mapping columns to a target.    *    *<p>Properties:    *    *<ul>    *<li>It has a finite number of sources and targets    *<li>Each target has at most one source    *<li>Each source has exactly one target    *</ul>    *    *<p>TODO: figure out which interfaces this should extend    */
 specifier|public
 specifier|static
 interface|interface
@@ -2217,7 +2217,7 @@ return|return
 literal|true
 return|;
 block|}
-comment|/**          * Returns a string representation of this mapping.          *          *<p>For example, the mapping          *          *<table border="1">          *<tr>          *<th>source</th>          *<td>0</td>          *<td>1</td>          *<td>2</td>          *</tr>          *<tr>          *<th>target</th>          *<td>-1</td>          *<td>3</td>          *<td>2</td>          *</tr>          *</table>          *          *<table border="1">          *<tr>          *<th>target</th>          *<td>0</td>          *<td>1</td>          *<td>2</td>          *<td>3</td>          *</tr>          *<tr>          *<th>source</th>          *<td>-1</td>          *<td>-1</td>          *<td>2</td>          *<td>1</td>          *</tr>          *</table>          *          * is represented by the string "[1:3, 2:2]".          *          *<p>This method relies upon the optional method {@link #iterator()}.          */
+comment|/**      * Returns a string representation of this mapping.      *      *<p>For example, the mapping      *      *<table border="1">      *<tr>      *<th>source</th>      *<td>0</td>      *<td>1</td>      *<td>2</td>      *</tr>      *<tr>      *<th>target</th>      *<td>-1</td>      *<td>3</td>      *<td>2</td>      *</tr>      *</table>      *      *<table border="1">      *<tr>      *<th>target</th>      *<td>0</td>      *<td>1</td>      *<td>2</td>      *<td>3</td>      *</tr>      *<tr>      *<th>source</th>      *<td>-1</td>      *<td>-1</td>      *<td>2</td>      *<td>1</td>      *</tr>      *</table>      *      * is represented by the string "[1:3, 2:2]".      *      *<p>This method relies upon the optional method {@link #iterator()}.      */
 specifier|public
 name|String
 name|toString
@@ -2500,15 +2500,15 @@ argument_list|()
 throw|;
 block|}
 block|}
-comment|/**      * Thrown when a mapping is expected to return one element but returns      * several.      */
+comment|/**    * Thrown when a mapping is expected to return one element but returns    * several.    */
 specifier|public
 specifier|static
 class|class
 name|TooManyElementsException
 extends|extends
 name|RuntimeException
-block|{     }
-comment|/**      * Thrown when a mapping is expected to return one element but returns none.      */
+block|{   }
+comment|/**    * Thrown when a mapping is expected to return one element but returns none.    */
 specifier|public
 specifier|static
 class|class
@@ -2516,7 +2516,7 @@ name|NoElementException
 extends|extends
 name|RuntimeException
 block|{
-comment|/**          * Creates a NoElementException.          *          * @param message Message          */
+comment|/**      * Creates a NoElementException.      *      * @param message Message      */
 specifier|public
 name|NoElementException
 parameter_list|(
@@ -2531,7 +2531,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * A mapping where a source has at most one target, and every target has at      * most one source.      */
+comment|/**    * A mapping where a source has at most one target, and every target has at    * most one source.    */
 specifier|public
 specifier|static
 class|class
@@ -2562,7 +2562,7 @@ specifier|final
 name|MappingType
 name|mappingType
 decl_stmt|;
-comment|/**          * Creates a partial mapping.          *          *<p>Initially, no element is mapped to any other:          *          *<table border="1">          *<tr>          *<th>source</th>          *<td>0</td>          *<td>1</td>          *<td>2</td>          *</tr>          *<tr>          *<th>target</th>          *<td>-1</td>          *<td>-1</td>          *<td>-1</td>          *</tr>          *</table>          *          *<table border="1">          *<tr>          *<th>target</th>          *<td>0</td>          *<td>1</td>          *<td>2</td>          *<td>3</td>          *</tr>          *<tr>          *<th>source</th>          *<td>-1</td>          *<td>-1</td>          *<td>-1</td>          *<td>-1</td>          *</tr>          *</table>          *          * @param sourceCount Number of source elements          * @param targetCount Number of target elements          * @param mappingType Mapping type; must not allow multiple sources per          * target or multiple targets per source          */
+comment|/**      * Creates a partial mapping.      *      *<p>Initially, no element is mapped to any other:      *      *<table border="1">      *<tr>      *<th>source</th>      *<td>0</td>      *<td>1</td>      *<td>2</td>      *</tr>      *<tr>      *<th>target</th>      *<td>-1</td>      *<td>-1</td>      *<td>-1</td>      *</tr>      *</table>      *      *<table border="1">      *<tr>      *<th>target</th>      *<td>0</td>      *<td>1</td>      *<td>2</td>      *<td>3</td>      *</tr>      *<tr>      *<th>source</th>      *<td>-1</td>      *<td>-1</td>      *<td>-1</td>      *<td>-1</td>      *</tr>      *</table>      *      * @param sourceCount Number of source elements      * @param targetCount Number of target elements      * @param mappingType Mapping type; must not allow multiple sources per      *                    target or multiple targets per source      */
 specifier|public
 name|PartialMapping
 parameter_list|(
@@ -2639,7 +2639,7 @@ literal|1
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**          * Creates a partial mapping from a list. For example,<code>          * PartialMapping({1, 2, 4}, 6)</code> creates the mapping          *          *<table border="1">          *<tr>          *<th>source</th>          *<td>0</td>          *<td>1</td>          *<td>2</td>          *<td>3</td>          *<td>4</td>          *<td>5</td>          *</tr>          *<tr>          *<th>target</th>          *<td>-1</td>          *<td>0</td>          *<td>1</td>          *<td>-1</td>          *<td>2</td>          *<td>-1</td>          *</tr>          *</table>          *          * @param sourceList List whose i'th element is the source of target #i          * @param sourceCount Number of elements in the source domain          * @param mappingType Mapping type, must be {@link          * org.eigenbase.util.mapping.MappingType#PartialSurjection} or          * stronger.          */
+comment|/**      * Creates a partial mapping from a list. For example,<code>      * PartialMapping({1, 2, 4}, 6)</code> creates the mapping      *      *<table border="1">      *<tr>      *<th>source</th>      *<td>0</td>      *<td>1</td>      *<td>2</td>      *<td>3</td>      *<td>4</td>      *<td>5</td>      *</tr>      *<tr>      *<th>target</th>      *<td>-1</td>      *<td>0</td>      *<td>1</td>      *<td>-1</td>      *<td>2</td>      *<td>-1</td>      *</tr>      *</table>      *      * @param sourceList  List whose i'th element is the source of target #i      * @param sourceCount Number of elements in the source domain      * @param mappingType Mapping type, must be      *                    {@link org.eigenbase.util.mapping.MappingType#PartialSurjection}      *                    or stronger.      */
 specifier|public
 name|PartialMapping
 parameter_list|(
@@ -3263,10 +3263,12 @@ init|=
 operator|-
 literal|1
 decl_stmt|;
+name|MappingItr
+parameter_list|()
 block|{
 name|advance
-parameter_list|()
-constructor_decl|;
+argument_list|()
+expr_stmt|;
 block|}
 specifier|public
 name|boolean
@@ -3350,7 +3352,7 @@ throw|;
 block|}
 block|}
 block|}
-comment|/**      * A surjection with inverse has precisely one source for each target.      * (Whereas a general surjection has at least one source for each target.)      * Every source has at most one target.      *      *<p>If you call {@link #set} on a target, the target's previous source      * will be lost.      */
+comment|/**    * A surjection with inverse has precisely one source for each target.    * (Whereas a general surjection has at least one source for each target.)    * Every source has at most one target.    *    *<p>If you call {@link #set} on a target, the target's previous source    * will be lost.    */
 specifier|static
 class|class
 name|SurjectionWithInverse
@@ -3378,7 +3380,7 @@ name|InverseSurjection
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**          * Creates a mapping between a source and a target.          *          *<p>It is an error to map a target to a source which already has a          * target.          *          *<p>If you map a source to a target which already has a source, the          * old source becomes an orphan.          *          * @param source source          * @param target target          */
+comment|/**      * Creates a mapping between a source and a target.      *      *<p>It is an error to map a target to a source which already has a      * target.      *      *<p>If you map a source to a target which already has a source, the      * old source becomes an orphan.      *      * @param source source      * @param target target      */
 specifier|public
 name|void
 name|set
@@ -3474,7 +3476,7 @@ specifier|final
 name|int
 name|size
 decl_stmt|;
-comment|/**          * Creates an identity mapping.          *          * @param size Size, or -1 if infinite.          */
+comment|/**      * Creates an identity mapping.      *      * @param size Size, or -1 if infinite.      */
 specifier|public
 name|IdentityMapping
 parameter_list|(
@@ -4134,7 +4136,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**      * Implementation of {@link Mapping} where a source can have at most one      * target, and a target can have any number of sources. The source count      * must be finite, but the target count may be infinite.      *      *<p>The implementation uses an array for the forward-mapping, but does not      * store the backward mapping.      */
+comment|/**    * Implementation of {@link Mapping} where a source can have at most one    * target, and a target can have any number of sources. The source count    * must be finite, but the target count may be infinite.    *    *<p>The implementation uses an array for the forward-mapping, but does not    * store the backward mapping.    */
 specifier|private
 specifier|static
 class|class
@@ -4581,7 +4583,7 @@ index|]
 return|;
 block|}
 block|}
-comment|/**      * Decorator which converts any {@link Mapping} into the inverse of itself.      *      *<p>If the mapping does not have an inverse -- for example, if a given      * source can have more than one target -- then the corresponding method      * call of the underlying mapping will raise a runtime exception.      */
+comment|/**    * Decorator which converts any {@link Mapping} into the inverse of itself.    *    *<p>If the mapping does not have an inverse -- for example, if a given    * source can have more than one target -- then the corresponding method    * call of the underlying mapping will raise a runtime exception.    */
 specifier|private
 specifier|static
 class|class

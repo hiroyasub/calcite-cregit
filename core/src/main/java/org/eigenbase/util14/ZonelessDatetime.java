@@ -58,7 +58,7 @@ implements|,
 name|Serializable
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
-comment|/**      * SerialVersionUID created with JDK 1.5 serialver tool.      */
+comment|/**    * SerialVersionUID created with JDK 1.5 serialver tool.    */
 specifier|private
 specifier|static
 specifier|final
@@ -69,7 +69,7 @@ operator|-
 literal|1274713852537224763L
 decl_stmt|;
 comment|//~ Instance fields --------------------------------------------------------
-comment|/**      * Treat this as a protected field. It is only made public to simplify Java      * code generation.      */
+comment|/**    * Treat this as a protected field. It is only made public to simplify Java    * code generation.    */
 specifier|public
 name|long
 name|internalTime
@@ -143,7 +143,7 @@ name|value
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Gets the time portion of this zoneless datetime.      */
+comment|/**    * Gets the time portion of this zoneless datetime.    */
 specifier|public
 name|long
 name|getTimeValue
@@ -179,7 +179,7 @@ return|return
 name|timePart
 return|;
 block|}
-comment|/**      * Gets the date portion of this zoneless datetime.      */
+comment|/**    * Gets the date portion of this zoneless datetime.    */
 specifier|public
 name|long
 name|getDateValue
@@ -192,7 +192,7 @@ name|getTimeValue
 argument_list|()
 return|;
 block|}
-comment|/**      * Clears the date component of this datetime      */
+comment|/**    * Clears the date component of this datetime    */
 specifier|public
 name|void
 name|clearDate
@@ -204,7 +204,7 @@ name|getTimeValue
 argument_list|()
 expr_stmt|;
 block|}
-comment|/**      * Clears the time component of this datetime      */
+comment|/**    * Clears the time component of this datetime    */
 specifier|public
 name|void
 name|clearTime
@@ -216,7 +216,7 @@ name|getDateValue
 argument_list|()
 expr_stmt|;
 block|}
-comment|/**      * Gets the value of this datetime as a milliseconds value for {@link      * java.sql.Time}.      *      * @param zone time zone in which to generate a time value for      */
+comment|/**    * Gets the value of this datetime as a milliseconds value for {@link    * java.sql.Time}.    *    * @param zone time zone in which to generate a time value for    */
 specifier|public
 name|long
 name|getJdbcTime
@@ -242,7 +242,7 @@ name|timeValue
 argument_list|)
 return|;
 block|}
-comment|/**      * Gets the value of this datetime as a milliseconds value for {@link      * java.sql.Date}.      *      * @param zone time zone in which to generate a time value for      */
+comment|/**    * Gets the value of this datetime as a milliseconds value for {@link    * java.sql.Date}.    *    * @param zone time zone in which to generate a time value for    */
 specifier|public
 name|long
 name|getJdbcDate
@@ -334,7 +334,7 @@ name|getTimeInMillis
 argument_list|()
 return|;
 block|}
-comment|/**      * Gets the value of this datetime as a milliseconds value for {@link      * java.sql.Timestamp}.      *      * @param zone time zone in which to generate a time value for      */
+comment|/**    * Gets the value of this datetime as a milliseconds value for {@link    * java.sql.Timestamp}.    *    * @param zone time zone in which to generate a time value for    */
 specifier|public
 name|long
 name|getJdbcTimestamp
@@ -517,14 +517,14 @@ name|getTimeInMillis
 argument_list|()
 return|;
 block|}
-comment|/**      * Returns this datetime as a Jdbc object      */
+comment|/**    * Returns this datetime as a Jdbc object    */
 specifier|public
 specifier|abstract
 name|Object
 name|toJdbcObject
 parameter_list|()
 function_decl|;
-comment|/**      * Gets a temporary Calendar set to the specified time zone. The same      * Calendar is returned on subsequent calls.      */
+comment|/**    * Gets a temporary Calendar set to the specified time zone. The same    * Calendar is returned on subsequent calls.    */
 specifier|protected
 name|Calendar
 name|getCalendar
@@ -564,7 +564,7 @@ return|return
 name|tempCal
 return|;
 block|}
-comment|/**      * Gets a temporary formatter for a zoneless date time. The same formatter      * is returned on subsequent calls.      *      * @param format a {@link java.text.SimpleDateFormat} format string      */
+comment|/**    * Gets a temporary formatter for a zoneless date time. The same formatter    * is returned on subsequent calls.    *    * @param format a {@link java.text.SimpleDateFormat} format string    */
 specifier|protected
 name|DateFormat
 name|getFormatter

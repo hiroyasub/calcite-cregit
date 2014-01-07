@@ -834,7 +834,7 @@ return|return
 literal|false
 return|;
 block|}
-comment|/** Converts the collected terms and values to a string. Does not write to      * the parent writer. */
+comment|/**    * Converts the collected terms and values to a string. Does not write to    * the parent writer.    */
 specifier|public
 name|String
 name|simple

@@ -818,7 +818,7 @@ name|oldRel
 argument_list|)
 return|;
 block|}
-comment|/**      * Maps the ordinal of a field pre-flattening to the ordinal of the      * corresponding field post-flattening, and optionally returns its type.      *      * @param oldOrdinal Pre-flattening ordinal      *      * @return Post-flattening ordinal      */
+comment|/**    * Maps the ordinal of a field pre-flattening to the ordinal of the    * corresponding field post-flattening, and optionally returns its type.    *    * @param oldOrdinal Pre-flattening ordinal    * @return Post-flattening ordinal    */
 specifier|protected
 name|int
 name|getNewForOldInput
@@ -937,7 +937,7 @@ return|return
 name|newOrdinal
 return|;
 block|}
-comment|/**      * Returns a mapping between old and new fields.      *      * @param oldRel Old relational expression      * @return Mapping between fields of old and new      */
+comment|/**    * Returns a mapping between old and new fields.    *    * @param oldRel Old relational expression    * @return Mapping between fields of old and new    */
 specifier|private
 name|Mappings
 operator|.

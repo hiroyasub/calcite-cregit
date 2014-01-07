@@ -196,7 +196,7 @@ name|RexNode
 argument_list|>
 name|exps
 decl_stmt|;
-comment|/**      * Values defined in {@link Flags}.      */
+comment|/**    * Values defined in {@link Flags}.    */
 specifier|protected
 name|int
 name|flags
@@ -210,7 +210,7 @@ argument_list|>
 name|collationList
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a Project.      *      * @param cluster Cluster this relational expression belongs to      * @param traits traits of this rel      * @param child input relational expression      * @param exps List of expressions for the input columns      * @param rowType output row type      * @param flags values as in {@link Flags}      * @param collationList List of sort keys      *      * @deprecated Use the other constructor, without collation list;      * this constructor will be removed after optiq-0.4.16.      */
+comment|/**    * Creates a Project.    *    * @param cluster       Cluster this relational expression belongs to    * @param traits        traits of this rel    * @param child         input relational expression    * @param exps          List of expressions for the input columns    * @param rowType       output row type    * @param flags         values as in {@link Flags}    * @param collationList List of sort keys    * @deprecated Use the other constructor, without collation list;    * this constructor will be removed after optiq-0.4.16.    */
 specifier|protected
 name|ProjectRelBase
 parameter_list|(
@@ -290,7 +290,7 @@ literal|"remove after optiq-0.4.16"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Creates a Project.      *      * @param cluster Cluster this relational expression belongs to      * @param traits traits of this rel      * @param child input relational expression      * @param exps List of expressions for the input columns      * @param rowType output row type      * @param flags values as in {@link Flags}      */
+comment|/**    * Creates a Project.    *    * @param cluster Cluster this relational expression belongs to    * @param traits  traits of this rel    * @param child   input relational expression    * @param exps    List of expressions for the input columns    * @param rowType output row type    * @param flags   values as in {@link Flags}    */
 specifier|protected
 name|ProjectRelBase
 parameter_list|(
@@ -396,7 +396,7 @@ literal|true
 argument_list|)
 assert|;
 block|}
-comment|/** Creates a ProjectRelBase by parsing serialized output. */
+comment|/**    * Creates a ProjectRelBase by parsing serialized output.    */
 specifier|protected
 name|ProjectRelBase
 parameter_list|(
@@ -489,7 +489,7 @@ return|return
 name|exps
 return|;
 block|}
-comment|/**      * Returns the project expressions.      */
+comment|/**    * Returns the project expressions.    */
 specifier|public
 name|List
 argument_list|<
@@ -502,7 +502,7 @@ return|return
 name|exps
 return|;
 block|}
-comment|/** Returns a list of (expression, name) pairs. Convenient for various      * transformations. */
+comment|/**    * Returns a list of (expression, name) pairs. Convenient for various    * transformations.    */
 specifier|public
 specifier|final
 name|List
@@ -812,7 +812,7 @@ return|;
 end_return
 
 begin_function
-unit|}      public
+unit|}    public
 name|RelOptCost
 name|computeSelfCost
 parameter_list|(
@@ -1022,7 +1022,7 @@ name|AnonFields
 init|=
 literal|2
 decl_stmt|;
-comment|/**          * Whether the resulting row is to be a synthetic class whose fields are          * the aliases of the fields.<code>boxed</code> must be true unless          * there is only one field:<code>select {dept.deptno} from dept</code>          * is boxed,<code>select dept.deptno from dept</code> is not.          */
+comment|/**      * Whether the resulting row is to be a synthetic class whose fields are      * the aliases of the fields.<code>boxed</code> must be true unless      * there is only one field:<code>select {dept.deptno} from dept</code>      * is boxed,<code>select dept.deptno from dept</code> is not.      */
 name|int
 name|Boxed
 init|=
@@ -1041,7 +1041,7 @@ comment|//~ Inner Classes ------------------------------------------------------
 end_comment
 
 begin_comment
-comment|/**      * Visitor which walks over a program and checks validity.      */
+comment|/**    * Visitor which walks over a program and checks validity.    */
 end_comment
 
 begin_class
@@ -1070,7 +1070,7 @@ name|failCount
 init|=
 literal|0
 decl_stmt|;
-comment|/**          * Creates a Checker.          *          * @param inputRowType Input row type to expressions          * @param fail Whether to throw if checker finds an error          */
+comment|/**      * Creates a Checker.      *      * @param inputRowType Input row type to expressions      * @param fail         Whether to throw if checker finds an error      */
 specifier|private
 name|Checker
 parameter_list|(

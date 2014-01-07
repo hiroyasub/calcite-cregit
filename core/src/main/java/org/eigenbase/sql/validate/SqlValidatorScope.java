@@ -59,17 +59,17 @@ interface|interface
 name|SqlValidatorScope
 block|{
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Returns the validator which created this scope.      */
+comment|/**    * Returns the validator which created this scope.    */
 name|SqlValidator
 name|getValidator
 parameter_list|()
 function_decl|;
-comment|/**      * Returns the root node of this scope.      *      * @post return != null      */
+comment|/**    * Returns the root node of this scope.    *    * @post return != null    */
 name|SqlNode
 name|getNode
 parameter_list|()
 function_decl|;
-comment|/**      * Looks up a node with a given name. Returns null if none is found.      *      * @param name Name of node to find      * @param ancestorOut If not null, writes the ancestor scope here      * @param offsetOut If not null, writes the offset within the ancestor here      */
+comment|/**    * Looks up a node with a given name. Returns null if none is found.    *    * @param name        Name of node to find    * @param ancestorOut If not null, writes the ancestor scope here    * @param offsetOut   If not null, writes the offset within the ancestor here    */
 name|SqlValidatorNamespace
 name|resolve
 parameter_list|(
@@ -85,7 +85,7 @@ index|[]
 name|offsetOut
 parameter_list|)
 function_decl|;
-comment|/**      * Finds the table alias which is implicitly qualifying an unqualified      * column name. Throws an error if there is not exactly one table.      *      *<p>This method is only implemented in scopes (such as {@link      * org.eigenbase.sql.validate.SelectScope}) which can be the context for      * name-resolution. In scopes such as {@link      * org.eigenbase.sql.validate.IdentifierNamespace}, it throws {@link      * UnsupportedOperationException}.</p>      *      * @param columnName Column name      * @param ctx Validation context, to appear in any error thrown      *      * @return Table alias      */
+comment|/**    * Finds the table alias which is implicitly qualifying an unqualified    * column name. Throws an error if there is not exactly one table.    *    *<p>This method is only implemented in scopes (such as {@link    * org.eigenbase.sql.validate.SelectScope}) which can be the context for    * name-resolution. In scopes such as {@link    * org.eigenbase.sql.validate.IdentifierNamespace}, it throws {@link    * UnsupportedOperationException}.</p>    *    * @param columnName Column name    * @param ctx        Validation context, to appear in any error thrown    * @return Table alias    */
 name|String
 name|findQualifyingTableName
 parameter_list|(
@@ -96,7 +96,7 @@ name|SqlNode
 name|ctx
 parameter_list|)
 function_decl|;
-comment|/**      * Collects the {@link SqlMoniker}s of all possible columns in this scope.      *      * @param result an array list of strings to add the result to      */
+comment|/**    * Collects the {@link SqlMoniker}s of all possible columns in this scope.    *    * @param result an array list of strings to add the result to    */
 name|void
 name|findAllColumnNames
 parameter_list|(
@@ -107,7 +107,7 @@ argument_list|>
 name|result
 parameter_list|)
 function_decl|;
-comment|/**      * Collects the {@link SqlMoniker}s of all table aliases (uses of tables in      * query FROM clauses) available in this scope.      *      * @param result a list of monikers to add the result to      */
+comment|/**    * Collects the {@link SqlMoniker}s of all table aliases (uses of tables in    * query FROM clauses) available in this scope.    *    * @param result a list of monikers to add the result to    */
 name|void
 name|findAliases
 parameter_list|(
@@ -118,7 +118,7 @@ argument_list|>
 name|result
 parameter_list|)
 function_decl|;
-comment|/**      * Converts an identifier into a fully-qualified identifier. For example,      * the "empno" in "select empno from emp natural join dept" becomes      * "emp.empno".      */
+comment|/**    * Converts an identifier into a fully-qualified identifier. For example,    * the "empno" in "select empno from emp natural join dept" becomes    * "emp.empno".    */
 name|SqlIdentifier
 name|fullyQualify
 parameter_list|(
@@ -126,7 +126,7 @@ name|SqlIdentifier
 name|identifier
 parameter_list|)
 function_decl|;
-comment|/**      * Registers a relation in this scope.      *      * @param ns Namespace representing the result-columns of the relation      * @param alias Alias with which to reference the relation, must not be null      */
+comment|/**    * Registers a relation in this scope.    *    * @param ns    Namespace representing the result-columns of the relation    * @param alias Alias with which to reference the relation, must not be null    */
 name|void
 name|addChild
 parameter_list|(
@@ -137,7 +137,7 @@ name|String
 name|alias
 parameter_list|)
 function_decl|;
-comment|/**      * Finds a window with a given name. Returns null if not found.      */
+comment|/**    * Finds a window with a given name. Returns null if not found.    */
 name|SqlWindow
 name|lookupWindow
 parameter_list|(
@@ -145,7 +145,7 @@ name|String
 name|name
 parameter_list|)
 function_decl|;
-comment|/**      * Returns whether an expression is monotonic in this scope. For example, if      * the scope has previously been sorted by columns X, Y, then X is monotonic      * in this scope, but Y is not.      */
+comment|/**    * Returns whether an expression is monotonic in this scope. For example, if    * the scope has previously been sorted by columns X, Y, then X is monotonic    * in this scope, but Y is not.    */
 name|SqlMonotonicity
 name|getMonotonicity
 parameter_list|(
@@ -153,12 +153,12 @@ name|SqlNode
 name|expr
 parameter_list|)
 function_decl|;
-comment|/**      * Returns the expressions by which the rows in this scope are sorted. If      * the rows are unsorted, returns null.      */
+comment|/**    * Returns the expressions by which the rows in this scope are sorted. If    * the rows are unsorted, returns null.    */
 name|SqlNodeList
 name|getOrderList
 parameter_list|()
 function_decl|;
-comment|/**      * Resolves a single identifier to a column, and returns the datatype of      * that column.      *      *<p>If it cannot find the column, returns null. If the column is      * ambiguous, throws an error with context<code>ctx</code>.      *      * @param name Name of column      * @param ctx Context for exception      *      * @return Type of column, if found and unambiguous; null if not found      */
+comment|/**    * Resolves a single identifier to a column, and returns the datatype of    * that column.    *    *<p>If it cannot find the column, returns null. If the column is    * ambiguous, throws an error with context<code>ctx</code>.    *    * @param name Name of column    * @param ctx  Context for exception    * @return Type of column, if found and unambiguous; null if not found    */
 name|RelDataType
 name|resolveColumn
 parameter_list|(
@@ -169,7 +169,7 @@ name|SqlNode
 name|ctx
 parameter_list|)
 function_decl|;
-comment|/**      * Returns the scope within which operands to a call are to be validated.      * Usually it is this scope, but when the call is to an aggregate function      * and this is an aggregating scope, it will be a a different scope.      *      * @param call Call      *      * @return Scope within which to validate arguments to call.      */
+comment|/**    * Returns the scope within which operands to a call are to be validated.    * Usually it is this scope, but when the call is to an aggregate function    * and this is an aggregating scope, it will be a a different scope.    *    * @param call Call    * @return Scope within which to validate arguments to call.    */
 name|SqlValidatorScope
 name|getOperandScope
 parameter_list|(
@@ -177,7 +177,7 @@ name|SqlCall
 name|call
 parameter_list|)
 function_decl|;
-comment|/**      * Performs any scope-specific validation of an expression. For example, an      * aggregating scope requires that expressions are valid aggregations. The      * expression has already been validated.      */
+comment|/**    * Performs any scope-specific validation of an expression. For example, an    * aggregating scope requires that expressions are valid aggregations. The    * expression has already been validated.    */
 name|void
 name|validateExpr
 parameter_list|(

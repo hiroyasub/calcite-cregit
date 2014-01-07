@@ -98,7 +98,7 @@ return|return
 name|type
 return|;
 block|}
-comment|/**      * Returns the name of this variable.      */
+comment|/**    * Returns the name of this variable.    */
 specifier|public
 name|String
 name|getName

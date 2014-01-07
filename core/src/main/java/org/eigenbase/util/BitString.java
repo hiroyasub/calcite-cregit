@@ -36,7 +36,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * String of bits.  *  *<p>A bit string logically consists of a set of '0' and '1' values, of a  * specified length. The length is preserved even if this means that the bit  * string has leading '0's.  *  *<p>You can create a bit string from a string of 0s and 1s ({@link  * #BitString(String,int)} or {@link #createFromBitString}), or from a string of  * hex digits ({@link #createFromHexString}). You can convert it to a byte array  * ({@link #getAsByteArray}), to a bit string ({@link #toBitString}), or to a  * hex string ({@link #toHexString}). A utility method {@link  * #toByteArrayFromBitString} converts a bit string directly to a byte array.  *  *<p>This class is immutable: once created, none of the methods modify the  * value.  * @testcase  */
+comment|/**  * String of bits.  *  *<p>A bit string logically consists of a set of '0' and '1' values, of a  * specified length. The length is preserved even if this means that the bit  * string has leading '0's.  *  *<p>You can create a bit string from a string of 0s and 1s ({@link  * #BitString(String, int)} or {@link #createFromBitString}), or from a string of  * hex digits ({@link #createFromHexString}). You can convert it to a byte array  * ({@link #getAsByteArray}), to a bit string ({@link #toBitString}), or to a  * hex string ({@link #toHexString}). A utility method {@link  * #toByteArrayFromBitString} converts a bit string directly to a byte array.  *  *<p>This class is immutable: once created, none of the methods modify the  * value.  *  * @testcase  */
 end_comment
 
 begin_class
@@ -148,7 +148,7 @@ name|bitCount
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Creates a BitString representation out of a Hex String. Initial zeros are      * be preserved. Hex String is defined in the SQL standard to be a string      * with odd number of hex digits. An even number of hex digits is in the      * standard a Binary String.      *      * @param s a string, in hex notation      *      * @throws NumberFormatException if<code>s</code> is invalid.      */
+comment|/**    * Creates a BitString representation out of a Hex String. Initial zeros are    * be preserved. Hex String is defined in the SQL standard to be a string    * with odd number of hex digits. An even number of hex digits is in the    * standard a Binary String.    *    * @param s a string, in hex notation    * @throws NumberFormatException if<code>s</code> is invalid.    */
 specifier|public
 specifier|static
 name|BitString
@@ -202,7 +202,7 @@ name|bitCount
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates a BitString representation out of a Bit String. Initial zeros are      * be preserved.      *      * @param s a string of 0s and 1s.      *      * @throws NumberFormatException if<code>s</code> is invalid.      */
+comment|/**    * Creates a BitString representation out of a Bit String. Initial zeros are    * be preserved.    *    * @param s a string of 0s and 1s.    * @throws NumberFormatException if<code>s</code> is invalid.    */
 specifier|public
 specifier|static
 name|BitString
@@ -286,7 +286,7 @@ name|bitCount
 argument_list|)
 return|;
 block|}
-comment|/**      * Returns this bit string as a bit string, such as "10110".      */
+comment|/**    * Returns this bit string as a bit string, such as "10110".    */
 specifier|public
 name|String
 name|toBitString
@@ -296,7 +296,7 @@ return|return
 name|bits
 return|;
 block|}
-comment|/**      * Converts this bit string to a hex string, such as "7AB".      */
+comment|/**    * Converts this bit string to a hex string, such as "7AB".    */
 specifier|public
 name|String
 name|toHexString
@@ -399,7 +399,7 @@ name|s
 return|;
 block|}
 block|}
-comment|/**      * Converts a bit string to an array of bytes.      *      * @post return.length = (bitCount + 7) / 8      */
+comment|/**    * Converts a bit string to an array of bytes.    *    * @post return.length = (bitCount + 7) / 8    */
 specifier|public
 specifier|static
 name|byte
@@ -537,7 +537,7 @@ return|return
 name|dest
 return|;
 block|}
-comment|/**      * Concatenates some BitStrings. Concatenates all at once, not pairwise, to      * avoid string copies.      *      * @param args BitString[]      */
+comment|/**    * Concatenates some BitStrings. Concatenates all at once, not pairwise, to    * avoid string copies.    *    * @param args BitString[]    */
 specifier|public
 specifier|static
 name|BitString
@@ -624,7 +624,7 @@ name|length
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates a BitString from an array of bytes.      *      * @param bytes Bytes      *      * @return BitString      */
+comment|/**    * Creates a BitString from an array of bytes.    *    * @param bytes Bytes    * @return BitString    */
 specifier|public
 specifier|static
 name|BitString

@@ -466,7 +466,7 @@ specifier|private
 name|int
 name|nDynamicParamsInExplain
 decl_stmt|;
-comment|/**      * Fields used in name resolution for correlated subqueries.      */
+comment|/**    * Fields used in name resolution for correlated subqueries.    */
 specifier|private
 specifier|final
 name|Map
@@ -499,7 +499,7 @@ name|correlPrefix
 init|=
 literal|"$cor"
 decl_stmt|;
-comment|/**      * Fields used in decorrelation.      */
+comment|/**    * Fields used in decorrelation.    */
 specifier|private
 specifier|final
 name|Map
@@ -594,7 +594,7 @@ name|Correlation
 argument_list|>
 argument_list|()
 decl_stmt|;
-comment|/**      * Stack of names of datasets requested by the<code>      * TABLE(SAMPLE(&lt;datasetName&gt;,&lt;query&gt;))</code> construct.      */
+comment|/**    * Stack of names of datasets requested by the<code>    * TABLE(SAMPLE(&lt;datasetName&gt;,&lt;query&gt;))</code> construct.    */
 specifier|private
 specifier|final
 name|Stack
@@ -610,7 +610,7 @@ name|String
 argument_list|>
 argument_list|()
 decl_stmt|;
-comment|/**      * Mapping of non-correlated subqueries that have been converted to their      * equivalent constants. Used to avoid re-evaluating the subquery if it's      * already been evaluated.      */
+comment|/**    * Mapping of non-correlated subqueries that have been converted to their    * equivalent constants. Used to avoid re-evaluating the subquery if it's    * already been evaluated.    */
 specifier|private
 specifier|final
 name|Map
@@ -638,7 +638,7 @@ name|ViewExpander
 name|viewExpander
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a converter.      *      * @param viewExpander Preparing statement      * @param validator Validator      * @param catalogReader Schema      * @param planner Planner      * @param rexBuilder Rex builder      */
+comment|/**    * Creates a converter.    *    * @param viewExpander  Preparing statement    * @param validator     Validator    * @param catalogReader Schema    * @param planner       Planner    * @param rexBuilder    Rex builder    */
 specifier|public
 name|SqlToRelConverter
 parameter_list|(
@@ -793,7 +793,7 @@ literal|0
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * @return the RelOptCluster in use.      */
+comment|/**    * @return the RelOptCluster in use.    */
 specifier|public
 name|RelOptCluster
 name|getCluster
@@ -803,7 +803,7 @@ return|return
 name|cluster
 return|;
 block|}
-comment|/**      * Returns the row-expression builder.      */
+comment|/**    * Returns the row-expression builder.    */
 specifier|public
 name|RexBuilder
 name|getRexBuilder
@@ -813,7 +813,7 @@ return|return
 name|rexBuilder
 return|;
 block|}
-comment|/**      * Returns the number of dynamic parameters encountered during translation;      * this must only be called after {@link #convertQuery}.      *      * @return number of dynamic parameters      */
+comment|/**    * Returns the number of dynamic parameters encountered during translation;    * this must only be called after {@link #convertQuery}.    *    * @return number of dynamic parameters    */
 specifier|public
 name|int
 name|getDynamicParamCount
@@ -826,7 +826,7 @@ name|size
 argument_list|()
 return|;
 block|}
-comment|/**      * Returns the type inferred for a dynamic parameter.      *      * @param index 0-based index of dynamic parameter      *      * @return inferred type, never null      */
+comment|/**    * Returns the type inferred for a dynamic parameter.    *    * @param index 0-based index of dynamic parameter    * @return inferred type, never null    */
 specifier|public
 name|RelDataType
 name|getDynamicParamType
@@ -870,7 +870,7 @@ name|sqlNode
 argument_list|)
 return|;
 block|}
-comment|/**      * Returns the current count of the number of dynamic parameters in an      * EXPLAIN PLAN statement.      *      * @param increment if true, increment the count      *      * @return the current count before the optional increment      */
+comment|/**    * Returns the current count of the number of dynamic parameters in an    * EXPLAIN PLAN statement.    *    * @param increment if true, increment the count    * @return the current count before the optional increment    */
 specifier|public
 name|int
 name|getDynamicParamCountInExplain
@@ -897,7 +897,7 @@ return|return
 name|retVal
 return|;
 block|}
-comment|/**      * @return mapping of non-correlated subqueries that have been converted to      * the constants that they evaluate to      */
+comment|/**    * @return mapping of non-correlated subqueries that have been converted to    * the constants that they evaluate to    */
 specifier|public
 name|Map
 argument_list|<
@@ -912,7 +912,7 @@ return|return
 name|mapConvertedNonCorrSubqs
 return|;
 block|}
-comment|/**      * Adds to the current map of non-correlated converted subqueries the      * elements from another map that contains non-correlated subqueries that      * have been converted by another SqlToRelConverter.      *      * @param alreadyConvertedNonCorrSubqs the other map      */
+comment|/**    * Adds to the current map of non-correlated converted subqueries the    * elements from another map that contains non-correlated subqueries that    * have been converted by another SqlToRelConverter.    *    * @param alreadyConvertedNonCorrSubqs the other map    */
 specifier|public
 name|void
 name|addConvertedNonCorrSubqs
@@ -934,7 +934,7 @@ name|alreadyConvertedNonCorrSubqs
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Set a new DefaultValueFactory. To have any effect, this must be called      * before any convert method.      *      * @param factory new DefaultValueFactory      */
+comment|/**    * Set a new DefaultValueFactory. To have any effect, this must be called    * before any convert method.    *    * @param factory new DefaultValueFactory    */
 specifier|public
 name|void
 name|setDefaultValueFactory
@@ -948,7 +948,7 @@ operator|=
 name|factory
 expr_stmt|;
 block|}
-comment|/**      * Sets a new SubqueryConverter. To have any effect, this must be called      * before any convert method.      *      * @param converter new SubqueryConverter      */
+comment|/**    * Sets a new SubqueryConverter. To have any effect, this must be called    * before any convert method.    *    * @param converter new SubqueryConverter    */
 specifier|public
 name|void
 name|setSubqueryConverter
@@ -962,7 +962,7 @@ operator|=
 name|converter
 expr_stmt|;
 block|}
-comment|/**      * Indicates that the current statement is part of an EXPLAIN PLAN statement      *      * @param nDynamicParams number of dynamic parameters in the statement      */
+comment|/**    * Indicates that the current statement is part of an EXPLAIN PLAN statement    *    * @param nDynamicParams number of dynamic parameters in the statement    */
 specifier|public
 name|void
 name|setIsExplain
@@ -980,7 +980,7 @@ operator|=
 name|nDynamicParams
 expr_stmt|;
 block|}
-comment|/**      * Controls whether table access references are converted to physical rels      * immediately. The optimizer doesn't like leaf rels to have      * {@link Convention#NONE}. However, if we are doing further conversion      * passes (e.g. {@link RelStructuredTypeFlattener}), then we may need to      * defer conversion. To have any effect, this must be called before any      * convert method.      *      * @param enabled true for immediate conversion (the default); false to      * generate logical TableAccessRel instances      */
+comment|/**    * Controls whether table access references are converted to physical rels    * immediately. The optimizer doesn't like leaf rels to have    * {@link Convention#NONE}. However, if we are doing further conversion    * passes (e.g. {@link RelStructuredTypeFlattener}), then we may need to    * defer conversion. To have any effect, this must be called before any    * convert method.    *    * @param enabled true for immediate conversion (the default); false to    *                generate logical TableAccessRel instances    */
 specifier|public
 name|void
 name|enableTableAccessConversion
@@ -994,7 +994,7 @@ operator|=
 name|enabled
 expr_stmt|;
 block|}
-comment|/**      * Controls whether instances of {@link ValuesRel} are generated. These may      * not be supported by all physical implementations. To have any effect,      * this must be called before any convert method.      *      * @param enabled true to allow ValuesRel to be generated (the default);      * false to force substitution of ProjectRel+OneRowRel instead      */
+comment|/**    * Controls whether instances of {@link ValuesRel} are generated. These may    * not be supported by all physical implementations. To have any effect,    * this must be called before any convert method.    *    * @param enabled true to allow ValuesRel to be generated (the default);    *                false to force substitution of ProjectRel+OneRowRel instead    */
 specifier|public
 name|void
 name|enableValuesRelCreation
@@ -1080,47 +1080,23 @@ name|newInternal
 argument_list|(
 literal|"Conversion to relational algebra failed to preserve "
 operator|+
-literal|"datatypes:"
+literal|"datatypes:\n"
 operator|+
-name|Util
-operator|.
-name|lineSeparator
-operator|+
-literal|"validated type:"
-operator|+
-name|Util
-operator|.
-name|lineSeparator
+literal|"validated type:\n"
 operator|+
 name|validatedRowType
 operator|.
 name|getFullTypeString
 argument_list|()
 operator|+
-name|Util
-operator|.
-name|lineSeparator
-operator|+
-literal|"converted type:"
-operator|+
-name|Util
-operator|.
-name|lineSeparator
+literal|"\nconverted type:\n"
 operator|+
 name|convertedRowType
 operator|.
 name|getFullTypeString
 argument_list|()
 operator|+
-name|Util
-operator|.
-name|lineSeparator
-operator|+
-literal|"rel:"
-operator|+
-name|Util
-operator|.
-name|lineSeparator
+literal|"\nrel:\n"
 operator|+
 name|RelOptUtil
 operator|.
@@ -1191,7 +1167,7 @@ return|return
 name|newRootRel
 return|;
 block|}
-comment|/**      * If subquery is correlated and decorrelation is enabled, performs      * decorrelation.      *      * @param query Query      * @param rootRel Root relational expression      * @return New root relational expression after decorrelation      */
+comment|/**    * If subquery is correlated and decorrelation is enabled, performs    * decorrelation.    *    * @param query   Query    * @param rootRel Root relational expression    * @return New root relational expression after decorrelation    */
 specifier|public
 name|RelNode
 name|decorrelate
@@ -1236,7 +1212,7 @@ return|return
 name|result
 return|;
 block|}
-comment|/**      * Walks over a tree of relational expressions, replacing each      * {@link RelNode} with a 'slimmed down' relational expression that projects      * only the fields required by its consumer.      *      *<p>This may make things easier for the optimizer, by removing crud that      * would expand the search space, but is difficult for the optimizer itself      * to do it, because optimizer rules must preserve the number and type of      * fields. Hence, this transform that operates on the entire tree, similar      * to the {@link RelStructuredTypeFlattener type-flattening transform}.      *      *<p>Currently this functionality is disabled in farrago/luciddb; the      * default implementation of this method does nothing.      *      * @param rootRel Relational expression that is at the root of the tree      * @return Trimmed relational expression      */
+comment|/**    * Walks over a tree of relational expressions, replacing each    * {@link RelNode} with a 'slimmed down' relational expression that projects    * only the fields required by its consumer.    *    *<p>This may make things easier for the optimizer, by removing crud that    * would expand the search space, but is difficult for the optimizer itself    * to do it, because optimizer rules must preserve the number and type of    * fields. Hence, this transform that operates on the entire tree, similar    * to the {@link RelStructuredTypeFlattener type-flattening transform}.    *    *<p>Currently this functionality is disabled in farrago/luciddb; the    * default implementation of this method does nothing.    *    * @param rootRel Relational expression that is at the root of the tree    * @return Trimmed relational expression    */
 specifier|public
 name|RelNode
 name|trimUnusedFields
@@ -1311,7 +1287,7 @@ return|return
 name|rootRel
 return|;
 block|}
-comment|/**      * Creates a RelFieldTrimmer.      *      * @return Field trimmer      */
+comment|/**    * Creates a RelFieldTrimmer.    *    * @return Field trimmer    */
 specifier|protected
 name|RelFieldTrimmer
 name|newFieldTrimmer
@@ -1325,7 +1301,7 @@ name|validator
 argument_list|)
 return|;
 block|}
-comment|/**      * Converts an unvalidated query's parse tree into a relational expression.      *      * @param query Query to convert      * @param needsValidation Whether to validate the query before converting;      *<code>false</code> if the query has already been validated.      * @param top Whether the query is top-level, say if its result will become      * a JDBC result set;<code>false</code> if the query will be part of a      * view.      */
+comment|/**    * Converts an unvalidated query's parse tree into a relational expression.    *    * @param query           Query to convert    * @param needsValidation Whether to validate the query before converting;    *<code>false</code> if the query has already been    *                        validated.    * @param top             Whether the query is top-level, say if its result    *                        will become a JDBC result set;<code>false</code> if    *                        the query will be part of a view.    */
 specifier|public
 name|RelNode
 name|convertQuery
@@ -1498,7 +1474,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**      * Converts a SELECT statement's parse tree into a relational expression.      */
+comment|/**    * Converts a SELECT statement's parse tree into a relational expression.    */
 specifier|public
 name|RelNode
 name|convertSelect
@@ -1542,7 +1518,7 @@ operator|.
 name|root
 return|;
 block|}
-comment|/**      * Factory method for creating translation workspace.      */
+comment|/**    * Factory method for creating translation workspace.    */
 specifier|protected
 name|Blackboard
 name|createBlackboard
@@ -1569,7 +1545,7 @@ name|nameToNodeMap
 argument_list|)
 return|;
 block|}
-comment|/**      * Implementation of {@link #convertSelect(SqlSelect)}; derived class may      * override.      */
+comment|/**    * Implementation of {@link #convertSelect(SqlSelect)}; derived class may    * override.    */
 specifier|protected
 name|void
 name|convertSelectImpl
@@ -1744,7 +1720,7 @@ literal|true
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Having translated 'SELECT ... FROM ... [GROUP BY ...] [HAVING ...]', adds      * a relational expression to make the results unique.      *      *<p>If the SELECT clause contains duplicate expressions, adds {@link      * ProjectRel}s so that we are grouping on the minimal set of keys. The      * performance gain isn't huge, but it is difficult to detect these      * duplicate expressions later.      *      * @param bb Blackboard      * @param checkForDupExprs Check for duplicate expressions      */
+comment|/**    * Having translated 'SELECT ... FROM ... [GROUP BY ...] [HAVING ...]', adds    * a relational expression to make the results unique.    *    *<p>If the SELECT clause contains duplicate expressions, adds {@link    * ProjectRel}s so that we are grouping on the minimal set of keys. The    * performance gain isn't huge, but it is difficult to detect these    * duplicate expressions later.    *    * @param bb               Blackboard    * @param checkForDupExprs Check for duplicate expressions    */
 specifier|private
 name|void
 name|distinctify
@@ -2311,7 +2287,7 @@ operator|-
 literal|1
 return|;
 block|}
-comment|/**      * Converts a query's ORDER BY clause, if any.      *      * @param select Query      * @param bb Blackboard      * @param collation Collation list      * @param orderExprList Method populates this list with orderBy expressions      *   not present in selectList      * @param offset Expression for number of rows to discard before returning      *               first row      * @param fetch Expression for number of rows to fetch      */
+comment|/**    * Converts a query's ORDER BY clause, if any.    *    * @param select        Query    * @param bb            Blackboard    * @param collation     Collation list    * @param orderExprList Method populates this list with orderBy expressions    *                      not present in selectList    * @param offset        Expression for number of rows to discard before    *                      returning first row    * @param fetch         Expression for number of rows to fetch    */
 specifier|protected
 name|void
 name|convertOrder
@@ -2562,7 +2538,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Returns whether a given node contains a {@link SqlInOperator}.      *      * @param node a RexNode tree      */
+comment|/**    * Returns whether a given node contains a {@link SqlInOperator}.    *    * @param node a RexNode tree    */
 specifier|private
 specifier|static
 name|boolean
@@ -2659,7 +2635,7 @@ literal|true
 return|;
 block|}
 block|}
-comment|/**      * Pushdown allthe NOT logical operators into any IN/NOT IN operators.      *      * @param sqlNode the root node from which to look for NOT operators      *      * @return the transformed SqlNode representation with NOT pushed down.      */
+comment|/**    * Pushdown allthe NOT logical operators into any IN/NOT IN operators.    *    * @param sqlNode the root node from which to look for NOT operators    * @return the transformed SqlNode representation with NOT pushed down.    */
 specifier|private
 specifier|static
 name|SqlNode
@@ -3213,7 +3189,7 @@ name|sqlNode
 return|;
 block|}
 block|}
-comment|/**      * Converts a WHERE clause.      *      * @param bb Blackboard      * @param where WHERE clause, may be null      */
+comment|/**    * Converts a WHERE clause.    *    * @param bb    Blackboard    * @param where WHERE clause, may be null    */
 specifier|private
 name|void
 name|convertWhere
@@ -4072,7 +4048,7 @@ name|expression
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Determines if a subquery is non-correlated and if so, converts it to a      * constant.      *      * @param call the call that references the subquery      * @param bb blackboard used to convert the subquery      * @param converted RelNode tree corresponding to the subquery      * @param isExists true if the subquery is part of an EXISTS expression      *      * @return if the subquery can be converted to a constant      */
+comment|/**    * Determines if a subquery is non-correlated and if so, converts it to a    * constant.    *    * @param call      the call that references the subquery    * @param bb        blackboard used to convert the subquery    * @param converted RelNode tree corresponding to the subquery    * @param isExists  true if the subquery is part of an EXISTS expression    * @return if the subquery can be converted to a constant    */
 specifier|private
 name|boolean
 name|convertNonCorrelatedSubq
@@ -4177,7 +4153,7 @@ return|return
 literal|false
 return|;
 block|}
-comment|/**      * Converts the RelNode tree for a select statement to a select that      * produces a single value.      *      * @param select the statement      * @param plan the original RelNode tree corresponding to the statement      *      * @return the converted RelNode tree      */
+comment|/**    * Converts the RelNode tree for a select statement to a select that    * produces a single value.    *    * @param select the statement    * @param plan   the original RelNode tree corresponding to the statement    * @return the converted RelNode tree    */
 specifier|public
 name|RelNode
 name|convertToSingleValueSubq
@@ -4288,7 +4264,7 @@ name|plan
 argument_list|)
 return|;
 block|}
-comment|/**      * Converts "x IN (1, 2, ...)" to "x=1 OR x=2 OR ...".      *      * @param leftKeys LHS      * @param valuesList RHS      * @param isNotIn is this a NOT IN operator      *      * @return converted expression      */
+comment|/**    * Converts "x IN (1, 2, ...)" to "x=1 OR x=2 OR ...".    *    * @param leftKeys   LHS    * @param valuesList RHS    * @param isNotIn    is this a NOT IN operator    * @return converted expression    */
 specifier|private
 name|RexNode
 name|convertInToOr
@@ -4530,7 +4506,7 @@ return|return
 name|result
 return|;
 block|}
-comment|/**      * Gets the list size threshold under which {@link #convertInToOr} is used.      * Lists of this size or greater will instead be converted to use a join      * against an inline table ({@link ValuesRel}) rather than a predicate. A      * threshold of 0 forces usage of an inline table in all cases; a threshold      * of Integer.MAX_VALUE forces usage of OR in all cases      *      * @return threshold, default 20      */
+comment|/**    * Gets the list size threshold under which {@link #convertInToOr} is used.    * Lists of this size or greater will instead be converted to use a join    * against an inline table ({@link ValuesRel}) rather than a predicate. A    * threshold of 0 forces usage of an inline table in all cases; a threshold    * of Integer.MAX_VALUE forces usage of OR in all cases    *    * @return threshold, default 20    */
 specifier|protected
 name|int
 name|getInSubqueryThreshold
@@ -4540,7 +4516,7 @@ return|return
 literal|20
 return|;
 block|}
-comment|/**      * Creates the condition for a join implementing an IN clause.      *      * @param bb blackboard to use, bb.root points to the LHS      * @param leftKeys LHS of IN      * @param rightRel Relational expression on RHS      *      * @return join condition      */
+comment|/**    * Creates the condition for a join implementing an IN clause.    *    * @param bb       blackboard to use, bb.root points to the LHS    * @param leftKeys LHS of IN    * @param rightRel Relational expression on RHS    * @return join condition    */
 specifier|private
 name|RexNode
 name|createJoinConditionForIn
@@ -4681,7 +4657,7 @@ literal|true
 argument_list|)
 return|;
 block|}
-comment|/**      * Converts an EXISTS or IN predicate into a join. For EXISTS, the subquery      * produces an indicator variable, and the result is a relational expression      * which outer joins that indicator to the original query. After performing      * the outer join, the condition will be TRUE if the EXISTS condition holds,      * NULL otherwise.      *      *<p>FIXME jvs 1-May-2006: null semantics for IN are currently broken      *      * @param seek A query, for example 'select * from emp' or 'values (1,2,3)'      * or '('Foo', 34)'.      * @param isIn Whether is an IN predicate      * @param isExists Whether is an EXISTS predicate      * @param needsOuterJoin Whether an outer join is needed      *      * @return join expression      *      * @pre extraExpr == null || extraName != null      */
+comment|/**    * Converts an EXISTS or IN predicate into a join. For EXISTS, the subquery    * produces an indicator variable, and the result is a relational expression    * which outer joins that indicator to the original query. After performing    * the outer join, the condition will be TRUE if the EXISTS condition holds,    * NULL otherwise.    *    *<p>FIXME jvs 1-May-2006: null semantics for IN are currently broken    *    * @param seek           A query, for example 'select * from emp' or    *                       'values (1,2,3)' or '('Foo', 34)'.    * @param isIn           Whether is an IN predicate    * @param isExists       Whether is an EXISTS predicate    * @param needsOuterJoin Whether an outer join is needed    * @return join expression    * @pre extraExpr == null || extraName != null    */
 specifier|private
 name|RelNode
 name|convertExists
@@ -5529,7 +5505,7 @@ literal|"row"
 argument_list|)
 return|;
 block|}
-comment|/**      * Builds a list of all<code>IN</code> or<code>EXISTS</code> operators      * inside SQL parse tree. Does not traverse inside queries.      *      * @param bb blackboard      * @param node the SQL parse tree      * @param registerOnlyScalarSubqueries if set to true and the parse tree      * corresponds to a variation of a select node, only register it if it's a      * scalar subquery      */
+comment|/**    * Builds a list of all<code>IN</code> or<code>EXISTS</code> operators    * inside SQL parse tree. Does not traverse inside queries.    *    * @param bb                           blackboard    * @param node                         the SQL parse tree    * @param registerOnlyScalarSubqueries if set to true and the parse tree    *                                     corresponds to a variation of a select    *                                     node, only register it if it's a scalar    *                                     subquery    */
 specifier|private
 name|void
 name|findSubqueries
@@ -5766,7 +5742,7 @@ expr_stmt|;
 block|}
 block|}
 block|}
-comment|/**      * Converts an expression from {@link SqlNode} to {@link RexNode} format.      *      * @param node Expression to translate      *      * @return Converted expression      */
+comment|/**    * Converts an expression from {@link SqlNode} to {@link RexNode} format.    *    * @param node Expression to translate    * @return Converted expression    */
 specifier|public
 name|RexNode
 name|convertExpression
@@ -5816,7 +5792,7 @@ name|node
 argument_list|)
 return|;
 block|}
-comment|/**      * Converts an expression from {@link SqlNode} to {@link RexNode} format,      * mapping identifier references to predefined expressions.      *      * @param node Expression to translate      * @param nameToNodeMap map from String to {@link RexNode}; when an {@link      * SqlIdentifier} is encountered, it is used as a key and translated to the      * corresponding value from this map      *      * @return Converted expression      */
+comment|/**    * Converts an expression from {@link SqlNode} to {@link RexNode} format,    * mapping identifier references to predefined expressions.    *    * @param node          Expression to translate    * @param nameToNodeMap map from String to {@link RexNode}; when an    *                      {@link SqlIdentifier} is encountered, it is used as a    *                      key and translated to the corresponding value from    *                      this map    * @return Converted expression    */
 specifier|public
 name|RexNode
 name|convertExpression
@@ -5916,7 +5892,7 @@ name|node
 argument_list|)
 return|;
 block|}
-comment|/**      * Converts a non-standard expression.      *      *<p>This method is an extension-point for derived classes can override. If      * this method returns a null result, the normal expression translation      * process will proceeed. The default implementation always returns null.      *      * @param node Expression      * @param bb Blackboard      *      * @return null to proceed with the usual expression translation process      */
+comment|/**    * Converts a non-standard expression.    *    *<p>This method is an extension-point for derived classes can override. If    * this method returns a null result, the normal expression translation    * process will proceeed. The default implementation always returns null.    *    * @param node Expression    * @param bb   Blackboard    * @return null to proceed with the usual expression translation process    */
 specifier|protected
 name|RexNode
 name|convertExtendedExpression
@@ -6238,7 +6214,7 @@ name|visitor
 argument_list|)
 return|;
 block|}
-comment|/**      * Converts a FROM clause into a relational expression.      *      * @param bb Scope within which to resolve identifiers      * @param from FROM clause of a query. Examples include:      *      *<ul>      *<li>a single table ("SALES.EMP"),      *<li>an aliased table ("EMP AS E"),      *<li>a list of tables ("EMP, DEPT"),      *<li>an ANSI Join expression ("EMP JOIN DEPT ON EMP.DEPTNO =      * DEPT.DEPTNO"),      *<li>a VALUES clause ("VALUES ('Fred', 20)"),      *<li>a query ("(SELECT * FROM EMP WHERE GENDER = 'F')"),      *<li>or any combination of the above.      *</ul>      *      * @post return != null      */
+comment|/**    * Converts a FROM clause into a relational expression.    *    * @param bb   Scope within which to resolve identifiers    * @param from FROM clause of a query. Examples include:    *    *<ul>    *<li>a single table ("SALES.EMP"),    *<li>an aliased table ("EMP AS E"),    *<li>a list of tables ("EMP, DEPT"),    *<li>an ANSI Join expression ("EMP JOIN DEPT ON EMP.DEPTNO =    *             DEPT.DEPTNO"),    *<li>a VALUES clause ("VALUES ('Fred', 20)"),    *<li>a query ("(SELECT * FROM EMP WHERE GENDER = 'F')"),    *<li>or any combination of the above.    *</ul>    * @post return != null    */
 specifier|protected
 name|void
 name|convertFrom
@@ -8310,7 +8286,7 @@ return|return
 name|join
 return|;
 block|}
-comment|/** Pushes down parts of a join condition. For example, given      * "emp JOIN dept ON emp.deptno + 1 = dept.deptno", adds a project above      * "emp" that computes the expression      * "emp.deptno + 1". The resulting join condition is a simple combination      * of AND, equals, and input fields. */
+comment|/**    * Pushes down parts of a join condition. For example, given    * "emp JOIN dept ON emp.deptno + 1 = dept.deptno", adds a project above    * "emp" that computes the expression    * "emp.deptno + 1". The resulting join condition is a simple combination    * of AND, equals, and input fields.    */
 specifier|private
 name|RexNode
 name|pushDownJoinConditions
@@ -8556,7 +8532,7 @@ return|;
 block|}
 block|}
 block|}
-comment|/** Categorizes whether a bit set contains bits left and right of a      * line. */
+comment|/**    * Categorizes whether a bit set contains bits left and right of a    * line.    */
 enum|enum
 name|Side
 block|{
@@ -8633,7 +8609,7 @@ name|BOTH
 return|;
 block|}
 block|}
-comment|/**      * Determines whether a subquery is non-correlated. Note that a      * non-correlated subquery can contain correlated references, provided those      * references do not reference select statements that are parents of the      * subquery.      *      * @param subq the subquery      * @param bb blackboard used while converting the subquery, i.e., the      * blackboard of the parent query of this subquery      *      * @return true if the subquery is non-correlated.      */
+comment|/**    * Determines whether a subquery is non-correlated. Note that a    * non-correlated subquery can contain correlated references, provided those    * references do not reference select statements that are parents of the    * subquery.    *    * @param subq the subquery    * @param bb   blackboard used while converting the subquery, i.e., the    *             blackboard of the parent query of this subquery    * @return true if the subquery is non-correlated.    */
 specifier|private
 name|boolean
 name|isSubqNonCorrelated
@@ -8803,7 +8779,7 @@ return|return
 literal|true
 return|;
 block|}
-comment|/**      * Returns a list of fields to be prefixed to each relational expression.      *      * @return List of system fields      */
+comment|/**    * Returns a list of fields to be prefixed to each relational expression.    *    * @return List of system fields    */
 specifier|protected
 name|List
 argument_list|<
@@ -8986,7 +8962,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**      * Returns an expression for matching columns of a USING clause or inferred      * from NATURAL JOIN. "a JOIN b USING (x, y)" becomes "a.x = b.x AND a.y =      * b.y". Returns null if the column list is empty.      *      * @param leftRel Left input to the join      * @param rightRel Right input to the join      * @param nameList List of column names to join on      *      * @return Expression to match columns from name list, or null if name list      * is empty      */
+comment|/**    * Returns an expression for matching columns of a USING clause or inferred    * from NATURAL JOIN. "a JOIN b USING (x, y)" becomes "a.x = b.x AND a.y =    * b.y". Returns null if the column list is empty.    *    * @param leftRel  Left input to the join    * @param rightRel Right input to the join    * @param nameList List of column names to join on    * @return Expression to match columns from name list, or null if name list    * is empty    */
 specifier|private
 name|RexNode
 name|convertUsing
@@ -9219,7 +9195,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**      * Converts the SELECT, GROUP BY and HAVING clauses of an aggregate query.      *      *<p>This method extracts SELECT, GROUP BY and HAVING clauses, and creates      * an {@link AggConverter}, then delegates to {@link #createAggImpl}.      * Derived class may override this method to change any of those clauses or      * specify a different {@link AggConverter}.      *      * @param bb Scope within which to resolve identifiers      * @param select Query      * @param orderExprList Additional expressions needed to implement ORDER BY      */
+comment|/**    * Converts the SELECT, GROUP BY and HAVING clauses of an aggregate query.    *    *<p>This method extracts SELECT, GROUP BY and HAVING clauses, and creates    * an {@link AggConverter}, then delegates to {@link #createAggImpl}.    * Derived class may override this method to change any of those clauses or    * specify a different {@link AggConverter}.    *    * @param bb            Scope within which to resolve identifiers    * @param select        Query    * @param orderExprList Additional expressions needed to implement ORDER BY    */
 specifier|protected
 name|void
 name|convertAgg
@@ -10296,7 +10272,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Creates an AggregateRel.      *      *<p>In case the aggregate rel changes the order in which it projects      * fields, the<code>groupExprProjection</code> parameter is provided, and      * the implementation of this method may modify it.      *      *<p>The<code>sortedCount</code> parameter is the number of expressions      * known to be monotonic. These expressions must be on the leading edge of      * the grouping keys. The default implementation of this method ignores this      * parameter.      *      *      * @param bb Blackboard      * @param groupSet Bit set of ordinals of grouping columns      * @param aggCalls Array of calls to aggregate functions      * @return AggregateRel      */
+comment|/**    * Creates an AggregateRel.    *    *<p>In case the aggregate rel changes the order in which it projects    * fields, the<code>groupExprProjection</code> parameter is provided, and    * the implementation of this method may modify it.    *    *<p>The<code>sortedCount</code> parameter is the number of expressions    * known to be monotonic. These expressions must be on the leading edge of    * the grouping keys. The default implementation of this method ignores this    * parameter.    *    * @param bb       Blackboard    * @param groupSet Bit set of ordinals of grouping columns    * @param aggCalls Array of calls to aggregate functions    * @return AggregateRel    */
 specifier|protected
 name|RelNode
 name|createAggregate
@@ -10396,7 +10372,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates a list of collations required to implement the ORDER BY clause,      * if there is one. Populates<code>extraOrderExprs</code> with any sort      * expressions which are not in the select clause.      *      * @param bb Scope within which to resolve identifiers      * @param select Select clause, null if order by is applied to set operation      * (UNION etc.)      * @param orderList Order by clause, may be null      * @param extraOrderExprs Sort expressions which are not in the select      * clause (output)      * @param collationList List of collations (output)      *      * @pre bb.root != null      */
+comment|/**    * Creates a list of collations required to implement the ORDER BY clause,    * if there is one. Populates<code>extraOrderExprs</code> with any sort    * expressions which are not in the select clause.    *    * @param bb              Scope within which to resolve identifiers    * @param select          Select clause, null if order by is applied to set    *                        operation (UNION etc.)    * @param orderList       Order by clause, may be null    * @param extraOrderExprs Sort expressions which are not in the select    *                        clause (output)    * @param collationList   List of collations (output)    * @pre bb.root != null    */
 specifier|protected
 name|void
 name|gatherOrderExprs
@@ -10795,7 +10771,7 @@ return|return
 name|decorrelationEnabled
 return|;
 block|}
-comment|/**      * Returns whether there are any correlating variables in this statement.      *      * @return whether there are any correlating variables      */
+comment|/**    * Returns whether there are any correlating variables in this statement.    *    * @return whether there are any correlating variables    */
 specifier|public
 name|boolean
 name|hasCorrelation
@@ -10903,7 +10879,7 @@ return|return
 name|newRootRel
 return|;
 block|}
-comment|/**      * Sets whether to trim unused fields as part of the conversion process.      *      * @param trim Whether to trim unused fields      */
+comment|/**    * Sets whether to trim unused fields as part of the conversion process.    *    * @param trim Whether to trim unused fields    */
 specifier|public
 name|void
 name|setTrimUnusedFields
@@ -10919,7 +10895,7 @@ operator|=
 name|trim
 expr_stmt|;
 block|}
-comment|/**      * Returns whether to trim unused fields as part of the conversion process.      *      * @return Whether to trim unused fields      */
+comment|/**    * Returns whether to trim unused fields as part of the conversion process.    *    * @return Whether to trim unused fields    */
 specifier|public
 name|boolean
 name|isTrimUnusedFields
@@ -10929,7 +10905,7 @@ return|return
 name|trimUnusedFields
 return|;
 block|}
-comment|/**      * Recursively converts a query to a relational expression.      *      * @param query Query      * @param top Whether this query is the top-level query of the statement      * @param targetRowType Target row type, or null      *      * @return Relational expression      */
+comment|/**    * Recursively converts a query to a relational expression.    *    * @param query         Query    * @param top           Whether this query is the top-level query of the    *                      statement    * @param targetRowType Target row type, or null    * @return Relational expression    */
 specifier|protected
 name|RelNode
 name|convertQueryRecursive
@@ -11057,7 +11033,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**      * Converts a set operation (UNION, INTERSECT, MINUS) into relational      * expressions.      *      * @param call Call to set operator      * @return Relational expression      */
+comment|/**    * Converts a set operation (UNION, INTERSECT, MINUS) into relational    * expressions.    *    * @param call Call to set operator    * @return Relational expression    */
 specifier|protected
 name|RelNode
 name|convertSetOp
@@ -11490,7 +11466,7 @@ return|return
 name|targetTable
 return|;
 block|}
-comment|/**      * Creates a source for an INSERT statement.      *      *<p>If the column list is not specified, source expressions match target      * columns in order.      *      *<p>If the column list is specified, Source expressions are mapped to      * target columns by name via targetColumnList, and may not cover the entire      * target table. So, we'll make up a full row, using a combination of      * default values and the source expressions provided.      *      * @param call Insert expression      * @param sourceRel Source relational expression      *      * @return Converted INSERT statement      */
+comment|/**    * Creates a source for an INSERT statement.    *    *<p>If the column list is not specified, source expressions match target    * columns in order.    *    *<p>If the column list is specified, Source expressions are mapped to    * target columns by name via targetColumnList, and may not cover the entire    * target table. So, we'll make up a full row, using a combination of    * default values and the source expressions provided.    *    * @param call      Insert expression    * @param sourceRel Source relational expression    * @return Converted INSERT statement    */
 specifier|protected
 name|RelNode
 name|convertColumnList
@@ -11902,7 +11878,7 @@ name|node
 argument_list|)
 return|;
 block|}
-comment|/**      * Given an INSERT statement, collects the list of names to be populated and      * the expressions to put in them.      *      * @param call Insert statement      * @param sourceRef Expression representing a row from the source relational      * expression      * @param targetColumnNames List of target column names, to be populated      * @param columnExprs List of expressions, to be populated      */
+comment|/**    * Given an INSERT statement, collects the list of names to be populated and    * the expressions to put in them.    *    * @param call              Insert statement    * @param sourceRef         Expression representing a row from the source    *                          relational expression    * @param targetColumnNames List of target column names, to be populated    * @param columnExprs       List of expressions, to be populated    */
 specifier|protected
 name|void
 name|collectInsertTargets
@@ -12622,7 +12598,7 @@ literal|false
 argument_list|)
 return|;
 block|}
-comment|/**      * Converts an identifier into an expression in a given scope. For example,      * the "empno" in "select empno from emp join dept" becomes "emp.empno".      */
+comment|/**    * Converts an identifier into an expression in a given scope. For example,    * the "empno" in "select empno from emp join dept" becomes "emp.empno".    */
 specifier|private
 name|RexNode
 name|convertIdentifier
@@ -12899,7 +12875,7 @@ return|return
 name|e
 return|;
 block|}
-comment|/**      * Adjusts the type of a reference to an input field to account for nulls      * introduced by outer joins; and adjusts the offset to match the physical      * implementation.      *      * @param bb Blackboard      * @param inputRef Input ref      *      * @return Adjusted input ref      */
+comment|/**    * Adjusts the type of a reference to an input field to account for nulls    * introduced by outer joins; and adjusts the offset to match the physical    * implementation.    *    * @param bb       Blackboard    * @param inputRef Input ref    * @return Adjusted input ref    */
 specifier|protected
 name|RexNode
 name|adjustInputRef
@@ -12949,7 +12925,7 @@ return|return
 name|inputRef
 return|;
 block|}
-comment|/**      * Converts a row constructor into a relational expression.      *      * @param bb Blackboard      * @param rowConstructor Row constructor expression      *      * @return Relational expression which returns a single row.      *      * @pre isRowConstructor(rowConstructor)      */
+comment|/**    * Converts a row constructor into a relational expression.    *    * @param bb             Blackboard    * @param rowConstructor Row constructor expression    * @return Relational expression which returns a single row.    * @pre isRowConstructor(rowConstructor)    */
 specifier|private
 name|RelNode
 name|convertRowConstructor
@@ -13701,7 +13677,7 @@ return|return
 name|ret
 return|;
 block|}
-comment|/**      * Factory method that creates a join.      * A subclass can override to use a different kind of join.      *      * @param left Left input      * @param right Right input      * @param condition Join condition      * @param joinType Join type      * @param variablesStopped Set of names of variables which are set by the      * LHS and used by the RHS and are not available to nodes above this JoinRel      * in the tree      * @return A relational expression representing a join      */
+comment|/**    * Factory method that creates a join.    * A subclass can override to use a different kind of join.    *    * @param left             Left input    * @param right            Right input    * @param condition        Join condition    * @param joinType         Join type    * @param variablesStopped Set of names of variables which are set by the    *                         LHS and used by the RHS and are not available to    *                         nodes above this JoinRel in the tree    * @return A relational expression representing a join    */
 specifier|protected
 name|RelNode
 name|createJoin
@@ -14089,7 +14065,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Adds extra select items. The default implementation adds nothing; derived      * classes may add columns to exprList, nameList, aliasList and      * columnMonotonicityList.      *      * @param bb Blackboard      * @param select Select statement being translated      * @param exprList List of expressions in select clause      * @param nameList List of names, one per column      * @param aliasList Collection of aliases that have been used already      * @param columnMonotonicityList List of monotonicity, one per column      */
+comment|/**    * Adds extra select items. The default implementation adds nothing; derived    * classes may add columns to exprList, nameList, aliasList and    * columnMonotonicityList.    *    * @param bb                     Blackboard    * @param select                 Select statement being translated    * @param exprList               List of expressions in select clause    * @param nameList               List of names, one per column    * @param aliasList              Collection of aliases that have been used    *                               already    * @param columnMonotonicityList List of monotonicity, one per column    */
 specifier|protected
 name|void
 name|extraSelectItems
@@ -14230,7 +14206,7 @@ return|return
 name|alias
 return|;
 block|}
-comment|/**      * Converts a SELECT statement's parse tree into a relational expression.      */
+comment|/**    * Converts a SELECT statement's parse tree into a relational expression.    */
 specifier|public
 name|RelNode
 name|convertValues
@@ -14284,7 +14260,7 @@ operator|.
 name|root
 return|;
 block|}
-comment|/**      * Converts a values clause (as in "INSERT INTO T(x,y) VALUES (1,2)") into a      * relational expression.      *      * @param bb Blackboard      * @param values Call to SQL VALUES operator      * @param targetRowType Target row type      */
+comment|/**    * Converts a values clause (as in "INSERT INTO T(x,y) VALUES (1,2)") into a    * relational expression.    *    * @param bb            Blackboard    * @param values        Call to SQL VALUES operator    * @param targetRowType Target row type    */
 specifier|private
 name|void
 name|convertValuesImpl
@@ -14639,7 +14615,7 @@ argument_list|)
 return|;
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------
-comment|/**      * Workspace for translating an individual SELECT statement (or sub-SELECT).      */
+comment|/**    * Workspace for translating an individual SELECT statement (or sub-SELECT).    */
 specifier|protected
 class|class
 name|Blackboard
@@ -14651,7 +14627,7 @@ argument_list|<
 name|RexNode
 argument_list|>
 block|{
-comment|/**          * Collection of {@link RelNode} objects which correspond to a SELECT          * statement.          */
+comment|/**      * Collection of {@link RelNode} objects which correspond to a SELECT      * statement.      */
 specifier|public
 specifier|final
 name|SqlValidatorScope
@@ -14703,7 +14679,7 @@ name|RelNode
 argument_list|>
 name|cursors
 decl_stmt|;
-comment|/**          * List of<code>IN</code> and<code>EXISTS</code> nodes inside this          *<code>SELECT</code> statement (but not inside sub-queries).          */
+comment|/**      * List of<code>IN</code> and<code>EXISTS</code> nodes inside this      *<code>SELECT</code> statement (but not inside sub-queries).      */
 specifier|private
 specifier|final
 name|List
@@ -14719,7 +14695,7 @@ name|SqlNode
 argument_list|>
 argument_list|()
 decl_stmt|;
-comment|/**          * Maps IN and EXISTS {@link SqlSelect sub-queries} to the expressions          * which will be used to access them.          */
+comment|/**      * Maps IN and EXISTS {@link SqlSelect sub-queries} to the expressions      * which will be used to access them.      */
 specifier|private
 specifier|final
 name|Map
@@ -14743,11 +14719,11 @@ specifier|private
 name|boolean
 name|subqueryNeedsOuterJoin
 decl_stmt|;
-comment|/**          * Workspace for building aggregates.          */
+comment|/**      * Workspace for building aggregates.      */
 name|AggConverter
 name|agg
 decl_stmt|;
-comment|/**          * Project the groupby expressions out of the root of this sub-select.          * Subqueries can reference group by expressions projected from the          * "right" to the subquery.          */
+comment|/**      * Project the groupby expressions out of the root of this sub-select.      * Subqueries can reference group by expressions projected from the      * "right" to the subquery.      */
 specifier|private
 specifier|final
 name|Map
@@ -14807,7 +14783,7 @@ name|RelDataTypeField
 argument_list|>
 argument_list|()
 decl_stmt|;
-comment|/**          * Creates a Blackboard.          *          * @param scope Name-resolution scope for expressions validated within          * this query. Can be null if this Blackboard is for a leaf node, say          * @param nameToNodeMap Map which translates the expression to map a          * given parameter into, if translating expressions; null otherwise          */
+comment|/**      * Creates a Blackboard.      *      * @param scope         Name-resolution scope for expressions validated      *                      within this query. Can be null if this Blackboard is      *                      for a leaf node, say      * @param nameToNodeMap Map which translates the expression to map a      *                      given parameter into, if translating expressions;      *                      null otherwise      */
 specifier|protected
 name|Blackboard
 parameter_list|(
@@ -14873,7 +14849,7 @@ literal|null
 argument_list|)
 return|;
 block|}
-comment|/**          * Registers a relational expression.          *          * @param rel Relational expression          * @param joinType Join type          * @param leftJoinKeysForIn LHS of IN clause, or null for expressions          * other than IN          *          * @return Expression with which to refer to the row (or partial row)          * coming from this relational expression's side of the join. rchen          * 2006-08-17: temporarily translate select * from X where a not in          * (select b form Y); to select X.* from X, (select distinct b from Y)          * where not (a = b);          */
+comment|/**      * Registers a relational expression.      *      * @param rel               Relational expression      * @param joinType          Join type      * @param leftJoinKeysForIn LHS of IN clause, or null for expressions      *                          other than IN      * @return Expression with which to refer to the row (or partial row)      * coming from this relational expression's side of the join. rchen      * 2006-08-17: temporarily translate select * from X where a not in      * (select b form Y); to select X.* from X, (select distinct b from Y)      * where not (a = b);      */
 specifier|public
 name|RexNode
 name|register
@@ -15340,7 +15316,7 @@ return|;
 block|}
 block|}
 block|}
-comment|/**          * Sets a new root relational expression, as the translation process          * backs its way further up the tree.          *          * @param root New root relational expression          * @param leaf Whether the relational expression is a leaf, that is,          * derived from an atomic relational expression such as a table name in          * the from clause, or the projection on top of a select-subquery. In          * particular, relational expressions derived from JOIN operators are          * not leaves, but set expressions are.          */
+comment|/**      * Sets a new root relational expression, as the translation process      * backs its way further up the tree.      *      * @param root New root relational expression      * @param leaf Whether the relational expression is a leaf, that is,      *             derived from an atomic relational expression such as a table      *             name in the from clause, or the projection on top of a      *             select-subquery. In particular, relational expressions      *             derived from JOIN operators are not leaves, but set      *             expressions are.      */
 specifier|public
 name|void
 name|setRoot
@@ -15442,7 +15418,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**          * Notifies this Blackboard that the root just set using {@link          * #setRoot(RelNode, boolean)} was derived using dataset substitution.          *          *<p>The default implementation is not interested in such          * notifications, and does nothing.          *          * @param datasetName Dataset name          */
+comment|/**      * Notifies this Blackboard that the root just set using {@link      * #setRoot(RelNode, boolean)} was derived using dataset substitution.      *      *<p>The default implementation is not interested in such      * notifications, and does nothing.      *      * @param datasetName Dataset name      */
 specifier|public
 name|void
 name|setDataset
@@ -15472,7 +15448,7 @@ literal|false
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**          * Returns an expression with which to reference a from-list item.          *          * @param name the alias of the from item          *          * @return a {@link RexFieldAccess} or {@link RexRangeRef}, or null if          * not found          */
+comment|/**      * Returns an expression with which to reference a from-list item.      *      * @param name the alias of the from item      * @return a {@link RexFieldAccess} or {@link RexRangeRef}, or null if      * not found      */
 name|RexNode
 name|lookupExp
 parameter_list|(
@@ -15686,7 +15662,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**          * Creates an expression with which to reference the expression whose          * offset in its from-list is {@code offset}.          */
+comment|/**      * Creates an expression with which to reference the expression whose      * offset in its from-list is {@code offset}.      */
 name|RexNode
 name|lookup
 parameter_list|(
@@ -16510,7 +16486,7 @@ return|return
 name|rex
 return|;
 block|}
-comment|/** Converts an item in an ORDER BY clause, extracting DESC, NULLS LAST          * and NULLS FIRST flags first. */
+comment|/**      * Converts an item in an ORDER BY clause, extracting DESC, NULLS LAST      * and NULLS FIRST flags first.      */
 specifier|public
 name|RexNode
 name|convertSortExpression
@@ -16585,7 +16561,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**          * Determines whether a RexNode corresponds to a subquery that's been          * converted to a constant.          *          * @param rex the expression to be examined          *          * @return true if the expression is a dynamic parameter, a literal, or          * a literal that is being cast          */
+comment|/**      * Determines whether a RexNode corresponds to a subquery that's been      * converted to a constant.      *      * @param rex the expression to be examined      * @return true if the expression is a dynamic parameter, a literal, or      * a literal that is being cast      */
 specifier|private
 name|boolean
 name|isConvertedSubq
@@ -16924,7 +16900,7 @@ name|intervalQualifier
 argument_list|)
 return|;
 block|}
-comment|/**          * Shifts the expressions used to reference subqueries to the right.          * Moves any reference&ge;<code>index</code><code>count</code> places          * to the right.          *          * @param index Position where new expression was inserted          * @param count Number of new expressions inserted          */
+comment|/**      * Shifts the expressions used to reference subqueries to the right.      * Moves any reference&ge;<code>index</code><code>count</code> places      * to the right.      *      * @param index Position where new expression was inserted      * @param count Number of new expressions inserted      */
 specifier|public
 name|void
 name|adjustSubqueries
@@ -17160,7 +17136,7 @@ name|originalRelName
 return|;
 block|}
 block|}
-comment|/**      * An implementation of DefaultValueFactory which always supplies NULL.      */
+comment|/**    * An implementation of DefaultValueFactory which always supplies NULL.    */
 class|class
 name|NullDefaultValueFactory
 implements|implements
@@ -17227,7 +17203,7 @@ argument_list|()
 return|;
 block|}
 block|}
-comment|/**      * A default implementation of SubqueryConverter that does no conversion.      */
+comment|/**    * A default implementation of SubqueryConverter that does no conversion.    */
 specifier|private
 class|class
 name|NoOpSubqueryConverter
@@ -17269,7 +17245,7 @@ argument_list|()
 throw|;
 block|}
 block|}
-comment|/**      * Converts expressions to aggregates.      *      *<p>Consider the expression SELECT deptno, SUM(2 * sal) FROM emp GROUP BY      * deptno Then      *      *<ul>      *<li>groupExprs = {SqlIdentifier(deptno)}</li>      *<li>convertedInputExprs = {RexInputRef(deptno), 2 *      * RefInputRef(sal)}</li>      *<li>inputRefs = {RefInputRef(#0), RexInputRef(#1)}</li>      *<li>aggCalls = {AggCall(SUM, {1})}</li>      *</ul>      */
+comment|/**    * Converts expressions to aggregates.    *    *<p>Consider the expression SELECT deptno, SUM(2 * sal) FROM emp GROUP BY    * deptno Then    *    *<ul>    *<li>groupExprs = {SqlIdentifier(deptno)}</li>    *<li>convertedInputExprs = {RexInputRef(deptno), 2 *    * RefInputRef(sal)}</li>    *<li>inputRefs = {RefInputRef(#0), RexInputRef(#1)}</li>    *<li>aggCalls = {AggCall(SUM, {1})}</li>    *</ul>    */
 specifier|protected
 class|class
 name|AggConverter
@@ -17303,7 +17279,7 @@ name|String
 argument_list|>
 argument_list|()
 decl_stmt|;
-comment|/**          * The group-by expressions, in {@link SqlNode} format.          */
+comment|/**      * The group-by expressions, in {@link SqlNode} format.      */
 specifier|private
 specifier|final
 name|SqlNodeList
@@ -17317,7 +17293,7 @@ operator|.
 name|ZERO
 argument_list|)
 decl_stmt|;
-comment|/**          * Input expressions for the group columns and aggregates, in {@link          * RexNode} format. The first elements of the list correspond to the          * elements in {@link #groupExprs}; the remaining elements are for          * aggregates.          */
+comment|/**      * Input expressions for the group columns and aggregates, in {@link      * RexNode} format. The first elements of the list correspond to the      * elements in {@link #groupExprs}; the remaining elements are for      * aggregates.      */
 specifier|private
 specifier|final
 name|List
@@ -17333,7 +17309,7 @@ name|RexNode
 argument_list|>
 argument_list|()
 decl_stmt|;
-comment|/**          * Names of {@link #convertedInputExprs}, where the expressions are          * simple mappings to input fields.          */
+comment|/**      * Names of {@link #convertedInputExprs}, where the expressions are      * simple mappings to input fields.      */
 specifier|private
 specifier|final
 name|List
@@ -17417,7 +17393,7 @@ name|RexNode
 argument_list|>
 argument_list|()
 decl_stmt|;
-comment|/**          * Creates an AggConverter.          *          *<p>The<code>select</code> parameter provides enough context to name          * aggregate calls which are top-level select list items.          *          * @param bb Blackboard          * @param select Query being translated; provides context to give          */
+comment|/**      * Creates an AggConverter.      *      *<p>The<code>select</code> parameter provides enough context to name      * aggregate calls which are top-level select list items.      *      * @param bb     Blackboard      * @param select Query being translated; provides context to give      */
 specifier|public
 name|AggConverter
 parameter_list|(
@@ -17649,7 +17625,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**          * Adds an expression, deducing an appropriate name if possible.          *          * @param expr Expression          * @param name Suggested name          */
+comment|/**      * Adds an expression, deducing an appropriate name if possible.      *      * @param expr Expression      * @param name Suggested name      */
 specifier|private
 name|void
 name|addExpr
@@ -18255,7 +18231,7 @@ return|return
 name|index
 return|;
 block|}
-comment|/**          * If an expression is structurally identical to one of the group-by          * expressions, returns a reference to the expression, otherwise returns          * null.          */
+comment|/**      * If an expression is structurally identical to one of the group-by      * expressions, returns a reference to the expression, otherwise returns      * null.      */
 specifier|public
 name|RexNode
 name|lookupGroupExpr
@@ -18389,7 +18365,7 @@ name|typeFactory
 return|;
 block|}
 block|}
-comment|/**      * Context to find a relational expression to a field offset.      */
+comment|/**    * Context to find a relational expression to a field offset.    */
 specifier|private
 specifier|static
 class|class
@@ -18420,7 +18396,7 @@ argument_list|>
 argument_list|>
 argument_list|()
 decl_stmt|;
-comment|/**          * Creates a LookupContext with multiple input relational expressions.          *          * @param bb Context for translating this subquery          * @param rels Relational expressions          * @param systemFieldCount Number of system fields          */
+comment|/**      * Creates a LookupContext with multiple input relational expressions.      *      * @param bb               Context for translating this subquery      * @param rels             Relational expressions      * @param systemFieldCount Number of system fields      */
 name|LookupContext
 parameter_list|(
 name|Blackboard
@@ -18455,7 +18431,7 @@ name|relOffsetList
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**          * Returns the relational expression with a given offset, and the          * ordinal in the combined row of its first field.          *          *<p>For example, in {@code Emp JOIN Dept}, findRel(1) returns the          * relational expression for {@code Dept} and offset 6 (because          * {@code Emp} has 6 fields, therefore the first field of {@code Dept}          * is field 6.          *          * @param offset Offset of relational expression in FROM clause          * @return Relational expression and the ordinal of its first field          */
+comment|/**      * Returns the relational expression with a given offset, and the      * ordinal in the combined row of its first field.      *      *<p>For example, in {@code Emp JOIN Dept}, findRel(1) returns the      * relational expression for {@code Dept} and offset 6 (because      * {@code Emp} has 6 fields, therefore the first field of {@code Dept}      * is field 6.      *      * @param offset Offset of relational expression in FROM clause      * @return Relational expression and the ordinal of its first field      */
 name|Pair
 argument_list|<
 name|RelNode
@@ -18478,14 +18454,14 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**      * Shuttle which walks over a tree of {@link RexNode}s and applies 'over' to      * all agg functions.      *      *<p>This is necessary because the returned expression is not necessarily a      * call to an agg function. For example,      *      *<blockquote><code>AVG(x)</code></blockquote>      *      * becomes      *      *<blockquote><code>SUM(x) / COUNT(x)</code></blockquote>      *      *<p>Any aggregate functions are converted to calls to the internal<code>      * $Histogram</code> aggregation function and accessors such as<code>      * $HistogramMin</code>; for example,      *      *<blockquote><code>MIN(x), MAX(x)</code></blockquote>      *      * are converted to      *      *<blockquote><code>$HistogramMin($Histogram(x)),      * $HistogramMax($Histogram(x))</code></blockquote>      *      * Common sub-expression elmination will ensure that only one histogram is      * computed.      */
+comment|/**    * Shuttle which walks over a tree of {@link RexNode}s and applies 'over' to    * all agg functions.    *    *<p>This is necessary because the returned expression is not necessarily a    * call to an agg function. For example,    *    *<blockquote><code>AVG(x)</code></blockquote>    *    * becomes    *    *<blockquote><code>SUM(x) / COUNT(x)</code></blockquote>    *    *<p>Any aggregate functions are converted to calls to the internal<code>    * $Histogram</code> aggregation function and accessors such as<code>    * $HistogramMin</code>; for example,    *    *<blockquote><code>MIN(x), MAX(x)</code></blockquote>    *    * are converted to    *    *<blockquote><code>$HistogramMin($Histogram(x)),    * $HistogramMax($Histogram(x))</code></blockquote>    *    * Common sub-expression elmination will ensure that only one histogram is    * computed.    */
 specifier|private
 class|class
 name|HistogramShuttle
 extends|extends
 name|RexShuttle
 block|{
-comment|/** Whether to convert calls to MIN(x) to HISTOGRAM_MIN(HISTOGRAM(x)).          * Histograms allow rolling computation, but require more space. */
+comment|/**      * Whether to convert calls to MIN(x) to HISTOGRAM_MIN(HISTOGRAM(x)).      * Histograms allow rolling computation, but require more space.      */
 specifier|static
 specifier|final
 name|boolean
@@ -18980,7 +18956,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**          * Returns the histogram operator corresponding to a given aggregate          * function.          *          *<p>For example,<code>getHistogramOp({@link          * SqlStdOperatorTable#minOperator}}</code> returns {@link          * SqlStdOperatorTable#histogramMinFunction}.          *          * @param aggFunction An aggregate function          *          * @return Its histogram function, or null          */
+comment|/**      * Returns the histogram operator corresponding to a given aggregate      * function.      *      *<p>For example,<code>getHistogramOp({@link      * SqlStdOperatorTable#minOperator}}</code> returns {@link      * SqlStdOperatorTable#histogramMinFunction}.      *      * @param aggFunction An aggregate function      * @return Its histogram function, or null      */
 name|SqlFunction
 name|getHistogramOp
 parameter_list|(
@@ -19055,7 +19031,7 @@ literal|null
 return|;
 block|}
 block|}
-comment|/**          * Returns the type for a histogram function. It is either the actual          * type or an an approximation to it.          */
+comment|/**      * Returns the type for a histogram function. It is either the actual      * type or an an approximation to it.      */
 specifier|private
 name|RelDataType
 name|computeHistogramType

@@ -89,7 +89,7 @@ operator|=
 name|params
 expr_stmt|;
 block|}
-comment|/** Creates a SamplingRel by parsing serialized output. */
+comment|/**    * Creates a SamplingRel by parsing serialized output.    */
 specifier|public
 name|SamplingRel
 parameter_list|(
@@ -234,7 +234,7 @@ name|params
 argument_list|)
 return|;
 block|}
-comment|/**      * Retrieve the sampling parameters for this SamplingRel.      */
+comment|/**    * Retrieve the sampling parameters for this SamplingRel.    */
 specifier|public
 name|RelOptSamplingParameters
 name|getSamplingParameters

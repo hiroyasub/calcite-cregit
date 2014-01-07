@@ -167,7 +167,7 @@ specifier|final
 name|ExprCondition
 name|preserveExprCondition
 decl_stmt|;
-comment|/**      * Original projection expressions      */
+comment|/**    * Original projection expressions    */
 specifier|final
 name|List
 argument_list|<
@@ -175,7 +175,7 @@ name|RexNode
 argument_list|>
 name|origProjExprs
 decl_stmt|;
-comment|/**      * Fields from the RelNode that the projection is being pushed past      */
+comment|/**    * Fields from the RelNode that the projection is being pushed past    */
 specifier|final
 name|List
 argument_list|<
@@ -183,43 +183,43 @@ name|RelDataTypeField
 argument_list|>
 name|childFields
 decl_stmt|;
-comment|/**      * Number of fields in the RelNode that the projection is being pushed past      */
+comment|/**    * Number of fields in the RelNode that the projection is being pushed past    */
 specifier|final
 name|int
 name|nChildFields
 decl_stmt|;
-comment|/**      * Bitmap containing the references in the original projection      */
+comment|/**    * Bitmap containing the references in the original projection    */
 specifier|final
 name|BitSet
 name|projRefs
 decl_stmt|;
-comment|/**      * Bitmap containing the fields in the RelNode that the projection is being      * pushed past, if the RelNode is not a join. If the RelNode is a join, then      * the fields correspond to the left hand side of the join.      */
+comment|/**    * Bitmap containing the fields in the RelNode that the projection is being    * pushed past, if the RelNode is not a join. If the RelNode is a join, then    * the fields correspond to the left hand side of the join.    */
 specifier|final
 name|BitSet
 name|childBitmap
 decl_stmt|;
-comment|/**      * Bitmap containing the fields in the right hand side of a join, in the      * case where the projection is being pushed past a join. Not used      * otherwise.      */
+comment|/**    * Bitmap containing the fields in the right hand side of a join, in the    * case where the projection is being pushed past a join. Not used    * otherwise.    */
 specifier|final
 name|BitSet
 name|rightBitmap
 decl_stmt|;
-comment|/**      * Number of fields in the RelNode that the projection is being pushed past,      * if the RelNode is not a join. If the RelNode is a join, then this is the      * number of fields in the left hand side of the join.      *      *<p>The identity      * {@code nChildFields == nSysFields + nFields + nFieldsRight}      * holds. {@code nFields} does not include {@code nSysFields}.      * The output of a join looks like this:      *      *<blockquote><pre>      * | nSysFields | nFields | nFieldsRight |      *</pre></blockquote>      *      * The output of a single-input rel looks like this:      *      *<blockquote><pre>      * | nSysFields | nFields |      *</pre></blockquote>      */
+comment|/**    * Number of fields in the RelNode that the projection is being pushed past,    * if the RelNode is not a join. If the RelNode is a join, then this is the    * number of fields in the left hand side of the join.    *    *<p>The identity    * {@code nChildFields == nSysFields + nFields + nFieldsRight}    * holds. {@code nFields} does not include {@code nSysFields}.    * The output of a join looks like this:    *    *<blockquote><pre>    * | nSysFields | nFields | nFieldsRight |    *</pre></blockquote>    *    * The output of a single-input rel looks like this:    *    *<blockquote><pre>    * | nSysFields | nFields |    *</pre></blockquote>    */
 specifier|final
 name|int
 name|nFields
 decl_stmt|;
-comment|/**      * Number of fields in the right hand side of a join, in the case where the      * projection is being pushed past a join. Always 0 otherwise.      */
+comment|/**    * Number of fields in the right hand side of a join, in the case where the    * projection is being pushed past a join. Always 0 otherwise.    */
 specifier|final
 name|int
 name|nFieldsRight
 decl_stmt|;
-comment|/**      * Number of system fields. System fields appear at the start of a join,      * before the first field from the left input.      */
+comment|/**    * Number of system fields. System fields appear at the start of a join,    * before the first field from the left input.    */
 specifier|private
 specifier|final
 name|int
 name|nSysFields
 decl_stmt|;
-comment|/**      * Expressions referenced in the projection/filter that should be preserved.      * In the case where the projection is being pushed past a join, then the      * list only contains the expressions corresponding to the left hand side of      * the join.      */
+comment|/**    * Expressions referenced in the projection/filter that should be preserved.    * In the case where the projection is being pushed past a join, then the    * list only contains the expressions corresponding to the left hand side of    * the join.    */
 specifier|final
 name|List
 argument_list|<
@@ -227,7 +227,7 @@ name|RexNode
 argument_list|>
 name|childPreserveExprs
 decl_stmt|;
-comment|/**      * Expressions referenced in the projection/filter that should be preserved,      * corresponding to expressions on the right hand side of the join, if the      * projection is being pushed past a join. Empty list otherwise.      */
+comment|/**    * Expressions referenced in the projection/filter that should be preserved,    * corresponding to expressions on the right hand side of the join, if the    * projection is being pushed past a join. Empty list otherwise.    */
 specifier|final
 name|List
 argument_list|<
@@ -235,25 +235,25 @@ name|RexNode
 argument_list|>
 name|rightPreserveExprs
 decl_stmt|;
-comment|/**      * Number of system fields being projected.      */
+comment|/**    * Number of system fields being projected.    */
 name|int
 name|nSystemProject
 decl_stmt|;
-comment|/**      * Number of fields being projected. In the case where the projection is      * being pushed past a join, the number of fields being projected from the      * left hand side of the join.      */
+comment|/**    * Number of fields being projected. In the case where the projection is    * being pushed past a join, the number of fields being projected from the    * left hand side of the join.    */
 name|int
 name|nProject
 decl_stmt|;
-comment|/**      * Number of fields being projected from the right hand side of a join, in      * the case where the projection is being pushed past a join. 0 otherwise.      */
+comment|/**    * Number of fields being projected from the right hand side of a join, in    * the case where the projection is being pushed past a join. 0 otherwise.    */
 name|int
 name|nRightProject
 decl_stmt|;
-comment|/**      * Rex builder used to create new expressions.      */
+comment|/**    * Rex builder used to create new expressions.    */
 specifier|final
 name|RexBuilder
 name|rexBuilder
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a PushProjector object for pushing projects past a RelNode.      *      * @param origProj the original projection that is being pushed; may be null      * if the projection is implied as a result of a projection having been      * trivially removed      * @param origFilter the filter that the projection must also be pushed      * past, if applicable      * @param childRel the RelNode that the projection is being pushed past      * @param preserveExprCondition condition for whether an expression should      * be preserved in the projection      */
+comment|/**    * Creates a PushProjector object for pushing projects past a RelNode.    *    * @param origProj              the original projection that is being pushed;    *                              may be null if the projection is implied as a    *                              result of a projection having been trivially    *                              removed    * @param origFilter            the filter that the projection must also be    *                              pushed past, if applicable    * @param childRel              the RelNode that the projection is being    *                              pushed past    * @param preserveExprCondition condition for whether an expression should    *                              be preserved in the projection    */
 specifier|public
 name|PushProjector
 parameter_list|(
@@ -511,7 +511,7 @@ argument_list|()
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Decomposes a projection to the input references referenced by a      * projection and a filter, either of which is optional. If both are      * provided, the filter is underneath the project.      *      *<p>Creates a projection containing all input references as well as      * preserving any special expressions. Converts the original projection      * and/or filter to reference the new projection. Then, finally puts on top,      * a final projection corresponding to the original projection.      *      * @param defaultExpr expression to be used in the projection if no fields      * or special columns are selected      *      * @return the converted projection if it makes sense to push elements of      * the projection; otherwise returns null      */
+comment|/**    * Decomposes a projection to the input references referenced by a    * projection and a filter, either of which is optional. If both are    * provided, the filter is underneath the project.    *    *<p>Creates a projection containing all input references as well as    * preserving any special expressions. Converts the original projection    * and/or filter to reference the new projection. Then, finally puts on top,    * a final projection corresponding to the original projection.    *    * @param defaultExpr expression to be used in the projection if no fields    *                    or special columns are selected    * @return the converted projection if it makes sense to push elements of    * the projection; otherwise returns null    */
 specifier|public
 name|ProjectRel
 name|convertProject
@@ -752,7 +752,7 @@ return|return
 name|topProject
 return|;
 block|}
-comment|/**      * Locates all references found in either the projection expressions a      * filter, as well as references to expressions that should be preserved.      * Based on that, determines whether pushing the projection makes sense.      *      * @return true if all inputs from the child that the projection is being      * pushed past are referenced in the projection/filter and no special      * preserve expressions are referenced; in that case, it does not make sense      * to push the projection      */
+comment|/**    * Locates all references found in either the projection expressions a    * filter, as well as references to expressions that should be preserved.    * Based on that, determines whether pushing the projection makes sense.    *    * @return true if all inputs from the child that the projection is being    * pushed past are referenced in the projection/filter and no special    * preserve expressions are referenced; in that case, it does not make sense    * to push the projection    */
 specifier|public
 name|boolean
 name|locateAllRefs
@@ -1015,7 +1015,7 @@ return|return
 literal|false
 return|;
 block|}
-comment|/**      * Creates a projection based on the inputs specified in a bitmap and the      * expressions that need to be preserved. The expressions are appended after      * the input references.      *      * @param projChild child that the projection will be created on top of      * @param adjust if true, need to create new projection expressions;      * otherwise, the existing ones are reused      * @param rightSide if true, creating a projection for the right hand side      * of a join      *      * @return created projection      */
+comment|/**    * Creates a projection based on the inputs specified in a bitmap and the    * expressions that need to be preserved. The expressions are appended after    * the input references.    *    * @param projChild child that the projection will be created on top of    * @param adjust    if true, need to create new projection expressions;    *                  otherwise, the existing ones are reused    * @param rightSide if true, creating a projection for the right hand side    *                  of a join    * @return created projection    */
 specifier|public
 name|ProjectRel
 name|createProjectRefsAndExprs
@@ -1359,7 +1359,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**      * Determines how much each input reference needs to be adjusted as a result      * of projection      *      * @return array indicating how much each input needs to be adjusted by      */
+comment|/**    * Determines how much each input reference needs to be adjusted as a result    * of projection    *    * @return array indicating how much each input needs to be adjusted by    */
 specifier|public
 name|int
 index|[]
@@ -1439,7 +1439,7 @@ return|return
 name|adjustments
 return|;
 block|}
-comment|/**      * Clones an expression tree and walks through it, adjusting each      * RexInputRef index by some amount, and converting expressions that need to      * be preserved to field references.      *      * @param rex the expression      * @param destFields fields that the new expressions will be referencing      * @param adjustments the amount each input reference index needs to be      * adjusted by      *      * @return modified expression tree      */
+comment|/**    * Clones an expression tree and walks through it, adjusting each    * RexInputRef index by some amount, and converting expressions that need to    * be preserved to field references.    *    * @param rex         the expression    * @param destFields  fields that the new expressions will be referencing    * @param adjustments the amount each input reference index needs to be    *                    adjusted by    * @return modified expression tree    */
 specifier|public
 name|RexNode
 name|convertRefsAndExprs
@@ -1492,7 +1492,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates a new projection based on the original projection, adjusting all      * input refs using an adjustment array passed in. If there was no original      * projection, create a new one that selects every field from the underlying      * rel.      *      *<p>If the resulting projection would be trivial, return the child.      *      * @param projChild child of the new project      * @param adjustments array indicating how much each input reference should      * be adjusted by      *      * @return the created projection      */
+comment|/**    * Creates a new projection based on the original projection, adjusting all    * input refs using an adjustment array passed in. If there was no original    * projection, create a new one that selects every field from the underlying    * rel.    *    *<p>If the resulting projection would be trivial, return the child.    *    * @param projChild   child of the new project    * @param adjustments array indicating how much each input reference should    *                    be adjusted by    * @return the created projection    */
 specifier|public
 name|ProjectRel
 name|createNewProject
@@ -1667,7 +1667,7 @@ argument_list|)
 return|;
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------
-comment|/**      * Visitor which builds a bitmap of the inputs used by an expressions, as      * well as locating expressions corresponding to special operators.      */
+comment|/**    * Visitor which builds a bitmap of the inputs used by an expressions, as    * well as locating expressions corresponding to special operators.    */
 specifier|private
 class|class
 name|InputSpecialOpFinder
@@ -1943,7 +1943,7 @@ return|return
 literal|null
 return|;
 block|}
-comment|/**          * Adds an expression to a list if the same expression isn't already in          * the list. Expressions are identical if their digests are the same.          *          * @param exprList current list of expressions          * @param newExpr new expression to be added          */
+comment|/**      * Adds an expression to a list if the same expression isn't already in      * the list. Expressions are identical if their digests are the same.      *      * @param exprList current list of expressions      * @param newExpr  new expression to be added      */
 specifier|private
 name|void
 name|addExpr
@@ -2001,7 +2001,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Walks an expression tree, replacing input refs with new values to reflect      * projection and converting special expressions to field references.      */
+comment|/**    * Walks an expression tree, replacing input refs with new values to reflect    * projection and converting special expressions to field references.    */
 specifier|private
 class|class
 name|RefAndExprConverter
@@ -2175,7 +2175,7 @@ name|call
 argument_list|)
 return|;
 block|}
-comment|/**          * Looks for a matching RexNode from among two lists of RexNodes and          * returns the offset into the list corresponding to the match, adjusted          * by an amount, depending on whether the match was from the first or          * second list.          *          * @param rex RexNode that is being matched against          * @param rexList1 first list of RexNodes          * @param adjust1 adjustment if match occurred in first list          * @param rexList2 second list of RexNodes          * @param adjust2 adjustment if match occurred in the second list          *          * @return index in the list corresponding to the matching RexNode; -1          * if no match          */
+comment|/**      * Looks for a matching RexNode from among two lists of RexNodes and      * returns the offset into the list corresponding to the match, adjusted      * by an amount, depending on whether the match was from the first or      * second list.      *      * @param rex      RexNode that is being matched against      * @param rexList1 first list of RexNodes      * @param adjust1  adjustment if match occurred in first list      * @param rexList2 second list of RexNodes      * @param adjust2  adjustment if match occurred in the second list      * @return index in the list corresponding to the matching RexNode; -1      * if no match      */
 specifier|private
 name|int
 name|findExprInLists
@@ -2319,12 +2319,12 @@ literal|1
 return|;
 block|}
 block|}
-comment|/**      * A functor that replies true or false for a given expression.      *      * @see org.eigenbase.rel.rules.PushProjector.OperatorExprCondition      */
+comment|/**    * A functor that replies true or false for a given expression.    *    * @see org.eigenbase.rel.rules.PushProjector.OperatorExprCondition    */
 specifier|public
 interface|interface
 name|ExprCondition
 block|{
-comment|/**          * Evaluates a condition for a given expression.          *          * @param expr Expression          * @return result of evaluating the condition          */
+comment|/**      * Evaluates a condition for a given expression.      *      * @param expr Expression      * @return result of evaluating the condition      */
 name|boolean
 name|test
 parameter_list|(
@@ -2332,7 +2332,7 @@ name|RexNode
 name|expr
 parameter_list|)
 function_decl|;
-comment|/**          * Constant condition that replies {@code false} for all expressions.          */
+comment|/**      * Constant condition that replies {@code false} for all expressions.      */
 specifier|public
 specifier|static
 specifier|final
@@ -2358,7 +2358,7 @@ block|}
 block|}
 decl_stmt|;
 block|}
-comment|/**      * An expression condition that evaluates to true if the expression is      * a call to one of a set of operators.      */
+comment|/**    * An expression condition that evaluates to true if the expression is    * a call to one of a set of operators.    */
 specifier|public
 specifier|static
 class|class
@@ -2374,7 +2374,7 @@ name|SqlOperator
 argument_list|>
 name|operatorSet
 decl_stmt|;
-comment|/**          * Creates an OperatorExprCondition.          *          * @param operatorSet Set of operators          */
+comment|/**      * Creates an OperatorExprCondition.      *      * @param operatorSet Set of operators      */
 specifier|public
 name|OperatorExprCondition
 parameter_list|(

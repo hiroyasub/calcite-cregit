@@ -95,7 +95,7 @@ name|int
 name|loginTimeout
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a JDBC data source.      *      * @param url URL of JDBC connection (must not be null)      *      * @pre url != null      */
+comment|/**    * Creates a JDBC data source.    *    * @param url URL of JDBC connection (must not be null)    * @pre url != null    */
 specifier|public
 name|JdbcDataSource
 parameter_list|(

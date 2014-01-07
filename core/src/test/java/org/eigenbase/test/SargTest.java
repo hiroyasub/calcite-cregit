@@ -191,7 +191,7 @@ index|[]
 name|exprs
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a SargTest.      */
+comment|/**    * Creates a SargTest.    */
 specifier|public
 name|SargTest
 parameter_list|()

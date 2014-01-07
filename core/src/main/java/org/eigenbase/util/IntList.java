@@ -51,7 +51,7 @@ name|this
 argument_list|)
 return|;
 block|}
-comment|/**      * Converts a list of {@link Integer} objects to an array of primitive      *<code>int</code>s.      *      * @param integers List of Integer objects      *      * @return Array of primitive<code>int</code>s      */
+comment|/**    * Converts a list of {@link Integer} objects to an array of primitive    *<code>int</code>s.    *    * @param integers List of Integer objects    * @return Array of primitive<code>int</code>s    */
 specifier|public
 specifier|static
 name|int
@@ -113,7 +113,7 @@ return|return
 name|ints
 return|;
 block|}
-comment|/**      * Returns a list backed by an array of primitive<code>int</code> values.      *      *<p>The behavior is analogous to {@link Arrays#asList(Object[])}. Changes      * to the list are reflected in the array. The list cannot be extended.      *      * @param args Array of primitive<code>int</code> values      *      * @return List backed by array      */
+comment|/**    * Returns a list backed by an array of primitive<code>int</code> values.    *    *<p>The behavior is analogous to {@link Arrays#asList(Object[])}. Changes    * to the list are reflected in the array. The list cannot be extended.    *    * @param args Array of primitive<code>int</code> values    * @return List backed by array    */
 specifier|public
 specifier|static
 name|List

@@ -81,7 +81,7 @@ interface|interface
 name|DefaultValueFactory
 block|{
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Whether a column is always generated. If a column is always generated,      * then non-generated values cannot be inserted into the column.      */
+comment|/**    * Whether a column is always generated. If a column is always generated,    * then non-generated values cannot be inserted into the column.    */
 specifier|public
 name|boolean
 name|isGeneratedAlways
@@ -93,7 +93,7 @@ name|int
 name|iColumn
 parameter_list|)
 function_decl|;
-comment|/**      * Creates an expression which evaluates to the default value for a      * particular column.      *      * @param table the table containing the column      * @param iColumn the 0-based offset of the column in the table      *      * @return default value expression      */
+comment|/**    * Creates an expression which evaluates to the default value for a    * particular column.    *    * @param table   the table containing the column    * @param iColumn the 0-based offset of the column in the table    * @return default value expression    */
 specifier|public
 name|RexNode
 name|newColumnDefaultValue
@@ -105,7 +105,7 @@ name|int
 name|iColumn
 parameter_list|)
 function_decl|;
-comment|/**      * Creates an expression which evaluates to the initializer expression for a      * particular attribute of a structured type.      *      * @param type the structured type      * @param constructor the constructor invoked to initialize the type      * @param iAttribute the 0-based offset of the attribute in the type      * @param constructorArgs arguments passed to the constructor invocation      *      * @return default value expression      */
+comment|/**    * Creates an expression which evaluates to the initializer expression for a    * particular attribute of a structured type.    *    * @param type            the structured type    * @param constructor     the constructor invoked to initialize the type    * @param iAttribute      the 0-based offset of the attribute in the type    * @param constructorArgs arguments passed to the constructor invocation    * @return default value expression    */
 specifier|public
 name|RexNode
 name|newAttributeInitializer

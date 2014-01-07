@@ -214,7 +214,7 @@ name|alias
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * @return the identifier for the target table of the merge      */
+comment|/**    * @return the identifier for the target table of the merge    */
 specifier|public
 name|SqlIdentifier
 name|getTargetTable
@@ -230,7 +230,7 @@ name|TARGET_TABLE_OPERAND
 index|]
 return|;
 block|}
-comment|/**      * @return the alias for the target table of the merge      */
+comment|/**    * @return the alias for the target table of the merge    */
 specifier|public
 name|SqlIdentifier
 name|getAlias
@@ -246,7 +246,7 @@ name|ALIAS_OPERAND
 index|]
 return|;
 block|}
-comment|/**      * @return the source for the merge      */
+comment|/**    * @return the source for the merge    */
 specifier|public
 name|SqlNode
 name|getSourceTableRef
@@ -278,7 +278,7 @@ operator|=
 name|tableRef
 expr_stmt|;
 block|}
-comment|/**      * @return the update statement for the merge      */
+comment|/**    * @return the update statement for the merge    */
 specifier|public
 name|SqlUpdate
 name|getUpdateCall
@@ -294,7 +294,7 @@ name|UPDATE_OPERAND
 index|]
 return|;
 block|}
-comment|/**      * @return the insert statement for the merge      */
+comment|/**    * @return the insert statement for the merge    */
 specifier|public
 name|SqlInsert
 name|getInsertCall
@@ -310,7 +310,7 @@ name|INSERT_OPERAND
 index|]
 return|;
 block|}
-comment|/**      * @return the condition expression to determine whether to update or insert      */
+comment|/**    * @return the condition expression to determine whether to update or insert    */
 specifier|public
 name|SqlNode
 name|getCondition
@@ -323,7 +323,7 @@ name|CONDITION_OPERAND
 index|]
 return|;
 block|}
-comment|/**      * Gets the source SELECT expression for the data to be updated/inserted.      * Returns null before the statement has been expanded by      * SqlValidator.performUnconditionalRewrites.      *      * @return the source SELECT for the data to be updated      */
+comment|/**    * Gets the source SELECT expression for the data to be updated/inserted.    * Returns null before the statement has been expanded by    * SqlValidator.performUnconditionalRewrites.    *    * @return the source SELECT for the data to be updated    */
 specifier|public
 name|SqlSelect
 name|getSourceSelect

@@ -108,7 +108,7 @@ index|[]
 name|paramTypes
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a new SqlFunction for a call to a builtin function.      *      * @param name of builtin function      * @param kind kind of operator implemented by function      * @param returnTypeInference strategy to use for return type inference      * @param operandTypeInference strategy to use for parameter type inference      * @param operandTypeChecker strategy to use for parameter type checking      * @param funcType categorization for function      */
+comment|/**    * Creates a new SqlFunction for a call to a builtin function.    *    * @param name                 of builtin function    * @param kind                 kind of operator implemented by function    * @param returnTypeInference  strategy to use for return type inference    * @param operandTypeInference strategy to use for parameter type inference    * @param operandTypeChecker   strategy to use for parameter type checking    * @param funcType             categorization for function    */
 specifier|public
 name|SqlFunction
 parameter_list|(
@@ -187,7 +187,7 @@ operator|=
 literal|null
 expr_stmt|;
 block|}
-comment|/**      * Creates a placeholder SqlFunction for an invocation of a function with a      * possibly qualified name. This name must be resolved into either a builtin      * function or a user-defined function.      *      * @param sqlIdentifier possibly qualified identifier for function      * @param returnTypeInference strategy to use for return type inference      * @param operandTypeInference strategy to use for parameter type inference      * @param operandTypeChecker strategy to use for parameter type checking      * @param paramTypes array of parameter types      * @param funcType function category      */
+comment|/**    * Creates a placeholder SqlFunction for an invocation of a function with a    * possibly qualified name. This name must be resolved into either a builtin    * function or a user-defined function.    *    * @param sqlIdentifier        possibly qualified identifier for function    * @param returnTypeInference  strategy to use for return type inference    * @param operandTypeInference strategy to use for parameter type inference    * @param operandTypeChecker   strategy to use for parameter type checking    * @param paramTypes           array of parameter types    * @param funcType             function category    */
 specifier|public
 name|SqlFunction
 parameter_list|(
@@ -274,7 +274,7 @@ operator|.
 name|Function
 return|;
 block|}
-comment|/**      * @return fully qualified name of function, or null for a builtin function      */
+comment|/**    * @return fully qualified name of function, or null for a builtin function    */
 specifier|public
 name|SqlIdentifier
 name|getSqlIdentifier
@@ -284,7 +284,7 @@ return|return
 name|sqlIdentifier
 return|;
 block|}
-comment|/**      * @return fully qualified name of function      */
+comment|/**    * @return fully qualified name of function    */
 specifier|public
 name|SqlIdentifier
 name|getNameAsId
@@ -314,7 +314,7 @@ name|ZERO
 argument_list|)
 return|;
 block|}
-comment|/**      * @return array of parameter types, or null for builtin function      */
+comment|/**    * @return array of parameter types, or null for builtin function    */
 specifier|public
 name|RelDataType
 index|[]
@@ -360,7 +360,7 @@ name|rightPrec
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * @return function category      */
+comment|/**    * @return function category    */
 specifier|public
 name|SqlFunctionCategory
 name|getFunctionType
@@ -372,7 +372,7 @@ operator|.
 name|functionType
 return|;
 block|}
-comment|/**      * Returns whether this function allows a<code>DISTINCT</code> or<code>      * ALL</code> quantifier. The default is<code>false</code>; some aggregate      * functions return<code>true</code>.      */
+comment|/**    * Returns whether this function allows a<code>DISTINCT</code> or<code>    * ALL</code> quantifier. The default is<code>false</code>; some aggregate    * functions return<code>true</code>.    */
 specifier|public
 name|boolean
 name|isQuantifierAllowed
@@ -427,7 +427,7 @@ name|call
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Throws a validation error if a DISTINCT or ALL quantifier is present but      * not allowed.      */
+comment|/**    * Throws a validation error if a DISTINCT or ALL quantifier is present but    * not allowed.    */
 specifier|protected
 name|void
 name|validateQuantifier

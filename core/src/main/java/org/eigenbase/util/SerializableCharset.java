@@ -56,7 +56,7 @@ name|String
 name|charsetName
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a SerializableCharset. External users should call {@link      * #forCharset(Charset)}.      *      * @param charset Character set; must not be null      */
+comment|/**    * Creates a SerializableCharset. External users should call {@link    * #forCharset(Charset)}.    *    * @param charset Character set; must not be null    */
 specifier|private
 name|SerializableCharset
 parameter_list|(
@@ -86,7 +86,7 @@ argument_list|()
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Per {@link Serializable}.      */
+comment|/**    * Per {@link Serializable}.    */
 specifier|private
 name|void
 name|writeObject
@@ -108,7 +108,7 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Per {@link Serializable}.      */
+comment|/**    * Per {@link Serializable}.    */
 specifier|private
 name|void
 name|readObject
@@ -146,7 +146,7 @@ name|charsetName
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Returns the wrapped {@link Charset}.      *      * @return the wrapped Charset      */
+comment|/**    * Returns the wrapped {@link Charset}.    *    * @return the wrapped Charset    */
 specifier|public
 name|Charset
 name|getCharset
@@ -156,7 +156,7 @@ return|return
 name|charset
 return|;
 block|}
-comment|/**      * Returns a SerializableCharset wrapping the given Charset, or null if the      *<coded>charset</code> is null.      *      * @param charset Character set to wrap, or null      *      * @return Wrapped charset      */
+comment|/**    * Returns a SerializableCharset wrapping the given Charset, or null if the    *<coded>charset</code> is null.    *    * @param charset Character set to wrap, or null    * @return Wrapped charset    */
 specifier|public
 specifier|static
 name|SerializableCharset

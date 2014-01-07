@@ -73,7 +73,7 @@ name|PushFilterPastProjectRule
 argument_list|()
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a PushFilterPastProjectRule.      */
+comment|/**    * Creates a PushFilterPastProjectRule.    */
 specifier|private
 name|PushFilterPastProjectRule
 parameter_list|()

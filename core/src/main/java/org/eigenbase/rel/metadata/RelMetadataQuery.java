@@ -96,7 +96,7 @@ class|class
 name|RelMetadataQuery
 block|{
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Returns statistics for a relational expression. These statistics include      * features such as row counts, or column distributions. Stats are typically      * collected by sampling a table. They might also be inferred from a rel's      * history. Certain rels, such as filters, might generate stats from their      * inputs.      *      * @param rel the relational expression.      *      * @return a statistics object, if statistics are available, or null      * otherwise      */
+comment|/**    * Returns statistics for a relational expression. These statistics include    * features such as row counts, or column distributions. Stats are typically    * collected by sampling a table. They might also be inferred from a rel's    * history. Certain rels, such as filters, might generate stats from their    * inputs.    *    * @param rel the relational expression.    * @return a statistics object, if statistics are available, or null    * otherwise    */
 specifier|public
 specifier|static
 name|RelStatSource
@@ -133,7 +133,7 @@ return|return
 name|result
 return|;
 block|}
-comment|/**      * Estimates the number of rows which will be returned by a relational      * expression. The default implementation for this query asks the rel itself      * via {@link RelNode#getRows}, but metadata providers can override this      * with their own cost models.      *      *      * @param rel the relational expression      *      * @return estimated row count, or null if no reliable estimate can be      * determined      */
+comment|/**    * Estimates the number of rows which will be returned by a relational    * expression. The default implementation for this query asks the rel itself    * via {@link RelNode#getRows}, but metadata providers can override this    * with their own cost models.    *    * @param rel the relational expression    * @return estimated row count, or null if no reliable estimate can be    * determined    */
 specifier|public
 specifier|static
 name|Double
@@ -173,7 +173,7 @@ name|result
 argument_list|)
 return|;
 block|}
-comment|/**      * Estimates the cost of executing a relational expression, including the      * cost of its inputs. The default implementation for this query adds {@link      * #getNonCumulativeCost} to the cumulative cost of each input, but metadata      * providers can override this with their own cost models, e.g. to take into      * account interactions between expressions.      *      * @param rel the relational expression      *      * @return estimated cost, or null if no reliable estimate can be determined      */
+comment|/**    * Estimates the cost of executing a relational expression, including the    * cost of its inputs. The default implementation for this query adds {@link    * #getNonCumulativeCost} to the cumulative cost of each input, but metadata    * providers can override this with their own cost models, e.g. to take into    * account interactions between expressions.    *    * @param rel the relational expression    * @return estimated cost, or null if no reliable estimate can be determined    */
 specifier|public
 specifier|static
 name|RelOptCost
@@ -210,7 +210,7 @@ return|return
 name|result
 return|;
 block|}
-comment|/**      * Estimates the cost of executing a relational expression, not counting the      * cost of its inputs. (However, the non-cumulative cost is still usually      * dependent on the row counts of the inputs.) The default implementation      * for this query asks the rel itself via {@link RelNode#computeSelfCost},      * but metadata providers can override this with their own cost models.      *      * @param rel the relational expression      *      * @return estimated cost, or null if no reliable estimate can be determined      */
+comment|/**    * Estimates the cost of executing a relational expression, not counting the    * cost of its inputs. (However, the non-cumulative cost is still usually    * dependent on the row counts of the inputs.) The default implementation    * for this query asks the rel itself via {@link RelNode#computeSelfCost},    * but metadata providers can override this with their own cost models.    *    * @param rel the relational expression    * @return estimated cost, or null if no reliable estimate can be determined    */
 specifier|public
 specifier|static
 name|RelOptCost
@@ -247,7 +247,7 @@ return|return
 name|result
 return|;
 block|}
-comment|/**      * Estimates the percentage of the number of rows actually produced by an      * expression out of the number of rows it would produce if all single-table      * filter conditions were removed.      *      * @param rel the relational expression      *      * @return estimated percentage (between 0.0 and 1.0), or null if no      * reliable estimate can be determined      */
+comment|/**    * Estimates the percentage of the number of rows actually produced by an    * expression out of the number of rows it would produce if all single-table    * filter conditions were removed.    *    * @param rel the relational expression    * @return estimated percentage (between 0.0 and 1.0), or null if no    * reliable estimate can be determined    */
 specifier|public
 specifier|static
 name|Double
@@ -292,7 +292,7 @@ return|return
 name|result
 return|;
 block|}
-comment|/**      * For a given output column of an expression, determines all columns of      * underlying tables which contribute to result values. An output column may      * have more than one origin due to expressions such as UnionRel and      * ProjectRel. The optimizer may use this information for catalog access      * (e.g. index availability).      *      * @param rel the relational expression      * @param iOutputColumn 0-based ordinal for output column of interest      *      * @return set of origin columns, or null if this information cannot be      * determined (whereas empty set indicates definitely no origin columns at      * all)      */
+comment|/**    * For a given output column of an expression, determines all columns of    * underlying tables which contribute to result values. An output column may    * have more than one origin due to expressions such as UnionRel and    * ProjectRel. The optimizer may use this information for catalog access    * (e.g. index availability).    *    * @param rel           the relational expression    * @param iOutputColumn 0-based ordinal for output column of interest    * @return set of origin columns, or null if this information cannot be    * determined (whereas empty set indicates definitely no origin columns at    * all)    */
 specifier|public
 specifier|static
 name|Set
@@ -338,7 +338,7 @@ block|}
 argument_list|)
 return|;
 block|}
-comment|/**      * Estimates the percentage of an expression's output rows which satisfy a      * given predicate. Returns null to indicate that no reliable estimate can      * be produced.      *      * @param rel the relational expression      * @param predicate predicate whose selectivity is to be estimated against      * rel's output      *      * @return estimated selectivity (between 0.0 and 1.0), or null if no      * reliable estimate can be determined      */
+comment|/**    * Estimates the percentage of an expression's output rows which satisfy a    * given predicate. Returns null to indicate that no reliable estimate can    * be produced.    *    * @param rel       the relational expression    * @param predicate predicate whose selectivity is to be estimated against    *                  rel's output    * @return estimated selectivity (between 0.0 and 1.0), or null if no    * reliable estimate can be determined    */
 specifier|public
 specifier|static
 name|Double
@@ -391,7 +391,7 @@ return|return
 name|result
 return|;
 block|}
-comment|/**      * Determines the set of unique minimal keys for this expression. A key is      * represented as a BitSet, where each bit position represents a 0-based      * output column ordinal. (Note that RelNode.isDistinct should return true      * if and only if at least one key is known.)      *      * @param rel the relational expression      *      * @return set of keys, or null if this information cannot be determined      * (whereas empty set indicates definitely no keys at all)      */
+comment|/**    * Determines the set of unique minimal keys for this expression. A key is    * represented as a BitSet, where each bit position represents a 0-based    * output column ordinal. (Note that RelNode.isDistinct should return true    * if and only if at least one key is known.)    *    * @param rel the relational expression    * @return set of keys, or null if this information cannot be determined    * (whereas empty set indicates definitely no keys at all)    */
 specifier|public
 specifier|static
 name|Set
@@ -434,7 +434,7 @@ block|}
 argument_list|)
 return|;
 block|}
-comment|/**      * Determines the set of unique minimal keys for this expression,      * optionally ignoring nulls in the columns in the expression.  A key is      * represented as a BitSet, where each bit position represents a 0-based      * output column ordinal. (Note that RelNode.isDistinct should return true      * if and only if at least one key is known.)      *      *<p>Nulls can be ignored if the relational expression has filtered out      * null values.      *      * @param rel the relational expression      * @param ignoreNulls if true, ignore null values when determining      * whether the keys are unique      *      * @return set of keys, or null if this information cannot be determined      * (whereas empty set indicates definitely no keys at all)      */
+comment|/**    * Determines the set of unique minimal keys for this expression,    * optionally ignoring nulls in the columns in the expression.  A key is    * represented as a BitSet, where each bit position represents a 0-based    * output column ordinal. (Note that RelNode.isDistinct should return true    * if and only if at least one key is known.)    *    *<p>Nulls can be ignored if the relational expression has filtered out    * null values.    *    * @param rel         the relational expression    * @param ignoreNulls if true, ignore null values when determining    *                    whether the keys are unique    * @return set of keys, or null if this information cannot be determined    * (whereas empty set indicates definitely no keys at all)    */
 specifier|public
 specifier|static
 name|Set
@@ -480,7 +480,7 @@ block|}
 argument_list|)
 return|;
 block|}
-comment|/**      * Determines if a specified set of columns from a specified relational      * expression are unique.      *      * @param rel the relational expression      * @param columns column mask representing the subset of columns for which      * uniqueness will be determined      *      * @return true or false depending on whether the columns are unique, or      * null if not enough information is available to make that determination      */
+comment|/**    * Determines if a specified set of columns from a specified relational    * expression are unique.    *    * @param rel     the relational expression    * @param columns column mask representing the subset of columns for which    *                uniqueness will be determined    * @return true or false depending on whether the columns are unique, or    * null if not enough information is available to make that determination    */
 specifier|public
 specifier|static
 name|Boolean
@@ -522,7 +522,7 @@ block|}
 argument_list|)
 return|;
 block|}
-comment|/**      * Determines if a specified set of columns from a specified relational      * expression are unique, optionally ignoring null values in the columns.      * Nulls can be ignored if the relational expression has filtered out      * null values.      *      * @param rel the relational expression      * @param columns column mask representing the subset of columns for which      * uniqueness will be determined      * @param ignoreNulls if true, ignore null values when determining column      * uniqueness      *      * @return true or false depending on whether the columns are unique, or      * null if not enough information is available to make that determination      */
+comment|/**    * Determines if a specified set of columns from a specified relational    * expression are unique, optionally ignoring null values in the columns.    * Nulls can be ignored if the relational expression has filtered out    * null values.    *    * @param rel         the relational expression    * @param columns     column mask representing the subset of columns for which    *                    uniqueness will be determined    * @param ignoreNulls if true, ignore null values when determining column    *                    uniqueness    * @return true or false depending on whether the columns are unique, or    * null if not enough information is available to make that determination    */
 specifier|public
 specifier|static
 name|Boolean
@@ -567,7 +567,7 @@ block|}
 argument_list|)
 return|;
 block|}
-comment|/**      * Estimates the distinct row count in the original source for the given      * groupKey, ignoring any filtering being applied by the expression.      * Typically, "original source" means base table, but for derived columns,      * the estimate may come from a non-leaf rel such as a ProjectRel.      *      * @param rel the relational expression      * @param groupKey column mask representing the subset of columns for which      * the row count will be determined      *      * @return distinct row count for the given groupKey, or null if no reliable      * estimate can be determined      */
+comment|/**    * Estimates the distinct row count in the original source for the given    * groupKey, ignoring any filtering being applied by the expression.    * Typically, "original source" means base table, but for derived columns,    * the estimate may come from a non-leaf rel such as a ProjectRel.    *    * @param rel      the relational expression    * @param groupKey column mask representing the subset of columns for which    *                 the row count will be determined    * @return distinct row count for the given groupKey, or null if no reliable    * estimate can be determined    */
 specifier|public
 specifier|static
 name|Double
@@ -615,7 +615,7 @@ name|result
 argument_list|)
 return|;
 block|}
-comment|/**      * Estimates the number of rows which would be produced by a GROUP BY on the      * set of columns indicated by groupKey, where the input to the GROUP BY has      * been pre-filtered by predicate. This quantity (leaving out predicate) is      * often referred to as cardinality (as in gender being a "low-cardinality      * column").      *      * @param rel the relational expression      * @param groupKey column mask representing group by columns      * @param predicate pre-filtered predicates      *      * @return distinct row count for groupKey, filtered by predicate, or null      * if no reliable estimate can be determined      */
+comment|/**    * Estimates the number of rows which would be produced by a GROUP BY on the    * set of columns indicated by groupKey, where the input to the GROUP BY has    * been pre-filtered by predicate. This quantity (leaving out predicate) is    * often referred to as cardinality (as in gender being a "low-cardinality    * column").    *    * @param rel       the relational expression    * @param groupKey  column mask representing group by columns    * @param predicate pre-filtered predicates    * @return distinct row count for groupKey, filtered by predicate, or null    * if no reliable estimate can be determined    */
 specifier|public
 specifier|static
 name|Double
@@ -668,7 +668,7 @@ name|result
 argument_list|)
 return|;
 block|}
-comment|/**      * Determines whether a relational expression should be visible in EXPLAIN      * PLAN output at a particular level of detail.      *      * @param rel the relational expression      * @param explainLevel level of detail      *      * @return true for visible, false for invisible      */
+comment|/**    * Determines whether a relational expression should be visible in EXPLAIN    * PLAN output at a particular level of detail.    *    * @param rel          the relational expression    * @param explainLevel level of detail    * @return true for visible, false for invisible    */
 specifier|public
 specifier|static
 name|boolean

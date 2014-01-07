@@ -77,24 +77,24 @@ extends|extends
 name|SqlNode
 block|{
 comment|//~ Instance fields --------------------------------------------------------
-comment|/**      * Array of the components of this compound identifier.      *      *<p>It's convenient to have this member public, and it's convenient to      * have this member not-final, but it's a shame it's public and not-final.      * If you assign to this member, please use {@link #setNames(String[],      * SqlParserPos[])}. And yes, we'd like to make identifiers immutable one      * day.      */
+comment|/**    * Array of the components of this compound identifier.    *    *<p>It's convenient to have this member public, and it's convenient to    * have this member not-final, but it's a shame it's public and not-final.    * If you assign to this member, please use {@link #setNames(String[],    * SqlParserPos[])}. And yes, we'd like to make identifiers immutable one    * day.    */
 specifier|public
 name|String
 index|[]
 name|names
 decl_stmt|;
-comment|/**      * This identifier's collation (if any).      */
+comment|/**    * This identifier's collation (if any).    */
 name|SqlCollation
 name|collation
 decl_stmt|;
-comment|/**      * A list of the positions of the components of compound identifiers.      */
+comment|/**    * A list of the positions of the components of compound identifiers.    */
 specifier|private
 name|SqlParserPos
 index|[]
 name|componentPositions
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a compound identifier, for example<code>foo.bar</code>.      *      * @param names Parts of the identifier, length&gt;= 1      */
+comment|/**    * Creates a compound identifier, for example<code>foo.bar</code>.    *    * @param names Parts of the identifier, length&gt;= 1    */
 specifier|public
 name|SqlIdentifier
 parameter_list|(
@@ -174,7 +174,7 @@ literal|null
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Creates a simple identifier, for example<code>foo</code>, with a      * collation.      */
+comment|/**    * Creates a simple identifier, for example<code>foo</code>, with a    * collation.    */
 specifier|public
 name|SqlIdentifier
 parameter_list|(
@@ -205,7 +205,7 @@ literal|null
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Creates a simple identifier, for example<code>foo</code>.      */
+comment|/**    * Creates a simple identifier, for example<code>foo</code>.    */
 specifier|public
 name|SqlIdentifier
 parameter_list|(
@@ -346,7 +346,7 @@ name|toString
 argument_list|()
 return|;
 block|}
-comment|/**      * Modifies the components of this identifier and their positions.      *      * @param names Names of components      * @param poses Positions of components      *      * @deprecated Identifiers should be immutable      */
+comment|/**    * Modifies the components of this identifier and their positions.    *    * @param names Names of components    * @param poses Positions of components    * @deprecated Identifiers should be immutable    */
 specifier|public
 name|void
 name|setNames
@@ -373,7 +373,7 @@ operator|=
 name|poses
 expr_stmt|;
 block|}
-comment|/**      * Returns the position of the<code>i</code>th component of a compound      * identifier, or the position of the whole identifier if that information      * is not present.      *      * @param i Ordinal of component.      *      * @return Position of i'th component      */
+comment|/**    * Returns the position of the<code>i</code>th component of a compound    * identifier, or the position of the whole identifier if that information    * is not present.    *    * @param i Ordinal of component.    * @return Position of i'th component    */
 specifier|public
 name|SqlParserPos
 name|getComponentParserPosition
@@ -413,7 +413,7 @@ name|i
 index|]
 return|;
 block|}
-comment|/**      * Copies names and components from another identifier. Does not modify the      * cross-component parser position.      *      * @param other identifier from which to copy      */
+comment|/**    * Copies names and components from another identifier. Does not modify the    * cross-component parser position.    *    * @param other identifier from which to copy    */
 specifier|public
 name|void
 name|assignNamesFrom
@@ -434,7 +434,7 @@ name|componentPositions
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Creates an identifier which contains only the<code>ordinal</code>th      * component of this compound identifier. It will have the correct {@link      * SqlParserPos}, provided that detailed position information is available.      */
+comment|/**    * Creates an identifier which contains only the<code>ordinal</code>th    * component of this compound identifier. It will have the correct {@link    * SqlParserPos}, provided that detailed position information is available.    */
 specifier|public
 name|SqlIdentifier
 name|getComponent
@@ -820,7 +820,7 @@ literal|0
 index|]
 return|;
 block|}
-comment|/**      * Returns whether this identifier is a star, such as "*" or "foo.bar.*".      */
+comment|/**    * Returns whether this identifier is a star, such as "*" or "foo.bar.*".    */
 specifier|public
 name|boolean
 name|isStar
@@ -842,7 +842,7 @@ literal|"*"
 argument_list|)
 return|;
 block|}
-comment|/**      * Returns whether this is a simple identifier. "FOO" is simple; "*",      * "FOO.*" and "FOO.BAR" are not.      */
+comment|/**    * Returns whether this is a simple identifier. "FOO" is simple; "*",    * "FOO.*" and "FOO.BAR" are not.    */
 specifier|public
 name|boolean
 name|isSimple

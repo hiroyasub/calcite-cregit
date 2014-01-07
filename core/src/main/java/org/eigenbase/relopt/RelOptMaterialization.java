@@ -165,7 +165,7 @@ specifier|final
 name|RelNode
 name|queryRel
 decl_stmt|;
-comment|/** Creates a RelOptMaterialization. */
+comment|/**    * Creates a RelOptMaterialization.    */
 specifier|public
 name|RelOptMaterialization
 parameter_list|(
@@ -242,7 +242,7 @@ operator|=
 name|queryRel
 expr_stmt|;
 block|}
-comment|/** Converts a relational expression to one that uses a    * {@link net.hydromatic.optiq.impl.StarTable}.    * The relational expression is already in leaf-join-form, per    * {@link #toLeafJoinForm(org.eigenbase.rel.RelNode)}. */
+comment|/**    * Converts a relational expression to one that uses a    * {@link net.hydromatic.optiq.impl.StarTable}.    * The relational expression is already in leaf-join-form, per    * {@link #toLeafJoinForm(org.eigenbase.rel.RelNode)}.    */
 specifier|public
 specifier|static
 name|RelNode
@@ -1000,7 +1000,7 @@ block|}
 argument_list|)
 return|;
 block|}
-comment|/** Converts a relational expression to a form where    * {@link org.eigenbase.rel.JoinRel}s are    * as close to leaves as possible. */
+comment|/**    * Converts a relational expression to a form where    * {@link org.eigenbase.rel.JoinRel}s are    * as close to leaves as possible.    */
 specifier|public
 specifier|static
 name|RelNode

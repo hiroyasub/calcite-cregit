@@ -96,7 +96,7 @@ name|isDerived
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * @return table of origin      */
+comment|/**    * @return table of origin    */
 specifier|public
 name|RelOptTable
 name|getOriginTable
@@ -106,7 +106,7 @@ return|return
 name|originTable
 return|;
 block|}
-comment|/**      * @return 0-based index of column in origin table; whether this ordinal is      * flattened or unflattened depends on whether UDT flattening has already      * been performed on the relational expression which produced this      * description      */
+comment|/**    * @return 0-based index of column in origin table; whether this ordinal is    * flattened or unflattened depends on whether UDT flattening has already    * been performed on the relational expression which produced this    * description    */
 specifier|public
 name|int
 name|getOriginColumnOrdinal
@@ -116,7 +116,7 @@ return|return
 name|iOriginColumn
 return|;
 block|}
-comment|/**      * Consider the query<code>select a+b as c, d as e from t</code>. The      * output column c has two origins (a and b), both of them derived. The      * output column d as one origin (c), which is not derived.      *      * @return false if value taken directly from column in origin table; true      * otherwise      */
+comment|/**    * Consider the query<code>select a+b as c, d as e from t</code>. The    * output column c has two origins (a and b), both of them derived. The    * output column d as one origin (c), which is not derived.    *    * @return false if value taken directly from column in origin table; true    * otherwise    */
 specifier|public
 name|boolean
 name|isDerived

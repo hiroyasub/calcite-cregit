@@ -73,7 +73,7 @@ interface|interface
 name|SqlRexContext
 block|{
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Converts an expression from {@link SqlNode} to {@link RexNode} format.      *      * @param expr Expression to translate      *      * @return Converted expression      */
+comment|/**    * Converts an expression from {@link SqlNode} to {@link RexNode} format.    *    * @param expr Expression to translate    * @return Converted expression    */
 name|RexNode
 name|convertExpression
 parameter_list|(
@@ -81,12 +81,12 @@ name|SqlNode
 name|expr
 parameter_list|)
 function_decl|;
-comment|/**      * Returns the {@link RexBuilder} to use to create {@link RexNode} objects.      */
+comment|/**    * Returns the {@link RexBuilder} to use to create {@link RexNode} objects.    */
 name|RexBuilder
 name|getRexBuilder
 parameter_list|()
 function_decl|;
-comment|/**      * Returns the expression used to access a given IN or EXISTS {@link      * SqlSelect sub-query}.      *      * @param call IN or EXISTS expression      *      * @return Expression used to access current row of sub-query      */
+comment|/**    * Returns the expression used to access a given IN or EXISTS {@link    * SqlSelect sub-query}.    *    * @param call IN or EXISTS expression    * @return Expression used to access current row of sub-query    */
 name|RexRangeRef
 name|getSubqueryExpr
 parameter_list|(
@@ -94,22 +94,22 @@ name|SqlCall
 name|call
 parameter_list|)
 function_decl|;
-comment|/**      * Returns the type factory.      */
+comment|/**    * Returns the type factory.    */
 name|RelDataTypeFactory
 name|getTypeFactory
 parameter_list|()
 function_decl|;
-comment|/**      * Returns the factory which supplies default values for INSERT, UPDATE, and      * NEW.      */
+comment|/**    * Returns the factory which supplies default values for INSERT, UPDATE, and    * NEW.    */
 name|DefaultValueFactory
 name|getDefaultValueFactory
 parameter_list|()
 function_decl|;
-comment|/**      * Returns the validator.      */
+comment|/**    * Returns the validator.    */
 name|SqlValidator
 name|getValidator
 parameter_list|()
 function_decl|;
-comment|/**      * Converts a literal.      */
+comment|/**    * Converts a literal.    */
 name|RexNode
 name|convertLiteral
 parameter_list|(

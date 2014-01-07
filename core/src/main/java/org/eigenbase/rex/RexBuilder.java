@@ -184,7 +184,7 @@ specifier|public
 class|class
 name|RexBuilder
 block|{
-comment|/** Special operator that accesses an unadvertised field of an input record.      * This operator cannot be used in SQL queries; it is introduced temporarily      * during sql-to-rel translation, then replaced during the process that      * trims unwanted fields. */
+comment|/**    * Special operator that accesses an unadvertised field of an input record.    * This operator cannot be used in SQL queries; it is introduced temporarily    * during sql-to-rel translation, then replaced during the process that    * trims unwanted fields.    */
 specifier|public
 specifier|static
 specifier|final
@@ -238,7 +238,7 @@ name|instance
 argument_list|()
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a RexBuilder.      *      * @param typeFactory Type factory      */
+comment|/**    * Creates a RexBuilder.    *    * @param typeFactory Type factory    */
 specifier|public
 name|RexBuilder
 parameter_list|(
@@ -356,7 +356,7 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Returns this RexBuilder's type factory      *      * @return type factory      */
+comment|/**    * Returns this RexBuilder's type factory    *    * @return type factory    */
 specifier|public
 name|RelDataTypeFactory
 name|getTypeFactory
@@ -366,7 +366,7 @@ return|return
 name|typeFactory
 return|;
 block|}
-comment|/**      * Returns this RexBuilder's operator table      *      * @return operator table      */
+comment|/**    * Returns this RexBuilder's operator table    *    * @return operator table    */
 specifier|public
 name|SqlStdOperatorTable
 name|getOpTab
@@ -376,7 +376,7 @@ return|return
 name|opTab
 return|;
 block|}
-comment|/**      * Creates an expression accessing a given named field from a record.      *      * @param expr Expression yielding a record      * @param fieldName Name of field in record      *      * @return Expression accessing a given named field      */
+comment|/**    * Creates an expression accessing a given named field from a record.    *    * @param expr      Expression yielding a record    * @param fieldName Name of field in record    * @return Expression accessing a given named field    */
 specifier|public
 name|RexNode
 name|makeFieldAccess
@@ -441,7 +441,7 @@ name|field
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates an expression accessing a field with a given ordinal from a      * record.      *      * @param expr Expression yielding a record      * @param i Ordinal of field      *      * @return Expression accessing given field      */
+comment|/**    * Creates an expression accessing a field with a given ordinal from a    * record.    *    * @param expr Expression yielding a record    * @param i    Ordinal of field    * @return Expression accessing given field    */
 specifier|public
 name|RexNode
 name|makeFieldAccess
@@ -525,7 +525,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates an expression accessing a given field from a record.      *      * @param expr Expression yielding a record      * @param field Field      *      * @return Expression accessing given field      */
+comment|/**    * Creates an expression accessing a given field from a record.    *    * @param expr  Expression yielding a record    * @param field Field    * @return Expression accessing given field    */
 specifier|private
 name|RexNode
 name|makeFieldAccessInternal
@@ -621,7 +621,7 @@ name|field
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates a call with an array of arguments and a predetermined type.      */
+comment|/**    * Creates a call with an array of arguments and a predetermined type.    */
 specifier|public
 name|RexNode
 name|makeCall
@@ -651,7 +651,7 @@ name|exprs
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates a call with an array of arguments.      *      *<p>This is the fundamental method called by all of the other<code>      * makeCall</code> methods. If you derive a class from {@link RexBuilder},      * this is the only method you need to override.</p>      */
+comment|/**    * Creates a call with an array of arguments.    *    *<p>This is the fundamental method called by all of the other<code>    * makeCall</code> methods. If you derive a class from {@link RexBuilder},    * this is the only method you need to override.</p>    */
 specifier|public
 name|RexNode
 name|makeCall
@@ -739,7 +739,7 @@ name|exprs
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates a call with a list of arguments.      *      *<p>Equivalent to<code>makeCall(op, exprList.toArray(new      * RexNode[exprList.size()]))</code>.      */
+comment|/**    * Creates a call with a list of arguments.    *    *<p>Equivalent to<code>makeCall(op, exprList.toArray(new    * RexNode[exprList.size()]))</code>.    */
 specifier|public
 specifier|final
 name|RexNode
@@ -767,7 +767,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates a call with an array of arguments.      *      *<p>This is the fundamental method called by all of the other<code>      * makeCall</code> methods. If you derive a class from {@link RexBuilder},      * this is the only method you need to override.</p>      */
+comment|/**    * Creates a call with an array of arguments.    *    *<p>This is the fundamental method called by all of the other<code>    * makeCall</code> methods. If you derive a class from {@link RexBuilder},    * this is the only method you need to override.</p>    */
 specifier|public
 name|RexNode
 name|makeFlatCall
@@ -800,7 +800,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**      * Derives the return type of a call to an operator.      *      * @param op the operator being called      * @param typeFactory factory for return type      * @param exprs actual operands      *      * @return derived type      */
+comment|/**    * Derives the return type of a call to an operator.    *    * @param op          the operator being called    * @param typeFactory factory for return type    * @param exprs       actual operands    * @return derived type    */
 specifier|public
 name|RelDataType
 name|deriveReturnType
@@ -837,7 +837,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates a reference to an aggregate call, checking for repeated calls.      */
+comment|/**    * Creates a reference to an aggregate call, checking for repeated calls.    */
 specifier|public
 name|RexNode
 name|addAggCall
@@ -923,7 +923,7 @@ return|return
 name|rex
 return|;
 block|}
-comment|/**      * Creates a call to a windowed agg.      */
+comment|/**    * Creates a call to a windowed agg.    */
 specifier|public
 name|RexNode
 name|makeOver
@@ -1207,7 +1207,7 @@ return|return
 name|result
 return|;
 block|}
-comment|/**      * Creates a window specification.      *      *      * @param partitionKeys Partition keys      * @param orderKeys Order keys      * @param lowerBound Lower bound      * @param upperBound Upper bound      * @param isRows Whether physical. True if row-based, false if range-based      * @return window specification      */
+comment|/**    * Creates a window specification.    *    * @param partitionKeys Partition keys    * @param orderKeys     Order keys    * @param lowerBound    Lower bound    * @param upperBound    Upper bound    * @param isRows        Whether physical. True if row-based, false if    *                      range-based    * @return window specification    */
 specifier|public
 name|RexWindow
 name|makeWindow
@@ -1250,7 +1250,7 @@ name|isRows
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates a constant for the SQL<code>NULL</code> value.      */
+comment|/**    * Creates a constant for the SQL<code>NULL</code> value.    */
 specifier|public
 name|RexLiteral
 name|constantNull
@@ -1260,7 +1260,7 @@ return|return
 name|constantNull
 return|;
 block|}
-comment|/**      * Creates an expression referencing a correlation variable.      *      * @param type Type of variable      * @param name Name of variable      *      * @return Correlation variable      */
+comment|/**    * Creates an expression referencing a correlation variable.    *    * @param type Type of variable    * @param name Name of variable    * @return Correlation variable    */
 specifier|public
 name|RexNode
 name|makeCorrel
@@ -1282,7 +1282,7 @@ name|type
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates an invocation of the NEW operator.      *      * @param type Type to be instantiated      * @param exprs Arguments to NEW operator      *      * @return Expression invoking NEW operator      */
+comment|/**    * Creates an invocation of the NEW operator.    *    * @param type  Type to be instantiated    * @param exprs Arguments to NEW operator    * @return Expression invoking NEW operator    */
 specifier|public
 name|RexNode
 name|makeNewInvocation
@@ -1311,7 +1311,7 @@ name|exprs
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates a call to the CAST operator, expanding if possible.      *      * @param type Type to cast to      * @param exp Expression being cast      *      * @return Call to CAST operator      */
+comment|/**    * Creates a call to the CAST operator, expanding if possible.    *    * @param type Type to cast to    * @param exp  Expression being cast    * @return Call to CAST operator    */
 specifier|public
 name|RexNode
 name|makeCast
@@ -2245,7 +2245,7 @@ literal|false
 argument_list|)
 return|;
 block|}
-comment|/**      * Casts a decimal's integer representation to a decimal node. If the      * expression is not the expected integer type, then it is casted first.      *      *<p>An overflow check may be requested to ensure the internal value      * does not exceed the maximum value of the decimal type.      *      * @param value integer representation of decimal      * @param type type integer will be reinterpreted as      * @param checkOverflow indicates whether an overflow check is required      * when reinterpreting this particular value as the decimal type. A      * check usually not required for arithmetic, but is often required for      * rounding and explicit casts.      *      * @return the integer reinterpreted as an opaque decimal type      */
+comment|/**    * Casts a decimal's integer representation to a decimal node. If the    * expression is not the expected integer type, then it is casted first.    *    *<p>An overflow check may be requested to ensure the internal value    * does not exceed the maximum value of the decimal type.    *    * @param value         integer representation of decimal    * @param type          type integer will be reinterpreted as    * @param checkOverflow indicates whether an overflow check is required    *                      when reinterpreting this particular value as the    *                      decimal type. A check usually not required for    *                      arithmetic, but is often required for rounding and    *                      explicit casts.    * @return the integer reinterpreted as an opaque decimal type    */
 specifier|public
 name|RexNode
 name|encodeIntervalOrDecimal
@@ -2298,7 +2298,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**      * Retrieves an interval or decimal node's integer representation      *      * @param node the interval or decimal value as an opaque type      *      * @return an integer representation of the decimal value      */
+comment|/**    * Retrieves an interval or decimal node's integer representation    *    * @param node the interval or decimal value as an opaque type    * @return an integer representation of the decimal value    */
 specifier|public
 name|RexNode
 name|decodeIntervalOrDecimal
@@ -2361,7 +2361,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates a call to the CAST operator.      *      * @param type Type to cast to      * @param exp Expression being cast      *      * @return Call to CAST operator      */
+comment|/**    * Creates a call to the CAST operator.    *    * @param type Type to cast to    * @param exp  Expression being cast    * @return Call to CAST operator    */
 specifier|public
 name|RexNode
 name|makeAbstractCast
@@ -2392,7 +2392,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**      * Makes a reinterpret cast.      *      * @param type type returned by the cast      * @param exp expression to be casted      * @param checkOverflow whether an overflow check is required      *      * @return a RexCall with two operands and a special return type      */
+comment|/**    * Makes a reinterpret cast.    *    * @param type          type returned by the cast    * @param exp           expression to be casted    * @param checkOverflow whether an overflow check is required    * @return a RexCall with two operands and a special return type    */
 specifier|public
 name|RexNode
 name|makeReinterpretCast
@@ -2465,7 +2465,7 @@ name|args
 argument_list|)
 return|;
 block|}
-comment|/**      * Makes an expression which converts a value of type T to a value of type T      * NOT NULL, or throws if the value is NULL. If the expression is already      * NOT NULL, does nothing.      */
+comment|/**    * Makes an expression which converts a value of type T to a value of type T    * NOT NULL, or throws if the value is NULL. If the expression is already    * NOT NULL, does nothing.    */
 specifier|public
 name|RexNode
 name|makeNotNullCast
@@ -2527,7 +2527,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates a reference to all the fields in the row. That is, the whole row      * as a single record object.      *      * @param rowType Type of the input row.      */
+comment|/**    * Creates a reference to all the fields in the row. That is, the whole row    * as a single record object.    *    * @param rowType Type of the input row.    */
 specifier|public
 name|RexNode
 name|makeRangeReference
@@ -2546,7 +2546,7 @@ literal|0
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates a reference to all the fields in the row.      *      *<p>For example, if the input row has type<code>T{f0,f1,f2,f3,f4}</code>      * then<code>makeRangeReference(T{f0,f1,f2,f3,f4}, S{f3,f4}, 3)</code> is      * an expression which yields the last 2 fields.      *      * @param type Type of the resulting range record.      * @param offset Index of first field.      * @param nullable Whether the record is nullable.      */
+comment|/**    * Creates a reference to all the fields in the row.    *    *<p>For example, if the input row has type<code>T{f0,f1,f2,f3,f4}</code>    * then<code>makeRangeReference(T{f0,f1,f2,f3,f4}, S{f3,f4}, 3)</code> is    * an expression which yields the last 2 fields.    *    * @param type     Type of the resulting range record.    * @param offset   Index of first field.    * @param nullable Whether the record is nullable.    */
 specifier|public
 name|RexNode
 name|makeRangeReference
@@ -2594,7 +2594,7 @@ name|offset
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates a reference to a given field of the input record.      *      * @param type Type of field      * @param i Ordinal of field      *      * @return Reference to field      */
+comment|/**    * Creates a reference to a given field of the input record.    *    * @param type Type of field    * @param i    Ordinal of field    * @return Reference to field    */
 specifier|public
 name|RexInputRef
 name|makeInputRef
@@ -2627,7 +2627,7 @@ name|type
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates a literal representing a flag.      *      * @param flag Flag value; must be either a {@link      * org.eigenbase.util14.Enum14.Value} or a {@link Enum}, and hence a {@link      * Comparable}.      */
+comment|/**    * Creates a literal representing a flag.    *    * @param flag Flag value; must be either a {@link    *             org.eigenbase.util14.Enum14.Value} or a {@link Enum}, and hence a {@link    *             Comparable}.    */
 specifier|public
 name|RexLiteral
 name|makeFlag
@@ -2684,7 +2684,7 @@ name|SYMBOL
 argument_list|)
 return|;
 block|}
-comment|/**      * Internal method to create a call to a literal. Code outside this package      * should call one of the type-specific methods such as {@link      * #makeDateLiteral(Calendar)}, {@link #makeLiteral(boolean)}, {@link      * #makeLiteral(String)}.      *      * @param o Value of literal, must be appropriate for the type      * @param type Type of literal      * @param typeName SQL type of literal      *      * @return Literal      */
+comment|/**    * Internal method to create a call to a literal. Code outside this package    * should call one of the type-specific methods such as {@link    * #makeDateLiteral(Calendar)}, {@link #makeLiteral(boolean)}, {@link    * #makeLiteral(String)}.    *    * @param o        Value of literal, must be appropriate for the type    * @param type     Type of literal    * @param typeName SQL type of literal    * @return Literal    */
 specifier|protected
 name|RexLiteral
 name|makeLiteral
@@ -2825,7 +2825,7 @@ name|typeName
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates a boolean literal.      */
+comment|/**    * Creates a boolean literal.    */
 specifier|public
 name|RexLiteral
 name|makeLiteral
@@ -2842,7 +2842,7 @@ else|:
 name|booleanFalse
 return|;
 block|}
-comment|/**      * Creates a numeric literal.      */
+comment|/**    * Creates a numeric literal.    */
 specifier|public
 name|RexLiteral
 name|makeExactLiteral
@@ -3001,7 +3001,7 @@ name|relType
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates a BIGINT literal.      */
+comment|/**    * Creates a BIGINT literal.    */
 specifier|public
 name|RexLiteral
 name|makeBigintLiteral
@@ -3035,7 +3035,7 @@ name|DECIMAL
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates a numeric literal.      */
+comment|/**    * Creates a numeric literal.    */
 specifier|public
 name|RexLiteral
 name|makeExactLiteral
@@ -3060,7 +3060,7 @@ name|DECIMAL
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates a byte array literal.      */
+comment|/**    * Creates a byte array literal.    */
 specifier|public
 name|RexLiteral
 name|makeBinaryLiteral
@@ -3094,7 +3094,7 @@ name|BINARY
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates a double-precision literal.      */
+comment|/**    * Creates a double-precision literal.    */
 specifier|public
 name|RexLiteral
 name|makeApproxLiteral
@@ -3138,7 +3138,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates an approximate numeric literal (double or float).      *      * @param bd literal value      * @param type approximate numeric type      *      * @return new literal      */
+comment|/**    * Creates an approximate numeric literal (double or float).    *    * @param bd   literal value    * @param type approximate numeric type    * @return new literal    */
 specifier|public
 name|RexLiteral
 name|makeApproxLiteral
@@ -3181,7 +3181,7 @@ name|DOUBLE
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates a character string literal.      *      * @pre s != null      */
+comment|/**    * Creates a character string literal.    *    * @pre s != null    */
 specifier|public
 name|RexLiteral
 name|makeLiteral
@@ -3197,7 +3197,7 @@ name|s
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates a character string literal with type CHAR and default charset and      * collation.      *      * @param s String value      *      * @return Character string literal      */
+comment|/**    * Creates a character string literal with type CHAR and default charset and    * collation.    *    * @param s String value    * @return Character string literal    */
 specifier|protected
 name|RexLiteral
 name|makePreciseStringLiteral
@@ -3267,7 +3267,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**      * Ensures expression is interpreted as a specified type. The returned      * expression may be wrapped with a cast.      *      * @param type desired type      * @param node expression      * @param matchNullability whether to correct nullability of specified      * type to match the expression; this usually should be true, except for      * explicit casts which can override default nullability      *      * @return a casted expression or the original expression      */
+comment|/**    * Ensures expression is interpreted as a specified type. The returned    * expression may be wrapped with a cast.    *    * @param type             desired type    * @param node             expression    * @param matchNullability whether to correct nullability of specified    *                         type to match the expression; this usually should    *                         be true, except for explicit casts which can    *                         override default nullability    * @return a casted expression or the original expression    */
 specifier|public
 name|RexNode
 name|ensureType
@@ -3329,7 +3329,7 @@ return|return
 name|node
 return|;
 block|}
-comment|/**      * Ensures that a type's nullability matches a value's nullability.      */
+comment|/**    * Ensures that a type's nullability matches a value's nullability.    */
 specifier|public
 name|RelDataType
 name|matchNullability
@@ -3383,7 +3383,7 @@ return|return
 name|type
 return|;
 block|}
-comment|/**      * Creates a character string literal from an {@link NlsString}.      *      *<p>If the string's charset and collation are not set, uses the system      * defaults.      *      * @pre str != null      */
+comment|/**    * Creates a character string literal from an {@link NlsString}.    *    *<p>If the string's charset and collation are not set, uses the system    * defaults.    *    * @pre str != null    */
 specifier|public
 name|RexLiteral
 name|makeCharLiteral
@@ -3428,7 +3428,7 @@ name|CHAR
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates a Date literal.      *      * @pre date != null      */
+comment|/**    * Creates a Date literal.    *    * @pre date != null    */
 specifier|public
 name|RexLiteral
 name|makeDateLiteral
@@ -3468,7 +3468,7 @@ name|DATE
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates a Time literal.      *      * @pre time != null      */
+comment|/**    * Creates a Time literal.    *    * @pre time != null    */
 specifier|public
 name|RexLiteral
 name|makeTimeLiteral
@@ -3513,7 +3513,7 @@ name|TIME
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates a Timestamp literal.      *      * @pre timestamp != null      */
+comment|/**    * Creates a Timestamp literal.    *    * @pre timestamp != null    */
 specifier|public
 name|RexLiteral
 name|makeTimestampLiteral
@@ -3558,7 +3558,7 @@ name|TIMESTAMP
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates an interval literal.      */
+comment|/**    * Creates an interval literal.    */
 specifier|public
 name|RexLiteral
 name|makeIntervalLiteral
@@ -3605,7 +3605,7 @@ name|INTERVAL_DAY_TIME
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates an interval literal.      */
+comment|/**    * Creates an interval literal.    */
 specifier|public
 name|RexLiteral
 name|makeIntervalLiteral
@@ -3644,7 +3644,7 @@ name|INTERVAL_DAY_TIME
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates a reference to a dynamic parameter      *      * @param type Type of dynamic parameter      * @param index Index of dynamic parameter      *      * @return Expression referencing dynamic parameter      */
+comment|/**    * Creates a reference to a dynamic parameter    *    * @param type  Type of dynamic parameter    * @param index Index of dynamic parameter    * @return Expression referencing dynamic parameter    */
 specifier|public
 name|RexDynamicParam
 name|makeDynamicParam
@@ -3666,7 +3666,7 @@ name|index
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates an expression corresponding to a null literal, cast to a specific      * type and precision      *      * @param typeName name of the type that the null will be cast to      * @param precision precision of the type      *      * @return created expression      */
+comment|/**    * Creates an expression corresponding to a null literal, cast to a specific    * type and precision    *    * @param typeName  name of the type that the null will be cast to    * @param precision precision of the type    * @return created expression    */
 specifier|public
 name|RexNode
 name|makeNullLiteral
@@ -3707,7 +3707,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates a literal whose value is NULL, with a particular type.      *      *<p>The typing is necessary because RexNodes are strictly typed. For      * example, in the Rex world the<code>NULL</code> parameter to<code>      * SUBSTRING(NULL FROM 2 FOR 4)</code> must have a valid VARCHAR type so      * that the result type can be determined.      *      * @param typeName Type to cast NULL to      *      * @return NULL literal of given type      */
+comment|/**    * Creates a literal whose value is NULL, with a particular type.    *    *<p>The typing is necessary because RexNodes are strictly typed. For    * example, in the Rex world the<code>NULL</code> parameter to<code>    * SUBSTRING(NULL FROM 2 FOR 4)</code> must have a valid VARCHAR type so    * that the result type can be determined.    *    * @param typeName Type to cast NULL to    * @return NULL literal of given type    */
 specifier|public
 name|RexNode
 name|makeNullLiteral
@@ -3743,7 +3743,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates a copy of an expression, which may have been created using a      * different RexBuilder and/or {@link RelDataTypeFactory}, using this      * RexBuilder.      *      * @param expr Expression      *      * @return Copy of expression      *      * @see RelDataTypeFactory#copyType(RelDataType)      */
+comment|/**    * Creates a copy of an expression, which may have been created using a    * different RexBuilder and/or {@link RelDataTypeFactory}, using this    * RexBuilder.    *    * @param expr Expression    * @return Copy of expression    * @see RelDataTypeFactory#copyType(RelDataType)    */
 specifier|public
 name|RexNode
 name|copy
@@ -3765,7 +3765,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates a literal of the default value for the given type.      *      * @see #makeZeroLiteral(org.eigenbase.reltype.RelDataType, boolean)      *      * @param type Type      * @return Simple literal      */
+comment|/**    * Creates a literal of the default value for the given type.    *    * @param type Type    * @return Simple literal    * @see #makeZeroLiteral(org.eigenbase.reltype.RelDataType, boolean)    */
 specifier|public
 name|RexLiteral
 name|makeZeroLiteral
@@ -3786,7 +3786,7 @@ literal|false
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates an expression of the default value for the given type, casting if      * necessary to ensure that the expression is the exact type.      *      *<p>This value is:</p>      *      *<ul>      *<li>0 for numeric types;      *<li>FALSE for BOOLEAN;      *<li>The epoch for TIMESTAMP and DATE;      *<li>Midnight for TIME;      *<li>The empty string for string types (CHAR, BINARY, VARCHAR, VARBINARY).      *</ul>      *      * @param type Type      * @param allowCast Whether to allow a cast. If false, value is always a      *    {@link RexLiteral} but may not be the exact type      * @return Simple literal, or cast simple literal      */
+comment|/**    * Creates an expression of the default value for the given type, casting if    * necessary to ensure that the expression is the exact type.    *    *<p>This value is:</p>    *    *<ul>    *<li>0 for numeric types;    *<li>FALSE for BOOLEAN;    *<li>The epoch for TIMESTAMP and DATE;    *<li>Midnight for TIME;    *<li>The empty string for string types (CHAR, BINARY, VARCHAR, VARBINARY).    *</ul>    *    * @param type      Type    * @param allowCast Whether to allow a cast. If false, value is always a    *                  {@link RexLiteral} but may not be the exact type    * @return Simple literal, or cast simple literal    */
 specifier|public
 name|RexNode
 name|makeZeroLiteral

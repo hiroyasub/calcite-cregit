@@ -109,7 +109,7 @@ name|SqlCollation
 name|collation
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a string in a specfied character set.      *      * @param value String constant, must not be null      * @param charsetName Name of the character set, may be null      * @param collation Collation, may be null      *      * @throws IllegalCharsetNameException If the given charset name is illegal      * @throws UnsupportedCharsetException If no support for the named charset      * is available in this instance of the Java virtual machine      * @throws RuntimeException If the given value cannot be represented in the      * given charset      *      * @pre theString != null      */
+comment|/**    * Creates a string in a specfied character set.    *    * @param value       String constant, must not be null    * @param charsetName Name of the character set, may be null    * @param collation   Collation, may be null    * @throws IllegalCharsetNameException If the given charset name is illegal    * @throws UnsupportedCharsetException If no support for the named charset    *                                     is available in this instance of the    *                                     Java virtual machine    * @throws RuntimeException            If the given value cannot be represented in the    *                                     given charset    * @pre theString != null    */
 specifier|public
 name|NlsString
 parameter_list|(
@@ -449,7 +449,7 @@ return|return
 name|value
 return|;
 block|}
-comment|/** Returns a string the same as this but with spaces trimmed from the      * right. */
+comment|/**    * Returns a string the same as this but with spaces trimmed from the    * right.    */
 specifier|public
 name|NlsString
 name|rtrim
@@ -492,7 +492,7 @@ return|return
 name|this
 return|;
 block|}
-comment|/**      * Returns the string quoted for SQL, for example<code>_ISO-8859-1'is it a      * plane? no it''s superman!'</code>.      *      * @param prefix if true, prefix the character set name      * @param suffix if true, suffix the collation clause      *      * @return the quoted string      */
+comment|/**    * Returns the string quoted for SQL, for example<code>_ISO-8859-1'is it a    * plane? no it''s superman!'</code>.    *    * @param prefix if true, prefix the character set name    * @param suffix if true, suffix the collation clause    * @return the quoted string    */
 specifier|public
 name|String
 name|asSql
@@ -610,7 +610,7 @@ name|toString
 argument_list|()
 return|;
 block|}
-comment|/**      * Returns the string quoted for SQL, for example<code>_ISO-8859-1'is it a      * plane? no it''s superman!'</code>.      */
+comment|/**    * Returns the string quoted for SQL, for example<code>_ISO-8859-1'is it a    * plane? no it''s superman!'</code>.    */
 specifier|public
 name|String
 name|toString
@@ -625,7 +625,7 @@ literal|true
 argument_list|)
 return|;
 block|}
-comment|/**      * Concatenates some {@link NlsString} objects. The result has the charset      * and collation of the first element. The other elements must have matching      * (or null) charset and collation. Concatenates all at once, not pairwise,      * to avoid string copies.      *      * @param args array of {@link NlsString} to be concatenated      */
+comment|/**    * Concatenates some {@link NlsString} objects. The result has the charset    * and collation of the first element. The other elements must have matching    * (or null) charset and collation. Concatenates all at once, not pairwise,    * to avoid string copies.    *    * @param args array of {@link NlsString} to be concatenated    */
 specifier|public
 specifier|static
 name|NlsString

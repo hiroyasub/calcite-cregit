@@ -185,7 +185,7 @@ argument_list|>
 name|trimFieldsDispatcher
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a RelFieldTrimmer.      *      * @param validator Validator      */
+comment|/**    * Creates a RelFieldTrimmer.    *    * @param validator Validator    */
 specifier|public
 name|RelFieldTrimmer
 parameter_list|(
@@ -232,7 +232,7 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Trims unused fields from a relational expression.      *      *<p>We presume that all fields of the relational expression are wanted by      * its consumer, so only trim fields that are not used within the tree.      *      * @param root Root node of relational expression      * @return Trimmed relational expression      */
+comment|/**    * Trims unused fields from a relational expression.    *    *<p>We presume that all fields of the relational expression are wanted by    * its consumer, so only trim fields that are not used within the tree.    *    * @param root Root node of relational expression    * @return Trimmed relational expression    */
 specifier|public
 name|RelNode
 name|trim
@@ -312,7 +312,7 @@ operator|.
 name|left
 return|;
 block|}
-comment|/**      * Trims the fields of an input relational expression.      *      * @param rel Relational expression      * @param input Input relational expression, whose fields to trim      * @param fieldsUsed Bitmap of fields needed by the consumer      * @return New relational expression and its field mapping      */
+comment|/**    * Trims the fields of an input relational expression.    *    * @param rel        Relational expression    * @param input      Input relational expression, whose fields to trim    * @param fieldsUsed Bitmap of fields needed by the consumer    * @return New relational expression and its field mapping    */
 specifier|protected
 name|TrimResult
 name|trimChild
@@ -386,7 +386,7 @@ name|extraFields
 argument_list|)
 return|;
 block|}
-comment|/**      * Trims a child relational expression, then adds back a dummy project to      * restore the fields that were removed.      *      *<p>Sounds pointless? It causes unused fields to be removed      * further down the tree (towards the leaves), but it ensure that the      * consuming relational expression continues to see the same fields.      *      * @param rel Relational expression      * @param input Input relational expression, whose fields to trim      * @param fieldsUsed Bitmap of fields needed by the consumer      * @return New relational expression and its field mapping      */
+comment|/**    * Trims a child relational expression, then adds back a dummy project to    * restore the fields that were removed.    *    *<p>Sounds pointless? It causes unused fields to be removed    * further down the tree (towards the leaves), but it ensure that the    * consuming relational expression continues to see the same fields.    *    * @param rel        Relational expression    * @param input      Input relational expression, whose fields to trim    * @param fieldsUsed Bitmap of fields needed by the consumer    * @return New relational expression and its field mapping    */
 specifier|protected
 name|TrimResult
 name|trimChildRestore
@@ -611,7 +611,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**      * Invokes {@link #trimFields}, or the appropriate method for the type      * of the rel parameter, using multi-method dispatch.      *      * @param rel Relational expression      * @param fieldsUsed Bitmap of fields needed by the consumer      * @return New relational expression and its field mapping      */
+comment|/**    * Invokes {@link #trimFields}, or the appropriate method for the type    * of the rel parameter, using multi-method dispatch.    *    * @param rel        Relational expression    * @param fieldsUsed Bitmap of fields needed by the consumer    * @return New relational expression and its field mapping    */
 specifier|protected
 specifier|final
 name|TrimResult
@@ -776,7 +776,7 @@ return|return
 name|trimResult
 return|;
 block|}
-comment|/**      * Visit method, per {@link org.eigenbase.util.ReflectiveVisitor}.      *      *<p>This method is invoked reflectively, so there may not be any apparent      * calls to it. The class (or derived classes) may contain overloads of      * this method with more specific types for the {@code rel} parameter.      *      *<p>Returns a pair: the relational expression created, and the mapping      * between the original fields and the fields of the newly created      * relational expression.      *      * @param rel Relational expression      * @param fieldsUsed Fields needed by the consumer      * @return relational expression and mapping      */
+comment|/**    * Visit method, per {@link org.eigenbase.util.ReflectiveVisitor}.    *    *<p>This method is invoked reflectively, so there may not be any apparent    * calls to it. The class (or derived classes) may contain overloads of    * this method with more specific types for the {@code rel} parameter.    *    *<p>Returns a pair: the relational expression created, and the mapping    * between the original fields and the fields of the newly created    * relational expression.    *    * @param rel        Relational expression    * @param fieldsUsed Fields needed by the consumer    * @return relational expression and mapping    */
 specifier|public
 name|TrimResult
 name|trimFields
@@ -824,7 +824,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**      * Variant of {@link #trimFields(RelNode, BitSet, Set)} for      * {@link ProjectRel}.      */
+comment|/**    * Variant of {@link #trimFields(RelNode, BitSet, Set)} for    * {@link ProjectRel}.    */
 specifier|public
 name|TrimResult
 name|trimFields
@@ -1416,7 +1416,7 @@ name|mapping
 argument_list|)
 return|;
 block|}
-comment|/**      * Variant of {@link #trimFields(RelNode, BitSet, Set)} for      * {@link FilterRel}.      */
+comment|/**    * Variant of {@link #trimFields(RelNode, BitSet, Set)} for    * {@link FilterRel}.    */
 specifier|public
 name|TrimResult
 name|trimFields
@@ -1649,7 +1649,7 @@ name|inputMapping
 argument_list|)
 return|;
 block|}
-comment|/**      * Variant of {@link #trimFields(RelNode, BitSet, Set)} for      * {@link SortRel}.      */
+comment|/**    * Variant of {@link #trimFields(RelNode, BitSet, Set)} for    * {@link SortRel}.    */
 specifier|public
 name|TrimResult
 name|trimFields
@@ -1865,7 +1865,7 @@ name|inputMapping
 argument_list|)
 return|;
 block|}
-comment|/**      * Variant of {@link #trimFields(RelNode, BitSet, Set)} for      * {@link JoinRel}.      */
+comment|/**    * Variant of {@link #trimFields(RelNode, BitSet, Set)} for    * {@link JoinRel}.    */
 specifier|public
 name|TrimResult
 name|trimFields
@@ -2525,7 +2525,7 @@ name|mapping
 argument_list|)
 return|;
 block|}
-comment|/**      * Variant of {@link #trimFields(RelNode, BitSet, Set)} for      * {@link SetOpRel} (including UNION and UNION ALL).      */
+comment|/**    * Variant of {@link #trimFields(RelNode, BitSet, Set)} for    * {@link SetOpRel} (including UNION and UNION ALL).    */
 specifier|public
 name|TrimResult
 name|trimFields
@@ -2763,7 +2763,7 @@ name|mapping
 argument_list|)
 return|;
 block|}
-comment|/**      * Variant of {@link #trimFields(RelNode, BitSet, Set)} for      * {@link AggregateRel}.      */
+comment|/**    * Variant of {@link #trimFields(RelNode, BitSet, Set)} for    * {@link AggregateRel}.    */
 specifier|public
 name|TrimResult
 name|trimFields
@@ -3256,7 +3256,7 @@ name|mapping
 argument_list|)
 return|;
 block|}
-comment|/**      * Variant of {@link #trimFields(RelNode, BitSet, Set)} for      * {@link TableModificationRel}.      */
+comment|/**    * Variant of {@link #trimFields(RelNode, BitSet, Set)} for    * {@link TableModificationRel}.    */
 specifier|public
 name|TrimResult
 name|trimFields
@@ -3459,7 +3459,7 @@ name|mapping
 argument_list|)
 return|;
 block|}
-comment|/**      * Variant of {@link #trimFields(RelNode, BitSet, Set)} for      * {@link TableFunctionRel}.      */
+comment|/**    * Variant of {@link #trimFields(RelNode, BitSet, Set)} for    * {@link TableFunctionRel}.    */
 specifier|public
 name|TrimResult
 name|trimFields
@@ -3652,7 +3652,7 @@ name|mapping
 argument_list|)
 return|;
 block|}
-comment|/**      * Variant of {@link #trimFields(RelNode, BitSet, Set)} for      * {@link org.eigenbase.rel.ValuesRel}.      */
+comment|/**    * Variant of {@link #trimFields(RelNode, BitSet, Set)} for    * {@link org.eigenbase.rel.ValuesRel}.    */
 specifier|public
 name|TrimResult
 name|trimFields
@@ -3957,7 +3957,7 @@ return|return
 name|mapping
 return|;
 block|}
-comment|/**      * Variant of {@link #trimFields(RelNode, BitSet, Set)} for      * {@link org.eigenbase.rel.TableAccessRel}.      */
+comment|/**    * Variant of {@link #trimFields(RelNode, BitSet, Set)} for    * {@link org.eigenbase.rel.TableAccessRel}.    */
 specifier|public
 name|TrimResult
 name|trimFields
@@ -4057,7 +4057,7 @@ argument_list|)
 return|;
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------
-comment|/**      * Result of an attempt to trim columns from a relational expression.      *      *<p>The mapping describes where to find the columns wanted by the parent      * of the current relational expression.      *      *<p>The mapping is a      * {@link org.eigenbase.util.mapping.Mappings.SourceMapping}, which means      * that no column can be used more than once, and some columns are not used.      * {@code columnsUsed.getSource(i)} returns the source of the i'th output      * field.      *      *<p>For example, consider the mapping for a relational expression that      * has 4 output columns but only two are being used. The mapping      * {2&rarr; 1, 3&rarr; 0} would give the following behavior:</p>      *      *<ul>      *<li>columnsUsed.getSourceCount() returns 4      *<li>columnsUsed.getTargetCount() returns 2      *<li>columnsUsed.getSource(0) returns 3      *<li>columnsUsed.getSource(1) returns 2      *<li>columnsUsed.getSource(2) throws IndexOutOfBounds      *<li>columnsUsed.getTargetOpt(3) returns 0      *<li>columnsUsed.getTargetOpt(0) returns -1      *</ul>      */
+comment|/**    * Result of an attempt to trim columns from a relational expression.    *    *<p>The mapping describes where to find the columns wanted by the parent    * of the current relational expression.    *    *<p>The mapping is a    * {@link org.eigenbase.util.mapping.Mappings.SourceMapping}, which means    * that no column can be used more than once, and some columns are not used.    * {@code columnsUsed.getSource(i)} returns the source of the i'th output    * field.    *    *<p>For example, consider the mapping for a relational expression that    * has 4 output columns but only two are being used. The mapping    * {2&rarr; 1, 3&rarr; 0} would give the following behavior:</p>    *    *<ul>    *<li>columnsUsed.getSourceCount() returns 4    *<li>columnsUsed.getTargetCount() returns 2    *<li>columnsUsed.getSource(0) returns 3    *<li>columnsUsed.getSource(1) returns 2    *<li>columnsUsed.getSource(2) throws IndexOutOfBounds    *<li>columnsUsed.getTargetOpt(3) returns 0    *<li>columnsUsed.getTargetOpt(0) returns -1    *</ul>    */
 specifier|protected
 specifier|static
 class|class
@@ -4070,7 +4070,7 @@ argument_list|,
 name|Mapping
 argument_list|>
 block|{
-comment|/**          * Creates a TrimResult.          *          * @param left New relational expression          * @param right Mapping of fields onto original fields          */
+comment|/**      * Creates a TrimResult.      *      * @param left  New relational expression      * @param right Mapping of fields onto original fields      */
 specifier|public
 name|TrimResult
 parameter_list|(

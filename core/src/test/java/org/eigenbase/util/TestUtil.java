@@ -72,7 +72,7 @@ argument_list|(
 literal|"\t"
 argument_list|)
 decl_stmt|;
-comment|/**      * System-dependent newline character.      *      *<p/>Do not use '\n' in strings which are samples for test results. {@link      * java.io.PrintWriter#println()} produces '\n' on Unix and '\r\n' on      * Windows, but '\n' is always '\n', so your tests will fail on Windows.      */
+comment|/**    * System-dependent newline character.    *    *<p>Do not use '\n' in strings which are samples for test results.    * {@link java.io.PrintWriter#println()} produces '\n' on Unix and '\r\n' on    * Windows, but '\n' is always '\n', so your tests will fail on Windows.</p>    *    *<p>Or you could use '\n' and let {@link #fold(String)} mask it.</p>    */
 specifier|public
 specifier|static
 specifier|final
@@ -241,7 +241,7 @@ name|actual
 argument_list|)
 throw|;
 block|}
-comment|/**      * Converts a string (which may contain quotes and newlines) into a java      * literal.      *      *<p>For example,<code>      *<pre>string with "quotes" split      * across lines</pre>      *</code> becomes<code>      *<pre>"string with \"quotes\" split" + NL +      *  "across lines"</pre>      *</code>      */
+comment|/**    * Converts a string (which may contain quotes and newlines) into a java    * literal.    *    *<p>For example,<code>    *<pre>string with "quotes" split    * across lines</pre>    *</code> becomes<code>    *<pre>"string with \"quotes\" split" + NL +    *  "across lines"</pre>    *</code>    */
 specifier|public
 specifier|static
 name|String
@@ -357,7 +357,7 @@ return|return
 name|s
 return|;
 block|}
-comment|/**      * Converts a string (which may contain quotes and newlines) into a java      * literal.      *      *<p>For example,<code>      *<pre>string with "quotes" split      * across lines</pre>      *</code> becomes<code>      *<pre>TestUtil.fold(      *  "string with \"quotes\" split\n",      *  + "across lines")</pre>      *</code>      */
+comment|/**    * Converts a string (which may contain quotes and newlines) into a java    * literal.    *    *<p>For example,<code>    *<pre>string with "quotes" split    * across lines</pre>    *</code> becomes<code>    *<pre>TestUtil.fold(    *  "string with \"quotes\" split\n",    *  + "across lines")</pre>    *</code>    */
 specifier|public
 specifier|static
 name|String
@@ -486,7 +486,7 @@ return|return
 name|s
 return|;
 block|}
-comment|/**      * Combines an array of strings, each representing a line, into a single      * string containing line separators.      */
+comment|/**    * Combines an array of strings, each representing a line, into a single    * string containing line separators.    */
 specifier|public
 specifier|static
 name|String
@@ -559,7 +559,7 @@ name|toString
 argument_list|()
 return|;
 block|}
-comment|/**      * Converts a string containing newlines (\n) into a string containing      * os-dependent line endings.      */
+comment|/**    * Converts a string containing newlines (\n) into a string containing    * os-dependent line endings.    */
 specifier|public
 specifier|static
 name|String
@@ -596,7 +596,7 @@ return|return
 name|string
 return|;
 block|}
-comment|/**      * Quotes a pattern.      */
+comment|/**    * Quotes a pattern.    */
 specifier|public
 specifier|static
 name|String

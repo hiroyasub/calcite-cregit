@@ -23,19 +23,19 @@ interface|interface
 name|RelStatColumnStatistics
 block|{
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Estimates the percentage of a relational expression's rows which satisfy      * a given condition. This corresponds to the metadata query {@link      * org.eigenbase.rel.metadata.RelMetadataQuery#getSelectivity}.      *      * @return an estimated percentage from 0.0 to 1.0 or null if no reliable      * estimate can be determined      */
+comment|/**    * Estimates the percentage of a relational expression's rows which satisfy    * a given condition. This corresponds to the metadata query {@link    * org.eigenbase.rel.metadata.RelMetadataQuery#getSelectivity}.    *    * @return an estimated percentage from 0.0 to 1.0 or null if no reliable    * estimate can be determined    */
 specifier|public
 name|Double
 name|getSelectivity
 parameter_list|()
 function_decl|;
-comment|/**      * Estimates the number of distinct values returned from a relational      * expression that satisfy a given condition.      *      * @return an estimate of the distinct values of a predicate or null if no      * reliable estimate can be determined      */
+comment|/**    * Estimates the number of distinct values returned from a relational    * expression that satisfy a given condition.    *    * @return an estimate of the distinct values of a predicate or null if no    * reliable estimate can be determined    */
 specifier|public
 name|Double
 name|getCardinality
 parameter_list|()
 function_decl|;
-comment|/**      * Determine how many blocks on disk will be read from physical storage      * to retrieve the column values selected. This corresponds to an      * attribute set by the Broadbase server. This feature is deferred until      * we find a use for it      */
+comment|/**    * Determine how many blocks on disk will be read from physical storage    * to retrieve the column values selected. This corresponds to an    * attribute set by the Broadbase server. This feature is deferred until    * we find a use for it    */
 comment|// public Long getNumBlocks();
 block|}
 end_interface

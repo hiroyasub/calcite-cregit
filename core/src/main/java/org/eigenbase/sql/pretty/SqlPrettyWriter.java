@@ -138,7 +138,7 @@ literal|"org.eigenbase.sql.pretty.SqlPrettyWriter"
 argument_list|)
 argument_list|)
 decl_stmt|;
-comment|/**      * Bean holding the default property values.      */
+comment|/**    * Bean holding the default property values.    */
 specifier|private
 specifier|static
 specifier|final
@@ -375,7 +375,7 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Sets whether the WHEN, THEN and ELSE clauses of a CASE expression appear      * at the start of a new line. The default is false.      */
+comment|/**    * Sets whether the WHEN, THEN and ELSE clauses of a CASE expression appear    * at the start of a new line. The default is false.    */
 specifier|public
 name|void
 name|setCaseClausesOnNewLines
@@ -391,7 +391,7 @@ operator|=
 name|caseClausesOnNewLines
 expr_stmt|;
 block|}
-comment|/**      * Sets the subquery style. Default is {@link      * org.eigenbase.sql.SqlWriter.SubqueryStyle#Hyde}.      */
+comment|/**    * Sets the subquery style. Default is {@link    * org.eigenbase.sql.SqlWriter.SubqueryStyle#Hyde}.    */
 specifier|public
 name|void
 name|setSubqueryStyle
@@ -648,7 +648,7 @@ operator|=
 literal|" "
 expr_stmt|;
 block|}
-comment|/**      * Returns an object which encapsulates each property as a get/set method.      */
+comment|/**    * Returns an object which encapsulates each property as a get/set method.    */
 specifier|private
 name|Bean
 name|getBean
@@ -674,7 +674,7 @@ return|return
 name|bean
 return|;
 block|}
-comment|/**      * Sets the number of spaces indentation.      *      * @see #getIndentation()      */
+comment|/**    * Sets the number of spaces indentation.    *    * @see #getIndentation()    */
 specifier|public
 name|void
 name|setIndentation
@@ -690,7 +690,7 @@ operator|=
 name|indentation
 expr_stmt|;
 block|}
-comment|/**      * Prints the property settings of this pretty-writer to a writer.      *      * @param pw Writer      * @param omitDefaults Whether to omit properties whose value is the same as      * the default      */
+comment|/**    * Prints the property settings of this pretty-writer to a writer.    *    * @param pw           Writer    * @param omitDefaults Whether to omit properties whose value is the same as    *                     the default    */
 specifier|public
 name|void
 name|describe
@@ -814,7 +814,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Sets settings from a properties object.      */
+comment|/**    * Sets settings from a properties object.    */
 specifier|public
 name|void
 name|setSettings
@@ -898,7 +898,7 @@ expr_stmt|;
 block|}
 block|}
 block|}
-comment|/**      * Sets whether a clause (FROM, WHERE, GROUP BY, HAVING, WINDOW, ORDER BY)      * starts a new line. Default is true. SELECT is always at the start of a      * line.      */
+comment|/**    * Sets whether a clause (FROM, WHERE, GROUP BY, HAVING, WINDOW, ORDER BY)    * starts a new line. Default is true. SELECT is always at the start of a    * line.    */
 specifier|public
 name|void
 name|setClauseStartsLine
@@ -914,7 +914,7 @@ operator|=
 name|clauseStartsLine
 expr_stmt|;
 block|}
-comment|/**      * Sets whether each item in a SELECT list, GROUP BY list, or ORDER BY list      * is on its own line. Default false.      */
+comment|/**    * Sets whether each item in a SELECT list, GROUP BY list, or ORDER BY list    * is on its own line. Default false.    */
 specifier|public
 name|void
 name|setSelectListItemsOnSeparateLines
@@ -930,7 +930,7 @@ operator|=
 name|b
 expr_stmt|;
 block|}
-comment|/**      * Sets whether to use a fix for SELECT list indentations.      *      *<ul>      *<li>If set to "false":      *      *<pre>      * SELECT      *     A as A      *         B as B      *         C as C      *     D      *</pre>      *<li>If set to "true":      *      *<pre>      * SELECT      *     A as A      *     B as B      *     C as C      *     D      *</pre>      *</ul>      */
+comment|/**    * Sets whether to use a fix for SELECT list indentations.    *    *<ul>    *<li>If set to "false":    *    *<pre>    * SELECT    *     A as A    *         B as B    *         C as C    *     D    *</pre>    *<li>If set to "true":    *    *<pre>    * SELECT    *     A as A    *     B as B    *     C as C    *     D    *</pre>    *</ul>    */
 specifier|public
 name|void
 name|setSelectListExtraIndentFlag
@@ -946,7 +946,7 @@ operator|=
 name|b
 expr_stmt|;
 block|}
-comment|/**      * Sets whether to print keywords (SELECT, AS, etc.) in lower-case. The      * default is false: keywords are printed in upper-case.      */
+comment|/**    * Sets whether to print keywords (SELECT, AS, etc.) in lower-case. The    * default is false: keywords are printed in upper-case.    */
 specifier|public
 name|void
 name|setKeywordsLowerCase
@@ -962,7 +962,7 @@ operator|=
 name|b
 expr_stmt|;
 block|}
-comment|/**      * Sets whether to print a newline before each AND or OR (whichever is      * higher level) in WHERE clauses. NOTE:<i>Ignored when      * alwaysUseParentheses is set to true.</i>      */
+comment|/**    * Sets whether to print a newline before each AND or OR (whichever is    * higher level) in WHERE clauses. NOTE:<i>Ignored when    * alwaysUseParentheses is set to true.</i>    */
 specifier|public
 name|void
 name|setWhereListItemsOnSeparateLines
@@ -1136,7 +1136,7 @@ operator|+=
 name|indent
 expr_stmt|;
 block|}
-comment|/**      * Sets whether to quote all identifiers, even those which would be correct      * according to the rules of the {@link SqlDialect} if quotation marks were      * omitted.      *      *<p>Default true.      */
+comment|/**    * Sets whether to quote all identifiers, even those which would be correct    * according to the rules of the {@link SqlDialect} if quotation marks were    * omitted.    *    *<p>Default true.    */
 specifier|public
 name|void
 name|setQuoteAllIdentifiers
@@ -1152,7 +1152,7 @@ operator|=
 name|b
 expr_stmt|;
 block|}
-comment|/**      * Creates a list frame.      *      *<p>Derived classes should override this method to specify the indentation      * of the list.      *      * @param frameType What type of list      * @param keyword The keyword to be printed at the start of the list      * @param open The string to print at the start of the list      * @param close The string to print at the end of the list      *      * @return A frame      */
+comment|/**    * Creates a list frame.    *    *<p>Derived classes should override this method to specify the indentation    * of the list.    *    * @param frameType What type of list    * @param keyword   The keyword to be printed at the start of the list    * @param open      The string to print at the start of the list    * @param close     The string to print at the end of the list    * @return A frame    */
 specifier|protected
 name|FrameImpl
 name|createListFrame
@@ -1904,7 +1904,7 @@ literal|false
 argument_list|)
 return|;
 block|}
-comment|/**      * Starts a list.      *      * @param frameType Type of list. For example, a SELECT list will be      * governed according to SELECT-list formatting preferences.      * @param open String to print at the start of the list; typically "(" or      * the empty string.      * @param close String to print at the end of the list.      */
+comment|/**    * Starts a list.    *    * @param frameType Type of list. For example, a SELECT list will be    *                  governed according to SELECT-list formatting preferences.    * @param open      String to print at the start of the list; typically "(" or    *                  the empty string.    * @param close     String to print at the end of the list.    */
 specifier|protected
 name|Frame
 name|startList
@@ -3094,7 +3094,7 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------
-comment|/**      * Implementation of {@link org.eigenbase.sql.SqlWriter.Frame}.      */
+comment|/**    * Implementation of {@link org.eigenbase.sql.SqlWriter.Frame}.    */
 specifier|protected
 class|class
 name|FrameImpl
@@ -3117,26 +3117,26 @@ specifier|final
 name|String
 name|close
 decl_stmt|;
-comment|/**          * Indent of sub-frame with respect to this one.          */
+comment|/**      * Indent of sub-frame with respect to this one.      */
 specifier|final
 name|int
 name|extraIndent
 decl_stmt|;
-comment|/**          * Indent of separators with respect to this frame's indent. Typically          * zero.          */
+comment|/**      * Indent of separators with respect to this frame's indent. Typically      * zero.      */
 specifier|final
 name|int
 name|sepIndent
 decl_stmt|;
-comment|/**          * Number of items which have been printed in this list so far.          */
+comment|/**      * Number of items which have been printed in this list so far.      */
 name|int
 name|itemCount
 decl_stmt|;
-comment|/**          * Whether to print a newline before each separator.          */
+comment|/**      * Whether to print a newline before each separator.      */
 specifier|public
 name|boolean
 name|newlineBeforeSep
 decl_stmt|;
-comment|/**          * Whether to print a newline after each separator.          */
+comment|/**      * Whether to print a newline after each separator.      */
 specifier|public
 name|boolean
 name|newlineAfterSep
@@ -3363,7 +3363,7 @@ name|itemCount
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Helper class which exposes the get/set methods of an object as      * properties.      */
+comment|/**    * Helper class which exposes the get/set methods of an object as    * properties.    */
 specifier|private
 specifier|static
 class|class

@@ -143,7 +143,7 @@ name|typeFactory
 argument_list|)
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a SqlAdvisor validator.      *      * @param opTab Operator table      * @param catalogReader Catalog reader      * @param typeFactory Type factory      * @param conformance Compatibility mode      *      * @pre opTab != null      * @pre // node is a "query expression" (per SQL standard)      * @pre catalogReader != null      * @pre typeFactory != null      */
+comment|/**    * Creates a SqlAdvisor validator.    *    * @param opTab         Operator table    * @param catalogReader Catalog reader    * @param typeFactory   Type factory    * @param conformance   Compatibility mode    * @pre opTab != null    * @pre // node is a "query expression" (per SQL standard)    * @pre catalogReader != null    * @pre typeFactory != null    */
 specifier|public
 name|SqlAdvisorValidator
 parameter_list|(
@@ -173,7 +173,7 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Registers the identifier and its scope into a map keyed by ParserPostion.      */
+comment|/**    * Registers the identifier and its scope into a map keyed by ParserPostion.    */
 specifier|public
 name|void
 name|validateIdentifier
@@ -375,7 +375,7 @@ return|return
 name|orderExpr
 return|;
 block|}
-comment|/**      * Calls the parent class method and mask Farrago exception thrown.      */
+comment|/**    * Calls the parent class method and mask Farrago exception thrown.    */
 specifier|public
 name|RelDataType
 name|deriveType
@@ -486,7 +486,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Calls the parent class method and masks Farrago exception thrown.      */
+comment|/**    * Calls the parent class method and masks Farrago exception thrown.    */
 specifier|protected
 name|void
 name|validateWhereClause
@@ -522,7 +522,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Calls the parent class method and masks Farrago exception thrown.      */
+comment|/**    * Calls the parent class method and masks Farrago exception thrown.    */
 specifier|protected
 name|void
 name|validateHavingClause

@@ -137,10 +137,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Converts this literal to a {@link java.sql.Timestamp} object.      */
-comment|/*     public Timestamp getTimestamp()     {         return new Timestamp(getCal().getTimeInMillis());     }     */
-comment|/**      * Converts this literal to a {@link java.sql.Time} object.      */
-comment|/*     public Time getTime()     {         long millis = getCal().getTimeInMillis();         int tzOffset = Calendar.getInstance().getTimeZone().getOffset(millis);         return new Time(millis - tzOffset);     }     */
+comment|/*   /**    * Converts this literal to a {@link java.sql.Timestamp} object.    o/   public Timestamp getTimestamp() {     return new Timestamp(getCal().getTimeInMillis());   } */
+comment|/*   /**    * Converts this literal to a {@link java.sql.Time} object.    o/   public Time getTime() {     long millis = getCal().getTimeInMillis();     int tzOffset = Calendar.getInstance().getTimeZone().getOffset(millis);     return new Time(millis - tzOffset);   } */
 specifier|public
 name|SqlNode
 name|clone
@@ -182,7 +180,7 @@ operator|+
 literal|"'"
 return|;
 block|}
-comment|/**      * Returns e.g. '03:05:67.456'.      */
+comment|/**    * Returns e.g. '03:05:67.456'.    */
 specifier|public
 name|String
 name|toFormattedString

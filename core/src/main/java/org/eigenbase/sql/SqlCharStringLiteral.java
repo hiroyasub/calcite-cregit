@@ -88,7 +88,7 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * @return the underlying NlsString      */
+comment|/**    * @return the underlying NlsString    */
 specifier|public
 name|NlsString
 name|getNlsString
@@ -101,7 +101,7 @@ operator|)
 name|value
 return|;
 block|}
-comment|/**      * @return the collation      */
+comment|/**    * @return the collation    */
 specifier|public
 name|SqlCollation
 name|getCollation

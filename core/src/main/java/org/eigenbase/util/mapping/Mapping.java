@@ -52,7 +52,7 @@ name|IntPair
 argument_list|>
 block|{
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Returns an iterator over the elements in this mapping.      *      *<p>This method is optional; implementations may throw {@link      * UnsupportedOperationException}.      */
+comment|/**    * Returns an iterator over the elements in this mapping.    *    *<p>This method is optional; implementations may throw {@link    * UnsupportedOperationException}.    */
 name|Iterator
 argument_list|<
 name|IntPair
@@ -60,12 +60,12 @@ argument_list|>
 name|iterator
 parameter_list|()
 function_decl|;
-comment|/**      * Returns the number of sources. Valid sources will be in the range 0 ..      * sourceCount.      */
+comment|/**    * Returns the number of sources. Valid sources will be in the range 0 ..    * sourceCount.    */
 name|int
 name|getSourceCount
 parameter_list|()
 function_decl|;
-comment|/**      * Returns the number of targets. Valid targets will be in the range 0 ..      * targetCount.      */
+comment|/**    * Returns the number of targets. Valid targets will be in the range 0 ..    * targetCount.    */
 name|int
 name|getTargetCount
 parameter_list|()
@@ -74,17 +74,17 @@ name|MappingType
 name|getMappingType
 parameter_list|()
 function_decl|;
-comment|/**      * Returns whether this mapping is the identity.      */
+comment|/**    * Returns whether this mapping is the identity.    */
 name|boolean
 name|isIdentity
 parameter_list|()
 function_decl|;
-comment|/**      * Removes all elements in the mapping.      */
+comment|/**    * Removes all elements in the mapping.    */
 name|void
 name|clear
 parameter_list|()
 function_decl|;
-comment|/**      * Returns the number of elements in the mapping.      */
+comment|/**    * Returns the number of elements in the mapping.    */
 name|int
 name|size
 parameter_list|()

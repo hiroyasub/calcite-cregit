@@ -177,7 +177,7 @@ name|RelNode
 name|child
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Constructs a CalcRelSplitter.      *      * @param calc CalcRel to split      * @param relTypes Array of rel types, e.g. {Java, Fennel}. Must be      * distinct.      */
+comment|/**    * Constructs a CalcRelSplitter.    *    * @param calc     CalcRel to split    * @param relTypes Array of rel types, e.g. {Java, Fennel}. Must be    *                 distinct.    */
 name|CalcRelSplitter
 parameter_list|(
 name|CalcRelBase
@@ -896,7 +896,7 @@ return|return
 name|rel
 return|;
 block|}
-comment|/** Opportunity to further refine the relational expression created for a      * given level. The default implementation returns the relational expression      * unchanged. */
+comment|/**    * Opportunity to further refine the relational expression created for a    * given level. The default implementation returns the relational expression    * unchanged.    */
 specifier|protected
 name|RelNode
 name|handle
@@ -909,7 +909,7 @@ return|return
 name|rel
 return|;
 block|}
-comment|/**      * Figures out which expressions to calculate at which level.      *      * @param exprs Array of expressions      * @param conditionOrdinal Ordinal of the condition expression, or -1 if no      * condition      * @param exprLevels Level ordinal for each expression (output)      * @param levelTypeOrdinals The type of each level (output)      * @return Number of levels required      */
+comment|/**    * Figures out which expressions to calculate at which level.    *    * @param exprs             Array of expressions    * @param conditionOrdinal  Ordinal of the condition expression, or -1 if no    *                          condition    * @param exprLevels        Level ordinal for each expression (output)    * @param levelTypeOrdinals The type of each level (output)    * @return Number of levels required    */
 specifier|private
 name|int
 name|chooseLevels
@@ -1438,7 +1438,7 @@ return|return
 name|levelCount
 return|;
 block|}
-comment|/**      * Computes the order in which to visit expressions, so that we decide the      * level of an expression only after the levels of lower expressions have      * been decided.      *      *<p>First, we need to ensure that an expression is visited after all of      * its inputs.      *      *<p>Further, if the expression is a member of a cohort, we need to visit      * it after the inputs of all other expressions in that cohort. With this      * condition, expressions in the same cohort will very likely end up in the      * same level.      *      *<p>Note that if there are no cohorts, the expressions from the      * {@link RexProgram} are already in a suitable order. We perform the      * topological sort just to ensure that the code path is well-trodden.      *      * @param exprs Expressions      * @param cohorts List of cohorts, each of which is a set of expr ordinals      * @return Expression ordinals in topological order      */
+comment|/**    * Computes the order in which to visit expressions, so that we decide the    * level of an expression only after the levels of lower expressions have    * been decided.    *    *<p>First, we need to ensure that an expression is visited after all of    * its inputs.    *    *<p>Further, if the expression is a member of a cohort, we need to visit    * it after the inputs of all other expressions in that cohort. With this    * condition, expressions in the same cohort will very likely end up in the    * same level.    *    *<p>Note that if there are no cohorts, the expressions from the    * {@link RexProgram} are already in a suitable order. We perform the    * topological sort just to ensure that the code path is well-trodden.    *    * @param exprs   Expressions    * @param cohorts List of cohorts, each of which is a set of expr ordinals    * @return Expression ordinals in topological order    */
 specifier|private
 name|List
 argument_list|<
@@ -1676,7 +1676,7 @@ return|return
 name|permutation
 return|;
 block|}
-comment|/**      * Finds the cohort that contains the given integer, or returns null.      *      * @param cohorts List of cohorts, each a set of integers      * @param ordinal Integer to search for      * @return Cohort that contains the integer, or null if not found      */
+comment|/**    * Finds the cohort that contains the given integer, or returns null.    *    * @param cohorts List of cohorts, each a set of integers    * @param ordinal Integer to search for    * @return Cohort that contains the integer, or null if not found    */
 specifier|private
 specifier|static
 name|Set
@@ -1777,7 +1777,7 @@ return|return
 name|ints
 return|;
 block|}
-comment|/**      * Creates a program containing the expressions for a given level.      *      *<p>The expression list of the program will consist of all entries in the      * expression list<code>allExprs[i]</code> for which the corresponding      * level ordinal<code>exprLevels[i]</code> is equal to<code>level</code>.      * Expressions are mapped according to<code>inputExprOrdinals</code>.      *      * @param level Level ordinal      * @param levelCount Number of levels      * @param inputRowType Input row type      * @param allExprs Array of all expressions      * @param exprLevels Array of the level ordinal of each expression      * @param inputExprOrdinals Ordinals in the expression list of input      * expressions. Input expression<code>i</code> will be found at position      *<code>inputExprOrdinals[i]</code>.      * @param projectExprOrdinals Ordinals of the expressions to be output this      * level.      * @param conditionExprOrdinal Ordinal of the expression to form the      * condition for this level, or -1 if there is no condition.      * @param outputRowType Output row type      *      * @return Relational expression      */
+comment|/**    * Creates a program containing the expressions for a given level.    *    *<p>The expression list of the program will consist of all entries in the    * expression list<code>allExprs[i]</code> for which the corresponding    * level ordinal<code>exprLevels[i]</code> is equal to<code>level</code>.    * Expressions are mapped according to<code>inputExprOrdinals</code>.    *    * @param level                Level ordinal    * @param levelCount           Number of levels    * @param inputRowType         Input row type    * @param allExprs             Array of all expressions    * @param exprLevels           Array of the level ordinal of each expression    * @param inputExprOrdinals    Ordinals in the expression list of input    *                             expressions. Input expression<code>i</code>    *                             will be found at position    *<code>inputExprOrdinals[i]</code>.    * @param projectExprOrdinals  Ordinals of the expressions to be output this    *                             level.    * @param conditionExprOrdinal Ordinal of the expression to form the    *                             condition for this level, or -1 if there is no    *                             condition.    * @param outputRowType        Output row type    * @return Relational expression    */
 specifier|private
 name|RexProgram
 name|createProgramForLevel
@@ -2327,7 +2327,7 @@ operator|+
 name|ordinal
 return|;
 block|}
-comment|/**      * Traces the given array of level expression lists at the finer level.      *      * @param exprs Array expressions      * @param exprLevels For each expression, the ordinal of its level      * @param levelTypeOrdinals For each level, the ordinal of its reltype in      * the {@link #relTypes} array      * @param levelCount The number of levels      */
+comment|/**    * Traces the given array of level expression lists at the finer level.    *    * @param exprs             Array expressions    * @param exprLevels        For each expression, the ordinal of its level    * @param levelTypeOrdinals For each level, the ordinal of its reltype in    *                          the {@link #relTypes} array    * @param levelCount        The number of levels    */
 specifier|private
 name|void
 name|traceLevelExpressions
@@ -2509,7 +2509,7 @@ name|msg
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Returns the number of bits set in an array.      */
+comment|/**    * Returns the number of bits set in an array.    */
 specifier|private
 specifier|static
 name|int
@@ -2547,7 +2547,7 @@ return|return
 name|count
 return|;
 block|}
-comment|/**      * Returns the index of the first set bit in an array.      */
+comment|/**    * Returns the index of the first set bit in an array.    */
 specifier|private
 specifier|static
 name|int
@@ -2593,7 +2593,7 @@ operator|-
 literal|1
 return|;
 block|}
-comment|/**      * Searches for a value in a map, and returns the position where it was      * found, or -1.      *      * @param value Value to search for      * @param map Map to search in      *      * @return Ordinal of value in map, or -1 if not found      */
+comment|/**    * Searches for a value in a map, and returns the position where it was    * found, or -1.    *    * @param value Value to search for    * @param map   Map to search in    * @return Ordinal of value in map, or -1 if not found    */
 specifier|private
 specifier|static
 name|int
@@ -2644,7 +2644,7 @@ operator|-
 literal|1
 return|;
 block|}
-comment|/**      * Returns whether a relational expression can be implemented solely in a      * given {@link RelType}.      *      * @param rel Calculation relational expression      * @param relTypeName Name of a {@link RelType}      *      * @return Whether relational expression can be implemented      */
+comment|/**    * Returns whether a relational expression can be implemented solely in a    * given {@link RelType}.    *    * @param rel         Calculation relational expression    * @param relTypeName Name of a {@link RelType}    * @return Whether relational expression can be implemented    */
 specifier|protected
 name|boolean
 name|canImplement
@@ -2700,7 +2700,7 @@ name|relTypeName
 argument_list|)
 throw|;
 block|}
-comment|/**      * Returns a list of sets of expressions that should be on the same level.      *      *<p>For example, if this method returns { {3, 5}, {4, 7} }, it means that      * expressions 3 and 5, should be on the same level, and expressions 4 and 7      * should be on the same level. The two cohorts do not need to be on the      * same level.      *      *<p>The list is best effort. If it is not possible to arrange that the      * expressions in a cohort are on the same level, the {@link #execute()}      * method will still succeed.      *      *<p>The default implementation of this method returns the empty list;      * expressions will be put on the most suitable level. This is generally      * the lowest possible level, except for literals, which are placed at the      * level where they are used.      *      * @return List of cohorts, that is sets of expressions, that the splitting      * algorithm should attempt to place on the same level      */
+comment|/**    * Returns a list of sets of expressions that should be on the same level.    *    *<p>For example, if this method returns { {3, 5}, {4, 7} }, it means that    * expressions 3 and 5, should be on the same level, and expressions 4 and 7    * should be on the same level. The two cohorts do not need to be on the    * same level.    *    *<p>The list is best effort. If it is not possible to arrange that the    * expressions in a cohort are on the same level, the {@link #execute()}    * method will still succeed.    *    *<p>The default implementation of this method returns the empty list;    * expressions will be put on the most suitable level. This is generally    * the lowest possible level, except for literals, which are placed at the    * level where they are used.    *    * @return List of cohorts, that is sets of expressions, that the splitting    * algorithm should attempt to place on the same level    */
 specifier|protected
 name|List
 argument_list|<
@@ -2843,7 +2843,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**          * Returns whether this<code>RelType</code> can implement a given          * expression.          *          * @param expr Expression          * @param condition Whether expression is a condition          *          * @return Whether this<code>RelType</code> can implement a given          * expression.          */
+comment|/**      * Returns whether this<code>RelType</code> can implement a given      * expression.      *      * @param expr      Expression      * @param condition Whether expression is a condition      * @return Whether this<code>RelType</code> can implement a given      * expression.      */
 specifier|public
 name|boolean
 name|canImplement
@@ -2905,7 +2905,7 @@ literal|false
 return|;
 block|}
 block|}
-comment|/**          * Returns whether this tester's<code>RelType</code> can implement a          * given program.          *          * @param program Program          *          * @return Whether this tester's<code>RelType</code> can implement a          * given program.          */
+comment|/**      * Returns whether this tester's<code>RelType</code> can implement a      * given program.      *      * @param program Program      * @return Whether this tester's<code>RelType</code> can implement a      * given program.      */
 specifier|public
 name|boolean
 name|canImplement
@@ -2973,7 +2973,7 @@ literal|true
 return|;
 block|}
 block|}
-comment|/**      * Visitor which returns whether an expression can be implemented in a given      * type of relational expression.      */
+comment|/**    * Visitor which returns whether an expression can be implemented in a given    * type of relational expression.    */
 specifier|private
 specifier|static
 class|class
@@ -3125,7 +3125,7 @@ literal|null
 return|;
 block|}
 block|}
-comment|/**      * Control exception for {@link ImplementTester}.      */
+comment|/**    * Control exception for {@link ImplementTester}.    */
 specifier|private
 specifier|static
 class|class
@@ -3143,7 +3143,7 @@ name|CannotImplement
 argument_list|()
 decl_stmt|;
 block|}
-comment|/**      * Shuttle which converts every reference to an input field in an expression      * to a reference to a common sub-expression.      */
+comment|/**    * Shuttle which converts every reference to an input field in an expression    * to a reference to a common sub-expression.    */
 specifier|private
 specifier|static
 class|class
@@ -3381,7 +3381,7 @@ return|;
 block|}
 block|}
 block|}
-comment|/**      * Finds the highest level used by any of the inputs of a given expression.      */
+comment|/**    * Finds the highest level used by any of the inputs of a given expression.    */
 specifier|private
 specifier|static
 class|class
@@ -3454,7 +3454,7 @@ return|return
 literal|null
 return|;
 block|}
-comment|/**          * Returns the highest level of any of the inputs of an expression.          */
+comment|/**      * Returns the highest level of any of the inputs of an expression.      */
 specifier|public
 name|int
 name|maxInputFor
@@ -3479,7 +3479,7 @@ name|level
 return|;
 block|}
 block|}
-comment|/**      * Builds an array of the highest level which contains an expression which      * uses each expression as an input.      */
+comment|/**    * Builds an array of the highest level which contains an expression which    * uses each expression as an input.    */
 specifier|private
 specifier|static
 class|class

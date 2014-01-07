@@ -73,7 +73,7 @@ implements|implements
 name|Serializable
 block|{
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a<code>RecordType</code>. This should only be called from a      * factory method.      */
+comment|/**    * Creates a<code>RecordType</code>. This should only be called from a    * factory method.    */
 specifier|public
 name|RelRecordType
 parameter_list|(
@@ -246,7 +246,7 @@ literal|")"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Per {@link Serializable} API, provides a replacement object to be written      * during serialization.      *      *<p>This implementation converts this RelRecordType into a      * SerializableRelRecordType, whose<code>readResolve</code> method converts      * it back to a RelRecordType during deserialization.      */
+comment|/**    * Per {@link Serializable} API, provides a replacement object to be written    * during serialization.    *    *<p>This implementation converts this RelRecordType into a    * SerializableRelRecordType, whose<code>readResolve</code> method converts    * it back to a RelRecordType during deserialization.    */
 specifier|private
 name|Object
 name|writeReplace
@@ -261,7 +261,7 @@ argument_list|)
 return|;
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------
-comment|/**      * Skinny object which has the same information content as a {@link      * RelRecordType} but skips redundant stuff like digest and the immutable      * list.      */
+comment|/**    * Skinny object which has the same information content as a {@link    * RelRecordType} but skips redundant stuff like digest and the immutable    * list.    */
 specifier|private
 specifier|static
 class|class
@@ -293,7 +293,7 @@ operator|=
 name|fields
 expr_stmt|;
 block|}
-comment|/**          * Per {@link Serializable} API. See {@link          * RelRecordType#writeReplace()}.          */
+comment|/**      * Per {@link Serializable} API. See {@link      * RelRecordType#writeReplace()}.      */
 specifier|private
 name|Object
 name|readResolve

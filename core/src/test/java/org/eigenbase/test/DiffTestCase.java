@@ -133,22 +133,22 @@ specifier|final
 name|String
 name|testCaseName
 decl_stmt|;
-comment|/**      * Name of current .log file.      */
+comment|/**    * Name of current .log file.    */
 specifier|protected
 name|File
 name|logFile
 decl_stmt|;
-comment|/**      * Name of current .ref file.      */
+comment|/**    * Name of current .ref file.    */
 specifier|protected
 name|File
 name|refFile
 decl_stmt|;
-comment|/**      * OutputStream for current test log.      */
+comment|/**    * OutputStream for current test log.    */
 specifier|protected
 name|OutputStream
 name|logOutputStream
 decl_stmt|;
-comment|/**      * Diff masks defined so far      */
+comment|/**    * Diff masks defined so far    */
 comment|// private List diffMasks;
 specifier|private
 name|String
@@ -167,13 +167,13 @@ decl_stmt|;
 name|int
 name|gcInterval
 decl_stmt|;
-comment|/**      * Whether to give verbose message if diff fails.      */
+comment|/**    * Whether to give verbose message if diff fails.    */
 specifier|private
 name|boolean
 name|verbose
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Initializes a new DiffTestCase.      *      * @param testCaseName Test case name      */
+comment|/**    * Initializes a new DiffTestCase.    *    * @param testCaseName Test case name    */
 specifier|protected
 name|DiffTestCase
 parameter_list|(
@@ -297,7 +297,7 @@ literal|null
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Initializes a diff-based test. Any existing .log and .dif files      * corresponding to this test case are deleted, and a new, empty .log file      * is created. The default log file location is a subdirectory under the      * result getTestlogRoot(), where the subdirectory name is based on the      * unqualified name of the test class. The generated log file name will be      * testMethodName.log, and the expected reference file will be      * testMethodName.ref.      *      * @return Writer for log file, which caller should use as a destination for      * test output to be diffed      */
+comment|/**    * Initializes a diff-based test. Any existing .log and .dif files    * corresponding to this test case are deleted, and a new, empty .log file    * is created. The default log file location is a subdirectory under the    * result getTestlogRoot(), where the subdirectory name is based on the    * unqualified name of the test class. The generated log file name will be    * testMethodName.log, and the expected reference file will be    * testMethodName.ref.    *    * @return Writer for log file, which caller should use as a destination for    * test output to be diffed    */
 specifier|protected
 name|Writer
 name|openTestLog
@@ -350,7 +350,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**      * @return the root under which testlogs should be written      */
+comment|/**    * @return the root under which testlogs should be written    */
 specifier|protected
 specifier|abstract
 name|File
@@ -359,7 +359,7 @@ parameter_list|()
 throws|throws
 name|Exception
 function_decl|;
-comment|/**      * Initializes a diff-based test, overriding the default log file naming      * scheme altogether.      *      * @param testFileSansExt full path to log filename, without .log/.ref      * extension      */
+comment|/**    * Initializes a diff-based test, overriding the default log file naming    * scheme altogether.    *    * @param testFileSansExt full path to log filename, without .log/.ref    *                        extension    */
 specifier|protected
 name|OutputStream
 name|openTestLogOutputStream
@@ -420,7 +420,7 @@ return|return
 name|logOutputStream
 return|;
 block|}
-comment|/**      * Finishes a diff-based test. Output that was written to the Writer      * returned by openTestLog is diffed against a .ref file, and if any      * differences are detected, the test case fails. Note that the diff used is      * just a boolean test, and does not create any .dif ouput.      *      *<p>NOTE: if you wrap the Writer returned by openTestLog() (e.g. with a      * PrintWriter), be sure to flush the wrapping Writer before calling this      * method.</p>      *      * @see #diffFile(File, File)      */
+comment|/**    * Finishes a diff-based test. Output that was written to the Writer    * returned by openTestLog is diffed against a .ref file, and if any    * differences are detected, the test case fails. Note that the diff used is    * just a boolean test, and does not create any .dif ouput.    *    *<p>NOTE: if you wrap the Writer returned by openTestLog() (e.g. with a    * PrintWriter), be sure to flush the wrapping Writer before calling this    * method.</p>    *    * @see #diffFile(File, File)    */
 specifier|protected
 name|void
 name|diffTestLog
@@ -473,7 +473,7 @@ name|refFile
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Compares a log file with its reference log.      *      *<p>Usually, the log file and the reference log are in the same directory,      * one ending with '.log' and the other with '.ref'.      *      *<p>If the files are identical, removes logFile.      *      * @param logFile Log file      * @param refFile Reference log      */
+comment|/**    * Compares a log file with its reference log.    *    *<p>Usually, the log file and the reference log are in the same directory,    * one ending with '.log' and the other with '.ref'.    *    *<p>If the files are identical, removes logFile.    *    * @param logFile Log file    * @param refFile Reference log    */
 specifier|protected
 name|void
 name|diffFile
@@ -819,7 +819,7 @@ name|delete
 argument_list|()
 expr_stmt|;
 block|}
-comment|/**      * set the number of lines for garbage collection.      *      * @param n an integer, the number of line for garbage collection, 0 means      * no garbage collection.      */
+comment|/**    * set the number of lines for garbage collection.    *    * @param n an integer, the number of line for garbage collection, 0 means    *          no garbage collection.    */
 specifier|protected
 name|void
 name|setGC
@@ -833,7 +833,7 @@ operator|=
 name|n
 expr_stmt|;
 block|}
-comment|/**      * Adds a diff mask. Strings matching the given regular expression will be      * masked before diffing. This can be used to suppress spurious diffs on a      * case-by-case basis.      *      * @param mask a regular expression, as per String.replaceAll      */
+comment|/**    * Adds a diff mask. Strings matching the given regular expression will be    * masked before diffing. This can be used to suppress spurious diffs on a    * case-by-case basis.    *    * @param mask a regular expression, as per String.replaceAll    */
 specifier|protected
 name|void
 name|addDiffMask
@@ -1119,7 +1119,7 @@ name|message
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Returns whether this test is running inside the IntelliJ IDE.      *      * @return whether we're running in IntelliJ.      */
+comment|/**    * Returns whether this test is running inside the IntelliJ IDE.    *    * @return whether we're running in IntelliJ.    */
 specifier|private
 specifier|static
 name|boolean
@@ -1220,7 +1220,7 @@ return|return
 literal|false
 return|;
 block|}
-comment|/**      * Returns a string containing the difference between the contents of two      * files. The string has a similar format to the UNIX 'diff' utility.      */
+comment|/**    * Returns a string containing the difference between the contents of two    * files. The string has a similar format to the UNIX 'diff' utility.    */
 specifier|private
 specifier|static
 name|String
@@ -1264,7 +1264,7 @@ name|lines2
 argument_list|)
 return|;
 block|}
-comment|/**      * Returns a string containing the difference between the two sets of lines.      */
+comment|/**    * Returns a string containing the difference between the two sets of lines.    */
 specifier|public
 specifier|static
 name|String
@@ -1826,7 +1826,7 @@ name|toString
 argument_list|()
 return|;
 block|}
-comment|/**      * Returns a list of the lines in a given file.      *      * @param file File      *      * @return List of lines      */
+comment|/**    * Returns a list of the lines in a given file.    *    * @param file File    * @return List of lines    */
 specifier|private
 specifier|static
 name|List
@@ -1916,7 +1916,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**      * Returns the contents of a file as a string.      *      * @param file File      *      * @return Contents of the file      */
+comment|/**    * Returns the contents of a file as a string.    *    * @param file File    * @return Contents of the file    */
 specifier|protected
 specifier|static
 name|String
@@ -2009,7 +2009,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**      * Sets whether to give verbose message if diff fails.      */
+comment|/**    * Sets whether to give verbose message if diff fails.    */
 specifier|protected
 name|void
 name|setVerbose
@@ -2025,7 +2025,7 @@ operator|=
 name|verbose
 expr_stmt|;
 block|}
-comment|/**      * Sets the diff masks that are common to .REF files      */
+comment|/**    * Sets the diff masks that are common to .REF files    */
 specifier|protected
 name|void
 name|setRefFileDiffMasks

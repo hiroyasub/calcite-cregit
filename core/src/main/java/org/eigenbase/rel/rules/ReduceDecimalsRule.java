@@ -195,7 +195,7 @@ name|ReduceDecimalsRule
 argument_list|()
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a ReduceDecimalsRule.      */
+comment|/**    * Creates a ReduceDecimalsRule.    */
 specifier|private
 name|ReduceDecimalsRule
 parameter_list|()
@@ -391,7 +391,7 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------
-comment|/**      * A shuttle which converts decimal expressions to expressions based on      * longs.      */
+comment|/**    * A shuttle which converts decimal expressions to expressions based on    * longs.    */
 specifier|public
 class|class
 name|DecimalShuttle
@@ -461,7 +461,7 @@ name|rexBuilder
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**          * Rewrites a call in place, from bottom up, as follows:          *          *<ol>          *<li>visit operands          *<li>visit call node          *          *<ol>          *<li>rewrite call          *<li>visit the rewritten call          *</ol>          *</ol>          */
+comment|/**      * Rewrites a call in place, from bottom up, as follows:      *      *<ol>      *<li>visit operands      *<li>visit call node      *      *<ol>      *<li>rewrite call      *<li>visit the rewritten call      *</ol>      *</ol>      */
 specifier|public
 name|RexNode
 name|visitCall
@@ -558,7 +558,7 @@ return|return
 name|newCall
 return|;
 block|}
-comment|/**          * Registers node so it will not be computed again          */
+comment|/**      * Registers node so it will not be computed again      */
 specifier|private
 name|void
 name|register
@@ -610,7 +610,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**          * Lookup registered node          */
+comment|/**      * Lookup registered node      */
 specifier|private
 name|RexNode
 name|lookup
@@ -654,7 +654,7 @@ name|key
 argument_list|)
 return|;
 block|}
-comment|/**          * Rewrites a call, if required, or returns the original call          */
+comment|/**      * Rewrites a call, if required, or returns the original call      */
 specifier|private
 name|RexNode
 name|rewriteCall
@@ -715,7 +715,7 @@ return|return
 name|call
 return|;
 block|}
-comment|/**          * Returns a {@link RexExpander} for a call          */
+comment|/**      * Returns a {@link RexExpander} for a call      */
 specifier|private
 name|RexExpander
 name|getExpander
@@ -734,7 +734,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**      * Maps a RexCall to a RexExpander      */
+comment|/**    * Maps a RexCall to a RexExpander    */
 specifier|private
 class|class
 name|ExpanderMap
@@ -1100,25 +1100,25 @@ name|defaultExpander
 return|;
 block|}
 block|}
-comment|/**      * Rewrites a decimal expression for a specific set of SqlOperator's. In      * general, most expressions are rewritten in such a way that SqlOperator's      * do not have to deal with decimals. Decimals are represented by their      * unscaled integer representations, similar to {@link      * BigDecimal#unscaledValue()} (i.e. 10^scale). Once decimals are decoded,      * SqlOperators can then operate on the integer representations. The value      * can later be recoded as a decimal.      *      *<p>For example, suppose one casts 2.0 as a decima(10,4). The value is      * decoded (20), multiplied by a scale factor (1000), for a result of      * (20000) which is encoded as a decimal(10,4), in this case 2.0000      *      *<p>To avoid the lengthy coding of RexNode expressions, this base class      * provides succinct methods for building expressions used in rewrites.      */
+comment|/**    * Rewrites a decimal expression for a specific set of SqlOperator's. In    * general, most expressions are rewritten in such a way that SqlOperator's    * do not have to deal with decimals. Decimals are represented by their    * unscaled integer representations, similar to {@link    * BigDecimal#unscaledValue()} (i.e. 10^scale). Once decimals are decoded,    * SqlOperators can then operate on the integer representations. The value    * can later be recoded as a decimal.    *    *<p>For example, suppose one casts 2.0 as a decima(10,4). The value is    * decoded (20), multiplied by a scale factor (1000), for a result of    * (20000) which is encoded as a decimal(10,4), in this case 2.0000    *    *<p>To avoid the lengthy coding of RexNode expressions, this base class    * provides succinct methods for building expressions used in rewrites.    */
 specifier|public
 specifier|abstract
 class|class
 name|RexExpander
 block|{
-comment|/**          * Factory for constructing new relational expressions          */
+comment|/**      * Factory for constructing new relational expressions      */
 name|RexBuilder
 name|builder
 decl_stmt|;
-comment|/**          * Type for the internal representation of decimals. This type is a          * non-nullable type and requires extra work to make it nullable.          */
+comment|/**      * Type for the internal representation of decimals. This type is a      * non-nullable type and requires extra work to make it nullable.      */
 name|RelDataType
 name|int8
 decl_stmt|;
-comment|/**          * Type for doubles. This type is a non-nullable type and requires extra          * work to make it nullable.          */
+comment|/**      * Type for doubles. This type is a non-nullable type and requires extra      * work to make it nullable.      */
 name|RelDataType
 name|real8
 decl_stmt|;
-comment|/**          * Constructs a RexExpander          */
+comment|/**      * Constructs a RexExpander      */
 specifier|public
 name|RexExpander
 parameter_list|(
@@ -1161,7 +1161,7 @@ name|DOUBLE
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**          * This defaults to the utility method, {@link          * RexUtil#requiresDecimalExpansion(RexNode, boolean)} which checks          * general guidelines on whether a rewrite should be considered at all.          * In general, it is helpful to update the utility method since that          * method is often used to filter the somewhat expensive rewrite          * process.          *          *<p>However, this method provides another place for implementations of          * RexExpander to make a more detailed analysis before deciding on          * whether to perform a rewrite.          */
+comment|/**      * This defaults to the utility method, {@link      * RexUtil#requiresDecimalExpansion(RexNode, boolean)} which checks      * general guidelines on whether a rewrite should be considered at all.      * In general, it is helpful to update the utility method since that      * method is often used to filter the somewhat expensive rewrite      * process.      *      *<p>However, this method provides another place for implementations of      * RexExpander to make a more detailed analysis before deciding on      * whether to perform a rewrite.      */
 specifier|public
 name|boolean
 name|canExpand
@@ -1181,7 +1181,7 @@ literal|false
 argument_list|)
 return|;
 block|}
-comment|/**          * Rewrites an expression containing decimals. Normally, this method          * always performs a rewrite, but implementations may choose to return          * the original expression if no change was required.          */
+comment|/**      * Rewrites an expression containing decimals. Normally, this method      * always performs a rewrite, but implementations may choose to return      * the original expression if no change was required.      */
 specifier|public
 specifier|abstract
 name|RexNode
@@ -1191,7 +1191,7 @@ name|RexCall
 name|call
 parameter_list|)
 function_decl|;
-comment|/**          * Makes an exact numeric literal to be used for scaling          *          * @param scale a scale from one to max precision - 1          *          * @return 10^scale as an exact numeric value          */
+comment|/**      * Makes an exact numeric literal to be used for scaling      *      * @param scale a scale from one to max precision - 1      * @return 10^scale as an exact numeric value      */
 specifier|protected
 name|RexNode
 name|makeScaleFactor
@@ -1225,7 +1225,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**          * Makes an approximate literal to be used for scaling          *          * @param scale a scale from -99 to 99          *          * @return 10^scale as an approximate value          */
+comment|/**      * Makes an approximate literal to be used for scaling      *      * @param scale a scale from -99 to 99      * @return 10^scale as an approximate value      */
 specifier|protected
 name|RexNode
 name|makeApproxScaleFactor
@@ -1301,7 +1301,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**          * Makes an exact numeric value to be used for rounding.          *          * @param scale a scale from 1 to max precision - 1          *          * @return 10^scale / 2 as an exact numeric value          */
+comment|/**      * Makes an exact numeric value to be used for rounding.      *      * @param scale a scale from 1 to max precision - 1      * @return 10^scale / 2 as an exact numeric value      */
 specifier|protected
 name|RexNode
 name|makeRoundFactor
@@ -1337,7 +1337,7 @@ literal|2
 argument_list|)
 return|;
 block|}
-comment|/**          * Calculates a power of ten, as a long value          */
+comment|/**      * Calculates a power of ten, as a long value      */
 specifier|protected
 name|long
 name|powerOfTen
@@ -1375,7 +1375,7 @@ name|longValue
 argument_list|()
 return|;
 block|}
-comment|/**          * Makes an exact, non-nullable literal of Bigint type          */
+comment|/**      * Makes an exact, non-nullable literal of Bigint type      */
 specifier|protected
 name|RexNode
 name|makeExactLiteral
@@ -1405,7 +1405,7 @@ name|int8
 argument_list|)
 return|;
 block|}
-comment|/**          * Makes an approximate literal of double precision          */
+comment|/**      * Makes an approximate literal of double precision      */
 specifier|protected
 name|RexNode
 name|makeApproxLiteral
@@ -1423,7 +1423,7 @@ name|bd
 argument_list|)
 return|;
 block|}
-comment|/**          * Scales up a decimal value and returns the scaled value as an exact          * number.          *          * @param value the integer representation of a decimal          * @param scale a value from zero to max precision - 1          *          * @return value * 10^scale as an exact numeric value          */
+comment|/**      * Scales up a decimal value and returns the scaled value as an exact      * number.      *      * @param value the integer representation of a decimal      * @param scale a value from zero to max precision - 1      * @return value * 10^scale as an exact numeric value      */
 specifier|protected
 name|RexNode
 name|scaleUp
@@ -1479,7 +1479,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**          * Scales down a decimal value, and returns the scaled value as an exact          * numeric. with the rounding convention {@link BigDecimal#ROUND_HALF_UP          * BigDecimal.ROUND_HALF_UP}. (Values midway between two points are          * rounded away from zero.)          *          * @param value the integer representation of a decimal          * @param scale a value from zero to max precision          *          * @return value/10^scale, rounded away from zero and returned as an          * exact numeric value          */
+comment|/**      * Scales down a decimal value, and returns the scaled value as an exact      * numeric. with the rounding convention {@link BigDecimal#ROUND_HALF_UP      * BigDecimal.ROUND_HALF_UP}. (Values midway between two points are      * rounded away from zero.)      *      * @param value the integer representation of a decimal      * @param scale a value from zero to max precision      * @return value/10^scale, rounded away from zero and returned as an      * exact numeric value      */
 specifier|protected
 name|RexNode
 name|scaleDown
@@ -1658,7 +1658,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**          * Scales down a decimal value and returns the scaled value as a an          * double precision approximate value. Scaling is implemented with          * double precision arithmetic.          *          * @param value the integer representation of a decimal          * @param scale a value from zero to {@link          * SqlTypeName#MAX_NUMERIC_PRECISION MAX_NUMERIC_PRECISION}          *          * @return value/10^scale as a double precision value          */
+comment|/**      * Scales down a decimal value and returns the scaled value as a an      * double precision approximate value. Scaling is implemented with      * double precision arithmetic.      *      * @param value the integer representation of a decimal      * @param scale a value from zero to {@link      *              SqlTypeName#MAX_NUMERIC_PRECISION MAX_NUMERIC_PRECISION}      * @return value/10^scale as a double precision value      */
 specifier|protected
 name|RexNode
 name|scaleDownDouble
@@ -1718,7 +1718,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**          * Ensures a value is of a required scale. If it is not, then the value          * is multiplied by a scale factor. Scaling up an exact value is limited          * to max precision - 1, because we cannot represent the result of          * larger scales internally. Scaling up a floating point value is more          * flexible since the value may be very small despite having a scale of          * zero and the scaling may still produce a reasonable result          *          * @param value integer representation of decimal, or a floating point          * number          * @param scale current scale, 0 for floating point numbers          * @param required required scale, must be at least the current scale;          * the scale difference may not be greater than max precision - 1 for          * exact numerics          *          * @return value * 10^scale, returned as an exact or approximate value          * corresponding to the input value          */
+comment|/**      * Ensures a value is of a required scale. If it is not, then the value      * is multiplied by a scale factor. Scaling up an exact value is limited      * to max precision - 1, because we cannot represent the result of      * larger scales internally. Scaling up a floating point value is more      * flexible since the value may be very small despite having a scale of      * zero and the scaling may still produce a reasonable result      *      * @param value    integer representation of decimal, or a floating point      *                 number      * @param scale    current scale, 0 for floating point numbers      * @param required required scale, must be at least the current scale;      *                 the scale difference may not be greater than max      *                 precision - 1 for exact numerics      * @return value * 10^scale, returned as an exact or approximate value      * corresponding to the input value      */
 specifier|protected
 name|RexNode
 name|ensureScale
@@ -1841,7 +1841,7 @@ name|scaleDiff
 argument_list|)
 return|;
 block|}
-comment|/**          * Retrieves a decimal node's integer representation          *          * @param decimalNode the decimal value as an opaque type          *          * @return an integer representation of the decimal value          */
+comment|/**      * Retrieves a decimal node's integer representation      *      * @param decimalNode the decimal value as an opaque type      * @return an integer representation of the decimal value      */
 specifier|protected
 name|RexNode
 name|decodeValue
@@ -1872,7 +1872,7 @@ name|decimalNode
 argument_list|)
 return|;
 block|}
-comment|/**          * Retrieves the primitive value of a numeric node. If the node is a          * decimal, then it must first be decoded. Otherwise the original node          * may be returned.          *          * @param node a numeric node, possibly a decimal          *          * @return the primitive value of the numeric node          */
+comment|/**      * Retrieves the primitive value of a numeric node. If the node is a      * decimal, then it must first be decoded. Otherwise the original node      * may be returned.      *      * @param node a numeric node, possibly a decimal      * @return the primitive value of the numeric node      */
 specifier|protected
 name|RexNode
 name|accessValue
@@ -1916,7 +1916,7 @@ return|return
 name|node
 return|;
 block|}
-comment|/**          * Casts a decimal's integer representation to a decimal node. If the          * expression is not the expected integer type, then it is casted first.          *          *<p>This method does not request an overflow check.          *          * @param value integer representation of decimal          * @param decimalType type integer will be reinterpreted as          *          * @return the integer representation reinterpreted as a decimal type          */
+comment|/**      * Casts a decimal's integer representation to a decimal node. If the      * expression is not the expected integer type, then it is casted first.      *      *<p>This method does not request an overflow check.      *      * @param value       integer representation of decimal      * @param decimalType type integer will be reinterpreted as      * @return the integer representation reinterpreted as a decimal type      */
 specifier|protected
 name|RexNode
 name|encodeValue
@@ -1939,7 +1939,7 @@ literal|false
 argument_list|)
 return|;
 block|}
-comment|/**          * Casts a decimal's integer representation to a decimal node. If the          * expression is not the expected integer type, then it is casted first.          *          *<p>An overflow check may be requested to ensure the internal value          * does not exceed the maximum value of the decimal type.          *          * @param value integer representation of decimal          * @param decimalType type integer will be reinterpreted as          * @param checkOverflow indicates whether an overflow check is required          * when reinterpreting this particular value as the decimal type. A          * check usually not required for arithmetic, but is often required for          * rounding and explicit casts.          *          * @return the integer reinterpreted as an opaque decimal type          */
+comment|/**      * Casts a decimal's integer representation to a decimal node. If the      * expression is not the expected integer type, then it is casted first.      *      *<p>An overflow check may be requested to ensure the internal value      * does not exceed the maximum value of the decimal type.      *      * @param value         integer representation of decimal      * @param decimalType   type integer will be reinterpreted as      * @param checkOverflow indicates whether an overflow check is required      *                      when reinterpreting this particular value as the      *                      decimal type. A check usually not required for      *                      arithmetic, but is often required for rounding and      *                      explicit casts.      * @return the integer reinterpreted as an opaque decimal type      */
 specifier|protected
 name|RexNode
 name|encodeValue
@@ -1967,7 +1967,7 @@ name|checkOverflow
 argument_list|)
 return|;
 block|}
-comment|/**          * Ensures expression is interpreted as a specified type. The returned          * expression may be wrapped with a cast.          *          *<p>This method corrects the nullability of the specified type to          * match the nullability of the expression.          *          * @param type desired type          * @param node expression          *          * @return a casted expression or the original expression          */
+comment|/**      * Ensures expression is interpreted as a specified type. The returned      * expression may be wrapped with a cast.      *      *<p>This method corrects the nullability of the specified type to      * match the nullability of the expression.      *      * @param type desired type      * @param node expression      * @return a casted expression or the original expression      */
 specifier|protected
 name|RexNode
 name|ensureType
@@ -1990,7 +1990,7 @@ literal|true
 argument_list|)
 return|;
 block|}
-comment|/**          * Ensures expression is interpreted as a specified type. The returned          * expression may be wrapped with a cast.          *          * @param type desired type          * @param node expression          * @param matchNullability whether to correct nullability of specified          * type to match the expression; this usually should be true, except for          * explicit casts which can override default nullability          *          * @return a casted expression or the original expression          */
+comment|/**      * Ensures expression is interpreted as a specified type. The returned      * expression may be wrapped with a cast.      *      * @param type             desired type      * @param node             expression      * @param matchNullability whether to correct nullability of specified      *                         type to match the expression; this usually should      *                         be true, except for explicit casts which can      *                         override default nullability      * @return a casted expression or the original expression      */
 specifier|protected
 name|RexNode
 name|ensureType
@@ -2247,7 +2247,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**      * Expands a decimal cast expression      */
+comment|/**    * Expands a decimal cast expression    */
 specifier|private
 class|class
 name|CastExpander
@@ -2706,7 +2706,7 @@ throw|;
 block|}
 block|}
 block|}
-comment|/**      * Expands a decimal arithmetic expression      */
+comment|/**    * Expands a decimal arithmetic expression    */
 specifier|private
 class|class
 name|BinaryArithmeticExpander
@@ -3057,7 +3057,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**          * Convenience method for reading characteristics of operands (such as          * scale, precision, whole digits) into an ArithmeticExpander. The          * operands are restricted by the following contraints:          *          *<ul>          *<li>there are exactly two operands          *<li>both are exact numeric types          *</ul>          */
+comment|/**      * Convenience method for reading characteristics of operands (such as      * scale, precision, whole digits) into an ArithmeticExpander. The      * operands are restricted by the following contraints:      *      *<ul>      *<li>there are exactly two operands      *<li>both are exact numeric types      *</ul>      */
 specifier|private
 name|void
 name|analyzeOperands
@@ -3693,7 +3693,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**      * Expander that rewrites floor(decimal) expressions:      *      *<pre>      * if (value< 0)      *     (value-0.99...)/(10^scale)      * else      *     value/(10^scale)      *</pre>      */
+comment|/**    * Expander that rewrites floor(decimal) expressions:    *    *<pre>    * if (value< 0)    *     (value-0.99...)/(10^scale)    * else    *     value/(10^scale)    *</pre>    */
 specifier|private
 class|class
 name|FloorExpander
@@ -3874,7 +3874,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**      * Expander that rewrites ceiling(decimal) expressions:      *      *<pre>      * if (value> 0)      *     (value+0.99...)/(10^scale)      * else      *     value/(10^scale)      *</pre>      */
+comment|/**    * Expander that rewrites ceiling(decimal) expressions:    *    *<pre>    * if (value> 0)    *     (value+0.99...)/(10^scale)    * else    *     value/(10^scale)    *</pre>    */
 specifier|private
 class|class
 name|CeilExpander
@@ -4054,7 +4054,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**      * Expander that rewrites case expressions, in place. Starting from:      *      *<pre>(when $cond then $val)+ else $default</pre>      *      * this expander casts all values to the return type. If the target type is      * a decimal, then the values are then decoded. The result of expansion is      * that the case operator no longer deals with decimals args. (The return      * value is encoded if necessary.)      *      *<p>Note: a decimal type is returned iff arguments have decimals      */
+comment|/**    * Expander that rewrites case expressions, in place. Starting from:    *    *<pre>(when $cond then $val)+ else $default</pre>    *    * this expander casts all values to the return type. If the target type is    * a decimal, then the values are then decoded. The result of expansion is    * that the case operator no longer deals with decimals args. (The return    * value is encoded if necessary.)    *    *<p>Note: a decimal type is returned iff arguments have decimals    */
 specifier|private
 class|class
 name|CaseExpander
@@ -4256,7 +4256,7 @@ name|newCall
 return|;
 block|}
 block|}
-comment|/**      * An expander that substitutes decimals with their integer representations.      * If the output is decimal, the output is reinterpreted from the integer      * representation into a decimal.      */
+comment|/**    * An expander that substitutes decimals with their integer representations.    * If the output is decimal, the output is reinterpreted from the integer    * representation into a decimal.    */
 specifier|private
 class|class
 name|PassThroughExpander
@@ -4420,7 +4420,7 @@ return|;
 block|}
 block|}
 block|}
-comment|/**      * An expander which casts decimal arguments as doubles      */
+comment|/**    * An expander which casts decimal arguments as doubles    */
 specifier|private
 class|class
 name|CastArgAsDoubleExpander
@@ -4494,7 +4494,7 @@ name|type
 return|;
 block|}
 block|}
-comment|/**      * An expander which casts decimal arguments as another type      */
+comment|/**    * An expander which casts decimal arguments as another type    */
 specifier|private
 specifier|abstract
 class|class
@@ -4668,7 +4668,7 @@ name|ret
 return|;
 block|}
 block|}
-comment|/**      * This expander simplifies reinterpret calls. Consider (1.0+1)*1. The inner      * operation encodes a decimal (Reinterpret(...)) which the outer operation      * immediately decodes: (Reinterpret(Reinterpret(...))). Arithmetic overflow      * is handled by underlying integer operations, so we don't have to consider      * it. Simply remove the nested Reinterpret.      */
+comment|/**    * This expander simplifies reinterpret calls. Consider (1.0+1)*1. The inner    * operation encodes a decimal (Reinterpret(...)) which the outer operation    * immediately decodes: (Reinterpret(Reinterpret(...))). Arithmetic overflow    * is handled by underlying integer operations, so we don't have to consider    * it. Simply remove the nested Reinterpret.    */
 specifier|private
 class|class
 name|ReinterpretExpander
@@ -4789,7 +4789,7 @@ return|return
 name|call
 return|;
 block|}
-comment|/**          * Detect, in a generic, but strict way, whether it is possible to          * simplify a reinterpret cast. The rules are as follows:          *          *<ol>          *<li>If value is not the same basic type as outer, then we cannot          * simplify          *<li>If the value is nullable but the inner or outer are not, then we          * cannot simplify.          *<li>If inner is nullable but outer is not, we cannot simplify.          *<li>If an overflow check is required from either inner or outer, we          * cannot simplify.          *<li>Otherwise, given the same type, and sufficient nullability          * constraints, we can simplify.          *</ol>          *          * @param outer outer call to reinterpret          * @param inner inner call to reinterpret          * @param value inner value          *          * @return whether the two reinterpret casts can be removed          */
+comment|/**      * Detect, in a generic, but strict way, whether it is possible to      * simplify a reinterpret cast. The rules are as follows:      *      *<ol>      *<li>If value is not the same basic type as outer, then we cannot      * simplify      *<li>If the value is nullable but the inner or outer are not, then we      * cannot simplify.      *<li>If inner is nullable but outer is not, we cannot simplify.      *<li>If an overflow check is required from either inner or outer, we      * cannot simplify.      *<li>Otherwise, given the same type, and sufficient nullability      * constraints, we can simplify.      *</ol>      *      * @param outer outer call to reinterpret      * @param inner inner call to reinterpret      * @param value inner value      * @return whether the two reinterpret casts can be removed      */
 specifier|private
 name|boolean
 name|canSimplify

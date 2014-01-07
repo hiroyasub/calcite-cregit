@@ -83,7 +83,7 @@ name|all
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Creates a UnionRel by parsing serialized output. */
+comment|/**    * Creates a UnionRel by parsing serialized output.    */
 specifier|public
 name|UnionRel
 parameter_list|(

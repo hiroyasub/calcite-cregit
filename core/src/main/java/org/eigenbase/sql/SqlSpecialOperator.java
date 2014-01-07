@@ -201,7 +201,7 @@ literal|"unparse must be implemented by SqlCall subclass"
 argument_list|)
 throw|;
 block|}
-comment|/**      * Reduces a list of operators and arguments according to the rules of      * precedence and associativity. Returns the ordinal of the node which      * replaced the expression.      *      *<p>The default implementation throws {@link      * UnsupportedOperationException}.      *      * @param ordinal indicating the ordinal of the current operator in the list      * on which a possible reduction can be made      * @param list List of alternating {@link      * org.eigenbase.sql.parser.SqlParserUtil.ToTreeListItem} and {@link      * SqlNode}      *      * @return ordinal of the node which replaced the expression      */
+comment|/**    * Reduces a list of operators and arguments according to the rules of    * precedence and associativity. Returns the ordinal of the node which    * replaced the expression.    *    *<p>The default implementation throws {@link    * UnsupportedOperationException}.    *    * @param ordinal indicating the ordinal of the current operator in the list    *                on which a possible reduction can be made    * @param list    List of alternating {@link    *                org.eigenbase.sql.parser.SqlParserUtil.ToTreeListItem} and {@link    *                SqlNode}    * @return ordinal of the node which replaced the expression    */
 specifier|public
 name|int
 name|reduceExpr

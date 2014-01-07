@@ -144,7 +144,7 @@ return|return
 name|h
 return|;
 block|}
-comment|/**      * Returns whether two arrays are equal (deep compare).      */
+comment|/**    * Returns whether two arrays are equal (deep compare).    */
 specifier|public
 specifier|static
 name|boolean

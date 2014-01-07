@@ -162,7 +162,7 @@ name|getOrdinal
 argument_list|()
 return|;
 block|}
-comment|/** Creates a parse-tree node representing an occurrence of this keyword      * at a particular position in the parsed text. */
+comment|/**    * Creates a parse-tree node representing an occurrence of this keyword    * at a particular position in the parsed text.    */
 specifier|public
 name|SqlLiteral
 name|symbol

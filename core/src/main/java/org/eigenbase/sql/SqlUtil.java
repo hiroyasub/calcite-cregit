@@ -325,7 +325,7 @@ return|return
 name|list
 return|;
 block|}
-comment|/**      * Returns the<code>n</code>th (0-based) input to a join expression.      */
+comment|/**    * Returns the<code>n</code>th (0-based) input to a join expression.    */
 specifier|public
 specifier|static
 name|SqlNode
@@ -451,7 +451,7 @@ expr_stmt|;
 return|return;
 block|}
 block|}
-comment|/**      * Converts an SqlNode array to a SqlNodeList      */
+comment|/**    * Converts an SqlNode array to a SqlNodeList    */
 specifier|public
 specifier|static
 name|SqlNodeList
@@ -510,7 +510,7 @@ return|return
 name|ret
 return|;
 block|}
-comment|/**      * Returns whether a node represents the NULL value.      *      *<p>Examples:      *      *<ul>      *<li>For {@link SqlLiteral} Unknown, returns false.      *<li>For<code>CAST(NULL AS<i>type</i>)</code>, returns true if<code>      * allowCast</code> is true, false otherwise.      *<li>For<code>CAST(CAST(NULL AS<i>type</i>) AS<i>type</i>))</code>,      * returns false.      *</ul>      */
+comment|/**    * Returns whether a node represents the NULL value.    *    *<p>Examples:    *    *<ul>    *<li>For {@link SqlLiteral} Unknown, returns false.    *<li>For<code>CAST(NULL AS<i>type</i>)</code>, returns true if<code>    * allowCast</code> is true, false otherwise.    *<li>For<code>CAST(CAST(NULL AS<i>type</i>) AS<i>type</i>))</code>,    * returns false.    *</ul>    */
 specifier|public
 specifier|static
 name|boolean
@@ -624,7 +624,7 @@ return|return
 literal|false
 return|;
 block|}
-comment|/**      * Returns whether a node represents the NULL value or a series of nested      * CAST(NULL as<TYPE>) calls<br>      * For Example:<br>      * isNull(CAST(CAST(NULL as INTEGER) AS VARCHAR(1))) returns true      */
+comment|/**    * Returns whether a node represents the NULL value or a series of nested    * CAST(NULL as<TYPE>) calls<br>    * For Example:<br>    * isNull(CAST(CAST(NULL as INTEGER) AS VARCHAR(1))) returns true    */
 specifier|public
 specifier|static
 name|boolean
@@ -671,7 +671,7 @@ argument_list|)
 operator|)
 return|;
 block|}
-comment|/**      * Returns whether a node is a literal.      *      *<p>Many constructs which require literals also accept<code>CAST(NULL AS      *<i>type</i>)</code>. This method does not accept casts, so you should      * call {@link #isNullLiteral} first.      *      * @param node The node, never null.      *      * @return Whether the node is a literal      *      * @pre node != null      */
+comment|/**    * Returns whether a node is a literal.    *    *<p>Many constructs which require literals also accept<code>CAST(NULL AS    *<i>type</i>)</code>. This method does not accept casts, so you should    * call {@link #isNullLiteral} first.    *    * @param node The node, never null.    * @return Whether the node is a literal    * @pre node != null    */
 specifier|public
 specifier|static
 name|boolean
@@ -698,7 +698,7 @@ operator|instanceof
 name|SqlLiteral
 return|;
 block|}
-comment|/**      * Returns whether a node is a literal chain which is used to represent a      * continued string literal.      *      * @param node The node, never null.      *      * @return Whether the node is a literal chain      *      * @pre node != null      */
+comment|/**    * Returns whether a node is a literal chain which is used to represent a    * continued string literal.    *    * @param node The node, never null.    * @return Whether the node is a literal chain    * @pre node != null    */
 specifier|public
 specifier|static
 name|boolean
@@ -752,7 +752,7 @@ literal|false
 return|;
 block|}
 block|}
-comment|/**      * Unparses a call to an operator which has function syntax.      *      * @param operator The operator      * @param writer Writer      * @param operands List of 0 or more operands      * @param emptyParens Whether to print parentheses if there are 0 operands      * @param quantifier Quantifier      */
+comment|/**    * Unparses a call to an operator which has function syntax.    *    * @param operator    The operator    * @param writer      Writer    * @param operands    List of 0 or more operands    * @param emptyParens Whether to print parentheses if there are 0 operands    * @param quantifier  Quantifier    */
 specifier|public
 specifier|static
 name|void
@@ -1136,7 +1136,7 @@ name|frame
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Concatenates string literals.      *      *<p>This method takes an array of arguments, since pairwise concatenation      * means too much string copying.      *      * @param lits an array of {@link SqlLiteral}, not empty, all of the same      * class      *      * @return a new {@link SqlLiteral}, of that same class, whose value is the      * string concatenation of the values of the literals      *      * @throws ClassCastException if the lits are not homogeneous.      * @throws ArrayIndexOutOfBoundsException if lits is an empty array.      */
+comment|/**    * Concatenates string literals.    *    *<p>This method takes an array of arguments, since pairwise concatenation    * means too much string copying.    *    * @param lits an array of {@link SqlLiteral}, not empty, all of the same    *             class    * @return a new {@link SqlLiteral}, of that same class, whose value is the    * string concatenation of the values of the literals    * @throws ClassCastException             if the lits are not homogeneous.    * @throws ArrayIndexOutOfBoundsException if lits is an empty array.    */
 specifier|public
 specifier|static
 name|SqlLiteral
@@ -1181,7 +1181,7 @@ name|lits
 argument_list|)
 return|;
 block|}
-comment|/**      * Looks up a (possibly overloaded) routine based on name and argument      * types.      *      * @param opTab operator table to search      * @param funcName name of function being invoked      * @param argTypes argument types      * @param category whether a function or a procedure. (If a procedure is      * being invoked, the overload rules are simpler.)      *      * @return matching routine, or null if none found      *      * @sql.99 Part 2 Section 10.4      */
+comment|/**    * Looks up a (possibly overloaded) routine based on name and argument    * types.    *    * @param opTab    operator table to search    * @param funcName name of function being invoked    * @param argTypes argument types    * @param category whether a function or a procedure. (If a procedure is    *                 being invoked, the overload rules are simpler.)    * @return matching routine, or null if none found    * @sql.99 Part 2 Section 10.4    */
 specifier|public
 specifier|static
 name|SqlFunction
@@ -1243,7 +1243,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**      * Looks up all subject routines matching the given name and argument types.      *      * @param opTab operator table to search      * @param funcName name of function being invoked      * @param argTypes argument types      * @param category category of routine to look up      *      * @return list of matching routines      *      * @sql.99 Part 2 Section 10.4      */
+comment|/**    * Looks up all subject routines matching the given name and argument types.    *    * @param opTab    operator table to search    * @param funcName name of function being invoked    * @param argTypes argument types    * @param category category of routine to look up    * @return list of matching routines    * @sql.99 Part 2 Section 10.4    */
 specifier|public
 specifier|static
 name|List
@@ -1345,7 +1345,7 @@ return|return
 name|routines
 return|;
 block|}
-comment|/**      * Determine if there is a routine matching the given name and number of      * arguments.      *      * @param opTab operator table to search      * @param funcName name of function being invoked      * @param argTypes argument types      * @param category category of routine to look up      *      * @return true if match found      */
+comment|/**    * Determine if there is a routine matching the given name and number of    * arguments.    *    * @param opTab    operator table to search    * @param funcName name of function being invoked    * @param argTypes argument types    * @param category category of routine to look up    * @return true if match found    */
 specifier|public
 specifier|static
 name|boolean
@@ -1557,7 +1557,7 @@ expr_stmt|;
 block|}
 block|}
 block|}
-comment|/**      * @sql.99 Part 2 Section 10.4 Syntax Rule 6.b.iii.2.B      */
+comment|/**    * @sql.99 Part 2 Section 10.4 Syntax Rule 6.b.iii.2.B    */
 specifier|private
 specifier|static
 name|void
@@ -1699,7 +1699,7 @@ expr_stmt|;
 block|}
 block|}
 block|}
-comment|/**      * @sql.99 Part 2 Section 9.4      */
+comment|/**    * @sql.99 Part 2 Section 9.4    */
 specifier|private
 specifier|static
 name|void
@@ -1920,7 +1920,7 @@ block|}
 block|}
 block|}
 block|}
-comment|/**      * Returns the<code>i</code>th select-list item of a query.      */
+comment|/**    * Returns the<code>i</code>th select-list item of a query.    */
 specifier|public
 specifier|static
 name|SqlNode
@@ -2123,7 +2123,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**      * If an identifier is a legitimate call to a function which has no      * arguments and requires no parentheses (for example "CURRENT_USER"),      * returns a call to that function, otherwise returns null.      */
+comment|/**    * If an identifier is a legitimate call to a function which has no    * arguments and requires no parentheses (for example "CURRENT_USER"),    * returns a call to that function, otherwise returns null.    */
 specifier|public
 specifier|static
 name|SqlCall
@@ -2234,7 +2234,7 @@ operator|+
 name|ordinal
 return|;
 block|}
-comment|/**      * Constructs an operator signature from a type list.      *      * @param op operator      * @param typeList list of types to use for operands. Types may be      * represented as {@link String}, {@link SqlTypeFamily}, or any object with      * a valid {@link Object#toString()} method.      *      * @return constructed signature      */
+comment|/**    * Constructs an operator signature from a type list.    *    * @param op       operator    * @param typeList list of types to use for operands. Types may be    *                 represented as {@link String}, {@link SqlTypeFamily}, or any object with    *                 a valid {@link Object#toString()} method.    * @return constructed signature    */
 specifier|public
 specifier|static
 name|String
@@ -2266,7 +2266,7 @@ name|typeList
 argument_list|)
 return|;
 block|}
-comment|/**      * Constructs an operator signature from a type list, substituting an alias      * for the operator name.      *      * @param op operator      * @param opName name to use for operator      * @param typeList list of {@link SqlTypeName} or {@link String} to use for      * operands      *      * @return constructed signature      */
+comment|/**    * Constructs an operator signature from a type list, substituting an alias    * for the operator name.    *    * @param op       operator    * @param opName   name to use for operator    * @param typeList list of {@link SqlTypeName} or {@link String} to use for    *                 operands    * @return constructed signature    */
 specifier|public
 specifier|static
 name|String
@@ -2522,7 +2522,7 @@ name|toString
 argument_list|()
 return|;
 block|}
-comment|/**      * Wraps an exception with context.      */
+comment|/**    * Wraps an exception with context.    */
 specifier|public
 specifier|static
 name|EigenbaseException
@@ -2563,7 +2563,7 @@ return|return
 name|ex
 return|;
 block|}
-comment|/**      * Wraps an exception with context.      */
+comment|/**    * Wraps an exception with context.    */
 specifier|public
 specifier|static
 name|EigenbaseException
@@ -2624,7 +2624,7 @@ name|e
 argument_list|)
 return|;
 block|}
-comment|/**      * Wraps an exception with context.      */
+comment|/**    * Wraps an exception with context.    */
 specifier|public
 specifier|static
 name|EigenbaseException
@@ -2716,7 +2716,7 @@ return|return
 name|contextExcn
 return|;
 block|}
-comment|/**      * Returns whether a {@link SqlNode node} is a {@link SqlCall call} to a      * given {@link SqlOperator operator}.      */
+comment|/**    * Returns whether a {@link SqlNode node} is a {@link SqlCall call} to a    * given {@link SqlOperator operator}.    */
 specifier|public
 specifier|static
 name|boolean
@@ -2751,7 +2751,7 @@ name|operator
 operator|)
 return|;
 block|}
-comment|/**      * Creates the type of an {@link NlsString}.      *      *<p>The type inherits the The NlsString's {@link Charset} and {@link      * SqlCollation}, if they are set, otherwise it gets the system defaults.      *      * @param typeFactory Type factory      * @param str String      *      * @return Type, including collation and charset      */
+comment|/**    * Creates the type of an {@link NlsString}.    *    *<p>The type inherits the The NlsString's {@link Charset} and {@link    * SqlCollation}, if they are set, otherwise it gets the system defaults.    *    * @param typeFactory Type factory    * @param str         String    * @return Type, including collation and charset    */
 specifier|public
 specifier|static
 name|RelDataType
@@ -2846,7 +2846,7 @@ return|return
 name|type
 return|;
 block|}
-comment|/**      * Translates a character set name from a SQL-level name into a Java-level      * name.      *      * @param name SQL-level name      *      * @return Java-level name, or null if SQL-level name is unknown      */
+comment|/**    * Translates a character set name from a SQL-level name into a Java-level    * name.    *    * @param name SQL-level name    * @return Java-level name, or null if SQL-level name is unknown    */
 specifier|public
 specifier|static
 name|String
@@ -2923,7 +2923,7 @@ literal|null
 return|;
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------
-comment|/**      * Handles particular {@link DatabaseMetaData} methods; invocations of other      * methods will fall through to the base class, {@link      * BarfingInvocationHandler}, which will throw an error.      */
+comment|/**    * Handles particular {@link DatabaseMetaData} methods; invocations of other    * methods will fall through to the base class, {@link    * BarfingInvocationHandler}, which will throw an error.    */
 specifier|public
 specifier|static
 class|class

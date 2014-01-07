@@ -209,7 +209,7 @@ name|EigenbaseTrace
 operator|.
 name|parserTracer
 decl_stmt|;
-comment|/**      * Alias generated for the source table when rewriting UPDATE to MERGE.      */
+comment|/**    * Alias generated for the source table when rewriting UPDATE to MERGE.    */
 specifier|public
 specifier|static
 specifier|final
@@ -218,7 +218,7 @@ name|UPDATE_SRC_ALIAS
 init|=
 literal|"SYS$SRC"
 decl_stmt|;
-comment|/**      * Alias generated for the target table when rewriting UPDATE to MERGE if no      * alias was specified by the user.      */
+comment|/**    * Alias generated for the target table when rewriting UPDATE to MERGE if no    * alias was specified by the user.    */
 specifier|public
 specifier|static
 specifier|final
@@ -227,7 +227,7 @@ name|UPDATE_TGT_ALIAS
 init|=
 literal|"SYS$TGT"
 decl_stmt|;
-comment|/**      * Alias prefix generated for source columns when rewriting UPDATE to MERGE.      */
+comment|/**    * Alias prefix generated for source columns when rewriting UPDATE to MERGE.    */
 specifier|public
 specifier|static
 specifier|final
@@ -237,18 +237,18 @@ init|=
 literal|"SYS$ANON"
 decl_stmt|;
 comment|//~ Enums ------------------------------------------------------------------
-comment|/**      * Validation status.      */
+comment|/**    * Validation status.    */
 specifier|public
 enum|enum
 name|Status
 block|{
-comment|/**          * Validation has not started for this scope.          */
+comment|/**      * Validation has not started for this scope.      */
 name|Unvalidated
 block|,
-comment|/**          * Validation is in progress for this scope.          */
+comment|/**      * Validation is in progress for this scope.      */
 name|InProgress
 block|,
-comment|/**          * Validation has completed (perhaps unsuccessfully).          */
+comment|/**      * Validation has completed (perhaps unsuccessfully).      */
 name|Valid
 block|}
 comment|//~ Instance fields --------------------------------------------------------
@@ -261,7 +261,7 @@ specifier|final
 name|SqlValidatorCatalogReader
 name|catalogReader
 decl_stmt|;
-comment|/**      * Maps ParsePosition strings to the {@link SqlIdentifier} identifier      * objects at these positions      */
+comment|/**    * Maps ParsePosition strings to the {@link SqlIdentifier} identifier    * objects at these positions    */
 specifier|protected
 specifier|final
 name|Map
@@ -281,7 +281,7 @@ name|IdInfo
 argument_list|>
 argument_list|()
 decl_stmt|;
-comment|/**      * Maps {@link SqlNode query node} objects to the {@link SqlValidatorScope}      * scope created from them}.      */
+comment|/**    * Maps {@link SqlNode query node} objects to the {@link SqlValidatorScope}    * scope created from them}.    */
 specifier|protected
 specifier|final
 name|Map
@@ -301,7 +301,7 @@ name|SqlValidatorScope
 argument_list|>
 argument_list|()
 decl_stmt|;
-comment|/**      * Maps a {@link SqlSelect} node to the scope used by its WHERE and HAVING      * clauses.      */
+comment|/**    * Maps a {@link SqlSelect} node to the scope used by its WHERE and HAVING    * clauses.    */
 specifier|private
 specifier|final
 name|Map
@@ -321,7 +321,7 @@ name|SqlValidatorScope
 argument_list|>
 argument_list|()
 decl_stmt|;
-comment|/**      * Maps a {@link SqlSelect} node to the scope used by its SELECT and HAVING      * clauses.      */
+comment|/**    * Maps a {@link SqlSelect} node to the scope used by its SELECT and HAVING    * clauses.    */
 specifier|private
 specifier|final
 name|Map
@@ -341,7 +341,7 @@ name|SqlValidatorScope
 argument_list|>
 argument_list|()
 decl_stmt|;
-comment|/**      * Maps a {@link SqlSelect} node to the scope used by its ORDER BY clause.      */
+comment|/**    * Maps a {@link SqlSelect} node to the scope used by its ORDER BY clause.    */
 specifier|private
 specifier|final
 name|Map
@@ -361,7 +361,7 @@ name|SqlValidatorScope
 argument_list|>
 argument_list|()
 decl_stmt|;
-comment|/**      * Maps a {@link SqlSelect} node that is the argument to a CURSOR      * constructor to the scope of the result of that select node      */
+comment|/**    * Maps a {@link SqlSelect} node that is the argument to a CURSOR    * constructor to the scope of the result of that select node    */
 specifier|private
 specifier|final
 name|Map
@@ -381,7 +381,7 @@ name|SqlValidatorScope
 argument_list|>
 argument_list|()
 decl_stmt|;
-comment|/**      * Maps a {@link SqlNode node} to the {@link SqlValidatorNamespace      * namespace} which describes what columns they contain.      */
+comment|/**    * Maps a {@link SqlNode node} to the {@link SqlValidatorNamespace    * namespace} which describes what columns they contain.    */
 specifier|protected
 specifier|final
 name|Map
@@ -401,7 +401,7 @@ name|SqlValidatorNamespace
 argument_list|>
 argument_list|()
 decl_stmt|;
-comment|/**      * Set of select expressions used as cursor definitions. In standard SQL,      * only the top-level SELECT is a cursor; Eigenbase extends this with      * cursors as inputs to table functions.      */
+comment|/**    * Set of select expressions used as cursor definitions. In standard SQL,    * only the top-level SELECT is a cursor; Eigenbase extends this with    * cursors as inputs to table functions.    */
 specifier|private
 specifier|final
 name|Set
@@ -417,7 +417,7 @@ name|SqlNode
 argument_list|>
 argument_list|()
 decl_stmt|;
-comment|/**      * Stack of objects that maintain information about function calls. A stack      * is needed to handle nested function calls. The function call currently      * being validated is at the top of the stack.      */
+comment|/**    * Stack of objects that maintain information about function calls. A stack    * is needed to handle nested function calls. The function call currently    * being validated is at the top of the stack.    */
 specifier|protected
 specifier|final
 name|Stack
@@ -452,7 +452,7 @@ specifier|final
 name|RelDataType
 name|booleanType
 decl_stmt|;
-comment|/**      * Map of derived RelDataType for each node. This is an IdentityHashMap      * since in some cases (such as null literals) we need to discriminate by      * instance.      */
+comment|/**    * Map of derived RelDataType for each node. This is an IdentityHashMap    * since in some cases (such as null literals) we need to discriminate by    * instance.    */
 specifier|private
 specifier|final
 name|Map
@@ -541,7 +541,7 @@ name|boolean
 name|validatingSqlMerge
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a validator.      *      * @param opTab Operator table      * @param catalogReader Catalog reader      * @param typeFactory Type factory      * @param conformance Compatibility mode      */
+comment|/**    * Creates a validator.    *    * @param opTab         Operator table    * @param catalogReader Catalog reader    * @param typeFactory   Type factory    * @param conformance   Compatibility mode    */
 specifier|protected
 name|SqlValidatorImpl
 parameter_list|(
@@ -1003,7 +1003,7 @@ name|columnListParamName
 argument_list|)
 return|;
 block|}
-comment|/**      * If<code>selectItem</code> is "*" or "TABLE.*", expands it and returns      * true; otherwise writes the unexpanded item.      *      * @param selectItem Select-list item      * @param select Containing select clause      * @param selectItems List that expanded items are written to      * @param aliases Set of aliases      * @param types List of data types in alias order      * @param includeSystemVars If true include system vars in lists      *      * @return Whether the node was expanded      */
+comment|/**    * If<code>selectItem</code> is "*" or "TABLE.*", expands it and returns    * true; otherwise writes the unexpanded item.    *    * @param selectItem        Select-list item    * @param select            Containing select clause    * @param selectItems       List that expanded items are written to    * @param aliases           Set of aliases    * @param types             List of data types in alias order    * @param includeSystemVars If true include system vars in lists    * @return Whether the node was expanded    */
 specifier|private
 name|boolean
 name|expandSelectItem
@@ -1769,7 +1769,7 @@ literal|null
 return|;
 block|}
 block|}
-comment|/**      * Looks up completion hints for a syntactically correct select SQL that has      * been parsed into an expression tree.      *      * @param select the Select node of the parsed expression tree      * @param pos indicates the position in the sql statement we want to get      * completion hints for      * @param hintList list of {@link SqlMoniker} (sql identifiers) that can      * fill in at the indicated position      */
+comment|/**    * Looks up completion hints for a syntactically correct select SQL that has    * been parsed into an expression tree.    *    * @param select   the Select node of the parsed expression tree    * @param pos      indicates the position in the sql statement we want to get    *                 completion hints for    * @param hintList list of {@link SqlMoniker} (sql identifiers) that can    *                 fill in at the indicated position    */
 name|void
 name|lookupSelectHints
 parameter_list|(
@@ -2280,7 +2280,7 @@ comment|// Not supporting hints for other types such as 'Using' yet.
 return|return;
 block|}
 block|}
-comment|/**      * Populates a list of all the valid alternatives for an identifier.      *      * @param scope Validation scope      * @param names Components of the identifier      * @param pos position      * @param hintList a list of valid options      */
+comment|/**    * Populates a list of all the valid alternatives for an identifier.    *    * @param scope    Validation scope    * @param names    Components of the identifier    * @param pos      position    * @param hintList a list of valid options    */
 specifier|public
 specifier|final
 name|void
@@ -3160,7 +3160,7 @@ name|SELECT
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Validates a namespace.      */
+comment|/**    * Validates a namespace.    */
 specifier|protected
 name|void
 name|validateNamespace
@@ -3416,7 +3416,7 @@ name|node
 argument_list|)
 return|;
 block|}
-comment|/**      * Returns the appropriate scope for validating a particular clause of a      * SELECT statement.      *      *<p>Consider SELECT * FROM foo WHERE EXISTS ( SELECT deptno AS x FROM emp,      * dept WHERE emp.deptno = 5 GROUP BY deptno ORDER BY x) In FROM, you can      * only see 'foo'. In WHERE, GROUP BY and SELECT, you can see 'emp', 'dept',      * and 'foo'. In ORDER BY, you can see the column alias 'x', 'emp', 'dept',      * and 'foo'.      */
+comment|/**    * Returns the appropriate scope for validating a particular clause of a    * SELECT statement.    *    *<p>Consider SELECT * FROM foo WHERE EXISTS ( SELECT deptno AS x FROM emp,    * dept WHERE emp.deptno = 5 GROUP BY deptno ORDER BY x) In FROM, you can    * only see 'foo'. In WHERE, GROUP BY and SELECT, you can see 'emp', 'dept',    * and 'foo'. In ORDER BY, you can see the column alias 'x', 'emp', 'dept',    * and 'foo'.    */
 specifier|public
 name|SqlValidatorScope
 name|getScope
@@ -3590,7 +3590,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**      * Performs expression rewrites which are always used unconditionally. These      * rewrites massage the expression tree into a standard form so that the      * rest of the validation logic can be simpler.      *      * @param node expression to be rewritten      * @param underFrom whether node appears directly under a FROM clause      *      * @return rewritten expression      */
+comment|/**    * Performs expression rewrites which are always used unconditionally. These    * rewrites massage the expression tree into a standard form so that the    * rest of the validation logic can be simpler.    *    * @param node      expression to be rewritten    * @param underFrom whether node appears directly under a FROM clause    * @return rewritten expression    */
 specifier|protected
 name|SqlNode
 name|performUnconditionalRewrites
@@ -5176,7 +5176,7 @@ return|return
 name|mergeCall
 return|;
 block|}
-comment|/**      * Allows a subclass to provide information about how to convert an UPDATE      * into a MERGE via self-join. If this method returns null, then no such      * conversion takes place. Otherwise, this method should return a suitable      * unique identifier expression for the given table.      *      * @param table identifier for table being updated      * @param alias alias to use for qualifying columns in expression, or null      * for unqualified references; if this is equal to {@value      * #UPDATE_SRC_ALIAS}, then column references have been anonymized to      * "SYS$ANONx", where x is the 1-based column number.      *      * @return expression for unique identifier, or null to prevent conversion      */
+comment|/**    * Allows a subclass to provide information about how to convert an UPDATE    * into a MERGE via self-join. If this method returns null, then no such    * conversion takes place. Otherwise, this method should return a suitable    * unique identifier expression for the given table.    *    * @param table identifier for table being updated    * @param alias alias to use for qualifying columns in expression, or null    *              for unqualified references; if this is equal to    *              {@value #UPDATE_SRC_ALIAS}, then column references have been    *              anonymized to "SYS$ANONx", where x is the 1-based column    *              number.    * @return expression for unique identifier, or null to prevent conversion    */
 specifier|protected
 name|SqlNode
 name|getSelfJoinExprForUpdate
@@ -5192,7 +5192,7 @@ return|return
 literal|null
 return|;
 block|}
-comment|/**      * Creates the SELECT statement that putatively feeds rows into an UPDATE      * statement to be updated.      *      * @param call Call to the UPDATE operator      *      * @return select statement      */
+comment|/**    * Creates the SELECT statement that putatively feeds rows into an UPDATE    * statement to be updated.    *    * @param call Call to the UPDATE operator    * @return select statement    */
 specifier|protected
 name|SqlSelect
 name|createSourceSelectForUpdate
@@ -5346,7 +5346,7 @@ name|ZERO
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates the SELECT statement that putatively feeds rows into a DELETE      * statement to be deleted.      *      * @param call Call to the DELETE operator      *      * @return select statement      */
+comment|/**    * Creates the SELECT statement that putatively feeds rows into a DELETE    * statement to be deleted.    *    * @param call Call to the DELETE operator    * @return select statement    */
 specifier|protected
 name|SqlSelect
 name|createSourceSelectForDelete
@@ -5454,7 +5454,7 @@ name|ZERO
 argument_list|)
 return|;
 block|}
-comment|/** Returns null if there is no common type. E.g. if the rows have a      * different number of columns. */
+comment|/**    * Returns null if there is no common type. E.g. if the rows have a    * different number of columns.    */
 name|RelDataType
 name|getTableConstructorRowType
 parameter_list|(
@@ -6007,7 +6007,7 @@ return|return
 name|type
 return|;
 block|}
-comment|/**      * Derives the type of a node.      *      * @post return != null      */
+comment|/**    * Derives the type of a node.    *    * @post return != null    */
 name|RelDataType
 name|deriveTypeImpl
 parameter_list|(
@@ -6969,7 +6969,7 @@ expr_stmt|;
 block|}
 block|}
 block|}
-comment|/**      * Adds an expression to a select list, ensuring that its alias does not      * clash with any existing expressions on the list.      */
+comment|/**    * Adds an expression to a select list, ensuring that its alias does not    * clash with any existing expressions on the list.    */
 specifier|protected
 name|void
 name|addToSelectList
@@ -7187,7 +7187,7 @@ return|return
 literal|true
 return|;
 block|}
-comment|/**      * Registers a new namespace, and adds it as a child of its parent scope.      * Derived class can override this method to tinker with namespaces as they      * are created.      *      * @param usingScope Parent scope (which will want to look for things in      * this namespace)      * @param alias Alias by which parent will refer to this namespace      * @param ns Namespace      * @param forceNullable Whether to force the type of namespace to be      */
+comment|/**    * Registers a new namespace, and adds it as a child of its parent scope.    * Derived class can override this method to tinker with namespaces as they    * are created.    *    * @param usingScope    Parent scope (which will want to look for things in    *                      this namespace)    * @param alias         Alias by which parent will refer to this namespace    * @param ns            Namespace    * @param forceNullable Whether to force the type of namespace to be    */
 specifier|protected
 name|void
 name|registerNamespace
@@ -7246,7 +7246,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Registers scopes and namespaces implied a relational expression in the      * FROM clause.      *      *<p>{@code parentScope} and {@code usingScope} are often the same. They      * differ when the namespace are not visible within the parent. (Example      * needed.)      *      *<p>Likewise, {@code enclosingNode} and {@code node} are often the same.      * {@code enclosingNode} is the topmost node within the FROM clause, from      * which any decorations like an alias (<code>AS alias</code>) or a table      * sample clause are stripped away to get {@code node}. Both are recorded in      * the namespace.      *      * @param parentScope Parent scope which this scope turns to in order to      * resolve objects      * @param usingScope Scope whose child list this scope should add itself to      * @param node Node which namespace is based on      * @param enclosingNode Outermost node for namespace, including decorations      * such as alias and sample clause      * @param alias Alias      * @param forceNullable Whether to force the type of namespace to be      * nullable because it is in an outer join      *      * @return registered node, usually the same as {@code node}      */
+comment|/**    * Registers scopes and namespaces implied a relational expression in the    * FROM clause.    *    *<p>{@code parentScope} and {@code usingScope} are often the same. They    * differ when the namespace are not visible within the parent. (Example    * needed.)    *    *<p>Likewise, {@code enclosingNode} and {@code node} are often the same.    * {@code enclosingNode} is the topmost node within the FROM clause, from    * which any decorations like an alias (<code>AS alias</code>) or a table    * sample clause are stripped away to get {@code node}. Both are recorded in    * the namespace.    *    * @param parentScope   Parent scope which this scope turns to in order to    *                      resolve objects    * @param usingScope    Scope whose child list this scope should add itself to    * @param node          Node which namespace is based on    * @param enclosingNode Outermost node for namespace, including decorations    *                      such as alias and sample clause    * @param alias         Alias    * @param forceNullable Whether to force the type of namespace to be    *                      nullable because it is in an outer join    * @return registered node, usually the same as {@code node}    */
 specifier|private
 name|SqlNode
 name|registerFrom
@@ -8227,7 +8227,7 @@ return|return
 literal|false
 return|;
 block|}
-comment|/**      * Creates a namespace for a<code>SELECT</code> node. Derived class may      * override this factory method.      *      * @param select Select node      * @param enclosingNode Enclosing node      *      * @return Select namespace      */
+comment|/**    * Creates a namespace for a<code>SELECT</code> node. Derived class may    * override this factory method.    *    * @param select        Select node    * @param enclosingNode Enclosing node    * @return Select namespace    */
 specifier|protected
 name|SelectNamespace
 name|createSelectNamespace
@@ -8251,7 +8251,7 @@ name|enclosingNode
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates a namespace for a set operation (<code>UNION</code>,<code>      * INTERSECT</code>, or<code>EXCEPT</code>). Derived class may override      * this factory method.      *      * @param call Call to set operation      * @param enclosingNode Enclosing node      *      * @return Set operation namespace      */
+comment|/**    * Creates a namespace for a set operation (<code>UNION</code>,<code>    * INTERSECT</code>, or<code>EXCEPT</code>). Derived class may override    * this factory method.    *    * @param call          Call to set operation    * @param enclosingNode Enclosing node    * @return Set operation namespace    */
 specifier|protected
 name|SetopNamespace
 name|createSetopNamespace
@@ -8275,7 +8275,7 @@ name|enclosingNode
 argument_list|)
 return|;
 block|}
-comment|/**      * Registers a query in a parent scope.      *      * @param parentScope Parent scope which this scope turns to in order to      * resolve objects      * @param usingScope Scope whose child list this scope should add itself to      * @param node Query node      * @param alias Name of this query within its parent. Must be specified if      * usingScope != null      *      * @pre usingScope == null || alias != null      */
+comment|/**    * Registers a query in a parent scope.    *    * @param parentScope Parent scope which this scope turns to in order to    *                    resolve objects    * @param usingScope  Scope whose child list this scope should add itself to    * @param node        Query node    * @param alias       Name of this query within its parent. Must be specified    *                    if usingScope != null    * @pre usingScope == null || alias != null    */
 specifier|private
 name|void
 name|registerQuery
@@ -8317,7 +8317,7 @@ literal|true
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Registers a query in a parent scope.      *      * @param parentScope Parent scope which this scope turns to in order to      * resolve objects      * @param usingScope Scope whose child list this scope should add itself to      * @param node Query node      * @param alias Name of this query within its parent. Must be specified if      * usingScope != null      * @param checkUpdate if true, validate that the update feature is supported      * if validating the update statement      *      * @pre usingScope == null || alias != null      */
+comment|/**    * Registers a query in a parent scope.    *    * @param parentScope Parent scope which this scope turns to in order to    *                    resolve objects    * @param usingScope  Scope whose child list this scope should add itself to    * @param node        Query node    * @param alias       Name of this query within its parent. Must be specified    *                    if usingScope != null    * @param checkUpdate if true, validate that the update feature is supported    *                    if validating the update statement    * @pre usingScope == null || alias != null    */
 specifier|private
 name|void
 name|registerQuery
@@ -9880,7 +9880,7 @@ block|{
 comment|// atomic node -- can be ignored
 block|}
 block|}
-comment|/**      * Registers any subqueries inside a given call operand, and converts the      * operand to a scalar subquery if the operator requires it.      *      * @param parentScope Parent scope      * @param call Call      * @param operandOrdinal Ordinal of operand within call      *      * @see SqlOperator#argumentMustBeScalar(int)      */
+comment|/**    * Registers any subqueries inside a given call operand, and converts the    * operand to a scalar subquery if the operator requires it.    *    * @param parentScope    Parent scope    * @param call           Call    * @param operandOrdinal Ordinal of operand within call    * @see SqlOperator#argumentMustBeScalar(int)    */
 specifier|private
 name|void
 name|registerOperandSubqueries
@@ -10688,7 +10688,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**      * Validates the FROM clause of a query, or (recursively) a child node of      * the FROM clause: AS, OVER, JOIN, VALUES, or subquery.      *      * @param node Node in FROM clause, typically a table or derived table      * @param targetRowType Desired row type of this expression, or {@link      * #unknownType} if not fussy. Must not be null.      * @param scope Scope      */
+comment|/**    * Validates the FROM clause of a query, or (recursively) a child node of    * the FROM clause: AS, OVER, JOIN, VALUES, or subquery.    *    * @param node          Node in FROM clause, typically a table or derived    *                      table    * @param targetRowType Desired row type of this expression, or    *                      {@link #unknownType} if not fussy. Must not be null.    * @param scope         Scope    */
 specifier|protected
 name|void
 name|validateFrom
@@ -11383,7 +11383,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**      * Throws an error if there is an aggregate or windowed aggregate in the      * given clause.      *      * @param condition Parse tree      * @param clause Name of clause: "WHERE", "GROUP BY", "ON"      */
+comment|/**    * Throws an error if there is an aggregate or windowed aggregate in the    * given clause.    *    * @param condition Parse tree    * @param clause    Name of clause: "WHERE", "GROUP BY", "ON"    */
 specifier|private
 name|void
 name|validateNoAggs
@@ -11606,7 +11606,7 @@ argument_list|)
 argument_list|)
 throw|;
 block|}
-comment|/**      * Validates a SELECT statement.      *      * @param select Select statement      * @param targetRowType Desired row type, must not be null, may be the data      * type 'unknown'.      *      * @pre targetRowType != null      */
+comment|/**    * Validates a SELECT statement.    *    * @param select        Select statement    * @param targetRowType Desired row type, must not be null, may be the data    *                      type 'unknown'.    * @pre targetRowType != null    */
 specifier|protected
 name|void
 name|validateSelect
@@ -11918,7 +11918,7 @@ name|select
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Returns the ordinal of the first element in the list which is equal to a      * previous element in the list.      *      *<p>For example,<code>firstDuplicate(Arrays.asList("a", "b", "c", "b",      * "a"))</code> returns 3, the ordinal of the 2nd "b".      *      * @param list List      *      * @return Ordinal of first duplicate, or -1 if not found      */
+comment|/**    * Returns the ordinal of the first element in the list which is equal to a    * previous element in the list.    *    *<p>For example,<code>firstDuplicate(Arrays.asList("a", "b", "c", "b",    * "a"))</code> returns 3, the ordinal of the 2nd "b".    *    * @param list List    * @return Ordinal of first duplicate, or -1 if not found    */
 specifier|private
 specifier|static
 parameter_list|<
@@ -12294,7 +12294,7 @@ name|windowScope
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Validates the ORDER BY clause of a SELECT statement.      *      * @param select Select statement      */
+comment|/**    * Validates the ORDER BY clause of a SELECT statement.    *    * @param select Select statement    */
 specifier|protected
 name|void
 name|validateOrderList
@@ -12496,7 +12496,7 @@ name|go
 argument_list|()
 return|;
 block|}
-comment|/**      * Validates the GROUP BY clause of a SELECT statement. This method is      * called even if no GROUP BY clause is present.      */
+comment|/**    * Validates the GROUP BY clause of a SELECT statement. This method is    * called even if no GROUP BY clause is present.    */
 specifier|protected
 name|void
 name|validateGroupClause
@@ -13192,7 +13192,7 @@ name|fieldList
 argument_list|)
 return|;
 block|}
-comment|/**      * Validates an expression.      *      * @param expr Expression      * @param scope Scope in which expression occurs      */
+comment|/**    * Validates an expression.    *    * @param expr  Expression    * @param scope Scope in which expression occurs    */
 specifier|private
 name|void
 name|validateExpr
@@ -13224,7 +13224,7 @@ name|expr
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Processes SubQuery found in Select list. Checks that is actually Scalar      * subquery and makes proper entries in each of the 3 lists used to create      * the final rowType entry.      *      * @param parentSelect base SqlSelect item      * @param selectItem child SqlSelect from select list      * @param expandedSelectItems Select items after processing      * @param aliasList built from user or system values      * @param fieldList Built up entries for each select list entry      */
+comment|/**    * Processes SubQuery found in Select list. Checks that is actually Scalar    * subquery and makes proper entries in each of the 3 lists used to create    * the final rowType entry.    *    * @param parentSelect        base SqlSelect item    * @param selectItem          child SqlSelect from select list    * @param expandedSelectItems Select items after processing    * @param aliasList           built from user or system values    * @param fieldList           Built up entries for each select list entry    */
 specifier|private
 name|void
 name|handleScalarSubQuery
@@ -13410,7 +13410,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Derives a row-type for INSERT and UPDATE operations.      *      * @param table Target table for INSERT/UPDATE      * @param targetColumnList List of target columns, or null if not specified      * @param append Whether to append fields to those in<code>      * baseRowType</code>      *      * @return Rowtype      */
+comment|/**    * Derives a row-type for INSERT and UPDATE operations.    *    * @param table            Target table for INSERT/UPDATE    * @param targetColumnList List of target columns, or null if not specified    * @param append           Whether to append fields to those in<code>    *                         baseRowType</code>    * @return Rowtype    */
 specifier|protected
 name|RelDataType
 name|createTargetRowType
@@ -14236,7 +14236,7 @@ throw|;
 block|}
 block|}
 block|}
-comment|/**      * Locates the n'th expression in an INSERT or UPDATE query.      *      * @param query Query      * @param ordinal Ordinal of expression      * @param sourceCount Number of expressions      *      * @return Ordinal'th expression, never null      */
+comment|/**    * Locates the n'th expression in an INSERT or UPDATE query.    *    * @param query       Query    * @param ordinal     Ordinal of expression    * @param sourceCount Number of expressions    * @return Ordinal'th expression, never null    */
 specifier|private
 name|SqlNode
 name|getNthExpr
@@ -14784,7 +14784,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Validates access to a table.      *      * @param table Table      * @param requiredAccess Access requested on table      */
+comment|/**    * Validates access to a table.    *    * @param table          Table    * @param requiredAccess Access requested on table    */
 specifier|private
 name|void
 name|validateAccess
@@ -14857,7 +14857,7 @@ throw|;
 block|}
 block|}
 block|}
-comment|/**      * Validates a VALUES clause.      *      * @param node Values clause      * @param targetRowType Row type which expression must conform to      * @param scope Scope within which clause occurs      */
+comment|/**    * Validates a VALUES clause.    *    * @param node          Values clause    * @param targetRowType Row type which expression must conform to    * @param scope         Scope within which clause occurs    */
 specifier|protected
 name|void
 name|validateValues
@@ -15895,7 +15895,7 @@ name|operandScope
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Validates that a particular feature is enabled. By default, all features      * are enabled; subclasses may override this method to be more      * discriminating.      *      * @param feature feature being used, represented as a resource definition      * from {@link EigenbaseResource}      * @param context parser position context for error reporting, or null if      * none available      */
+comment|/**    * Validates that a particular feature is enabled. By default, all features    * are enabled; subclasses may override this method to be more    * discriminating.    *    * @param feature feature being used, represented as a resource definition    *                from {@link EigenbaseResource}    * @param context parser position context for error reporting, or null if    *                none available    */
 specifier|protected
 name|void
 name|validateFeature
@@ -16485,7 +16485,7 @@ argument_list|()
 throw|;
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------
-comment|/**      * Common base class for DML statement namespaces.      */
+comment|/**    * Common base class for DML statement namespaces.    */
 specifier|public
 specifier|static
 class|class
@@ -16517,7 +16517,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Namespace for an INSERT statement.      */
+comment|/**    * Namespace for an INSERT statement.    */
 specifier|private
 specifier|static
 class|class
@@ -16577,7 +16577,7 @@ name|node
 return|;
 block|}
 block|}
-comment|/**      * Namespace for an UPDATE statement.      */
+comment|/**    * Namespace for an UPDATE statement.    */
 specifier|private
 specifier|static
 class|class
@@ -16637,7 +16637,7 @@ name|node
 return|;
 block|}
 block|}
-comment|/**      * Namespace for a DELETE statement.      */
+comment|/**    * Namespace for a DELETE statement.    */
 specifier|private
 specifier|static
 class|class
@@ -16697,7 +16697,7 @@ name|node
 return|;
 block|}
 block|}
-comment|/**      * Namespace for a MERGE statement.      */
+comment|/**    * Namespace for a MERGE statement.    */
 specifier|private
 specifier|static
 class|class
@@ -16757,7 +16757,7 @@ name|node
 return|;
 block|}
 block|}
-comment|/**      * Visitor which derives the type of a given {@link SqlNode}.      *      *<p>Each method must return the derived type. This visitor is basically a      * single-use dispatcher; the visit is never recursive.      */
+comment|/**    * Visitor which derives the type of a given {@link SqlNode}.    *    *<p>Each method must return the derived type. This visitor is basically a    * single-use dispatcher; the visit is never recursive.    */
 specifier|private
 class|class
 name|DeriveTypeVisitor
@@ -17218,7 +17218,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**      * Converts an expression into canonical form by fully-qualifying any      * identifiers.      */
+comment|/**    * Converts an expression into canonical form by fully-qualifying any    * identifiers.    */
 specifier|private
 specifier|static
 class|class
@@ -17383,7 +17383,7 @@ name|result
 return|;
 block|}
 block|}
-comment|/**      * Shuttle which walks over an expression in the ORDER BY clause, replacing      * usages of aliases with the underlying expression.      */
+comment|/**    * Shuttle which walks over an expression in the ORDER BY clause, replacing    * usages of aliases with the underlying expression.    */
 class|class
 name|OrderExpressionExpander
 extends|extends
@@ -17601,7 +17601,7 @@ name|literal
 argument_list|)
 return|;
 block|}
-comment|/**          * Returns the<code>ordinal</code>th item in the select list.          */
+comment|/**      * Returns the<code>ordinal</code>th item in the select list.      */
 specifier|private
 name|SqlNode
 name|nthSelectItem
@@ -17877,13 +17877,13 @@ name|id
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Utility object used to maintain information about the parameters in a      * function call.      */
+comment|/**    * Utility object used to maintain information about the parameters in a    * function call.    */
 specifier|protected
 specifier|static
 class|class
 name|FunctionParamInfo
 block|{
-comment|/**          * Maps a cursor (based on its position relative to other cursor          * parameters within a function call) to the SELECT associated with the          * cursor.          */
+comment|/**      * Maps a cursor (based on its position relative to other cursor      * parameters within a function call) to the SELECT associated with the      * cursor.      */
 specifier|public
 specifier|final
 name|Map
@@ -17894,7 +17894,7 @@ name|SqlSelect
 argument_list|>
 name|cursorPosToSelectMap
 decl_stmt|;
-comment|/**          * Maps a column list parameter to the parent cursor parameter it          * references. The parameters are id'd by their names.          */
+comment|/**      * Maps a column list parameter to the parent cursor parameter it      * references. The parameters are id'd by their names.      */
 specifier|public
 specifier|final
 name|Map

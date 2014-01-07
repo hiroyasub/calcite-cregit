@@ -116,7 +116,7 @@ argument_list|>
 name|systemFieldList
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a JoinRel.      *      * @param cluster Cluster      * @param left Left input      * @param right Right input      * @param condition Join condition      * @param joinType Join type      * @param variablesStopped Set of names of variables which are set by the      * LHS and used by the RHS and are not available to nodes above this JoinRel      * in the tree      */
+comment|/**    * Creates a JoinRel.    *    * @param cluster          Cluster    * @param left             Left input    * @param right            Right input    * @param condition        Join condition    * @param joinType         Join type    * @param variablesStopped Set of names of variables which are set by the    *                         LHS and used by the RHS and are not available to    *                         nodes above this JoinRel in the tree    */
 specifier|public
 name|JoinRel
 parameter_list|(
@@ -168,7 +168,7 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Creates a JoinRel, flagged with whether it has been translated to a      * semi-join.      *      * @param cluster Cluster      * @param left Left input      * @param right Right input      * @param condition Join condition      * @param joinType Join type      * @param variablesStopped Set of names of variables which are set by the      * LHS and used by the RHS and are not available to nodes above this JoinRel      * in the tree      * @param semiJoinDone Whether this join has been translated to a semi-join      * @param systemFieldList List of system fields that will be prefixed to      * output row type; typically empty but must not be null      *      * @see #isSemiJoinDone()      */
+comment|/**    * Creates a JoinRel, flagged with whether it has been translated to a    * semi-join.    *    * @param cluster          Cluster    * @param left             Left input    * @param right            Right input    * @param condition        Join condition    * @param joinType         Join type    * @param variablesStopped Set of names of variables which are set by the    *                         LHS and used by the RHS and are not available to    *                         nodes above this JoinRel in the tree    * @param semiJoinDone     Whether this join has been translated to a    *                         semi-join    * @param systemFieldList  List of system fields that will be prefixed to    *                         output row type; typically empty but must not be    *                         null    * @see #isSemiJoinDone()    */
 specifier|public
 name|JoinRel
 parameter_list|(
@@ -245,7 +245,7 @@ operator|=
 name|systemFieldList
 expr_stmt|;
 block|}
-comment|/** Creates a JoinRel by parsing serialized output. */
+comment|/**    * Creates a JoinRel by parsing serialized output.    */
 specifier|public
 name|JoinRel
 parameter_list|(
@@ -437,7 +437,7 @@ name|semiJoinDone
 argument_list|)
 return|;
 block|}
-comment|/**      * Returns whether this JoinRel has already spawned a {@link      * org.eigenbase.rel.rules.SemiJoinRel} via {@link      * org.eigenbase.rel.rules.AddRedundantSemiJoinRule}.      *      * @return whether this join has already spawned a semi join      */
+comment|/**    * Returns whether this JoinRel has already spawned a {@link    * org.eigenbase.rel.rules.SemiJoinRel} via {@link    * org.eigenbase.rel.rules.AddRedundantSemiJoinRule}.    *    * @return whether this join has already spawned a semi join    */
 specifier|public
 name|boolean
 name|isSemiJoinDone

@@ -110,7 +110,7 @@ operator|new
 name|PushAggregateThroughUnionRule
 argument_list|()
 decl_stmt|;
-comment|/**      * Private constructor.      */
+comment|/**    * Private constructor.    */
 specifier|private
 name|PushAggregateThroughUnionRule
 parameter_list|()

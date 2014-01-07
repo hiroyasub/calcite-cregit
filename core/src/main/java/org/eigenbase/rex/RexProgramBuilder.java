@@ -183,7 +183,7 @@ name|boolean
 name|validating
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a program-builder.      */
+comment|/**    * Creates a program-builder.    */
 specifier|public
 name|RexProgramBuilder
 parameter_list|(
@@ -279,7 +279,7 @@ expr_stmt|;
 block|}
 block|}
 block|}
-comment|/**      * Creates a program builder with the same contents as a program.      *      * @param rexBuilder Rex builder      * @param inputRowType Input row type      * @param exprList Common expressions      * @param projectRefList Projections      * @param conditionRef Condition, or null      * @param outputRowType Output row type      * @param normalize Whether to normalize      */
+comment|/**    * Creates a program builder with the same contents as a program.    *    * @param rexBuilder     Rex builder    * @param inputRowType   Input row type    * @param exprList       Common expressions    * @param projectRefList Projections    * @param conditionRef   Condition, or null    * @param outputRowType  Output row type    * @param normalize      Whether to normalize    */
 specifier|private
 name|RexProgramBuilder
 parameter_list|(
@@ -504,7 +504,7 @@ expr_stmt|;
 block|}
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Returns whether assertions are enabled in this class.      */
+comment|/**    * Returns whether assertions are enabled in this class.    */
 specifier|private
 specifier|static
 name|boolean
@@ -716,7 +716,7 @@ name|validator
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Adds a project expression to the program.      *      *<p>The expression specified in terms of the input fields. If not, call      * {@link #registerOutput(RexNode)} first.      *      * @param expr Expression to add      * @param name Name of field in output row type; if null, a unique name will      * be generated when the program is created      *      * @return the ref created      */
+comment|/**    * Adds a project expression to the program.    *    *<p>The expression specified in terms of the input fields. If not, call    * {@link #registerOutput(RexNode)} first.    *    * @param expr Expression to add    * @param name Name of field in output row type; if null, a unique name will    *             be generated when the program is created    * @return the ref created    */
 specifier|public
 name|RexLocalRef
 name|addProject
@@ -749,7 +749,7 @@ name|name
 argument_list|)
 return|;
 block|}
-comment|/**      * Adds a projection based upon the<code>index</code>th expression.      *      * @param ordinal Index of expression to project      * @param name Name of field in output row type; if null, a unique name will      * be generated when the program is created      *      * @return the ref created      */
+comment|/**    * Adds a projection based upon the<code>index</code>th expression.    *    * @param ordinal Index of expression to project    * @param name    Name of field in output row type; if null, a unique name    *                will be generated when the program is created    * @return the ref created    */
 specifier|public
 name|RexLocalRef
 name|addProject
@@ -791,7 +791,7 @@ return|return
 name|ref
 return|;
 block|}
-comment|/**      * Adds a project expression to the program at a given position.      *      *<p>The expression specified in terms of the input fields. If not, call      * {@link #registerOutput(RexNode)} first.      *      * @param at Position in project list to add expression      * @param expr Expression to add      * @param name Name of field in output row type; if null, a unique name will      * be generated when the program is created      *      * @return the ref created      */
+comment|/**    * Adds a project expression to the program at a given position.    *    *<p>The expression specified in terms of the input fields. If not, call    * {@link #registerOutput(RexNode)} first.    *    * @param at   Position in project list to add expression    * @param expr Expression to add    * @param name Name of field in output row type; if null, a unique name will    *             be generated when the program is created    * @return the ref created    */
 specifier|public
 name|RexLocalRef
 name|addProject
@@ -837,7 +837,7 @@ return|return
 name|ref
 return|;
 block|}
-comment|/**      * Adds a projection based upon the<code>index</code>th expression at a      * given position.      *      * @param at Position in project list to add expression      * @param ordinal Index of expression to project      * @param name Name of field in output row type; if null, a unique name will      * be generated when the program is created      *      * @return the ref created      */
+comment|/**    * Adds a projection based upon the<code>index</code>th expression at a    * given position.    *    * @param at      Position in project list to add expression    * @param ordinal Index of expression to project    * @param name    Name of field in output row type; if null, a unique name    *                will be generated when the program is created    * @return the ref created    */
 specifier|public
 name|RexLocalRef
 name|addProject
@@ -869,7 +869,7 @@ name|name
 argument_list|)
 return|;
 block|}
-comment|/**      * Sets the condition of the program.      *      *<p/>The expression must be specified in terms of the input fields. If      * not, call {@link #registerOutput(RexNode)} first.      */
+comment|/**    * Sets the condition of the program.    *    *<p>The expression must be specified in terms of the input fields. If    * not, call {@link #registerOutput(RexNode)} first.</p>    */
 specifier|public
 name|void
 name|addCondition
@@ -935,7 +935,7 @@ name|andRef
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Registers an expression in the list of common sub-expressions, and      * returns a reference to that expression.      *      *<p/>The expression must be expressed in terms of the<em>inputs</em> of      * this program.      */
+comment|/**    * Registers an expression in the list of common sub-expressions, and    * returns a reference to that expression.     *<p>The expression must be expressed in terms of the<em>inputs</em> of    * this program.</p>    */
 specifier|public
 name|RexLocalRef
 name|registerInput
@@ -972,7 +972,7 @@ operator|)
 name|ref
 return|;
 block|}
-comment|/**      * Converts an expression expressed in terms of the<em>outputs</em> of this      * program into an expression expressed in terms of the<em>inputs</em>,      * registers it in the list of common sub-expressions, and returns a      * reference to that expression.      *      * @param expr Expression to register      */
+comment|/**    * Converts an expression expressed in terms of the<em>outputs</em> of this    * program into an expression expressed in terms of the<em>inputs</em>,    * registers it in the list of common sub-expressions, and returns a    * reference to that expression.    *    * @param expr Expression to register    */
 specifier|public
 name|RexLocalRef
 name|registerOutput
@@ -1009,7 +1009,7 @@ operator|)
 name|ref
 return|;
 block|}
-comment|/**      * Registers an expression in the list of common sub-expressions, and      * returns a reference to that expression.      *      *<p>If an equivalent sub-expression already exists, creates another      * expression only if<code>force</code> is true.      *      * @param expr Expression to register      * @param force Whether to create a new sub-expression if an equivalent      * sub-expression exists.      */
+comment|/**    * Registers an expression in the list of common sub-expressions, and    * returns a reference to that expression.    *    *<p>If an equivalent sub-expression already exists, creates another    * expression only if<code>force</code> is true.    *    * @param expr  Expression to register    * @param force Whether to create a new sub-expression if an equivalent    *              sub-expression exists.    */
 specifier|private
 name|RexLocalRef
 name|registerInternal
@@ -1166,7 +1166,7 @@ return|;
 block|}
 block|}
 block|}
-comment|/**      * Adds an expression to the list of common expressions, and returns a      * reference to the expression.<b>DOES NOT CHECK WHETHER THE EXPRESSION      * ALREADY EXISTS</b>.      *      * @param expr Expression      *      * @return Reference to expression      */
+comment|/**    * Adds an expression to the list of common expressions, and returns a    * reference to the expression.<b>DOES NOT CHECK WHETHER THE EXPRESSION    * ALREADY EXISTS</b>.    *    * @param expr Expression    * @return Reference to expression    */
 specifier|public
 name|RexLocalRef
 name|addExpr
@@ -1218,7 +1218,7 @@ return|return
 name|ref
 return|;
 block|}
-comment|/**      * Converts the state of the program builder to an immutable program,      * normalizing in the process.      *      *<p>It is OK to call this method, modify the program specification (by      * adding projections, and so forth), and call this method again.      */
+comment|/**    * Converts the state of the program builder to an immutable program,    * normalizing in the process.    *    *<p>It is OK to call this method, modify the program specification (by    * adding projections, and so forth), and call this method again.    */
 specifier|public
 name|RexProgram
 name|getProgram
@@ -1231,7 +1231,7 @@ literal|true
 argument_list|)
 return|;
 block|}
-comment|/**      * Converts the state of the program builder to an immutable program.      *      *<p>It is OK to call this method, modify the program specification (by      * adding projections, and so forth), and call this method again.      *      * @param normalize Whether to normalize      */
+comment|/**    * Converts the state of the program builder to an immutable program.    *    *<p>It is OK to call this method, modify the program specification (by    * adding projections, and so forth), and call this method again.    *    * @param normalize Whether to normalize    */
 specifier|public
 name|RexProgram
 name|getProgram
@@ -1434,7 +1434,7 @@ block|}
 block|}
 block|}
 block|}
-comment|/**      * Creates a program builder and initializes it from an existing program.      *      *<p>Calling {@link #getProgram()} immediately after creation will return a      * program equivalent (in terms of external behavior) to the existing      * program.      *      *<p>The existing program will not be changed. (It cannot: programs are      * immutable.)      *      * @param program Existing program      * @param rexBuilder Rex builder      * @param normalize Whether to normalize      * @return A program builder initialized with an equivalent program      */
+comment|/**    * Creates a program builder and initializes it from an existing program.    *    *<p>Calling {@link #getProgram()} immediately after creation will return a    * program equivalent (in terms of external behavior) to the existing    * program.    *    *<p>The existing program will not be changed. (It cannot: programs are    * immutable.)    *    * @param program    Existing program    * @param rexBuilder Rex builder    * @param normalize  Whether to normalize    * @return A program builder initialized with an equivalent program    */
 specifier|public
 specifier|static
 name|RexProgramBuilder
@@ -1528,7 +1528,7 @@ name|normalize
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates a program builder with the same contents as a program.      *      *<p>If {@code normalize}, converts the program to canonical form. In      * canonical form, in addition to the usual constraints:      *      *<ul>      *<li>The first N internal expressions are {@link RexInputRef}s to the N      *     input fields;      *<li>Subsequent internal expressions reference only preceding expressions;      *<li>Arguments to {@link RexCall}s must be {@link RexLocalRef}s (that is,      *     expressions must have maximum depth 1)      *</ul>      *      * there are additional constraints:      *      *<ul>      *<li>Expressions appear in the left-deep order they are needed by      *     the projections and (if present) the condition. Thus, expression N+1      *     is the leftmost argument (literal or or call) in the expansion of      *     projection #0.      *<li>There are no duplicate expressions      *<li>There are no unused expressions      *</ul>      *      * @param rexBuilder Rex builder      * @param inputRowType Input row type      * @param exprList Common expressions      * @param projectRefList Projections      * @param conditionRef Condition, or null      * @param outputRowType Output row type      * @param normalize Whether to normalize      * @return A program builder      */
+comment|/**    * Creates a program builder with the same contents as a program.    *    *<p>If {@code normalize}, converts the program to canonical form. In    * canonical form, in addition to the usual constraints:    *    *<ul>    *<li>The first N internal expressions are {@link RexInputRef}s to the N    * input fields;    *<li>Subsequent internal expressions reference only preceding expressions;    *<li>Arguments to {@link RexCall}s must be {@link RexLocalRef}s (that is,    * expressions must have maximum depth 1)    *</ul>    *    * there are additional constraints:    *    *<ul>    *<li>Expressions appear in the left-deep order they are needed by    * the projections and (if present) the condition. Thus, expression N+1    * is the leftmost argument (literal or or call) in the expansion of    * projection #0.    *<li>There are no duplicate expressions    *<li>There are no unused expressions    *</ul>    *    * @param rexBuilder     Rex builder    * @param inputRowType   Input row type    * @param exprList       Common expressions    * @param projectRefList Projections    * @param conditionRef   Condition, or null    * @param outputRowType  Output row type    * @param normalize      Whether to normalize    * @return A program builder    */
 specifier|public
 specifier|static
 name|RexProgramBuilder
@@ -1587,7 +1587,7 @@ name|normalize
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates a program builder with the same contents as a program, applying a      * shuttle first.      *      *<p>TODO: Refactor the above create method in terms of this one.      *      * @param rexBuilder Rex builder      * @param inputRowType Input row type      * @param exprList Common expressions      * @param projectRefList Projections      * @param conditionRef Condition, or null      * @param outputRowType Output row type      * @param shuttle Shuttle to apply to each expression before adding it to      * the program builder      * @param updateRefs Whether to update references that changes as a result      * of rewrites made by the shuttle      *      * @return A program builder      */
+comment|/**    * Creates a program builder with the same contents as a program, applying a    * shuttle first.    *    *<p>TODO: Refactor the above create method in terms of this one.    *    * @param rexBuilder     Rex builder    * @param inputRowType   Input row type    * @param exprList       Common expressions    * @param projectRefList Projections    * @param conditionRef   Condition, or null    * @param outputRowType  Output row type    * @param shuttle        Shuttle to apply to each expression before adding it    *                       to the program builder    * @param updateRefs     Whether to update references that changes as a result    *                       of rewrites made by the shuttle    * @return A program builder    */
 specifier|public
 specifier|static
 name|RexProgramBuilder
@@ -1664,7 +1664,7 @@ return|return
 name|progBuilder
 return|;
 block|}
-comment|/**      * Normalizes a program.      *      * @param rexBuilder Rex builder      * @param program Program      * @return Normalized program      */
+comment|/**    * Normalizes a program.    *    * @param rexBuilder Rex builder    * @param program    Program    * @return Normalized program    */
 specifier|public
 specifier|static
 name|RexProgram
@@ -1696,7 +1696,7 @@ literal|false
 argument_list|)
 return|;
 block|}
-comment|/**      * Adds a set of expressions, projections and filters, applying a shuttle      * first.      *      * @param exprList Common expressions      * @param projectRefList Projections      * @param conditionRef Condition, or null      * @param outputRowType Output row type      * @param shuttle Shuttle to apply to each expression before adding it to      * the program builder      * @param updateRefs Whether to update references that changes as a result      * of rewrites made by the shuttle      */
+comment|/**    * Adds a set of expressions, projections and filters, applying a shuttle    * first.    *    * @param exprList       Common expressions    * @param projectRefList Projections    * @param conditionRef   Condition, or null    * @param outputRowType  Output row type    * @param shuttle        Shuttle to apply to each expression before adding it    *                       to the program builder    * @param updateRefs     Whether to update references that changes as a result    *                       of rewrites made by the shuttle    */
 specifier|private
 name|void
 name|add
@@ -1972,7 +1972,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Merges two programs together, and normalizes the result.      *      * @see #mergePrograms(RexProgram, RexProgram, RexBuilder, boolean)      *      * @param topProgram Top program. Its expressions are in terms of the      * outputs of the bottom program.      * @param bottomProgram Bottom program. Its expressions are in terms of the      * result fields of the relational expression's input      * @param rexBuilder Rex builder      *      * @return Merged program      */
+comment|/**    * Merges two programs together, and normalizes the result.    *    * @param topProgram    Top program. Its expressions are in terms of the    *                      outputs of the bottom program.    * @param bottomProgram Bottom program. Its expressions are in terms of the    *                      result fields of the relational expression's input    * @param rexBuilder    Rex builder    * @return Merged program    * @see #mergePrograms(RexProgram, RexProgram, RexBuilder, boolean)    */
 specifier|public
 specifier|static
 name|RexProgram
@@ -2001,7 +2001,7 @@ literal|true
 argument_list|)
 return|;
 block|}
-comment|/**      * Merges two programs together.      *      *<p>All expressions become common sub-expressions. For example, the query      *      *<pre>{@code      * SELECT x + 1 AS p, x + y AS q FROM (      *   SELECT a + b AS x, c AS y      *   FROM t      *   WHERE c = 6)}</pre>      *      * would be represented as the programs      *      *<pre>      *   Calc:      *       Projects={$2, $3},      *       Condition=null,      *       Exprs={$0, $1, $0 + 1, $0 + $1})      *   Calc(      *       Projects={$3, $2},      *       Condition={$4}      *       Exprs={$0, $1, $2, $0 + $1, $2 = 6}      *</pre>      *      *<p>The merged program is      *      *<pre>      *   Calc(      *      Projects={$4, $5}      *      Condition=$6      *      Exprs={0: $0       // a      *             1: $1        // b      *             2: $2        // c      *             3: ($0 + $1) // x = a + b      *             4: ($3 + 1)  // p = x + 1      *             5: ($3 + $2) // q = x + y      *             6: ($2 = 6)  // c = 6      *</pre>      *      *<p>Another example:</blockquote>      *      *<pre>SELECT *      * FROM (      *   SELECT a + b AS x, c AS y      *   FROM t      *   WHERE c = 6)      * WHERE x = 5</pre>      *</blockquote>      *      * becomes      *      *<blockquote>      *<pre>SELECT a + b AS x, c AS y      * FROM t      * WHERE c = 6 AND (a + b) = 5</pre>      *</blockquote>      *      * @param topProgram Top program. Its expressions are in terms of the      * outputs of the bottom program.      * @param bottomProgram Bottom program. Its expressions are in terms of the      * result fields of the relational expression's input      * @param rexBuilder Rex builder      * @param normalize Whether to convert program to canonical form      * @return Merged program      */
+comment|/**    * Merges two programs together.    *    *<p>All expressions become common sub-expressions. For example, the query    *    *<pre>{@code    * SELECT x + 1 AS p, x + y AS q FROM (    *   SELECT a + b AS x, c AS y    *   FROM t    *   WHERE c = 6)}</pre>    *    * would be represented as the programs    *    *<pre>    *   Calc:    *       Projects={$2, $3},    *       Condition=null,    *       Exprs={$0, $1, $0 + 1, $0 + $1})    *   Calc(    *       Projects={$3, $2},    *       Condition={$4}    *       Exprs={$0, $1, $2, $0 + $1, $2 = 6}    *</pre>    *    *<p>The merged program is    *    *<pre>    *   Calc(    *      Projects={$4, $5}    *      Condition=$6    *      Exprs={0: $0       // a    *             1: $1        // b    *             2: $2        // c    *             3: ($0 + $1) // x = a + b    *             4: ($3 + 1)  // p = x + 1    *             5: ($3 + $2) // q = x + y    *             6: ($2 = 6)  // c = 6    *</pre>    *    *<p>Another example:</blockquote>    *    *<pre>SELECT *    * FROM (    *   SELECT a + b AS x, c AS y    *   FROM t    *   WHERE c = 6)    * WHERE x = 5</pre>    *</blockquote>    *    * becomes    *    *<blockquote>    *<pre>SELECT a + b AS x, c AS y    * FROM t    * WHERE c = 6 AND (a + b) = 5</pre>    *</blockquote>    *    * @param topProgram    Top program. Its expressions are in terms of the    *                      outputs of the bottom program.    * @param bottomProgram Bottom program. Its expressions are in terms of the    *                      result fields of the relational expression's input    * @param rexBuilder    Rex builder    * @param normalize     Whether to convert program to canonical form    * @return Merged program    */
 specifier|public
 specifier|static
 name|RexProgram
@@ -2312,7 +2312,7 @@ return|return
 name|projectRefList
 return|;
 block|}
-comment|/**      * Removes all project items.      *      *<p>After calling this method, you may need to re-normalize.</p>      */
+comment|/**    * Removes all project items.    *    *<p>After calling this method, you may need to re-normalize.</p>    */
 specifier|public
 name|void
 name|clearProjects
@@ -2329,7 +2329,7 @@ name|clear
 argument_list|()
 expr_stmt|;
 block|}
-comment|/**      * Clears the condition.      *      *<p>After calling this method, you may need to re-normalize.</p>      */
+comment|/**    * Clears the condition.    *    *<p>After calling this method, you may need to re-normalize.</p>    */
 specifier|public
 name|void
 name|clearCondition
@@ -2340,7 +2340,7 @@ operator|=
 literal|null
 expr_stmt|;
 block|}
-comment|/**      * Adds a project item for every input field.      *      *<p>You cannot call this method if there are other project items.      *      * @pre projectRefList.isEmpty()      */
+comment|/**    * Adds a project item for every input field.    *    *<p>You cannot call this method if there are other project items.    *    * @pre projectRefList.isEmpty()    */
 specifier|public
 name|void
 name|addIdentity
@@ -2387,7 +2387,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Creates a reference to a given input field.      *      * @param index Ordinal of input field, must be less than the number of      * fields in the input type      *      * @return Reference to input field      */
+comment|/**    * Creates a reference to a given input field.    *    * @param index Ordinal of input field, must be less than the number of    *              fields in the input type    * @return Reference to input field    */
 specifier|public
 name|RexLocalRef
 name|makeInputRef
@@ -2440,7 +2440,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**      * Returns the rowtype of the input to the program      */
+comment|/**    * Returns the rowtype of the input to the program    */
 specifier|public
 name|RelDataType
 name|getInputRowType
@@ -2450,7 +2450,7 @@ return|return
 name|inputRowType
 return|;
 block|}
-comment|/**      * Returns the list of project expressions.      */
+comment|/**    * Returns the list of project expressions.    */
 specifier|public
 name|List
 argument_list|<
@@ -2640,7 +2640,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**      * Shuttle which walks over an expression, registering each sub-expression.      * Each {@link RexInputRef} is assumed to refer to an<em>input</em> of the      * program.      */
+comment|/**    * Shuttle which walks over an expression, registering each sub-expression.    * Each {@link RexInputRef} is assumed to refer to an<em>input</em> of the    * program.    */
 specifier|private
 class|class
 name|RegisterInputShuttle
@@ -2944,7 +2944,7 @@ block|}
 block|}
 block|}
 block|}
-comment|/**      * Extension to {@link RegisterInputShuttle} which allows expressions to be      * in terms of inputs or previous common sub-expressions.      */
+comment|/**    * Extension to {@link RegisterInputShuttle} which allows expressions to be    * in terms of inputs or previous common sub-expressions.    */
 specifier|private
 class|class
 name|RegisterMidputShuttle
@@ -3017,7 +3017,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**      * Shuttle which walks over an expression, registering each sub-expression.      * Each {@link RexInputRef} is assumed to refer to an<em>output</em> of the      * program.      */
+comment|/**    * Shuttle which walks over an expression, registering each sub-expression.    * Each {@link RexInputRef} is assumed to refer to an<em>output</em> of the    * program.    */
 specifier|private
 class|class
 name|RegisterOutputShuttle
@@ -3141,7 +3141,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**      * Shuttle which rewires {@link RexLocalRef} using a list of updated      * references      */
+comment|/**    * Shuttle which rewires {@link RexLocalRef} using a list of updated    * references    */
 specifier|private
 class|class
 name|UpdateRefShuttle

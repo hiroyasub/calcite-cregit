@@ -146,7 +146,7 @@ name|class
 argument_list|)
 return|;
 block|}
-comment|/**      * Parses a SQL query. To use a different parser, override this method.      */
+comment|/**    * Parses a SQL query. To use a different parser, override this method.    */
 specifier|protected
 name|SqlNode
 name|parseQuery

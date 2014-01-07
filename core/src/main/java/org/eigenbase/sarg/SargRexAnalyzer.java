@@ -88,7 +88,7 @@ specifier|final
 name|SargFactory
 name|factory
 decl_stmt|;
-comment|/**      * If true, conjuntions on the same input reference are disallowed, as well      * as all disjunctions. Also, only a single range predicate is allowed.      */
+comment|/**    * If true, conjuntions on the same input reference are disallowed, as well    * as all disjunctions. Also, only a single range predicate is allowed.    */
 specifier|private
 specifier|final
 name|boolean
@@ -154,12 +154,12 @@ name|RexNode
 argument_list|>
 name|sarg2RexMap
 decl_stmt|;
-comment|/**      * If>= 0, treat RexInputRefs whose index is within the range      * [lowerRexInputIdx, upperRexInputIdx) as coordinates in expressions      */
+comment|/**    * If>= 0, treat RexInputRefs whose index is within the range    * [lowerRexInputIdx, upperRexInputIdx) as coordinates in expressions    */
 specifier|private
 name|int
 name|lowerRexInputIdx
 decl_stmt|;
-comment|/**      * If>= 0, treat RexInputRefs whose index is within the range      * [lowerRexInputIdx, upperRexInputIdx) as coordinates in expressions      */
+comment|/**    * If>= 0, treat RexInputRefs whose index is within the range    * [lowerRexInputIdx, upperRexInputIdx) as coordinates in expressions    */
 specifier|private
 name|int
 name|upperRexInputIdx
@@ -513,7 +513,7 @@ comment|// still have a chance of figuring out what they're for just
 comment|// from the names.  Also, some explanation of the state maintained
 comment|// by SargRexAnalyzer across the various calls is in order.
 comment|// (It used to be one-shot, but no longer.)
-comment|/**      * Reconstructs a rex predicate from a list of SargExprs which will be      * AND'ed together.      */
+comment|/**    * Reconstructs a rex predicate from a list of SargExprs which will be    * AND'ed together.    */
 specifier|private
 name|void
 name|recomposeConjunction
@@ -815,7 +815,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Analyzes a rex predicate.      *      * @param rexPredicate predicate to be analyzed      *      * @return a list of SargBindings contained in the input rex predicate      */
+comment|/**    * Analyzes a rex predicate.    *    * @param rexPredicate predicate to be analyzed    * @return a list of SargBindings contained in the input rex predicate    */
 specifier|public
 name|List
 argument_list|<
@@ -1057,7 +1057,7 @@ return|return
 name|sargBindingList
 return|;
 block|}
-comment|/**      * Tests whether we can support the usage of dynamic parameters in a given      * SargExpr.      *      * @param sargExpr expression to test      *      * @return true if supported      */
+comment|/**    * Tests whether we can support the usage of dynamic parameters in a given    * SargExpr.    *    * @param sargExpr expression to test    * @return true if supported    */
 specifier|private
 name|boolean
 name|testDynamicParamSupport
@@ -1123,7 +1123,7 @@ return|return
 literal|false
 return|;
 block|}
-comment|/**      * Reconstructs a rex predicate from the non-sargable filter predicates      * which are AND'ed together.      *      * @return the rex predicate reconstructed from the non-sargable predicates.      */
+comment|/**    * Reconstructs a rex predicate from the non-sargable filter predicates    * which are AND'ed together.    *    * @return the rex predicate reconstructed from the non-sargable predicates.    */
 specifier|public
 name|RexNode
 name|getNonSargFilterRexNode
@@ -1197,7 +1197,7 @@ return|return
 name|newAndNode
 return|;
 block|}
-comment|/**      * @deprecated use {@link #getNonSargFilterRexNode()}      */
+comment|/**    * @deprecated use {@link #getNonSargFilterRexNode()}    */
 specifier|public
 name|RexNode
 name|getPostFilterRexNode
@@ -1208,7 +1208,7 @@ name|getNonSargFilterRexNode
 argument_list|()
 return|;
 block|}
-comment|/**      * Reconstructs a rex predicate from a list of SargBindings which are AND'ed      * together.      *      * @param sargBindingList list of SargBindings to be converted.      *      * @return the rex predicate reconstructed from the list of SargBindings.      */
+comment|/**    * Reconstructs a rex predicate from a list of SargBindings which are AND'ed    * together.    *    * @param sargBindingList list of SargBindings to be converted.    * @return the rex predicate reconstructed from the list of SargBindings.    */
 specifier|public
 name|RexNode
 name|getSargBindingListToRexNode
@@ -1309,7 +1309,7 @@ return|return
 name|newAndNode
 return|;
 block|}
-comment|/**      * @deprecated use {@link #getSargBindingListToRexNode(List)}      */
+comment|/**    * @deprecated use {@link #getSargBindingListToRexNode(List)}    */
 specifier|public
 name|RexNode
 name|getResidualSargRexNode
@@ -1328,7 +1328,7 @@ name|residualSargList
 argument_list|)
 return|;
 block|}
-comment|/**      * Analyzes a rex predicate.      *      * @param rexPredicate predicate to be analyzed      *      * @return corresponding bound sarg expression, or null if analysis failed      */
+comment|/**    * Analyzes a rex predicate.    *    * @param rexPredicate predicate to be analyzed    * @return corresponding bound sarg expression, or null if analysis failed    */
 specifier|public
 name|SargBinding
 name|analyze

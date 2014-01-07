@@ -47,12 +47,12 @@ interface|interface
 name|RelStatSource
 block|{
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Returns the number of rows in a relation, as determined by statistics      *      * @return a row count, or null if one could not be determined      */
+comment|/**    * Returns the number of rows in a relation, as determined by statistics    *    * @return a row count, or null if one could not be determined    */
 name|Double
 name|getRowCount
 parameter_list|()
 function_decl|;
-comment|/**      * Returns statistics pertaining to a column specified by the 0-based      * ordinal and the sargable predicates associated with that column. The      * second argument can be null if there are no sargable predicates on the      * column.      *      * @param ordinal zero based column ordinal      * @param predicate associated predicates(s), evaluated as intervals      *      * @return filtered column statistics, or null if they could not be obtained      */
+comment|/**    * Returns statistics pertaining to a column specified by the 0-based    * ordinal and the sargable predicates associated with that column. The    * second argument can be null if there are no sargable predicates on the    * column.    *    * @param ordinal   zero based column ordinal    * @param predicate associated predicates(s), evaluated as intervals    * @return filtered column statistics, or null if they could not be obtained    */
 name|RelStatColumnStatistics
 name|getColumnStatistics
 parameter_list|(

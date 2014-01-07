@@ -44,17 +44,17 @@ specifier|public
 interface|interface
 name|RelOptNode
 block|{
-comment|/**      * Returns the ID of this relational expression, unique among all relational      * expressions created since the server was started.      *      * @return Unique ID      */
+comment|/**    * Returns the ID of this relational expression, unique among all relational    * expressions created since the server was started.    *    * @return Unique ID    */
 name|int
 name|getId
 parameter_list|()
 function_decl|;
-comment|/**      * Returns a string which concisely describes the definition of this      * relational expression. Two relational expressions are equivalent if and      * only if their digests are the same.      *      *<p>The digest does not contain the relational expression's identity --      * that would prevent similar relational expressions from ever comparing      * equal -- but does include the identity of children (on the assumption      * that children have already been normalized).      *      *<p>If you want a descriptive string which contains the identity, call      * {@link Object#toString()}, which always returns "rel#{id}:{digest}".      */
+comment|/**    * Returns a string which concisely describes the definition of this    * relational expression. Two relational expressions are equivalent if and    * only if their digests are the same.    *    *<p>The digest does not contain the relational expression's identity --    * that would prevent similar relational expressions from ever comparing    * equal -- but does include the identity of children (on the assumption    * that children have already been normalized).    *    *<p>If you want a descriptive string which contains the identity, call    * {@link Object#toString()}, which always returns "rel#{id}:{digest}".    */
 name|String
 name|getDigest
 parameter_list|()
 function_decl|;
-comment|/**      * Retrieves this RelNode's traits. Note that although the RelTraitSet      * returned is modifiable, it<b>must not</b> be modified during      * optimization. It is legal to modify the traits of a RelNode before or      * after optimization, although doing so could render a tree of RelNodes      * unimplementable. If a RelNode's traits need to be modified during      * optimization, clone the RelNode and change the clone's traits.      *      * @return this RelNode's trait set      */
+comment|/**    * Retrieves this RelNode's traits. Note that although the RelTraitSet    * returned is modifiable, it<b>must not</b> be modified during    * optimization. It is legal to modify the traits of a RelNode before or    * after optimization, although doing so could render a tree of RelNodes    * unimplementable. If a RelNode's traits need to be modified during    * optimization, clone the RelNode and change the clone's traits.    *    * @return this RelNode's trait set    */
 name|RelTraitSet
 name|getTraitSet
 parameter_list|()
@@ -65,7 +65,7 @@ name|RelDataType
 name|getRowType
 parameter_list|()
 function_decl|;
-comment|/**      * Returns a string which describes the relational expression and, unlike      * {@link #getDigest()}, also includes the identity. Typically returns      * "rel#{id}:{digest}".      */
+comment|/**    * Returns a string which describes the relational expression and, unlike    * {@link #getDigest()}, also includes the identity. Typically returns    * "rel#{id}:{digest}".    */
 name|String
 name|getDescription
 parameter_list|()
@@ -79,7 +79,7 @@ argument_list|>
 name|getInputs
 parameter_list|()
 function_decl|;
-comment|/**      * Returns the cluster this relational expression belongs to.      *      * @return cluster      */
+comment|/**    * Returns the cluster this relational expression belongs to.    *    * @return cluster    */
 name|RelOptCluster
 name|getCluster
 parameter_list|()

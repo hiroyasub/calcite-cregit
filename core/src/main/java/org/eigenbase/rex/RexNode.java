@@ -75,7 +75,7 @@ name|RexNode
 name|clone
 parameter_list|()
 function_decl|;
-comment|/**      * Returns whether this expression always returns true. (Such as if this      * expression is equal to the literal<code>TRUE</code>.)      */
+comment|/**    * Returns whether this expression always returns true. (Such as if this    * expression is equal to the literal<code>TRUE</code>.)    */
 specifier|public
 name|boolean
 name|isAlwaysTrue
@@ -85,7 +85,7 @@ return|return
 literal|false
 return|;
 block|}
-comment|/**      * Returns whether this expression always returns false. (Such as if this      * expression is equal to the literal<code>FALSE</code>.)      */
+comment|/**    * Returns whether this expression always returns false. (Such as if this    * expression is equal to the literal<code>FALSE</code>.)    */
 specifier|public
 name|boolean
 name|isAlwaysFalse
@@ -131,7 +131,7 @@ name|kinds
 argument_list|)
 return|;
 block|}
-comment|/**      * Returns the kind of node this is.      *      * @return A {@link org.eigenbase.sql.SqlKind} value, never null      */
+comment|/**    * Returns the kind of node this is.    *    * @return A {@link org.eigenbase.sql.SqlKind} value, never null    */
 specifier|public
 name|SqlKind
 name|getKind
@@ -152,7 +152,7 @@ return|return
 name|digest
 return|;
 block|}
-comment|/**      * Accepts a visitor, dispatching to the right overloaded {@link      * RexVisitor#visitInputRef visitXxx} method.      *      *<p>Also see {@link RexProgram#apply(RexVisitor, java.util.List, RexNode)},      * which applies a visitor to several expressions simultaneously.      */
+comment|/**    * Accepts a visitor, dispatching to the right overloaded {@link    * RexVisitor#visitInputRef visitXxx} method.    *    *<p>Also see {@link RexProgram#apply(RexVisitor, java.util.List, RexNode)},    * which applies a visitor to several expressions simultaneously.    */
 specifier|public
 specifier|abstract
 parameter_list|<

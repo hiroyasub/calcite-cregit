@@ -864,7 +864,7 @@ return|return
 name|SELECT_KEYWORDS
 return|;
 block|}
-comment|/**      * Returns a list of the tables in the SALES schema. Derived classes with      * extended SALES schemas may override.      *      * @return list of tables in the SALES schema      */
+comment|/**    * Returns a list of the tables in the SALES schema. Derived classes with    * extended SALES schemas may override.    *    * @return list of tables in the SALES schema    */
 specifier|protected
 name|List
 argument_list|<
@@ -1020,7 +1020,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Checks that a given SQL statement yields the expected set of completion      * hints.      *      * @param sql SQL statement      * @param expectedResults Expected list of hints      *      * @throws Exception on error      */
+comment|/**    * Checks that a given SQL statement yields the expected set of completion    * hints.    *    * @param sql             SQL statement    * @param expectedResults Expected list of hints    * @throws Exception on error    */
 specifier|protected
 name|void
 name|assertHint
@@ -1104,7 +1104,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Tests that a given SQL statement simplifies to the salesTables result.      *      * @param sql SQL statement to simplify. The SQL statement must contain      * precisely one caret '^', which marks the location where completion is to      * occur.      * @param expected Expected result after simplification.      */
+comment|/**    * Tests that a given SQL statement simplifies to the salesTables result.    *    * @param sql      SQL statement to simplify. The SQL statement must contain    *                 precisely one caret '^', which marks the location where    *                 completion is to occur.    * @param expected Expected result after simplification.    */
 specifier|protected
 name|void
 name|assertSimplify
@@ -1231,7 +1231,7 @@ literal|null
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Tests that a given SQL which may be invalid or incomplete simplifies      * itself and yields the salesTables set of completion hints. This is an      * integration test of {@link #assertHint} and {@link #assertSimplify}.      *      * @param sql SQL statement      * @param expectedResults Expected list of hints      * @param expectedWord Word that we expect to be replaced, or null if we      * don't care      */
+comment|/**    * Tests that a given SQL which may be invalid or incomplete simplifies    * itself and yields the salesTables set of completion hints. This is an    * integration test of {@link #assertHint} and {@link #assertSimplify}.    *    * @param sql             SQL statement    * @param expectedResults Expected list of hints    * @param expectedWord    Word that we expect to be replaced, or null if we    *                        don't care    */
 specifier|protected
 name|void
 name|assertComplete
@@ -1541,7 +1541,7 @@ name|list
 argument_list|)
 return|;
 block|}
-comment|/**      * Converts a list to a string, one item per line.      *      * @param list List      *      * @return String with one item of the list per line      */
+comment|/**    * Converts a list to a string, one item per line.    *    * @param list List    * @return String with one item of the list per line    */
 specifier|private
 specifier|static
 parameter_list|<
@@ -1610,7 +1610,7 @@ name|conformance
 argument_list|)
 return|;
 block|}
-comment|/**      * Concatenates several lists of the same type into a single list.      *      * @param lists Lists to concatenate      *      * @return Sum list      */
+comment|/**    * Concatenates several lists of the same type into a single list.    *    * @param lists Lists to concatenate    * @return Sum list    */
 specifier|protected
 specifier|static
 parameter_list|<

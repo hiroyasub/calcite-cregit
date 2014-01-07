@@ -91,7 +91,7 @@ extends|extends
 name|SqlSpecialOperator
 block|{
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates an AS operator.      */
+comment|/**    * Creates an AS operator.    */
 specifier|public
 name|SqlAsOperator
 parameter_list|()

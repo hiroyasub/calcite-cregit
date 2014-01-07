@@ -85,7 +85,7 @@ literal|0
 index|]
 decl_stmt|;
 comment|//~ Instance fields --------------------------------------------------------
-comment|/**      * map symbol names to values      */
+comment|/**    * map symbol names to values    */
 specifier|private
 name|HashMap
 name|valuesByName
@@ -95,13 +95,13 @@ name|HashMap
 argument_list|()
 decl_stmt|;
 comment|// the variables below are only set AFTER makeImmutable() has been called
-comment|/**      * An array mapping ordinals to {@link Value}s. It is biased by the min      * value. It is built by {@link #makeImmutable}.      */
+comment|/**    * An array mapping ordinals to {@link Value}s. It is biased by the min    * value. It is built by {@link #makeImmutable}.    */
 specifier|private
 name|Value
 index|[]
 name|ordinalToValueMap
 decl_stmt|;
-comment|/**      * the largest ordinal value      */
+comment|/**    * the largest ordinal value    */
 specifier|private
 name|int
 name|max
@@ -110,7 +110,7 @@ name|Integer
 operator|.
 name|MIN_VALUE
 decl_stmt|;
-comment|/**      * the smallest ordinal value      */
+comment|/**    * the smallest ordinal value    */
 specifier|private
 name|int
 name|min
@@ -120,13 +120,13 @@ operator|.
 name|MAX_VALUE
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a new empty, mutable enumeration.      */
+comment|/**    * Creates a new empty, mutable enumeration.    */
 specifier|public
 name|Enum14
 parameter_list|()
 block|{
 block|}
-comment|/**      * Creates an enumeration, with an array of values, and freezes it.      */
+comment|/**    * Creates an enumeration, with an array of values, and freezes it.    */
 specifier|public
 name|Enum14
 parameter_list|(
@@ -165,7 +165,7 @@ name|makeImmutable
 argument_list|()
 expr_stmt|;
 block|}
-comment|/**      * Creates an enumeration, initialize it with an array of strings, and      * freezes it.      */
+comment|/**    * Creates an enumeration, initialize it with an array of strings, and    * freezes it.    */
 specifier|public
 name|Enum14
 parameter_list|(
@@ -215,7 +215,7 @@ name|makeImmutable
 argument_list|()
 expr_stmt|;
 block|}
-comment|/**      * Create an enumeration, initializes it with arrays of code/name pairs, and      * freezes it.      */
+comment|/**    * Create an enumeration, initializes it with arrays of code/name pairs, and    * freezes it.    */
 specifier|public
 name|Enum14
 parameter_list|(
@@ -272,7 +272,7 @@ name|makeImmutable
 argument_list|()
 expr_stmt|;
 block|}
-comment|/**      * Create an enumeration, initializes it with arrays of code/name pairs, and      * freezes it.      */
+comment|/**    * Create an enumeration, initializes it with arrays of code/name pairs, and    * freezes it.    */
 specifier|public
 name|Enum14
 parameter_list|(
@@ -334,7 +334,7 @@ argument_list|()
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Returns the description associated with an ordinal; the return value is      * null if the ordinal is not a member of the enumeration.      *      * @pre isImmutable()      */
+comment|/**    * Returns the description associated with an ordinal; the return value is    * null if the ordinal is not a member of the enumeration.    *    * @pre isImmutable()    */
 specifier|public
 specifier|final
 name|String
@@ -396,7 +396,7 @@ literal|null
 operator|)
 return|;
 block|}
-comment|/**      * Returns the number of enumerated values currently contained in this      * enumeration      */
+comment|/**    * Returns the number of enumerated values currently contained in this    * enumeration    */
 specifier|public
 specifier|final
 name|int
@@ -410,7 +410,7 @@ name|size
 argument_list|()
 return|;
 block|}
-comment|/**      * Returns the largest ordinal defined by this enumeration.      */
+comment|/**    * Returns the largest ordinal defined by this enumeration.    */
 specifier|public
 specifier|final
 name|int
@@ -421,7 +421,7 @@ return|return
 name|max
 return|;
 block|}
-comment|/**      * Returns the smallest ordinal defined by this enumeration.      */
+comment|/**    * Returns the smallest ordinal defined by this enumeration.    */
 specifier|public
 specifier|final
 name|int
@@ -432,7 +432,7 @@ return|return
 name|min
 return|;
 block|}
-comment|/**      * Creates a mutable enumeration from an existing enumeration, which may      * already be immutable.      */
+comment|/**    * Creates a mutable enumeration from an existing enumeration, which may    * already be immutable.    */
 specifier|public
 name|Enum14
 name|getMutableClone14
@@ -446,7 +446,7 @@ name|clone
 argument_list|()
 return|;
 block|}
-comment|/**      * Returns the name associated with an ordinal; the return value is null if      * the ordinal is not a member of the enumeration.      *      * @pre isImmutable()      */
+comment|/**    * Returns the name associated with an ordinal; the return value is null if    * the ordinal is not a member of the enumeration.    *    * @pre isImmutable()    */
 specifier|public
 specifier|final
 name|String
@@ -480,7 +480,7 @@ name|getName
 argument_list|()
 return|;
 block|}
-comment|/**      * Returns the value associated with an ordinal; the return value is null if      * the ordinal is not a member of the enumeration.      *      * @pre isImmutable()      */
+comment|/**    * Returns the value associated with an ordinal; the return value is null if    * the ordinal is not a member of the enumeration.    *    * @pre isImmutable()    */
 specifier|public
 specifier|final
 name|Value
@@ -525,7 +525,7 @@ name|value
 return|;
 block|}
 block|}
-comment|/**      * Returns the ordinal associated with a name      *      * @throws Error if the name is not a member of the enumeration      */
+comment|/**    * Returns the ordinal associated with a name    *    * @throws Error if the name is not a member of the enumeration    */
 specifier|public
 specifier|final
 name|int
@@ -545,7 +545,7 @@ name|getOrdinal
 argument_list|()
 return|;
 block|}
-comment|/**      * Returns whether<code>ordinal</code> is valid for this enumeration. This      * method is particularly useful in pre- and post-conditions, for example      *      *<blockquote>      *<pre>&#64;param axisCode Axis code, must be a {&#64;link AxisCode} value      *&#64;pre AxisCode.instance.isValid(axisCode)</pre>      *</blockquote>      *      * @param ordinal Suspected ordinal from this enumeration.      *      * @return Whether<code>ordinal</code> is valid.      */
+comment|/**    * Returns whether<code>ordinal</code> is valid for this enumeration. This    * method is particularly useful in pre- and post-conditions, for example    *    *<blockquote>    *<pre>&#64;param axisCode Axis code, must be a {&#64;link AxisCode} value    *&#64;pre AxisCode.instance.isValid(axisCode)</pre>    *</blockquote>    *    * @param ordinal Suspected ordinal from this enumeration.    * @return Whether<code>ordinal</code> is valid.    */
 specifier|public
 specifier|final
 name|boolean
@@ -592,7 +592,7 @@ return|return
 literal|true
 return|;
 block|}
-comment|/**      * Returns an iterator over the values of this enumeration.      */
+comment|/**    * Returns an iterator over the values of this enumeration.    */
 specifier|public
 name|Iterator
 name|iterator
@@ -619,7 +619,7 @@ name|iterator
 argument_list|()
 return|;
 block|}
-comment|/**      * Returns the names in this enumeration, in no particular order.      */
+comment|/**    * Returns the names in this enumeration, in no particular order.    */
 specifier|public
 name|String
 index|[]
@@ -642,7 +642,7 @@ name|emptyStringArray
 argument_list|)
 return|;
 block|}
-comment|/**      * Returns the ordinal associated with a name.      *      * @throws Error if the name is not a member of the enumeration      */
+comment|/**    * Returns the ordinal associated with a name.    *    * @throws Error if the name is not a member of the enumeration    */
 specifier|public
 name|Value
 name|getValue
@@ -686,7 +686,7 @@ return|return
 name|value
 return|;
 block|}
-comment|/**      * Returns true if this enumerationr contains<code>name</code>, else false.      */
+comment|/**    * Returns true if this enumerationr contains<code>name</code>, else false.    */
 specifier|public
 name|boolean
 name|containsName
@@ -704,7 +704,7 @@ name|name
 argument_list|)
 return|;
 block|}
-comment|/**      * Returns an error indicating that the value is illegal. (The client needs      * to throw the error.)      */
+comment|/**    * Returns an error indicating that the value is illegal. (The client needs    * to throw the error.)    */
 specifier|public
 name|Error
 name|badValue
@@ -740,7 +740,7 @@ literal|"'"
 argument_list|)
 return|;
 block|}
-comment|/**      * Freezes the enumeration, preventing it from being further modified.      */
+comment|/**    * Freezes the enumeration, preventing it from being further modified.    */
 specifier|public
 name|void
 name|makeImmutable
@@ -834,7 +834,7 @@ name|value
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Associates a symbolic name with an ordinal value.      *      * @pre value != null      * @pre !isImmutable()      * @pre value.getName() != null      */
+comment|/**    * Associates a symbolic name with an ordinal value.    *    * @pre value != null    * @pre !isImmutable()    * @pre value.getName() != null    */
 specifier|public
 name|void
 name|register
@@ -942,7 +942,7 @@ name|ordinal
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Returns an exception indicating that we didn't expect to find this value      * here.      *      * @see org.eigenbase.util.Util#unexpected      */
+comment|/**    * Returns an exception indicating that we didn't expect to find this value    * here.    *    * @see org.eigenbase.util.Util#unexpected    */
 specifier|public
 name|Error
 name|unexpected
@@ -1025,7 +1025,7 @@ name|clone
 return|;
 block|}
 comment|//~ Inner Interfaces -------------------------------------------------------
-comment|/**      * A<code>Value</code> represents a member of an enumerated type. If an      * enumerated type is not based upon an explicit array of values, an array      * of {@link Enum14.BasicValue}s will implicitly be created.      */
+comment|/**    * A<code>Value</code> represents a member of an enumerated type. If an    * enumerated type is not based upon an explicit array of values, an array    * of {@link Enum14.BasicValue}s will implicitly be created.    */
 specifier|public
 interface|interface
 name|Value
@@ -1046,7 +1046,7 @@ parameter_list|()
 function_decl|;
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------
-comment|/**      *<code>BasicValue</code> is an obvious implementation of {@link      * Enum14.Value}. This class is marked Serializable so that serializable      * subclasses can be supported without requiring a default (no-argument)      * constructor. However, note that while<code>BasicValue</code> is marked      * Serializable, deserialized instances will be new instances rather than      * members of the original enumeration. In other words,<code>      * deserializedBasicValue == origBasicValue</code> will be false. Use {@link      * Enum14.SerializableValue} for instances that deserialize into members of      * the original enumeration so that<code>deserializedBasicValue ==      * origBasicValue</code> will be true.      */
+comment|/**    *<code>BasicValue</code> is an obvious implementation of {@link    * Enum14.Value}. This class is marked Serializable so that serializable    * subclasses can be supported without requiring a default (no-argument)    * constructor. However, note that while<code>BasicValue</code> is marked    * Serializable, deserialized instances will be new instances rather than    * members of the original enumeration. In other words,<code>    * deserializedBasicValue == origBasicValue</code> will be false. Use {@link    * Enum14.SerializableValue} for instances that deserialize into members of    * the original enumeration so that<code>deserializedBasicValue ==    * origBasicValue</code> will be true.    */
 specifier|public
 specifier|static
 class|class
@@ -1056,7 +1056,7 @@ name|Value
 implements|,
 name|Serializable
 block|{
-comment|/**          * SerialVersionUID created with JDK 1.5 serialver tool.          */
+comment|/**      * SerialVersionUID created with JDK 1.5 serialver tool.      */
 specifier|private
 specifier|static
 specifier|final
@@ -1081,7 +1081,7 @@ specifier|final
 name|int
 name|ordinal
 decl_stmt|;
-comment|/**          * @pre name != null          */
+comment|/**      * @pre name != null      */
 specifier|public
 name|BasicValue
 parameter_list|(
@@ -1148,7 +1148,7 @@ return|return
 name|ordinal
 return|;
 block|}
-comment|/**          * Returns whether this value is equal to a given string.          *          * @deprecated I bet you meant to write<code>          * value.name.equals(s)</code> rather than<code>value.equals(s)</code>,          * didn't you?          */
+comment|/**      * Returns whether this value is equal to a given string.      *      * @deprecated I bet you meant to write<code>      * value.name.equals(s)</code> rather than<code>value.equals(s)</code>,      * didn't you?      */
 specifier|public
 name|boolean
 name|equals
@@ -1231,7 +1231,7 @@ operator|.
 name|ordinal
 return|;
 block|}
-comment|/**          * Returns the value's name.          */
+comment|/**      * Returns the value's name.      */
 specifier|public
 name|String
 name|toString
@@ -1264,7 +1264,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**      *<code>SerializableValue</code> extends<code>BasicValue</code> to provide      * better support for serializable subclasses. Instances of<code>      * SerializableValue</code> will deserialize into members of the original      * enumeration so that<code>deserializedBasicValue == origBasicValue</code>      * will be true.      */
+comment|/**    *<code>SerializableValue</code> extends<code>BasicValue</code> to provide    * better support for serializable subclasses. Instances of<code>    * SerializableValue</code> will deserialize into members of the original    * enumeration so that<code>deserializedBasicValue == origBasicValue</code>    * will be true.    */
 specifier|public
 specifier|static
 specifier|abstract
@@ -1275,7 +1275,7 @@ name|BasicValue
 implements|implements
 name|Serializable
 block|{
-comment|/**          * SerialVersionUID created with JDK 1.5 serialver tool.          */
+comment|/**      * SerialVersionUID created with JDK 1.5 serialver tool.      */
 specifier|private
 specifier|static
 specifier|final
@@ -1284,12 +1284,12 @@ name|serialVersionUID
 init|=
 literal|1534436036499327177L
 decl_stmt|;
-comment|/**          * Ordinal value which, when deserialized, can be used by {@link          * #readResolve} to locate a matching instance in the original          * enumeration.          */
+comment|/**      * Ordinal value which, when deserialized, can be used by {@link      * #readResolve} to locate a matching instance in the original      * enumeration.      */
 specifier|protected
 name|int
 name|_ordinal
 decl_stmt|;
-comment|/**          * Creates a new SerializableValue.          */
+comment|/**      * Creates a new SerializableValue.      */
 specifier|public
 name|SerializableValue
 parameter_list|(
@@ -1313,7 +1313,7 @@ name|description
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**          * Subclass must implement this method to retrieve a matching instance          * based on the<code>_ordinal</code> deserialized by {@link          * #readObject}. This would typically be an instance from the original          * enumeration. Current instance is the candidate object deserialized          * from the ObjectInputStream. It is incomplete, cannot be used as-is,          * and this method must return a valid replacement. For example,<br>          *<code>return SqlTypeName.get(_ordinal);</code>          *          * @return replacement instance that matches<code>_ordinal</code>          *          * @throws java.io.ObjectStreamException          */
+comment|/**      * Subclass must implement this method to retrieve a matching instance      * based on the<code>_ordinal</code> deserialized by {@link      * #readObject}. This would typically be an instance from the original      * enumeration. Current instance is the candidate object deserialized      * from the ObjectInputStream. It is incomplete, cannot be used as-is,      * and this method must return a valid replacement. For example,<br>      *<code>return SqlTypeName.get(_ordinal);</code>      *      * @return replacement instance that matches<code>_ordinal</code>      * @throws java.io.ObjectStreamException      */
 specifier|protected
 specifier|abstract
 name|Object
@@ -1322,7 +1322,7 @@ parameter_list|()
 throws|throws
 name|ObjectStreamException
 function_decl|;
-comment|/**          * Deserialization method reads the<code>_ordinal</code> value.          */
+comment|/**      * Deserialization method reads the<code>_ordinal</code> value.      */
 specifier|private
 name|void
 name|readObject
@@ -1343,7 +1343,7 @@ name|readInt
 argument_list|()
 expr_stmt|;
 block|}
-comment|/**          * Serialization method writes just the ordinal value.          */
+comment|/**      * Serialization method writes just the ordinal value.      */
 specifier|private
 name|void
 name|writeObject

@@ -64,7 +64,7 @@ extends|extends
 name|AbstractRelNode
 block|{
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a<code>OneRowRelBase</code> with specific traits.      *      * @param cluster {@link RelOptCluster}  this relational expression belongs      * to      * @param traits for this rel      */
+comment|/**    * Creates a<code>OneRowRelBase</code> with specific traits.    *    * @param cluster {@link RelOptCluster}  this relational expression belongs    *                to    * @param traits  for this rel    */
 specifier|protected
 name|OneRowRelBase
 parameter_list|(
@@ -83,7 +83,7 @@ name|traits
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Creates a OneRowRelBase by parsing serialized output. */
+comment|/**    * Creates a OneRowRelBase by parsing serialized output.    */
 specifier|protected
 name|OneRowRelBase
 parameter_list|(

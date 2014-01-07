@@ -452,7 +452,7 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Returns the {@link org.eigenbase.util.Glossary#SingletonPattern      * singleton} instance.      */
+comment|/**    * Returns the {@link org.eigenbase.util.Glossary#SingletonPattern    * singleton} instance.    */
 specifier|public
 specifier|static
 name|JavaToSqlTypeConversionRules
@@ -463,7 +463,7 @@ return|return
 name|instance
 return|;
 block|}
-comment|/**      * Returns a corresponding {@link SqlTypeName} for a given Java class.      *      * @param javaClass the Java class to lookup      *      * @return a corresponding SqlTypeName if found, otherwise null is returned      */
+comment|/**    * Returns a corresponding {@link SqlTypeName} for a given Java class.    *    * @param javaClass the Java class to lookup    * @return a corresponding SqlTypeName if found, otherwise null is returned    */
 specifier|public
 name|SqlTypeName
 name|lookup
@@ -481,13 +481,13 @@ name|javaClass
 argument_list|)
 return|;
 block|}
-comment|/**      * Make this public when needed. To represent COLUMN_LIST SQL value, we need      * a type distinguishable from {@link List} in user-defined types.      */
+comment|/**    * Make this public when needed. To represent COLUMN_LIST SQL value, we need    * a type distinguishable from {@link List} in user-defined types.    */
 specifier|private
 interface|interface
 name|ColumnList
 extends|extends
 name|List
-block|{     }
+block|{   }
 block|}
 end_class
 

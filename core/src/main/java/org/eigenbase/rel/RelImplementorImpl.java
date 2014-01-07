@@ -147,7 +147,7 @@ operator|.
 name|getRelImplementorTracer
 argument_list|()
 decl_stmt|;
-comment|/**      * Maps a {@link String} to the {@link RelImplementorImpl.Frame} whose      * {@link Frame#rel}.correlVariable == correlName.      */
+comment|/**    * Maps a {@link String} to the {@link RelImplementorImpl.Frame} whose    * {@link Frame#rel}.correlVariable == correlName.    */
 specifier|protected
 specifier|final
 name|Map
@@ -167,7 +167,7 @@ name|Frame
 argument_list|>
 argument_list|()
 decl_stmt|;
-comment|/**      * Maps a {@link org.eigenbase.rel.RelNode} to the unique frame whose      * {@link RelImplementorImpl.Frame#rel} is      * that relational expression.      */
+comment|/**    * Maps a {@link org.eigenbase.rel.RelNode} to the unique frame whose    * {@link RelImplementorImpl.Frame#rel} is    * that relational expression.    */
 specifier|protected
 specifier|final
 name|Map
@@ -531,7 +531,7 @@ literal|null
 return|;
 comment|// not found
 block|}
-comment|/**      * Returns a list of the relational expressions which are ancestors of the      * current one.      *      * @pre // rel must be on the implementation stack      */
+comment|/**    * Returns a list of the relational expressions which are ancestors of the    * current one.    *    * @pre // rel must be on the implementation stack    */
 specifier|public
 name|List
 argument_list|<
@@ -639,17 +639,17 @@ specifier|static
 class|class
 name|Frame
 block|{
-comment|/**          *<code>rel</code>'s parent          */
+comment|/**      *<code>rel</code>'s parent      */
 specifier|public
 name|RelNode
 name|parent
 decl_stmt|;
-comment|/**          * relation which is being implemented in this frame          */
+comment|/**      * relation which is being implemented in this frame      */
 specifier|public
 name|RelNode
 name|rel
 decl_stmt|;
-comment|/**          * ordinal of<code>rel</code> within<code>parent</code>          */
+comment|/**      * ordinal of<code>rel</code> within<code>parent</code>      */
 specifier|public
 name|int
 name|ordinal

@@ -215,7 +215,7 @@ return|return
 name|root
 return|;
 block|}
-comment|/**      * Recursively matches a rule.      *      *      *      * @param rel Relational expression      * @param parent Parent relational expression      * @param ordinalInParent Ordinal of relational expression among its      * siblings      *      * @return whether match occurred      */
+comment|/**    * Recursively matches a rule.    *    * @param rel             Relational expression    * @param parent          Parent relational expression    * @param ordinalInParent Ordinal of relational expression among its    *                        siblings    * @return whether match occurred    */
 specifier|private
 name|boolean
 name|matchRecursive
@@ -397,7 +397,7 @@ return|return
 literal|false
 return|;
 block|}
-comment|/**      * Matches a relational expression to a rule.      *      * @param operand Root operand of rule      * @param rel Relational expression      * @param bindings Bindings, populated on successful match      *      * @return whether relational expression matched rule      */
+comment|/**    * Matches a relational expression to a rule.    *    * @param operand  Root operand of rule    * @param rel      Relational expression    * @param bindings Bindings, populated on successful match    * @return whether relational expression matched rule    */
 specifier|private
 name|boolean
 name|match
@@ -592,7 +592,7 @@ name|MockRuleCall
 extends|extends
 name|RelOptRuleCall
 block|{
-comment|/**          * Creates a MockRuleCall.          *          * @param planner Planner          * @param operand Operand          * @param rels List of matched relational expressions          */
+comment|/**      * Creates a MockRuleCall.      *      * @param planner Planner      * @param operand Operand      * @param rels    List of matched relational expressions      */
 name|MockRuleCall
 parameter_list|(
 name|RelOptPlanner

@@ -114,7 +114,7 @@ extends|extends
 name|SingleRel
 block|{
 comment|//~ Enums ------------------------------------------------------------------
-comment|/**      * Enumeration of supported modification operations.      */
+comment|/**    * Enumeration of supported modification operations.    */
 specifier|public
 enum|enum
 name|Operation
@@ -126,16 +126,16 @@ block|,
 name|DELETE
 block|,
 name|MERGE
-block|;     }
+block|;   }
 comment|//~ Instance fields --------------------------------------------------------
-comment|/**      * The connection to the optimizing session.      */
+comment|/**    * The connection to the optimizing session.    */
 specifier|protected
 name|Prepare
 operator|.
 name|CatalogReader
 name|catalogReader
 decl_stmt|;
-comment|/**      * The table definition.      */
+comment|/**    * The table definition.    */
 specifier|protected
 specifier|final
 name|RelOptTable

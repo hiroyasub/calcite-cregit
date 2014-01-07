@@ -77,7 +77,7 @@ extends|extends
 name|SqlCall
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
-comment|/**      * Ordinal of the operand which holds the name of the window being declared.      */
+comment|/**    * Ordinal of the operand which holds the name of the window being declared.    */
 specifier|public
 specifier|static
 specifier|final
@@ -86,7 +86,7 @@ name|DeclName_OPERAND
 init|=
 literal|0
 decl_stmt|;
-comment|/**      * Ordinal of operand which holds the name of the window being referenced,      * or null.      */
+comment|/**    * Ordinal of operand which holds the name of the window being referenced,    * or null.    */
 specifier|public
 specifier|static
 specifier|final
@@ -95,7 +95,7 @@ name|RefName_OPERAND
 init|=
 literal|1
 decl_stmt|;
-comment|/**      * Ordinal of the operand which holds the list of partitioning columns.      */
+comment|/**    * Ordinal of the operand which holds the list of partitioning columns.    */
 specifier|public
 specifier|static
 specifier|final
@@ -104,7 +104,7 @@ name|PartitionList_OPERAND
 init|=
 literal|2
 decl_stmt|;
-comment|/**      * Ordinal of the operand which holds the list of ordering columns.      */
+comment|/**    * Ordinal of the operand which holds the list of ordering columns.    */
 specifier|public
 specifier|static
 specifier|final
@@ -113,7 +113,7 @@ name|OrderList_OPERAND
 init|=
 literal|3
 decl_stmt|;
-comment|/**      * Ordinal of the operand which declares whether it is a physical (rows) or      * logical (values) range.      */
+comment|/**    * Ordinal of the operand which declares whether it is a physical (rows) or    * logical (values) range.    */
 specifier|public
 specifier|static
 specifier|final
@@ -122,7 +122,7 @@ name|IsRows_OPERAND
 init|=
 literal|4
 decl_stmt|;
-comment|/**      * Ordinal of the operand which holds the lower bound of the window.      */
+comment|/**    * Ordinal of the operand which holds the lower bound of the window.    */
 specifier|public
 specifier|static
 specifier|final
@@ -131,7 +131,7 @@ name|LowerBound_OPERAND
 init|=
 literal|5
 decl_stmt|;
-comment|/**      * Ordinal of the operand which holds the upper bound of the window.      */
+comment|/**    * Ordinal of the operand which holds the upper bound of the window.    */
 specifier|public
 specifier|static
 specifier|final
@@ -140,7 +140,7 @@ name|UpperBound_OPERAND
 init|=
 literal|6
 decl_stmt|;
-comment|/**      * Ordinal of the operand which declares whether to allow partial results.      * It may be null.      */
+comment|/**    * Ordinal of the operand which declares whether to allow partial results.    * It may be null.    */
 specifier|public
 specifier|static
 specifier|final
@@ -165,7 +165,7 @@ init|=
 literal|null
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a window.      *      * @pre operands[DeclName_OPERAND] == null ||      * operands[DeclName_OPERAND].isSimple()      * @pre operands[OrderList_OPERAND] != null      * @pre operands[PartitionList_OPERAND] != null      */
+comment|/**    * Creates a window.    *    * @pre operands[DeclName_OPERAND] == null ||    * operands[DeclName_OPERAND].isSimple()    * @pre operands[OrderList_OPERAND] != null    * @pre operands[PartitionList_OPERAND] != null    */
 specifier|public
 name|SqlWindow
 parameter_list|(
@@ -492,7 +492,7 @@ return|return
 name|windowCall
 return|;
 block|}
-comment|/**      * Creates a new window by combining this one with another.      *      *<p>For example,      *      *<pre>WINDOW (w PARTITION BY x ORDER BY y)      *   overlay      *   WINDOW w AS (PARTITION BY z)</pre>      *      * yields      *      *<pre>WINDOW (PARTITION BY z ORDER BY y)</pre>      *      *<p>Does not alter this or the other window.      *      * @return A new window      */
+comment|/**    * Creates a new window by combining this one with another.    *    *<p>For example,    *    *<pre>WINDOW (w PARTITION BY x ORDER BY y)    *   overlay    *   WINDOW w AS (PARTITION BY z)</pre>    *    * yields    *    *<pre>WINDOW (PARTITION BY z ORDER BY y)</pre>    *    *<p>Does not alter this or the other window.    *    * @return A new window    */
 specifier|public
 name|SqlWindow
 name|overlay
@@ -861,7 +861,7 @@ throw|;
 block|}
 block|}
 block|}
-comment|/**      * Overridden method to specfically check only the right subtree of a window      * definition      *      * @param node The SqlWindow to compare to "this" window      * @param fail      *      * @return boolean true if all nodes in the subtree are equal      */
+comment|/**    * Overridden method to specfically check only the right subtree of a window    * definition    *    * @param node The SqlWindow to compare to "this" window    * @param fail Whether to throw if not equal    * @return boolean true if all nodes in the subtree are equal    */
 specifier|public
 name|boolean
 name|equalsDeep
@@ -1052,7 +1052,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**      * Returns whether partial windows are allowed. If false, a partial window      * (for example, a window of size 1 hour which has only 45 minutes of data      * in it) will appear to windowed aggregate functions to be empty.      */
+comment|/**    * Returns whether partial windows are allowed. If false, a partial window    * (for example, a window of size 1 hour which has only 45 minutes of data    * in it) will appear to windowed aggregate functions to be empty.    */
 specifier|public
 name|boolean
 name|isAllowPartial

@@ -71,7 +71,7 @@ interface|interface
 name|RelOptTable
 block|{
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Obtains an identifier for this table. The identifier must be unique with      * respect to the Connection producing this table.      *      * @return qualified name      */
+comment|/**    * Obtains an identifier for this table. The identifier must be unique with    * respect to the Connection producing this table.    *    * @return qualified name    */
 name|List
 argument_list|<
 name|String
@@ -79,22 +79,22 @@ argument_list|>
 name|getQualifiedName
 parameter_list|()
 function_decl|;
-comment|/**      * Returns an estimate of the number of rows in the table.      */
+comment|/**    * Returns an estimate of the number of rows in the table.    */
 name|double
 name|getRowCount
 parameter_list|()
 function_decl|;
-comment|/**      * Describes the type of rows returned by this table.      */
+comment|/**    * Describes the type of rows returned by this table.    */
 name|RelDataType
 name|getRowType
 parameter_list|()
 function_decl|;
-comment|/**      * Returns the {@link RelOptSchema} this table belongs to.      */
+comment|/**    * Returns the {@link RelOptSchema} this table belongs to.    */
 name|RelOptSchema
 name|getRelOptSchema
 parameter_list|()
 function_decl|;
-comment|/**      * Converts this table into a {@link RelNode relational expression}.      *      *<p>The {@link org.eigenbase.relopt.RelOptPlanner planner} calls this      * method to convert a table into an initial relational expression,      * generally something abstract, such as a {@link      * org.eigenbase.rel.TableAccessRel}, then optimizes this expression by      * applying {@link org.eigenbase.relopt.RelOptRule rules} to transform it      * into more efficient access methods for this table.</p>      */
+comment|/**    * Converts this table into a {@link RelNode relational expression}.    *    *<p>The {@link org.eigenbase.relopt.RelOptPlanner planner} calls this    * method to convert a table into an initial relational expression,    * generally something abstract, such as a {@link    * org.eigenbase.rel.TableAccessRel}, then optimizes this expression by    * applying {@link org.eigenbase.relopt.RelOptRule rules} to transform it    * into more efficient access methods for this table.</p>    */
 name|RelNode
 name|toRel
 parameter_list|(
@@ -102,7 +102,7 @@ name|ToRelContext
 name|context
 parameter_list|)
 function_decl|;
-comment|/**      * Returns a description of the physical ordering (or orderings) of the rows      * returned from this table.      *      * @see RelNode#getCollationList()      * @post return != null      */
+comment|/**    * Returns a description of the physical ordering (or orderings) of the rows    * returned from this table.    *    * @post return != null    * @see RelNode#getCollationList()    */
 name|List
 argument_list|<
 name|RelCollation
@@ -110,7 +110,7 @@ argument_list|>
 name|getCollationList
 parameter_list|()
 function_decl|;
-comment|/**      * Returns whether the given columns are a key or a superset of a unique key      * of this table.      *      * @param columns Ordinals of key columns      * @return Whether the given columns are a key or a superset of a key      */
+comment|/**    * Returns whether the given columns are a key or a superset of a unique key    * of this table.    *    * @param columns Ordinals of key columns    * @return Whether the given columns are a key or a superset of a key    */
 name|boolean
 name|isKey
 parameter_list|(
@@ -118,7 +118,7 @@ name|BitSet
 name|columns
 parameter_list|)
 function_decl|;
-comment|/** Finds an interface implemented by this table. */
+comment|/**    * Finds an interface implemented by this table.    */
 parameter_list|<
 name|T
 parameter_list|>
@@ -132,7 +132,7 @@ argument_list|>
 name|clazz
 parameter_list|)
 function_decl|;
-comment|/**      * Generates code for this table.      *      * @param clazz The desired collection class; for example {@code Queryable}.      */
+comment|/**    * Generates code for this table.    *    * @param clazz The desired collection class; for example {@code Queryable}.    */
 name|Expression
 name|getExpression
 parameter_list|(

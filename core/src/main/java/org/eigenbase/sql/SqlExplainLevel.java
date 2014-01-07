@@ -40,19 +40,19 @@ name|SqlLiteral
 operator|.
 name|SqlSymbol
 block|{
-comment|/**      * Suppress all attributes.      */
+comment|/**    * Suppress all attributes.    */
 name|NO_ATTRIBUTES
 block|,
-comment|/**      * Display only attributes which contribute to the plan output.      */
+comment|/**    * Display only attributes which contribute to the plan output.    */
 name|EXPPLAN_ATTRIBUTES
 block|,
-comment|/**      * Display only attributes which contribute to an expression's digest.      */
+comment|/**    * Display only attributes which contribute to an expression's digest.    */
 name|DIGEST_ATTRIBUTES
 block|,
-comment|/**      * Display all attributes, including cost.      */
+comment|/**    * Display all attributes, including cost.    */
 name|ALL_ATTRIBUTES
 block|;
-comment|/** Creates a parse-tree node representing an occurrence of this symbol at      * a particular position in the parsed text. */
+comment|/**    * Creates a parse-tree node representing an occurrence of this symbol at    * a particular position in the parsed text.    */
 specifier|public
 name|SqlLiteral
 name|symbol

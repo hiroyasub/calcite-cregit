@@ -498,7 +498,7 @@ name|INCLUDE
 argument_list|,
 name|SETUP_STATE
 argument_list|)
-block|,             }
+block|,           }
 argument_list|)
 block|,
 operator|new
@@ -560,7 +560,7 @@ name|INCLUDE
 argument_list|,
 name|CLEANUP_STATE
 argument_list|)
-block|,             }
+block|,           }
 argument_list|)
 block|,
 operator|new
@@ -1287,7 +1287,7 @@ name|super
 argument_list|()
 expr_stmt|;
 block|}
-comment|/**      * Constructs and prepares a new ConcurrentTestCommandScript.      */
+comment|/**    * Constructs and prepares a new ConcurrentTestCommandScript.    */
 specifier|public
 name|ConcurrentTestCommandScript
 parameter_list|(
@@ -1309,7 +1309,7 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Gets ready to execute: loads script FILENAME applying external variable      * BINDINGS      */
+comment|/**    * Gets ready to execute: loads script FILENAME applying external variable    * BINDINGS    */
 specifier|private
 name|void
 name|prepare
@@ -1405,7 +1405,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/** Executes the script */
+comment|/**    * Executes the script    */
 specifier|public
 name|void
 name|execute
@@ -2065,7 +2065,7 @@ name|timeout
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Identifies the start of a comment line; same rules as sqlline */
+comment|/**    * Identifies the start of a comment line; same rules as sqlline    */
 specifier|private
 name|boolean
 name|isComment
@@ -2090,7 +2090,7 @@ literal|"#"
 argument_list|)
 return|;
 block|}
-comment|/** translates argument of !set force etc. */
+comment|/**    * translates argument of !set force etc.    */
 specifier|private
 name|boolean
 name|asBoolValue
@@ -2129,7 +2129,7 @@ literal|"on"
 argument_list|)
 return|;
 block|}
-comment|/**      * Determines if a block of SQL is a select statment or not.      */
+comment|/**    * Determines if a block of SQL is a select statment or not.    */
 specifier|private
 name|boolean
 name|isSelect
@@ -2269,7 +2269,7 @@ return|return
 literal|false
 return|;
 block|}
-comment|/**      * Builds a map of thread ids to result data for the thread. Each result      * datum is an<code>String[2]</code> containing the thread name and the      * thread's output.      * @return the map.      */
+comment|/**    * Builds a map of thread ids to result data for the thread. Each result    * datum is an<code>String[2]</code> containing the thread name and the    * thread's output.    *    * @return the map.    */
 specifier|private
 name|Map
 argument_list|<
@@ -2657,7 +2657,7 @@ name|flush
 argument_list|()
 expr_stmt|;
 block|}
-comment|/**      * Causes errors to be send here for custom handling. See {@link      * #customErrorHandler(ConcurrentTestCommandExecutor)}.      */
+comment|/**    * Causes errors to be send here for custom handling. See {@link    * #customErrorHandler(ConcurrentTestCommandExecutor)}.    */
 name|boolean
 name|requiresCustomErrorHandling
 parameter_list|()
@@ -2798,7 +2798,7 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Retrieves the output stream for the given thread id.      *      * @return a BufferedWriter on a StringWriter for the thread.      */
+comment|/**    * Retrieves the output stream for the given thread id.    *    * @return a BufferedWriter on a StringWriter for the thread.    */
 specifier|private
 name|BufferedWriter
 name|getThreadWriter
@@ -2826,7 +2826,7 @@ name|threadId
 argument_list|)
 return|;
 block|}
-comment|/**      * Saves a SQL command to be printed with the thread's output.      */
+comment|/**    * Saves a SQL command to be printed with the thread's output.    */
 specifier|private
 name|void
 name|storeSql
@@ -2966,7 +2966,7 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Saves a message to be printed with the thread's output.      */
+comment|/**    * Saves a message to be printed with the thread's output.    */
 specifier|private
 name|void
 name|storeMessage
@@ -3898,7 +3898,7 @@ name|message
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**          * Parses a multi-threaded script and converts it into test commands.          */
+comment|/**      * Parses a multi-threaded script and converts it into test commands.      */
 specifier|private
 name|void
 name|load
@@ -6410,7 +6410,7 @@ expr_stmt|;
 block|}
 block|}
 block|}
-comment|/**          * Manages state transitions.          * Converts a state name into a map. Map keys are the names of available          * commands (e.g. @sync), and map values are the state to switch to open          * seeing the command.          */
+comment|/**      * Manages state transitions.      * Converts a state name into a map. Map keys are the names of available      * commands (e.g. @sync), and map values are the state to switch to open      * seeing the command.      */
 specifier|private
 name|Map
 argument_list|<
@@ -6547,7 +6547,7 @@ name|IllegalArgumentException
 argument_list|()
 throw|;
 block|}
-comment|/**          * Returns the first word of the given line, assuming the line is          * trimmed. Returns the characters up the first non-whitespace          * character in the line.          */
+comment|/**      * Returns the first word of the given line, assuming the line is      * trimmed. Returns the characters up the first non-whitespace      * character in the line.      */
 specifier|private
 name|String
 name|firstWord
@@ -6567,7 +6567,7 @@ literal|""
 argument_list|)
 return|;
 block|}
-comment|/**          * Returns everything but the first word of the given line, assuming the          * line is trimmed. Returns the characters following the first series of          * consecutive whitespace characters in the line.          */
+comment|/**      * Returns everything but the first word of the given line, assuming the      * line is trimmed. Returns the characters following the first series of      * consecutive whitespace characters in the line.      */
 specifier|private
 name|String
 name|skipFirstWord
@@ -6587,7 +6587,7 @@ literal|""
 argument_list|)
 return|;
 block|}
-comment|/**          * Returns an input line, possible extended by the continuation          * character (\).  Scans the script until it finds an un-escaped          * newline.          */
+comment|/**      * Returns an input line, possible extended by the continuation      * character (\).  Scans the script until it finds an un-escaped      * newline.      */
 specifier|private
 name|String
 name|readLine
@@ -6759,7 +6759,7 @@ return|return
 name|line
 return|;
 block|}
-comment|/**          * Returns a block of SQL, starting with the given String. Returns          *<code> startOfSql</code> concatenated with each line from          *<code>in</code> until a line ending with a semicolon is found.          */
+comment|/**      * Returns a block of SQL, starting with the given String. Returns      *<code> startOfSql</code> concatenated with each line from      *<code>in</code> until a line ending with a semicolon is found.      */
 specifier|private
 name|String
 name|readSql
@@ -7820,7 +7820,7 @@ expr_stmt|;
 block|}
 block|}
 block|}
-comment|/**      * SelectCommand creates and executes a SQL select statement, with optional      * timeout and row limit.      */
+comment|/**    * SelectCommand creates and executes a SQL select statement, with optional    * timeout and row limit.    */
 specifier|private
 class|class
 name|SelectCommand
@@ -8037,7 +8037,7 @@ expr_stmt|;
 block|}
 block|}
 block|}
-comment|/**      * SelectCommand creates and executes a SQL select statement, with optional      * timeout.      */
+comment|/**    * SelectCommand creates and executes a SQL select statement, with optional    * timeout.    */
 specifier|private
 class|class
 name|SqlCommand
@@ -8371,7 +8371,7 @@ expr_stmt|;
 block|}
 block|}
 block|}
-comment|/**      * PrepareCommand creates a {@link PreparedStatement}, which is saved as the      * current statement of its test thread. For a preparted query (a SELECT or      * a CALL with results), a subsequent FetchAndPrintCommand executes the      * statement and fetches its reults, until end-of-data or a timeout. A      * PrintCommand attaches a listener, called for each rows, that selects rows      * to save and print, and sets the format. By default, if no PrintCommand      * appears before a FetchAndPrintCommand, all rows are printed. A      * CloseCommand closes and discards the prepared statement.      */
+comment|/**    * PrepareCommand creates a {@link PreparedStatement}, which is saved as the    * current statement of its test thread. For a preparted query (a SELECT or    * a CALL with results), a subsequent FetchAndPrintCommand executes the    * statement and fetches its reults, until end-of-data or a timeout. A    * PrintCommand attaches a listener, called for each rows, that selects rows    * to save and print, and sets the format. By default, if no PrintCommand    * appears before a FetchAndPrintCommand, all rows are printed. A    * CloseCommand closes and discards the prepared statement.    */
 specifier|private
 class|class
 name|PrepareCommand
@@ -8473,7 +8473,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * FetchAndPrintCommand executes a previously prepared statement stored      * inthe ConcurrentTestCommandExecutor and then outputs the returned      * rows.      */
+comment|/**    * FetchAndPrintCommand executes a previously prepared statement stored    * inthe ConcurrentTestCommandExecutor and then outputs the returned    * rows.    */
 specifier|private
 class|class
 name|FetchAndPrintCommand
@@ -9350,7 +9350,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**          * Prints an output table separator. Something like<code>          * "+----+--------+"</code>.          */
+comment|/**      * Prints an output table separator. Something like<code>      * "+----+--------+"</code>.      */
 specifier|private
 name|void
 name|printSeparator
@@ -9455,7 +9455,7 @@ literal|"-+"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**          * Prints an output table row. Something like<code>"| COL1 | COL2          * |"</code>.          */
+comment|/**      * Prints an output table row. Something like<code>"| COL1 | COL2      * |"</code>.      */
 specifier|private
 name|void
 name|printRow
@@ -10115,7 +10115,7 @@ literal|true
 return|;
 block|}
 block|}
-comment|/**      * Client tool that connects via jdbc and runs one or more mtsql on that      * connection.      *      *<p>Usage: mtsql [-vgq] -u SERVER -d DRIVER [-n USER][-p PASSWORD]      * [VAR=VAL]...  SCRIPT [SCRIPT]...      */
+comment|/**    * Client tool that connects via jdbc and runs one or more mtsql on that    * connection.    *    *<p>Usage: mtsql [-vgq] -u SERVER -d DRIVER [-n USER][-p PASSWORD]    * [VAR=VAL]...  SCRIPT [SCRIPT]...    */
 specifier|public
 specifier|static
 name|void

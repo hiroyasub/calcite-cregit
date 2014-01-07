@@ -110,7 +110,7 @@ name|NestedLoopsJoinRule
 argument_list|()
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Private constructor; use singleton {@link #instance}.      */
+comment|/**    * Private constructor; use singleton {@link #instance}.    */
 specifier|private
 name|NestedLoopsJoinRule
 parameter_list|()

@@ -100,7 +100,7 @@ name|Subtype
 name|subtype
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a SqlAvgAggFunction      *      *      * @param type Data type      * @param subtype Specific function, e.g. AVG or STDDEV_POP      */
+comment|/**    * Creates a SqlAvgAggFunction    *    * @param type    Data type    * @param subtype Specific function, e.g. AVG or STDDEV_POP    */
 specifier|public
 name|SqlAvgAggFunction
 parameter_list|(
@@ -183,7 +183,7 @@ return|return
 name|type
 return|;
 block|}
-comment|/**      * Returns the specific function, e.g. AVG or STDDEV_POP.      *      * @return Subtype      */
+comment|/**    * Returns the specific function, e.g. AVG or STDDEV_POP.    *    * @return Subtype    */
 specifier|public
 name|Subtype
 name|getSubtype

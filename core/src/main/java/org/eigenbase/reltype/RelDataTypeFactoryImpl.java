@@ -192,7 +192,7 @@ implements|implements
 name|RelDataTypeFactory
 block|{
 comment|//~ Instance fields --------------------------------------------------------
-comment|/** Global cache. Uses soft values to allow GC. */
+comment|/**    * Global cache. Uses soft values to allow GC.    */
 specifier|private
 specifier|static
 specifier|final
@@ -1355,7 +1355,7 @@ name|newType
 argument_list|)
 return|;
 block|}
-comment|/**      * Registers a type, or returns the existing type if it is already      * registered.      *      * @throws NullPointerException if type is null      */
+comment|/**    * Registers a type, or returns the existing type if it is already    * registered.    *    * @throws NullPointerException if type is null    */
 specifier|protected
 name|RelDataType
 name|canonize
@@ -1411,7 +1411,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**      * Looks up a type using a temporary key, and if not present, creates      * a permanent key and type.      *      *<p>This approach allows us to use a cheap temporary key. A permanent      * key is more expensive, because it must be immutable and not hold      * references into other data structures.</p>      */
+comment|/**    * Looks up a type using a temporary key, and if not present, creates    * a permanent key and type.    *    *<p>This approach allows us to use a cheap temporary key. A permanent    * key is more expensive, because it must be immutable and not hold    * references into other data structures.</p>    */
 specifier|protected
 name|RelDataType
 name|canonize
@@ -1521,7 +1521,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**      * Returns an array of the fields in an array of types.      */
+comment|/**    * Returns an array of the fields in an array of types.    */
 specifier|private
 specifier|static
 name|List
@@ -1570,7 +1570,7 @@ return|return
 name|fieldList
 return|;
 block|}
-comment|/**      * Returns an array of all atomic types in an array.      */
+comment|/**    * Returns an array of all atomic types in an array.    */
 specifier|private
 specifier|static
 name|List
@@ -1670,7 +1670,7 @@ expr_stmt|;
 block|}
 block|}
 block|}
-comment|/**      * Adds all fields in<code>type</code> to<code>fieldList</code>.      */
+comment|/**    * Adds all fields in<code>type</code> to<code>fieldList</code>.    */
 specifier|private
 specifier|static
 name|void
@@ -1862,7 +1862,7 @@ return|return
 name|list
 return|;
 block|}
-comment|/**      * implement RelDataTypeFactory with SQL 2003 compliant behavior. Let p1, s1      * be the precision and scale of the first operand Let p2, s2 be the      * precision and scale of the second operand Let p, s be the precision and      * scale of the result, Then the result type is a decimal with:      *      *<ul>      *<li>p = p1 + p2</li>      *<li>s = s1 + s2</li>      *</ul>      *      * p and s are capped at their maximum values      *      * @sql.2003 Part 2 Section 6.26      */
+comment|/**    * implement RelDataTypeFactory with SQL 2003 compliant behavior. Let p1, s1    * be the precision and scale of the first operand Let p2, s2 be the    * precision and scale of the second operand Let p, s be the precision and    * scale of the result, Then the result type is a decimal with:    *    *<ul>    *<li>p = p1 + p2</li>    *<li>s = s1 + s2</li>    *</ul>    *    * p and s are capped at their maximum values    *    * @sql.2003 Part 2 Section 6.26    */
 specifier|public
 name|RelDataType
 name|createDecimalProduct
@@ -2033,7 +2033,7 @@ return|return
 literal|false
 return|;
 block|}
-comment|/**      * implement RelDataTypeFactory Let p1, s1 be the precision and scale of the      * first operand Let p2, s2 be the precision and scale of the second operand      * Let p, s be the precision and scale of the result, Let d be the number of      * whole digits in the result Then the result type is a decimal with:      *      *<ul>      *<li>d = p1 - s1 + s2</li>      *<li>s<= max(6, s1 + p2 + 1)</li>      *<li>p = d + s</li>      *</ul>      *      * p and s are capped at their maximum values      *      * @sql.2003 Part 2 Section 6.26      */
+comment|/**    * implement RelDataTypeFactory Let p1, s1 be the precision and scale of the    * first operand Let p2, s2 be the precision and scale of the second operand    * Let p, s be the precision and scale of the result, Let d be the number of    * whole digits in the result Then the result type is a decimal with:    *    *<ul>    *<li>d = p1 - s1 + s2</li>    *<li>s<= max(6, s1 + p2 + 1)</li>    *<li>p = d + s</li>    *</ul>    *    * p and s are capped at their maximum values    *    * @sql.2003 Part 2 Section 6.26    */
 specifier|public
 name|RelDataType
 name|createDecimalQuotient
@@ -2248,7 +2248,7 @@ return|;
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------
 comment|// TODO jvs 13-Dec-2004:  move to OJTypeFactoryImpl?
-comment|/**      * Type which is based upon a Java class.      */
+comment|/**    * Type which is based upon a Java class.    */
 specifier|public
 class|class
 name|JavaType

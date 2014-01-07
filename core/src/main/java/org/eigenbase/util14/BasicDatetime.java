@@ -33,13 +33,13 @@ interface|interface
 name|BasicDatetime
 block|{
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Gets the internal value of this datetime      */
+comment|/**    * Gets the internal value of this datetime    */
 specifier|public
 name|long
 name|getTime
 parameter_list|()
 function_decl|;
-comment|/**      * Sets this datetime via a zoneless time value. See class comments for more      * information.      */
+comment|/**    * Sets this datetime via a zoneless time value. See class comments for more    * information.    */
 specifier|public
 name|void
 name|setZonelessTime
@@ -48,7 +48,7 @@ name|long
 name|value
 parameter_list|)
 function_decl|;
-comment|/**      * Sets this datetime via a zoned time value. See class comments for more      * information.      */
+comment|/**    * Sets this datetime via a zoned time value. See class comments for more    * information.    */
 specifier|public
 name|void
 name|setZonedTime

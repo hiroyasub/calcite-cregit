@@ -89,7 +89,7 @@ name|RelDataType
 name|type
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates an inference rule which always returns the same type object.      *      *<p>If the requesting type factory is different, returns a copy of the      * type object made using {@link RelDataTypeFactory#copyType(RelDataType)}      * within the requesting type factory.      *      *<p>REVIEW jvs 6-Aug-2006: Under what circumstances is a copy of the type      * required?      *      * @param type Type object      */
+comment|/**    * Creates an inference rule which always returns the same type object.    *    *<p>If the requesting type factory is different, returns a copy of the    * type object made using {@link RelDataTypeFactory#copyType(RelDataType)}    * within the requesting type factory.    *    *<p>REVIEW jvs 6-Aug-2006: Under what circumstances is a copy of the type    * required?    *    * @param type Type object    */
 specifier|public
 name|ExplicitReturnTypeInference
 parameter_list|(
@@ -130,7 +130,7 @@ operator|=
 literal|0
 expr_stmt|;
 block|}
-comment|/**      * Creates an inference rule which always returns a given SQL type with zero      * parameters (such as<code>DATE</code>).      *      * @param typeName Name of the type      */
+comment|/**    * Creates an inference rule which always returns a given SQL type with zero    * parameters (such as<code>DATE</code>).    *    * @param typeName Name of the type    */
 specifier|public
 name|ExplicitReturnTypeInference
 parameter_list|(
@@ -171,7 +171,7 @@ operator|=
 literal|null
 expr_stmt|;
 block|}
-comment|/**      * Creates an inference rule which always returns a given SQL type with a      * precision/length parameter (such as<code>VARCHAR(10)</code> and<code>      * NUMBER(5)</code>).      *      * @param typeName Name of the type      * @param length Length or precision of the type      */
+comment|/**    * Creates an inference rule which always returns a given SQL type with a    * precision/length parameter (such as<code>VARCHAR(10)</code> and<code>    * NUMBER(5)</code>).    *    * @param typeName Name of the type    * @param length   Length or precision of the type    */
 specifier|public
 name|ExplicitReturnTypeInference
 parameter_list|(
@@ -214,7 +214,7 @@ operator|=
 literal|null
 expr_stmt|;
 block|}
-comment|/**      * Creates an inference rule which always returns a given SQL type with a      * precision and scale parameters (such as<code>DECIMAL(8, 3)</code>).      *      * @param typeName Name of the type      * @param length Precision of the type      */
+comment|/**    * Creates an inference rule which always returns a given SQL type with a    * precision and scale parameters (such as<code>DECIMAL(8, 3)</code>).    *    * @param typeName Name of the type    * @param length   Precision of the type    */
 specifier|public
 name|ExplicitReturnTypeInference
 parameter_list|(

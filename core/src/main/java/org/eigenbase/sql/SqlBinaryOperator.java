@@ -125,7 +125,7 @@ extends|extends
 name|SqlOperator
 block|{
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a SqlBinaryOperator.      *      * @param name Name of operator      * @param kind Kind      * @param prec Precedence      * @param leftAssoc Left-associativity      * @param returnTypeInference Strategy to infer return type      * @param operandTypeInference Strategy to infer operand types      * @param operandTypeChecker Validator for operand types      */
+comment|/**    * Creates a SqlBinaryOperator.    *    * @param name                 Name of operator    * @param kind                 Kind    * @param prec                 Precedence    * @param leftAssoc            Left-associativity    * @param returnTypeInference  Strategy to infer return type    * @param operandTypeInference Strategy to infer operand types    * @param operandTypeChecker   Validator for operand types    */
 specifier|public
 name|SqlBinaryOperator
 parameter_list|(
@@ -212,7 +212,7 @@ return|return
 literal|"{1} {0} {2}"
 return|;
 block|}
-comment|/**      * Returns whether this operator should be surrounded by space when      * unparsed.      *      *<p>Returns true for most operators but false for the '.' operator;      * consider      *      *<blockquote>      *<pre>x.y + 5 * 6</pre>      *</blockquote>      *      * @return whether this operator should be surrounded by space      */
+comment|/**    * Returns whether this operator should be surrounded by space when    * unparsed.    *    *<p>Returns true for most operators but false for the '.' operator;    * consider    *    *<blockquote>    *<pre>x.y + 5 * 6</pre>    *</blockquote>    *    * @return whether this operator should be surrounded by space    */
 name|boolean
 name|needsSpace
 parameter_list|()

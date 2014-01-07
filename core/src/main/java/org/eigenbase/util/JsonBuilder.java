@@ -76,7 +76,7 @@ specifier|public
 class|class
 name|JsonBuilder
 block|{
-comment|/** Creates a JSON object (represented by a {@link Map}). */
+comment|/**    * Creates a JSON object (represented by a {@link Map}).    */
 specifier|public
 name|Map
 argument_list|<
@@ -99,7 +99,7 @@ argument_list|>
 argument_list|()
 return|;
 block|}
-comment|/** Creates a JSON object (represented by a {@link List}). */
+comment|/**    * Creates a JSON object (represented by a {@link List}).    */
 specifier|public
 name|List
 argument_list|<
@@ -117,7 +117,7 @@ argument_list|>
 argument_list|()
 return|;
 block|}
-comment|/** Adds a key/value pair to a JSON object. */
+comment|/**    * Adds a key/value pair to a JSON object.    */
 specifier|public
 name|JsonBuilder
 name|put
@@ -150,7 +150,7 @@ return|return
 name|this
 return|;
 block|}
-comment|/** Adds a key/value pair to a JSON object if the value is not null. */
+comment|/**    * Adds a key/value pair to a JSON object if the value is not null.    */
 specifier|public
 name|JsonBuilder
 name|putIf
@@ -191,7 +191,7 @@ return|return
 name|this
 return|;
 block|}
-comment|/**      * Serializes an object consisting of maps, lists and atoms into a JSON      * string.      *      *<p>We should use a JSON library such as Jackson when Mondrian needs      * one elsewhere.</p>      */
+comment|/**    * Serializes an object consisting of maps, lists and atoms into a JSON    * string.    *    *<p>We should use a JSON library such as Jackson when Mondrian needs    * one elsewhere.</p>    */
 specifier|public
 name|String
 name|toJsonString
@@ -223,7 +223,7 @@ name|toString
 argument_list|()
 return|;
 block|}
-comment|/** Appends a JSON object to a string builder. */
+comment|/**    * Appends a JSON object to a string builder.    */
 specifier|private
 name|void
 name|append

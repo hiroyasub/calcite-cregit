@@ -140,7 +140,7 @@ extends|extends
 name|RelOptRule
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
-comment|/**      * Instance of the rule that applies to a {@link CalcRelBase} that contains      * windowed aggregates and converts it into a mixture of      * {@link org.eigenbase.rel.WindowRel} and {@code CalcRelBase}.      */
+comment|/**    * Instance of the rule that applies to a {@link CalcRelBase} that contains    * windowed aggregates and converts it into a mixture of    * {@link org.eigenbase.rel.WindowRel} and {@code CalcRelBase}.    */
 specifier|public
 specifier|static
 specifier|final
@@ -258,7 +258,7 @@ expr_stmt|;
 block|}
 block|}
 decl_stmt|;
-comment|/**      * Instance of the rule that can be applied to a      * {@link org.eigenbase.rel.ProjectRelBase} and that produces, in turn,      * a mixture of {@code ProjectRel} and {@link org.eigenbase.rel.WindowRel}.      */
+comment|/**    * Instance of the rule that can be applied to a    * {@link org.eigenbase.rel.ProjectRelBase} and that produces, in turn,    * a mixture of {@code ProjectRel} and {@link org.eigenbase.rel.WindowRel}.    */
 specifier|public
 specifier|static
 specifier|final
@@ -615,7 +615,7 @@ block|}
 block|}
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/** Creates a rule. */
+comment|/**    * Creates a rule.    */
 specifier|private
 name|WindowedAggSplitterRule
 parameter_list|(
@@ -635,7 +635,7 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------
-comment|/**      * Splitter which distinguishes between windowed aggregation expressions      * (calls to {@link RexOver}) and ordinary expressions.      */
+comment|/**    * Splitter which distinguishes between windowed aggregation expressions    * (calls to {@link RexOver}) and ordinary expressions.    */
 specifier|static
 class|class
 name|WindowedAggRelSplitter
@@ -881,7 +881,7 @@ empty_stmt|;
 end_empty_stmt
 
 begin_function
-unit|}          @
+unit|}      @
 name|Override
 specifier|protected
 name|List

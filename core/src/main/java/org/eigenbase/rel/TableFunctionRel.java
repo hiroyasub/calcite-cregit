@@ -109,7 +109,7 @@ extends|extends
 name|TableFunctionRelBase
 block|{
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a<code>TableFunctionRel</code>.      *      * @param cluster Cluster that this relational expression belongs to      * @param inputs 0 or more relational inputs      * @param rexCall function invocation expression      * @param rowType row type produced by function      * @param columnMappings column mappings associated with this function      */
+comment|/**    * Creates a<code>TableFunctionRel</code>.    *    * @param cluster        Cluster that this relational expression belongs to    * @param inputs         0 or more relational inputs    * @param rexCall        function invocation expression    * @param rowType        row type produced by function    * @param columnMappings column mappings associated with this function    */
 specifier|public
 name|TableFunctionRel
 parameter_list|(
@@ -158,7 +158,7 @@ name|columnMappings
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Creates a TableFunctionRel by parsing serialized output. */
+comment|/**    * Creates a TableFunctionRel by parsing serialized output.    */
 specifier|public
 name|TableFunctionRel
 parameter_list|(

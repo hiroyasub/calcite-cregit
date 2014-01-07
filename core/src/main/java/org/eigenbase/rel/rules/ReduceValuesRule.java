@@ -404,7 +404,7 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**    * Does the work.    *    * @param call Rule call    * @param project Project, may be null    * @param filter Filter, may be null    * @param values Values rel to be reduced    */
+comment|/**    * Does the work.    *    * @param call    Rule call    * @param project Project, may be null    * @param filter  Filter, may be null    * @param values  Values rel to be reduced    */
 specifier|protected
 name|void
 name|apply

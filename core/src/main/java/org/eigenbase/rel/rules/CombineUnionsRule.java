@@ -81,7 +81,7 @@ name|CombineUnionsRule
 argument_list|()
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a CombineUnionsRule.      */
+comment|/**    * Creates a CombineUnionsRule.    */
 specifier|private
 name|CombineUnionsRule
 parameter_list|()

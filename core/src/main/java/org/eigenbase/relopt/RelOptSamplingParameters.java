@@ -86,7 +86,7 @@ name|repeatableSeed
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Indicates whether Bernoulli or system sampling should be performed.      * Bernoulli sampling requires the decision whether to include each row in      * the the sample to be independent across rows. System sampling allows      * implementation-dependent behavior.      *      * @return true if Bernoulli sampling is configured, false for system      * sampling      */
+comment|/**    * Indicates whether Bernoulli or system sampling should be performed.    * Bernoulli sampling requires the decision whether to include each row in    * the the sample to be independent across rows. System sampling allows    * implementation-dependent behavior.    *    * @return true if Bernoulli sampling is configured, false for system    * sampling    */
 specifier|public
 name|boolean
 name|isBernoulli
@@ -96,7 +96,7 @@ return|return
 name|isBernoulli
 return|;
 block|}
-comment|/**      * Returns the sampling percentage. For Bernoulli sampling, the sampling      * percentage is the likelihood that any given row will be included in the      * sample. For system sampling, the sampling percentage indicates (roughly)      * what percentage of the rows will appear in the sample.      *      * @return the sampling percentage between 0.0 and 1.0, exclusive      */
+comment|/**    * Returns the sampling percentage. For Bernoulli sampling, the sampling    * percentage is the likelihood that any given row will be included in the    * sample. For system sampling, the sampling percentage indicates (roughly)    * what percentage of the rows will appear in the sample.    *    * @return the sampling percentage between 0.0 and 1.0, exclusive    */
 specifier|public
 name|float
 name|getSamplingPercentage
@@ -106,7 +106,7 @@ return|return
 name|samplingPercentage
 return|;
 block|}
-comment|/**      * Indicates whether the sample results should be repeatable. Sample results      * are only required to repeat if no changes have been made to the      * relation's content or structure. If the sample is configured to be      * repeatable, then a user-specified seed value can be obtained via {@link      * #getRepeatableSeed()}.      *      * @return true if the sample results should be repeatable      */
+comment|/**    * Indicates whether the sample results should be repeatable. Sample results    * are only required to repeat if no changes have been made to the    * relation's content or structure. If the sample is configured to be    * repeatable, then a user-specified seed value can be obtained via {@link    * #getRepeatableSeed()}.    *    * @return true if the sample results should be repeatable    */
 specifier|public
 name|boolean
 name|isRepeatable
@@ -116,7 +116,7 @@ return|return
 name|isRepeatable
 return|;
 block|}
-comment|/**      * If {@link #isRepeatable()} returns<tt>true</tt>, this method returns a      * user-specified seed value. Samples of the same, unmodified relation      * should be identical if the sampling mode, sampling percentage and      * repeatable seed are the same.      *      * @return seed value for repeatable samples      */
+comment|/**    * If {@link #isRepeatable()} returns<tt>true</tt>, this method returns a    * user-specified seed value. Samples of the same, unmodified relation    * should be identical if the sampling mode, sampling percentage and    * repeatable seed are the same.    *    * @return seed value for repeatable samples    */
 specifier|public
 name|int
 name|getRepeatableSeed

@@ -57,13 +57,13 @@ extends|extends
 name|Enum14
 block|{
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a new empty, mutable enumeration.      */
+comment|/**    * Creates a new empty, mutable enumeration.    */
 specifier|public
 name|EnumeratedValues
 parameter_list|()
 block|{
 block|}
-comment|/**      * Creates an enumeration, with an array of values, and freezes it.      */
+comment|/**    * Creates an enumeration, with an array of values, and freezes it.    */
 specifier|public
 name|EnumeratedValues
 parameter_list|(
@@ -78,7 +78,7 @@ name|values
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Creates an enumeration, initialize it with an array of strings, and      * freezes it.      */
+comment|/**    * Creates an enumeration, initialize it with an array of strings, and    * freezes it.    */
 specifier|public
 name|EnumeratedValues
 parameter_list|(
@@ -93,7 +93,7 @@ name|names
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Create an enumeration, initializes it with arrays of code/name pairs, and      * freezes it.      */
+comment|/**    * Create an enumeration, initializes it with arrays of code/name pairs, and    * freezes it.    */
 specifier|public
 name|EnumeratedValues
 parameter_list|(
@@ -114,7 +114,7 @@ name|codes
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Create an enumeration, initializes it with arrays of code/name pairs, and      * freezes it.      */
+comment|/**    * Create an enumeration, initializes it with arrays of code/name pairs, and    * freezes it.    */
 specifier|public
 name|EnumeratedValues
 parameter_list|(
@@ -142,7 +142,7 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Creates a mutable enumeration from an existing enumeration, which may      * already be immutable.      */
+comment|/**    * Creates a mutable enumeration from an existing enumeration, which may    * already be immutable.    */
 specifier|public
 name|EnumeratedValues
 name|getMutableClone

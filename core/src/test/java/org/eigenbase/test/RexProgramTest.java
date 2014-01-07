@@ -166,7 +166,7 @@ name|RexBuilder
 name|rexBuilder
 decl_stmt|;
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Creates a RexProgramTest.      */
+comment|/**    * Creates a RexProgramTest.    */
 specifier|public
 name|RexProgramTest
 parameter_list|()
@@ -197,7 +197,7 @@ name|typeFactory
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Tests construction of a RexProgram.      */
+comment|/**    * Tests construction of a RexProgram.    */
 annotation|@
 name|Test
 specifier|public
@@ -286,7 +286,7 @@ name|normalizedProgramString
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Tests construction and normalization of a RexProgram.      */
+comment|/**    * Tests construction and normalization of a RexProgram.    */
 annotation|@
 name|Test
 specifier|public
@@ -331,7 +331,7 @@ name|program
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Tests construction and normalization of a RexProgram.      */
+comment|/**    * Tests construction and normalization of a RexProgram.    */
 annotation|@
 name|Test
 specifier|public
@@ -413,7 +413,7 @@ name|program2
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Tests that AND(x, x) is translated to x.      */
+comment|/**    * Tests that AND(x, x) is translated to x.    */
 annotation|@
 name|Test
 specifier|public
@@ -460,7 +460,7 @@ name|program
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Creates a program, depending on variant:      *<ol>      *<li><code>select (x + y) + (x + 1) as a, (x + x) as b from t(x, y)</code>      *<li><code>select (x + y) + (x + 1) as a, (x + (x + 1)) as b      *     from t(x, y)</code>      *<li><code>select (x + y) + (x + 1) as a, (x + x) as b from t(x, y)      *     where ((x + y)> 1) and ((x + y)> 1)</code>      *</ul>      */
+comment|/**    * Creates a program, depending on variant:    *<ol>    *<li><code>select (x + y) + (x + 1) as a, (x + x) as b from t(x, y)</code>    *<li><code>select (x + y) + (x + 1) as a, (x + (x + 1)) as b    * from t(x, y)</code>    *<li><code>select (x + y) + (x + 1) as a, (x + x) as b from t(x, y)    * where ((x + y)> 1) and ((x + y)> 1)</code>    *</ul>    */
 specifier|private
 name|RexProgramBuilder
 name|createProg

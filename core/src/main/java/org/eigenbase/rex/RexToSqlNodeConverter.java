@@ -35,7 +35,7 @@ interface|interface
 name|RexToSqlNodeConverter
 block|{
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Converts a {@link RexNode} to a {@link SqlNode} expression,      * typically by dispatching to one of the other interface methods.      *      * @param node RexNode to translate      *      * @return SqlNode, or null if no translation was available      */
+comment|/**    * Converts a {@link RexNode} to a {@link SqlNode} expression,    * typically by dispatching to one of the other interface methods.    *    * @param node RexNode to translate    * @return SqlNode, or null if no translation was available    */
 name|SqlNode
 name|convertNode
 parameter_list|(
@@ -43,7 +43,7 @@ name|RexNode
 name|node
 parameter_list|)
 function_decl|;
-comment|/**      * Converts a {@link RexCall} to a {@link SqlNode} expression.      *      * @param call RexCall to translate      *      * @return SqlNode, or null if no translation was available      */
+comment|/**    * Converts a {@link RexCall} to a {@link SqlNode} expression.    *    * @param call RexCall to translate    * @return SqlNode, or null if no translation was available    */
 name|SqlNode
 name|convertCall
 parameter_list|(
@@ -51,7 +51,7 @@ name|RexCall
 name|call
 parameter_list|)
 function_decl|;
-comment|/**      * Converts a {@link RexLiteral} to a {@link SqlLiteral}.      *      * @param literal RexLiteral to translate      *      * @return SqlNode, or null if no translation was available      */
+comment|/**    * Converts a {@link RexLiteral} to a {@link SqlLiteral}.    *    * @param literal RexLiteral to translate    * @return SqlNode, or null if no translation was available    */
 name|SqlNode
 name|convertLiteral
 parameter_list|(
@@ -59,7 +59,7 @@ name|RexLiteral
 name|literal
 parameter_list|)
 function_decl|;
-comment|/**      * Converts a {@link RexInputRef} to a {@link SqlIdentifier}.      *      * @param ref RexInputRef to translate      *      * @return SqlNode, or null if no translation was available      */
+comment|/**    * Converts a {@link RexInputRef} to a {@link SqlIdentifier}.    *    * @param ref RexInputRef to translate    * @return SqlNode, or null if no translation was available    */
 name|SqlNode
 name|convertInputRef
 parameter_list|(

@@ -93,7 +93,7 @@ name|SqlCall
 name|call
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates an AliasNamespace.      *      * @param validator Validator      * @param call Call to AS operator      * @param enclosingNode Enclosing node      */
+comment|/**    * Creates an AliasNamespace.    *    * @param validator     Validator    * @param call          Call to AS operator    * @param enclosingNode Enclosing node    */
 specifier|protected
 name|AliasNamespace
 parameter_list|(

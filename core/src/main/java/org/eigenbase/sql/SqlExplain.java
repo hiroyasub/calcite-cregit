@@ -81,7 +81,7 @@ init|=
 literal|4
 decl_stmt|;
 comment|//~ Enums ------------------------------------------------------------------
-comment|/**      * The level of abstraction with which to display the plan.      */
+comment|/**    * The level of abstraction with which to display the plan.    */
 specifier|public
 specifier|static
 enum|enum
@@ -97,7 +97,7 @@ name|Logical
 block|,
 name|Physical
 block|;
-comment|/** Creates a parse-tree node representing an occurrence of this symbol          * at a particular position in the parsed text. */
+comment|/**      * Creates a parse-tree node representing an occurrence of this symbol      * at a particular position in the parsed text.      */
 specifier|public
 name|SqlLiteral
 name|symbol
@@ -199,7 +199,7 @@ name|nDynamicParams
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * @return the underlying SQL statement to be explained      */
+comment|/**    * @return the underlying SQL statement to be explained    */
 specifier|public
 name|SqlNode
 name|getExplicandum
@@ -212,7 +212,7 @@ name|EXPLICANDUM_OPERAND
 index|]
 return|;
 block|}
-comment|/**      * @return detail level to be generated      */
+comment|/**    * @return detail level to be generated    */
 specifier|public
 name|SqlExplainLevel
 name|getDetailLevel
@@ -233,7 +233,7 @@ index|]
 argument_list|)
 return|;
 block|}
-comment|/**      * Returns the level of abstraction at which this plan should be displayed.      */
+comment|/**    * Returns the level of abstraction at which this plan should be displayed.    */
 specifier|public
 name|Depth
 name|getDepth
@@ -254,7 +254,7 @@ index|]
 argument_list|)
 return|;
 block|}
-comment|/**      * @return the number of dynamic parameters in the statement      */
+comment|/**    * @return the number of dynamic parameters in the statement    */
 specifier|public
 name|int
 name|getDynamicParamCount
@@ -264,7 +264,7 @@ return|return
 name|nDynamicParams
 return|;
 block|}
-comment|/**      * @return whether physical plan implementation should be returned      */
+comment|/**    * @return whether physical plan implementation should be returned    */
 specifier|public
 name|boolean
 name|withImplementation
@@ -279,7 +279,7 @@ operator|.
 name|Physical
 return|;
 block|}
-comment|/**      * @return whether type should be returned      */
+comment|/**    * @return whether type should be returned    */
 specifier|public
 name|boolean
 name|withType
@@ -294,7 +294,7 @@ operator|.
 name|Type
 return|;
 block|}
-comment|/**      * Returns whether result is to be in XML format.      */
+comment|/**    * Returns whether result is to be in XML format.    */
 specifier|public
 name|boolean
 name|isXml

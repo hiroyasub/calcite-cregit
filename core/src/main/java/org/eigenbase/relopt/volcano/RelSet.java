@@ -122,7 +122,7 @@ name|RelNode
 argument_list|>
 argument_list|()
 decl_stmt|;
-comment|/** Relational expressions that have a subset in this set as a child. This      * is a multi-set. If multiple relational expressions in this set have the      * same parent, there will be multiple entries. */
+comment|/**    * Relational expressions that have a subset in this set as a child. This    * is a multi-set. If multiple relational expressions in this set have the    * same parent, there will be multiple entries.    */
 specifier|final
 name|List
 argument_list|<
@@ -151,7 +151,7 @@ name|RelSubset
 argument_list|>
 argument_list|()
 decl_stmt|;
-comment|/**      * List of {@link AbstractConverter} objects which have not yet been      * satisfied.      */
+comment|/**    * List of {@link AbstractConverter} objects which have not yet been    * satisfied.    */
 specifier|final
 name|List
 argument_list|<
@@ -166,14 +166,14 @@ name|AbstractConverter
 argument_list|>
 argument_list|()
 decl_stmt|;
-comment|/**      * Set to the superseding set when this is found to be equivalent to another      * set.      */
+comment|/**    * Set to the superseding set when this is found to be equivalent to another    * set.    */
 name|RelSet
 name|equivalentSet
 decl_stmt|;
 name|RelNode
 name|rel
 decl_stmt|;
-comment|/**      * Names of variables which are set by relational expressions in this set      * and available for use by parent and child expressions.      */
+comment|/**    * Names of variables which are set by relational expressions in this set    * and available for use by parent and child expressions.    */
 specifier|final
 name|Set
 argument_list|<
@@ -181,7 +181,7 @@ name|String
 argument_list|>
 name|variablesPropagated
 decl_stmt|;
-comment|/**      * Names of variables which are used by relational expressions in this set.      */
+comment|/**    * Names of variables which are used by relational expressions in this set.    */
 specifier|final
 name|Set
 argument_list|<
@@ -193,7 +193,7 @@ specifier|final
 name|int
 name|id
 decl_stmt|;
-comment|/**      * Reentrancy flag.      */
+comment|/**    * Reentrancy flag.    */
 name|boolean
 name|inMetadataQuery
 decl_stmt|;
@@ -236,7 +236,7 @@ name|variablesUsed
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Returns all of the {@link RelNode}s which reference {@link RelNode}s in      * this set.      */
+comment|/**    * Returns all of the {@link RelNode}s which reference {@link RelNode}s in    * this set.    */
 specifier|public
 name|List
 argument_list|<
@@ -249,7 +249,7 @@ return|return
 name|parents
 return|;
 block|}
-comment|/**      * @return all of the {@link RelNode}s contained by any subset of this set      * (does not include the subset objects themselves)      */
+comment|/**    * @return all of the {@link RelNode}s contained by any subset of this set    * (does not include the subset objects themselves)    */
 specifier|public
 name|List
 argument_list|<
@@ -300,7 +300,7 @@ return|return
 literal|null
 return|;
 block|}
-comment|/** Removes all references to a specific {@link RelNode} in both the subsets      * and their parent relationships. */
+comment|/**    * Removes all references to a specific {@link RelNode} in both the subsets    * and their parent relationships.    */
 name|void
 name|obliterateRelNode
 parameter_list|(
@@ -316,7 +316,7 @@ name|rel
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Adds a relational expression to a set, with its results available under a      * particular calling convention. An expression may be in the set several      * times with different calling conventions (and hence different costs).      */
+comment|/**    * Adds a relational expression to a set, with its results available under a    * particular calling convention. An expression may be in the set several    * times with different calling conventions (and hence different costs).    */
 specifier|public
 name|RelSubset
 name|add
@@ -579,7 +579,7 @@ name|event
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Adds an expression<code>rel</code> to this set, without creating a      * {@link org.eigenbase.relopt.volcano.RelSubset}. (Called only from      * {@link org.eigenbase.relopt.volcano.RelSubset#add}.      *      * @param rel Relational expression      */
+comment|/**    * Adds an expression<code>rel</code> to this set, without creating a    * {@link org.eigenbase.relopt.volcano.RelSubset}. (Called only from    * {@link org.eigenbase.relopt.volcano.RelSubset#add}.    *    * @param rel Relational expression    */
 name|void
 name|addInternal
 parameter_list|(
@@ -706,7 +706,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Merges<code>otherSet</code> into this RelSet.      *      *<p>One generally calls this method after discovering that two relational      * expressions are equivalent, and hence the<code>RelSet</code>s they      * belong to are equivalent also.      *      *<p>After this method completes,<code>otherSet</code> is obsolete, its      * {@link #equivalentSet} member points to this RelSet, and this RelSet is      * still alive.      *      * @param planner Planner      * @param otherSet RelSet which is equivalent to this one      */
+comment|/**    * Merges<code>otherSet</code> into this RelSet.    *    *<p>One generally calls this method after discovering that two relational    * expressions are equivalent, and hence the<code>RelSet</code>s they    * belong to are equivalent also.    *    *<p>After this method completes,<code>otherSet</code> is obsolete, its    * {@link #equivalentSet} member points to this RelSet, and this RelSet is    * still alive.    *    * @param planner  Planner    * @param otherSet RelSet which is equivalent to this one    */
 name|void
 name|mergeWith
 parameter_list|(

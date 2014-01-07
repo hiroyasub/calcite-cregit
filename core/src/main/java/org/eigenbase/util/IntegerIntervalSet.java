@@ -262,7 +262,7 @@ expr_stmt|;
 block|}
 block|}
 block|}
-comment|/**      * Parses a range of integers expressed as a string. The string can contain      * non-negative integers separated by commas, ranges (represented by a      * hyphen between two integers), and exclusions (represented by a preceding      * hyphen). For example, "1,2,3-20,-7,-10-15,12".      *      *<p>Inclusions and exclusions are performed in the order that they are      * seen. For example, "1-10,-2-9,3-7,-4-6"</p> does contain 3, because it is      * included by "1-10", excluded by "-2-9" and last included by "3-7". But it      * does not include 4.      *      * @param s Range set      */
+comment|/**    * Parses a range of integers expressed as a string. The string can contain    * non-negative integers separated by commas, ranges (represented by a    * hyphen between two integers), and exclusions (represented by a preceding    * hyphen). For example, "1,2,3-20,-7,-10-15,12".    *    *<p>Inclusions and exclusions are performed in the order that they are    * seen. For example, "1-10,-2-9,3-7,-4-6"</p> does contain 3, because it is    * included by "1-10", excluded by "-2-9" and last included by "3-7". But it    * does not include 4.    *    * @param s Range set    */
 specifier|public
 specifier|static
 name|Set

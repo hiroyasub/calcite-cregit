@@ -29,7 +29,7 @@ name|RelNode
 name|root
 decl_stmt|;
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Visits a node during a traversal.      *      * @param node Node to visit      * @param ordinal Ordinal of node within its parent      * @param parent Parent of the node, or null if it is the root of the      * traversal      */
+comment|/**    * Visits a node during a traversal.    *    * @param node    Node to visit    * @param ordinal Ordinal of node within its parent    * @param parent  Parent of the node, or null if it is the root of the    *                traversal    */
 specifier|public
 name|void
 name|visit
@@ -52,7 +52,7 @@ name|this
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Replaces the root node of this traversal.      *      * @param node The new root node      */
+comment|/**    * Replaces the root node of this traversal.    *    * @param node The new root node    */
 specifier|public
 name|void
 name|replaceRoot
@@ -68,7 +68,7 @@ operator|=
 name|node
 expr_stmt|;
 block|}
-comment|/**      * Starts an iteration.      */
+comment|/**    * Starts an iteration.    */
 specifier|public
 name|RelNode
 name|go

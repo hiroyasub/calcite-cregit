@@ -175,13 +175,13 @@ name|String
 argument_list|>
 name|variablesStopped
 decl_stmt|;
-comment|/**      * Values must be of enumeration {@link JoinRelType}, except that {@link      * JoinRelType#RIGHT} is disallowed.      */
+comment|/**    * Values must be of enumeration {@link JoinRelType}, except that {@link    * JoinRelType#RIGHT} is disallowed.    */
 specifier|protected
 name|JoinRelType
 name|joinType
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a JoinRelBase.      *      * @param cluster Cluster      * @param traits Traits      * @param left Left input      * @param right Right input      * @param condition Join condition      * @param joinType Join type      * @param variablesStopped Set of names of variables which are set by the      * LHS and used by the RHS and are not available to nodes above this JoinRel      * in the tree      */
+comment|/**    * Creates a JoinRelBase.    *    * @param cluster          Cluster    * @param traits           Traits    * @param left             Left input    * @param right            Right input    * @param condition        Join condition    * @param joinType         Join type    * @param variablesStopped Set of names of variables which are set by the    *                         LHS and used by the RHS and are not available to    *                         nodes above this JoinRel in the tree    */
 specifier|protected
 name|JoinRelBase
 parameter_list|(
@@ -818,7 +818,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**      * Returns a list of system fields that will be prefixed to      * output row type.      *      * @return list of system fields      */
+comment|/**    * Returns a list of system fields that will be prefixed to    * output row type.    *    * @return list of system fields    */
 specifier|public
 name|List
 argument_list|<
@@ -834,7 +834,7 @@ name|emptyList
 argument_list|()
 return|;
 block|}
-comment|/**      * Derives the type of a join relational expression.      *      * @param leftType Row type of left input to join      * @param rightType Row type of right input to join      * @param joinType Type of join      * @param typeFactory Type factory      * @param fieldNameList List of names of fields; if null, field names are      * inherited and made unique      * @param systemFieldList List of system fields that will be prefixed to      * output row type; typically empty but must not be null      * @return join type      */
+comment|/**    * Derives the type of a join relational expression.    *    * @param leftType        Row type of left input to join    * @param rightType       Row type of right input to join    * @param joinType        Type of join    * @param typeFactory     Type factory    * @param fieldNameList   List of names of fields; if null, field names are    *                        inherited and made unique    * @param systemFieldList List of system fields that will be prefixed to    *                        output row type; typically empty but must not be    *                        null    * @return join type    */
 specifier|public
 specifier|static
 name|RelDataType
@@ -949,7 +949,7 @@ name|systemFieldList
 argument_list|)
 return|;
 block|}
-comment|/**      * Returns the type the row which results when two relations are joined.      *      *<p>The resulting row type consists of      * the system fields (if any), followed by      * the fields of the left type, followed by      * the fields of the right type. The field name list, if present, overrides      * the original names of the fields.      *      * @param typeFactory Type factory      * @param leftType Type of left input to join      * @param rightType Type of right input to join      * @param fieldNameList If not null, overrides the original names of the      * fields      * @param systemFieldList List of system fields that will be prefixed to      * output row type; typically empty but must not be null      * @return type of row which results when two relations are joined      *      * @pre fieldNameList == null      * || fieldNameList.size() == systemFieldList.size()      * + leftType.getFieldCount() + rightType.getFieldCount()      */
+comment|/**    * Returns the type the row which results when two relations are joined.    *    *<p>The resulting row type consists of    * the system fields (if any), followed by    * the fields of the left type, followed by    * the fields of the right type. The field name list, if present, overrides    * the original names of the fields.    *    * @param typeFactory     Type factory    * @param leftType        Type of left input to join    * @param rightType       Type of right input to join    * @param fieldNameList   If not null, overrides the original names of the    *                        fields    * @param systemFieldList List of system fields that will be prefixed to    *                        output row type; typically empty but must not be    *                        null    * @return type of row which results when two relations are joined    * @pre fieldNameList == null    * || fieldNameList.size() == systemFieldList.size()    * + leftType.getFieldCount() + rightType.getFieldCount()    */
 specifier|public
 specifier|static
 name|RelDataType
@@ -1302,7 +1302,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates a copy of this join, overriding condition, system fields and      * inputs.      *      *<p>General contract as {@link org.eigenbase.rel.RelNode#copy}.      *      * @param conditionExpr Condition      * @param left Left input      * @param right Right input      * @return Copy of this join      */
+comment|/**    * Creates a copy of this join, overriding condition, system fields and    * inputs.    *    *<p>General contract as {@link org.eigenbase.rel.RelNode#copy}.    *    * @param conditionExpr Condition    * @param left          Left input    * @param right         Right input    * @return Copy of this join    */
 specifier|public
 specifier|abstract
 name|JoinRelBase

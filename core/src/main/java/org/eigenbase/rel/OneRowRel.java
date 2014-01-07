@@ -48,7 +48,7 @@ extends|extends
 name|OneRowRelBase
 block|{
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a<code>OneRowRel</code>.      *      * @param cluster {@link RelOptCluster}  this relational expression belongs      * to      */
+comment|/**    * Creates a<code>OneRowRel</code>.    *    * @param cluster {@link RelOptCluster}  this relational expression belongs    *                to    */
 specifier|public
 name|OneRowRel
 parameter_list|(
@@ -71,7 +71,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Creates a OneRowRel by parsing serialized output. */
+comment|/**    * Creates a OneRowRel by parsing serialized output.    */
 specifier|public
 name|OneRowRel
 parameter_list|(

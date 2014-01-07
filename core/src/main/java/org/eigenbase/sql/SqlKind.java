@@ -54,260 +54,260 @@ name|SqlKind
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
 comment|// the basics
-comment|/**      * Expression not covered by any other {@link SqlKind} value.      *      * @see #OTHER_FUNCTION      */
+comment|/**    * Expression not covered by any other {@link SqlKind} value.    *    * @see #OTHER_FUNCTION    */
 name|OTHER
 block|,
-comment|/**      * SELECT statement or sub-query.      */
+comment|/**    * SELECT statement or sub-query.    */
 name|SELECT
 block|,
-comment|/**      * JOIN operator or compound FROM clause.      *      *<p>A FROM clause with more than one table is represented as if it were a      * join. For example, "FROM x, y, z" is represented as "JOIN(x, JOIN(x,      * y))".</p>      */
+comment|/**    * JOIN operator or compound FROM clause.    *    *<p>A FROM clause with more than one table is represented as if it were a    * join. For example, "FROM x, y, z" is represented as "JOIN(x, JOIN(x,    * y))".</p>    */
 name|JOIN
 block|,
-comment|/**      * Identifier      */
+comment|/**    * Identifier    */
 name|IDENTIFIER
 block|,
-comment|/**      * A literal.      */
+comment|/**    * A literal.    */
 name|LITERAL
 block|,
-comment|/**      * Function that is not a special function.      *      * @see #FUNCTION      */
+comment|/**    * Function that is not a special function.    *    * @see #FUNCTION    */
 name|OTHER_FUNCTION
 block|,
-comment|/**      * EXPLAIN statement      */
+comment|/**    * EXPLAIN statement    */
 name|EXPLAIN
 block|,
-comment|/**      * INSERT statement      */
+comment|/**    * INSERT statement    */
 name|INSERT
 block|,
-comment|/**      * DELETE statement      */
+comment|/**    * DELETE statement    */
 name|DELETE
 block|,
-comment|/**      * UPDATE statement      */
+comment|/**    * UPDATE statement    */
 name|UPDATE
 block|,
-comment|/**      * A dynamic parameter.      */
+comment|/**    * A dynamic parameter.    */
 name|DYNAMIC_PARAM
 block|,
-comment|/**      * ORDER BY clause.      *      * @see #DESCENDING      * @see #NULLS_FIRST      * @see #NULLS_LAST      */
+comment|/**    * ORDER BY clause.    *    * @see #DESCENDING    * @see #NULLS_FIRST    * @see #NULLS_LAST    */
 name|ORDER_BY
 block|,
-comment|/**      * Union      */
+comment|/**    * Union    */
 name|UNION
 block|,
-comment|/**      * Except      */
+comment|/**    * Except    */
 name|EXCEPT
 block|,
-comment|/**      * Intersect      */
+comment|/**    * Intersect    */
 name|INTERSECT
 block|,
-comment|/**      * AS operator      */
+comment|/**    * AS operator    */
 name|AS
 block|,
-comment|/**      * OVER operator      */
+comment|/**    * OVER operator    */
 name|OVER
 block|,
-comment|/**      * Window specification      */
+comment|/**    * Window specification    */
 name|WINDOW
 block|,
-comment|/**      * MERGE statement      */
+comment|/**    * MERGE statement    */
 name|MERGE
 block|,
-comment|/**      * TABLESAMPLE operator      */
+comment|/**    * TABLESAMPLE operator    */
 name|TABLESAMPLE
 block|,
 comment|// binary operators
-comment|/**      * The arithmetic multiplication operator, "*".      */
+comment|/**    * The arithmetic multiplication operator, "*".    */
 name|TIMES
 block|,
-comment|/**      * The arithmetic division operator, "/".      */
+comment|/**    * The arithmetic division operator, "/".    */
 name|DIVIDE
 block|,
-comment|/**      * The arithmetic plus operator, "+".      *      * @see #PLUS_PREFIX      */
+comment|/**    * The arithmetic plus operator, "+".    *    * @see #PLUS_PREFIX    */
 name|PLUS
 block|,
-comment|/**      * The arithmetic minus operator, "-".      *      * @see #MINUS_PREFIX      */
+comment|/**    * The arithmetic minus operator, "-".    *    * @see #MINUS_PREFIX    */
 name|MINUS
 block|,
 comment|// comparison operators
-comment|/**      * The "IN" operator.      */
+comment|/**    * The "IN" operator.    */
 name|IN
 block|,
-comment|/**      * The less-than operator, "&lt;".      */
+comment|/**    * The less-than operator, "&lt;".    */
 name|LESS_THAN
 block|,
-comment|/**      * The greater-than operator, "&gt;".      */
+comment|/**    * The greater-than operator, "&gt;".    */
 name|GREATER_THAN
 block|,
-comment|/**      * The less-than-or-equal operator, "&lt;=".      */
+comment|/**    * The less-than-or-equal operator, "&lt;=".    */
 name|LESS_THAN_OR_EQUAL
 block|,
-comment|/**      * The greater-than-or-equal operator, "&gt;=".      */
+comment|/**    * The greater-than-or-equal operator, "&gt;=".    */
 name|GREATER_THAN_OR_EQUAL
 block|,
-comment|/**      * The equals operator, "=".      */
+comment|/**    * The equals operator, "=".    */
 name|EQUALS
 block|,
-comment|/**      * The not-equals operator, "&#33;=" or "&lt;&gt;".      */
+comment|/**    * The not-equals operator, "&#33;=" or "&lt;&gt;".    */
 name|NOT_EQUALS
 block|,
-comment|/**      * The is-distinct-from operator.      */
+comment|/**    * The is-distinct-from operator.    */
 name|IS_DISTINCT_FROM
 block|,
-comment|/**      * The is-not-distinct-from operator.      */
+comment|/**    * The is-not-distinct-from operator.    */
 name|IS_NOT_DISTINCT_FROM
 block|,
-comment|/**      * The logical "OR" operator.      */
+comment|/**    * The logical "OR" operator.    */
 name|OR
 block|,
-comment|/**      * The logical "AND" operator.      */
+comment|/**    * The logical "AND" operator.    */
 name|AND
 block|,
 comment|// other infix
-comment|/**      * Dot      */
+comment|/**    * Dot    */
 name|DOT
 block|,
-comment|/**      * The "OVERLAPS" operator.      */
+comment|/**    * The "OVERLAPS" operator.    */
 name|OVERLAPS
 block|,
-comment|/**      * The "LIKE" operator.      */
+comment|/**    * The "LIKE" operator.    */
 name|LIKE
 block|,
-comment|/**      * The "SIMILAR" operator.      */
+comment|/**    * The "SIMILAR" operator.    */
 name|SIMILAR
 block|,
-comment|/**      * The "BETWEEN" operator.      */
+comment|/**    * The "BETWEEN" operator.    */
 name|BETWEEN
 block|,
-comment|/**      * A "CASE" expression.      */
+comment|/**    * A "CASE" expression.    */
 name|CASE
 block|,
 comment|// prefix operators
-comment|/**      * The logical "NOT" operator.      */
+comment|/**    * The logical "NOT" operator.    */
 name|NOT
 block|,
-comment|/**      * The unary plus operator, as in "+1".      *      * @see #PLUS      */
+comment|/**    * The unary plus operator, as in "+1".    *    * @see #PLUS    */
 name|PLUS_PREFIX
 block|,
-comment|/**      * The unary minus operator, as in "-1".      *      * @see #MINUS      */
+comment|/**    * The unary minus operator, as in "-1".    *    * @see #MINUS    */
 name|MINUS_PREFIX
 block|,
-comment|/**      * The "EXISTS" operator.      */
+comment|/**    * The "EXISTS" operator.    */
 name|EXISTS
 block|,
-comment|/**      * The "VALUES" operator.      */
+comment|/**    * The "VALUES" operator.    */
 name|VALUES
 block|,
-comment|/**      * Explicit table, e.g.<code>select * from (TABLE t)</code> or<code>TABLE      * t</code>. See also {@link #COLLECTION_TABLE}.      */
+comment|/**    * Explicit table, e.g.<code>select * from (TABLE t)</code> or<code>TABLE    * t</code>. See also {@link #COLLECTION_TABLE}.    */
 name|EXPLICIT_TABLE
 block|,
-comment|/**      * Scalar query; that is, a subquery used in an expression context, and      * returning one row and one column.      */
+comment|/**    * Scalar query; that is, a subquery used in an expression context, and    * returning one row and one column.    */
 name|SCALAR_QUERY
 block|,
-comment|/**      * ProcedureCall      */
+comment|/**    * ProcedureCall    */
 name|PROCEDURE_CALL
 block|,
-comment|/**      * NewSpecification      */
+comment|/**    * NewSpecification    */
 name|NEW_SPECIFICATION
 block|,
 comment|// postfix operators
-comment|/**      * DESC in ORDER BY. A parse tree, not a true expression.      */
+comment|/**    * DESC in ORDER BY. A parse tree, not a true expression.    */
 name|DESCENDING
 block|,
-comment|/**      * NULLS FIRST clause in ORDER BY. A parse tree, not a true expression.      */
+comment|/**    * NULLS FIRST clause in ORDER BY. A parse tree, not a true expression.    */
 name|NULLS_FIRST
 block|,
-comment|/**      * NULLS LAST clause in ORDER BY. A parse tree, not a true expression.      */
+comment|/**    * NULLS LAST clause in ORDER BY. A parse tree, not a true expression.    */
 name|NULLS_LAST
 block|,
-comment|/**      * The "IS TRUE" operator.      */
+comment|/**    * The "IS TRUE" operator.    */
 name|IS_TRUE
 block|,
-comment|/**      * The "IS FALSE" operator.      */
+comment|/**    * The "IS FALSE" operator.    */
 name|IS_FALSE
 block|,
-comment|/**      * The "IS UNKNOWN" operator.      */
+comment|/**    * The "IS UNKNOWN" operator.    */
 name|IS_UNKNOWN
 block|,
-comment|/**      * The "IS NULL" operator.      */
+comment|/**    * The "IS NULL" operator.    */
 name|IS_NULL
 block|,
-comment|/**      * The "PRECEDING" qualifier of an interval end-point in a window      * specification.      */
+comment|/**    * The "PRECEDING" qualifier of an interval end-point in a window    * specification.    */
 name|PRECEDING
 block|,
-comment|/**      * The "FOLLOWING" qualifier of an interval end-point in a window      * specification.      */
+comment|/**    * The "FOLLOWING" qualifier of an interval end-point in a window    * specification.    */
 name|FOLLOWING
 block|,
-comment|/**      * The field access operator, ".".      *      *<p>(Only used at the RexNode level; at      * SqlNode level, a field-access is part of an identifier.)</p>      */
+comment|/**    * The field access operator, ".".    *    *<p>(Only used at the RexNode level; at    * SqlNode level, a field-access is part of an identifier.)</p>    */
 name|FIELD_ACCESS
 block|,
-comment|/**      * Reference to an input field.      *      *<p>(Only used at the RexNode level.)</p>      */
+comment|/**    * Reference to an input field.    *    *<p>(Only used at the RexNode level.)</p>    */
 name|INPUT_REF
 block|,
-comment|/**      * Reference to a sub-expression computed within the current relational      * operator.      *      *<p>(Only used at the RexNode level.)</p>      */
+comment|/**    * Reference to a sub-expression computed within the current relational    * operator.    *    *<p>(Only used at the RexNode level.)</p>    */
 name|LOCAL_REF
 block|,
-comment|/**      * Reference to correlation variable.      *      *<p>(Only used at the RexNode level.)</p>      */
+comment|/**    * Reference to correlation variable.    *    *<p>(Only used at the RexNode level.)</p>    */
 name|CORREL_VARIABLE
 block|,
 comment|// functions
-comment|/**      * The row-constructor function. May be explicit or implicit:      * {@code VALUES 1, ROW (2)}.      */
+comment|/**    * The row-constructor function. May be explicit or implicit:    * {@code VALUES 1, ROW (2)}.    */
 name|ROW
 block|,
-comment|/**      * The non-standard constructor used to pass a      * COLUMN_LIST parameter to a user-defined transform.      */
+comment|/**    * The non-standard constructor used to pass a    * COLUMN_LIST parameter to a user-defined transform.    */
 name|COLUMN_LIST
 block|,
-comment|/**      * The "CAST" operator.      */
+comment|/**    * The "CAST" operator.    */
 name|CAST
 block|,
-comment|/**      * The "TRIM" function.      */
+comment|/**    * The "TRIM" function.    */
 name|TRIM
 block|,
-comment|/**      * Call to a function using JDBC function syntax.      */
+comment|/**    * Call to a function using JDBC function syntax.    */
 name|JDBC_FN
 block|,
-comment|/**      * The MULTISET value constructor.      */
+comment|/**    * The MULTISET value constructor.    */
 name|MULTISET_VALUE_CONSTRUCTOR
 block|,
-comment|/**      * The MULTISET query constructor.      */
+comment|/**    * The MULTISET query constructor.    */
 name|MULTISET_QUERY_CONSTRUCTOR
 block|,
-comment|/**      * The "UNNEST" operator.      */
+comment|/**    * The "UNNEST" operator.    */
 name|UNNEST
 block|,
-comment|/**      * The "LATERAL" qualifier to relations in the FROM clause.      */
+comment|/**    * The "LATERAL" qualifier to relations in the FROM clause.    */
 name|LATERAL
 block|,
-comment|/**      * Table operator which converts user-defined transform into a relation, for      * example,<code>select * from TABLE(udx(x, y, z))</code>. See also the      * {@link #EXPLICIT_TABLE} prefix operator.      */
+comment|/**    * Table operator which converts user-defined transform into a relation, for    * example,<code>select * from TABLE(udx(x, y, z))</code>. See also the    * {@link #EXPLICIT_TABLE} prefix operator.    */
 name|COLLECTION_TABLE
 block|,
-comment|/**      * Array Value Constructor, e.g. {@code Array[1, 2, 3]}.      */
+comment|/**    * Array Value Constructor, e.g. {@code Array[1, 2, 3]}.    */
 name|ARRAY_VALUE_CONSTRUCTOR
 block|,
-comment|/**      * Array Query Constructor, e.g. {@code Array(select deptno from dept)}.      */
+comment|/**    * Array Query Constructor, e.g. {@code Array(select deptno from dept)}.    */
 name|ARRAY_QUERY_CONSTRUCTOR
 block|,
-comment|/**      * Map Value Constructor, e.g. {@code Map['washington', 1, 'obama', 44]}.      */
+comment|/**    * Map Value Constructor, e.g. {@code Map['washington', 1, 'obama', 44]}.    */
 name|MAP_VALUE_CONSTRUCTOR
 block|,
-comment|/**      * Map Query Constructor, e.g. {@code MAP (SELECT empno, deptno FROM emp)}.      */
+comment|/**    * Map Query Constructor, e.g. {@code MAP (SELECT empno, deptno FROM emp)}.    */
 name|MAP_QUERY_CONSTRUCTOR
 block|,
-comment|/**      * CURSOR constructor, for example,<code>select * from      * TABLE(udx(CURSOR(select ...), x, y, z))</code>      */
+comment|/**    * CURSOR constructor, for example,<code>select * from    * TABLE(udx(CURSOR(select ...), x, y, z))</code>    */
 name|CURSOR
 block|,
 comment|// internal operators (evaluated in validator) 200-299
-comment|/**      * Literal chain operator (for composite string literals).      * An internal operator that does not appear in SQL syntax.      */
+comment|/**    * Literal chain operator (for composite string literals).    * An internal operator that does not appear in SQL syntax.    */
 name|LITERAL_CHAIN
 block|,
-comment|/**      * Escape operator (always part of LIKE or SIMILAR TO expression).      * An internal operator that does not appear in SQL syntax.      */
+comment|/**    * Escape operator (always part of LIKE or SIMILAR TO expression).    * An internal operator that does not appear in SQL syntax.    */
 name|ESCAPE
 block|,
-comment|/**      * The internal REINTERPRET operator (meaning a reinterpret cast).      * An internal operator that does not appear in SQL syntax.      */
+comment|/**    * The internal REINTERPRET operator (meaning a reinterpret cast).    * An internal operator that does not appear in SQL syntax.    */
 name|REINTERPRET
 block|;
 comment|//~ Static fields/initializers ---------------------------------------------
 comment|// Most of the static fields are categories, aggregating several kinds into
 comment|// a set.
-comment|/**      * Category consisting of set-query node types.      *      *<p>Consists of:      * {@link #EXCEPT},      * {@link #INTERSECT},      * {@link #UNION}.      */
+comment|/**    * Category consisting of set-query node types.    *    *<p>Consists of:    * {@link #EXCEPT},    * {@link #INTERSECT},    * {@link #UNION}.    */
 specifier|public
 specifier|static
 specifier|final
@@ -328,7 +328,7 @@ argument_list|,
 name|EXCEPT
 argument_list|)
 decl_stmt|;
-comment|/**      * Category consisting of all expression operators.      *      *<p>A node is an expression if it is NOT one of the following:      * {@link #AS},      * {@link #DESCENDING},      * {@link #SELECT},      * {@link #JOIN},      * {@link #OTHER_FUNCTION},      * {@link #CAST},      * {@link #TRIM},      * {@link #LITERAL_CHAIN},      * {@link #JDBC_FN},      * {@link #PRECEDING},      * {@link #FOLLOWING},      * {@link #ORDER_BY},      * {@link #COLLECTION_TABLE},      * {@link #TABLESAMPLE}.      */
+comment|/**    * Category consisting of all expression operators.    *    *<p>A node is an expression if it is NOT one of the following:    * {@link #AS},    * {@link #DESCENDING},    * {@link #SELECT},    * {@link #JOIN},    * {@link #OTHER_FUNCTION},    * {@link #CAST},    * {@link #TRIM},    * {@link #LITERAL_CHAIN},    * {@link #JDBC_FN},    * {@link #PRECEDING},    * {@link #FOLLOWING},    * {@link #ORDER_BY},    * {@link #COLLECTION_TABLE},    * {@link #TABLESAMPLE}.    */
 specifier|public
 specifier|static
 specifier|final
@@ -380,7 +380,7 @@ name|TABLESAMPLE
 argument_list|)
 argument_list|)
 decl_stmt|;
-comment|/**      * Category consisting of all DML operators.      *      *<p>Consists of:      * {@link #INSERT},      * {@link #UPDATE},      * {@link #DELETE},      * {@link #MERGE},      * {@link #PROCEDURE_CALL}.      *      *<p>NOTE jvs 1-June-2006: For now we treat procedure calls as DML;      * this makes it easy for JDBC clients to call execute or      * executeUpdate and not have to process dummy cursor results.  If      * in the future we support procedures which return results sets,      * we'll need to refine this.      */
+comment|/**    * Category consisting of all DML operators.    *    *<p>Consists of:    * {@link #INSERT},    * {@link #UPDATE},    * {@link #DELETE},    * {@link #MERGE},    * {@link #PROCEDURE_CALL}.    *    *<p>NOTE jvs 1-June-2006: For now we treat procedure calls as DML;    * this makes it easy for JDBC clients to call execute or    * executeUpdate and not have to process dummy cursor results.  If    * in the future we support procedures which return results sets,    * we'll need to refine this.    */
 specifier|public
 specifier|static
 specifier|final
@@ -405,7 +405,7 @@ argument_list|,
 name|PROCEDURE_CALL
 argument_list|)
 decl_stmt|;
-comment|/**      * Category consisting of query node types.      *      *<p>Consists of:      * {@link #SELECT},      * {@link #EXCEPT},      * {@link #INTERSECT},      * {@link #UNION},      * {@link #VALUES},      * {@link #ORDER_BY},      * {@link #EXPLICIT_TABLE}.      */
+comment|/**    * Category consisting of query node types.    *    *<p>Consists of:    * {@link #SELECT},    * {@link #EXCEPT},    * {@link #INTERSECT},    * {@link #UNION},    * {@link #VALUES},    * {@link #ORDER_BY},    * {@link #EXPLICIT_TABLE}.    */
 specifier|public
 specifier|static
 specifier|final
@@ -434,7 +434,7 @@ argument_list|,
 name|EXPLICIT_TABLE
 argument_list|)
 decl_stmt|;
-comment|/**      * Category of all SQL statement types.      *      *<p>Consists of all types in {@link #QUERY} and {@link #DML}.      */
+comment|/**    * Category of all SQL statement types.    *    *<p>Consists of all types in {@link #QUERY} and {@link #DML}.    */
 specifier|public
 specifier|static
 specifier|final
@@ -463,7 +463,7 @@ name|DML
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Category consisting of regular and special functions.      *      *<p>Consists of regular functions {@link #OTHER_FUNCTION} and special      * functions {@link #ROW}, {@link #TRIM}, {@link #CAST}, {@link #JDBC_FN}.      */
+comment|/**    * Category consisting of regular and special functions.    *    *<p>Consists of regular functions {@link #OTHER_FUNCTION} and special    * functions {@link #ROW}, {@link #TRIM}, {@link #CAST}, {@link #JDBC_FN}.    */
 specifier|public
 specifier|static
 specifier|final
@@ -488,7 +488,7 @@ argument_list|,
 name|JDBC_FN
 argument_list|)
 decl_stmt|;
-comment|/**      * Category of comparison operators.      *      *<p>Consists of:      * {@link #IN},      * {@link #EQUALS},      * {@link #NOT_EQUALS},      * {@link #LESS_THAN},      * {@link #GREATER_THAN},      * {@link #LESS_THAN_OR_EQUAL},      * {@link #GREATER_THAN_OR_EQUAL}.      */
+comment|/**    * Category of comparison operators.    *    *<p>Consists of:    * {@link #IN},    * {@link #EQUALS},    * {@link #NOT_EQUALS},    * {@link #LESS_THAN},    * {@link #GREATER_THAN},    * {@link #LESS_THAN_OR_EQUAL},    * {@link #GREATER_THAN_OR_EQUAL}.    */
 specifier|public
 specifier|static
 specifier|final
@@ -517,7 +517,7 @@ argument_list|,
 name|LESS_THAN_OR_EQUAL
 argument_list|)
 decl_stmt|;
-comment|/**      * Returns whether this {@code SqlKind} belongs to a given category.      *      *<p>A category is a collection of kinds, not necessarily disjoint. For      * example, QUERY is { SELECT, UNION, INTERSECT, EXCEPT, VALUES, ORDER_BY,      * EXPLICIT_TABLE }.      *      * @param category Category      * @return Whether this kind belongs to the given category      */
+comment|/**    * Returns whether this {@code SqlKind} belongs to a given category.    *    *<p>A category is a collection of kinds, not necessarily disjoint. For    * example, QUERY is { SELECT, UNION, INTERSECT, EXCEPT, VALUES, ORDER_BY,    * EXPLICIT_TABLE }.    *    * @param category Category    * @return Whether this kind belongs to the given category    */
 specifier|public
 specifier|final
 name|boolean

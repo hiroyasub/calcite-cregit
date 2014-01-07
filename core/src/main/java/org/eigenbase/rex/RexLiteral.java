@@ -179,13 +179,13 @@ extends|extends
 name|RexNode
 block|{
 comment|//~ Instance fields --------------------------------------------------------
-comment|/**      * The value of this literal. Must be consistent with its type, as per      * {@link #valueMatchesType}. For example, you can't store an {@link      * Integer} value here just because you feel like it -- all numbers are      * represented by a {@link BigDecimal}. But since this field is private, it      * doesn't really matter how the values are stored.      */
+comment|/**    * The value of this literal. Must be consistent with its type, as per    * {@link #valueMatchesType}. For example, you can't store an {@link    * Integer} value here just because you feel like it -- all numbers are    * represented by a {@link BigDecimal}. But since this field is private, it    * doesn't really matter how the values are stored.    */
 specifier|private
 specifier|final
 name|Comparable
 name|value
 decl_stmt|;
-comment|/**      * The real type of this literal, as reported by {@link #getType}.      */
+comment|/**    * The real type of this literal, as reported by {@link #getType}.    */
 specifier|private
 specifier|final
 name|RelDataType
@@ -194,14 +194,14 @@ decl_stmt|;
 comment|// TODO jvs 26-May-2006:  Use SqlTypeFamily instead; it exists
 comment|// for exactly this purpose (to avoid the confusion which results
 comment|// from overloading SqlTypeName).
-comment|/**      * An indication of the broad type of this literal -- even if its type isn't      * a SQL type. Sometimes this will be different than the SQL type; for      * example, all exact numbers, including integers have typeName {@link      * SqlTypeName#DECIMAL}. See {@link #valueMatchesType} for the definitive      * story.      */
+comment|/**    * An indication of the broad type of this literal -- even if its type isn't    * a SQL type. Sometimes this will be different than the SQL type; for    * example, all exact numbers, including integers have typeName {@link    * SqlTypeName#DECIMAL}. See {@link #valueMatchesType} for the definitive    * story.    */
 specifier|private
 specifier|final
 name|SqlTypeName
 name|typeName
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a<code>RexLiteral</code>.      */
+comment|/**    * Creates a<code>RexLiteral</code>.    */
 name|RexLiteral
 parameter_list|(
 name|Comparable
@@ -283,7 +283,7 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * @return whether value is appropriate for its type (we have rules about      * these things)      */
+comment|/**    * @return whether value is appropriate for its type (we have rules about    * these things)    */
 specifier|public
 specifier|static
 name|boolean
@@ -586,7 +586,7 @@ name|toString
 argument_list|()
 return|;
 block|}
-comment|/**      * Prints the value this literal as a Java string constant.      */
+comment|/**    * Prints the value this literal as a Java string constant.    */
 specifier|public
 name|void
 name|printAsJava
@@ -607,7 +607,7 @@ literal|true
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Prints a value as a Java string. The value must be consistent with the      * type, as per {@link #valueMatchesType}.      *      *<p>Typical return values:      *      *<ul>      *<li>true</li>      *<li>null</li>      *<li>"Hello, world!"</li>      *<li>1.25</li>      *<li>1234ABCD</li>      *</ul>      *      * @param value Value      * @param pw Writer to write to      * @param typeName Type family      */
+comment|/**    * Prints a value as a Java string. The value must be consistent with the    * type, as per {@link #valueMatchesType}.    *    *<p>Typical return values:    *    *<ul>    *<li>true</li>    *<li>null</li>    *<li>"Hello, world!"</li>    *<li>1.25</li>    *<li>1234ABCD</li>    *</ul>    *    * @param value    Value    * @param pw       Writer to write to    * @param typeName Type family    */
 specifier|private
 specifier|static
 name|void
@@ -1050,7 +1050,7 @@ name|datetime
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Converts a Jdbc string into a RexLiteral. This method accepts a string,      * as returned by the Jdbc method ResultSet.getString(), and restores the      * string into an equivalent RexLiteral. It allows one to use Jdbc strings      * as a common format for data.      *      *<p>If a null literal is provided, then a null pointer will be returned.      *      * @param type data type of literal to be read      * @param typeName type family of literal      * @param literal the (non-SQL encoded) string representation, as returned      * by the Jdbc call to return a column as a string      *      * @return a typed RexLiteral, or null      */
+comment|/**    * Converts a Jdbc string into a RexLiteral. This method accepts a string,    * as returned by the Jdbc method ResultSet.getString(), and restores the    * string into an equivalent RexLiteral. It allows one to use Jdbc strings    * as a common format for data.    *    *<p>If a null literal is provided, then a null pointer will be returned.    *    * @param type     data type of literal to be read    * @param typeName type family of literal    * @param literal  the (non-SQL encoded) string representation, as returned    *                 by the Jdbc call to return a column as a string    * @return a typed RexLiteral, or null    */
 specifier|public
 specifier|static
 name|RexLiteral
@@ -1504,7 +1504,7 @@ operator|.
 name|LITERAL
 return|;
 block|}
-comment|/**      * Returns the value of this literal.      */
+comment|/**    * Returns the value of this literal.    */
 specifier|public
 name|Comparable
 name|getValue
@@ -1526,7 +1526,7 @@ return|return
 name|value
 return|;
 block|}
-comment|/**      * Returns the value of this literal, in the form that the calculator      * program builder wants it.      */
+comment|/**    * Returns the value of this literal, in the form that the calculator    * program builder wants it.    */
 specifier|public
 name|Object
 name|getValue2
@@ -1667,7 +1667,7 @@ name|value
 return|;
 block|}
 block|}
-comment|/**      * Returns the value of this literal, in the form that the rex-to-lix      * translator wants it.      */
+comment|/**    * Returns the value of this literal, in the form that the rex-to-lix    * translator wants it.    */
 specifier|public
 name|Object
 name|getValue3

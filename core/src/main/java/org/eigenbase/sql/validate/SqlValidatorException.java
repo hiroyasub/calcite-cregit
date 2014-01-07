@@ -86,7 +86,7 @@ operator|-
 literal|831683113957131387L
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a new SqlValidatorException object.      *      * @param message error message      * @param cause underlying cause      */
+comment|/**    * Creates a new SqlValidatorException object.    *    * @param message error message    * @param cause   underlying cause    */
 specifier|public
 name|SqlValidatorException
 parameter_list|(

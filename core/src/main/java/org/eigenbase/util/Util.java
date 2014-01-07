@@ -213,7 +213,7 @@ class|class
 name|Util
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
-comment|/**      * Name of the system property that controls whether the AWT work-around is      * enabled. This workaround allows Farrago to load its native libraries      * despite a conflict with AWT and allows applications that use AWT to      * function normally.      *      * @see #loadLibrary(String)      */
+comment|/**    * Name of the system property that controls whether the AWT work-around is    * enabled. This workaround allows Farrago to load its native libraries    * despite a conflict with AWT and allows applications that use AWT to    * function normally.    *    * @see #loadLibrary(String)    */
 specifier|public
 specifier|static
 specifier|final
@@ -222,7 +222,7 @@ name|awtWorkaroundProperty
 init|=
 literal|"org.eigenbase.util.AWT_WORKAROUND"
 decl_stmt|;
-comment|/**      * System-dependent newline character.      */
+comment|/**    * System-dependent newline character.    */
 specifier|public
 specifier|static
 specifier|final
@@ -236,7 +236,7 @@ argument_list|(
 literal|"line.separator"
 argument_list|)
 decl_stmt|;
-comment|/**      * System-dependent file separator, for example, "/" or "\."      */
+comment|/**    * System-dependent file separator, for example, "/" or "\."    */
 specifier|public
 specifier|static
 specifier|final
@@ -250,7 +250,7 @@ argument_list|(
 literal|"file.separator"
 argument_list|)
 decl_stmt|;
-comment|/**      * Datetime format string for generating a timestamp string to be used as      * part of a filename. Conforms to SimpleDateFormat conventions.      */
+comment|/**    * Datetime format string for generating a timestamp string to be used as    * part of a filename. Conforms to SimpleDateFormat conventions.    */
 specifier|public
 specifier|static
 specifier|final
@@ -305,7 +305,7 @@ name|driversLoaded
 init|=
 literal|false
 decl_stmt|;
-comment|/**      * Regular expression for a valid java identifier which contains no      * underscores and can therefore be returned intact by {@link #toJavaId}.      */
+comment|/**    * Regular expression for a valid java identifier which contains no    * underscores and can therefore be returned intact by {@link #toJavaId}.    */
 specifier|private
 specifier|static
 specifier|final
@@ -319,13 +319,13 @@ argument_list|(
 literal|"[a-zA-Z_$][a-zA-Z0-9$]*"
 argument_list|)
 decl_stmt|;
-comment|/**      * @see #loadLibrary(String)      */
+comment|/**    * @see #loadLibrary(String)    */
 specifier|private
 specifier|static
 name|Toolkit
 name|awtToolkit
 decl_stmt|;
-comment|/**      * Maps classes to the map of their enum values. Uses a weak map so that      * classes are not prevented from being unloaded.      */
+comment|/**    * Maps classes to the map of their enum values. Uses a weak map so that    * classes are not prevented from being unloaded.    */
 specifier|private
 specifier|static
 specifier|final
@@ -385,10 +385,10 @@ block|,
 literal|"       "
 block|,
 literal|"        "
-block|,             }
+block|,   }
 decl_stmt|;
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Does nothing with its argument. Call this method when you have a value      * you are not interested in, but you don't want the compiler to warn that      * you are not using it.      */
+comment|/**    * Does nothing with its argument. Call this method when you have a value    * you are not interested in, but you don't want the compiler to warn that    * you are not using it.    */
 specifier|public
 specifier|static
 specifier|final
@@ -411,7 +411,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Does nothing with its argument. Call this method when you have a value      * you are not interested in, but you don't want the compiler to warn that      * you are not using it.      */
+comment|/**    * Does nothing with its argument. Call this method when you have a value    * you are not interested in, but you don't want the compiler to warn that    * you are not using it.    */
 specifier|public
 specifier|static
 specifier|final
@@ -434,7 +434,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Does nothing with its argument. Call this method when you have a value      * you are not interested in, but you don't want the compiler to warn that      * you are not using it.      */
+comment|/**    * Does nothing with its argument. Call this method when you have a value    * you are not interested in, but you don't want the compiler to warn that    * you are not using it.    */
 specifier|public
 specifier|static
 specifier|final
@@ -457,7 +457,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Does nothing with its argument. Call this method when you have a value      * you are not interested in, but you don't want the compiler to warn that      * you are not using it.      */
+comment|/**    * Does nothing with its argument. Call this method when you have a value    * you are not interested in, but you don't want the compiler to warn that    * you are not using it.    */
 specifier|public
 specifier|static
 specifier|final
@@ -480,7 +480,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Records that an exception has been caught but will not be re-thrown. If      * the tracer is not null, logs the exception to the tracer.      *      * @param e Exception      * @param logger If not null, logs exception to this logger      */
+comment|/**    * Records that an exception has been caught but will not be re-thrown. If    * the tracer is not null, logs the exception to the tracer.    *    * @param e      Exception    * @param logger If not null, logs exception to this logger    */
 specifier|public
 specifier|static
 specifier|final
@@ -516,7 +516,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Returns whether two objects are equal or are both null.      */
+comment|/**    * Returns whether two objects are equal or are both null.    */
 specifier|public
 specifier|static
 specifier|final
@@ -564,7 +564,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**      * Returns a sub-list from a given position to the end.      */
+comment|/**    * Returns a sub-list from a given position to the end.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -600,7 +600,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**      * Returns whether two lists are equal to each other using shallow      * comparisons.      *      * @param list0 First list      * @param list1 Second list      * @return Whether lists are same length and all of their elements are      *   equal using {@code ==} (may be null).      */
+comment|/**    * Returns whether two lists are equal to each other using shallow    * comparisons.    *    * @param list0 First list    * @param list1 Second list    * @return Whether lists are same length and all of their elements are    * equal using {@code ==} (may be null).    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -687,7 +687,7 @@ return|return
 literal|true
 return|;
 block|}
-comment|/**      * Combines two integers into a hash code.      */
+comment|/**    * Combines two integers into a hash code.    */
 specifier|public
 specifier|static
 name|int
@@ -710,7 +710,7 @@ operator|^
 name|j
 return|;
 block|}
-comment|/**      * Computes a hash code from an existing hash code and an object (which may      * be null).      */
+comment|/**    * Computes a hash code from an existing hash code and an object (which may    * be null).    */
 specifier|public
 specifier|static
 name|int
@@ -753,7 +753,7 @@ operator|^
 name|k
 return|;
 block|}
-comment|/**      * Computes a hash code from an existing hash code and an array of objects      * (which may be null).      */
+comment|/**    * Computes a hash code from an existing hash code and an array of objects    * (which may be null).    */
 specifier|public
 specifier|static
 name|int
@@ -837,7 +837,7 @@ return|return
 name|h
 return|;
 block|}
-comment|/**      * Computes a hash code over var args.      */
+comment|/**    * Computes a hash code over var args.    */
 specifier|public
 specifier|static
 name|int
@@ -875,7 +875,7 @@ return|return
 name|h
 return|;
 block|}
-comment|/**      * Returns a set of the elements which are in<code>set1</code> but not in      *<code>set2</code>, without modifying either.      */
+comment|/**    * Returns a set of the elements which are in<code>set1</code> but not in    *<code>set2</code>, without modifying either.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -953,7 +953,7 @@ name|set
 return|;
 block|}
 block|}
-comment|/**      * Computes<code>nlogn(n)</code> using the natural logarithm (or<code>      * n</code> if<code>n<{@link Math#E}</code>, so the result is never      * negative.      */
+comment|/**    * Computes<code>nlogn(n)</code> using the natural logarithm (or<code>    * n</code> if<code>n<{@link Math#E}</code>, so the result is never    * negative.    */
 specifier|public
 specifier|static
 name|double
@@ -986,7 +986,7 @@ argument_list|)
 operator|)
 return|;
 block|}
-comment|/**      * Prints an object using reflection. We can handle<code>null</code>;      * arrays of objects and primitive values; for regular objects, we print all      * public fields.      */
+comment|/**    * Prints an object using reflection. We can handle<code>null</code>;    * arrays of objects and primitive values; for regular objects, we print all    * public fields.    */
 specifier|public
 specifier|static
 name|void
@@ -1648,7 +1648,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Prints a string, enclosing in double quotes (") and escaping if      * necessary. For examples,<code>printDoubleQuoted(w,"x\"y",false)</code>      * prints<code>"x\"y"</code>.      */
+comment|/**    * Prints a string, enclosing in double quotes (") and escaping if    * necessary. For examples,<code>printDoubleQuoted(w,"x\"y",false)</code>    * prints<code>"x\"y"</code>.    */
 specifier|public
 specifier|static
 specifier|final
@@ -1802,7 +1802,7 @@ name|println
 argument_list|()
 expr_stmt|;
 block|}
-comment|/**      * Formats a {@link BigDecimal} value to a string in scientific notation For      * example<br>      *      *<ul>      *<li>A value of 0.00001234 would be formated as<code>1.234E-5</code></li>      *<li>A value of 100000.00 would be formated as<code>1.00E5</code></li>      *<li>A value of 100 (scale zero) would be formated as<code>      * 1E2</code></li><br>      * If<code>bd</code> has a precision higher than 20, this method will      * truncate the output string to have a precision of 20 (no rounding will be      * done, just a truncate).      */
+comment|/**    * Formats a {@link BigDecimal} value to a string in scientific notation For    * example<br>    *    *<ul>    *<li>A value of 0.00001234 would be formated as<code>1.234E-5</code></li>    *<li>A value of 100000.00 would be formated as<code>1.00E5</code></li>    *<li>A value of 100 (scale zero) would be formated as<code>    * 1E2</code></li><br>    * If<code>bd</code> has a precision higher than 20, this method will    * truncate the output string to have a precision of 20 (no rounding will be    * done, just a truncate).    */
 specifier|public
 specifier|static
 name|String
@@ -2036,7 +2036,7 @@ name|toString
 argument_list|()
 return|;
 block|}
-comment|/**      * Replaces every occurrence of<code>find</code> in<code>s</code> with      *<code>replace</code>.      */
+comment|/**    * Replaces every occurrence of<code>find</code> in<code>s</code> with    *<code>replace</code>.    */
 specifier|public
 specifier|static
 specifier|final
@@ -2184,7 +2184,7 @@ name|toString
 argument_list|()
 return|;
 block|}
-comment|/**      * Creates a file-protocol URL for the given file.      */
+comment|/**    * Creates a file-protocol URL for the given file.    */
 specifier|public
 specifier|static
 name|URL
@@ -2290,7 +2290,7 @@ name|path
 argument_list|)
 return|;
 block|}
-comment|/**      * Gets a timestamp string for use in file names. The generated timestamp      * string reflects the current time.      */
+comment|/**    * Gets a timestamp string for use in file names. The generated timestamp    * string reflects the current time.    */
 specifier|public
 specifier|static
 name|String
@@ -2321,7 +2321,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**      * Converts double-quoted Java strings to their contents. For example,      *<code>"foo\"bar"</code> becomes<code>foo"bar</code>.      */
+comment|/**    * Converts double-quoted Java strings to their contents. For example,    *<code>"foo\"bar"</code> becomes<code>foo"bar</code>.    */
 specifier|public
 specifier|static
 name|String
@@ -2437,7 +2437,7 @@ return|return
 name|s1
 return|;
 block|}
-comment|/**      * Converts an arbitrary string into a string suitable for use as a Java      * identifier.      *      *<p>The mapping is one-to-one (that is, distinct strings will produce      * distinct java identifiers). The mapping is also reversible, but the      * inverse mapping is not implemented.</p>      *      *<p>A valid Java identifier must start with a Unicode letter, underscore,      * or dollar sign ($). The other characters, if any, can be a Unicode      * letter, underscore, dollar sign, or digit.</p>      *      *<p>This method uses an algorithm similar to URL encoding. Valid      * characters are unchanged; invalid characters are converted to an      * underscore followed by the hex code of the character; and underscores are      * doubled.</p>      *      * Examples:      *      *<ul>      *<li><code>toJavaId("foo")</code> returns<code>"foo"</code>      *<li><code>toJavaId("foo bar")</code> returns<code>"foo_20_bar"</code>      *<li><code>toJavaId("foo_bar")</code> returns<code>"foo__bar"</code>      *<li><code>toJavaId("0bar")</code> returns<code>"_40_bar"</code> (digits      * are illegal as a prefix)      *<li><code>toJavaId("foo0bar")</code> returns<code>"foo0bar"</code>      *</ul>      *      * @testcase      */
+comment|/**    * Converts an arbitrary string into a string suitable for use as a Java    * identifier.    *    *<p>The mapping is one-to-one (that is, distinct strings will produce    * distinct java identifiers). The mapping is also reversible, but the    * inverse mapping is not implemented.</p>    *    *<p>A valid Java identifier must start with a Unicode letter, underscore,    * or dollar sign ($). The other characters, if any, can be a Unicode    * letter, underscore, dollar sign, or digit.</p>    *    *<p>This method uses an algorithm similar to URL encoding. Valid    * characters are unchanged; invalid characters are converted to an    * underscore followed by the hex code of the character; and underscores are    * doubled.</p>    *    * Examples:    *    *<ul>    *<li><code>toJavaId("foo")</code> returns<code>"foo"</code>    *<li><code>toJavaId("foo bar")</code> returns<code>"foo_20_bar"</code>    *<li><code>toJavaId("foo_bar")</code> returns<code>"foo__bar"</code>    *<li><code>toJavaId("0bar")</code> returns<code>"_40_bar"</code> (digits    * are illegal as a prefix)    *<li><code>toJavaId("foo0bar")</code> returns<code>"foo0bar"</code>    *</ul>    *    * @testcase    */
 specifier|public
 specifier|static
 name|String
@@ -2642,7 +2642,7 @@ name|toString
 argument_list|()
 return|;
 block|}
-comment|/**      * Materializes the results of a {@link java.util.Iterator} as a {@link      * java.util.List}.      *      * @param iter iterator to materialize      *      * @return materialized list      */
+comment|/**    * Materializes the results of a {@link java.util.Iterator} as a {@link    * java.util.List}.    *    * @param iter iterator to materialize    * @return materialized list    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -2734,7 +2734,7 @@ name|modifiers
 argument_list|)
 return|;
 block|}
-comment|/**      * @return true if s==null or if s.length()==0      */
+comment|/**    * @return true if s==null or if s.length()==0    */
 specifier|public
 specifier|static
 name|boolean
@@ -2761,7 +2761,7 @@ literal|0
 operator|)
 return|;
 block|}
-comment|/**      * Converts a list of a string, with commas between elements.      *      * For example,      *<code>commaList(Arrays.asList({"a", "b"}))</code>      * returns "a, b".      *      * @param list List      * @return String representation of string      */
+comment|/**    * Converts a list of a string, with commas between elements.    *    * For example,    *<code>commaList(Arrays.asList({"a", "b"}))</code>    * returns "a, b".    *    * @param list List    * @return String representation of string    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -2852,7 +2852,7 @@ name|toString
 argument_list|()
 return|;
 block|}
-comment|/**      * Returns the connect string with which to connect to the 'Sales' test      * database. In the process, it loads the necessary drivers.      */
+comment|/**    * Returns the connect string with which to connect to the 'Sales' test    * database. In the process, it loads the necessary drivers.    */
 specifier|public
 specifier|static
 name|String
@@ -2962,7 +2962,7 @@ operator|=
 literal|true
 expr_stmt|;
 block|}
-comment|/**      * Returns the {@link Charset} object representing the value of {@link      * SaffronProperties#defaultCharset}      *      * @throws java.nio.charset.IllegalCharsetNameException If the given charset      * name is illegal      * @throws java.nio.charset.UnsupportedCharsetException If no support for      * the named charset is available in this instance of the Java virtual      * machine      */
+comment|/**    * Returns the {@link Charset} object representing the value of {@link    * SaffronProperties#defaultCharset}    *    * @throws java.nio.charset.IllegalCharsetNameException If the given charset    *                                                      name is illegal    * @throws java.nio.charset.UnsupportedCharsetException If no support for    *                                                      the named charset is    *                                                      available in this    *                                                      instance of the Java    *                                                      virtual machine    */
 specifier|public
 specifier|static
 name|Charset
@@ -3101,7 +3101,7 @@ return|return
 name|ae
 return|;
 block|}
-comment|/**      * Retrieves messages in a exception and writes them to a string. In the      * string returned, each message will appear on a different line.      *      * @return a non-null string containing all messages of the exception      */
+comment|/**    * Retrieves messages in a exception and writes them to a string. In the    * string returned, each message will appear on a different line.    *    * @return a non-null string containing all messages of the exception    */
 specifier|public
 specifier|static
 name|String
@@ -3197,7 +3197,7 @@ name|toString
 argument_list|()
 return|;
 block|}
-comment|/**      * Returns the stack trace of a throwable. Called from native code.      *      * @param t Throwable      *      * @return Stack trace      */
+comment|/**    * Returns the stack trace of a throwable. Called from native code.    *    * @param t Throwable    * @return Stack trace    */
 specifier|public
 specifier|static
 name|String
@@ -3244,7 +3244,7 @@ name|toString
 argument_list|()
 return|;
 block|}
-comment|/**      * Checks a pre-condition.      *      *<p>For example,      *      *<pre>      * /**      *   * @ pre x != 0      *   * /      * void foo(int x) {      *     Util.pre(x != 0, "x != 0");      * }</pre>      *      * @param b Result of evaluating the pre-condition.      * @param description Description of the pre-condition.      */
+comment|/**    * Checks a pre-condition.    *    *<p>For example,    *    *<pre>    * /**    *   * @ pre x != 0    *   * /    * void foo(int x) {    *     Util.pre(x != 0, "x != 0");    * }</pre>    *    * @param b           Result of evaluating the pre-condition.    * @param description Description of the pre-condition.    */
 specifier|public
 specifier|static
 name|void
@@ -3273,7 +3273,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**      * Checks a post-condition.      *      *<p>For example,      *      *<pre>      * /**      *   * @ post return != 0      *   * /      * void foo(int x) {      *     int res = bar(x);      *     Util.post(res != 0, "return != 0");      * }</pre>      *      * @param b Result of evaluating the pre-condition.      * @param description Description of the pre-condition.      */
+comment|/**    * Checks a post-condition.    *    *<p>For example,    *    *<pre>    * /**    *   * @ post return != 0    *   * /    * void foo(int x) {    *     int res = bar(x);    *     Util.post(res != 0, "return != 0");    * }</pre>    *    * @param b           Result of evaluating the pre-condition.    * @param description Description of the pre-condition.    */
 specifier|public
 specifier|static
 name|void
@@ -3302,7 +3302,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**      * Checks an invariant.      *      *<p>This is similar to<code>assert</code> keyword, except that the      * condition is always evaluated even if asserts are disabled.      */
+comment|/**    * Checks an invariant.    *    *<p>This is similar to<code>assert</code> keyword, except that the    * condition is always evaluated even if asserts are disabled.    */
 specifier|public
 specifier|static
 name|void
@@ -3331,7 +3331,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**      * Returns a {@link java.lang.RuntimeException} indicating that a particular      * feature has not been implemented, but should be.      *      *<p>If every 'hole' in our functionality uses this method, it will be      * easier for us to identity the holes. Throwing a {@link      * java.lang.UnsupportedOperationException} isn't as good, because sometimes      * we actually want to partially implement an API.      *      *<p>Example usage:      *      *<blockquote>      *<pre><code>class MyVisitor extends BaseVisitor {      *     void accept(Foo foo) {      *         // Exception will identify which subclass forgot to override      *         // this method      *         throw Util.needToImplement(this);      *     }      * }</pre>      *</blockquote>      *      * @param o The object which was the target of the call, or null. Passing      * the object gives crucial information if a method needs to be overridden      * and a subclass forgot to do so.      *      * @return an {@link UnsupportedOperationException}.      */
+comment|/**    * Returns a {@link java.lang.RuntimeException} indicating that a particular    * feature has not been implemented, but should be.    *    *<p>If every 'hole' in our functionality uses this method, it will be    * easier for us to identity the holes. Throwing a {@link    * java.lang.UnsupportedOperationException} isn't as good, because sometimes    * we actually want to partially implement an API.    *    *<p>Example usage:    *    *<blockquote>    *<pre><code>class MyVisitor extends BaseVisitor {    *     void accept(Foo foo) {    *         // Exception will identify which subclass forgot to override    *         // this method    *         throw Util.needToImplement(this);    *     }    * }</pre>    *</blockquote>    *    * @param o The object which was the target of the call, or null. Passing    *          the object gives crucial information if a method needs to be    *          overridden and a subclass forgot to do so.    * @return an {@link UnsupportedOperationException}.    */
 specifier|public
 specifier|static
 name|RuntimeException
@@ -3379,7 +3379,7 @@ name|description
 argument_list|)
 throw|;
 block|}
-comment|/**      * Flags a piece of code as needing to be cleaned up before you check in.      *      *<p>Introduce a call to this method to indicate that a piece of code, or a      * javadoc comment, needs work before you check in. If you have an IDE which      * can easily trace references, this is an easy way to maintain a to-do      * list.      *      *<p><strong>Checked-in code must never call this method</strong>: you must      * remove all calls/references to this method before you check in.      *      *<p>The<code>argument</code> has generic type and determines the type of      * the result. This allows you to use the method inside an expression, for      * example      *      *<blockquote>      *<pre><code>int x = Util.deprecated(0, false);</code></pre>      *</blockquote>      *      * but the usual usage is to pass in a descriptive string.      *      *<h3>Examples</h3>      *      *<h4>Example #1: Using<code>deprecated</code> to fail if a piece of      * supposedly dead code is reached</h4>      *      *<blockquote>      *<pre><code>void foo(int x) {      *     if (x&lt; 0) {      *         // If this code is executed, an error will be thrown.      *         Util.deprecated(      *             "no longer need to handle negative numbers", true);      *         bar(x);      *     } else {      *         baz(x);      *     }      * }</code></pre>      *</blockquote>      *      *<h4>Example #2: Using<code>deprecated</code> to comment out dead      * code</h4>      *      *<blockquote>      *<pre>if (Util.deprecated(false, false)) {      *     // This code will not be executed, but an error will not be thrown.      *     baz();      * }</pre>      *</blockquote>      *      * @param argument Arbitrary argument to the method.      * @param fail Whether to throw an exception if this method is called      *      * @return The value of the<code>argument</code>.      *      * @deprecated If a piece of code calls this method, it indicates that the      * code needs to be cleaned up.      */
+comment|/**    * Flags a piece of code as needing to be cleaned up before you check in.    *    *<p>Introduce a call to this method to indicate that a piece of code, or a    * javadoc comment, needs work before you check in. If you have an IDE which    * can easily trace references, this is an easy way to maintain a to-do    * list.    *    *<p><strong>Checked-in code must never call this method</strong>: you must    * remove all calls/references to this method before you check in.    *    *<p>The<code>argument</code> has generic type and determines the type of    * the result. This allows you to use the method inside an expression, for    * example    *    *<blockquote>    *<pre><code>int x = Util.deprecated(0, false);</code></pre>    *</blockquote>    *    * but the usual usage is to pass in a descriptive string.    *    *<h3>Examples</h3>    *    *<h4>Example #1: Using<code>deprecated</code> to fail if a piece of    * supposedly dead code is reached</h4>    *    *<blockquote>    *<pre><code>void foo(int x) {    *     if (x&lt; 0) {    *         // If this code is executed, an error will be thrown.    *         Util.deprecated(    *             "no longer need to handle negative numbers", true);    *         bar(x);    *     } else {    *         baz(x);    *     }    * }</code></pre>    *</blockquote>    *    *<h4>Example #2: Using<code>deprecated</code> to comment out dead    * code</h4>    *    *<blockquote>    *<pre>if (Util.deprecated(false, false)) {    *     // This code will not be executed, but an error will not be thrown.    *     baz();    * }</pre>    *</blockquote>    *    * @param argument Arbitrary argument to the method.    * @param fail     Whether to throw an exception if this method is called    * @return The value of the<code>argument</code>.    * @deprecated If a piece of code calls this method, it indicates that the    * code needs to be cleaned up.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -3410,7 +3410,7 @@ return|return
 name|argument
 return|;
 block|}
-comment|/**      * Uses {@link System#loadLibrary(String)} to load a native library      * correctly under mingw (Windows/Cygwin) and Linux environments.      *      *<p>This method also implements a work-around for applications that wish      * to load AWT. AWT conflicts with some native libraries in a way that      * requires AWT to be loaded first. This method checks the system property      * named {@link #awtWorkaroundProperty} and if it is set to "on" (default;      * case-insensitive) it pre-loads AWT to avoid the conflict.      *      * @param libName the name of the library to load, as in {@link      * System#loadLibrary(String)}.      */
+comment|/**    * Uses {@link System#loadLibrary(String)} to load a native library    * correctly under mingw (Windows/Cygwin) and Linux environments.    *    *<p>This method also implements a work-around for applications that wish    * to load AWT. AWT conflicts with some native libraries in a way that    * requires AWT to be loaded first. This method checks the system property    * named {@link #awtWorkaroundProperty} and if it is set to "on" (default;    * case-insensitive) it pre-loads AWT to avoid the conflict.    *    * @param libName the name of the library to load, as in {@link    *                System#loadLibrary(String)}.    */
 specifier|public
 specifier|static
 name|void
@@ -3488,7 +3488,7 @@ name|libName
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Returns whether an array of strings contains a given string among the      * first<code>length</code> entries.      *      * @param a Array of strings      * @param length Number of entries to search      * @param s String to seek      *      * @return Whether array contains the name      */
+comment|/**    * Returns whether an array of strings contains a given string among the    * first<code>length</code> entries.    *    * @param a      Array of strings    * @param length Number of entries to search    * @param s      String to seek    * @return Whether array contains the name    */
 specifier|public
 specifier|static
 name|boolean
@@ -3542,7 +3542,7 @@ return|return
 literal|false
 return|;
 block|}
-comment|/**      * Reads all remaining contents from a {@link java.io.Reader} and returns      * them as a string.      *      * @param reader reader to read from      *      * @return reader contents as string      */
+comment|/**    * Reads all remaining contents from a {@link java.io.Reader} and returns    * them as a string.    *    * @param reader reader to read from    * @return reader contents as string    */
 specifier|public
 specifier|static
 name|String
@@ -3616,7 +3616,7 @@ name|toString
 argument_list|()
 return|;
 block|}
-comment|/**      * Closes a Jar, ignoring any I/O exception. This should only be      * used in finally blocks when it's necessary to avoid throwing an exception      * which might mask a real exception.      *      * @param jar jar to close      */
+comment|/**    * Closes a Jar, ignoring any I/O exception. This should only be    * used in finally blocks when it's necessary to avoid throwing an exception    * which might mask a real exception.    *    * @param jar jar to close    */
 specifier|public
 specifier|static
 name|void
@@ -3651,7 +3651,7 @@ block|{
 comment|// intentionally suppressed
 block|}
 block|}
-comment|/**      * Closes an InputStream, ignoring any I/O exception. This should only be      * used in finally blocks when it's necessary to avoid throwing an exception      * which might mask a real exception.      *      * @param stream stream to close      */
+comment|/**    * Closes an InputStream, ignoring any I/O exception. This should only be    * used in finally blocks when it's necessary to avoid throwing an exception    * which might mask a real exception.    *    * @param stream stream to close    */
 specifier|public
 specifier|static
 name|void
@@ -3686,7 +3686,7 @@ block|{
 comment|// intentionally suppressed
 block|}
 block|}
-comment|/**      * Closes an OutputStream, ignoring any I/O exception. This should only be      * used in finally blocks when it's necessary to avoid throwing an exception      * which might mask a real exception. If you want to make sure that data has      * been successfully flushed, do NOT use this anywhere else; use      * stream.close() instead.      *      * @param stream stream to close      */
+comment|/**    * Closes an OutputStream, ignoring any I/O exception. This should only be    * used in finally blocks when it's necessary to avoid throwing an exception    * which might mask a real exception. If you want to make sure that data has    * been successfully flushed, do NOT use this anywhere else; use    * stream.close() instead.    *    * @param stream stream to close    */
 specifier|public
 specifier|static
 name|void
@@ -3721,7 +3721,7 @@ block|{
 comment|// intentionally suppressed
 block|}
 block|}
-comment|/**      * Closes a Reader, ignoring any I/O exception. This should only be used in      * finally blocks when it's necessary to avoid throwing an exception which      * might mask a real exception.      *      * @param reader reader to close      */
+comment|/**    * Closes a Reader, ignoring any I/O exception. This should only be used in    * finally blocks when it's necessary to avoid throwing an exception which    * might mask a real exception.    *    * @param reader reader to close    */
 specifier|public
 specifier|static
 name|void
@@ -3756,7 +3756,7 @@ block|{
 comment|// intentionally suppressed
 block|}
 block|}
-comment|/**      * Closes a Writer, ignoring any I/O exception. This should only be used in      * finally blocks when it's necessary to avoid throwing an exception which      * might mask a real exception. If you want to make sure that data has been      * successfully flushed, do NOT use this anywhere else; use writer.close()      * instead.      *      * @param writer writer to close      */
+comment|/**    * Closes a Writer, ignoring any I/O exception. This should only be used in    * finally blocks when it's necessary to avoid throwing an exception which    * might mask a real exception. If you want to make sure that data has been    * successfully flushed, do NOT use this anywhere else; use writer.close()    * instead.    *    * @param writer writer to close    */
 specifier|public
 specifier|static
 name|void
@@ -3791,7 +3791,7 @@ block|{
 comment|// intentionally suppressed
 block|}
 block|}
-comment|/**      * Closes a Statement, ignoring any SQL exception. This should only be used      * in finally blocks when it's necessary to avoid throwing an exception      * which might mask a real exception.      *      * @param stmt stmt to close      */
+comment|/**    * Closes a Statement, ignoring any SQL exception. This should only be used    * in finally blocks when it's necessary to avoid throwing an exception    * which might mask a real exception.    *    * @param stmt stmt to close    */
 specifier|public
 specifier|static
 name|void
@@ -3826,7 +3826,7 @@ block|{
 comment|// intentionally suppressed
 block|}
 block|}
-comment|/**      * Closes a Connection, ignoring any SQL exception. This should only be used      * in finally blocks when it's necessary to avoid throwing an exception      * which might mask a real exception.      *      * @param connection connection to close      */
+comment|/**    * Closes a Connection, ignoring any SQL exception. This should only be used    * in finally blocks when it's necessary to avoid throwing an exception    * which might mask a real exception.    *    * @param connection connection to close    */
 specifier|public
 specifier|static
 name|void
@@ -3861,7 +3861,7 @@ block|{
 comment|// intentionally suppressed
 block|}
 block|}
-comment|/**      * Trims trailing spaces from a string.      *      * @param s string to be trimmed      *      * @return trimmed string      */
+comment|/**    * Trims trailing spaces from a string.    *    * @param s string to be trimmed    * @return trimmed string    */
 specifier|public
 specifier|static
 name|String
@@ -3945,7 +3945,7 @@ return|return
 literal|""
 return|;
 block|}
-comment|/**      * Pads a string with spaces up to a given length.      *      * @param s string to be padded      * @param len desired length      *      * @return padded string      */
+comment|/**    * Pads a string with spaces up to a given length.    *    * @param s   string to be padded    * @param len desired length    * @return padded string    */
 specifier|public
 specifier|static
 name|String
@@ -4006,7 +4006,7 @@ name|toString
 argument_list|()
 return|;
 block|}
-comment|/** Converts an iterable to a string. */
+comment|/**    * Converts an iterable to a string.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -4103,7 +4103,7 @@ name|toString
 argument_list|()
 return|;
 block|}
-comment|/**      * Converts a Java timezone to POSIX format, so that the boost C++ library      * can instantiate timezone objects.      *      *<p><a      * href="http://www.opengroup.org/onlinepubs/000095399/basedefs/xbd_chap08.html">POSIX      * IEEE 1003.1</a> defines a format for timezone specifications.      *      *<p>The boost C++ library can read these specifications and instantiate<a      * href="http://www.boost.org/doc/html/date_time/local_time.html#date_time.local_time.posix_time_zone">      * posix_time_zone</a> objects from them. The purpose of this method,      * therefore, is to allow the C++ code such as the fennel calculator to use      * the same notion of timezone as Java code.      *      *<p>The format is as follows:      *      *<blockquote>"std offset dst [offset],start[/time],end[/time]"      *</blockquote>      *      * where:      *      *<ul>      *<li>'std' specifies the abbrev of the time zone.      *<li>'offset' is the offset from UTC, and takes the form<code>      * [+|-]hh[:mm[:ss]] {h=0-23, m/s=0-59}</code>      *<li>'dst' specifies the abbrev of the time zone during daylight savings      * time      *<li>The second offset is how many hours changed during DST. Default=1      *<li>'start'& 'end' are the dates when DST goes into (and out of) effect.      * They can each be one of three forms:      *      *<ol>      *<li>Mm.w.d {month=1-12, week=1-5 (5 is always last), day=0-6}      *<li>Jn {n=1-365 Feb29 is never counted}      *<li>n {n=0-365 Feb29 is counted in leap years}      *</ol>      *<li>'time' has the same format as 'offset', and defaults to 02:00:00      *      *<p>For example:      *      *<ul>      *<li>"PST-8PDT01:00:00,M4.1.0/02:00:00,M10.1.0/02:00:00"; or more tersely      *<li>"PST-8PDT,M4.1.0,M10.1.0"      *</ul>      *      *<p>(Real format strings do not contain spaces; they are in the above      * template only for readability.)      *      *<p>Boost apparently diverges from the POSIX standard in how it treats the      * sign of timezone offsets. The POSIX standard states '<i>If preceded by a      * '-', the timezone shall be east of the Prime Meridian; otherwise, it      * shall be west</i>', yet boost requires the opposite. For instance, PST      * has offset '-8' above. This method generates timezone strings consistent      * with boost's expectations.      *      * @param tz Timezone      * @param verbose Whether to include fields which can be omitted because      * they have their default values      *      * @return Timezone in POSIX format (offset sign reversed, per boost's      * idiosyncracies)      */
+comment|/**    * Converts a Java timezone to POSIX format, so that the boost C++ library    * can instantiate timezone objects.    *    *<p><a    * href="http://www.opengroup.org/onlinepubs/000095399/basedefs/xbd_chap08.html">POSIX    * IEEE 1003.1</a> defines a format for timezone specifications.    *    *<p>The boost C++ library can read these specifications and instantiate<a    * href="http://www.boost.org/doc/html/date_time/local_time.html#date_time.local_time.posix_time_zone">    * posix_time_zone</a> objects from them. The purpose of this method,    * therefore, is to allow the C++ code such as the fennel calculator to use    * the same notion of timezone as Java code.    *    *<p>The format is as follows:    *    *<blockquote>"std offset dst [offset],start[/time],end[/time]"    *</blockquote>    *    * where:    *    *<ul>    *<li>'std' specifies the abbrev of the time zone.    *<li>'offset' is the offset from UTC, and takes the form<code>    * [+|-]hh[:mm[:ss]] {h=0-23, m/s=0-59}</code>    *<li>'dst' specifies the abbrev of the time zone during daylight savings    * time    *<li>The second offset is how many hours changed during DST. Default=1    *<li>'start'& 'end' are the dates when DST goes into (and out of) effect.    * They can each be one of three forms:    *    *<ol>    *<li>Mm.w.d {month=1-12, week=1-5 (5 is always last), day=0-6}    *<li>Jn {n=1-365 Feb29 is never counted}    *<li>n {n=0-365 Feb29 is counted in leap years}    *</ol>    *<li>'time' has the same format as 'offset', and defaults to 02:00:00    *    *<p>For example:    *    *<ul>    *<li>"PST-8PDT01:00:00,M4.1.0/02:00:00,M10.1.0/02:00:00"; or more tersely    *<li>"PST-8PDT,M4.1.0,M10.1.0"    *</ul>    *    *<p>(Real format strings do not contain spaces; they are in the above    * template only for readability.)    *    *<p>Boost apparently diverges from the POSIX standard in how it treats the    * sign of timezone offsets. The POSIX standard states '<i>If preceded by a    * '-', the timezone shall be east of the Prime Meridian; otherwise, it    * shall be west</i>', yet boost requires the opposite. For instance, PST    * has offset '-8' above. This method generates timezone strings consistent    * with boost's expectations.    *    * @param tz      Timezone    * @param verbose Whether to include fields which can be omitted because    *                they have their default values    * @return Timezone in POSIX format (offset sign reversed, per boost's    * idiosyncracies)    */
 specifier|public
 specifier|static
 name|String
@@ -4534,7 +4534,7 @@ name|toString
 argument_list|()
 return|;
 block|}
-comment|/**      * Writes a daylight savings time transition to a POSIX timezone      * description.      *      * @param tz Timezone      * @param buf Buffer to append to      * @param mode Transition mode      * @param day Day of transition      * @param month Month of transition      * @param dayOfWeek Day of week of transition      * @param time Time of transition in millis      * @param timeMode Mode of time transition      * @param verbose Verbose      * @param isEnd Whether this transition is leaving DST      */
+comment|/**    * Writes a daylight savings time transition to a POSIX timezone    * description.    *    * @param tz        Timezone    * @param buf       Buffer to append to    * @param mode      Transition mode    * @param day       Day of transition    * @param month     Month of transition    * @param dayOfWeek Day of week of transition    * @param time      Time of transition in millis    * @param timeMode  Mode of time transition    * @param verbose   Verbose    * @param isEnd     Whether this transition is leaving DST    */
 specifier|private
 specifier|static
 name|void
@@ -4831,7 +4831,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Given a time expressed in milliseconds, append the time formatted as      * "hh[:mm[:ss]]".      *      * @param buf Buffer to append to      * @param millis Milliseconds      */
+comment|/**    * Given a time expressed in milliseconds, append the time formatted as    * "hh[:mm[:ss]]".    *    * @param buf    Buffer to append to    * @param millis Milliseconds    */
 specifier|private
 specifier|static
 name|void
@@ -4985,7 +4985,7 @@ name|seconds
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Parses a locale string.      *      *<p>The inverse operation of {@link java.util.Locale#toString()}.      *      * @param localeString Locale string, e.g. "en" or "en_US"      * @return Java locale object      */
+comment|/**    * Parses a locale string.    *    *<p>The inverse operation of {@link java.util.Locale#toString()}.    *    * @param localeString Locale string, e.g. "en" or "en_US"    * @return Java locale object    */
 specifier|public
 specifier|static
 name|Locale
@@ -5080,7 +5080,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**      * Runs an external application.      *      * @param cmdarray command and arguments, see {@link ProcessBuilder}      * @param logger if not null, command and exit status will be logged      * @param appInput if not null, data will be copied to application's stdin      * @param appOutput if not null, data will be captured from application's      * stdout and stderr      *      * @return application process exit value      *      * @throws IOException      * @throws InterruptedException      */
+comment|/**    * Runs an external application.    *    * @param cmdarray  command and arguments, see {@link ProcessBuilder}    * @param logger    if not null, command and exit status will be logged    * @param appInput  if not null, data will be copied to application's stdin    * @param appOutput if not null, data will be captured from application's    *                  stdout and stderr    * @return application process exit value    * @throws IOException    * @throws InterruptedException    */
 specifier|public
 specifier|static
 name|int
@@ -5120,7 +5120,7 @@ name|appOutput
 argument_list|)
 return|;
 block|}
-comment|/**      * Constructs a {@link ProcessBuilder} to run an external application.      *      * @param cmdarray command and arguments.      * @return a ProcessBuilder.      */
+comment|/**    * Constructs a {@link ProcessBuilder} to run an external application.    *    * @param cmdarray command and arguments.    * @return a ProcessBuilder.    */
 specifier|public
 specifier|static
 name|ProcessBuilder
@@ -5220,7 +5220,7 @@ name|cmdarray
 argument_list|)
 return|;
 block|}
-comment|/**      * Runs an external application process.      *      * @param pb {@link ProcessBuilder} for the application; might be returned by {@link #newAppProcess}.      * @param logger if not null, command and exit status will be logged here      * @param appInput if not null, data will be copied to application's stdin      * @param appOutput if not null, data will be captured from application's      * stdout and stderr      *      * @return application process exit value      * @throws IOException      * @throws InterruptedException      */
+comment|/**    * Runs an external application process.    *    * @param pb        {@link ProcessBuilder} for the application; might be returned by {@link #newAppProcess}.    * @param logger    if not null, command and exit status will be logged here    * @param appInput  if not null, data will be copied to application's stdin    * @param appOutput if not null, data will be captured from application's    *                  stdout and stderr    * @return application process exit value    * @throws IOException    * @throws InterruptedException    */
 specifier|public
 specifier|static
 name|int
@@ -5443,7 +5443,7 @@ return|return
 name|status
 return|;
 block|}
-comment|/**      * Converts a list whose members are automatically down-cast to a given      * type.      *      *<p>If a member of the backing list is not an instanceof<code>E</code>,      * the accessing method (such as {@link List#get}) will throw a {@link      * ClassCastException}.      *      *<p>All modifications are automatically written to the backing list. Not      * synchronized.      *      * @param list Backing list.      * @param clazz Class to cast to.      *      * @return A list whose members are of the desired type.      */
+comment|/**    * Converts a list whose members are automatically down-cast to a given    * type.    *    *<p>If a member of the backing list is not an instanceof<code>E</code>,    * the accessing method (such as {@link List#get}) will throw a {@link    * ClassCastException}.    *    *<p>All modifications are automatically written to the backing list. Not    * synchronized.    *    * @param list  Backing list.    * @param clazz Class to cast to.    * @return A list whose members are of the desired type.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -5483,7 +5483,7 @@ name|clazz
 argument_list|)
 return|;
 block|}
-comment|/**      * Converts a iterator whose members are automatically down-cast to a given      * type.      *      *<p>If a member of the backing iterator is not an instanceof<code>      * E</code>, {@link Iterator#next()}) will throw a {@link      * ClassCastException}.      *      *<p>All modifications are automatically written to the backing iterator.      * Not synchronized.      *      * @param iter Backing iterator.      * @param clazz Class to cast to.      *      * @return An iterator whose members are of the desired type.      */
+comment|/**    * Converts a iterator whose members are automatically down-cast to a given    * type.    *    *<p>If a member of the backing iterator is not an instanceof<code>    * E</code>, {@link Iterator#next()}) will throw a {@link    * ClassCastException}.    *    *<p>All modifications are automatically written to the backing iterator.    * Not synchronized.    *    * @param iter  Backing iterator.    * @param clazz Class to cast to.    * @return An iterator whose members are of the desired type.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -5561,7 +5561,7 @@ block|}
 block|}
 return|;
 block|}
-comment|/**      * Converts an {@link Iterable} whose members are automatically down-cast to      * a given type.      *      *<p>All modifications are automatically written to the backing iterator.      * Not synchronized.      *      * @param iterable Backing iterable      * @param clazz Class to cast to      *      * @return An iterable whose members are of the desired type.      */
+comment|/**    * Converts an {@link Iterable} whose members are automatically down-cast to    * a given type.    *    *<p>All modifications are automatically written to the backing iterator.    * Not synchronized.    *    * @param iterable Backing iterable    * @param clazz    Class to cast to    * @return An iterable whose members are of the desired type.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -5621,7 +5621,7 @@ block|}
 block|}
 return|;
 block|}
-comment|/**      * Makes a collection of untyped elements appear as a list of strictly typed      * elements, by filtering out those which are not of the correct type.      *      *<p>The returned object is an {@link Iterable},      * which makes it ideal for use with the 'foreach' construct. For example,      *      *<blockquote><code>List&lt;Number&gt; numbers = Arrays.asList(1, 2, 3.14,      * 4, null, 6E23);<br/>      * for (int myInt : filter(numbers, Integer.class)) {<br/>      *&nbsp;&nbsp;&nbsp;&nbsp;print(i);<br/>      * }</code></blockquote>      *      * will print 1, 2, 4.      *      * @param iterable Iterable      * @param includeFilter Class whose instances to include      */
+comment|/**    * Makes a collection of untyped elements appear as a list of strictly typed    * elements, by filtering out those which are not of the correct type.    *    *<p>The returned object is an {@link Iterable},    * which makes it ideal for use with the 'foreach' construct. For example,    *    *<blockquote><code>List&lt;Number&gt; numbers = Arrays.asList(1, 2, 3.14,    * 4, null, 6E23);<br/>    * for (int myInt : filter(numbers, Integer.class)) {<br/>    *&nbsp;&nbsp;&nbsp;&nbsp;print(i);<br/>    * }</code></blockquote>    *    * will print 1, 2, 4.    *    * @param iterable      Iterable    * @param includeFilter Class whose instances to include    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -5810,7 +5810,7 @@ block|}
 block|}
 return|;
 block|}
-comment|/**      * Returns a subset of a list containing only elements of a given type.      *      *<p>Modifications to the list are NOT written back to the source list.      *      * @param list List of objects      * @param includeFilter Class to filter for      *      * @return List of objects of given class (or a subtype)      */
+comment|/**    * Returns a subset of a list containing only elements of a given type.    *    *<p>Modifications to the list are NOT written back to the source list.    *    * @param list          List of objects    * @param includeFilter Class to filter for    * @return List of objects of given class (or a subtype)    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -5886,7 +5886,7 @@ return|return
 name|result
 return|;
 block|}
-comment|/**      * Converts a {@link Properties} object to a<code>{@link Map}&lt;String,      * String&gt;</code>.      *      *<p>This is necessary because {@link Properties} is a dinosaur class. It      * ought to extend<code>Map&lt;String,String&gt;</code>, but instead      * extends<code>{@link Hashtable}&lt;Object,Object&gt;</code>.      *      *<p>Typical usage, to iterate over a {@link Properties}:      *      *<blockquote>      *<code>      * Properties properties;<br/>      * for (Map.Entry&lt;String, String&gt; entry =      * Util.toMap(properties).entrySet()) {<br/>      *   println("key=" + entry.getKey() + ", value=" + entry.getValue());<br/>      * }      *</code>      *</blockquote>      */
+comment|/**    * Converts a {@link Properties} object to a<code>{@link Map}&lt;String,    * String&gt;</code>.    *    *<p>This is necessary because {@link Properties} is a dinosaur class. It    * ought to extend<code>Map&lt;String,String&gt;</code>, but instead    * extends<code>{@link Hashtable}&lt;Object,Object&gt;</code>.    *    *<p>Typical usage, to iterate over a {@link Properties}:    *    *<blockquote>    *<code>    * Properties properties;<br/>    * for (Map.Entry&lt;String, String&gt; entry =    * Util.toMap(properties).entrySet()) {<br/>    * println("key=" + entry.getKey() + ", value=" + entry.getValue());<br/>    * }    *</code>    *</blockquote>    */
 specifier|public
 specifier|static
 name|Map
@@ -5909,7 +5909,7 @@ operator|)
 name|properties
 return|;
 block|}
-comment|/**      * Returns a hashmap with given contents.      *      *<p>Use this method in initializers. Type parameters are inferred from      * context, and the contents are initialized declaratively. For example,      *      *<blockquote><code>Map&lt;String, Integer&gt; population =<br/>      *&nbsp;&nbsp;Olap4jUtil.mapOf(<br/>      *&nbsp;&nbsp;&nbsp;&nbsp;"UK", 65000000,<br/>      *&nbsp;&nbsp;&nbsp;&nbsp;"USA", 300000000);</code></blockquote>      *      * @param key First key      * @param value First value      * @param keyValues Second and sequent key/value pairs      * @param<K> Key type      * @param<V> Value type      * @return Map with given contents      */
+comment|/**    * Returns a hashmap with given contents.    *    *<p>Use this method in initializers. Type parameters are inferred from    * context, and the contents are initialized declaratively. For example,    *    *<blockquote><code>Map&lt;String, Integer&gt; population =<br/>    *&nbsp;&nbsp;Olap4jUtil.mapOf(<br/>    *&nbsp;&nbsp;&nbsp;&nbsp;"UK", 65000000,<br/>    *&nbsp;&nbsp;&nbsp;&nbsp;"USA", 300000000);</code></blockquote>    *    * @param key       First key    * @param value     First value    * @param keyValues Second and sequent key/value pairs    * @param<K>       Key type    * @param<V>       Value type    * @return Map with given contents    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -6013,7 +6013,7 @@ return|return
 name|map
 return|;
 block|}
-comment|/**      * Returns an exception indicating that we didn't expect to find this      * enumeration here.      *      * @param value Enumeration value which was not expected      *      * @return an error, to be thrown      */
+comment|/**    * Returns an exception indicating that we didn't expect to find this    * enumeration here.    *    * @param value Enumeration value which was not expected    * @return an error, to be thrown    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -6053,7 +6053,7 @@ literal|"' in this context"
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates a map of the values of an enumeration by name.      *      * @param clazz Enumeration class      *      * @return map of values      */
+comment|/**    * Creates a map of the values of an enumeration by name.    *    * @param clazz Enumeration class    * @return map of values    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -6154,7 +6154,7 @@ name|map
 argument_list|)
 return|;
 block|}
-comment|/**      * Returns the value of an enumeration with a particular name.      *      *<p>Similar to {@link Enum#valueOf(Class, String)}, but returns {@code      * null} rather than throwing {@link IllegalArgumentException}.      *      * @param clazz Enum class      * @param name Name of enum constant      * @param<T> Enum class type      *      * @return Enum constant or null      */
+comment|/**    * Returns the value of an enumeration with a particular name.    *    *<p>Similar to {@link Enum#valueOf(Class, String)}, but returns {@code    * null} rather than throwing {@link IllegalArgumentException}.    *    * @param clazz Enum class    * @param name  Name of enum constant    * @param<T>   Enum class type    * @return Enum constant or null    */
 annotation|@
 name|SuppressWarnings
 argument_list|(
@@ -6242,7 +6242,7 @@ name|name
 argument_list|)
 return|;
 block|}
-comment|/**      * Returns a string of N spaces.      */
+comment|/**    * Returns a string of N spaces.    */
 specifier|public
 specifier|static
 name|String
@@ -6263,7 +6263,7 @@ name|i
 argument_list|)
 return|;
 block|}
-comment|/** Creates a list that returns every {@code n}th element of a list,      * starting at element {@code k}.      *      *<p>It is OK if the list is empty or its size is not a multiple of      * {@code n}.</p>      *      *<p>For instance, {@code quotientList(list, 2, 0)} returns the even      * elements of a list, and {@code quotientList(list, 2, 1)} returns the odd      * elements. Those lists are the same length only if list has even size.</p>      */
+comment|/**    * Creates a list that returns every {@code n}th element of a list,    * starting at element {@code k}.    *    *<p>It is OK if the list is empty or its size is not a multiple of    * {@code n}.</p>    *    *<p>For instance, {@code quotientList(list, 2, 0)} returns the even    * elements of a list, and {@code quotientList(list, 2, 1)} returns the odd    * elements. Those lists are the same length only if list has even size.</p>    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -6452,7 +6452,7 @@ block|}
 block|}
 return|;
 block|}
-comment|/** Converts an underscore-separated name into a camelCase name.      * For example, {@code uncamel("MY_JDBC_DRIVER")} returns "myJdbcDriver". */
+comment|/**    * Converts an underscore-separated name into a camelCase name.    * For example, {@code uncamel("MY_JDBC_DRIVER")} returns "myJdbcDriver".    */
 specifier|public
 specifier|static
 name|String
@@ -6562,7 +6562,7 @@ name|toString
 argument_list|()
 return|;
 block|}
-comment|/** Converts a camelCase name into an upper-case underscore-separated name.      * For example, {@code camelToUpper("myJdbcDriver")} returns      * "MY_JDBC_DRIVER". */
+comment|/**    * Converts a camelCase name into an upper-case underscore-separated name.    * For example, {@code camelToUpper("myJdbcDriver")} returns    * "MY_JDBC_DRIVER".    */
 specifier|public
 specifier|static
 name|String
@@ -6652,7 +6652,7 @@ name|toString
 argument_list|()
 return|;
 block|}
-comment|/** Returns whether the elements of {@code list} are distinct. */
+comment|/**    * Returns whether the elements of {@code list} are distinct.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -6723,7 +6723,7 @@ literal|true
 return|;
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------
-comment|/**      * Exception used to interrupt a tree walk of any kind.      */
+comment|/**    * Exception used to interrupt a tree walk of any kind.    */
 specifier|public
 specifier|static
 class|class
@@ -6858,7 +6858,7 @@ expr_stmt|;
 block|}
 block|}
 block|}
-comment|/** Populates this list with all prefix strings of a given string. All          * of the prefix strings share the same backing array of chars. */
+comment|/**      * Populates this list with all prefix strings of a given string. All      * of the prefix strings share the same backing array of chars.      */
 specifier|private
 name|void
 name|populate

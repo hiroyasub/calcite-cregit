@@ -65,7 +65,7 @@ class|class
 name|SqlDialect
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
-comment|/**      * A dialect useful for generating generic SQL. If you need to do something      * database-specific like quoting identifiers, don't rely on this dialect to      * do what you want.      */
+comment|/**    * A dialect useful for generating generic SQL. If you need to do something    * database-specific like quoting identifiers, don't rely on this dialect to    * do what you want.    */
 specifier|public
 specifier|static
 specifier|final
@@ -79,7 +79,7 @@ operator|.
 name|getDialect
 argument_list|()
 decl_stmt|;
-comment|/**      * A dialect useful for generating SQL which can be parsed by the      * Eigenbase parser, in particular quoting literals and identifiers. If you      * want a dialect that knows the full capabilities of the database, create      * one from a connection.      */
+comment|/**    * A dialect useful for generating SQL which can be parsed by the    * Eigenbase parser, in particular quoting literals and identifiers. If you    * want a dialect that knows the full capabilities of the database, create    * one from a connection.    */
 specifier|public
 specifier|static
 specifier|final
@@ -120,7 +120,7 @@ name|DatabaseProduct
 name|databaseProduct
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a<code>SqlDialect</code> from a DatabaseMetaData.      *      *<p>Does not maintain a reference to the DatabaseMetaData -- or, more      * importantly, to its {@link java.sql.Connection} -- after this call has      * returned.      *      * @param databaseMetaData used to determine which dialect of SQL to      * generate      */
+comment|/**    * Creates a<code>SqlDialect</code> from a DatabaseMetaData.    *    *<p>Does not maintain a reference to the DatabaseMetaData -- or, more    * importantly, to its {@link java.sql.Connection} -- after this call has    * returned.    *    * @param databaseMetaData used to determine which dialect of SQL to    *                         generate    */
 specifier|public
 specifier|static
 name|SqlDialect
@@ -213,7 +213,7 @@ name|identifierQuoteString
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates a SqlDialect.      *      * @param databaseProduct Database product; may be UNKNOWN, never null      * @param databaseProductName Database product name from JDBC driver      * @param identifierQuoteString String to quote identifiers. Null if quoting      *     is not supported. If "[", close quote is deemed to be "]".      */
+comment|/**    * Creates a SqlDialect.    *    * @param databaseProduct       Database product; may be UNKNOWN, never null    * @param databaseProductName   Database product name from JDBC driver    * @param identifierQuoteString String to quote identifiers. Null if quoting    *                              is not supported. If "[", close quote is    *                              deemed to be "]".    */
 specifier|public
 name|SqlDialect
 parameter_list|(
@@ -326,7 +326,7 @@ name|identifierEndQuoteString
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Converts a product name and version (per the JDBC driver) into a product      * enumeration.      *      * @param productName Product name      * @param productVersion Product version      * @return database product      */
+comment|/**    * Converts a product name and version (per the JDBC driver) into a product    * enumeration.    *    * @param productName    Product name    * @param productVersion Product version    * @return database product    */
 specifier|public
 specifier|static
 name|DatabaseProduct
@@ -718,7 +718,7 @@ return|;
 block|}
 block|}
 comment|// -- detect various databases --
-comment|/**      * Encloses an identifier in quotation marks appropriate for the current SQL      * dialect.      *      *<p>For example,<code>quoteIdentifier("emp")</code> yields a string      * containing<code>"emp"</code> in Oracle, and a string containing<code>      * [emp]</code> in Access.      *      * @param val Identifier to quote      *      * @return Quoted identifier      */
+comment|/**    * Encloses an identifier in quotation marks appropriate for the current SQL    * dialect.    *    *<p>For example,<code>quoteIdentifier("emp")</code> yields a string    * containing<code>"emp"</code> in Oracle, and a string containing<code>    * [emp]</code> in Access.    *    * @param val Identifier to quote    * @return Quoted identifier    */
 specifier|public
 name|String
 name|quoteIdentifier
@@ -759,7 +759,7 @@ operator|+
 name|identifierEndQuoteString
 return|;
 block|}
-comment|/**      * Encloses an identifier in quotation marks appropriate for the current SQL      * dialect, writing the result to a {@link StringBuilder}.      *      *<p>For example,<code>quoteIdentifier("emp")</code> yields a string      * containing<code>"emp"</code> in Oracle, and a string containing<code>      * [emp]</code> in Access.      *      * @param buf Buffer      * @param val Identifier to quote      *      * @return The buffer      */
+comment|/**    * Encloses an identifier in quotation marks appropriate for the current SQL    * dialect, writing the result to a {@link StringBuilder}.    *    *<p>For example,<code>quoteIdentifier("emp")</code> yields a string    * containing<code>"emp"</code> in Oracle, and a string containing<code>    * [emp]</code> in Access.    *    * @param buf Buffer    * @param val Identifier to quote    * @return The buffer    */
 specifier|public
 name|StringBuilder
 name|quoteIdentifier
@@ -827,7 +827,7 @@ return|return
 name|buf
 return|;
 block|}
-comment|/**      * Quotes a multi-part identifier.      *      * @param buf Buffer      * @param identifiers List of parts of the identifier to quote      *      * @return The buffer      */
+comment|/**    * Quotes a multi-part identifier.    *    * @param buf         Buffer    * @param identifiers List of parts of the identifier to quote    * @return The buffer    */
 specifier|public
 name|StringBuilder
 name|quoteIdentifier
@@ -883,7 +883,7 @@ return|return
 name|buf
 return|;
 block|}
-comment|/**      * Returns whether a given identifier needs to be quoted.      */
+comment|/**    * Returns whether a given identifier needs to be quoted.    */
 specifier|public
 name|boolean
 name|identifierNeedsToBeQuoted
@@ -910,7 +910,7 @@ name|matches
 argument_list|()
 return|;
 block|}
-comment|/**      * Converts a string into a string literal. For example,<code>can't      * run</code> becomes<code>'can''t run'</code>.      */
+comment|/**    * Converts a string into a string literal. For example,<code>can't    * run</code> becomes<code>'can''t run'</code>.    */
 specifier|public
 name|String
 name|quoteStringLiteral
@@ -973,7 +973,7 @@ literal|"'"
 return|;
 block|}
 block|}
-comment|/**      * Returns whether the string contains any characters outside the      * comfortable 7-bit ASCII range (32 through 127).      *      * @param s String      * @return Whether string contains any non-7-bit-ASCII characters      */
+comment|/**    * Returns whether the string contains any characters outside the    * comfortable 7-bit ASCII range (32 through 127).    *    * @param s String    * @return Whether string contains any non-7-bit-ASCII characters    */
 specifier|private
 specifier|static
 name|boolean
@@ -1031,7 +1031,7 @@ return|return
 literal|false
 return|;
 block|}
-comment|/**      * Converts a string into a unicode string literal. For example,      *<code>can't{tab}run\</code> becomes<code>u'can''t\0009run\\'</code>.      */
+comment|/**    * Converts a string into a unicode string literal. For example,    *<code>can't{tab}run\</code> becomes<code>u'can''t\0009run\\'</code>.    */
 specifier|public
 name|void
 name|quoteStringLiteralUnicode
@@ -1241,9 +1241,9 @@ block|,
 literal|'e'
 block|,
 literal|'f'
-block|,     }
+block|,   }
 decl_stmt|;
-comment|/**      * Converts a string literal back into a string. For example,<code>'can''t      * run'</code> becomes<code>can't run</code>.      */
+comment|/**    * Converts a string literal back into a string. For example,<code>'can''t    * run'</code> becomes<code>can't run</code>.    */
 specifier|public
 name|String
 name|unquoteStringLiteral
@@ -1370,7 +1370,7 @@ operator|.
 name|POSTGRESQL
 return|;
 block|}
-comment|/**      * Converts a timestamp to a SQL timestamp literal, e.g.      * {@code TIMESTAMP '2009-12-17 12:34:56'}.      *      *<p>Timestamp values do not have a time zone. We therefore interpret them      * as the number of milliseconds after the UTC epoch, and the formatted      * value is that time in UTC.      *      *<p>In particular,      *      *<blockquote><code>quoteTimestampLiteral(new Timestamp(0));</code>      *</blockquote>      *      * returns {@code TIMESTAMP '1970-01-01 00:00:00'}, regardless of the JVM's      * timezone.      *      * @param timestamp Timestamp      * @return SQL timestamp literal      */
+comment|/**    * Converts a timestamp to a SQL timestamp literal, e.g.    * {@code TIMESTAMP '2009-12-17 12:34:56'}.    *    *<p>Timestamp values do not have a time zone. We therefore interpret them    * as the number of milliseconds after the UTC epoch, and the formatted    * value is that time in UTC.    *    *<p>In particular,    *    *<blockquote><code>quoteTimestampLiteral(new Timestamp(0));</code>    *</blockquote>    *    * returns {@code TIMESTAMP '1970-01-01 00:00:00'}, regardless of the JVM's    * timezone.    *    * @param timestamp Timestamp    * @return SQL timestamp literal    */
 specifier|public
 name|String
 name|quoteTimestampLiteral
@@ -1410,7 +1410,7 @@ name|timestamp
 argument_list|)
 return|;
 block|}
-comment|/**      * Returns the database this dialect belongs to,      * {@link SqlDialect.DatabaseProduct#UNKNOWN} if not known, never null.      *      * @return Database product      */
+comment|/**    * Returns the database this dialect belongs to,    * {@link SqlDialect.DatabaseProduct#UNKNOWN} if not known, never null.    *    * @return Database product    */
 specifier|public
 name|DatabaseProduct
 name|getDatabaseProduct
@@ -1420,7 +1420,7 @@ return|return
 name|databaseProduct
 return|;
 block|}
-comment|/** Returns whether the dialect supports character set names as part of a      * data type, for instance {@code VARCHAR(30) CHARACTER SET `ISO-8859-1`}.      */
+comment|/**    * Returns whether the dialect supports character set names as part of a    * data type, for instance {@code VARCHAR(30) CHARACTER SET `ISO-8859-1`}.    */
 specifier|public
 name|boolean
 name|supportsCharSet
@@ -1434,7 +1434,7 @@ operator|.
 name|MYSQL
 return|;
 block|}
-comment|/**      * A few utility functions copied from org.eigenbase.util.Util. We have      * copied them because we wish to keep SqlDialect's dependencies to a      * minimum.      */
+comment|/**    * A few utility functions copied from org.eigenbase.util.Util. We have    * copied them because we wish to keep SqlDialect's dependencies to a    * minimum.    */
 specifier|public
 specifier|static
 class|class
@@ -1479,7 +1479,7 @@ return|return
 name|ae
 return|;
 block|}
-comment|/**          * Replaces every occurrence of<code>find</code> in<code>s</code> with          *<code>replace</code>.          */
+comment|/**      * Replaces every occurrence of<code>find</code> in<code>s</code> with      *<code>replace</code>.      */
 specifier|public
 specifier|static
 specifier|final
@@ -1628,7 +1628,7 @@ argument_list|()
 return|;
 block|}
 block|}
-comment|/**      * Rough list of flavors of database.      *      *<p>These values cannot help you distinguish between features that exist      * in different versions or ports of a database, but they are sufficient      * to drive a {@code switch} statement if behavior is broadly different      * between say, MySQL and Oracle.      *      *<p>If possible, you should not refer to particular database at all; write      * extend the dialect to describe the particular capability, for example,      * whether the database allows expressions to appear in the GROUP BY clause.      */
+comment|/**    * Rough list of flavors of database.    *    *<p>These values cannot help you distinguish between features that exist    * in different versions or ports of a database, but they are sufficient    * to drive a {@code switch} statement if behavior is broadly different    * between say, MySQL and Oracle.    *    *<p>If possible, you should not refer to particular database at all; write    * extend the dialect to describe the particular capability, for example,    * whether the database allows expressions to appear in the GROUP BY clause.    */
 specifier|public
 enum|enum
 name|DatabaseProduct
@@ -1780,7 +1780,7 @@ argument_list|,
 literal|"\""
 argument_list|)
 block|,
-comment|/**          * Placeholder for the unknown database.          *          *<p>Its dialect is useful for generating generic SQL. If you need to          * do something database-specific like quoting identifiers, don't rely          * on this dialect to do what you want.          */
+comment|/**      * Placeholder for the unknown database.      *      *<p>Its dialect is useful for generating generic SQL. If you need to      * do something database-specific like quoting identifiers, don't rely      * on this dialect to do what you want.      */
 name|UNKNOWN
 argument_list|(
 literal|"Unknown"
@@ -1824,7 +1824,7 @@ operator|=
 name|quoteString
 expr_stmt|;
 block|}
-comment|/**          * Returns a dummy dialect for this database.          *          *<p>Since databases have many versions and flavors, this dummy dialect          * is at best an approximation. If you want exact information, better to          * use a dialect created from an actual connection's metadata          * (see {@link SqlDialect#create(java.sql.DatabaseMetaData)}).          *          * @return Dialect representing lowest-common-demoninator behavior for          * all versions of this database          */
+comment|/**      * Returns a dummy dialect for this database.      *      *<p>Since databases have many versions and flavors, this dummy dialect      * is at best an approximation. If you want exact information, better to      * use a dialect created from an actual connection's metadata      * (see {@link SqlDialect#create(java.sql.DatabaseMetaData)}).      *      * @return Dialect representing lowest-common-demoninator behavior for      * all versions of this database      */
 specifier|public
 name|SqlDialect
 name|getDialect

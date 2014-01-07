@@ -38,11 +38,11 @@ block|,
 comment|//                  3    any      1 true     12 InverseFunction
 name|Function
 block|,
-comment|/**      * An inverse surjection has a source for every target, and no source has      * more than one target.      */
+comment|/**    * An inverse surjection has a source for every target, and no source has    * more than one target.    */
 comment|//                  4      1<= 1 partial  1 Surjection
 name|InverseSurjection
 block|,
-comment|/**      * A partial surjection has no more than one source for any target, and no      * more than one target for any source.      */
+comment|/**    * A partial surjection has no more than one source for any target, and no    * more than one target for any source.    */
 comment|//                  5<= 1<= 1 partial  5 PartialSurjection
 name|PartialSurjection
 block|,
@@ -64,7 +64,7 @@ block|,
 comment|//                 11    any>= 1 multi    14
 name|Eleven
 block|,
-comment|/**      * An inverse function has a source for every target, but a source might      * have 0, 1 or more targets.      *      *<p>Obeys the constaints {@link MappingType#isMandatorySource()}, {@link      * MappingType#isSingleSource()}.      *      *<p>Similar types:      *      *<ul>      *<li> {@link #InverseSurjection} is stronger (a source may not have      * multiple targets);      *<li>{@link #InversePartialFunction} is weaker (a target may have 0 or 1      * sources).      *</ul>      */
+comment|/**    * An inverse function has a source for every target, but a source might    * have 0, 1 or more targets.    *    *<p>Obeys the constaints {@link MappingType#isMandatorySource()}, {@link    * MappingType#isSingleSource()}.    *    *<p>Similar types:    *    *<ul>    *<li> {@link #InverseSurjection} is stronger (a source may not have    * multiple targets);    *<li>{@link #InversePartialFunction} is weaker (a target may have 0 or 1    * sources).    *</ul>    */
 comment|//                 12      1    any multi    3 Function
 name|InverseFunction
 block|,
@@ -130,7 +130,7 @@ name|inverseOrdinal
 index|]
 return|;
 block|}
-comment|/**      * Returns whether this mapping type is (possibly a weaker form of) a given      * mapping type.      *      *<p>For example, a {@link #Bijection} is a {@link #Function}, but not      * every {link #Function} is a {@link #Bijection}.      */
+comment|/**    * Returns whether this mapping type is (possibly a weaker form of) a given    * mapping type.    *    *<p>For example, a {@link #Bijection} is a {@link #Function}, but not    * every {link #Function} is a {@link #Bijection}.    */
 specifier|public
 name|boolean
 name|isA
@@ -154,7 +154,7 @@ name|ordinal
 argument_list|()
 return|;
 block|}
-comment|/**      * A mapping is a total function if every source has precisely one target.      */
+comment|/**    * A mapping is a total function if every source has precisely one target.    */
 specifier|public
 name|boolean
 name|isFunction
@@ -175,7 +175,7 @@ operator|==
 literal|0
 return|;
 block|}
-comment|/**      * A mapping is a partial function if every source has at most one target.      */
+comment|/**    * A mapping is a partial function if every source has at most one target.    */
 specifier|public
 name|boolean
 name|isPartialFunction
@@ -192,7 +192,7 @@ operator|==
 literal|0
 return|;
 block|}
-comment|/**      * A mapping is a surjection if it is a function and every target has at      * least one source.      */
+comment|/**    * A mapping is a surjection if it is a function and every target has at    * least one source.    */
 specifier|public
 name|boolean
 name|isSurjection
@@ -215,7 +215,7 @@ operator|==
 literal|0
 return|;
 block|}
-comment|/**      * A mapping is an injection if it is a function and no target has more than      * one source. (In other words, every source has precisely one target.)      */
+comment|/**    * A mapping is an injection if it is a function and no target has more than    * one source. (In other words, every source has precisely one target.)    */
 specifier|public
 name|boolean
 name|isInjection
@@ -238,7 +238,7 @@ operator|==
 literal|0
 return|;
 block|}
-comment|/**      * A mapping is a bijection if it is a surjection and it is an injection.      * (In other words,      */
+comment|/**    * A mapping is a bijection if it is a surjection and it is an injection.    * (In other words,    */
 specifier|public
 name|boolean
 name|isBijection
@@ -263,7 +263,7 @@ operator|==
 literal|0
 return|;
 block|}
-comment|/**      * Constraint that every source has at least one target.      */
+comment|/**    * Constraint that every source has at least one target.    */
 specifier|public
 name|boolean
 name|isMandatoryTarget
@@ -283,7 +283,7 @@ name|OptionalTarget
 operator|)
 return|;
 block|}
-comment|/**      * Constraint that every source has at most one target.      */
+comment|/**    * Constraint that every source has at most one target.    */
 specifier|public
 name|boolean
 name|isSingleTarget
@@ -303,7 +303,7 @@ name|MultipleTarget
 operator|)
 return|;
 block|}
-comment|/**      * Constraint that every target has at least one source.      */
+comment|/**    * Constraint that every target has at least one source.    */
 specifier|public
 name|boolean
 name|isMandatorySource
@@ -323,7 +323,7 @@ name|OptionalSource
 operator|)
 return|;
 block|}
-comment|/**      * Constraint that every target has at most one source.      */
+comment|/**    * Constraint that every target has at most one source.    */
 specifier|public
 name|boolean
 name|isSingleSource
@@ -343,7 +343,7 @@ name|MultipleSource
 operator|)
 return|;
 block|}
-comment|/**      * Allow less than one source for a given target.      */
+comment|/**    * Allow less than one source for a given target.    */
 specifier|private
 specifier|static
 specifier|final
@@ -352,7 +352,7 @@ name|OptionalSource
 init|=
 literal|1
 decl_stmt|;
-comment|/**      * Allow more than one source for a given target.      */
+comment|/**    * Allow more than one source for a given target.    */
 specifier|private
 specifier|static
 specifier|final
@@ -361,7 +361,7 @@ name|MultipleSource
 init|=
 literal|2
 decl_stmt|;
-comment|/**      * Allow less than one target for a given source.      */
+comment|/**    * Allow less than one target for a given source.    */
 specifier|private
 specifier|static
 specifier|final
@@ -370,7 +370,7 @@ name|OptionalTarget
 init|=
 literal|4
 decl_stmt|;
-comment|/**      * Allow more than one target for a given source.      */
+comment|/**    * Allow more than one target for a given source.    */
 specifier|private
 specifier|static
 specifier|final

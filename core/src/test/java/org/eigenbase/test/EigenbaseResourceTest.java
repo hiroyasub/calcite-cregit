@@ -73,7 +73,7 @@ parameter_list|()
 block|{
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Verifies that resource properties such as SQLSTATE are available at      * runtime.      */
+comment|/**    * Verifies that resource properties such as SQLSTATE are available at    * runtime.    */
 annotation|@
 name|Test
 specifier|public

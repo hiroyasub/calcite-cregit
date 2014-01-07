@@ -61,7 +61,7 @@ name|PushSemiJoinPastFilterRule
 argument_list|()
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a PushSemiJoinPastFilterRule.      */
+comment|/**    * Creates a PushSemiJoinPastFilterRule.    */
 specifier|private
 name|PushSemiJoinPastFilterRule
 parameter_list|()

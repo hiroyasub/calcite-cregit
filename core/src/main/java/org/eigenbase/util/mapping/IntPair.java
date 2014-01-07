@@ -16,7 +16,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * An immutable pair of integers.  * @see Mapping#iterator()  */
+comment|/**  * An immutable pair of integers.  *  * @see Mapping#iterator()  */
 end_comment
 
 begin_class

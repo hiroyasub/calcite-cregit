@@ -30,7 +30,7 @@ parameter_list|()
 block|{
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Creates a sample which substitutes one relation for another.      */
+comment|/**    * Creates a sample which substitutes one relation for another.    */
 specifier|public
 specifier|static
 name|SqlSampleSpec
@@ -48,7 +48,7 @@ name|name
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates a table sample without repeatability.      *      * @param isBernoulli true if Bernoulli style sampling is to be used; false      * for implementation specific sampling      * @param samplePercentage likelihood of a row appearing in the sample      */
+comment|/**    * Creates a table sample without repeatability.    *    * @param isBernoulli      true if Bernoulli style sampling is to be used;    *                         false for implementation specific sampling    * @param samplePercentage likelihood of a row appearing in the sample    */
 specifier|public
 specifier|static
 name|SqlSampleSpec
@@ -71,7 +71,7 @@ name|samplePercentage
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates a table sample with repeatability.      *      * @param isBernoulli true if Bernoulli style sampling is to be used; false      * for implementation specific sampling      * @param samplePercentage likelihood of a row appearing in the sample      * @param repeatableSeed seed value used to reproduce the same sample      */
+comment|/**    * Creates a table sample with repeatability.    *    * @param isBernoulli      true if Bernoulli style sampling is to be used;    *                         false for implementation specific sampling    * @param samplePercentage likelihood of a row appearing in the sample    * @param repeatableSeed   seed value used to reproduce the same sample    */
 specifier|public
 specifier|static
 name|SqlSampleSpec
@@ -256,7 +256,7 @@ operator|=
 name|repeatableSeed
 expr_stmt|;
 block|}
-comment|/**          * Indicates Bernoulli vs. System sampling.          */
+comment|/**      * Indicates Bernoulli vs. System sampling.      */
 specifier|public
 name|boolean
 name|isBernoulli
@@ -266,7 +266,7 @@ return|return
 name|isBernoulli
 return|;
 block|}
-comment|/**          * Returns sampling percentage. Range is 0.0 to 1.0, exclusive          */
+comment|/**      * Returns sampling percentage. Range is 0.0 to 1.0, exclusive      */
 specifier|public
 name|float
 name|getSamplePercentage
@@ -276,7 +276,7 @@ return|return
 name|samplePercentage
 return|;
 block|}
-comment|/**          * Indicates whether repeatable seed should be used.          */
+comment|/**      * Indicates whether repeatable seed should be used.      */
 specifier|public
 name|boolean
 name|isRepeatable
@@ -286,7 +286,7 @@ return|return
 name|isRepeatable
 return|;
 block|}
-comment|/**          * Seed to produce repeatable samples.          */
+comment|/**      * Seed to produce repeatable samples.      */
 specifier|public
 name|int
 name|getRepeatableSeed

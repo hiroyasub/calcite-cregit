@@ -102,7 +102,7 @@ argument_list|>
 name|argList
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates an AggregateCall.      *      * @param aggregation Aggregation      * @param distinct Whether distinct      * @param argList List of ordinals of arguments      * @param type Result type      * @param name Name (may be null)      */
+comment|/**    * Creates an AggregateCall.    *    * @param aggregation Aggregation    * @param distinct    Whether distinct    * @param argList     List of ordinals of arguments    * @param type        Result type    * @param name        Name (may be null)    */
 specifier|public
 name|AggregateCall
 parameter_list|(
@@ -177,7 +177,7 @@ name|distinct
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Returns whether this AggregateCall is distinct, as in<code>      * COUNT(DISTINCT empno)</code>.      *      * @return whether distinct      */
+comment|/**    * Returns whether this AggregateCall is distinct, as in<code>    * COUNT(DISTINCT empno)</code>.    *    * @return whether distinct    */
 specifier|public
 specifier|final
 name|boolean
@@ -188,7 +188,7 @@ return|return
 name|distinct
 return|;
 block|}
-comment|/**      * Returns the Aggregation.      *      * @return aggregation      */
+comment|/**    * Returns the Aggregation.    *    * @return aggregation    */
 specifier|public
 specifier|final
 name|Aggregation
@@ -199,7 +199,7 @@ return|return
 name|aggregation
 return|;
 block|}
-comment|/**      * Returns the ordinals of the arguments to this call.      *      *<p>The list is immutable.      *      * @return list of argument ordinals      */
+comment|/**    * Returns the ordinals of the arguments to this call.    *    *<p>The list is immutable.    *    * @return list of argument ordinals    */
 specifier|public
 specifier|final
 name|List
@@ -213,7 +213,7 @@ return|return
 name|argList
 return|;
 block|}
-comment|/**      * Returns the result type.      *      * @return result type      */
+comment|/**    * Returns the result type.    *    * @return result type    */
 specifier|public
 specifier|final
 name|RelDataType
@@ -224,7 +224,7 @@ return|return
 name|type
 return|;
 block|}
-comment|/**      * Returns the name.      *      * @return name      */
+comment|/**    * Returns the name.    *    * @return name    */
 specifier|public
 name|String
 name|getName
@@ -234,7 +234,7 @@ return|return
 name|name
 return|;
 block|}
-comment|/**      * Creates an equivalent AggregateCall that has a new name.      *      * @param name New name (may be null)      */
+comment|/**    * Creates an equivalent AggregateCall that has a new name.    *    * @param name New name (may be null)    */
 specifier|public
 name|AggregateCall
 name|rename
@@ -444,7 +444,7 @@ name|hashCode
 argument_list|()
 return|;
 block|}
-comment|/**      * Creates a binding of this call in the context of an {@link AggregateRel},      * which can then be used to infer the return type.      */
+comment|/**    * Creates a binding of this call in the context of an {@link AggregateRel},    * which can then be used to infer the return type.    */
 specifier|public
 name|AggregateRelBase
 operator|.

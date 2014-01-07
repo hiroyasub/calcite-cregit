@@ -219,7 +219,7 @@ specifier|private
 name|boolean
 name|noDAG
 decl_stmt|;
-comment|/**      * Query graph, with edges directed from parent to child. This is a      * single-rooted DAG, possibly with additional roots corresponding to      * discarded plan fragments which remain to be garbage-collected.      */
+comment|/**    * Query graph, with edges directed from parent to child. This is a    * single-rooted DAG, possibly with additional roots corresponding to    * discarded plan fragments which remain to be garbage-collected.    */
 specifier|private
 name|DirectedGraph
 argument_list|<
@@ -242,7 +242,7 @@ argument_list|>
 name|onCopyHook
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a new HepPlanner that allows DAG.      *      * @param program program controlling rule application      */
+comment|/**    * Creates a new HepPlanner that allows DAG.    *    * @param program program controlling rule application    */
 specifier|public
 name|HepPlanner
 parameter_list|(
@@ -260,7 +260,7 @@ literal|null
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Creates a new HepPlanner with the option to keep the graph a      * tree(noDAG=true) or allow DAG(noDAG=false).      *      * @param program program controlling rule application      * @param onCopyHook Function to call when a node is copied      */
+comment|/**    * Creates a new HepPlanner with the option to keep the graph a    * tree(noDAG=true) or allow DAG(noDAG=false).    *    * @param program    program controlling rule application    * @param onCopyHook Function to call when a node is copied    */
 specifier|public
 name|HepPlanner
 parameter_list|(
@@ -2045,7 +2045,7 @@ name|outTrait
 argument_list|)
 return|;
 block|}
-comment|/**      * Retrieves the parent vertices of a vertex.  If a vertex appears multiple      * times as an input into a parent, then that counts as multiple parents,      * one per input reference.      *      * @param vertex the vertex      *      * @return the list of parents for the vertex      */
+comment|/**    * Retrieves the parent vertices of a vertex.  If a vertex appears multiple    * times as an input into a parent, then that counts as multiple parents,    * one per input reference.    *    * @param vertex the vertex    * @return the list of parents for the vertex    */
 specifier|private
 name|List
 argument_list|<

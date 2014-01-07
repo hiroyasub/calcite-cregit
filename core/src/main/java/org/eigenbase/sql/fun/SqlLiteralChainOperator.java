@@ -796,7 +796,7 @@ name|frame
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Concatenates the operands of a call to this operator.      */
+comment|/**    * Concatenates the operands of a call to this operator.    */
 specifier|public
 specifier|static
 name|SqlLiteral

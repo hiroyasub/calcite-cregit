@@ -110,7 +110,7 @@ operator|=
 name|ints
 expr_stmt|;
 block|}
-comment|/** Returns an empty ImmutableIntList. */
+comment|/**    * Returns an empty ImmutableIntList.    */
 specifier|public
 specifier|static
 name|ImmutableIntList
@@ -121,7 +121,7 @@ return|return
 name|EMPTY
 return|;
 block|}
-comment|/** Creates an ImmutableIntList from an array of {@code int}. */
+comment|/**    * Creates an ImmutableIntList from an array of {@code int}.    */
 specifier|public
 specifier|static
 name|ImmutableIntList
@@ -143,7 +143,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/** Creates an ImmutableIntList from an array of {@code Number}. */
+comment|/**    * Creates an ImmutableIntList from an array of {@code Number}.    */
 specifier|public
 specifier|static
 name|ImmutableIntList
@@ -206,7 +206,7 @@ name|ints
 argument_list|)
 return|;
 block|}
-comment|/** Creates an ImmutableIntList from a collection of {@link Number}. */
+comment|/**    * Creates an ImmutableIntList from a collection of {@link Number}.    */
 specifier|public
 specifier|static
 name|ImmutableIntList

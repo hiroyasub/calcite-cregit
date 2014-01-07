@@ -77,7 +77,7 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Helper routine for {@link SqlUtil#concatenateLiterals}.      *      * @param lits homogeneous StringLiteral[] args.      *      * @return StringLiteral with concatenated value. this == lits[0], used only      * for method dispatch.      */
+comment|/**    * Helper routine for {@link SqlUtil#concatenateLiterals}.    *    * @param lits homogeneous StringLiteral[] args.    * @return StringLiteral with concatenated value. this == lits[0], used only    * for method dispatch.    */
 specifier|protected
 specifier|abstract
 name|SqlAbstractStringLiteral

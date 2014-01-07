@@ -86,7 +86,7 @@ literal|"UTF-16BE"
 else|:
 literal|"UTF-16LE"
 decl_stmt|;
-comment|/**      * A constant string which can be used wherever a Java string containing      * Unicode characters is needed in a test. It spells 'anthropos' in Greek.      */
+comment|/**    * A constant string which can be used wherever a Java string containing    * Unicode characters is needed in a test. It spells 'anthropos' in Greek.    */
 specifier|public
 specifier|static
 specifier|final
@@ -95,7 +95,7 @@ name|TEST_UNICODE_STRING
 init|=
 literal|"\u03B1\u03BD\u03B8\u03C1\u03C9\u03C0\u03BF\u03C2"
 decl_stmt|;
-comment|/**      * A constant string which can be used wherever a SQL literal containing      * Unicode escape characters is needed in a test. It spells 'anthropos' in      * Greek. The escape character is the SQL default (backslash); note that the      * backslash-doubling here is for Java only, so by the time the SQL parser      * gets it, there is only one backslash.      */
+comment|/**    * A constant string which can be used wherever a SQL literal containing    * Unicode escape characters is needed in a test. It spells 'anthropos' in    * Greek. The escape character is the SQL default (backslash); note that the    * backslash-doubling here is for Java only, so by the time the SQL parser    * gets it, there is only one backslash.    */
 specifier|public
 specifier|static
 specifier|final
@@ -105,7 +105,7 @@ init|=
 literal|"\\03B1\\03BD\\03B8\\03C1\\03C9\\03C0\\03BF\\03C2"
 decl_stmt|;
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Converts a byte array into a bit string or a hex string.      *      *<p>For example,<code>toStringFromByteArray(new byte[] {0xAB, 0xCD},      * 16)</code> returns<code>ABCD</code>.      */
+comment|/**    * Converts a byte array into a bit string or a hex string.    *    *<p>For example,<code>toStringFromByteArray(new byte[] {0xAB, 0xCD},    * 16)</code> returns<code>ABCD</code>.    */
 specifier|public
 specifier|static
 name|String
@@ -217,7 +217,7 @@ name|toUpperCase
 argument_list|()
 return|;
 block|}
-comment|/**      * Converts a string into a byte array. The inverse of {@link      * #toStringFromByteArray(byte[], int)}.      */
+comment|/**    * Converts a string into a byte array. The inverse of {@link    * #toStringFromByteArray(byte[], int)}.    */
 specifier|public
 specifier|static
 name|byte
@@ -366,7 +366,7 @@ return|return
 name|ret
 return|;
 block|}
-comment|/**      * Converts an approximate value into a string, following the SQL 2003      * standard.      */
+comment|/**    * Converts an approximate value into a string, following the SQL 2003    * standard.    */
 specifier|public
 specifier|static
 name|String
@@ -398,7 +398,7 @@ name|d
 argument_list|)
 return|;
 block|}
-comment|/**      * Converts a string into a boolean      */
+comment|/**    * Converts a string into a boolean    */
 specifier|public
 specifier|static
 name|Boolean

@@ -294,7 +294,7 @@ name|this
 argument_list|)
 return|;
 block|}
-comment|/**      *<p>Visits an array of expressions, returning the logical 'and' of their      * results.      *      *<p>If any of them returns false, returns false immediately; if they all      * return true, returns true.      *      * @see #visitArrayOr      * @see RexShuttle#visitArray      */
+comment|/**    *<p>Visits an array of expressions, returning the logical 'and' of their    * results.    *    *<p>If any of them returns false, returns false immediately; if they all    * return true, returns true.    *    * @see #visitArrayOr    * @see RexShuttle#visitArray    */
 specifier|public
 specifier|static
 name|boolean
@@ -347,7 +347,7 @@ return|return
 literal|true
 return|;
 block|}
-comment|/**      *<p>Visits an array of expressions, returning the logical 'or' of their      * results.      *      *<p>If any of them returns true, returns true immediately; if they all      * return false, returns false.      *      * @see #visitArrayAnd      * @see RexShuttle#visitArray      */
+comment|/**    *<p>Visits an array of expressions, returning the logical 'or' of their    * results.    *    *<p>If any of them returns true, returns true immediately; if they all    * return false, returns false.    *    * @see #visitArrayAnd    * @see RexShuttle#visitArray    */
 specifier|public
 specifier|static
 name|boolean

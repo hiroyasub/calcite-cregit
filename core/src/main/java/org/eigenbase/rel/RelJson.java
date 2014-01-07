@@ -473,7 +473,7 @@ return|return
 name|constructor
 return|;
 block|}
-comment|/** Converts a type name to a class. E.g. {@code getClass("ProjectRel")}    * returns {@link org.eigenbase.rel.ProjectRel}.class. */
+comment|/**    * Converts a type name to a class. E.g. {@code getClass("ProjectRel")}    * returns {@link org.eigenbase.rel.ProjectRel}.class.    */
 specifier|public
 name|Class
 name|typeNameToClass
@@ -552,7 +552,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/** Inverse of {@link #typeNameToClass}. */
+comment|/**    * Inverse of {@link #typeNameToClass}.    */
 specifier|public
 name|String
 name|classToTypeName

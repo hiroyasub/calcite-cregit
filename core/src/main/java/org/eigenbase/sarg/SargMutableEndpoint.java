@@ -49,7 +49,7 @@ extends|extends
 name|SargEndpoint
 block|{
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * @see SargFactory#newEndpoint      */
+comment|/**    * @see SargFactory#newEndpoint    */
 name|SargMutableEndpoint
 parameter_list|(
 name|SargFactory

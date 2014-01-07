@@ -109,7 +109,7 @@ name|SqlValidatorImpl
 name|validator
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates an AggChecker.      *      * @param validator Validator      * @param scope Scope      * @param groupExprs Expressions in GROUP BY (or SELECT DISTINCT) clause,      * that are therefore available      * @param distinct Whether aggregation checking is because of a SELECT      * DISTINCT clause      */
+comment|/**    * Creates an AggChecker.    *    * @param validator  Validator    * @param scope      Scope    * @param groupExprs Expressions in GROUP BY (or SELECT DISTINCT) clause,    *                   that are therefore available    * @param distinct   Whether aggregation checking is because of a SELECT    *                   DISTINCT clause    */
 name|AggChecker
 parameter_list|(
 name|SqlValidatorImpl

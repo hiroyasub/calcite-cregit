@@ -81,7 +81,7 @@ name|SqlCall
 name|call
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a<code>SetopNamespace</code>.      *      * @param validator Validator      * @param call Call to set operator      * @param enclosingNode Enclosing node      */
+comment|/**    * Creates a<code>SetopNamespace</code>.    *    * @param validator     Validator    * @param call          Call to set operator    * @param enclosingNode Enclosing node    */
 specifier|protected
 name|SetopNamespace
 parameter_list|(

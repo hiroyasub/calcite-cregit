@@ -105,7 +105,7 @@ name|PushFilterPastSetOpRule
 argument_list|()
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a PushFilterPastSetOpRule.      */
+comment|/**    * Creates a PushFilterPastSetOpRule.    */
 specifier|private
 name|PushFilterPastSetOpRule
 parameter_list|()

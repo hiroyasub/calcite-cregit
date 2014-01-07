@@ -60,7 +60,7 @@ extends|extends
 name|FilterRelBase
 block|{
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a filter.      *      * @param cluster {@link RelOptCluster}  this relational expression belongs      * to      * @param child input relational expression      * @param condition boolean expression which determines whether a row is      * allowed to pass      */
+comment|/**    * Creates a filter.    *    * @param cluster   {@link RelOptCluster}  this relational expression belongs    *                  to    * @param child     input relational expression    * @param condition boolean expression which determines whether a row is    *                  allowed to pass    */
 specifier|public
 name|FilterRel
 parameter_list|(
@@ -93,7 +93,7 @@ name|condition
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Creates a FilterRel by parsing serialized output. */
+comment|/**    * Creates a FilterRel by parsing serialized output.    */
 specifier|public
 name|FilterRel
 parameter_list|(

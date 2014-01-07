@@ -90,7 +90,7 @@ literal|30
 argument_list|)
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a local variable.      *      * @param index Index of the field in the underlying rowtype      * @param type Type of the column      *      * @pre type != null      * @pre index>= 0      */
+comment|/**    * Creates a local variable.    *    * @param index Index of the field in the underlying rowtype    * @param type  Type of the column    * @pre type != null    * @pre index>= 0    */
 specifier|public
 name|RexLocalRef
 parameter_list|(

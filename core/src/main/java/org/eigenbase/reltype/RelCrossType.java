@@ -70,7 +70,7 @@ argument_list|>
 name|types
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a cartesian product type. This should only be called from a      * factory method.      */
+comment|/**    * Creates a cartesian product type. This should only be called from a    * factory method.    */
 specifier|public
 name|RelCrossType
 parameter_list|(

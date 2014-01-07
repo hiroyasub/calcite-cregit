@@ -219,7 +219,7 @@ parameter_list|)
 function_decl|;
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------
-comment|/**      * Default implementation of {@link ArgHandler} which merely calls {@link      * SqlNode#accept} on each operand.      */
+comment|/**    * Default implementation of {@link ArgHandler} which merely calls {@link    * SqlNode#accept} on each operand.    */
 specifier|public
 specifier|static
 class|class

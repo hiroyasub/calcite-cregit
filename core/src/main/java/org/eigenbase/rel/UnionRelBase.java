@@ -93,7 +93,7 @@ name|all
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Creates a UnionRelBase by parsing serialized output. */
+comment|/**    * Creates a UnionRelBase by parsing serialized output.    */
 specifier|protected
 name|UnionRelBase
 parameter_list|(
@@ -137,7 +137,7 @@ return|return
 name|dRows
 return|;
 block|}
-comment|/**      * Helper method for computing row count for UNION ALL.      *      * @param rel node representing UNION ALL      *      * @return estimated row count for rel      */
+comment|/**    * Helper method for computing row count for UNION ALL.    *    * @param rel node representing UNION ALL    * @return estimated row count for rel    */
 specifier|public
 specifier|static
 name|double

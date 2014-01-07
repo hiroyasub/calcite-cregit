@@ -287,7 +287,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**      * Returns the default diff repository for this test, or null if there is      * no repository.      *      *<p>The default implementation returns null.      *      *<p>Sub-classes that want to use a diff repository can override.      * Sub-sub-classes can override again, inheriting test cases and overriding      * selected test results.      *      *<p>And individual test cases can override by providing a different      * tester object.      *      * @return Diff repository      */
+comment|/**    * Returns the default diff repository for this test, or null if there is    * no repository.    *    *<p>The default implementation returns null.    *    *<p>Sub-classes that want to use a diff repository can override.    * Sub-sub-classes can override again, inheriting test cases and overriding    * selected test results.    *    *<p>And individual test cases can override by providing a different    * tester object.    *    * @return Diff repository    */
 specifier|protected
 name|DiffRepository
 name|getDiffRepos
@@ -298,13 +298,13 @@ literal|null
 return|;
 block|}
 comment|//~ Inner Interfaces -------------------------------------------------------
-comment|/**      * Helper class which contains default implementations of methods used for      * running sql-to-rel conversion tests.      */
+comment|/**    * Helper class which contains default implementations of methods used for    * running sql-to-rel conversion tests.    */
 specifier|public
 specifier|static
 interface|interface
 name|Tester
 block|{
-comment|/**          * Converts a SQL string to a {@link RelNode} tree.          *          * @param sql SQL statement          *          * @return Relational expression, never null          */
+comment|/**      * Converts a SQL string to a {@link RelNode} tree.      *      * @param sql SQL statement      * @return Relational expression, never null      */
 name|RelNode
 name|convertSqlToRel
 parameter_list|(
@@ -321,7 +321,7 @@ parameter_list|)
 throws|throws
 name|Exception
 function_decl|;
-comment|/**          * Factory method to create a {@link SqlValidator}.          */
+comment|/**      * Factory method to create a {@link SqlValidator}.      */
 name|SqlValidator
 name|createValidator
 parameter_list|(
@@ -332,7 +332,7 @@ name|RelDataTypeFactory
 name|typeFactory
 parameter_list|)
 function_decl|;
-comment|/**          * Factory method for a          * {@link net.hydromatic.optiq.prepare.Prepare.CatalogReader}.          */
+comment|/**      * Factory method for a      * {@link net.hydromatic.optiq.prepare.Prepare.CatalogReader}.      */
 name|Prepare
 operator|.
 name|CatalogReader
@@ -346,17 +346,17 @@ name|RelOptPlanner
 name|createPlanner
 parameter_list|()
 function_decl|;
-comment|/**          * Returns the {@link SqlOperatorTable} to use.          */
+comment|/**      * Returns the {@link SqlOperatorTable} to use.      */
 name|SqlOperatorTable
 name|getOperatorTable
 parameter_list|()
 function_decl|;
-comment|/**          * Returns the SQL dialect to test.          */
+comment|/**      * Returns the SQL dialect to test.      */
 name|SqlConformance
 name|getConformance
 parameter_list|()
 function_decl|;
-comment|/**          * Checks that a SQL statement converts to a given plan.          *          * @param sql SQL query          * @param plan Expected plan          */
+comment|/**      * Checks that a SQL statement converts to a given plan.      *      * @param sql  SQL query      * @param plan Expected plan      */
 name|void
 name|assertConvertsTo
 parameter_list|(
@@ -367,7 +367,7 @@ name|String
 name|plan
 parameter_list|)
 function_decl|;
-comment|/**          * Checks that a SQL statement converts to a given plan, optionally          * trimming columns that are not needed.          *          * @param sql SQL query          * @param plan Expected plan          */
+comment|/**      * Checks that a SQL statement converts to a given plan, optionally      * trimming columns that are not needed.      *      * @param sql  SQL query      * @param plan Expected plan      */
 name|void
 name|assertConvertsTo
 parameter_list|(
@@ -381,19 +381,19 @@ name|boolean
 name|trim
 parameter_list|)
 function_decl|;
-comment|/**          * Returns the diff repository.          *          * @return Diff repository          */
+comment|/**      * Returns the diff repository.      *      * @return Diff repository      */
 name|DiffRepository
 name|getDiffRepos
 parameter_list|()
 function_decl|;
-comment|/**          * Returns the validator.          *          * @return Validator          */
+comment|/**      * Returns the validator.      *      * @return Validator      */
 name|SqlValidator
 name|getValidator
 parameter_list|()
 function_decl|;
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------
-comment|/**      * Mock implementation of {@link RelOptSchema}.      */
+comment|/**    * Mock implementation of {@link RelOptSchema}.    */
 specifier|protected
 specifier|static
 class|class
@@ -1305,7 +1305,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**      * Default implementation of {@link Tester}, using mock classes {@link      * MockRelOptSchema} and {@link MockRelOptPlanner}.      */
+comment|/**    * Default implementation of {@link Tester}, using mock classes {@link    * MockRelOptSchema} and {@link MockRelOptPlanner}.    */
 specifier|public
 specifier|static
 class|class
@@ -1330,7 +1330,7 @@ specifier|private
 name|RelDataTypeFactory
 name|typeFactory
 decl_stmt|;
-comment|/**          * Creates a TesterImpl.          *          * @param diffRepos Diff repository          */
+comment|/**      * Creates a TesterImpl.      *      * @param diffRepos Diff repository      */
 specifier|protected
 name|TesterImpl
 parameter_list|(
@@ -1677,7 +1677,7 @@ return|return
 name|opTab
 return|;
 block|}
-comment|/**          * Creates an operator table.          *          * @return New operator table          */
+comment|/**      * Creates an operator table.      *      * @return New operator table      */
 specifier|protected
 name|SqlOperatorTable
 name|createOperatorTable
@@ -1865,7 +1865,7 @@ name|actual
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**          * Creates a RelFieldTrimmer.          *          * @return Field trimmer          */
+comment|/**      * Creates a RelFieldTrimmer.      *      * @return Field trimmer      */
 specifier|public
 name|RelFieldTrimmer
 name|createFieldTrimmer
@@ -1880,7 +1880,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**          * Checks that every node of a relational expression is valid.          *          * @param rel Relational expression          */
+comment|/**      * Checks that every node of a relational expression is valid.      *      * @param rel Relational expression      */
 specifier|protected
 name|void
 name|assertValid

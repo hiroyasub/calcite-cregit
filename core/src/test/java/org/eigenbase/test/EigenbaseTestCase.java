@@ -464,7 +464,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Fails if<code>throwable</code> is null, or if its message does not      * contain the string<code>pattern</code>.      */
+comment|/**    * Fails if<code>throwable</code> is null, or if its message does not    * contain the string<code>pattern</code>.    */
 specifier|protected
 name|void
 name|assertThrowableContains
@@ -536,7 +536,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Returns an iterator over the elements of an array.      */
+comment|/**    * Returns an iterator over the elements of an array.    */
 specifier|public
 specifier|static
 name|Iterator
@@ -559,7 +559,7 @@ name|iterator
 argument_list|()
 return|;
 block|}
-comment|/**      * Checks that an iterator returns the same objects as the contents of an      * array.      */
+comment|/**    * Checks that an iterator returns the same objects as the contents of an    * array.    */
 specifier|protected
 name|void
 name|assertEquals
@@ -612,7 +612,7 @@ name|a
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Checks that a list has the same contents as an array.      */
+comment|/**    * Checks that a list has the same contents as an array.    */
 specifier|protected
 name|void
 name|assertEquals
@@ -642,7 +642,7 @@ name|b
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Checks that two arrays are equal.      */
+comment|/**    * Checks that two arrays are equal.    */
 specifier|protected
 name|void
 name|assertEquals

@@ -533,7 +533,7 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Converts a call to an operator into a {@link SqlCall} to the same      * operator.      *      *<p>Called automatically via reflection.      *      * @param converter Converter      * @param call Call      *      * @return Sql call      */
+comment|/**    * Converts a call to an operator into a {@link SqlCall} to the same    * operator.    *    *<p>Called automatically via reflection.    *    * @param converter Converter    * @param call      Call    * @return Sql call    */
 specifier|public
 name|SqlNode
 name|convertCall
@@ -705,7 +705,7 @@ return|return
 name|exprs
 return|;
 block|}
-comment|/**      * Creates and registers a convertlet for an operator in which      * the SQL and Rex representations are structurally equivalent.      *      * @param op operator instance      */
+comment|/**    * Creates and registers a convertlet for an operator in which    * the SQL and Rex representations are structurally equivalent.    *    * @param op operator instance    */
 specifier|protected
 name|void
 name|registerEquivOp
@@ -776,7 +776,7 @@ block|}
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Creates and registers a convertlet for an operator in which      * the SQL representation needs the result type appended      * as an extra argument (e.g. CAST).      *      * @param op operator instance      */
+comment|/**    * Creates and registers a convertlet for an operator in which    * the SQL representation needs the result type appended    * as an extra argument (e.g. CAST).    *    * @param op operator instance    */
 specifier|private
 name|void
 name|registerTypeAppendOp
@@ -896,7 +896,7 @@ block|}
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Creates and registers a convertlet for the CASE operator,      * which takes different forms for SQL vs Rex.      *      * @param op instance of CASE operator      */
+comment|/**    * Creates and registers a convertlet for the CASE operator,    * which takes different forms for SQL vs Rex.    *    * @param op instance of CASE operator    */
 specifier|private
 name|void
 name|registerCaseOp

@@ -127,6 +127,7 @@ name|wasNull
 parameter_list|()
 function_decl|;
 comment|/**    * Accessor of a column value.    */
+specifier|public
 interface|interface
 name|Accessor
 block|{

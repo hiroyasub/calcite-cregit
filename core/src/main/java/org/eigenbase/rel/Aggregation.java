@@ -45,7 +45,7 @@ interface|interface
 name|Aggregation
 block|{
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Returns the parameter types accepted by this Aggregation.      *      * @param typeFactory Type factory to create the types      *      * @return Array of parameter types      */
+comment|/**    * Returns the parameter types accepted by this Aggregation.    *    * @param typeFactory Type factory to create the types    * @return Array of parameter types    */
 name|List
 argument_list|<
 name|RelDataType
@@ -56,7 +56,7 @@ name|RelDataTypeFactory
 name|typeFactory
 parameter_list|)
 function_decl|;
-comment|/**      * Returns the type of the result yielded by this Aggregation.      *      * @param typeFactory Type factory to create the type      *      * @return Result type      */
+comment|/**    * Returns the type of the result yielded by this Aggregation.    *    * @param typeFactory Type factory to create the type    * @return Result type    */
 name|RelDataType
 name|getReturnType
 parameter_list|(
@@ -64,7 +64,7 @@ name|RelDataTypeFactory
 name|typeFactory
 parameter_list|)
 function_decl|;
-comment|/**      * Returns the name of this Aggregation      *      * @return name of this aggregation      */
+comment|/**    * Returns the name of this Aggregation    *    * @return name of this aggregation    */
 name|String
 name|getName
 parameter_list|()

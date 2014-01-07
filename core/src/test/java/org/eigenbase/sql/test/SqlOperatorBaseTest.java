@@ -206,7 +206,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Contains unit tests for all operators. Each of the methods is named after an  * operator.  *  *<p>The class is abstract. It contains a test for every operator, but does not  * provide a mechanism to execute the tests: parse, validate, and execute  * expressions on the operators. This is left to a {@link SqlTester} object  * which the derived class must provide.  *  *<p>Different implementations of {@link SqlTester} are possible, such as:  *  *<ul>  *<li>Execute against a real farrago database  *<li>Execute in pure java (parsing and validation can be done, but expression  * evaluation is not possible)  *<li>Generate a SQL script.  *<li>Analyze which operators are adequately tested.  *</ul>  *  *<p>A typical method will be named after the operator it is testing (say  *<code>testSubstringFunc</code>). It first calls {@link  * SqlTester#setFor(org.eigenbase.sql.SqlOperator,  * org.eigenbase.sql.test.SqlTester.VmName...)} to declare which operator it is  * testing.<blockqoute>  *  *<pre><code>  * public void testSubstringFunc() {  *     tester.setFor(SqlStdOperatorTable.substringFunc);  *     tester.checkScalar("sin(0)", "0");  *     tester.checkScalar("sin(1.5707)", "1");  * }</code></pre>  *  *</blockqoute> The rest of the method contains calls to the various<code>  * checkXxx</code> methods in the {@link SqlTester} interface. For an operator  * to be adequately tested, there need to be tests for:  *  *<ul>  *<li>Parsing all of its the syntactic variants.  *<li>Deriving the type of in all combinations of arguments.  *  *<ul>  *<li>Pay particular attention to nullability. For example, the result of the  * "+" operator is NOT NULL if and only if both of its arguments are NOT  * NULL.</li>  *<li>Also pay attention to precision/scale/length. For example, the maximum  * length of the "||" operator is the sum of the maximum lengths of its  * arguments.</li>  *</ul>  *</li>  *<li>Executing the function. Pay particular attention to corner cases such as  * null arguments or null results.</li>  *</ul>  */
+comment|/**  * Contains unit tests for all operators. Each of the methods is named after an  * operator.  * p/>  *<p>The class is abstract. It contains a test for every operator, but does not  *provide a mechanism to execute the tests: parse, validate, and execute  * expressions on the operators. This is left to a {@link SqlTester} object  *which the derived class must provde. *  *<p>Different implementations of {@link SqlTester} are possible, suchas:  * p/>  *<ul>  *<li>Execute against a real farrago database  *<li>Execute in pure java (parsing and validation can be done, but expression  * evaluation is not possible)  *<li>Generate a SQL script.  *<li>Analyze which operators are adequately tested.  *<ul>  *  *<p>A typical method will be named after the operator it is testing (say  *<code>testSubstringFunc</code>). It first calls {@link  *SqlTester#setFor(org.eigenbase.sql.SqlOperator,  * org.eigenbase.sql.test.SqlTester.VmName...)} to declare which operator it is  * testing.<blockqote>  *  *<pre><code>  * public void testSubstringFunc() {  *     tester.setFor(SqlStdOperatorTable.substringFunc);  *     tester.checkScalar("sin(0)", "0");  *     tester.checkScalar("sin(1.5707)", "1");  * }</code></pre>  *  *</blockqoute> The rest of the method contains calls to the various<code>  * checkXxx</code> methods in the {@link SqlTester} interface. For an operator  * to be adequately tested, there need to be tests for:  *  *<ul>  *<li>Parsing all of its the syntactic variants.  *<li>Deriving the type of in all combinations of arguments.  *  *<ul>  *<li>Pay particular attention to nullability. For example, the result of the  * "+" operator is NOT NULL if and only if both of its arguments are NOT  * NULL.</li>  *<li>Also pay attention to precision/scale/length. For example, the maximum  * length of the "||" operator is the sum of the maximum lengths of its  * arguments.</li>  *</ul>  *</li>  *<li>Executing the function. Pay particular attention to corner cases such as  * null arguments or null results.</li>  *</ul>  */
 end_comment
 
 begin_class
@@ -322,7 +322,7 @@ name|todo
 init|=
 literal|false
 decl_stmt|;
-comment|/**      * Regular expression for a SQL TIME(0) value.      */
+comment|/**    * Regular expression for a SQL TIME(0) value.    */
 specifier|public
 specifier|static
 specifier|final
@@ -336,7 +336,7 @@ argument_list|(
 literal|"[0-9][0-9]:[0-9][0-9]:[0-9][0-9]"
 argument_list|)
 decl_stmt|;
-comment|/**      * Regular expression for a SQL TIMESTAMP(0) value.      */
+comment|/**    * Regular expression for a SQL TIMESTAMP(0) value.    */
 specifier|public
 specifier|static
 specifier|final
@@ -352,7 +352,7 @@ operator|+
 literal|"[0-9][0-9]:[0-9][0-9]:[0-9][0-9]"
 argument_list|)
 decl_stmt|;
-comment|/**      * Regular expression for a SQL DATE value.      */
+comment|/**    * Regular expression for a SQL DATE value.    */
 specifier|public
 specifier|static
 specifier|final
@@ -373,9 +373,6 @@ name|String
 index|[]
 name|numericTypeNames
 init|=
-operator|new
-name|String
-index|[]
 block|{
 literal|"TINYINT"
 block|,
@@ -403,9 +400,6 @@ name|String
 index|[]
 name|minNumericStrings
 init|=
-operator|new
-name|String
-index|[]
 block|{
 name|Long
 operator|.
@@ -445,8 +439,7 @@ argument_list|)
 block|,
 literal|"-999.99"
 block|,
-comment|// NOTE jvs 26-Apr-2006:  Win32 takes smaller values from
-comment|// win32_values.h
+comment|// NOTE jvs 26-Apr-2006:  Win32 takes smaller values from win32_values.h
 literal|"1E-37"
 block|,
 comment|/*Float.toString(Float.MIN_VALUE)*/
@@ -455,7 +448,7 @@ block|,
 comment|/*Double.toString(Double.MIN_VALUE)*/
 literal|"2E-307"
 comment|/*Double.toString(Double.MIN_VALUE)*/
-block|,         }
+block|,   }
 decl_stmt|;
 specifier|public
 specifier|static
@@ -464,9 +457,6 @@ name|String
 index|[]
 name|minOverflowNumericStrings
 init|=
-operator|new
-name|String
-index|[]
 block|{
 name|Long
 operator|.
@@ -538,9 +528,6 @@ name|String
 index|[]
 name|maxNumericStrings
 init|=
-operator|new
-name|String
-index|[]
 block|{
 name|Long
 operator|.
@@ -600,9 +587,6 @@ name|String
 index|[]
 name|maxOverflowNumericStrings
 init|=
-operator|new
-name|String
-index|[]
 block|{
 name|Long
 operator|.
@@ -676,9 +660,6 @@ name|boolean
 index|[]
 name|FalseTrue
 init|=
-operator|new
-name|boolean
-index|[]
 block|{
 literal|false
 block|,
@@ -787,7 +768,7 @@ argument_list|(
 literal|"(?s).*could not calculate results for the following row.*PC=5 Code=2201F.*"
 argument_list|)
 decl_stmt|;
-comment|/** Whether DECIMAL type is implemented. */
+comment|/**    * Whether DECIMAL type is implemented.    */
 specifier|public
 specifier|static
 specifier|final
@@ -796,7 +777,7 @@ name|DECIMAL
 init|=
 literal|false
 decl_stmt|;
-comment|/** Whether INTERVAL type is implemented. */
+comment|/**    * Whether INTERVAL type is implemented.    */
 specifier|public
 specifier|static
 specifier|final
@@ -816,7 +797,7 @@ name|SqlTester
 name|tester
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/** Creates a SqlOperatorBaseTest.    *    * @param enable Whether to run "failing" tests.    * @param tester Means to validate, execute various statements.    */
+comment|/**    * Creates a SqlOperatorBaseTest.    *    * @param enable Whether to run "failing" tests.    * @param tester Means to validate, execute various statements.    */
 specifier|protected
 name|SqlOperatorBaseTest
 parameter_list|(
@@ -864,7 +845,7 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//--- Tests -----------------------------------------------------------
-comment|/** For development. Put any old code in here. */
+comment|/**    * For development. Put any old code in here.    */
 annotation|@
 name|Test
 specifier|public
@@ -3993,6 +3974,7 @@ if|if
 condition|(
 name|enable
 condition|)
+block|{
 name|tester
 operator|.
 name|checkScalar
@@ -4004,6 +3986,7 @@ argument_list|,
 literal|"TIME(0) NOT NULL"
 argument_list|)
 expr_stmt|;
+block|}
 if|if
 condition|(
 name|Bug
@@ -4040,6 +4023,7 @@ if|if
 condition|(
 name|enable
 condition|)
+block|{
 name|tester
 operator|.
 name|checkScalar
@@ -4051,6 +4035,7 @@ argument_list|,
 literal|"TIME(0) NOT NULL"
 argument_list|)
 expr_stmt|;
+block|}
 comment|// time<-> string
 name|checkCastToString
 argument_list|(
@@ -4106,6 +4091,7 @@ if|if
 condition|(
 name|enable
 condition|)
+block|{
 name|tester
 operator|.
 name|checkScalar
@@ -4117,6 +4103,7 @@ argument_list|,
 literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
 expr_stmt|;
+block|}
 if|if
 condition|(
 operator|!
@@ -4564,7 +4551,7 @@ literal|"cast(cast(null as timestamp) as time)"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Returns a Calendar that is the current time, pausing if we are within 2      * minutes of midnight or the top of the hour.      *      * @param timeUnit Time unit      *      * @return calendar      */
+comment|/**    * Returns a Calendar that is the current time, pausing if we are within 2    * minutes of midnight or the top of the hour.    *    * @param timeUnit Time unit    * @return calendar    */
 specifier|protected
 specifier|static
 name|Calendar
@@ -5211,7 +5198,7 @@ literal|"DECIMAL(11, 1)"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Tests support for JDBC functions.      *      *<p>See FRG-97 "Support for JDBC escape syntax is incomplete".      */
+comment|/**    * Tests support for JDBC functions.    *    *<p>See FRG-97 "Support for JDBC escape syntax is incomplete".    */
 annotation|@
 name|Test
 specifier|public
@@ -13064,6 +13051,7 @@ if|if
 condition|(
 name|enable
 condition|)
+block|{
 name|tester
 operator|.
 name|checkString
@@ -13077,10 +13065,12 @@ argument_list|,
 literal|"VARCHAR(15) NOT NULL"
 argument_list|)
 expr_stmt|;
+block|}
 if|if
 condition|(
 name|enable
 condition|)
+block|{
 name|tester
 operator|.
 name|checkString
@@ -13094,6 +13084,7 @@ argument_list|,
 literal|"VARCHAR(15) NOT NULL"
 argument_list|)
 expr_stmt|;
+block|}
 name|tester
 operator|.
 name|checkNull
@@ -13134,6 +13125,7 @@ if|if
 condition|(
 name|enable
 condition|)
+block|{
 name|tester
 operator|.
 name|checkString
@@ -13147,10 +13139,12 @@ argument_list|,
 literal|"VARBINARY(8) NOT NULL"
 argument_list|)
 expr_stmt|;
+block|}
 if|if
 condition|(
 name|enable
 condition|)
+block|{
 name|tester
 operator|.
 name|checkString
@@ -13164,6 +13158,7 @@ argument_list|,
 literal|"VARBINARY(8) NOT NULL"
 argument_list|)
 expr_stmt|;
+block|}
 name|tester
 operator|.
 name|checkNull
@@ -15129,7 +15124,7 @@ literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Returns a time string, in GMT, that will be valid for at least 2 minutes.      *      *<p>For example, at "2005-01-01 12:34:56 PST", returns "2005-01-01 20:".      * At "2005-01-01 12:34:59 PST", waits a minute, then returns "2005-01-01      * 21:".      *      * @param tz Time zone      *      * @return Time string      */
+comment|/**    * Returns a time string, in GMT, that will be valid for at least 2 minutes.    *    *<p>For example, at "2005-01-01 12:34:56 PST", returns "2005-01-01 20:".    * At "2005-01-01 12:34:59 PST", waits a minute, then returns "2005-01-01    * 21:".    *    * @param tz Time zone    * @return Time string    */
 specifier|protected
 specifier|static
 name|String
@@ -18349,7 +18344,7 @@ literal|0d
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Tests that CAST fails when given a value just outside the valid range for      * that type. For example,      *      *<ul>      *<li>CAST(-200 AS TINYINT) fails because the value is less than -128;      *<li>CAST(1E-999 AS FLOAT) fails because the value underflows;      *<li>CAST(123.4567891234567 AS FLOAT) fails because the value loses      * precision.      *</ul>      */
+comment|/**    * Tests that CAST fails when given a value just outside the valid range for    * that type. For example,    *    *<ul>    *<li>CAST(-200 AS TINYINT) fails because the value is less than -128;    *<li>CAST(1E-999 AS FLOAT) fails because the value underflows;    *<li>CAST(123.4567891234567 AS FLOAT) fails because the value loses    * precision.    *</ul>    */
 annotation|@
 name|Test
 specifier|public
@@ -18539,7 +18534,7 @@ block|}
 block|}
 block|}
 block|}
-comment|/**      * Tests that CAST fails when given a value just outside the valid range for      * that type. For example,      *      *<ul>      *<li>CAST(-200 AS TINYINT) fails because the value is less than -128;      *<li>CAST(1E-999 AS FLOAT) fails because the value underflows;      *<li>CAST(123.4567891234567 AS FLOAT) fails because the value loses      * precision.      *</ul>      */
+comment|/**    * Tests that CAST fails when given a value just outside the valid range for    * that type. For example,    *    *<ul>    *<li>CAST(-200 AS TINYINT) fails because the value is less than -128;    *<li>CAST(1E-999 AS FLOAT) fails because the value underflows;    *<li>CAST(123.4567891234567 AS FLOAT) fails because the value loses    * precision.    *</ul>    */
 annotation|@
 name|Test
 specifier|public
@@ -18934,7 +18929,7 @@ name|values
 return|;
 block|}
 comment|// TODO: Test other stuff
-comment|/**      * Result checker that considers a test to have succeeded if it throws an      * exception that matches one of a list of patterns.      */
+comment|/**    * Result checker that considers a test to have succeeded if it throws an    * exception that matches one of a list of patterns.    */
 specifier|private
 specifier|static
 class|class
@@ -19048,7 +19043,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Result checker that considers a test to have succeeded if it returns a      * particular value or throws an exception that matches one of a list of      * patterns.      *      *<p>Sounds peculiar, but is necessary when eager and lazy behaviors are      * both valid.      */
+comment|/**    * Result checker that considers a test to have succeeded if it returns a    * particular value or throws an exception that matches one of a list of    * patterns.    *    *<p>Sounds peculiar, but is necessary when eager and lazy behaviors are    * both valid.    */
 specifier|private
 specifier|static
 class|class
@@ -19204,7 +19199,7 @@ expr_stmt|;
 block|}
 block|}
 block|}
-comment|/** Creates a {@link org.eigenbase.sql.test.SqlTester} based on a JDBC      * connection. */
+comment|/**    * Creates a {@link org.eigenbase.sql.test.SqlTester} based on a JDBC    * connection.    */
 specifier|public
 specifier|static
 name|SqlTester
@@ -19222,7 +19217,7 @@ name|connection
 argument_list|)
 return|;
 block|}
-comment|/** Implementation of {@link org.eigenbase.sql.test.SqlTester} based on a      * JDBC connection. */
+comment|/**    * Implementation of {@link org.eigenbase.sql.test.SqlTester} based on a    * JDBC connection.    */
 specifier|protected
 specifier|static
 class|class

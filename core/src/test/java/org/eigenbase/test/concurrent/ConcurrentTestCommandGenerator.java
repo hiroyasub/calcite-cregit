@@ -108,7 +108,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * ConcurrentTestCommandGenerator creates instances of {@link  * ConcurrentTestCommand} that perform specific actions in a specific  * order and within the context of a test thread ({@link  * ConcurrentTestCommandExecutor}).  *  *<p>Typical actions include preparing a SQL statement for execution, executing  * the statement and verifying its result set, and closing the statement.  *  *<p>A single ConcurrentTestCommandGenerator creates commands for  * multiple threads. Each thread is represented by an integer "thread ID".  * Thread IDs may take on any positive integer value and may be a sparse set  * (e.g. 1, 2, 5).  *  *<p>When each command is created, it is associated with a thread and given an  * execution order. Execution order values are positive integers, must be unique  * within a thread, and may be a sparse set.  *  *<p>There are no restrictions on the order of command creation.  */
+comment|/**  * ConcurrentTestCommandGenerator creates instances of {@link  * ConcurrentTestCommand} that perform specific actions in a specific  * order and within the context of a test thread ({@link  * ConcurrentTestCommandExecutor}).  *  *<p>Typical actions include preparing a SQL statement for execution, executing  * the statement and verifying its result set, and closing the statement.</p>  *  *<p>A single ConcurrentTestCommandGenerator creates commands for  * multiple threads. Each thread is represented by an integer "thread ID".  * Thread IDs may take on any positive integer value and may be a sparse set  * (e.g. 1, 2, 5).</p>  *  *<p>When each command is created, it is associated with a thread and given an  * execution order. Execution order values are positive integers, must be unique  * within a thread, and may be a sparse set.</p>  *  *<p>There are no restrictions on the order of command creation.</p>  */
 end_comment
 
 begin_class
@@ -172,7 +172,7 @@ specifier|protected
 name|Properties
 name|jdbcProps
 decl_stmt|;
-comment|/**      * Maps Integer thread IDs to a TreeMap. The TreeMap vaules map an Integer      * execution order to a {@link ConcurrentTestCommand}.      */
+comment|/**    * Maps Integer thread IDs to a TreeMap. The TreeMap vaules map an Integer    * execution order to a {@link ConcurrentTestCommand}.    */
 specifier|private
 name|TreeMap
 argument_list|<
@@ -187,7 +187,7 @@ argument_list|>
 argument_list|>
 name|threadMap
 decl_stmt|;
-comment|/**      * Maps Integer thread IDs to thread names.      */
+comment|/**    * Maps Integer thread IDs to thread names.    */
 specifier|private
 name|TreeMap
 argument_list|<
@@ -197,7 +197,7 @@ name|String
 argument_list|>
 name|threadNameMap
 decl_stmt|;
-comment|/** Describes a thread that failed */
+comment|/**    * Describes a thread that failed    */
 specifier|public
 specifier|static
 class|class
@@ -251,7 +251,7 @@ name|failure
 expr_stmt|;
 block|}
 block|}
-comment|/** Collects threads that failed. Cleared when execution starts, valid whe/n      * execution has ended. Only failed threads appear in the list, so after a      * successful test the list is empty.      */
+comment|/**    * Collects threads that failed. Cleared when execution starts, valid whe/n    * execution has ended. Only failed threads appear in the list, so after a    * successful test the list is empty.    */
 specifier|private
 name|List
 argument_list|<
@@ -260,7 +260,7 @@ argument_list|>
 name|failedThreads
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Constructs a new ConcurrentTestCommandGenerator.      */
+comment|/**    * Constructs a new ConcurrentTestCommandGenerator.    */
 specifier|public
 name|ConcurrentTestCommandGenerator
 parameter_list|()
@@ -303,7 +303,7 @@ argument_list|()
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Adds a synchronization commands. When a thread reaches a synchronization      * command it stops and waits for all other threads to reach their      * synchronization commands. When all threads have reached their      * synchronization commands, they are all released simultaneously (or as      * close as one can get with {@link Object#notifyAll()}). Each thread must      * have exactly the same number of synchronization commands.      *      * @param threadId the thread that should execute this command      * @param order the execution order      *      * @return the newly-added command      */
+comment|/**    * Adds a synchronization commands. When a thread reaches a synchronization    * command it stops and waits for all other threads to reach their    * synchronization commands. When all threads have reached their    * synchronization commands, they are all released simultaneously (or as    * close as one can get with {@link Object#notifyAll()}). Each thread must    * have exactly the same number of synchronization commands.    *    * @param threadId the thread that should execute this command    * @param order    the execution order    * @return the newly-added command    */
 specifier|public
 name|ConcurrentTestCommand
 name|addSynchronizationCommand
@@ -328,7 +328,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**      * Causes the given thread to sleep for the indicated number of      * milliseconds.  Thread executes {@link java.lang.Thread#sleep(long)}.      *      * @param threadId the thread that should execute this command      * @param order the execution order      * @param millis the length of time to sleep in milliseconds (must not be      * negative)      *      * @return the newly-added command      */
+comment|/**    * Causes the given thread to sleep for the indicated number of    * milliseconds.  Thread executes {@link java.lang.Thread#sleep(long)}.    *    * @param threadId the thread that should execute this command    * @param order    the execution order    * @param millis   the length of time to sleep in milliseconds (must not be    *                 negative)    * @return the newly-added command    */
 specifier|public
 name|ConcurrentTestCommand
 name|addSleepCommand
@@ -358,7 +358,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**      * Adds an "explain plan" command.      *      * @param threadId the thread that should execute this command      * @param order the execution order      * @param sql the explain plan SQL (e.g.<code>"explain plan for select *      * from t"</code>)      *      * @return the newly-added command      */
+comment|/**    * Adds an "explain plan" command.    *    * @param threadId the thread that should execute this command    * @param order    the execution order    * @param sql      the explain plan SQL (e.g.<code>"explain plan for select *    *                 from t"</code>)    * @return the newly-added command    */
 specifier|public
 name|ConcurrentTestCommand
 name|addExplainCommand
@@ -400,7 +400,7 @@ name|command
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates a {@link PreparedStatement} for the given SQL. This command does      * not execute the SQL, it merely creates a PreparedStatement and stores it      * in the ConcurrentTestCommandExecutor.      *      * @param threadId the thread that should execute this command      * @param order the execution order      * @param sql the SQL to prepare (e.g.<code>"select * from t"</code>)      *      * @return the newly-added command      *      * @see #addFetchAndCompareCommand(int, int, int, String)      */
+comment|/**    * Creates a {@link PreparedStatement} for the given SQL. This command does    * not execute the SQL, it merely creates a PreparedStatement and stores it    * in the ConcurrentTestCommandExecutor.    *    * @param threadId the thread that should execute this command    * @param order    the execution order    * @param sql      the SQL to prepare (e.g.<code>"select * from t"</code>)    * @return the newly-added command    * @see #addFetchAndCompareCommand(int, int, int, String)    */
 specifier|public
 name|ConcurrentTestCommand
 name|addPrepareCommand
@@ -442,7 +442,7 @@ name|command
 argument_list|)
 return|;
 block|}
-comment|/**      * Executes a previously {@link #addPrepareCommand(int, int, String)      * prepared} SQL statement and compares its {@link ResultSet} to the given      * data.      *      *<p><b>Expected data format:</b><code>{ 'row1, col1 value', 'row1, col2      * value', ... }, { 'row2, col1 value', 'row2, col2 value', ... },      * ...</code>      *      *<ul>      *<li>For string data: enclose value in apostrophes, use doubled apostrophe      * to include an spostrophe in the value.</li>      *<li>For integer or real data: simply use the stringified value (e.g. 123,      * 12.3, 0.65). No scientific notation is allowed.</li>      *<li>For null values, use the word<code>null</code> without quotes.</li>      *</ul>      *<b>Example:</b><code>{ 'foo', 10, 3.14, null }</code>      *      *<p><b>Note on timeout:</b> If the previously prepared statement's {@link      * Statement#setQueryTimeout(int)} method throws an<code>      * UnsupportedOperationException</code> it is ignored and no timeout is set.      *      * @param threadId the thread that should execute this command      * @param order the execution order      * @param timeout the query timeout, in seconds (see above)      * @param expected the expected results (see above)      *      * @return the newly-added command      */
+comment|/**    * Executes a previously {@link #addPrepareCommand(int, int, String)    * prepared} SQL statement and compares its {@link ResultSet} to the given    * data.    *    *<p><b>Expected data format:</b><code>{ 'row1, col1 value', 'row1, col2    * value', ... }, { 'row2, col1 value', 'row2, col2 value', ... },    * ...</code></p>    *    *<ul>    *<li>For string data: enclose value in apostrophes, use doubled apostrophe    * to include an apostrophe in the value.</li>    *<li>For integer or real data: simply use the stringified value (e.g. 123,    * 12.3, 0.65). No scientific notation is allowed.</li>    *<li>For null values, use the word<code>null</code> without quotes.</li>    *</ul>    *<b>Example:</b><code>{ 'foo', 10, 3.14, null }</code>    *    *<p><b>Note on timeout:</b> If the previously prepared statement's    * {@link Statement#setQueryTimeout(int)} method throws an    * {@link UnsupportedOperationException} it is ignored and no timeout is set.    *    * @param threadId the thread that should execute this command    * @param order    the execution order    * @param timeout  the query timeout, in seconds (see above)    * @param expected the expected results (see above)    * @return the newly-added command    */
 specifier|public
 name|ConcurrentTestCommand
 name|addFetchAndCompareCommand
@@ -482,7 +482,7 @@ name|command
 argument_list|)
 return|;
 block|}
-comment|/**      * Closes a previously {@link #addPrepareCommand(int, int, String) prepared}      * SQL statement.      *      * @param threadId the thread that should execute this command      * @param order the execution order      *      * @return the newly-added command      */
+comment|/**    * Closes a previously {@link #addPrepareCommand(int, int, String) prepared}    * SQL statement.    *    * @param threadId the thread that should execute this command    * @param order    the execution order    * @return the newly-added command    */
 specifier|public
 name|ConcurrentTestCommand
 name|addCloseCommand
@@ -507,7 +507,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**      * Executes the given SQL via {@link Statement#executeUpdate(String)}. May      * be used for update as well as insert statements.      *      *<p><b>Note on timeout:</b> If the previously prepared statement's {@link      * Statement#setQueryTimeout(int)} method throws an<code>      * UnsupportedOperationException</code> it is ignored and no timeout is set.      *      * @param threadId the thread that should execute this command      * @param order the execution order      * @param timeout the query timeout, in seconds (see above)      * @param sql the insert/update/delete SQL      *      * @return the newly-added command      */
+comment|/**    * Executes the given SQL via {@link Statement#executeUpdate(String)}. May    * be used for update as well as insert statements.    *    *<p><b>Note on timeout:</b> If the previously prepared statement's    * {@link Statement#setQueryTimeout(int)} method throws an    * {@link UnsupportedOperationException} it is ignored and no timeout is set.    *    * @param threadId the thread that should execute this command    * @param order    the execution order    * @param timeout  the query timeout, in seconds (see above)    * @param sql      the insert/update/delete SQL    * @return the newly-added command    */
 specifier|public
 name|ConcurrentTestCommand
 name|addInsertCommand
@@ -547,7 +547,7 @@ name|command
 argument_list|)
 return|;
 block|}
-comment|/**      * Commits pending transaction on the thread's connection.      *      * @param threadId the thread that should execute this command      * @param order the execution order      *      * @return the newly-added command      */
+comment|/**    * Commits pending transaction on the thread's connection.    *    * @param threadId the thread that should execute this command    * @param order    the execution order    * @return the newly-added command    */
 specifier|public
 name|ConcurrentTestCommand
 name|addCommitCommand
@@ -572,7 +572,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**      * Rolls back pending transaction on the thread's connection.      *      * @param threadId the thread that should execute this command      * @param order the execution order      *      * @return the newly-added command      */
+comment|/**    * Rolls back pending transaction on the thread's connection.    *    * @param threadId the thread that should execute this command    * @param order    the execution order    * @return the newly-added command    */
 specifier|public
 name|ConcurrentTestCommand
 name|addRollbackCommand
@@ -597,7 +597,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**      * Executes a DDL statement immediately. Assumes the statement returns no      * information.      *      * @return the newly-added command      */
+comment|/**    * Executes a DDL statement immediately. Assumes the statement returns no    * information.    *    * @return the newly-added command    */
 specifier|public
 name|ConcurrentTestCommand
 name|addDdlCommand
@@ -627,7 +627,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**      * Handles adding a command to {@link #threadMap}.      *      * @return the newly-added command      */
+comment|/**    * Handles adding a command to {@link #threadMap}.    *    * @return the newly-added command    */
 specifier|protected
 name|ConcurrentTestCommand
 name|addCommand
@@ -724,7 +724,7 @@ return|return
 name|command
 return|;
 block|}
-comment|/**      * Configures a human-readable name for a given thread identifier. Does not      * imply that the thread will be created -- that only happens if there are      * commands added to the thread.      */
+comment|/**    * Configures a human-readable name for a given thread identifier. Does not    * imply that the thread will be created -- that only happens if there are    * commands added to the thread.    */
 specifier|public
 name|void
 name|setThreadName
@@ -740,11 +740,7 @@ name|threadNameMap
 operator|.
 name|put
 argument_list|(
-operator|new
-name|Integer
-argument_list|(
 name|threadId
-argument_list|)
 argument_list|,
 name|name
 argument_list|)
@@ -783,7 +779,7 @@ operator|=
 name|alternatePrintStream
 expr_stmt|;
 block|}
-comment|/**      * Sets the jdbc data source for executing the command threads.      */
+comment|/**    * Sets the jdbc data source for executing the command threads.    */
 specifier|public
 name|void
 name|setDataSource
@@ -808,7 +804,7 @@ operator|=
 name|jdbcProps
 expr_stmt|;
 block|}
-comment|/**      * Creates a {@link ConcurrentTestCommandExecutor} object for each define thread,      * and then runs them all.      *      * @throws Exception if no connection found or if a thread operation is      * interrupted      */
+comment|/**    * Creates a {@link ConcurrentTestCommandExecutor} object for each define thread,    * and then runs them all.    *    * @throws Exception if no connection found or if a thread operation is    *                   interrupted    */
 specifier|public
 name|void
 name|execute
@@ -843,6 +839,9 @@ name|clear
 argument_list|()
 expr_stmt|;
 name|Set
+argument_list|<
+name|Integer
+argument_list|>
 name|threadIds
 init|=
 name|getThreadIds
@@ -885,36 +884,19 @@ literal|0
 decl_stmt|;
 for|for
 control|(
-name|Iterator
-name|i
-init|=
+name|int
+name|threadId
+range|:
 name|threadIds
-operator|.
-name|iterator
-argument_list|()
-init|;
-name|i
-operator|.
-name|hasNext
-argument_list|()
-condition|;
 control|)
 block|{
-name|Integer
-name|threadId
-init|=
-operator|(
-name|Integer
-operator|)
-name|i
-operator|.
-name|next
-argument_list|()
-decl_stmt|;
-name|Iterator
+name|Iterable
+argument_list|<
+name|ConcurrentTestCommand
+argument_list|>
 name|commands
 init|=
-name|getCommandIterator
+name|getCommandIterable
 argument_list|(
 name|threadId
 argument_list|)
@@ -960,9 +942,6 @@ operator|new
 name|ConcurrentTestCommandExecutor
 argument_list|(
 name|threadId
-operator|.
-name|intValue
-argument_list|()
 argument_list|,
 name|getThreadName
 argument_list|(
@@ -996,29 +975,13 @@ block|}
 comment|// start all the threads
 for|for
 control|(
-name|int
-name|i
-init|=
-literal|0
-init|,
-name|n
-init|=
+name|ConcurrentTestCommandExecutor
+name|thread
+range|:
 name|threads
-operator|.
-name|length
-init|;
-name|i
-operator|<
-name|n
-condition|;
-name|i
-operator|++
 control|)
 block|{
-name|threads
-index|[
-name|i
-index|]
+name|thread
 operator|.
 name|start
 argument_list|()
@@ -1027,29 +990,13 @@ block|}
 comment|// wait for all threads to finish
 for|for
 control|(
-name|int
-name|i
-init|=
-literal|0
-init|,
-name|n
-init|=
+name|ConcurrentTestCommandExecutor
+name|thread
+range|:
 name|threads
-operator|.
-name|length
-init|;
-name|i
-operator|<
-name|n
-condition|;
-name|i
-operator|++
 control|)
 block|{
-name|threads
-index|[
-name|i
-index|]
+name|thread
 operator|.
 name|join
 argument_list|()
@@ -1079,33 +1026,12 @@ condition|)
 block|{
 for|for
 control|(
-name|int
-name|i
-init|=
-literal|0
-init|,
-name|n
-init|=
-name|threads
-operator|.
-name|length
-init|;
-name|i
-operator|<
-name|n
-condition|;
-name|i
-operator|++
-control|)
-block|{
 name|ConcurrentTestCommandExecutor
 name|executor
-init|=
+range|:
 name|threads
-index|[
-name|i
-index|]
-decl_stmt|;
+control|)
+block|{
 if|if
 condition|(
 name|executor
@@ -1128,32 +1054,16 @@ else|else
 block|{
 for|for
 control|(
-name|int
-name|i
-init|=
-literal|0
-init|,
-name|n
-init|=
+name|ConcurrentTestCommandExecutor
+name|thread
+range|:
 name|threads
-operator|.
-name|length
-init|;
-name|i
-operator|<
-name|n
-condition|;
-name|i
-operator|++
 control|)
 block|{
 name|Throwable
 name|cause
 init|=
-name|threads
-index|[
-name|i
-index|]
+name|thread
 operator|.
 name|getFailureCause
 argument_list|()
@@ -1172,18 +1082,12 @@ argument_list|(
 operator|new
 name|FailedThread
 argument_list|(
-name|threads
-index|[
-name|i
-index|]
+name|thread
 operator|.
 name|getName
 argument_list|()
 argument_list|,
-name|threads
-index|[
-name|i
-index|]
+name|thread
 operator|.
 name|getFailureLocation
 argument_list|()
@@ -1196,7 +1100,7 @@ block|}
 block|}
 block|}
 block|}
-comment|/**      * Returns whether any test thread failed. Valid after {@link #execute} has      * returned.      */
+comment|/**    * Returns whether any test thread failed. Valid after {@link #execute} has    * returned.    */
 specifier|public
 name|boolean
 name|failed
@@ -1210,7 +1114,7 @@ name|isEmpty
 argument_list|()
 return|;
 block|}
-comment|/** @return the list of failed threads (unmodifiable) */
+comment|/**    * @return the list of failed threads (unmodifiable)    */
 specifier|public
 name|List
 argument_list|<
@@ -1228,7 +1132,7 @@ name|failedThreads
 argument_list|)
 return|;
 block|}
-comment|/**      * Insures that the number of commands is the same for each thread, fills      * missing order value with null commands, and interleaves a synchronization      * command before each actual command. These steps are required for      * synchronized execution in FarragoConcurrencyTestCase.      */
+comment|/**    * Insures that the number of commands is the same for each thread, fills    * missing order value with null commands, and interleaves a synchronization    * command before each actual command. These steps are required for    * synchronized execution in FarragoConcurrencyTestCase.    */
 specifier|public
 name|void
 name|synchronizeCommandSets
@@ -1241,45 +1145,20 @@ literal|0
 decl_stmt|;
 for|for
 control|(
-name|Iterator
-argument_list|<
 name|TreeMap
 argument_list|<
 name|Integer
 argument_list|,
 name|ConcurrentTestCommand
 argument_list|>
-argument_list|>
-name|i
-init|=
+name|map
+range|:
 name|threadMap
 operator|.
 name|values
 argument_list|()
-operator|.
-name|iterator
-argument_list|()
-init|;
-name|i
-operator|.
-name|hasNext
-argument_list|()
-condition|;
 control|)
 block|{
-name|TreeMap
-argument_list|<
-name|Integer
-argument_list|,
-name|ConcurrentTestCommand
-argument_list|>
-name|commands
-init|=
-name|i
-operator|.
-name|next
-argument_list|()
-decl_stmt|;
 comment|// Fill in missing slots with null (no-op) commands.
 for|for
 control|(
@@ -1290,45 +1169,31 @@ literal|1
 init|;
 name|j
 operator|<
-operator|(
-name|commands
+name|map
 operator|.
 name|lastKey
-argument_list|()
-operator|)
-operator|.
-name|intValue
 argument_list|()
 condition|;
 name|j
 operator|++
 control|)
 block|{
-name|Integer
-name|key
-init|=
-operator|new
-name|Integer
-argument_list|(
-name|j
-argument_list|)
-decl_stmt|;
 if|if
 condition|(
 operator|!
-name|commands
+name|map
 operator|.
 name|containsKey
 argument_list|(
-name|key
+name|j
 argument_list|)
 condition|)
 block|{
-name|commands
+name|map
 operator|.
 name|put
 argument_list|(
-name|key
+name|j
 argument_list|,
 literal|null
 argument_list|)
@@ -1343,7 +1208,7 @@ name|max
 argument_list|(
 name|maxCommands
 argument_list|,
-name|commands
+name|map
 operator|.
 name|size
 argument_list|()
@@ -1353,48 +1218,23 @@ block|}
 comment|// Make sure all threads have the same number of commands.
 for|for
 control|(
-name|Iterator
-argument_list|<
 name|TreeMap
 argument_list|<
 name|Integer
 argument_list|,
 name|ConcurrentTestCommand
 argument_list|>
-argument_list|>
-name|i
-init|=
+name|map
+range|:
 name|threadMap
 operator|.
 name|values
 argument_list|()
-operator|.
-name|iterator
-argument_list|()
-init|;
-name|i
-operator|.
-name|hasNext
-argument_list|()
-condition|;
 control|)
 block|{
-name|TreeMap
-argument_list|<
-name|Integer
-argument_list|,
-name|ConcurrentTestCommand
-argument_list|>
-name|commands
-init|=
-name|i
-operator|.
-name|next
-argument_list|()
-decl_stmt|;
 if|if
 condition|(
-name|commands
+name|map
 operator|.
 name|size
 argument_list|()
@@ -1407,7 +1247,7 @@ control|(
 name|int
 name|j
 init|=
-name|commands
+name|map
 operator|.
 name|size
 argument_list|()
@@ -1422,15 +1262,11 @@ name|j
 operator|++
 control|)
 block|{
-name|commands
+name|map
 operator|.
 name|put
 argument_list|(
-operator|new
-name|Integer
-argument_list|(
 name|j
-argument_list|)
 argument_list|,
 literal|null
 argument_list|)
@@ -1441,8 +1277,6 @@ block|}
 comment|// Interleave synchronization commands before each command.
 for|for
 control|(
-name|Iterator
-argument_list|<
 name|Map
 operator|.
 name|Entry
@@ -1456,44 +1290,14 @@ argument_list|,
 name|ConcurrentTestCommand
 argument_list|>
 argument_list|>
-argument_list|>
-name|i
-init|=
+name|entry
+range|:
 name|threadMap
 operator|.
 name|entrySet
 argument_list|()
-operator|.
-name|iterator
-argument_list|()
-init|;
-name|i
-operator|.
-name|hasNext
-argument_list|()
-condition|;
 control|)
 block|{
-name|Map
-operator|.
-name|Entry
-argument_list|<
-name|Integer
-argument_list|,
-name|TreeMap
-argument_list|<
-name|Integer
-argument_list|,
-name|ConcurrentTestCommand
-argument_list|>
-argument_list|>
-name|threadCommandsEntry
-init|=
-name|i
-operator|.
-name|next
-argument_list|()
-decl_stmt|;
 name|TreeMap
 argument_list|<
 name|Integer
@@ -1502,7 +1306,7 @@ name|ConcurrentTestCommand
 argument_list|>
 name|commands
 init|=
-name|threadCommandsEntry
+name|entry
 operator|.
 name|getValue
 argument_list|()
@@ -1526,8 +1330,6 @@ argument_list|()
 decl_stmt|;
 for|for
 control|(
-name|Iterator
-argument_list|<
 name|Map
 operator|.
 name|Entry
@@ -1536,50 +1338,20 @@ name|Integer
 argument_list|,
 name|ConcurrentTestCommand
 argument_list|>
-argument_list|>
-name|j
-init|=
+name|commandEntry
+range|:
 name|commands
 operator|.
 name|entrySet
 argument_list|()
-operator|.
-name|iterator
-argument_list|()
-init|;
-name|j
-operator|.
-name|hasNext
-argument_list|()
-condition|;
 control|)
 block|{
-name|Map
-operator|.
-name|Entry
-argument_list|<
-name|Integer
-argument_list|,
-name|ConcurrentTestCommand
-argument_list|>
-name|commandEntry
-init|=
-name|j
-operator|.
-name|next
-argument_list|()
-decl_stmt|;
 name|int
 name|orderKey
 init|=
-operator|(
 name|commandEntry
 operator|.
 name|getKey
-argument_list|()
-operator|)
-operator|.
-name|intValue
 argument_list|()
 decl_stmt|;
 name|ConcurrentTestCommand
@@ -1594,9 +1366,6 @@ name|synchronizedCommands
 operator|.
 name|put
 argument_list|(
-operator|new
-name|Integer
-argument_list|(
 operator|(
 name|orderKey
 operator|*
@@ -1604,7 +1373,6 @@ literal|2
 operator|)
 operator|-
 literal|1
-argument_list|)
 argument_list|,
 operator|new
 name|AutoSynchronizationCommand
@@ -1615,19 +1383,15 @@ name|synchronizedCommands
 operator|.
 name|put
 argument_list|(
-operator|new
-name|Integer
-argument_list|(
 name|orderKey
 operator|*
 literal|2
-argument_list|)
 argument_list|,
 name|command
 argument_list|)
 expr_stmt|;
 block|}
-name|threadCommandsEntry
+name|entry
 operator|.
 name|setValue
 argument_list|(
@@ -1636,7 +1400,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Validates that all threads have the same number of      * SynchronizationCommands (otherwise a deadlock is guaranteed).      * @return true when valid, false when invalid.      */
+comment|/**    * Validates that all threads have the same number of    * SynchronizationCommands (otherwise a deadlock is guaranteed).    *    * @return true when valid, false when invalid.    */
 specifier|public
 name|boolean
 name|hasValidSynchronization
@@ -1650,8 +1414,6 @@ literal|1
 decl_stmt|;
 for|for
 control|(
-name|Iterator
-argument_list|<
 name|Map
 operator|.
 name|Entry
@@ -1665,44 +1427,14 @@ argument_list|,
 name|ConcurrentTestCommand
 argument_list|>
 argument_list|>
-argument_list|>
-name|i
-init|=
+name|entry
+range|:
 name|threadMap
 operator|.
 name|entrySet
 argument_list|()
-operator|.
-name|iterator
-argument_list|()
-init|;
-name|i
-operator|.
-name|hasNext
-argument_list|()
-condition|;
 control|)
 block|{
-name|Map
-operator|.
-name|Entry
-argument_list|<
-name|Integer
-argument_list|,
-name|TreeMap
-argument_list|<
-name|Integer
-argument_list|,
-name|ConcurrentTestCommand
-argument_list|>
-argument_list|>
-name|threadCommandsEntry
-init|=
-name|i
-operator|.
-name|next
-argument_list|()
-decl_stmt|;
 name|TreeMap
 argument_list|<
 name|Integer
@@ -1711,15 +1443,7 @@ name|ConcurrentTestCommand
 argument_list|>
 name|commands
 init|=
-operator|(
-name|TreeMap
-argument_list|<
-name|Integer
-argument_list|,
-name|ConcurrentTestCommand
-argument_list|>
-operator|)
-name|threadCommandsEntry
+name|entry
 operator|.
 name|getValue
 argument_list|()
@@ -1731,33 +1455,18 @@ literal|0
 decl_stmt|;
 for|for
 control|(
-name|Iterator
-argument_list|<
 name|ConcurrentTestCommand
-argument_list|>
-name|j
-init|=
+name|concurrentTestCommand
+range|:
 name|commands
 operator|.
 name|values
 argument_list|()
-operator|.
-name|iterator
-argument_list|()
-init|;
-name|j
-operator|.
-name|hasNext
-argument_list|()
-condition|;
 control|)
 block|{
 if|if
 condition|(
-name|j
-operator|.
-name|next
-argument_list|()
+name|concurrentTestCommand
 operator|instanceof
 name|SynchronizationCommand
 condition|)
@@ -1795,7 +1504,7 @@ return|return
 literal|true
 return|;
 block|}
-comment|/**      * Returns a set of thread IDs.      */
+comment|/**    * Returns a set of thread IDs.    */
 specifier|protected
 name|Set
 argument_list|<
@@ -1811,7 +1520,7 @@ name|keySet
 argument_list|()
 return|;
 block|}
-comment|/**      * Retrieves the name of a given thread. If no thread names were configured,      * returns the concatenation of "#" and the thread's numeric identifier.      *      * @return human-readable thread name      */
+comment|/**    * Retrieves the name of a given thread. If no thread names were configured,    * returns the concatenation of "#" and the thread's numeric identifier.    *    * @return human-readable thread name    */
 specifier|protected
 name|String
 name|getThreadName
@@ -1848,7 +1557,7 @@ name|threadId
 return|;
 block|}
 block|}
-comment|/**      * Indicates whether commands generated by this generator require special      * handling. Default implement returns false.      */
+comment|/**    * Indicates whether commands generated by this generator require special    * handling. Default implement returns false.    */
 name|boolean
 name|requiresCustomErrorHandling
 parameter_list|()
@@ -1857,7 +1566,7 @@ return|return
 literal|false
 return|;
 block|}
-comment|/**      * Custom error handling occurs here if {@link      * #requiresCustomErrorHandling()} returns true. Default implementation does      * nothing.      */
+comment|/**    * Custom error handling occurs here if {@link    * #requiresCustomErrorHandling()} returns true. Default implementation does    * nothing.    */
 name|void
 name|customErrorHandler
 parameter_list|(
@@ -1866,46 +1575,45 @@ name|executor
 parameter_list|)
 block|{
 block|}
-comment|/**      * Returns a {@link Collection} of {@link ConcurrentTestCommand}      * objects for the given thread ID.      */
+comment|/**    * Returns a {@link Collection} of {@link ConcurrentTestCommand}    * objects for the given thread ID.    */
 name|Collection
+argument_list|<
+name|ConcurrentTestCommand
+argument_list|>
 name|getCommands
 parameter_list|(
-name|Integer
+name|int
 name|threadId
 parameter_list|)
 block|{
 assert|assert
-operator|(
 name|threadMap
 operator|.
 name|containsKey
 argument_list|(
 name|threadId
 argument_list|)
-operator|)
 assert|;
 return|return
-operator|(
-operator|(
-name|TreeMap
-operator|)
 name|threadMap
 operator|.
 name|get
 argument_list|(
 name|threadId
 argument_list|)
-operator|)
 operator|.
 name|values
 argument_list|()
 return|;
 block|}
-comment|/**      * Returns an {@link Iterator} of {@link ConcurrentTestCommand}      * objects for the given thread ID.      */
-name|Iterator
-name|getCommandIterator
+comment|/**    * Returns an {@link Iterator} of {@link ConcurrentTestCommand}    * objects for the given thread ID.    *    * @param threadId Thread id    */
+name|Iterable
+argument_list|<
+name|ConcurrentTestCommand
+argument_list|>
+name|getCommandIterable
 parameter_list|(
-name|Integer
+name|int
 name|threadId
 parameter_list|)
 block|{
@@ -1914,12 +1622,9 @@ name|getCommands
 argument_list|(
 name|threadId
 argument_list|)
-operator|.
-name|iterator
-argument_list|()
 return|;
 block|}
-comment|/**      * Prints a description of the commands to be executed for a given thread.      */
+comment|/**    * Prints a description of the commands to be executed for a given thread.    */
 name|void
 name|printCommands
 parameter_list|(
@@ -1937,19 +1642,13 @@ literal|1
 decl_stmt|;
 for|for
 control|(
-name|Iterator
-name|i
-init|=
-name|getCommandIterator
+name|ConcurrentTestCommand
+name|command
+range|:
+name|getCommandIterable
 argument_list|(
 name|threadId
 argument_list|)
-init|;
-name|i
-operator|.
-name|hasNext
-argument_list|()
-condition|;
 control|)
 block|{
 name|out
@@ -1963,10 +1662,7 @@ operator|++
 operator|+
 literal|": "
 operator|+
-name|i
-operator|.
-name|next
-argument_list|()
+name|command
 operator|.
 name|getClass
 argument_list|()
@@ -1978,7 +1674,7 @@ expr_stmt|;
 block|}
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------
-comment|/**      * abstract base to handle SQLExceptions      */
+comment|/**    * abstract base to handle SQLExceptions    */
 specifier|protected
 specifier|static
 specifier|abstract
@@ -2236,7 +1932,7 @@ block|}
 block|}
 block|}
 block|}
-comment|/**      * SynchronizationCommand causes the execution thread to wait for all other      * threads in the test before continuing.      */
+comment|/**    * SynchronizationCommand causes the execution thread to wait for all other    * threads in the test before continuing.    */
 specifier|static
 class|class
 name|SynchronizationCommand
@@ -2268,7 +1964,7 @@ argument_list|()
 expr_stmt|;
 block|}
 block|}
-comment|/**      * AutoSynchronizationCommand is idential to SynchronizationCommand, except      * that it is generated automatically by the test harness and is not counted      * when displaying the step number in which an error occurred.      */
+comment|/**    * AutoSynchronizationCommand is idential to SynchronizationCommand, except    * that it is generated automatically by the test harness and is not counted    * when displaying the step number in which an error occurred.    */
 specifier|static
 class|class
 name|AutoSynchronizationCommand
@@ -2284,7 +1980,7 @@ argument_list|()
 expr_stmt|;
 block|}
 block|}
-comment|/**      * SleepCommand causes the execution thread to wait for all other threads in      * the test before continuing.      */
+comment|/**    * SleepCommand causes the execution thread to wait for all other threads in    * the test before continuing.    */
 specifier|private
 specifier|static
 class|class
@@ -2329,7 +2025,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * ExplainCommand executes explain plan commands. Automatically closes the      * {@link Statement} before returning from {@link      * #execute(ConcurrentTestCommandExecutor)}.      */
+comment|/**    * ExplainCommand executes explain plan commands. Automatically closes the    * {@link Statement} before returning from {@link    * #execute(ConcurrentTestCommandExecutor)}.    */
 specifier|private
 specifier|static
 class|class
@@ -2436,7 +2132,7 @@ expr_stmt|;
 block|}
 block|}
 block|}
-comment|/**      * PrepareCommand creates a {@link PreparedStatement}. Stores the prepared      * statement in the ConcurrentTestCommandExecutor.      */
+comment|/**    * PrepareCommand creates a {@link PreparedStatement}. Stores the prepared    * statement in the ConcurrentTestCommandExecutor.    */
 specifier|private
 specifier|static
 class|class
@@ -2494,7 +2190,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * CloseCommand closes a previously prepared statement. If no statement is      * stored in the ConcurrentTestCommandExecutor, it does nothing.      */
+comment|/**    * CloseCommand closes a previously prepared statement. If no statement is    * stored in the ConcurrentTestCommandExecutor, it does nothing.    */
 specifier|private
 specifier|static
 class|class
@@ -2606,7 +2302,7 @@ literal|false
 return|;
 block|}
 block|}
-comment|/**      * FetchAndCompareCommand executes a previously prepared statement stored in      * the ConcurrentTestCommandExecutor and then validates the returned      * rows against expected data.      */
+comment|/**    * FetchAndCompareCommand executes a previously prepared statement stored in    * the ConcurrentTestCommandExecutor and then validates the returned    * rows against expected data.    */
 specifier|private
 specifier|static
 class|class
@@ -2845,7 +2541,7 @@ name|testValues
 argument_list|()
 expr_stmt|;
 block|}
-comment|/**          * Parses expected values. See {@link          * ConcurrentTestCommandGenerator#addFetchAndCompareCommand(int,          * int, int, String)} for details on format of<code>expected</code>.          *          * @throws IllegalStateException if there are formatting errors in          *<code>expected</code>          */
+comment|/**      * Parses expected values. See {@link      * ConcurrentTestCommandGenerator#addFetchAndCompareCommand(int,      * int, int, String)} for details on format of<code>expected</code>.      *      * @throws IllegalStateException if there are formatting errors in      *<code>expected</code>      */
 specifier|private
 name|void
 name|parseExpected
@@ -3444,7 +3140,7 @@ operator|=
 name|rows
 expr_stmt|;
 block|}
-comment|/**          * Validates expected data against retrieved data.          */
+comment|/**      * Validates expected data against retrieved data.      */
 specifier|private
 name|void
 name|testValues
@@ -3561,7 +3257,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**          * Validates {@link ResultSet} against expected data.          */
+comment|/**      * Validates {@link ResultSet} against expected data.      */
 specifier|private
 name|void
 name|testValues
@@ -4248,7 +3944,7 @@ literal|">"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**          * Outputs expected and result data in tabular format.          */
+comment|/**      * Outputs expected and result data in tabular format.      */
 specifier|private
 name|void
 name|dumpData
@@ -4736,7 +4432,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**      * InsertCommand exeutes an insert, update or delete SQL statement. Uses      * {@link Statement#executeUpdate(String)}.      */
+comment|/**    * InsertCommand exeutes an insert, update or delete SQL statement. Uses    * {@link Statement#executeUpdate(String)}.    */
 specifier|private
 specifier|static
 class|class
@@ -4805,7 +4501,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * CommitCommand commits pending transactions via {@link      * Connection#commit()}.      */
+comment|/**    * CommitCommand commits pending transactions via {@link    * Connection#commit()}.    */
 specifier|private
 specifier|static
 class|class
@@ -4833,7 +4529,7 @@ argument_list|()
 expr_stmt|;
 block|}
 block|}
-comment|/**      * RollbackCommand rolls back pending transactions via {@link      * Connection#rollback()}.      */
+comment|/**    * RollbackCommand rolls back pending transactions via {@link    * Connection#rollback()}.    */
 specifier|private
 specifier|static
 class|class
@@ -4861,7 +4557,7 @@ argument_list|()
 expr_stmt|;
 block|}
 block|}
-comment|/**      * DdlCommand executes DDL commands. Automatically closes the {@link      * Statement} before returning from {@link      * #doExecute(ConcurrentTestCommandExecutor)}.      */
+comment|/**    * DdlCommand executes DDL commands. Automatically closes the {@link    * Statement} before returning from {@link    * #doExecute(ConcurrentTestCommandExecutor)}.    */
 specifier|private
 specifier|static
 class|class

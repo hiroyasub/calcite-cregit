@@ -50,7 +50,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A scope which contains nothing besides a few parameters. Like {@link  * EmptyScope} (which is its base class), it has no parent scope.  * @see ParameterNamespace  */
+comment|/**  * A scope which contains nothing besides a few parameters. Like {@link  * EmptyScope} (which is its base class), it has no parent scope.  *  * @see ParameterNamespace  */
 end_comment
 
 begin_class
@@ -61,7 +61,7 @@ extends|extends
 name|EmptyScope
 block|{
 comment|//~ Instance fields --------------------------------------------------------
-comment|/**      * Map from the simple names of the parameters to types of the parameters      * ({@link RelDataType}).      */
+comment|/**    * Map from the simple names of the parameters to types of the parameters    * ({@link RelDataType}).    */
 specifier|private
 specifier|final
 name|Map

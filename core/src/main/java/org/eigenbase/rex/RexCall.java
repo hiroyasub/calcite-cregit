@@ -447,7 +447,7 @@ return|return
 name|op
 return|;
 block|}
-comment|/**      * Creates a new call to the same operator with different operands.      *      * @param type Return type      * @param operands Operands to call      *      * @return New call      */
+comment|/**    * Creates a new call to the same operator with different operands.    *    * @param type     Return type    * @param operands Operands to call    * @return New call    */
 specifier|public
 name|RexCall
 name|clone

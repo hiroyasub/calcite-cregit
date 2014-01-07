@@ -87,7 +87,7 @@ class|class
 name|RexMultisetUtil
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
-comment|/**      * A set defining all implementable multiset calls      */
+comment|/**    * A set defining all implementable multiset calls    */
 specifier|private
 specifier|static
 specifier|final
@@ -166,7 +166,7 @@ name|instance
 argument_list|()
 decl_stmt|;
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Returns true if any expression in a program contains a mixing between      * multiset and non-multiset calls.      */
+comment|/**    * Returns true if any expression in a program contains a mixing between    * multiset and non-multiset calls.    */
 specifier|public
 specifier|static
 name|boolean
@@ -236,7 +236,7 @@ return|return
 literal|false
 return|;
 block|}
-comment|/**      * Returns true if a node contains a mixing between multiset and      * non-multiset calls.      */
+comment|/**    * Returns true if a node contains a mixing between multiset and    * non-multiset calls.    */
 specifier|public
 specifier|static
 name|boolean
@@ -280,7 +280,7 @@ name|multisetCount
 operator|)
 return|;
 block|}
-comment|/**      * Returns true if node contains a multiset operator, otherwise false. Use      * it with deep=false when checking if a RexCall is a multiset call.      *      * @param node Expression      * @param deep If true, returns whether expression contains a multiset. If      * false, returns whether expression<em>is</em> a multiset.      */
+comment|/**    * Returns true if node contains a multiset operator, otherwise false. Use    * it with deep=false when checking if a RexCall is a multiset call.    *    * @param node Expression    * @param deep If true, returns whether expression contains a multiset. If    *             false, returns whether expression<em>is</em> a multiset.    */
 specifier|public
 specifier|static
 name|boolean
@@ -305,7 +305,7 @@ name|deep
 argument_list|)
 return|;
 block|}
-comment|/**      * Returns whether a list of expressions contains a multiset.      */
+comment|/**    * Returns whether a list of expressions contains a multiset.    */
 specifier|public
 specifier|static
 name|boolean
@@ -348,7 +348,7 @@ return|return
 literal|false
 return|;
 block|}
-comment|/**      * Returns whether a program contains a multiset.      */
+comment|/**    * Returns whether a program contains a multiset.    */
 specifier|public
 specifier|static
 name|boolean
@@ -370,7 +370,7 @@ literal|true
 argument_list|)
 return|;
 block|}
-comment|/**      * Returns true if call is call to<code>CAST</code> and the to/from cast      * types are of multiset types      */
+comment|/**    * Returns true if call is call to<code>CAST</code> and the to/from cast    * types are of multiset types    */
 specifier|public
 specifier|static
 name|boolean
@@ -414,7 +414,7 @@ operator|.
 name|MULTISET
 return|;
 block|}
-comment|/**      * Returns a reference to the first found multiset call or null if none was      * found      */
+comment|/**    * Returns a reference to the first found multiset call or null if none was    * found    */
 specifier|public
 specifier|static
 name|RexCall
@@ -557,7 +557,7 @@ name|firstOne
 return|;
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------
-comment|/**      * A RexShuttle that traverse all RexNode and counts total number of      * RexCalls traversed and number of multiset calls traversed.      *      *<p>totalCount>= multisetCount always holds true.      */
+comment|/**    * A RexShuttle that traverse all RexNode and counts total number of    * RexCalls traversed and number of multiset calls traversed.    *    *<p>totalCount>= multisetCount always holds true.    */
 specifier|private
 specifier|static
 class|class

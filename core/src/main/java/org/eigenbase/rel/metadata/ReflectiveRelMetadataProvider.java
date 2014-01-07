@@ -100,7 +100,7 @@ argument_list|>
 name|visitDispatcher
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a ReflectiveRelMetadataProvider.      */
+comment|/**    * Creates a ReflectiveRelMetadataProvider.    */
 specifier|protected
 name|ReflectiveRelMetadataProvider
 parameter_list|()
@@ -136,7 +136,7 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Maps the parameter type signature to look up for a given metadata query.      *      * @param metadataQueryName name of metadata query to map      * @param parameterTypes argument types (beyond the overloaded rel type) to      * map      */
+comment|/**    * Maps the parameter type signature to look up for a given metadata query.    *    * @param metadataQueryName name of metadata query to map    * @param parameterTypes    argument types (beyond the overloaded rel type) to    *                          map    */
 specifier|protected
 name|void
 name|mapParameterTypes

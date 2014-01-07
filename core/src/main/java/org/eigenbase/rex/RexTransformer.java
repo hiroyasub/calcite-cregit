@@ -149,7 +149,7 @@ operator|.
 name|andOperator
 argument_list|)
 expr_stmt|;
-comment|/** NOTE the OR operator is NOT missing.          * see {@link org.eigenbase.test.RexTransformerTest} */
+comment|/** NOTE the OR operator is NOT missing.      * see {@link org.eigenbase.test.RexTransformerTest} */
 name|transformableOperators
 operator|.
 name|add

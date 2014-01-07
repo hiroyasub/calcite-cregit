@@ -64,13 +64,13 @@ argument_list|>
 argument_list|()
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates an options list with no options.      */
+comment|/**    * Creates an options list with no options.    */
 specifier|public
 name|OptionsList
 parameter_list|()
 block|{
 block|}
-comment|/**      * Creates an options list with an array of options.      */
+comment|/**    * Creates an options list with an array of options.    */
 specifier|public
 name|OptionsList
 parameter_list|(
@@ -115,7 +115,7 @@ name|option
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Tells the options list that the given options are mutually exclusive.      * This means that at most one of the given options can be specified.      *      *<p>To create a set mutually exclusive options, specify minCount = 0 or 1,      * maxCount = 1. To create a set of mutually inclusive options, specify      * minCount = 1, maxCount = -1.</p>      *      * @param options List of mutually exclusive options      * @param minCount Minimum number of these options which must be specified.      * @param maxCount Maximum number of these options which must be specified.      *      * @pre None of the options must be mandatory.      */
+comment|/**    * Tells the options list that the given options are mutually exclusive.    * This means that at most one of the given options can be specified.    *    *<p>To create a set mutually exclusive options, specify minCount = 0 or 1,    * maxCount = 1. To create a set of mutually inclusive options, specify    * minCount = 1, maxCount = -1.</p>    *    * @param options  List of mutually exclusive options    * @param minCount Minimum number of these options which must be specified.    * @param maxCount Maximum number of these options which must be specified.    * @pre None of the options must be mandatory.    */
 specifier|public
 name|void
 name|constrain
@@ -540,7 +540,7 @@ argument_list|)
 return|;
 block|}
 comment|//~ Inner Interfaces -------------------------------------------------------
-comment|/**      * Handles the event of setting options. One implementation stores options      * in a property list; another implementation uses reflection.      */
+comment|/**    * Handles the event of setting options. One implementation stores options    * in a property list; another implementation uses reflection.    */
 interface|interface
 name|OptionHandler
 block|{
@@ -603,19 +603,19 @@ parameter_list|)
 block|{
 block|}
 block|}
-comment|/**      * Definition of a command-line option, including its short and long names,      * description, default value, and whether it is mandatory.      *      *<p>You can optionally provide a {@link OptionsList.OptionHandler handler}      * to handle events such as the option receiving a value, or a value being      * of the wrong format. If you do not provide a handler, the value is stored      * inside the option, and can be retrieved via</p>      */
+comment|/**    * Definition of a command-line option, including its short and long names,    * description, default value, and whether it is mandatory.    *    *<p>You can optionally provide a {@link OptionsList.OptionHandler handler}    * to handle events such as the option receiving a value, or a value being    * of the wrong format. If you do not provide a handler, the value is stored    * inside the option, and can be retrieved via</p>    */
 specifier|public
 specifier|static
 specifier|abstract
 class|class
 name|Option
 block|{
-comment|/**          * Holds the runtime value of this option. Set by the default          * implementation {@link #set}. If the user has supplied an {@link          * OptionHandler}, or overridden the<code>set</code> method, this field          * is not assigned.          *          *<p>Several derived classes have typesafe methods to access this          * field: see {@link OptionsList.BooleanOption#booleanValue}, {@link          * OptionsList.StringOption#stringValue}, {@link          * OptionsList.NumberOption#intValue}, {@link          * OptionsList.NumberOption#doubleValue}.</p>          */
+comment|/**      * Holds the runtime value of this option. Set by the default      * implementation {@link #set}. If the user has supplied an {@link      * OptionHandler}, or overridden the<code>set</code> method, this field      * is not assigned.      *      *<p>Several derived classes have typesafe methods to access this      * field: see {@link OptionsList.BooleanOption#booleanValue}, {@link      * OptionsList.StringOption#stringValue}, {@link      * OptionsList.NumberOption#intValue}, {@link      * OptionsList.NumberOption#doubleValue}.</p>      */
 specifier|protected
 name|Object
 name|value
 decl_stmt|;
-comment|/**          * Default value of option, or null if there is no default value.          */
+comment|/**      * Default value of option, or null if there is no default value.      */
 specifier|private
 specifier|final
 name|Object
@@ -626,13 +626,13 @@ specifier|final
 name|String
 name|description
 decl_stmt|;
-comment|/**          * Short name of option, used as a flag, e.g. "c".          */
+comment|/**      * Short name of option, used as a flag, e.g. "c".      */
 specifier|private
 specifier|final
 name|String
 name|flag
 decl_stmt|;
-comment|/**          * Long name of option, e.g. "color".          */
+comment|/**      * Long name of option, e.g. "color".      */
 specifier|private
 specifier|final
 name|String
@@ -749,7 +749,7 @@ else|:
 name|flag
 return|;
 block|}
-comment|/**          * Returns the value of this option for the most recent call to {@link          * #parse}.          *          *<p>If you specified an {@link OptionsList.OptionHandler}, this value          * will not be set. Also note that this method is unsafe if the same          * options are shared between multiple threads.</p>          *          *<p>Some derived classes have methods which return the same          * information in a typesafe manner. For example: {@link          * OptionsList.BooleanOption#booleanValue}, {@link          * OptionsList.NumberOption#intValue}.</p>          */
+comment|/**      * Returns the value of this option for the most recent call to {@link      * #parse}.      *      *<p>If you specified an {@link OptionsList.OptionHandler}, this value      * will not be set. Also note that this method is unsafe if the same      * options are shared between multiple threads.</p>      *      *<p>Some derived classes have methods which return the same      * information in a typesafe manner. For example: {@link      * OptionsList.BooleanOption#booleanValue}, {@link      * OptionsList.NumberOption#intValue}.</p>      */
 specifier|public
 name|Object
 name|getValue
@@ -759,7 +759,7 @@ return|return
 name|value
 return|;
 block|}
-comment|/**          * Tries to apply this option to the<tt>i</tt>th member of          *<tt>args</tt>.          *          * @param args Argument list          * @param i Offset of argument in argument list          *          * @return If matched, the offset of the argument after the last one          * matched, otherwise<tt>i</tt>.          */
+comment|/**      * Tries to apply this option to the<tt>i</tt>th member of      *<tt>args</tt>.      *      * @param args Argument list      * @param i    Offset of argument in argument list      * @return If matched, the offset of the argument after the last one      * matched, otherwise<tt>i</tt>.      */
 specifier|public
 name|int
 name|match
@@ -940,7 +940,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**          * Converts an argument to the correct value type, and acts on the          * value.          *          *<p>What action is taken depends upon whether the value is valid for          * this argument type, and whether there is a handler. If there is a          * handler, this method calls either {@link          * OptionsList.OptionHandler#set} or {@link          * OptionsList.OptionHandler#invalidValue}. If there is no handler, the          * method should execute a reasonable default action like assigning to a          * field via reflection.</p>          *          * @param arg Argument          */
+comment|/**      * Converts an argument to the correct value type, and acts on the      * value.      *      *<p>What action is taken depends upon whether the value is valid for      * this argument type, and whether there is a handler. If there is a      * handler, this method calls either {@link      * OptionsList.OptionHandler#set} or {@link      * OptionsList.OptionHandler#invalidValue}. If there is no handler, the      * method should execute a reasonable default action like assigning to a      * field via reflection.</p>      *      * @param arg Argument      */
 specifier|protected
 specifier|abstract
 name|void
@@ -950,7 +950,7 @@ name|String
 name|arg
 parameter_list|)
 function_decl|;
-comment|/**          * Called by the parser when an argument is not a valid value for this          * type of argument.          *          *<p>For example, if "flag" is a boolean argument and they specify          * "flag=oui" on the command-line, the parser will call<code>          * valueError("oui")</code>.</p>          *          *<p>The default implementation calls {@link          * OptionsList.OptionHandler#invalidValue} if there is a handler, or          * prints a message to {@link System#out} if there is not. Derived          * option classes can override this method.</p>          *          * @param arg String value which is supposed to match the parameter, but          * doesn't.          */
+comment|/**      * Called by the parser when an argument is not a valid value for this      * type of argument.      *      *<p>For example, if "flag" is a boolean argument and they specify      * "flag=oui" on the command-line, the parser will call<code>      * valueError("oui")</code>.</p>      *      *<p>The default implementation calls {@link      * OptionsList.OptionHandler#invalidValue} if there is a handler, or      * prints a message to {@link System#out} if there is not. Derived      * option classes can override this method.</p>      *      * @param arg String value which is supposed to match the parameter, but      *            doesn't.      */
 specifier|protected
 name|void
 name|valueError

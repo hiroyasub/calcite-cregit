@@ -65,7 +65,7 @@ extends|extends
 name|ZonelessDatetime
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
-comment|/**      * SerialVersionUID created with JDK 1.5 serialver tool.      */
+comment|/**    * SerialVersionUID created with JDK 1.5 serialver tool.    */
 specifier|private
 specifier|static
 specifier|final
@@ -86,7 +86,7 @@ name|Time
 name|tempTime
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Constructs a ZonelessTime      */
+comment|/**    * Constructs a ZonelessTime    */
 specifier|public
 name|ZonelessTime
 parameter_list|()
@@ -96,7 +96,7 @@ operator|=
 literal|0
 expr_stmt|;
 block|}
-comment|/**      * Constructs a ZonelessTime with precision.      *      *<p>The precision is the number of digits to the right of the decimal      * point in the seconds value. For example, a<code>TIME(6)</code> has a      * precision to microseconds.      *      * @param precision Number of digits of precision      */
+comment|/**    * Constructs a ZonelessTime with precision.    *    *<p>The precision is the number of digits to the right of the decimal    * point in the seconds value. For example, a<code>TIME(6)</code> has a    * precision to microseconds.    *    * @param precision Number of digits of precision    */
 specifier|public
 name|ZonelessTime
 parameter_list|(
@@ -176,7 +176,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**      * Override ZonelessDatetime.      *      *<p>NOTE: the returned timestamp is based on the current date of the      * specified time zone, rather than the context variable for current_date,      * as specified by the SQL standard.      */
+comment|/**    * Override ZonelessDatetime.    *    *<p>NOTE: the returned timestamp is based on the current date of the    * specified time zone, rather than the context variable for current_date,    * as specified by the SQL standard.    */
 specifier|public
 name|long
 name|getJdbcTimestamp
@@ -319,7 +319,7 @@ name|getTimeInMillis
 argument_list|()
 return|;
 block|}
-comment|/**      * Converts this ZonelessTime to a java.sql.Time and formats it via the      * {@link java.sql.Time#toString() toString()} method of that class.      *      * @return the formatted time string      */
+comment|/**    * Converts this ZonelessTime to a java.sql.Time and formats it via the    * {@link java.sql.Time#toString() toString()} method of that class.    *    * @return the formatted time string    */
 specifier|public
 name|String
 name|toString
@@ -345,7 +345,7 @@ name|toString
 argument_list|()
 return|;
 block|}
-comment|/**      * Formats this ZonelessTime via a SimpleDateFormat      *      * @param format format string, as required by SimpleDateFormat      *      * @return the formatted time string      */
+comment|/**    * Formats this ZonelessTime via a SimpleDateFormat    *    * @param format format string, as required by SimpleDateFormat    * @return the formatted time string    */
 specifier|public
 name|String
 name|toString
@@ -380,7 +380,7 @@ name|jdbcTime
 argument_list|)
 return|;
 block|}
-comment|/**      * Parses a string as a ZonelessTime.      *      * @param s a string representing a time in ISO format, i.e. according to      * the {@link SimpleDateFormat} string "HH:mm:ss"      *      * @return the parsed time, or null if parsing failed      */
+comment|/**    * Parses a string as a ZonelessTime.    *    * @param s a string representing a time in ISO format, i.e. according to    *          the {@link SimpleDateFormat} string "HH:mm:ss"    * @return the parsed time, or null if parsing failed    */
 specifier|public
 specifier|static
 name|ZonelessTime
@@ -401,7 +401,7 @@ name|TimeFormatStr
 argument_list|)
 return|;
 block|}
-comment|/**      * Parses a string as a ZonelessTime using a given format string.      *      * @param s a string representing a time the given format      * @param format format string as per {@link SimpleDateFormat}      *      * @return the parsed time, or null if parsing failed      */
+comment|/**    * Parses a string as a ZonelessTime using a given format string.    *    * @param s      a string representing a time the given format    * @param format format string as per {@link SimpleDateFormat}    * @return the parsed time, or null if parsing failed    */
 specifier|public
 specifier|static
 name|ZonelessTime
@@ -475,7 +475,7 @@ return|return
 name|zt
 return|;
 block|}
-comment|/**      * Gets a temporary Time object. The same object is returned every time.      */
+comment|/**    * Gets a temporary Time object. The same object is returned every time.    */
 specifier|protected
 name|Time
 name|getTempTime

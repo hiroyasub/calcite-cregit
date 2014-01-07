@@ -66,7 +66,7 @@ specifier|final
 name|SqlValidatorTable
 name|table
 decl_stmt|;
-comment|/**      * Creates a DelegatingSqlValidatorTable.      *      * @param table Parent table      */
+comment|/**    * Creates a DelegatingSqlValidatorTable.    *    * @param table Parent table    */
 specifier|public
 name|DelegatingSqlValidatorTable
 parameter_list|(

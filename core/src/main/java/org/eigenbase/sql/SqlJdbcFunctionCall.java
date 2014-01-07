@@ -151,7 +151,7 @@ specifier|final
 name|String
 name|systemFunctions
 decl_stmt|;
-comment|/**      * List of all numeric function names defined by JDBC.      */
+comment|/**    * List of all numeric function names defined by JDBC.    */
 specifier|private
 specifier|static
 specifier|final
@@ -209,7 +209,7 @@ block|,
 literal|"TRUNCATE"
 block|}
 decl_stmt|;
-comment|/**      * List of all string function names defined by JDBC.      */
+comment|/**    * List of all string function names defined by JDBC.    */
 specifier|private
 specifier|static
 specifier|final
@@ -258,7 +258,7 @@ comment|// "LEFT", "TRIM", "REPEAT", "REPLACE",
 comment|// "RIGHT", "SPACE", "SUBSTRING", "UPPER", "INITCAP", "OVERLAY"
 block|}
 decl_stmt|;
-comment|/**      * List of all time/date function names defined by JDBC.      */
+comment|/**    * List of all time/date function names defined by JDBC.    */
 specifier|private
 specifier|static
 specifier|final
@@ -302,7 +302,7 @@ block|,
 literal|"YEAR"
 block|}
 decl_stmt|;
-comment|/**      * List of all system function names defined by JDBC.      */
+comment|/**    * List of all system function names defined by JDBC.    */
 specifier|private
 specifier|static
 specifier|final
@@ -963,7 +963,7 @@ literal|"}"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * @see java.sql.DatabaseMetaData#getNumericFunctions      */
+comment|/**    * @see java.sql.DatabaseMetaData#getNumericFunctions    */
 specifier|public
 specifier|static
 name|String
@@ -974,7 +974,7 @@ return|return
 name|numericFunctions
 return|;
 block|}
-comment|/**      * @see java.sql.DatabaseMetaData#getStringFunctions      */
+comment|/**    * @see java.sql.DatabaseMetaData#getStringFunctions    */
 specifier|public
 specifier|static
 name|String
@@ -985,7 +985,7 @@ return|return
 name|stringFunctions
 return|;
 block|}
-comment|/**      * @see java.sql.DatabaseMetaData#getTimeDateFunctions      */
+comment|/**    * @see java.sql.DatabaseMetaData#getTimeDateFunctions    */
 specifier|public
 specifier|static
 name|String
@@ -996,7 +996,7 @@ return|return
 name|timeDateFunctions
 return|;
 block|}
-comment|/**      * @see java.sql.DatabaseMetaData#getSystemFunctions      */
+comment|/**    * @see java.sql.DatabaseMetaData#getSystemFunctions    */
 specifier|public
 specifier|static
 name|String
@@ -1008,7 +1008,7 @@ name|systemFunctions
 return|;
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------
-comment|/**      * Represent a Strategy Object to create a {@link SqlCall} by providing the      * feature of reording, adding/dropping operands.      */
+comment|/**    * Represent a Strategy Object to create a {@link SqlCall} by providing the    * feature of reording, adding/dropping operands.    */
 specifier|private
 specifier|static
 class|class
@@ -1023,7 +1023,7 @@ name|int
 index|[]
 name|order
 decl_stmt|;
-comment|/**          * List of the possible numbers of operands this function can take.          */
+comment|/**      * List of the possible numbers of operands this function can take.      */
 specifier|final
 name|int
 index|[]
@@ -1063,7 +1063,7 @@ name|argCount
 block|}
 expr_stmt|;
 block|}
-comment|/**          * Creates a MakeCall strategy object with reordering of operands.          *          *<p>The reordering is specified by an int array where the value of          * element at position<code>i</code> indicates to which element in a          * new SqlNode[] array the operand goes.          *          * @param operator Operator          * @param order Order          *          * @pre order != null          * @pre order[i]< order.length          * @pre order.length> 0          * @pre argCounts == order.length          */
+comment|/**      * Creates a MakeCall strategy object with reordering of operands.      *      *<p>The reordering is specified by an int array where the value of      * element at position<code>i</code> indicates to which element in a      * new SqlNode[] array the operand goes.      *      * @param operator Operator      * @param order    Order      * @pre order != null      * @pre order[i]< order.length      * @pre order.length> 0      * @pre argCounts == order.length      */
 name|MakeCall
 parameter_list|(
 name|SqlOperator
@@ -1189,7 +1189,7 @@ operator|.
 name|argCounts
 return|;
 block|}
-comment|/**          * Uses the data in {@link #order} to reorder a SqlNode[] array.          *          * @param operands Operands          */
+comment|/**      * Uses the data in {@link #order} to reorder a SqlNode[] array.      *      * @param operands Operands      */
 specifier|protected
 name|SqlNode
 index|[]
@@ -1281,7 +1281,7 @@ return|return
 name|newOrder
 return|;
 block|}
-comment|/**          * Creates and return a {@link SqlCall}. If the MakeCall strategy object          * was created with a reording specified the call will be created with          * the operands reordered, otherwise no change of ordering is applied          *          * @param operands Operands          */
+comment|/**      * Creates and return a {@link SqlCall}. If the MakeCall strategy object      * was created with a reording specified the call will be created with      * the operands reordered, otherwise no change of ordering is applied      *      * @param operands Operands      */
 name|SqlCall
 name|createCall
 parameter_list|(
@@ -1325,7 +1325,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**          * Returns false if number of arguments are unexpected, otherwise true.          * This function is supposed to be called with an {@link SqlNode} array          * of operands direct from the oven, e.g no reording or adding/dropping          * of operands...else it would make much sense to have this methods          */
+comment|/**      * Returns false if number of arguments are unexpected, otherwise true.      * This function is supposed to be called with an {@link SqlNode} array      * of operands direct from the oven, e.g no reording or adding/dropping      * of operands...else it would make much sense to have this methods      */
 name|boolean
 name|checkNumberOfArg
 parameter_list|(
@@ -1370,13 +1370,13 @@ literal|false
 return|;
 block|}
 block|}
-comment|/**      * Lookup table between JDBC functions and internal representation      */
+comment|/**    * Lookup table between JDBC functions and internal representation    */
 specifier|private
 specifier|static
 class|class
 name|JdbcToInternalLookupTable
 block|{
-comment|/**          * The {@link org.eigenbase.util.Glossary#SingletonPattern singleton}          * instance.          */
+comment|/**      * The {@link org.eigenbase.util.Glossary#SingletonPattern singleton}      * instance.      */
 specifier|static
 specifier|final
 name|JdbcToInternalLookupTable
@@ -1863,7 +1863,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**          * Tries to lookup a given function name JDBC to an internal          * representation. Returns null if no function defined.          */
+comment|/**      * Tries to lookup a given function name JDBC to an internal      * representation. Returns null if no function defined.      */
 specifier|public
 name|MakeCall
 name|lookup

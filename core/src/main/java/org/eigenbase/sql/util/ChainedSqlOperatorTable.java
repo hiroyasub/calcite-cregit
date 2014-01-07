@@ -58,7 +58,7 @@ argument_list|>
 name|tableList
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a table based on a given list.      */
+comment|/**    * Creates a table based on a given list.    */
 specifier|public
 name|ChainedSqlOperatorTable
 parameter_list|(
@@ -77,7 +77,7 @@ name|tableList
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Adds an underlying table. The order in which tables are added is      * significant; tables added earlier have higher lookup precedence. A table      * is not added if it is already on the list.      *      * @param table table to add      */
+comment|/**    * Adds an underlying table. The order in which tables are added is    * significant; tables added earlier have higher lookup precedence. A table    * is not added if it is already on the list.    *    * @param table table to add    */
 specifier|public
 name|void
 name|add

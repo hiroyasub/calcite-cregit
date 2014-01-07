@@ -76,7 +76,7 @@ index|[]
 name|traits
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Constructs a RelTraitSet with the given set of RelTraits.      *      * @param cache Trait set cache (and indirectly cluster) that this set      *              belongs to      * @param traits Traits      */
+comment|/**    * Constructs a RelTraitSet with the given set of RelTraits.    *    * @param cache  Trait set cache (and indirectly cluster) that this set    *               belongs to    * @param traits Traits    */
 specifier|private
 name|RelTraitSet
 parameter_list|(
@@ -105,7 +105,7 @@ name|traits
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Creates an empty trait set.      *      *<p>It has a new cache, which will be shared by any trait set created from      * it. Thus each empty trait set is the start of a new ancestral line.      */
+comment|/**    * Creates an empty trait set.    *    *<p>It has a new cache, which will be shared by any trait set created from    * it. Thus each empty trait set is the start of a new ancestral line.    */
 specifier|public
 specifier|static
 name|RelTraitSet
@@ -124,7 +124,7 @@ name|EMPTY_TRAITS
 argument_list|)
 return|;
 block|}
-comment|/**      * Retrieves a RelTrait from the set.      *      * @param index 0-based index into ordered RelTraitSet      *      * @return the RelTrait      *      * @throws ArrayIndexOutOfBoundsException if index greater than or equal to      * {@link #size()} or less than 0.      */
+comment|/**    * Retrieves a RelTrait from the set.    *    * @param index 0-based index into ordered RelTraitSet    * @return the RelTrait    * @throws ArrayIndexOutOfBoundsException if index greater than or equal to    *                                        {@link #size()} or less than 0.    */
 specifier|public
 name|RelTrait
 name|getTrait
@@ -155,7 +155,7 @@ name|index
 argument_list|)
 return|;
 block|}
-comment|/**      * Retrieves a RelTrait of the given type from the set.      *      * @param traitDef the type of RelTrait to retrieve      *      * @return the RelTrait, or null if not found      */
+comment|/**    * Retrieves a RelTrait of the given type from the set.    *    * @param traitDef the type of RelTrait to retrieve    * @return the RelTrait, or null if not found    */
 specifier|public
 parameter_list|<
 name|T
@@ -202,7 +202,7 @@ return|return
 literal|null
 return|;
 block|}
-comment|/**      * Replaces an existing RelTrait in the set.      * Returns a different trait set; does not modify this trait set.      *      * @param index 0-based index into ordered RelTraitSet      * @param trait the new RelTrait      *      * @return the old RelTrait at the index      */
+comment|/**    * Replaces an existing RelTrait in the set.    * Returns a different trait set; does not modify this trait set.    *    * @param index 0-based index into ordered RelTraitSet    * @param trait the new RelTrait    * @return the old RelTrait at the index    */
 specifier|public
 name|RelTraitSet
 name|replace
@@ -283,7 +283,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**      * Returns a trait set consisting of the current set plus a new trait.      *      *<p>If the set does not contain a trait of the same {@link RelTraitDef},      * the trait is ignored, and this trait set is returned.      *      * @param trait the new trait      * @return New set      *      * @see #plus(RelTrait)      */
+comment|/**    * Returns a trait set consisting of the current set plus a new trait.    *    *<p>If the set does not contain a trait of the same {@link RelTraitDef},    * the trait is ignored, and this trait set is returned.    *    * @param trait the new trait    * @return New set    * @see #plus(RelTrait)    */
 specifier|public
 name|RelTraitSet
 name|replace
@@ -330,7 +330,7 @@ name|trait
 argument_list|)
 return|;
 block|}
-comment|/**      * Returns the size of the RelTraitSet.      *      * @return the size of the RelTraitSet.      */
+comment|/**    * Returns the size of the RelTraitSet.    *    * @return the size of the RelTraitSet.    */
 specifier|public
 name|int
 name|size
@@ -342,7 +342,7 @@ operator|.
 name|length
 return|;
 block|}
-comment|/**      * Converts a trait to canonical form.      *      *<p>After canonization, t1.equals(t2) if and only if t1 == t2.      *      * @param trait Trait      *      * @return Trait in canonical form      */
+comment|/**    * Converts a trait to canonical form.    *    *<p>After canonization, t1.equals(t2) if and only if t1 == t2.    *    * @param trait Trait    * @return Trait in canonical form    */
 specifier|public
 parameter_list|<
 name|T
@@ -383,7 +383,7 @@ name|trait
 argument_list|)
 return|;
 block|}
-comment|/**      * Compares two RelTraitSet objects for equality.      *      * @param obj another RelTraitSet      *      * @return true if traits are equal and in the same order, false otherwise      */
+comment|/**    * Compares two RelTraitSet objects for equality.    *    * @param obj another RelTraitSet    * @return true if traits are equal and in the same order, false otherwise    */
 specifier|public
 name|boolean
 name|equals
@@ -424,7 +424,7 @@ return|return
 literal|false
 return|;
 block|}
-comment|/**      * Returns whether this trait set subsumes another trait set.      *      *<p>For that to happen, each trait subsumes the corresponding trait in the      * other set. In particular, each trait set subsumes itself, because each      * trait subsumes itself.</p>      *      *<p>Intuitively, if a relational expression is needed that has trait set      * S, and trait set S1 subsumes S, then a relational expression R in S1      * meets that need. For example, if we need a relational expression that has      * trait set S = {enumerable convention, sorted on [C1 asc]}, and R      * has {enumerable convention, sorted on [C1 asc, C2]}</p>      *      * @param that another RelTraitSet      *      * @return whether this trait set subsumes other trait set      */
+comment|/**    * Returns whether this trait set subsumes another trait set.    *    *<p>For that to happen, each trait subsumes the corresponding trait in the    * other set. In particular, each trait set subsumes itself, because each    * trait subsumes itself.</p>    *    *<p>Intuitively, if a relational expression is needed that has trait set    * S, and trait set S1 subsumes S, then a relational expression R in S1    * meets that need. For example, if we need a relational expression that has    * trait set S = {enumerable convention, sorted on [C1 asc]}, and R    * has {enumerable convention, sorted on [C1 asc, C2]}</p>    *    * @param that another RelTraitSet    * @return whether this trait set subsumes other trait set    */
 specifier|public
 name|boolean
 name|subsumes
@@ -479,7 +479,7 @@ return|return
 literal|true
 return|;
 block|}
-comment|/**      * Compares two RelTraitSet objects to see if they match for the purposes of      * firing a rule. A null RelTrait within a RelTraitSet indicates a wildcard:      * any RelTrait in the other RelTraitSet will match. If one RelTraitSet is      * smaller than the other, comparison stops when the last RelTrait from the      * smaller set has been examined and the remaining RelTraits in the larger      * set are assumed to match.      *      * @param that another RelTraitSet      *      * @return true if the RelTraitSets match, false otherwise      */
+comment|/**    * Compares two RelTraitSet objects to see if they match for the purposes of    * firing a rule. A null RelTrait within a RelTraitSet indicates a wildcard:    * any RelTrait in the other RelTraitSet will match. If one RelTraitSet is    * smaller than the other, comparison stops when the last RelTrait from the    * smaller set has been examined and the remaining RelTraits in the larger    * set are assumed to match.    *    * @param that another RelTraitSet    * @return true if the RelTraitSets match, false otherwise    */
 specifier|public
 name|boolean
 name|matches
@@ -575,7 +575,7 @@ return|return
 literal|true
 return|;
 block|}
-comment|/**      * Returns whether this trait set contains a given trait.      *      * @param trait Sought trait      *      * @return Whether set contains given trait      */
+comment|/**    * Returns whether this trait set contains a given trait.    *    * @param trait Sought trait    * @return Whether set contains given trait    */
 specifier|public
 name|boolean
 name|contains
@@ -608,7 +608,7 @@ return|return
 literal|false
 return|;
 block|}
-comment|/**      * Returns whether this trait set contains the given trait, or whether the      * trait is not present because its {@link RelTraitDef} is not enabled.      * Returns false if another trait of the same {@code RelTraitDef} is      * present.      *      * @param trait Trait      * @return Whether trait is present, or is absent because disabled      */
+comment|/**    * Returns whether this trait set contains the given trait, or whether the    * trait is not present because its {@link RelTraitDef} is not enabled.    * Returns false if another trait of the same {@code RelTraitDef} is    * present.    *    * @param trait Trait    * @return Whether trait is present, or is absent because disabled    */
 specifier|public
 name|boolean
 name|containsIfApplicable
@@ -640,7 +640,7 @@ operator|==
 name|trait
 return|;
 block|}
-comment|/**      * Returns whether this trait set comprises precisely the list of given      * traits.      *      * @param relTraits Traits      * @return Whether this trait set's traits are the same as the argument      */
+comment|/**    * Returns whether this trait set comprises precisely the list of given    * traits.    *    * @param relTraits Traits    * @return Whether this trait set's traits are the same as the argument    */
 specifier|public
 name|boolean
 name|comprises
@@ -661,7 +661,7 @@ name|relTraits
 argument_list|)
 return|;
 block|}
-comment|/**      * Outputs the traits of this set as a String. Traits are output in order,      * separated by periods.      */
+comment|/**    * Outputs the traits of this set as a String. Traits are output in order,    * separated by periods.    */
 specifier|public
 name|String
 name|toString
@@ -761,7 +761,7 @@ name|toString
 argument_list|()
 return|;
 block|}
-comment|/**      * Finds the index of a trait of a given type in this set.      *      * @param traitDef Sought trait definition      *      * @return index of trait, or -1 if not found      */
+comment|/**    * Finds the index of a trait of a given type in this set.    *    * @param traitDef Sought trait definition    * @return index of trait, or -1 if not found    */
 specifier|private
 name|int
 name|findIndex
@@ -823,7 +823,7 @@ operator|-
 literal|1
 return|;
 block|}
-comment|/**      * Returns this trait set with a given trait added or overridden. Does not      * modify this trait set.      *      * @param trait Trait      * @return Trait set with given trait      */
+comment|/**    * Returns this trait set with a given trait added or overridden. Does not    * modify this trait set.    *    * @param trait Trait    * @return Trait set with given trait    */
 specifier|public
 name|RelTraitSet
 name|plus

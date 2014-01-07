@@ -180,7 +180,7 @@ name|BitSet
 name|groupSet
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates an AggregateRelBase.      *      * @param cluster Cluster      * @param traits Traits      * @param child Child      * @param groupSet Bitset of grouping fields      * @param aggCalls Collection of calls to aggregate functions      */
+comment|/**    * Creates an AggregateRelBase.    *    * @param cluster  Cluster    * @param traits   Traits    * @param child    Child    * @param groupSet Bitset of grouping fields    * @param aggCalls Collection of calls to aggregate functions    */
 specifier|protected
 name|AggregateRelBase
 parameter_list|(
@@ -263,7 +263,7 @@ operator|:
 literal|"See http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=6222207"
 assert|;
 block|}
-comment|/** Creates an AggregateRelBase by parsing serialized output. */
+comment|/**    * Creates an AggregateRelBase by parsing serialized output.    */
 specifier|protected
 name|AggregateRelBase
 parameter_list|(
@@ -316,7 +316,7 @@ return|return
 literal|true
 return|;
 block|}
-comment|/**      * Returns a list of calls to aggregate functions.      *      * @return list of calls to aggregate functions      */
+comment|/**    * Returns a list of calls to aggregate functions.    *    * @return list of calls to aggregate functions    */
 specifier|public
 name|List
 argument_list|<
@@ -329,7 +329,7 @@ return|return
 name|aggCalls
 return|;
 block|}
-comment|/**      * Returns the number of grouping fields.      * These grouping fields are the leading fields in both the input and output      * records.      *      *<p>NOTE: The {@link #getGroupSet()} data structure allows for the      * grouping fields to not be on the leading edge. New code should, if      * possible, assume that grouping fields are in arbitrary positions in the      * input relational expression.      *      * @return number of grouping fields      */
+comment|/**    * Returns the number of grouping fields.    * These grouping fields are the leading fields in both the input and output    * records.    *    *<p>NOTE: The {@link #getGroupSet()} data structure allows for the    * grouping fields to not be on the leading edge. New code should, if    * possible, assume that grouping fields are in arbitrary positions in the    * input relational expression.    *    * @return number of grouping fields    */
 specifier|public
 name|int
 name|getGroupCount
@@ -342,7 +342,7 @@ name|cardinality
 argument_list|()
 return|;
 block|}
-comment|/**      * Returns a bitmap of the grouping fields.      *      * @return bitset of ordinals of grouping fields      */
+comment|/**    * Returns a bitmap of the grouping fields.    *    * @return bitset of ordinals of grouping fields    */
 specifier|public
 name|BitSet
 name|getGroupSet
@@ -712,7 +712,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**      * Returns whether the inferred type of an {@link AggregateCall} matches the      * type it was given when it was created.      *      * @param aggCall Aggregate call      * @param fail Whether to fail if the types do not match      *      * @return Whether the inferred and declared types match      */
+comment|/**    * Returns whether the inferred type of an {@link AggregateCall} matches the    * type it was given when it was created.    *    * @param aggCall Aggregate call    * @param fail    Whether to fail if the types do not match    * @return Whether the inferred and declared types match    */
 specifier|private
 name|boolean
 name|typeMatchesInferred
@@ -781,7 +781,7 @@ name|fail
 argument_list|)
 return|;
 block|}
-comment|/**      * Returns whether any of the aggregates are DISTINCT.      */
+comment|/**    * Returns whether any of the aggregates are DISTINCT.    */
 specifier|public
 name|boolean
 name|containsDistinctCall
@@ -813,7 +813,7 @@ literal|false
 return|;
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------
-comment|/**      * Implementation of the {@link SqlOperatorBinding} interface for an {@link      * AggregateCall aggregate call} applied to a set of operands in the context      * of a {@link AggregateRel}.      */
+comment|/**    * Implementation of the {@link SqlOperatorBinding} interface for an {@link    * AggregateCall aggregate call} applied to a set of operands in the context    * of a {@link AggregateRel}.    */
 specifier|public
 specifier|static
 class|class
@@ -834,7 +834,7 @@ name|Integer
 argument_list|>
 name|operands
 decl_stmt|;
-comment|/**          * Creates an AggCallBinding          *          * @param typeFactory Type factory          * @param aggFunction Aggregation function          * @param aggregateRel Relational expression which is context          * @param operands Operand ordinals          */
+comment|/**      * Creates an AggCallBinding      *      * @param typeFactory  Type factory      * @param aggFunction  Aggregation function      * @param aggregateRel Relational expression which is context      * @param operands     Operand ordinals      */
 name|AggCallBinding
 parameter_list|(
 name|RelDataTypeFactory

@@ -101,14 +101,14 @@ extends|extends
 name|SqlBinaryOperator
 block|{
 comment|//~ Instance fields --------------------------------------------------------
-comment|/**      * If true the call represents 'NOT IN'.      */
+comment|/**    * If true the call represents 'NOT IN'.    */
 specifier|private
 specifier|final
 name|boolean
 name|isNotIn
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a SqlInOperator      *      * @param isNotIn Whether this is the 'NOT IN' operator      */
+comment|/**    * Creates a SqlInOperator    *    * @param isNotIn Whether this is the 'NOT IN' operator    */
 name|SqlInOperator
 parameter_list|(
 name|boolean
@@ -150,7 +150,7 @@ name|isNotIn
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Returns whether this is the 'NOT IN' operator      *      * @return whether this is the 'NOT IN' operator      */
+comment|/**    * Returns whether this is the 'NOT IN' operator    *    * @return whether this is the 'NOT IN' operator    */
 specifier|public
 name|boolean
 name|isNotIn

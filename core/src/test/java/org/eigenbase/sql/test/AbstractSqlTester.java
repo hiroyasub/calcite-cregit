@@ -148,7 +148,7 @@ operator|.
 name|BOOLEAN
 argument_list|)
 decl_stmt|;
-comment|/**      * Checker which allows any type.      */
+comment|/**    * Checker which allows any type.    */
 specifier|public
 specifier|static
 specifier|final
@@ -176,7 +176,7 @@ name|SqlOperator
 name|operator
 decl_stmt|;
 comment|//~ Methods ----------------------------------------------------------------
-comment|/** {@inheritDoc}      *      * This default implementation does nothing.      */
+comment|/**    * {@inheritDoc}    *    * This default implementation does nothing.    */
 specifier|public
 name|void
 name|close
@@ -315,7 +315,7 @@ name|type
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Helper function to get the string representation of a RelDataType      * (include precision/scale but no charset or collation)      *      * @param sqlType Type      *      * @return String representation of type      */
+comment|/**    * Helper function to get the string representation of a RelDataType    * (include precision/scale but no charset or collation)    *    * @param sqlType Type    * @return String representation of type    */
 specifier|public
 specifier|static
 name|String
@@ -676,7 +676,7 @@ name|toString
 argument_list|()
 return|;
 block|}
-comment|/**      * Helper method which converts a scalar expression into a SQL query.      *      *<p>By default, "expr" becomes "VALUES (expr)". Derived classes may      * override.      *      * @param expression Expression      *      * @return Query that returns expression      */
+comment|/**    * Helper method which converts a scalar expression into a SQL query.    *    *<p>By default, "expr" becomes "VALUES (expr)". Derived classes may    * override.    *    * @param expression Expression    * @return Query that returns expression    */
 specifier|protected
 name|String
 name|buildQuery
@@ -992,7 +992,7 @@ literal|0
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Returns the operator this test is for. Throws if no operator has been      * set.      *      * @return the operator this test is for, never null      */
+comment|/**    * Returns the operator this test is for. Throws if no operator has been    * set.    *    * @return the operator this test is for, never null    */
 specifier|protected
 name|SqlOperator
 name|getFor
@@ -1009,7 +1009,7 @@ return|return
 name|operator
 return|;
 block|}
-comment|/**      * Compares the first column of a result set against a String-valued      * reference set, disregarding order entirely.      *      * @param resultSet Result set      * @param refSet Expected results      *      * @throws Exception .      */
+comment|/**    * Compares the first column of a result set against a String-valued    * reference set, disregarding order entirely.    *    * @param resultSet Result set    * @param refSet    Expected results    * @throws Exception .    */
 specifier|public
 specifier|static
 name|void
@@ -1081,7 +1081,7 @@ name|actualSet
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Compares the first column of a result set against a pattern. The result      * set must return exactly one row.      *      * @param resultSet Result set      * @param pattern Expected pattern      */
+comment|/**    * Compares the first column of a result set against a pattern. The result    * set must return exactly one row.    *    * @param resultSet Result set    * @param pattern   Expected pattern    */
 specifier|public
 specifier|static
 name|void
@@ -1173,7 +1173,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Compares the first column of a result set against a numeric result,      * within a given tolerance. The result set must return exactly one row.      *      * @param resultSet Result set      * @param expected Expected result      * @param delta Tolerance      */
+comment|/**    * Compares the first column of a result set against a numeric result,    * within a given tolerance. The result set must return exactly one row.    *    * @param resultSet Result set    * @param expected  Expected result    * @param delta     Tolerance    */
 specifier|public
 specifier|static
 name|void
@@ -1288,7 +1288,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Compares the first column of a result set against a String-valued      * reference set, taking order into account.      *      * @param resultSet Result set      * @param refList Expected results      *      * @throws Exception .      */
+comment|/**    * Compares the first column of a result set against a String-valued    * reference set, taking order into account.    *    * @param resultSet Result set    * @param refList   Expected results    * @throws Exception .    */
 specifier|public
 specifier|static
 name|void
@@ -1360,7 +1360,7 @@ name|actualSet
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Compares the columns of a result set against several String-valued      * reference lists, taking order into account.      *      * @param resultSet Result set      * @param refLists vararg of List<String>. The first list is compared to the      * first column, the second list to the second column and so on      */
+comment|/**    * Compares the columns of a result set against several String-valued    * reference lists, taking order into account.    *    * @param resultSet Result set    * @param refLists  vararg of List<String>. The first list is compared to the    *                  first column, the second list to the second column and so    *                  on    */
 specifier|public
 specifier|static
 name|void
@@ -1598,7 +1598,7 @@ expr_stmt|;
 block|}
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------
-comment|/**      * Checks that a type matches a given SQL type. Does not care about      * nullability.      */
+comment|/**    * Checks that a type matches a given SQL type. Does not care about    * nullability.    */
 specifier|private
 specifier|static
 class|class
@@ -1647,7 +1647,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Type checker which compares types to a specified string.      *      *<p>The string contains "NOT NULL" constraints, but does not contain      * collations and charsets. For example,      *      *<ul>      *<li><code>INTEGER NOT NULL</code></li>      *<li><code>BOOLEAN</code></li>      *<li><code>DOUBLE NOT NULL MULTISET NOT NULL</code></li>      *<li><code>CHAR(3) NOT NULL</code></li>      *<li><code>RecordType(INTEGER X, VARCHAR(10) Y)</code></li>      *</ul>      */
+comment|/**    * Type checker which compares types to a specified string.    *    *<p>The string contains "NOT NULL" constraints, but does not contain    * collations and charsets. For example,    *    *<ul>    *<li><code>INTEGER NOT NULL</code></li>    *<li><code>BOOLEAN</code></li>    *<li><code>DOUBLE NOT NULL MULTISET NOT NULL</code></li>    *<li><code>CHAR(3) NOT NULL</code></li>    *<li><code>RecordType(INTEGER X, VARCHAR(10) Y)</code></li>    *</ul>    */
 specifier|public
 specifier|static
 class|class
@@ -1831,7 +1831,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**      * Result checker that checks a result against a regular expression.      */
+comment|/**    * Result checker that checks a result against a regular expression.    */
 specifier|public
 specifier|static
 class|class
@@ -1877,7 +1877,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Result checker that checks a result against an expected value. A delta      * value is used for approximate values (double and float).      */
+comment|/**    * Result checker that checks a result against an expected value. A delta    * value is used for approximate values (double and float).    */
 specifier|public
 specifier|static
 class|class
@@ -1942,7 +1942,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Result checker that checks a result against a list of expected strings.      */
+comment|/**    * Result checker that checks a result against a list of expected strings.    */
 specifier|public
 specifier|static
 class|class

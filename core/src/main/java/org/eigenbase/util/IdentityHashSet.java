@@ -66,7 +66,7 @@ operator|new
 name|Object
 argument_list|()
 decl_stmt|;
-comment|/**      * Creates an empty IdentityHashSet.      */
+comment|/**    * Creates an empty IdentityHashSet.    */
 specifier|public
 name|IdentityHashSet
 parameter_list|()
@@ -83,7 +83,7 @@ argument_list|>
 argument_list|()
 expr_stmt|;
 block|}
-comment|/**      * Creates an IdentityHashSet containing the elements of the specified      * collection.      *      * @param c the collection whose elements are to be placed into this set      */
+comment|/**    * Creates an IdentityHashSet containing the elements of the specified    * collection.    *    * @param c the collection whose elements are to be placed into this set    */
 specifier|public
 name|IdentityHashSet
 parameter_list|(

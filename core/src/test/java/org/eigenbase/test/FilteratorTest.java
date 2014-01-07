@@ -312,7 +312,7 @@ block|,
 name|linkedList
 block|,
 literal|null
-block|,         }
+block|,     }
 decl_stmt|;
 specifier|final
 name|Filterator

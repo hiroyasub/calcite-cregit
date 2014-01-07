@@ -114,7 +114,7 @@ name|all
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Creates a MinusRelBase by parsing serialized output. */
+comment|/**    * Creates a MinusRelBase by parsing serialized output.    */
 specifier|protected
 name|MinusRelBase
 parameter_list|(

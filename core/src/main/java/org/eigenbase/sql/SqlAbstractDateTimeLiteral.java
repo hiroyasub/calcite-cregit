@@ -103,7 +103,7 @@ name|int
 name|precision
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Constructs a datetime literal based on a Calendar. If the literal is to      * represent a Timestamp, the Calendar is expected to follow java.sql      * semantics. If the Calendar is to represent a Time or Date, the Calendar      * is expected to follow {@link ZonelessTime} and {@link ZonelessDate}      * semantics.      */
+comment|/**    * Constructs a datetime literal based on a Calendar. If the literal is to    * represent a Timestamp, the Calendar is expected to follow java.sql    * semantics. If the Calendar is to represent a Time or Date, the Calendar    * is expected to follow {@link ZonelessTime} and {@link ZonelessDate}    * semantics.    */
 specifier|protected
 name|SqlAbstractDateTimeLiteral
 parameter_list|(
@@ -194,7 +194,7 @@ operator|)
 name|value
 return|;
 block|}
-comment|/**      * Returns timezone component of this literal. Technically, a sql date      * doesn't come with a tz, but time and ts inherit this, and the calendar      * object has one, so it seems harmless.      *      * @return timezone      */
+comment|/**    * Returns timezone component of this literal. Technically, a sql date    * doesn't come with a tz, but time and ts inherit this, and the calendar    * object has one, so it seems harmless.    *    * @return timezone    */
 specifier|public
 name|TimeZone
 name|getTimeZone
@@ -218,14 +218,14 @@ name|getTimeZone
 argument_list|()
 return|;
 block|}
-comment|/**      * Returns e.g.<code>DATE '1969-07-21'</code>.      */
+comment|/**    * Returns e.g.<code>DATE '1969-07-21'</code>.    */
 specifier|public
 specifier|abstract
 name|String
 name|toString
 parameter_list|()
 function_decl|;
-comment|/**      * Returns e.g.<code>1969-07-21</code>.      */
+comment|/**    * Returns e.g.<code>1969-07-21</code>.    */
 specifier|public
 specifier|abstract
 name|String
@@ -278,7 +278,7 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Converts this literal to a {@link ZonelessDate} object.      */
+comment|/**    * Converts this literal to a {@link ZonelessDate} object.    */
 specifier|protected
 name|ZonelessDate
 name|getDate
@@ -306,7 +306,7 @@ return|return
 name|zd
 return|;
 block|}
-comment|/**      * Converts this literal to a {@link ZonelessTime} object.      */
+comment|/**    * Converts this literal to a {@link ZonelessTime} object.    */
 specifier|protected
 name|ZonelessTime
 name|getTime
@@ -334,7 +334,7 @@ return|return
 name|zt
 return|;
 block|}
-comment|/**      * Converts this literal to a {@link ZonelessTimestamp} object.      */
+comment|/**    * Converts this literal to a {@link ZonelessTimestamp} object.    */
 specifier|protected
 name|ZonelessTimestamp
 name|getTimestamp

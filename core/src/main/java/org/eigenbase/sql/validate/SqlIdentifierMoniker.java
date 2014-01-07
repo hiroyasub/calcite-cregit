@@ -57,7 +57,7 @@ name|SqlIdentifier
 name|id
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates an SqlIdentifierMoniker.      */
+comment|/**    * Creates an SqlIdentifierMoniker.    */
 specifier|public
 name|SqlIdentifierMoniker
 parameter_list|(

@@ -109,7 +109,7 @@ operator|.
 name|getPlannerTracer
 argument_list|()
 decl_stmt|;
-comment|/** Generator for {@link #id} values. */
+comment|/**    * Generator for {@link #id} values.    */
 specifier|static
 name|int
 name|nextId
@@ -165,7 +165,7 @@ argument_list|>
 name|parents
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a RelOptRuleCall.      *      * @param planner Planner      * @param operand Root operand      * @param rels Array of relational expressions which matched each operand      * @param nodeChildren For each node which matched with<code>      * matchAnyChildren</code>=true, a list of the node's children      * @param parents list of parent RelNodes corresponding to the first      * relational expression in the array argument, if known; otherwise, null      */
+comment|/**    * Creates a RelOptRuleCall.    *    * @param planner      Planner    * @param operand      Root operand    * @param rels         Array of relational expressions which matched each    *                     operand    * @param nodeChildren For each node which matched with<code>    *                     matchAnyChildren</code>=true, a list of the node's    *                     children    * @param parents      list of parent RelNodes corresponding to the first    *                     relational expression in the array argument, if known;    *                     otherwise, null    */
 specifier|protected
 name|RelOptRuleCall
 parameter_list|(
@@ -296,7 +296,7 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Returns the root operand matched by this rule.      *      * @return root operand      */
+comment|/**    * Returns the root operand matched by this rule.    *    * @return root operand    */
 specifier|public
 name|RelOptRuleOperand
 name|getOperand0
@@ -306,7 +306,7 @@ return|return
 name|operand0
 return|;
 block|}
-comment|/**      * Returns the invoked planner rule.      *      * @return planner rule      */
+comment|/**    * Returns the invoked planner rule.    *    * @return planner rule    */
 specifier|public
 name|RelOptRule
 name|getRule
@@ -316,7 +316,7 @@ return|return
 name|rule
 return|;
 block|}
-comment|/**      * Returns a list of matched relational expressions.      *      * @return matched relational expressions      *      * @deprecated Use {@link #getRelList()} or {@link #rel(int)}      */
+comment|/**    * Returns a list of matched relational expressions.    *    * @return matched relational expressions    * @deprecated Use {@link #getRelList()} or {@link #rel(int)}    */
 specifier|public
 name|RelNode
 index|[]
@@ -327,7 +327,7 @@ return|return
 name|rels
 return|;
 block|}
-comment|/**      * Returns a list of matched relational expressions.      *      * @return matched relational expressions      * @see #rel(int)      */
+comment|/**    * Returns a list of matched relational expressions.    *    * @return matched relational expressions    * @see #rel(int)    */
 specifier|public
 name|List
 argument_list|<
@@ -345,7 +345,7 @@ name|rels
 argument_list|)
 return|;
 block|}
-comment|/**      * Retrieves the {@code ordinal}th matched relational expression. This      * corresponds to the {@code ordinal}th operand of the rule.      *      * @param ordinal Ordinal      * @param<T> Type      * @return Relational expression      */
+comment|/**    * Retrieves the {@code ordinal}th matched relational expression. This    * corresponds to the {@code ordinal}th operand of the rule.    *    * @param ordinal Ordinal    * @param<T>     Type    * @return Relational expression    */
 specifier|public
 parameter_list|<
 name|T
@@ -370,7 +370,7 @@ name|ordinal
 index|]
 return|;
 block|}
-comment|/**      * Returns the children of a given relational expression node matched in a      * rule.      *      *<p>If the policy of the operand which caused the match is not      * {@link org.eigenbase.relopt.RelOptRuleOperandChildPolicy#ANY},      * the children will have their      * own operands and therefore be easily available in the array returned by      * the {@link #getRels} method, so this method returns null.      *      *<p>This method is for      * {@link org.eigenbase.relopt.RelOptRuleOperandChildPolicy#ANY},      * which is generally used when a node can have a variable number of      * children, and hence where the matched children are not retrievable by any      * other means.      *      * @param rel Relational expression      *      * @return Children of relational expression      */
+comment|/**    * Returns the children of a given relational expression node matched in a    * rule.    *    *<p>If the policy of the operand which caused the match is not    * {@link org.eigenbase.relopt.RelOptRuleOperandChildPolicy#ANY},    * the children will have their    * own operands and therefore be easily available in the array returned by    * the {@link #getRels} method, so this method returns null.    *    *<p>This method is for    * {@link org.eigenbase.relopt.RelOptRuleOperandChildPolicy#ANY},    * which is generally used when a node can have a variable number of    * children, and hence where the matched children are not retrievable by any    * other means.    *    * @param rel Relational expression    * @return Children of relational expression    */
 specifier|public
 name|List
 argument_list|<
@@ -391,7 +391,7 @@ name|rel
 argument_list|)
 return|;
 block|}
-comment|/**      * Returns the planner.      *      * @return planner      */
+comment|/**    * Returns the planner.    *    * @return planner    */
 specifier|public
 name|RelOptPlanner
 name|getPlanner
@@ -401,7 +401,7 @@ return|return
 name|planner
 return|;
 block|}
-comment|/**      * @return list of parents of the first relational expression      */
+comment|/**    * @return list of parents of the first relational expression    */
 specifier|public
 name|List
 argument_list|<
@@ -414,7 +414,7 @@ return|return
 name|parents
 return|;
 block|}
-comment|/**      * Registers that a rule has produced an equivalent relational expression.      *      *<p>Called by the rule whenever it finds a match. The implementation of      * this method guarantees that the original relational expression (that is,      *<code>this.rels[0]</code>) has its traits propagated to the new      * relational expression (<code>rel</code>) and its unregistered children.      * Any trait not specifically set in the RelTraitSet returned by<code>      * rel.getTraits()</code> will be copied from<code>      * this.rels[0].getTraitSet()</code>.      *      * @param rel Relational expression equivalent to the root relational      *            expression of the rule call, {@code call.rels(0)}      * @param equiv Map of other equivalences      */
+comment|/**    * Registers that a rule has produced an equivalent relational expression.    *    *<p>Called by the rule whenever it finds a match. The implementation of    * this method guarantees that the original relational expression (that is,    *<code>this.rels[0]</code>) has its traits propagated to the new    * relational expression (<code>rel</code>) and its unregistered children.    * Any trait not specifically set in the RelTraitSet returned by<code>    * rel.getTraits()</code> will be copied from<code>    * this.rels[0].getTraitSet()</code>.    *    * @param rel   Relational expression equivalent to the root relational    *              expression of the rule call, {@code call.rels(0)}    * @param equiv Map of other equivalences    */
 specifier|public
 specifier|abstract
 name|void
@@ -432,7 +432,7 @@ argument_list|>
 name|equiv
 parameter_list|)
 function_decl|;
-comment|/**      * Registers that a rule has produced an equivalent relational expression,      * but no other equivalences.      *      * @param rel Relational expression equivalent to the root relational      *            expression of the rule call, {@code call.rels(0)}      */
+comment|/**    * Registers that a rule has produced an equivalent relational expression,    * but no other equivalences.    *    * @param rel Relational expression equivalent to the root relational    *            expression of the rule call, {@code call.rels(0)}    */
 specifier|public
 specifier|final
 name|void

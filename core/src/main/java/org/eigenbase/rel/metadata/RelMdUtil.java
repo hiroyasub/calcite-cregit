@@ -208,7 +208,7 @@ name|System
 argument_list|)
 decl_stmt|;
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Creates a RexNode that stores a selectivity value corresponding to the      * selectivity of a semijoin. This can be added to a filter to simulate the      * effect of the semijoin during costing, but should never appear in a real      * plan since it has no physical implementation.      *      * @param rel the semijoin of interest      *      * @return constructed rexnode      */
+comment|/**    * Creates a RexNode that stores a selectivity value corresponding to the    * selectivity of a semijoin. This can be added to a filter to simulate the    * effect of the semijoin during costing, but should never appear in a real    * plan since it has no physical implementation.    *    * @param rel the semijoin of interest    * @return constructed rexnode    */
 specifier|public
 specifier|static
 name|RexNode
@@ -272,7 +272,7 @@ name|selec
 argument_list|)
 return|;
 block|}
-comment|/**      * Returns the selectivity value stored in the rexnode      *      * @param artificialSelecFuncNode rexnode containing the selectivity value      *      * @return selectivity value      */
+comment|/**    * Returns the selectivity value stored in the rexnode    *    * @param artificialSelecFuncNode rexnode containing the selectivity value    * @return selectivity value    */
 specifier|public
 specifier|static
 name|double
@@ -343,7 +343,7 @@ name|doubleValue
 argument_list|()
 return|;
 block|}
-comment|/**      * Computes the selectivity of a semijoin filter if it is applied on a fact      * table. The computation is based on the selectivity of the dimension      * table/columns and the number of distinct values in the fact table      * columns.      *      * @param rel semijoin rel      *      * @return calculated selectivity      */
+comment|/**    * Computes the selectivity of a semijoin filter if it is applied on a fact    * table. The computation is based on the selectivity of the dimension    * table/columns and the number of distinct values in the fact table    * columns.    *    * @param rel semijoin rel    * @return calculated selectivity    */
 specifier|public
 specifier|static
 name|double
@@ -378,7 +378,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**      * Computes the selectivity of a semijoin filter if it is applied on a fact      * table. The computation is based on the selectivity of the dimension      * table/columns and the number of distinct values in the fact table      * columns.      *      * @param factRel fact table participating in the semijoin      * @param dimRel dimension table participating in the semijoin      * @param rel semijoin rel      *      * @return calculated selectivity      */
+comment|/**    * Computes the selectivity of a semijoin filter if it is applied on a fact    * table. The computation is based on the selectivity of the dimension    * table/columns and the number of distinct values in the fact table    * columns.    *    * @param factRel fact table participating in the semijoin    * @param dimRel  dimension table participating in the semijoin    * @param rel     semijoin rel    * @return calculated selectivity    */
 specifier|public
 specifier|static
 name|double
@@ -413,7 +413,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**      * Computes the selectivity of a semijoin filter if it is applied on a fact      * table. The computation is based on the selectivity of the dimension      * table/columns and the number of distinct values in the fact table      * columns.      *      * @param factRel fact table participating in the semijoin      * @param dimRel dimension table participating in the semijoin      * @param factKeyList LHS keys used in the filter      * @param dimKeyList RHS keys used in the filter      *      * @return calculated selectivity      */
+comment|/**    * Computes the selectivity of a semijoin filter if it is applied on a fact    * table. The computation is based on the selectivity of the dimension    * table/columns and the number of distinct values in the fact table    * columns.    *    * @param factRel     fact table participating in the semijoin    * @param dimRel      dimension table participating in the semijoin    * @param factKeyList LHS keys used in the filter    * @param dimKeyList  RHS keys used in the filter    * @return calculated selectivity    */
 specifier|public
 specifier|static
 name|double
@@ -623,7 +623,7 @@ return|return
 name|selectivity
 return|;
 block|}
-comment|/**      * Returns true if the columns represented in a bit mask are definitely      * known to form a unique column set.      *      * @param rel the relnode that the column mask correponds to      * @param colMask bit mask containing columns that will be tested for      * uniqueness      *      * @return true if bit mask represents a unique column set; false if not (or      * if no metadata is available)      */
+comment|/**    * Returns true if the columns represented in a bit mask are definitely    * known to form a unique column set.    *    * @param rel     the relnode that the column mask correponds to    * @param colMask bit mask containing columns that will be tested for    *                uniqueness    * @return true if bit mask represents a unique column set; false if not (or    * if no metadata is available)    */
 specifier|public
 specifier|static
 name|boolean
@@ -770,7 +770,7 @@ return|return
 name|b
 return|;
 block|}
-comment|/**      * Returns true if the columns represented in a bit mask are definitely      * known to form a unique column set, when nulls have been filtered from      * the columns.      *      * @param rel the relnode that the column mask correponds to      * @param colMask bit mask containing columns that will be tested for      * uniqueness      *      * @return true if bit mask represents a unique column set; false if not (or      * if no metadata is available)      */
+comment|/**    * Returns true if the columns represented in a bit mask are definitely    * known to form a unique column set, when nulls have been filtered from    * the columns.    *    * @param rel     the relnode that the column mask correponds to    * @param colMask bit mask containing columns that will be tested for    *                uniqueness    * @return true if bit mask represents a unique column set; false if not (or    * if no metadata is available)    */
 specifier|public
 specifier|static
 name|boolean
@@ -921,7 +921,7 @@ return|return
 name|b
 return|;
 block|}
-comment|/**      * Sets a bitmap corresponding to a list of keys.      *      * @param keys list of keys      *      * @return the bitmap      */
+comment|/**    * Sets a bitmap corresponding to a list of keys.    *    * @param keys list of keys    * @return the bitmap    */
 specifier|public
 specifier|static
 name|BitSet
@@ -961,7 +961,7 @@ return|return
 name|bits
 return|;
 block|}
-comment|/**      * Separates a bitmask representing a join into masks representing the left      * and right inputs into the join      *      * @param groupKey original bitmask      * @param leftMask left bitmask to be set      * @param rightMask right bitmask to be set      * @param nFieldsOnLeft number of fields in the left input      */
+comment|/**    * Separates a bitmask representing a join into masks representing the left    * and right inputs into the join    *    * @param groupKey      original bitmask    * @param leftMask      left bitmask to be set    * @param rightMask     right bitmask to be set    * @param nFieldsOnLeft number of fields in the left input    */
 specifier|public
 specifier|static
 name|void
@@ -1022,7 +1022,7 @@ expr_stmt|;
 block|}
 block|}
 block|}
-comment|/**      * Returns the number of distinct values provided numSelected are selected      * where there are domainSize distinct values.      *      *<p>Note that in the case where domainSize == numSelected, it's not true      * that the return value should be domainSize. If you pick 100 random values      * between 1 and 100, you'll most likely end up with fewer than 100 distinct      * values, because you'll pick some values more than once.      *      * @param domainSize number of distinct values in the domain      * @param numSelected number selected from the domain      *      * @return number of distinct values for subset selected      */
+comment|/**    * Returns the number of distinct values provided numSelected are selected    * where there are domainSize distinct values.    *    *<p>Note that in the case where domainSize == numSelected, it's not true    * that the return value should be domainSize. If you pick 100 random values    * between 1 and 100, you'll most likely end up with fewer than 100 distinct    * values, because you'll pick some values more than once.    *    * @param domainSize  number of distinct values in the domain    * @param numSelected number selected from the domain    * @return number of distinct values for subset selected    */
 specifier|public
 specifier|static
 name|Double
@@ -1160,7 +1160,7 @@ return|return
 name|res
 return|;
 block|}
-comment|/**      * Caps a double value at Double.MAX_VALUE if it's currently infinity      *      * @param d the Double object      *      * @return the double value if it's not infinity; else Double.MAX_VALUE      */
+comment|/**    * Caps a double value at Double.MAX_VALUE if it's currently infinity    *    * @param d the Double object    * @return the double value if it's not infinity; else Double.MAX_VALUE    */
 specifier|public
 specifier|static
 name|double
@@ -1188,7 +1188,7 @@ argument_list|()
 operator|)
 return|;
 block|}
-comment|/**      * Returns default estimates for selectivities, in the absence of stats.      *      * @param predicate predicate for which selectivity will be computed; null      * means true, so gives selectity of 1.0      *      * @return estimated selectivity      */
+comment|/**    * Returns default estimates for selectivities, in the absence of stats.    *    * @param predicate predicate for which selectivity will be computed; null    *                  means true, so gives selectity of 1.0    * @return estimated selectivity    */
 specifier|public
 specifier|static
 name|double
@@ -1207,7 +1207,7 @@ literal|false
 argument_list|)
 return|;
 block|}
-comment|/**      * Returns default estimates for selectivities, in the absence of stats.      *      * @param predicate predicate for which selectivity will be computed; null      * means true, so gives selectity of 1.0      * @param artificialOnly return only the selectivity contribution from      * artificial nodes      *      * @return estimated selectivity      */
+comment|/**    * Returns default estimates for selectivities, in the absence of stats.    *    * @param predicate      predicate for which selectivity will be computed;    *                       null means true, so gives selectity of 1.0    * @param artificialOnly return only the selectivity contribution from    *                       artificial nodes    * @return estimated selectivity    */
 specifier|public
 specifier|static
 name|double
@@ -1386,7 +1386,7 @@ name|artificialSel
 return|;
 block|}
 block|}
-comment|/**      * Locates the columns corresponding to equijoins within a joinrel.      *      * @param leftChild left input into the join      * @param rightChild right input into the join      * @param predicate join predicate      * @param leftJoinCols bitmap that will be set with the columns on the LHS      * of the join that participate in equijoins      * @param rightJoinCols bitmap that will be set with the columns on the RHS      * of the join that participate in equijoins      *      * @return remaining join filters that are not equijoins; may return a      * {@link RexLiteral} true, but never null      */
+comment|/**    * Locates the columns corresponding to equijoins within a joinrel.    *    * @param leftChild     left input into the join    * @param rightChild    right input into the join    * @param predicate     join predicate    * @param leftJoinCols  bitmap that will be set with the columns on the LHS    *                      of the join that participate in equijoins    * @param rightJoinCols bitmap that will be set with the columns on the RHS    *                      of the join that participate in equijoins    * @return remaining join filters that are not equijoins; may return a    * {@link RexLiteral} true, but never null    */
 specifier|public
 specifier|static
 name|RexNode
@@ -1506,7 +1506,7 @@ return|return
 name|nonEquiJoin
 return|;
 block|}
-comment|/**      * AND's two predicates together, either of which may be null, removing      * redundant filters.      *      * @param rexBuilder rexBuilder used to construct AND'd RexNode      * @param pred1 first predicate      * @param pred2 second predicate      *      * @return AND'd predicate or individual predicates if one is null      */
+comment|/**    * AND's two predicates together, either of which may be null, removing    * redundant filters.    *    * @param rexBuilder rexBuilder used to construct AND'd RexNode    * @param pred1      first predicate    * @param pred2      second predicate    * @return AND'd predicate or individual predicates if one is null    */
 specifier|public
 specifier|static
 name|RexNode
@@ -1633,7 +1633,7 @@ literal|true
 argument_list|)
 return|;
 block|}
-comment|/**      * Takes the difference between two predicates, removing from the first any      * predicates also in the second      *      * @param rexBuilder rexBuilder used to construct AND'd RexNode      * @param pred1 first predicate      * @param pred2 second predicate      *      * @return MINUS'd predicate list      */
+comment|/**    * Takes the difference between two predicates, removing from the first any    * predicates also in the second    *    * @param rexBuilder rexBuilder used to construct AND'd RexNode    * @param pred1      first predicate    * @param pred2      second predicate    * @return MINUS'd predicate list    */
 specifier|public
 specifier|static
 name|RexNode
@@ -1761,7 +1761,7 @@ literal|true
 argument_list|)
 return|;
 block|}
-comment|/**      * Takes a bitmap representing a set of input references and extracts the      * ones that reference the group by columns in an aggregate      *      * @param groupKey the original bitmap      * @param aggRel the aggregate      * @param childKey sets bits from groupKey corresponding to group by columns      */
+comment|/**    * Takes a bitmap representing a set of input references and extracts the    * ones that reference the group by columns in an aggregate    *    * @param groupKey the original bitmap    * @param aggRel   the aggregate    * @param childKey sets bits from groupKey corresponding to group by columns    */
 specifier|public
 specifier|static
 name|void
@@ -1861,7 +1861,7 @@ block|}
 block|}
 block|}
 block|}
-comment|/**      * Forms two bitmaps by splitting the columns in a bitmap according to      * whether or not the column references the child input or is an expression      *      * @param projExprs Project expressions      * @param groupKey Bitmap whose columns will be split      * @param baseCols Bitmap representing columns from the child input      * @param projCols Bitmap representing non-child columns      */
+comment|/**    * Forms two bitmaps by splitting the columns in a bitmap according to    * whether or not the column references the child input or is an expression    *    * @param projExprs Project expressions    * @param groupKey  Bitmap whose columns will be split    * @param baseCols  Bitmap representing columns from the child input    * @param projCols  Bitmap representing non-child columns    */
 specifier|public
 specifier|static
 name|void
@@ -1942,7 +1942,7 @@ expr_stmt|;
 block|}
 block|}
 block|}
-comment|/**      * Computes the cardinality of a particular expression from the projection      * list      *      * @param rel RelNode corresponding to the project      * @param expr projection expression      *      * @return cardinality      */
+comment|/**    * Computes the cardinality of a particular expression from the projection    * list    *    * @param rel  RelNode corresponding to the project    * @param expr projection expression    * @return cardinality    */
 specifier|public
 specifier|static
 name|Double
@@ -1968,7 +1968,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**      * Computes the population size for a set of keys returned from a join      *      * @param joinRel the join rel      * @param groupKey keys to compute the population for      *      * @return computed population size      */
+comment|/**    * Computes the population size for a set of keys returned from a join    *    * @param joinRel  the join rel    * @param groupKey keys to compute the population for    * @return computed population size    */
 specifier|public
 specifier|static
 name|Double
@@ -2083,7 +2083,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**      * Computes the number of distinct rows for a set of keys returned from a      * join      *      * @param joinRel RelNode representing the join      * @param joinType type of join      * @param groupKey keys that the distinct row count will be computed for      * @param predicate join predicate      *      * @return number of distinct rows      */
+comment|/**    * Computes the number of distinct rows for a set of keys returned from a    * join    *    * @param joinRel   RelNode representing the join    * @param joinType  type of join    * @param groupKey  keys that the distinct row count will be computed for    * @param predicate join predicate    * @return number of distinct rows    */
 specifier|public
 specifier|static
 name|Double

@@ -25,7 +25,7 @@ interface|interface
 name|ConcurrentTestCommand
 block|{
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Executes this command. The ConcurrentTestCommandExecutor provides      * access to a JDBC connection and previously prepared statements.      *      * @param exec the ConcurrentTestCommandExecutor firing this command.      *      * @throws Exception to indicate a test failure      *      * @see ConcurrentTestCommandExecutor#getStatement()      * @see ConcurrentTestCommandExecutor#setStatement(java.sql.Statement)      */
+comment|/**    * Executes this command. The ConcurrentTestCommandExecutor provides    * access to a JDBC connection and previously prepared statements.    *    * @param exec the ConcurrentTestCommandExecutor firing this command.    *    * @throws Exception to indicate a test failure    *    * @see ConcurrentTestCommandExecutor#getStatement()    * @see ConcurrentTestCommandExecutor#setStatement(java.sql.Statement)    */
 name|void
 name|execute
 parameter_list|(
@@ -35,7 +35,7 @@ parameter_list|)
 throws|throws
 name|Exception
 function_decl|;
-comment|/**      * Marks a command to show that it is expected to fail, and indicates how.      * Used for negative tests. Normally when a command fails the embracing test      * fails.      * But when a marked command fails, the error is caught and inspected: if it      * matches the expected error, the test continues. However if it does not      * match, if another kind of exception is thrown, or if no exception is      * caught, then the test fails. Assumes the error is indicated by a      * java.sql.SQLException. Optionally checks for the expected error condition      * by matching the error message against a regular expression. (Scans the      * list of chained SQLExceptions).      *      * @param comment a brief description of the expected error      * @param pattern null, or a regular expression that matches the expected      * error message.      */
+comment|/**    * Marks a command to show that it is expected to fail, and indicates how.    * Used for negative tests. Normally when a command fails the embracing test    * fails.    * But when a marked command fails, the error is caught and inspected: if it    * matches the expected error, the test continues. However if it does not    * match, if another kind of exception is thrown, or if no exception is    * caught, then the test fails. Assumes the error is indicated by a    * java.sql.SQLException. Optionally checks for the expected error condition    * by matching the error message against a regular expression. (Scans the    * list of chained SQLExceptions).    *    * @param comment a brief description of the expected error    * @param pattern null, or a regular expression that matches the expected    * error message.    */
 name|ConcurrentTestCommand
 name|markToFail
 parameter_list|(
@@ -46,18 +46,18 @@ name|String
 name|pattern
 parameter_list|)
 function_decl|;
-comment|/**      * Returns true if the command should fail. This allows special error      * handling for expected failures that don't have patterns.      *      * @return true if command is expected to fail      */
+comment|/**    * Returns true if the command should fail. This allows special error    * handling for expected failures that don't have patterns.    *    * @return true if command is expected to fail    */
 name|boolean
 name|isFailureExpected
 parameter_list|()
 function_decl|;
-comment|/**      * Set this command to expect a patternless failure.      */
+comment|/**    * Set this command to expect a patternless failure.    */
 name|ConcurrentTestCommand
 name|markToFail
 parameter_list|()
 function_decl|;
 comment|//~ Inner Classes ----------------------------------------------------------
-comment|/**      * Indicates that a command should have failed, but instead succeeded, which      * is a test error      */
+comment|/**    * Indicates that a command should have failed, but instead succeeded, which    * is a test error    */
 specifier|public
 specifier|static
 class|class

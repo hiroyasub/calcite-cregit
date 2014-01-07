@@ -104,12 +104,12 @@ specifier|final
 name|SqlIdentifier
 name|id
 decl_stmt|;
-comment|/**      * The underlying table. Set on validate.      */
+comment|/**    * The underlying table. Set on validate.    */
 specifier|private
 name|SqlValidatorTable
 name|table
 decl_stmt|;
-comment|/**      * List of monotonic expressions. Set on validate.      */
+comment|/**    * List of monotonic expressions. Set on validate.    */
 specifier|private
 name|List
 argument_list|<
@@ -123,7 +123,7 @@ argument_list|>
 name|monotonicExprs
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates an IdentifierNamespace.      *      * @param validator Validator      * @param id Identifier node      * @param enclosingNode Enclosing node      */
+comment|/**    * Creates an IdentifierNamespace.    *    * @param validator     Validator    * @param id            Identifier node    * @param enclosingNode Enclosing node    */
 name|IdentifierNamespace
 parameter_list|(
 name|SqlValidatorImpl

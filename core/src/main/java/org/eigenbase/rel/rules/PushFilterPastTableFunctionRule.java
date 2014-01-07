@@ -109,7 +109,7 @@ name|PushFilterPastTableFunctionRule
 argument_list|()
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a PushFilterPastTableFunctionRule.      */
+comment|/**    * Creates a PushFilterPastTableFunctionRule.    */
 specifier|private
 name|PushFilterPastTableFunctionRule
 parameter_list|()

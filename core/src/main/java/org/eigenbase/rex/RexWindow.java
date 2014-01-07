@@ -106,7 +106,7 @@ name|String
 name|digest
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a window.      *      *<p>If you need to create a window from outside this package, use {@link      * RexBuilder#makeOver}.      */
+comment|/**    * Creates a window.    *    *<p>If you need to create a window from outside this package, use {@link    * RexBuilder#makeOver}.    */
 name|RexWindow
 parameter_list|(
 name|List

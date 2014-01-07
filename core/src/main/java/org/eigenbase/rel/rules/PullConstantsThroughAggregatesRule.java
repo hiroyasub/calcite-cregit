@@ -125,7 +125,7 @@ extends|extends
 name|RelOptRule
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
-comment|/**      * The singleton.      */
+comment|/**    * The singleton.    */
 specifier|public
 specifier|static
 specifier|final
@@ -137,7 +137,7 @@ name|PullConstantsThroughAggregatesRule
 argument_list|()
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Private: use singleton      */
+comment|/**    * Private: use singleton    */
 specifier|private
 name|PullConstantsThroughAggregatesRule
 parameter_list|()
@@ -860,7 +860,7 @@ name|inverseProject
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Creates a projection which permutes the fields of a given relational      * expression.      *      *<p>For example, given a relational expression [A, B, C, D] and a mapping      * [2:1, 3:0], returns a projection [$3 AS C, $2 AS B].      *      * @param mapping Mapping to apply to source columns      * @param child Relational expression      *      * @return Relational expressions with permutation applied      */
+comment|/**    * Creates a projection which permutes the fields of a given relational    * expression.    *    *<p>For example, given a relational expression [A, B, C, D] and a mapping    * [2:1, 3:0], returns a projection [$3 AS C, $2 AS B].    *    * @param mapping Mapping to apply to source columns    * @param child   Relational expression    * @return Relational expressions with permutation applied    */
 specifier|private
 specifier|static
 name|RelNode

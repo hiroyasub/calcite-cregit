@@ -250,7 +250,7 @@ block|}
 block|}
 decl_stmt|;
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Returns a guess for the selectivity of an expression.      *      * @param exp expression of interest, or null for none (implying a      * selectivity of 1.0)      *      * @return guessed selectivity      */
+comment|/**    * Returns a guess for the selectivity of an expression.    *    * @param exp expression of interest, or null for none (implying a    *            selectivity of 1.0)    * @return guessed selectivity    */
 specifier|public
 specifier|static
 name|double
@@ -282,7 +282,7 @@ return|return
 literal|0.1
 return|;
 block|}
-comment|/**      * Returns a copy of an array of row-expressions.      */
+comment|/**    * Returns a copy of an array of row-expressions.    */
 specifier|public
 specifier|static
 name|RexNode
@@ -352,7 +352,7 @@ return|return
 name|exps2
 return|;
 block|}
-comment|/**      * Generates a cast from one row type to another      *      * @param rexBuilder RexBuilder to use for constructing casts      * @param lhsRowType target row type      * @param rhsRowType source row type; fields must be 1-to-1 with lhsRowType,      * in same order      *      * @return cast expressions      */
+comment|/**    * Generates a cast from one row type to another    *    * @param rexBuilder RexBuilder to use for constructing casts    * @param lhsRowType target row type    * @param rhsRowType source row type; fields must be 1-to-1 with lhsRowType,    *                   in same order    * @return cast expressions    */
 specifier|public
 specifier|static
 name|List
@@ -462,7 +462,7 @@ name|rhsExps
 argument_list|)
 return|;
 block|}
-comment|/**      * Generates a cast for a row type.      *      * @param rexBuilder RexBuilder to use for constructing casts      * @param lhsRowType target row type      * @param rhsExps expressions to be cast      *      * @return cast expressions      */
+comment|/**    * Generates a cast for a row type.    *    * @param rexBuilder RexBuilder to use for constructing casts    * @param lhsRowType target row type    * @param rhsExps    expressions to be cast    * @return cast expressions    */
 specifier|public
 specifier|static
 name|List
@@ -601,7 +601,7 @@ return|return
 name|castExps
 return|;
 block|}
-comment|/**      * Returns whether a node represents the NULL value.      *      *<p>Examples:      *      *<ul>      *<li>For {@link org.eigenbase.rex.RexLiteral} Unknown, returns false.      *<li>For<code>CAST(NULL AS<i>type</i>)</code>, returns true if<code>      * allowCast</code> is true, false otherwise.      *<li>For<code>CAST(CAST(NULL AS<i>type</i>) AS<i>type</i>))</code>,      * returns false.      *</ul>      */
+comment|/**    * Returns whether a node represents the NULL value.    *    *<p>Examples:    *    *<ul>    *<li>For {@link org.eigenbase.rex.RexLiteral} Unknown, returns false.    *<li>For<code>CAST(NULL AS<i>type</i>)</code>, returns true if<code>    * allowCast</code> is true, false otherwise.    *<li>For<code>CAST(CAST(NULL AS<i>type</i>) AS<i>type</i>))</code>,    * returns false.    *</ul>    */
 specifier|public
 specifier|static
 name|boolean
@@ -717,7 +717,7 @@ return|return
 literal|false
 return|;
 block|}
-comment|/**      * Returns whether a node represents the NULL value or a series of nested      * CAST(NULL as<TYPE>) calls<br>      * For Example:<br>      * isNull(CAST(CAST(NULL as INTEGER) AS VARCHAR(1))) returns true      */
+comment|/**    * Returns whether a node represents the NULL value or a series of nested    * CAST(NULL as<TYPE>) calls<br>    * For Example:<br>    * isNull(CAST(CAST(NULL as INTEGER) AS VARCHAR(1))) returns true    */
 specifier|public
 specifier|static
 name|boolean
@@ -778,7 +778,7 @@ literal|false
 return|;
 block|}
 block|}
-comment|/**      * Returns whether a given node contains a RexCall with a specified operator      *      * @param operator to look for      * @param node a RexNode tree      */
+comment|/**    * Returns whether a given node contains a RexCall with a specified operator    *    * @param operator to look for    * @param node     a RexNode tree    */
 specifier|public
 specifier|static
 name|RexCall
@@ -890,7 +890,7 @@ argument_list|()
 return|;
 block|}
 block|}
-comment|/**      * Returns whether a given tree contains any {link RexInputRef} nodes.      *      * @param node a RexNode tree      */
+comment|/**    * Returns whether a given tree contains any {link RexInputRef} nodes.    *    * @param node a RexNode tree    */
 specifier|public
 specifier|static
 name|boolean
@@ -970,7 +970,7 @@ literal|true
 return|;
 block|}
 block|}
-comment|/**      * Returns whether a given tree contains any {@link      * org.eigenbase.rex.RexFieldAccess} nodes.      *      * @param node a RexNode tree      */
+comment|/**    * Returns whether a given tree contains any {@link    * org.eigenbase.rex.RexFieldAccess} nodes.    *    * @param node a RexNode tree    */
 specifier|public
 specifier|static
 name|boolean
@@ -1050,7 +1050,7 @@ literal|true
 return|;
 block|}
 block|}
-comment|/**      * Determines whether a {@link RexCall} requires decimal expansion. It      * usually requires expansion if it has decimal operands.      *      *<p>Exceptions to this rule are:      *      *<ul>      *<li>isNull doesn't require expansion      *<li>It's okay to cast decimals to and from char types      *<li>It's okay to cast nulls as decimals      *<li>Casts require expansion if their return type is decimal      *<li>Reinterpret casts can handle a decimal operand      *</ul>      *      * @param expr expression possibly in need of expansion      * @param recurse whether to check nested calls      *      * @return whether the expression requires expansion      */
+comment|/**    * Determines whether a {@link RexCall} requires decimal expansion. It    * usually requires expansion if it has decimal operands.    *    *<p>Exceptions to this rule are:    *    *<ul>    *<li>isNull doesn't require expansion    *<li>It's okay to cast decimals to and from char types    *<li>It's okay to cast nulls as decimals    *<li>Casts require expansion if their return type is decimal    *<li>Reinterpret casts can handle a decimal operand    *</ul>    *    * @param expr    expression possibly in need of expansion    * @param recurse whether to check nested calls    * @return whether the expression requires expansion    */
 specifier|public
 specifier|static
 name|boolean
@@ -1290,7 +1290,7 @@ name|recurse
 argument_list|)
 return|;
 block|}
-comment|/**      * Determines whether any operand of a set requires decimal expansion      */
+comment|/**    * Determines whether any operand of a set requires decimal expansion    */
 specifier|public
 specifier|static
 name|boolean
@@ -1349,7 +1349,7 @@ return|return
 literal|false
 return|;
 block|}
-comment|/**      * Returns whether a {@link RexProgram} contains expressions which require      * decimal expansion.      */
+comment|/**    * Returns whether a {@link RexProgram} contains expressions which require    * decimal expansion.    */
 specifier|public
 specifier|static
 name|boolean
@@ -1433,7 +1433,7 @@ operator|>
 literal|1
 return|;
 block|}
-comment|/**      * Returns whether an array of expressions has any common sub-expressions.      */
+comment|/**    * Returns whether an array of expressions has any common sub-expressions.    */
 specifier|public
 specifier|static
 name|boolean
@@ -1504,7 +1504,7 @@ return|return
 literal|false
 return|;
 block|}
-comment|/**      * Returns whether an array of expressions contains a forward reference.      * That is, if expression #i contains a {@link RexInputRef} referencing      * field i or greater.      *      *      * @param exprs Array of expressions      * @param inputRowType Input row type      * @param fail Whether to assert if there is a forward reference      *      * @return Whether there is a forward reference      */
+comment|/**    * Returns whether an array of expressions contains a forward reference.    * That is, if expression #i contains a {@link RexInputRef} referencing    * field i or greater.    *    * @param exprs        Array of expressions    * @param inputRowType Input row type    * @param fail         Whether to assert if there is a forward reference    * @return Whether there is a forward reference    */
 specifier|public
 specifier|static
 name|boolean
@@ -1613,7 +1613,7 @@ return|return
 literal|false
 return|;
 block|}
-comment|/**      * Returns whether an array of exp contains aggregate function calls whose      * arguments are not {@link RexInputRef}.s      *      * @param exprs Expressions      * @param fail Whether to assert if there is such a function call      */
+comment|/**    * Returns whether an array of exp contains aggregate function calls whose    * arguments are not {@link RexInputRef}.s    *    * @param exprs Expressions    * @param fail  Whether to assert if there is such a function call    */
 specifier|static
 name|boolean
 name|containNonTrivialAggs
@@ -1699,7 +1699,7 @@ return|return
 literal|false
 return|;
 block|}
-comment|/**      * Returns whether a list of expressions contains complex expressions, that      * is, a call whose arguments are not {@link RexVariable} (or a subtype such      * as {@link RexInputRef}) or {@link RexLiteral}.      */
+comment|/**    * Returns whether a list of expressions contains complex expressions, that    * is, a call whose arguments are not {@link RexVariable} (or a subtype such    * as {@link RexInputRef}) or {@link RexLiteral}.    */
 specifier|public
 specifier|static
 name|boolean
@@ -1785,7 +1785,7 @@ name|RexVariable
 operator|)
 return|;
 block|}
-comment|/**      * Returns whether a {@link RexNode node} is a {@link RexCall call} to a      * given {@link SqlOperator operator}.      */
+comment|/**    * Returns whether a {@link RexNode node} is a {@link RexCall call} to a    * given {@link SqlOperator operator}.    */
 specifier|public
 specifier|static
 name|boolean
@@ -1820,7 +1820,7 @@ name|op
 operator|)
 return|;
 block|}
-comment|/**      * Creates a record type with anonymous field names.      *      * @param typeFactory Type factory      * @param exprs Expressions      * @return Record type      */
+comment|/**    * Creates a record type with anonymous field names.    *    * @param typeFactory Type factory    * @param exprs       Expressions    * @return Record type    */
 specifier|public
 specifier|static
 name|RelDataType
@@ -1848,7 +1848,7 @@ literal|null
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates a record type with specified field names.      *      *<p>The array of field names may be null, or any of the names within it      * can be null. We recommend using explicit names where possible, because it      * makes it much easier to figure out the intent of fields when looking at      * planner output.      *      * @param typeFactory Type factory      * @param exprs Expressions      * @param names Field names, may be null, or elements may be null      * @return Record type      */
+comment|/**    * Creates a record type with specified field names.    *    *<p>The array of field names may be null, or any of the names within it    * can be null. We recommend using explicit names where possible, because it    * makes it much easier to figure out the intent of fields when looking at    * planner output.    *    * @param typeFactory Type factory    * @param exprs       Expressions    * @param names       Field names, may be null, or elements may be null    * @return Record type    */
 specifier|public
 specifier|static
 name|RelDataType
@@ -1958,7 +1958,7 @@ name|build
 argument_list|()
 return|;
 block|}
-comment|/**      * Returns whether the type of an array of expressions is compatible with a      * struct type.      *      *      * @param exprs Array of expressions      * @param type Type      * @param fail Whether to fail if there is a mismatch      *      * @return Whether every expression has the same type as the corresponding      * member of the struct type      *      * @see RelOptUtil#eq(String, RelDataType, String, RelDataType, boolean)      */
+comment|/**    * Returns whether the type of an array of expressions is compatible with a    * struct type.    *    * @param exprs Array of expressions    * @param type  Type    * @param fail  Whether to fail if there is a mismatch    * @return Whether every expression has the same type as the corresponding    * member of the struct type    * @see RelOptUtil#eq(String, RelDataType, String, RelDataType, boolean)    */
 specifier|public
 specifier|static
 name|boolean
@@ -2086,7 +2086,7 @@ return|return
 literal|true
 return|;
 block|}
-comment|/**      * Creates a key for {@link RexNode} which is the same as another key of      * another RexNode only if the two have both the same type and textual      * representation. For example, "10" integer and "10" bigint result in      * different keys.      */
+comment|/**    * Creates a key for {@link RexNode} which is the same as another key of    * another RexNode only if the two have both the same type and textual    * representation. For example, "10" integer and "10" bigint result in    * different keys.    */
 specifier|public
 specifier|static
 name|String
@@ -2166,7 +2166,7 @@ name|toString
 argument_list|()
 return|;
 block|}
-comment|/**      * Returns whether the leading edge of a given array of expressions is      * wholly {@link RexInputRef} objects with types corresponding to the      * underlying datatype.      */
+comment|/**    * Returns whether the leading edge of a given array of expressions is    * wholly {@link RexInputRef} objects with types corresponding to the    * underlying datatype.    */
 specifier|public
 specifier|static
 name|boolean
@@ -2353,7 +2353,7 @@ return|return
 literal|true
 return|;
 block|}
-comment|/** Converts a collection of expressions into an AND.      * If there are zero expressions, returns TRUE.      * If there is one expression, returns just that expression.      * Removes expressions that always evaluate to TRUE. */
+comment|/**    * Converts a collection of expressions into an AND.    * If there are zero expressions, returns TRUE.    * If there is one expression, returns just that expression.    * Removes expressions that always evaluate to TRUE.    */
 specifier|public
 specifier|static
 name|RexNode
@@ -2436,7 +2436,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/** Converts a collection of expressions into an OR.      * If there are zero expressions, returns FALSE.      * If there is one expression, returns just that expression.      * Removes expressions that always evaluate to FALSE. */
+comment|/**    * Converts a collection of expressions into an OR.    * If there are zero expressions, returns FALSE.    * If there is one expression, returns just that expression.    * Removes expressions that always evaluate to FALSE.    */
 specifier|public
 specifier|static
 name|RexNode
@@ -2519,7 +2519,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**      * Applies a mapping to a collation list.      *      * @param mapping Mapping      * @param collationList Collation list      * @return collation list with mapping applied to each field      */
+comment|/**    * Applies a mapping to a collation list.    *    * @param mapping       Mapping    * @param collationList Collation list    * @return collation list with mapping applied to each field    */
 specifier|public
 specifier|static
 name|List
@@ -2686,7 +2686,7 @@ return|return
 name|newCollationList
 return|;
 block|}
-comment|/**      * Applies a mapping to a collation.      *      * @param mapping Mapping      * @param collation Collation      * @return collation with mapping applied      */
+comment|/**    * Applies a mapping to a collation.    *    * @param mapping   Mapping    * @param collation Collation    * @return collation with mapping applied    */
 specifier|public
 specifier|static
 name|RelCollation
@@ -2738,7 +2738,7 @@ name|fieldCollations
 argument_list|)
 return|;
 block|}
-comment|/**      * Applies a mapping to a field collation.      *      *<p>If the field is not mapped, returns null.      *      * @param mapping Mapping      * @param fieldCollation Field collation      * @return collation with mapping applied      */
+comment|/**    * Applies a mapping to a field collation.    *    *<p>If the field is not mapped, returns null.    *    * @param mapping        Mapping    * @param fieldCollation Field collation    * @return collation with mapping applied    */
 specifier|public
 specifier|static
 name|RelFieldCollation
@@ -2787,7 +2787,7 @@ name|target
 argument_list|)
 return|;
 block|}
-comment|/**      * Applies a mapping to a list of field collations.      *      * @param mapping Mapping      * @param fieldCollations Field collations      * @return collations with mapping applied      */
+comment|/**    * Applies a mapping to a list of field collations.    *    * @param mapping         Mapping    * @param fieldCollations Field collations    * @return collations with mapping applied    */
 specifier|public
 specifier|static
 name|List
@@ -2852,7 +2852,7 @@ return|return
 name|newFieldCollations
 return|;
 block|}
-comment|/**      * Applies a shuttle to an array of expressions. Creates a copy first.      *      * @param shuttle Shuttle      * @param exprs Array of expressions      */
+comment|/**    * Applies a shuttle to an array of expressions. Creates a copy first.    *    * @param shuttle Shuttle    * @param exprs   Array of expressions    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -2935,7 +2935,7 @@ return|return
 name|newExprs
 return|;
 block|}
-comment|/**      * Applies a visitor to an array of expressions and, if specified, a single      * expression.      *      * @param visitor Visitor      * @param exprs Array of expressions      * @param expr Single expression, may be null      */
+comment|/**    * Applies a visitor to an array of expressions and, if specified, a single    * expression.    *    * @param visitor Visitor    * @param exprs   Array of expressions    * @param expr    Single expression, may be null    */
 specifier|public
 specifier|static
 name|void
@@ -2987,7 +2987,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Applies a visitor to a list of expressions and, if specified, a single      * expression.      *      * @param visitor Visitor      * @param exprs List of expressions      * @param expr Single expression, may be null      */
+comment|/**    * Applies a visitor to a list of expressions and, if specified, a single    * expression.    *    * @param visitor Visitor    * @param exprs   List of expressions    * @param expr    Single expression, may be null    */
 specifier|public
 specifier|static
 name|void
@@ -3043,7 +3043,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/** Converts a list of operands into a list that is flat with respect to      * the given operator. The operands are assumed to be flat already. */
+comment|/**    * Converts a list of operands into a list that is flat with respect to    * the given operator. The operands are assumed to be flat already.    */
 specifier|static
 name|List
 argument_list|<
@@ -3106,7 +3106,7 @@ return|return
 name|list
 return|;
 block|}
-comment|/** Returns whether a call to {@code op} with {@code exprs} as arguments      * would be considered "flat".      *      *<p>For example, {@code isFlat([w, AND[x, y], z, AND)} returns false;      *<p>{@code isFlat([w, x, y, z], AND)} returns true.</p>      */
+comment|/**    * Returns whether a call to {@code op} with {@code exprs} as arguments    * would be considered "flat".    *    *<p>For example, {@code isFlat([w, AND[x, y], z, AND)} returns false;    *<p>{@code isFlat([w, x, y, z], AND)} returns true.</p>    */
 specifier|private
 specifier|static
 name|boolean
@@ -3165,7 +3165,7 @@ block|}
 argument_list|)
 return|;
 block|}
-comment|/** Returns false if the expression can be optimized by flattening      * calls to an associative operator such as AND and OR. */
+comment|/**    * Returns false if the expression can be optimized by flattening    * calls to an associative operator such as AND and OR.    */
 specifier|public
 specifier|static
 name|boolean
@@ -3303,7 +3303,7 @@ expr_stmt|;
 block|}
 block|}
 block|}
-comment|/** Returns whether an operator is associative. AND is associative,      * which means that "(x AND y) and z" is equivalent to "x AND (y AND z)".      * We might well flatten the tree, and write "AND(x, y, z)". */
+comment|/**    * Returns whether an operator is associative. AND is associative,    * which means that "(x AND y) and z" is equivalent to "x AND (y AND z)".    * We might well flatten the tree, and write "AND(x, y, z)".    */
 specifier|private
 specifier|static
 name|boolean
@@ -3333,7 +3333,7 @@ operator|.
 name|OR
 return|;
 block|}
-comment|/** Returns whether there is an element in {@code list} for which      * {@code predicate} is true. */
+comment|/**    * Returns whether there is an element in {@code list} for which    * {@code predicate} is true.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -3384,7 +3384,7 @@ return|return
 literal|false
 return|;
 block|}
-comment|/** Returns whether {@code predicate} is true for all elements of      * {@code list}. */
+comment|/**    * Returns whether {@code predicate} is true for all elements of    * {@code list}.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -3436,7 +3436,7 @@ return|return
 literal|true
 return|;
 block|}
-comment|/** Returns a list generated by applying a function to each index between      * 0 and {@code size} - 1. */
+comment|/**    * Returns a list generated by applying a function to each index between    * 0 and {@code size} - 1.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -3512,7 +3512,7 @@ block|}
 block|}
 return|;
 block|}
-comment|/** Shifts every {@link RexInputRef} in an expression by {@code offset}. */
+comment|/**    * Shifts every {@link RexInputRef} in an expression by {@code offset}.    */
 specifier|public
 specifier|static
 name|RexNode
@@ -3568,7 +3568,7 @@ argument_list|)
 return|;
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------
-comment|/**      * Walks over expressions and builds a bank of common sub-expressions.      */
+comment|/**    * Walks over expressions and builds a bank of common sub-expressions.    */
 specifier|private
 specifier|static
 class|class
@@ -3931,7 +3931,7 @@ name|fieldAccess
 argument_list|)
 return|;
 block|}
-comment|/**          * Thrown if there is a sub-expression.          */
+comment|/**      * Thrown if there is a sub-expression.      */
 specifier|private
 specifier|static
 class|class
@@ -3955,7 +3955,7 @@ expr_stmt|;
 block|}
 block|}
 block|}
-comment|/**      * Walks over an expression and throws an exception if it finds an {@link      * RexInputRef} with an ordinal beyond the number of fields in the input row      * type, or a {@link RexLocalRef} with ordinal greater than that set using      * {@link #setLimit(int)}.      */
+comment|/**    * Walks over an expression and throws an exception if it finds an {@link    * RexInputRef} with an ordinal beyond the number of fields in the input row    * type, or a {@link RexLocalRef} with ordinal greater than that set using    * {@link #setLimit(int)}.    */
 specifier|private
 specifier|static
 class|class
@@ -4090,9 +4090,9 @@ class|class
 name|IllegalForwardRefException
 extends|extends
 name|RuntimeException
-block|{         }
+block|{     }
 block|}
-comment|/**      * Visitor which builds a bitmap of the inputs used by an expression.      */
+comment|/**    * Visitor which builds a bitmap of the inputs used by an expression.    */
 specifier|public
 specifier|static
 class|class

@@ -221,7 +221,7 @@ name|collationList
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates a relational expression which projects an array of expressions.      *      * @param child input relational expression      * @param exprList list of expressions for the input columns      * @param fieldNameList aliases of the expressions, or null to generate      */
+comment|/**    * Creates a relational expression which projects an array of expressions.    *    * @param child         input relational expression    * @param exprList      list of expressions for the input columns    * @param fieldNameList aliases of the expressions, or null to generate    */
 specifier|public
 specifier|static
 name|RelNode
@@ -256,7 +256,7 @@ literal|false
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates a relational expression which projects an array of expressions.      *      * @param child input relational expression      * @param projectList list of (expression, name) pairs      * @param optimize Whether to optimize      */
+comment|/**    * Creates a relational expression which projects an array of expressions.    *    * @param child       input relational expression    * @param projectList list of (expression, name) pairs    * @param optimize    Whether to optimize    */
 specifier|public
 specifier|static
 name|RelNode
@@ -303,7 +303,7 @@ name|optimize
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates a relational expression that projects the given fields of the      * input.      *      *<p>Optimizes if the fields are the identity projection.</p>      *      * @param child Input relational expression      * @param posList Source of each projected field      * @return Relational expression that projects given fields      */
+comment|/**    * Creates a relational expression that projects the given fields of the    * input.    *    *<p>Optimizes if the fields are the identity projection.</p>    *    * @param child   Input relational expression    * @param posList Source of each projected field    * @return Relational expression that projects given fields    */
 specifier|public
 specifier|static
 name|RelNode
@@ -498,7 +498,7 @@ return|return
 literal|true
 return|;
 block|}
-comment|/**      * Creates a relational expression which projects an array of expressions,      * and optionally optimizes.      *      *<p>The result may not be a {@link ProjectRel}. If the projection is      * trivial,<code>child</code> is returned directly; and future versions may      * return other formulations of expressions, such as {@link CalcRel}.      *      * @param child input relational expression      * @param exprs list of expressions for the input columns      * @param fieldNames aliases of the expressions, or null to generate      * @param optimize Whether to return<code>child</code> unchanged if the      * projections are trivial.      */
+comment|/**    * Creates a relational expression which projects an array of expressions,    * and optionally optimizes.    *    *<p>The result may not be a {@link ProjectRel}. If the projection is    * trivial,<code>child</code> is returned directly; and future versions may    * return other formulations of expressions, such as {@link CalcRel}.    *    * @param child      input relational expression    * @param exprs      list of expressions for the input columns    * @param fieldNames aliases of the expressions, or null to generate    * @param optimize   Whether to return<code>child</code> unchanged if the    *                   projections are trivial.    */
 specifier|public
 specifier|static
 name|RelNode
@@ -703,7 +703,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**      * Creates a relational expression which filters according to a given      * condition, returning the same fields as its input.      *      * @param child Child relational expression      * @param condition Condition      *      * @return Relational expression      */
+comment|/**    * Creates a relational expression which filters according to a given    * condition, returning the same fields as its input.    *    * @param child     Child relational expression    * @param condition Condition    * @return Relational expression    */
 specifier|public
 specifier|static
 name|RelNode
@@ -816,7 +816,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**      * Returns a relational expression which has the same fields as the      * underlying expression, but the fields have different names.      *      * @param rel Relational expression      * @param fieldNames Field names      *      * @return Renamed relational expression      */
+comment|/**    * Returns a relational expression which has the same fields as the    * underlying expression, but the fields have different names.    *    * @param rel        Relational expression    * @param fieldNames Field names    * @return Renamed relational expression    */
 specifier|public
 specifier|static
 name|RelNode
@@ -983,7 +983,7 @@ name|variables
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Creates a relational expression which permutes the output fields of a      * relational expression according to a permutation.      *      *<p>Optimizations:      *      *<ul>      *<li>If the relational expression is a {@link CalcRel} or {@link      * ProjectRel} which is already acting as a permutation, combines the new      * permutation with the old;</li>      *<li>If the permutation is the identity, returns the original relational      * expression.</li>      *</ul>      *</p>      *      *<p>If a permutation is combined with its inverse, these optimizations      * would combine to remove them both.      *      * @param rel Relational expression      * @param permutation Permutation to apply to fields      * @param fieldNames Field names; if null, or if a particular entry is null,      * the name of the permuted field is used      *      * @return relational expression which permutes its input fields      */
+comment|/**    * Creates a relational expression which permutes the output fields of a    * relational expression according to a permutation.    *    *<p>Optimizations:    *    *<ul>    *<li>If the relational expression is a {@link CalcRel} or {@link    * ProjectRel} which is already acting as a permutation, combines the new    * permutation with the old;</li>    *<li>If the permutation is the identity, returns the original relational    * expression.</li>    *</ul>    *</p>    *    *<p>If a permutation is combined with its inverse, these optimizations    * would combine to remove them both.    *    * @param rel         Relational expression    * @param permutation Permutation to apply to fields    * @param fieldNames  Field names; if null, or if a particular entry is null,    *                    the name of the permuted field is used    * @return relational expression which permutes its input fields    */
 specifier|public
 specifier|static
 name|RelNode
@@ -1411,7 +1411,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates a relational expression which projects the output fields of a      * relational expression according to a partial mapping.      *      *<p>A partial mapping is weaker than a permutation: every target has one      * source, but a source may have 0, 1 or more than one targets. Usually the      * result will have fewer fields than the source, unless some source fields      * are projected multiple times.      *      *<p>This method could optimize the result as {@link #permute} does, but      * does not at present.      *      * @param rel Relational expression      * @param mapping Mapping from source fields to target fields. The mapping      * type must obey the constaints {@link MappingType#isMandatorySource()} and      * {@link MappingType#isSingleSource()}, as does {@link      * MappingType#InverseFunction}.      * @param fieldNames Field names; if null, or if a particular entry is null,      * the name of the permuted field is used      *      * @return relational expression which projects a subset of the input fields      */
+comment|/**    * Creates a relational expression which projects the output fields of a    * relational expression according to a partial mapping.    *    *<p>A partial mapping is weaker than a permutation: every target has one    * source, but a source may have 0, 1 or more than one targets. Usually the    * result will have fewer fields than the source, unless some source fields    * are projected multiple times.    *    *<p>This method could optimize the result as {@link #permute} does, but    * does not at present.    *    * @param rel        Relational expression    * @param mapping    Mapping from source fields to target fields. The mapping    *                   type must obey the constaints {@link MappingType#isMandatorySource()} and    *                   {@link MappingType#isSingleSource()}, as does {@link    *                   MappingType#InverseFunction}.    * @param fieldNames Field names; if null, or if a particular entry is null,    *                   the name of the permuted field is used    * @return relational expression which projects a subset of the input fields    */
 specifier|public
 specifier|static
 name|RelNode

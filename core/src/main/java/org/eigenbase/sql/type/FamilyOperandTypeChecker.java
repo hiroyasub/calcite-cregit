@@ -96,7 +96,7 @@ argument_list|>
 name|families
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/** Package private. Create using {@link SqlTypeStrategies#family}. */
+comment|/**    * Package private. Create using {@link SqlTypeStrategies#family}.    */
 name|FamilyOperandTypeChecker
 parameter_list|(
 name|List

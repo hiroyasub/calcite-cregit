@@ -109,7 +109,7 @@ argument_list|>
 name|children
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * @see SargFactory#newSetExpr      */
+comment|/**    * @see SargFactory#newSetExpr    */
 name|SargSetExpr
 parameter_list|(
 name|SargFactory
@@ -151,7 +151,7 @@ argument_list|()
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * @return a read-only list of this expression's children (the returned      * children themselves are modifiable)      */
+comment|/**    * @return a read-only list of this expression's children (the returned    * children themselves are modifiable)    */
 specifier|public
 name|List
 argument_list|<
@@ -169,7 +169,7 @@ name|children
 argument_list|)
 return|;
 block|}
-comment|/**      * Adds a child to this expression.      *      * @param child child to add      */
+comment|/**    * Adds a child to this expression.    *    * @param child child to add    */
 specifier|public
 name|void
 name|addChild
@@ -1408,7 +1408,7 @@ throw|;
 block|}
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------
-comment|/**      * Comparator used in evaluateUnionOp. Intervals collate based on      * {lowerBound, upperBound}.      */
+comment|/**    * Comparator used in evaluateUnionOp. Intervals collate based on    * {lowerBound, upperBound}.    */
 specifier|private
 specifier|static
 class|class

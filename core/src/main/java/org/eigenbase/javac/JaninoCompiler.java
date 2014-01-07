@@ -439,7 +439,7 @@ name|fullClassName
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Refinement of JavaSourceClassLoader which keeps track of the total      * bytecode length of the classes it has compiled.      */
+comment|/**    * Refinement of JavaSourceClassLoader which keeps track of the total    * bytecode length of the classes it has compiled.    */
 specifier|private
 specifier|static
 class|class

@@ -22,16 +22,16 @@ specifier|public
 enum|enum
 name|RelOptRuleOperandChildPolicy
 block|{
-comment|/** Signifies that operand can have any number of children. */
+comment|/**    * Signifies that operand can have any number of children.    */
 name|ANY
 block|,
-comment|/** Signifies that operand has no children. Therefore it matches a      * leaf node, such as a table scan or VALUES operator.      *      *<p>{@code RelOptRuleOperand(Foo.class, NONE)} is equivalent to      * {@code RelOptRuleOperand(Foo.class)} but we prefer the former because      * it is more explicit.</p> */
+comment|/**    * Signifies that operand has no children. Therefore it matches a    * leaf node, such as a table scan or VALUES operator.    *    *<p>{@code RelOptRuleOperand(Foo.class, NONE)} is equivalent to    * {@code RelOptRuleOperand(Foo.class)} but we prefer the former because    * it is more explicit.</p>    */
 name|LEAF
 block|,
-comment|/** Signifies that the operand's children must precisely match its      * child operands, in order. */
+comment|/**    * Signifies that the operand's children must precisely match its    * child operands, in order.    */
 name|SOME
 block|,
-comment|/** Signifies that the rule matches any one of its parents' children.      * The parent may have one or more children. */
+comment|/**    * Signifies that the rule matches any one of its parents' children.    * The parent may have one or more children.    */
 name|UNORDERED
 block|, }
 end_enum

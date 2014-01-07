@@ -69,7 +69,7 @@ class|class
 name|RelOptQuery
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
-comment|/**      * Prefix to the name of correlating variables.      */
+comment|/**    * Prefix to the name of correlating variables.    */
 specifier|public
 specifier|static
 specifier|final
@@ -79,7 +79,7 @@ init|=
 literal|"$cor"
 decl_stmt|;
 comment|//~ Instance fields --------------------------------------------------------
-comment|/**      * Maps a from-list expression to the name of the correlating variable which      * references it. This is for forward-references, caused when from items      * have correlating variables. We will later resolve to a {@link RelNode}.      */
+comment|/**    * Maps a from-list expression to the name of the correlating variable which    * references it. This is for forward-references, caused when from items    * have correlating variables. We will later resolve to a {@link RelNode}.    */
 specifier|private
 specifier|final
 name|Map
@@ -99,7 +99,7 @@ name|String
 argument_list|>
 argument_list|()
 decl_stmt|;
-comment|/**      * Maps name of correlating variable (e.g. "$cor3") to the {@link RelNode}      * which implements it.      */
+comment|/**    * Maps name of correlating variable (e.g. "$cor3") to the {@link RelNode}    * which implements it.    */
 specifier|final
 name|Map
 argument_list|<
@@ -130,7 +130,7 @@ init|=
 literal|0
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a query.      *      * @param planner Planner      */
+comment|/**    * Creates a query.    *    * @param planner Planner    */
 specifier|public
 name|RelOptQuery
 parameter_list|(
@@ -146,7 +146,7 @@ name|planner
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Converts a correlating variable name into an ordinal, unqiue within the      * query.      *      * @param correlName Name of correlating variable      *      * @return Correlating variable ordinal      */
+comment|/**    * Converts a correlating variable name into an ordinal, unqiue within the    * query.    *    * @param correlName Name of correlating variable    * @return Correlating variable ordinal    */
 specifier|public
 specifier|static
 name|int
@@ -183,7 +183,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**      * Returns the map which identifies which correlating variable each {@link      * org.eigenbase.relopt.RelOptQuery.DeferredLookup} will set.      *      * @return Map of deferred lookups      */
+comment|/**    * Returns the map which identifies which correlating variable each {@link    * org.eigenbase.relopt.RelOptQuery.DeferredLookup} will set.    *    * @return Map of deferred lookups    */
 specifier|public
 name|Map
 argument_list|<
@@ -198,7 +198,7 @@ return|return
 name|mapDeferredToCorrel
 return|;
 block|}
-comment|/**      * Creates a cluster.      *      * @param typeFactory Type factory      * @param rexBuilder Expression builder      * @return New cluster      */
+comment|/**    * Creates a cluster.    *    * @param typeFactory Type factory    * @param rexBuilder  Expression builder    * @return New cluster    */
 specifier|public
 name|RelOptCluster
 name|createCluster
@@ -224,7 +224,7 @@ name|rexBuilder
 argument_list|)
 return|;
 block|}
-comment|/**      * Constructs a new name for a correlating variable. It is unique within the      * whole query.      */
+comment|/**    * Constructs a new name for a correlating variable. It is unique within the    * whole query.    */
 specifier|public
 name|String
 name|createCorrel
@@ -242,7 +242,7 @@ operator|+
 name|n
 return|;
 block|}
-comment|/**      * Creates a name for a correlating variable for which no {@link RelNode}      * has been created yet.      *      * @param deferredLookup contains the information required to resolve the      * variable later      */
+comment|/**    * Creates a name for a correlating variable for which no {@link RelNode}    * has been created yet.    *    * @param deferredLookup contains the information required to resolve the    *                       variable later    */
 specifier|public
 name|String
 name|createCorrelUnresolved
@@ -277,7 +277,7 @@ return|return
 name|name
 return|;
 block|}
-comment|/**      * Returns the relational expression which populates a correlating variable.      */
+comment|/**    * Returns the relational expression which populates a correlating variable.    */
 specifier|public
 name|RelNode
 name|lookupCorrel
@@ -295,7 +295,7 @@ name|name
 argument_list|)
 return|;
 block|}
-comment|/**      * Maps a correlating variable to a {@link RelNode}.      */
+comment|/**    * Maps a correlating variable to a {@link RelNode}.    */
 specifier|public
 name|void
 name|mapCorrel
@@ -318,12 +318,12 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Inner Interfaces -------------------------------------------------------
-comment|/**      * Contains the information necessary to repeat a call to {@link      * org.eigenbase.sql2rel.SqlToRelConverter.Blackboard#lookup}.      */
+comment|/**    * Contains the information necessary to repeat a call to {@link    * org.eigenbase.sql2rel.SqlToRelConverter.Blackboard#lookup}.    */
 specifier|public
 interface|interface
 name|DeferredLookup
 block|{
-comment|/**          * Creates an expression which accesses a particular field of this          * lookup.          *          *<p>For example, when resolving          *          *<pre>          * select *          * from dept          * where exists (          *   select *          *   from emp          *   where deptno = dept.deptno          *   and specialty = 'Karate')</pre>          *          * the expression<code>dept.deptno</code> would be handled using a          * deferred lookup for<code>dept</code> (because the sub-query is          * validated before the outer query) and the translator would call          *<code>getFieldAccess("DEPTNO")</code> on that lookup.          *          * @param name Name of field          *          * @return Expression which retrieves the given field of this lookup's          * correlating variable          */
+comment|/**      * Creates an expression which accesses a particular field of this      * lookup.      *      *<p>For example, when resolving      *      *<pre>      * select *      * from dept      * where exists (      *   select *      *   from emp      *   where deptno = dept.deptno      *   and specialty = 'Karate')</pre>      *      * the expression<code>dept.deptno</code> would be handled using a      * deferred lookup for<code>dept</code> (because the sub-query is      * validated before the outer query) and the translator would call      *<code>getFieldAccess("DEPTNO")</code> on that lookup.      *      * @param name Name of field      * @return Expression which retrieves the given field of this lookup's      * correlating variable      */
 name|RexFieldAccess
 name|getFieldAccess
 parameter_list|(

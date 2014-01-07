@@ -119,7 +119,7 @@ parameter_list|()
 block|{
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Performs post-constructor initialization of an operator table. It can't      * be part of the constructor, because the subclass constructor needs to      * complete first.      */
+comment|/**    * Performs post-constructor initialization of an operator table. It can't    * be part of the constructor, because the subclass constructor needs to    * complete first.    */
 specifier|public
 specifier|final
 name|void
@@ -643,7 +643,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Registers a function in the table.      *      * @param function Function to register      */
+comment|/**    * Registers a function in the table.    *    * @param function Function to register    */
 specifier|public
 name|void
 name|register

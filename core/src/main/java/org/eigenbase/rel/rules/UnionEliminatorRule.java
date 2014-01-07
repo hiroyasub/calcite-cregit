@@ -61,7 +61,7 @@ name|UnionEliminatorRule
 argument_list|()
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a UnionEliminatorRule.      */
+comment|/**    * Creates a UnionEliminatorRule.    */
 specifier|private
 name|UnionEliminatorRule
 parameter_list|()

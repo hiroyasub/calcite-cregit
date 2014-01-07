@@ -879,7 +879,7 @@ name|newProjRel
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * @param call RelOptRuleCall      *      * @return true if the rule was invoked with a left project child      */
+comment|/**    * @param call RelOptRuleCall    * @return true if the rule was invoked with a left project child    */
 specifier|protected
 name|boolean
 name|hasLeftChild
@@ -901,7 +901,7 @@ name|ProjectRel
 operator|)
 return|;
 block|}
-comment|/**      * @param call RelOptRuleCall      *      * @return true if the rule was invoked with 2 children      */
+comment|/**    * @param call RelOptRuleCall    * @return true if the rule was invoked with 2 children    */
 specifier|protected
 name|boolean
 name|hasRightChild
@@ -920,7 +920,7 @@ operator|==
 literal|3
 return|;
 block|}
-comment|/**      * @param call RelOptRuleCall      *      * @return ProjectRel corresponding to the right child      */
+comment|/**    * @param call RelOptRuleCall    * @return ProjectRel corresponding to the right child    */
 specifier|protected
 name|ProjectRel
 name|getRightChild
@@ -938,7 +938,7 @@ literal|2
 argument_list|)
 return|;
 block|}
-comment|/**      * Returns the child of the project that will be used as input into the new      * JoinRel once the projects are pulled above the JoinRel.      *      * @param call RelOptRuleCall      * @param project project RelNode      * @param leftChild true if the project corresponds to the left projection      * @return child of the project that will be used as input into the new      * JoinRel once the projects are pulled above the JoinRel      */
+comment|/**    * Returns the child of the project that will be used as input into the new    * JoinRel once the projects are pulled above the JoinRel.    *    * @param call      RelOptRuleCall    * @param project   project RelNode    * @param leftChild true if the project corresponds to the left projection    * @return child of the project that will be used as input into the new    * JoinRel once the projects are pulled above the JoinRel    */
 specifier|protected
 name|RelNode
 name|getProjectChild
@@ -960,7 +960,7 @@ name|getChild
 argument_list|()
 return|;
 block|}
-comment|/**      * Creates projection expressions corresponding to one of the inputs into      * the join      *      * @param projRel the projection input into the join (if it exists)      * @param joinChild the child of the projection input (if there is a      * projection); otherwise, this is the join input      * @param adjustmentAmount the amount the expressions need to be shifted by      * @param rexBuilder rex builder      * @param joinChildrenFields concatenation of the fields from the left and      * right join inputs (once the projections have been removed)      * @param projects Projection expressions& names to be created      */
+comment|/**    * Creates projection expressions corresponding to one of the inputs into    * the join    *    * @param projRel            the projection input into the join (if it exists)    * @param joinChild          the child of the projection input (if there is a    *                           projection); otherwise, this is the join input    * @param adjustmentAmount   the amount the expressions need to be shifted by    * @param rexBuilder         rex builder    * @param joinChildrenFields concatenation of the fields from the left and    *                           right join inputs (once the projections have been    *                           removed)    * @param projects           Projection expressions&amp; names to be created    */
 specifier|private
 name|void
 name|createProjectExprs

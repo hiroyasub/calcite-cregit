@@ -78,7 +78,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * The name-resolution scope of a SELECT clause. The objects visible are those  * in the FROM clause, and objects inherited from the parent scope.  *  *<p/>  *<p>This object is both a {@link SqlValidatorScope} and a {@link  * SqlValidatorNamespace}. In the query  *  *<p/>  *<blockquote>  *<pre>SELECT name FROM (  *     SELECT *  *     FROM emp  *     WHERE gender = 'F')</code></blockquote>  *<p/>  *<p>we need to use the {@link SelectScope} as a  * {@link SqlValidatorNamespace} when resolving 'name', and  * as a {@link SqlValidatorScope} when resolving 'gender'.</p>  *<p/>  *<h3>Scopes</h3>  *<p/>  *<p>In the query  *<p/>  *<blockquote>  *<pre>  * SELECT expr1  * FROM t1,  *     t2,  *     (SELECT expr2 FROM t3) AS q3  * WHERE c1 IN (SELECT expr3 FROM t4)  * ORDER BY expr4</pre>  *</blockquote>  *  *<p/>The scopes available at various points of the query are as follows:  *  *<ul>  *<li>expr1 can see t1, t2, q3</li>  *<li>expr2 can see t3</li>  *<li>expr3 can see t4, t1, t2</li>  *<li>expr4 can see t1, t2, q3, plus (depending upon the dialect) any aliases  * defined in the SELECT clause</li>  *</ul>  *  *<p/>  *<h3>Namespaces</h3>  *  *<p/>  *<p>In the above query, there are 4 namespaces:  *  *<ul>  *<li>t1</li>  *<li>t2</li>  *<li>(SELECT expr2 FROM t3) AS q3</li>  *<li>(SELECT expr3 FROM t4)</li>  *</ul>  * @see SelectNamespace  */
+comment|/**  * The name-resolution scope of a SELECT clause. The objects visible are those  * in the FROM clause, and objects inherited from the parent scope.  *  *  *<p>This object is both a {@link SqlValidatorScope} and a {@link  * SqlValidatorNamespace}. In the query</p>  *  *<blockquote>  *<pre>SELECT name FROM (  *     SELECT *  *     FROM emp  *     WHERE gender = 'F')</code></blockquote>  *  *<p>we need to use the {@link SelectScope} as a  * {@link SqlValidatorNamespace} when resolving 'name', and  * as a {@link SqlValidatorScope} when resolving 'gender'.</p>  *  *<h3>Scopes</h3>  *  *<p>In the query</p>  *  *<blockquote>  *<pre>  * SELECT expr1  * FROM t1,  *     t2,  *     (SELECT expr2 FROM t3) AS q3  * WHERE c1 IN (SELECT expr3 FROM t4)  * ORDER BY expr4</pre>  *</blockquote>  *  *<p>The scopes available at various points of the query are as follows:</p>  *  *<ul>  *<li>expr1 can see t1, t2, q3</li>  *<li>expr2 can see t3</li>  *<li>expr3 can see t4, t1, t2</li>  *<li>expr4 can see t1, t2, q3, plus (depending upon the dialect) any aliases  * defined in the SELECT clause</li>  *</ul>  *  *<h3>Namespaces</h3>  *  *<p>In the above query, there are 4 namespaces:</p>  *  *<ul>  *<li>t1</li>  *<li>t2</li>  *<li>(SELECT expr2 FROM t3) AS q3</li>  *<li>(SELECT expr3 FROM t4)</li>  *</ul>  *  * @see SelectNamespace  */
 end_comment
 
 begin_class
@@ -118,19 +118,19 @@ name|expandedSelectList
 init|=
 literal|null
 decl_stmt|;
-comment|/**      * List of column names which sort this scope. Empty if this scope is not      * sorted. Null if has not been computed yet.      */
+comment|/**    * List of column names which sort this scope. Empty if this scope is not    * sorted. Null if has not been computed yet.    */
 specifier|private
 name|SqlNodeList
 name|orderList
 decl_stmt|;
-comment|/**      * Scope to use to resolve windows      */
+comment|/**    * Scope to use to resolve windows    */
 specifier|private
 specifier|final
 name|SqlValidatorScope
 name|windowParent
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a scope corresponding to a SELECT clause.      *      * @param parent Parent scope, must not be null      * @param winParent Scope for window parent, may be null      * @param select Select clause      */
+comment|/**    * Creates a scope corresponding to a SELECT clause.    *    * @param parent    Parent scope, must not be null    * @param winParent Scope for window parent, may be null    * @param select    Select clause    */
 name|SelectScope
 parameter_list|(
 name|SqlValidatorScope

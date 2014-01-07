@@ -117,14 +117,14 @@ name|RelOptRuleOperand
 argument_list|>
 name|children
 decl_stmt|;
-comment|/** Whether child operands can be matched in any order. */
+comment|/**    * Whether child operands can be matched in any order.    */
 specifier|public
 specifier|final
 name|RelOptRuleOperandChildPolicy
 name|childPolicy
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates an operand.      *      *<p>The {@code childOperands} argument is often populated by calling one      * of the following methods:      * {@link RelOptRule#some},      * {@link RelOptRule#none()},      * {@link RelOptRule#any},      * {@link RelOptRule#unordered},      * See {@link org.eigenbase.relopt.RelOptRuleOperandChildren} for more      * details.</p>      *      * @param clazz Class of relational expression to match (must not be null)      * @param trait Trait to match, or null to match any trait      * @param children Child operands      */
+comment|/**    * Creates an operand.    *    *<p>The {@code childOperands} argument is often populated by calling one    * of the following methods:    * {@link RelOptRule#some},    * {@link RelOptRule#none()},    * {@link RelOptRule#any},    * {@link RelOptRule#unordered},    * See {@link org.eigenbase.relopt.RelOptRuleOperandChildren} for more    * details.</p>    *    * @param clazz    Class of relational expression to match (must not be null)    * @param trait    Trait to match, or null to match any trait    * @param children Child operands    */
 specifier|protected
 name|RelOptRuleOperand
 parameter_list|(
@@ -255,7 +255,7 @@ expr_stmt|;
 block|}
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Returns the parent operand.      *      * @return parent operand      */
+comment|/**    * Returns the parent operand.    *    * @return parent operand    */
 specifier|public
 name|RelOptRuleOperand
 name|getParent
@@ -265,7 +265,7 @@ return|return
 name|parent
 return|;
 block|}
-comment|/**      * Sets the parent operand.      *      * @param parent Parent operand      */
+comment|/**    * Sets the parent operand.    *    * @param parent Parent operand    */
 specifier|public
 name|void
 name|setParent
@@ -281,7 +281,7 @@ operator|=
 name|parent
 expr_stmt|;
 block|}
-comment|/**      * Returns the rule this operand belongs to.      *      * @return containing rule      */
+comment|/**    * Returns the rule this operand belongs to.    *    * @return containing rule    */
 specifier|public
 name|RelOptRule
 name|getRule
@@ -291,7 +291,7 @@ return|return
 name|rule
 return|;
 block|}
-comment|/**      * Sets the rule this operand belongs to      *      * @param rule containing rule      */
+comment|/**    * Sets the rule this operand belongs to    *    * @param rule containing rule    */
 specifier|public
 name|void
 name|setRule
@@ -423,7 +423,7 @@ name|children
 argument_list|)
 return|;
 block|}
-comment|/**      * @return relational expression class matched by this operand      */
+comment|/**    * @return relational expression class matched by this operand    */
 specifier|public
 name|Class
 argument_list|<
@@ -438,7 +438,7 @@ return|return
 name|clazz
 return|;
 block|}
-comment|/**      * Returns the child operands.      *      * @return child operands      */
+comment|/**    * Returns the child operands.    *    * @return child operands    */
 specifier|public
 name|List
 argument_list|<
@@ -451,7 +451,7 @@ return|return
 name|children
 return|;
 block|}
-comment|/**      * Returns whether a relational expression matches this operand. It must be      * of the right class and trait.      */
+comment|/**    * Returns whether a relational expression matches this operand. It must be    * of the right class and trait.    */
 specifier|public
 name|boolean
 name|matches

@@ -174,7 +174,7 @@ block|{
 comment|//~ Static fields/initializers ---------------------------------------------
 comment|// TODO jvs 10-Oct-2003:  Make this thread safe.  Either synchronize, or
 comment|// keep this per-VolcanoPlanner.
-comment|/**      * generator for {@link #id} values      */
+comment|/**    * generator for {@link #id} values    */
 specifier|static
 name|int
 name|nextId
@@ -193,17 +193,17 @@ name|getPlannerTracer
 argument_list|()
 decl_stmt|;
 comment|//~ Instance fields --------------------------------------------------------
-comment|/**      * Description, consists of id plus digest.      */
+comment|/**    * Description, consists of id plus digest.    */
 specifier|private
 name|String
 name|desc
 decl_stmt|;
-comment|/**      * Cached type of this relational expression.      */
+comment|/**    * Cached type of this relational expression.    */
 specifier|protected
 name|RelDataType
 name|rowType
 decl_stmt|;
-comment|/**      * A short description of this relational expression's type, inputs, and      * other properties. The string uniquely identifies the node; another node      * is equivalent if and only if it has the same value. Computed by {@link      * #computeDigest}, assigned by {@link #onRegister}, returned by {@link      * #getDigest()}.      *      * @see #desc      */
+comment|/**    * A short description of this relational expression's type, inputs, and    * other properties. The string uniquely identifies the node; another node    * is equivalent if and only if it has the same value. Computed by {@link    * #computeDigest}, assigned by {@link #onRegister}, returned by {@link    * #getDigest()}.    *    * @see #desc    */
 specifier|protected
 name|String
 name|digest
@@ -213,23 +213,23 @@ specifier|final
 name|RelOptCluster
 name|cluster
 decl_stmt|;
-comment|/**      * unique id of this object -- for debugging      */
+comment|/**    * unique id of this object -- for debugging    */
 specifier|protected
 name|int
 name|id
 decl_stmt|;
-comment|/**      * The variable by which to refer to rows from this relational expression,      * as correlating expressions; null if this expression is not correlated on.      */
+comment|/**    * The variable by which to refer to rows from this relational expression,    * as correlating expressions; null if this expression is not correlated on.    */
 specifier|private
 name|String
 name|correlVariable
 decl_stmt|;
-comment|/**      * The RelTraitSet that describes the traits of this RelNode.      */
+comment|/**    * The RelTraitSet that describes the traits of this RelNode.    */
 specifier|protected
 name|RelTraitSet
 name|traitSet
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates an<code>AbstractRelNode</code>.      */
+comment|/**    * Creates an<code>AbstractRelNode</code>.    */
 specifier|public
 name|AbstractRelNode
 parameter_list|(
@@ -973,7 +973,7 @@ name|this
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Describes the inputs and attributes of this relational expression.      * Each node should call {@code super.explainTerms}, then call the      * {@link RelWriterImpl#input(String, RelNode)}      * and {@link RelWriterImpl#item(String, Object)} methods for each input      * and attribute.      *      * @param pw Plan writer      */
+comment|/**    * Describes the inputs and attributes of this relational expression.    * Each node should call {@code super.explainTerms}, then call the    * {@link RelWriterImpl#input(String, RelNode)}    * and {@link RelWriterImpl#item(String, Object)} methods for each input    * and attribute.    *    * @param pw Plan writer    */
 specifier|public
 name|RelWriter
 name|explainTerms
@@ -1280,7 +1280,7 @@ return|return
 literal|null
 return|;
 block|}
-comment|/**      * Computes the digest. Does not modify this object.      */
+comment|/**    * Computes the digest. Does not modify this object.    */
 specifier|protected
 name|String
 name|computeDigest

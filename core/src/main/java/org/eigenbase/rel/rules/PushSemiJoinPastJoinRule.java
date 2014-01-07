@@ -95,7 +95,7 @@ name|PushSemiJoinPastJoinRule
 argument_list|()
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a PushSemiJoinPastJoinRule.      */
+comment|/**    * Creates a PushSemiJoinPastJoinRule.    */
 specifier|private
 name|PushSemiJoinPastJoinRule
 parameter_list|()
@@ -676,7 +676,7 @@ name|newJoinRel
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Sets an array to reflect how much each index corresponding to a field      * needs to be adjusted. The array corresponds to fields in a 3-way join      * between (X, Y, and Z). X remains unchanged, but Y and Z need to be      * adjusted by some fixed amount as determined by the input.      *      * @param adjustments array to be filled out      * @param nFieldsX number of fields in X      * @param nFieldsY number of fields in Y      * @param nFieldsZ number of fields in Z      * @param adjustY the amount to adjust Y by      * @param adjustZ the amount to adjust Z by      */
+comment|/**    * Sets an array to reflect how much each index corresponding to a field    * needs to be adjusted. The array corresponds to fields in a 3-way join    * between (X, Y, and Z). X remains unchanged, but Y and Z need to be    * adjusted by some fixed amount as determined by the input.    *    * @param adjustments array to be filled out    * @param nFieldsX    number of fields in X    * @param nFieldsY    number of fields in Y    * @param nFieldsZ    number of fields in Z    * @param adjustY     the amount to adjust Y by    * @param adjustZ     the amount to adjust Z by    */
 specifier|private
 name|void
 name|setJoinAdjustments

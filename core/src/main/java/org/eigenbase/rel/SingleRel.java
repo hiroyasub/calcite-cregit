@@ -89,7 +89,7 @@ name|RelNode
 name|child
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a<code>SingleRel</code>.      *      * @param cluster {@link RelOptCluster}  this relational expression belongs      * to      * @param child input relational expression      */
+comment|/**    * Creates a<code>SingleRel</code>.    *    * @param cluster {@link RelOptCluster}  this relational expression belongs    *                to    * @param child   input relational expression    */
 specifier|protected
 name|SingleRel
 parameter_list|(

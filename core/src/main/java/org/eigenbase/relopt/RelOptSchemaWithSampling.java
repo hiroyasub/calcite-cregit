@@ -35,7 +35,7 @@ extends|extends
 name|RelOptSchema
 block|{
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Retrieves a {@link RelOptTable} based upon a member access, using a      * sample dataset if it exists.      *      * @param names Compound name of table      * @param datasetName Name of sample dataset to substitute, if it exists;      * null to not look for a sample      * @param usedDataset Output parameter which is set to true if a sample      * dataset is found; may be null      *      * @return Table, or null if not found      */
+comment|/**    * Retrieves a {@link RelOptTable} based upon a member access, using a    * sample dataset if it exists.    *    * @param names       Compound name of table    * @param datasetName Name of sample dataset to substitute, if it exists;    *                    null to not look for a sample    * @param usedDataset Output parameter which is set to true if a sample    *                    dataset is found; may be null    * @return Table, or null if not found    */
 name|RelOptTable
 name|getTableForMember
 parameter_list|(

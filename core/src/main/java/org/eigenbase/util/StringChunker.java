@@ -66,7 +66,7 @@ argument_list|(
 literal|"org.eigenbase.util.StringChunker"
 argument_list|)
 decl_stmt|;
-comment|/**      * Breaks a large string into&quot;chunks&quot; of no more than a specified      * length for easier transmission or storage. The array of resulting chunks      * are kept in order so they can be reassembled easily.      *      * @param input String to break into chunks      * @param maxLen Maximum size (in characters) of a chunk      * @return String array containing the chunks of the input string, in order      * If the input string is empty, the return is a single-element array      * containing an empty string.      * @throws NullPointerException if the input string is null      */
+comment|/**    * Breaks a large string into&quot;chunks&quot; of no more than a specified    * length for easier transmission or storage. The array of resulting chunks    * are kept in order so they can be reassembled easily.    *    * @param input  String to break into chunks    * @param maxLen Maximum size (in characters) of a chunk    * @return String array containing the chunks of the input string, in order    * If the input string is empty, the return is a single-element array    * containing an empty string.    * @throws NullPointerException if the input string is null    */
 specifier|public
 specifier|static
 name|String
@@ -183,7 +183,7 @@ return|return
 name|results
 return|;
 block|}
-comment|/**      * Breaks a large string into&quot;chunks&quot; of up to 32,000 characters      * for easier transmission or storage. The array of resulting chunks are      * kept in order so they can be reassembled easily.      *      * @param input String to break into chunks      * @return String array containing the chunks of the input string, in order      * If the input string is empty, the return is a single-element array      * containing an empty string.      * @throws NullPointerException if the input string is null      */
+comment|/**    * Breaks a large string into&quot;chunks&quot; of up to 32,000 characters    * for easier transmission or storage. The array of resulting chunks are    * kept in order so they can be reassembled easily.    *    * @param input String to break into chunks    * @return String array containing the chunks of the input string, in order    * If the input string is empty, the return is a single-element array    * containing an empty string.    * @throws NullPointerException if the input string is null    */
 specifier|public
 specifier|static
 name|String
@@ -203,7 +203,7 @@ name|DEFAULT_CHUNK_SIZE
 argument_list|)
 return|;
 block|}
-comment|/**      * Calculates the number of&quot;chunks&quot; created when dividing a      * corpus of a certain size into chunks of a given size.      *      * @param wholeSize int representing the size of the corpus      * @param chunkSize int representing the maximum size of each chunk      * @return int representing the total number of chunks      */
+comment|/**    * Calculates the number of&quot;chunks&quot; created when dividing a    * corpus of a certain size into chunks of a given size.    *    * @param wholeSize int representing the size of the corpus    * @param chunkSize int representing the maximum size of each chunk    * @return int representing the total number of chunks    */
 specifier|public
 specifier|static
 specifier|final
@@ -253,7 +253,7 @@ return|return
 name|result
 return|;
 block|}
-comment|/**      * Writes a chunked string into a PreparedStatement sink. Each chunk is      * written with a sequential index in its row, so code reading the chunks      * can reconstruct the original string by ordering the chunks on read with      * an ORDER BY clause.<P>      * The prepared statement must contain two columns: the first being an      * INTEGER to hold the index value, and the second a VARCHAR of sufficient      * size to hold the largest chunk value.      *      * @param chunks Array of String objects representing the chunks of a larger      * original String      * @param ps PreparedStatement that will write each indexed chunk      * @param startIdx int representing the initial chunk index, which will be      * incremented for subsequent chunks      * @return the number of chunks written      * @throws SQLException if the input data does not match the prepared      * statement or if the statement execution fails      */
+comment|/**    * Writes a chunked string into a PreparedStatement sink. Each chunk is    * written with a sequential index in its row, so code reading the chunks    * can reconstruct the original string by ordering the chunks on read with    * an ORDER BY clause.<P>    * The prepared statement must contain two columns: the first being an    * INTEGER to hold the index value, and the second a VARCHAR of sufficient    * size to hold the largest chunk value.    *    * @param chunks   Array of String objects representing the chunks of a larger    *                 original String    * @param ps       PreparedStatement that will write each indexed chunk    * @param startIdx int representing the initial chunk index, which will be    *                 incremented for subsequent chunks    * @return the number of chunks written    * @throws SQLException if the input data does not match the prepared    *                      statement or if the statement execution fails    */
 specifier|public
 specifier|static
 name|int
@@ -320,7 +320,7 @@ name|startIdx
 operator|)
 return|;
 block|}
-comment|/**      * Writes a chunked string into a PreparedStatement sink. Each chunk is      * written with a sequential index in its row, so code reading the chunks      * can reconstruct the original string by ordering the chunks on read with      * an ORDER BY clause. The chunk index starts at zero.<P>      * The prepared statement must contain two columns: the first being an      * INTEGER to hold the index value, and the second a VARCHAR of sufficient      * size to hold the largest chunk value.      *      * @param chunks Array of String objects representing the chunks of a larger      * original String      * @param ps PreparedStatement that will write each indexed chunk      * @return the number of chunks written      * @throws SQLException if the input data does not match the prepared      * statement or if the statement execution fails      */
+comment|/**    * Writes a chunked string into a PreparedStatement sink. Each chunk is    * written with a sequential index in its row, so code reading the chunks    * can reconstruct the original string by ordering the chunks on read with    * an ORDER BY clause. The chunk index starts at zero.<P>    * The prepared statement must contain two columns: the first being an    * INTEGER to hold the index value, and the second a VARCHAR of sufficient    * size to hold the largest chunk value.    *    * @param chunks Array of String objects representing the chunks of a larger    *               original String    * @param ps     PreparedStatement that will write each indexed chunk    * @return the number of chunks written    * @throws SQLException if the input data does not match the prepared    *                      statement or if the statement execution fails    */
 specifier|public
 specifier|static
 name|int
@@ -347,7 +347,7 @@ literal|0
 argument_list|)
 return|;
 block|}
-comment|/**      * Reads a set of string&quot;chunks&quot; from a ResultSet and      * concatenates them in the order read to produce a large, single string.      * One column from each row is designated as the one containing the string      * chunks.      * This is the complement to the<code>writeChunks()</code> methods.      *      * @param rs ResultSet to read chunks from      * @param columnIndex index indicating which column in the result set to      * use as the chunk for each row      * @return String containing all concatenated chunks      * @throws SQLException if there is a database access problem or if the      * designated column is not a string      */
+comment|/**    * Reads a set of string&quot;chunks&quot; from a ResultSet and    * concatenates them in the order read to produce a large, single string.    * One column from each row is designated as the one containing the string    * chunks.    * This is the complement to the<code>writeChunks()</code> methods.    *    * @param rs          ResultSet to read chunks from    * @param columnIndex index indicating which column in the result set to    *                    use as the chunk for each row    * @return String containing all concatenated chunks    * @throws SQLException if there is a database access problem or if the    *                      designated column is not a string    */
 specifier|public
 specifier|static
 name|String
@@ -416,7 +416,7 @@ name|toString
 argument_list|()
 return|;
 block|}
-comment|/**      * Reads a set of strings&quot;chunks&quot; from a ResultSet and      * concatenates them in the order read to produce a large, single string.      * The chunks are taken from the first column of each row in the result      * set.      * @param rs ResultSet to read chunks from      * @return String containing all concatenated chunks      * @throws SQLException if there is a database access problem or if the      * designated column is not a string      */
+comment|/**    * Reads a set of strings&quot;chunks&quot; from a ResultSet and    * concatenates them in the order read to produce a large, single string.    * The chunks are taken from the first column of each row in the result    * set.    *    * @param rs ResultSet to read chunks from    * @return String containing all concatenated chunks    * @throws SQLException if there is a database access problem or if the    *                      designated column is not a string    */
 specifier|public
 specifier|static
 name|String

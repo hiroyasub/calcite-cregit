@@ -146,7 +146,7 @@ init|=
 literal|"_suggest_"
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a SqlAdvisor with a validator instance      *      * @param validator Validator      */
+comment|/**    * Creates a SqlAdvisor with a validator instance    *    * @param validator Validator    */
 specifier|public
 name|SqlAdvisor
 parameter_list|(
@@ -162,7 +162,7 @@ name|validator
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Gets completion hints for a partially completed or syntatically incorrect      * sql statement with cursor pointing to the position where completion hints      * are requested.      *      *<p>Writes into<code>replaced[0]</code> the string that is being      * replaced. Includes the cursor and the preceding identifier. For example,      * if<code>sql</code> is "select abc^de from t", sets<code>      * replaced[0]</code> to "abc". If the cursor is in the middle of      * whitespace, the replaced string is empty. The replaced string is never      * null.      *      * @param sql A partial or syntatically incorrect sql statement for which to      * retrieve completion hints      * @param cursor to indicate the 0-based cursor position in the query at      * @param replaced String which is being replaced (output)      *      * @return completion hints      */
+comment|/**    * Gets completion hints for a partially completed or syntatically incorrect    * sql statement with cursor pointing to the position where completion hints    * are requested.    *    *<p>Writes into<code>replaced[0]</code> the string that is being    * replaced. Includes the cursor and the preceding identifier. For example,    * if<code>sql</code> is "select abc^de from t", sets<code>    * replaced[0]</code> to "abc". If the cursor is in the middle of    * whitespace, the replaced string is empty. The replaced string is never    * null.    *    * @param sql      A partial or syntatically incorrect sql statement for which    *                 to retrieve completion hints    * @param cursor   to indicate the 0-based cursor position in the query at    * @param replaced String which is being replaced (output)    * @return completion hints    */
 specifier|public
 name|List
 argument_list|<
@@ -613,7 +613,7 @@ name|pos
 argument_list|)
 return|;
 block|}
-comment|/**      * Gets completion hints for a syntatically correct sql statement with dummy      * SqlIdentifier      *      * @param sql A syntatically correct sql statement for which to retrieve      * completion hints      * @param pos to indicate the line and column position in the query at which      * completion hints need to be retrieved. For example, "select a.ename,      * b.deptno from sales.emp a join sales.dept b "on a.deptno=b.deptno where      * empno=1"; setting pos to 'Line 1, Column 17' returns all the possible      * column names that can be selected from sales.dept table setting pos to      * 'Line 1, Column 31' returns all the possible table names in 'sales'      * schema      *      * @return an array of hints ({@link SqlMoniker}) that can fill in at the      * indicated position      */
+comment|/**    * Gets completion hints for a syntatically correct sql statement with dummy    * SqlIdentifier    *    * @param sql A syntatically correct sql statement for which to retrieve    *            completion hints    * @param pos to indicate the line and column position in the query at which    *            completion hints need to be retrieved. For example, "select    *            a.ename, b.deptno from sales.emp a join sales.dept b "on    *            a.deptno=b.deptno where empno=1"; setting pos to 'Line 1, Column    *            17' returns all the possible column names that can be selected    *            from sales.dept table setting pos to 'Line 1, Column 31' returns    *            all the possible table names in 'sales' schema    * @return an array of hints ({@link SqlMoniker}) that can fill in at the    * indicated position    */
 specifier|public
 name|List
 argument_list|<
@@ -762,7 +762,7 @@ return|return
 name|hintList
 return|;
 block|}
-comment|/**      * Tries to parse a SQL statement.      *      *<p>If succeeds, returns the parse tree node; if fails, populates the list      * of hints and returns null.      *      * @param sql SQL statement      * @param hintList List of hints suggesting allowable tokens at the point of      * failure      *      * @return Parse tree if succeeded, null if parse failed      */
+comment|/**    * Tries to parse a SQL statement.    *    *<p>If succeeds, returns the parse tree node; if fails, populates the list    * of hints and returns null.    *    * @param sql      SQL statement    * @param hintList List of hints suggesting allowable tokens at the point of    *                 failure    * @return Parse tree if succeeded, null if parse failed    */
 specifier|private
 name|SqlNode
 name|tryParse
@@ -875,7 +875,7 @@ literal|null
 return|;
 block|}
 block|}
-comment|/**      * Gets the fully qualified name for a {@link SqlIdentifier} at a given      * position of a sql statement.      *      * @param sql A syntactically correct sql statement for which to retrieve a      * fully qualified SQL identifier name      * @param cursor to indicate the 0-based cursor position in the query that      * represents a SQL identifier for which its fully qualified name is to be      * returned.      *      * @return a {@link SqlMoniker} that contains the fully qualified name of      * the specified SQL identifier, returns null if none is found or the SQL      * statement is invalid.      */
+comment|/**    * Gets the fully qualified name for a {@link SqlIdentifier} at a given    * position of a sql statement.    *    * @param sql    A syntactically correct sql statement for which to retrieve a    *               fully qualified SQL identifier name    * @param cursor to indicate the 0-based cursor position in the query that    *               represents a SQL identifier for which its fully qualified    *               name is to be returned.    * @return a {@link SqlMoniker} that contains the fully qualified name of    * the specified SQL identifier, returns null if none is found or the SQL    * statement is invalid.    */
 specifier|public
 name|SqlMoniker
 name|getQualifiedName
@@ -968,7 +968,7 @@ literal|null
 return|;
 block|}
 block|}
-comment|/**      * Attempts to complete and validate a given partially completed sql      * statement, and returns whether it is valid.      *      * @param sql A partial or syntatically incorrect sql statement to validate      *      * @return whether SQL statement is valid      */
+comment|/**    * Attempts to complete and validate a given partially completed sql    * statement, and returns whether it is valid.    *    * @param sql A partial or syntatically incorrect sql statement to validate    * @return whether SQL statement is valid    */
 specifier|public
 name|boolean
 name|isValid
@@ -1044,7 +1044,7 @@ return|return
 literal|true
 return|;
 block|}
-comment|/**      * Attempts to parse and validate a SQL statement. Throws the first      * exception encountered. The error message of this exception is to be      * displayed on the UI      *      * @param sql A user-input sql statement to be validated      *      * @return a List of ValidateErrorInfo (null if sql is valid)      */
+comment|/**    * Attempts to parse and validate a SQL statement. Throws the first    * exception encountered. The error message of this exception is to be    * displayed on the UI    *    * @param sql A user-input sql statement to be validated    * @return a List of ValidateErrorInfo (null if sql is valid)    */
 specifier|public
 name|List
 argument_list|<
@@ -1176,7 +1176,7 @@ return|return
 literal|null
 return|;
 block|}
-comment|/**      * Turns a partially completed or syntatically incorrect sql statement into      * a simplified, valid one that can be passed into getCompletionHints()      *      * @param sql A partial or syntatically incorrect sql statement      * @param cursor to indicate column position in the query at which      * completion hints need to be retrieved.      *      * @return a completed, valid (and possibly simplified SQL statement      */
+comment|/**    * Turns a partially completed or syntatically incorrect sql statement into    * a simplified, valid one that can be passed into getCompletionHints()    *    * @param sql    A partial or syntatically incorrect sql statement    * @param cursor to indicate column position in the query at which    *               completion hints need to be retrieved.    * @return a completed, valid (and possibly simplified SQL statement    */
 specifier|public
 name|String
 name|simplifySql
@@ -1208,7 +1208,7 @@ name|cursor
 argument_list|)
 return|;
 block|}
-comment|/**      * Return an array of SQL reserved and keywords      *      * @return an of SQL reserved and keywords      */
+comment|/**    * Return an array of SQL reserved and keywords    *    * @return an of SQL reserved and keywords    */
 specifier|public
 name|List
 argument_list|<
@@ -1284,7 +1284,7 @@ return|return
 name|al
 return|;
 block|}
-comment|/**      * Returns the underlying Parser implementation class.      *      *<p>To use a different parser (recognizing a different dialect of SQL),      * derived class should override.      *      * @return a {@link SqlAbstractParserImpl} instance      */
+comment|/**    * Returns the underlying Parser implementation class.    *    *<p>To use a different parser (recognizing a different dialect of SQL),    * derived class should override.    *    * @return a {@link SqlAbstractParserImpl} instance    */
 specifier|protected
 name|SqlAbstractParserImpl
 name|getParserImpl
@@ -1310,7 +1310,7 @@ name|getParserImpl
 argument_list|()
 return|;
 block|}
-comment|/**      * Wrapper function to parse a SQL query (SELECT or VALUES, but not INSERT,      * UPDATE, DELETE, CREATE, DROP etc.), throwing a {@link SqlParseException}      * if the statement is not syntactically valid.      *      * @param sql SQL statement      *      * @return parse tree      *      * @throws SqlParseException if not syntactically valid      */
+comment|/**    * Wrapper function to parse a SQL query (SELECT or VALUES, but not INSERT,    * UPDATE, DELETE, CREATE, DROP etc.), throwing a {@link SqlParseException}    * if the statement is not syntactically valid.    *    * @param sql SQL statement    * @return parse tree    * @throws SqlParseException if not syntactically valid    */
 specifier|protected
 name|SqlNode
 name|parseQuery
@@ -1337,7 +1337,7 @@ name|parseStmt
 argument_list|()
 return|;
 block|}
-comment|/**      * Attempts to parse a SQL statement and adds to the errorList if any syntax      * error is found. This implementation uses {@link SqlParser}. Subclass can      * re-implement this with a different parser implementation      *      * @param sql A user-input sql statement to be parsed      * @param errorList A {@link List} of error to be added to      *      * @return {@link SqlNode } that is root of the parse tree, null if the sql      * is not valid      */
+comment|/**    * Attempts to parse a SQL statement and adds to the errorList if any syntax    * error is found. This implementation uses {@link SqlParser}. Subclass can    * re-implement this with a different parser implementation    *    * @param sql       A user-input sql statement to be parsed    * @param errorList A {@link List} of error to be added to    * @return {@link SqlNode } that is root of the parse tree, null if the sql    * is not valid    */
 specifier|protected
 name|SqlNode
 name|collectParserError
@@ -1398,7 +1398,7 @@ return|;
 block|}
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------
-comment|/**      * An inner class that represents error message text and position info of a      * validator or parser exception      */
+comment|/**    * An inner class that represents error message text and position info of a    * validator or parser exception    */
 specifier|public
 class|class
 name|ValidateErrorInfo
@@ -1423,7 +1423,7 @@ specifier|private
 name|String
 name|errorMsg
 decl_stmt|;
-comment|/**          * Creates a new ValidateErrorInfo with the position coordinates and an          * error string.          *          * @param startLineNum Start line number          * @param startColumnNum Start column number          * @param endLineNum End line number          * @param endColumnNum End column number          * @param errorMsg Error message          */
+comment|/**      * Creates a new ValidateErrorInfo with the position coordinates and an      * error string.      *      * @param startLineNum   Start line number      * @param startColumnNum Start column number      * @param endLineNum     End line number      * @param endColumnNum   End column number      * @param errorMsg       Error message      */
 specifier|public
 name|ValidateErrorInfo
 parameter_list|(
@@ -1474,7 +1474,7 @@ operator|=
 name|errorMsg
 expr_stmt|;
 block|}
-comment|/**          * Creates a new ValidateErrorInfo with an EigenbaseContextException.          *          * @param e Exception          */
+comment|/**      * Creates a new ValidateErrorInfo with an EigenbaseContextException.      *      * @param e Exception      */
 specifier|public
 name|ValidateErrorInfo
 parameter_list|(
@@ -1531,7 +1531,7 @@ name|getMessage
 argument_list|()
 expr_stmt|;
 block|}
-comment|/**          * Creates a new ValidateErrorInfo with a SqlParserPos and an error          * string.          *          * @param pos Error position          * @param errorMsg Error message          */
+comment|/**      * Creates a new ValidateErrorInfo with a SqlParserPos and an error      * string.      *      * @param pos      Error position      * @param errorMsg Error message      */
 specifier|public
 name|ValidateErrorInfo
 parameter_list|(
@@ -1585,7 +1585,7 @@ operator|=
 name|errorMsg
 expr_stmt|;
 block|}
-comment|/**          * @return 1-based starting line number          */
+comment|/**      * @return 1-based starting line number      */
 specifier|public
 name|int
 name|getStartLineNum
@@ -1595,7 +1595,7 @@ return|return
 name|startLineNum
 return|;
 block|}
-comment|/**          * @return 1-based starting column number          */
+comment|/**      * @return 1-based starting column number      */
 specifier|public
 name|int
 name|getStartColumnNum
@@ -1605,7 +1605,7 @@ return|return
 name|startColumnNum
 return|;
 block|}
-comment|/**          * @return 1-based end line number          */
+comment|/**      * @return 1-based end line number      */
 specifier|public
 name|int
 name|getEndLineNum
@@ -1615,7 +1615,7 @@ return|return
 name|endLineNum
 return|;
 block|}
-comment|/**          * @return 1-based end column number          */
+comment|/**      * @return 1-based end column number      */
 specifier|public
 name|int
 name|getEndColumnNum
@@ -1625,7 +1625,7 @@ return|return
 name|endColumnNum
 return|;
 block|}
-comment|/**          * @return error message          */
+comment|/**      * @return error message      */
 specifier|public
 name|String
 name|getMessage

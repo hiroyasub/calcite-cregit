@@ -66,25 +66,25 @@ name|derived
 expr_stmt|;
 block|}
 comment|//~ Instance fields --------------------------------------------------------
-comment|/**      * 0-based ordinal of mapped output column.      */
+comment|/**    * 0-based ordinal of mapped output column.    */
 specifier|public
 specifier|final
 name|int
 name|iOutputColumn
 decl_stmt|;
-comment|/**      * 0-based ordinal of mapped input rel.      */
+comment|/**    * 0-based ordinal of mapped input rel.    */
 specifier|public
 specifier|final
 name|int
 name|iInputRel
 decl_stmt|;
-comment|/**      * 0-based ordinal of mapped column within input rel.      */
+comment|/**    * 0-based ordinal of mapped column within input rel.    */
 specifier|public
 specifier|final
 name|int
 name|iInputColumn
 decl_stmt|;
-comment|/**      * Whether the column mapping transforms the input.      */
+comment|/**    * Whether the column mapping transforms the input.    */
 specifier|public
 specifier|final
 name|boolean

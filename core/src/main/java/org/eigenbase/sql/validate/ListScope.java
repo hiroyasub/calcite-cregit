@@ -86,7 +86,7 @@ extends|extends
 name|DelegatingScope
 block|{
 comment|//~ Instance fields --------------------------------------------------------
-comment|/**      * List of child {@link SqlValidatorNamespace} objects and their names.      */
+comment|/**    * List of child {@link SqlValidatorNamespace} objects and their names.    */
 specifier|protected
 specifier|final
 name|List
@@ -158,7 +158,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Returns an immutable list of child namespaces.      *      * @return list of child namespaces      */
+comment|/**    * Returns an immutable list of child namespaces.    *    * @return list of child namespaces    */
 specifier|public
 name|List
 argument_list|<

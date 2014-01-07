@@ -54,7 +54,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Namespace offered by a subquery.  * @see SelectScope  * @see SetopNamespace  */
+comment|/**  * Namespace offered by a subquery.  *  * @see SelectScope  * @see SetopNamespace  */
 end_comment
 
 begin_class
@@ -71,7 +71,7 @@ name|SqlSelect
 name|select
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a SelectNamespace.      *      * @param validator Validate      * @param select Select node      * @param enclosingNode Enclosing node      */
+comment|/**    * Creates a SelectNamespace.    *    * @param validator     Validate    * @param select        Select node    * @param enclosingNode Enclosing node    */
 specifier|public
 name|SelectNamespace
 parameter_list|(

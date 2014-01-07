@@ -151,7 +151,7 @@ class|class
 name|SqlValidatorUtil
 block|{
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Converts a {@link SqlValidatorScope} into a {@link RelOptTable}. This is      * only possible if the scope represents an identifier, such as "sales.emp".      * Otherwise, returns null.      *      * @param namespace Namespace      * @param catalogReader Schema      * @param datasetName Name of sample dataset to substitute, or null to use      * the regular table      * @param usedDataset Output parameter which is set to true if a sample      * dataset is found; may be null      */
+comment|/**    * Converts a {@link SqlValidatorScope} into a {@link RelOptTable}. This is    * only possible if the scope represents an identifier, such as "sales.emp".    * Otherwise, returns null.    *    * @param namespace     Namespace    * @param catalogReader Schema    * @param datasetName   Name of sample dataset to substitute, or null to use    *                      the regular table    * @param usedDataset   Output parameter which is set to true if a sample    *                      dataset is found; may be null    */
 specifier|public
 specifier|static
 name|RelOptTable
@@ -270,7 +270,7 @@ literal|null
 return|;
 block|}
 block|}
-comment|/**      * Looks up a field with a given name and if found returns its type.      *      * @param rowType Row type      * @param columnName Field name      *      * @return Field's type, or null if not found      */
+comment|/**    * Looks up a field with a given name and if found returns its type.    *    * @param rowType    Row type    * @param columnName Field name    * @return Field's type, or null if not found    */
 specifier|static
 name|RelDataType
 name|lookupFieldType
@@ -374,7 +374,7 @@ return|return
 literal|null
 return|;
 block|}
-comment|/**      * Looks up a field with a given name, returning null if not found.      *      * @param rowType Row type      * @param columnName Field name      *      * @return Field, or null if not found      */
+comment|/**    * Looks up a field with a given name, returning null if not found.    *    * @param rowType    Row type    * @param columnName Field name    * @return Field, or null if not found    */
 specifier|public
 specifier|static
 name|RelDataTypeField
@@ -586,7 +586,7 @@ block|}
 block|}
 block|}
 block|}
-comment|/**      * Converts an expression "expr" into "expr AS alias".      */
+comment|/**    * Converts an expression "expr" into "expr AS alias".    */
 specifier|public
 specifier|static
 name|SqlNode
@@ -635,7 +635,7 @@ name|id
 argument_list|)
 return|;
 block|}
-comment|/**      * Derives an alias for a node. If it cannot derive an alias, returns null.      *      *<p>This method doesn't try very hard. It doesn't invent mangled aliases,      * and doesn't even recognize an AS clause. (See {@link #getAlias(SqlNode,      * int)} for that.) It just takes the last part of an identifier.      */
+comment|/**    * Derives an alias for a node. If it cannot derive an alias, returns null.    *    *<p>This method doesn't try very hard. It doesn't invent mangled aliases,    * and doesn't even recognize an AS clause. (See {@link #getAlias(SqlNode,    * int)} for that.) It just takes the last part of an identifier.    */
 specifier|public
 specifier|static
 name|String
@@ -683,7 +683,7 @@ literal|null
 return|;
 block|}
 block|}
-comment|/**      * Derives an alias for a node, and invents a mangled identifier if it      * cannot.      *      *<p>Examples:      *      *<ul>      *<li>Alias: "1 + 2 as foo" yields "foo"      *<li>Identifier: "foo.bar.baz" yields "baz"      *<li>Anything else yields "expr$<i>ordinal</i>"      *</ul>      *      * @return An alias, if one can be derived; or a synthetic alias      * "expr$<i>ordinal</i>" if ordinal>= 0; otherwise null      */
+comment|/**    * Derives an alias for a node, and invents a mangled identifier if it    * cannot.    *    *<p>Examples:    *    *<ul>    *<li>Alias: "1 + 2 as foo" yields "foo"    *<li>Identifier: "foo.bar.baz" yields "baz"    *<li>Anything else yields "expr$<i>ordinal</i>"    *</ul>    *    * @return An alias, if one can be derived; or a synthetic alias    * "expr$<i>ordinal</i>" if ordinal>= 0; otherwise null    */
 specifier|public
 specifier|static
 name|String
@@ -801,7 +801,7 @@ return|;
 block|}
 block|}
 block|}
-comment|/**      * Makes a name distinct from other names which have already been used, adds      * it to the list, and returns it.      *      * @param name Suggested name, may not be unique      * @param nameList Collection of names already used      * @param suggester Base for name when input name is null      * @return Unique name      */
+comment|/**    * Makes a name distinct from other names which have already been used, adds    * it to the list, and returns it.    *    * @param name      Suggested name, may not be unique    * @param nameList  Collection of names already used    * @param suggester Base for name when input name is null    * @return Unique name    */
 specifier|public
 specifier|static
 name|String
@@ -892,7 +892,7 @@ return|;
 block|}
 block|}
 block|}
-comment|/**      * Factory method for {@link SqlValidator}.      */
+comment|/**    * Factory method for {@link SqlValidator}.    */
 specifier|public
 specifier|static
 name|SqlValidatorWithHints
@@ -924,7 +924,7 @@ name|Default
 argument_list|)
 return|;
 block|}
-comment|/**      * Makes sure that the names in a list are unique.      *      *<p>Does not modify the input list. Returns the input list if the strings      * are unique, otherwise allocates a new list.      *      * @param nameList List of strings      * @return List of unique strings      */
+comment|/**    * Makes sure that the names in a list are unique.    *    *<p>Does not modify the input list. Returns the input list if the strings    * are unique, otherwise allocates a new list.    *    * @param nameList List of strings    * @return List of unique strings    */
 specifier|public
 specifier|static
 name|List
@@ -1038,7 +1038,7 @@ name|used
 argument_list|)
 return|;
 block|}
-comment|/**      * Resolves a multi-part identifier such as "SCHEMA.EMP.EMPNO" to a      * namespace. The returned namespace may represent a schema, table, column,      * etc.      *      * @pre names.size()> 0      * @post return != null      */
+comment|/**    * Resolves a multi-part identifier such as "SCHEMA.EMP.EMPNO" to a    * namespace. The returned namespace may represent a schema, table, column,    * etc.    *    * @pre names.size()> 0    * @post return != null    */
 specifier|public
 specifier|static
 name|SqlValidatorNamespace
@@ -1286,7 +1286,7 @@ return|return
 literal|null
 return|;
 block|}
-comment|/**      * Derives the list of column names suitable for NATURAL JOIN. These are the      * columns that occur exactly once on each side of the join.      *      * @param leftRowType Row type of left input to the join      * @param rightRowType Row type of right input to the join      *      * @return List of columns that occur once on each side      */
+comment|/**    * Derives the list of column names suitable for NATURAL JOIN. These are the    * columns that occur exactly once on each side of the join.    *    * @param leftRowType  Row type of left input to the join    * @param rightRowType Row type of right input to the join    * @return List of columns that occur once on each side    */
 specifier|public
 specifier|static
 name|List
@@ -1390,7 +1390,7 @@ name|naturalColumnNames
 return|;
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------
-comment|/**      * Walks over an expression, copying every node, and fully-qualifying every      * identifier.      */
+comment|/**    * Walks over an expression, copying every node, and fully-qualifying every    * identifier.    */
 specifier|public
 specifier|static
 class|class

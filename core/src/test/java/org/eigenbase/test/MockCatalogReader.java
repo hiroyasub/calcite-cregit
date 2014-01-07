@@ -264,7 +264,7 @@ name|RelDataType
 name|addressType
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a MockCatalogReader.      *      * @param typeFactory Type factory      */
+comment|/**    * Creates a MockCatalogReader.    *    * @param typeFactory Type factory    */
 specifier|public
 name|MockCatalogReader
 parameter_list|(
@@ -283,7 +283,7 @@ name|init
 argument_list|()
 expr_stmt|;
 block|}
-comment|/**      * Creates a MockCatalogReader but does not initialize.      *      *<p>Protected constructor for use by subclasses, which must call      * {@link #init} at the end of their public constructor.      *      * @param typeFactory Type factory      * @param dummy Dummy parameter to distinguish from public constructor      */
+comment|/**    * Creates a MockCatalogReader but does not initialize.    *    *<p>Protected constructor for use by subclasses, which must call    * {@link #init} at the end of their public constructor.    *    * @param typeFactory Type factory    * @param dummy       Dummy parameter to distinguish from public constructor    */
 specifier|protected
 name|MockCatalogReader
 parameter_list|(
@@ -305,7 +305,7 @@ operator|!
 name|dummy
 assert|;
 block|}
-comment|/**      * Initializes this catalog reader.      */
+comment|/**    * Initializes this catalog reader.    */
 specifier|protected
 name|void
 name|init
@@ -1495,7 +1495,7 @@ name|defaultCatalog
 return|;
 block|}
 block|}
-comment|/**      * Mock implementation of      * {@link net.hydromatic.optiq.prepare.Prepare.PreparingTable}.      */
+comment|/**    * Mock implementation of    * {@link net.hydromatic.optiq.prepare.Prepare.PreparingTable}.    */
 specifier|public
 specifier|static
 class|class

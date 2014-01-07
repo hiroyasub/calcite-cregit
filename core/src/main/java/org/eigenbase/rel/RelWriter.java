@@ -56,7 +56,7 @@ specifier|public
 interface|interface
 name|RelWriter
 block|{
-comment|/**    * Prints an explanation of a node, with a list of (term, value) pairs.    *    *<p>The term-value pairs are generally gathered by calling    * {@link RelNode#explain(RelWriter)}. Each sub-class of    * {@link RelNode} calls {@link #input(String, org.eigenbase.rel.RelNode)}    * and {@link #item(String, Object)} to declare term-value pairs.</p>    *    * @param rel Relational expression    * @param valueList List of term-value pairs    */
+comment|/**    * Prints an explanation of a node, with a list of (term, value) pairs.    *    *<p>The term-value pairs are generally gathered by calling    * {@link RelNode#explain(RelWriter)}. Each sub-class of    * {@link RelNode} calls {@link #input(String, org.eigenbase.rel.RelNode)}    * and {@link #item(String, Object)} to declare term-value pairs.</p>    *    * @param rel       Relational expression    * @param valueList List of term-value pairs    */
 name|void
 name|explain
 parameter_list|(
@@ -80,7 +80,7 @@ name|SqlExplainLevel
 name|getDetailLevel
 parameter_list|()
 function_decl|;
-comment|/** Adds an input to the explanation of the current node.    *    * @param term Term for input, e.g. "left" or "input #1".    * @param input Input relational expression    */
+comment|/**    * Adds an input to the explanation of the current node.    *    * @param term  Term for input, e.g. "left" or "input #1".    * @param input Input relational expression    */
 name|RelWriter
 name|input
 parameter_list|(
@@ -91,7 +91,7 @@ name|RelNode
 name|input
 parameter_list|)
 function_decl|;
-comment|/** Adds an attribute to the explanation of the current node.    *    * @param term Term for attribute, e.g. "joinType"    * @param value Attribute value    */
+comment|/**    * Adds an attribute to the explanation of the current node.    *    * @param term  Term for attribute, e.g. "joinType"    * @param value Attribute value    */
 name|RelWriter
 name|item
 parameter_list|(
@@ -102,7 +102,7 @@ name|Object
 name|value
 parameter_list|)
 function_decl|;
-comment|/** Adds an input to the explanation of the current node, if a condition    * holds. */
+comment|/**    * Adds an input to the explanation of the current node, if a condition    * holds.    */
 name|RelWriter
 name|itemIf
 parameter_list|(
@@ -116,7 +116,7 @@ name|boolean
 name|condition
 parameter_list|)
 function_decl|;
-comment|/** Writes the completed explanation. */
+comment|/**    * Writes the completed explanation.    */
 name|RelWriter
 name|done
 parameter_list|(
@@ -124,7 +124,7 @@ name|RelNode
 name|node
 parameter_list|)
 function_decl|;
-comment|/** Returns whether the writer prefers nested values. Traditional explain    * writers prefer flattened values. */
+comment|/**    * Returns whether the writer prefers nested values. Traditional explain    * writers prefer flattened values.    */
 name|boolean
 name|nest
 parameter_list|()

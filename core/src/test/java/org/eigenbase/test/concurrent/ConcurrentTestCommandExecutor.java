@@ -56,64 +56,67 @@ extends|extends
 name|Thread
 block|{
 comment|//~ Instance fields --------------------------------------------------------
-comment|/**      * The id for this thread.      */
+comment|/**    * The id for this thread.    */
 specifier|private
 name|Integer
 name|threadId
 decl_stmt|;
-comment|/**      * JDBC URL to connect with.      */
+comment|/**    * JDBC URL to connect with.    */
 specifier|private
 name|String
 name|jdbcURL
 decl_stmt|;
-comment|/**      * JDBC Connection properties.      */
+comment|/**    * JDBC Connection properties.    */
 specifier|private
 name|Properties
 name|jdbcProps
 decl_stmt|;
-comment|/**      * Command sequence for this thread.      */
+comment|/**    * Command sequence for this thread.    */
 specifier|private
-name|Iterator
+name|Iterable
+argument_list|<
+name|ConcurrentTestCommand
+argument_list|>
 name|commands
 decl_stmt|;
-comment|/**      * Used to synchronize command execution.      */
+comment|/**    * Used to synchronize command execution.    */
 specifier|private
 name|Sync
 name|synchronizer
 decl_stmt|;
-comment|/**      * JDBC connection for commands.      */
+comment|/**    * JDBC connection for commands.    */
 specifier|private
 name|Connection
 name|connection
 decl_stmt|;
-comment|/**      * Current JDBC Statement. May be null.      */
+comment|/**    * Current JDBC Statement. May be null.    */
 specifier|private
 name|Statement
 name|statement
 decl_stmt|;
-comment|/**      * First exception thrown by the thread.      */
+comment|/**    * First exception thrown by the thread.    */
 specifier|private
 name|Throwable
 name|error
 decl_stmt|;
-comment|/**      * Location of {@link #error}.      */
+comment|/**    * Location of {@link #error}.    */
 specifier|private
 name|String
 name|when
 decl_stmt|;
-comment|/**      * Debugging print stream. May be null.      */
+comment|/**    * Debugging print stream. May be null.    */
 specifier|private
 specifier|final
 name|PrintStream
 name|debugPrintStream
 decl_stmt|;
-comment|/**      * Command throwing error *      */
+comment|/**    * Command throwing error *    */
 specifier|private
 name|ConcurrentTestCommand
 name|errorCommand
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Constructs a ConcurrentTestCommandExecutor with the given thread      * ID, JDBC URL, commands and synchronization object.      *      * @param threadId the thread ID (see {@link      * ConcurrentTestCommandGenerator})      * @param threadName the thread's name      * @param jdbcURL the JDBC URL to connect to      * @param jdbcProps JDBC Connnection properties (user, password, etc.)      * @param commands the sequence of commands to execute -- null elements      * indicate no-ops      * @param synchronizer synchronization object (may not be null);      * @param debugPrintStream if non-null a PrintStream to use for debugging      * output (may help debugging thread synchronization issues)      */
+comment|/**    * Constructs a ConcurrentTestCommandExecutor with the given thread    * ID, JDBC URL, commands and synchronization object.    *    * @param threadId         the thread ID (see {@link ConcurrentTestCommandGenerator})    * @param threadName       the thread's name    * @param jdbcURL          the JDBC URL to connect to    * @param jdbcProps        JDBC Connection properties (user, password, etc.)    * @param commands         the sequence of commands to execute -- null    *                         elements indicate no-ops    * @param synchronizer     synchronization object (may not be null);    * @param debugPrintStream if non-null a PrintStream to use for debugging    *                         output (may help debugging thread synchronization    */
 name|ConcurrentTestCommandExecutor
 parameter_list|(
 name|int
@@ -128,7 +131,10 @@ parameter_list|,
 name|Properties
 name|jdbcProps
 parameter_list|,
-name|Iterator
+name|Iterable
+argument_list|<
+name|ConcurrentTestCommand
+argument_list|>
 name|commands
 parameter_list|,
 name|Sync
@@ -142,11 +148,7 @@ name|this
 operator|.
 name|threadId
 operator|=
-operator|new
-name|Integer
-argument_list|(
 name|threadId
-argument_list|)
 expr_stmt|;
 name|this
 operator|.
@@ -189,7 +191,7 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Executes the configured commands.      */
+comment|/**    * Executes the configured commands.    */
 specifier|public
 name|void
 name|run
@@ -251,25 +253,14 @@ name|stepNumber
 init|=
 literal|0
 decl_stmt|;
-while|while
-condition|(
-name|commands
-operator|.
-name|hasNext
-argument_list|()
-condition|)
-block|{
+for|for
+control|(
 name|ConcurrentTestCommand
 name|command
-init|=
-operator|(
-name|ConcurrentTestCommand
-operator|)
+range|:
 name|commands
-operator|.
-name|next
-argument_list|()
-decl_stmt|;
+control|)
+block|{
 if|if
 condition|(
 operator|!
@@ -408,7 +399,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Handles details of an exception during execution.      */
+comment|/**    * Handles details of an exception during execution.    */
 specifier|private
 name|void
 name|handleError
@@ -474,7 +465,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Obtains the thread's JDBC connection.      */
+comment|/**    * Obtains the thread's JDBC connection.    */
 specifier|public
 name|Connection
 name|getConnection
@@ -484,7 +475,7 @@ return|return
 name|connection
 return|;
 block|}
-comment|/**      * Obtains the thread's current JDBC statement. May return null.      */
+comment|/**    * Obtains the thread's current JDBC statement. May return null.    */
 specifier|public
 name|Statement
 name|getStatement
@@ -494,7 +485,7 @@ return|return
 name|statement
 return|;
 block|}
-comment|/**      * Sets the thread's current JDBC statement. To clear the JDBC statement use      * {@link #clearStatement()}.      */
+comment|/**    * Sets the thread's current JDBC statement. To clear the JDBC statement use    * {@link #clearStatement()}.    */
 specifier|public
 name|void
 name|setStatement
@@ -516,7 +507,7 @@ operator|=
 name|stmt
 expr_stmt|;
 block|}
-comment|/**      * Clears the thread's current JDBC statement. To set the JDBC statement use      * {@link #setStatement(Statement)}.      */
+comment|/**    * Clears the thread's current JDBC statement. To set the JDBC statement use    * {@link #setStatement(Statement)}.    */
 specifier|public
 name|void
 name|clearStatement
@@ -527,7 +518,7 @@ operator|=
 literal|null
 expr_stmt|;
 block|}
-comment|/**      * Retrieves the object used to synchronize threads at a point in the list      * of commands.      */
+comment|/**    * Retrieves the object used to synchronize threads at a point in the list    * of commands.    */
 specifier|public
 name|Sync
 name|getSynchronizer
@@ -537,7 +528,7 @@ return|return
 name|synchronizer
 return|;
 block|}
-comment|/**      * Checks whether an exception occurred during execution. If this method      * returns null, the thread's commands all succeeded. If this method returns      * non-null, see {@link #getFailureLocation()} for details on which command      * caused the failure.      */
+comment|/**    * Checks whether an exception occurred during execution. If this method    * returns null, the thread's commands all succeeded. If this method returns    * non-null, see {@link #getFailureLocation()} for details on which command    * caused the failure.    */
 specifier|public
 name|Throwable
 name|getFailureCause
@@ -547,7 +538,7 @@ return|return
 name|error
 return|;
 block|}
-comment|/**      * Returns location (e.g., command number) for exception returned by {@link      * #getFailureCause()}.      */
+comment|/**    * Returns location (e.g., command number) for exception returned by {@link    * #getFailureCause()}.    */
 specifier|public
 name|String
 name|getFailureLocation
@@ -576,7 +567,7 @@ name|threadId
 return|;
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------
-comment|/**      * Synchronization object that allows multiple      * ConcurrentTestCommandExecutors to execute commands in lock-step.      * Requires that all ConcurrentTestCommandExecutors have the same      * number of commands.      */
+comment|/**    * Synchronization object that allows multiple    * ConcurrentTestCommandExecutors to execute commands in lock-step.    * Requires that all ConcurrentTestCommandExecutors have the same    * number of commands.    */
 specifier|public
 specifier|static
 class|class

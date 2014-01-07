@@ -124,7 +124,7 @@ name|SqlParserPos
 name|pos
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a node.      *      * @param pos Parser position, must not be null.      */
+comment|/**    * Creates a node.    *    * @param pos Parser position, must not be null.    */
 name|SqlNode
 parameter_list|(
 name|SqlParserPos
@@ -163,7 +163,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**      * Clones a SqlNode with a different position.      */
+comment|/**    * Clones a SqlNode with a different position.    */
 specifier|public
 name|SqlNode
 name|clone
@@ -207,7 +207,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**      * Returns the type of node this is, or {@link      * org.eigenbase.sql.SqlKind#OTHER} if it's nothing special.      *      * @see #isA      *      * @return a {@link SqlKind} value, never null      */
+comment|/**    * Returns the type of node this is, or {@link    * org.eigenbase.sql.SqlKind#OTHER} if it's nothing special.    *    * @return a {@link SqlKind} value, never null    * @see #isA    */
 specifier|public
 name|SqlKind
 name|getKind
@@ -219,7 +219,7 @@ operator|.
 name|OTHER
 return|;
 block|}
-comment|/**      * Returns whether this node is a member of an aggregate category.      *      *<p>For example, {@code node.isA(SqlKind.QUERY)} returns {@code true}      * if the node is a SELECT, INSERT, UPDATE etc.      *      *<p>This method is shorthand: {@code node.isA(category)} is always      * equivalent to {@code node.getKind().belongsTo(category)}.      *      * @param category Category      *      * @return Whether this node belongs to the given category.      */
+comment|/**    * Returns whether this node is a member of an aggregate category.    *    *<p>For example, {@code node.isA(SqlKind.QUERY)} returns {@code true}    * if the node is a SELECT, INSERT, UPDATE etc.    *    *<p>This method is shorthand: {@code node.isA(category)} is always    * equivalent to {@code node.getKind().belongsTo(category)}.    *    * @param category Category    * @return Whether this node belongs to the given category.    */
 specifier|public
 specifier|final
 name|boolean
@@ -328,7 +328,7 @@ name|getSql
 argument_list|()
 return|;
 block|}
-comment|/**      * Returns the SQL text of the tree of which this<code>SqlNode</code> is      * the root.      *      * @param dialect Dialect      * @param forceParens wraps all expressions in parentheses; good for parse      * test, but false by default.      *      *<p>Typical return values are:      *      *<ul>      *<li>'It''s a bird!'</li>      *<li>NULL</li>      *<li>12.3</li>      *<li>DATE '1969-04-29'</li>      *</ul>      */
+comment|/**    * Returns the SQL text of the tree of which this<code>SqlNode</code> is    * the root.    *    * @param dialect     Dialect    * @param forceParens wraps all expressions in parentheses; good for parse    *                    test, but false by default.    *    *<p>Typical return values are:</p>    *<ul>    *<li>'It''s a bird!'</li>    *<li>NULL</li>    *<li>12.3</li>    *<li>DATE '1969-04-29'</li>    *</ul>    */
 specifier|public
 name|SqlString
 name|toSqlString
@@ -429,7 +429,7 @@ literal|false
 argument_list|)
 return|;
 block|}
-comment|/**      * Writes a SQL representation of this node to a writer.      *      *<p>The<code>leftPrec</code> and<code>rightPrec</code> parameters give      * us enough context to decide whether we need to enclose the expression in      * parentheses. For example, we need parentheses around "2 + 3" if preceded      * by "5 *". This is because the precedence of the "*" operator is greater      * than the precedence of the "+" operator.      *      *<p>The algorithm handles left- and right-associative operators by giving      * them slightly different left- and right-precedence.      *      *<p>If {@link SqlWriter#isAlwaysUseParentheses()} is true, we use      * parentheses even when they are not required by the precedence rules.      *      *<p>For the details of this algorithm, see {@link SqlCall#unparse}.      *      * @param writer Target writer      * @param leftPrec The precedence of the {@link SqlNode} immediately      * preceding this node in a depth-first scan of the parse tree      * @param rightPrec The precedence of the {@link SqlNode} immediately      */
+comment|/**    * Writes a SQL representation of this node to a writer.    *    *<p>The<code>leftPrec</code> and<code>rightPrec</code> parameters give    * us enough context to decide whether we need to enclose the expression in    * parentheses. For example, we need parentheses around "2 + 3" if preceded    * by "5 *". This is because the precedence of the "*" operator is greater    * than the precedence of the "+" operator.    *    *<p>The algorithm handles left- and right-associative operators by giving    * them slightly different left- and right-precedence.    *    *<p>If {@link SqlWriter#isAlwaysUseParentheses()} is true, we use    * parentheses even when they are not required by the precedence rules.    *    *<p>For the details of this algorithm, see {@link SqlCall#unparse}.    *    * @param writer    Target writer    * @param leftPrec  The precedence of the {@link SqlNode} immediately    *                  preceding this node in a depth-first scan of the parse    *                  tree    * @param rightPrec The precedence of the {@link SqlNode} immediately    */
 specifier|public
 specifier|abstract
 name|void
@@ -454,7 +454,7 @@ return|return
 name|pos
 return|;
 block|}
-comment|/**      * Validates this node.      *      *<p>The typical implementation of this method will make a callback to the      * validator appropriate to the node type and context. The validator has      * methods such as {@link SqlValidator#validateLiteral} for these purposes.      *      * @param scope Validator      */
+comment|/**    * Validates this node.    *    *<p>The typical implementation of this method will make a callback to the    * validator appropriate to the node type and context. The validator has    * methods such as {@link SqlValidator#validateLiteral} for these purposes.    *    * @param scope Validator    */
 specifier|public
 specifier|abstract
 name|void
@@ -467,7 +467,7 @@ name|SqlValidatorScope
 name|scope
 parameter_list|)
 function_decl|;
-comment|/**      * Lists all the valid alternatives for this node if the parse position of      * the node matches that of pos. Only implemented now for SqlCall and      * SqlOperator.      *      * @param validator Validator      * @param scope Validation scope      * @param pos SqlParserPos indicating the cursor position at which competion      * hints are requested for      * @param hintList list of valid options      */
+comment|/**    * Lists all the valid alternatives for this node if the parse position of    * the node matches that of pos. Only implemented now for SqlCall and    * SqlOperator.    *    * @param validator Validator    * @param scope     Validation scope    * @param pos       SqlParserPos indicating the cursor position at which    *                  completion hints are requested for    * @param hintList  list of valid options    */
 specifier|public
 name|void
 name|findValidOptions
@@ -490,7 +490,7 @@ parameter_list|)
 block|{
 comment|// no valid options
 block|}
-comment|/**      * Validates this node in an expression context.      *      *<p>Usually, this method does much the same as {@link #validate}, but a      * {@link SqlIdentifier} can occur in expression and non-expression      * contexts.      */
+comment|/**    * Validates this node in an expression context.    *    *<p>Usually, this method does much the same as {@link #validate}, but a    * {@link SqlIdentifier} can occur in expression and non-expression    * contexts.    */
 specifier|public
 name|void
 name|validateExpr
@@ -524,7 +524,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Accepts a generic visitor.      *      *<p>Implementations of this method in subtypes simply call the appropriate      *<code>visit</code> method on the {@link org.eigenbase.sql.util.SqlVisitor      * visitor object}.      *      *<p>The type parameter<code>R</code> must be consistent with the type      * parameter of the visitor.      */
+comment|/**    * Accepts a generic visitor.    *    *<p>Implementations of this method in subtypes simply call the appropriate    *<code>visit</code> method on the {@link org.eigenbase.sql.util.SqlVisitor    * visitor object}.    *    *<p>The type parameter<code>R</code> must be consistent with the type    * parameter of the visitor.    */
 specifier|public
 specifier|abstract
 parameter_list|<
@@ -540,7 +540,7 @@ argument_list|>
 name|visitor
 parameter_list|)
 function_decl|;
-comment|/**      * Returns whether this node is structurally equivalent to another node.      * Some examples:      *      *<ul>      *<li>1 + 2 is structurally equivalent to 1 + 2</li>      *<li>1 + 2 + 3 is structurally equivalent to (1 + 2) + 3, but not to 1 +      * (2 + 3), because the '+' operator is left-associative</li>      *</ul>      */
+comment|/**    * Returns whether this node is structurally equivalent to another node.    * Some examples:    *    *<ul>    *<li>1 + 2 is structurally equivalent to 1 + 2</li>    *<li>1 + 2 + 3 is structurally equivalent to (1 + 2) + 3, but not to 1 +    * (2 + 3), because the '+' operator is left-associative</li>    *</ul>    */
 specifier|public
 specifier|abstract
 name|boolean
@@ -553,7 +553,7 @@ name|boolean
 name|fail
 parameter_list|)
 function_decl|;
-comment|/**      * Returns whether two nodes are equal (using {@link      * #equalsDeep(SqlNode,boolean)}) or are both null.      *      * @param node1 First expression      * @param node2 Second expression      * @param fail Whether to throw {@link AssertionError} if expressions are      * not equal      */
+comment|/**    * Returns whether two nodes are equal (using {@link    * #equalsDeep(SqlNode, boolean)}) or are both null.    *    * @param node1 First expression    * @param node2 Second expression    * @param fail  Whether to throw {@link AssertionError} if expressions are    *              not equal    */
 specifier|public
 specifier|static
 name|boolean
@@ -607,7 +607,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**      * Returns whether expression is always ascending, descending or constant.      * This property is useful because it allows to safely aggregte infinite      * streams of values.      *      *<p>The default implementation returns {@link      * SqlMonotonicity#NotMonotonic}.      */
+comment|/**    * Returns whether expression is always ascending, descending or constant.    * This property is useful because it allows to safely aggregte infinite    * streams of values.    *    *<p>The default implementation returns {@link    * SqlMonotonicity#NotMonotonic}.    */
 specifier|public
 name|SqlMonotonicity
 name|getMonotonicity

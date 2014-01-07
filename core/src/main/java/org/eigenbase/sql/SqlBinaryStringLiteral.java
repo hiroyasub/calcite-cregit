@@ -88,7 +88,7 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * @return the underlying BitString      */
+comment|/**    * @return the underlying BitString    */
 specifier|public
 name|BitString
 name|getBitString

@@ -155,7 +155,7 @@ name|this
 argument_list|)
 return|;
 block|}
-comment|/**      * Returns the expression whose field is being accessed.      */
+comment|/**    * Returns the expression whose field is being accessed.    */
 specifier|public
 name|RexNode
 name|getReferenceExpr
@@ -180,7 +180,7 @@ operator|=
 name|expr
 expr_stmt|;
 block|}
-comment|/**      * Returns the name of the field.      */
+comment|/**    * Returns the name of the field.    */
 specifier|public
 name|String
 name|getName

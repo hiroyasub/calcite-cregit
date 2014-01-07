@@ -235,7 +235,7 @@ name|Object
 argument_list|>
 argument_list|>
 argument_list|()
-block|{}
+block|{       }
 decl_stmt|;
 specifier|private
 specifier|final

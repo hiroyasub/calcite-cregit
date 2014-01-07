@@ -53,7 +53,7 @@ extends|extends
 name|SqlCall
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
-comment|/**      * VALUE_OPERAND = 0      */
+comment|/**    * VALUE_OPERAND = 0    */
 specifier|public
 specifier|static
 specifier|final
@@ -62,7 +62,7 @@ name|VALUE_OPERAND
 init|=
 literal|0
 decl_stmt|;
-comment|/**      * WHEN_OPERANDS = 1      */
+comment|/**    * WHEN_OPERANDS = 1    */
 specifier|public
 specifier|static
 specifier|final
@@ -71,7 +71,7 @@ name|WHEN_OPERANDS
 init|=
 literal|1
 decl_stmt|;
-comment|/**      * THEN_OPERANDS = 2      */
+comment|/**    * THEN_OPERANDS = 2    */
 specifier|public
 specifier|static
 specifier|final
@@ -80,7 +80,7 @@ name|THEN_OPERANDS
 init|=
 literal|2
 decl_stmt|;
-comment|/**      * ELSE_OPERAND = 3      */
+comment|/**    * ELSE_OPERAND = 3    */
 specifier|public
 specifier|static
 specifier|final
@@ -90,7 +90,7 @@ init|=
 literal|3
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a SqlCase expression.      *      *<p>The operands are an array of SqlNodes where      *      *<ul>      *<li>operands[0] is a SqlNodeList of all WHEN expressions      *<li>operands[1] is a SqlNodeList of all THEN expressions      *<li>operands[2] is a SqlNode representing the implicit or explicit ELSE      * expression      *</ul>      *      *<p>See {@link #VALUE_OPERAND}, {@link #WHEN_OPERANDS},      * {@link #THEN_OPERANDS}, {@link #ELSE_OPERAND}.      */
+comment|/**    * Creates a SqlCase expression.    *    *<p>The operands are an array of SqlNodes where    *    *<ul>    *<li>operands[0] is a SqlNodeList of all WHEN expressions    *<li>operands[1] is a SqlNodeList of all THEN expressions    *<li>operands[2] is a SqlNode representing the implicit or explicit ELSE    * expression    *</ul>    *    *<p>See {@link #VALUE_OPERAND}, {@link #WHEN_OPERANDS},    * {@link #THEN_OPERANDS}, {@link #ELSE_OPERAND}.    */
 name|SqlCase
 parameter_list|(
 name|SqlCaseOperator

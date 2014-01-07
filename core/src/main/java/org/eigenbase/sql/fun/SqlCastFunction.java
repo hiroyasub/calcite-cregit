@@ -140,7 +140,7 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * List all casts that do not preserve monotonicity.      */
+comment|/**    * List all casts that do not preserve monotonicity.    */
 specifier|private
 name|Set
 argument_list|<
@@ -563,7 +563,7 @@ literal|2
 argument_list|)
 return|;
 block|}
-comment|/**      * Makes sure that the number and types of arguments are allowable.      * Operators (such as "ROW" and "AS") which do not check their arguments can      * override this method.      */
+comment|/**    * Makes sure that the number and types of arguments are allowable.    * Operators (such as "ROW" and "AS") which do not check their arguments can    * override this method.    */
 specifier|public
 name|boolean
 name|checkOperandTypes

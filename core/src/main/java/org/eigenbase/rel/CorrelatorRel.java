@@ -97,7 +97,7 @@ argument_list|>
 name|correlations
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a CorrelatorRel.      *      * @param cluster cluster this relational expression belongs to      * @param left left input relational expression      * @param right right input relational expression      * @param joinCond join condition      * @param correlations set of expressions to set as variables each time a      * row arrives from the left input      * @param joinType join type      */
+comment|/**    * Creates a CorrelatorRel.    *    * @param cluster      cluster this relational expression belongs to    * @param left         left input relational expression    * @param right        right input relational expression    * @param joinCond     join condition    * @param correlations set of expressions to set as variables each time a    *                     row arrives from the left input    * @param joinType     join type    */
 specifier|public
 name|CorrelatorRel
 parameter_list|(
@@ -182,7 +182,7 @@ name|INNER
 operator|)
 assert|;
 block|}
-comment|/**      * Creates a CorrelatorRel with no join condition.      *      * @param cluster cluster this relational expression belongs to      * @param left left input relational expression      * @param right right input relational expression      * @param correlations set of expressions to set as variables each time a      * row arrives from the left input      * @param joinType join type      */
+comment|/**    * Creates a CorrelatorRel with no join condition.    *    * @param cluster      cluster this relational expression belongs to    * @param left         left input relational expression    * @param right        right input relational expression    * @param correlations set of expressions to set as variables each time a    *                     row arrives from the left input    * @param joinType     join type    */
 specifier|public
 name|CorrelatorRel
 parameter_list|(
@@ -229,7 +229,7 @@ name|joinType
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Creates a CorrelatorRel by parsing serialized output. */
+comment|/**    * Creates a CorrelatorRel by parsing serialized output.    */
 specifier|public
 name|CorrelatorRel
 parameter_list|(
@@ -459,7 +459,7 @@ name|correlations
 argument_list|)
 return|;
 block|}
-comment|/**      * Returns the correlating expressions.      *      * @return correlating expressions      */
+comment|/**    * Returns the correlating expressions.    *    * @return correlating expressions    */
 specifier|public
 name|List
 argument_list|<
@@ -473,7 +473,7 @@ name|correlations
 return|;
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------
-comment|/**      * Describes the neccessary parameters for an implementation in order to      * identify and set dynamic variables      */
+comment|/**    * Describes the neccessary parameters for an implementation in order to    * identify and set dynamic variables    */
 specifier|public
 specifier|static
 class|class
@@ -496,7 +496,7 @@ specifier|final
 name|int
 name|offset
 decl_stmt|;
-comment|/**          * Creates a correlation.          *          * @param id Identifier          * @param offset Offset          */
+comment|/**      * Creates a correlation.      *      * @param id     Identifier      * @param offset Offset      */
 specifier|public
 name|Correlation
 parameter_list|(
@@ -520,7 +520,7 @@ operator|=
 name|offset
 expr_stmt|;
 block|}
-comment|/**          * Returns the identifier.          *          * @return identifier          */
+comment|/**      * Returns the identifier.      *      * @return identifier      */
 specifier|public
 name|int
 name|getId
@@ -530,7 +530,7 @@ return|return
 name|id
 return|;
 block|}
-comment|/**          * Returns this correlation's offset.          *          * @return offset          */
+comment|/**      * Returns this correlation's offset.      *      * @return offset      */
 specifier|public
 name|int
 name|getOffset

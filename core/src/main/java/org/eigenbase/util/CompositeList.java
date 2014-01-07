@@ -49,7 +49,7 @@ argument_list|>
 index|[]
 name|lists
 decl_stmt|;
-comment|/**      * Creates a CompoundList.      *      * @param lists Constituent lists      */
+comment|/**    * Creates a CompoundList.    *    * @param lists Constituent lists    */
 specifier|public
 name|CompositeList
 parameter_list|(
@@ -68,7 +68,7 @@ operator|=
 name|lists
 expr_stmt|;
 block|}
-comment|/**      * Creates a CompoundList.      *      *<p>More convenient than {@link #CompositeList(java.util.List[])},      * because element type is inferred. Use this method as you would      * {@link java.util.Arrays#asList(Object[])} or      * {@link java.util.EnumSet#of(Enum, Enum[])}.      *      * @param lists Constituent lists      * @param<T> Element type      * @return List consisting of all lists      */
+comment|/**    * Creates a CompoundList.    *    *<p>More convenient than {@link #CompositeList(java.util.List[])},    * because element type is inferred. Use this method as you would    * {@link java.util.Arrays#asList(Object[])} or    * {@link java.util.EnumSet#of(Enum, Enum[])}.    *    * @param lists Constituent lists    * @param<T>   Element type    * @return List consisting of all lists    */
 specifier|public
 specifier|static
 parameter_list|<

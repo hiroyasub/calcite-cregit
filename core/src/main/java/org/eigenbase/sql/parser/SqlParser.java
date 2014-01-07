@@ -85,7 +85,7 @@ name|String
 name|originalInput
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a<code>SqlParser</code> which reads input from a string.      */
+comment|/**    * Creates a<code>SqlParser</code> which reads input from a string.    */
 specifier|public
 name|SqlParser
 parameter_list|(
@@ -119,7 +119,7 @@ operator|=
 name|s
 expr_stmt|;
 block|}
-comment|/**      * Creates a<code>SqlParser</code> which reads input from a reader.      */
+comment|/**    * Creates a<code>SqlParser</code> which reads input from a reader.    */
 specifier|public
 name|SqlParser
 parameter_list|(
@@ -201,7 +201,7 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Parses a SQL expression.      *      * @throws SqlParseException if there is a parse error      */
+comment|/**    * Parses a SQL expression.    *    * @throws SqlParseException if there is a parse error    */
 specifier|public
 name|SqlNode
 name|parseExpression
@@ -262,7 +262,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**      * Parses a<code>SELECT</code> statement.      *      * @return A {@link org.eigenbase.sql.SqlSelect} for a regular<code>      * SELECT</code> statement; a {@link org.eigenbase.sql.SqlBinaryOperator}      * for a<code>UNION</code>,<code>INTERSECT</code>, or<code>EXCEPT</code>.      *      * @throws SqlParseException if there is a parse error      */
+comment|/**    * Parses a<code>SELECT</code> statement.    *    * @return A {@link org.eigenbase.sql.SqlSelect} for a regular<code>    * SELECT</code> statement; a {@link org.eigenbase.sql.SqlBinaryOperator}    * for a<code>UNION</code>,<code>INTERSECT</code>, or<code>EXCEPT</code>.    * @throws SqlParseException if there is a parse error    */
 specifier|public
 name|SqlNode
 name|parseQuery
@@ -323,7 +323,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**      * Parses an SQL statement.      *      * @return top-level SqlNode representing stmt      *      * @throws SqlParseException if there is a parse error      */
+comment|/**    * Parses an SQL statement.    *    * @return top-level SqlNode representing stmt    * @throws SqlParseException if there is a parse error    */
 specifier|public
 name|SqlNode
 name|parseStmt
@@ -384,7 +384,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**      * Returns the underlying generated parser.      */
+comment|/**    * Returns the underlying generated parser.    */
 specifier|public
 name|SqlParserImpl
 name|getParserImpl

@@ -82,7 +82,7 @@ specifier|public
 class|class
 name|ChunkListTest
 block|{
-comment|/** Unit test for {@link ChunkList}. */
+comment|/**    * Unit test for {@link ChunkList}.    */
 annotation|@
 name|Test
 specifier|public
@@ -671,7 +671,7 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Unit test for {@link ChunkList} that applies random    * operations. */
+comment|/**    * Unit test for {@link ChunkList} that applies random    * operations.    */
 annotation|@
 name|Test
 specifier|public

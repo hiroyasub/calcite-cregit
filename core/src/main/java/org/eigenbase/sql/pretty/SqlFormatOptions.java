@@ -90,7 +90,7 @@ name|lineLength
 init|=
 literal|0
 decl_stmt|;
-comment|/**      * Constructs a set of default SQL format options.      */
+comment|/**    * Constructs a set of default SQL format options.    */
 specifier|public
 name|SqlFormatOptions
 parameter_list|()
@@ -99,7 +99,7 @@ name|super
 argument_list|()
 expr_stmt|;
 block|}
-comment|/**      * Constructs a complete set of SQL format options.      *      * @param alwaysUseParentheses Always use parentheses      * @param caseClausesOnNewLines Case clauses on new lines      * @param clauseStartsLine Clause starts line      * @param keywordsLowercase Keywords in lower case      * @param quoteAllIdentifiers Quote all identifiers      * @param selectListItemsOnSeparateLines Select items on separate lines      * @param whereListItemsOnSeparateLines Where items on separate lines      * @param windowDeclarationStartsLine Window declaration starts line      * @param windowListItemsOnSeparateLines Window list items on separate lines      * @param indentation Indentation      * @param lineLength Line length      */
+comment|/**    * Constructs a complete set of SQL format options.    *    * @param alwaysUseParentheses           Always use parentheses    * @param caseClausesOnNewLines          Case clauses on new lines    * @param clauseStartsLine               Clause starts line    * @param keywordsLowercase              Keywords in lower case    * @param quoteAllIdentifiers            Quote all identifiers    * @param selectListItemsOnSeparateLines Select items on separate lines    * @param whereListItemsOnSeparateLines  Where items on separate lines    * @param windowDeclarationStartsLine    Window declaration starts line    * @param windowListItemsOnSeparateLines Window list items on separate lines    * @param indentation                    Indentation    * @param lineLength                     Line length    */
 specifier|public
 name|SqlFormatOptions
 parameter_list|(

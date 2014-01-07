@@ -61,7 +61,7 @@ name|RemoveDistinctRule
 argument_list|()
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a RemoveDistinctRule.      */
+comment|/**    * Creates a RemoveDistinctRule.    */
 specifier|private
 name|RemoveDistinctRule
 parameter_list|()

@@ -111,7 +111,7 @@ extends|extends
 name|SqlFunction
 block|{
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates the SqlSubstringFunction.      */
+comment|/**    * Creates the SqlSubstringFunction.    */
 name|SqlSubstringFunction
 parameter_list|()
 block|{

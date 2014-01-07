@@ -83,7 +83,7 @@ name|IntersectRelBase
 extends|extends
 name|SetOpRel
 block|{
-comment|/** Creates an IntersectRelBase. */
+comment|/**    * Creates an IntersectRelBase.    */
 specifier|public
 name|IntersectRelBase
 parameter_list|(
@@ -115,7 +115,7 @@ name|all
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Creates an IntersectRelBase by parsing serialized output. */
+comment|/**    * Creates an IntersectRelBase by parsing serialized output.    */
 specifier|protected
 name|IntersectRelBase
 parameter_list|(

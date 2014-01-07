@@ -523,7 +523,7 @@ name|expected
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * the or operator should pass through unchanged since e.g. x OR y should      * return true if x=null and y=true if it was transformed into something      * like (x ISNOTNULL) AND (y ISNOTNULL) AND (x OR y) an incorrect result      * could be produced      */
+comment|/**    * the or operator should pass through unchanged since e.g. x OR y should    * return true if x=null and y=true if it was transformed into something    * like (x ISNOTNULL) AND (y ISNOTNULL) AND (x OR y) an incorrect result    * could be produced    */
 annotation|@
 name|Test
 specifier|public

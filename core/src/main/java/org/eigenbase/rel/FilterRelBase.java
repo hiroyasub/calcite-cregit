@@ -94,7 +94,7 @@ name|RexNode
 name|condition
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a filter.      *      * @param cluster {@link RelOptCluster}  this relational expression belongs      * to      * @param traits the traits of this rel      * @param child input relational expression      * @param condition boolean expression which determines whether a row is      * allowed to pass      */
+comment|/**    * Creates a filter.    *    * @param cluster   {@link RelOptCluster}  this relational expression belongs    *                  to    * @param traits    the traits of this rel    * @param child     input relational expression    * @param condition boolean expression which determines whether a row is    *                  allowed to pass    */
 specifier|protected
 name|FilterRelBase
 parameter_list|(
@@ -142,7 +142,7 @@ operator|=
 name|condition
 expr_stmt|;
 block|}
-comment|/** Creates a FilterRelBase by parsing serialized output. */
+comment|/**    * Creates a FilterRelBase by parsing serialized output.    */
 specifier|protected
 name|FilterRelBase
 parameter_list|(

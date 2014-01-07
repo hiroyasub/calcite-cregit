@@ -22,7 +22,7 @@ specifier|public
 interface|interface
 name|SqlOperandCountRange
 block|{
-comment|/** Returns whether {@code count} is a valid number of operands. */
+comment|/**    * Returns whether {@code count} is a valid number of operands.    */
 specifier|public
 name|boolean
 name|isValidCount
@@ -31,13 +31,13 @@ name|int
 name|count
 parameter_list|)
 function_decl|;
-comment|/** Returns an lower bound. -1 if there is no lower bound. */
+comment|/**    * Returns an lower bound. -1 if there is no lower bound.    */
 specifier|public
 name|int
 name|getMin
 parameter_list|()
 function_decl|;
-comment|/** Returns an upper bound. -1 if there is no upper bound. */
+comment|/**    * Returns an upper bound. -1 if there is no upper bound.    */
 specifier|public
 name|int
 name|getMax

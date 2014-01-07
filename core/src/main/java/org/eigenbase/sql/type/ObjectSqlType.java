@@ -76,7 +76,7 @@ name|RelDataTypeFamily
 name|family
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Constructs an object type. This should only be called from a factory      * method.      *      * @param typeName SqlTypeName for this type (either Distinct or Structured)      * @param sqlIdentifier identifier for this type      * @param nullable whether type accepts nulls      * @param fields object attribute definitions      */
+comment|/**    * Constructs an object type. This should only be called from a factory    * method.    *    * @param typeName      SqlTypeName for this type (either Distinct or    *                      Structured)    * @param sqlIdentifier identifier for this type    * @param nullable      whether type accepts nulls    * @param fields        object attribute definitions    */
 specifier|public
 name|ObjectSqlType
 parameter_list|(

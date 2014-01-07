@@ -57,7 +57,7 @@ argument_list|>
 name|providers
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a new empty chain.      */
+comment|/**    * Creates a new empty chain.    */
 specifier|public
 name|ChainedRelMetadataProvider
 parameter_list|()
@@ -73,7 +73,7 @@ argument_list|()
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Adds a provider, giving it higher priority than all those already in      * chain. Chain order matters, since the first provider which answers a      * query is used.      *      * @param provider provider to add      */
+comment|/**    * Adds a provider, giving it higher priority than all those already in    * chain. Chain order matters, since the first provider which answers a    * query is used.    *    * @param provider provider to add    */
 specifier|public
 name|void
 name|addProvider

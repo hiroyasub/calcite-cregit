@@ -218,7 +218,7 @@ name|ONE
 argument_list|)
 decl_stmt|;
 comment|//~ Enums ------------------------------------------------------------------
-comment|/**      * Enumeration of time units used to construct an interval.      */
+comment|/**    * Enumeration of time units used to construct an interval.    */
 specifier|public
 enum|enum
 name|TimeUnit
@@ -394,7 +394,7 @@ operator|=
 name|limit
 expr_stmt|;
 block|}
-comment|/**          * Returns the TimeUnit associated with an ordinal. The value returned          * is null if the ordinal is not a member of the TimeUnit enumeration.          */
+comment|/**      * Returns the TimeUnit associated with an ordinal. The value returned      * is null if the ordinal is not a member of the TimeUnit enumeration.      */
 specifier|public
 specifier|static
 name|TimeUnit
@@ -437,7 +437,7 @@ name|GET_VALUE_METHOD_NAME
 init|=
 literal|"getValue"
 decl_stmt|;
-comment|/**          * Returns whether a given value is valid for a field of this time unit.          *          * @param field Field value          * @return Whether value          */
+comment|/**      * Returns whether a given value is valid for a field of this time unit.      *      * @param field Field value      * @return Whether value      */
 specifier|public
 name|boolean
 name|isValidValue
@@ -683,7 +683,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**          * Creates a TimeUnitRange.          * @param startUnit Start time unit          * @param endUnit End time unit          */
+comment|/**      * Creates a TimeUnitRange.      *      * @param startUnit Start time unit      * @param endUnit   End time unit      */
 name|TimeUnitRange
 parameter_list|(
 name|TimeUnit
@@ -711,7 +711,7 @@ operator|=
 name|endUnit
 expr_stmt|;
 block|}
-comment|/**          * Returns a TimeUnitRange with a given start and end unit.          *          * @param startUnit Start unit          * @param endUnit End unit          * @return Time unit range, or null if not valid          */
+comment|/**      * Returns a TimeUnitRange with a given start and end unit.      *      * @param startUnit Start unit      * @param endUnit   End unit      * @return Time unit range, or null if not valid      */
 specifier|public
 specifier|static
 name|TimeUnitRange
@@ -1713,7 +1713,7 @@ expr_stmt|;
 block|}
 block|}
 block|}
-comment|/**      * Does this interval have a single datetime field      *      * Return true not of form unit TO unit.      */
+comment|/**    * Does this interval have a single datetime field    *    * Return true not of form unit TO unit.    */
 specifier|public
 name|boolean
 name|isSingleDatetimeField
@@ -1741,7 +1741,7 @@ operator|.
 name|yearMonth
 return|;
 block|}
-comment|/**      * @return 1 or -1      */
+comment|/**    * @return 1 or -1    */
 specifier|private
 name|int
 name|getIntervalSign
@@ -2024,7 +2024,7 @@ name|valueOf
 argument_list|(
 literal|1000000000
 argument_list|)
-block|,     }
+block|,   }
 decl_stmt|;
 specifier|private
 name|boolean
@@ -2306,7 +2306,7 @@ name|ret
 operator|)
 return|;
 block|}
-comment|/**      * Validates an INTERVAL literal against a YEAR interval qualifier.      *      * @throws SqlValidatorException if the interval value is illegal.      */
+comment|/**    * Validates an INTERVAL literal against a YEAR interval qualifier.    *    * @throws SqlValidatorException if the interval value is illegal.    */
 specifier|private
 name|int
 index|[]
@@ -2416,7 +2416,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**      * Validates an INTERVAL literal against a YEAR TO MONTH interval qualifier.      *      * @throws SqlValidatorException if the interval value is illegal.      */
+comment|/**    * Validates an INTERVAL literal against a YEAR TO MONTH interval qualifier.    *    * @throws SqlValidatorException if the interval value is illegal.    */
 specifier|private
 name|int
 index|[]
@@ -2559,7 +2559,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**      * Validates an INTERVAL literal against a MONTH interval qualifier.      *      * @throws SqlValidatorException if the interval value is illegal.      */
+comment|/**    * Validates an INTERVAL literal against a MONTH interval qualifier.    *    * @throws SqlValidatorException if the interval value is illegal.    */
 specifier|private
 name|int
 index|[]
@@ -2669,7 +2669,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**      * Validates an INTERVAL literal against a DAY interval qualifier.      *      * @throws SqlValidatorException if the interval value is illegal.      */
+comment|/**    * Validates an INTERVAL literal against a DAY interval qualifier.    *    * @throws SqlValidatorException if the interval value is illegal.    */
 specifier|private
 name|int
 index|[]
@@ -2785,7 +2785,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**      * Validates an INTERVAL literal against a DAY TO HOUR interval qualifier.      *      * @throws SqlValidatorException if the interval value is illegal.      */
+comment|/**    * Validates an INTERVAL literal against a DAY TO HOUR interval qualifier.    *    * @throws SqlValidatorException if the interval value is illegal.    */
 specifier|private
 name|int
 index|[]
@@ -2934,7 +2934,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**      * Validates an INTERVAL literal against a DAY TO MINUTE interval qualifier.      *      * @throws SqlValidatorException if the interval value is illegal.      */
+comment|/**    * Validates an INTERVAL literal against a DAY TO MINUTE interval qualifier.    *    * @throws SqlValidatorException if the interval value is illegal.    */
 specifier|private
 name|int
 index|[]
@@ -3106,7 +3106,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**      * Validates an INTERVAL literal against a DAY TO SECOND interval qualifier.      *      * @throws SqlValidatorException if the interval value is illegal.      */
+comment|/**    * Validates an INTERVAL literal against a DAY TO SECOND interval qualifier.    *    * @throws SqlValidatorException if the interval value is illegal.    */
 specifier|private
 name|int
 index|[]
@@ -3384,7 +3384,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**      * Validates an INTERVAL literal against an HOUR interval qualifier.      *      * @throws SqlValidatorException if the interval value is illegal.      */
+comment|/**    * Validates an INTERVAL literal against an HOUR interval qualifier.    *    * @throws SqlValidatorException if the interval value is illegal.    */
 specifier|private
 name|int
 index|[]
@@ -3500,7 +3500,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**      * Validates an INTERVAL literal against an HOUR TO MINUTE interval      * qualifier.      *      * @throws SqlValidatorException if the interval value is illegal.      */
+comment|/**    * Validates an INTERVAL literal against an HOUR TO MINUTE interval    * qualifier.    *    * @throws SqlValidatorException if the interval value is illegal.    */
 specifier|private
 name|int
 index|[]
@@ -3649,7 +3649,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**      * Validates an INTERVAL literal against an HOUR TO SECOND interval      * qualifier.      *      * @throws SqlValidatorException if the interval value is illegal.      */
+comment|/**    * Validates an INTERVAL literal against an HOUR TO SECOND interval    * qualifier.    *    * @throws SqlValidatorException if the interval value is illegal.    */
 specifier|private
 name|int
 index|[]
@@ -3904,7 +3904,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**      * Validates an INTERVAL literal against an MINUTE interval qualifier.      *      * @throws SqlValidatorException if the interval value is illegal.      */
+comment|/**    * Validates an INTERVAL literal against an MINUTE interval qualifier.    *    * @throws SqlValidatorException if the interval value is illegal.    */
 specifier|private
 name|int
 index|[]
@@ -4020,7 +4020,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**      * Validates an INTERVAL literal against an MINUTE TO SECOND interval      * qualifier.      *      * @throws SqlValidatorException if the interval value is illegal.      */
+comment|/**    * Validates an INTERVAL literal against an MINUTE TO SECOND interval    * qualifier.    *    * @throws SqlValidatorException if the interval value is illegal.    */
 specifier|private
 name|int
 index|[]
@@ -4252,7 +4252,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**      * Validates an INTERVAL literal against an SECOND interval qualifier.      *      * @throws SqlValidatorException if the interval value is illegal.      */
+comment|/**    * Validates an INTERVAL literal against an SECOND interval qualifier.    *    * @throws SqlValidatorException if the interval value is illegal.    */
 specifier|private
 name|int
 index|[]
@@ -4461,7 +4461,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**      * Validates an INTERVAL literal according to the rules specified by the      * interval qualifier. The assumption is made that the interval qualfier has      * been validated prior to calling this method. Evaluating against an      * invalid qualifier could lead to strange results.      *      * @return field values, never null      * @throws SqlValidatorException if the interval value is illegal      */
+comment|/**    * Validates an INTERVAL literal according to the rules specified by the    * interval qualifier. The assumption is made that the interval qualfier has    * been validated prior to calling this method. Evaluating against an    * invalid qualifier could lead to strange results.    *    * @return field values, never null    * @throws SqlValidatorException if the interval value is illegal    */
 specifier|public
 name|int
 index|[]

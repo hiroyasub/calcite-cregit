@@ -111,7 +111,7 @@ extends|extends
 name|RelOptRule
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
-comment|/**      * The singleton      */
+comment|/**    * The singleton    */
 specifier|public
 specifier|static
 specifier|final
@@ -123,7 +123,7 @@ name|SwapJoinRule
 argument_list|()
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a SwapJoinRule.      */
+comment|/**    * Creates a SwapJoinRule.    */
 specifier|private
 name|SwapJoinRule
 parameter_list|()
@@ -161,7 +161,7 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Returns a relational expression with the inputs switched round. Does not      * modify<code>join</code>. Returns null if the join cannot be swapped (for      * example, because it is an outer join).      */
+comment|/**    * Returns a relational expression with the inputs switched round. Does not    * modify<code>join</code>. Returns null if the join cannot be swapped (for    * example, because it is an outer join).    */
 specifier|public
 specifier|static
 name|RelNode
@@ -180,7 +180,7 @@ literal|false
 argument_list|)
 return|;
 block|}
-comment|/**      * @param join join to be swapped      * @param swapOuterJoins whether outer joins should be swapped      *      * @return swapped join if swapping possible; else null      */
+comment|/**    * @param join           join to be swapped    * @param swapOuterJoins whether outer joins should be swapped    * @return swapped join if swapping possible; else null    */
 specifier|public
 specifier|static
 name|RelNode
@@ -556,7 +556,7 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------
-comment|/**      * Walks over an expression, replacing references to fields of the left and      * right inputs.      *      *<p>If the field index is less than leftFieldCount, it must be from the      * left, and so has rightFieldCount added to it; if the field index is      * greater than leftFieldCount, it must be from the right, so we subtract      * leftFieldCount from it.</p>      */
+comment|/**    * Walks over an expression, replacing references to fields of the left and    * right inputs.    *    *<p>If the field index is less than leftFieldCount, it must be from the    * left, and so has rightFieldCount added to it; if the field index is    * greater than leftFieldCount, it must be from the right, so we subtract    * leftFieldCount from it.</p>    */
 specifier|private
 specifier|static
 class|class

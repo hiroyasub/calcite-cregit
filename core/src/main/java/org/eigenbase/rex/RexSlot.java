@@ -66,7 +66,7 @@ name|int
 name|index
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a slot.      *      * @param index Index of the field in the underlying rowtype      * @param type Type of the column      */
+comment|/**    * Creates a slot.    *    * @param index Index of the field in the underlying rowtype    * @param type  Type of the column    */
 specifier|protected
 name|RexSlot
 parameter_list|(
@@ -109,7 +109,7 @@ return|return
 name|index
 return|;
 block|}
-comment|/** Thread-safe list that populates itself if you make a reference beyond      * the end of the list. Useful if you are using the same entries repeatedly.      * Once populated, accesses are very efficient. */
+comment|/**    * Thread-safe list that populates itself if you make a reference beyond    * the end of the list. Useful if you are using the same entries repeatedly.    * Once populated, accesses are very efficient.    */
 specifier|protected
 specifier|static
 class|class

@@ -49,7 +49,7 @@ interface|interface
 name|SqlOperandTypeInference
 block|{
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Infers any unknown operand types.      *      * @param callBinding description of the call being analyzed      * @param returnType the type known or inferred for the result of the call      * @param operandTypes receives the inferred types for all operands      */
+comment|/**    * Infers any unknown operand types.    *    * @param callBinding  description of the call being analyzed    * @param returnType   the type known or inferred for the result of the call    * @param operandTypes receives the inferred types for all operands    */
 specifier|public
 name|void
 name|inferOperandTypes

@@ -74,7 +74,7 @@ name|boolean
 name|isNullable
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates an AbstractSqlType.      *      * @param typeName Type name      * @param isNullable Whether nullable      * @param fields Fields of type, or null if not a record type      */
+comment|/**    * Creates an AbstractSqlType.    *    * @param typeName   Type name    * @param isNullable Whether nullable    * @param fields     Fields of type, or null if not a record type    */
 specifier|protected
 name|AbstractSqlType
 parameter_list|(

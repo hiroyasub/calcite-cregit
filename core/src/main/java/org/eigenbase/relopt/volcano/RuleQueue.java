@@ -131,7 +131,7 @@ argument_list|(
 literal|"<ALL RULES>"
 argument_list|)
 decl_stmt|;
-comment|/**      * Largest value which is less than one.      */
+comment|/**    * Largest value which is less than one.    */
 specifier|private
 specifier|static
 specifier|final
@@ -142,7 +142,7 @@ name|computeOneMinusEpsilon
 argument_list|()
 decl_stmt|;
 comment|//~ Instance fields --------------------------------------------------------
-comment|/**      * The importance of each subset.      */
+comment|/**    * The importance of each subset.    */
 specifier|final
 name|Map
 argument_list|<
@@ -161,7 +161,7 @@ name|Double
 argument_list|>
 argument_list|()
 decl_stmt|;
-comment|/**      * The set of RelSubsets whose importance is currently in an artificially      * raised state. Typically this only includes RelSubsets which have only      * logical RelNodes.      */
+comment|/**    * The set of RelSubsets whose importance is currently in an artificially    * raised state. Typically this only includes RelSubsets which have only    * logical RelNodes.    */
 specifier|final
 name|Set
 argument_list|<
@@ -176,7 +176,7 @@ name|RelSubset
 argument_list|>
 argument_list|()
 decl_stmt|;
-comment|/**      * Map of {@link VolcanoPlannerPhase} to a list of rule-matches. Initially,      * there is an empty {@link PhaseMatchList} for each planner phase. As the      * planner invokes {@link #addMatch(VolcanoRuleMatch)} the rule-match is      * added to the appropriate PhaseMatchList(s). As the planner completes      * phases, the matching entry is removed from this list to avoid unused      * work.      */
+comment|/**    * Map of {@link VolcanoPlannerPhase} to a list of rule-matches. Initially,    * there is an empty {@link PhaseMatchList} for each planner phase. As the    * planner invokes {@link #addMatch(VolcanoRuleMatch)} the rule-match is    * added to the appropriate PhaseMatchList(s). As the planner completes    * phases, the matching entry is removed from this list to avoid unused    * work.    */
 specifier|final
 name|Map
 argument_list|<
@@ -195,7 +195,7 @@ name|PhaseMatchList
 argument_list|>
 argument_list|()
 decl_stmt|;
-comment|/**      * Sorts rule-matches into decreasing order of importance.      */
+comment|/**    * Sorts rule-matches into decreasing order of importance.    */
 specifier|private
 specifier|final
 name|Comparator
@@ -213,7 +213,7 @@ specifier|final
 name|VolcanoPlanner
 name|planner
 decl_stmt|;
-comment|/**      * Compares relexps according to their cached 'importance'.      */
+comment|/**    * Compares relexps according to their cached 'importance'.    */
 specifier|private
 specifier|final
 name|Comparator
@@ -226,7 +226,7 @@ operator|new
 name|RelImportanceComparator
 argument_list|()
 decl_stmt|;
-comment|/**      * Maps a {@link VolcanoPlannerPhase} to a set of rule names.  Named rules      * may be invoked in their corresponding phase.      */
+comment|/**    * Maps a {@link VolcanoPlannerPhase} to a set of rule names.  Named rules    * may be invoked in their corresponding phase.    */
 specifier|private
 specifier|final
 name|Map
@@ -362,7 +362,7 @@ expr_stmt|;
 block|}
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Removes the {@link PhaseMatchList rule-match list} for the given planner      * phase.      */
+comment|/**    * Removes the {@link PhaseMatchList rule-match list} for the given planner    * phase.    */
 specifier|public
 name|void
 name|phaseCompleted
@@ -379,7 +379,7 @@ name|phase
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Computes the importance of a set (which is that of its most important      * subset).      */
+comment|/**    * Computes the importance of a set (which is that of its most important    * subset).    */
 specifier|public
 name|double
 name|getImportance
@@ -422,7 +422,7 @@ return|return
 name|importance
 return|;
 block|}
-comment|/**      * Returns whether there is a rule match in the queue for the given phase.      *      *<p>Note that the VolcanoPlanner may still decide to reject rule matches      * which have become invalid, say if one of their operands belongs to an      * obsolete set or has importance=0.      *      * @exception NullPointerException if this method is called with a phase      * previously marked as completed via {@link      * #phaseCompleted(VolcanoPlannerPhase)}.      */
+comment|/**    * Returns whether there is a rule match in the queue for the given phase.    *    *<p>Note that the VolcanoPlanner may still decide to reject rule matches    * which have become invalid, say if one of their operands belongs to an    * obsolete set or has importance=0.    *    * @throws NullPointerException if this method is called with a phase    *                              previously marked as completed via {@link    *                              #phaseCompleted(VolcanoPlannerPhase)}.    */
 specifier|public
 name|boolean
 name|hasNextMatch
@@ -446,7 +446,7 @@ name|isEmpty
 argument_list|()
 return|;
 block|}
-comment|/**      * Recomputes the importance of the given RelSubset.      *      * @param subset RelSubset whose importance is to be recomputed      * @param force if true, forces an importance update even if the subset has      * not been registered      */
+comment|/**    * Recomputes the importance of the given RelSubset.    *    * @param subset RelSubset whose importance is to be recomputed    * @param force  if true, forces an importance update even if the subset has    *               not been registered    */
 specifier|public
 name|void
 name|recompute
@@ -519,7 +519,7 @@ name|importance
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Equivalent to {@link #recompute(RelSubset, boolean) recompute(subset,      * false)}.      */
+comment|/**    * Equivalent to {@link #recompute(RelSubset, boolean) recompute(subset,    * false)}.    */
 specifier|public
 name|void
 name|recompute
@@ -536,7 +536,7 @@ literal|false
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Artificially boosts the importance of the given {@link RelSubset}s by a      * given factor.      *      *<p>Iterates over the currently boosted RelSubsets and removes their      * importance boost, forcing a recalculation of the RelSubsets' importances      * (see {@link #recompute(RelSubset)}).      *      *<p>Once RelSubsets have been restored to their normal importance, the      * given RelSubsets have their importances boosted. A RelSubset's boosted      * importance is always less than 1.0 (and never equal to 1.0).      *      * @param subsets RelSubsets to boost importance (priority)      * @param factor the amount to boost their importances (e.g., 1.25 increases      * importance by 25%)      */
+comment|/**    * Artificially boosts the importance of the given {@link RelSubset}s by a    * given factor.    *    *<p>Iterates over the currently boosted RelSubsets and removes their    * importance boost, forcing a recalculation of the RelSubsets' importances    * (see {@link #recompute(RelSubset)}).    *    *<p>Once RelSubsets have been restored to their normal importance, the    * given RelSubsets have their importances boosted. A RelSubset's boosted    * importance is always less than 1.0 (and never equal to 1.0).    *    * @param subsets RelSubsets to boost importance (priority)    * @param factor  the amount to boost their importances (e.g., 1.25 increases    *                importance by 25%)    */
 specifier|public
 name|void
 name|boostImportance
@@ -924,7 +924,7 @@ block|}
 block|}
 block|}
 block|}
-comment|/**      * Returns the importance of an equivalence class of relational expressions.      * Subset importances are held in a lookup table, and importance changes      * gradually propagate through that table.      *      *<p>If a subset in the same set but with a different calling convention is      * deemed to be important, then this subset has at least half of its      * importance. (This rule is designed to encourage conversions to take      * place.)</p>      */
+comment|/**    * Returns the importance of an equivalence class of relational expressions.    * Subset importances are held in a lookup table, and importance changes    * gradually propagate through that table.    *    *<p>If a subset in the same set but with a different calling convention is    * deemed to be important, then this subset has at least half of its    * importance. (This rule is designed to encourage conversions to take    * place.)</p>    */
 name|double
 name|getImportance
 parameter_list|(
@@ -1032,7 +1032,7 @@ return|return
 name|importance
 return|;
 block|}
-comment|/**      * Adds a rule match. The rule-matches are automatically added to all      * existing {@link PhaseMatchList per-phase rule-match lists} which allow      * the rule referenced by the match.      */
+comment|/**    * Adds a rule match. The rule-matches are automatically added to all    * existing {@link PhaseMatchList per-phase rule-match lists} which allow    * the rule referenced by the match.    */
 name|void
 name|addMatch
 parameter_list|(
@@ -1187,7 +1187,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Computes the<dfn>importance</dfn> of a node. Importance is defined as      * follows:      *      *<ul>      *<li>the root {@link RelSubset} has an importance of 1</li>      *<li>the importance of any other subset is the sum of its importance to      * its parents</li>      *<li>The importance of children is pro-rated according to the cost of the      * children. Consider a node which has a cost of 3, and children with costs      * of 2 and 5. The total cost is 10. If the node has an importance of .5,      * then the children will have importance of .1 and .25. The retains .15      * importance points, to reflect the fact that work needs to be done on the      * node's algorithm.</li>      *</ul>      *      * The formula for the importance I of node n is:      *      *<blockquote>I<sub>n</sub> = Sum<sub>parents p of n</sub>{I<sub>p</sub> .      * W<sub>n, p</sub>}</blockquote>      *      * where W<sub>n, p</sub>, the weight of n within its parent p, is      *      *<blockquote>W<sub>n, p</sub> = Cost<sub>n</sub> / (SelfCost<sub>p</sub> +      * Cost<sub>n<sub>0</sub></sub> + ... + Cost<sub>n<sub>k</sub></sub>)      *</blockquote>      */
+comment|/**    * Computes the<dfn>importance</dfn> of a node. Importance is defined as    * follows:    *    *<ul>    *<li>the root {@link RelSubset} has an importance of 1</li>    *<li>the importance of any other subset is the sum of its importance to    * its parents</li>    *<li>The importance of children is pro-rated according to the cost of the    * children. Consider a node which has a cost of 3, and children with costs    * of 2 and 5. The total cost is 10. If the node has an importance of .5,    * then the children will have importance of .1 and .25. The retains .15    * importance points, to reflect the fact that work needs to be done on the    * node's algorithm.</li>    *</ul>    *    * The formula for the importance I of node n is:    *    *<blockquote>I<sub>n</sub> = Sum<sub>parents p of n</sub>{I<sub>p</sub> .    * W<sub>n, p</sub>}</blockquote>    *    * where W<sub>n, p</sub>, the weight of n within its parent p, is    *    *<blockquote>W<sub>n, p</sub> = Cost<sub>n</sub> / (SelfCost<sub>p</sub> +    * Cost<sub>n<sub>0</sub></sub> + ... + Cost<sub>n<sub>k</sub></sub>)    *</blockquote>    */
 name|double
 name|computeImportance
 parameter_list|(
@@ -1424,7 +1424,7 @@ literal|"}"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Removes the rule match with the highest importance, and returns it.      *      * @pre hasNextMatch()      */
+comment|/**    * Removes the rule match with the highest importance, and returns it.    *    * @pre hasNextMatch()    */
 name|VolcanoRuleMatch
 name|popMatch
 parameter_list|(
@@ -1704,7 +1704,7 @@ return|return
 name|match
 return|;
 block|}
-comment|/**      * Returns the importance of a child to a parent. This is defined by the      * importance of the parent, pro-rated by the cost of the child. For      * example, if the parent has importance = 0.8 and cost 100, then a child      * with cost 50 will have importance 0.4, and a child with cost 25 will have      * importance 0.2.      */
+comment|/**    * Returns the importance of a child to a parent. This is defined by the    * importance of the parent, pro-rated by the cost of the child. For    * example, if the parent has importance = 0.8 and cost 100, then a child    * with cost 50 will have importance 0.4, and a child with cost 25 will have    * importance 0.2.    */
 specifier|private
 name|double
 name|computeImportanceOfChild
@@ -1831,7 +1831,7 @@ return|return
 name|importance
 return|;
 block|}
-comment|/**      * Converts a cost to a scalar quantity.      */
+comment|/**    * Converts a cost to a scalar quantity.    */
 specifier|private
 name|double
 name|toDouble
@@ -2009,7 +2009,7 @@ operator|)
 return|;
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------
-comment|/**      * Compares {@link RelNode} objects according to their cached 'importance'.      */
+comment|/**    * Compares {@link RelNode} objects according to their cached 'importance'.    */
 specifier|private
 class|class
 name|RelImportanceComparator
@@ -2083,7 +2083,7 @@ name|c
 return|;
 block|}
 block|}
-comment|/**      * Compares {@link VolcanoRuleMatch} objects according to their importance.      * Matches which are more important collate earlier. Ties are adjudicated by      * comparing the {@link RelNode#getId id}s of the relational expressions      * matched.      */
+comment|/**    * Compares {@link VolcanoRuleMatch} objects according to their importance.    * Matches which are more important collate earlier. Ties are adjudicated by    * comparing the {@link RelNode#getId id}s of the relational expressions    * matched.    */
 specifier|private
 class|class
 name|RuleMatchImportanceComparator
@@ -2159,18 +2159,18 @@ name|c
 return|;
 block|}
 block|}
-comment|/**      * PhaseMatchList represents a set of {@link VolcanoRuleMatch rule-matches}      * for a particular {@link VolcanoPlannerPhase phase of the planner's      * execution}.      */
+comment|/**    * PhaseMatchList represents a set of {@link VolcanoRuleMatch rule-matches}    * for a particular {@link VolcanoPlannerPhase phase of the planner's    * execution}.    */
 specifier|private
 specifier|static
 class|class
 name|PhaseMatchList
 block|{
-comment|/**          * The VolcanoPlannerPhase that this PhaseMatchList is used in.          */
+comment|/**      * The VolcanoPlannerPhase that this PhaseMatchList is used in.      */
 specifier|final
 name|VolcanoPlannerPhase
 name|phase
 decl_stmt|;
-comment|/**          * Current list of VolcanoRuleMatches for this phase. New rule-matches          * are appended to the end of this list. When removing a rule-match, the          * list is sorted and the highest importance rule-match removed. It is          * important for performance that this list remain mostly sorted.          */
+comment|/**      * Current list of VolcanoRuleMatches for this phase. New rule-matches      * are appended to the end of this list. When removing a rule-match, the      * list is sorted and the highest importance rule-match removed. It is      * important for performance that this list remain mostly sorted.      */
 specifier|final
 name|List
 argument_list|<
@@ -2178,7 +2178,7 @@ name|VolcanoRuleMatch
 argument_list|>
 name|list
 decl_stmt|;
-comment|/**          * A set of rule-match names contained in {@link #list}. Allows fast          * detection of duplicate rule-matches.          */
+comment|/**      * A set of rule-match names contained in {@link #list}. Allows fast      * detection of duplicate rule-matches.      */
 specifier|final
 name|Set
 argument_list|<
@@ -2186,7 +2186,7 @@ name|String
 argument_list|>
 name|names
 decl_stmt|;
-comment|/**          * Multi-map of RelSubset to VolcanoRuleMatches. Used to {@link          * VolcanoRuleMatch#clearCachedImportance() clear} the rule-match's          * cached importance related RelSubset importances are modified (e.g.,          * due to invocation of {@link RuleQueue#boostImportance(Collection,          * double)}).          */
+comment|/**      * Multi-map of RelSubset to VolcanoRuleMatches. Used to {@link      * VolcanoRuleMatch#clearCachedImportance() clear} the rule-match's      * cached importance related RelSubset importances are modified (e.g.,      * due to invocation of {@link RuleQueue#boostImportance(Collection,      * double)}).      */
 specifier|final
 name|MultiMap
 argument_list|<

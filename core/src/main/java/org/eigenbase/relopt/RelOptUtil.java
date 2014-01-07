@@ -250,7 +250,7 @@ init|=
 literal|1.0e-5
 decl_stmt|;
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Returns a list of variables set by a relational expression or its      * descendants.      */
+comment|/**    * Returns a list of variables set by a relational expression or its    * descendants.    */
 specifier|public
 specifier|static
 name|Set
@@ -283,7 +283,7 @@ operator|.
 name|variables
 return|;
 block|}
-comment|/**      * Returns a set of distinct variables set by<code>rel0</code> and used by      *<code>rel1</code>.      */
+comment|/**    * Returns a set of distinct variables set by<code>rel0</code> and used by    *<code>rel1</code>.    */
 specifier|public
 specifier|static
 name|List
@@ -407,7 +407,7 @@ return|return
 name|result
 return|;
 block|}
-comment|/**      * Returns a set of variables used by a relational expression or its      * descendants. The set may contain duplicates. The item type is the same as      * {@link org.eigenbase.rex.RexVariable#getName}      */
+comment|/**    * Returns a set of variables used by a relational expression or its    * descendants. The set may contain duplicates. The item type is the same as    * {@link org.eigenbase.rex.RexVariable#getName}    */
 specifier|public
 specifier|static
 name|Set
@@ -503,7 +503,7 @@ operator|.
 name|variables
 return|;
 block|}
-comment|/**      * Sets a {@link RelVisitor} going on a given relational expression, and      * returns the result.      */
+comment|/**    * Sets a {@link RelVisitor} going on a given relational expression, and    * returns the result.    */
 specifier|public
 specifier|static
 name|void
@@ -544,7 +544,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**      * Returns a list of the types of the fields in a given struct type. The      * list is immutable.      *      * @param type Struct type      *      * @return List of field types      *      * @see org.eigenbase.reltype.RelDataType#getFieldNames()      */
+comment|/**    * Returns a list of the types of the fields in a given struct type. The    * list is immutable.    *    * @param type Struct type    * @return List of field types    * @see org.eigenbase.reltype.RelDataType#getFieldNames()    */
 specifier|public
 specifier|static
 name|List
@@ -826,7 +826,7 @@ return|return
 literal|true
 return|;
 block|}
-comment|/**      * Verifies that a row type being added to an equivalence class matches the      * existing type, raising an assertion if this is not the case.      *      * @param originalRel canonical rel for equivalence class      * @param newRel rel being added to equivalence class      * @param equivalenceClass object representing equivalence class      */
+comment|/**    * Verifies that a row type being added to an equivalence class matches the    * existing type, raising an assertion if this is not the case.    *    * @param originalRel      canonical rel for equivalence class    * @param newRel           rel being added to equivalence class    * @param equivalenceClass object representing equivalence class    */
 specifier|public
 specifier|static
 name|void
@@ -931,7 +931,7 @@ name|s
 argument_list|)
 throw|;
 block|}
-comment|/** Returns a permutation describing where output fields come from. In      * the returned map, value of {@code map.getTargetOpt(i)} is {@code n} if      * field {@code i} projects input field {@code n}, -1 if it is an      * expression. */
+comment|/**    * Returns a permutation describing where output fields come from. In    * the returned map, value of {@code map.getTargetOpt(i)} is {@code n} if    * field {@code i} projects input field {@code n}, -1 if it is an    * expression.    */
 specifier|public
 specifier|static
 name|Mappings
@@ -1088,7 +1088,7 @@ return|return
 name|mapping
 return|;
 block|}
-comment|/**      * Creates a plan suitable for use in<code>EXISTS</code> or<code>IN</code>      * statements. See {@link      * org.eigenbase.sql2rel.SqlToRelConverter#convertExists} Note: this      * implementation of createExistsPlan is only called from      * net.sf.farrago.fennel.rel. The last two arguments do not apply to      * those invocations and can be removed from the method.      *      *<p>      *      * @param cluster Cluster      * @param seekRel A query rel, for example the resulting rel from 'select *      * from emp' or 'values (1,2,3)' or '('Foo', 34)'.      * @param conditions May be null      * @param extraExpr Column expression to add. "TRUE" for EXISTS and IN      * @param extraName Name of expression to add.      *      * @return relational expression which outer joins a boolean condition      * column      *      * @pre extraExpr == null || extraName != null      */
+comment|/**    * Creates a plan suitable for use in<code>EXISTS</code> or<code>IN</code>    * statements. See {@link    * org.eigenbase.sql2rel.SqlToRelConverter#convertExists} Note: this    * implementation of createExistsPlan is only called from    * net.sf.farrago.fennel.rel. The last two arguments do not apply to    * those invocations and can be removed from the method.    *    *    *    * @param cluster    Cluster    * @param seekRel    A query rel, for example the resulting rel from 'select *    *                   from emp' or 'values (1,2,3)' or '('Foo', 34)'.    * @param conditions May be null    * @param extraExpr  Column expression to add. "TRUE" for EXISTS and IN    * @param extraName  Name of expression to add.    * @return relational expression which outer joins a boolean condition    * column    * @pre extraExpr == null || extraName != null    */
 specifier|public
 specifier|static
 name|RelNode
@@ -1639,7 +1639,7 @@ return|return
 name|ret
 return|;
 block|}
-comment|/**      * Creates a ProjectRel which accomplishes a rename.      *      * @param outputType a row type descriptor whose field names the generated      * ProjectRel must match      * @param rel the rel whose output is to be renamed; rel.getRowType() must      * be the same as outputType except for field names      *      * @return generated relational expression      */
+comment|/**    * Creates a ProjectRel which accomplishes a rename.    *    * @param outputType a row type descriptor whose field names the generated    *                   ProjectRel must match    * @param rel        the rel whose output is to be renamed; rel.getRowType()    *                   must be the same as outputType except for field names    * @return generated relational expression    */
 specifier|public
 specifier|static
 name|RelNode
@@ -1842,7 +1842,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates a filter which will remove rows containing NULL values.      *      * @param rel the rel to be filtered      * @param fieldOrdinals array of 0-based field ordinals to filter, or null      * for all fields      *      * @return filtered rel      */
+comment|/**    * Creates a filter which will remove rows containing NULL values.    *    * @param rel           the rel to be filtered    * @param fieldOrdinals array of 0-based field ordinals to filter, or null    *                      for all fields    * @return filtered rel    */
 specifier|public
 specifier|static
 name|RelNode
@@ -2060,7 +2060,7 @@ name|condition
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates a projection which casts a rel's output to a desired row type.      *      * @param rel producer of rows to be converted      * @param castRowType row type after cast      * @param rename if true, use field names from castRowType; if false,      * preserve field names from rel      *      * @return conversion rel      */
+comment|/**    * Creates a projection which casts a rel's output to a desired row type.    *    * @param rel         producer of rows to be converted    * @param castRowType row type after cast    * @param rename      if true, use field names from castRowType; if false,    *                    preserve field names from rel    * @return conversion rel    */
 specifier|public
 specifier|static
 name|RelNode
@@ -2167,7 +2167,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**      * Creates an AggregateRel which removes all duplicates from the result of      * an underlying rel.      *      * @param rel underlying rel      *      * @return rel implementing SingleValueAgg      */
+comment|/**    * Creates an AggregateRel which removes all duplicates from the result of    * an underlying rel.    *    * @param rel underlying rel    * @return rel implementing SingleValueAgg    */
 specifier|public
 specifier|static
 name|RelNode
@@ -2306,7 +2306,7 @@ name|aggCalls
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates an AggregateRel which removes all duplicates from the result of      * an underlying rel.      *      * @param rel underlying rel      *      * @return rel implementing DISTINCT      */
+comment|/**    * Creates an AggregateRel which removes all duplicates from the result of    * an underlying rel.    *    * @param rel underlying rel    * @return rel implementing DISTINCT    */
 specifier|public
 specifier|static
 name|RelNode
@@ -2540,7 +2540,7 @@ return|return
 literal|true
 return|;
 block|}
-comment|/**      * Splits out the equi-join components of a join condition, and returns      * what's left. For example, given the condition      *      *<blockquote><code>L.A = R.X AND L.B = L.C AND (L.D = 5 OR L.E =      * R.Y)</code></blockquote>      *      * returns      *      *<ul>      *<li>leftKeys = {A}      *<li>rightKeys = {X}      *<li>rest = L.B = L.C AND (L.D = 5 OR L.E = R.Y)</li>      *</ul>      *      * @param left left input to join      * @param right right input to join      * @param condition join condition      * @param leftKeys The ordinals of the fields from the left input which are      * equi-join keys      * @param rightKeys The ordinals of the fields from the right input which      * are equi-join keys      *      * @return remaining join filters that are not equijoins; may return a      * {@link RexLiteral} true, but never null      */
+comment|/**    * Splits out the equi-join components of a join condition, and returns    * what's left. For example, given the condition    *    *<blockquote><code>L.A = R.X AND L.B = L.C AND (L.D = 5 OR L.E =    * R.Y)</code></blockquote>    *    * returns    *    *<ul>    *<li>leftKeys = {A}    *<li>rightKeys = {X}    *<li>rest = L.B = L.C AND (L.D = 5 OR L.E = R.Y)</li>    *</ul>    *    * @param left      left input to join    * @param right     right input to join    * @param condition join condition    * @param leftKeys  The ordinals of the fields from the left input which are    *                  equi-join keys    * @param rightKeys The ordinals of the fields from the right input which    *                  are equi-join keys    * @return remaining join filters that are not equijoins; may return a    * {@link RexLiteral} true, but never null    */
 specifier|public
 specifier|static
 name|RexNode
@@ -2619,7 +2619,7 @@ literal|false
 argument_list|)
 return|;
 block|}
-comment|/**      * Returns whether a join condition an "equi-join" condition.      *      * @param left Left input of join      * @param right Right input of join      * @param condition Condition      * @return Whether condition is equi-join      */
+comment|/**    * Returns whether a join condition an "equi-join" condition.    *    * @param left      Left input of join    * @param right     Right input of join    * @param condition Condition    * @return Whether condition is equi-join    */
 specifier|public
 specifier|static
 name|boolean
@@ -2705,7 +2705,7 @@ operator|==
 literal|0
 return|;
 block|}
-comment|/**      * Splits out the equi-join (and optionally, a single non-equi) components      * of a join condition, and returns what's left. Projection might be      * required by the caller to provide join keys that are not direct field      * references.      *      * @param sysFieldList list of system fields      * @param leftRel left join input      * @param rightRel right join input      * @param condition join condition      * @param leftJoinKeys The join keys from the left input which are equi-join      * keys      * @param rightJoinKeys The join keys from the right input which are      * equi-join keys      * @param filterNulls The join key positions for which null values will not      * match. null values only match for the "is not distinct from" condition.      * @param rangeOp if null, only locate equi-joins; otherwise, locate a      * single non-equi join predicate and return its operator in this list;      * join keys associated with the non-equi join predicate are at the end      * of the key lists returned      *      * @return What's left      */
+comment|/**    * Splits out the equi-join (and optionally, a single non-equi) components    * of a join condition, and returns what's left. Projection might be    * required by the caller to provide join keys that are not direct field    * references.    *    * @param sysFieldList  list of system fields    * @param leftRel       left join input    * @param rightRel      right join input    * @param condition     join condition    * @param leftJoinKeys  The join keys from the left input which are equi-join    *                      keys    * @param rightJoinKeys The join keys from the right input which are    *                      equi-join keys    * @param filterNulls   The join key positions for which null values will not    *                      match. null values only match for the "is not distinct    *                      from" condition.    * @param rangeOp       if null, only locate equi-joins; otherwise, locate a    *                      single non-equi join predicate and return its operator    *                      in this list; join keys associated with the non-equi    *                      join predicate are at the end of the key lists    *                      returned    * @return What's left    */
 specifier|public
 specifier|static
 name|RexNode
@@ -4919,7 +4919,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Adding projection to the inputs of a join to produce the required join      * keys.      *      * @param inputRels inputs to a join      * @param leftJoinKeys expressions for LHS of join key      * @param rightJoinKeys expressions for RHS of join key      * @param systemColCount number of system columns, usually zero. These      * columns are projected at the leading edge of the output row.      * @param leftKeys on return this contains the join key positions from the      * new project rel on the LHS.      * @param rightKeys on return this contains the join key positions from the      * new project rel on the RHS.      * @param outputProj on return this contains the positions of the original      * join output in the (to be formed by caller) LhxJoinRel. Caller needs to      * be responsible for adding projection on the new join output.      */
+comment|/**    * Adding projection to the inputs of a join to produce the required join    * keys.    *    * @param inputRels      inputs to a join    * @param leftJoinKeys   expressions for LHS of join key    * @param rightJoinKeys  expressions for RHS of join key    * @param systemColCount number of system columns, usually zero. These    *                       columns are projected at the leading edge of the    *                       output row.    * @param leftKeys       on return this contains the join key positions from    *                       the new project rel on the LHS.    * @param rightKeys      on return this contains the join key positions from    *                       the new project rel on the RHS.    * @param outputProj     on return this contains the positions of the original    *                       join output in the (to be formed by caller)    *                       LhxJoinRel. Caller needs to be responsible for adding    *                       projection on the new join output.    */
 specifier|public
 specifier|static
 name|void
@@ -5487,7 +5487,7 @@ operator|=
 name|rightRel
 expr_stmt|;
 block|}
-comment|/**      * Creates a projection on top of a join, if the desired projection is a      * subset of the join columns      *      * @param outputProj desired projection; if null, return original join node      * @param joinRel the join node      *      * @return projected join node or the original join if projection is      * unnecessary      */
+comment|/**    * Creates a projection on top of a join, if the desired projection is a    * subset of the join columns    *    * @param outputProj desired projection; if null, return original join node    * @param joinRel    the join node    * @return projected join node or the original join if projection is    * unnecessary    */
 specifier|public
 specifier|static
 name|RelNode
@@ -5713,7 +5713,7 @@ name|PROJECT
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Dumps a plan as a string.      *      * @param header Header to print before the plan. Ignored if the format is      * XML.      * @param rel Relational expression to explain.      * @param asXml Whether to format as XML.      * @param detailLevel Detail level.      *      * @return Plan      */
+comment|/**    * Dumps a plan as a string.    *    * @param header      Header to print before the plan. Ignored if the format    *                    is XML.    * @param rel         Relational expression to explain.    * @param asXml       Whether to format as XML.    * @param detailLevel Detail level.    * @return Plan    */
 specifier|public
 specifier|static
 name|String
@@ -5820,7 +5820,7 @@ name|toString
 argument_list|()
 return|;
 block|}
-comment|/**      * Creates the row type descriptor for the result of a DML operation, which      * is a single column named ROWCOUNT of type BIGINT for INSERT;      * a single column named PLAN for EXPLAIN.      *      * @param kind Kind of node      * @param typeFactory factory to use for creating type descriptor      *      * @return created type      */
+comment|/**    * Creates the row type descriptor for the result of a DML operation, which    * is a single column named ROWCOUNT of type BIGINT for INSERT;    * a single column named PLAN for EXPLAIN.    *    * @param kind        Kind of node    * @param typeFactory factory to use for creating type descriptor    * @return created type    */
 specifier|public
 specifier|static
 name|RelDataType
@@ -5913,7 +5913,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**      * Creates a reference to an output field of a relational expression.      *      * @param rel Relational expression      * @param i Field ordinal; if negative, counts from end, so -1 means the      * last field      */
+comment|/**    * Creates a reference to an output field of a relational expression.    *    * @param rel Relational expression    * @param i   Field ordinal; if negative, counts from end, so -1 means the    *            last field    */
 specifier|public
 specifier|static
 name|RexNode
@@ -5983,7 +5983,7 @@ name|i
 argument_list|)
 return|;
 block|}
-comment|/**      * Returns whether two types are equal using '='.      *      * @param desc1 Description of first type      * @param type1 First type      * @param desc2 Description of second type      * @param type2 Second type      * @param fail Whether to assert if they are not equal      *      * @return Whether the types are equal      */
+comment|/**    * Returns whether two types are equal using '='.    *    * @param desc1 Description of first type    * @param type1 First type    * @param desc2 Description of second type    * @param type2 Second type    * @param fail  Whether to assert if they are not equal    * @return Whether the types are equal    */
 specifier|public
 specifier|static
 name|boolean
@@ -6054,7 +6054,7 @@ return|return
 literal|true
 return|;
 block|}
-comment|/**      * Returns whether two types are equal using {@link      * #areRowTypesEqual(RelDataType, RelDataType, boolean)}. Both types must      * not be null.      *      * @param desc1 Description of role of first type      * @param type1 First type      * @param desc2 Description of role of second type      * @param type2 Second type      * @param fail Whether to assert if they are not equal      *      * @return Whether the types are equal      */
+comment|/**    * Returns whether two types are equal using {@link    * #areRowTypesEqual(RelDataType, RelDataType, boolean)}. Both types must    * not be null.    *    * @param desc1 Description of role of first type    * @param type1 First type    * @param desc2 Description of role of second type    * @param type2 Second type    * @param fail  Whether to assert if they are not equal    * @return Whether the types are equal    */
 specifier|public
 specifier|static
 name|boolean
@@ -6132,7 +6132,7 @@ return|return
 literal|true
 return|;
 block|}
-comment|/**      * Returns a translation of the<code>IS DISTINCT FROM</code> (or<code>IS      * NOT DISTINCT FROM</code>) sql operator.      *      * @param neg if false, returns a translation of IS NOT DISTINCT FROM      */
+comment|/**    * Returns a translation of the<code>IS DISTINCT FROM</code> (or<code>IS    * NOT DISTINCT FROM</code>) sql operator.    *    * @param neg if false, returns a translation of IS NOT DISTINCT FROM    */
 specifier|public
 specifier|static
 name|RexNode
@@ -6502,7 +6502,7 @@ name|whenThenElse
 argument_list|)
 return|;
 block|}
-comment|/**      * Converts a relational expression to a string, showing just basic      * attributes.      */
+comment|/**    * Converts a relational expression to a string, showing just basic    * attributes.    */
 specifier|public
 specifier|static
 name|String
@@ -6524,7 +6524,7 @@ name|EXPPLAN_ATTRIBUTES
 argument_list|)
 return|;
 block|}
-comment|/**      * Converts a relational expression to a string.      */
+comment|/**    * Converts a relational expression to a string.    */
 specifier|public
 specifier|static
 name|String
@@ -6589,7 +6589,7 @@ name|toString
 argument_list|()
 return|;
 block|}
-comment|/**      * Renames a relational expression to make its field names the same as      * another row type. If the row type is already identical, or if the row      * type is too different (the fields are different in number or type) does      * nothing.      *      * @param rel Relational expression      * @param desiredRowType Desired row type (including desired field names)      *      * @return Renamed relational expression, or the original expression if      * there is nothing to do or nothing we<em>can</em> do.      */
+comment|/**    * Renames a relational expression to make its field names the same as    * another row type. If the row type is already identical, or if the row    * type is too different (the fields are different in number or type) does    * nothing.    *    * @param rel            Relational expression    * @param desiredRowType Desired row type (including desired field names)    * @return Renamed relational expression, or the original expression if    * there is nothing to do or nothing we<em>can</em> do.    */
 specifier|public
 specifier|static
 name|RelNode
@@ -6746,7 +6746,7 @@ name|toString
 argument_list|()
 return|;
 block|}
-comment|/**      * Decomposes a predicate into a list of expressions that are AND'ed      * together.      *      * @param rexPredicate predicate to be analyzed      * @param rexList list of decomposed RexNodes      */
+comment|/**    * Decomposes a predicate into a list of expressions that are AND'ed    * together.    *    * @param rexPredicate predicate to be analyzed    * @param rexList      list of decomposed RexNodes    */
 specifier|public
 specifier|static
 name|void
@@ -6824,7 +6824,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Decomposes a predicate into a list of expressions that are AND'ed      * together, and a list of expressions that are preceded by NOT.      *      *<p>For example, {@code a AND NOT b AND NOT (c and d) AND TRUE AND NOT      * FALSE} returns {@code rexList = [a], notList = [b, c AND d]}.</p>      *      *<p>TRUE and NOT FALSE expressions are ignored. FALSE and NOT TRUE      * expressions are placed on {@code rexList} and {@code notList} as other      * expressions.</p>      *      *<p>For example, {@code a AND TRUE AND NOT TRUE} returns      * {@code rexList = [a], notList = [TRUE]}.</p>      *      * @param rexPredicate predicate to be analyzed      * @param rexList list of decomposed RexNodes (except those with NOT)      * @param notList list of decomposed RexNodes that were prefixed NOT      */
+comment|/**    * Decomposes a predicate into a list of expressions that are AND'ed    * together, and a list of expressions that are preceded by NOT.    *    *<p>For example, {@code a AND NOT b AND NOT (c and d) AND TRUE AND NOT    * FALSE} returns {@code rexList = [a], notList = [b, c AND d]}.</p>    *    *<p>TRUE and NOT FALSE expressions are ignored. FALSE and NOT TRUE    * expressions are placed on {@code rexList} and {@code notList} as other    * expressions.</p>    *    *<p>For example, {@code a AND TRUE AND NOT TRUE} returns    * {@code rexList = [a], notList = [TRUE]}.</p>    *    * @param rexPredicate predicate to be analyzed    * @param rexList      list of decomposed RexNodes (except those with NOT)    * @param notList      list of decomposed RexNodes that were prefixed NOT    */
 specifier|public
 specifier|static
 name|void
@@ -6949,7 +6949,7 @@ expr_stmt|;
 break|break;
 block|}
 block|}
-comment|/**      * Decomposes a predicate into a list of expressions that are OR'ed      * together.      *      * @param rexPredicate predicate to be analyzed      * @param rexList list of decomposed RexNodes      */
+comment|/**    * Decomposes a predicate into a list of expressions that are OR'ed    * together.    *    * @param rexPredicate predicate to be analyzed    * @param rexList      list of decomposed RexNodes    */
 specifier|public
 specifier|static
 name|void
@@ -7027,7 +7027,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Returns a condition decomposed by AND.      *      *<p>For example, {@code conjunctions(TRUE)} returns the empty list.</p>      */
+comment|/**    * Returns a condition decomposed by AND.    *    *<p>For example, {@code conjunctions(TRUE)} returns the empty list.</p>    */
 specifier|public
 specifier|static
 name|List
@@ -7065,7 +7065,7 @@ return|return
 name|list
 return|;
 block|}
-comment|/**      * Returns a condition decomposed by OR.      *      *<p>For example, {@code disjunctions(FALSE)} returns the empty list.</p>      */
+comment|/**    * Returns a condition decomposed by OR.    *    *<p>For example, {@code disjunctions(FALSE)} returns the empty list.</p>    */
 specifier|public
 specifier|static
 name|List
@@ -7103,7 +7103,7 @@ return|return
 name|list
 return|;
 block|}
-comment|/**      * Ands two sets of join filters together, either of which can be null.      *      * @param rexBuilder rexBuilder to create AND expression      * @param left filter on the left that the right will be AND'd to      * @param right filter on the right      *      * @return AND'd filter      */
+comment|/**    * Ands two sets of join filters together, either of which can be null.    *    * @param rexBuilder rexBuilder to create AND expression    * @param left       filter on the left that the right will be AND'd to    * @param right      filter on the right    * @return AND'd filter    */
 specifier|public
 specifier|static
 name|RexNode
@@ -7197,7 +7197,7 @@ return|return
 name|left
 return|;
 block|}
-comment|/**      * Adjusts key values in a list by some fixed amount.      *      * @param keys list of key values      * @param adjustment the amount to adjust the key values by      *      * @return modified list      */
+comment|/**    * Adjusts key values in a list by some fixed amount.    *    * @param keys       list of key values    * @param adjustment the amount to adjust the key values by    * @return modified list    */
 specifier|public
 specifier|static
 name|List
@@ -7266,7 +7266,7 @@ return|return
 name|newKeys
 return|;
 block|}
-comment|/**      * Classifies filters according to where they should be processed. They      * either stay where they are, are pushed to the join (if they originated      * from above the join), or are pushed to one of the children. Filters that      * are pushed are added to list passed in as input parameters.      *      * @param joinRel join node      * @param filters filters to be classified      * @param pushJoin true if filters originated from above the join node and      * the join is an inner join      * @param pushLeft true if filters can be pushed to the left      * @param pushRight true if filters can be pushed to the right      * @param joinFilters list of filters to push to the join      * @param leftFilters list of filters to push to the left child      * @param rightFilters list of filters to push to the right child      *      * @return true if at least one filter was pushed      */
+comment|/**    * Classifies filters according to where they should be processed. They    * either stay where they are, are pushed to the join (if they originated    * from above the join), or are pushed to one of the children. Filters that    * are pushed are added to list passed in as input parameters.    *    * @param joinRel      join node    * @param filters      filters to be classified    * @param pushJoin     true if filters originated from above the join node and    *                     the join is an inner join    * @param pushLeft     true if filters can be pushed to the left    * @param pushRight    true if filters can be pushed to the right    * @param joinFilters  list of filters to push to the join    * @param leftFilters  list of filters to push to the left child    * @param rightFilters list of filters to push to the right child    * @return true if at least one filter was pushed    */
 specifier|public
 specifier|static
 name|boolean
@@ -7770,7 +7770,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**      * Splits a filter into two lists, depending on whether or not the filter      * only references its child input      *      * @param childBitmap Fields in the child      * @param predicate filters that will be split      * @param pushable returns the list of filters that can be pushed to the      * child input      * @param notPushable returns the list of filters that cannot be pushed to      * the child input      */
+comment|/**    * Splits a filter into two lists, depending on whether or not the filter    * only references its child input    *    * @param childBitmap Fields in the child    * @param predicate   filters that will be split    * @param pushable    returns the list of filters that can be pushed to the    *                    child input    * @param notPushable returns the list of filters that cannot be pushed to    *                    the child input    */
 specifier|public
 specifier|static
 name|void
@@ -7852,7 +7852,7 @@ expr_stmt|;
 block|}
 block|}
 block|}
-comment|/**      * Splits a join condition.      *      * @param left Left input to the join      * @param right Right input to the join      * @param condition Join condition      *      * @return Array holding the output; neither element is null. Element 0 is      * the equi-join condition (or TRUE if empty); Element 1 is rest of the      * condition (or TRUE if empty).      */
+comment|/**    * Splits a join condition.    *    * @param left      Left input to the join    * @param right     Right input to the join    * @param condition Join condition    * @return Array holding the output; neither element is null. Element 0 is    * the equi-join condition (or TRUE if empty); Element 1 is rest of the    * condition (or TRUE if empty).    */
 specifier|public
 specifier|static
 name|RexNode
@@ -8109,7 +8109,7 @@ name|nonEquiCondition
 block|}
 return|;
 block|}
-comment|/**      * Determines if a projection and its input reference identical input      * references.      *      * @param project projection being examined      * @param checkNames if true, also compare that the names of the project      * fields and its child fields      *      * @return if checkNames is false, true is returned if the project and its      * child reference the same input references, regardless of the names of the      * project and child fields; if checkNames is true, then true is returned if      * the input references are the same but the field names are different      */
+comment|/**    * Determines if a projection and its input reference identical input    * references.    *    * @param project    projection being examined    * @param checkNames if true, also compare that the names of the project    *                   fields and its child fields    * @return if checkNames is false, true is returned if the project and its    * child reference the same input references, regardless of the names of the    * project and child fields; if checkNames is true, then true is returned if    * the input references are the same but the field names are different    */
 specifier|public
 specifier|static
 name|boolean
@@ -8329,7 +8329,7 @@ name|namesDifferent
 operator|)
 return|;
 block|}
-comment|/**      * Creates projection expressions reflecting the swapping of a join's input.      *      * @param newJoin the RelNode corresponding to the join with its inputs      * swapped      * @param origJoin original JoinRel      * @param origOrder if true, create the projection expressions to reflect      * the original (pre-swapped) join projection; otherwise, create the      * projection to reflect the order of the swapped projection      *      * @return array of expression representing the swapped join inputs      */
+comment|/**    * Creates projection expressions reflecting the swapping of a join's input.    *    * @param newJoin   the RelNode corresponding to the join with its inputs    *                  swapped    * @param origJoin  original JoinRel    * @param origOrder if true, create the projection expressions to reflect    *                  the original (pre-swapped) join projection; otherwise,    *                  create the projection to reflect the order of the swapped    *                  projection    * @return array of expression representing the swapped join inputs    */
 specifier|public
 specifier|static
 name|List
@@ -8491,7 +8491,7 @@ return|return
 name|exps
 return|;
 block|}
-comment|/**      * Converts a filter to the new filter that would result if the filter is      * pushed past a ProjectRel that it currently is referencing.      *      * @param filter the filter to be converted      * @param projRel project rel underneath the filter      *      * @return converted filter      */
+comment|/**    * Converts a filter to the new filter that would result if the filter is    * pushed past a ProjectRel that it currently is referencing.    *    * @param filter  the filter to be converted    * @param projRel project rel underneath the filter    * @return converted filter    */
 specifier|public
 specifier|static
 name|RexNode
@@ -8608,7 +8608,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates a new {@link MultiJoinRel} to reflect projection references from      * a {@link ProjectRel} that is on top of the {@link MultiJoinRel}.      *      * @param multiJoin the original MultiJoinRel      * @param project the ProjectRel on top of the MultiJoinRel      *      * @return the new MultiJoinRel      */
+comment|/**    * Creates a new {@link MultiJoinRel} to reflect projection references from    * a {@link ProjectRel} that is on top of the {@link MultiJoinRel}.    *    * @param multiJoin the original MultiJoinRel    * @param project   the ProjectRel on top of the MultiJoinRel    * @return the new MultiJoinRel    */
 specifier|public
 specifier|static
 name|MultiJoinRel
@@ -8897,7 +8897,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/** Returns a shallow copy of a relational expression with a particular      * input replaced. */
+comment|/**    * Returns a shallow copy of a relational expression with a particular    * input replaced.    */
 specifier|public
 specifier|static
 name|RelNode
@@ -8955,7 +8955,7 @@ name|inputs
 argument_list|)
 return|;
 block|}
-comment|/** Creates a {@link org.eigenbase.rel.ProjectRel} that projects particular      * fields of its input, according to a mapping. */
+comment|/**    * Creates a {@link org.eigenbase.rel.ProjectRel} that projects particular    * fields of its input, according to a mapping.    */
 specifier|public
 specifier|static
 name|ProjectRel
@@ -9531,7 +9531,7 @@ expr_stmt|;
 block|}
 block|}
 block|}
-comment|/**      * Visitor which builds a bitmap of the inputs used by an expression.      */
+comment|/**    * Visitor which builds a bitmap of the inputs used by an expression.    */
 specifier|public
 specifier|static
 class|class
@@ -9601,7 +9601,7 @@ operator|=
 name|extraFields
 expr_stmt|;
 block|}
-comment|/** Returns a bit set describing the inputs used by an expression. */
+comment|/**      * Returns a bit set describing the inputs used by an expression.      */
 specifier|public
 specifier|static
 name|BitSet
@@ -9634,7 +9634,7 @@ return|return
 name|inputBitSet
 return|;
 block|}
-comment|/** Returns a bit set describing the inputs used by a collection of          * project expressions and an optional condition. */
+comment|/**      * Returns a bit set describing the inputs used by a collection of      * project expressions and an optional condition.      */
 specifier|public
 specifier|static
 name|BitSet
@@ -9773,7 +9773,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**      * Walks an expression tree, converting the index of RexInputRefs based on      * some adjustment factor.      */
+comment|/**    * Walks an expression tree, converting the index of RexInputRefs based on    * some adjustment factor.    */
 specifier|public
 specifier|static
 class|class
@@ -9825,7 +9825,7 @@ name|int
 index|[]
 name|adjustments
 decl_stmt|;
-comment|/**          * @param rexBuilder builder for creating new RexInputRefs          * @param srcFields fields where the RexInputRefs originally originated          * from; if null, a new RexInputRef is always created, referencing the          * input from destFields corresponding to its current index value          * @param destFields fields that the new RexInputRefs will be          * referencing; if null, use the type information from the source field          * when creating the new RexInputRef          * @param leftDestFields in the case where the destination is a join,          * these are the fields from the left join input          * @param rightDestFields in the case where the destination is a join,          * these are the fields from the right join input          * @param adjustments the amount to adjust each field by          */
+comment|/**      * @param rexBuilder      builder for creating new RexInputRefs      * @param srcFields       fields where the RexInputRefs originated      *                        from; if null, a new RexInputRef is always      *                        created, referencing the input from destFields      *                        corresponding to its current index value      * @param destFields      fields that the new RexInputRefs will be      *                        referencing; if null, use the type information      *                        from the source field when creating the new      *                        RexInputRef      * @param leftDestFields  in the case where the destination is a join,      *                        these are the fields from the left join input      * @param rightDestFields in the case where the destination is a join,      *                        these are the fields from the right join input      * @param adjustments     the amount to adjust each field by      */
 specifier|private
 name|RexInputConverter
 parameter_list|(

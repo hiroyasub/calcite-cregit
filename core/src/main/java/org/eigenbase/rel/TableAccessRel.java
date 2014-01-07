@@ -58,7 +58,7 @@ extends|extends
 name|TableAccessRelBase
 block|{
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a TableAccessRel.      *      * @param cluster Cluster      * @param table Table      */
+comment|/**    * Creates a TableAccessRel.    *    * @param cluster Cluster    * @param table   Table    */
 specifier|public
 name|TableAccessRel
 parameter_list|(
@@ -86,7 +86,7 @@ name|table
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Creates a TableAccessRel by parsing serialized output. */
+comment|/**    * Creates a TableAccessRel by parsing serialized output.    */
 specifier|public
 name|TableAccessRel
 parameter_list|(

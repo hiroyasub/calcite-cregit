@@ -80,7 +80,7 @@ name|SqlValidatorNamespace
 name|namespace
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a DelegatingNamespace.      *      * @param namespace Underlying namespace, to delegate to      */
+comment|/**    * Creates a DelegatingNamespace.    *    * @param namespace Underlying namespace, to delegate to    */
 specifier|protected
 name|DelegatingNamespace
 parameter_list|(

@@ -83,7 +83,7 @@ literal|"remove before optiq-0.4.18"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Shorthand for      * {@link RelOptRuleOperandChildPolicy#ANY}.      *      * @deprecated Will be removed before optiq-0.4.18.      */
+comment|/**    * Shorthand for    * {@link RelOptRuleOperandChildPolicy#ANY}.    *    * @deprecated Will be removed before optiq-0.4.18.    */
 specifier|public
 specifier|static
 specifier|final
@@ -95,19 +95,19 @@ operator|.
 name|ANY
 decl_stmt|;
 comment|//~ Instance fields --------------------------------------------------------
-comment|/**      * Description of rule, must be unique within planner. Default is the name      * of the class sans package name, but derived classes are encouraged to      * override.      */
+comment|/**    * Description of rule, must be unique within planner. Default is the name    * of the class sans package name, but derived classes are encouraged to    * override.    */
 specifier|protected
 specifier|final
 name|String
 name|description
 decl_stmt|;
-comment|/**      * Root of operand tree.      */
+comment|/**    * Root of operand tree.    */
 specifier|private
 specifier|final
 name|RelOptRuleOperand
 name|operand
 decl_stmt|;
-comment|/**      * Flattened list of operands.      */
+comment|/**    * Flattened list of operands.    */
 specifier|public
 name|List
 argument_list|<
@@ -116,7 +116,7 @@ argument_list|>
 name|operands
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a rule.      *      * @param operand root operand, must not be null      */
+comment|/**    * Creates a rule.    *    * @param operand root operand, must not be null    */
 specifier|public
 name|RelOptRule
 parameter_list|(
@@ -132,7 +132,7 @@ literal|null
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Creates a rule with an explicit description.      *      * @param operand root operand, must not be null      *      * @param description Description, or null to guess description      */
+comment|/**    * Creates a rule with an explicit description.    *    * @param operand     root operand, must not be null    * @param description Description, or null to guess description    */
 specifier|public
 name|RelOptRule
 parameter_list|(
@@ -193,7 +193,7 @@ argument_list|()
 expr_stmt|;
 block|}
 comment|//~ Methods for creating operands ------------------------------------------
-comment|/**      * Creates an operand that matches a relational expression that has no      * children.      *      * @param clazz Class of relational expression to match (must not be null)      * @return Operand      */
+comment|/**    * Creates an operand that matches a relational expression that has no    * children.    *    * @param clazz Class of relational expression to match (must not be null)    * @return Operand    */
 specifier|public
 specifier|static
 name|RelOptRuleOperand
@@ -223,7 +223,7 @@ name|operandList
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates an operand that matches a relational expression that has no      * children.      *      * @param clazz Class of relational expression to match (must not be null)      * @param trait Trait to match, or null to match any trait      * @return Operand      */
+comment|/**    * Creates an operand that matches a relational expression that has no    * children.    *    * @param clazz Class of relational expression to match (must not be null)    * @param trait Trait to match, or null to match any trait    * @return Operand    */
 specifier|public
 specifier|static
 name|RelOptRuleOperand
@@ -256,7 +256,7 @@ name|operandList
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates an operand that matches a relational expression with a given      * list of children.      *      *<p>Shorthand for<code>operand(clazz, some(...))</code>.      *      *<p>If you wish to match a relational expression that has no children      * (that is, a leaf node), write<code>operand(clazz, none())</code></p>.      *      *<p>If you wish to match a relational expression that has any number of      * children, write<code>operand(clazz, any())</code></p>.      *      * @param clazz Class of relational expression to match (must not be null)      * @return Operand      */
+comment|/**    * Creates an operand that matches a relational expression with a given    * list of children.    *    *<p>Shorthand for<code>operand(clazz, some(...))</code>.    *    *<p>If you wish to match a relational expression that has no children    * (that is, a leaf node), write<code>operand(clazz, none())</code></p>.    *    *<p>If you wish to match a relational expression that has any number of    * children, write<code>operand(clazz, any())</code></p>.    *    * @param clazz Class of relational expression to match (must not be null)    * @return Operand    */
 specifier|public
 specifier|static
 name|RelOptRuleOperand
@@ -293,7 +293,7 @@ argument_list|)
 return|;
 block|}
 comment|//~ Methods for creating lists of child operands ---------------------------
-comment|/**      * Creates a list of child operands that matches child relational      * expressions in the order they appear.      *      * @param first First child operand      * @param rest Remaining child operands (may be empty)      */
+comment|/**    * Creates a list of child operands that matches child relational    * expressions in the order they appear.    *    * @param first First child operand    * @param rest  Remaining child operands (may be empty)    */
 specifier|public
 specifier|static
 name|RelOptRuleOperandChildren
@@ -338,7 +338,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates a list of child operands that matches child relational      * expressions in any order.      *      *<p>This is useful when matching a relational expression which      * can have a variable number of children. For example, the rule to      * eliminate empty children of a Union would have operands      *      *<blockquote>Operand(UnionRel, true, Operand(EmptyRel))</blockquote>      *      * and given the relational expressions      *      *<blockquote>UnionRel(FilterRel, EmptyRel, ProjectRel)</blockquote>      *      * would fire the rule with arguments      *      *<blockquote>{Union, Empty}</blockquote>      *      * It is up to the rule to deduce the other children, or indeed the position      * of the matched child.</p>      *      * @param first First child operand      * @param rest Remaining child operands (may be empty)      */
+comment|/**    * Creates a list of child operands that matches child relational    * expressions in any order.    *    *<p>This is useful when matching a relational expression which    * can have a variable number of children. For example, the rule to    * eliminate empty children of a Union would have operands    *    *<blockquote>Operand(UnionRel, true, Operand(EmptyRel))</blockquote>    *    * and given the relational expressions    *    *<blockquote>UnionRel(FilterRel, EmptyRel, ProjectRel)</blockquote>    *    * would fire the rule with arguments    *    *<blockquote>{Union, Empty}</blockquote>    *    * It is up to the rule to deduce the other children, or indeed the position    * of the matched child.</p>    *    * @param first First child operand    * @param rest  Remaining child operands (may be empty)    */
 specifier|public
 specifier|static
 name|RelOptRuleOperandChildren
@@ -383,7 +383,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates an empty list of child operands.      */
+comment|/**    * Creates an empty list of child operands.    */
 specifier|public
 specifier|static
 name|RelOptRuleOperandChildren
@@ -396,7 +396,7 @@ operator|.
 name|LEAF_CHILDREN
 return|;
 block|}
-comment|/**      * Creates a list of child operands that signifies that the operand matches      * any number of child relational expressions.      */
+comment|/**    * Creates a list of child operands that signifies that the operand matches    * any number of child relational expressions.    */
 specifier|public
 specifier|static
 name|RelOptRuleOperandChildren
@@ -410,7 +410,7 @@ name|ANY_CHILDREN
 return|;
 block|}
 comment|//~ Obsolete methods for creating operands ---------------------------------
-comment|/**      * Creates an operand that matches a relational expression that has no      * children.      *      * @param clazz Class of relational expression to match (must not be null)      * @return Operand      *      * @deprecated Use<code>operand(clazz, {@link #none()})</code>;      *    will be removed before optiq-0.4.18.      */
+comment|/**    * Creates an operand that matches a relational expression that has no    * children.    *    * @param clazz Class of relational expression to match (must not be null)    * @return Operand    * @deprecated Use<code>operand(clazz, {@link #none()})</code>;    * will be removed before optiq-0.4.18.    */
 specifier|public
 specifier|static
 name|RelOptRuleOperand
@@ -435,7 +435,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates an operand that matches a relational expression that has no      * children.      *      * @param clazz Class of relational expression to match (must not be null)      * @param trait Trait to match, or null to match any trait      * @return Operand      *      * @deprecated Use<code>operand(clazz, trait, {@link #none()})</code>;      *    will be removed before optiq-0.4.18.      */
+comment|/**    * Creates an operand that matches a relational expression that has no    * children.    *    * @param clazz Class of relational expression to match (must not be null)    * @param trait Trait to match, or null to match any trait    * @return Operand    * @deprecated Use<code>operand(clazz, trait, {@link #none()})</code>;    * will be removed before optiq-0.4.18.    */
 specifier|public
 specifier|static
 name|RelOptRuleOperand
@@ -465,7 +465,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates an operand that matches a relational expression that has any      * number of children.      *      * @param clazz Class of relational expression to match (must not be null)      * @return Operand      *      * @deprecated Use<code>operand(clazz, {@link #any()})</code>;      *    will be removed before optiq-0.4.18.      */
+comment|/**    * Creates an operand that matches a relational expression that has any    * number of children.    *    * @param clazz Class of relational expression to match (must not be null)    * @return Operand    * @deprecated Use<code>operand(clazz, {@link #any()})</code>;    * will be removed before optiq-0.4.18.    */
 specifier|public
 specifier|static
 name|RelOptRuleOperand
@@ -490,7 +490,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates an operand that matches a relational expression that has any      * number of children.      *      * @param clazz Class of relational expression to match (must not be null)      * @param trait Trait to match, or null to match any trait      * @return Operand      *      * @deprecated Use<code>operand(clazz, trait, {@link #any()})</code>;      *    will be removed before optiq-0.4.18.      */
+comment|/**    * Creates an operand that matches a relational expression that has any    * number of children.    *    * @param clazz Class of relational expression to match (must not be null)    * @param trait Trait to match, or null to match any trait    * @return Operand    * @deprecated Use<code>operand(clazz, trait, {@link #any()})</code>;    * will be removed before optiq-0.4.18.    */
 specifier|public
 specifier|static
 name|RelOptRuleOperand
@@ -520,7 +520,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates an operand which matches a given trait and matches child operands      * in the order they appear.      *      * @param clazz Class of relational expression to match (must not be null)      * @param first First child operand      * @param rest Remaining child operands      *      * @deprecated Use<code>operand(clazz, some(...))</code>;      *    will be removed before optiq-0.4.18.      */
+comment|/**    * Creates an operand which matches a given trait and matches child operands    * in the order they appear.    *    * @param clazz Class of relational expression to match (must not be null)    * @param first First child operand    * @param rest  Remaining child operands    * @deprecated Use<code>operand(clazz, some(...))</code>;    * will be removed before optiq-0.4.18.    */
 specifier|public
 specifier|static
 name|RelOptRuleOperand
@@ -556,7 +556,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates an operand which matches a given trait and matches child operands      * in the order they appear.      *      * @param clazz Class of relational expression to match (must not be null)      * @param trait Trait to match, or null to match any trait      * @param first First child operand      * @param rest Remaining child operands      *      * @deprecated Use<code>operand(clazz, trait, some(...))</code>;      *    will be removed before optiq-0.4.18.      */
+comment|/**    * Creates an operand which matches a given trait and matches child operands    * in the order they appear.    *    * @param clazz Class of relational expression to match (must not be null)    * @param trait Trait to match, or null to match any trait    * @param first First child operand    * @param rest  Remaining child operands    * @deprecated Use<code>operand(clazz, trait, some(...))</code>;    * will be removed before optiq-0.4.18.    */
 specifier|public
 specifier|static
 name|RelOptRuleOperand
@@ -597,7 +597,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates an operand that matches a relational expression and its children      * in any order.      *      * @param clazz Class of relational expression to match (must not be null)      * @param first First child operand      * @param rest Remaining child operands      * @return Operand      *      * @deprecated Use<code>operand(clazz, trait, unordered(...))</code>;      *    will be removed before optiq-0.4.18.      */
+comment|/**    * Creates an operand that matches a relational expression and its children    * in any order.    *    * @param clazz Class of relational expression to match (must not be null)    * @param first First child operand    * @param rest  Remaining child operands    * @return Operand    * @deprecated Use<code>operand(clazz, trait, unordered(...))</code>;    * will be removed before optiq-0.4.18.    */
 specifier|public
 specifier|static
 name|RelOptRuleOperand
@@ -634,7 +634,7 @@ argument_list|)
 return|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Creates a flattened list of this operand and its descendants in prefix      * order.      *      * @param rootOperand Root operand      *      * @return Flattened list of operands      */
+comment|/**    * Creates a flattened list of this operand and its descendants in prefix    * order.    *    * @param rootOperand Root operand    * @return Flattened list of operands    */
 specifier|private
 name|List
 argument_list|<
@@ -712,7 +712,7 @@ name|operandList
 argument_list|)
 return|;
 block|}
-comment|/**      * Adds the operand and its descendants to the list in prefix order.      *      * @param operandList Flattened list of operands      * @param parentOperand Parent of this operand      */
+comment|/**    * Adds the operand and its descendants to the list in prefix order.    *    * @param operandList   Flattened list of operands    * @param parentOperand Parent of this operand    */
 specifier|private
 name|void
 name|flattenRecurse
@@ -789,7 +789,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Builds each operand's solve-order. Start with itself, then its parent, up      * to the root, then the remaining operands in prefix order.      */
+comment|/**    * Builds each operand's solve-order. Start with itself, then its parent, up    * to the root, then the remaining operands in prefix order.    */
 specifier|private
 name|void
 name|assignSolveOrder
@@ -938,7 +938,7 @@ argument_list|()
 assert|;
 block|}
 block|}
-comment|/**      * Returns the root operand of this rule      *      * @return the root operand of this rule      */
+comment|/**    * Returns the root operand of this rule    *    * @return the root operand of this rule    */
 specifier|public
 name|RelOptRuleOperand
 name|getOperand
@@ -948,7 +948,7 @@ return|return
 name|operand
 return|;
 block|}
-comment|/**      * Returns a flattened list of operands of this rule.      *      * @return flattened list of operands      */
+comment|/**    * Returns a flattened list of operands of this rule.    *    * @return flattened list of operands    */
 specifier|public
 name|List
 argument_list|<
@@ -1006,7 +1006,7 @@ name|obj
 argument_list|)
 return|;
 block|}
-comment|/**      * Returns whether this rule is equal to another rule.      *      *<p>The base implementation checks that the rules have the same class and      * that the operands are equal; derived classes can override.      */
+comment|/**    * Returns whether this rule is equal to another rule.    *    *<p>The base implementation checks that the rules have the same class and    * that the operands are equal; derived classes can override.    */
 specifier|protected
 name|boolean
 name|equals
@@ -1053,7 +1053,7 @@ name|operand
 argument_list|)
 return|;
 block|}
-comment|/**      * Returns whether this rule could possibly match the given operands.      *      *<p>This method is an opportunity to apply side-conditions to a rule. The      * {@link RelOptPlanner} calls this method after matching all operands of      * the rule, and before calling {@link #onMatch(RelOptRuleCall)}.      *      *<p>In implementations of {@link RelOptPlanner} which may queue up a      * matched {@link RelOptRuleCall} for a long time before calling {@link      * #onMatch(RelOptRuleCall)}, this method is beneficial because it allows      * the planner to discard rules earlier in the process.      *      *<p>The default implementation of this method returns<code>true</code>.      * It is acceptable for any implementation of this method to give a false      * positives, that is, to say that the rule matches the operands but have      * {@link #onMatch(RelOptRuleCall)} subsequently not generate any      * successors.      *      *<p>The following script is useful to identify rules which commonly      * produce no successors. You should override this method for these rules:      *      *<blockquote>      *<pre><code>awk '      * /Apply rule/ {rule=$4; ruleCount[rule]++;}      * /generated 0 successors/ {ruleMiss[rule]++;}      * END {      *   printf "%-30s %s %s\n", "Rule", "Fire", "Miss";      *   for (i in ruleCount) {      *     printf "%-30s %5d %5d\n", i, ruleCount[i], ruleMiss[i];      *   }      * } ' FarragoTrace.log</code></pre>      *</blockquote>      *      * @param call Rule call which has been determined to match all operands of      * this rule      *      * @return whether this RelOptRule matches a given RelOptRuleCall      */
+comment|/**    * Returns whether this rule could possibly match the given operands.    *    *<p>This method is an opportunity to apply side-conditions to a rule. The    * {@link RelOptPlanner} calls this method after matching all operands of    * the rule, and before calling {@link #onMatch(RelOptRuleCall)}.    *    *<p>In implementations of {@link RelOptPlanner} which may queue up a    * matched {@link RelOptRuleCall} for a long time before calling {@link    * #onMatch(RelOptRuleCall)}, this method is beneficial because it allows    * the planner to discard rules earlier in the process.    *    *<p>The default implementation of this method returns<code>true</code>.    * It is acceptable for any implementation of this method to give a false    * positives, that is, to say that the rule matches the operands but have    * {@link #onMatch(RelOptRuleCall)} subsequently not generate any    * successors.    *    *<p>The following script is useful to identify rules which commonly    * produce no successors. You should override this method for these rules:    *    *<blockquote>    *<pre><code>awk '    * /Apply rule/ {rule=$4; ruleCount[rule]++;}    * /generated 0 successors/ {ruleMiss[rule]++;}    * END {    *   printf "%-30s %s %s\n", "Rule", "Fire", "Miss";    *   for (i in ruleCount) {    *     printf "%-30s %5d %5d\n", i, ruleCount[i], ruleMiss[i];    *   }    * } ' FarragoTrace.log</code></pre>    *</blockquote>    *    * @param call Rule call which has been determined to match all operands of    *             this rule    * @return whether this RelOptRule matches a given RelOptRuleCall    */
 specifier|public
 name|boolean
 name|matches
@@ -1066,7 +1066,7 @@ return|return
 literal|true
 return|;
 block|}
-comment|/**      * Receives notification about a rule match. At the time that this method is      * called, {@link RelOptRuleCall#rels call.rels} holds the set of relational      * expressions which match the operands to the rule;<code>      * call.rels[0]</code> is the root expression.      *      *<p>Typically a rule would check that the nodes are valid matches, creates      * a new expression, then calls back {@link RelOptRuleCall#transformTo} to      * register the expression.</p>      *      * @param call Rule call      *      * @see #matches(RelOptRuleCall)      */
+comment|/**    * Receives notification about a rule match. At the time that this method is    * called, {@link RelOptRuleCall#rels call.rels} holds the set of relational    * expressions which match the operands to the rule;<code>    * call.rels[0]</code> is the root expression.    *    *<p>Typically a rule would check that the nodes are valid matches, creates    * a new expression, then calls back {@link RelOptRuleCall#transformTo} to    * register the expression.</p>    *    * @param call Rule call    * @see #matches(RelOptRuleCall)    */
 specifier|public
 specifier|abstract
 name|void
@@ -1076,7 +1076,7 @@ name|RelOptRuleCall
 name|call
 parameter_list|)
 function_decl|;
-comment|/**      * Returns the convention of the result of firing this rule, null if      * not known.      */
+comment|/**    * Returns the convention of the result of firing this rule, null if    * not known.    */
 specifier|public
 name|Convention
 name|getOutConvention
@@ -1086,7 +1086,7 @@ return|return
 literal|null
 return|;
 block|}
-comment|/**      * Returns the trait which will be modified as a result of firing this rule,      * or null if the rule is not a converter rule.      */
+comment|/**    * Returns the trait which will be modified as a result of firing this rule,    * or null if the rule is not a converter rule.    */
 specifier|public
 name|RelTrait
 name|getOutTrait
@@ -1105,7 +1105,7 @@ return|return
 name|description
 return|;
 block|}
-comment|/**      * Converts a relation expression to a give set of traits, if it does not      * already have those traits. If the conversion is not possible, returns      * null.      *      * @param rel Relational expression to convert      * @param toTraits desired traits      *      * @return a relational expression with the desired traits; never null      */
+comment|/**    * Converts a relation expression to a give set of traits, if it does not    * already have those traits. If the conversion is not possible, returns    * null.    *    * @param rel      Relational expression to convert    * @param toTraits desired traits    * @return a relational expression with the desired traits; never null    */
 specifier|public
 specifier|static
 name|RelNode
@@ -1243,7 +1243,7 @@ name|outTraits
 argument_list|)
 return|;
 block|}
-comment|/**      * Converts a list of relational expressions.      *      * @param rels Relational expressions      * @param traitSet Trait set to apply to each relational expression      * @return List of converted relational expressions, or null if any could      *   not be converted      */
+comment|/**    * Converts a list of relational expressions.    *    * @param rels     Relational expressions    * @param traitSet Trait set to apply to each relational expression    * @return List of converted relational expressions, or null if any could    * not be converted    */
 specifier|public
 specifier|static
 name|List
@@ -1301,7 +1301,7 @@ return|return
 name|list
 return|;
 block|}
-comment|/**      * Deduces a name for a rule by taking the name of its class and returning      * the segment after the last '.' or '$'.      *      *<p>Examples:      *<ul>      *<li>"com.foo.Bar" yields "Bar";</li>      *<li>"com.flatten.Bar$Baz" yields "Baz";</li>      *<li>"com.foo.Bar$1" yields "1" (which as an integer is an invalid      *      name, and writer of the rule is encouraged to give it an      *      explicit name).</li>      *</ul>      *      * @param className Name of the rule's class      *      * @return Last segment of the class      */
+comment|/**    * Deduces a name for a rule by taking the name of its class and returning    * the segment after the last '.' or '$'.    *    *<p>Examples:    *<ul>    *<li>"com.foo.Bar" yields "Bar";</li>    *<li>"com.flatten.Bar$Baz" yields "Baz";</li>    *<li>"com.foo.Bar$1" yields "1" (which as an integer is an invalid    * name, and writer of the rule is encouraged to give it an    * explicit name).</li>    *</ul>    *    * @param className Name of the rule's class    * @return Last segment of the class    */
 specifier|static
 name|String
 name|guessDescription

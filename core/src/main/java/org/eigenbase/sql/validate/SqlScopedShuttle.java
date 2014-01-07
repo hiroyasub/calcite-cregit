@@ -147,7 +147,7 @@ return|return
 name|result
 return|;
 block|}
-comment|/**      * Visits an operator call. If the call has entered a new scope, the base      * class will have already modified the scope.      */
+comment|/**    * Visits an operator call. If the call has entered a new scope, the base    * class will have already modified the scope.    */
 specifier|protected
 name|SqlNode
 name|visitScoped
@@ -165,7 +165,7 @@ name|call
 argument_list|)
 return|;
 block|}
-comment|/**      * Returns the current scope.      */
+comment|/**    * Returns the current scope.    */
 specifier|protected
 name|SqlValidatorScope
 name|getScope

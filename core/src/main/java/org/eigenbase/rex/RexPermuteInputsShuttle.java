@@ -106,7 +106,7 @@ argument_list|>
 argument_list|()
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a RexPermuteInputsShuttle.      *      *<p>The mapping provides at most one target for every source. If a source      * has no targets and is referenced in the expression,      * {@link org.eigenbase.util.mapping.Mappings.TargetMapping#getTarget(int)}      * will give an error. Otherwise the mapping gives a unique target.      *      * @param mapping Mapping      * @param inputs Input relational expressions      */
+comment|/**    * Creates a RexPermuteInputsShuttle.    *    *<p>The mapping provides at most one target for every source. If a source    * has no targets and is referenced in the expression,    * {@link org.eigenbase.util.mapping.Mappings.TargetMapping#getTarget(int)}    * will give an error. Otherwise the mapping gives a unique target.    *    * @param mapping Mapping    * @param inputs  Input relational expressions    */
 specifier|public
 name|RexPermuteInputsShuttle
 parameter_list|(

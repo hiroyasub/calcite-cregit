@@ -68,7 +68,7 @@ name|long
 name|lastNanoTime
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a new timing tracer, publishing an initial event (at elapsed time      * 0).      *      * @param logger logger on which to log timing events; level FINE will be      * used      * @param startEvent event to trace as start of timing      */
+comment|/**    * Creates a new timing tracer, publishing an initial event (at elapsed time    * 0).    *    * @param logger     logger on which to log timing events; level FINE will be    *                   used    * @param startEvent event to trace as start of timing    */
 specifier|public
 name|EigenbaseTimingTracer
 parameter_list|(
@@ -127,7 +127,7 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Publishes an event with the time elapsed since the previous event.      *      * @param event event to trace      */
+comment|/**    * Publishes an event with the time elapsed since the previous event.    *    * @param event event to trace    */
 specifier|public
 name|void
 name|traceTime

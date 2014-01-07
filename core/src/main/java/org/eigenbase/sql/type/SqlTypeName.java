@@ -1196,13 +1196,13 @@ name|STRUCTURED
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Bitwise-or of flags indicating allowable precision/scale combinations.      */
+comment|/**    * Bitwise-or of flags indicating allowable precision/scale combinations.    */
 specifier|private
 specifier|final
 name|int
 name|signatures
 decl_stmt|;
-comment|/**      * Returns true if not of a "pure" standard sql type. "Inpure" types are      * {@link #ANY}, {@link #NULL} and {@link #SYMBOL}      */
+comment|/**    * Returns true if not of a "pure" standard sql type. "Inpure" types are    * {@link #ANY}, {@link #NULL} and {@link #SYMBOL}    */
 specifier|private
 specifier|final
 name|boolean
@@ -1245,7 +1245,7 @@ operator|=
 name|jdbcType
 expr_stmt|;
 block|}
-comment|/**      * Looks up a type name from its name.      *      * @return Type name, or null if not found      */
+comment|/**    * Looks up a type name from its name.    *    * @return Type name, or null if not found    */
 specifier|public
 specifier|static
 name|SqlTypeName
@@ -1362,7 +1362,7 @@ literal|true
 argument_list|)
 return|;
 block|}
-comment|/**      * Returns whether this type can be specified with a given combination of      * precision and scale. For example,      *      *<ul>      *<li><code>Varchar.allowsPrecScale(true, false)</code> returns<code>      * true</code>, because the VARCHAR type allows a precision parameter, as in      *<code>VARCHAR(10)</code>.</li>      *<li><code>Varchar.allowsPrecScale(true, true)</code> returns<code>      * true</code>, because the VARCHAR type does not allow a precision and a      * scale parameter, as in<code>VARCHAR(10, 4)</code>.</li>      *<li><code>allowsPrecScale(false, true)</code> returns<code>false</code>      * for every type.</li>      *</ul>      *      * @param precision Whether the precision/length field is part of the type      * specification      * @param scale Whether the scale field is part of the type specification      *      * @return Whether this combination of precision/scale is valid      */
+comment|/**    * Returns whether this type can be specified with a given combination of    * precision and scale. For example,    *    *<ul>    *<li><code>Varchar.allowsPrecScale(true, false)</code> returns<code>    * true</code>, because the VARCHAR type allows a precision parameter, as in    *<code>VARCHAR(10)</code>.</li>    *<li><code>Varchar.allowsPrecScale(true, true)</code> returns<code>    * true</code>, because the VARCHAR type does not allow a precision and a    * scale parameter, as in<code>VARCHAR(10, 4)</code>.</li>    *<li><code>allowsPrecScale(false, true)</code> returns<code>false</code>    * for every type.</li>    *</ul>    *    * @param precision Whether the precision/length field is part of the type    *                  specification    * @param scale     Whether the scale field is part of the type specification    * @return Whether this combination of precision/scale is valid    */
 specifier|public
 name|boolean
 name|allowsPrecScale
@@ -1420,7 +1420,7 @@ return|return
 name|special
 return|;
 block|}
-comment|/**      * @return the ordinal from {@link java.sql.Types} corresponding to this      * SqlTypeName      */
+comment|/**    * @return the ordinal from {@link java.sql.Types} corresponding to this    * SqlTypeName    */
 specifier|public
 name|int
 name|getJdbcOrdinal
@@ -1474,7 +1474,7 @@ name|build
 argument_list|()
 return|;
 block|}
-comment|/**      * @return default precision for this type if supported, otherwise -1 if      * precision is either unsupported or must be specified explicitly      */
+comment|/**    * @return default precision for this type if supported, otherwise -1 if    * precision is either unsupported or must be specified explicitly    */
 specifier|public
 name|int
 name|getDefaultPrecision
@@ -1536,7 +1536,7 @@ literal|1
 return|;
 block|}
 block|}
-comment|/**      * @return default scale for this type if supported, otherwise -1 if scale      * is either unsupported or must be specified explicitly      */
+comment|/**    * @return default scale for this type if supported, otherwise -1 if scale    * is either unsupported or must be specified explicitly    */
 specifier|public
 name|int
 name|getDefaultScale
@@ -1569,7 +1569,7 @@ literal|1
 return|;
 block|}
 block|}
-comment|/**      * Gets the SqlTypeFamily containing this SqlTypeName.      *      * @return containing family, or null for none      */
+comment|/**    * Gets the SqlTypeFamily containing this SqlTypeName.    *    * @return containing family, or null for none    */
 specifier|public
 name|SqlTypeFamily
 name|getFamily
@@ -1584,7 +1584,7 @@ name|this
 argument_list|)
 return|;
 block|}
-comment|/**      * Gets the SqlTypeName corresponding to a JDBC type.      *      * @param jdbcType the JDBC type of interest      *      * @return corresponding SqlTypeName      */
+comment|/**    * Gets the SqlTypeName corresponding to a JDBC type.    *    * @param jdbcType the JDBC type of interest    * @return corresponding SqlTypeName    */
 specifier|public
 specifier|static
 name|SqlTypeName
@@ -1625,7 +1625,7 @@ operator|=
 name|name
 expr_stmt|;
 block|}
-comment|/**      * Returns the limit of this datatype. For example,      *      *<table border="1">      *<tr>      *<th>Datatype</th>      *<th>sign</th>      *<th>limit</th>      *<th>beyond</th>      *<th>precision</th>      *<th>scale</th>      *<th>Returns</th>      *</tr>      *<tr>      *<td>Integer</th>      *<td>true</td>      *<td>true</td>      *<td>false</td>      *<td>-1</td>      *<td>-1</td>      *<td>2147483647 (2 ^ 31 -1 = MAXINT)</td>      *</tr>      *<tr>      *<td>Integer</th>      *<td>true</td>      *<td>true</td>      *<td>true</td>      *<td>-1</td>      *<td>-1</td>      *<td>2147483648 (2 ^ 31 = MAXINT + 1)</td>      *</tr>      *<tr>      *<td>Integer</th>      *<td>false</td>      *<td>true</td>      *<td>false</td>      *<td>-1</td>      *<td>-1</td>      *<td>-2147483648 (-2 ^ 31 = MININT)</td>      *</tr>      *<tr>      *<td>Boolean</th>      *<td>true</td>      *<td>true</td>      *<td>false</td>      *<td>-1</td>      *<td>-1</td>      *<td>TRUE</td>      *</tr>      *<tr>      *<td>Varchar</th>      *<td>true</td>      *<td>true</td>      *<td>false</td>      *<td>10</td>      *<td>-1</td>      *<td>'ZZZZZZZZZZ'</td>      *</tr>      *</table>      *      * @param sign If true, returns upper limit, otherwise lower limit      * @param limit If true, returns value at or near to overflow; otherwise      * value at or near to underflow      * @param beyond If true, returns the value just beyond the limit, otherwise      * the value at the limit      * @param precision Precision, or -1 if not applicable      * @param scale Scale, or -1 if not applicable      *      * @return Limit value      */
+comment|/**    * Returns the limit of this datatype. For example,    *    *<table border="1">    *<tr>    *<th>Datatype</th>    *<th>sign</th>    *<th>limit</th>    *<th>beyond</th>    *<th>precision</th>    *<th>scale</th>    *<th>Returns</th>    *</tr>    *<tr>    *<td>Integer</th>    *<td>true</td>    *<td>true</td>    *<td>false</td>    *<td>-1</td>    *<td>-1</td>    *<td>2147483647 (2 ^ 31 -1 = MAXINT)</td>    *</tr>    *<tr>    *<td>Integer</th>    *<td>true</td>    *<td>true</td>    *<td>true</td>    *<td>-1</td>    *<td>-1</td>    *<td>2147483648 (2 ^ 31 = MAXINT + 1)</td>    *</tr>    *<tr>    *<td>Integer</th>    *<td>false</td>    *<td>true</td>    *<td>false</td>    *<td>-1</td>    *<td>-1</td>    *<td>-2147483648 (-2 ^ 31 = MININT)</td>    *</tr>    *<tr>    *<td>Boolean</th>    *<td>true</td>    *<td>true</td>    *<td>false</td>    *<td>-1</td>    *<td>-1</td>    *<td>TRUE</td>    *</tr>    *<tr>    *<td>Varchar</th>    *<td>true</td>    *<td>true</td>    *<td>false</td>    *<td>10</td>    *<td>-1</td>    *<td>'ZZZZZZZZZZ'</td>    *</tr>    *</table>    *    * @param sign      If true, returns upper limit, otherwise lower limit    * @param limit     If true, returns value at or near to overflow; otherwise    *                  value at or near to underflow    * @param beyond    If true, returns the value just beyond the limit,    *                  otherwise the value at the limit    * @param precision Precision, or -1 if not applicable    * @param scale     Scale, or -1 if not applicable    * @return Limit value    */
 specifier|public
 name|Object
 name|getLimit
@@ -2886,7 +2886,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**      * Returns the maximum precision (or length) allowed for this type, or -1 if      * precision/length are not applicable for this type.      *      * @return Maximum allowed precision      */
+comment|/**    * Returns the maximum precision (or length) allowed for this type, or -1 if    * precision/length are not applicable for this type.    *    * @return Maximum allowed precision    */
 specifier|public
 name|int
 name|getMaxPrecision
@@ -2946,7 +2946,7 @@ literal|1
 return|;
 block|}
 block|}
-comment|/**      * Returns the maximum scale (or fractional second precision in the case of      * intervals) allowed for this type, or -1 if precision/length are not      * applicable for this type.      *      * @return Maximum allowed scale      */
+comment|/**    * Returns the maximum scale (or fractional second precision in the case of    * intervals) allowed for this type, or -1 if precision/length are not    * applicable for this type.    *    * @return Maximum allowed scale    */
 specifier|public
 name|int
 name|getMaxScale
@@ -2979,7 +2979,7 @@ literal|1
 return|;
 block|}
 block|}
-comment|/**      * Returns the minimum precision (or length) allowed for this type, or -1 if      * precision/length are not applicable for this type.      *      * @return Minimum allowed precision      */
+comment|/**    * Returns the minimum precision (or length) allowed for this type, or -1 if    * precision/length are not applicable for this type.    *    * @return Minimum allowed precision    */
 specifier|public
 name|int
 name|getMinPrecision
@@ -3030,7 +3030,7 @@ literal|1
 return|;
 block|}
 block|}
-comment|/**      * Returns the minimum scale (or fractional second precision in the case of      * intervals) allowed for this type, or -1 if precision/length are not      * applicable for this type.      *      * @return Minimum allowed scale      */
+comment|/**    * Returns the minimum scale (or fractional second precision in the case of    * intervals) allowed for this type, or -1 if precision/length are not    * applicable for this type.    *    * @return Minimum allowed scale    */
 specifier|public
 name|int
 name|getMinScale
@@ -3393,7 +3393,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**      * @return name of this type      */
+comment|/**    * @return name of this type    */
 specifier|public
 name|String
 name|getName
@@ -3404,7 +3404,7 @@ name|toString
 argument_list|()
 return|;
 block|}
-comment|/**      * Flags indicating precision/scale combinations.      *      *<p>Note: for intervals:      *      *<ul>      *<li>precision = start (leading field) precision</li>      *<li>scale = fractional second precision</li>      *</ul>      */
+comment|/**    * Flags indicating precision/scale combinations.    *    *<p>Note: for intervals:    *    *<ul>    *<li>precision = start (leading field) precision</li>    *<li>scale = fractional second precision</li>    *</ul>    */
 specifier|private
 interface|interface
 name|PrecScale

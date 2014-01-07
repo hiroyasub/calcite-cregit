@@ -35,7 +35,7 @@ interface|interface
 name|RexSqlConvertlet
 block|{
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Converts a {@link RexCall} to a {@link SqlNode} expression.      *      * @param converter to use in translating      * @param call RexCall to translate      *      * @return SqlNode, or null if translation was unavailable      */
+comment|/**    * Converts a {@link RexCall} to a {@link SqlNode} expression.    *    * @param converter to use in translating    * @param call      RexCall to translate    * @return SqlNode, or null if translation was unavailable    */
 name|SqlNode
 name|convertCall
 parameter_list|(

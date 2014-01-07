@@ -50,7 +50,7 @@ name|SqlJoin
 name|join
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a<code>JoinScope</code>.      *      * @param parent Parent scope      * @param usingScope Scope for resolving USING clause      * @param join Call to JOIN operator      */
+comment|/**    * Creates a<code>JoinScope</code>.    *    * @param parent     Parent scope    * @param usingScope Scope for resolving USING clause    * @param join       Call to JOIN operator    */
 name|JoinScope
 parameter_list|(
 name|SqlValidatorScope
@@ -179,7 +179,7 @@ literal|null
 return|;
 block|}
 block|}
-comment|/**      * Returns the scope which is used for resolving USING clause.      */
+comment|/**    * Returns the scope which is used for resolving USING clause.    */
 specifier|public
 name|SqlValidatorScope
 name|getUsingScope

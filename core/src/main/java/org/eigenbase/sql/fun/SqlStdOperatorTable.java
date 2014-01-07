@@ -93,7 +93,7 @@ extends|extends
 name|ReflectiveSqlOperatorTable
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
-comment|/**      * The standard operator table.      */
+comment|/**    * The standard operator table.    */
 specifier|private
 specifier|static
 name|SqlStdOperatorTable
@@ -102,7 +102,7 @@ decl_stmt|;
 comment|//-------------------------------------------------------------
 comment|//                   SET OPERATORS
 comment|//-------------------------------------------------------------
-comment|// The set operators can be compared to the arthimetic operators
+comment|// The set operators can be compared to the arithmetic operators
 comment|// UNION -> +
 comment|// EXCEPT -> -
 comment|// INTERSECT -> *
@@ -227,7 +227,7 @@ argument_list|,
 literal|true
 argument_list|)
 decl_stmt|;
-comment|/**      * The "MULTISET UNION" operator.      */
+comment|/**    * The "MULTISET UNION" operator.    */
 specifier|public
 specifier|static
 specifier|final
@@ -244,7 +244,7 @@ argument_list|,
 literal|false
 argument_list|)
 decl_stmt|;
-comment|/**      * The "MULTISET UNION ALL" operator.      */
+comment|/**    * The "MULTISET UNION ALL" operator.    */
 specifier|public
 specifier|static
 specifier|final
@@ -261,7 +261,7 @@ argument_list|,
 literal|true
 argument_list|)
 decl_stmt|;
-comment|/**      * The "MULTISET EXCEPT" operator.      */
+comment|/**    * The "MULTISET EXCEPT" operator.    */
 specifier|public
 specifier|static
 specifier|final
@@ -278,7 +278,7 @@ argument_list|,
 literal|false
 argument_list|)
 decl_stmt|;
-comment|/**      * The "MULTISET EXCEPT ALL" operator.      */
+comment|/**    * The "MULTISET EXCEPT ALL" operator.    */
 specifier|public
 specifier|static
 specifier|final
@@ -295,7 +295,7 @@ argument_list|,
 literal|true
 argument_list|)
 decl_stmt|;
-comment|/**      * The "MULTISET INTERSECT" operator.      */
+comment|/**    * The "MULTISET INTERSECT" operator.    */
 specifier|public
 specifier|static
 specifier|final
@@ -312,7 +312,7 @@ argument_list|,
 literal|false
 argument_list|)
 decl_stmt|;
-comment|/**      * The "MULTISET INTERSECT ALL" operator.      */
+comment|/**    * The "MULTISET INTERSECT ALL" operator.    */
 specifier|public
 specifier|static
 specifier|final
@@ -332,7 +332,7 @@ decl_stmt|;
 comment|//-------------------------------------------------------------
 comment|//                   BINARY OPERATORS
 comment|//-------------------------------------------------------------
-comment|/**      * Logical<code>AND</code> operator.      */
+comment|/**    * Logical<code>AND</code> operator.    */
 specifier|public
 specifier|static
 specifier|final
@@ -365,7 +365,7 @@ operator|.
 name|otcBoolX2
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>AS</code> operator associates an expression in the SELECT clause      * with an alias.      */
+comment|/**    *<code>AS</code> operator associates an expression in the SELECT clause    * with an alias.    */
 specifier|public
 specifier|static
 specifier|final
@@ -376,7 +376,7 @@ operator|new
 name|SqlAsOperator
 argument_list|()
 decl_stmt|;
-comment|/**      * String concatenation operator, '<code>||</code>'.      */
+comment|/**    * String concatenation operator, '<code>||</code>'.    */
 specifier|public
 specifier|static
 specifier|final
@@ -407,7 +407,7 @@ operator|.
 name|otcStringSameX2
 argument_list|)
 decl_stmt|;
-comment|/**      * Arithmetic division operator, '<code>/</code>'.      */
+comment|/**    * Arithmetic division operator, '<code>/</code>'.    */
 specifier|public
 specifier|static
 specifier|final
@@ -440,7 +440,7 @@ operator|.
 name|otcDivisionOperator
 argument_list|)
 decl_stmt|;
-comment|/**      * Internal integer arithmetic division operator, '<code>/INT</code>'. This      * is only used to adjust scale for numerics. We distinguish it from      * user-requested division since some personalities want a floating-point      * computation, whereas for the internal scaling use of division, we always      * want integer division.      */
+comment|/**    * Internal integer arithmetic division operator, '<code>/INT</code>'. This    * is only used to adjust scale for numerics. We distinguish it from    * user-requested division since some personalities want a floating-point    * computation, whereas for the internal scaling use of division, we always    * want integer division.    */
 specifier|public
 specifier|static
 specifier|final
@@ -473,7 +473,7 @@ operator|.
 name|otcDivisionOperator
 argument_list|)
 decl_stmt|;
-comment|/**      * Dot operator, '<code>.</code>', used for referencing fields of records.      */
+comment|/**    * Dot operator, '<code>.</code>', used for referencing fields of records.    */
 specifier|public
 specifier|static
 specifier|final
@@ -502,7 +502,7 @@ operator|.
 name|otcAnyX2
 argument_list|)
 decl_stmt|;
-comment|/**      * Logical equals operator, '<code>=</code>'.      */
+comment|/**    * Logical equals operator, '<code>=</code>'.    */
 specifier|public
 specifier|static
 specifier|final
@@ -535,7 +535,7 @@ operator|.
 name|otcComparableUnorderedX2
 argument_list|)
 decl_stmt|;
-comment|/**      * Logical greater-than operator, '<code>&gt;</code>'.      */
+comment|/**    * Logical greater-than operator, '<code>&gt;</code>'.    */
 specifier|public
 specifier|static
 specifier|final
@@ -568,7 +568,7 @@ operator|.
 name|otcComparableOrderedX2
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>IS DISTINCT FROM</code> operator.      */
+comment|/**    *<code>IS DISTINCT FROM</code> operator.    */
 specifier|public
 specifier|static
 specifier|final
@@ -601,7 +601,7 @@ operator|.
 name|otcComparableUnorderedX2
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>IS NOT DISTINCT FROM</code> operator. Is equivalent to<code>NOT(x      * IS DISTINCT FROM y)</code>      */
+comment|/**    *<code>IS NOT DISTINCT FROM</code> operator. Is equivalent to<code>NOT(x    * IS DISTINCT FROM y)</code>    */
 specifier|public
 specifier|static
 specifier|final
@@ -634,7 +634,7 @@ operator|.
 name|otcComparableUnorderedX2
 argument_list|)
 decl_stmt|;
-comment|/**      * The internal<code>$IS_DIFFERENT_FROM</code> operator is the same as the      * user-level {@link #isDistinctFromOperator} in all respects except that      * the test for equality on character datatypes treats trailing spaces as      * significant.      */
+comment|/**    * The internal<code>$IS_DIFFERENT_FROM</code> operator is the same as the    * user-level {@link #isDistinctFromOperator} in all respects except that    * the test for equality on character datatypes treats trailing spaces as    * significant.    */
 specifier|public
 specifier|static
 specifier|final
@@ -667,7 +667,7 @@ operator|.
 name|otcComparableUnorderedX2
 argument_list|)
 decl_stmt|;
-comment|/**      * Logical greater-than-or-equal operator, '<code>&gt;=</code>'.      */
+comment|/**    * Logical greater-than-or-equal operator, '<code>&gt;=</code>'.    */
 specifier|public
 specifier|static
 specifier|final
@@ -700,7 +700,7 @@ operator|.
 name|otcComparableOrderedX2
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>IN</code> operator tests for a value's membership in a subquery or      * a list of values.      */
+comment|/**    *<code>IN</code> operator tests for a value's membership in a subquery or    * a list of values.    */
 specifier|public
 specifier|static
 specifier|final
@@ -713,7 +713,7 @@ argument_list|(
 literal|false
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>NOT IN</code> operator tests for a value's membership in a subquery      * or a list of values.      */
+comment|/**    *<code>NOT IN</code> operator tests for a value's membership in a subquery    * or a list of values.    */
 specifier|public
 specifier|static
 specifier|final
@@ -726,7 +726,7 @@ argument_list|(
 literal|true
 argument_list|)
 decl_stmt|;
-comment|/**      * Logical less-than operator, '<code>&lt;</code>'.      */
+comment|/**    * Logical less-than operator, '<code>&lt;</code>'.    */
 specifier|public
 specifier|static
 specifier|final
@@ -759,7 +759,7 @@ operator|.
 name|otcComparableOrderedX2
 argument_list|)
 decl_stmt|;
-comment|/**      * Logical less-than-or-equal operator, '<code>&lt;=</code>'.      */
+comment|/**    * Logical less-than-or-equal operator, '<code>&lt;=</code>'.    */
 specifier|public
 specifier|static
 specifier|final
@@ -792,7 +792,7 @@ operator|.
 name|otcComparableOrderedX2
 argument_list|)
 decl_stmt|;
-comment|/**      * Infix arithmetic minus operator, '<code>-</code>'.      *      *<p>Its precedence is less than the prefix {@link #prefixPlusOperator +}      * and {@link #prefixMinusOperator -} operators.      */
+comment|/**    * Infix arithmetic minus operator, '<code>-</code>'.    *    *<p>Its precedence is less than the prefix {@link #prefixPlusOperator +}    * and {@link #prefixMinusOperator -} operators.    */
 specifier|public
 specifier|static
 specifier|final
@@ -826,7 +826,7 @@ operator|.
 name|otcMinusOperator
 argument_list|)
 decl_stmt|;
-comment|/**      * Arithmetic multiplication operator, '<code>*</code>'.      */
+comment|/**    * Arithmetic multiplication operator, '<code>*</code>'.    */
 specifier|public
 specifier|static
 specifier|final
@@ -859,7 +859,7 @@ operator|.
 name|otcMultiplyOperator
 argument_list|)
 decl_stmt|;
-comment|/**      * Logical not-equals operator, '<code>&lt;&gt;</code>'.      */
+comment|/**    * Logical not-equals operator, '<code>&lt;&gt;</code>'.    */
 specifier|public
 specifier|static
 specifier|final
@@ -892,7 +892,7 @@ operator|.
 name|otcComparableUnorderedX2
 argument_list|)
 decl_stmt|;
-comment|/**      * Logical<code>OR</code> operator.      */
+comment|/**    * Logical<code>OR</code> operator.    */
 specifier|public
 specifier|static
 specifier|final
@@ -925,7 +925,7 @@ operator|.
 name|otcBoolX2
 argument_list|)
 decl_stmt|;
-comment|/**      * Infix arithmetic plus operator, '<code>+</code>'.      */
+comment|/**    * Infix arithmetic plus operator, '<code>+</code>'.    */
 specifier|public
 specifier|static
 specifier|final
@@ -958,7 +958,7 @@ operator|.
 name|otcPlusOperator
 argument_list|)
 decl_stmt|;
-comment|/**      * Multiset MEMBER OF. Checks to see if a element belongs to a multiset.<br>      * Example:<br>      *<code>'green' MEMBER OF MULTISET['red','almost green','blue']</code>      * returns<code>false</code>.      */
+comment|/**    * Multiset MEMBER OF. Checks to see if a element belongs to a multiset.<br>    * Example:<br>    *<code>'green' MEMBER OF MULTISET['red','almost green','blue']</code>    * returns<code>false</code>.    */
 specifier|public
 specifier|static
 specifier|final
@@ -969,7 +969,7 @@ operator|new
 name|SqlMultisetMemberOfOperator
 argument_list|()
 decl_stmt|;
-comment|/**      * Submultiset. Checks to see if an multiset is a sub-set of another      * multiset.<br>      * Example:<br>      *<code>MULTISET['green'] SUBMULTISET OF MULTISET['red','almost      * green','blue']</code> returns<code>false</code>.      *      *<p>But<code>MULTISET['blue', 'red'] SUBMULTISET OF      * MULTISET['red','almost green','blue']</code> returns<code>true</code>      * (<b>NB</b> multisets is order independant)      */
+comment|/**    * Submultiset. Checks to see if an multiset is a sub-set of another    * multiset.<br>    * Example:<br>    *<code>MULTISET['green'] SUBMULTISET OF MULTISET['red','almost    * green','blue']</code> returns<code>false</code>.    *    *<p>But<code>MULTISET['blue', 'red'] SUBMULTISET OF    * MULTISET['red','almost green','blue']</code> returns<code>true</code>    * (<b>NB</b> multisets is order independant)    */
 specifier|public
 specifier|static
 specifier|final
@@ -1437,7 +1437,7 @@ operator|.
 name|otcBool
 argument_list|)
 decl_stmt|;
-comment|/**      * Prefix arithmetic minus operator, '<code>-</code>'.      *      *<p>Its precedence is greater than the infix '{@link #plusOperator +}' and      * '{@link #minusOperator -}' operators.      */
+comment|/**    * Prefix arithmetic minus operator, '<code>-</code>'.    *    *<p>Its precedence is greater than the infix '{@link #plusOperator +}' and    * '{@link #minusOperator -}' operators.    */
 specifier|public
 specifier|static
 specifier|final
@@ -1468,7 +1468,7 @@ operator|.
 name|otcNumericOrInterval
 argument_list|)
 decl_stmt|;
-comment|/**      * Prefix arithmetic plus operator, '<code>+</code>'.      *      *<p>Its precedence is greater than the infix '{@link #plusOperator +}' and      * '{@link #minusOperator -}' operators.      */
+comment|/**    * Prefix arithmetic plus operator, '<code>+</code>'.    *    *<p>Its precedence is greater than the infix '{@link #plusOperator +}' and    * '{@link #minusOperator -}' operators.    */
 specifier|public
 specifier|static
 specifier|final
@@ -1499,7 +1499,7 @@ operator|.
 name|otcNumericOrInterval
 argument_list|)
 decl_stmt|;
-comment|/**      * Keyword which allows an identifier to be explicitly flagged as a table.      * For example,<code>select * from (TABLE t)</code> or<code>TABLE      * t</code>. See also {@link #collectionTableOperator}.      */
+comment|/**    * Keyword which allows an identifier to be explicitly flagged as a table.    * For example,<code>select * from (TABLE t)</code> or<code>TABLE    * t</code>. See also {@link #collectionTableOperator}.    */
 specifier|public
 specifier|static
 specifier|final
@@ -1527,7 +1527,7 @@ decl_stmt|;
 comment|//-------------------------------------------------------------
 comment|// AGGREGATE OPERATORS
 comment|//-------------------------------------------------------------
-comment|/**      *<code>SUM</code> aggregate function.      */
+comment|/**    *<code>SUM</code> aggregate function.    */
 specifier|public
 specifier|static
 specifier|final
@@ -1540,7 +1540,7 @@ argument_list|(
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>COUNT</code> aggregate function.      */
+comment|/**    *<code>COUNT</code> aggregate function.    */
 specifier|public
 specifier|static
 specifier|final
@@ -1551,7 +1551,7 @@ operator|new
 name|SqlCountAggFunction
 argument_list|()
 decl_stmt|;
-comment|/**      *<code>MIN</code> aggregate function.      */
+comment|/**    *<code>MIN</code> aggregate function.    */
 specifier|public
 specifier|static
 specifier|final
@@ -1576,7 +1576,7 @@ operator|.
 name|MINMAX_COMPARABLE
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>MAX</code> aggregate function.      */
+comment|/**    *<code>MAX</code> aggregate function.    */
 specifier|public
 specifier|static
 specifier|final
@@ -1601,7 +1601,7 @@ operator|.
 name|MINMAX_COMPARABLE
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>LAST_VALUE</code> aggregate function.      */
+comment|/**    *<code>LAST_VALUE</code> aggregate function.    */
 specifier|public
 specifier|static
 specifier|final
@@ -1614,7 +1614,7 @@ argument_list|(
 literal|false
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>FIRST_VALUE</code> aggregate function.      */
+comment|/**    *<code>FIRST_VALUE</code> aggregate function.    */
 specifier|public
 specifier|static
 specifier|final
@@ -1627,7 +1627,7 @@ argument_list|(
 literal|true
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>SINGLE_VALUE</code> aggregate function.      */
+comment|/**    *<code>SINGLE_VALUE</code> aggregate function.    */
 specifier|public
 specifier|static
 specifier|final
@@ -1640,7 +1640,7 @@ argument_list|(
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>AVG</code> aggregate function.      */
+comment|/**    *<code>AVG</code> aggregate function.    */
 specifier|public
 specifier|static
 specifier|final
@@ -1659,7 +1659,7 @@ operator|.
 name|AVG
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>STDDEV_POP</code> aggregate function.      */
+comment|/**    *<code>STDDEV_POP</code> aggregate function.    */
 specifier|public
 specifier|static
 specifier|final
@@ -1678,7 +1678,7 @@ operator|.
 name|STDDEV_POP
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>STDDEV_SAMP</code> aggregate function.      */
+comment|/**    *<code>STDDEV_SAMP</code> aggregate function.    */
 specifier|public
 specifier|static
 specifier|final
@@ -1697,7 +1697,7 @@ operator|.
 name|STDDEV_SAMP
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>VAR_POP</code> aggregate function.      */
+comment|/**    *<code>VAR_POP</code> aggregate function.    */
 specifier|public
 specifier|static
 specifier|final
@@ -1716,7 +1716,7 @@ operator|.
 name|VAR_POP
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>VAR_SAMP</code> aggregate function.      */
+comment|/**    *<code>VAR_SAMP</code> aggregate function.    */
 specifier|public
 specifier|static
 specifier|final
@@ -1738,7 +1738,7 @@ decl_stmt|;
 comment|//-------------------------------------------------------------
 comment|// WINDOW Aggregate Functions
 comment|//-------------------------------------------------------------
-comment|/**      *<code>HISTORAM</code> aggregate function support. Used by window      * aggregate versions of MIN/MAX      */
+comment|/**    *<code>HISTORAM</code> aggregate function support. Used by window    * aggregate versions of MIN/MAX    */
 specifier|public
 specifier|static
 specifier|final
@@ -1751,7 +1751,7 @@ argument_list|(
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>HISTOGRAM_MIN</code> window aggregate function.      */
+comment|/**    *<code>HISTOGRAM_MIN</code> window aggregate function.    */
 specifier|public
 specifier|static
 specifier|final
@@ -1782,7 +1782,7 @@ operator|.
 name|Numeric
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>HISTOGRAM_MAX</code> window aggregate function.      */
+comment|/**    *<code>HISTOGRAM_MAX</code> window aggregate function.    */
 specifier|public
 specifier|static
 specifier|final
@@ -1813,7 +1813,7 @@ operator|.
 name|Numeric
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>HISTOGRAM_FIRST_VALUE</code> window aggregate function.      */
+comment|/**    *<code>HISTOGRAM_FIRST_VALUE</code> window aggregate function.    */
 specifier|public
 specifier|static
 specifier|final
@@ -1844,7 +1844,7 @@ operator|.
 name|Numeric
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>HISTOGRAM_LAST_VALUE</code> window aggregate function.      */
+comment|/**    *<code>HISTOGRAM_LAST_VALUE</code> window aggregate function.    */
 specifier|public
 specifier|static
 specifier|final
@@ -1875,7 +1875,7 @@ operator|.
 name|Numeric
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>SUM0</code> aggregate function.      */
+comment|/**    *<code>SUM0</code> aggregate function.    */
 specifier|public
 specifier|static
 specifier|final
@@ -1891,7 +1891,7 @@ decl_stmt|;
 comment|//-------------------------------------------------------------
 comment|// WINDOW Rank Functions
 comment|//-------------------------------------------------------------
-comment|/**      *<code>CUME_DIST</code> Window function.      */
+comment|/**    *<code>CUME_DIST</code> Window function.    */
 specifier|public
 specifier|static
 specifier|final
@@ -1904,7 +1904,7 @@ argument_list|(
 literal|"CUME_DIST"
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>DENSE_RANK</code> Window function.      */
+comment|/**    *<code>DENSE_RANK</code> Window function.    */
 specifier|public
 specifier|static
 specifier|final
@@ -1917,7 +1917,7 @@ argument_list|(
 literal|"DENSE_RANK"
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>PERCENT_RANK</code> Window function.      */
+comment|/**    *<code>PERCENT_RANK</code> Window function.    */
 specifier|public
 specifier|static
 specifier|final
@@ -1930,7 +1930,7 @@ argument_list|(
 literal|"PERCENT_RANK"
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>RANK</code> Window function.      */
+comment|/**    *<code>RANK</code> Window function.    */
 specifier|public
 specifier|static
 specifier|final
@@ -1943,7 +1943,7 @@ argument_list|(
 literal|"RANK"
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>ROW_NUMBER</code> Window function.      */
+comment|/**    *<code>ROW_NUMBER</code> Window function.    */
 specifier|public
 specifier|static
 specifier|final
@@ -1969,7 +1969,7 @@ operator|new
 name|SqlRowOperator
 argument_list|()
 decl_stmt|;
-comment|/**      * A special operator for the subtraction of two DATETIMEs. The format of      * DATETIME substraction is:<br>      *<code>"("&lt;datetime&gt; "-"&lt;datetime&gt; ")"<interval      * qualifier></code>. This operator is special since it needs to hold the      * additional interval qualifier specification.      */
+comment|/**    * A special operator for the subtraction of two DATETIMEs. The format of    * DATETIME substraction is:<br>    *<code>"("&lt;datetime&gt; "-"&lt;datetime&gt; ")"<interval    * qualifier></code>. This operator is special since it needs to hold the    * additional interval qualifier specification.    */
 specifier|public
 specifier|static
 specifier|final
@@ -1980,7 +1980,7 @@ operator|new
 name|SqlDatetimeSubtractionOperator
 argument_list|()
 decl_stmt|;
-comment|/**      * The MULTISET Value Constructor. e.g. "<code>MULTISET[1,2,3]</code>".      */
+comment|/**    * The MULTISET Value Constructor. e.g. "<code>MULTISET[1,2,3]</code>".    */
 specifier|public
 specifier|static
 specifier|final
@@ -1991,7 +1991,7 @@ operator|new
 name|SqlMultisetValueConstructor
 argument_list|()
 decl_stmt|;
-comment|/**      * The MULTISET Query Constructor. e.g. "<code>SELECT dname, MULTISET(SELECT      * FROM emp WHERE deptno = dept.deptno) FROM dept</code>".      */
+comment|/**    * The MULTISET Query Constructor. e.g. "<code>SELECT dname, MULTISET(SELECT    * FROM emp WHERE deptno = dept.deptno) FROM dept</code>".    */
 specifier|public
 specifier|static
 specifier|final
@@ -2002,7 +2002,7 @@ operator|new
 name|SqlMultisetQueryConstructor
 argument_list|()
 decl_stmt|;
-comment|/**      * The ARRAY Query Constructor. e.g. "<code>SELECT dname, ARRAY(SELECT      * FROM emp WHERE deptno = dept.deptno) FROM dept</code>".      */
+comment|/**    * The ARRAY Query Constructor. e.g. "<code>SELECT dname, ARRAY(SELECT    * FROM emp WHERE deptno = dept.deptno) FROM dept</code>".    */
 specifier|public
 specifier|static
 specifier|final
@@ -2013,7 +2013,7 @@ operator|new
 name|SqlArrayQueryConstructor
 argument_list|()
 decl_stmt|;
-comment|/**      * The MAP Query Constructor. e.g. "<code>MAP(SELECT empno, deptno      * FROM emp)</code>".      */
+comment|/**    * The MAP Query Constructor. e.g. "<code>MAP(SELECT empno, deptno    * FROM emp)</code>".    */
 specifier|public
 specifier|static
 specifier|final
@@ -2024,7 +2024,7 @@ operator|new
 name|SqlMapQueryConstructor
 argument_list|()
 decl_stmt|;
-comment|/**      * The CURSOR constructor. e.g. "<code>SELECT * FROM      * TABLE(DEDUP(CURSOR(SELECT * FROM EMPS), 'name'))</code>".      */
+comment|/**    * The CURSOR constructor. e.g. "<code>SELECT * FROM    * TABLE(DEDUP(CURSOR(SELECT * FROM EMPS), 'name'))</code>".    */
 specifier|public
 specifier|static
 specifier|final
@@ -2035,7 +2035,7 @@ operator|new
 name|SqlCursorConstructor
 argument_list|()
 decl_stmt|;
-comment|/**      * The COLUMN_LIST constructor. e.g. the ROW() call in "<code>SELECT * FROM      * TABLE(DEDUP(CURSOR(SELECT * FROM EMPS), ROW(name, empno)))</code>".      */
+comment|/**    * The COLUMN_LIST constructor. e.g. the ROW() call in "<code>SELECT * FROM    * TABLE(DEDUP(CURSOR(SELECT * FROM EMPS), ROW(name, empno)))</code>".    */
 specifier|public
 specifier|static
 specifier|final
@@ -2046,7 +2046,7 @@ operator|new
 name|SqlColumnListConstructor
 argument_list|()
 decl_stmt|;
-comment|/**      * The<code>UNNEST<code>operator.      */
+comment|/**    * The<code>UNNEST<code>operator.    */
 specifier|public
 specifier|static
 specifier|final
@@ -2057,7 +2057,7 @@ operator|new
 name|SqlUnnestOperator
 argument_list|()
 decl_stmt|;
-comment|/**      * The<code>LATERAL<code>operator.      */
+comment|/**    * The<code>LATERAL<code>operator.    */
 specifier|public
 specifier|static
 specifier|final
@@ -2088,7 +2088,7 @@ operator|.
 name|otcAny
 argument_list|)
 decl_stmt|;
-comment|/**      * The "table function derived table" operator, which a table-valued      * function into a relation, e.g. "<code>SELECT * FROM      * TABLE(ramp(5))</code>".      *      *<p>This operator has function syntax (with one argument), whereas {@link      * #explicitTableOperator} is a prefix operator.      */
+comment|/**    * The "table function derived table" operator, which a table-valued    * function into a relation, e.g. "<code>SELECT * FROM    * TABLE(ramp(5))</code>".    *    *<p>This operator has function syntax (with one argument), whereas {@link    * #explicitTableOperator} is a prefix operator.    */
 specifier|public
 specifier|static
 specifier|final
@@ -2289,7 +2289,7 @@ argument_list|,
 literal|false
 argument_list|)
 decl_stmt|;
-comment|/**      * Internal operator used to represent the ESCAPE clause of a LIKE or      * SIMILAR TO expression.      */
+comment|/**    * Internal operator used to represent the ESCAPE clause of a LIKE or    * SIMILAR TO expression.    */
 specifier|public
 specifier|static
 specifier|final
@@ -2308,7 +2308,7 @@ argument_list|,
 literal|30
 argument_list|)
 decl_stmt|;
-comment|/**      * The standard SELECT operator.      */
+comment|/**    * The standard SELECT operator.    */
 specifier|public
 specifier|static
 specifier|final
@@ -2449,7 +2449,7 @@ operator|new
 name|SqlNewOperator
 argument_list|()
 decl_stmt|;
-comment|/**      * The WINDOW clause of a SELECT statment.      *      * @see #overOperator      */
+comment|/**    * The WINDOW clause of a SELECT statment.    *    * @see #overOperator    */
 specifier|public
 specifier|static
 specifier|final
@@ -2460,7 +2460,7 @@ operator|new
 name|SqlWindowOperator
 argument_list|()
 decl_stmt|;
-comment|/**      * The<code>OVER</code> operator, which applies an aggregate functions to a      * {@link SqlWindow window}.      *      *<p>Operands are as follows:      *      *<ol>      *<li>name of window function ({@link org.eigenbase.sql.SqlCall})</li>      *<li>window name ({@link org.eigenbase.sql.SqlLiteral}) or window in-line      * specification (@link SqlWindowOperator})</li>      *</ul>      */
+comment|/**    * The<code>OVER</code> operator, which applies an aggregate functions to a    * {@link SqlWindow window}.    *    *<p>Operands are as follows:    *    *<ol>    *<li>name of window function ({@link org.eigenbase.sql.SqlCall})</li>    *<li>window name ({@link org.eigenbase.sql.SqlLiteral}) or window in-line    * specification (@link SqlWindowOperator})</li>    *</ul>    */
 specifier|public
 specifier|static
 specifier|final
@@ -2471,7 +2471,7 @@ operator|new
 name|SqlOverOperator
 argument_list|()
 decl_stmt|;
-comment|/**      * An<code>REINTERPRET<code>operator is internal to the planner. When the      * physical storage of two types is the same, this operator may be used to      * reinterpret values of one type as the other. This operator is similar to      * a cast, except that it does not alter the data value. Like a regular cast      * it accepts one operand and stores the target type as the return type. It      * performs an overflow check if it has<i>any</i> second operand, whether      * true or not.      */
+comment|/**    * An<code>REINTERPRET<code>operator is internal to the planner. When the    * physical storage of two types is the same, this operator may be used to    * reinterpret values of one type as the other. This operator is similar to    * a cast, except that it does not alter the data value. Like a regular cast    * it accepts one operand and stores the target type as the return type. It    * performs an overflow check if it has<i>any</i> second operand, whether    * true or not.    */
 specifier|public
 specifier|static
 specifier|final
@@ -2509,7 +2509,7 @@ decl_stmt|;
 comment|//-------------------------------------------------------------
 comment|//                   FUNCTIONS
 comment|//-------------------------------------------------------------
-comment|/**      * The character substring function:<code>SUBSTRING(string FROM start [FOR      * length])</code>.      *      *<p>If the length parameter is a constant, the length of the result is the      * minimum of the length of the input and that length. Otherwise it is the      * length of the input.      *      *<p>      */
+comment|/**    * The character substring function:<code>SUBSTRING(string FROM start [FOR    * length])</code>.    *    *<p>If the length parameter is a constant, the length of the result is the    * minimum of the length of the input and that length. Otherwise it is the    * length of the input.    *    *    */
 specifier|public
 specifier|static
 specifier|final
@@ -2554,7 +2554,7 @@ operator|new
 name|SqlOverlayFunction
 argument_list|()
 decl_stmt|;
-comment|/**      * The "TRIM" function.      */
+comment|/**    * The "TRIM" function.    */
 specifier|public
 specifier|static
 specifier|final
@@ -2725,7 +2725,7 @@ operator|.
 name|String
 argument_list|)
 decl_stmt|;
-comment|/**      * Uses SqlOperatorTable.useDouble for its return type since we don't know      * what the result type will be by just looking at the operand types. For      * example POW(int, int) can return a non integer if the second operand is      * negative.      */
+comment|/**    * Uses SqlOperatorTable.useDouble for its return type since we don't know    * what the result type will be by just looking at the operand types. For    * example POW(int, int) can return a non integer if the second operand is    * negative.    */
 specifier|public
 specifier|static
 specifier|final
@@ -2948,7 +2948,7 @@ operator|new
 name|SqlNullifFunction
 argument_list|()
 decl_stmt|;
-comment|/**      * The COALESCE builtin function.      */
+comment|/**    * The COALESCE builtin function.    */
 specifier|public
 specifier|static
 specifier|final
@@ -2959,7 +2959,7 @@ operator|new
 name|SqlCoalesceFunction
 argument_list|()
 decl_stmt|;
-comment|/**      * The<code>FLOOR</code> function.      */
+comment|/**    * The<code>FLOOR</code> function.    */
 specifier|public
 specifier|static
 specifier|final
@@ -2990,7 +2990,7 @@ operator|.
 name|Numeric
 argument_list|)
 decl_stmt|;
-comment|/**      * The<code>CEIL</code> function.      */
+comment|/**    * The<code>CEIL</code> function.    */
 specifier|public
 specifier|static
 specifier|final
@@ -3021,7 +3021,7 @@ operator|.
 name|Numeric
 argument_list|)
 decl_stmt|;
-comment|/**      * The<code>USER</code> function.      */
+comment|/**    * The<code>USER</code> function.    */
 specifier|public
 specifier|static
 specifier|final
@@ -3034,7 +3034,7 @@ argument_list|(
 literal|"USER"
 argument_list|)
 decl_stmt|;
-comment|/**      * The<code>CURRENT_USER</code> function.      */
+comment|/**    * The<code>CURRENT_USER</code> function.    */
 specifier|public
 specifier|static
 specifier|final
@@ -3047,7 +3047,7 @@ argument_list|(
 literal|"CURRENT_USER"
 argument_list|)
 decl_stmt|;
-comment|/**      * The<code>SESSION_USER</code> function.      */
+comment|/**    * The<code>SESSION_USER</code> function.    */
 specifier|public
 specifier|static
 specifier|final
@@ -3060,7 +3060,7 @@ argument_list|(
 literal|"SESSION_USER"
 argument_list|)
 decl_stmt|;
-comment|/**      * The<code>SYSTEM_USER</code> function.      */
+comment|/**    * The<code>SYSTEM_USER</code> function.    */
 specifier|public
 specifier|static
 specifier|final
@@ -3073,7 +3073,7 @@ argument_list|(
 literal|"SYSTEM_USER"
 argument_list|)
 decl_stmt|;
-comment|/**      * The<code>CURRENT_PATH</code> function.      */
+comment|/**    * The<code>CURRENT_PATH</code> function.    */
 specifier|public
 specifier|static
 specifier|final
@@ -3086,7 +3086,7 @@ argument_list|(
 literal|"CURRENT_PATH"
 argument_list|)
 decl_stmt|;
-comment|/**      * The<code>CURRENT_ROLE</code> function.      */
+comment|/**    * The<code>CURRENT_ROLE</code> function.    */
 specifier|public
 specifier|static
 specifier|final
@@ -3099,7 +3099,7 @@ argument_list|(
 literal|"CURRENT_ROLE"
 argument_list|)
 decl_stmt|;
-comment|/**      * The<code>CURRENT_CATALOG</code> function.      */
+comment|/**    * The<code>CURRENT_CATALOG</code> function.    */
 specifier|public
 specifier|static
 specifier|final
@@ -3112,7 +3112,7 @@ argument_list|(
 literal|"CURRENT_CATALOG"
 argument_list|)
 decl_stmt|;
-comment|/**      * The<code>CURRENT_SCHEMA</code> function.      */
+comment|/**    * The<code>CURRENT_SCHEMA</code> function.    */
 specifier|public
 specifier|static
 specifier|final
@@ -3125,7 +3125,7 @@ argument_list|(
 literal|"CURRENT_SCHEMA"
 argument_list|)
 decl_stmt|;
-comment|/**      * The<code>LOCALTIME [(<i>precision</i>)]</code> function.      */
+comment|/**    * The<code>LOCALTIME [(<i>precision</i>)]</code> function.    */
 specifier|public
 specifier|static
 specifier|final
@@ -3142,7 +3142,7 @@ operator|.
 name|TIME
 argument_list|)
 decl_stmt|;
-comment|/**      * The<code>LOCALTIMESTAMP [(<i>precision</i>)]</code> function.      */
+comment|/**    * The<code>LOCALTIMESTAMP [(<i>precision</i>)]</code> function.    */
 specifier|public
 specifier|static
 specifier|final
@@ -3159,7 +3159,7 @@ operator|.
 name|TIMESTAMP
 argument_list|)
 decl_stmt|;
-comment|/**      * The<code>CURRENT_TIME [(<i>precision</i>)]</code> function.      */
+comment|/**    * The<code>CURRENT_TIME [(<i>precision</i>)]</code> function.    */
 specifier|public
 specifier|static
 specifier|final
@@ -3176,7 +3176,7 @@ operator|.
 name|TIME
 argument_list|)
 decl_stmt|;
-comment|/**      * The<code>CURRENT_TIMESTAMP [(<i>precision</i>)]</code> function.      */
+comment|/**    * The<code>CURRENT_TIMESTAMP [(<i>precision</i>)]</code> function.    */
 specifier|public
 specifier|static
 specifier|final
@@ -3193,7 +3193,7 @@ operator|.
 name|TIMESTAMP
 argument_list|)
 decl_stmt|;
-comment|/**      * The<code>CURRENT_DATE</code> function.      */
+comment|/**    * The<code>CURRENT_DATE</code> function.    */
 specifier|public
 specifier|static
 specifier|final
@@ -3204,7 +3204,7 @@ operator|new
 name|SqlCurrentDateFunction
 argument_list|()
 decl_stmt|;
-comment|/**      * Use of the<code>IN_FENNEL<code> forces argument to be evaluated in      * Fennel. Otherwise acts as identity function.      */
+comment|/**    * Use of the<code>IN_FENNEL<code> forces argument to be evaluated in    * Fennel. Otherwise acts as identity function.    */
 specifier|public
 specifier|static
 specifier|final
@@ -3235,7 +3235,7 @@ operator|.
 name|System
 argument_list|)
 decl_stmt|;
-comment|/**      * The SQL<code>CAST</code> operator.      *      *<p>The SQL syntax is      *      *<blockquote><code>CAST(<i>expression</i> AS<i>type</i>)</code>      *</blockqoute>      *      *<p>When the CAST operator is applies as a {@link SqlCall}, it has two      * arguments: the expression and the type. The type must not include a      * constraint, so<code>CAST(x AS INTEGER NOT NULL)</code>, for instance, is      * invalid.</p>      *      *<p>When the CAST operator is applied as a<code>RexCall</code>, the      * target type is simply stored as the return type, not an explicit operand.      * For example, the expression<code>CAST(1 + 2 AS DOUBLE)</code> will      * become a call to<code>CAST</code> with the expression<code>1 + 2</code>      * as its only operand.</p>      *      *<p>The<code>RexCall</code> form can also have a type which contains a      *<code>NOT NULL</code> constraint. When this expression is implemented, if      * the value is NULL, an exception will be thrown.</p>      */
+comment|/**    * The SQL<code>CAST</code> operator.    *    *<p>The SQL syntax is    *    *<blockquote><code>CAST(<i>expression</i> AS<i>type</i>)</code>    *</blockqoute>    *    *<p>When the CAST operator is applies as a {@link SqlCall}, it has two    * arguments: the expression and the type. The type must not include a    * constraint, so<code>CAST(x AS INTEGER NOT NULL)</code>, for instance, is    * invalid.</p>    *    *<p>When the CAST operator is applied as a<code>RexCall</code>, the    * target type is simply stored as the return type, not an explicit operand.    * For example, the expression<code>CAST(1 + 2 AS DOUBLE)</code> will    * become a call to<code>CAST</code> with the expression<code>1 + 2</code>    * as its only operand.</p>    *    *<p>The<code>RexCall</code> form can also have a type which contains a    *<code>NOT NULL</code> constraint. When this expression is implemented, if    * the value is NULL, an exception will be thrown.</p>    */
 specifier|public
 specifier|static
 specifier|final
@@ -3246,7 +3246,7 @@ operator|new
 name|SqlCastFunction
 argument_list|()
 decl_stmt|;
-comment|/**      * The SQL<code>EXTRACT</code> operator. Extracts a specified field value      * from a DATETIME or an INTERVAL. E.g.<br>      *<code>EXTRACT(HOUR FROM INTERVAL '364 23:59:59')</code> returns<code>      * 23</code>      */
+comment|/**    * The SQL<code>EXTRACT</code> operator. Extracts a specified field value    * from a DATETIME or an INTERVAL. E.g.<br>    *<code>EXTRACT(HOUR FROM INTERVAL '364 23:59:59')</code> returns<code>    * 23</code>    */
 specifier|public
 specifier|static
 specifier|final
@@ -3257,7 +3257,7 @@ operator|new
 name|SqlExtractFunction
 argument_list|()
 decl_stmt|;
-comment|/**      * The ELEMENT operator, used to convert a multiset with only one item to a      * "regular" type. Example ... log(ELEMENT(MULTISET[1])) ...      */
+comment|/**    * The ELEMENT operator, used to convert a multiset with only one item to a    * "regular" type. Example ... log(ELEMENT(MULTISET[1])) ...    */
 specifier|public
 specifier|static
 specifier|final
@@ -3288,7 +3288,7 @@ operator|.
 name|System
 argument_list|)
 decl_stmt|;
-comment|/**      * The item operator {@code [ ... ]}, used to access a given element of an      * array or map. For example, {@code myArray[3]} or {@code "myMap['foo']"}.      *      *<p>The SQL standard calls the ARRAY variant a      *&lt;array element reference&gt;. Index is 1-based. The standard says      * to raise "data exception â array element error" but we currently return      * null.</p>      *      *<p>MAP is not standard SQL.</p>      */
+comment|/**    * The item operator {@code [ ... ]}, used to access a given element of an    * array or map. For example, {@code myArray[3]} or {@code "myMap['foo']"}.    *    *<p>The SQL standard calls the ARRAY variant a    *&lt;array element reference&gt;. Index is 1-based. The standard says    * to raise "data exception â array element error" but we currently return    * null.</p>    *    *<p>MAP is not standard SQL.</p>    */
 specifier|public
 specifier|static
 specifier|final
@@ -3299,7 +3299,7 @@ operator|new
 name|SqlItemOperator
 argument_list|()
 decl_stmt|;
-comment|/**      * The ARRAY Value Constructor. e.g. "<code>ARRAY[1, 2, 3]</code>".      */
+comment|/**    * The ARRAY Value Constructor. e.g. "<code>ARRAY[1, 2, 3]</code>".    */
 specifier|public
 specifier|static
 specifier|final
@@ -3310,7 +3310,7 @@ operator|new
 name|SqlArrayValueConstructor
 argument_list|()
 decl_stmt|;
-comment|/**      * The MAP Value Constructor,      * e.g. "<code>MAP['washington', 1, 'obama', 44]</code>".      */
+comment|/**    * The MAP Value Constructor,    * e.g. "<code>MAP['washington', 1, 'obama', 44]</code>".    */
 specifier|public
 specifier|static
 specifier|final
@@ -3321,7 +3321,7 @@ operator|new
 name|SqlMapValueConstructor
 argument_list|()
 decl_stmt|;
-comment|/**      * The internal "$SLICE" operator takes a multiset of records and returns a      * multiset of the first column of those records.      *      *<p>It is introduced when multisets of scalar types are created, in order      * to keep types consistent. For example,<code>MULTISET [5]</code> has type      *<code>INTEGER MULTISET</code> but is translated to an expression of type      *<code>RECORD(INTEGER EXPR$0) MULTISET</code> because in our internal      * representation of multisets, every element must be a record. Applying the      * "$SLICE" operator to this result converts the type back to an<code>      * INTEGER MULTISET</code> multiset value.      *      *<p><code>$SLICE</code> is often translated away when the multiset type is      * converted back to scalar values.      */
+comment|/**    * The internal "$SLICE" operator takes a multiset of records and returns a    * multiset of the first column of those records.    *    *<p>It is introduced when multisets of scalar types are created, in order    * to keep types consistent. For example,<code>MULTISET [5]</code> has type    *<code>INTEGER MULTISET</code> but is translated to an expression of type    *<code>RECORD(INTEGER EXPR$0) MULTISET</code> because in our internal    * representation of multisets, every element must be a record. Applying the    * "$SLICE" operator to this result converts the type back to an<code>    * INTEGER MULTISET</code> multiset value.    *    *<p><code>$SLICE</code> is often translated away when the multiset type is    * converted back to scalar values.    */
 specifier|public
 specifier|static
 specifier|final
@@ -3351,9 +3351,9 @@ name|SqlTypeStrategies
 operator|.
 name|otcRecordMultiset
 argument_list|)
-block|{         }
+block|{       }
 decl_stmt|;
-comment|/**      * The internal "$ELEMENT_SLICE" operator returns the first field of the      * only element of a multiset.      *      *<p/>It is introduced when multisets of scalar types are created, in order      * to keep types consistent. For example,<code>ELEMENT(MULTISET [5])</code>      * is translated to<code>$ELEMENT_SLICE(MULTISET (VALUES ROW (5      * EXPR$0))</code> It is translated away when the multiset type is converted      * back to scalar values.      *      *<p/>NOTE: jhyde, 2006/1/9: Usages of this operator are commented out, but      * I'm not deleting the operator, because some multiset tests are disabled,      * and we may need this operator to get them working!      */
+comment|/**    * The internal "$ELEMENT_SLICE" operator returns the first field of the    * only element of a multiset.    *    *<p>It is introduced when multisets of scalar types are created, in order    * to keep types consistent. For example,<code>ELEMENT(MULTISET [5])</code>    * is translated to<code>$ELEMENT_SLICE(MULTISET (VALUES ROW (5    * EXPR$0))</code> It is translated away when the multiset type is converted    * back to scalar values.</p>    *    *<p>NOTE: jhyde, 2006/1/9: Usages of this operator are commented out, but    * I'm not deleting the operator, because some multiset tests are disabled,    * and we may need this operator to get them working!</p>    */
 specifier|public
 specifier|static
 specifier|final
@@ -3420,7 +3420,7 @@ expr_stmt|;
 block|}
 block|}
 decl_stmt|;
-comment|/**      * The internal "$SCALAR_QUERY" operator returns a scalar value from a      * record type. It asusmes the record type only has one field, and returns      * that field as the output.      */
+comment|/**    * The internal "$SCALAR_QUERY" operator returns a scalar value from a    * record type. It asusmes the record type only has one field, and returns    * that field as the output.    */
 specifier|public
 specifier|static
 specifier|final
@@ -3521,7 +3521,7 @@ return|;
 block|}
 block|}
 decl_stmt|;
-comment|/**      * The CARDINALITY operator, used to retrieve the number of elements in a      * MULTISET, ARRAY or MAP.      */
+comment|/**    * The CARDINALITY operator, used to retrieve the number of elements in a    * MULTISET, ARRAY or MAP.    */
 specifier|public
 specifier|static
 specifier|final
@@ -3552,7 +3552,7 @@ operator|.
 name|System
 argument_list|)
 decl_stmt|;
-comment|/**      * The COLLECT operator. Multiset aggregator function.      */
+comment|/**    * The COLLECT operator. Multiset aggregator function.    */
 specifier|public
 specifier|static
 specifier|final
@@ -3583,7 +3583,7 @@ operator|.
 name|System
 argument_list|)
 decl_stmt|;
-comment|/**      * The FUSION operator. Multiset aggregator function.      */
+comment|/**    * The FUSION operator. Multiset aggregator function.    */
 specifier|public
 specifier|static
 specifier|final
@@ -3614,7 +3614,7 @@ operator|.
 name|System
 argument_list|)
 decl_stmt|;
-comment|/**      * The sequence next value function:<code>NEXT VALUE FOR sequence</code>      */
+comment|/**    * The sequence next value function:<code>NEXT VALUE FOR sequence</code>    */
 specifier|public
 specifier|static
 specifier|final
@@ -3656,7 +3656,7 @@ return|;
 block|}
 block|}
 decl_stmt|;
-comment|/**      * The<code>TABLESAMPLE</code> operator.      *      *<p>Examples:      *      *<ul>      *<li><code>&lt;query&gt; TABLESAMPLE SUBSTITUTE('sampleName')</code>      * (non-standard)      *<li><code>&lt;query&gt; TABLESAMPLE BERNOULLI(&lt;percent&gt;)      * [REPEATABLE(&lt;seed&gt;)]</code> (standard, but not implemented for FTRS      * yet)      *<li><code>&lt;query&gt; TABLESAMPLE SYSTEM(&lt;percent&gt;)      * [REPEATABLE(&lt;seed&gt;)]</code> (standard, but not implemented for FTRS      * yet)      *</ul>      *      *<p>Operand #0 is a query or table; Operand #1 is a {@link SqlSampleSpec}      * wrapped in a {@link SqlLiteral}.      */
+comment|/**    * The<code>TABLESAMPLE</code> operator.    *    *<p>Examples:    *    *<ul>    *<li><code>&lt;query&gt; TABLESAMPLE SUBSTITUTE('sampleName')</code>    * (non-standard)    *<li><code>&lt;query&gt; TABLESAMPLE BERNOULLI(&lt;percent&gt;)    * [REPEATABLE(&lt;seed&gt;)]</code> (standard, but not implemented for FTRS    * yet)    *<li><code>&lt;query&gt; TABLESAMPLE SYSTEM(&lt;percent&gt;)    * [REPEATABLE(&lt;seed&gt;)]</code> (standard, but not implemented for FTRS    * yet)    *</ul>    *    *<p>Operand #0 is a query or table; Operand #1 is a {@link SqlSampleSpec}    * wrapped in a {@link SqlLiteral}.    */
 specifier|public
 specifier|static
 specifier|final
@@ -3744,7 +3744,7 @@ block|}
 block|}
 decl_stmt|;
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Returns the standard operator table, creating it if necessary.      */
+comment|/**    * Returns the standard operator table, creating it if necessary.    */
 specifier|public
 specifier|static
 specifier|synchronized

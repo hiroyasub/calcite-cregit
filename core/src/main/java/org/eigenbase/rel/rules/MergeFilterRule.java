@@ -73,7 +73,7 @@ name|MergeFilterRule
 argument_list|()
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a MergeFilterRule.      */
+comment|/**    * Creates a MergeFilterRule.    */
 specifier|private
 name|MergeFilterRule
 parameter_list|()
@@ -213,7 +213,7 @@ name|newFilterRel
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Creates a RexProgram corresponding to a FilterRel      *      * @param filterRel the FilterRel      *      * @return created RexProgram      */
+comment|/**    * Creates a RexProgram corresponding to a FilterRel    *    * @param filterRel the FilterRel    * @return created RexProgram    */
 specifier|private
 name|RexProgram
 name|createProgram

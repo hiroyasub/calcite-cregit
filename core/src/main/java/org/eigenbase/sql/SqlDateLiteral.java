@@ -170,7 +170,7 @@ operator|+
 literal|"'"
 return|;
 block|}
-comment|/**      * Returns e.g. '1969-07-21'.      */
+comment|/**    * Returns e.g. '1969-07-21'.    */
 specifier|public
 name|String
 name|toFormattedString

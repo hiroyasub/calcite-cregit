@@ -24,7 +24,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Filtered iterator class: an iterator that includes only elements that are  * instanceof a specified class. Apologies for the dorky name.  * @see Util#cast(List, Class)  * @see Util#cast(Iterator, Class)  */
+comment|/**  * Filtered iterator class: an iterator that includes only elements that are  * instanceof a specified class. Apologies for the dorky name.  *  * @see Util#cast(List, Class)  * @see Util#cast(Iterator, Class)  */
 end_comment
 
 begin_class

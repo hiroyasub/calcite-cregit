@@ -153,7 +153,7 @@ name|Window
 argument_list|>
 name|windows
 decl_stmt|;
-comment|/**      * Creates a window relational expression.      *      * @param cluster Cluster      * @param child Input relational expression      * @param rowType Output row type      * @param windows Windows      */
+comment|/**    * Creates a window relational expression.    *    * @param cluster Cluster    * @param child   Input relational expression    * @param rowType Output row type    * @param windows Windows    */
 specifier|public
 name|WindowRelBase
 parameter_list|(
@@ -507,7 +507,7 @@ block|}
 argument_list|)
 return|;
 block|}
-comment|/**      * A Window is a range of input rows, defined by an upper and lower bound.      * It also has zero or more partitioning columns.      *      *<p>A window is either logical or physical. A physical window is measured      * in terms of row count. A logical window is measured in terms of rows      * within a certain distance from the current sort key.      *      *<p>For example:      *      *<ul>      *<li><code>ROWS BETWEEN 10 PRECEDING and 5 FOLLOWING</code> is a physical      * window with an upper and lower bound;      *<li><code>RANGE BETWEEN INTERVAL '1' HOUR PRECEDING AND UNBOUNDED      * FOLLOWING</code> is a logical window with only a lower bound;      *<li><code>RANGE INTERVAL '10' MINUTES PRECEDING</code> (which is      * equivalent to<code>RANGE BETWEEN INTERVAL '10' MINUTES PRECEDING AND      * CURRENT ROW</code>) is a logical window with an upper and lower bound.      *</ul>      */
+comment|/**    * A Window is a range of input rows, defined by an upper and lower bound.    * It also has zero or more partitioning columns.    *    *<p>A window is either logical or physical. A physical window is measured    * in terms of row count. A logical window is measured in terms of rows    * within a certain distance from the current sort key.    *    *<p>For example:    *    *<ul>    *<li><code>ROWS BETWEEN 10 PRECEDING and 5 FOLLOWING</code> is a physical    * window with an upper and lower bound;    *<li><code>RANGE BETWEEN INTERVAL '1' HOUR PRECEDING AND UNBOUNDED    * FOLLOWING</code> is a logical window with only a lower bound;    *<li><code>RANGE INTERVAL '10' MINUTES PRECEDING</code> (which is    * equivalent to<code>RANGE BETWEEN INTERVAL '10' MINUTES PRECEDING AND    * CURRENT ROW</code>) is a logical window with an upper and lower bound.    *</ul>    */
 specifier|public
 specifier|static
 class|class
@@ -543,7 +543,7 @@ specifier|final
 name|String
 name|digest
 decl_stmt|;
-comment|/**          * List of {@link org.eigenbase.rel.WindowRelBase.RexWinAggCall}          * objects, each of which is a call to a          * {@link org.eigenbase.sql.SqlAggFunction}.          */
+comment|/**      * List of {@link org.eigenbase.rel.WindowRelBase.RexWinAggCall}      * objects, each of which is a call to a      * {@link org.eigenbase.sql.SqlAggFunction}.      */
 specifier|public
 specifier|final
 name|ImmutableList
@@ -839,7 +839,7 @@ return|return
 name|orderKeys
 return|;
 block|}
-comment|/** Presents a view of the {@link RexWinAggCall} list as a list of          * {@link AggregateCall}. */
+comment|/**      * Presents a view of the {@link RexWinAggCall} list as a list of      * {@link AggregateCall}.      */
 specifier|public
 name|List
 argument_list|<
@@ -963,7 +963,7 @@ block|}
 return|;
 block|}
 block|}
-comment|/**      * A call to a windowed aggregate function.      *      *<p>Belongs to a {@link org.eigenbase.rel.WindowRelBase.Window}.      *      *<p>It's a bastard son of a {@link org.eigenbase.rex.RexCall}; similar      * enough that it gets visited by a {@link org.eigenbase.rex.RexVisitor},      * but it also has some extra data members.      */
+comment|/**    * A call to a windowed aggregate function.    *    *<p>Belongs to a {@link org.eigenbase.rel.WindowRelBase.Window}.    *    *<p>It's a bastard son of a {@link org.eigenbase.rex.RexCall}; similar    * enough that it gets visited by a {@link org.eigenbase.rex.RexVisitor},    * but it also has some extra data members.    */
 specifier|public
 specifier|static
 class|class
@@ -971,13 +971,13 @@ name|RexWinAggCall
 extends|extends
 name|RexCall
 block|{
-comment|/**          * Ordinal of this aggregate within its partition.          */
+comment|/**      * Ordinal of this aggregate within its partition.      */
 specifier|public
 specifier|final
 name|int
 name|ordinal
 decl_stmt|;
-comment|/**          * Creates a RexWinAggCall.          *          * @param aggFun Aggregate function          * @param type Result type          * @param operands Operands to call          * @param ordinal Ordinal within its partition          */
+comment|/**      * Creates a RexWinAggCall.      *      * @param aggFun   Aggregate function      * @param type     Result type      * @param operands Operands to call      * @param ordinal  Ordinal within its partition      */
 specifier|public
 name|RexWinAggCall
 parameter_list|(

@@ -45,7 +45,7 @@ specifier|private
 name|SqlDialect
 name|dialect
 decl_stmt|;
-comment|/**      * Creates a SqlString.      *      * @param s Contents of string      */
+comment|/**    * Creates a SqlString.    *    * @param s Contents of string    */
 specifier|public
 name|SqlString
 parameter_list|(
@@ -123,7 +123,7 @@ name|s
 argument_list|)
 return|;
 block|}
-comment|/**      * {@inheritDoc}      *      *<p>Returns the SQL string.      *      * @see #getSql()      * @return SQL string      */
+comment|/**    * {@inheritDoc}    *    *<p>Returns the SQL string.    *    * @return SQL string    * @see #getSql()    */
 annotation|@
 name|Override
 specifier|public
@@ -135,7 +135,7 @@ return|return
 name|s
 return|;
 block|}
-comment|/**      * Returns the SQL string.      * @return SQL string      */
+comment|/**    * Returns the SQL string.    *    * @return SQL string    */
 specifier|public
 name|String
 name|getSql
@@ -145,7 +145,7 @@ return|return
 name|s
 return|;
 block|}
-comment|/**      * Returns the dialect.      */
+comment|/**    * Returns the dialect.    */
 specifier|public
 name|SqlDialect
 name|getDialect

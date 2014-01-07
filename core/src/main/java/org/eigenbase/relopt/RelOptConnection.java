@@ -23,7 +23,7 @@ interface|interface
 name|RelOptConnection
 block|{
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Returns the schema underlying this connection. Non-abstract classes      * implementing this interface must also provide<code>public static Schema      * getRelOptSchemaStatic()</code>.      */
+comment|/**    * Returns the schema underlying this connection. Non-abstract classes    * implementing this interface must also provide<code>public static Schema    * getRelOptSchemaStatic()</code>.    */
 name|RelOptSchema
 name|getRelOptSchema
 parameter_list|()

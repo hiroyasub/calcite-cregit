@@ -61,7 +61,7 @@ name|PushFilterIntoMultiJoinRule
 argument_list|()
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a PushFilterIntoMultiJoinRule.      */
+comment|/**    * Creates a PushFilterIntoMultiJoinRule.    */
 specifier|private
 name|PushFilterIntoMultiJoinRule
 parameter_list|()

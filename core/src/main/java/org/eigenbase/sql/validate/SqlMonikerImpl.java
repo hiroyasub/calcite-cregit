@@ -65,7 +65,7 @@ name|SqlMonikerType
 name|type
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a moniker with an array of names.      */
+comment|/**    * Creates a moniker with an array of names.    */
 specifier|public
 name|SqlMonikerImpl
 parameter_list|(
@@ -114,7 +114,7 @@ operator|=
 name|type
 expr_stmt|;
 block|}
-comment|/**      * Creates a moniker with a single name.      */
+comment|/**    * Creates a moniker with a single name.    */
 specifier|public
 name|SqlMonikerImpl
 parameter_list|(

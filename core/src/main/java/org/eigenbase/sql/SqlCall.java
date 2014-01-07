@@ -215,7 +215,7 @@ name|getKind
 argument_list|()
 return|;
 block|}
-comment|/**      * Whether this call was created by expanding a parentheses-free call to      * what was syntactically an identifier.      */
+comment|/**    * Whether this call was created by expanding a parentheses-free call to    * what was syntactically an identifier.    */
 specifier|public
 name|boolean
 name|isExpanded
@@ -459,7 +459,7 @@ expr_stmt|;
 block|}
 block|}
 block|}
-comment|/**      * Validates this call.      *      *<p>The default implementation delegates the validation to the operator's      * {@link SqlOperator#validateCall}. Derived classes may override (as do,      * for example {@link SqlSelect} and {@link SqlUpdate}).      */
+comment|/**    * Validates this call.    *    *<p>The default implementation delegates the validation to the operator's    * {@link SqlOperator#validateCall}. Derived classes may override (as do,    * for example {@link SqlSelect} and {@link SqlUpdate}).    */
 specifier|public
 name|void
 name|validate
@@ -765,7 +765,7 @@ return|return
 literal|true
 return|;
 block|}
-comment|/**      * Returns a string describing the actual argument types of a call, e.g.      * "SUBSTR(VARCHAR(12), NUMBER(3,2), INTEGER)".      */
+comment|/**    * Returns a string describing the actual argument types of a call, e.g.    * "SUBSTR(VARCHAR(12), NUMBER(3,2), INTEGER)".    */
 specifier|protected
 name|String
 name|getCallSignature
@@ -880,7 +880,7 @@ name|scope
 argument_list|)
 return|;
 block|}
-comment|/**      * Tests whether operator name matches supplied value.      *      * @param name Test string      *      * @return whether operator name matches parameter      */
+comment|/**    * Tests whether operator name matches supplied value.    *    * @param name Test string    * @return whether operator name matches parameter    */
 specifier|public
 name|boolean
 name|isName
@@ -898,7 +898,7 @@ name|name
 argument_list|)
 return|;
 block|}
-comment|/**      * Test to see if it is the function COUNT(*)      *      * @return boolean true if function call to COUNT(*)      */
+comment|/**    * Test to see if it is the function COUNT(*)    *    * @return boolean true if function call to COUNT(*)    */
 specifier|public
 name|boolean
 name|isCountStar

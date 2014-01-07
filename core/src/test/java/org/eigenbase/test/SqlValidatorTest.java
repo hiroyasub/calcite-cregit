@@ -133,7 +133,7 @@ extends|extends
 name|SqlValidatorTestCase
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
-comment|/**      * @deprecated Deprecated so that usages of this constant will show up in      * yellow in Intellij and maybe someone will fix them.      */
+comment|/**    * @deprecated Deprecated so that usages of this constant will show up in    * yellow in Intellij and maybe someone will fix them.    */
 specifier|protected
 specifier|static
 specifier|final
@@ -3396,7 +3396,7 @@ expr_stmt|;
 comment|// REVIEW: Can't think of any date/time/ts literals that will parse,
 comment|// but not validate.
 block|}
-comment|/**      * Tests casting to/from date/time types.      */
+comment|/**    * Tests casting to/from date/time types.    */
 annotation|@
 name|Test
 specifier|public
@@ -4382,7 +4382,7 @@ literal|"3903123"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Runs tests for INTERVAL... YEAR that should pass both parser and      * validator. A substantially identical set of tests exists in      * SqlParserTest, and any changes here should be synchronized there.      * Similarly, any changes to tests here should be echoed appropriately to      * each of the other 12 subTestIntervalXXXPositive() tests.      */
+comment|/**    * Runs tests for INTERVAL... YEAR that should pass both parser and    * validator. A substantially identical set of tests exists in    * SqlParserTest, and any changes here should be synchronized there.    * Similarly, any changes to tests here should be echoed appropriately to    * each of the other 12 subTestIntervalXXXPositive() tests.    */
 specifier|public
 name|void
 name|subTestIntervalYearPositive
@@ -4500,7 +4500,7 @@ literal|"INTERVAL YEAR NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Runs tests for INTERVAL... YEAR TO MONTH that should pass both parser and      * validator. A substantially identical set of tests exists in      * SqlParserTest, and any changes here should be synchronized there.      * Similarly, any changes to tests here should be echoed appropriately to      * each of the other 12 subTestIntervalXXXPositive() tests.      */
+comment|/**    * Runs tests for INTERVAL... YEAR TO MONTH that should pass both parser and    * validator. A substantially identical set of tests exists in    * SqlParserTest, and any changes here should be synchronized there.    * Similarly, any changes to tests here should be echoed appropriately to    * each of the other 12 subTestIntervalXXXPositive() tests.    */
 specifier|public
 name|void
 name|subTestIntervalYearToMonthPositive
@@ -4632,7 +4632,7 @@ literal|"INTERVAL YEAR TO MONTH NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Runs tests for INTERVAL... MONTH that should pass both parser and      * validator. A substantially identical set of tests exists in      * SqlParserTest, and any changes here should be synchronized there.      * Similarly, any changes to tests here should be echoed appropriately to      * each of the other 12 subTestIntervalXXXPositive() tests.      */
+comment|/**    * Runs tests for INTERVAL... MONTH that should pass both parser and    * validator. A substantially identical set of tests exists in    * SqlParserTest, and any changes here should be synchronized there.    * Similarly, any changes to tests here should be echoed appropriately to    * each of the other 12 subTestIntervalXXXPositive() tests.    */
 specifier|public
 name|void
 name|subTestIntervalMonthPositive
@@ -4750,7 +4750,7 @@ literal|"INTERVAL MONTH NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Runs tests for INTERVAL... DAY that should pass both parser and      * validator. A substantially identical set of tests exists in      * SqlParserTest, and any changes here should be synchronized there.      * Similarly, any changes to tests here should be echoed appropriately to      * each of the other 12 subTestIntervalXXXPositive() tests.      */
+comment|/**    * Runs tests for INTERVAL... DAY that should pass both parser and    * validator. A substantially identical set of tests exists in    * SqlParserTest, and any changes here should be synchronized there.    * Similarly, any changes to tests here should be echoed appropriately to    * each of the other 12 subTestIntervalXXXPositive() tests.    */
 specifier|public
 name|void
 name|subTestIntervalDayPositive
@@ -4999,7 +4999,7 @@ literal|"INTERVAL DAY TO HOUR NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Runs tests for INTERVAL... DAY TO MINUTE that should pass both parser and      * validator. A substantially identical set of tests exists in      * SqlParserTest, and any changes here should be synchronized there.      * Similarly, any changes to tests here should be echoed appropriately to      * each of the other 12 subTestIntervalXXXPositive() tests.      */
+comment|/**    * Runs tests for INTERVAL... DAY TO MINUTE that should pass both parser and    * validator. A substantially identical set of tests exists in    * SqlParserTest, and any changes here should be synchronized there.    * Similarly, any changes to tests here should be echoed appropriately to    * each of the other 12 subTestIntervalXXXPositive() tests.    */
 specifier|public
 name|void
 name|subTestIntervalDayToMinutePositive
@@ -5131,7 +5131,7 @@ literal|"INTERVAL DAY TO MINUTE NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Runs tests for INTERVAL... DAY TO SECOND that should pass both parser and      * validator. A substantially identical set of tests exists in      * SqlParserTest, and any changes here should be synchronized there.      * Similarly, any changes to tests here should be echoed appropriately to      * each of the other 12 subTestIntervalXXXPositive() tests.      */
+comment|/**    * Runs tests for INTERVAL... DAY TO SECOND that should pass both parser and    * validator. A substantially identical set of tests exists in    * SqlParserTest, and any changes here should be synchronized there.    * Similarly, any changes to tests here should be echoed appropriately to    * each of the other 12 subTestIntervalXXXPositive() tests.    */
 specifier|public
 name|void
 name|subTestIntervalDayToSecondPositive
@@ -5312,7 +5312,7 @@ literal|"INTERVAL DAY TO SECOND NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Runs tests for INTERVAL... HOUR that should pass both parser and      * validator. A substantially identical set of tests exists in      * SqlParserTest, and any changes here should be synchronized there.      * Similarly, any changes to tests here should be echoed appropriately to      * each of the other 12 subTestIntervalXXXPositive() tests.      */
+comment|/**    * Runs tests for INTERVAL... HOUR that should pass both parser and    * validator. A substantially identical set of tests exists in    * SqlParserTest, and any changes here should be synchronized there.    * Similarly, any changes to tests here should be echoed appropriately to    * each of the other 12 subTestIntervalXXXPositive() tests.    */
 specifier|public
 name|void
 name|subTestIntervalHourPositive
@@ -5430,7 +5430,7 @@ literal|"INTERVAL HOUR NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Runs tests for INTERVAL... HOUR TO MINUTE that should pass both parser      * and validator. A substantially identical set of tests exists in      * SqlParserTest, and any changes here should be synchronized there.      * Similarly, any changes to tests here should be echoed appropriately to      * each of the other 12 subTestIntervalXXXPositive() tests.      */
+comment|/**    * Runs tests for INTERVAL... HOUR TO MINUTE that should pass both parser    * and validator. A substantially identical set of tests exists in    * SqlParserTest, and any changes here should be synchronized there.    * Similarly, any changes to tests here should be echoed appropriately to    * each of the other 12 subTestIntervalXXXPositive() tests.    */
 specifier|public
 name|void
 name|subTestIntervalHourToMinutePositive
@@ -5562,7 +5562,7 @@ literal|"INTERVAL HOUR TO MINUTE NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Runs tests for INTERVAL... HOUR TO SECOND that should pass both parser      * and validator. A substantially identical set of tests exists in      * SqlParserTest, and any changes here should be synchronized there.      * Similarly, any changes to tests here should be echoed appropriately to      * each of the other 12 subTestIntervalXXXPositive() tests.      */
+comment|/**    * Runs tests for INTERVAL... HOUR TO SECOND that should pass both parser    * and validator. A substantially identical set of tests exists in    * SqlParserTest, and any changes here should be synchronized there.    * Similarly, any changes to tests here should be echoed appropriately to    * each of the other 12 subTestIntervalXXXPositive() tests.    */
 specifier|public
 name|void
 name|subTestIntervalHourToSecondPositive
@@ -5743,7 +5743,7 @@ literal|"INTERVAL HOUR TO SECOND NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Runs tests for INTERVAL... MINUTE that should pass both parser and      * validator. A substantially identical set of tests exists in      * SqlParserTest, and any changes here should be synchronized there.      * Similarly, any changes to tests here should be echoed appropriately to      * each of the other 12 subTestIntervalXXXPositive() tests.      */
+comment|/**    * Runs tests for INTERVAL... MINUTE that should pass both parser and    * validator. A substantially identical set of tests exists in    * SqlParserTest, and any changes here should be synchronized there.    * Similarly, any changes to tests here should be echoed appropriately to    * each of the other 12 subTestIntervalXXXPositive() tests.    */
 specifier|public
 name|void
 name|subTestIntervalMinutePositive
@@ -5861,7 +5861,7 @@ literal|"INTERVAL MINUTE NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Runs tests for INTERVAL... MINUTE TO SECOND that should pass both parser      * and validator. A substantially identical set of tests exists in      * SqlParserTest, and any changes here should be synchronized there.      * Similarly, any changes to tests here should be echoed appropriately to      * each of the other 12 subTestIntervalXXXPositive() tests.      */
+comment|/**    * Runs tests for INTERVAL... MINUTE TO SECOND that should pass both parser    * and validator. A substantially identical set of tests exists in    * SqlParserTest, and any changes here should be synchronized there.    * Similarly, any changes to tests here should be echoed appropriately to    * each of the other 12 subTestIntervalXXXPositive() tests.    */
 specifier|public
 name|void
 name|subTestIntervalMinuteToSecondPositive
@@ -6042,7 +6042,7 @@ literal|"INTERVAL MINUTE TO SECOND NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Runs tests for INTERVAL... SECOND that should pass both parser and      * validator. A substantially identical set of tests exists in      * SqlParserTest, and any changes here should be synchronized there.      * Similarly, any changes to tests here should be echoed appropriately to      * each of the other 12 subTestIntervalXXXPositive() tests.      */
+comment|/**    * Runs tests for INTERVAL... SECOND that should pass both parser and    * validator. A substantially identical set of tests exists in    * SqlParserTest, and any changes here should be synchronized there.    * Similarly, any changes to tests here should be echoed appropriately to    * each of the other 12 subTestIntervalXXXPositive() tests.    */
 specifier|public
 name|void
 name|subTestIntervalSecondPositive
@@ -6195,7 +6195,7 @@ literal|"INTERVAL SECOND NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Runs tests for INTERVAL... YEAR that should pass parser but fail      * validator. A substantially identical set of tests exists in      * SqlParserTest, and any changes here should be synchronized there.      * Similarly, any changes to tests here should be echoed appropriately to      * each of the other 12 subTestIntervalXXXNegative() tests.      */
+comment|/**    * Runs tests for INTERVAL... YEAR that should pass parser but fail    * validator. A substantially identical set of tests exists in    * SqlParserTest, and any changes here should be synchronized there.    * Similarly, any changes to tests here should be echoed appropriately to    * each of the other 12 subTestIntervalXXXNegative() tests.    */
 specifier|public
 name|void
 name|subTestIntervalYearNegative
@@ -6315,7 +6315,7 @@ literal|"Interval leading field precision '0' out of range for INTERVAL YEAR\\(0
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Runs tests for INTERVAL... YEAR TO MONTH that should pass parser but fail      * validator. A substantially identical set of tests exists in      * SqlParserTest, and any changes here should be synchronized there.      * Similarly, any changes to tests here should be echoed appropriately to      * each of the other 12 subTestIntervalXXXNegative() tests.      */
+comment|/**    * Runs tests for INTERVAL... YEAR TO MONTH that should pass parser but fail    * validator. A substantially identical set of tests exists in    * SqlParserTest, and any changes here should be synchronized there.    * Similarly, any changes to tests here should be echoed appropriately to    * each of the other 12 subTestIntervalXXXNegative() tests.    */
 specifier|public
 name|void
 name|subTestIntervalYearToMonthNegative
@@ -6457,7 +6457,7 @@ literal|"Interval leading field precision '0' out of range for INTERVAL YEAR\\(0
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Runs tests for INTERVAL... MONTH that should pass parser but fail      * validator. A substantially identical set of tests exists in      * SqlParserTest, and any changes here should be synchronized there.      * Similarly, any changes to tests here should be echoed appropriately to      * each of the other 12 subTestIntervalXXXNegative() tests.      */
+comment|/**    * Runs tests for INTERVAL... MONTH that should pass parser but fail    * validator. A substantially identical set of tests exists in    * SqlParserTest, and any changes here should be synchronized there.    * Similarly, any changes to tests here should be echoed appropriately to    * each of the other 12 subTestIntervalXXXNegative() tests.    */
 specifier|public
 name|void
 name|subTestIntervalMonthNegative
@@ -6577,7 +6577,7 @@ literal|"Interval leading field precision '0' out of range for INTERVAL MONTH\\(
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Runs tests for INTERVAL... DAY that should pass parser but fail      * validator. A substantially identical set of tests exists in      * SqlParserTest, and any changes here should be synchronized there.      * Similarly, any changes to tests here should be echoed appropriately to      * each of the other 12 subTestIntervalXXXNegative() tests.      */
+comment|/**    * Runs tests for INTERVAL... DAY that should pass parser but fail    * validator. A substantially identical set of tests exists in    * SqlParserTest, and any changes here should be synchronized there.    * Similarly, any changes to tests here should be echoed appropriately to    * each of the other 12 subTestIntervalXXXNegative() tests.    */
 specifier|public
 name|void
 name|subTestIntervalDayNegative
@@ -6704,7 +6704,7 @@ literal|"Interval leading field precision '0' out of range for INTERVAL DAY\\(0\
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Runs tests for INTERVAL... DAY TO HOUR that should pass parser but fail      * validator. A substantially identical set of tests exists in      * SqlParserTest, and any changes here should be synchronized there.      * Similarly, any changes to tests here should be echoed appropriately to      * each of the other 12 subTestIntervalXXXNegative() tests.      */
+comment|/**    * Runs tests for INTERVAL... DAY TO HOUR that should pass parser but fail    * validator. A substantially identical set of tests exists in    * SqlParserTest, and any changes here should be synchronized there.    * Similarly, any changes to tests here should be echoed appropriately to    * each of the other 12 subTestIntervalXXXNegative() tests.    */
 specifier|public
 name|void
 name|subTestIntervalDayToHourNegative
@@ -6853,7 +6853,7 @@ literal|"Interval leading field precision '0' out of range for INTERVAL DAY\\(0\
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Runs tests for INTERVAL... DAY TO MINUTE that should pass parser but fail      * validator. A substantially identical set of tests exists in      * SqlParserTest, and any changes here should be synchronized there.      * Similarly, any changes to tests here should be echoed appropriately to      * each of the other 12 subTestIntervalXXXNegative() tests.      */
+comment|/**    * Runs tests for INTERVAL... DAY TO MINUTE that should pass parser but fail    * validator. A substantially identical set of tests exists in    * SqlParserTest, and any changes here should be synchronized there.    * Similarly, any changes to tests here should be echoed appropriately to    * each of the other 12 subTestIntervalXXXNegative() tests.    */
 specifier|public
 name|void
 name|subTestIntervalDayToMinuteNegative
@@ -7051,7 +7051,7 @@ literal|"Interval leading field precision '0' out of range for INTERVAL DAY\\(0\
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Runs tests for INTERVAL... DAY TO SECOND that should pass parser but fail      * validator. A substantially identical set of tests exists in      * SqlParserTest, and any changes here should be synchronized there.      * Similarly, any changes to tests here should be echoed appropriately to      * each of the other 12 subTestIntervalXXXNegative() tests.      */
+comment|/**    * Runs tests for INTERVAL... DAY TO SECOND that should pass parser but fail    * validator. A substantially identical set of tests exists in    * SqlParserTest, and any changes here should be synchronized there.    * Similarly, any changes to tests here should be echoed appropriately to    * each of the other 12 subTestIntervalXXXNegative() tests.    */
 specifier|public
 name|void
 name|subTestIntervalDayToSecondNegative
@@ -7319,7 +7319,7 @@ literal|"Interval fractional second precision '0' out of range for INTERVAL DAY 
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Runs tests for INTERVAL... HOUR that should pass parser but fail      * validator. A substantially identical set of tests exists in      * SqlParserTest, and any changes here should be synchronized there.      * Similarly, any changes to tests here should be echoed appropriately to      * each of the other 12 subTestIntervalXXXNegative() tests.      */
+comment|/**    * Runs tests for INTERVAL... HOUR that should pass parser but fail    * validator. A substantially identical set of tests exists in    * SqlParserTest, and any changes here should be synchronized there.    * Similarly, any changes to tests here should be echoed appropriately to    * each of the other 12 subTestIntervalXXXNegative() tests.    */
 specifier|public
 name|void
 name|subTestIntervalHourNegative
@@ -7446,7 +7446,7 @@ literal|"Interval leading field precision '0' out of range for INTERVAL HOUR\\(0
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Runs tests for INTERVAL... HOUR TO MINUTE that should pass parser but      * fail validator. A substantially identical set of tests exists in      * SqlParserTest, and any changes here should be synchronized there.      * Similarly, any changes to tests here should be echoed appropriately to      * each of the other 12 subTestIntervalXXXNegative() tests.      */
+comment|/**    * Runs tests for INTERVAL... HOUR TO MINUTE that should pass parser but    * fail validator. A substantially identical set of tests exists in    * SqlParserTest, and any changes here should be synchronized there.    * Similarly, any changes to tests here should be echoed appropriately to    * each of the other 12 subTestIntervalXXXNegative() tests.    */
 specifier|public
 name|void
 name|subTestIntervalHourToMinuteNegative
@@ -7595,7 +7595,7 @@ literal|"Interval leading field precision '0' out of range for INTERVAL HOUR\\(0
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Runs tests for INTERVAL... HOUR TO SECOND that should pass parser but      * fail validator. A substantially identical set of tests exists in      * SqlParserTest, and any changes here should be synchronized there.      * Similarly, any changes to tests here should be echoed appropriately to      * each of the other 12 subTestIntervalXXXNegative() tests.      */
+comment|/**    * Runs tests for INTERVAL... HOUR TO SECOND that should pass parser but    * fail validator. A substantially identical set of tests exists in    * SqlParserTest, and any changes here should be synchronized there.    * Similarly, any changes to tests here should be echoed appropriately to    * each of the other 12 subTestIntervalXXXNegative() tests.    */
 specifier|public
 name|void
 name|subTestIntervalHourToSecondNegative
@@ -7835,7 +7835,7 @@ literal|"Interval fractional second precision '0' out of range for INTERVAL HOUR
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Runs tests for INTERVAL... MINUTE that should pass parser but fail      * validator. A substantially identical set of tests exists in      * SqlParserTest, and any changes here should be synchronized there.      * Similarly, any changes to tests here should be echoed appropriately to      * each of the other 12 subTestIntervalXXXNegative() tests.      */
+comment|/**    * Runs tests for INTERVAL... MINUTE that should pass parser but fail    * validator. A substantially identical set of tests exists in    * SqlParserTest, and any changes here should be synchronized there.    * Similarly, any changes to tests here should be echoed appropriately to    * each of the other 12 subTestIntervalXXXNegative() tests.    */
 specifier|public
 name|void
 name|subTestIntervalMinuteNegative
@@ -7962,7 +7962,7 @@ literal|"Interval leading field precision '0' out of range for INTERVAL MINUTE\\
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Runs tests for INTERVAL... MINUTE TO SECOND that should pass parser but      * fail validator. A substantially identical set of tests exists in      * SqlParserTest, and any changes here should be synchronized there.      * Similarly, any changes to tests here should be echoed appropriately to      * each of the other 12 subTestIntervalXXXNegative() tests.      */
+comment|/**    * Runs tests for INTERVAL... MINUTE TO SECOND that should pass parser but    * fail validator. A substantially identical set of tests exists in    * SqlParserTest, and any changes here should be synchronized there.    * Similarly, any changes to tests here should be echoed appropriately to    * each of the other 12 subTestIntervalXXXNegative() tests.    */
 specifier|public
 name|void
 name|subTestIntervalMinuteToSecondNegative
@@ -8195,7 +8195,7 @@ literal|" INTERVAL MINUTE TO SECOND\\(0\\)"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Runs tests for INTERVAL... SECOND that should pass parser but fail      * validator. A substantially identical set of tests exists in      * SqlParserTest, and any changes here should be synchronized there.      * Similarly, any changes to tests here should be echoed appropriately to      * each of the other 12 subTestIntervalXXXNegative() tests.      */
+comment|/**    * Runs tests for INTERVAL... SECOND that should pass parser but fail    * validator. A substantially identical set of tests exists in    * SqlParserTest, and any changes here should be synchronized there.    * Similarly, any changes to tests here should be echoed appropriately to    * each of the other 12 subTestIntervalXXXNegative() tests.    */
 specifier|public
 name|void
 name|subTestIntervalSecondNegative
@@ -12325,7 +12325,7 @@ literal|"select deptno from emp group by deptno having deptno + 5> 10"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Tests a large scalar expression, which will expose any O(n^2) algorithms      * lurking in the validation process.      */
+comment|/**    * Tests a large scalar expression, which will expose any O(n^2) algorithms    * lurking in the validation process.    */
 annotation|@
 name|Test
 specifier|public
@@ -12940,7 +12940,7 @@ literal|"order by 'foobar'"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Tests validation of the ORDER BY clause when GROUP BY is present.      */
+comment|/**    * Tests validation of the ORDER BY clause when GROUP BY is present.    */
 annotation|@
 name|Test
 specifier|public

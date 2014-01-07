@@ -215,7 +215,7 @@ block|}
 argument_list|)
 return|;
 block|}
-comment|/**      * Returns the type of the argument to UNNEST.      */
+comment|/**    * Returns the type of the argument to UNNEST.    */
 specifier|private
 name|RelDataType
 name|inferReturnType

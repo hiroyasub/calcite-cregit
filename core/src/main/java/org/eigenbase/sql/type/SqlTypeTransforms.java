@@ -86,7 +86,7 @@ class|class
 name|SqlTypeTransforms
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
-comment|/**      * Parameter type-inference transform strategy where a derived type is      * transformed into the same type but nullable if any of a calls operands is      * nullable      */
+comment|/**    * Parameter type-inference transform strategy where a derived type is    * transformed into the same type but nullable if any of a calls operands is    * nullable    */
 specifier|public
 specifier|static
 specifier|final
@@ -134,7 +134,7 @@ return|;
 block|}
 block|}
 decl_stmt|;
-comment|/**      * Parameter type-inference transform strategy where a derived type is      * transformed into the same type but not nullable.      */
+comment|/**    * Parameter type-inference transform strategy where a derived type is    * transformed into the same type but not nullable.    */
 specifier|public
 specifier|static
 specifier|final
@@ -177,7 +177,7 @@ return|;
 block|}
 block|}
 decl_stmt|;
-comment|/**      * Parameter type-inference transform strategy where a derived type is      * transformed into the same type with nulls allowed.      */
+comment|/**    * Parameter type-inference transform strategy where a derived type is    * transformed into the same type with nulls allowed.    */
 specifier|public
 specifier|static
 specifier|final
@@ -220,7 +220,7 @@ return|;
 block|}
 block|}
 decl_stmt|;
-comment|/**      * Type-inference strategy whereby the result type of a call is VARYING the      * type given. The length returned is the same as length of the first      * argument. Return type will have same nullablilty as input type      * nullablility. First Arg must be of string type.      */
+comment|/**    * Type-inference strategy whereby the result type of a call is VARYING the    * type given. The length returned is the same as length of the first    * argument. Return type will have same nullablilty as input type    * nullablility. First Arg must be of string type.    */
 specifier|public
 specifier|static
 specifier|final
@@ -387,7 +387,7 @@ block|}
 block|}
 block|}
 decl_stmt|;
-comment|/**      * Parameter type-inference transform strategy where a derived type must be      * a multiset type and the returned type is the multiset's element type.      *      * @see MultisetSqlType#getComponentType      */
+comment|/**    * Parameter type-inference transform strategy where a derived type must be    * a multiset type and the returned type is the multiset's element type.    *    * @see MultisetSqlType#getComponentType    */
 specifier|public
 specifier|static
 specifier|final
@@ -418,7 +418,7 @@ return|;
 block|}
 block|}
 decl_stmt|;
-comment|/**      * Parameter type-inference transform strategy where a derived type must be      * a struct type with precisely one field and the returned type is the type      * of that field.      */
+comment|/**    * Parameter type-inference transform strategy where a derived type must be    * a struct type with precisely one field and the returned type is the type    * of that field.    */
 specifier|public
 specifier|static
 specifier|final

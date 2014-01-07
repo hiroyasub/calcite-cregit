@@ -101,7 +101,7 @@ name|FALSE
 argument_list|)
 decl_stmt|;
 comment|//~ Instance fields --------------------------------------------------------
-comment|/**      * Condition for expressions that should be preserved in the projection.      */
+comment|/**    * Condition for expressions that should be preserved in the projection.    */
 specifier|private
 specifier|final
 name|PushProjector
@@ -110,7 +110,7 @@ name|ExprCondition
 name|preserveExprCondition
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a PushProjectPastJoinRule with an explicit condition.      *      * @param preserveExprCondition Condition for expressions that should be      * preserved in the projection      */
+comment|/**    * Creates a PushProjectPastJoinRule with an explicit condition.    *    * @param preserveExprCondition Condition for expressions that should be    *                              preserved in the projection    */
 specifier|private
 name|PushProjectPastJoinRule
 parameter_list|(

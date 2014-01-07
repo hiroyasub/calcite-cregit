@@ -181,7 +181,7 @@ name|RexNode
 name|postJoinFilter
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Constructs a MultiJoinRel.      *      * @param cluster cluster that join belongs to      * @param inputs inputs into this multirel join      * @param joinFilter join filter applicable to this join node      * @param rowType row type of the join result of this node      * @param isFullOuterJoin true if the join is a full outer join      * @param outerJoinConditions outer join condition associated with each join      * input, if the input is null-generating in a left or right outer join;      * null otherwise      * @param joinTypes the join type corresponding to each input; if an input      * is null-generating in a left or right outer join, the entry indicates the      * type of outer join; otherwise, the entry is set to INNER      * @param projFields fields that will be projected from each input; if null,      * projection information is not available yet so it's assumed that all      * fields from the input are projected      * @param joinFieldRefCountsMap counters of the number of times each field      * is referenced in join conditions, indexed by the input #      * @param postJoinFilter filter to be applied after the joins are executed      */
+comment|/**    * Constructs a MultiJoinRel.    *    * @param cluster               cluster that join belongs to    * @param inputs                inputs into this multirel join    * @param joinFilter            join filter applicable to this join node    * @param rowType               row type of the join result of this node    * @param isFullOuterJoin       true if the join is a full outer join    * @param outerJoinConditions   outer join condition associated with each join    *                              input, if the input is null-generating in a    *                              left or right outer join; null otherwise    * @param joinTypes             the join type corresponding to each input; if    *                              an input is null-generating in a left or right    *                              outer join, the entry indicates the type of    *                              outer join; otherwise, the entry is set to    *                              INNER    * @param projFields            fields that will be projected from each input;    *                              if null, projection information is not    *                              available yet so it's assumed that all fields    *                              from the input are projected    * @param joinFieldRefCountsMap counters of the number of times each field    *                              is referenced in join conditions, indexed by    *                              the input #    * @param postJoinFilter        filter to be applied after the joins are    *                              executed    */
 specifier|public
 name|MultiJoinRel
 parameter_list|(
@@ -384,7 +384,7 @@ name|postJoinFilter
 argument_list|)
 return|;
 block|}
-comment|/**      * Returns a deep copy of {@link #joinFieldRefCountsMap}.      */
+comment|/**    * Returns a deep copy of {@link #joinFieldRefCountsMap}.    */
 specifier|private
 name|Map
 argument_list|<
@@ -741,7 +741,7 @@ name|joinFilter
 argument_list|)
 return|;
 block|}
-comment|/**      * @return join filters associated with this MultiJoinRel      */
+comment|/**    * @return join filters associated with this MultiJoinRel    */
 specifier|public
 name|RexNode
 name|getJoinFilter
@@ -751,7 +751,7 @@ return|return
 name|joinFilter
 return|;
 block|}
-comment|/**      * @return true if the MultiJoinRel corresponds to a full outer join.      */
+comment|/**    * @return true if the MultiJoinRel corresponds to a full outer join.    */
 specifier|public
 name|boolean
 name|isFullOuterJoin
@@ -761,7 +761,7 @@ return|return
 name|isFullOuterJoin
 return|;
 block|}
-comment|/**      * @return outer join conditions for null-generating inputs      */
+comment|/**    * @return outer join conditions for null-generating inputs    */
 specifier|public
 name|List
 argument_list|<
@@ -774,7 +774,7 @@ return|return
 name|outerJoinConditions
 return|;
 block|}
-comment|/**      * @return join types of each input      */
+comment|/**    * @return join types of each input    */
 specifier|public
 name|List
 argument_list|<
@@ -787,7 +787,7 @@ return|return
 name|joinTypes
 return|;
 block|}
-comment|/**      * @return bitmaps representing the fields projected from each input; if an      * entry is null, all fields are projected      */
+comment|/**    * @return bitmaps representing the fields projected from each input; if an    * entry is null, all fields are projected    */
 specifier|public
 name|List
 argument_list|<
@@ -800,7 +800,7 @@ return|return
 name|projFields
 return|;
 block|}
-comment|/**      * @return the map of reference counts for each input, representing the      * fields accessed in join conditions      */
+comment|/**    * @return the map of reference counts for each input, representing the    * fields accessed in join conditions    */
 specifier|public
 name|Map
 argument_list|<
@@ -816,7 +816,7 @@ return|return
 name|joinFieldRefCountsMap
 return|;
 block|}
-comment|/**      * @return a copy of the map of reference counts for each input,      * representing the fields accessed in join conditions      */
+comment|/**    * @return a copy of the map of reference counts for each input,    * representing the fields accessed in join conditions    */
 specifier|public
 name|Map
 argument_list|<
@@ -833,7 +833,7 @@ name|cloneJoinFieldRefCountsMap
 argument_list|()
 return|;
 block|}
-comment|/**      * @return post-join filter associated with this MultiJoinRel      */
+comment|/**    * @return post-join filter associated with this MultiJoinRel    */
 specifier|public
 name|RexNode
 name|getPostJoinFilter

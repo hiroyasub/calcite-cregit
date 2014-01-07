@@ -87,7 +87,7 @@ extends|,
 name|Cloneable
 block|{
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Returns a list of this relational expression's child expressions.      * (These are scalar expressions, and so do not include the relational      * inputs that are returned by {@link #getInputs}.      *      *<p>The caller should treat the list as unmodifiable; typical      * implementations will return an immutable list. If there are no      * child expressions, returns an empty list, not<code>null</code>.      */
+comment|/**    * Returns a list of this relational expression's child expressions.    * (These are scalar expressions, and so do not include the relational    * inputs that are returned by {@link #getInputs}.    *    *<p>The caller should treat the list as unmodifiable; typical    * implementations will return an immutable list. If there are no    * child expressions, returns an empty list, not<code>null</code>.    */
 specifier|public
 name|List
 argument_list|<
@@ -96,13 +96,13 @@ argument_list|>
 name|getChildExps
 parameter_list|()
 function_decl|;
-comment|/**      * Return the CallingConvention trait from this RelNode's {@link      * #getTraitSet() trait set}.      *      * @return this RelNode's CallingConvention      */
+comment|/**    * Return the CallingConvention trait from this RelNode's {@link    * #getTraitSet() trait set}.    *    * @return this RelNode's CallingConvention    */
 specifier|public
 name|Convention
 name|getConvention
 parameter_list|()
 function_decl|;
-comment|/**      * Sets the name of the variable which is to be implicitly set at runtime      * each time a row is returned from this relational expression      *      * @param correlVariable Name of correlating variable      */
+comment|/**    * Sets the name of the variable which is to be implicitly set at runtime    * each time a row is returned from this relational expression    *    * @param correlVariable Name of correlating variable    */
 specifier|public
 name|void
 name|setCorrelVariable
@@ -111,19 +111,19 @@ name|String
 name|correlVariable
 parameter_list|)
 function_decl|;
-comment|/**      * Returns the name of the variable which is to be implicitly set at runtime      * each time a row is returned from this relational expression; or null if      * there is no variable.      *      * @return Name of correlating variable, or null      */
+comment|/**    * Returns the name of the variable which is to be implicitly set at runtime    * each time a row is returned from this relational expression; or null if    * there is no variable.    *    * @return Name of correlating variable, or null    */
 specifier|public
 name|String
 name|getCorrelVariable
 parameter_list|()
 function_decl|;
-comment|/**      * Returns whether the same value will not come out twice. Default value is      *<code>false</code>, derived classes should override.      */
+comment|/**    * Returns whether the same value will not come out twice. Default value is    *<code>false</code>, derived classes should override.    */
 specifier|public
 name|boolean
 name|isDistinct
 parameter_list|()
 function_decl|;
-comment|/**      * Returns the<code>i</code><sup>th</sup> input relational expression.      *      * @param i Ordinal of input      *      * @return<code>i</code><sup>th</sup> input      */
+comment|/**    * Returns the<code>i</code><sup>th</sup> input relational expression.    *    * @param i Ordinal of input    * @return<code>i</code><sup>th</sup> input    */
 specifier|public
 name|RelNode
 name|getInput
@@ -132,25 +132,25 @@ name|int
 name|i
 parameter_list|)
 function_decl|;
-comment|/**      * Returns a variable with which to reference the current row of this      * relational expression as a correlating variable. Creates a variable if      * none exists.      */
+comment|/**    * Returns a variable with which to reference the current row of this    * relational expression as a correlating variable. Creates a variable if    * none exists.    */
 specifier|public
 name|String
 name|getOrCreateCorrelVariable
 parameter_list|()
 function_decl|;
-comment|/**      * Returns the sub-query this relational expression belongs to. A sub-query      * determines the scope for correlating variables (see {@link      * #setCorrelVariable(String)}).      *      * @return Sub-query      */
+comment|/**    * Returns the sub-query this relational expression belongs to. A sub-query    * determines the scope for correlating variables (see {@link    * #setCorrelVariable(String)}).    *    * @return Sub-query    */
 specifier|public
 name|RelOptQuery
 name|getQuery
 parameter_list|()
 function_decl|;
-comment|/**      * Returns the type of the rows returned by this relational expression.      */
+comment|/**    * Returns the type of the rows returned by this relational expression.    */
 specifier|public
 name|RelDataType
 name|getRowType
 parameter_list|()
 function_decl|;
-comment|/**      * Returns the type of the rows expected for an input. Defaults to {@link      * #getRowType}.      *      * @param ordinalInParent input's 0-based ordinal with respect to this      * parent rel      *      * @return expected row type      */
+comment|/**    * Returns the type of the rows expected for an input. Defaults to {@link    * #getRowType}.    *    * @param ordinalInParent input's 0-based ordinal with respect to this    *                        parent rel    * @return expected row type    */
 specifier|public
 name|RelDataType
 name|getExpectedInputRowType
@@ -159,7 +159,7 @@ name|int
 name|ordinalInParent
 parameter_list|)
 function_decl|;
-comment|/**      * Returns an array of this relational expression's inputs. If there are no      * inputs, returns an empty array, not<code>null</code>.      */
+comment|/**    * Returns an array of this relational expression's inputs. If there are no    * inputs, returns an empty array, not<code>null</code>.    */
 specifier|public
 name|List
 argument_list|<
@@ -168,13 +168,13 @@ argument_list|>
 name|getInputs
 parameter_list|()
 function_decl|;
-comment|/**      * Returns an estimate of the number of rows this relational expression will      * return.      *      *<p>NOTE jvs 29-Mar-2006: Don't call this method directly. Instead, use      * {@link RelMetadataQuery#getRowCount}, which gives plugins a chance to      * override the rel's default ideas about row count.      */
+comment|/**    * Returns an estimate of the number of rows this relational expression will    * return.    *    *<p>NOTE jvs 29-Mar-2006: Don't call this method directly. Instead, use    * {@link RelMetadataQuery#getRowCount}, which gives plugins a chance to    * override the rel's default ideas about row count.    */
 specifier|public
 name|double
 name|getRows
 parameter_list|()
 function_decl|;
-comment|/**      * Returns the names of variables which are set in this relational      * expression but also used and therefore not available to parents of this      * relational expression.      *      *<p>By default, returns the empty set. Derived classes may override this      * method.</p>      */
+comment|/**    * Returns the names of variables which are set in this relational    * expression but also used and therefore not available to parents of this    * relational expression.    *    *<p>By default, returns the empty set. Derived classes may override this    * method.</p>    */
 specifier|public
 name|Set
 argument_list|<
@@ -183,7 +183,7 @@ argument_list|>
 name|getVariablesStopped
 parameter_list|()
 function_decl|;
-comment|/**      * Collects variables known to be used by this expression or its      * descendants. By default, no such information is available and must be      * derived by analyzing sub-expressions, but some optimizer implementations      * may insert special expressions which remember such information.      *      * @param variableSet receives variables used      */
+comment|/**    * Collects variables known to be used by this expression or its    * descendants. By default, no such information is available and must be    * derived by analyzing sub-expressions, but some optimizer implementations    * may insert special expressions which remember such information.    *    * @param variableSet receives variables used    */
 specifier|public
 name|void
 name|collectVariablesUsed
@@ -195,7 +195,7 @@ argument_list|>
 name|variableSet
 parameter_list|)
 function_decl|;
-comment|/**      * Collects variables set by this expression.      *      * @param variableSet receives variables known to be set by      */
+comment|/**    * Collects variables set by this expression.    *    * @param variableSet receives variables known to be set by    */
 specifier|public
 name|void
 name|collectVariablesSet
@@ -207,7 +207,7 @@ argument_list|>
 name|variableSet
 parameter_list|)
 function_decl|;
-comment|/**      * Interacts with the {@link RelVisitor} in a {@link      * org.eigenbase.util.Glossary#VisitorPattern visitor pattern} to traverse      * the tree of relational expressions.      */
+comment|/**    * Interacts with the {@link RelVisitor} in a {@link    * org.eigenbase.util.Glossary#VisitorPattern visitor pattern} to traverse    * the tree of relational expressions.    */
 specifier|public
 name|void
 name|childrenAccept
@@ -216,7 +216,7 @@ name|RelVisitor
 name|visitor
 parameter_list|)
 function_decl|;
-comment|/**      * Returns the cost of this plan (not including children). The base      * implementation throws an error; derived classes should override.      *      *<p>NOTE jvs 29-Mar-2006: Don't call this method directly. Instead, use      * {@link RelMetadataQuery#getNonCumulativeCost}, which gives plugins a      * chance to override the rel's default ideas about cost.      */
+comment|/**    * Returns the cost of this plan (not including children). The base    * implementation throws an error; derived classes should override.    *    *<p>NOTE jvs 29-Mar-2006: Don't call this method directly. Instead, use    * {@link RelMetadataQuery#getNonCumulativeCost}, which gives plugins a    * chance to override the rel's default ideas about cost.    */
 specifier|public
 name|RelOptCost
 name|computeSelfCost
@@ -225,7 +225,7 @@ name|RelOptPlanner
 name|planner
 parameter_list|)
 function_decl|;
-comment|/** Describes the inputs and attributes of this relational expression.      * Each node should call {@code super.explain}, then call the      * {@link RelWriterImpl#input(String, RelNode)}      * and {@link RelWriterImpl#item(String, Object)} methods for each input      * and attribute.      *      * @param pw Plan writer      */
+comment|/**    * Describes the inputs and attributes of this relational expression.    * Each node should call {@code super.explain}, then call the    * {@link RelWriterImpl#input(String, RelNode)}    * and {@link RelWriterImpl#item(String, Object)} methods for each input    * and attribute.    *    * @param pw Plan writer    */
 specifier|public
 name|void
 name|explain
@@ -234,7 +234,7 @@ name|RelWriter
 name|pw
 parameter_list|)
 function_decl|;
-comment|/**      * Receives notification that this expression is about to be registered. The      * implementation of this method must at least register all child      * expressions.      */
+comment|/**    * Receives notification that this expression is about to be registered. The    * implementation of this method must at least register all child    * expressions.    */
 specifier|public
 name|RelNode
 name|onRegister
@@ -243,13 +243,13 @@ name|RelOptPlanner
 name|planner
 parameter_list|)
 function_decl|;
-comment|/**      * Computes the digest, assigns it, and returns it. For planner use only.      */
+comment|/**    * Computes the digest, assigns it, and returns it. For planner use only.    */
 specifier|public
 name|String
 name|recomputeDigest
 parameter_list|()
 function_decl|;
-comment|/**      * Registers a correlation variable.      *      * @see #getVariablesStopped      */
+comment|/**    * Registers a correlation variable.    *    * @see #getVariablesStopped    */
 specifier|public
 name|void
 name|registerCorrelVariable
@@ -258,7 +258,7 @@ name|String
 name|correlVariable
 parameter_list|)
 function_decl|;
-comment|/**      * Replaces the<code>ordinalInParent</code><sup>th</sup> input. You must      * override this method if you override {@link #getInputs}.      */
+comment|/**    * Replaces the<code>ordinalInParent</code><sup>th</sup> input. You must    * override this method if you override {@link #getInputs}.    */
 specifier|public
 name|void
 name|replaceInput
@@ -270,19 +270,19 @@ name|RelNode
 name|p
 parameter_list|)
 function_decl|;
-comment|/**      * If this relational expression represents an access to a table, returns      * that table, otherwise returns null.      */
+comment|/**    * If this relational expression represents an access to a table, returns    * that table, otherwise returns null.    */
 specifier|public
 name|RelOptTable
 name|getTable
 parameter_list|()
 function_decl|;
-comment|/**      * Returns the name of this relational expression's class, sans package      * name, for use in explain. For example, for a<code>      * org.eigenbase.rel.ArrayRel.ArrayReader</code>, this method returns      * "ArrayReader".      */
+comment|/**    * Returns the name of this relational expression's class, sans package    * name, for use in explain. For example, for a<code>    * org.eigenbase.rel.ArrayRel.ArrayReader</code>, this method returns    * "ArrayReader".    */
 specifier|public
 name|String
 name|getRelTypeName
 parameter_list|()
 function_decl|;
-comment|/**      * Returns whether this relational expression is valid.      *      *<p>If assertions are enabled, this method is typically called with<code>      * fail</code> =<code>true</code>, as follows:      *      *<blockquote>      *<pre>assert rel.isValid(true)</pre>      *</blockquote>      *      * This signals that the method can throw an {@link AssertionError} if it is      * not valid.      *      * @param fail Whether to fail if invalid      *      * @return Whether relational expression is valid      *      * @throws AssertionError if this relational expression is invalid and      * fail=true and assertions are enabled      */
+comment|/**    * Returns whether this relational expression is valid.    *    *<p>If assertions are enabled, this method is typically called with<code>    * fail</code> =<code>true</code>, as follows:    *    *<blockquote>    *<pre>assert rel.isValid(true)</pre>    *</blockquote>    *    * This signals that the method can throw an {@link AssertionError} if it is    * not valid.    *    * @param fail Whether to fail if invalid    * @return Whether relational expression is valid    * @throws AssertionError if this relational expression is invalid and    *                        fail=true and assertions are enabled    */
 specifier|public
 name|boolean
 name|isValid
@@ -291,7 +291,7 @@ name|boolean
 name|fail
 parameter_list|)
 function_decl|;
-comment|/**      * Returns a description of the physical ordering (or orderings) of this      * relational expression.      *      * @post return != null      */
+comment|/**    * Returns a description of the physical ordering (or orderings) of this    * relational expression.    *    * @post return != null    */
 specifier|public
 name|List
 argument_list|<
@@ -300,7 +300,7 @@ argument_list|>
 name|getCollationList
 parameter_list|()
 function_decl|;
-comment|/**      * Creates a copy of this relational expression, perhaps changing traits and      * inputs.      *      *<p>Sub-classes with other important attributes are encouraged to create      * variants of this method with more parameters.</p>      *      * @param traitSet Trait set      * @param inputs Inputs      * @return Copy of this relational expression, substituting traits and      * inputs      */
+comment|/**    * Creates a copy of this relational expression, perhaps changing traits and    * inputs.    *    *<p>Sub-classes with other important attributes are encouraged to create    * variants of this method with more parameters.</p>    *    * @param traitSet Trait set    * @param inputs   Inputs    * @return Copy of this relational expression, substituting traits and    * inputs    */
 name|RelNode
 name|copy
 parameter_list|(
@@ -314,7 +314,7 @@ argument_list|>
 name|inputs
 parameter_list|)
 function_decl|;
-comment|/**      * Registers any special rules specific to this kind of relational      * expression.      *      *<p>The planner calls this method this first time that it sees a      * relational expression of this class. The derived class should call {@link      * org.eigenbase.relopt.RelOptPlanner#addRule} for each rule, and then call      * {@code super.register}.</p>      */
+comment|/**    * Registers any special rules specific to this kind of relational    * expression.    *    *<p>The planner calls this method this first time that it sees a    * relational expression of this class. The derived class should call {@link    * org.eigenbase.relopt.RelOptPlanner#addRule} for each rule, and then call    * {@code super.register}.</p>    */
 name|void
 name|register
 parameter_list|(
@@ -322,7 +322,7 @@ name|RelOptPlanner
 name|planner
 parameter_list|)
 function_decl|;
-comment|/**      * Returns whether the result of this relational expression is uniquely      * identified by this columns with the given ordinals.      *      *<p>For example, if this relational expression is a TableAccessRel to      * T(A, B, C, D) whose key is (A, B), then isKey([0, 1]) yields true,      * and isKey([0]) and isKey([0, 2]) yields false.</p>      *      * @param columns Ordinals of key columns      * @return Whether the given columns are a key or a superset of a key      */
+comment|/**    * Returns whether the result of this relational expression is uniquely    * identified by this columns with the given ordinals.    *    *<p>For example, if this relational expression is a TableAccessRel to    * T(A, B, C, D) whose key is (A, B), then isKey([0, 1]) yields true,    * and isKey([0]) and isKey([0, 2]) yields false.</p>    *    * @param columns Ordinals of key columns    * @return Whether the given columns are a key or a superset of a key    */
 name|boolean
 name|isKey
 parameter_list|(
@@ -330,7 +330,7 @@ name|BitSet
 name|columns
 parameter_list|)
 function_decl|;
-comment|/**      * Accepts a visit from a shuttle.      *      * @param shuttle Shuttle      * @return A copy of this node incorporating changes made by the shuttle to      *   this node's children      */
+comment|/**    * Accepts a visit from a shuttle.    *    * @param shuttle Shuttle    * @return A copy of this node incorporating changes made by the shuttle to    * this node's children    */
 name|RelNode
 name|accept
 parameter_list|(

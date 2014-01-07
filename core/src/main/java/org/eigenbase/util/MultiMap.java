@@ -58,7 +58,7 @@ argument_list|>
 argument_list|()
 decl_stmt|;
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Returns the number of keys in this MultiMap.      *      * @return number of keys in this MultiMap      */
+comment|/**    * Returns the number of keys in this MultiMap.    *    * @return number of keys in this MultiMap    */
 specifier|public
 name|int
 name|size
@@ -110,7 +110,7 @@ name|value
 argument_list|)
 return|;
 block|}
-comment|/**      * Returns a list of values for a given key; returns an empty list if not      * found.      *      * @post return != null      */
+comment|/**    * Returns a list of values for a given key; returns an empty list if not    * found.    *    * @post return != null    */
 specifier|public
 name|List
 argument_list|<
@@ -179,7 +179,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**      * Adds a value for this key.      */
+comment|/**    * Adds a value for this key.    */
 specifier|public
 name|void
 name|putMulti
@@ -275,7 +275,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Removes a value for this key.      */
+comment|/**    * Removes a value for this key.    */
 specifier|public
 name|boolean
 name|removeMulti
@@ -428,7 +428,7 @@ block|}
 block|}
 block|}
 block|}
-comment|/**      * Like entrySet().iterator(), but returns one Map.Entry per value rather      * than one per key.      */
+comment|/**    * Like entrySet().iterator(), but returns one Map.Entry per value rather    * than one per key.    */
 specifier|public
 name|EntryIter
 name|entryIterMulti
@@ -486,7 +486,7 @@ argument_list|()
 expr_stmt|;
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------
-comment|/**      * Holder class, ensures that user's values are never interpreted as      * multiple values.      */
+comment|/**    * Holder class, ensures that user's values are never interpreted as    * multiple values.    */
 specifier|private
 specifier|static
 class|class
@@ -499,8 +499,8 @@ name|ArrayList
 argument_list|<
 name|V
 argument_list|>
-block|{     }
-comment|/**      * Implementation for entryIterMulti(). Note that this assumes that empty      * ValueLists will never be encountered, and also preserves this property      * when remove() is called.      */
+block|{   }
+comment|/**    * Implementation for entryIterMulti(). Note that this assumes that empty    * ValueLists will never be encountered, and also preserves this property    * when remove() is called.    */
 specifier|private
 class|class
 name|EntryIter

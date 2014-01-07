@@ -62,7 +62,7 @@ extends|extends
 name|RelOptRule
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
-comment|/**      * Singleton instance of rule which removes empty children of a {@link      * UnionRel}.      *      *<p>Examples:      *      *<ul>      *<li>Union(Rel, Empty, Rel2) becomes Union(Rel, Rel2)      *<li>Union(Rel, Empty, Empty) becomes Rel      *<li>Union(Empty, Empty) becomes Empty      *</ul>      */
+comment|/**    * Singleton instance of rule which removes empty children of a {@link    * UnionRel}.    *    *<p>Examples:    *    *<ul>    *<li>Union(Rel, Empty, Rel2) becomes Union(Rel, Rel2)    *<li>Union(Rel, Empty, Empty) becomes Rel    *<li>Union(Empty, Empty) becomes Empty    *</ul>    */
 specifier|public
 specifier|static
 specifier|final
@@ -267,7 +267,7 @@ expr_stmt|;
 block|}
 block|}
 decl_stmt|;
-comment|/**      * Singleton instance of rule which converts a {@link ProjectRel} to empty      * if its child is empty.      *      *<p>Examples:      *      *<ul>      *<li>Project(Empty) becomes Empty      *</ul>      */
+comment|/**    * Singleton instance of rule which converts a {@link ProjectRel} to empty    * if its child is empty.    *    *<p>Examples:    *    *<ul>    *<li>Project(Empty) becomes Empty    *</ul>    */
 specifier|public
 specifier|static
 specifier|final
@@ -337,7 +337,7 @@ expr_stmt|;
 block|}
 block|}
 decl_stmt|;
-comment|/**      * Singleton instance of rule which converts a {@link FilterRel} to empty if      * its child is empty.      *      *<p>Examples:      *      *<ul>      *<li>Filter(Empty) becomes Empty      *</ul>      */
+comment|/**    * Singleton instance of rule which converts a {@link FilterRel} to empty if    * its child is empty.    *    *<p>Examples:    *    *<ul>    *<li>Filter(Empty) becomes Empty    *</ul>    */
 specifier|public
 specifier|static
 specifier|final
@@ -408,7 +408,7 @@ block|}
 block|}
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a RemoveEmptyRule.      *      * @param operand Operand      * @param desc Description      */
+comment|/**    * Creates a RemoveEmptyRule.    *    * @param operand Operand    * @param desc    Description    */
 specifier|private
 name|RemoveEmptyRule
 parameter_list|(

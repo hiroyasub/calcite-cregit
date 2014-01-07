@@ -24,13 +24,13 @@ specifier|public
 enum|enum
 name|HepMatchOrder
 block|{
-comment|/**      * Match in arbitrary order. This is the default because it is the most      * efficient, and most rules don't care about order.      */
+comment|/**    * Match in arbitrary order. This is the default because it is the most    * efficient, and most rules don't care about order.    */
 name|ARBITRARY
 block|,
-comment|/**      * Match from leaves up. A match attempt at a descendant precedes all match      * attempts at its ancestors.      */
+comment|/**    * Match from leaves up. A match attempt at a descendant precedes all match    * attempts at its ancestors.    */
 name|BOTTOM_UP
 block|,
-comment|/**      * Match from root down. A match attempt at an ancestor always precedes all      * match attempts at its descendants.      */
+comment|/**    * Match from root down. A match attempt at an ancestor always precedes all    * match attempts at its descendants.    */
 name|TOP_DOWN
 block|}
 end_enum

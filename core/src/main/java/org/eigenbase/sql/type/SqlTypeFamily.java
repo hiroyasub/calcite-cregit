@@ -833,7 +833,7 @@ operator|=
 name|COLUMN_LIST
 expr_stmt|;
 block|}
-comment|/**      * List of {@link SqlTypeName}s included in this family.      */
+comment|/**    * List of {@link SqlTypeName}s included in this family.    */
 specifier|private
 name|List
 argument_list|<
@@ -905,7 +905,7 @@ operator|=
 name|family
 expr_stmt|;
 block|}
-comment|/**      * Gets the primary family containing a SqlTypeName.      *      * @param sqlTypeName the type of interest      *      * @return containing family, or null for none      */
+comment|/**    * Gets the primary family containing a SqlTypeName.    *    * @param sqlTypeName the type of interest    * @return containing family, or null for none    */
 specifier|public
 specifier|static
 name|SqlTypeFamily
@@ -925,7 +925,7 @@ argument_list|()
 index|]
 return|;
 block|}
-comment|/**      * Gets the primary family containing a JDBC type.      *      * @param jdbcType the JDBC type of interest      *      * @return containing family      */
+comment|/**    * Gets the primary family containing a JDBC type.    *    * @param jdbcType the JDBC type of interest    * @return containing family    */
 specifier|public
 specifier|static
 name|SqlTypeFamily
@@ -946,7 +946,7 @@ name|MIN_JDBC_TYPE
 index|]
 return|;
 block|}
-comment|/**      * @return collection of {@link SqlTypeName}s included in this family      */
+comment|/**    * @return collection of {@link SqlTypeName}s included in this family    */
 specifier|public
 name|List
 argument_list|<

@@ -57,37 +57,37 @@ interface|interface
 name|SargExpr
 block|{
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Overrides the default Object.toString. The result must be safe for use in      * a RelNode digest.      */
+comment|/**    * Overrides the default Object.toString. The result must be safe for use in    * a RelNode digest.    */
 specifier|public
 name|String
 name|toString
 parameter_list|()
 function_decl|;
-comment|/**      * @return datatype for coordinates of search domain      */
+comment|/**    * @return datatype for coordinates of search domain    */
 specifier|public
 name|RelDataType
 name|getDataType
 parameter_list|()
 function_decl|;
-comment|/**      * Resolves this expression into a fixed {@link SargIntervalSequence}.      *      *<p>TODO jvs 17-Jan-2006: add binding for dynamic params so they can be      * evaluated as well      *      * @return immutable ordered sequence of disjoint intervals      */
+comment|/**    * Resolves this expression into a fixed {@link SargIntervalSequence}.    *    *<p>TODO jvs 17-Jan-2006: add binding for dynamic params so they can be    * evaluated as well    *    * @return immutable ordered sequence of disjoint intervals    */
 specifier|public
 name|SargIntervalSequence
 name|evaluate
 parameter_list|()
 function_decl|;
-comment|/**      * Resolves the complement of this expression into a fixed {@link      * SargIntervalSequence}.      *      * @return immutable ordered sequence of disjoint intervals      */
+comment|/**    * Resolves the complement of this expression into a fixed {@link    * SargIntervalSequence}.    *    * @return immutable ordered sequence of disjoint intervals    */
 specifier|public
 name|SargIntervalSequence
 name|evaluateComplemented
 parameter_list|()
 function_decl|;
-comment|/**      * @return the factory which produced this expression      */
+comment|/**    * @return the factory which produced this expression    */
 specifier|public
 name|SargFactory
 name|getFactory
 parameter_list|()
 function_decl|;
-comment|/**      * Collects all dynamic parameters referenced by this expression.      *      * @param dynamicParams receives dynamic parameter references      */
+comment|/**    * Collects all dynamic parameters referenced by this expression.    *    * @param dynamicParams receives dynamic parameter references    */
 specifier|public
 name|void
 name|collectDynamicParams

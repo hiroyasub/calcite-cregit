@@ -83,7 +83,7 @@ name|RelNode
 argument_list|>
 argument_list|()
 decl_stmt|;
-comment|/** Visits a particular child of a parent. */
+comment|/**    * Visits a particular child of a parent.    */
 specifier|protected
 name|RelNode
 name|visitChild

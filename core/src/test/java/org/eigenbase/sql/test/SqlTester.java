@@ -71,7 +71,7 @@ extends|extends
 name|Closeable
 block|{
 comment|//~ Enums ------------------------------------------------------------------
-comment|/**      * Name of a virtual machine that can potentially implement an operator.      */
+comment|/**    * Name of a virtual machine that can potentially implement an operator.    */
 specifier|public
 enum|enum
 name|VmName
@@ -83,7 +83,7 @@ block|,
 name|EXPAND
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Tests that a scalar SQL expression returns the expected result and the      * expected type. For example,      *      *<blockquote>      *<pre>checkScalar("1.1 + 2.9", "4.0", "DECIMAL(2, 1) NOT NULL");</pre>      *</blockquote>      *      * @param expression Scalar expression      * @param result Expected result      * @param resultType Expected result type      */
+comment|/**    * Tests that a scalar SQL expression returns the expected result and the    * expected type. For example,    *    *<blockquote>    *<pre>checkScalar("1.1 + 2.9", "4.0", "DECIMAL(2, 1) NOT NULL");</pre>    *</blockquote>    *    * @param expression Scalar expression    * @param result     Expected result    * @param resultType Expected result type    */
 name|void
 name|checkScalar
 parameter_list|(
@@ -97,7 +97,7 @@ name|String
 name|resultType
 parameter_list|)
 function_decl|;
-comment|/**      * Tests that a scalar SQL expression returns the expected exact numeric      * result as an integer. For example,      *      *<blockquote>      *<pre>checkScalarExact("1 + 2", "3");</pre>      *</blockquote>      *      * @param expression Scalar expression      * @param result Expected result      */
+comment|/**    * Tests that a scalar SQL expression returns the expected exact numeric    * result as an integer. For example,    *    *<blockquote>    *<pre>checkScalarExact("1 + 2", "3");</pre>    *</blockquote>    *    * @param expression Scalar expression    * @param result     Expected result    */
 name|void
 name|checkScalarExact
 parameter_list|(
@@ -108,7 +108,7 @@ name|String
 name|result
 parameter_list|)
 function_decl|;
-comment|/**      * Tests that a scalar SQL expression returns the expected exact numeric      * result. For example,      *      *<blockquote>      *<pre>checkScalarExact("1 + 2", "3");</pre>      *</blockquote>      *      * @param expression Scalar expression      * @param expectedType Type we expect the result to have, including      * nullability, precision and scale, for example<code>DECIMAL(2, 1) NOT      * NULL</code>.      * @param result Expected result      */
+comment|/**    * Tests that a scalar SQL expression returns the expected exact numeric    * result. For example,    *    *<blockquote>    *<pre>checkScalarExact("1 + 2", "3");</pre>    *</blockquote>    *    * @param expression   Scalar expression    * @param expectedType Type we expect the result to have, including    *                     nullability, precision and scale, for example    *<code>DECIMAL(2, 1) NOT NULL</code>.    * @param result       Expected result    */
 name|void
 name|checkScalarExact
 parameter_list|(
@@ -122,7 +122,7 @@ name|String
 name|result
 parameter_list|)
 function_decl|;
-comment|/**      * Tests that a scalar SQL expression returns expected appoximate numeric      * result. For example,      *      *<blockquote>      *<pre>checkScalarApprox("1.0 + 2.1", "3.1");</pre>      *</blockquote>      *      * @param expression Scalar expression      * @param expectedType Type we expect the result to have, including      * nullability, precision and scale, for example<code>DECIMAL(2, 1) NOT      * NULL</code>.      * @param expectedResult Expected result      * @param delta Allowed margin of error between expected and actual result      */
+comment|/**    * Tests that a scalar SQL expression returns expected appoximate numeric    * result. For example,    *    *<blockquote>    *<pre>checkScalarApprox("1.0 + 2.1", "3.1");</pre>    *</blockquote>    *    * @param expression     Scalar expression    * @param expectedType   Type we expect the result to have, including    *                       nullability, precision and scale, for example    *<code>DECIMAL(2, 1) NOT NULL</code>.    * @param expectedResult Expected result    * @param delta          Allowed margin of error between expected and actual    *                       result    */
 name|void
 name|checkScalarApprox
 parameter_list|(
@@ -139,7 +139,7 @@ name|double
 name|delta
 parameter_list|)
 function_decl|;
-comment|/**      * Tests that a scalar SQL expression returns the expected boolean result.      * For example,      *      *<blockquote>      *<pre>checkScalarExact("TRUE AND FALSE", Boolean.TRUE);</pre>      *</blockquote>      *      * The expected result can be null:      *      *<blockquote>      *<pre>checkScalarExact("NOT UNKNOWN", null);</pre>      *</blockquote>      *      * @param expression Scalar expression      * @param result Expected result (null signifies NULL).      */
+comment|/**    * Tests that a scalar SQL expression returns the expected boolean result.    * For example,    *    *<blockquote>    *<pre>checkScalarExact("TRUE AND FALSE", Boolean.TRUE);</pre>    *</blockquote>    *    * The expected result can be null:    *    *<blockquote>    *<pre>checkScalarExact("NOT UNKNOWN", null);</pre>    *</blockquote>    *    * @param expression Scalar expression    * @param result     Expected result (null signifies NULL).    */
 name|void
 name|checkBoolean
 parameter_list|(
@@ -150,7 +150,7 @@ name|Boolean
 name|result
 parameter_list|)
 function_decl|;
-comment|/**      * Tests that a scalar SQL expression returns the expected string result.      * For example,      *      *<blockquote>      *<pre>checkScalarExact("'ab' || 'c'", "abc");</pre>      *</blockquote>      *      * @param expression Scalar expression      * @param result Expected result      * @param resultType Expected result type      */
+comment|/**    * Tests that a scalar SQL expression returns the expected string result.    * For example,    *    *<blockquote>    *<pre>checkScalarExact("'ab' || 'c'", "abc");</pre>    *</blockquote>    *    * @param expression Scalar expression    * @param result     Expected result    * @param resultType Expected result type    */
 name|void
 name|checkString
 parameter_list|(
@@ -164,7 +164,7 @@ name|String
 name|resultType
 parameter_list|)
 function_decl|;
-comment|/**      * Tests that a SQL expression returns the SQL NULL value. For example,      *      *<blockquote>      *<pre>checkNull("CHAR_LENGTH(CAST(NULL AS VARCHAR(3))");</pre>      *</blockquote>      *      * @param expression Scalar expression      */
+comment|/**    * Tests that a SQL expression returns the SQL NULL value. For example,    *    *<blockquote>    *<pre>checkNull("CHAR_LENGTH(CAST(NULL AS VARCHAR(3))");</pre>    *</blockquote>    *    * @param expression Scalar expression    */
 name|void
 name|checkNull
 parameter_list|(
@@ -172,7 +172,7 @@ name|String
 name|expression
 parameter_list|)
 function_decl|;
-comment|/**      * Tests that a SQL expression has a given type. For example,      *      *<blockquote>      *<code>checkType("SUBSTR('hello' FROM 1 FOR 3)",      * "VARCHAR(3) NOT NULL");</code>      *</blockquote>      *      * This method checks length/precision, scale, and whether the type allows      * NULL values, so is more precise than the type-checking done by methods      * such as {@link #checkScalarExact}.      *      * @param expression Scalar expression      * @param type Type string      */
+comment|/**    * Tests that a SQL expression has a given type. For example,    *    *<blockquote>    *<code>checkType("SUBSTR('hello' FROM 1 FOR 3)",    * "VARCHAR(3) NOT NULL");</code>    *</blockquote>    *    * This method checks length/precision, scale, and whether the type allows    * NULL values, so is more precise than the type-checking done by methods    * such as {@link #checkScalarExact}.    *    * @param expression Scalar expression    * @param type       Type string    */
 name|void
 name|checkType
 parameter_list|(
@@ -183,7 +183,7 @@ name|String
 name|type
 parameter_list|)
 function_decl|;
-comment|/**      * Checks that a query returns one column of an expected type. For example,      *<code>checkType("VALUES (1 + 2)", "INTEGER NOT NULL")</code>.      *      * @param sql Query expression      * @param type Type string      */
+comment|/**    * Checks that a query returns one column of an expected type. For example,    *<code>checkType("VALUES (1 + 2)", "INTEGER NOT NULL")</code>.    *    * @param sql  Query expression    * @param type Type string    */
 name|void
 name|checkColumnType
 parameter_list|(
@@ -194,7 +194,7 @@ name|String
 name|type
 parameter_list|)
 function_decl|;
-comment|/**      * Tests that a SQL query returns a single column with the given type. For      * example,      *      *<blockquote>      *<pre>check("VALUES (1 + 2)", "3", SqlTypeName.Integer);</pre>      *</blockquote>      *      *<p>If<code>result</code> is null, the expression must yield the SQL NULL      * value. If<code>result</code> is a {@link java.util.regex.Pattern}, the      * result must match that pattern.      *      * @param query SQL query      * @param typeChecker Checks whether the result is the expected type; must      * not be null      * @param result Expected result      * @param delta The acceptable tolerance between the expected and actual      */
+comment|/**    * Tests that a SQL query returns a single column with the given type. For    * example,    *    *<blockquote>    *<pre>check("VALUES (1 + 2)", "3", SqlTypeName.Integer);</pre>    *</blockquote>    *    *<p>If<code>result</code> is null, the expression must yield the SQL NULL    * value. If<code>result</code> is a {@link java.util.regex.Pattern}, the    * result must match that pattern.    *    * @param query       SQL query    * @param typeChecker Checks whether the result is the expected type; must    *                    not be null    * @param result      Expected result    * @param delta       The acceptable tolerance between the expected and actual    */
 name|void
 name|check
 parameter_list|(
@@ -211,7 +211,7 @@ name|double
 name|delta
 parameter_list|)
 function_decl|;
-comment|/**      * Tests that a SQL query returns a result of expected type and value.      * Checking of type and value are abstracted using {@link TypeChecker}      * and {@link ResultChecker} functors.      *      * @param query SQL query      * @param typeChecker Checks whether the result is the expected type; must      *     not be null      * @param resultChecker Checks whether the result has the expected value;      *     must not be null      */
+comment|/**    * Tests that a SQL query returns a result of expected type and value.    * Checking of type and value are abstracted using {@link TypeChecker}    * and {@link ResultChecker} functors.    *    * @param query         SQL query    * @param typeChecker   Checks whether the result is the expected type; must    *                      not be null    * @param resultChecker Checks whether the result has the expected value;    *                      must not be null    */
 name|void
 name|check
 parameter_list|(
@@ -225,7 +225,7 @@ name|ResultChecker
 name|resultChecker
 parameter_list|)
 function_decl|;
-comment|/**      * Declares that this test is for a given operator. So we can check that all      * operators are tested.      *      * @param operator Operator      * @param unimplementedVmNames Names of virtual machines for which this      */
+comment|/**    * Declares that this test is for a given operator. So we can check that all    * operators are tested.    *    * @param operator             Operator    * @param unimplementedVmNames Names of virtual machines for which this    */
 name|void
 name|setFor
 parameter_list|(
@@ -237,7 +237,7 @@ modifier|...
 name|unimplementedVmNames
 parameter_list|)
 function_decl|;
-comment|/**      * Checks to see if this tester is for the given VmName. Return false if      * no vm associated with this tester.      *      * @param vmName VmName to check for.      * @return whether or not this tester is for the given VmName.      */
+comment|/**    * Checks to see if this tester is for the given VmName. Return false if    * no vm associated with this tester.    *    * @param vmName VmName to check for.    * @return whether or not this tester is for the given VmName.    */
 name|boolean
 name|isVm
 parameter_list|(
@@ -245,7 +245,7 @@ name|VmName
 name|vmName
 parameter_list|)
 function_decl|;
-comment|/**      * Checks that an aggregate expression returns the expected result.      *      *<p>For example,<code>checkAgg("AVG(DISTINCT x)", new String[] {"2", "3",      * null, "3" }, new Double(2.5), 0);</code>      *      * @param expr Aggregate expression, e.g.<code>SUM(DISTINCT x)</code>      * @param inputValues Array of input values, e.g.<code>["1", null,      * "2"]</code>.      * @param result Expected result      * @param delta Allowable variance from expected result      */
+comment|/**    * Checks that an aggregate expression returns the expected result.    *    *<p>For example,<code>checkAgg("AVG(DISTINCT x)", new String[] {"2", "3",    * null, "3" }, new Double(2.5), 0);</code>    *    * @param expr        Aggregate expression, e.g.<code>SUM(DISTINCT x)</code>    * @param inputValues Array of input values, e.g.<code>["1", null,    *                    "2"]</code>.    * @param result      Expected result    * @param delta       Allowable variance from expected result    */
 name|void
 name|checkAgg
 parameter_list|(
@@ -263,7 +263,7 @@ name|double
 name|delta
 parameter_list|)
 function_decl|;
-comment|/**      * Checks that a windowed aggregate expression returns the expected result.      *      *<p>For example,<code>checkWinAgg("FIRST_VALUE(x)", new String[] {"2",      * "3", null, "3" }, "INTEGER NOT NULL", 2, 0d);</code>      *      * @param expr Aggregate expression, e.g.<code>SUM(DISTINCT x)</code>      * @param inputValues Array of input values, e.g.<code>["1", null,      * "2"]</code>.      * @param type Expected result type      * @param result Expected result      * @param delta Allowable variance from expected result      */
+comment|/**    * Checks that a windowed aggregate expression returns the expected result.    *    *<p>For example,<code>checkWinAgg("FIRST_VALUE(x)", new String[] {"2",    * "3", null, "3" }, "INTEGER NOT NULL", 2, 0d);</code>    *    * @param expr        Aggregate expression, e.g.<code>SUM(DISTINCT x)</code>    * @param inputValues Array of input values, e.g.<code>["1", null,    *                    "2"]</code>.    * @param type        Expected result type    * @param result      Expected result    * @param delta       Allowable variance from expected result    */
 name|void
 name|checkWinAgg
 parameter_list|(
@@ -287,7 +287,7 @@ name|double
 name|delta
 parameter_list|)
 function_decl|;
-comment|/**      * Tests that a scalar SQL expression fails at run time.      *      * @param expression SQL scalar expression      * @param expectedError Pattern for expected error. If !runtime, must      * include an error location.      * @param runtime If true, must fail at runtime; if false, must fail at      * validate time      */
+comment|/**    * Tests that a scalar SQL expression fails at run time.    *    * @param expression    SQL scalar expression    * @param expectedError Pattern for expected error. If !runtime, must    *                      include an error location.    * @param runtime       If true, must fail at runtime; if false, must fail at    *                      validate time    */
 name|void
 name|checkFails
 parameter_list|(

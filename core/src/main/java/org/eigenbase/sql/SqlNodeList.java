@@ -96,7 +96,7 @@ name|SqlNode
 argument_list|>
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
-comment|/**      * An immutable, empty SqlNodeList.      */
+comment|/**    * An immutable, empty SqlNodeList.    */
 specifier|public
 specifier|static
 specifier|final
@@ -137,7 +137,7 @@ argument_list|>
 name|list
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates an empty<code>SqlNodeList</code>.      */
+comment|/**    * Creates an empty<code>SqlNodeList</code>.    */
 specifier|public
 name|SqlNodeList
 parameter_list|(
@@ -160,7 +160,7 @@ argument_list|>
 argument_list|()
 expr_stmt|;
 block|}
-comment|/**      * Creates a<code>SqlNodeList</code> containing the nodes in<code>      * list</code>. The list is copied, but the nodes in it are not.      */
+comment|/**    * Creates a<code>SqlNodeList</code> containing the nodes in<code>    * list</code>. The list is copied, but the nodes in it are not.    */
 specifier|public
 name|SqlNodeList
 parameter_list|(

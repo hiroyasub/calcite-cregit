@@ -66,7 +66,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Namespace for COLLECT and TABLE constructs.  *  *<p>Examples:  *  *<ul>  *<li><code>SELECT deptno, COLLECT(empno) FROM emp GROUP BY deptno</code>,  *<li><code>SELECT * FROM (TABLE getEmpsInDept(30))</code>.  *</ul>  *  *<p>NOTE: jhyde, 2006/4/24: These days, this class seems to be used  * exclusively for the<code>MULTISET</code> construct.  * @see CollectScope  */
+comment|/**  * Namespace for COLLECT and TABLE constructs.  *  *<p>Examples:  *  *<ul>  *<li><code>SELECT deptno, COLLECT(empno) FROM emp GROUP BY deptno</code>,  *<li><code>SELECT * FROM (TABLE getEmpsInDept(30))</code>.  *</ul>  *  *<p>NOTE: jhyde, 2006/4/24: These days, this class seems to be used  * exclusively for the<code>MULTISET</code> construct.  *  * @see CollectScope  */
 end_comment
 
 begin_class
@@ -88,7 +88,7 @@ name|SqlValidatorScope
 name|scope
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a CollectNamespace.      *      * @param child Parse tree node      * @param scope Scope      * @param enclosingNode Enclosing parse tree node      */
+comment|/**    * Creates a CollectNamespace.    *    * @param child         Parse tree node    * @param scope         Scope    * @param enclosingNode Enclosing parse tree node    */
 name|CollectNamespace
 parameter_list|(
 name|SqlCall

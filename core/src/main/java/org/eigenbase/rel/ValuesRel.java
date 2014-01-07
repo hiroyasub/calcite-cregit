@@ -71,7 +71,7 @@ extends|extends
 name|ValuesRelBase
 block|{
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a new ValuesRel. Note that tuples passed in become owned by this      * rel (without a deep copy), so caller must not modify them after this      * call, otherwise bad things will happen.      *      * @param cluster .      * @param rowType row type for tuples produced by this rel      * @param tuples 2-dimensional array of tuple values to be produced; outer      * list contains tuples; each inner list is one tuple; all tuples must be of      * same length, conforming to rowType      */
+comment|/**    * Creates a new ValuesRel. Note that tuples passed in become owned by this    * rel (without a deep copy), so caller must not modify them after this    * call, otherwise bad things will happen.    *    * @param cluster .    * @param rowType row type for tuples produced by this rel    * @param tuples  2-dimensional array of tuple values to be produced; outer    *                list contains tuples; each inner list is one tuple; all    *                tuples must be of same length, conforming to rowType    */
 specifier|public
 name|ValuesRel
 parameter_list|(
@@ -110,7 +110,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Creates a ValuesRel by parsing serialized output. */
+comment|/**    * Creates a ValuesRel by parsing serialized output.    */
 specifier|public
 name|ValuesRel
 parameter_list|(

@@ -184,7 +184,7 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Tests that AND(x, AND(y, z)) gets flattened to AND(x, y, z). */
+comment|/**    * Tests that AND(x, AND(y, z)) gets flattened to AND(x, y, z).    */
 annotation|@
 name|Test
 specifier|public
@@ -268,7 +268,7 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test case for<a href="https://github.com/julianhyde/optiq/issues/74">      * JOIN ... USING fails in 3-way join with      * UnsupportedOperationException</a>. */
+comment|/**    * Test case for<a href="https://github.com/julianhyde/optiq/issues/74">    * JOIN ... USING fails in 3-way join with    * UnsupportedOperationException</a>.    */
 annotation|@
 name|Test
 specifier|public
@@ -526,7 +526,7 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Tests that if the clause of SELECT DISTINCT contains duplicate      * expressions, they are only aggregated once.      */
+comment|/**    * Tests that if the clause of SELECT DISTINCT contains duplicate    * expressions, they are only aggregated once.    */
 annotation|@
 name|Test
 specifier|public
@@ -1514,7 +1514,7 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Test one of the custom conversions which is recognized by the class of      * the operator (in this case, {@link      * org.eigenbase.sql.fun.SqlCaseOperator}).      */
+comment|/**    * Test one of the custom conversions which is recognized by the class of    * the operator (in this case, {@link    * org.eigenbase.sql.fun.SqlCaseOperator}).    */
 annotation|@
 name|Test
 specifier|public
@@ -1530,7 +1530,7 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Tests one of the custom conversions which is recognized by the identity      * of the operator (in this case, {@link      * org.eigenbase.sql.fun.SqlStdOperatorTable#characterLengthFunc}).      */
+comment|/**    * Tests one of the custom conversions which is recognized by the identity    * of the operator (in this case, {@link    * org.eigenbase.sql.fun.SqlStdOperatorTable#characterLengthFunc}).    */
 annotation|@
 name|Test
 specifier|public
@@ -1616,7 +1616,7 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Tests that a window containing only ORDER BY is implicitly CURRENT ROW.      */
+comment|/**    * Tests that a window containing only ORDER BY is implicitly CURRENT ROW.    */
 annotation|@
 name|Test
 specifier|public
@@ -1646,7 +1646,7 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Tests that a window with a FOLLOWING bound becomes BETWEEN CURRENT ROW      * AND FOLLOWING.      */
+comment|/**    * Tests that a window with a FOLLOWING bound becomes BETWEEN CURRENT ROW    * AND FOLLOWING.    */
 annotation|@
 name|Test
 specifier|public
@@ -1809,7 +1809,7 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Visitor that checks that every {@link RelNode} in a tree is valid.      *      * @see RelNode#isValid(boolean)      */
+comment|/**    * Visitor that checks that every {@link RelNode} in a tree is valid.    *    * @see RelNode#isValid(boolean)    */
 specifier|public
 specifier|static
 class|class

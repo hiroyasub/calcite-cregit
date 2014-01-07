@@ -212,7 +212,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Returns the child of a project if the project is trivial, otherwise      * the project itself. */
+comment|/**    * Returns the child of a project if the project is trivial, otherwise    * the project itself.    */
 specifier|public
 specifier|static
 name|RelNode

@@ -62,16 +62,16 @@ specifier|static
 enum|enum
 name|Mode
 block|{
-comment|/**          * Table is not accessed at all.          */
+comment|/**      * Table is not accessed at all.      */
 name|NO_ACCESS
 block|,
-comment|/**          * Table is accessed for read only.          */
+comment|/**      * Table is accessed for read only.      */
 name|READ_ACCESS
 block|,
-comment|/**          * Table is accessed for write only.          */
+comment|/**      * Table is accessed for write only.      */
 name|WRITE_ACCESS
 block|,
-comment|/**          * Table is accessed for both read and write.          */
+comment|/**      * Table is accessed for both read and write.      */
 name|READWRITE_ACCESS
 block|}
 comment|//~ Instance fields --------------------------------------------------------
@@ -89,7 +89,7 @@ argument_list|>
 name|accessMap
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Constructs a permanently empty TableAccessMap.      */
+comment|/**    * Constructs a permanently empty TableAccessMap.    */
 specifier|public
 name|TableAccessMap
 parameter_list|()
@@ -101,7 +101,7 @@ operator|.
 name|EMPTY_MAP
 expr_stmt|;
 block|}
-comment|/**      * Constructs a TableAccessMap for all tables accessed by a RelNode and its      * descendants.      *      * @param rel the RelNode for which to build the map      */
+comment|/**    * Constructs a TableAccessMap for all tables accessed by a RelNode and its    * descendants.    *    * @param rel the RelNode for which to build the map    */
 specifier|public
 name|TableAccessMap
 parameter_list|(
@@ -138,7 +138,7 @@ name|rel
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Constructs a TableAccessMap for a single table      *      * @param table fully qualified name of the table, represented as a list      * @param mode access mode for the table      */
+comment|/**    * Constructs a TableAccessMap for a single table    *    * @param table fully qualified name of the table, represented as a list    * @param mode  access mode for the table    */
 specifier|public
 name|TableAccessMap
 parameter_list|(
@@ -177,7 +177,7 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * @return set of qualified names for all tables accessed      */
+comment|/**    * @return set of qualified names for all tables accessed    */
 specifier|public
 name|Set
 argument_list|<
@@ -196,7 +196,7 @@ name|keySet
 argument_list|()
 return|;
 block|}
-comment|/**      * Determines whether a table is accessed at all.      *      * @param tableName qualified name of the table of interest      *      * @return true if table is accessed      */
+comment|/**    * Determines whether a table is accessed at all.    *    * @param tableName qualified name of the table of interest    * @return true if table is accessed    */
 specifier|public
 name|boolean
 name|isTableAccessed
@@ -217,7 +217,7 @@ name|tableName
 argument_list|)
 return|;
 block|}
-comment|/**      * Determines whether a table is accessed for read.      *      * @param tableName qualified name of the table of interest      *      * @return true if table is accessed for read      */
+comment|/**    * Determines whether a table is accessed for read.    *    * @param tableName qualified name of the table of interest    * @return true if table is accessed for read    */
 specifier|public
 name|boolean
 name|isTableAccessedForRead
@@ -255,7 +255,7 @@ name|READWRITE_ACCESS
 operator|)
 return|;
 block|}
-comment|/**      * Determines whether a table is accessed for write.      *      * @param tableName qualified name of the table of interest      *      * @return true if table is accessed for write      */
+comment|/**    * Determines whether a table is accessed for write.    *    * @param tableName qualified name of the table of interest    * @return true if table is accessed for write    */
 specifier|public
 name|boolean
 name|isTableAccessedForWrite
@@ -293,7 +293,7 @@ name|READWRITE_ACCESS
 operator|)
 return|;
 block|}
-comment|/**      * Determines the access mode of a table.      *      * @param tableName qualified name of the table of interest      *      * @return access mode      */
+comment|/**    * Determines the access mode of a table.    *    * @param tableName qualified name of the table of interest    * @return access mode    */
 specifier|public
 name|Mode
 name|getTableAccessMode
@@ -332,7 +332,7 @@ return|return
 name|mode
 return|;
 block|}
-comment|/**      * Constructs a qualified name for an optimizer table reference.      *      * @param table table of interest      *      * @return qualified name      */
+comment|/**    * Constructs a qualified name for an optimizer table reference.    *    * @param table table of interest    * @return qualified name    */
 specifier|public
 name|List
 argument_list|<

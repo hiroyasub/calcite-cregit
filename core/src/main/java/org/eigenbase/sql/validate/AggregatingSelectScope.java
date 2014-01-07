@@ -84,7 +84,7 @@ argument_list|>
 name|groupExprList
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates an AggregatingSelectScope      *      * @param selectScope Parent scope      * @param select Enclosing SELECT node      * @param distinct Whether SELECT is DISTINCT      */
+comment|/**    * Creates an AggregatingSelectScope    *    * @param selectScope Parent scope    * @param select      Enclosing SELECT node    * @param distinct    Whether SELECT is DISTINCT    */
 name|AggregatingSelectScope
 parameter_list|(
 name|SqlValidatorScope
@@ -183,7 +183,7 @@ expr_stmt|;
 block|}
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Returns the expressions that are in the GROUP BY clause (or the SELECT      * DISTINCT clause, if distinct) and that can therefore be referenced      * without being wrapped in aggregate functions.      *      *<p>The expressions are fully-qualified, and any "*" in select clauses are      * expanded.      *      * @return list of grouping expressions      */
+comment|/**    * Returns the expressions that are in the GROUP BY clause (or the SELECT    * DISTINCT clause, if distinct) and that can therefore be referenced    * without being wrapped in aggregate functions.    *    *<p>The expressions are fully-qualified, and any "*" in select clauses are    * expanded.    *    * @return list of grouping expressions    */
 specifier|private
 name|List
 argument_list|<
@@ -492,7 +492,7 @@ literal|true
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Adds a GROUP BY expression.      *      *<p>This method is used when the GROUP BY list is validated, and      * expressions are expanded, in which case they are not structurally      * identical to the unexpanded form.  We leave the previous expression in      * the list (in case there are occurrences of the expression's unexpanded      * form in the parse tree.      *      * @param expr Expression      */
+comment|/**    * Adds a GROUP BY expression.    *    *<p>This method is used when the GROUP BY list is validated, and    * expressions are expanded, in which case they are not structurally    * identical to the unexpanded form.  We leave the previous expression in    * the list (in case there are occurrences of the expression's unexpanded    * form in the parse tree.    *    * @param expr Expression    */
 specifier|public
 name|void
 name|addGroupExpr

@@ -91,7 +91,7 @@ name|baseName
 init|=
 literal|"org.eigenbase.resource.EigenbaseResource"
 decl_stmt|;
-comment|/**      * Retrieves the singleton instance of {@link EigenbaseResource}. If      * the application has called {@link #setThreadLocale}, returns the      * resource for the thread's locale.      */
+comment|/**    * Retrieves the singleton instance of {@link EigenbaseResource}. If    * the application has called {@link #setThreadLocale}, returns the    * resource for the thread's locale.    */
 specifier|public
 specifier|static
 specifier|synchronized
@@ -122,7 +122,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**      * Retrieves the instance of {@link EigenbaseResource} for the given locale.      */
+comment|/**    * Retrieves the instance of {@link EigenbaseResource} for the given locale.    */
 specifier|public
 specifier|static
 specifier|synchronized
@@ -154,7 +154,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**      *<code>ParserContext</code> is '<code>line {0,number,#}, column {1,number,#}</code>'      */
+comment|/**    *<code>ParserContext</code> is '<code>line {0,number,#}, column {1,number,#}</code>'    */
 specifier|public
 specifier|final
 name|_Def0
@@ -170,7 +170,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>IllegalLiteral</code> is '<code>Illegal {0} literal {1}: {2}</code>'      */
+comment|/**    *<code>IllegalLiteral</code> is '<code>Illegal {0} literal {1}: {2}</code>'    */
 specifier|public
 specifier|final
 name|_Def1
@@ -186,7 +186,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>IdentifierTooLong</code> is '<code>Length of identifier&#39;&#39;{0}&#39;&#39; must be less than or equal to {1,number,#} characters</code>'      */
+comment|/**    *<code>IdentifierTooLong</code> is '<code>Length of identifier&#39;&#39;{0}&#39;&#39; must be less than or equal to {1,number,#} characters</code>'    */
 specifier|public
 specifier|final
 name|_Def2
@@ -202,7 +202,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>BadFormat</code> is '<code>not in format&#39;&#39;{0}&#39;&#39;</code>'      */
+comment|/**    *<code>BadFormat</code> is '<code>not in format&#39;&#39;{0}&#39;&#39;</code>'    */
 specifier|public
 specifier|final
 name|_Def3
@@ -218,7 +218,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>BetweenWithoutAnd</code> is '<code>BETWEEN operator has no terminating AND</code>'      */
+comment|/**    *<code>BetweenWithoutAnd</code> is '<code>BETWEEN operator has no terminating AND</code>'    */
 specifier|public
 specifier|final
 name|_Def4
@@ -234,7 +234,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>IllegalIntervalLiteral</code> is '<code>Illegal INTERVAL literal {0}; at {1}</code>'      */
+comment|/**    *<code>IllegalIntervalLiteral</code> is '<code>Illegal INTERVAL literal {0}; at {1}</code>'    */
 specifier|public
 specifier|final
 name|_Def5
@@ -257,7 +257,7 @@ literal|"42000"
 block|}
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>IllegalMinusDate</code> is '<code>Illegal expression. Was expecting&quot;(DATETIME - DATETIME) INTERVALQUALIFIER&quot;</code>'      */
+comment|/**    *<code>IllegalMinusDate</code> is '<code>Illegal expression. Was expecting&quot;(DATETIME - DATETIME) INTERVALQUALIFIER&quot;</code>'    */
 specifier|public
 specifier|final
 name|_Def6
@@ -273,7 +273,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>IllegalOverlaps</code> is '<code>Illegal overlaps expression. Was expecting expression on the form&quot;(DATETIME, EXPRESSION) OVERLAPS (DATETIME, EXPRESSION)&quot;</code>'      */
+comment|/**    *<code>IllegalOverlaps</code> is '<code>Illegal overlaps expression. Was expecting expression on the form&quot;(DATETIME, EXPRESSION) OVERLAPS (DATETIME, EXPRESSION)&quot;</code>'    */
 specifier|public
 specifier|final
 name|_Def6
@@ -289,7 +289,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>IllegalNonQueryExpression</code> is '<code>Non-query expression encountered in illegal context</code>'      */
+comment|/**    *<code>IllegalNonQueryExpression</code> is '<code>Non-query expression encountered in illegal context</code>'    */
 specifier|public
 specifier|final
 name|_Def6
@@ -305,7 +305,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>IllegalQueryExpression</code> is '<code>Query expression encountered in illegal context</code>'      */
+comment|/**    *<code>IllegalQueryExpression</code> is '<code>Query expression encountered in illegal context</code>'    */
 specifier|public
 specifier|final
 name|_Def6
@@ -321,7 +321,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>IllegalCursorExpression</code> is '<code>CURSOR expression encountered in illegal context</code>'      */
+comment|/**    *<code>IllegalCursorExpression</code> is '<code>CURSOR expression encountered in illegal context</code>'    */
 specifier|public
 specifier|final
 name|_Def6
@@ -337,7 +337,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>IllegalOrderBy</code> is '<code>ORDER BY unexpected</code>'      */
+comment|/**    *<code>IllegalOrderBy</code> is '<code>ORDER BY unexpected</code>'    */
 specifier|public
 specifier|final
 name|_Def6
@@ -353,7 +353,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>IllegalBinaryString</code> is '<code>Illegal binary string {0}</code>'      */
+comment|/**    *<code>IllegalBinaryString</code> is '<code>Illegal binary string {0}</code>'    */
 specifier|public
 specifier|final
 name|_Def7
@@ -369,7 +369,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>IllegalFromEmpty</code> is '<code>&#39;&#39;FROM&#39;&#39; without operands preceding it is illegal</code>'      */
+comment|/**    *<code>IllegalFromEmpty</code> is '<code>&#39;&#39;FROM&#39;&#39; without operands preceding it is illegal</code>'    */
 specifier|public
 specifier|final
 name|_Def6
@@ -385,7 +385,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>IllegalRowExpression</code> is '<code>ROW expression encountered in illegal context</code>'      */
+comment|/**    *<code>IllegalRowExpression</code> is '<code>ROW expression encountered in illegal context</code>'    */
 specifier|public
 specifier|final
 name|_Def6
@@ -401,7 +401,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>InvalidSampleSize</code> is '<code>TABLESAMPLE percentage must be between 0 and 100, inclusive</code>'      */
+comment|/**    *<code>InvalidSampleSize</code> is '<code>TABLESAMPLE percentage must be between 0 and 100, inclusive</code>'    */
 specifier|public
 specifier|final
 name|_Def6
@@ -424,7 +424,7 @@ literal|"2202H"
 block|}
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>UnknownCharacterSet</code> is '<code>Unknown character set&#39;&#39;{0}&#39;&#39;</code>'      */
+comment|/**    *<code>UnknownCharacterSet</code> is '<code>Unknown character set&#39;&#39;{0}&#39;&#39;</code>'    */
 specifier|public
 specifier|final
 name|_Def7
@@ -440,7 +440,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>CharsetEncoding</code> is '<code>Failed to encode&#39;&#39;{0}&#39;&#39; in character set&#39;&#39;{1}&#39;&#39;</code>'      */
+comment|/**    *<code>CharsetEncoding</code> is '<code>Failed to encode&#39;&#39;{0}&#39;&#39; in character set&#39;&#39;{1}&#39;&#39;</code>'    */
 specifier|public
 specifier|final
 name|_Def5
@@ -456,7 +456,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>UnicodeEscapeCharLength</code> is '<code>UESCAPE&#39;&#39;{0}&#39;&#39; must be exactly one character</code>'      */
+comment|/**    *<code>UnicodeEscapeCharLength</code> is '<code>UESCAPE&#39;&#39;{0}&#39;&#39; must be exactly one character</code>'    */
 specifier|public
 specifier|final
 name|_Def7
@@ -472,7 +472,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>UnicodeEscapeCharIllegal</code> is '<code>UESCAPE&#39;&#39;{0}&#39;&#39; may not be hex digit, whitespace, plus sign, or double quote</code>'      */
+comment|/**    *<code>UnicodeEscapeCharIllegal</code> is '<code>UESCAPE&#39;&#39;{0}&#39;&#39; may not be hex digit, whitespace, plus sign, or double quote</code>'    */
 specifier|public
 specifier|final
 name|_Def7
@@ -488,7 +488,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>UnicodeEscapeUnexpected</code> is '<code>UESCAPE cannot be specified without Unicode literal introducer</code>'      */
+comment|/**    *<code>UnicodeEscapeUnexpected</code> is '<code>UESCAPE cannot be specified without Unicode literal introducer</code>'    */
 specifier|public
 specifier|final
 name|_Def6
@@ -504,7 +504,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>UnicodeEscapeMalformed</code> is '<code>Unicode escape sequence starting at character {0,number,#} is not exactly four hex digits</code>'      */
+comment|/**    *<code>UnicodeEscapeMalformed</code> is '<code>Unicode escape sequence starting at character {0,number,#} is not exactly four hex digits</code>'    */
 specifier|public
 specifier|final
 name|_Def8
@@ -520,7 +520,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>ValidatorUnknownFunction</code> is '<code>No match found for function signature {0}</code>'      */
+comment|/**    *<code>ValidatorUnknownFunction</code> is '<code>No match found for function signature {0}</code>'    */
 specifier|public
 specifier|final
 name|_Def9
@@ -536,7 +536,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>InvalidArgCount</code> is '<code>Invalid number of arguments to function&#39;&#39;{0}&#39;&#39;. Was expecting {1,number,#} arguments</code>'      */
+comment|/**    *<code>InvalidArgCount</code> is '<code>Invalid number of arguments to function&#39;&#39;{0}&#39;&#39;. Was expecting {1,number,#} arguments</code>'    */
 specifier|public
 specifier|final
 name|_Def10
@@ -552,7 +552,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>ValidatorContextPoint</code> is '<code>At line {0,number,#}, column {1,number,#}</code>'      */
+comment|/**    *<code>ValidatorContextPoint</code> is '<code>At line {0,number,#}, column {1,number,#}</code>'    */
 specifier|public
 specifier|final
 name|_Def11
@@ -568,7 +568,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>ValidatorContext</code> is '<code>From line {0,number,#}, column {1,number,#} to line {2,number,#}, column {3,number,#}</code>'      */
+comment|/**    *<code>ValidatorContext</code> is '<code>From line {0,number,#}, column {1,number,#} to line {2,number,#}, column {3,number,#}</code>'    */
 specifier|public
 specifier|final
 name|_Def12
@@ -584,7 +584,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>CannotCastValue</code> is '<code>Cast function cannot convert value of type {0} to type {1}</code>'      */
+comment|/**    *<code>CannotCastValue</code> is '<code>Cast function cannot convert value of type {0} to type {1}</code>'    */
 specifier|public
 specifier|final
 name|_Def13
@@ -600,7 +600,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>UnknownDatatypeName</code> is '<code>Unknown datatype name&#39;&#39;{0}&#39;&#39;</code>'      */
+comment|/**    *<code>UnknownDatatypeName</code> is '<code>Unknown datatype name&#39;&#39;{0}&#39;&#39;</code>'    */
 specifier|public
 specifier|final
 name|_Def9
@@ -616,7 +616,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>IncompatibleValueType</code> is '<code>Values passed to {0} operator must have compatible types</code>'      */
+comment|/**    *<code>IncompatibleValueType</code> is '<code>Values passed to {0} operator must have compatible types</code>'    */
 specifier|public
 specifier|final
 name|_Def9
@@ -632,7 +632,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>IncompatibleTypesInList</code> is '<code>Values in expression list must have compatible types</code>'      */
+comment|/**    *<code>IncompatibleTypesInList</code> is '<code>Values in expression list must have compatible types</code>'    */
 specifier|public
 specifier|final
 name|_Def4
@@ -648,7 +648,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>IncompatibleCharset</code> is '<code>Cannot apply {0} to the two different charsets {1} and {2}</code>'      */
+comment|/**    *<code>IncompatibleCharset</code> is '<code>Cannot apply {0} to the two different charsets {1} and {2}</code>'    */
 specifier|public
 specifier|final
 name|_Def14
@@ -664,7 +664,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>InvalidOrderByPos</code> is '<code>ORDER BY is only allowed on top-level SELECT</code>'      */
+comment|/**    *<code>InvalidOrderByPos</code> is '<code>ORDER BY is only allowed on top-level SELECT</code>'    */
 specifier|public
 specifier|final
 name|_Def4
@@ -680,7 +680,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>UnknownIdentifier</code> is '<code>Unknown identifier&#39;&#39;{0}&#39;&#39;</code>'      */
+comment|/**    *<code>UnknownIdentifier</code> is '<code>Unknown identifier&#39;&#39;{0}&#39;&#39;</code>'    */
 specifier|public
 specifier|final
 name|_Def9
@@ -696,7 +696,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>UnknownField</code> is '<code>Unknown field&#39;&#39;{0}&#39;&#39;</code>'      */
+comment|/**    *<code>UnknownField</code> is '<code>Unknown field&#39;&#39;{0}&#39;&#39;</code>'    */
 specifier|public
 specifier|final
 name|_Def9
@@ -712,7 +712,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>UnknownTargetColumn</code> is '<code>Unknown target column&#39;&#39;{0}&#39;&#39;</code>'      */
+comment|/**    *<code>UnknownTargetColumn</code> is '<code>Unknown target column&#39;&#39;{0}&#39;&#39;</code>'    */
 specifier|public
 specifier|final
 name|_Def9
@@ -728,7 +728,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>DuplicateTargetColumn</code> is '<code>Target column&#39;&#39;{0}&#39;&#39; is assigned more than once</code>'      */
+comment|/**    *<code>DuplicateTargetColumn</code> is '<code>Target column&#39;&#39;{0}&#39;&#39; is assigned more than once</code>'    */
 specifier|public
 specifier|final
 name|_Def9
@@ -744,7 +744,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>UnmatchInsertColumn</code> is '<code>Number of INSERT target columns ({0,number}) does not equal number of source items ({1,number})</code>'      */
+comment|/**    *<code>UnmatchInsertColumn</code> is '<code>Number of INSERT target columns ({0,number}) does not equal number of source items ({1,number})</code>'    */
 specifier|public
 specifier|final
 name|_Def15
@@ -760,7 +760,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>TypeNotAssignable</code> is '<code>Cannot assign to target field&#39;&#39;{0}&#39;&#39; of type {1} from source field&#39;&#39;{2}&#39;&#39; of type {3}</code>'      */
+comment|/**    *<code>TypeNotAssignable</code> is '<code>Cannot assign to target field&#39;&#39;{0}&#39;&#39; of type {1} from source field&#39;&#39;{2}&#39;&#39; of type {3}</code>'    */
 specifier|public
 specifier|final
 name|_Def16
@@ -776,7 +776,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>TableNameNotFound</code> is '<code>Table&#39;&#39;{0}&#39;&#39; not found</code>'      */
+comment|/**    *<code>TableNameNotFound</code> is '<code>Table&#39;&#39;{0}&#39;&#39; not found</code>'    */
 specifier|public
 specifier|final
 name|_Def9
@@ -792,7 +792,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>ColumnNotFound</code> is '<code>Column&#39;&#39;{0}&#39;&#39; not found in any table</code>'      */
+comment|/**    *<code>ColumnNotFound</code> is '<code>Column&#39;&#39;{0}&#39;&#39; not found in any table</code>'    */
 specifier|public
 specifier|final
 name|_Def9
@@ -808,7 +808,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>ColumnNotFoundInTable</code> is '<code>Column&#39;&#39;{0}&#39;&#39; not found in table&#39;&#39;{1}&#39;&#39;</code>'      */
+comment|/**    *<code>ColumnNotFoundInTable</code> is '<code>Column&#39;&#39;{0}&#39;&#39; not found in table&#39;&#39;{1}&#39;&#39;</code>'    */
 specifier|public
 specifier|final
 name|_Def13
@@ -824,7 +824,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>ColumnAmbiguous</code> is '<code>Column&#39;&#39;{0}&#39;&#39; is ambiguous</code>'      */
+comment|/**    *<code>ColumnAmbiguous</code> is '<code>Column&#39;&#39;{0}&#39;&#39; is ambiguous</code>'    */
 specifier|public
 specifier|final
 name|_Def9
@@ -840,7 +840,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>NeedQueryOp</code> is '<code>Operand {0} must be a query</code>'      */
+comment|/**    *<code>NeedQueryOp</code> is '<code>Operand {0} must be a query</code>'    */
 specifier|public
 specifier|final
 name|_Def9
@@ -856,7 +856,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>NeedSameTypeParameter</code> is '<code>Parameters must be of the same type</code>'      */
+comment|/**    *<code>NeedSameTypeParameter</code> is '<code>Parameters must be of the same type</code>'    */
 specifier|public
 specifier|final
 name|_Def4
@@ -872,7 +872,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>CanNotApplyOp2Type</code> is '<code>Cannot apply&#39;&#39;{0}&#39;&#39; to arguments of type {1}. Supported form(s): {2}</code>'      */
+comment|/**    *<code>CanNotApplyOp2Type</code> is '<code>Cannot apply&#39;&#39;{0}&#39;&#39; to arguments of type {1}. Supported form(s): {2}</code>'    */
 specifier|public
 specifier|final
 name|_Def14
@@ -888,7 +888,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>ExpectedBoolean</code> is '<code>Expected a boolean type</code>'      */
+comment|/**    *<code>ExpectedBoolean</code> is '<code>Expected a boolean type</code>'    */
 specifier|public
 specifier|final
 name|_Def4
@@ -904,7 +904,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>MustNotNullInElse</code> is '<code>ELSE clause or at least one THEN clause must be non-NULL</code>'      */
+comment|/**    *<code>MustNotNullInElse</code> is '<code>ELSE clause or at least one THEN clause must be non-NULL</code>'    */
 specifier|public
 specifier|final
 name|_Def4
@@ -920,7 +920,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>FunctionUndefined</code> is '<code>Function&#39;&#39;{0}&#39;&#39; is not defined</code>'      */
+comment|/**    *<code>FunctionUndefined</code> is '<code>Function&#39;&#39;{0}&#39;&#39; is not defined</code>'    */
 specifier|public
 specifier|final
 name|_Def9
@@ -936,7 +936,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>WrongNumberOfParam</code> is '<code>Encountered {0} with {1,number} parameter(s); was expecting {2}</code>'      */
+comment|/**    *<code>WrongNumberOfParam</code> is '<code>Encountered {0} with {1,number} parameter(s); was expecting {2}</code>'    */
 specifier|public
 specifier|final
 name|_Def17
@@ -952,7 +952,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>IllegalMixingOfTypes</code> is '<code>Illegal mixing of types in CASE or COALESCE statement</code>'      */
+comment|/**    *<code>IllegalMixingOfTypes</code> is '<code>Illegal mixing of types in CASE or COALESCE statement</code>'    */
 specifier|public
 specifier|final
 name|_Def4
@@ -968,7 +968,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>InvalidCompare</code> is '<code>Invalid compare. Comparing  (collation, coercibility): ({0}, {1} with ({2}, {3}) is illegal</code>'      */
+comment|/**    *<code>InvalidCompare</code> is '<code>Invalid compare. Comparing  (collation, coercibility): ({0}, {1} with ({2}, {3}) is illegal</code>'    */
 specifier|public
 specifier|final
 name|_Def18
@@ -984,7 +984,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>DifferentCollations</code> is '<code>Invalid syntax. Two explicit different collations ({0}, {1}) are illegal</code>'      */
+comment|/**    *<code>DifferentCollations</code> is '<code>Invalid syntax. Two explicit different collations ({0}, {1}) are illegal</code>'    */
 specifier|public
 specifier|final
 name|_Def5
@@ -1000,7 +1000,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>TypeNotComparable</code> is '<code>{0} is not comparable to {1}</code>'      */
+comment|/**    *<code>TypeNotComparable</code> is '<code>{0} is not comparable to {1}</code>'    */
 specifier|public
 specifier|final
 name|_Def13
@@ -1016,7 +1016,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>TypeNotComparableNear</code> is '<code>Cannot compare values of types&#39;&#39;{0}&#39;&#39;,&#39;&#39;{1}&#39;&#39;</code>'      */
+comment|/**    *<code>TypeNotComparableNear</code> is '<code>Cannot compare values of types&#39;&#39;{0}&#39;&#39;,&#39;&#39;{1}&#39;&#39;</code>'    */
 specifier|public
 specifier|final
 name|_Def13
@@ -1032,7 +1032,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>WrongNumOfArguments</code> is '<code>Wrong number of arguments to expression</code>'      */
+comment|/**    *<code>WrongNumOfArguments</code> is '<code>Wrong number of arguments to expression</code>'    */
 specifier|public
 specifier|final
 name|_Def4
@@ -1048,7 +1048,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>OperandNotComparable</code> is '<code>Operands {0} not comparable to each other</code>'      */
+comment|/**    *<code>OperandNotComparable</code> is '<code>Operands {0} not comparable to each other</code>'    */
 specifier|public
 specifier|final
 name|_Def9
@@ -1064,7 +1064,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>TypeNotComparableEachOther</code> is '<code>Types {0} not comparable to each other</code>'      */
+comment|/**    *<code>TypeNotComparableEachOther</code> is '<code>Types {0} not comparable to each other</code>'    */
 specifier|public
 specifier|final
 name|_Def9
@@ -1080,7 +1080,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>NumberLiteralOutOfRange</code> is '<code>Numeric literal&#39;&#39;{0}&#39;&#39; out of range</code>'      */
+comment|/**    *<code>NumberLiteralOutOfRange</code> is '<code>Numeric literal&#39;&#39;{0}&#39;&#39; out of range</code>'    */
 specifier|public
 specifier|final
 name|_Def9
@@ -1096,7 +1096,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>DateLiteralOutOfRange</code> is '<code>Date literal&#39;&#39;{0}&#39;&#39; out of range</code>'      */
+comment|/**    *<code>DateLiteralOutOfRange</code> is '<code>Date literal&#39;&#39;{0}&#39;&#39; out of range</code>'    */
 specifier|public
 specifier|final
 name|_Def9
@@ -1112,7 +1112,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>StringFragsOnSameLine</code> is '<code>String literal continued on same line</code>'      */
+comment|/**    *<code>StringFragsOnSameLine</code> is '<code>String literal continued on same line</code>'    */
 specifier|public
 specifier|final
 name|_Def4
@@ -1128,7 +1128,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>AliasMustBeSimpleIdentifier</code> is '<code>Table or column alias must be a simple identifier</code>'      */
+comment|/**    *<code>AliasMustBeSimpleIdentifier</code> is '<code>Table or column alias must be a simple identifier</code>'    */
 specifier|public
 specifier|final
 name|_Def4
@@ -1144,7 +1144,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>AliasListDegree</code> is '<code>List of column aliases must have same degree as table; table has {0,number,#} columns {1}, whereas alias list has {2,number,#} columns</code>'      */
+comment|/**    *<code>AliasListDegree</code> is '<code>List of column aliases must have same degree as table; table has {0,number,#} columns {1}, whereas alias list has {2,number,#} columns</code>'    */
 specifier|public
 specifier|final
 name|_Def19
@@ -1160,7 +1160,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>AliasListDuplicate</code> is '<code>Duplicate name&#39;&#39;{0}&#39;&#39; in column alias list</code>'      */
+comment|/**    *<code>AliasListDuplicate</code> is '<code>Duplicate name&#39;&#39;{0}&#39;&#39; in column alias list</code>'    */
 specifier|public
 specifier|final
 name|_Def9
@@ -1176,7 +1176,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>JoinRequiresCondition</code> is '<code>INNER, LEFT, RIGHT or FULL join requires a condition (NATURAL keyword or ON or USING clause)</code>'      */
+comment|/**    *<code>JoinRequiresCondition</code> is '<code>INNER, LEFT, RIGHT or FULL join requires a condition (NATURAL keyword or ON or USING clause)</code>'    */
 specifier|public
 specifier|final
 name|_Def4
@@ -1192,7 +1192,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>CrossJoinDisallowsCondition</code> is '<code>Cannot specify condition (NATURAL keyword, or ON or USING clause) following CROSS JOIN</code>'      */
+comment|/**    *<code>CrossJoinDisallowsCondition</code> is '<code>Cannot specify condition (NATURAL keyword, or ON or USING clause) following CROSS JOIN</code>'    */
 specifier|public
 specifier|final
 name|_Def4
@@ -1208,7 +1208,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>NaturalDisallowsOnOrUsing</code> is '<code>Cannot specify NATURAL keyword with ON or USING clause</code>'      */
+comment|/**    *<code>NaturalDisallowsOnOrUsing</code> is '<code>Cannot specify NATURAL keyword with ON or USING clause</code>'    */
 specifier|public
 specifier|final
 name|_Def4
@@ -1224,7 +1224,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>ColumnInUsingNotUnique</code> is '<code>Column name&#39;&#39;{0}&#39;&#39; in USING clause is not unique on one side of join</code>'      */
+comment|/**    *<code>ColumnInUsingNotUnique</code> is '<code>Column name&#39;&#39;{0}&#39;&#39; in USING clause is not unique on one side of join</code>'    */
 specifier|public
 specifier|final
 name|_Def9
@@ -1240,7 +1240,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>NaturalOrUsingColumnNotCompatible</code> is '<code>Column&#39;&#39;{0}&#39;&#39; matched using NATURAL keyword or USING clause has incompatible types: cannot compare&#39;&#39;{1}&#39;&#39; to&#39;&#39;{2}&#39;&#39;</code>'      */
+comment|/**    *<code>NaturalOrUsingColumnNotCompatible</code> is '<code>Column&#39;&#39;{0}&#39;&#39; matched using NATURAL keyword or USING clause has incompatible types: cannot compare&#39;&#39;{1}&#39;&#39; to&#39;&#39;{2}&#39;&#39;</code>'    */
 specifier|public
 specifier|final
 name|_Def14
@@ -1256,7 +1256,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>WindowNotFound</code> is '<code>Window&#39;&#39;{0}&#39;&#39; not found</code>'      */
+comment|/**    *<code>WindowNotFound</code> is '<code>Window&#39;&#39;{0}&#39;&#39; not found</code>'    */
 specifier|public
 specifier|final
 name|_Def9
@@ -1272,7 +1272,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>NotGroupExpr</code> is '<code>Expression&#39;&#39;{0}&#39;&#39; is not being grouped</code>'      */
+comment|/**    *<code>NotGroupExpr</code> is '<code>Expression&#39;&#39;{0}&#39;&#39; is not being grouped</code>'    */
 specifier|public
 specifier|final
 name|_Def9
@@ -1288,7 +1288,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>NotSelectDistinctExpr</code> is '<code>Expression&#39;&#39;{0}&#39;&#39; is not in the select clause</code>'      */
+comment|/**    *<code>NotSelectDistinctExpr</code> is '<code>Expression&#39;&#39;{0}&#39;&#39; is not in the select clause</code>'    */
 specifier|public
 specifier|final
 name|_Def9
@@ -1304,7 +1304,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>AggregateIllegalInClause</code> is '<code>Aggregate expression is illegal in {0} clause</code>'      */
+comment|/**    *<code>AggregateIllegalInClause</code> is '<code>Aggregate expression is illegal in {0} clause</code>'    */
 specifier|public
 specifier|final
 name|_Def9
@@ -1320,7 +1320,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>WindowedAggregateIllegalInClause</code> is '<code>Windowed aggregate expression is illegal in {0} clause</code>'      */
+comment|/**    *<code>WindowedAggregateIllegalInClause</code> is '<code>Windowed aggregate expression is illegal in {0} clause</code>'    */
 specifier|public
 specifier|final
 name|_Def9
@@ -1336,7 +1336,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>AggregateIllegalInGroupBy</code> is '<code>Aggregate expression is illegal in GROUP BY clause</code>'      */
+comment|/**    *<code>AggregateIllegalInGroupBy</code> is '<code>Aggregate expression is illegal in GROUP BY clause</code>'    */
 specifier|public
 specifier|final
 name|_Def4
@@ -1352,7 +1352,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>NestedAggIllegal</code> is '<code>Aggregate expressions cannot be nested</code>'      */
+comment|/**    *<code>NestedAggIllegal</code> is '<code>Aggregate expressions cannot be nested</code>'    */
 specifier|public
 specifier|final
 name|_Def4
@@ -1368,7 +1368,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>AggregateIllegalInOrderBy</code> is '<code>Aggregate expression is illegal in ORDER BY clause of non-aggregating SELECT</code>'      */
+comment|/**    *<code>AggregateIllegalInOrderBy</code> is '<code>Aggregate expression is illegal in ORDER BY clause of non-aggregating SELECT</code>'    */
 specifier|public
 specifier|final
 name|_Def4
@@ -1384,7 +1384,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>CondMustBeBoolean</code> is '<code>{0} clause must be a condition</code>'      */
+comment|/**    *<code>CondMustBeBoolean</code> is '<code>{0} clause must be a condition</code>'    */
 specifier|public
 specifier|final
 name|_Def9
@@ -1400,7 +1400,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>HavingMustBeBoolean</code> is '<code>HAVING clause must be a condition</code>'      */
+comment|/**    *<code>HavingMustBeBoolean</code> is '<code>HAVING clause must be a condition</code>'    */
 specifier|public
 specifier|final
 name|_Def4
@@ -1416,7 +1416,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>OverNonAggregate</code> is '<code>OVER must be applied to aggregate function</code>'      */
+comment|/**    *<code>OverNonAggregate</code> is '<code>OVER must be applied to aggregate function</code>'    */
 specifier|public
 specifier|final
 name|_Def4
@@ -1432,7 +1432,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>CannotOverrideWindowAttribute</code> is '<code>Cannot override window attribute</code>'      */
+comment|/**    *<code>CannotOverrideWindowAttribute</code> is '<code>Cannot override window attribute</code>'    */
 specifier|public
 specifier|final
 name|_Def4
@@ -1448,7 +1448,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>ColumnCountMismatchInSetop</code> is '<code>Column count mismatch in {0}</code>'      */
+comment|/**    *<code>ColumnCountMismatchInSetop</code> is '<code>Column count mismatch in {0}</code>'    */
 specifier|public
 specifier|final
 name|_Def9
@@ -1464,7 +1464,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>ColumnTypeMismatchInSetop</code> is '<code>Type mismatch in column {0,number} of {1}</code>'      */
+comment|/**    *<code>ColumnTypeMismatchInSetop</code> is '<code>Type mismatch in column {0,number} of {1}</code>'    */
 specifier|public
 specifier|final
 name|_Def20
@@ -1480,7 +1480,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>BinaryLiteralOdd</code> is '<code>Binary literal string must contain an even number of hexits</code>'      */
+comment|/**    *<code>BinaryLiteralOdd</code> is '<code>Binary literal string must contain an even number of hexits</code>'    */
 specifier|public
 specifier|final
 name|_Def4
@@ -1496,7 +1496,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>BinaryLiteralInvalid</code> is '<code>Binary literal string must contain only characters&#39;&#39;0&#39;&#39; -&#39;&#39;9&#39;&#39;,&#39;&#39;A&#39;&#39; -&#39;&#39;F&#39;&#39;</code>'      */
+comment|/**    *<code>BinaryLiteralInvalid</code> is '<code>Binary literal string must contain only characters&#39;&#39;0&#39;&#39; -&#39;&#39;9&#39;&#39;,&#39;&#39;A&#39;&#39; -&#39;&#39;F&#39;&#39;</code>'    */
 specifier|public
 specifier|final
 name|_Def4
@@ -1512,7 +1512,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>UnsupportedIntervalLiteral</code> is '<code>Illegal interval literal format {0} for {1}</code>'      */
+comment|/**    *<code>UnsupportedIntervalLiteral</code> is '<code>Illegal interval literal format {0} for {1}</code>'    */
 specifier|public
 specifier|final
 name|_Def13
@@ -1528,7 +1528,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>IntervalFieldExceedsPrecision</code> is '<code>Interval field value {0,number} exceeds precision of {1} field</code>'      */
+comment|/**    *<code>IntervalFieldExceedsPrecision</code> is '<code>Interval field value {0,number} exceeds precision of {1} field</code>'    */
 specifier|public
 specifier|final
 name|_Def20
@@ -1544,7 +1544,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>CompoundOrderByProhibitsRange</code> is '<code>RANGE clause cannot be used with compound ORDER BY clause</code>'      */
+comment|/**    *<code>CompoundOrderByProhibitsRange</code> is '<code>RANGE clause cannot be used with compound ORDER BY clause</code>'    */
 specifier|public
 specifier|final
 name|_Def4
@@ -1560,7 +1560,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>OrderByDataTypeProhibitsRange</code> is '<code>Data type of ORDER BY prohibits use of RANGE clause</code>'      */
+comment|/**    *<code>OrderByDataTypeProhibitsRange</code> is '<code>Data type of ORDER BY prohibits use of RANGE clause</code>'    */
 specifier|public
 specifier|final
 name|_Def4
@@ -1576,7 +1576,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>OrderByRangeMismatch</code> is '<code>Data Type mismatch between ORDER BY and RANGE clause</code>'      */
+comment|/**    *<code>OrderByRangeMismatch</code> is '<code>Data Type mismatch between ORDER BY and RANGE clause</code>'    */
 specifier|public
 specifier|final
 name|_Def4
@@ -1592,7 +1592,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>DateRequiresInterval</code> is '<code>Window ORDER BY expression of type DATE requires range of type INTERVAL</code>'      */
+comment|/**    *<code>DateRequiresInterval</code> is '<code>Window ORDER BY expression of type DATE requires range of type INTERVAL</code>'    */
 specifier|public
 specifier|final
 name|_Def4
@@ -1608,7 +1608,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>RangeOrRowMustBeConstant</code> is '<code>Window boundary must be constant</code>'      */
+comment|/**    *<code>RangeOrRowMustBeConstant</code> is '<code>Window boundary must be constant</code>'    */
 specifier|public
 specifier|final
 name|_Def4
@@ -1624,7 +1624,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>RowMustBeNonNegativeIntegral</code> is '<code>ROWS value must be a non-negative integral constant</code>'      */
+comment|/**    *<code>RowMustBeNonNegativeIntegral</code> is '<code>ROWS value must be a non-negative integral constant</code>'    */
 specifier|public
 specifier|final
 name|_Def4
@@ -1640,7 +1640,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>OverMissingOrderBy</code> is '<code>Window specification must contain an ORDER BY clause</code>'      */
+comment|/**    *<code>OverMissingOrderBy</code> is '<code>Window specification must contain an ORDER BY clause</code>'    */
 specifier|public
 specifier|final
 name|_Def4
@@ -1656,7 +1656,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>BadLowerBoundary</code> is '<code>UNBOUNDED FOLLOWING cannot be specified for the lower frame boundary</code>'      */
+comment|/**    *<code>BadLowerBoundary</code> is '<code>UNBOUNDED FOLLOWING cannot be specified for the lower frame boundary</code>'    */
 specifier|public
 specifier|final
 name|_Def4
@@ -1672,7 +1672,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>BadUpperBoundary</code> is '<code>UNBOUNDED PRECEDING cannot be specified for the upper frame boundary</code>'      */
+comment|/**    *<code>BadUpperBoundary</code> is '<code>UNBOUNDED PRECEDING cannot be specified for the upper frame boundary</code>'    */
 specifier|public
 specifier|final
 name|_Def4
@@ -1688,7 +1688,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>CurrentRowPrecedingError</code> is '<code>Upper frame boundary cannot be PRECEDING when lower boundary is CURRENT ROW</code>'      */
+comment|/**    *<code>CurrentRowPrecedingError</code> is '<code>Upper frame boundary cannot be PRECEDING when lower boundary is CURRENT ROW</code>'    */
 specifier|public
 specifier|final
 name|_Def4
@@ -1704,7 +1704,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>CurrentRowFollowingError</code> is '<code>Upper frame boundary cannot be CURRENT ROW when lower boundary is FOLLOWING</code>'      */
+comment|/**    *<code>CurrentRowFollowingError</code> is '<code>Upper frame boundary cannot be CURRENT ROW when lower boundary is FOLLOWING</code>'    */
 specifier|public
 specifier|final
 name|_Def4
@@ -1720,7 +1720,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>FollowingBeforePrecedingError</code> is '<code>Upper frame boundary cannot be PRECEDING when lower boundary is FOLLOWING</code>'      */
+comment|/**    *<code>FollowingBeforePrecedingError</code> is '<code>Upper frame boundary cannot be PRECEDING when lower boundary is FOLLOWING</code>'    */
 specifier|public
 specifier|final
 name|_Def4
@@ -1736,7 +1736,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>WindowNameMustBeSimple</code> is '<code>Window name must be a simple identifier</code>'      */
+comment|/**    *<code>WindowNameMustBeSimple</code> is '<code>Window name must be a simple identifier</code>'    */
 specifier|public
 specifier|final
 name|_Def4
@@ -1752,7 +1752,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>DuplicateWindowName</code> is '<code>Duplicate window names not allowed</code>'      */
+comment|/**    *<code>DuplicateWindowName</code> is '<code>Duplicate window names not allowed</code>'    */
 specifier|public
 specifier|final
 name|_Def4
@@ -1768,7 +1768,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>EmptyWindowSpec</code> is '<code>Empty window specification not allowed</code>'      */
+comment|/**    *<code>EmptyWindowSpec</code> is '<code>Empty window specification not allowed</code>'    */
 specifier|public
 specifier|final
 name|_Def4
@@ -1784,7 +1784,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>DupWindowSpec</code> is '<code>Duplicate window specification not allowed in the same window clause</code>'      */
+comment|/**    *<code>DupWindowSpec</code> is '<code>Duplicate window specification not allowed in the same window clause</code>'    */
 specifier|public
 specifier|final
 name|_Def4
@@ -1800,7 +1800,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>RankWithFrame</code> is '<code>ROW/RANGE not allowed with RANK or DENSE_RANK functions</code>'      */
+comment|/**    *<code>RankWithFrame</code> is '<code>ROW/RANGE not allowed with RANK or DENSE_RANK functions</code>'    */
 specifier|public
 specifier|final
 name|_Def4
@@ -1816,7 +1816,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>FuncNeedsOrderBy</code> is '<code>RANK or DENSE_RANK functions require ORDER BY clause in window specification</code>'      */
+comment|/**    *<code>FuncNeedsOrderBy</code> is '<code>RANK or DENSE_RANK functions require ORDER BY clause in window specification</code>'    */
 specifier|public
 specifier|final
 name|_Def4
@@ -1832,7 +1832,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>PartitionNotAllowed</code> is '<code>PARTITION BY not allowed with existing window reference</code>'      */
+comment|/**    *<code>PartitionNotAllowed</code> is '<code>PARTITION BY not allowed with existing window reference</code>'    */
 specifier|public
 specifier|final
 name|_Def4
@@ -1848,7 +1848,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>OrderByOverlap</code> is '<code>ORDER BY not allowed in both base and referenced windows</code>'      */
+comment|/**    *<code>OrderByOverlap</code> is '<code>ORDER BY not allowed in both base and referenced windows</code>'    */
 specifier|public
 specifier|final
 name|_Def4
@@ -1864,7 +1864,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>RefWindowWithFrame</code> is '<code>Referenced window cannot have framing declarations</code>'      */
+comment|/**    *<code>RefWindowWithFrame</code> is '<code>Referenced window cannot have framing declarations</code>'    */
 specifier|public
 specifier|final
 name|_Def4
@@ -1880,7 +1880,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>TypeNotSupported</code> is '<code>Type&#39;&#39;{0}&#39;&#39; is not supported</code>'      */
+comment|/**    *<code>TypeNotSupported</code> is '<code>Type&#39;&#39;{0}&#39;&#39; is not supported</code>'    */
 specifier|public
 specifier|final
 name|_Def9
@@ -1896,7 +1896,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>FunctionQuantifierNotAllowed</code> is '<code>DISTINCT/ALL not allowed with {0} function</code>'      */
+comment|/**    *<code>FunctionQuantifierNotAllowed</code> is '<code>DISTINCT/ALL not allowed with {0} function</code>'    */
 specifier|public
 specifier|final
 name|_Def9
@@ -1912,7 +1912,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>AccessNotAllowed</code> is '<code>Not allowed to perform {0} on {1}</code>'      */
+comment|/**    *<code>AccessNotAllowed</code> is '<code>Not allowed to perform {0} on {1}</code>'    */
 specifier|public
 specifier|final
 name|_Def13
@@ -1928,7 +1928,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>MinMaxBadType</code> is '<code>The {0} function does not support the {1} data type.</code>'      */
+comment|/**    *<code>MinMaxBadType</code> is '<code>The {0} function does not support the {1} data type.</code>'    */
 specifier|public
 specifier|final
 name|_Def13
@@ -1944,7 +1944,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>OnlyScalarSubqueryAllowed</code> is '<code>Only scalar subqueries allowed in select list.</code>'      */
+comment|/**    *<code>OnlyScalarSubqueryAllowed</code> is '<code>Only scalar subqueries allowed in select list.</code>'    */
 specifier|public
 specifier|final
 name|_Def4
@@ -1960,7 +1960,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>OrderByOrdinalOutOfRange</code> is '<code>Ordinal out of range</code>'      */
+comment|/**    *<code>OrderByOrdinalOutOfRange</code> is '<code>Ordinal out of range</code>'    */
 specifier|public
 specifier|final
 name|_Def4
@@ -1976,7 +1976,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>WindowHasNegativeSize</code> is '<code>Window has negative size</code>'      */
+comment|/**    *<code>WindowHasNegativeSize</code> is '<code>Window has negative size</code>'    */
 specifier|public
 specifier|final
 name|_Def4
@@ -1992,7 +1992,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>UnboundedFollowingWindowNotSupported</code> is '<code>UNBOUNDED FOLLOWING window not supported</code>'      */
+comment|/**    *<code>UnboundedFollowingWindowNotSupported</code> is '<code>UNBOUNDED FOLLOWING window not supported</code>'    */
 specifier|public
 specifier|final
 name|_Def4
@@ -2008,7 +2008,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>CannotUseDisallowPartialWithRange</code> is '<code>Cannot use DISALLOW PARTIAL with window based on RANGE</code>'      */
+comment|/**    *<code>CannotUseDisallowPartialWithRange</code> is '<code>Cannot use DISALLOW PARTIAL with window based on RANGE</code>'    */
 specifier|public
 specifier|final
 name|_Def4
@@ -2024,7 +2024,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>IntervalStartPrecisionOutOfRange</code> is '<code>Interval leading field precision&#39;&#39;{0}&#39;&#39; out of range for {1}</code>'      */
+comment|/**    *<code>IntervalStartPrecisionOutOfRange</code> is '<code>Interval leading field precision&#39;&#39;{0}&#39;&#39; out of range for {1}</code>'    */
 specifier|public
 specifier|final
 name|_Def13
@@ -2040,7 +2040,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>IntervalFractionalSecondPrecisionOutOfRange</code> is '<code>Interval fractional second precision&#39;&#39;{0}&#39;&#39; out of range for {1}</code>'      */
+comment|/**    *<code>IntervalFractionalSecondPrecisionOutOfRange</code> is '<code>Interval fractional second precision&#39;&#39;{0}&#39;&#39; out of range for {1}</code>'    */
 specifier|public
 specifier|final
 name|_Def13
@@ -2056,7 +2056,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>FromAliasDuplicate</code> is '<code>Duplicate relation name&#39;&#39;{0}&#39;&#39; in FROM clause</code>'      */
+comment|/**    *<code>FromAliasDuplicate</code> is '<code>Duplicate relation name&#39;&#39;{0}&#39;&#39; in FROM clause</code>'    */
 specifier|public
 specifier|final
 name|_Def9
@@ -2072,7 +2072,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>DuplicateColumnName</code> is '<code>Duplicate column name&#39;&#39;{0}&#39;&#39; in output</code>'      */
+comment|/**    *<code>DuplicateColumnName</code> is '<code>Duplicate column name&#39;&#39;{0}&#39;&#39; in output</code>'    */
 specifier|public
 specifier|final
 name|_Def9
@@ -2088,7 +2088,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>Internal</code> is '<code>Internal error: {0}</code>'      */
+comment|/**    *<code>Internal</code> is '<code>Internal error: {0}</code>'    */
 specifier|public
 specifier|final
 name|_Def7
@@ -2104,7 +2104,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>ArgumentMustBeLiteral</code> is '<code>Argument to function&#39;&#39;{0}&#39;&#39; must be a literal</code>'      */
+comment|/**    *<code>ArgumentMustBeLiteral</code> is '<code>Argument to function&#39;&#39;{0}&#39;&#39; must be a literal</code>'    */
 specifier|public
 specifier|final
 name|_Def9
@@ -2120,7 +2120,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>ArgumentMustBePositiveInteger</code> is '<code>Argument to function&#39;&#39;{0}&#39;&#39; must be a positive integer literal</code>'      */
+comment|/**    *<code>ArgumentMustBePositiveInteger</code> is '<code>Argument to function&#39;&#39;{0}&#39;&#39; must be a positive integer literal</code>'    */
 specifier|public
 specifier|final
 name|_Def9
@@ -2136,7 +2136,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>ValidationError</code> is '<code>Validation Error: {0}</code>'      */
+comment|/**    *<code>ValidationError</code> is '<code>Validation Error: {0}</code>'    */
 specifier|public
 specifier|final
 name|_Def7
@@ -2152,7 +2152,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>ParserError</code> is '<code>Parser Error: {0}</code>'      */
+comment|/**    *<code>ParserError</code> is '<code>Parser Error: {0}</code>'    */
 specifier|public
 specifier|final
 name|_Def7
@@ -2168,7 +2168,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>ArgumentMustNotBeNull</code> is '<code>Argument to function&#39;&#39;{0}&#39;&#39; must not be NULL</code>'      */
+comment|/**    *<code>ArgumentMustNotBeNull</code> is '<code>Argument to function&#39;&#39;{0}&#39;&#39; must not be NULL</code>'    */
 specifier|public
 specifier|final
 name|_Def9
@@ -2184,7 +2184,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>NullIllegal</code> is '<code>Illegal use of&#39;&#39;NULL&#39;&#39;</code>'      */
+comment|/**    *<code>NullIllegal</code> is '<code>Illegal use of&#39;&#39;NULL&#39;&#39;</code>'    */
 specifier|public
 specifier|final
 name|_Def4
@@ -2200,7 +2200,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>DynamicParamIllegal</code> is '<code>Illegal use of dynamic parameter</code>'      */
+comment|/**    *<code>DynamicParamIllegal</code> is '<code>Illegal use of dynamic parameter</code>'    */
 specifier|public
 specifier|final
 name|_Def4
@@ -2216,7 +2216,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>InvalidBoolean</code> is '<code>&#39;&#39;{0}&#39;&#39; is not a valid boolean value</code>'      */
+comment|/**    *<code>InvalidBoolean</code> is '<code>&#39;&#39;{0}&#39;&#39; is not a valid boolean value</code>'    */
 specifier|public
 specifier|final
 name|_Def7
@@ -2232,7 +2232,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>ArgumentMustBeValidPrecision</code> is '<code>Argument to function&#39;&#39;{0}&#39;&#39; must be a valid precision between&#39;&#39;{1}&#39;&#39; and&#39;&#39;{2}&#39;&#39;</code>'      */
+comment|/**    *<code>ArgumentMustBeValidPrecision</code> is '<code>Argument to function&#39;&#39;{0}&#39;&#39; must be a valid precision between&#39;&#39;{1}&#39;&#39; and&#39;&#39;{2}&#39;&#39;</code>'    */
 specifier|public
 specifier|final
 name|_Def14
@@ -2248,7 +2248,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>InvalidDatetimeFormat</code> is '<code>&#39;&#39;{0}&#39;&#39; is not a valid datetime format</code>'      */
+comment|/**    *<code>InvalidDatetimeFormat</code> is '<code>&#39;&#39;{0}&#39;&#39; is not a valid datetime format</code>'    */
 specifier|public
 specifier|final
 name|_Def7
@@ -2264,7 +2264,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>InsertIntoAlwaysGenerated</code> is '<code>Cannot explicitly insert value into IDENTITY column&#39;&#39;{0}&#39;&#39; which is ALWAYS GENERATED</code>'      */
+comment|/**    *<code>InsertIntoAlwaysGenerated</code> is '<code>Cannot explicitly insert value into IDENTITY column&#39;&#39;{0}&#39;&#39; which is ALWAYS GENERATED</code>'    */
 specifier|public
 specifier|final
 name|_Def7
@@ -2280,7 +2280,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>ArgumentMustHaveScaleZero</code> is '<code>Argument to function&#39;&#39;{0}&#39;&#39; must have a scale of 0</code>'      */
+comment|/**    *<code>ArgumentMustHaveScaleZero</code> is '<code>Argument to function&#39;&#39;{0}&#39;&#39; must have a scale of 0</code>'    */
 specifier|public
 specifier|final
 name|_Def7
@@ -2296,7 +2296,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>PreparationAborted</code> is '<code>Statement preparation aborted</code>'      */
+comment|/**    *<code>PreparationAborted</code> is '<code>Statement preparation aborted</code>'    */
 specifier|public
 specifier|final
 name|_Def6
@@ -2312,7 +2312,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>SQLFeature_E051_01</code> is '<code>SELECT DISTINCT not supported</code>'      */
+comment|/**    *<code>SQLFeature_E051_01</code> is '<code>SELECT DISTINCT not supported</code>'    */
 specifier|public
 specifier|final
 name|_Def6
@@ -2335,7 +2335,7 @@ literal|"SQL:2003 Part 2 Annex F"
 block|}
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>SQLFeature_E071_03</code> is '<code>EXCEPT not supported</code>'      */
+comment|/**    *<code>SQLFeature_E071_03</code> is '<code>EXCEPT not supported</code>'    */
 specifier|public
 specifier|final
 name|_Def6
@@ -2358,7 +2358,7 @@ literal|"SQL:2003 Part 2 Annex F"
 block|}
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>SQLFeature_E101_03</code> is '<code>UPDATE not supported</code>'      */
+comment|/**    *<code>SQLFeature_E101_03</code> is '<code>UPDATE not supported</code>'    */
 specifier|public
 specifier|final
 name|_Def6
@@ -2381,7 +2381,7 @@ literal|"SQL:2003 Part 2 Annex F"
 block|}
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>SQLFeature_E151</code> is '<code>Transactions not supported</code>'      */
+comment|/**    *<code>SQLFeature_E151</code> is '<code>Transactions not supported</code>'    */
 specifier|public
 specifier|final
 name|_Def6
@@ -2404,7 +2404,7 @@ literal|"SQL:2003 Part 2 Annex F"
 block|}
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>SQLFeature_F302</code> is '<code>INTERSECT not supported</code>'      */
+comment|/**    *<code>SQLFeature_F302</code> is '<code>INTERSECT not supported</code>'    */
 specifier|public
 specifier|final
 name|_Def6
@@ -2427,7 +2427,7 @@ literal|"SQL:2003 Part 2 Annex F"
 block|}
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>SQLFeature_F312</code> is '<code>MERGE not supported</code>'      */
+comment|/**    *<code>SQLFeature_F312</code> is '<code>MERGE not supported</code>'    */
 specifier|public
 specifier|final
 name|_Def6
@@ -2450,7 +2450,7 @@ literal|"SQL:2003 Part 2 Annex F"
 block|}
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>SQLFeature_S271</code> is '<code>Basic multiset not supported</code>'      */
+comment|/**    *<code>SQLFeature_S271</code> is '<code>Basic multiset not supported</code>'    */
 specifier|public
 specifier|final
 name|_Def6
@@ -2473,7 +2473,7 @@ literal|"SQL:2003 Part 2 Annex F"
 block|}
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>SQLFeature_T613</code> is '<code>TABLESAMPLE not supported</code>'      */
+comment|/**    *<code>SQLFeature_T613</code> is '<code>TABLESAMPLE not supported</code>'    */
 specifier|public
 specifier|final
 name|_Def6
@@ -2496,7 +2496,7 @@ literal|"SQL:2003 Part 2 Annex F"
 block|}
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>SQLConformance_MultipleActiveAutocommitStatements</code> is '<code>Execution of a new autocommit statement while a cursor is still open on same connection is not supported</code>'      */
+comment|/**    *<code>SQLConformance_MultipleActiveAutocommitStatements</code> is '<code>Execution of a new autocommit statement while a cursor is still open on same connection is not supported</code>'    */
 specifier|public
 specifier|final
 name|_Def6
@@ -2519,7 +2519,7 @@ literal|"Eigenbase-defined"
 block|}
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>SQLConformance_OrderByDesc</code> is '<code>Descending sort (ORDER BY DESC) not supported</code>'      */
+comment|/**    *<code>SQLConformance_OrderByDesc</code> is '<code>Descending sort (ORDER BY DESC) not supported</code>'    */
 specifier|public
 specifier|final
 name|_Def6
@@ -2542,7 +2542,7 @@ literal|"Eigenbase-defined"
 block|}
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>SharedStatementPlans</code> is '<code>Sharing of cached statement plans not supported</code>'      */
+comment|/**    *<code>SharedStatementPlans</code> is '<code>Sharing of cached statement plans not supported</code>'    */
 specifier|public
 specifier|final
 name|_Def6
@@ -2565,7 +2565,7 @@ literal|"Eigenbase-defined"
 block|}
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>SQLFeatureExt_T613_Substitution</code> is '<code>TABLESAMPLE SUBSTITUTE not supported</code>'      */
+comment|/**    *<code>SQLFeatureExt_T613_Substitution</code> is '<code>TABLESAMPLE SUBSTITUTE not supported</code>'    */
 specifier|public
 specifier|final
 name|_Def6
@@ -2588,7 +2588,7 @@ literal|"Eigenbase-defined"
 block|}
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>PersonalityManagesRowCount</code> is '<code>Personality does not maintain table&#39;&#39;s row count in the catalog</code>'      */
+comment|/**    *<code>PersonalityManagesRowCount</code> is '<code>Personality does not maintain table&#39;&#39;s row count in the catalog</code>'    */
 specifier|public
 specifier|final
 name|_Def6
@@ -2611,7 +2611,7 @@ literal|"Eigenbase-defined"
 block|}
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>PersonalitySupportsSnapshots</code> is '<code>Personality does not support snapshot reads</code>'      */
+comment|/**    *<code>PersonalitySupportsSnapshots</code> is '<code>Personality does not support snapshot reads</code>'    */
 specifier|public
 specifier|final
 name|_Def6
@@ -2634,7 +2634,7 @@ literal|"Eigenbase-defined"
 block|}
 argument_list|)
 decl_stmt|;
-comment|/**      *<code>PersonalitySupportsLabels</code> is '<code>Personality does not support labels</code>'      */
+comment|/**    *<code>PersonalitySupportsLabels</code> is '<code>Personality does not support labels</code>'    */
 specifier|public
 specifier|final
 name|_Def6
@@ -2657,7 +2657,7 @@ literal|"Eigenbase-defined"
 block|}
 argument_list|)
 decl_stmt|;
-comment|/**      * Definition for resources which      * take arguments 'Number p0, Number p1'.      */
+comment|/**    * Definition for resources which    * take arguments 'Number p0, Number p1'.    */
 specifier|public
 specifier|final
 class|class
@@ -2727,7 +2727,7 @@ argument_list|()
 return|;
 block|}
 block|}
-comment|/**      * Definition for resources which      * return a {@link org.eigenbase.util.EigenbaseException} exception and      * take arguments 'String p0, String p1, String p2'.      */
+comment|/**    * Definition for resources which    * return a {@link org.eigenbase.util.EigenbaseException} exception and    * take arguments 'String p0, String p1, String p2'.    */
 specifier|public
 specifier|final
 class|class
@@ -2915,7 +2915,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**      * Definition for resources which      * return a {@link org.eigenbase.util.EigenbaseException} exception and      * take arguments 'String p0, Number p1'.      */
+comment|/**    * Definition for resources which    * return a {@link org.eigenbase.util.EigenbaseException} exception and    * take arguments 'String p0, Number p1'.    */
 specifier|public
 specifier|final
 class|class
@@ -3088,7 +3088,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**      * Definition for resources which      * take arguments 'String p0'.      */
+comment|/**    * Definition for resources which    * take arguments 'String p0'.    */
 specifier|public
 specifier|final
 class|class
@@ -3153,7 +3153,7 @@ argument_list|()
 return|;
 block|}
 block|}
-comment|/**      * Definition for resources which      * return a {@link org.eigenbase.sql.validate.SqlValidatorException} exception and      * take arguments ''.      */
+comment|/**    * Definition for resources which    * return a {@link org.eigenbase.sql.validate.SqlValidatorException} exception and    * take arguments ''.    */
 specifier|public
 specifier|final
 class|class
@@ -3295,7 +3295,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**      * Definition for resources which      * return a {@link org.eigenbase.util.EigenbaseException} exception and      * take arguments 'String p0, String p1'.      */
+comment|/**    * Definition for resources which    * return a {@link org.eigenbase.util.EigenbaseException} exception and    * take arguments 'String p0, String p1'.    */
 specifier|public
 specifier|final
 class|class
@@ -3468,7 +3468,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**      * Definition for resources which      * return a {@link org.eigenbase.util.EigenbaseException} exception and      * take arguments ''.      */
+comment|/**    * Definition for resources which    * return a {@link org.eigenbase.util.EigenbaseException} exception and    * take arguments ''.    */
 specifier|public
 specifier|final
 class|class
@@ -3602,7 +3602,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**      * Definition for resources which      * return a {@link org.eigenbase.util.EigenbaseException} exception and      * take arguments 'String p0'.      */
+comment|/**    * Definition for resources which    * return a {@link org.eigenbase.util.EigenbaseException} exception and    * take arguments 'String p0'.    */
 specifier|public
 specifier|final
 class|class
@@ -3760,7 +3760,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**      * Definition for resources which      * return a {@link org.eigenbase.util.EigenbaseException} exception and      * take arguments 'Number p0'.      */
+comment|/**    * Definition for resources which    * return a {@link org.eigenbase.util.EigenbaseException} exception and    * take arguments 'Number p0'.    */
 specifier|public
 specifier|final
 class|class
@@ -3918,7 +3918,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**      * Definition for resources which      * return a {@link org.eigenbase.sql.validate.SqlValidatorException} exception and      * take arguments 'String p0'.      */
+comment|/**    * Definition for resources which    * return a {@link org.eigenbase.sql.validate.SqlValidatorException} exception and    * take arguments 'String p0'.    */
 specifier|public
 specifier|final
 class|class
@@ -4084,7 +4084,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**      * Definition for resources which      * return a {@link org.eigenbase.sql.validate.SqlValidatorException} exception and      * take arguments 'String p0, Number p1'.      */
+comment|/**    * Definition for resources which    * return a {@link org.eigenbase.sql.validate.SqlValidatorException} exception and    * take arguments 'String p0, Number p1'.    */
 specifier|public
 specifier|final
 class|class
@@ -4265,7 +4265,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**      * Definition for resources which      * return a {@link org.eigenbase.util.EigenbaseContextException} exception and      * take arguments 'Number p0, Number p1'.      */
+comment|/**    * Definition for resources which    * return a {@link org.eigenbase.util.EigenbaseContextException} exception and    * take arguments 'Number p0, Number p1'.    */
 specifier|public
 specifier|final
 class|class
@@ -4438,7 +4438,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**      * Definition for resources which      * return a {@link org.eigenbase.util.EigenbaseContextException} exception and      * take arguments 'Number p0, Number p1, Number p2, Number p3'.      */
+comment|/**    * Definition for resources which    * return a {@link org.eigenbase.util.EigenbaseContextException} exception and    * take arguments 'Number p0, Number p1, Number p2, Number p3'.    */
 specifier|public
 specifier|final
 class|class
@@ -4641,7 +4641,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**      * Definition for resources which      * return a {@link org.eigenbase.sql.validate.SqlValidatorException} exception and      * take arguments 'String p0, String p1'.      */
+comment|/**    * Definition for resources which    * return a {@link org.eigenbase.sql.validate.SqlValidatorException} exception and    * take arguments 'String p0, String p1'.    */
 specifier|public
 specifier|final
 class|class
@@ -4822,7 +4822,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**      * Definition for resources which      * return a {@link org.eigenbase.sql.validate.SqlValidatorException} exception and      * take arguments 'String p0, String p1, String p2'.      */
+comment|/**    * Definition for resources which    * return a {@link org.eigenbase.sql.validate.SqlValidatorException} exception and    * take arguments 'String p0, String p1, String p2'.    */
 specifier|public
 specifier|final
 class|class
@@ -5018,7 +5018,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**      * Definition for resources which      * return a {@link org.eigenbase.sql.validate.SqlValidatorException} exception and      * take arguments 'Number p0, Number p1'.      */
+comment|/**    * Definition for resources which    * return a {@link org.eigenbase.sql.validate.SqlValidatorException} exception and    * take arguments 'Number p0, Number p1'.    */
 specifier|public
 specifier|final
 class|class
@@ -5199,7 +5199,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**      * Definition for resources which      * return a {@link org.eigenbase.sql.validate.SqlValidatorException} exception and      * take arguments 'String p0, String p1, String p2, String p3'.      */
+comment|/**    * Definition for resources which    * return a {@link org.eigenbase.sql.validate.SqlValidatorException} exception and    * take arguments 'String p0, String p1, String p2, String p3'.    */
 specifier|public
 specifier|final
 class|class
@@ -5410,7 +5410,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**      * Definition for resources which      * return a {@link org.eigenbase.sql.validate.SqlValidatorException} exception and      * take arguments 'String p0, Number p1, String p2'.      */
+comment|/**    * Definition for resources which    * return a {@link org.eigenbase.sql.validate.SqlValidatorException} exception and    * take arguments 'String p0, Number p1, String p2'.    */
 specifier|public
 specifier|final
 class|class
@@ -5606,7 +5606,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**      * Definition for resources which      * return a {@link org.eigenbase.util.EigenbaseException} exception and      * take arguments 'String p0, String p1, String p2, String p3'.      */
+comment|/**    * Definition for resources which    * return a {@link org.eigenbase.util.EigenbaseException} exception and    * take arguments 'String p0, String p1, String p2, String p3'.    */
 specifier|public
 specifier|final
 class|class
@@ -5809,7 +5809,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**      * Definition for resources which      * return a {@link org.eigenbase.sql.validate.SqlValidatorException} exception and      * take arguments 'Number p0, String p1, Number p2'.      */
+comment|/**    * Definition for resources which    * return a {@link org.eigenbase.sql.validate.SqlValidatorException} exception and    * take arguments 'Number p0, String p1, Number p2'.    */
 specifier|public
 specifier|final
 class|class
@@ -6005,7 +6005,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**      * Definition for resources which      * return a {@link org.eigenbase.sql.validate.SqlValidatorException} exception and      * take arguments 'Number p0, String p1'.      */
+comment|/**    * Definition for resources which    * return a {@link org.eigenbase.sql.validate.SqlValidatorException} exception and    * take arguments 'Number p0, String p1'.    */
 specifier|public
 specifier|final
 class|class

@@ -63,7 +63,7 @@ name|RelTrait
 name|outTrait
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a<code>ConverterRule</code>.      *      * @param clazz Type of relational expression to consider converting      * @param in Trait of relational expression to consider converting      * @param out Trait which is converted to      * @param description Description of rule      *      * @pre in != null      * @pre out != null      */
+comment|/**    * Creates a<code>ConverterRule</code>.    *    * @param clazz       Type of relational expression to consider converting    * @param in          Trait of relational expression to consider converting    * @param out         Trait which is converted to    * @param description Description of rule    * @pre in != null    * @pre out != null    */
 specifier|public
 name|ConverterRule
 parameter_list|(
@@ -203,7 +203,7 @@ name|RelNode
 name|rel
 parameter_list|)
 function_decl|;
-comment|/**      * Returns true if this rule can convert<em>any</em> relational expression      * of the input convention.      *      *<p>The union-to-java converter, for example, is not guaranteed, because      * it only works on unions.</p>      */
+comment|/**    * Returns true if this rule can convert<em>any</em> relational expression    * of the input convention.    *    *<p>The union-to-java converter, for example, is not guaranteed, because    * it only works on unions.</p>    */
 specifier|public
 name|boolean
 name|isGuaranteed

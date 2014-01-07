@@ -55,29 +55,29 @@ init|=
 literal|10
 decl_stmt|;
 comment|//~ Instance fields --------------------------------------------------------
-comment|/**      * The current capacity (not size) of this queue. Equal to<code>{link      * #queue}.length</code>.      */
+comment|/**    * The current capacity (not size) of this queue. Equal to<code>{link    * #queue}.length</code>.    */
 specifier|private
 name|int
 name|capacity
 decl_stmt|;
-comment|/**      * The queue contents. Treated as a circular buffer.      */
+comment|/**    * The queue contents. Treated as a circular buffer.    */
 specifier|private
 name|E
 index|[]
 name|queue
 decl_stmt|;
-comment|/**      * The current position of the head element of the queue.      */
+comment|/**    * The current position of the head element of the queue.    */
 specifier|private
 name|int
 name|start
 decl_stmt|;
-comment|/**      * The current position for the next element added to the queue.      */
+comment|/**    * The current position for the next element added to the queue.    */
 specifier|private
 name|int
 name|end
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Constructs an empty ArrayQueue with the specified initial capacity.      *      * @param capacity the initial capacity of this queue      */
+comment|/**    * Constructs an empty ArrayQueue with the specified initial capacity.    *    * @param capacity the initial capacity of this queue    */
 specifier|public
 name|ArrayQueue
 parameter_list|(
@@ -131,7 +131,7 @@ operator|=
 literal|0
 expr_stmt|;
 block|}
-comment|/**      * Constructs an empty ArrayQueue with the default initial capacity of      * DEFAULT_CAPACITY.      */
+comment|/**    * Constructs an empty ArrayQueue with the default initial capacity of    * DEFAULT_CAPACITY.    */
 specifier|public
 name|ArrayQueue
 parameter_list|()
@@ -142,7 +142,7 @@ name|DEFAULT_CAPACITY
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Constructs an ArrayQueue with the given contents. The initial capacity of      * the queue is {@link #DEFAULT_CAPACITY 10} or {@link Collection#size()      * c.size()} whichever is larger. The queue is populated with the elements      * of<code>c</code> in the order in which<code>c</code>'s iterator returns      * them.      *      * @param c a collection to use as the default contents of the queue      *      * @throws NullPointerException if c or any of its elements are null      */
+comment|/**    * Constructs an ArrayQueue with the given contents. The initial capacity of    * the queue is {@link #DEFAULT_CAPACITY 10} or {@link Collection#size()    * c.size()} whichever is larger. The queue is populated with the elements    * of<code>c</code> in the order in which<code>c</code>'s iterator returns    * them.    *    * @param c a collection to use as the default contents of the queue    * @throws NullPointerException if c or any of its elements are null    */
 specifier|public
 name|ArrayQueue
 parameter_list|(
@@ -176,7 +176,7 @@ name|c
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Constructs an ArrayQueue with the given contents and initial capacity. If      *<code>capacity</code> is smaller than {@link Collection#size() c.size()},      * the initial capacity will be<code>c.size()</code>. The queue is      * populated with the elements of<code>c</code> in the order in which      *<code>c</code>'s iterator returns them.      *      * @param capacity the initial capacity of this queue      * @param c a collection to use as the default contents of the queue      *      * @throws NullPointerException if c or any of its elements are null      */
+comment|/**    * Constructs an ArrayQueue with the given contents and initial capacity. If    *<code>capacity</code> is smaller than {@link Collection#size() c.size()},    * the initial capacity will be<code>c.size()</code>. The queue is    * populated with the elements of<code>c</code> in the order in which    *<code>c</code>'s iterator returns them.    *    * @param capacity the initial capacity of this queue    * @param c        a collection to use as the default contents of the queue    * @throws NullPointerException if c or any of its elements are null    */
 specifier|public
 name|ArrayQueue
 parameter_list|(
@@ -214,7 +214,7 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Inserts the specified element into this queue. The queue's capacity may      * grow as a result of this call.      *      * @param o the element to insert      *      * @return<code>false</code> if o is<code>null</code>, otherwise<code>      * true</code> since it's always possible to add an element to this queue.      */
+comment|/**    * Inserts the specified element into this queue. The queue's capacity may    * grow as a result of this call.    *    * @param o the element to insert    * @return<code>false</code> if o is<code>null</code>, otherwise<code>    * true</code> since it's always possible to add an element to this queue.    */
 specifier|public
 name|boolean
 name|offer
@@ -287,7 +287,7 @@ return|return
 literal|true
 return|;
 block|}
-comment|/**      * Retrieves, but does not remove the head of this queue, returning<code>      * null</code> if this queue is empty.      *      * @return the head of the queue or<code>null</code> if the queue is empty      */
+comment|/**    * Retrieves, but does not remove the head of this queue, returning<code>    * null</code> if this queue is empty.    *    * @return the head of the queue or<code>null</code> if the queue is empty    */
 specifier|public
 name|E
 name|peek
@@ -311,7 +311,7 @@ name|start
 index|]
 return|;
 block|}
-comment|/**      * Retrieves and removes the head of this queue, returning<code>null</code>      * if this queue is empty.      *      * @return the head of the queue or<code>null</code> if the queue is empty      */
+comment|/**    * Retrieves and removes the head of this queue, returning<code>null</code>    * if this queue is empty.    *    * @return the head of the queue or<code>null</code> if the queue is empty    */
 specifier|public
 name|E
 name|poll
@@ -355,7 +355,7 @@ return|return
 name|result
 return|;
 block|}
-comment|/**      * Returns the number of elements currently in the queue.      *      * @return the number of elements currently in the queue      */
+comment|/**    * Returns the number of elements currently in the queue.    *    * @return the number of elements currently in the queue    */
 specifier|public
 name|int
 name|size
@@ -387,7 +387,7 @@ name|start
 return|;
 block|}
 block|}
-comment|/**      * Returns an iterator over the elements in the queue in proper sequence.      * The returned<code>Iterator</code> is a "weakly consistent" iterator. It      * will never throw<code>ConcurrentModificationException</code> and      * guarantees to traverse elements as they existed upon construction of the      * iterator, but will never reflect any modifications subsequent to      * construction.      *      * @return an iterator over the elements in this queue in proper order      */
+comment|/**    * Returns an iterator over the elements in the queue in proper sequence.    * The returned<code>Iterator</code> is a "weakly consistent" iterator. It    * will never throw<code>ConcurrentModificationException</code> and    * guarantees to traverse elements as they existed upon construction of the    * iterator, but will never reflect any modifications subsequent to    * construction.    *    * @return an iterator over the elements in this queue in proper order    */
 specifier|public
 name|Iterator
 argument_list|<
@@ -428,7 +428,7 @@ name|iterator
 argument_list|()
 return|;
 block|}
-comment|/**      * Unsupported operation.      */
+comment|/**    * Unsupported operation.    */
 specifier|public
 name|boolean
 name|remove
@@ -443,7 +443,7 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
-comment|/**      * Unsupported operation.      */
+comment|/**    * Unsupported operation.    */
 specifier|public
 name|boolean
 name|removeAll
@@ -458,7 +458,7 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
-comment|/**      * Unsupported operation.      */
+comment|/**    * Unsupported operation.    */
 specifier|public
 name|boolean
 name|retainAll
@@ -476,7 +476,7 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
-comment|/**      * Grows the queue to twice the current capacity.      */
+comment|/**    * Grows the queue to twice the current capacity.    */
 specifier|private
 name|void
 name|grow
@@ -531,7 +531,7 @@ operator|=
 name|largerCapacity
 expr_stmt|;
 block|}
-comment|/**      * Compares two queues for equality. The queues are not modified by this      * method. Concurrent modification of either this queue or the one being      * compared to has undefined results. Each element, in the proper order,      * must match in the two queues using the elements'<code>equals</code>      * method.      *      * @param o the queue to compare this queue to      *      * @return true if the queues have the same elements in the same order,      * false otherwise      *      * @throws ClassCastException if<code>o</code> is not an ArrayQueue.      */
+comment|/**    * Compares two queues for equality. The queues are not modified by this    * method. Concurrent modification of either this queue or the one being    * compared to has undefined results. Each element, in the proper order,    * must match in the two queues using the elements'<code>equals</code>    * method.    *    * @param o the queue to compare this queue to    * @return true if the queues have the same elements in the same order,    * false otherwise    * @throws ClassCastException if<code>o</code> is not an ArrayQueue.    */
 specifier|public
 name|boolean
 name|equals
@@ -656,7 +656,7 @@ return|return
 literal|true
 return|;
 block|}
-comment|/**      * Copies the contents of the queue into an array. The elements are copied      * such that the first element of the queue ends up in<code>      * otherQueue[0]</code>. Elements are copied in order.      *      * @param otherQueue the array to copy data into,<code>      * otherQueue.length</code> must be greater than or equal to {@link      * #size()}.      */
+comment|/**    * Copies the contents of the queue into an array. The elements are copied    * such that the first element of the queue ends up in<code>    * otherQueue[0]</code>. Elements are copied in order.    *    * @param otherQueue the array to copy data into,<code>    *                   otherQueue.length</code> must be greater than or equal to {@link    *                   #size()}.    */
 specifier|private
 name|void
 name|copyQueueToArray
@@ -747,7 +747,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Increments the given index by one modulo the queue's capacity.      *      * @param index the index value to increment      *      * @return the index mod {@link #capacity}      */
+comment|/**    * Increments the given index by one modulo the queue's capacity.    *    * @param index the index value to increment    * @return the index mod {@link #capacity}    */
 specifier|private
 name|int
 name|increment
@@ -775,7 +775,7 @@ return|return
 name|index
 return|;
 block|}
-comment|/**      * Adds the specified element to this queue. This implementation returns      * true if offer succeeds, else throws an IllegalStateException.      *      * @param o the element      *      * @return true (as per the general contract of {@link      * Collection#add(Object)}).      *      * @throws NullPointerException if o is<code>null</code>      * @throws IllegalStateException if the call to {@link #offer(Object)} fails      */
+comment|/**    * Adds the specified element to this queue. This implementation returns    * true if offer succeeds, else throws an IllegalStateException.    *    * @param o the element    * @return true (as per the general contract of {@link    * Collection#add(Object)}).    * @throws NullPointerException  if o is<code>null</code>    * @throws IllegalStateException if the call to {@link #offer(Object)} fails    */
 specifier|public
 name|boolean
 name|add
@@ -815,7 +815,7 @@ name|IllegalStateException
 argument_list|()
 throw|;
 block|}
-comment|/**      * Adds all of the elements in the specified collection to this queue.      * Attempts to addAll of a queue to itself result in      * IllegalArgumentException. Further, the behavior of this operation is      * undefined if the specified collection is modified while the operation is      * in progress.      *      *<p>This implementation iterates over the specified collection, and adds      * each element returned by the iterator to this collection, in turn. A      * runtime exception encountered while trying to add an element (including,      * in particular, a<code>null</code> element) may result in only some of      * the elements having been successfully added when the associated exception      * is thrown.      *      * @param c collection to add to the queue      *      * @return true if this queue changed as a result of the call      *      * @throws IllegalArgumentException if<code>this == c</code>      * @throws NullPointerException if<code>c</code> or any of its elements are      *<code>null</code>.      * @throws IllegalStateException if the call to {@link #add(Object)} does      */
+comment|/**    * Adds all of the elements in the specified collection to this queue.    * Attempts to addAll of a queue to itself result in    * IllegalArgumentException. Further, the behavior of this operation is    * undefined if the specified collection is modified while the operation is    * in progress.    *    *<p>This implementation iterates over the specified collection, and adds    * each element returned by the iterator to this collection, in turn. A    * runtime exception encountered while trying to add an element (including,    * in particular, a<code>null</code> element) may result in only some of    * the elements having been successfully added when the associated exception    * is thrown.    *    * @param c collection to add to the queue    * @return true if this queue changed as a result of the call    * @throws IllegalArgumentException if<code>this == c</code>    * @throws NullPointerException     if<code>c</code> or any of its elements are    *<code>null</code>.    * @throws IllegalStateException    if the call to {@link #add(Object)} does    */
 specifier|public
 name|boolean
 name|addAll
@@ -884,7 +884,7 @@ return|return
 name|result
 return|;
 block|}
-comment|/**      * Removes all elements from the queue. The queue will be empty and contain      * no references to its previous contents after this call returns. This      * method calls {@link #poll()} repeatedly until it returns<code>      * null</code>.      */
+comment|/**    * Removes all elements from the queue. The queue will be empty and contain    * no references to its previous contents after this call returns. This    * method calls {@link #poll()} repeatedly until it returns<code>    * null</code>.    */
 specifier|public
 name|void
 name|clear
@@ -901,7 +901,7 @@ block|{
 empty_stmt|;
 block|}
 block|}
-comment|/**      * Retrieves, but does not remove, the head of the queue. Returns the result      * of {@link #peek()} unless the queue is empty.      *      * @return the head of this queue      *      * @throws NoSuchElementException if the queue is empty      */
+comment|/**    * Retrieves, but does not remove, the head of the queue. Returns the result    * of {@link #peek()} unless the queue is empty.    *    * @return the head of this queue    * @throws NoSuchElementException if the queue is empty    */
 specifier|public
 name|Object
 name|element
@@ -924,7 +924,7 @@ name|peek
 argument_list|()
 return|;
 block|}
-comment|/**      * Retrieves and removes the head of the queue. Returns the result of {@link      * #poll()} unless the queue is empty.      *      * @return the head of the queue      *      * @throws NoSuchElementException if the queue is empty      */
+comment|/**    * Retrieves and removes the head of the queue. Returns the result of {@link    * #poll()} unless the queue is empty.    *    * @return the head of the queue    * @throws NoSuchElementException if the queue is empty    */
 specifier|public
 name|E
 name|remove

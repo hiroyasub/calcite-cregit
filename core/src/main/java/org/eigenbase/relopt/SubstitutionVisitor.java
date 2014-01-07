@@ -128,7 +128,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Substitutes part of a tree of relational expressions with another tree.  *  *<p>The call {@code new SubstitutionVisitor(find, query).go(replacement))  * will return {@code query} with every occurrence of {@code find} replaced  * by {@code replacement}.</p>  *  *<p>The following example shows how {@code SubstitutionVisitor} can be used  * for materialized view recognition.</p>  *  *<ul>  *<li>query = SELECT a, c FROM t WHERE x = 5 AND b = 4</li>  *<li>find = SELECT a, b, c FROM t WHERE x = 5</li>  *<li>replacement = SELECT * FROM mv</li>  *<li>result = SELECT a, c FROM mv WHERE b = 4</li>  *</ul>  *  *<p>Note that {@code result} uses the materialized view table {@code mv} and a  * simplified condition {@code b = 4}.</p>  *  *<p>Uses a bottom-up matching algorithm. Nodes do not need to be identical.  * At each level, returns the residue.</p>  *  *<p>The inputs must only include the core relational operators:  * {@link org.eigenbase.rel.TableAccessRel},  * {@link org.eigenbase.rel.FilterRel},  * {@link org.eigenbase.rel.ProjectRel},  * {@link org.eigenbase.rel.JoinRel},  * {@link org.eigenbase.rel.UnionRel},  * {@link org.eigenbase.rel.AggregateRel}.</p>  */
+comment|/**  * Substitutes part of a tree of relational expressions with another tree.  *  *<p>The call {@code new SubstitutionVisitor(find, query).go(replacement))}  * will return {@code query} with every occurrence of {@code find} replaced  * by {@code replacement}.</p>  *  *<p>The following example shows how {@code SubstitutionVisitor} can be used  * for materialized view recognition.</p>  *  *<ul>  *<li>query = SELECT a, c FROM t WHERE x = 5 AND b = 4</li>  *<li>find = SELECT a, b, c FROM t WHERE x = 5</li>  *<li>replacement = SELECT * FROM mv</li>  *<li>result = SELECT a, c FROM mv WHERE b = 4</li>  *</ul>  *  *<p>Note that {@code result} uses the materialized view table {@code mv} and a  * simplified condition {@code b = 4}.</p>  *  *<p>Uses a bottom-up matching algorithm. Nodes do not need to be identical.  * At each level, returns the residue.</p>  *  *<p>The inputs must only include the core relational operators:  * {@link org.eigenbase.rel.TableAccessRel},  * {@link org.eigenbase.rel.FilterRel},  * {@link org.eigenbase.rel.ProjectRel},  * {@link org.eigenbase.rel.JoinRel},  * {@link org.eigenbase.rel.UnionRel},  * {@link org.eigenbase.rel.AggregateRel}.</p>  */
 end_comment
 
 begin_class
@@ -229,7 +229,7 @@ specifier|final
 name|RelNode
 name|find
 decl_stmt|;
-comment|/** Map from each node in the query and the materialization query      * to its parent. */
+comment|/**    * Map from each node in the query and the materialization query    * to its parent.    */
 specifier|final
 name|Map
 argument_list|<
@@ -258,7 +258,7 @@ argument_list|>
 argument_list|>
 argument_list|()
 decl_stmt|;
-comment|/** Nodes in {@link #find} that have no children. */
+comment|/**    * Nodes in {@link #find} that have no children.    */
 specifier|final
 name|List
 argument_list|<
@@ -266,7 +266,7 @@ name|RelNode
 argument_list|>
 name|findLeaves
 decl_stmt|;
-comment|/** Nodes in {@link #query} that have no children. */
+comment|/**    * Nodes in {@link #query} that have no children.    */
 specifier|final
 name|List
 argument_list|<
@@ -733,7 +733,7 @@ return|return
 name|query
 return|;
 block|}
-comment|/** Maps a condition onto a target.      *      *<p>If condition is stronger than target, returns the residue.      * If it is equal to target, returns the expression that evaluates to      * the constant {@code true}. If it is weaker than target, returns      * {@code null}.</p>      *      *<p>The terms satisfy the relation      *<pre>      *     {@code residue = condition AND NOT target}      *</pre>      *      *<p>Example #1: condition stronger than target</p>      *<ul>      *<li>condition: x = 1 AND y = 2</li>      *<li>target: x = 1</li>      *<li>residue: y = 2</li>      *</ul>      *      *<p>Example #2: target weaker than target (valid, but not currently      * implemented)</p>      *<ul>      *<li>condition: x = 1</li>      *<li>target: x = 1 OR z = 3</li>      *<li>residue: z = 3</li>      *</ul>      *      *<p>Example #3: condition and target are equivalent</p>      *<ul>      *<li>condition: x = 1 and y = 2</li>      *<li>target: y = 2 and x = 1</li>      *<li>residue: true</li>      *</ul>      *      *<p>Example #4: condition weaker than target</p>      *<ul>      *<li>condition: x = 1</li>      *<li>target: x = 1 AND y = 2</li>      *<li>residue: null (i.e. no match)</li>      *</ul>      *      *<p>There are many other possible examples. It amounts to solving      * whether {@code condition AND NOT target} can ever evaluate to      * true, and therefore is a form of the NP-complete      *<a href"http://en.wikipedia.org/wiki/Satisfiability">Satisfiability</a>      * problem.</p>      */
+comment|/**    * Maps a condition onto a target.    *    *<p>If condition is stronger than target, returns the residue.    * If it is equal to target, returns the expression that evaluates to    * the constant {@code true}. If it is weaker than target, returns    * {@code null}.</p>    *    *<p>The terms satisfy the relation    *<pre>    *     {@code residue = condition AND NOT target}    *</pre>    *    *<p>Example #1: condition stronger than target</p>    *<ul>    *<li>condition: x = 1 AND y = 2</li>    *<li>target: x = 1</li>    *<li>residue: y = 2</li>    *</ul>    *    *<p>Example #2: target weaker than target (valid, but not currently    * implemented)</p>    *<ul>    *<li>condition: x = 1</li>    *<li>target: x = 1 OR z = 3</li>    *<li>residue: z = 3</li>    *</ul>    *    *<p>Example #3: condition and target are equivalent</p>    *<ul>    *<li>condition: x = 1 and y = 2</li>    *<li>target: y = 2 and x = 1</li>    *<li>residue: true</li>    *</ul>    *    *<p>Example #4: condition weaker than target</p>    *<ul>    *<li>condition: x = 1</li>    *<li>target: x = 1 AND y = 2</li>    *<li>residue: null (i.e. no match)</li>    *</ul>    *    *<p>There are many other possible examples. It amounts to solving    * whether {@code condition AND NOT target} can ever evaluate to    * true, and therefore is a form of the NP-complete    *<a href"http://en.wikipedia.org/wiki/Satisfiability">Satisfiability</a>    * problem.</p>    */
 specifier|static
 name|RexNode
 name|splitFilter
@@ -793,7 +793,7 @@ return|return
 literal|null
 return|;
 block|}
-comment|/** Returns whether a boolean expression ever returns true.      *      *<p>This method may give false positives. For instance, it will say      * that {@code x = 5 AND x> 10} is satisfiable, because at present it      * cannot prove that it is not.</p> */
+comment|/**    * Returns whether a boolean expression ever returns true.    *    *<p>This method may give false positives. For instance, it will say    * that {@code x = 5 AND x> 10} is satisfiable, because at present it    * cannot prove that it is not.</p>    */
 specifier|public
 specifier|static
 name|boolean
@@ -967,7 +967,7 @@ return|return
 literal|true
 return|;
 block|}
-comment|/** Returns whether {@code list} contains every item in {@code list2}. */
+comment|/**    * Returns whether {@code list} contains every item in {@code list2}.    */
 specifier|static
 name|boolean
 name|containsAll
@@ -1013,7 +1013,7 @@ return|return
 literal|true
 return|;
 block|}
-comment|/** Simplifies a boolean expression.      *      *<p>In particular:</p>      *<ul>      *<li>{@code simplify(x = 1 AND y = 2 AND NOT x = 1)}      *      returns {@code y = 2}</li>      *<li>{@code simplify(x = 1 AND FALSE)}      *      returns {@code FALSE}</li>      *</ul>      */
+comment|/**    * Simplifies a boolean expression.    *    *<p>In particular:</p>    *<ul>    *<li>{@code simplify(x = 1 AND y = 2 AND NOT x = 1)}    * returns {@code y = 2}</li>    *<li>{@code simplify(x = 1 AND FALSE)}    * returns {@code FALSE}</li>    *</ul>    */
 specifier|public
 specifier|static
 name|RexNode
@@ -1275,7 +1275,7 @@ literal|false
 argument_list|)
 return|;
 block|}
-comment|/** Creates the expression {@code e1 AND NOT e2}. */
+comment|/**    * Creates the expression {@code e1 AND NOT e2}.    */
 specifier|static
 name|RexNode
 name|andNot
@@ -2063,7 +2063,7 @@ argument_list|>
 name|getTargetClass
 parameter_list|()
 function_decl|;
-comment|/**<p>Applies this rule to a particular node in a query. The goal is          * to convert {@code query} into {@code target}. Before the rule is          * invoked, Optiq has made sure that query's children are equivalent          * to target's children.          *          *<p>There are 3 possible outcomes:</p>          *          *<ul>          *          *<li>{@code query} already exactly matches {@code target}; returns          * {@code target}</li>          *          *<li>{@code query} is sufficiently close to a match for          * {@code target}; returns {@code target}</li>          *          *<li>{@code query} cannot be made to match {@code target}; returns          * null</li>          *          *</ul>          *          *<p>REVIEW: Is possible that we match query PLUS one or more of its          * ancestors?</p>          *          * @param in Input parameters          */
+comment|/**      *<p>Applies this rule to a particular node in a query. The goal is      * to convert {@code query} into {@code target}. Before the rule is      * invoked, Optiq has made sure that query's children are equivalent      * to target's children.      *      *<p>There are 3 possible outcomes:</p>      *      *<ul>      *      *<li>{@code query} already exactly matches {@code target}; returns      * {@code target}</li>      *      *<li>{@code query} is sufficiently close to a match for      * {@code target}; returns {@code target}</li>      *      *<li>{@code query} cannot be made to match {@code target}; returns      * null</li>      *      *</ul>      *      *<p>REVIEW: Is possible that we match query PLUS one or more of its      * ancestors?</p>      *      * @param in Input parameters      */
 name|UnifyResult
 name|apply
 parameter_list|(
@@ -2077,7 +2077,7 @@ name|in
 parameter_list|)
 function_decl|;
 block|}
-comment|/** Arguments to an application of a {@link UnifyRule}. */
+comment|/**    * Arguments to an application of a {@link UnifyRule}.    */
 specifier|private
 class|class
 name|UnifyIn
@@ -2212,7 +2212,7 @@ name|result
 argument_list|)
 return|;
 block|}
-comment|/** Creates a {@link UnifyIn} based on the parent of {@code query}. */
+comment|/**      * Creates a {@link UnifyIn} based on the parent of {@code query}.      */
 specifier|public
 parameter_list|<
 name|Q2
@@ -2288,7 +2288,7 @@ literal|true
 argument_list|)
 return|;
 block|}
-comment|/** Result of an application of a {@link UnifyRule} indicating that the      * rule successfully matched {@code query} against {@code target} and      * generated a {@code result} that is equivalent to {@code query} and      * contains {@code target}. */
+comment|/**    * Result of an application of a {@link UnifyRule} indicating that the    * rule successfully matched {@code query} against {@code target} and    * generated a {@code result} that is equivalent to {@code query} and    * contains {@code target}.    */
 specifier|private
 specifier|static
 class|class

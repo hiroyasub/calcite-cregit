@@ -113,13 +113,13 @@ name|i
 expr_stmt|;
 block|}
 block|}
-comment|/** Creates an empty ChunkList. */
+comment|/**    * Creates an empty ChunkList.    */
 specifier|public
 name|ChunkList
 parameter_list|()
 block|{
 block|}
-comment|/** Creates a ChunkList whose contents are a given Collection. */
+comment|/**    * Creates a ChunkList whose contents are a given Collection.    */
 specifier|public
 name|ChunkList
 parameter_list|(
@@ -136,7 +136,7 @@ name|collection
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** For debugging and testing. */
+comment|/**    * For debugging and testing.    */
 name|boolean
 name|isValid
 parameter_list|(

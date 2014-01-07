@@ -419,7 +419,7 @@ name|class
 argument_list|)
 return|;
 block|}
-comment|/**      * Returns a list of typical types.      */
+comment|/**    * Returns a list of typical types.    */
 specifier|public
 specifier|static
 name|List

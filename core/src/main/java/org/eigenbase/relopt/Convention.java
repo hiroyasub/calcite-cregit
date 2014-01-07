@@ -36,7 +36,7 @@ name|Convention
 extends|extends
 name|RelTrait
 block|{
-comment|/**      * Convention that for a relational expression that does not support any      * convention. It is not implementable, and has to be transformed to      * something else in order to be implemented.      *      *<p>Relational expressions generally start off in this form.</p>      *      *<p>Such expressions always have infinite cost.</p>      */
+comment|/**    * Convention that for a relational expression that does not support any    * convention. It is not implementable, and has to be transformed to    * something else in order to be implemented.    *    *<p>Relational expressions generally start off in this form.</p>    *    *<p>Such expressions always have infinite cost.</p>    */
 name|Convention
 name|NONE
 init|=
@@ -58,7 +58,7 @@ name|String
 name|getName
 parameter_list|()
 function_decl|;
-comment|/** Default implementation. */
+comment|/**    * Default implementation.    */
 class|class
 name|Impl
 implements|implements

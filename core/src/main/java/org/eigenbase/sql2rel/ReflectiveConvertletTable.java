@@ -182,7 +182,7 @@ expr_stmt|;
 block|}
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Registers method if it: a. is public, and b. is named "convertXxx", and      * c. has a return type of "RexNode" or a subtype d. has a 2 parameters with      * types ConvertletContext and SqlNode (or a subtype) respectively.      */
+comment|/**    * Registers method if it: a. is public, and b. is named "convertXxx", and    * c. has a return type of "RexNode" or a subtype d. has a 2 parameters with    * types ConvertletContext and SqlNode (or a subtype) respectively.    */
 specifier|private
 name|void
 name|registerNodeTypeMethod
@@ -385,7 +385,7 @@ block|}
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Registers method if it: a. is public, and b. is named "convertXxx", and      * c. has a return type of "RexNode" or a subtype d. has a 3 parameters with      * types: ConvertletContext; SqlOperator (or a subtype), SqlCall (or a      * subtype).      */
+comment|/**    * Registers method if it: a. is public, and b. is named "convertXxx", and    * c. has a return type of "RexNode" or a subtype d. has a 3 parameters with    * types: ConvertletContext; SqlOperator (or a subtype), SqlCall (or a    * subtype).    */
 specifier|private
 name|void
 name|registerOpTypeMethod
@@ -766,7 +766,7 @@ return|return
 literal|null
 return|;
 block|}
-comment|/**      * Registers a convertlet for a given operator instance      *      * @param op Operator instance, say {@link      * org.eigenbase.sql.fun.SqlStdOperatorTable#minusOperator}      * @param convertlet Convertlet      */
+comment|/**    * Registers a convertlet for a given operator instance    *    * @param op         Operator instance, say {@link    *                   org.eigenbase.sql.fun.SqlStdOperatorTable#minusOperator}    * @param convertlet Convertlet    */
 specifier|protected
 name|void
 name|registerOp
@@ -788,7 +788,7 @@ name|convertlet
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Registers that one operator is an alias for another.      *      * @param alias Operator which is alias      * @param target Operator to translate calls to      */
+comment|/**    * Registers that one operator is an alias for another.    *    * @param alias  Operator which is alias    * @param target Operator to translate calls to    */
 specifier|protected
 name|void
 name|addAlias

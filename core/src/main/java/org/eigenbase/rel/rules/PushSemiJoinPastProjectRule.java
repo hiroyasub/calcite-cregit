@@ -107,7 +107,7 @@ name|PushSemiJoinPastProjectRule
 argument_list|()
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a PushSemiJoinPastProjectRule.      */
+comment|/**    * Creates a PushSemiJoinPastProjectRule.    */
 specifier|private
 name|PushSemiJoinPastProjectRule
 parameter_list|()
@@ -310,7 +310,7 @@ name|newProject
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Pulls the project above the semijoin and returns the resulting semijoin      * condition. As a result, the semijoin condition should be modified such      * that references to the LHS of a semijoin should now reference the      * children of the project that's on the LHS.      *      * @param project ProjectRel on the LHS of the semijoin      * @param semiJoin the semijoin      *      * @return the modified semijoin condition      */
+comment|/**    * Pulls the project above the semijoin and returns the resulting semijoin    * condition. As a result, the semijoin condition should be modified such    * that references to the LHS of a semijoin should now reference the    * children of the project that's on the LHS.    *    * @param project  ProjectRel on the LHS of the semijoin    * @param semiJoin the semijoin    * @return the modified semijoin condition    */
 specifier|private
 name|RexNode
 name|adjustCondition

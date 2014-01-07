@@ -59,7 +59,7 @@ specifier|static
 interface|interface
 name|TestContext
 block|{
-comment|/**          * Store a message as output for mtsql script.          *          * @param message Message to be output          */
+comment|/**      * Store a message as output for mtsql script.      *      * @param message Message to be output      */
 specifier|public
 name|void
 name|storeMessage
@@ -68,20 +68,20 @@ name|String
 name|message
 parameter_list|)
 function_decl|;
-comment|/**          * Get connection for thread.          *          * @return connection for thread          */
+comment|/**      * Get connection for thread.      *      * @return connection for thread      */
 specifier|public
 name|Connection
 name|getConnection
 parameter_list|()
 function_decl|;
-comment|/**          * Get current statement for thread, or null if none.          *          * @return current statement for thread          */
+comment|/**      * Get current statement for thread, or null if none.      *      * @return current statement for thread      */
 specifier|public
 name|Statement
 name|getCurrentStatement
 parameter_list|()
 function_decl|;
 block|}
-comment|/**      * Implement this method to extend functionality of mtsql.      *      * @param testContext Exposed context for plugin to run in.      * @throws IOException      */
+comment|/**    * Implement this method to extend functionality of mtsql.    *    * @param testContext Exposed context for plugin to run in.    * @throws IOException    */
 name|void
 name|execute
 parameter_list|(

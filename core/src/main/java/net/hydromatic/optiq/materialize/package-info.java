@@ -4,7 +4,7 @@ comment|/* // Licensed to Julian Hyde under one or more contributor license // a
 end_comment
 
 begin_comment
-comment|/**  * Management of materialized query results.  *  *<p>An actor ({@link MaterializeActor} maintains the state of all  * materializations in the system and is wrapped in a service  * ({@link MaterializationService}) for access from other parts of the system.  *  *<p>Optimizer rules allow Optiq to rewrite queries using materializations, if  * they are valid (that is, contain the same result as executing their defining  * query) and lower cost.  *  *<p>In future, the actor may manage the process of updating materializations,  * instantiating materializations from the intermediate results of queries, and  * recognize what materializations would be useful based on actual query load.  */
+comment|/**  * Management of materialized query results.  *  *<p>An actor ({@link net.hydromatic.optiq.materialize.MaterializationActor})  * maintains the state of all  * materializations in the system and is wrapped in a service  * ({@link net.hydromatic.optiq.materialize.MaterializationService})  * for access from other parts of the system.</p>  *  *<p>Optimizer rules allow Optiq to rewrite queries using materializations, if  * they are valid (that is, contain the same result as executing their defining  * query) and lower cost.  *  *<p>In future, the actor may manage the process of updating materializations,  * instantiating materializations from the intermediate results of queries, and  * recognize what materializations would be useful based on actual query load.  */
 end_comment
 
 begin_package

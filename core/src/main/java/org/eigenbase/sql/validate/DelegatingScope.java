@@ -88,7 +88,7 @@ implements|implements
 name|SqlValidatorScope
 block|{
 comment|//~ Instance fields --------------------------------------------------------
-comment|/**      * Parent scope. This is where to look next to resolve an identifier; it is      * not always the parent object in the parse tree.      *      *<p>This is never null: at the top of the tree, it is an {@link      * EmptyScope}.      */
+comment|/**    * Parent scope. This is where to look next to resolve an identifier; it is    * not always the parent object in the parse tree.    *    *<p>This is never null: at the top of the tree, it is an {@link    * EmptyScope}.    */
 specifier|protected
 specifier|final
 name|SqlValidatorScope
@@ -100,7 +100,7 @@ name|SqlValidatorImpl
 name|validator
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a<code>DelegatingScope</code>.      *      * @param parent Parent scope      */
+comment|/**    * Creates a<code>DelegatingScope</code>.    *    * @param parent Parent scope    */
 name|DelegatingScope
 parameter_list|(
 name|SqlValidatorScope
@@ -373,7 +373,7 @@ return|return
 name|validator
 return|;
 block|}
-comment|/**      * Converts an identifier into a fully-qualified identifier. For example,      * the "empno" in "select empno from emp natural join dept" becomes      * "emp.empno".      *      *<p>If the identifier cannot be resolved, throws. Never returns null.      */
+comment|/**    * Converts an identifier into a fully-qualified identifier. For example,    * the "empno" in "select empno from emp natural join dept" becomes    * "emp.empno".    *    *<p>If the identifier cannot be resolved, throws. Never returns null.    */
 specifier|public
 name|SqlIdentifier
 name|fullyQualify
@@ -688,7 +688,7 @@ name|getOrderList
 argument_list|()
 return|;
 block|}
-comment|/**      * Returns the parent scope of this<code>DelegatingScope</code>.      */
+comment|/**    * Returns the parent scope of this<code>DelegatingScope</code>.    */
 specifier|public
 name|SqlValidatorScope
 name|getParent

@@ -47,7 +47,7 @@ interface|interface
 name|SqlNodeToRexConverter
 block|{
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Converts a {@link SqlCall} to a {@link RexNode} expression.      */
+comment|/**    * Converts a {@link SqlCall} to a {@link RexNode} expression.    */
 name|RexNode
 name|convertCall
 parameter_list|(
@@ -58,7 +58,7 @@ name|SqlCall
 name|call
 parameter_list|)
 function_decl|;
-comment|/**      * Converts a {@link SqlLiteral SQL literal} to a {@link RexLiteral REX      * literal}.      *      *<p>The result is {@link RexNode}, not {@link RexLiteral} because if the      * literal is NULL (or the boolean Unknown value), we make a<code>CAST(NULL      * AS type)</code> expression.      */
+comment|/**    * Converts a {@link SqlLiteral SQL literal} to a {@link RexLiteral REX    * literal}.    *    *<p>The result is {@link RexNode}, not {@link RexLiteral} because if the    * literal is NULL (or the boolean Unknown value), we make a<code>CAST(NULL    * AS type)</code> expression.    */
 name|RexNode
 name|convertLiteral
 parameter_list|(
@@ -69,7 +69,7 @@ name|SqlLiteral
 name|literal
 parameter_list|)
 function_decl|;
-comment|/**      * Converts a {@link SqlIntervalQualifier SQL Interval Qualifier} to a      * {@link RexLiteral REX literal}.      */
+comment|/**    * Converts a {@link SqlIntervalQualifier SQL Interval Qualifier} to a    * {@link RexLiteral REX literal}.    */
 name|RexLiteral
 name|convertInterval
 parameter_list|(

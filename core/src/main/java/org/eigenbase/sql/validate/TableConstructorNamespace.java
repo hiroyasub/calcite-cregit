@@ -62,7 +62,7 @@ name|SqlValidatorScope
 name|scope
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a TableConstructorNamespace.      *      * @param validator Validator      * @param values VALUES parse tree node      * @param scope Scope      * @param enclosingNode Enclosing node      */
+comment|/**    * Creates a TableConstructorNamespace.    *    * @param validator     Validator    * @param values        VALUES parse tree node    * @param scope         Scope    * @param enclosingNode Enclosing node    */
 name|TableConstructorNamespace
 parameter_list|(
 name|SqlValidatorImpl
@@ -206,7 +206,7 @@ return|return
 name|values
 return|;
 block|}
-comment|/**      * Returns the scope.      *      * @return scope      */
+comment|/**    * Returns the scope.    *    * @return scope    */
 specifier|public
 name|SqlValidatorScope
 name|getScope

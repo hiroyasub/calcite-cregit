@@ -123,7 +123,7 @@ name|Implicit
 argument_list|)
 decl_stmt|;
 comment|//~ Enums ------------------------------------------------------------------
-comment|/**      *<blockquote>A&lt;character value expression&gt; consisting of a column      * reference has the coercibility characteristic Implicit, with collating      * sequence as defined when the column was created. A&lt;character value      * expression&gt; consisting of a value other than a column (e.g., a host      * variable or a literal) has the coercibility characteristic Coercible,      * with the default collation for its character repertoire. A&lt;character      * value expression&gt; simply containing a&lt;collate clause&gt; has the      * coercibility characteristic Explicit, with the collating sequence      * specified in the&lt;collate clause&gt;.</blockquote>      *      * @sql.99 Part 2 Section 4.2.3      */
+comment|/**    *<blockquote>A&lt;character value expression&gt; consisting of a column    * reference has the coercibility characteristic Implicit, with collating    * sequence as defined when the column was created. A&lt;character value    * expression&gt; consisting of a value other than a column (e.g., a host    * variable or a literal) has the coercibility characteristic Coercible,    * with the default collation for its character repertoire. A&lt;character    * value expression&gt; simply containing a&lt;collate clause&gt; has the    * coercibility characteristic Explicit, with the collating sequence    * specified in the&lt;collate clause&gt;.</blockquote>    *    * @sql.99 Part 2 Section 4.2.3    */
 specifier|public
 enum|enum
 name|Coercibility
@@ -166,7 +166,7 @@ name|Coercibility
 name|coercibility
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a Collation by its name and its coercibility      *      * @param collation Collation specification      * @param coercibility Coercibility      */
+comment|/**    * Creates a Collation by its name and its coercibility    *    * @param collation    Collation specification    * @param coercibility Coercibility    */
 specifier|public
 name|SqlCollation
 parameter_list|(
@@ -278,7 +278,7 @@ operator|=
 name|c
 expr_stmt|;
 block|}
-comment|/**      * Creates a SqlCollation with the default collation name and the given      * coercibility.      *      * @param coercibility Coercibility      */
+comment|/**    * Creates a SqlCollation with the default collation name and the given    * coercibility.    *    * @param coercibility Coercibility    */
 specifier|public
 name|SqlCollation
 parameter_list|(
@@ -337,7 +337,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**      * Returns the collating sequence (the collation name) and the coercibility      * for the resulting value of a dyadic operator.      *      * @param col1 first operand for the dyadic operation      * @param col2 second operand for the dyadic operation      *      * @return the resulting collation sequence. The "no collating sequence"      * result is returned as null.      *      * @sql.99 Part 2 Section 4.2.3 Table 2      */
+comment|/**    * Returns the collating sequence (the collation name) and the coercibility    * for the resulting value of a dyadic operator.    *    * @param col1 first operand for the dyadic operation    * @param col2 second operand for the dyadic operation    * @return the resulting collation sequence. The "no collating sequence"    * result is returned as null.    * @sql.99 Part 2 Section 4.2.3 Table 2    */
 specifier|public
 specifier|static
 name|SqlCollation
@@ -359,7 +359,7 @@ name|col2
 argument_list|)
 return|;
 block|}
-comment|/**      * Returns the collating sequence (the collation name) and the coercibility      * for the resulting value of a dyadic operator.      *      * @param col1 first operand for the dyadic operation      * @param col2 second operand for the dyadic operation      *      * @return the resulting collation sequence      *      * @throws EigenbaseException {@link EigenbaseResource#InvalidCompare} or      * {@link EigenbaseResource#DifferentCollations} if no collating sequence      * can be deduced      *      * @sql.99 Part 2 Section 4.2.3 Table 2      */
+comment|/**    * Returns the collating sequence (the collation name) and the coercibility    * for the resulting value of a dyadic operator.    *    * @param col1 first operand for the dyadic operation    * @param col2 second operand for the dyadic operation    * @return the resulting collation sequence    * @throws EigenbaseException {@link EigenbaseResource#InvalidCompare} or    *                            {@link EigenbaseResource#DifferentCollations} if no collating sequence    *                            can be deduced    * @sql.99 Part 2 Section 4.2.3 Table 2    */
 specifier|public
 specifier|static
 name|SqlCollation
@@ -425,7 +425,7 @@ return|return
 name|ret
 return|;
 block|}
-comment|/**      * Returns the collating sequence (the collation name) to use for the      * resulting value of a comparison.      *      * @param col1 first operand for the dyadic operation      * @param col2 second operand for the dyadic operation      *      * @return the resulting collation sequence. If no collating sequence could      * be deduced a {@link EigenbaseResource#InvalidCompare} is thrown      *      * @sql.99 Part 2 Section 4.2.3 Table 3      */
+comment|/**    * Returns the collating sequence (the collation name) to use for the    * resulting value of a comparison.    *    * @param col1 first operand for the dyadic operation    * @param col2 second operand for the dyadic operation    * @return the resulting collation sequence. If no collating sequence could    * be deduced a {@link EigenbaseResource#InvalidCompare} is thrown    * @sql.99 Part 2 Section 4.2.3 Table 3    */
 specifier|public
 specifier|static
 name|String
@@ -449,7 +449,7 @@ operator|.
 name|collationName
 return|;
 block|}
-comment|/**      * Returns the result for {@link #getCoercibilityDyadicComparison} and      * {@link #getCoercibilityDyadicOperator}.      */
+comment|/**    * Returns the result for {@link #getCoercibilityDyadicComparison} and    * {@link #getCoercibilityDyadicOperator}.    */
 specifier|protected
 specifier|static
 name|SqlCollation

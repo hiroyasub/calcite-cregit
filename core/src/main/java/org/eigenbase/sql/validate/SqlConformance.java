@@ -38,7 +38,7 @@ name|Sql2003
 block|,
 name|Pragmatic2003
 block|;
-comment|/**      * Whether 'order by 2' is interpreted to mean 'sort by the 2nd column in      * the select list'.      */
+comment|/**    * Whether 'order by 2' is interpreted to mean 'sort by the 2nd column in    * the select list'.    */
 specifier|public
 name|boolean
 name|isSortByOrdinal
@@ -73,7 +73,7 @@ literal|false
 return|;
 block|}
 block|}
-comment|/**      * Whether 'order by x' is interpreted to mean 'sort by the select list item      * whose alias is x' even if there is a column called x.      */
+comment|/**    * Whether 'order by x' is interpreted to mean 'sort by the select list item    * whose alias is x' even if there is a column called x.    */
 specifier|public
 name|boolean
 name|isSortByAlias
@@ -102,7 +102,7 @@ literal|false
 return|;
 block|}
 block|}
-comment|/**      * Whether "empno" is invalid in "select empno as x from emp order by empno"      * because the alias "x" obscures it.      */
+comment|/**    * Whether "empno" is invalid in "select empno as x from emp order by empno"    * because the alias "x" obscures it.    */
 specifier|public
 name|boolean
 name|isSortByAliasObscures

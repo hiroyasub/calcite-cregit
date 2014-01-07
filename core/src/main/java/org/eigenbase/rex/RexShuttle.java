@@ -299,7 +299,7 @@ name|call
 return|;
 block|}
 block|}
-comment|/**      * Visits each of an array of expressions and returns an array of the      * results.      *      * @param exprs Array of expressions      * @param update If not null, sets this to true if any of the expressions      * was modified      *      * @return Array of visited expressions      */
+comment|/**    * Visits each of an array of expressions and returns an array of the    * results.    *    * @param exprs  Array of expressions    * @param update If not null, sets this to true if any of the expressions    *               was modified    * @return Array of visited expressions    */
 specifier|protected
 name|RexNode
 index|[]
@@ -396,7 +396,7 @@ return|return
 name|clonedOperands
 return|;
 block|}
-comment|/**      * Visits each of a list of expressions and returns a list of the      * results.      *      * @param exprs List of expressions      * @param update If not null, sets this to true if any of the expressions      * was modified      *      * @return Array of visited expressions      */
+comment|/**    * Visits each of a list of expressions and returns a list of the    * results.    *    * @param exprs  List of expressions    * @param update If not null, sets this to true if any of the expressions    *               was modified    * @return Array of visited expressions    */
 specifier|protected
 name|List
 argument_list|<
@@ -486,7 +486,7 @@ name|build
 argument_list|()
 return|;
 block|}
-comment|/**      * Visits a list and writes the results to another list.      */
+comment|/**    * Visits a list and writes the results to another list.    */
 specifier|public
 name|void
 name|visitList
@@ -528,7 +528,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Visits each of a list of field collations and returns a list of the      * results.      *      * @param collations List of field collations      * @param update If not null, sets this to true if any of the expressions      * was modified      *      * @return Array of visited field collations      */
+comment|/**    * Visits each of a list of field collations and returns a list of the    * results.    *    * @param collations List of field collations    * @param update     If not null, sets this to true if any of the expressions    *                   was modified    * @return Array of visited field collations    */
 specifier|protected
 name|List
 argument_list|<
@@ -757,7 +757,7 @@ return|return
 name|rangeRef
 return|;
 block|}
-comment|/**      * Applies this shuttle to each expression in a list.      *      * @return whether any of the expressions changed      */
+comment|/**    * Applies this shuttle to each expression in a list.    *    * @return whether any of the expressions changed    */
 specifier|public
 specifier|final
 parameter_list|<
@@ -848,7 +848,7 @@ operator|>
 literal|0
 return|;
 block|}
-comment|/**      * Applies this shuttle to each expression in a list and returns the      * resulting list. Does not modify the initial list.      */
+comment|/**    * Applies this shuttle to each expression in a list and returns the    * resulting list. Does not modify the initial list.    */
 specifier|public
 specifier|final
 parameter_list|<
@@ -904,7 +904,7 @@ name|exprList
 return|;
 block|}
 block|}
-comment|/**      * Applies this shuttle to an expression, or returns null if the expression      * is null.      */
+comment|/**    * Applies this shuttle to an expression, or returns null if the expression    * is null.    */
 specifier|public
 specifier|final
 name|RexNode

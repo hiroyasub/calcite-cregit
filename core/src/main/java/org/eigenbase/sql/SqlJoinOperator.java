@@ -83,7 +83,7 @@ literal|"USING"
 argument_list|)
 decl_stmt|;
 comment|//~ Enums ------------------------------------------------------------------
-comment|/**      * Enumerates the types of condition in a join expression.      */
+comment|/**    * Enumerates the types of condition in a join expression.    */
 specifier|public
 enum|enum
 name|ConditionType
@@ -92,16 +92,16 @@ name|SqlLiteral
 operator|.
 name|SqlSymbol
 block|{
-comment|/**          * Join clause has no condition, for example "FROM EMP, DEPT"          */
+comment|/**      * Join clause has no condition, for example "FROM EMP, DEPT"      */
 name|None
 block|,
-comment|/**          * Join clause has an ON condition, for example "FROM EMP JOIN DEPT ON          * EMP.DEPTNO = DEPT.DEPTNO"          */
+comment|/**      * Join clause has an ON condition, for example "FROM EMP JOIN DEPT ON      * EMP.DEPTNO = DEPT.DEPTNO"      */
 name|On
 block|,
-comment|/**          * Join clause has a USING condition, for example "FROM EMP JOIN DEPT          * USING (DEPTNO)"          */
+comment|/**      * Join clause has a USING condition, for example "FROM EMP JOIN DEPT      * USING (DEPTNO)"      */
 name|Using
 block|;
-comment|/** Creates a parse-tree node representing an occurrence of this join          * type at a particular position in the parsed text. */
+comment|/**      * Creates a parse-tree node representing an occurrence of this join      * type at a particular position in the parsed text.      */
 specifier|public
 name|SqlLiteral
 name|symbol
@@ -122,7 +122,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**      * Enumerates the types of join.      */
+comment|/**    * Enumerates the types of join.    */
 specifier|public
 enum|enum
 name|JoinType
@@ -131,25 +131,25 @@ name|SqlLiteral
 operator|.
 name|SqlSymbol
 block|{
-comment|/**          * Inner join.          */
+comment|/**      * Inner join.      */
 name|Inner
 block|,
-comment|/**          * Full outer join.          */
+comment|/**      * Full outer join.      */
 name|Full
 block|,
-comment|/**          * Cross join (also known as Cartesian product).          */
+comment|/**      * Cross join (also known as Cartesian product).      */
 name|Cross
 block|,
-comment|/**          * Left outer join.          */
+comment|/**      * Left outer join.      */
 name|Left
 block|,
-comment|/**          * Right outer join.          */
+comment|/**      * Right outer join.      */
 name|Right
 block|,
-comment|/**          * Comma join: the good old-fashioned SQL<code>FROM</code> clause,          * where table expressions are specified with commas between them, and          * join conditions are specified in the<code>WHERE</code> clause.          */
+comment|/**      * Comma join: the good old-fashioned SQL<code>FROM</code> clause,      * where table expressions are specified with commas between them, and      * join conditions are specified in the<code>WHERE</code> clause.      */
 name|Comma
 block|;
-comment|/** Creates a parse-tree node representing an occurrence of this          * condition type keyword at a particular position in the parsed          * text. */
+comment|/**      * Creates a parse-tree node representing an occurrence of this      * condition type keyword at a particular position in the parsed      * text.      */
 specifier|public
 name|SqlLiteral
 name|symbol

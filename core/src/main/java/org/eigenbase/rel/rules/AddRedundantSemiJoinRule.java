@@ -71,7 +71,7 @@ name|AddRedundantSemiJoinRule
 argument_list|()
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates an AddRedundantSemiJoinRule.      */
+comment|/**    * Creates an AddRedundantSemiJoinRule.    */
 specifier|private
 name|AddRedundantSemiJoinRule
 parameter_list|()

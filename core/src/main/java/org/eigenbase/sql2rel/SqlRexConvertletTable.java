@@ -35,7 +35,7 @@ interface|interface
 name|SqlRexConvertletTable
 block|{
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Returns the convertlet applicable to a given expression.      */
+comment|/**    * Returns the convertlet applicable to a given expression.    */
 specifier|public
 name|SqlRexConvertlet
 name|get

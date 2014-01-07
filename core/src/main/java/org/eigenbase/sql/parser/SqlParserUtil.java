@@ -244,7 +244,7 @@ parameter_list|()
 block|{
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * @return the character-set prefix of an sql string literal; returns null      * if there is none      */
+comment|/**    * @return the character-set prefix of an sql string literal; returns null    * if there is none    */
 specifier|public
 specifier|static
 name|String
@@ -321,7 +321,7 @@ argument_list|)
 return|;
 comment|// skip prefixed '_'
 block|}
-comment|/**      * Converts the contents of an sql quoted string literal into the      * corresponding Java string representation (removing leading and trailing      * quotes and unescaping internal doubled quotes).      */
+comment|/**    * Converts the contents of an sql quoted string literal into the    * corresponding Java string representation (removing leading and trailing    * quotes and unescaping internal doubled quotes).    */
 specifier|public
 specifier|static
 name|String
@@ -402,7 +402,7 @@ name|s
 argument_list|)
 return|;
 block|}
-comment|/**      * @deprecated this method is not localized for Farrago standards      */
+comment|/**    * @deprecated this method is not localized for Farrago standards    */
 specifier|public
 specifier|static
 name|java
@@ -429,7 +429,7 @@ name|s
 argument_list|)
 return|;
 block|}
-comment|/**      * @deprecated Does not parse SQL:99 milliseconds      */
+comment|/**    * @deprecated Does not parse SQL:99 milliseconds    */
 specifier|public
 specifier|static
 name|java
@@ -456,7 +456,7 @@ name|s
 argument_list|)
 return|;
 block|}
-comment|/**      * @deprecated this method is not localized for Farrago standards      */
+comment|/**    * @deprecated this method is not localized for Farrago standards    */
 specifier|public
 specifier|static
 name|java
@@ -483,7 +483,7 @@ name|s
 argument_list|)
 return|;
 block|}
-comment|/**      * Checks if the date/time format is valid      *      * @param pattern {@link SimpleDateFormat}  pattern      */
+comment|/**    * Checks if the date/time format is valid    *    * @param pattern {@link SimpleDateFormat}  pattern    */
 specifier|public
 specifier|static
 name|void
@@ -510,7 +510,7 @@ name|df
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Converts the interval value into a millisecond representation.      *      * @param interval Interval      *      * @return a long value that represents millisecond equivalent of the      * interval value.      */
+comment|/**    * Converts the interval value into a millisecond representation.    *    * @param interval Interval    * @return a long value that represents millisecond equivalent of the    * interval value.    */
 specifier|public
 specifier|static
 name|long
@@ -718,7 +718,7 @@ operator|*
 name|l
 return|;
 block|}
-comment|/**      * Converts the interval value into a months representation.      *      * @param interval Interval      *      * @return a long value that represents months equivalent of the interval      * value.      */
+comment|/**    * Converts the interval value into a months representation.    *    * @param interval Interval    * @return a long value that represents months equivalent of the interval    * value.    */
 specifier|public
 specifier|static
 name|long
@@ -886,7 +886,7 @@ operator|*
 name|l
 return|;
 block|}
-comment|/**      * Parses a positive int. All characters have to be digits.      *      * @see Integer#parseInt(String)      */
+comment|/**    * Parses a positive int. All characters have to be digits.    *    * @see Integer#parseInt(String)    */
 specifier|public
 specifier|static
 name|int
@@ -934,7 +934,7 @@ name|value
 argument_list|)
 return|;
 block|}
-comment|/**      * Parses a Binary string. SQL:99 defines a binary string as a hexstring      * with EVEN nbr of hex digits.      */
+comment|/**    * Parses a Binary string. SQL:99 defines a binary string as a hexstring    * with EVEN nbr of hex digits.    */
 specifier|public
 specifier|static
 name|byte
@@ -1104,7 +1104,7 @@ return|return
 name|ret
 return|;
 block|}
-comment|/**      * Unquotes a quoted string. For example,<code>strip("'it''s got      * quotes'")</code> returns<code>"it's got quotes"</code>.      */
+comment|/**    * Unquotes a quoted string. For example,<code>strip("'it''s got    * quotes'")</code> returns<code>"it's got quotes"</code>.    */
 specifier|public
 specifier|static
 name|String
@@ -1159,7 +1159,7 @@ name|quote
 argument_list|)
 return|;
 block|}
-comment|/**      * Trims a string for given characters from left and right. E.g.<code>      * trim("aBaac123AabC","abBcC")</code> returns</code>"123A"</code>      */
+comment|/**    * Trims a string for given characters from left and right. E.g.<code>    * trim("aBaac123AabC","abBcC")</code> returns</code>"123A"</code>    */
 specifier|public
 specifier|static
 name|String
@@ -1300,7 +1300,7 @@ name|stop
 argument_list|)
 return|;
 block|}
-comment|/**      * Looks for one or two carets in a SQL string, and if present, converts      * them into a parser position.      *      *<p>Examples:      *      *<ul>      *<li>findPos("xxx^yyy") yields {"xxxyyy", position 3, line 1 column 4}      *<li>findPos("xxxyyy") yields {"xxxyyy", null}      *<li>findPos("xxx^yy^y") yields {"xxxyyy", position 3, line 4 column 4      * through line 1 column 6}      *</ul>      */
+comment|/**    * Looks for one or two carets in a SQL string, and if present, converts    * them into a parser position.    *    *<p>Examples:    *    *<ul>    *<li>findPos("xxx^yyy") yields {"xxxyyy", position 3, line 1 column 4}    *<li>findPos("xxxyyy") yields {"xxxyyy", null}    *<li>findPos("xxx^yy^y") yields {"xxxyyy", position 3, line 4 column 4    * through line 1 column 6}    *</ul>    */
 specifier|public
 specifier|static
 name|StringAndPos
@@ -1544,7 +1544,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**      * Returns the (1-based) line and column corresponding to a particular      * (0-based) offset in a string.      *      *<p>Converse of {@link #lineColToIndex(String, int, int)}.      */
+comment|/**    * Returns the (1-based) line and column corresponding to a particular    * (0-based) offset in a string.    *    *<p>Converse of {@link #lineColToIndex(String, int, int)}.    */
 specifier|public
 specifier|static
 name|int
@@ -1756,7 +1756,7 @@ name|line
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Finds the position (0-based) in a string which corresponds to a given      * line and column (1-based).      *      *<p>Converse of {@link #indexToLineCol(String, int)}.      */
+comment|/**    * Finds the position (0-based) in a string which corresponds to a given    * line and column (1-based).    *    *<p>Converse of {@link #indexToLineCol(String, int)}.    */
 specifier|public
 specifier|static
 name|int
@@ -1818,7 +1818,7 @@ operator|+
 name|column
 return|;
 block|}
-comment|/**      * Converts a string to a string with one or two carets in it. For example,      *<code>addCarets("values (foo)", 1, 9, 1, 12)</code> yields "values      * (^foo^)".      */
+comment|/**    * Converts a string to a string with one or two carets in it. For example,    *<code>addCarets("values (foo)", 1, 9, 1, 12)</code> yields "values    * (^foo^)".    */
 specifier|public
 specifier|static
 name|String
@@ -2036,7 +2036,7 @@ return|return
 literal|null
 return|;
 block|}
-comment|/**      * Extracts the values from a collation name.      *      *<p>Collation names are on the form<i>charset$locale$strength</i>.      *      * @param in The collation name      *      * @return A link {@link ParsedCollation}      */
+comment|/**    * Extracts the values from a collation name.    *    *<p>Collation names are on the form<i>charset$locale$strength</i>.    *    * @param in The collation name    * @return A link {@link ParsedCollation}    */
 specifier|public
 specifier|static
 name|ParsedCollation
@@ -2390,7 +2390,7 @@ return|return
 literal|""
 return|;
 block|}
-comment|/**      * Replaces a range of elements in a list with a single element. For      * example, if list contains<code>{A, B, C, D, E}</code> then<code>      * replaceSublist(list, X, 1, 4)</code> returns<code>{A, X, E}</code>.      */
+comment|/**    * Replaces a range of elements in a list with a single element. For    * example, if list contains<code>{A, B, C, D, E}</code> then<code>    * replaceSublist(list, X, 1, 4)</code> returns<code>{A, X, E}</code>.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -2472,7 +2472,7 @@ name|o
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Converts a list of {expression, operator, expression, ...} into a tree,      * taking operator precedence and associativity into account.      *      * @pre list.size() % 2 == 1      */
+comment|/**    * Converts a list of {expression, operator, expression, ...} into a tree,    * taking operator precedence and associativity into account.    *    * @pre list.size() % 2 == 1    */
 specifier|public
 specifier|static
 name|SqlNode
@@ -2547,7 +2547,7 @@ return|return
 name|node
 return|;
 block|}
-comment|/**      * Converts a list of {expression, operator, expression, ...} into a tree,      * taking operator precedence and associativity into account.      *      * @param list List of operands and operators. This list is modified as      * expressions are reduced.      * @param start Position of first operand in the list. Anything to the left      * of this (besides the immediately preceding operand) is ignored. Generally      * use value 1.      * @param minPrec Minimum precedence to consider. If the method encounters      * an operator of lower precedence, it doesn't reduce any further.      * @param stopperKind If not {@link SqlKind#OTHER}, stop reading the list if      * we encounter a token of this kind.      *      * @return the root node of the tree which the list condenses into      */
+comment|/**    * Converts a list of {expression, operator, expression, ...} into a tree,    * taking operator precedence and associativity into account.    *    * @param list        List of operands and operators. This list is modified as    *                    expressions are reduced.    * @param start       Position of first operand in the list. Anything to the    *                    left of this (besides the immediately preceding operand)    *                    is ignored. Generally use value 1.    * @param minPrec     Minimum precedence to consider. If the method encounters    *                    an operator of lower precedence, it doesn't reduce any    *                    further.    * @param stopperKind If not {@link SqlKind#OTHER}, stop reading the list if    *                    we encounter a token of this kind.    * @return the root node of the tree which the list condenses into    */
 specifier|public
 specifier|static
 name|SqlNode
@@ -3435,7 +3435,7 @@ name|start
 argument_list|)
 return|;
 block|}
-comment|/**      * Checks a UESCAPE string for validity, and returns the escape character if      * no exception is thrown.      *      * @param s UESCAPE string to check      *      * @return validated escape character      */
+comment|/**    * Checks a UESCAPE string for validity, and returns the escape character if    * no exception is thrown.    *    * @param s UESCAPE string to check    * @return validated escape character    */
 specifier|public
 specifier|static
 name|char
@@ -3635,7 +3635,7 @@ name|strength
 return|;
 block|}
 block|}
-comment|/**      * Class that holds a {@link SqlOperator} and a {@link SqlParserPos}. Used      * by {@link SqlSpecialOperator#reduceExpr} and the parser to associate a      * parsed operator with a parser position.      */
+comment|/**    * Class that holds a {@link SqlOperator} and a {@link SqlParserPos}. Used    * by {@link SqlSpecialOperator#reduceExpr} and the parser to associate a    * parsed operator with a parser position.    */
 specifier|public
 specifier|static
 class|class
@@ -3693,7 +3693,7 @@ name|pos
 return|;
 block|}
 block|}
-comment|/**      * Contains a string, the offset of a token within the string, and a parser      * position containing the beginning and end line number.      */
+comment|/**    * Contains a string, the offset of a token within the string, and a parser    * position containing the beginning and end line number.    */
 specifier|public
 specifier|static
 class|class

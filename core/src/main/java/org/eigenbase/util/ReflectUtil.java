@@ -445,7 +445,7 @@ block|}
 block|}
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Uses reflection to find the correct java.nio.ByteBuffer "absolute get"      * method for a given primitive type.      *      * @param clazz the Class object representing the primitive type      *      * @return corresponding method      */
+comment|/**    * Uses reflection to find the correct java.nio.ByteBuffer "absolute get"    * method for a given primitive type.    *    * @param clazz the Class object representing the primitive type    * @return corresponding method    */
 specifier|public
 specifier|static
 name|Method
@@ -472,7 +472,7 @@ name|clazz
 argument_list|)
 return|;
 block|}
-comment|/**      * Uses reflection to find the correct java.nio.ByteBuffer "absolute put"      * method for a given primitive type.      *      * @param clazz the Class object representing the primitive type      *      * @return corresponding method      */
+comment|/**    * Uses reflection to find the correct java.nio.ByteBuffer "absolute put"    * method for a given primitive type.    *    * @param clazz the Class object representing the primitive type    * @return corresponding method    */
 specifier|public
 specifier|static
 name|Method
@@ -499,7 +499,7 @@ name|clazz
 argument_list|)
 return|;
 block|}
-comment|/**      * Gets the Java boxing class for a primitive class.      *      * @param primitiveClass representative class for primitive (e.g.      * java.lang.Integer.TYPE)      *      * @return corresponding boxing Class (e.g. java.lang.Integer)      */
+comment|/**    * Gets the Java boxing class for a primitive class.    *    * @param primitiveClass representative class for primitive (e.g.    *                       java.lang.Integer.TYPE)    * @return corresponding boxing Class (e.g. java.lang.Integer)    */
 specifier|public
 specifier|static
 name|Class
@@ -526,7 +526,7 @@ name|primitiveClass
 argument_list|)
 return|;
 block|}
-comment|/**      * Gets the name of a class with no package qualifiers; if it's an inner      * class, it will still be qualified by the containing class (X$Y).      *      * @param c the class of interest      *      * @return the unqualified name      */
+comment|/**    * Gets the name of a class with no package qualifiers; if it's an inner    * class, it will still be qualified by the containing class (X$Y).    *    * @param c the class of interest    * @return the unqualified name    */
 specifier|public
 specifier|static
 name|String
@@ -576,7 +576,7 @@ literal|1
 argument_list|)
 return|;
 block|}
-comment|/**      * Composes a string representing a human-readable method name (with neither      * exception nor return type information).      *      * @param declaringClass class on which method is defined      * @param methodName simple name of method without signature      * @param paramTypes method parameter types      *      * @return unmangled method name      */
+comment|/**    * Composes a string representing a human-readable method name (with neither    * exception nor return type information).    *    * @param declaringClass class on which method is defined    * @param methodName     simple name of method without signature    * @param paramTypes     method parameter types    * @return unmangled method name    */
 specifier|public
 specifier|static
 name|String
@@ -691,7 +691,7 @@ name|toString
 argument_list|()
 return|;
 block|}
-comment|/**      * Composes a string representing a human-readable method name (with neither      * exception nor return type information).      *      * @param method method whose name is to be generated      *      * @return unmangled method name      */
+comment|/**    * Composes a string representing a human-readable method name (with neither    * exception nor return type information).    *    * @param method method whose name is to be generated    * @return unmangled method name    */
 specifier|public
 specifier|static
 name|String
@@ -721,7 +721,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**      * Implements the {@link Glossary#VisitorPattern} via reflection. The basic      * technique is taken from<a      * href="http://www.javaworld.com/javaworld/javatips/jw-javatip98.html">a      * Javaworld article</a>. For an example of how to use it, see {@code      * ReflectVisitorTest}. Visit method lookup follows the same rules as if      * compile-time resolution for VisitorClass.visit(VisiteeClass) were      * performed. An ambiguous match due to multiple interface inheritance      * results in an IllegalArgumentException. A non-match is indicated by      * returning false.      *      * @param visitor object whose visit method is to be invoked      * @param visitee object to be passed as a parameter to the visit method      * @param hierarchyRoot if non-null, visitor method will only be invoked if      * it takes a parameter whose type is a subtype of hierarchyRoot      * @param visitMethodName name of visit method, e.g. "visit"      *      * @return true if a matching visit method was found and invoked      */
+comment|/**    * Implements the {@link Glossary#VisitorPattern} via reflection. The basic    * technique is taken from<a    * href="http://www.javaworld.com/javaworld/javatips/jw-javatip98.html">a    * Javaworld article</a>. For an example of how to use it, see {@code    * ReflectVisitorTest}. Visit method lookup follows the same rules as if    * compile-time resolution for VisitorClass.visit(VisiteeClass) were    * performed. An ambiguous match due to multiple interface inheritance    * results in an IllegalArgumentException. A non-match is indicated by    * returning false.    *    * @param visitor         object whose visit method is to be invoked    * @param visitee         object to be passed as a parameter to the visit    *                        method    * @param hierarchyRoot   if non-null, visitor method will only be invoked if    *                        it takes a parameter whose type is a subtype of    *                        hierarchyRoot    * @param visitMethodName name of visit method, e.g. "visit"    * @return true if a matching visit method was found and invoked    */
 specifier|public
 specifier|static
 name|boolean
@@ -753,7 +753,7 @@ name|visitMethodName
 argument_list|)
 return|;
 block|}
-comment|/**      * Shared implementation of the two forms of invokeVisitor.      *      * @param visitor object whose visit method is to be invoked      * @param visitee object to be passed as a parameter to the visit method      * @param hierarchyRoot if non-null, visitor method will only be invoked if      * it takes a parameter whose type is a subtype of hierarchyRoot      * @param visitMethodName name of visit method, e.g. "visit"      *      * @return true if a matching visit method was found and invoked      */
+comment|/**    * Shared implementation of the two forms of invokeVisitor.    *    * @param visitor         object whose visit method is to be invoked    * @param visitee         object to be passed as a parameter to the visit    *                        method    * @param hierarchyRoot   if non-null, visitor method will only be invoked if    *                        it takes a parameter whose type is a subtype of    *                        hierarchyRoot    * @param visitMethodName name of visit method, e.g. "visit"    * @return true if a matching visit method was found and invoked    */
 specifier|private
 specifier|static
 name|boolean
@@ -941,7 +941,7 @@ return|return
 literal|true
 return|;
 block|}
-comment|/**      * Looks up a visit method.      *      * @param visitorClass class of object whose visit method is to be invoked      * @param visiteeClass class of object to be passed as a parameter to the      * visit method      * @param visitMethodName name of visit method      *      * @return method found, or null if none found      */
+comment|/**    * Looks up a visit method.    *    * @param visitorClass    class of object whose visit method is to be invoked    * @param visiteeClass    class of object to be passed as a parameter to the    *                        visit method    * @param visitMethodName name of visit method    * @return method found, or null if none found    */
 specifier|public
 specifier|static
 name|Method
@@ -982,7 +982,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**      * Looks up a visit method taking additional parameters beyond the      * overloaded visitee type.      *      * @param visitorClass class of object whose visit method is to be invoked      * @param visiteeClass class of object to be passed as a parameter to the      * visit method      * @param visitMethodName name of visit method      * @param additionalParameterTypes list of additional parameter types      *      * @return method found, or null if none found      *      * @see #createDispatcher(Class,Class)      */
+comment|/**    * Looks up a visit method taking additional parameters beyond the    * overloaded visitee type.    *    * @param visitorClass             class of object whose visit method is to be    *                                 invoked    * @param visiteeClass             class of object to be passed as a parameter    *                                 to the visit method    * @param visitMethodName          name of visit method    * @param additionalParameterTypes list of additional parameter types    * @return method found, or null if none found    * @see #createDispatcher(Class, Class)    */
 specifier|public
 specifier|static
 name|Method
@@ -1416,7 +1416,7 @@ return|return
 name|candidateMethod
 return|;
 block|}
-comment|/**      * Creates a dispatcher for calls to {@link #lookupVisitMethod}. The      * dispatcher caches methods between invocations.      *      * @param visitorBaseClazz Visitor base class      * @param visiteeBaseClazz Visitee base class      *      * @return cache of methods      */
+comment|/**    * Creates a dispatcher for calls to {@link #lookupVisitMethod}. The    * dispatcher caches methods between invocations.    *    * @param visitorBaseClazz Visitor base class    * @param visiteeBaseClazz Visitee base class    * @return cache of methods    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -1689,7 +1689,7 @@ block|}
 block|}
 return|;
 block|}
-comment|/**      * Creates a dispatcher for calls to a single multi-method on a particular      * object.      *      *<p>Calls to that multi-method are resolved by looking for a method on      * the runtime type of that object, with the required name, and with      * the correct type or a subclass for the first argument, and precisely the      * same types for other arguments.      *      *<p>For instance, a dispatcher created for the method      *      *<blockquote>String foo(Vehicle, int, List)</blockquote>      *      * could be used to call the methods      *      *<blockquote>String foo(Car, int, List)<br/>      * String foo(Bus, int, List)</blockquote>      *      * (because Car and Bus are subclasses of Vehicle, and they occur in the      * polymorphic first argument) but not the method      *      *<blockquote>String foo(Car, int, ArrayList)</blockquote>      *      * (only the first argument is polymorphic).      *      *<p>You must create an implementation of the method for the base class.      * Otherwise throws {@link IllegalArgumentException}.      *      * @param returnClazz Return type of method      * @param visitor Object on which to invoke the method      * @param methodName Name of method      * @param arg0Clazz Base type of argument zero      * @param otherArgClasses Types of remaining arguments      */
+comment|/**    * Creates a dispatcher for calls to a single multi-method on a particular    * object.    *    *<p>Calls to that multi-method are resolved by looking for a method on    * the runtime type of that object, with the required name, and with    * the correct type or a subclass for the first argument, and precisely the    * same types for other arguments.    *    *<p>For instance, a dispatcher created for the method    *    *<blockquote>String foo(Vehicle, int, List)</blockquote>    *    * could be used to call the methods    *    *<blockquote>String foo(Car, int, List)<br/>    * String foo(Bus, int, List)</blockquote>    *    * (because Car and Bus are subclasses of Vehicle, and they occur in the    * polymorphic first argument) but not the method    *    *<blockquote>String foo(Car, int, ArrayList)</blockquote>    *    * (only the first argument is polymorphic).    *    *<p>You must create an implementation of the method for the base class.    * Otherwise throws {@link IllegalArgumentException}.    *    * @param returnClazz     Return type of method    * @param visitor         Object on which to invoke the method    * @param methodName      Name of method    * @param arg0Clazz       Base type of argument zero    * @param otherArgClasses Types of remaining arguments    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -1986,7 +1986,7 @@ block|}
 return|;
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------
-comment|/**      * Can invoke a method on an object of type E with return type T.      *      * @param<T> Return type of method      */
+comment|/**    * Can invoke a method on an object of type E with return type T.    *    * @param<T> Return type of method    */
 specifier|public
 interface|interface
 name|MethodDispatcher
@@ -1994,7 +1994,7 @@ parameter_list|<
 name|T
 parameter_list|>
 block|{
-comment|/**          * Invokes method on an object with a given set of arguments.          *          * @param args Arguments to method          * @return Return value of method          */
+comment|/**      * Invokes method on an object with a given set of arguments.      *      * @param args Arguments to method      * @return Return value of method      */
 name|T
 name|invoke
 parameter_list|(

@@ -57,7 +57,7 @@ name|ConverterRule
 name|converter
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a new TraitMatchingRule.      *      * @param converterRule rule to be restricted; rule must take a single      * operand expecting a single input      */
+comment|/**    * Creates a new TraitMatchingRule.    *    * @param converterRule rule to be restricted; rule must take a single    *                      operand expecting a single input    */
 specifier|public
 name|TraitMatchingRule
 parameter_list|(

@@ -1262,7 +1262,7 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**    * Reduces a list of expressions.    *    * @param rel Relational expression    * @param expList List of expressions, modified in place    *    * @return whether reduction found something to change, and succeeded    */
+comment|/**    * Reduces a list of expressions.    *    * @param rel     Relational expression    * @param expList List of expressions, modified in place    * @return whether reduction found something to change, and succeeded    */
 specifier|static
 name|boolean
 name|reduceExpressions
@@ -1604,7 +1604,7 @@ literal|null
 return|;
 comment|// TODO:
 block|}
-comment|/**    * Locates expressions that can be reduced to literals or converted to    * expressions with redundant casts removed.    *    * @param typeFactory Type factory    * @param exps list of candidate expressions to be examined for reduction    * @param constExps returns the list of expressions that can be constant    *   reduced    * @param addCasts indicator for each expression that can be constant    *   reduced, whether a cast of the resulting reduced expression is    *   potentially necessary    * @param removableCasts returns the list of cast expressions where the cast    */
+comment|/**    * Locates expressions that can be reduced to literals or converted to    * expressions with redundant casts removed.    *    * @param typeFactory    Type factory    * @param exps           list of candidate expressions to be examined for    *                       reduction    * @param constExps      returns the list of expressions that can be constant    *                       reduced    * @param addCasts       indicator for each expression that can be constant    *                       reduced, whether a cast of the resulting reduced    *                       expression is potentially necessary    * @param removableCasts returns the list of cast expressions where the cast    */
 specifier|private
 specifier|static
 name|void
@@ -2797,7 +2797,7 @@ block|}
 interface|interface
 name|Executor
 block|{
-comment|/** Reduces expressions. Returns whether failed. */
+comment|/**      * Reduces expressions. Returns whether failed.      */
 name|boolean
 name|execute
 parameter_list|(

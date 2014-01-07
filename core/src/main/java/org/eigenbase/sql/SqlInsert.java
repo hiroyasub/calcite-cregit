@@ -183,7 +183,7 @@ name|columnList
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * @return the identifier for the target table of the insertion      */
+comment|/**    * @return the identifier for the target table of the insertion    */
 specifier|public
 name|SqlIdentifier
 name|getTargetTable
@@ -199,7 +199,7 @@ name|TARGET_TABLE_OPERAND
 index|]
 return|;
 block|}
-comment|/**      * @return the source expression for the data to be inserted      */
+comment|/**    * @return the source expression for the data to be inserted    */
 specifier|public
 name|SqlNode
 name|getSource
@@ -212,7 +212,7 @@ name|SOURCE_OPERAND
 index|]
 return|;
 block|}
-comment|/**      * @return the list of target column names, or null for all columns in the      * target table      */
+comment|/**    * @return the list of target column names, or null for all columns in the    * target table    */
 specifier|public
 name|SqlNodeList
 name|getTargetColumnList

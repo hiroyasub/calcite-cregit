@@ -28,7 +28,7 @@ name|boolean
 name|cancelRequested
 decl_stmt|;
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * @return whether a cancellation has been requested      */
+comment|/**    * @return whether a cancellation has been requested    */
 specifier|public
 name|boolean
 name|isCancelRequested
@@ -38,7 +38,7 @@ return|return
 name|cancelRequested
 return|;
 block|}
-comment|/**      * Requests a cancellation.      */
+comment|/**    * Requests a cancellation.    */
 specifier|public
 name|void
 name|requestCancel
@@ -49,7 +49,7 @@ operator|=
 literal|true
 expr_stmt|;
 block|}
-comment|/**      * Clears any pending cancellation request.      */
+comment|/**    * Clears any pending cancellation request.    */
 specifier|public
 name|void
 name|clearCancel

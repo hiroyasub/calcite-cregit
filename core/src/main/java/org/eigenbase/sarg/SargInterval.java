@@ -37,7 +37,7 @@ extends|extends
 name|SargIntervalBase
 block|{
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a SargInterval.      */
+comment|/**    * Creates a SargInterval.    */
 name|SargInterval
 parameter_list|(
 name|SargFactory

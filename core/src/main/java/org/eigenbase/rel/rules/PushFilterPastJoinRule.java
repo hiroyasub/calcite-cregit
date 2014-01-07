@@ -213,7 +213,7 @@ block|}
 block|}
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a PushFilterPastJoinRule with an explicit root operand.      */
+comment|/**    * Creates a PushFilterPastJoinRule with an explicit root operand.    */
 specifier|private
 name|PushFilterPastJoinRule
 parameter_list|(
@@ -659,7 +659,7 @@ name|newRel
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * If the filter list passed in is non-empty, creates a FilterRel on top of      * the existing RelNode; otherwise, just returns the RelNode      *      * @param rexBuilder rex builder      * @param rel the RelNode that the filter will be put on top of      * @param filters list of filters      *      * @return new RelNode or existing one if no filters      */
+comment|/**    * If the filter list passed in is non-empty, creates a FilterRel on top of    * the existing RelNode; otherwise, just returns the RelNode    *    * @param rexBuilder rex builder    * @param rel        the RelNode that the filter will be put on top of    * @param filters    list of filters    * @return new RelNode or existing one if no filters    */
 specifier|private
 name|RelNode
 name|createFilterOnRel

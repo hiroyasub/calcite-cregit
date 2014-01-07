@@ -49,7 +49,7 @@ name|RemoveSemiJoinRule
 argument_list|()
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a RemoveSemiJoinRule.      */
+comment|/**    * Creates a RemoveSemiJoinRule.    */
 specifier|private
 name|RemoveSemiJoinRule
 parameter_list|()

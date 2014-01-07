@@ -145,7 +145,7 @@ class|class
 name|VolcanoPlannerTraitTest
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
-comment|/**      * Private calling convention representing a generic "physical" calling      * convention.      */
+comment|/**    * Private calling convention representing a generic "physical" calling    * convention.    */
 specifier|private
 specifier|static
 specifier|final
@@ -164,7 +164,7 @@ operator|.
 name|class
 argument_list|)
 decl_stmt|;
-comment|/**      * Private trait definition for an alternate type of traits.      */
+comment|/**    * Private trait definition for an alternate type of traits.    */
 specifier|private
 specifier|static
 specifier|final
@@ -175,7 +175,7 @@ operator|new
 name|AltTraitDef
 argument_list|()
 decl_stmt|;
-comment|/**      * Private alternate trait.      */
+comment|/**    * Private alternate trait.    */
 specifier|private
 specifier|static
 specifier|final
@@ -190,7 +190,7 @@ argument_list|,
 literal|"ALT"
 argument_list|)
 decl_stmt|;
-comment|/**      * Private alternate trait.      */
+comment|/**    * Private alternate trait.    */
 specifier|private
 specifier|static
 specifier|final
@@ -205,7 +205,7 @@ argument_list|,
 literal|"ALT2"
 argument_list|)
 decl_stmt|;
-comment|/**      * Ordinal count for alternate traits (so they can implement equals() and      * avoid being canonized into the same trait).      */
+comment|/**    * Ordinal count for alternate traits (so they can implement equals() and    * avoid being canonized into the same trait).    */
 specifier|private
 specifier|static
 name|int
@@ -1692,7 +1692,7 @@ function_decl|;
 block|}
 interface|interface
 name|FooRelImplementor
-block|{}
+block|{   }
 specifier|private
 specifier|static
 class|class

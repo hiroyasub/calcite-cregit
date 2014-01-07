@@ -151,7 +151,7 @@ name|ValuesRelBase
 extends|extends
 name|AbstractRelNode
 block|{
-comment|/** Lambda that helps render tuples as strings. */
+comment|/**    * Lambda that helps render tuples as strings.    */
 specifier|private
 specifier|static
 specifier|final
@@ -248,7 +248,7 @@ argument_list|>
 name|tuples
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a new ValuesRelBase. Note that tuples passed in become owned by      * this rel (without a deep copy), so caller must not modify them after this      * call, otherwise bad things will happen.      *      * @param cluster .      * @param rowType row type for tuples produced by this rel      * @param tuples 2-dimensional array of tuple values to be produced; outer      * list contains tuples; each inner list is one tuple; all tuples must be of      * same length, conforming to rowType      */
+comment|/**    * Creates a new ValuesRelBase. Note that tuples passed in become owned by    * this rel (without a deep copy), so caller must not modify them after this    * call, otherwise bad things will happen.    *    * @param cluster .    * @param rowType row type for tuples produced by this rel    * @param tuples  2-dimensional array of tuple values to be produced; outer    *                list contains tuples; each inner list is one tuple; all    *                tuples must be of same length, conforming to rowType    */
 specifier|protected
 name|ValuesRelBase
 parameter_list|(
@@ -297,7 +297,7 @@ argument_list|()
 operator|)
 assert|;
 block|}
-comment|/** Creates a ValuesRelBase by parsing serialized output. */
+comment|/**    * Creates a ValuesRelBase by parsing serialized output.    */
 specifier|public
 name|ValuesRelBase
 parameter_list|(
@@ -357,7 +357,7 @@ literal|"tuples"
 argument_list|)
 return|;
 block|}
-comment|/**      * @return rows of literals represented by this rel      */
+comment|/**    * @return rows of literals represented by this rel    */
 specifier|public
 name|List
 argument_list|<
@@ -373,7 +373,7 @@ return|return
 name|tuples
 return|;
 block|}
-comment|/**      * @return true if all tuples match rowType; otherwise, assert on mismatch      */
+comment|/**    * @return true if all tuples match rowType; otherwise, assert on mismatch    */
 specifier|private
 name|boolean
 name|assertRowType

@@ -83,7 +83,7 @@ name|all
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Creates an IntersectRel by parsing serialized output. */
+comment|/**    * Creates an IntersectRel by parsing serialized output.    */
 specifier|public
 name|IntersectRel
 parameter_list|(

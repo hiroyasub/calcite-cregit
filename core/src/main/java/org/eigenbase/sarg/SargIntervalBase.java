@@ -64,7 +64,7 @@ name|SargMutableEndpoint
 name|upperBound
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * @see SargFactory#newIntervalExpr      */
+comment|/**    * @see SargFactory#newIntervalExpr    */
 name|SargIntervalBase
 parameter_list|(
 name|SargFactory
@@ -106,7 +106,7 @@ argument_list|()
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * @return an immutable reference to the endpoint representing this      * interval's lower bound      */
+comment|/**    * @return an immutable reference to the endpoint representing this    * interval's lower bound    */
 specifier|public
 name|SargEndpoint
 name|getLowerBound
@@ -116,7 +116,7 @@ return|return
 name|lowerBound
 return|;
 block|}
-comment|/**      * @return an immutable reference to the endpoint representing this      * interval's upper bound      */
+comment|/**    * @return an immutable reference to the endpoint representing this    * interval's upper bound    */
 specifier|public
 name|SargEndpoint
 name|getUpperBound
@@ -126,7 +126,7 @@ return|return
 name|upperBound
 return|;
 block|}
-comment|/**      * @return whether this represents a single point      */
+comment|/**    * @return whether this represents a single point    */
 specifier|public
 name|boolean
 name|isPoint
@@ -151,7 +151,7 @@ name|upperBound
 argument_list|)
 return|;
 block|}
-comment|/**      * @return whether this represents the empty interval      */
+comment|/**    * @return whether this represents the empty interval    */
 specifier|public
 name|boolean
 name|isEmpty
@@ -181,7 +181,7 @@ name|isNull
 argument_list|()
 return|;
 block|}
-comment|/**      * @return whether this represents a (non-empty, non-point) range interval      */
+comment|/**    * @return whether this represents a (non-empty, non-point) range interval    */
 specifier|public
 name|boolean
 name|isRange
@@ -199,7 +199,7 @@ argument_list|()
 operator|)
 return|;
 block|}
-comment|/**      * @return whether this represents the universal set      */
+comment|/**    * @return whether this represents the universal set    */
 specifier|public
 name|boolean
 name|isUnconstrained
@@ -219,7 +219,7 @@ name|isFinite
 argument_list|()
 return|;
 block|}
-comment|/**      * @return the factory which produced this expression      */
+comment|/**    * @return the factory which produced this expression    */
 specifier|public
 name|SargFactory
 name|getFactory
@@ -229,7 +229,7 @@ return|return
 name|factory
 return|;
 block|}
-comment|/**      * Sets this interval to represent a single point (possibly the null value).      *      * @param coordinate coordinate of point to set, or null for the null value      */
+comment|/**    * Sets this interval to represent a single point (possibly the null value).    *    * @param coordinate coordinate of point to set, or null for the null value    */
 name|void
 name|setPoint
 parameter_list|(
@@ -256,7 +256,7 @@ name|CLOSED
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Sets this interval to represent a single point matching the null value.      */
+comment|/**    * Sets this interval to represent a single point matching the null value.    */
 name|void
 name|setNull
 parameter_list|()
@@ -270,7 +270,7 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Sets the lower bound for this interval.      *      * @param coordinate coordinate of point to set, must not be null      * @param strictness strictness      */
+comment|/**    * Sets the lower bound for this interval.    *    * @param coordinate coordinate of point to set, must not be null    * @param strictness strictness    */
 name|void
 name|setLower
 parameter_list|(
@@ -295,7 +295,7 @@ name|coordinate
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Sets the upper bound for this interval.      *      * @param coordinate coordinate of point to set      * @param strictness boundary strictness      */
+comment|/**    * Sets the upper bound for this interval.    *    * @param coordinate coordinate of point to set    * @param strictness boundary strictness    */
 name|void
 name|setUpper
 parameter_list|(
@@ -320,7 +320,7 @@ name|coordinate
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Removes the lower bound for this interval, setting it to -infinity.      */
+comment|/**    * Removes the lower bound for this interval, setting it to -infinity.    */
 name|void
 name|unsetLower
 parameter_list|()
@@ -334,7 +334,7 @@ literal|1
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Removes the upper bound for this interval, setting it to +infinity.      */
+comment|/**    * Removes the upper bound for this interval, setting it to +infinity.    */
 name|void
 name|unsetUpper
 parameter_list|()
@@ -347,7 +347,7 @@ literal|1
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Sets this interval to unconstrained (matching everything, including      * null).      */
+comment|/**    * Sets this interval to unconstrained (matching everything, including    * null).    */
 name|void
 name|setUnconstrained
 parameter_list|()
@@ -359,7 +359,7 @@ name|unsetUpper
 argument_list|()
 expr_stmt|;
 block|}
-comment|/**      * Sets this interval to empty (matching nothing at all).      */
+comment|/**    * Sets this interval to empty (matching nothing at all).    */
 name|void
 name|setEmpty
 parameter_list|()

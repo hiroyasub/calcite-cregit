@@ -47,7 +47,7 @@ extends|extends
 name|RelTrait
 block|{
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Returns the ordinals and directions of the columns in this ordering.      */
+comment|/**    * Returns the ordinals and directions of the columns in this ordering.    */
 name|List
 argument_list|<
 name|RelFieldCollation

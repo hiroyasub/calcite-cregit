@@ -35,7 +35,7 @@ implements|implements
 name|ClosableAllocationOwner
 block|{
 comment|//~ Instance fields --------------------------------------------------------
-comment|/**      * List of owned ClosableAllocation objects.      */
+comment|/**    * List of owned ClosableAllocation objects.    */
 specifier|protected
 name|List
 argument_list|<
@@ -137,7 +137,7 @@ name|clear
 argument_list|()
 expr_stmt|;
 block|}
-comment|/**      * Forgets an allocation without closing it.      *      * @param allocation the allocation to forget      *      * @return whether the allocation was known      */
+comment|/**    * Forgets an allocation without closing it.    *    * @param allocation the allocation to forget    * @return whether the allocation was known    */
 specifier|public
 name|boolean
 name|forgetAllocation
@@ -155,7 +155,7 @@ name|allocation
 argument_list|)
 return|;
 block|}
-comment|/**      * @return whether any allocations remain unclosed      */
+comment|/**    * @return whether any allocations remain unclosed    */
 specifier|public
 name|boolean
 name|hasAllocations

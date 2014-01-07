@@ -99,7 +99,7 @@ name|boolean
 name|all
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/** Creates a SetOpRel. */
+comment|/**    * Creates a SetOpRel.    */
 specifier|protected
 name|SetOpRel
 parameter_list|(
@@ -144,7 +144,7 @@ operator|=
 name|all
 expr_stmt|;
 block|}
-comment|/** Creates a SetOpRel by parsing serialized output. */
+comment|/**    * Creates a SetOpRel by parsing serialized output.    */
 specifier|protected
 name|SetOpRel
 parameter_list|(
@@ -430,7 +430,7 @@ block|}
 argument_list|)
 return|;
 block|}
-comment|/**      * Returns whether all the inputs of this set operator have the same row      * type as its output row.      *      * @param compareNames whether or not column names are important in the      * homogeneity comparison      */
+comment|/**    * Returns whether all the inputs of this set operator have the same row    * type as its output row.    *    * @param compareNames whether or not column names are important in the    *                     homogeneity comparison    */
 specifier|public
 name|boolean
 name|isHomogeneous
@@ -481,7 +481,7 @@ return|return
 literal|true
 return|;
 block|}
-comment|/**      * Returns whether all the inputs of this set operator have the same row      * type as its output row. Equivalent to {@link #isHomogeneous(boolean)      * isHomogeneous(true)}.      */
+comment|/**    * Returns whether all the inputs of this set operator have the same row    * type as its output row. Equivalent to {@link #isHomogeneous(boolean)    * isHomogeneous(true)}.    */
 specifier|public
 name|boolean
 name|isHomogeneous

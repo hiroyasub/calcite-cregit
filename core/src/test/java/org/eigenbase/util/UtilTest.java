@@ -865,7 +865,7 @@ name|out
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Tests whether {@link EnumeratedValues} serialize correctly.      */
+comment|/**    * Tests whether {@link EnumeratedValues} serialize correctly.    */
 annotation|@
 name|Test
 specifier|public
@@ -996,7 +996,7 @@ return|return
 name|o
 return|;
 block|}
-comment|/**      * Unit-test for {@link BitString}.      */
+comment|/**    * Unit-test for {@link BitString}.    */
 annotation|@
 name|Test
 specifier|public
@@ -1519,7 +1519,7 @@ name|s
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Converts a byte array to a hex string like "AB, CD".      */
+comment|/**    * Converts a byte array to a hex string like "AB, CD".    */
 specifier|private
 name|String
 name|toString
@@ -1615,7 +1615,7 @@ name|toString
 argument_list|()
 return|;
 block|}
-comment|/**      * Tests {@link CastingList} and {@link Util#cast}.      */
+comment|/**    * Tests {@link CastingList} and {@link Util#cast}.    */
 annotation|@
 name|Test
 specifier|public
@@ -1998,7 +1998,7 @@ block|{
 comment|// ok
 block|}
 block|}
-comment|/**      * Tests the difference engine, {@link DiffTestCase#diff}.      */
+comment|/**    * Tests the difference engine, {@link DiffTestCase#diff}.    */
 annotation|@
 name|Test
 specifier|public
@@ -2091,7 +2091,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Tests the {@link Util#toPosix(TimeZone, boolean)} method.      */
+comment|/**    * Tests the {@link Util#toPosix(TimeZone, boolean)} method.    */
 annotation|@
 name|Test
 specifier|public
@@ -2266,7 +2266,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Tests the methods {@link Util#enumConstants(Class)} and {@link      * Util#enumVal(Class, String)}.      */
+comment|/**    * Tests the methods {@link Util#enumConstants(Class)} and {@link    * Util#enumVal(Class, String)}.    */
 annotation|@
 name|Test
 specifier|public
@@ -2403,7 +2403,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Tests the method {@link net.hydromatic.optiq.util.BitSets#toIter(java.util.BitSet)}.      */
+comment|/**    * Tests the method {@link net.hydromatic.optiq.util.BitSets#toIter(java.util.BitSet)}.    */
 annotation|@
 name|Test
 specifier|public
@@ -2473,7 +2473,7 @@ name|bitSet
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Tests that iterating over a BitSet yields the expected string.      *      * @param expected Expected string      * @param bitSet Bit set      */
+comment|/**    * Tests that iterating over a BitSet yields the expected string.    *    * @param expected Expected string    * @param bitSet   Bit set    */
 specifier|private
 name|void
 name|assertToIterBitSet
@@ -2548,7 +2548,7 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Tests the method {@link net.hydromatic.optiq.util.BitSets#toList(java.util.BitSet)}.      */
+comment|/**    * Tests the method {@link net.hydromatic.optiq.util.BitSets#toList(java.util.BitSet)}.    */
 annotation|@
 name|Test
 specifier|public
@@ -2634,7 +2634,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Tests the method {@link net.hydromatic.optiq.util.BitSets#of(int...)}.      */
+comment|/**    * Tests the method {@link net.hydromatic.optiq.util.BitSets#of(int...)}.    */
 annotation|@
 name|Test
 specifier|public
@@ -2694,7 +2694,7 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Tests the method {@link net.hydromatic.optiq.util.BitSets#range(int, int)}.      */
+comment|/**    * Tests the method {@link net.hydromatic.optiq.util.BitSets#range(int, int)}.    */
 annotation|@
 name|Test
 specifier|public
@@ -2786,7 +2786,7 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Tests SQL builders.      */
+comment|/**    * Tests SQL builders.    */
 annotation|@
 name|Test
 specifier|public
@@ -3061,7 +3061,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Unit test for {@link org.eigenbase.util.CompositeList}.      */
+comment|/**    * Unit test for {@link org.eigenbase.util.CompositeList}.    */
 annotation|@
 name|Test
 specifier|public
@@ -3452,7 +3452,7 @@ name|ss
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Unit test for {@link Template}.      */
+comment|/**    * Unit test for {@link Template}.    */
 annotation|@
 name|Test
 specifier|public
@@ -3744,7 +3744,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Unit test for {@link Util#parseLocale(String)} method.      */
+comment|/**    * Unit test for {@link Util#parseLocale(String)} method.    */
 annotation|@
 name|Test
 specifier|public
@@ -3777,7 +3777,7 @@ block|,
 name|Locale
 operator|.
 name|TRADITIONAL_CHINESE
-block|,         }
+block|,     }
 decl_stmt|;
 for|for
 control|(
@@ -4387,7 +4387,7 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Unit test for {@link Pair#zip(java.util.List, java.util.List)}. */
+comment|/**    * Unit test for {@link Pair#zip(java.util.List, java.util.List)}.    */
 annotation|@
 name|Test
 specifier|public
@@ -4533,7 +4533,7 @@ name|x
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Unit test for {@link Util#quotientList(java.util.List, int, int)}. */
+comment|/**    * Unit test for {@link Util#quotientList(java.util.List, int, int)}.    */
 annotation|@
 name|Test
 specifier|public
@@ -5035,7 +5035,7 @@ index|]
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Unit test for      * {@link net.hydromatic.optiq.util.BitSets#contains(java.util.BitSet, java.util.BitSet)}. */
+comment|/**    * Unit test for    * {@link net.hydromatic.optiq.util.BitSets#contains(java.util.BitSet, java.util.BitSet)}.    */
 annotation|@
 name|Test
 specifier|public
@@ -5212,7 +5212,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Unit test for {@link IntegerIntervalSet}. */
+comment|/**    * Unit test for {@link IntegerIntervalSet}.    */
 annotation|@
 name|Test
 specifier|public
@@ -5361,7 +5361,7 @@ return|return
 name|list
 return|;
 block|}
-comment|/** Tests that flat lists behave like regular lists in terms of equals      * and hashCode. */
+comment|/**    * Tests that flat lists behave like regular lists in terms of equals    * and hashCode.    */
 annotation|@
 name|Test
 specifier|public
@@ -5574,7 +5574,7 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Unit test for {@link Util#toCamelCase(String)}. */
+comment|/**    * Unit test for {@link Util#toCamelCase(String)}.    */
 annotation|@
 name|Test
 specifier|public
@@ -5667,7 +5667,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Unit test for {@link Util#camelToUpper(String)}. */
+comment|/**    * Unit test for {@link Util#camelToUpper(String)}.    */
 annotation|@
 name|Test
 specifier|public
@@ -5736,7 +5736,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Unit test for {@link Util#isDistinct(java.util.List)}. */
+comment|/**    * Unit test for {@link Util#isDistinct(java.util.List)}.    */
 annotation|@
 name|Test
 specifier|public
@@ -5851,7 +5851,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Unit test for {@link org.eigenbase.util.JsonBuilder}. */
+comment|/**    * Unit test for {@link org.eigenbase.util.JsonBuilder}.    */
 annotation|@
 name|Test
 specifier|public
@@ -6553,7 +6553,7 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------
-comment|/**      * Enumeration which extends BasicValue does NOT serialize correctly.      */
+comment|/**    * Enumeration which extends BasicValue does NOT serialize correctly.    */
 specifier|private
 specifier|static
 class|class
@@ -6612,7 +6612,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Enumeration which serializes correctly.      */
+comment|/**    * Enumeration which serializes correctly.    */
 specifier|private
 specifier|static
 class|class

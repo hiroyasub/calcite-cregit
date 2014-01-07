@@ -362,7 +362,7 @@ literal|"  ]\n"
 operator|+
 literal|"}"
 decl_stmt|;
-comment|/** Unit test for {@link org.eigenbase.rel.RelJsonWriter} on    * a simple tree of relational expressions, consisting of a table, a filter    * and an aggregate node. */
+comment|/**    * Unit test for {@link org.eigenbase.rel.RelJsonWriter} on    * a simple tree of relational expressions, consisting of a table, a filter    * and an aggregate node.    */
 annotation|@
 name|Test
 specifier|public
@@ -615,7 +615,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Unit test for {@link org.eigenbase.rel.RelJsonReader}. */
+comment|/**    * Unit test for {@link org.eigenbase.rel.RelJsonReader}.    */
 annotation|@
 name|Test
 specifier|public

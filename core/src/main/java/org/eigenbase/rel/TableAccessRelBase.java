@@ -98,7 +98,7 @@ extends|extends
 name|AbstractRelNode
 block|{
 comment|//~ Instance fields --------------------------------------------------------
-comment|/**      * The table definition.      */
+comment|/**    * The table definition.    */
 specifier|protected
 specifier|final
 name|RelOptTable
@@ -156,7 +156,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/** Creates a TableAccessRelBase by parsing serialized output. */
+comment|/**    * Creates a TableAccessRelBase by parsing serialized output.    */
 specifier|protected
 name|TableAccessRelBase
 parameter_list|(
@@ -322,7 +322,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**      * Projects a subset of the fields of the table, and also asks for "extra"      * fields that were not included in the table's official type.      *      *<p>The default implementation assumes that tables cannot do either of      * these operations, therefore it adds a {@link ProjectRel}, projecting      * {@code NULL} values for the extra fields.</p>      *      *<p>Sub-classes, representing table types that have these capabilities,      * should override.</p>      *      * @param fieldsUsed Bitmap of the fields desired by the consumer      * @param extraFields Extra fields, not advertised in the table's row-type,      *                    wanted by the consumer      * @return Relational expression that projects the desired fields      */
+comment|/**    * Projects a subset of the fields of the table, and also asks for "extra"    * fields that were not included in the table's official type.    *    *<p>The default implementation assumes that tables cannot do either of    * these operations, therefore it adds a {@link ProjectRel}, projecting    * {@code NULL} values for the extra fields.</p>    *    *<p>Sub-classes, representing table types that have these capabilities,    * should override.</p>    *    * @param fieldsUsed  Bitmap of the fields desired by the consumer    * @param extraFields Extra fields, not advertised in the table's row-type,    *                    wanted by the consumer    * @return Relational expression that projects the desired fields    */
 specifier|public
 name|RelNode
 name|project

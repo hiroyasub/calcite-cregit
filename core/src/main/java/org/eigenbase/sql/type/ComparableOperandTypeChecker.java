@@ -242,7 +242,7 @@ literal|true
 return|;
 block|}
 block|}
-comment|/**      * Similar functionality to {@link #checkOperandTypes(SqlCallBinding,      * boolean)}, but not part of the interface, and cannot throw an error.      */
+comment|/**    * Similar functionality to {@link #checkOperandTypes(SqlCallBinding,    * boolean)}, but not part of the interface, and cannot throw an error.    */
 specifier|public
 name|boolean
 name|checkOperandTypes

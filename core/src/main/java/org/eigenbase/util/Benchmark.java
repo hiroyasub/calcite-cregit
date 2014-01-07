@@ -62,7 +62,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Helps to run benchmarks by running the same task repeatedly and averaging  * the running times. */
+comment|/**  * Helps to run benchmarks by running the same task repeatedly and averaging  * the running times.  */
 end_comment
 
 begin_class
@@ -150,7 +150,7 @@ name|description
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Returns whether performance tests are enabled. */
+comment|/**    * Returns whether performance tests are enabled.    */
 specifier|public
 specifier|static
 name|boolean

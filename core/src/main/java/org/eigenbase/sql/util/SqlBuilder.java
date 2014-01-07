@@ -66,7 +66,7 @@ specifier|final
 name|SqlDialect
 name|dialect
 decl_stmt|;
-comment|/**      * Creates a SqlBuilder.      *      * @param dialect Dialect      */
+comment|/**    * Creates a SqlBuilder.    *    * @param dialect Dialect    */
 specifier|public
 name|SqlBuilder
 parameter_list|(
@@ -94,7 +94,7 @@ name|StringBuilder
 argument_list|()
 expr_stmt|;
 block|}
-comment|/**      * Creates a SqlBuilder with a given string.      *      * @param dialect Dialect      * @param s Initial contents of the buffer      */
+comment|/**    * Creates a SqlBuilder with a given string.    *    * @param dialect Dialect    * @param s       Initial contents of the buffer    */
 specifier|public
 name|SqlBuilder
 parameter_list|(
@@ -127,7 +127,7 @@ name|s
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Returns the dialect.      *      * @return dialect      */
+comment|/**    * Returns the dialect.    *    * @return dialect    */
 specifier|public
 name|SqlDialect
 name|getDialect
@@ -137,7 +137,7 @@ return|return
 name|dialect
 return|;
 block|}
-comment|/**      * Returns the length (character count).      *      * @return  the length of the sequence of characters currently      *          represented by this object      */
+comment|/**    * Returns the length (character count).    *    * @return the length of the sequence of characters currently    * represented by this object    */
 specifier|public
 name|int
 name|length
@@ -150,7 +150,7 @@ name|length
 argument_list|()
 return|;
 block|}
-comment|/**      * Clears the contents of the buffer.      */
+comment|/**    * Clears the contents of the buffer.    */
 specifier|public
 name|void
 name|clear
@@ -164,7 +164,7 @@ literal|0
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * {@inheritDoc}      *      *<p>Returns the SQL string.      *      * @see #getSql()      * @return SQL string      */
+comment|/**    * {@inheritDoc}    *    *<p>Returns the SQL string.    *    * @return SQL string    * @see #getSql()    */
 annotation|@
 name|Override
 specifier|public
@@ -177,7 +177,7 @@ name|getSql
 argument_list|()
 return|;
 block|}
-comment|/**      * Returns the SQL.      */
+comment|/**    * Returns the SQL.    */
 specifier|public
 name|String
 name|getSql
@@ -190,7 +190,7 @@ name|toString
 argument_list|()
 return|;
 block|}
-comment|/**      * Returns the SQL and clears the buffer.      *      *<p>Convenient if you are reusing the same SQL builder in a loop.      */
+comment|/**    * Returns the SQL and clears the buffer.    *    *<p>Convenient if you are reusing the same SQL builder in a loop.    */
 specifier|public
 name|String
 name|getSqlAndClear
@@ -212,7 +212,7 @@ return|return
 name|str
 return|;
 block|}
-comment|/**      * Appends a hygienic SQL string.      *      * @param s SQL string to append      * @return This builder      */
+comment|/**    * Appends a hygienic SQL string.    *    * @param s SQL string to append    * @return This builder    */
 specifier|public
 name|SqlBuilder
 name|append
@@ -235,7 +235,7 @@ return|return
 name|this
 return|;
 block|}
-comment|/**      * Appends a string, without any quoting.      *      *<p>Calls to this method are dubious.      *      * @param s String to append      * @return This builder      */
+comment|/**    * Appends a string, without any quoting.    *    *<p>Calls to this method are dubious.    *    * @param s String to append    * @return This builder    */
 specifier|public
 name|SqlBuilder
 name|append
@@ -255,7 +255,7 @@ return|return
 name|this
 return|;
 block|}
-comment|/**      * Appends a character, without any quoting.      *      * @param c Character to append      * @return This builder      */
+comment|/**    * Appends a character, without any quoting.    *    * @param c Character to append    * @return This builder    */
 specifier|public
 name|SqlBuilder
 name|append
@@ -275,7 +275,7 @@ return|return
 name|this
 return|;
 block|}
-comment|/**      * Appends a number, per {@link StringBuilder#append(long)}.      */
+comment|/**    * Appends a number, per {@link StringBuilder#append(long)}.    */
 specifier|public
 name|SqlBuilder
 name|append
@@ -295,7 +295,7 @@ return|return
 name|this
 return|;
 block|}
-comment|/**      * Appends an identifier to this buffer, quoting accordingly.      *      * @param name Identifier      * @return This builder      */
+comment|/**    * Appends an identifier to this buffer, quoting accordingly.    *    * @param name Identifier    * @return This builder    */
 specifier|public
 name|SqlBuilder
 name|identifier
@@ -317,7 +317,7 @@ return|return
 name|this
 return|;
 block|}
-comment|/**      * Appends one or more identifiers to this buffer, quoting accordingly.      *      * @param names Varargs array of identifiers      * @return This builder      */
+comment|/**    * Appends one or more identifiers to this buffer, quoting accordingly.    *    * @param names Varargs array of identifiers    * @return This builder    */
 specifier|public
 name|SqlBuilder
 name|identifier
@@ -345,7 +345,7 @@ return|return
 name|this
 return|;
 block|}
-comment|/**      * Appends a compound identifier to this buffer, quoting accordingly.      *      * @param names Parts of a compound identifier      * @return This builder      */
+comment|/**    * Appends a compound identifier to this buffer, quoting accordingly.    *    * @param names Parts of a compound identifier    * @return This builder    */
 specifier|public
 name|SqlBuilder
 name|identifier
@@ -370,7 +370,7 @@ return|return
 name|this
 return|;
 block|}
-comment|/**      * Returns the contents of this SQL buffer as a 'certified kocher' SQL      * string.      *      *<p>Use this method in preference to {@link #toString()}. It indicates      * that the SQL string has been constructed using good hygiene, and is      * therefore less likely to contain SQL injection or badly quoted      * identifiers or strings.      *      * @return Contents of this builder as a SQL string.      */
+comment|/**    * Returns the contents of this SQL buffer as a 'certified kocher' SQL    * string.    *    *<p>Use this method in preference to {@link #toString()}. It indicates    * that the SQL string has been constructed using good hygiene, and is    * therefore less likely to contain SQL injection or badly quoted    * identifiers or strings.    *    * @return Contents of this builder as a SQL string.    */
 specifier|public
 name|SqlString
 name|toSqlString
@@ -389,7 +389,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**      * Appends a string literal to this buffer.      *      *<p>For example, calling<code>literal(&quot;can't&quot;)</code>      * would convert the buffer      *<blockquote><code>SELECT</code></blockquote>      * to      *<blockquote><code>SELECT 'can''t'</code></blockquote>      *      * @param s String to append      * @return This buffer      */
+comment|/**    * Appends a string literal to this buffer.    *    *<p>For example, calling<code>literal(&quot;can't&quot;)</code>    * would convert the buffer    *<blockquote><code>SELECT</code></blockquote>    * to    *<blockquote><code>SELECT 'can''t'</code></blockquote>    *    * @param s String to append    * @return This buffer    */
 specifier|public
 name|SqlBuilder
 name|literal
@@ -420,7 +420,7 @@ return|return
 name|this
 return|;
 block|}
-comment|/**      * Appends a timestamp literal to this buffer.      *      * @param timestamp Timestamp to append      * @return This buffer      */
+comment|/**    * Appends a timestamp literal to this buffer.    *    * @param timestamp Timestamp to append    * @return This buffer    */
 specifier|public
 name|SqlBuilder
 name|literal
@@ -451,7 +451,7 @@ return|return
 name|this
 return|;
 block|}
-comment|/**      * Returns the index within this string of the first occurrence of the      * specified substring.      *      * @see StringBuilder#indexOf(String)      */
+comment|/**    * Returns the index within this string of the first occurrence of the    * specified substring.    *    * @see StringBuilder#indexOf(String)    */
 specifier|public
 name|int
 name|indexOf
@@ -469,7 +469,7 @@ name|str
 argument_list|)
 return|;
 block|}
-comment|/**      * Returns the index within this string of the first occurrence of the      * specified substring, starting at the specified index.      *      * @see StringBuilder#indexOf(String, int)      */
+comment|/**    * Returns the index within this string of the first occurrence of the    * specified substring, starting at the specified index.    *    * @see StringBuilder#indexOf(String, int)    */
 specifier|public
 name|int
 name|indexOf
@@ -492,7 +492,7 @@ name|fromIndex
 argument_list|)
 return|;
 block|}
-comment|/**      * Inserts the string into this character sequence.      *      * @see StringBuilder#insert(int, String)      */
+comment|/**    * Inserts the string into this character sequence.    *    * @see StringBuilder#insert(int, String)    */
 specifier|public
 name|SqlBuilder
 name|insert

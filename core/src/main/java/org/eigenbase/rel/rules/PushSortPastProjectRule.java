@@ -125,7 +125,7 @@ name|PushSortPastProjectRule
 argument_list|()
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a PushSortPastProjectRule.      */
+comment|/**    * Creates a PushSortPastProjectRule.    */
 specifier|private
 name|PushSortPastProjectRule
 parameter_list|()

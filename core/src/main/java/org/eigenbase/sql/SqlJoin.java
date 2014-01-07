@@ -47,7 +47,7 @@ name|LEFT_OPERAND
 init|=
 literal|0
 decl_stmt|;
-comment|/**      * Operand says whether this is a natural join. Must be constant TRUE or      * FALSE.      */
+comment|/**    * Operand says whether this is a natural join. Must be constant TRUE or    * FALSE.    */
 specifier|public
 specifier|static
 specifier|final
@@ -56,7 +56,7 @@ name|IS_NATURAL_OPERAND
 init|=
 literal|1
 decl_stmt|;
-comment|/**      * Value must be a {@link SqlLiteral}, one of the integer codes for {@link      * SqlJoinOperator.JoinType}.      */
+comment|/**    * Value must be a {@link SqlLiteral}, one of the integer codes for {@link    * SqlJoinOperator.JoinType}.    */
 specifier|public
 specifier|static
 specifier|final
@@ -73,7 +73,7 @@ name|RIGHT_OPERAND
 init|=
 literal|3
 decl_stmt|;
-comment|/**      * Value must be a {@link SqlLiteral}, one of the integer codes for {@link      * SqlJoinOperator.ConditionType}.      */
+comment|/**    * Value must be a {@link SqlLiteral}, one of the integer codes for {@link    * SqlJoinOperator.ConditionType}.    */
 specifier|public
 specifier|static
 specifier|final
@@ -129,7 +129,7 @@ name|CONDITION_OPERAND
 index|]
 return|;
 block|}
-comment|/**      * Returns a {@link SqlJoinOperator.ConditionType}      *      * @post return != null      */
+comment|/**    * Returns a {@link SqlJoinOperator.ConditionType}    *    * @post return != null    */
 specifier|public
 specifier|final
 name|SqlJoinOperator
@@ -155,7 +155,7 @@ index|]
 argument_list|)
 return|;
 block|}
-comment|/**      * Returns a {@link SqlJoinOperator.JoinType}      *      * @post return != null      */
+comment|/**    * Returns a {@link SqlJoinOperator.JoinType}    *    * @post return != null    */
 specifier|public
 specifier|final
 name|SqlJoinOperator

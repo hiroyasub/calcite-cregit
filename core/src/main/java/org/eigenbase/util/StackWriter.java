@@ -45,7 +45,7 @@ extends|extends
 name|FilterWriter
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
-comment|/**      * directive for increasing the indentation level      */
+comment|/**    * directive for increasing the indentation level    */
 specifier|public
 specifier|static
 specifier|final
@@ -54,7 +54,7 @@ name|INDENT
 init|=
 literal|0xF0000001
 decl_stmt|;
-comment|/**      * directive for decreasing the indentation level      */
+comment|/**    * directive for decreasing the indentation level    */
 specifier|public
 specifier|static
 specifier|final
@@ -63,7 +63,7 @@ name|OUTDENT
 init|=
 literal|0xF0000002
 decl_stmt|;
-comment|/**      * directive for beginning an SQL string literal      */
+comment|/**    * directive for beginning an SQL string literal    */
 specifier|public
 specifier|static
 specifier|final
@@ -72,7 +72,7 @@ name|OPEN_SQL_STRING_LITERAL
 init|=
 literal|0xF0000003
 decl_stmt|;
-comment|/**      * directive for ending an SQL string literal      */
+comment|/**    * directive for ending an SQL string literal    */
 specifier|public
 specifier|static
 specifier|final
@@ -81,7 +81,7 @@ name|CLOSE_SQL_STRING_LITERAL
 init|=
 literal|0xF0000004
 decl_stmt|;
-comment|/**      * directive for beginning an SQL identifier      */
+comment|/**    * directive for beginning an SQL identifier    */
 specifier|public
 specifier|static
 specifier|final
@@ -90,7 +90,7 @@ name|OPEN_SQL_IDENTIFIER
 init|=
 literal|0xF0000005
 decl_stmt|;
-comment|/**      * directive for ending an SQL identifier      */
+comment|/**    * directive for ending an SQL identifier    */
 specifier|public
 specifier|static
 specifier|final
@@ -99,7 +99,7 @@ name|CLOSE_SQL_IDENTIFIER
 init|=
 literal|0xF0000006
 decl_stmt|;
-comment|/**      * tab indentation      */
+comment|/**    * tab indentation    */
 specifier|public
 specifier|static
 specifier|final
@@ -108,7 +108,7 @@ name|INDENT_TAB
 init|=
 literal|"\t"
 decl_stmt|;
-comment|/**      * four-space indentation      */
+comment|/**    * four-space indentation    */
 specifier|public
 specifier|static
 specifier|final
@@ -159,7 +159,7 @@ name|LinkedList
 name|quoteStack
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a new StackWriter on top of an existing Writer, with the      * specified string to be used for each level of indentation.      *      * @param writer underyling writer      * @param indentation indentation unit such as {@link #INDENT_TAB} or {@link      * #INDENT_SPACE4}      */
+comment|/**    * Creates a new StackWriter on top of an existing Writer, with the    * specified string to be used for each level of indentation.    *    * @param writer      underyling writer    * @param indentation indentation unit such as {@link #INDENT_TAB} or {@link    *                    #INDENT_SPACE4}    */
 specifier|public
 name|StackWriter
 parameter_list|(
@@ -602,7 +602,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Writes an SQL string literal.      *      * @param pw PrintWriter on which to write      * @param s text of literal      */
+comment|/**    * Writes an SQL string literal.    *    * @param pw PrintWriter on which to write    * @param s  text of literal    */
 specifier|public
 specifier|static
 name|void
@@ -637,7 +637,7 @@ name|CLOSE_SQL_STRING_LITERAL
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Writes an SQL identifier.      *      * @param pw PrintWriter on which to write      * @param s identifier      */
+comment|/**    * Writes an SQL identifier.    *    * @param pw PrintWriter on which to write    * @param s  identifier    */
 specifier|public
 specifier|static
 name|void

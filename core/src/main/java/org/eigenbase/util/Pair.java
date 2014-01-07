@@ -80,7 +80,7 @@ name|T2
 name|right
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a Pair.      *      * @param left left value      * @param right right value      */
+comment|/**    * Creates a Pair.    *    * @param left  left value    * @param right right value    */
 specifier|public
 name|Pair
 parameter_list|(
@@ -104,7 +104,7 @@ operator|=
 name|right
 expr_stmt|;
 block|}
-comment|/**      * Creates a Pair of appropriate type.      *      *<p>This is a shorthand that allows you to omit implicit types. For      * example, you can write:      *<blockquote>return Pair.of(s, n);</blockquote>      * instead of      *<blockquote>return new Pair&lt;String, Integer&gt;(s, n);</blockquote>      *      * @param left left value      * @param right right value      * @return A Pair      */
+comment|/**    * Creates a Pair of appropriate type.    *    *<p>This is a shorthand that allows you to omit implicit types. For    * example, you can write:    *<blockquote>return Pair.of(s, n);</blockquote>    * instead of    *<blockquote>return new Pair&lt;String, Integer&gt;(s, n);</blockquote>    *    * @param left  left value    * @param right right value    * @return A Pair    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -340,7 +340,7 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
-comment|/**      * Compares a pair of comparable values of the same type. Null collates      * less than everything else, but equal to itself.      *      * @param c1 First value      * @param c2 Second value      * @return  a negative integer, zero, or a positive integer if c1      *          is less than, equal to, or greater than c2.      */
+comment|/**    * Compares a pair of comparable values of the same type. Null collates    * less than everything else, but equal to itself.    *    * @param c1 First value    * @param c2 Second value    * @return a negative integer, zero, or a positive integer if c1    * is less than, equal to, or greater than c2.    */
 specifier|private
 specifier|static
 parameter_list|<
@@ -410,7 +410,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**      * Converts a collection of Pairs into a Map.      *      *<p>This is an obvious thing to do because Pair is similar in structure to      * {@link java.util.Map.Entry}.      *      *<p>The map contains a copy of the collection of Pairs; if you change the      * collection, the map does not change.      *      * @param pairs Collection of Pair objects      *      * @return map with the same contents as the collection      */
+comment|/**    * Converts a collection of Pairs into a Map.    *    *<p>This is an obvious thing to do because Pair is similar in structure to    * {@link java.util.Map.Entry}.    *    *<p>The map contains a copy of the collection of Pairs; if you change the    * collection, the map does not change.    *    * @param pairs Collection of Pair objects    * @return map with the same contents as the collection    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -486,7 +486,7 @@ return|return
 name|map
 return|;
 block|}
-comment|/**      * Converts two lists into a list of {@link org.eigenbase.util.Pair}s,      * whose length is the lesser of the lengths of the      * source lists.</p>      *      * @param ks Left list      * @param vs Right list      * @return List of pairs      *      * @see net.hydromatic.linq4j.Ord#zip(java.util.List)      */
+comment|/**    * Converts two lists into a list of {@link org.eigenbase.util.Pair}s,    * whose length is the lesser of the lengths of the    * source lists.</p>    *    * @param ks Left list    * @param vs Right list    * @return List of pairs    * @see net.hydromatic.linq4j.Ord#zip(java.util.List)    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -529,7 +529,7 @@ literal|false
 argument_list|)
 return|;
 block|}
-comment|/**      * Converts two lists into a list of {@link Pair}s.      *      *<p>The length of the combined list is the lesser of the lengths of the      * source lists. But typically the source lists will be the same length.</p>      *      * @param ks Left list      * @param vs Right list      * @param strict Whether to fail if lists have different size      * @return List of pairs      *      * @see net.hydromatic.linq4j.Ord#zip(java.util.List)      */
+comment|/**    * Converts two lists into a list of {@link Pair}s.    *    *<p>The length of the combined list is the lesser of the lengths of the    * source lists. But typically the source lists will be the same length.</p>    *    * @param ks     Left list    * @param vs     Right list    * @param strict Whether to fail if lists have different size    * @return List of pairs    * @see net.hydromatic.linq4j.Ord#zip(java.util.List)    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -681,7 +681,7 @@ block|}
 block|}
 return|;
 block|}
-comment|/**      * Converts two iterables into an iterable of {@link Pair}s.      *      *<p>The resulting iterator ends whenever the first of the input iterators      * ends. But typically the source iterators will be the same length.</p>      *      * @param ks Left iterable      * @param vs Right iterable      * @return Iterable over pairs      */
+comment|/**    * Converts two iterables into an iterable of {@link Pair}s.    *    *<p>The resulting iterator ends whenever the first of the input iterators    * ends. But typically the source iterators will be the same length.</p>    *    * @param ks Left iterable    * @param vs Right iterable    * @return Iterable over pairs    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -844,7 +844,7 @@ block|}
 block|}
 return|;
 block|}
-comment|/**      * Converts two arrays into a list of {@link Pair}s.      *      *<p>The length of the combined list is the lesser of the lengths of the      * source arrays. But typically the source arrays will be the same      * length.</p>      *      * @param ks Left array      * @param vs Right array      * @return List of pairs      */
+comment|/**    * Converts two arrays into a list of {@link Pair}s.    *    *<p>The length of the combined list is the lesser of the lengths of the    * source arrays. But typically the source arrays will be the same    * length.</p>    *    * @param ks Left array    * @param vs Right array    * @return List of pairs    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -940,7 +940,7 @@ block|}
 block|}
 return|;
 block|}
-comment|/**      * Returns an iterable over the left slice of an iterable.      *      * @param iterable Iterable over pairs      * @param<L> Left type      * @param<R> Right type      * @return Iterable over the left elements      */
+comment|/**    * Returns an iterable over the left slice of an iterable.    *    * @param iterable Iterable over pairs    * @param<L>      Left type    * @param<R>      Right type    * @return Iterable over the left elements    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -1060,7 +1060,7 @@ block|}
 block|}
 return|;
 block|}
-comment|/**      * Returns an iterable over the right slice of an iterable.      *      * @param iterable Iterable over pairs      * @param<L> right type      * @param<R> Right type      * @return Iterable over the right elements      */
+comment|/**    * Returns an iterable over the right slice of an iterable.    *    * @param iterable Iterable over pairs    * @param<L>      right type    * @param<R>      Right type    * @return Iterable over the right elements    */
 specifier|public
 specifier|static
 parameter_list|<

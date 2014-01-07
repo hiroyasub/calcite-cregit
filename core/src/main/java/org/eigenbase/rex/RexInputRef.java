@@ -90,7 +90,7 @@ literal|30
 argument_list|)
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates an input variable.      *      * @param index Index of the field in the underlying rowtype      * @param type Type of the column      */
+comment|/**    * Creates an input variable.    *    * @param index Index of the field in the underlying rowtype    * @param type  Type of the column    */
 specifier|public
 name|RexInputRef
 parameter_list|(
@@ -115,7 +115,7 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/** Creates a reference to a given field in a row type. */
+comment|/**    * Creates a reference to a given field in a row type.    */
 specifier|public
 specifier|static
 name|RexInputRef
@@ -140,7 +140,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/** Creates a reference to a given field in a list of fields. */
+comment|/**    * Creates a reference to a given field in a list of fields.    */
 specifier|public
 specifier|static
 name|RexInputRef
@@ -174,7 +174,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/** Creates a reference to a given field in a list of fields. */
+comment|/**    * Creates a reference to a given field in a list of fields.    */
 specifier|public
 specifier|static
 name|Pair
@@ -278,7 +278,7 @@ name|this
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates a name for an input reference, of the form "$index". If the index      * is low, uses a cache of common names, to reduce gc.      */
+comment|/**    * Creates a name for an input reference, of the form "$index". If the index    * is low, uses a cache of common names, to reduce gc.    */
 specifier|public
 specifier|static
 name|String

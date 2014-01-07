@@ -84,7 +84,7 @@ index|[]
 name|rules
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a FallbackCascade from an array of rules      *      * @pre null!=rules      * @pre null!=rules[i]      * @pre rules.length> 0      */
+comment|/**    * Creates a FallbackCascade from an array of rules    *    * @pre null!=rules    * @pre null!=rules[i]    * @pre rules.length> 0    */
 specifier|public
 name|SqlReturnTypeInferenceChain
 parameter_list|(
@@ -156,7 +156,7 @@ operator|=
 name|rules
 expr_stmt|;
 block|}
-comment|/**      * Creates a FallbackCascade from two rules      */
+comment|/**    * Creates a FallbackCascade from two rules    */
 specifier|public
 name|SqlReturnTypeInferenceChain
 parameter_list|(

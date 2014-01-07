@@ -137,7 +137,7 @@ name|ImmutableIntList
 name|rightKeys
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * @param cluster cluster that join belongs to      * @param left left join input      * @param right right join input      * @param condition join condition      * @param leftKeys left keys of the semijoin      * @param rightKeys right keys of the semijoin      */
+comment|/**    * @param cluster   cluster that join belongs to    * @param left      left join input    * @param right     right join input    * @param condition join condition    * @param leftKeys  left keys of the semijoin    * @param rightKeys right keys of the semijoin    */
 specifier|public
 name|SemiJoinRel
 parameter_list|(
@@ -302,7 +302,7 @@ name|condition
 argument_list|)
 return|;
 block|}
-comment|/**      * @return returns rowtype representing only the left join input      */
+comment|/**    * @return returns rowtype representing only the left join input    */
 specifier|public
 name|RelDataType
 name|deriveRowType

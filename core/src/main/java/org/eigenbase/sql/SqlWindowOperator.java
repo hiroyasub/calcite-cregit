@@ -126,7 +126,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * An operator describing a window specification.  *  *<p>Operands are as follows:  *  *<ul>  *<li>0: name of referenced window ({@link SqlIdentifier})</li>  *<li>1: partition clause ({@link SqlNodeList})</li>  *<li>2: order clause ({@link SqlNodeList})</li>  *<li>3: isRows ({@link SqlLiteral})</li>  *<li>4: lowerBound ({@link SqlNode})</li>  *<li>5: upperBound ({@link SqlNode})</li>  *</ul>  *  * All operands are optional.</p>  */
+comment|/**  * An operator describing a window specification.  *  *<p>Operands are as follows:</p>  *  *<ul>  *<li>0: name of referenced window ({@link SqlIdentifier})</li>  *<li>1: partition clause ({@link SqlNodeList})</li>  *<li>2: order clause ({@link SqlNodeList})</li>  *<li>3: isRows ({@link SqlLiteral})</li>  *<li>4: lowerBound ({@link SqlNode})</li>  *<li>5: upperBound ({@link SqlNode})</li>  *</ul>  *  *<p>All operands are optional.</p>  */
 end_comment
 
 begin_class
@@ -137,7 +137,7 @@ extends|extends
 name|SqlOperator
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
-comment|/**      * The FOLLOWING operator used exclusively in a window specification.      */
+comment|/**    * The FOLLOWING operator used exclusively in a window specification.    */
 specifier|static
 specifier|final
 name|SqlPostfixOperator
@@ -161,7 +161,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      * The PRECEDING operator used exclusively in a window specification.      */
+comment|/**    * The PRECEDING operator used exclusively in a window specification.    */
 specifier|static
 specifier|final
 name|SqlPostfixOperator
@@ -186,7 +186,7 @@ literal|null
 argument_list|)
 decl_stmt|;
 comment|//~ Enums ------------------------------------------------------------------
-comment|/**      * An enumeration of types of bounds in a window:<code>CURRENT ROW</code>,      *<code>UNBOUNDED PRECEDING</code>, and<code>UNBOUNDED FOLLOWING</code>.      */
+comment|/**    * An enumeration of types of bounds in a window:<code>CURRENT ROW</code>,    *<code>UNBOUNDED PRECEDING</code>, and<code>UNBOUNDED FOLLOWING</code>.    */
 enum|enum
 name|Bound
 implements|implements
@@ -236,7 +236,7 @@ return|return
 name|sql
 return|;
 block|}
-comment|/** Creates a parse-tree node representing an occurrence of this bound          * type at a particular position in the parsed text. */
+comment|/**      * Creates a parse-tree node representing an occurrence of this bound      * type at a particular position in the parsed text.      */
 specifier|public
 name|SqlNode
 name|symbol
@@ -1782,7 +1782,7 @@ argument_list|)
 operator|)
 condition|)
 block|{
-comment|// true==throw if not exact (we just tested that - right?)
+comment|// true == throw if not exact (we just tested that - right?)
 throw|throw
 name|validator
 operator|.
@@ -2395,7 +2395,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**      * This method retrieves the list of columns for the current table then      * walks through the list looking for a column that is monotonic (sorted)      */
+comment|/**    * This method retrieves the list of columns for the current table then    * walks through the list looking for a column that is monotonic (sorted)    */
 specifier|private
 specifier|static
 name|boolean
@@ -2473,7 +2473,7 @@ return|return
 literal|false
 return|;
 block|}
-comment|/**      * Creates a window<code>(RANGE<i>columnName</i> CURRENT ROW)</code>.      *      * @param columnName Order column      */
+comment|/**    * Creates a window<code>(RANGE<i>columnName</i> CURRENT ROW)</code>.    *    * @param columnName Order column    */
 specifier|public
 name|SqlWindow
 name|createCurrentRowWindow
@@ -2568,7 +2568,7 @@ name|ZERO
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates a window<code>(RANGE<i>columnName</i> UNBOUNDED      * PRECEDING)</code>.      *      * @param columnName Order column      */
+comment|/**    * Creates a window<code>(RANGE<i>columnName</i> UNBOUNDED    * PRECEDING)</code>.    *    * @param columnName Order column    */
 specifier|public
 name|SqlWindow
 name|createUnboundedPrecedingWindow
@@ -2782,7 +2782,7 @@ return|return
 name|range
 return|;
 block|}
-comment|/**      * Returns whether an expression represents the "CURRENT ROW" bound.      */
+comment|/**    * Returns whether an expression represents the "CURRENT ROW" bound.    */
 specifier|public
 specifier|static
 name|boolean
@@ -2813,7 +2813,7 @@ name|CURRENT_ROW
 operator|)
 return|;
 block|}
-comment|/**      * Returns whether an expression represents the "UNBOUNDED PRECEDING" bound.      */
+comment|/**    * Returns whether an expression represents the "UNBOUNDED PRECEDING" bound.    */
 specifier|public
 specifier|static
 name|boolean
@@ -2844,7 +2844,7 @@ name|UNBOUNDED_PRECEDING
 operator|)
 return|;
 block|}
-comment|/**      * Returns whether an expression represents the "UNBOUNDED FOLLOWING" bound.      */
+comment|/**    * Returns whether an expression represents the "UNBOUNDED FOLLOWING" bound.    */
 specifier|public
 specifier|static
 name|boolean
@@ -2875,7 +2875,7 @@ name|UNBOUNDED_FOLLOWING
 operator|)
 return|;
 block|}
-comment|/**      * Converts a pair of bounds into a (range, offset) pair.      *      *<p>If the upper bound is unbounded, returns null, since that cannot be      * represented as a (range, offset) pair. (The offset would be +infinity,      * but what would the range be?)      *      * @param lowerBound Lower bound      * @param upperBound Upper bound      * @param physical Whether interval is physical (rows), as opposed to      * logical (values)      *      * @return range-offset pair, or null      */
+comment|/**    * Converts a pair of bounds into a (range, offset) pair.    *    *<p>If the upper bound is unbounded, returns null, since that cannot be    * represented as a (range, offset) pair. (The offset would be +infinity,    * but what would the range be?)    *    * @param lowerBound Lower bound    * @param upperBound Upper bound    * @param physical   Whether interval is physical (rows), as opposed to    *                   logical (values)    * @return range-offset pair, or null    */
 specifier|public
 specifier|static
 name|OffsetRange
@@ -2984,7 +2984,7 @@ name|range
 argument_list|)
 return|;
 block|}
-comment|/**      * Decodes a node, representing an upper or lower bound to a window, into a      * range offset. For example, '3 FOLLOWING' is 3, '3 PRECEDING' is -3, and      * 'UNBOUNDED PRECEDING' or 'UNBOUNDED FOLLOWING' is null.      *      * @param node Node representing window bound      * @param op Either {@link #precedingOperator} or {@link #followingOperator}      *      * @return range      */
+comment|/**    * Decodes a node, representing an upper or lower bound to a window, into a    * range offset. For example, '3 FOLLOWING' is 3, '3 PRECEDING' is -3, and    * 'UNBOUNDED PRECEDING' or 'UNBOUNDED FOLLOWING' is null.    *    * @param node Node representing window bound    * @param op   Either {@link #precedingOperator} or {@link #followingOperator}    * @return range    */
 specifier|private
 specifier|static
 name|ValSign

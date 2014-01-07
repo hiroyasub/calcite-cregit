@@ -154,7 +154,7 @@ extends|extends
 name|RelOptRule
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
-comment|/**      * The singleton.      */
+comment|/**    * The singleton.    */
 specifier|public
 specifier|static
 specifier|final
@@ -166,7 +166,7 @@ name|RemoveDistinctAggregateRule
 argument_list|()
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Private constructor.      */
+comment|/**    * Private constructor.    */
 specifier|private
 name|RemoveDistinctAggregateRule
 parameter_list|()
@@ -638,7 +638,7 @@ name|rel
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Converts an aggregrate relational expression which contains just one      * distinct aggregate function (or perhaps several over the same arguments)      * and no non-distinct aggregate functions.      */
+comment|/**    * Converts an aggregrate relational expression which contains just one    * distinct aggregate function (or perhaps several over the same arguments)    * and no non-distinct aggregate functions.    */
 specifier|private
 name|RelNode
 name|convertMonopole
@@ -751,7 +751,7 @@ return|return
 name|newAggregate
 return|;
 block|}
-comment|/**      * Converts all distinct aggregate calls to a given set of arguments.      *      *<p>This method is called several times, one for each set of arguments.      * Each time it is called, it generates a JOIN to a new SELECT DISTINCT      * relational expression, and modifies the set of top-level calls.      *      * @param aggregate Original aggregate      * @param left Child relational expression (either the original aggregate,      * the output from the previous call to this method, or null in the case      * where we're converting the first distinct aggregate in a query with no      * non-distinct aggregates)      * @param argList Arguments to the distinct aggregate function      * @param refs Array of expressions which will be the projected by the      * result of this rule. Those relating to this arg list will be modified      *      * @return Relational expression      */
+comment|/**    * Converts all distinct aggregate calls to a given set of arguments.    *    *<p>This method is called several times, one for each set of arguments.    * Each time it is called, it generates a JOIN to a new SELECT DISTINCT    * relational expression, and modifies the set of top-level calls.    *    * @param aggregate Original aggregate    * @param left      Child relational expression (either the original    *                  aggregate, the output from the previous call to this    *                  method, or null in the case where we're converting the    *                  first distinct aggregate in a query with no non-distinct    *                  aggregates)    * @param argList   Arguments to the distinct aggregate function    * @param refs      Array of expressions which will be the projected by the    *                  result of this rule. Those relating to this arg list will    *                  be modified    * @return Relational expression    */
 specifier|private
 name|RelNode
 name|doRewrite
@@ -1557,7 +1557,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Given an {@link AggregateRel} and the ordinals of the arguments to a      * particular call to an aggregate function, creates a 'select distinct'      * relational expression which projects the group columns and those      * arguments but nothing else.      *      *<p>For example, given      *      *<blockquote>      *<pre>select f0, count(distinct f1), count(distinct f2)      * from t group by f0</pre>      *</blockquote>      *      * and the arglist      *      *<blockquote>{2}</blockquote>      *      * returns      *      *<blockquote>      *<pre>select distinct f0, f2 from t</pre>      *</blockquote>      *      * '      *      *<p>The<code>sourceOf</code> map is populated with the source of each      * column; in this case sourceOf.get(0) = 0, and sourceOf.get(1) = 2.</p>      *      * @param aggregate Aggregate relational expression      * @param argList Ordinals of columns to distinctify      * @param sourceOf Out parameter, is populated with a map of where each      *     output field came from      *      * @return Aggregate relational expression which projects the required      * columns      */
+comment|/**    * Given an {@link AggregateRel} and the ordinals of the arguments to a    * particular call to an aggregate function, creates a 'select distinct'    * relational expression which projects the group columns and those    * arguments but nothing else.    *    *<p>For example, given    *    *<blockquote>    *<pre>select f0, count(distinct f1), count(distinct f2)    * from t group by f0</pre>    *</blockquote>    *    * and the arglist    *    *<blockquote>{2}</blockquote>    *    * returns    *    *<blockquote>    *<pre>select distinct f0, f2 from t</pre>    *</blockquote>    *    * '    *    *<p>The<code>sourceOf</code> map is populated with the source of each    * column; in this case sourceOf.get(0) = 0, and sourceOf.get(1) = 2.</p>    *    * @param aggregate Aggregate relational expression    * @param argList   Ordinals of columns to distinctify    * @param sourceOf  Out parameter, is populated with a map of where each    *                  output field came from    * @return Aggregate relational expression which projects the required    * columns    */
 specifier|private
 specifier|static
 name|AggregateRel

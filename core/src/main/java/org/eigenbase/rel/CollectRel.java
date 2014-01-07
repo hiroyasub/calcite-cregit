@@ -80,7 +80,7 @@ name|String
 name|fieldName
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a CollectRel.      *      * @param cluster Cluster      * @param child Child relational expression      * @param fieldName Name of the sole output field      */
+comment|/**    * Creates a CollectRel.    *    * @param cluster   Cluster    * @param child     Child relational expression    * @param fieldName Name of the sole output field    */
 specifier|public
 name|CollectRel
 parameter_list|(
@@ -117,7 +117,7 @@ operator|=
 name|fieldName
 expr_stmt|;
 block|}
-comment|/** Creates a CollectRel by parsing serialized output. */
+comment|/**    * Creates a CollectRel by parsing serialized output.    */
 specifier|public
 name|CollectRel
 parameter_list|(
@@ -215,7 +215,7 @@ name|fieldName
 argument_list|)
 return|;
 block|}
-comment|/**      * Returns the name of the sole output field.      *      * @return name of the sole output field      */
+comment|/**    * Returns the name of the sole output field.    *    * @return name of the sole output field    */
 specifier|public
 name|String
 name|getFieldName
@@ -241,7 +241,7 @@ name|fieldName
 argument_list|)
 return|;
 block|}
-comment|/**      * Derives the output type of a collect relational expression.      *      * @param rel relational expression      * @param fieldName name of sole output field      *      * @return output type of a collect relational expression      */
+comment|/**    * Derives the output type of a collect relational expression.    *    * @param rel       relational expression    * @param fieldName name of sole output field    * @return output type of a collect relational expression    */
 specifier|public
 specifier|static
 name|RelDataType

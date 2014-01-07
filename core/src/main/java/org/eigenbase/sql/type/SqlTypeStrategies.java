@@ -97,7 +97,7 @@ specifier|abstract
 class|class
 name|SqlTypeStrategies
 block|{
-comment|/** Creates a checker that passes if each operand is a member of a      * corresponding family. */
+comment|/**    * Creates a checker that passes if each operand is a member of a    * corresponding family.    */
 specifier|public
 specifier|static
 name|FamilyOperandTypeChecker
@@ -121,7 +121,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/** Creates a checker that passes if each operand is a member of a      * corresponding family. */
+comment|/**    * Creates a checker that passes if each operand is a member of a    * corresponding family.    */
 specifier|public
 specifier|static
 name|FamilyOperandTypeChecker
@@ -142,7 +142,7 @@ name|families
 argument_list|)
 return|;
 block|}
-comment|/** Creates a checker that passes if any one of the rules passes. */
+comment|/**    * Creates a checker that passes if any one of the rules passes.    */
 specifier|public
 specifier|static
 name|SqlSingleOperandTypeChecker
@@ -172,7 +172,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/** Creates a checker that passes if any one of the rules passes. */
+comment|/**    * Creates a checker that passes if any one of the rules passes.    */
 specifier|public
 specifier|static
 name|SqlSingleOperandTypeChecker
@@ -206,7 +206,7 @@ comment|// ---------------------------------------------------------------------
 comment|// SqlOperandTypeChecker definitions
 comment|// ----------------------------------------------------------------------
 comment|//~ Static fields/initializers ---------------------------------------------
-comment|/**      * Operand type-checking strategy for an operator which takes no operands.      */
+comment|/**    * Operand type-checking strategy for an operator which takes no operands.    */
 specifier|public
 specifier|static
 specifier|final
@@ -216,7 +216,7 @@ init|=
 name|family
 argument_list|()
 decl_stmt|;
-comment|/**      * Operand type-checking strategy for an operator with no restrictions on      * number or type of operands.      */
+comment|/**    * Operand type-checking strategy for an operator with no restrictions on    * number or type of operands.    */
 specifier|public
 specifier|static
 specifier|final
@@ -471,7 +471,7 @@ name|MAP
 argument_list|)
 argument_list|)
 decl_stmt|;
-comment|/**      * Operand type-checking strategy where type must be a literal or NULL.      */
+comment|/**    * Operand type-checking strategy where type must be a literal or NULL.    */
 specifier|public
 specifier|static
 specifier|final
@@ -484,7 +484,7 @@ argument_list|(
 literal|true
 argument_list|)
 decl_stmt|;
-comment|/**      * Operand type-checking strategy type must be a non-NULL literal.      */
+comment|/**    * Operand type-checking strategy type must be a non-NULL literal.    */
 specifier|public
 specifier|static
 specifier|final
@@ -497,7 +497,7 @@ argument_list|(
 literal|false
 argument_list|)
 decl_stmt|;
-comment|/**      * Operand type-checking strategy type must be a positive integer non-NULL      * literal.      */
+comment|/**    * Operand type-checking strategy type must be a positive integer non-NULL    * literal.    */
 specifier|public
 specifier|static
 specifier|final
@@ -643,7 +643,7 @@ return|;
 block|}
 block|}
 decl_stmt|;
-comment|/**      * Operand type-checking strategy where two operands must both be in the      * same type family.      */
+comment|/**    * Operand type-checking strategy where two operands must both be in the    * same type family.    */
 specifier|public
 specifier|static
 specifier|final
@@ -656,7 +656,7 @@ argument_list|(
 literal|2
 argument_list|)
 decl_stmt|;
-comment|/**      * Operand type-checking strategy where three operands must all be in the      * same type family.      */
+comment|/**    * Operand type-checking strategy where three operands must all be in the    * same type family.    */
 specifier|public
 specifier|static
 specifier|final
@@ -669,7 +669,7 @@ argument_list|(
 literal|3
 argument_list|)
 decl_stmt|;
-comment|/**      * Operand type-checking strategy where any number of operands must all be      * in the same type family.      */
+comment|/**    * Operand type-checking strategy where any number of operands must all be    * in the same type family.    */
 specifier|public
 specifier|static
 specifier|final
@@ -683,7 +683,7 @@ operator|-
 literal|1
 argument_list|)
 decl_stmt|;
-comment|/**      * Operand type-checking strategy where operand types must allow ordered      * comparisons.      */
+comment|/**    * Operand type-checking strategy where operand types must allow ordered    * comparisons.    */
 specifier|public
 specifier|static
 specifier|final
@@ -700,7 +700,7 @@ operator|.
 name|All
 argument_list|)
 decl_stmt|;
-comment|/**      * Operand type-checking strategy where operand type must allow ordered      * comparisons. Used when instance comparisons are made on single operand      * functions      */
+comment|/**    * Operand type-checking strategy where operand type must allow ordered    * comparisons. Used when instance comparisons are made on single operand    * functions    */
 specifier|public
 specifier|static
 specifier|final
@@ -717,7 +717,7 @@ operator|.
 name|All
 argument_list|)
 decl_stmt|;
-comment|/**      * Operand type-checking strategy where operand types must allow unordered      * comparisons.      */
+comment|/**    * Operand type-checking strategy where operand types must allow unordered    * comparisons.    */
 specifier|public
 specifier|static
 specifier|final
@@ -734,7 +734,7 @@ operator|.
 name|Unordered
 argument_list|)
 decl_stmt|;
-comment|/**      * Operand type-checking strategy where two operands must both be in the      * same string type family.      */
+comment|/**    * Operand type-checking strategy where two operands must both be in the    * same string type family.    */
 specifier|public
 specifier|static
 specifier|final
@@ -759,7 +759,7 @@ argument_list|,
 name|otcSameX2
 argument_list|)
 decl_stmt|;
-comment|/**      * Operand type-checking strategy where three operands must all be in the      * same string type family.      */
+comment|/**    * Operand type-checking strategy where three operands must all be in the    * same string type family.    */
 specifier|public
 specifier|static
 specifier|final
@@ -864,7 +864,7 @@ operator|.
 name|ANY
 argument_list|)
 decl_stmt|;
-comment|/**      * Parameter type-checking strategy type must a nullable time interval,      * nullable time interval      */
+comment|/**    * Parameter type-checking strategy type must a nullable time interval,    * nullable time interval    */
 specifier|public
 specifier|static
 specifier|final
@@ -978,7 +978,7 @@ argument_list|,
 name|otcIntervalDatetime
 argument_list|)
 decl_stmt|;
-comment|/**      * Type checking strategy for the "*" operator      */
+comment|/**    * Type checking strategy for the "*" operator    */
 specifier|public
 specifier|static
 specifier|final
@@ -996,7 +996,7 @@ argument_list|,
 name|otcNumericInterval
 argument_list|)
 decl_stmt|;
-comment|/**      * Type checking strategy for the "/" operator      */
+comment|/**    * Type checking strategy for the "/" operator    */
 specifier|public
 specifier|static
 specifier|final
@@ -1370,7 +1370,7 @@ operator|new
 name|MultisetOperandTypeChecker
 argument_list|()
 decl_stmt|;
-comment|/**      * Operand type-checking strategy for a set operator (UNION, INTERSECT,      * EXCEPT).      */
+comment|/**    * Operand type-checking strategy for a set operator (UNION, INTERSECT,    * EXCEPT).    */
 specifier|public
 specifier|static
 specifier|final
@@ -1569,7 +1569,7 @@ decl_stmt|;
 comment|// ----------------------------------------------------------------------
 comment|// SqlReturnTypeInference definitions
 comment|// ----------------------------------------------------------------------
-comment|/**      * Type-inference strategy whereby the result type of a call is the type of      * the first operand.      */
+comment|/**    * Type-inference strategy whereby the result type of a call is the type of    * the first operand.    */
 specifier|public
 specifier|static
 specifier|final
@@ -1582,7 +1582,7 @@ argument_list|(
 literal|0
 argument_list|)
 decl_stmt|;
-comment|/**      * Type-inference strategy whereby the result type of a call is the type of      * the first operand, with nulls always allowed.      */
+comment|/**    * Type-inference strategy whereby the result type of a call is the type of    * the first operand, with nulls always allowed.    */
 specifier|public
 specifier|static
 specifier|final
@@ -1599,7 +1599,7 @@ operator|.
 name|forceNullable
 argument_list|)
 decl_stmt|;
-comment|/**      * Type-inference strategy whereby the result type of a call is the type of      * the first operand. If any of the other operands are nullable the returned      * type will also be nullable.      */
+comment|/**    * Type-inference strategy whereby the result type of a call is the type of    * the first operand. If any of the other operands are nullable the returned    * type will also be nullable.    */
 specifier|public
 specifier|static
 specifier|final
@@ -1651,7 +1651,7 @@ operator|.
 name|toNullable
 argument_list|)
 decl_stmt|;
-comment|/**      * Type-inference strategy whereby the result type of a call is VARYING the      * type of the first argument. The length returned is the same as length of      * the first argument. If any of the other operands are nullable the      * returned type will also be nullable. First Arg must be of string type.      */
+comment|/**    * Type-inference strategy whereby the result type of a call is VARYING the    * type of the first argument. The length returned is the same as length of    * the first argument. If any of the other operands are nullable the    * returned type will also be nullable. First Arg must be of string type.    */
 specifier|public
 specifier|static
 specifier|final
@@ -1672,7 +1672,7 @@ operator|.
 name|toVarying
 argument_list|)
 decl_stmt|;
-comment|/**      * Type-inference strategy whereby the result type of a call is the type of      * the second operand.      */
+comment|/**    * Type-inference strategy whereby the result type of a call is the type of    * the second operand.    */
 specifier|public
 specifier|static
 specifier|final
@@ -1685,7 +1685,7 @@ argument_list|(
 literal|1
 argument_list|)
 decl_stmt|;
-comment|/**      * Type-inference strategy whereby the result type of a call is the type of      * the second operand. If any of the other operands are nullable the      * returned type will also be nullable.      */
+comment|/**    * Type-inference strategy whereby the result type of a call is the type of    * the second operand. If any of the other operands are nullable the    * returned type will also be nullable.    */
 specifier|public
 specifier|static
 specifier|final
@@ -1702,7 +1702,7 @@ operator|.
 name|toNullable
 argument_list|)
 decl_stmt|;
-comment|/**      * Type-inference strategy whereby the result type of a call is the type of      * the third operand.      */
+comment|/**    * Type-inference strategy whereby the result type of a call is the type of    * the third operand.    */
 specifier|public
 specifier|static
 specifier|final
@@ -1715,7 +1715,7 @@ argument_list|(
 literal|2
 argument_list|)
 decl_stmt|;
-comment|/**      * Type-inference strategy whereby the result type of a call is the type of      * the third operand. If any of the other operands are nullable the returned      * type will also be nullable.      */
+comment|/**    * Type-inference strategy whereby the result type of a call is the type of    * the third operand. If any of the other operands are nullable the returned    * type will also be nullable.    */
 specifier|public
 specifier|static
 specifier|final
@@ -1732,7 +1732,7 @@ operator|.
 name|toNullable
 argument_list|)
 decl_stmt|;
-comment|/**      * Type-inference strategy whereby the result type of a call is Boolean.      */
+comment|/**    * Type-inference strategy whereby the result type of a call is Boolean.    */
 specifier|public
 specifier|static
 specifier|final
@@ -1747,7 +1747,7 @@ operator|.
 name|BOOLEAN
 argument_list|)
 decl_stmt|;
-comment|/**      * Type-inference strategy whereby the result type of a call is Boolean      * not null.      */
+comment|/**    * Type-inference strategy whereby the result type of a call is Boolean    * not null.    */
 specifier|public
 specifier|static
 specifier|final
@@ -1764,7 +1764,7 @@ operator|.
 name|toNotNullable
 argument_list|)
 decl_stmt|;
-comment|/**      * Type-inference strategy whereby the result type of a call is Boolean,      * with nulls allowed if any of the operands allow nulls.      */
+comment|/**    * Type-inference strategy whereby the result type of a call is Boolean,    * with nulls allowed if any of the operands allow nulls.    */
 specifier|public
 specifier|static
 specifier|final
@@ -1781,7 +1781,7 @@ operator|.
 name|toNullable
 argument_list|)
 decl_stmt|;
-comment|/**      * Type-inference strategy whereby the result type of a call is Date.      */
+comment|/**    * Type-inference strategy whereby the result type of a call is Date.    */
 specifier|public
 specifier|static
 specifier|final
@@ -1796,7 +1796,7 @@ operator|.
 name|DATE
 argument_list|)
 decl_stmt|;
-comment|/**      * Type-inference strategy whereby the result type of a call is Time(0).      */
+comment|/**    * Type-inference strategy whereby the result type of a call is Time(0).    */
 specifier|public
 specifier|static
 specifier|final
@@ -1813,7 +1813,7 @@ argument_list|,
 literal|0
 argument_list|)
 decl_stmt|;
-comment|/**      * Type-inference strategy whereby the result type of a call is nullable      * Time(0).      */
+comment|/**    * Type-inference strategy whereby the result type of a call is nullable    * Time(0).    */
 specifier|public
 specifier|static
 specifier|final
@@ -1830,7 +1830,7 @@ operator|.
 name|toNullable
 argument_list|)
 decl_stmt|;
-comment|/**      * Type-inference strategy whereby the result type of a call is Double.      */
+comment|/**    * Type-inference strategy whereby the result type of a call is Double.    */
 specifier|public
 specifier|static
 specifier|final
@@ -1845,7 +1845,7 @@ operator|.
 name|DOUBLE
 argument_list|)
 decl_stmt|;
-comment|/**      * Type-inference strategy whereby the result type of a call is Double with      * nulls allowed if any of the operands allow nulls.      */
+comment|/**    * Type-inference strategy whereby the result type of a call is Double with    * nulls allowed if any of the operands allow nulls.    */
 specifier|public
 specifier|static
 specifier|final
@@ -1862,7 +1862,7 @@ operator|.
 name|toNullable
 argument_list|)
 decl_stmt|;
-comment|/**      * Type-inference strategy whereby the result type of a call is an Integer.      */
+comment|/**    * Type-inference strategy whereby the result type of a call is an Integer.    */
 specifier|public
 specifier|static
 specifier|final
@@ -1877,7 +1877,7 @@ operator|.
 name|INTEGER
 argument_list|)
 decl_stmt|;
-comment|/**      * Type-inference strategy whereby the result type of a call is a Bigint      */
+comment|/**    * Type-inference strategy whereby the result type of a call is a Bigint    */
 specifier|public
 specifier|static
 specifier|final
@@ -1892,7 +1892,7 @@ operator|.
 name|BIGINT
 argument_list|)
 decl_stmt|;
-comment|/**      * Type-inference strategy whereby the result type of a call is an Bigint      * with nulls allowed if any of the operands allow nulls.      */
+comment|/**    * Type-inference strategy whereby the result type of a call is an Bigint    * with nulls allowed if any of the operands allow nulls.    */
 specifier|public
 specifier|static
 specifier|final
@@ -1909,7 +1909,7 @@ operator|.
 name|toNullable
 argument_list|)
 decl_stmt|;
-comment|/**      * Type-inference strategy whereby the result type of a call is a nullable      * Bigint      */
+comment|/**    * Type-inference strategy whereby the result type of a call is a nullable    * Bigint    */
 specifier|public
 specifier|static
 specifier|final
@@ -1926,7 +1926,7 @@ operator|.
 name|forceNullable
 argument_list|)
 decl_stmt|;
-comment|/**      * Type-inference strategy whereby the result type of a call is an Integer      * with nulls allowed if any of the operands allow nulls.      */
+comment|/**    * Type-inference strategy whereby the result type of a call is an Integer    * with nulls allowed if any of the operands allow nulls.    */
 specifier|public
 specifier|static
 specifier|final
@@ -1943,7 +1943,7 @@ operator|.
 name|toNullable
 argument_list|)
 decl_stmt|;
-comment|/**      * Type-inference strategy which always returns "VARCHAR(2000)".      */
+comment|/**    * Type-inference strategy which always returns "VARCHAR(2000)".    */
 specifier|public
 specifier|static
 specifier|final
@@ -1960,7 +1960,7 @@ argument_list|,
 literal|2000
 argument_list|)
 decl_stmt|;
-comment|/**      * Type-inference strategy for Histogram agg support      */
+comment|/**    * Type-inference strategy for Histogram agg support    */
 specifier|public
 specifier|static
 specifier|final
@@ -1977,7 +1977,7 @@ argument_list|,
 literal|8
 argument_list|)
 decl_stmt|;
-comment|/**      * Type-inference strategy which always returns "CURSOR".      */
+comment|/**    * Type-inference strategy which always returns "CURSOR".    */
 specifier|public
 specifier|static
 specifier|final
@@ -1992,7 +1992,7 @@ operator|.
 name|CURSOR
 argument_list|)
 decl_stmt|;
-comment|/**      * Type-inference strategy which always returns "COLUMN_LIST".      */
+comment|/**    * Type-inference strategy which always returns "COLUMN_LIST".    */
 specifier|public
 specifier|static
 specifier|final
@@ -2007,7 +2007,7 @@ operator|.
 name|COLUMN_LIST
 argument_list|)
 decl_stmt|;
-comment|/**      * Type-inference strategy whereby the result type of a call is using its      * operands biggest type, using the SQL:1999 rules described in "Data types      * of results of aggregations". These rules are used in union, except,      * intersect, case and other places.      *      * @sql.99 Part 2 Section 9.3      */
+comment|/**    * Type-inference strategy whereby the result type of a call is using its    * operands biggest type, using the SQL:1999 rules described in "Data types    * of results of aggregations". These rules are used in union, except,    * intersect, case and other places.    *    * @sql.99 Part 2 Section 9.3    */
 specifier|public
 specifier|static
 specifier|final
@@ -2043,7 +2043,7 @@ return|;
 block|}
 block|}
 decl_stmt|;
-comment|/**      * Type-inference strategy for a call where the first argument is a decimal.      * The result type of a call is a decimal with a scale of 0, and the same      * precision and nullibility as the first argument      */
+comment|/**    * Type-inference strategy for a call where the first argument is a decimal.    * The result type of a call is a decimal with a scale of 0, and the same    * precision and nullibility as the first argument    */
 specifier|public
 specifier|static
 specifier|final
@@ -2161,7 +2161,7 @@ return|;
 block|}
 block|}
 decl_stmt|;
-comment|/**      * Type-inference strategy whereby the result type of a call is {@link      * #rtiDecimalNoScale} with a fallback to {@link #rtiFirstArgType} This rule      * is used for floor, ceiling.      */
+comment|/**    * Type-inference strategy whereby the result type of a call is {@link    * #rtiDecimalNoScale} with a fallback to {@link #rtiFirstArgType} This rule    * is used for floor, ceiling.    */
 specifier|public
 specifier|static
 specifier|final
@@ -2181,7 +2181,7 @@ name|rtiFirstArgType
 block|}
 argument_list|)
 decl_stmt|;
-comment|/**      * Type-inference strategy whereby the result type of a call is the decimal      * product of two exact numeric operands where at least one of the operands      * is a decimal.      */
+comment|/**    * Type-inference strategy whereby the result type of a call is the decimal    * product of two exact numeric operands where at least one of the operands    * is a decimal.    */
 specifier|public
 specifier|static
 specifier|final
@@ -2241,7 +2241,7 @@ return|;
 block|}
 block|}
 decl_stmt|;
-comment|/**      * Same as {@link #rtiDecimalProduct} but returns with nullablity if any of      * the operands is nullable by using {@link SqlTypeTransforms#toNullable}      */
+comment|/**    * Same as {@link #rtiDecimalProduct} but returns with nullablity if any of    * the operands is nullable by using {@link SqlTypeTransforms#toNullable}    */
 specifier|public
 specifier|static
 specifier|final
@@ -2258,7 +2258,7 @@ operator|.
 name|toNullable
 argument_list|)
 decl_stmt|;
-comment|/**      * Type-inference strategy whereby the result type of a call is {@link      * #rtiNullableDecimalProduct} with a fallback to {@link      * #rtiNullableFirstInterval} and {@link #rtiLeastRestrictive} These rules      * are used for multiplication.      */
+comment|/**    * Type-inference strategy whereby the result type of a call is {@link    * #rtiNullableDecimalProduct} with a fallback to {@link    * #rtiNullableFirstInterval} and {@link #rtiLeastRestrictive} These rules    * are used for multiplication.    */
 specifier|public
 specifier|static
 specifier|final
@@ -2280,7 +2280,7 @@ name|rtiLeastRestrictive
 block|}
 argument_list|)
 decl_stmt|;
-comment|/**      * Type-inference strategy whereby the result type of a call is the decimal      * product of two exact numeric operands where at least one of the operands      * is a decimal.      */
+comment|/**    * Type-inference strategy whereby the result type of a call is the decimal    * product of two exact numeric operands where at least one of the operands    * is a decimal.    */
 specifier|public
 specifier|static
 specifier|final
@@ -2340,7 +2340,7 @@ return|;
 block|}
 block|}
 decl_stmt|;
-comment|/**      * Same as {@link #rtiDecimalQuotient} but returns with nullablity if any of      * the operands is nullable by using {@link SqlTypeTransforms#toNullable}      */
+comment|/**    * Same as {@link #rtiDecimalQuotient} but returns with nullablity if any of    * the operands is nullable by using {@link SqlTypeTransforms#toNullable}    */
 specifier|public
 specifier|static
 specifier|final
@@ -2357,7 +2357,7 @@ operator|.
 name|toNullable
 argument_list|)
 decl_stmt|;
-comment|/**      * Type-inference strategy whereby the result type of a call is {@link      * #rtiNullableDecimalQuotient} with a fallback to {@link      * #rtiNullableFirstInterval} and {@link #rtiLeastRestrictive} These rules      * are used for division.      */
+comment|/**    * Type-inference strategy whereby the result type of a call is {@link    * #rtiNullableDecimalQuotient} with a fallback to {@link    * #rtiNullableFirstInterval} and {@link #rtiLeastRestrictive} These rules    * are used for division.    */
 specifier|public
 specifier|static
 specifier|final
@@ -2379,7 +2379,7 @@ name|rtiLeastRestrictive
 block|}
 argument_list|)
 decl_stmt|;
-comment|/**      * Type-inference strategy whereby the result type of a call is {@link      * #rtiNullableFirstInterval} and {@link #rtiLeastRestrictive}. These rules      * are used for integer division.      */
+comment|/**    * Type-inference strategy whereby the result type of a call is {@link    * #rtiNullableFirstInterval} and {@link #rtiLeastRestrictive}. These rules    * are used for integer division.    */
 specifier|public
 specifier|static
 specifier|final
@@ -2399,7 +2399,7 @@ name|rtiLeastRestrictive
 block|}
 argument_list|)
 decl_stmt|;
-comment|/**      * Type-inference strategy whereby the result type of a call is the decimal      * sum of two exact numeric operands where at least one of the operands is a      * decimal. Let p1, s1 be the precision and scale of the first operand Let      * p2, s2 be the precision and scale of the second operand Let p, s be the      * precision and scale of the result, Then the result type is a decimal      * with:      *      *<ul>      *<li>s = max(s1, s2)</li>      *<li>p = max(p1 - s1, p2 - s2) + s + 1</li>      *</ul>      *      * p and s are capped at their maximum values      *      * @sql.2003 Part 2 Section 6.26      */
+comment|/**    * Type-inference strategy whereby the result type of a call is the decimal    * sum of two exact numeric operands where at least one of the operands is a    * decimal. Let p1, s1 be the precision and scale of the first operand Let    * p2, s2 be the precision and scale of the second operand Let p, s be the    * precision and scale of the result, Then the result type is a decimal    * with:    *    *<ul>    *<li>s = max(s1, s2)</li>    *<li>p = max(p1 - s1, p2 - s2) + s + 1</li>    *</ul>    *    * p and s are capped at their maximum values    *    * @sql.2003 Part 2 Section 6.26    */
 specifier|public
 specifier|static
 specifier|final
@@ -2597,7 +2597,7 @@ return|;
 block|}
 block|}
 decl_stmt|;
-comment|/**      * Same as {@link #rtiDecimalSum} but returns with nullablity if any      * of the operands is nullable by using {@link SqlTypeTransforms#toNullable}      */
+comment|/**    * Same as {@link #rtiDecimalSum} but returns with nullablity if any    * of the operands is nullable by using {@link SqlTypeTransforms#toNullable}    */
 specifier|public
 specifier|static
 specifier|final
@@ -2614,7 +2614,7 @@ operator|.
 name|toNullable
 argument_list|)
 decl_stmt|;
-comment|/**      * Type-inference strategy whereby the result type of a call is {@link      * #rtiNullableDecimalSum} with a fallback to {@link #rtiLeastRestrictive}      * These rules are used for addition and subtraction.      */
+comment|/**    * Type-inference strategy whereby the result type of a call is {@link    * #rtiNullableDecimalSum} with a fallback to {@link #rtiLeastRestrictive}    * These rules are used for addition and subtraction.    */
 specifier|public
 specifier|static
 specifier|final
@@ -2629,7 +2629,7 @@ argument_list|,
 name|rtiLeastRestrictive
 argument_list|)
 decl_stmt|;
-comment|/**      * Type-inference strategy whereby the result type of a call is      *      *<ul>      *<li>the same type as the input types but with the combined length of the      * two first types</li>      *<li>if types are of char type the type with the highest coercibility will      * be used</li>      *<li>result is varying if either input is; otherwise fixed      *</ul>      *      * Pre-requisites:      *      *<ul>      *<li>input types must be of the same string type      *<li>types must be comparable without casting      *</ul>      */
+comment|/**    * Type-inference strategy whereby the result type of a call is    *    *<ul>    *<li>the same type as the input types but with the combined length of the    * two first types</li>    *<li>if types are of char type the type with the highest coercibility will    * be used</li>    *<li>result is varying if either input is; otherwise fixed    *</ul>    *    * Pre-requisites:    *    *<ul>    *<li>input types must be of the same string type    *<li>types must be comparable without casting    *</ul>    */
 specifier|public
 specifier|static
 specifier|final
@@ -2640,7 +2640,7 @@ operator|new
 name|SqlReturnTypeInference
 argument_list|()
 block|{
-comment|/**              * @pre SqlTypeUtil.sameNamedType(argTypes[0], (argTypes[1]))              */
+comment|/**          * @pre SqlTypeUtil.sameNamedType(argTypes[0], (argTypes[1]))          */
 specifier|public
 name|RelDataType
 name|inferReturnType
@@ -2934,7 +2934,7 @@ return|;
 block|}
 block|}
 decl_stmt|;
-comment|/**      * Same as {@link #rtiDyadicStringSumPrecision} and using {@link      * SqlTypeTransforms#toNullable}      */
+comment|/**    * Same as {@link #rtiDyadicStringSumPrecision} and using {@link    * SqlTypeTransforms#toNullable}    */
 specifier|public
 specifier|static
 specifier|final
@@ -2951,7 +2951,7 @@ operator|.
 name|toNullable
 argument_list|)
 decl_stmt|;
-comment|/**      * Same as {@link #rtiDyadicStringSumPrecision} and using {@link      * SqlTypeTransforms#toNullable}, {@link SqlTypeTransforms#toVarying}.      */
+comment|/**    * Same as {@link #rtiDyadicStringSumPrecision} and using {@link    * SqlTypeTransforms#toNullable}, {@link SqlTypeTransforms#toVarying}.    */
 specifier|public
 specifier|static
 specifier|final
@@ -2972,7 +2972,7 @@ operator|.
 name|toVarying
 argument_list|)
 decl_stmt|;
-comment|/**      * Type-inference strategy where the expression is assumed to be registered      * as a {@link org.eigenbase.sql.validate.SqlValidatorNamespace}, and      * therefore the result type of the call is the type of that namespace.      */
+comment|/**    * Type-inference strategy where the expression is assumed to be registered    * as a {@link org.eigenbase.sql.validate.SqlValidatorNamespace}, and    * therefore the result type of the call is the type of that namespace.    */
 specifier|public
 specifier|static
 specifier|final
@@ -3019,7 +3019,7 @@ return|;
 block|}
 block|}
 decl_stmt|;
-comment|/**      * Returns the same type as the multiset carries. The multiset type returned      * is the least restrictive of the call's multiset operands      */
+comment|/**    * Returns the same type as the multiset carries. The multiset type returned    * is the least restrictive of the call's multiset operands    */
 specifier|public
 specifier|static
 specifier|final
@@ -3126,7 +3126,7 @@ return|;
 block|}
 block|}
 decl_stmt|;
-comment|/**      * Returns a multiset of the first column of a multiset. For example, given      *<code>RECORD(x INTEGER, y DATE) MULTISET</code>, returns<code>INTEGER      * MULTISET</code>.      */
+comment|/**    * Returns a multiset of the first column of a multiset. For example, given    *<code>RECORD(x INTEGER, y DATE) MULTISET</code>, returns<code>INTEGER    * MULTISET</code>.    */
 specifier|public
 specifier|static
 specifier|final
@@ -3232,7 +3232,7 @@ return|;
 block|}
 block|}
 decl_stmt|;
-comment|/**      * Returns a multiset of the first column of a multiset. For example, given      *<code>INTEGER MULTISET</code>, returns<code>RECORD(x INTEGER)      * MULTISET</code>.      */
+comment|/**    * Returns a multiset of the first column of a multiset. For example, given    *<code>INTEGER MULTISET</code>, returns<code>RECORD(x INTEGER)    * MULTISET</code>.    */
 specifier|public
 specifier|static
 specifier|final
@@ -3329,7 +3329,7 @@ return|;
 block|}
 block|}
 decl_stmt|;
-comment|/**      * Returns the type of the only column of a multiset.      *      *<p>For example, given<code>RECORD(x INTEGER) MULTISET</code>, returns      *<code>INTEGER MULTISET</code>.      */
+comment|/**    * Returns the type of the only column of a multiset.    *    *<p>For example, given<code>RECORD(x INTEGER) MULTISET</code>, returns    *<code>INTEGER MULTISET</code>.    */
 specifier|public
 specifier|static
 specifier|final
@@ -3346,7 +3346,7 @@ operator|.
 name|onlyColumn
 argument_list|)
 decl_stmt|;
-comment|/**      * Same as {@link #rtiMultiset} but returns with nullablity if any of the      * operands is nullable      */
+comment|/**    * Same as {@link #rtiMultiset} but returns with nullablity if any of the    * operands is nullable    */
 specifier|public
 specifier|static
 specifier|final
@@ -3363,7 +3363,7 @@ operator|.
 name|toNullable
 argument_list|)
 decl_stmt|;
-comment|/**      * Returns the element type of a multiset      */
+comment|/**    * Returns the element type of a multiset    */
 specifier|public
 specifier|static
 specifier|final
@@ -3380,7 +3380,7 @@ operator|.
 name|toMultisetElementType
 argument_list|)
 decl_stmt|;
-comment|/**      * Returns the field type of a structured type which has only one field. For      * example, given<code>RECORD(x INTEGER)</code> returns<code>      * INTEGER</code>.      */
+comment|/**    * Returns the field type of a structured type which has only one field. For    * example, given<code>RECORD(x INTEGER)</code> returns<code>    * INTEGER</code>.    */
 specifier|public
 specifier|static
 specifier|final
@@ -3497,7 +3497,7 @@ decl_stmt|;
 comment|// ----------------------------------------------------------------------
 comment|// SqlOperandTypeInference definitions
 comment|// ----------------------------------------------------------------------
-comment|/**      * Operand type-inference strategy where an unknown operand type is derived      * from the first operand with a known type.      */
+comment|/**    * Operand type-inference strategy where an unknown operand type is derived    * from the first operand with a known type.    */
 specifier|public
 specifier|static
 specifier|final
@@ -3624,7 +3624,7 @@ block|}
 block|}
 block|}
 decl_stmt|;
-comment|/**      * Operand type-inference strategy where an unknown operand type is derived      * from the call's return type. If the return type is a record, it must have      * the same number of fields as the number of operands.      */
+comment|/**    * Operand type-inference strategy where an unknown operand type is derived    * from the call's return type. If the return type is a record, it must have    * the same number of fields as the number of operands.    */
 specifier|public
 specifier|static
 specifier|final
@@ -3696,7 +3696,7 @@ block|}
 block|}
 block|}
 decl_stmt|;
-comment|/**      * Operand type-inference strategy where an unknown operand type is assumed      * to be boolean.      */
+comment|/**    * Operand type-inference strategy where an unknown operand type is assumed    * to be boolean.    */
 specifier|public
 specifier|static
 specifier|final
@@ -3765,7 +3765,7 @@ block|}
 block|}
 block|}
 decl_stmt|;
-comment|/**      * Operand type-inference strategy where an unknown operand type is assumed      * to be VARCHAR(1024).  This is not something which should be used in most      * cases (especially since the precision is arbitrary), but for IS [NOT]      * NULL, we don't really care about the type at all, so it's reasonable to      * use something that every other type can be cast to.      */
+comment|/**    * Operand type-inference strategy where an unknown operand type is assumed    * to be VARCHAR(1024).  This is not something which should be used in most    * cases (especially since the precision is arbitrary), but for IS [NOT]    * NULL, we don't really care about the type at all, so it's reasonable to    * use something that every other type can be cast to.    */
 specifier|public
 specifier|static
 specifier|final

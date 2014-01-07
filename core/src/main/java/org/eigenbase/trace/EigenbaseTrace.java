@@ -126,7 +126,7 @@ class|class
 name|EigenbaseTrace
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
-comment|/**      * The "org.eigenbase.sql.parser" tracer reports parser events in {@link      * org.eigenbase.sql.parser.SqlParser} and other classes (at level {@link      * Level#FINE} or higher).      */
+comment|/**    * The "org.eigenbase.sql.parser" tracer reports parser events in {@link    * org.eigenbase.sql.parser.SqlParser} and other classes (at level {@link    * Level#FINE} or higher).    */
 specifier|public
 specifier|static
 specifier|final
@@ -190,7 +190,7 @@ block|}
 block|}
 decl_stmt|;
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * The "org.eigenbase.relopt.RelOptPlanner" tracer prints the query      * optimization process.      *      *<p>Levels:      *      *<ul>      *<li>{@link Level#FINE} prints rules as they fire;      *<li>{@link Level#FINER} prints and validates the whole expression pool      * and rule queue as each rule fires;      *<li>{@link Level#FINEST} prints finer details like rule importances.      *</ul>      */
+comment|/**    * The "org.eigenbase.relopt.RelOptPlanner" tracer prints the query    * optimization process.    *    *<p>Levels:    *    *<ul>    *<li>{@link Level#FINE} prints rules as they fire;    *<li>{@link Level#FINER} prints and validates the whole expression pool    * and rule queue as each rule fires;    *<li>{@link Level#FINEST} prints finer details like rule importances.    *</ul>    */
 specifier|public
 specifier|static
 name|Logger
@@ -211,7 +211,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**      * The "net.hydromatic.optiq.prepare.Prepare" tracer prints the generated      * program at level {@link java.util.logging.Level#FINE} or higher.      */
+comment|/**    * The "net.hydromatic.optiq.prepare.Prepare" tracer prints the generated    * program at level {@link java.util.logging.Level#FINE} or higher.    */
 specifier|public
 specifier|static
 name|Logger
@@ -232,7 +232,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**      * The "org.eigenbase.rel.RelImplementorImpl" tracer reports when      * expressions are bound to variables ({@link Level#FINE})      */
+comment|/**    * The "org.eigenbase.rel.RelImplementorImpl" tracer reports when    * expressions are bound to variables ({@link Level#FINE})    */
 specifier|public
 specifier|static
 name|Logger
@@ -253,7 +253,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**      * The tracer "org.eigenbase.sql.timing" traces timing for various stages of      * query processing.      *      * @see EigenbaseTimingTracer      */
+comment|/**    * The tracer "org.eigenbase.sql.timing" traces timing for various stages of    * query processing.    *    * @see EigenbaseTimingTracer    */
 specifier|public
 specifier|static
 name|Logger
@@ -269,7 +269,7 @@ literal|"org.eigenbase.sql.timing"
 argument_list|)
 return|;
 block|}
-comment|/**      * The "org.eigenbase.sql.parser" tracer reports parse events.      */
+comment|/**    * The "org.eigenbase.sql.parser" tracer reports parse events.    */
 specifier|public
 specifier|static
 name|Logger
@@ -285,7 +285,7 @@ literal|"org.eigenbase.sql.parser"
 argument_list|)
 return|;
 block|}
-comment|/**      * The "org.eigenbase.sql2rel" tracer reports parse events.      */
+comment|/**    * The "org.eigenbase.sql2rel" tracer reports parse events.    */
 specifier|public
 specifier|static
 name|Logger
@@ -301,7 +301,7 @@ literal|"org.eigenbase.sql2rel"
 argument_list|)
 return|;
 block|}
-comment|/**      * The "org.eigenbase.jmi.JmiChangeSet" tracer reports JmiChangeSet events.      */
+comment|/**    * The "org.eigenbase.jmi.JmiChangeSet" tracer reports JmiChangeSet events.    */
 specifier|public
 specifier|static
 name|Logger
@@ -317,7 +317,7 @@ literal|"org.eigenbase.jmi.JmiChangeSet"
 argument_list|)
 return|;
 block|}
-comment|/**      * The "org.eigenbase.util.property.Property" tracer reports errors related      * to all manner of properties.      */
+comment|/**    * The "org.eigenbase.util.property.Property" tracer reports errors related    * to all manner of properties.    */
 specifier|public
 specifier|static
 name|Logger
@@ -338,7 +338,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**      * Thread-local handler that is called with dynamically generated Java code.      * It exists for unit-testing.      * The handler is never null; the default handler does nothing.      */
+comment|/**    * Thread-local handler that is called with dynamically generated Java code.    * It exists for unit-testing.    * The handler is never null; the default handler does nothing.    */
 specifier|public
 specifier|static
 name|ThreadLocal

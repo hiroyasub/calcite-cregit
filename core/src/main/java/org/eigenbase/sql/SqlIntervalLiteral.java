@@ -243,7 +243,7 @@ argument_list|()
 return|;
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------
-comment|/**      * A Interval value.      */
+comment|/**    * A Interval value.    */
 specifier|public
 specifier|static
 class|class
@@ -264,7 +264,7 @@ specifier|final
 name|int
 name|sign
 decl_stmt|;
-comment|/**          * Creates an interval value.          *          * @param intervalQualifier Interval qualifier          * @param sign Sign (+1 or -1)          * @param intervalStr Interval string          */
+comment|/**      * Creates an interval value.      *      * @param intervalQualifier Interval qualifier      * @param sign              Sign (+1 or -1)      * @param intervalStr       Interval string      */
 name|IntervalValue
 parameter_list|(
 name|SqlIntervalQualifier

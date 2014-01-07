@@ -95,7 +95,7 @@ name|boolean
 name|negated
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a SqlLikeOperator.      *      * @param name Operator name      * @param kind Kind      * @param negated Whether this is 'NOT LIKE'      */
+comment|/**    * Creates a SqlLikeOperator.    *    * @param name    Operator name    * @param kind    Kind    * @param negated Whether this is 'NOT LIKE'    */
 name|SqlLikeOperator
 parameter_list|(
 name|String
@@ -142,7 +142,7 @@ name|negated
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Returns whether this is the 'NOT LIKE' operator.      *      * @return whether this is 'NOT LIKE'      */
+comment|/**    * Returns whether this is the 'NOT LIKE' operator.    *    * @return whether this is 'NOT LIKE'    */
 specifier|public
 name|boolean
 name|isNegated

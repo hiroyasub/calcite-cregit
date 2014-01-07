@@ -82,7 +82,7 @@ name|R
 argument_list|>
 name|ruleClass
 decl_stmt|;
-comment|/**          * Actual rule set instantiated during planning by filtering all of the          * planner's rules through ruleClass.          */
+comment|/**      * Actual rule set instantiated during planning by filtering all of the      * planner's rules through ruleClass.      */
 name|Set
 argument_list|<
 name|RelOptRule
@@ -131,7 +131,7 @@ name|RuleCollection
 extends|extends
 name|HepInstruction
 block|{
-comment|/**          * Collection of rules to apply.          */
+comment|/**      * Collection of rules to apply.      */
 name|Collection
 argument_list|<
 name|RelOptRule
@@ -163,7 +163,7 @@ block|{
 name|boolean
 name|guaranteed
 decl_stmt|;
-comment|/**          * Actual rule set instantiated during planning by filtering all of the          * planner's rules, looking for the desired converters.          */
+comment|/**      * Actual rule set instantiated during planning by filtering all of the      * planner's rules, looking for the desired converters.      */
 name|Set
 argument_list|<
 name|RelOptRule
@@ -220,11 +220,11 @@ name|RuleInstance
 extends|extends
 name|HepInstruction
 block|{
-comment|/**          * Description to look for, or null if rule specified explicitly.          */
+comment|/**      * Description to look for, or null if rule specified explicitly.      */
 name|String
 name|ruleDescription
 decl_stmt|;
-comment|/**          * Explicitly specified rule, or rule looked up by planner from          * description.          */
+comment|/**      * Explicitly specified rule, or rule looked up by planner from      * description.      */
 name|RelOptRule
 name|rule
 decl_stmt|;
@@ -402,7 +402,7 @@ name|EndGroup
 extends|extends
 name|HepInstruction
 block|{
-comment|/**          * Actual rule set instantiated during planning by collecting grouped          * rules.          */
+comment|/**      * Actual rule set instantiated during planning by collecting grouped      * rules.      */
 name|Set
 argument_list|<
 name|RelOptRule

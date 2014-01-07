@@ -97,7 +97,7 @@ argument_list|>
 name|typeNames
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Returns the first type of typeName at or after position start (zero      * based).      *      * @see #MatchReturnTypeInference(int, SqlTypeName[])      */
+comment|/**    * Returns the first type of typeName at or after position start (zero    * based).    *    * @see #MatchReturnTypeInference(int, SqlTypeName[])    */
 specifier|public
 name|MatchReturnTypeInference
 parameter_list|(
@@ -122,7 +122,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Returns the first type matching any type in typeNames at or after      * position start (zero based).      */
+comment|/**    * Returns the first type matching any type in typeNames at or after    * position start (zero based).    */
 specifier|public
 name|MatchReturnTypeInference
 parameter_list|(

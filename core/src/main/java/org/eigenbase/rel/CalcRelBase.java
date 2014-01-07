@@ -212,7 +212,7 @@ name|collationList
 argument_list|)
 return|;
 block|}
-comment|/** Creates a copy of this {@code CalcRelBase}. */
+comment|/**    * Creates a copy of this {@code CalcRelBase}.    */
 specifier|public
 specifier|abstract
 name|CalcRelBase

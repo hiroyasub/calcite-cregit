@@ -52,7 +52,7 @@ name|E
 parameter_list|>
 block|{
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Looks up a visit method taking additional parameters beyond the      * overloaded visitee type.      *      * @param visitorClass class of object whose visit method is to be invoked      * @param visiteeClass class of object to be passed as a parameter to the      * visit method      * @param visitMethodName name of visit method      * @param additionalParameterTypes list of additional parameter types      *      * @return method found, or null if none found      */
+comment|/**    * Looks up a visit method taking additional parameters beyond the    * overloaded visitee type.    *    * @param visitorClass             class of object whose visit method is to be    *                                 invoked    * @param visiteeClass             class of object to be passed as a parameter    *                                 to the visit method    * @param visitMethodName          name of visit method    * @param additionalParameterTypes list of additional parameter types    * @return method found, or null if none found    */
 name|Method
 name|lookupVisitMethod
 parameter_list|(
@@ -82,7 +82,7 @@ argument_list|>
 name|additionalParameterTypes
 parameter_list|)
 function_decl|;
-comment|/**      * Looks up a visit method.      *      * @param visitorClass class of object whose visit method is to be invoked      * @param visiteeClass class of object to be passed as a parameter to the      * visit method      * @param visitMethodName name of visit method      *      * @return method found, or null if none found      */
+comment|/**    * Looks up a visit method.    *    * @param visitorClass    class of object whose visit method is to be invoked    * @param visiteeClass    class of object to be passed as a parameter to the    *                        visit method    * @param visitMethodName name of visit method    * @return method found, or null if none found    */
 name|Method
 name|lookupVisitMethod
 parameter_list|(
@@ -106,7 +106,7 @@ name|String
 name|visitMethodName
 parameter_list|)
 function_decl|;
-comment|/**      * Implements the {@link Glossary#VisitorPattern} via reflection. The basic      * technique is taken from<a      * href="http://www.javaworld.com/javaworld/javatips/jw-javatip98.html">a      * Javaworld article</a>. For an example of how to use it, see {@link      * ReflectVisitorTest}. Visit method lookup follows the same rules as if      * compile-time resolution for VisitorClass.visit(VisiteeClass) were      * performed. An ambiguous match due to multiple interface inheritance      * results in an IllegalArgumentException. A non-match is indicated by      * returning false.      *      * @param visitor object whose visit method is to be invoked      * @param visitee object to be passed as a parameter to the visit method      * @param visitMethodName name of visit method, e.g. "visit"      *      * @return true if a matching visit method was found and invoked      */
+comment|/**    * Implements the {@link Glossary#VisitorPattern} via reflection. The basic    * technique is taken from<a    * href="http://www.javaworld.com/javaworld/javatips/jw-javatip98.html">a    * Javaworld article</a>. For an example of how to use it, see    * {@code ReflectVisitorTest}.    *    *<p>Visit method lookup follows the same rules as if compile-time resolution    * for VisitorClass.visit(VisiteeClass) were performed. An ambiguous match due    * to multiple interface inheritance results in an IllegalArgumentException. A    * non-match is indicated by returning false.</p>    *    * @param visitor         object whose visit method is to be invoked    * @param visitee         object to be passed as a parameter to the visit    *                        method    * @param visitMethodName name of visit method, e.g. "visit"    * @return true if a matching visit method was found and invoked    */
 name|boolean
 name|invokeVisitor
 parameter_list|(

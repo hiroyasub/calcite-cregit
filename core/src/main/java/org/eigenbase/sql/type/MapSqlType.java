@@ -62,7 +62,7 @@ name|RelDataType
 name|valueType
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a MapSqlType. This constructor should only be called      * from a factory method.      */
+comment|/**    * Creates a MapSqlType. This constructor should only be called    * from a factory method.    */
 specifier|public
 name|MapSqlType
 parameter_list|(

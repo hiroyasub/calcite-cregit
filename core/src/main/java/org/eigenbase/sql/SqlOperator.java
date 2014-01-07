@@ -139,7 +139,7 @@ argument_list|(
 literal|"line.separator"
 argument_list|)
 decl_stmt|;
-comment|/**      * Maximum precedence.      */
+comment|/**    * Maximum precedence.    */
 specifier|protected
 specifier|static
 specifier|final
@@ -149,50 +149,50 @@ init|=
 literal|200
 decl_stmt|;
 comment|//~ Instance fields --------------------------------------------------------
-comment|/**      * The name of the operator/function. Ex. "OVERLAY" or "TRIM"      */
+comment|/**    * The name of the operator/function. Ex. "OVERLAY" or "TRIM"    */
 specifier|private
 specifier|final
 name|String
 name|name
 decl_stmt|;
-comment|/**      * See {@link SqlKind}. It's possible to have a name that doesn't match the      * kind      */
+comment|/**    * See {@link SqlKind}. It's possible to have a name that doesn't match the    * kind    */
 specifier|public
 specifier|final
 name|SqlKind
 name|kind
 decl_stmt|;
-comment|/**      * The precedence with which this operator binds to the expression to the      * left. This is less than the right precedence if the operator is      * left-associative.      */
+comment|/**    * The precedence with which this operator binds to the expression to the    * left. This is less than the right precedence if the operator is    * left-associative.    */
 specifier|private
 specifier|final
 name|int
 name|leftPrec
 decl_stmt|;
-comment|/**      * The precedence with which this operator binds to the expression to the      * right. This is more than the left precedence if the operator is      * left-associative.      */
+comment|/**    * The precedence with which this operator binds to the expression to the    * right. This is more than the left precedence if the operator is    * left-associative.    */
 specifier|private
 specifier|final
 name|int
 name|rightPrec
 decl_stmt|;
-comment|/**      * used to infer the return type of a call to this operator      */
+comment|/**    * used to infer the return type of a call to this operator    */
 specifier|private
 specifier|final
 name|SqlReturnTypeInference
 name|returnTypeInference
 decl_stmt|;
-comment|/**      * used to infer types of unknown operands      */
+comment|/**    * used to infer types of unknown operands    */
 specifier|private
 specifier|final
 name|SqlOperandTypeInference
 name|operandTypeInference
 decl_stmt|;
-comment|/**      * used to validate operand types      */
+comment|/**    * used to validate operand types    */
 specifier|private
 specifier|final
 name|SqlOperandTypeChecker
 name|operandTypeChecker
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates an operator.      *      * @pre kind != null      */
+comment|/**    * Creates an operator.    *    * @pre kind != null    */
 specifier|protected
 name|SqlOperator
 parameter_list|(
@@ -272,7 +272,7 @@ operator|=
 name|operandTypeChecker
 expr_stmt|;
 block|}
-comment|/**      * Creates an operator specifying left/right associativity.      */
+comment|/**    * Creates an operator specifying left/right associativity.    */
 specifier|protected
 name|SqlOperator
 parameter_list|(
@@ -405,7 +405,7 @@ return|return
 name|operandTypeChecker
 return|;
 block|}
-comment|/**      * Returns a constraint on the number of operands expected by this operator.      * Subclasses may override this method; when they don't, the range is      * derived from the {@link SqlOperandTypeChecker} associated with this      * operator.      *      * @return acceptable range      */
+comment|/**    * Returns a constraint on the number of operands expected by this operator.    * Subclasses may override this method; when they don't, the range is    * derived from the {@link SqlOperandTypeChecker} associated with this    * operator.    *    * @return acceptable range    */
 specifier|public
 name|SqlOperandCountRange
 name|getOperandCountRange
@@ -481,14 +481,14 @@ return|return
 name|rightPrec
 return|;
 block|}
-comment|/**      * Returns the syntactic type of this operator.      *      * @post return != null      */
+comment|/**    * Returns the syntactic type of this operator.    *    * @post return != null    */
 specifier|public
 specifier|abstract
 name|SqlSyntax
 name|getSyntax
 parameter_list|()
 function_decl|;
-comment|/**      * Creates a call to this operand with an array of operands.      *      *<p>The position of the resulting call is the union of the<code>      * pos</code> and the positions of all of the operands.      *      * @param functionQualifier function qualifier (e.g. "DISTINCT"), may be      * @param pos parser position of the identifier of the call      * @param operands array of operands      */
+comment|/**    * Creates a call to this operand with an array of operands.    *    *<p>The position of the resulting call is the union of the<code>    * pos</code> and the positions of all of the operands.    *    * @param functionQualifier function qualifier (e.g. "DISTINCT"), may be    * @param pos               parser position of the identifier of the call    * @param operands          array of operands    */
 specifier|public
 name|SqlCall
 name|createCall
@@ -529,7 +529,7 @@ name|functionQualifier
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates a call to this operand with an array of operands.      *      *<p>The position of the resulting call is the union of the<code>      * pos</code> and the positions of all of the operands.      *      * @param pos Parser position      * @param operands List of arguments      *      * @return call to this operator      */
+comment|/**    * Creates a call to this operand with an array of operands.    *    *<p>The position of the resulting call is the union of the<code>    * pos</code> and the positions of all of the operands.    *    * @param pos      Parser position    * @param operands List of arguments    * @return call to this operator    */
 specifier|public
 specifier|final
 name|SqlCall
@@ -554,7 +554,7 @@ name|operands
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates a call to this operand with a list of operands contained in a      * {@link SqlNodeList}.      *      *<p>The position of the resulting call inferred from the SqlNodeList.      *      * @param nodeList List of arguments      *      * @return call to this operator      */
+comment|/**    * Creates a call to this operand with a list of operands contained in a    * {@link SqlNodeList}.    *    *<p>The position of the resulting call inferred from the SqlNodeList.    *    * @param nodeList List of arguments    * @return call to this operator    */
 specifier|public
 specifier|final
 name|SqlCall
@@ -581,7 +581,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates a call to this operand with a list of operands.      *      *<p>The position of the resulting call is the union of the<code>      * pos</code> and the positions of all of the operands.      */
+comment|/**    * Creates a call to this operand with a list of operands.    *    *<p>The position of the resulting call is the union of the<code>    * pos</code> and the positions of all of the operands.    */
 specifier|public
 specifier|final
 name|SqlCall
@@ -622,7 +622,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**      * Rewrites a call to this operator. Some operators are implemented as      * trivial rewrites (e.g. NULLIF becomes CASE). However, we don't do this at      * createCall time because we want to preserve the original SQL syntax as      * much as possible; instead, we do this before the call is validated (so      * the trivial operator doesn't need its own implementation of type      * derivation methods). The default implementation is to just return the      * original call without any rewrite.      *      * @param validator Validator      * @param call Call to be rewritten      *      * @return rewritten call      */
+comment|/**    * Rewrites a call to this operator. Some operators are implemented as    * trivial rewrites (e.g. NULLIF becomes CASE). However, we don't do this at    * createCall time because we want to preserve the original SQL syntax as    * much as possible; instead, we do this before the call is validated (so    * the trivial operator doesn't need its own implementation of type    * derivation methods). The default implementation is to just return the    * original call without any rewrite.    *    * @param validator Validator    * @param call      Call to be rewritten    * @return rewritten call    */
 specifier|public
 name|SqlNode
 name|rewriteCall
@@ -638,7 +638,7 @@ return|return
 name|call
 return|;
 block|}
-comment|/**      * Writes a SQL representation of a call to this operator to a writer,      * including parentheses if the operators on either side are of greater      * precedence.      *      *<p>The default implementation of this method delegates to {@link      * SqlSyntax#unparse}.      */
+comment|/**    * Writes a SQL representation of a call to this operator to a writer,    * including parentheses if the operators on either side are of greater    * precedence.    *    *<p>The default implementation of this method delegates to {@link    * SqlSyntax#unparse}.    */
 specifier|public
 name|void
 name|unparse
@@ -875,7 +875,7 @@ name|hashCode
 argument_list|()
 return|;
 block|}
-comment|/**      * Validates a call to this operator.      *      *<p>This method should not perform type-derivation or perform validation      * related related to types. That is done later, by {@link      * #deriveType(SqlValidator, SqlValidatorScope, SqlCall)}. This method      * should focus on structural validation.      *      *<p>A typical implementation of this method first validates the operands,      * then performs some operator-specific logic. The default implementation      * just validates the operands.      *      *<p>This method is the default implementation of {@link SqlCall#validate};      * but note that some sub-classes of {@link SqlCall} never call this method.      *      * @param call the call to this operator      * @param validator the active validator      * @param scope validator scope      * @param operandScope validator scope in which to validate operands to this      * call; usually equal to scope, but not always because some operators      * introduce new scopes      *      * @see SqlNode#validateExpr(SqlValidator, SqlValidatorScope)      * @see #deriveType(SqlValidator, SqlValidatorScope, SqlCall)      */
+comment|/**    * Validates a call to this operator.    *    *<p>This method should not perform type-derivation or perform validation    * related related to types. That is done later, by {@link    * #deriveType(SqlValidator, SqlValidatorScope, SqlCall)}. This method    * should focus on structural validation.    *    *<p>A typical implementation of this method first validates the operands,    * then performs some operator-specific logic. The default implementation    * just validates the operands.    *    *<p>This method is the default implementation of {@link SqlCall#validate};    * but note that some sub-classes of {@link SqlCall} never call this method.    *    * @param call         the call to this operator    * @param validator    the active validator    * @param scope        validator scope    * @param operandScope validator scope in which to validate operands to this    *                     call; usually equal to scope, but not always because    *                     some operators introduce new scopes    * @see SqlNode#validateExpr(SqlValidator, SqlValidatorScope)    * @see #deriveType(SqlValidator, SqlValidatorScope, SqlCall)    */
 specifier|public
 name|void
 name|validateCall
@@ -923,7 +923,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Validates the operands of a call, inferring the return type in the      * process.      *      * @param validator active validator      * @param scope validation scope      * @param call call to be validated      *      * @return inferred type      */
+comment|/**    * Validates the operands of a call, inferring the return type in the    * process.    *    * @param validator active validator    * @param scope     validation scope    * @param call      call to be validated    * @return inferred type    */
 specifier|public
 specifier|final
 name|RelDataType
@@ -1001,7 +1001,7 @@ return|return
 name|ret
 return|;
 block|}
-comment|/**      * Receives notification that validation of a call to this operator is      * beginning. Subclasses can supply custom behavior; default implementation      * does nothing.      *      * @param validator invoking validator      * @param scope validation scope      * @param call the call being validated      */
+comment|/**    * Receives notification that validation of a call to this operator is    * beginning. Subclasses can supply custom behavior; default implementation    * does nothing.    *    * @param validator invoking validator    * @param scope     validation scope    * @param call      the call being validated    */
 specifier|protected
 name|void
 name|preValidateCall
@@ -1017,7 +1017,7 @@ name|call
 parameter_list|)
 block|{
 block|}
-comment|/**      * Infers the return type of an invocation of this operator; only called      * after the number and types of operands have already been validated.      * Subclasses must either override this method or supply an instance of      * {@link SqlReturnTypeInference} to the constructor.      *      * @param opBinding description of invocation (not necessarily a {@link      * SqlCall})      *      * @return inferred return type      */
+comment|/**    * Infers the return type of an invocation of this operator; only called    * after the number and types of operands have already been validated.    * Subclasses must either override this method or supply an instance of    * {@link SqlReturnTypeInference} to the constructor.    *    * @param opBinding description of invocation (not necessarily a {@link    *                  SqlCall})    * @return inferred return type    */
 specifier|public
 name|RelDataType
 name|inferReturnType
@@ -1053,7 +1053,7 @@ name|this
 argument_list|)
 throw|;
 block|}
-comment|/**      * Derives the type of a call to this operator.      *      *<p>This method is an intrinsic part of the validation process so, unlike      * {@link #inferReturnType}, specific operators would not typically override      * this method.      *      * @param validator Validator      * @param scope Scope of validation      * @param call Call to this operator      *      * @return Type of call      */
+comment|/**    * Derives the type of a call to this operator.    *    *<p>This method is an intrinsic part of the validation process so, unlike    * {@link #inferReturnType}, specific operators would not typically override    * this method.    *    * @param validator Validator    * @param scope     Scope of validation    * @param call      Call to this operator    * @return Type of call    */
 specifier|public
 name|RelDataType
 name|deriveType
@@ -1132,7 +1132,7 @@ return|return
 name|type
 return|;
 block|}
-comment|/**      * Validates and determines coercibility and resulting collation name of      * binary operator if needed.      */
+comment|/**    * Validates and determines coercibility and resulting collation name of    * binary operator if needed.    */
 specifier|protected
 name|RelDataType
 name|adjustType
@@ -1152,7 +1152,7 @@ return|return
 name|type
 return|;
 block|}
-comment|/**      * Infers the type of a call to this operator with a given set of operand      * types. Shorthand for {@link #inferReturnType(SqlOperatorBinding)}.      */
+comment|/**    * Infers the type of a call to this operator with a given set of operand    * types. Shorthand for {@link #inferReturnType(SqlOperatorBinding)}.    */
 specifier|public
 specifier|final
 name|RelDataType
@@ -1183,7 +1183,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**      * Checks that the operand values in a {@link SqlCall} to this operator are      * valid. Subclasses must either override this method or supply an instance      * of {@link SqlOperandTypeChecker} to the constructor.      *      * @param callBinding description of call      * @param throwOnFailure whether to throw an exception if check fails      * (otherwise returns false in that case)      *      * @return whether check succeeded      */
+comment|/**    * Checks that the operand values in a {@link SqlCall} to this operator are    * valid. Subclasses must either override this method or supply an instance    * of {@link SqlOperandTypeChecker} to the constructor.    *    * @param callBinding    description of call    * @param throwOnFailure whether to throw an exception if check fails    *                       (otherwise returns false in that case)    * @return whether check succeeded    */
 specifier|public
 name|boolean
 name|checkOperandTypes
@@ -1333,7 +1333,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/** Returns whether the given operands are valid. If not valid and      * {@code fail}, throws an assertion error.      *      *<p>Similar to {@link #checkOperandCount}, but some operators may have      * different valid operands in {@link SqlNode} and {@code RexNode} formats      * (some examples are CAST and AND), and this method throws internal errors,      * not user errors.</p>      */
+comment|/**    * Returns whether the given operands are valid. If not valid and    * {@code fail}, throws an assertion error.    *    *<p>Similar to {@link #checkOperandCount}, but some operators may have    * different valid operands in {@link SqlNode} and {@code RexNode} formats    * (some examples are CAST and AND), and this method throws internal errors,    * not user errors.</p>    */
 specifier|public
 name|boolean
 name|validRexOperands
@@ -1349,7 +1349,7 @@ return|return
 literal|true
 return|;
 block|}
-comment|/**      * Returns a template describing how the operator signature is to be built.      * E.g for the binary + operator the template looks like "{1} {0} {2}" {0}      * is the operator, subsequent numbers are operands.      *      * @param operandsCount is used with functions that can take a variable      * number of operands      *      * @return signature template, or null to indicate that a default template      * will suffice      */
+comment|/**    * Returns a template describing how the operator signature is to be built.    * E.g for the binary + operator the template looks like "{1} {0} {2}" {0}    * is the operator, subsequent numbers are operands.    *    * @param operandsCount is used with functions that can take a variable    *                      number of operands    * @return signature template, or null to indicate that a default template    * will suffice    */
 specifier|public
 name|String
 name|getSignatureTemplate
@@ -1363,7 +1363,7 @@ return|return
 literal|null
 return|;
 block|}
-comment|/**      * Returns a string describing the expected operand types of a call, e.g.      * "SUBSTR(VARCHAR, INTEGER, INTEGER)".      */
+comment|/**    * Returns a string describing the expected operand types of a call, e.g.    * "SUBSTR(VARCHAR, INTEGER, INTEGER)".    */
 specifier|public
 specifier|final
 name|String
@@ -1377,7 +1377,7 @@ name|name
 argument_list|)
 return|;
 block|}
-comment|/**      * Returns a string describing the expected operand types of a call, e.g.      * "SUBSTRING(VARCHAR, INTEGER, INTEGER)" where the name (SUBSTRING in this      * example) can be replaced by a specified name.      */
+comment|/**    * Returns a string describing the expected operand types of a call, e.g.    * "SUBSTRING(VARCHAR, INTEGER, INTEGER)" where the name (SUBSTRING in this    * example) can be replaced by a specified name.    */
 specifier|public
 name|String
 name|getAllowedSignatures
@@ -1418,7 +1418,7 @@ return|return
 name|operandTypeInference
 return|;
 block|}
-comment|/**      * Returns whether this operator is an aggregate function. By default,      * subclass type is used (an instance of SqlAggFunction is assumed to be an      * aggregator; anything else is not).      *      * @return whether this operator is an aggregator      */
+comment|/**    * Returns whether this operator is an aggregate function. By default,    * subclass type is used (an instance of SqlAggFunction is assumed to be an    * aggregator; anything else is not).    *    * @return whether this operator is an aggregator    */
 specifier|public
 name|boolean
 name|isAggregator
@@ -1432,7 +1432,7 @@ name|SqlAggFunction
 operator|)
 return|;
 block|}
-comment|/**      * Accepts a {@link SqlVisitor}, visiting each operand of a call. Returns      * null.      *      * @param visitor Visitor      * @param call Call to visit      */
+comment|/**    * Accepts a {@link SqlVisitor}, visiting each operand of a call. Returns    * null.    *    * @param visitor Visitor    * @param call    Call to visit    */
 specifier|public
 parameter_list|<
 name|R
@@ -1481,7 +1481,7 @@ return|return
 literal|null
 return|;
 block|}
-comment|/**      * Accepts a {@link SqlVisitor}, directing an {@link      * org.eigenbase.sql.util.SqlBasicVisitor.ArgHandler} to visit operand of a      * call. The argument handler allows fine control about how the operands are      * visited, and how the results are combined.      *      * @param visitor Visitor      * @param call Call to visit      * @param onlyExpressions If true, ignores operands which are not      * expressions. For example, in the call to the<code>AS</code> operator      * @param argHandler Called for each operand      */
+comment|/**    * Accepts a {@link SqlVisitor}, directing an {@link    * org.eigenbase.sql.util.SqlBasicVisitor.ArgHandler} to visit operand of a    * call. The argument handler allows fine control about how the operands are    * visited, and how the results are combined.    *    * @param visitor         Visitor    * @param call            Call to visit    * @param onlyExpressions If true, ignores operands which are not    *                        expressions. For example, in the call to the    *<code>AS</code> operator    * @param argHandler      Called for each operand    */
 specifier|public
 parameter_list|<
 name|R
@@ -1553,7 +1553,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * @return the return type inference strategy for this operator, or null if      * return type inference is implemented by a subclass override      */
+comment|/**    * @return the return type inference strategy for this operator, or null if    * return type inference is implemented by a subclass override    */
 specifier|public
 name|SqlReturnTypeInference
 name|getReturnTypeInference
@@ -1563,7 +1563,7 @@ return|return
 name|returnTypeInference
 return|;
 block|}
-comment|/**      * Returns whether this operator is monotonic.      *      *<p>Default implementation returns {@link SqlMonotonicity#NotMonotonic}.      *      * @param call Call to this operator      * @param scope Scope in which the call occurs      */
+comment|/**    * Returns whether this operator is monotonic.    *    *<p>Default implementation returns {@link SqlMonotonicity#NotMonotonic}.    *    * @param call  Call to this operator    * @param scope Scope in which the call occurs    */
 specifier|public
 name|SqlMonotonicity
 name|getMonotonicity
@@ -1581,7 +1581,7 @@ operator|.
 name|NotMonotonic
 return|;
 block|}
-comment|/**      * @return true iff a call to this operator is guaranteed to always return      * the same result given the same operands; true is assumed by default      */
+comment|/**    * @return true iff a call to this operator is guaranteed to always return    * the same result given the same operands; true is assumed by default    */
 specifier|public
 name|boolean
 name|isDeterministic
@@ -1591,7 +1591,7 @@ return|return
 literal|true
 return|;
 block|}
-comment|/**      * @return true iff it is unsafe to cache query plans referencing this      * operator; false is assumed by default      */
+comment|/**    * @return true iff it is unsafe to cache query plans referencing this    * operator; false is assumed by default    */
 specifier|public
 name|boolean
 name|isDynamicFunction
@@ -1601,7 +1601,7 @@ return|return
 literal|false
 return|;
 block|}
-comment|/**      * Method to check if call requires expansion when it has decimal operands.      * The default implementation is to return true.      */
+comment|/**    * Method to check if call requires expansion when it has decimal operands.    * The default implementation is to return true.    */
 specifier|public
 name|boolean
 name|requiresDecimalExpansion
@@ -1611,7 +1611,7 @@ return|return
 literal|true
 return|;
 block|}
-comment|/**      * Returns whether the<code>ordinal</code>th argument to this operator must      * be scalar (as opposed to a query).      *      *<p>If true (the default), the validator will attempt to convert the      * argument into a scalar subquery, which must have one column and return at      * most one row.      *      *<p>Operators such as<code>SELECT</code> and<code>EXISTS</code> override      * this method.      */
+comment|/**    * Returns whether the<code>ordinal</code>th argument to this operator must    * be scalar (as opposed to a query).    *    *<p>If true (the default), the validator will attempt to convert the    * argument into a scalar subquery, which must have one column and return at    * most one row.    *    *<p>Operators such as<code>SELECT</code> and<code>EXISTS</code> override    * this method.    */
 specifier|public
 name|boolean
 name|argumentMustBeScalar

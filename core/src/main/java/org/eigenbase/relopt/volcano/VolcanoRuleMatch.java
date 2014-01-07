@@ -77,7 +77,7 @@ operator|.
 name|NaN
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a<code>VolcanoRuleMatch</code>.      *      * @param operand0 Primary operand      * @param rels List of targets; copied by the constructor, so the client can      * modify it later      *      * @pre rels[i] != null      */
+comment|/**    * Creates a<code>VolcanoRuleMatch</code>.    *    * @param operand0 Primary operand    * @param rels     List of targets; copied by the constructor, so the client    *                 can modify it later    * @pre rels[i] != null    */
 name|VolcanoRuleMatch
 parameter_list|(
 name|VolcanoPlanner
@@ -182,7 +182,7 @@ return|return
 name|digest
 return|;
 block|}
-comment|/**      * Clears the cached importance value of this rule match. The importance      * will be re-calculated next time {@link #getImportance()} is called.      */
+comment|/**    * Clears the cached importance value of this rule match. The importance    * will be re-calculated next time {@link #getImportance()} is called.    */
 name|void
 name|clearCachedImportance
 parameter_list|()
@@ -194,7 +194,7 @@ operator|.
 name|NaN
 expr_stmt|;
 block|}
-comment|/**      * Returns the importance of this rule.      *      *<p>Calls {@link #computeImportance()} the first time, thereafter uses a      * cached value until {@link #clearCachedImportance()} is called.      *      * @return importance of this rule; a value between 0 and 1      */
+comment|/**    * Returns the importance of this rule.    *    *<p>Calls {@link #computeImportance()} the first time, thereafter uses a    * cached value until {@link #clearCachedImportance()} is called.    *    * @return importance of this rule; a value between 0 and 1    */
 name|double
 name|getImportance
 parameter_list|()
@@ -219,7 +219,7 @@ return|return
 name|cachedImportance
 return|;
 block|}
-comment|/**      * Computes the importance of this rule match.      *      * @return importance of this rule match      */
+comment|/**    * Computes the importance of this rule match.    *    * @return importance of this rule match    */
 name|double
 name|computeImportance
 parameter_list|()
@@ -377,7 +377,7 @@ return|return
 name|importance
 return|;
 block|}
-comment|/**      * Computes a string describing this rule match. Two rule matches are      * equivalent if and only if their digests are the same.      *      * @return description of this rule match      */
+comment|/**    * Computes a string describing this rule match. Two rule matches are    * equivalent if and only if their digests are the same.    *    * @return description of this rule match    */
 specifier|private
 name|String
 name|computeDigest
@@ -457,7 +457,7 @@ name|toString
 argument_list|()
 return|;
 block|}
-comment|/**      * Recomputes the digest of this VolcanoRuleMatch. It is necessary when sets      * have merged since the match was created.      */
+comment|/**    * Recomputes the digest of this VolcanoRuleMatch. It is necessary when sets    * have merged since the match was created.    */
 specifier|public
 name|void
 name|recomputeDigest
@@ -469,7 +469,7 @@ name|computeDigest
 argument_list|()
 expr_stmt|;
 block|}
-comment|/**      * Returns a guess as to which subset (that is equivalence class of      * relational expressions combined with a set of physical traits) the result      * of this rule will belong to.      *      * @return expected subset, or null if we cannot guess      */
+comment|/**    * Returns a guess as to which subset (that is equivalence class of    * relational expressions combined with a set of physical traits) the result    * of this rule will belong to.    *    * @return expected subset, or null if we cannot guess    */
 specifier|private
 name|RelSubset
 name|guessSubset

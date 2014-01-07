@@ -173,7 +173,7 @@ block|,
 literal|"AND"
 block|}
 decl_stmt|;
-comment|/**      * Ordinal of the 'value' operand.      */
+comment|/**    * Ordinal of the 'value' operand.    */
 specifier|public
 specifier|static
 specifier|final
@@ -182,7 +182,7 @@ name|VALUE_OPERAND
 init|=
 literal|0
 decl_stmt|;
-comment|/**      * Ordinal of the 'lower' operand.      */
+comment|/**    * Ordinal of the 'lower' operand.    */
 specifier|public
 specifier|static
 specifier|final
@@ -191,7 +191,7 @@ name|LOWER_OPERAND
 init|=
 literal|1
 decl_stmt|;
-comment|/**      * Ordinal of the 'upper' operand.      */
+comment|/**    * Ordinal of the 'upper' operand.    */
 specifier|public
 specifier|static
 specifier|final
@@ -200,7 +200,7 @@ name|UPPER_OPERAND
 init|=
 literal|2
 decl_stmt|;
-comment|/**      * Custom operand-type checking strategy.      */
+comment|/**    * Custom operand-type checking strategy.    */
 specifier|private
 specifier|static
 specifier|final
@@ -235,7 +235,7 @@ literal|"BETWEEN"
 argument_list|)
 decl_stmt|;
 comment|//~ Enums ------------------------------------------------------------------
-comment|/**      * Defines the "SYMMETRIC" and "ASYMMETRIC" keywords.      */
+comment|/**    * Defines the "SYMMETRIC" and "ASYMMETRIC" keywords.    */
 specifier|public
 enum|enum
 name|Flag
@@ -254,7 +254,7 @@ specifier|final
 name|Flag
 name|flag
 decl_stmt|;
-comment|/**      * If true the call represents 'NOT BETWEEN'.      */
+comment|/**    * If true the call represents 'NOT BETWEEN'.    */
 specifier|private
 specifier|final
 name|boolean
@@ -983,7 +983,7 @@ literal|1
 return|;
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------
-comment|/**      * Finds an AND operator in an expression.      */
+comment|/**    * Finds an AND operator in an expression.    */
 specifier|private
 specifier|static
 class|class
@@ -1074,7 +1074,7 @@ class|class
 name|Found
 extends|extends
 name|RuntimeException
-block|{         }
+block|{     }
 block|}
 block|}
 end_class

@@ -103,7 +103,7 @@ name|ConventionTraitDef
 argument_list|()
 decl_stmt|;
 comment|//~ Instance fields --------------------------------------------------------
-comment|/**      * Weak-key map of RelOptPlanner to ConversionData. The idea is that when      * the planner goes away, so does the map entry.      */
+comment|/**    * Weak-key map of RelOptPlanner to ConversionData. The idea is that when    * the planner goes away, so does the map entry.    */
 specifier|private
 specifier|final
 name|WeakHashMap
@@ -547,7 +547,7 @@ return|return
 literal|null
 return|;
 block|}
-comment|/**      * Tries to convert a relational expression to the target convention of an      * arc.      */
+comment|/**    * Tries to convert a relational expression to the target convention of an    * arc.    */
 specifier|private
 name|RelNode
 name|changeConvention
@@ -763,7 +763,7 @@ operator|.
 name|create
 argument_list|()
 decl_stmt|;
-comment|/**          * For a given source/target convention, there may be several possible          * conversion rules. Maps {@link DefaultEdge} to a          * collection of {@link ConverterRule} objects.          */
+comment|/**      * For a given source/target convention, there may be several possible      * conversion rules. Maps {@link DefaultEdge} to a      * collection of {@link ConverterRule} objects.      */
 specifier|final
 name|MultiMap
 argument_list|<

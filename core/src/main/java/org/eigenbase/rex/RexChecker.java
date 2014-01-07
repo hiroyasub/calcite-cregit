@@ -80,7 +80,7 @@ name|int
 name|failCount
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a RexChecker with a given input row type.      *      *<p>If<code>fail</code> is true, the checker will throw an {@link      * AssertionError} if an invalid node is found and assertions are enabled.      *      *<p>Otherwise, each method returns whether its part of the tree is valid.      *      * @param inputRowType Input row type      * @param fail Whether to throw an {@link AssertionError} if an invalid node      * is detected      */
+comment|/**    * Creates a RexChecker with a given input row type.    *    *<p>If<code>fail</code> is true, the checker will throw an {@link    * AssertionError} if an invalid node is found and assertions are enabled.    *    *<p>Otherwise, each method returns whether its part of the tree is valid.    *    * @param inputRowType Input row type    * @param fail         Whether to throw an {@link AssertionError} if an invalid node    *                     is detected    */
 specifier|public
 name|RexChecker
 parameter_list|(
@@ -105,7 +105,7 @@ name|fail
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Creates a RexChecker with a given set of input fields.      *      *<p>If<code>fail</code> is true, the checker will throw an {@link      * AssertionError} if an invalid node is found and assertions are enabled.      *      *<p>Otherwise, each method returns whether its part of the tree is valid.      *      * @param inputTypeList Input row type      * @param fail Whether to throw an {@link AssertionError} if an invalid node      * is detected      */
+comment|/**    * Creates a RexChecker with a given set of input fields.    *    *<p>If<code>fail</code> is true, the checker will throw an {@link    * AssertionError} if an invalid node is found and assertions are enabled.    *    *<p>Otherwise, each method returns whether its part of the tree is valid.    *    * @param inputTypeList Input row type    * @param fail          Whether to throw an {@link AssertionError} if an invalid node    *                      is detected    */
 specifier|public
 name|RexChecker
 parameter_list|(
@@ -138,7 +138,7 @@ name|fail
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Returns the number of failures encountered.      *      * @return Number of failures      */
+comment|/**    * Returns the number of failures encountered.    *    * @return Number of failures    */
 specifier|public
 name|int
 name|getFailureCount
@@ -466,7 +466,7 @@ return|return
 literal|true
 return|;
 block|}
-comment|/**      * Returns whether an expression is valid.      */
+comment|/**    * Returns whether an expression is valid.    */
 specifier|public
 specifier|final
 name|boolean

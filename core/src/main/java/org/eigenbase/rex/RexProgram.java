@@ -155,7 +155,7 @@ class|class
 name|RexProgram
 block|{
 comment|//~ Instance fields --------------------------------------------------------
-comment|/**      * First stage of expression evaluation. The expressions in this array can      * refer to inputs (using input ordinal #0) or previous expressions in the      * array (using input ordinal #1).      */
+comment|/**    * First stage of expression evaluation. The expressions in this array can    * refer to inputs (using input ordinal #0) or previous expressions in the    * array (using input ordinal #1).    */
 specifier|private
 specifier|final
 name|List
@@ -164,7 +164,7 @@ name|RexNode
 argument_list|>
 name|exprs
 decl_stmt|;
-comment|/**      * With {@link #condition}, the second stage of expression evaluation.      */
+comment|/**    * With {@link #condition}, the second stage of expression evaluation.    */
 specifier|private
 specifier|final
 name|List
@@ -173,7 +173,7 @@ name|RexLocalRef
 argument_list|>
 name|projects
 decl_stmt|;
-comment|/**      * The optional condition. If null, the calculator does not filter rows.      */
+comment|/**    * The optional condition. If null, the calculator does not filter rows.    */
 specifier|private
 specifier|final
 name|RexLocalRef
@@ -189,14 +189,14 @@ specifier|final
 name|RelDataType
 name|outputRowType
 decl_stmt|;
-comment|/**      * Reference counts for each expression, computed on demand.      */
+comment|/**    * Reference counts for each expression, computed on demand.    */
 specifier|private
 name|int
 index|[]
 name|refCounts
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a program.      *      * @param inputRowType Input row type      * @param exprs Common expressions      * @param projects Projection expressions      * @param condition Condition expression. If null, calculator does not      * filter rows      * @param outputRowType Description of the row produced by the program      *      * @pre !containCommonExprs(exprs)      * @pre !containForwardRefs(exprs)      * @pre !containNonTrivialAggs(exprs)      */
+comment|/**    * Creates a program.    *    * @param inputRowType  Input row type    * @param exprs         Common expressions    * @param projects      Projection expressions    * @param condition     Condition expression. If null, calculator does not    *                      filter rows    * @param outputRowType Description of the row produced by the program    * @pre !containCommonExprs(exprs)    * @pre !containForwardRefs(exprs)    * @pre !containNonTrivialAggs(exprs)    */
 specifier|public
 name|RexProgram
 parameter_list|(
@@ -276,7 +276,7 @@ comment|// REVIEW jvs 16-Oct-2006:  The description below is confusing.  I
 comment|// think it means "none of the entries are null, there may be none,
 comment|// and there is no further reduction into smaller common sub-expressions
 comment|// possible"?
-comment|/**      * Returns the common sub-expressions of this program.      *      *<p>The list is never null but may be empty; each the expression in the      * list is not null; and no further reduction into smaller common      * sub-expressions is possible.      *      * @post return != null      * @post !containCommonExprs(exprs)      */
+comment|/**    * Returns the common sub-expressions of this program.    *    *<p>The list is never null but may be empty; each the expression in the    * list is not null; and no further reduction into smaller common    * sub-expressions is possible.    *    * @post return != null    * @post !containCommonExprs(exprs)    */
 specifier|public
 name|List
 argument_list|<
@@ -289,7 +289,7 @@ return|return
 name|exprs
 return|;
 block|}
-comment|/**      * Returns an array of references to the expressions which this program is      * to project. Never null, may be empty.      */
+comment|/**    * Returns an array of references to the expressions which this program is    * to project. Never null, may be empty.    */
 specifier|public
 name|List
 argument_list|<
@@ -302,7 +302,7 @@ return|return
 name|projects
 return|;
 block|}
-comment|/**      * Returns a list of project expressions and their field names.      */
+comment|/**    * Returns a list of project expressions and their field names.    */
 specifier|public
 name|List
 argument_list|<
@@ -384,7 +384,7 @@ block|}
 block|}
 return|;
 block|}
-comment|/**      * Returns the field reference of this program's filter condition, or null      * if there is no condition.      */
+comment|/**    * Returns the field reference of this program's filter condition, or null    * if there is no condition.    */
 specifier|public
 name|RexLocalRef
 name|getCondition
@@ -394,7 +394,7 @@ return|return
 name|condition
 return|;
 block|}
-comment|/**      * Creates a program which calculates projections and filters rows based      * upon a condition. Does not attempt to eliminate common sub-expressions.      *      * @param projectExprs Project expressions      * @param conditionExpr Condition on which to filter rows, or null if rows      * are not to be filtered      * @param outputRowType Output row type      * @param rexBuilder Builder of rex expressions      *      * @return A program      */
+comment|/**    * Creates a program which calculates projections and filters rows based    * upon a condition. Does not attempt to eliminate common sub-expressions.    *    * @param projectExprs  Project expressions    * @param conditionExpr Condition on which to filter rows, or null if rows    *                      are not to be filtered    * @param outputRowType Output row type    * @param rexBuilder    Builder of rex expressions    * @return A program    */
 specifier|public
 specifier|static
 name|RexProgram
@@ -437,7 +437,7 @@ name|rexBuilder
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates a program which calculates projections and filters rows based      * upon a condition. Does not attempt to eliminate common sub-expressions.      *      * @param projectExprs Project expressions      * @param conditionExpr Condition on which to filter rows, or null if rows      * are not to be filtered      * @param fieldNames Names of projected fields      * @param rexBuilder Builder of rex expressions      *      * @return A program      */
+comment|/**    * Creates a program which calculates projections and filters rows based    * upon a condition. Does not attempt to eliminate common sub-expressions.    *    * @param projectExprs  Project expressions    * @param conditionExpr Condition on which to filter rows, or null if rows    *                      are not to be filtered    * @param fieldNames    Names of projected fields    * @param rexBuilder    Builder of rex expressions    * @return A program    */
 specifier|public
 specifier|static
 name|RexProgram
@@ -619,7 +619,7 @@ name|simple
 argument_list|()
 return|;
 block|}
-comment|/**      * Writes an explanation of the expressions in this program to a plan      * writer.      *      * @param pw Plan writer      */
+comment|/**    * Writes an explanation of the expressions in this program to a plan    * writer.    *    * @param pw Plan writer    */
 specifier|public
 name|RelWriter
 name|explainCalc
@@ -666,7 +666,7 @@ name|EXPPLAN_ATTRIBUTES
 argument_list|)
 return|;
 block|}
-comment|/**      * Collects the expressions in this program into a list of terms and values.      *      * @param prefix Prefix for term names, usually the empty string, but useful      * if a relational expression contains more than one program      * @param pw Plan writer      */
+comment|/**    * Collects the expressions in this program into a list of terms and values.    *    * @param prefix Prefix for term names, usually the empty string, but useful    *               if a relational expression contains more than one program    * @param pw     Plan writer    */
 specifier|public
 name|RelWriter
 name|collectExplainTerms
@@ -938,7 +938,7 @@ return|return
 name|pw
 return|;
 block|}
-comment|/**      * Returns the number of expressions at the front of an array which are      * simply projections of the same field.      *      * @param refs References      */
+comment|/**    * Returns the number of expressions at the front of an array which are    * simply projections of the same field.    *    * @param refs References    */
 specifier|private
 specifier|static
 name|int
@@ -1001,7 +1001,7 @@ name|size
 argument_list|()
 return|;
 block|}
-comment|/**      * Returns the number of expressions in this program.      */
+comment|/**    * Returns the number of expressions in this program.    */
 specifier|public
 name|int
 name|getExprCount
@@ -1031,7 +1031,7 @@ literal|1
 operator|)
 return|;
 block|}
-comment|/**      * Creates a copy of this program.      *      * @deprecated Method not necessary because RexProgram is immutable      */
+comment|/**    * Creates a copy of this program.    *    * @deprecated Method not necessary because RexProgram is immutable    */
 specifier|public
 name|RexProgram
 name|copy
@@ -1078,7 +1078,7 @@ name|outputRowType
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates the identity program.      */
+comment|/**    * Creates the identity program.    */
 specifier|public
 specifier|static
 name|RexProgram
@@ -1097,7 +1097,7 @@ name|rowType
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates a program that projects its input fields but with possibly      * different names for the output fields.      */
+comment|/**    * Creates a program that projects its input fields but with possibly    * different names for the output fields.    */
 specifier|public
 specifier|static
 name|RexProgram
@@ -1266,7 +1266,7 @@ name|outputRowType
 argument_list|)
 return|;
 block|}
-comment|/**      * Returns the type of the input row to the program.      *      * @return input row type      */
+comment|/**    * Returns the type of the input row to the program.    *    * @return input row type    */
 specifier|public
 name|RelDataType
 name|getInputRowType
@@ -1276,7 +1276,7 @@ return|return
 name|inputRowType
 return|;
 block|}
-comment|/**      * Returns whether this program contains windowed aggregate functions      *      * @return whether this program contains windowed aggregate functions      */
+comment|/**    * Returns whether this program contains windowed aggregate functions    *    * @return whether this program contains windowed aggregate functions    */
 specifier|public
 name|boolean
 name|containsAggs
@@ -1291,7 +1291,7 @@ name|this
 argument_list|)
 return|;
 block|}
-comment|/**      * Returns the type of the output row from this program.      *      * @return output row type      */
+comment|/**    * Returns the type of the output row from this program.    *    * @return output row type    */
 specifier|public
 name|RelDataType
 name|getOutputRowType
@@ -1301,7 +1301,7 @@ return|return
 name|outputRowType
 return|;
 block|}
-comment|/**      * Checks that this program is valid.      *      *<p>If<code>fail</code> is true, executes<code>assert false</code>, so      * will throw an {@link AssertionError} if assertions are enabled. If<code>      * fail</code> is false, merely returns whether the program is valid.      *      * @param fail Whether to fail      *      * @return Whether the program is valid      *      * @throws AssertionError if program is invalid and<code>fail</code> is      * true and assertions are enabled      */
+comment|/**    * Checks that this program is valid.    *    *<p>If<code>fail</code> is true, executes<code>assert false</code>, so    * will throw an {@link AssertionError} if assertions are enabled. If<code>    * fail</code> is false, merely returns whether the program is valid.    *    * @param fail Whether to fail    * @return Whether the program is valid    * @throws AssertionError if program is invalid and<code>fail</code> is    *                        true and assertions are enabled    */
 specifier|public
 name|boolean
 name|isValid
@@ -1729,7 +1729,7 @@ return|return
 literal|true
 return|;
 block|}
-comment|/**      * Returns whether an expression always evaluates to null.      *      *<p/>Like {@link RexUtil#isNull(RexNode)}, null literals are null, and      * casts of null literals are null. But this method also regards references      * to null expressions as null.      *      * @param expr Expression      *      * @return Whether expression always evaluates to null      */
+comment|/**    * Returns whether an expression always evaluates to null.    *    *<p>Like {@link RexUtil#isNull(RexNode)}, null literals are null, and                                                         |    * casts of null literals are null. But this method also regards references    * to null expressions as null.</p>    *    * @param expr Expression    * @return Whether expression always evaluates to null    */
 specifier|public
 name|boolean
 name|isNull
@@ -1813,7 +1813,7 @@ literal|false
 return|;
 block|}
 block|}
-comment|/**      * Fully expands a RexLocalRef back into a pure RexNode tree containing no      * RexLocalRefs (reversing the effect of common subexpression elimination).      * For example,<code>program.expandLocalRef(program.getCondition())</code>      * will return the expansion of a program's condition.      *      * @param ref a RexLocalRef from this program      *      * @return expanded form      */
+comment|/**    * Fully expands a RexLocalRef back into a pure RexNode tree containing no    * RexLocalRefs (reversing the effect of common subexpression elimination).    * For example,<code>program.expandLocalRef(program.getCondition())</code>    * will return the expansion of a program's condition.    *    * @param ref a RexLocalRef from this program    * @return expanded form    */
 specifier|public
 name|RexNode
 name|expandLocalRef
@@ -1840,7 +1840,7 @@ name|shuttle
 argument_list|)
 return|;
 block|}
-comment|/**      * Given a list of collations which hold for the input to this program,      * returns a list of collations which hold for its output. The result is      * mutable.      */
+comment|/**    * Given a list of collations which hold for the input to this program,    * returns a list of collations which hold for its output. The result is    * mutable.    */
 specifier|public
 name|List
 argument_list|<
@@ -1888,7 +1888,7 @@ return|return
 name|outputCollations
 return|;
 block|}
-comment|/**      * Given a list of expressions and a description of which are ordered,      * computes a list of collations. The result is mutable.      */
+comment|/**    * Given a list of expressions and a description of which are ordered,    * computes a list of collations. The result is mutable.    */
 specifier|public
 specifier|static
 name|void
@@ -2098,7 +2098,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Returns whether the fields on the leading edge of the project list are      * the input fields.      *      * @param fail Whether to throw an assert failure if does not project      * identity      */
+comment|/**    * Returns whether the fields on the leading edge of the project list are    * the input fields.    *    * @param fail Whether to throw an assert failure if does not project    *             identity    */
 specifier|public
 name|boolean
 name|projectsIdentity
@@ -2206,7 +2206,7 @@ return|return
 literal|true
 return|;
 block|}
-comment|/**      * Returns whether this program projects precisely its input fields. It may      * or may not apply a condition.      */
+comment|/**    * Returns whether this program projects precisely its input fields. It may    * or may not apply a condition.    */
 specifier|public
 name|boolean
 name|projectsOnlyIdentity
@@ -2275,7 +2275,7 @@ return|return
 literal|true
 return|;
 block|}
-comment|/**      * Returns whether this program returns its input exactly.      *      *<p>This is a stronger condition than {@link #projectsIdentity(boolean)}.      */
+comment|/**    * Returns whether this program returns its input exactly.    *    *<p>This is a stronger condition than {@link #projectsIdentity(boolean)}.    */
 specifier|public
 name|boolean
 name|isTrivial
@@ -2291,7 +2291,7 @@ name|projectsOnlyIdentity
 argument_list|()
 return|;
 block|}
-comment|/**      * Gets reference counts for each expression in the program, where the      * references are detected from later expressions in the same program, as      * well as the project list and condition. Expressions with references      * counts greater than 1 are true common sub-expressions.      *      * @return array of reference counts; the ith element in the returned array      * is the number of references to getExprList()[i]      */
+comment|/**    * Gets reference counts for each expression in the program, where the    * references are detected from later expressions in the same program, as    * well as the project list and condition. Expressions with references    * counts greater than 1 are true common sub-expressions.    *    * @return array of reference counts; the ith element in the returned array    * is the number of references to getExprList()[i]    */
 specifier|public
 name|int
 index|[]
@@ -2371,7 +2371,7 @@ return|return
 name|refCounts
 return|;
 block|}
-comment|/**      * Applies a visitor to an array of expressions and, if specified, a single      * expression.      *      * @param visitor Visitor      * @param exprs Array of expressions      * @param expr Single expression, may be null      */
+comment|/**    * Applies a visitor to an array of expressions and, if specified, a single    * expression.    *    * @param visitor Visitor    * @param exprs   Array of expressions    * @param expr    Single expression, may be null    */
 specifier|public
 specifier|static
 name|void
@@ -2425,7 +2425,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Returns whether an expression is constant.      */
+comment|/**    * Returns whether an expression is constant.    */
 specifier|public
 name|boolean
 name|isConstant
@@ -2464,7 +2464,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**      * Returns the input field that an output field is populated from, or -1 if      * it is populated from an expression.      */
+comment|/**    * Returns the input field that an output field is populated from, or -1 if    * it is populated from an expression.    */
 specifier|public
 name|int
 name|getSourceField
@@ -2609,7 +2609,7 @@ return|;
 block|}
 block|}
 block|}
-comment|/**      * Returns whether this program is a permutation of its inputs.      */
+comment|/**    * Returns whether this program is a permutation of its inputs.    */
 specifier|public
 name|boolean
 name|isPermutation
@@ -2672,7 +2672,7 @@ return|return
 literal|true
 return|;
 block|}
-comment|/**      * Returns a permutation, if this program is a permutation, otherwise null.      */
+comment|/**    * Returns a permutation, if this program is a permutation, otherwise null.    */
 specifier|public
 name|Permutation
 name|getPermutation
@@ -2761,7 +2761,7 @@ return|return
 name|permutation
 return|;
 block|}
-comment|/**      * Returns the set of correlation variables used (read) by this program.      *      * @return set of correlation variable names      */
+comment|/**    * Returns the set of correlation variables used (read) by this program.    *    * @return set of correlation variable names    */
 specifier|public
 name|HashSet
 argument_list|<
@@ -2828,7 +2828,7 @@ return|return
 name|paramIdSet
 return|;
 block|}
-comment|/**      * Returns whether this program is in canonical form.      *      * @param fail Whether to throw an assertion error if not in canonical form      * @param rexBuilder Rex builder      * @return whether in canonical form      */
+comment|/**    * Returns whether this program is in canonical form.    *    * @param fail       Whether to throw an assertion error if not in canonical    *                   form    * @param rexBuilder Rex builder    * @return whether in canonical form    */
 specifier|public
 name|boolean
 name|isNormalized
@@ -2905,7 +2905,7 @@ literal|true
 return|;
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------
-comment|/**      * Visitor which walks over a program and checks validity.      */
+comment|/**    * Visitor which walks over a program and checks validity.    */
 specifier|static
 class|class
 name|Checker
@@ -2920,7 +2920,7 @@ name|RelDataType
 argument_list|>
 name|internalExprTypeList
 decl_stmt|;
-comment|/**          * Creates a Checker.          *          * @param fail Whether to fail          * @param inputRowType Types of the input fields          * @param internalExprTypeList Types of the internal expressions          */
+comment|/**      * Creates a Checker.      *      * @param fail                 Whether to fail      * @param inputRowType         Types of the input fields      * @param internalExprTypeList Types of the internal expressions      */
 specifier|public
 name|Checker
 parameter_list|(
@@ -3042,7 +3042,7 @@ literal|true
 return|;
 block|}
 block|}
-comment|/**      * A RexShuttle used in the implementation of {@link      * RexProgram#expandLocalRef}.      */
+comment|/**    * A RexShuttle used in the implementation of {@link    * RexProgram#expandLocalRef}.    */
 specifier|private
 class|class
 name|ExpansionShuttle
@@ -3081,7 +3081,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**      * Walks over an expression and determines whether it is constant.      */
+comment|/**    * Walks over an expression and determines whether it is constant.    */
 specifier|private
 class|class
 name|ConstantFinder
@@ -3256,7 +3256,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**      * Given an expression in a program, creates a clone of the expression with      * sub-expressions (represented by {@link RexLocalRef}s) fully expanded.      */
+comment|/**    * Given an expression in a program, creates a clone of the expression with    * sub-expressions (represented by {@link RexLocalRef}s) fully expanded.    */
 specifier|private
 class|class
 name|Marshaller
@@ -3476,7 +3476,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**      * Visitor which marks which expressions are used.      */
+comment|/**    * Visitor which marks which expressions are used.    */
 specifier|private
 class|class
 name|ReferenceCounter

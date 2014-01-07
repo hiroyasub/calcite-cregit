@@ -112,7 +112,7 @@ name|Composition
 name|composition
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/** Package private. Use {@link SqlTypeStrategies#and},      * {@link SqlTypeStrategies#or}. */
+comment|/**    * Package private. Use {@link SqlTypeStrategies#and},    * {@link SqlTypeStrategies#or}.    */
 name|CompositeOperandTypeChecker
 parameter_list|(
 name|Composition

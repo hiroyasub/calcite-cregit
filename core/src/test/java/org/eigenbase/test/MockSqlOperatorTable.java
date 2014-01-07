@@ -132,7 +132,7 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Adds an operator to this table.      */
+comment|/**    * Adds an operator to this table.    */
 specifier|public
 name|void
 name|addOperator

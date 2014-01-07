@@ -109,7 +109,7 @@ extends|extends
 name|AbstractRelNode
 block|{
 comment|//~ Instance fields --------------------------------------------------------
-comment|/**      * Wrapped rel currently chosen for implementation of expression.      */
+comment|/**    * Wrapped rel currently chosen for implementation of expression.    */
 specifier|private
 name|RelNode
 name|currentRel
@@ -280,7 +280,7 @@ operator|+
 literal|")"
 return|;
 block|}
-comment|/**      * Replaces the implementation for this expression with a new one.      *      * @param newRel new expression      */
+comment|/**    * Replaces the implementation for this expression with a new one.    *    * @param newRel new expression    */
 name|void
 name|replaceRel
 parameter_list|(
@@ -293,7 +293,7 @@ operator|=
 name|newRel
 expr_stmt|;
 block|}
-comment|/**      * @return current implementation chosen for this vertex      */
+comment|/**    * @return current implementation chosen for this vertex    */
 specifier|public
 name|RelNode
 name|getCurrentRel

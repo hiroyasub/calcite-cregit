@@ -37,18 +37,18 @@ interface|interface
 name|SqlMoniker
 block|{
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Returns the type of object referred to by this moniker. Never null.      */
+comment|/**    * Returns the type of object referred to by this moniker. Never null.    */
 name|SqlMonikerType
 name|getType
 parameter_list|()
 function_decl|;
-comment|/**      * Returns the array of component names.      */
+comment|/**    * Returns the array of component names.    */
 name|String
 index|[]
 name|getFullyQualifiedNames
 parameter_list|()
 function_decl|;
-comment|/**      * Creates a {@link SqlIdentifier} containing the fully-qualified name.      */
+comment|/**    * Creates a {@link SqlIdentifier} containing the fully-qualified name.    */
 name|SqlIdentifier
 name|toIdentifier
 parameter_list|()

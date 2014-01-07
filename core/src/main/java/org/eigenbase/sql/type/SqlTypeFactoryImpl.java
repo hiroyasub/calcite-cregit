@@ -1980,7 +1980,7 @@ return|return
 name|resultType
 return|;
 block|}
-comment|/**      * Controls behavior discussed<a      * href="http://sf.net/mailarchive/message.php?msg_id=13337379">here</a>.      *      * @return false (the default) to provide strict SQL:2003 behavior; true to      * provide pragmatic behavior      *      * @sql.2003 Part 2 Section 9.3 Syntax Rule 3.a.iii.3      */
+comment|/**    * Controls behavior discussed<a    * href="http://sf.net/mailarchive/message.php?msg_id=13337379">here</a>.    *    * @return false (the default) to provide strict SQL:2003 behavior; true to    * provide pragmatic behavior    * @sql.2003 Part 2 Section 9.3 Syntax Rule 3.a.iii.3    */
 specifier|protected
 name|boolean
 name|shouldRaggedFixedLengthValueUnionBeVariable

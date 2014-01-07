@@ -161,7 +161,7 @@ name|WindowRel
 extends|extends
 name|WindowRelBase
 block|{
-comment|/**      * Creates a WindowRel.      *      * @param cluster Cluster      * @param child Input relational expression      * @param rowType Output row type      * @param windows Windows      */
+comment|/**    * Creates a WindowRel.    *    * @param cluster Cluster    * @param child   Input relational expression    * @param rowType Output row type    * @param windows Windows    */
 specifier|public
 name|WindowRel
 parameter_list|(
@@ -234,7 +234,7 @@ name|windows
 argument_list|)
 return|;
 block|}
-comment|/** Creates a WindowRel. */
+comment|/**    * Creates a WindowRel.    */
 specifier|public
 specifier|static
 name|RelNode

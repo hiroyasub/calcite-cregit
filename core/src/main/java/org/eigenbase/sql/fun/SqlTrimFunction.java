@@ -101,7 +101,7 @@ extends|extends
 name|SqlFunction
 block|{
 comment|//~ Enums ------------------------------------------------------------------
-comment|/**      * Defines the enumerated values "LEADING", "TRAILING", "BOTH".      */
+comment|/**    * Defines the enumerated values "LEADING", "TRAILING", "BOTH".    */
 specifier|public
 enum|enum
 name|Flag

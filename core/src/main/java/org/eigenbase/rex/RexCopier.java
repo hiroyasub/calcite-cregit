@@ -30,7 +30,7 @@ name|RexBuilder
 name|builder
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a RexCopier.      *      * @param builder Builder      */
+comment|/**    * Creates a RexCopier.    *    * @param builder Builder    */
 name|RexCopier
 parameter_list|(
 name|RexBuilder

@@ -69,14 +69,14 @@ extends|extends
 name|Properties
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
-comment|/**      * The singleton properties object.      */
+comment|/**    * The singleton properties object.    */
 specifier|private
 specifier|static
 name|SaffronProperties
 name|properties
 decl_stmt|;
 comment|//~ Instance fields --------------------------------------------------------
-comment|/**      * The string property "saffron.class.dir" is the path of the directory to      * compile classes to.      */
+comment|/**    * The string property "saffron.class.dir" is the path of the directory to    * compile classes to.    */
 specifier|public
 specifier|final
 name|StringProperty
@@ -92,7 +92,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      * The string property "saffron.java.compiler.class" is the name of the Java      * compiler to use. It must implement {@link      * org.eigenbase.javac.JavaCompiler}. The default value is      * "JP.ac.tsukuba.openjava.SunJavaCompiler".      */
+comment|/**    * The string property "saffron.java.compiler.class" is the name of the Java    * compiler to use. It must implement {@link    * org.eigenbase.javac.JavaCompiler}. The default value is    * "JP.ac.tsukuba.openjava.SunJavaCompiler".    */
 specifier|public
 specifier|final
 name|StringProperty
@@ -108,7 +108,7 @@ argument_list|,
 literal|"JP.ac.tsukuba.openjava.SunJavaCompiler"
 argument_list|)
 decl_stmt|;
-comment|/**      * The string property "saffron.package.name" is the package in which to      * include temporary classes. The default is "saffron.runtime".      */
+comment|/**    * The string property "saffron.package.name" is the package in which to    * include temporary classes. The default is "saffron.runtime".    */
 specifier|public
 specifier|final
 name|StringProperty
@@ -124,7 +124,7 @@ argument_list|,
 literal|"saffron.runtime"
 argument_list|)
 decl_stmt|;
-comment|/**      * The string property "saffron.java.dir" is the directory to generate      * temporary java files to. The default is {@link #classDir the class root}.      */
+comment|/**    * The string property "saffron.java.dir" is the directory to generate    * temporary java files to. The default is {@link #classDir the class root}.    */
 specifier|public
 specifier|final
 name|StringProperty
@@ -154,7 +154,7 @@ return|;
 block|}
 block|}
 decl_stmt|;
-comment|/**      * The string property "saffron.java.compiler.args" is the argument string      * for the {@link #javaCompilerClass java compiler}. {@link      * org.eigenbase.javac.JavaCompilerArgs#setString} describes how these      * arguments are interpreted.      */
+comment|/**    * The string property "saffron.java.compiler.args" is the argument string    * for the {@link #javaCompilerClass java compiler}. {@link    * org.eigenbase.javac.JavaCompilerArgs#setString} describes how these    * arguments are interpreted.    */
 specifier|public
 specifier|final
 name|StringProperty
@@ -170,7 +170,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      * The boolean property "saffron.stupid" determines whether to optimize      * variable assignments. If it is true, records are assigned to a variable      * even if they are never used. Default is false.      */
+comment|/**    * The boolean property "saffron.stupid" determines whether to optimize    * variable assignments. If it is true, records are assigned to a variable    * even if they are never used. Default is false.    */
 specifier|public
 specifier|final
 name|BooleanProperty
@@ -186,7 +186,7 @@ argument_list|,
 literal|false
 argument_list|)
 decl_stmt|;
-comment|/**      * The integer property "saffron.debug.level" determines how much debugging      * information is printed. The default, 0, means no debugging.      */
+comment|/**    * The integer property "saffron.debug.level" determines how much debugging    * information is printed. The default, 0, means no debugging.    */
 specifier|public
 specifier|final
 name|IntegerProperty
@@ -202,7 +202,7 @@ argument_list|,
 literal|0
 argument_list|)
 decl_stmt|;
-comment|/**      * The string property "saffron.debug.out" is the name of the file to send      * debugging information to.<code>"out"</code> (the default), means send to      * {@link System#out};<code>"err"</code> means send to {@link System#err}.      */
+comment|/**    * The string property "saffron.debug.out" is the name of the file to send    * debugging information to.<code>"out"</code> (the default), means send to    * {@link System#out};<code>"err"</code> means send to {@link System#err}.    */
 specifier|public
 specifier|final
 name|StringProperty
@@ -218,7 +218,7 @@ argument_list|,
 literal|"out"
 argument_list|)
 decl_stmt|;
-comment|/**      * The string property "saffron.test.Name" is used by {@link      * net.sf.farrago.test.FarragoTestCase} to filter tests.      */
+comment|/**    * The string property "saffron.test.Name" is used by    * {@code FarragoTestCase} to filter tests.    */
 specifier|public
 specifier|final
 name|StringProperty
@@ -234,7 +234,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      * The string property "saffron.test.Class" is used by {@link      * net.sf.farrago.test.FarragoTestCase} to filter tests.      */
+comment|/**    * The string property "saffron.test.Class" is used by    * {@code FarragoTestCase} to filter tests.    */
 specifier|public
 specifier|final
 name|StringProperty
@@ -250,7 +250,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      * The string property "saffron.test.Suite" is used by {@link      * net.sf.farrago.test.FarragoTestCase} to filter tests.      */
+comment|/**    * The string property "saffron.test.Suite" is used by    * {@code FarragoTestCase} to filter tests.    */
 specifier|public
 specifier|final
 name|StringProperty
@@ -266,7 +266,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      * The string property "saffron.test.everything" is used by {@link      * net.sf.farrago.test.FarragoTestCase} to filter tests.      */
+comment|/**    * The string property "saffron.test.everything" is used by    * {@code FarragoTestCase} to filter tests.    */
 specifier|public
 specifier|final
 name|BooleanProperty
@@ -282,7 +282,7 @@ argument_list|,
 literal|false
 argument_list|)
 decl_stmt|;
-comment|/**      * The string property "saffron.test.jdbc.url" is the URL of the JDBC      * database which contains the EMP and DEPT tables used for testing.      */
+comment|/**    * The string property "saffron.test.jdbc.url" is the URL of the JDBC    * database which contains the EMP and DEPT tables used for testing.    */
 specifier|public
 specifier|final
 name|StringProperty
@@ -298,7 +298,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      * The string property "saffron.test.jdbc.drivers" is a comma-separated list      * of class names to be used as JDBC drivers.      */
+comment|/**    * The string property "saffron.test.jdbc.drivers" is a comma-separated list    * of class names to be used as JDBC drivers.    */
 specifier|public
 specifier|final
 name|StringProperty
@@ -314,7 +314,7 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-comment|/**      * The boolean property "saffron.opt.allowInfiniteCostConverters" determines      * whether the optimizer will consider adding converters of infinite cost in      * order to convert a relational expression from one calling convention to      * another. The default value is<code>true</code>.      */
+comment|/**    * The boolean property "saffron.opt.allowInfiniteCostConverters" determines    * whether the optimizer will consider adding converters of infinite cost in    * order to convert a relational expression from one calling convention to    * another. The default value is<code>true</code>.    */
 specifier|public
 specifier|final
 name|BooleanProperty
@@ -330,7 +330,7 @@ argument_list|,
 literal|true
 argument_list|)
 decl_stmt|;
-comment|/**      * The string property "saffron.default.charset" is the name of the default      * character set. The default is "ISO-8859-1". It is used in {@link      * org.eigenbase.sql.validate.SqlValidator}.      */
+comment|/**    * The string property "saffron.default.charset" is the name of the default    * character set. The default is "ISO-8859-1". It is used in {@link    * org.eigenbase.sql.validate.SqlValidator}.    */
 specifier|public
 specifier|final
 name|StringProperty
@@ -346,7 +346,7 @@ argument_list|,
 literal|"ISO-8859-1"
 argument_list|)
 decl_stmt|;
-comment|/**      * The string property "saffron.default.nationalcharset" is the name of the      * default national character set which is used with the N'string' construct      * which may or may not be different from the {@link #defaultCharset}. The      * default is "ISO-8859-1". It is used in {@link      * org.eigenbase.sql.SqlLiteral#SqlLiteral}      */
+comment|/**    * The string property "saffron.default.nationalcharset" is the name of the    * default national character set which is used with the N'string' construct    * which may or may not be different from the {@link #defaultCharset}. The    * default is "ISO-8859-1". It is used in {@link    * org.eigenbase.sql.SqlLiteral#SqlLiteral}    */
 specifier|public
 specifier|final
 name|StringProperty
@@ -362,7 +362,7 @@ argument_list|,
 literal|"ISO-8859-1"
 argument_list|)
 decl_stmt|;
-comment|/**      * The string property "saffron.default.collation.name" is the name of the      * default collation. The default is "ISO-8859-1$en_US". Used in {@link      * org.eigenbase.sql.SqlCollation} and {@link      * org.eigenbase.sql.SqlLiteral#SqlLiteral}      */
+comment|/**    * The string property "saffron.default.collation.name" is the name of the    * default collation. The default is "ISO-8859-1$en_US". Used in {@link    * org.eigenbase.sql.SqlCollation} and {@link    * org.eigenbase.sql.SqlLiteral#SqlLiteral}    */
 specifier|public
 specifier|final
 name|StringProperty
@@ -378,7 +378,7 @@ argument_list|,
 literal|"ISO-8859-1$en_US"
 argument_list|)
 decl_stmt|;
-comment|/**      * The string property "saffron.default.collation.strength" is the strength      * of the default collation. The default is "primary". Used in {@link      * org.eigenbase.sql.SqlCollation} and {@link      * org.eigenbase.sql.SqlLiteral#SqlLiteral}      */
+comment|/**    * The string property "saffron.default.collation.strength" is the strength    * of the default collation. The default is "primary". Used in {@link    * org.eigenbase.sql.SqlCollation} and {@link    * org.eigenbase.sql.SqlLiteral#SqlLiteral}    */
 specifier|public
 specifier|final
 name|StringProperty
@@ -394,7 +394,7 @@ argument_list|,
 literal|"primary"
 argument_list|)
 decl_stmt|;
-comment|/**      * The boolean property "saffron.calc.comments.generate" determines if to      * generate comments in calculator programs in order to make debugging      * easier. The default is "true". Used in {@link      * org.eigenbase.sql.SqlCollation} and {@link      * org.eigenbase.sql.SqlLiteral#SqlLiteral}      */
+comment|/**    * The boolean property "saffron.calc.comments.generate" determines if to    * generate comments in calculator programs in order to make debugging    * easier. The default is "true". Used in {@link    * org.eigenbase.sql.SqlCollation} and {@link    * org.eigenbase.sql.SqlLiteral#SqlLiteral}    */
 specifier|public
 specifier|final
 name|BooleanProperty
@@ -411,14 +411,14 @@ literal|true
 argument_list|)
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * This constructor is private; please use {@link #instance} to create a      * {@link SaffronProperties}.      */
+comment|/**    * This constructor is private; please use {@link #instance} to create a    * {@link SaffronProperties}.    */
 specifier|private
 name|SaffronProperties
 parameter_list|()
 block|{
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Retrieves the singleton instance of {@link SaffronProperties}.      */
+comment|/**    * Retrieves the singleton instance of {@link SaffronProperties}.    */
 specifier|public
 specifier|static
 name|SaffronProperties
@@ -517,7 +517,7 @@ return|return
 name|properties
 return|;
 block|}
-comment|/**      * Adds all saffron-related properties found in the source list. This means      * all properties whose names start with "saffron." or "net.sf.saffron." The      * added properties can replace existing properties.      *      * @param source a Properties list      */
+comment|/**    * Adds all saffron-related properties found in the source list. This means    * all properties whose names start with "saffron." or "net.sf.saffron." The    * added properties can replace existing properties.    *    * @param source a Properties list    */
 specifier|public
 name|void
 name|loadSaffronProperties
@@ -593,7 +593,7 @@ expr_stmt|;
 block|}
 block|}
 block|}
-comment|/**      * Retrieves a boolean property. Returns<code>true</code> if the property      * exists, and its value is<code>1</code>,<code>true</code> or<code>      * yes</code>; returns<code>false</code> otherwise.      */
+comment|/**    * Retrieves a boolean property. Returns<code>true</code> if the property    * exists, and its value is<code>1</code>,<code>true</code> or<code>    * yes</code>; returns<code>false</code> otherwise.    */
 specifier|public
 name|boolean
 name|getBooleanProperty
@@ -611,7 +611,7 @@ literal|false
 argument_list|)
 return|;
 block|}
-comment|/**      * Retrieves a boolean property, or a default value if the property does not      * exist. Returns<code>true</code> if the property exists, and its value is      *<code>1</code>,<code>true</code> or<code>yes</code>; the default value      * if it does not exist;<code>false</code> otherwise.      */
+comment|/**    * Retrieves a boolean property, or a default value if the property does not    * exist. Returns<code>true</code> if the property exists, and its value is    *<code>1</code>,<code>true</code> or<code>yes</code>; the default value    * if it does not exist;<code>false</code> otherwise.    */
 specifier|public
 name|boolean
 name|getBooleanProperty
@@ -665,7 +665,7 @@ literal|"yes"
 argument_list|)
 return|;
 block|}
-comment|/**      * Retrieves an integer property. Returns -1 if the property is not found,      * or if its value is not an integer.      */
+comment|/**    * Retrieves an integer property. Returns -1 if the property is not found,    * or if its value is not an integer.    */
 specifier|public
 name|int
 name|getIntProperty

@@ -232,21 +232,21 @@ specifier|protected
 name|RelSubset
 name|root
 decl_stmt|;
-comment|/**      * If true, the planner keeps applying rules as long as they continue to      * reduce the cost. If false, the planner terminates as soon as it has found      * any implementation, no matter how expensive. The default is false due to      * unresolved bugs with various rules.      */
+comment|/**    * If true, the planner keeps applying rules as long as they continue to    * reduce the cost. If false, the planner terminates as soon as it has found    * any implementation, no matter how expensive. The default is false due to    * unresolved bugs with various rules.    */
 specifier|protected
 name|boolean
 name|ambitious
 init|=
 literal|true
 decl_stmt|;
-comment|/**      * If true, and if {@link #ambitious} is true, the planner waits a finite      * number of iterations for the cost to improve.      *      *<p>The number of iterations K is equal to the number of iterations      * required to get the first finite plan. After the first finite plan, it      * continues to fire rules to try to improve it. The planner sets a target      * cost of the current best cost multiplied by {@link #CostImprovement}. If      * it does not meet that cost target within K steps, it quits, and uses the      * current best plan. If it meets the cost, it sets a new, lower target, and      * has another K iterations to meet it. And so forth.      *      *<p>If false, the planner continues to fire rules until the rule queue is      * empty.      */
+comment|/**    * If true, and if {@link #ambitious} is true, the planner waits a finite    * number of iterations for the cost to improve.    *    *<p>The number of iterations K is equal to the number of iterations    * required to get the first finite plan. After the first finite plan, it    * continues to fire rules to try to improve it. The planner sets a target    * cost of the current best cost multiplied by {@link #CostImprovement}. If    * it does not meet that cost target within K steps, it quits, and uses the    * current best plan. If it meets the cost, it sets a new, lower target, and    * has another K iterations to meet it. And so forth.    *    *<p>If false, the planner continues to fire rules until the rule queue is    * empty.    */
 specifier|protected
 name|boolean
 name|impatient
 init|=
 literal|false
 decl_stmt|;
-comment|/**      * List of all operands of all rules. Any operand can be an 'entry point' to      * a rule call, when a relexp is registered which matches the.      */
+comment|/**    * List of all operands of all rules. Any operand can be an 'entry point' to    * a rule call, when a relexp is registered which matches the.    */
 specifier|private
 specifier|final
 name|List
@@ -262,7 +262,7 @@ name|RelOptRuleOperand
 argument_list|>
 argument_list|()
 decl_stmt|;
-comment|/**      * List of all sets. Used only for debugging.      */
+comment|/**    * List of all sets. Used only for debugging.    */
 specifier|final
 name|List
 argument_list|<
@@ -277,7 +277,7 @@ name|RelSet
 argument_list|>
 argument_list|()
 decl_stmt|;
-comment|/**      * Canonical map from {@link String digest} to the unique {@link RelNode      * relational expression} with that digest.      */
+comment|/**    * Canonical map from {@link String digest} to the unique {@link RelNode    * relational expression} with that digest.    */
 specifier|private
 specifier|final
 name|Map
@@ -297,7 +297,7 @@ name|RelNode
 argument_list|>
 argument_list|()
 decl_stmt|;
-comment|/**      * Map each registered expression ({@link RelNode}) to its equivalence set      * ({@link RelSubset}).      *      *<p>We use an {@link IdentityHashMap} to simplify the process of merging      * {@link RelSet} objects. Most {@link RelNode} objects are identified by      * their digest, which involves the set that their child relational      * expressions belong to. If those children belong to the same set, we have      * to be careful, otherwise it gets incestuous.</p>      */
+comment|/**    * Map each registered expression ({@link RelNode}) to its equivalence set    * ({@link RelSubset}).    *    *<p>We use an {@link IdentityHashMap} to simplify the process of merging    * {@link RelSet} objects. Most {@link RelNode} objects are identified by    * their digest, which involves the set that their child relational    * expressions belong to. If those children belong to the same set, we have    * to be careful, otherwise it gets incestuous.</p>    */
 specifier|private
 specifier|final
 name|IdentityHashMap
@@ -317,7 +317,7 @@ name|RelSubset
 argument_list|>
 argument_list|()
 decl_stmt|;
-comment|/**      * The importance of relational expressions.      *      *<p>The map contains only RelNodes whose importance has been overridden      * using {@link RelOptPlanner#setImportance(RelNode, double)}. Other      * RelNodes are presumed to have 'normal' importance.      *      *<p>If a RelNode has 0 importance, all {@link RelOptRuleCall}s using it      * are ignored, and future RelOptRuleCalls are not queued up.      */
+comment|/**    * The importance of relational expressions.    *    *<p>The map contains only RelNodes whose importance has been overridden    * using {@link RelOptPlanner#setImportance(RelNode, double)}. Other    * RelNodes are presumed to have 'normal' importance.    *    *<p>If a RelNode has 0 importance, all {@link RelOptRuleCall}s using it    * are ignored, and future RelOptRuleCalls are not queued up.    */
 specifier|final
 name|Map
 argument_list|<
@@ -336,7 +336,7 @@ name|Double
 argument_list|>
 argument_list|()
 decl_stmt|;
-comment|/**      * List of all schemas which have been registered.      */
+comment|/**    * List of all schemas which have been registered.    */
 specifier|private
 specifier|final
 name|Set
@@ -352,7 +352,7 @@ name|RelOptSchema
 argument_list|>
 argument_list|()
 decl_stmt|;
-comment|/**      * Holds rule calls waiting to be fired.      */
+comment|/**    * Holds rule calls waiting to be fired.    */
 specifier|final
 name|RuleQueue
 name|ruleQueue
@@ -363,7 +363,7 @@ argument_list|(
 name|this
 argument_list|)
 decl_stmt|;
-comment|/**      * Holds the currently registered RelTraitDefs.      */
+comment|/**    * Holds the currently registered RelTraitDefs.    */
 specifier|private
 specifier|final
 name|List
@@ -379,7 +379,7 @@ name|RelTraitDef
 argument_list|>
 argument_list|()
 decl_stmt|;
-comment|/**      * Set of all registered rules.      */
+comment|/**    * Set of all registered rules.    */
 specifier|protected
 specifier|final
 name|Set
@@ -401,16 +401,16 @@ name|nextSetId
 init|=
 literal|0
 decl_stmt|;
-comment|/**      * Incremented every time a relational expression is registered or two sets      * are merged. Tells us whether anything is going on.      */
+comment|/**    * Incremented every time a relational expression is registered or two sets    * are merged. Tells us whether anything is going on.    */
 specifier|private
 name|int
 name|registerCount
 decl_stmt|;
-comment|/**      * Listener for this planner, or null if none set.      */
+comment|/**    * Listener for this planner, or null if none set.    */
 name|RelOptListener
 name|listener
 decl_stmt|;
-comment|/**      * Dump of the root relational expression, as it was before any rules were      * applied. For debugging.      */
+comment|/**    * Dump of the root relational expression, as it was before any rules were    * applied. For debugging.    */
 specifier|private
 name|String
 name|originalRootString
@@ -419,7 +419,7 @@ specifier|private
 name|RelNode
 name|originalRoot
 decl_stmt|;
-comment|/**      * Whether the planner can accept new rules.      */
+comment|/**    * Whether the planner can accept new rules.    */
 specifier|private
 name|boolean
 name|locked
@@ -473,7 +473,7 @@ argument_list|>
 argument_list|()
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a uninitialized<code>VolcanoPlanner</code>. To fully initialize      * it, the caller must register the desired set of relations, rules, and      * calling conventions.      */
+comment|/**    * Creates a uninitialized<code>VolcanoPlanner</code>. To fully initialize    * it, the caller must register the desired set of relations, rules, and    * calling conventions.    */
 specifier|public
 name|VolcanoPlanner
 parameter_list|()
@@ -1032,7 +1032,7 @@ block|}
 block|}
 block|}
 block|}
-comment|/** Returns whether {@code table} uses one or more of the tables in      * {@code usedTables}. */
+comment|/**    * Returns whether {@code table} uses one or more of the tables in    * {@code usedTables}.    */
 specifier|private
 name|boolean
 name|usesTable
@@ -1184,7 +1184,7 @@ return|return
 name|usedTables
 return|;
 block|}
-comment|/**      * Finds an expression's equivalence set. If the expression is not      * registered, returns null.      *      * @param rel Relational expression      * @pre rel != null      * @return Equivalence set that expression belongs to, or null if it is not      * registered      */
+comment|/**    * Finds an expression's equivalence set. If the expression is not    * registered, returns null.    *    * @param rel Relational expression    * @return Equivalence set that expression belongs to, or null if it is not    * registered    * @pre rel != null    */
 specifier|public
 name|RelSet
 name|getSet
@@ -1815,7 +1815,7 @@ return|return
 name|this
 return|;
 block|}
-comment|/**      * Finds the most efficient expression to implement the query given via      * {@link org.eigenbase.relopt.RelOptPlanner#setRoot(org.eigenbase.rel.RelNode)}.      *      *<p>The algorithm executes repeatedly in a series of phases. In each phase      * the exact rules that may be fired varies. The mapping of phases to rule      * sets is maintained in the {@link #ruleQueue}.      *      *<p>In each phase, the planner sets the initial importance of the existing      * RelSubSets ({@link #setInitialImportance()}). The planner then iterates      * over the rule matches presented by the rule queue until:      *      *<ol>      *<li>The rule queue becomes empty.</li>      *<li>For ambitious planners: No improvements to the plan have been made      * recently (specifically within a number of iterations that is 10% of the      * number of iterations necessary to first reach an implementable plan or 25      * iterations whichever is larger).</li>      *<li>For non-ambitious planners: When an implementable plan is found.</li>      *</ol>      *      *<p>Furthermore, after every 10 iterations without an implementable plan,      * RelSubSets that contain only logical RelNodes are given an importance      * boost via {@link #injectImportanceBoost()}. Once an implementable plan is      * found, the artificially raised importances are cleared ({@link      * #clearImportanceBoost()}).      *      * @return the most efficient RelNode tree found for implementing the given      * query      */
+comment|/**    * Finds the most efficient expression to implement the query given via    * {@link org.eigenbase.relopt.RelOptPlanner#setRoot(org.eigenbase.rel.RelNode)}.    *    *<p>The algorithm executes repeatedly in a series of phases. In each phase    * the exact rules that may be fired varies. The mapping of phases to rule    * sets is maintained in the {@link #ruleQueue}.    *    *<p>In each phase, the planner sets the initial importance of the existing    * RelSubSets ({@link #setInitialImportance()}). The planner then iterates    * over the rule matches presented by the rule queue until:    *    *<ol>    *<li>The rule queue becomes empty.</li>    *<li>For ambitious planners: No improvements to the plan have been made    * recently (specifically within a number of iterations that is 10% of the    * number of iterations necessary to first reach an implementable plan or 25    * iterations whichever is larger).</li>    *<li>For non-ambitious planners: When an implementable plan is found.</li>    *</ol>    *    *<p>Furthermore, after every 10 iterations without an implementable plan,    * RelSubSets that contain only logical RelNodes are given an importance    * boost via {@link #injectImportanceBoost()}. Once an implementable plan is    * found, the artificially raised importances are cleared ({@link    * #clearImportanceBoost()}).    *    * @return the most efficient RelNode tree found for implementing the given    * query    */
 specifier|public
 name|RelNode
 name|findBestExp
@@ -2221,7 +2221,7 @@ return|return
 name|cheapest
 return|;
 block|}
-comment|/** Returns a multi-line string describing the provenance of a tree of      * relational expressions. For each node in the tree, prints the rule that      * created the node, if any. Recursively describes the provenance of the      * relational expressions that are the arguments to that rule.      *      *<p>Thus, every relational expression and rule invocation that affected      * the final outcome is described in the provenance. This can be useful      * when finding the root cause of "mistakes" in a query plan.</p>      *      * @param root Root relational expression in a tree      * @return Multi-line string describing the rules that created the tree      */
+comment|/**    * Returns a multi-line string describing the provenance of a tree of    * relational expressions. For each node in the tree, prints the rule that    * created the node, if any. Recursively describes the provenance of the    * relational expressions that are the arguments to that rule.    *    *<p>Thus, every relational expression and rule invocation that affected    * the final outcome is described in the provenance. This can be useful    * when finding the root cause of "mistakes" in a query plan.</p>    *    * @param root Root relational expression in a tree    * @return Multi-line string describing the rules that created the tree    */
 specifier|private
 name|String
 name|provenance
@@ -2352,7 +2352,7 @@ name|toString
 argument_list|()
 return|;
 block|}
-comment|/** Helper for {@link #provenance(org.eigenbase.rel.RelNode)}. */
+comment|/**    * Helper for {@link #provenance(org.eigenbase.rel.RelNode)}.    */
 specifier|private
 name|void
 name|provenanceRecurse
@@ -2741,7 +2741,7 @@ name|root
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Finds RelSubsets in the plan that contain only rels of {@link      * Convention#NONE} and boosts their importance by 25%.      */
+comment|/**    * Finds RelSubsets in the plan that contain only rels of {@link    * Convention#NONE} and boosts their importance by 25%.    */
 specifier|private
 name|void
 name|injectImportanceBoost
@@ -2821,7 +2821,7 @@ literal|1.25
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Clear all importance boosts.      */
+comment|/**    * Clear all importance boosts.    */
 specifier|private
 name|void
 name|clearImportanceBoost
@@ -3112,7 +3112,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**      * Checks internal consistency.      */
+comment|/**    * Checks internal consistency.    */
 specifier|protected
 name|void
 name|validate
@@ -3472,7 +3472,7 @@ return|return
 name|cost
 return|;
 block|}
-comment|/**      * Returns the subset that a relational expression belongs to.      *      * @param rel Relational expression      *      * @return Subset it belongs to, or null if it is not registered      *      * @pre rel != null      */
+comment|/**    * Returns the subset that a relational expression belongs to.    *    * @param rel Relational expression    * @return Subset it belongs to, or null if it is not registered    * @pre rel != null    */
 specifier|public
 name|RelSubset
 name|getSubset
@@ -3881,7 +3881,7 @@ return|return
 name|converted
 return|;
 block|}
-comment|/** Converts traits using well-founded induction. We don't require that      * each conversion preserves all traits that have previously been converted,      * but if it changes "locked in" traits we'll try some other conversion.      *      * @param rel Relational expression      * @param allowInfiniteCostConverters Whether to allow infinite converters      * @param toTraits Target trait set      * @param usedTraits Traits that have been locked in      * @return Converted relational expression      */
+comment|/**    * Converts traits using well-founded induction. We don't require that    * each conversion preserves all traits that have previously been converted,    * but if it changes "locked in" traits we'll try some other conversion.    *    * @param rel                         Relational expression    * @param allowInfiniteCostConverters Whether to allow infinite converters    * @param toTraits                    Target trait set    * @param usedTraits                  Traits that have been locked in    * @return Converted relational expression    */
 specifier|private
 name|RelNode
 name|completeConversion
@@ -4191,7 +4191,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Dumps the internal state of this VolcanoPlanner to a writer.      *      * @param pw Print writer      *      * @see #normalizePlan(String)      */
+comment|/**    * Dumps the internal state of this VolcanoPlanner to a writer.    *    * @param pw Print writer    * @see #normalizePlan(String)    */
 specifier|public
 name|void
 name|dump
@@ -4624,7 +4624,7 @@ name|println
 argument_list|()
 expr_stmt|;
 block|}
-comment|/**      * Re-computes the digest of a {@link RelNode}.      *      *<p>Since a relational expression's digest contains the identifiers of its      * children, this method needs to be called when the child has been renamed,      * for example if the child's set merges with another.      *      * @param rel Relational expression      */
+comment|/**    * Re-computes the digest of a {@link RelNode}.    *    *<p>Since a relational expression's digest contains the identifiers of its    * children, this method needs to be called when the child has been renamed,    * for example if the child's set merges with another.    *    * @param rel Relational expression    */
 name|void
 name|rename
 parameter_list|(
@@ -4892,7 +4892,7 @@ block|}
 block|}
 block|}
 block|}
-comment|/**      * Registers a {@link RelNode}, which has already been registered, in a new      * {@link RelSet}.      *      * @param set Set      * @param rel Relational expression      */
+comment|/**    * Registers a {@link RelNode}, which has already been registered, in a new    * {@link RelSet}.    *    * @param set Set    * @param rel Relational expression    */
 name|void
 name|reregister
 parameter_list|(
@@ -4994,7 +4994,7 @@ name|set
 argument_list|)
 decl_stmt|;
 block|}
-comment|/**      * If a subset has one or more equivalent subsets (owing to a set having      * merged with another), returns the subset which is the leader of the      * equivalence class.      *      * @param subset Subset      *      * @return Leader of subset's equivalence class      */
+comment|/**    * If a subset has one or more equivalent subsets (owing to a set having    * merged with another), returns the subset which is the leader of the    * equivalence class.    *    * @param subset Subset    * @return Leader of subset's equivalence class    */
 specifier|private
 name|RelSubset
 name|canonize
@@ -5061,7 +5061,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**      * Fires all rules matched by a relational expression.      *      * @param rel Relational expression which has just been created (or maybe      * from the queue)      * @param deferred If true, each time a rule matches, just add an entry to      * the queue.      */
+comment|/**    * Fires all rules matched by a relational expression.    *    * @param rel      Relational expression which has just been created (or maybe    *                 from the queue)    * @param deferred If true, each time a rule matches, just add an entry to    *                 the queue.    */
 name|void
 name|fireRules
 parameter_list|(
@@ -5434,7 +5434,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Registers a new expression<code>exp</code> and queues up rule matches.      * If<code>set</code> is not null, makes the expression part of that      * equivalence set. If an identical expression is already registered, we      * don't need to register this one and nor should we queue up rule matches.      *      * @param rel relational expression to register. Must be either a {@link      * RelSubset}, or an unregistered {@link RelNode}      * @param set set that rel belongs to, or<code>null</code>      *      * @return the equivalence-set      *      * @pre rel instanceof RelSubset || !isRegistered(rel)      */
+comment|/**    * Registers a new expression<code>exp</code> and queues up rule matches.    * If<code>set</code> is not null, makes the expression part of that    * equivalence set. If an identical expression is already registered, we    * don't need to register this one and nor should we queue up rule matches.    *    * @param rel relational expression to register. Must be either a {@link    *            RelSubset}, or an unregistered {@link RelNode}    * @param set set that rel belongs to, or<code>null</code>    * @return the equivalence-set    * @pre rel instanceof RelSubset || !isRegistered(rel)    */
 specifier|private
 name|RelSubset
 name|registerImpl
@@ -6537,7 +6537,7 @@ name|timestamp
 return|;
 block|}
 block|}
-comment|/**      * Normalizes references to subsets within the string representation of a      * plan.      *      *<p>This is useful when writing tests: it helps to ensure that tests don't      * break when an extra rule is introduced that generates a new subset and      * causes subsequent subset numbers to be off by one.      *      *<p>For example,      *      *<blockquote>      * FennelAggRel.FENNEL_EXEC(child=Subset#17.FENNEL_EXEC,groupCount=1,      *   EXPR$1=COUNT())<br/>      *&nbsp;&nbsp;FennelSortRel.FENNEL_EXEC(child=Subset#2.FENNEL_EXEC,      *   key=[0], discardDuplicates=false)<br/>      *&nbsp;&nbsp;&nbsp;&nbsp;FennelCalcRel.FENNEL_EXEC(      *   child=Subset#4.FENNEL_EXEC, expr#0..8={inputs}, expr#9=3456,      *   DEPTNO=$t7, $f0=$t9)<br/>      *&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MockTableImplRel.FENNEL_EXEC(      *   table=[CATALOG, SALES, EMP])</blockquote>      *      * becomes      *      *<blockquote>      * FennelAggRel.FENNEL_EXEC(child=Subset#{0}.FENNEL_EXEC, groupCount=1,      *   EXPR$1=COUNT())<br/>      *&nbsp;&nbsp;FennelSortRel.FENNEL_EXEC(child=Subset#{1}.FENNEL_EXEC,      *   key=[0], discardDuplicates=false)<br/>      *&nbsp;&nbsp;&nbsp;&nbsp;FennelCalcRel.FENNEL_EXEC(      *   child=Subset#{2}.FENNEL_EXEC,expr#0..8={inputs},expr#9=3456,DEPTNO=$t7,      *   $f0=$t9)<br/>      *&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MockTableImplRel.FENNEL_EXEC(      *   table=[CATALOG, SALES, EMP])</blockquote>      *      * @param plan Plan      *      * @return Normalized plan      */
+comment|/**    * Normalizes references to subsets within the string representation of a    * plan.    *    *<p>This is useful when writing tests: it helps to ensure that tests don't    * break when an extra rule is introduced that generates a new subset and    * causes subsequent subset numbers to be off by one.    *    *<p>For example,    *    *<blockquote>    * FennelAggRel.FENNEL_EXEC(child=Subset#17.FENNEL_EXEC,groupCount=1,    * EXPR$1=COUNT())<br/>    *&nbsp;&nbsp;FennelSortRel.FENNEL_EXEC(child=Subset#2.FENNEL_EXEC,    * key=[0], discardDuplicates=false)<br/>    *&nbsp;&nbsp;&nbsp;&nbsp;FennelCalcRel.FENNEL_EXEC(    * child=Subset#4.FENNEL_EXEC, expr#0..8={inputs}, expr#9=3456,    * DEPTNO=$t7, $f0=$t9)<br/>    *&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MockTableImplRel.FENNEL_EXEC(    * table=[CATALOG, SALES, EMP])</blockquote>    *    * becomes    *    *<blockquote>    * FennelAggRel.FENNEL_EXEC(child=Subset#{0}.FENNEL_EXEC, groupCount=1,    * EXPR$1=COUNT())<br/>    *&nbsp;&nbsp;FennelSortRel.FENNEL_EXEC(child=Subset#{1}.FENNEL_EXEC,    * key=[0], discardDuplicates=false)<br/>    *&nbsp;&nbsp;&nbsp;&nbsp;FennelCalcRel.FENNEL_EXEC(    * child=Subset#{2}.FENNEL_EXEC,expr#0..8={inputs},expr#9=3456,DEPTNO=$t7,    * $f0=$t9)<br/>    *&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MockTableImplRel.FENNEL_EXEC(    * table=[CATALOG, SALES, EMP])</blockquote>    *    * @param plan Plan    * @return Normalized plan    */
 specifier|public
 specifier|static
 name|String
@@ -6631,7 +6631,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Sets whether this planner is locked. A locked planner does not accept      * new rules. {@link #addRule(org.eigenbase.relopt.RelOptRule)} will do      * nothing and return false.      *      * @param locked Whether planner is locked      */
+comment|/**    * Sets whether this planner is locked. A locked planner does not accept    * new rules. {@link #addRule(org.eigenbase.relopt.RelOptRule)} will do    * nothing and return false.    *    * @param locked Whether planner is locked    */
 specifier|public
 name|void
 name|setLocked
@@ -6684,7 +6684,7 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------
-comment|/**      * A rule call which defers its actions. Whereas {@link RelOptRuleCall}      * invokes the rule when it finds a match, a<code>DeferringRuleCall</code>      * creates a {@link VolcanoRuleMatch} which can be invoked later.      */
+comment|/**    * A rule call which defers its actions. Whereas {@link RelOptRuleCall}    * invokes the rule when it finds a match, a<code>DeferringRuleCall</code>    * creates a {@link VolcanoRuleMatch} which can be invoked later.    */
 specifier|private
 specifier|static
 class|class
@@ -6709,7 +6709,7 @@ name|operand
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**          * Rather than invoking the rule (as the base method does), creates a          * {@link VolcanoRuleMatch} which can be invoked later.          */
+comment|/**      * Rather than invoking the rule (as the base method does), creates a      * {@link VolcanoRuleMatch} which can be invoked later.      */
 specifier|protected
 name|void
 name|onMatch
@@ -6741,7 +6741,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/** Where a RelNode came from. */
+comment|/**    * Where a RelNode came from.    */
 specifier|private
 specifier|static
 specifier|abstract
@@ -6759,15 +6759,15 @@ name|UnknownProvenance
 argument_list|()
 decl_stmt|;
 block|}
-comment|/** We do not know where this RelNode came from. Probably created by hand,      * or by sql-to-rel converter. */
+comment|/**    * We do not know where this RelNode came from. Probably created by hand,    * or by sql-to-rel converter.    */
 specifier|private
 specifier|static
 class|class
 name|UnknownProvenance
 extends|extends
 name|Provenance
-block|{     }
-comment|/** A RelNode that came directly from another RelNode via a copy. */
+block|{   }
+comment|/**    * A RelNode that came directly from another RelNode via a copy.    */
 specifier|static
 class|class
 name|DirectProvenance
@@ -6792,7 +6792,7 @@ name|source
 expr_stmt|;
 block|}
 block|}
-comment|/** A RelNode that came via the firing of a rule. */
+comment|/**    * A RelNode that came via the firing of a rule.    */
 specifier|static
 class|class
 name|RuleProvenance

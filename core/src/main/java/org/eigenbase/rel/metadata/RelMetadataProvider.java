@@ -37,7 +37,7 @@ interface|interface
 name|RelMetadataProvider
 block|{
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Retrieves metadata about a relational expression.      *      * @param rel relational expression of interest      * @param metadataQueryName name of metadata query to invoke      * @param args arguments to metadata query (expected number and type depend      * on query name; must have well-defined hashCode/equals for use by      * caching); null can be used instead of empty array      *      * @return metadata result (actual type depends on query name), or null if      * the provider cannot answer the given query/rel combination; it is better      * to return null than to return a possibly incorrect answer      */
+comment|/**    * Retrieves metadata about a relational expression.    *    * @param rel               relational expression of interest    * @param metadataQueryName name of metadata query to invoke    * @param args              arguments to metadata query (expected number and    *                          type depend on query name; must have well-defined    *                          hashCode/equals for use by caching); null can be    *                          used instead of empty array    * @return metadata result (actual type depends on query name), or null if    * the provider cannot answer the given query/rel combination; it is better    * to return null than to return a possibly incorrect answer    */
 specifier|public
 name|Object
 name|getRelMetadata

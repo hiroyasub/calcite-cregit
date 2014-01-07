@@ -73,7 +73,7 @@ name|boolean
 name|over
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates an AggFinder.      *      * @param over Whether to find windowed function calls {@code Agg(x) OVER      * windowSpec}      */
+comment|/**    * Creates an AggFinder.    *    * @param over Whether to find windowed function calls {@code Agg(x) OVER    *             windowSpec}    */
 name|AggFinder
 parameter_list|(
 name|boolean
@@ -88,7 +88,7 @@ name|over
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Finds an aggregate.      *      * @param node Parse tree to search      *      * @return First aggregate function in parse tree, or null if not found      */
+comment|/**    * Finds an aggregate.    *    * @param node Parse tree to search    * @return First aggregate function in parse tree, or null if not found    */
 specifier|public
 name|SqlNode
 name|findAgg

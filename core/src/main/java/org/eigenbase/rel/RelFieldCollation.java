@@ -23,27 +23,27 @@ class|class
 name|RelFieldCollation
 block|{
 comment|//~ Enums ------------------------------------------------------------------
-comment|/**      * Direction that a field is ordered in.      */
+comment|/**    * Direction that a field is ordered in.    */
 specifier|public
 enum|enum
 name|Direction
 block|{
-comment|/**          * Ascending direction: A value is always followed by a greater or equal          * value.          */
+comment|/**      * Ascending direction: A value is always followed by a greater or equal      * value.      */
 name|Ascending
 block|,
-comment|/**          * Strictly ascending direction: A value is always followed by a greater          * value.          */
+comment|/**      * Strictly ascending direction: A value is always followed by a greater      * value.      */
 name|StrictlyAscending
 block|,
-comment|/**          * Descending direction: A value is always followed by a lesser or equal          * value.          */
+comment|/**      * Descending direction: A value is always followed by a lesser or equal      * value.      */
 name|Descending
 block|,
-comment|/**          * Strictly descending direction: A value is always followed by a lesser          * value.          */
+comment|/**      * Strictly descending direction: A value is always followed by a lesser      * value.      */
 name|StrictlyDescending
 block|,
-comment|/**          * Clustered direction: Values occur in no particular order, and the          * same value may occur in contiguous groups, but never occurs after          * that. This sort order tends to occur when values are ordered          * according to a hash-key.          */
+comment|/**      * Clustered direction: Values occur in no particular order, and the      * same value may occur in contiguous groups, but never occurs after      * that. This sort order tends to occur when values are ordered      * according to a hash-key.      */
 name|Clustered
-block|,     }
-comment|/**      * Ordering of nulls.      */
+block|,   }
+comment|/**    * Ordering of nulls.    */
 specifier|public
 enum|enum
 name|NullDirection
@@ -55,26 +55,26 @@ block|,
 name|UNSPECIFIED
 block|}
 comment|//~ Instance fields --------------------------------------------------------
-comment|/**      * 0-based index of field being sorted.      */
+comment|/**    * 0-based index of field being sorted.    */
 specifier|private
 specifier|final
 name|int
 name|fieldIndex
 decl_stmt|;
-comment|/**      * Direction of sorting.      */
+comment|/**    * Direction of sorting.    */
 specifier|public
 specifier|final
 name|Direction
 name|direction
 decl_stmt|;
-comment|/**      * Direction of sorting of nulls.      */
+comment|/**    * Direction of sorting of nulls.    */
 specifier|public
 specifier|final
 name|NullDirection
 name|nullDirection
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates an ascending field collation.      */
+comment|/**    * Creates an ascending field collation.    */
 specifier|public
 name|RelFieldCollation
 parameter_list|(
@@ -96,7 +96,7 @@ name|UNSPECIFIED
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Creates a field collation with unspecified null direction.      */
+comment|/**    * Creates a field collation with unspecified null direction.    */
 specifier|public
 name|RelFieldCollation
 parameter_list|(
@@ -119,7 +119,7 @@ name|UNSPECIFIED
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Creates a field collation.      */
+comment|/**    * Creates a field collation.    */
 specifier|public
 name|RelFieldCollation
 parameter_list|(
@@ -163,7 +163,7 @@ literal|null
 assert|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/** Creates a copy of this RelFieldCollation against a different field. */
+comment|/**    * Creates a copy of this RelFieldCollation against a different field.    */
 specifier|public
 name|RelFieldCollation
 name|copy

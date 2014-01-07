@@ -61,7 +61,7 @@ name|PushProjectIntoMultiJoinRule
 argument_list|()
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a PushProjectIntoMultiJoinRule.      */
+comment|/**    * Creates a PushProjectIntoMultiJoinRule.    */
 specifier|private
 name|PushProjectIntoMultiJoinRule
 parameter_list|()

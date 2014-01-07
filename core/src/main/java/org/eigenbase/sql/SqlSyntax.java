@@ -34,7 +34,7 @@ specifier|public
 enum|enum
 name|SqlSyntax
 block|{
-comment|/**      * Function syntax, as in "Foo(x, y)".      */
+comment|/**    * Function syntax, as in "Foo(x, y)".    */
 name|Function
 block|{
 specifier|public
@@ -76,7 +76,7 @@ expr_stmt|;
 block|}
 block|}
 block|,
-comment|/**      * Binary operator syntax, as in "x + y".      */
+comment|/**    * Binary operator syntax, as in "x + y".    */
 name|Binary
 block|{
 specifier|public
@@ -118,7 +118,7 @@ expr_stmt|;
 block|}
 block|}
 block|,
-comment|/**      * Prefix unary operator syntax, as in "- x".      */
+comment|/**    * Prefix unary operator syntax, as in "- x".    */
 name|Prefix
 block|{
 specifier|public
@@ -184,7 +184,7 @@ expr_stmt|;
 block|}
 block|}
 block|,
-comment|/**      * Postfix unary operator syntax, as in "x ++".      */
+comment|/**    * Postfix unary operator syntax, as in "x ++".    */
 name|Postfix
 block|{
 specifier|public
@@ -250,7 +250,7 @@ expr_stmt|;
 block|}
 block|}
 block|,
-comment|/**      * Special syntax, such as that of the SQL CASE operator, "CASE x WHEN 1      * THEN 2 ELSE 3 END".      */
+comment|/**    * Special syntax, such as that of the SQL CASE operator, "CASE x WHEN 1    * THEN 2 ELSE 3 END".    */
 name|Special
 block|{
 specifier|public
@@ -287,7 +287,7 @@ throw|;
 block|}
 block|}
 block|,
-comment|/**      * Function syntax which takes no parentheses if there are no arguments, for      * example "CURRENTTIME".      */
+comment|/**    * Function syntax which takes no parentheses if there are no arguments, for    * example "CURRENTTIME".    */
 name|FunctionId
 block|{
 specifier|public
@@ -329,7 +329,7 @@ expr_stmt|;
 block|}
 block|}
 block|,
-comment|/**      * Syntax of an internal operator, which does not appear in the SQL.      */
+comment|/**    * Syntax of an internal operator, which does not appear in the SQL.    */
 name|Internal
 block|{
 specifier|public
@@ -368,7 +368,7 @@ throw|;
 block|}
 block|}
 block|;
-comment|/**      * Converts a call to an operator of this syntax into a string.      */
+comment|/**    * Converts a call to an operator of this syntax into a string.    */
 specifier|public
 specifier|abstract
 name|void

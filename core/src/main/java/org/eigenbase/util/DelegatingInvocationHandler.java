@@ -157,7 +157,7 @@ argument_list|()
 throw|;
 block|}
 block|}
-comment|/**      * Returns the object to forward method calls to, should the derived class      * not implement the method. Generally, this object will be a member of the      * derived class, supplied as a parameter to its constructor.      */
+comment|/**    * Returns the object to forward method calls to, should the derived class    * not implement the method. Generally, this object will be a member of the    * derived class, supplied as a parameter to its constructor.    */
 specifier|protected
 specifier|abstract
 name|Object

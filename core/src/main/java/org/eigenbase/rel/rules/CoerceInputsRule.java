@@ -94,7 +94,7 @@ name|boolean
 name|coerceNames
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Constructs the rule.      *      * @param consumerRelClass the RelNode class which will consume the inputs      * @param coerceNames if true, coerce names and types; if false, coerce type      * only      */
+comment|/**    * Constructs the rule.    *    * @param consumerRelClass the RelNode class which will consume the inputs    * @param coerceNames      if true, coerce names and types; if false, coerce    *                         type only    */
 specifier|public
 name|CoerceInputsRule
 parameter_list|(

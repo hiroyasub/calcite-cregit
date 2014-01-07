@@ -153,7 +153,7 @@ name|String
 name|digest
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a RelDataTypeImpl.      *      * @param fieldList List of fields      */
+comment|/**    * Creates a RelDataTypeImpl.    *    * @param fieldList List of fields    */
 specifier|protected
 name|RelDataTypeImpl
 parameter_list|(
@@ -196,7 +196,7 @@ literal|null
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Default constructor, to allow derived classes such as {@link      * BasicSqlType} to be {@link Serializable}.      *      *<p>(The serialization specification says that a class can be serializable      * even if its base class is not serializable, provided that the base class      * has a public or protected zero-args constructor.)      */
+comment|/**    * Default constructor, to allow derived classes such as {@link    * BasicSqlType} to be {@link Serializable}.    *    *<p>(The serialization specification says that a class can be serializable    * even if its base class is not serializable, provided that the base class    * has a public or protected zero-args constructor.)    */
 specifier|protected
 name|RelDataTypeImpl
 parameter_list|()
@@ -641,7 +641,7 @@ return|return
 name|this
 return|;
 block|}
-comment|/**      * Generates a string representation of this type.      *      * @param sb StringBuffer into which to generate the string      * @param withDetail when true, all detail information needed to compute a      * unique digest (and return from getFullTypeString) should be included;      */
+comment|/**    * Generates a string representation of this type.    *    * @param sb         StringBuffer into which to generate the string    * @param withDetail when true, all detail information needed to compute a    *                   unique digest (and return from getFullTypeString) should    *                   be included;    */
 specifier|protected
 specifier|abstract
 name|void
@@ -654,7 +654,7 @@ name|boolean
 name|withDetail
 parameter_list|)
 function_decl|;
-comment|/**      * Computes the digest field. This should be called in every non-abstract      * subclass constructor once the type is fully defined.      */
+comment|/**    * Computes the digest field. This should be called in every non-abstract    * subclass constructor once the type is fully defined.    */
 specifier|protected
 name|void
 name|computeDigest
@@ -801,7 +801,7 @@ operator|.
 name|All
 return|;
 block|}
-comment|/** Returns an implementation of      * {@link RelProtoDataType}      * that copies a given type using th given type factory. */
+comment|/**    * Returns an implementation of    * {@link RelProtoDataType}    * that copies a given type using th given type factory.    */
 specifier|public
 specifier|static
 name|RelProtoDataType

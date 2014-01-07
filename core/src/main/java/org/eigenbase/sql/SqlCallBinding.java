@@ -115,7 +115,7 @@ name|SqlCall
 name|call
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a call binding.      *      * @param validator Validator      * @param scope Scope of call      * @param call Call node      */
+comment|/**    * Creates a call binding.    *    * @param validator Validator    * @param scope     Scope of call    * @param call      Call node    */
 specifier|public
 name|SqlCallBinding
 parameter_list|(
@@ -162,7 +162,7 @@ name|call
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Returns the validator.      */
+comment|/**    * Returns the validator.    */
 specifier|public
 name|SqlValidator
 name|getValidator
@@ -172,7 +172,7 @@ return|return
 name|validator
 return|;
 block|}
-comment|/**      * Returns the scope of the call.      */
+comment|/**    * Returns the scope of the call.    */
 specifier|public
 name|SqlValidatorScope
 name|getScope
@@ -182,7 +182,7 @@ return|return
 name|scope
 return|;
 block|}
-comment|/**      * Returns the call node.      */
+comment|/**    * Returns the call node.    */
 specifier|public
 name|SqlCall
 name|getCall
@@ -637,7 +637,7 @@ name|e
 argument_list|)
 return|;
 block|}
-comment|/**      * Constructs a new validation signature error for the call.      *      * @return signature exception      */
+comment|/**    * Constructs a new validation signature error for the call.    *    * @return signature exception    */
 specifier|public
 name|EigenbaseException
 name|newValidationSignatureError
@@ -683,7 +683,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**      * Constructs a new validation error for the call. (Do not use this to      * construct a validation error for other nodes such as an operands.)      *      * @param ex underlying exception      *      * @return wrapped exception      */
+comment|/**    * Constructs a new validation error for the call. (Do not use this to    * construct a validation error for other nodes such as an operands.)    *    * @param ex underlying exception    * @return wrapped exception    */
 specifier|public
 name|EigenbaseException
 name|newValidationError

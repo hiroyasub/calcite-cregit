@@ -176,7 +176,7 @@ operator|+
 literal|"'"
 return|;
 block|}
-comment|/**      * Returns e.g. '03:05:67.456'.      */
+comment|/**    * Returns e.g. '03:05:67.456'.    */
 specifier|public
 name|String
 name|toFormattedString

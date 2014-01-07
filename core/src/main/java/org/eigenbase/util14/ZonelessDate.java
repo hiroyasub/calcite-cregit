@@ -65,7 +65,7 @@ extends|extends
 name|ZonelessDatetime
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
-comment|/**      * SerialVersionUID created with JDK 1.5 serialver tool.      */
+comment|/**    * SerialVersionUID created with JDK 1.5 serialver tool.    */
 specifier|private
 specifier|static
 specifier|final
@@ -82,7 +82,7 @@ name|Date
 name|tempDate
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Constructs a ZonelessDate.      */
+comment|/**    * Constructs a ZonelessDate.    */
 specifier|public
 name|ZonelessDate
 parameter_list|()
@@ -153,7 +153,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**      * Converts this ZonelessDate to a java.sql.Date and formats it via the      * {@link java.sql.Date#toString() toString()} method of that class.      *      * @return the formatted date string      */
+comment|/**    * Converts this ZonelessDate to a java.sql.Date and formats it via the    * {@link java.sql.Date#toString() toString()} method of that class.    *    * @return the formatted date string    */
 specifier|public
 name|String
 name|toString
@@ -179,7 +179,7 @@ name|toString
 argument_list|()
 return|;
 block|}
-comment|/**      * Formats this ZonelessDate via a SimpleDateFormat      *      * @param format format string, as required by {@link SimpleDateFormat}      *      * @return the formatted date string      */
+comment|/**    * Formats this ZonelessDate via a SimpleDateFormat    *    * @param format format string, as required by {@link SimpleDateFormat}    * @return the formatted date string    */
 specifier|public
 name|String
 name|toString
@@ -214,7 +214,7 @@ name|jdbcDate
 argument_list|)
 return|;
 block|}
-comment|/**      * Parses a string as a ZonelessDate.      *      * @param s a string representing a date in ISO format, i.e. according to      * the SimpleDateFormat string "yyyy-MM-dd"      *      * @return the parsed date, or null if parsing failed      */
+comment|/**    * Parses a string as a ZonelessDate.    *    * @param s a string representing a date in ISO format, i.e. according to    *          the SimpleDateFormat string "yyyy-MM-dd"    * @return the parsed date, or null if parsing failed    */
 specifier|public
 specifier|static
 name|ZonelessDate
@@ -235,7 +235,7 @@ name|DateFormatStr
 argument_list|)
 return|;
 block|}
-comment|/**      * Parses a string as a ZonelessDate with a given format string.      *      * @param s a string representing a date in ISO format, i.e. according to      * the SimpleDateFormat string "yyyy-MM-dd"      * @param format format string as per {@link SimpleDateFormat}      *      * @return the parsed date, or null if parsing failed      */
+comment|/**    * Parses a string as a ZonelessDate with a given format string.    *    * @param s      a string representing a date in ISO format, i.e. according to    *               the SimpleDateFormat string "yyyy-MM-dd"    * @param format format string as per {@link SimpleDateFormat}    * @return the parsed date, or null if parsing failed    */
 specifier|public
 specifier|static
 name|ZonelessDate
@@ -296,7 +296,7 @@ return|return
 name|zd
 return|;
 block|}
-comment|/**      * Gets a temporary Date object. The same object is returned every time.      */
+comment|/**    * Gets a temporary Date object. The same object is returned every time.    */
 specifier|protected
 name|Date
 name|getTempDate

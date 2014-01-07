@@ -90,7 +90,7 @@ name|RelTraitDef
 name|traitDef
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a ConverterRelImpl.      *      * @param cluster planner's cluster      * @param traitDef the RelTraitDef this converter converts      * @param traits the output traits of this converter      * @param child child rel (provides input traits)      */
+comment|/**    * Creates a ConverterRelImpl.    *    * @param cluster  planner's cluster    * @param traitDef the RelTraitDef this converter converts    * @param traits   the output traits of this converter    * @param child    child rel (provides input traits)    */
 specifier|protected
 name|ConverterRelImpl
 parameter_list|(

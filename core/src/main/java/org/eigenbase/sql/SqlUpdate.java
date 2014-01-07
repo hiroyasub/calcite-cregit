@@ -209,7 +209,7 @@ operator|)
 assert|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * @return the identifier for the target table of the update      */
+comment|/**    * @return the identifier for the target table of the update    */
 specifier|public
 name|SqlIdentifier
 name|getTargetTable
@@ -225,7 +225,7 @@ name|TARGET_TABLE_OPERAND
 index|]
 return|;
 block|}
-comment|/**      * @return the alias for the target table of the update      */
+comment|/**    * @return the alias for the target table of the update    */
 specifier|public
 name|SqlIdentifier
 name|getAlias
@@ -241,7 +241,7 @@ name|ALIAS_OPERAND
 index|]
 return|;
 block|}
-comment|/**      * @return the list of target column names      */
+comment|/**    * @return the list of target column names    */
 specifier|public
 name|SqlNodeList
 name|getTargetColumnList
@@ -257,7 +257,7 @@ name|TARGET_COLUMN_LIST_OPERAND
 index|]
 return|;
 block|}
-comment|/**      * @return the list of source expressions      */
+comment|/**    * @return the list of source expressions    */
 specifier|public
 name|SqlNodeList
 name|getSourceExpressionList
@@ -273,7 +273,7 @@ name|SOURCE_EXPRESSION_LIST_OPERAND
 index|]
 return|;
 block|}
-comment|/**      * Gets the filter condition for rows to be updated.      *      * @return the condition expression for the data to be updated, or null for      * all rows in the table      */
+comment|/**    * Gets the filter condition for rows to be updated.    *    * @return the condition expression for the data to be updated, or null for    * all rows in the table    */
 specifier|public
 name|SqlNode
 name|getCondition
@@ -286,7 +286,7 @@ name|CONDITION_OPERAND
 index|]
 return|;
 block|}
-comment|/**      * Gets the source SELECT expression for the data to be updated. Returns      * null before the statement has been expanded by      * SqlValidator.performUnconditionalRewrites.      *      * @return the source SELECT for the data to be updated      */
+comment|/**    * Gets the source SELECT expression for the data to be updated. Returns    * null before the statement has been expanded by    * SqlValidator.performUnconditionalRewrites.    *    * @return the source SELECT for the data to be updated    */
 specifier|public
 name|SqlSelect
 name|getSourceSelect

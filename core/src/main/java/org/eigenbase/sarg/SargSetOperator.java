@@ -22,13 +22,13 @@ specifier|public
 enum|enum
 name|SargSetOperator
 block|{
-comment|/**      * Set intersection over any number of children (no children => universal      * set).      */
+comment|/**    * Set intersection over any number of children (no children => universal    * set).    */
 name|INTERSECTION
 block|,
-comment|/**      * Set union over any number of children (no children => empty set).      */
+comment|/**    * Set union over any number of children (no children => empty set).    */
 name|UNION
 block|,
-comment|/**      * Set complement over exactly one child.      */
+comment|/**    * Set complement over exactly one child.    */
 name|COMPLEMENT
 block|}
 end_enum

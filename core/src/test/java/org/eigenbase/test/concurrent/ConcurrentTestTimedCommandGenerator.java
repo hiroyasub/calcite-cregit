@@ -35,6 +35,20 @@ name|*
 import|;
 end_import
 
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|ImmutableList
+import|;
+end_import
+
 begin_comment
 comment|/**  * ConcurrentTestTimedCommandGenerator extends {@link  * ConcurrentTestCommandGenerator} and repeats the configured command  * sequence until a certain amount of time has elapsed.  *  *<p>The command sequence is always completed in full, even if the time limit  * has been exceeded. Therefore, the time limit can only be considered the  * minimum length of time that the test will run and not a guarantee of how long  * the test will take.  */
 end_comment
@@ -56,7 +70,7 @@ name|long
 name|endTimeMillis
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Constructs a new ConcurrentTestTimedCommandGenerator that will run      * for at least the given amount of time. See {@link      * ConcurrentTestTimedCommandGenerator} for more information on the      * semantics of run-time length.      *      * @param runTimeSeconds minimum run-time length, in seconds      */
+comment|/**    * Constructs a new ConcurrentTestTimedCommandGenerator that will run    * for at least the given amount of time. See {@link    * ConcurrentTestTimedCommandGenerator} for more information on the    * semantics of run-time length.    *    * @param runTimeSeconds minimum run-time length, in seconds    */
 specifier|public
 name|ConcurrentTestTimedCommandGenerator
 parameter_list|(
@@ -75,11 +89,15 @@ name|runTimeSeconds
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Retrieves an Iterator based on the configured commands. This Iterator,      * when it reaches the end of the command list will compare the current time      * with the test's end time. If there is time left, the Iterator will repeat      * the command sequence.      *      *<p>The test's end time is computed by taking the value of<code>      * System.currentTimeMillis()</code> the first time this method is called      * (across all thread IDs) and adding the configured run time.      *      * @param threadId the thread ID to get an Iterator on      */
-name|Iterator
-name|getCommandIterator
+comment|/**    * Retrieves an Iterator based on the configured commands. This Iterator,    * when it reaches the end of the command list will compare the current time    * with the test's end time. If there is time left, the Iterator will repeat    * the command sequence.    *    *<p>The test's end time is computed by taking the value of<code>    * System.currentTimeMillis()</code> the first time this method is called    * (across all thread IDs) and adding the configured run time.    *    * @param threadId the thread ID to get an Iterator on    */
+name|Iterable
+argument_list|<
+name|ConcurrentTestCommand
+argument_list|>
+name|getCommandIterable
 parameter_list|(
-name|Integer
+specifier|final
+name|int
 name|threadId
 parameter_list|)
 block|{
@@ -112,7 +130,26 @@ block|}
 block|}
 return|return
 operator|new
+name|Iterable
+argument_list|<
+name|ConcurrentTestCommand
+argument_list|>
+argument_list|()
+block|{
+specifier|public
+name|Iterator
+argument_list|<
+name|ConcurrentTestCommand
+argument_list|>
+name|iterator
+parameter_list|()
+block|{
+return|return
+operator|new
 name|TimedIterator
+argument_list|<
+name|ConcurrentTestCommand
+argument_list|>
 argument_list|(
 name|getCommands
 argument_list|(
@@ -123,7 +160,10 @@ name|endTimeMillis
 argument_list|)
 return|;
 block|}
-comment|/**      * Outputs command sequence and notes how long the sequence will be      * repeated.      */
+block|}
+return|;
+block|}
+comment|/**    * Outputs command sequence and notes how long the sequence will be    * repeated.    */
 name|void
 name|printCommands
 parameter_list|(
@@ -156,16 +196,25 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------
-comment|/**      * TimedIterator is an Iterator that repeats a given collection's elements      * until<code>System.currentTimeMillis()>= endTimeMillis</code>.      */
+comment|/**    * TimedIterator is an Iterator that repeats a given collection's elements    * until<code>System.currentTimeMillis()>= endTimeMillis</code>.    */
 specifier|private
 class|class
 name|TimedIterator
+parameter_list|<
+name|E
+parameter_list|>
 implements|implements
 name|Iterator
+argument_list|<
+name|E
+argument_list|>
 block|{
 specifier|private
-name|Object
-index|[]
+specifier|final
+name|List
+argument_list|<
+name|E
+argument_list|>
 name|commands
 decl_stmt|;
 specifier|private
@@ -180,6 +229,9 @@ specifier|private
 name|TimedIterator
 parameter_list|(
 name|Collection
+argument_list|<
+name|E
+argument_list|>
 name|commands
 parameter_list|,
 name|long
@@ -190,10 +242,12 @@ name|this
 operator|.
 name|commands
 operator|=
-name|commands
+name|ImmutableList
 operator|.
-name|toArray
-argument_list|()
+name|copyOf
+argument_list|(
+name|commands
+argument_list|)
 expr_stmt|;
 name|this
 operator|.
@@ -219,7 +273,8 @@ name|commandIndex
 operator|<
 name|commands
 operator|.
-name|length
+name|size
+argument_list|()
 condition|)
 block|{
 return|return
@@ -243,7 +298,8 @@ expr_stmt|;
 return|return
 name|commands
 operator|.
-name|length
+name|size
+argument_list|()
 operator|>
 literal|0
 return|;
@@ -254,7 +310,7 @@ literal|false
 return|;
 block|}
 specifier|public
-name|Object
+name|E
 name|next
 parameter_list|()
 block|{
@@ -273,10 +329,12 @@ throw|;
 block|}
 return|return
 name|commands
-index|[
+operator|.
+name|get
+argument_list|(
 name|commandIndex
 operator|++
-index|]
+argument_list|)
 return|;
 block|}
 specifier|public

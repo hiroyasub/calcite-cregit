@@ -35,7 +35,7 @@ specifier|abstract
 class|class
 name|ConcurrentTestPlugin
 block|{
-comment|/**      * Should containing test be disabled?      *      * @return true if containing test should be disabled      */
+comment|/**    * Should containing test be disabled?    *    * @return true if containing test should be disabled    */
 specifier|public
 name|boolean
 name|isTestDisabled
@@ -45,7 +45,7 @@ return|return
 literal|false
 return|;
 block|}
-comment|/**      * What commands are supported by this plugin within      * a thread or repeat section. Commands should start with '@'.      *      * @return List of supported commands      */
+comment|/**    * What commands are supported by this plugin within    * a thread or repeat section. Commands should start with '@'.    *    * @return List of supported commands    */
 specifier|public
 name|Iterable
 argument_list|<
@@ -63,7 +63,7 @@ argument_list|>
 argument_list|()
 return|;
 block|}
-comment|/**      * What commands are supported by this plugin before      * the setup section. Commands should start with '@'.      *      * @return List of supported commands      */
+comment|/**    * What commands are supported by this plugin before    * the setup section. Commands should start with '@'.    *    * @return List of supported commands    */
 specifier|public
 name|Iterable
 argument_list|<
@@ -81,7 +81,7 @@ argument_list|>
 argument_list|()
 return|;
 block|}
-comment|/**      *  Create and return plugin command for given name.      * @param name Name of command plugin      * @param params parameters for command.      * @return Initialized plugin command.      */
+comment|/**    * Create and return plugin command for given name.    *    * @param name   Name of command plugin    * @param params parameters for command.    * @return Initialized plugin command.    */
 specifier|public
 specifier|abstract
 name|ConcurrentTestPluginCommand
@@ -94,7 +94,7 @@ name|String
 name|params
 parameter_list|)
 function_decl|;
-comment|/**      *  Do pre-setup action for given command and parameters.      * @param name Name of command plugin      * @param params parameters for command.      */
+comment|/**    * Do pre-setup action for given command and parameters.    *    * @param name   Name of command plugin    * @param params parameters for command.    */
 specifier|public
 name|void
 name|preSetupFor

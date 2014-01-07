@@ -60,7 +60,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  *<code>EmptyRel</code> represents a relational expression with zero rows.  *  *<p>EmptyRel can not be implemented, but serves as a token for rules to match  * so that empty sections of queries can be eliminated.  *  *<p>Rules:  *  *<ul>  *<li>Created by {@code net.sf.farrago.query.FarragoReduceValuesRule}</li>  *<li>Triggers {@link org.eigenbase.rel.rules.RemoveEmptyRule}</li>  *</ul>  * @see org.eigenbase.rel.ValuesRel  */
+comment|/**  *<code>EmptyRel</code> represents a relational expression with zero rows.  *  *<p>EmptyRel can not be implemented, but serves as a token for rules to match  * so that empty sections of queries can be eliminated.  *  *<p>Rules:  *  *<ul>  *<li>Created by {@code net.sf.farrago.query.FarragoReduceValuesRule}</li>  *<li>Triggers {@link org.eigenbase.rel.rules.RemoveEmptyRule}</li>  *</ul>  *  * @see org.eigenbase.rel.ValuesRel  */
 end_comment
 
 begin_class
@@ -71,7 +71,7 @@ extends|extends
 name|AbstractRelNode
 block|{
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a new EmptyRel.      *      * @param cluster Cluster      * @param rowType row type for tuples which would be produced by this rel if      * it actually produced any, but it doesn't (see, philosophy is good for      * something after all!)      */
+comment|/**    * Creates a new EmptyRel.    *    * @param cluster Cluster    * @param rowType row type for tuples which would be produced by this rel if    *                it actually produced any, but it doesn't (see, philosophy is    *                good for something after all!)    */
 specifier|public
 name|EmptyRel
 parameter_list|(

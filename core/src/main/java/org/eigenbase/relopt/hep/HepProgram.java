@@ -49,7 +49,7 @@ class|class
 name|HepProgram
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
-comment|/**      * Symbolic constant for matching until no more matches occur.      */
+comment|/**    * Symbolic constant for matching until no more matches occur.    */
 specifier|public
 specifier|static
 specifier|final
@@ -80,7 +80,7 @@ name|EndGroup
 name|group
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a new empty HepProgram. The program has an initial match order of      * {@link org.eigenbase.relopt.hep.HepMatchOrder#ARBITRARY}, and an initial      * match limit of {@link #MATCH_UNTIL_FIXPOINT}.      */
+comment|/**    * Creates a new empty HepProgram. The program has an initial match order of    * {@link org.eigenbase.relopt.hep.HepMatchOrder#ARBITRARY}, and an initial    * match limit of {@link #MATCH_UNTIL_FIXPOINT}.    */
 name|HepProgram
 parameter_list|(
 name|List

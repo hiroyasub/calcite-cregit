@@ -79,7 +79,7 @@ argument_list|>
 name|transforms
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a SqlTypeTransformCascade from a rule and an array of one or more      * transforms.      */
+comment|/**    * Creates a SqlTypeTransformCascade from a rule and an array of one or more    * transforms.    */
 specifier|public
 name|SqlTypeTransformCascade
 parameter_list|(

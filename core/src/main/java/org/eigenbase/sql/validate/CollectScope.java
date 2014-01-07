@@ -28,7 +28,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * The name-resolution context for expression inside a multiset call. The  * objects visible are multiset expressions, and those inherited from the parent  * scope.  * @see CollectNamespace  */
+comment|/**  * The name-resolution context for expression inside a multiset call. The  * objects visible are multiset expressions, and those inherited from the parent  * scope.  *  * @see CollectNamespace  */
 end_comment
 
 begin_class

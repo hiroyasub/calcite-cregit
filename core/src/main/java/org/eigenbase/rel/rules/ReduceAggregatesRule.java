@@ -133,7 +133,7 @@ extends|extends
 name|RelOptRule
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
-comment|/**      * The singleton.      */
+comment|/**    * The singleton.    */
 specifier|public
 specifier|static
 specifier|final
@@ -210,7 +210,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Returns whether any of the aggregates are calls to AVG, STDDEV_*, VAR_*.      *      * @param aggCallList List of aggregate calls      */
+comment|/**    * Returns whether any of the aggregates are calls to AVG, STDDEV_*, VAR_*.    *    * @param aggCallList List of aggregate calls    */
 specifier|private
 name|boolean
 name|containsAvgStddevVarCall
@@ -249,7 +249,7 @@ return|return
 literal|false
 return|;
 block|}
-comment|/**      * Reduces all calls to AVG, STDDEV_POP, STDDEV_SAMP, VAR_POP, VAR_SAMP in      * the aggregates list to.      *      *<p>It handles newly generated common subexpressions since this was done      * at the sql2rel stage.      */
+comment|/**    * Reduces all calls to AVG, STDDEV_POP, STDDEV_SAMP, VAR_POP, VAR_SAMP in    * the aggregates list to.    *    *<p>It handles newly generated common subexpressions since this was done    * at the sql2rel stage.    */
 specifier|private
 name|void
 name|reduceAggs
@@ -1573,7 +1573,7 @@ name|result
 argument_list|)
 return|;
 block|}
-comment|/**      * Finds the ordinal of an element in a list, or adds it.      *      * @param list List      * @param element Element to lookup or add      * @param<T> Element type      * @return Ordinal of element in list      */
+comment|/**    * Finds the ordinal of an element in a list, or adds it.    *    * @param list    List    * @param element Element to lookup or add    * @param<T>     Element type    * @return Ordinal of element in list    */
 specifier|private
 specifier|static
 parameter_list|<
@@ -1629,7 +1629,7 @@ return|return
 name|ordinal
 return|;
 block|}
-comment|/**      * Do a shallow clone of oldAggRel and update aggCalls. Could be refactored      * into AggregateRelBase and subclasses - but it's only needed for some      * subclasses.      *      * @param oldAggRel AggregateRel to clone.      * @param inputRel Input relational expression      * @param newCalls New list of AggregateCalls      *  @return shallow clone with new list of AggregateCalls.      */
+comment|/**    * Do a shallow clone of oldAggRel and update aggCalls. Could be refactored    * into AggregateRelBase and subclasses - but it's only needed for some    * subclasses.    *    * @param oldAggRel AggregateRel to clone.    * @param inputRel  Input relational expression    * @param newCalls  New list of AggregateCalls    * @return shallow clone with new list of AggregateCalls.    */
 specifier|protected
 name|AggregateRelBase
 name|newAggregateRel

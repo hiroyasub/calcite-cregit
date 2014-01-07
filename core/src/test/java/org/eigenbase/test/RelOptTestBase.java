@@ -89,7 +89,7 @@ extends|extends
 name|SqlToRelTestBase
 block|{
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Checks the plan for a SQL statement before/after executing a given rule.      *      * @param rule Planner rule      * @param sql SQL query      */
+comment|/**    * Checks the plan for a SQL statement before/after executing a given rule.    *    * @param rule Planner rule    * @param sql  SQL query    */
 specifier|protected
 name|void
 name|checkPlanning
@@ -127,7 +127,7 @@ name|sql
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Checks the plan for a SQL statement before/after executing a given      * program.      *      * @param program Planner program      * @param sql SQL query      */
+comment|/**    * Checks the plan for a SQL statement before/after executing a given    * program.    *    * @param program Planner program    * @param sql     SQL query    */
 specifier|protected
 name|void
 name|checkPlanning
@@ -151,7 +151,7 @@ name|sql
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Checks the plan for a SQL statement before/after executing a given      * planner.      *      * @param planner Planner      * @param sql SQL query      */
+comment|/**    * Checks the plan for a SQL statement before/after executing a given    * planner.    *    * @param planner Planner    * @param sql     SQL query    */
 specifier|protected
 name|void
 name|checkPlanning
@@ -173,7 +173,7 @@ name|sql
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Checks the plan for a SQL statement before/after executing a given rule,      * with a pre-program to prepare the tree.      *      * @param preProgram Program to execute before comparing before state      * @param rule Planner rule      * @param sql SQL query      */
+comment|/**    * Checks the plan for a SQL statement before/after executing a given rule,    * with a pre-program to prepare the tree.    *    * @param preProgram Program to execute before comparing before state    * @param rule       Planner rule    * @param sql        SQL query    */
 specifier|protected
 name|void
 name|checkPlanning
@@ -226,7 +226,7 @@ name|sql
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Checks the plan for a SQL statement before/after executing a given rule,      * with a pre-program to prepare the tree.      *      * @param preProgram Program to execute before comparing before state      * @param planner Planner      * @param sql SQL query      */
+comment|/**    * Checks the plan for a SQL statement before/after executing a given rule,    * with a pre-program to prepare the tree.    *    * @param preProgram Program to execute before comparing before state    * @param planner    Planner    * @param sql        SQL query    */
 specifier|protected
 name|void
 name|checkPlanning
@@ -425,7 +425,7 @@ name|planAfter
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Creates a program which is a sequence of rules.      *      * @param rules Sequence of rules      *      * @return Program      */
+comment|/**    * Creates a program which is a sequence of rules.    *    * @param rules Sequence of rules    * @return Program    */
 specifier|protected
 specifier|static
 name|HepProgram

@@ -63,7 +63,7 @@ literal|0
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Does the work of the application. Derived classes must implement this      * method; they can throw any exception they like, and {@link #run} will      * clean up after them.      */
+comment|/**    * Does the work of the application. Derived classes must implement this    * method; they can throw any exception they like, and {@link #run} will    * clean up after them.    */
 specifier|public
 specifier|abstract
 name|void
@@ -72,7 +72,7 @@ parameter_list|()
 throws|throws
 name|Exception
 function_decl|;
-comment|/**      * Does the work of the application, handles any errors, then calls {@link      * System#exit} to terminate the application.      */
+comment|/**    * Does the work of the application, handles any errors, then calls {@link    * System#exit} to terminate the application.    */
 specifier|public
 specifier|final
 name|void
@@ -108,7 +108,7 @@ name|exitCode
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Sets the code which this program will return to the operating system.      *      * @param exitCode Exit code      *      * @see System#exit      */
+comment|/**    * Sets the code which this program will return to the operating system.    *    * @param exitCode Exit code    * @see System#exit    */
 specifier|public
 name|void
 name|setExitCode
@@ -124,7 +124,7 @@ operator|=
 name|exitCode
 expr_stmt|;
 block|}
-comment|/**      * Handles an error. Derived classes may override this method to provide      * their own error-handling.      *      * @param throwable Error to handle.      */
+comment|/**    * Handles an error. Derived classes may override this method to provide    * their own error-handling.    *    * @param throwable Error to handle.    */
 specifier|public
 name|void
 name|handle
@@ -157,7 +157,7 @@ name|args
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Initializes the application.      */
+comment|/**    * Initializes the application.    */
 specifier|protected
 name|void
 name|initializeOptions

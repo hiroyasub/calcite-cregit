@@ -113,7 +113,7 @@ argument_list|()
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Whether a relational expression may possess more than one instance of      * this trait simultaneously.      *      *<p>A subset has only one instance of a trait.</p>      */
+comment|/**    * Whether a relational expression may possess more than one instance of    * this trait simultaneously.    *    *<p>A subset has only one instance of a trait.</p>    */
 specifier|public
 name|boolean
 name|multiple
@@ -123,7 +123,7 @@ return|return
 literal|false
 return|;
 block|}
-comment|/**      * @return the specific RelTrait type associated with this RelTraitDef.      */
+comment|/**    * @return the specific RelTrait type associated with this RelTraitDef.    */
 specifier|public
 specifier|abstract
 name|Class
@@ -133,14 +133,14 @@ argument_list|>
 name|getTraitClass
 parameter_list|()
 function_decl|;
-comment|/**      * @return a simple name for this RelTraitDef (for use in      * {@link org.eigenbase.rel.RelNode#explain(RelWriter)}).      */
+comment|/**    * @return a simple name for this RelTraitDef (for use in    * {@link org.eigenbase.rel.RelNode#explain(RelWriter)}).    */
 specifier|public
 specifier|abstract
 name|String
 name|getSimpleName
 parameter_list|()
 function_decl|;
-comment|/**      * Takes an arbitrary RelTrait and returns the canonical representation of      * that RelTrait. Canonized RelTrait objects may always be compared using      * the equality operator (<code>==</code>).      *      *<p>If an equal RelTrait has already been canonized and is still in use,      * it will be returned. Otherwise, the given RelTrait is made canonical and      * returned.      *      * @param trait a possibly non-canonical RelTrait      *      * @return a canonical RelTrait.      */
+comment|/**    * Takes an arbitrary RelTrait and returns the canonical representation of    * that RelTrait. Canonized RelTrait objects may always be compared using    * the equality operator (<code>==</code>).    *    *<p>If an equal RelTrait has already been canonized and is still in use,    * it will be returned. Otherwise, the given RelTrait is made canonical and    * returned.    *    * @param trait a possibly non-canonical RelTrait    * @return a canonical RelTrait.    */
 specifier|public
 specifier|final
 name|T
@@ -262,7 +262,7 @@ return|return
 name|trait
 return|;
 block|}
-comment|/**      * Converts the given RelNode to the given RelTrait.      *      * @param planner the planner requesting the conversion      * @param rel RelNode to convert      * @param toTrait RelTrait to convert to      * @param allowInfiniteCostConverters flag indicating whether infinite cost      * converters are allowed      *      * @return a converted RelNode or null if conversion is not possible      */
+comment|/**    * Converts the given RelNode to the given RelTrait.    *    * @param planner                     the planner requesting the conversion    * @param rel                         RelNode to convert    * @param toTrait                     RelTrait to convert to    * @param allowInfiniteCostConverters flag indicating whether infinite cost    *                                    converters are allowed    * @return a converted RelNode or null if conversion is not possible    */
 specifier|public
 specifier|abstract
 name|RelNode
@@ -281,7 +281,7 @@ name|boolean
 name|allowInfiniteCostConverters
 parameter_list|)
 function_decl|;
-comment|/**      * Tests whether the given RelTrait can be converted to another RelTrait.      *      * @param planner the planner requesting the conversion test      * @param fromTrait the RelTrait to convert from      * @param toTrait the RelTrait to convert to      *      * @return true if fromTrait can be converted to toTrait      */
+comment|/**    * Tests whether the given RelTrait can be converted to another RelTrait.    *    * @param planner   the planner requesting the conversion test    * @param fromTrait the RelTrait to convert from    * @param toTrait   the RelTrait to convert to    * @return true if fromTrait can be converted to toTrait    */
 specifier|public
 specifier|abstract
 name|boolean
@@ -297,7 +297,7 @@ name|T
 name|toTrait
 parameter_list|)
 function_decl|;
-comment|/**      * Provides notification of the registration of a particular {@link      * ConverterRule} with a {@link RelOptPlanner}. The default implementation      * does nothing.      *      * @param planner the planner registering the rule      * @param converterRule the registered converter rule      */
+comment|/**    * Provides notification of the registration of a particular {@link    * ConverterRule} with a {@link RelOptPlanner}. The default implementation    * does nothing.    *    * @param planner       the planner registering the rule    * @param converterRule the registered converter rule    */
 specifier|public
 name|void
 name|registerConverterRule
@@ -310,7 +310,7 @@ name|converterRule
 parameter_list|)
 block|{
 block|}
-comment|/**      * Provides notification that a particular {@link ConverterRule} has been      * de-registered from a {@link RelOptPlanner}. The default implementation      * does nothing.      *      * @param planner the planner registering the rule      * @param converterRule the registered converter rule      */
+comment|/**    * Provides notification that a particular {@link ConverterRule} has been    * de-registered from a {@link RelOptPlanner}. The default implementation    * does nothing.    *    * @param planner       the planner registering the rule    * @param converterRule the registered converter rule    */
 specifier|public
 name|void
 name|deregisterConverterRule
@@ -323,7 +323,7 @@ name|converterRule
 parameter_list|)
 block|{
 block|}
-comment|/**      * Returns the default member of this trait.      */
+comment|/**    * Returns the default member of this trait.    */
 specifier|public
 specifier|abstract
 name|T

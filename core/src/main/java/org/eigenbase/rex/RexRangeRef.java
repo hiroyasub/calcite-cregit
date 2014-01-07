@@ -48,7 +48,7 @@ name|int
 name|offset
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a range reference.      *      * @param rangeType Type of the record returned      * @param offset Offset of the first column within the input record      */
+comment|/**    * Creates a range reference.    *    * @param rangeType Type of the record returned    * @param offset    Offset of the first column within the input record    */
 name|RexRangeRef
 parameter_list|(
 name|RelDataType

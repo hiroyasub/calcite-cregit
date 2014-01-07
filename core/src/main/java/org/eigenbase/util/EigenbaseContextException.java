@@ -37,7 +37,7 @@ extends|extends
 name|EigenbaseException
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
-comment|/**      * SerialVersionUID created with JDK 1.5 serialver tool. Prevents      * incompatible class conflict when serialized from JDK 1.5-built server to      * JDK 1.4-built client.      */
+comment|/**    * SerialVersionUID created with JDK 1.5 serialver tool. Prevents    * incompatible class conflict when serialized from JDK 1.5-built server to    * JDK 1.4-built client.    */
 specifier|private
 specifier|static
 specifier|final
@@ -69,7 +69,7 @@ name|String
 name|originalStatement
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a new EigenbaseContextException object. This constructor is for      * use by the generated factory.      *      * @param message error message      * @param cause underlying cause, must not be null      */
+comment|/**    * Creates a new EigenbaseContextException object. This constructor is for    * use by the generated factory.    *    * @param message error message    * @param cause   underlying cause, must not be null    */
 specifier|public
 name|EigenbaseContextException
 parameter_list|(
@@ -96,7 +96,7 @@ literal|0
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Creates a new EigenbaseContextException object.      *      * @param message error message      * @param cause underlying cause, must not be null      * @param posLine 1-based start line number      * @param posColumn 1-based start column number      * @param endPosLine 1-based end line number      * @param endPosColumn 1-based end column number      */
+comment|/**    * Creates a new EigenbaseContextException object.    *    * @param message      error message    * @param cause        underlying cause, must not be null    * @param posLine      1-based start line number    * @param posColumn    1-based start column number    * @param endPosLine   1-based end line number    * @param endPosColumn 1-based end column number    */
 specifier|public
 name|EigenbaseContextException
 parameter_list|(
@@ -145,7 +145,7 @@ name|endPosColumn
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Creates a new EigenbaseContextException object. This constructor is for      * use by the generated factory.      *      * @param message error message      * @param cause underlying cause, must not be null      * @param inputText is the orginal SQL statement, may be null      */
+comment|/**    * Creates a new EigenbaseContextException object. This constructor is for    * use by the generated factory.    *    * @param message   error message    * @param cause     underlying cause, must not be null    * @param inputText is the orginal SQL statement, may be null    */
 specifier|public
 name|EigenbaseContextException
 parameter_list|(
@@ -182,7 +182,7 @@ name|inputText
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Sets a textual position at which this exception was detected.      *      * @param posLine 1-based line number      * @param posColumn 1-based column number      */
+comment|/**    * Sets a textual position at which this exception was detected.    *    * @param posLine   1-based line number    * @param posColumn 1-based column number    */
 specifier|public
 name|void
 name|setPosition
@@ -219,7 +219,7 @@ operator|=
 name|posColumn
 expr_stmt|;
 block|}
-comment|/**      * Sets a textual range at which this exception was detected.      *      * @param posLine 1-based start line number      * @param posColumn 1-based start column number      * @param endPosLine 1-based end line number      * @param endPosColumn 1-based end column number      */
+comment|/**    * Sets a textual range at which this exception was detected.    *    * @param posLine      1-based start line number    * @param posColumn    1-based start column number    * @param endPosLine   1-based end line number    * @param endPosColumn 1-based end column number    */
 specifier|public
 name|void
 name|setPosition
@@ -262,7 +262,7 @@ operator|=
 name|endPosColumn
 expr_stmt|;
 block|}
-comment|/**      * @return 1-based line number, or 0 for missing position information      */
+comment|/**    * @return 1-based line number, or 0 for missing position information    */
 specifier|public
 name|int
 name|getPosLine
@@ -272,7 +272,7 @@ return|return
 name|posLine
 return|;
 block|}
-comment|/**      * @return 1-based column number, or 0 for missing position information      */
+comment|/**    * @return 1-based column number, or 0 for missing position information    */
 specifier|public
 name|int
 name|getPosColumn
@@ -282,7 +282,7 @@ return|return
 name|posColumn
 return|;
 block|}
-comment|/**      * @return 1-based ending line number, or 0 for missing position information      */
+comment|/**    * @return 1-based ending line number, or 0 for missing position information    */
 specifier|public
 name|int
 name|getEndPosLine
@@ -292,7 +292,7 @@ return|return
 name|endPosLine
 return|;
 block|}
-comment|/**      * @return 1-based ending column number, or 0 for missing position      * information      */
+comment|/**    * @return 1-based ending column number, or 0 for missing position    * information    */
 specifier|public
 name|int
 name|getEndPosColumn
@@ -302,7 +302,7 @@ return|return
 name|endPosColumn
 return|;
 block|}
-comment|/**      * @return the input string that is associated with the context      */
+comment|/**    * @return the input string that is associated with the context    */
 specifier|public
 name|String
 name|getOriginalStatement
@@ -312,7 +312,7 @@ return|return
 name|originalStatement
 return|;
 block|}
-comment|/**      * @param originalStatement - String to associate with the current context      */
+comment|/**    * @param originalStatement - String to associate with the current context    */
 specifier|public
 name|void
 name|setOriginalStatement

@@ -55,7 +55,7 @@ name|int
 name|index
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a dynamic parameter.      *      * @param type inferred type of parameter      * @param index 0-based index of dynamic parameter in statement      */
+comment|/**    * Creates a dynamic parameter.    *    * @param type  inferred type of parameter    * @param index 0-based index of dynamic parameter in statement    */
 specifier|public
 name|RexDynamicParam
 parameter_list|(

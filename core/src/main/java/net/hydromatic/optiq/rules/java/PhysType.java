@@ -161,7 +161,7 @@ name|int
 name|field
 parameter_list|)
 function_decl|;
-comment|/** Generates an accessor function for a given list of fields.    * The resulting object is a {@link List} (implementing {@link #hashCode()}    * and {@link #equals(Object)} per that interface) and also implements    * {@link Comparable}.    *    *<p>For example:</p>    *<pre>{@code    * new Function1<Employee, Object[]> {    *    public Object[] apply(Employee v1) {    *        return FlatLists.of(v1.<fieldN>, v1.<fieldM>);    *    }    * }    * }</pre>    */
+comment|/** Generates an accessor function for a given list of fields.  The resulting    * object is a {@link List} (implementing {@link Object#hashCode()} and    * {@link Object#equals(Object)} per that interface) and also implements    * {@link Comparable}.    *    *<p>For example:</p>    *<pre>{@code    * new Function1<Employee, Object[]> {    *    public Object[] apply(Employee v1) {    *        return FlatLists.of(v1.<fieldN>, v1.<fieldM>);    *    }    * }    * }</pre>    */
 name|Expression
 name|generateAccessor
 parameter_list|(

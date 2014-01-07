@@ -945,7 +945,7 @@ expr_stmt|;
 block|}
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Converts a CASE expression.      */
+comment|/**    * Converts a CASE expression.    */
 specifier|public
 name|RexNode
 name|convertCase
@@ -3025,7 +3025,7 @@ name|defaultCasts
 argument_list|)
 return|;
 block|}
-comment|/**      * Converts a call to an operator into a {@link RexCall} to the same      * operator.      *      *<p>Called automatically via reflection.      *      * @param cx Context      * @param call Call      *      * @return Rex call      */
+comment|/**    * Converts a call to an operator into a {@link RexCall} to the same    * operator.    *    *<p>Called automatically via reflection.    *    * @param cx   Context    * @param call Call    * @return Rex call    */
 specifier|public
 name|RexNode
 name|convertCall
@@ -3417,7 +3417,7 @@ name|neg
 argument_list|)
 return|;
 block|}
-comment|/**      * Converts a BETWEEN expression.      *      *<p>Called automatically via reflection.      */
+comment|/**    * Converts a BETWEEN expression.    *    *<p>Called automatically via reflection.    */
 specifier|public
 name|RexNode
 name|convertBetween
@@ -3699,7 +3699,7 @@ return|return
 name|res
 return|;
 block|}
-comment|/**      * Converts a LiteralChain expression: that is, concatenates the operands      * immediately, to produce a single literal string.      *      *<p>Called automatically via reflection.      */
+comment|/**    * Converts a LiteralChain expression: that is, concatenates the operands    * immediately, to produce a single literal string.    *    *<p>Called automatically via reflection.    */
 specifier|public
 name|RexNode
 name|convertLiteralChain
@@ -3740,7 +3740,7 @@ name|sum
 argument_list|)
 return|;
 block|}
-comment|/**      * Converts a ROW.      *      *<p>Called automatically via reflection.      */
+comment|/**    * Converts a ROW.    *    *<p>Called automatically via reflection.    */
 specifier|public
 name|RexNode
 name|convertRow
@@ -3852,7 +3852,7 @@ name|columns
 argument_list|)
 return|;
 block|}
-comment|/**      * Converts a call to OVERLAPS.      *      *<p>Called automatically via reflection.      */
+comment|/**    * Converts a call to OVERLAPS.    *    *<p>Called automatically via reflection.    */
 specifier|public
 name|RexNode
 name|convertOverlaps
@@ -4180,7 +4180,7 @@ name|call3
 argument_list|)
 return|;
 block|}
-comment|/**      * Casts a RexNode value to the validated type of a SqlCall. If the value      * was already of the validated type, then the value is returned without an      * additional cast.      */
+comment|/**    * Casts a RexNode value to the validated type of a SqlCall. If the value    * was already of the validated type, then the value is returned without an    * additional cast.    */
 specifier|public
 name|RexNode
 name|castToValidatedType

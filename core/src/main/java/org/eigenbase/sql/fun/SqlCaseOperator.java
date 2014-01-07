@@ -958,7 +958,7 @@ name|pos
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates a call to the switched form of the case operator, viz:      *      *<blockquote><code>CASE value<br/>      * WHEN whenList[0] THEN thenList[0]<br/>      * WHEN whenList[1] THEN thenList[1]<br/>      * ...<br/>      * ELSE elseClause<br/>      * END</code></blockquote>      */
+comment|/**    * Creates a call to the switched form of the case operator, viz:    *    *<blockquote><code>CASE value<br/>    * WHEN whenList[0] THEN thenList[0]<br/>    * WHEN whenList[1] THEN thenList[1]<br/>    * ...<br/>    * ELSE elseClause<br/>    * END</code></blockquote>    */
 specifier|public
 name|SqlCase
 name|createSwitchedCall

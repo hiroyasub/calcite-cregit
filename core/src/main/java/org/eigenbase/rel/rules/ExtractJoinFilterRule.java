@@ -74,7 +74,7 @@ extends|extends
 name|RelOptRule
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
-comment|/**      * The singleton.      */
+comment|/**    * The singleton.    */
 specifier|public
 specifier|static
 specifier|final
@@ -86,7 +86,7 @@ name|ExtractJoinFilterRule
 argument_list|()
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates an ExtractJoinFilterRule.      */
+comment|/**    * Creates an ExtractJoinFilterRule.    */
 specifier|private
 name|ExtractJoinFilterRule
 parameter_list|()

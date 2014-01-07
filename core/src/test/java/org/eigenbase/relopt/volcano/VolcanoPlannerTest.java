@@ -185,7 +185,7 @@ class|class
 name|VolcanoPlannerTest
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
-comment|/**      * Private calling convention representing a physical implementation.      */
+comment|/**    * Private calling convention representing a physical implementation.    */
 specifier|private
 specifier|static
 specifier|final
@@ -250,7 +250,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**      * Tests transformation of a leaf from NONE to PHYS.      */
+comment|/**    * Tests transformation of a leaf from NONE to PHYS.    */
 annotation|@
 name|Test
 specifier|public
@@ -345,7 +345,7 @@ name|PhysLeafRel
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Tests transformation of a single+leaf from NONE to PHYS.      */
+comment|/**    * Tests transformation of a single+leaf from NONE to PHYS.    */
 annotation|@
 name|Test
 specifier|public
@@ -460,7 +460,7 @@ name|PhysSingleRel
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Tests transformation of a single+leaf from NONE to PHYS. In the past,      * this one didn't work due to the definition of ReformedSingleRule.      */
+comment|/**    * Tests transformation of a single+leaf from NONE to PHYS. In the past,    * this one didn't work due to the definition of ReformedSingleRule.    */
 annotation|@
 name|Ignore
 comment|// broken, because ReformedSingleRule matches child traits strictly
@@ -840,7 +840,7 @@ literal|false
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Previously, this didn't work because ReformedRemoveSingleRule uses a      * pattern which spans calling conventions.      */
+comment|/**    * Previously, this didn't work because ReformedRemoveSingleRule uses a    * pattern which spans calling conventions.    */
 annotation|@
 name|Ignore
 comment|// broken, because ReformedSingleRule matches child traits strictly
@@ -982,7 +982,7 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * This always worked (in contrast to testRemoveSingleReformed) because it      * uses a completely-physical pattern (requiring GoodSingleRule to fire      * first).      */
+comment|/**    * This always worked (in contrast to testRemoveSingleReformed) because it    * uses a completely-physical pattern (requiring GoodSingleRule to fire    * first).    */
 annotation|@
 name|Test
 specifier|public
@@ -1130,7 +1130,7 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Tests whether planner correctly notifies listeners of events.      */
+comment|/**    * Tests whether planner correctly notifies listeners of events.    */
 annotation|@
 name|Ignore
 annotation|@

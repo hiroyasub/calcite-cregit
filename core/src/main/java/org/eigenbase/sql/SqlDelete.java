@@ -150,7 +150,7 @@ name|alias
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * @return the identifier for the target table of the deletion      */
+comment|/**    * @return the identifier for the target table of the deletion    */
 specifier|public
 name|SqlIdentifier
 name|getTargetTable
@@ -166,7 +166,7 @@ name|TARGET_TABLE_OPERAND
 index|]
 return|;
 block|}
-comment|/**      * @return the alias for the target table of the deletion      */
+comment|/**    * @return the alias for the target table of the deletion    */
 specifier|public
 name|SqlIdentifier
 name|getAlias
@@ -182,7 +182,7 @@ name|ALIAS_OPERAND
 index|]
 return|;
 block|}
-comment|/**      * Gets the filter condition for rows to be deleted.      *      * @return the condition expression for the data to be deleted, or null for      * all rows in the table      */
+comment|/**    * Gets the filter condition for rows to be deleted.    *    * @return the condition expression for the data to be deleted, or null for    * all rows in the table    */
 specifier|public
 name|SqlNode
 name|getCondition
@@ -195,7 +195,7 @@ name|CONDITION_OPERAND
 index|]
 return|;
 block|}
-comment|/**      * Gets the source SELECT expression for the data to be deleted. This      * returns null before the condition has been expanded by      * SqlValidator.performUnconditionRewrites.      *      * @return the source SELECT for the data to be inserted      */
+comment|/**    * Gets the source SELECT expression for the data to be deleted. This    * returns null before the condition has been expanded by    * SqlValidator.performUnconditionRewrites.    *    * @return the source SELECT for the data to be inserted    */
 specifier|public
 name|SqlSelect
 name|getSourceSelect

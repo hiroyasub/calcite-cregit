@@ -145,7 +145,7 @@ name|RexNode
 name|fetch
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a sorter.      *      * @param cluster Cluster this relational expression belongs to      * @param traits Traits      * @param child input relational expression      * @param collation array of sort specifications      */
+comment|/**    * Creates a sorter.    *    * @param cluster   Cluster this relational expression belongs to    * @param traits    Traits    * @param child     input relational expression    * @param collation array of sort specifications    */
 specifier|public
 name|SortRel
 parameter_list|(
@@ -178,7 +178,7 @@ literal|null
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Creates a sorter.      *      * @param cluster Cluster this relational expression belongs to      * @param traits Traits      * @param child input relational expression      * @param collation array of sort specifications      * @param offset Expression for number of rows to discard before returning      *               first row      * @param fetch Expression for number of rows to fetch      */
+comment|/**    * Creates a sorter.    *    * @param cluster   Cluster this relational expression belongs to    * @param traits    Traits    * @param child     input relational expression    * @param collation array of sort specifications    * @param offset    Expression for number of rows to discard before returning    *                  first row    * @param fetch     Expression for number of rows to fetch    */
 specifier|public
 name|SortRel
 parameter_list|(
@@ -336,7 +336,7 @@ name|build
 argument_list|()
 expr_stmt|;
 block|}
-comment|/** Creates a SortRel by parsing serialized output. */
+comment|/**    * Creates a SortRel by parsing serialized output.    */
 specifier|public
 name|SortRel
 parameter_list|(
@@ -592,7 +592,7 @@ return|return
 name|fieldExps
 return|;
 block|}
-comment|/**      * Returns the array of {@link RelFieldCollation}s asked for by the sort      * specification, from most significant to least significant.      *      *<p>See also {@link #getCollationList()}, inherited from {@link RelNode},      * which lists all known collations. For example,      *<code>ORDER BY time_id</code> might also be sorted by      *<code>the_year, the_month</code> because of a known monotonicity      * constraint among the columns. {@code getCollations} would return      *<code>[time_id]</code> and {@code getCollationList} would return      *<code>[ [time_id], [the_year, the_month] ]</code>.</p>      */
+comment|/**    * Returns the array of {@link RelFieldCollation}s asked for by the sort    * specification, from most significant to least significant.    *    *<p>See also {@link #getCollationList()}, inherited from {@link RelNode},    * which lists all known collations. For example,    *<code>ORDER BY time_id</code> might also be sorted by    *<code>the_year, the_month</code> because of a known monotonicity    * constraint among the columns. {@code getCollations} would return    *<code>[time_id]</code> and {@code getCollationList} would return    *<code>[ [time_id], [the_year, the_month] ]</code>.</p>    */
 specifier|public
 name|RelCollation
 name|getCollation

@@ -45,7 +45,7 @@ extends|extends
 name|ZonelessDatetime
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
-comment|/**      * SerialVersionUID created with JDK 1.5 serialver tool.      */
+comment|/**    * SerialVersionUID created with JDK 1.5 serialver tool.    */
 specifier|private
 specifier|static
 specifier|final
@@ -67,7 +67,7 @@ name|Timestamp
 name|tempTimestamp
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Constructs a ZonelessTimestamp.      */
+comment|/**    * Constructs a ZonelessTimestamp.    */
 specifier|public
 name|ZonelessTimestamp
 parameter_list|()
@@ -79,7 +79,7 @@ operator|=
 literal|0
 expr_stmt|;
 block|}
-comment|/**      * Constructs a ZonelessTimestamp with precision.      *      *<p>The precision is the number of digits to the right of the decimal      * point in the seconds value. For example, a<code>TIMESTAMP(3)</code> has      * a precision to milliseconds.      *      * @param precision Number of digits of precision      */
+comment|/**    * Constructs a ZonelessTimestamp with precision.    *    *<p>The precision is the number of digits to the right of the decimal    * point in the seconds value. For example, a<code>TIMESTAMP(3)</code> has    * a precision to milliseconds.    *    * @param precision Number of digits of precision    */
 specifier|public
 name|ZonelessTimestamp
 parameter_list|(
@@ -114,7 +114,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**      * Converts this ZonelessTimestamp to a java.sql.Timestamp and formats it      * via the {@link java.sql.Timestamp#toString() toString()} method of that      * class.      *      *<p>Note: Jdbc formatting always includes a decimal point and at least one      * digit of milliseconds precision. Trailing zeros, except for the first one      * after the decimal point, do not appear in the output.      *      * @return the formatted time string      */
+comment|/**    * Converts this ZonelessTimestamp to a java.sql.Timestamp and formats it    * via the {@link java.sql.Timestamp#toString() toString()} method of that    * class.    *    *<p>Note: Jdbc formatting always includes a decimal point and at least one    * digit of milliseconds precision. Trailing zeros, except for the first one    * after the decimal point, do not appear in the output.    *    * @return the formatted time string    */
 specifier|public
 name|String
 name|toString
@@ -150,7 +150,7 @@ literal|19
 argument_list|)
 return|;
 block|}
-comment|/**      * Formats this ZonelessTimestamp via a SimpleDateFormat. This method does      * not display milliseconds precision.      *      * @param format format string, as required by SimpleDateFormat      *      * @return the formatted timestamp string      */
+comment|/**    * Formats this ZonelessTimestamp via a SimpleDateFormat. This method does    * not display milliseconds precision.    *    * @param format format string, as required by SimpleDateFormat    * @return the formatted timestamp string    */
 specifier|public
 name|String
 name|toString
@@ -185,7 +185,7 @@ name|ts
 argument_list|)
 return|;
 block|}
-comment|/**      * Parses a string as a ZonelessTimestamp.      *      *<p>This method's parsing is strict and may parse fractional seconds (as      * opposed to just milliseconds.)      *      * @param s a string representing a time in ISO format, i.e. according to      * the SimpleDateFormat string "yyyy-MM-dd HH:mm:ss"      *      * @return the parsed time, or null if parsing failed      */
+comment|/**    * Parses a string as a ZonelessTimestamp.    *    *<p>This method's parsing is strict and may parse fractional seconds (as    * opposed to just milliseconds.)    *    * @param s a string representing a time in ISO format, i.e. according to    *          the SimpleDateFormat string "yyyy-MM-dd HH:mm:ss"    * @return the parsed time, or null if parsing failed    */
 specifier|public
 specifier|static
 name|ZonelessTimestamp
@@ -206,7 +206,7 @@ name|TimestampFormatStr
 argument_list|)
 return|;
 block|}
-comment|/**      * Parses a string as a ZonelessTimestamp using a given format string.      *      *<p>This method's parsing is strict and may parse fractional seconds (as      * opposed to just milliseconds.)      *      * @param s a string representing a time in ISO format, i.e. according to      * the SimpleDateFormat string "yyyy-MM-dd HH:mm:ss"      * @param format format string as per {@link SimpleDateFormat}      *      * @return the parsed timestamp, or null if parsing failed      */
+comment|/**    * Parses a string as a ZonelessTimestamp using a given format string.    *    *<p>This method's parsing is strict and may parse fractional seconds (as    * opposed to just milliseconds.)    *    * @param s      a string representing a time in ISO format, i.e. according to    *               the SimpleDateFormat string "yyyy-MM-dd HH:mm:ss"    * @param format format string as per {@link SimpleDateFormat}    * @return the parsed timestamp, or null if parsing failed    */
 specifier|public
 specifier|static
 name|ZonelessTimestamp
@@ -280,7 +280,7 @@ return|return
 name|zt
 return|;
 block|}
-comment|/**      * Gets a temporary Timestamp object. The same object is returned every      * time.      */
+comment|/**    * Gets a temporary Timestamp object. The same object is returned every    * time.    */
 specifier|protected
 name|Timestamp
 name|getTempTimestamp

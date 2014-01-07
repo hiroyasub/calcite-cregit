@@ -178,7 +178,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Unit test for {@link Mappings#createShiftMapping}. */
+comment|/**    * Unit test for {@link Mappings#createShiftMapping}.    */
 annotation|@
 name|Test
 specifier|public
@@ -258,7 +258,7 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Unit test for {@link Mappings#append}. */
+comment|/**    * Unit test for {@link Mappings#append}.    */
 annotation|@
 name|Test
 specifier|public
@@ -359,7 +359,7 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Unit test for {@link Mappings#offsetSource}. */
+comment|/**    * Unit test for {@link Mappings#offsetSource}.    */
 annotation|@
 name|Test
 specifier|public

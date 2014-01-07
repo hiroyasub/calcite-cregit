@@ -128,7 +128,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Represents a SQL data type specification in a parse tree.  *  *<p>A<code>SqlDataTypeSpec</code> is immutable; once created, you cannot  * change any of the fields.  *  *<p>todo: This should really be a subtype of {@link SqlCall}.  *  *<p>In its full glory, we will have to support complex type expressions like  *  *<blockquote><code>ROW( NUMBER(5,2) NOT NULL AS foo, ROW( BOOLEAN AS b, MyUDT  * NOT NULL AS i ) AS rec )</code></blockquote>  *  *<p>Currently it only supports simple datatypes like CHAR, VARCHAR and DOUBLE,  * with optional precision and scale.  */
+comment|/**  * Represents a SQL data type specification in a parse tree.  *  *<p>A<code>SqlDataTypeSpec</code> is immutable; once created, you cannot  * change any of the fields.</p>  *  *<p>todo: This should really be a subtype of {@link SqlCall}.</p>  *  *<p>In its full glory, we will have to support complex type expressions  * like:</p>  *  *<blockquote><code>ROW( NUMBER(5,2) NOT NULL AS foo, ROW( BOOLEAN AS b, MyUDT  * NOT NULL AS i ) AS rec )</code></blockquote>  *  *<p>Currently it only supports simple datatypes like CHAR, VARCHAR and DOUBLE,  * with optional precision and scale.</p>  */
 end_comment
 
 begin_class
@@ -170,7 +170,7 @@ name|TimeZone
 name|timeZone
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates a type specification.      */
+comment|/**    * Creates a type specification.    */
 specifier|public
 name|SqlDataTypeSpec
 parameter_list|(
@@ -236,7 +236,7 @@ operator|=
 name|timeZone
 expr_stmt|;
 block|}
-comment|/**      * Creates a type specification representing a collection type.      */
+comment|/**    * Creates a type specification representing a collection type.    */
 specifier|public
 name|SqlDataTypeSpec
 parameter_list|(
@@ -418,7 +418,7 @@ return|return
 name|timeZone
 return|;
 block|}
-comment|/**      * Returns a new SqlDataTypeSpec corresponding to the component type if the      * type spec is a collections type spec.<br>      * Collection types are<code>ARRAY</code> and<code>MULTISET</code>.      *      * @pre null != getCollectionsTypeName()      */
+comment|/**    * Returns a new SqlDataTypeSpec corresponding to the component type if the    * type spec is a collections type spec.<br>    * Collection types are<code>ARRAY</code> and<code>MULTISET</code>.    *    * @pre null != getCollectionsTypeName()    */
 specifier|public
 name|SqlDataTypeSpec
 name|getComponentTypeSpec
@@ -916,7 +916,7 @@ return|return
 literal|true
 return|;
 block|}
-comment|/**      * Throws an error if the type is not built-in.      */
+comment|/**    * Throws an error if the type is not built-in.    */
 specifier|public
 name|RelDataType
 name|deriveType
@@ -1035,7 +1035,7 @@ name|typeFactory
 argument_list|)
 return|;
 block|}
-comment|/**      * Does not throw an error if the type is not built-in.      */
+comment|/**    * Does not throw an error if the type is not built-in.    */
 specifier|public
 name|RelDataType
 name|deriveType

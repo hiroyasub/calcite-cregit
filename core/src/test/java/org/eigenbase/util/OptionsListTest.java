@@ -1295,7 +1295,7 @@ name|enumeration
 return|;
 block|}
 block|}
-comment|/**      * Implementation of {@link OptionsList.OptionHandler} which writes to a      * buffer. For testing purposes.      */
+comment|/**    * Implementation of {@link OptionsList.OptionHandler} which writes to a    * buffer. For testing purposes.    */
 specifier|public
 specifier|static
 class|class

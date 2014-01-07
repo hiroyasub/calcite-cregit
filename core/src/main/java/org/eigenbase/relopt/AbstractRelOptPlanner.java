@@ -110,7 +110,7 @@ implements|implements
 name|RelOptPlanner
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
-comment|/**      * Regular expression for integer.      */
+comment|/**    * Regular expression for integer.    */
 specifier|private
 specifier|static
 specifier|final
@@ -125,7 +125,7 @@ literal|"[0-9]+"
 argument_list|)
 decl_stmt|;
 comment|//~ Instance fields --------------------------------------------------------
-comment|/**      * Maps rule description to rule, just to ensure that rules' descriptions      * are unique.      */
+comment|/**    * Maps rule description to rule, just to ensure that rules' descriptions    * are unique.    */
 specifier|private
 specifier|final
 name|Map
@@ -174,7 +174,7 @@ argument_list|>
 argument_list|()
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates an AbstractRelOptPlanner.      */
+comment|/**    * Creates an AbstractRelOptPlanner.    */
 specifier|protected
 name|AbstractRelOptPlanner
 parameter_list|()
@@ -216,7 +216,7 @@ operator|=
 name|cancelFlag
 expr_stmt|;
 block|}
-comment|/**      * Checks to see whether cancellation has been requested, and if so, throws      * an exception.      */
+comment|/**    * Checks to see whether cancellation has been requested, and if so, throws    * an exception.    */
 specifier|public
 name|void
 name|checkCancel
@@ -243,7 +243,7 @@ argument_list|()
 throw|;
 block|}
 block|}
-comment|/**      * Registers a rule's description.      *      * @param rule Rule      */
+comment|/**    * Registers a rule's description.    *    * @param rule Rule    */
 specifier|protected
 name|void
 name|mapRuleDescription
@@ -365,7 +365,7 @@ throw|;
 block|}
 block|}
 block|}
-comment|/**      * Removes the mapping between a rule and its description.      *      * @param rule Rule      */
+comment|/**    * Removes the mapping between a rule and its description.    *    * @param rule Rule    */
 specifier|protected
 name|void
 name|unmapRuleDescription
@@ -390,7 +390,7 @@ name|description
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Returns the rule with a given description      *      * @param description Description      *      * @return Rule with given description, or null if not found      */
+comment|/**    * Returns the rule with a given description    *    * @param description Description    * @return Rule with given description, or null if not found    */
 specifier|protected
 name|RelOptRule
 name|getRuleByDescription
@@ -422,7 +422,7 @@ operator|=
 name|exclusionFilter
 expr_stmt|;
 block|}
-comment|/**      * Determines whether a given rule is excluded by ruleDescExclusionFilter.      *      * @param rule rule to test      *      * @return true iff rule should be excluded      */
+comment|/**    * Determines whether a given rule is excluded by ruleDescExclusionFilter.    *    * @param rule rule to test    * @return true iff rule should be excluded    */
 specifier|public
 name|boolean
 name|isRuleExcluded
@@ -725,7 +725,7 @@ name|emptyList
 argument_list|()
 return|;
 block|}
-comment|/**      * Fires a rule, taking care of tracing and listener notification.      *      * @param ruleCall description of rule call      *      * @pre ruleCall.getRule().matches(ruleCall)      */
+comment|/**    * Fires a rule, taking care of tracing and listener notification.    *    * @param ruleCall description of rule call    * @pre ruleCall.getRule().matches(ruleCall)    */
 specifier|protected
 name|void
 name|fireRule
@@ -927,7 +927,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Takes care of tracing and listener notification when a rule's      * transformation is applied.      *      * @param ruleCall description of rule call      * @param newRel result of transformation      * @param before true before registration of new rel; false after      */
+comment|/**    * Takes care of tracing and listener notification when a rule's    * transformation is applied.    *    * @param ruleCall description of rule call    * @param newRel   result of transformation    * @param before   true before registration of new rel; false after    */
 specifier|protected
 name|void
 name|notifyTransformation
@@ -1025,7 +1025,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Takes care of tracing and listener notification when a rel is chosen as      * part of the final plan.      *      * @param rel chosen rel      */
+comment|/**    * Takes care of tracing and listener notification when a rel is chosen as    * part of the final plan.    *    * @param rel chosen rel    */
 specifier|protected
 name|void
 name|notifyChosen
@@ -1087,7 +1087,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Takes care of tracing and listener notification when a rel equivalence is      * detected.      *      * @param rel chosen rel      */
+comment|/**    * Takes care of tracing and listener notification when a rel equivalence is    * detected.    *    * @param rel chosen rel    */
 specifier|protected
 name|void
 name|notifyEquivalence
@@ -1137,7 +1137,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Takes care of tracing and listener notification when a rel is discarded      *      * @param rel discarded rel      */
+comment|/**    * Takes care of tracing and listener notification when a rel is discarded    *    * @param rel discarded rel    */
 specifier|protected
 name|void
 name|notifyDiscard

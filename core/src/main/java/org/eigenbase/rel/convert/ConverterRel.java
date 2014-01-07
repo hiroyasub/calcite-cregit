@@ -51,17 +51,17 @@ extends|extends
 name|RelNode
 block|{
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Returns the trait of the input relational expression.      *      * @return input trait      */
+comment|/**    * Returns the trait of the input relational expression.    *    * @return input trait    */
 name|RelTraitSet
 name|getInputTraits
 parameter_list|()
 function_decl|;
-comment|/**      * Returns the definition of trait which this converter works on.      *      *<p>The input relational expression (matched by the rule) must possess      * this trait and have the value given by {@link #getInputTraits()}, and the      * traits of the output of this converter given by {@link #getTraitSet()} will      * have one trait altered and the other orthogonal traits will be the same.      *      * @return trait which this converter modifies      */
+comment|/**    * Returns the definition of trait which this converter works on.    *    *<p>The input relational expression (matched by the rule) must possess    * this trait and have the value given by {@link #getInputTraits()}, and the    * traits of the output of this converter given by {@link #getTraitSet()} will    * have one trait altered and the other orthogonal traits will be the same.    *    * @return trait which this converter modifies    */
 name|RelTraitDef
 name|getTraitDef
 parameter_list|()
 function_decl|;
-comment|/**      * Returns the sole input relational expression      *      * @return child relational expression      */
+comment|/**    * Returns the sole input relational expression    *    * @return child relational expression    */
 name|RelNode
 name|getChild
 parameter_list|()

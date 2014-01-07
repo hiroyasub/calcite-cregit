@@ -24,7 +24,7 @@ name|InvalidRelException
 extends|extends
 name|Exception
 block|{
-comment|/** Creates an InvalidRelException. */
+comment|/**    * Creates an InvalidRelException.    */
 specifier|public
 name|InvalidRelException
 parameter_list|(
@@ -38,7 +38,7 @@ name|message
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Creates an InvalidRelException with a cause. */
+comment|/**    * Creates an InvalidRelException with a cause.    */
 specifier|public
 name|InvalidRelException
 parameter_list|(

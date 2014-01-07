@@ -69,7 +69,7 @@ name|RelDataType
 name|elementType
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**      * Creates an ArraySqlType. This constructor should only be called      * from a factory method.      */
+comment|/**    * Creates an ArraySqlType. This constructor should only be called    * from a factory method.    */
 specifier|public
 name|ArraySqlType
 parameter_list|(

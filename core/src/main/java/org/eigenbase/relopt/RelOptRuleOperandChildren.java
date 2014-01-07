@@ -28,7 +28,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Children of a {@link org.eigenbase.relopt.RelOptRuleOperand} and the policy  * for matching them.  *  *<p>Often created by calling one of the following methods:  * {@link RelOptRule#some},  * {@link RelOptRule#none},  * {@link RelOptRule#any},  * {@link RelOptRule#unordered},</p> */
+comment|/**  * Children of a {@link org.eigenbase.relopt.RelOptRuleOperand} and the policy  * for matching them.  *  *<p>Often created by calling one of the following methods:  * {@link RelOptRule#some},  * {@link RelOptRule#none},  * {@link RelOptRule#any},  * {@link RelOptRule#unordered},</p>  */
 end_comment
 
 begin_class
