@@ -49,7 +49,7 @@ name|eigenbase
 operator|.
 name|reltype
 operator|.
-name|RelDataType
+name|RelProtoDataType
 import|;
 end_import
 
@@ -60,16 +60,6 @@ operator|.
 name|io
 operator|.
 name|File
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|List
 import|;
 end_import
 
@@ -86,36 +76,18 @@ block|{
 comment|/** Creates a CsvSmartTable. */
 name|CsvSmartTable
 parameter_list|(
-name|CsvSchema
-name|schema
-parameter_list|,
-name|String
-name|tableName
-parameter_list|,
 name|File
 name|file
 parameter_list|,
-name|RelDataType
-name|rowType
-parameter_list|,
-name|List
-argument_list|<
-name|CsvFieldType
-argument_list|>
-name|fieldTypes
+name|RelProtoDataType
+name|protoRowType
 parameter_list|)
 block|{
 name|super
 argument_list|(
-name|schema
-argument_list|,
-name|tableName
-argument_list|,
 name|file
 argument_list|,
-name|rowType
-argument_list|,
-name|fieldTypes
+name|protoRowType
 argument_list|)
 expr_stmt|;
 block|}
