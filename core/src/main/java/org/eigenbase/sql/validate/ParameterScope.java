@@ -50,7 +50,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A scope which contains nothing besides a few parameters. Like {@link  * EmptyScope} (which is its base class), it has no parent scope.  *  * @author jhyde  * @version $Id$  * @see ParameterNamespace  * @since Mar 25, 2003  */
+comment|/**  * A scope which contains nothing besides a few parameters. Like {@link  * EmptyScope} (which is its base class), it has no parent scope.  * @see ParameterNamespace  */
 end_comment
 
 begin_class

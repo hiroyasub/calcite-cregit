@@ -76,7 +76,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Partial implementation of {@link RelOptTable}.  *  * @author jhyde  * @version $Id$  * @since May 3, 2002  */
+comment|/**  * Partial implementation of {@link RelOptTable}.  */
 end_comment
 
 begin_class

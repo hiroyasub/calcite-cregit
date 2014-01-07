@@ -26,7 +26,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Collection of {@link SqlRexConvertlet}s.  *  * @author jhyde  * @version $Id$  * @since 2005/8/3  */
+comment|/**  * Collection of {@link SqlRexConvertlet}s.  */
 end_comment
 
 begin_interface

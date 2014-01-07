@@ -28,7 +28,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A<code>SqlJoin</code> is ...  *  * @author jhyde  * @version $Id$  * @since Mar 29, 2003  */
+comment|/**  * Parse tree node representing a {@code JOIN} clause.  */
 end_comment
 
 begin_class

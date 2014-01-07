@@ -114,7 +114,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A MultiJoinRel represents a join of N inputs, whereas other join relnodes  * represent strictly binary joins.  *  * @author Zelaine Fong  * @version $Id$  */
+comment|/**  * A MultiJoinRel represents a join of N inputs, whereas other join relnodes  * represent strictly binary joins.  */
 end_comment
 
 begin_class

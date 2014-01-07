@@ -24,7 +24,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * StringRepresentationComparator compares two objects by comparing their {@link  * Object#toString()} representations.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  * StringRepresentationComparator compares two objects by comparing their {@link  * Object#toString()} representations.  */
 end_comment
 
 begin_class

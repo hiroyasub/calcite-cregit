@@ -62,7 +62,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * ReflectiveSqlOperatorTable implements the {@link SqlOperatorTable } interface  * by reflecting the public fields of a subclass.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  * ReflectiveSqlOperatorTable implements the {@link SqlOperatorTable } interface  * by reflecting the public fields of a subclass.  */
 end_comment
 
 begin_class

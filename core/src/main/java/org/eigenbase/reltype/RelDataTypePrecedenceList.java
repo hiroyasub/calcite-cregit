@@ -14,7 +14,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * RelDataTypePrecedenceList defines a type precedence list for a particular  * type.  *  * @author John V. Sichi  * @version $Id$  * @sql.99 Part 2 Section 9.5  */
+comment|/**  * RelDataTypePrecedenceList defines a type precedence list for a particular  * type.  *  * @sql.99 Part 2 Section 9.5  */
 end_comment
 
 begin_interface

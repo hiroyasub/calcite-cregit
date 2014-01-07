@@ -38,7 +38,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Class to hold rules to determine if a type is assignable from another type.  *  *<p>REVIEW 7/05/04 Wael: We should split this up in Cast rules, symmetric and  * asymmetric assignable rules  *  * @author Wael Chatila  * @version $Id$  */
+comment|/**  * Class to hold rules to determine if a type is assignable from another type.  *  *<p>REVIEW 7/05/04 Wael: We should split this up in Cast rules, symmetric and  * asymmetric assignable rules  */
 end_comment
 
 begin_class

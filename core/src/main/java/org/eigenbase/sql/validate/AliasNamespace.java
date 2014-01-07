@@ -76,7 +76,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Namespace for an<code>AS t(c1, c2, ...)</code> clause.  *  *<p>A namespace is necessary only if there is a column list, in order to  * re-map column names; a<code>relation AS t</code> clause just uses the same  * namespace as<code>relation</code>.  *  * @author jhyde  * @version $Id$  * @since October 9, 2008  */
+comment|/**  * Namespace for an<code>AS t(c1, c2, ...)</code> clause.  *  *<p>A namespace is necessary only if there is a column list, in order to  * re-map column names; a<code>relation AS t</code> clause just uses the same  * namespace as<code>relation</code>.  */
 end_comment
 
 begin_class

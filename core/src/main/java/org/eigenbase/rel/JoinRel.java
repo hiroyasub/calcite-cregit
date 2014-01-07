@@ -88,7 +88,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A JoinRel represents two relational expressions joined according to some  * condition.  *  *<p>Some rules:  *  *<ul><li>{@link org.eigenbase.rel.rules.ExtractJoinFilterRule} converts an  * {@link JoinRel inner join} to a {@link FilterRel filter} on top of a {@link  * JoinRel cartesian inner join}.<li>{@code  * net.sf.farrago.fennel.rel.FennelCartesianJoinRule} implements a JoinRel as a  * cartesian product.</ul>  *  * @author jhyde  * @version $Id$  */
+comment|/**  * A JoinRel represents two relational expressions joined according to some  * condition.  *  *<p>Some rules:  *  *<ul><li>{@link org.eigenbase.rel.rules.ExtractJoinFilterRule} converts an  * {@link JoinRel inner join} to a {@link FilterRel filter} on top of a {@link  * JoinRel cartesian inner join}.<li>{@code  * net.sf.farrago.fennel.rel.FennelCartesianJoinRule} implements a JoinRel as a  * cartesian product.</ul>  */
 end_comment
 
 begin_class

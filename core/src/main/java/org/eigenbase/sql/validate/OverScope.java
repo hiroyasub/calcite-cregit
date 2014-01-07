@@ -50,7 +50,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * The name-resolution scope of a OVER clause. The objects visible are those in  * the parameters found on the left side of the over clause, and objects  * inherited from the parent scope.  *  *<p>This object is both a {@link SqlValidatorScope} only. In the query  *  *<blockquote>  *<pre>SELECT name FROM (  *     SELECT *  *     FROM emp OVER (  *         ORDER BY empno  *         RANGE BETWEEN 2 PRECEDING AND 2 FOLLOWING))  *</pre>  *</blockquote>  *  *<p/>  *<p>We need to use the {@link OverScope} as a {@link SqlValidatorNamespace}  * when resolving names used in the window specification.</p>  *  * @author jack  * @version $Id$  * @since Jun 29, 2005  */
+comment|/**  * The name-resolution scope of a OVER clause. The objects visible are those in  * the parameters found on the left side of the over clause, and objects  * inherited from the parent scope.  *  *<p>This object is both a {@link SqlValidatorScope} only. In the query  *  *<blockquote>  *<pre>SELECT name FROM (  *     SELECT *  *     FROM emp OVER (  *         ORDER BY empno  *         RANGE BETWEEN 2 PRECEDING AND 2 FOLLOWING))  *</pre>  *</blockquote>  *  *<p/>  *<p>We need to use the {@link OverScope} as a {@link SqlValidatorNamespace}  * when resolving names used in the window specification.</p>  */
 end_comment
 
 begin_class

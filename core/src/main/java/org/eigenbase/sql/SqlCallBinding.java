@@ -88,7 +88,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  *<code>SqlCallBinding</code> implements {@link SqlOperatorBinding} by  * analyzing to the operands of a {@link SqlCall} with a {@link SqlValidator}.  *  * @author Wael Chatila  * @version $Id$  */
+comment|/**  *<code>SqlCallBinding</code> implements {@link SqlOperatorBinding} by  * analyzing to the operands of a {@link SqlCall} with a {@link SqlValidator}.  */
 end_comment
 
 begin_class
@@ -229,7 +229,7 @@ name|int
 name|ordinal
 parameter_list|)
 block|{
-comment|//todo: move this to SqlTypeUtil
+comment|// todo: move this to SqlTypeUtil
 name|SqlNode
 name|node
 init|=

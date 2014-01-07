@@ -50,7 +50,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * HepRuleCall implements {@link RelOptRuleCall} for a {@link HepPlanner}. It  * remembers transformation results so that the planner can choose which one (if  * any) should replace the original expression.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  * HepRuleCall implements {@link RelOptRuleCall} for a {@link HepPlanner}. It  * remembers transformation results so that the planner can choose which one (if  * any) should replace the original expression.  */
 end_comment
 
 begin_class

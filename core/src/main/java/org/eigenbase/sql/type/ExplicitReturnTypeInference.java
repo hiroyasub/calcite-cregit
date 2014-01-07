@@ -52,7 +52,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A {@link SqlReturnTypeInference} which always returns the same SQL type.  *  * @author Wael Chatila  * @version $Id$  */
+comment|/**  * A {@link SqlReturnTypeInference} which always returns the same SQL type.  */
 end_comment
 
 begin_class

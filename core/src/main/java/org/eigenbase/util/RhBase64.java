@@ -127,8 +127,8 @@ name|byte
 index|[]
 name|_NATIVE_ALPHABET
 init|=
-comment|/* May be something funny                                                      like EBCDIC */
 block|{
+comment|// May be something funny like EBCDIC
 operator|(
 name|byte
 operator|)
@@ -841,7 +841,7 @@ block|,
 operator|-
 literal|9
 comment|// Decimal 123 - 126
-comment|/*,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,     // Decimal 127 - 139         -9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,     // Decimal 140 - 152          -9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,     // Decimal 153 - 165          -9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,     // Decimal 166 - 178          -9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,     // Decimal 179 - 191          -9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,     // Decimal 192 - 204          -9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,     // Decimal 205 - 217          -9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,     // Decimal 218 - 230          -9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,     // Decimal 231 -          243-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9         // Decimal 244 - 255          */
+comment|/*         ,         -9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,     // Decimal 127 - 139         -9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,     // Decimal 140 - 152          -9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,     // Decimal 153 - 165          -9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,     // Decimal 166 - 178          -9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,     // Decimal 179 - 191          -9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,     // Decimal 192 - 204          -9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,     // Decimal 205 - 217          -9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,     // Decimal 218 - 230          -9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,     // Decimal 231 -          243-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9         // Decimal 244 - 255 */
 block|}
 decl_stmt|;
 comment|// I think I end up not using the BAD_ENCODING indicator. private final
@@ -3849,7 +3849,7 @@ return|;
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------
 comment|/* ********  I N N E R   C L A S S   I N P U T S T R E A M  ******** */
-comment|/**      * A {@link RhBase64.InputStream} will read data from another<tt>      * java.io.InputStream</tt>, given in the constructor, and encode/decode      * to/from Base64 notation on the fly.      *      * @see RhBase64      * @since 1.3      */
+comment|/**      * A {@link RhBase64.InputStream} will read data from another<tt>      * java.io.InputStream</tt>, given in the constructor, and encode/decode      * to/from Base64 notation on the fly.      *      * @see RhBase64      */
 specifier|public
 specifier|static
 class|class
@@ -4431,8 +4431,6 @@ operator|=
 name|read
 argument_list|()
 expr_stmt|;
-comment|//if( b< 0&& i == 0 )
-comment|//    return -1;
 if|if
 condition|(
 name|b

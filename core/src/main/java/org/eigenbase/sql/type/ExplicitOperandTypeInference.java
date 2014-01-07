@@ -64,7 +64,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * ExplicitOperandTypeInferences implements {@link SqlOperandTypeInference} by  * explicity supplying a type for each parameter.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  * ExplicitOperandTypeInferences implements {@link SqlOperandTypeInference} by  * explicity supplying a type for each parameter.  */
 end_comment
 
 begin_class

@@ -76,7 +76,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Operand type-checking strategy which checks operands for inclusion in type  * families.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  * Operand type-checking strategy which checks operands for inclusion in type  * families.  */
 end_comment
 
 begin_class

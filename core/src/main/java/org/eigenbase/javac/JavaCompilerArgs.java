@@ -24,7 +24,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A<code>JavaCompilerArgs</code> holds the arguments for a {@link  * JavaCompiler}.  *  *<p>Specific implementations of {@link JavaCompiler} may override<code>  * set<i>Argument</i></code> methods to store arguments in a different fashion,  * or may throw {@link UnsupportedOperationException} to indicate that the  * compiler does not support that argument.  *  * @author jhyde  * @version $Id$  * @since Jun 2, 2002  */
+comment|/**  * A<code>JavaCompilerArgs</code> holds the arguments for a {@link  * JavaCompiler}.  *  *<p>Specific implementations of {@link JavaCompiler} may override<code>  * set<i>Argument</i></code> methods to store arguments in a different fashion,  * or may throw {@link UnsupportedOperationException} to indicate that the  * compiler does not support that argument.  */
 end_comment
 
 begin_class

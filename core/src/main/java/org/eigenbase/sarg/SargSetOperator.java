@@ -14,7 +14,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * SargSetOperator defines the supported set operators which can be used to  * combine instances of {@link SargExpr}.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  * SargSetOperator defines the supported set operators which can be used to  * combine instances of {@link SargExpr}.  */
 end_comment
 
 begin_enum

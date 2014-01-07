@@ -50,7 +50,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * SargFactory creates new instances of various sarg-related objects.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  * SargFactory creates new instances of various sarg-related objects.  */
 end_comment
 
 begin_class

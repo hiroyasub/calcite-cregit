@@ -66,7 +66,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A<code>SqlIdentifier</code> is an identifier, possibly compound.  *  * @author jhyde  * @version $Id$  */
+comment|/**  * A<code>SqlIdentifier</code> is an identifier, possibly compound.  */
 end_comment
 
 begin_class

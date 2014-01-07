@@ -28,7 +28,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * SqlFunctionalOperator is a base class for special operators which use  * functional syntax.  *  * @author John V. Sichi  */
+comment|/**  * SqlFunctionalOperator is a base class for special operators which use  * functional syntax.  */
 end_comment
 
 begin_class

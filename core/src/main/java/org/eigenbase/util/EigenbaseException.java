@@ -38,7 +38,7 @@ comment|// dependencies on other Eigenbase code.
 end_comment
 
 begin_comment
-comment|/**  * Base class for all exceptions originating from Farrago.  *  * @author John V. Sichi  * @version $Id$  * @see EigenbaseContextException  */
+comment|/**  * Base class for all exceptions originating from Farrago.  * @see EigenbaseContextException  */
 end_comment
 
 begin_class

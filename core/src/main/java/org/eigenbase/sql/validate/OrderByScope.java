@@ -50,7 +50,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Represents the name-resolution context for expressions in an ORDER BY clause.  *  *<p>In some dialects of SQL, the ORDER BY clause can reference column aliases  * in the SELECT clause. For example, the query  *  *<blockquote><code>SELECT empno AS x<br/>  * FROM emp<br/>  * ORDER BY x</code></blockquote>  *  * is valid.  *  * @author jhyde  * @version $Id$  * @since Mar 25, 2003  */
+comment|/**  * Represents the name-resolution context for expressions in an ORDER BY clause.  *  *<p>In some dialects of SQL, the ORDER BY clause can reference column aliases  * in the SELECT clause. For example, the query  *  *<blockquote><code>SELECT empno AS x<br/>  * FROM emp<br/>  * ORDER BY x</code></blockquote>  *  * is valid.  */
 end_comment
 
 begin_class

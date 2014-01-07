@@ -42,7 +42,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Abstract base for chararacter and binary string literals.  *  * @author wael  * @version $Id$  */
+comment|/**  * Abstract base for chararacter and binary string literals.  */
 end_comment
 
 begin_class

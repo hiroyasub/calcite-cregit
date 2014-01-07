@@ -98,7 +98,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * HepRelVertex wraps a real {@link RelNode} as a vertex in a DAG representing  * the entire query expression.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  * HepRelVertex wraps a real {@link RelNode} as a vertex in a DAG representing  * the entire query expression.  */
 end_comment
 
 begin_class

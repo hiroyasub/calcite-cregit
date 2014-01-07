@@ -74,7 +74,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Abstract base for a scope which is defined by a list of child namespaces and  * which inherits from a parent scope.  *  * @author jhyde  * @version $Id$  * @since Mar 25, 2003  */
+comment|/**  * Abstract base for a scope which is defined by a list of child namespaces and  * which inherits from a parent scope.  */
 end_comment
 
 begin_class

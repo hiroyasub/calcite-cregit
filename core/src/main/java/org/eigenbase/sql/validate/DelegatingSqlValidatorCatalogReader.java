@@ -50,7 +50,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Implementation of  * {@link org.eigenbase.sql.validate.SqlValidatorCatalogReader} that passes  * all calls to a parent catalog reader.  *  * @author jhyde  * @version $Id$  * @since Mar 6, 2009  */
+comment|/**  * Implementation of  * {@link org.eigenbase.sql.validate.SqlValidatorCatalogReader} that passes  * all calls to a parent catalog reader.  */
 end_comment
 
 begin_class

@@ -60,7 +60,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Local variable.  *  *<p>Identity is based upon type and index. We want multiple references to the  * same slot in the same context to be equal. A side effect is that references  * to slots in different contexts which happen to have the same index and type  * will be considered equal; this is not desired, but not too damaging, because  * of the immutability.  *  *<p>Variables are immutable.  *  * @author jhyde  * @version $Id$  * @since Oct 25, 2005  */
+comment|/**  * Local variable.  *  *<p>Identity is based upon type and index. We want multiple references to the  * same slot in the same context to be equal. A side effect is that references  * to slots in different contexts which happen to have the same index and type  * will be considered equal; this is not desired, but not too damaging, because  * of the immutability.  *  *<p>Variables are immutable.  */
 end_comment
 
 begin_class

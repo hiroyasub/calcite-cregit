@@ -66,7 +66,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Base class for binary operators such as addition, subtraction, and  * multiplication which are monotonic for the patterns<code>m op c</code> and  *<code>c op m</code> where m is any monotonic expression and c is a constant.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  * Base class for binary operators such as addition, subtraction, and  * multiplication which are monotonic for the patterns<code>m op c</code> and  *<code>c op m</code> where m is any monotonic expression and c is a constant.  */
 end_comment
 
 begin_class

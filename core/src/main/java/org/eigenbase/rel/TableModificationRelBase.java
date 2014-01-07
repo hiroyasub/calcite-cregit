@@ -102,7 +102,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  *<code>TableModificationRelBase</code> is an abstract base class for  * implementations of {@link TableModificationRel}.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  *<code>TableModificationRelBase</code> is an abstract base class for  * implementations of {@link TableModificationRel}.  */
 end_comment
 
 begin_class

@@ -14,7 +14,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * RelOptCostImpl provides a default implementation for the {@link RelOptCost}  * interface. It it defined in terms of a single scalar quantity; somewhat  * arbitrarily, it returns this scalar for rows processed and zero for both CPU  * and I/O.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  * RelOptCostImpl provides a default implementation for the {@link RelOptCost}  * interface. It it defined in terms of a single scalar quantity; somewhat  * arbitrarily, it returns this scalar for rows processed and zero for both CPU  * and I/O.  */
 end_comment
 
 begin_class

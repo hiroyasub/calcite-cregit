@@ -74,7 +74,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Parameter type-checking strategy where all operand types must be the same.  *  * @author Wael Chatila  * @version $Id$  */
+comment|/**  * Parameter type-checking strategy where all operand types must be the same.  */
 end_comment
 
 begin_class

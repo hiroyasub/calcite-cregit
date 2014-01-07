@@ -142,7 +142,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  *<code>JoinRelBase</code> is an abstract base class for implementations of  * {@link JoinRel}.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  *<code>JoinRelBase</code> is an abstract base class for implementations of  * {@link JoinRel}.  */
 end_comment
 
 begin_class

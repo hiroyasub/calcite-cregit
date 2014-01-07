@@ -26,7 +26,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * ChainedPhaseRuleMappingInitializer is an abstract implementation of {@link  * VolcanoPlannerPhaseRuleMappingInitializer} that allows additional rules to be  * layered ontop of those configured by a subordinate  * VolcanoPlannerPhaseRuleMappingInitializer.  *  * @author Stephan Zuercher  * @see VolcanoPlannerPhaseRuleMappingInitializer  */
+comment|/**  * ChainedPhaseRuleMappingInitializer is an abstract implementation of {@link  * VolcanoPlannerPhaseRuleMappingInitializer} that allows additional rules to be  * layered ontop of those configured by a subordinate  * VolcanoPlannerPhaseRuleMappingInitializer.  *  * @see VolcanoPlannerPhaseRuleMappingInitializer  */
 end_comment
 
 begin_class

@@ -62,7 +62,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * SqlTypeFamily provides SQL type categorization.  *  *<p>The<em>primary</em> family categorization is a complete disjoint  * partitioning of SQL types into families, where two types are members of the  * same primary family iff instances of the two types can be the operands of an  * SQL equality predicate such as<code>WHERE v1 = v2</code>. Primary families  * are returned by RelDataType.getFamily().  *  *<p>There is also a<em>secondary</em> family categorization which overlaps  * with the primary categorization. It is used in type strategies for more  * specific or more general categorization than the primary families. Secondary  * families are never returned by RelDataType.getFamily().  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  * SqlTypeFamily provides SQL type categorization.  *  *<p>The<em>primary</em> family categorization is a complete disjoint  * partitioning of SQL types into families, where two types are members of the  * same primary family iff instances of the two types can be the operands of an  * SQL equality predicate such as<code>WHERE v1 = v2</code>. Primary families  * are returned by RelDataType.getFamily().  *  *<p>There is also a<em>secondary</em> family categorization which overlaps  * with the primary categorization. It is used in type strategies for more  * specific or more general categorization than the primary families. Secondary  * families are never returned by RelDataType.getFamily().  */
 end_comment
 
 begin_enum

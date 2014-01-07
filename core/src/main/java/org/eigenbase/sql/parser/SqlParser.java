@@ -66,7 +66,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A<code>SqlParser</code> parses a SQL statement.  *  * @author jhyde  * @version $Id$  * @since Mar 18, 2003  */
+comment|/**  * A<code>SqlParser</code> parses a SQL statement.  */
 end_comment
 
 begin_class

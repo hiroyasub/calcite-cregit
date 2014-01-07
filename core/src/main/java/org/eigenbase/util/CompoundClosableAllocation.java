@@ -24,7 +24,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * CompoundClosableAllocation represents a collection of ClosableAllocations  * which share a common lifecycle. It guarantees that allocations are closed in  * the reverse order in which they were added.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  * CompoundClosableAllocation represents a collection of ClosableAllocations  * which share a common lifecycle. It guarantees that allocations are closed in  * the reverse order in which they were added.  */
 end_comment
 
 begin_class

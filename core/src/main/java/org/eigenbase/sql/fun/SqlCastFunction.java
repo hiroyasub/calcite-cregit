@@ -90,7 +90,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * SqlCastFunction. Note that the std functions are really singleton objects,  * because they always get fetched via the StdOperatorTable. So you can't store  * any local info in the class and hence the return type data is maintained in  * operand[1] through the validation phase.  *  * @author lee  * @version $Id$  * @since Jun 5, 2004  */
+comment|/**  * SqlCastFunction. Note that the std functions are really singleton objects,  * because they always get fetched via the StdOperatorTable. So you can't store  * any local info in the class and hence the return type data is maintained in  * operand[1] through the validation phase.  */
 end_comment
 
 begin_class

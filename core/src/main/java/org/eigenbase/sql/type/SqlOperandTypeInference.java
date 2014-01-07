@@ -40,7 +40,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Strategy to infer unknown types of the operands of an operator call.  *  * @author Wael Chatila  * @version $Id$  * @since Sept 8, 2004  */
+comment|/**  * Strategy to infer unknown types of the operands of an operator call.  */
 end_comment
 
 begin_interface

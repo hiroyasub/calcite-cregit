@@ -44,7 +44,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * ZonelessDatetime is an abstract class for dates, times, or timestamps that  * contain a zoneless time value.  *  * @author John Pham  * @version $Id$  */
+comment|/**  * ZonelessDatetime is an abstract class for dates, times, or timestamps that  * contain a zoneless time value.  */
 end_comment
 
 begin_class

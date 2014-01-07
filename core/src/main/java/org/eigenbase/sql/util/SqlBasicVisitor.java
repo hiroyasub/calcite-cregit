@@ -28,7 +28,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Basic implementation of {@link SqlVisitor} which does nothing at each node.  *  *<p>This class is useful as a base class for classes which implement the  * {@link SqlVisitor} interface. The derived class can override whichever  * methods it chooses.  *  * @author jhyde  * @version $Id$  */
+comment|/**  * Basic implementation of {@link SqlVisitor} which does nothing at each node.  *  *<p>This class is useful as a base class for classes which implement the  * {@link SqlVisitor} interface. The derived class can override whichever  * methods it chooses.  */
 end_comment
 
 begin_class

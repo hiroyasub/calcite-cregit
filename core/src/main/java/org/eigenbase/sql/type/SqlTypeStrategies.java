@@ -88,7 +88,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * SqlTypeStrategies defines singleton instances of strategy objects for operand  * type checking (member prefix<code>otc</code>), operand type inference  * (member prefix<code>oti</code>), and operator return type inference (member  * prefix<code>rti</code>). For otc members, the convention<code>  * otcSometypeX2</code> means two operands of type<code>Sometype</code>. The  * convention<code>otcSometypeLit</code> means a literal operand of type<code>  * Sometype</code>.  *  *<p>NOTE: avoid anonymous inner classes here except for unique,  * non-generalizable strategies; anything else belongs in a reusable top-level  * class. If you find yourself copying and pasting an existing strategy's  * anonymous inner class, you're making a mistake.  *  * @author Wael Chatila  * @version $Id$  */
+comment|/**  * SqlTypeStrategies defines singleton instances of strategy objects for operand  * type checking (member prefix<code>otc</code>), operand type inference  * (member prefix<code>oti</code>), and operator return type inference (member  * prefix<code>rti</code>). For otc members, the convention<code>  * otcSometypeX2</code> means two operands of type<code>Sometype</code>. The  * convention<code>otcSometypeLit</code> means a literal operand of type<code>  * Sometype</code>.  *  *<p>NOTE: avoid anonymous inner classes here except for unique,  * non-generalizable strategies; anything else belongs in a reusable top-level  * class. If you find yourself copying and pasting an existing strategy's  * anonymous inner class, you're making a mistake.  */
 end_comment
 
 begin_class

@@ -60,7 +60,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * SqlParserPos represents the position of a parsed token within SQL statement  * text.  *  * @author Kinkoi Lo  * @version $Id$  * @since Jun 1, 2004  */
+comment|/**  * SqlParserPos represents the position of a parsed token within SQL statement  * text.  */
 end_comment
 
 begin_class

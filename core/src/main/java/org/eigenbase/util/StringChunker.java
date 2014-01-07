@@ -36,7 +36,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Utility class for breaking huge strings into smaller&quot;chunks&quot; for  * applications that require it (such as fitting into transmission buffers).  * The class contains methods that allow the user to specify the maximum chunk  * length, or by default uses a maximum chunk length of 32,000 characters.  *  * @author chard  */
+comment|/**  * Utility class for breaking huge strings into smaller&quot;chunks&quot; for  * applications that require it (such as fitting into transmission buffers).  * The class contains methods that allow the user to specify the maximum chunk  * length, or by default uses a maximum chunk length of 32,000 characters.  */
 end_comment
 
 begin_class

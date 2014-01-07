@@ -102,7 +102,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  *<code>RexCallBinding</code> implements {@link SqlOperatorBinding} by  * referring to an underlying collection of {@link RexNode} operands.  *  * @author Wael Chatila  * @version $Id$  */
+comment|/**  *<code>RexCallBinding</code> implements {@link SqlOperatorBinding} by  * referring to an underlying collection of {@link RexNode} operands.  */
 end_comment
 
 begin_class

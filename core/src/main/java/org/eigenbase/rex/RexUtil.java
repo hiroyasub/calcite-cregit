@@ -140,7 +140,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Utility methods concerning row-expressions.  *  * @author jhyde  * @version $Id$  * @since Nov 23, 2003  */
+comment|/**  * Utility methods concerning row-expressions.  */
 end_comment
 
 begin_class

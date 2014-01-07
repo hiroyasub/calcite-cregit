@@ -60,7 +60,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A<code>RelOptQuery</code> represents a set of {@link RelNode relational  * expressions} which derive from the same<code>select</code> statement.  *  * @version $Id$  */
+comment|/**  * A<code>RelOptQuery</code> represents a set of {@link RelNode relational  * expressions} which derive from the same<code>select</code> statement.  */
 end_comment
 
 begin_class

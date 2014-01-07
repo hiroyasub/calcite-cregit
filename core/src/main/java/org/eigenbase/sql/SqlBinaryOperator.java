@@ -114,7 +114,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  *<code>SqlBinaryOperator</code> is a binary operator.  *  * @version $Id$  */
+comment|/**  *<code>SqlBinaryOperator</code> is a binary operator.  */
 end_comment
 
 begin_class

@@ -38,7 +38,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * ChainedSqlOperatorTable implements the {@link SqlOperatorTable} interface by  * chaining together any number of underlying operator table instances.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  * ChainedSqlOperatorTable implements the {@link SqlOperatorTable} interface by  * chaining together any number of underlying operator table instances.  */
 end_comment
 
 begin_class

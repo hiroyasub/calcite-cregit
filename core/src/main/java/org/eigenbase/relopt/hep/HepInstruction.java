@@ -38,7 +38,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * HepInstruction represents one instruction in a HepProgram. The actual  * instruction set is defined here via inner classes; if these grow too big,  * they should be moved out to top-level classes.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  * HepInstruction represents one instruction in a HepProgram. The actual  * instruction set is defined here via inner classes; if these grow too big,  * they should be moved out to top-level classes.  */
 end_comment
 
 begin_class

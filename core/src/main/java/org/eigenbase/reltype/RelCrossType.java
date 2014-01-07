@@ -50,7 +50,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Type of the cartesian product of two or more sets of records.  *  *<p>Its fields are those of its constituent records, but unlike a {@link  * RelRecordType}, those fields' names are not necessarily distinct.</p>  *  * @author jhyde  * @version $Id$  */
+comment|/**  * Type of the cartesian product of two or more sets of records.  *  *<p>Its fields are those of its constituent records, but unlike a {@link  * RelRecordType}, those fields' names are not necessarily distinct.</p>  */
 end_comment
 
 begin_class

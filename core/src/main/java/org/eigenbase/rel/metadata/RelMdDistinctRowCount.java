@@ -116,7 +116,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * RelMdDistinctRowCount supplies a default implementation of {@link  * RelMetadataQuery#getDistinctRowCount} for the standard logical algebra.  *  * @author Zelaine Fong  * @version $Id$  */
+comment|/**  * RelMdDistinctRowCount supplies a default implementation of {@link  * RelMetadataQuery#getDistinctRowCount} for the standard logical algebra.  */
 end_comment
 
 begin_class

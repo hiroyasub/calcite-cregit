@@ -42,7 +42,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A generic implementation of {@link SqlMoniker}.  *  * @author tleung  * @version $Id$  * @since May 31, 2005  */
+comment|/**  * A generic implementation of {@link SqlMoniker}.  */
 end_comment
 
 begin_class

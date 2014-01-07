@@ -24,7 +24,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Extension to {@link RelOptSchema} with support for sample data-sets.  *  * @author jhyde  * @see RelOptSchema  */
+comment|/**  * Extension to {@link RelOptSchema} with support for sample data-sets.  *  * @see RelOptSchema  */
 end_comment
 
 begin_interface

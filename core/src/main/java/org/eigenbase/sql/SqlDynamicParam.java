@@ -56,7 +56,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A<code>SqlDynamicParam</code> represents a dynamic parameter marker in an  * SQL statement. The textual order in which dynamic parameters appear within an  * SQL statement is the only property which distinguishes them, so this 0-based  * index is recorded as soon as the parameter is encountered.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  * A<code>SqlDynamicParam</code> represents a dynamic parameter marker in an  * SQL statement. The textual order in which dynamic parameters appear within an  * SQL statement is the only property which distinguishes them, so this 0-based  * index is recorded as soon as the parameter is encountered.  */
 end_comment
 
 begin_class

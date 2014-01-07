@@ -70,7 +70,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * The<code>COALESCE</code> function.  *  * @author Wael Chatila  * @version $Id$  */
+comment|/**  * The<code>COALESCE</code> function.  */
 end_comment
 
 begin_class
@@ -187,7 +187,7 @@ argument_list|(
 name|pos
 argument_list|)
 decl_stmt|;
-comment|//todo optimize when know operand is not null.
+comment|// todo: optimize when know operand is not null.
 for|for
 control|(
 name|int

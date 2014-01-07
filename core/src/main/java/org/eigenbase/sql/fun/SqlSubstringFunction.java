@@ -100,7 +100,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Definition of the "SUBSTRING" builtin SQL function.  *  * @author Wael Chatila  * @version $Id$  * @since Sep 5, 2004  */
+comment|/**  * Definition of the "SUBSTRING" builtin SQL function.  */
 end_comment
 
 begin_class

@@ -24,7 +24,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Map which contains more than one value per key.  *  *<p>You can either use a<code>MultiMap</code> as a regular map, or you can  * use the additional methods {@link #putMulti} and {@link #getMulti}. Values  * are returned in the order in which they were added.</p>  *  *<p>TODO jvs 21-Jul-2007: unit test for this class  *  * @author jhyde  * @version $Id$  * @since May 18, 2003  */
+comment|/**  * Map which contains more than one value per key.  *  *<p>You can either use a<code>MultiMap</code> as a regular map, or you can  * use the additional methods {@link #putMulti} and {@link #getMulti}. Values  * are returned in the order in which they were added.</p>  *  *<p>TODO jvs 21-Jul-2007: unit test for this class  */
 end_comment
 
 begin_class

@@ -86,7 +86,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A relational expression which unnests its input's sole column into a  * relation.  *  *<p>Like its inverse operation {@link CollectRel}, UncollectRel is generally  * invoked in a nested loop, driven by {@link CorrelatorRel} or similar.  *  * @author Wael Chatila  * @version $Id$  * @since Dec 12, 2004  */
+comment|/**  * A relational expression which unnests its input's sole column into a  * relation.  *  *<p>Like its inverse operation {@link CollectRel}, UncollectRel is generally  * invoked in a nested loop, driven by {@link CorrelatorRel} or similar.  */
 end_comment
 
 begin_class

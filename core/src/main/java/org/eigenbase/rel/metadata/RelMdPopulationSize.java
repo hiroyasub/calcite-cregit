@@ -78,7 +78,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * RelMdPopulationSize supplies a default implementation of {@link  * RelMetadataQuery#getPopulationSize} for the standard logical algebra.  *  * @author Zelaine Fong  * @version $Id$  */
+comment|/**  * RelMdPopulationSize supplies a default implementation of {@link  * RelMetadataQuery#getPopulationSize} for the standard logical algebra.  */
 end_comment
 
 begin_class

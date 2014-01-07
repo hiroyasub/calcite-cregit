@@ -36,7 +36,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * RelOptListener defines an interface for listening to events which occur  * during the optimization process.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  * RelOptListener defines an interface for listening to events which occur  * during the optimization process.  */
 end_comment
 
 begin_interface

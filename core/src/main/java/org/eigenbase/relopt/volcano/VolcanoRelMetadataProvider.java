@@ -42,7 +42,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * VolcanoRelMetadataProvider implements the {@link RelMetadataProvider}  * interface by combining metadata from the rels making up an equivalence class.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  * VolcanoRelMetadataProvider implements the {@link RelMetadataProvider}  * interface by combining metadata from the rels making up an equivalence class.  */
 end_comment
 
 begin_class

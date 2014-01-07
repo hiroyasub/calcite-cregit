@@ -52,7 +52,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  *<code>OneRowRelBase</code> is an abstract base class for implementations of  * {@link OneRowRel}.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  *<code>OneRowRelBase</code> is an abstract base class for implementations of  * {@link OneRowRel}.  */
 end_comment
 
 begin_class

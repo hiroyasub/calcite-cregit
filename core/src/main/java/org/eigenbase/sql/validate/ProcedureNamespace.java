@@ -40,7 +40,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Namespace whose contents are defined by the result of a call to a  * user-defined procedure.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  * Namespace whose contents are defined by the result of a call to a  * user-defined procedure.  */
 end_comment
 
 begin_class

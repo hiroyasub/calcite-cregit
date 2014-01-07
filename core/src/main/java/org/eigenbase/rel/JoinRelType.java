@@ -14,7 +14,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * Enumeration of join types.  *  * @author jhyde  * @version $Id$  */
+comment|/**  * Enumeration of join types.  */
 end_comment
 
 begin_enum

@@ -26,7 +26,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A general-purpose implementation of {@link Comparator} to compare {@link  * SqlMoniker} values.  *  * @author tleung  * @version $Id$  * @since Oct 16, 2005  */
+comment|/**  * A general-purpose implementation of {@link Comparator} to compare {@link  * SqlMoniker} values.  */
 end_comment
 
 begin_class

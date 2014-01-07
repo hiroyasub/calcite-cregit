@@ -62,7 +62,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * An implementation of {@link SqlValidatorNamespace} that delegates all methods  * to an underlying object.  *  * @author jhyde  * @version $Id$  */
+comment|/**  * An implementation of {@link SqlValidatorNamespace} that delegates all methods  * to an underlying object.  */
 end_comment
 
 begin_class

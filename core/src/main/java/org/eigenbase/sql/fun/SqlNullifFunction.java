@@ -70,7 +70,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * The<code>NULLIF</code> function.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  * The<code>NULLIF</code> function.  */
 end_comment
 
 begin_class

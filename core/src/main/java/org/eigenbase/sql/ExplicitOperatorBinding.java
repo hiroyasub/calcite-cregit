@@ -76,7 +76,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  *<code>ExplicitOperatorBinding</code> implements {@link SqlOperatorBinding}  * via an underlying array of known operand types.  *  * @author Wael Chatila  * @version $Id$  */
+comment|/**  *<code>ExplicitOperatorBinding</code> implements {@link SqlOperatorBinding}  * via an underlying array of known operand types.  */
 end_comment
 
 begin_class

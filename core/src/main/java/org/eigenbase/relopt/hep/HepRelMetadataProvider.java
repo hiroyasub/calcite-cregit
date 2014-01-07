@@ -42,7 +42,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * HepRelMetadataProvider implements the {@link RelMetadataProvider} interface  * by combining metadata from the rels inside of a {@link HepRelVertex}.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  * HepRelMetadataProvider implements the {@link RelMetadataProvider} interface  * by combining metadata from the rels inside of a {@link HepRelVertex}.  */
 end_comment
 
 begin_class

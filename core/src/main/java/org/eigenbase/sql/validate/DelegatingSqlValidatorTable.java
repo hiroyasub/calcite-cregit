@@ -50,7 +50,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Implements {@link org.eigenbase.sql.validate.SqlValidatorTable} by  * delegating to a parent table.  *  * @author jhyde  * @version $Id$  * @since Mar 9, 2009  */
+comment|/**  * Implements {@link org.eigenbase.sql.validate.SqlValidatorTable} by  * delegating to a parent table.  */
 end_comment
 
 begin_class

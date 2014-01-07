@@ -50,7 +50,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Supplies catalog information for {@link SqlValidator}.  *  *<p>This interface only provides a thin API to the underlying repository, and  * this is intentional. By only presenting the repository information of  * interest to the validator, we reduce the dependency on exact mechanism to  * implement the repository. It is also possible to construct mock  * implementations of this interface for testing purposes.  *  * @author jhyde  * @version $Id$  * @since Mar 25, 2003  */
+comment|/**  * Supplies catalog information for {@link SqlValidator}.  *  *<p>This interface only provides a thin API to the underlying repository, and  * this is intentional. By only presenting the repository information of  * interest to the validator, we reduce the dependency on exact mechanism to  * implement the repository. It is also possible to construct mock  * implementations of this interface for testing purposes.  */
 end_comment
 
 begin_interface

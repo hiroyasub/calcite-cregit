@@ -14,7 +14,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * A<code>RexPattern</code> represents an expression with holes in it. The  * {@link #match} method tests whether a given expression matches the pattern.  *  * @author jhyde  * @version $Id$  * @since May 3, 2002  */
+comment|/**  * A<code>RexPattern</code> represents an expression with holes in it. The  * {@link #match} method tests whether a given expression matches the pattern.  */
 end_comment
 
 begin_interface

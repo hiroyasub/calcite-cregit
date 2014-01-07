@@ -24,7 +24,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Extension to {@link ArrayList} to help build an array of<code>int</code>  * values.  *  * @author jhyde  * @version $Id$  */
+comment|/**  * Extension to {@link ArrayList} to help build an array of<code>int</code>  * values.  */
 end_comment
 
 begin_class

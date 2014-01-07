@@ -50,7 +50,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * RelMdPercentageOriginalRows supplies a default implementation of {@link  * RelMetadataQuery#getPercentageOriginalRows} for the standard logical algebra.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  * RelMdPercentageOriginalRows supplies a default implementation of {@link  * RelMetadataQuery#getPercentageOriginalRows} for the standard logical algebra.  */
 end_comment
 
 begin_class

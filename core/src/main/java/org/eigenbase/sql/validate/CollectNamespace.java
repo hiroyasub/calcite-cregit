@@ -66,7 +66,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Namespace for COLLECT and TABLE constructs.  *  *<p>Examples:  *  *<ul>  *<li><code>SELECT deptno, COLLECT(empno) FROM emp GROUP BY deptno</code>,  *<li><code>SELECT * FROM (TABLE getEmpsInDept(30))</code>.  *</ul>  *  *<p>NOTE: jhyde, 2006/4/24: These days, this class seems to be used  * exclusively for the<code>MULTISET</code> construct.  *  * @author wael  * @version $Id$  * @see CollectScope  * @since Mar 25, 2003  */
+comment|/**  * Namespace for COLLECT and TABLE constructs.  *  *<p>Examples:  *  *<ul>  *<li><code>SELECT deptno, COLLECT(empno) FROM emp GROUP BY deptno</code>,  *<li><code>SELECT * FROM (TABLE getEmpsInDept(30))</code>.  *</ul>  *  *<p>NOTE: jhyde, 2006/4/24: These days, this class seems to be used  * exclusively for the<code>MULTISET</code> construct.  * @see CollectScope  */
 end_comment
 
 begin_class

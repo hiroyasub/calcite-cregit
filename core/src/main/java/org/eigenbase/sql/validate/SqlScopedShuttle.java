@@ -52,7 +52,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Refinement to {@link SqlShuttle} which maintains a stack of scopes.  *  *<p>Derived class should override {@link #visitScoped(SqlCall)} rather than  * {@link #visit(SqlCall)}.  *  * @author jhyde  * @version $Id$  * @since Jun 10, 2006  */
+comment|/**  * Refinement to {@link SqlShuttle} which maintains a stack of scopes.  *  *<p>Derived class should override {@link #visitScoped(SqlCall)} rather than  * {@link #visit(SqlCall)}.  */
 end_comment
 
 begin_class

@@ -114,7 +114,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  *<code>TableFunctionRelBase</code> is an abstract base class for  * implementations of {@link TableFunctionRel}.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  *<code>TableFunctionRelBase</code> is an abstract base class for  * implementations of {@link TableFunctionRel}.  */
 end_comment
 
 begin_class

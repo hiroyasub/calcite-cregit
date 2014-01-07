@@ -16,7 +16,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * DefaultRelMetadataProvider supplies a default implementation of the {@link  * RelMetadataProvider} interface. It provides generic formulas and derivation  * rules for the standard logical algebra; coverage corresponds to the methods  * declared in {@link RelMetadataQuery}.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  * DefaultRelMetadataProvider supplies a default implementation of the {@link  * RelMetadataProvider} interface. It provides generic formulas and derivation  * rules for the standard logical algebra; coverage corresponds to the methods  * declared in {@link RelMetadataQuery}.  */
 end_comment
 
 begin_class

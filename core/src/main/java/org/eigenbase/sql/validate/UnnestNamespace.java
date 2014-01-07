@@ -68,7 +68,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Namespace for UNNEST.  *  * @author wael  * @version $Id$  * @since Mar 25, 2003  */
+comment|/**  * Namespace for UNNEST.  */
 end_comment
 
 begin_class

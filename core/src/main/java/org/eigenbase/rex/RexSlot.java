@@ -48,7 +48,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Abstract base class for {@link RexInputRef} and {@link RexLocalRef}.  *  * @author jhyde  * @version $Id$  * @since Oct 25, 2005  */
+comment|/**  * Abstract base class for {@link RexInputRef} and {@link RexLocalRef}.  */
 end_comment
 
 begin_class

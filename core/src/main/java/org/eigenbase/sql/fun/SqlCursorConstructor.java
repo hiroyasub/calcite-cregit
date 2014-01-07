@@ -68,7 +68,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * SqlCursorConstructor defines the non-standard CURSOR(&lt;query&gt;)  * constructor.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  * SqlCursorConstructor defines the non-standard CURSOR(&lt;query&gt;)  * constructor.  */
 end_comment
 
 begin_class

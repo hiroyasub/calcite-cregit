@@ -14,7 +14,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * CancelFlag is used to post and check cancellation requests.  *  * @author John Sichi  * @version $Id$  */
+comment|/**  * CancelFlag is used to post and check cancellation requests.  */
 end_comment
 
 begin_class

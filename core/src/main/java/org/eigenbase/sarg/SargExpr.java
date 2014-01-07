@@ -48,7 +48,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * SargExpr represents an expression defining a possibly non-contiguous search  * subset of a scalar domain of a given datatype.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  * SargExpr represents an expression defining a possibly non-contiguous search  * subset of a scalar domain of a given datatype.  */
 end_comment
 
 begin_interface

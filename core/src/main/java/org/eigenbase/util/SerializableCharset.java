@@ -36,7 +36,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Serializable wrapper around a {@link Charset}.  *  *<p>It serializes itself by writing out the name of the character set, for  * example "ISO-8859-1". On the other side, it deserializes itself by looking  * for a charset with the same name.  *  *<p>A SerializableCharset is immutable.  *  * @author jhyde  * @version $Id$  */
+comment|/**  * Serializable wrapper around a {@link Charset}.  *  *<p>It serializes itself by writing out the name of the character set, for  * example "ISO-8859-1". On the other side, it deserializes itself by looking  * for a charset with the same name.  *  *<p>A SerializableCharset is immutable.  */
 end_comment
 
 begin_class

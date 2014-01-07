@@ -36,7 +36,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Description of the physical ordering of a relational expression.  *  *<p>An ordering consists of a list of one or more column ordinals and the  * direction of the ordering.  *  * @author jhyde  * @version $Id$  * @since March 6, 2006  */
+comment|/**  * Description of the physical ordering of a relational expression.  *  *<p>An ordering consists of a list of one or more column ordinals and the  * direction of the ordering.  */
 end_comment
 
 begin_interface

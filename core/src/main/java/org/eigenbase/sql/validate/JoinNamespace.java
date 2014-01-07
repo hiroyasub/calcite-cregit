@@ -40,7 +40,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Namespace representing the row type produced by joining two relations.  *  * @author jhyde  * @version $Id$  * @since Mar 25, 2003  */
+comment|/**  * Namespace representing the row type produced by joining two relations.  */
 end_comment
 
 begin_class

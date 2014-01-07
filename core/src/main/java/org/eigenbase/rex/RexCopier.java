@@ -14,7 +14,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * Shuttle which creates a deep copy of a Rex expression.  *  *<p>This is useful when copying objects from one type factory or builder to  * another.  *  *<p>Due to the laziness of the author, not all Rex types are supported at  * present.  *  * @author jhyde  * @version $Id$  * @see RexBuilder#copy(RexNode)  */
+comment|/**  * Shuttle which creates a deep copy of a Rex expression.  *  *<p>This is useful when copying objects from one type factory or builder to  * another.  *  *<p>Due to the laziness of the author, not all Rex types are supported at  * present.  *  * @see RexBuilder#copy(RexNode)  */
 end_comment
 
 begin_class

@@ -14,7 +14,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * The planner's view of a connection to a database.  *  *<p>A connection contains a {@link RelOptSchema}, via which the query planner  * can access {@link RelOptTable} objects.</p>  *  *<p>If used in saffron, and if saffron is being used as a Java preprocessor,  * then every class which implements<code>RelOptConnection</code> must  * implement the method  *  *<blockquote>  *<pre>public static RelOptSchema getRelOptSchema()</pre>  *</blockquote>  *</p>  *  * @author jhyde  * @version $Id$  * @since 10 November, 2001  */
+comment|/**  * The planner's view of a connection to a database.  *  *<p>A connection contains a {@link RelOptSchema}, via which the query planner  * can access {@link RelOptTable} objects.</p>  *  *<p>If used in saffron, and if saffron is being used as a Java preprocessor,  * then every class which implements<code>RelOptConnection</code> must  * implement the method  *  *<blockquote>  *<pre>public static RelOptSchema getRelOptSchema()</pre>  *</blockquote>  *</p>  */
 end_comment
 
 begin_interface

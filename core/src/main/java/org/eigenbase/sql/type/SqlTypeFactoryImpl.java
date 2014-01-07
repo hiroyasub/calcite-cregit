@@ -74,7 +74,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * SqlTypeFactoryImpl provides a default implementation of {@link  * RelDataTypeFactory} which supports SQL types.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  * SqlTypeFactoryImpl provides a default implementation of {@link  * RelDataTypeFactory} which supports SQL types.  */
 end_comment
 
 begin_class

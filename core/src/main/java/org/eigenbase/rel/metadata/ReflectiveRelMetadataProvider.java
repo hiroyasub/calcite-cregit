@@ -62,7 +62,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * ReflectiveRelMetadataProvider provides an abstract base for reflective  * implementations of the {@link RelMetadataProvider} interface. For an example,  * see {@link DefaultRelMetadataProvider}.  *  *<p>TODO jvs 28-Mar-2006: most of this should probably be refactored into  * ReflectUtil.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  * ReflectiveRelMetadataProvider provides an abstract base for reflective  * implementations of the {@link RelMetadataProvider} interface. For an example,  * see {@link DefaultRelMetadataProvider}.  *  *<p>TODO jvs 28-Mar-2006: most of this should probably be refactored into  * ReflectUtil.  */
 end_comment
 
 begin_class

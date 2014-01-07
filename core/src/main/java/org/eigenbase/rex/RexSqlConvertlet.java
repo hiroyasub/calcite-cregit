@@ -26,7 +26,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Converts a {@link RexNode} expression into a {@link SqlNode} expression.  *  * @author Sunny Choi  * @version $Id$  */
+comment|/**  * Converts a {@link RexNode} expression into a {@link SqlNode} expression.  */
 end_comment
 
 begin_interface

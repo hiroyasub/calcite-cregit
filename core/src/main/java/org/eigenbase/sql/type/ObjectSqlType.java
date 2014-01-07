@@ -50,7 +50,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * ObjectSqlType represents an SQL structured user-defined type.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  * ObjectSqlType represents an SQL structured user-defined type.  */
 end_comment
 
 begin_class

@@ -40,7 +40,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Implementation of {@link SqlValidatorNamespace} for a field of a record.  *  *<p>A field is not a very interesting namespace - except if the field has a  * record or multiset type - but this class exists to make fields behave  * similarly to other records for purposes of name resolution.  *  * @author jhyde  * @version $Id$  */
+comment|/**  * Implementation of {@link SqlValidatorNamespace} for a field of a record.  *  *<p>A field is not a very interesting namespace - except if the field has a  * record or multiset type - but this class exists to make fields behave  * similarly to other records for purposes of name resolution.  */
 end_comment
 
 begin_class

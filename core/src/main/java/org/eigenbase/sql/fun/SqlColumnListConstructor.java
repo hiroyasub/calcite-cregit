@@ -42,7 +42,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * SqlColumnListConstructor defines the non-standard constructor used to pass a  * COLUMN_LIST parameter to a UDX.  *  * @author Zelaine Fong  * @version $Id$  */
+comment|/**  * SqlColumnListConstructor defines the non-standard constructor used to pass a  * COLUMN_LIST parameter to a UDX.  */
 end_comment
 
 begin_class

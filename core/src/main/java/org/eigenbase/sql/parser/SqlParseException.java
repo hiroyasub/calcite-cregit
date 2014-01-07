@@ -38,7 +38,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * SqlParseException defines a checked exception corresponding to {@link  * SqlParser}.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  * SqlParseException defines a checked exception corresponding to {@link  * SqlParser}.  */
 end_comment
 
 begin_class

@@ -86,7 +86,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * SqlRowOperator represents the special ROW constructor.  *  *<p>TODO: describe usage for row-value construction and row-type construction  * (SQL supports both).  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  * SqlRowOperator represents the special ROW constructor.  *  *<p>TODO: describe usage for row-value construction and row-type construction  * (SQL supports both).  */
 end_comment
 
 begin_class

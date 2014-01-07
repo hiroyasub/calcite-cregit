@@ -54,7 +54,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A SQL literal representing a time interval.  *  *<p>Examples:  *  *<ul>  *<li>INTERVAL '1' SECOND</li>  *<li>INTERVAL '1:00:05.345' HOUR</li>  *<li>INTERVAL '3:4' YEAR TO MONTH</li>  *</ul>  *  *<p>YEAR/MONTH intervals are not implemented yet.</p>  *  *<p>The interval string, such as '1:00:05.345', is not parsed yet.</p>  *  * @author jhyde  * @version $Id$  */
+comment|/**  * A SQL literal representing a time interval.  *  *<p>Examples:  *  *<ul>  *<li>INTERVAL '1' SECOND</li>  *<li>INTERVAL '1:00:05.345' HOUR</li>  *<li>INTERVAL '3:4' YEAR TO MONTH</li>  *</ul>  *  *<p>YEAR/MONTH intervals are not implemented yet.</p>  *  *<p>The interval string, such as '1:00:05.345', is not parsed yet.</p>  */
 end_comment
 
 begin_class
@@ -264,7 +264,7 @@ specifier|final
 name|int
 name|sign
 decl_stmt|;
-comment|/**          * Creates an interval value.          *          * @param intervalQualifier Interval qualifier          * @param sign Sign (+1 or -1)          * @param intervalStr          */
+comment|/**          * Creates an interval value.          *          * @param intervalQualifier Interval qualifier          * @param sign Sign (+1 or -1)          * @param intervalStr Interval string          */
 name|IntervalValue
 parameter_list|(
 name|SqlIntervalQualifier

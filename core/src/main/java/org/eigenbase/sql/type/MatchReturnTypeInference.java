@@ -72,7 +72,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Returns the first type that matches a set of given {@link SqlTypeName}s. If  * no match could be found, null is returned.  *  * @author Wael Chatila  * @version $Id$  */
+comment|/**  * Returns the first type that matches a set of given {@link SqlTypeName}s. If  * no match could be found, null is returned.  */
 end_comment
 
 begin_class

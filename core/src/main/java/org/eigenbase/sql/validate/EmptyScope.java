@@ -62,7 +62,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Deviant implementation of {@link SqlValidatorScope} for the top of the scope  * stack.  *  *<p>It is convenient, because we never need to check whether a scope's parent  * is null. (This scope knows not to ask about its parents, just like Adam.)  *  * @author jhyde  * @version $Id$  * @since Mar 25, 2003  */
+comment|/**  * Deviant implementation of {@link SqlValidatorScope} for the top of the scope  * stack.  *  *<p>It is convenient, because we never need to check whether a scope's parent  * is null. (This scope knows not to ask about its parents, just like Adam.)  */
 end_comment
 
 begin_class

@@ -62,7 +62,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Abstract implementation of {@link SqlValidatorNamespace}.  *  * @author jhyde  * @version $Id$  * @since Mar 3, 2005  */
+comment|/**  * Abstract implementation of {@link SqlValidatorNamespace}.  */
 end_comment
 
 begin_class

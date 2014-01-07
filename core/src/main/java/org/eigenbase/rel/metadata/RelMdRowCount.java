@@ -76,7 +76,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * RelMdRowCount supplies a default implementation of {@link  * RelMetadataQuery#getRowCount} for the standard logical algebra.  *  * @author Zelaine Fong  * @version $Id$  */
+comment|/**  * RelMdRowCount supplies a default implementation of {@link  * RelMetadataQuery#getRowCount} for the standard logical algebra.  */
 end_comment
 
 begin_class

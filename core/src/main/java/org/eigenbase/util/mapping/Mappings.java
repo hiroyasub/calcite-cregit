@@ -66,7 +66,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Utility functions related to mappings.  *  * @author jhyde  * @version $Id$  * @see MappingType  * @see Mapping  * @see Permutation  * @since Mar 24, 2006  */
+comment|/**  * Utility functions related to mappings.  * @see MappingType  * @see Mapping  * @see Permutation  */
 end_comment
 
 begin_class

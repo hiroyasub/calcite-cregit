@@ -38,7 +38,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * SargMutableEndpoint exposes methods for modifying a {@link SargEndpoint}.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  * SargMutableEndpoint exposes methods for modifying a {@link SargEndpoint}.  */
 end_comment
 
 begin_class

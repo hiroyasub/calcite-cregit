@@ -74,7 +74,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  *<code>VolcanoRuleCall</code> implements the {@link RelOptRuleCall} interface  * for VolcanoPlanner.  *  * @author jhyde  * @version $Id$  */
+comment|/**  *<code>VolcanoRuleCall</code> implements the {@link RelOptRuleCall} interface  * for VolcanoPlanner.  */
 end_comment
 
 begin_class

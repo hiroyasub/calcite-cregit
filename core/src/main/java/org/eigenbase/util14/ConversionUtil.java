@@ -56,7 +56,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Utility functions for converting from one type to another  *  * @author angel  * @version $Id$  * @since Jan 22, 2006  */
+comment|/**  * Utility functions for converting from one type to another  */
 end_comment
 
 begin_class

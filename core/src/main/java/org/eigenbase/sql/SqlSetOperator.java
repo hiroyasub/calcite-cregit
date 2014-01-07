@@ -42,7 +42,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * SqlSetOperator represents a relational set theory operator (UNION, INTERSECT,  * MINUS). These are binary operators, but with an extra boolean attribute  * tacked on for whether to remove duplicates (e.g. UNION ALL does not remove  * duplicates).  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  * SqlSetOperator represents a relational set theory operator (UNION, INTERSECT,  * MINUS). These are binary operators, but with an extra boolean attribute  * tacked on for whether to remove duplicates (e.g. UNION ALL does not remove  * duplicates).  */
 end_comment
 
 begin_class

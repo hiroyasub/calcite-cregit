@@ -56,7 +56,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * JavaToSqlTypeConversionRules defines mappings from common Java types to  * corresponding SQL types.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  * JavaToSqlTypeConversionRules defines mappings from common Java types to  * corresponding SQL types.  */
 end_comment
 
 begin_class

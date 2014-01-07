@@ -54,7 +54,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * The SQL<code>EXTRACT</code> operator. Extracts a specified field value from  * a DATETIME or an INTERVAL. E.g.<br>  *<code>EXTRACT(HOUR FROM INTERVAL '364 23:59:59')</code> returns<code>  * 23</code>  *  * @author Wael Chatila  * @version $Id$  */
+comment|/**  * The SQL<code>EXTRACT</code> operator. Extracts a specified field value from  * a DATETIME or an INTERVAL. E.g.<br>  *<code>EXTRACT(HOUR FROM INTERVAL '364 23:59:59')</code> returns<code>  * 23</code>  */
 end_comment
 
 begin_class

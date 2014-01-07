@@ -56,7 +56,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Definition of the "FLOOR" builtin SQL function.  *  * @author jack  * @version $Id$  * @since May 28, 2004  */
+comment|/**  * Definition of the "FLOOR" builtin SQL function.  */
 end_comment
 
 begin_class

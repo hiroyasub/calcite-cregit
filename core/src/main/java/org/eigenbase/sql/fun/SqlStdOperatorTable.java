@@ -82,7 +82,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Implementation of {@link org.eigenbase.sql.SqlOperatorTable} containing the  * standard operators and functions.  *  * @author jhyde  * @version $Id$  * @since May 28, 2004  */
+comment|/**  * Implementation of {@link org.eigenbase.sql.SqlOperatorTable} containing the  * standard operators and functions.  */
 end_comment
 
 begin_class

@@ -76,7 +76,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Definition of the<code>MIN</code> and<code>MAX</code> aggregate functions,  * returning the returns the smallest/largest of the values which go into it.  *  *<p>There are 3 forms:  *  *<dl>  *<dt>sum(<em>primitive type</em>)</dt>  *<dd>values are compared using&lt;</dd>  *  *<dt>sum({@link java.lang.Comparable})</dt>  *<dd>values are compared using {@link java.lang.Comparable#compareTo}</dd>  *  *<dt>sum({@link java.util.Comparator}, {@link java.lang.Object})</dt>  *<dd>the {@link java.util.Comparator#compare} method of the comparator is used  * to compare pairs of objects. The comparator is a startup argument, and must  * therefore be constant for the duration of the aggregation.</dd>  *</dl>  *  * @author jhyde  * @version $Id$  */
+comment|/**  * Definition of the<code>MIN</code> and<code>MAX</code> aggregate functions,  * returning the returns the smallest/largest of the values which go into it.  *  *<p>There are 3 forms:  *  *<dl>  *<dt>sum(<em>primitive type</em>)</dt>  *<dd>values are compared using&lt;</dd>  *  *<dt>sum({@link java.lang.Comparable})</dt>  *<dd>values are compared using {@link java.lang.Comparable#compareTo}</dd>  *  *<dt>sum({@link java.util.Comparator}, {@link java.lang.Object})</dt>  *<dd>the {@link java.util.Comparator#compare} method of the comparator is used  * to compare pairs of objects. The comparator is a startup argument, and must  * therefore be constant for the duration of the aggregation.</dd>  *</dl>  */
 end_comment
 
 begin_class

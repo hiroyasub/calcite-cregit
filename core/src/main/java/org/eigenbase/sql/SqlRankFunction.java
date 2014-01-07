@@ -104,7 +104,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Operator which aggregates sets of values into a result.  *  * @author jack  * @version $Id$  * @since Jun 3, 2005  */
+comment|/**  * Operator which aggregates sets of values into a result.  */
 end_comment
 
 begin_class

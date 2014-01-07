@@ -136,7 +136,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Standard implementation of {@link SqlNodeToRexConverter}.  *  * @author jhyde  * @version $Id$  * @since 2005/8/4  */
+comment|/**  * Standard implementation of {@link SqlNodeToRexConverter}.  */
 end_comment
 
 begin_class

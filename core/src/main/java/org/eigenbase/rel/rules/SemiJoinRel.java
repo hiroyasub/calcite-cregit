@@ -114,7 +114,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A SemiJoinRel represents two relational expressions joined according to some  * condition, where the output only contains the columns from the left join  * input.  *  * @author Zelaine Fong  * @version $Id$  */
+comment|/**  * A SemiJoinRel represents two relational expressions joined according to some  * condition, where the output only contains the columns from the left join  * input.  */
 end_comment
 
 begin_class

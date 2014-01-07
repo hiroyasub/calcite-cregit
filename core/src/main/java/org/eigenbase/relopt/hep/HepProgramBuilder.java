@@ -52,7 +52,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * HepProgramBuilder creates instances of {@link HepProgram}.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  * HepProgramBuilder creates instances of {@link HepProgram}.  */
 end_comment
 
 begin_class

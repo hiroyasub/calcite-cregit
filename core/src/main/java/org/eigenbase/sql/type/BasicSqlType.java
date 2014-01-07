@@ -52,7 +52,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * BasicSqlType represents a standard atomic SQL type (excluding interval  * types).  *  * @author jhyde  * @version $Id$  */
+comment|/**  * BasicSqlType represents a standard atomic SQL type (excluding interval  * types).  */
 end_comment
 
 begin_class

@@ -40,7 +40,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Namespace representing the type of a dynamic parameter.  *  * @author jhyde  * @version $Id$  * @see ParameterScope  * @since Mar 25, 2003  */
+comment|/**  * Namespace representing the type of a dynamic parameter.  * @see ParameterScope  */
 end_comment
 
 begin_class

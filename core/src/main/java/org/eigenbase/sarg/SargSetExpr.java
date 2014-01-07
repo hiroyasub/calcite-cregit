@@ -74,7 +74,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * SargSetExpr represents the application of a {@link SargSetOperator set  * operator} to zero or more child {@link SargExpr sarg expressions}.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  * SargSetExpr represents the application of a {@link SargSetOperator set  * operator} to zero or more child {@link SargExpr sarg expressions}.  */
 end_comment
 
 begin_class

@@ -14,7 +14,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * ClosableAllocation represents an object which requires a call in order to  * release resources early rather than waiting for finalization.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  * ClosableAllocation represents an object which requires a call in order to  * release resources early rather than waiting for finalization.  */
 end_comment
 
 begin_interface

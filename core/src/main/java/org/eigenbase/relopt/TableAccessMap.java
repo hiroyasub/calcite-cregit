@@ -48,7 +48,7 @@ comment|// names instead of List<String>.
 end_comment
 
 begin_comment
-comment|/**  *<code>TableAccessMap</code> represents the tables accessed by a query plan,  * with READ/WRITE information.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  *<code>TableAccessMap</code> represents the tables accessed by a query plan,  * with READ/WRITE information.  */
 end_comment
 
 begin_class

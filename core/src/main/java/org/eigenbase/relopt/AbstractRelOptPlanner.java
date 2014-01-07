@@ -98,7 +98,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * AbstractRelOptPlanner is an abstract base for implementations of the {@link  * RelOptPlanner} interface.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  * AbstractRelOptPlanner is an abstract base for implementations of the {@link  * RelOptPlanner} interface.  */
 end_comment
 
 begin_class

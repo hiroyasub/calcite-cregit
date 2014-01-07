@@ -54,7 +54,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A binary (or hexadecimal) string literal.  *  *<p>The {@link #value} field is a {@link BitString} and {@link #typeName} is  * {@link SqlTypeName#BINARY}.  *  * @author wael  * @version $Id$  */
+comment|/**  * A binary (or hexadecimal) string literal.  *  *<p>The {@link #value} field is a {@link BitString} and {@link #typeName} is  * {@link SqlTypeName#BINARY}.  */
 end_comment
 
 begin_class

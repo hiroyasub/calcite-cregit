@@ -78,7 +78,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * SqlOverlapsOperator represents the SQL:1999 standard OVERLAPS function  * Determins if two anchored time intervals overlaps.  *  * @author Wael Chatila  * @version $Id$  * @since Dec 11, 2004  */
+comment|/**  * SqlOverlapsOperator represents the SQL:1999 standard OVERLAPS function  * Determins if two anchored time intervals overlaps.  */
 end_comment
 
 begin_class

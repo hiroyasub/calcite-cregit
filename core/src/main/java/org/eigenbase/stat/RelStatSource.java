@@ -38,7 +38,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * This class encapsulates statistics for a RelNode  *  * @author John Pham  * @version $Id$  */
+comment|/**  * This class encapsulates statistics for a RelNode  */
 end_comment
 
 begin_interface

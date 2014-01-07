@@ -198,7 +198,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * @author jhyde  */
+comment|/**  * Utilities for converting {@link RelNode} into JSON format.  */
 end_comment
 
 begin_class

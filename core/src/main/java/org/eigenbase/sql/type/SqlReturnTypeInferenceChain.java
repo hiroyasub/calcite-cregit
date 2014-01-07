@@ -66,7 +66,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Strategy to infer the type of an operator call from the type of the operands  * by using a series of {@link SqlReturnTypeInference} rules in a given order.  * If a rule fails to find a return type (by returning NULL), next rule is tried  * until there are no more rules in which case NULL will be returned.  *  * @author Wael Chatila  * @version $Id$  */
+comment|/**  * Strategy to infer the type of an operator call from the type of the operands  * by using a series of {@link SqlReturnTypeInference} rules in a given order.  * If a rule fails to find a return type (by returning NULL), next rule is tried  * until there are no more rules in which case NULL will be returned.  */
 end_comment
 
 begin_class

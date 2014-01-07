@@ -152,7 +152,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Contains utility methods used during SQL validation or type derivation.  *  * @author Wael Chatila  * @version $Id$  * @since Sep 3, 2004  */
+comment|/**  * Contains utility methods used during SQL validation or type derivation.  */
 end_comment
 
 begin_class

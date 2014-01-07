@@ -116,7 +116,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Internal operator, by which the parser represents a continued string literal.  *  *<p>The string fragments are {@link SqlLiteral} objects, all of the same type,  * collected as the operands of an {@link SqlCall} using this operator. After  * validation, the fragments will be concatenated into a single literal.  *  *<p>For a chain of {@link org.eigenbase.sql.SqlCharStringLiteral} objects, a  * {@link SqlCollation} object is attached only to the head of the chain.  *  * @author Marc Berkowitz  * @version $Id$  * @since Sep 7, 2004  */
+comment|/**  * Internal operator, by which the parser represents a continued string literal.  *  *<p>The string fragments are {@link SqlLiteral} objects, all of the same type,  * collected as the operands of an {@link SqlCall} using this operator. After  * validation, the fragments will be concatenated into a single literal.  *  *<p>For a chain of {@link org.eigenbase.sql.SqlCharStringLiteral} objects, a  * {@link SqlCollation} object is attached only to the head of the chain.  */
 end_comment
 
 begin_class

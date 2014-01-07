@@ -40,7 +40,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Returns the rowtype of a cursor of the operand at a particular 0-based  * ordinal position.  *  * @author Julian Hyde  * @version $Id$  * @see OrdinalReturnTypeInference  */
+comment|/**  * Returns the rowtype of a cursor of the operand at a particular 0-based  * ordinal position.  * @see OrdinalReturnTypeInference  */
 end_comment
 
 begin_class

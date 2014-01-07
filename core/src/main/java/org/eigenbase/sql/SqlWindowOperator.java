@@ -126,7 +126,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * An operator describing a window specification.  *  *<p>Operands are as follows:  *  *<ul>  *<li>0: name of referenced window ({@link SqlIdentifier})</li>  *<li>1: partition clause ({@link SqlNodeList})</li>  *<li>2: order clause ({@link SqlNodeList})</li>  *<li>3: isRows ({@link SqlLiteral})</li>  *<li>4: lowerBound ({@link SqlNode})</li>  *<li>5: upperBound ({@link SqlNode})</li>  *</ul>  *  * All operands are optional.</p>  *  * @author jhyde  * @version $Id$  * @since Oct 19, 2004  */
+comment|/**  * An operator describing a window specification.  *  *<p>Operands are as follows:  *  *<ul>  *<li>0: name of referenced window ({@link SqlIdentifier})</li>  *<li>1: partition clause ({@link SqlNodeList})</li>  *<li>2: order clause ({@link SqlNodeList})</li>  *<li>3: isRows ({@link SqlLiteral})</li>  *<li>4: lowerBound ({@link SqlNode})</li>  *<li>5: upperBound ({@link SqlNode})</li>  *</ul>  *  * All operands are optional.</p>  */
 end_comment
 
 begin_class

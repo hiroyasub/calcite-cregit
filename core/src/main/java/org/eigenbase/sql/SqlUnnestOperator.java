@@ -40,7 +40,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * The<code>UNNEST<code>operator.  *  * @author Wael Chatila  * @version $Id$  */
+comment|/**  * The<code>UNNEST<code>operator.  */
 end_comment
 
 begin_class

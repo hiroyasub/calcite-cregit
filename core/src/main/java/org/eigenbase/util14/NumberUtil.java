@@ -34,7 +34,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Utility functions for working with numbers This class is JDK 1.4 compatible.  *  * @author angel  * @version $Id$  * @since Jan 9, 2006  */
+comment|/**  * Utility functions for working with numbers This class is JDK 1.4 compatible.  */
 end_comment
 
 begin_class

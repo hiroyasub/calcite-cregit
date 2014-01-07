@@ -40,7 +40,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Strategy interface to infer the type of an operator call from the type of the  * operands.  *  *<p>This interface is an example of the {@link  * org.eigenbase.util.Glossary#StrategyPattern strategy pattern}. This makes  * sense because many operators have similar, straightforward strategies, such  * as to take the type of the first operand.</p>  *  * @author Wael Chatila  * @version $Id$  * @since Sept 8, 2004  */
+comment|/**  * Strategy interface to infer the type of an operator call from the type of the  * operands.  *  *<p>This interface is an example of the {@link  * org.eigenbase.util.Glossary#StrategyPattern strategy pattern}. This makes  * sense because many operators have similar, straightforward strategies, such  * as to take the type of the first operand.</p>  */
 end_comment
 
 begin_interface

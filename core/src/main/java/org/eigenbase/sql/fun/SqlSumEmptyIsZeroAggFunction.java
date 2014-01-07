@@ -78,7 +78,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  *<code>Sum0</code> is an aggregator which returns the sum of the values which  * go into it like<code>Sum</code>. It differs in that when no non null values  * are applied zero is returned instead of null. Can be used along with<code>  * Count</code> to implement<code>Sum</code>.  *  * @author jhahn  * @version $Id$  */
+comment|/**  *<code>Sum0</code> is an aggregator which returns the sum of the values which  * go into it like<code>Sum</code>. It differs in that when no non null values  * are applied zero is returned instead of null. Can be used along with<code>  * Count</code> to implement<code>Sum</code>.  */
 end_comment
 
 begin_class

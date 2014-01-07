@@ -42,7 +42,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * SqlCollectionTableOperator is the "table function derived table" operator. It  * converts a table-valued function into a relation, e.g. "<code>SELECT * FROM  * TABLE(ramp(5))</code>".  *  *<p>This operator has function syntax (with one argument), whereas {@link  * SqlStdOperatorTable#explicitTableOperator} is a prefix operator.  *  * @author jhyde, stephan  */
+comment|/**  * SqlCollectionTableOperator is the "table function derived table" operator. It  * converts a table-valued function into a relation, e.g. "<code>SELECT * FROM  * TABLE(ramp(5))</code>".  *  *<p>This operator has function syntax (with one argument), whereas {@link  * SqlStdOperatorTable#explicitTableOperator} is a prefix operator.  */
 end_comment
 
 begin_class

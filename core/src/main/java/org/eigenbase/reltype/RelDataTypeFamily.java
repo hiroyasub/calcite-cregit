@@ -14,7 +14,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * RelDataTypeFamily represents a family of related types. The specific criteria  * for membership in a type family are type-system dependent.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  * RelDataTypeFamily represents a family of related types. The specific criteria  * for membership in a type family are type-system dependent.  */
 end_comment
 
 begin_interface

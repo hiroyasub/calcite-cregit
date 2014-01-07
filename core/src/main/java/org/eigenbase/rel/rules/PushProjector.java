@@ -138,7 +138,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * PushProjector is a utility class used to perform operations used in push  * projection rules.  *  *<p>Pushing is particularly interesting in the case of join, because there  * are multiple inputs. Generally an expression can be pushed down to a  * particular input if it depends upon no other inputs. If it can be pushed  * down to both sides, it is pushed down to the left.  *  *<p>Sometimes an expression needs to be split before it can be pushed down.  * To flag that an expression cannot be split, specify a rule that it must be  *<dfn>preserved</dfn>. Such an expression will be pushed down intact to one  * of the inputs, or not pushed down at all.</p>  *  * @author Zelaine Fong  * @version $Id$  */
+comment|/**  * PushProjector is a utility class used to perform operations used in push  * projection rules.  *  *<p>Pushing is particularly interesting in the case of join, because there  * are multiple inputs. Generally an expression can be pushed down to a  * particular input if it depends upon no other inputs. If it can be pushed  * down to both sides, it is pushed down to the left.  *  *<p>Sometimes an expression needs to be split before it can be pushed down.  * To flag that an expression cannot be split, specify a rule that it must be  *<dfn>preserved</dfn>. Such an expression will be pushed down intact to one  * of the inputs, or not pushed down at all.</p>  */
 end_comment
 
 begin_class

@@ -112,7 +112,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * An assistant which offers hints and corrections to a partially-formed SQL  * statement. It is used in the SQL editor user-interface.  *  * @author tleung  * @version $Id$  * @since Jan 16, 2004  */
+comment|/**  * An assistant which offers hints and corrections to a partially-formed SQL  * statement. It is used in the SQL editor user-interface.  */
 end_comment
 
 begin_class

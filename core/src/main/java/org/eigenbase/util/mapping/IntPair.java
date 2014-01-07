@@ -16,7 +16,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * An immutable pair of integers.  *  * @author jhyde  * @version $Id$  * @see Mapping#iterator()  * @since Mar 24, 2006  */
+comment|/**  * An immutable pair of integers.  * @see Mapping#iterator()  */
 end_comment
 
 begin_class

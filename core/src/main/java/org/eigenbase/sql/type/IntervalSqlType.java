@@ -54,7 +54,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * IntervalSqlType represents a standard SQL datetime interval type.  *  * @author wael  * @version $Id$  */
+comment|/**  * IntervalSqlType represents a standard SQL datetime interval type.  */
 end_comment
 
 begin_class

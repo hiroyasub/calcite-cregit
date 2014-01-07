@@ -76,7 +76,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A scope which delegates all requests to its parent scope. Use this as a base  * class for defining nested scopes.  *  * @author jhyde  * @version $Id$  * @since Mar 25, 2003  */
+comment|/**  * A scope which delegates all requests to its parent scope. Use this as a base  * class for defining nested scopes.  */
 end_comment
 
 begin_class

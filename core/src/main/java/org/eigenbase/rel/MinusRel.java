@@ -36,7 +36,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  *<code>MinusRel</code> returns the rows of its first input minus any matching  * rows from its other inputs. If "all" is true, then multiset subtraction is  * performed; otherwise, set subtraction is performed (implying no duplicates in  * the results).  *  * @author jhyde  * @version $Id$  * @since 23 September, 2001  */
+comment|/**  *<code>MinusRel</code> returns the rows of its first input minus any matching  * rows from its other inputs. If "all" is true, then multiset subtraction is  * performed; otherwise, set subtraction is performed (implying no duplicates in  * the results).  */
 end_comment
 
 begin_class

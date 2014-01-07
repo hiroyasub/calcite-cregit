@@ -86,7 +86,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  *<code>TableAccessRelBase</code> is an abstract base class for implementations  * of {@link TableAccessRel}.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  *<code>TableAccessRelBase</code> is an abstract base class for implementations  * of {@link TableAccessRel}.  */
 end_comment
 
 begin_class

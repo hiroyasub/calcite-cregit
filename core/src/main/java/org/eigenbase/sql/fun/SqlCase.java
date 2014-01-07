@@ -42,7 +42,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A<code>SqlCase</code> is a node of a parse tree which represents a case  * statement. It warrants its own node type just because we have a lot of  * methods to put somewhere.  *  * @author wael  * @version $Id$  * @since Mar 14, 2004  */
+comment|/**  * A<code>SqlCase</code> is a node of a parse tree which represents a case  * statement. It warrants its own node type just because we have a lot of  * methods to put somewhere.  */
 end_comment
 
 begin_class

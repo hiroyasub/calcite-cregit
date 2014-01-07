@@ -38,7 +38,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Basic implementation of {@link SqlVisitor} which returns each leaf node  * unchanged.  *  *<p>This class is useful as a base class for classes which implement the  * {@link SqlVisitor} interface and have {@link SqlNode} as the return type. The  * derived class can override whichever methods it chooses.  *  * @author jhyde  * @version $Id$  */
+comment|/**  * Basic implementation of {@link SqlVisitor} which returns each leaf node  * unchanged.  *  *<p>This class is useful as a base class for classes which implement the  * {@link SqlVisitor} interface and have {@link SqlNode} as the return type. The  * derived class can override whichever methods it chooses.  */
 end_comment
 
 begin_class

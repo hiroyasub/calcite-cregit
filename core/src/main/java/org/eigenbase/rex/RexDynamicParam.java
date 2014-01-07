@@ -38,7 +38,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Dynamic parameter reference in a row-expression.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  * Dynamic parameter reference in a row-expression.  */
 end_comment
 
 begin_class

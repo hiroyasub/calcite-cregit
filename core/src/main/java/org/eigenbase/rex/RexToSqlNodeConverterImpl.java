@@ -76,7 +76,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Standard implementation of {@link RexToSqlNodeConverter}.  *  * @author Sunny Choi  * @version $Id$  */
+comment|/**  * Standard implementation of {@link RexToSqlNodeConverter}.  */
 end_comment
 
 begin_class

@@ -80,7 +80,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * The<code>AS</code> operator associates an expression with an alias.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  * The<code>AS</code> operator associates an expression with an alias.  */
 end_comment
 
 begin_class

@@ -72,7 +72,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * DefaultValueFactory supplies default values for INSERT, UPDATE, and NEW.  *  *<p>TODO jvs 26-Feb-2005: rename this to InitializerExpressionFactory, since  * it is in the process of being generalized to handle constructor invocations  * and eventually generated columns.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  * DefaultValueFactory supplies default values for INSERT, UPDATE, and NEW.  *  *<p>TODO jvs 26-Feb-2005: rename this to InitializerExpressionFactory, since  * it is in the process of being generalized to handle constructor invocations  * and eventually generated columns.  */
 end_comment
 
 begin_interface

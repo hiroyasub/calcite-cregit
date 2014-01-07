@@ -60,7 +60,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Variable which references a field of an input relational expression.  *  *<p>Fields of the input are 0-based. If there is more than one input, they are  * numbered consecutively. For example, if the inputs to a join are  *  *<ul>  *<li>Input #0: EMP(EMPNO, ENAME, DEPTNO) and</li>  *<li>Input #1: DEPT(DEPTNO AS DEPTNO2, DNAME)</li>  *</ul>  *  * then the fields are:  *  *<ul>  *<li>Field #0: EMPNO</li>  *<li>Field #1: ENAME</li>  *<li>Field #2: DEPTNO (from EMP)</li>  *<li>Field #3: DEPTNO2 (from DEPT)</li>  *<li>Field #4: DNAME</li>  *</ul>  *  * So<code>RexInputRef(3,Integer)</code> is the correct reference for the field  * DEPTNO2.</p>  *  * @author jhyde  * @version $Id$  * @since Nov 24, 2003  */
+comment|/**  * Variable which references a field of an input relational expression.  *  *<p>Fields of the input are 0-based. If there is more than one input, they are  * numbered consecutively. For example, if the inputs to a join are  *  *<ul>  *<li>Input #0: EMP(EMPNO, ENAME, DEPTNO) and</li>  *<li>Input #1: DEPT(DEPTNO AS DEPTNO2, DNAME)</li>  *</ul>  *  * then the fields are:  *  *<ul>  *<li>Field #0: EMPNO</li>  *<li>Field #1: ENAME</li>  *<li>Field #2: DEPTNO (from EMP)</li>  *<li>Field #3: DEPTNO2 (from DEPT)</li>  *<li>Field #4: DNAME</li>  *</ul>  *  * So<code>RexInputRef(3,Integer)</code> is the correct reference for the field  * DEPTNO2.</p>  */
 end_comment
 
 begin_class

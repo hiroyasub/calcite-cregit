@@ -40,7 +40,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * HepProgram specifies the order in which rules should be attempted by {@link  * HepPlanner}. Use {@link HepProgramBuilder} to create a new instance of  * HepProgram.  *  *<p>Note that the structure of a program is immutable, but the planner uses it  * as read/write during planning, so a program can only be in use by a single  * planner at a time.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  * HepProgram specifies the order in which rules should be attempted by {@link  * HepPlanner}. Use {@link HepProgramBuilder} to create a new instance of  * HepProgram.  *  *<p>Note that the structure of a program is immutable, but the planner uses it  * as read/write during planning, so a program can only be in use by a single  * planner at a time.  */
 end_comment
 
 begin_class

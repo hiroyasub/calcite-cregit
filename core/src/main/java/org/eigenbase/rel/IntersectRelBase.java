@@ -72,7 +72,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Abstract base class for implementations of  * {@link IntersectRel}.  *  * @author jhyde  */
+comment|/**  * Abstract base class for implementations of  * {@link IntersectRel}.  */
 end_comment
 
 begin_class

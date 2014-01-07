@@ -38,7 +38,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * RelColumnOrigin is a data structure describing one of the origins of an  * output column produced by a relational expression.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  * RelColumnOrigin is a data structure describing one of the origins of an  * output column produced by a relational expression.  */
 end_comment
 
 begin_class

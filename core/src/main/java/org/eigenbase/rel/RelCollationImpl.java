@@ -74,7 +74,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Simple implementation of {@link RelCollation}.  *  * @author jhyde  * @version $Id$  * @since March 6, 2006  */
+comment|/**  * Simple implementation of {@link RelCollation}.  */
 end_comment
 
 begin_class

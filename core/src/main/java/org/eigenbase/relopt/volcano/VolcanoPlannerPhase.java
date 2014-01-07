@@ -16,7 +16,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * VolcanoPlannerPhase represents the phases of operation that the {@link  * VolcanoPlanner} passes through during optimization of a tree of {@link  * org.eigenbase.rel.RelNode} objects.  *  * @author stephan  */
+comment|/**  * VolcanoPlannerPhase represents the phases of operation that the {@link  * VolcanoPlanner} passes through during optimization of a tree of {@link  * org.eigenbase.rel.RelNode} objects.  */
 end_comment
 
 begin_enum

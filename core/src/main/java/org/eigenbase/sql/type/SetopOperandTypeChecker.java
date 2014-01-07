@@ -88,7 +88,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Parameter type-checking strategy for a set operator (UNION, INTERSECT,  * EXCEPT).  *  *<p>Both arguments must be records with the same number of fields, and the  * fields must be union-compatible.  *  * @author Jack Frost  * @version $Id$  */
+comment|/**  * Parameter type-checking strategy for a set operator (UNION, INTERSECT,  * EXCEPT).  *  *<p>Both arguments must be records with the same number of fields, and the  * fields must be union-compatible.  */
 end_comment
 
 begin_class

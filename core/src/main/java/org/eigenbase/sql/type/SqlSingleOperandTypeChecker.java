@@ -28,7 +28,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * SqlSingleOperandTypeChecker is an extension of {@link SqlOperandTypeChecker}  * for implementations which are cabable of checking the type of a single  * operand in isolation. This isn't meaningful for all type-checking rules (e.g.  * SameOperandTypeChecker requires two operands to have matching types, so  * checking one in isolation is meaningless).  *  * @author Wael Chatila  * @version $Id$  */
+comment|/**  * SqlSingleOperandTypeChecker is an extension of {@link SqlOperandTypeChecker}  * for implementations which are cabable of checking the type of a single  * operand in isolation. This isn't meaningful for all type-checking rules (e.g.  * SameOperandTypeChecker requires two operands to have matching types, so  * checking one in isolation is meaningless).  */
 end_comment
 
 begin_interface

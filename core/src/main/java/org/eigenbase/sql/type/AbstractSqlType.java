@@ -48,7 +48,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Abstract base class for SQL implementations of {@link RelDataType}.  *  * @author jhyde  * @version $Id$  */
+comment|/**  * Abstract base class for SQL implementations of {@link RelDataType}.  */
 end_comment
 
 begin_class

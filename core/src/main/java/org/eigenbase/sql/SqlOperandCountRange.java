@@ -14,7 +14,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * A class that describes how many operands an operator can take.  *  * @author Wael Chatila  * @version $Id$  */
+comment|/**  * A class that describes how many operands an operator can take.  */
 end_comment
 
 begin_interface

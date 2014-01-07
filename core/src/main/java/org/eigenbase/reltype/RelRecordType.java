@@ -60,7 +60,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * RelRecordType represents a structured type having named fields.  *  * @author jhyde  * @version $Id$  */
+comment|/**  * RelRecordType represents a structured type having named fields.  */
 end_comment
 
 begin_class

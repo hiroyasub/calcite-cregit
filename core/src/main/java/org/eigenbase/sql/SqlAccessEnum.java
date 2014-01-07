@@ -14,7 +14,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * Enumeration representing different access types  *  * @author angel  * @version $Id$  * @since Sep 18, 2005  */
+comment|/**  * Enumeration representing different access types  */
 end_comment
 
 begin_enum

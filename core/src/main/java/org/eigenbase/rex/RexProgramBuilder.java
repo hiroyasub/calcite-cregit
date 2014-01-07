@@ -74,7 +74,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Workspace for constructing a {@link RexProgram}.  *  *<p>RexProgramBuilder is necessary because a {@link RexProgram} is immutable.  * (The {@link String} class has the same problem: it is immutable, so they  * introduced {@link StringBuffer}.)  *  * @author jhyde  * @version $Id$  * @since Aug 18, 2005  */
+comment|/**  * Workspace for constructing a {@link RexProgram}.  *  *<p>RexProgramBuilder is necessary because a {@link RexProgram} is immutable.  * (The {@link String} class has the same problem: it is immutable, so they  * introduced {@link StringBuffer}.)  */
 end_comment
 
 begin_class

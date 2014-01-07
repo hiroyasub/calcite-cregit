@@ -36,7 +36,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * RelTraitSet represents an ordered set of {@link RelTrait}s.  *  * @author Stephan Zuercher  * @version $Id$  */
+comment|/**  * RelTraitSet represents an ordered set of {@link RelTrait}s.  */
 end_comment
 
 begin_class

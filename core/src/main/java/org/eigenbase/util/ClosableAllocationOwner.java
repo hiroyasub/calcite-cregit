@@ -14,7 +14,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * ClosableAllocationOwner represents an object which can take ownership of  * ClosableAllocations and guarantee that they will be cleaned up correctly when  * its own closeAllocation() is called.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  * ClosableAllocationOwner represents an object which can take ownership of  * ClosableAllocations and guarantee that they will be cleaned up correctly when  * its own closeAllocation() is called.  */
 end_comment
 
 begin_interface

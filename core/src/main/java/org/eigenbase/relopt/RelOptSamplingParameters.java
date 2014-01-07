@@ -14,7 +14,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * RelOptSamplingParameters represents the parameters necessary to produce a  * sample of a relation.  *  *<p>It's parameters are derived from the SQL 2003 TABLESAMPLE clause.  *  * @author Stephan Zuercher  */
+comment|/**  * RelOptSamplingParameters represents the parameters necessary to produce a  * sample of a relation.  *  *<p>It's parameters are derived from the SQL 2003 TABLESAMPLE clause.  */
 end_comment
 
 begin_class

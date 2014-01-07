@@ -104,7 +104,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * RelMdColumnUniqueness supplies a default implementation of {@link  * RelMetadataQuery#areColumnsUnique} for the standard logical algebra.  *  * @author Zelaine Fong  * @version $Id$  */
+comment|/**  * RelMdColumnUniqueness supplies a default implementation of {@link  * RelMetadataQuery#areColumnsUnique} for the standard logical algebra.  */
 end_comment
 
 begin_class

@@ -126,7 +126,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * @author jhyde  */
+comment|/**  * Implementation of {@link RelImplementor}.  */
 end_comment
 
 begin_class

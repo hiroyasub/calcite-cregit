@@ -54,7 +54,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Returns the type of the operand at a particular 0-based ordinal position.  *  * @author Wael Chatila  * @version $Id$  */
+comment|/**  * Returns the type of the operand at a particular 0-based ordinal position.  */
 end_comment
 
 begin_class

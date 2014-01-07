@@ -80,7 +80,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Base class for time functions such as "LOCALTIME", "LOCALTIME(n)".  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  * Base class for time functions such as "LOCALTIME", "LOCALTIME(n)".  */
 end_comment
 
 begin_class

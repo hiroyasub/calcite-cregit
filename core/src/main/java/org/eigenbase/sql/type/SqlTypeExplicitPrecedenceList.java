@@ -38,7 +38,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * SqlTypeExplicitPrecedenceList implements the {@link  * RelDataTypePrecedenceList} interface via an explicit list of SqlTypeName  * entries.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  * SqlTypeExplicitPrecedenceList implements the {@link  * RelDataTypePrecedenceList} interface via an explicit list of SqlTypeName  * entries.  */
 end_comment
 
 begin_class

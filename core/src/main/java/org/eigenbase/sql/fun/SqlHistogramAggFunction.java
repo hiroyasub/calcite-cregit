@@ -78,7 +78,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  *<code>HistogramAgg</code> is base operator which supports the Histogram  * MIN/MAX aggregatoin functions. which returns the sum of the values which go  * into it. It has precisely one argument of numeric type (<code>int</code>,  *<code>long</code>,<code>float</code>,<code>double</code>) results are  * retrived with (<code>HistogramMin</code>) and (<code>HistogramMax</code>)  *  * @author jfrost  * @version $Id$  */
+comment|/**  *<code>HistogramAgg</code> is base operator which supports the Histogram  * MIN/MAX aggregatoin functions. which returns the sum of the values which go  * into it. It has precisely one argument of numeric type (<code>int</code>,  *<code>long</code>,<code>float</code>,<code>double</code>) results are  * retrived with (<code>HistogramMin</code>) and (<code>HistogramMax</code>)  */
 end_comment
 
 begin_class

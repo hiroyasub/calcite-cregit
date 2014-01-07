@@ -62,7 +62,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  *<code>NoneConverter</code> converts a plan from<code>inConvention</code> to  * {@link org.eigenbase.relopt.Convention#NONE}.  *  * @author jhyde  * @version $Id$  * @since 15 February, 2002  */
+comment|/**  *<code>NoneConverter</code> converts a plan from<code>inConvention</code> to  * {@link org.eigenbase.relopt.Convention#NONE}.  */
 end_comment
 
 begin_class

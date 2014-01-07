@@ -52,7 +52,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Exception thrown while validating a SQL statement.  *  *<p>Unlike {@link org.eigenbase.util.EigenbaseException}, this is a checked  * exception, which reminds code authors to wrap it in another exception  * containing the line/column context.  *  * @author jhyde  * @version $Id$  * @since Oct 28, 2004  */
+comment|/**  * Exception thrown while validating a SQL statement.  *  *<p>Unlike {@link org.eigenbase.util.EigenbaseException}, this is a checked  * exception, which reminds code authors to wrap it in another exception  * containing the line/column context.  */
 end_comment
 
 begin_class

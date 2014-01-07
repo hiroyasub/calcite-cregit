@@ -36,7 +36,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  *<code>OneRowRel</code> always returns one row, one column (containing the  * value 0).  *  * @author jhyde  * @version $Id$  * @since 23 September, 2001  */
+comment|/**  *<code>OneRowRel</code> always returns one row, one column (containing the  * value 0).  */
 end_comment
 
 begin_class

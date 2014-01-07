@@ -26,7 +26,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Enumeration of possible syntactic types of {@link SqlOperator operators}.  *  * @author jhyde  * @version $Id$  * @since June 28, 2004  */
+comment|/**  * Enumeration of possible syntactic types of {@link SqlOperator operators}.  */
 end_comment
 
 begin_enum

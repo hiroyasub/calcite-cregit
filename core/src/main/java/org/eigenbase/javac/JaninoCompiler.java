@@ -108,7 +108,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  *<code>JaninoCompiler</code> implements the {@link JavaCompiler} interface by  * calling<a href="http://www.janino.net">Janino</a>.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  *<code>JaninoCompiler</code> implements the {@link JavaCompiler} interface by  * calling<a href="http://www.janino.net">Janino</a>.  */
 end_comment
 
 begin_class

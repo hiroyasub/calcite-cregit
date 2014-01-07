@@ -92,7 +92,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A<code>SqlNode</code> is a SQL parse tree. It may be an {@link SqlOperator  * operator}, {@link SqlLiteral literal}, {@link SqlIdentifier identifier}, and  * so forth.  *  * @author jhyde  * @version $Id$  * @since Dec 12, 2003  */
+comment|/**  * A<code>SqlNode</code> is a SQL parse tree. It may be an {@link SqlOperator  * operator}, {@link SqlLiteral literal}, {@link SqlIdentifier identifier}, and  * so forth.  */
 end_comment
 
 begin_class

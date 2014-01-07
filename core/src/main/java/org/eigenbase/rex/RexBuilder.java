@@ -176,7 +176,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Factory for row expressions.  *  *<p>Some common literal values (NULL, TRUE, FALSE, 0, 1, '') are cached.</p>  *  * @author jhyde  * @version $Id$  * @since Nov 23, 2003  */
+comment|/**  * Factory for row expressions.  *  *<p>Some common literal values (NULL, TRUE, FALSE, 0, 1, '') are cached.</p>  */
 end_comment
 
 begin_class

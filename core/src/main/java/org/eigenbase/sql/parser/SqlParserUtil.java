@@ -144,7 +144,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Utility methods relating to parsing SQL.  *  * @author jhyde  * @version $Id$  * @since Oct 7, 2003  */
+comment|/**  * Utility methods relating to parsing SQL.  */
 end_comment
 
 begin_class
@@ -1031,7 +1031,6 @@ return|;
 block|}
 assert|assert
 operator|(
-operator|(
 name|s
 operator|.
 name|length
@@ -1041,9 +1040,8 @@ literal|1
 operator|)
 operator|==
 literal|0
-operator|)
 assert|;
-comment|//must be even nbr of hex digits
+comment|// must be even nbr of hex digits
 specifier|final
 name|int
 name|lengthToBe

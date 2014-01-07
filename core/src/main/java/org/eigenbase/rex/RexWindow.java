@@ -60,7 +60,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Specification of the window of rows over which a {@link RexOver} windowed  * aggregate is evaluated.  *  *<p>Treat it as immutable!  *  * @author jhyde  * @version $Id$  * @since Dec 6, 2004  */
+comment|/**  * Specification of the window of rows over which a {@link RexOver} windowed  * aggregate is evaluated.  *  *<p>Treat it as immutable!  */
 end_comment
 
 begin_class

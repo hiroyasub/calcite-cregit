@@ -40,7 +40,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * An implementation of {@link SqlMoniker} that encapsulates the normalized name  * information of a {@link SqlIdentifier}.  *  * @author tleung  * @version $Id$  * @since May 24, 2005  */
+comment|/**  * An implementation of {@link SqlMoniker} that encapsulates the normalized name  * information of a {@link SqlIdentifier}.  */
 end_comment
 
 begin_class

@@ -34,7 +34,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * ZonelessTimestamp is a timestamp value without a time zone.  *  * @author John Pham  * @version $Id$  */
+comment|/**  * ZonelessTimestamp is a timestamp value without a time zone.  */
 end_comment
 
 begin_class

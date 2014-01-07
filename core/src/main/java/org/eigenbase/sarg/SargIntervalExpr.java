@@ -60,7 +60,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * SargIntervalExpr represents an expression which can be resolved to a fixed  * {@link SargInterval}.  *  *<p>Null values require special treatment in expressions. Normally, for  * intervals of any kind, nulls are not considered to be within the domain of  * search values. This behavior can be modified by setting the {@link  * SqlNullSemantics} to a value other than the default. This happens implicitly  * when a point interval is created matching the null value. When null values  * are considered to be part of the domain, the ordering is defined as for  * {@link SargInterval}.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  * SargIntervalExpr represents an expression which can be resolved to a fixed  * {@link SargInterval}.  *  *<p>Null values require special treatment in expressions. Normally, for  * intervals of any kind, nulls are not considered to be within the domain of  * search values. This behavior can be modified by setting the {@link  * SqlNullSemantics} to a value other than the default. This happens implicitly  * when a point interval is created matching the null value. When null values  * are considered to be part of the domain, the ordering is defined as for  * {@link SargInterval}.  */
 end_comment
 
 begin_class

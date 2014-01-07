@@ -64,7 +64,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Contains the context necessary for a {@link SqlRexConvertlet} to convert a  * {@link SqlNode} expression into a {@link RexNode}.  *  * @author jhyde  * @version $Id$  * @since 2005/8/3  */
+comment|/**  * Contains the context necessary for a {@link SqlRexConvertlet} to convert a  * {@link SqlNode} expression into a {@link RexNode}.  */
 end_comment
 
 begin_interface

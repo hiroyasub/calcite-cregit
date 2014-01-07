@@ -86,7 +86,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * SargEndpoint represents an endpoint of a ({@link SargInterval}).  *  *<p>Instances of SargEndpoint are immutable from outside this package.  * Subclass {@link SargMutableEndpoint} is provided for manipulation from  * outside the package.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  * SargEndpoint represents an endpoint of a ({@link SargInterval}).  *  *<p>Instances of SargEndpoint are immutable from outside this package.  * Subclass {@link SargMutableEndpoint} is provided for manipulation from  * outside the package.  */
 end_comment
 
 begin_class

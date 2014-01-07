@@ -74,7 +74,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * SargRexAnalyzer attempts to translate a rex predicate into a {@link  * SargBinding}. It assumes that the predicate expression is already  * well-formed.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  * SargRexAnalyzer attempts to translate a rex predicate into a {@link  * SargBinding}. It assumes that the predicate expression is already  * well-formed.  */
 end_comment
 
 begin_class

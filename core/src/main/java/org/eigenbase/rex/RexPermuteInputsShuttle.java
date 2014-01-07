@@ -72,7 +72,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Shuttle which applies a permutation to its input fields.  *  * @author jhyde  * @version $Id$  * @see RexPermutationShuttle  */
+comment|/**  * Shuttle which applies a permutation to its input fields.  *  * @see RexPermutationShuttle  */
 end_comment
 
 begin_class

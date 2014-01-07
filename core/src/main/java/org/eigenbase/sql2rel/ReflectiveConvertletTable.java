@@ -86,7 +86,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Implementation of {@link SqlRexConvertletTable} which uses reflection to call  * any method of the form<code>public RexNode convertXxx(ConvertletContext,  * SqlNode)</code> or<code>public RexNode convertXxx(ConvertletContext,  * SqlOperator, SqlCall)</code>.  *  * @author jhyde  * @version $Id$  * @since 2005/8/3  */
+comment|/**  * Implementation of {@link SqlRexConvertletTable} which uses reflection to call  * any method of the form<code>public RexNode convertXxx(ConvertletContext,  * SqlNode)</code> or<code>public RexNode convertXxx(ConvertletContext,  * SqlOperator, SqlCall)</code>.  */
 end_comment
 
 begin_class

@@ -68,7 +68,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Adapter to make a JDBC connection into a {@link javax.sql.DataSource}.  *  * @author jhyde  * @version $Id$  * @since Sep 7, 2003  */
+comment|/**  * Adapter to make a JDBC connection into a {@link javax.sql.DataSource}.  */
 end_comment
 
 begin_class

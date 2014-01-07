@@ -78,7 +78,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Utility class for various methods related to multisets.  *  * @author Wael Chatila  * @version $Id$  * @since Apr 4, 2005  */
+comment|/**  * Utility class for various methods related to multisets.  */
 end_comment
 
 begin_class

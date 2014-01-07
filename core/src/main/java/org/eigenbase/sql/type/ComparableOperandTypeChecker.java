@@ -50,7 +50,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Type checking strategy which verifies that types have the required attributes  * to be used as arguments to comparison operators.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  * Type checking strategy which verifies that types have the required attributes  * to be used as arguments to comparison operators.  */
 end_comment
 
 begin_class

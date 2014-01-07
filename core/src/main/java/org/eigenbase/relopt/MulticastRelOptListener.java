@@ -24,7 +24,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * MulticastRelOptListener implements the {@link RelOptListener} interface by  * forwarding events on to a collection of other listeners.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  * MulticastRelOptListener implements the {@link RelOptListener} interface by  * forwarding events on to a collection of other listeners.  */
 end_comment
 
 begin_class

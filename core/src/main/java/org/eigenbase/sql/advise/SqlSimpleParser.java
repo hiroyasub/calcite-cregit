@@ -26,7 +26,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A simple parser that takes an incomplete and turn it into a syntactically  * correct statement. It is used in the SQL editor user-interface.  *  * @author jhyde  * @version $Id$  * @since Oct 31, 2007  */
+comment|/**  * A simple parser that takes an incomplete and turn it into a syntactically  * correct statement. It is used in the SQL editor user-interface.  */
 end_comment
 
 begin_class

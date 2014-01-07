@@ -64,7 +64,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A SQL literal representing a DATE value, such as<code>DATE  * '2004-10-22'</code>.  *  *<p>Create values using {@link SqlLiteral#createDate}.  *  * @author jhyde  * @version $Id$  */
+comment|/**  * A SQL literal representing a DATE value, such as<code>DATE  * '2004-10-22'</code>.  *  *<p>Create values using {@link SqlLiteral#createDate}.  */
 end_comment
 
 begin_class

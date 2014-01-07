@@ -88,7 +88,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  *<code>CalcRelBase</code> is an abstract base class for implementations of  * {@link CalcRel}.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  *<code>CalcRelBase</code> is an abstract base class for implementations of  * {@link CalcRel}.  */
 end_comment
 
 begin_class

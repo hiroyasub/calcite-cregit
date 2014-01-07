@@ -14,7 +14,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * This is a tagging interface to allow a {@link  * org.eigenbase.sql.parser.SqlParseException} to be identified without adding a  * dependency on it from client-side code.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  * This is a tagging interface to allow a {@link  * org.eigenbase.sql.parser.SqlParseException} to be identified without adding a  * dependency on it from client-side code.  */
 end_comment
 
 begin_interface

@@ -78,7 +78,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * RelMdUniqueKeys supplies a default implementation of {@link  * RelMetadataQuery#getUniqueKeys} for the standard logical algebra.  *  * @author Zelaine Fong  * @version $Id$  */
+comment|/**  * RelMdUniqueKeys supplies a default implementation of {@link  * RelMetadataQuery#getUniqueKeys} for the standard logical algebra.  */
 end_comment
 
 begin_class

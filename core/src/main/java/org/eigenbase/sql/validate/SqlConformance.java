@@ -16,7 +16,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * Enumeration of valid SQL compatiblity modes.  *  * @author jhyde  * @version $Id$  * @since Nov 06, 2007  */
+comment|/**  * Enumeration of valid SQL compatiblity modes.  */
 end_comment
 
 begin_enum

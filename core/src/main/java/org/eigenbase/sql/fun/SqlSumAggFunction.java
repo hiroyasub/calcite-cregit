@@ -78,7 +78,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  *<code>Sum</code> is an aggregator which returns the sum of the values which  * go into it. It has precisely one argument of numeric type (<code>int</code>,  *<code>long</code>,<code>float</code>,<code>double</code>), and the result  * is the same type.  *  * @author jhyde  * @version $Id$  */
+comment|/**  *<code>Sum</code> is an aggregator which returns the sum of the values which  * go into it. It has precisely one argument of numeric type (<code>int</code>,  *<code>long</code>,<code>float</code>,<code>double</code>), and the result  * is the same type.  */
 end_comment
 
 begin_class

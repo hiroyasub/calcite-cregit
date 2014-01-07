@@ -24,7 +24,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * SqlAccessType is represented by a set of allowed access types  *  * @author angel  * @version $Id$  * @since Sep 16, 2005  */
+comment|/**  * SqlAccessType is represented by a set of allowed access types  */
 end_comment
 
 begin_class

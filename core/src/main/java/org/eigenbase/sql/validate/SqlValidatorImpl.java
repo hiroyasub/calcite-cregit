@@ -188,7 +188,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Default implementation of {@link SqlValidator}.  *  * @author jhyde  * @version $Id$  * @since Mar 3, 2005  */
+comment|/**  * Default implementation of {@link SqlValidator}.  */
 end_comment
 
 begin_class

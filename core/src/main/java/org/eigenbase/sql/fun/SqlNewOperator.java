@@ -42,7 +42,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * SqlNewOperator represents an SQL<code>new specification</code> such as  *<code>NEW UDT(1, 2)</code>. When used in an SqlCall, SqlNewOperator takes a  * single operand, which is an invocation of the constructor method; but when  * used in a RexCall, the operands are the initial values to be used for the new  * instance.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  * SqlNewOperator represents an SQL<code>new specification</code> such as  *<code>NEW UDT(1, 2)</code>. When used in an SqlCall, SqlNewOperator takes a  * single operand, which is an invocation of the constructor method; but when  * used in a RexCall, the operands are the initial values to be used for the new  * instance.  */
 end_comment
 
 begin_class

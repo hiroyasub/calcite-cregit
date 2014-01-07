@@ -176,7 +176,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  *<code>ProjectRelBase</code> is an abstract base class for implementations of  * {@link ProjectRel}.  *  * @version $Id$  * @author jhyde  * @since March, 2004  */
+comment|/**  *<code>ProjectRelBase</code> is an abstract base class for implementations of  * {@link ProjectRel}.  */
 end_comment
 
 begin_class

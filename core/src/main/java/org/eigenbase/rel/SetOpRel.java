@@ -74,7 +74,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  *<code>SetOpRel</code> is an abstract base for relational set operators such  * as UNION, MINUS (aka EXCEPT), and INTERSECT.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  *<code>SetOpRel</code> is an abstract base for relational set operators such  * as UNION, MINUS (aka EXCEPT), and INTERSECT.  */
 end_comment
 
 begin_class

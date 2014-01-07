@@ -38,7 +38,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * SargIntervalBase is a common base for {@link SargInterval} and {@link  * SargIntervalExpr}.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  * SargIntervalBase is a common base for {@link SargInterval} and {@link  * SargIntervalExpr}.  */
 end_comment
 
 begin_class

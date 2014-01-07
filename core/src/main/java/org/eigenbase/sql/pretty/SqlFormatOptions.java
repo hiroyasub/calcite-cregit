@@ -16,7 +16,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * Data structure to hold options for  * {@link SqlPrettyWriter#setFormatOptions(SqlFormatOptions)}.  * @author chard  */
+comment|/**  * Data structure to hold options for  * {@link SqlPrettyWriter#setFormatOptions(SqlFormatOptions)}.  */
 end_comment
 
 begin_class
@@ -99,7 +99,7 @@ name|super
 argument_list|()
 expr_stmt|;
 block|}
-comment|/**      * COnstructs a complete set of SQL format options.      * @param alwaysUseParentheses      * @param caseClausesOnNewLines      * @param clauseStartsLine      * @param keywordsLowercase      * @param quoteAllIdentifiers      * @param selectListItemsOnSeparateLines      * @param whereListItemsOnSeparateLines      * @param windowDeclarationStartsLine      * @param windowListItemsOnSeparateLines      * @param indentation      * @param lineLength      */
+comment|/**      * Constructs a complete set of SQL format options.      *      * @param alwaysUseParentheses Always use parentheses      * @param caseClausesOnNewLines Case clauses on new lines      * @param clauseStartsLine Clause starts line      * @param keywordsLowercase Keywords in lower case      * @param quoteAllIdentifiers Quote all identifiers      * @param selectListItemsOnSeparateLines Select items on separate lines      * @param whereListItemsOnSeparateLines Where items on separate lines      * @param windowDeclarationStartsLine Window declaration starts line      * @param windowListItemsOnSeparateLines Window list items on separate lines      * @param indentation Indentation      * @param lineLength Line length      */
 specifier|public
 name|SqlFormatOptions
 parameter_list|(

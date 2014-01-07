@@ -50,7 +50,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * TableModificationRel is like TableAccessRel, but represents a request to  * modify a table rather than read from it. It takes one child which produces  * the modified rows. (For INSERT, the new values; for DELETE, the old values;  * for UPDATE, all old values plus updated new values.)  *  * @version $Id$  */
+comment|/**  * TableModificationRel is like TableAccessRel, but represents a request to  * modify a table rather than read from it. It takes one child which produces  * the modified rows. (For INSERT, the new values; for DELETE, the old values;  * for UPDATE, all old values plus updated new values.)  */
 end_comment
 
 begin_class

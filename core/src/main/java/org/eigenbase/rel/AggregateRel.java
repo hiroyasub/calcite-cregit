@@ -36,7 +36,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  *<code>AggregateRel</code> is a relational operator which eliminates  * duplicates and computes totals.  *  *<p>Rules:  *  *<ul>  *<li>{@link org.eigenbase.rel.rules.PullConstantsThroughAggregatesRule}  *<li>{@link org.eigenbase.rel.rules.RemoveDistinctAggregateRule}  *<li>{@link org.eigenbase.rel.rules.ReduceAggregatesRule}.  *  * @author jhyde  * @version $Id$  * @since 3 February, 2002  */
+comment|/**  *<code>AggregateRel</code> is a relational operator which eliminates  * duplicates and computes totals.  *  *<p>Rules:  *  *<ul>  *<li>{@link org.eigenbase.rel.rules.PullConstantsThroughAggregatesRule}  *<li>{@link org.eigenbase.rel.rules.RemoveDistinctAggregateRule}  *<li>{@link org.eigenbase.rel.rules.ReduceAggregatesRule}.  */
 end_comment
 
 begin_class

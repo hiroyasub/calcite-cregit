@@ -14,7 +14,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * A collection of terms.  *  *<p>(This is not a real class. It is here so that terms which do not map to  * classes can be referenced in Javadoc.)</p>  *  * @author jhyde  * @version $Id$  * @since Nov 28, 2003  */
+comment|/**  * A collection of terms.  *  *<p>(This is not a real class. It is here so that terms which do not map to  * classes can be referenced in Javadoc.)</p>  */
 end_comment
 
 begin_class

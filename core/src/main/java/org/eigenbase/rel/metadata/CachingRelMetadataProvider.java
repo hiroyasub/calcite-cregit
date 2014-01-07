@@ -62,7 +62,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * CachingRelMetadataProvider implements the {@link RelMetadataProvider}  * interface by caching results from an underlying provider.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  * CachingRelMetadataProvider implements the {@link RelMetadataProvider}  * interface by caching results from an underlying provider.  */
 end_comment
 
 begin_class

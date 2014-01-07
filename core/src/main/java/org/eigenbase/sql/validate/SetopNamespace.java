@@ -64,7 +64,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Namespace based upon a set operation (UNION, INTERSECT, EXCEPT).  *  * @author jhyde  * @version $Id$  * @since Mar 25, 2003  */
+comment|/**  * Namespace based upon a set operation (UNION, INTERSECT, EXCEPT).  */
 end_comment
 
 begin_class

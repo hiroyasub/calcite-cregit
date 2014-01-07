@@ -16,7 +16,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * Enumeration of types of monotonicity.  *  * @author jhyde  * @version $Id$  * @since 2007/9/4  */
+comment|/**  * Enumeration of types of monotonicity.  */
 end_comment
 
 begin_enum

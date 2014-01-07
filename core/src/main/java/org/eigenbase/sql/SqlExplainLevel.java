@@ -28,7 +28,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * SqlExplainLevel defines detail levels for EXPLAIN PLAN.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  * SqlExplainLevel defines detail levels for EXPLAIN PLAN.  */
 end_comment
 
 begin_enum

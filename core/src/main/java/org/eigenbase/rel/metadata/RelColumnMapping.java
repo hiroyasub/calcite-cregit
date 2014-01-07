@@ -16,7 +16,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * Mapping from an input column of a {@link org.eigenbase.rel.RelNode} to one  * of its output columns.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  * Mapping from an input column of a {@link org.eigenbase.rel.RelNode} to one  * of its output columns.  */
 end_comment
 
 begin_class

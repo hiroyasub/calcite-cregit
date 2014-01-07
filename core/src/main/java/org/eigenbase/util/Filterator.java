@@ -24,7 +24,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Filtered iterator class: an iterator that includes only elements that are  * instanceof a specified class. Apologies for the dorky name.  *  * @author jason  * @version $Id$  * @see Util#cast(List, Class)  * @see Util#cast(Iterator, Class)  * @since November 9, 2004  */
+comment|/**  * Filtered iterator class: an iterator that includes only elements that are  * instanceof a specified class. Apologies for the dorky name.  * @see Util#cast(List, Class)  * @see Util#cast(Iterator, Class)  */
 end_comment
 
 begin_class
@@ -92,7 +92,6 @@ name|includeFilter
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/* (non-Javadoc)      * @see java.util.Iterator#hasNext()      */
 specifier|public
 name|boolean
 name|hasNext
@@ -139,7 +138,6 @@ literal|false
 return|;
 block|}
 block|}
-comment|/* (non-Javadoc)      * @see java.util.Iterator#next()      */
 specifier|public
 name|E
 name|next
@@ -205,7 +203,6 @@ name|NoSuchElementException
 argument_list|()
 throw|;
 block|}
-comment|/* (non-Javadoc)      * @see java.util.Iterator#remove()      */
 specifier|public
 name|void
 name|remove

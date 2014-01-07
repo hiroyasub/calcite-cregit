@@ -38,7 +38,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * ChainedRelMetadataProvider implements the {@link RelMetadataProvider}  * interface via the {@link  * org.eigenbase.util.Glossary#ChainOfResponsibilityPattern}.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  * ChainedRelMetadataProvider implements the {@link RelMetadataProvider}  * interface via the {@link  * org.eigenbase.util.Glossary#ChainOfResponsibilityPattern}.  */
 end_comment
 
 begin_class

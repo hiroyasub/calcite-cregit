@@ -90,7 +90,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Definition of the SQL:2003 standard MULTISET query constructor,<code>  * MULTISET (&lt;query&gt;)</code>.  *  * @author Wael Chatila  * @version $Id$  * @see SqlMultisetValueConstructor  * @since Oct 17, 2004  */
+comment|/**  * Definition of the SQL:2003 standard MULTISET query constructor,<code>  * MULTISET (&lt;query&gt;)</code>.  * @see SqlMultisetValueConstructor  */
 end_comment
 
 begin_class

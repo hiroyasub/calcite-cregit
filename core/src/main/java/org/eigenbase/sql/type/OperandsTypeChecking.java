@@ -40,7 +40,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Strategies to check for allowed operand types of an operator call.  *  * @author Wael Chatila  * @version $Id$  * @since Sept 8, 2004  */
+comment|/**  * Strategies to check for allowed operand types of an operator call.  */
 end_comment
 
 begin_class

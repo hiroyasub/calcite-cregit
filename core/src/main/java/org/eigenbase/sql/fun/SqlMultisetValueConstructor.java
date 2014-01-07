@@ -90,7 +90,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Definition of the SQL:2003 standard MULTISET constructor,<code>MULTISET  * [&lt;expr&gt;, ...]</code>.  *  *<p>Derived classes construct other kinds of collections.</p>  *  * @author Wael Chatila  * @version $Id$  * @see SqlMultisetQueryConstructor  * @since Oct 17, 2004  */
+comment|/**  * Definition of the SQL:2003 standard MULTISET constructor,<code>MULTISET  * [&lt;expr&gt;, ...]</code>.  *  *<p>Derived classes construct other kinds of collections.</p>  * @see SqlMultisetQueryConstructor  */
 end_comment
 
 begin_class

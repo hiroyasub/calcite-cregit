@@ -14,7 +14,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * Collection of {@link RexSqlConvertlet}s.  *  * @author Sunny Choi  * @version $Id$  */
+comment|/**  * Collection of {@link RexSqlConvertlet}s.  */
 end_comment
 
 begin_interface

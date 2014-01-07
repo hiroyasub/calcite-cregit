@@ -14,7 +14,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * SynchronizedJaninoCompiler exists as a fallback in case Janino has  * more multi-threading bugs.  We hope never to have to use it, but  * if necessary:  *<code>alter system set "javaCompilerClassName" =  * 'org.eigenbase.javac.SynchronizedJaninoCompiler';</code>  *  * @author John Sichi  * @version $Id$  */
+comment|/**  * SynchronizedJaninoCompiler exists as a fallback in case Janino has  * more multi-threading bugs.  We hope never to have to use it, but  * if necessary:  *<code>alter system set "javaCompilerClassName" =  * 'org.eigenbase.javac.SynchronizedJaninoCompiler';</code>  */
 end_comment
 
 begin_class

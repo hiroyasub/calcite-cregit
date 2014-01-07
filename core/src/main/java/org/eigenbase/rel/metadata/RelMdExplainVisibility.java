@@ -50,7 +50,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * RelMdExplainVisibility supplies a default implementation of {@link  * RelMetadataQuery#isVisibleInExplain} for the standard logical algebra.  *  * @author Zelaine Fong  * @version $Id$  */
+comment|/**  * RelMdExplainVisibility supplies a default implementation of {@link  * RelMetadataQuery#isVisibleInExplain} for the standard logical algebra.  */
 end_comment
 
 begin_class

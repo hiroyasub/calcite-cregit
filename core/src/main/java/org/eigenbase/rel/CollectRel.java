@@ -62,7 +62,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A relational expression that collapses multiple rows into one.  *  *<p>Rules:  *  *<ul>  *<li>{@code net.sf.farrago.fennel.rel.FarragoMultisetSplitterRule}  * creates a CollectRel from a call to {@link  * org.eigenbase.sql.fun.SqlMultisetValueConstructor} or to {@link  * org.eigenbase.sql.fun.SqlMultisetQueryConstructor}.</li>  *</ul>  *</p>  *  * @author Wael Chatila  * @version $Id$  * @since Dec 12, 2004  */
+comment|/**  * A relational expression that collapses multiple rows into one.  *  *<p>Rules:  *  *<ul>  *<li>{@code net.sf.farrago.fennel.rel.FarragoMultisetSplitterRule}  * creates a CollectRel from a call to {@link  * org.eigenbase.sql.fun.SqlMultisetValueConstructor} or to {@link  * org.eigenbase.sql.fun.SqlMultisetQueryConstructor}.</li>  *</ul>  *</p>  */
 end_comment
 
 begin_class

@@ -126,7 +126,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * RelDataTypeImpl is an abstract base for implementations of  * {@link RelDataType}.  *  *<p>Identity is based upon the {@link #digest} field, which each derived class  * should set during construction.</p>  *  * @author jhyde  * @version $Id$  */
+comment|/**  * RelDataTypeImpl is an abstract base for implementations of  * {@link RelDataType}.  *  *<p>Identity is based upon the {@link #digest} field, which each derived class  * should set during construction.</p>  */
 end_comment
 
 begin_class

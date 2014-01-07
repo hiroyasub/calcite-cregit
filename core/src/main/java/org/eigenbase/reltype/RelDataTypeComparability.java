@@ -26,7 +26,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * RelDataTypeComparability is an enumeration of the categories of comparison  * operators which types may support.  *  *<p>NOTE jvs 17-Mar-2005: the order of values of this enumeration is  * significant (from least inclusive to most inclusive) and should not be  * changed.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  * RelDataTypeComparability is an enumeration of the categories of comparison  * operators which types may support.  *  *<p>NOTE jvs 17-Mar-2005: the order of values of this enumeration is  * significant (from least inclusive to most inclusive) and should not be  * changed.  */
 end_comment
 
 begin_enum

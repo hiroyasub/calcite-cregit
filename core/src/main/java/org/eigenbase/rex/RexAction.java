@@ -14,7 +14,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * A<code>RexAction</code> is called when a {@link RexPattern} finds a match.  * It yields a {@link RexNode} by substituting the matching tokens.  *  * @author jhyde  * @version $Id$  * @since May 3, 2002  */
+comment|/**  * A<code>RexAction</code> is called when a {@link RexPattern} finds a match.  * It yields a {@link RexNode} by substituting the matching tokens.  */
 end_comment
 
 begin_interface

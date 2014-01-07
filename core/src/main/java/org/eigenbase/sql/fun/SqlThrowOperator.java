@@ -42,7 +42,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * An internal operator that throws an exception.<br>  * The exception is thrown with a (localized) error message which is the only  * input paramter to the operator.<br>  * The return type is defined as a<code>BOOLEAN</code> to facilitate the use of  * it in constructs like the following:  *  *<p><code>CASE<br>  * WHEN&lt;conditionn&gt; THEN true<br>  * ELSE throw("what's wrong with you man?")<br>  * END  *  * @author Wael Chatila  * @version $Id$  * @since Mar 29, 2005  */
+comment|/**  * An internal operator that throws an exception.<br>  * The exception is thrown with a (localized) error message which is the only  * input paramter to the operator.<br>  * The return type is defined as a<code>BOOLEAN</code> to facilitate the use of  * it in constructs like the following:  *  *<p><code>CASE<br>  * WHEN&lt;conditionn&gt; THEN true<br>  * ELSE throw("what's wrong with you man?")<br>  * END  */
 end_comment
 
 begin_class

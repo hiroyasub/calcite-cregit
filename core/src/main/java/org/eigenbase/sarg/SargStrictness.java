@@ -14,7 +14,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * Defines the boundary strictness of an endpoint: either open (either strictly  * less than or greater than) or closed (exactly equal).  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  * Defines the boundary strictness of an endpoint: either open (either strictly  * less than or greater than) or closed (exactly equal).  */
 end_comment
 
 begin_enum

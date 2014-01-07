@@ -14,7 +14,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * Visitor pattern for traversing a tree of {@link RexNode} objects.  *  * @author jhyde  * @version $Id$  * @see org.eigenbase.util.Glossary#VisitorPattern  * @see RexShuttle  * @see RexVisitorImpl  * @since May 30, 2004  */
+comment|/**  * Visitor pattern for traversing a tree of {@link RexNode} objects.  *  * @see org.eigenbase.util.Glossary#VisitorPattern  * @see RexShuttle  * @see RexVisitorImpl  */
 end_comment
 
 begin_interface

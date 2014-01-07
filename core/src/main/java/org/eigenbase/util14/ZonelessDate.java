@@ -54,7 +54,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * ZonelessDate is a date value without a time zone.  *  * @author John Pham  * @version $Id$  */
+comment|/**  * ZonelessDate is a date value without a time zone.  */
 end_comment
 
 begin_class

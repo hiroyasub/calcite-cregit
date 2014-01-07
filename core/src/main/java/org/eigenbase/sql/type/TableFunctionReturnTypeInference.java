@@ -76,7 +76,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * TableFunctionReturnTypeInference implements rules for deriving table function  * output row types by expanding references to cursor parameters.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  * TableFunctionReturnTypeInference implements rules for deriving table function  * output row types by expanding references to cursor parameters.  */
 end_comment
 
 begin_class

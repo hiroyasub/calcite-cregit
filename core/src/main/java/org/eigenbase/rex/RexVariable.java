@@ -26,7 +26,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A row-expression which references a field.  *  * @author jhyde  * @version $Id$  * @since Nov 24, 2003  */
+comment|/**  * A row-expression which references a field.  */
 end_comment
 
 begin_class

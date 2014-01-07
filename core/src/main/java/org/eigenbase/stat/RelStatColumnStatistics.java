@@ -14,7 +14,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * This interface provides results based on column statistics. It may be used to  * summarize the results of applying a predicate to a column of a relational  * expression. Alternatively, it may be used to summarize aspects of the entire  * column.  *  * @author John Pham  * @version $Id$  */
+comment|/**  * This interface provides results based on column statistics. It may be used to  * summarize the results of applying a predicate to a column of a relational  * expression. Alternatively, it may be used to summarize aspects of the entire  * column.  */
 end_comment
 
 begin_interface

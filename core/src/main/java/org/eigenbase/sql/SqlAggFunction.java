@@ -54,7 +54,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Abstract base class for the definition of an aggregate function: an operator  * which aggregates sets of values into a result.  *  * @author jhyde  * @version $Id$  */
+comment|/**  * Abstract base class for the definition of an aggregate function: an operator  * which aggregates sets of values into a result.  */
 end_comment
 
 begin_class

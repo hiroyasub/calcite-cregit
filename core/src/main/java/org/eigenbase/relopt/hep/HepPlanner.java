@@ -160,7 +160,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * HepPlanner is a heuristic implementation of the {@link RelOptPlanner}  * interface.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  * HepPlanner is a heuristic implementation of the {@link RelOptPlanner}  * interface.  */
 end_comment
 
 begin_class

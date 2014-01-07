@@ -16,7 +16,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * HepMatchOrder specifies the order of graph traversal when looking for rule  * matches.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  * HepMatchOrder specifies the order of graph traversal when looking for rule  * matches.  */
 end_comment
 
 begin_enum

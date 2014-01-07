@@ -142,7 +142,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Utility methods related to validation.  *  * @author jhyde  * @version $Id$  * @since Mar 25, 2003  */
+comment|/**  * Utility methods related to validation.  */
 end_comment
 
 begin_class

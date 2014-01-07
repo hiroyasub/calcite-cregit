@@ -36,7 +36,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * SamplingRel represents the TABLESAMPLE BERNOULLI or SYSTEM keyword applied to  * a table, view or subquery.  *  * @author Stephan Zuercher  */
+comment|/**  * SamplingRel represents the TABLESAMPLE BERNOULLI or SYSTEM keyword applied to  * a table, view or subquery.  */
 end_comment
 
 begin_class

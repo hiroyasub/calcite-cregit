@@ -78,7 +78,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Definition of the the convention trait.  * A new set of conversion information is created for  * each planner that registers at least one {@link ConverterRule} instance.  *  *<p>Conversion data is held in a {@link WeakHashMap} so that the JVM's garbage  * collector may reclaim the conversion data after the planner itself has been  * garbage collected. The conversion information consists of a graph of  * conversions (from one calling convention to another) and a map of graph arcs  * to {@link ConverterRule}s.  *  * @author Stephan Zuercher  * @version $Id$  */
+comment|/**  * Definition of the the convention trait.  * A new set of conversion information is created for  * each planner that registers at least one {@link ConverterRule} instance.  *  *<p>Conversion data is held in a {@link WeakHashMap} so that the JVM's garbage  * collector may reclaim the conversion data after the planner itself has been  * garbage collected. The conversion information consists of a graph of  * conversions (from one calling convention to another) and a map of graph arcs  * to {@link ConverterRule}s.  */
 end_comment
 
 begin_class

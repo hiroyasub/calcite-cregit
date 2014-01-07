@@ -54,7 +54,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A character string literal.  *  *<p>Its {@link #value} field is an {@link NlsString} and {@link #typeName} is  * {@link SqlTypeName#CHAR}.  *  * @author wael  * @version $Id$  */
+comment|/**  * A character string literal.  *  *<p>Its {@link #value} field is an {@link NlsString} and {@link #typeName} is  * {@link SqlTypeName#CHAR}.  */
 end_comment
 
 begin_class

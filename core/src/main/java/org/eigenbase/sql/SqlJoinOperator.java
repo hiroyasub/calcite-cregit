@@ -54,7 +54,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  *<code>SqlJoinOperator</code> describes the syntax of the SQL<code>  * JOIN</code> operator. Since there is only one such operator, this class is  * almost certainly a singleton.  *  * @author jhyde  * @version $Id$  * @since Mar 19, 2003  */
+comment|/**  *<code>SqlJoinOperator</code> describes the syntax of the SQL<code>  * JOIN</code> operator. Since there is only one such operator, this class is  * almost certainly a singleton.  */
 end_comment
 
 begin_class

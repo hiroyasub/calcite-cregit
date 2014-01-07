@@ -60,7 +60,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Static utilities for Java reflection.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  * Static utilities for Java reflection.  */
 end_comment
 
 begin_class

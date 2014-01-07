@@ -16,7 +16,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * An enumeration of moniker types.  *  *<p>Used in {@link SqlMoniker}.  *  * @author tleung  * @version $Id$  * @since May 24, 2005  */
+comment|/**  * An enumeration of moniker types.  *  *<p>Used in {@link SqlMoniker}.  */
 end_comment
 
 begin_enum

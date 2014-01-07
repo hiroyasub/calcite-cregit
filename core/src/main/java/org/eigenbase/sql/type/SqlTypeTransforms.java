@@ -76,7 +76,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * SqlTypeTransforms defines a number of reusable instances of {@link  * SqlTypeTransform}.  *  *<p>NOTE: avoid anonymous inner classes here except for unique,  * non-generalizable strategies; anything else belongs in a reusable top-level  * class. If you find yourself copying and pasting an existing strategy's  * anonymous inner class, you're making a mistake.  *  * @author Wael Chatila  * @version $Id$  */
+comment|/**  * SqlTypeTransforms defines a number of reusable instances of {@link  * SqlTypeTransform}.  *  *<p>NOTE: avoid anonymous inner classes here except for unique,  * non-generalizable strategies; anything else belongs in a reusable top-level  * class. If you find yourself copying and pasting an existing strategy's  * anonymous inner class, you're making a mistake.  */
 end_comment
 
 begin_class

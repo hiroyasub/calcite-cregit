@@ -64,7 +64,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Visitor which throws an exception if any component of the expression is not a  * group expression.  *  * @author jhyde  * @version $Id$  * @since Oct 28, 2004  */
+comment|/**  * Visitor which throws an exception if any component of the expression is not a  * group expression.  */
 end_comment
 
 begin_class

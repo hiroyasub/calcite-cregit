@@ -148,7 +148,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A<code>RelSubset</code> is set of expressions in a set which have the same  * calling convention. An expression may be in more than one sub-set of a set;  * the same expression is used.  *  * @author jhyde  * @version $Id$  * @since 16 December, 2001  */
+comment|/**  * A<code>RelSubset</code> is set of expressions in a set which have the same  * calling convention. An expression may be in more than one sub-set of a set;  * the same expression is used.  */
 end_comment
 
 begin_class

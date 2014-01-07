@@ -36,7 +36,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * EigenbaseTimingTracer provides a mechanism for tracing the timing of a call  * sequence at nanosecond resolution.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  * EigenbaseTimingTracer provides a mechanism for tracing the timing of a call  * sequence at nanosecond resolution.  */
 end_comment
 
 begin_class

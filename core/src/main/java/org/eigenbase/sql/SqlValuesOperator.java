@@ -14,7 +14,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * The<code>VALUES</code> operator.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  * The<code>VALUES</code> operator.  */
 end_comment
 
 begin_class

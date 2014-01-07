@@ -14,7 +14,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * SargBoundType defines the possible endpoint boundaries (upper or lower).  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  * SargBoundType defines the possible endpoint boundaries (upper or lower).  */
 end_comment
 
 begin_enum

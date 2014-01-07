@@ -62,7 +62,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * RelMdColumnOrigins supplies a default implementation of {@link  * RelMetadataQuery#getColumnOrigins} for the standard logical algebra.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  * RelMdColumnOrigins supplies a default implementation of {@link  * RelMetadataQuery#getColumnOrigins} for the standard logical algebra.  */
 end_comment
 
 begin_class

@@ -76,7 +76,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A<code>CorrelatorRel</code> behaves like a kind of {@link JoinRel}, but  * works by setting variables in its environment and restarting its right-hand  * input.  *  *<p>A CorrelatorRel is used to represent a correlated query. One  * implementation strategy is to de-correlate the expression.  *  * @author jhyde  * @version $Id$  * @since 23 September, 2001  */
+comment|/**  * A<code>CorrelatorRel</code> behaves like a kind of {@link JoinRel}, but  * works by setting variables in its environment and restarting its right-hand  * input.  *  *<p>A CorrelatorRel is used to represent a correlated query. One  * implementation strategy is to de-correlate the expression.  */
 end_comment
 
 begin_class

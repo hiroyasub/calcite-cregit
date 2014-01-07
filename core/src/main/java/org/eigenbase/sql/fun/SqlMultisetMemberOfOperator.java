@@ -66,7 +66,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Multiset MEMBER OF. Checks to see if a element belongs to a multiset.<br>  * Example:<br>  *<code>'green' MEMBER OF MULTISET['red','almost green','blue']</code> returns  *<code>false</code>.  *  * @author Wael Chatila  * @version $Id$  */
+comment|/**  * Multiset MEMBER OF. Checks to see if a element belongs to a multiset.<br>  * Example:<br>  *<code>'green' MEMBER OF MULTISET['red','almost green','blue']</code> returns  *<code>false</code>.  */
 end_comment
 
 begin_class

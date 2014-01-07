@@ -52,7 +52,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Scope for resolving identifers within a SELECT statement which has a GROUP BY  * clause.  *  *<p>The same set of identifiers are in scope, but it won't allow access to  * identifiers or expressions which are not group-expressions.  *  * @author jhyde  * @version $Id$  * @since Mar 25, 2003  */
+comment|/**  * Scope for resolving identifers within a SELECT statement which has a GROUP BY  * clause.  *  *<p>The same set of identifiers are in scope, but it won't allow access to  * identifiers or expressions which are not group-expressions.  */
 end_comment
 
 begin_class

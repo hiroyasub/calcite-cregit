@@ -48,7 +48,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Walks over a tree of {@link RelNode relational expressions}, walking a {@link  * RexShuttle} over every expression in that tree.  *  * @author jhyde  * @version $Id$  * @since 22 October, 2001  */
+comment|/**  * Walks over a tree of {@link RelNode relational expressions}, walking a {@link  * RexShuttle} over every expression in that tree.  */
 end_comment
 
 begin_class

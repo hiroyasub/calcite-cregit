@@ -56,7 +56,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * The<code>CURRENT_DATE</code> function.  *  * @author Wael Chatila  * @version $Id$  */
+comment|/**  * The<code>CURRENT_DATE</code> function.  */
 end_comment
 
 begin_class

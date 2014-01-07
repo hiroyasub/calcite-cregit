@@ -28,7 +28,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A<code>SqlWriter</code> is the target to construct a SQL statement from a  * parse tree. It deals with dialect differences; for example, Oracle quotes  * identifiers as<code>"scott"</code>, while SQL Server quotes them as<code>  * [scott]</code>.  *  * @author Julian Hyde  * @version $Id$  * @since 2002/8/8  */
+comment|/**  * A<code>SqlWriter</code> is the target to construct a SQL statement from a  * parse tree. It deals with dialect differences; for example, Oracle quotes  * identifiers as<code>"scott"</code>, while SQL Server quotes them as<code>  * [scott]</code>.  */
 end_comment
 
 begin_interface

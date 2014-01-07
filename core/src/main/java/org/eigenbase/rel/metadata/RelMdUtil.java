@@ -166,7 +166,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * RelMdUtil provides utility methods used by the metadata provider methods.  *  * @author Zelaine Fong  * @version $Id$  */
+comment|/**  * RelMdUtil provides utility methods used by the metadata provider methods.  */
 end_comment
 
 begin_class

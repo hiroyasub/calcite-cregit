@@ -28,7 +28,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * String that represents a kocher SQL statement, expression, or fragment.  *  *<p>A SqlString just contains a regular Java string, but the SqlString wrapper  * indicates that the string has been created carefully guarding against all SQL  * dialect and injection issues.  *  *<p>The easiest way to do build a SqlString is to use a {@link SqlBuilder}.  *  * @version $Id$  * @author jhyde  */
+comment|/**  * String that represents a kocher SQL statement, expression, or fragment.  *  *<p>A SqlString just contains a regular Java string, but the SqlString wrapper  * indicates that the string has been created carefully guarding against all SQL  * dialect and injection issues.  *  *<p>The easiest way to do build a SqlString is to use a {@link SqlBuilder}.  */
 end_comment
 
 begin_class

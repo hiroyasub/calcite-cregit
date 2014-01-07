@@ -54,7 +54,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Visitor which looks for an aggregate function inside a tree of {@link  * SqlNode} objects.  *  * @author jhyde  * @version $Id$  * @since Oct 28, 2004  */
+comment|/**  * Visitor which looks for an aggregate function inside a tree of {@link  * SqlNode} objects.  */
 end_comment
 
 begin_class

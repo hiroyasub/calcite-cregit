@@ -52,7 +52,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Extends {@link SqlValidator} to allow discovery of useful data such as fully  * qualified names of sql objects, alternative valid sql objects that can be  * used in the SQL statement (dubbed as hints)  *  * @author tleung  * @version $Id$  * @since Jul 7, 2005  */
+comment|/**  * Extends {@link SqlValidator} to allow discovery of useful data such as fully  * qualified names of sql objects, alternative valid sql objects that can be  * used in the SQL statement (dubbed as hints)  */
 end_comment
 
 begin_interface

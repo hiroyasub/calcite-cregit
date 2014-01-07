@@ -40,7 +40,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * AssignableOperandTypeChecker implements {@link SqlOperandTypeChecker} by  * verifying that the type of each argument is assignable to a predefined set of  * parameter types (under the SQL definition of "assignable").  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  * AssignableOperandTypeChecker implements {@link SqlOperandTypeChecker} by  * verifying that the type of each argument is assignable to a predefined set of  * parameter types (under the SQL definition of "assignable").  */
 end_comment
 
 begin_class

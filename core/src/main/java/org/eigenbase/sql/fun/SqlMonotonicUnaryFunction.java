@@ -56,7 +56,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Base class for unary operators such as FLOOR/CEIL which are monotonic for  * monotonic inputs.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  * Base class for unary operators such as FLOOR/CEIL which are monotonic for  * monotonic inputs.  */
 end_comment
 
 begin_class

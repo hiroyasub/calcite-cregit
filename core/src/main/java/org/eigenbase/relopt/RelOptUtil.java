@@ -218,7 +218,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  *<code>RelOptUtil</code> defines static utility methods for use in optimizing  * {@link RelNode}s.  *  * @author jhyde  * @since 26 September, 2003  */
+comment|/**  *<code>RelOptUtil</code> defines static utility methods for use in optimizing  * {@link RelNode}s.  */
 end_comment
 
 begin_class

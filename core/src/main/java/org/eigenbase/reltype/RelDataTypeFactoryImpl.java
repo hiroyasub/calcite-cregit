@@ -180,7 +180,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Abstract base for implementations of {@link RelDataTypeFactory}.  *  * @author jhyde  * @version $Id$  * @since May 31, 2003  */
+comment|/**  * Abstract base for implementations of {@link RelDataTypeFactory}.  */
 end_comment
 
 begin_class

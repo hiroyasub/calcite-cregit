@@ -42,7 +42,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Strategy interface to check for allowed operand types of an operator call.  *  *<p>This interface is an example of the {@link  * org.eigenbase.util.Glossary#StrategyPattern strategy pattern}.</p>  *  * @author Wael Chatila  * @version $Id$  */
+comment|/**  * Strategy interface to check for allowed operand types of an operator call.  *  *<p>This interface is an example of the {@link  * org.eigenbase.util.Glossary#StrategyPattern strategy pattern}.</p>  */
 end_comment
 
 begin_interface

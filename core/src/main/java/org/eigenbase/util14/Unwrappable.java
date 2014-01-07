@@ -24,7 +24,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Crotchety implementation for {@link Wrapper}.  *  * @author John Sichi  * @version $Id: //open/dev/farrago/jdbc4/Unwrappable16.java#5 $  */
+comment|/**  * Crotchety implementation for {@link Wrapper}.  */
 end_comment
 
 begin_class

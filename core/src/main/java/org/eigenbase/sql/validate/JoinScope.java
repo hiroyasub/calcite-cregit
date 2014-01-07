@@ -28,7 +28,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * The name-resolution context for expression inside a JOIN clause. The objects  * visible are the joined table expressions, and those inherited from the parent  * scope.  *  *<p>Consider "SELECT * FROM (A JOIN B ON {exp1}) JOIN C ON {exp2}". {exp1} is  * resolved in the join scope for "A JOIN B", which contains A and B but not  * C.</p>  *  * @author jhyde  * @version $Id$  * @since Mar 25, 2003  */
+comment|/**  * The name-resolution context for expression inside a JOIN clause. The objects  * visible are the joined table expressions, and those inherited from the parent  * scope.  *  *<p>Consider "SELECT * FROM (A JOIN B ON {exp1}) JOIN C ON {exp2}". {exp1} is  * resolved in the join scope for "A JOIN B", which contains A and B but not  * C.</p>  */
 end_comment
 
 begin_class

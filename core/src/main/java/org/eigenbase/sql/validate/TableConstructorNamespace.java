@@ -40,7 +40,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Namespace for a table constructor<code>VALUES (expr, expr, ...)</code>.  *  * @author jhyde  * @version $Id$  * @since Mar 25, 2003  */
+comment|/**  * Namespace for a table constructor<code>VALUES (expr, expr, ...)</code>.  */
 end_comment
 
 begin_class

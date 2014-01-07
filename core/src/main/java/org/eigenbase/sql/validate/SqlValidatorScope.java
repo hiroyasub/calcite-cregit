@@ -50,7 +50,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Name-resolution scope. Represents any position in a parse tree than an  * expression can be, or anything in the parse tree which has columns.  *  *<p>When validating an expression, say "foo"."bar", you first use the {@link  * #resolve} method of the scope where the expression is defined to locate  * "foo". If successful, this returns a {@link SqlValidatorNamespace namespace}  * describing the type of the resulting object.  *  * @author jhyde  * @version $Id$  * @since Mar 25, 2003  */
+comment|/**  * Name-resolution scope. Represents any position in a parse tree than an  * expression can be, or anything in the parse tree which has columns.  *  *<p>When validating an expression, say "foo"."bar", you first use the {@link  * #resolve} method of the scope where the expression is defined to locate  * "foo". If successful, this returns a {@link SqlValidatorNamespace namespace}  * describing the type of the resulting object.  */
 end_comment
 
 begin_interface

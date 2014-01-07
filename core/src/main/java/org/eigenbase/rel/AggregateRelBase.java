@@ -154,7 +154,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  *<code>AggregateRelBase</code> is an abstract base class for implementations  * of {@link AggregateRel}.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  *<code>AggregateRelBase</code> is an abstract base class for implementations  * of {@link AggregateRel}.  */
 end_comment
 
 begin_class

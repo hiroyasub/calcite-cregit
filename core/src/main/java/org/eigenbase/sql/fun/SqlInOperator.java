@@ -90,7 +90,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Definition of the SQL<code>IN</code> operator, which tests for a value's  * membership in a subquery or a list of values.  *  * @author jhyde  * @version $Id$  * @since April 17, 2006  */
+comment|/**  * Definition of the SQL<code>IN</code> operator, which tests for a value's  * membership in a subquery or a list of values.  */
 end_comment
 
 begin_class

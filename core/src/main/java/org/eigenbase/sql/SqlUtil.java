@@ -146,7 +146,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Contains utility functions related to SQL parsing, all static.  *  * @author jhyde  * @version $Id$  * @since Nov 26, 2003  */
+comment|/**  * Contains utility functions related to SQL parsing, all static.  */
 end_comment
 
 begin_class

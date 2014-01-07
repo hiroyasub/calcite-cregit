@@ -66,7 +66,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Abstract implementation of {@link org.eigenbase.rel.convert.ConverterRel}.  *  * @author jhyde  * @version $Id$  */
+comment|/**  * Abstract implementation of {@link org.eigenbase.rel.convert.ConverterRel}.  */
 end_comment
 
 begin_class

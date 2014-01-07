@@ -80,7 +80,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * An operator describing a window function specification.  *  *<p>Operands are as follows:  *  *<ul>  *<li>0: name of window function ({@link org.eigenbase.sql.SqlCall})</li>  *<li>1: window name ({@link org.eigenbase.sql.SqlLiteral}) or window in-line  * specification ({@link SqlWindowOperator})</li>  *</ul>  *</p>  *  * @author klo  * @version $Id$  * @since Nov 4, 2004  */
+comment|/**  * An operator describing a window function specification.  *  *<p>Operands are as follows:  *  *<ul>  *<li>0: name of window function ({@link org.eigenbase.sql.SqlCall})</li>  *<li>1: window name ({@link org.eigenbase.sql.SqlLiteral}) or window in-line  * specification ({@link SqlWindowOperator})</li>  *</ul>  *</p>  */
 end_comment
 
 begin_class

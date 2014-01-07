@@ -38,7 +38,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Implementation of the {@link SqlOperatorTable} interface by using a list of  * {@link SqlOperator operators}.  *  * @author jhyde  * @version $Id$  */
+comment|/**  * Implementation of the {@link SqlOperatorTable} interface by using a list of  * {@link SqlOperator operators}.  */
 end_comment
 
 begin_class

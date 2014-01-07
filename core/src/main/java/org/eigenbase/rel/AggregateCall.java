@@ -62,7 +62,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Call to an aggregation function within an {@link AggregateRel}.  *  * @author jhyde  * @version $Id$  */
+comment|/**  * Call to an aggregation function within an {@link AggregateRel}.  */
 end_comment
 
 begin_class

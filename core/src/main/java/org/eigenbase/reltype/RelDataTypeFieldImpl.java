@@ -24,7 +24,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Default implementation of {@link RelDataTypeField}.  *  * @author jhyde  * @version $Id$  */
+comment|/**  * Default implementation of {@link RelDataTypeField}.  */
 end_comment
 
 begin_class

@@ -36,7 +36,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Implementation of {@link RexSqlConvertletTable}.  *  * @author Sunny Choi  * @version $Id$  */
+comment|/**  * Implementation of {@link RexSqlConvertletTable}.  */
 end_comment
 
 begin_class

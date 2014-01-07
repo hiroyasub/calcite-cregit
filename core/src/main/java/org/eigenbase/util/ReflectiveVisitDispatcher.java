@@ -36,7 +36,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Interface for looking up methods relating to reflective visitation. One  * possible implementation would cache the results.  *  *<p>Type parameter 'R' is the base class of visitoR class; type parameter 'E'  * is the base class of visiteE class.  *  *<p>TODO: obsolete {@link ReflectUtil#lookupVisitMethod}, and use caching in  * implementing that method.  *  * @author Julian Hyde  * @version $Id$  */
+comment|/**  * Interface for looking up methods relating to reflective visitation. One  * possible implementation would cache the results.  *  *<p>Type parameter 'R' is the base class of visitoR class; type parameter 'E'  * is the base class of visiteE class.  *  *<p>TODO: obsolete {@link ReflectUtil#lookupVisitMethod}, and use caching in  * implementing that method.  */
 end_comment
 
 begin_interface

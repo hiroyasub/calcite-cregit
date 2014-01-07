@@ -38,7 +38,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Thunk which converts a {@link SqlNode} expression into a {@link RexNode}  * expression.  *  * @author jhyde  * @version $Id$  * @since 2005/8/3  */
+comment|/**  * Thunk which converts a {@link SqlNode} expression into a {@link RexNode}  * expression.  */
 end_comment
 
 begin_interface

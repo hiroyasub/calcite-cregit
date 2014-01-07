@@ -140,7 +140,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  *<code>ValuesRelBase</code> is an abstract base class for implementations of  * {@link ValuesRel}.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  *<code>ValuesRelBase</code> is an abstract base class for implementations of  * {@link ValuesRel}.  */
 end_comment
 
 begin_class

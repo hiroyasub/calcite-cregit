@@ -62,7 +62,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  *<code>SqlOperatorBinding</code> represents the binding of an {@link  * SqlOperator} to actual operands, along with any additional information  * required to validate those operands if needed.  *  * @author Wael Chatila  * @version $Id$  * @since Dec 16, 2004  */
+comment|/**  *<code>SqlOperatorBinding</code> represents the binding of an {@link  * SqlOperator} to actual operands, along with any additional information  * required to validate those operands if needed.  */
 end_comment
 
 begin_class

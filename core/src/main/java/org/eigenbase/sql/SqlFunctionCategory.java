@@ -26,7 +26,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  *<code>SqlFunctionCategory</codde> is an enumeration of the categories of  * SQL-invoked routines.  *  * @version $Id$  */
+comment|/**  *<code>SqlFunctionCategory</codde> is an enumeration of the categories of  * SQL-invoked routines.  */
 end_comment
 
 begin_enum

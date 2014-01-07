@@ -56,7 +56,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Support for the CEIL/CEILING builtin function.  *  * @author jack  * @version $Id$  * @since Apr 13, 2005  */
+comment|/**  * Support for the CEIL/CEILING builtin function.  */
 end_comment
 
 begin_class

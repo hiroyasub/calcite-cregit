@@ -68,7 +68,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * The<code>POSITION</code> function.  *  * @author Wael Chatila  * @version $Id$  */
+comment|/**  * The<code>POSITION</code> function.  */
 end_comment
 
 begin_class

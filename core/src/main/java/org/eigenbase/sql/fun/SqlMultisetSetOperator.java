@@ -42,7 +42,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * An operator which performs set operations on multisets, such as "MULTISET  * UNION ALL".  *  *<p>Not to be confused with {@link SqlMultisetValueConstructor} or {@link  * SqlMultisetQueryConstructor}.  *  *<p>todo: Represent the ALL keyword to MULTISET UNION ALL etc. as a hidden  * operand. Then we can obsolete this class.  *  * @author Wael Chatila  * @version $Id$  */
+comment|/**  * An operator which performs set operations on multisets, such as "MULTISET  * UNION ALL".  *  *<p>Not to be confused with {@link SqlMultisetValueConstructor} or {@link  * SqlMultisetQueryConstructor}.  *  *<p>todo: Represent the ALL keyword to MULTISET UNION ALL etc. as a hidden  * operand. Then we can obsolete this class.  */
 end_comment
 
 begin_class

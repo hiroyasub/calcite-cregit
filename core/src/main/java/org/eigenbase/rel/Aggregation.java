@@ -36,7 +36,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * An<code>Aggregation</code> aggregates a set of values into one value.  *  *<p>It is used, via a {@link AggregateCall}, in an {@link AggregateRel}  * relational operator.</p>  *  * @author jhyde  * @version $Id$  * @since 26 January, 2001  */
+comment|/**  * An<code>Aggregation</code> aggregates a set of values into one value.  *  *<p>It is used, via a {@link AggregateCall}, in an {@link AggregateRel}  * relational operator.</p>  */
 end_comment
 
 begin_interface

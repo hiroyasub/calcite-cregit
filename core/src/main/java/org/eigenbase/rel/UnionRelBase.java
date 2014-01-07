@@ -50,7 +50,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  *<code>UnionRelBase</code> is an abstract base class for implementations of  * {@link UnionRel}.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  *<code>UnionRelBase</code> is an abstract base class for implementations of  * {@link UnionRel}.  */
 end_comment
 
 begin_class

@@ -54,7 +54,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Namespace offered by a subquery.  *  * @author jhyde  * @version $Id$  * @see SelectScope  * @see SetopNamespace  * @since Mar 25, 2003  */
+comment|/**  * Namespace offered by a subquery.  * @see SelectScope  * @see SetopNamespace  */
 end_comment
 
 begin_class

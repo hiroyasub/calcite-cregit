@@ -28,7 +28,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Common base for the<code>CONVERT</code> and<code>TRANSLATE</code>  * functions.  *  * @author Wael Chatila  * @version $Id$  */
+comment|/**  * Common base for the<code>CONVERT</code> and<code>TRANSLATE</code>  * functions.  */
 end_comment
 
 begin_class

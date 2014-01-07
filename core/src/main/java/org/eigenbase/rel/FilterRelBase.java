@@ -76,7 +76,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  *<code>FilterRelBase</code> is an abstract base class for implementations of  * {@link FilterRel}.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  *<code>FilterRelBase</code> is an abstract base class for implementations of  * {@link FilterRel}.  */
 end_comment
 
 begin_class

@@ -40,7 +40,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A match of a rule to a particular set of target relational expressions,  * frozen in time.  *  * @author jhyde  * @version $Id$  * @since Jun 14, 2003  */
+comment|/**  * A match of a rule to a particular set of target relational expressions,  * frozen in time.  */
 end_comment
 
 begin_class

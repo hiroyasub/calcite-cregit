@@ -38,7 +38,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Represents a mapping which reorders elements in an array.  *  * @author Julian Hyde  * @version $Id$  */
+comment|/**  * Represents a mapping which reorders elements in an array.  */
 end_comment
 
 begin_class

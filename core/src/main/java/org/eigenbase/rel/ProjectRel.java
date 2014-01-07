@@ -112,7 +112,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  *<code>ProjectRel</code> is a relational expression which computes a set of  * 'select expressions' from its input relational expression.  *  *<p>The result is usually 'boxed' as a record with one named field for each  * column; if there is precisely one expression, the result may be 'unboxed',  * and consist of the raw value type.</p>  *  * @version $Id$  * @author jhyde  * @since March, 2004  */
+comment|/**  *<code>ProjectRel</code> is a relational expression which computes a set of  * 'select expressions' from its input relational expression.  *  *<p>The result is usually 'boxed' as a record with one named field for each  * column; if there is precisely one expression, the result may be 'unboxed',  * and consist of the raw value type.</p>  */
 end_comment
 
 begin_class

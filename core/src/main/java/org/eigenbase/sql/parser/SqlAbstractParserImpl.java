@@ -114,7 +114,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Abstract base for parsers generated from CommonParser.jj.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  * Abstract base for parsers generated from CommonParser.jj.  */
 end_comment
 
 begin_class

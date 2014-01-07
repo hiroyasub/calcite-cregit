@@ -76,7 +76,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A numeric SQL literal.  *  * @author jhyde  * @version $Id$  * @since Nov 18, 2004  */
+comment|/**  * A numeric SQL literal.  */
 end_comment
 
 begin_class
@@ -360,7 +360,7 @@ name|result
 argument_list|)
 return|;
 block|}
-comment|//else we have a decimal
+comment|// else we have a decimal
 return|return
 name|typeFactory
 operator|.

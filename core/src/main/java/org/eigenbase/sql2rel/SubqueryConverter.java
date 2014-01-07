@@ -38,7 +38,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * SubqueryConverter provides the interface for classes that convert subqueries  * into equivalent expressions.  *  * @author Zelaine Fong  * @version $Id$  */
+comment|/**  * SubqueryConverter provides the interface for classes that convert subqueries  * into equivalent expressions.  */
 end_comment
 
 begin_interface

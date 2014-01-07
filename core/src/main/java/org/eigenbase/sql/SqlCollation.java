@@ -84,7 +84,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A<code>SqlCollation</code> is an object representing a<code>Collate</code>  * statement. It is immutable.  *  * @author wael  * @version $Id$  * @since Mar 23, 2004  */
+comment|/**  * A<code>SqlCollation</code> is an object representing a<code>Collate</code>  * statement. It is immutable.  */
 end_comment
 
 begin_class

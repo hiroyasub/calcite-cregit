@@ -60,7 +60,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Call to an aggregate function over a window.  *  * @author jhyde  * @version $Id$  * @since Dec 6, 2004  */
+comment|/**  * Call to an aggregate function over a window.  */
 end_comment
 
 begin_class

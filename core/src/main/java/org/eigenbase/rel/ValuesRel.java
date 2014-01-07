@@ -60,7 +60,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  *<code>ValuesRel</code> represents a sequence of zero or more literal row  * values.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  *<code>ValuesRel</code> represents a sequence of zero or more literal row  * values.  */
 end_comment
 
 begin_class

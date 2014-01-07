@@ -62,7 +62,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * RelDataType represents the type of a scalar expression or entire row returned  * from a relational expression.  *  *<p>This is a somewhat "fat" interface which unions the attributes of many  * different type classes into one. Inelegant, but since our type system was  * defined before the advent of Java generics, it avoids a lot of typecasting.  *  * @author jhyde  * @version $Id$  * @since May 29, 2003  */
+comment|/**  * RelDataType represents the type of a scalar expression or entire row returned  * from a relational expression.  *  *<p>This is a somewhat "fat" interface which unions the attributes of many  * different type classes into one. Inelegant, but since our type system was  * defined before the advent of Java generics, it avoids a lot of typecasting.  */
 end_comment
 
 begin_interface

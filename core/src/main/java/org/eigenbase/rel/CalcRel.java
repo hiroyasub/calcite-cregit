@@ -114,7 +114,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A relational expression which computes project expressions and also filters.  *  *<p>This relational expression combines the functionality of {@link  * ProjectRel} and {@link FilterRel}. It should be created in the latter stages  * of optimization, by merging consecutive {@link ProjectRel} and {@link  * FilterRel} nodes together.  *  *<p>The following rules relate to<code>CalcRel</code>:  *  *<ul>  *<li>{@link FilterToCalcRule} creates this from a {@link FilterRel}</li>  *<li>{@link ProjectToCalcRule} creates this from a {@link FilterRel}</li>  *<li>{@link MergeFilterOntoCalcRule} merges this with a {@link FilterRel}</li>  *<li>{@link MergeProjectOntoCalcRule} merges this with a {@link  * ProjectRel}</li>  *<li>{@link MergeCalcRule} merges two CalcRels</li>  *</ul>  *</p>  *  * @author jhyde  * @version $Id$  * @since Mar 7, 2004  */
+comment|/**  * A relational expression which computes project expressions and also filters.  *  *<p>This relational expression combines the functionality of {@link  * ProjectRel} and {@link FilterRel}. It should be created in the latter stages  * of optimization, by merging consecutive {@link ProjectRel} and {@link  * FilterRel} nodes together.  *  *<p>The following rules relate to<code>CalcRel</code>:  *  *<ul>  *<li>{@link FilterToCalcRule} creates this from a {@link FilterRel}</li>  *<li>{@link ProjectToCalcRule} creates this from a {@link FilterRel}</li>  *<li>{@link MergeFilterOntoCalcRule} merges this with a {@link FilterRel}</li>  *<li>{@link MergeProjectOntoCalcRule} merges this with a {@link  * ProjectRel}</li>  *<li>{@link MergeCalcRule} merges two CalcRels</li>  *</ul>  *</p>  */
 end_comment
 
 begin_class

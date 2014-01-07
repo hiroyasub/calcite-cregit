@@ -40,7 +40,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * MultisetSqlType represents a standard SQL2003 multiset type.  *  * @author Wael Chatila  * @version $Id$  */
+comment|/**  * MultisetSqlType represents a standard SQL2003 multiset type.  */
 end_comment
 
 begin_class

@@ -50,7 +50,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Supplies a {@link SqlValidator} with the metadata for a table.  *  * @author jhyde  * @version $Id$  * @see SqlValidatorCatalogReader  * @since Mar 25, 2003  */
+comment|/**  * Supplies a {@link SqlValidator} with the metadata for a table.  * @see SqlValidatorCatalogReader  */
 end_comment
 
 begin_interface

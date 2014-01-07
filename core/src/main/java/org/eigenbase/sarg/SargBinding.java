@@ -26,7 +26,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * SargBinding represents the binding of a {@link SargExpr} to a particular  * {@link RexInputRef}.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  * SargBinding represents the binding of a {@link SargExpr} to a particular  * {@link RexInputRef}.  */
 end_comment
 
 begin_class

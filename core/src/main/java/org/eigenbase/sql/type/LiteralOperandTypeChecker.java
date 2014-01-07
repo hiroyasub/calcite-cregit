@@ -52,7 +52,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Parameter type-checking strategy type must be a literal (whether null is  * allowed is determined by the constructor).<code>CAST(NULL as ...)</code> is  * considered to be a NULL literal but not<code>CAST(CAST(NULL as ...) AS  * ...)</code>  *  * @author Wael Chatila  * @version $Id$  */
+comment|/**  * Parameter type-checking strategy type must be a literal (whether null is  * allowed is determined by the constructor).<code>CAST(NULL as ...)</code> is  * considered to be a NULL literal but not<code>CAST(CAST(NULL as ...) AS  * ...)</code>  */
 end_comment
 
 begin_class

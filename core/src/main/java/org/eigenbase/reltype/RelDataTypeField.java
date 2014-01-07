@@ -38,7 +38,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * RelDataTypeField represents the definition of a field in a structured {@link  * RelDataType}.  *  *<p>Extends the {@link java.util.Map.Entry} interface to allow convenient  * inter-operation with Java collections classes. In any implementation of this  * interface, {@link #getKey()} must be equivalent to {@link #getName()}  * and {@link #getValue()} must be equivalent to {@link #getType()}.  *  * @author jhyde  * @version $Id$  * @since May 29, 2003  */
+comment|/**  * RelDataTypeField represents the definition of a field in a structured {@link  * RelDataType}.  *  *<p>Extends the {@link java.util.Map.Entry} interface to allow convenient  * inter-operation with Java collections classes. In any implementation of this  * interface, {@link #getKey()} must be equivalent to {@link #getName()}  * and {@link #getValue()} must be equivalent to {@link #getType()}.  */
 end_comment
 
 begin_interface

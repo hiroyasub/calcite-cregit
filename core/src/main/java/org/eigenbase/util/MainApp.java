@@ -14,7 +14,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * Abstract base class for a Java application invoked from the command-line.  *  *<p>Example usage:  *  *<blockquote>  *<pre>public class MyClass extends MainApp {  *     public static void main(String[] args) {  *         new MyClass(args).run();  *     }  *     public void mainImpl() {  *         System.out.println("Hello, world!");  *     }  * }</pre>  *</blockquote>  *</p>  *  * @author jhyde  * @version $Id$  * @since Aug 31, 2003  */
+comment|/**  * Abstract base class for a Java application invoked from the command-line.  *  *<p>Example usage:  *  *<blockquote>  *<pre>public class MyClass extends MainApp {  *     public static void main(String[] args) {  *         new MyClass(args).run();  *     }  *     public void mainImpl() {  *         System.out.println("Hello, world!");  *     }  * }</pre>  *</blockquote>  *</p>  */
 end_comment
 
 begin_class

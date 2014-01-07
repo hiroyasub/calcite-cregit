@@ -56,7 +56,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Base class for functions such as "USER", "CURRENT_ROLE", and "CURRENT_PATH".  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  * Base class for functions such as "USER", "CURRENT_ROLE", and "CURRENT_PATH".  */
 end_comment
 
 begin_class

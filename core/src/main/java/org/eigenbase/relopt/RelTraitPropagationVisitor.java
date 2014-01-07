@@ -38,7 +38,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * RelTraitPropagationVisitor traverses a RelNode and its<i>unregistered</i>  * children, making sure that each has a full complement of traits. When a  * RelNode is found to be missing one or more traits, they are copied from a  * RelTraitSet given during construction.  *  * @author Stephan Zuercher  */
+comment|/**  * RelTraitPropagationVisitor traverses a RelNode and its<i>unregistered</i>  * children, making sure that each has a full complement of traits. When a  * RelNode is found to be missing one or more traits, they are copied from a  * RelTraitSet given during construction.  */
 end_comment
 
 begin_class

@@ -14,7 +14,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * SqlNullSemantics defines the possible comparison rules for values which might  * be null. In SQL (and internal plans used to process SQL) different rules are  * used depending on the context.  *  * @author John V. Sichi  * @version $Id$  */
+comment|/**  * SqlNullSemantics defines the possible comparison rules for values which might  * be null. In SQL (and internal plans used to process SQL) different rules are  * used depending on the context.  */
 end_comment
 
 begin_enum

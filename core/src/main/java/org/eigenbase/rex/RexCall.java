@@ -62,7 +62,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * An expression formed by a call to an operator with zero or more expressions  * as operands.  *  *<p>Operators may be binary, unary, functions, special syntactic constructs  * like<code>CASE ... WHEN ... END</code>, or even internally generated  * constructs like implicit type conversions. The syntax of the operator is  * really irrelevant, because row-expressions (unlike {@link  * org.eigenbase.sql.SqlNode SQL expressions}) do not directly represent a piece  * of source code.</p>  *  *<p>It's not often necessary to sub-class this class. The smarts should be in  * the operator, rather than the call. Any extra information about the call can  * often be encoded as extra arguments. (These don't need to be hidden, because  * no one is going to be generating source code from this tree.)</p>  *  * @author jhyde  * @version $Id$  * @since Nov 24, 2003  */
+comment|/**  * An expression formed by a call to an operator with zero or more expressions  * as operands.  *  *<p>Operators may be binary, unary, functions, special syntactic constructs  * like<code>CASE ... WHEN ... END</code>, or even internally generated  * constructs like implicit type conversions. The syntax of the operator is  * really irrelevant, because row-expressions (unlike {@link  * org.eigenbase.sql.SqlNode SQL expressions}) do not directly represent a piece  * of source code.</p>  *  *<p>It's not often necessary to sub-class this class. The smarts should be in  * the operator, rather than the call. Any extra information about the call can  * often be encoded as extra arguments. (These don't need to be hidden, because  * no one is going to be generating source code from this tree.)</p>  */
 end_comment
 
 begin_class

@@ -74,7 +74,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A string, optionally with {@link Charset character set} and {@link  * SqlCollation}. It is immutable.  *  * @author jhyde  * @version $Id$  * @since May 28, 2004  */
+comment|/**  * A string, optionally with {@link Charset character set} and {@link  * SqlCollation}. It is immutable.  */
 end_comment
 
 begin_class

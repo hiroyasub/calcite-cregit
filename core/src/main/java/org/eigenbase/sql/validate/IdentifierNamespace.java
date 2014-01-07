@@ -88,7 +88,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Namespace whose contents are defined by the type of an {@link  * org.eigenbase.sql.SqlIdentifier identifier}.  *  * @author jhyde  * @version $Id$  * @since Mar 25, 2003  */
+comment|/**  * Namespace whose contents are defined by the type of an {@link  * org.eigenbase.sql.SqlIdentifier identifier}.  */
 end_comment
 
 begin_class

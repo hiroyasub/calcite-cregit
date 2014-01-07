@@ -346,7 +346,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Converts a SQL parse tree (consisting of {@link org.eigenbase.sql.SqlNode}  * objects) into a relational algebra expression (consisting of {@link  * org.eigenbase.rel.RelNode} objects).  *  *<p>The public entry points are: {@link #convertQuery}, {@link  * #convertExpression(SqlNode)}.  *  * @author jhyde  * @version $Id$  * @since Oct 10, 2003  */
+comment|/**  * Converts a SQL parse tree (consisting of {@link org.eigenbase.sql.SqlNode}  * objects) into a relational algebra expression (consisting of {@link  * org.eigenbase.rel.RelNode} objects).  *  *<p>The public entry points are: {@link #convertQuery}, {@link  * #convertExpression(SqlNode)}.  */
 end_comment
 
 begin_class
