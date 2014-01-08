@@ -79,6 +79,18 @@ name|*
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
+name|util
+operator|.
+name|Util
+import|;
+end_import
+
 begin_comment
 comment|/**  * A<code>SqlFunction</code> is a type of operator which has conventional  * function-call syntax.  */
 end_comment
@@ -213,18 +225,14 @@ parameter_list|)
 block|{
 name|super
 argument_list|(
+name|Util
+operator|.
+name|last
+argument_list|(
 name|sqlIdentifier
 operator|.
 name|names
-index|[
-name|sqlIdentifier
-operator|.
-name|names
-operator|.
-name|length
-operator|-
-literal|1
-index|]
+argument_list|)
 argument_list|,
 name|SqlKind
 operator|.

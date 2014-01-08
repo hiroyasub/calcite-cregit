@@ -17,6 +17,16 @@ end_package
 
 begin_import
 import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|eigenbase
@@ -43,8 +53,10 @@ name|getType
 parameter_list|()
 function_decl|;
 comment|/**    * Returns the array of component names.    */
+name|List
+argument_list|<
 name|String
-index|[]
+argument_list|>
 name|getFullyQualifiedNames
 parameter_list|()
 function_decl|;

@@ -560,14 +560,9 @@ name|lookupNameCompletionHints
 argument_list|(
 name|scope
 argument_list|,
-name|Arrays
-operator|.
-name|asList
-argument_list|(
 name|id
 operator|.
 name|names
-argument_list|)
 argument_list|,
 name|pos
 argument_list|,
@@ -958,7 +953,8 @@ name|id
 operator|.
 name|names
 operator|.
-name|length
+name|size
+argument_list|()
 operator|==
 literal|1
 operator|)

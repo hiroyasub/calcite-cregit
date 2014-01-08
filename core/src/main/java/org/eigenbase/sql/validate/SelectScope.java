@@ -248,9 +248,11 @@ condition|(
 name|declId
 operator|.
 name|names
-index|[
+operator|.
+name|get
+argument_list|(
 literal|0
-index|]
+argument_list|)
 operator|.
 name|equals
 argument_list|(

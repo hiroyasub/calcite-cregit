@@ -173,9 +173,11 @@ init|=
 name|identifier
 operator|.
 name|names
-index|[
+operator|.
+name|get
+argument_list|(
 literal|0
-index|]
+argument_list|)
 decl_stmt|;
 specifier|final
 name|SqlValidatorNamespace

@@ -2142,7 +2142,8 @@ name|id
 operator|.
 name|names
 operator|.
-name|length
+name|size
+argument_list|()
 operator|==
 literal|1
 condition|)
@@ -2234,7 +2235,7 @@ operator|+
 name|ordinal
 return|;
 block|}
-comment|/**    * Constructs an operator signature from a type list.    *    * @param op       operator    * @param typeList list of types to use for operands. Types may be    *                 represented as {@link String}, {@link SqlTypeFamily}, or any object with    *                 a valid {@link Object#toString()} method.    * @return constructed signature    */
+comment|/**    * Constructs an operator signature from a type list.    *    * @param op       operator    * @param typeList list of types to use for operands. Types may be    *                 represented as {@link String}, {@link SqlTypeFamily}, or    *                 any object with a valid {@link Object#toString()} method.    * @return constructed signature    */
 specifier|public
 specifier|static
 name|String
@@ -2246,8 +2247,6 @@ parameter_list|,
 name|List
 argument_list|<
 name|?
-extends|extends
-name|Object
 argument_list|>
 name|typeList
 parameter_list|)
