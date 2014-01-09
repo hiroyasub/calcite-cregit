@@ -123,6 +123,18 @@ name|Stacks
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
+name|util
+operator|.
+name|Util
+import|;
+end_import
+
 begin_comment
 comment|/**  * Collection of planner rules that apply various simplifying transformations on  * RexNode trees. Currently, there are two transformations:  *  *<ul>  *<li>Constant reduction, which evaluates constant subtrees, replacing them  * with a corresponding RexLiteral  *<li>Removal of redundant casts, which occurs when the argument into the cast  * is the same as the type of the resulting cast expression  *</ul>  */
 end_comment
@@ -2349,21 +2361,13 @@ name|Constancy
 argument_list|>
 name|operandStack
 init|=
-name|stack
+name|Util
 operator|.
-name|subList
+name|last
 argument_list|(
 name|stack
-operator|.
-name|size
-argument_list|()
-operator|-
-name|operandCount
 argument_list|,
-name|stack
-operator|.
-name|size
-argument_list|()
+name|operandCount
 argument_list|)
 decl_stmt|;
 for|for
@@ -2794,6 +2798,7 @@ argument_list|()
 return|;
 block|}
 block|}
+specifier|public
 interface|interface
 name|Executor
 block|{

@@ -966,7 +966,7 @@ name|scope
 argument_list|,
 name|Util
 operator|.
-name|butLast
+name|skipLast
 argument_list|(
 name|fqId
 operator|.

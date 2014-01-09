@@ -12549,7 +12549,7 @@ name|addAll
 argument_list|(
 name|Util
 operator|.
-name|subList
+name|skip
 argument_list|(
 name|project
 operator|.

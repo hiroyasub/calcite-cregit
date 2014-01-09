@@ -161,6 +161,18 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
+name|util
+operator|.
+name|Util
+import|;
+end_import
+
+begin_import
+import|import
 name|com
 operator|.
 name|google
@@ -617,16 +629,11 @@ name|DBObject
 argument_list|>
 name|rest
 init|=
-name|list
+name|Util
 operator|.
-name|subList
+name|skip
 argument_list|(
-literal|1
-argument_list|,
 name|list
-operator|.
-name|size
-argument_list|()
 argument_list|)
 decl_stmt|;
 specifier|final

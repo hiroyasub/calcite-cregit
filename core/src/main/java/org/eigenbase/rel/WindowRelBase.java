@@ -860,7 +860,7 @@ name|fieldNames
 init|=
 name|Util
 operator|.
-name|subList
+name|skip
 argument_list|(
 name|windowRel
 operator|.

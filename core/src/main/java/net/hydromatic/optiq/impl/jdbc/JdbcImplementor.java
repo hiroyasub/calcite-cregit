@@ -1271,7 +1271,7 @@ name|butLast
 init|=
 name|Util
 operator|.
-name|butLast
+name|skipLast
 argument_list|(
 name|nodeList
 argument_list|)

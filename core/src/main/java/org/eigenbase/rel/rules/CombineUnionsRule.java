@@ -59,6 +59,18 @@ name|*
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
+name|util
+operator|.
+name|Util
+import|;
+end_import
+
 begin_comment
 comment|/**  * CombineUnionsRule implements the rule for combining two non-distinct {@link  * UnionRel}s into a single {@link UnionRel}.  */
 end_comment
@@ -286,21 +298,13 @@ name|unionInputs
 operator|.
 name|addAll
 argument_list|(
-name|topUnionRel
+name|Util
 operator|.
-name|getInputs
-argument_list|()
-operator|.
-name|subList
+name|skip
 argument_list|(
-literal|1
-argument_list|,
 name|topUnionRel
 operator|.
 name|getInputs
-argument_list|()
-operator|.
-name|size
 argument_list|()
 argument_list|)
 argument_list|)

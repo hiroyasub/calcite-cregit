@@ -2547,7 +2547,7 @@ argument_list|()
 argument_list|,
 name|Util
 operator|.
-name|butLast
+name|skipLast
 argument_list|(
 name|materialization
 operator|.
