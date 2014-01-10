@@ -1471,7 +1471,7 @@ argument_list|)
 decl_stmt|;
 name|replacer
 operator|.
-name|apply
+name|mutate
 argument_list|(
 name|expList
 argument_list|)
@@ -1594,7 +1594,7 @@ argument_list|)
 decl_stmt|;
 name|replacer
 operator|.
-name|apply
+name|mutate
 argument_list|(
 name|expList
 argument_list|)
@@ -1612,9 +1612,10 @@ name|rel
 parameter_list|)
 block|{
 return|return
-literal|null
+operator|new
+name|RexExecutorImpl
+argument_list|()
 return|;
-comment|// TODO:
 block|}
 comment|/**    * Locates expressions that can be reduced to literals or converted to    * expressions with redundant casts removed.    *    * @param typeFactory    Type factory    * @param exps           list of candidate expressions to be examined for    *                       reduction    * @param constExps      returns the list of expressions that can be constant    *                       reduced    * @param addCasts       indicator for each expression that can be constant    *                       reduced, whether a cast of the resulting reduced    *                       expression is potentially necessary    * @param removableCasts returns the list of cast expressions where the cast    */
 specifier|private

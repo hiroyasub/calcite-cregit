@@ -143,7 +143,7 @@ operator|.
 name|getPlannerTracer
 argument_list|()
 decl_stmt|;
-comment|/**    * Singleton instance of this rule that applies to the pattern    * Filter(Values).    */
+comment|/**    * Instance of this rule that applies to the pattern    * Filter(Values).    */
 specifier|public
 specifier|static
 specifier|final
@@ -215,7 +215,7 @@ expr_stmt|;
 block|}
 block|}
 decl_stmt|;
-comment|/**    * Singleton instance of this rule that applies to the pattern    * Project(Values).    */
+comment|/**    * Instance of this rule that applies to the pattern    * Project(Values).    */
 specifier|public
 specifier|static
 specifier|final

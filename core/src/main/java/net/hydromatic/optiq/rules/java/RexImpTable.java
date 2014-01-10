@@ -3032,6 +3032,9 @@ block|{
 case|case
 name|NOT_POSSIBLE
 case|:
+case|case
+name|NULL
+case|:
 for|for
 control|(
 name|Expression

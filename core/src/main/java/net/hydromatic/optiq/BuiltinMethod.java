@@ -692,6 +692,15 @@ argument_list|,
 literal|"arrayComparer"
 argument_list|)
 block|,
+name|FUNCTION0_APPLY
+argument_list|(
+name|Function0
+operator|.
+name|class
+argument_list|,
+literal|"apply"
+argument_list|)
+block|,
 name|ARRAYS_AS_LIST
 argument_list|(
 name|FlatLists
