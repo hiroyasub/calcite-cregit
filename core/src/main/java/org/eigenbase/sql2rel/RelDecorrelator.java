@@ -8215,9 +8215,6 @@ argument_list|(
 literal|"There are no unique keys for "
 operator|+
 name|leftInputRel
-operator|.
-name|toString
-argument_list|()
 argument_list|)
 expr_stmt|;
 return|return;
