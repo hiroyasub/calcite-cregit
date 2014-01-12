@@ -1585,7 +1585,7 @@ name|nullAs
 operator|==
 name|NullAs
 operator|.
-name|FALSE
+name|TRUE
 condition|?
 name|NullAs
 operator|.
@@ -1691,8 +1691,6 @@ name|Expressions
 operator|.
 name|condition
 argument_list|(
-name|optimize
-argument_list|(
 name|Expressions
 operator|.
 name|equal
@@ -1701,13 +1699,10 @@ name|t0
 argument_list|,
 name|NULL_EXPR
 argument_list|)
-argument_list|)
 argument_list|,
 name|Expressions
 operator|.
 name|condition
-argument_list|(
-name|optimize
 argument_list|(
 name|Expressions
 operator|.
@@ -1723,7 +1718,6 @@ name|NULL_EXPR
 argument_list|)
 argument_list|,
 name|t1
-argument_list|)
 argument_list|)
 argument_list|,
 name|NULL_EXPR
