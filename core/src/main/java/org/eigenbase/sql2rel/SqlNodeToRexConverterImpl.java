@@ -516,6 +516,9 @@ name|rexBuilder
 operator|.
 name|makeFlag
 argument_list|(
+operator|(
+name|Enum
+operator|)
 name|value
 argument_list|)
 return|;
