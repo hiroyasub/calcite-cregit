@@ -853,8 +853,6 @@ name|void
 name|testDummy
 parameter_list|()
 block|{
-comment|//testNullIfOperatorIntervals();
-comment|//testCastIntervalToInterval();
 block|}
 annotation|@
 name|Test
@@ -15947,7 +15945,7 @@ literal|"ARRAY ['foo', 'bar'][1]"
 argument_list|,
 literal|"foo"
 argument_list|,
-literal|"CHAR(3) NOT NULL"
+literal|"CHAR(3)"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -15958,7 +15956,7 @@ literal|"ARRAY ['foo', 'bar'][0]"
 argument_list|,
 literal|null
 argument_list|,
-literal|"CHAR(3) NOT NULL"
+literal|"CHAR(3)"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -15969,7 +15967,7 @@ literal|"ARRAY ['foo', 'bar'][2]"
 argument_list|,
 literal|"bar"
 argument_list|,
-literal|"CHAR(3) NOT NULL"
+literal|"CHAR(3)"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -15980,7 +15978,7 @@ literal|"ARRAY ['foo', 'bar'][3]"
 argument_list|,
 literal|null
 argument_list|,
-literal|"CHAR(3) NOT NULL"
+literal|"CHAR(3)"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -16013,7 +16011,7 @@ literal|"ARRAY [2, 4, 6][2]"
 argument_list|,
 literal|"4"
 argument_list|,
-literal|"INTEGER NOT NULL"
+literal|"INTEGER"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -16024,7 +16022,7 @@ literal|"ARRAY [2, 4, 6][4]"
 argument_list|,
 literal|null
 argument_list|,
-literal|"INTEGER NOT NULL"
+literal|"INTEGER"
 argument_list|)
 expr_stmt|;
 comment|// Map item
@@ -16034,7 +16032,7 @@ name|checkScalarExact
 argument_list|(
 literal|"map['foo', 3, 'bar', 7]['bar']"
 argument_list|,
-literal|"INTEGER NOT NULL"
+literal|"INTEGER"
 argument_list|,
 literal|"7"
 argument_list|)

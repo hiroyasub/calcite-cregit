@@ -1490,13 +1490,21 @@ literal|true
 return|;
 block|}
 comment|// Compute the values they reduce to.
+name|RelOptPlanner
+operator|.
 name|Executor
 name|executor
 init|=
-name|getExecutor
-argument_list|(
 name|rel
-argument_list|)
+operator|.
+name|getCluster
+argument_list|()
+operator|.
+name|getPlanner
+argument_list|()
+operator|.
+name|getExecutor
+argument_list|()
 decl_stmt|;
 name|List
 argument_list|<
@@ -1511,9 +1519,6 @@ name|RexNode
 argument_list|>
 argument_list|()
 decl_stmt|;
-name|boolean
-name|failed
-init|=
 name|executor
 operator|.
 name|execute
@@ -1524,16 +1529,7 @@ name|constExps
 argument_list|,
 name|reducedValues
 argument_list|)
-decl_stmt|;
-if|if
-condition|(
-name|failed
-condition|)
-block|{
-return|return
-literal|false
-return|;
-block|}
+expr_stmt|;
 comment|// For ProjectRel, we have to be sure to preserve the result
 comment|// types, so always cast regardless of the expression type.
 comment|// For other RelNodes like FilterRel, in general, this isn't necessary,
@@ -1601,20 +1597,6 @@ argument_list|)
 expr_stmt|;
 return|return
 literal|true
-return|;
-block|}
-specifier|static
-name|Executor
-name|getExecutor
-parameter_list|(
-name|RelNode
-name|rel
-parameter_list|)
-block|{
-return|return
-operator|new
-name|RexExecutorImpl
-argument_list|()
 return|;
 block|}
 comment|/**    * Locates expressions that can be reduced to literals or converted to    * expressions with redundant casts removed.    *    * @param typeFactory    Type factory    * @param exps           list of candidate expressions to be examined for    *                       reduction    * @param constExps      returns the list of expressions that can be constant    *                       reduced    * @param addCasts       indicator for each expression that can be constant    *                       reduced, whether a cast of the resulting reduced    *                       expression is potentially necessary    * @param removableCasts returns the list of cast expressions where the cast    */
@@ -2430,10 +2412,7 @@ condition|)
 block|{
 comment|// We can reduce the call to a constant, but we can't
 comment|// cache the plan if the function is dynamic
-assert|assert
-literal|false
-assert|;
-comment|// TODO:
+comment|// TODO: Flag that the plan cannot be cached
 block|}
 comment|// Row operator itself can't be reduced to a literal, but if
 comment|// the operands are constants, we still want to reduce those
@@ -2798,31 +2777,6 @@ name|pushVariable
 argument_list|()
 return|;
 block|}
-block|}
-specifier|public
-interface|interface
-name|Executor
-block|{
-comment|/**      * Reduces expressions. Returns whether failed.      */
-name|boolean
-name|execute
-parameter_list|(
-name|RexBuilder
-name|rexBuilder
-parameter_list|,
-name|List
-argument_list|<
-name|RexNode
-argument_list|>
-name|constExps
-parameter_list|,
-name|List
-argument_list|<
-name|RexNode
-argument_list|>
-name|reducedValues
-parameter_list|)
-function_decl|;
 block|}
 block|}
 end_class

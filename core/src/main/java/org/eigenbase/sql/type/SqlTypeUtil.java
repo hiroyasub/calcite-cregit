@@ -2365,6 +2365,15 @@ operator|.
 name|getFamily
 argument_list|()
 operator|==
+name|SqlTypeFamily
+operator|.
+name|ANY
+operator|||
+name|toType
+operator|.
+name|getFamily
+argument_list|()
+operator|==
 name|fromType
 operator|.
 name|getFamily

@@ -173,6 +173,10 @@ argument_list|>
 argument_list|>
 argument_list|()
 decl_stmt|;
+specifier|private
+name|Executor
+name|executor
+decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 comment|/**    * Creates an AbstractRelOptPlanner.    */
 specifier|protected
@@ -723,6 +727,30 @@ name|Collections
 operator|.
 name|emptyList
 argument_list|()
+return|;
+block|}
+specifier|public
+name|void
+name|setExecutor
+parameter_list|(
+name|Executor
+name|executor
+parameter_list|)
+block|{
+name|this
+operator|.
+name|executor
+operator|=
+name|executor
+expr_stmt|;
+block|}
+specifier|public
+name|Executor
+name|getExecutor
+parameter_list|()
+block|{
+return|return
+name|executor
 return|;
 block|}
 comment|/**    * Fires a rule, taking care of tracing and listener notification.    *    * @param ruleCall description of rule call    * @pre ruleCall.getRule().matches(ruleCall)    */

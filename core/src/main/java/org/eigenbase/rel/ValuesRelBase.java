@@ -456,7 +456,6 @@ argument_list|)
 condition|)
 block|{
 assert|assert
-operator|(
 name|SqlTypeUtil
 operator|.
 name|canAssignFrom
@@ -468,7 +467,14 @@ operator|.
 name|getType
 argument_list|()
 argument_list|)
-operator|)
+operator|:
+literal|"to "
+operator|+
+name|fieldType
+operator|+
+literal|" from "
+operator|+
+name|literal
 assert|;
 block|}
 block|}
