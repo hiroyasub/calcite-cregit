@@ -53,9 +53,33 @@ name|org
 operator|.
 name|eigenbase
 operator|.
+name|rex
+operator|.
+name|RexExecutorImpl
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
 name|util
 operator|.
 name|Pair
+import|;
+end_import
+
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|optiq
+operator|.
+name|Schemas
 import|;
 end_import
 
@@ -84,6 +108,29 @@ name|RelNode
 name|transformationResult
 decl_stmt|;
 comment|//~ Methods ----------------------------------------------------------------
+comment|/** Creates MockRelOptPlanner. */
+specifier|public
+name|MockRelOptPlanner
+parameter_list|()
+block|{
+name|super
+argument_list|()
+expr_stmt|;
+name|setExecutor
+argument_list|(
+operator|new
+name|RexExecutorImpl
+argument_list|(
+name|Schemas
+operator|.
+name|createDataContext
+argument_list|(
+literal|null
+argument_list|)
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
 comment|// implement RelOptPlanner
 specifier|public
 name|void
