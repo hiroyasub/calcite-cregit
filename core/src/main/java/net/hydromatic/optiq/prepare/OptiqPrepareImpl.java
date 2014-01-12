@@ -1092,6 +1092,15 @@ name|planner
 operator|.
 name|addRule
 argument_list|(
+name|ReduceExpressionsRule
+operator|.
+name|JOIN_INSTANCE
+argument_list|)
+expr_stmt|;
+name|planner
+operator|.
+name|addRule
+argument_list|(
 name|ReduceValuesRule
 operator|.
 name|FILTER_INSTANCE

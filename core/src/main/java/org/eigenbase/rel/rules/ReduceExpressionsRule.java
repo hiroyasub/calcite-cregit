@@ -2411,8 +2411,14 @@ argument_list|()
 condition|)
 block|{
 comment|// We can reduce the call to a constant, but we can't
-comment|// cache the plan if the function is dynamic
-comment|// TODO: Flag that the plan cannot be cached
+comment|// cache the plan if the function is dynamic.
+comment|// For now, treat it same as non-deterministic.
+name|callConstancy
+operator|=
+name|Constancy
+operator|.
+name|NON_CONSTANT
+expr_stmt|;
 block|}
 comment|// Row operator itself can't be reduced to a literal, but if
 comment|// the operands are constants, we still want to reduce those
