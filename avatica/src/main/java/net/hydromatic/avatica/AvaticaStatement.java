@@ -1068,6 +1068,31 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+comment|// implements java.sql.Statement.closeOnCompletion (added in JDK 1.7)
+specifier|public
+name|void
+name|closeOnCompletion
+parameter_list|()
+throws|throws
+name|SQLException
+block|{
+name|closeOnCompletion
+operator|=
+literal|true
+expr_stmt|;
+block|}
+comment|// implements java.sql.Statement.isCloseOnCompletion (added in JDK 1.7)
+specifier|public
+name|boolean
+name|isCloseOnCompletion
+parameter_list|()
+throws|throws
+name|SQLException
+block|{
+return|return
+name|closeOnCompletion
+return|;
+block|}
 comment|// implement Wrapper
 specifier|public
 parameter_list|<
