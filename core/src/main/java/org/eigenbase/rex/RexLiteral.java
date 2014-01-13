@@ -168,7 +168,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Constant value in a row-expression.  *  *<p>There are several methods for creating literals in {@link RexBuilder}:  * {@link RexBuilder#makeLiteral(boolean)} and so forth.</p>  *  *<p>How is the value stored? In that respect, the class is somewhat of a black  * box. There is a {@link #getValue} method which returns the value as an  * object, but the type of that value is implementation detail, and it is best  * that your code does not depend upon that knowledge. It is better to use  * task-oriented methods such as {@link #getValue2} and {@link  * #toJavaString}.</p>  *  *<p>The allowable types and combinations are:  *  *<table>  *<tr>  *<th>TypeName</th>  *<th>Meaing</th>  *<th>Value type</th>  *</tr>  *<tr>  *<td>{@link SqlTypeName#NULL}</td>  *<td>The null value. It has its own special type.</td>  *<td>null</td>  *</tr>  *<tr>  *<td>{@link SqlTypeName#BOOLEAN}</td>  *<td>Boolean, namely<code>TRUE</code>,<code>FALSE</code> or<code>  * UNKNOWN</code>.</td>  *<td>{@link Boolean}, or null represents the UNKNOWN value</td>  *</tr>  *<tr>  *<td>{@link SqlTypeName#DECIMAL}</td>  *<td>Exact number, for example<code>0</code>,<code>-.5</code>,<code>  * 12345</code>.</td>  *<td>{@link BigDecimal}</td>  *</tr>  *<tr>  *<td>{@link SqlTypeName#DOUBLE}</td>  *<td>Approximate number, for example<code>6.023E-23</code>.</td>  *<td>{@link BigDecimal}</td>  *</tr>  *<tr>  *<td>{@link SqlTypeName#DATE}</td>  *<td>Date, for example<code>DATE '1969-04'29'</code></td>  *<td>{@link Calendar}</td>  *</tr>  *<tr>  *<td>{@link SqlTypeName#TIME}</td>  *<td>Time, for example<code>TIME '18:37:42.567'</code></td>  *<td>{@link Calendar}</td>  *</tr>  *<tr>  *<td>{@link SqlTypeName#TIMESTAMP}</td>  *<td>Timestamp, for example<code>TIMESTAMP '1969-04-29  * 18:37:42.567'</code></td>  *<td>{@link Calendar}</td>  *</tr>  *<tr>  *<td>{@link SqlTypeName#CHAR}</td>  *<td>Character constant, for example<code>'Hello, world!'</code>,<code>  * ''</code>,<code>_N'Bonjour'</code>,<code>_ISO-8859-1'It''s superman!'  * COLLATE SHIFT_JIS$ja_JP$2</code>. These are always CHAR, never VARCHAR.</td>  *<td>{@link NlsString}</td>  *</tr>  *<tr>  *<td>{@link SqlTypeName#BINARY}</td>  *<td>Binary constant, for example<code>X'7F34'</code>. (The number of hexits  * must be even; see above.) These constants are always BINARY, never  * VARBINARY.</td>  *<td>{@link ByteBuffer}</td>  *</tr>  *<tr>  *<td>{@link SqlTypeName#SYMBOL}</td>  *<td>A symbol is a special type used to make parsing easier; it is not part of  * the SQL standard, and is not exposed to end-users. It is used to hold a flag,  * such as the LEADING flag in a call to the function<code>  * TRIM([LEADING|TRAILING|BOTH] chars FROM string)</code>.</td>  *<td>A class which implements the {@link org.eigenbase.util14.Enum14.Value}  * interface</td>  *</tr>  *</table>  */
+comment|/**  * Constant value in a row-expression.  *  *<p>There are several methods for creating literals in {@link RexBuilder}:  * {@link RexBuilder#makeLiteral(boolean)} and so forth.</p>  *  *<p>How is the value stored? In that respect, the class is somewhat of a black  * box. There is a {@link #getValue} method which returns the value as an  * object, but the type of that value is implementation detail, and it is best  * that your code does not depend upon that knowledge. It is better to use  * task-oriented methods such as {@link #getValue2} and {@link  * #toJavaString}.</p>  *  *<p>The allowable types and combinations are:  *  *<table>  *<tr>  *<th>TypeName</th>  *<th>Meaing</th>  *<th>Value type</th>  *</tr>  *<tr>  *<td>{@link SqlTypeName#NULL}</td>  *<td>The null value. It has its own special type.</td>  *<td>null</td>  *</tr>  *<tr>  *<td>{@link SqlTypeName#BOOLEAN}</td>  *<td>Boolean, namely<code>TRUE</code>,<code>FALSE</code> or<code>  * UNKNOWN</code>.</td>  *<td>{@link Boolean}, or null represents the UNKNOWN value</td>  *</tr>  *<tr>  *<td>{@link SqlTypeName#DECIMAL}</td>  *<td>Exact number, for example<code>0</code>,<code>-.5</code>,<code>  * 12345</code>.</td>  *<td>{@link BigDecimal}</td>  *</tr>  *<tr>  *<td>{@link SqlTypeName#DOUBLE}</td>  *<td>Approximate number, for example<code>6.023E-23</code>.</td>  *<td>{@link BigDecimal}</td>  *</tr>  *<tr>  *<td>{@link SqlTypeName#DATE}</td>  *<td>Date, for example<code>DATE '1969-04'29'</code></td>  *<td>{@link Calendar}</td>  *</tr>  *<tr>  *<td>{@link SqlTypeName#TIME}</td>  *<td>Time, for example<code>TIME '18:37:42.567'</code></td>  *<td>{@link Calendar}</td>  *</tr>  *<tr>  *<td>{@link SqlTypeName#TIMESTAMP}</td>  *<td>Timestamp, for example<code>TIMESTAMP '1969-04-29  * 18:37:42.567'</code></td>  *<td>{@link Calendar}</td>  *</tr>  *<tr>  *<td>{@link SqlTypeName#CHAR}</td>  *<td>Character constant, for example<code>'Hello, world!'</code>,<code>  * ''</code>,<code>_N'Bonjour'</code>,<code>_ISO-8859-1'It''s superman!'  * COLLATE SHIFT_JIS$ja_JP$2</code>. These are always CHAR, never VARCHAR.</td>  *<td>{@link NlsString}</td>  *</tr>  *<tr>  *<td>{@link SqlTypeName#BINARY}</td>  *<td>Binary constant, for example<code>X'7F34'</code>. (The number of hexits  * must be even; see above.) These constants are always BINARY, never  * VARBINARY.</td>  *<td>{@link ByteBuffer}</td>  *</tr>  *<tr>  *<td>{@link SqlTypeName#SYMBOL}</td>  *<td>A symbol is a special type used to make parsing easier; it is not part of  * the SQL standard, and is not exposed to end-users. It is used to hold a flag,  * such as the LEADING flag in a call to the function<code>  * TRIM([LEADING|TRAILING|BOTH] chars FROM string)</code>.</td>  *<td>An enum class</td>  *</tr>  *</table>  */
 end_comment
 
 begin_class
@@ -863,9 +863,7 @@ case|:
 assert|assert
 name|value
 operator|instanceof
-name|SqlLiteral
-operator|.
-name|SqlSymbol
+name|Enum
 assert|;
 name|pw
 operator|.
@@ -1570,9 +1568,6 @@ case|case
 name|DECIMAL
 case|:
 return|return
-operator|new
-name|Long
-argument_list|(
 operator|(
 operator|(
 name|BigDecimal
@@ -1585,7 +1580,6 @@ argument_list|()
 operator|.
 name|longValue
 argument_list|()
-argument_list|)
 return|;
 case|case
 name|DATE
@@ -1637,9 +1631,6 @@ case|case
 name|TIMESTAMP
 case|:
 return|return
-operator|new
-name|Long
-argument_list|(
 operator|(
 operator|(
 name|Calendar
@@ -1649,7 +1640,6 @@ operator|)
 operator|.
 name|getTimeInMillis
 argument_list|()
-argument_list|)
 return|;
 default|default:
 return|return
@@ -1697,7 +1687,6 @@ parameter_list|)
 block|{
 return|return
 operator|(
-operator|(
 name|Boolean
 operator|)
 operator|(
@@ -1708,10 +1697,6 @@ name|node
 operator|)
 operator|.
 name|value
-operator|)
-operator|.
-name|booleanValue
-argument_list|()
 return|;
 block|}
 specifier|public
@@ -2052,16 +2037,9 @@ name|RexLiteral
 name|clone
 parameter_list|()
 block|{
+comment|// All fields are immutable, so there's no point in creating a copy.
 return|return
-operator|new
-name|RexLiteral
-argument_list|(
-name|value
-argument_list|,
-name|type
-argument_list|,
-name|typeName
-argument_list|)
+name|this
 return|;
 block|}
 specifier|private

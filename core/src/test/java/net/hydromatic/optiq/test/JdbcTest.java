@@ -1310,7 +1310,7 @@ name|remove
 argument_list|()
 expr_stmt|;
 block|}
-comment|/** Tests {@link java.sql.Statement#closeOnCompletion()}. */
+comment|/** Tests {@link java.sql.Statement}.{@code closeOnCompletion()}. */
 annotation|@
 name|Test
 specifier|public

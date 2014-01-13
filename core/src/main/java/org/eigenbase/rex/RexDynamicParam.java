@@ -88,14 +88,9 @@ name|RexDynamicParam
 name|clone
 parameter_list|()
 block|{
+comment|// All fields are immutable, so there's no point in creating a copy.
 return|return
-operator|new
-name|RexDynamicParam
-argument_list|(
-name|type
-argument_list|,
-name|index
-argument_list|)
+name|this
 return|;
 block|}
 specifier|public

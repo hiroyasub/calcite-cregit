@@ -2627,7 +2627,7 @@ name|type
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates a literal representing a flag.    *    * @param flag Flag value; must be either a {@link    *             org.eigenbase.util14.Enum14.Value} or a {@link Enum}, and hence a {@link    *             Comparable}.    */
+comment|/**    * Creates a literal representing a flag.    *    * @param flag Flag value    */
 specifier|public
 name|RexLiteral
 name|makeFlag

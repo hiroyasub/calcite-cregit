@@ -69,6 +69,7 @@ name|RelDataType
 name|getType
 parameter_list|()
 function_decl|;
+comment|/** Returns a copy of this expression.    *    *<p>Expressions are immutable, so this method serves no purpose.</p>    *    * @deprecated Will be removed before 0.4.19.    * @see org.eigenbase.util.Bug#upgrade(String)    */
 specifier|public
 specifier|abstract
 name|RexNode

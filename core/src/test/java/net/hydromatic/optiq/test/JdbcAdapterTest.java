@@ -26,7 +26,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Tests for the {@link net.hydromatic.optiq.impl.jdbc} package.  */
+comment|/**  * Tests for the {@code net.hydromatic.optiq.impl.jdbc} package.  */
 end_comment
 
 begin_class

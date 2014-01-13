@@ -2327,9 +2327,6 @@ name|get
 argument_list|(
 literal|0
 argument_list|)
-operator|.
-name|clone
-argument_list|()
 decl_stmt|;
 name|RelDataType
 name|fromType
@@ -2348,7 +2345,6 @@ name|getType
 argument_list|()
 decl_stmt|;
 assert|assert
-operator|(
 name|SqlTypeUtil
 operator|.
 name|isDecimal
@@ -2362,7 +2358,6 @@ name|isDecimal
 argument_list|(
 name|toType
 argument_list|)
-operator|)
 assert|;
 if|if
 condition|(
@@ -4780,9 +4775,6 @@ condition|)
 block|{
 return|return
 name|innerValue
-operator|.
-name|clone
-argument_list|()
 return|;
 block|}
 return|return

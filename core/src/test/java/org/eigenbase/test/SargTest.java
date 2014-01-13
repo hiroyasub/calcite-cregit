@@ -120,7 +120,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Tests for the {@link org.eigenbase.sarg} class library.  *  *<p>NOTE: This class lives in org.eigenbase.test rather than  * org.eigenbase.sarg by design: we want to make sure we're only testing via the  * public interface.  */
+comment|/**  * Tests for the {@code org.eigenbase.sarg} class library.  *  *<p>NOTE: This class lives in org.eigenbase.test rather than  * org.eigenbase.sarg by design: we want to make sure we're only testing via the  * public interface.  */
 end_comment
 
 begin_class

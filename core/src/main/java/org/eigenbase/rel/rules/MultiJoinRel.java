@@ -363,9 +363,6 @@ argument_list|,
 name|inputs
 argument_list|,
 name|joinFilter
-operator|.
-name|clone
-argument_list|()
 argument_list|,
 name|rowType
 argument_list|,

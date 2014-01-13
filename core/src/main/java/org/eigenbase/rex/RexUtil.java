@@ -282,7 +282,7 @@ return|return
 literal|0.1
 return|;
 block|}
-comment|/**    * Returns a copy of an array of row-expressions.    */
+comment|/**    * Returns a copy of an array of row-expressions.    *    * @deprecated Will be removed before optiq-0.4.19.    */
 specifier|public
 specifier|static
 name|RexNode
