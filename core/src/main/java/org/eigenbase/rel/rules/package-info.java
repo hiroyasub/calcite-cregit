@@ -16,7 +16,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * Defines relational expressions.<p>&nbsp;</p>  *  *<h2>Related packages and classes</h2>  *<ul>  *<li>Package<code><a href="../sql/package-summary.html">org.eigenbase.sql</a></code>  *        is an object model for SQL expressions</li>  *<li>Package<code><a href="../sql/package-summary.html">org.eigenbase.rex</a></code>  *        is an object model for relational row expressions</li>  *<li>Package<code><a href="../relopt/package-summary.html">org.eigenbase.relopt</a></code>  *        provides an  *        optimizer interface.</li>  *</ul> */
+comment|/**  * Defines relational expressions.<p>&nbsp;</p>  *  *<h2>Related packages and classes</h2>  *<ul>  *<li>Package<code><a href="../sql/package-summary.html">  *        org.eigenbase.sql</a></code>  *        is an object model for SQL expressions</li>  *<li>Package<code><a href="../sql/package-summary.html">           org.eigenbase.rex</a></code>  *        is an object model for relational row expressions</li>  *<li>Package<code><a href="../relopt/package-summary.html">           org.eigenbase.relopt</a></code>  *        provides an optimizer interface.</li>  *</ul> */
 end_comment
 
 begin_comment
