@@ -935,6 +935,25 @@ literal|""
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testBoolean
+parameter_list|()
+throws|throws
+name|SQLException
+block|{
+name|checkSql
+argument_list|(
+literal|"smart"
+argument_list|,
+literal|"select empno, slacker from emps where slacker"
+argument_list|,
+literal|"EMPNO=100; SLACKER=true\n"
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 end_class
 
