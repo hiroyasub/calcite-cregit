@@ -10183,6 +10183,125 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUnicode
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+name|OptiqAssert
+operator|.
+name|AssertThat
+name|with
+init|=
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|FOODMART_CLONE
+argument_list|)
+decl_stmt|;
+comment|// various ways to create a unicode string literal
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"values _UTF16'è±å½'"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"EXPR$0=è±å½\n"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"values U&'\\82F1\\56FD'"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"EXPR$0=è±å½\n"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"values u&'\\82f1\\56fd'"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"EXPR$0=è±å½\n"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"values 'è±å½'"
+argument_list|)
+operator|.
+name|throws_
+argument_list|(
+literal|"Failed to encode 'è±å½' in character set 'ISO-8859-1'"
+argument_list|)
+expr_stmt|;
+comment|// comparing a unicode string literal with a regular string literal
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select * from \"employee\" where \"full_name\" = 'è±å½'"
+argument_list|)
+operator|.
+name|throws_
+argument_list|(
+literal|"Failed to encode 'è±å½' in character set 'ISO-8859-1'"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select * from \"employee\" where \"full_name\" = _UTF16'è±å½'"
+argument_list|)
+operator|.
+name|throws_
+argument_list|(
+literal|"Cannot apply = to the two different charsets ISO-8859-1 and UTF-16LE"
+argument_list|)
+expr_stmt|;
+comment|// The CONVERT function (what SQL:2011 calls "character transliteration") is
+comment|// not implemented yet. See https://github.com/julianhyde/optiq/issues/111.
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select * from \"employee\"\n"
+operator|+
+literal|"where convert(\"full_name\" using UTF16) = _UTF16'è±å½'"
+argument_list|)
+operator|.
+name|throws_
+argument_list|(
+literal|"Column 'UTF16' not found in any table"
+argument_list|)
+expr_stmt|;
+block|}
 specifier|public
 specifier|static
 class|class

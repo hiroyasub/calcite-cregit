@@ -2478,6 +2478,7 @@ argument_list|)
 argument_list|)
 throw|;
 block|}
+specifier|final
 name|String
 name|u
 init|=
@@ -2494,16 +2495,17 @@ operator|+
 literal|5
 argument_list|)
 decl_stmt|;
-name|short
+specifier|final
+name|int
 name|v
 decl_stmt|;
 try|try
 block|{
 name|v
 operator|=
-name|Short
+name|Integer
 operator|.
-name|parseShort
+name|parseInt
 argument_list|(
 name|u
 argument_list|,
@@ -2546,7 +2548,11 @@ argument_list|(
 operator|(
 name|char
 operator|)
+operator|(
 name|v
+operator|&
+literal|0xFFFF
+operator|)
 argument_list|)
 expr_stmt|;
 comment|// skip hexits
