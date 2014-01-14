@@ -388,6 +388,22 @@ argument_list|,
 name|SqlTypeFamily
 operator|.
 name|CHARACTER
+argument_list|,
+name|boolean
+operator|.
+name|class
+argument_list|,
+name|SqlTypeFamily
+operator|.
+name|BOOLEAN
+argument_list|,
+name|Boolean
+operator|.
+name|class
+argument_list|,
+name|SqlTypeFamily
+operator|.
+name|BOOLEAN
 argument_list|)
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------

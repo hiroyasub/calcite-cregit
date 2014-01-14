@@ -1616,6 +1616,121 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testJavaBoolean
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|OptiqAssert
+operator|.
+name|AssertThat
+name|with
+init|=
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+literal|"s"
+argument_list|,
+operator|new
+name|CatchallSchema
+argument_list|()
+argument_list|)
+decl_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select count(*) as c from \"s\".\"everyTypes\"\n"
+operator|+
+literal|"where \"primitiveBoolean\""
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"C=1\n"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select count(*) as c from \"s\".\"everyTypes\"\n"
+operator|+
+literal|"where \"wrapperBoolean\""
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"C=0\n"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select count(*) as c from \"s\".\"everyTypes\"\n"
+operator|+
+literal|"where \"wrapperBoolean\" is not true"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"C=2\n"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select count(*) as c from \"s\".\"everyTypes\"\n"
+operator|+
+literal|"where \"primitiveInt\"> 0"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"C=1\n"
+argument_list|)
+expr_stmt|;
+comment|// count(nullif(b, false)) counts how many times b is true
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select count(\"primitiveBoolean\") as p,\n"
+operator|+
+literal|"  count(\"wrapperBoolean\") as w,\n"
+operator|+
+literal|"  count(nullif(\"primitiveShort\"> 0, false)) as sp,\n"
+operator|+
+literal|"  count(nullif(\"wrapperShort\"> 0, false)) as sw,\n"
+operator|+
+literal|"  count(nullif(\"primitiveInt\"> 0, false)) as ip,\n"
+operator|+
+literal|"  count(nullif(\"wrapperInteger\"> 0, false)) as iw,\n"
+operator|+
+literal|"  count(nullif(\"primitiveLong\"> 0, false)) as lp,\n"
+operator|+
+literal|"  count(nullif(\"wrapperLong\"> 0, false)) as lw\n"
+operator|+
+literal|"from \"s\".\"everyTypes\""
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"P=2; W=1; SP=1; SW=0; IP=1; IW=0; LP=1; LW=0\n"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testDivide
 parameter_list|()
 throws|throws
