@@ -2032,16 +2032,6 @@ literal|null
 operator|)
 return|;
 block|}
-specifier|public
-name|RexLiteral
-name|clone
-parameter_list|()
-block|{
-comment|// All fields are immutable, so there's no point in creating a copy.
-return|return
-name|this
-return|;
-block|}
 specifier|private
 specifier|static
 name|boolean

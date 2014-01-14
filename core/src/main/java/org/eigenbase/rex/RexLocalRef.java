@@ -72,6 +72,11 @@ name|RexSlot
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
 comment|// array of common names, to reduce memory allocations
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"MismatchedQueryAndUpdateOfCollection"
+argument_list|)
 specifier|private
 specifier|static
 specifier|final
@@ -126,17 +131,6 @@ return|return
 name|SqlKind
 operator|.
 name|LOCAL_REF
-return|;
-block|}
-specifier|public
-name|RexLocalRef
-name|clone
-parameter_list|()
-block|{
-comment|// Since refs are immutable and identity is based on value,
-comment|// there's no point returning a copy.
-return|return
-name|this
 return|;
 block|}
 specifier|public

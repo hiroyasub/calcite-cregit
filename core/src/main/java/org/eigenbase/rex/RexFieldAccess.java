@@ -37,20 +37,8 @@ name|SqlKind
 import|;
 end_import
 
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
-name|util
-operator|.
-name|Bug
-import|;
-end_import
-
 begin_comment
-comment|/**  * Access to a field of a row-expression.  *  *<p>You might expect to use a<code>RexFieldAccess</code> to access columns of  * relational tables, for example, the expression<code>emp.empno</code> in the  * query  *  *<blockquote>  *<pre>SELECT emp.empno FROM emp</pre>  *</blockquote>  *  * but there is a specialized expression {@link RexInputRef} for this purpose.  * So in practice,<code>RexFieldAccess</code> is usually used to access fields  * of correlating variabless, for example the expression<code>emp.deptno</code>  * in  *  *<blockquote>  *<pre>SELECT ename  * FROM dept  * WHERE EXISTS (  *     SELECT NULL  *     FROM emp  *     WHERE emp.deptno = dept.deptno  *     AND gender = 'F')</pre>  *</blockquote>  */
+comment|/**  * Access to a field of a row-expression.  *  *<p>You might expect to use a<code>RexFieldAccess</code> to access columns of  * relational tables, for example, the expression<code>emp.empno</code> in the  * query  *  *<blockquote>  *<pre>SELECT emp.empno FROM emp</pre>  *</blockquote>  *  * but there is a specialized expression {@link RexInputRef} for this purpose.  * So in practice,<code>RexFieldAccess</code> is usually used to access fields  * of correlating variables, for example the expression<code>emp.deptno</code>  * in  *  *<blockquote>  *<pre>SELECT ename  * FROM dept  * WHERE EXISTS (  *     SELECT NULL  *     FROM emp  *     WHERE emp.deptno = dept.deptno  *     AND gender = 'F')</pre>  *</blockquote>  */
 end_comment
 
 begin_class
@@ -62,6 +50,7 @@ name|RexNode
 block|{
 comment|//~ Instance fields --------------------------------------------------------
 specifier|private
+specifier|final
 name|RexNode
 name|expr
 decl_stmt|;
@@ -92,7 +81,17 @@ name|field
 operator|=
 name|field
 expr_stmt|;
-name|computeDigest
+name|this
+operator|.
+name|digest
+operator|=
+name|expr
+operator|+
+literal|"."
+operator|+
+name|field
+operator|.
+name|getName
 argument_list|()
 expr_stmt|;
 block|}
@@ -116,21 +115,6 @@ name|field
 operator|.
 name|getType
 argument_list|()
-return|;
-block|}
-specifier|public
-name|RexFieldAccess
-name|clone
-parameter_list|()
-block|{
-return|return
-operator|new
-name|RexFieldAccess
-argument_list|(
-name|expr
-argument_list|,
-name|field
-argument_list|)
 return|;
 block|}
 specifier|public
@@ -177,29 +161,6 @@ return|return
 name|expr
 return|;
 block|}
-comment|/**    * Sets the reference expression.    *    * @param expr Reference expression    *    * @deprecated Not used; will be removed before optiq-0.4.19    */
-specifier|public
-name|void
-name|setReferenceExpr
-parameter_list|(
-name|RexNode
-name|expr
-parameter_list|)
-block|{
-name|Bug
-operator|.
-name|upgrade
-argument_list|(
-literal|"remove before 0.4.19"
-argument_list|)
-expr_stmt|;
-name|this
-operator|.
-name|expr
-operator|=
-name|expr
-expr_stmt|;
-block|}
 comment|/**    * Returns the name of the field.    */
 specifier|public
 name|String
@@ -219,30 +180,7 @@ name|toString
 parameter_list|()
 block|{
 return|return
-name|computeDigest
-argument_list|()
-return|;
-block|}
-specifier|private
-name|String
-name|computeDigest
-parameter_list|()
-block|{
-return|return
-operator|(
-name|this
-operator|.
 name|digest
-operator|=
-name|expr
-operator|+
-literal|"."
-operator|+
-name|field
-operator|.
-name|getName
-argument_list|()
-operator|)
 return|;
 block|}
 block|}

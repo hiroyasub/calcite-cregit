@@ -84,16 +84,6 @@ expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
 specifier|public
-name|RexDynamicParam
-name|clone
-parameter_list|()
-block|{
-comment|// All fields are immutable, so there's no point in creating a copy.
-return|return
-name|this
-return|;
-block|}
-specifier|public
 name|SqlKind
 name|getKind
 parameter_list|()

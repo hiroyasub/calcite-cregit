@@ -68,16 +68,6 @@ expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
 specifier|public
-name|RexCorrelVariable
-name|clone
-parameter_list|()
-block|{
-comment|// All fields are immutable, so there's no point in creating a copy.
-return|return
-name|this
-return|;
-block|}
-specifier|public
 parameter_list|<
 name|R
 parameter_list|>

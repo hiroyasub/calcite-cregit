@@ -72,6 +72,11 @@ name|RexSlot
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
 comment|// list of common names, to reduce memory allocations
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"MismatchedQueryAndUpdateOfCollection"
+argument_list|)
 specifier|private
 specifier|static
 specifier|final
@@ -90,7 +95,7 @@ literal|30
 argument_list|)
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates an input variable.    *    * @param index Index of the field in the underlying rowtype    * @param type  Type of the column    */
+comment|/**    * Creates an input variable.    *    * @param index Index of the field in the underlying row-type    * @param type  Type of the column    */
 specifier|public
 name|RexInputRef
 parameter_list|(
@@ -243,16 +248,6 @@ return|return
 name|SqlKind
 operator|.
 name|INPUT_REF
-return|;
-block|}
-specifier|public
-name|RexInputRef
-name|clone
-parameter_list|()
-block|{
-comment|// All fields are immutable, so there's no point in creating a copy.
-return|return
-name|this
 return|;
 block|}
 specifier|public

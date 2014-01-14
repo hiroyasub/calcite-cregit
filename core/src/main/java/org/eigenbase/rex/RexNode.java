@@ -48,7 +48,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Row expression.  *  *<p>Every row-expression has a type. (Compare with {@link  * org.eigenbase.sql.SqlNode}, which is created before validation, and therefore  * types may not be available.)</p>  *  *<p>Some common row-expressions are: {@link RexLiteral} (constant value),  * {@link RexVariable} (variable), {@link RexCall} (call to operator with  * operands). Expressions are generally created using a {@link RexBuilder}  * factory.</p>  */
+comment|/**  * Row expression.  *  *<p>Every row-expression has a type. (Compare with {@link  * org.eigenbase.sql.SqlNode}, which is created before validation, and therefore  * types may not be available.)</p>  *  *<p>Some common row-expressions are: {@link RexLiteral} (constant value),  * {@link RexVariable} (variable), {@link RexCall} (call to operator with  * operands). Expressions are generally created using a {@link RexBuilder}  * factory.</p>  *  *<p>All sub-classes of RexNode are immutable.</p>  */
 end_comment
 
 begin_class
@@ -58,6 +58,7 @@ class|class
 name|RexNode
 block|{
 comment|//~ Instance fields --------------------------------------------------------
+comment|// Effectively final. Set in each sub-class constructor, and never re-set.
 specifier|protected
 name|String
 name|digest
@@ -67,13 +68,6 @@ specifier|public
 specifier|abstract
 name|RelDataType
 name|getType
-parameter_list|()
-function_decl|;
-comment|/** Returns a copy of this expression.    *    *<p>Expressions are immutable, so this method serves no purpose.</p>    *    * @deprecated Will be removed before 0.4.19.    * @see org.eigenbase.util.Bug#upgrade(String)    */
-specifier|public
-specifier|abstract
-name|RexNode
-name|clone
 parameter_list|()
 function_decl|;
 comment|/**    * Returns whether this expression always returns true. (Such as if this    * expression is equal to the literal<code>TRUE</code>.)    */
@@ -132,7 +126,7 @@ name|kinds
 argument_list|)
 return|;
 block|}
-comment|/**    * Returns the kind of node this is.    *    * @return A {@link org.eigenbase.sql.SqlKind} value, never null    */
+comment|/**    * Returns the kind of node this is.    *    * @return Node kind, never null    */
 specifier|public
 name|SqlKind
 name|getKind

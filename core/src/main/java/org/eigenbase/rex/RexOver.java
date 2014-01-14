@@ -194,16 +194,6 @@ literal|")"
 return|;
 block|}
 specifier|public
-name|RexOver
-name|clone
-parameter_list|()
-block|{
-return|return
-name|this
-return|;
-comment|// immutable
-block|}
-specifier|public
 parameter_list|<
 name|R
 parameter_list|>
