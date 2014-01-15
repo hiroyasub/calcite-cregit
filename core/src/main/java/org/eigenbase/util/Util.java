@@ -7046,6 +7046,19 @@ specifier|final
 name|Object
 name|node
 decl_stmt|;
+comment|/** Singleton instance. Can be used if you don't care about node. */
+specifier|public
+specifier|static
+specifier|final
+name|FoundOne
+name|NULL
+init|=
+operator|new
+name|FoundOne
+argument_list|(
+literal|null
+argument_list|)
+decl_stmt|;
 specifier|public
 name|FoundOne
 parameter_list|(
