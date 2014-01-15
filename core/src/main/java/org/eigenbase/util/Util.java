@@ -6879,6 +6879,31 @@ argument_list|>
 name|list
 parameter_list|)
 block|{
+return|return
+name|firstDuplicate
+argument_list|(
+name|list
+argument_list|)
+operator|<
+literal|0
+return|;
+block|}
+comment|/**    * Returns the ordinal of the first element in the list which is equal to a    * previous element in the list.    *    *<p>For example,<code>firstDuplicate(Arrays.asList("a", "b", "c", "b",    * "a"))</code> returns 3, the ordinal of the 2nd "b".    *    * @param list List    * @return Ordinal of first duplicate, or -1 if not found    */
+specifier|public
+specifier|static
+parameter_list|<
+name|E
+parameter_list|>
+name|int
+name|firstDuplicate
+parameter_list|(
+name|List
+argument_list|<
+name|E
+argument_list|>
+name|list
+parameter_list|)
+block|{
 specifier|final
 name|int
 name|size
@@ -6897,7 +6922,8 @@ condition|)
 block|{
 comment|// Lists of size 0 and 1 are always distinct.
 return|return
-literal|true
+operator|-
+literal|1
 return|;
 block|}
 if|if
@@ -6972,13 +6998,14 @@ argument_list|)
 condition|)
 block|{
 return|return
-literal|false
+name|i
 return|;
 block|}
 block|}
 block|}
 return|return
-literal|true
+operator|-
+literal|1
 return|;
 block|}
 specifier|final
@@ -7024,12 +7051,16 @@ literal|null
 condition|)
 block|{
 return|return
-literal|false
+name|set
+operator|.
+name|size
+argument_list|()
 return|;
 block|}
 block|}
 return|return
-literal|true
+operator|-
+literal|1
 return|;
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------
