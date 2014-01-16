@@ -95,6 +95,34 @@ name|*
 import|;
 end_import
 
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|HashMultimap
+import|;
+end_import
+
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|Multimap
+import|;
+end_import
+
 begin_comment
 comment|/**  * Priority queue of relexps whose rules have not been called, and rule-matches  * which have not yet been acted upon.  */
 end_comment
@@ -856,7 +884,7 @@ name|values
 argument_list|()
 control|)
 block|{
-name|MultiMap
+name|Multimap
 argument_list|<
 name|RelSubset
 argument_list|,
@@ -885,7 +913,7 @@ name|match
 range|:
 name|relMatchMap
 operator|.
-name|getMulti
+name|get
 argument_list|(
 name|subset
 argument_list|)
@@ -1144,7 +1172,7 @@ name|matchList
 operator|.
 name|matchMap
 operator|.
-name|putMulti
+name|put
 argument_list|(
 name|planner
 operator|.
@@ -1692,7 +1720,7 @@ name|phaseMatchList
 operator|.
 name|matchMap
 operator|.
-name|removeMulti
+name|remove
 argument_list|(
 name|planner
 operator|.
@@ -2417,13 +2445,20 @@ specifier|final
 name|VolcanoPlannerPhase
 name|phase
 decl_stmt|;
-comment|/**      * Current list of VolcanoRuleMatches for this phase. New rule-matches      * are appended to the end of this list. When removing a rule-match, the      * list is sorted and the highest importance rule-match removed. It is      * important for performance that this list remain mostly sorted.      */
+comment|/**      * Current list of VolcanoRuleMatches for this phase. New rule-matches      * are appended to the end of this list. When removing a rule-match, the      * list is sorted and the highest importance rule-match removed. It is      * important for performance that this list remain mostly sorted.      *      *<p>Use a hunkList because {@link java.util.ArrayList} does not implement      * remove(0) efficiently.</p>      */
 specifier|final
 name|List
 argument_list|<
 name|VolcanoRuleMatch
 argument_list|>
 name|list
+init|=
+operator|new
+name|ChunkList
+argument_list|<
+name|VolcanoRuleMatch
+argument_list|>
+argument_list|()
 decl_stmt|;
 comment|/**      * A set of rule-match names contained in {@link #list}. Allows fast      * detection of duplicate rule-matches.      */
 specifier|final
@@ -2432,16 +2467,28 @@ argument_list|<
 name|String
 argument_list|>
 name|names
+init|=
+operator|new
+name|HashSet
+argument_list|<
+name|String
+argument_list|>
+argument_list|()
 decl_stmt|;
-comment|/**      * Multi-map of RelSubset to VolcanoRuleMatches. Used to {@link      * VolcanoRuleMatch#clearCachedImportance() clear} the rule-match's      * cached importance related RelSubset importances are modified (e.g.,      * due to invocation of {@link RuleQueue#boostImportance(Collection,      * double)}).      */
+comment|/**      * Multi-map of RelSubset to VolcanoRuleMatches. Used to      * {@link VolcanoRuleMatch#clearCachedImportance() clear} the rule-match's      * cached importance when the importance of a related RelSubset is modified      * (e.g., due to invocation of      * {@link RuleQueue#boostImportance(Collection, double)}).      */
 specifier|final
-name|MultiMap
+name|Multimap
 argument_list|<
 name|RelSubset
 argument_list|,
 name|VolcanoRuleMatch
 argument_list|>
 name|matchMap
+init|=
+name|HashMultimap
+operator|.
+name|create
+argument_list|()
 decl_stmt|;
 name|PhaseMatchList
 parameter_list|(
@@ -2454,43 +2501,6 @@ operator|.
 name|phase
 operator|=
 name|phase
-expr_stmt|;
-comment|// Use a double-linked list because an array-list does not
-comment|// implement remove(0) efficiently.
-name|this
-operator|.
-name|list
-operator|=
-operator|new
-name|ChunkList
-argument_list|<
-name|VolcanoRuleMatch
-argument_list|>
-argument_list|()
-expr_stmt|;
-name|this
-operator|.
-name|names
-operator|=
-operator|new
-name|HashSet
-argument_list|<
-name|String
-argument_list|>
-argument_list|()
-expr_stmt|;
-name|this
-operator|.
-name|matchMap
-operator|=
-operator|new
-name|MultiMap
-argument_list|<
-name|RelSubset
-argument_list|,
-name|VolcanoRuleMatch
-argument_list|>
-argument_list|()
 expr_stmt|;
 block|}
 block|}
