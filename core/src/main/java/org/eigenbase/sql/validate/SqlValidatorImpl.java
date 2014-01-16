@@ -6068,8 +6068,10 @@ parameter_list|,
 name|SqlFunction
 name|resolvedConstructor
 parameter_list|,
+name|List
+argument_list|<
 name|RelDataType
-index|[]
+argument_list|>
 name|argTypes
 parameter_list|)
 block|{
@@ -6149,6 +6151,7 @@ condition|)
 block|{
 comment|// This is not a default constructor invocation, and
 comment|// no user-defined constructor could be found
+throw|throw
 name|handleUnresolvedFunction
 argument_list|(
 name|call
@@ -6157,7 +6160,7 @@ name|unresolvedConstructor
 argument_list|,
 name|argTypes
 argument_list|)
-expr_stmt|;
+throw|;
 block|}
 block|}
 else|else
@@ -6268,7 +6271,7 @@ name|type
 return|;
 block|}
 specifier|public
-name|void
+name|EigenbaseException
 name|handleUnresolvedFunction
 parameter_list|(
 name|SqlCall
@@ -6277,8 +6280,10 @@ parameter_list|,
 name|SqlFunction
 name|unresolvedFunction
 parameter_list|,
+name|List
+argument_list|<
 name|RelDataType
-index|[]
+argument_list|>
 name|argTypes
 parameter_list|)
 block|{
@@ -15758,6 +15763,7 @@ block|{
 comment|// For example, "LOCALTIME()" is illegal. (It should be
 comment|// "LOCALTIME", which would have been handled as a
 comment|// SqlIdentifier.)
+throw|throw
 name|handleUnresolvedFunction
 argument_list|(
 name|call
@@ -15767,13 +15773,15 @@ name|SqlFunction
 operator|)
 name|operator
 argument_list|,
-operator|new
+name|ImmutableList
+operator|.
+expr|<
 name|RelDataType
-index|[
-literal|0
-index|]
+operator|>
+name|of
+argument_list|()
 argument_list|)
-expr_stmt|;
+throw|;
 block|}
 name|SqlValidatorScope
 name|operandScope
@@ -16374,8 +16382,10 @@ parameter_list|(
 name|SqlFunction
 name|function
 parameter_list|,
+name|List
+argument_list|<
 name|RelDataType
-index|[]
+argument_list|>
 name|argTypes
 parameter_list|,
 name|SqlNode

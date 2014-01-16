@@ -255,8 +255,10 @@ parameter_list|(
 name|SqlFunction
 name|function
 parameter_list|,
+name|List
+argument_list|<
 name|RelDataType
-index|[]
+argument_list|>
 name|argTypes
 parameter_list|,
 name|SqlNode
@@ -521,13 +523,15 @@ parameter_list|,
 name|SqlFunction
 name|resolvedConstructor
 parameter_list|,
+name|List
+argument_list|<
 name|RelDataType
-index|[]
+argument_list|>
 name|argTypes
 parameter_list|)
 function_decl|;
-comment|/**    * Handles a call to a function which cannot be resolved, throwing an    * appropriately descriptive error.    *    * @param call               Call    * @param unresolvedFunction Overloaded function which is the target of the    *                           call    * @param argTypes           Types of arguments    */
-name|void
+comment|/**    * Handles a call to a function which cannot be resolved. Returns a an    * appropriately descriptive error, which caller must throw.    *    * @param call               Call    * @param unresolvedFunction Overloaded function which is the target of the    *                           call    * @param argTypes           Types of arguments    */
+name|EigenbaseException
 name|handleUnresolvedFunction
 parameter_list|(
 name|SqlCall
@@ -536,8 +540,10 @@ parameter_list|,
 name|SqlFunction
 name|unresolvedFunction
 parameter_list|,
+name|List
+argument_list|<
 name|RelDataType
-index|[]
+argument_list|>
 name|argTypes
 parameter_list|)
 function_decl|;

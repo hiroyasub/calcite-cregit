@@ -15,6 +15,16 @@ end_package
 
 begin_import
 import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|eigenbase
@@ -91,6 +101,20 @@ name|Util
 import|;
 end_import
 
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|ImmutableList
+import|;
+end_import
+
 begin_comment
 comment|/**  * A<code>SqlFunction</code> is a type of operator which has conventional  * function-call syntax.  */
 end_comment
@@ -115,8 +139,10 @@ name|sqlIdentifier
 decl_stmt|;
 specifier|private
 specifier|final
+name|List
+argument_list|<
 name|RelDataType
-index|[]
+argument_list|>
 name|paramTypes
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
@@ -268,6 +294,17 @@ operator|.
 name|paramTypes
 operator|=
 name|paramTypes
+operator|==
+literal|null
+condition|?
+literal|null
+else|:
+name|ImmutableList
+operator|.
+name|copyOf
+argument_list|(
+name|paramTypes
+argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
@@ -324,8 +361,10 @@ return|;
 block|}
 comment|/**    * @return array of parameter types, or null for builtin function    */
 specifier|public
+name|List
+argument_list|<
 name|RelDataType
-index|[]
+argument_list|>
 name|getParamTypes
 parameter_list|()
 block|{
@@ -547,18 +586,6 @@ name|call
 operator|.
 name|operands
 decl_stmt|;
-name|RelDataType
-index|[]
-name|argTypes
-init|=
-operator|new
-name|RelDataType
-index|[
-name|operands
-operator|.
-name|length
-index|]
-decl_stmt|;
 comment|// Scope for operands. Usually the same as 'scope'.
 specifier|final
 name|SqlValidatorScope
@@ -579,6 +606,20 @@ argument_list|()
 expr_stmt|;
 try|try
 block|{
+specifier|final
+name|ImmutableList
+operator|.
+name|Builder
+argument_list|<
+name|RelDataType
+argument_list|>
+name|argTypeBuilder
+init|=
+name|ImmutableList
+operator|.
+name|builder
+argument_list|()
+decl_stmt|;
 name|boolean
 name|containsRowArg
 init|=
@@ -586,19 +627,10 @@ literal|false
 decl_stmt|;
 for|for
 control|(
-name|int
-name|i
-init|=
-literal|0
-init|;
-name|i
-operator|<
+name|SqlNode
+name|operand
+range|:
 name|operands
-operator|.
-name|length
-condition|;
-operator|++
-name|i
 control|)
 block|{
 name|RelDataType
@@ -610,10 +642,7 @@ comment|// validating the arguments of the row constructor until we know
 comment|// for sure that the row argument maps to a ColumnList type
 if|if
 condition|(
-name|operands
-index|[
-name|i
-index|]
+name|operand
 operator|.
 name|getKind
 argument_list|()
@@ -659,10 +688,7 @@ name|deriveType
 argument_list|(
 name|operandScope
 argument_list|,
-name|operands
-index|[
-name|i
-index|]
+name|operand
 argument_list|)
 expr_stmt|;
 block|}
@@ -670,22 +696,31 @@ name|validator
 operator|.
 name|setValidatedNodeType
 argument_list|(
-name|operands
-index|[
-name|i
-index|]
+name|operand
 argument_list|,
 name|nodeType
 argument_list|)
 expr_stmt|;
-name|argTypes
-index|[
-name|i
-index|]
-operator|=
+name|argTypeBuilder
+operator|.
+name|add
+argument_list|(
 name|nodeType
+argument_list|)
 expr_stmt|;
 block|}
+specifier|final
+name|List
+argument_list|<
+name|RelDataType
+argument_list|>
+name|argTypes
+init|=
+name|argTypeBuilder
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
 name|SqlFunction
 name|function
 init|=
@@ -844,6 +879,7 @@ operator|==
 literal|null
 condition|)
 block|{
+throw|throw
 name|validator
 operator|.
 name|handleUnresolvedFunction
@@ -854,7 +890,7 @@ name|this
 argument_list|,
 name|argTypes
 argument_list|)
-expr_stmt|;
+throw|;
 block|}
 comment|// REVIEW jvs 25-Mar-2005:  This is, in a sense, expanding
 comment|// identifiers, but we ignore shouldExpandIdentifiers()
