@@ -6470,6 +6470,46 @@ literal|"empid=200; deptno=20; name=Eric; salary=8000.0; commission=500\n"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** "SELECT ... LIMIT 0" is executed differently. A planner rule converts the    * whole query to an empty rel. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testLimitZero
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select * from \"hr\".\"emps\"\n"
+operator|+
+literal|"limit 0"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|""
+argument_list|)
+operator|.
+name|planContains
+argument_list|(
+literal|"return net.hydromatic.linq4j.Linq4j.asEnumerable(new Object[] {})"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Alternative formulation for {@link #testFetchStar()}. */
 annotation|@
 name|Test

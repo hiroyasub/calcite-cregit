@@ -60,7 +60,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  *<code>EmptyRel</code> represents a relational expression with zero rows.  *  *<p>EmptyRel can not be implemented, but serves as a token for rules to match  * so that empty sections of queries can be eliminated.  *  *<p>Rules:  *  *<ul>  *<li>Created by {@code net.sf.farrago.query.FarragoReduceValuesRule}</li>  *<li>Triggers {@link org.eigenbase.rel.rules.RemoveEmptyRule}</li>  *</ul>  *  * @see org.eigenbase.rel.ValuesRel  */
+comment|/**  *<code>EmptyRel</code> represents a relational expression with zero rows.  *  *<p>EmptyRel can not be implemented, but serves as a token for rules to match  * so that empty sections of queries can be eliminated.  *  *<p>Rules:  *  *<ul>  *<li>Created by {@code net.sf.farrago.query.FarragoReduceValuesRule}</li>  *<li>Triggers {@link org.eigenbase.rel.rules.RemoveEmptyRules}</li>  *</ul>  *  * @see org.eigenbase.rel.ValuesRel  */
 end_comment
 
 begin_class
