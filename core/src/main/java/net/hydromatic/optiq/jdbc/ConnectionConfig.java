@@ -15,6 +15,20 @@ name|jdbc
 package|;
 end_package
 
+begin_import
+import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
+name|sql
+operator|.
+name|parser
+operator|.
+name|SqlParser
+import|;
+end_import
+
 begin_comment
 comment|/** Interface for reading connection properties within Optiq code. There is  * a method for every property. At some point there will be similar config  * classes for system and statement properties. */
 end_comment
@@ -38,6 +52,12 @@ parameter_list|()
 function_decl|;
 name|String
 name|schema
+parameter_list|()
+function_decl|;
+name|SqlParser
+operator|.
+name|Quoting
+name|quoting
 parameter_list|()
 function_decl|;
 name|boolean

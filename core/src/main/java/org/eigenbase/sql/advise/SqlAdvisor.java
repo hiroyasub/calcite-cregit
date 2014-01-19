@@ -1296,11 +1296,7 @@ init|=
 operator|new
 name|SqlParser
 argument_list|(
-operator|new
-name|StringReader
-argument_list|(
 literal|""
-argument_list|)
 argument_list|)
 decl_stmt|;
 return|return

@@ -95,6 +95,16 @@ name|org
 operator|.
 name|junit
 operator|.
+name|Ignore
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
 name|Test
 import|;
 end_import
@@ -128,6 +138,17 @@ name|String
 name|ANY
 init|=
 literal|"(?s).*"
+decl_stmt|;
+name|SqlParser
+operator|.
+name|Quoting
+name|quoting
+init|=
+name|SqlParser
+operator|.
+name|Quoting
+operator|.
+name|DOUBLE_QUOTE
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 specifier|public
@@ -185,6 +206,8 @@ operator|new
 name|SqlParser
 argument_list|(
 name|sql
+argument_list|,
+name|quoting
 argument_list|)
 operator|.
 name|parseStmt
@@ -228,6 +251,8 @@ operator|new
 name|SqlParser
 argument_list|(
 name|sql
+argument_list|,
+name|quoting
 argument_list|)
 operator|.
 name|parseExpression
@@ -244,6 +269,8 @@ operator|new
 name|SqlParser
 argument_list|(
 literal|""
+argument_list|,
+name|quoting
 argument_list|)
 operator|.
 name|getParserImpl
@@ -359,53 +386,56 @@ literal|"Lexical error at line 1, column 10\\.  Encountered: \"#\" \\(35\\), aft
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
 specifier|public
 name|void
-name|_testDerivedColumnList
-parameter_list|()
-block|{
-name|check
-argument_list|(
-literal|"select * from emp (empno, gender) where true"
-argument_list|,
-literal|"foo"
-argument_list|)
-expr_stmt|;
-block|}
-specifier|public
-name|void
-name|_testDerivedColumnListInJoin
-parameter_list|()
-block|{
-name|check
-argument_list|(
-literal|"select * from emp as e (empno, gender) join dept (deptno, dname) on emp.deptno = dept.deptno"
-argument_list|,
-literal|"foo"
-argument_list|)
-expr_stmt|;
-block|}
-specifier|public
-name|void
-name|_testDerivedColumnListNoAs
-parameter_list|()
-block|{
-name|check
-argument_list|(
-literal|"select * from emp e (empno, gender) where true"
-argument_list|,
-literal|"foo"
-argument_list|)
-expr_stmt|;
-block|}
-specifier|public
-name|void
-name|_testDerivedColumnListWithAlias
+name|testDerivedColumnList
 parameter_list|()
 block|{
 name|check
 argument_list|(
 literal|"select * from emp as e (empno, gender) where true"
+argument_list|,
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `EMP` AS `E` (`EMPNO`, `GENDER`)\n"
+operator|+
+literal|"WHERE TRUE"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDerivedColumnListInJoin
+parameter_list|()
+block|{
+name|check
+argument_list|(
+literal|"select * from emp as e (empno, gender) join dept as d (deptno, dname) on emp.deptno = dept.deptno"
+argument_list|,
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `EMP` AS `E` (`EMPNO`, `GENDER`)\n"
+operator|+
+literal|"INNER JOIN `DEPT` AS `D` (`DEPTNO`, `DNAME`) ON (`EMP`.`DEPTNO` = `DEPT`.`DEPTNO`)"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Ignore
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDerivedColumnListNoAs
+parameter_list|()
+block|{
+name|check
+argument_list|(
+literal|"select * from emp e (empno, gender) where true"
 argument_list|,
 literal|"foo"
 argument_list|)
@@ -1895,11 +1925,213 @@ argument_list|,
 literal|"`a  \" b!c`"
 argument_list|)
 expr_stmt|;
+name|checkExpFails
+argument_list|(
+literal|"     ^`^a  \" b!c`"
+argument_list|,
+literal|"(?s).*Encountered.*"
+argument_list|)
+expr_stmt|;
 name|checkExp
 argument_list|(
 literal|"\"x`y`z\""
 argument_list|,
 literal|"`x``y``z`"
+argument_list|)
+expr_stmt|;
+name|checkExpFails
+argument_list|(
+literal|"^`^x`y`z`"
+argument_list|,
+literal|"(?s).*Encountered.*"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"myMap[field] + myArray[1 + 2]"
+argument_list|,
+literal|"(`MYMAP`[`FIELD`] + `MYARRAY`[(1 + 2)])"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testBackTickIdentifier
+parameter_list|()
+block|{
+name|quoting
+operator|=
+name|SqlParser
+operator|.
+name|Quoting
+operator|.
+name|BACK_TICK
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"ab"
+argument_list|,
+literal|"`AB`"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"     `a  \" b!c`"
+argument_list|,
+literal|"`a  \" b!c`"
+argument_list|)
+expr_stmt|;
+name|checkExpFails
+argument_list|(
+literal|"     ^\"^a  \"\" b!c\""
+argument_list|,
+literal|"(?s).*Encountered.*"
+argument_list|)
+expr_stmt|;
+name|checkExpFails
+argument_list|(
+literal|"^\"^x`y`z\""
+argument_list|,
+literal|"(?s).*Encountered.*"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"`x``y``z`"
+argument_list|,
+literal|"`x``y``z`"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"myMap[field] + myArray[1 + 2]"
+argument_list|,
+literal|"(`MYMAP`[`FIELD`] + `MYARRAY`[(1 + 2)])"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testBracketIdentifier
+parameter_list|()
+block|{
+name|quoting
+operator|=
+name|SqlParser
+operator|.
+name|Quoting
+operator|.
+name|BRACKET
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"ab"
+argument_list|,
+literal|"`AB`"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"     [a  \" b!c]"
+argument_list|,
+literal|"`a  \" b!c`"
+argument_list|)
+expr_stmt|;
+name|checkExpFails
+argument_list|(
+literal|"     ^`^a  \" b!c`"
+argument_list|,
+literal|"(?s).*Encountered.*"
+argument_list|)
+expr_stmt|;
+name|checkExpFails
+argument_list|(
+literal|"     ^\"^a  \"\" b!c\""
+argument_list|,
+literal|"(?s).*Encountered.*"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"[x`y`z]"
+argument_list|,
+literal|"`x``y``z`"
+argument_list|)
+expr_stmt|;
+name|checkExpFails
+argument_list|(
+literal|"^\"^x`y`z\""
+argument_list|,
+literal|"(?s).*Encountered.*"
+argument_list|)
+expr_stmt|;
+name|checkExpFails
+argument_list|(
+literal|"^`^x``y``z`"
+argument_list|,
+literal|"(?s).*Encountered.*"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"[anything [but brackets]] are].[ok]"
+argument_list|,
+literal|"`anything [but brackets]] are`.`ok`"
+argument_list|)
+expr_stmt|;
+comment|// What would be a call to the 'item' function in DOUBLE_QUOTE and BACK_TICK
+comment|// is a table alias.
+name|check
+argument_list|(
+literal|"select * from myMap[field], myArray[1 + 2]"
+argument_list|,
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `MYMAP` AS `field`,\n"
+operator|+
+literal|"`MYARRAY` AS `1 + 2`"
+argument_list|)
+expr_stmt|;
+name|check
+argument_list|(
+literal|"select * from myMap [field], myArray [1 + 2]"
+argument_list|,
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `MYMAP` AS `field`,\n"
+operator|+
+literal|"`MYARRAY` AS `1 + 2`"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testBackTickQuery
+parameter_list|()
+block|{
+name|quoting
+operator|=
+name|SqlParser
+operator|.
+name|Quoting
+operator|.
+name|BACK_TICK
+expr_stmt|;
+name|check
+argument_list|(
+literal|"select `x`.`b baz` from `emp` as `x` where `x`.deptno in (10, 20)"
+argument_list|,
+literal|"SELECT `x`.`b baz`\n"
+operator|+
+literal|"FROM `emp` AS `x`\n"
+operator|+
+literal|"WHERE (`x`.`DEPTNO` IN (10, 20))"
 argument_list|)
 expr_stmt|;
 block|}
@@ -4111,6 +4343,10 @@ operator|+
 literal|"<IDENTIFIER> \\.\\.\\.\n"
 operator|+
 literal|"<QUOTED_IDENTIFIER> \\.\\.\\.\n"
+operator|+
+literal|"<BACK_QUOTED_IDENTIFIER> \\.\\.\\.\n"
+operator|+
+literal|"<BRACKET_QUOTED_IDENTIFIER> \\.\\.\\.\n"
 operator|+
 literal|"<UNICODE_QUOTED_IDENTIFIER> \\.\\.\\.\n"
 operator|+

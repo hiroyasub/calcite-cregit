@@ -1726,6 +1726,14 @@ operator|new
 name|SqlParser
 argument_list|(
 name|sql
+argument_list|,
+name|context
+operator|.
+name|config
+argument_list|()
+operator|.
+name|quoting
+argument_list|()
 argument_list|)
 decl_stmt|;
 name|SqlNode
