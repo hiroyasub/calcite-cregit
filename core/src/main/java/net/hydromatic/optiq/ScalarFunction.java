@@ -10,78 +10,56 @@ operator|.
 name|hydromatic
 operator|.
 name|optiq
-operator|.
-name|model
 package|;
 end_package
 
 begin_import
 import|import
-name|java
+name|org
 operator|.
-name|lang
+name|eigenbase
 operator|.
-name|String
+name|reltype
+operator|.
+name|RelDataType
 import|;
 end_import
 
 begin_import
 import|import
-name|java
+name|org
 operator|.
-name|util
+name|eigenbase
 operator|.
-name|ArrayList
-import|;
-end_import
-
-begin_import
-import|import
-name|java
+name|reltype
 operator|.
-name|util
-operator|.
-name|List
+name|RelDataTypeFactory
 import|;
 end_import
 
 begin_comment
-comment|/**  * Root schema element.  *  *<p>A POJO with fields of {@link Boolean}, {@link String}, {@link ArrayList},  * {@link java.util.LinkedHashMap}, per Jackson simple data binding.</p>  *  *<p>Schema structure is as follows:</p>  *  *<pre>{@code Root}  *   {@link JsonSchema} (in collection {@link JsonRoot#schemas schemas})  *     {@link JsonTable} (in collection {@link JsonMapSchema#tables tables})  *       {@link JsonColumn} (in collection {@link JsonTable#columns column}  *     {@link JsonView}  *     {@link JsonFunction}  (in collection {@link JsonMapSchema#functions functions})  *</pre>  */
+comment|/**  * Function that returns a scalar result.  *  *<p>NOTE: it is a sub-class of {@link net.hydromatic.optiq.TableFunction}  * for a short period only. We will later introduce a common base class for  * scalar and table functions.</p>  */
 end_comment
 
-begin_class
+begin_interface
 specifier|public
-class|class
-name|JsonRoot
+interface|interface
+name|ScalarFunction
+extends|extends
+name|TableFunction
 block|{
-specifier|public
-name|String
-name|version
-decl_stmt|;
-specifier|public
-name|String
-name|defaultSchema
-decl_stmt|;
-specifier|public
-specifier|final
-name|List
-argument_list|<
-name|JsonSchema
-argument_list|>
-name|schemas
-init|=
-operator|new
-name|ArrayList
-argument_list|<
-name|JsonSchema
-argument_list|>
-argument_list|()
-decl_stmt|;
+name|RelDataType
+name|getReturnType
+parameter_list|(
+name|RelDataTypeFactory
+name|typeFactory
+parameter_list|)
+function_decl|;
 block|}
-end_class
+end_interface
 
 begin_comment
-comment|// End JsonRoot.java
+comment|// End ScalarFunction.java
 end_comment
 
 end_unit

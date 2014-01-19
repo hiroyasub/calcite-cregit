@@ -102,6 +102,7 @@ name|RelColumnMapping
 argument_list|>
 name|columnMappings
 decl_stmt|;
+comment|// not re-entrant!
 specifier|private
 specifier|final
 name|boolean
@@ -111,7 +112,7 @@ comment|//~ Constructors -------------------------------------------------------
 specifier|public
 name|TableFunctionReturnTypeInference
 parameter_list|(
-name|RelDataType
+name|RelProtoDataType
 name|unexpandedOutputType
 parameter_list|,
 name|List
@@ -175,8 +176,15 @@ expr_stmt|;
 name|RelDataType
 name|unexpandedOutputType
 init|=
-name|getExplicitType
+name|protoType
+operator|.
+name|apply
+argument_list|(
+name|opBinding
+operator|.
+name|getTypeFactory
 argument_list|()
+argument_list|)
 decl_stmt|;
 name|List
 argument_list|<

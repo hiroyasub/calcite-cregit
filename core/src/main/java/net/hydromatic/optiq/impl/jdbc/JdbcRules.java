@@ -3587,7 +3587,7 @@ operator|.
 name|getInputs
 argument_list|()
 argument_list|,
-name|traitSet
+name|out
 argument_list|)
 argument_list|,
 name|union
@@ -3821,7 +3821,7 @@ operator|.
 name|getInputs
 argument_list|()
 argument_list|,
-name|traitSet
+name|out
 argument_list|)
 argument_list|,
 name|intersect
@@ -4029,7 +4029,7 @@ operator|.
 name|getInputs
 argument_list|()
 argument_list|,
-name|traitSet
+name|out
 argument_list|)
 argument_list|,
 name|minus

@@ -1697,6 +1697,54 @@ argument_list|(
 literal|"C=1\n"
 argument_list|)
 expr_stmt|;
+block|}
+comment|/** Test case for https://github.com/julianhyde/optiq/issues/119. */
+annotation|@
+name|Ignore
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJavaBoolean2
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|OptiqAssert
+operator|.
+name|AssertThat
+name|with
+init|=
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+literal|"s"
+argument_list|,
+operator|new
+name|CatchallSchema
+argument_list|()
+argument_list|)
+decl_stmt|;
+comment|// should return "C=1" but with optiq-119 it does not
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select \"wrapperLong\" as c from \"s\".\"everyTypes\"\n"
+operator|+
+literal|"where \"wrapperLong\"> 0"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"C=1\n"
+argument_list|)
+expr_stmt|;
 comment|// count(nullif(b, false)) counts how many times b is true
 name|with
 operator|.
@@ -2199,6 +2247,88 @@ operator|.
 name|query
 argument_list|(
 literal|"select * from \"s\".\"prefixEmps\" where \"name\" in ('Ab', 'Abd')"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"empid=2; deptno=10; name=Ab; salary=0.0; commission=null\n"
+operator|+
+literal|"empid=4; deptno=10; name=Abd; salary=0.0; commission=null\n"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** If a method returns a    * {@link net.hydromatic.optiq.impl.ViewTable.ViewTableFunction}, then it    * should be expanded. */
+annotation|@
+name|Ignore
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testTableFunctionIsView
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+literal|"s"
+argument_list|,
+operator|new
+name|JdbcTest
+operator|.
+name|HrSchema
+argument_list|()
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select * from table(\"s\".\"view\"('abc'))"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"empid=2; deptno=10; name=Ab; salary=0.0; commission=null\n"
+operator|+
+literal|"empid=4; deptno=10; name=Abd; salary=0.0; commission=null\n"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Finds a table-function using reflection. */
+annotation|@
+name|Ignore
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testTableFunction
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+literal|"s"
+argument_list|,
+operator|new
+name|JdbcTest
+operator|.
+name|HrSchema
+argument_list|()
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select * from table(\"s\".\"foo\"(3))"
 argument_list|)
 operator|.
 name|returns

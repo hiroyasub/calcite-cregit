@@ -299,9 +299,35 @@ name|org
 operator|.
 name|eigenbase
 operator|.
+name|reltype
+operator|.
+name|RelProtoDataType
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
 name|sql
 operator|.
 name|SqlDialect
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
+name|sql
+operator|.
+name|type
+operator|.
+name|SqlTypeName
 import|;
 end_import
 
@@ -326,6 +352,20 @@ operator|.
 name|util
 operator|.
 name|Pair
+import|;
+end_import
+
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|ImmutableList
 import|;
 end_import
 
@@ -693,7 +733,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testFunction
+name|testTableFunction
 parameter_list|()
 throws|throws
 name|SQLException
@@ -795,7 +835,7 @@ name|executeQuery
 argument_list|(
 literal|"select *\n"
 operator|+
-literal|"from table(s.\"GenerateStrings\"(5)) as t(c)\n"
+literal|"from table(\"s\".\"GenerateStrings\"(5)) as t(n, c)\n"
 operator|+
 literal|"where char_length(c)> 3"
 argument_list|)
@@ -842,12 +882,10 @@ name|q1
 argument_list|)
 return|;
 block|}
+comment|/** A function that generates a table that generates a sequence of    * {@link net.hydromatic.optiq.test.JdbcTest.IntString} values. */
 specifier|public
 specifier|static
-name|Queryable
-argument_list|<
-name|IntString
-argument_list|>
+name|Table
 name|generateStrings
 parameter_list|(
 specifier|final
@@ -856,6 +894,79 @@ name|count
 parameter_list|)
 block|{
 return|return
+operator|new
+name|AbstractQueryableTable
+argument_list|(
+name|IntString
+operator|.
+name|class
+argument_list|)
+block|{
+specifier|public
+name|RelDataType
+name|getRowType
+parameter_list|(
+name|RelDataTypeFactory
+name|typeFactory
+parameter_list|)
+block|{
+return|return
+name|typeFactory
+operator|.
+name|builder
+argument_list|()
+operator|.
+name|add
+argument_list|(
+literal|"n"
+argument_list|,
+name|SqlTypeName
+operator|.
+name|INTEGER
+argument_list|)
+operator|.
+name|add
+argument_list|(
+literal|"s"
+argument_list|,
+name|SqlTypeName
+operator|.
+name|VARCHAR
+argument_list|,
+operator|-
+literal|1
+argument_list|)
+operator|.
+name|build
+argument_list|()
+return|;
+block|}
+specifier|public
+parameter_list|<
+name|T
+parameter_list|>
+name|Queryable
+argument_list|<
+name|T
+argument_list|>
+name|asQueryable
+parameter_list|(
+name|QueryProvider
+name|queryProvider
+parameter_list|,
+name|SchemaPlus
+name|schema
+parameter_list|,
+name|String
+name|tableName
+parameter_list|)
+block|{
+name|BaseQueryable
+argument_list|<
+name|IntString
+argument_list|>
+name|queryable
+init|=
 operator|new
 name|BaseQueryable
 argument_list|<
@@ -980,6 +1091,19 @@ parameter_list|()
 block|{
 block|}
 block|}
+return|;
+block|}
+block|}
+decl_stmt|;
+comment|//noinspection unchecked
+return|return
+operator|(
+name|Queryable
+argument_list|<
+name|T
+argument_list|>
+operator|)
+name|queryable
 return|;
 block|}
 block|}
@@ -8739,6 +8863,207 @@ block|}
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Tests user-defined function. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUserDefinedFunction
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|OptiqAssert
+operator|.
+name|AssertThat
+name|with
+init|=
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|withModel
+argument_list|(
+literal|"{\n"
+operator|+
+literal|"  version: '1.0',\n"
+operator|+
+literal|"   schemas: [\n"
+operator|+
+literal|"     {\n"
+operator|+
+literal|"       name: 'adhoc',\n"
+operator|+
+literal|"       tables: [\n"
+operator|+
+literal|"         {\n"
+operator|+
+literal|"           name: 'EMPLOYEES',\n"
+operator|+
+literal|"           type: 'custom',\n"
+operator|+
+literal|"           factory: '"
+operator|+
+name|EmpDeptTableFactory
+operator|.
+name|class
+operator|.
+name|getName
+argument_list|()
+operator|+
+literal|"',\n"
+operator|+
+literal|"           operand: {'foo': true, 'bar': 345}\n"
+operator|+
+literal|"         }\n"
+operator|+
+literal|"       ],\n"
+operator|+
+literal|"       functions: [\n"
+operator|+
+literal|"         {\n"
+operator|+
+literal|"           name: 'MY_PLUS',\n"
+operator|+
+literal|"           className: '"
+operator|+
+name|MyPlusFunction
+operator|.
+name|class
+operator|.
+name|getName
+argument_list|()
+operator|+
+literal|"'\n"
+operator|+
+literal|"         },\n"
+operator|+
+literal|"         {\n"
+operator|+
+literal|"           name: 'MY_DOUBLE',\n"
+operator|+
+literal|"           className: '"
+operator|+
+name|MyDoubleFunction
+operator|.
+name|class
+operator|.
+name|getName
+argument_list|()
+operator|+
+literal|"'\n"
+operator|+
+literal|"         }\n"
+operator|+
+literal|"       ]\n"
+operator|+
+literal|"     }\n"
+operator|+
+literal|"   ]\n"
+operator|+
+literal|"}"
+argument_list|)
+decl_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select \"adhoc\".my_plus(\"deptno\", 100) as p from \"adhoc\".EMPLOYEES"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"P=110\n"
+operator|+
+literal|"P=120\n"
+operator|+
+literal|"P=110\n"
+operator|+
+literal|"P=110\n"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select \"adhoc\".my_double(\"deptno\") as p from \"adhoc\".EMPLOYEES"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"P=20\n"
+operator|+
+literal|"P=40\n"
+operator|+
+literal|"P=20\n"
+operator|+
+literal|"P=20\n"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests user-defined function. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUserDefinedFunction2
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|withModel
+argument_list|(
+literal|"{\n"
+operator|+
+literal|"  version: '1.0',\n"
+operator|+
+literal|"   schemas: [\n"
+operator|+
+literal|"     {\n"
+operator|+
+literal|"       name: 'adhoc',\n"
+operator|+
+literal|"       functions: [\n"
+operator|+
+literal|"         {\n"
+operator|+
+literal|"           name: 'AWKWARD',\n"
+operator|+
+literal|"           className: '"
+operator|+
+name|AwkwardFunction
+operator|.
+name|class
+operator|.
+name|getName
+argument_list|()
+operator|+
+literal|"'\n"
+operator|+
+literal|"         }\n"
+operator|+
+literal|"       ]\n"
+operator|+
+literal|"     }\n"
+operator|+
+literal|"   ]\n"
+operator|+
+literal|"}"
+argument_list|)
+operator|.
+name|connectThrows
+argument_list|(
+literal|"declaring class 'net.hydromatic.optiq.test.JdbcTest$AwkwardFunction' of non-static UDF must have a public constructor with zero parameters"
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public
@@ -10487,6 +10812,82 @@ argument_list|)
 argument_list|)
 block|,     }
 decl_stmt|;
+specifier|public
+name|Table
+name|foo
+parameter_list|(
+name|int
+name|count
+parameter_list|)
+block|{
+return|return
+name|generateStrings
+argument_list|(
+name|count
+argument_list|)
+return|;
+block|}
+specifier|public
+name|Table
+name|view
+parameter_list|(
+name|String
+name|s
+parameter_list|)
+block|{
+return|return
+operator|new
+name|ViewTable
+argument_list|(
+name|Object
+operator|.
+name|class
+argument_list|,
+operator|new
+name|RelProtoDataType
+argument_list|()
+block|{
+specifier|public
+name|RelDataType
+name|apply
+parameter_list|(
+name|RelDataTypeFactory
+name|typeFactory
+parameter_list|)
+block|{
+return|return
+name|typeFactory
+operator|.
+name|builder
+argument_list|()
+operator|.
+name|add
+argument_list|(
+literal|"c"
+argument_list|,
+name|SqlTypeName
+operator|.
+name|INTEGER
+argument_list|)
+operator|.
+name|build
+argument_list|()
+return|;
+block|}
+block|}
+argument_list|,
+literal|"values (1), (3)"
+argument_list|,
+name|ImmutableList
+operator|.
+expr|<
+name|String
+operator|>
+name|of
+argument_list|()
+argument_list|)
+return|;
+block|}
 block|}
 specifier|public
 specifier|static
@@ -11568,6 +11969,83 @@ name|MyTable2
 argument_list|()
 block|}
 decl_stmt|;
+block|}
+comment|/** Example of a UDF with a nontatic {@code eval} method. */
+specifier|public
+specifier|static
+class|class
+name|MyPlusFunction
+block|{
+specifier|public
+name|int
+name|eval
+parameter_list|(
+name|int
+name|x
+parameter_list|,
+name|int
+name|y
+parameter_list|)
+block|{
+return|return
+name|x
+operator|+
+name|y
+return|;
+block|}
+block|}
+comment|/** Example of a UDF with a static {@code eval} method. Class is abstract,    * but code-generator should not need to instantiate it. */
+specifier|public
+specifier|static
+specifier|abstract
+class|class
+name|MyDoubleFunction
+block|{
+specifier|private
+name|MyDoubleFunction
+parameter_list|()
+block|{
+block|}
+specifier|public
+specifier|static
+name|int
+name|eval
+parameter_list|(
+name|int
+name|x
+parameter_list|)
+block|{
+return|return
+name|x
+operator|*
+literal|2
+return|;
+block|}
+block|}
+comment|/** Example of a UDF class that needs to be instantiated but cannot be. */
+specifier|public
+specifier|static
+specifier|abstract
+class|class
+name|AwkwardFunction
+block|{
+specifier|private
+name|AwkwardFunction
+parameter_list|()
+block|{
+block|}
+specifier|public
+name|int
+name|eval
+parameter_list|(
+name|int
+name|x
+parameter_list|)
+block|{
+return|return
+literal|0
+return|;
+block|}
 block|}
 block|}
 end_class

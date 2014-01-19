@@ -6229,15 +6229,6 @@ block|}
 else|else
 block|{
 comment|// fake a fully-qualified call to the default constructor
-name|SqlReturnTypeInference
-name|returnTypeInference
-init|=
-operator|new
-name|ExplicitReturnTypeInference
-argument_list|(
-name|type
-argument_list|)
-decl_stmt|;
 name|call
 operator|.
 name|setOperator
@@ -6250,7 +6241,12 @@ operator|.
 name|getSqlIdentifier
 argument_list|()
 argument_list|,
-name|returnTypeInference
+name|ExplicitReturnTypeInference
+operator|.
+name|of
+argument_list|(
+name|type
+argument_list|)
 argument_list|,
 literal|null
 argument_list|,

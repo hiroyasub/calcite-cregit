@@ -25,19 +25,7 @@ name|hydromatic
 operator|.
 name|optiq
 operator|.
-name|BuiltinMethod
-import|;
-end_import
-
-begin_import
-import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|optiq
-operator|.
-name|ModifiableTable
+name|*
 import|;
 end_import
 
@@ -176,6 +164,20 @@ operator|.
 name|convert
 operator|.
 name|ConverterRule
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
+name|rel
+operator|.
+name|metadata
+operator|.
+name|RelColumnMapping
 import|;
 end_import
 
@@ -6103,6 +6105,14 @@ operator|)
 name|rel
 decl_stmt|;
 specifier|final
+name|EnumerableConvention
+name|out
+init|=
+name|EnumerableConvention
+operator|.
+name|INSTANCE
+decl_stmt|;
+specifier|final
 name|RelTraitSet
 name|traitSet
 init|=
@@ -6113,9 +6123,7 @@ argument_list|()
 operator|.
 name|replace
 argument_list|(
-name|EnumerableConvention
-operator|.
-name|INSTANCE
+name|out
 argument_list|)
 decl_stmt|;
 return|return
@@ -6136,7 +6144,7 @@ operator|.
 name|getInputs
 argument_list|()
 argument_list|,
-name|traitSet
+name|out
 argument_list|)
 argument_list|,
 name|union
@@ -6478,6 +6486,14 @@ return|;
 comment|// INTERSECT ALL not implemented
 block|}
 specifier|final
+name|EnumerableConvention
+name|out
+init|=
+name|EnumerableConvention
+operator|.
+name|INSTANCE
+decl_stmt|;
+specifier|final
 name|RelTraitSet
 name|traitSet
 init|=
@@ -6488,9 +6504,7 @@ argument_list|()
 operator|.
 name|replace
 argument_list|(
-name|EnumerableConvention
-operator|.
-name|INSTANCE
+name|out
 argument_list|)
 decl_stmt|;
 return|return
@@ -6511,7 +6525,7 @@ operator|.
 name|getInputs
 argument_list|()
 argument_list|,
-name|traitSet
+name|out
 argument_list|)
 argument_list|,
 name|intersect
@@ -6857,6 +6871,14 @@ return|;
 comment|// EXCEPT ALL not implemented
 block|}
 specifier|final
+name|EnumerableConvention
+name|out
+init|=
+name|EnumerableConvention
+operator|.
+name|INSTANCE
+decl_stmt|;
+specifier|final
 name|RelTraitSet
 name|traitSet
 init|=
@@ -6890,7 +6912,7 @@ operator|.
 name|getInputs
 argument_list|()
 argument_list|,
-name|traitSet
+name|out
 argument_list|)
 argument_list|,
 name|minus
