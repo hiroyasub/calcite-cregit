@@ -102,13 +102,11 @@ name|class
 argument_list|,
 literal|1
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|false
+argument_list|,
+literal|true
 argument_list|)
 block|,
 name|BYTE
@@ -122,6 +120,11 @@ operator|.
 name|class
 argument_list|,
 literal|2
+argument_list|,
+operator|(
+name|byte
+operator|)
+literal|0
 argument_list|,
 name|Byte
 operator|.
@@ -144,6 +147,11 @@ name|class
 argument_list|,
 literal|2
 argument_list|,
+operator|(
+name|char
+operator|)
+literal|0
+argument_list|,
 name|Character
 operator|.
 name|MIN_VALUE
@@ -164,6 +172,11 @@ operator|.
 name|class
 argument_list|,
 literal|2
+argument_list|,
+operator|(
+name|short
+operator|)
+literal|0
 argument_list|,
 name|Short
 operator|.
@@ -186,6 +199,8 @@ name|class
 argument_list|,
 literal|2
 argument_list|,
+literal|0
+argument_list|,
 name|Integer
 operator|.
 name|MIN_VALUE
@@ -206,6 +221,8 @@ operator|.
 name|class
 argument_list|,
 literal|2
+argument_list|,
+literal|0L
 argument_list|,
 name|Long
 operator|.
@@ -228,6 +245,8 @@ name|class
 argument_list|,
 literal|3
 argument_list|,
+literal|0F
+argument_list|,
 name|Float
 operator|.
 name|MIN_VALUE
@@ -248,6 +267,8 @@ operator|.
 name|class
 argument_list|,
 literal|3
+argument_list|,
+literal|0D
 argument_list|,
 name|Double
 operator|.
@@ -273,6 +294,8 @@ argument_list|,
 literal|null
 argument_list|,
 literal|null
+argument_list|,
+literal|null
 argument_list|)
 block|,
 name|OTHER
@@ -282,6 +305,8 @@ argument_list|,
 literal|null
 argument_list|,
 literal|5
+argument_list|,
+literal|null
 argument_list|,
 literal|null
 argument_list|,
@@ -309,11 +334,19 @@ specifier|final
 name|int
 name|family
 decl_stmt|;
+comment|/** The default value of this primitive class. This is the value    * taken by uninitialized fields, for instance; 0 for {@code int}, false for    * {@code boolean}, etc. */
+specifier|public
+specifier|final
+name|Object
+name|defaultValue
+decl_stmt|;
+comment|/** The minimum value of this primitive class. */
 specifier|public
 specifier|final
 name|Object
 name|min
 decl_stmt|;
+comment|/** The maximum value of this primitive class. */
 specifier|public
 specifier|final
 name|Object
@@ -434,6 +467,9 @@ name|int
 name|family
 parameter_list|,
 name|Object
+name|defaultValue
+parameter_list|,
+name|Object
 name|min
 parameter_list|,
 name|Object
@@ -472,6 +508,12 @@ operator|.
 name|boxClass
 operator|=
 name|boxClass
+expr_stmt|;
+name|this
+operator|.
+name|defaultValue
+operator|=
+name|defaultValue
 expr_stmt|;
 name|this
 operator|.
