@@ -4011,7 +4011,7 @@ name|Hook
 operator|.
 name|JAVA_PLAN
 operator|.
-name|add
+name|addThread
 argument_list|(
 operator|new
 name|Function1
@@ -4135,7 +4135,7 @@ name|Hook
 operator|.
 name|QUERY_PLAN
 operator|.
-name|add
+name|addThread
 argument_list|(
 operator|new
 name|Function1

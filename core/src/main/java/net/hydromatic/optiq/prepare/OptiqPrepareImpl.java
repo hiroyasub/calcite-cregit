@@ -1830,7 +1830,8 @@ argument_list|()
 condition|?
 name|MaterializationService
 operator|.
-name|INSTANCE
+name|instance
+argument_list|()
 operator|.
 name|query
 argument_list|(

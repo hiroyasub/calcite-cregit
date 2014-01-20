@@ -365,7 +365,8 @@ name|tableEntry
 init|=
 name|MaterializationService
 operator|.
-name|INSTANCE
+name|instance
+argument_list|()
 operator|.
 name|checkValid
 argument_list|(
@@ -471,7 +472,8 @@ name|key
 operator|=
 name|MaterializationService
 operator|.
-name|INSTANCE
+name|instance
+argument_list|()
 operator|.
 name|defineMaterialization
 argument_list|(

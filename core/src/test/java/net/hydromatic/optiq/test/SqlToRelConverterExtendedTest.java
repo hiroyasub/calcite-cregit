@@ -179,7 +179,7 @@ name|Hook
 operator|.
 name|CONVERTED
 operator|.
-name|add
+name|addThread
 argument_list|(
 operator|(
 name|Function1

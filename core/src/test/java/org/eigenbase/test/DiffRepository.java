@@ -759,6 +759,7 @@ block|}
 block|}
 comment|/**    * Expands a string containing one or more variables. (Currently only works    * if there is one variable.)    */
 specifier|public
+specifier|synchronized
 name|String
 name|expand
 parameter_list|(
@@ -1057,6 +1058,7 @@ block|}
 block|}
 comment|/**    * Returns a given resource from a given testcase.    *    * @param testCaseName Name of test case, e.g. "testFoo"    * @param resourceName Name of resource, e.g. "sql", "plan"    * @return The value of the resource, or null if not found    */
 specifier|private
+specifier|synchronized
 name|String
 name|get
 parameter_list|(
@@ -1273,6 +1275,7 @@ return|;
 block|}
 comment|/**    * Returns the&lt;TestCase&gt; element corresponding to the current test    * case.    *    * @param testCaseName  Name of test case    * @param checkOverride Make sure that if an element overrides an element in    *                      a base repository, it has overrides="true"    * @return TestCase element, or null if not found    */
 specifier|private
+specifier|synchronized
 name|Element
 name|getTestCaseElement
 parameter_list|(
@@ -2808,6 +2811,7 @@ block|}
 comment|/**    * Finds the repository instance for a given class.    *    *<p>It is important that all testcases in a class share the same    * repository instance. This ensures that, if two or more testcases fail,    * the log file will contains the actual results of both testcases.    *    *<p>The<code>baseRepos</code> parameter is useful if the test is an    * extension to a previous test. If the test class has a base class which    * also has a repository, specify the repository here. DiffRepository will    * look for resources in the base class if it cannot find them in this    * repository. If test resources from testcases in the base class are    * missing or incorrect, it will not write them to the log file -- you    * probably need to fix the base test.    *    *<p>Use the<code>filter</code> parameter if you expect the test to    * return results slightly different than in the repository. This happens    * if the behavior of a derived test is slightly different than a base    * test. If you do not specify a filter, no filtering will happen.    *    * @param clazz     Testcase class    * @param baseRepos Base repository    * @param filter    Filters each string returned by the repository    * @return The diff repository shared between testcases in this class.    */
 specifier|public
 specifier|static
+specifier|synchronized
 name|DiffRepository
 name|lookup
 parameter_list|(
