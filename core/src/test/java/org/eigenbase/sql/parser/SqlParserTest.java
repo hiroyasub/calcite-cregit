@@ -2078,9 +2078,9 @@ argument_list|)
 expr_stmt|;
 name|checkExp
 argument_list|(
-literal|"[anything [but brackets]] are].[ok]"
+literal|"[anything [even brackets]] is].[ok]"
 argument_list|,
-literal|"`anything [but brackets]] are`.`ok`"
+literal|"`anything [even brackets] is`.`ok`"
 argument_list|)
 expr_stmt|;
 comment|// What would be a call to the 'item' function in DOUBLE_QUOTE and BACK_TICK
