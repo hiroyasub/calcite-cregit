@@ -141,20 +141,6 @@ name|org
 operator|.
 name|eigenbase
 operator|.
-name|sql
-operator|.
-name|validate
-operator|.
-name|SqlConformance
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
 name|test
 operator|.
 name|*
@@ -6258,7 +6244,7 @@ name|check
 argument_list|(
 literal|"select * from (values(1))"
 argument_list|,
-name|AbstractSqlTester
+name|SqlTests
 operator|.
 name|IntegerTypeChecker
 argument_list|,
@@ -6615,7 +6601,7 @@ name|check
 argument_list|(
 literal|"values 1> 2 and sqrt(-4) = -2"
 argument_list|,
-name|AbstractSqlTester
+name|SqlTests
 operator|.
 name|BooleanTypeChecker
 argument_list|,
@@ -10172,7 +10158,7 @@ name|check
 argument_list|(
 literal|"values 1< cast(null as integer) or sqrt(-4) = -2"
 argument_list|,
-name|AbstractSqlTester
+name|SqlTests
 operator|.
 name|BooleanTypeChecker
 argument_list|,
@@ -10197,7 +10183,7 @@ name|check
 argument_list|(
 literal|"values 1< 2 or sqrt(-4) = -2"
 argument_list|,
-name|AbstractSqlTester
+name|SqlTests
 operator|.
 name|BooleanTypeChecker
 argument_list|,
@@ -10224,7 +10210,7 @@ name|check
 argument_list|(
 literal|"values 1< cast(null as integer) or sqrt(4) = -2"
 argument_list|,
-name|AbstractSqlTester
+name|SqlTests
 operator|.
 name|BooleanTypeChecker
 argument_list|,
@@ -11446,7 +11432,7 @@ argument_list|(
 literal|"select 'abc' from (values(true))"
 argument_list|,
 operator|new
-name|AbstractSqlTester
+name|SqlTests
 operator|.
 name|StringTypeChecker
 argument_list|(
@@ -15531,7 +15517,7 @@ argument_list|(
 literal|"select sum(1) over (order by x) from (select 1 as x, 2 as y from (values (true)))"
 argument_list|,
 operator|new
-name|AbstractSqlTester
+name|SqlTests
 operator|.
 name|StringTypeChecker
 argument_list|(
@@ -19221,9 +19207,7 @@ specifier|static
 class|class
 name|TesterImpl
 extends|extends
-name|SqlValidatorTestCase
-operator|.
-name|TesterImpl
+name|SqlTesterImpl
 block|{
 specifier|final
 name|Connection
@@ -19238,9 +19222,9 @@ parameter_list|)
 block|{
 name|super
 argument_list|(
-name|SqlConformance
+name|DefaultSqlTestFactory
 operator|.
-name|Default
+name|INSTANCE
 argument_list|)
 expr_stmt|;
 name|this

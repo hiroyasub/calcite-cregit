@@ -57,6 +57,20 @@ name|eigenbase
 operator|.
 name|sql
 operator|.
+name|parser
+operator|.
+name|SqlParser
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
+name|sql
+operator|.
 name|type
 operator|.
 name|*
@@ -122,7 +136,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Concrete child class of {@link SqlValidatorTestCase}, containing lots of unit  * tests.  *  *<p>If you want to run these same tests in a different environment, create a  * derived class whose {@link #getTester} returns a different implementation of  * {@link org.eigenbase.test.SqlValidatorTestCase.Tester}.  */
+comment|/**  * Concrete child class of {@link SqlValidatorTestCase}, containing lots of unit  * tests.  *  *<p>If you want to run these same tests in a different environment, create a  * derived class whose {@link #getTester} returns a different implementation of  * {@link org.eigenbase.sql.test.SqlTester}.  */
 end_comment
 
 begin_class
@@ -158,8 +172,8 @@ name|ANY
 init|=
 literal|"(?s).*"
 decl_stmt|;
-comment|//~ Instance fields --------------------------------------------------------
 specifier|protected
+specifier|static
 specifier|final
 name|Logger
 name|logger
@@ -168,14 +182,16 @@ name|Logger
 operator|.
 name|getLogger
 argument_list|(
-name|getClass
-argument_list|()
+name|SqlValidatorTest
+operator|.
+name|class
 operator|.
 name|getName
 argument_list|()
 argument_list|)
 decl_stmt|;
 specifier|private
+specifier|static
 specifier|final
 name|String
 name|ERR_IN_VALUES_INCOMPATIBLE
@@ -183,6 +199,7 @@ init|=
 literal|"Values in expression list must have compatible types"
 decl_stmt|;
 specifier|private
+specifier|static
 specifier|final
 name|String
 name|ERR_IN_OPERANDS_INCOMPATIBLE
@@ -195,9 +212,7 @@ name|SqlValidatorTest
 parameter_list|()
 block|{
 name|super
-argument_list|(
-literal|null
-argument_list|)
+argument_list|()
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
@@ -15299,10 +15314,112 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testBrackets
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|withQuoting
+argument_list|(
+name|SqlParser
+operator|.
+name|Quoting
+operator|.
+name|BRACKET
+argument_list|)
+operator|.
+name|checkResultType
+argument_list|(
+literal|"select [e].EMPNO from [EMP] as [e]"
+argument_list|,
+literal|"RecordType(INTEGER NOT NULL EMPNO) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|withQuoting
+argument_list|(
+name|SqlParser
+operator|.
+name|Quoting
+operator|.
+name|BRACKET
+argument_list|)
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"select ^e^.EMPNO from [EMP] as [e]"
+argument_list|,
+literal|"Table 'E' not found"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|withQuoting
+argument_list|(
+name|SqlParser
+operator|.
+name|Quoting
+operator|.
+name|BRACKET
+argument_list|)
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"select ^x^ from (\n"
+operator|+
+literal|"  select [e].EMPNO as [x] from [EMP] as [e])"
+argument_list|,
+literal|"Column 'X' not found in any table"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|withQuoting
+argument_list|(
+name|SqlParser
+operator|.
+name|Quoting
+operator|.
+name|BRACKET
+argument_list|)
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"select EMP.^\"x\"^ from EMP"
+argument_list|,
+literal|"(?s).*Encountered \"\\. \\\\\"\" at line .*"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|withQuoting
+argument_list|(
+name|SqlParser
+operator|.
+name|Quoting
+operator|.
+name|BRACKET
+argument_list|)
+operator|.
+name|checkResultType
+argument_list|(
+literal|"select [x[y]] z ] from (\n"
+operator|+
+literal|"  select [e].EMPNO as [x[y]] z ] from [EMP] as [e])"
+argument_list|,
+literal|"RecordType(INTEGER NOT NULL x[y] z ) NOT NULL"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testNew
 parameter_list|()
 block|{
-comment|// (To debug invidual statements, paste them into this method.)
+comment|// (To debug individual statements, paste them into this method.)
 comment|//            1         2         3         4         5         6
 comment|//   12345678901234567890123456789012345678901234567890123456789012345
 comment|//        check("SELECT count(0) FROM emp GROUP BY ()");

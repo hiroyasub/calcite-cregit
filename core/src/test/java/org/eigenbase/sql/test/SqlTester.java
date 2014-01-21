@@ -59,8 +59,48 @@ name|*
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
+name|sql
+operator|.
+name|parser
+operator|.
+name|SqlParser
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
+name|sql
+operator|.
+name|validate
+operator|.
+name|SqlConformance
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
+name|test
+operator|.
+name|SqlValidatorTestCase
+import|;
+end_import
+
 begin_comment
-comment|/**  * SqlTester defines a callback for testing SQL queries and expressions.  *  *<p>The idea is that when you define an operator (or another piece of SQL  * functionality), you can define the logical behavior of that operator once, as  * part of that operator. Later you can define one or more physical  * implementations of that operator, and test them all using the same set of  * tests.  *  *<p>Specific implementations of<code>SqlTestser</code> might evaluate the  * queries in different ways, for example, using a C++ versus Java calculator.  * An implementation might even ignore certain calls altogether.  */
+comment|/**  * SqlTester defines a callback for testing SQL queries and expressions.  *  *<p>The idea is that when you define an operator (or another piece of SQL  * functionality), you can define the logical behavior of that operator once, as  * part of that operator. Later you can define one or more physical  * implementations of that operator, and test them all using the same set of  * tests.  *  *<p>Specific implementations of<code>SqlTester</code> might evaluate the  * queries in different ways, for example, using a C++ versus Java calculator.  * An implementation might even ignore certain calls altogether.  */
 end_comment
 
 begin_interface
@@ -69,6 +109,10 @@ interface|interface
 name|SqlTester
 extends|extends
 name|Closeable
+extends|,
+name|SqlValidatorTestCase
+operator|.
+name|Tester
 block|{
 comment|//~ Enums ------------------------------------------------------------------
 comment|/**    * Name of a virtual machine that can potentially implement an operator.    */
@@ -83,6 +127,28 @@ block|,
 name|EXPAND
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+name|SqlTestFactory
+name|getFactory
+parameter_list|()
+function_decl|;
+comment|/** Returns a tester that tests a given SQL quoting style. */
+name|SqlTester
+name|withQuoting
+parameter_list|(
+name|SqlParser
+operator|.
+name|Quoting
+name|bracket
+parameter_list|)
+function_decl|;
+comment|/** Returns a tester that tests conformance to a particular SQL language    * version. */
+name|SqlTester
+name|withConformance
+parameter_list|(
+name|SqlConformance
+name|conformance
+parameter_list|)
+function_decl|;
 comment|/**    * Tests that a scalar SQL expression returns the expected result and the    * expected type. For example,    *    *<blockquote>    *<pre>checkScalar("1.1 + 2.9", "4.0", "DECIMAL(2, 1) NOT NULL");</pre>    *</blockquote>    *    * @param expression Scalar expression    * @param result     Expected result    * @param resultType Expected result type    */
 name|void
 name|checkScalar
@@ -299,6 +365,17 @@ name|expectedError
 parameter_list|,
 name|boolean
 name|runtime
+parameter_list|)
+function_decl|;
+comment|/**    * Tests that a SQL query fails at prepare time.    *    * @param sql           SQL query    * @param expectedError Pattern for expected error. Must    *                      include an error location.    */
+name|void
+name|checkQueryFails
+parameter_list|(
+name|String
+name|sql
+parameter_list|,
+name|String
+name|expectedError
 parameter_list|)
 function_decl|;
 comment|//~ Inner Interfaces -------------------------------------------------------
