@@ -926,10 +926,10 @@ operator|.
 name|parameter
 argument_list|)
 operator|&&
-name|initializer
-operator|.
-name|equals
+name|eq
 argument_list|(
+name|initializer
+argument_list|,
 name|fieldDeclaration
 operator|.
 name|initializer

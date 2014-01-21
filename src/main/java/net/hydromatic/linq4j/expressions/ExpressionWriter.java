@@ -71,6 +71,8 @@ decl_stmt|;
 specifier|private
 name|String
 name|indent
+init|=
+literal|""
 decl_stmt|;
 specifier|private
 name|boolean

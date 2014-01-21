@@ -3693,6 +3693,14 @@ name|eighteen
 argument_list|)
 argument_list|)
 expr_stmt|;
+name|BlockStatement
+name|expression
+init|=
+name|statements
+operator|.
+name|toBlock
+argument_list|()
+decl_stmt|;
 name|assertEquals
 argument_list|(
 name|expected
@@ -3701,11 +3709,17 @@ name|Expressions
 operator|.
 name|toString
 argument_list|(
-name|statements
-operator|.
-name|toBlock
-argument_list|()
+name|expression
 argument_list|)
+argument_list|)
+expr_stmt|;
+name|expression
+operator|.
+name|accept
+argument_list|(
+operator|new
+name|Visitor
+argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
@@ -3810,6 +3824,14 @@ argument_list|)
 argument_list|)
 argument_list|)
 expr_stmt|;
+name|BlockStatement
+name|expression
+init|=
+name|statements
+operator|.
+name|toBlock
+argument_list|()
+decl_stmt|;
 name|assertEquals
 argument_list|(
 literal|"{\n"
@@ -3826,11 +3848,17 @@ name|Expressions
 operator|.
 name|toString
 argument_list|(
-name|statements
-operator|.
-name|toBlock
-argument_list|()
+name|expression
 argument_list|)
+argument_list|)
+expr_stmt|;
+name|expression
+operator|.
+name|accept
+argument_list|(
+operator|new
+name|Visitor
+argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
@@ -4049,6 +4077,14 @@ comment|//    bar(1, _b, _c, _d, foo(_d));
 comment|// Correct result is
 comment|//    bar(1, _b, _c, _d, foo(_c));
 comment|// because _c has the same expression (a + 3) as inner b.
+name|BlockStatement
+name|expression
+init|=
+name|builder0
+operator|.
+name|toBlock
+argument_list|()
+decl_stmt|;
 name|assertEquals
 argument_list|(
 literal|"{\n"
@@ -4067,11 +4103,17 @@ name|Expressions
 operator|.
 name|toString
 argument_list|(
-name|builder0
-operator|.
-name|toBlock
-argument_list|()
+name|expression
 argument_list|)
+argument_list|)
+expr_stmt|;
+name|expression
+operator|.
+name|accept
+argument_list|(
+operator|new
+name|Visitor
+argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
@@ -4082,60 +4124,10 @@ name|void
 name|testConstantExpression
 parameter_list|()
 block|{
-name|assertEquals
-argument_list|(
-literal|"new Object[] {\n"
-operator|+
-literal|"  1,\n"
-operator|+
-literal|"  new Object[] {\n"
-operator|+
-literal|"    (byte)1,\n"
-operator|+
-literal|"    (short)2,\n"
-operator|+
-literal|"    3,\n"
-operator|+
-literal|"    4L,\n"
-operator|+
-literal|"    5.0F,\n"
-operator|+
-literal|"    6.0D,\n"
-operator|+
-literal|"    (char)7,\n"
-operator|+
-literal|"    true,\n"
-operator|+
-literal|"    \"string\",\n"
-operator|+
-literal|"    null},\n"
-operator|+
-literal|"  new net.hydromatic.linq4j.test.ExpressionTest.AllType(\n"
-operator|+
-literal|"    true,\n"
-operator|+
-literal|"    (byte)100,\n"
-operator|+
-literal|"    (char)101,\n"
-operator|+
-literal|"    (short)102,\n"
-operator|+
-literal|"    103,\n"
-operator|+
-literal|"    104L,\n"
-operator|+
-literal|"    105.0F,\n"
-operator|+
-literal|"    106.0D,\n"
-operator|+
-literal|"    new java.math.BigDecimal(107L),\n"
-operator|+
-literal|"    new java.math.BigInteger(\"108\"),\n"
-operator|+
-literal|"    \"109\",\n"
-operator|+
-literal|"    null)}"
-argument_list|,
+specifier|final
+name|Expression
+name|constant
+init|=
 name|Expressions
 operator|.
 name|constant
@@ -4247,8 +4239,73 @@ literal|null
 argument_list|)
 block|}
 argument_list|)
+decl_stmt|;
+name|assertEquals
+argument_list|(
+literal|"new Object[] {\n"
+operator|+
+literal|"  1,\n"
+operator|+
+literal|"  new Object[] {\n"
+operator|+
+literal|"    (byte)1,\n"
+operator|+
+literal|"    (short)2,\n"
+operator|+
+literal|"    3,\n"
+operator|+
+literal|"    4L,\n"
+operator|+
+literal|"    5.0F,\n"
+operator|+
+literal|"    6.0D,\n"
+operator|+
+literal|"    (char)7,\n"
+operator|+
+literal|"    true,\n"
+operator|+
+literal|"    \"string\",\n"
+operator|+
+literal|"    null},\n"
+operator|+
+literal|"  new net.hydromatic.linq4j.test.ExpressionTest.AllType(\n"
+operator|+
+literal|"    true,\n"
+operator|+
+literal|"    (byte)100,\n"
+operator|+
+literal|"    (char)101,\n"
+operator|+
+literal|"    (short)102,\n"
+operator|+
+literal|"    103,\n"
+operator|+
+literal|"    104L,\n"
+operator|+
+literal|"    105.0F,\n"
+operator|+
+literal|"    106.0D,\n"
+operator|+
+literal|"    new java.math.BigDecimal(107L),\n"
+operator|+
+literal|"    new java.math.BigInteger(\"108\"),\n"
+operator|+
+literal|"    \"109\",\n"
+operator|+
+literal|"    null)}"
+argument_list|,
+name|constant
 operator|.
 name|toString
+argument_list|()
+argument_list|)
+expr_stmt|;
+name|constant
+operator|.
+name|accept
+argument_list|(
+operator|new
+name|Visitor
 argument_list|()
 argument_list|)
 expr_stmt|;
@@ -4287,8 +4344,9 @@ name|MemberDeclaration
 operator|>
 name|asList
 argument_list|(
-operator|new
-name|FieldDeclaration
+name|Expressions
+operator|.
+name|fieldDecl
 argument_list|(
 name|Modifier
 operator|.
@@ -4373,8 +4431,9 @@ argument_list|)
 argument_list|)
 argument_list|)
 argument_list|,
-operator|new
-name|FieldDeclaration
+name|Expressions
+operator|.
+name|fieldDecl
 argument_list|(
 literal|0
 argument_list|,
@@ -4388,8 +4447,6 @@ name|class
 argument_list|,
 literal|"i"
 argument_list|)
-argument_list|,
-literal|null
 argument_list|)
 argument_list|)
 argument_list|)
@@ -4416,6 +4473,15 @@ name|toString
 argument_list|(
 name|newExpression
 argument_list|)
+argument_list|)
+expr_stmt|;
+name|newExpression
+operator|.
+name|accept
+argument_list|(
+operator|new
+name|Visitor
+argument_list|()
 argument_list|)
 expr_stmt|;
 block|}

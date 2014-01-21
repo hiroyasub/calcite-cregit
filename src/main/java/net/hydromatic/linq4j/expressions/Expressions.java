@@ -5183,7 +5183,7 @@ name|body
 argument_list|)
 return|;
 block|}
-comment|/**    * Declares a field.    */
+comment|/**    * Declares a field with an initializer.    */
 specifier|public
 specifier|static
 name|FieldDeclaration
@@ -5208,6 +5208,31 @@ argument_list|,
 name|parameter
 argument_list|,
 name|initializer
+argument_list|)
+return|;
+block|}
+comment|/**    * Declares a field.    */
+specifier|public
+specifier|static
+name|FieldDeclaration
+name|fieldDecl
+parameter_list|(
+name|int
+name|modifier
+parameter_list|,
+name|ParameterExpression
+name|parameter
+parameter_list|)
+block|{
+return|return
+operator|new
+name|FieldDeclaration
+argument_list|(
+name|modifier
+argument_list|,
+name|parameter
+argument_list|,
+literal|null
 argument_list|)
 return|;
 block|}

@@ -103,6 +103,14 @@ init|=
 name|this
 operator|.
 name|initializer
+operator|==
+literal|null
+condition|?
+literal|null
+else|:
+name|this
+operator|.
+name|initializer
 operator|.
 name|accept
 argument_list|(
