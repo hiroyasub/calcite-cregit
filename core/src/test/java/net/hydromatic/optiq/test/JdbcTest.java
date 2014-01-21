@@ -4036,6 +4036,39 @@ argument_list|(
 name|queries
 argument_list|)
 decl_stmt|;
+comment|/** Janino bug    *<a href="https://jira.codehaus.org/browse/JANINO-169">JANINO-169</a>    * running queries against the JDBC adapter. As of janino-2.7.3 bug is    * open but we have a workaround in EnumerableRelImplementor. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJanino169
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|JDBC_FOODMART
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select \"time_id\" from \"foodmart\".\"time_by_day\" as \"t\"\n"
+argument_list|)
+operator|.
+name|returnsCount
+argument_list|(
+literal|730
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Unit test for self-join. Left and right children of the join are the same    * relational expression. */
 annotation|@
 name|Test
