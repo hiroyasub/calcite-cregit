@@ -10609,17 +10609,19 @@ operator|.
 name|FOODMART_CLONE
 argument_list|)
 decl_stmt|;
+comment|// Note that \u82f1 in a Java string is a Java unicode escape;
+comment|// But \\82f1 in a SQL string is a SQL unicode escape.
 comment|// various ways to create a unicode string literal
 name|with
 operator|.
 name|query
 argument_list|(
-literal|"values _UTF16'è±å½'"
+literal|"values _UTF16'\u82f1\u56fd'"
 argument_list|)
 operator|.
 name|returns
 argument_list|(
-literal|"EXPR$0=è±å½\n"
+literal|"EXPR$0=\u82f1\u56fd\n"
 argument_list|)
 expr_stmt|;
 name|with
@@ -10631,7 +10633,7 @@ argument_list|)
 operator|.
 name|returns
 argument_list|(
-literal|"EXPR$0=è±å½\n"
+literal|"EXPR$0=\u82f1\u56fd\n"
 argument_list|)
 expr_stmt|;
 name|with
@@ -10643,19 +10645,19 @@ argument_list|)
 operator|.
 name|returns
 argument_list|(
-literal|"EXPR$0=è±å½\n"
+literal|"EXPR$0=\u82f1\u56fd\n"
 argument_list|)
 expr_stmt|;
 name|with
 operator|.
 name|query
 argument_list|(
-literal|"values 'è±å½'"
+literal|"values '\u82f1\u56fd'"
 argument_list|)
 operator|.
 name|throws_
 argument_list|(
-literal|"Failed to encode 'è±å½' in character set 'ISO-8859-1'"
+literal|"Failed to encode '\u82f1\u56fd' in character set 'ISO-8859-1'"
 argument_list|)
 expr_stmt|;
 comment|// comparing a unicode string literal with a regular string literal
@@ -10663,19 +10665,19 @@ name|with
 operator|.
 name|query
 argument_list|(
-literal|"select * from \"employee\" where \"full_name\" = 'è±å½'"
+literal|"select * from \"employee\" where \"full_name\" = '\u82f1\u56fd'"
 argument_list|)
 operator|.
 name|throws_
 argument_list|(
-literal|"Failed to encode 'è±å½' in character set 'ISO-8859-1'"
+literal|"Failed to encode '\u82f1\u56fd' in character set 'ISO-8859-1'"
 argument_list|)
 expr_stmt|;
 name|with
 operator|.
 name|query
 argument_list|(
-literal|"select * from \"employee\" where \"full_name\" = _UTF16'è±å½'"
+literal|"select * from \"employee\" where \"full_name\" = _UTF16'\u82f1\u56fd'"
 argument_list|)
 operator|.
 name|throws_
@@ -10691,7 +10693,7 @@ name|query
 argument_list|(
 literal|"select * from \"employee\"\n"
 operator|+
-literal|"where convert(\"full_name\" using UTF16) = _UTF16'è±å½'"
+literal|"where convert(\"full_name\" using UTF16) = _UTF16'\u82f1\u56fd'"
 argument_list|)
 operator|.
 name|throws_
