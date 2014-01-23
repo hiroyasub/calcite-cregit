@@ -91,6 +91,20 @@ name|net
 operator|.
 name|hydromatic
 operator|.
+name|optiq
+operator|.
+name|jdbc
+operator|.
+name|ConnectionConfig
+import|;
+end_import
+
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
 name|avatica
 operator|.
 name|Casing
@@ -171,6 +185,16 @@ name|withCaseSensitive
 parameter_list|(
 name|boolean
 name|sensitive
+parameter_list|)
+function_decl|;
+comment|/** Returns a tester that follows a lex policy. */
+name|SqlTester
+name|withLex
+parameter_list|(
+name|ConnectionConfig
+operator|.
+name|Lex
+name|lex
 parameter_list|)
 function_decl|;
 comment|/** Returns a tester that tests conformance to a particular SQL language    * version. */

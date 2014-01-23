@@ -117,6 +117,20 @@ end_import
 
 begin_import
 import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|optiq
+operator|.
+name|jdbc
+operator|.
+name|ConnectionConfig
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|junit
@@ -15387,6 +15401,90 @@ argument_list|(
 literal|"select [x[y]] z ] from (\n"
 operator|+
 literal|"  select [e].EMPNO as [x[y]] z ] from [EMP] as [e])"
+argument_list|,
+literal|"RecordType(INTEGER NOT NULL x[y] z ) NOT NULL"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testLexJava
+parameter_list|()
+block|{
+specifier|final
+name|SqlTester
+name|tester1
+init|=
+name|tester
+operator|.
+name|withLex
+argument_list|(
+name|ConnectionConfig
+operator|.
+name|Lex
+operator|.
+name|JAVA
+argument_list|)
+decl_stmt|;
+name|tester1
+operator|.
+name|checkResultType
+argument_list|(
+literal|"select e.EMPNO from EMP as e"
+argument_list|,
+literal|"RecordType(INTEGER NOT NULL EMPNO) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester1
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"select ^e^.EMPNO from EMP as E"
+argument_list|,
+literal|"Table 'e' not found"
+argument_list|)
+expr_stmt|;
+name|tester1
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"select ^E^.EMPNO from EMP as e"
+argument_list|,
+literal|"Table 'E' not found"
+argument_list|)
+expr_stmt|;
+name|tester1
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"select ^x^ from (\n"
+operator|+
+literal|"  select e.EMPNO as X from EMP as e)"
+argument_list|,
+literal|"Column 'x' not found in any table"
+argument_list|)
+expr_stmt|;
+comment|// double-quotes are not valid in this lexical convention
+name|tester1
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"select EMP.^\"x\"^ from EMP"
+argument_list|,
+literal|"(?s).*Encountered \"\\. \\\\\"\" at line .*"
+argument_list|)
+expr_stmt|;
+comment|// in Java mode, creating identifiers with spaces is not encouraged, but you
+comment|// can use back-ticks if you really have to
+name|tester1
+operator|.
+name|checkResultType
+argument_list|(
+literal|"select `x[y] z ` from (\n"
+operator|+
+literal|"  select e.EMPNO as `x[y] z ` from EMP as e)"
 argument_list|,
 literal|"RecordType(INTEGER NOT NULL x[y] z ) NOT NULL"
 argument_list|)
