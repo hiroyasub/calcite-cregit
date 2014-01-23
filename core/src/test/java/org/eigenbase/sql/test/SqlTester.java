@@ -67,20 +67,6 @@ name|eigenbase
 operator|.
 name|sql
 operator|.
-name|parser
-operator|.
-name|SqlParser
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
-name|sql
-operator|.
 name|validate
 operator|.
 name|SqlConformance
@@ -96,6 +82,30 @@ operator|.
 name|test
 operator|.
 name|SqlValidatorTestCase
+import|;
+end_import
+
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|avatica
+operator|.
+name|Casing
+import|;
+end_import
+
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|avatica
+operator|.
+name|Quoting
 import|;
 end_import
 
@@ -135,10 +145,32 @@ comment|/** Returns a tester that tests a given SQL quoting style. */
 name|SqlTester
 name|withQuoting
 parameter_list|(
-name|SqlParser
-operator|.
 name|Quoting
-name|bracket
+name|quoting
+parameter_list|)
+function_decl|;
+comment|/** Returns a tester that applies a given casing policy to quoted    * identifiers. */
+name|SqlTester
+name|withQuotedCasing
+parameter_list|(
+name|Casing
+name|casing
+parameter_list|)
+function_decl|;
+comment|/** Returns a tester that applies a given casing policy to unquoted    * identifiers. */
+name|SqlTester
+name|withUnquotedCasing
+parameter_list|(
+name|Casing
+name|casing
+parameter_list|)
+function_decl|;
+comment|/** Returns a tester that matches identifiers by case-sensitive or    * case-insensitive. */
+name|SqlTester
+name|withCaseSensitive
+parameter_list|(
+name|boolean
+name|sensitive
 parameter_list|)
 function_decl|;
 comment|/** Returns a tester that tests conformance to a particular SQL language    * version. */
@@ -376,6 +408,14 @@ name|sql
 parameter_list|,
 name|String
 name|expectedError
+parameter_list|)
+function_decl|;
+comment|/**    * Tests that a SQL query succeeds at prepare time.    *    * @param sql           SQL query    */
+name|void
+name|checkQuery
+parameter_list|(
+name|String
+name|sql
 parameter_list|)
 function_decl|;
 comment|//~ Inner Interfaces -------------------------------------------------------

@@ -542,6 +542,31 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Tests referencing columns from a sub-query that has duplicate column    * names. I think the standard says that this is illegal. We roll with it,    * and rename the second column to "e0". */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDuplicateColumnsInSubQuery
+parameter_list|()
+block|{
+name|String
+name|sql
+init|=
+literal|"select \"e\" from (\n"
+operator|+
+literal|"select empno as \"e\", deptno as d, 1 as \"e\" from EMP)"
+decl_stmt|;
+name|tester
+operator|.
+name|assertConvertsTo
+argument_list|(
+name|sql
+argument_list|,
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public

@@ -581,12 +581,14 @@ name|getRowType
 argument_list|()
 decl_stmt|;
 specifier|final
-name|RelDataType
-name|type
+name|RelDataTypeField
+name|field
 init|=
-name|SqlValidatorUtil
+name|validator
 operator|.
-name|lookupFieldType
+name|catalogReader
+operator|.
+name|field
 argument_list|(
 name|fromRowType
 argument_list|,
@@ -595,7 +597,7 @@ argument_list|)
 decl_stmt|;
 if|if
 condition|(
-name|type
+name|field
 operator|!=
 literal|null
 condition|)

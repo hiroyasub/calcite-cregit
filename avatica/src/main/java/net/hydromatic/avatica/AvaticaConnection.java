@@ -127,6 +127,25 @@ name|Helper
 operator|.
 name|INSTANCE
 decl_stmt|;
+specifier|public
+specifier|final
+name|Map
+argument_list|<
+name|InternalProperty
+argument_list|,
+name|Object
+argument_list|>
+name|properties
+init|=
+operator|new
+name|HashMap
+argument_list|<
+name|InternalProperty
+argument_list|,
+name|Object
+argument_list|>
+argument_list|()
+decl_stmt|;
 comment|/**    * Creates an AvaticaConnection.    *    *<p>Not public; method is called only from the driver or a derived    * class.</p>    *    * @param driver Driver    * @param factory Factory for JDBC objects    * @param url Server URL    * @param info Other connection properties    */
 specifier|protected
 name|AvaticaConnection

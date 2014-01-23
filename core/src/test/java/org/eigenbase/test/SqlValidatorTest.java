@@ -57,9 +57,9 @@ name|eigenbase
 operator|.
 name|sql
 operator|.
-name|parser
+name|test
 operator|.
-name|SqlParser
+name|SqlTester
 import|;
 end_import
 
@@ -100,6 +100,18 @@ operator|.
 name|util
 operator|.
 name|*
+import|;
+end_import
+
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|avatica
+operator|.
+name|Quoting
 import|;
 end_import
 
@@ -15317,16 +15329,20 @@ name|void
 name|testBrackets
 parameter_list|()
 block|{
+specifier|final
+name|SqlTester
+name|tester1
+init|=
 name|tester
 operator|.
 name|withQuoting
 argument_list|(
-name|SqlParser
-operator|.
 name|Quoting
 operator|.
 name|BRACKET
 argument_list|)
+decl_stmt|;
+name|tester1
 operator|.
 name|checkResultType
 argument_list|(
@@ -15335,16 +15351,7 @@ argument_list|,
 literal|"RecordType(INTEGER NOT NULL EMPNO) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
-operator|.
-name|withQuoting
-argument_list|(
-name|SqlParser
-operator|.
-name|Quoting
-operator|.
-name|BRACKET
-argument_list|)
+name|tester1
 operator|.
 name|checkQueryFails
 argument_list|(
@@ -15353,16 +15360,7 @@ argument_list|,
 literal|"Table 'E' not found"
 argument_list|)
 expr_stmt|;
-name|tester
-operator|.
-name|withQuoting
-argument_list|(
-name|SqlParser
-operator|.
-name|Quoting
-operator|.
-name|BRACKET
-argument_list|)
+name|tester1
 operator|.
 name|checkQueryFails
 argument_list|(
@@ -15373,16 +15371,7 @@ argument_list|,
 literal|"Column 'X' not found in any table"
 argument_list|)
 expr_stmt|;
-name|tester
-operator|.
-name|withQuoting
-argument_list|(
-name|SqlParser
-operator|.
-name|Quoting
-operator|.
-name|BRACKET
-argument_list|)
+name|tester1
 operator|.
 name|checkQueryFails
 argument_list|(
@@ -15391,16 +15380,7 @@ argument_list|,
 literal|"(?s).*Encountered \"\\. \\\\\"\" at line .*"
 argument_list|)
 expr_stmt|;
-name|tester
-operator|.
-name|withQuoting
-argument_list|(
-name|SqlParser
-operator|.
-name|Quoting
-operator|.
-name|BRACKET
-argument_list|)
+name|tester1
 operator|.
 name|checkResultType
 argument_list|(
@@ -15409,6 +15389,223 @@ operator|+
 literal|"  select [e].EMPNO as [x[y]] z ] from [EMP] as [e])"
 argument_list|,
 literal|"RecordType(INTEGER NOT NULL x[y] z ) NOT NULL"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests using case-insensitive matching of identifiers. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testCaseInsensitive
+parameter_list|()
+block|{
+specifier|final
+name|SqlTester
+name|tester1
+init|=
+name|tester
+operator|.
+name|withCaseSensitive
+argument_list|(
+literal|false
+argument_list|)
+operator|.
+name|withQuoting
+argument_list|(
+name|Quoting
+operator|.
+name|BRACKET
+argument_list|)
+decl_stmt|;
+name|tester1
+operator|.
+name|checkQuery
+argument_list|(
+literal|"select EMPNO from EMP"
+argument_list|)
+expr_stmt|;
+name|tester1
+operator|.
+name|checkQuery
+argument_list|(
+literal|"select empno from emp"
+argument_list|)
+expr_stmt|;
+name|tester1
+operator|.
+name|checkQuery
+argument_list|(
+literal|"select [empno] from [emp]"
+argument_list|)
+expr_stmt|;
+name|tester1
+operator|.
+name|checkQuery
+argument_list|(
+literal|"select [E].[empno] from [emp] as e"
+argument_list|)
+expr_stmt|;
+name|tester1
+operator|.
+name|checkQuery
+argument_list|(
+literal|"select t.[x] from (\n"
+operator|+
+literal|"  select [E].[empno] as x from [emp] as e) as [t]"
+argument_list|)
+expr_stmt|;
+comment|// correlating variable
+name|tester1
+operator|.
+name|checkQuery
+argument_list|(
+literal|"select * from emp as [e] where exists (\n"
+operator|+
+literal|"select 1 from dept where dept.deptno = [E].deptno)"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|withQuoting
+argument_list|(
+name|Quoting
+operator|.
+name|BRACKET
+argument_list|)
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"select * from emp as [e] where exists (\n"
+operator|+
+literal|"select 1 from dept where dept.deptno = ^[E]^.deptno)"
+argument_list|,
+literal|"(?s).*Table 'E' not found"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests that it is an error to insert into the same column twice, even using    * case-insensitive matching. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testCaseInsensitiveInsert
+parameter_list|()
+block|{
+specifier|final
+name|SqlTester
+name|tester1
+init|=
+name|tester
+operator|.
+name|withCaseSensitive
+argument_list|(
+literal|false
+argument_list|)
+operator|.
+name|withQuoting
+argument_list|(
+name|Quoting
+operator|.
+name|BRACKET
+argument_list|)
+decl_stmt|;
+name|tester1
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"insert into EMP ([EMPNO], deptno, ^[empno]^)\n"
+operator|+
+literal|" values (1, 1, 1)"
+argument_list|,
+literal|"Target column 'EMPNO' is assigned more than once"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests referencing columns from a sub-query that has duplicate column    * names. (The standard says it should be an error, but we don't right    * now.) */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testCaseInsensitiveSubQuery
+parameter_list|()
+block|{
+specifier|final
+name|SqlTester
+name|insensitive
+init|=
+name|tester
+operator|.
+name|withCaseSensitive
+argument_list|(
+literal|false
+argument_list|)
+operator|.
+name|withQuoting
+argument_list|(
+name|Quoting
+operator|.
+name|BRACKET
+argument_list|)
+decl_stmt|;
+specifier|final
+name|SqlTester
+name|sensitive
+init|=
+name|tester
+operator|.
+name|withCaseSensitive
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|withQuoting
+argument_list|(
+name|Quoting
+operator|.
+name|BRACKET
+argument_list|)
+decl_stmt|;
+name|String
+name|sql
+init|=
+literal|"select [e] from (\n"
+operator|+
+literal|"select empno as [e], deptno as d, 1 as [e] from EMP)"
+decl_stmt|;
+name|sensitive
+operator|.
+name|checkQuery
+argument_list|(
+name|sql
+argument_list|)
+expr_stmt|;
+name|insensitive
+operator|.
+name|checkQuery
+argument_list|(
+name|sql
+argument_list|)
+expr_stmt|;
+name|String
+name|sql1
+init|=
+literal|"select e from (\n"
+operator|+
+literal|"select empno as [e], deptno as d, 1 as [E] from EMP)"
+decl_stmt|;
+name|insensitive
+operator|.
+name|checkQuery
+argument_list|(
+name|sql1
+argument_list|)
+expr_stmt|;
+name|sensitive
+operator|.
+name|checkQuery
+argument_list|(
+name|sql1
 argument_list|)
 expr_stmt|;
 block|}

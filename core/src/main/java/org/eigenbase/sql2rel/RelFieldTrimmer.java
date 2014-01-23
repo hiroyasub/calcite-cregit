@@ -2193,14 +2193,11 @@ name|RelDataTypeField
 argument_list|>
 name|inputExtraFields
 init|=
-name|input
+name|RelDataTypeImpl
 operator|.
-name|getRowType
-argument_list|()
-operator|.
-name|getField
+name|extra
 argument_list|(
-literal|"_extra"
+name|rowType
 argument_list|)
 operator|==
 literal|null

@@ -425,6 +425,18 @@ argument_list|(
 literal|"conformance"
 argument_list|)
 decl_stmt|;
+specifier|final
+name|boolean
+name|caseSensitive
+init|=
+operator|(
+name|Boolean
+operator|)
+name|get
+argument_list|(
+literal|"caseSensitive"
+argument_list|)
+decl_stmt|;
 return|return
 operator|new
 name|FeatureValidator
@@ -438,6 +450,8 @@ operator|new
 name|MockCatalogReader
 argument_list|(
 name|typeFactory
+argument_list|,
+name|caseSensitive
 argument_list|)
 argument_list|,
 name|typeFactory

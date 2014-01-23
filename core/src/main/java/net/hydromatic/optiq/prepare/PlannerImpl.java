@@ -257,6 +257,13 @@ name|RuleSet
 argument_list|>
 name|ruleSets
 decl_stmt|;
+comment|// Options. TODO: allow client to set these. Maybe use a ConnectionConfig.
+specifier|private
+name|boolean
+name|caseSensitive
+init|=
+literal|true
+decl_stmt|;
 specifier|private
 name|State
 name|state
@@ -798,6 +805,8 @@ name|from
 argument_list|(
 name|rootSchema
 argument_list|)
+argument_list|,
+name|caseSensitive
 argument_list|,
 name|Schemas
 operator|.

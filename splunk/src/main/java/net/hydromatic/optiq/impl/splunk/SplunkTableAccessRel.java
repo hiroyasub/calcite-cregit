@@ -437,6 +437,7 @@ range|:
 name|fieldList
 control|)
 block|{
+comment|// REVIEW: is case-sensitive match what we want here?
 name|builder
 operator|.
 name|add
@@ -449,6 +450,8 @@ operator|.
 name|getField
 argument_list|(
 name|field
+argument_list|,
+literal|true
 argument_list|)
 argument_list|)
 expr_stmt|;

@@ -669,7 +669,7 @@ name|RelDataType
 name|createJoinType
 parameter_list|(
 name|RelDataType
-index|[]
+modifier|...
 name|types
 parameter_list|)
 block|{

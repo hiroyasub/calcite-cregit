@@ -2474,6 +2474,8 @@ argument_list|(
 name|expr
 argument_list|,
 name|field
+argument_list|,
+literal|true
 argument_list|)
 return|;
 block|}
