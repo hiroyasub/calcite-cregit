@@ -13899,14 +13899,14 @@ name|checkWholeExpFails
 argument_list|(
 literal|"(timestamp '1-2-3 4:5:6', timestamp '1-2-3 4:5:6' ) overlaps (time '4:5:6', interval '1 2:3:4.5' day to second)"
 argument_list|,
-literal|"(?s).*Cannot apply 'OVERLAPS' to arguments of type '.<TIMESTAMP>,<TIMESTAMP>. OVERLAPS .<TIME.0.>,<INTERVAL DAY TO SECOND>.*"
+literal|"(?s).*Cannot apply 'OVERLAPS' to arguments of type '.<TIMESTAMP.0.>,<TIMESTAMP.0.>. OVERLAPS .<TIME.0.>,<INTERVAL DAY TO SECOND>.*"
 argument_list|)
 expr_stmt|;
 name|checkWholeExpFails
 argument_list|(
 literal|"(time '4:5:6', timestamp '1-2-3 4:5:6' ) overlaps (time '4:5:6', interval '1 2:3:4.5' day to second)"
 argument_list|,
-literal|"(?s).*Cannot apply 'OVERLAPS' to arguments of type '.<TIME.0.>,<TIMESTAMP>. OVERLAPS .<TIME.0.>,<INTERVAL DAY TO SECOND>.'.*"
+literal|"(?s).*Cannot apply 'OVERLAPS' to arguments of type '.<TIME.0.>,<TIMESTAMP.0.>. OVERLAPS .<TIME.0.>,<INTERVAL DAY TO SECOND>.'.*"
 argument_list|)
 expr_stmt|;
 name|checkWholeExpFails
