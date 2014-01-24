@@ -252,9 +252,10 @@ block|{
 name|RelOptCost
 name|bestCost
 init|=
-name|VolcanoCost
+name|planner
 operator|.
-name|INFINITY
+name|makeInfiniteCost
+argument_list|()
 decl_stmt|;
 for|for
 control|(
@@ -381,12 +382,9 @@ literal|null
 condition|)
 block|{
 return|return
-name|VolcanoCost
+name|Double
 operator|.
-name|INFINITY
-operator|.
-name|getRows
-argument_list|()
+name|POSITIVE_INFINITY
 return|;
 block|}
 else|else
