@@ -150,6 +150,9 @@ block|{
 return|return
 name|planner
 operator|.
+name|getCostFactory
+argument_list|()
+operator|.
 name|makeInfiniteCost
 argument_list|()
 return|;

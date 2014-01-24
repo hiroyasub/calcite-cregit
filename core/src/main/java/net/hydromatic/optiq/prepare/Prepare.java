@@ -765,6 +765,10 @@ name|Void
 operator|>
 name|ignore2
 argument_list|()
+argument_list|,
+name|RelOptCostImpl
+operator|.
+name|FACTORY
 argument_list|)
 decl_stmt|;
 name|planner3

@@ -161,6 +161,9 @@ block|{
 return|return
 name|planner
 operator|.
+name|getCostFactory
+argument_list|()
+operator|.
 name|makeZeroCost
 argument_list|()
 return|;

@@ -136,6 +136,11 @@ name|RelOptRule
 argument_list|>
 name|mapDescToRule
 decl_stmt|;
+specifier|protected
+specifier|final
+name|RelOptCostFactory
+name|costFactory
+decl_stmt|;
 specifier|private
 name|MulticastRelOptListener
 name|listener
@@ -181,8 +186,17 @@ comment|//~ Constructors -------------------------------------------------------
 comment|/**    * Creates an AbstractRelOptPlanner.    */
 specifier|protected
 name|AbstractRelOptPlanner
-parameter_list|()
+parameter_list|(
+name|RelOptCostFactory
+name|costFactory
+parameter_list|)
 block|{
+name|this
+operator|.
+name|costFactory
+operator|=
+name|costFactory
+expr_stmt|;
 name|mapDescToRule
 operator|=
 operator|new
@@ -204,6 +218,15 @@ argument_list|()
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+specifier|public
+name|RelOptCostFactory
+name|getCostFactory
+parameter_list|()
+block|{
+return|return
+name|costFactory
+return|;
+block|}
 comment|// implement RelOptPlanner
 specifier|public
 name|void
@@ -557,89 +580,6 @@ name|RelTraitSet
 operator|.
 name|createEmpty
 argument_list|()
-return|;
-block|}
-comment|// implement RelOptPlanner
-specifier|public
-name|RelOptCost
-name|makeCost
-parameter_list|(
-name|double
-name|dRows
-parameter_list|,
-name|double
-name|dCpu
-parameter_list|,
-name|double
-name|dIo
-parameter_list|)
-block|{
-return|return
-operator|new
-name|RelOptCostImpl
-argument_list|(
-name|dRows
-argument_list|)
-return|;
-block|}
-comment|// implement RelOptPlanner
-specifier|public
-name|RelOptCost
-name|makeHugeCost
-parameter_list|()
-block|{
-return|return
-operator|new
-name|RelOptCostImpl
-argument_list|(
-name|Double
-operator|.
-name|MAX_VALUE
-argument_list|)
-return|;
-block|}
-comment|// implement RelOptPlanner
-specifier|public
-name|RelOptCost
-name|makeInfiniteCost
-parameter_list|()
-block|{
-return|return
-operator|new
-name|RelOptCostImpl
-argument_list|(
-name|Double
-operator|.
-name|POSITIVE_INFINITY
-argument_list|)
-return|;
-block|}
-comment|// implement RelOptPlanner
-specifier|public
-name|RelOptCost
-name|makeTinyCost
-parameter_list|()
-block|{
-return|return
-operator|new
-name|RelOptCostImpl
-argument_list|(
-literal|1.0
-argument_list|)
-return|;
-block|}
-comment|// implement RelOptPlanner
-specifier|public
-name|RelOptCost
-name|makeZeroCost
-parameter_list|()
-block|{
-return|return
-operator|new
-name|RelOptCostImpl
-argument_list|(
-literal|0.0
-argument_list|)
 return|;
 block|}
 comment|// implement RelOptPlanner

@@ -248,43 +248,10 @@ name|RelNode
 name|findBestExp
 parameter_list|()
 function_decl|;
-comment|/**    * Creates a cost object.    */
+comment|/**    * Returns the factory that creates {@link org.eigenbase.relopt.RelOptCost}s.    */
 specifier|public
-name|RelOptCost
-name|makeCost
-parameter_list|(
-name|double
-name|dRows
-parameter_list|,
-name|double
-name|dCpu
-parameter_list|,
-name|double
-name|dIo
-parameter_list|)
-function_decl|;
-comment|/**    * Creates a cost object representing an enormous non-infinite cost.    */
-specifier|public
-name|RelOptCost
-name|makeHugeCost
-parameter_list|()
-function_decl|;
-comment|/**    * Creates a cost object representing infinite cost.    */
-specifier|public
-name|RelOptCost
-name|makeInfiniteCost
-parameter_list|()
-function_decl|;
-comment|/**    * Creates a cost object representing a small positive cost.    */
-specifier|public
-name|RelOptCost
-name|makeTinyCost
-parameter_list|()
-function_decl|;
-comment|/**    * Creates a cost object representing zero cost.    */
-specifier|public
-name|RelOptCost
-name|makeZeroCost
+name|RelOptCostFactory
+name|getCostFactory
 parameter_list|()
 function_decl|;
 comment|/**    * Computes the cost of a RelNode. In most cases, this just dispatches to    * {@link RelMetadataQuery#getCumulativeCost}.    *    * @param rel expression of interest    * @return estimated cost    */

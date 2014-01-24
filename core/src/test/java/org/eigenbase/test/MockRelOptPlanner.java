@@ -114,7 +114,11 @@ name|MockRelOptPlanner
 parameter_list|()
 block|{
 name|super
-argument_list|()
+argument_list|(
+name|RelOptCostImpl
+operator|.
+name|FACTORY
+argument_list|)
 expr_stmt|;
 name|setExecutor
 argument_list|(

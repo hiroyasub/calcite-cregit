@@ -711,6 +711,10 @@ literal|null
 return|;
 block|}
 block|}
+argument_list|,
+name|RelOptCostImpl
+operator|.
+name|FACTORY
 argument_list|)
 return|;
 block|}

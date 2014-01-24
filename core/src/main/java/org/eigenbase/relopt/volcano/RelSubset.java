@@ -254,6 +254,9 @@ name|bestCost
 init|=
 name|planner
 operator|.
+name|getCostFactory
+argument_list|()
+operator|.
 name|makeInfiniteCost
 argument_list|()
 decl_stmt|;
@@ -364,6 +367,9 @@ parameter_list|)
 block|{
 return|return
 name|planner
+operator|.
+name|getCostFactory
+argument_list|()
 operator|.
 name|makeZeroCost
 argument_list|()

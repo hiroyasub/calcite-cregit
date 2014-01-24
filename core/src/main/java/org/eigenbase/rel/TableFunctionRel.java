@@ -231,6 +231,9 @@ comment|// for an abstract rel?
 return|return
 name|planner
 operator|.
+name|getCostFactory
+argument_list|()
+operator|.
 name|makeHugeCost
 argument_list|()
 return|;

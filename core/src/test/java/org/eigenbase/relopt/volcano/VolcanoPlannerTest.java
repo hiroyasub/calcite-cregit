@@ -1602,6 +1602,9 @@ block|{
 return|return
 name|planner
 operator|.
+name|getCostFactory
+argument_list|()
+operator|.
 name|makeInfiniteCost
 argument_list|()
 return|;
@@ -1715,6 +1718,9 @@ parameter_list|)
 block|{
 return|return
 name|planner
+operator|.
+name|getCostFactory
+argument_list|()
 operator|.
 name|makeInfiniteCost
 argument_list|()
@@ -1920,6 +1926,9 @@ block|{
 return|return
 name|planner
 operator|.
+name|getCostFactory
+argument_list|()
+operator|.
 name|makeTinyCost
 argument_list|()
 return|;
@@ -1999,6 +2008,9 @@ parameter_list|)
 block|{
 return|return
 name|planner
+operator|.
+name|getCostFactory
+argument_list|()
 operator|.
 name|makeTinyCost
 argument_list|()

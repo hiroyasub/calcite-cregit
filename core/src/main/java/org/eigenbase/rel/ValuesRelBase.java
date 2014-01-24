@@ -526,6 +526,9 @@ decl_stmt|;
 return|return
 name|planner
 operator|.
+name|getCostFactory
+argument_list|()
+operator|.
 name|makeCost
 argument_list|(
 name|dRows

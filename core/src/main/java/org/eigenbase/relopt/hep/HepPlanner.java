@@ -257,6 +257,10 @@ argument_list|,
 literal|false
 argument_list|,
 literal|null
+argument_list|,
+name|RelOptCostImpl
+operator|.
+name|FACTORY
 argument_list|)
 expr_stmt|;
 block|}
@@ -279,8 +283,16 @@ argument_list|,
 name|Void
 argument_list|>
 name|onCopyHook
+parameter_list|,
+name|RelOptCostFactory
+name|costFactory
 parameter_list|)
 block|{
+name|super
+argument_list|(
+name|costFactory
+argument_list|)
+expr_stmt|;
 name|this
 operator|.
 name|mainProgram

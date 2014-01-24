@@ -275,6 +275,9 @@ comment|// REVIEW jvs 9-Apr-2006:  Just for now...
 return|return
 name|planner
 operator|.
+name|getCostFactory
+argument_list|()
+operator|.
 name|makeTinyCost
 argument_list|()
 return|;
