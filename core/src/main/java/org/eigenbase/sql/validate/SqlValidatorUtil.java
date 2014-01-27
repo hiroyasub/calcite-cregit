@@ -300,9 +300,11 @@ name|field
 operator|!=
 literal|null
 condition|)
+block|{
 return|return
 name|field
 return|;
+block|}
 comment|// If record type is flagged as having "any field you ask for",
 comment|// return a type. (TODO: Better way to mark accommodating types.)
 name|RelDataTypeField
