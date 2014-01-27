@@ -63,6 +63,20 @@ name|optiq
 operator|.
 name|jdbc
 operator|.
+name|ConnectionConfig
+import|;
+end_import
+
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|optiq
+operator|.
+name|jdbc
+operator|.
 name|OptiqConnection
 import|;
 end_import
@@ -195,12 +209,17 @@ name|Frameworks
 parameter_list|()
 block|{
 block|}
-comment|/**    * Creates an instance of {@code Planner}.    *    * @param schemaFactory Schema factory. Given a root schema, it creates and    *                      returns the schema that should be used to execute    *                      queries.    * @param operatorTable The instance of SqlOperatorTable that be should to    *     resolve Optiq operators.    * @param ruleSets An array of one or more rule sets used during the course of    *     query evaluation. The common use case is when there is a single rule    *     set and {@link net.hydromatic.optiq.tools.Planner#transform}    *     will only be called once. However, consumers may also register multiple    *     {@link net.hydromatic.optiq.tools.RuleSet}s and do multiple repetitions    *     of {@link Planner#transform} planning cycles using different indices.    *     The order of rule sets provided here determines the zero-based indices    *     of rule sets elsewhere in this class.    * @return The Planner object.    */
+comment|/**    * Creates an instance of {@code Planner}.    *    * @param lex The type of lexing the SqlParser should do.  Controls case rules     * and quoted identifier syntax.    * @param schemaFactory Schema factory. Given a root schema, it creates and    *                      returns the schema that should be used to execute    *                      queries.    * @param operatorTable The instance of SqlOperatorTable that be should to    *     resolve Optiq operators.    * @param ruleSets An array of one or more rule sets used during the course of    *     query evaluation. The common use case is when there is a single rule    *     set and {@link net.hydromatic.optiq.tools.Planner#transform}    *     will only be called once. However, consumers may also register multiple    *     {@link net.hydromatic.optiq.tools.RuleSet}s and do multiple repetitions    *     of {@link Planner#transform} planning cycles using different indices.    *     The order of rule sets provided here determines the zero-based indices    *     of rule sets elsewhere in this class.    * @return The Planner object.    */
 specifier|public
 specifier|static
 name|Planner
 name|getPlanner
 parameter_list|(
+name|ConnectionConfig
+operator|.
+name|Lex
+name|lex
+parameter_list|,
 name|Function1
 argument_list|<
 name|SchemaPlus
@@ -221,6 +240,8 @@ return|return
 operator|new
 name|PlannerImpl
 argument_list|(
+name|lex
+argument_list|,
 name|schemaFactory
 argument_list|,
 name|operatorTable
