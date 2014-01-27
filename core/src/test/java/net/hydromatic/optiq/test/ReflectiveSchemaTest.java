@@ -1698,14 +1698,12 @@ literal|"C=1\n"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test case for https://github.com/julianhyde/optiq/issues/119. */
-annotation|@
-name|Ignore
+comment|/** Test case for    *<a href="https://github.com/julianhyde/optiq/issues/119">optiq-119</a>.    * Comparing a Java type with a SQL type. */
 annotation|@
 name|Test
 specifier|public
 name|void
-name|testJavaBoolean2
+name|testCompareJavaAndSqlTypes
 parameter_list|()
 throws|throws
 name|Exception
@@ -1730,19 +1728,21 @@ name|CatchallSchema
 argument_list|()
 argument_list|)
 decl_stmt|;
-comment|// should return "C=1" but with optiq-119 it does not
+comment|// With optiq-119, returned 0 rows. The problem was that when comparing
+comment|// a Java type (long) and a SQL type (INTEGER), the SQL type was deemed
+comment|// "less restrictive". So, the long value got truncated to an int value.
 name|with
 operator|.
 name|query
 argument_list|(
-literal|"select \"wrapperLong\" as c from \"s\".\"everyTypes\"\n"
+literal|"select \"primitiveLong\" as c from \"s\".\"everyTypes\"\n"
 operator|+
-literal|"where \"wrapperLong\"> 0"
+literal|"where \"primitiveLong\"> 0"
 argument_list|)
 operator|.
 name|returns
 argument_list|(
-literal|"C=1\n"
+literal|"C=9223372036854775807\n"
 argument_list|)
 expr_stmt|;
 comment|// count(nullif(b, false)) counts how many times b is true
@@ -1754,24 +1754,24 @@ literal|"select count(\"primitiveBoolean\") as p,\n"
 operator|+
 literal|"  count(\"wrapperBoolean\") as w,\n"
 operator|+
-literal|"  count(nullif(\"primitiveShort\"> 0, false)) as sp,\n"
+literal|"  count(nullif(\"primitiveShort\">= 0, false)) as sp,\n"
 operator|+
-literal|"  count(nullif(\"wrapperShort\"> 0, false)) as sw,\n"
+literal|"  count(nullif(\"wrapperShort\">= 0, false)) as sw,\n"
 operator|+
-literal|"  count(nullif(\"primitiveInt\"> 0, false)) as ip,\n"
+literal|"  count(nullif(\"primitiveInt\">= 0, false)) as ip,\n"
 operator|+
-literal|"  count(nullif(\"wrapperInteger\"> 0, false)) as iw,\n"
+literal|"  count(nullif(\"wrapperInteger\">= 0, false)) as iw,\n"
 operator|+
-literal|"  count(nullif(\"primitiveLong\"> 0, false)) as lp,\n"
+literal|"  count(nullif(\"primitiveLong\">= 0, false)) as lp,\n"
 operator|+
-literal|"  count(nullif(\"wrapperLong\"> 0, false)) as lw\n"
+literal|"  count(nullif(\"wrapperLong\">= 0, false)) as lw\n"
 operator|+
 literal|"from \"s\".\"everyTypes\""
 argument_list|)
 operator|.
 name|returns
 argument_list|(
-literal|"P=2; W=1; SP=1; SW=0; IP=1; IW=0; LP=1; LW=0\n"
+literal|"P=2; W=1; SP=2; SW=1; IP=2; IW=1; LP=2; LW=1\n"
 argument_list|)
 expr_stmt|;
 block|}
