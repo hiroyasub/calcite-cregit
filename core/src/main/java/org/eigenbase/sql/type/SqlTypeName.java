@@ -97,6 +97,20 @@ name|ImmutableList
 import|;
 end_import
 
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|ImmutableMap
+import|;
+end_import
+
 begin_comment
 comment|/**  * Enumeration of the type names which can be used to construct a SQL type.  * Rationale for this class's existence (instead of just using the standard  * java.sql.Type ordinals):  *  *<ul>  *<li>{@link java.sql.Types} does not include all SQL2003 data-types;  *<li>SqlTypeName provides a type-safe enumeration;  *<li>SqlTypeName provides a place to hang extra information such as whether  * the type carries precision and scale.  *</ul>  */
 end_comment
@@ -117,6 +131,10 @@ argument_list|,
 name|Types
 operator|.
 name|BOOLEAN
+argument_list|,
+name|SqlTypeFamily
+operator|.
+name|BOOLEAN
 argument_list|)
 block|,
 name|TINYINT
@@ -130,6 +148,10 @@ argument_list|,
 name|Types
 operator|.
 name|TINYINT
+argument_list|,
+name|SqlTypeFamily
+operator|.
+name|NUMERIC
 argument_list|)
 block|,
 name|SMALLINT
@@ -143,6 +165,10 @@ argument_list|,
 name|Types
 operator|.
 name|SMALLINT
+argument_list|,
+name|SqlTypeFamily
+operator|.
+name|NUMERIC
 argument_list|)
 block|,
 name|INTEGER
@@ -156,6 +182,10 @@ argument_list|,
 name|Types
 operator|.
 name|INTEGER
+argument_list|,
+name|SqlTypeFamily
+operator|.
+name|NUMERIC
 argument_list|)
 block|,
 name|BIGINT
@@ -169,6 +199,10 @@ argument_list|,
 name|Types
 operator|.
 name|BIGINT
+argument_list|,
+name|SqlTypeFamily
+operator|.
+name|NUMERIC
 argument_list|)
 block|,
 name|DECIMAL
@@ -190,6 +224,10 @@ argument_list|,
 name|Types
 operator|.
 name|DECIMAL
+argument_list|,
+name|SqlTypeFamily
+operator|.
+name|NUMERIC
 argument_list|)
 block|,
 name|FLOAT
@@ -203,6 +241,10 @@ argument_list|,
 name|Types
 operator|.
 name|FLOAT
+argument_list|,
+name|SqlTypeFamily
+operator|.
+name|NUMERIC
 argument_list|)
 block|,
 name|REAL
@@ -216,6 +258,10 @@ argument_list|,
 name|Types
 operator|.
 name|REAL
+argument_list|,
+name|SqlTypeFamily
+operator|.
+name|NUMERIC
 argument_list|)
 block|,
 name|DOUBLE
@@ -229,6 +275,10 @@ argument_list|,
 name|Types
 operator|.
 name|DOUBLE
+argument_list|,
+name|SqlTypeFamily
+operator|.
+name|NUMERIC
 argument_list|)
 block|,
 name|DATE
@@ -240,6 +290,10 @@ argument_list|,
 literal|false
 argument_list|,
 name|Types
+operator|.
+name|DATE
+argument_list|,
+name|SqlTypeFamily
 operator|.
 name|DATE
 argument_list|)
@@ -257,6 +311,10 @@ argument_list|,
 literal|false
 argument_list|,
 name|Types
+operator|.
+name|TIME
+argument_list|,
+name|SqlTypeFamily
 operator|.
 name|TIME
 argument_list|)
@@ -274,6 +332,10 @@ argument_list|,
 literal|false
 argument_list|,
 name|Types
+operator|.
+name|TIMESTAMP
+argument_list|,
+name|SqlTypeFamily
 operator|.
 name|TIMESTAMP
 argument_list|)
@@ -289,6 +351,10 @@ argument_list|,
 name|Types
 operator|.
 name|OTHER
+argument_list|,
+name|SqlTypeFamily
+operator|.
+name|INTERVAL_YEAR_MONTH
 argument_list|)
 block|,
 name|INTERVAL_DAY_TIME
@@ -310,6 +376,10 @@ argument_list|,
 name|Types
 operator|.
 name|OTHER
+argument_list|,
+name|SqlTypeFamily
+operator|.
+name|INTERVAL_DAY_TIME
 argument_list|)
 block|,
 name|CHAR
@@ -327,6 +397,10 @@ argument_list|,
 name|Types
 operator|.
 name|CHAR
+argument_list|,
+name|SqlTypeFamily
+operator|.
+name|CHARACTER
 argument_list|)
 block|,
 name|VARCHAR
@@ -344,6 +418,10 @@ argument_list|,
 name|Types
 operator|.
 name|VARCHAR
+argument_list|,
+name|SqlTypeFamily
+operator|.
+name|CHARACTER
 argument_list|)
 block|,
 name|BINARY
@@ -359,6 +437,10 @@ argument_list|,
 literal|false
 argument_list|,
 name|Types
+operator|.
+name|BINARY
+argument_list|,
+name|SqlTypeFamily
 operator|.
 name|BINARY
 argument_list|)
@@ -378,6 +460,10 @@ argument_list|,
 name|Types
 operator|.
 name|VARBINARY
+argument_list|,
+name|SqlTypeFamily
+operator|.
+name|BINARY
 argument_list|)
 block|,
 name|NULL
@@ -389,6 +475,10 @@ argument_list|,
 literal|true
 argument_list|,
 name|Types
+operator|.
+name|NULL
+argument_list|,
+name|SqlTypeFamily
 operator|.
 name|NULL
 argument_list|)
@@ -404,6 +494,10 @@ argument_list|,
 name|Types
 operator|.
 name|JAVA_OBJECT
+argument_list|,
+name|SqlTypeFamily
+operator|.
+name|ANY
 argument_list|)
 block|,
 name|SYMBOL
@@ -417,6 +511,8 @@ argument_list|,
 name|Types
 operator|.
 name|OTHER
+argument_list|,
+literal|null
 argument_list|)
 block|,
 name|MULTISET
@@ -430,6 +526,10 @@ argument_list|,
 name|Types
 operator|.
 name|ARRAY
+argument_list|,
+name|SqlTypeFamily
+operator|.
+name|MULTISET
 argument_list|)
 block|,
 name|ARRAY
@@ -441,6 +541,10 @@ argument_list|,
 literal|false
 argument_list|,
 name|Types
+operator|.
+name|ARRAY
+argument_list|,
+name|SqlTypeFamily
 operator|.
 name|ARRAY
 argument_list|)
@@ -456,6 +560,10 @@ argument_list|,
 name|Types
 operator|.
 name|OTHER
+argument_list|,
+name|SqlTypeFamily
+operator|.
+name|MAP
 argument_list|)
 block|,
 name|DISTINCT
@@ -469,6 +577,8 @@ argument_list|,
 name|Types
 operator|.
 name|DISTINCT
+argument_list|,
+literal|null
 argument_list|)
 block|,
 name|STRUCTURED
@@ -482,6 +592,8 @@ argument_list|,
 name|Types
 operator|.
 name|STRUCT
+argument_list|,
+literal|null
 argument_list|)
 block|,
 name|ROW
@@ -495,6 +607,8 @@ argument_list|,
 name|Types
 operator|.
 name|STRUCT
+argument_list|,
+literal|null
 argument_list|)
 block|,
 name|OTHER
@@ -508,6 +622,8 @@ argument_list|,
 name|Types
 operator|.
 name|OTHER
+argument_list|,
+literal|null
 argument_list|)
 block|,
 name|CURSOR
@@ -518,11 +634,13 @@ name|NoNo
 argument_list|,
 literal|false
 argument_list|,
-name|Types
+name|ExtraSqlTypes
 operator|.
-name|OTHER
-operator|+
-literal|1
+name|REF_CURSOR
+argument_list|,
+name|SqlTypeFamily
+operator|.
+name|CURSOR
 argument_list|)
 block|,
 name|COLUMN_LIST
@@ -538,47 +656,12 @@ operator|.
 name|OTHER
 operator|+
 literal|2
+argument_list|,
+name|SqlTypeFamily
+operator|.
+name|COLUMN_LIST
 argument_list|)
 block|;
-specifier|private
-specifier|static
-name|SqlTypeName
-index|[]
-name|jdbcTypeToName
-decl_stmt|;
-comment|// Basing type name mapping on these constants is fragile, since newer
-comment|// JDK versions may introduce new types with values outside of these
-comment|// boundaries.
-comment|// TODO: Find a less fragile way to map type constants to names
-specifier|public
-specifier|static
-specifier|final
-name|int
-name|MIN_JDBC_TYPE
-init|=
-name|ExtraSqlTypes
-operator|.
-name|LONGNVARCHAR
-decl_stmt|;
-specifier|public
-specifier|static
-specifier|final
-name|int
-name|MAX_JDBC_TYPE
-init|=
-name|ExtraSqlTypes
-operator|.
-name|NCLOB
-decl_stmt|;
-specifier|public
-specifier|static
-specifier|final
-name|int
-name|JAVA6_NCHAR
-init|=
-operator|-
-literal|15
-decl_stmt|;
 specifier|public
 specifier|static
 specifier|final
@@ -969,24 +1052,28 @@ argument_list|,
 name|INTERVAL_YEAR_MONTH
 argument_list|)
 decl_stmt|;
-static|static
-block|{
-comment|// This squanders some memory since MAX_JDBC_TYPE == 2006!
-name|jdbcTypeToName
-operator|=
-operator|new
+specifier|private
+specifier|static
+specifier|final
+name|Map
+argument_list|<
+name|Integer
+argument_list|,
 name|SqlTypeName
-index|[
-operator|(
-literal|1
-operator|+
-name|MAX_JDBC_TYPE
-operator|)
-operator|-
-name|MIN_JDBC_TYPE
-index|]
-expr_stmt|;
-name|setNameForJdbcType
+argument_list|>
+name|jdbcTypeToName
+init|=
+name|ImmutableMap
+operator|.
+expr|<
+name|Integer
+decl_stmt|,
+name|SqlTypeName
+decl|>
+name|builder
+argument_list|()
+decl|.
+name|put
 argument_list|(
 name|Types
 operator|.
@@ -994,8 +1081,8 @@ name|TINYINT
 argument_list|,
 name|TINYINT
 argument_list|)
-expr_stmt|;
-name|setNameForJdbcType
+decl|.
+name|put
 argument_list|(
 name|Types
 operator|.
@@ -1003,8 +1090,8 @@ name|SMALLINT
 argument_list|,
 name|SMALLINT
 argument_list|)
-expr_stmt|;
-name|setNameForJdbcType
+decl|.
+name|put
 argument_list|(
 name|Types
 operator|.
@@ -1012,8 +1099,8 @@ name|BIGINT
 argument_list|,
 name|BIGINT
 argument_list|)
-expr_stmt|;
-name|setNameForJdbcType
+decl|.
+name|put
 argument_list|(
 name|Types
 operator|.
@@ -1021,8 +1108,8 @@ name|INTEGER
 argument_list|,
 name|INTEGER
 argument_list|)
-expr_stmt|;
-name|setNameForJdbcType
+decl|.
+name|put
 argument_list|(
 name|Types
 operator|.
@@ -1030,9 +1117,9 @@ name|NUMERIC
 argument_list|,
 name|DECIMAL
 argument_list|)
-expr_stmt|;
 comment|// REVIEW
-name|setNameForJdbcType
+decl|.
+name|put
 argument_list|(
 name|Types
 operator|.
@@ -1040,8 +1127,8 @@ name|DECIMAL
 argument_list|,
 name|DECIMAL
 argument_list|)
-expr_stmt|;
-name|setNameForJdbcType
+decl|.
+name|put
 argument_list|(
 name|Types
 operator|.
@@ -1049,8 +1136,8 @@ name|FLOAT
 argument_list|,
 name|FLOAT
 argument_list|)
-expr_stmt|;
-name|setNameForJdbcType
+decl|.
+name|put
 argument_list|(
 name|Types
 operator|.
@@ -1058,8 +1145,8 @@ name|REAL
 argument_list|,
 name|REAL
 argument_list|)
-expr_stmt|;
-name|setNameForJdbcType
+decl|.
+name|put
 argument_list|(
 name|Types
 operator|.
@@ -1067,8 +1154,8 @@ name|DOUBLE
 argument_list|,
 name|DOUBLE
 argument_list|)
-expr_stmt|;
-name|setNameForJdbcType
+decl|.
+name|put
 argument_list|(
 name|Types
 operator|.
@@ -1076,8 +1163,8 @@ name|CHAR
 argument_list|,
 name|CHAR
 argument_list|)
-expr_stmt|;
-name|setNameForJdbcType
+decl|.
+name|put
 argument_list|(
 name|Types
 operator|.
@@ -1085,9 +1172,9 @@ name|VARCHAR
 argument_list|,
 name|VARCHAR
 argument_list|)
-expr_stmt|;
 comment|// TODO: provide real support for these eventually
-name|setNameForJdbcType
+decl|.
+name|put
 argument_list|(
 name|ExtraSqlTypes
 operator|.
@@ -1095,8 +1182,8 @@ name|NCHAR
 argument_list|,
 name|CHAR
 argument_list|)
-expr_stmt|;
-name|setNameForJdbcType
+decl|.
+name|put
 argument_list|(
 name|ExtraSqlTypes
 operator|.
@@ -1104,17 +1191,17 @@ name|NVARCHAR
 argument_list|,
 name|VARCHAR
 argument_list|)
-expr_stmt|;
-comment|// TODO: additional types not yet supported. See ExtraSqlTypes.java
-comment|// setNameForJdbcType(Types.LONGVARCHAR, Longvarchar);
-comment|// setNameForJdbcType(Types.CLOB, Clob);
-comment|// setNameForJdbcType(Types.LONGVARBINARY, Longvarbinary);
-comment|// setNameForJdbcType(Types.BLOB, Blob);
-comment|// setNameForJdbcType(Types.LONGNVARCHAR, Longnvarchar);
-comment|// setNameForJdbcType(Types.NCLOB, Nclob);
-comment|// setNameForJdbcType(Types.ROWID, Rowid);
-comment|// setNameForJdbcType(Types.SQLXML, Sqlxml);
-name|setNameForJdbcType
+comment|// TODO: additional types not yet supported. See ExtraSqlTypes.
+comment|// .put(Types.LONGVARCHAR, Longvarchar)
+comment|// .put(Types.CLOB, Clob)
+comment|// .put(Types.LONGVARBINARY, Longvarbinary)
+comment|// .put(Types.BLOB, Blob)
+comment|// .put(Types.LONGNVARCHAR, Longnvarchar)
+comment|// .put(Types.NCLOB, Nclob)
+comment|// .put(Types.ROWID, Rowid)
+comment|// .put(Types.SQLXML, Sqlxml)
+decl|.
+name|put
 argument_list|(
 name|Types
 operator|.
@@ -1122,8 +1209,8 @@ name|BINARY
 argument_list|,
 name|BINARY
 argument_list|)
-expr_stmt|;
-name|setNameForJdbcType
+decl|.
+name|put
 argument_list|(
 name|Types
 operator|.
@@ -1131,8 +1218,8 @@ name|VARBINARY
 argument_list|,
 name|VARBINARY
 argument_list|)
-expr_stmt|;
-name|setNameForJdbcType
+decl|.
+name|put
 argument_list|(
 name|Types
 operator|.
@@ -1140,8 +1227,8 @@ name|DATE
 argument_list|,
 name|DATE
 argument_list|)
-expr_stmt|;
-name|setNameForJdbcType
+decl|.
+name|put
 argument_list|(
 name|Types
 operator|.
@@ -1149,8 +1236,8 @@ name|TIME
 argument_list|,
 name|TIME
 argument_list|)
-expr_stmt|;
-name|setNameForJdbcType
+decl|.
+name|put
 argument_list|(
 name|Types
 operator|.
@@ -1158,8 +1245,8 @@ name|TIMESTAMP
 argument_list|,
 name|TIMESTAMP
 argument_list|)
-expr_stmt|;
-name|setNameForJdbcType
+decl|.
+name|put
 argument_list|(
 name|Types
 operator|.
@@ -1167,8 +1254,8 @@ name|BIT
 argument_list|,
 name|BOOLEAN
 argument_list|)
-expr_stmt|;
-name|setNameForJdbcType
+decl|.
+name|put
 argument_list|(
 name|Types
 operator|.
@@ -1176,8 +1263,8 @@ name|BOOLEAN
 argument_list|,
 name|BOOLEAN
 argument_list|)
-expr_stmt|;
-name|setNameForJdbcType
+decl|.
+name|put
 argument_list|(
 name|Types
 operator|.
@@ -1185,8 +1272,8 @@ name|DISTINCT
 argument_list|,
 name|DISTINCT
 argument_list|)
-expr_stmt|;
-name|setNameForJdbcType
+decl|.
+name|put
 argument_list|(
 name|Types
 operator|.
@@ -1194,8 +1281,10 @@ name|STRUCT
 argument_list|,
 name|STRUCTURED
 argument_list|)
-expr_stmt|;
-block|}
+decl|.
+name|build
+argument_list|()
+decl_stmt|;
 comment|/**    * Bitwise-or of flags indicating allowable precision/scale combinations.    */
 specifier|private
 specifier|final
@@ -1214,6 +1303,11 @@ name|int
 name|jdbcOrdinal
 decl_stmt|;
 specifier|private
+specifier|final
+name|SqlTypeFamily
+name|family
+decl_stmt|;
+specifier|private
 name|SqlTypeName
 parameter_list|(
 name|int
@@ -1224,6 +1318,9 @@ name|special
 parameter_list|,
 name|int
 name|jdbcType
+parameter_list|,
+name|SqlTypeFamily
+name|family
 parameter_list|)
 block|{
 name|this
@@ -1243,6 +1340,12 @@ operator|.
 name|jdbcOrdinal
 operator|=
 name|jdbcType
+expr_stmt|;
+name|this
+operator|.
+name|family
+operator|=
+name|family
 expr_stmt|;
 block|}
 comment|/**    * Looks up a type name from its name.    *    * @return Type name, or null if not found    */
@@ -1576,12 +1679,7 @@ name|getFamily
 parameter_list|()
 block|{
 return|return
-name|SqlTypeFamily
-operator|.
-name|getFamilyForSqlType
-argument_list|(
-name|this
-argument_list|)
+name|family
 return|;
 block|}
 comment|/**    * Gets the SqlTypeName corresponding to a JDBC type.    *    * @param jdbcType the JDBC type of interest    * @return corresponding SqlTypeName    */
@@ -1596,34 +1694,12 @@ parameter_list|)
 block|{
 return|return
 name|jdbcTypeToName
-index|[
+operator|.
+name|get
+argument_list|(
 name|jdbcType
-operator|-
-name|MIN_JDBC_TYPE
-index|]
+argument_list|)
 return|;
-block|}
-specifier|private
-specifier|static
-name|void
-name|setNameForJdbcType
-parameter_list|(
-name|int
-name|jdbcType
-parameter_list|,
-name|SqlTypeName
-name|name
-parameter_list|)
-block|{
-name|jdbcTypeToName
-index|[
-name|jdbcType
-operator|-
-name|MIN_JDBC_TYPE
-index|]
-operator|=
-name|name
-expr_stmt|;
 block|}
 comment|/**    * Returns the limit of this datatype. For example,    *    *<table border="1">    *<tr>    *<th>Datatype</th>    *<th>sign</th>    *<th>limit</th>    *<th>beyond</th>    *<th>precision</th>    *<th>scale</th>    *<th>Returns</th>    *</tr>    *<tr>    *<td>Integer</th>    *<td>true</td>    *<td>true</td>    *<td>false</td>    *<td>-1</td>    *<td>-1</td>    *<td>2147483647 (2 ^ 31 -1 = MAXINT)</td>    *</tr>    *<tr>    *<td>Integer</th>    *<td>true</td>    *<td>true</td>    *<td>true</td>    *<td>-1</td>    *<td>-1</td>    *<td>2147483648 (2 ^ 31 = MAXINT + 1)</td>    *</tr>    *<tr>    *<td>Integer</th>    *<td>false</td>    *<td>true</td>    *<td>false</td>    *<td>-1</td>    *<td>-1</td>    *<td>-2147483648 (-2 ^ 31 = MININT)</td>    *</tr>    *<tr>    *<td>Boolean</th>    *<td>true</td>    *<td>true</td>    *<td>false</td>    *<td>-1</td>    *<td>-1</td>    *<td>TRUE</td>    *</tr>    *<tr>    *<td>Varchar</th>    *<td>true</td>    *<td>true</td>    *<td>false</td>    *<td>10</td>    *<td>-1</td>    *<td>'ZZZZZZZZZZ'</td>    *</tr>    *</table>    *    * @param sign      If true, returns upper limit, otherwise lower limit    * @param limit     If true, returns value at or near to overflow; otherwise    *                  value at or near to underflow    * @param beyond    If true, returns the value just beyond the limit,    *                  otherwise the value at the limit    * @param precision Precision, or -1 if not applicable    * @param scale     Scale, or -1 if not applicable    * @return Limit value    */
 specifier|public

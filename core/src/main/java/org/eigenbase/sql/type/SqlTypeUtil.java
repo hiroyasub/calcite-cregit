@@ -992,12 +992,10 @@ name|typeName
 parameter_list|)
 block|{
 return|return
-name|SqlTypeFamily
-operator|.
-name|getFamilyForSqlType
-argument_list|(
 name|typeName
-argument_list|)
+operator|.
+name|getFamily
+argument_list|()
 operator|==
 name|SqlTypeFamily
 operator|.

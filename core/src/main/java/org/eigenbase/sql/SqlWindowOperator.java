@@ -1451,21 +1451,19 @@ argument_list|)
 decl_stmt|;
 name|orderTypeFam
 operator|=
-name|SqlTypeFamily
-operator|.
-name|getFamilyForSqlType
-argument_list|(
 name|orderType
 operator|.
 name|getSqlTypeName
 argument_list|()
-argument_list|)
+operator|.
+name|getFamily
+argument_list|()
 expr_stmt|;
 block|}
 else|else
 block|{
 comment|// requires an ORDER BY clause if frame is logical(RANGE)
-comment|// We relax this requirment if the table appears to be
+comment|// We relax this requirement if the table appears to be
 comment|// sorted already
 if|if
 condition|(
@@ -1839,7 +1837,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|// if this is a range spec check and make sure the boundery type
+comment|// if this is a range spec check and make sure the boundary type
 comment|// and order by type are compatible
 if|if
 condition|(
@@ -1868,15 +1866,13 @@ decl_stmt|;
 name|SqlTypeFamily
 name|bndTypeFam
 init|=
-name|SqlTypeFamily
-operator|.
-name|getFamilyForSqlType
-argument_list|(
 name|bndType
 operator|.
 name|getSqlTypeName
 argument_list|()
-argument_list|)
+operator|.
+name|getFamily
+argument_list|()
 decl_stmt|;
 switch|switch
 condition|(

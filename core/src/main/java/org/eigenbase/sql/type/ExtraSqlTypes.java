@@ -59,6 +59,22 @@ name|SQLXML
 init|=
 literal|2009
 decl_stmt|;
+comment|// From JDK 1.8
+name|int
+name|REF_CURSOR
+init|=
+literal|2012
+decl_stmt|;
+name|int
+name|TIME_WITH_TIMEZONE
+init|=
+literal|2013
+decl_stmt|;
+name|int
+name|TIMESTAMP_WITH_TIMEZONE
+init|=
+literal|2014
+decl_stmt|;
 block|}
 end_interface
 
