@@ -24,25 +24,21 @@ name|RelOptCost
 block|{
 comment|//~ Methods ----------------------------------------------------------------
 comment|/**    * @return number of rows processed; this should not be confused with the    * row count produced by a relational expression ({@link    * org.eigenbase.rel.RelNode#getRows})    */
-specifier|public
 name|double
 name|getRows
 parameter_list|()
 function_decl|;
 comment|/**    * @return usage of CPU resources    */
-specifier|public
 name|double
 name|getCpu
 parameter_list|()
 function_decl|;
 comment|/**    * @return usage of I/O resources    */
-specifier|public
 name|double
 name|getIo
 parameter_list|()
 function_decl|;
 comment|/**    * @return true iff this cost represents an expression that hasn't actually    * been implemented (e.g. a pure relational algebra expression) or can't    * actually be implemented, e.g. a transfer of data between two disconnected    * sites    */
-specifier|public
 name|boolean
 name|isInfinite
 parameter_list|()
@@ -50,7 +46,6 @@ function_decl|;
 comment|// REVIEW jvs 3-Apr-2006:  we should standardize this
 comment|// to Comparator/equals/hashCode
 comment|/**    * Compares this to another cost.    *    * @param cost another cost    * @return true iff this is exactly equal to other cost    */
-specifier|public
 name|boolean
 name|equals
 parameter_list|(
@@ -59,7 +54,6 @@ name|cost
 parameter_list|)
 function_decl|;
 comment|/**    * Compares this to another cost, allowing for slight roundoff errors.    *    * @param cost another cost    * @return true iff this is the same as the other cost within a roundoff    * margin of error    */
-specifier|public
 name|boolean
 name|isEqWithEpsilon
 parameter_list|(
@@ -68,7 +62,6 @@ name|cost
 parameter_list|)
 function_decl|;
 comment|/**    * Compares this to another cost.    *    * @param cost another cost    * @return true iff this is less than or equal to other cost    */
-specifier|public
 name|boolean
 name|isLe
 parameter_list|(
@@ -77,7 +70,6 @@ name|cost
 parameter_list|)
 function_decl|;
 comment|/**    * Compares this to another cost.    *    * @param cost another cost    * @return true iff this is strictly less than other cost    */
-specifier|public
 name|boolean
 name|isLt
 parameter_list|(
@@ -86,7 +78,6 @@ name|cost
 parameter_list|)
 function_decl|;
 comment|/**    * Adds another cost to this.    *    * @param cost another cost    * @return sum of this and other cost    */
-specifier|public
 name|RelOptCost
 name|plus
 parameter_list|(
@@ -95,7 +86,6 @@ name|cost
 parameter_list|)
 function_decl|;
 comment|/**    * Subtracts another cost from this.    *    * @param cost another cost    * @return difference between this and other cost    */
-specifier|public
 name|RelOptCost
 name|minus
 parameter_list|(
@@ -104,7 +94,6 @@ name|cost
 parameter_list|)
 function_decl|;
 comment|/**    * Multiplies this cost by a scalar factor.    *    * @param factor scalar factor    * @return scalar product of this and factor    */
-specifier|public
 name|RelOptCost
 name|multiplyBy
 parameter_list|(
@@ -113,7 +102,6 @@ name|factor
 parameter_list|)
 function_decl|;
 comment|/**    * Computes the ratio between this cost and another cost.    *    *<p>divideBy is the inverse of {@link #multiplyBy(double)}. For any    * finite, non-zero cost and factor f,<code>    * cost.divideBy(cost.multiplyBy(f))</code> yields<code>1 / f</code>.    *    * @param cost Other cost    * @return Ratio between costs    */
-specifier|public
 name|double
 name|divideBy
 parameter_list|(
@@ -122,7 +110,6 @@ name|cost
 parameter_list|)
 function_decl|;
 comment|/**    * Forces implementations to override {@link Object#toString} and provide a    * good cost rendering to use during tracing.    */
-specifier|public
 name|String
 name|toString
 parameter_list|()

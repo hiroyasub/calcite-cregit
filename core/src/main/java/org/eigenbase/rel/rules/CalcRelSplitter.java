@@ -2721,8 +2721,8 @@ return|;
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------
 specifier|public
-specifier|static
 specifier|abstract
+specifier|static
 class|class
 name|RelType
 block|{

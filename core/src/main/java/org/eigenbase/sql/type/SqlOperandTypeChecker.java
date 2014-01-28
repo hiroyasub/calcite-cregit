@@ -52,7 +52,6 @@ name|SqlOperandTypeChecker
 block|{
 comment|//~ Methods ----------------------------------------------------------------
 comment|/**    * Checks the types of all operands to an operator call.    *    * @param callBinding    description of the call to be checked    * @param throwOnFailure whether to throw an exception if check fails    *                       (otherwise returns false in that case)    * @return whether check succeeded    */
-specifier|public
 name|boolean
 name|checkOperandTypes
 parameter_list|(
@@ -64,13 +63,11 @@ name|throwOnFailure
 parameter_list|)
 function_decl|;
 comment|/**    * @return range of operand counts allowed in a call    */
-specifier|public
 name|SqlOperandCountRange
 name|getOperandCountRange
 parameter_list|()
 function_decl|;
 comment|/**    * Returns a string describing the allowed formal signatures of a call, e.g.    * "SUBSTR(VARCHAR, INTEGER, INTEGER)".    *    * @param op     the operator being checked    * @param opName name to use for the operator in case of aliasing    * @return generated string    */
-specifier|public
 name|String
 name|getAllowedSignatures
 parameter_list|(

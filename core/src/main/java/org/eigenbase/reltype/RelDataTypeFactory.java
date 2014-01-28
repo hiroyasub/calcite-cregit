@@ -80,7 +80,6 @@ name|clazz
 parameter_list|)
 function_decl|;
 comment|/**    * Creates a cartesian product type.    *    * @return canonical join type descriptor    * @pre types array of types to be joined    * @pre types != null    * @pre types.length>= 1    */
-specifier|public
 name|RelDataType
 name|createJoinType
 parameter_list|(
@@ -90,7 +89,6 @@ name|types
 parameter_list|)
 function_decl|;
 comment|/**    * Creates a type which represents a structured collection of fields.    *    * @param types      types of the fields    * @param fieldNames names of the fields    * @return canonical struct type descriptor    * @pre types.length == fieldNames.length    * @post return != null    */
-specifier|public
 name|RelDataType
 name|createStructType
 parameter_list|(
@@ -104,7 +102,6 @@ name|fieldNames
 parameter_list|)
 function_decl|;
 comment|/**    * Creates a type which represents a structured collection of fields, given    * lists of the names and types of the fields.    *    * @param typeList      types of the fields    * @param fieldNameList names of the fields    * @return canonical struct type descriptor    * @pre typeList.size() == fieldNameList.size()    * @post return != null    */
-specifier|public
 name|RelDataType
 name|createStructType
 parameter_list|(
@@ -122,7 +119,6 @@ name|fieldNameList
 parameter_list|)
 function_decl|;
 comment|/**    * Creates a type which represents a structured collection of fields,    * obtaining the field information via a callback.    *    * @param fieldInfo callback for field information    * @return canonical struct type descriptor    */
-specifier|public
 name|RelDataType
 name|createStructType
 parameter_list|(
@@ -131,7 +127,6 @@ name|fieldInfo
 parameter_list|)
 function_decl|;
 comment|/**    * Creates a type which represents a structured collection of fieldList,    * obtaining the field information from a list of (name, type) pairs.    *    * @param fieldList List of (name, type) pairs    * @return canonical struct type descriptor    */
-specifier|public
 name|RelDataType
 name|createStructType
 parameter_list|(
@@ -152,7 +147,6 @@ name|fieldList
 parameter_list|)
 function_decl|;
 comment|/**    * Creates an array type. Arrays are ordered collections of elements.    *    * @param elementType    type of the elements of the array    * @param maxCardinality maximum array size, or -1 for unlimited    * @return canonical array type descriptor    */
-specifier|public
 name|RelDataType
 name|createArrayType
 parameter_list|(
@@ -164,7 +158,6 @@ name|maxCardinality
 parameter_list|)
 function_decl|;
 comment|/**    * Creates a map type. Maps are unordered collections of key/value pairs.    *    * @param keyType   type of the keys of the map    * @param valueType type of the values of the map    * @return canonical map type descriptor    */
-specifier|public
 name|RelDataType
 name|createMapType
 parameter_list|(
@@ -176,7 +169,6 @@ name|valueType
 parameter_list|)
 function_decl|;
 comment|/**    * Creates a multiset type. Multisets are unordered collections of elements.    *    * @param elementType    type of the elements of the multiset    * @param maxCardinality maximum collection size, or -1 for unlimited    * @return canonical multiset type descriptor    */
-specifier|public
 name|RelDataType
 name|createMultisetType
 parameter_list|(
@@ -188,7 +180,6 @@ name|maxCardinality
 parameter_list|)
 function_decl|;
 comment|/**    * Duplicates a type, making a deep copy. Normally, this is a no-op, since    * canonical type objects are returned. However, it is useful when copying a    * type from one factory to another.    *    * @param type input type    * @return output type, a new object equivalent to input type    */
-specifier|public
 name|RelDataType
 name|copyType
 parameter_list|(
@@ -197,7 +188,6 @@ name|type
 parameter_list|)
 function_decl|;
 comment|/**    * Creates a type which is the same as another type but with possibly    * different nullability. The output type may be identical to the input    * type. For type systems without a concept of nullability, the return value    * is always the same as the input.    *    * @param type     input type    * @param nullable true to request a nullable type; false to request a NOT    *                 NULL type    * @return output type, same as input type except with specified nullability    * @throws NullPointerException if type is null    */
-specifier|public
 name|RelDataType
 name|createTypeWithNullability
 parameter_list|(
@@ -209,7 +199,6 @@ name|nullable
 parameter_list|)
 function_decl|;
 comment|/**    * Creates a Type which is the same as another type but with possibily    * different charset or collation. For types without a concept of charset or    * collation this function must throw an error.    *    * @param type      input type    * @param charset   charset to assign    * @param collation collation to assign    * @return output type, same as input type except with specified charset and    * collation    * @pre SqlTypeUtil.inCharFamily(type)    */
-specifier|public
 name|RelDataType
 name|createTypeWithCharsetAndCollation
 parameter_list|(
@@ -224,13 +213,11 @@ name|collation
 parameter_list|)
 function_decl|;
 comment|/**    * @return the default {@link Charset} for string types    */
-specifier|public
 name|Charset
 name|getDefaultCharset
 parameter_list|()
 function_decl|;
 comment|/**    * Returns the most general of a set of types (that is, one type to which    * they can all be cast), or null if conversion is not possible. The result    * may be a new type which is less restrictive than any of the input types,    * e.g. leastRestrictive(INT, NUMERIC(3,2)) could be NUMERIC(12,2).    *    * @param types input types to be combined using union    * @return canonical union type descriptor    * @pre types != null    * @pre types.length>= 1    */
-specifier|public
 name|RelDataType
 name|leastRestrictive
 parameter_list|(
@@ -242,7 +229,6 @@ name|types
 parameter_list|)
 function_decl|;
 comment|/**    * Creates a SQL type with no precision or scale.    *    * @param typeName Name of the type, for example {@link    *                 SqlTypeName#BOOLEAN}.    * @return canonical type descriptor    * @pre typeName != null    * @post return != null    */
-specifier|public
 name|RelDataType
 name|createSqlType
 parameter_list|(
@@ -251,7 +237,6 @@ name|typeName
 parameter_list|)
 function_decl|;
 comment|/**    * Creates a SQL type with length (precision) but no scale.    *    * @param typeName  Name of the type, for example {@link    *                  org.eigenbase.sql.type.SqlTypeName#VARCHAR}.    * @param precision maximum length of the value (non-numeric types) or the    *                  precision of the value (numeric/datetime types) requires    *                  both operands to have exact numeric types.    * @return canonical type descriptor    * @pre typeName != null    * @pre length>= 0    * @post return != null    */
-specifier|public
 name|RelDataType
 name|createSqlType
 parameter_list|(
@@ -263,7 +248,6 @@ name|precision
 parameter_list|)
 function_decl|;
 comment|/**    * Creates a SQL type with precision and scale.    *    * @param typeName  Name of the type, for example {@link    *                  org.eigenbase.sql.type.SqlTypeName#DECIMAL}.    * @param precision precision of the value    * @param scale     scale of the values, i.e. the number of decimal places to    *                  shift the value. For example, a NUMBER(10,3) value of    *                  "123.45" is represented "123450" (that is, multiplied by    *                  10^3). A negative scale<em>is</em> valid.    * @return canonical type descriptor    * @pre typeName != null    * @pre length>= 0    * @post return != null    */
-specifier|public
 name|RelDataType
 name|createSqlType
 parameter_list|(
@@ -278,7 +262,6 @@ name|scale
 parameter_list|)
 function_decl|;
 comment|/**    * Creates a SQL interval type.    *    * @param intervalQualifier contains information if it is a year-month or a    *                          day-time interval along with precision information    * @return canonical type descriptor    */
-specifier|public
 name|RelDataType
 name|createSqlIntervalType
 parameter_list|(
@@ -287,7 +270,6 @@ name|intervalQualifier
 parameter_list|)
 function_decl|;
 comment|/**    * Infers the return type of a decimal multiplication. Decimal    * multiplication involves at least one decimal operand and requires both    * operands to have exact numeric types.    *    * @param type1 type of the first operand    * @param type2 type of the second operand    * @return the result type for a decimal multiplication, or null if decimal    * multiplication should not be applied to the operands.    */
-specifier|public
 name|RelDataType
 name|createDecimalProduct
 parameter_list|(
@@ -299,7 +281,6 @@ name|type2
 parameter_list|)
 function_decl|;
 comment|/**    * @return whether a decimal multiplication should be implemented by casting    * arguments to double values.    * @pre createDecimalProduct(type1, type2) != null    */
-specifier|public
 name|boolean
 name|useDoubleMultiplication
 parameter_list|(
@@ -311,7 +292,6 @@ name|type2
 parameter_list|)
 function_decl|;
 comment|/**    * Infers the return type of a decimal division. Decimal division involves    * at least one decimal operand and requires both operands to have exact    * numeric types.    *    * @param type1 type of the first operand    * @param type2 type of the second operand    * @return the result type for a decimal division, or null if decimal    * division should not be applied to the operands.    */
-specifier|public
 name|RelDataType
 name|createDecimalQuotient
 parameter_list|(
@@ -323,7 +303,6 @@ name|type2
 parameter_list|)
 function_decl|;
 comment|/**    * Creates a    * {@link org.eigenbase.reltype.RelDataTypeFactory.FieldInfoBuilder}.    */
-specifier|public
 name|FieldInfoBuilder
 name|builder
 parameter_list|()
@@ -335,13 +314,11 @@ interface|interface
 name|FieldInfo
 block|{
 comment|/**      * Returns the number of fields.      *      * @return number of fields      */
-specifier|public
 name|int
 name|getFieldCount
 parameter_list|()
 function_decl|;
 comment|/**      * Returns the name of a given field.      *      * @param index Ordinal of field      * @return Name of given field      */
-specifier|public
 name|String
 name|getFieldName
 parameter_list|(
@@ -350,7 +327,6 @@ name|index
 parameter_list|)
 function_decl|;
 comment|/**      * Returns the type of a given field.      *      * @param index Ordinal of field      * @return Type of given field      */
-specifier|public
 name|RelDataType
 name|getFieldType
 parameter_list|(

@@ -753,8 +753,8 @@ name|getFieldCount
 argument_list|()
 return|;
 block|}
-specifier|static
 specifier|abstract
+specifier|static
 class|class
 name|JdbcConverterRule
 extends|extends

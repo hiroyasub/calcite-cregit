@@ -24,7 +24,6 @@ name|RexSqlConvertletTable
 block|{
 comment|//~ Methods ----------------------------------------------------------------
 comment|/**    * Returns the convertlet applicable to a given expression.    */
-specifier|public
 name|RexSqlConvertlet
 name|get
 parameter_list|(

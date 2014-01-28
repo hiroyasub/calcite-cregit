@@ -1491,8 +1491,8 @@ block|}
 block|}
 comment|/**    * Accessor of exact numeric values. The subclass must implement the    * {@link #getLong()} method.    */
 specifier|private
-specifier|static
 specifier|abstract
+specifier|static
 class|class
 name|ExactNumericAccessor
 extends|extends
@@ -1902,8 +1902,8 @@ block|}
 block|}
 comment|/**    * Accessor of values that are {@link Double} or null.    */
 specifier|private
-specifier|static
 specifier|abstract
+specifier|static
 class|class
 name|ApproximateNumericAccessor
 extends|extends
@@ -2132,8 +2132,8 @@ block|}
 block|}
 comment|/**    * Accessor of exact numeric values. The subclass must implement the    * {@link #getLong()} method.    */
 specifier|private
-specifier|static
 specifier|abstract
+specifier|static
 class|class
 name|BigNumberAccessor
 extends|extends

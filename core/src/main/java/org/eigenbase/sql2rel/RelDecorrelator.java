@@ -7038,11 +7038,9 @@ name|getChild
 argument_list|()
 expr_stmt|;
 assert|assert
-operator|(
 name|rightInputRel
 operator|instanceof
 name|HepRelVertex
-operator|)
 assert|;
 name|rightInputRel
 operator|=
@@ -7153,7 +7151,6 @@ operator|++
 control|)
 block|{
 assert|assert
-operator|(
 name|tmpRightJoinKeys
 operator|.
 name|get
@@ -7162,7 +7159,6 @@ name|i
 argument_list|)
 operator|instanceof
 name|RexInputRef
-operator|)
 assert|;
 name|rightJoinKeys
 operator|.

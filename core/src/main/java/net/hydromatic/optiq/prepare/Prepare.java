@@ -1644,8 +1644,8 @@ name|SqlValidatorTable
 block|{   }
 comment|/**    * PreparedExplanation is a PreparedResult for an EXPLAIN PLAN statement.    * It's always good to have an explanation prepared.    */
 specifier|public
-specifier|static
 specifier|abstract
+specifier|static
 class|class
 name|PreparedExplain
 implements|implements
@@ -1886,8 +1886,8 @@ function_decl|;
 block|}
 comment|/**    * Abstract implementation of {@link PreparedResult}.    */
 specifier|public
-specifier|static
 specifier|abstract
+specifier|static
 class|class
 name|PreparedResultImpl
 implements|implements

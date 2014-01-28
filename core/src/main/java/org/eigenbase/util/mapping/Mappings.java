@@ -1838,7 +1838,6 @@ block|}
 comment|//~ Inner Interfaces -------------------------------------------------------
 comment|/**    * Core interface of all mappings.    */
 specifier|public
-specifier|static
 interface|interface
 name|CoreMapping
 extends|extends
@@ -1860,7 +1859,6 @@ function_decl|;
 block|}
 comment|/**    * Mapping where every source has a target. But:    *    *<ul>    *<li>A target may not have a source.    *<li>May not be finite.    *</ul>    */
 specifier|public
-specifier|static
 interface|interface
 name|FunctionMapping
 extends|extends
@@ -1893,7 +1891,6 @@ function_decl|;
 block|}
 comment|/**    * Mapping suitable for sourcing columns.    *    *<p>Properties:    *    *<ul>    *<li>It has a finite number of sources and targets    *<li>Each target has exactly one source    *<li>Each source has at most one target    *</ul>    *    *<p>TODO: figure out which interfaces this should extend    */
 specifier|public
-specifier|static
 interface|interface
 name|SourceMapping
 extends|extends
@@ -1943,7 +1940,6 @@ function_decl|;
 block|}
 comment|/**    * Mapping suitable for mapping columns to a target.    *    *<p>Properties:    *    *<ul>    *<li>It has a finite number of sources and targets    *<li>Each target has at most one source    *<li>Each source has exactly one target    *</ul>    *    *<p>TODO: figure out which interfaces this should extend    */
 specifier|public
-specifier|static
 interface|interface
 name|TargetMapping
 extends|extends
@@ -1995,8 +1991,8 @@ function_decl|;
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------
 specifier|public
-specifier|static
 specifier|abstract
+specifier|static
 class|class
 name|AbstractMapping
 implements|implements
@@ -2337,8 +2333,8 @@ return|;
 block|}
 block|}
 specifier|public
-specifier|static
 specifier|abstract
+specifier|static
 class|class
 name|FiniteAbstractMapping
 extends|extends

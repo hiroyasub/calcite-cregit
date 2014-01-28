@@ -924,8 +924,8 @@ name|String
 name|sql
 parameter_list|,
 name|int
-name|columnIndexes
 index|[]
+name|columnIndexes
 parameter_list|)
 throws|throws
 name|SQLException
@@ -944,8 +944,8 @@ name|String
 name|sql
 parameter_list|,
 name|String
-name|columnNames
 index|[]
+name|columnNames
 parameter_list|)
 throws|throws
 name|SQLException
@@ -983,8 +983,8 @@ name|String
 name|sql
 parameter_list|,
 name|int
-name|columnIndexes
 index|[]
+name|columnIndexes
 parameter_list|)
 throws|throws
 name|SQLException
@@ -1003,8 +1003,8 @@ name|String
 name|sql
 parameter_list|,
 name|String
-name|columnNames
 index|[]
+name|columnNames
 parameter_list|)
 throws|throws
 name|SQLException

@@ -242,7 +242,7 @@ parameter_list|<
 name|T
 parameter_list|>
 name|T
-name|_get
+name|get_
 parameter_list|(
 name|Properties
 name|properties
@@ -328,7 +328,7 @@ operator|.
 name|STRING
 assert|;
 return|return
-name|_get
+name|get_
 argument_list|(
 name|properties
 argument_list|,
@@ -355,7 +355,7 @@ operator|.
 name|BOOLEAN
 assert|;
 return|return
-name|_get
+name|get_
 argument_list|(
 name|properties
 argument_list|,
@@ -394,7 +394,7 @@ name|ENUM
 assert|;
 comment|//noinspection unchecked
 return|return
-name|_get
+name|get_
 argument_list|(
 name|properties
 argument_list|,
@@ -493,6 +493,7 @@ return|return
 name|map
 return|;
 block|}
+comment|/** Callback to parse a property from string to its native type. */
 interface|interface
 name|Converter
 parameter_list|<
@@ -716,6 +717,7 @@ block|}
 block|}
 return|;
 block|}
+comment|/** Data type of property. */
 enum|enum
 name|Type
 block|{

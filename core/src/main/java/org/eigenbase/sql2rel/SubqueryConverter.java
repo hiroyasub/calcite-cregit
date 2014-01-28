@@ -48,13 +48,11 @@ name|SubqueryConverter
 block|{
 comment|//~ Methods ----------------------------------------------------------------
 comment|/**    * @return true if the subquery can be converted    */
-specifier|public
 name|boolean
 name|canConvertSubquery
 parameter_list|()
 function_decl|;
 comment|/**    * Converts the subquery to an equivalent expression.    *    * @param subquery        the SqlNode tree corresponding to a subquery    * @param parentConverter sqlToRelConverter of the parent query    * @param isExists        whether the subquery is part of an EXISTS expression    * @param isExplain       whether the subquery is part of an EXPLAIN PLAN    *                        statement    * @return the equivalent expression or null if the subquery couldn't be    * converted    */
-specifier|public
 name|RexNode
 name|convertSubquery
 parameter_list|(

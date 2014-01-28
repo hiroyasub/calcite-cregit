@@ -37,7 +37,6 @@ interface|interface
 name|Typed
 block|{
 comment|/**    * Gets the type of the element(s) that are returned in this collection.    */
-specifier|public
 name|Type
 name|getElementType
 parameter_list|()

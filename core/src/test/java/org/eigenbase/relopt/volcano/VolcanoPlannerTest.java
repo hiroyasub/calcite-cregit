@@ -1543,8 +1543,8 @@ block|}
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------
 specifier|private
-specifier|static
 specifier|abstract
+specifier|static
 class|class
 name|TestLeafRel
 extends|extends
@@ -1677,8 +1677,8 @@ return|;
 block|}
 block|}
 specifier|private
-specifier|static
 specifier|abstract
+specifier|static
 class|class
 name|TestSingleRel
 extends|extends

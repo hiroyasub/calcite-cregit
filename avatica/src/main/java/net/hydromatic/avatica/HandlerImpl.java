@@ -53,8 +53,6 @@ parameter_list|(
 name|AvaticaConnection
 name|connection
 parameter_list|)
-throws|throws
-name|RuntimeException
 block|{
 comment|// nothing
 block|}
@@ -68,8 +66,6 @@ parameter_list|,
 name|ResultSink
 name|resultSink
 parameter_list|)
-throws|throws
-name|RuntimeException
 block|{
 comment|// nothing
 block|}
@@ -80,8 +76,6 @@ parameter_list|(
 name|AvaticaStatement
 name|statement
 parameter_list|)
-throws|throws
-name|RuntimeException
 block|{
 comment|// nothing
 block|}

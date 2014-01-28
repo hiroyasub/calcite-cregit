@@ -512,12 +512,10 @@ name|moveNext
 parameter_list|()
 block|{
 return|return
-operator|(
 operator|++
 name|i
 operator|<
 name|rowCount
-operator|)
 return|;
 block|}
 specifier|public
@@ -543,6 +541,7 @@ block|}
 block|}
 return|;
 block|}
+comment|/** How a column's values are represented. */
 enum|enum
 name|RepresentationType
 block|{
@@ -734,10 +733,12 @@ block|}
 return|;
 block|}
 block|}
+comment|/** Representation of the values of a column. */
 specifier|public
 interface|interface
 name|Representation
 block|{
+comment|/** Returns the representation type. */
 name|RepresentationType
 name|getType
 parameter_list|()
@@ -805,6 +806,7 @@ name|dataSet
 parameter_list|)
 function_decl|;
 block|}
+comment|/** Representation that stores the column values in an array. */
 specifier|public
 specifier|static
 class|class
@@ -1069,6 +1071,7 @@ argument_list|)
 return|;
 block|}
 block|}
+comment|/** Representation that stores the values of a column in an array of    * primitive values. */
 specifier|public
 specifier|static
 class|class
@@ -1290,6 +1293,7 @@ argument_list|)
 return|;
 block|}
 block|}
+comment|/** Representation that stores column values in a dictionary of    * primitive values, then uses a short code for each row. */
 specifier|public
 specifier|static
 class|class
@@ -1429,6 +1433,7 @@ throw|;
 comment|// TODO:
 block|}
 block|}
+comment|/** Representation that stores the values of a column as a    * dictionary of objects. */
 specifier|public
 specifier|static
 class|class
@@ -1889,6 +1894,7 @@ argument_list|()
 return|;
 block|}
 block|}
+comment|/** Representation that stores string column values. */
 specifier|public
 specifier|static
 class|class
@@ -2037,6 +2043,7 @@ argument_list|()
 return|;
 block|}
 block|}
+comment|/** Representation that stores byte-string column values. */
 specifier|public
 specifier|static
 class|class
@@ -2183,6 +2190,7 @@ argument_list|()
 return|;
 block|}
 block|}
+comment|/** Representation of a column that has the same value for every row. */
 specifier|public
 specifier|static
 class|class
@@ -2453,6 +2461,7 @@ argument_list|()
 return|;
 block|}
 block|}
+comment|/** Representation that stores numeric values in a bit-sliced    * array. Each value does not necessarily occupy 8, 16, 32 or 64    * bits (the number of bits used by the built-in types). This    * representation is often used to store the value codes for a    * dictionary-based representation. */
 specifier|public
 specifier|static
 class|class
@@ -2726,7 +2735,6 @@ control|)
 block|{
 name|v
 operator||=
-operator|(
 name|booleans
 operator|.
 name|get
@@ -2746,7 +2754,6 @@ operator|)
 operator|)
 else|:
 literal|0
-operator|)
 expr_stmt|;
 block|}
 name|longs
@@ -2786,7 +2793,6 @@ control|)
 block|{
 name|v
 operator||=
-operator|(
 name|booleans
 operator|.
 name|get
@@ -2806,7 +2812,6 @@ operator|)
 operator|)
 else|:
 literal|0
-operator|)
 expr_stmt|;
 block|}
 name|longs
@@ -2873,7 +2878,6 @@ control|)
 block|{
 name|v
 operator||=
-operator|(
 name|numbers
 operator|.
 name|get
@@ -2889,7 +2893,6 @@ operator|(
 name|bitCount
 operator|*
 name|j
-operator|)
 operator|)
 expr_stmt|;
 block|}
@@ -2930,7 +2933,6 @@ control|)
 block|{
 name|v
 operator||=
-operator|(
 name|numbers
 operator|.
 name|get
@@ -2946,7 +2948,6 @@ operator|(
 name|bitCount
 operator|*
 name|j
-operator|)
 operator|)
 expr_stmt|;
 block|}
@@ -3695,6 +3696,7 @@ block|}
 block|}
 return|;
 block|}
+comment|/** Contents of a table. */
 specifier|public
 specifier|static
 class|class

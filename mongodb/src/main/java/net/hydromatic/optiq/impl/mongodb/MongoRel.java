@@ -104,7 +104,6 @@ name|implementor
 parameter_list|)
 function_decl|;
 comment|/** Calling convention for relational operations that occur in MongoDB. */
-specifier|final
 name|Convention
 name|CONVENTION
 init|=

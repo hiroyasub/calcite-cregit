@@ -49,8 +49,6 @@ parameter_list|(
 name|AvaticaConnection
 name|connection
 parameter_list|)
-throws|throws
-name|RuntimeException
 function_decl|;
 comment|/** Called by container when a statement is being executed.    *    *<p>If the session would like the statement results stored in a temporary    * table, {@code resultSink} is not null.    * The provider must call its {@link ResultSink#toBeCompleted}    * method at some point during execution (not necessarily before the call to    * this method returns).</p>    *    * @param statement Statement    * @param resultSink Place to put result of query. Null if container does not    *                   want results stored to a temporary table    * @throws RuntimeException on error    */
 name|void
@@ -62,8 +60,6 @@ parameter_list|,
 name|ResultSink
 name|resultSink
 parameter_list|)
-throws|throws
-name|RuntimeException
 function_decl|;
 comment|/** Called by container when a statement is being closed.    *    *<p>This method is called after marking the statement closed, and after    * closing any open {@link java.sql.ResultSet} objects.</p>    *    *<p>If the implementation of this method throws, the call to    * {@link java.sql.Statement#close} that triggered this method will throw an    * exception, but the statement will still be marked closed.    *    * @param statement Statement    * @throws RuntimeException on error    */
 name|void
@@ -72,9 +68,8 @@ parameter_list|(
 name|AvaticaStatement
 name|statement
 parameter_list|)
-throws|throws
-name|RuntimeException
 function_decl|;
+comment|/** Handler for temporary tables. */
 interface|interface
 name|ResultSink
 block|{

@@ -527,8 +527,8 @@ name|int
 name|parameterIndex
 parameter_list|,
 name|byte
-name|x
 index|[]
+name|x
 parameter_list|)
 throws|throws
 name|SQLException

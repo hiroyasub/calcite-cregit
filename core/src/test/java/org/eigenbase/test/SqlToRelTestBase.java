@@ -300,7 +300,6 @@ block|}
 comment|//~ Inner Interfaces -------------------------------------------------------
 comment|/**    * Helper class which contains default implementations of methods used for    * running sql-to-rel conversion tests.    */
 specifier|public
-specifier|static
 interface|interface
 name|Tester
 block|{

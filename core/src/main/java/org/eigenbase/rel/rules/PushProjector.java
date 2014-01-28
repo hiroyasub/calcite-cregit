@@ -2333,9 +2333,6 @@ name|expr
 parameter_list|)
 function_decl|;
 comment|/**      * Constant condition that replies {@code false} for all expressions.      */
-specifier|public
-specifier|static
-specifier|final
 name|ExprCondition
 name|FALSE
 init|=

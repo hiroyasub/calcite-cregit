@@ -11879,8 +11879,8 @@ return|;
 block|}
 block|}
 specifier|public
-specifier|static
 specifier|abstract
+specifier|static
 class|class
 name|AbstractModifiableTable
 extends|extends
@@ -12531,8 +12531,8 @@ block|}
 block|}
 comment|/** Example of a UDF with a static {@code eval} method. Class is abstract,    * but code-generator should not need to instantiate it. */
 specifier|public
-specifier|static
 specifier|abstract
+specifier|static
 class|class
 name|MyDoubleFunction
 block|{
@@ -12559,8 +12559,8 @@ block|}
 block|}
 comment|/** Example of a UDF class that needs to be instantiated but cannot be. */
 specifier|public
-specifier|static
 specifier|abstract
+specifier|static
 class|class
 name|AwkwardFunction
 block|{

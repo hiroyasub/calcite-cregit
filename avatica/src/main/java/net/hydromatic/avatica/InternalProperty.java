@@ -216,7 +216,7 @@ parameter_list|<
 name|T
 parameter_list|>
 name|T
-name|_get
+name|get_
 parameter_list|(
 name|Map
 argument_list|<
@@ -304,7 +304,7 @@ operator|.
 name|STRING
 assert|;
 return|return
-name|_get
+name|get_
 argument_list|(
 name|map
 argument_list|,
@@ -337,7 +337,7 @@ operator|.
 name|BOOLEAN
 assert|;
 return|return
-name|_get
+name|get_
 argument_list|(
 name|map
 argument_list|,
@@ -382,7 +382,7 @@ name|ENUM
 assert|;
 comment|//noinspection unchecked
 return|return
-name|_get
+name|get_
 argument_list|(
 name|map
 argument_list|,
@@ -393,6 +393,7 @@ name|defaultValue
 argument_list|)
 return|;
 block|}
+comment|/** Where nulls appear in a sorted relation. */
 enum|enum
 name|NullSorting
 block|{

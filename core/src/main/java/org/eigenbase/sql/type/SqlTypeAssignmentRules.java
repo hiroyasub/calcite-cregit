@@ -1873,8 +1873,8 @@ expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
 specifier|public
-specifier|synchronized
 specifier|static
+specifier|synchronized
 name|SqlTypeAssignmentRules
 name|instance
 parameter_list|()

@@ -34,13 +34,11 @@ name|BasicDatetime
 block|{
 comment|//~ Methods ----------------------------------------------------------------
 comment|/**    * Gets the internal value of this datetime    */
-specifier|public
 name|long
 name|getTime
 parameter_list|()
 function_decl|;
 comment|/**    * Sets this datetime via a zoneless time value. See class comments for more    * information.    */
-specifier|public
 name|void
 name|setZonelessTime
 parameter_list|(
@@ -49,7 +47,6 @@ name|value
 parameter_list|)
 function_decl|;
 comment|/**    * Sets this datetime via a zoned time value. See class comments for more    * information.    */
-specifier|public
 name|void
 name|setZonedTime
 parameter_list|(

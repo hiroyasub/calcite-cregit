@@ -36,7 +36,6 @@ name|VolcanoPlannerPhaseRuleMappingInitializer
 block|{
 comment|//~ Methods ----------------------------------------------------------------
 comment|/**    * Initializes a {@link VolcanoPlannerPhase}-to-rule map. Rules are    * specified by description (see above). When this method is called, the map    * will already be pre-initialized with empty sets for each    * VolcanoPlannerPhase. Implementations must not return having added or    * removed keys from the map, although it is safe to temporarily add or    * remove keys.    *    * @param phaseRuleMap a {@link VolcanoPlannerPhase}-to-rule map    */
-specifier|public
 name|void
 name|initialize
 parameter_list|(

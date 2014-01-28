@@ -2343,8 +2343,8 @@ expr_stmt|;
 block|}
 block|}
 specifier|private
-specifier|static
 specifier|abstract
+specifier|static
 class|class
 name|AbstractUnifyRule
 parameter_list|<

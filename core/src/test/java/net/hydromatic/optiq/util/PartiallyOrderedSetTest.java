@@ -77,6 +77,7 @@ init|=
 literal|false
 decl_stmt|;
 specifier|private
+specifier|static
 specifier|final
 name|int
 name|SCALE

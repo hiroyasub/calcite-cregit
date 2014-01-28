@@ -23,22 +23,18 @@ interface|interface
 name|JavaCompiler
 block|{
 comment|//~ Methods ----------------------------------------------------------------
-specifier|public
 name|void
 name|compile
 parameter_list|()
 function_decl|;
-specifier|public
 name|JavaCompilerArgs
 name|getArgs
 parameter_list|()
 function_decl|;
-specifier|public
 name|ClassLoader
 name|getClassLoader
 parameter_list|()
 function_decl|;
-specifier|public
 name|int
 name|getTotalByteCodeSize
 parameter_list|()

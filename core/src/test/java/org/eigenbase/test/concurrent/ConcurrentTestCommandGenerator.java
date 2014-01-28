@@ -1676,8 +1676,8 @@ block|}
 comment|//~ Inner Classes ----------------------------------------------------------
 comment|/**    * abstract base to handle SQLExceptions    */
 specifier|protected
-specifier|static
 specifier|abstract
+specifier|static
 class|class
 name|AbstractCommand
 implements|implements
@@ -2237,8 +2237,8 @@ expr_stmt|;
 block|}
 block|}
 specifier|private
-specifier|static
 specifier|abstract
+specifier|static
 class|class
 name|CommandWithTimeout
 extends|extends

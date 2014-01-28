@@ -6783,8 +6783,8 @@ block|}
 block|}
 comment|/**    * Where a RelNode came from.    */
 specifier|private
-specifier|static
 specifier|abstract
+specifier|static
 class|class
 name|Provenance
 block|{

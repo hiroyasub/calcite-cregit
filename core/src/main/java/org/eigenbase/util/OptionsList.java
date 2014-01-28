@@ -598,8 +598,8 @@ block|}
 block|}
 comment|/**    * Definition of a command-line option, including its short and long names,    * description, default value, and whether it is mandatory.    *    *<p>You can optionally provide a {@link OptionsList.OptionHandler handler}    * to handle events such as the option receiving a value, or a value being    * of the wrong format. If you do not provide a handler, the value is stored    * inside the option, and can be retrieved via</p>    */
 specifier|public
-specifier|static
 specifier|abstract
+specifier|static
 class|class
 name|Option
 block|{

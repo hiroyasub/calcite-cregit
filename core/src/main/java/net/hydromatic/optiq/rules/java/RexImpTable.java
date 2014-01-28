@@ -3776,8 +3776,8 @@ name|nullAs
 parameter_list|)
 function_decl|;
 block|}
-specifier|static
 specifier|abstract
+specifier|static
 class|class
 name|AbstractCallImplementor
 implements|implements

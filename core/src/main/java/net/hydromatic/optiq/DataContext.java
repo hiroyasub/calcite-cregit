@@ -153,6 +153,7 @@ name|String
 name|name
 parameter_list|)
 function_decl|;
+comment|/** Variable that may be asked for in a call to {@link DataContext#get}. */
 enum|enum
 name|Variable
 block|{

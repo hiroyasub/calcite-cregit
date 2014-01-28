@@ -26,7 +26,6 @@ name|ClosableAllocation
 block|{
 comment|//~ Methods ----------------------------------------------------------------
 comment|/**    * Assigns ownership of a ClosableAllocation to this owner.    *    * @param allocation the ClosableAllocation to take over    */
-specifier|public
 name|void
 name|addAllocation
 parameter_list|(

@@ -1305,8 +1305,8 @@ expr_stmt|;
 block|}
 block|}
 specifier|private
-specifier|static
 specifier|abstract
+specifier|static
 class|class
 name|TestLeafRel
 extends|extends
@@ -1554,8 +1554,8 @@ block|}
 comment|// TODO: SWZ Implement clone?
 block|}
 specifier|private
-specifier|static
 specifier|abstract
+specifier|static
 class|class
 name|TestSingleRel
 extends|extends

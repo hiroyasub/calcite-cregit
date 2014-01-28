@@ -949,8 +949,8 @@ name|x
 return|;
 block|}
 block|}
-specifier|static
 specifier|abstract
+specifier|static
 class|class
 name|MongoConverterRule
 extends|extends

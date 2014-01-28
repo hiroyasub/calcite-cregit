@@ -54,13 +54,10 @@ specifier|public
 interface|interface
 name|ConcurrentTestPluginCommand
 block|{
-specifier|public
-specifier|static
 interface|interface
 name|TestContext
 block|{
 comment|/**      * Store a message as output for mtsql script.      *      * @param message Message to be output      */
-specifier|public
 name|void
 name|storeMessage
 parameter_list|(
@@ -69,13 +66,11 @@ name|message
 parameter_list|)
 function_decl|;
 comment|/**      * Get connection for thread.      *      * @return connection for thread      */
-specifier|public
 name|Connection
 name|getConnection
 parameter_list|()
 function_decl|;
 comment|/**      * Get current statement for thread, or null if none.      *      * @return current statement for thread      */
-specifier|public
 name|Statement
 name|getCurrentStatement
 parameter_list|()

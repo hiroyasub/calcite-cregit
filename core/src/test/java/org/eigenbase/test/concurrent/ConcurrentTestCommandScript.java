@@ -7648,8 +7648,8 @@ block|}
 block|}
 comment|// TODO: replace by super.CommmandWithTimeout
 specifier|private
-specifier|static
 specifier|abstract
+specifier|static
 class|class
 name|CommandWithTimeout
 extends|extends
@@ -7738,8 +7738,8 @@ return|;
 block|}
 block|}
 specifier|private
-specifier|static
 specifier|abstract
+specifier|static
 class|class
 name|CommandWithTimeoutAndRowLimit
 extends|extends

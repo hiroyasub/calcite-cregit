@@ -50,7 +50,6 @@ name|SqlReturnTypeInference
 block|{
 comment|//~ Methods ----------------------------------------------------------------
 comment|/**    * Infers the return type of a call to an {@link SqlOperator}.    *    * @param opBinding description of operator binding    * @return inferred type; may be null    */
-specifier|public
 name|RelDataType
 name|inferReturnType
 parameter_list|(

@@ -34,7 +34,6 @@ name|SqlOperatorTable
 block|{
 comment|//~ Methods ----------------------------------------------------------------
 comment|/**    * Retrieves a list of operators with a given name and syntax. For example,    * by passing SqlSyntax.Function, the returned list is narrowed to only    * matching SqlFunction objects.    *    * @param opName   name of operator    * @param category function category to look up, or null for any matching    *                 operator    * @param syntax   syntax type of operator    * @return mutable list of SqlOperator objects (or immutable empty list if    * no matches)    */
-specifier|public
 name|List
 argument_list|<
 name|SqlOperator
@@ -52,7 +51,6 @@ name|syntax
 parameter_list|)
 function_decl|;
 comment|/**    * Retrieves a list of all functions and operators in this table. Used for    * automated testing.    *    * @return list of SqlOperator objects    */
-specifier|public
 name|List
 argument_list|<
 name|SqlOperator

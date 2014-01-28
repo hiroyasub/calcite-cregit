@@ -906,6 +906,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+comment|/** Collection of values comprising a test. */
 specifier|static
 class|class
 name|Quad

@@ -24,7 +24,6 @@ name|RelDataTypePrecedenceList
 block|{
 comment|//~ Methods ----------------------------------------------------------------
 comment|/**    * Determines whether a type appears in this precedence list.    *    * @param type type to check    * @return true iff this list contains type    */
-specifier|public
 name|boolean
 name|containsType
 parameter_list|(
@@ -33,7 +32,6 @@ name|type
 parameter_list|)
 function_decl|;
 comment|/**    * Compares the precedence of two types.    *    * @param type1 first type to compare    * @param type2 second type to compare    * @return positive if type1 has higher precedence; negative if type2 has    * higher precedence; 0 if types have equal precedence    * @pre containsType(type1)&& containsType(type2)    */
-specifier|public
 name|int
 name|compareTypePrecedence
 parameter_list|(

@@ -1863,7 +1863,7 @@ name|TimeZone
 operator|.
 name|class
 argument_list|)
-block|,   ;
+block|;
 specifier|public
 specifier|final
 name|Method

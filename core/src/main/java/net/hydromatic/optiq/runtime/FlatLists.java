@@ -430,8 +430,8 @@ return|;
 block|}
 block|}
 specifier|public
-specifier|static
 specifier|abstract
+specifier|static
 class|class
 name|AbstractFlatList
 parameter_list|<

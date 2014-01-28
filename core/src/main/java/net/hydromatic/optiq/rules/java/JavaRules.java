@@ -11076,7 +11076,6 @@ expr_stmt|;
 block|}
 block|}
 specifier|public
-specifier|static
 interface|interface
 name|AggCallContext
 block|{

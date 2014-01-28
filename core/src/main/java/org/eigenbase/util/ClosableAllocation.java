@@ -24,7 +24,6 @@ name|ClosableAllocation
 block|{
 comment|//~ Methods ----------------------------------------------------------------
 comment|/**    * Closes this object.    */
-specifier|public
 name|void
 name|closeAllocation
 parameter_list|()

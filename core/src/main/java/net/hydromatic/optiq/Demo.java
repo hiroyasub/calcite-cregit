@@ -32,6 +32,11 @@ specifier|public
 class|class
 name|Demo
 block|{
+specifier|private
+name|Demo
+parameter_list|()
+block|{
+block|}
 specifier|public
 specifier|static
 name|void

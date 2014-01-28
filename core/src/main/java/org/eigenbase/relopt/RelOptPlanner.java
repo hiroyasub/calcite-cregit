@@ -131,9 +131,6 @@ interface|interface
 name|RelOptPlanner
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
-specifier|public
-specifier|static
-specifier|final
 name|Logger
 name|tracer
 init|=
@@ -144,7 +141,6 @@ argument_list|()
 decl_stmt|;
 comment|//~ Methods ----------------------------------------------------------------
 comment|/**    * Sets the root node of this query.    *    * @param rel Relational expression    */
-specifier|public
 name|void
 name|setRoot
 parameter_list|(
@@ -153,13 +149,11 @@ name|rel
 parameter_list|)
 function_decl|;
 comment|/**    * Returns the root node of this query.    *    * @return Root node    */
-specifier|public
 name|RelNode
 name|getRoot
 parameter_list|()
 function_decl|;
 comment|/**    * Registers a rel trait definition. If the {@link RelTraitDef} has already    * been registered, does nothing.    *    * @return whether the RelTraitDef was added, as per {@link    * java.util.Collection#add}    */
-specifier|public
 name|boolean
 name|addRelTraitDef
 parameter_list|(
@@ -168,7 +162,6 @@ name|relTraitDef
 parameter_list|)
 function_decl|;
 comment|/**    * Returns the list of active trait types.    */
-specifier|public
 name|List
 argument_list|<
 name|RelTraitDef
@@ -182,7 +175,6 @@ name|clearRules
 parameter_list|()
 function_decl|;
 comment|/**    * Registers a rule. If the rule has already been registered, does nothing.    * This method should determine if the given rule is a {@link    * org.eigenbase.rel.convert.ConverterRule} and pass the ConverterRule to    * all {@link #addRelTraitDef(RelTraitDef) registered} RelTraitDef    * instances.    *    * @return whether the rule was added, as per {@link    * java.util.Collection#add}    */
-specifier|public
 name|boolean
 name|addRule
 parameter_list|(
@@ -199,7 +191,6 @@ name|rule
 parameter_list|)
 function_decl|;
 comment|/**    * Sets the exclusion filter to use for this planner. Rules which match the    * given pattern will not be fired regardless of whether or when they are    * added to the planner.    *    * @param exclusionFilter pattern to match for exclusion; null to disable    *                        filtering    */
-specifier|public
 name|void
 name|setRuleDescExclusionFilter
 parameter_list|(
@@ -208,7 +199,6 @@ name|exclusionFilter
 parameter_list|)
 function_decl|;
 comment|/**    * Installs the cancellation-checking flag for this planner. The planner    * should periodically check this flag and terminate the planning process if    * it sees a cancellation request.    *    * @param cancelFlag flag which the planner should periodically check    */
-specifier|public
 name|void
 name|setCancelFlag
 parameter_list|(
@@ -217,7 +207,6 @@ name|cancelFlag
 parameter_list|)
 function_decl|;
 comment|/**    * Changes a relational expression to an equivalent one with a different set    * of traits.    *    * @param rel      Relational expression, may or may not have been registered    * @param toTraits Trait set to convert relational expression to    * @return Relational expression with desired traits. Never null, but may be    * abstract    * @pre !rel.getTraits().equals(toTraits)    * @post return != null    */
-specifier|public
 name|RelNode
 name|changeTraits
 parameter_list|(
@@ -229,7 +218,6 @@ name|toTraits
 parameter_list|)
 function_decl|;
 comment|/**    * Negotiates an appropriate planner to deal with distributed queries. The    * idea is that the schemas decide among themselves which has the most    * knowledge. Right now, the local planner retains control.    */
-specifier|public
 name|RelOptPlanner
 name|chooseDelegate
 parameter_list|()
@@ -243,19 +231,16 @@ name|materialization
 parameter_list|)
 function_decl|;
 comment|/**    * Finds the most efficient expression to implement this query.    *    * @throws CannotPlanException if cannot find a plan    */
-specifier|public
 name|RelNode
 name|findBestExp
 parameter_list|()
 function_decl|;
 comment|/**    * Returns the factory that creates {@link org.eigenbase.relopt.RelOptCost}s.    */
-specifier|public
 name|RelOptCostFactory
 name|getCostFactory
 parameter_list|()
 function_decl|;
 comment|/**    * Computes the cost of a RelNode. In most cases, this just dispatches to    * {@link RelMetadataQuery#getCumulativeCost}.    *    * @param rel expression of interest    * @return estimated cost    */
-specifier|public
 name|RelOptCost
 name|getCost
 parameter_list|(
@@ -264,7 +249,6 @@ name|rel
 parameter_list|)
 function_decl|;
 comment|/**    * Registers a relational expression in the expression bank.    *    *<p>After it has been registered, you may not modify it.    *    *<p>The expression must not already have been registered. If you are not    * sure whether it has been registered, call {@link    * #ensureRegistered(RelNode, RelNode)}.    *    * @param rel      Relational expression to register (must not already be    *                 registered)    * @param equivRel Relational expression it is equivalent to (may be null)    * @return the same expression, or an equivalent existing expression    * @pre !isRegistered(rel)    */
-specifier|public
 name|RelNode
 name|register
 parameter_list|(
@@ -287,7 +271,6 @@ name|equivRel
 parameter_list|)
 function_decl|;
 comment|/**    * Determines whether a relational expression has been registered.    *    * @param rel expression to test    * @return whether rel has been registered    */
-specifier|public
 name|boolean
 name|isRegistered
 parameter_list|(
@@ -296,7 +279,6 @@ name|rel
 parameter_list|)
 function_decl|;
 comment|/**    * Tells this planner that a schema exists. This is the schema's chance to    * tell the planner about all of the special transformation rules.    */
-specifier|public
 name|void
 name|registerSchema
 parameter_list|(
@@ -305,7 +287,6 @@ name|schema
 parameter_list|)
 function_decl|;
 comment|/**    * Adds a listener to this planner.    *    * @param newListener new listener to be notified of events    */
-specifier|public
 name|void
 name|addListener
 parameter_list|(
@@ -314,7 +295,6 @@ name|newListener
 parameter_list|)
 function_decl|;
 comment|/**    * Gives this planner a chance to register one or more {@link    * RelMetadataProvider}s in the chain which will be used to answer metadata    * queries. Planners which use their own relational expressions internally    * to represent concepts such as equivalence classes will generally need to    * supply corresponding metadata providers.    *    * @param chain receives planner's custom providers, if any    */
-specifier|public
 name|void
 name|registerMetadataProviders
 parameter_list|(
@@ -323,7 +303,6 @@ name|chain
 parameter_list|)
 function_decl|;
 comment|/**    * Gets a timestamp for a given rel's metadata. This timestamp is used by    * {@link CachingRelMetadataProvider} to decide whether cached metadata has    * gone stale.    *    * @param rel rel of interest    * @return timestamp of last change which might affect metadata derivation    */
-specifier|public
 name|long
 name|getRelMetadataTimestamp
 parameter_list|(

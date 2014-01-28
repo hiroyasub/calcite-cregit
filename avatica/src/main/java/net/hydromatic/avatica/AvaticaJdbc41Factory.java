@@ -74,7 +74,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Implementation of {@link AvaticaFactory} for JDBC 4.1 (corresponds to JDK 1.7).  */
+comment|/**  * Implementation of {@link AvaticaFactory} for JDBC 4.1 (corresponds to JDK  * 1.7).  */
 end_comment
 
 begin_class
@@ -337,6 +337,7 @@ name|columnMetaDataList
 argument_list|)
 return|;
 block|}
+comment|/** Implementation of Connection for JDBC 4.1. */
 specifier|private
 specifier|static
 class|class
@@ -372,6 +373,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+comment|/** Implementation of Statement for JDBC 4.1. */
 specifier|private
 specifier|static
 class|class
@@ -408,6 +410,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+comment|/** Implementation of PreparedStatement for JDBC 4.1. */
 specifier|private
 specifier|static
 class|class
@@ -917,6 +920,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+comment|/** Implementation of DatabaseMetaData for JDBC 4.1. */
 specifier|private
 specifier|static
 class|class

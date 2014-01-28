@@ -79,7 +79,7 @@ specifier|static
 specifier|final
 name|char
 index|[]
-name|digits
+name|DIGITS
 init|=
 block|{
 literal|'0'
@@ -392,7 +392,7 @@ name|j
 operator|++
 index|]
 operator|=
-name|digits
+name|DIGITS
 index|[
 operator|(
 name|b
@@ -409,7 +409,7 @@ name|j
 operator|++
 index|]
 operator|=
-name|digits
+name|DIGITS
 index|[
 operator|(
 name|b
@@ -426,7 +426,7 @@ name|j
 operator|++
 index|]
 operator|=
-name|digits
+name|DIGITS
 index|[
 operator|(
 name|b
@@ -443,7 +443,7 @@ name|j
 operator|++
 index|]
 operator|=
-name|digits
+name|DIGITS
 index|[
 operator|(
 name|b
@@ -460,7 +460,7 @@ name|j
 operator|++
 index|]
 operator|=
-name|digits
+name|DIGITS
 index|[
 operator|(
 name|b
@@ -477,7 +477,7 @@ name|j
 operator|++
 index|]
 operator|=
-name|digits
+name|DIGITS
 index|[
 operator|(
 name|b
@@ -494,7 +494,7 @@ name|j
 operator|++
 index|]
 operator|=
-name|digits
+name|DIGITS
 index|[
 operator|(
 name|b
@@ -511,7 +511,7 @@ name|j
 operator|++
 index|]
 operator|=
-name|digits
+name|DIGITS
 index|[
 name|b
 operator|&
@@ -549,7 +549,7 @@ name|j
 operator|++
 index|]
 operator|=
-name|digits
+name|DIGITS
 index|[
 operator|(
 name|b
@@ -566,7 +566,7 @@ name|j
 operator|++
 index|]
 operator|=
-name|digits
+name|DIGITS
 index|[
 name|b
 operator|&

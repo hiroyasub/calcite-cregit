@@ -819,8 +819,8 @@ argument_list|()
 return|;
 block|}
 specifier|public
-specifier|static
 specifier|abstract
+specifier|static
 class|class
 name|Entry
 block|{
@@ -896,8 +896,8 @@ return|;
 block|}
 block|}
 specifier|public
-specifier|static
 specifier|abstract
+specifier|static
 class|class
 name|TableEntry
 extends|extends
@@ -929,8 +929,8 @@ parameter_list|()
 function_decl|;
 block|}
 specifier|public
-specifier|static
 specifier|abstract
+specifier|static
 class|class
 name|TableFunctionEntry
 extends|extends
