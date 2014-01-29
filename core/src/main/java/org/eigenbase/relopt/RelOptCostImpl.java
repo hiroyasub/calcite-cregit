@@ -149,11 +149,14 @@ block|{
 return|return
 name|Double
 operator|.
-name|hashCode
+name|valueOf
 argument_list|(
 name|getRows
 argument_list|()
 argument_list|)
+operator|.
+name|hashCode
+argument_list|()
 return|;
 block|}
 comment|// implement RelOptCost
