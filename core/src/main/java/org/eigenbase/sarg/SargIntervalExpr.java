@@ -628,7 +628,6 @@ name|seq
 return|;
 block|}
 assert|assert
-operator|(
 name|originalSeq
 operator|.
 name|getList
@@ -638,7 +637,6 @@ name|size
 argument_list|()
 operator|==
 literal|1
-operator|)
 assert|;
 name|SargInterval
 name|originalInterval
@@ -867,7 +865,6 @@ else|else
 block|{
 comment|// Mirror image of previous case.
 assert|assert
-operator|(
 name|originalInterval
 operator|.
 name|getUpperBound
@@ -875,7 +872,6 @@ argument_list|()
 operator|.
 name|isFinite
 argument_list|()
-operator|)
 assert|;
 name|interval
 operator|.

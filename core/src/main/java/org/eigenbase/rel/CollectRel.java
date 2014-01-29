@@ -266,12 +266,10 @@ name|getRowType
 argument_list|()
 decl_stmt|;
 assert|assert
-operator|(
 name|childType
 operator|.
 name|isStruct
 argument_list|()
-operator|)
 assert|;
 name|RelDataType
 name|ret

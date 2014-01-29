@@ -83,20 +83,6 @@ name|*
 import|;
 end_import
 
-begin_import
-import|import
-name|com
-operator|.
-name|google
-operator|.
-name|common
-operator|.
-name|collect
-operator|.
-name|ImmutableSet
-import|;
-end_import
-
 begin_comment
 comment|/**  *<code>TableFunctionRel</code> represents a call to a function which returns a  * result set. Currently, it can only appear as a leaf in a query tree, but  * eventually we will extend it to take relational inputs.  */
 end_comment

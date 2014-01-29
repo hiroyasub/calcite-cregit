@@ -136,7 +136,7 @@ specifier|private
 specifier|static
 specifier|final
 name|Logger
-name|tracer
+name|LOGGER
 init|=
 name|EigenbaseTrace
 operator|.
@@ -399,7 +399,7 @@ name|Util
 operator|.
 name|discard
 argument_list|(
-name|tracer
+name|LOGGER
 argument_list|)
 expr_stmt|;
 block|}

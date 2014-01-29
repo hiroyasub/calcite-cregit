@@ -2222,7 +2222,7 @@ name|number
 operator|==
 literal|null
 condition|?
-literal|0l
+literal|0L
 else|:
 name|number
 operator|.

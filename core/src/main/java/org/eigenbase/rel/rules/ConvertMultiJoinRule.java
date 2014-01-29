@@ -100,7 +100,7 @@ specifier|public
 specifier|static
 specifier|final
 name|ConvertMultiJoinRule
-name|instance
+name|INSTANCE
 init|=
 operator|new
 name|ConvertMultiJoinRule
@@ -387,7 +387,6 @@ operator|.
 name|getRowType
 argument_list|()
 argument_list|,
-operator|(
 name|origJoinRel
 operator|.
 name|getJoinType
@@ -396,7 +395,6 @@ operator|==
 name|JoinRelType
 operator|.
 name|FULL
-operator|)
 argument_list|,
 name|newOuterJoinConds
 argument_list|,
@@ -1497,12 +1495,9 @@ name|nullGenerating
 parameter_list|)
 block|{
 return|return
-operator|(
-operator|(
 name|input
 operator|instanceof
 name|MultiJoinRel
-operator|)
 operator|&&
 operator|!
 operator|(
@@ -1517,7 +1512,6 @@ argument_list|()
 operator|&&
 operator|!
 name|nullGenerating
-operator|)
 return|;
 block|}
 comment|/**    * Shifts a filter originating from the right child of the JoinRel to the    * right, to reflect the filter now being applied on the resulting    * MultiJoinRel.    *    * @param joinRel     the original JoinRel    * @param left        the left child of the JoinRel    * @param right       the right child of the JoinRel    * @param rightFilter the filter originating from the right child    * @return the adjusted right filter    */
@@ -1811,11 +1805,9 @@ name|currInput
 operator|++
 expr_stmt|;
 assert|assert
-operator|(
 name|currInput
 operator|<
 name|nInputs
-operator|)
 assert|;
 name|nFields
 operator|=

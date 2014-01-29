@@ -412,6 +412,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+comment|/** Implementation of statement for JDBC 4.1. */
 specifier|private
 specifier|static
 class|class
@@ -448,6 +449,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+comment|/** Implementation of prepared statement for JDBC 4.1. */
 specifier|private
 specifier|static
 class|class
@@ -959,6 +961,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+comment|/** Implementation of database metadata for JDBC 4.1. */
 specifier|private
 specifier|static
 class|class

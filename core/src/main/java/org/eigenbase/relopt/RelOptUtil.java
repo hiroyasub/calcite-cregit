@@ -1099,7 +1099,6 @@ name|getTypeFactory
 argument_list|()
 decl_stmt|;
 assert|assert
-operator|(
 name|extraExpr
 operator|==
 name|rexBuilder
@@ -1108,7 +1107,6 @@ name|makeLiteral
 argument_list|(
 literal|true
 argument_list|)
-operator|)
 assert|;
 comment|// this should only be called for the exists case
 comment|// first stick an Agg on top of the subquery
@@ -3705,7 +3703,6 @@ argument_list|,
 name|leftKey
 argument_list|,
 operator|(
-operator|(
 name|rangeOp
 operator|!=
 literal|null
@@ -3716,7 +3713,6 @@ name|rangeOp
 operator|.
 name|isEmpty
 argument_list|()
-operator|)
 argument_list|)
 expr_stmt|;
 name|addJoinKey
@@ -3726,7 +3722,6 @@ argument_list|,
 name|rightKey
 argument_list|,
 operator|(
-operator|(
 name|rangeOp
 operator|!=
 literal|null
@@ -3737,7 +3732,6 @@ name|rangeOp
 operator|.
 name|isEmpty
 argument_list|()
-operator|)
 argument_list|)
 expr_stmt|;
 if|if
@@ -4706,7 +4700,8 @@ argument_list|)
 decl_stmt|;
 name|RexInputRef
 name|leftField
-decl_stmt|,
+decl_stmt|;
+name|RexInputRef
 name|rightField
 decl_stmt|;
 if|if
@@ -5583,7 +5578,7 @@ name|addRule
 argument_list|(
 name|PullConstantsThroughAggregatesRule
 operator|.
-name|instance
+name|INSTANCE
 argument_list|)
 expr_stmt|;
 name|planner
@@ -6167,7 +6162,6 @@ argument_list|()
 condition|)
 block|{
 assert|assert
-operator|(
 name|y
 operator|.
 name|getType
@@ -6175,7 +6169,6 @@ argument_list|()
 operator|.
 name|isStruct
 argument_list|()
-operator|)
 assert|;
 name|List
 argument_list|<
@@ -8316,12 +8309,10 @@ block|}
 comment|// inputs are the same; return value depends on the checkNames
 comment|// parameter
 return|return
-operator|(
 operator|!
 name|checkNames
 operator|||
 name|namesDifferent
-operator|)
 return|;
 block|}
 comment|/**    * Creates projection expressions reflecting the swapping of a join's input.    *    * @param newJoin   the RelNode corresponding to the join with its inputs    *                  swapped    * @param origJoin  original JoinRel    * @param origOrder if true, create the projection expressions to reflect    *                  the original (pre-swapped) join projection; otherwise,    *                  create the projection to reflect the order of the swapped    *                  projection    * @return array of expression representing the swapped join inputs    */
@@ -9090,7 +9081,7 @@ name|ProjectRel
 operator|.
 name|Flags
 operator|.
-name|Boxed
+name|BOXED
 argument_list|)
 return|;
 block|}
@@ -9174,6 +9165,7 @@ argument_list|(
 name|ancestor
 argument_list|)
 expr_stmt|;
+comment|// CHECKSTYLE: IGNORE -1
 return|return
 literal|false
 return|;
@@ -10180,11 +10172,9 @@ block|}
 else|else
 block|{
 assert|assert
-operator|(
 name|destFields
 operator|==
 literal|null
-operator|)
 assert|;
 name|nLeftDestFields
 operator|=

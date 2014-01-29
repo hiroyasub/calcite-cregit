@@ -195,7 +195,6 @@ operator|=
 name|alias
 expr_stmt|;
 assert|assert
-operator|(
 name|sourceExpressionList
 operator|.
 name|size
@@ -205,7 +204,6 @@ name|targetColumnList
 operator|.
 name|size
 argument_list|()
-operator|)
 assert|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------

@@ -88,6 +88,7 @@ name|boolean
 name|spark
 parameter_list|()
 function_decl|;
+comment|/** Named, built-in lexical policy. A lexical policy describes how    * identifiers are quoted, whether they are converted to upper- or    * lower-case when they are read, and whether they are matched    * case-sensitively. */
 enum|enum
 name|Lex
 block|{

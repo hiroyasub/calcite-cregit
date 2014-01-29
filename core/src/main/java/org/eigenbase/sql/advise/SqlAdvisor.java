@@ -19,16 +19,6 @@ begin_import
 import|import
 name|java
 operator|.
-name|io
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
 name|util
 operator|.
 name|*
@@ -125,7 +115,7 @@ specifier|public
 specifier|static
 specifier|final
 name|Logger
-name|tracer
+name|LOGGER
 init|=
 name|EigenbaseTrace
 operator|.
@@ -731,7 +721,7 @@ name|swallow
 argument_list|(
 name|e
 argument_list|,
-name|tracer
+name|LOGGER
 argument_list|)
 expr_stmt|;
 block|}

@@ -150,11 +150,9 @@ condition|)
 block|{
 name|denominator
 operator|+=
-operator|(
 name|rowCount
 operator|/
 name|percentage
-operator|)
 expr_stmt|;
 name|numerator
 operator|+=

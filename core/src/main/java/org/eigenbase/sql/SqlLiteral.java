@@ -2334,7 +2334,6 @@ name|this
 return|;
 block|}
 assert|assert
-operator|(
 name|SqlTypeUtil
 operator|.
 name|inCharFamily
@@ -2342,7 +2341,6 @@ argument_list|(
 name|getTypeName
 argument_list|()
 argument_list|)
-operator|)
 assert|;
 name|NlsString
 name|ns

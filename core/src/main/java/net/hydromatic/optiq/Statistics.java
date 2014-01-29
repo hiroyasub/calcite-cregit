@@ -46,6 +46,11 @@ specifier|public
 class|class
 name|Statistics
 block|{
+specifier|private
+name|Statistics
+parameter_list|()
+block|{
+block|}
 comment|/** Returns a {@link Statistic} that knows nothing about a table. */
 specifier|public
 specifier|static

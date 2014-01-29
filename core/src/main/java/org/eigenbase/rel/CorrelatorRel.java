@@ -261,9 +261,7 @@ argument_list|()
 operator|.
 name|get
 argument_list|(
-operator|(
 literal|1
-operator|)
 argument_list|)
 argument_list|,
 name|getCorrelations
@@ -564,13 +562,11 @@ name|other
 parameter_list|)
 block|{
 return|return
-operator|(
 name|id
 operator|-
 name|other
 operator|.
 name|id
-operator|)
 return|;
 block|}
 block|}

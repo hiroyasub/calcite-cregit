@@ -67,8 +67,9 @@ block|{
 comment|//~ Static fields/initializers ---------------------------------------------
 specifier|private
 specifier|static
+specifier|final
 name|Logger
-name|tracer
+name|LOGGER
 init|=
 name|Logger
 operator|.
@@ -105,7 +106,7 @@ name|cause
 argument_list|)
 expr_stmt|;
 comment|// TODO: see note in EigenbaseException constructor
-name|tracer
+name|LOGGER
 operator|.
 name|throwing
 argument_list|(
@@ -116,7 +117,7 @@ argument_list|,
 name|this
 argument_list|)
 expr_stmt|;
-name|tracer
+name|LOGGER
 operator|.
 name|severe
 argument_list|(

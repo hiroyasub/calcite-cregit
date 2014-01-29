@@ -108,9 +108,7 @@ parameter_list|)
 block|{
 name|super
 argument_list|(
-operator|(
 name|firstFlag
-operator|)
 condition|?
 literal|"FIRST_VALUE"
 else|:

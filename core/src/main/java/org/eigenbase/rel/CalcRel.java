@@ -130,7 +130,7 @@ specifier|public
 specifier|static
 specifier|final
 name|boolean
-name|DeprecateProjectAndFilter
+name|DEPRECATE_PROJECT_AND_FILTER
 init|=
 literal|false
 decl_stmt|;
@@ -576,7 +576,7 @@ argument_list|)
 decl_stmt|;
 if|if
 condition|(
-name|DeprecateProjectAndFilter
+name|DEPRECATE_PROJECT_AND_FILTER
 condition|)
 block|{
 return|return
@@ -698,7 +698,7 @@ name|ProjectRelBase
 operator|.
 name|Flags
 operator|.
-name|Boxed
+name|BOXED
 argument_list|)
 return|;
 block|}
@@ -718,7 +718,7 @@ parameter_list|)
 block|{
 if|if
 condition|(
-name|DeprecateProjectAndFilter
+name|DEPRECATE_PROJECT_AND_FILTER
 condition|)
 block|{
 specifier|final

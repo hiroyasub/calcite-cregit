@@ -67,7 +67,7 @@ specifier|public
 specifier|static
 specifier|final
 name|MergeCalcRule
-name|instance
+name|INSTANCE
 init|=
 operator|new
 name|MergeCalcRule

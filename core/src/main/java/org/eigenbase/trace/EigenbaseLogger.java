@@ -50,11 +50,9 @@ name|logger
 parameter_list|)
 block|{
 assert|assert
-operator|(
 name|logger
 operator|!=
 literal|null
-operator|)
 assert|;
 name|this
 operator|.

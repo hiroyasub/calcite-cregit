@@ -105,6 +105,11 @@ block|,
 literal|"\\p{Alnum}"
 block|}
 decl_stmt|;
+specifier|private
+name|Like
+parameter_list|()
+block|{
+block|}
 comment|/**    * Translates a SQL LIKE pattern to Java regex pattern, with optional    * escape string.    */
 specifier|static
 name|String

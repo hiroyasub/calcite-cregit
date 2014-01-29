@@ -2283,7 +2283,6 @@ name|value
 parameter_list|)
 block|{
 assert|assert
-operator|(
 name|value
 operator|.
 name|charAt
@@ -2292,10 +2291,8 @@ literal|0
 argument_list|)
 operator|==
 literal|'"'
-operator|)
 assert|;
 assert|assert
-operator|(
 name|value
 operator|.
 name|charAt
@@ -2309,7 +2306,6 @@ literal|1
 argument_list|)
 operator|==
 literal|'"'
-operator|)
 assert|;
 name|String
 name|s5
@@ -4877,11 +4873,9 @@ argument_list|)
 expr_stmt|;
 name|millis
 operator|-=
-operator|(
 name|hours
 operator|*
 literal|3600000
-operator|)
 expr_stmt|;
 if|if
 condition|(
@@ -4930,11 +4924,9 @@ argument_list|)
 expr_stmt|;
 name|millis
 operator|-=
-operator|(
 name|minutes
 operator|*
 literal|60000
-operator|)
 expr_stmt|;
 if|if
 condition|(

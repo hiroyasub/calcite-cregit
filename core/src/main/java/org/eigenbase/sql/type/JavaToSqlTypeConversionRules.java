@@ -83,7 +83,7 @@ specifier|private
 specifier|static
 specifier|final
 name|JavaToSqlTypeConversionRules
-name|instance
+name|INSTANCE
 init|=
 operator|new
 name|JavaToSqlTypeConversionRules
@@ -420,7 +420,7 @@ name|instance
 parameter_list|()
 block|{
 return|return
-name|instance
+name|INSTANCE
 return|;
 block|}
 comment|/**    * Returns a corresponding {@link SqlTypeName} for a given Java class.    *    * @param javaClass the Java class to lookup    * @return a corresponding SqlTypeName if found, otherwise null is returned    */

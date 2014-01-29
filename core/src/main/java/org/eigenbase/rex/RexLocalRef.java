@@ -84,7 +84,7 @@ name|List
 argument_list|<
 name|String
 argument_list|>
-name|names
+name|NAMES
 init|=
 operator|new
 name|SelfPopulatingList
@@ -234,7 +234,7 @@ name|index
 parameter_list|)
 block|{
 return|return
-name|names
+name|NAMES
 operator|.
 name|get
 argument_list|(

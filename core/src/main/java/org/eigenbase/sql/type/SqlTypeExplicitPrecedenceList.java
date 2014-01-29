@@ -550,20 +550,16 @@ name|type2
 parameter_list|)
 block|{
 assert|assert
-operator|(
 name|containsType
 argument_list|(
 name|type1
 argument_list|)
-operator|)
 assert|;
 assert|assert
-operator|(
 name|containsType
 argument_list|(
 name|type2
 argument_list|)
-operator|)
 assert|;
 name|int
 name|p1
@@ -623,12 +619,10 @@ name|type
 argument_list|)
 decl_stmt|;
 assert|assert
-operator|(
 name|i
 operator|!=
 operator|-
 literal|1
-operator|)
 assert|;
 comment|// adjust for precedence equivalence classes
 for|for

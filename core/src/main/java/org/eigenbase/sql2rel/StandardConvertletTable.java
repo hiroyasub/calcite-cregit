@@ -974,7 +974,6 @@ name|getThenOperands
 argument_list|()
 decl_stmt|;
 assert|assert
-operator|(
 name|whenList
 operator|.
 name|size
@@ -984,7 +983,6 @@ name|thenList
 operator|.
 name|size
 argument_list|()
-operator|)
 assert|;
 specifier|final
 name|List
@@ -1577,14 +1575,12 @@ name|BigDecimal
 name|sourceValue
 init|=
 operator|(
-operator|(
 name|BigDecimal
 operator|)
 name|sourceInterval
 operator|.
 name|getValue
 argument_list|()
-operator|)
 decl_stmt|;
 name|RexLiteral
 name|castedInterval

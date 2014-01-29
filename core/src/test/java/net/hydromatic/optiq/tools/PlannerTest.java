@@ -673,7 +673,7 @@ name|ofList
 argument_list|(
 name|MergeFilterRule
 operator|.
-name|instance
+name|INSTANCE
 argument_list|,
 name|JavaRules
 operator|.

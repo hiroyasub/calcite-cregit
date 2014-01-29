@@ -228,7 +228,6 @@ operator|==
 literal|null
 assert|;
 assert|assert
-operator|(
 name|operands
 index|[
 name|SqlJoin
@@ -237,7 +236,6 @@ name|IS_NATURAL_OPERAND
 index|]
 operator|instanceof
 name|SqlLiteral
-operator|)
 assert|;
 specifier|final
 name|SqlLiteral
@@ -254,7 +252,6 @@ name|IS_NATURAL_OPERAND
 index|]
 decl_stmt|;
 assert|assert
-operator|(
 name|isNatural
 operator|.
 name|getTypeName
@@ -263,7 +260,6 @@ operator|==
 name|SqlTypeName
 operator|.
 name|BOOLEAN
-operator|)
 assert|;
 assert|assert
 name|operands

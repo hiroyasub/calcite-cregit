@@ -157,31 +157,25 @@ comment|// the previous as its parent ClassLoader.  If we refactored this
 comment|// class and its callers to specify all code to compile in one
 comment|// go, we could probably just use a single AccountingClassLoader.
 assert|assert
-operator|(
 name|args
 operator|.
 name|destdir
 operator|!=
 literal|null
-operator|)
 assert|;
 assert|assert
-operator|(
 name|args
 operator|.
 name|fullClassName
 operator|!=
 literal|null
-operator|)
 assert|;
 assert|assert
-operator|(
 name|args
 operator|.
 name|source
 operator|!=
 literal|null
-operator|)
 assert|;
 name|ClassLoader
 name|parentClassLoader

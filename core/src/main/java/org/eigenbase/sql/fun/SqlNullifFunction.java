@@ -155,13 +155,11 @@ name|call
 argument_list|)
 expr_stmt|;
 assert|assert
-operator|(
 name|operands
 operator|.
 name|length
 operator|==
 literal|2
-operator|)
 assert|;
 name|SqlNodeList
 name|whenList

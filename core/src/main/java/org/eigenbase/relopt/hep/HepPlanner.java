@@ -531,11 +531,9 @@ name|findBestExp
 parameter_list|()
 block|{
 assert|assert
-operator|(
 name|root
 operator|!=
 literal|null
-operator|)
 assert|;
 name|executeProgram
 argument_list|(
@@ -638,7 +636,7 @@ parameter_list|)
 block|{
 if|if
 condition|(
-name|tracer
+name|LOGGER
 operator|.
 name|isLoggable
 argument_list|(
@@ -648,7 +646,7 @@ name|FINEST
 argument_list|)
 condition|)
 block|{
-name|tracer
+name|LOGGER
 operator|.
 name|finest
 argument_list|(
@@ -680,7 +678,7 @@ parameter_list|)
 block|{
 if|if
 condition|(
-name|tracer
+name|LOGGER
 operator|.
 name|isLoggable
 argument_list|(
@@ -690,7 +688,7 @@ name|FINEST
 argument_list|)
 condition|)
 block|{
-name|tracer
+name|LOGGER
 operator|.
 name|finest
 argument_list|(
@@ -738,13 +736,11 @@ literal|null
 condition|)
 block|{
 assert|assert
-operator|(
 name|instruction
 operator|.
 name|ruleDescription
 operator|!=
 literal|null
-operator|)
 assert|;
 name|instruction
 operator|.
@@ -759,7 +755,7 @@ argument_list|)
 expr_stmt|;
 if|if
 condition|(
-name|tracer
+name|LOGGER
 operator|.
 name|isLoggable
 argument_list|(
@@ -769,7 +765,7 @@ name|FINEST
 argument_list|)
 condition|)
 block|{
-name|tracer
+name|LOGGER
 operator|.
 name|finest
 argument_list|(
@@ -832,7 +828,7 @@ return|return;
 block|}
 if|if
 condition|(
-name|tracer
+name|LOGGER
 operator|.
 name|isLoggable
 argument_list|(
@@ -842,7 +838,7 @@ name|FINEST
 argument_list|)
 condition|)
 block|{
-name|tracer
+name|LOGGER
 operator|.
 name|finest
 argument_list|(
@@ -985,13 +981,11 @@ name|instruction
 parameter_list|)
 block|{
 assert|assert
-operator|(
 name|currentProgram
 operator|.
 name|group
 operator|==
 literal|null
-operator|)
 assert|;
 if|if
 condition|(
@@ -1112,13 +1106,11 @@ name|instruction
 parameter_list|)
 block|{
 assert|assert
-operator|(
 name|currentProgram
 operator|.
 name|group
 operator|==
 literal|null
-operator|)
 assert|;
 if|if
 condition|(
@@ -1190,7 +1182,7 @@ name|Subprogram
 name|instruction
 parameter_list|)
 block|{
-name|tracer
+name|LOGGER
 operator|.
 name|finest
 argument_list|(
@@ -1226,7 +1218,7 @@ comment|// Nothing happened this time around.
 break|break;
 block|}
 block|}
-name|tracer
+name|LOGGER
 operator|.
 name|finest
 argument_list|(
@@ -1244,13 +1236,11 @@ name|instruction
 parameter_list|)
 block|{
 assert|assert
-operator|(
 name|currentProgram
 operator|.
 name|group
 operator|==
 literal|null
-operator|)
 assert|;
 name|currentProgram
 operator|.
@@ -1260,7 +1250,7 @@ name|instruction
 operator|.
 name|endGroup
 expr_stmt|;
-name|tracer
+name|LOGGER
 operator|.
 name|finest
 argument_list|(
@@ -1278,13 +1268,11 @@ name|instruction
 parameter_list|)
 block|{
 assert|assert
-operator|(
 name|currentProgram
 operator|.
 name|group
 operator|==
 name|instruction
-operator|)
 assert|;
 name|currentProgram
 operator|.
@@ -1307,7 +1295,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|tracer
+name|LOGGER
 operator|.
 name|finest
 argument_list|(
@@ -1339,13 +1327,11 @@ literal|null
 condition|)
 block|{
 assert|assert
-operator|(
 name|currentProgram
 operator|.
 name|group
 operator|.
 name|collecting
-operator|)
 assert|;
 name|currentProgram
 operator|.
@@ -1362,7 +1348,7 @@ return|return;
 block|}
 if|if
 condition|(
-name|tracer
+name|LOGGER
 operator|.
 name|isLoggable
 argument_list|(
@@ -1372,7 +1358,7 @@ name|FINEST
 argument_list|)
 condition|)
 block|{
-name|tracer
+name|LOGGER
 operator|.
 name|finest
 argument_list|(
@@ -1385,7 +1371,6 @@ block|}
 name|boolean
 name|fullRestartAfterTransformation
 init|=
-operator|(
 name|currentProgram
 operator|.
 name|matchOrder
@@ -1393,7 +1378,6 @@ operator|!=
 name|HepMatchOrder
 operator|.
 name|ARBITRARY
-operator|)
 decl_stmt|;
 name|int
 name|nMatches
@@ -2462,7 +2446,6 @@ comment|// TODO jvs 5-Apr-2006:  Take the one that gives the best
 comment|// global cost rather than the best local cost.  That requires
 comment|// "tentative" graph edits.
 assert|assert
-operator|(
 operator|!
 name|call
 operator|.
@@ -2471,7 +2454,6 @@ argument_list|()
 operator|.
 name|isEmpty
 argument_list|()
-operator|)
 assert|;
 name|RelNode
 name|bestRel
@@ -2534,7 +2516,7 @@ argument_list|)
 decl_stmt|;
 if|if
 condition|(
-name|tracer
+name|LOGGER
 operator|.
 name|isLoggable
 argument_list|(
@@ -2544,7 +2526,7 @@ name|FINER
 argument_list|)
 condition|)
 block|{
-name|tracer
+name|LOGGER
 operator|.
 name|finer
 argument_list|(
@@ -3447,7 +3429,7 @@ name|nTransformationsLastGC
 operator|=
 name|nTransformations
 expr_stmt|;
-name|tracer
+name|LOGGER
 operator|.
 name|finest
 argument_list|(
@@ -3583,13 +3565,11 @@ expr_stmt|;
 block|}
 block|}
 assert|assert
-operator|(
 operator|!
 name|sweepSet
 operator|.
 name|isEmpty
 argument_list|()
-operator|)
 assert|;
 name|graph
 operator|.
@@ -3732,7 +3712,7 @@ block|{
 if|if
 condition|(
 operator|!
-name|tracer
+name|LOGGER
 operator|.
 name|isLoggable
 argument_list|(
@@ -3893,7 +3873,7 @@ argument_list|(
 literal|"}"
 argument_list|)
 expr_stmt|;
-name|tracer
+name|LOGGER
 operator|.
 name|finer
 argument_list|(

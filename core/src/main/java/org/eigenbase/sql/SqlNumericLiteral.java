@@ -398,14 +398,12 @@ name|isInteger
 parameter_list|()
 block|{
 return|return
-operator|(
 literal|0
 operator|==
 name|scale
 operator|.
 name|intValue
 argument_list|()
-operator|)
 return|;
 block|}
 block|}

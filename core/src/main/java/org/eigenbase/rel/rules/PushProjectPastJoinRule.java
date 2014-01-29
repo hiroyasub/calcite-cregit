@@ -88,7 +88,7 @@ specifier|public
 specifier|static
 specifier|final
 name|PushProjectPastJoinRule
-name|instance
+name|INSTANCE
 init|=
 operator|new
 name|PushProjectPastJoinRule

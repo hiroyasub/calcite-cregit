@@ -62,6 +62,11 @@ specifier|public
 class|class
 name|Graphs
 block|{
+specifier|private
+name|Graphs
+parameter_list|()
+block|{
+block|}
 specifier|public
 specifier|static
 parameter_list|<

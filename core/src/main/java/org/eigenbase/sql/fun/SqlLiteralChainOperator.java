@@ -393,7 +393,6 @@ name|getPrecision
 argument_list|()
 expr_stmt|;
 assert|assert
-operator|(
 name|type
 operator|.
 name|getSqlTypeName
@@ -403,7 +402,6 @@ name|equals
 argument_list|(
 name|typeName
 argument_list|)
-operator|)
 assert|;
 block|}
 return|return

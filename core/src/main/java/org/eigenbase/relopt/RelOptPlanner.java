@@ -132,7 +132,7 @@ name|RelOptPlanner
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
 name|Logger
-name|tracer
+name|LOGGER
 init|=
 name|EigenbaseTrace
 operator|.

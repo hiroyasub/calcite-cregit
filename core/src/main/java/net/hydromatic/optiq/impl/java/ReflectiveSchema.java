@@ -742,6 +742,7 @@ literal|" into a Enumerable"
 argument_list|)
 throw|;
 block|}
+comment|/** Table that is implemented by reading from a Java object. */
 specifier|private
 specifier|static
 class|class
@@ -1090,6 +1091,7 @@ argument_list|)
 return|;
 block|}
 block|}
+comment|/** Table function based on a Java method. */
 specifier|private
 specifier|static
 class|class
@@ -1446,6 +1448,7 @@ throw|;
 block|}
 block|}
 block|}
+comment|/** Table based on a Java field. */
 specifier|private
 specifier|static
 class|class

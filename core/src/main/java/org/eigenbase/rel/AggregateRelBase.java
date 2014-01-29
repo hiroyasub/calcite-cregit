@@ -485,7 +485,6 @@ argument_list|()
 decl_stmt|;
 name|rowCount
 operator|*=
-operator|(
 literal|1.0
 operator|-
 name|Math
@@ -496,7 +495,6 @@ literal|.5
 argument_list|,
 name|groupCount
 argument_list|)
-operator|)
 expr_stmt|;
 return|return
 name|rowCount

@@ -122,9 +122,7 @@ argument_list|()
 return|;
 block|}
 assert|assert
-operator|(
 literal|false
-operator|)
 assert|;
 return|return
 literal|null

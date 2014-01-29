@@ -229,7 +229,7 @@ specifier|public
 specifier|static
 specifier|final
 name|Logger
-name|tracer
+name|TRACER
 init|=
 name|EigenbaseTrace
 operator|.
@@ -2917,7 +2917,7 @@ argument_list|)
 expr_stmt|;
 if|if
 condition|(
-name|tracer
+name|TRACER
 operator|.
 name|isLoggable
 argument_list|(
@@ -2927,7 +2927,7 @@ name|FINER
 argument_list|)
 condition|)
 block|{
-name|tracer
+name|TRACER
 operator|.
 name|finer
 argument_list|(
@@ -3002,7 +3002,7 @@ expr_stmt|;
 block|}
 if|if
 condition|(
-name|tracer
+name|TRACER
 operator|.
 name|isLoggable
 argument_list|(
@@ -3012,7 +3012,7 @@ name|FINER
 argument_list|)
 condition|)
 block|{
-name|tracer
+name|TRACER
 operator|.
 name|finer
 argument_list|(
@@ -3718,13 +3718,11 @@ condition|)
 block|{
 name|childUnderFrom
 operator|=
-operator|(
 name|i
 operator|==
 name|SqlSelect
 operator|.
 name|FROM_OPERAND
-operator|)
 expr_stmt|;
 block|}
 if|else if
@@ -4915,11 +4913,9 @@ argument_list|()
 argument_list|)
 decl_stmt|;
 assert|assert
-operator|(
 name|selfJoinTgtExpr
 operator|!=
 literal|null
-operator|)
 assert|;
 comment|// Create join condition between source and target exprs,
 comment|// creating a conjunction with the user-level WHERE
@@ -5537,7 +5533,6 @@ name|iRow
 index|]
 decl_stmt|;
 assert|assert
-operator|(
 name|operand
 operator|.
 name|getKind
@@ -5546,7 +5541,6 @@ operator|==
 name|SqlKind
 operator|.
 name|ROW
-operator|)
 assert|;
 name|SqlCall
 name|rowConstructor
@@ -6084,11 +6078,9 @@ name|getSqlIdentifier
 argument_list|()
 decl_stmt|;
 assert|assert
-operator|(
 name|sqlIdentifier
 operator|!=
 literal|null
-operator|)
 assert|;
 name|RelDataType
 name|type
@@ -6198,11 +6190,9 @@ name|testCall
 argument_list|)
 decl_stmt|;
 assert|assert
-operator|(
 name|type
 operator|==
 name|returnType
-operator|)
 assert|;
 block|}
 if|if
@@ -8901,7 +8891,6 @@ name|i
 control|)
 block|{
 assert|assert
-operator|(
 name|operands
 index|[
 name|i
@@ -8913,7 +8902,6 @@ operator|==
 name|SqlKind
 operator|.
 name|ROW
-operator|)
 assert|;
 comment|// FIXME jvs 9-Feb-2005:  Correlation should
 comment|// be illegal in these subqueries.  Same goes for
@@ -9609,7 +9597,6 @@ name|selectNode
 parameter_list|)
 block|{
 return|return
-operator|(
 name|aggFinder
 operator|.
 name|findAgg
@@ -9618,7 +9605,6 @@ name|selectNode
 argument_list|)
 operator|!=
 literal|null
-operator|)
 return|;
 block|}
 specifier|private
@@ -10454,11 +10440,9 @@ name|qualifier
 parameter_list|)
 block|{
 assert|assert
-operator|(
 name|qualifier
 operator|!=
 literal|null
-operator|)
 assert|;
 name|boolean
 name|startPrecisionOutOfRange
@@ -13962,25 +13946,21 @@ name|size
 argument_list|()
 decl_stmt|;
 assert|assert
-operator|(
 name|sourceFields
 operator|.
 name|size
 argument_list|()
 operator|>=
 name|nUpdateColumns
-operator|)
 assert|;
 name|iAdjusted
 operator|-=
-operator|(
 name|sourceFields
 operator|.
 name|size
 argument_list|()
 operator|-
 name|nUpdateColumns
-operator|)
 expr_stmt|;
 block|}
 name|SqlNode
@@ -15768,7 +15748,6 @@ block|{
 comment|// By default, do nothing except to verify that the resource
 comment|// represents a real feature definition.
 assert|assert
-operator|(
 name|feature
 operator|.
 name|getProperties
@@ -15780,7 +15759,6 @@ literal|"FeatureDefinition"
 argument_list|)
 operator|!=
 literal|null
-operator|)
 assert|;
 block|}
 specifier|public

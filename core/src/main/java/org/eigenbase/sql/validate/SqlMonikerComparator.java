@@ -101,7 +101,6 @@ block|}
 else|else
 block|{
 return|return
-operator|(
 name|m1
 operator|.
 name|toString
@@ -114,7 +113,6 @@ operator|.
 name|toString
 argument_list|()
 argument_list|)
-operator|)
 return|;
 block|}
 block|}

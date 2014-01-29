@@ -29,18 +29,6 @@ name|RelNode
 import|;
 end_import
 
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
-name|sql
-operator|.
-name|SqlNode
-import|;
-end_import
-
 begin_comment
 comment|/**  * Relational expression that uses JDBC calling convention.  */
 end_comment

@@ -76,7 +76,7 @@ specifier|public
 specifier|static
 specifier|final
 name|PushProjectPastSetOpRule
-name|instance
+name|INSTANCE
 init|=
 operator|new
 name|PushProjectPastSetOpRule

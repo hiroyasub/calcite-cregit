@@ -174,10 +174,10 @@ block|{
 comment|//~ Static fields/initializers ---------------------------------------------
 comment|// TODO jvs 10-Oct-2003:  Make this thread safe.  Either synchronize, or
 comment|// keep this per-VolcanoPlanner.
-comment|/**    * generator for {@link #id} values    */
+comment|/** Generator for {@link #id} values. */
 specifier|static
 name|int
-name|nextId
+name|NEXT_ID
 init|=
 literal|0
 decl_stmt|;
@@ -185,7 +185,7 @@ specifier|private
 specifier|static
 specifier|final
 name|Logger
-name|tracer
+name|LOGGER
 init|=
 name|EigenbaseTrace
 operator|.
@@ -244,11 +244,9 @@ name|super
 argument_list|()
 expr_stmt|;
 assert|assert
-operator|(
 name|cluster
 operator|!=
 literal|null
-operator|)
 assert|;
 name|this
 operator|.
@@ -266,7 +264,7 @@ name|this
 operator|.
 name|id
 operator|=
-name|nextId
+name|NEXT_ID
 operator|++
 expr_stmt|;
 name|this
@@ -288,7 +286,7 @@ name|digest
 expr_stmt|;
 if|if
 condition|(
-name|tracer
+name|LOGGER
 operator|.
 name|isLoggable
 argument_list|(
@@ -298,7 +296,7 @@ name|FINEST
 argument_list|)
 condition|)
 block|{
-name|tracer
+name|LOGGER
 operator|.
 name|finest
 argument_list|(
@@ -439,7 +437,7 @@ name|getTrait
 argument_list|(
 name|ConventionTraitDef
 operator|.
-name|instance
+name|INSTANCE
 argument_list|)
 return|;
 block|}
@@ -1198,13 +1196,11 @@ name|correlVariable
 parameter_list|)
 block|{
 assert|assert
-operator|(
 name|this
 operator|.
 name|correlVariable
 operator|==
 literal|null
-operator|)
 assert|;
 name|this
 operator|.

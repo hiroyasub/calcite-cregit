@@ -64,7 +64,6 @@ name|other
 parameter_list|)
 block|{
 assert|assert
-operator|(
 name|getDataType
 argument_list|()
 operator|==
@@ -72,7 +71,6 @@ name|other
 operator|.
 name|getDataType
 argument_list|()
-operator|)
 assert|;
 name|lowerBound
 operator|.
@@ -103,7 +101,6 @@ name|other
 parameter_list|)
 block|{
 assert|assert
-operator|(
 name|getDataType
 argument_list|()
 operator|==
@@ -111,7 +108,6 @@ name|other
 operator|.
 name|getDataType
 argument_list|()
-operator|)
 assert|;
 if|if
 condition|(

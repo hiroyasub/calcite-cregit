@@ -1344,7 +1344,6 @@ name|E
 argument_list|>
 name|child
 range|:
-operator|(
 name|up
 condition|?
 name|ancestor
@@ -1354,7 +1353,6 @@ else|:
 name|ancestor
 operator|.
 name|parentList
-operator|)
 control|)
 block|{
 if|if

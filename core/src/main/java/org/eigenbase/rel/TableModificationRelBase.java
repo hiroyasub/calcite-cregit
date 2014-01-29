@@ -397,11 +397,9 @@ name|ordinalInParent
 parameter_list|)
 block|{
 assert|assert
-operator|(
 name|ordinalInParent
 operator|==
 literal|0
-operator|)
 assert|;
 if|if
 condition|(

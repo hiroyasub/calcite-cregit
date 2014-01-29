@@ -59,32 +59,6 @@ name|*
 import|;
 end_import
 
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
-name|util
-operator|.
-name|Pair
-import|;
-end_import
-
-begin_import
-import|import
-name|com
-operator|.
-name|google
-operator|.
-name|common
-operator|.
-name|collect
-operator|.
-name|ImmutableList
-import|;
-end_import
-
 begin_comment
 comment|/**  * A relational expression which unnests its input's sole column into a  * relation.  *  *<p>Like its inverse operation {@link CollectRel}, UncollectRel is generally  * invoked in a nested loop, driven by {@link CorrelatorRel} or similar.  */
 end_comment

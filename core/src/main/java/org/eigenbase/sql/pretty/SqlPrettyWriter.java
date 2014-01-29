@@ -1739,7 +1739,6 @@ decl_stmt|;
 name|boolean
 name|newlineAfter
 init|=
-operator|(
 name|newlineAfterSep
 operator|&&
 name|sep
@@ -1748,7 +1747,6 @@ name|equals
 argument_list|(
 literal|","
 argument_list|)
-operator|)
 decl_stmt|;
 if|if
 condition|(
@@ -1801,9 +1799,7 @@ argument_list|)
 expr_stmt|;
 name|nextWhitespace
 operator|=
-operator|(
 name|newlineAfter
-operator|)
 condition|?
 name|NL
 else|:
@@ -2522,12 +2518,9 @@ block|{
 name|boolean
 name|result
 init|=
-operator|(
-operator|(
 name|lineLength
 operator|>
 literal|0
-operator|)
 operator|&&
 operator|(
 name|charCount
@@ -2546,7 +2539,6 @@ argument_list|()
 operator|)
 operator|>=
 name|lineLength
-operator|)
 operator|)
 decl_stmt|;
 if|if
@@ -3349,9 +3341,7 @@ argument_list|)
 expr_stmt|;
 name|nextWhitespace
 operator|=
-operator|(
 name|newlineAfterSep
-operator|)
 condition|?
 name|NL
 else|:

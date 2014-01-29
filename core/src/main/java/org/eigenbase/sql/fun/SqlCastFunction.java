@@ -406,14 +406,12 @@ name|opBinding
 parameter_list|)
 block|{
 assert|assert
-operator|(
 name|opBinding
 operator|.
 name|getOperandCount
 argument_list|()
 operator|==
 literal|2
-operator|)
 assert|;
 name|RelDataType
 name|ret

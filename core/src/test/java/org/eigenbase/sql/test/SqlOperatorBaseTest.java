@@ -4635,7 +4635,6 @@ comment|// Within two minutes of the top of the hour. Wait in 10s
 comment|// increments until calendar moves into the next next day.
 if|if
 condition|(
-operator|(
 name|cal
 operator|.
 name|get
@@ -4646,7 +4645,6 @@ name|MINUTE
 argument_list|)
 operator|>=
 literal|58
-operator|)
 condition|)
 block|{
 name|Thread

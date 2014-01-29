@@ -88,7 +88,7 @@ specifier|public
 specifier|static
 specifier|final
 name|PushSemiJoinPastJoinRule
-name|instance
+name|INSTANCE
 init|=
 operator|new
 name|PushSemiJoinPastJoinRule
@@ -373,7 +373,6 @@ comment|// the keys must all originate from either the left or right;
 comment|// otherwise, a semijoin wouldn't have been created
 assert|assert
 operator|(
-operator|(
 name|nKeysFromX
 operator|==
 literal|0
@@ -386,7 +385,6 @@ name|leftKeys
 operator|.
 name|size
 argument_list|()
-operator|)
 operator|)
 assert|;
 comment|// need to convert the semijoin condition and possibly the keys

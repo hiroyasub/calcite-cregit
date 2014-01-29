@@ -61,8 +61,9 @@ literal|1314522633397794178L
 decl_stmt|;
 specifier|private
 specifier|static
+specifier|final
 name|Logger
-name|tracer
+name|LOGGER
 init|=
 name|Logger
 operator|.
@@ -97,7 +98,7 @@ argument_list|)
 expr_stmt|;
 comment|// TODO: Force the caller to pass in a Logger as a trace argument for
 comment|// better context.  Need to extend ResGen for this.
-name|tracer
+name|LOGGER
 operator|.
 name|throwing
 argument_list|(
@@ -108,7 +109,7 @@ argument_list|,
 name|this
 argument_list|)
 expr_stmt|;
-name|tracer
+name|LOGGER
 operator|.
 name|severe
 argument_list|(

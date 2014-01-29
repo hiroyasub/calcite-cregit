@@ -127,14 +127,12 @@ operator|++
 control|)
 block|{
 assert|assert
-operator|(
 name|rels
 index|[
 name|i
 index|]
 operator|!=
 literal|null
-operator|)
 assert|;
 block|}
 comment|// Try to deduce which subset the result will belong to. Assume --

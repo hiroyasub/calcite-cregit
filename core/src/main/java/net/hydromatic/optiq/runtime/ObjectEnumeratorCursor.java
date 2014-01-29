@@ -139,11 +139,9 @@ index|[
 literal|0
 index|]
 operator|=
-operator|(
 name|o
 operator|==
 literal|null
-operator|)
 expr_stmt|;
 return|return
 name|o

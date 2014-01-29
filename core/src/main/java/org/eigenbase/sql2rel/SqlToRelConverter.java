@@ -493,9 +493,10 @@ init|=
 literal|0
 decl_stmt|;
 specifier|private
+specifier|static
 specifier|final
 name|String
-name|correlPrefix
+name|CORREL_PREFIX
 init|=
 literal|"$cor"
 decl_stmt|;
@@ -2012,7 +2013,7 @@ name|ProjectRel
 operator|.
 name|Flags
 operator|.
-name|Boxed
+name|BOXED
 argument_list|)
 expr_stmt|;
 name|bb
@@ -2160,7 +2161,7 @@ name|ProjectRel
 operator|.
 name|Flags
 operator|.
-name|Boxed
+name|BOXED
 argument_list|)
 expr_stmt|;
 name|bb
@@ -2530,7 +2531,7 @@ name|ProjectRelBase
 operator|.
 name|Flags
 operator|.
-name|Boxed
+name|BOXED
 argument_list|)
 argument_list|,
 literal|false
@@ -2760,11 +2761,9 @@ literal|0
 index|]
 decl_stmt|;
 assert|assert
-operator|(
 name|childNode
 operator|instanceof
 name|SqlCall
-operator|)
 assert|;
 name|SqlCall
 name|childSqlCall
@@ -3058,13 +3057,11 @@ name|getOperands
 argument_list|()
 decl_stmt|;
 assert|assert
-operator|(
 name|notOperands
 operator|.
 name|length
 operator|==
 literal|1
-operator|)
 assert|;
 return|return
 name|pushdownNotForIn
@@ -3712,9 +3709,7 @@ init|=
 operator|(
 name|SqlLiteral
 operator|)
-operator|(
 name|sqlNode
-operator|)
 decl_stmt|;
 if|if
 condition|(
@@ -4347,11 +4342,9 @@ block|}
 else|else
 block|{
 assert|assert
-operator|(
 name|rightVals
 operator|instanceof
 name|SqlCall
-operator|)
 assert|;
 specifier|final
 name|SqlCall
@@ -4364,7 +4357,6 @@ name|rightVals
 decl_stmt|;
 assert|assert
 operator|(
-operator|(
 name|call
 operator|.
 name|getOperator
@@ -4373,7 +4365,6 @@ operator|instanceof
 name|SqlRowOperator
 operator|)
 operator|&&
-operator|(
 name|call
 operator|.
 name|getOperands
@@ -4384,8 +4375,6 @@ operator|==
 name|leftKeys
 operator|.
 name|length
-operator|)
-operator|)
 assert|;
 name|rexComparison
 operator|=
@@ -4676,13 +4665,11 @@ name|needsOuterJoin
 parameter_list|)
 block|{
 assert|assert
-operator|(
 operator|!
 name|isIn
 operator|||
 operator|!
 name|isExists
-operator|)
 assert|;
 specifier|final
 name|SqlValidatorScope
@@ -6944,7 +6931,6 @@ name|from
 expr_stmt|;
 comment|// Dig out real call; TABLE() wrapper is just syntactic.
 assert|assert
-operator|(
 name|call
 operator|.
 name|getOperands
@@ -6953,7 +6939,6 @@ operator|.
 name|length
 operator|==
 literal|1
-operator|)
 assert|;
 name|call
 operator|=
@@ -7407,20 +7392,16 @@ name|nsIndexes
 argument_list|)
 decl_stmt|;
 assert|assert
-operator|(
 name|foundNs
 operator|!=
 literal|null
-operator|)
 assert|;
 assert|assert
-operator|(
 name|nsIndexes
 operator|.
 name|length
 operator|==
 literal|1
-operator|)
 assert|;
 name|int
 name|childNamespaceIndex
@@ -7441,13 +7422,11 @@ decl_stmt|;
 name|boolean
 name|correlInCurrentScope
 init|=
-operator|(
 name|ancestorScope
 operator|==
 name|bb
 operator|.
 name|scope
-operator|)
 decl_stmt|;
 if|if
 condition|(
@@ -7469,11 +7448,9 @@ block|{
 comment|// If not the first child, need to figure out the width
 comment|// of output types from all the preceding namespaces
 assert|assert
-operator|(
 name|ancestorScope
 operator|instanceof
 name|ListScope
-operator|)
 assert|;
 name|List
 argument_list|<
@@ -7573,12 +7550,10 @@ name|getType
 argument_list|()
 assert|;
 assert|assert
-operator|(
 name|pos
 operator|!=
 operator|-
 literal|1
-operator|)
 assert|;
 if|if
 condition|(
@@ -8697,20 +8672,16 @@ name|nsIndexes
 argument_list|)
 decl_stmt|;
 assert|assert
-operator|(
 name|foundNs
 operator|!=
 literal|null
-operator|)
 assert|;
 assert|assert
-operator|(
 name|nsIndexes
 operator|.
 name|length
 operator|==
 literal|1
-operator|)
 assert|;
 name|SqlValidatorScope
 name|ancestorScope
@@ -9511,20 +9482,16 @@ name|nsIndexes
 argument_list|)
 decl_stmt|;
 assert|assert
-operator|(
 name|foundNs
 operator|!=
 literal|null
-operator|)
 assert|;
 assert|assert
-operator|(
 name|nsIndexes
 operator|.
 name|length
 operator|==
 literal|1
-operator|)
 assert|;
 name|int
 name|childNamespaceIndex
@@ -9549,14 +9516,12 @@ block|{
 comment|// If not the first child, need to figure out the width of
 comment|// output types from all the preceding namespaces
 assert|assert
-operator|(
 name|ancestorScopes
 index|[
 literal|0
 index|]
 operator|instanceof
 name|ListScope
-operator|)
 assert|;
 name|List
 argument_list|<
@@ -12992,7 +12957,6 @@ name|cursorCall
 parameter_list|)
 block|{
 assert|assert
-operator|(
 name|cursorCall
 operator|.
 name|operands
@@ -13000,7 +12964,6 @@ operator|.
 name|length
 operator|==
 literal|1
-operator|)
 assert|;
 name|SqlNode
 name|query
@@ -14590,7 +14553,7 @@ name|nextCorrel
 operator|++
 decl_stmt|;
 return|return
-name|correlPrefix
+name|CORREL_PREFIX
 operator|+
 name|n
 return|;
@@ -14604,14 +14567,12 @@ name|correlName
 parameter_list|)
 block|{
 assert|assert
-operator|(
 name|correlName
 operator|.
 name|startsWith
 argument_list|(
-name|correlPrefix
+name|CORREL_PREFIX
 argument_list|)
-operator|)
 assert|;
 return|return
 name|Integer
@@ -14622,7 +14583,7 @@ name|correlName
 operator|.
 name|substring
 argument_list|(
-name|correlPrefix
+name|CORREL_PREFIX
 operator|.
 name|length
 argument_list|()
@@ -14894,11 +14855,9 @@ literal|null
 condition|)
 block|{
 assert|assert
-operator|(
 name|leftJoinKeysForIn
 operator|==
 literal|null
-operator|)
 assert|;
 name|setRoot
 argument_list|(
@@ -17949,7 +17908,6 @@ argument_list|()
 condition|)
 block|{
 assert|assert
-operator|(
 name|call
 operator|.
 name|operands
@@ -17957,7 +17915,6 @@ operator|.
 name|length
 operator|==
 literal|1
-operator|)
 assert|;
 assert|assert
 name|args

@@ -667,14 +667,12 @@ name|otherQueue
 parameter_list|)
 block|{
 assert|assert
-operator|(
 name|otherQueue
 operator|.
 name|length
 operator|>=
 name|size
 argument_list|()
-operator|)
 assert|;
 if|if
 condition|(

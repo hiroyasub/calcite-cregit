@@ -104,7 +104,7 @@ specifier|public
 specifier|static
 specifier|final
 name|PushAggregateThroughUnionRule
-name|instance
+name|INSTANCE
 init|=
 operator|new
 name|PushAggregateThroughUnionRule

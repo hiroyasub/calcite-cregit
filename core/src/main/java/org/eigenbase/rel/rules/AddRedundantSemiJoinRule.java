@@ -64,7 +64,7 @@ specifier|public
 specifier|static
 specifier|final
 name|AddRedundantSemiJoinRule
-name|instance
+name|INSTANCE
 init|=
 operator|new
 name|AddRedundantSemiJoinRule

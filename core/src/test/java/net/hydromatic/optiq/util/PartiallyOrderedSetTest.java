@@ -84,7 +84,7 @@ name|SCALE
 init|=
 literal|100
 decl_stmt|;
-comment|// 100, 250, 1000, 3000 are reasonable values
+comment|// 100, 250, 1000, 3000 are reasonable
 specifier|final
 name|long
 name|seed

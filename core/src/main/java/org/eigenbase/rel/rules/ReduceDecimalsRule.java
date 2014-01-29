@@ -188,7 +188,7 @@ specifier|public
 specifier|static
 specifier|final
 name|ReduceDecimalsRule
-name|instance
+name|INSTANCE
 init|=
 operator|new
 name|ReduceDecimalsRule
@@ -1236,7 +1236,6 @@ parameter_list|)
 block|{
 assert|assert
 operator|(
-operator|(
 operator|-
 literal|100
 operator|<
@@ -1247,7 +1246,6 @@ operator|(
 name|scale
 operator|<
 literal|100
-operator|)
 operator|)
 operator|:
 literal|"could not make approximate scale factor"
@@ -1851,7 +1849,6 @@ name|decimalNode
 parameter_list|)
 block|{
 assert|assert
-operator|(
 name|SqlTypeUtil
 operator|.
 name|isDecimal
@@ -1861,7 +1858,6 @@ operator|.
 name|getType
 argument_list|()
 argument_list|)
-operator|)
 assert|;
 return|return
 name|builder
@@ -2710,12 +2706,14 @@ name|RexExpander
 block|{
 name|RelDataType
 name|typeA
-decl_stmt|,
+decl_stmt|;
+name|RelDataType
 name|typeB
 decl_stmt|;
 name|int
 name|scaleA
-decl_stmt|,
+decl_stmt|;
+name|int
 name|scaleB
 decl_stmt|;
 specifier|private
@@ -2785,7 +2783,6 @@ name|getType
 argument_list|()
 decl_stmt|;
 assert|assert
-operator|(
 name|SqlTypeUtil
 operator|.
 name|isNumeric
@@ -2799,7 +2796,6 @@ name|isNumeric
 argument_list|(
 name|typeB
 argument_list|)
-operator|)
 assert|;
 if|if
 condition|(
@@ -3097,7 +3093,6 @@ name|getType
 argument_list|()
 expr_stmt|;
 assert|assert
-operator|(
 name|SqlTypeUtil
 operator|.
 name|isExactNumeric
@@ -3111,7 +3106,6 @@ name|isExactNumeric
 argument_list|(
 name|typeB
 argument_list|)
-operator|)
 assert|;
 name|scaleA
 operator|=

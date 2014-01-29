@@ -101,7 +101,7 @@ specifier|public
 specifier|static
 specifier|final
 name|PullUpProjectsAboveJoinRule
-name|instanceTwoProjectChildren
+name|BOTH_PROJECT
 init|=
 operator|new
 name|PullUpProjectsAboveJoinRule
@@ -140,7 +140,7 @@ specifier|public
 specifier|static
 specifier|final
 name|PullUpProjectsAboveJoinRule
-name|instanceLeftProjectChild
+name|LEFT_PROJECT
 init|=
 operator|new
 name|PullUpProjectsAboveJoinRule
@@ -172,7 +172,7 @@ specifier|public
 specifier|static
 specifier|final
 name|PullUpProjectsAboveJoinRule
-name|instanceRightProjectChild
+name|RIGHT_PROJECT
 init|=
 operator|new
 name|PullUpProjectsAboveJoinRule
@@ -889,7 +889,6 @@ name|call
 parameter_list|)
 block|{
 return|return
-operator|(
 name|call
 operator|.
 name|rel
@@ -898,7 +897,6 @@ literal|1
 argument_list|)
 operator|instanceof
 name|ProjectRel
-operator|)
 return|;
 block|}
 comment|/**    * @param call RelOptRuleCall    * @return true if the rule was invoked with 2 children    */

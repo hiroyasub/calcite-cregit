@@ -1336,7 +1336,8 @@ name|i
 init|=
 operator|-
 literal|1
-decl_stmt|,
+decl_stmt|;
+name|int
 name|j
 init|=
 literal|0

@@ -50,12 +50,12 @@ comment|//~ Static fields/initializers -----------------------------------------
 specifier|private
 specifier|static
 name|SqlTypeAssignmentRules
-name|instance
+name|INSTANCE
 init|=
 literal|null
 decl_stmt|;
 specifier|private
-specifier|static
+specifier|final
 name|Map
 argument_list|<
 name|SqlTypeName
@@ -66,11 +66,9 @@ name|SqlTypeName
 argument_list|>
 argument_list|>
 name|rules
-init|=
-literal|null
 decl_stmt|;
 specifier|private
-specifier|static
+specifier|final
 name|Map
 argument_list|<
 name|SqlTypeName
@@ -81,8 +79,6 @@ name|SqlTypeName
 argument_list|>
 argument_list|>
 name|coerceRules
-init|=
-literal|null
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 specifier|private
@@ -1881,12 +1877,12 @@ parameter_list|()
 block|{
 if|if
 condition|(
-name|instance
+name|INSTANCE
 operator|==
 literal|null
 condition|)
 block|{
-name|instance
+name|INSTANCE
 operator|=
 operator|new
 name|SqlTypeAssignmentRules
@@ -1894,7 +1890,7 @@ argument_list|()
 expr_stmt|;
 block|}
 return|return
-name|instance
+name|INSTANCE
 return|;
 block|}
 specifier|public

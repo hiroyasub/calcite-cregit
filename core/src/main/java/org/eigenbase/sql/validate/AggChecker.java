@@ -489,7 +489,7 @@ literal|true
 argument_list|,
 name|ArgHandlerImpl
 operator|.
-name|instance
+name|INSTANCE
 argument_list|)
 expr_stmt|;
 comment|// Restore scope.

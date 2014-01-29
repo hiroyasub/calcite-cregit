@@ -926,11 +926,9 @@ name|call
 parameter_list|)
 block|{
 assert|assert
-operator|(
 name|op
 operator|instanceof
 name|SqlCaseOperator
-operator|)
 assert|;
 name|SqlNode
 index|[]

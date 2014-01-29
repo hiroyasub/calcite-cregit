@@ -341,7 +341,7 @@ block|}
 comment|// TODO: enable
 specifier|public
 name|boolean
-name|_isValid
+name|isValid_
 parameter_list|(
 name|boolean
 name|fail

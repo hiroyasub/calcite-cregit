@@ -426,6 +426,7 @@ name|relOptTable
 argument_list|)
 return|;
 block|}
+comment|/** Table function that returns the table that materializes a view. */
 specifier|public
 specifier|static
 class|class

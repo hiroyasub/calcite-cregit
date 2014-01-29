@@ -97,7 +97,7 @@ comment|/**    * The standard operator table.    */
 specifier|private
 specifier|static
 name|SqlStdOperatorTable
-name|instance
+name|INSTANCE
 decl_stmt|;
 comment|//-------------------------------------------------------------
 comment|//                   SET OPERATORS
@@ -3754,7 +3754,7 @@ parameter_list|()
 block|{
 if|if
 condition|(
-name|instance
+name|INSTANCE
 operator|==
 literal|null
 condition|)
@@ -3762,20 +3762,20 @@ block|{
 comment|// Creates and initializes the standard operator table.
 comment|// Uses two-phase construction, because we can't intialize the
 comment|// table until the constructor of the sub-class has completed.
-name|instance
+name|INSTANCE
 operator|=
 operator|new
 name|SqlStdOperatorTable
 argument_list|()
 expr_stmt|;
-name|instance
+name|INSTANCE
 operator|.
 name|init
 argument_list|()
 expr_stmt|;
 block|}
 return|return
-name|instance
+name|INSTANCE
 return|;
 block|}
 block|}

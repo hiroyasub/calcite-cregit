@@ -199,11 +199,9 @@ name|pp
 parameter_list|)
 block|{
 assert|assert
-operator|(
 name|pattern
 operator|!=
 literal|null
-operator|)
 assert|;
 name|SimpleDateFormat
 name|df
@@ -312,11 +310,9 @@ name|tz
 parameter_list|)
 block|{
 assert|assert
-operator|(
 name|pattern
 operator|!=
 literal|null
-operator|)
 assert|;
 name|ParsePosition
 name|pp
@@ -617,7 +613,6 @@ expr_stmt|;
 block|}
 block|}
 assert|assert
-operator|(
 name|pp
 operator|.
 name|getIndex
@@ -627,7 +622,6 @@ name|s
 operator|.
 name|length
 argument_list|()
-operator|)
 assert|;
 name|PrecisionTime
 name|ret

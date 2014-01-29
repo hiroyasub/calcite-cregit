@@ -994,14 +994,12 @@ expr_stmt|;
 block|}
 name|removeCount
 operator|+=
-operator|(
 name|sizeBefore
 operator|-
 name|list
 operator|.
 name|size
 argument_list|()
-operator|)
 expr_stmt|;
 break|break;
 case|case

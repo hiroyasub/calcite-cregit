@@ -44,6 +44,14 @@ specifier|public
 class|class
 name|Utilities
 block|{
+comment|// Even though this is a utility class (all methods are static), we cannot
+comment|// make the constructor private. Because Janino doesn't do static import,
+comment|// generated code is placed in sub-classes.
+specifier|protected
+name|Utilities
+parameter_list|()
+block|{
+block|}
 specifier|public
 specifier|static
 name|boolean

@@ -39,18 +39,6 @@ name|RelDataTypeFamily
 import|;
 end_import
 
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
-name|util
-operator|.
-name|Util
-import|;
-end_import
-
 begin_comment
 comment|/**  * SQL array type.  */
 end_comment

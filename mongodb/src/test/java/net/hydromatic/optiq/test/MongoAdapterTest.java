@@ -112,7 +112,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Tests for the {@code net.hydromatic.optiq.impl.mongodb} package.  *  *<p>Before calling this test, you need to populate MongoDB with the "zips"  * data set (as described in HOWTO.md)  * and "foodmart" data set, as follows:</p>  *  *<blockquote><pre>  * JAR=~/.m2/repository/pentaho/mondrian-data-foodmart-json/0.3/mondrian-data-foodmart-json-0.3.jar  * mkdir /tmp/foodmart  * cd /tmp/foodmart  * jar xvf $JAR  * for i in *.json; do  *   mongoimport --db foodmart --collection ${i/.json/} --file $i  * done  *</pre></blockquote>  */
+comment|/**  * Tests for the {@code net.hydromatic.optiq.impl.mongodb} package.  *  *<p>Before calling this test, you need to populate MongoDB with the "zips"  * data set (as described in HOWTO.md)  * and "foodmart" data set, as follows:</p>  *  *<blockquote><code>  * JAR=~/.m2/repository/pentaho/mondrian-data-foodmart-json/  * 0.3/mondrian-data-foodmart-json-0.3.jar<br>  * mkdir /tmp/foodmart<br>  * cd /tmp/foodmart<br>  * jar xvf $JAR<br>  * for i in *.json; do<br>  *&nbsp;&nbsp;mongoimport --db foodmart --collection ${i/.json/} --file $i<br>  * done<br>  *</code></blockquote>  */
 end_comment
 
 begin_class

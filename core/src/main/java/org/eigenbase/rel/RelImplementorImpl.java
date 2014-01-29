@@ -140,7 +140,7 @@ specifier|protected
 specifier|static
 specifier|final
 name|Logger
-name|tracer
+name|LOGGER
 init|=
 name|EigenbaseTrace
 operator|.

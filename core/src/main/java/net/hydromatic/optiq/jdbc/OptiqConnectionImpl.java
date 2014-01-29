@@ -1163,6 +1163,7 @@ return|return
 name|factory
 return|;
 block|}
+comment|/** Implementation of Queryable. */
 specifier|static
 class|class
 name|OptiqQueryable
@@ -1211,6 +1212,7 @@ name|provider
 return|;
 block|}
 block|}
+comment|/** Implementation of Server. */
 specifier|private
 specifier|static
 class|class
@@ -1265,6 +1267,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+comment|/** Schema that has no parents. */
 specifier|private
 specifier|static
 class|class
@@ -1308,6 +1311,7 @@ argument_list|)
 return|;
 block|}
 block|}
+comment|/** Implementation of DataContext. */
 specifier|static
 class|class
 name|DataContextImpl
@@ -1587,6 +1591,7 @@ name|queryProvider
 return|;
 block|}
 block|}
+comment|/** Implementation of Context. */
 specifier|static
 class|class
 name|ContextImpl

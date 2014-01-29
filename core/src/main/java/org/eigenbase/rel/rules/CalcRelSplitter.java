@@ -138,11 +138,11 @@ specifier|private
 specifier|static
 specifier|final
 name|Logger
-name|ruleTracer
+name|RULE_LOGGER
 init|=
 name|RelOptPlanner
 operator|.
-name|tracer
+name|LOGGER
 decl_stmt|;
 comment|//~ Instance fields --------------------------------------------------------
 specifier|protected
@@ -476,7 +476,7 @@ block|}
 comment|// Print out what we've got.
 if|if
 condition|(
-name|ruleTracer
+name|RULE_LOGGER
 operator|.
 name|isLoggable
 argument_list|(
@@ -2501,7 +2501,7 @@ operator|.
 name|toString
 argument_list|()
 decl_stmt|;
-name|ruleTracer
+name|RULE_LOGGER
 operator|.
 name|finer
 argument_list|(
@@ -3030,7 +3030,7 @@ block|{
 throw|throw
 name|CannotImplement
 operator|.
-name|instance
+name|INSTANCE
 throw|;
 block|}
 return|return
@@ -3059,7 +3059,7 @@ block|{
 throw|throw
 name|CannotImplement
 operator|.
-name|instance
+name|INSTANCE
 throw|;
 block|}
 return|return
@@ -3088,7 +3088,7 @@ block|{
 throw|throw
 name|CannotImplement
 operator|.
-name|instance
+name|INSTANCE
 throw|;
 block|}
 return|return
@@ -3117,7 +3117,7 @@ block|{
 throw|throw
 name|CannotImplement
 operator|.
-name|instance
+name|INSTANCE
 throw|;
 block|}
 return|return
@@ -3136,7 +3136,7 @@ block|{
 specifier|static
 specifier|final
 name|CannotImplement
-name|instance
+name|INSTANCE
 init|=
 operator|new
 name|CannotImplement

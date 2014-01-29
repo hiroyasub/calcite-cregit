@@ -78,7 +78,7 @@ specifier|public
 specifier|static
 specifier|final
 name|PushJoinThroughUnionRule
-name|instanceUnionOnLeft
+name|LEFT_UNION
 init|=
 operator|new
 name|PushJoinThroughUnionRule
@@ -117,7 +117,7 @@ specifier|public
 specifier|static
 specifier|final
 name|PushJoinThroughUnionRule
-name|instanceUnionOnRight
+name|RIGHT_UNION
 init|=
 operator|new
 name|PushJoinThroughUnionRule
@@ -356,7 +356,8 @@ control|)
 block|{
 name|RelNode
 name|joinLeft
-decl_stmt|,
+decl_stmt|;
+name|RelNode
 name|joinRight
 decl_stmt|;
 if|if

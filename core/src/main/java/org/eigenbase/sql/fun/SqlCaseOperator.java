@@ -359,7 +359,6 @@ name|getThenOperands
 argument_list|()
 decl_stmt|;
 assert|assert
-operator|(
 name|whenList
 operator|.
 name|size
@@ -369,7 +368,6 @@ name|thenList
 operator|.
 name|size
 argument_list|()
-operator|)
 assert|;
 comment|// checking that search conditions are ok...
 for|for

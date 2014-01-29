@@ -271,7 +271,7 @@ name|addRelTraitDef
 argument_list|(
 name|ConventionTraitDef
 operator|.
-name|instance
+name|INSTANCE
 argument_list|)
 expr_stmt|;
 name|planner
@@ -366,7 +366,7 @@ name|addRelTraitDef
 argument_list|(
 name|ConventionTraitDef
 operator|.
-name|instance
+name|INSTANCE
 argument_list|)
 expr_stmt|;
 name|planner
@@ -484,7 +484,7 @@ name|addRelTraitDef
 argument_list|(
 name|ConventionTraitDef
 operator|.
-name|instance
+name|INSTANCE
 argument_list|)
 expr_stmt|;
 name|planner
@@ -605,7 +605,7 @@ name|addRelTraitDef
 argument_list|(
 name|ConventionTraitDef
 operator|.
-name|instance
+name|INSTANCE
 argument_list|)
 expr_stmt|;
 if|if
@@ -619,7 +619,7 @@ name|addRule
 argument_list|(
 name|RemoveTrivialProjectRule
 operator|.
-name|instance
+name|INSTANCE
 argument_list|)
 expr_stmt|;
 block|}
@@ -870,7 +870,7 @@ name|addRelTraitDef
 argument_list|(
 name|ConventionTraitDef
 operator|.
-name|instance
+name|INSTANCE
 argument_list|)
 expr_stmt|;
 name|planner
@@ -1009,7 +1009,7 @@ name|addRelTraitDef
 argument_list|(
 name|ConventionTraitDef
 operator|.
-name|instance
+name|INSTANCE
 argument_list|)
 expr_stmt|;
 name|planner
@@ -1167,7 +1167,7 @@ name|addRelTraitDef
 argument_list|(
 name|ConventionTraitDef
 operator|.
-name|instance
+name|INSTANCE
 argument_list|)
 expr_stmt|;
 name|planner
@@ -2074,7 +2074,7 @@ name|cluster
 argument_list|,
 name|ConventionTraitDef
 operator|.
-name|instance
+name|INSTANCE
 argument_list|,
 name|cluster
 operator|.

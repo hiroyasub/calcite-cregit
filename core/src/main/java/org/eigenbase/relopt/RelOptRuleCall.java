@@ -102,7 +102,7 @@ specifier|protected
 specifier|static
 specifier|final
 name|Logger
-name|tracer
+name|LOGGER
 init|=
 name|EigenbaseTrace
 operator|.
@@ -110,9 +110,10 @@ name|getPlannerTracer
 argument_list|()
 decl_stmt|;
 comment|/**    * Generator for {@link #id} values.    */
+specifier|private
 specifier|static
 name|int
-name|nextId
+name|NEXT_ID
 init|=
 literal|0
 decl_stmt|;
@@ -201,7 +202,7 @@ name|this
 operator|.
 name|id
 operator|=
-name|nextId
+name|NEXT_ID
 operator|++
 expr_stmt|;
 name|this

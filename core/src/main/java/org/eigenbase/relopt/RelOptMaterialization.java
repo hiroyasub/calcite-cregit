@@ -1022,14 +1022,14 @@ name|addRuleInstance
 argument_list|(
 name|PullUpProjectsAboveJoinRule
 operator|.
-name|instanceRightProjectChild
+name|RIGHT_PROJECT
 argument_list|)
 operator|.
 name|addRuleInstance
 argument_list|(
 name|PullUpProjectsAboveJoinRule
 operator|.
-name|instanceLeftProjectChild
+name|LEFT_PROJECT
 argument_list|)
 operator|.
 name|build

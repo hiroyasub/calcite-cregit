@@ -119,6 +119,20 @@ name|common
 operator|.
 name|collect
 operator|.
+name|ImmutableSet
+import|;
+end_import
+
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
 name|Multimap
 import|;
 end_import
@@ -136,7 +150,7 @@ specifier|private
 specifier|static
 specifier|final
 name|Logger
-name|tracer
+name|LOGGER
 init|=
 name|EigenbaseTrace
 operator|.
@@ -150,11 +164,11 @@ name|Set
 argument_list|<
 name|String
 argument_list|>
-name|allRules
+name|ALL_RULES
 init|=
-name|Collections
+name|ImmutableSet
 operator|.
-name|singleton
+name|of
 argument_list|(
 literal|"<ALL RULES>"
 argument_list|)
@@ -164,7 +178,7 @@ specifier|private
 specifier|static
 specifier|final
 name|double
-name|OneMinusEpsilon
+name|ONE_MINUS_EPSILON
 init|=
 name|computeOneMinusEpsilon
 argument_list|()
@@ -364,7 +378,7 @@ name|put
 argument_list|(
 name|phase
 argument_list|,
-name|allRules
+name|ALL_RULES
 argument_list|)
 expr_stmt|;
 block|}
@@ -506,9 +520,6 @@ decl_stmt|;
 if|if
 condition|(
 name|previousImportance
-operator|.
-name|doubleValue
-argument_list|()
 operator|==
 name|importance
 condition|)
@@ -555,7 +566,7 @@ name|double
 name|factor
 parameter_list|)
 block|{
-name|tracer
+name|LOGGER
 operator|.
 name|finer
 argument_list|(
@@ -831,7 +842,7 @@ name|Math
 operator|.
 name|min
 argument_list|(
-name|OneMinusEpsilon
+name|ONE_MINUS_EPSILON
 argument_list|,
 name|importance
 operator|*
@@ -1003,9 +1014,6 @@ name|double
 name|subsetImportance
 init|=
 name|d
-operator|.
-name|doubleValue
-argument_list|()
 decl_stmt|;
 if|if
 condition|(
@@ -1113,7 +1121,7 @@ if|if
 condition|(
 name|phaseRuleSet
 operator|!=
-name|allRules
+name|ALL_RULES
 condition|)
 block|{
 if|if
@@ -1132,7 +1140,7 @@ block|}
 block|}
 if|if
 condition|(
-name|tracer
+name|LOGGER
 operator|.
 name|isLoggable
 argument_list|(
@@ -1142,7 +1150,7 @@ name|FINEST
 argument_list|)
 condition|)
 block|{
-name|tracer
+name|LOGGER
 operator|.
 name|finest
 argument_list|(
@@ -1262,7 +1270,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-name|tracer
+name|LOGGER
 operator|.
 name|finest
 argument_list|(
@@ -1286,7 +1294,7 @@ parameter_list|()
 block|{
 if|if
 condition|(
-name|tracer
+name|LOGGER
 operator|.
 name|isLoggable
 argument_list|(
@@ -1322,7 +1330,7 @@ operator|.
 name|flush
 argument_list|()
 expr_stmt|;
-name|tracer
+name|LOGGER
 operator|.
 name|finer
 argument_list|(
@@ -1451,11 +1459,9 @@ argument_list|)
 decl_stmt|;
 if|if
 condition|(
-operator|(
 name|phaseMatchList
 operator|==
 literal|null
-operator|)
 condition|)
 block|{
 throw|throw
@@ -1504,7 +1510,7 @@ return|;
 block|}
 if|if
 condition|(
-name|tracer
+name|LOGGER
 operator|.
 name|isLoggable
 argument_list|(
@@ -1592,7 +1598,7 @@ name|importance
 argument_list|)
 expr_stmt|;
 block|}
-name|tracer
+name|LOGGER
 operator|.
 name|finest
 argument_list|(
@@ -1682,7 +1688,7 @@ condition|)
 block|{
 if|if
 condition|(
-name|tracer
+name|LOGGER
 operator|.
 name|isLoggable
 argument_list|(
@@ -1692,7 +1698,7 @@ name|FINE
 argument_list|)
 condition|)
 block|{
-name|tracer
+name|LOGGER
 operator|.
 name|fine
 argument_list|(
@@ -1739,7 +1745,7 @@ argument_list|)
 expr_stmt|;
 if|if
 condition|(
-name|tracer
+name|LOGGER
 operator|.
 name|isLoggable
 argument_list|(
@@ -1749,7 +1755,7 @@ name|FINE
 argument_list|)
 condition|)
 block|{
-name|tracer
+name|LOGGER
 operator|.
 name|fine
 argument_list|(
@@ -1869,7 +1875,7 @@ return|return
 literal|false
 return|;
 block|}
-comment|/** Recursively checks whether there are any duplicate subsets along any path    * from root of the operand tree to one of the leaves.    *    *<p>It is OK for a match to have duplicate subsets if they are not on the    * same path. For example,</p>    *    *<pre>    *   Join    *  /   \    * X     X    *</pre>    *    *<p>is a valid match.</p>    */
+comment|/** Recursively checks whether there are any duplicate subsets along any path    * from root of the operand tree to one of the leaves.    *    *<p>It is OK for a match to have duplicate subsets if they are not on the    * same path. For example,</p>    *    *<pre>    *   Join    *  /   \    * X     X    *</pre>    *    *<p>is a valid match.</p>    *    * @throws org.eigenbase.util.Util.FoundOne on match    */
 specifier|private
 name|void
 name|checkDuplicateSubsets
@@ -1887,10 +1893,6 @@ name|RelNode
 index|[]
 name|rels
 parameter_list|)
-throws|throws
-name|Util
-operator|.
-name|FoundOne
 block|{
 specifier|final
 name|RelSubset
@@ -2031,11 +2033,9 @@ decl_stmt|;
 name|double
 name|alpha
 init|=
-operator|(
 name|childCost
 operator|/
 name|parentCost
-operator|)
 decl_stmt|;
 if|if
 condition|(
@@ -2060,7 +2060,7 @@ name|alpha
 decl_stmt|;
 if|if
 condition|(
-name|tracer
+name|LOGGER
 operator|.
 name|isLoggable
 argument_list|(
@@ -2070,7 +2070,7 @@ name|FINEST
 argument_list|)
 condition|)
 block|{
-name|tracer
+name|LOGGER
 operator|.
 name|finest
 argument_list|(

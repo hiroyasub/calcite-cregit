@@ -291,10 +291,8 @@ operator|=
 name|tuples
 expr_stmt|;
 assert|assert
-operator|(
 name|assertRowType
 argument_list|()
-operator|)
 assert|;
 block|}
 comment|/**    * Creates a ValuesRelBase by parsing serialized output.    */

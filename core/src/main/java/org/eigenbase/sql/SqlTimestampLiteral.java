@@ -212,11 +212,9 @@ literal|0
 condition|)
 block|{
 assert|assert
-operator|(
 name|precision
 operator|<=
 literal|3
-operator|)
 assert|;
 comment|// get the millisecond count.  millisecond => at most 3 digits.
 name|String
@@ -263,7 +261,6 @@ block|}
 else|else
 block|{
 assert|assert
-operator|(
 literal|0
 operator|==
 name|cal
@@ -274,7 +271,6 @@ name|Calendar
 operator|.
 name|MILLISECOND
 argument_list|)
-operator|)
 assert|;
 block|}
 return|return

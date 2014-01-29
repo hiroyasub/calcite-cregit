@@ -1084,7 +1084,6 @@ operator|)
 condition|)
 block|{
 assert|assert
-operator|(
 name|sqlTypeName
 operator|.
 name|allowsPrecScale
@@ -1093,7 +1092,6 @@ literal|true
 argument_list|,
 literal|true
 argument_list|)
-operator|)
 assert|;
 name|type
 operator|=
@@ -1117,12 +1115,10 @@ literal|0
 condition|)
 block|{
 assert|assert
-operator|(
 name|sqlTypeName
 operator|.
 name|allowsPrecNoScale
 argument_list|()
-operator|)
 assert|;
 name|type
 operator|=
@@ -1139,12 +1135,10 @@ block|}
 else|else
 block|{
 assert|assert
-operator|(
 name|sqlTypeName
 operator|.
 name|allowsNoPrecNoScale
 argument_list|()
-operator|)
 assert|;
 name|type
 operator|=

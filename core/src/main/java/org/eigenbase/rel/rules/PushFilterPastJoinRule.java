@@ -392,7 +392,6 @@ name|join
 argument_list|,
 name|aboveFilters
 argument_list|,
-operator|(
 name|join
 operator|.
 name|getJoinType
@@ -401,7 +400,6 @@ operator|==
 name|JoinRelType
 operator|.
 name|INNER
-operator|)
 argument_list|,
 operator|!
 name|join

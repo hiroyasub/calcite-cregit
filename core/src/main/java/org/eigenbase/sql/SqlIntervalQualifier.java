@@ -1153,12 +1153,10 @@ comment|// qual1 is more precise, but if it has the default indicator
 comment|// set, we need to return that indicator so result will also
 comment|// use default
 return|return
-operator|(
 name|qual1
 operator|.
 name|getStartPrecisionPreservingDefault
 argument_list|()
-operator|)
 return|;
 block|}
 if|else if
@@ -1178,12 +1176,10 @@ comment|// qual2 is more precise, but if it has the default indicator
 comment|// set, we need to return that indicator so result will also
 comment|// use default
 return|return
-operator|(
 name|qual2
 operator|.
 name|getStartPrecisionPreservingDefault
 argument_list|()
-operator|)
 return|;
 block|}
 else|else
@@ -1278,12 +1274,10 @@ comment|// qual1 is more precise, but if it has the default indicator
 comment|// set, we need to return that indicator so result will also
 comment|// use default
 return|return
-operator|(
 name|qual1
 operator|.
 name|getFractionalSecondPrecisionPreservingDefault
 argument_list|()
-operator|)
 return|;
 block|}
 if|else if
@@ -1303,12 +1297,10 @@ comment|// qual2 is more precise, but if it has the default indicator
 comment|// set, we need to return that indicator so result will also
 comment|// use default
 return|return
-operator|(
 name|qual2
 operator|.
 name|getFractionalSecondPrecisionPreservingDefault
 argument_list|()
-operator|)
 return|;
 block|}
 else|else
@@ -1788,9 +1780,7 @@ comment|// Negative
 block|}
 block|}
 return|return
-operator|(
 name|sign
-operator|)
 return|;
 block|}
 specifier|private
@@ -1854,9 +1844,7 @@ expr_stmt|;
 block|}
 block|}
 return|return
-operator|(
 name|unsignedValue
-operator|)
 return|;
 block|}
 specifier|private
@@ -2077,11 +2065,9 @@ assert|;
 comment|// YEAR and DAY can never be secondary units,
 comment|// nor can unit be null.
 assert|assert
-operator|(
 name|unit
 operator|!=
 literal|null
-operator|)
 assert|;
 switch|switch
 condition|(
@@ -2204,9 +2190,7 @@ name|intValue
 argument_list|()
 expr_stmt|;
 return|return
-operator|(
 name|ret
-operator|)
 return|;
 block|}
 specifier|private
@@ -2301,9 +2285,7 @@ name|intValue
 argument_list|()
 expr_stmt|;
 return|return
-operator|(
 name|ret
-operator|)
 return|;
 block|}
 comment|/**    * Validates an INTERVAL literal against a YEAR interval qualifier.    *    * @throws SqlValidatorException if the interval value is illegal.    */

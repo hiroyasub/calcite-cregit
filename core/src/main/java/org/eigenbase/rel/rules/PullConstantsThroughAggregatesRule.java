@@ -125,12 +125,12 @@ extends|extends
 name|RelOptRule
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
-comment|/**    * The singleton.    */
+comment|/** The singleton. */
 specifier|public
 specifier|static
 specifier|final
 name|PullConstantsThroughAggregatesRule
-name|instance
+name|INSTANCE
 init|=
 operator|new
 name|PullConstantsThroughAggregatesRule

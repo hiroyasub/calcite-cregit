@@ -840,7 +840,7 @@ name|addRelTraitDef
 argument_list|(
 name|ConventionTraitDef
 operator|.
-name|instance
+name|INSTANCE
 argument_list|)
 expr_stmt|;
 if|if
@@ -1002,7 +1002,7 @@ name|addRule
 argument_list|(
 name|TableAccessRule
 operator|.
-name|instance
+name|INSTANCE
 argument_list|)
 expr_stmt|;
 name|planner
@@ -1011,7 +1011,7 @@ name|addRule
 argument_list|(
 name|MergeProjectRule
 operator|.
-name|instance
+name|INSTANCE
 argument_list|)
 expr_stmt|;
 name|planner
@@ -1020,7 +1020,7 @@ name|addRule
 argument_list|(
 name|PushFilterPastProjectRule
 operator|.
-name|instance
+name|INSTANCE
 argument_list|)
 expr_stmt|;
 name|planner
@@ -1038,7 +1038,7 @@ name|addRule
 argument_list|(
 name|RemoveDistinctAggregateRule
 operator|.
-name|instance
+name|INSTANCE
 argument_list|)
 expr_stmt|;
 name|planner
@@ -1047,7 +1047,7 @@ name|addRule
 argument_list|(
 name|ReduceAggregatesRule
 operator|.
-name|instance
+name|INSTANCE
 argument_list|)
 expr_stmt|;
 name|planner
@@ -1056,7 +1056,7 @@ name|addRule
 argument_list|(
 name|SwapJoinRule
 operator|.
-name|instance
+name|INSTANCE
 argument_list|)
 expr_stmt|;
 name|planner

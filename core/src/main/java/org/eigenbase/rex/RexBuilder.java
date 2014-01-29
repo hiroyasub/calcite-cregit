@@ -2313,7 +2313,6 @@ name|node
 parameter_list|)
 block|{
 assert|assert
-operator|(
 name|SqlTypeUtil
 operator|.
 name|isDecimal
@@ -2333,7 +2332,6 @@ operator|.
 name|getType
 argument_list|()
 argument_list|)
-operator|)
 assert|;
 name|RelDataType
 name|bigintType
@@ -2857,7 +2855,6 @@ argument_list|()
 decl_stmt|;
 assert|assert
 operator|(
-operator|(
 name|scale
 operator|>=
 literal|0
@@ -2870,10 +2867,8 @@ name|SqlTypeName
 operator|.
 name|MAX_NUMERIC_SCALE
 operator|)
-operator|)
 assert|;
 assert|assert
-operator|(
 name|BigDecimal
 operator|.
 name|valueOf
@@ -2887,7 +2882,6 @@ name|equals
 argument_list|(
 name|bd
 argument_list|)
-operator|)
 assert|;
 if|if
 condition|(

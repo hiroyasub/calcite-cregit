@@ -602,20 +602,16 @@ expr_stmt|;
 name|boolean
 name|printPrecision
 init|=
-operator|(
 name|precision
 operator|!=
 name|PRECISION_NOT_SPECIFIED
-operator|)
 decl_stmt|;
 name|boolean
 name|printScale
 init|=
-operator|(
 name|scale
 operator|!=
 name|SCALE_NOT_SPECIFIED
-operator|)
 decl_stmt|;
 comment|// for the digest, print the precision when defaulted,
 comment|// since (for instance) TIME is equivalent to TIME(0).

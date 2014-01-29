@@ -1684,11 +1684,9 @@ case|case
 name|PRECEDING
 case|:
 assert|assert
-operator|(
 name|bound
 operator|instanceof
 name|SqlCall
-operator|)
 assert|;
 specifier|final
 name|SqlNode

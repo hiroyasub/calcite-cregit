@@ -139,6 +139,23 @@ name|getRows
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
+specifier|public
+name|int
+name|hashCode
+parameter_list|()
+block|{
+return|return
+name|Double
+operator|.
+name|hashCode
+argument_list|(
+name|getRows
+argument_list|()
+argument_list|)
+return|;
+block|}
 comment|// implement RelOptCost
 specifier|public
 name|boolean

@@ -74,7 +74,7 @@ specifier|public
 specifier|static
 specifier|final
 name|String
-name|correlPrefix
+name|CORREL_PREFIX
 init|=
 literal|"$cor"
 decl_stmt|;
@@ -157,14 +157,12 @@ name|correlName
 parameter_list|)
 block|{
 assert|assert
-operator|(
 name|correlName
 operator|.
 name|startsWith
 argument_list|(
-name|correlPrefix
+name|CORREL_PREFIX
 argument_list|)
-operator|)
 assert|;
 return|return
 name|Integer
@@ -175,7 +173,7 @@ name|correlName
 operator|.
 name|substring
 argument_list|(
-name|correlPrefix
+name|CORREL_PREFIX
 operator|.
 name|length
 argument_list|()
@@ -237,7 +235,7 @@ name|nextCorrel
 operator|++
 decl_stmt|;
 return|return
-name|correlPrefix
+name|CORREL_PREFIX
 operator|+
 name|n
 return|;
@@ -260,7 +258,7 @@ decl_stmt|;
 name|String
 name|name
 init|=
-name|correlPrefix
+name|CORREL_PREFIX
 operator|+
 name|n
 decl_stmt|;

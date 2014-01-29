@@ -333,11 +333,9 @@ name|node
 parameter_list|)
 block|{
 assert|assert
-operator|(
 name|isParentsCount
 operator|>=
 literal|0
-operator|)
 operator|:
 literal|"Cannot be negative"
 assert|;
@@ -451,25 +449,17 @@ argument_list|)
 decl_stmt|;
 if|if
 condition|(
-operator|(
-operator|(
 name|operand
 operator|instanceof
 name|RexLiteral
-operator|)
 operator|||
-operator|(
 name|operand
 operator|instanceof
 name|RexInputRef
-operator|)
 operator|||
-operator|(
 name|operand
 operator|instanceof
 name|RexDynamicParam
-operator|)
-operator|)
 condition|)
 block|{
 if|if

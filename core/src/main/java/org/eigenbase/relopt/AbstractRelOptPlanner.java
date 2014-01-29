@@ -110,12 +110,12 @@ implements|implements
 name|RelOptPlanner
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
-comment|/**    * Regular expression for integer.    */
+comment|/** Regular expression for integer. */
 specifier|private
 specifier|static
 specifier|final
 name|Pattern
-name|IntegerPattern
+name|INTEGER_PATTERN
 init|=
 name|Pattern
 operator|.
@@ -311,7 +311,7 @@ name|description
 assert|;
 assert|assert
 operator|!
-name|IntegerPattern
+name|INTEGER_PATTERN
 operator|.
 name|matcher
 argument_list|(
@@ -729,7 +729,7 @@ condition|)
 block|{
 if|if
 condition|(
-name|tracer
+name|LOGGER
 operator|.
 name|isLoggable
 argument_list|(
@@ -739,7 +739,7 @@ name|FINE
 argument_list|)
 condition|)
 block|{
-name|tracer
+name|LOGGER
 operator|.
 name|fine
 argument_list|(
@@ -766,7 +766,7 @@ return|return;
 block|}
 if|if
 condition|(
-name|tracer
+name|LOGGER
 operator|.
 name|isLoggable
 argument_list|(
@@ -776,7 +776,7 @@ name|FINE
 argument_list|)
 condition|)
 block|{
-name|tracer
+name|LOGGER
 operator|.
 name|fine
 argument_list|(
@@ -914,7 +914,7 @@ if|if
 condition|(
 name|before
 operator|&&
-name|tracer
+name|LOGGER
 operator|.
 name|isLoggable
 argument_list|(
@@ -924,7 +924,7 @@ name|FINE
 argument_list|)
 condition|)
 block|{
-name|tracer
+name|LOGGER
 operator|.
 name|fine
 argument_list|(
@@ -1004,7 +1004,7 @@ parameter_list|)
 block|{
 if|if
 condition|(
-name|tracer
+name|LOGGER
 operator|.
 name|isLoggable
 argument_list|(
@@ -1014,7 +1014,7 @@ name|FINE
 argument_list|)
 condition|)
 block|{
-name|tracer
+name|LOGGER
 operator|.
 name|fine
 argument_list|(

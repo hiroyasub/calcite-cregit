@@ -240,7 +240,7 @@ specifier|public
 specifier|static
 specifier|final
 name|ArgHandler
-name|instance
+name|INSTANCE
 init|=
 operator|new
 name|ArgHandlerImpl

@@ -347,7 +347,7 @@ argument_list|)
 argument_list|,
 name|Flags
 operator|.
-name|Boxed
+name|BOXED
 argument_list|)
 expr_stmt|;
 block|}
@@ -375,12 +375,12 @@ name|flags
 operator|&
 name|Flags
 operator|.
-name|Boxed
+name|BOXED
 operator|)
 operator|==
 name|Flags
 operator|.
-name|Boxed
+name|BOXED
 return|;
 block|}
 annotation|@
@@ -920,32 +920,42 @@ block|}
 end_function
 
 begin_comment
-comment|//~ Inner Interfaces -------------------------------------------------------
+comment|//~ Inner Classes ----------------------------------------------------------
 end_comment
 
-begin_interface
+begin_class
 specifier|public
-interface|interface
+specifier|static
+class|class
 name|Flags
 block|{
+specifier|public
+specifier|static
+specifier|final
 name|int
-name|AnonFields
+name|ANON_FIELDS
 init|=
 literal|2
 decl_stmt|;
 comment|/**      * Whether the resulting row is to be a synthetic class whose fields are      * the aliases of the fields.<code>boxed</code> must be true unless      * there is only one field:<code>select {dept.deptno} from dept</code>      * is boxed,<code>select dept.deptno from dept</code> is not.      */
+specifier|public
+specifier|static
+specifier|final
 name|int
-name|Boxed
+name|BOXED
 init|=
 literal|1
 decl_stmt|;
+specifier|public
+specifier|static
+specifier|final
 name|int
-name|None
+name|NONE
 init|=
 literal|0
 decl_stmt|;
 block|}
-end_interface
+end_class
 
 begin_comment
 comment|//~ Inner Classes ----------------------------------------------------------

@@ -355,7 +355,6 @@ name|length
 decl_stmt|;
 assert|assert
 operator|(
-operator|(
 literal|3
 operator|==
 name|n
@@ -365,7 +364,6 @@ operator|(
 literal|2
 operator|==
 name|n
-operator|)
 operator|)
 assert|;
 if|if

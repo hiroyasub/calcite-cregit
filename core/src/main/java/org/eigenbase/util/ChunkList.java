@@ -946,11 +946,9 @@ argument_list|)
 expr_stmt|;
 name|startIndex
 operator|+=
-operator|(
 name|end
 operator|-
 name|HEADER_SIZE
-operator|)
 expr_stmt|;
 block|}
 if|if
@@ -1337,11 +1335,9 @@ condition|)
 block|{
 name|startIndex
 operator|+=
-operator|(
 name|end
 operator|-
 name|HEADER_SIZE
-operator|)
 expr_stmt|;
 name|chunk
 operator|=

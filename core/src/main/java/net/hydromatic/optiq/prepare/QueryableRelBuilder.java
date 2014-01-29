@@ -2540,7 +2540,7 @@ name|ProjectRelBase
 operator|.
 name|Flags
 operator|.
-name|Boxed
+name|BOXED
 argument_list|)
 argument_list|)
 expr_stmt|;

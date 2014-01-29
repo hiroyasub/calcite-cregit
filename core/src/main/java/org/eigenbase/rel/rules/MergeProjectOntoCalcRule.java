@@ -89,7 +89,7 @@ specifier|public
 specifier|static
 specifier|final
 name|MergeProjectOntoCalcRule
-name|instance
+name|INSTANCE
 init|=
 operator|new
 name|MergeProjectOntoCalcRule

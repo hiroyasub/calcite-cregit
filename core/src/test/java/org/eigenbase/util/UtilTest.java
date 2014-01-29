@@ -6412,7 +6412,6 @@ argument_list|)
 argument_list|,
 name|equalTo
 argument_list|(
-operator|(
 name|ImmutableMultiset
 operator|.
 name|copyOf
@@ -6430,7 +6429,6 @@ argument_list|,
 literal|5
 argument_list|)
 argument_list|)
-operator|)
 argument_list|)
 argument_list|)
 expr_stmt|;

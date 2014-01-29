@@ -57,7 +57,7 @@ specifier|private
 specifier|static
 specifier|final
 name|Logger
-name|tracer
+name|LOGGER
 init|=
 name|Logger
 operator|.
@@ -313,11 +313,9 @@ operator|++
 expr_stmt|;
 block|}
 return|return
-operator|(
 name|idx
 operator|-
 name|startIdx
-operator|)
 return|;
 block|}
 comment|/**    * Writes a chunked string into a PreparedStatement sink. Each chunk is    * written with a sequential index in its row, so code reading the chunks    * can reconstruct the original string by ordering the chunks on read with    * an ORDER BY clause. The chunk index starts at zero.<P>    * The prepared statement must contain two columns: the first being an    * INTEGER to hold the index value, and the second a VARCHAR of sufficient    * size to hold the largest chunk value.    *    * @param chunks Array of String objects representing the chunks of a larger    *               original String    * @param ps     PreparedStatement that will write each indexed chunk    * @return the number of chunks written    * @throws SQLException if the input data does not match the prepared    *                      statement or if the statement execution fails    */

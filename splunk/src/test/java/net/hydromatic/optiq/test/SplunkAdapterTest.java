@@ -306,7 +306,7 @@ specifier|static
 specifier|final
 name|String
 index|[]
-name|sqls
+name|SQL_STRINGS
 init|=
 block|{
 literal|"select \"source\", \"sourcetype\"\n"
@@ -383,9 +383,11 @@ operator|+
 literal|"where s.\"sourcetype\" = 'access_combined_wcookie'\n"
 block|,   }
 decl_stmt|;
+specifier|static
+specifier|final
 name|String
 index|[]
-name|errSqls
+name|ERROR_SQL_STRINGS
 init|=
 block|{
 comment|// gives error in SplunkPushDownRule

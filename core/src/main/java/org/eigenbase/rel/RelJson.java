@@ -237,7 +237,7 @@ name|List
 argument_list|<
 name|String
 argument_list|>
-name|packages
+name|PACKAGES
 init|=
 name|ImmutableList
 operator|.
@@ -498,7 +498,7 @@ control|(
 name|String
 name|package_
 range|:
-name|packages
+name|PACKAGES
 control|)
 block|{
 try|try
@@ -580,7 +580,7 @@ control|(
 name|String
 name|package_
 range|:
-name|packages
+name|PACKAGES
 control|)
 block|{
 if|if
@@ -1325,11 +1325,9 @@ name|Object
 name|o
 range|:
 operator|(
-operator|(
 name|List
 operator|)
 name|value
-operator|)
 control|)
 block|{
 name|list

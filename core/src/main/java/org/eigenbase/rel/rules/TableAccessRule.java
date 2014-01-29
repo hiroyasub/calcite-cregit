@@ -61,20 +61,6 @@ name|RelDataType
 import|;
 end_import
 
-begin_import
-import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|optiq
-operator|.
-name|prepare
-operator|.
-name|Prepare
-import|;
-end_import
-
 begin_comment
 comment|/**  * TableAccessRule converts a TableAccessRel to the result of calling {@link  * RelOptTable#toRel}.  */
 end_comment
@@ -91,7 +77,7 @@ specifier|public
 specifier|static
 specifier|final
 name|TableAccessRule
-name|instance
+name|INSTANCE
 init|=
 operator|new
 name|TableAccessRule

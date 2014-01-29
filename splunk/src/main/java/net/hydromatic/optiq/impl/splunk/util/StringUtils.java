@@ -457,7 +457,8 @@ name|char
 name|a
 init|=
 literal|'\0'
-decl_stmt|,
+decl_stmt|;
+name|char
 name|b
 init|=
 literal|'\0'

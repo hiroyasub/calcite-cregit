@@ -255,9 +255,7 @@ literal|"{0}({1} PLACING {2} FROM {3} FOR {4})"
 return|;
 block|}
 assert|assert
-operator|(
 literal|false
-operator|)
 assert|;
 return|return
 literal|null

@@ -1397,14 +1397,12 @@ name|type
 parameter_list|)
 block|{
 assert|assert
-operator|(
 name|SqlTypeUtil
 operator|.
 name|isIntType
 argument_list|(
 name|type
 argument_list|)
-operator|)
 assert|;
 switch|switch
 condition|(
@@ -3034,7 +3032,6 @@ comment|// no null indicator is required for structured type columns declared
 comment|// as NOT NULL.  However, the uniformity of always having a null
 comment|// indicator makes things cleaner in many places.
 return|return
-operator|(
 name|recordType
 operator|.
 name|getSqlTypeName
@@ -3043,7 +3040,6 @@ operator|==
 name|SqlTypeName
 operator|.
 name|STRUCTURED
-operator|)
 return|;
 block|}
 specifier|private
@@ -3310,11 +3306,9 @@ decl_stmt|;
 comment|// TODO jvs 28-Dec-2004:  support row types, user-defined types,
 comment|// interval types, multiset types, etc
 assert|assert
-operator|(
 name|typeName
 operator|!=
 literal|null
-operator|)
 assert|;
 name|SqlIdentifier
 name|typeIdentifier

@@ -72,7 +72,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * CombineUnionsRule implements the rule for combining two non-distinct {@link  * UnionRel}s into a single {@link UnionRel}.  */
+comment|/**  * CombineUnionsRule implements the rule for combining two non-distinct  * {@link UnionRel}s into a single {@link UnionRel}.  */
 end_comment
 
 begin_class
@@ -86,7 +86,7 @@ specifier|public
 specifier|static
 specifier|final
 name|CombineUnionsRule
-name|instance
+name|INSTANCE
 init|=
 operator|new
 name|CombineUnionsRule

@@ -3289,6 +3289,7 @@ name|typeFactory
 argument_list|)
 return|;
 block|}
+comment|/** An object that has a name. */
 interface|interface
 name|Named
 block|{
@@ -3297,6 +3298,7 @@ name|getName
 parameter_list|()
 function_decl|;
 block|}
+comment|/** Metadata describing a column. */
 specifier|public
 specifier|static
 class|class
@@ -3570,6 +3572,7 @@ name|columnName
 return|;
 block|}
 block|}
+comment|/** Metadata describing a table. */
 specifier|public
 specifier|static
 class|class
@@ -3712,6 +3715,7 @@ name|tableName
 return|;
 block|}
 block|}
+comment|/** Metadata describing a schema. */
 specifier|public
 specifier|static
 class|class
@@ -3776,6 +3780,7 @@ name|tableSchem
 return|;
 block|}
 block|}
+comment|/** Metadata describing a catalog. */
 specifier|public
 specifier|static
 class|class
@@ -3812,6 +3817,7 @@ name|tableCatalog
 return|;
 block|}
 block|}
+comment|/** Metadata describing a table type. */
 specifier|public
 specifier|static
 class|class
@@ -3837,31 +3843,37 @@ name|tableType
 expr_stmt|;
 block|}
 block|}
+comment|/** Metadata describing a procedure. */
 specifier|public
 specifier|static
 class|class
 name|MetaProcedure
 block|{   }
+comment|/** Metadata describing a procedure column. */
 specifier|public
 specifier|static
 class|class
 name|MetaProcedureColumn
 block|{   }
+comment|/** Metadata describing a column privilege. */
 specifier|public
 specifier|static
 class|class
 name|MetaColumnPrivilege
 block|{   }
+comment|/** Metadata describing a table privilege. */
 specifier|public
 specifier|static
 class|class
 name|MetaTablePrivilege
 block|{   }
+comment|/** Metadata describing the best identifier for a row. */
 specifier|public
 specifier|static
 class|class
 name|MetaBestRowIdentifier
 block|{   }
+comment|/** Metadata describing a version column. */
 specifier|public
 specifier|static
 class|class
@@ -3984,6 +3996,7 @@ name|pseudoColumn
 expr_stmt|;
 block|}
 block|}
+comment|/** Metadata describing a primary key. */
 specifier|public
 specifier|static
 class|class
@@ -4078,71 +4091,85 @@ name|pkName
 expr_stmt|;
 block|}
 block|}
+comment|/** Metadata describing an imported key. */
 specifier|public
 specifier|static
 class|class
 name|MetaImportedKey
 block|{   }
+comment|/** Metadata describing an exported key. */
 specifier|public
 specifier|static
 class|class
 name|MetaExportedKey
 block|{   }
+comment|/** Metadata describing a cross reference. */
 specifier|public
 specifier|static
 class|class
 name|MetaCrossReference
 block|{   }
+comment|/** Metadata describing type info. */
 specifier|public
 specifier|static
 class|class
 name|MetaTypeInfo
 block|{   }
+comment|/** Metadata describing index info. */
 specifier|public
 specifier|static
 class|class
 name|MetaIndexInfo
 block|{   }
+comment|/** Metadata describing a user-defined type. */
 specifier|public
 specifier|static
 class|class
 name|MetaUdt
 block|{   }
+comment|/** Metadata describing a super-type. */
 specifier|public
 specifier|static
 class|class
 name|MetaSuperType
 block|{   }
+comment|/** Metadata describing an attribute. */
 specifier|public
 specifier|static
 class|class
 name|MetaAttribute
 block|{   }
+comment|/** Metadata describing a client info property. */
 specifier|public
 specifier|static
 class|class
 name|MetaClientInfoProperty
 block|{   }
+comment|/** Metadata describing a function. */
 specifier|public
 specifier|static
 class|class
 name|MetaFunction
 block|{   }
+comment|/** Metadata describing a function column. */
 specifier|public
 specifier|static
 class|class
 name|MetaFunctionColumn
 block|{   }
+comment|/** Metadata describing a pseudo column. */
 specifier|public
 specifier|static
 class|class
 name|MetaPseudoColumn
 block|{   }
+comment|/** Metadata describing a super-table. */
 specifier|public
 specifier|static
 class|class
 name|MetaSuperTable
 block|{   }
+comment|/** Accesses fields by name. */
 specifier|private
 specifier|static
 class|class
@@ -4418,6 +4445,7 @@ block|}
 return|;
 block|}
 block|}
+comment|/** Table whose contents are metadata. */
 specifier|abstract
 specifier|static
 class|class

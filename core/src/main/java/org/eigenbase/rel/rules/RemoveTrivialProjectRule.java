@@ -89,7 +89,7 @@ specifier|public
 specifier|static
 specifier|final
 name|RemoveTrivialProjectRule
-name|instance
+name|INSTANCE
 init|=
 operator|new
 name|RemoveTrivialProjectRule

@@ -54,7 +54,7 @@ specifier|public
 specifier|static
 specifier|final
 name|PushFilterIntoMultiJoinRule
-name|instance
+name|INSTANCE
 init|=
 operator|new
 name|PushFilterIntoMultiJoinRule

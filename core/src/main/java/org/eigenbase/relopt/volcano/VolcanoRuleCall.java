@@ -195,7 +195,7 @@ parameter_list|)
 block|{
 if|if
 condition|(
-name|tracer
+name|LOGGER
 operator|.
 name|isLoggable
 argument_list|(
@@ -205,7 +205,7 @@ name|FINE
 argument_list|)
 condition|)
 block|{
-name|tracer
+name|LOGGER
 operator|.
 name|fine
 argument_list|(
@@ -285,7 +285,7 @@ argument_list|)
 expr_stmt|;
 if|if
 condition|(
-name|tracer
+name|LOGGER
 operator|.
 name|isLoggable
 argument_list|(
@@ -314,7 +314,7 @@ operator|.
 name|getRelTypeName
 argument_list|()
 decl_stmt|;
-name|tracer
+name|LOGGER
 operator|.
 name|finest
 argument_list|(
@@ -528,7 +528,7 @@ condition|)
 block|{
 if|if
 condition|(
-name|tracer
+name|LOGGER
 operator|.
 name|isLoggable
 argument_list|(
@@ -538,7 +538,7 @@ name|FINE
 argument_list|)
 condition|)
 block|{
-name|tracer
+name|LOGGER
 operator|.
 name|fine
 argument_list|(
@@ -599,7 +599,7 @@ condition|)
 block|{
 if|if
 condition|(
-name|tracer
+name|LOGGER
 operator|.
 name|isLoggable
 argument_list|(
@@ -609,7 +609,7 @@ name|FINE
 argument_list|)
 condition|)
 block|{
-name|tracer
+name|LOGGER
 operator|.
 name|fine
 argument_list|(
@@ -647,7 +647,7 @@ condition|)
 block|{
 if|if
 condition|(
-name|tracer
+name|LOGGER
 operator|.
 name|isLoggable
 argument_list|(
@@ -657,7 +657,7 @@ name|FINE
 argument_list|)
 condition|)
 block|{
-name|tracer
+name|LOGGER
 operator|.
 name|fine
 argument_list|(
@@ -712,7 +712,7 @@ condition|)
 block|{
 if|if
 condition|(
-name|tracer
+name|LOGGER
 operator|.
 name|isLoggable
 argument_list|(
@@ -722,7 +722,7 @@ name|FINE
 argument_list|)
 condition|)
 block|{
-name|tracer
+name|LOGGER
 operator|.
 name|fine
 argument_list|(
@@ -750,7 +750,7 @@ block|}
 block|}
 if|if
 condition|(
-name|tracer
+name|LOGGER
 operator|.
 name|isLoggable
 argument_list|(
@@ -760,7 +760,7 @@ name|FINE
 argument_list|)
 condition|)
 block|{
-name|tracer
+name|LOGGER
 operator|.
 name|fine
 argument_list|(
@@ -827,7 +827,7 @@ expr_stmt|;
 block|}
 if|if
 condition|(
-name|tracer
+name|LOGGER
 operator|.
 name|isLoggable
 argument_list|(
@@ -859,7 +859,7 @@ argument_list|)
 expr_stmt|;
 if|if
 condition|(
-name|tracer
+name|LOGGER
 operator|.
 name|isLoggable
 argument_list|(
@@ -877,7 +877,7 @@ name|isEmpty
 argument_list|()
 condition|)
 block|{
-name|tracer
+name|LOGGER
 operator|.
 name|fine
 argument_list|(
@@ -891,7 +891,7 @@ expr_stmt|;
 block|}
 else|else
 block|{
-name|tracer
+name|LOGGER
 operator|.
 name|fine
 argument_list|(
@@ -1000,7 +1000,6 @@ name|rel
 parameter_list|)
 block|{
 assert|assert
-operator|(
 name|getOperand0
 argument_list|()
 operator|.
@@ -1008,7 +1007,6 @@ name|matches
 argument_list|(
 name|rel
 argument_list|)
-operator|)
 assert|;
 specifier|final
 name|int
@@ -1156,14 +1154,12 @@ name|ascending
 condition|)
 block|{
 assert|assert
-operator|(
 name|previousOperand
 operator|.
 name|getParent
 argument_list|()
 operator|==
 name|operand
-operator|)
 assert|;
 specifier|final
 name|RelNode

@@ -82,7 +82,7 @@ block|{
 return|return
 name|ConventionTraitDef
 operator|.
-name|instance
+name|INSTANCE
 return|;
 block|}
 specifier|public

@@ -569,6 +569,7 @@ block|,
 comment|/**      * Compressed byte array table. Similar to compressed string table.      *      * @see ByteStringDictionary      */
 name|BYTE_STRING_DICTIONARY
 block|,   }
+comment|/** Column definition and value set. */
 specifier|public
 specifier|static
 class|class

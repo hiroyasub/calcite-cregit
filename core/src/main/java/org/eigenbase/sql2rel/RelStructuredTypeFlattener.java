@@ -414,11 +414,9 @@ name|oldRel
 argument_list|)
 decl_stmt|;
 assert|assert
-operator|(
 name|newRel
 operator|instanceof
 name|CorrelatorRel
-operator|)
 assert|;
 name|mapCorVarToCorRel
 operator|.
@@ -828,11 +826,9 @@ name|oldOrdinal
 parameter_list|)
 block|{
 assert|assert
-operator|(
 name|currentRel
 operator|!=
 literal|null
-operator|)
 assert|;
 name|int
 name|newOrdinal
@@ -910,11 +906,9 @@ name|n
 expr_stmt|;
 block|}
 assert|assert
-operator|(
 name|oldInput
 operator|!=
 literal|null
-operator|)
 assert|;
 name|RelDataType
 name|oldInputType

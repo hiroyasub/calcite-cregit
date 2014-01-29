@@ -374,11 +374,9 @@ name|sql
 parameter_list|)
 block|{
 assert|assert
-operator|(
 name|sql
 operator|!=
 literal|null
-operator|)
 assert|;
 name|ConcurrentTestCommand
 name|command
@@ -416,11 +414,9 @@ name|sql
 parameter_list|)
 block|{
 assert|assert
-operator|(
 name|sql
 operator|!=
 literal|null
-operator|)
 assert|;
 name|ConcurrentTestCommand
 name|command
@@ -643,18 +639,14 @@ name|command
 parameter_list|)
 block|{
 assert|assert
-operator|(
 name|threadId
 operator|>
 literal|0
-operator|)
 assert|;
 assert|assert
-operator|(
 name|order
 operator|>
 literal|0
-operator|)
 assert|;
 name|TreeMap
 argument_list|<
@@ -701,7 +693,6 @@ expr_stmt|;
 block|}
 comment|// check for duplicate order numbers
 assert|assert
-operator|(
 operator|!
 name|commandMap
 operator|.
@@ -709,7 +700,6 @@ name|containsKey
 argument_list|(
 name|order
 argument_list|)
-operator|)
 assert|;
 name|commandMap
 operator|.
@@ -2106,11 +2096,9 @@ operator|++
 expr_stmt|;
 block|}
 assert|assert
-operator|(
 name|rowCount
 operator|>
 literal|0
-operator|)
 assert|;
 block|}
 finally|finally
@@ -2273,11 +2261,9 @@ throws|throws
 name|SQLException
 block|{
 assert|assert
-operator|(
 name|timeout
 operator|>=
 literal|0
-operator|)
 assert|;
 if|if
 condition|(
@@ -2652,7 +2638,6 @@ name|nextCh
 init|=
 operator|(
 operator|(
-operator|(
 name|i
 operator|+
 literal|1
@@ -2674,7 +2659,6 @@ literal|1
 argument_list|)
 else|:
 literal|0
-operator|)
 decl_stmt|;
 switch|switch
 condition|(
@@ -4158,12 +4142,9 @@ block|{
 name|Object
 name|expectedObject
 init|=
-operator|(
-operator|(
 name|expectedRowIter
 operator|!=
 literal|null
-operator|)
 condition|?
 name|expectedRowIter
 operator|.
@@ -4171,17 +4152,13 @@ name|next
 argument_list|()
 else|:
 literal|""
-operator|)
 decl_stmt|;
 name|Object
 name|resultObject
 init|=
-operator|(
-operator|(
 name|resultRowIter
 operator|!=
 literal|null
-operator|)
 condition|?
 name|resultRowIter
 operator|.
@@ -4189,7 +4166,6 @@ name|next
 argument_list|()
 else|:
 literal|""
-operator|)
 decl_stmt|;
 name|String
 name|expectedValue

@@ -100,7 +100,7 @@ specifier|public
 specifier|static
 specifier|final
 name|PushSemiJoinPastProjectRule
-name|instance
+name|INSTANCE
 init|=
 operator|new
 name|PushSemiJoinPastProjectRule

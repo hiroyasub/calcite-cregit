@@ -77,7 +77,7 @@ specifier|public
 specifier|static
 specifier|final
 name|MergeFilterOntoCalcRule
-name|instance
+name|INSTANCE
 init|=
 operator|new
 name|MergeFilterOntoCalcRule

@@ -92,7 +92,7 @@ specifier|private
 specifier|static
 specifier|final
 name|ReentrantLock
-name|lock
+name|LOCK
 init|=
 operator|new
 name|ReentrantLock
@@ -103,7 +103,7 @@ specifier|private
 specifier|static
 name|char
 index|[]
-name|spaces
+name|SPACES
 init|=
 block|{
 literal|' '
@@ -222,7 +222,7 @@ return|return
 operator|new
 name|String
 argument_list|(
-name|spaces
+name|SPACES
 argument_list|,
 literal|0
 argument_list|,
@@ -243,7 +243,7 @@ name|buf
 operator|.
 name|append
 argument_list|(
-name|spaces
+name|SPACES
 argument_list|,
 literal|0
 argument_list|,
@@ -269,7 +269,7 @@ name|buf
 operator|.
 name|write
 argument_list|(
-name|spaces
+name|SPACES
 argument_list|,
 literal|0
 argument_list|,
@@ -293,7 +293,7 @@ name|buf
 operator|.
 name|write
 argument_list|(
-name|spaces
+name|SPACES
 argument_list|,
 literal|0
 argument_list|,
@@ -317,7 +317,7 @@ name|buf
 operator|.
 name|write
 argument_list|(
-name|spaces
+name|SPACES
 argument_list|,
 literal|0
 argument_list|,
@@ -337,7 +337,7 @@ name|int
 name|n
 parameter_list|)
 block|{
-name|lock
+name|LOCK
 operator|.
 name|lock
 argument_list|()
@@ -346,7 +346,7 @@ try|try
 block|{
 if|if
 condition|(
-name|spaces
+name|SPACES
 operator|.
 name|length
 operator|<
@@ -373,7 +373,7 @@ literal|' '
 argument_list|)
 expr_stmt|;
 comment|// atomic assignment; other Spacer instances may be using this
-name|spaces
+name|SPACES
 operator|=
 name|newSpaces
 expr_stmt|;
@@ -381,7 +381,7 @@ block|}
 block|}
 finally|finally
 block|{
-name|lock
+name|LOCK
 operator|.
 name|unlock
 argument_list|()
@@ -419,6 +419,8 @@ return|return
 name|string
 return|;
 block|}
+comment|// Replacing StringBuffer with String would hurt performance.
+comment|//noinspection StringBufferReplaceableByString
 return|return
 operator|new
 name|StringBuilder
@@ -428,7 +430,7 @@ argument_list|)
 operator|.
 name|append
 argument_list|(
-name|spaces
+name|SPACES
 argument_list|,
 literal|0
 argument_list|,

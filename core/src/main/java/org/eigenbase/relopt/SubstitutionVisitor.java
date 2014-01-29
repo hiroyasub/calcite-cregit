@@ -541,6 +541,7 @@ argument_list|(
 name|ancestor
 argument_list|)
 expr_stmt|;
+comment|// CHECKSTYLE: IGNORE -1
 return|return
 literal|false
 return|;

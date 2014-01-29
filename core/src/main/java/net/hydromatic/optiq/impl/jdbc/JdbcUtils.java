@@ -154,6 +154,7 @@ literal|"no instances!"
 argument_list|)
 throw|;
 block|}
+comment|/** Pool of dialects. */
 specifier|public
 specifier|static
 class|class

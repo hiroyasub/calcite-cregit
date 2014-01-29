@@ -82,30 +82,6 @@ import|;
 end_import
 
 begin_import
-import|import
-name|org
-operator|.
-name|junit
-operator|.
-name|runner
-operator|.
-name|RunWith
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|junit
-operator|.
-name|runners
-operator|.
-name|JUnit4
-import|;
-end_import
-
-begin_import
 import|import static
 name|org
 operator|.
@@ -371,11 +347,9 @@ throws|throws
 name|IOException
 block|{
 assert|assert
-operator|(
 name|logOutputStream
 operator|==
 literal|null
-operator|)
 assert|;
 name|logFile
 operator|=
@@ -429,11 +403,9 @@ throws|throws
 name|IOException
 block|{
 assert|assert
-operator|(
 name|logOutputStream
 operator|!=
 literal|null
-operator|)
 assert|;
 name|logOutputStream
 operator|.

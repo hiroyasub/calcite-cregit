@@ -111,12 +111,12 @@ extends|extends
 name|RelOptRule
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
-comment|/**    * The singleton    */
+comment|/** The singleton. */
 specifier|public
 specifier|static
 specifier|final
 name|SwapJoinRule
-name|instance
+name|INSTANCE
 init|=
 operator|new
 name|SwapJoinRule

@@ -213,7 +213,7 @@ specifier|public
 specifier|static
 specifier|final
 name|ExpandConversionRule
-name|instance
+name|INSTANCE
 init|=
 operator|new
 name|ExpandConversionRule

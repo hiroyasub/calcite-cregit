@@ -54,7 +54,7 @@ specifier|public
 specifier|static
 specifier|final
 name|PushProjectIntoMultiJoinRule
-name|instance
+name|INSTANCE
 init|=
 operator|new
 name|PushProjectIntoMultiJoinRule

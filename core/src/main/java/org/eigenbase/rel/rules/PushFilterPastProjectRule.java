@@ -66,7 +66,7 @@ specifier|public
 specifier|static
 specifier|final
 name|PushFilterPastProjectRule
-name|instance
+name|INSTANCE
 init|=
 operator|new
 name|PushFilterPastProjectRule

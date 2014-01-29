@@ -95,7 +95,7 @@ name|Set
 argument_list|<
 name|SqlOperator
 argument_list|>
-name|multisetOperators
+name|MULTISET_OPERATORS
 init|=
 name|ImmutableSet
 operator|.
@@ -154,18 +154,12 @@ operator|.
 name|submultisetOfOperator
 argument_list|)
 decl_stmt|;
-specifier|public
-specifier|static
-specifier|final
-name|SqlStdOperatorTable
-name|opTab
-init|=
-name|SqlStdOperatorTable
-operator|.
-name|instance
-argument_list|()
-decl_stmt|;
 comment|//~ Methods ----------------------------------------------------------------
+specifier|private
+name|RexMultisetUtil
+parameter_list|()
+block|{
+block|}
 comment|/**    * Returns true if any expression in a program contains a mixing between    * multiset and non-multiset calls.    */
 specifier|public
 specifier|static
@@ -485,7 +479,7 @@ control|(
 name|SqlOperator
 name|op
 range|:
-name|multisetOperators
+name|MULTISET_OPERATORS
 control|)
 block|{
 name|firstOne
@@ -613,7 +607,7 @@ name|totalCount
 expr_stmt|;
 if|if
 condition|(
-name|multisetOperators
+name|MULTISET_OPERATORS
 operator|.
 name|contains
 argument_list|(

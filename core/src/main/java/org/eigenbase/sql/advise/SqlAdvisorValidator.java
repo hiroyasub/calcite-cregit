@@ -216,7 +216,7 @@ name|swallow
 argument_list|(
 name|e
 argument_list|,
-name|tracer
+name|TRACER
 argument_list|)
 expr_stmt|;
 block|}
@@ -456,7 +456,7 @@ name|swallow
 argument_list|(
 name|e
 argument_list|,
-name|tracer
+name|TRACER
 argument_list|)
 expr_stmt|;
 block|}
@@ -492,7 +492,7 @@ name|swallow
 argument_list|(
 name|e
 argument_list|,
-name|tracer
+name|TRACER
 argument_list|)
 expr_stmt|;
 block|}
@@ -528,7 +528,7 @@ name|swallow
 argument_list|(
 name|e
 argument_list|,
-name|tracer
+name|TRACER
 argument_list|)
 expr_stmt|;
 block|}
@@ -633,7 +633,7 @@ name|swallow
 argument_list|(
 name|e
 argument_list|,
-name|tracer
+name|TRACER
 argument_list|)
 expr_stmt|;
 block|}

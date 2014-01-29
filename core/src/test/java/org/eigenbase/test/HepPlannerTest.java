@@ -224,7 +224,7 @@ name|addRule
 argument_list|(
 name|FilterToCalcRule
 operator|.
-name|instance
+name|INSTANCE
 argument_list|)
 expr_stmt|;
 name|checkPlanning
@@ -275,7 +275,7 @@ name|addRuleInstance
 argument_list|(
 name|UnionToDistinctRule
 operator|.
-name|instance
+name|INSTANCE
 argument_list|)
 expr_stmt|;
 name|checkPlanning
@@ -329,7 +329,7 @@ name|addRuleInstance
 argument_list|(
 name|UnionToDistinctRule
 operator|.
-name|instance
+name|INSTANCE
 argument_list|)
 expr_stmt|;
 name|checkPlanning
@@ -376,7 +376,7 @@ name|addRuleInstance
 argument_list|(
 name|UnionToDistinctRule
 operator|.
-name|instance
+name|INSTANCE
 argument_list|)
 expr_stmt|;
 name|checkPlanning
@@ -409,7 +409,7 @@ name|checkPlanning
 argument_list|(
 name|RemoveTrivialProjectRule
 operator|.
-name|instance
+name|INSTANCE
 argument_list|,
 literal|"select d1.deptno from (select * from dept) d1,"
 operator|+
@@ -460,7 +460,7 @@ name|addRuleInstance
 argument_list|(
 name|ProjectToCalcRule
 operator|.
-name|instance
+name|INSTANCE
 argument_list|)
 expr_stmt|;
 name|subprogramBuilder
@@ -469,7 +469,7 @@ name|addRuleInstance
 argument_list|(
 name|MergeCalcRule
 operator|.
-name|instance
+name|INSTANCE
 argument_list|)
 expr_stmt|;
 name|HepProgramBuilder
@@ -532,7 +532,7 @@ name|addRuleInstance
 argument_list|(
 name|MergeCalcRule
 operator|.
-name|instance
+name|INSTANCE
 argument_list|)
 expr_stmt|;
 name|programBuilder
@@ -541,7 +541,7 @@ name|addRuleInstance
 argument_list|(
 name|ProjectToCalcRule
 operator|.
-name|instance
+name|INSTANCE
 argument_list|)
 expr_stmt|;
 name|programBuilder
@@ -550,7 +550,7 @@ name|addRuleInstance
 argument_list|(
 name|FilterToCalcRule
 operator|.
-name|instance
+name|INSTANCE
 argument_list|)
 expr_stmt|;
 name|programBuilder

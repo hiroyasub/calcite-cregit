@@ -55,7 +55,7 @@ specifier|public
 specifier|static
 specifier|final
 name|PullUpProjectsOnTopOfMultiJoinRule
-name|instanceTwoProjectChildren
+name|MULTI_BOTH_PROJECT
 init|=
 operator|new
 name|PullUpProjectsOnTopOfMultiJoinRule
@@ -108,7 +108,7 @@ specifier|public
 specifier|static
 specifier|final
 name|PullUpProjectsOnTopOfMultiJoinRule
-name|instanceLeftProjectChild
+name|MULTI_LEFT_PROJECT
 init|=
 operator|new
 name|PullUpProjectsOnTopOfMultiJoinRule
@@ -147,7 +147,7 @@ specifier|public
 specifier|static
 specifier|final
 name|PullUpProjectsOnTopOfMultiJoinRule
-name|instanceRightProjectChild
+name|MULTI_RIGHT_PROJECT
 init|=
 operator|new
 name|PullUpProjectsOnTopOfMultiJoinRule
@@ -219,7 +219,6 @@ name|call
 parameter_list|)
 block|{
 return|return
-operator|(
 name|call
 operator|.
 name|rels
@@ -227,7 +226,6 @@ operator|.
 name|length
 operator|!=
 literal|4
-operator|)
 return|;
 block|}
 comment|// override PullUpProjectsAboveJoinRule

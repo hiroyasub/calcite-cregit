@@ -396,7 +396,7 @@ specifier|public
 specifier|static
 specifier|final
 name|OverFound
-name|instance
+name|INSTANCE
 init|=
 operator|new
 name|OverFound
@@ -435,7 +435,7 @@ block|{
 throw|throw
 name|OverFound
 operator|.
-name|instance
+name|INSTANCE
 throw|;
 block|}
 block|}

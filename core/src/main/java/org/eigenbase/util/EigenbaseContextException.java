@@ -127,11 +127,9 @@ name|cause
 argument_list|)
 expr_stmt|;
 assert|assert
-operator|(
 name|cause
 operator|!=
 literal|null
-operator|)
 assert|;
 name|setPosition
 argument_list|(

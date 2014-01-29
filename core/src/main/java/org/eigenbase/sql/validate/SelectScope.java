@@ -330,14 +330,12 @@ argument_list|()
 decl_stmt|;
 if|if
 condition|(
-operator|(
 name|orderList
 operator|.
 name|size
 argument_list|()
 operator|>
 literal|0
-operator|)
 condition|)
 block|{
 name|SqlNode

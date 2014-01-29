@@ -430,7 +430,7 @@ name|ProjectRel
 operator|.
 name|Flags
 operator|.
-name|Boxed
+name|BOXED
 argument_list|)
 return|;
 case|case

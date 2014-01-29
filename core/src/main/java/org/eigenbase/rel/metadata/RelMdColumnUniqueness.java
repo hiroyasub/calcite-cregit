@@ -699,11 +699,9 @@ block|}
 else|else
 block|{
 return|return
-operator|(
 name|leftUnique
 operator|&&
 name|rightUnique
-operator|)
 return|;
 block|}
 block|}
@@ -804,11 +802,9 @@ literal|null
 return|;
 block|}
 return|return
-operator|(
 name|rightJoinColsUnique
 operator|&&
 name|leftUnique
-operator|)
 return|;
 block|}
 if|else if
@@ -870,11 +866,9 @@ literal|null
 return|;
 block|}
 return|return
-operator|(
 name|leftJoinColsUnique
 operator|&&
 name|rightUnique
-operator|)
 return|;
 block|}
 throw|throw

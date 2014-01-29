@@ -572,14 +572,12 @@ name|NULL
 condition|)
 block|{
 assert|assert
-operator|(
 literal|null
 operator|==
 name|literal
 operator|.
 name|getValue
 argument_list|()
-operator|)
 assert|;
 return|return
 literal|true

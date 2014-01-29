@@ -496,11 +496,9 @@ parameter_list|)
 block|{
 comment|// assert that we don't already have a statement
 assert|assert
-operator|(
 name|statement
 operator|==
 literal|null
-operator|)
 assert|;
 name|statement
 operator|=
@@ -589,11 +587,9 @@ name|numThreads
 parameter_list|)
 block|{
 assert|assert
-operator|(
 name|numThreads
 operator|>
 literal|0
-operator|)
 assert|;
 name|this
 operator|.

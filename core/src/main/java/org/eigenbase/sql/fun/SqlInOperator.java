@@ -185,13 +185,11 @@ name|getOperands
 argument_list|()
 decl_stmt|;
 assert|assert
-operator|(
 name|operands
 operator|.
 name|length
 operator|==
 literal|2
-operator|)
 assert|;
 specifier|final
 name|RelDataTypeFactory

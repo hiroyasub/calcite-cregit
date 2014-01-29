@@ -113,18 +113,14 @@ name|description
 argument_list|)
 expr_stmt|;
 assert|assert
-operator|(
 name|in
 operator|!=
 literal|null
-operator|)
 assert|;
 assert|assert
-operator|(
 name|out
 operator|!=
 literal|null
-operator|)
 assert|;
 comment|// Source and target traits must have same type
 assert|assert

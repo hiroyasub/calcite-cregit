@@ -2015,7 +2015,6 @@ condition|)
 block|{
 return|return
 operator|(
-operator|(
 name|Boolean
 operator|)
 name|o
@@ -2023,7 +2022,6 @@ condition|?
 literal|1
 else|:
 literal|0
-operator|)
 return|;
 block|}
 if|else if
@@ -2381,6 +2379,7 @@ name|v
 return|;
 block|}
 block|}
+comment|/** Key-value pair. */
 specifier|private
 specifier|static
 class|class

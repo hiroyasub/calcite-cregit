@@ -173,7 +173,6 @@ name|other
 parameter_list|)
 block|{
 assert|assert
-operator|(
 name|getDataType
 argument_list|()
 operator|==
@@ -181,7 +180,6 @@ name|other
 operator|.
 name|getDataType
 argument_list|()
-operator|)
 assert|;
 if|if
 condition|(
@@ -232,7 +230,6 @@ parameter_list|)
 block|{
 assert|assert
 operator|(
-operator|(
 name|infinitude
 operator|==
 operator|-
@@ -243,7 +240,6 @@ operator|(
 name|infinitude
 operator|==
 literal|1
-operator|)
 operator|)
 assert|;
 if|if
@@ -297,11 +293,9 @@ parameter_list|)
 block|{
 comment|// validate the input
 assert|assert
-operator|(
 name|coordinate
 operator|!=
 literal|null
-operator|)
 assert|;
 if|if
 condition|(
@@ -321,11 +315,9 @@ operator|)
 condition|)
 block|{
 assert|assert
-operator|(
 name|coordinate
 operator|instanceof
 name|RexLiteral
-operator|)
 assert|;
 name|RexLiteral
 name|literal
@@ -347,7 +339,6 @@ argument_list|)
 condition|)
 block|{
 assert|assert
-operator|(
 name|SqlTypeUtil
 operator|.
 name|canAssignFrom
@@ -359,7 +350,6 @@ operator|.
 name|getType
 argument_list|()
 argument_list|)
-operator|)
 assert|;
 block|}
 block|}
@@ -1071,7 +1061,6 @@ name|other
 parameter_list|)
 block|{
 assert|assert
-operator|(
 name|getDataType
 argument_list|()
 operator|==
@@ -1079,7 +1068,6 @@ name|other
 operator|.
 name|getDataType
 argument_list|()
-operator|)
 assert|;
 if|if
 condition|(
@@ -1296,18 +1284,14 @@ name|coord2
 parameter_list|)
 block|{
 assert|assert
-operator|(
 name|coord1
 operator|instanceof
 name|RexLiteral
-operator|)
 assert|;
 assert|assert
-operator|(
 name|coord2
 operator|instanceof
 name|RexLiteral
-operator|)
 assert|;
 comment|// null values always sort lowest
 name|boolean

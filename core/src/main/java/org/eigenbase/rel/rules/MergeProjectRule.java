@@ -76,7 +76,7 @@ specifier|public
 specifier|static
 specifier|final
 name|MergeProjectRule
-name|instance
+name|INSTANCE
 init|=
 operator|new
 name|MergeProjectRule

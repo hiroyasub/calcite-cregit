@@ -103,14 +103,14 @@ specifier|public
 specifier|static
 specifier|final
 name|NestedLoopsJoinRule
-name|instance
+name|INSTANCE
 init|=
 operator|new
 name|NestedLoopsJoinRule
 argument_list|()
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Private constructor; use singleton {@link #instance}.    */
+comment|/**    * Private constructor; use singleton {@link #INSTANCE}.    */
 specifier|private
 name|NestedLoopsJoinRule
 parameter_list|()
@@ -363,7 +363,7 @@ control|)
 block|{
 specifier|final
 name|String
-name|dyn_inIdStr
+name|dynInIdStr
 init|=
 name|cluster
 operator|.
@@ -375,13 +375,13 @@ argument_list|()
 decl_stmt|;
 specifier|final
 name|int
-name|dyn_inId
+name|dynInId
 init|=
 name|RelOptQuery
 operator|.
 name|getCorrelOrdinal
 argument_list|(
-name|dyn_inIdStr
+name|dynInIdStr
 argument_list|)
 decl_stmt|;
 comment|// Create correlation to say 'each row, set variable #id
@@ -395,7 +395,7 @@ name|CorrelatorRel
 operator|.
 name|Correlation
 argument_list|(
-name|dyn_inId
+name|dynInId
 argument_list|,
 name|p
 operator|.
@@ -470,7 +470,7 @@ operator|.
 name|getType
 argument_list|()
 argument_list|,
-name|dyn_inIdStr
+name|dynInIdStr
 argument_list|)
 argument_list|)
 argument_list|)

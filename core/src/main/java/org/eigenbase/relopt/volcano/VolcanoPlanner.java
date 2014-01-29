@@ -235,7 +235,7 @@ specifier|protected
 specifier|static
 specifier|final
 name|double
-name|CostImprovement
+name|COST_IMPROVEMENT
 init|=
 literal|.5
 decl_stmt|;
@@ -251,7 +251,7 @@ name|ambitious
 init|=
 literal|true
 decl_stmt|;
-comment|/**    * If true, and if {@link #ambitious} is true, the planner waits a finite    * number of iterations for the cost to improve.    *    *<p>The number of iterations K is equal to the number of iterations    * required to get the first finite plan. After the first finite plan, it    * continues to fire rules to try to improve it. The planner sets a target    * cost of the current best cost multiplied by {@link #CostImprovement}. If    * it does not meet that cost target within K steps, it quits, and uses the    * current best plan. If it meets the cost, it sets a new, lower target, and    * has another K iterations to meet it. And so forth.    *    *<p>If false, the planner continues to fire rules until the rule queue is    * empty.    */
+comment|/**    * If true, and if {@link #ambitious} is true, the planner waits a finite    * number of iterations for the cost to improve.    *    *<p>The number of iterations K is equal to the number of iterations    * required to get the first finite plan. After the first finite plan, it    * continues to fire rules to try to improve it. The planner sets a target    * cost of the current best cost multiplied by {@link #COST_IMPROVEMENT}. If    * it does not meet that cost target within K steps, it quits, and uses the    * current best plan. If it meets the cost, it sets a new, lower target, and    * has another K iterations to meet it. And so forth.    *    *<p>If false, the planner continues to fire rules until the rule queue is    * empty.    */
 specifier|protected
 name|boolean
 name|impatient
@@ -1653,7 +1653,6 @@ name|toTraits
 parameter_list|)
 block|{
 assert|assert
-operator|(
 name|fromTraits
 operator|.
 name|size
@@ -1663,7 +1662,6 @@ name|toTraits
 operator|.
 name|size
 argument_list|()
-operator|)
 assert|;
 name|boolean
 name|canConvert
@@ -2047,7 +2045,7 @@ expr_stmt|;
 block|}
 if|if
 condition|(
-name|tracer
+name|LOGGER
 operator|.
 name|isLoggable
 argument_list|(
@@ -2057,7 +2055,7 @@ name|FINE
 argument_list|)
 condition|)
 block|{
-name|tracer
+name|LOGGER
 operator|.
 name|fine
 argument_list|(
@@ -2143,7 +2141,7 @@ expr_stmt|;
 block|}
 if|if
 condition|(
-name|tracer
+name|LOGGER
 operator|.
 name|isLoggable
 argument_list|(
@@ -2180,7 +2178,7 @@ operator|.
 name|flush
 argument_list|()
 expr_stmt|;
-name|tracer
+name|LOGGER
 operator|.
 name|finer
 argument_list|(
@@ -2203,7 +2201,7 @@ argument_list|)
 decl_stmt|;
 if|if
 condition|(
-name|tracer
+name|LOGGER
 operator|.
 name|isLoggable
 argument_list|(
@@ -2213,7 +2211,7 @@ name|FINE
 argument_list|)
 condition|)
 block|{
-name|tracer
+name|LOGGER
 operator|.
 name|fine
 argument_list|(
@@ -2231,7 +2229,7 @@ name|ALL_ATTRIBUTES
 argument_list|)
 argument_list|)
 expr_stmt|;
-name|tracer
+name|LOGGER
 operator|.
 name|fine
 argument_list|(
@@ -2956,7 +2954,7 @@ argument_list|)
 decl_stmt|;
 if|if
 condition|(
-name|tracer
+name|LOGGER
 operator|.
 name|isLoggable
 argument_list|(
@@ -3219,42 +3217,42 @@ name|AbstractConverter
 operator|.
 name|ExpandConversionRule
 operator|.
-name|instance
+name|INSTANCE
 argument_list|)
 expr_stmt|;
 name|addRule
 argument_list|(
 name|SwapJoinRule
 operator|.
-name|instance
+name|INSTANCE
 argument_list|)
 expr_stmt|;
 name|addRule
 argument_list|(
 name|RemoveDistinctRule
 operator|.
-name|instance
+name|INSTANCE
 argument_list|)
 expr_stmt|;
 name|addRule
 argument_list|(
 name|UnionToDistinctRule
 operator|.
-name|instance
+name|INSTANCE
 argument_list|)
 expr_stmt|;
 name|addRule
 argument_list|(
 name|RemoveTrivialProjectRule
 operator|.
-name|instance
+name|INSTANCE
 argument_list|)
 expr_stmt|;
 name|addRule
 argument_list|(
 name|RemoveTrivialCalcRule
 operator|.
-name|instance
+name|INSTANCE
 argument_list|)
 expr_stmt|;
 name|addRule
@@ -3609,7 +3607,6 @@ name|getTraitSet
 argument_list|()
 decl_stmt|;
 assert|assert
-operator|(
 name|fromTraits
 operator|.
 name|size
@@ -3619,7 +3616,6 @@ name|toTraits
 operator|.
 name|size
 argument_list|()
-operator|)
 assert|;
 specifier|final
 name|boolean
@@ -4347,13 +4343,11 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 assert|assert
-operator|(
 name|subset
 operator|.
 name|set
 operator|==
 name|set
-operator|)
 assert|;
 for|for
 control|(
@@ -4655,7 +4649,7 @@ operator|.
 name|recomputeDigest
 argument_list|()
 decl_stmt|;
-name|tracer
+name|LOGGER
 operator|.
 name|finer
 argument_list|(
@@ -4724,7 +4718,7 @@ name|rel
 assert|;
 comment|// There's already an equivalent with the same name, and we
 comment|// just knocked it out. Put it back, and forget about 'rel'.
-name|tracer
+name|LOGGER
 operator|.
 name|finer
 argument_list|(
@@ -4939,7 +4933,6 @@ operator|)
 condition|)
 block|{
 assert|assert
-operator|(
 name|equivRel
 operator|.
 name|getClass
@@ -4949,10 +4942,8 @@ name|rel
 operator|.
 name|getClass
 argument_list|()
-operator|)
 assert|;
 assert|assert
-operator|(
 name|equivRel
 operator|.
 name|getTraitSet
@@ -4965,7 +4956,6 @@ operator|.
 name|getTraitSet
 argument_list|()
 argument_list|)
-operator|)
 assert|;
 name|RelSubset
 name|equivRelSubset
@@ -5748,7 +5738,7 @@ operator|==
 literal|null
 condition|)
 block|{
-empty_stmt|;
+comment|// do nothing
 block|}
 if|else if
 condition|(
@@ -5767,7 +5757,6 @@ block|}
 else|else
 block|{
 assert|assert
-operator|(
 name|equivExp
 operator|.
 name|getTraitSet
@@ -5788,7 +5777,6 @@ name|rel
 operator|.
 name|getClass
 argument_list|()
-operator|)
 operator|)
 assert|;
 assert|assert
@@ -5830,7 +5818,7 @@ condition|)
 block|{
 if|if
 condition|(
-name|tracer
+name|LOGGER
 operator|.
 name|isLoggable
 argument_list|(
@@ -5840,7 +5828,7 @@ name|FINER
 argument_list|)
 condition|)
 block|{
-name|tracer
+name|LOGGER
 operator|.
 name|finer
 argument_list|(
@@ -5929,7 +5917,7 @@ condition|)
 block|{
 if|if
 condition|(
-name|tracer
+name|LOGGER
 operator|.
 name|isLoggable
 argument_list|(
@@ -5939,7 +5927,7 @@ name|FINER
 argument_list|)
 condition|)
 block|{
-name|tracer
+name|LOGGER
 operator|.
 name|finer
 argument_list|(
@@ -6155,19 +6143,13 @@ name|rel
 argument_list|)
 decl_stmt|;
 assert|assert
-operator|(
-operator|(
 name|xx
 operator|==
 literal|null
-operator|)
 operator|||
-operator|(
 name|xx
 operator|==
 name|rel
-operator|)
-operator|)
 operator|:
 name|rel
 operator|.
@@ -6176,7 +6158,7 @@ argument_list|()
 assert|;
 if|if
 condition|(
-name|tracer
+name|LOGGER
 operator|.
 name|isLoggable
 argument_list|(
@@ -6186,7 +6168,7 @@ name|FINER
 argument_list|)
 condition|)
 block|{
-name|tracer
+name|LOGGER
 operator|.
 name|finer
 argument_list|(
@@ -6454,7 +6436,7 @@ literal|null
 operator|)
 condition|)
 block|{
-name|tracer
+name|LOGGER
 operator|.
 name|finer
 argument_list|(

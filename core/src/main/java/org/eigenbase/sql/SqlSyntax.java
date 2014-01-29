@@ -143,13 +143,11 @@ name|rightPrec
 parameter_list|)
 block|{
 assert|assert
-operator|(
 name|operands
 operator|.
 name|length
 operator|==
 literal|1
-operator|)
 assert|;
 name|writer
 operator|.
@@ -209,13 +207,11 @@ name|rightPrec
 parameter_list|)
 block|{
 assert|assert
-operator|(
 name|operands
 operator|.
 name|length
 operator|==
 literal|1
-operator|)
 assert|;
 name|operands
 index|[

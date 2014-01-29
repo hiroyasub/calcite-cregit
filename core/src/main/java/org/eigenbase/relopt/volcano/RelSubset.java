@@ -163,7 +163,7 @@ specifier|private
 specifier|static
 specifier|final
 name|Logger
-name|tracer
+name|LOGGER
 init|=
 name|EigenbaseTrace
 operator|.
@@ -1231,7 +1231,7 @@ block|{
 comment|// This subset is already in the chain being propagated to. This
 comment|// means that the graph is cyclic, and therefore the cost of this
 comment|// relational expression - not this subset - must be infinite.
-name|tracer
+name|LOGGER
 operator|.
 name|finer
 argument_list|(
@@ -1267,7 +1267,7 @@ condition|)
 block|{
 if|if
 condition|(
-name|tracer
+name|LOGGER
 operator|.
 name|isLoggable
 argument_list|(
@@ -1277,7 +1277,7 @@ name|FINER
 argument_list|)
 condition|)
 block|{
-name|tracer
+name|LOGGER
 operator|.
 name|finer
 argument_list|(
@@ -1720,7 +1720,7 @@ argument_list|(
 name|dump
 argument_list|)
 decl_stmt|;
-name|tracer
+name|LOGGER
 operator|.
 name|throwing
 argument_list|(

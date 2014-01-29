@@ -77,7 +77,6 @@ parameter_list|()
 block|{
 return|return
 operator|(
-operator|(
 name|list
 operator|.
 name|size
@@ -95,7 +94,6 @@ argument_list|)
 operator|.
 name|isPoint
 argument_list|()
-operator|)
 return|;
 block|}
 comment|/**    * @return true if this sequence represents an empty range.    */
@@ -106,7 +104,6 @@ parameter_list|()
 block|{
 return|return
 operator|(
-operator|(
 name|list
 operator|.
 name|size
@@ -124,7 +121,6 @@ argument_list|)
 operator|.
 name|isEmpty
 argument_list|()
-operator|)
 return|;
 block|}
 comment|/**    * @return true if this sequence represents a non-point, non-empty range.    */
@@ -134,17 +130,13 @@ name|isRange
 parameter_list|()
 block|{
 return|return
-operator|(
-operator|(
 name|list
 operator|.
 name|size
 argument_list|()
 operator|>
 literal|1
-operator|)
 operator|||
-operator|(
 operator|(
 name|list
 operator|.
@@ -152,7 +144,6 @@ name|size
 argument_list|()
 operator|==
 literal|1
-operator|)
 operator|&&
 name|list
 operator|.
@@ -163,7 +154,6 @@ argument_list|)
 operator|.
 name|isRange
 argument_list|()
-operator|)
 operator|)
 return|;
 block|}

@@ -164,9 +164,7 @@ literal|"{0}({1} USING {2})"
 return|;
 block|}
 assert|assert
-operator|(
 literal|false
-operator|)
 assert|;
 return|return
 literal|null

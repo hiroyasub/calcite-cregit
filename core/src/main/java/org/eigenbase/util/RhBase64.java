@@ -13,6 +13,40 @@ name|util
 package|;
 end_package
 
+begin_import
+import|import
+name|java
+operator|.
+name|io
+operator|.
+name|*
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|zip
+operator|.
+name|GZIPInputStream
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|zip
+operator|.
+name|GZIPOutputStream
+import|;
+end_import
+
 begin_comment
 comment|/**  * Encodes and decodes to and from Base64 notation.  *  *<p>Change Log:</p>  *  *<ul>  *<li>v2.1 - Cleaned up javadoc comments and unused variables and methods.  * Added some convenience methods for reading and writing to and from  * files.</li>  *<li>v2.0.2 - Now specifies UTF-8 encoding in places where the code fails on  * systems with other encodings (like EBCDIC).</li>  *<li>v2.0.1 - Fixed an error when decoding a single byte, that is, when the  * encoded data was a single byte.</li>  *<li>v2.0 - I got rid of methods that used booleans to set options. Now  * everything is more consolidated and cleaner. The code now detects when data  * that's being decoded is gzip-compressed and will decompress it automatically.  * Generally things are cleaner. You'll probably have to change some method  * calls that you were making to support the new options format (<tt>int</tt>s  * that you "OR" together).</li>  *<li>v1.5.1 - Fixed bug when decompressing and decoding to a byte[] using<tt>  * decode( String s, boolean gzipCompressed )</tt>. Added the ability to  * "suspend" encoding in the Output Stream so you can turn on and off the  * encoding if you need to embed base64 data in an otherwise "normal" stream  * (like an XML file).</li>  *<li>v1.5 - Output stream pases on flush() command but doesn't do anything  * itself. This helps when using GZIP streams. Added the ability to  * GZip-compress objects before encoding them.</li>  *<li>v1.4 - Added helper methods to read/write files.</li>  *<li>v1.3.6 - Fixed OutputStream.flush() so that 'position' is reset.</li>  *<li>v1.3.5 - Added flag to turn on and off line breaks. Fixed bug in input  * stream where last buffer being read, if not completely full, was not  * returned.</li>  *<li>v1.3.4 - Fixed when "improperly padded stream" error was thrown at the  * wrong time.</li>  *<li>v1.3.3 - Fixed I/O streams which were totally messed up.</li>  *</ul>  *  *<p>I am placing this code in the Public Domain. Do with it as you will. This  * software comes with no guarantees or warranties but with plenty of  * well-wishing instead! Please visit<a href="http://iharder.net/base64">  * http://iharder.net/base64</a> periodically to check for updates or to  * contribute improvements.</p>  *  *<p>Author: Robert Harder, rob@iharder.net</p>  *  * @version 2.1  */
 end_comment
@@ -471,10 +505,6 @@ expr_stmt|;
 block|}
 catch|catch
 parameter_list|(
-name|java
-operator|.
-name|io
-operator|.
 name|UnsupportedEncodingException
 name|use
 parameter_list|)
@@ -1036,11 +1066,9 @@ index|]
 operator|=
 name|ALPHABET
 index|[
-operator|(
 name|inBuff
 operator|>>>
 literal|18
-operator|)
 index|]
 expr_stmt|;
 name|destination
@@ -1088,9 +1116,7 @@ index|]
 operator|=
 name|ALPHABET
 index|[
-operator|(
 name|inBuff
-operator|)
 operator|&
 literal|0x3f
 index|]
@@ -1108,11 +1134,9 @@ index|]
 operator|=
 name|ALPHABET
 index|[
-operator|(
 name|inBuff
 operator|>>>
 literal|18
-operator|)
 index|]
 expr_stmt|;
 name|destination
@@ -1173,11 +1197,9 @@ index|]
 operator|=
 name|ALPHABET
 index|[
-operator|(
 name|inBuff
 operator|>>>
 literal|18
-operator|)
 index|]
 expr_stmt|;
 name|destination
@@ -1231,10 +1253,6 @@ specifier|static
 name|String
 name|encodeObject
 parameter_list|(
-name|java
-operator|.
-name|io
-operator|.
 name|Serializable
 name|serializableObject
 parameter_list|)
@@ -1254,10 +1272,6 @@ specifier|static
 name|String
 name|encodeObject
 parameter_list|(
-name|java
-operator|.
-name|io
-operator|.
 name|Serializable
 name|serializableObject
 parameter_list|,
@@ -1266,39 +1280,21 @@ name|options
 parameter_list|)
 block|{
 comment|// Streams
-name|java
-operator|.
-name|io
-operator|.
 name|ByteArrayOutputStream
 name|baos
 init|=
 literal|null
 decl_stmt|;
-name|java
-operator|.
-name|io
-operator|.
 name|OutputStream
 name|b64os
 init|=
 literal|null
 decl_stmt|;
-name|java
-operator|.
-name|io
-operator|.
 name|ObjectOutputStream
 name|oos
 init|=
 literal|null
 decl_stmt|;
-name|java
-operator|.
-name|util
-operator|.
-name|zip
-operator|.
 name|GZIPOutputStream
 name|gzos
 init|=
@@ -1308,20 +1304,16 @@ comment|// Isolate options
 name|int
 name|gzip
 init|=
-operator|(
 name|options
 operator|&
 name|GZIP
-operator|)
 decl_stmt|;
 name|int
 name|dontBreakLines
 init|=
-operator|(
 name|options
 operator|&
 name|DONT_BREAK_LINES
-operator|)
 decl_stmt|;
 try|try
 block|{
@@ -1329,10 +1321,6 @@ comment|// ObjectOutputStream -> (GZIP) -> Base64 -> ByteArrayOutputStream
 name|baos
 operator|=
 operator|new
-name|java
-operator|.
-name|io
-operator|.
 name|ByteArrayOutputStream
 argument_list|()
 expr_stmt|;
@@ -1361,12 +1349,6 @@ block|{
 name|gzos
 operator|=
 operator|new
-name|java
-operator|.
-name|util
-operator|.
-name|zip
-operator|.
 name|GZIPOutputStream
 argument_list|(
 name|b64os
@@ -1375,10 +1357,6 @@ expr_stmt|;
 name|oos
 operator|=
 operator|new
-name|java
-operator|.
-name|io
-operator|.
 name|ObjectOutputStream
 argument_list|(
 name|gzos
@@ -1390,10 +1368,6 @@ block|{
 name|oos
 operator|=
 operator|new
-name|java
-operator|.
-name|io
-operator|.
 name|ObjectOutputStream
 argument_list|(
 name|b64os
@@ -1410,10 +1384,6 @@ expr_stmt|;
 block|}
 catch|catch
 parameter_list|(
-name|java
-operator|.
-name|io
-operator|.
 name|IOException
 name|e
 parameter_list|)
@@ -1508,10 +1478,6 @@ return|;
 block|}
 catch|catch
 parameter_list|(
-name|java
-operator|.
-name|io
-operator|.
 name|UnsupportedEncodingException
 name|uue
 parameter_list|)
@@ -1637,20 +1603,16 @@ comment|// Isolate options
 name|int
 name|dontBreakLines
 init|=
-operator|(
 name|options
 operator|&
 name|DONT_BREAK_LINES
-operator|)
 decl_stmt|;
 name|int
 name|gzip
 init|=
-operator|(
 name|options
 operator|&
 name|GZIP
-operator|)
 decl_stmt|;
 comment|// Compress?
 if|if
@@ -1660,21 +1622,11 @@ operator|==
 name|GZIP
 condition|)
 block|{
-name|java
-operator|.
-name|io
-operator|.
 name|ByteArrayOutputStream
 name|baos
 init|=
 literal|null
 decl_stmt|;
-name|java
-operator|.
-name|util
-operator|.
-name|zip
-operator|.
 name|GZIPOutputStream
 name|gzos
 init|=
@@ -1693,10 +1645,6 @@ comment|// GZip -> Base64 -> ByteArray
 name|baos
 operator|=
 operator|new
-name|java
-operator|.
-name|io
-operator|.
 name|ByteArrayOutputStream
 argument_list|()
 expr_stmt|;
@@ -1717,12 +1665,6 @@ expr_stmt|;
 name|gzos
 operator|=
 operator|new
-name|java
-operator|.
-name|util
-operator|.
-name|zip
-operator|.
 name|GZIPOutputStream
 argument_list|(
 name|b64os
@@ -1747,10 +1689,6 @@ expr_stmt|;
 block|}
 catch|catch
 parameter_list|(
-name|java
-operator|.
-name|io
-operator|.
 name|IOException
 name|e
 parameter_list|)
@@ -1830,10 +1768,6 @@ return|;
 block|}
 catch|catch
 parameter_list|(
-name|java
-operator|.
-name|io
-operator|.
 name|UnsupportedEncodingException
 name|uue
 parameter_list|)
@@ -1877,9 +1811,7 @@ init|=
 operator|new
 name|byte
 index|[
-operator|(
 name|len43
-operator|)
 comment|// Main 4:3
 operator|+
 operator|(
@@ -2048,10 +1980,6 @@ return|;
 block|}
 catch|catch
 parameter_list|(
-name|java
-operator|.
-name|io
-operator|.
 name|UnsupportedEncodingException
 name|uue
 parameter_list|)
@@ -2391,9 +2319,7 @@ operator|=
 operator|(
 name|byte
 operator|)
-operator|(
 name|outBuff
-operator|)
 expr_stmt|;
 return|return
 literal|3
@@ -2786,10 +2712,6 @@ expr_stmt|;
 block|}
 catch|catch
 parameter_list|(
-name|java
-operator|.
-name|io
-operator|.
 name|UnsupportedEncodingException
 name|uee
 parameter_list|)
@@ -2866,12 +2788,6 @@ operator|)
 decl_stmt|;
 if|if
 condition|(
-name|java
-operator|.
-name|util
-operator|.
-name|zip
-operator|.
 name|GZIPInputStream
 operator|.
 name|GZIP_MAGIC
@@ -2879,30 +2795,16 @@ operator|==
 name|head
 condition|)
 block|{
-name|java
-operator|.
-name|io
-operator|.
 name|ByteArrayInputStream
 name|bais
 init|=
 literal|null
 decl_stmt|;
-name|java
-operator|.
-name|util
-operator|.
-name|zip
-operator|.
 name|GZIPInputStream
 name|gzis
 init|=
 literal|null
 decl_stmt|;
-name|java
-operator|.
-name|io
-operator|.
 name|ByteArrayOutputStream
 name|baos
 init|=
@@ -2928,20 +2830,12 @@ block|{
 name|baos
 operator|=
 operator|new
-name|java
-operator|.
-name|io
-operator|.
 name|ByteArrayOutputStream
 argument_list|()
 expr_stmt|;
 name|bais
 operator|=
 operator|new
-name|java
-operator|.
-name|io
-operator|.
 name|ByteArrayInputStream
 argument_list|(
 name|bytes
@@ -2950,12 +2844,6 @@ expr_stmt|;
 name|gzis
 operator|=
 operator|new
-name|java
-operator|.
-name|util
-operator|.
-name|zip
-operator|.
 name|GZIPInputStream
 argument_list|(
 name|bais
@@ -3000,10 +2888,6 @@ expr_stmt|;
 block|}
 catch|catch
 parameter_list|(
-name|java
-operator|.
-name|io
-operator|.
 name|IOException
 name|e
 parameter_list|)
@@ -3084,19 +2968,11 @@ argument_list|(
 name|encodedObject
 argument_list|)
 decl_stmt|;
-name|java
-operator|.
-name|io
-operator|.
 name|ByteArrayInputStream
 name|bais
 init|=
 literal|null
 decl_stmt|;
-name|java
-operator|.
-name|io
-operator|.
 name|ObjectInputStream
 name|ois
 init|=
@@ -3112,10 +2988,6 @@ block|{
 name|bais
 operator|=
 operator|new
-name|java
-operator|.
-name|io
-operator|.
 name|ByteArrayInputStream
 argument_list|(
 name|objBytes
@@ -3124,10 +2996,6 @@ expr_stmt|;
 name|ois
 operator|=
 operator|new
-name|java
-operator|.
-name|io
-operator|.
 name|ObjectInputStream
 argument_list|(
 name|bais
@@ -3143,10 +3011,6 @@ expr_stmt|;
 block|}
 catch|catch
 parameter_list|(
-name|java
-operator|.
-name|io
-operator|.
 name|IOException
 name|e
 parameter_list|)
@@ -3254,10 +3118,6 @@ operator|.
 name|OutputStream
 argument_list|(
 operator|new
-name|java
-operator|.
-name|io
-operator|.
 name|FileOutputStream
 argument_list|(
 name|filename
@@ -3282,10 +3142,6 @@ expr_stmt|;
 block|}
 catch|catch
 parameter_list|(
-name|java
-operator|.
-name|io
-operator|.
 name|IOException
 name|e
 parameter_list|)
@@ -3352,10 +3208,6 @@ operator|.
 name|OutputStream
 argument_list|(
 operator|new
-name|java
-operator|.
-name|io
-operator|.
 name|FileOutputStream
 argument_list|(
 name|filename
@@ -3385,10 +3237,6 @@ expr_stmt|;
 block|}
 catch|catch
 parameter_list|(
-name|java
-operator|.
-name|io
-operator|.
 name|IOException
 name|e
 parameter_list|)
@@ -3447,18 +3295,10 @@ decl_stmt|;
 try|try
 block|{
 comment|// Set up some useful variables
-name|java
-operator|.
-name|io
-operator|.
 name|File
 name|file
 init|=
 operator|new
-name|java
-operator|.
-name|io
-operator|.
 name|File
 argument_list|(
 name|filename
@@ -3536,17 +3376,9 @@ operator|.
 name|InputStream
 argument_list|(
 operator|new
-name|java
-operator|.
-name|io
-operator|.
 name|BufferedInputStream
 argument_list|(
 operator|new
-name|java
-operator|.
-name|io
-operator|.
 name|FileInputStream
 argument_list|(
 name|file
@@ -3611,10 +3443,6 @@ expr_stmt|;
 block|}
 catch|catch
 parameter_list|(
-name|java
-operator|.
-name|io
-operator|.
 name|IOException
 name|e
 parameter_list|)
@@ -3678,18 +3506,10 @@ decl_stmt|;
 try|try
 block|{
 comment|// Set up some useful variables
-name|java
-operator|.
-name|io
-operator|.
 name|File
 name|file
 init|=
 operator|new
-name|java
-operator|.
-name|io
-operator|.
 name|File
 argument_list|(
 name|filename
@@ -3734,17 +3554,9 @@ operator|.
 name|InputStream
 argument_list|(
 operator|new
-name|java
-operator|.
-name|io
-operator|.
 name|BufferedInputStream
 argument_list|(
 operator|new
-name|java
-operator|.
-name|io
-operator|.
 name|FileInputStream
 argument_list|(
 name|file
@@ -3802,10 +3614,6 @@ expr_stmt|;
 block|}
 catch|catch
 parameter_list|(
-name|java
-operator|.
-name|io
-operator|.
 name|IOException
 name|e
 parameter_list|)
@@ -3846,16 +3654,12 @@ return|;
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------
 comment|/* ********  I N N E R   C L A S S   I N P U T S T R E A M  ******** */
-comment|/**    * A {@link RhBase64.InputStream} will read data from another<tt>    * java.io.InputStream</tt>, given in the constructor, and encode/decode    * to/from Base64 notation on the fly.    *    * @see RhBase64    */
+comment|/**    * A {@link RhBase64.InputStream} will read data from another<tt>    * InputStream</tt>, given in the constructor, and encode/decode    * to/from Base64 notation on the fly.    *    * @see RhBase64    */
 specifier|public
 specifier|static
 class|class
 name|InputStream
 extends|extends
-name|java
-operator|.
-name|io
-operator|.
 name|FilterInputStream
 block|{
 specifier|private
@@ -3893,14 +3697,10 @@ name|boolean
 name|breakLines
 decl_stmt|;
 comment|// Break lines at less than 80 characters
-comment|/**      * Constructs a {@link RhBase64.InputStream} in DECODE mode.      *      * @param in the<tt>java.io.InputStream</tt> from which to read data.      * @since 1.3      */
+comment|/**      * Constructs a {@link RhBase64.InputStream} in DECODE mode.      *      * @param in the<tt>InputStream</tt> from which to read data.      * @since 1.3      */
 specifier|public
 name|InputStream
 parameter_list|(
-name|java
-operator|.
-name|io
-operator|.
 name|InputStream
 name|in
 parameter_list|)
@@ -3913,7 +3713,7 @@ name|DECODE
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Constructs a {@link RhBase64.InputStream} in either ENCODE or DECODE      * mode.      *      *<p>Valid options:      *      *<pre>      *   ENCODE or DECODE: Encode or Decode as data is read.      *   DONT_BREAK_LINES: don't break lines at 76 characters      *     (only meaningful when encoding)      *<i>Note: Technically, this makes your encoding non-compliant.</i>      *</pre>      *      *<p>Example:<code>new RhBase64.InputStream( in, RhBase64.DECODE      * )</code>      *      * @param in      the<tt>java.io.InputStream</tt> from which to read data.      * @param options Specified options      * @see RhBase64#ENCODE      * @see RhBase64#DECODE      * @see RhBase64#DONT_BREAK_LINES      * @since 2.0      */
+comment|/**      * Constructs a {@link RhBase64.InputStream} in either ENCODE or DECODE      * mode.      *      *<p>Valid options:      *      *<pre>      *   ENCODE or DECODE: Encode or Decode as data is read.      *   DONT_BREAK_LINES: don't break lines at 76 characters      *     (only meaningful when encoding)      *<i>Note: Technically, this makes your encoding non-compliant.</i>      *</pre>      *      *<p>Example:<code>new RhBase64.InputStream( in, RhBase64.DECODE      * )</code>      *      * @param in      the<tt>InputStream</tt> from which to read data.      * @param options Specified options      * @see RhBase64#ENCODE      * @see RhBase64#DECODE      * @see RhBase64#DONT_BREAK_LINES      * @since 2.0      */
 specifier|public
 name|InputStream
 parameter_list|(
@@ -3997,10 +3797,6 @@ name|int
 name|read
 parameter_list|()
 throws|throws
-name|java
-operator|.
-name|io
-operator|.
 name|IOException
 block|{
 comment|// Do we need to get data?
@@ -4081,10 +3877,6 @@ block|}
 block|}
 catch|catch
 parameter_list|(
-name|java
-operator|.
-name|io
-operator|.
 name|IOException
 name|e
 parameter_list|)
@@ -4271,10 +4063,6 @@ block|{
 comment|// Must have broken out from above.
 throw|throw
 operator|new
-name|java
-operator|.
-name|io
-operator|.
 name|IOException
 argument_list|(
 literal|"Improperly padded Base64 input."
@@ -4370,10 +4158,6 @@ comment|// Else error
 comment|// When JDK1.4 is more accepted, use an assertion here.
 throw|throw
 operator|new
-name|java
-operator|.
-name|io
-operator|.
 name|IOException
 argument_list|(
 literal|"Error in Base64 code reading stream."
@@ -4397,10 +4181,6 @@ name|int
 name|len
 parameter_list|)
 throws|throws
-name|java
-operator|.
-name|io
-operator|.
 name|IOException
 block|{
 name|int
@@ -4472,16 +4252,12 @@ return|;
 block|}
 block|}
 comment|/* ********  I N N E R   C L A S S   O U T P U T S T R E A M  ******** */
-comment|/**    * A {@link RhBase64.OutputStream} will write data to another<tt>    * java.io.OutputStream</tt>, given in the constructor, and encode/decode    * to/from Base64 notation on the fly.    *    * @see RhBase64    * @since 1.3    */
+comment|/**    * A {@link RhBase64.OutputStream} will write data to another<tt>    * OutputStream</tt>, given in the constructor, and encode/decode    * to/from Base64 notation on the fly.    *    * @see RhBase64    * @since 1.3    */
 specifier|public
 specifier|static
 class|class
 name|OutputStream
 extends|extends
-name|java
-operator|.
-name|io
-operator|.
 name|FilterOutputStream
 block|{
 specifier|private
@@ -4519,14 +4295,10 @@ specifier|private
 name|boolean
 name|suspendEncoding
 decl_stmt|;
-comment|/**      * Constructs a {@link RhBase64.OutputStream} in ENCODE mode.      *      * @param out the<tt>java.io.OutputStream</tt> to which data will be      *            written.      * @since 1.3      */
+comment|/**      * Constructs a {@link RhBase64.OutputStream} in ENCODE mode.      *      * @param out the<tt>OutputStream</tt> to which data will be      *            written.      * @since 1.3      */
 specifier|public
 name|OutputStream
 parameter_list|(
-name|java
-operator|.
-name|io
-operator|.
 name|OutputStream
 name|out
 parameter_list|)
@@ -4539,7 +4311,7 @@ name|ENCODE
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Constructs a {@link RhBase64.OutputStream} in either ENCODE or DECODE      * mode.      *      *<p>Valid options:      *      *<pre>      *   ENCODE or DECODE: Encode or Decode as data is read.      *   DONT_BREAK_LINES: don't break lines at 76 characters      *     (only meaningful when encoding)      *<i>Note: Technically, this makes your encoding non-compliant.</i>      *</pre>      *      *<p>Example:<code>new RhBase64.OutputStream( out, RhBase64.ENCODE      * )</code>      *      * @param out     the<tt>java.io.OutputStream</tt> to which data will be      *                written.      * @param options Specified options.      * @see RhBase64#ENCODE      * @see RhBase64#DECODE      * @see RhBase64#DONT_BREAK_LINES      * @since 1.3      */
+comment|/**      * Constructs a {@link RhBase64.OutputStream} in either ENCODE or DECODE      * mode.      *      *<p>Valid options:      *      *<pre>      *   ENCODE or DECODE: Encode or Decode as data is read.      *   DONT_BREAK_LINES: don't break lines at 76 characters      *     (only meaningful when encoding)      *<i>Note: Technically, this makes your encoding non-compliant.</i>      *</pre>      *      *<p>Example:<code>new RhBase64.OutputStream( out, RhBase64.ENCODE      * )</code>      *      * @param out     the<tt>OutputStream</tt> to which data will be      *                written.      * @param options Specified options.      * @see RhBase64#ENCODE      * @see RhBase64#DECODE      * @see RhBase64#DONT_BREAK_LINES      * @since 1.3      */
 specifier|public
 name|OutputStream
 parameter_list|(
@@ -4641,10 +4413,6 @@ name|int
 name|theByte
 parameter_list|)
 throws|throws
-name|java
-operator|.
-name|io
-operator|.
 name|IOException
 block|{
 comment|// Encoding suspended?
@@ -4819,10 +4587,6 @@ condition|)
 block|{
 throw|throw
 operator|new
-name|java
-operator|.
-name|io
-operator|.
 name|IOException
 argument_list|(
 literal|"Invalid character in Base64 data."
@@ -4847,10 +4611,6 @@ name|int
 name|len
 parameter_list|)
 throws|throws
-name|java
-operator|.
-name|io
-operator|.
 name|IOException
 block|{
 comment|// Encoding suspended?
@@ -4907,10 +4667,6 @@ name|void
 name|flushBase64
 parameter_list|()
 throws|throws
-name|java
-operator|.
-name|io
-operator|.
 name|IOException
 block|{
 if|if
@@ -4948,10 +4704,6 @@ else|else
 block|{
 throw|throw
 operator|new
-name|java
-operator|.
-name|io
-operator|.
 name|IOException
 argument_list|(
 literal|"Base64 input not properly padded."
@@ -4966,10 +4718,6 @@ name|void
 name|close
 parameter_list|()
 throws|throws
-name|java
-operator|.
-name|io
-operator|.
 name|IOException
 block|{
 comment|// 1. Ensure that pending characters are written
@@ -4998,10 +4746,6 @@ name|void
 name|suspendEncoding
 parameter_list|()
 throws|throws
-name|java
-operator|.
-name|io
-operator|.
 name|IOException
 block|{
 name|flushBase64

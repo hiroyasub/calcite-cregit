@@ -294,11 +294,16 @@ specifier|public
 class|class
 name|JdbcRules
 block|{
+specifier|private
+name|JdbcRules
+parameter_list|()
+block|{
+block|}
 specifier|protected
 specifier|static
 specifier|final
 name|Logger
-name|tracer
+name|LOGGER
 init|=
 name|EigenbaseTrace
 operator|.
@@ -753,6 +758,7 @@ name|getFieldCount
 argument_list|()
 return|;
 block|}
+comment|/** Abstract base class for rule that converts to JDBC. */
 specifier|abstract
 specifier|static
 class|class
@@ -805,6 +811,7 @@ name|out
 expr_stmt|;
 block|}
 block|}
+comment|/** Rule that converts a join to JDBC. */
 specifier|private
 specifier|static
 class|class
@@ -975,7 +982,7 @@ name|InvalidRelException
 name|e
 parameter_list|)
 block|{
-name|tracer
+name|LOGGER
 operator|.
 name|warning
 argument_list|(
@@ -991,6 +998,7 @@ return|;
 block|}
 block|}
 block|}
+comment|/** Join operator implemented in JDBC convention. */
 specifier|public
 specifier|static
 class|class
@@ -1731,11 +1739,12 @@ name|ProjectRelBase
 operator|.
 name|Flags
 operator|.
-name|Boxed
+name|BOXED
 argument_list|)
 return|;
 block|}
 block|}
+comment|/** Calc operator implemented in JDBC convention. */
 specifier|public
 specifier|static
 class|class
@@ -2225,7 +2234,7 @@ name|ProjectRelBase
 operator|.
 name|Flags
 operator|.
-name|Boxed
+name|BOXED
 argument_list|)
 return|;
 block|}
@@ -2802,7 +2811,7 @@ name|InvalidRelException
 name|e
 parameter_list|)
 block|{
-name|tracer
+name|LOGGER
 operator|.
 name|warning
 argument_list|(
@@ -2818,6 +2827,7 @@ return|;
 block|}
 block|}
 block|}
+comment|/** Aggregate operator implemented in JDBC convention. */
 specifier|public
 specifier|static
 class|class
@@ -3228,6 +3238,7 @@ argument_list|)
 return|;
 block|}
 block|}
+comment|/** Sort operator implemented in JDBC convention. */
 specifier|public
 specifier|static
 class|class
@@ -3603,6 +3614,7 @@ argument_list|)
 return|;
 block|}
 block|}
+comment|/** Union operator implemented in JDBC convention. */
 specifier|public
 specifier|static
 class|class
@@ -3837,6 +3849,7 @@ argument_list|)
 return|;
 block|}
 block|}
+comment|/** Intersect operator implemented in JDBC convention. */
 specifier|public
 specifier|static
 class|class
@@ -4045,6 +4058,7 @@ argument_list|)
 return|;
 block|}
 block|}
+comment|/** Minus operator implemented in JDBC convention. */
 specifier|public
 specifier|static
 class|class
@@ -4151,6 +4165,7 @@ argument_list|)
 return|;
 block|}
 block|}
+comment|/** Rule that converts a table-modification to JDBC. */
 specifier|public
 specifier|static
 class|class
@@ -4291,6 +4306,7 @@ argument_list|)
 return|;
 block|}
 block|}
+comment|/** Table-modification operator implemented in JDBC convention. */
 specifier|public
 specifier|static
 class|class
@@ -4491,6 +4507,7 @@ throw|;
 comment|// TODO:
 block|}
 block|}
+comment|/** Rule that converts a values operator to JDBC. */
 specifier|public
 specifier|static
 class|class
@@ -4571,6 +4588,7 @@ argument_list|)
 return|;
 block|}
 block|}
+comment|/** Values operator implemented in JDBC convention. */
 specifier|public
 specifier|static
 class|class

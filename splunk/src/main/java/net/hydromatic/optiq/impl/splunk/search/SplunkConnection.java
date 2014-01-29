@@ -1617,14 +1617,12 @@ operator|.
 name|getResultCount
 argument_list|()
 argument_list|,
-operator|(
 name|System
 operator|.
 name|currentTimeMillis
 argument_list|()
 operator|-
 name|start
-operator|)
 argument_list|)
 expr_stmt|;
 block|}

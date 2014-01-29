@@ -820,7 +820,6 @@ name|print
 argument_list|(
 operator|(
 operator|(
-operator|(
 name|ByteString
 operator|)
 name|value
@@ -830,7 +829,6 @@ name|toString
 argument_list|(
 literal|16
 argument_list|)
-operator|)
 argument_list|)
 expr_stmt|;
 name|pw
@@ -1009,11 +1007,9 @@ name|value
 parameter_list|)
 block|{
 assert|assert
-operator|(
 name|value
 operator|instanceof
 name|Calendar
-operator|)
 assert|;
 name|datetime
 operator|.

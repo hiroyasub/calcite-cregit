@@ -1165,7 +1165,6 @@ comment|// 1. change the collations field to reference the new input.
 comment|//
 comment|// SortRel itself should not reference cor vars.
 assert|assert
-operator|(
 operator|!
 name|mapRefRelToCorVar
 operator|.
@@ -1173,7 +1172,6 @@ name|containsKey
 argument_list|(
 name|rel
 argument_list|)
-operator|)
 assert|;
 comment|// SortRel only references field positions in collations field.
 comment|// The collations field in the newRel now need to refer to the
@@ -1343,7 +1341,6 @@ comment|// 3. Change aggCalls to reference the new ProjectRel.
 comment|//
 comment|// AggregaterRel itself should not reference cor vars.
 assert|assert
-operator|(
 operator|!
 name|mapRefRelToCorVar
 operator|.
@@ -1351,7 +1348,6 @@ name|containsKey
 argument_list|(
 name|rel
 argument_list|)
-operator|)
 assert|;
 name|RelNode
 name|oldChildRel
@@ -1397,11 +1393,9 @@ name|newChildRel
 argument_list|)
 decl_stmt|;
 assert|assert
-operator|(
 name|childMapOldToNewOutputPos
 operator|!=
 literal|null
-operator|)
 assert|;
 comment|// map from newChildRel
 name|Map
@@ -2126,11 +2120,9 @@ name|newChildRel
 argument_list|)
 decl_stmt|;
 assert|assert
-operator|(
 name|childMapOldToNewOutputPos
 operator|!=
 literal|null
-operator|)
 assert|;
 name|Map
 argument_list|<
@@ -2558,11 +2550,9 @@ literal|0
 argument_list|)
 expr_stmt|;
 assert|assert
-operator|(
 name|oldInputRel
 operator|!=
 literal|null
-operator|)
 assert|;
 name|newInputRel
 operator|=
@@ -2574,11 +2564,9 @@ name|oldInputRel
 argument_list|)
 expr_stmt|;
 assert|assert
-operator|(
 name|newInputRel
 operator|!=
 literal|null
-operator|)
 assert|;
 if|if
 condition|(
@@ -2629,11 +2617,9 @@ name|newInputRel
 argument_list|)
 decl_stmt|;
 assert|assert
-operator|(
 name|mapOldToNewOutputPos
 operator|!=
 literal|null
-operator|)
 assert|;
 name|int
 name|newCorVarOffset
@@ -2723,11 +2709,9 @@ literal|0
 argument_list|)
 expr_stmt|;
 assert|assert
-operator|(
 name|oldInputRel
 operator|!=
 literal|null
-operator|)
 assert|;
 name|newInputRel
 operator|=
@@ -2739,11 +2723,9 @@ name|oldInputRel
 argument_list|)
 expr_stmt|;
 assert|assert
-operator|(
 name|newInputRel
 operator|!=
 literal|null
-operator|)
 assert|;
 if|if
 condition|(
@@ -2933,11 +2915,9 @@ name|newInputRel
 argument_list|)
 decl_stmt|;
 assert|assert
-operator|(
 name|mapOldToNewOutputPos
 operator|!=
 literal|null
-operator|)
 assert|;
 name|newLocalOutputPos
 operator|=
@@ -2983,7 +2963,6 @@ argument_list|)
 condition|)
 block|{
 assert|assert
-operator|(
 name|mapCorVarToOutputPos
 operator|.
 name|get
@@ -2992,7 +2971,6 @@ name|corVar
 argument_list|)
 operator|==
 name|newOutputPos
-operator|)
 assert|;
 block|}
 name|mapCorVarToOutputPos
@@ -3019,7 +2997,6 @@ parameter_list|)
 block|{
 comment|// currently only handles one child input
 assert|assert
-operator|(
 name|rel
 operator|.
 name|getInputs
@@ -3029,7 +3006,6 @@ name|size
 argument_list|()
 operator|==
 literal|1
-operator|)
 assert|;
 name|RelNode
 name|oldChildRel
@@ -3067,11 +3043,9 @@ name|newChildRel
 argument_list|)
 decl_stmt|;
 assert|assert
-operator|(
 name|childMapOldToNewOutputPos
 operator|!=
 literal|null
-operator|)
 assert|;
 name|SortedMap
 argument_list|<
@@ -3302,11 +3276,9 @@ name|newChildRel
 argument_list|)
 decl_stmt|;
 assert|assert
-operator|(
 name|childMapOldToNewOutputPos
 operator|!=
 literal|null
-operator|)
 assert|;
 name|boolean
 name|produceCorVar
@@ -3537,11 +3509,9 @@ name|newLeftRel
 argument_list|)
 decl_stmt|;
 assert|assert
-operator|(
 name|leftChildMapOldToNewOutputPos
 operator|!=
 literal|null
-operator|)
 assert|;
 name|Map
 argument_list|<
@@ -3559,11 +3529,9 @@ name|newRightRel
 argument_list|)
 decl_stmt|;
 assert|assert
-operator|(
 name|rightChildMapOldToNewOutputPos
 operator|!=
 literal|null
-operator|)
 assert|;
 name|SortedMap
 argument_list|<
@@ -3578,7 +3546,6 @@ init|=
 name|rightChildMapCorVarToOutputPos
 decl_stmt|;
 assert|assert
-operator|(
 name|rel
 operator|.
 name|getCorrelations
@@ -3594,7 +3561,6 @@ argument_list|()
 operator|.
 name|size
 argument_list|()
-operator|)
 assert|;
 comment|// Change correlator rel into a join.
 comment|// Join all the correlated variables produced by this correlator rel
@@ -3871,7 +3837,6 @@ name|getFieldCount
 argument_list|()
 decl_stmt|;
 assert|assert
-operator|(
 name|rel
 operator|.
 name|getRowType
@@ -3880,12 +3845,9 @@ operator|.
 name|getFieldCount
 argument_list|()
 operator|==
-operator|(
 name|oldLeftFieldCount
 operator|+
 name|oldRightFieldCount
-operator|)
-operator|)
 assert|;
 comment|// Left input positions are not changed.
 name|mapOldToNewOutputPos
@@ -4100,11 +4062,9 @@ name|newLeftRel
 argument_list|)
 decl_stmt|;
 assert|assert
-operator|(
 name|leftChildMapOldToNewOutputPos
 operator|!=
 literal|null
-operator|)
 assert|;
 name|Map
 argument_list|<
@@ -4122,11 +4082,9 @@ name|newRightRel
 argument_list|)
 decl_stmt|;
 assert|assert
-operator|(
 name|rightChildMapOldToNewOutputPos
 operator|!=
 literal|null
-operator|)
 assert|;
 name|SortedMap
 argument_list|<
@@ -4245,7 +4203,6 @@ name|getFieldCount
 argument_list|()
 decl_stmt|;
 assert|assert
-operator|(
 name|rel
 operator|.
 name|getRowType
@@ -4254,12 +4211,9 @@ operator|.
 name|getFieldCount
 argument_list|()
 operator|==
-operator|(
 name|oldLeftFieldCount
 operator|+
 name|oldRightFieldCount
-operator|)
-operator|)
 assert|;
 comment|// Left input positions are not changed.
 name|mapOldToNewOutputPos
@@ -4440,11 +4394,9 @@ name|oldInputRef
 parameter_list|)
 block|{
 assert|assert
-operator|(
 name|currentRel
 operator|!=
 literal|null
-operator|)
 assert|;
 name|int
 name|oldOrdinal
@@ -4540,11 +4492,9 @@ name|n
 expr_stmt|;
 block|}
 assert|assert
-operator|(
 name|oldInputRel
 operator|!=
 literal|null
-operator|)
 assert|;
 name|RelNode
 name|newInputRel
@@ -4557,11 +4507,9 @@ name|oldInputRel
 argument_list|)
 decl_stmt|;
 assert|assert
-operator|(
 name|newInputRel
 operator|!=
 literal|null
-operator|)
 assert|;
 comment|// now oldOrdinal is relative to oldInputRel
 name|int
@@ -5065,11 +5013,9 @@ literal|null
 condition|)
 block|{
 assert|assert
-operator|(
 name|correlatedJoinKeys
 operator|!=
 literal|null
-operator|)
 assert|;
 comment|// check that all correlated refs in the filter condition are
 comment|// used in the join(as field access).
@@ -7846,11 +7792,9 @@ name|getChild
 argument_list|()
 expr_stmt|;
 assert|assert
-operator|(
 name|rightInputRel
 operator|instanceof
 name|HepRelVertex
-operator|)
 assert|;
 name|rightInputRel
 operator|=
@@ -7991,11 +7935,9 @@ literal|false
 argument_list|)
 decl_stmt|;
 assert|assert
-operator|(
 name|correlatedInputRef
 operator|instanceof
 name|RexInputRef
-operator|)
 assert|;
 name|correlatedInputRefJoinKeys
 operator|.

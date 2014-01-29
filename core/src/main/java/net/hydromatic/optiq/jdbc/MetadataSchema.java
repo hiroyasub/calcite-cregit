@@ -138,7 +138,7 @@ name|String
 argument_list|,
 name|Table
 argument_list|>
-name|tableMap
+name|TABLE_MAP
 init|=
 name|ImmutableMap
 operator|.
@@ -307,7 +307,7 @@ name|getTableMap
 parameter_list|()
 block|{
 return|return
-name|tableMap
+name|TABLE_MAP
 return|;
 block|}
 comment|/** Creates the data dictionary, also called the information schema. It is a    * schema called "metadata" that contains tables "TABLES", "COLUMNS" etc. */

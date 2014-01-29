@@ -507,6 +507,7 @@ argument_list|)
 throw|;
 block|}
 block|}
+comment|/** Table function that implements a view. It returns the operator    * tree of the view's SQL query. */
 specifier|static
 class|class
 name|ViewTableFunction

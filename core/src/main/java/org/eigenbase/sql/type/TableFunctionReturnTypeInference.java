@@ -343,12 +343,10 @@ expr_stmt|;
 block|}
 block|}
 assert|assert
-operator|(
 name|paramOrdinal
 operator|!=
 operator|-
 literal|1
-operator|)
 assert|;
 comment|// Translate to actual argument type.
 name|boolean
@@ -405,11 +403,9 @@ name|columnNames
 argument_list|)
 decl_stmt|;
 assert|assert
-operator|(
 name|parentCursorName
 operator|!=
 literal|null
-operator|)
 assert|;
 name|paramOrdinal
 operator|=
@@ -490,11 +486,9 @@ name|paramOrdinal
 argument_list|)
 expr_stmt|;
 assert|assert
-operator|(
 name|cursorType
 operator|!=
 literal|null
-operator|)
 assert|;
 block|}
 comment|// And expand. Function output is always nullable... except system

@@ -179,14 +179,12 @@ name|child
 parameter_list|)
 block|{
 assert|assert
-operator|(
 name|child
 operator|.
 name|getDataType
 argument_list|()
 operator|==
 name|dataType
-operator|)
 assert|;
 if|if
 condition|(
@@ -198,12 +196,10 @@ name|COMPLEMENT
 condition|)
 block|{
 assert|assert
-operator|(
 name|children
 operator|.
 name|isEmpty
 argument_list|()
-operator|)
 assert|;
 block|}
 name|children
@@ -314,14 +310,12 @@ name|COMPLEMENT
 condition|)
 block|{
 assert|assert
-operator|(
 name|children
 operator|.
 name|size
 argument_list|()
 operator|==
 literal|1
-operator|)
 assert|;
 name|SargExpr
 name|child
@@ -559,13 +553,11 @@ control|)
 block|{
 comment|// Empty intervals should have been previously filtered out.
 assert|assert
-operator|(
 operator|!
 name|interval
 operator|.
 name|isEmpty
 argument_list|()
-operator|)
 assert|;
 if|if
 condition|(
@@ -1246,11 +1238,9 @@ else|else
 block|{
 comment|// Source ends after target ends, so advance target.
 assert|assert
-operator|(
 name|c
 operator|>
 literal|0
-operator|)
 assert|;
 if|if
 condition|(
@@ -1486,11 +1476,9 @@ name|obj
 parameter_list|)
 block|{
 return|return
-operator|(
 name|obj
 operator|instanceof
 name|IntervalComparator
-operator|)
 return|;
 block|}
 block|}

@@ -48,7 +48,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Visitor which checks the validity of a {@link RexNode} expression.  *  *<p>There are two modes of operation:  *  *<ul>  *<li>Use<code>fail=true</code> to throw an {@link AssertionError} as soon as  * an invalid node is detected:  *  *<blockquote><code>RexNode node;<br/>  * RelDataType rowType;<br/>  * assert new RexChecker(rowType, true).isValid(node);</code></blockquote>  *  * This mode requires that assertions are enabled.</li>  *<li>Use<code>fail=false</code> to test for validity without throwing an  * error.  *  *<blockquote><code>RexNode node;<br/>  * RelDataType rowType;<br/>  * RexChecker checker = new RexChecker(rowType, false);<br/>  * node.accept(checker);<br/>  * if (!checker.valid) {<br/>  *&nbsp;&nbsp;&nbsp;...<br/>  * }</br></code></blockquote>  *</li>  *  * @see RexNode  */
+comment|/**  * Visitor which checks the validity of a {@link RexNode} expression.  *  *<p>There are two modes of operation:  *  *<ul>  *<li>Use<code>fail=true</code> to throw an {@link AssertionError} as soon as  * an invalid node is detected:  *  *<blockquote><code>RexNode node;<br/>  * RelDataType rowType;<br/>  * assert new RexChecker(rowType, true).isValid(node);</code></blockquote>  *  * This mode requires that assertions are enabled.</li>  *  *<li>Use<code>fail=false</code> to test for validity without throwing an  * error.  *  *<blockquote><code>RexNode node;<br/>  * RelDataType rowType;<br/>  * RexChecker checker = new RexChecker(rowType, false);<br/>  * node.accept(checker);<br/>  * if (!checker.valid) {<br/>  *&nbsp;&nbsp;&nbsp;...<br/>  * }</code></blockquote>  *</li>  *</ul>  *  * @see RexNode  */
 end_comment
 
 begin_class

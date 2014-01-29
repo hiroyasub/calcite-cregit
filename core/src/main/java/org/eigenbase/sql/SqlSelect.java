@@ -663,7 +663,6 @@ argument_list|()
 decl_stmt|;
 return|return
 operator|(
-operator|(
 literal|null
 operator|!=
 name|orderList
@@ -676,7 +675,6 @@ name|orderList
 operator|.
 name|size
 argument_list|()
-operator|)
 operator|)
 return|;
 block|}

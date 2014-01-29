@@ -169,7 +169,7 @@ comment|//~ Static fields/initializers -----------------------------------------
 specifier|static
 specifier|final
 name|Logger
-name|tracer
+name|LOGGER
 init|=
 name|EigenbaseTrace
 operator|.
@@ -2574,7 +2574,7 @@ parameter_list|)
 block|{
 if|if
 condition|(
-name|tracer
+name|LOGGER
 operator|.
 name|isLoggable
 argument_list|(
@@ -2584,7 +2584,7 @@ name|FINER
 argument_list|)
 condition|)
 block|{
-name|tracer
+name|LOGGER
 operator|.
 name|finer
 argument_list|(
@@ -2613,7 +2613,7 @@ argument_list|)
 decl_stmt|;
 if|if
 condition|(
-name|tracer
+name|LOGGER
 operator|.
 name|isLoggable
 argument_list|(
@@ -2623,7 +2623,7 @@ name|FINE
 argument_list|)
 condition|)
 block|{
-name|tracer
+name|LOGGER
 operator|.
 name|fine
 argument_list|(
@@ -3030,7 +3030,7 @@ argument_list|)
 decl_stmt|;
 if|if
 condition|(
-name|tracer
+name|LOGGER
 operator|.
 name|isLoggable
 argument_list|(
@@ -3040,7 +3040,7 @@ name|FINE
 argument_list|)
 condition|)
 block|{
-name|tracer
+name|LOGGER
 operator|.
 name|fine
 argument_list|(
@@ -3190,7 +3190,7 @@ argument_list|)
 decl_stmt|;
 if|if
 condition|(
-name|tracer
+name|LOGGER
 operator|.
 name|isLoggable
 argument_list|(
@@ -3200,7 +3200,7 @@ name|FINE
 argument_list|)
 condition|)
 block|{
-name|tracer
+name|LOGGER
 operator|.
 name|fine
 argument_list|(
@@ -3456,7 +3456,7 @@ argument_list|)
 expr_stmt|;
 if|if
 condition|(
-name|tracer
+name|LOGGER
 operator|.
 name|isLoggable
 argument_list|(
@@ -3466,7 +3466,7 @@ name|FINE
 argument_list|)
 condition|)
 block|{
-name|tracer
+name|LOGGER
 operator|.
 name|fine
 argument_list|(

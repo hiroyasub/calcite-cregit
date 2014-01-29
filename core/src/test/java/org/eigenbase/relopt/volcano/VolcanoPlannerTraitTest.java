@@ -270,7 +270,7 @@ name|addRelTraitDef
 argument_list|(
 name|ConventionTraitDef
 operator|.
-name|instance
+name|INSTANCE
 argument_list|)
 expr_stmt|;
 name|planner
@@ -429,7 +429,7 @@ name|getTrait
 argument_list|(
 name|ConventionTraitDef
 operator|.
-name|instance
+name|INSTANCE
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -545,7 +545,7 @@ name|addRelTraitDef
 argument_list|(
 name|ConventionTraitDef
 operator|.
-name|instance
+name|INSTANCE
 argument_list|)
 expr_stmt|;
 name|planner
@@ -704,7 +704,7 @@ name|getTrait
 argument_list|(
 name|ConventionTraitDef
 operator|.
-name|instance
+name|INSTANCE
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -758,7 +758,7 @@ name|getTrait
 argument_list|(
 name|ConventionTraitDef
 operator|.
-name|instance
+name|INSTANCE
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -2364,7 +2364,7 @@ name|cluster
 argument_list|,
 name|ConventionTraitDef
 operator|.
-name|instance
+name|INSTANCE
 argument_list|,
 name|child
 operator|.

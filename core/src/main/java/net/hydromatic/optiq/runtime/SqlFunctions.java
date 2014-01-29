@@ -129,6 +129,11 @@ argument_list|(
 literal|"0.0E0"
 argument_list|)
 decl_stmt|;
+specifier|private
+name|SqlFunctions
+parameter_list|()
+block|{
+block|}
 comment|/** SQL SUBSTRING(string FROM ... FOR ...) function. */
 specifier|public
 specifier|static
@@ -5948,7 +5953,7 @@ name|StringBuilder
 name|buf
 parameter_list|,
 name|int
-name|J
+name|julian
 parameter_list|)
 block|{
 comment|// this shifts the epoch back to astronomical year -4800 instead of the
@@ -5957,7 +5962,7 @@ comment|// calendar.
 name|int
 name|j
 init|=
-name|J
+name|julian
 operator|+
 literal|32044
 decl_stmt|;
@@ -6090,7 +6095,7 @@ operator|+
 literal|122
 decl_stmt|;
 name|int
-name|Y
+name|year
 init|=
 name|y
 operator|-
@@ -6105,7 +6110,7 @@ operator|/
 literal|12
 decl_stmt|;
 name|int
-name|M
+name|month
 init|=
 operator|(
 name|m
@@ -6118,7 +6123,7 @@ operator|+
 literal|1
 decl_stmt|;
 name|int
-name|D
+name|day
 init|=
 name|d
 operator|+
@@ -6128,7 +6133,7 @@ name|int4
 argument_list|(
 name|buf
 argument_list|,
-name|Y
+name|year
 argument_list|)
 expr_stmt|;
 name|buf
@@ -6142,7 +6147,7 @@ name|int2
 argument_list|(
 name|buf
 argument_list|,
-name|M
+name|month
 argument_list|)
 expr_stmt|;
 name|buf
@@ -6156,7 +6161,7 @@ name|int2
 argument_list|(
 name|buf
 argument_list|,
-name|D
+name|day
 argument_list|)
 expr_stmt|;
 block|}

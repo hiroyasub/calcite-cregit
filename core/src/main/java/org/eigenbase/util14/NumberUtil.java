@@ -743,9 +743,7 @@ name|isFloat
 parameter_list|)
 block|{
 return|return
-operator|(
 name|isFloat
-operator|)
 condition|?
 name|floatFormatter
 else|:

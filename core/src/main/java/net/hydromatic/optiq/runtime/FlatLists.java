@@ -34,6 +34,11 @@ specifier|public
 class|class
 name|FlatLists
 block|{
+specifier|private
+name|FlatLists
+parameter_list|()
+block|{
+block|}
 specifier|public
 specifier|static
 specifier|final
@@ -131,7 +136,7 @@ name|t
 parameter_list|)
 block|{
 return|return
-name|_flatList
+name|flatList_
 argument_list|(
 name|t
 argument_list|,
@@ -157,7 +162,7 @@ name|t
 parameter_list|)
 block|{
 return|return
-name|_flatList
+name|flatList_
 argument_list|(
 name|t
 argument_list|,
@@ -175,7 +180,7 @@ name|List
 argument_list|<
 name|T
 argument_list|>
-name|_flatList
+name|flatList_
 parameter_list|(
 name|T
 index|[]

@@ -381,7 +381,6 @@ decl_stmt|;
 name|boolean
 name|reverse
 init|=
-operator|(
 name|rexCall
 operator|.
 name|getOperator
@@ -390,7 +389,6 @@ operator|==
 name|SqlStdOperatorTable
 operator|.
 name|notOperator
-operator|)
 decl_stmt|;
 if|if
 condition|(
@@ -699,7 +697,7 @@ name|ProjectRel
 operator|.
 name|Flags
 operator|.
-name|Boxed
+name|BOXED
 argument_list|)
 argument_list|)
 expr_stmt|;

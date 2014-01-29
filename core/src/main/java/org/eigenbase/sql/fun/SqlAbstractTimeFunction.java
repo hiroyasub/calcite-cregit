@@ -221,11 +221,9 @@ expr_stmt|;
 block|}
 block|}
 assert|assert
-operator|(
 name|precision
 operator|>=
 literal|0
-operator|)
 assert|;
 if|if
 condition|(

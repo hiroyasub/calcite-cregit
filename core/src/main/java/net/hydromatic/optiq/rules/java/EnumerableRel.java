@@ -84,7 +84,7 @@ name|CUSTOM_NICE
 block|,
 comment|/** Consumer has no preferred representation. */
 name|ANY
-block|,;
+block|;
 specifier|public
 name|JavaRowFormat
 name|preferCustom

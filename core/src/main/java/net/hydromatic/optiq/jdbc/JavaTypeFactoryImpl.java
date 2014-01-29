@@ -1375,6 +1375,7 @@ name|syntheticType
 argument_list|)
 return|;
 block|}
+comment|/** Synthetic record type. */
 specifier|public
 specifier|static
 class|class
@@ -1486,6 +1487,7 @@ name|name
 return|;
 block|}
 block|}
+comment|/** Implementation of a field. */
 specifier|private
 specifier|static
 class|class

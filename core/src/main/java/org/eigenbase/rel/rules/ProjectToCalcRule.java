@@ -93,7 +93,7 @@ specifier|public
 specifier|static
 specifier|final
 name|ProjectToCalcRule
-name|instance
+name|INSTANCE
 init|=
 operator|new
 name|ProjectToCalcRule

@@ -2009,6 +2009,7 @@ argument_list|)
 throw|;
 block|}
 block|}
+comment|/** Result of implementing a node. */
 specifier|public
 class|class
 name|Result
@@ -2513,6 +2514,7 @@ argument_list|)
 return|;
 block|}
 block|}
+comment|/** Builder. */
 specifier|public
 class|class
 name|Builder

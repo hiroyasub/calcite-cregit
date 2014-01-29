@@ -113,18 +113,6 @@ name|org
 operator|.
 name|eigenbase
 operator|.
-name|relopt
-operator|.
-name|RelImplementor
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
 name|rex
 operator|.
 name|RexBuilder
@@ -204,7 +192,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Subclass of {@link RelImplementor} for relational operators  * of one of the {@link EnumerableConvention} calling  * conventions.  */
+comment|/**  * Subclass of {@link org.eigenbase.relopt.RelImplementor} for relational  * operators of {@link EnumerableConvention} calling convention.  */
 end_comment
 
 begin_class
@@ -364,7 +352,7 @@ comment|// member variable, rename the "root0" parameter as "root", and referenc
 comment|// directly from inner classes.
 specifier|final
 name|ParameterExpression
-name|_root0
+name|root0_
 init|=
 name|Expressions
 operator|.
@@ -409,7 +397,7 @@ name|DataContext
 operator|.
 name|ROOT
 argument_list|,
-name|_root0
+name|root0_
 argument_list|)
 argument_list|)
 argument_list|)
@@ -469,7 +457,7 @@ name|Expressions
 operator|.
 name|list
 argument_list|(
-name|_root0
+name|root0_
 argument_list|)
 argument_list|,
 name|block

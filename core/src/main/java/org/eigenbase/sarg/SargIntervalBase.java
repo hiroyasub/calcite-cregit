@@ -188,7 +188,6 @@ name|isRange
 parameter_list|()
 block|{
 return|return
-operator|(
 operator|!
 name|isPoint
 argument_list|()
@@ -196,7 +195,6 @@ operator|&&
 operator|!
 name|isEmpty
 argument_list|()
-operator|)
 return|;
 block|}
 comment|/**    * @return whether this represents the universal set    */

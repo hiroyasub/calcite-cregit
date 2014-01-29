@@ -498,7 +498,7 @@ name|INCLUDE
 argument_list|,
 name|SETUP_STATE
 argument_list|)
-block|,           }
+block|,         }
 argument_list|)
 block|,
 operator|new
@@ -560,7 +560,7 @@ name|INCLUDE
 argument_list|,
 name|CLEANUP_STATE
 argument_list|)
-block|,           }
+block|,         }
 argument_list|)
 block|,
 operator|new
@@ -1704,9 +1704,7 @@ block|{
 name|String
 name|sql
 init|=
-operator|(
 name|command
-operator|)
 operator|.
 name|trim
 argument_list|()
@@ -2233,9 +2231,7 @@ name|e
 parameter_list|)
 block|{
 assert|assert
-operator|(
 literal|false
-operator|)
 operator|:
 literal|"IOException via StringReader"
 assert|;
@@ -2257,9 +2253,7 @@ name|e
 parameter_list|)
 block|{
 assert|assert
-operator|(
 literal|false
-operator|)
 operator|:
 literal|"IOException via StringReader"
 assert|;
@@ -2373,9 +2367,7 @@ name|e
 parameter_list|)
 block|{
 assert|assert
-operator|(
 literal|false
-operator|)
 operator|:
 literal|"IOException via StringWriter"
 assert|;
@@ -2808,14 +2800,12 @@ name|threadId
 parameter_list|)
 block|{
 assert|assert
-operator|(
 name|threadBufferedWriters
 operator|.
 name|containsKey
 argument_list|(
 name|threadId
 argument_list|)
-operator|)
 assert|;
 return|return
 name|threadBufferedWriters
@@ -2923,9 +2913,7 @@ name|e
 parameter_list|)
 block|{
 assert|assert
-operator|(
 literal|false
-operator|)
 operator|:
 literal|"IOException via StringReader"
 assert|;
@@ -2947,9 +2935,7 @@ name|e
 parameter_list|)
 block|{
 assert|assert
-operator|(
 literal|false
-operator|)
 operator|:
 literal|"IOException via StringReader"
 assert|;
@@ -3035,9 +3021,7 @@ name|e
 parameter_list|)
 block|{
 assert|assert
-operator|(
 literal|false
-operator|)
 operator|:
 literal|"IOException on StringWriter"
 assert|;
@@ -3250,7 +3234,6 @@ name|put
 argument_list|(
 name|sym
 argument_list|,
-operator|(
 name|val
 operator|==
 literal|null
@@ -3258,7 +3241,6 @@ condition|?
 literal|""
 else|:
 name|val
-operator|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -4126,11 +4108,9 @@ name|command
 argument_list|)
 decl_stmt|;
 assert|assert
-operator|(
 name|nextState
 operator|!=
 literal|null
-operator|)
 assert|;
 if|if
 condition|(
@@ -4346,9 +4326,7 @@ block|}
 else|else
 block|{
 assert|assert
-operator|(
 literal|false
-operator|)
 assert|;
 block|}
 block|}
@@ -4420,11 +4398,9 @@ argument_list|)
 condition|)
 block|{
 assert|assert
-operator|(
 name|lockstep
 operator|==
 literal|null
-operator|)
 operator|:
 name|LOCKSTEP
 operator|+
@@ -4457,11 +4433,9 @@ argument_list|)
 condition|)
 block|{
 assert|assert
-operator|(
 name|lockstep
 operator|==
 literal|null
-operator|)
 operator|:
 name|LOCKSTEP
 operator|+
@@ -4494,11 +4468,9 @@ argument_list|)
 condition|)
 block|{
 assert|assert
-operator|(
 name|disabled
 operator|==
 literal|null
-operator|)
 operator|:
 name|DISABLED
 operator|+
@@ -4531,11 +4503,9 @@ argument_list|)
 condition|)
 block|{
 assert|assert
-operator|(
 name|disabled
 operator|==
 literal|null
-operator|)
 operator|:
 name|DISABLED
 operator|+
@@ -4744,11 +4714,9 @@ name|repeatCount
 argument_list|)
 expr_stmt|;
 assert|assert
-operator|(
 name|repeatCount
 operator|>
 literal|0
-operator|)
 operator|:
 literal|"Repeat count must be> 0"
 assert|;
@@ -4884,9 +4852,7 @@ block|}
 else|else
 block|{
 assert|assert
-operator|(
 literal|false
-operator|)
 assert|;
 block|}
 block|}
@@ -4979,11 +4945,9 @@ name|millisStr
 argument_list|)
 decl_stmt|;
 assert|assert
-operator|(
 name|millis
 operator|>=
 literal|0L
-operator|)
 operator|:
 literal|"Timeout must be>= 0"
 assert|;
@@ -5115,11 +5079,9 @@ name|limitStr
 argument_list|)
 decl_stmt|;
 assert|assert
-operator|(
 name|limit
 operator|>=
 literal|0
-operator|)
 operator|:
 literal|"Rowlimit must be>= 0"
 assert|;
@@ -5840,11 +5802,9 @@ name|arg
 argument_list|)
 expr_stmt|;
 assert|assert
-operator|(
 name|millis
 operator|>=
 literal|0L
-operator|)
 operator|:
 literal|"Fetch timeout must be>= 0"
 assert|;
@@ -5970,11 +5930,9 @@ name|arg
 argument_list|)
 decl_stmt|;
 assert|assert
-operator|(
 name|millis
 operator|>=
 literal|0L
-operator|)
 operator|:
 literal|"Sleep timeout must be>= 0"
 assert|;
@@ -6294,11 +6252,9 @@ name|state
 parameter_list|)
 block|{
 assert|assert
-operator|(
 name|state
 operator|!=
 literal|null
-operator|)
 assert|;
 for|for
 control|(
@@ -6425,11 +6381,9 @@ name|state
 parameter_list|)
 block|{
 assert|assert
-operator|(
 name|state
 operator|!=
 literal|null
-operator|)
 assert|;
 for|for
 control|(
@@ -7685,11 +7639,9 @@ throws|throws
 name|SQLException
 block|{
 assert|assert
-operator|(
 name|timeout
 operator|>=
 literal|0
-operator|)
 assert|;
 if|if
 condition|(
@@ -7700,11 +7652,9 @@ condition|)
 block|{
 comment|// FIX: call setQueryTimeoutMillis() when available.
 assert|assert
-operator|(
 name|timeout
 operator|>=
 literal|1000
-operator|)
 operator|:
 literal|"timeout too short"
 assert|;
@@ -7797,11 +7747,9 @@ throws|throws
 name|SQLException
 block|{
 assert|assert
-operator|(
 name|rowLimit
 operator|>=
 literal|0
-operator|)
 assert|;
 if|if
 condition|(
@@ -8241,11 +8189,9 @@ decl_stmt|;
 name|boolean
 name|timeoutSet
 init|=
-operator|(
 name|timeout
 operator|>=
 literal|0
-operator|)
 decl_stmt|;
 try|try
 block|{
@@ -8831,11 +8777,9 @@ block|{
 name|boolean
 name|withTimeout
 init|=
-operator|(
 name|timeout
 operator|>=
 literal|0
-operator|)
 decl_stmt|;
 name|boolean
 name|timedOut
@@ -8846,7 +8790,8 @@ name|long
 name|startTime
 init|=
 literal|0
-decl_stmt|,
+decl_stmt|;
+name|long
 name|endTime
 init|=
 literal|0
@@ -9208,13 +9153,11 @@ name|startTime
 argument_list|,
 name|startTime
 argument_list|,
-operator|(
 name|timedOut
 condition|?
 literal|"timeout"
 else|:
 literal|"eos"
-operator|)
 argument_list|,
 name|endTime
 argument_list|,
@@ -9245,11 +9188,9 @@ name|timeout
 expr_stmt|;
 block|}
 assert|assert
-operator|(
 name|dt
 operator|>=
 literal|0
-operator|)
 assert|;
 name|out
 operator|.

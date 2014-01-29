@@ -248,7 +248,7 @@ name|addRule
 argument_list|(
 name|PushFilterPastSetOpRule
 operator|.
-name|instance
+name|INSTANCE
 argument_list|)
 expr_stmt|;
 name|planner
@@ -257,7 +257,7 @@ name|addRule
 argument_list|(
 name|RemoveTrivialProjectRule
 operator|.
-name|instance
+name|INSTANCE
 argument_list|)
 expr_stmt|;
 block|}
