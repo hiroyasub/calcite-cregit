@@ -94,9 +94,9 @@ literal|30
 argument_list|,
 literal|true
 argument_list|,
-name|SqlTypeStrategies
+name|ReturnTypes
 operator|.
-name|rtiNullableBoolean
+name|BOOLEAN_NULLABLE
 argument_list|,
 literal|null
 argument_list|,
@@ -119,9 +119,9 @@ block|{
 if|if
 condition|(
 operator|!
-name|SqlTypeStrategies
+name|OperandTypes
 operator|.
-name|otcMultiset
+name|MULTISET
 operator|.
 name|checkSingleOperandType
 argument_list|(

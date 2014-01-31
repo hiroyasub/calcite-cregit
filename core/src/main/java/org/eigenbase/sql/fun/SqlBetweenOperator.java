@@ -417,9 +417,9 @@ argument_list|)
 argument_list|)
 decl_stmt|;
 return|return
-name|SqlTypeStrategies
+name|ReturnTypes
 operator|.
-name|rtiNullableBoolean
+name|BOOLEAN_NULLABLE
 operator|.
 name|inferReturnType
 argument_list|(

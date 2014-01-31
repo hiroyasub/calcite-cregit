@@ -68,15 +68,15 @@ name|SqlKind
 operator|.
 name|OTHER_FUNCTION
 argument_list|,
-name|SqlTypeStrategies
+name|ReturnTypes
 operator|.
-name|rtiNullableInteger
+name|INTEGER_NULLABLE
 argument_list|,
 literal|null
 argument_list|,
-name|SqlTypeStrategies
+name|OperandTypes
 operator|.
-name|otcStringSameX2
+name|STRING_SAME_SAME
 argument_list|,
 name|SqlFunctionCategory
 operator|.
@@ -191,9 +191,9 @@ parameter_list|)
 block|{
 comment|// check that the two operands are of same type.
 return|return
-name|SqlTypeStrategies
+name|OperandTypes
 operator|.
-name|otcSameX2
+name|SAME_SAME
 operator|.
 name|checkOperandTypes
 argument_list|(

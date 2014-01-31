@@ -71,9 +71,9 @@ literal|null
 argument_list|,
 literal|null
 argument_list|,
-name|SqlTypeStrategies
+name|OperandTypes
 operator|.
-name|otcMultisetOrRecordTypeMultiset
+name|MULTISET_OR_RECORD_MULTISET
 argument_list|)
 expr_stmt|;
 block|}

@@ -97,17 +97,17 @@ specifier|final
 name|SqlOperandTypeChecker
 name|OTC_CUSTOM
 init|=
-name|SqlTypeStrategies
+name|OperandTypes
 operator|.
 name|or
 argument_list|(
-name|SqlTypeStrategies
+name|OperandTypes
 operator|.
-name|otcPositiveIntLit
+name|POSITIVE_INTEGER_LITERAL
 argument_list|,
-name|SqlTypeStrategies
+name|OperandTypes
 operator|.
-name|otcNiladic
+name|NILADIC
 argument_list|)
 decl_stmt|;
 comment|//~ Instance fields --------------------------------------------------------

@@ -107,9 +107,9 @@ literal|2
 argument_list|,
 literal|true
 argument_list|,
-name|SqlTypeStrategies
+name|ReturnTypes
 operator|.
-name|rtiScope
+name|SCOPE
 argument_list|,
 literal|null
 argument_list|,

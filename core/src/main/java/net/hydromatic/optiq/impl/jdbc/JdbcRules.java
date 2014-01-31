@@ -221,7 +221,7 @@ name|sql
 operator|.
 name|type
 operator|.
-name|SqlTypeStrategies
+name|*
 import|;
 end_import
 
@@ -3508,17 +3508,17 @@ name|SqlKind
 operator|.
 name|OTHER_FUNCTION
 argument_list|,
-name|SqlTypeStrategies
+name|ReturnTypes
 operator|.
-name|rtiBoolean
+name|BOOLEAN
 argument_list|,
-name|SqlTypeStrategies
+name|InferTypes
 operator|.
-name|otiFirstKnown
+name|FIRST_KNOWN
 argument_list|,
-name|SqlTypeStrategies
+name|OperandTypes
 operator|.
-name|otcAny
+name|ANY
 argument_list|,
 name|SqlFunctionCategory
 operator|.

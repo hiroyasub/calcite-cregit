@@ -202,9 +202,9 @@ literal|null
 argument_list|,
 literal|null
 argument_list|,
-name|SqlTypeStrategies
+name|OperandTypes
 operator|.
-name|otcNumeric
+name|NUMERIC
 argument_list|,
 name|SqlFunctionCategory
 operator|.
@@ -272,9 +272,9 @@ literal|null
 argument_list|,
 literal|null
 argument_list|,
-name|SqlTypeStrategies
+name|OperandTypes
 operator|.
-name|otcVariadic
+name|VARIADIC
 argument_list|,
 name|SqlFunctionCategory
 operator|.

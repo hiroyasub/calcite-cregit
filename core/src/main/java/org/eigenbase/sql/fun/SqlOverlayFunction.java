@@ -59,17 +59,17 @@ specifier|final
 name|SqlOperandTypeChecker
 name|OTC_CUSTOM
 init|=
-name|SqlTypeStrategies
+name|OperandTypes
 operator|.
 name|or
 argument_list|(
-name|SqlTypeStrategies
+name|OperandTypes
 operator|.
-name|otcStringX2Int
+name|STRING_STRING_INTEGER
 argument_list|,
-name|SqlTypeStrategies
+name|OperandTypes
 operator|.
-name|otcStringX2IntX2
+name|STRING_STRING_INTEGER_INTEGER
 argument_list|)
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
@@ -85,9 +85,9 @@ name|SqlKind
 operator|.
 name|OTHER_FUNCTION
 argument_list|,
-name|SqlTypeStrategies
+name|ReturnTypes
 operator|.
-name|rtiNullableVaryingDyadicStringSumPrecision
+name|DYADIC_STRING_SUM_PRECISION_NULLABLE_VARYING
 argument_list|,
 literal|null
 argument_list|,

@@ -73,6 +73,20 @@ name|Util
 import|;
 end_import
 
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|ImmutableList
+import|;
+end_import
+
 begin_comment
 comment|/**  * Parameter type-checking strategy where all operand types must be the same.  */
 end_comment
@@ -471,9 +485,9 @@ operator|==
 operator|-
 literal|1
 condition|?
-name|Arrays
+name|ImmutableList
 operator|.
-name|asList
+name|of
 argument_list|(
 literal|"EQUIVALENT_TYPE"
 argument_list|,

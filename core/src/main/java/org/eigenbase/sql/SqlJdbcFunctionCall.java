@@ -338,9 +338,9 @@ literal|null
 argument_list|,
 literal|null
 argument_list|,
-name|SqlTypeStrategies
+name|OperandTypes
 operator|.
-name|otcVariadic
+name|VARIADIC
 argument_list|,
 literal|null
 argument_list|)

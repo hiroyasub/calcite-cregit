@@ -3084,9 +3084,9 @@ operator|.
 name|getOperandTypeChecker
 argument_list|()
 operator|==
-name|SqlTypeStrategies
+name|OperandTypes
 operator|.
-name|otcComparableUnorderedX2
+name|COMPARABLE_UNORDERED_COMPARABLE_UNORDERED
 condition|)
 block|{
 name|ensureSameType

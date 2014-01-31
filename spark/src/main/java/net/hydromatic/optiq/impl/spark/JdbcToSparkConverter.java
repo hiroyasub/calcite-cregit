@@ -207,7 +207,7 @@ name|cluster
 argument_list|,
 name|ConventionTraitDef
 operator|.
-name|instance
+name|INSTANCE
 argument_list|,
 name|traits
 argument_list|,

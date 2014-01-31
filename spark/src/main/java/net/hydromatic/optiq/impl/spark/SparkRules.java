@@ -317,9 +317,15 @@ end_comment
 
 begin_class
 specifier|public
+specifier|abstract
 class|class
 name|SparkRules
 block|{
+specifier|private
+name|SparkRules
+parameter_list|()
+block|{
+block|}
 specifier|public
 specifier|static
 name|List
@@ -1084,7 +1090,7 @@ name|ProjectRelBase
 operator|.
 name|Flags
 operator|.
-name|Boxed
+name|BOXED
 argument_list|)
 return|;
 block|}
@@ -1255,6 +1261,9 @@ literal|0
 decl_stmt|;
 return|return
 name|planner
+operator|.
+name|getCostFactory
+argument_list|()
 operator|.
 name|makeCost
 argument_list|(
@@ -1841,6 +1850,7 @@ argument_list|)
 return|;
 block|}
 block|}
+comment|//CHECKSTYLE: IGNORE 1
 argument_list|)
 operator|.
 name|map

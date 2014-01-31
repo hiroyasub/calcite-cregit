@@ -190,16 +190,16 @@ name|SqlKind
 operator|.
 name|OTHER_FUNCTION
 argument_list|,
-name|SqlTypeStrategies
+name|ReturnTypes
 operator|.
-name|rtiBoolean
+name|BOOLEAN
 argument_list|,
 comment|// returns boolean since we'll AND it
 literal|null
 argument_list|,
-name|SqlTypeStrategies
+name|OperandTypes
 operator|.
-name|otcNumeric
+name|NUMERIC
 argument_list|,
 comment|// takes a numeric param
 name|SqlFunctionCategory

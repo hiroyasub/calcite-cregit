@@ -105,9 +105,9 @@ decl_stmt|;
 if|if
 condition|(
 operator|!
-name|SqlTypeStrategies
+name|OperandTypes
 operator|.
-name|otcMultiset
+name|MULTISET
 operator|.
 name|checkSingleOperandType
 argument_list|(
@@ -138,9 +138,9 @@ decl_stmt|;
 if|if
 condition|(
 operator|!
-name|SqlTypeStrategies
+name|OperandTypes
 operator|.
-name|otcMultiset
+name|MULTISET
 operator|.
 name|checkSingleOperandType
 argument_list|(

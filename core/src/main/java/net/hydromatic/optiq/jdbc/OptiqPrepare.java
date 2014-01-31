@@ -541,7 +541,7 @@ name|clazz
 operator|.
 name|getMethod
 argument_list|(
-literal|"INSTANCE"
+literal|"instance"
 argument_list|)
 decl_stmt|;
 return|return

@@ -177,9 +177,9 @@ literal|true
 argument_list|,
 literal|null
 argument_list|,
-name|SqlTypeStrategies
+name|InferTypes
 operator|.
-name|otiReturnType
+name|RETURN_TYPE
 argument_list|,
 literal|null
 argument_list|)

@@ -105,11 +105,11 @@ specifier|final
 name|SqlSingleOperandTypeChecker
 name|ARRAY_OR_MAP
 init|=
-name|SqlTypeStrategies
+name|OperandTypes
 operator|.
 name|or
 argument_list|(
-name|SqlTypeStrategies
+name|OperandTypes
 operator|.
 name|family
 argument_list|(
@@ -118,7 +118,7 @@ operator|.
 name|ARRAY
 argument_list|)
 argument_list|,
-name|SqlTypeStrategies
+name|OperandTypes
 operator|.
 name|family
 argument_list|(
@@ -127,7 +127,7 @@ operator|.
 name|MAP
 argument_list|)
 argument_list|,
-name|SqlTypeStrategies
+name|OperandTypes
 operator|.
 name|family
 argument_list|(
@@ -466,7 +466,7 @@ case|case
 name|ARRAY
 case|:
 return|return
-name|SqlTypeStrategies
+name|OperandTypes
 operator|.
 name|family
 argument_list|(
@@ -479,7 +479,7 @@ case|case
 name|MAP
 case|:
 return|return
-name|SqlTypeStrategies
+name|OperandTypes
 operator|.
 name|family
 argument_list|(
@@ -499,11 +499,11 @@ case|case
 name|ANY
 case|:
 return|return
-name|SqlTypeStrategies
+name|OperandTypes
 operator|.
 name|or
 argument_list|(
-name|SqlTypeStrategies
+name|OperandTypes
 operator|.
 name|family
 argument_list|(
@@ -512,7 +512,7 @@ operator|.
 name|INTEGER
 argument_list|)
 argument_list|,
-name|SqlTypeStrategies
+name|OperandTypes
 operator|.
 name|family
 argument_list|(

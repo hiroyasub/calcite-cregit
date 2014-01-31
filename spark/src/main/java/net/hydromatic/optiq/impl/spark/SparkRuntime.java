@@ -119,9 +119,15 @@ end_comment
 
 begin_class
 specifier|public
+specifier|abstract
 class|class
 name|SparkRuntime
 block|{
+specifier|private
+name|SparkRuntime
+parameter_list|()
+block|{
+block|}
 comment|/** Converts an array into an RDD. */
 specifier|public
 specifier|static
@@ -255,7 +261,7 @@ name|JavaSparkContext
 operator|)
 name|SparkHandlerImpl
 operator|.
-name|INSTANCE
+name|instance
 argument_list|()
 operator|.
 name|sparkContext
@@ -264,8 +270,8 @@ return|;
 block|}
 comment|/** Combines linq4j {@link net.hydromatic.linq4j.function.Function}    * and Spark {@link org.apache.spark.api.java.function.FlatMapFunction}. */
 specifier|public
-specifier|static
 specifier|abstract
+specifier|static
 class|class
 name|OptiqFlatMapFunction
 parameter_list|<

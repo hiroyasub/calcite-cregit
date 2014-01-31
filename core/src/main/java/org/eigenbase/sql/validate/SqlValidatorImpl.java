@@ -6232,9 +6232,9 @@ operator|.
 name|getSqlIdentifier
 argument_list|()
 argument_list|,
-name|ExplicitReturnTypeInference
+name|ReturnTypes
 operator|.
-name|of
+name|explicit
 argument_list|(
 name|type
 argument_list|)

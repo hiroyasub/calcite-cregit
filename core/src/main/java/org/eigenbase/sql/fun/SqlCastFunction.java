@@ -127,9 +127,9 @@ name|CAST
 argument_list|,
 literal|null
 argument_list|,
-name|SqlTypeStrategies
+name|InferTypes
 operator|.
-name|otiFirstKnown
+name|FIRST_KNOWN
 argument_list|,
 literal|null
 argument_list|,

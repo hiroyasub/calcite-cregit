@@ -115,13 +115,13 @@ literal|false
 argument_list|,
 literal|null
 argument_list|,
-name|SqlTypeStrategies
+name|InferTypes
 operator|.
-name|otiReturnType
+name|RETURN_TYPE
 argument_list|,
-name|SqlTypeStrategies
+name|OperandTypes
 operator|.
-name|otcVariadic
+name|VARIADIC
 argument_list|)
 expr_stmt|;
 block|}

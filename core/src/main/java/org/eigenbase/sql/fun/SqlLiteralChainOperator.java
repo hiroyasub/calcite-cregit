@@ -143,17 +143,17 @@ argument_list|,
 literal|true
 argument_list|,
 comment|// precedence tighter than the * and || operators
-name|SqlTypeStrategies
+name|ReturnTypes
 operator|.
-name|rtiFirstArgType
+name|ARG0
 argument_list|,
-name|SqlTypeStrategies
+name|InferTypes
 operator|.
-name|otiFirstKnown
+name|FIRST_KNOWN
 argument_list|,
-name|SqlTypeStrategies
+name|OperandTypes
 operator|.
-name|otcVariadic
+name|VARIADIC
 argument_list|)
 expr_stmt|;
 block|}
