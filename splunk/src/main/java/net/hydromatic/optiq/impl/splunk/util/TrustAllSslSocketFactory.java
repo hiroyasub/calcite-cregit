@@ -86,6 +86,7 @@ name|SocketFactoryImpl
 block|{
 specifier|private
 specifier|static
+specifier|final
 name|TrustAllSslSocketFactory
 name|DEFAULT
 init|=

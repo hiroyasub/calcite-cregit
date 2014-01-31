@@ -134,7 +134,7 @@ name|otcNumeric
 argument_list|,
 name|SqlFunctionCategory
 operator|.
-name|Numeric
+name|NUMERIC
 argument_list|)
 expr_stmt|;
 name|this

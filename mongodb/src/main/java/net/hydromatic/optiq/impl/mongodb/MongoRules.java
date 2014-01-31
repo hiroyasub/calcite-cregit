@@ -162,8 +162,14 @@ specifier|public
 class|class
 name|MongoRules
 block|{
+specifier|private
+name|MongoRules
+parameter_list|()
+block|{
+block|}
 specifier|public
 specifier|static
+specifier|final
 name|RelOptRule
 index|[]
 name|RULES
@@ -540,7 +546,7 @@ argument_list|()
 operator|==
 name|SqlStdOperatorTable
 operator|.
-name|itemOp
+name|ITEM
 operator|&&
 name|call
 operator|.
@@ -675,7 +681,7 @@ argument_list|()
 operator|==
 name|SqlStdOperatorTable
 operator|.
-name|castFunc
+name|CAST
 condition|)
 block|{
 assert|assert

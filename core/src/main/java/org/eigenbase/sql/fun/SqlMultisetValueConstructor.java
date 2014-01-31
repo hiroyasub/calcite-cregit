@@ -131,7 +131,7 @@ name|name
 argument_list|,
 name|kind
 argument_list|,
-name|MaxPrec
+name|MDX_PRECEDENCE
 argument_list|,
 literal|false
 argument_list|,

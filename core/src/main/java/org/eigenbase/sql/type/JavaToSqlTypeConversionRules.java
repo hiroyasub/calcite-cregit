@@ -412,7 +412,7 @@ name|build
 argument_list|()
 decl_stmt|;
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**    * Returns the {@link org.eigenbase.util.Glossary#SingletonPattern    * singleton} instance.    */
+comment|/**    * Returns the {@link org.eigenbase.util.Glossary#SINGLETON_PATTERN    * singleton} instance.    */
 specifier|public
 specifier|static
 name|JavaToSqlTypeConversionRules

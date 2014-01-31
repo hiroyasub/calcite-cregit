@@ -95,7 +95,7 @@ specifier|final
 name|SqlWriter
 operator|.
 name|FrameType
-name|OverlapsFrameType
+name|FRAME_TYPE
 init|=
 name|SqlWriter
 operator|.
@@ -164,7 +164,7 @@ name|writer
 operator|.
 name|startList
 argument_list|(
-name|OverlapsFrameType
+name|FRAME_TYPE
 argument_list|,
 literal|"("
 argument_list|,

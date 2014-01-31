@@ -922,7 +922,7 @@ name|countAgg
 init|=
 name|SqlStdOperatorTable
 operator|.
-name|countOperator
+name|COUNT
 decl_stmt|;
 name|RelDataType
 name|countType
@@ -1001,7 +1001,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|divideOperator
+name|DIVIDE
 argument_list|,
 name|numeratorRef
 argument_list|,
@@ -1167,7 +1167,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|multiplyOperator
+name|MULTIPLY
 argument_list|,
 name|argRef
 argument_list|,
@@ -1302,7 +1302,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|multiplyOperator
+name|MULTIPLY
 argument_list|,
 name|sumArg
 argument_list|,
@@ -1315,7 +1315,7 @@ name|countAgg
 init|=
 name|SqlStdOperatorTable
 operator|.
-name|countOperator
+name|COUNT
 decl_stmt|;
 specifier|final
 name|RelDataType
@@ -1379,7 +1379,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|divideOperator
+name|DIVIDE
 argument_list|,
 name|sumSquaredArg
 argument_list|,
@@ -1396,7 +1396,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|minusOperator
+name|MINUS
 argument_list|,
 name|sumArgSquared
 argument_list|,
@@ -1459,7 +1459,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|minusOperator
+name|MINUS
 argument_list|,
 name|countArg
 argument_list|,
@@ -1476,7 +1476,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|equalsOperator
+name|EQUALS
 argument_list|,
 name|countArg
 argument_list|,
@@ -1491,7 +1491,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|caseOperator
+name|CASE
 argument_list|,
 name|countEqOne
 argument_list|,
@@ -1511,7 +1511,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|divideOperator
+name|DIVIDE
 argument_list|,
 name|diff
 argument_list|,
@@ -1551,7 +1551,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|powerFunc
+name|POWER
 argument_list|,
 name|div
 argument_list|,

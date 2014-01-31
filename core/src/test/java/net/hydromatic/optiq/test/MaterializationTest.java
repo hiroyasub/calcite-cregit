@@ -226,7 +226,7 @@ try|try
 block|{
 name|Prepare
 operator|.
-name|TRIM
+name|trim
 operator|=
 literal|true
 expr_stmt|;
@@ -283,7 +283,7 @@ finally|finally
 block|{
 name|Prepare
 operator|.
-name|TRIM
+name|trim
 operator|=
 literal|false
 expr_stmt|;
@@ -332,7 +332,7 @@ try|try
 block|{
 name|Prepare
 operator|.
-name|TRIM
+name|trim
 operator|=
 literal|true
 expr_stmt|;
@@ -387,7 +387,7 @@ finally|finally
 block|{
 name|Prepare
 operator|.
-name|TRIM
+name|trim
 operator|=
 literal|false
 expr_stmt|;
@@ -412,7 +412,7 @@ try|try
 block|{
 name|Prepare
 operator|.
-name|TRIM
+name|trim
 operator|=
 literal|true
 expr_stmt|;
@@ -464,7 +464,7 @@ finally|finally
 block|{
 name|Prepare
 operator|.
-name|TRIM
+name|trim
 operator|=
 literal|false
 expr_stmt|;
@@ -720,7 +720,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|equalsOperator
+name|EQUALS
 argument_list|,
 name|rexBuilder
 operator|.
@@ -767,7 +767,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|andOperator
+name|AND
 argument_list|,
 name|i0_eq_0
 argument_list|,
@@ -797,7 +797,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|andOperator
+name|AND
 argument_list|,
 name|i0_eq_0
 argument_list|,
@@ -825,7 +825,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|andOperator
+name|AND
 argument_list|,
 name|i0_eq_0
 argument_list|,
@@ -835,7 +835,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|notOperator
+name|NOT
 argument_list|,
 name|i0_eq_0
 argument_list|)
@@ -857,7 +857,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|andOperator
+name|AND
 argument_list|,
 name|rexBuilder
 operator|.
@@ -872,7 +872,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|notOperator
+name|NOT
 argument_list|,
 name|i0_eq_0
 argument_list|)
@@ -896,7 +896,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|equalsOperator
+name|EQUALS
 argument_list|,
 name|rexBuilder
 operator|.
@@ -935,7 +935,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|andOperator
+name|AND
 argument_list|,
 name|i0_eq_0
 argument_list|,
@@ -945,7 +945,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|andOperator
+name|AND
 argument_list|,
 name|i1_eq_1
 argument_list|,
@@ -955,7 +955,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|notOperator
+name|NOT
 argument_list|,
 name|i0_eq_0
 argument_list|)
@@ -978,7 +978,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|andOperator
+name|AND
 argument_list|,
 name|i0_eq_0
 argument_list|,
@@ -988,7 +988,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|notOperator
+name|NOT
 argument_list|,
 name|i1_eq_1
 argument_list|)
@@ -1012,7 +1012,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|andOperator
+name|AND
 argument_list|,
 name|i0_eq_0
 argument_list|,
@@ -1022,7 +1022,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|notOperator
+name|NOT
 argument_list|,
 name|rexBuilder
 operator|.
@@ -1030,7 +1030,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|andOperator
+name|AND
 argument_list|,
 name|i0_eq_0
 argument_list|,
@@ -1057,7 +1057,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|andOperator
+name|AND
 argument_list|,
 name|i0_eq_0
 argument_list|,
@@ -1067,7 +1067,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|andOperator
+name|AND
 argument_list|,
 name|i1_eq_1
 argument_list|,
@@ -1077,7 +1077,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|notOperator
+name|NOT
 argument_list|,
 name|i0_eq_0
 argument_list|)
@@ -1164,7 +1164,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|andOperator
+name|AND
 argument_list|,
 name|i0_eq_0
 argument_list|,
@@ -1174,7 +1174,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|andOperator
+name|AND
 argument_list|,
 name|i2
 argument_list|,
@@ -1184,7 +1184,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|andOperator
+name|AND
 argument_list|,
 name|i3
 argument_list|,
@@ -1194,7 +1194,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|notOperator
+name|NOT
 argument_list|,
 name|rexBuilder
 operator|.
@@ -1202,7 +1202,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|andOperator
+name|AND
 argument_list|,
 name|i2
 argument_list|,
@@ -1218,7 +1218,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|notOperator
+name|NOT
 argument_list|,
 name|i4
 argument_list|)

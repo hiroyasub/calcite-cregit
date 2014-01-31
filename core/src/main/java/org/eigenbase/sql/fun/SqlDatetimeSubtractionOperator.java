@@ -120,7 +120,7 @@ block|{
 return|return
 name|SqlSyntax
 operator|.
-name|Special
+name|SPECIAL
 return|;
 block|}
 specifier|public
@@ -227,7 +227,7 @@ block|{
 return|return
 name|SqlStdOperatorTable
 operator|.
-name|minusOperator
+name|MINUS
 operator|.
 name|getMonotonicity
 argument_list|(

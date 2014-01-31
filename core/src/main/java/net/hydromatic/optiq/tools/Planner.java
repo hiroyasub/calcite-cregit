@@ -104,7 +104,7 @@ parameter_list|)
 throws|throws
 name|RelConversionException
 function_decl|;
-comment|/**    * Converts one relational expression tree into another relational expression    * based on a particular rule set and requires set of traits.    *    * @param ruleSetIndex The RuleSet to use for conversion purposes.  Note that    *                     this is zero-indexed and is based on the list and order    *                     of RuleSets provided in the construction of this    *                     Planner.    * @param requiredOutputTraits The set of RelTraits required of the root node    *                             at the termination of the planning cycle.    * @param rel The root of the RelNode tree to convert.    * @return The root of the new RelNode tree.    * @throws net.hydromatic.optiq.tools.RelConversionException on conversion error    */
+comment|/**    * Converts one relational expression tree into another relational expression    * based on a particular rule set and requires set of traits.    *    * @param ruleSetIndex The RuleSet to use for conversion purposes.  Note that    *                     this is zero-indexed and is based on the list and order    *                     of RuleSets provided in the construction of this    *                     Planner.    * @param requiredOutputTraits The set of RelTraits required of the root node    *                             at the termination of the planning cycle.    * @param rel The root of the RelNode tree to convert.    * @return The root of the new RelNode tree.    * @throws net.hydromatic.optiq.tools.RelConversionException on conversion    *     error    */
 name|RelNode
 name|transform
 parameter_list|(

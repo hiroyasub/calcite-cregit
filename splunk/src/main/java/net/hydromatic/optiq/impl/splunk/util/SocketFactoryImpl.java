@@ -62,6 +62,8 @@ name|SocketFactory
 block|{
 comment|/**    * should keep alives be sent    */
 specifier|public
+specifier|static
+specifier|final
 name|boolean
 name|SO_KEEPALIVE
 init|=
@@ -69,6 +71,8 @@ literal|false
 decl_stmt|;
 comment|/**    * is out of band in-line enabled    */
 specifier|public
+specifier|static
+specifier|final
 name|boolean
 name|OOBINLINE
 init|=
@@ -76,6 +80,8 @@ literal|false
 decl_stmt|;
 comment|/**    * should the address be reused    */
 specifier|public
+specifier|static
+specifier|final
 name|boolean
 name|SO_REUSEADDR
 init|=
@@ -83,6 +89,8 @@ literal|false
 decl_stmt|;
 comment|/**    * do not buffer send(s) iff true    */
 specifier|public
+specifier|static
+specifier|final
 name|boolean
 name|TCP_NODELAY
 init|=
@@ -90,6 +98,8 @@ literal|true
 decl_stmt|;
 comment|/**    * size of receiving buffer    */
 specifier|public
+specifier|static
+specifier|final
 name|int
 name|SO_RCVBUF
 init|=
@@ -97,6 +107,8 @@ literal|8192
 decl_stmt|;
 comment|/**    * size of sending buffer iff needed    */
 specifier|public
+specifier|static
+specifier|final
 name|int
 name|SO_SNDBUF
 init|=
@@ -104,6 +116,8 @@ literal|1024
 decl_stmt|;
 comment|/**    * read timeout in milliseconds    */
 specifier|public
+specifier|static
+specifier|final
 name|int
 name|SO_TIMEOUT
 init|=
@@ -111,6 +125,8 @@ literal|12000
 decl_stmt|;
 comment|/**    * connect timeout in milliseconds    */
 specifier|public
+specifier|static
+specifier|final
 name|int
 name|SO_CONNECT_TIMEOUT
 init|=
@@ -118,6 +134,8 @@ literal|5000
 decl_stmt|;
 comment|/**    * enabling lingering with 0-timeout will cause the socket to be    * closed forcefully upon execution of close()    */
 specifier|public
+specifier|static
+specifier|final
 name|boolean
 name|SO_LINGER
 init|=
@@ -125,6 +143,8 @@ literal|true
 decl_stmt|;
 comment|/**    * amount of time to linger    */
 specifier|public
+specifier|static
+specifier|final
 name|int
 name|LINGER
 init|=

@@ -1202,6 +1202,7 @@ name|parent
 argument_list|)
 expr_stmt|;
 block|}
+comment|// CHECKSTYLE: IGNORE 1
 block|}
 operator|.
 name|go
@@ -2324,6 +2325,7 @@ name|parent
 argument_list|)
 expr_stmt|;
 block|}
+comment|// CHECKSTYLE: IGNORE 1
 block|}
 operator|.
 name|go

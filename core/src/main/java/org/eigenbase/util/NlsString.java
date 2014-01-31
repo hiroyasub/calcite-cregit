@@ -109,7 +109,7 @@ name|SqlCollation
 name|collation
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a string in a specfied character set.    *    * @param value       String constant, must not be null    * @param charsetName Name of the character set, may be null    * @param collation   Collation, may be null    * @throws IllegalCharsetNameException If the given charset name is illegal    * @throws UnsupportedCharsetException If no support for the named charset    *                                     is available in this instance of the    *                                     Java virtual machine    * @throws RuntimeException            If the given value cannot be represented in the    *                                     given charset    * @pre theString != null    */
+comment|/**    * Creates a string in a specfied character set.    *    * @param value       String constant, must not be null    * @param charsetName Name of the character set, may be null    * @param collation   Collation, may be null    * @throws IllegalCharsetNameException If the given charset name is illegal    * @throws UnsupportedCharsetException If no support for the named charset    *     is available in this instance of the Java virtual machine    * @throws RuntimeException If the given value cannot be represented in the    *     given charset    * @pre theString != null    */
 specifier|public
 name|NlsString
 parameter_list|(
@@ -122,10 +122,6 @@ parameter_list|,
 name|SqlCollation
 name|collation
 parameter_list|)
-throws|throws
-name|IllegalCharsetNameException
-throws|,
-name|UnsupportedCharsetException
 block|{
 name|Util
 operator|.

@@ -233,7 +233,7 @@ name|TRACER
 init|=
 name|EigenbaseTrace
 operator|.
-name|parserTracer
+name|PARSER_LOGGER
 decl_stmt|;
 comment|/**    * Alias generated for the source table when rewriting UPDATE to MERGE.    */
 specifier|public
@@ -1490,7 +1490,7 @@ name|expanded
 operator|=
 name|SqlStdOperatorTable
 operator|.
-name|asOperator
+name|AS
 operator|.
 name|createCall
 argument_list|(
@@ -2281,7 +2281,7 @@ name|conditionType
 condition|)
 block|{
 case|case
-name|On
+name|ON
 case|:
 name|condition
 operator|.
@@ -2767,7 +2767,7 @@ argument_list|()
 operator|==
 name|SqlSyntax
 operator|.
-name|Function
+name|FUNCTION
 operator|)
 operator|||
 operator|(
@@ -2778,7 +2778,7 @@ argument_list|()
 operator|==
 name|SqlSyntax
 operator|.
-name|Prefix
+name|PREFIX
 operator|)
 condition|)
 block|{
@@ -3836,7 +3836,7 @@ literal|null
 argument_list|,
 name|SqlSyntax
 operator|.
-name|Function
+name|FUNCTION
 argument_list|)
 decl_stmt|;
 if|if
@@ -3981,6 +3981,7 @@ block|{
 case|case
 name|VALUES
 case|:
+comment|// CHECKSTYLE: IGNORE 1
 if|if
 condition|(
 name|underFrom
@@ -4027,7 +4028,7 @@ expr_stmt|;
 return|return
 name|SqlStdOperatorTable
 operator|.
-name|selectOperator
+name|SELECT
 operator|.
 name|createCall
 argument_list|(
@@ -4219,7 +4220,7 @@ expr_stmt|;
 return|return
 name|SqlStdOperatorTable
 operator|.
-name|selectOperator
+name|SELECT
 operator|.
 name|createCall
 argument_list|(
@@ -4292,7 +4293,7 @@ expr_stmt|;
 return|return
 name|SqlStdOperatorTable
 operator|.
-name|selectOperator
+name|SELECT
 operator|.
 name|createCall
 argument_list|(
@@ -4606,13 +4607,13 @@ name|SqlJoinOperator
 operator|.
 name|JoinType
 operator|.
-name|Inner
+name|INNER
 else|:
 name|SqlJoinOperator
 operator|.
 name|JoinType
 operator|.
-name|Left
+name|LEFT
 decl_stmt|;
 name|SqlNode
 name|leftJoinTerm
@@ -4630,7 +4631,7 @@ name|outerJoin
 init|=
 name|SqlStdOperatorTable
 operator|.
-name|joinOperator
+name|JOIN
 operator|.
 name|createCall
 argument_list|(
@@ -4662,7 +4663,7 @@ name|SqlJoinOperator
 operator|.
 name|ConditionType
 operator|.
-name|On
+name|ON
 operator|.
 name|symbol
 argument_list|(
@@ -4686,7 +4687,7 @@ name|select
 init|=
 name|SqlStdOperatorTable
 operator|.
-name|selectOperator
+name|SELECT
 operator|.
 name|createCall
 argument_list|(
@@ -4809,7 +4810,7 @@ name|select
 operator|=
 name|SqlStdOperatorTable
 operator|.
-name|selectOperator
+name|SELECT
 operator|.
 name|createCall
 argument_list|(
@@ -4933,7 +4934,7 @@ name|selfJoinCond
 init|=
 name|SqlStdOperatorTable
 operator|.
-name|equalsOperator
+name|EQUALS
 operator|.
 name|createCall
 argument_list|(
@@ -4964,7 +4965,7 @@ name|condition
 operator|=
 name|SqlStdOperatorTable
 operator|.
-name|andOperator
+name|AND
 operator|.
 name|createCall
 argument_list|(
@@ -5108,7 +5109,7 @@ name|source
 operator|=
 name|SqlStdOperatorTable
 operator|.
-name|selectOperator
+name|SELECT
 operator|.
 name|createCall
 argument_list|(
@@ -5156,7 +5157,7 @@ name|SqlMerge
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|mergeOperator
+name|MERGE
 argument_list|,
 name|target
 argument_list|,
@@ -5325,7 +5326,7 @@ block|}
 return|return
 name|SqlStdOperatorTable
 operator|.
-name|selectOperator
+name|SELECT
 operator|.
 name|createCall
 argument_list|(
@@ -5433,7 +5434,7 @@ block|}
 return|return
 name|SqlStdOperatorTable
 operator|.
-name|selectOperator
+name|SELECT
 operator|.
 name|createCall
 argument_list|(
@@ -6246,7 +6247,7 @@ literal|null
 argument_list|,
 name|SqlFunctionCategory
 operator|.
-name|UserDefinedConstructor
+name|USER_DEFINED_CONSTRUCTOR
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -6293,7 +6294,7 @@ literal|null
 argument_list|,
 name|SqlSyntax
 operator|.
-name|Function
+name|FUNCTION
 argument_list|)
 decl_stmt|;
 if|if
@@ -6338,7 +6339,7 @@ argument_list|()
 operator|!=
 name|SqlSyntax
 operator|.
-name|FunctionId
+name|FUNCTION_ID
 operator|)
 condition|)
 block|{
@@ -7753,7 +7754,7 @@ name|SqlJoinOperator
 operator|.
 name|JoinType
 operator|.
-name|Left
+name|LEFT
 condition|)
 block|{
 name|forceRightNullable
@@ -7772,7 +7773,7 @@ name|SqlJoinOperator
 operator|.
 name|JoinType
 operator|.
-name|Right
+name|RIGHT
 condition|)
 block|{
 name|forceLeftNullable
@@ -7791,7 +7792,7 @@ name|SqlJoinOperator
 operator|.
 name|JoinType
 operator|.
-name|Full
+name|FULL
 condition|)
 block|{
 name|forceLeftNullable
@@ -9847,7 +9848,7 @@ name|listNode
 operator|=
 name|SqlStdOperatorTable
 operator|.
-name|scalarQueryOperator
+name|SCALAR_QUERY
 operator|.
 name|createCall
 argument_list|(
@@ -9947,7 +9948,7 @@ name|operand
 operator|=
 name|SqlStdOperatorTable
 operator|.
-name|scalarQueryOperator
+name|SCALAR_QUERY
 operator|.
 name|createCall
 argument_list|(
@@ -10931,7 +10932,7 @@ name|conditionType
 condition|)
 block|{
 case|case
-name|None
+name|NONE
 case|:
 name|Util
 operator|.
@@ -10946,7 +10947,7 @@ argument_list|)
 expr_stmt|;
 break|break;
 case|case
-name|On
+name|ON
 case|:
 name|Util
 operator|.
@@ -10970,7 +10971,7 @@ argument_list|)
 expr_stmt|;
 break|break;
 case|case
-name|Using
+name|USING
 case|:
 name|SqlNodeList
 name|list
@@ -11269,16 +11270,16 @@ name|joinType
 condition|)
 block|{
 case|case
-name|Inner
+name|INNER
 case|:
 case|case
-name|Left
+name|LEFT
 case|:
 case|case
-name|Right
+name|RIGHT
 case|:
 case|case
-name|Full
+name|FULL
 case|:
 if|if
 condition|(
@@ -11311,10 +11312,10 @@ throw|;
 block|}
 break|break;
 case|case
-name|Comma
+name|COMMA
 case|:
 case|case
-name|Cross
+name|CROSS
 case|:
 if|if
 condition|(
@@ -11428,7 +11429,7 @@ name|agg
 argument_list|,
 name|SqlStdOperatorTable
 operator|.
-name|overOperator
+name|OVER
 argument_list|)
 condition|)
 block|{
@@ -12313,7 +12314,7 @@ name|orderItem
 argument_list|,
 name|SqlStdOperatorTable
 operator|.
-name|descendingOperator
+name|DESC
 argument_list|)
 condition|)
 block|{
@@ -14912,7 +14913,7 @@ name|ex
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|valuesOperator
+name|VALUES
 operator|.
 name|getName
 argument_list|()
@@ -15026,7 +15027,7 @@ name|ex
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|valuesOperator
+name|VALUES
 operator|.
 name|getName
 argument_list|()
@@ -15675,7 +15676,7 @@ argument_list|()
 operator|==
 name|SqlSyntax
 operator|.
-name|FunctionId
+name|FUNCTION_ID
 operator|)
 operator|&&
 operator|!
@@ -16026,7 +16027,7 @@ name|selectItem
 argument_list|,
 name|SqlStdOperatorTable
 operator|.
-name|asOperator
+name|AS
 argument_list|)
 condition|)
 block|{
@@ -16817,7 +16818,7 @@ name|discard
 argument_list|(
 name|Bug
 operator|.
-name|Frg140Fixed
+name|FRG140_FIXED
 argument_list|)
 expr_stmt|;
 name|SqlValidatorNamespace
@@ -17507,7 +17508,7 @@ argument_list|()
 operator|==
 name|SqlStdOperatorTable
 operator|.
-name|asOperator
+name|AS
 condition|)
 block|{
 name|expr

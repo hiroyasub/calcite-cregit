@@ -647,13 +647,13 @@ name|node
 init|=
 name|SqlStdOperatorTable
 operator|.
-name|selectOperator
+name|SELECT
 operator|.
 name|createCall
 argument_list|(
 name|SqlNodeList
 operator|.
-name|Empty
+name|EMPTY
 argument_list|,
 operator|new
 name|SqlNodeList

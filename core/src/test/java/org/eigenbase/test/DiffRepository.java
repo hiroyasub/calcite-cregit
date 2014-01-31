@@ -103,20 +103,8 @@ name|*
 import|;
 end_import
 
-begin_import
-import|import static
-name|org
-operator|.
-name|junit
-operator|.
-name|Assert
-operator|.
-name|*
-import|;
-end_import
-
 begin_comment
-comment|/**  * A collection of resources used by tests.  *  *<p>Loads files containing test input and output into memory. If there are  * differences, writes out a log file containing the actual output.  *  *<p>Typical usage is as follows:  *  *<ol>  *<li>A testcase class defines a method  *  *<blockquote><code>  *<pre>  *  * package com.acme.test;  *  * public class MyTest extends TestCase {  *     public DiffRepository getDiffRepos() {  *         return DiffRepository.lookup(MyTest.class);  *     }  *  *     @Test public void testToUpper() {  *          getDiffRepos().assertEquals("${result}", "${string}");  *     }  *  *     @Test public void testToLower() {  *          getDiffRepos().assertEquals("Multi-line\nstring", "${string}");  *     }  * }</pre>  *</code></blockquote>  *  * There is an accompanying reference file named after the class,<code>  * com/acme/test/MyTest.ref.xml</code>:  *  *<blockquote><code>  *<pre>  *&lt;Root&gt;  *&lt;TestCase name="testToUpper"&gt;  *&lt;Resource name="string"&gt;  *&lt;![CDATA[String to be converted to upper case]]&gt;  *&lt;/Resource&gt;  *&lt;Resource name="result"&gt;  *&lt;![CDATA[STRING TO BE CONVERTED TO UPPER CASE]]&gt;  *&lt;/Resource&gt;  *&lt;/TestCase&gt;  *&lt;TestCase name="testToLower"&gt;  *&lt;Resource name="result"&gt;  *&lt;![CDATA[multi-line  * string]]&gt;  *&lt;/Resource&gt;  *&lt;/TestCase&gt;  *&lt;/Root&gt;  *</pre>  *</code></blockquote>  *  *<p>If any of the testcases fails, a log file is generated, called<code>  * com/acme/test/MyTest.log.xml</code> containing the actual output. The log  * file is otherwise identical to the reference log, so once the log file has  * been verified, it can simply be copied over to become the new reference  * log.</p>  *  *<p>If a resource or testcase does not exist,<code>DiffRepository</code>  * creates them in the log file. Because DiffRepository is so forgiving, it is  * very easy to create new tests and testcases.</p>  *  *<p>The {@link #lookup} method ensures that all test cases share the same  * instance of the repository. This is important more than one one test case  * fails. The shared instance ensures that the generated<code>.log.xml</code>  * file contains the actual for<em>both</em> test cases.  */
+comment|/**  * A collection of resources used by tests.  *  *<p>Loads files containing test input and output into memory. If there are  * differences, writes out a log file containing the actual output.  *  *<p>Typical usage is as follows. A testcase class defines a method  *  *<blockquote><code>  *<pre>  *  * package com.acme.test;  *  * public class MyTest extends TestCase {  *     public DiffRepository getDiffRepos() {  *         return DiffRepository.lookup(MyTest.class);  *     }  *  *     @Test public void testToUpper() {  *          getDiffRepos().assertEquals("${result}", "${string}");  *     }  *  *     @Test public void testToLower() {  *          getDiffRepos().assertEquals("Multi-line\nstring", "${string}");  *     }  * }</pre>  *</code></blockquote>  *  * There is an accompanying reference file named after the class,<code>  * com/acme/test/MyTest.ref.xml</code>:  *  *<blockquote><code>  *<pre>  *&lt;Root&gt;  *&lt;TestCase name="testToUpper"&gt;  *&lt;Resource name="string"&gt;  *&lt;![CDATA[String to be converted to upper case]]&gt;  *&lt;/Resource&gt;  *&lt;Resource name="result"&gt;  *&lt;![CDATA[STRING TO BE CONVERTED TO UPPER CASE]]&gt;  *&lt;/Resource&gt;  *&lt;/TestCase&gt;  *&lt;TestCase name="testToLower"&gt;  *&lt;Resource name="result"&gt;  *&lt;![CDATA[multi-line  * string]]&gt;  *&lt;/Resource&gt;  *&lt;/TestCase&gt;  *&lt;/Root&gt;  *</pre>  *</code></blockquote>  *  *<p>If any of the testcases fails, a log file is generated, called<code>  * com/acme/test/MyTest.log.xml</code> containing the actual output. The log  * file is otherwise identical to the reference log, so once the log file has  * been verified, it can simply be copied over to become the new reference  * log.</p>  *  *<p>If a resource or testcase does not exist,<code>DiffRepository</code>  * creates them in the log file. Because DiffRepository is so forgiving, it is  * very easy to create new tests and testcases.</p>  *  *<p>The {@link #lookup} method ensures that all test cases share the same  * instance of the repository. This is important more than one one test case  * fails. The shared instance ensures that the generated<code>.log.xml</code>  * file contains the actual for<em>both</em> test cases.  */
 end_comment
 
 begin_class
@@ -130,7 +118,7 @@ specifier|private
 specifier|static
 specifier|final
 name|String
-name|RootTag
+name|ROOT_TAG
 init|=
 literal|"Root"
 decl_stmt|;
@@ -138,7 +126,7 @@ specifier|private
 specifier|static
 specifier|final
 name|String
-name|TestCaseTag
+name|TEST_CASE_TAG
 init|=
 literal|"TestCase"
 decl_stmt|;
@@ -146,7 +134,7 @@ specifier|private
 specifier|static
 specifier|final
 name|String
-name|TestCaseNameAttr
+name|TEST_CASE_NAME_ATTR
 init|=
 literal|"name"
 decl_stmt|;
@@ -154,7 +142,7 @@ specifier|private
 specifier|static
 specifier|final
 name|String
-name|TestCaseOverridesAttr
+name|TEST_CASE_OVERRIDES_ATTR
 init|=
 literal|"overrides"
 decl_stmt|;
@@ -162,7 +150,7 @@ specifier|private
 specifier|static
 specifier|final
 name|String
-name|ResourceTag
+name|RESOURCE_TAG
 init|=
 literal|"Resource"
 decl_stmt|;
@@ -170,7 +158,7 @@ specifier|private
 specifier|static
 specifier|final
 name|String
-name|ResourceNameAttr
+name|RESOURCE_NAME_ATTR
 init|=
 literal|"name"
 decl_stmt|;
@@ -184,7 +172,7 @@ name|Class
 argument_list|,
 name|DiffRepository
 argument_list|>
-name|mapClassToRepos
+name|MAP_CLASS_TO_REPOS
 init|=
 operator|new
 name|HashMap
@@ -365,7 +353,7 @@ name|doc
 operator|.
 name|createElement
 argument_list|(
-name|RootTag
+name|ROOT_TAG
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -392,7 +380,7 @@ argument_list|()
 operator|.
 name|equals
 argument_list|(
-name|RootTag
+name|ROOT_TAG
 argument_list|)
 condition|)
 block|{
@@ -402,7 +390,7 @@ name|RuntimeException
 argument_list|(
 literal|"expected root element of type '"
 operator|+
-name|RootTag
+name|ROOT_TAG
 operator|+
 literal|"', but found '"
 operator|+
@@ -1309,7 +1297,7 @@ argument_list|()
 operator|.
 name|equals
 argument_list|(
-name|TestCaseTag
+name|TEST_CASE_TAG
 argument_list|)
 condition|)
 block|{
@@ -1331,7 +1319,7 @@ name|testCase
 operator|.
 name|getAttribute
 argument_list|(
-name|TestCaseNameAttr
+name|TEST_CASE_NAME_ATTR
 argument_list|)
 argument_list|)
 condition|)
@@ -1368,7 +1356,7 @@ name|testCase
 operator|.
 name|getAttribute
 argument_list|(
-name|TestCaseOverridesAttr
+name|TEST_CASE_OVERRIDES_ATTR
 argument_list|)
 argument_list|)
 condition|)
@@ -1591,7 +1579,7 @@ name|replace
 argument_list|(
 name|Util
 operator|.
-name|lineSeparator
+name|LINE_SEPARATOR
 argument_list|,
 literal|"\n"
 argument_list|)
@@ -1605,7 +1593,7 @@ name|replace
 argument_list|(
 name|Util
 operator|.
-name|lineSeparator
+name|LINE_SEPARATOR
 argument_list|,
 literal|"\n"
 argument_list|)
@@ -1824,7 +1812,7 @@ name|replace
 argument_list|(
 name|Util
 operator|.
-name|lineSeparator
+name|LINE_SEPARATOR
 argument_list|,
 literal|"\n"
 argument_list|)
@@ -1838,7 +1826,7 @@ name|replace
 argument_list|(
 name|Util
 operator|.
-name|lineSeparator
+name|LINE_SEPARATOR
 argument_list|,
 literal|"\n"
 argument_list|)
@@ -1932,14 +1920,14 @@ name|doc
 operator|.
 name|createElement
 argument_list|(
-name|TestCaseTag
+name|TEST_CASE_TAG
 argument_list|)
 expr_stmt|;
 name|testCaseElement
 operator|.
 name|setAttribute
 argument_list|(
-name|TestCaseNameAttr
+name|TEST_CASE_NAME_ATTR
 argument_list|,
 name|testCaseName
 argument_list|)
@@ -1975,14 +1963,14 @@ name|doc
 operator|.
 name|createElement
 argument_list|(
-name|ResourceTag
+name|RESOURCE_TAG
 argument_list|)
 expr_stmt|;
 name|resourceElement
 operator|.
 name|setAttribute
 argument_list|(
-name|ResourceNameAttr
+name|RESOURCE_NAME_ATTR
 argument_list|,
 name|resourceName
 argument_list|)
@@ -2169,7 +2157,7 @@ argument_list|()
 operator|.
 name|equals
 argument_list|(
-name|ResourceTag
+name|RESOURCE_TAG
 argument_list|)
 operator|&&
 name|resourceName
@@ -2185,7 +2173,7 @@ operator|)
 operator|.
 name|getAttribute
 argument_list|(
-name|ResourceNameAttr
+name|RESOURCE_NAME_ATTR
 argument_list|)
 argument_list|)
 condition|)
@@ -2804,7 +2792,7 @@ block|{
 name|DiffRepository
 name|diffRepos
 init|=
-name|mapClassToRepos
+name|MAP_CLASS_TO_REPOS
 operator|.
 name|get
 argument_list|(
@@ -2854,7 +2842,7 @@ argument_list|,
 name|filter
 argument_list|)
 expr_stmt|;
-name|mapClassToRepos
+name|MAP_CLASS_TO_REPOS
 operator|.
 name|put
 argument_list|(

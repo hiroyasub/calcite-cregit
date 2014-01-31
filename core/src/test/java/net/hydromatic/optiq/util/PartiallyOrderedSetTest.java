@@ -72,7 +72,7 @@ specifier|private
 specifier|static
 specifier|final
 name|boolean
-name|debug
+name|DEBUG
 init|=
 literal|false
 decl_stmt|;
@@ -114,7 +114,7 @@ name|Ordering
 argument_list|<
 name|String
 argument_list|>
-name|stringSubsetOrdering
+name|STRING_SUBSET_ORDERING
 init|=
 operator|new
 name|PartiallyOrderedSet
@@ -193,7 +193,7 @@ name|Ordering
 argument_list|<
 name|Integer
 argument_list|>
-name|isDivisor
+name|IS_DIVISOR
 init|=
 operator|new
 name|PartiallyOrderedSet
@@ -234,7 +234,7 @@ name|Ordering
 argument_list|<
 name|Integer
 argument_list|>
-name|isDivisorInverse
+name|IS_DIVISOR_INVERSE
 init|=
 operator|new
 name|PartiallyOrderedSet
@@ -276,7 +276,7 @@ name|Ordering
 argument_list|<
 name|Integer
 argument_list|>
-name|isBitSubset
+name|IS_BIT_SUBSET
 init|=
 operator|new
 name|PartiallyOrderedSet
@@ -320,7 +320,7 @@ name|Ordering
 argument_list|<
 name|Integer
 argument_list|>
-name|isBitSuperset
+name|IS_BIT_SUPERSET
 init|=
 operator|new
 name|PartiallyOrderedSet
@@ -383,7 +383,7 @@ argument_list|<
 name|String
 argument_list|>
 argument_list|(
-name|stringSubsetOrdering
+name|STRING_SUBSET_ORDERING
 argument_list|)
 decl_stmt|;
 name|assertEquals
@@ -993,7 +993,7 @@ argument_list|<
 name|String
 argument_list|>
 argument_list|(
-name|stringSubsetOrdering
+name|STRING_SUBSET_ORDERING
 argument_list|)
 decl_stmt|;
 comment|// A tricky little poset with 4 elements:
@@ -1072,7 +1072,7 @@ argument_list|<
 name|Integer
 argument_list|>
 argument_list|(
-name|isBitSuperset
+name|IS_BIT_SUPERSET
 argument_list|)
 decl_stmt|;
 name|poset
@@ -1150,7 +1150,7 @@ argument_list|<
 name|Integer
 argument_list|>
 argument_list|(
-name|isBitSuperset
+name|IS_BIT_SUPERSET
 argument_list|)
 decl_stmt|;
 name|poset
@@ -1223,7 +1223,7 @@ argument_list|<
 name|Integer
 argument_list|>
 argument_list|(
-name|isDivisor
+name|IS_DIVISOR
 argument_list|,
 name|range
 argument_list|(
@@ -1325,9 +1325,9 @@ parameter_list|()
 block|{
 name|checkPoset
 argument_list|(
-name|isDivisor
+name|IS_DIVISOR
 argument_list|,
-name|debug
+name|DEBUG
 argument_list|,
 name|range
 argument_list|(
@@ -1358,9 +1358,9 @@ try|try
 block|{
 name|checkPoset
 argument_list|(
-name|isDivisor
+name|IS_DIVISOR
 argument_list|,
-name|debug
+name|DEBUG
 argument_list|,
 name|random
 argument_list|(
@@ -1419,9 +1419,9 @@ try|try
 block|{
 name|checkPoset
 argument_list|(
-name|isDivisor
+name|IS_DIVISOR
 argument_list|,
-name|debug
+name|DEBUG
 argument_list|,
 name|random
 argument_list|(
@@ -1473,9 +1473,9 @@ parameter_list|()
 block|{
 name|checkPoset
 argument_list|(
-name|isDivisorInverse
+name|IS_DIVISOR_INVERSE
 argument_list|,
-name|debug
+name|DEBUG
 argument_list|,
 name|range
 argument_list|(
@@ -1506,9 +1506,9 @@ try|try
 block|{
 name|checkPoset
 argument_list|(
-name|isDivisorInverse
+name|IS_DIVISOR_INVERSE
 argument_list|,
-name|debug
+name|DEBUG
 argument_list|,
 name|random
 argument_list|(
@@ -1567,9 +1567,9 @@ try|try
 block|{
 name|checkPoset
 argument_list|(
-name|isDivisorInverse
+name|IS_DIVISOR_INVERSE
 argument_list|,
-name|debug
+name|DEBUG
 argument_list|,
 name|random
 argument_list|(
@@ -1621,9 +1621,9 @@ parameter_list|()
 block|{
 name|checkPoset
 argument_list|(
-name|isBitSubset
+name|IS_BIT_SUBSET
 argument_list|,
-name|debug
+name|DEBUG
 argument_list|,
 name|range
 argument_list|(
@@ -1654,9 +1654,9 @@ try|try
 block|{
 name|checkPoset
 argument_list|(
-name|isBitSubset
+name|IS_BIT_SUBSET
 argument_list|,
-name|debug
+name|DEBUG
 argument_list|,
 name|random
 argument_list|(
@@ -1715,7 +1715,7 @@ parameter_list|)
 block|{
 if|if
 condition|(
-name|debug
+name|DEBUG
 condition|)
 block|{
 name|dump
@@ -1730,7 +1730,7 @@ name|poset
 operator|.
 name|isValid
 argument_list|(
-name|debug
+name|DEBUG
 argument_list|)
 argument_list|)
 expr_stmt|;

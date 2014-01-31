@@ -67,18 +67,6 @@ name|eigenbase
 operator|.
 name|sql
 operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
-name|sql
-operator|.
 name|type
 operator|.
 name|*
@@ -138,7 +126,7 @@ specifier|public
 specifier|static
 specifier|final
 name|TypeChecker
-name|IntegerTypeChecker
+name|INTEGER_TYPE_CHECKER
 init|=
 operator|new
 name|SqlTypeChecker
@@ -152,7 +140,7 @@ specifier|public
 specifier|static
 specifier|final
 name|TypeChecker
-name|BooleanTypeChecker
+name|BOOLEAN_TYPE_CHECKER
 init|=
 operator|new
 name|SqlTypeChecker
@@ -167,7 +155,7 @@ specifier|public
 specifier|static
 specifier|final
 name|TypeChecker
-name|AnyTypeChecker
+name|ANY_TYPE_CHECKER
 init|=
 operator|new
 name|TypeChecker

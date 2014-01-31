@@ -110,7 +110,7 @@ name|otcComparableUnorderedX2
 argument_list|,
 name|SqlFunctionCategory
 operator|.
-name|System
+name|SYSTEM
 argument_list|)
 expr_stmt|;
 block|}
@@ -206,7 +206,7 @@ expr_stmt|;
 return|return
 name|SqlStdOperatorTable
 operator|.
-name|caseOperator
+name|CASE
 operator|.
 name|createSwitchedCall
 argument_list|(

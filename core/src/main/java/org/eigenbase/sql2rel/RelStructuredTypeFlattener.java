@@ -734,7 +734,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|isNullOperator
+name|IS_NULL
 argument_list|,
 name|nullIndicator
 argument_list|)
@@ -772,7 +772,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|caseOperator
+name|CASE
 argument_list|,
 name|caseOperands
 argument_list|)
@@ -3627,7 +3627,7 @@ name|op
 operator|=
 name|SqlStdOperatorTable
 operator|.
-name|equalsOperator
+name|EQUALS
 expr_stmt|;
 block|}
 if|if
@@ -3725,7 +3725,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|andOperator
+name|AND
 argument_list|,
 name|conjunction
 argument_list|,
@@ -3746,7 +3746,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|notOperator
+name|NOT
 argument_list|,
 name|conjunction
 argument_list|)

@@ -172,7 +172,7 @@ block|{
 return|return
 name|SqlSyntax
 operator|.
-name|Special
+name|SPECIAL
 return|;
 block|}
 specifier|public

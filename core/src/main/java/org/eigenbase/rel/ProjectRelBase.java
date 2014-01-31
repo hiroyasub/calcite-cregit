@@ -648,6 +648,7 @@ return|return
 literal|false
 return|;
 block|}
+comment|//CHECKSTYLE: IGNORE 1
 if|if
 condition|(
 literal|false
@@ -887,6 +888,7 @@ comment|// If we're generating a digest, include the rowtype. If two projects
 comment|// differ in return type, we don't want to regard them as equivalent,
 comment|// otherwise we will try to put rels of different types into the same
 comment|// planner equivalence set.
+comment|//CHECKSTYLE: IGNORE 2
 if|if
 condition|(
 operator|(

@@ -480,7 +480,7 @@ name|node
 operator|=
 name|SqlStdOperatorTable
 operator|.
-name|asOperator
+name|AS
 operator|.
 name|createCall
 argument_list|(
@@ -1436,7 +1436,7 @@ name|x
 init|=
 name|SqlStdOperatorTable
 operator|.
-name|equalsOperator
+name|EQUALS
 operator|.
 name|createCall
 argument_list|(
@@ -1479,7 +1479,7 @@ name|sqlCondition
 operator|=
 name|SqlStdOperatorTable
 operator|.
-name|andOperator
+name|AND
 operator|.
 name|createCall
 argument_list|(
@@ -1497,7 +1497,7 @@ name|join
 init|=
 name|SqlStdOperatorTable
 operator|.
-name|joinOperator
+name|JOIN
 operator|.
 name|createCall
 argument_list|(
@@ -1534,7 +1534,7 @@ name|SqlJoinOperator
 operator|.
 name|ConditionType
 operator|.
-name|On
+name|ON
 operator|.
 name|symbol
 argument_list|(
@@ -1583,7 +1583,7 @@ name|SqlJoinOperator
 operator|.
 name|JoinType
 operator|.
-name|Left
+name|LEFT
 return|;
 case|case
 name|RIGHT
@@ -1593,7 +1593,7 @@ name|SqlJoinOperator
 operator|.
 name|JoinType
 operator|.
-name|Right
+name|RIGHT
 return|;
 case|case
 name|INNER
@@ -1603,7 +1603,7 @@ name|SqlJoinOperator
 operator|.
 name|JoinType
 operator|.
-name|Inner
+name|INNER
 return|;
 case|case
 name|FULL
@@ -1613,7 +1613,7 @@ name|SqlJoinOperator
 operator|.
 name|JoinType
 operator|.
-name|Full
+name|FULL
 return|;
 default|default:
 throw|throw
@@ -3495,6 +3495,7 @@ block|}
 comment|/** MySQL specific function. */
 specifier|private
 specifier|static
+specifier|final
 name|SqlFunction
 name|ISNULL_FUNCTION
 init|=
@@ -3521,7 +3522,7 @@ name|otcAny
 argument_list|,
 name|SqlFunctionCategory
 operator|.
-name|System
+name|SYSTEM
 argument_list|)
 decl_stmt|;
 comment|/**    * Rule to convert an {@link org.eigenbase.rel.UnionRel} to a    * {@link JdbcUnionRel}.    */
@@ -3729,11 +3730,11 @@ name|all
 condition|?
 name|SqlStdOperatorTable
 operator|.
-name|unionAllOperator
+name|UNION_ALL
 else|:
 name|SqlStdOperatorTable
 operator|.
-name|unionOperator
+name|UNION
 decl_stmt|;
 return|return
 name|setOpToSql
@@ -3945,11 +3946,11 @@ name|all
 condition|?
 name|SqlStdOperatorTable
 operator|.
-name|intersectAllOperator
+name|INTERSECT_ALL
 else|:
 name|SqlStdOperatorTable
 operator|.
-name|intersectOperator
+name|INTERSECT
 argument_list|,
 name|this
 argument_list|)
@@ -4154,11 +4155,11 @@ name|all
 condition|?
 name|SqlStdOperatorTable
 operator|.
-name|exceptAllOperator
+name|EXCEPT_ALL
 else|:
 name|SqlStdOperatorTable
 operator|.
-name|exceptOperator
+name|EXCEPT
 argument_list|,
 name|this
 argument_list|)
@@ -4803,7 +4804,7 @@ name|add
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|asOperator
+name|AS
 operator|.
 name|createCall
 argument_list|(
@@ -4839,13 +4840,13 @@ name|add
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|selectOperator
+name|SELECT
 operator|.
 name|createCall
 argument_list|(
 name|SqlNodeList
 operator|.
-name|Empty
+name|EMPTY
 argument_list|,
 operator|new
 name|SqlNodeList
@@ -4907,7 +4908,7 @@ name|query
 operator|=
 name|SqlStdOperatorTable
 operator|.
-name|unionAllOperator
+name|UNION_ALL
 operator|.
 name|createCall
 argument_list|(

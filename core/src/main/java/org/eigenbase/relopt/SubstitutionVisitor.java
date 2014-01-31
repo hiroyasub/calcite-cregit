@@ -534,6 +534,7 @@ name|parent
 argument_list|)
 expr_stmt|;
 block|}
+comment|// CHECKSTYLE: IGNORE 1
 block|}
 operator|.
 name|go
@@ -541,7 +542,6 @@ argument_list|(
 name|ancestor
 argument_list|)
 expr_stmt|;
-comment|// CHECKSTYLE: IGNORE -1
 return|return
 literal|false
 return|;
@@ -1256,7 +1256,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|notOperator
+name|NOT
 argument_list|,
 name|notDisjunction
 argument_list|)
@@ -1298,7 +1298,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|andOperator
+name|AND
 argument_list|,
 name|e1
 argument_list|,
@@ -1308,7 +1308,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|notOperator
+name|NOT
 argument_list|,
 name|e2
 argument_list|)

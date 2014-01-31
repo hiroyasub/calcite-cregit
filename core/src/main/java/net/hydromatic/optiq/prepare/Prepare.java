@@ -377,7 +377,7 @@ decl_stmt|;
 specifier|public
 specifier|static
 name|boolean
-name|TRIM
+name|trim
 init|=
 literal|false
 decl_stmt|;
@@ -1450,7 +1450,7 @@ comment|// For now, don't trim if there are more than 3 joins. The projects
 comment|// near the leaves created by trim migrate past joins and seem to
 comment|// prevent join-reordering.
 return|return
-name|TRIM
+name|trim
 operator|||
 name|countJoins
 argument_list|(

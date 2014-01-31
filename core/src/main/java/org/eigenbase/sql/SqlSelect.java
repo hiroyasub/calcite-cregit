@@ -485,7 +485,7 @@ name|fromClause
 operator|=
 name|SqlStdOperatorTable
 operator|.
-name|joinOperator
+name|JOIN
 operator|.
 name|createCall
 argument_list|(

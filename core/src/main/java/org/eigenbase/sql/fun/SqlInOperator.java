@@ -471,7 +471,7 @@ name|ex
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|inOperator
+name|IN
 operator|.
 name|getName
 argument_list|()

@@ -71,7 +71,7 @@ specifier|final
 name|SqlWriter
 operator|.
 name|FrameType
-name|UsingFrameType
+name|FRAME_TYPE
 init|=
 name|SqlWriter
 operator|.
@@ -93,13 +93,13 @@ operator|.
 name|SqlSymbol
 block|{
 comment|/**      * Join clause has no condition, for example "FROM EMP, DEPT"      */
-name|None
+name|NONE
 block|,
 comment|/**      * Join clause has an ON condition, for example "FROM EMP JOIN DEPT ON      * EMP.DEPTNO = DEPT.DEPTNO"      */
-name|On
+name|ON
 block|,
 comment|/**      * Join clause has a USING condition, for example "FROM EMP JOIN DEPT      * USING (DEPTNO)"      */
-name|Using
+name|USING
 block|;
 comment|/**      * Creates a parse-tree node representing an occurrence of this join      * type at a particular position in the parsed text.      */
 specifier|public
@@ -132,22 +132,22 @@ operator|.
 name|SqlSymbol
 block|{
 comment|/**      * Inner join.      */
-name|Inner
+name|INNER
 block|,
 comment|/**      * Full outer join.      */
-name|Full
+name|FULL
 block|,
 comment|/**      * Cross join (also known as Cartesian product).      */
-name|Cross
+name|CROSS
 block|,
 comment|/**      * Left outer join.      */
-name|Left
+name|LEFT
 block|,
 comment|/**      * Right outer join.      */
-name|Right
+name|RIGHT
 block|,
 comment|/**      * Comma join: the good old-fashioned SQL<code>FROM</code> clause,      * where table expressions are specified with commas between them, and      * join conditions are specified in the<code>WHERE</code> clause.      */
-name|Comma
+name|COMMA
 block|;
 comment|/**      * Creates a parse-tree node representing an occurrence of this      * condition type keyword at a particular position in the parsed      * text.      */
 specifier|public
@@ -204,7 +204,7 @@ block|{
 return|return
 name|SqlSyntax
 operator|.
-name|Special
+name|SPECIAL
 return|;
 block|}
 specifier|public
@@ -491,7 +491,7 @@ name|joinType
 condition|)
 block|{
 case|case
-name|Comma
+name|COMMA
 case|:
 name|writer
 operator|.
@@ -504,7 +504,7 @@ argument_list|)
 expr_stmt|;
 break|break;
 case|case
-name|Cross
+name|CROSS
 case|:
 name|writer
 operator|.
@@ -517,7 +517,7 @@ argument_list|)
 expr_stmt|;
 break|break;
 case|case
-name|Full
+name|FULL
 case|:
 name|writer
 operator|.
@@ -530,7 +530,7 @@ argument_list|)
 expr_stmt|;
 break|break;
 case|case
-name|Inner
+name|INNER
 case|:
 name|writer
 operator|.
@@ -543,7 +543,7 @@ argument_list|)
 expr_stmt|;
 break|break;
 case|case
-name|Left
+name|LEFT
 case|:
 name|writer
 operator|.
@@ -556,7 +556,7 @@ argument_list|)
 expr_stmt|;
 break|break;
 case|case
-name|Right
+name|RIGHT
 case|:
 name|writer
 operator|.
@@ -646,7 +646,7 @@ name|conditionType
 condition|)
 block|{
 case|case
-name|Using
+name|USING
 case|:
 comment|// No need for an extra pair of parens -- the condition is a
 comment|// list. The result is something like "USING (deptno, gender)".
@@ -672,7 +672,7 @@ name|writer
 operator|.
 name|startList
 argument_list|(
-name|UsingFrameType
+name|FRAME_TYPE
 argument_list|,
 literal|"("
 argument_list|,
@@ -699,7 +699,7 @@ argument_list|)
 expr_stmt|;
 break|break;
 case|case
-name|On
+name|ON
 case|:
 name|writer
 operator|.

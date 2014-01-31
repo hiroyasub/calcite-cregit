@@ -97,7 +97,7 @@ comment|/**    * The standard operator table.    */
 specifier|private
 specifier|static
 name|SqlStdOperatorTable
-name|INSTANCE
+name|instance
 decl_stmt|;
 comment|//-------------------------------------------------------------
 comment|//                   SET OPERATORS
@@ -111,7 +111,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlSetOperator
-name|unionOperator
+name|UNION
 init|=
 operator|new
 name|SqlSetOperator
@@ -131,7 +131,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlSetOperator
-name|unionAllOperator
+name|UNION_ALL
 init|=
 operator|new
 name|SqlSetOperator
@@ -151,7 +151,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlSetOperator
-name|exceptOperator
+name|EXCEPT
 init|=
 operator|new
 name|SqlSetOperator
@@ -171,7 +171,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlSetOperator
-name|exceptAllOperator
+name|EXCEPT_ALL
 init|=
 operator|new
 name|SqlSetOperator
@@ -191,7 +191,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlSetOperator
-name|intersectOperator
+name|INTERSECT
 init|=
 operator|new
 name|SqlSetOperator
@@ -211,7 +211,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlSetOperator
-name|intersectAllOperator
+name|INTERSECT_ALL
 init|=
 operator|new
 name|SqlSetOperator
@@ -232,7 +232,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlMultisetSetOperator
-name|multisetUnionOperator
+name|MULTISET_UNION
 init|=
 operator|new
 name|SqlMultisetSetOperator
@@ -249,7 +249,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlMultisetSetOperator
-name|multisetUnionAllOperator
+name|MULTISET_UNION_ALL
 init|=
 operator|new
 name|SqlMultisetSetOperator
@@ -266,7 +266,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlMultisetSetOperator
-name|multisetExceptOperator
+name|MULTISET_EXCEPT
 init|=
 operator|new
 name|SqlMultisetSetOperator
@@ -283,7 +283,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlMultisetSetOperator
-name|multisetExceptAllOperator
+name|MULTISET_EXCEPT_ALL
 init|=
 operator|new
 name|SqlMultisetSetOperator
@@ -300,7 +300,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlMultisetSetOperator
-name|multisetIntersectOperator
+name|MULTISET_INTERSECT
 init|=
 operator|new
 name|SqlMultisetSetOperator
@@ -317,7 +317,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlMultisetSetOperator
-name|multisetIntersectAllOperator
+name|MULTISET_INTERSECT_ALL
 init|=
 operator|new
 name|SqlMultisetSetOperator
@@ -337,7 +337,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlBinaryOperator
-name|andOperator
+name|AND
 init|=
 operator|new
 name|SqlBinaryOperator
@@ -370,7 +370,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlAsOperator
-name|asOperator
+name|AS
 init|=
 operator|new
 name|SqlAsOperator
@@ -381,7 +381,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlBinaryOperator
-name|concatOperator
+name|CONCAT
 init|=
 operator|new
 name|SqlBinaryOperator
@@ -412,7 +412,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlBinaryOperator
-name|divideOperator
+name|DIVIDE
 init|=
 operator|new
 name|SqlBinaryOperator
@@ -445,7 +445,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlBinaryOperator
-name|divideIntegerOperator
+name|DIVIDE_INTEGER
 init|=
 operator|new
 name|SqlBinaryOperator
@@ -478,7 +478,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlBinaryOperator
-name|dotOperator
+name|DOT
 init|=
 operator|new
 name|SqlBinaryOperator
@@ -507,7 +507,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlBinaryOperator
-name|equalsOperator
+name|EQUALS
 init|=
 operator|new
 name|SqlBinaryOperator
@@ -540,7 +540,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlBinaryOperator
-name|greaterThanOperator
+name|GREATER_THAN
 init|=
 operator|new
 name|SqlBinaryOperator
@@ -573,7 +573,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlBinaryOperator
-name|isDistinctFromOperator
+name|IS_DISTINCT_FROM
 init|=
 operator|new
 name|SqlBinaryOperator
@@ -606,7 +606,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlBinaryOperator
-name|isNotDistinctFromOperator
+name|IS_NOT_DISTINCT_FROM
 init|=
 operator|new
 name|SqlBinaryOperator
@@ -634,12 +634,12 @@ operator|.
 name|otcComparableUnorderedX2
 argument_list|)
 decl_stmt|;
-comment|/**    * The internal<code>$IS_DIFFERENT_FROM</code> operator is the same as the    * user-level {@link #isDistinctFromOperator} in all respects except that    * the test for equality on character datatypes treats trailing spaces as    * significant.    */
+comment|/**    * The internal<code>$IS_DIFFERENT_FROM</code> operator is the same as the    * user-level {@link #IS_DISTINCT_FROM} in all respects except that    * the test for equality on character datatypes treats trailing spaces as    * significant.    */
 specifier|public
 specifier|static
 specifier|final
 name|SqlBinaryOperator
-name|isDifferentFromOperator
+name|IS_DIFFERENT_FROM
 init|=
 operator|new
 name|SqlBinaryOperator
@@ -672,7 +672,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlBinaryOperator
-name|greaterThanOrEqualOperator
+name|GREATER_THAN_OR_EQUAL
 init|=
 operator|new
 name|SqlBinaryOperator
@@ -705,7 +705,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlBinaryOperator
-name|inOperator
+name|IN
 init|=
 operator|new
 name|SqlInOperator
@@ -718,7 +718,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlBinaryOperator
-name|notInOperator
+name|NOT_IN
 init|=
 operator|new
 name|SqlInOperator
@@ -731,7 +731,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlBinaryOperator
-name|lessThanOperator
+name|LESS_THAN
 init|=
 operator|new
 name|SqlBinaryOperator
@@ -764,7 +764,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlBinaryOperator
-name|lessThanOrEqualOperator
+name|LESS_THAN_OR_EQUAL
 init|=
 operator|new
 name|SqlBinaryOperator
@@ -792,12 +792,12 @@ operator|.
 name|otcComparableOrderedX2
 argument_list|)
 decl_stmt|;
-comment|/**    * Infix arithmetic minus operator, '<code>-</code>'.    *    *<p>Its precedence is less than the prefix {@link #prefixPlusOperator +}    * and {@link #prefixMinusOperator -} operators.    */
+comment|/**    * Infix arithmetic minus operator, '<code>-</code>'.    *    *<p>Its precedence is less than the prefix {@link #UNARY_PLUS +}    * and {@link #UNARY_MINUS -} operators.    */
 specifier|public
 specifier|static
 specifier|final
 name|SqlBinaryOperator
-name|minusOperator
+name|MINUS
 init|=
 operator|new
 name|SqlMonotonicBinaryOperator
@@ -831,7 +831,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlBinaryOperator
-name|multiplyOperator
+name|MULTIPLY
 init|=
 operator|new
 name|SqlMonotonicBinaryOperator
@@ -864,7 +864,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlBinaryOperator
-name|notEqualsOperator
+name|NOT_EQUALS
 init|=
 operator|new
 name|SqlBinaryOperator
@@ -897,7 +897,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlBinaryOperator
-name|orOperator
+name|OR
 init|=
 operator|new
 name|SqlBinaryOperator
@@ -930,7 +930,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlBinaryOperator
-name|plusOperator
+name|PLUS
 init|=
 operator|new
 name|SqlMonotonicBinaryOperator
@@ -963,7 +963,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlBinaryOperator
-name|memberOfOperator
+name|MEMBER_OF
 init|=
 operator|new
 name|SqlMultisetMemberOfOperator
@@ -974,7 +974,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlBinaryOperator
-name|submultisetOfOperator
+name|SUBMULTISET_OF
 init|=
 comment|// TODO: check if precedence is correct
 operator|new
@@ -1008,7 +1008,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlPostfixOperator
-name|descendingOperator
+name|DESC
 init|=
 operator|new
 name|SqlPostfixOperator
@@ -1038,7 +1038,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlPostfixOperator
-name|nullsFirstOperator
+name|NULLS_FIRST
 init|=
 operator|new
 name|SqlPostfixOperator
@@ -1068,7 +1068,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlPostfixOperator
-name|nullsLastOperator
+name|NULLS_LAST
 init|=
 operator|new
 name|SqlPostfixOperator
@@ -1098,7 +1098,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlPostfixOperator
-name|isNotNullOperator
+name|IS_NOT_NULL
 init|=
 operator|new
 name|SqlPostfixOperator
@@ -1128,7 +1128,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlPostfixOperator
-name|isNullOperator
+name|IS_NULL
 init|=
 operator|new
 name|SqlPostfixOperator
@@ -1158,7 +1158,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlPostfixOperator
-name|isNotTrueOperator
+name|IS_NOT_TRUE
 init|=
 operator|new
 name|SqlPostfixOperator
@@ -1188,7 +1188,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlPostfixOperator
-name|isTrueOperator
+name|IS_TRUE
 init|=
 operator|new
 name|SqlPostfixOperator
@@ -1218,7 +1218,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlPostfixOperator
-name|isNotFalseOperator
+name|IS_NOT_FALSE
 init|=
 operator|new
 name|SqlPostfixOperator
@@ -1248,7 +1248,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlPostfixOperator
-name|isFalseOperator
+name|IS_FALSE
 init|=
 operator|new
 name|SqlPostfixOperator
@@ -1278,7 +1278,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlPostfixOperator
-name|isNotUnknownOperator
+name|IS_NOT_UNKNOWN
 init|=
 operator|new
 name|SqlPostfixOperator
@@ -1308,7 +1308,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlPostfixOperator
-name|isUnknownOperator
+name|IS_UNKNOWN
 init|=
 operator|new
 name|SqlPostfixOperator
@@ -1338,7 +1338,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlPostfixOperator
-name|isASetOperator
+name|IS_A_SET
 init|=
 operator|new
 name|SqlPostfixOperator
@@ -1369,7 +1369,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlPrefixOperator
-name|existsOperator
+name|EXISTS
 init|=
 operator|new
 name|SqlPrefixOperator
@@ -1411,7 +1411,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlPrefixOperator
-name|notOperator
+name|NOT
 init|=
 operator|new
 name|SqlPrefixOperator
@@ -1437,12 +1437,12 @@ operator|.
 name|otcBool
 argument_list|)
 decl_stmt|;
-comment|/**    * Prefix arithmetic minus operator, '<code>-</code>'.    *    *<p>Its precedence is greater than the infix '{@link #plusOperator +}' and    * '{@link #minusOperator -}' operators.    */
+comment|/**    * Prefix arithmetic minus operator, '<code>-</code>'.    *    *<p>Its precedence is greater than the infix '{@link #PLUS +}' and    * '{@link #MINUS -}' operators.    */
 specifier|public
 specifier|static
 specifier|final
 name|SqlPrefixOperator
-name|prefixMinusOperator
+name|UNARY_MINUS
 init|=
 operator|new
 name|SqlPrefixOperator
@@ -1468,12 +1468,12 @@ operator|.
 name|otcNumericOrInterval
 argument_list|)
 decl_stmt|;
-comment|/**    * Prefix arithmetic plus operator, '<code>+</code>'.    *    *<p>Its precedence is greater than the infix '{@link #plusOperator +}' and    * '{@link #minusOperator -}' operators.    */
+comment|/**    * Prefix arithmetic plus operator, '<code>+</code>'.    *    *<p>Its precedence is greater than the infix '{@link #PLUS +}' and    * '{@link #MINUS -}' operators.    */
 specifier|public
 specifier|static
 specifier|final
 name|SqlPrefixOperator
-name|prefixPlusOperator
+name|UNARY_PLUS
 init|=
 operator|new
 name|SqlPrefixOperator
@@ -1499,12 +1499,12 @@ operator|.
 name|otcNumericOrInterval
 argument_list|)
 decl_stmt|;
-comment|/**    * Keyword which allows an identifier to be explicitly flagged as a table.    * For example,<code>select * from (TABLE t)</code> or<code>TABLE    * t</code>. See also {@link #collectionTableOperator}.    */
+comment|/**    * Keyword which allows an identifier to be explicitly flagged as a table.    * For example,<code>select * from (TABLE t)</code> or<code>TABLE    * t</code>. See also {@link #COLLECTION_TABLE}.    */
 specifier|public
 specifier|static
 specifier|final
 name|SqlPrefixOperator
-name|explicitTableOperator
+name|EXPLICIT_TABLE
 init|=
 operator|new
 name|SqlPrefixOperator
@@ -1532,7 +1532,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlAggFunction
-name|sumOperator
+name|SUM
 init|=
 operator|new
 name|SqlSumAggFunction
@@ -1545,7 +1545,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlAggFunction
-name|countOperator
+name|COUNT
 init|=
 operator|new
 name|SqlCountAggFunction
@@ -1556,7 +1556,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlAggFunction
-name|minOperator
+name|MIN
 init|=
 operator|new
 name|SqlMinMaxAggFunction
@@ -1581,7 +1581,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlAggFunction
-name|maxOperator
+name|MAX
 init|=
 operator|new
 name|SqlMinMaxAggFunction
@@ -1606,7 +1606,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlAggFunction
-name|lastValueOperator
+name|LAST_VALUE
 init|=
 operator|new
 name|SqlFirstLastValueAggFunction
@@ -1619,7 +1619,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlAggFunction
-name|firstValueOperator
+name|FIRST_VALUE
 init|=
 operator|new
 name|SqlFirstLastValueAggFunction
@@ -1632,7 +1632,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlAggFunction
-name|singleValueOperator
+name|SINGLE_VALUE
 init|=
 operator|new
 name|SqlSingleValueAggFunction
@@ -1645,7 +1645,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlAggFunction
-name|avgOperator
+name|AVG
 init|=
 operator|new
 name|SqlAvgAggFunction
@@ -1664,7 +1664,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlAggFunction
-name|stddevPopOperator
+name|STDDEV_POP
 init|=
 operator|new
 name|SqlAvgAggFunction
@@ -1683,7 +1683,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlAggFunction
-name|stddevSampOperator
+name|STDDEV_SAMP
 init|=
 operator|new
 name|SqlAvgAggFunction
@@ -1702,7 +1702,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlAggFunction
-name|varPopOperator
+name|VAR_POP
 init|=
 operator|new
 name|SqlAvgAggFunction
@@ -1721,7 +1721,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlAggFunction
-name|varSampOperator
+name|VAR_SAMP
 init|=
 operator|new
 name|SqlAvgAggFunction
@@ -1743,7 +1743,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlAggFunction
-name|histogramAggFunction
+name|HISTOGRAM_AGG
 init|=
 operator|new
 name|SqlHistogramAggFunction
@@ -1756,7 +1756,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlFunction
-name|histogramMinFunction
+name|HISTOGRAM_MIN
 init|=
 operator|new
 name|SqlFunction
@@ -1779,7 +1779,7 @@ name|otcNumericOrString
 argument_list|,
 name|SqlFunctionCategory
 operator|.
-name|Numeric
+name|NUMERIC
 argument_list|)
 decl_stmt|;
 comment|/**    *<code>HISTOGRAM_MAX</code> window aggregate function.    */
@@ -1787,7 +1787,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlFunction
-name|histogramMaxFunction
+name|HISTOGRAM_MAX
 init|=
 operator|new
 name|SqlFunction
@@ -1810,7 +1810,7 @@ name|otcNumericOrString
 argument_list|,
 name|SqlFunctionCategory
 operator|.
-name|Numeric
+name|NUMERIC
 argument_list|)
 decl_stmt|;
 comment|/**    *<code>HISTOGRAM_FIRST_VALUE</code> window aggregate function.    */
@@ -1818,7 +1818,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlFunction
-name|histogramFirstValueFunction
+name|HISTOGRAM_FIRST_VALUE
 init|=
 operator|new
 name|SqlFunction
@@ -1841,7 +1841,7 @@ name|otcNumericOrString
 argument_list|,
 name|SqlFunctionCategory
 operator|.
-name|Numeric
+name|NUMERIC
 argument_list|)
 decl_stmt|;
 comment|/**    *<code>HISTOGRAM_LAST_VALUE</code> window aggregate function.    */
@@ -1849,7 +1849,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlFunction
-name|histogramLastValueFunction
+name|HISTOGRAM_LAST_VALUE
 init|=
 operator|new
 name|SqlFunction
@@ -1872,7 +1872,7 @@ name|otcNumericOrString
 argument_list|,
 name|SqlFunctionCategory
 operator|.
-name|Numeric
+name|NUMERIC
 argument_list|)
 decl_stmt|;
 comment|/**    *<code>SUM0</code> aggregate function.    */
@@ -1880,7 +1880,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlAggFunction
-name|sumEmptyIsZeroOperator
+name|SUM0
 init|=
 operator|new
 name|SqlSumEmptyIsZeroAggFunction
@@ -1896,7 +1896,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlRankFunction
-name|cumeDistFunc
+name|CUME_DIST
 init|=
 operator|new
 name|SqlRankFunction
@@ -1909,7 +1909,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlRankFunction
-name|denseRankFunc
+name|DENSE_RANK
 init|=
 operator|new
 name|SqlRankFunction
@@ -1922,7 +1922,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlRankFunction
-name|percentRankFunc
+name|PERCENT_RANK
 init|=
 operator|new
 name|SqlRankFunction
@@ -1935,7 +1935,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlRankFunction
-name|rankFunc
+name|RANK
 init|=
 operator|new
 name|SqlRankFunction
@@ -1948,7 +1948,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlRankFunction
-name|rowNumberFunc
+name|ROW_NUMBER
 init|=
 operator|new
 name|SqlRankFunction
@@ -1963,7 +1963,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlRowOperator
-name|rowConstructor
+name|ROW
 init|=
 operator|new
 name|SqlRowOperator
@@ -1974,7 +1974,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlOperator
-name|minusDateOperator
+name|MINUS_DATE
 init|=
 operator|new
 name|SqlDatetimeSubtractionOperator
@@ -1985,7 +1985,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlMultisetValueConstructor
-name|multisetValueConstructor
+name|MULTISET_VALUE
 init|=
 operator|new
 name|SqlMultisetValueConstructor
@@ -1996,7 +1996,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlMultisetQueryConstructor
-name|multisetQueryConstructor
+name|MULTISET_QUERY
 init|=
 operator|new
 name|SqlMultisetQueryConstructor
@@ -2007,7 +2007,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlMultisetQueryConstructor
-name|arrayQueryConstructor
+name|ARRAY_QUERY
 init|=
 operator|new
 name|SqlArrayQueryConstructor
@@ -2018,7 +2018,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlMultisetQueryConstructor
-name|mapQueryConstructor
+name|MAP_QUERY
 init|=
 operator|new
 name|SqlMapQueryConstructor
@@ -2029,7 +2029,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlCursorConstructor
-name|cursorConstructor
+name|CURSOR
 init|=
 operator|new
 name|SqlCursorConstructor
@@ -2040,29 +2040,29 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlColumnListConstructor
-name|columnListConstructor
+name|COLUMN_LIST
 init|=
 operator|new
 name|SqlColumnListConstructor
 argument_list|()
 decl_stmt|;
-comment|/**    * The<code>UNNEST<code>operator.    */
+comment|/**    * The<code>UNNEST</code> operator.    */
 specifier|public
 specifier|static
 specifier|final
 name|SqlSpecialOperator
-name|unnestOperator
+name|UNNEST
 init|=
 operator|new
 name|SqlUnnestOperator
 argument_list|()
 decl_stmt|;
-comment|/**    * The<code>LATERAL<code>operator.    */
+comment|/**    * The<code>LATERAL</code> operator.    */
 specifier|public
 specifier|static
 specifier|final
 name|SqlSpecialOperator
-name|lateralOperator
+name|LATERAL
 init|=
 operator|new
 name|SqlFunctionalOperator
@@ -2088,12 +2088,12 @@ operator|.
 name|otcAny
 argument_list|)
 decl_stmt|;
-comment|/**    * The "table function derived table" operator, which a table-valued    * function into a relation, e.g. "<code>SELECT * FROM    * TABLE(ramp(5))</code>".    *    *<p>This operator has function syntax (with one argument), whereas {@link    * #explicitTableOperator} is a prefix operator.    */
+comment|/**    * The "table function derived table" operator, which a table-valued    * function into a relation, e.g. "<code>SELECT * FROM    * TABLE(ramp(5))</code>".    *    *<p>This operator has function syntax (with one argument), whereas {@link    * #EXPLICIT_TABLE} is a prefix operator.    */
 specifier|public
 specifier|static
 specifier|final
 name|SqlSpecialOperator
-name|collectionTableOperator
+name|COLLECTION_TABLE
 init|=
 operator|new
 name|SqlCollectionTableOperator
@@ -2109,7 +2109,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlOverlapsOperator
-name|overlapsOperator
+name|OVERLAPS
 init|=
 operator|new
 name|SqlOverlapsOperator
@@ -2119,7 +2119,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlSpecialOperator
-name|valuesOperator
+name|VALUES
 init|=
 operator|new
 name|SqlValuesOperator
@@ -2129,7 +2129,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlLiteralChainOperator
-name|literalChainOperator
+name|LITERAL_CHAIN
 init|=
 operator|new
 name|SqlLiteralChainOperator
@@ -2139,7 +2139,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlInternalOperator
-name|throwOperator
+name|THROW
 init|=
 operator|new
 name|SqlThrowOperator
@@ -2149,7 +2149,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlBetweenOperator
-name|betweenOperator
+name|BETWEEN
 init|=
 operator|new
 name|SqlBetweenOperator
@@ -2167,7 +2167,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlBetweenOperator
-name|symmetricBetweenOperator
+name|SYMMETRIC_BETWEEN
 init|=
 operator|new
 name|SqlBetweenOperator
@@ -2185,7 +2185,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlBetweenOperator
-name|notBetweenOperator
+name|NOT_BETWEEN
 init|=
 operator|new
 name|SqlBetweenOperator
@@ -2203,7 +2203,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlBetweenOperator
-name|symmetricNotBetweenOperator
+name|SYMMETRIC_NOT_BETWEEN
 init|=
 operator|new
 name|SqlBetweenOperator
@@ -2221,7 +2221,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlSpecialOperator
-name|notLikeOperator
+name|NOT_LIKE
 init|=
 operator|new
 name|SqlLikeOperator
@@ -2239,7 +2239,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlSpecialOperator
-name|likeOperator
+name|LIKE
 init|=
 operator|new
 name|SqlLikeOperator
@@ -2257,7 +2257,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlSpecialOperator
-name|notSimilarOperator
+name|NOT_SIMILAR_TO
 init|=
 operator|new
 name|SqlLikeOperator
@@ -2275,7 +2275,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlSpecialOperator
-name|similarOperator
+name|SIMILAR_TO
 init|=
 operator|new
 name|SqlLikeOperator
@@ -2294,7 +2294,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlSpecialOperator
-name|escapeOperator
+name|ESCAPE
 init|=
 operator|new
 name|SqlSpecialOperator
@@ -2313,7 +2313,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlSelectOperator
-name|selectOperator
+name|SELECT
 init|=
 operator|new
 name|SqlSelectOperator
@@ -2323,7 +2323,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlCaseOperator
-name|caseOperator
+name|CASE
 init|=
 operator|new
 name|SqlCaseOperator
@@ -2333,7 +2333,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlJoinOperator
-name|joinOperator
+name|JOIN
 init|=
 operator|new
 name|SqlJoinOperator
@@ -2343,7 +2343,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlSpecialOperator
-name|insertOperator
+name|INSERT
 init|=
 operator|new
 name|SqlSpecialOperator
@@ -2359,7 +2359,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlSpecialOperator
-name|deleteOperator
+name|DELETE
 init|=
 operator|new
 name|SqlSpecialOperator
@@ -2375,7 +2375,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlSpecialOperator
-name|updateOperator
+name|UPDATE
 init|=
 operator|new
 name|SqlSpecialOperator
@@ -2391,7 +2391,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlSpecialOperator
-name|mergeOperator
+name|MERGE
 init|=
 operator|new
 name|SqlSpecialOperator
@@ -2407,7 +2407,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlSpecialOperator
-name|explainOperator
+name|EXPLAIN
 init|=
 operator|new
 name|SqlSpecialOperator
@@ -2423,7 +2423,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlOrderByOperator
-name|orderByOperator
+name|ORDER_BY
 init|=
 operator|new
 name|SqlOrderByOperator
@@ -2433,7 +2433,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlOperator
-name|procedureCallOperator
+name|PROCEDURE_CALL
 init|=
 operator|new
 name|SqlProcedureCallOperator
@@ -2443,40 +2443,40 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlOperator
-name|newOperator
+name|NEW
 init|=
 operator|new
 name|SqlNewOperator
 argument_list|()
 decl_stmt|;
-comment|/**    * The WINDOW clause of a SELECT statment.    *    * @see #overOperator    */
+comment|/**    * The WINDOW clause of a SELECT statment.    *    * @see #OVER    */
 specifier|public
 specifier|static
 specifier|final
 name|SqlWindowOperator
-name|windowOperator
+name|WINDOW
 init|=
 operator|new
 name|SqlWindowOperator
 argument_list|()
 decl_stmt|;
-comment|/**    * The<code>OVER</code> operator, which applies an aggregate functions to a    * {@link SqlWindow window}.    *    *<p>Operands are as follows:    *    *<ol>    *<li>name of window function ({@link org.eigenbase.sql.SqlCall})</li>    *<li>window name ({@link org.eigenbase.sql.SqlLiteral}) or window in-line    * specification (@link SqlWindowOperator})</li>    *</ul>    */
+comment|/**    * The<code>OVER</code> operator, which applies an aggregate functions to a    * {@link SqlWindow window}.    *    *<p>Operands are as follows:    *    *<ol>    *<li>name of window function ({@link org.eigenbase.sql.SqlCall})</li>    *<li>window name ({@link org.eigenbase.sql.SqlLiteral}) or window in-line    * specification (@link SqlWindowOperator})</li>    *</ol>    */
 specifier|public
 specifier|static
 specifier|final
 name|SqlBinaryOperator
-name|overOperator
+name|OVER
 init|=
 operator|new
 name|SqlOverOperator
 argument_list|()
 decl_stmt|;
-comment|/**    * An<code>REINTERPRET<code>operator is internal to the planner. When the    * physical storage of two types is the same, this operator may be used to    * reinterpret values of one type as the other. This operator is similar to    * a cast, except that it does not alter the data value. Like a regular cast    * it accepts one operand and stores the target type as the return type. It    * performs an overflow check if it has<i>any</i> second operand, whether    * true or not.    */
+comment|/**    * An<code>REINTERPRET</code> operator is internal to the planner. When the    * physical storage of two types is the same, this operator may be used to    * reinterpret values of one type as the other. This operator is similar to    * a cast, except that it does not alter the data value. Like a regular cast    * it accepts one operand and stores the target type as the return type. It    * performs an overflow check if it has<i>any</i> second operand, whether    * true or not.    */
 specifier|public
 specifier|static
 specifier|final
 name|SqlSpecialOperator
-name|reinterpretOperator
+name|REINTERPRET
 init|=
 operator|new
 name|SqlSpecialOperator
@@ -2509,12 +2509,12 @@ decl_stmt|;
 comment|//-------------------------------------------------------------
 comment|//                   FUNCTIONS
 comment|//-------------------------------------------------------------
-comment|/**    * The character substring function:<code>SUBSTRING(string FROM start [FOR    * length])</code>.    *    *<p>If the length parameter is a constant, the length of the result is the    * minimum of the length of the input and that length. Otherwise it is the    * length of the input.    *    *    */
+comment|/**    * The character substring function:<code>SUBSTRING(string FROM start [FOR    * length])</code>.    *    *<p>If the length parameter is a constant, the length of the result is the    * minimum of the length of the input and that length. Otherwise it is the    * length of the input.    */
 specifier|public
 specifier|static
 specifier|final
 name|SqlFunction
-name|substringFunc
+name|SUBSTRING
 init|=
 operator|new
 name|SqlSubstringFunction
@@ -2524,7 +2524,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlFunction
-name|convertFunc
+name|CONVERT
 init|=
 operator|new
 name|SqlConvertFunction
@@ -2536,7 +2536,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlFunction
-name|translateFunc
+name|TRANSLATE
 init|=
 operator|new
 name|SqlConvertFunction
@@ -2548,18 +2548,18 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlFunction
-name|overlayFunc
+name|OVERLAY
 init|=
 operator|new
 name|SqlOverlayFunction
 argument_list|()
 decl_stmt|;
-comment|/**    * The "TRIM" function.    */
+comment|/** The "TRIM" function. */
 specifier|public
 specifier|static
 specifier|final
 name|SqlFunction
-name|trimFunc
+name|TRIM
 init|=
 operator|new
 name|SqlTrimFunction
@@ -2569,7 +2569,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlFunction
-name|positionFunc
+name|POSITION
 init|=
 operator|new
 name|SqlPositionFunction
@@ -2579,7 +2579,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlFunction
-name|charLengthFunc
+name|CHAR_LENGTH
 init|=
 operator|new
 name|SqlFunction
@@ -2602,14 +2602,14 @@ name|otcCharString
 argument_list|,
 name|SqlFunctionCategory
 operator|.
-name|Numeric
+name|NUMERIC
 argument_list|)
 decl_stmt|;
 specifier|public
 specifier|static
 specifier|final
 name|SqlFunction
-name|characterLengthFunc
+name|CHARACTER_LENGTH
 init|=
 operator|new
 name|SqlFunction
@@ -2632,14 +2632,14 @@ name|otcCharString
 argument_list|,
 name|SqlFunctionCategory
 operator|.
-name|Numeric
+name|NUMERIC
 argument_list|)
 decl_stmt|;
 specifier|public
 specifier|static
 specifier|final
 name|SqlFunction
-name|upperFunc
+name|UPPER
 init|=
 operator|new
 name|SqlFunction
@@ -2662,14 +2662,14 @@ name|otcCharString
 argument_list|,
 name|SqlFunctionCategory
 operator|.
-name|String
+name|STRING
 argument_list|)
 decl_stmt|;
 specifier|public
 specifier|static
 specifier|final
 name|SqlFunction
-name|lowerFunc
+name|LOWER
 init|=
 operator|new
 name|SqlFunction
@@ -2692,14 +2692,14 @@ name|otcCharString
 argument_list|,
 name|SqlFunctionCategory
 operator|.
-name|String
+name|STRING
 argument_list|)
 decl_stmt|;
 specifier|public
 specifier|static
 specifier|final
 name|SqlFunction
-name|initcapFunc
+name|INITCAP
 init|=
 operator|new
 name|SqlFunction
@@ -2722,7 +2722,7 @@ name|otcCharString
 argument_list|,
 name|SqlFunctionCategory
 operator|.
-name|String
+name|STRING
 argument_list|)
 decl_stmt|;
 comment|/**    * Uses SqlOperatorTable.useDouble for its return type since we don't know    * what the result type will be by just looking at the operand types. For    * example POW(int, int) can return a non integer if the second operand is    * negative.    */
@@ -2730,7 +2730,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlFunction
-name|powerFunc
+name|POWER
 init|=
 operator|new
 name|SqlFunction
@@ -2753,14 +2753,14 @@ name|otcNumericX2
 argument_list|,
 name|SqlFunctionCategory
 operator|.
-name|Numeric
+name|NUMERIC
 argument_list|)
 decl_stmt|;
 specifier|public
 specifier|static
 specifier|final
 name|SqlFunction
-name|sqrtFunc
+name|SQRT
 init|=
 operator|new
 name|SqlFunction
@@ -2783,14 +2783,14 @@ name|otcNumeric
 argument_list|,
 name|SqlFunctionCategory
 operator|.
-name|Numeric
+name|NUMERIC
 argument_list|)
 decl_stmt|;
 specifier|public
 specifier|static
 specifier|final
 name|SqlFunction
-name|modFunc
+name|MOD
 init|=
 comment|// Return type is same as divisor (2nd operand)
 comment|// SQL2003 Part2 Section 6.27, Syntax Rules 9
@@ -2815,14 +2815,14 @@ name|otcExactNumericX2
 argument_list|,
 name|SqlFunctionCategory
 operator|.
-name|Numeric
+name|NUMERIC
 argument_list|)
 decl_stmt|;
 specifier|public
 specifier|static
 specifier|final
 name|SqlFunction
-name|lnFunc
+name|LN
 init|=
 operator|new
 name|SqlFunction
@@ -2845,14 +2845,14 @@ name|otcNumeric
 argument_list|,
 name|SqlFunctionCategory
 operator|.
-name|Numeric
+name|NUMERIC
 argument_list|)
 decl_stmt|;
 specifier|public
 specifier|static
 specifier|final
 name|SqlFunction
-name|log10Func
+name|LOG10
 init|=
 operator|new
 name|SqlFunction
@@ -2875,14 +2875,14 @@ name|otcNumeric
 argument_list|,
 name|SqlFunctionCategory
 operator|.
-name|Numeric
+name|NUMERIC
 argument_list|)
 decl_stmt|;
 specifier|public
 specifier|static
 specifier|final
 name|SqlFunction
-name|absFunc
+name|ABS
 init|=
 operator|new
 name|SqlFunction
@@ -2905,14 +2905,14 @@ name|otcNumericOrInterval
 argument_list|,
 name|SqlFunctionCategory
 operator|.
-name|Numeric
+name|NUMERIC
 argument_list|)
 decl_stmt|;
 specifier|public
 specifier|static
 specifier|final
 name|SqlFunction
-name|expFunc
+name|EXP
 init|=
 operator|new
 name|SqlFunction
@@ -2935,14 +2935,14 @@ name|otcNumeric
 argument_list|,
 name|SqlFunctionCategory
 operator|.
-name|Numeric
+name|NUMERIC
 argument_list|)
 decl_stmt|;
 specifier|public
 specifier|static
 specifier|final
 name|SqlFunction
-name|nullIfFunc
+name|NULLIF
 init|=
 operator|new
 name|SqlNullifFunction
@@ -2953,7 +2953,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlFunction
-name|coalesceFunc
+name|COALESCE
 init|=
 operator|new
 name|SqlCoalesceFunction
@@ -2964,7 +2964,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlFunction
-name|floorFunc
+name|FLOOR
 init|=
 operator|new
 name|SqlMonotonicUnaryFunction
@@ -2987,7 +2987,7 @@ name|otcNumericOrInterval
 argument_list|,
 name|SqlFunctionCategory
 operator|.
-name|Numeric
+name|NUMERIC
 argument_list|)
 decl_stmt|;
 comment|/**    * The<code>CEIL</code> function.    */
@@ -2995,7 +2995,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlFunction
-name|ceilFunc
+name|CEIL
 init|=
 operator|new
 name|SqlMonotonicUnaryFunction
@@ -3018,7 +3018,7 @@ name|otcNumericOrInterval
 argument_list|,
 name|SqlFunctionCategory
 operator|.
-name|Numeric
+name|NUMERIC
 argument_list|)
 decl_stmt|;
 comment|/**    * The<code>USER</code> function.    */
@@ -3026,7 +3026,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlFunction
-name|userFunc
+name|USER
 init|=
 operator|new
 name|SqlStringContextVariable
@@ -3039,7 +3039,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlFunction
-name|currentUserFunc
+name|CURRENT_USER
 init|=
 operator|new
 name|SqlStringContextVariable
@@ -3052,7 +3052,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlFunction
-name|sessionUserFunc
+name|SESSION_USER
 init|=
 operator|new
 name|SqlStringContextVariable
@@ -3065,7 +3065,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlFunction
-name|systemUserFunc
+name|SYSTEM_USER
 init|=
 operator|new
 name|SqlStringContextVariable
@@ -3078,7 +3078,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlFunction
-name|currentPathFunc
+name|CURRENT_PATH
 init|=
 operator|new
 name|SqlStringContextVariable
@@ -3091,7 +3091,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlFunction
-name|currentRoleFunc
+name|CURRENT_ROLE
 init|=
 operator|new
 name|SqlStringContextVariable
@@ -3104,7 +3104,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlFunction
-name|currentCatalogFunc
+name|CURRENT_CATALOG
 init|=
 operator|new
 name|SqlStringContextVariable
@@ -3117,7 +3117,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlFunction
-name|currentSchemaFunc
+name|CURRENT_SCHEMA
 init|=
 operator|new
 name|SqlStringContextVariable
@@ -3130,7 +3130,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlFunction
-name|localTimeFunc
+name|LOCALTIME
 init|=
 operator|new
 name|SqlAbstractTimeFunction
@@ -3147,7 +3147,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlFunction
-name|localTimestampFunc
+name|LOCALTIMESTAMP
 init|=
 operator|new
 name|SqlAbstractTimeFunction
@@ -3164,7 +3164,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlFunction
-name|currentTimeFunc
+name|CURRENT_TIME
 init|=
 operator|new
 name|SqlAbstractTimeFunction
@@ -3181,7 +3181,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlFunction
-name|currentTimestampFunc
+name|CURRENT_TIMESTAMP
 init|=
 operator|new
 name|SqlAbstractTimeFunction
@@ -3198,18 +3198,18 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlFunction
-name|currentDateFunc
+name|CURRENT_DATE
 init|=
 operator|new
 name|SqlCurrentDateFunction
 argument_list|()
 decl_stmt|;
-comment|/**    * Use of the<code>IN_FENNEL<code> forces argument to be evaluated in    * Fennel. Otherwise acts as identity function.    */
+comment|/**    * Use of the<code>IN_FENNEL</code> operator forces the argument to be    * evaluated in Fennel. Otherwise acts as identity function.    */
 specifier|public
 specifier|static
 specifier|final
 name|SqlFunction
-name|inFennelFunc
+name|IN_FENNEL
 init|=
 operator|new
 name|SqlMonotonicUnaryFunction
@@ -3232,15 +3232,15 @@ name|otcAny
 argument_list|,
 name|SqlFunctionCategory
 operator|.
-name|System
+name|SYSTEM
 argument_list|)
 decl_stmt|;
-comment|/**    * The SQL<code>CAST</code> operator.    *    *<p>The SQL syntax is    *    *<blockquote><code>CAST(<i>expression</i> AS<i>type</i>)</code>    *</blockqoute>    *    *<p>When the CAST operator is applies as a {@link SqlCall}, it has two    * arguments: the expression and the type. The type must not include a    * constraint, so<code>CAST(x AS INTEGER NOT NULL)</code>, for instance, is    * invalid.</p>    *    *<p>When the CAST operator is applied as a<code>RexCall</code>, the    * target type is simply stored as the return type, not an explicit operand.    * For example, the expression<code>CAST(1 + 2 AS DOUBLE)</code> will    * become a call to<code>CAST</code> with the expression<code>1 + 2</code>    * as its only operand.</p>    *    *<p>The<code>RexCall</code> form can also have a type which contains a    *<code>NOT NULL</code> constraint. When this expression is implemented, if    * the value is NULL, an exception will be thrown.</p>    */
+comment|/**    * The SQL<code>CAST</code> operator.    *    *<p>The SQL syntax is    *    *<blockquote><code>CAST(<i>expression</i> AS<i>type</i>)</code>    *</blockquote>    *    *<p>When the CAST operator is applies as a {@link SqlCall}, it has two    * arguments: the expression and the type. The type must not include a    * constraint, so<code>CAST(x AS INTEGER NOT NULL)</code>, for instance, is    * invalid.</p>    *    *<p>When the CAST operator is applied as a<code>RexCall</code>, the    * target type is simply stored as the return type, not an explicit operand.    * For example, the expression<code>CAST(1 + 2 AS DOUBLE)</code> will    * become a call to<code>CAST</code> with the expression<code>1 + 2</code>    * as its only operand.</p>    *    *<p>The<code>RexCall</code> form can also have a type which contains a    *<code>NOT NULL</code> constraint. When this expression is implemented, if    * the value is NULL, an exception will be thrown.</p>    */
 specifier|public
 specifier|static
 specifier|final
 name|SqlFunction
-name|castFunc
+name|CAST
 init|=
 operator|new
 name|SqlCastFunction
@@ -3251,7 +3251,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlFunction
-name|extractFunc
+name|EXTRACT
 init|=
 operator|new
 name|SqlExtractFunction
@@ -3262,7 +3262,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlFunction
-name|elementFunc
+name|ELEMENT
 init|=
 operator|new
 name|SqlFunction
@@ -3285,7 +3285,7 @@ name|otcMultiset
 argument_list|,
 name|SqlFunctionCategory
 operator|.
-name|System
+name|SYSTEM
 argument_list|)
 decl_stmt|;
 comment|/**    * The item operator {@code [ ... ]}, used to access a given element of an    * array or map. For example, {@code myArray[3]} or {@code "myMap['foo']"}.    *    *<p>The SQL standard calls the ARRAY variant a    *&lt;array element reference&gt;. Index is 1-based. The standard says    * to raise "data exception - array element error" but we currently return    * null.</p>    *    *<p>MAP is not standard SQL.</p>    */
@@ -3293,7 +3293,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlOperator
-name|itemOp
+name|ITEM
 init|=
 operator|new
 name|SqlItemOperator
@@ -3304,7 +3304,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlArrayValueConstructor
-name|arrayValueConstructor
+name|ARRAY_VALUE_CONSTRUCTOR
 init|=
 operator|new
 name|SqlArrayValueConstructor
@@ -3315,7 +3315,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlMapValueConstructor
-name|mapValueConstructor
+name|MAP_VALUE_CONSTRUCTOR
 init|=
 operator|new
 name|SqlMapValueConstructor
@@ -3326,7 +3326,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlInternalOperator
-name|sliceOp
+name|SLICE
 init|=
 operator|new
 name|SqlInternalOperator
@@ -3358,7 +3358,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlInternalOperator
-name|elementSlicefunc
+name|ELEMENT_SLICE
 init|=
 operator|new
 name|SqlInternalOperator
@@ -3425,7 +3425,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlInternalOperator
-name|scalarQueryOperator
+name|SCALAR_QUERY
 init|=
 operator|new
 name|SqlInternalOperator
@@ -3526,7 +3526,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlFunction
-name|cardinalityFunc
+name|CARDINALITY
 init|=
 operator|new
 name|SqlFunction
@@ -3549,7 +3549,7 @@ name|otcCollection
 argument_list|,
 name|SqlFunctionCategory
 operator|.
-name|System
+name|SYSTEM
 argument_list|)
 decl_stmt|;
 comment|/**    * The COLLECT operator. Multiset aggregator function.    */
@@ -3557,7 +3557,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlFunction
-name|collectFunc
+name|COLLECT
 init|=
 operator|new
 name|SqlFunction
@@ -3580,7 +3580,7 @@ name|otcAny
 argument_list|,
 name|SqlFunctionCategory
 operator|.
-name|System
+name|SYSTEM
 argument_list|)
 decl_stmt|;
 comment|/**    * The FUSION operator. Multiset aggregator function.    */
@@ -3588,7 +3588,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlFunction
-name|fusionFunc
+name|FUSION
 init|=
 operator|new
 name|SqlFunction
@@ -3611,7 +3611,7 @@ name|otcMultiset
 argument_list|,
 name|SqlFunctionCategory
 operator|.
-name|System
+name|SYSTEM
 argument_list|)
 decl_stmt|;
 comment|/**    * The sequence next value function:<code>NEXT VALUE FOR sequence</code>    */
@@ -3619,7 +3619,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlFunction
-name|nextValueFunc
+name|NEXT_VALUE
 init|=
 operator|new
 name|SqlFunction
@@ -3642,7 +3642,7 @@ name|otcCharString
 argument_list|,
 name|SqlFunctionCategory
 operator|.
-name|System
+name|SYSTEM
 argument_list|)
 block|{
 specifier|public
@@ -3661,7 +3661,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlSpecialOperator
-name|sampleFunction
+name|TABLESAMPLE
 init|=
 operator|new
 name|SqlSpecialOperator
@@ -3754,7 +3754,7 @@ parameter_list|()
 block|{
 if|if
 condition|(
-name|INSTANCE
+name|instance
 operator|==
 literal|null
 condition|)
@@ -3762,20 +3762,20 @@ block|{
 comment|// Creates and initializes the standard operator table.
 comment|// Uses two-phase construction, because we can't intialize the
 comment|// table until the constructor of the sub-class has completed.
-name|INSTANCE
+name|instance
 operator|=
 operator|new
 name|SqlStdOperatorTable
 argument_list|()
 expr_stmt|;
-name|INSTANCE
+name|instance
 operator|.
 name|init
 argument_list|()
 expr_stmt|;
 block|}
 return|return
-name|INSTANCE
+name|instance
 return|;
 block|}
 block|}

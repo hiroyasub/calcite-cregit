@@ -258,7 +258,7 @@ name|getCalendar
 argument_list|(
 name|DateTimeUtil
 operator|.
-name|gmtZone
+name|GMT_ZONE
 argument_list|)
 decl_stmt|;
 name|cal
@@ -350,7 +350,7 @@ name|getCalendar
 argument_list|(
 name|DateTimeUtil
 operator|.
-name|gmtZone
+name|GMT_ZONE
 argument_list|)
 decl_stmt|;
 name|cal
@@ -608,7 +608,7 @@ name|setTimeZone
 argument_list|(
 name|DateTimeUtil
 operator|.
-name|gmtZone
+name|GMT_ZONE
 argument_list|)
 expr_stmt|;
 name|lastFormat

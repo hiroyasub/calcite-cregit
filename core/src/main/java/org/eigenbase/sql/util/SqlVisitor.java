@@ -28,7 +28,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Visitor class, follows the {@link org.eigenbase.util.Glossary#VisitorPattern  * visitor pattern}.  *  *<p>The type parameter<code>R</code> is the return type of each<code>  * visit()</code> method. If the methods do not need to return a value, use  * {@link Void}.  *  * @see SqlBasicVisitor  * @see SqlNode#accept(SqlVisitor)  * @see SqlOperator#acceptCall  */
+comment|/**  * Visitor class, follows the {@link org.eigenbase.util.Glossary#VISITOR_PATTERN  * visitor pattern}.  *  *<p>The type parameter<code>R</code> is the return type of each<code>  * visit()</code> method. If the methods do not need to return a value, use  * {@link Void}.  *  * @see SqlBasicVisitor  * @see SqlNode#accept(SqlVisitor)  * @see SqlOperator#acceptCall  */
 end_comment
 
 begin_interface

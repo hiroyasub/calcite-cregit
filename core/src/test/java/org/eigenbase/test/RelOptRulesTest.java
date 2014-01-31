@@ -440,7 +440,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testPushSemiJoinPastJoinRule_Left
+name|testPushSemiJoinPastJoinRuleLeft
 parameter_list|()
 throws|throws
 name|Exception
@@ -494,7 +494,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testPushSemiJoinPastJoinRule_Right
+name|testPushSemiJoinPastJoinRuleRight
 parameter_list|()
 throws|throws
 name|Exception

@@ -136,7 +136,7 @@ block|{
 return|return
 name|SqlSyntax
 operator|.
-name|Postfix
+name|POSTFIX
 return|;
 block|}
 specifier|public

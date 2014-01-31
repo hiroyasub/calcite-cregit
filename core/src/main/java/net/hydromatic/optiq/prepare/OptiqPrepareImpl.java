@@ -4895,7 +4895,7 @@ name|expression
 argument_list|,
 name|SqlStdOperatorTable
 operator|.
-name|greaterThanOperator
+name|GREATER_THAN
 argument_list|)
 return|;
 case|case
@@ -4908,7 +4908,7 @@ name|expression
 argument_list|,
 name|SqlStdOperatorTable
 operator|.
-name|lessThanOperator
+name|LESS_THAN
 argument_list|)
 return|;
 case|case

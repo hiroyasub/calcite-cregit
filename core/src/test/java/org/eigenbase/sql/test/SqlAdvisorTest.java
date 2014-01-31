@@ -27,18 +27,6 @@ end_import
 
 begin_import
 import|import
-name|java
-operator|.
-name|util
-operator|.
-name|logging
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
 name|org
 operator|.
 name|eigenbase
@@ -811,22 +799,15 @@ argument_list|,
 literal|"Keyword(UNION)"
 argument_list|)
 decl_stmt|;
-comment|//~ Instance fields --------------------------------------------------------
-specifier|public
+specifier|private
+specifier|static
 specifier|final
-name|Logger
-name|logger
+name|String
+name|EMPNO_EMP
 init|=
-name|Logger
-operator|.
-name|getLogger
-argument_list|(
-name|getClass
-argument_list|()
-operator|.
-name|getName
-argument_list|()
-argument_list|)
+literal|"Column(EMPNO)\n"
+operator|+
+literal|"Table(EMP)\n"
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 specifier|public
@@ -3518,14 +3499,6 @@ name|sql
 operator|=
 literal|"select * from emp where em^"
 expr_stmt|;
-specifier|final
-name|String
-name|EMPNO_EMP
-init|=
-literal|"Column(EMPNO)\n"
-operator|+
-literal|"Table(EMP)\n"
-decl_stmt|;
 name|assertComplete
 argument_list|(
 name|sql

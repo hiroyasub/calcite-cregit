@@ -388,7 +388,7 @@ argument_list|()
 operator|==
 name|SqlStdOperatorTable
 operator|.
-name|notOperator
+name|NOT
 decl_stmt|;
 if|if
 condition|(
@@ -476,13 +476,13 @@ name|op
 operator|==
 name|SqlStdOperatorTable
 operator|.
-name|isNullOperator
+name|IS_NULL
 operator|||
 name|op
 operator|==
 name|SqlStdOperatorTable
 operator|.
-name|isUnknownOperator
+name|IS_UNKNOWN
 condition|)
 block|{
 name|alwaysTrue
@@ -496,7 +496,7 @@ name|op
 operator|==
 name|SqlStdOperatorTable
 operator|.
-name|isNotNullOperator
+name|IS_NOT_NULL
 condition|)
 block|{
 name|alwaysTrue
@@ -2519,7 +2519,7 @@ argument_list|()
 operator|==
 name|SqlStdOperatorTable
 operator|.
-name|castFunc
+name|CAST
 condition|)
 block|{
 name|reduceCasts
@@ -2672,7 +2672,7 @@ argument_list|()
 operator|!=
 name|SqlStdOperatorTable
 operator|.
-name|castFunc
+name|CAST
 condition|)
 block|{
 return|return;

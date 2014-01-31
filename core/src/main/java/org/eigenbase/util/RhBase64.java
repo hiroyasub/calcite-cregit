@@ -56,7 +56,7 @@ specifier|public
 class|class
 name|RhBase64
 block|{
-comment|/* ********  P U B L I C   F I E L D S  ******** */
+comment|// ********  P U B L I C   F I E L D S  ********
 comment|//~ Static fields/initializers ---------------------------------------------
 comment|/**    * No options specified. Value is zero.    */
 specifier|public
@@ -103,7 +103,7 @@ name|DONT_BREAK_LINES
 init|=
 literal|8
 decl_stmt|;
-comment|/* ********  P R I V A T E   F I E L D S  ******** */
+comment|// ********  P R I V A T E   F I E L D S  ********
 comment|/**    * Maximum line length (76) of Base64 output.    */
 specifier|private
 specifier|static
@@ -159,7 +159,7 @@ specifier|static
 specifier|final
 name|byte
 index|[]
-name|_NATIVE_ALPHABET
+name|NATIVE_ALPHABET
 init|=
 block|{
 comment|// May be something funny like EBCDIC
@@ -489,11 +489,11 @@ static|static
 block|{
 name|byte
 index|[]
-name|__bytes
+name|bytes
 decl_stmt|;
 try|try
 block|{
-name|__bytes
+name|bytes
 operator|=
 literal|"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
 operator|.
@@ -509,15 +509,15 @@ name|UnsupportedEncodingException
 name|use
 parameter_list|)
 block|{
-name|__bytes
+name|bytes
 operator|=
-name|_NATIVE_ALPHABET
+name|NATIVE_ALPHABET
 expr_stmt|;
 comment|// Fall back to native encoding
 block|}
 name|ALPHABET
 operator|=
-name|__bytes
+name|bytes
 expr_stmt|;
 block|}
 comment|/**    * Translates a Base64 value to either its 6-bit reconstruction value or a    * negative number indicating some other meaning.    */
@@ -903,8 +903,8 @@ parameter_list|()
 block|{
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/* ********  E N C O D I N G   M E T H O D S  ******** */
-comment|/**    * Encodes up to the first three bytes of array<var>threeBytes</var> and    * returns a four-byte array in Base64 notation. The actual number of    * significant bytes in your array is given by<var>numSigBytes</var>. The    * array<var>threeBytes</var> needs only be as big as<var>    * numSigBytes</var>. Code can reuse a byte array by passing a four-byte    * array as<var>b4</var>.    *    * @param b4          A reusable byte array to reduce array instantiation    * @param threeBytes  the array to convert    * @param numSigBytes the number of significant bytes in your array    * @return four byte array in Base64 notation.    * @since 1.5.1    */
+comment|// ********  E N C O D I N G   M E T H O D S  ********
+comment|/**    * Encodes up to the first three bytes of array {@code threeBytes} and    * returns a four-byte array in Base64 notation. The actual number of    * significant bytes in your array is given by {@code numSigBytes}. The    * array {@code threeBytes} needs only be as big as {@code numSigBytes}.    * Code can reuse a byte array by passing a four-byte    * array as {@code b4}.    *    * @param b4          A reusable byte array to reduce array instantiation    * @param threeBytes  the array to convert    * @param numSigBytes the number of significant bytes in your array    * @return four byte array in Base64 notation.    * @since 1.5.1    */
 specifier|private
 specifier|static
 name|byte
@@ -940,7 +940,7 @@ return|return
 name|b4
 return|;
 block|}
-comment|/**    * Encodes up to three bytes of the array<var>source</var> and writes the    * resulting four Base64 bytes to<var>destination</var>. The source and    * destination arrays can be manipulated anywhere along their length by    * specifying<var>srcOffset</var> and<var>destOffset</var>. This method    * does not check to make sure your arrays are large enough to accomodate    *<var>srcOffset</var> + 3 for the<var>source</var> array or<var>    * destOffset</var> + 4 for the<var>destination</var> array. The actual    * number of significant bytes in your array is given by<var>    * numSigBytes</var>.    *    * @param source      the array to convert    * @param srcOffset   the index where conversion begins    * @param numSigBytes the number of significant bytes in your array    * @param destination the array to hold the conversion    * @param destOffset  the index where output will be put    * @return the<var>destination</var> array    * @since 1.3    */
+comment|/**    * Encodes up to three bytes of the array {@code source} and writes the    * resulting four Base64 bytes to {@code destination}. The source and    * destination arrays can be manipulated anywhere along their length by    * specifying {@code srcOffset} and {@code destOffset}. This method    * does not check to make sure your arrays are large enough to accomodate    * {@code srcOffset} + 3 for the {@code source} array or    * {@code destOffset} + 4 for the {@code destination} array. The actual    * number of significant bytes in your array is given by {@code numSigBytes}.    *    * @param source      the array to convert    * @param srcOffset   the index where conversion begins    * @param numSigBytes the number of significant bytes in your array    * @param destination the array to hold the conversion    * @param destOffset  the index where output will be put    * @return the {@code destination} array    * @since 1.3    */
 specifier|private
 specifier|static
 name|byte
@@ -1413,6 +1413,7 @@ name|Exception
 name|e
 parameter_list|)
 block|{
+comment|// ignore
 block|}
 try|try
 block|{
@@ -1428,6 +1429,7 @@ name|Exception
 name|e
 parameter_list|)
 block|{
+comment|// ignore
 block|}
 try|try
 block|{
@@ -1443,6 +1445,7 @@ name|Exception
 name|e
 parameter_list|)
 block|{
+comment|// ignore
 block|}
 try|try
 block|{
@@ -1458,6 +1461,7 @@ name|Exception
 name|e
 parameter_list|)
 block|{
+comment|// ignore
 block|}
 block|}
 comment|// Return value according to relevant encoding.
@@ -1718,6 +1722,7 @@ name|Exception
 name|e
 parameter_list|)
 block|{
+comment|// ignore
 block|}
 try|try
 block|{
@@ -1733,6 +1738,7 @@ name|Exception
 name|e
 parameter_list|)
 block|{
+comment|// ignore
 block|}
 try|try
 block|{
@@ -1748,6 +1754,7 @@ name|Exception
 name|e
 parameter_list|)
 block|{
+comment|// ignore
 block|}
 block|}
 comment|// Return value according to relevant encoding.
@@ -1998,8 +2005,8 @@ return|;
 block|}
 block|}
 block|}
-comment|/* ********  D E C O D I N G   M E T H O D S  ******** */
-comment|/**    * Decodes four bytes from array<var>source</var> and writes the resulting    * bytes (up to three of them) to<var>destination</var>. The source and    * destination arrays can be manipulated anywhere along their length by    * specifying<var>srcOffset</var> and<var>destOffset</var>. This method    * does not check to make sure your arrays are large enough to accomodate    *<var>srcOffset</var> + 4 for the<var>source</var> array or<var>    * destOffset</var> + 3 for the<var>destination</var> array. This method    * returns the actual number of bytes that were converted from the Base64    * encoding.    *    * @param source      the array to convert    * @param srcOffset   the index where conversion begins    * @param destination the array to hold the conversion    * @param destOffset  the index where output will be put    * @return the number of decoded bytes converted    * @since 1.3    */
+comment|// ********  D E C O D I N G   M E T H O D S  ********
+comment|/**    * Decodes four bytes from array {@code source} and writes the resulting    * bytes (up to three of them) to {@code destination}. The source and    * destination arrays can be manipulated anywhere along their length by    * specifying {@code srcOffset} and {@code destOffset}. This method    * does not check to make sure your arrays are large enough to accomodate    * {@code srcOffset} + 4 for the {@code source} array or    * {@code destOffset} + 3 for the {@code destination} array. This method    * returns the actual number of bytes that were converted from the Base64    * encoding.    *    * @param source      the array to convert    * @param srcOffset   the index where conversion begins    * @param destination the array to hold the conversion    * @param destOffset  the index where output will be put    * @return the number of decoded bytes converted    * @since 1.3    */
 specifier|private
 specifier|static
 name|int
@@ -2910,6 +2917,7 @@ name|Exception
 name|e
 parameter_list|)
 block|{
+comment|// ignore
 block|}
 try|try
 block|{
@@ -2925,6 +2933,7 @@ name|Exception
 name|e
 parameter_list|)
 block|{
+comment|// ignore
 block|}
 try|try
 block|{
@@ -2940,6 +2949,7 @@ name|Exception
 name|e
 parameter_list|)
 block|{
+comment|// ignore
 block|}
 block|}
 block|}
@@ -3061,6 +3071,7 @@ name|Exception
 name|e
 parameter_list|)
 block|{
+comment|// ignore
 block|}
 try|try
 block|{
@@ -3076,6 +3087,7 @@ name|Exception
 name|e
 parameter_list|)
 block|{
+comment|// ignore
 block|}
 block|}
 return|return
@@ -3167,6 +3179,7 @@ name|Exception
 name|e
 parameter_list|)
 block|{
+comment|// ignore
 block|}
 block|}
 return|return
@@ -3262,6 +3275,7 @@ name|Exception
 name|e
 parameter_list|)
 block|{
+comment|// ignore
 block|}
 block|}
 return|return
@@ -3475,6 +3489,7 @@ name|Exception
 name|e
 parameter_list|)
 block|{
+comment|// ignore
 block|}
 block|}
 return|return
@@ -3646,6 +3661,7 @@ name|Exception
 name|e
 parameter_list|)
 block|{
+comment|// ignore
 block|}
 block|}
 return|return
@@ -3653,7 +3669,7 @@ name|encodedData
 return|;
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------
-comment|/* ********  I N N E R   C L A S S   I N P U T S T R E A M  ******** */
+comment|// ********  I N N E R   C L A S S   I N P U T S T R E A M  ********
 comment|/**    * A {@link RhBase64.InputStream} will read data from another<tt>    * InputStream</tt>, given in the constructor, and encode/decode    * to/from Base64 notation on the fly.    *    * @see RhBase64    */
 specifier|public
 specifier|static
@@ -4165,7 +4181,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**      * Calls {@link #read()} repeatedly until the end of stream is reached      * or<var>len</var> bytes are read. Returns number of bytes read into      * array or -1 if end of stream is encountered.      *      * @param dest array to hold values      * @param off  offset for array      * @param len  max number of bytes to read into array      * @return bytes read into array or -1 if end of stream is encountered.      * @since 1.3      */
+comment|/**      * Calls {@link #read()} repeatedly until the end of stream is reached      * or {@code len} bytes are read. Returns number of bytes read into      * array or -1 if end of stream is encountered.      *      * @param dest array to hold values      * @param off  offset for array      * @param len  max number of bytes to read into array      * @return bytes read into array or -1 if end of stream is encountered.      * @since 1.3      */
 specifier|public
 name|int
 name|read
@@ -4251,7 +4267,7 @@ name|i
 return|;
 block|}
 block|}
-comment|/* ********  I N N E R   C L A S S   O U T P U T S T R E A M  ******** */
+comment|// ********  I N N E R   C L A S S   O U T P U T S T R E A M  ********
 comment|/**    * A {@link RhBase64.OutputStream} will write data to another<tt>    * OutputStream</tt>, given in the constructor, and encode/decode    * to/from Base64 notation on the fly.    *    * @see RhBase64    * @since 1.3    */
 specifier|public
 specifier|static
@@ -4595,7 +4611,7 @@ throw|;
 block|}
 block|}
 block|}
-comment|/**      * Calls {@link #write(int)} repeatedly until<var>len</var> bytes are      * written.      *      * @param theBytes array from which to read bytes      * @param off      offset for array      * @param len      max number of bytes to read into array      * @since 1.3      */
+comment|/**      * Calls {@link #write(int)} repeatedly until {@code len} bytes are      * written.      *      * @param theBytes array from which to read bytes      * @param off      offset for array      * @param len      max number of bytes to read into array      * @since 1.3      */
 specifier|public
 name|void
 name|write

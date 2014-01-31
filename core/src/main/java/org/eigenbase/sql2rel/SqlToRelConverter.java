@@ -359,7 +359,7 @@ specifier|protected
 specifier|static
 specifier|final
 name|Logger
-name|sqlToRelTracer
+name|SQL2REL_LOGGER
 init|=
 name|EigenbaseTrace
 operator|.
@@ -1248,7 +1248,7 @@ expr_stmt|;
 name|boolean
 name|dumpPlan
 init|=
-name|sqlToRelTracer
+name|SQL2REL_LOGGER
 operator|.
 name|isLoggable
 argument_list|(
@@ -1262,7 +1262,7 @@ condition|(
 name|dumpPlan
 condition|)
 block|{
-name|sqlToRelTracer
+name|SQL2REL_LOGGER
 operator|.
 name|fine
 argument_list|(
@@ -1356,7 +1356,7 @@ expr_stmt|;
 name|boolean
 name|dumpPlan
 init|=
-name|sqlToRelTracer
+name|SQL2REL_LOGGER
 operator|.
 name|isLoggable
 argument_list|(
@@ -1370,7 +1370,7 @@ condition|(
 name|dumpPlan
 condition|)
 block|{
-name|sqlToRelTracer
+name|SQL2REL_LOGGER
 operator|.
 name|fine
 argument_list|(
@@ -2678,7 +2678,7 @@ argument_list|()
 operator|==
 name|SqlStdOperatorTable
 operator|.
-name|andOperator
+name|AND
 operator|)
 operator|||
 operator|(
@@ -2689,7 +2689,7 @@ argument_list|()
 operator|==
 name|SqlStdOperatorTable
 operator|.
-name|orOperator
+name|OR
 operator|)
 condition|)
 block|{
@@ -2746,7 +2746,7 @@ argument_list|()
 operator|==
 name|SqlStdOperatorTable
 operator|.
-name|notOperator
+name|NOT
 condition|)
 block|{
 name|SqlNode
@@ -2782,7 +2782,7 @@ argument_list|()
 operator|==
 name|SqlStdOperatorTable
 operator|.
-name|andOperator
+name|AND
 condition|)
 block|{
 name|SqlNode
@@ -2830,7 +2830,7 @@ index|]
 operator|=
 name|SqlStdOperatorTable
 operator|.
-name|notOperator
+name|NOT
 operator|.
 name|createCall
 argument_list|(
@@ -2881,7 +2881,7 @@ name|orNode
 init|=
 name|SqlStdOperatorTable
 operator|.
-name|orOperator
+name|OR
 operator|.
 name|createCall
 argument_list|(
@@ -2913,7 +2913,7 @@ argument_list|()
 operator|==
 name|SqlStdOperatorTable
 operator|.
-name|orOperator
+name|OR
 condition|)
 block|{
 name|SqlNode
@@ -2961,7 +2961,7 @@ index|]
 operator|=
 name|SqlStdOperatorTable
 operator|.
-name|notOperator
+name|NOT
 operator|.
 name|createCall
 argument_list|(
@@ -3012,7 +3012,7 @@ name|andNode
 init|=
 name|SqlStdOperatorTable
 operator|.
-name|andOperator
+name|AND
 operator|.
 name|createCall
 argument_list|(
@@ -3044,7 +3044,7 @@ argument_list|()
 operator|==
 name|SqlStdOperatorTable
 operator|.
-name|notOperator
+name|NOT
 condition|)
 block|{
 name|SqlNode
@@ -3114,7 +3114,7 @@ block|{
 return|return
 name|SqlStdOperatorTable
 operator|.
-name|inOperator
+name|IN
 operator|.
 name|createCall
 argument_list|(
@@ -3139,7 +3139,7 @@ block|{
 return|return
 name|SqlStdOperatorTable
 operator|.
-name|notInOperator
+name|NOT_IN
 operator|.
 name|createCall
 argument_list|(
@@ -4323,7 +4323,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|equalsOperator
+name|EQUALS
 argument_list|,
 name|leftKeys
 index|[
@@ -4416,7 +4416,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|equalsOperator
+name|EQUALS
 argument_list|,
 name|leftKeys
 index|[
@@ -4485,7 +4485,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|notOperator
+name|NOT
 argument_list|,
 name|result
 argument_list|)
@@ -4601,7 +4601,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|equalsOperator
+name|EQUALS
 argument_list|,
 name|key
 operator|.
@@ -5079,7 +5079,7 @@ name|call
 operator|=
 name|SqlStdOperatorTable
 operator|.
-name|rowConstructor
+name|ROW
 operator|.
 name|createCall
 argument_list|(
@@ -6994,7 +6994,7 @@ argument_list|()
 operator|==
 name|SqlStdOperatorTable
 operator|.
-name|sampleFunction
+name|TABLESAMPLE
 condition|)
 block|{
 specifier|final
@@ -8831,7 +8831,7 @@ name|conditionType
 condition|)
 block|{
 case|case
-name|On
+name|ON
 case|:
 name|bb
 operator|.
@@ -8856,7 +8856,7 @@ name|condition
 argument_list|)
 return|;
 case|case
-name|Using
+name|USING
 case|:
 name|SqlNodeList
 name|list
@@ -9059,7 +9059,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|equalsOperator
+name|EQUALS
 argument_list|,
 name|left
 argument_list|,
@@ -9088,7 +9088,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|andOperator
+name|AND
 argument_list|,
 name|conditionExp
 argument_list|,
@@ -9118,13 +9118,13 @@ name|joinType
 condition|)
 block|{
 case|case
-name|Comma
+name|COMMA
 case|:
 case|case
-name|Inner
+name|INNER
 case|:
 case|case
-name|Cross
+name|CROSS
 case|:
 return|return
 name|JoinRelType
@@ -9132,7 +9132,7 @@ operator|.
 name|INNER
 return|;
 case|case
-name|Full
+name|FULL
 case|:
 return|return
 name|JoinRelType
@@ -9140,7 +9140,7 @@ operator|.
 name|FULL
 return|;
 case|case
-name|Left
+name|LEFT
 case|:
 return|return
 name|JoinRelType
@@ -9148,7 +9148,7 @@ operator|.
 name|LEFT
 return|;
 case|case
-name|Right
+name|RIGHT
 case|:
 return|return
 name|JoinRelType
@@ -9331,7 +9331,7 @@ name|groupList
 operator|=
 name|SqlNodeList
 operator|.
-name|Empty
+name|EMPTY
 expr_stmt|;
 block|}
 comment|// register the group exprs
@@ -10789,7 +10789,7 @@ decl_stmt|;
 name|boolean
 name|dumpPlan
 init|=
-name|sqlToRelTracer
+name|SQL2REL_LOGGER
 operator|.
 name|isLoggable
 argument_list|(
@@ -10813,7 +10813,7 @@ condition|(
 name|dumpPlan
 condition|)
 block|{
-name|sqlToRelTracer
+name|SQL2REL_LOGGER
 operator|.
 name|fine
 argument_list|(
@@ -13145,7 +13145,7 @@ name|op
 operator|!=
 name|SqlStdOperatorTable
 operator|.
-name|multisetValueConstructor
+name|MULTISET_VALUE
 operator|)
 operator|&&
 operator|(
@@ -13153,7 +13153,7 @@ name|op
 operator|!=
 name|SqlStdOperatorTable
 operator|.
-name|multisetQueryConstructor
+name|MULTISET_QUERY
 operator|)
 condition|)
 block|{
@@ -13176,7 +13176,7 @@ name|op
 operator|==
 name|SqlStdOperatorTable
 operator|.
-name|multisetValueConstructor
+name|MULTISET_VALUE
 condition|)
 block|{
 specifier|final
@@ -16190,7 +16190,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|isTrueOperator
+name|IS_TRUE
 argument_list|,
 name|fieldAccess
 argument_list|)
@@ -16309,7 +16309,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|isTrueOperator
+name|IS_TRUE
 argument_list|,
 name|rexNode
 argument_list|)
@@ -16325,7 +16325,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|notOperator
+name|NOT
 argument_list|,
 name|rexBuilder
 operator|.
@@ -16333,7 +16333,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|isTrueOperator
+name|IS_TRUE
 argument_list|,
 name|rexNode
 argument_list|)
@@ -16381,7 +16381,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|andOperator
+name|AND
 argument_list|,
 name|rexNode
 argument_list|,
@@ -16391,7 +16391,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|isNotNullOperator
+name|IS_NOT_NULL
 argument_list|,
 name|rexBuilder
 operator|.
@@ -16588,7 +16588,7 @@ argument_list|()
 operator|==
 name|SqlStdOperatorTable
 operator|.
-name|castFunc
+name|CAST
 condition|)
 block|{
 name|RexNode
@@ -17439,7 +17439,7 @@ name|selectItem
 argument_list|,
 name|SqlStdOperatorTable
 operator|.
-name|asOperator
+name|AS
 argument_list|)
 condition|)
 block|{
@@ -18748,7 +18748,7 @@ argument_list|()
 argument_list|,
 name|SqlStdOperatorTable
 operator|.
-name|histogramAggFunction
+name|HISTOGRAM_AGG
 argument_list|,
 name|exprs
 argument_list|)
@@ -18762,7 +18762,7 @@ name|makeOver
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|histogramAggFunction
+name|HISTOGRAM_AGG
 operator|.
 name|inferReturnType
 argument_list|(
@@ -18771,7 +18771,7 @@ argument_list|)
 argument_list|,
 name|SqlStdOperatorTable
 operator|.
-name|histogramAggFunction
+name|HISTOGRAM_AGG
 argument_list|,
 name|exprs
 argument_list|,
@@ -18879,7 +18879,7 @@ name|aggOp
 operator|==
 name|SqlStdOperatorTable
 operator|.
-name|sumOperator
+name|SUM
 decl_stmt|;
 name|SqlAggFunction
 name|aggOpToUse
@@ -18888,7 +18888,7 @@ name|needSum0
 condition|?
 name|SqlStdOperatorTable
 operator|.
-name|sumEmptyIsZeroOperator
+name|SUM0
 else|:
 name|aggOp
 decl_stmt|;
@@ -18929,7 +18929,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**      * Returns the histogram operator corresponding to a given aggregate      * function.      *      *<p>For example,<code>getHistogramOp({@link      * SqlStdOperatorTable#minOperator}}</code> returns {@link      * SqlStdOperatorTable#histogramMinFunction}.      *      * @param aggFunction An aggregate function      * @return Its histogram function, or null      */
+comment|/**      * Returns the histogram operator corresponding to a given aggregate      * function.      *      *<p>For example,<code>getHistogramOp({@link      * SqlStdOperatorTable#MIN}}</code> returns {@link      * SqlStdOperatorTable#HISTOGRAM_MIN}.      *      * @param aggFunction An aggregate function      * @return Its histogram function, or null      */
 name|SqlFunction
 name|getHistogramOp
 parameter_list|(
@@ -18943,13 +18943,13 @@ name|aggFunction
 operator|==
 name|SqlStdOperatorTable
 operator|.
-name|minOperator
+name|MIN
 condition|)
 block|{
 return|return
 name|SqlStdOperatorTable
 operator|.
-name|histogramMinFunction
+name|HISTOGRAM_MIN
 return|;
 block|}
 if|else if
@@ -18958,13 +18958,13 @@ name|aggFunction
 operator|==
 name|SqlStdOperatorTable
 operator|.
-name|maxOperator
+name|MAX
 condition|)
 block|{
 return|return
 name|SqlStdOperatorTable
 operator|.
-name|histogramMaxFunction
+name|HISTOGRAM_MAX
 return|;
 block|}
 if|else if
@@ -18973,13 +18973,13 @@ name|aggFunction
 operator|==
 name|SqlStdOperatorTable
 operator|.
-name|firstValueOperator
+name|FIRST_VALUE
 condition|)
 block|{
 return|return
 name|SqlStdOperatorTable
 operator|.
-name|histogramFirstValueFunction
+name|HISTOGRAM_FIRST_VALUE
 return|;
 block|}
 if|else if
@@ -18988,13 +18988,13 @@ name|aggFunction
 operator|==
 name|SqlStdOperatorTable
 operator|.
-name|lastValueOperator
+name|LAST_VALUE
 condition|)
 block|{
 return|return
 name|SqlStdOperatorTable
 operator|.
-name|histogramLastValueFunction
+name|HISTOGRAM_LAST_VALUE
 return|;
 block|}
 else|else

@@ -489,7 +489,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|andOperator
+name|AND
 argument_list|,
 name|newPred
 argument_list|,

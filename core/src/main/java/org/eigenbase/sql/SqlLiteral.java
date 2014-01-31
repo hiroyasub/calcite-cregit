@@ -604,7 +604,7 @@ argument_list|()
 operator|==
 name|SqlStdOperatorTable
 operator|.
-name|castFunc
+name|CAST
 operator|)
 condition|)
 block|{

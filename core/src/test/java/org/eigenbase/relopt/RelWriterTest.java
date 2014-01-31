@@ -467,7 +467,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|equalsOperator
+name|EQUALS
 argument_list|,
 name|rexBuilder
 operator|.
@@ -549,7 +549,7 @@ name|AggregateCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|countOperator
+name|COUNT
 argument_list|,
 literal|true
 argument_list|,
@@ -570,7 +570,7 @@ name|AggregateCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|countOperator
+name|COUNT
 argument_list|,
 literal|false
 argument_list|,

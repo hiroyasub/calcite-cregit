@@ -246,7 +246,7 @@ name|selectItem
 argument_list|,
 name|SqlStdOperatorTable
 operator|.
-name|asOperator
+name|AS
 argument_list|)
 condition|)
 block|{

@@ -681,7 +681,7 @@ parameter_list|()
 block|{
 specifier|final
 name|int
-name|ITERATION_COUNT
+name|iterationCount
 init|=
 literal|10000
 decl_stmt|;
@@ -700,7 +700,7 @@ name|Integer
 argument_list|>
 argument_list|()
 argument_list|,
-name|ITERATION_COUNT
+name|iterationCount
 argument_list|)
 expr_stmt|;
 specifier|final
@@ -739,7 +739,7 @@ name|Integer
 argument_list|>
 argument_list|()
 argument_list|,
-name|ITERATION_COUNT
+name|iterationCount
 argument_list|)
 expr_stmt|;
 block|}
@@ -767,7 +767,7 @@ literal|5
 argument_list|)
 argument_list|)
 argument_list|,
-name|ITERATION_COUNT
+name|iterationCount
 argument_list|)
 expr_stmt|;
 block|}

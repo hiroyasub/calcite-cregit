@@ -51,6 +51,18 @@ name|*
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
+name|util14
+operator|.
+name|DateTimeUtil
+import|;
+end_import
+
 begin_comment
 comment|/**  * A SQL literal representing a TIME value, for example<code>TIME  * '14:33:44.567'</code>.  *  *<p>Create values using {@link SqlLiteral#createTime}.  */
 end_comment
@@ -90,9 +102,9 @@ name|TIME
 argument_list|,
 name|precision
 argument_list|,
-name|SqlParserUtil
+name|DateTimeUtil
 operator|.
-name|TimeFormatStr
+name|TIME_FORMAT_STRING
 argument_list|,
 name|pos
 argument_list|)

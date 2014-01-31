@@ -254,10 +254,6 @@ name|ArrayTableTest
 operator|.
 name|class
 block|,
-name|ArrayQueueTest
-operator|.
-name|class
-block|,
 name|DirectedGraphTest
 operator|.
 name|class

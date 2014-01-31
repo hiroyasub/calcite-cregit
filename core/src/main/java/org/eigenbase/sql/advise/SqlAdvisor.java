@@ -119,7 +119,7 @@ name|LOGGER
 init|=
 name|EigenbaseTrace
 operator|.
-name|parserTracer
+name|PARSER_LOGGER
 decl_stmt|;
 comment|//~ Instance fields --------------------------------------------------------
 comment|// Flags indicating precision/scale combinations

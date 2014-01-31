@@ -1414,7 +1414,7 @@ name|equals
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|notOperator
+name|NOT
 argument_list|)
 condition|)
 block|{
@@ -1722,14 +1722,14 @@ name|equals
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|likeOperator
+name|LIKE
 argument_list|)
 condition|)
 block|{
 return|return
 name|SqlStdOperatorTable
 operator|.
-name|equalsOperator
+name|EQUALS
 operator|.
 name|toString
 argument_list|()
@@ -1743,7 +1743,7 @@ name|equals
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|notEqualsOperator
+name|NOT_EQUALS
 argument_list|)
 condition|)
 block|{
@@ -1937,7 +1937,7 @@ if|if
 condition|(
 name|SqlTypeName
 operator|.
-name|numericTypes
+name|NUMERIC_TYPES
 operator|.
 name|contains
 argument_list|(
@@ -1991,7 +1991,7 @@ name|equals
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|likeOperator
+name|LIKE
 argument_list|)
 condition|)
 block|{

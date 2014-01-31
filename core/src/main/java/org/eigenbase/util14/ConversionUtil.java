@@ -64,6 +64,11 @@ specifier|public
 class|class
 name|ConversionUtil
 block|{
+specifier|private
+name|ConversionUtil
+parameter_list|()
+block|{
+block|}
 comment|//~ Static fields/initializers ---------------------------------------------
 specifier|public
 specifier|static

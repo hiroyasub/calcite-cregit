@@ -3759,7 +3759,7 @@ name|append
 argument_list|(
 name|Util
 operator|.
-name|lineSeparator
+name|LINE_SEPARATOR
 argument_list|)
 expr_stmt|;
 name|sb
@@ -3775,7 +3775,7 @@ name|append
 argument_list|(
 name|Util
 operator|.
-name|lineSeparator
+name|LINE_SEPARATOR
 argument_list|)
 expr_stmt|;
 while|while
@@ -3862,7 +3862,7 @@ name|append
 argument_list|(
 name|Util
 operator|.
-name|lineSeparator
+name|LINE_SEPARATOR
 argument_list|)
 expr_stmt|;
 block|}

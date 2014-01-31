@@ -419,7 +419,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|equalsOperator
+name|EQUALS
 argument_list|,
 name|rexBuilder
 operator|.

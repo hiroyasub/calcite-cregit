@@ -1001,7 +1001,7 @@ block|{
 specifier|static
 specifier|final
 name|String
-name|z
+name|Z
 init|=
 literal|"abcdefghijklm"
 decl_stmt|;
@@ -1044,7 +1044,7 @@ name|IntString
 argument_list|(
 name|i
 argument_list|,
-name|z
+name|Z
 operator|.
 name|substring
 argument_list|(
@@ -1052,7 +1052,7 @@ literal|0
 argument_list|,
 name|i
 operator|%
-name|z
+name|Z
 operator|.
 name|length
 argument_list|()
@@ -3445,7 +3445,7 @@ specifier|static
 specifier|final
 name|String
 index|[]
-name|queries
+name|QUERIES
 init|=
 block|{
 literal|"select count(*) from (select 1 as \"c0\" from \"salary\" as \"salary\") as \"init\""
@@ -4033,7 +4033,7 @@ name|FOODMART_QUERIES
 init|=
 name|querify
 argument_list|(
-name|queries
+name|QUERIES
 argument_list|)
 decl_stmt|;
 comment|/** Janino bug    *<a href="https://jira.codehaus.org/browse/JANINO-169">JANINO-169</a>    * running queries against the JDBC adapter. As of janino-2.7.3 bug is    * open but we have a workaround in EnumerableRelImplementor. */
@@ -6115,7 +6115,7 @@ condition|(
 operator|!
 name|Bug
 operator|.
-name|TodoFixed
+name|TODO_FIXED
 condition|)
 block|{
 return|return;
@@ -9616,7 +9616,7 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 name|TimeZone
-name|UTC
+name|tzUtc
 init|=
 name|TimeZone
 operator|.
@@ -9627,7 +9627,7 @@ argument_list|)
 decl_stmt|;
 comment|// +0000 always
 name|TimeZone
-name|GMT03
+name|tzGmt03
 init|=
 name|TimeZone
 operator|.
@@ -9638,7 +9638,7 @@ argument_list|)
 decl_stmt|;
 comment|// +0300 always
 name|TimeZone
-name|GMT05
+name|tzGmt05
 init|=
 name|TimeZone
 operator|.
@@ -9649,7 +9649,7 @@ argument_list|)
 decl_stmt|;
 comment|// -0500 always
 name|TimeZone
-name|GMT13
+name|tzGmt13
 init|=
 name|TimeZone
 operator|.
@@ -9660,43 +9660,43 @@ argument_list|)
 decl_stmt|;
 comment|// +1000 always
 name|Calendar
-name|cUTC
+name|cUtc
 init|=
 name|Calendar
 operator|.
 name|getInstance
 argument_list|(
-name|UTC
+name|tzUtc
 argument_list|)
 decl_stmt|;
 name|Calendar
-name|cGMT03
+name|cGmt03
 init|=
 name|Calendar
 operator|.
 name|getInstance
 argument_list|(
-name|GMT03
+name|tzGmt03
 argument_list|)
 decl_stmt|;
 name|Calendar
-name|cGMT05
+name|cGmt05
 init|=
 name|Calendar
 operator|.
 name|getInstance
 argument_list|(
-name|GMT05
+name|tzGmt05
 argument_list|)
 decl_stmt|;
 name|Calendar
-name|cGMT13
+name|cGmt13
 init|=
 name|Calendar
 operator|.
 name|getInstance
 argument_list|(
-name|GMT13
+name|tzGmt13
 argument_list|)
 decl_stmt|;
 name|Timestamp
@@ -9741,7 +9741,7 @@ name|getTimestamp
 argument_list|(
 name|c
 argument_list|,
-name|cUTC
+name|cUtc
 argument_list|)
 expr_stmt|;
 comment|// Convert timestamp to UTC
@@ -9764,7 +9764,7 @@ name|getTimestamp
 argument_list|(
 name|c
 argument_list|,
-name|cGMT03
+name|cGmt03
 argument_list|)
 expr_stmt|;
 comment|// Convert timestamp to +0300
@@ -9788,7 +9788,7 @@ name|getTimestamp
 argument_list|(
 name|c
 argument_list|,
-name|cGMT05
+name|cGmt05
 argument_list|)
 expr_stmt|;
 comment|// Convert timestamp to -0500
@@ -9811,7 +9811,7 @@ name|getTimestamp
 argument_list|(
 name|c
 argument_list|,
-name|cGMT13
+name|cGmt13
 argument_list|)
 expr_stmt|;
 comment|// Convert timestamp to +1300
@@ -9882,7 +9882,7 @@ name|getTimestamp
 argument_list|(
 name|c
 argument_list|,
-name|cUTC
+name|cUtc
 argument_list|)
 expr_stmt|;
 comment|// TZ irrelevant, as above
@@ -9905,7 +9905,7 @@ name|getTimestamp
 argument_list|(
 name|c
 argument_list|,
-name|cGMT03
+name|cGmt03
 argument_list|)
 expr_stmt|;
 comment|// TZ irrelevant, as above
@@ -9928,7 +9928,7 @@ name|getTimestamp
 argument_list|(
 name|c
 argument_list|,
-name|cGMT05
+name|cGmt05
 argument_list|)
 expr_stmt|;
 comment|// TZ irrelevant, as above
@@ -9951,7 +9951,7 @@ name|getTimestamp
 argument_list|(
 name|c
 argument_list|,
-name|cGMT13
+name|cGmt13
 argument_list|)
 expr_stmt|;
 comment|// TZ irrelevant, as above
@@ -10000,7 +10000,7 @@ name|getTimestamp
 argument_list|(
 name|c
 argument_list|,
-name|cUTC
+name|cUtc
 argument_list|)
 expr_stmt|;
 comment|// Convert timestamp to UTC
@@ -10023,7 +10023,7 @@ name|getTimestamp
 argument_list|(
 name|c
 argument_list|,
-name|cGMT03
+name|cGmt03
 argument_list|)
 expr_stmt|;
 comment|// Convert timestamp to +0300
@@ -10046,7 +10046,7 @@ name|getTimestamp
 argument_list|(
 name|c
 argument_list|,
-name|cGMT05
+name|cGmt05
 argument_list|)
 expr_stmt|;
 comment|// Convert timestamp to -0500
@@ -10069,7 +10069,7 @@ name|getTimestamp
 argument_list|(
 name|c
 argument_list|,
-name|cGMT13
+name|cGmt13
 argument_list|)
 expr_stmt|;
 comment|// Convert timestamp to +1300
@@ -10132,7 +10132,7 @@ name|getTimestamp
 argument_list|(
 name|c
 argument_list|,
-name|cUTC
+name|cUtc
 argument_list|)
 expr_stmt|;
 name|assertEquals
@@ -10154,7 +10154,7 @@ name|getTimestamp
 argument_list|(
 name|c
 argument_list|,
-name|cGMT03
+name|cGmt03
 argument_list|)
 expr_stmt|;
 name|assertEquals
@@ -10176,7 +10176,7 @@ name|getTimestamp
 argument_list|(
 name|c
 argument_list|,
-name|cGMT05
+name|cGmt05
 argument_list|)
 expr_stmt|;
 name|assertEquals
@@ -10198,7 +10198,7 @@ name|getTimestamp
 argument_list|(
 name|c
 argument_list|,
-name|cGMT13
+name|cGmt13
 argument_list|)
 expr_stmt|;
 name|assertEquals
@@ -10266,7 +10266,7 @@ name|getTimestamp
 argument_list|(
 name|c
 argument_list|,
-name|cUTC
+name|cUtc
 argument_list|)
 expr_stmt|;
 name|assertEquals
@@ -10289,7 +10289,7 @@ name|getTimestamp
 argument_list|(
 name|c
 argument_list|,
-name|cGMT03
+name|cGmt03
 argument_list|)
 expr_stmt|;
 name|assertEquals
@@ -10312,7 +10312,7 @@ name|getTimestamp
 argument_list|(
 name|c
 argument_list|,
-name|cGMT05
+name|cGmt05
 argument_list|)
 expr_stmt|;
 name|assertEquals
@@ -10335,7 +10335,7 @@ name|getTimestamp
 argument_list|(
 name|c
 argument_list|,
-name|cGMT13
+name|cGmt13
 argument_list|)
 expr_stmt|;
 name|assertEquals
@@ -10383,7 +10383,7 @@ name|getTimestamp
 argument_list|(
 name|c
 argument_list|,
-name|cUTC
+name|cUtc
 argument_list|)
 expr_stmt|;
 name|assertEquals
@@ -10405,7 +10405,7 @@ name|getTimestamp
 argument_list|(
 name|c
 argument_list|,
-name|cGMT03
+name|cGmt03
 argument_list|)
 expr_stmt|;
 name|assertEquals
@@ -10427,7 +10427,7 @@ name|getTimestamp
 argument_list|(
 name|c
 argument_list|,
-name|cGMT05
+name|cGmt05
 argument_list|)
 expr_stmt|;
 name|assertEquals
@@ -10449,7 +10449,7 @@ name|getTimestamp
 argument_list|(
 name|c
 argument_list|,
-name|cGMT13
+name|cGmt13
 argument_list|)
 expr_stmt|;
 name|assertEquals
@@ -11202,6 +11202,8 @@ block|}
 argument_list|)
 expr_stmt|;
 block|}
+comment|// Disable checkstyle, so it doesn't complain about fields like "customer_id".
+comment|//CHECKSTYLE: OFF
 specifier|public
 specifier|static
 class|class
@@ -11822,6 +11824,7 @@ name|prod_id
 expr_stmt|;
 block|}
 block|}
+comment|//CHECKSTYLE: ON
 specifier|public
 specifier|static
 class|class

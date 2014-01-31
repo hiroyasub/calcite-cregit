@@ -1592,7 +1592,7 @@ name|rtiFirstArgType
 argument_list|,
 name|SqlTypeTransforms
 operator|.
-name|forceNullable
+name|FORCE_NULLABLE
 argument_list|)
 decl_stmt|;
 comment|/**    * Type-inference strategy whereby the result type of a call is the type of    * the first operand. If any of the other operands are nullable the returned    * type will also be nullable.    */
@@ -1609,7 +1609,7 @@ name|rtiFirstArgType
 argument_list|,
 name|SqlTypeTransforms
 operator|.
-name|toNullable
+name|TO_NULLABLE
 argument_list|)
 decl_stmt|;
 specifier|public
@@ -1644,7 +1644,7 @@ name|rtiFirstInterval
 argument_list|,
 name|SqlTypeTransforms
 operator|.
-name|toNullable
+name|TO_NULLABLE
 argument_list|)
 decl_stmt|;
 comment|/**    * Type-inference strategy whereby the result type of a call is VARYING the    * type of the first argument. The length returned is the same as length of    * the first argument. If any of the other operands are nullable the    * returned type will also be nullable. First Arg must be of string type.    */
@@ -1661,11 +1661,11 @@ name|rtiFirstArgType
 argument_list|,
 name|SqlTypeTransforms
 operator|.
-name|toNullable
+name|TO_NULLABLE
 argument_list|,
 name|SqlTypeTransforms
 operator|.
-name|toVarying
+name|TO_VARYING
 argument_list|)
 decl_stmt|;
 comment|/**    * Type-inference strategy whereby the result type of a call is the type of    * the second operand.    */
@@ -1695,7 +1695,7 @@ name|rtiSecondArgType
 argument_list|,
 name|SqlTypeTransforms
 operator|.
-name|toNullable
+name|TO_NULLABLE
 argument_list|)
 decl_stmt|;
 comment|/**    * Type-inference strategy whereby the result type of a call is the type of    * the third operand.    */
@@ -1725,7 +1725,7 @@ name|rtiThirdArgType
 argument_list|,
 name|SqlTypeTransforms
 operator|.
-name|toNullable
+name|TO_NULLABLE
 argument_list|)
 decl_stmt|;
 comment|/**    * Type-inference strategy whereby the result type of a call is Boolean.    */
@@ -1758,7 +1758,7 @@ name|rtiBoolean
 argument_list|,
 name|SqlTypeTransforms
 operator|.
-name|toNotNullable
+name|TO_NOT_NULLABLE
 argument_list|)
 decl_stmt|;
 comment|/**    * Type-inference strategy whereby the result type of a call is Boolean,    * with nulls allowed if any of the operands allow nulls.    */
@@ -1775,7 +1775,7 @@ name|rtiBoolean
 argument_list|,
 name|SqlTypeTransforms
 operator|.
-name|toNullable
+name|TO_NULLABLE
 argument_list|)
 decl_stmt|;
 comment|/**    * Type-inference strategy whereby the result type of a call is Date.    */
@@ -1826,7 +1826,7 @@ name|rtiTime
 argument_list|,
 name|SqlTypeTransforms
 operator|.
-name|toNullable
+name|TO_NULLABLE
 argument_list|)
 decl_stmt|;
 comment|/**    * Type-inference strategy whereby the result type of a call is Double.    */
@@ -1859,7 +1859,7 @@ name|rtiDouble
 argument_list|,
 name|SqlTypeTransforms
 operator|.
-name|toNullable
+name|TO_NULLABLE
 argument_list|)
 decl_stmt|;
 comment|/**    * Type-inference strategy whereby the result type of a call is an Integer.    */
@@ -1908,7 +1908,7 @@ name|rtiBigint
 argument_list|,
 name|SqlTypeTransforms
 operator|.
-name|toNullable
+name|TO_NULLABLE
 argument_list|)
 decl_stmt|;
 comment|/**    * Type-inference strategy whereby the result type of a call is a nullable    * Bigint    */
@@ -1925,7 +1925,7 @@ name|rtiBigint
 argument_list|,
 name|SqlTypeTransforms
 operator|.
-name|forceNullable
+name|FORCE_NULLABLE
 argument_list|)
 decl_stmt|;
 comment|/**    * Type-inference strategy whereby the result type of a call is an Integer    * with nulls allowed if any of the operands allow nulls.    */
@@ -1942,7 +1942,7 @@ name|rtiInteger
 argument_list|,
 name|SqlTypeTransforms
 operator|.
-name|toNullable
+name|TO_NULLABLE
 argument_list|)
 decl_stmt|;
 comment|/**    * Type-inference strategy which always returns "VARCHAR(2000)".    */
@@ -2247,7 +2247,7 @@ return|;
 block|}
 block|}
 decl_stmt|;
-comment|/**    * Same as {@link #rtiDecimalProduct} but returns with nullablity if any of    * the operands is nullable by using {@link SqlTypeTransforms#toNullable}    */
+comment|/**    * Same as {@link #rtiDecimalProduct} but returns with nullablity if any of    * the operands is nullable by using {@link SqlTypeTransforms#TO_NULLABLE}    */
 specifier|public
 specifier|static
 specifier|final
@@ -2261,7 +2261,7 @@ name|rtiDecimalProduct
 argument_list|,
 name|SqlTypeTransforms
 operator|.
-name|toNullable
+name|TO_NULLABLE
 argument_list|)
 decl_stmt|;
 comment|/**    * Type-inference strategy whereby the result type of a call is {@link    * #rtiNullableDecimalProduct} with a fallback to {@link    * #rtiNullableFirstInterval} and {@link #rtiLeastRestrictive} These rules    * are used for multiplication.    */
@@ -2346,7 +2346,7 @@ return|;
 block|}
 block|}
 decl_stmt|;
-comment|/**    * Same as {@link #rtiDecimalQuotient} but returns with nullablity if any of    * the operands is nullable by using {@link SqlTypeTransforms#toNullable}    */
+comment|/**    * Same as {@link #rtiDecimalQuotient} but returns with nullablity if any of    * the operands is nullable by using {@link SqlTypeTransforms#TO_NULLABLE}    */
 specifier|public
 specifier|static
 specifier|final
@@ -2360,7 +2360,7 @@ name|rtiDecimalQuotient
 argument_list|,
 name|SqlTypeTransforms
 operator|.
-name|toNullable
+name|TO_NULLABLE
 argument_list|)
 decl_stmt|;
 comment|/**    * Type-inference strategy whereby the result type of a call is {@link    * #rtiNullableDecimalQuotient} with a fallback to {@link    * #rtiNullableFirstInterval} and {@link #rtiLeastRestrictive} These rules    * are used for division.    */
@@ -2599,7 +2599,7 @@ return|;
 block|}
 block|}
 decl_stmt|;
-comment|/**    * Same as {@link #rtiDecimalSum} but returns with nullablity if any    * of the operands is nullable by using {@link SqlTypeTransforms#toNullable}    */
+comment|/**    * Same as {@link #rtiDecimalSum} but returns with nullablity if any    * of the operands is nullable by using {@link SqlTypeTransforms#TO_NULLABLE}    */
 specifier|public
 specifier|static
 specifier|final
@@ -2613,7 +2613,7 @@ name|rtiDecimalSum
 argument_list|,
 name|SqlTypeTransforms
 operator|.
-name|toNullable
+name|TO_NULLABLE
 argument_list|)
 decl_stmt|;
 comment|/**    * Type-inference strategy whereby the result type of a call is {@link    * #rtiNullableDecimalSum} with a fallback to {@link #rtiLeastRestrictive}    * These rules are used for addition and subtraction.    */
@@ -2934,7 +2934,7 @@ return|;
 block|}
 block|}
 decl_stmt|;
-comment|/**    * Same as {@link #rtiDyadicStringSumPrecision} and using {@link    * SqlTypeTransforms#toNullable}    */
+comment|/**    * Same as {@link #rtiDyadicStringSumPrecision} and using {@link    * SqlTypeTransforms#TO_NULLABLE}    */
 specifier|public
 specifier|static
 specifier|final
@@ -2948,10 +2948,10 @@ name|rtiDyadicStringSumPrecision
 argument_list|,
 name|SqlTypeTransforms
 operator|.
-name|toNullable
+name|TO_NULLABLE
 argument_list|)
 decl_stmt|;
-comment|/**    * Same as {@link #rtiDyadicStringSumPrecision} and using {@link    * SqlTypeTransforms#toNullable}, {@link SqlTypeTransforms#toVarying}.    */
+comment|/**    * Same as {@link #rtiDyadicStringSumPrecision} and using {@link    * SqlTypeTransforms#TO_NULLABLE}, {@link SqlTypeTransforms#TO_VARYING}.    */
 specifier|public
 specifier|static
 specifier|final
@@ -2965,11 +2965,11 @@ name|rtiDyadicStringSumPrecision
 argument_list|,
 name|SqlTypeTransforms
 operator|.
-name|toNullable
+name|TO_NULLABLE
 argument_list|,
 name|SqlTypeTransforms
 operator|.
-name|toVarying
+name|TO_VARYING
 argument_list|)
 decl_stmt|;
 comment|/**    * Type-inference strategy where the expression is assumed to be registered    * as a {@link org.eigenbase.sql.validate.SqlValidatorNamespace}, and    * therefore the result type of the call is the type of that namespace.    */
@@ -3096,6 +3096,7 @@ name|getOperandCount
 argument_list|()
 return|;
 block|}
+comment|// CHECKSTYLE: IGNORE 1
 block|}
 argument_list|)
 decl_stmt|;
@@ -3343,7 +3344,7 @@ name|rtiMultiset
 argument_list|,
 name|SqlTypeTransforms
 operator|.
-name|onlyColumn
+name|ONLY_COLUMN
 argument_list|)
 decl_stmt|;
 comment|/**    * Same as {@link #rtiMultiset} but returns with nullablity if any of the    * operands is nullable    */
@@ -3360,7 +3361,7 @@ name|rtiMultiset
 argument_list|,
 name|SqlTypeTransforms
 operator|.
-name|toNullable
+name|TO_NULLABLE
 argument_list|)
 decl_stmt|;
 comment|/**    * Returns the element type of a multiset    */
@@ -3377,7 +3378,7 @@ name|rtiMultiset
 argument_list|,
 name|SqlTypeTransforms
 operator|.
-name|toMultisetElementType
+name|TO_MULTISET_ELEMENT_TYPE
 argument_list|)
 decl_stmt|;
 comment|/**    * Returns the field type of a structured type which has only one field. For    * example, given<code>RECORD(x INTEGER)</code> returns<code>    * INTEGER</code>.    */

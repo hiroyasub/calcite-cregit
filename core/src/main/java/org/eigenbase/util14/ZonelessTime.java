@@ -171,7 +171,7 @@ name|getJdbcTime
 argument_list|(
 name|DateTimeUtil
 operator|.
-name|defaultZone
+name|DEFAULT_ZONE
 argument_list|)
 argument_list|)
 return|;
@@ -192,7 +192,7 @@ name|getCalendar
 argument_list|(
 name|DateTimeUtil
 operator|.
-name|gmtZone
+name|GMT_ZONE
 argument_list|)
 decl_stmt|;
 name|cal
@@ -334,7 +334,7 @@ name|getJdbcTime
 argument_list|(
 name|DateTimeUtil
 operator|.
-name|defaultZone
+name|DEFAULT_ZONE
 argument_list|)
 argument_list|)
 decl_stmt|;
@@ -397,7 +397,7 @@ name|s
 argument_list|,
 name|DateTimeUtil
 operator|.
-name|TimeFormatStr
+name|TIME_FORMAT_STRING
 argument_list|)
 return|;
 block|}
@@ -429,7 +429,7 @@ name|format
 argument_list|,
 name|DateTimeUtil
 operator|.
-name|gmtZone
+name|GMT_ZONE
 argument_list|)
 decl_stmt|;
 if|if

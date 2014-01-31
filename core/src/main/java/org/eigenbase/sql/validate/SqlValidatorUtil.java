@@ -150,6 +150,11 @@ specifier|public
 class|class
 name|SqlValidatorUtil
 block|{
+specifier|private
+name|SqlValidatorUtil
+parameter_list|()
+block|{
+block|}
 comment|//~ Methods ----------------------------------------------------------------
 comment|/**    * Converts a {@link SqlValidatorScope} into a {@link RelOptTable}. This is    * only possible if the scope represents an identifier, such as "sales.emp".    * Otherwise, returns null.    *    * @param namespace     Namespace    * @param catalogReader Schema    * @param datasetName   Name of sample dataset to substitute, or null to use    *                      the regular table    * @param usedDataset   Output parameter which is set to true if a sample    *                      dataset is found; may be null    */
 specifier|public
@@ -478,7 +483,7 @@ decl_stmt|;
 return|return
 name|SqlStdOperatorTable
 operator|.
-name|asOperator
+name|AS
 operator|.
 name|createCall
 argument_list|(

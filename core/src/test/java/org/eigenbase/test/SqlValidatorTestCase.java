@@ -182,7 +182,7 @@ specifier|private
 specifier|static
 specifier|final
 name|Pattern
-name|lineColPattern
+name|LINE_COL_PATTERN
 init|=
 name|Pattern
 operator|.
@@ -195,7 +195,7 @@ specifier|private
 specifier|static
 specifier|final
 name|Pattern
-name|lineColTwicePattern
+name|LINE_COL_TWICE_PATTERN
 init|=
 name|Pattern
 operator|.
@@ -916,7 +916,7 @@ block|{
 name|Matcher
 name|matcher
 init|=
-name|lineColTwicePattern
+name|LINE_COL_TWICE_PATTERN
 operator|.
 name|matcher
 argument_list|(
@@ -1001,7 +1001,7 @@ else|else
 block|{
 name|matcher
 operator|=
-name|lineColPattern
+name|LINE_COL_PATTERN
 operator|.
 name|matcher
 argument_list|(

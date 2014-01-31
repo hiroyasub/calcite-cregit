@@ -249,6 +249,11 @@ return|;
 block|}
 block|}
 decl_stmt|;
+specifier|private
+name|RexUtil
+parameter_list|()
+block|{
+block|}
 comment|//~ Methods ----------------------------------------------------------------
 comment|/**    * Returns a guess for the selectivity of an expression.    *    * @param exp expression of interest, or null for none (implying a    *            selectivity of 1.0)    * @return guessed selectivity    */
 specifier|public
@@ -2319,7 +2324,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|andOperator
+name|AND
 argument_list|,
 name|nodes2
 argument_list|)
@@ -2402,7 +2407,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|orOperator
+name|OR
 argument_list|,
 name|nodes2
 argument_list|)

@@ -133,7 +133,7 @@ literal|null
 argument_list|,
 name|SqlFunctionCategory
 operator|.
-name|String
+name|STRING
 argument_list|)
 expr_stmt|;
 block|}
@@ -201,7 +201,7 @@ name|zip
 argument_list|(
 name|SqlTypeName
 operator|.
-name|stringTypes
+name|STRING_TYPES
 argument_list|)
 control|)
 block|{

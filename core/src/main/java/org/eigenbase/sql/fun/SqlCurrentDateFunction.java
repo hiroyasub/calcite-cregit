@@ -91,7 +91,7 @@ name|otcNiladic
 argument_list|,
 name|SqlFunctionCategory
 operator|.
-name|TimeDate
+name|TIMEDATE
 argument_list|)
 expr_stmt|;
 block|}
@@ -104,7 +104,7 @@ block|{
 return|return
 name|SqlSyntax
 operator|.
-name|FunctionId
+name|FUNCTION_ID
 return|;
 block|}
 specifier|public

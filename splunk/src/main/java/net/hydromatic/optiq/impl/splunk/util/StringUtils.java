@@ -56,6 +56,11 @@ specifier|public
 class|class
 name|StringUtils
 block|{
+specifier|private
+name|StringUtils
+parameter_list|()
+block|{
+block|}
 specifier|public
 specifier|static
 name|StringBuilder
@@ -212,7 +217,8 @@ name|int
 name|start
 init|=
 literal|0
-decl_stmt|,
+decl_stmt|;
+name|int
 name|end
 init|=
 literal|0
@@ -226,7 +232,8 @@ name|char
 name|p
 init|=
 literal|'\0'
-decl_stmt|,
+decl_stmt|;
+name|char
 name|c
 init|=
 literal|'\0'
@@ -324,7 +331,8 @@ name|char
 name|a
 init|=
 literal|'\0'
-decl_stmt|,
+decl_stmt|;
+name|char
 name|b
 init|=
 literal|'\0'

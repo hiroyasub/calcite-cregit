@@ -361,6 +361,7 @@ if|if
 condition|(
 literal|false
 condition|)
+block|{
 comment|// TODO:
 switch|switch
 condition|(
@@ -377,6 +378,7 @@ case|case
 name|LAST
 case|:
 break|break;
+block|}
 block|}
 block|}
 name|implementor

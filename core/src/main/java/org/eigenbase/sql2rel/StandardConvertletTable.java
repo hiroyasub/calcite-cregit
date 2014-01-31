@@ -174,33 +174,33 @@ name|addAlias
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|characterLengthFunc
+name|CHARACTER_LENGTH
 argument_list|,
 name|SqlStdOperatorTable
 operator|.
-name|charLengthFunc
+name|CHAR_LENGTH
 argument_list|)
 expr_stmt|;
 name|addAlias
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|isUnknownOperator
+name|IS_UNKNOWN
 argument_list|,
 name|SqlStdOperatorTable
 operator|.
-name|isNullOperator
+name|IS_NULL
 argument_list|)
 expr_stmt|;
 name|addAlias
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|isNotUnknownOperator
+name|IS_NOT_UNKNOWN
 argument_list|,
 name|SqlStdOperatorTable
 operator|.
-name|isNotNullOperator
+name|IS_NOT_NULL
 argument_list|)
 expr_stmt|;
 comment|// Register convertlets for specific objects.
@@ -208,7 +208,7 @@ name|registerOp
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|castFunc
+name|CAST
 argument_list|,
 operator|new
 name|SqlRexConvertlet
@@ -241,7 +241,7 @@ name|registerOp
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|isDistinctFromOperator
+name|IS_DISTINCT_FROM
 argument_list|,
 operator|new
 name|SqlRexConvertlet
@@ -276,7 +276,7 @@ name|registerOp
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|isNotDistinctFromOperator
+name|IS_NOT_DISTINCT_FROM
 argument_list|,
 operator|new
 name|SqlRexConvertlet
@@ -312,7 +312,7 @@ name|registerOp
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|notLikeOperator
+name|NOT_LIKE
 argument_list|,
 operator|new
 name|SqlRexConvertlet
@@ -335,7 +335,7 @@ name|expanded
 init|=
 name|SqlStdOperatorTable
 operator|.
-name|notOperator
+name|NOT
 operator|.
 name|createCall
 argument_list|(
@@ -345,7 +345,7 @@ name|ZERO
 argument_list|,
 name|SqlStdOperatorTable
 operator|.
-name|likeOperator
+name|LIKE
 operator|.
 name|createCall
 argument_list|(
@@ -377,7 +377,7 @@ name|registerOp
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|notSimilarOperator
+name|NOT_SIMILAR_TO
 argument_list|,
 operator|new
 name|SqlRexConvertlet
@@ -400,7 +400,7 @@ name|expanded
 init|=
 name|SqlStdOperatorTable
 operator|.
-name|notOperator
+name|NOT
 operator|.
 name|createCall
 argument_list|(
@@ -410,7 +410,7 @@ name|ZERO
 argument_list|,
 name|SqlStdOperatorTable
 operator|.
-name|similarOperator
+name|SIMILAR_TO
 operator|.
 name|createCall
 argument_list|(
@@ -442,7 +442,7 @@ name|registerOp
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|prefixPlusOperator
+name|UNARY_PLUS
 argument_list|,
 operator|new
 name|SqlRexConvertlet
@@ -487,7 +487,7 @@ name|registerOp
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|asOperator
+name|AS
 argument_list|,
 operator|new
 name|SqlRexConvertlet
@@ -532,7 +532,7 @@ name|registerOp
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|sqrtFunc
+name|SQRT
 argument_list|,
 operator|new
 name|SqlRexConvertlet
@@ -554,7 +554,7 @@ name|expanded
 init|=
 name|SqlStdOperatorTable
 operator|.
-name|powerFunc
+name|POWER
 operator|.
 name|createCall
 argument_list|(
@@ -613,7 +613,7 @@ name|registerOp
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|avgOperator
+name|AVG
 argument_list|,
 operator|new
 name|AvgVarianceConvertlet
@@ -630,7 +630,7 @@ name|registerOp
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|stddevPopOperator
+name|STDDEV_POP
 argument_list|,
 operator|new
 name|AvgVarianceConvertlet
@@ -647,7 +647,7 @@ name|registerOp
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|stddevSampOperator
+name|STDDEV_SAMP
 argument_list|,
 operator|new
 name|AvgVarianceConvertlet
@@ -664,7 +664,7 @@ name|registerOp
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|varPopOperator
+name|VAR_POP
 argument_list|,
 operator|new
 name|AvgVarianceConvertlet
@@ -681,7 +681,7 @@ name|registerOp
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|varSampOperator
+name|VAR_SAMP
 argument_list|,
 operator|new
 name|AvgVarianceConvertlet
@@ -698,7 +698,7 @@ name|registerOp
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|floorFunc
+name|FLOOR
 argument_list|,
 operator|new
 name|FloorCeilConvertlet
@@ -711,7 +711,7 @@ name|registerOp
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|ceilFunc
+name|CEIL
 argument_list|,
 operator|new
 name|FloorCeilConvertlet
@@ -731,7 +731,7 @@ name|registerOp
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|elementFunc
+name|ELEMENT
 argument_list|,
 operator|new
 name|SqlRexConvertlet
@@ -813,7 +813,7 @@ name|convertExpression
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|elementSlicefunc
+name|ELEMENT_SLICE
 operator|.
 name|createCall
 argument_list|(
@@ -854,7 +854,7 @@ name|registerOp
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|elementSlicefunc
+name|ELEMENT_SLICE
 argument_list|,
 operator|new
 name|SqlRexConvertlet
@@ -913,7 +913,7 @@ name|convertExpression
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|elementFunc
+name|ELEMENT
 operator|.
 name|createCall
 argument_list|(
@@ -1139,7 +1139,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|caseOperator
+name|CASE
 argument_list|,
 name|exprList
 argument_list|)
@@ -1263,7 +1263,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|sliceOp
+name|SLICE
 argument_list|,
 name|expr
 argument_list|)
@@ -1437,7 +1437,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|sliceOp
+name|SLICE
 argument_list|,
 name|expr
 argument_list|)
@@ -2000,7 +2000,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|greaterThanOrEqualOperator
+name|GREATER_THAN_OR_EQUAL
 argument_list|,
 name|rexInterval
 argument_list|,
@@ -2053,11 +2053,11 @@ name|floor
 condition|?
 name|SqlStdOperatorTable
 operator|.
-name|minusOperator
+name|MINUS
 else|:
 name|SqlStdOperatorTable
 operator|.
-name|plusOperator
+name|PLUS
 decl_stmt|;
 name|RexNode
 name|sum
@@ -2084,7 +2084,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|caseOperator
+name|CASE
 argument_list|,
 name|cond
 argument_list|,
@@ -2099,7 +2099,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|caseOperator
+name|CASE
 argument_list|,
 name|cond
 argument_list|,
@@ -2132,7 +2132,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|divideIntegerOperator
+name|DIVIDE_INTEGER
 argument_list|,
 name|kase
 argument_list|,
@@ -2148,7 +2148,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|multiplyOperator
+name|MULTIPLY
 argument_list|,
 name|div
 argument_list|,
@@ -2461,7 +2461,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|modFunc
+name|MOD
 argument_list|,
 name|res
 argument_list|,
@@ -2477,7 +2477,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|divideIntegerOperator
+name|DIVIDE_INTEGER
 argument_list|,
 name|res
 argument_list|,
@@ -2687,7 +2687,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|minusOperator
+name|MINUS
 argument_list|,
 name|casts
 argument_list|)
@@ -2779,7 +2779,7 @@ argument_list|()
 operator|==
 name|SqlFunctionCategory
 operator|.
-name|UserDefinedConstructor
+name|USER_DEFINED_CONSTRUCTOR
 condition|)
 block|{
 return|return
@@ -3525,7 +3525,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|greaterThanOrEqualOperator
+name|GREATER_THAN_OR_EQUAL
 argument_list|,
 name|x
 argument_list|,
@@ -3541,7 +3541,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|lessThanOrEqualOperator
+name|LESS_THAN_OR_EQUAL
 argument_list|,
 name|x
 argument_list|,
@@ -3557,7 +3557,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|andOperator
+name|AND
 argument_list|,
 name|ge1
 argument_list|,
@@ -3592,7 +3592,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|greaterThanOrEqualOperator
+name|GREATER_THAN_OR_EQUAL
 argument_list|,
 name|x
 argument_list|,
@@ -3608,7 +3608,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|lessThanOrEqualOperator
+name|LESS_THAN_OR_EQUAL
 argument_list|,
 name|x
 argument_list|,
@@ -3624,7 +3624,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|andOperator
+name|AND
 argument_list|,
 name|ge2
 argument_list|,
@@ -3639,7 +3639,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|orOperator
+name|OR
 argument_list|,
 name|and1
 argument_list|,
@@ -3685,7 +3685,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|notOperator
+name|NOT
 argument_list|,
 name|res
 argument_list|)
@@ -3842,7 +3842,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|columnListConstructor
+name|COLUMN_LIST
 argument_list|,
 name|columns
 argument_list|)
@@ -3898,7 +3898,7 @@ name|op1
 init|=
 name|SqlStdOperatorTable
 operator|.
-name|plusOperator
+name|PLUS
 decl_stmt|;
 name|SqlNode
 index|[]
@@ -3964,7 +3964,7 @@ name|op1
 init|=
 name|SqlStdOperatorTable
 operator|.
-name|plusOperator
+name|PLUS
 decl_stmt|;
 name|SqlNode
 index|[]
@@ -4020,7 +4020,7 @@ name|op1
 init|=
 name|SqlStdOperatorTable
 operator|.
-name|greaterThanOrEqualOperator
+name|GREATER_THAN_OR_EQUAL
 decl_stmt|;
 name|SqlNode
 index|[]
@@ -4073,7 +4073,7 @@ name|op2
 init|=
 name|SqlStdOperatorTable
 operator|.
-name|greaterThanOrEqualOperator
+name|GREATER_THAN_OR_EQUAL
 decl_stmt|;
 name|SqlNode
 index|[]
@@ -4126,7 +4126,7 @@ name|and
 init|=
 name|SqlStdOperatorTable
 operator|.
-name|andOperator
+name|AND
 decl_stmt|;
 name|SqlNode
 index|[]
@@ -4458,7 +4458,7 @@ name|sum
 init|=
 name|SqlStdOperatorTable
 operator|.
-name|sumOperator
+name|SUM
 operator|.
 name|createCall
 argument_list|(
@@ -4473,7 +4473,7 @@ name|count
 init|=
 name|SqlStdOperatorTable
 operator|.
-name|countOperator
+name|COUNT
 operator|.
 name|createCall
 argument_list|(
@@ -4485,7 +4485,7 @@ decl_stmt|;
 return|return
 name|SqlStdOperatorTable
 operator|.
-name|divideOperator
+name|DIVIDE
 operator|.
 name|createCall
 argument_list|(
@@ -4545,7 +4545,7 @@ name|argSquared
 init|=
 name|SqlStdOperatorTable
 operator|.
-name|multiplyOperator
+name|MULTIPLY
 operator|.
 name|createCall
 argument_list|(
@@ -4562,7 +4562,7 @@ name|sumArgSquared
 init|=
 name|SqlStdOperatorTable
 operator|.
-name|sumOperator
+name|SUM
 operator|.
 name|createCall
 argument_list|(
@@ -4577,7 +4577,7 @@ name|sum
 init|=
 name|SqlStdOperatorTable
 operator|.
-name|sumOperator
+name|SUM
 operator|.
 name|createCall
 argument_list|(
@@ -4592,7 +4592,7 @@ name|sumSquared
 init|=
 name|SqlStdOperatorTable
 operator|.
-name|multiplyOperator
+name|MULTIPLY
 operator|.
 name|createCall
 argument_list|(
@@ -4609,7 +4609,7 @@ name|count
 init|=
 name|SqlStdOperatorTable
 operator|.
-name|countOperator
+name|COUNT
 operator|.
 name|createCall
 argument_list|(
@@ -4624,7 +4624,7 @@ name|avgSumSquared
 init|=
 name|SqlStdOperatorTable
 operator|.
-name|divideOperator
+name|DIVIDE
 operator|.
 name|createCall
 argument_list|(
@@ -4641,7 +4641,7 @@ name|diff
 init|=
 name|SqlStdOperatorTable
 operator|.
-name|minusOperator
+name|MINUS
 operator|.
 name|createCall
 argument_list|(
@@ -4685,7 +4685,7 @@ name|denominator
 operator|=
 name|SqlStdOperatorTable
 operator|.
-name|minusOperator
+name|MINUS
 operator|.
 name|createCall
 argument_list|(
@@ -4703,7 +4703,7 @@ name|div
 init|=
 name|SqlStdOperatorTable
 operator|.
-name|divideOperator
+name|DIVIDE
 operator|.
 name|createCall
 argument_list|(
@@ -4741,7 +4741,7 @@ name|result
 operator|=
 name|SqlStdOperatorTable
 operator|.
-name|powerFunc
+name|POWER
 operator|.
 name|createCall
 argument_list|(

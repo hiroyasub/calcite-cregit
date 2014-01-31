@@ -65,7 +65,7 @@ name|SqlKind
 operator|.
 name|COLUMN_LIST
 argument_list|,
-name|MaxPrec
+name|MDX_PRECEDENCE
 argument_list|,
 literal|false
 argument_list|,

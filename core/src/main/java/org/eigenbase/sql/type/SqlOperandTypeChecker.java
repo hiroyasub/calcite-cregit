@@ -27,22 +27,8 @@ name|*
 import|;
 end_import
 
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
-name|sql
-operator|.
-name|validate
-operator|.
-name|*
-import|;
-end_import
-
 begin_comment
-comment|/**  * Strategy interface to check for allowed operand types of an operator call.  *  *<p>This interface is an example of the {@link  * org.eigenbase.util.Glossary#StrategyPattern strategy pattern}.</p>  */
+comment|/**  * Strategy interface to check for allowed operand types of an operator call.  *  *<p>This interface is an example of the {@link  * org.eigenbase.util.Glossary#STRATEGY_PATTERN strategy pattern}.</p>  */
 end_comment
 
 begin_interface

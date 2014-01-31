@@ -87,7 +87,7 @@ name|RexWindow
 name|window
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a RexOver.    *    *<p>For example, "SUM(x) OVER (ROWS 3 PRECEDING)" is represented as:    *    *<ul>    *<li>type = Integer,    *<li>op = {@link org.eigenbase.sql.fun.SqlStdOperatorTable#sumOperator},    *<li>operands = { {@link RexFieldAccess}("x") }    *<li>window = {@link SqlWindow}(ROWS 3 PRECEDING)    *</ul>    *    * @param type     Result type    * @param op       Aggregate operator    * @param operands Operands list    * @param window   Window specification    * @pre op.isAggregator()    * @pre window != null    * @pre window.getRefName() == null    */
+comment|/**    * Creates a RexOver.    *    *<p>For example, "SUM(x) OVER (ROWS 3 PRECEDING)" is represented as:    *    *<ul>    *<li>type = Integer,    *<li>op = {@link org.eigenbase.sql.fun.SqlStdOperatorTable#SUM},    *<li>operands = { {@link RexFieldAccess}("x") }    *<li>window = {@link SqlWindow}(ROWS 3 PRECEDING)    *</ul>    *    * @param type     Result type    * @param op       Aggregate operator    * @param operands Operands list    * @param window   Window specification    * @pre op.isAggregator()    * @pre window != null    * @pre window.getRefName() == null    */
 name|RexOver
 parameter_list|(
 name|RelDataType

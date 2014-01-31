@@ -67,6 +67,7 @@ name|QueryProviderImpl
 block|{
 specifier|public
 specifier|static
+specifier|final
 name|JdbcQueryProvider
 name|INSTANCE
 init|=

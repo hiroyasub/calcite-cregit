@@ -62,7 +62,7 @@ literal|null
 argument_list|,
 name|SqlFunctionCategory
 operator|.
-name|String
+name|STRING
 argument_list|)
 expr_stmt|;
 block|}

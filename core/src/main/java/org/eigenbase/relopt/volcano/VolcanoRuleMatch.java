@@ -319,9 +319,10 @@ comment|// If the equivalence class is cheaper than the target, bump up
 comment|// the importance of the rule. A converter is an easy way to
 comment|// make the plan cheaper, so we'd hate to miss this opportunity.
 comment|//
-comment|//
 comment|// REVIEW: jhyde, 2007/12/21: This rule seems to make sense, but
 comment|// is disabled until it has been proven.
+comment|//
+comment|// CHECKSTYLE: IGNORE 3
 if|if
 condition|(
 operator|(

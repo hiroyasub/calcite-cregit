@@ -790,7 +790,7 @@ literal|"Cannot add expression of different type to set: "
 operator|+
 name|Util
 operator|.
-name|lineSeparator
+name|LINE_SEPARATOR
 operator|+
 literal|"set type is "
 operator|+
@@ -801,7 +801,7 @@ argument_list|()
 operator|+
 name|Util
 operator|.
-name|lineSeparator
+name|LINE_SEPARATOR
 operator|+
 literal|"expression type is "
 operator|+
@@ -812,7 +812,7 @@ argument_list|()
 operator|+
 name|Util
 operator|.
-name|lineSeparator
+name|LINE_SEPARATOR
 operator|+
 literal|"set is "
 operator|+
@@ -823,7 +823,7 @@ argument_list|()
 operator|+
 name|Util
 operator|.
-name|lineSeparator
+name|LINE_SEPARATOR
 operator|+
 literal|"expression is "
 operator|+
@@ -1902,7 +1902,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|isNotNullOperator
+name|IS_NOT_NULL
 argument_list|,
 name|rexBuilder
 operator|.
@@ -1936,7 +1936,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|andOperator
+name|AND
 argument_list|,
 name|condition
 argument_list|,
@@ -2133,7 +2133,7 @@ name|returnType
 init|=
 name|SqlStdOperatorTable
 operator|.
-name|singleValueOperator
+name|SINGLE_VALUE
 operator|.
 name|inferReturnType
 argument_list|(
@@ -2176,7 +2176,7 @@ name|AggregateCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|singleValueOperator
+name|SINGLE_VALUE
 argument_list|,
 literal|false
 argument_list|,
@@ -3099,7 +3099,7 @@ argument_list|()
 operator|==
 name|SqlStdOperatorTable
 operator|.
-name|andOperator
+name|AND
 condition|)
 block|{
 for|for
@@ -3900,7 +3900,7 @@ case|:
 return|return
 name|SqlStdOperatorTable
 operator|.
-name|equalsOperator
+name|EQUALS
 return|;
 case|case
 name|NOT_EQUALS
@@ -3908,7 +3908,7 @@ case|:
 return|return
 name|SqlStdOperatorTable
 operator|.
-name|notEqualsOperator
+name|NOT_EQUALS
 return|;
 case|case
 name|GREATER_THAN
@@ -3916,7 +3916,7 @@ case|:
 return|return
 name|SqlStdOperatorTable
 operator|.
-name|greaterThanOperator
+name|GREATER_THAN
 return|;
 case|case
 name|GREATER_THAN_OR_EQUAL
@@ -3924,7 +3924,7 @@ case|:
 return|return
 name|SqlStdOperatorTable
 operator|.
-name|greaterThanOrEqualOperator
+name|GREATER_THAN_OR_EQUAL
 return|;
 case|case
 name|LESS_THAN
@@ -3932,7 +3932,7 @@ case|:
 return|return
 name|SqlStdOperatorTable
 operator|.
-name|lessThanOperator
+name|LESS_THAN
 return|;
 case|case
 name|LESS_THAN_OR_EQUAL
@@ -3940,7 +3940,7 @@ case|:
 return|return
 name|SqlStdOperatorTable
 operator|.
-name|lessThanOrEqualOperator
+name|LESS_THAN_OR_EQUAL
 return|;
 case|case
 name|IS_DISTINCT_FROM
@@ -3948,7 +3948,7 @@ case|:
 return|return
 name|SqlStdOperatorTable
 operator|.
-name|isDistinctFromOperator
+name|IS_DISTINCT_FROM
 return|;
 case|case
 name|IS_NOT_DISTINCT_FROM
@@ -3956,7 +3956,7 @@ case|:
 return|return
 name|SqlStdOperatorTable
 operator|.
-name|isNotDistinctFromOperator
+name|IS_NOT_DISTINCT_FROM
 return|;
 default|default:
 return|return
@@ -4073,7 +4073,7 @@ argument_list|()
 operator|==
 name|SqlStdOperatorTable
 operator|.
-name|andOperator
+name|AND
 condition|)
 block|{
 for|for
@@ -4112,7 +4112,7 @@ argument_list|()
 operator|==
 name|SqlStdOperatorTable
 operator|.
-name|equalsOperator
+name|EQUALS
 condition|)
 block|{
 specifier|final
@@ -4293,7 +4293,7 @@ argument_list|()
 operator|==
 name|SqlStdOperatorTable
 operator|.
-name|andOperator
+name|AND
 condition|)
 block|{
 for|for
@@ -4334,7 +4334,7 @@ argument_list|()
 operator|==
 name|SqlStdOperatorTable
 operator|.
-name|equalsOperator
+name|EQUALS
 condition|)
 block|{
 specifier|final
@@ -4588,7 +4588,7 @@ name|operator
 operator|==
 name|SqlStdOperatorTable
 operator|.
-name|andOperator
+name|AND
 condition|)
 block|{
 for|for
@@ -4626,13 +4626,13 @@ name|operator
 operator|==
 name|SqlStdOperatorTable
 operator|.
-name|equalsOperator
+name|EQUALS
 operator|||
 name|operator
 operator|==
 name|SqlStdOperatorTable
 operator|.
-name|isNotDistinctFromOperator
+name|IS_NOT_DISTINCT_FROM
 condition|)
 block|{
 specifier|final
@@ -6309,7 +6309,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|andOperator
+name|AND
 argument_list|,
 name|ret
 argument_list|,
@@ -6395,13 +6395,13 @@ name|nullOp
 operator|=
 name|SqlStdOperatorTable
 operator|.
-name|isNullOperator
+name|IS_NULL
 expr_stmt|;
 name|eqOp
 operator|=
 name|SqlStdOperatorTable
 operator|.
-name|equalsOperator
+name|EQUALS
 expr_stmt|;
 block|}
 else|else
@@ -6410,13 +6410,13 @@ name|nullOp
 operator|=
 name|SqlStdOperatorTable
 operator|.
-name|isNotNullOperator
+name|IS_NOT_NULL
 expr_stmt|;
 name|eqOp
 operator|=
 name|SqlStdOperatorTable
 operator|.
-name|notEqualsOperator
+name|NOT_EQUALS
 expr_stmt|;
 block|}
 name|RexNode
@@ -6431,7 +6431,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|isNullOperator
+name|IS_NULL
 argument_list|,
 name|x
 argument_list|)
@@ -6453,7 +6453,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|isNullOperator
+name|IS_NULL
 argument_list|,
 name|y
 argument_list|)
@@ -6488,7 +6488,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|caseOperator
+name|CASE
 argument_list|,
 name|whenThenElse
 argument_list|)
@@ -7151,7 +7151,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|andOperator
+name|AND
 argument_list|,
 name|left
 argument_list|,
@@ -8004,7 +8004,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|equalsOperator
+name|EQUALS
 argument_list|,
 name|rexBuilder
 operator|.
@@ -8077,7 +8077,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|andOperator
+name|AND
 argument_list|,
 name|equiCondition
 argument_list|,
@@ -9158,6 +9158,7 @@ name|parent
 argument_list|)
 expr_stmt|;
 block|}
+comment|// CHECKSTYLE: IGNORE 1
 block|}
 operator|.
 name|go
@@ -9165,7 +9166,6 @@ argument_list|(
 name|ancestor
 argument_list|)
 expr_stmt|;
-comment|// CHECKSTYLE: IGNORE -1
 return|return
 literal|false
 return|;

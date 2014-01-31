@@ -192,7 +192,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Contains unit tests for all operators. Each of the methods is named after an  * operator.  * p/>  *<p>The class is abstract. It contains a test for every operator, but does not  *provide a mechanism to execute the tests: parse, validate, and execute  * expressions on the operators. This is left to a {@link SqlTester} object  *which the derived class must provde. *  *<p>Different implementations of {@link SqlTester} are possible, suchas:  * p/>  *<ul>  *<li>Execute against a real farrago database  *<li>Execute in pure java (parsing and validation can be done, but expression  * evaluation is not possible)  *<li>Generate a SQL script.  *<li>Analyze which operators are adequately tested.  *<ul>  *  *<p>A typical method will be named after the operator it is testing (say  *<code>testSubstringFunc</code>). It first calls {@link  *SqlTester#setFor(org.eigenbase.sql.SqlOperator,  * org.eigenbase.sql.test.SqlTester.VmName...)} to declare which operator it is  * testing.<blockqote>  *  *<pre><code>  * public void testSubstringFunc() {  *     tester.setFor(SqlStdOperatorTable.substringFunc);  *     tester.checkScalar("sin(0)", "0");  *     tester.checkScalar("sin(1.5707)", "1");  * }</code></pre>  *  *</blockqoute> The rest of the method contains calls to the various<code>  * checkXxx</code> methods in the {@link SqlTester} interface. For an operator  * to be adequately tested, there need to be tests for:  *  *<ul>  *<li>Parsing all of its the syntactic variants.  *<li>Deriving the type of in all combinations of arguments.  *  *<ul>  *<li>Pay particular attention to nullability. For example, the result of the  * "+" operator is NOT NULL if and only if both of its arguments are NOT  * NULL.</li>  *<li>Also pay attention to precision/scale/length. For example, the maximum  * length of the "||" operator is the sum of the maximum lengths of its  * arguments.</li>  *</ul>  *</li>  *<li>Executing the function. Pay particular attention to corner cases such as  * null arguments or null results.</li>  *</ul>  */
+comment|/**  * Contains unit tests for all operators. Each of the methods is named after an  * operator.  * p/>  *<p>The class is abstract. It contains a test for every operator, but does not  *provide a mechanism to execute the tests: parse, validate, and execute  * expressions on the operators. This is left to a {@link SqlTester} object  *which the derived class must provde. *  *<p>Different implementations of {@link SqlTester} are possible, such as:</p>  *  *<ul>  *<li>Execute against a real farrago database  *<li>Execute in pure java (parsing and validation can be done, but expression  * evaluation is not possible)  *<li>Generate a SQL script.  *<li>Analyze which operators are adequately tested.  *</ul>  *  *<p>A typical method will be named after the operator it is testing (say  *<code>testSubstringFunc</code>). It first calls  * {@link SqlTester#setFor(org.eigenbase.sql.SqlOperator, org.eigenbase.sql.test.SqlTester.VmName...)}  * to declare which operator it is testing.  *  *<blockquote>  *<pre><code>  * public void testSubstringFunc() {  *     tester.setFor(SqlStdOperatorTable.substringFunc);  *     tester.checkScalar("sin(0)", "0");  *     tester.checkScalar("sin(1.5707)", "1");  * }</code></pre>  *</blockquote>  *  *<p>The rest of the method contains calls to the various {@code checkXxx}  * methods in the {@link SqlTester} interface. For an operator  * to be adequately tested, there need to be tests for:  *  *<ul>  *<li>Parsing all of its the syntactic variants.  *<li>Deriving the type of in all combinations of arguments.  *  *<ul>  *<li>Pay particular attention to nullability. For example, the result of the  * "+" operator is NOT NULL if and only if both of its arguments are NOT  * NULL.</li>  *<li>Also pay attention to precision/scale/length. For example, the maximum  * length of the "||" operator is the sum of the maximum lengths of its  * arguments.</li>  *</ul>  *</li>  *<li>Executing the function. Pay particular attention to corner cases such as  * null arguments or null results.</li>  *</ul>  */
 end_comment
 
 begin_class
@@ -218,11 +218,11 @@ specifier|public
 specifier|static
 specifier|final
 name|String
-name|invalidCharMessage
+name|INVALID_CHAR_MESSAGE
 init|=
 name|Bug
 operator|.
-name|Fnl3Fixed
+name|FNL3_FIXED
 condition|?
 literal|null
 else|:
@@ -234,11 +234,11 @@ specifier|public
 specifier|static
 specifier|final
 name|String
-name|outOfRangeMessage
+name|OUT_OF_RANGE_MESSAGE
 init|=
 name|Bug
 operator|.
-name|Fnl3Fixed
+name|FNL3_FIXED
 condition|?
 literal|null
 else|:
@@ -250,11 +250,11 @@ specifier|public
 specifier|static
 specifier|final
 name|String
-name|divisionByZeroMessage
+name|DIVISION_BY_ZERO_MESSAGE
 init|=
 name|Bug
 operator|.
-name|Fnl3Fixed
+name|FNL3_FIXED
 condition|?
 literal|null
 else|:
@@ -266,11 +266,11 @@ specifier|public
 specifier|static
 specifier|final
 name|String
-name|stringTruncMessage
+name|STRING_TRUNC_MESSAGE
 init|=
 name|Bug
 operator|.
-name|Fnl3Fixed
+name|FNL3_FIXED
 condition|?
 literal|null
 else|:
@@ -282,11 +282,11 @@ specifier|public
 specifier|static
 specifier|final
 name|String
-name|badDatetimeMessage
+name|BAD_DATETIME_MESSAGE
 init|=
 name|Bug
 operator|.
-name|Fnl3Fixed
+name|FNL3_FIXED
 condition|?
 literal|null
 else|:
@@ -296,7 +296,7 @@ specifier|public
 specifier|static
 specifier|final
 name|String
-name|literalOutOfRangeMessage
+name|LITERAL_OUT_OF_RANGE_MESSAGE
 init|=
 literal|"(?s).*Numeric literal.*out of range.*"
 decl_stmt|;
@@ -304,7 +304,7 @@ specifier|public
 specifier|static
 specifier|final
 name|boolean
-name|todo
+name|TODO
 init|=
 literal|false
 decl_stmt|;
@@ -313,7 +313,7 @@ specifier|public
 specifier|static
 specifier|final
 name|Pattern
-name|timePattern
+name|TIME_PATTERN
 init|=
 name|Pattern
 operator|.
@@ -327,7 +327,7 @@ specifier|public
 specifier|static
 specifier|final
 name|Pattern
-name|timestampPattern
+name|TIMESTAMP_PATTERN
 init|=
 name|Pattern
 operator|.
@@ -343,7 +343,7 @@ specifier|public
 specifier|static
 specifier|final
 name|Pattern
-name|datePattern
+name|DATE_PATTERN
 init|=
 name|Pattern
 operator|.
@@ -357,7 +357,7 @@ specifier|static
 specifier|final
 name|String
 index|[]
-name|numericTypeNames
+name|NUMERIC_TYPE_NAMES
 init|=
 block|{
 literal|"TINYINT"
@@ -384,7 +384,7 @@ specifier|static
 specifier|final
 name|String
 index|[]
-name|minNumericStrings
+name|MIN_NUMERIC_STRINGS
 init|=
 block|{
 name|Long
@@ -441,7 +441,7 @@ specifier|static
 specifier|final
 name|String
 index|[]
-name|minOverflowNumericStrings
+name|MIN_OVERFLOW_NUMERIC_STRINGS
 init|=
 block|{
 name|Long
@@ -512,7 +512,7 @@ specifier|static
 specifier|final
 name|String
 index|[]
-name|maxNumericStrings
+name|MAX_NUMERIC_STRINGS
 init|=
 block|{
 name|Long
@@ -571,7 +571,7 @@ specifier|static
 specifier|final
 name|String
 index|[]
-name|maxOverflowNumericStrings
+name|MAX_OVERFLOW_NUMERIC_STRINGS
 init|=
 block|{
 name|Long
@@ -644,7 +644,7 @@ specifier|static
 specifier|final
 name|boolean
 index|[]
-name|FalseTrue
+name|FALSE_TRUE
 init|=
 block|{
 literal|false
@@ -732,7 +732,7 @@ specifier|private
 specifier|static
 specifier|final
 name|Pattern
-name|invalidArgForPower
+name|INVALID_ARG_FOR_POWER
 init|=
 name|Pattern
 operator|.
@@ -745,7 +745,7 @@ specifier|private
 specifier|static
 specifier|final
 name|Pattern
-name|code2201f
+name|CODE_2201F
 init|=
 name|Pattern
 operator|.
@@ -853,7 +853,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|betweenOperator
+name|BETWEEN
 argument_list|,
 name|SqlTester
 operator|.
@@ -1113,7 +1113,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|notBetweenOperator
+name|NOT_BETWEEN
 argument_list|,
 name|VM_EXPAND
 argument_list|)
@@ -1470,7 +1470,7 @@ if|if
 condition|(
 name|Bug
 operator|.
-name|Dt239Fixed
+name|DT239_FIXED
 condition|)
 block|{
 name|checkCastFails
@@ -1487,7 +1487,7 @@ operator|)
 operator|+
 literal|")"
 argument_list|,
-name|stringTruncMessage
+name|STRING_TRUNC_MESSAGE
 argument_list|,
 literal|true
 argument_list|)
@@ -1528,7 +1528,7 @@ if|if
 condition|(
 name|Bug
 operator|.
-name|Dt239Fixed
+name|DT239_FIXED
 condition|)
 block|{
 name|checkCastFails
@@ -1545,7 +1545,7 @@ operator|)
 operator|+
 literal|")"
 argument_list|,
-name|stringTruncMessage
+name|STRING_TRUNC_MESSAGE
 argument_list|,
 literal|true
 argument_list|)
@@ -1597,7 +1597,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|castFunc
+name|CAST
 argument_list|)
 expr_stmt|;
 comment|// integer
@@ -1684,7 +1684,7 @@ name|checkFails
 argument_list|(
 literal|"cast(2.523 as char(2))"
 argument_list|,
-name|stringTruncMessage
+name|STRING_TRUNC_MESSAGE
 argument_list|,
 literal|true
 argument_list|)
@@ -1750,7 +1750,7 @@ argument_list|)
 expr_stmt|;
 if|if
 condition|(
-name|todo
+name|TODO
 condition|)
 block|{
 name|checkCastToString
@@ -1765,7 +1765,7 @@ expr_stmt|;
 block|}
 if|if
 condition|(
-name|todo
+name|TODO
 condition|)
 block|{
 name|checkCastToString
@@ -1780,7 +1780,7 @@ expr_stmt|;
 block|}
 if|if
 condition|(
-name|todo
+name|TODO
 condition|)
 block|{
 name|checkCastToString
@@ -1799,7 +1799,7 @@ name|checkFails
 argument_list|(
 literal|"cast(1.3243232e0 as varchar(4))"
 argument_list|,
-name|stringTruncMessage
+name|STRING_TRUNC_MESSAGE
 argument_list|,
 literal|true
 argument_list|)
@@ -1810,7 +1810,7 @@ name|checkFails
 argument_list|(
 literal|"cast(1.9e5 as char(4))"
 argument_list|,
-name|stringTruncMessage
+name|STRING_TRUNC_MESSAGE
 argument_list|,
 literal|true
 argument_list|)
@@ -1941,7 +1941,7 @@ name|checkFails
 argument_list|(
 literal|"cast(true as char(3))"
 argument_list|,
-name|invalidCharMessage
+name|INVALID_CHAR_MESSAGE
 argument_list|,
 literal|true
 argument_list|)
@@ -1952,7 +1952,7 @@ name|checkFails
 argument_list|(
 literal|"cast(false as char(4))"
 argument_list|,
-name|invalidCharMessage
+name|INVALID_CHAR_MESSAGE
 argument_list|,
 literal|true
 argument_list|)
@@ -1963,7 +1963,7 @@ name|checkFails
 argument_list|(
 literal|"cast(true as varchar(3))"
 argument_list|,
-name|invalidCharMessage
+name|INVALID_CHAR_MESSAGE
 argument_list|,
 literal|true
 argument_list|)
@@ -1974,7 +1974,7 @@ name|checkFails
 argument_list|(
 literal|"cast(false as varchar(4))"
 argument_list|,
-name|invalidCharMessage
+name|INVALID_CHAR_MESSAGE
 argument_list|,
 literal|true
 argument_list|)
@@ -1993,7 +1993,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|castFunc
+name|CAST
 argument_list|)
 expr_stmt|;
 comment|// Test casting for min,max, out of range for exact numeric types
@@ -2006,7 +2006,7 @@ literal|0
 init|;
 name|i
 operator|<
-name|numericTypeNames
+name|NUMERIC_TYPE_NAMES
 operator|.
 name|length
 condition|;
@@ -2017,7 +2017,7 @@ block|{
 name|String
 name|type
 init|=
-name|numericTypeNames
+name|NUMERIC_TYPE_NAMES
 index|[
 name|i
 index|]
@@ -2052,7 +2052,7 @@ block|}
 comment|// Convert from literal to type
 name|checkCastToScalarOkay
 argument_list|(
-name|maxNumericStrings
+name|MAX_NUMERIC_STRINGS
 index|[
 name|i
 index|]
@@ -2062,7 +2062,7 @@ argument_list|)
 expr_stmt|;
 name|checkCastToScalarOkay
 argument_list|(
-name|minNumericStrings
+name|MIN_NUMERIC_STRINGS
 index|[
 name|i
 index|]
@@ -2084,28 +2084,28 @@ block|{
 comment|// Literal of range
 name|checkCastFails
 argument_list|(
-name|maxOverflowNumericStrings
+name|MAX_OVERFLOW_NUMERIC_STRINGS
 index|[
 name|i
 index|]
 argument_list|,
 name|type
 argument_list|,
-name|literalOutOfRangeMessage
+name|LITERAL_OUT_OF_RANGE_MESSAGE
 argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
 name|checkCastFails
 argument_list|(
-name|minOverflowNumericStrings
+name|MIN_OVERFLOW_NUMERIC_STRINGS
 index|[
 name|i
 index|]
 argument_list|,
 name|type
 argument_list|,
-name|literalOutOfRangeMessage
+name|LITERAL_OUT_OF_RANGE_MESSAGE
 argument_list|,
 literal|false
 argument_list|)
@@ -2115,28 +2115,28 @@ else|else
 block|{
 name|checkCastFails
 argument_list|(
-name|maxOverflowNumericStrings
+name|MAX_OVERFLOW_NUMERIC_STRINGS
 index|[
 name|i
 index|]
 argument_list|,
 name|type
 argument_list|,
-name|outOfRangeMessage
+name|OUT_OF_RANGE_MESSAGE
 argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
 name|checkCastFails
 argument_list|(
-name|minOverflowNumericStrings
+name|MIN_OVERFLOW_NUMERIC_STRINGS
 index|[
 name|i
 index|]
 argument_list|,
 name|type
 argument_list|,
-name|outOfRangeMessage
+name|OUT_OF_RANGE_MESSAGE
 argument_list|,
 literal|true
 argument_list|)
@@ -2155,7 +2155,7 @@ name|checkCastToScalarOkay
 argument_list|(
 literal|"'"
 operator|+
-name|maxNumericStrings
+name|MAX_NUMERIC_STRINGS
 index|[
 name|i
 index|]
@@ -2164,7 +2164,7 @@ literal|"'"
 argument_list|,
 name|type
 argument_list|,
-name|maxNumericStrings
+name|MAX_NUMERIC_STRINGS
 index|[
 name|i
 index|]
@@ -2174,7 +2174,7 @@ name|checkCastToScalarOkay
 argument_list|(
 literal|"'"
 operator|+
-name|minNumericStrings
+name|MIN_NUMERIC_STRINGS
 index|[
 name|i
 index|]
@@ -2183,7 +2183,7 @@ literal|"'"
 argument_list|,
 name|type
 argument_list|,
-name|minNumericStrings
+name|MIN_NUMERIC_STRINGS
 index|[
 name|i
 index|]
@@ -2193,7 +2193,7 @@ name|checkCastFails
 argument_list|(
 literal|"'"
 operator|+
-name|maxOverflowNumericStrings
+name|MAX_OVERFLOW_NUMERIC_STRINGS
 index|[
 name|i
 index|]
@@ -2202,7 +2202,7 @@ literal|"'"
 argument_list|,
 name|type
 argument_list|,
-name|outOfRangeMessage
+name|OUT_OF_RANGE_MESSAGE
 argument_list|,
 literal|true
 argument_list|)
@@ -2211,7 +2211,7 @@ name|checkCastFails
 argument_list|(
 literal|"'"
 operator|+
-name|minOverflowNumericStrings
+name|MIN_OVERFLOW_NUMERIC_STRINGS
 index|[
 name|i
 index|]
@@ -2220,7 +2220,7 @@ literal|"'"
 argument_list|,
 name|type
 argument_list|,
-name|outOfRangeMessage
+name|OUT_OF_RANGE_MESSAGE
 argument_list|,
 literal|true
 argument_list|)
@@ -2228,7 +2228,7 @@ expr_stmt|;
 comment|// Convert from type to string
 name|checkCastToString
 argument_list|(
-name|maxNumericStrings
+name|MAX_NUMERIC_STRINGS
 index|[
 name|i
 index|]
@@ -2240,7 +2240,7 @@ argument_list|)
 expr_stmt|;
 name|checkCastToString
 argument_list|(
-name|maxNumericStrings
+name|MAX_NUMERIC_STRINGS
 index|[
 name|i
 index|]
@@ -2252,7 +2252,7 @@ argument_list|)
 expr_stmt|;
 name|checkCastToString
 argument_list|(
-name|minNumericStrings
+name|MIN_NUMERIC_STRINGS
 index|[
 name|i
 index|]
@@ -2264,7 +2264,7 @@ argument_list|)
 expr_stmt|;
 name|checkCastToString
 argument_list|(
-name|minNumericStrings
+name|MIN_NUMERIC_STRINGS
 index|[
 name|i
 index|]
@@ -2280,7 +2280,7 @@ literal|"'notnumeric'"
 argument_list|,
 name|type
 argument_list|,
-name|invalidCharMessage
+name|INVALID_CHAR_MESSAGE
 argument_list|,
 literal|true
 argument_list|)
@@ -2300,7 +2300,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|castFunc
+name|CAST
 argument_list|)
 expr_stmt|;
 name|checkCastToScalarOkay
@@ -2471,7 +2471,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|castFunc
+name|CAST
 argument_list|)
 expr_stmt|;
 if|if
@@ -2555,7 +2555,7 @@ name|checkFails
 argument_list|(
 literal|"cast(' -1.21e' as decimal(2,1))"
 argument_list|,
-name|invalidCharMessage
+name|INVALID_CHAR_MESSAGE
 argument_list|,
 literal|true
 argument_list|)
@@ -2574,7 +2574,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|castFunc
+name|CAST
 argument_list|)
 expr_stmt|;
 comment|// interval to decimal
@@ -2795,7 +2795,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|castFunc
+name|CAST
 argument_list|)
 expr_stmt|;
 if|if
@@ -2957,7 +2957,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|castFunc
+name|CAST
 argument_list|)
 expr_stmt|;
 name|checkCastToScalarOkay
@@ -3191,7 +3191,7 @@ name|checkFails
 argument_list|(
 literal|"cast(9.99 as decimal(2,1))"
 argument_list|,
-name|outOfRangeMessage
+name|OUT_OF_RANGE_MESSAGE
 argument_list|,
 literal|true
 argument_list|)
@@ -3210,7 +3210,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|castFunc
+name|CAST
 argument_list|)
 expr_stmt|;
 name|tester
@@ -3289,7 +3289,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|castFunc
+name|CAST
 argument_list|)
 expr_stmt|;
 comment|// Test casting for min,max, out of range for approx numeric types
@@ -3302,7 +3302,7 @@ literal|0
 init|;
 name|i
 operator|<
-name|numericTypeNames
+name|NUMERIC_TYPE_NAMES
 operator|.
 name|length
 condition|;
@@ -3313,7 +3313,7 @@ block|{
 name|String
 name|type
 init|=
-name|numericTypeNames
+name|NUMERIC_TYPE_NAMES
 index|[
 name|i
 index|]
@@ -3374,7 +3374,7 @@ block|}
 comment|// Convert from literal to type
 name|checkCastToApproxOkay
 argument_list|(
-name|maxNumericStrings
+name|MAX_NUMERIC_STRINGS
 index|[
 name|i
 index|]
@@ -3385,7 +3385,7 @@ name|Double
 operator|.
 name|parseDouble
 argument_list|(
-name|maxNumericStrings
+name|MAX_NUMERIC_STRINGS
 index|[
 name|i
 index|]
@@ -3400,7 +3400,7 @@ argument_list|)
 expr_stmt|;
 name|checkCastToApproxOkay
 argument_list|(
-name|minNumericStrings
+name|MIN_NUMERIC_STRINGS
 index|[
 name|i
 index|]
@@ -3411,7 +3411,7 @@ name|Double
 operator|.
 name|parseDouble
 argument_list|(
-name|minNumericStrings
+name|MIN_NUMERIC_STRINGS
 index|[
 name|i
 index|]
@@ -3427,14 +3427,14 @@ condition|)
 block|{
 name|checkCastFails
 argument_list|(
-name|maxOverflowNumericStrings
+name|MAX_OVERFLOW_NUMERIC_STRINGS
 index|[
 name|i
 index|]
 argument_list|,
 name|type
 argument_list|,
-name|outOfRangeMessage
+name|OUT_OF_RANGE_MESSAGE
 argument_list|,
 literal|true
 argument_list|)
@@ -3445,14 +3445,14 @@ block|{
 comment|// Double: Literal out of range
 name|checkCastFails
 argument_list|(
-name|maxOverflowNumericStrings
+name|MAX_OVERFLOW_NUMERIC_STRINGS
 index|[
 name|i
 index|]
 argument_list|,
 name|type
 argument_list|,
-name|literalOutOfRangeMessage
+name|LITERAL_OUT_OF_RANGE_MESSAGE
 argument_list|,
 literal|false
 argument_list|)
@@ -3461,7 +3461,7 @@ block|}
 comment|// Underflow: goes to 0
 name|checkCastToApproxOkay
 argument_list|(
-name|minOverflowNumericStrings
+name|MIN_OVERFLOW_NUMERIC_STRINGS
 index|[
 name|i
 index|]
@@ -3478,7 +3478,7 @@ name|checkCastToApproxOkay
 argument_list|(
 literal|"'"
 operator|+
-name|maxNumericStrings
+name|MAX_NUMERIC_STRINGS
 index|[
 name|i
 index|]
@@ -3491,7 +3491,7 @@ name|Double
 operator|.
 name|parseDouble
 argument_list|(
-name|maxNumericStrings
+name|MAX_NUMERIC_STRINGS
 index|[
 name|i
 index|]
@@ -3508,7 +3508,7 @@ name|checkCastToApproxOkay
 argument_list|(
 literal|"'"
 operator|+
-name|minNumericStrings
+name|MIN_NUMERIC_STRINGS
 index|[
 name|i
 index|]
@@ -3521,7 +3521,7 @@ name|Double
 operator|.
 name|parseDouble
 argument_list|(
-name|minNumericStrings
+name|MIN_NUMERIC_STRINGS
 index|[
 name|i
 index|]
@@ -3534,7 +3534,7 @@ name|checkCastFails
 argument_list|(
 literal|"'"
 operator|+
-name|maxOverflowNumericStrings
+name|MAX_OVERFLOW_NUMERIC_STRINGS
 index|[
 name|i
 index|]
@@ -3543,7 +3543,7 @@ literal|"'"
 argument_list|,
 name|type
 argument_list|,
-name|outOfRangeMessage
+name|OUT_OF_RANGE_MESSAGE
 argument_list|,
 literal|true
 argument_list|)
@@ -3553,7 +3553,7 @@ name|checkCastToApproxOkay
 argument_list|(
 literal|"'"
 operator|+
-name|minOverflowNumericStrings
+name|MIN_OVERFLOW_NUMERIC_STRINGS
 index|[
 name|i
 index|]
@@ -3571,7 +3571,7 @@ comment|// Convert from type to string
 comment|// Treated as DOUBLE
 name|checkCastToString
 argument_list|(
-name|maxNumericStrings
+name|MAX_NUMERIC_STRINGS
 index|[
 name|i
 index|]
@@ -3597,7 +3597,7 @@ block|{
 comment|// Treated as FLOAT or DOUBLE
 name|checkCastToString
 argument_list|(
-name|maxNumericStrings
+name|MAX_NUMERIC_STRINGS
 index|[
 name|i
 index|]
@@ -3614,7 +3614,7 @@ argument_list|)
 expr_stmt|;
 name|checkCastToString
 argument_list|(
-name|minNumericStrings
+name|MIN_NUMERIC_STRINGS
 index|[
 name|i
 index|]
@@ -3631,7 +3631,7 @@ argument_list|)
 expr_stmt|;
 name|checkCastToString
 argument_list|(
-name|minNumericStrings
+name|MIN_NUMERIC_STRINGS
 index|[
 name|i
 index|]
@@ -3655,7 +3655,7 @@ block|{
 comment|// Treated as FLOAT or DOUBLE
 name|checkCastToString
 argument_list|(
-name|maxNumericStrings
+name|MAX_NUMERIC_STRINGS
 index|[
 name|i
 index|]
@@ -3672,7 +3672,7 @@ argument_list|)
 expr_stmt|;
 name|checkCastToString
 argument_list|(
-name|minNumericStrings
+name|MIN_NUMERIC_STRINGS
 index|[
 name|i
 index|]
@@ -3689,7 +3689,7 @@ expr_stmt|;
 comment|// Treated as FLOAT or DOUBLE
 name|checkCastToString
 argument_list|(
-name|minNumericStrings
+name|MIN_NUMERIC_STRINGS
 index|[
 name|i
 index|]
@@ -3710,7 +3710,7 @@ literal|"'notnumeric'"
 argument_list|,
 name|type
 argument_list|,
-name|invalidCharMessage
+name|INVALID_CHAR_MESSAGE
 argument_list|,
 literal|true
 argument_list|)
@@ -3730,7 +3730,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|castFunc
+name|CAST
 argument_list|)
 expr_stmt|;
 name|checkCastToApproxOkay
@@ -3826,7 +3826,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|castFunc
+name|CAST
 argument_list|)
 expr_stmt|;
 comment|// null
@@ -3928,7 +3928,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|castFunc
+name|CAST
 argument_list|)
 expr_stmt|;
 name|tester
@@ -3975,7 +3975,7 @@ if|if
 condition|(
 name|Bug
 operator|.
-name|Frg282Fixed
+name|FRG282_FIXED
 condition|)
 block|{
 comment|// test precision
@@ -4032,7 +4032,7 @@ argument_list|)
 expr_stmt|;
 if|if
 condition|(
-name|todo
+name|TODO
 condition|)
 block|{
 name|checkCastToString
@@ -4208,7 +4208,7 @@ if|if
 condition|(
 name|Bug
 operator|.
-name|Frg282Fixed
+name|FRG282_FIXED
 condition|)
 block|{
 name|tester
@@ -4229,7 +4229,7 @@ name|checkFails
 argument_list|(
 literal|"cast('nottime' as TIME)"
 argument_list|,
-name|badDatetimeMessage
+name|BAD_DATETIME_MESSAGE
 argument_list|,
 literal|true
 argument_list|)
@@ -4240,7 +4240,7 @@ name|checkFails
 argument_list|(
 literal|"cast('1241241' as TIME)"
 argument_list|,
-name|badDatetimeMessage
+name|BAD_DATETIME_MESSAGE
 argument_list|,
 literal|true
 argument_list|)
@@ -4251,7 +4251,7 @@ name|checkFails
 argument_list|(
 literal|"cast('12:54:78' as TIME)"
 argument_list|,
-name|badDatetimeMessage
+name|BAD_DATETIME_MESSAGE
 argument_list|,
 literal|true
 argument_list|)
@@ -4268,7 +4268,7 @@ argument_list|)
 expr_stmt|;
 if|if
 condition|(
-name|todo
+name|TODO
 condition|)
 block|{
 comment|// TODO: casting allows one to discard precision without error
@@ -4330,7 +4330,7 @@ if|if
 condition|(
 name|Bug
 operator|.
-name|Frg282Fixed
+name|FRG282_FIXED
 condition|)
 block|{
 name|tester
@@ -4351,7 +4351,7 @@ name|checkFails
 argument_list|(
 literal|"cast('nottime' as TIMESTAMP)"
 argument_list|,
-name|badDatetimeMessage
+name|BAD_DATETIME_MESSAGE
 argument_list|,
 literal|true
 argument_list|)
@@ -4362,7 +4362,7 @@ name|checkFails
 argument_list|(
 literal|"cast('1241241' as TIMESTAMP)"
 argument_list|,
-name|badDatetimeMessage
+name|BAD_DATETIME_MESSAGE
 argument_list|,
 literal|true
 argument_list|)
@@ -4373,7 +4373,7 @@ name|checkFails
 argument_list|(
 literal|"cast('1945-20-24 12:42:25.34' as TIMESTAMP)"
 argument_list|,
-name|badDatetimeMessage
+name|BAD_DATETIME_MESSAGE
 argument_list|,
 literal|true
 argument_list|)
@@ -4384,7 +4384,7 @@ name|checkFails
 argument_list|(
 literal|"cast('1945-01-24 25:42:25.34' as TIMESTAMP)"
 argument_list|,
-name|badDatetimeMessage
+name|BAD_DATETIME_MESSAGE
 argument_list|,
 literal|true
 argument_list|)
@@ -4436,7 +4436,7 @@ name|checkFails
 argument_list|(
 literal|"cast('notdate' as DATE)"
 argument_list|,
-name|badDatetimeMessage
+name|BAD_DATETIME_MESSAGE
 argument_list|,
 literal|true
 argument_list|)
@@ -4447,7 +4447,7 @@ name|checkFails
 argument_list|(
 literal|"cast('52534253' as DATE)"
 argument_list|,
-name|badDatetimeMessage
+name|BAD_DATETIME_MESSAGE
 argument_list|,
 literal|true
 argument_list|)
@@ -4458,7 +4458,7 @@ name|checkFails
 argument_list|(
 literal|"cast('1945-30-24' as DATE)"
 argument_list|,
-name|badDatetimeMessage
+name|BAD_DATETIME_MESSAGE
 argument_list|,
 literal|true
 argument_list|)
@@ -4704,7 +4704,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|castFunc
+name|CAST
 argument_list|)
 expr_stmt|;
 comment|// string to boolean
@@ -4758,7 +4758,7 @@ name|checkFails
 argument_list|(
 literal|"cast('unknown' as boolean)"
 argument_list|,
-name|invalidCharMessage
+name|INVALID_CHAR_MESSAGE
 argument_list|,
 literal|true
 argument_list|)
@@ -4791,7 +4791,7 @@ name|checkFails
 argument_list|(
 literal|"cast(cast('blah' as varchar(10)) as boolean)"
 argument_list|,
-name|invalidCharMessage
+name|INVALID_CHAR_MESSAGE
 argument_list|,
 literal|true
 argument_list|)
@@ -4810,7 +4810,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|caseOperator
+name|CASE
 argument_list|)
 expr_stmt|;
 name|tester
@@ -5004,7 +5004,7 @@ argument_list|)
 expr_stmt|;
 if|if
 condition|(
-name|todo
+name|TODO
 condition|)
 block|{
 name|tester
@@ -5131,7 +5131,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|caseOperator
+name|CASE
 argument_list|)
 expr_stmt|;
 name|tester
@@ -6231,7 +6231,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|selectOperator
+name|SELECT
 argument_list|,
 name|VM_EXPAND
 argument_list|)
@@ -6244,7 +6244,7 @@ literal|"select * from (values(1))"
 argument_list|,
 name|SqlTests
 operator|.
-name|IntegerTypeChecker
+name|INTEGER_TYPE_CHECKER
 argument_list|,
 literal|"1"
 argument_list|,
@@ -6259,7 +6259,7 @@ if|if
 condition|(
 name|Bug
 operator|.
-name|Frg189Fixed
+name|FRG189_FIXED
 operator|||
 operator|(
 name|getClass
@@ -6272,7 +6272,7 @@ operator|)
 operator|&&
 name|Bug
 operator|.
-name|TodoFixed
+name|TODO_FIXED
 condition|)
 block|{
 name|tester
@@ -6363,7 +6363,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|literalChainOperator
+name|LITERAL_CHAIN
 argument_list|,
 name|VM_EXPAND
 argument_list|)
@@ -6448,7 +6448,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|rowConstructor
+name|ROW
 argument_list|,
 name|VM_FENNEL
 argument_list|)
@@ -6467,7 +6467,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|andOperator
+name|AND
 argument_list|)
 expr_stmt|;
 name|tester
@@ -6587,7 +6587,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|andOperator
+name|AND
 argument_list|)
 expr_stmt|;
 comment|// lazy eval returns FALSE;
@@ -6601,7 +6601,7 @@ literal|"values 1> 2 and sqrt(-4) = -2"
 argument_list|,
 name|SqlTests
 operator|.
-name|BooleanTypeChecker
+name|BOOLEAN_TYPE_CHECKER
 argument_list|,
 operator|new
 name|ValueOrExceptionResultChecker
@@ -6610,9 +6610,9 @@ name|Boolean
 operator|.
 name|FALSE
 argument_list|,
-name|invalidArgForPower
+name|INVALID_ARG_FOR_POWER
 argument_list|,
-name|code2201f
+name|CODE_2201F
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -6630,7 +6630,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|concatOperator
+name|CONCAT
 argument_list|)
 expr_stmt|;
 name|tester
@@ -6697,7 +6697,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|divideOperator
+name|DIVIDE
 argument_list|)
 expr_stmt|;
 name|tester
@@ -6829,7 +6829,7 @@ name|checkFails
 argument_list|(
 literal|"100.1 / 0.00000000000000001"
 argument_list|,
-name|outOfRangeMessage
+name|OUT_OF_RANGE_MESSAGE
 argument_list|,
 literal|true
 argument_list|)
@@ -6922,7 +6922,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|equalsOperator
+name|EQUALS
 argument_list|)
 expr_stmt|;
 name|tester
@@ -7184,7 +7184,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|greaterThanOperator
+name|GREATER_THAN
 argument_list|)
 expr_stmt|;
 name|tester
@@ -7525,7 +7525,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|isDistinctFromOperator
+name|IS_DISTINCT_FROM
 argument_list|,
 name|VM_EXPAND
 argument_list|)
@@ -7680,7 +7680,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|isNotDistinctFromOperator
+name|IS_NOT_DISTINCT_FROM
 argument_list|,
 name|VM_EXPAND
 argument_list|)
@@ -7835,7 +7835,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|greaterThanOrEqualOperator
+name|GREATER_THAN_OR_EQUAL
 argument_list|)
 expr_stmt|;
 name|tester
@@ -8145,7 +8145,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|inOperator
+name|IN
 argument_list|,
 name|VM_EXPAND
 argument_list|)
@@ -8190,7 +8190,7 @@ if|if
 condition|(
 name|Bug
 operator|.
-name|Frg327Fixed
+name|FRG327_FIXED
 condition|)
 block|{
 name|tester
@@ -8235,7 +8235,7 @@ condition|(
 operator|!
 name|Bug
 operator|.
-name|TodoFixed
+name|TODO_FIXED
 condition|)
 block|{
 return|return;
@@ -8265,7 +8265,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|notInOperator
+name|NOT_IN
 argument_list|,
 name|VM_EXPAND
 argument_list|)
@@ -8318,7 +8318,7 @@ if|if
 condition|(
 name|Bug
 operator|.
-name|Frg327Fixed
+name|FRG327_FIXED
 condition|)
 block|{
 name|tester
@@ -8355,7 +8355,7 @@ condition|(
 operator|!
 name|Bug
 operator|.
-name|TodoFixed
+name|TODO_FIXED
 condition|)
 block|{
 return|return;
@@ -8385,7 +8385,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|overlapsOperator
+name|OVERLAPS
 argument_list|,
 name|VM_EXPAND
 argument_list|)
@@ -8394,7 +8394,7 @@ if|if
 condition|(
 name|Bug
 operator|.
-name|Frg187Fixed
+name|FRG187_FIXED
 condition|)
 block|{
 name|tester
@@ -8542,7 +8542,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|lessThanOperator
+name|LESS_THAN
 argument_list|)
 expr_stmt|;
 name|tester
@@ -8874,7 +8874,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|lessThanOrEqualOperator
+name|LESS_THAN_OR_EQUAL
 argument_list|)
 expr_stmt|;
 name|tester
@@ -9205,7 +9205,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|minusOperator
+name|MINUS
 argument_list|)
 expr_stmt|;
 name|tester
@@ -9325,7 +9325,7 @@ if|if
 condition|(
 name|Bug
 operator|.
-name|Fnl25Fixed
+name|FNL25_FIXED
 condition|)
 block|{
 comment|// Should throw out of range error
@@ -9335,7 +9335,7 @@ name|checkFails
 argument_list|(
 literal|"cast(100 as tinyint) - cast(-100 as tinyint)"
 argument_list|,
-name|outOfRangeMessage
+name|OUT_OF_RANGE_MESSAGE
 argument_list|,
 literal|true
 argument_list|)
@@ -9346,7 +9346,7 @@ name|checkFails
 argument_list|(
 literal|"cast(-20000 as smallint) - cast(20000 as smallint)"
 argument_list|,
-name|outOfRangeMessage
+name|OUT_OF_RANGE_MESSAGE
 argument_list|,
 literal|true
 argument_list|)
@@ -9357,7 +9357,7 @@ name|checkFails
 argument_list|(
 literal|"cast(1.5e9 as integer) - cast(-1.5e9 as integer)"
 argument_list|,
-name|outOfRangeMessage
+name|OUT_OF_RANGE_MESSAGE
 argument_list|,
 literal|true
 argument_list|)
@@ -9368,7 +9368,7 @@ name|checkFails
 argument_list|(
 literal|"cast(-5e18 as bigint) - cast(5e18 as bigint)"
 argument_list|,
-name|outOfRangeMessage
+name|OUT_OF_RANGE_MESSAGE
 argument_list|,
 literal|true
 argument_list|)
@@ -9379,7 +9379,7 @@ name|checkFails
 argument_list|(
 literal|"cast(5e18 as decimal(19,0)) - cast(-5e18 as decimal(19,0))"
 argument_list|,
-name|outOfRangeMessage
+name|OUT_OF_RANGE_MESSAGE
 argument_list|,
 literal|true
 argument_list|)
@@ -9390,7 +9390,7 @@ name|checkFails
 argument_list|(
 literal|"cast(-5e8 as decimal(19,10)) - cast(5e8 as decimal(19,10))"
 argument_list|,
-name|outOfRangeMessage
+name|OUT_OF_RANGE_MESSAGE
 argument_list|,
 literal|true
 argument_list|)
@@ -9410,7 +9410,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|minusOperator
+name|MINUS
 argument_list|)
 expr_stmt|;
 name|tester
@@ -9521,7 +9521,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|minusDateOperator
+name|MINUS_DATE
 argument_list|)
 expr_stmt|;
 if|if
@@ -9655,7 +9655,7 @@ if|if
 condition|(
 name|Bug
 operator|.
-name|Dt1684Fixed
+name|DT1684_FIXED
 condition|)
 block|{
 name|tester
@@ -9689,7 +9689,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|multiplyOperator
+name|MULTIPLY
 argument_list|)
 expr_stmt|;
 name|tester
@@ -9814,7 +9814,7 @@ if|if
 condition|(
 name|Bug
 operator|.
-name|Fnl25Fixed
+name|FNL25_FIXED
 condition|)
 block|{
 comment|// Should throw out of range error
@@ -9824,7 +9824,7 @@ name|checkFails
 argument_list|(
 literal|"cast(100 as tinyint) * cast(-2 as tinyint)"
 argument_list|,
-name|outOfRangeMessage
+name|OUT_OF_RANGE_MESSAGE
 argument_list|,
 literal|true
 argument_list|)
@@ -9835,7 +9835,7 @@ name|checkFails
 argument_list|(
 literal|"cast(200 as smallint) * cast(200 as smallint)"
 argument_list|,
-name|outOfRangeMessage
+name|OUT_OF_RANGE_MESSAGE
 argument_list|,
 literal|true
 argument_list|)
@@ -9846,7 +9846,7 @@ name|checkFails
 argument_list|(
 literal|"cast(1.5e9 as integer) * cast(-2 as integer)"
 argument_list|,
-name|outOfRangeMessage
+name|OUT_OF_RANGE_MESSAGE
 argument_list|,
 literal|true
 argument_list|)
@@ -9857,7 +9857,7 @@ name|checkFails
 argument_list|(
 literal|"cast(5e9 as bigint) * cast(2e9 as bigint)"
 argument_list|,
-name|outOfRangeMessage
+name|OUT_OF_RANGE_MESSAGE
 argument_list|,
 literal|true
 argument_list|)
@@ -9868,7 +9868,7 @@ name|checkFails
 argument_list|(
 literal|"cast(2e9 as decimal(19,0)) * cast(-5e9 as decimal(19,0))"
 argument_list|,
-name|outOfRangeMessage
+name|OUT_OF_RANGE_MESSAGE
 argument_list|,
 literal|true
 argument_list|)
@@ -9879,7 +9879,7 @@ name|checkFails
 argument_list|(
 literal|"cast(5e4 as decimal(19,10)) * cast(2e4 as decimal(19,10))"
 argument_list|,
-name|outOfRangeMessage
+name|OUT_OF_RANGE_MESSAGE
 argument_list|,
 literal|true
 argument_list|)
@@ -9931,7 +9931,7 @@ argument_list|)
 expr_stmt|;
 if|if
 condition|(
-name|todo
+name|TODO
 condition|)
 block|{
 name|tester
@@ -9971,7 +9971,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|notEqualsOperator
+name|NOT_EQUALS
 argument_list|)
 expr_stmt|;
 name|tester
@@ -10088,7 +10088,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|orOperator
+name|OR
 argument_list|)
 expr_stmt|;
 name|tester
@@ -10145,7 +10145,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|orOperator
+name|OR
 argument_list|)
 expr_stmt|;
 comment|// need to evaluate 2nd argument if first evaluates to null, therefore
@@ -10158,16 +10158,16 @@ literal|"values 1< cast(null as integer) or sqrt(-4) = -2"
 argument_list|,
 name|SqlTests
 operator|.
-name|BooleanTypeChecker
+name|BOOLEAN_TYPE_CHECKER
 argument_list|,
 operator|new
 name|ValueOrExceptionResultChecker
 argument_list|(
 literal|null
 argument_list|,
-name|invalidArgForPower
+name|INVALID_ARG_FOR_POWER
 argument_list|,
-name|code2201f
+name|CODE_2201F
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -10183,7 +10183,7 @@ literal|"values 1< 2 or sqrt(-4) = -2"
 argument_list|,
 name|SqlTests
 operator|.
-name|BooleanTypeChecker
+name|BOOLEAN_TYPE_CHECKER
 argument_list|,
 operator|new
 name|ValueOrExceptionResultChecker
@@ -10192,9 +10192,9 @@ name|Boolean
 operator|.
 name|TRUE
 argument_list|,
-name|invalidArgForPower
+name|INVALID_ARG_FOR_POWER
 argument_list|,
-name|code2201f
+name|CODE_2201F
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -10210,16 +10210,16 @@ literal|"values 1< cast(null as integer) or sqrt(4) = -2"
 argument_list|,
 name|SqlTests
 operator|.
-name|BooleanTypeChecker
+name|BOOLEAN_TYPE_CHECKER
 argument_list|,
 operator|new
 name|ValueOrExceptionResultChecker
 argument_list|(
 literal|null
 argument_list|,
-name|invalidArgForPower
+name|INVALID_ARG_FOR_POWER
 argument_list|,
-name|code2201f
+name|CODE_2201F
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -10249,7 +10249,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|plusOperator
+name|PLUS
 argument_list|)
 expr_stmt|;
 name|tester
@@ -10369,7 +10369,7 @@ if|if
 condition|(
 name|Bug
 operator|.
-name|Fnl25Fixed
+name|FNL25_FIXED
 condition|)
 block|{
 comment|// Should throw out of range error
@@ -10379,7 +10379,7 @@ name|checkFails
 argument_list|(
 literal|"cast(100 as tinyint) + cast(100 as tinyint)"
 argument_list|,
-name|outOfRangeMessage
+name|OUT_OF_RANGE_MESSAGE
 argument_list|,
 literal|true
 argument_list|)
@@ -10390,7 +10390,7 @@ name|checkFails
 argument_list|(
 literal|"cast(-20000 as smallint) + cast(-20000 as smallint)"
 argument_list|,
-name|outOfRangeMessage
+name|OUT_OF_RANGE_MESSAGE
 argument_list|,
 literal|true
 argument_list|)
@@ -10401,7 +10401,7 @@ name|checkFails
 argument_list|(
 literal|"cast(1.5e9 as integer) + cast(1.5e9 as integer)"
 argument_list|,
-name|outOfRangeMessage
+name|OUT_OF_RANGE_MESSAGE
 argument_list|,
 literal|true
 argument_list|)
@@ -10412,7 +10412,7 @@ name|checkFails
 argument_list|(
 literal|"cast(5e18 as bigint) + cast(5e18 as bigint)"
 argument_list|,
-name|outOfRangeMessage
+name|OUT_OF_RANGE_MESSAGE
 argument_list|,
 literal|true
 argument_list|)
@@ -10423,7 +10423,7 @@ name|checkFails
 argument_list|(
 literal|"cast(-5e18 as decimal(19,0)) + cast(-5e18 as decimal(19,0))"
 argument_list|,
-name|outOfRangeMessage
+name|OUT_OF_RANGE_MESSAGE
 argument_list|,
 literal|true
 argument_list|)
@@ -10434,7 +10434,7 @@ name|checkFails
 argument_list|(
 literal|"cast(5e8 as decimal(19,10)) + cast(5e8 as decimal(19,10))"
 argument_list|,
-name|outOfRangeMessage
+name|OUT_OF_RANGE_MESSAGE
 argument_list|,
 literal|true
 argument_list|)
@@ -10454,7 +10454,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|plusOperator
+name|PLUS
 argument_list|)
 expr_stmt|;
 name|tester
@@ -10482,7 +10482,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|plusOperator
+name|PLUS
 argument_list|)
 expr_stmt|;
 name|tester
@@ -10593,7 +10593,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|descendingOperator
+name|DESC
 argument_list|,
 name|VM_EXPAND
 argument_list|)
@@ -10612,7 +10612,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|isNotNullOperator
+name|IS_NOT_NULL
 argument_list|)
 expr_stmt|;
 name|tester
@@ -10651,7 +10651,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|isNullOperator
+name|IS_NULL
 argument_list|)
 expr_stmt|;
 name|tester
@@ -10690,7 +10690,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|isNotTrueOperator
+name|IS_NOT_TRUE
 argument_list|)
 expr_stmt|;
 name|tester
@@ -10751,7 +10751,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|isTrueOperator
+name|IS_TRUE
 argument_list|)
 expr_stmt|;
 name|tester
@@ -10801,7 +10801,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|isNotFalseOperator
+name|IS_NOT_FALSE
 argument_list|)
 expr_stmt|;
 name|tester
@@ -10851,7 +10851,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|isFalseOperator
+name|IS_FALSE
 argument_list|)
 expr_stmt|;
 name|tester
@@ -10901,7 +10901,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|isNotUnknownOperator
+name|IS_NOT_UNKNOWN
 argument_list|,
 name|VM_EXPAND
 argument_list|)
@@ -10975,7 +10975,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|isUnknownOperator
+name|IS_UNKNOWN
 argument_list|,
 name|VM_EXPAND
 argument_list|)
@@ -11049,7 +11049,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|isASetOperator
+name|IS_A_SET
 argument_list|,
 name|VM_EXPAND
 argument_list|)
@@ -11068,7 +11068,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|existsOperator
+name|EXISTS
 argument_list|,
 name|VM_EXPAND
 argument_list|)
@@ -11087,7 +11087,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|notOperator
+name|NOT
 argument_list|)
 expr_stmt|;
 name|tester
@@ -11142,7 +11142,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|prefixMinusOperator
+name|UNARY_MINUS
 argument_list|)
 expr_stmt|;
 name|tester
@@ -11266,7 +11266,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|prefixPlusOperator
+name|UNARY_PLUS
 argument_list|,
 name|VM_EXPAND
 argument_list|)
@@ -11352,7 +11352,7 @@ if|if
 condition|(
 name|Bug
 operator|.
-name|Frg254Fixed
+name|FRG254_FIXED
 condition|)
 block|{
 name|tester
@@ -11399,7 +11399,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|explicitTableOperator
+name|EXPLICIT_TABLE
 argument_list|,
 name|VM_EXPAND
 argument_list|)
@@ -11418,7 +11418,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|valuesOperator
+name|VALUES
 argument_list|,
 name|VM_EXPAND
 argument_list|)
@@ -11456,7 +11456,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|notLikeOperator
+name|NOT_LIKE
 argument_list|,
 name|VM_EXPAND
 argument_list|)
@@ -11486,7 +11486,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|likeOperator
+name|LIKE
 argument_list|)
 expr_stmt|;
 name|tester
@@ -11668,7 +11668,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|notSimilarOperator
+name|NOT_SIMILAR_TO
 argument_list|,
 name|VM_EXPAND
 argument_list|)
@@ -11741,7 +11741,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|similarOperator
+name|SIMILAR_TO
 argument_list|)
 expr_stmt|;
 comment|// like LIKE
@@ -12732,7 +12732,7 @@ if|if
 condition|(
 name|Bug
 operator|.
-name|Frg375Fixed
+name|FRG375_FIXED
 condition|)
 block|{
 name|tester
@@ -12754,7 +12754,7 @@ if|if
 condition|(
 name|Bug
 operator|.
-name|Frg377Fixed
+name|FRG377_FIXED
 condition|)
 block|{
 name|tester
@@ -12943,7 +12943,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|escapeOperator
+name|ESCAPE
 argument_list|,
 name|VM_EXPAND
 argument_list|)
@@ -12962,7 +12962,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|convertFunc
+name|CONVERT
 argument_list|,
 name|VM_FENNEL
 argument_list|,
@@ -12983,7 +12983,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|translateFunc
+name|TRANSLATE
 argument_list|,
 name|VM_FENNEL
 argument_list|,
@@ -13004,7 +13004,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|overlayFunc
+name|OVERLAY
 argument_list|)
 expr_stmt|;
 name|tester
@@ -13176,7 +13176,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|positionFunc
+name|POSITION
 argument_list|)
 expr_stmt|;
 name|tester
@@ -13246,7 +13246,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|charLengthFunc
+name|CHAR_LENGTH
 argument_list|)
 expr_stmt|;
 name|tester
@@ -13279,7 +13279,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|characterLengthFunc
+name|CHARACTER_LENGTH
 argument_list|)
 expr_stmt|;
 name|tester
@@ -13312,7 +13312,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|upperFunc
+name|UPPER
 argument_list|)
 expr_stmt|;
 name|tester
@@ -13380,7 +13380,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|lowerFunc
+name|LOWER
 argument_list|)
 expr_stmt|;
 comment|// SQL:2003 6.29.8 The type of lower is the type of its argument
@@ -13452,7 +13452,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|initcapFunc
+name|INITCAP
 argument_list|,
 name|VM_FENNEL
 argument_list|)
@@ -13534,7 +13534,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|powerFunc
+name|POWER
 argument_list|)
 expr_stmt|;
 name|tester
@@ -13590,7 +13590,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|sqrtFunc
+name|SQRT
 argument_list|,
 name|SqlTester
 operator|.
@@ -13678,7 +13678,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|expFunc
+name|EXP
 argument_list|,
 name|VM_FENNEL
 argument_list|)
@@ -13737,7 +13737,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|modFunc
+name|MOD
 argument_list|)
 expr_stmt|;
 name|tester
@@ -13870,7 +13870,7 @@ name|checkFails
 argument_list|(
 literal|"mod(3,case 'a' when 'a' then 0 end)"
 argument_list|,
-name|divisionByZeroMessage
+name|DIVISION_BY_ZERO_MESSAGE
 argument_list|,
 literal|true
 argument_list|)
@@ -13889,7 +13889,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|lnFunc
+name|LN
 argument_list|)
 expr_stmt|;
 name|tester
@@ -13939,7 +13939,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|log10Func
+name|LOG10
 argument_list|)
 expr_stmt|;
 name|tester
@@ -14029,7 +14029,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|absFunc
+name|ABS
 argument_list|)
 expr_stmt|;
 name|tester
@@ -14217,7 +14217,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|nullIfFunc
+name|NULLIF
 argument_list|,
 name|VM_EXPAND
 argument_list|)
@@ -14464,7 +14464,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|coalesceFunc
+name|COALESCE
 argument_list|,
 name|VM_EXPAND
 argument_list|)
@@ -14514,7 +14514,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|userFunc
+name|USER
 argument_list|,
 name|VM_FENNEL
 argument_list|)
@@ -14544,7 +14544,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|currentUserFunc
+name|CURRENT_USER
 argument_list|,
 name|VM_FENNEL
 argument_list|)
@@ -14574,7 +14574,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|sessionUserFunc
+name|SESSION_USER
 argument_list|,
 name|VM_FENNEL
 argument_list|)
@@ -14604,7 +14604,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|systemUserFunc
+name|SYSTEM_USER
 argument_list|,
 name|VM_FENNEL
 argument_list|)
@@ -14645,7 +14645,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|currentPathFunc
+name|CURRENT_PATH
 argument_list|,
 name|VM_FENNEL
 argument_list|)
@@ -14675,7 +14675,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|currentRoleFunc
+name|CURRENT_ROLE
 argument_list|,
 name|VM_FENNEL
 argument_list|)
@@ -14707,7 +14707,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|localTimeFunc
+name|LOCALTIME
 argument_list|)
 expr_stmt|;
 name|tester
@@ -14716,7 +14716,7 @@ name|checkScalar
 argument_list|(
 literal|"LOCALTIME"
 argument_list|,
-name|timePattern
+name|TIME_PATTERN
 argument_list|,
 literal|"TIME(0) NOT NULL"
 argument_list|)
@@ -14738,7 +14738,7 @@ name|checkScalar
 argument_list|(
 literal|"LOCALTIME(1)"
 argument_list|,
-name|timePattern
+name|TIME_PATTERN
 argument_list|,
 literal|"TIME(1) NOT NULL"
 argument_list|)
@@ -14809,7 +14809,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|localTimestampFunc
+name|LOCALTIMESTAMP
 argument_list|)
 expr_stmt|;
 name|tester
@@ -14818,7 +14818,7 @@ name|checkScalar
 argument_list|(
 literal|"LOCALTIMESTAMP"
 argument_list|,
-name|timestampPattern
+name|TIMESTAMP_PATTERN
 argument_list|,
 literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
@@ -14840,7 +14840,7 @@ name|checkFails
 argument_list|(
 literal|"LOCALTIMESTAMP(^4000000000^)"
 argument_list|,
-name|literalOutOfRangeMessage
+name|LITERAL_OUT_OF_RANGE_MESSAGE
 argument_list|,
 literal|false
 argument_list|)
@@ -14851,7 +14851,7 @@ name|checkScalar
 argument_list|(
 literal|"LOCALTIMESTAMP(1)"
 argument_list|,
-name|timestampPattern
+name|TIMESTAMP_PATTERN
 argument_list|,
 literal|"TIMESTAMP(1) NOT NULL"
 argument_list|)
@@ -14914,7 +14914,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|currentTimeFunc
+name|CURRENT_TIME
 argument_list|)
 expr_stmt|;
 name|tester
@@ -14923,7 +14923,7 @@ name|checkScalar
 argument_list|(
 literal|"CURRENT_TIME"
 argument_list|,
-name|timePattern
+name|TIME_PATTERN
 argument_list|,
 literal|"TIME(0) NOT NULL"
 argument_list|)
@@ -14945,7 +14945,7 @@ name|checkScalar
 argument_list|(
 literal|"CURRENT_TIME(1)"
 argument_list|,
-name|timePattern
+name|TIME_PATTERN
 argument_list|,
 literal|"TIME(1) NOT NULL"
 argument_list|)
@@ -15016,7 +15016,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|currentTimestampFunc
+name|CURRENT_TIMESTAMP
 argument_list|)
 expr_stmt|;
 name|tester
@@ -15025,7 +15025,7 @@ name|checkScalar
 argument_list|(
 literal|"CURRENT_TIMESTAMP"
 argument_list|,
-name|timestampPattern
+name|TIMESTAMP_PATTERN
 argument_list|,
 literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
@@ -15047,7 +15047,7 @@ name|checkFails
 argument_list|(
 literal|"CURRENT_TIMESTAMP(^4000000000^)"
 argument_list|,
-name|literalOutOfRangeMessage
+name|LITERAL_OUT_OF_RANGE_MESSAGE
 argument_list|,
 literal|false
 argument_list|)
@@ -15058,7 +15058,7 @@ name|checkScalar
 argument_list|(
 literal|"CURRENT_TIMESTAMP(1)"
 argument_list|,
-name|timestampPattern
+name|TIMESTAMP_PATTERN
 argument_list|,
 literal|"TIMESTAMP(1) NOT NULL"
 argument_list|)
@@ -15168,7 +15168,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|currentDateFunc
+name|CURRENT_DATE
 argument_list|,
 name|VM_FENNEL
 argument_list|)
@@ -15179,7 +15179,7 @@ name|checkScalar
 argument_list|(
 literal|"CURRENT_DATE"
 argument_list|,
-name|datePattern
+name|DATE_PATTERN
 argument_list|,
 literal|"DATE NOT NULL"
 argument_list|)
@@ -15290,7 +15290,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|substringFunc
+name|SUBSTRING
 argument_list|)
 expr_stmt|;
 name|tester
@@ -15319,7 +15319,7 @@ if|if
 condition|(
 name|Bug
 operator|.
-name|Frg296Fixed
+name|FRG296_FIXED
 condition|)
 block|{
 comment|// substring regexp not supported yet
@@ -15356,7 +15356,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|trimFunc
+name|TRIM
 argument_list|)
 expr_stmt|;
 comment|// SQL:2003 6.29.11 Trimming a CHAR yields a VARCHAR
@@ -15422,7 +15422,7 @@ if|if
 condition|(
 name|Bug
 operator|.
-name|Fnl3Fixed
+name|FNL3_FIXED
 condition|)
 block|{
 comment|// SQL:2003 6.29.9: trim string must have length=1. Failure occurs
@@ -15493,7 +15493,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|windowOperator
+name|WINDOW
 argument_list|,
 name|VM_FENNEL
 argument_list|,
@@ -15541,7 +15541,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|elementFunc
+name|ELEMENT
 argument_list|,
 name|VM_FENNEL
 argument_list|,
@@ -15550,7 +15550,7 @@ argument_list|)
 expr_stmt|;
 if|if
 condition|(
-name|todo
+name|TODO
 condition|)
 block|{
 name|tester
@@ -15586,7 +15586,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|cardinalityFunc
+name|CARDINALITY
 argument_list|,
 name|VM_FENNEL
 argument_list|,
@@ -15595,7 +15595,7 @@ argument_list|)
 expr_stmt|;
 if|if
 condition|(
-name|todo
+name|TODO
 condition|)
 block|{
 name|tester
@@ -15650,7 +15650,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|memberOfOperator
+name|MEMBER_OF
 argument_list|,
 name|VM_FENNEL
 argument_list|,
@@ -15659,7 +15659,7 @@ argument_list|)
 expr_stmt|;
 if|if
 condition|(
-name|todo
+name|TODO
 condition|)
 block|{
 name|tester
@@ -15732,7 +15732,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|collectFunc
+name|COLLECT
 argument_list|,
 name|VM_FENNEL
 argument_list|,
@@ -15753,7 +15753,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|fusionFunc
+name|FUSION
 argument_list|,
 name|VM_FENNEL
 argument_list|,
@@ -15774,7 +15774,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|extractFunc
+name|EXTRACT
 argument_list|,
 name|VM_FENNEL
 argument_list|,
@@ -15877,7 +15877,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|arrayValueConstructor
+name|ARRAY_VALUE_CONSTRUCTOR
 argument_list|)
 expr_stmt|;
 name|tester
@@ -15918,7 +15918,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|itemOp
+name|ITEM
 argument_list|)
 expr_stmt|;
 name|tester
@@ -16057,7 +16057,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|mapValueConstructor
+name|MAP_VALUE_CONSTRUCTOR
 argument_list|,
 name|VM_JAVA
 argument_list|)
@@ -16120,7 +16120,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|ceilFunc
+name|CEIL
 argument_list|,
 name|VM_FENNEL
 argument_list|)
@@ -16288,7 +16288,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|floorFunc
+name|FLOOR
 argument_list|,
 name|VM_FENNEL
 argument_list|)
@@ -16456,7 +16456,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|denseRankFunc
+name|DENSE_RANK
 argument_list|,
 name|VM_FENNEL
 argument_list|,
@@ -16477,7 +16477,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|percentRankFunc
+name|PERCENT_RANK
 argument_list|,
 name|VM_FENNEL
 argument_list|,
@@ -16498,7 +16498,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|rankFunc
+name|RANK
 argument_list|,
 name|VM_FENNEL
 argument_list|,
@@ -16519,7 +16519,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|cumeDistFunc
+name|CUME_DIST
 argument_list|,
 name|VM_FENNEL
 argument_list|,
@@ -16540,7 +16540,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|rowNumberFunc
+name|ROW_NUMBER
 argument_list|,
 name|VM_FENNEL
 argument_list|,
@@ -16561,7 +16561,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|countOperator
+name|COUNT
 argument_list|,
 name|VM_EXPAND
 argument_list|)
@@ -16796,7 +16796,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|sumOperator
+name|SUM
 argument_list|,
 name|VM_EXPAND
 argument_list|)
@@ -16996,7 +16996,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|avgOperator
+name|AVG
 argument_list|,
 name|VM_EXPAND
 argument_list|)
@@ -17123,7 +17123,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|stddevPopOperator
+name|STDDEV_POP
 argument_list|,
 name|VM_EXPAND
 argument_list|)
@@ -17282,7 +17282,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|stddevSampOperator
+name|STDDEV_SAMP
 argument_list|,
 name|VM_EXPAND
 argument_list|)
@@ -17441,7 +17441,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|varPopOperator
+name|VAR_POP
 argument_list|,
 name|VM_EXPAND
 argument_list|)
@@ -17600,7 +17600,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|varSampOperator
+name|VAR_SAMP
 argument_list|,
 name|VM_EXPAND
 argument_list|)
@@ -17759,7 +17759,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|minOperator
+name|MIN
 argument_list|,
 name|VM_EXPAND
 argument_list|)
@@ -17913,7 +17913,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|maxOperator
+name|MAX
 argument_list|,
 name|VM_EXPAND
 argument_list|)
@@ -18067,7 +18067,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|lastValueOperator
+name|LAST_VALUE
 argument_list|,
 name|VM_EXPAND
 argument_list|)
@@ -18207,7 +18207,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|firstValueOperator
+name|FIRST_VALUE
 argument_list|,
 name|VM_EXPAND
 argument_list|)
@@ -18340,7 +18340,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|castFunc
+name|CAST
 argument_list|)
 expr_stmt|;
 if|if
@@ -18530,7 +18530,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|castFunc
+name|CAST
 argument_list|)
 expr_stmt|;
 for|for
@@ -18737,7 +18737,7 @@ name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|castFunc
+name|CAST
 argument_list|)
 expr_stmt|;
 name|tester
@@ -18843,7 +18843,7 @@ control|(
 name|boolean
 name|sign
 range|:
-name|FalseTrue
+name|FALSE_TRUE
 control|)
 block|{
 for|for

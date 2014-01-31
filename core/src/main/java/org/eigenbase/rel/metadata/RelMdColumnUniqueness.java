@@ -377,7 +377,7 @@ argument_list|()
 operator|!=
 name|SqlStdOperatorTable
 operator|.
-name|castFunc
+name|CAST
 condition|)
 block|{
 continue|continue;

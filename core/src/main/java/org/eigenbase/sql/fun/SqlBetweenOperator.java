@@ -146,11 +146,8 @@ specifier|static
 specifier|final
 name|String
 index|[]
-name|betweenNames
+name|BETWEEN_NAMES
 init|=
-operator|new
-name|String
-index|[]
 block|{
 literal|"BETWEEN"
 block|,
@@ -162,11 +159,8 @@ specifier|static
 specifier|final
 name|String
 index|[]
-name|notBetweenNames
+name|NOT_BETWEEN_NAMES
 init|=
-operator|new
-name|String
-index|[]
 block|{
 literal|"NOT BETWEEN"
 block|,
@@ -205,7 +199,7 @@ specifier|private
 specifier|static
 specifier|final
 name|SqlOperandTypeChecker
-name|otcCustom
+name|OTC_CUSTOM
 init|=
 operator|new
 name|ComparableOperandTypeChecker
@@ -223,7 +217,7 @@ specifier|final
 name|SqlWriter
 operator|.
 name|FrameType
-name|BetweenFrameType
+name|FRAME_TYPE
 init|=
 name|SqlWriter
 operator|.
@@ -275,9 +269,9 @@ name|super
 argument_list|(
 name|negated
 condition|?
-name|notBetweenNames
+name|NOT_BETWEEN_NAMES
 else|:
-name|betweenNames
+name|BETWEEN_NAMES
 argument_list|,
 name|SqlKind
 operator|.
@@ -289,7 +283,7 @@ literal|null
 argument_list|,
 literal|null
 argument_list|,
-name|otcCustom
+name|OTC_CUSTOM
 argument_list|)
 expr_stmt|;
 name|this
@@ -481,7 +475,7 @@ name|writer
 operator|.
 name|startList
 argument_list|(
-name|BetweenFrameType
+name|FRAME_TYPE
 argument_list|,
 literal|""
 argument_list|,
@@ -1017,7 +1011,7 @@ name|operator
 operator|==
 name|SqlStdOperatorTable
 operator|.
-name|andOperator
+name|AND
 condition|)
 block|{
 throw|throw

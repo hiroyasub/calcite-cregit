@@ -113,7 +113,7 @@ comment|/**    * Generator for {@link #id} values.    */
 specifier|private
 specifier|static
 name|int
-name|NEXT_ID
+name|nextId
 init|=
 literal|0
 decl_stmt|;
@@ -202,7 +202,7 @@ name|this
 operator|.
 name|id
 operator|=
-name|NEXT_ID
+name|nextId
 operator|++
 expr_stmt|;
 name|this

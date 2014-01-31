@@ -122,7 +122,7 @@ name|otcAny
 argument_list|,
 name|SqlFunctionCategory
 operator|.
-name|System
+name|SYSTEM
 argument_list|)
 expr_stmt|;
 name|this

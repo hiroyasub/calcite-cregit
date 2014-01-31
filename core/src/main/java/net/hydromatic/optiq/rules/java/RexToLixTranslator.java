@@ -267,7 +267,7 @@ argument_list|,
 literal|"toUpperCase"
 argument_list|)
 argument_list|,
-name|upperFunc
+name|UPPER
 argument_list|,
 name|findMethod
 argument_list|(
@@ -290,7 +290,7 @@ operator|.
 name|TYPE
 argument_list|)
 argument_list|,
-name|substringFunc
+name|SUBSTRING
 argument_list|,
 name|findMethod
 argument_list|(
@@ -305,7 +305,7 @@ operator|.
 name|class
 argument_list|)
 argument_list|,
-name|characterLengthFunc
+name|CHARACTER_LENGTH
 argument_list|,
 name|findMethod
 argument_list|(
@@ -320,7 +320,7 @@ operator|.
 name|class
 argument_list|)
 argument_list|,
-name|charLengthFunc
+name|CHAR_LENGTH
 argument_list|)
 decl_stmt|;
 specifier|private
@@ -2274,7 +2274,7 @@ if|if
 condition|(
 name|aggregation
 operator|==
-name|countOperator
+name|COUNT
 condition|)
 block|{
 comment|// FIXME: count(x) and count(distinct x) don't work currently

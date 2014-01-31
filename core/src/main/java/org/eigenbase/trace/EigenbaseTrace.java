@@ -131,7 +131,7 @@ specifier|public
 specifier|static
 specifier|final
 name|Logger
-name|parserTracer
+name|PARSER_LOGGER
 init|=
 name|getParserTracer
 argument_list|()

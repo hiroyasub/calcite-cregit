@@ -236,7 +236,9 @@ decl_stmt|;
 specifier|final
 name|String
 name|username
-decl_stmt|,
+decl_stmt|;
+specifier|final
+name|String
 name|password
 decl_stmt|;
 name|String
@@ -1421,7 +1423,8 @@ name|get
 argument_list|(
 literal|"search"
 argument_list|)
-decl_stmt|,
+decl_stmt|;
+name|String
 name|field_list
 init|=
 name|argsMap
@@ -1718,6 +1721,7 @@ name|isEmpty
 argument_list|()
 condition|)
 block|{
+comment|// do nothing
 block|}
 else|else
 block|{
@@ -1874,9 +1878,6 @@ operator|+
 name|sw
 argument_list|)
 expr_stmt|;
-block|}
-finally|finally
-block|{
 block|}
 block|}
 specifier|public

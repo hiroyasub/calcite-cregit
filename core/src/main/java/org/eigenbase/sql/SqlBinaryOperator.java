@@ -188,7 +188,7 @@ block|{
 return|return
 name|SqlSyntax
 operator|.
-name|Binary
+name|BINARY
 return|;
 block|}
 specifier|public
@@ -852,13 +852,13 @@ name|this
 operator|==
 name|SqlStdOperatorTable
 operator|.
-name|andOperator
+name|AND
 operator|||
 name|this
 operator|==
 name|SqlStdOperatorTable
 operator|.
-name|orOperator
+name|OR
 operator|)
 operator|&&
 name|count

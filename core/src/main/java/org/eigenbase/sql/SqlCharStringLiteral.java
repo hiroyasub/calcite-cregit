@@ -161,7 +161,7 @@ name|discard
 argument_list|(
 name|Bug
 operator|.
-name|Frg78Fixed
+name|FRG78_FIXED
 argument_list|)
 expr_stmt|;
 name|String

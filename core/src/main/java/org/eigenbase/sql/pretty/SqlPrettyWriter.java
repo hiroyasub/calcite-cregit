@@ -125,7 +125,7 @@ specifier|protected
 specifier|static
 specifier|final
 name|EigenbaseLogger
-name|logger
+name|LOGGER
 init|=
 operator|new
 name|EigenbaseLogger
@@ -143,7 +143,7 @@ specifier|private
 specifier|static
 specifier|final
 name|Bean
-name|defaultBean
+name|DEFAULT_BEAN
 init|=
 operator|new
 name|SqlPrettyWriter
@@ -764,7 +764,7 @@ specifier|final
 name|Object
 name|defaultValue
 init|=
-name|defaultBean
+name|DEFAULT_BEAN
 operator|.
 name|get
 argument_list|(
@@ -1056,7 +1056,7 @@ name|print
 argument_list|(
 name|Util
 operator|.
-name|spaces
+name|SPACES
 index|[
 name|indent
 index|]
@@ -1103,7 +1103,7 @@ name|print
 argument_list|(
 name|Util
 operator|.
-name|spaces
+name|SPACES
 index|[
 literal|8
 index|]
@@ -1123,7 +1123,7 @@ name|print
 argument_list|(
 name|Util
 operator|.
-name|spaces
+name|SPACES
 index|[
 name|rem
 index|]
@@ -2551,7 +2551,7 @@ operator|=
 name|NL
 expr_stmt|;
 block|}
-name|logger
+name|LOGGER
 operator|.
 name|finest
 argument_list|(

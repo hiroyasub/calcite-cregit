@@ -50,7 +50,7 @@ specifier|private
 specifier|static
 specifier|final
 name|Pattern
-name|LineBreakPattern
+name|LINE_BREAK_PATTERN
 init|=
 name|Pattern
 operator|.
@@ -63,7 +63,7 @@ specifier|private
 specifier|static
 specifier|final
 name|Pattern
-name|TabPattern
+name|TAB_PATTERN
 init|=
 name|Pattern
 operator|.
@@ -81,13 +81,13 @@ name|NL
 init|=
 name|Util
 operator|.
-name|lineSeparator
+name|LINE_SEPARATOR
 decl_stmt|;
 specifier|private
 specifier|static
 specifier|final
 name|String
-name|lineBreak
+name|LINE_BREAK
 init|=
 literal|"\" + NL +"
 operator|+
@@ -99,7 +99,7 @@ specifier|private
 specifier|static
 specifier|final
 name|String
-name|lineBreak2
+name|LINE_BREAK2
 init|=
 literal|"\\\\n\""
 operator|+
@@ -111,7 +111,7 @@ specifier|private
 specifier|static
 specifier|final
 name|String
-name|lineBreak3
+name|LINE_BREAK3
 init|=
 literal|"\\n\""
 operator|+
@@ -279,7 +279,7 @@ argument_list|)
 expr_stmt|;
 name|s
 operator|=
-name|LineBreakPattern
+name|LINE_BREAK_PATTERN
 operator|.
 name|matcher
 argument_list|(
@@ -288,12 +288,12 @@ argument_list|)
 operator|.
 name|replaceAll
 argument_list|(
-name|lineBreak
+name|LINE_BREAK
 argument_list|)
 expr_stmt|;
 name|s
 operator|=
-name|TabPattern
+name|TAB_PATTERN
 operator|.
 name|matcher
 argument_list|(
@@ -388,7 +388,7 @@ argument_list|)
 expr_stmt|;
 name|s
 operator|=
-name|LineBreakPattern
+name|LINE_BREAK_PATTERN
 operator|.
 name|matcher
 argument_list|(
@@ -397,12 +397,12 @@ argument_list|)
 operator|.
 name|replaceAll
 argument_list|(
-name|lineBreak2
+name|LINE_BREAK2
 argument_list|)
 expr_stmt|;
 name|s
 operator|=
-name|TabPattern
+name|TAB_PATTERN
 operator|.
 name|matcher
 argument_list|(
@@ -465,7 +465,7 @@ name|s
 operator|.
 name|indexOf
 argument_list|(
-name|lineBreak3
+name|LINE_BREAK3
 argument_list|)
 operator|>=
 literal|0

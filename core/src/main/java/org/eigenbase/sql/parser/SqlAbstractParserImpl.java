@@ -131,7 +131,7 @@ name|ImmutableSet
 argument_list|<
 name|String
 argument_list|>
-name|sql92ReservedWordSet
+name|SQL_92_RESERVED_WORD_SET
 init|=
 name|ImmutableSet
 operator|.
@@ -644,7 +644,7 @@ name|getSql92ReservedWords
 parameter_list|()
 block|{
 return|return
-name|sql92ReservedWordSet
+name|SQL_92_RESERVED_WORD_SET
 return|;
 block|}
 comment|/**    * Creates a call.    *    * @param funName           Name of function    * @param pos               Position in source code    * @param funcType          Type of function    * @param functionQualifier Qualifier    * @param operands          Operands to call    * @return Call    */
@@ -702,7 +702,7 @@ literal|null
 argument_list|,
 name|SqlSyntax
 operator|.
-name|Function
+name|FUNCTION
 argument_list|)
 decl_stmt|;
 if|if
@@ -785,6 +785,7 @@ name|ex
 parameter_list|)
 function_decl|;
 comment|/**    * Reinitializes parser with new input.    *    * @param reader provides new input    */
+comment|// CHECKSTYLE: IGNORE 1
 specifier|public
 specifier|abstract
 name|void
@@ -1414,7 +1415,7 @@ name|jdbcReservedSet
 operator|.
 name|removeAll
 argument_list|(
-name|sql92ReservedWordSet
+name|SQL_92_RESERVED_WORD_SET
 argument_list|)
 expr_stmt|;
 name|jdbcReservedSet
@@ -1489,7 +1490,7 @@ name|token
 parameter_list|)
 block|{
 return|return
-name|sql92ReservedWordSet
+name|SQL_92_RESERVED_WORD_SET
 operator|.
 name|contains
 argument_list|(

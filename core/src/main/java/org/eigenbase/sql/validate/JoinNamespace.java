@@ -135,7 +135,7 @@ argument_list|()
 condition|)
 block|{
 case|case
-name|Left
+name|LEFT
 case|:
 name|rightType
 operator|=
@@ -150,7 +150,7 @@ argument_list|)
 expr_stmt|;
 break|break;
 case|case
-name|Right
+name|RIGHT
 case|:
 name|leftType
 operator|=
@@ -165,7 +165,7 @@ argument_list|)
 expr_stmt|;
 break|break;
 case|case
-name|Full
+name|FULL
 case|:
 name|leftType
 operator|=

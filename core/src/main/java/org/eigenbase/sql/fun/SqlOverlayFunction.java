@@ -57,7 +57,7 @@ specifier|private
 specifier|static
 specifier|final
 name|SqlOperandTypeChecker
-name|otcCustom
+name|OTC_CUSTOM
 init|=
 name|SqlTypeStrategies
 operator|.
@@ -91,11 +91,11 @@ name|rtiNullableVaryingDyadicStringSumPrecision
 argument_list|,
 literal|null
 argument_list|,
-name|otcCustom
+name|OTC_CUSTOM
 argument_list|,
 name|SqlFunctionCategory
 operator|.
-name|String
+name|STRING
 argument_list|)
 expr_stmt|;
 block|}

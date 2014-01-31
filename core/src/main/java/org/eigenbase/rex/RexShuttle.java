@@ -38,7 +38,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Passes over a row-expression, calling a handler method for each node,  * appropriate to the type of the node.  *  *<p>Like {@link RexVisitor}, this is an instance of the {@link  * org.eigenbase.util.Glossary#VisitorPattern Visitor Pattern}. Use<code>  * RexShuttle</code> if you would like your methods to return a value.</p>  */
+comment|/**  * Passes over a row-expression, calling a handler method for each node,  * appropriate to the type of the node.  *  *<p>Like {@link RexVisitor}, this is an instance of the {@link  * org.eigenbase.util.Glossary#VISITOR_PATTERN Visitor Pattern}. Use<code>  * RexShuttle</code> if you would like your methods to return a value.</p>  */
 end_comment
 
 begin_class

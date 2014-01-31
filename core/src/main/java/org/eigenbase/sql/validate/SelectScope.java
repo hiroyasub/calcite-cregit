@@ -78,7 +78,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * The name-resolution scope of a SELECT clause. The objects visible are those  * in the FROM clause, and objects inherited from the parent scope.  *  *  *<p>This object is both a {@link SqlValidatorScope} and a {@link  * SqlValidatorNamespace}. In the query</p>  *  *<blockquote>  *<pre>SELECT name FROM (  *     SELECT *  *     FROM emp  *     WHERE gender = 'F')</code></blockquote>  *  *<p>we need to use the {@link SelectScope} as a  * {@link SqlValidatorNamespace} when resolving 'name', and  * as a {@link SqlValidatorScope} when resolving 'gender'.</p>  *  *<h3>Scopes</h3>  *  *<p>In the query</p>  *  *<blockquote>  *<pre>  * SELECT expr1  * FROM t1,  *     t2,  *     (SELECT expr2 FROM t3) AS q3  * WHERE c1 IN (SELECT expr3 FROM t4)  * ORDER BY expr4</pre>  *</blockquote>  *  *<p>The scopes available at various points of the query are as follows:</p>  *  *<ul>  *<li>expr1 can see t1, t2, q3</li>  *<li>expr2 can see t3</li>  *<li>expr3 can see t4, t1, t2</li>  *<li>expr4 can see t1, t2, q3, plus (depending upon the dialect) any aliases  * defined in the SELECT clause</li>  *</ul>  *  *<h3>Namespaces</h3>  *  *<p>In the above query, there are 4 namespaces:</p>  *  *<ul>  *<li>t1</li>  *<li>t2</li>  *<li>(SELECT expr2 FROM t3) AS q3</li>  *<li>(SELECT expr3 FROM t4)</li>  *</ul>  *  * @see SelectNamespace  */
+comment|/**  * The name-resolution scope of a SELECT clause. The objects visible are those  * in the FROM clause, and objects inherited from the parent scope.  *  *  *<p>This object is both a {@link SqlValidatorScope} and a {@link  * SqlValidatorNamespace}. In the query</p>  *  *<blockquote>  *<pre>SELECT name FROM (  *     SELECT *  *     FROM emp  *     WHERE gender = 'F')</pre></blockquote>  *  *<p>we need to use the {@link SelectScope} as a  * {@link SqlValidatorNamespace} when resolving 'name', and  * as a {@link SqlValidatorScope} when resolving 'gender'.</p>  *  *<h3>Scopes</h3>  *  *<p>In the query</p>  *  *<blockquote>  *<pre>  * SELECT expr1  * FROM t1,  *     t2,  *     (SELECT expr2 FROM t3) AS q3  * WHERE c1 IN (SELECT expr3 FROM t4)  * ORDER BY expr4</pre>  *</blockquote>  *  *<p>The scopes available at various points of the query are as follows:</p>  *  *<ul>  *<li>expr1 can see t1, t2, q3</li>  *<li>expr2 can see t3</li>  *<li>expr3 can see t4, t1, t2</li>  *<li>expr4 can see t1, t2, q3, plus (depending upon the dialect) any aliases  * defined in the SELECT clause</li>  *</ul>  *  *<h3>Namespaces</h3>  *  *<p>In the above query, there are 4 namespaces:</p>  *  *<ul>  *<li>t1</li>  *<li>t2</li>  *<li>(SELECT expr2 FROM t3) AS q3</li>  *<li>(SELECT expr3 FROM t4)</li>  *</ul>  *  * @see SelectNamespace  */
 end_comment
 
 begin_class
@@ -375,7 +375,7 @@ argument_list|()
 operator|==
 name|SqlStdOperatorTable
 operator|.
-name|descendingOperator
+name|DESC
 operator|)
 condition|)
 block|{

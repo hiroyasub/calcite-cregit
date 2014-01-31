@@ -102,16 +102,6 @@ name|SqlCountAggFunction
 extends|extends
 name|SqlAggFunction
 block|{
-comment|//~ Static fields/initializers ---------------------------------------------
-specifier|public
-specifier|static
-specifier|final
-name|RelDataType
-name|type
-init|=
-literal|null
-decl_stmt|;
-comment|// TODO:
 comment|//~ Constructors -----------------------------------------------------------
 specifier|public
 name|SqlCountAggFunction
@@ -137,7 +127,7 @@ name|otcAny
 argument_list|,
 name|SqlFunctionCategory
 operator|.
-name|Numeric
+name|NUMERIC
 argument_list|)
 expr_stmt|;
 block|}
@@ -158,7 +148,14 @@ name|ImmutableList
 operator|.
 name|of
 argument_list|(
-name|type
+name|typeFactory
+operator|.
+name|createSqlType
+argument_list|(
+name|SqlTypeName
+operator|.
+name|ANY
+argument_list|)
 argument_list|)
 return|;
 block|}

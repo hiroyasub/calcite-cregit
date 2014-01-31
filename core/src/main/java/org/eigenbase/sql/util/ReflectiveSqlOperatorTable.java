@@ -448,7 +448,7 @@ name|syntax
 operator|==
 name|SqlSyntax
 operator|.
-name|Function
+name|FUNCTION
 operator|&&
 name|op
 operator|instanceof
@@ -474,13 +474,13 @@ name|syntax
 condition|)
 block|{
 case|case
-name|Binary
+name|BINARY
 case|:
 case|case
-name|Prefix
+name|PREFIX
 case|:
 case|case
-name|Postfix
+name|POSTFIX
 case|:
 name|SqlOperator
 name|extra
@@ -572,7 +572,7 @@ argument_list|()
 argument_list|,
 name|SqlSyntax
 operator|.
-name|Binary
+name|BINARY
 argument_list|)
 argument_list|,
 name|op
@@ -601,7 +601,7 @@ argument_list|()
 argument_list|,
 name|SqlSyntax
 operator|.
-name|Prefix
+name|PREFIX
 argument_list|)
 argument_list|,
 name|op
@@ -630,7 +630,7 @@ argument_list|()
 argument_list|,
 name|SqlSyntax
 operator|.
-name|Postfix
+name|POSTFIX
 argument_list|)
 argument_list|,
 name|op

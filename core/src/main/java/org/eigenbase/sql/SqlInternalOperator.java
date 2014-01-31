@@ -151,7 +151,7 @@ block|{
 return|return
 name|SqlSyntax
 operator|.
-name|Internal
+name|INTERNAL
 return|;
 block|}
 specifier|public

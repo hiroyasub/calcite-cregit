@@ -136,7 +136,7 @@ block|{
 return|return
 name|SqlSyntax
 operator|.
-name|Prefix
+name|PREFIX
 return|;
 block|}
 specifier|public

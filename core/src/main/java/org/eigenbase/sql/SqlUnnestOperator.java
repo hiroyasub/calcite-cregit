@@ -40,7 +40,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * The<code>UNNEST<code>operator.  */
+comment|/**  * The<code>UNNEST</code> operator.  */
 end_comment
 
 begin_class

@@ -739,7 +739,7 @@ if|if
 condition|(
 name|Bug
 operator|.
-name|TodoFixed
+name|TODO_FIXED
 condition|)
 block|{
 assert|assert

@@ -198,7 +198,7 @@ name|category
 operator|==
 name|SqlFunctionCategory
 operator|.
-name|UserDefinedConstructor
+name|USER_DEFINED_CONSTRUCTOR
 operator|)
 operator|&&
 operator|(
@@ -352,7 +352,7 @@ block|{
 return|return
 name|SqlSyntax
 operator|.
-name|Function
+name|FUNCTION
 return|;
 block|}
 comment|/**    * @return fully qualified name of function, or null for a builtin function    */
@@ -888,7 +888,7 @@ argument_list|()
 operator|==
 name|SqlFunctionCategory
 operator|.
-name|UserDefinedConstructor
+name|USER_DEFINED_CONSTRUCTOR
 condition|)
 block|{
 return|return

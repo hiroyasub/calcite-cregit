@@ -126,7 +126,7 @@ block|{
 return|return
 name|SqlSyntax
 operator|.
-name|Special
+name|SPECIAL
 return|;
 block|}
 specifier|public
@@ -526,7 +526,7 @@ name|writer
 argument_list|,
 name|SqlStdOperatorTable
 operator|.
-name|joinOperator
+name|JOIN
 operator|.
 name|getLeftPrec
 argument_list|()
@@ -535,7 +535,7 @@ literal|1
 argument_list|,
 name|SqlStdOperatorTable
 operator|.
-name|joinOperator
+name|JOIN
 operator|.
 name|getRightPrec
 argument_list|()

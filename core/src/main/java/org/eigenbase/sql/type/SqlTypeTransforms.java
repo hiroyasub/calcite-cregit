@@ -91,7 +91,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlTypeTransform
-name|toNullable
+name|TO_NULLABLE
 init|=
 operator|new
 name|SqlTypeTransform
@@ -139,7 +139,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlTypeTransform
-name|toNotNullable
+name|TO_NOT_NULLABLE
 init|=
 operator|new
 name|SqlTypeTransform
@@ -182,7 +182,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlTypeTransform
-name|forceNullable
+name|FORCE_NULLABLE
 init|=
 operator|new
 name|SqlTypeTransform
@@ -220,12 +220,12 @@ return|;
 block|}
 block|}
 decl_stmt|;
-comment|/**    * Type-inference strategy whereby the result type of a call is VARYING the    * type given. The length returned is the same as length of the first    * argument. Return type will have same nullablilty as input type    * nullablility. First Arg must be of string type.    */
+comment|/**    * Type-inference strategy whereby the result type of a call is VARYING the    * type given. The length returned is the same as length of the first    * argument. Return type will have same nullability as input type    * nullability. First Arg must be of string type.    */
 specifier|public
 specifier|static
 specifier|final
 name|SqlTypeTransform
-name|toVarying
+name|TO_VARYING
 init|=
 operator|new
 name|SqlTypeTransform
@@ -392,7 +392,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlTypeTransform
-name|toMultisetElementType
+name|TO_MULTISET_ELEMENT_TYPE
 init|=
 operator|new
 name|SqlTypeTransform
@@ -423,7 +423,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlTypeTransform
-name|onlyColumn
+name|ONLY_COLUMN
 init|=
 operator|new
 name|SqlTypeTransform

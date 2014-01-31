@@ -255,7 +255,7 @@ specifier|private
 specifier|static
 specifier|final
 name|Logger
-name|sqlToRelTracer
+name|SQL2REL_LOGGER
 init|=
 name|EigenbaseTrace
 operator|.
@@ -2856,7 +2856,8 @@ comment|// valueGenerators are joined with the original left input of the rel
 comment|// referencing correlated variables.
 name|int
 name|newOutputPos
-decl_stmt|,
+decl_stmt|;
+name|int
 name|newLocalOutputPos
 decl_stmt|;
 for|for
@@ -3613,7 +3614,8 @@ argument_list|()
 decl_stmt|;
 name|int
 name|newLeftPos
-decl_stmt|,
+decl_stmt|;
+name|int
 name|newRightPos
 decl_stmt|;
 for|for
@@ -3659,7 +3661,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|equalsOperator
+name|EQUALS
 argument_list|,
 name|RexInputRef
 operator|.
@@ -3716,7 +3718,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|andOperator
+name|AND
 argument_list|,
 name|condition
 argument_list|,
@@ -5922,7 +5924,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|isNullOperator
+name|IS_NULL
 argument_list|,
 operator|new
 name|RexInputRef
@@ -6003,7 +6005,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|caseOperator
+name|CASE
 argument_list|,
 name|caseOperands
 argument_list|)
@@ -7149,7 +7151,7 @@ name|rightJoinKeys
 argument_list|)
 condition|)
 block|{
-name|sqlToRelTracer
+name|SQL2REL_LOGGER
 operator|.
 name|fine
 argument_list|(
@@ -7977,7 +7979,7 @@ name|correlatedInputRefJoinKeys
 argument_list|)
 condition|)
 block|{
-name|sqlToRelTracer
+name|SQL2REL_LOGGER
 operator|.
 name|fine
 argument_list|(
@@ -8150,7 +8152,7 @@ name|allCols
 argument_list|)
 condition|)
 block|{
-name|sqlToRelTracer
+name|SQL2REL_LOGGER
 operator|.
 name|fine
 argument_list|(

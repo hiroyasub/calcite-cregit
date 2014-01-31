@@ -229,7 +229,7 @@ argument_list|()
 operator|==
 name|SqlSyntax
 operator|.
-name|FunctionId
+name|FUNCTION_ID
 operator|)
 condition|)
 block|{

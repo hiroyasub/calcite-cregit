@@ -178,7 +178,7 @@ specifier|protected
 specifier|static
 specifier|final
 name|boolean
-name|todo
+name|TODO
 init|=
 literal|false
 decl_stmt|;
@@ -186,7 +186,7 @@ specifier|public
 specifier|static
 specifier|final
 name|boolean
-name|todoTypeInference
+name|TODO_TYPE_INFERENCE
 init|=
 literal|false
 decl_stmt|;
@@ -202,7 +202,7 @@ specifier|protected
 specifier|static
 specifier|final
 name|Logger
-name|logger
+name|LOGGER
 init|=
 name|Logger
 operator|.
@@ -231,6 +231,30 @@ name|String
 name|ERR_IN_OPERANDS_INCOMPATIBLE
 init|=
 literal|"Values passed to IN operator must have compatible types"
+decl_stmt|;
+specifier|private
+specifier|static
+specifier|final
+name|String
+name|ERR_AGG_IN_GROUP_BY
+init|=
+literal|"Aggregate expression is illegal in GROUP BY clause"
+decl_stmt|;
+specifier|private
+specifier|static
+specifier|final
+name|String
+name|ERR_AGG_IN_ORDER_BY
+init|=
+literal|"Aggregate expression is illegal in ORDER BY clause of non-aggregating SELECT"
+decl_stmt|;
+specifier|private
+specifier|static
+specifier|final
+name|String
+name|ERR_NESTED_AGG
+init|=
+literal|"Aggregate expressions cannot be nested"
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 specifier|public
@@ -550,7 +574,7 @@ argument_list|)
 expr_stmt|;
 if|if
 condition|(
-name|todo
+name|TODO
 condition|)
 block|{
 name|checkWholeExpFails
@@ -2263,7 +2287,7 @@ argument_list|)
 expr_stmt|;
 if|if
 condition|(
-name|todo
+name|TODO
 condition|)
 block|{
 specifier|final
@@ -2377,7 +2401,7 @@ argument_list|)
 expr_stmt|;
 if|if
 condition|(
-name|todo
+name|TODO
 condition|)
 block|{
 name|checkCollation
@@ -3718,7 +3742,7 @@ argument_list|)
 expr_stmt|;
 if|if
 condition|(
-name|todo
+name|TODO
 condition|)
 block|{
 name|checkColumnType
@@ -3907,7 +3931,7 @@ argument_list|)
 expr_stmt|;
 if|if
 condition|(
-name|todo
+name|TODO
 condition|)
 block|{
 name|checkWholeExpFails
@@ -9505,7 +9529,7 @@ name|String
 name|expectedMsgPattern
 parameter_list|)
 block|{
-name|logger
+name|LOGGER
 operator|.
 name|info
 argument_list|(
@@ -9709,7 +9733,7 @@ if|if
 condition|(
 name|Bug
 operator|.
-name|Dt1446Fixed
+name|DT1446_FIXED
 condition|)
 block|{
 comment|// row_number function
@@ -13316,7 +13340,7 @@ expr_stmt|;
 comment|// Needs proper error message text and error markers in query
 if|if
 condition|(
-name|todo
+name|TODO
 condition|)
 block|{
 name|checkFails
@@ -13570,7 +13594,7 @@ if|if
 condition|(
 name|Bug
 operator|.
-name|Frg78Fixed
+name|FRG78_FIXED
 condition|)
 block|{
 name|check
@@ -13594,7 +13618,7 @@ if|if
 condition|(
 name|Bug
 operator|.
-name|Frg78Fixed
+name|FRG78_FIXED
 condition|)
 block|{
 name|checkFails
@@ -13629,11 +13653,6 @@ name|void
 name|testNestedAggFails
 parameter_list|()
 block|{
-name|String
-name|ERR_NESTED_AGG
-init|=
-literal|"Aggregate expressions cannot be nested"
-decl_stmt|;
 comment|// simple case
 name|checkFails
 argument_list|(
@@ -13701,11 +13720,6 @@ name|void
 name|testAggregateInGroupByFails
 parameter_list|()
 block|{
-name|String
-name|ERR_AGG_IN_GROUP_BY
-init|=
-literal|"Aggregate expression is illegal in GROUP BY clause"
-decl_stmt|;
 name|checkFails
 argument_list|(
 literal|"select count(*) from emp group by ^sum(empno)^"
@@ -13721,11 +13735,6 @@ name|void
 name|testAggregateInOrderByFails
 parameter_list|()
 block|{
-name|String
-name|ERR_AGG_IN_ORDER_BY
-init|=
-literal|"Aggregate expression is illegal in ORDER BY clause of non-aggregating SELECT"
-decl_stmt|;
 name|checkFails
 argument_list|(
 literal|"select empno from emp order by ^sum(empno)^"
@@ -14072,7 +14081,7 @@ argument_list|)
 expr_stmt|;
 if|if
 condition|(
-name|todoTypeInference
+name|TODO_TYPE_INFERENCE
 condition|)
 block|{
 name|check
@@ -14083,7 +14092,7 @@ expr_stmt|;
 block|}
 if|if
 condition|(
-name|todoTypeInference
+name|TODO_TYPE_INFERENCE
 condition|)
 block|{
 name|check
@@ -14094,7 +14103,7 @@ expr_stmt|;
 block|}
 if|if
 condition|(
-name|todoTypeInference
+name|TODO_TYPE_INFERENCE
 condition|)
 block|{
 name|check
@@ -14773,7 +14782,7 @@ if|if
 condition|(
 name|Bug
 operator|.
-name|Frg140Fixed
+name|FRG140_FIXED
 condition|)
 block|{
 name|checkResultType

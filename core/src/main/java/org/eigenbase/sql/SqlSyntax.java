@@ -35,7 +35,7 @@ enum|enum
 name|SqlSyntax
 block|{
 comment|/**    * Function syntax, as in "Foo(x, y)".    */
-name|Function
+name|FUNCTION
 block|{
 specifier|public
 name|void
@@ -77,7 +77,7 @@ block|}
 block|}
 block|,
 comment|/**    * Binary operator syntax, as in "x + y".    */
-name|Binary
+name|BINARY
 block|{
 specifier|public
 name|void
@@ -119,7 +119,7 @@ block|}
 block|}
 block|,
 comment|/**    * Prefix unary operator syntax, as in "- x".    */
-name|Prefix
+name|PREFIX
 block|{
 specifier|public
 name|void
@@ -183,7 +183,7 @@ block|}
 block|}
 block|,
 comment|/**    * Postfix unary operator syntax, as in "x ++".    */
-name|Postfix
+name|POSTFIX
 block|{
 specifier|public
 name|void
@@ -247,7 +247,7 @@ block|}
 block|}
 block|,
 comment|/**    * Special syntax, such as that of the SQL CASE operator, "CASE x WHEN 1    * THEN 2 ELSE 3 END".    */
-name|Special
+name|SPECIAL
 block|{
 specifier|public
 name|void
@@ -284,7 +284,7 @@ block|}
 block|}
 block|,
 comment|/**    * Function syntax which takes no parentheses if there are no arguments, for    * example "CURRENTTIME".    */
-name|FunctionId
+name|FUNCTION_ID
 block|{
 specifier|public
 name|void
@@ -326,7 +326,7 @@ block|}
 block|}
 block|,
 comment|/**    * Syntax of an internal operator, which does not appear in the SQL.    */
-name|Internal
+name|INTERNAL
 block|{
 specifier|public
 name|void

@@ -209,7 +209,7 @@ name|functionCategory
 operator|=
 name|SqlFunctionCategory
 operator|.
-name|System
+name|SYSTEM
 expr_stmt|;
 block|}
 if|if

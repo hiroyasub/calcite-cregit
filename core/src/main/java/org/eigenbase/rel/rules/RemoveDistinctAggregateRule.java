@@ -1265,7 +1265,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|isNotDistinctFromOperator
+name|IS_NOT_DISTINCT_FROM
 argument_list|,
 name|RexInputRef
 operator|.
@@ -1320,7 +1320,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|andOperator
+name|AND
 argument_list|,
 name|condition
 argument_list|,

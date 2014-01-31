@@ -3022,9 +3022,11 @@ argument_list|()
 decl_stmt|;
 name|RexNode
 name|pred1
-decl_stmt|,
+decl_stmt|;
+name|RexNode
 name|pred2
-decl_stmt|,
+decl_stmt|;
+name|RexNode
 name|pred3
 decl_stmt|;
 name|SargBinding
@@ -3063,7 +3065,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|lessThanOperator
+name|LESS_THAN
 argument_list|,
 name|inputRef8
 argument_list|,
@@ -3106,7 +3108,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|greaterThanOrEqualOperator
+name|GREATER_THAN_OR_EQUAL
 argument_list|,
 name|intLiteral490
 argument_list|,
@@ -3149,7 +3151,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|andOperator
+name|AND
 argument_list|,
 name|pred1
 argument_list|,
@@ -3192,7 +3194,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|orOperator
+name|OR
 argument_list|,
 name|pred1
 argument_list|,
@@ -3235,7 +3237,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|notOperator
+name|NOT
 argument_list|,
 name|pred1
 argument_list|)
@@ -3276,7 +3278,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|lessThanOperator
+name|LESS_THAN
 argument_list|,
 name|inputRef8
 argument_list|,
@@ -3306,7 +3308,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|lessThanOperator
+name|LESS_THAN
 argument_list|,
 name|intLiteral7
 argument_list|,

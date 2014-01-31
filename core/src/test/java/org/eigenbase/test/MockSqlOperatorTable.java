@@ -208,7 +208,7 @@ name|otcNumeric
 argument_list|,
 name|SqlFunctionCategory
 operator|.
-name|UserDefinedFunction
+name|USER_DEFINED_FUNCTION
 argument_list|)
 expr_stmt|;
 block|}
@@ -278,7 +278,7 @@ name|otcVariadic
 argument_list|,
 name|SqlFunctionCategory
 operator|.
-name|UserDefinedFunction
+name|USER_DEFINED_FUNCTION
 argument_list|)
 expr_stmt|;
 block|}

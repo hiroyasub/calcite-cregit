@@ -95,6 +95,11 @@ class|class
 name|HttpUtils
 block|{
 specifier|private
+name|HttpUtils
+parameter_list|()
+block|{
+block|}
+specifier|private
 specifier|static
 specifier|final
 name|Logger

@@ -204,7 +204,7 @@ argument_list|,
 comment|// takes a numeric param
 name|SqlFunctionCategory
 operator|.
-name|System
+name|SYSTEM
 argument_list|)
 decl_stmt|;
 comment|//~ Methods ----------------------------------------------------------------
@@ -1248,7 +1248,7 @@ argument_list|()
 operator|==
 name|SqlStdOperatorTable
 operator|.
-name|isNotNullOperator
+name|IS_NOT_NULL
 operator|)
 condition|)
 block|{

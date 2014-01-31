@@ -49,7 +49,7 @@ specifier|private
 specifier|static
 specifier|final
 name|DecimalFormat
-name|decimalFormat
+name|DECIMAL_FORMAT
 init|=
 operator|new
 name|DecimalFormat
@@ -172,7 +172,7 @@ name|event
 operator|+
 literal|":  elapsed nanos="
 operator|+
-name|decimalFormat
+name|DECIMAL_FORMAT
 operator|.
 name|format
 argument_list|(

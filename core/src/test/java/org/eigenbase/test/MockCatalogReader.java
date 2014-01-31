@@ -223,7 +223,7 @@ specifier|protected
 specifier|static
 specifier|final
 name|String
-name|defaultCatalog
+name|DEFAULT_CATALOG
 init|=
 literal|"CATALOG"
 decl_stmt|;
@@ -231,7 +231,7 @@ specifier|protected
 specifier|static
 specifier|final
 name|String
-name|defaultSchema
+name|DEFAULT_SCHEMA
 init|=
 literal|"SALES"
 decl_stmt|;
@@ -1162,9 +1162,9 @@ name|ImmutableList
 operator|.
 name|of
 argument_list|(
-name|defaultCatalog
+name|DEFAULT_CATALOG
 argument_list|,
-name|defaultSchema
+name|DEFAULT_SCHEMA
 argument_list|,
 name|names
 operator|.
@@ -1187,7 +1187,7 @@ name|ImmutableList
 operator|.
 name|of
 argument_list|(
-name|defaultCatalog
+name|DEFAULT_CATALOG
 argument_list|,
 name|names
 operator|.
@@ -1415,7 +1415,7 @@ name|getSchemaName
 parameter_list|()
 block|{
 return|return
-name|defaultSchema
+name|DEFAULT_SCHEMA
 return|;
 block|}
 specifier|public
@@ -1725,7 +1725,7 @@ name|getCatalogName
 parameter_list|()
 block|{
 return|return
-name|defaultCatalog
+name|DEFAULT_CATALOG
 return|;
 block|}
 block|}

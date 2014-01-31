@@ -521,7 +521,7 @@ argument_list|()
 operator|==
 name|SqlStdOperatorTable
 operator|.
-name|asOperator
+name|AS
 operator|)
 operator|:
 name|node
@@ -529,13 +529,13 @@ assert|;
 return|return
 name|SqlStdOperatorTable
 operator|.
-name|selectOperator
+name|SELECT
 operator|.
 name|createCall
 argument_list|(
 name|SqlNodeList
 operator|.
-name|Empty
+name|EMPTY
 argument_list|,
 literal|null
 argument_list|,
@@ -549,7 +549,7 @@ literal|null
 argument_list|,
 name|SqlNodeList
 operator|.
-name|Empty
+name|EMPTY
 argument_list|,
 literal|null
 argument_list|,
@@ -879,7 +879,7 @@ name|op
 operator|==
 name|SqlStdOperatorTable
 operator|.
-name|castFunc
+name|CAST
 condition|)
 block|{
 name|RelDataType
@@ -966,7 +966,7 @@ name|op
 operator|==
 name|SqlStdOperatorTable
 operator|.
-name|caseOperator
+name|CASE
 condition|)
 block|{
 specifier|final
@@ -1726,7 +1726,7 @@ name|node
 operator|=
 name|SqlStdOperatorTable
 operator|.
-name|descendingOperator
+name|DESC
 operator|.
 name|createCall
 argument_list|(
@@ -1750,7 +1750,7 @@ name|node
 operator|=
 name|SqlStdOperatorTable
 operator|.
-name|nullsFirstOperator
+name|NULLS_FIRST
 operator|.
 name|createCall
 argument_list|(
@@ -1767,7 +1767,7 @@ name|node
 operator|=
 name|SqlStdOperatorTable
 operator|.
-name|nullsLastOperator
+name|NULLS_LAST
 operator|.
 name|createCall
 argument_list|(
@@ -2279,7 +2279,7 @@ argument_list|()
 operator|==
 name|SqlStdOperatorTable
 operator|.
-name|asOperator
+name|AS
 condition|)
 block|{
 return|return
@@ -2402,7 +2402,7 @@ block|{
 return|return
 name|SqlStdOperatorTable
 operator|.
-name|asOperator
+name|AS
 operator|.
 name|createCall
 argument_list|(

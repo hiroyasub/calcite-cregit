@@ -559,7 +559,7 @@ parameter_list|()
 block|{
 name|defineMethod
 argument_list|(
-name|upperFunc
+name|UPPER
 argument_list|,
 name|BuiltinMethod
 operator|.
@@ -574,7 +574,7 @@ argument_list|)
 expr_stmt|;
 name|defineMethod
 argument_list|(
-name|lowerFunc
+name|LOWER
 argument_list|,
 name|BuiltinMethod
 operator|.
@@ -589,7 +589,7 @@ argument_list|)
 expr_stmt|;
 name|defineMethod
 argument_list|(
-name|initcapFunc
+name|INITCAP
 argument_list|,
 name|BuiltinMethod
 operator|.
@@ -604,7 +604,7 @@ argument_list|)
 expr_stmt|;
 name|defineMethod
 argument_list|(
-name|substringFunc
+name|SUBSTRING
 argument_list|,
 name|BuiltinMethod
 operator|.
@@ -619,7 +619,7 @@ argument_list|)
 expr_stmt|;
 name|defineMethod
 argument_list|(
-name|characterLengthFunc
+name|CHARACTER_LENGTH
 argument_list|,
 name|BuiltinMethod
 operator|.
@@ -634,7 +634,7 @@ argument_list|)
 expr_stmt|;
 name|defineMethod
 argument_list|(
-name|charLengthFunc
+name|CHAR_LENGTH
 argument_list|,
 name|BuiltinMethod
 operator|.
@@ -649,7 +649,7 @@ argument_list|)
 expr_stmt|;
 name|defineMethod
 argument_list|(
-name|concatOperator
+name|CONCAT
 argument_list|,
 name|BuiltinMethod
 operator|.
@@ -664,7 +664,7 @@ argument_list|)
 expr_stmt|;
 name|defineMethod
 argument_list|(
-name|overlayFunc
+name|OVERLAY
 argument_list|,
 name|BuiltinMethod
 operator|.
@@ -679,7 +679,7 @@ argument_list|)
 expr_stmt|;
 name|defineMethod
 argument_list|(
-name|positionFunc
+name|POSITION
 argument_list|,
 name|BuiltinMethod
 operator|.
@@ -702,7 +702,7 @@ argument_list|()
 decl_stmt|;
 name|defineImplementor
 argument_list|(
-name|trimFunc
+name|TRIM
 argument_list|,
 name|NullPolicy
 operator|.
@@ -716,7 +716,7 @@ expr_stmt|;
 comment|// logical
 name|defineBinary
 argument_list|(
-name|andOperator
+name|AND
 argument_list|,
 name|AndAlso
 argument_list|,
@@ -729,7 +729,7 @@ argument_list|)
 expr_stmt|;
 name|defineBinary
 argument_list|(
-name|orOperator
+name|OR
 argument_list|,
 name|OrElse
 argument_list|,
@@ -742,7 +742,7 @@ argument_list|)
 expr_stmt|;
 name|defineUnary
 argument_list|(
-name|notOperator
+name|NOT
 argument_list|,
 name|Not
 argument_list|,
@@ -754,7 +754,7 @@ expr_stmt|;
 comment|// comparisons
 name|defineBinary
 argument_list|(
-name|lessThanOperator
+name|LESS_THAN
 argument_list|,
 name|LessThan
 argument_list|,
@@ -767,7 +767,7 @@ argument_list|)
 expr_stmt|;
 name|defineBinary
 argument_list|(
-name|lessThanOrEqualOperator
+name|LESS_THAN_OR_EQUAL
 argument_list|,
 name|LessThanOrEqual
 argument_list|,
@@ -780,7 +780,7 @@ argument_list|)
 expr_stmt|;
 name|defineBinary
 argument_list|(
-name|greaterThanOperator
+name|GREATER_THAN
 argument_list|,
 name|GreaterThan
 argument_list|,
@@ -793,7 +793,7 @@ argument_list|)
 expr_stmt|;
 name|defineBinary
 argument_list|(
-name|greaterThanOrEqualOperator
+name|GREATER_THAN_OR_EQUAL
 argument_list|,
 name|GreaterThanOrEqual
 argument_list|,
@@ -806,7 +806,7 @@ argument_list|)
 expr_stmt|;
 name|defineBinary
 argument_list|(
-name|equalsOperator
+name|EQUALS
 argument_list|,
 name|Equal
 argument_list|,
@@ -819,7 +819,7 @@ argument_list|)
 expr_stmt|;
 name|defineBinary
 argument_list|(
-name|notEqualsOperator
+name|NOT_EQUALS
 argument_list|,
 name|NotEqual
 argument_list|,
@@ -833,7 +833,7 @@ expr_stmt|;
 comment|// arithmetic
 name|defineBinary
 argument_list|(
-name|plusOperator
+name|PLUS
 argument_list|,
 name|Add
 argument_list|,
@@ -846,7 +846,7 @@ argument_list|)
 expr_stmt|;
 name|defineBinary
 argument_list|(
-name|minusOperator
+name|MINUS
 argument_list|,
 name|Subtract
 argument_list|,
@@ -859,7 +859,7 @@ argument_list|)
 expr_stmt|;
 name|defineBinary
 argument_list|(
-name|multiplyOperator
+name|MULTIPLY
 argument_list|,
 name|Multiply
 argument_list|,
@@ -872,7 +872,7 @@ argument_list|)
 expr_stmt|;
 name|defineBinary
 argument_list|(
-name|divideOperator
+name|DIVIDE
 argument_list|,
 name|Divide
 argument_list|,
@@ -885,7 +885,7 @@ argument_list|)
 expr_stmt|;
 name|defineBinary
 argument_list|(
-name|divideIntegerOperator
+name|DIVIDE_INTEGER
 argument_list|,
 name|Divide
 argument_list|,
@@ -898,7 +898,7 @@ argument_list|)
 expr_stmt|;
 name|defineUnary
 argument_list|(
-name|prefixMinusOperator
+name|UNARY_MINUS
 argument_list|,
 name|Negate
 argument_list|,
@@ -909,7 +909,7 @@ argument_list|)
 expr_stmt|;
 name|defineUnary
 argument_list|(
-name|prefixPlusOperator
+name|UNARY_PLUS
 argument_list|,
 name|UnaryPlus
 argument_list|,
@@ -920,7 +920,7 @@ argument_list|)
 expr_stmt|;
 name|defineMethod
 argument_list|(
-name|modFunc
+name|MOD
 argument_list|,
 literal|"mod"
 argument_list|,
@@ -931,7 +931,7 @@ argument_list|)
 expr_stmt|;
 name|defineMethod
 argument_list|(
-name|expFunc
+name|EXP
 argument_list|,
 literal|"exp"
 argument_list|,
@@ -942,7 +942,7 @@ argument_list|)
 expr_stmt|;
 name|defineMethod
 argument_list|(
-name|powerFunc
+name|POWER
 argument_list|,
 literal|"power"
 argument_list|,
@@ -953,7 +953,7 @@ argument_list|)
 expr_stmt|;
 name|defineMethod
 argument_list|(
-name|lnFunc
+name|LN
 argument_list|,
 literal|"ln"
 argument_list|,
@@ -964,7 +964,7 @@ argument_list|)
 expr_stmt|;
 name|defineMethod
 argument_list|(
-name|log10Func
+name|LOG10
 argument_list|,
 literal|"log10"
 argument_list|,
@@ -975,7 +975,7 @@ argument_list|)
 expr_stmt|;
 name|defineMethod
 argument_list|(
-name|absFunc
+name|ABS
 argument_list|,
 literal|"abs"
 argument_list|,
@@ -986,7 +986,7 @@ argument_list|)
 expr_stmt|;
 name|defineMethod
 argument_list|(
-name|ceilFunc
+name|CEIL
 argument_list|,
 literal|"ceil"
 argument_list|,
@@ -997,7 +997,7 @@ argument_list|)
 expr_stmt|;
 name|defineMethod
 argument_list|(
-name|floorFunc
+name|FLOOR
 argument_list|,
 literal|"floor"
 argument_list|,
@@ -1010,7 +1010,7 @@ name|map
 operator|.
 name|put
 argument_list|(
-name|isNullOperator
+name|IS_NULL
 argument_list|,
 operator|new
 name|IsXxxImplementor
@@ -1025,7 +1025,7 @@ name|map
 operator|.
 name|put
 argument_list|(
-name|isNotNullOperator
+name|IS_NOT_NULL
 argument_list|,
 operator|new
 name|IsXxxImplementor
@@ -1040,7 +1040,7 @@ name|map
 operator|.
 name|put
 argument_list|(
-name|isTrueOperator
+name|IS_TRUE
 argument_list|,
 operator|new
 name|IsXxxImplementor
@@ -1055,7 +1055,7 @@ name|map
 operator|.
 name|put
 argument_list|(
-name|isNotTrueOperator
+name|IS_NOT_TRUE
 argument_list|,
 operator|new
 name|IsXxxImplementor
@@ -1070,7 +1070,7 @@ name|map
 operator|.
 name|put
 argument_list|(
-name|isFalseOperator
+name|IS_FALSE
 argument_list|,
 operator|new
 name|IsXxxImplementor
@@ -1085,7 +1085,7 @@ name|map
 operator|.
 name|put
 argument_list|(
-name|isNotFalseOperator
+name|IS_NOT_FALSE
 argument_list|,
 operator|new
 name|IsXxxImplementor
@@ -1113,7 +1113,7 @@ argument_list|)
 decl_stmt|;
 name|defineImplementor
 argument_list|(
-name|likeOperator
+name|LIKE
 argument_list|,
 name|NullPolicy
 operator|.
@@ -1126,7 +1126,7 @@ argument_list|)
 expr_stmt|;
 name|defineImplementor
 argument_list|(
-name|notLikeOperator
+name|NOT_LIKE
 argument_list|,
 name|NullPolicy
 operator|.
@@ -1158,7 +1158,7 @@ argument_list|)
 decl_stmt|;
 name|defineImplementor
 argument_list|(
-name|similarOperator
+name|SIMILAR_TO
 argument_list|,
 name|NullPolicy
 operator|.
@@ -1171,7 +1171,7 @@ argument_list|)
 expr_stmt|;
 name|defineImplementor
 argument_list|(
-name|notSimilarOperator
+name|NOT_SIMILAR_TO
 argument_list|,
 name|NullPolicy
 operator|.
@@ -1191,7 +1191,7 @@ name|map
 operator|.
 name|put
 argument_list|(
-name|caseOperator
+name|CASE
 argument_list|,
 operator|new
 name|CaseImplementor
@@ -1200,7 +1200,7 @@ argument_list|)
 expr_stmt|;
 name|defineImplementor
 argument_list|(
-name|castFunc
+name|CAST
 argument_list|,
 name|NullPolicy
 operator|.
@@ -1215,7 +1215,7 @@ argument_list|)
 expr_stmt|;
 name|defineImplementor
 argument_list|(
-name|reinterpretOperator
+name|REINTERPRET
 argument_list|,
 name|NullPolicy
 operator|.
@@ -1240,7 +1240,7 @@ name|map
 operator|.
 name|put
 argument_list|(
-name|mapValueConstructor
+name|MAP_VALUE_CONSTRUCTOR
 argument_list|,
 name|value
 argument_list|)
@@ -1249,7 +1249,7 @@ name|map
 operator|.
 name|put
 argument_list|(
-name|arrayValueConstructor
+name|ARRAY_VALUE_CONSTRUCTOR
 argument_list|,
 name|value
 argument_list|)
@@ -1258,7 +1258,7 @@ name|map
 operator|.
 name|put
 argument_list|(
-name|itemOp
+name|ITEM
 argument_list|,
 operator|new
 name|ItemImplementor
@@ -1278,7 +1278,7 @@ name|map
 operator|.
 name|put
 argument_list|(
-name|userFunc
+name|USER
 argument_list|,
 name|systemFunctionImplementor
 argument_list|)
@@ -1287,7 +1287,7 @@ name|map
 operator|.
 name|put
 argument_list|(
-name|currentUserFunc
+name|CURRENT_USER
 argument_list|,
 name|systemFunctionImplementor
 argument_list|)
@@ -1296,7 +1296,7 @@ name|map
 operator|.
 name|put
 argument_list|(
-name|sessionUserFunc
+name|SESSION_USER
 argument_list|,
 name|systemFunctionImplementor
 argument_list|)
@@ -1305,7 +1305,7 @@ name|map
 operator|.
 name|put
 argument_list|(
-name|systemUserFunc
+name|SYSTEM_USER
 argument_list|,
 name|systemFunctionImplementor
 argument_list|)
@@ -1314,7 +1314,7 @@ name|map
 operator|.
 name|put
 argument_list|(
-name|currentPathFunc
+name|CURRENT_PATH
 argument_list|,
 name|systemFunctionImplementor
 argument_list|)
@@ -1323,7 +1323,7 @@ name|map
 operator|.
 name|put
 argument_list|(
-name|currentRoleFunc
+name|CURRENT_ROLE
 argument_list|,
 name|systemFunctionImplementor
 argument_list|)
@@ -1333,7 +1333,7 @@ name|map
 operator|.
 name|put
 argument_list|(
-name|currentTimeFunc
+name|CURRENT_TIME
 argument_list|,
 name|systemFunctionImplementor
 argument_list|)
@@ -1342,7 +1342,7 @@ name|map
 operator|.
 name|put
 argument_list|(
-name|currentTimestampFunc
+name|CURRENT_TIMESTAMP
 argument_list|,
 name|systemFunctionImplementor
 argument_list|)
@@ -1351,7 +1351,7 @@ name|map
 operator|.
 name|put
 argument_list|(
-name|currentDateFunc
+name|CURRENT_DATE
 argument_list|,
 name|systemFunctionImplementor
 argument_list|)
@@ -1360,7 +1360,7 @@ name|map
 operator|.
 name|put
 argument_list|(
-name|localTimeFunc
+name|LOCALTIME
 argument_list|,
 name|systemFunctionImplementor
 argument_list|)
@@ -1369,7 +1369,7 @@ name|map
 operator|.
 name|put
 argument_list|(
-name|localTimestampFunc
+name|LOCALTIMESTAMP
 argument_list|,
 name|systemFunctionImplementor
 argument_list|)
@@ -1378,7 +1378,7 @@ name|aggMap
 operator|.
 name|put
 argument_list|(
-name|countOperator
+name|COUNT
 argument_list|,
 operator|new
 name|BuiltinAggregateImplementor
@@ -1391,7 +1391,7 @@ name|aggMap
 operator|.
 name|put
 argument_list|(
-name|sumOperator
+name|SUM
 argument_list|,
 operator|new
 name|BuiltinAggregateImplementor
@@ -1404,7 +1404,7 @@ name|aggMap
 operator|.
 name|put
 argument_list|(
-name|minOperator
+name|MIN
 argument_list|,
 operator|new
 name|BuiltinAggregateImplementor
@@ -1417,7 +1417,7 @@ name|aggMap
 operator|.
 name|put
 argument_list|(
-name|maxOperator
+name|MAX
 argument_list|,
 operator|new
 name|BuiltinAggregateImplementor
@@ -1430,7 +1430,7 @@ name|agg2Map
 operator|.
 name|put
 argument_list|(
-name|countOperator
+name|COUNT
 argument_list|,
 operator|new
 name|CountImplementor2
@@ -1441,7 +1441,7 @@ name|agg2Map
 operator|.
 name|put
 argument_list|(
-name|sumOperator
+name|SUM
 argument_list|,
 operator|new
 name|SumImplementor2
@@ -1452,7 +1452,7 @@ name|agg2Map
 operator|.
 name|put
 argument_list|(
-name|sumEmptyIsZeroOperator
+name|SUM0
 argument_list|,
 operator|new
 name|SumImplementor2
@@ -1471,7 +1471,7 @@ name|agg2Map
 operator|.
 name|put
 argument_list|(
-name|minOperator
+name|MIN
 argument_list|,
 name|minMax
 argument_list|)
@@ -1480,7 +1480,7 @@ name|agg2Map
 operator|.
 name|put
 argument_list|(
-name|maxOperator
+name|MAX
 argument_list|,
 name|minMax
 argument_list|)
@@ -1489,7 +1489,7 @@ name|agg2Map
 operator|.
 name|put
 argument_list|(
-name|rankFunc
+name|RANK
 argument_list|,
 operator|new
 name|RankImplementor2
@@ -4420,7 +4420,7 @@ name|class
 argument_list|,
 name|aggregation
 operator|==
-name|minOperator
+name|MIN
 condition|?
 literal|"lesser"
 else|:
@@ -4887,19 +4887,19 @@ name|asList
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|lessThanOperator
+name|LESS_THAN
 argument_list|,
 name|SqlStdOperatorTable
 operator|.
-name|lessThanOrEqualOperator
+name|LESS_THAN_OR_EQUAL
 argument_list|,
 name|SqlStdOperatorTable
 operator|.
-name|greaterThanOperator
+name|GREATER_THAN
 argument_list|,
 name|SqlStdOperatorTable
 operator|.
-name|greaterThanOrEqualOperator
+name|GREATER_THAN_OR_EQUAL
 argument_list|)
 decl_stmt|;
 specifier|private
@@ -6239,15 +6239,15 @@ if|if
 condition|(
 name|op
 operator|==
-name|currentUserFunc
+name|CURRENT_USER
 operator|||
 name|op
 operator|==
-name|sessionUserFunc
+name|SESSION_USER
 operator|||
 name|op
 operator|==
-name|userFunc
+name|USER
 condition|)
 block|{
 return|return
@@ -6263,7 +6263,7 @@ if|else if
 condition|(
 name|op
 operator|==
-name|systemUserFunc
+name|SYSTEM_USER
 condition|)
 block|{
 return|return
@@ -6284,11 +6284,11 @@ if|else if
 condition|(
 name|op
 operator|==
-name|currentPathFunc
+name|CURRENT_PATH
 operator|||
 name|op
 operator|==
-name|currentRoleFunc
+name|CURRENT_ROLE
 condition|)
 block|{
 comment|// By default, the CURRENT_ROLE function returns
@@ -6306,7 +6306,7 @@ if|else if
 condition|(
 name|op
 operator|==
-name|currentTimestampFunc
+name|CURRENT_TIMESTAMP
 condition|)
 block|{
 return|return
@@ -6328,7 +6328,7 @@ if|else if
 condition|(
 name|op
 operator|==
-name|currentTimeFunc
+name|CURRENT_TIME
 condition|)
 block|{
 return|return
@@ -6350,7 +6350,7 @@ if|else if
 condition|(
 name|op
 operator|==
-name|currentDateFunc
+name|CURRENT_DATE
 condition|)
 block|{
 return|return
@@ -6372,7 +6372,7 @@ if|else if
 condition|(
 name|op
 operator|==
-name|localTimestampFunc
+name|LOCALTIMESTAMP
 condition|)
 block|{
 return|return
@@ -6394,7 +6394,7 @@ if|else if
 condition|(
 name|op
 operator|==
-name|localTimeFunc
+name|LOCALTIME
 condition|)
 block|{
 return|return

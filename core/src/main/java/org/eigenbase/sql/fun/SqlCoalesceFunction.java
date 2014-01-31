@@ -110,7 +110,7 @@ name|otcSameVariadic
 argument_list|,
 name|SqlFunctionCategory
 operator|.
-name|System
+name|SYSTEM
 argument_list|)
 expr_stmt|;
 block|}
@@ -215,7 +215,7 @@ name|add
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|isNotNullOperator
+name|IS_NOT_NULL
 operator|.
 name|createCall
 argument_list|(
@@ -276,7 +276,7 @@ name|newCall
 init|=
 name|SqlStdOperatorTable
 operator|.
-name|caseOperator
+name|CASE
 operator|.
 name|createSwitchedCall
 argument_list|(

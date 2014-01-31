@@ -298,7 +298,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|isTrueOperator
+name|IS_TRUE
 argument_list|,
 name|node
 argument_list|)
@@ -315,7 +315,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|isFalseOperator
+name|IS_FALSE
 argument_list|,
 name|node
 argument_list|)
@@ -476,7 +476,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|plusOperator
+name|PLUS
 argument_list|,
 name|x
 argument_list|,
@@ -540,7 +540,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|orOperator
+name|OR
 argument_list|,
 name|x
 argument_list|,
@@ -603,7 +603,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|andOperator
+name|AND
 argument_list|,
 name|x
 argument_list|,
@@ -638,7 +638,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|equalsOperator
+name|EQUALS
 argument_list|,
 name|x
 argument_list|,
@@ -673,7 +673,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|notEqualsOperator
+name|NOT_EQUALS
 argument_list|,
 name|x
 argument_list|,
@@ -708,7 +708,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|greaterThanOperator
+name|GREATER_THAN
 argument_list|,
 name|x
 argument_list|,
@@ -743,7 +743,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|greaterThanOrEqualOperator
+name|GREATER_THAN_OR_EQUAL
 argument_list|,
 name|x
 argument_list|,
@@ -778,7 +778,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|lessThanOperator
+name|LESS_THAN
 argument_list|,
 name|x
 argument_list|,
@@ -813,7 +813,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|lessThanOrEqualOperator
+name|LESS_THAN_OR_EQUAL
 argument_list|,
 name|x
 argument_list|,
@@ -848,7 +848,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|lessThanOrEqualOperator
+name|LESS_THAN_OR_EQUAL
 argument_list|,
 name|x
 argument_list|,
@@ -874,7 +874,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|lessThanOrEqualOperator
+name|LESS_THAN_OR_EQUAL
 argument_list|,
 name|trueRex
 argument_list|,
@@ -941,7 +941,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|equalsOperator
+name|EQUALS
 argument_list|,
 name|x
 argument_list|,
@@ -957,7 +957,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|andOperator
+name|AND
 argument_list|,
 name|op1
 argument_list|,
@@ -993,7 +993,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|notEqualsOperator
+name|NOT_EQUALS
 argument_list|,
 name|x
 argument_list|,
@@ -1009,7 +1009,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|greaterThanOperator
+name|GREATER_THAN
 argument_list|,
 name|y
 argument_list|,
@@ -1025,7 +1025,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|andOperator
+name|AND
 argument_list|,
 name|op1
 argument_list|,
@@ -1061,7 +1061,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|equalsOperator
+name|EQUALS
 argument_list|,
 name|x
 argument_list|,
@@ -1077,7 +1077,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|greaterThanOperator
+name|GREATER_THAN
 argument_list|,
 name|falseRex
 argument_list|,
@@ -1093,7 +1093,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|andOperator
+name|AND
 argument_list|,
 name|op1
 argument_list|,

@@ -85,7 +85,7 @@ block|{
 return|return
 name|SqlSyntax
 operator|.
-name|Postfix
+name|POSTFIX
 return|;
 block|}
 specifier|public
@@ -155,7 +155,7 @@ index|]
 operator|!=
 name|SqlNodeList
 operator|.
-name|Empty
+name|EMPTY
 condition|)
 block|{
 name|writer

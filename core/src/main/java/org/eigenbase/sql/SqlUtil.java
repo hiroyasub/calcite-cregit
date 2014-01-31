@@ -278,7 +278,7 @@ block|}
 return|return
 name|SqlStdOperatorTable
 operator|.
-name|andOperator
+name|AND
 operator|.
 name|createCall
 argument_list|(
@@ -797,7 +797,7 @@ argument_list|()
 operator|==
 name|SqlFunctionCategory
 operator|.
-name|UserDefinedSpecificFunction
+name|USER_DEFINED_SPECIFIC_FUNCTION
 condition|)
 block|{
 name|writer
@@ -1301,7 +1301,7 @@ name|category
 operator|==
 name|SqlFunctionCategory
 operator|.
-name|UserDefinedProcedure
+name|USER_DEFINED_PROCEDURE
 condition|)
 block|{
 return|return
@@ -1437,7 +1437,7 @@ name|category
 argument_list|,
 name|SqlSyntax
 operator|.
-name|Function
+name|FUNCTION
 argument_list|)
 decl_stmt|;
 name|List
@@ -2194,7 +2194,7 @@ literal|null
 argument_list|,
 name|SqlSyntax
 operator|.
-name|Function
+name|FUNCTION
 argument_list|)
 decl_stmt|;
 for|for
@@ -2214,7 +2214,7 @@ argument_list|()
 operator|==
 name|SqlSyntax
 operator|.
-name|FunctionId
+name|FUNCTION_ID
 condition|)
 block|{
 comment|// Even though this looks like an identifier, it is a
@@ -2229,7 +2229,7 @@ name|operator
 argument_list|,
 name|SqlNode
 operator|.
-name|emptyArray
+name|EMPTY_ARRAY
 argument_list|,
 name|id
 operator|.

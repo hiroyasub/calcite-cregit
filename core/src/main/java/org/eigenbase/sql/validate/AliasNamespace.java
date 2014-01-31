@@ -128,7 +128,7 @@ argument_list|()
 operator|==
 name|SqlStdOperatorTable
 operator|.
-name|asOperator
+name|AS
 assert|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------

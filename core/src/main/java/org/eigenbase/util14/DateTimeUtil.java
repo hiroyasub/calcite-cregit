@@ -42,44 +42,49 @@ specifier|public
 class|class
 name|DateTimeUtil
 block|{
+specifier|private
+name|DateTimeUtil
+parameter_list|()
+block|{
+block|}
 comment|//~ Static fields/initializers ---------------------------------------------
-comment|/**    * the SimpleDateFormat string for ISO dates, "yyyy-MM-dd"    */
+comment|/** The SimpleDateFormat string for ISO dates, "yyyy-MM-dd". */
 specifier|public
 specifier|static
 specifier|final
 name|String
-name|DateFormatStr
+name|DATE_FORMAT_STRING
 init|=
 literal|"yyyy-MM-dd"
 decl_stmt|;
-comment|/**    * the SimpleDateFormat string for ISO times, "HH:mm:ss"    */
+comment|/** The SimpleDateFormat string for ISO times, "HH:mm:ss". */
 specifier|public
 specifier|static
 specifier|final
 name|String
-name|TimeFormatStr
+name|TIME_FORMAT_STRING
 init|=
 literal|"HH:mm:ss"
 decl_stmt|;
-comment|/**    * the SimpleDateFormat string for ISO timestamps, "yyyy-MM-dd HH:mm:ss"    */
+comment|/** The SimpleDateFormat string for ISO timestamps, "yyyy-MM-dd HH:mm:ss". */
 specifier|public
 specifier|static
 specifier|final
 name|String
-name|TimestampFormatStr
+name|TIMESTAMP_FORMAT_STRING
 init|=
-name|DateFormatStr
+name|DATE_FORMAT_STRING
 operator|+
 literal|" "
 operator|+
-name|TimeFormatStr
+name|TIME_FORMAT_STRING
 decl_stmt|;
-comment|/**    * the GMT time zone    */
+comment|/** The GMT time zone. */
 specifier|public
 specifier|static
 specifier|final
 name|TimeZone
-name|gmtZone
+name|GMT_ZONE
 init|=
 name|TimeZone
 operator|.
@@ -88,12 +93,12 @@ argument_list|(
 literal|"GMT"
 argument_list|)
 decl_stmt|;
-comment|/**    * the Java default time zone    */
+comment|/** The Java default time zone. */
 specifier|public
 specifier|static
 specifier|final
 name|TimeZone
-name|defaultZone
+name|DEFAULT_ZONE
 init|=
 name|TimeZone
 operator|.
@@ -143,11 +148,11 @@ specifier|public
 specifier|static
 specifier|final
 name|Calendar
-name|zeroCalendar
+name|ZERO_CALENDAR
 decl_stmt|;
 static|static
 block|{
-name|zeroCalendar
+name|ZERO_CALENDAR
 operator|=
 name|Calendar
 operator|.
@@ -155,10 +160,10 @@ name|getInstance
 argument_list|(
 name|DateTimeUtil
 operator|.
-name|gmtZone
+name|GMT_ZONE
 argument_list|)
 expr_stmt|;
-name|zeroCalendar
+name|ZERO_CALENDAR
 operator|.
 name|setTimeInMillis
 argument_list|(
@@ -221,7 +226,7 @@ condition|)
 block|{
 name|tz
 operator|=
-name|defaultZone
+name|DEFAULT_ZONE
 expr_stmt|;
 block|}
 name|Calendar
@@ -286,7 +291,7 @@ name|ret
 operator|.
 name|setTimeZone
 argument_list|(
-name|gmtZone
+name|GMT_ZONE
 argument_list|)
 expr_stmt|;
 return|return
@@ -656,7 +661,7 @@ literal|null
 condition|)
 block|{
 return|return
-name|defaultZone
+name|DEFAULT_ZONE
 return|;
 block|}
 return|return

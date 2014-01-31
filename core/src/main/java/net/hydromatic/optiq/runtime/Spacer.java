@@ -103,7 +103,7 @@ specifier|private
 specifier|static
 name|char
 index|[]
-name|SPACES
+name|spaces
 init|=
 block|{
 literal|' '
@@ -222,7 +222,7 @@ return|return
 operator|new
 name|String
 argument_list|(
-name|SPACES
+name|spaces
 argument_list|,
 literal|0
 argument_list|,
@@ -243,7 +243,7 @@ name|buf
 operator|.
 name|append
 argument_list|(
-name|SPACES
+name|spaces
 argument_list|,
 literal|0
 argument_list|,
@@ -269,7 +269,7 @@ name|buf
 operator|.
 name|write
 argument_list|(
-name|SPACES
+name|spaces
 argument_list|,
 literal|0
 argument_list|,
@@ -293,7 +293,7 @@ name|buf
 operator|.
 name|write
 argument_list|(
-name|SPACES
+name|spaces
 argument_list|,
 literal|0
 argument_list|,
@@ -317,7 +317,7 @@ name|buf
 operator|.
 name|write
 argument_list|(
-name|SPACES
+name|spaces
 argument_list|,
 literal|0
 argument_list|,
@@ -346,7 +346,7 @@ try|try
 block|{
 if|if
 condition|(
-name|SPACES
+name|spaces
 operator|.
 name|length
 operator|<
@@ -373,7 +373,7 @@ literal|' '
 argument_list|)
 expr_stmt|;
 comment|// atomic assignment; other Spacer instances may be using this
-name|SPACES
+name|spaces
 operator|=
 name|newSpaces
 expr_stmt|;
@@ -430,7 +430,7 @@ argument_list|)
 operator|.
 name|append
 argument_list|(
-name|SPACES
+name|spaces
 argument_list|,
 literal|0
 argument_list|,

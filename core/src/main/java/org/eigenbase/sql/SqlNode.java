@@ -109,7 +109,7 @@ specifier|static
 specifier|final
 name|SqlNode
 index|[]
-name|emptyArray
+name|EMPTY_ARRAY
 init|=
 operator|new
 name|SqlNode

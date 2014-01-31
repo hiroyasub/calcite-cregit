@@ -124,7 +124,7 @@ argument_list|()
 operator|==
 name|SqlStdOperatorTable
 operator|.
-name|unnestOperator
+name|UNNEST
 assert|;
 name|this
 operator|.

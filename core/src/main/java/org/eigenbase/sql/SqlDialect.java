@@ -1100,7 +1100,7 @@ name|buf
 operator|.
 name|append
 argument_list|(
-name|hex
+name|HEXITS
 index|[
 operator|(
 name|c
@@ -1116,7 +1116,7 @@ name|buf
 operator|.
 name|append
 argument_list|(
-name|hex
+name|HEXITS
 index|[
 operator|(
 name|c
@@ -1132,7 +1132,7 @@ name|buf
 operator|.
 name|append
 argument_list|(
-name|hex
+name|HEXITS
 index|[
 operator|(
 name|c
@@ -1148,7 +1148,7 @@ name|buf
 operator|.
 name|append
 argument_list|(
-name|hex
+name|HEXITS
 index|[
 name|c
 operator|&
@@ -1207,7 +1207,7 @@ specifier|static
 specifier|final
 name|char
 index|[]
-name|hex
+name|HEXITS
 init|=
 block|{
 literal|'0'

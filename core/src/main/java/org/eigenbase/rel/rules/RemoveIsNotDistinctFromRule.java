@@ -143,7 +143,7 @@ name|findOperatorCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|isNotDistinctFromOperator
+name|IS_NOT_DISTINCT_FROM
 argument_list|,
 name|oldFilterCond
 argument_list|)
@@ -251,7 +251,7 @@ argument_list|()
 operator|==
 name|SqlStdOperatorTable
 operator|.
-name|isNotDistinctFromOperator
+name|IS_NOT_DISTINCT_FROM
 condition|)
 block|{
 name|RexCall

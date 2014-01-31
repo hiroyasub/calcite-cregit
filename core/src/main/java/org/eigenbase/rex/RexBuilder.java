@@ -681,7 +681,7 @@ name|op
 operator|==
 name|SqlStdOperatorTable
 operator|.
-name|andOperator
+name|AND
 operator|&&
 name|exprs
 operator|.
@@ -1070,13 +1070,13 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|caseOperator
+name|CASE
 argument_list|,
 name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|greaterThanOperator
+name|GREATER_THAN
 argument_list|,
 operator|new
 name|RexOver
@@ -1085,7 +1085,7 @@ name|bigintType
 argument_list|,
 name|SqlStdOperatorTable
 operator|.
-name|countOperator
+name|COUNT
 argument_list|,
 name|exprs
 argument_list|,
@@ -1157,13 +1157,13 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|caseOperator
+name|CASE
 argument_list|,
 name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|greaterThanOrEqualOperator
+name|GREATER_THAN_OR_EQUAL
 argument_list|,
 operator|new
 name|RexOver
@@ -1172,7 +1172,7 @@ name|bigintType
 argument_list|,
 name|SqlStdOperatorTable
 operator|.
-name|countOperator
+name|COUNT
 argument_list|,
 name|ImmutableList
 operator|.
@@ -1310,7 +1310,7 @@ name|type
 argument_list|,
 name|SqlStdOperatorTable
 operator|.
-name|newOperator
+name|NEW
 argument_list|,
 name|exprs
 argument_list|)
@@ -1763,7 +1763,7 @@ name|toType
 argument_list|,
 name|SqlStdOperatorTable
 operator|.
-name|notEqualsOperator
+name|NOT_EQUALS
 argument_list|,
 name|ImmutableList
 operator|.
@@ -1804,7 +1804,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|caseOperator
+name|CASE
 argument_list|,
 name|exp
 argument_list|,
@@ -1846,7 +1846,7 @@ name|toType
 argument_list|,
 name|SqlStdOperatorTable
 operator|.
-name|caseOperator
+name|CASE
 argument_list|,
 name|ImmutableList
 operator|.
@@ -1859,7 +1859,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|isNotNullOperator
+name|IS_NOT_NULL
 argument_list|,
 name|exp
 argument_list|)
@@ -2008,7 +2008,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|divideIntegerOperator
+name|DIVIDE_INTEGER
 argument_list|,
 name|value
 argument_list|,
@@ -2228,7 +2228,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|multiplyOperator
+name|MULTIPLY
 argument_list|,
 name|value
 argument_list|,
@@ -2384,7 +2384,7 @@ name|type
 argument_list|,
 name|SqlStdOperatorTable
 operator|.
-name|castFunc
+name|CAST
 argument_list|,
 name|ImmutableList
 operator|.
@@ -2462,7 +2462,7 @@ name|type
 argument_list|,
 name|SqlStdOperatorTable
 operator|.
-name|reinterpretOperator
+name|REINTERPRET
 argument_list|,
 name|args
 argument_list|)
@@ -2519,7 +2519,7 @@ name|typeNotNull
 argument_list|,
 name|SqlStdOperatorTable
 operator|.
-name|castFunc
+name|CAST
 argument_list|,
 name|ImmutableList
 operator|.
@@ -3881,7 +3881,7 @@ case|:
 return|return
 name|DateTimeUtil
 operator|.
-name|zeroCalendar
+name|ZERO_CALENDAR
 return|;
 default|default:
 throw|throw
@@ -4348,7 +4348,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|mapValueConstructor
+name|MAP_VALUE_CONSTRUCTOR
 argument_list|,
 name|operands
 argument_list|)
@@ -4422,7 +4422,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|arrayValueConstructor
+name|ARRAY_VALUE_CONSTRUCTOR
 argument_list|,
 name|operands
 argument_list|)
@@ -4597,7 +4597,7 @@ name|getInstance
 argument_list|(
 name|DateTimeUtil
 operator|.
-name|gmtZone
+name|GMT_ZONE
 argument_list|)
 expr_stmt|;
 name|calendar
@@ -4635,7 +4635,7 @@ name|getInstance
 argument_list|(
 name|DateTimeUtil
 operator|.
-name|gmtZone
+name|GMT_ZONE
 argument_list|)
 expr_stmt|;
 name|calendar
@@ -4684,7 +4684,7 @@ name|getInstance
 argument_list|(
 name|DateTimeUtil
 operator|.
-name|gmtZone
+name|GMT_ZONE
 argument_list|)
 expr_stmt|;
 name|calendar

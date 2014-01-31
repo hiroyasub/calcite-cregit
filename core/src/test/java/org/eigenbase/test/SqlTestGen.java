@@ -118,6 +118,11 @@ specifier|public
 class|class
 name|SqlTestGen
 block|{
+specifier|private
+name|SqlTestGen
+parameter_list|()
+block|{
+block|}
 comment|//~ Methods ----------------------------------------------------------------
 specifier|public
 specifier|static

@@ -293,11 +293,7 @@ name|void
 name|testParseAndConvert
 parameter_list|()
 throws|throws
-name|SqlParseException
-throws|,
-name|RelConversionException
-throws|,
-name|ValidationException
+name|Exception
 block|{
 name|Planner
 name|planner
@@ -609,9 +605,7 @@ name|void
 name|testConvertWithoutValidateFails
 parameter_list|()
 throws|throws
-name|SqlParseException
-throws|,
-name|RelConversionException
+name|Exception
 block|{
 name|Planner
 name|planner
@@ -678,11 +672,7 @@ name|void
 name|testPlan
 parameter_list|()
 throws|throws
-name|SqlParseException
-throws|,
-name|RelConversionException
-throws|,
-name|ValidationException
+name|Exception
 block|{
 name|RuleSet
 name|ruleSet

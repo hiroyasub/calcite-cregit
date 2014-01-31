@@ -486,7 +486,7 @@ return|return
 name|map
 return|;
 block|}
-comment|/**    * Converts two lists into a list of {@link org.eigenbase.util.Pair}s,    * whose length is the lesser of the lengths of the    * source lists.</p>    *    * @param ks Left list    * @param vs Right list    * @return List of pairs    * @see net.hydromatic.linq4j.Ord#zip(java.util.List)    */
+comment|/**    * Converts two lists into a list of {@link org.eigenbase.util.Pair}s,    * whose length is the lesser of the lengths of the    * source lists.    *    * @param ks Left list    * @param vs Right list    * @return List of pairs    * @see net.hydromatic.linq4j.Ord#zip(java.util.List)    */
 specifier|public
 specifier|static
 parameter_list|<

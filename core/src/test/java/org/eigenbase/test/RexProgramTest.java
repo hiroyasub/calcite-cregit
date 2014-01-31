@@ -460,7 +460,7 @@ name|program
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Creates a program, depending on variant:    *<ol>    *<li><code>select (x + y) + (x + 1) as a, (x + x) as b from t(x, y)</code>    *<li><code>select (x + y) + (x + 1) as a, (x + (x + 1)) as b    * from t(x, y)</code>    *<li><code>select (x + y) + (x + 1) as a, (x + x) as b from t(x, y)    * where ((x + y)> 1) and ((x + y)> 1)</code>    *</ul>    */
+comment|/**    * Creates a program, depending on variant:    *    *<ol>    *<li><code>select (x + y) + (x + 1) as a, (x + x) as b from t(x, y)</code>    *<li><code>select (x + y) + (x + 1) as a, (x + (x + 1)) as b    * from t(x, y)</code>    *<li><code>select (x + y) + (x + 1) as a, (x + x) as b from t(x, y)    * where ((x + y)> 1) and ((x + y)> 1)</code>    *</ol>    */
 specifier|private
 name|RexProgramBuilder
 name|createProg
@@ -597,7 +597,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|plusOperator
+name|PLUS
 argument_list|,
 name|i0
 argument_list|,
@@ -671,7 +671,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|plusOperator
+name|PLUS
 argument_list|,
 name|i0
 argument_list|,
@@ -706,7 +706,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|plusOperator
+name|PLUS
 argument_list|,
 name|i0
 argument_list|,
@@ -732,7 +732,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|plusOperator
+name|PLUS
 argument_list|,
 name|i0
 argument_list|,
@@ -753,7 +753,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|plusOperator
+name|PLUS
 argument_list|,
 name|i0
 argument_list|,
@@ -788,7 +788,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|plusOperator
+name|PLUS
 argument_list|,
 name|t4
 argument_list|,
@@ -841,7 +841,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|greaterThanOperator
+name|GREATER_THAN
 argument_list|,
 name|t4
 argument_list|,
@@ -863,7 +863,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|andOperator
+name|AND
 argument_list|,
 name|t7
 argument_list|,

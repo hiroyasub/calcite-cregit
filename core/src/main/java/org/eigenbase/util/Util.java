@@ -39,16 +39,6 @@ name|java
 operator|.
 name|lang
 operator|.
-name|Iterable
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|lang
-operator|.
 name|reflect
 operator|.
 name|Array
@@ -212,13 +202,18 @@ specifier|public
 class|class
 name|Util
 block|{
+specifier|private
+name|Util
+parameter_list|()
+block|{
+block|}
 comment|//~ Static fields/initializers ---------------------------------------------
 comment|/**    * Name of the system property that controls whether the AWT work-around is    * enabled. This workaround allows Farrago to load its native libraries    * despite a conflict with AWT and allows applications that use AWT to    * function normally.    *    * @see #loadLibrary(String)    */
 specifier|public
 specifier|static
 specifier|final
 name|String
-name|awtWorkaroundProperty
+name|AWT_WORKAROUND_PROPERTY
 init|=
 literal|"org.eigenbase.util.AWT_WORKAROUND"
 decl_stmt|;
@@ -227,7 +222,7 @@ specifier|public
 specifier|static
 specifier|final
 name|String
-name|lineSeparator
+name|LINE_SEPARATOR
 init|=
 name|System
 operator|.
@@ -241,7 +236,7 @@ specifier|public
 specifier|static
 specifier|final
 name|String
-name|fileSeparator
+name|FILE_SEPARATOR
 init|=
 name|System
 operator|.
@@ -255,35 +250,9 @@ specifier|public
 specifier|static
 specifier|final
 name|String
-name|fileTimestampFormat
+name|FILE_TIMESTAMP_FORMAT
 init|=
 literal|"yyyy-MM-dd_HH_mm_ss"
-decl_stmt|;
-specifier|public
-specifier|static
-specifier|final
-name|Object
-index|[]
-name|emptyObjectArray
-init|=
-operator|new
-name|Object
-index|[
-literal|0
-index|]
-decl_stmt|;
-specifier|public
-specifier|static
-specifier|final
-name|String
-index|[]
-name|emptyStringArray
-init|=
-operator|new
-name|String
-index|[
-literal|0
-index|]
 decl_stmt|;
 specifier|private
 specifier|static
@@ -297,7 +266,7 @@ specifier|private
 specifier|static
 specifier|final
 name|Pattern
-name|javaIdPattern
+name|JAVA_ID_PATTERN
 init|=
 name|Pattern
 operator|.
@@ -329,7 +298,7 @@ extends|extends
 name|Enum
 argument_list|>
 argument_list|>
-name|mapClazzToMapNameToEnum
+name|MAP_CLASS_TO_MAP_NAME_TO_ENUM
 init|=
 operator|new
 name|WeakHashMap
@@ -352,7 +321,7 @@ specifier|static
 specifier|final
 name|String
 index|[]
-name|spaces
+name|SPACES
 init|=
 block|{
 literal|""
@@ -378,7 +347,6 @@ comment|//~ Methods ------------------------------------------------------------
 comment|/**    * Does nothing with its argument. Call this method when you have a value    * you are not interested in, but you don't want the compiler to warn that    * you are not using it.    */
 specifier|public
 specifier|static
-specifier|final
 name|void
 name|discard
 parameter_list|(
@@ -401,7 +369,6 @@ block|}
 comment|/**    * Does nothing with its argument. Call this method when you have a value    * you are not interested in, but you don't want the compiler to warn that    * you are not using it.    */
 specifier|public
 specifier|static
-specifier|final
 name|void
 name|discard
 parameter_list|(
@@ -424,30 +391,20 @@ block|}
 comment|/**    * Does nothing with its argument. Call this method when you have a value    * you are not interested in, but you don't want the compiler to warn that    * you are not using it.    */
 specifier|public
 specifier|static
-specifier|final
-name|void
+name|boolean
 name|discard
 parameter_list|(
 name|boolean
 name|b
 parameter_list|)
 block|{
-if|if
-condition|(
-literal|false
-condition|)
-block|{
-name|discard
-argument_list|(
+return|return
 name|b
-argument_list|)
-expr_stmt|;
-block|}
+return|;
 block|}
 comment|/**    * Does nothing with its argument. Call this method when you have a value    * you are not interested in, but you don't want the compiler to warn that    * you are not using it.    */
 specifier|public
 specifier|static
-specifier|final
 name|void
 name|discard
 parameter_list|(
@@ -470,7 +427,6 @@ block|}
 comment|/**    * Records that an exception has been caught but will not be re-thrown. If    * the tracer is not null, logs the exception to the tracer.    *    * @param e      Exception    * @param logger If not null, logs exception to this logger    */
 specifier|public
 specifier|static
-specifier|final
 name|void
 name|swallow
 parameter_list|(
@@ -506,7 +462,6 @@ block|}
 comment|/**    * Returns whether two objects are equal or are both null.    */
 specifier|public
 specifier|static
-specifier|final
 name|boolean
 name|equal
 parameter_list|(
@@ -1450,29 +1405,17 @@ literal|0
 decl_stmt|;
 for|for
 control|(
-name|int
-name|i
-init|=
-literal|0
-init|;
-name|i
-operator|<
+name|Field
+name|field
+range|:
 name|fields
-operator|.
-name|length
-condition|;
-name|i
-operator|++
 control|)
 block|{
 if|if
 condition|(
 name|isStatic
 argument_list|(
-name|fields
-index|[
-name|i
-index|]
+name|field
 argument_list|)
 condition|)
 block|{
@@ -1529,10 +1472,7 @@ name|pw
 operator|.
 name|print
 argument_list|(
-name|fields
-index|[
-name|i
-index|]
+name|field
 operator|.
 name|getName
 argument_list|()
@@ -1547,17 +1487,12 @@ argument_list|)
 expr_stmt|;
 name|Object
 name|val
-init|=
-literal|null
 decl_stmt|;
 try|try
 block|{
 name|val
 operator|=
-name|fields
-index|[
-name|i
-index|]
+name|field
 operator|.
 name|get
 argument_list|(
@@ -1602,7 +1537,6 @@ block|}
 comment|/**    * Prints a string, enclosing in double quotes (") and escaping if    * necessary. For examples,<code>printDoubleQuoted(w,"x\"y",false)</code>    * prints<code>"x\"y"</code>.    */
 specifier|public
 specifier|static
-specifier|final
 name|void
 name|printJavaString
 parameter_list|(
@@ -1753,7 +1687,7 @@ name|println
 argument_list|()
 expr_stmt|;
 block|}
-comment|/**    * Formats a {@link BigDecimal} value to a string in scientific notation For    * example<br>    *    *<ul>    *<li>A value of 0.00001234 would be formated as<code>1.234E-5</code></li>    *<li>A value of 100000.00 would be formated as<code>1.00E5</code></li>    *<li>A value of 100 (scale zero) would be formated as<code>    * 1E2</code></li><br>    * If<code>bd</code> has a precision higher than 20, this method will    * truncate the output string to have a precision of 20 (no rounding will be    * done, just a truncate).    */
+comment|/**    * Formats a {@link BigDecimal} value to a string in scientific notation For    * example<br>    *    *<ul>    *<li>A value of 0.00001234 would be formated as<code>1.234E-5</code></li>    *<li>A value of 100000.00 would be formated as<code>1.00E5</code></li>    *<li>A value of 100 (scale zero) would be formated as    *<code>1E2</code></li>    *</ul>    *    *<p>If<code>bd</code> has a precision higher than 20, this method will    * truncate the output string to have a precision of 20 (no rounding will be    * done, just a truncate).    */
 specifier|public
 specifier|static
 name|String
@@ -1990,7 +1924,6 @@ block|}
 comment|/**    * Replaces every occurrence of<code>find</code> in<code>s</code> with    *<code>replace</code>.    */
 specifier|public
 specifier|static
-specifier|final
 name|String
 name|replace
 parameter_list|(
@@ -2254,7 +2187,7 @@ init|=
 operator|new
 name|SimpleDateFormat
 argument_list|(
-name|fileTimestampFormat
+name|FILE_TIMESTAMP_FORMAT
 argument_list|)
 decl_stmt|;
 return|return
@@ -2384,7 +2317,7 @@ return|return
 name|s1
 return|;
 block|}
-comment|/**    * Converts an arbitrary string into a string suitable for use as a Java    * identifier.    *    *<p>The mapping is one-to-one (that is, distinct strings will produce    * distinct java identifiers). The mapping is also reversible, but the    * inverse mapping is not implemented.</p>    *    *<p>A valid Java identifier must start with a Unicode letter, underscore,    * or dollar sign ($). The other characters, if any, can be a Unicode    * letter, underscore, dollar sign, or digit.</p>    *    *<p>This method uses an algorithm similar to URL encoding. Valid    * characters are unchanged; invalid characters are converted to an    * underscore followed by the hex code of the character; and underscores are    * doubled.</p>    *    * Examples:    *    *<ul>    *<li><code>toJavaId("foo")</code> returns<code>"foo"</code>    *<li><code>toJavaId("foo bar")</code> returns<code>"foo_20_bar"</code>    *<li><code>toJavaId("foo_bar")</code> returns<code>"foo__bar"</code>    *<li><code>toJavaId("0bar")</code> returns<code>"_40_bar"</code> (digits    * are illegal as a prefix)    *<li><code>toJavaId("foo0bar")</code> returns<code>"foo0bar"</code>    *</ul>    *    * @testcase    */
+comment|/**    * Converts an arbitrary string into a string suitable for use as a Java    * identifier.    *    *<p>The mapping is one-to-one (that is, distinct strings will produce    * distinct java identifiers). The mapping is also reversible, but the    * inverse mapping is not implemented.</p>    *    *<p>A valid Java identifier must start with a Unicode letter, underscore,    * or dollar sign ($). The other characters, if any, can be a Unicode    * letter, underscore, dollar sign, or digit.</p>    *    *<p>This method uses an algorithm similar to URL encoding. Valid    * characters are unchanged; invalid characters are converted to an    * underscore followed by the hex code of the character; and underscores are    * doubled.</p>    *    * Examples:    *    *<ul>    *<li><code>toJavaId("foo")</code> returns<code>"foo"</code>    *<li><code>toJavaId("foo bar")</code> returns<code>"foo_20_bar"</code>    *<li><code>toJavaId("foo_bar")</code> returns<code>"foo__bar"</code>    *<li><code>toJavaId("0bar")</code> returns<code>"_40_bar"</code> (digits    * are illegal as a prefix)    *<li><code>toJavaId("foo0bar")</code> returns<code>"foo0bar"</code>    *</ul>    */
 specifier|public
 specifier|static
 name|String
@@ -2401,7 +2334,7 @@ comment|// If it's already a valid Java id (and doesn't contain any
 comment|// underscores), return it unchanged.
 if|if
 condition|(
-name|javaIdPattern
+name|JAVA_ID_PATTERN
 operator|.
 name|matcher
 argument_list|(
@@ -3324,7 +3257,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**    * Returns a {@link java.lang.RuntimeException} indicating that a particular    * feature has not been implemented, but should be.    *    *<p>If every 'hole' in our functionality uses this method, it will be    * easier for us to identity the holes. Throwing a {@link    * java.lang.UnsupportedOperationException} isn't as good, because sometimes    * we actually want to partially implement an API.    *    *<p>Example usage:    *    *<blockquote>    *<pre><code>class MyVisitor extends BaseVisitor {    *     void accept(Foo foo) {    *         // Exception will identify which subclass forgot to override    *         // this method    *         throw Util.needToImplement(this);    *     }    * }</pre>    *</blockquote>    *    * @param o The object which was the target of the call, or null. Passing    *          the object gives crucial information if a method needs to be    *          overridden and a subclass forgot to do so.    * @return an {@link UnsupportedOperationException}.    */
+comment|/**    * Returns a {@link java.lang.RuntimeException} indicating that a particular    * feature has not been implemented, but should be.    *    *<p>If every 'hole' in our functionality uses this method, it will be    * easier for us to identity the holes. Throwing a    * {@link java.lang.UnsupportedOperationException} isn't as good, because    * sometimes we actually want to partially implement an API.    *    *<p>Example usage:    *    *<blockquote>    *<pre><code>class MyVisitor extends BaseVisitor {    *     void accept(Foo foo) {    *         // Exception will identify which subclass forgot to override    *         // this method    *         throw Util.needToImplement(this);    *     }    * }</code></pre>    *</blockquote>    *    * @param o The object which was the target of the call, or null. Passing    *          the object gives crucial information if a method needs to be    *          overridden and a subclass forgot to do so.    * @return an {@link UnsupportedOperationException}.    */
 specifier|public
 specifier|static
 name|RuntimeException
@@ -3403,7 +3336,7 @@ return|return
 name|argument
 return|;
 block|}
-comment|/**    * Uses {@link System#loadLibrary(String)} to load a native library    * correctly under mingw (Windows/Cygwin) and Linux environments.    *    *<p>This method also implements a work-around for applications that wish    * to load AWT. AWT conflicts with some native libraries in a way that    * requires AWT to be loaded first. This method checks the system property    * named {@link #awtWorkaroundProperty} and if it is set to "on" (default;    * case-insensitive) it pre-loads AWT to avoid the conflict.    *    * @param libName the name of the library to load, as in {@link    *                System#loadLibrary(String)}.    */
+comment|/**    * Uses {@link System#loadLibrary(String)} to load a native library    * correctly under mingw (Windows/Cygwin) and Linux environments.    *    *<p>This method also implements a work-around for applications that wish    * to load AWT. AWT conflicts with some native libraries in a way that    * requires AWT to be loaded first. This method checks the system property    * named {@link #AWT_WORKAROUND_PROPERTY} and if it is set to "on" (default;    * case-insensitive) it pre-loads AWT to avoid the conflict.    *    * @param libName the name of the library to load, as in {@link    *                System#loadLibrary(String)}.    */
 specifier|public
 specifier|static
 name|void
@@ -3420,7 +3353,7 @@ name|System
 operator|.
 name|getProperty
 argument_list|(
-name|awtWorkaroundProperty
+name|AWT_WORKAROUND_PROPERTY
 argument_list|,
 literal|"on"
 argument_list|)
@@ -4096,7 +4029,7 @@ name|toString
 argument_list|()
 return|;
 block|}
-comment|/**    * Converts a Java timezone to POSIX format, so that the boost C++ library    * can instantiate timezone objects.    *    *<p><a    * href="http://www.opengroup.org/onlinepubs/000095399/basedefs/xbd_chap08.html">POSIX    * IEEE 1003.1</a> defines a format for timezone specifications.    *    *<p>The boost C++ library can read these specifications and instantiate<a    * href="http://www.boost.org/doc/html/date_time/local_time.html#date_time.local_time.posix_time_zone">    * posix_time_zone</a> objects from them. The purpose of this method,    * therefore, is to allow the C++ code such as the fennel calculator to use    * the same notion of timezone as Java code.    *    *<p>The format is as follows:    *    *<blockquote>"std offset dst [offset],start[/time],end[/time]"    *</blockquote>    *    * where:    *    *<ul>    *<li>'std' specifies the abbrev of the time zone.    *<li>'offset' is the offset from UTC, and takes the form<code>    * [+|-]hh[:mm[:ss]] {h=0-23, m/s=0-59}</code>    *<li>'dst' specifies the abbrev of the time zone during daylight savings    * time    *<li>The second offset is how many hours changed during DST. Default=1    *<li>'start'& 'end' are the dates when DST goes into (and out of) effect.    * They can each be one of three forms:    *    *<ol>    *<li>Mm.w.d {month=1-12, week=1-5 (5 is always last), day=0-6}    *<li>Jn {n=1-365 Feb29 is never counted}    *<li>n {n=0-365 Feb29 is counted in leap years}    *</ol>    *<li>'time' has the same format as 'offset', and defaults to 02:00:00    *    *<p>For example:    *    *<ul>    *<li>"PST-8PDT01:00:00,M4.1.0/02:00:00,M10.1.0/02:00:00"; or more tersely    *<li>"PST-8PDT,M4.1.0,M10.1.0"    *</ul>    *    *<p>(Real format strings do not contain spaces; they are in the above    * template only for readability.)    *    *<p>Boost apparently diverges from the POSIX standard in how it treats the    * sign of timezone offsets. The POSIX standard states '<i>If preceded by a    * '-', the timezone shall be east of the Prime Meridian; otherwise, it    * shall be west</i>', yet boost requires the opposite. For instance, PST    * has offset '-8' above. This method generates timezone strings consistent    * with boost's expectations.    *    * @param tz      Timezone    * @param verbose Whether to include fields which can be omitted because    *                they have their default values    * @return Timezone in POSIX format (offset sign reversed, per boost's    * idiosyncracies)    */
+comment|/**    * Converts a Java timezone to POSIX format, so that the boost C++ library    * can instantiate timezone objects.    *    *<p><a    * href="http://www.opengroup.org/onlinepubs/000095399/basedefs/xbd_chap08.html">POSIX    * IEEE 1003.1</a> defines a format for timezone specifications.    *    *<p>The boost C++ library can read these specifications and instantiate<a    * href="http://www.boost.org/doc/html/date_time/local_time.html#date_time.local_time.posix_time_zone">    * posix_time_zone</a> objects from them. The purpose of this method,    * therefore, is to allow the C++ code such as the fennel calculator to use    * the same notion of timezone as Java code.    *    *<p>The format is as follows:    *    *<blockquote>"std offset dst [offset],start[/time],end[/time]"    *</blockquote>    *    * where:    *    *<ul>    *<li>'std' specifies the abbrev of the time zone.    *<li>'offset' is the offset from UTC, and takes the form    *<code>[+|-]hh[:mm[:ss]] {h=0-23, m/s=0-59}</code></li>    *<li>'dst' specifies the abbrev of the time zone during daylight savings    * time    *<li>The second offset is how many hours changed during DST. Default=1    *<li>'start' and 'end' are the dates when DST goes into (and out of)    *     effect.<br>    *<br>    *     They can each be one of three forms:    *    *<ol>    *<li>Mm.w.d {month=1-12, week=1-5 (5 is always last), day=0-6}    *<li>Jn {n=1-365 Feb29 is never counted}    *<li>n {n=0-365 Feb29 is counted in leap years}    *</ol>    *</li>    *    *<li>'time' has the same format as 'offset', and defaults to 02:00:00.</li>    *</ul>    *    *<p>For example:</p>    *    *<ul>    *<li>"PST-8PDT01:00:00,M4.1.0/02:00:00,M10.1.0/02:00:00"; or more tersely    *<li>"PST-8PDT,M4.1.0,M10.1.0"    *</ul>    *    *<p>(Real format strings do not contain spaces; they are in the above    * template only for readability.)    *    *<p>Boost apparently diverges from the POSIX standard in how it treats the    * sign of timezone offsets. The POSIX standard states '<i>If preceded by a    * '-', the timezone shall be east of the Prime Meridian; otherwise, it    * shall be west</i>', yet boost requires the opposite. For instance, PST    * has offset '-8' above. This method generates timezone strings consistent    * with boost's expectations.    *    * @param tz      Timezone    * @param verbose Whether to include fields which can be omitted because    *                they have their default values    * @return Timezone in POSIX format (offset sign reversed, per boost's    * idiosyncracies)    */
 specifier|public
 specifier|static
 name|String
@@ -6181,7 +6114,7 @@ argument_list|,
 name|T
 argument_list|>
 operator|)
-name|mapClazzToMapNameToEnum
+name|MAP_CLASS_TO_MAP_NAME_TO_ENUM
 operator|.
 name|get
 argument_list|(
@@ -6202,7 +6135,7 @@ argument_list|(
 name|clazz
 argument_list|)
 expr_stmt|;
-name|mapClazzToMapNameToEnum
+name|MAP_CLASS_TO_MAP_NAME_TO_ENUM
 operator|.
 name|put
 argument_list|(

@@ -14,7 +14,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * Contains {@link org.eigenbase.util.Glossary#Sql2003} SQL state codes. Sql  * Sate codes are defined in  *  *<pre><code>&#64;sql.2003 Part 2 Section 23.1</code></pre>  */
+comment|/**  * Contains {@link org.eigenbase.util.Glossary#SQL2003} SQL state codes. Sql  * Sate codes are defined in  *  *<pre><code>&#64;sql.2003 Part 2 Section 23.1</code></pre>  */
 end_comment
 
 begin_enum

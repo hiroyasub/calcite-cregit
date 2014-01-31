@@ -94,7 +94,7 @@ name|otcNiladic
 argument_list|,
 name|SqlFunctionCategory
 operator|.
-name|System
+name|SYSTEM
 argument_list|)
 expr_stmt|;
 block|}
@@ -107,7 +107,7 @@ block|{
 return|return
 name|SqlSyntax
 operator|.
-name|FunctionId
+name|FUNCTION_ID
 return|;
 block|}
 comment|// All of the string constants are monotonic.

@@ -204,11 +204,11 @@ name|rtiThirdArgType
 argument_list|,
 name|SqlTypeTransforms
 operator|.
-name|toNullable
+name|TO_NULLABLE
 argument_list|,
 name|SqlTypeTransforms
 operator|.
-name|toVarying
+name|TO_VARYING
 argument_list|)
 argument_list|,
 literal|null
@@ -270,7 +270,7 @@ argument_list|)
 argument_list|,
 name|SqlFunctionCategory
 operator|.
-name|String
+name|STRING
 argument_list|)
 expr_stmt|;
 block|}

@@ -32,7 +32,7 @@ specifier|public
 specifier|static
 specifier|final
 name|boolean
-name|Dt239Fixed
+name|DT239_FIXED
 init|=
 literal|false
 decl_stmt|;
@@ -40,7 +40,7 @@ specifier|public
 specifier|static
 specifier|final
 name|boolean
-name|Dt785Fixed
+name|DT785_FIXED
 init|=
 literal|false
 decl_stmt|;
@@ -50,7 +50,7 @@ specifier|public
 specifier|static
 specifier|final
 name|boolean
-name|Dt1446Fixed
+name|DT1446_FIXED
 init|=
 literal|false
 decl_stmt|;
@@ -60,7 +60,7 @@ specifier|public
 specifier|static
 specifier|final
 name|boolean
-name|Fnl3Fixed
+name|FNL3_FIXED
 init|=
 literal|false
 decl_stmt|;
@@ -69,7 +69,7 @@ specifier|public
 specifier|static
 specifier|final
 name|boolean
-name|Fnl77Fixed
+name|FNL77_FIXED
 init|=
 literal|false
 decl_stmt|;
@@ -78,7 +78,7 @@ specifier|public
 specifier|static
 specifier|final
 name|boolean
-name|Frg327Fixed
+name|FRG327_FIXED
 init|=
 literal|false
 decl_stmt|;
@@ -87,7 +87,7 @@ specifier|public
 specifier|static
 specifier|final
 name|boolean
-name|Frg377Fixed
+name|FRG377_FIXED
 init|=
 literal|false
 decl_stmt|;
@@ -96,7 +96,7 @@ specifier|public
 specifier|static
 specifier|final
 name|boolean
-name|Dt1684Fixed
+name|DT1684_FIXED
 init|=
 literal|false
 decl_stmt|;
@@ -114,7 +114,7 @@ specifier|public
 specifier|static
 specifier|final
 name|boolean
-name|Fnl25Fixed
+name|FNL25_FIXED
 init|=
 literal|false
 decl_stmt|;
@@ -127,7 +127,7 @@ specifier|public
 specifier|static
 specifier|final
 name|boolean
-name|Frg73Fixed
+name|FRG73_FIXED
 init|=
 literal|false
 decl_stmt|;
@@ -136,7 +136,7 @@ specifier|public
 specifier|static
 specifier|final
 name|boolean
-name|Frg78Fixed
+name|FRG78_FIXED
 init|=
 literal|false
 decl_stmt|;
@@ -145,7 +145,7 @@ specifier|public
 specifier|static
 specifier|final
 name|boolean
-name|Frg140Fixed
+name|FRG140_FIXED
 init|=
 literal|false
 decl_stmt|;
@@ -154,7 +154,7 @@ specifier|public
 specifier|static
 specifier|final
 name|boolean
-name|Frg187Fixed
+name|FRG187_FIXED
 init|=
 literal|false
 decl_stmt|;
@@ -163,7 +163,7 @@ specifier|public
 specifier|static
 specifier|final
 name|boolean
-name|Frg189Fixed
+name|FRG189_FIXED
 init|=
 literal|false
 decl_stmt|;
@@ -177,7 +177,7 @@ specifier|public
 specifier|static
 specifier|final
 name|boolean
-name|Frg254Fixed
+name|FRG254_FIXED
 init|=
 literal|false
 decl_stmt|;
@@ -186,7 +186,7 @@ specifier|public
 specifier|static
 specifier|final
 name|boolean
-name|Frg282Fixed
+name|FRG282_FIXED
 init|=
 literal|false
 decl_stmt|;
@@ -195,7 +195,7 @@ specifier|public
 specifier|static
 specifier|final
 name|boolean
-name|Frg296Fixed
+name|FRG296_FIXED
 init|=
 literal|false
 decl_stmt|;
@@ -204,7 +204,7 @@ specifier|public
 specifier|static
 specifier|final
 name|boolean
-name|Frg375Fixed
+name|FRG375_FIXED
 init|=
 literal|false
 decl_stmt|;
@@ -213,7 +213,7 @@ specifier|public
 specifier|static
 specifier|final
 name|boolean
-name|Frg378Fixed
+name|FRG378_FIXED
 init|=
 literal|true
 decl_stmt|;
@@ -222,7 +222,7 @@ specifier|public
 specifier|static
 specifier|final
 name|boolean
-name|TodoFixed
+name|TODO_FIXED
 init|=
 literal|false
 decl_stmt|;

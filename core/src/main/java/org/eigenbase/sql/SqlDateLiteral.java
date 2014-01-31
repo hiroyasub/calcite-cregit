@@ -63,6 +63,18 @@ name|*
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
+name|util14
+operator|.
+name|DateTimeUtil
+import|;
+end_import
+
 begin_comment
 comment|/**  * A SQL literal representing a DATE value, such as<code>DATE  * '2004-10-22'</code>.  *  *<p>Create values using {@link SqlLiteral#createDate}.  */
 end_comment
@@ -96,9 +108,9 @@ name|DATE
 argument_list|,
 literal|0
 argument_list|,
-name|SqlParserUtil
+name|DateTimeUtil
 operator|.
-name|DateFormatStr
+name|DATE_FORMAT_STRING
 argument_list|,
 name|pos
 argument_list|)

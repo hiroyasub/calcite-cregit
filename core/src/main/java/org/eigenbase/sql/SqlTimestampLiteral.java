@@ -51,6 +51,18 @@ name|*
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
+name|util14
+operator|.
+name|DateTimeUtil
+import|;
+end_import
+
 begin_comment
 comment|/**  * A SQL literal representing a TIMESTAMP value, for example<code>TIMESTAMP  * '1969-07-21 03:15 GMT'</code>.  *  *<p>Create values using {@link SqlLiteral#createTimestamp}.  */
 end_comment
@@ -91,9 +103,9 @@ name|TIMESTAMP
 argument_list|,
 name|precision
 argument_list|,
-name|SqlParserUtil
+name|DateTimeUtil
 operator|.
-name|TimestampFormatStr
+name|TIMESTAMP_FORMAT_STRING
 argument_list|,
 name|pos
 argument_list|)

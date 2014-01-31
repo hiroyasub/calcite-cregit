@@ -1011,7 +1011,7 @@ decl_stmt|;
 comment|// other strings
 specifier|final
 name|BitString
-name|b0_1
+name|b0x1
 init|=
 operator|new
 name|BitString
@@ -1023,7 +1023,7 @@ argument_list|)
 decl_stmt|;
 specifier|final
 name|BitString
-name|b0_12
+name|b0x12
 init|=
 operator|new
 name|BitString
@@ -1138,7 +1138,7 @@ name|assertEquals
 argument_list|(
 literal|"0"
 argument_list|,
-name|b0_1
+name|b0x1
 operator|.
 name|toHexString
 argument_list|()
@@ -1148,7 +1148,7 @@ name|assertEquals
 argument_list|(
 literal|"000"
 argument_list|,
-name|b0_12
+name|b0x12
 operator|.
 name|toHexString
 argument_list|()

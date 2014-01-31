@@ -156,7 +156,7 @@ return|return
 name|charset
 return|;
 block|}
-comment|/**    * Returns a SerializableCharset wrapping the given Charset, or null if the    *<coded>charset</code> is null.    *    * @param charset Character set to wrap, or null    * @return Wrapped charset    */
+comment|/**    * Returns a SerializableCharset wrapping the given Charset, or null if the    * {@code charset} is null.    *    * @param charset Character set to wrap, or null    * @return Wrapped charset    */
 specifier|public
 specifier|static
 name|SerializableCharset

@@ -794,7 +794,7 @@ name|syntax
 operator|!=
 name|SqlSyntax
 operator|.
-name|Function
+name|FUNCTION
 condition|)
 block|{
 return|return

@@ -26,7 +26,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  *<code>SqlFunctionCategory</codde> is an enumeration of the categories of  * SQL-invoked routines.  */
+comment|/**  * Enumeration of the categories of  * SQL-invoked routines.  */
 end_comment
 
 begin_enum
@@ -34,56 +34,56 @@ specifier|public
 enum|enum
 name|SqlFunctionCategory
 block|{
-name|String
+name|STRING
 argument_list|(
 literal|"STRING"
 argument_list|,
 literal|"String function"
 argument_list|)
 block|,
-name|Numeric
+name|NUMERIC
 argument_list|(
 literal|"NUMERIC"
 argument_list|,
 literal|"Numeric function"
 argument_list|)
 block|,
-name|TimeDate
+name|TIMEDATE
 argument_list|(
 literal|"TIMEDATE"
 argument_list|,
 literal|"Time and date function"
 argument_list|)
 block|,
-name|System
+name|SYSTEM
 argument_list|(
 literal|"SYSTEM"
 argument_list|,
 literal|"System function"
 argument_list|)
 block|,
-name|UserDefinedFunction
+name|USER_DEFINED_FUNCTION
 argument_list|(
 literal|"UDF"
 argument_list|,
 literal|"User-defined function"
 argument_list|)
 block|,
-name|UserDefinedProcedure
+name|USER_DEFINED_PROCEDURE
 argument_list|(
 literal|"UDP"
 argument_list|,
 literal|"User-defined procedure"
 argument_list|)
 block|,
-name|UserDefinedConstructor
+name|USER_DEFINED_CONSTRUCTOR
 argument_list|(
 literal|"UDC"
 argument_list|,
 literal|"User-defined constructor"
 argument_list|)
 block|,
-name|UserDefinedSpecificFunction
+name|USER_DEFINED_SPECIFIC_FUNCTION
 argument_list|(
 literal|"UDF_SPECIFIC"
 argument_list|,

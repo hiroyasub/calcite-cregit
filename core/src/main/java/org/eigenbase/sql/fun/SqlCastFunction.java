@@ -135,7 +135,7 @@ literal|null
 argument_list|,
 name|SqlFunctionCategory
 operator|.
-name|System
+name|SYSTEM
 argument_list|)
 expr_stmt|;
 block|}
@@ -769,7 +769,7 @@ block|{
 return|return
 name|SqlSyntax
 operator|.
-name|Special
+name|SPECIAL
 return|;
 block|}
 specifier|public

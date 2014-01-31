@@ -109,7 +109,7 @@ name|SqlKind
 operator|.
 name|ROW
 argument_list|,
-name|MaxPrec
+name|MDX_PRECEDENCE
 argument_list|,
 literal|false
 argument_list|,
@@ -136,7 +136,7 @@ comment|// Function syntax would work too.
 return|return
 name|SqlSyntax
 operator|.
-name|Special
+name|SPECIAL
 return|;
 block|}
 specifier|public

@@ -126,7 +126,7 @@ decl_stmt|;
 return|return
 name|SqlStdOperatorTable
 operator|.
-name|selectOperator
+name|SELECT
 operator|.
 name|createCall
 argument_list|(
@@ -155,7 +155,7 @@ argument_list|)
 argument_list|,
 name|SqlStdOperatorTable
 operator|.
-name|valuesOperator
+name|VALUES
 operator|.
 name|createCall
 argument_list|(
@@ -165,7 +165,7 @@ name|ZERO
 argument_list|,
 name|SqlStdOperatorTable
 operator|.
-name|rowConstructor
+name|ROW
 operator|.
 name|createCall
 argument_list|(

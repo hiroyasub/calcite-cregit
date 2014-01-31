@@ -194,16 +194,10 @@ expr_stmt|;
 block|}
 if|else if
 condition|(
-operator|!
-operator|(
 name|stmt
 operator|instanceof
 name|PreparedStatement
-operator|)
 condition|)
-block|{
-block|}
-else|else
 block|{
 try|try
 block|{

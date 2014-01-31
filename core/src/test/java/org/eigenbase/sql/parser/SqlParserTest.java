@@ -2570,7 +2570,7 @@ condition|(
 operator|!
 name|Bug
 operator|.
-name|TodoFixed
+name|TODO_FIXED
 condition|)
 block|{
 return|return;
@@ -2606,7 +2606,7 @@ condition|(
 operator|!
 name|Bug
 operator|.
-name|TodoFixed
+name|TODO_FIXED
 condition|)
 block|{
 return|return;
@@ -2664,7 +2664,7 @@ condition|(
 operator|!
 name|Bug
 operator|.
-name|TodoFixed
+name|TODO_FIXED
 condition|)
 block|{
 return|return;
@@ -3533,7 +3533,7 @@ if|if
 condition|(
 name|Bug
 operator|.
-name|Frg73Fixed
+name|FRG73_FIXED
 condition|)
 block|{
 name|checkFails
@@ -3556,7 +3556,7 @@ if|if
 condition|(
 name|Bug
 operator|.
-name|Frg73Fixed
+name|FRG73_FIXED
 condition|)
 block|{
 name|check
@@ -3578,7 +3578,7 @@ if|if
 condition|(
 name|Bug
 operator|.
-name|Frg73Fixed
+name|FRG73_FIXED
 condition|)
 block|{
 name|checkFails
@@ -3596,7 +3596,7 @@ if|if
 condition|(
 name|Bug
 operator|.
-name|Frg73Fixed
+name|FRG73_FIXED
 condition|)
 block|{
 comment|// Test should fail, and it does, but it should give "*/" as the
@@ -5351,7 +5351,7 @@ condition|(
 operator|!
 name|Bug
 operator|.
-name|Frg78Fixed
+name|FRG78_FIXED
 condition|)
 block|{
 return|return;

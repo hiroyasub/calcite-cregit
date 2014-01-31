@@ -146,7 +146,7 @@ name|add
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|andOperator
+name|AND
 argument_list|)
 expr_stmt|;
 comment|/** NOTE the OR operator is NOT missing.      * see {@link org.eigenbase.test.RexTransformerTest} */
@@ -156,7 +156,7 @@ name|add
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|equalsOperator
+name|EQUALS
 argument_list|)
 expr_stmt|;
 name|transformableOperators
@@ -165,7 +165,7 @@ name|add
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|notEqualsOperator
+name|NOT_EQUALS
 argument_list|)
 expr_stmt|;
 name|transformableOperators
@@ -174,7 +174,7 @@ name|add
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|greaterThanOperator
+name|GREATER_THAN
 argument_list|)
 expr_stmt|;
 name|transformableOperators
@@ -183,7 +183,7 @@ name|add
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|greaterThanOrEqualOperator
+name|GREATER_THAN_OR_EQUAL
 argument_list|)
 expr_stmt|;
 name|transformableOperators
@@ -192,7 +192,7 @@ name|add
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|lessThanOperator
+name|LESS_THAN
 argument_list|)
 expr_stmt|;
 name|transformableOperators
@@ -201,7 +201,7 @@ name|add
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|lessThanOrEqualOperator
+name|LESS_THAN_OR_EQUAL
 argument_list|)
 expr_stmt|;
 block|}
@@ -479,7 +479,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|isNotNullOperator
+name|IS_NOT_NULL
 argument_list|,
 name|operand
 argument_list|)
@@ -506,7 +506,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|equalsOperator
+name|EQUALS
 argument_list|,
 name|operand
 argument_list|,
@@ -522,7 +522,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|andOperator
+name|AND
 argument_list|,
 name|notNullNode
 argument_list|,
@@ -557,7 +557,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|equalsOperator
+name|EQUALS
 argument_list|,
 name|node
 argument_list|,
@@ -691,7 +691,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|isNotNullOperator
+name|IS_NOT_NULL
 argument_list|,
 name|operands
 operator|.
@@ -734,7 +734,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|isNotNullOperator
+name|IS_NOT_NULL
 argument_list|,
 name|operands
 operator|.
@@ -780,7 +780,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|andOperator
+name|AND
 argument_list|,
 name|isNotNullOne
 argument_list|,
@@ -828,7 +828,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|andOperator
+name|AND
 argument_list|,
 name|intoFinalAnd
 argument_list|,

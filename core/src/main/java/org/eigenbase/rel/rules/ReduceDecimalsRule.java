@@ -800,7 +800,7 @@ name|put
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|castFunc
+name|CAST
 argument_list|,
 name|cast
 argument_list|)
@@ -820,7 +820,7 @@ name|put
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|prefixMinusOperator
+name|UNARY_MINUS
 argument_list|,
 name|passThrough
 argument_list|)
@@ -831,7 +831,7 @@ name|put
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|absFunc
+name|ABS
 argument_list|,
 name|passThrough
 argument_list|)
@@ -842,7 +842,7 @@ name|put
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|isNullOperator
+name|IS_NULL
 argument_list|,
 name|passThrough
 argument_list|)
@@ -853,7 +853,7 @@ name|put
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|isNotNullOperator
+name|IS_NOT_NULL
 argument_list|,
 name|passThrough
 argument_list|)
@@ -873,7 +873,7 @@ name|put
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|divideOperator
+name|DIVIDE
 argument_list|,
 name|arithmetic
 argument_list|)
@@ -884,7 +884,7 @@ name|put
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|multiplyOperator
+name|MULTIPLY
 argument_list|,
 name|arithmetic
 argument_list|)
@@ -895,7 +895,7 @@ name|put
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|plusOperator
+name|PLUS
 argument_list|,
 name|arithmetic
 argument_list|)
@@ -906,7 +906,7 @@ name|put
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|minusOperator
+name|MINUS
 argument_list|,
 name|arithmetic
 argument_list|)
@@ -917,7 +917,7 @@ name|put
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|modFunc
+name|MOD
 argument_list|,
 name|arithmetic
 argument_list|)
@@ -928,7 +928,7 @@ name|put
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|equalsOperator
+name|EQUALS
 argument_list|,
 name|arithmetic
 argument_list|)
@@ -939,7 +939,7 @@ name|put
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|greaterThanOperator
+name|GREATER_THAN
 argument_list|,
 name|arithmetic
 argument_list|)
@@ -950,7 +950,7 @@ name|put
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|greaterThanOrEqualOperator
+name|GREATER_THAN_OR_EQUAL
 argument_list|,
 name|arithmetic
 argument_list|)
@@ -961,7 +961,7 @@ name|put
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|lessThanOperator
+name|LESS_THAN
 argument_list|,
 name|arithmetic
 argument_list|)
@@ -972,7 +972,7 @@ name|put
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|lessThanOrEqualOperator
+name|LESS_THAN_OR_EQUAL
 argument_list|,
 name|arithmetic
 argument_list|)
@@ -992,7 +992,7 @@ name|put
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|floorFunc
+name|FLOOR
 argument_list|,
 name|floor
 argument_list|)
@@ -1012,7 +1012,7 @@ name|put
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|ceilFunc
+name|CEIL
 argument_list|,
 name|ceil
 argument_list|)
@@ -1032,7 +1032,7 @@ name|put
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|reinterpretOperator
+name|REINTERPRET
 argument_list|,
 name|reinterpret
 argument_list|)
@@ -1052,7 +1052,7 @@ name|put
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|caseOperator
+name|CASE
 argument_list|,
 name|caseExpander
 argument_list|)
@@ -1466,7 +1466,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|multiplyOperator
+name|MULTIPLY
 argument_list|,
 name|value
 argument_list|,
@@ -1555,7 +1555,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|greaterThanOrEqualOperator
+name|GREATER_THAN_OR_EQUAL
 argument_list|,
 name|value
 argument_list|,
@@ -1576,7 +1576,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|lessThanOrEqualOperator
+name|LESS_THAN_OR_EQUAL
 argument_list|,
 name|value
 argument_list|,
@@ -1619,7 +1619,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|greaterThanOperator
+name|GREATER_THAN
 argument_list|,
 name|value
 argument_list|,
@@ -2035,7 +2035,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|caseOperator
+name|CASE
 argument_list|,
 name|condition
 argument_list|,
@@ -2072,7 +2072,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|caseOperator
+name|CASE
 argument_list|,
 name|whenA
 argument_list|,
@@ -2104,7 +2104,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|plusOperator
+name|PLUS
 argument_list|,
 name|a
 argument_list|,
@@ -2130,7 +2130,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|minusOperator
+name|MINUS
 argument_list|,
 name|a
 argument_list|,
@@ -2156,7 +2156,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|divideIntegerOperator
+name|DIVIDE_INTEGER
 argument_list|,
 name|a
 argument_list|,
@@ -2182,7 +2182,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|multiplyOperator
+name|MULTIPLY
 argument_list|,
 name|a
 argument_list|,
@@ -2205,7 +2205,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|greaterThanOperator
+name|GREATER_THAN
 argument_list|,
 name|a
 argument_list|,
@@ -2231,7 +2231,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|lessThanOperator
+name|LESS_THAN
 argument_list|,
 name|a
 argument_list|,
@@ -3019,7 +3019,7 @@ argument_list|()
 operator|==
 name|SqlStdOperatorTable
 operator|.
-name|modFunc
+name|MOD
 condition|)
 block|{
 return|return
@@ -3289,7 +3289,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|multiplyOperator
+name|MULTIPLY
 argument_list|,
 name|dividend
 argument_list|,
@@ -3718,7 +3718,7 @@ argument_list|()
 operator|==
 name|SqlStdOperatorTable
 operator|.
-name|floorFunc
+name|FLOOR
 assert|;
 name|RexNode
 name|decValue
@@ -3899,7 +3899,7 @@ argument_list|()
 operator|==
 name|SqlStdOperatorTable
 operator|.
-name|ceilFunc
+name|CEIL
 assert|;
 name|RexNode
 name|decValue

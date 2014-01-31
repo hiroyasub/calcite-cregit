@@ -79,7 +79,7 @@ specifier|private
 specifier|static
 specifier|final
 name|String
-name|unionTree
+name|UNION_TREE
 init|=
 literal|"(select name from dept union select ename from emp)"
 operator|+
@@ -285,7 +285,7 @@ operator|.
 name|build
 argument_list|()
 argument_list|,
-name|unionTree
+name|UNION_TREE
 argument_list|)
 expr_stmt|;
 block|}
@@ -339,7 +339,7 @@ operator|.
 name|build
 argument_list|()
 argument_list|,
-name|unionTree
+name|UNION_TREE
 argument_list|)
 expr_stmt|;
 block|}
@@ -386,7 +386,7 @@ operator|.
 name|build
 argument_list|()
 argument_list|,
-name|unionTree
+name|UNION_TREE
 argument_list|)
 expr_stmt|;
 block|}

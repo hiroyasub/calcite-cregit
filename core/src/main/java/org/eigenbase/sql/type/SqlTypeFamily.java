@@ -415,7 +415,7 @@ case|:
 return|return
 name|SqlTypeName
 operator|.
-name|charTypes
+name|CHAR_TYPES
 return|;
 case|case
 name|BINARY
@@ -423,7 +423,7 @@ case|:
 return|return
 name|SqlTypeName
 operator|.
-name|binaryTypes
+name|BINARY_TYPES
 return|;
 case|case
 name|NUMERIC
@@ -431,7 +431,7 @@ case|:
 return|return
 name|SqlTypeName
 operator|.
-name|numericTypes
+name|NUMERIC_TYPES
 return|;
 case|case
 name|DATE
@@ -478,7 +478,7 @@ case|:
 return|return
 name|SqlTypeName
 operator|.
-name|booleanTypes
+name|BOOLEAN_TYPES
 return|;
 case|case
 name|INTERVAL_YEAR_MONTH
@@ -512,7 +512,7 @@ case|:
 return|return
 name|SqlTypeName
 operator|.
-name|stringTypes
+name|STRING_TYPES
 return|;
 case|case
 name|APPROXIMATE_NUMERIC
@@ -520,7 +520,7 @@ case|:
 return|return
 name|SqlTypeName
 operator|.
-name|approxTypes
+name|APPROX_TYPES
 return|;
 case|case
 name|EXACT_NUMERIC
@@ -528,7 +528,7 @@ case|:
 return|return
 name|SqlTypeName
 operator|.
-name|exactTypes
+name|EXACT_TYPES
 return|;
 case|case
 name|INTEGER
@@ -536,7 +536,7 @@ case|:
 return|return
 name|SqlTypeName
 operator|.
-name|intTypes
+name|INT_TYPES
 return|;
 case|case
 name|DATETIME
@@ -544,7 +544,7 @@ case|:
 return|return
 name|SqlTypeName
 operator|.
-name|datetimeTypes
+name|DATETIME_TYPES
 return|;
 case|case
 name|DATETIME_INTERVAL
@@ -552,7 +552,7 @@ case|:
 return|return
 name|SqlTypeName
 operator|.
-name|intervalTypes
+name|INTERVAL_TYPES
 return|;
 case|case
 name|MULTISET
@@ -612,7 +612,7 @@ case|:
 return|return
 name|SqlTypeName
 operator|.
-name|allTypes
+name|ALL_TYPES
 return|;
 case|case
 name|CURSOR

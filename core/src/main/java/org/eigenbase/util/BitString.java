@@ -36,7 +36,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * String of bits.  *  *<p>A bit string logically consists of a set of '0' and '1' values, of a  * specified length. The length is preserved even if this means that the bit  * string has leading '0's.  *  *<p>You can create a bit string from a string of 0s and 1s ({@link  * #BitString(String, int)} or {@link #createFromBitString}), or from a string of  * hex digits ({@link #createFromHexString}). You can convert it to a byte array  * ({@link #getAsByteArray}), to a bit string ({@link #toBitString}), or to a  * hex string ({@link #toHexString}). A utility method {@link  * #toByteArrayFromBitString} converts a bit string directly to a byte array.  *  *<p>This class is immutable: once created, none of the methods modify the  * value.  *  * @testcase  */
+comment|/**  * String of bits.  *  *<p>A bit string logically consists of a set of '0' and '1' values, of a  * specified length. The length is preserved even if this means that the bit  * string has leading '0's.  *  *<p>You can create a bit string from a string of 0s and 1s ({@link  * #BitString(String, int)} or {@link #createFromBitString}), or from a string of  * hex digits ({@link #createFromHexString}). You can convert it to a byte array  * ({@link #getAsByteArray}), to a bit string ({@link #toBitString}), or to a  * hex string ({@link #toHexString}). A utility method {@link  * #toByteArrayFromBitString} converts a bit string directly to a byte array.  *  *<p>This class is immutable: once created, none of the methods modify the  * value.  */
 end_comment
 
 begin_class
@@ -44,54 +44,14 @@ specifier|public
 class|class
 name|BitString
 block|{
-comment|//~ Static fields/initializers ---------------------------------------------
-specifier|private
-specifier|static
-specifier|final
-name|char
-index|[]
-name|Hexits
-init|=
-block|{
-literal|'0'
-block|,
-literal|'1'
-block|,
-literal|'2'
-block|,
-literal|'3'
-block|,
-literal|'4'
-block|,
-literal|'5'
-block|,
-literal|'6'
-block|,
-literal|'7'
-block|,
-literal|'8'
-block|,
-literal|'9'
-block|,
-literal|'a'
-block|,
-literal|'b'
-block|,
-literal|'c'
-block|,
-literal|'d'
-block|,
-literal|'e'
-block|,
-literal|'f'
-block|}
-decl_stmt|;
 comment|//~ Instance fields --------------------------------------------------------
 specifier|private
+specifier|final
 name|String
 name|bits
 decl_stmt|;
 specifier|private
+specifier|final
 name|int
 name|bitCount
 decl_stmt|;
@@ -399,7 +359,7 @@ name|s
 return|;
 block|}
 block|}
-comment|/**    * Converts a bit string to an array of bytes.    *    * @post return.length = (bitCount + 7) / 8    */
+comment|/**    * Converts a bit string to an array of bytes.    */
 specifier|public
 specifier|static
 name|byte

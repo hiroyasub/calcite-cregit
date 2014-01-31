@@ -1406,6 +1406,8 @@ return|;
 block|}
 block|}
 block|}
+comment|// todo: enable
+comment|// CHECKSTYLE: IGNORE 1
 if|if
 condition|(
 literal|false
@@ -1420,7 +1422,6 @@ name|fail
 argument_list|)
 condition|)
 block|{
-comment|// todo: enable
 assert|assert
 operator|!
 name|fail
@@ -1523,6 +1524,7 @@ name|size
 argument_list|()
 return|;
 block|}
+comment|// CHECKSTYLE: IGNORE 1
 block|}
 argument_list|)
 decl_stmt|;
@@ -2494,7 +2496,7 @@ argument_list|()
 operator|==
 name|SqlStdOperatorTable
 operator|.
-name|inFennelFunc
+name|IN_FENNEL
 condition|)
 block|{
 comment|// drill through identity function

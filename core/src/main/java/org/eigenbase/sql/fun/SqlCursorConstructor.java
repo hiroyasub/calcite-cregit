@@ -91,7 +91,7 @@ name|SqlKind
 operator|.
 name|CURSOR
 argument_list|,
-name|MaxPrec
+name|MDX_PRECEDENCE
 argument_list|,
 literal|false
 argument_list|,

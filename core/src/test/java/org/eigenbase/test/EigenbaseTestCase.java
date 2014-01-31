@@ -51,20 +51,6 @@ specifier|abstract
 class|class
 name|EigenbaseTestCase
 block|{
-comment|//~ Static fields/initializers ---------------------------------------------
-specifier|protected
-specifier|static
-specifier|final
-name|String
-name|nl
-init|=
-name|System
-operator|.
-name|getProperty
-argument_list|(
-literal|"line.separator"
-argument_list|)
-decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 specifier|protected
 name|EigenbaseTestCase

@@ -284,6 +284,11 @@ specifier|public
 class|class
 name|OptiqAssert
 block|{
+specifier|private
+name|OptiqAssert
+parameter_list|()
+block|{
+block|}
 comment|/** Which database to use for tests that require a JDBC data source. By    * default the test suite runs against the embedded hsqldb database.    *    *<p>We recommend that casual users use hsqldb, and frequent Optiq developers    * use MySQL. The test suite runs faster against the MySQL database (mainly    * because of the 0.1s versus 6s startup time). You have to populate MySQL    * manually with the foodmart data set, otherwise there will be test failures.    * To run against MySQL, specify '-Doptiq.test.db=mysql' on the java command    * line.</p> */
 specifier|public
 specifier|static

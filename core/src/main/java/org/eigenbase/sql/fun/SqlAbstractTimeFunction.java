@@ -95,7 +95,7 @@ specifier|private
 specifier|static
 specifier|final
 name|SqlOperandTypeChecker
-name|otcCustom
+name|OTC_CUSTOM
 init|=
 name|SqlTypeStrategies
 operator|.
@@ -139,11 +139,11 @@ literal|null
 argument_list|,
 literal|null
 argument_list|,
-name|otcCustom
+name|OTC_CUSTOM
 argument_list|,
 name|SqlFunctionCategory
 operator|.
-name|TimeDate
+name|TIMEDATE
 argument_list|)
 expr_stmt|;
 name|this
@@ -162,7 +162,7 @@ block|{
 return|return
 name|SqlSyntax
 operator|.
-name|FunctionId
+name|FUNCTION_ID
 return|;
 block|}
 specifier|public

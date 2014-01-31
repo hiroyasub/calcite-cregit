@@ -469,7 +469,7 @@ name|operand
 argument_list|,
 name|SqlStdOperatorTable
 operator|.
-name|cursorConstructor
+name|CURSOR
 argument_list|)
 condition|)
 block|{
@@ -548,7 +548,7 @@ name|operand
 argument_list|,
 name|SqlStdOperatorTable
 operator|.
-name|rowConstructor
+name|ROW
 argument_list|)
 condition|)
 block|{

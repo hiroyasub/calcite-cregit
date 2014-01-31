@@ -144,7 +144,7 @@ specifier|protected
 specifier|static
 specifier|final
 name|int
-name|MaxPrec
+name|MDX_PRECEDENCE
 init|=
 literal|200
 decl_stmt|;

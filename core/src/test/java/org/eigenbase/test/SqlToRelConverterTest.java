@@ -1555,7 +1555,7 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Tests one of the custom conversions which is recognized by the identity    * of the operator (in this case, {@link    * org.eigenbase.sql.fun.SqlStdOperatorTable#characterLengthFunc}).    */
+comment|/**    * Tests one of the custom conversions which is recognized by the identity    * of the operator (in this case, {@link    * org.eigenbase.sql.fun.SqlStdOperatorTable#CHARACTER_LENGTH}).    */
 annotation|@
 name|Test
 specifier|public
@@ -1714,7 +1714,7 @@ if|if
 condition|(
 name|Bug
 operator|.
-name|Dt785Fixed
+name|DT785_FIXED
 condition|)
 block|{
 name|check
