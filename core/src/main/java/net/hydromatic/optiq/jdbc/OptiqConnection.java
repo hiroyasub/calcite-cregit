@@ -21,6 +21,18 @@ name|net
 operator|.
 name|hydromatic
 operator|.
+name|linq4j
+operator|.
+name|QueryProvider
+import|;
+end_import
+
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
 name|optiq
 operator|.
 name|SchemaPlus
@@ -40,18 +52,6 @@ operator|.
 name|java
 operator|.
 name|JavaTypeFactory
-import|;
-end_import
-
-begin_import
-import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|linq4j
-operator|.
-name|QueryProvider
 import|;
 end_import
 

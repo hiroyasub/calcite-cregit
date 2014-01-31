@@ -17,18 +17,6 @@ end_package
 
 begin_import
 import|import
-name|mondrian
-operator|.
-name|test
-operator|.
-name|data
-operator|.
-name|FoodMartQuery
-import|;
-end_import
-
-begin_import
-import|import
 name|org
 operator|.
 name|eigenbase
@@ -130,6 +118,18 @@ operator|.
 name|util
 operator|.
 name|*
+import|;
+end_import
+
+begin_import
+import|import
+name|mondrian
+operator|.
+name|test
+operator|.
+name|data
+operator|.
+name|FoodMartQuery
 import|;
 end_import
 

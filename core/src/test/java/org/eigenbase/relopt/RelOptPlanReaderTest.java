@@ -55,9 +55,9 @@ begin_import
 import|import static
 name|org
 operator|.
-name|junit
+name|hamcrest
 operator|.
-name|Assert
+name|CoreMatchers
 operator|.
 name|*
 import|;
@@ -67,9 +67,9 @@ begin_import
 import|import static
 name|org
 operator|.
-name|hamcrest
+name|junit
 operator|.
-name|CoreMatchers
+name|Assert
 operator|.
 name|*
 import|;

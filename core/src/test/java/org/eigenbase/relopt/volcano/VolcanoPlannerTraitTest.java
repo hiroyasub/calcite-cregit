@@ -89,6 +89,22 @@ end_import
 
 begin_import
 import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|optiq
+operator|.
+name|rules
+operator|.
+name|java
+operator|.
+name|EnumerableConvention
+import|;
+end_import
+
+begin_import
+import|import
 name|com
 operator|.
 name|google
@@ -132,22 +148,6 @@ operator|.
 name|junit
 operator|.
 name|Test
-import|;
-end_import
-
-begin_import
-import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|optiq
-operator|.
-name|rules
-operator|.
-name|java
-operator|.
-name|EnumerableConvention
 import|;
 end_import
 

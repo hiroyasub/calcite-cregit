@@ -89,11 +89,9 @@ name|net
 operator|.
 name|hydromatic
 operator|.
-name|optiq
+name|linq4j
 operator|.
-name|runtime
-operator|.
-name|Spacer
+name|Ord
 import|;
 end_import
 
@@ -103,9 +101,11 @@ name|net
 operator|.
 name|hydromatic
 operator|.
-name|linq4j
+name|optiq
 operator|.
-name|Ord
+name|runtime
+operator|.
+name|Spacer
 import|;
 end_import
 

@@ -87,9 +87,13 @@ begin_import
 import|import static
 name|org
 operator|.
-name|junit
+name|eigenbase
 operator|.
-name|Assert
+name|sql
+operator|.
+name|test
+operator|.
+name|SqlTester
 operator|.
 name|*
 import|;
@@ -99,13 +103,9 @@ begin_import
 import|import static
 name|org
 operator|.
-name|eigenbase
+name|junit
 operator|.
-name|sql
-operator|.
-name|test
-operator|.
-name|SqlTester
+name|Assert
 operator|.
 name|*
 import|;

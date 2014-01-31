@@ -167,13 +167,11 @@ name|net
 operator|.
 name|hydromatic
 operator|.
-name|optiq
+name|linq4j
 operator|.
-name|util
+name|expressions
 operator|.
-name|graph
-operator|.
-name|*
+name|Expressions
 import|;
 end_import
 
@@ -183,11 +181,13 @@ name|net
 operator|.
 name|hydromatic
 operator|.
-name|linq4j
+name|optiq
 operator|.
-name|expressions
+name|util
 operator|.
-name|Expressions
+name|graph
+operator|.
+name|*
 import|;
 end_import
 

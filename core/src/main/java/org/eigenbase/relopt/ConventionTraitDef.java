@@ -75,6 +75,22 @@ end_import
 
 begin_import
 import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|optiq
+operator|.
+name|util
+operator|.
+name|graph
+operator|.
+name|*
+import|;
+end_import
+
+begin_import
+import|import
 name|com
 operator|.
 name|google
@@ -98,22 +114,6 @@ operator|.
 name|collect
 operator|.
 name|Multimap
-import|;
-end_import
-
-begin_import
-import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|optiq
-operator|.
-name|util
-operator|.
-name|graph
-operator|.
-name|*
 import|;
 end_import
 
