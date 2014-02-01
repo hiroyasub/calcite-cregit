@@ -21,18 +21,6 @@ end_package
 
 begin_import
 import|import
-name|javax
-operator|.
-name|net
-operator|.
-name|ssl
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
 name|java
 operator|.
 name|io
@@ -70,6 +58,18 @@ operator|.
 name|cert
 operator|.
 name|X509Certificate
+import|;
+end_import
+
+begin_import
+import|import
+name|javax
+operator|.
+name|net
+operator|.
+name|ssl
+operator|.
+name|*
 import|;
 end_import
 
