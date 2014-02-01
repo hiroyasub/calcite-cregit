@@ -62,7 +62,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Implementation of the {@link Queryable} interface that  * implements the extension methods by calling into the {@link Extensions}  * class.  */
+comment|/**  * Implementation of the {@link Queryable} interface that  * implements the extension methods by calling into the {@link Extensions}  * class.  *  * @param<T> Element type  */
 end_comment
 
 begin_class

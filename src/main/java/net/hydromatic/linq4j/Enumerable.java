@@ -14,7 +14,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * Exposes the enumerator, which supports a simple iteration over a collection.  *  *<p>Analogous to LINQ's System.Collections.IEnumerable (both generic  * and non-generic variants).</p>  *  *<p>Also implements {@link Iterable}, to enable use in Java foreach loops.</p>  *  * @param<T> element type  */
+comment|/**  * Exposes the enumerator, which supports a simple iteration over a collection.  *  *<p>Analogous to LINQ's System.Collections.IEnumerable (both generic  * and non-generic variants).</p>  *  *<p>Also implements {@link Iterable}, to enable use in Java foreach loops.</p>  *  * @param<T> Element type  */
 end_comment
 
 begin_interface

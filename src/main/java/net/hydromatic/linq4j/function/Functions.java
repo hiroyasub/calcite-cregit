@@ -75,9 +75,15 @@ end_comment
 
 begin_class
 specifier|public
+specifier|abstract
 class|class
 name|Functions
 block|{
+specifier|private
+name|Functions
+parameter_list|()
+block|{
+block|}
 specifier|public
 specifier|static
 specifier|final
@@ -1473,7 +1479,8 @@ name|int
 name|hitCount
 init|=
 literal|0
-decl_stmt|,
+decl_stmt|;
+name|int
 name|missCount
 init|=
 literal|0

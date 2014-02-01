@@ -14,7 +14,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * Exposes the enumerator, which supports a simple iteration over a collection,  * without the extension methods.  *  *<p>Just the bare methods, to make it easier to implement. Code that requires  * the extension methods can use the static methods in {@link Extensions}.</p>  *  *<p>Analogous to LINQ's System.Collections.IEnumerable (both generic  * and non-generic variants), without the extension methods.</p>  *  * @see Enumerable  */
+comment|/**  * Exposes the enumerator, which supports a simple iteration over a collection,  * without the extension methods.  *  *<p>Just the bare methods, to make it easier to implement. Code that requires  * the extension methods can use the static methods in {@link Extensions}.</p>  *  *<p>Analogous to LINQ's System.Collections.IEnumerable (both generic  * and non-generic variants), without the extension methods.</p>  *  * @param<T> Element type  * @see Enumerable  */
 end_comment
 
 begin_interface

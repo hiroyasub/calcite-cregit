@@ -40,7 +40,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Defines methods to create and execute queries that are described by a  * {@link Queryable} object.  *  *<p>Analogous to LINQ's System.Linq.QueryProvider.</p>  *  * @author jhyde  */
+comment|/**  * Defines methods to create and execute queries that are described by a  * {@link Queryable} object.  *  *<p>Analogous to LINQ's System.Linq.QueryProvider.</p>  */
 end_comment
 
 begin_interface

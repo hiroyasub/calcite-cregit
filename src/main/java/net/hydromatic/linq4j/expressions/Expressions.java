@@ -89,9 +89,15 @@ end_comment
 
 begin_class
 specifier|public
+specifier|abstract
 class|class
 name|Expressions
 block|{
+specifier|private
+name|Expressions
+parameter_list|()
+block|{
+block|}
 comment|/**    * Converts a list of expressions to Java source code, optionally emitting    * extra type information in generics.    */
 specifier|public
 specifier|static
@@ -6918,7 +6924,7 @@ comment|/**    * Creates a UnaryExpression that represents the assignment of    
 specifier|public
 specifier|static
 name|UnaryExpression
-name|PostIncrementAssign
+name|postIncrementAssign
 parameter_list|(
 name|Expression
 name|expression

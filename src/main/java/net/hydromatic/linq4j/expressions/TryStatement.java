@@ -52,7 +52,7 @@ decl_stmt|;
 specifier|public
 specifier|final
 name|Statement
-name|finally_
+name|fynally
 decl_stmt|;
 specifier|public
 name|TryStatement
@@ -67,7 +67,7 @@ argument_list|>
 name|catchBlocks
 parameter_list|,
 name|Statement
-name|finally_
+name|fynally
 parameter_list|)
 block|{
 name|super
@@ -96,9 +96,9 @@ name|catchBlocks
 expr_stmt|;
 name|this
 operator|.
-name|finally_
+name|fynally
 operator|=
-name|finally_
+name|fynally
 expr_stmt|;
 block|}
 annotation|@
@@ -196,7 +196,7 @@ expr_stmt|;
 block|}
 if|if
 condition|(
-name|finally_
+name|fynally
 operator|!=
 literal|null
 condition|)
@@ -219,7 +219,7 @@ name|Blocks
 operator|.
 name|toBlock
 argument_list|(
-name|finally_
+name|fynally
 argument_list|)
 argument_list|)
 expr_stmt|;

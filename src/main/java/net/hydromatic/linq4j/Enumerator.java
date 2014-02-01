@@ -24,7 +24,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Supports a simple iteration over a collection.  *  *<p>Analogous to LINQ's System.Collections.Enumerator. Unlike LINQ, if the  * underlying collection has been modified it is only optional that an  * implementation of the Enumerator interface detects it and throws a  * {@link java.util.ConcurrentModificationException}.</p>  *  * @param<T> element type  */
+comment|/**  * Supports a simple iteration over a collection.  *  *<p>Analogous to LINQ's System.Collections.Enumerator. Unlike LINQ, if the  * underlying collection has been modified it is only optional that an  * implementation of the Enumerator interface detects it and throws a  * {@link java.util.ConcurrentModificationException}.</p>  *  * @param<T> Element type  */
 end_comment
 
 begin_interface

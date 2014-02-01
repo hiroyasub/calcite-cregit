@@ -52,7 +52,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Represents a strongly typed lambda expression as a data structure in the form  * of an expression tree. This class cannot be inherited.  */
+comment|/**  * Represents a strongly typed lambda expression as a data structure in the form  * of an expression tree. This class cannot be inherited.  *  * @param<F> Function type  */
 end_comment
 
 begin_class
@@ -969,6 +969,7 @@ return|return
 literal|"apply"
 return|;
 block|}
+comment|/** Function that can be invoked with a variable number of arguments. */
 specifier|public
 interface|interface
 name|Invokable

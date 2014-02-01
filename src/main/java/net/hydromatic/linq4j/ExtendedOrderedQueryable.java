@@ -52,7 +52,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Extension methods for {@link OrderedQueryable}.  *  * @author jhyde  */
+comment|/**  * Extension methods for {@link OrderedQueryable}.  *  * @param<T> Element type  */
 end_comment
 
 begin_interface

@@ -40,7 +40,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Core methods that define a {@link Queryable}.  *  *<p>The other methods in {@link Queryable}, defined in  * {@link ExtendedQueryable}, can easily be implemented by calling the  * corresponding static methods in {@link Extensions}.  *  * @author jhyde  */
+comment|/**  * Core methods that define a {@link Queryable}.  *  *<p>The other methods in {@link Queryable}, defined in  * {@link ExtendedQueryable}, can easily be implemented by calling the  * corresponding static methods in {@link Extensions}.  *  * @param<T> Element type  */
 end_comment
 
 begin_interface

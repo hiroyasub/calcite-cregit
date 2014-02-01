@@ -98,7 +98,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Implementation of {@link Queryable} by a {@link Enumerable}.  */
+comment|/**  * Implementation of {@link Queryable} by a {@link Enumerable}.  *  * @param<T> Element type  */
 end_comment
 
 begin_class

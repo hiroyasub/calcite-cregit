@@ -16,7 +16,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * Compares values for equality.  */
+comment|/**  * Compares values for equality.  *  * @param<T> Value type  */
 end_comment
 
 begin_interface

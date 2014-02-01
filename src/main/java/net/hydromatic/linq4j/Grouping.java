@@ -14,7 +14,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * Represents a collection of objects that have a common key.  */
+comment|/**  * Represents a collection of objects that have a common key.  *  * @param<K> Key type  * @param<V> Element type  */
 end_comment
 
 begin_interface
@@ -22,18 +22,18 @@ specifier|public
 interface|interface
 name|Grouping
 parameter_list|<
-name|TKey
+name|K
 parameter_list|,
-name|T
+name|V
 parameter_list|>
 extends|extends
 name|Enumerable
 argument_list|<
-name|T
+name|V
 argument_list|>
 block|{
 comment|/**    * Gets the key of this Grouping.    */
-name|TKey
+name|K
 name|getKey
 parameter_list|()
 function_decl|;

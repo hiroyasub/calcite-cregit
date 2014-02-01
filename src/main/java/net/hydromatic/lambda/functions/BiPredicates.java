@@ -366,7 +366,7 @@ name|?
 super|super
 name|V
 argument_list|>
-name|BiPredicate
+name|biPredicate
 parameter_list|)
 block|{
 return|return
@@ -392,7 +392,7 @@ parameter_list|)
 block|{
 return|return
 operator|!
-name|BiPredicate
+name|biPredicate
 operator|.
 name|eval
 argument_list|(
@@ -1461,8 +1461,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
-specifier|static
 specifier|abstract
+specifier|static
 class|class
 name|AbstractBiPredicate
 parameter_list|<

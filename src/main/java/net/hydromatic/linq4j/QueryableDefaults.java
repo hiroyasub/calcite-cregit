@@ -102,7 +102,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Default implementations for methods in the {@link Queryable} interface.  *  * @author jhyde  */
+comment|/**  * Default implementations for methods in the {@link Queryable} interface.  */
 end_comment
 
 begin_class
@@ -4216,8 +4216,8 @@ parameter_list|)
 function_decl|;
 block|}
 specifier|public
-specifier|static
 specifier|abstract
+specifier|static
 class|class
 name|ReplayableQueryable
 parameter_list|<
@@ -4345,8 +4345,8 @@ return|;
 block|}
 block|}
 specifier|public
-specifier|static
 specifier|abstract
+specifier|static
 class|class
 name|NonLeafReplayableQueryable
 parameter_list|<

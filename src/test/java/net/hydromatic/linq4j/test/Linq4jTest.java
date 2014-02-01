@@ -2316,6 +2316,7 @@ operator|.
 name|apply
 argument_list|()
 argument_list|,
+comment|//CHECKSTYLE: IGNORE 0
 operator|new
 name|Function2
 argument_list|<
@@ -6448,6 +6449,7 @@ return|;
 block|}
 block|}
 comment|// Cedric works in a non-existent department.
+comment|//CHECKSTYLE: IGNORE 1
 specifier|public
 specifier|static
 specifier|final
@@ -6467,6 +6469,7 @@ literal|40
 argument_list|)
 block|,   }
 decl_stmt|;
+comment|//CHECKSTYLE: IGNORE 1
 specifier|public
 specifier|static
 specifier|final
@@ -6516,6 +6519,7 @@ literal|10
 argument_list|)
 block|,   }
 decl_stmt|;
+comment|//CHECKSTYLE: IGNORE 1
 specifier|public
 specifier|static
 specifier|final

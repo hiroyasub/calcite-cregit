@@ -53,9 +53,15 @@ end_comment
 
 begin_class
 specifier|public
+specifier|abstract
 class|class
 name|Extensions
 block|{
+specifier|private
+name|Extensions
+parameter_list|()
+block|{
+block|}
 specifier|static
 specifier|final
 name|Function2

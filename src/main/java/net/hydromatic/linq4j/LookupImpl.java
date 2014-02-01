@@ -38,7 +38,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Implementation of {@link Lookup} that uses an underlying map.  */
+comment|/**  * Implementation of {@link Lookup} that uses an underlying map.  *  * @param<K> Key type  * @param<V> Value type  */
 end_comment
 
 begin_class

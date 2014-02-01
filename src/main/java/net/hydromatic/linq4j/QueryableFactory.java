@@ -62,7 +62,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Factory for building {@link Queryable} objects.  *  * @author jhyde  */
+comment|/**  * Factory for building {@link Queryable} objects.  *  * @param<T> Element type  */
 end_comment
 
 begin_interface

@@ -34,7 +34,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Enumerator over the cartesian product of enumerators.  */
+comment|/**  * Enumerator over the cartesian product of enumerators.  *  * @param<T> Element type  */
 end_comment
 
 begin_class

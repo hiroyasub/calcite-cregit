@@ -41,7 +41,6 @@ name|U
 name|u
 parameter_list|)
 function_decl|;
-specifier|public
 parameter_list|<
 name|W
 parameter_list|>

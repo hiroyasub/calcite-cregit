@@ -450,9 +450,15 @@ argument_list|>
 name|other
 parameter_list|)
 function_decl|;
+specifier|abstract
 class|class
 name|Impl
 block|{
+specifier|private
+name|Impl
+parameter_list|()
+block|{
+block|}
 specifier|public
 specifier|static
 parameter_list|<

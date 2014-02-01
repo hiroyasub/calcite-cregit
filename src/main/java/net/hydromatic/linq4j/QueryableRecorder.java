@@ -88,7 +88,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Implementation of {@link QueryableFactory} that records each event  * and returns an object that can replay the event when you call its  * {@link net.hydromatic.linq4j.QueryableDefaults.ReplayableQueryable#replay(QueryableFactory)}  * method.  *  * @author jhyde  */
+comment|/**  * Implementation of {@link QueryableFactory} that records each event  * and returns an object that can replay the event when you call its  * {@link net.hydromatic.linq4j.QueryableDefaults.ReplayableQueryable#replay(QueryableFactory)}  * method.  *  * @param<T> Element type  */
 end_comment
 
 begin_class
@@ -199,6 +199,7 @@ operator|.
 name|single
 argument_list|()
 return|;
+comment|// CHECKSTYLE: IGNORE 0
 block|}
 specifier|public
 parameter_list|<
@@ -274,6 +275,7 @@ operator|>
 name|castSingle
 argument_list|()
 return|;
+comment|// CHECKSTYLE: IGNORE 0
 block|}
 specifier|public
 parameter_list|<
@@ -365,6 +367,7 @@ operator|>
 name|castSingle
 argument_list|()
 return|;
+comment|// CHECKSTYLE: IGNORE 0
 block|}
 specifier|public
 name|boolean
@@ -427,6 +430,7 @@ operator|>
 name|castSingle
 argument_list|()
 return|;
+comment|// CHECKSTYLE: IGNORE 0
 block|}
 specifier|public
 name|boolean
@@ -477,6 +481,7 @@ operator|>
 name|castSingle
 argument_list|()
 return|;
+comment|// CHECKSTYLE: IGNORE 0
 block|}
 specifier|public
 name|boolean
@@ -539,6 +544,7 @@ operator|>
 name|castSingle
 argument_list|()
 return|;
+comment|// CHECKSTYLE: IGNORE 0
 block|}
 specifier|public
 name|BigDecimal
@@ -598,6 +604,7 @@ operator|.
 name|castSingle
 argument_list|()
 return|;
+comment|// CHECKSTYLE: IGNORE 0
 block|}
 specifier|public
 name|BigDecimal
@@ -657,6 +664,7 @@ operator|.
 name|castSingle
 argument_list|()
 return|;
+comment|// CHECKSTYLE: IGNORE 0
 block|}
 specifier|public
 name|double
@@ -719,6 +727,7 @@ operator|>
 name|castSingle
 argument_list|()
 return|;
+comment|// CHECKSTYLE: IGNORE 0
 block|}
 specifier|public
 name|Double
@@ -781,6 +790,7 @@ operator|>
 name|castSingle
 argument_list|()
 return|;
+comment|// CHECKSTYLE: IGNORE 0
 block|}
 specifier|public
 name|int
@@ -843,6 +853,7 @@ operator|>
 name|castSingle
 argument_list|()
 return|;
+comment|// CHECKSTYLE: IGNORE 0
 block|}
 specifier|public
 name|Integer
@@ -905,6 +916,7 @@ operator|>
 name|castSingle
 argument_list|()
 return|;
+comment|// CHECKSTYLE: IGNORE 0
 block|}
 specifier|public
 name|float
@@ -967,6 +979,7 @@ operator|>
 name|castSingle
 argument_list|()
 return|;
+comment|// CHECKSTYLE: IGNORE 0
 block|}
 specifier|public
 name|Float
@@ -1029,6 +1042,7 @@ operator|>
 name|castSingle
 argument_list|()
 return|;
+comment|// CHECKSTYLE: IGNORE 0
 block|}
 specifier|public
 name|long
@@ -1091,6 +1105,7 @@ operator|>
 name|castSingle
 argument_list|()
 return|;
+comment|// CHECKSTYLE: IGNORE 0
 block|}
 specifier|public
 name|Long
@@ -1153,6 +1168,7 @@ operator|>
 name|castSingle
 argument_list|()
 return|;
+comment|// CHECKSTYLE: IGNORE 0
 block|}
 specifier|public
 parameter_list|<
@@ -1215,6 +1231,7 @@ operator|.
 name|castQueryable
 argument_list|()
 return|;
+comment|// CHECKSTYLE: IGNORE 0
 block|}
 specifier|public
 name|Queryable
@@ -1327,6 +1344,7 @@ operator|>
 name|castSingle
 argument_list|()
 return|;
+comment|// CHECKSTYLE: IGNORE 0
 block|}
 specifier|public
 name|boolean
@@ -1392,6 +1410,7 @@ operator|>
 name|castSingle
 argument_list|()
 return|;
+comment|// CHECKSTYLE: IGNORE 0
 block|}
 specifier|public
 name|int
@@ -1442,6 +1461,7 @@ operator|>
 name|castSingle
 argument_list|()
 return|;
+comment|// CHECKSTYLE: IGNORE 0
 block|}
 specifier|public
 name|int
@@ -1504,6 +1524,7 @@ operator|>
 name|castSingle
 argument_list|()
 return|;
+comment|// CHECKSTYLE: IGNORE 0
 block|}
 specifier|public
 name|Queryable
@@ -1763,6 +1784,7 @@ operator|>
 name|castSingle
 argument_list|()
 return|;
+comment|// CHECKSTYLE: IGNORE 0
 block|}
 specifier|public
 name|T
@@ -1819,6 +1841,7 @@ operator|>
 name|castSingle
 argument_list|()
 return|;
+comment|// CHECKSTYLE: IGNORE 0
 block|}
 specifier|public
 name|Queryable
@@ -1987,6 +2010,7 @@ operator|.
 name|single
 argument_list|()
 return|;
+comment|// CHECKSTYLE: IGNORE 0
 block|}
 specifier|public
 name|T
@@ -2046,6 +2070,7 @@ operator|.
 name|single
 argument_list|()
 return|;
+comment|// CHECKSTYLE: IGNORE 0
 block|}
 specifier|public
 name|T
@@ -2093,6 +2118,7 @@ operator|.
 name|single
 argument_list|()
 return|;
+comment|// CHECKSTYLE: IGNORE 0
 block|}
 specifier|public
 name|T
@@ -2152,6 +2178,7 @@ operator|.
 name|single
 argument_list|()
 return|;
+comment|// CHECKSTYLE: IGNORE 0
 block|}
 specifier|public
 parameter_list|<
@@ -2224,6 +2251,7 @@ operator|.
 name|castQueryable
 argument_list|()
 return|;
+comment|// CHECKSTYLE: IGNORE 0
 block|}
 specifier|public
 parameter_list|<
@@ -2305,6 +2333,7 @@ operator|.
 name|castQueryable
 argument_list|()
 return|;
+comment|// CHECKSTYLE: IGNORE 0
 block|}
 specifier|public
 parameter_list|<
@@ -2393,6 +2422,7 @@ operator|.
 name|castQueryable
 argument_list|()
 return|;
+comment|// CHECKSTYLE: IGNORE 0
 block|}
 specifier|public
 parameter_list|<
@@ -2486,6 +2516,7 @@ operator|.
 name|castQueryable
 argument_list|()
 return|;
+comment|// CHECKSTYLE: IGNORE 0
 block|}
 specifier|public
 parameter_list|<
@@ -2583,6 +2614,7 @@ operator|.
 name|castQueryable
 argument_list|()
 return|;
+comment|// CHECKSTYLE: IGNORE 0
 block|}
 specifier|public
 parameter_list|<
@@ -2680,6 +2712,7 @@ operator|.
 name|castQueryable
 argument_list|()
 return|;
+comment|// CHECKSTYLE: IGNORE 0
 block|}
 specifier|public
 parameter_list|<
@@ -2784,6 +2817,7 @@ operator|.
 name|castQueryable
 argument_list|()
 return|;
+comment|// CHECKSTYLE: IGNORE 0
 block|}
 specifier|public
 parameter_list|<
@@ -2897,6 +2931,7 @@ operator|.
 name|castQueryable
 argument_list|()
 return|;
+comment|// CHECKSTYLE: IGNORE 0
 block|}
 specifier|public
 parameter_list|<
@@ -3010,6 +3045,7 @@ operator|.
 name|castQueryable
 argument_list|()
 return|;
+comment|// CHECKSTYLE: IGNORE 0
 block|}
 specifier|public
 parameter_list|<
@@ -3132,6 +3168,7 @@ operator|.
 name|castQueryable
 argument_list|()
 return|;
+comment|// CHECKSTYLE: IGNORE 0
 block|}
 specifier|public
 name|Queryable
@@ -3363,6 +3400,7 @@ operator|.
 name|castQueryable
 argument_list|()
 return|;
+comment|// CHECKSTYLE: IGNORE 0
 block|}
 specifier|public
 parameter_list|<
@@ -3482,6 +3520,7 @@ operator|.
 name|castQueryable
 argument_list|()
 return|;
+comment|// CHECKSTYLE: IGNORE 0
 block|}
 specifier|public
 name|T
@@ -3529,6 +3568,7 @@ operator|.
 name|single
 argument_list|()
 return|;
+comment|// CHECKSTYLE: IGNORE 0
 block|}
 specifier|public
 name|T
@@ -3588,6 +3628,7 @@ operator|.
 name|single
 argument_list|()
 return|;
+comment|// CHECKSTYLE: IGNORE 0
 block|}
 specifier|public
 name|T
@@ -3635,6 +3676,7 @@ operator|.
 name|single
 argument_list|()
 return|;
+comment|// CHECKSTYLE: IGNORE 0
 block|}
 specifier|public
 name|T
@@ -3694,6 +3736,7 @@ operator|.
 name|single
 argument_list|()
 return|;
+comment|// CHECKSTYLE: IGNORE 0
 block|}
 specifier|public
 name|long
@@ -3744,6 +3787,7 @@ operator|>
 name|castSingle
 argument_list|()
 return|;
+comment|// CHECKSTYLE: IGNORE 0
 block|}
 specifier|public
 name|long
@@ -3803,6 +3847,7 @@ operator|.
 name|longCount
 argument_list|()
 return|;
+comment|// CHECKSTYLE: IGNORE 0
 block|}
 specifier|public
 name|T
@@ -3853,6 +3898,7 @@ operator|>
 name|castSingle
 argument_list|()
 return|;
+comment|// CHECKSTYLE: IGNORE 0
 block|}
 specifier|public
 parameter_list|<
@@ -3925,6 +3971,7 @@ operator|>
 name|castSingle
 argument_list|()
 return|;
+comment|// CHECKSTYLE: IGNORE 0
 block|}
 specifier|public
 name|T
@@ -3975,6 +4022,7 @@ operator|>
 name|castSingle
 argument_list|()
 return|;
+comment|// CHECKSTYLE: IGNORE 0
 block|}
 specifier|public
 parameter_list|<
@@ -4047,6 +4095,7 @@ operator|>
 name|castSingle
 argument_list|()
 return|;
+comment|// CHECKSTYLE: IGNORE 0
 block|}
 specifier|public
 parameter_list|<
@@ -4109,6 +4158,7 @@ operator|.
 name|castQueryable
 argument_list|()
 return|;
+comment|// CHECKSTYLE: IGNORE 0
 block|}
 specifier|public
 parameter_list|<
@@ -4516,6 +4566,7 @@ operator|.
 name|castQueryable
 argument_list|()
 return|;
+comment|// CHECKSTYLE: IGNORE 0
 block|}
 specifier|public
 parameter_list|<
@@ -4585,6 +4636,7 @@ operator|.
 name|castQueryable
 argument_list|()
 return|;
+comment|// CHECKSTYLE: IGNORE 0
 block|}
 specifier|public
 parameter_list|<
@@ -4655,6 +4707,7 @@ operator|.
 name|castQueryable
 argument_list|()
 return|;
+comment|// CHECKSTYLE: IGNORE 0
 block|}
 specifier|public
 parameter_list|<
@@ -4727,6 +4780,7 @@ operator|.
 name|castQueryable
 argument_list|()
 return|;
+comment|// CHECKSTYLE: IGNORE 0
 block|}
 specifier|public
 parameter_list|<
@@ -4817,6 +4871,7 @@ operator|.
 name|castQueryable
 argument_list|()
 return|;
+comment|// CHECKSTYLE: IGNORE 0
 block|}
 specifier|public
 parameter_list|<
@@ -4905,6 +4960,7 @@ operator|.
 name|castQueryable
 argument_list|()
 return|;
+comment|// CHECKSTYLE: IGNORE 0
 block|}
 specifier|public
 name|boolean
@@ -4964,6 +5020,7 @@ operator|>
 name|castSingle
 argument_list|()
 return|;
+comment|// CHECKSTYLE: IGNORE 0
 block|}
 specifier|public
 name|boolean
@@ -5032,6 +5089,7 @@ operator|>
 name|castSingle
 argument_list|()
 return|;
+comment|// CHECKSTYLE: IGNORE 0
 block|}
 specifier|public
 name|T
@@ -5079,6 +5137,7 @@ operator|.
 name|single
 argument_list|()
 return|;
+comment|// CHECKSTYLE: IGNORE 0
 block|}
 specifier|public
 name|T
@@ -5138,6 +5197,7 @@ operator|.
 name|single
 argument_list|()
 return|;
+comment|// CHECKSTYLE: IGNORE 0
 block|}
 specifier|public
 name|T
@@ -5185,6 +5245,7 @@ operator|.
 name|single
 argument_list|()
 return|;
+comment|// CHECKSTYLE: IGNORE 0
 block|}
 specifier|public
 name|T
@@ -5244,6 +5305,7 @@ operator|.
 name|single
 argument_list|()
 return|;
+comment|// CHECKSTYLE: IGNORE 0
 block|}
 specifier|public
 name|Queryable
@@ -5476,6 +5538,7 @@ operator|.
 name|castSingle
 argument_list|()
 return|;
+comment|// CHECKSTYLE: IGNORE 0
 block|}
 specifier|public
 name|BigDecimal
@@ -5535,6 +5598,7 @@ operator|.
 name|castSingle
 argument_list|()
 return|;
+comment|// CHECKSTYLE: IGNORE 0
 block|}
 specifier|public
 name|double
@@ -5597,6 +5661,7 @@ operator|>
 name|castSingle
 argument_list|()
 return|;
+comment|// CHECKSTYLE: IGNORE 0
 block|}
 specifier|public
 name|Double
@@ -5659,6 +5724,7 @@ operator|>
 name|castSingle
 argument_list|()
 return|;
+comment|// CHECKSTYLE: IGNORE 0
 block|}
 specifier|public
 name|int
@@ -5721,6 +5787,7 @@ operator|>
 name|castSingle
 argument_list|()
 return|;
+comment|// CHECKSTYLE: IGNORE 0
 block|}
 specifier|public
 name|Integer
@@ -5783,6 +5850,7 @@ operator|>
 name|castSingle
 argument_list|()
 return|;
+comment|// CHECKSTYLE: IGNORE 0
 block|}
 specifier|public
 name|long
@@ -5845,6 +5913,7 @@ operator|>
 name|castSingle
 argument_list|()
 return|;
+comment|// CHECKSTYLE: IGNORE 0
 block|}
 specifier|public
 name|Long
@@ -5907,6 +5976,7 @@ operator|>
 name|castSingle
 argument_list|()
 return|;
+comment|// CHECKSTYLE: IGNORE 0
 block|}
 specifier|public
 name|float
@@ -5969,6 +6039,7 @@ operator|>
 name|castSingle
 argument_list|()
 return|;
+comment|// CHECKSTYLE: IGNORE 0
 block|}
 specifier|public
 name|Float
@@ -6031,6 +6102,7 @@ operator|>
 name|castSingle
 argument_list|()
 return|;
+comment|// CHECKSTYLE: IGNORE 0
 block|}
 specifier|public
 name|Queryable
@@ -6813,6 +6885,7 @@ operator|.
 name|castQueryable
 argument_list|()
 return|;
+comment|// CHECKSTYLE: IGNORE 0
 block|}
 block|}
 end_class

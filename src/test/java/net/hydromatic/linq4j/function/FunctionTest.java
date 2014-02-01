@@ -577,7 +577,7 @@ name|Integer
 argument_list|,
 name|String
 argument_list|>
-name|Xxx0
+name|xx
 init|=
 operator|new
 name|Function1
@@ -627,7 +627,7 @@ name|generate
 argument_list|(
 literal|0
 argument_list|,
-name|Xxx0
+name|xx
 argument_list|)
 operator|.
 name|toString
@@ -646,7 +646,7 @@ name|generate
 argument_list|(
 literal|1
 argument_list|,
-name|Xxx0
+name|xx
 argument_list|)
 operator|.
 name|toString
@@ -665,7 +665,7 @@ name|generate
 argument_list|(
 literal|3
 argument_list|,
-name|Xxx0
+name|xx
 argument_list|)
 operator|.
 name|toString
@@ -688,7 +688,7 @@ argument_list|(
 operator|-
 literal|2
 argument_list|,
-name|Xxx0
+name|xx
 argument_list|)
 decl_stmt|;
 name|Assert

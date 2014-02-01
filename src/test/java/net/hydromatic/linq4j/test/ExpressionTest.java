@@ -2704,7 +2704,8 @@ parameter_list|()
 block|{
 name|DeclarationStatement
 name|xDecl
-decl_stmt|,
+decl_stmt|;
+name|DeclarationStatement
 name|yDecl
 decl_stmt|;
 name|Node

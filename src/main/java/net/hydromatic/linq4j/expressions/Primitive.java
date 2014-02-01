@@ -1230,7 +1230,7 @@ decl_stmt|;
 for|for
 control|(
 name|double
-name|_double
+name|v
 range|:
 operator|(
 name|Collection
@@ -1247,7 +1247,7 @@ name|i
 operator|++
 index|]
 operator|=
-name|_double
+name|v
 expr_stmt|;
 block|}
 return|return
@@ -1272,7 +1272,7 @@ decl_stmt|;
 for|for
 control|(
 name|float
-name|_float
+name|v
 range|:
 operator|(
 name|Collection
@@ -1289,7 +1289,7 @@ name|i
 operator|++
 index|]
 operator|=
-name|_float
+name|v
 expr_stmt|;
 block|}
 return|return
@@ -1314,7 +1314,7 @@ decl_stmt|;
 for|for
 control|(
 name|int
-name|_int
+name|v
 range|:
 operator|(
 name|Collection
@@ -1331,7 +1331,7 @@ name|i
 operator|++
 index|]
 operator|=
-name|_int
+name|v
 expr_stmt|;
 block|}
 return|return
@@ -1356,7 +1356,7 @@ decl_stmt|;
 for|for
 control|(
 name|long
-name|_long
+name|v
 range|:
 operator|(
 name|Collection
@@ -1373,7 +1373,7 @@ name|i
 operator|++
 index|]
 operator|=
-name|_long
+name|v
 expr_stmt|;
 block|}
 return|return
@@ -1398,7 +1398,7 @@ decl_stmt|;
 for|for
 control|(
 name|short
-name|_short
+name|v
 range|:
 operator|(
 name|Collection
@@ -1415,7 +1415,7 @@ name|i
 operator|++
 index|]
 operator|=
-name|_short
+name|v
 expr_stmt|;
 block|}
 return|return
@@ -1440,7 +1440,7 @@ decl_stmt|;
 for|for
 control|(
 name|boolean
-name|_boolean
+name|v
 range|:
 operator|(
 name|Collection
@@ -1457,7 +1457,7 @@ name|i
 operator|++
 index|]
 operator|=
-name|_boolean
+name|v
 expr_stmt|;
 block|}
 return|return
@@ -1482,7 +1482,7 @@ decl_stmt|;
 for|for
 control|(
 name|byte
-name|_byte
+name|v
 range|:
 operator|(
 name|Collection
@@ -1499,7 +1499,7 @@ name|i
 operator|++
 index|]
 operator|=
-name|_byte
+name|v
 expr_stmt|;
 block|}
 return|return
@@ -1524,7 +1524,7 @@ decl_stmt|;
 for|for
 control|(
 name|char
-name|_char
+name|v
 range|:
 operator|(
 name|Collection
@@ -1541,7 +1541,7 @@ name|i
 operator|++
 index|]
 operator|=
-name|_char
+name|v
 expr_stmt|;
 block|}
 return|return
@@ -4553,14 +4553,18 @@ name|getObject
 parameter_list|()
 function_decl|;
 block|}
+comment|/** What kind of type? */
 specifier|public
 enum|enum
 name|Flavor
 block|{
+comment|/** A primitive type, e.g. {@code int}. */
 name|PRIMITIVE
 block|,
+comment|/** A type that boxes a primitive, e.g. {@link Integer}. */
 name|BOX
 block|,
+comment|/** Neither a primitive nor a boxing type. */
 name|OBJECT
 block|}
 block|}

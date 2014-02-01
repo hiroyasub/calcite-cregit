@@ -14,7 +14,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * @author jhyde  */
+comment|/**  * Operator type.  */
 end_comment
 
 begin_enum

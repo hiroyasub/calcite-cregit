@@ -3,6 +3,10 @@ begin_comment
 comment|/* // Licensed to Julian Hyde under one or more contributor license // agreements. See the NOTICE file distributed with this work for // additional information regarding copyright ownership. // // Julian Hyde licenses this file to you under the Apache License, // Version 2.0 (the "License"); you may not use this file except in // compliance with the License. You may obtain a copy of the License at: // // http://www.apache.org/licenses/LICENSE-2.0 // // Unless required by applicable law or agreed to in writing, software // distributed under the License is distributed on an "AS IS" BASIS, // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. // See the License for the specific language governing permissions and // limitations under the License. */
 end_comment
 
+begin_comment
+comment|/**  * Core linq4j tests.  */
+end_comment
+
 begin_package
 package|package
 name|net
@@ -11,43 +15,12 @@ name|hydromatic
 operator|.
 name|linq4j
 operator|.
-name|function
+name|test
 package|;
 end_package
 
-begin_import
-import|import
-name|java
-operator|.
-name|math
-operator|.
-name|BigDecimal
-import|;
-end_import
-
 begin_comment
-comment|/**  * Function that takes one parameter and returns a {@link BigDecimal} value that  * may be null.  *  * @param<T0> Type of argument #0  */
-end_comment
-
-begin_interface
-specifier|public
-interface|interface
-name|NullableBigDecimalFunction1
-parameter_list|<
-name|T0
-parameter_list|>
-extends|extends
-name|Function1
-argument_list|<
-name|T0
-argument_list|,
-name|BigDecimal
-argument_list|>
-block|{ }
-end_interface
-
-begin_comment
-comment|// End NullableBigDecimalFunction1.java
+comment|// End package-info.java
 end_comment
 
 end_unit

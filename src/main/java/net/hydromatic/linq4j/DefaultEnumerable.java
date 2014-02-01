@@ -48,7 +48,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Implementation of the {@link net.hydromatic.linq4j.Enumerable} interface that  * implements the extension methods by calling into the {@link Extensions}  * class.  *  *<p>The are two abstract methods:  * {@link #enumerator()} and {@link #iterator()}.  * The derived class can implement each separately, or implement one in terms of  * the other.</p>  */
+comment|/**  * Implementation of the {@link net.hydromatic.linq4j.Enumerable} interface that  * implements the extension methods by calling into the {@link Extensions}  * class.  *  *<p>The are two abstract methods:  * {@link #enumerator()} and {@link #iterator()}.  * The derived class can implement each separately, or implement one in terms of  * the other.</p>  *  * @param<T> Element type  */
 end_comment
 
 begin_class
@@ -2395,12 +2395,10 @@ operator|.
 name|min
 argument_list|(
 operator|(
-operator|(
 name|Enumerable
 operator|)
 name|getThis
 argument_list|()
-operator|)
 argument_list|)
 return|;
 block|}

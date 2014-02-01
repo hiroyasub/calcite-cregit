@@ -48,7 +48,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Extension methods in {@link Enumerable}.  */
+comment|/**  * Extension methods in {@link Enumerable}.  *  * @param<TSource> Element type  */
 end_comment
 
 begin_interface

@@ -66,7 +66,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Implementation of {@link OrderedQueryable} by an  * {@link net.hydromatic.linq4j.Enumerable}.  */
+comment|/**  * Implementation of {@link OrderedQueryable} by an  * {@link net.hydromatic.linq4j.Enumerable}.  *  * @param<T> Element type  */
 end_comment
 
 begin_class

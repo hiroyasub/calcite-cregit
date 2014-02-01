@@ -16,7 +16,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * Function with one parameter.  *  * @param<R> result type  * @param<T1> type of parameter 1  */
+comment|/**  * Function with one parameter.  *  * @param<R> Result type  * @param<T0> Type of parameter 0  */
 end_comment
 
 begin_interface
@@ -24,7 +24,7 @@ specifier|public
 interface|interface
 name|Function1
 parameter_list|<
-name|T1
+name|T0
 parameter_list|,
 name|R
 parameter_list|>
@@ -57,11 +57,11 @@ name|Object
 name|apply
 parameter_list|(
 name|Object
-name|v1
+name|v0
 parameter_list|)
 block|{
 return|return
-name|v1
+name|v0
 return|;
 block|}
 block|}
@@ -69,7 +69,7 @@ decl_stmt|;
 name|R
 name|apply
 parameter_list|(
-name|T1
+name|T0
 name|a0
 parameter_list|)
 function_decl|;

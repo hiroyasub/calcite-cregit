@@ -46,6 +46,7 @@ class|class
 name|ExpressionWriter
 block|{
 specifier|static
+specifier|final
 name|Indent
 name|INDENT
 init|=
@@ -783,6 +784,7 @@ literal|false
 expr_stmt|;
 block|}
 block|}
+comment|/** Helps generate strings of spaces, to indent text. */
 specifier|private
 specifier|static
 class|class

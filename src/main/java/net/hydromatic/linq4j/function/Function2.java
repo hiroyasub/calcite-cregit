@@ -16,7 +16,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * Function with two parameters.  *  * @param<R> result type  * @param<T1> type of parameter 1  * @param<T2> type of parameter 2  */
+comment|/**  * Function with two parameters.  *  * @param<R> Result type  * @param<T0> Type of argument #0  * @param<T1> Type of argument #1  */
 end_comment
 
 begin_interface
@@ -24,9 +24,9 @@ specifier|public
 interface|interface
 name|Function2
 parameter_list|<
-name|T1
+name|T0
 parameter_list|,
-name|T2
+name|T1
 parameter_list|,
 name|R
 parameter_list|>
@@ -39,11 +39,11 @@ block|{
 name|R
 name|apply
 parameter_list|(
+name|T0
+name|v0
+parameter_list|,
 name|T1
 name|v1
-parameter_list|,
-name|T2
-name|v2
 parameter_list|)
 function_decl|;
 block|}

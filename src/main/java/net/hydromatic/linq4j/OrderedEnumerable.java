@@ -14,7 +14,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * Represents the result of applying a sorting operation to an  * {@link net.hydromatic.linq4j.Enumerable}.  *  * @author jhyde  */
+comment|/**  * Represents the result of applying a sorting operation to an  * {@link net.hydromatic.linq4j.Enumerable}.  */
 end_comment
 
 begin_interface

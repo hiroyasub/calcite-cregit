@@ -40,7 +40,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Partial implementation of {@link QueryProvider}.  *  *<p>Derived class needs to implement {@link #executeQuery}.</p>  *  * @author jhyde  */
+comment|/**  * Partial implementation of {@link QueryProvider}.  *  *<p>Derived class needs to implement {@link #executeQuery}.</p>  */
 end_comment
 
 begin_class

@@ -14,7 +14,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * Provides functionality to evaluate queries against a specific data source  * wherein the type of the data is known.  *  *<p>Analogous to LINQ's System.Linq.IQueryable.</p>  */
+comment|/**  * Provides functionality to evaluate queries against a specific data source  * wherein the type of the data is known.  *  *<p>Analogous to LINQ's System.Linq.IQueryable.</p>  *  * @param<T> Element type  */
 end_comment
 
 begin_interface

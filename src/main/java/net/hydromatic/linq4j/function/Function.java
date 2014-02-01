@@ -16,7 +16,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * Base interface for all functions.  *  * @param<R> result type  */
+comment|/**  * Base interface for all functions.  *  * @param<R> Result type  */
 end_comment
 
 begin_interface

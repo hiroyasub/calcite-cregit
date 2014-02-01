@@ -24,7 +24,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Pair of an element and an ordinal.  */
+comment|/**  * Pair of an element and an ordinal.  *  * @param<E> Element type  */
 end_comment
 
 begin_class

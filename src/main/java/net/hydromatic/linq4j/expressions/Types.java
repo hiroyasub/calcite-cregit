@@ -55,9 +55,15 @@ end_comment
 
 begin_class
 specifier|public
+specifier|abstract
 class|class
 name|Types
 block|{
+specifier|private
+name|Types
+parameter_list|()
+block|{
+block|}
 comment|/**    * Creates a type with generic parameters.    */
 specifier|public
 specifier|static
@@ -2421,6 +2427,7 @@ name|type
 return|;
 block|}
 block|}
+comment|/** Implementation of {@link ParameterizedType}. */
 specifier|static
 class|class
 name|ParameterizedTypeImpl

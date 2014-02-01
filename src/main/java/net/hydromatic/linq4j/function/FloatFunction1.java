@@ -16,7 +16,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * Function that takes one parameter and returns a native {@code float} value.  */
+comment|/**  * Function that takes one parameter and returns a native {@code float} value.  *  * @param<T0> Type of argument #0  */
 end_comment
 
 begin_interface
@@ -24,7 +24,7 @@ specifier|public
 interface|interface
 name|FloatFunction1
 parameter_list|<
-name|T1
+name|T0
 parameter_list|>
 extends|extends
 name|Function
@@ -35,8 +35,8 @@ block|{
 name|float
 name|apply
 parameter_list|(
-name|T1
-name|v1
+name|T0
+name|v0
 parameter_list|)
 function_decl|;
 block|}

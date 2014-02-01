@@ -98,7 +98,6 @@ argument_list|>
 name|mapper
 parameter_list|)
 function_decl|;
-specifier|public
 name|T
 name|reduce
 parameter_list|(
@@ -112,7 +111,6 @@ argument_list|>
 name|op
 parameter_list|)
 function_decl|;
-specifier|public
 parameter_list|<
 name|U
 parameter_list|>
