@@ -23,11 +23,13 @@ name|net
 operator|.
 name|hydromatic
 operator|.
-name|linq4j
+name|optiq
 operator|.
-name|expressions
+name|impl
 operator|.
-name|Primitive
+name|java
+operator|.
+name|JavaTypeFactory
 import|;
 end_import
 
@@ -37,13 +39,11 @@ name|net
 operator|.
 name|hydromatic
 operator|.
-name|optiq
+name|linq4j
 operator|.
-name|impl
+name|expressions
 operator|.
-name|java
-operator|.
-name|JavaTypeFactory
+name|Primitive
 import|;
 end_import
 
