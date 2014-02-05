@@ -494,18 +494,47 @@ name|VolcanoRuleCall
 argument_list|>
 argument_list|()
 decl_stmt|;
+comment|/** Zero cost, according to {@link #costFactory}. Not necessarily a    * {@link org.eigenbase.relopt.volcano.VolcanoCost}. */
+specifier|private
+specifier|final
+name|RelOptCost
+name|zeroCost
+decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 comment|/**    * Creates a uninitialized<code>VolcanoPlanner</code>. To fully initialize    * it, the caller must register the desired set of relations, rules, and    * calling conventions.    */
 specifier|public
 name|VolcanoPlanner
 parameter_list|()
 block|{
-name|super
+name|this
 argument_list|(
 name|VolcanoCost
 operator|.
 name|FACTORY
 argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Creates a {@code VolcanoPlanner} with a given cost factory.    */
+specifier|protected
+name|VolcanoPlanner
+parameter_list|(
+name|RelOptCostFactory
+name|costFactory
+parameter_list|)
+block|{
+name|super
+argument_list|(
+name|costFactory
+argument_list|)
+expr_stmt|;
+name|this
+operator|.
+name|zeroCost
+operator|=
+name|costFactory
+operator|.
+name|makeZeroCost
+argument_list|()
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
@@ -3385,9 +3414,7 @@ decl_stmt|;
 if|if
 condition|(
 operator|!
-name|VolcanoCost
-operator|.
-name|ZERO
+name|zeroCost
 operator|.
 name|isLt
 argument_list|(
