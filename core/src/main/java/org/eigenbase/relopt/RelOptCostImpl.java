@@ -13,6 +13,18 @@ name|relopt
 package|;
 end_package
 
+begin_import
+import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
+name|util
+operator|.
+name|Util
+import|;
+end_import
+
 begin_comment
 comment|/**  * RelOptCostImpl provides a default implementation for the {@link RelOptCost}  * interface. It it defined in terms of a single scalar quantity; somewhat  * arbitrarily, it returns this scalar for rows processed and zero for both CPU  * and I/O.  */
 end_comment
@@ -147,16 +159,13 @@ name|hashCode
 parameter_list|()
 block|{
 return|return
-name|Double
+name|Util
 operator|.
-name|valueOf
+name|hashCode
 argument_list|(
 name|getRows
 argument_list|()
 argument_list|)
-operator|.
-name|hashCode
-argument_list|()
 return|;
 block|}
 comment|// implement RelOptCost
