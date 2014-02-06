@@ -621,6 +621,11 @@ argument_list|,
 name|relA
 argument_list|,
 name|relC
+argument_list|,
+name|bottomJoin
+operator|.
+name|getJoinType
+argument_list|()
 argument_list|)
 decl_stmt|;
 comment|// target: | A       | C      | B |
@@ -748,6 +753,11 @@ argument_list|,
 name|newBottomJoin
 argument_list|,
 name|relB
+argument_list|,
+name|topJoin
+operator|.
+name|getJoinType
+argument_list|()
 argument_list|)
 decl_stmt|;
 assert|assert
@@ -1189,6 +1199,11 @@ argument_list|,
 name|relC
 argument_list|,
 name|relB
+argument_list|,
+name|bottomJoin
+operator|.
+name|getJoinType
+argument_list|()
 argument_list|)
 decl_stmt|;
 comment|// target: | C      | B | A       |
@@ -1316,6 +1331,11 @@ argument_list|,
 name|newBottomJoin
 argument_list|,
 name|relA
+argument_list|,
+name|topJoin
+operator|.
+name|getJoinType
+argument_list|()
 argument_list|)
 decl_stmt|;
 specifier|final

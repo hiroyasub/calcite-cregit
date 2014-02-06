@@ -70,6 +70,35 @@ name|FULL
 operator|)
 return|;
 block|}
+comment|/**    * Swaps left to right, and vice versa.    */
+specifier|public
+name|JoinRelType
+name|swap
+parameter_list|()
+block|{
+switch|switch
+condition|(
+name|this
+condition|)
+block|{
+case|case
+name|LEFT
+case|:
+return|return
+name|RIGHT
+return|;
+case|case
+name|RIGHT
+case|:
+return|return
+name|LEFT
+return|;
+default|default:
+return|return
+name|this
+return|;
+block|}
+block|}
 block|}
 end_enum
 

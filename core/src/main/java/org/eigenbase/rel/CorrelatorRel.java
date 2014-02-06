@@ -404,6 +404,9 @@ name|left
 parameter_list|,
 name|RelNode
 name|right
+parameter_list|,
+name|JoinRelType
+name|joinType
 parameter_list|)
 block|{
 assert|assert
@@ -429,6 +432,8 @@ name|right
 argument_list|,
 name|correlations
 argument_list|,
+name|this
+operator|.
 name|joinType
 argument_list|)
 return|;

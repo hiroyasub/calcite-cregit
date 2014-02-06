@@ -1166,6 +1166,9 @@ name|left
 parameter_list|,
 name|RelNode
 name|right
+parameter_list|,
+name|JoinRelType
+name|joinType
 parameter_list|)
 block|{
 try|try
@@ -1185,6 +1188,8 @@ name|right
 argument_list|,
 name|conditionExpr
 argument_list|,
+name|this
+operator|.
 name|joinType
 argument_list|,
 name|variablesStopped

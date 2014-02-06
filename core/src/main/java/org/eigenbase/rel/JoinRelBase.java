@@ -1302,10 +1302,12 @@ name|get
 argument_list|(
 literal|1
 argument_list|)
+argument_list|,
+name|joinType
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates a copy of this join, overriding condition, system fields and    * inputs.    *    *<p>General contract as {@link org.eigenbase.rel.RelNode#copy}.    *    * @param conditionExpr Condition    * @param left          Left input    * @param right         Right input    * @return Copy of this join    */
+comment|/**    * Creates a copy of this join, overriding condition, system fields and    * inputs.    *    *<p>General contract as {@link org.eigenbase.rel.RelNode#copy}.    *    * @param conditionExpr Condition    * @param left          Left input    * @param right         Right input    * @param joinType      Join type    * @return Copy of this join    */
 specifier|public
 specifier|abstract
 name|JoinRelBase
@@ -1322,6 +1324,9 @@ name|left
 parameter_list|,
 name|RelNode
 name|right
+parameter_list|,
+name|JoinRelType
+name|joinType
 parameter_list|)
 function_decl|;
 block|}

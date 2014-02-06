@@ -336,6 +336,9 @@ name|left
 parameter_list|,
 name|RelNode
 name|right
+parameter_list|,
+name|JoinRelType
+name|joinType
 parameter_list|)
 block|{
 assert|assert
