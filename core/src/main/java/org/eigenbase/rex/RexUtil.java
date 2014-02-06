@@ -2248,7 +2248,7 @@ return|return
 literal|true
 return|;
 block|}
-comment|/**    * Converts a collection of expressions into an AND.    * If there are zero expressions, returns TRUE.    * If there is one expression, returns just that expression.    * Removes expressions that always evaluate to TRUE.    */
+comment|/**    * Converts a collection of expressions into an AND.    * If there are zero expressions, returns TRUE.    * If there is one expression, returns just that expression.    * Removes expressions that always evaluate to TRUE.    * Returns null only if {@code nullOnEmpty} and expression is TRUE.    */
 specifier|public
 specifier|static
 name|RexNode
