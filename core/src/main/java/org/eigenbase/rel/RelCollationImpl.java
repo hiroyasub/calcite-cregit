@@ -395,10 +395,6 @@ name|of
 argument_list|(
 name|of
 argument_list|(
-name|ImmutableList
-operator|.
-name|of
-argument_list|(
 operator|new
 name|RelFieldCollation
 argument_list|(
@@ -415,7 +411,6 @@ operator|.
 name|NullDirection
 operator|.
 name|UNSPECIFIED
-argument_list|)
 argument_list|)
 argument_list|)
 argument_list|)
@@ -479,17 +474,13 @@ argument_list|()
 decl_stmt|;
 if|if
 condition|(
-operator|(
 name|index
 operator|<
 literal|0
-operator|)
 operator|||
-operator|(
 name|index
 operator|>=
 name|fieldCount
-operator|)
 condition|)
 block|{
 assert|assert
