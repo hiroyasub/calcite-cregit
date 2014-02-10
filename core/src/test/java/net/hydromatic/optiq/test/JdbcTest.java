@@ -4069,6 +4069,131 @@ literal|730
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Tests 3-way AND.    *    *<p>With<a href="https://github.com/julianhyde/optiq/issues/127">optiq-127,    * "EnumerableCalcRel can't support 3+ AND conditions"</a>, the last condition    * is ignored and rows with deptno=10 are wrongly returned.</p>    */
+annotation|@
+name|Ignore
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAnd3
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select \"deptno\" from \"hr\".\"emps\"\n"
+operator|+
+literal|"where \"emps\".\"empid\"< 240\n"
+operator|+
+literal|"and \"salary\"> 7500.0"
+operator|+
+literal|"and \"emps\".\"deptno\"> 10\n"
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"deptno=10"
+argument_list|,
+literal|"deptno=20"
+argument_list|,
+literal|"deptno=10"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests a date literal against a JDBC data source. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJdbcDate
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|FOODMART_CLONE
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select count(*) as c from (\n"
+operator|+
+literal|"  select 1 from \"foodmart\".\"employee\" as e1\n"
+operator|+
+literal|"  where \"position_title\" = 'VP Country Manager'\n"
+operator|+
+literal|"  and \"birth_date\"< DATE '1950-01-01'\n"
+operator|+
+literal|"  and \"gender\" = 'F')"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"C=1\n"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests a timestamp literal against JDBC data source. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJdbcTimestamp
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|JDBC_FOODMART
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select count(*) as c from (\n"
+operator|+
+literal|"  select 1 from \"foodmart\".\"employee\" as e1\n"
+operator|+
+literal|"  where \"hire_date\"< TIMESTAMP '1996-06-05 00:00:00'\n"
+operator|+
+literal|"  and \"gender\" = 'F')"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"C=287\n"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Unit test for self-join. Left and right children of the join are the same    * relational expression. */
 annotation|@
 name|Test
