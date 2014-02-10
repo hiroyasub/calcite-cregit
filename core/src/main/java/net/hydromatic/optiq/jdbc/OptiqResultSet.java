@@ -93,6 +93,8 @@ specifier|protected
 name|OptiqResultSet
 name|execute
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 comment|// Call driver's callback. It is permitted to throw a RuntimeException.
 name|OptiqConnectionImpl

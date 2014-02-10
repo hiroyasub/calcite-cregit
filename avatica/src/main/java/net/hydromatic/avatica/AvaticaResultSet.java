@@ -489,11 +489,13 @@ argument_list|()
 throw|;
 comment|// TODO:
 block|}
-comment|/**    * Executes this result set. (Not a JDBC method.)    *    *<p>Note that execute cannot occur in the constructor, because the    * constructor occurs while the statement is locked, to make sure that    * execute/cancel don't happen at the same time.</p>    *    * @see net.hydromatic.avatica.AvaticaConnection.Trojan#execute(AvaticaResultSet)    */
+comment|/**    * Executes this result set. (Not a JDBC method.)    *    *<p>Note that execute cannot occur in the constructor, because the    * constructor occurs while the statement is locked, to make sure that    * execute/cancel don't happen at the same time.</p>    *    * @see net.hydromatic.avatica.AvaticaConnection.Trojan#execute(AvaticaResultSet)    *    * @throws SQLException if execute fails for some reason.    */
 specifier|protected
 name|AvaticaResultSet
 name|execute
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 name|this
 operator|.

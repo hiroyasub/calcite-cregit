@@ -1396,7 +1396,7 @@ name|Trojan
 parameter_list|()
 block|{
 block|}
-comment|/** A means for anyone who has a trojan to call the protected method      * {@link net.hydromatic.avatica.AvaticaResultSet#execute()}. */
+comment|/** A means for anyone who has a trojan to call the protected method      * {@link net.hydromatic.avatica.AvaticaResultSet#execute()}.      * @throws SQLException if execute fails for some reason. */
 specifier|public
 name|ResultSet
 name|execute
@@ -1404,6 +1404,8 @@ parameter_list|(
 name|AvaticaResultSet
 name|resultSet
 parameter_list|)
+throws|throws
+name|SQLException
 block|{
 return|return
 name|resultSet
