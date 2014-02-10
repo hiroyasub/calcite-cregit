@@ -95,6 +95,8 @@ parameter_list|,
 name|Properties
 name|info
 parameter_list|)
+throws|throws
+name|SQLException
 function_decl|;
 name|AvaticaStatement
 name|newStatement
@@ -111,6 +113,8 @@ parameter_list|,
 name|int
 name|resultSetHoldability
 parameter_list|)
+throws|throws
+name|SQLException
 function_decl|;
 name|AvaticaPreparedStatement
 name|newPreparedStatement
@@ -146,6 +150,8 @@ parameter_list|,
 name|TimeZone
 name|timeZone
 parameter_list|)
+throws|throws
+name|SQLException
 function_decl|;
 name|AvaticaDatabaseMetaData
 name|newDatabaseMetaData
@@ -166,6 +172,8 @@ name|ColumnMetaData
 argument_list|>
 name|columnMetaDataList
 parameter_list|)
+throws|throws
+name|SQLException
 function_decl|;
 block|}
 end_interface
