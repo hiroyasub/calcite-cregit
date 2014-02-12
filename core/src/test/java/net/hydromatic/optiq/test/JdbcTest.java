@@ -4071,8 +4071,6 @@ expr_stmt|;
 block|}
 comment|/** Tests 3-way AND.    *    *<p>With<a href="https://github.com/julianhyde/optiq/issues/127">optiq-127,    * "EnumerableCalcRel can't support 3+ AND conditions"</a>, the last condition    * is ignored and rows with deptno=10 are wrongly returned.</p>    */
 annotation|@
-name|Ignore
-annotation|@
 name|Test
 specifier|public
 name|void
@@ -4106,11 +4104,7 @@ argument_list|)
 operator|.
 name|returnsUnordered
 argument_list|(
-literal|"deptno=10"
-argument_list|,
 literal|"deptno=20"
-argument_list|,
-literal|"deptno=10"
 argument_list|)
 expr_stmt|;
 block|}
