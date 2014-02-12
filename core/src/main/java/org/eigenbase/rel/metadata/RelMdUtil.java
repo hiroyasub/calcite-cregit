@@ -624,7 +624,7 @@ return|return
 name|selectivity
 return|;
 block|}
-comment|/**    * Returns true if the columns represented in a bit mask are definitely    * known to form a unique column set.    *    * @param rel     the relnode that the column mask correponds to    * @param colMask bit mask containing columns that will be tested for    *                uniqueness    * @return true if bit mask represents a unique column set; false if not (or    * if no metadata is available)    */
+comment|/**    * Returns true if the columns represented in a bit mask are definitely    * known to form a unique column set.    *    * @param rel     the relational expression that the column mask corresponds    *                to    * @param colMask bit mask containing columns that will be tested for    *                uniqueness    * @return true if bit mask represents a unique column set; false if not (or    * if no metadata is available)    */
 specifier|public
 specifier|static
 name|boolean
@@ -647,20 +647,15 @@ argument_list|(
 name|rel
 argument_list|,
 name|colMask
+argument_list|,
+literal|false
 argument_list|)
 decl_stmt|;
-if|if
-condition|(
+return|return
 name|b
-operator|==
+operator|!=
 literal|null
-condition|)
-block|{
-return|return
-literal|false
-return|;
-block|}
-return|return
+operator|&&
 name|b
 return|;
 block|}
@@ -741,22 +736,15 @@ argument_list|,
 name|columnRefs
 argument_list|)
 decl_stmt|;
-if|if
-condition|(
+return|return
 name|b
-operator|==
+operator|!=
 literal|null
-condition|)
-block|{
-return|return
-literal|false
-return|;
-block|}
-return|return
+operator|&&
 name|b
 return|;
 block|}
-comment|/**    * Returns true if the columns represented in a bit mask are definitely    * known to form a unique column set, when nulls have been filtered from    * the columns.    *    * @param rel     the relnode that the column mask correponds to    * @param colMask bit mask containing columns that will be tested for    *                uniqueness    * @return true if bit mask represents a unique column set; false if not (or    * if no metadata is available)    */
+comment|/**    * Returns true if the columns represented in a bit mask are definitely    * known to form a unique column set, when nulls have been filtered from    * the columns.    *    * @param rel     the relational expression that the column mask corresponds    *                to    * @param colMask bit mask containing columns that will be tested for    *                uniqueness    * @return true if bit mask represents a unique column set; false if not (or    * if no metadata is available)    */
 specifier|public
 specifier|static
 name|boolean
@@ -892,47 +880,7 @@ return|return
 name|b
 return|;
 block|}
-comment|/**    * Sets a bitmap corresponding to a list of keys.    *    * @param keys list of keys    * @return the bitmap    */
-specifier|public
-specifier|static
-name|BitSet
-name|setBitKeys
-parameter_list|(
-name|List
-argument_list|<
-name|Integer
-argument_list|>
-name|keys
-parameter_list|)
-block|{
-name|BitSet
-name|bits
-init|=
-operator|new
-name|BitSet
-argument_list|()
-decl_stmt|;
-for|for
-control|(
-name|Integer
-name|key
-range|:
-name|keys
-control|)
-block|{
-name|bits
-operator|.
-name|set
-argument_list|(
-name|key
-argument_list|)
-expr_stmt|;
-block|}
-return|return
-name|bits
-return|;
-block|}
-comment|/**    * Separates a bitmask representing a join into masks representing the left    * and right inputs into the join    *    * @param groupKey      original bitmask    * @param leftMask      left bitmask to be set    * @param rightMask     right bitmask to be set    * @param nFieldsOnLeft number of fields in the left input    */
+comment|/**    * Separates a bit-mask representing a join into masks representing the left    * and right inputs into the join    *    * @param groupKey      original bit-mask    * @param leftMask      left bit-mask to be set    * @param rightMask     right bit-mask to be set    * @param nFieldsOnLeft number of fields in the left input    */
 specifier|public
 specifier|static
 name|void

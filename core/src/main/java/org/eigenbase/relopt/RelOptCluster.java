@@ -102,6 +102,10 @@ name|RelMetadataProvider
 name|metadataProvider
 decl_stmt|;
 specifier|private
+name|MetadataFactory
+name|metadataFactory
+decl_stmt|;
+specifier|private
 specifier|final
 name|RelTraitSet
 name|emptyTraitSet
@@ -170,11 +174,12 @@ argument_list|)
 expr_stmt|;
 comment|// set up a default rel metadata provider,
 comment|// giving the planner first crack at everything
-name|metadataProvider
-operator|=
+name|setMetadataProvider
+argument_list|(
 operator|new
 name|DefaultRelMetadataProvider
 argument_list|()
+argument_list|)
 expr_stmt|;
 name|this
 operator|.
@@ -271,6 +276,25 @@ name|metadataProvider
 operator|=
 name|metadataProvider
 expr_stmt|;
+name|this
+operator|.
+name|metadataFactory
+operator|=
+operator|new
+name|MetadataFactoryImpl
+argument_list|(
+name|metadataProvider
+argument_list|)
+expr_stmt|;
+block|}
+specifier|public
+name|MetadataFactory
+name|getMetadataFactory
+parameter_list|()
+block|{
+return|return
+name|metadataFactory
+return|;
 block|}
 specifier|public
 name|RelTraitSet

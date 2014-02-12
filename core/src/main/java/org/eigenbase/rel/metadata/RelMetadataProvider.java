@@ -27,6 +27,20 @@ name|*
 import|;
 end_import
 
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|base
+operator|.
+name|Function
+import|;
+end_import
+
 begin_comment
 comment|/**  * RelMetadataProvider defines an interface for obtaining metadata about  * relational expressions. This interface is weakly-typed and is not intended to  * be called directly in most contexts; instead, use a strongly-typed facade  * such as {@link RelMetadataQuery}.  *  *<p>For background and motivation, see<a  * href="http://wiki.eigenbase.org/RelationalExpressionMetadata">wiki</a>.  */
 end_comment
@@ -37,19 +51,30 @@ interface|interface
 name|RelMetadataProvider
 block|{
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**    * Retrieves metadata about a relational expression.    *    * @param rel               relational expression of interest    * @param metadataQueryName name of metadata query to invoke    * @param args              arguments to metadata query (expected number and    *                          type depend on query name; must have well-defined    *                          hashCode/equals for use by caching); null can be    *                          used instead of empty array    * @return metadata result (actual type depends on query name), or null if    * the provider cannot answer the given query/rel combination; it is better    * to return null than to return a possibly incorrect answer    */
-name|Object
-name|getRelMetadata
-parameter_list|(
+comment|/**    * Retrieves metadata of a particular type and for a particular sub-class    * of relational expression.    *    *<p>The object returned is a function. It can be applied to a relational    * expression of the given type to create a metadata object.</p>    *    *<p>For example, you might call</p>    *    *<blockquote><pre>    * RelMetadataProvider provider;    * FilterRel filter;    * RexNode predicate;    * Function&lt;RelNode, Metadata&gt; function =    *   provider.apply(FilterRel.class, Selectivity.class};    * Selectivity selectivity = function.apply(filter);    * Double d = selectivity.selectivity(predicate);    *</pre></blockquote>    *    * @param relClass Type of relational expression    * @param metadataClass Type of metadata    * @return Function that will field a metadata instance; or null if this    *     provider cannot supply metadata of this type    */
+name|Function
+argument_list|<
 name|RelNode
-name|rel
+argument_list|,
+name|Metadata
+argument_list|>
+name|apply
+parameter_list|(
+name|Class
+argument_list|<
+name|?
+extends|extends
+name|RelNode
+argument_list|>
+name|relClass
 parameter_list|,
-name|String
-name|metadataQueryName
-parameter_list|,
-name|Object
-index|[]
-name|args
+name|Class
+argument_list|<
+name|?
+extends|extends
+name|Metadata
+argument_list|>
+name|metadataClass
 parameter_list|)
 function_decl|;
 block|}

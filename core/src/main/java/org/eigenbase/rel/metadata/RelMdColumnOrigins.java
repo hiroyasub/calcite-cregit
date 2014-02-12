@@ -61,6 +61,18 @@ name|*
 import|;
 end_import
 
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|optiq
+operator|.
+name|BuiltinMethod
+import|;
+end_import
+
 begin_comment
 comment|/**  * RelMdColumnOrigins supplies a default implementation of {@link  * RelMetadataQuery#getColumnOrigins} for the standard logical algebra.  */
 end_comment
@@ -69,36 +81,33 @@ begin_class
 specifier|public
 class|class
 name|RelMdColumnOrigins
-extends|extends
-name|ReflectiveRelMetadataProvider
 block|{
-comment|//~ Constructors -----------------------------------------------------------
 specifier|public
+specifier|static
+specifier|final
+name|RelMetadataProvider
+name|SOURCE
+init|=
+name|ReflectiveRelMetadataProvider
+operator|.
+name|reflectiveSource
+argument_list|(
+name|BuiltinMethod
+operator|.
+name|COLUMN_ORIGIN
+operator|.
+name|method
+argument_list|,
+operator|new
+name|RelMdColumnOrigins
+argument_list|()
+argument_list|)
+decl_stmt|;
+comment|//~ Constructors -----------------------------------------------------------
+specifier|private
 name|RelMdColumnOrigins
 parameter_list|()
 block|{
-comment|// Tell superclass reflection about parameter types expected
-comment|// for various metadata queries.
-comment|// This corresponds to getColumnOrigins(rel, int iOutputColumn); note
-comment|// that we don't specify the rel type because we always overload on
-comment|// that.
-name|mapParameterTypes
-argument_list|(
-literal|"getColumnOrigins"
-argument_list|,
-name|Collections
-operator|.
-name|singletonList
-argument_list|(
-operator|(
-name|Class
-operator|)
-name|Integer
-operator|.
-name|TYPE
-argument_list|)
-argument_list|)
-expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
 specifier|public
@@ -393,6 +402,9 @@ argument_list|()
 control|)
 block|{
 name|Set
+argument_list|<
+name|RelColumnOrigin
+argument_list|>
 name|inputSet
 init|=
 name|invokeGetColumnOrigins

@@ -97,6 +97,18 @@ name|hydromatic
 operator|.
 name|optiq
 operator|.
+name|BuiltinMethod
+import|;
+end_import
+
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|optiq
+operator|.
 name|util
 operator|.
 name|BitSets
@@ -111,36 +123,33 @@ begin_class
 specifier|public
 class|class
 name|RelMdSelectivity
-extends|extends
-name|ReflectiveRelMetadataProvider
 block|{
-comment|//~ Constructors -----------------------------------------------------------
 specifier|public
+specifier|static
+specifier|final
+name|RelMetadataProvider
+name|SOURCE
+init|=
+name|ReflectiveRelMetadataProvider
+operator|.
+name|reflectiveSource
+argument_list|(
+name|BuiltinMethod
+operator|.
+name|SELECTIVITY
+operator|.
+name|method
+argument_list|,
+operator|new
+name|RelMdSelectivity
+argument_list|()
+argument_list|)
+decl_stmt|;
+comment|//~ Constructors -----------------------------------------------------------
+specifier|private
 name|RelMdSelectivity
 parameter_list|()
 block|{
-comment|// Tell superclass reflection about parameter types expected
-comment|// for various metadata queries.
-comment|// This corresponds to getSelectivity(rel, RexNode predicate);
-comment|// note that we don't specify the rel type because we always overload
-comment|// on that.
-name|mapParameterTypes
-argument_list|(
-literal|"getSelectivity"
-argument_list|,
-name|Collections
-operator|.
-name|singletonList
-argument_list|(
-operator|(
-name|Class
-operator|)
-name|RexNode
-operator|.
-name|class
-argument_list|)
-argument_list|)
-expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
 specifier|public

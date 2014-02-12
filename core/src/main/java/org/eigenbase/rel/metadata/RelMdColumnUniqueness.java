@@ -97,6 +97,18 @@ name|hydromatic
 operator|.
 name|optiq
 operator|.
+name|BuiltinMethod
+import|;
+end_import
+
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|optiq
+operator|.
 name|util
 operator|.
 name|BitSets
@@ -111,64 +123,33 @@ begin_class
 specifier|public
 class|class
 name|RelMdColumnUniqueness
-extends|extends
-name|ReflectiveRelMetadataProvider
 block|{
-comment|//~ Constructors -----------------------------------------------------------
 specifier|public
+specifier|static
+specifier|final
+name|RelMetadataProvider
+name|SOURCE
+init|=
+name|ReflectiveRelMetadataProvider
+operator|.
+name|reflectiveSource
+argument_list|(
+name|BuiltinMethod
+operator|.
+name|COLUMN_UNIQUENESS
+operator|.
+name|method
+argument_list|,
+operator|new
+name|RelMdColumnUniqueness
+argument_list|()
+argument_list|)
+decl_stmt|;
+comment|//~ Constructors -----------------------------------------------------------
+specifier|private
 name|RelMdColumnUniqueness
 parameter_list|()
 block|{
-comment|// Tell superclass reflection about parameter types expected
-comment|// for various metadata queries.
-comment|// This corresponds to areColumnsUnique(rel, BitSet columns,
-comment|// boolean ignoreNulls);
-comment|// note that we don't specify the rel type because we always overload
-comment|// on that.
-name|List
-argument_list|<
-name|Class
-argument_list|>
-name|args
-init|=
-operator|new
-name|ArrayList
-argument_list|<
-name|Class
-argument_list|>
-argument_list|()
-decl_stmt|;
-name|args
-operator|.
-name|add
-argument_list|(
-operator|(
-name|Class
-operator|)
-name|BitSet
-operator|.
-name|class
-argument_list|)
-expr_stmt|;
-name|args
-operator|.
-name|add
-argument_list|(
-operator|(
-name|Class
-operator|)
-name|Boolean
-operator|.
-name|TYPE
-argument_list|)
-expr_stmt|;
-name|mapParameterTypes
-argument_list|(
-literal|"areColumnsUnique"
-argument_list|,
-name|args
-argument_list|)
-expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
 specifier|public

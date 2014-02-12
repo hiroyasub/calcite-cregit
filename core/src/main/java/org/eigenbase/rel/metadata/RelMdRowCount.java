@@ -75,6 +75,18 @@ name|*
 import|;
 end_import
 
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|optiq
+operator|.
+name|BuiltinMethod
+import|;
+end_import
+
 begin_comment
 comment|/**  * RelMdRowCount supplies a default implementation of {@link  * RelMetadataQuery#getRowCount} for the standard logical algebra.  */
 end_comment
@@ -83,9 +95,28 @@ begin_class
 specifier|public
 class|class
 name|RelMdRowCount
-extends|extends
-name|ReflectiveRelMetadataProvider
 block|{
+specifier|public
+specifier|static
+specifier|final
+name|RelMetadataProvider
+name|SOURCE
+init|=
+name|ReflectiveRelMetadataProvider
+operator|.
+name|reflectiveSource
+argument_list|(
+name|BuiltinMethod
+operator|.
+name|ROW_COUNT
+operator|.
+name|method
+argument_list|,
+operator|new
+name|RelMdRowCount
+argument_list|()
+argument_list|)
+decl_stmt|;
 comment|//~ Methods ----------------------------------------------------------------
 specifier|public
 name|Double

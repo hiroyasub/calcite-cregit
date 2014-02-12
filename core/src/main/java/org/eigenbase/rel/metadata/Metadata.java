@@ -9,7 +9,9 @@ name|org
 operator|.
 name|eigenbase
 operator|.
-name|stat
+name|rel
+operator|.
+name|metadata
 package|;
 end_package
 
@@ -19,43 +21,31 @@ name|org
 operator|.
 name|eigenbase
 operator|.
-name|sarg
+name|rel
 operator|.
-name|*
+name|RelNode
 import|;
 end_import
 
 begin_comment
-comment|/**  * This class encapsulates statistics for a RelNode  */
+comment|/**  * Metadata about a relational expression.  *  *<p>For particular types of metadata, a sub-class defines one of more methods  * to query that metadata. Then a {@link RelMetadataProvider} can offer those  * kinds of metadata for particular sub-classes of {@link RelNode}.</p>  *  *<p>User code (typically in a planner rule or an implementation of  * {@link RelNode#computeSelfCost(org.eigenbase.relopt.RelOptPlanner)}) acquires  * a {@code Metadata} instance by calling {@link RelNode#metadata}.</p>  *  *<p>A {@code Metadata} instance already knows which particular {@code RelNode}  * it is describing, so the methods do not pass in the {@code RelNode}. In fact,  * quite a few metadata methods have no extra parameters. For instance, you can  * get the row-count as follows:</p>  *  *<blockquote><pre><code>  * RelNode rel;  * double rowCount = rel.metadata(RowCount.class).rowCount();  *</code></pre></blockquote>  */
 end_comment
 
 begin_interface
 specifier|public
 interface|interface
-name|RelStatSource
+name|Metadata
 block|{
-comment|//~ Methods ----------------------------------------------------------------
-comment|/**    * Returns the number of rows in a relation, as determined by statistics    *    * @return a row count, or null if one could not be determined    */
-name|Double
-name|getRowCount
+comment|/** Returns the relational expression that this metadata is about. */
+name|RelNode
+name|rel
 parameter_list|()
-function_decl|;
-comment|/**    * Returns statistics pertaining to a column specified by the 0-based    * ordinal and the sargable predicates associated with that column. The    * second argument can be null if there are no sargable predicates on the    * column.    *    * @param ordinal   zero based column ordinal    * @param predicate associated predicates(s), evaluated as intervals    * @return filtered column statistics, or null if they could not be obtained    */
-name|RelStatColumnStatistics
-name|getColumnStatistics
-parameter_list|(
-name|int
-name|ordinal
-parameter_list|,
-name|SargIntervalSequence
-name|predicate
-parameter_list|)
 function_decl|;
 block|}
 end_interface
 
 begin_comment
-comment|// End RelStatSource.java
+comment|// End Metadata.java
 end_comment
 
 end_unit

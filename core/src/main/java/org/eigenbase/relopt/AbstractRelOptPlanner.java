@@ -636,8 +636,11 @@ specifier|public
 name|void
 name|registerMetadataProviders
 parameter_list|(
-name|ChainedRelMetadataProvider
-name|chain
+name|List
+argument_list|<
+name|RelMetadataProvider
+argument_list|>
+name|list
 parameter_list|)
 block|{
 block|}

@@ -9,7 +9,9 @@ name|org
 operator|.
 name|eigenbase
 operator|.
-name|stat
+name|rel
+operator|.
+name|metadata
 package|;
 end_package
 
@@ -19,43 +21,45 @@ name|org
 operator|.
 name|eigenbase
 operator|.
-name|sarg
+name|rel
 operator|.
-name|*
+name|RelNode
 import|;
 end_import
 
 begin_comment
-comment|/**  * This class encapsulates statistics for a RelNode  */
+comment|/**  * Source of metadata about relational expressions.  *  *<p>The metadata is typically various kinds of statistics used to estimate  * costs.</p>  *  *<p>Each kind of metadata has an interface that extends {@link Metadata} and  * has a method. Some examples: {@link BuiltInMetadata.Selectivity},  * {@link BuiltInMetadata.ColumnUniqueness}.</p>  */
 end_comment
 
 begin_interface
 specifier|public
 interface|interface
-name|RelStatSource
+name|MetadataFactory
 block|{
-comment|//~ Methods ----------------------------------------------------------------
-comment|/**    * Returns the number of rows in a relation, as determined by statistics    *    * @return a row count, or null if one could not be determined    */
-name|Double
-name|getRowCount
-parameter_list|()
-function_decl|;
-comment|/**    * Returns statistics pertaining to a column specified by the 0-based    * ordinal and the sargable predicates associated with that column. The    * second argument can be null if there are no sargable predicates on the    * column.    *    * @param ordinal   zero based column ordinal    * @param predicate associated predicates(s), evaluated as intervals    * @return filtered column statistics, or null if they could not be obtained    */
-name|RelStatColumnStatistics
-name|getColumnStatistics
+comment|/** Returns a metadata interface to get a particular kind of metadata    * from a particular relational expression. Returns null if that kind of    * metadata is not available. */
+parameter_list|<
+name|T
+extends|extends
+name|Metadata
+parameter_list|>
+name|T
+name|query
 parameter_list|(
-name|int
-name|ordinal
+name|RelNode
+name|rel
 parameter_list|,
-name|SargIntervalSequence
-name|predicate
+name|Class
+argument_list|<
+name|T
+argument_list|>
+name|clazz
 parameter_list|)
 function_decl|;
 block|}
 end_interface
 
 begin_comment
-comment|// End RelStatSource.java
+comment|// End MetadataFactory.java
 end_comment
 
 end_unit

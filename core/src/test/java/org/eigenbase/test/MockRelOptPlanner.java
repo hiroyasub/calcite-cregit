@@ -107,6 +107,12 @@ specifier|private
 name|RelNode
 name|transformationResult
 decl_stmt|;
+specifier|private
+name|long
+name|metadataTimestamp
+init|=
+literal|0L
+decl_stmt|;
 comment|//~ Methods ----------------------------------------------------------------
 comment|/** Creates MockRelOptPlanner. */
 specifier|public
@@ -635,6 +641,36 @@ block|{
 return|return
 literal|true
 return|;
+block|}
+annotation|@
+name|Override
+specifier|public
+name|long
+name|getRelMetadataTimestamp
+parameter_list|(
+name|RelNode
+name|rel
+parameter_list|)
+block|{
+return|return
+name|metadataTimestamp
+return|;
+block|}
+comment|/** Allow tests to tweak the timestamp. */
+specifier|public
+name|void
+name|setRelMetadataTimestamp
+parameter_list|(
+name|long
+name|metadataTimestamp
+parameter_list|)
+block|{
+name|this
+operator|.
+name|metadataTimestamp
+operator|=
+name|metadataTimestamp
+expr_stmt|;
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------
 specifier|private

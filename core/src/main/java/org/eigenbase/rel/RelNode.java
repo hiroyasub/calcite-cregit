@@ -208,6 +208,22 @@ name|RelOptPlanner
 name|planner
 parameter_list|)
 function_decl|;
+comment|/**    * Returns a metadata interface.    *    * @param metadataClass Metadata interface    * @param<M> Type of metadata being requested    * @return Metadata object that supplies the desired metadata (never null,    *     although if the information is not present the metadata object may    *     return null from all methods)    */
+parameter_list|<
+name|M
+extends|extends
+name|Metadata
+parameter_list|>
+name|M
+name|metadata
+parameter_list|(
+name|Class
+argument_list|<
+name|M
+argument_list|>
+name|metadataClass
+parameter_list|)
+function_decl|;
 comment|/**    * Describes the inputs and attributes of this relational expression.    * Each node should call {@code super.explain}, then call the    * {@link RelWriterImpl#input(String, RelNode)}    * and {@link RelWriterImpl#item(String, Object)} methods for each input    * and attribute.    *    * @param pw Plan writer    */
 name|void
 name|explain
