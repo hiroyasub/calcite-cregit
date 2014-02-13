@@ -8103,7 +8103,7 @@ specifier|static
 name|boolean
 name|checkProjAndChildInputs
 parameter_list|(
-name|ProjectRel
+name|ProjectRelBase
 name|project
 parameter_list|,
 name|boolean

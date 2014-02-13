@@ -43,6 +43,20 @@ name|org
 operator|.
 name|eigenbase
 operator|.
+name|rel
+operator|.
+name|RelFactories
+operator|.
+name|ProjectFactory
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
 name|relopt
 operator|.
 name|*
@@ -89,6 +103,11 @@ specifier|final
 name|boolean
 name|force
 decl_stmt|;
+specifier|private
+specifier|final
+name|ProjectFactory
+name|projectFactory
+decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 comment|/**    * Creates a MergeProjectRule.    */
 specifier|private
@@ -98,6 +117,10 @@ block|{
 name|this
 argument_list|(
 literal|false
+argument_list|,
+name|RelFactories
+operator|.
+name|DEFAULT_PROJECT_FACTORY
 argument_list|)
 expr_stmt|;
 block|}
@@ -107,6 +130,9 @@ name|MergeProjectRule
 parameter_list|(
 name|boolean
 name|force
+parameter_list|,
+name|ProjectFactory
+name|pFactory
 parameter_list|)
 block|{
 name|super
@@ -145,6 +171,10 @@ name|force
 operator|=
 name|force
 expr_stmt|;
+name|projectFactory
+operator|=
+name|pFactory
+expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
 comment|// implement RelOptRule
@@ -156,7 +186,7 @@ name|RelOptRuleCall
 name|call
 parameter_list|)
 block|{
-name|ProjectRel
+name|ProjectRelBase
 name|topProject
 init|=
 name|call
@@ -166,7 +196,7 @@ argument_list|(
 literal|0
 argument_list|)
 decl_stmt|;
-name|ProjectRel
+name|ProjectRelBase
 name|bottomProject
 init|=
 name|call
@@ -361,13 +391,10 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|// replace the two projects with a combined projection
-name|ProjectRel
+name|RelNode
 name|newProjectRel
 init|=
-operator|(
-name|ProjectRel
-operator|)
-name|CalcRel
+name|projectFactory
 operator|.
 name|createProject
 argument_list|(

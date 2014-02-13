@@ -43,6 +43,20 @@ name|org
 operator|.
 name|eigenbase
 operator|.
+name|rel
+operator|.
+name|RelFactories
+operator|.
+name|ProjectFactory
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
 name|relopt
 operator|.
 name|*
@@ -207,6 +221,11 @@ argument_list|,
 literal|"PullUpProjectsAboveJoinRule: with ProjectRel on right"
 argument_list|)
 decl_stmt|;
+specifier|private
+specifier|final
+name|ProjectFactory
+name|projectFactory
+decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 specifier|public
 name|PullUpProjectsAboveJoinRule
@@ -218,12 +237,41 @@ name|String
 name|description
 parameter_list|)
 block|{
+name|this
+argument_list|(
+name|operand
+argument_list|,
+name|description
+argument_list|,
+name|RelFactories
+operator|.
+name|DEFAULT_PROJECT_FACTORY
+argument_list|)
+expr_stmt|;
+block|}
+specifier|public
+name|PullUpProjectsAboveJoinRule
+parameter_list|(
+name|RelOptRuleOperand
+name|operand
+parameter_list|,
+name|String
+name|description
+parameter_list|,
+name|ProjectFactory
+name|pFactory
+parameter_list|)
+block|{
 name|super
 argument_list|(
 name|operand
 argument_list|,
 name|description
 argument_list|)
+expr_stmt|;
+name|projectFactory
+operator|=
+name|pFactory
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
@@ -254,10 +302,10 @@ operator|.
 name|getJoinType
 argument_list|()
 decl_stmt|;
-name|ProjectRel
+name|ProjectRelBase
 name|leftProj
 decl_stmt|;
-name|ProjectRel
+name|ProjectRelBase
 name|rightProj
 decl_stmt|;
 name|RelNode
@@ -854,7 +902,7 @@ comment|// finally, create the projection on top of the join
 name|RelNode
 name|newProjRel
 init|=
-name|CalcRel
+name|projectFactory
 operator|.
 name|createProject
 argument_list|(
@@ -896,7 +944,7 @@ argument_list|(
 literal|1
 argument_list|)
 operator|instanceof
-name|ProjectRel
+name|ProjectRelBase
 return|;
 block|}
 comment|/**    * @param call RelOptRuleCall    * @return true if the rule was invoked with 2 children    */
@@ -920,7 +968,7 @@ return|;
 block|}
 comment|/**    * @param call RelOptRuleCall    * @return ProjectRel corresponding to the right child    */
 specifier|protected
-name|ProjectRel
+name|ProjectRelBase
 name|getRightChild
 parameter_list|(
 name|RelOptRuleCall
@@ -944,7 +992,7 @@ parameter_list|(
 name|RelOptRuleCall
 name|call
 parameter_list|,
-name|ProjectRel
+name|ProjectRelBase
 name|project
 parameter_list|,
 name|boolean
@@ -963,7 +1011,7 @@ specifier|private
 name|void
 name|createProjectExprs
 parameter_list|(
-name|ProjectRel
+name|ProjectRelBase
 name|projRel
 parameter_list|,
 name|RelNode
