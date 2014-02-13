@@ -146,7 +146,7 @@ argument_list|()
 argument_list|)
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-specifier|private
+specifier|protected
 name|RelMdSelectivity
 parameter_list|()
 block|{
