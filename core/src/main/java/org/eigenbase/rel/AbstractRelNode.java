@@ -1003,14 +1003,10 @@ name|metadataClass
 operator|+
 literal|"); a backstop provider is recommended"
 assert|;
-assert|assert
-name|metadata
-operator|.
-name|rel
-argument_list|()
-operator|==
-name|this
-assert|;
+comment|// Usually the metadata belongs to the rel that created it. RelSubset and
+comment|// HepRelVertex are notable exceptions, so disable the assert. It's not
+comment|// worth the performance hit to override this method for them.
+comment|//   assert metadata.rel() == this : "someone else's metadata";
 return|return
 name|metadata
 return|;

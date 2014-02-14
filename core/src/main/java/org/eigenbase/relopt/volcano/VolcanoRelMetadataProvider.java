@@ -179,13 +179,16 @@ argument_list|,
 name|metadataClass
 argument_list|)
 decl_stmt|;
-return|return
+if|if
+condition|(
 name|function
-operator|==
+operator|!=
 literal|null
-condition|?
-literal|null
-else|:
+condition|)
+block|{
+name|Metadata
+name|metadata
+init|=
 name|function
 operator|.
 name|apply
@@ -194,7 +197,19 @@ name|subset
 operator|.
 name|best
 argument_list|)
+decl_stmt|;
+if|if
+condition|(
+name|metadata
+operator|!=
+literal|null
+condition|)
+block|{
+return|return
+name|metadata
 return|;
+block|}
+block|}
 block|}
 comment|// Otherwise, try rels in same logical equivalence class to see if any
 comment|// of them have a good answer.  We use the full logical equivalence
@@ -205,7 +220,7 @@ comment|// an infinite loop.  REVIEW: There's a chance this will cause us to
 comment|// fail on metadata queries which invoke other queries, e.g.
 comment|// PercentageOriginalRows -> Selectivity.  If we implement caching at
 comment|// this level, we could probably kill two birds with one stone (use
-comment|// presence of pending cache entry to detect reentrancy at the correct
+comment|// presence of pending cache entry to detect re-entrancy at the correct
 comment|// granularity).
 if|if
 condition|(
