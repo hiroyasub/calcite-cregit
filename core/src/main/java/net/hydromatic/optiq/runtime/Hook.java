@@ -70,6 +70,9 @@ specifier|public
 enum|enum
 name|Hook
 block|{
+comment|/** Called with the SQL string and parse tree, in an array. */
+name|PARSE_TREE
+block|,
 comment|/** Called with the generated Java plan, just before it is compiled by    * Janino. */
 name|JAVA_PLAN
 block|,
