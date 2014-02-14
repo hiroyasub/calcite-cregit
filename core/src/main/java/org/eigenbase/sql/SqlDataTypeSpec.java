@@ -313,7 +313,7 @@ block|{
 return|return
 operator|(
 name|collectionsTypeName
-operator|==
+operator|!=
 literal|null
 operator|)
 condition|?
