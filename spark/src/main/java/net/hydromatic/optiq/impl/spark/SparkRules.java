@@ -393,6 +393,7 @@ operator|.
 name|emptyList
 argument_list|()
 decl_stmt|;
+comment|/** Planner rule that converts from enumerable to Spark convention. */
 specifier|static
 class|class
 name|EnumerableToSparkConverterRule
@@ -467,6 +468,7 @@ argument_list|)
 return|;
 block|}
 block|}
+comment|/** Planner rule that converts from Spark to enumerable convention. */
 specifier|static
 class|class
 name|SparkToEnumerableConverterRule
@@ -551,6 +553,7 @@ operator|new
 name|SparkValuesRule
 argument_list|()
 decl_stmt|;
+comment|/** Planner rule that implements VALUES operator in Spark convention. */
 specifier|public
 specifier|static
 class|class
@@ -1095,6 +1098,7 @@ argument_list|)
 return|;
 block|}
 block|}
+comment|/** Implementation of {@link CalcRel} in Spark convention. */
 specifier|public
 specifier|static
 class|class

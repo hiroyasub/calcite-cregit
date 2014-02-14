@@ -105,6 +105,7 @@ name|close
 argument_list|()
 expr_stmt|;
 block|}
+comment|/** Implementation of {@link Getter} that reads from records that are    * arrays. */
 class|class
 name|ArrayEnumeratorGetter
 extends|extends

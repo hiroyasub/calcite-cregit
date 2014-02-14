@@ -367,6 +367,7 @@ name|columnMetaDataList
 argument_list|)
 return|;
 block|}
+comment|/** Implementation of connection for JDBC 4.1. */
 specifier|private
 specifier|static
 class|class

@@ -140,6 +140,7 @@ name|Class
 name|clazz
 parameter_list|)
 function_decl|;
+comment|/** Can expand a view into relational expressions. */
 interface|interface
 name|ViewExpander
 block|{
@@ -160,6 +161,7 @@ name|schemaPath
 parameter_list|)
 function_decl|;
 block|}
+comment|/** Contains the context needed to convert a a table into a relational    * expression. */
 interface|interface
 name|ToRelContext
 extends|extends

@@ -2265,6 +2265,7 @@ argument_list|)
 return|;
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------
+comment|/** Visitor that walks over a scalar expression and computes the    * cardinality of its result. */
 specifier|private
 specifier|static
 class|class

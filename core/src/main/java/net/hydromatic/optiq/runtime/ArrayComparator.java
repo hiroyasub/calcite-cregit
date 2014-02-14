@@ -17,6 +17,20 @@ end_package
 
 begin_import
 import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|Ordering
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -149,9 +163,9 @@ operator|.
 name|reverseOrder
 argument_list|()
 else|:
-name|ComparableComparator
+name|Ordering
 operator|.
-name|instance
+name|natural
 argument_list|()
 expr_stmt|;
 block|}

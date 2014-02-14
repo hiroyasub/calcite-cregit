@@ -103,6 +103,7 @@ name|close
 argument_list|()
 expr_stmt|;
 block|}
+comment|/** Implementation of {@link Getter} for records that consist of a single    * field. Each record is represented as an object, and the value of the sole    * field is that object. */
 class|class
 name|ObjectEnumeratorGetter
 extends|extends

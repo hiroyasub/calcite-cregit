@@ -1017,6 +1017,7 @@ name|v
 argument_list|)
 return|;
 block|}
+comment|/** Implementation of {@link Accessor}. */
 specifier|static
 class|class
 name|AccessorImpl

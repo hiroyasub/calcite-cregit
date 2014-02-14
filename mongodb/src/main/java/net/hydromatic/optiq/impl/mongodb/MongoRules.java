@@ -707,8 +707,7 @@ return|return
 literal|null
 return|;
 block|}
-comment|// Not currently used. Keep it around for a while. It may evolve into
-comment|// something that can handle complex expressions.
+comment|/** Visitor that walks over an expression, represented as a tree of    * {@link RexNode}s, looking for calls to the ITEM operator and converting    * them to MongoDB field references. */
 specifier|private
 specifier|static
 class|class
@@ -955,6 +954,7 @@ name|x
 return|;
 block|}
 block|}
+comment|/** Base class for planner rules that convert a relational expression to    * MongoDB calling convention. */
 specifier|abstract
 specifier|static
 class|class

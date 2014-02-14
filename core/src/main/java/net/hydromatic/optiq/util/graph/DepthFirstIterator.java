@@ -28,7 +28,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Iterates over the vertices in a directed graph in depth-first order.  */
+comment|/**  * Iterates over the vertices in a directed graph in depth-first order.  *  * @param<V> Vertex type  * @param<E> Edge type  */
 end_comment
 
 begin_class

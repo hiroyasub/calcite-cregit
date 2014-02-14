@@ -28,7 +28,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Iterates over the edges of a graph in topological order.  */
+comment|/**  * Iterates over the edges of a graph in topological order.  *  * @param<V> Vertex type  * @param<E> Edge type  */
 end_comment
 
 begin_class

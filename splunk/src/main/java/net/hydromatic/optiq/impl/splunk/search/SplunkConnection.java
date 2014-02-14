@@ -559,6 +559,9 @@ operator|!=
 literal|null
 assert|;
 name|Enumerator
+argument_list|<
+name|Object
+argument_list|>
 name|x
 init|=
 name|getSearchResults_
@@ -580,7 +583,10 @@ assert|;
 block|}
 specifier|public
 name|Enumerator
-name|getSearchResultIterator
+argument_list|<
+name|Object
+argument_list|>
+name|getSearchResultEnumerator
 parameter_list|(
 name|String
 name|search
@@ -615,6 +621,9 @@ return|;
 block|}
 specifier|private
 name|Enumerator
+argument_list|<
+name|Object
+argument_list|>
 name|getSearchResults_
 parameter_list|(
 name|String
@@ -775,7 +784,7 @@ condition|)
 block|{
 return|return
 operator|new
-name|SplunkResultIterator
+name|SplunkResultEnumerator
 argument_list|(
 name|in
 argument_list|,
@@ -1012,12 +1021,13 @@ argument_list|(
 name|csvr
 argument_list|)
 expr_stmt|;
-comment|// CSVReader closes the inputstream too
+comment|// CSVReader closes the input stream too
 block|}
 block|}
+comment|/** Implementation of    * {@link net.hydromatic.optiq.impl.splunk.search.SearchResultListener}    * interface that just counts the results. */
 specifier|static
 class|class
-name|DummySearchResultListener
+name|CountingSearchResultListener
 implements|implements
 name|SearchResultListener
 block|{
@@ -1032,13 +1042,12 @@ name|resultCount
 init|=
 literal|0
 decl_stmt|;
+specifier|final
 name|boolean
 name|print
-init|=
-literal|false
 decl_stmt|;
 specifier|public
-name|DummySearchResultListener
+name|CountingSearchResultListener
 parameter_list|(
 name|boolean
 name|print
@@ -1567,11 +1576,11 @@ name|toString
 argument_list|()
 argument_list|)
 expr_stmt|;
-name|DummySearchResultListener
+name|CountingSearchResultListener
 name|dummy
 init|=
 operator|new
-name|DummySearchResultListener
+name|CountingSearchResultListener
 argument_list|(
 name|Boolean
 operator|.
@@ -1629,12 +1638,16 @@ name|start
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Implementation of {@link net.hydromatic.linq4j.Enumerator} that parses    * results from a Splunk REST call.    *    *<p>The element type is either {@code String} or {@code String[]}, depending    * on the value of {@code source}.</p> */
 specifier|private
 specifier|static
 class|class
-name|SplunkResultIterator
+name|SplunkResultEnumerator
 implements|implements
 name|Enumerator
+argument_list|<
+name|Object
+argument_list|>
 block|{
 specifier|private
 specifier|final
@@ -1661,7 +1674,7 @@ name|int
 name|source
 decl_stmt|;
 specifier|public
-name|SplunkResultIterator
+name|SplunkResultEnumerator
 parameter_list|(
 name|InputStream
 name|in

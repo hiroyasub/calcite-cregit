@@ -434,6 +434,7 @@ argument_list|)
 return|;
 block|}
 block|}
+comment|/** Base class for flat lists. */
 specifier|public
 specifier|abstract
 specifier|static
@@ -1990,6 +1991,7 @@ argument_list|)
 return|;
 block|}
 block|}
+comment|/** Empty list that implements the {@link Comparable} interface. */
 specifier|private
 specifier|static
 class|class
@@ -2120,6 +2122,7 @@ argument_list|<
 name|List
 argument_list|>
 block|{   }
+comment|/** Wrapper around a list that makes it implement the {@link Comparable}    * interface using lexical ordering. The elements must be comparable. */
 specifier|static
 class|class
 name|ComparableListImpl

@@ -925,6 +925,10 @@ begin_comment
 comment|//~ Inner Classes ----------------------------------------------------------
 end_comment
 
+begin_comment
+comment|/** A collection of integer constants that describe the kind of project. */
+end_comment
+
 begin_class
 specifier|public
 specifier|static

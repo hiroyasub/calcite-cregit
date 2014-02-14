@@ -973,6 +973,7 @@ name|findBestExp
 argument_list|()
 return|;
 block|}
+comment|/** Stage of a statement in the query-preparation lifecycle. */
 specifier|private
 enum|enum
 name|State

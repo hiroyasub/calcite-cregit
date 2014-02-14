@@ -988,6 +988,7 @@ name|traits
 argument_list|)
 return|;
 block|}
+comment|/** Cache of trait sets. */
 specifier|private
 specifier|static
 class|class

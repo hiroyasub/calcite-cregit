@@ -93,6 +93,7 @@ name|Materialization
 argument_list|>
 argument_list|()
 decl_stmt|;
+comment|/** A query materialized in a table, so that reading from the table gives the    * same results as executing the query. */
 specifier|static
 class|class
 name|Materialization

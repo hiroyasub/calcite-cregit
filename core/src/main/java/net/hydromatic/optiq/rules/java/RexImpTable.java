@@ -3494,16 +3494,21 @@ name|current
 parameter_list|)
 function_decl|;
 block|}
+comment|/** Strategy what an operator should return if one of its    * arguments is null. */
 specifier|public
 enum|enum
 name|NullAs
 block|{
+comment|/** The most common policy among the SQL built-in operators. If      * one of the arguments is null, returns null. */
 name|NULL
 block|,
+comment|/** If one of the arguments is null, the function returns      * false. Example: {@code IS NOT NULL}. */
 name|FALSE
 block|,
+comment|/** If one of the arguments is null, the function returns      * true. Example: {@code IS NULL}. */
 name|TRUE
 block|,
+comment|/** It is not possible for any of the arguments to be null.  If      * the argument type is nullable, the enclosing code will already      * have performed a not-null check. This may allow the operator      * implementor to generate a more efficient implementation, for      * example, by avoiding boxing or unboxing. */
 name|NOT_POSSIBLE
 block|,
 comment|/** Return false if result is not null, true if result is null. */

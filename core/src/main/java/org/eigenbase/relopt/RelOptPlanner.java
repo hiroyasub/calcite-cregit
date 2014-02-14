@@ -349,6 +349,7 @@ name|Executor
 name|getExecutor
 parameter_list|()
 function_decl|;
+comment|/** Can reduce expressions, writing a literal for each into a list. */
 interface|interface
 name|Executor
 block|{

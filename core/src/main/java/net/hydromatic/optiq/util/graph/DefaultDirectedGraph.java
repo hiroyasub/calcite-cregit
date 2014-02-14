@@ -28,7 +28,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Default implementation of {@link DirectedGraph}.  */
+comment|/**  * Default implementation of {@link DirectedGraph}.  *  * @param<V> Vertex type  * @param<E> Edge type  */
 end_comment
 
 begin_class
@@ -794,6 +794,7 @@ operator|.
 name|target
 return|;
 block|}
+comment|/**    * Information about an edge.    *    * @param<V> Vertex type    * @param<E> Edge type    */
 specifier|static
 class|class
 name|VertexInfo

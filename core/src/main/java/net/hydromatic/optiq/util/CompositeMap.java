@@ -54,7 +54,7 @@ import|;
 end_import
 
 begin_comment
-comment|/** Unmodifiable view onto multiple backing maps. An element occurs in the map  * if it occurs in any of the backing maps; the value is the value that occurs  * in the first map that contains the key. */
+comment|/** Unmodifiable view onto multiple backing maps. An element occurs in the map  * if it occurs in any of the backing maps; the value is the value that occurs  * in the first map that contains the key.  *  * @param<K> Key type  * @param<V> Value type  */
 end_comment
 
 begin_class

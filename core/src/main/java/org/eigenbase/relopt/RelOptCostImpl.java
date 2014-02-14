@@ -340,6 +340,7 @@ argument_list|)
 return|;
 block|}
 block|}
+comment|/** Implementation of {@link RelOptCostFactory} that creates    * {@link RelOptCostImpl}s. */
 specifier|private
 specifier|static
 class|class

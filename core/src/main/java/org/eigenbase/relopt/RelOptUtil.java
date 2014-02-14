@@ -9364,6 +9364,7 @@ name|query
 return|;
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------
+comment|/** Visitor that finds all variables used but not stopped in an expression. */
 specifier|private
 specifier|static
 class|class
@@ -9432,6 +9433,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+comment|/** Visitor that finds all variables used in an expression. */
 specifier|public
 specifier|static
 class|class
@@ -9477,6 +9479,7 @@ name|p
 return|;
 block|}
 block|}
+comment|/** Shuttle that finds the set of inputs that are used. */
 specifier|public
 specifier|static
 class|class
@@ -9522,6 +9525,7 @@ name|inputRef
 return|;
 block|}
 block|}
+comment|/** Converts types to descriptive strings. */
 specifier|public
 specifier|static
 class|class

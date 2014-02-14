@@ -249,11 +249,11 @@ name|getChild
 argument_list|()
 argument_list|)
 expr_stmt|;
-name|Foo
-name|foo
+name|Translator
+name|translator
 init|=
 operator|new
-name|Foo
+name|Translator
 argument_list|(
 name|getRowType
 argument_list|()
@@ -265,7 +265,7 @@ decl_stmt|;
 name|String
 name|match
 init|=
-name|foo
+name|translator
 operator|.
 name|translateMatch
 argument_list|(
@@ -282,9 +282,10 @@ name|match
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Translates {@link RexNode} expressions into MongoDB expression strings. */
 specifier|static
 class|class
-name|Foo
+name|Translator
 block|{
 specifier|final
 name|JsonBuilder
@@ -339,7 +340,7 @@ name|String
 argument_list|>
 name|fieldNames
 decl_stmt|;
-name|Foo
+name|Translator
 parameter_list|(
 name|List
 argument_list|<

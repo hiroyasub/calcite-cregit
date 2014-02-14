@@ -1033,6 +1033,7 @@ expr_stmt|;
 block|}
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------
+comment|/** Shuttle that converts inputs to literals. */
 specifier|private
 specifier|static
 class|class

@@ -200,6 +200,7 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------
+comment|/** Shuttle that removes 'x IS NOT DISTINCT FROM y' and converts it    * to 'CASE WHEN x IS NULL THEN y IS NULL WHEN y IS NULL THEN x IS    * NULL ELSE x = y END'. */
 specifier|private
 class|class
 name|RemoveIsNotDistinctFromRexShuttle

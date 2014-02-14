@@ -40,7 +40,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Statement that can be bound to a {@link DataContext} and then executed.  */
+comment|/**  * Statement that can be bound to a {@link DataContext} and then executed.  *  * @param<T> Element type of the resulting enumerable  */
 end_comment
 
 begin_interface

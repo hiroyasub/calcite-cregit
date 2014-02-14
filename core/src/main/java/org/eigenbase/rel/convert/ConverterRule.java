@@ -267,6 +267,7 @@ block|}
 block|}
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------
+comment|/**    * Operand to an instance of the converter rule.    */
 specifier|private
 specifier|static
 class|class

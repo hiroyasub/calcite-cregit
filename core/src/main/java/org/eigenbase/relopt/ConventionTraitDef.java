@@ -781,6 +781,7 @@ name|conversionData
 return|;
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------
+comment|/** Workspace for converting from one convention to another. */
 specifier|private
 specifier|static
 specifier|final

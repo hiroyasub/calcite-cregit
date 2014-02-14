@@ -818,6 +818,7 @@ name|optiqSchema
 argument_list|()
 return|;
 block|}
+comment|/**    * Entry in a schema, such as a table or sub-schema.    *    *<p>Each object's name is a property of its membership in a schema;    * therefore in principle it could belong to several schemas, or    * even the same schema several times, with different names. In this    * respect, it is like an inode in a Unix file system.</p>    *    *<p>The members of a schema must have unique names.    */
 specifier|public
 specifier|abstract
 specifier|static
@@ -895,6 +896,7 @@ argument_list|)
 return|;
 block|}
 block|}
+comment|/** Membership of a table in a schema. */
 specifier|public
 specifier|abstract
 specifier|static
@@ -928,6 +930,7 @@ name|getTable
 parameter_list|()
 function_decl|;
 block|}
+comment|/** Membership of a table-function in a schema. */
 specifier|public
 specifier|abstract
 specifier|static
@@ -968,6 +971,7 @@ name|isMaterialization
 parameter_list|()
 function_decl|;
 block|}
+comment|/** Implementation of {@link SchemaPlus} based on an {@code OptiqSchema}. */
 specifier|private
 class|class
 name|SchemaPlusImpl

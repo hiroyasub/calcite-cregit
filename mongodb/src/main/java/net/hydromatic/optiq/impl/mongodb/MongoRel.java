@@ -119,6 +119,7 @@ operator|.
 name|class
 argument_list|)
 decl_stmt|;
+comment|/** Callback for the implementation process that converts a tree of    * {@link MongoRel} nodes into a MongoDB query. */
 class|class
 name|Implementor
 block|{

@@ -40,7 +40,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Implementation of {@link net.hydromatic.avatica.Cursor} on top of an  * {@link net.hydromatic.linq4j.Enumerator} that  * returns a record for each row. The record is a synthetic class whose fields  * are all public.  */
+comment|/**  * Implementation of {@link net.hydromatic.avatica.Cursor} on top of an  * {@link net.hydromatic.linq4j.Enumerator} that  * returns a record for each row. The record is a synthetic class whose fields  * are all public.  *  * @param<E> Element type  */
 end_comment
 
 begin_class
@@ -144,6 +144,7 @@ name|close
 argument_list|()
 expr_stmt|;
 block|}
+comment|/** Implementation of {@link Getter} that reads fields via reflection. */
 class|class
 name|RecordEnumeratorGetter
 extends|extends

@@ -533,6 +533,7 @@ name|shortestPaths
 argument_list|)
 return|;
 block|}
+comment|/**    * Immutable grap.    *    * @param<V> Vertex type    * @param<E> Edge type    */
 specifier|public
 specifier|static
 class|class
@@ -573,6 +574,7 @@ argument_list|>
 argument_list|>
 name|shortestPaths
 decl_stmt|;
+comment|/** Creates a frozen graph as a copy of another graph. */
 name|FrozenGraph
 parameter_list|(
 name|DefaultDirectedGraph

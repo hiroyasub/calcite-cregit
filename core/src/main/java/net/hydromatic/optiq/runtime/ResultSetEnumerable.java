@@ -134,7 +134,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Executes a SQL statement and returns the result as an {@link Enumerable}.  */
+comment|/**  * Executes a SQL statement and returns the result as an {@link Enumerable}.  *  * @param<T> Element type  */
 end_comment
 
 begin_class
@@ -747,6 +747,7 @@ block|}
 block|}
 block|}
 block|}
+comment|/** Implementation of {@link Enumerator} that reads from a    * {@link ResultSet}. */
 specifier|private
 specifier|static
 class|class

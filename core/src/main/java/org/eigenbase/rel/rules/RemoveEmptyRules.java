@@ -635,6 +635,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+comment|/** Planner rule that converts a single-rel (e.g. project, sort, aggregate or    * filter) on top of the empty relational expression into empty. */
 specifier|private
 specifier|static
 class|class

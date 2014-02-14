@@ -26,7 +26,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Map that allows you to partition values into lists according to a common  * key, and then convert those lists into an iterator of sorted arrays.  */
+comment|/**  * Map that allows you to partition values into lists according to a common  * key, and then convert those lists into an iterator of sorted arrays.  *  * @param<K> Key type  * @param<V> Value type  */
 end_comment
 
 begin_class

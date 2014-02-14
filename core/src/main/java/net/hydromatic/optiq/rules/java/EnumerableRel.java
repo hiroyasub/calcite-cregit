@@ -174,6 +174,7 @@ return|;
 block|}
 block|}
 block|}
+comment|/** Result of implementing an enumerable relational expression by generating    * Java code. */
 class|class
 name|Result
 block|{

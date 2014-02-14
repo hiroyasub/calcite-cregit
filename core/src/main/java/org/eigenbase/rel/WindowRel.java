@@ -1117,6 +1117,7 @@ block|}
 block|}
 return|;
 block|}
+comment|/** Window specification. All windowed aggregates over the same window    * (regardless of how it is specified, in terms of a named window or specified    * attribute by attribute) will end up with the same window key. */
 specifier|private
 specifier|static
 class|class

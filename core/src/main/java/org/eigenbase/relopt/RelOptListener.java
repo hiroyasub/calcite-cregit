@@ -134,6 +134,7 @@ name|rel
 return|;
 block|}
 block|}
+comment|/** Event indicating that a relational expression has been chosen. */
 specifier|public
 specifier|static
 class|class
@@ -160,6 +161,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+comment|/** Event indicating that a relational expression has been found to    * be equivalent to an equivalence class. */
 specifier|public
 specifier|static
 class|class
@@ -232,6 +234,7 @@ name|isPhysical
 return|;
 block|}
 block|}
+comment|/** Event indicating that a relational expression has been discarded. */
 specifier|public
 specifier|static
 class|class
@@ -258,6 +261,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+comment|/** Event indicating that a planner rule has fired. */
 specifier|public
 specifier|abstract
 specifier|static
@@ -308,6 +312,7 @@ name|ruleCall
 return|;
 block|}
 block|}
+comment|/** Event indicating that a planner rule has been attemptedd. */
 specifier|public
 specifier|static
 class|class
@@ -362,6 +367,7 @@ name|before
 return|;
 block|}
 block|}
+comment|/** Event indicating that a planner rule has produced a result. */
 specifier|public
 specifier|static
 class|class

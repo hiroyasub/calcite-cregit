@@ -2720,6 +2720,7 @@ argument_list|()
 return|;
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------
+comment|/** Type of relational expression. Determines which kinds of    * expressions it can handle. */
 specifier|public
 specifier|abstract
 specifier|static

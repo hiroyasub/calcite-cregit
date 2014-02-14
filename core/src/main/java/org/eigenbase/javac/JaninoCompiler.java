@@ -342,6 +342,7 @@ argument_list|()
 return|;
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------
+comment|/**    * Arguments to an invocation of the Janino compiler.    */
 specifier|private
 specifier|static
 class|class

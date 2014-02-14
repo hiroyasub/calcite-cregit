@@ -3537,6 +3537,7 @@ name|e2
 parameter_list|)
 function_decl|;
 block|}
+comment|/** List, backed by a list of {@link Node}s, that strips away the    * node and returns the element inside.    *    * @param<E> Element type    */
 specifier|private
 specifier|static
 class|class

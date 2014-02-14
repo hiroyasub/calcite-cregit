@@ -1470,6 +1470,7 @@ name|RelNode
 name|rootRel
 parameter_list|)
 block|{
+comment|/** Visitor that counts join nodes. */
 class|class
 name|JoinCounter
 extends|extends
@@ -1584,6 +1585,7 @@ name|SqlValidator
 name|getSqlValidator
 parameter_list|()
 function_decl|;
+comment|/** Interface by which validator and planner can read table metadata. */
 specifier|public
 interface|interface
 name|CatalogReader
@@ -1624,6 +1626,7 @@ name|names
 parameter_list|)
 function_decl|;
 block|}
+comment|/** Definition of a table, for the purposes of the validator and planner. */
 specifier|public
 interface|interface
 name|PreparingTable

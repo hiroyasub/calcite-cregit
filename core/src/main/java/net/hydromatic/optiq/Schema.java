@@ -117,6 +117,7 @@ name|boolean
 name|isMutable
 parameter_list|()
 function_decl|;
+comment|/** Table type. */
 enum|enum
 name|TableType
 block|{

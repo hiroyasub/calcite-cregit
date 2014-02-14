@@ -51,6 +51,10 @@ name|Logger
 import|;
 end_import
 
+begin_comment
+comment|/**  * Utility methods for encoding and decoding strings for Splunk REST calls.  */
+end_comment
+
 begin_class
 specifier|public
 class|class

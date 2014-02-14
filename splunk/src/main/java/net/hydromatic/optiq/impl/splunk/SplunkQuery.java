@@ -76,7 +76,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Query against Splunk.  */
+comment|/**  * Query against Splunk.  *  * @param<T> Element type  */
 end_comment
 
 begin_class
@@ -233,7 +233,7 @@ argument_list|>
 operator|)
 name|splunkConnection
 operator|.
-name|getSearchResultIterator
+name|getSearchResultEnumerator
 argument_list|(
 name|search
 argument_list|,

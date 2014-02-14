@@ -88,7 +88,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Abstract implementation of {@link net.hydromatic.linq4j.Queryable} for  * {@link Table}.  *  *<p>Not to be confused with  * {@link net.hydromatic.optiq.impl.java.AbstractQueryableTable}.</p>  *  * @param<T> element type  */
+comment|/**  * Abstract implementation of {@link net.hydromatic.linq4j.Queryable} for  * {@link QueryableTable}.  *  *<p>Not to be confused with  * {@link net.hydromatic.optiq.impl.java.AbstractQueryableTable}.</p>  *  * @param<T> element type  */
 end_comment
 
 begin_class

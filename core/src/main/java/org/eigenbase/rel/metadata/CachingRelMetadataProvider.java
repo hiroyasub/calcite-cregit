@@ -299,6 +299,7 @@ block|}
 return|;
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------
+comment|/** An entry in the cache. Consists of the cached object and the timestamp    * when the entry is valid. If read at a later timestamp, the entry will be    * invalid and will be re-computed as if it did not exist. The net effect is a    * lazy-flushing cache. */
 specifier|private
 specifier|static
 class|class
@@ -311,6 +312,7 @@ name|Object
 name|result
 decl_stmt|;
 block|}
+comment|/** Implementation of {@link InvocationHandler} for calls to a    * {@link CachingRelMetadataProvider}. Each request first looks in the cache;    * if the cache entry is present and not expired, returns the cache entry,    * otherwise computes the value and stores in the cache. */
 specifier|private
 class|class
 name|CachingInvocationHandler

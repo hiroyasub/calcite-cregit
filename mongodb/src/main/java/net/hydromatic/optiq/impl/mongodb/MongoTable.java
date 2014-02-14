@@ -717,6 +717,7 @@ block|}
 block|}
 return|;
 block|}
+comment|/** Implementation of {@link net.hydromatic.linq4j.Queryable} based on    * a {@link net.hydromatic.optiq.impl.mongodb.MongoTable}. */
 specifier|public
 specifier|static
 class|class
@@ -832,6 +833,12 @@ operator|)
 name|table
 return|;
 block|}
+comment|/** Called via code-generation.      *      * @see net.hydromatic.optiq.impl.mongodb.MongoMethod#MONGO_QUERYABLE_AGGREGATE      */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"UnusedDeclaration"
+argument_list|)
 specifier|public
 name|Enumerable
 argument_list|<
@@ -868,6 +875,12 @@ name|operations
 argument_list|)
 return|;
 block|}
+comment|/** Called via code-generation.      *      * @see net.hydromatic.optiq.impl.mongodb.MongoMethod#MONGO_QUERYABLE_FIND      */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"UnusedDeclaration"
+argument_list|)
 specifier|public
 name|Enumerable
 argument_list|<

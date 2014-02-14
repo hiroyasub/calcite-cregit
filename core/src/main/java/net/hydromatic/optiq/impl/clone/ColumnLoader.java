@@ -212,7 +212,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Column loader.  */
+comment|/**  * Column loader.  *  * @param<T> Element type of source table  */
 end_comment
 
 begin_class

@@ -28,7 +28,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Detects cycles in directed graphs.  */
+comment|/**  * Detects cycles in directed graphs.  *  * @param<V> Vertex type  * @param<E> Edge type  */
 end_comment
 
 begin_class

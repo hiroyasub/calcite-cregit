@@ -144,6 +144,7 @@ argument_list|>
 name|edgeSet
 parameter_list|()
 function_decl|;
+comment|/** Factory for edges.    *    * @param<V> Vertex type    * @param<E> Edge type    */
 interface|interface
 name|EdgeFactory
 parameter_list|<

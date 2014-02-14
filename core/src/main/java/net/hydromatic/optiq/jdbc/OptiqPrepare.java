@@ -478,6 +478,7 @@ name|sparkContext
 parameter_list|()
 function_decl|;
 block|}
+comment|/** Namespace that allows us to define non-abstract methods inside an    * interface. */
 specifier|public
 specifier|static
 class|class
@@ -689,6 +690,7 @@ name|context
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Implementation of {@link SparkHandler} that either does nothing or      * throws for each method. Use this if Spark is not installed. */
 specifier|private
 specifier|static
 class|class
@@ -762,6 +764,7 @@ throw|;
 block|}
 block|}
 block|}
+comment|/** The result of parsing and validating a SQL query. */
 specifier|public
 specifier|static
 class|class
@@ -850,6 +853,7 @@ argument_list|()
 expr_stmt|;
 block|}
 block|}
+comment|/** The result of preparing a query. It gives the Avatica driver framework    * the information it needs to create a prepared statement, or to execute a    * statement directly, without an explicit prepare step. */
 specifier|public
 specifier|static
 class|class

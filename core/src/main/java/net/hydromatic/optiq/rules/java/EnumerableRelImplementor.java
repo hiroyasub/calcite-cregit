@@ -1780,6 +1780,7 @@ name|format
 argument_list|)
 return|;
 block|}
+comment|/** Visitor that finds types in an {@link Expression} tree. */
 specifier|private
 specifier|static
 class|class

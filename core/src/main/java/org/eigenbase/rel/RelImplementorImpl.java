@@ -113,18 +113,6 @@ name|EigenbaseTrace
 import|;
 end_import
 
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
-name|util
-operator|.
-name|Util
-import|;
-end_import
-
 begin_comment
 comment|/**  * Implementation of {@link RelImplementor}.  */
 end_comment
@@ -302,26 +290,14 @@ name|frame
 init|=
 operator|new
 name|Frame
-argument_list|()
-decl_stmt|;
-name|frame
-operator|.
-name|rel
-operator|=
+argument_list|(
 name|child
-expr_stmt|;
-name|frame
-operator|.
+argument_list|,
 name|parent
-operator|=
-name|parent
-expr_stmt|;
-name|frame
-operator|.
+argument_list|,
 name|ordinal
-operator|=
-name|ordinal
-expr_stmt|;
+argument_list|)
+decl_stmt|;
 name|mapRel2Frame
 operator|.
 name|put
@@ -457,20 +433,10 @@ argument_list|()
 decl_stmt|;
 for|for
 control|(
-name|int
-name|i
-init|=
-literal|0
-init|;
-name|i
-operator|<
+name|RelNode
+name|input
+range|:
 name|inputs
-operator|.
-name|size
-argument_list|()
-condition|;
-name|i
-operator|++
 control|)
 block|{
 name|RelNode
@@ -478,12 +444,7 @@ name|result
 init|=
 name|findInputRel
 argument_list|(
-name|inputs
-operator|.
-name|get
-argument_list|(
-name|i
-argument_list|)
+name|input
 argument_list|,
 name|offset
 argument_list|,
@@ -531,7 +492,7 @@ literal|null
 return|;
 comment|// not found
 block|}
-comment|/**    * Returns a list of the relational expressions which are ancestors of the    * current one.    *    * @pre // rel must be on the implementation stack    */
+comment|/**    * Returns a list of the relational expressions which are ancestors of the    * current one.    */
 specifier|public
 name|List
 argument_list|<
@@ -567,17 +528,13 @@ argument_list|(
 name|rel
 argument_list|)
 decl_stmt|;
-name|Util
-operator|.
-name|pre
-argument_list|(
+assert|assert
 name|frame
 operator|!=
 literal|null
-argument_list|,
+operator|:
 literal|"rel must be on the current implementation stack"
-argument_list|)
-expr_stmt|;
+assert|;
 while|while
 condition|(
 literal|true
@@ -618,42 +575,73 @@ argument_list|(
 name|parentRel
 argument_list|)
 expr_stmt|;
-name|Util
-operator|.
-name|permAssert
-argument_list|(
+assert|assert
 name|frame
 operator|!=
 literal|null
-argument_list|,
+operator|:
 literal|"ancestor rel must have frame"
-argument_list|)
-expr_stmt|;
+assert|;
 block|}
 return|return
 name|ancestorList
 return|;
 block|}
+comment|/** Information about a call from a parent relational expression    * to implement one of its input relational expressions. */
 specifier|protected
 specifier|static
 class|class
 name|Frame
 block|{
-comment|/**      *<code>rel</code>'s parent      */
+comment|/** Parent relational expression. */
 specifier|public
+specifier|final
 name|RelNode
 name|parent
 decl_stmt|;
-comment|/**      * relation which is being implemented in this frame      */
+comment|/** Relational expression that is being implemented in this frame. */
 specifier|public
+specifier|final
 name|RelNode
 name|rel
 decl_stmt|;
-comment|/**      * ordinal of<code>rel</code> within<code>parent</code>      */
+comment|/** Ordinal of {@code rel} within {@code parent}. */
 specifier|public
+specifier|final
 name|int
 name|ordinal
 decl_stmt|;
+name|Frame
+parameter_list|(
+name|RelNode
+name|child
+parameter_list|,
+name|RelNode
+name|parent
+parameter_list|,
+name|int
+name|ordinal
+parameter_list|)
+block|{
+name|this
+operator|.
+name|rel
+operator|=
+name|child
+expr_stmt|;
+name|this
+operator|.
+name|parent
+operator|=
+name|parent
+expr_stmt|;
+name|this
+operator|.
+name|ordinal
+operator|=
+name|ordinal
+expr_stmt|;
+block|}
 block|}
 block|}
 end_class

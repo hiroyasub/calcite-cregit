@@ -1870,6 +1870,7 @@ argument_list|<
 name|Void
 argument_list|>
 block|{
+comment|/** Whether an expression is constant, and if so, whether it can be      * reduced to a simpler constant. */
 enum|enum
 name|Constancy
 block|{

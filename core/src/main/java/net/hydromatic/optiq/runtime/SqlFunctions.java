@@ -7675,6 +7675,7 @@ operator|||
 name|b
 return|;
 block|}
+comment|/** A range of time units. The first is more significant than the    * other (e.g. year-to-day) or the same as the other    * (e.g. month). */
 specifier|public
 enum|enum
 name|TimeUnitRange

@@ -423,6 +423,7 @@ return|return
 name|sslsocketfactory
 return|;
 block|}
+comment|/** Implementation of {@link X509TrustManager} that trusts all    * certificates. */
 specifier|private
 specifier|static
 class|class
