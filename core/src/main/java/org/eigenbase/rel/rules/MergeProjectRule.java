@@ -76,7 +76,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * MergeProjectRule merges a {@link ProjectRel} into another {@link ProjectRel},  * provided the projects aren't projecting identical sets of input references.  */
+comment|/**  * MergeProjectRule merges a {@link ProjectRelBase} into another {@link ProjectRelBase},  * provided the projects aren't projecting identical sets of input references.  */
 end_comment
 
 begin_class

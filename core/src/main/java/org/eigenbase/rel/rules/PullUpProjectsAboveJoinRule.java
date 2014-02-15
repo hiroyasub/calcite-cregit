@@ -100,7 +100,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * PullUpProjectsAboveJoinRule implements the rule for pulling {@link  * ProjectRel}s beneath a {@link JoinRel} above the {@link JoinRel}. Projections  * are pulled up if the {@link ProjectRel} doesn't originate from a null  * generating input in an outer join.  */
+comment|/**  * PullUpProjectsAboveJoinRule implements the rule for pulling {@link  * ProjectRel}s beneath a {@link JoinRelBase} above the {@link JoinRelBase}. Projections  * are pulled up if the {@link ProjectRel} doesn't originate from a null  * generating input in an outer join.  */
 end_comment
 
 begin_class
@@ -284,7 +284,7 @@ name|RelOptRuleCall
 name|call
 parameter_list|)
 block|{
-name|JoinRel
+name|JoinRelBase
 name|joinRel
 init|=
 name|call
@@ -441,7 +441,7 @@ comment|// join because the inputs haven't actually been joined yet.
 name|RelDataType
 name|joinChildrenRowType
 init|=
-name|JoinRel
+name|JoinRelBase
 operator|.
 name|deriveJoinRowType
 argument_list|(
@@ -740,31 +740,27 @@ name|getCondition
 argument_list|()
 argument_list|)
 decl_stmt|;
-name|JoinRel
+name|JoinRelBase
 name|newJoinRel
 init|=
-operator|new
-name|JoinRel
+name|joinRel
+operator|.
+name|copy
 argument_list|(
 name|joinRel
 operator|.
-name|getCluster
+name|getTraitSet
 argument_list|()
+argument_list|,
+name|newCondition
 argument_list|,
 name|leftJoinChild
 argument_list|,
 name|rightJoinChild
 argument_list|,
-name|newCondition
-argument_list|,
 name|joinRel
 operator|.
 name|getJoinType
-argument_list|()
-argument_list|,
-name|joinRel
-operator|.
-name|getVariablesStopped
 argument_list|()
 argument_list|)
 decl_stmt|;
