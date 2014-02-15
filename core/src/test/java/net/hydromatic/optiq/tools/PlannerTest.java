@@ -187,19 +187,7 @@ name|eigenbase
 operator|.
 name|sql
 operator|.
-name|SqlExplainLevel
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
-name|sql
-operator|.
-name|SqlNode
+name|*
 import|;
 end_import
 
@@ -773,6 +761,77 @@ argument_list|(
 literal|"EnumerableProjectRel(empid=[$0], deptno=[$1], name=[$2], salary=[$3], commission=[$4])\n"
 operator|+
 literal|"  EnumerableTableAccessRel(table=[[hr, emps]])\n"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests that Hive dialect does not generate "AS". */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testHiveDialect
+parameter_list|()
+throws|throws
+name|SqlParseException
+block|{
+name|Planner
+name|planner
+init|=
+name|getPlanner
+argument_list|()
+decl_stmt|;
+name|SqlNode
+name|parse
+init|=
+name|planner
+operator|.
+name|parse
+argument_list|(
+literal|"select * from (select * from \"emps\") as t\n"
+operator|+
+literal|"where \"name\" like '%e%'"
+argument_list|)
+decl_stmt|;
+specifier|final
+name|SqlDialect
+name|hiveDialect
+init|=
+operator|new
+name|SqlDialect
+argument_list|(
+name|SqlDialect
+operator|.
+name|DatabaseProduct
+operator|.
+name|HIVE
+argument_list|,
+literal|"Hive"
+argument_list|,
+literal|null
+argument_list|)
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|parse
+operator|.
+name|toSqlString
+argument_list|(
+name|hiveDialect
+argument_list|)
+operator|.
+name|getSql
+argument_list|()
+argument_list|,
+name|equalTo
+argument_list|(
+literal|"SELECT *\n"
+operator|+
+literal|"FROM (SELECT *\n"
+operator|+
+literal|"FROM emps) T\n"
+operator|+
+literal|"WHERE name LIKE '%e%'"
 argument_list|)
 argument_list|)
 expr_stmt|;

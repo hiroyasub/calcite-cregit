@@ -193,6 +193,17 @@ argument_list|(
 name|needsSpace
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+name|writer
+operator|.
+name|getDialect
+argument_list|()
+operator|.
+name|allowsAs
+argument_list|()
+condition|)
+block|{
 name|writer
 operator|.
 name|sep
@@ -207,6 +218,7 @@ argument_list|(
 name|needsSpace
 argument_list|)
 expr_stmt|;
+block|}
 name|operands
 index|[
 literal|1
