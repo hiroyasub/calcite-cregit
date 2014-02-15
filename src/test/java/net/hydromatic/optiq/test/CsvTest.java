@@ -347,6 +347,23 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testSelectSingleProject
+parameter_list|()
+throws|throws
+name|SQLException
+block|{
+name|checkSql
+argument_list|(
+literal|"smart"
+argument_list|,
+literal|"select name from EMPS"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testCustomTable
 parameter_list|()
 throws|throws

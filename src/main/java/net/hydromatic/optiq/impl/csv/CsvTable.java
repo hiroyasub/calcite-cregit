@@ -434,7 +434,6 @@ specifier|public
 name|Enumerable
 argument_list|<
 name|Object
-index|[]
 argument_list|>
 name|project
 parameter_list|(
@@ -449,7 +448,6 @@ operator|new
 name|AbstractEnumerable
 argument_list|<
 name|Object
-index|[]
 argument_list|>
 argument_list|()
 block|{
@@ -457,7 +455,6 @@ specifier|public
 name|Enumerator
 argument_list|<
 name|Object
-index|[]
 argument_list|>
 name|enumerator
 parameter_list|()
