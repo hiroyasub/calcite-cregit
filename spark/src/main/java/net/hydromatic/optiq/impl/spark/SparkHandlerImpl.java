@@ -281,7 +281,7 @@ init|=
 operator|new
 name|File
 argument_list|(
-literal|"core/target/classes"
+literal|"spark/target/classes"
 argument_list|)
 decl_stmt|;
 comment|/** Creates a SparkHandlerImpl. */
@@ -374,7 +374,6 @@ literal|"UnusedDeclaration"
 argument_list|)
 specifier|public
 specifier|static
-specifier|final
 name|OptiqPrepare
 operator|.
 name|SparkHandler
