@@ -5263,6 +5263,29 @@ operator|+
 literal|"FROM `EMP`) END)"
 argument_list|)
 expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"case x when 2, 4 then 3 else 4 end"
+argument_list|,
+literal|"(CASE WHEN (`X` IN (2, 4)) THEN 3 ELSE 4 END)"
+argument_list|)
+expr_stmt|;
+comment|// comma-list must not be empty
+name|checkFails
+argument_list|(
+literal|"case x when 2, 4 then 3 ^when^ then 5 else 4 end"
+argument_list|,
+literal|"(?s)Encountered \"when then\" at .*"
+argument_list|)
+expr_stmt|;
+comment|// commas not allowed in boolean case
+name|checkFails
+argument_list|(
+literal|"case when b1, b2 ^when^ 2, 4 then 3 else 4 end"
+argument_list|,
+literal|"(?s)Encountered \"when\" at .*"
+argument_list|)
+expr_stmt|;
 block|}
 annotation|@
 name|Test

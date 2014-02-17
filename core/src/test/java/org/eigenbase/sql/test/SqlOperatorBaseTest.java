@@ -5029,8 +5029,8 @@ argument_list|,
 literal|"row('a ','b ')"
 argument_list|)
 expr_stmt|;
+block|}
 comment|// multiple values in some cases (introduced in SQL:2011)
-comment|// https://github.com/julianhyde/optiq/issues/53
 name|tester
 operator|.
 name|checkString
@@ -5039,7 +5039,7 @@ literal|"case 1 "
 operator|+
 literal|"when 1, 2 then '1 or 2' "
 operator|+
-literal|"when 2 then 'not possible' end"
+literal|"when 2 then 'not possible' "
 operator|+
 literal|"when 3, 2 then '3' "
 operator|+
@@ -5047,9 +5047,9 @@ literal|"else 'none of the above' "
 operator|+
 literal|"end"
 argument_list|,
-literal|"a"
+literal|"1 or 2           "
 argument_list|,
-literal|"VARCHAR(3)"
+literal|"CHAR(17) NOT NULL"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -5060,7 +5060,7 @@ literal|"case 2 "
 operator|+
 literal|"when 1, 2 then '1 or 2' "
 operator|+
-literal|"when 2 then 'not possible' end"
+literal|"when 2 then 'not possible' "
 operator|+
 literal|"when 3, 2 then '3' "
 operator|+
@@ -5068,9 +5068,9 @@ literal|"else 'none of the above' "
 operator|+
 literal|"end"
 argument_list|,
-literal|"1 or 2"
+literal|"1 or 2           "
 argument_list|,
-literal|"VARCHAR(3)"
+literal|"CHAR(17) NOT NULL"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -5081,7 +5081,7 @@ literal|"case 3 "
 operator|+
 literal|"when 1, 2 then '1 or 2' "
 operator|+
-literal|"when 2 then 'not possible' end"
+literal|"when 2 then 'not possible' "
 operator|+
 literal|"when 3, 2 then '3' "
 operator|+
@@ -5089,9 +5089,9 @@ literal|"else 'none of the above' "
 operator|+
 literal|"end"
 argument_list|,
-literal|"3"
+literal|"3                "
 argument_list|,
-literal|"VARCHAR(3)"
+literal|"CHAR(17) NOT NULL"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -5102,7 +5102,7 @@ literal|"case 4 "
 operator|+
 literal|"when 1, 2 then '1 or 2' "
 operator|+
-literal|"when 2 then 'not possible' end"
+literal|"when 2 then 'not possible' "
 operator|+
 literal|"when 3, 2 then '3' "
 operator|+
@@ -5112,10 +5112,9 @@ literal|"end"
 argument_list|,
 literal|"none of the above"
 argument_list|,
-literal|"VARCHAR(3)"
+literal|"CHAR(17) NOT NULL"
 argument_list|)
 expr_stmt|;
-block|}
 comment|// TODO: Check case with multisets
 block|}
 annotation|@
