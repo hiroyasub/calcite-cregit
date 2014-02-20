@@ -15499,6 +15499,107 @@ literal|"RecordType(INTEGER NOT NULL x[y] z ) NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://github.com/julianhyde/optiq/issues/145">optiq-145,    * "Unexpected upper-casing of keywords when using java lexer"</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testLexJavaKeyword
+parameter_list|()
+block|{
+specifier|final
+name|SqlTester
+name|tester1
+init|=
+name|tester
+operator|.
+name|withLex
+argument_list|(
+name|ConnectionConfig
+operator|.
+name|Lex
+operator|.
+name|JAVA
+argument_list|)
+decl_stmt|;
+name|tester1
+operator|.
+name|checkResultType
+argument_list|(
+literal|"select path, x from (select 1 as path, 2 as x from (values (true)))"
+argument_list|,
+literal|"RecordType(INTEGER NOT NULL path, INTEGER NOT NULL x) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester1
+operator|.
+name|checkResultType
+argument_list|(
+literal|"select path, x from (select 1 as `path`, 2 as x from (values (true)))"
+argument_list|,
+literal|"RecordType(INTEGER NOT NULL path, INTEGER NOT NULL x) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester1
+operator|.
+name|checkResultType
+argument_list|(
+literal|"select `path`, x from (select 1 as path, 2 as x from (values (true)))"
+argument_list|,
+literal|"RecordType(INTEGER NOT NULL path, INTEGER NOT NULL x) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester1
+operator|.
+name|checkFails
+argument_list|(
+literal|"select ^PATH^ from (select 1 as path from (values (true)))"
+argument_list|,
+literal|"Column 'PATH' not found in any table"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|tester1
+operator|.
+name|checkFails
+argument_list|(
+literal|"select t.^PATH^ from (select 1 as path from (values (true))) as t"
+argument_list|,
+literal|"Column 'PATH' not found in table 't'"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|tester1
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"select t.x, t.^PATH^ from (values (true, 1)) as t(path, x)"
+argument_list|,
+literal|"Column 'PATH' not found in table 't'"
+argument_list|)
+expr_stmt|;
+comment|// Built-in functions now must be written in correct case.
+name|tester1
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"values (^current_timestamp^)"
+argument_list|,
+literal|"Unknown identifier 'current_timestamp'"
+argument_list|)
+expr_stmt|;
+name|tester1
+operator|.
+name|checkResultType
+argument_list|(
+literal|"values (CURRENT_TIMESTAMP)"
+argument_list|,
+literal|"RecordType(TIMESTAMP(0) NOT NULL CURRENT_TIMESTAMP) NOT NULL"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Tests using case-insensitive matching of identifiers. */
 annotation|@
 name|Test
