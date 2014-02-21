@@ -13,20 +13,8 @@ name|rel
 package|;
 end_package
 
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
-name|util
-operator|.
-name|Util
-import|;
-end_import
-
 begin_comment
-comment|/**  * Definition of the ordering of one field of a RelNode whose  * output is to be sorted.  *  * @see RelCollation  */
+comment|/**  * Definition of the ordering of one field of a {@link RelNode} whose  * output is to be sorted.  *  * @see RelCollation  */
 end_comment
 
 begin_class
@@ -42,38 +30,51 @@ name|Direction
 block|{
 comment|/**      * Ascending direction: A value is always followed by a greater or equal      * value.      */
 name|ASCENDING
+argument_list|(
+literal|"ASC"
+argument_list|)
 block|,
 comment|/**      * Strictly ascending direction: A value is always followed by a greater      * value.      */
 name|STRICTLY_ASCENDING
+argument_list|(
+literal|"SASC"
+argument_list|)
 block|,
 comment|/**      * Descending direction: A value is always followed by a lesser or equal      * value.      */
 name|DESCENDING
+argument_list|(
+literal|"DESC"
+argument_list|)
 block|,
 comment|/**      * Strictly descending direction: A value is always followed by a lesser      * value.      */
 name|STRICTLY_DESCENDING
+argument_list|(
+literal|"SDESC"
+argument_list|)
 block|,
 comment|/**      * Clustered direction: Values occur in no particular order, and the      * same value may occur in contiguous groups, but never occurs after      * that. This sort order tends to occur when values are ordered      * according to a hash-key.      */
 name|CLUSTERED
-block|;
-annotation|@
-name|Override
-specifier|public
-name|String
-name|toString
-parameter_list|()
-block|{
-comment|// For backwards-compatibility, short-term.
-return|return
-name|Util
-operator|.
-name|toCamelCase
 argument_list|(
-literal|"_"
-operator|+
-name|name
-argument_list|()
+literal|"CLU"
 argument_list|)
-return|;
+block|;
+specifier|public
+specifier|final
+name|String
+name|shortString
+decl_stmt|;
+name|Direction
+parameter_list|(
+name|String
+name|shortString
+parameter_list|)
+block|{
+name|this
+operator|.
+name|shortString
+operator|=
+name|shortString
+expr_stmt|;
 block|}
 block|}
 comment|/**    * Ordering of nulls.    */
@@ -350,6 +351,8 @@ operator|+
 literal|" "
 operator|+
 name|direction
+operator|.
+name|shortString
 operator|+
 operator|(
 name|nullDirection
@@ -381,6 +384,8 @@ name|FIRST
 case|:
 return|return
 name|direction
+operator|.
+name|shortString
 operator|+
 literal|"-nulls-first"
 return|;
@@ -389,6 +394,8 @@ name|LAST
 case|:
 return|return
 name|direction
+operator|.
+name|shortString
 operator|+
 literal|"-nulls-last"
 return|;
@@ -396,8 +403,7 @@ default|default:
 return|return
 name|direction
 operator|.
-name|toString
-argument_list|()
+name|shortString
 return|;
 block|}
 block|}

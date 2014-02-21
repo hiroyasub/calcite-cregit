@@ -6621,7 +6621,7 @@ name|explainContains
 argument_list|(
 literal|"PLAN=EnumerableLimitRel(fetch=[5])\n"
 operator|+
-literal|"  EnumerableSortRel(sort0=[$0], dir0=[Ascending])\n"
+literal|"  EnumerableSortRel(sort0=[$0], dir0=[ASC])\n"
 operator|+
 literal|"    EnumerableCalcRel(expr#0..23=[{inputs}], expr#24=[10], expr#25=[<($t0, $t24)], store_id=[$t0], grocery_sqft=[$t16], $condition=[$t25])\n"
 operator|+
@@ -7131,7 +7131,7 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"PLAN=EnumerableSortRel(sort0=[$0], dir0=[Ascending])\n"
+literal|"PLAN=EnumerableSortRel(sort0=[$0], dir0=[ASC])\n"
 operator|+
 literal|"  EnumerableTableAccessRel(table=[[foodmart2, time_by_day]])\n\n"
 argument_list|)
@@ -7284,7 +7284,7 @@ name|explainContains
 argument_list|(
 literal|"EnumerableCalcRel(expr#0..7=[{inputs}], expr#8=[0], expr#9=[>($t4, $t8)], expr#10=[null], expr#11=[CASE($t9, $t5, $t10)], expr#12=[CAST($t11):JavaType(class java.lang.Float)], expr#13=[5], expr#14=[CAST($t6):JavaType(class java.lang.Float)], expr#15=[CAST($t7):BIGINT], S=[$t12], FIVE=[$t13], M=[$t14], C=[$t15], deptno=[$t1], empid=[$t0])\n"
 operator|+
-literal|"  EnumerableWindowRel(window#0=[window(partition {1} order by [0 Ascending] rows between 1 PRECEDING and CURRENT ROW aggs [COUNT($3), $SUM0($3), MIN($2), COUNT()])])\n"
+literal|"  EnumerableWindowRel(window#0=[window(partition {1} order by [0] rows between 1 PRECEDING and CURRENT ROW aggs [COUNT($3), $SUM0($3), MIN($2), COUNT()])])\n"
 operator|+
 literal|"    EnumerableCalcRel(expr#0..4=[{inputs}], expr#5=[+($t3, $t0)], proj#0..1=[{exprs}], salary=[$t3], $3=[$t5])\n"
 operator|+
