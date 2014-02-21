@@ -165,6 +165,11 @@ specifier|public
 name|SqlNodeList
 parameter_list|(
 name|Collection
+argument_list|<
+name|?
+extends|extends
+name|SqlNode
+argument_list|>
 name|collection
 parameter_list|,
 name|SqlParserPos
@@ -234,7 +239,7 @@ argument_list|)
 expr_stmt|;
 block|}
 specifier|public
-name|SqlNode
+name|SqlNodeList
 name|clone
 parameter_list|(
 name|SqlParserPos

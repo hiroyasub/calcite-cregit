@@ -252,7 +252,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**    * Validates this scope and returns the type of the records it returns.    * External users should call {@link #validate}, which uses the {@link    * #status} field to protect against cycles.    *    * @return record data type, never null    * @post return != null    */
+comment|/**    * Validates this scope and returns the type of the records it returns.    * External users should call {@link #validate}, which uses the {@link    * #status} field to protect against cycles.    *    * @return record data type, never null    */
 specifier|protected
 specifier|abstract
 name|RelDataType
@@ -441,6 +441,15 @@ parameter_list|)
 block|{
 return|return
 name|name
+return|;
+block|}
+specifier|public
+name|SqlValidatorNamespace
+name|resolve
+parameter_list|()
+block|{
+return|return
+name|this
 return|;
 block|}
 specifier|public

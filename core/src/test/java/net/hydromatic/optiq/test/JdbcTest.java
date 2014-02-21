@@ -7192,6 +7192,48 @@ literal|"    EnumerableTableAccessRel(table=[[foodmart2, time_by_day]])\n\n"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWithInsideWhereExists
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select \"deptno\" from \"hr\".\"emps\"\n"
+operator|+
+literal|"where exists (\n"
+operator|+
+literal|"  with dept2 as (select * from \"hr\".\"depts\" where \"depts\".\"deptno\">= \"emps\".\"deptno\")\n"
+operator|+
+literal|"  select 1 from dept2 where \"deptno\"<= \"emps\".\"deptno\")"
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"deptno=10"
+argument_list|,
+literal|"deptno=10"
+argument_list|,
+literal|"deptno=10"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Tests windowed aggregation. */
 annotation|@
 name|Test

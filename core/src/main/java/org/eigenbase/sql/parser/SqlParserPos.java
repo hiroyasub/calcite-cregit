@@ -515,6 +515,8 @@ name|sum
 parameter_list|(
 name|List
 argument_list|<
+name|?
+extends|extends
 name|SqlNode
 argument_list|>
 name|nodes

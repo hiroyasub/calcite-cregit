@@ -2482,6 +2482,9 @@ name|SqlNode
 name|toTree
 parameter_list|(
 name|List
+argument_list|<
+name|Object
+argument_list|>
 name|list
 parameter_list|)
 block|{

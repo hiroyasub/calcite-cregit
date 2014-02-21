@@ -484,6 +484,16 @@ name|frameType
 operator|==
 name|FrameTypeEnum
 operator|.
+name|With
+operator|)
+operator|||
+operator|(
+name|frame
+operator|.
+name|frameType
+operator|==
+name|FrameTypeEnum
+operator|.
 name|Setop
 operator|)
 return|;

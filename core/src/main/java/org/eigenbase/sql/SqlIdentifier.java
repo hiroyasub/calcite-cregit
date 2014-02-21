@@ -977,6 +977,9 @@ decl_stmt|;
 return|return
 name|ns
 operator|.
+name|resolve
+argument_list|()
+operator|.
 name|getMonotonicity
 argument_list|(
 name|Util

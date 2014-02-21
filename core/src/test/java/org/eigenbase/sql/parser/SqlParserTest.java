@@ -1955,6 +1955,174 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testWith
+parameter_list|()
+block|{
+name|check
+argument_list|(
+literal|"with femaleEmps as (select * from emps where gender = 'F')"
+operator|+
+literal|"select deptno from femaleEmps"
+argument_list|,
+literal|"WITH `FEMALEEMPS` AS (SELECT *\n"
+operator|+
+literal|"FROM `EMPS`\n"
+operator|+
+literal|"WHERE (`GENDER` = 'F')) SELECT `DEPTNO`\n"
+operator|+
+literal|"FROM `FEMALEEMPS`"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWith2
+parameter_list|()
+block|{
+name|check
+argument_list|(
+literal|"with femaleEmps as (select * from emps where gender = 'F'),\n"
+operator|+
+literal|"marriedFemaleEmps(x, y) as (select * from femaleEmps where maritaStatus = 'M')\n"
+operator|+
+literal|"select deptno from femaleEmps"
+argument_list|,
+literal|"WITH `FEMALEEMPS` AS (SELECT *\n"
+operator|+
+literal|"FROM `EMPS`\n"
+operator|+
+literal|"WHERE (`GENDER` = 'F')), `MARRIEDFEMALEEMPS` (`X`, `Y`) AS (SELECT *\n"
+operator|+
+literal|"FROM `FEMALEEMPS`\n"
+operator|+
+literal|"WHERE (`MARITASTATUS` = 'M')) SELECT `DEPTNO`\n"
+operator|+
+literal|"FROM `FEMALEEMPS`"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWithFails
+parameter_list|()
+block|{
+name|checkFails
+argument_list|(
+literal|"with femaleEmps as ^select^ * from emps where gender = 'F'\n"
+operator|+
+literal|"select deptno from femaleEmps"
+argument_list|,
+literal|"(?s)Encountered \"select\" at .*"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWithValues
+parameter_list|()
+block|{
+name|check
+argument_list|(
+literal|"with v(i,c) as (values (1, 'a'), (2, 'bb'))\n"
+operator|+
+literal|"select c, i from v"
+argument_list|,
+literal|"WITH `V` (`I`, `C`) AS (VALUES (ROW(1, 'a')), (ROW(2, 'bb'))) SELECT `C`, `I`\n"
+operator|+
+literal|"FROM `V`"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWithNestedFails
+parameter_list|()
+block|{
+comment|// SQL standard does not allow WITH to contain WITH
+name|checkFails
+argument_list|(
+literal|"with emp2 as (select * from emp)\n"
+operator|+
+literal|"^with^ dept2 as (select * from dept)\n"
+operator|+
+literal|"select 1 as one from emp, dept"
+argument_list|,
+literal|"(?s)Encountered \"with\" at .*"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWithNestedInSubquery
+parameter_list|()
+block|{
+comment|// SQL standard does not allow sub-query to contain WITH but we do
+name|check
+argument_list|(
+literal|"with emp2 as (select * from emp)\n"
+operator|+
+literal|"(\n"
+operator|+
+literal|"  with dept2 as (select * from dept)\n"
+operator|+
+literal|"  select 1 as one from empDept)"
+argument_list|,
+literal|"WITH `EMP2` AS (SELECT *\n"
+operator|+
+literal|"FROM `EMP`) WITH `DEPT2` AS (SELECT *\n"
+operator|+
+literal|"FROM `DEPT`) SELECT 1 AS `ONE`\n"
+operator|+
+literal|"FROM `EMPDEPT`"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWithUnion
+parameter_list|()
+block|{
+comment|// Per the standard WITH ... SELECT ... UNION is valid even without parens.
+name|check
+argument_list|(
+literal|"with emp2 as (select * from emp)\n"
+operator|+
+literal|"select * from emp2\n"
+operator|+
+literal|"union\n"
+operator|+
+literal|"select * from emp2\n"
+argument_list|,
+literal|"WITH `EMP2` AS (SELECT *\n"
+operator|+
+literal|"FROM `EMP`) (SELECT *\n"
+operator|+
+literal|"FROM `EMP2`\n"
+operator|+
+literal|"UNION\n"
+operator|+
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `EMP2`)"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testIdentifier
 parameter_list|()
 block|{

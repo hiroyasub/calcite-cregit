@@ -256,6 +256,30 @@ name|ERR_NESTED_AGG
 init|=
 literal|"Aggregate expressions cannot be nested"
 decl_stmt|;
+specifier|private
+specifier|static
+specifier|final
+name|String
+name|EMP_RECORD_TYPE
+init|=
+literal|"RecordType(INTEGER NOT NULL EMPNO,"
+operator|+
+literal|" VARCHAR(20) NOT NULL ENAME,"
+operator|+
+literal|" VARCHAR(10) NOT NULL JOB,"
+operator|+
+literal|" INTEGER NOT NULL MGR,"
+operator|+
+literal|" TIMESTAMP(0) NOT NULL HIREDATE,"
+operator|+
+literal|" INTEGER NOT NULL SAL,"
+operator|+
+literal|" INTEGER NOT NULL COMM,"
+operator|+
+literal|" INTEGER NOT NULL DEPTNO,"
+operator|+
+literal|" BOOLEAN NOT NULL SLACKER) NOT NULL"
+decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 specifier|public
 name|SqlValidatorTest
@@ -12274,6 +12298,29 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
+name|Ignore
+argument_list|(
+literal|"bug: should fail if subquery does not have alias"
+argument_list|)
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJoinSubquery
+parameter_list|()
+block|{
+comment|// Sub-queries require alias
+name|checkFails
+argument_list|(
+literal|"select * from (select 1 as one from emp)\n"
+operator|+
+literal|"join (values (1), (2)) on true"
+argument_list|,
+literal|"require alias"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
 name|Test
 specifier|public
 name|void
@@ -12387,6 +12434,248 @@ comment|// this worked even before FRG-115 was fixed
 name|check
 argument_list|(
 literal|"select deptno from emp group by deptno having deptno + 5> 10"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests the {@code WITH} clause, also called common table expressions. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWith
+parameter_list|()
+block|{
+comment|// simplest possible
+name|checkResultType
+argument_list|(
+literal|"with emp2 as (select * from emp)\n"
+operator|+
+literal|"select * from emp2"
+argument_list|,
+name|EMP_RECORD_TYPE
+argument_list|)
+expr_stmt|;
+comment|// degree of emp2 column list does not match its query
+name|checkFails
+argument_list|(
+literal|"with emp2 ^(x, y)^ as (select * from emp)\n"
+operator|+
+literal|"select * from emp2"
+argument_list|,
+literal|"Number of columns must match number of query columns"
+argument_list|)
+expr_stmt|;
+comment|// duplicate names in column list
+name|checkFails
+argument_list|(
+literal|"with emp2 (x, y, ^y^, x) as (select sal, deptno, ename, empno from emp)\n"
+operator|+
+literal|"select * from emp2"
+argument_list|,
+literal|"Duplicate name 'Y' in column list"
+argument_list|)
+expr_stmt|;
+comment|// column list required if aliases are not unique
+name|checkFails
+argument_list|(
+literal|"with emp2 as (^select empno as e, sal, deptno as e from emp^)\n"
+operator|+
+literal|"select * from emp2"
+argument_list|,
+literal|"Column has duplicate column name 'E' and no column list specified"
+argument_list|)
+expr_stmt|;
+comment|// forward reference
+name|checkFails
+argument_list|(
+literal|"with emp3 as (select * from ^emp2^),\n"
+operator|+
+literal|" emp2 as (select * from emp)\n"
+operator|+
+literal|"select * from emp3"
+argument_list|,
+literal|"Table 'EMP2' not found"
+argument_list|)
+expr_stmt|;
+comment|// forward reference in with-item not used; should still fail
+name|checkFails
+argument_list|(
+literal|"with emp3 as (select * from ^emp2^),\n"
+operator|+
+literal|" emp2 as (select * from emp)\n"
+operator|+
+literal|"select * from emp2"
+argument_list|,
+literal|"Table 'EMP2' not found"
+argument_list|)
+expr_stmt|;
+comment|// table not used is ok
+name|checkResultType
+argument_list|(
+literal|"with emp2 as (select * from emp),\n"
+operator|+
+literal|" emp3 as (select * from emp2)\n"
+operator|+
+literal|"select * from emp2"
+argument_list|,
+name|EMP_RECORD_TYPE
+argument_list|)
+expr_stmt|;
+comment|// self-reference is not ok, even in table not used
+name|checkFails
+argument_list|(
+literal|"with emp2 as (select * from emp),\n"
+operator|+
+literal|" emp3 as (select * from ^emp3^)\n"
+operator|+
+literal|"values (1)"
+argument_list|,
+literal|"Table 'EMP3' not found"
+argument_list|)
+expr_stmt|;
+comment|// self-reference not ok
+name|checkFails
+argument_list|(
+literal|"with emp2 as (select * from ^emp2^)\n"
+operator|+
+literal|"select * from emp2 where false"
+argument_list|,
+literal|"Table 'EMP2' not found"
+argument_list|)
+expr_stmt|;
+comment|// refer to 2 previous tables, not just immediately preceding
+name|checkResultType
+argument_list|(
+literal|"with emp2 as (select * from emp),\n"
+operator|+
+literal|" dept2 as (select * from dept),\n"
+operator|+
+literal|" empDept as (select emp2.empno, dept2.deptno from dept2 join emp2 using (deptno))\n"
+operator|+
+literal|"select 1 as one from empDept"
+argument_list|,
+literal|"RecordType(INTEGER NOT NULL ONE) NOT NULL"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests the {@code WITH} clause with UNION. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWithUnion
+parameter_list|()
+block|{
+comment|// nested WITH (parentheses required - and even with parentheses SQL
+comment|// standard doesn't allow sub-query to have WITH)
+name|checkResultType
+argument_list|(
+literal|"with emp2 as (select * from emp)\n"
+operator|+
+literal|"select * from emp2 union all select * from emp"
+argument_list|,
+name|EMP_RECORD_TYPE
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests the {@code WITH} clause in sub-queries. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWithSubquery
+parameter_list|()
+block|{
+comment|// nested WITH (parentheses required - and even with parentheses SQL
+comment|// standard doesn't allow sub-query to have WITH)
+name|checkResultType
+argument_list|(
+literal|"with emp2 as (select * from emp)\n"
+operator|+
+literal|"(\n"
+operator|+
+literal|"  with dept2 as (select * from dept)\n"
+operator|+
+literal|"  (\n"
+operator|+
+literal|"    with empDept as (select emp2.empno, dept2.deptno from dept2 join emp2 using (deptno))\n"
+operator|+
+literal|"    select 1 as one from empDept))"
+argument_list|,
+literal|"RecordType(INTEGER NOT NULL ONE) NOT NULL"
+argument_list|)
+expr_stmt|;
+comment|// WITH inside WHERE can see enclosing tables
+name|checkResultType
+argument_list|(
+literal|"select * from emp\n"
+operator|+
+literal|"where exists (\n"
+operator|+
+literal|"  with dept2 as (select * from dept where dept.deptno>= emp.deptno)\n"
+operator|+
+literal|"  select 1 from dept2 where deptno<= emp.deptno)"
+argument_list|,
+name|EMP_RECORD_TYPE
+argument_list|)
+expr_stmt|;
+comment|// WITH inside FROM cannot see enclosing tables
+name|checkFails
+argument_list|(
+literal|"select * from emp\n"
+operator|+
+literal|"join (\n"
+operator|+
+literal|"  with dept2 as (select * from dept where dept.deptno>= ^emp^.deptno)\n"
+operator|+
+literal|"  select * from dept2) as d on true"
+argument_list|,
+literal|"Table 'EMP' not found"
+argument_list|)
+expr_stmt|;
+comment|// as above, using USING
+name|checkFails
+argument_list|(
+literal|"select * from emp\n"
+operator|+
+literal|"join (\n"
+operator|+
+literal|"  with dept2 as (select * from dept where dept.deptno>= ^emp^.deptno)\n"
+operator|+
+literal|"  select * from dept2) as d using (deptno)"
+argument_list|,
+literal|"Table 'EMP' not found"
+argument_list|)
+expr_stmt|;
+comment|// WITH inside FROM
+name|checkResultType
+argument_list|(
+literal|"select e.empno, d.* from emp as e\n"
+operator|+
+literal|"join (\n"
+operator|+
+literal|"  with dept2 as (select * from dept where dept.deptno> 10)\n"
+operator|+
+literal|"  select deptno, 1 as one from dept2) as d using (deptno)"
+argument_list|,
+literal|"RecordType(INTEGER NOT NULL EMPNO,"
+operator|+
+literal|" INTEGER NOT NULL DEPTNO,"
+operator|+
+literal|" INTEGER NOT NULL ONE) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|checkFails
+argument_list|(
+literal|"select ^e^.empno, d.* from emp\n"
+operator|+
+literal|"join (\n"
+operator|+
+literal|"  with dept2 as (select * from dept where dept.deptno> 10)\n"
+operator|+
+literal|"  select deptno, 1 as one from dept2) as d using (deptno)"
+argument_list|,
+literal|"Table 'E' not found"
 argument_list|)
 expr_stmt|;
 block|}

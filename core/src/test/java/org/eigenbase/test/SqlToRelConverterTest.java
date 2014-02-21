@@ -989,6 +989,82 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testWith
+parameter_list|()
+block|{
+name|check
+argument_list|(
+literal|"with emp2 as (select * from emp)\n"
+operator|+
+literal|"select * from emp2"
+argument_list|,
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWithUnion
+parameter_list|()
+block|{
+name|check
+argument_list|(
+literal|"with emp2 as (select * from emp where deptno> 10)\n"
+operator|+
+literal|"select empno from emp2 where deptno< 30 union all select deptno from emp"
+argument_list|,
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWithInsideWhereExists
+parameter_list|()
+block|{
+name|check
+argument_list|(
+literal|"select * from emp\n"
+operator|+
+literal|"where exists (\n"
+operator|+
+literal|"  with dept2 as (select * from dept where dept.deptno>= emp.deptno)\n"
+operator|+
+literal|"  select 1 from dept2 where deptno<= emp.deptno)"
+argument_list|,
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWithInsideScalarSubquery
+parameter_list|()
+block|{
+name|check
+argument_list|(
+literal|"select (\n"
+operator|+
+literal|" with dept2 as (select * from dept where deptno> 10)"
+operator|+
+literal|" select count(*) from dept2) as c\n"
+operator|+
+literal|"from emp"
+argument_list|,
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testExplicitTable
 parameter_list|()
 block|{

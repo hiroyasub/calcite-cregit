@@ -64,7 +64,7 @@ name|SqlValidator
 name|getValidator
 parameter_list|()
 function_decl|;
-comment|/**    * Returns the root node of this scope.    *    * @post return != null    */
+comment|/**    * Returns the root node of this scope. Never null.    */
 name|SqlNode
 name|getNode
 parameter_list|()
@@ -183,6 +183,17 @@ name|validateExpr
 parameter_list|(
 name|SqlNode
 name|expr
+parameter_list|)
+function_decl|;
+comment|/**    * Looks up a table in this scope from its name. If found, returns the    * {@link TableNamespace} that wraps it. If the "table" is defined in a    * {@code WITH} clause it may be a query, not a table after all.    *    * @param names Name of table, may be qualified or fully-qualified    * @return Namespace of table    */
+name|SqlValidatorNamespace
+name|getTableNamespace
+parameter_list|(
+name|List
+argument_list|<
+name|String
+argument_list|>
+name|names
 parameter_list|)
 function_decl|;
 block|}

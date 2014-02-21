@@ -46,7 +46,7 @@ name|Hyde
 block|,
 comment|/**      * Damian's style of subquery nesting. Like this:      *      *<pre>SELECT *      * FROM      * (   SELECT *      *     FROM t      * )      * WHERE condition</pre>      */
 name|Black
-block|;   }
+block|}
 comment|/**    * Enumerates the types of frame.    */
 enum|enum
 name|FrameTypeEnum
@@ -82,6 +82,9 @@ name|OrderBy
 block|,
 comment|/**      * ORDER BY list.      *      *<p>Example:      *<li>ORDER BY x, y DESC, z      */
 name|OrderByList
+block|,
+comment|/**      * WITH clause of a SELECT statement. The "list" has only two items:      * the WITH clause and the query, with AS as the separator.      */
+name|With
 block|,
 comment|/**      * OFFSET clause.      *      *<p>Example:      *<li>OFFSET 10 ROWS</li></p>      */
 name|Offset

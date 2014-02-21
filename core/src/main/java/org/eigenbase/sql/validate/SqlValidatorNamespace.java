@@ -81,7 +81,7 @@ name|SqlValidatorTable
 name|getTable
 parameter_list|()
 function_decl|;
-comment|/**    * Returns the row type of this namespace, which comprises a list of names    * and types of the output columns. If the scope's type has not yet been    * derived, derives it. Never returns null.    *    * @post return != null    */
+comment|/**    * Returns the row type of this namespace, which comprises a list of names    * and types of the output columns. If the scope's type has not yet been    * derived, derives it. Never returns null.    */
 name|RelDataType
 name|getRowType
 parameter_list|()
@@ -104,7 +104,7 @@ name|void
 name|validate
 parameter_list|()
 function_decl|;
-comment|/**    * Returns the parse tree node at the root of this namespace.    *    * @return parse tree node    */
+comment|/**    * Returns the parse tree node at the root of this namespace.    *    * @return parse tree node; null for {@link TableNamespace}    */
 name|SqlNode
 name|getNode
 parameter_list|()
@@ -188,6 +188,11 @@ name|?
 argument_list|>
 name|clazz
 parameter_list|)
+function_decl|;
+comment|/** If this namespace resolves to another namespace, returns that namespace,    * following links to the end of the chain.    *    *<p>A {@code WITH}) clause defines table names that resolve to queries    * (the body of the with-item). An {@link IdentifierNamespace} typically    * resolves to a {@link TableNamespace}.</p>    *    *<p>You must not call this method before {@link #validate()} has    * completed.</p> */
+name|SqlValidatorNamespace
+name|resolve
+parameter_list|()
 function_decl|;
 block|}
 end_interface
