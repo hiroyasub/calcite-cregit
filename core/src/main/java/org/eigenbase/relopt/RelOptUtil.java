@@ -871,7 +871,7 @@ name|create
 argument_list|(
 name|MappingType
 operator|.
-name|PartialFunction
+name|PARTIAL_FUNCTION
 argument_list|,
 name|nodes
 operator|.

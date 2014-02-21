@@ -745,7 +745,7 @@ name|mono1
 operator|==
 name|SqlMonotonicity
 operator|.
-name|Constant
+name|CONSTANT
 condition|)
 block|{
 if|if
@@ -799,7 +799,7 @@ comment|// mono / zero --> constant (infinity!)
 return|return
 name|SqlMonotonicity
 operator|.
-name|Constant
+name|CONSTANT
 return|;
 default|default:
 comment|// mono / +ve constant * mono1 --> mono, unstrict

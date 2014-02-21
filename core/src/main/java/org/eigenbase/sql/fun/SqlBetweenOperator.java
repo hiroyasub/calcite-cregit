@@ -208,7 +208,7 @@ literal|3
 argument_list|,
 name|RelDataTypeComparability
 operator|.
-name|All
+name|ALL
 argument_list|)
 decl_stmt|;
 specifier|private

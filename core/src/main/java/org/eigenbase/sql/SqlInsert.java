@@ -329,7 +329,7 @@ name|SqlWriter
 operator|.
 name|FrameTypeEnum
 operator|.
-name|Select
+name|SELECT
 argument_list|)
 expr_stmt|;
 name|writer

@@ -595,7 +595,7 @@ name|SqlWriter
 operator|.
 name|FrameTypeEnum
 operator|.
-name|Window
+name|WINDOW
 argument_list|,
 literal|"("
 argument_list|,
@@ -2535,7 +2535,7 @@ name|monotonicity
 operator|!=
 name|SqlMonotonicity
 operator|.
-name|NotMonotonic
+name|NOT_MONOTONIC
 condition|)
 block|{
 return|return

@@ -960,7 +960,7 @@ block|{
 return|return
 name|SqlMonotonicity
 operator|.
-name|NotMonotonic
+name|NOT_MONOTONIC
 return|;
 block|}
 block|}

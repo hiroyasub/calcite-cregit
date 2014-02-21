@@ -456,7 +456,7 @@ name|monotonicity
 operator|!=
 name|SqlMonotonicity
 operator|.
-name|NotMonotonic
+name|NOT_MONOTONIC
 condition|)
 block|{
 name|builder

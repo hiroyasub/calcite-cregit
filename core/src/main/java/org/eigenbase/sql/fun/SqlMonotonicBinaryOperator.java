@@ -17,16 +17,6 @@ end_package
 
 begin_import
 import|import
-name|java
-operator|.
-name|math
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
 name|org
 operator|.
 name|eigenbase
@@ -172,7 +162,7 @@ name|mono1
 operator|==
 name|SqlMonotonicity
 operator|.
-name|Constant
+name|CONSTANT
 operator|)
 operator|&&
 operator|(
@@ -180,14 +170,14 @@ name|mono0
 operator|==
 name|SqlMonotonicity
 operator|.
-name|Constant
+name|CONSTANT
 operator|)
 condition|)
 block|{
 return|return
 name|SqlMonotonicity
 operator|.
-name|Constant
+name|CONSTANT
 return|;
 block|}
 comment|// monotonic<op> constant
@@ -197,7 +187,7 @@ name|mono1
 operator|==
 name|SqlMonotonicity
 operator|.
-name|Constant
+name|CONSTANT
 condition|)
 block|{
 comment|// mono0 + constant --> mono0
@@ -285,7 +275,7 @@ comment|// mono0 * 0 --> constant (zero)
 return|return
 name|SqlMonotonicity
 operator|.
-name|Constant
+name|CONSTANT
 return|;
 default|default:
 comment|// mono0 * positiove constant --> mono0
@@ -305,7 +295,7 @@ name|mono0
 operator|==
 name|SqlMonotonicity
 operator|.
-name|Constant
+name|CONSTANT
 condition|)
 block|{
 if|if
@@ -403,7 +393,7 @@ comment|// 0 * mono1 --> constant (zero)
 return|return
 name|SqlMonotonicity
 operator|.
-name|Constant
+name|CONSTANT
 return|;
 default|default:
 comment|// positive constant * mono1 --> mono1
@@ -468,7 +458,7 @@ block|{
 return|return
 name|SqlMonotonicity
 operator|.
-name|NotMonotonic
+name|NOT_MONOTONIC
 return|;
 block|}
 block|}
@@ -525,7 +515,7 @@ block|{
 return|return
 name|SqlMonotonicity
 operator|.
-name|NotMonotonic
+name|NOT_MONOTONIC
 return|;
 block|}
 block|}
@@ -543,7 +533,7 @@ block|{
 return|return
 name|SqlMonotonicity
 operator|.
-name|NotMonotonic
+name|NOT_MONOTONIC
 return|;
 block|}
 return|return

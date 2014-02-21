@@ -871,7 +871,7 @@ block|{
 return|return
 name|SqlMonotonicity
 operator|.
-name|Constant
+name|CONSTANT
 return|;
 block|}
 comment|/**    * Creates a NULL literal.    *    *<p>There's no singleton constant for a NULL literal. Instead, nulls must    * be instantiated via createNull(), because different instances have    * different context-dependent types.    */

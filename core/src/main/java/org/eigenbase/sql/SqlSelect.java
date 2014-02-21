@@ -220,7 +220,7 @@ name|getModifierNode
 argument_list|(
 name|SqlSelectKeyword
 operator|.
-name|Distinct
+name|DISTINCT
 argument_list|)
 operator|!=
 literal|null
@@ -603,7 +603,7 @@ name|SqlWriter
 operator|.
 name|FrameTypeEnum
 operator|.
-name|Subquery
+name|SUB_QUERY
 argument_list|,
 literal|"("
 argument_list|,

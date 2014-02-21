@@ -745,7 +745,7 @@ literal|2
 argument_list|,
 name|RelDataTypeComparability
 operator|.
-name|All
+name|ALL
 argument_list|)
 decl_stmt|;
 comment|/**    * Operand type-checking strategy where operand type must allow ordered    * comparisons. Used when instance comparisons are made on single operand    * functions    */
@@ -762,7 +762,7 @@ literal|1
 argument_list|,
 name|RelDataTypeComparability
 operator|.
-name|All
+name|ALL
 argument_list|)
 decl_stmt|;
 comment|/**    * Operand type-checking strategy where operand types must allow unordered    * comparisons.    */
@@ -779,7 +779,7 @@ literal|2
 argument_list|,
 name|RelDataTypeComparability
 operator|.
-name|Unordered
+name|UNORDERED
 argument_list|)
 decl_stmt|;
 comment|/**    * Operand type-checking strategy where two operands must both be in the    * same string type family.    */

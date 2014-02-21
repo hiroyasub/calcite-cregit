@@ -894,7 +894,7 @@ name|SqlWriter
 operator|.
 name|FrameTypeEnum
 operator|.
-name|FunCall
+name|FUN_CALL
 argument_list|,
 literal|"("
 argument_list|,
@@ -1050,13 +1050,13 @@ name|SqlWriter
 operator|.
 name|FrameTypeEnum
 operator|.
-name|Setop
+name|SETOP
 else|:
 name|SqlWriter
 operator|.
 name|FrameTypeEnum
 operator|.
-name|Simple
+name|SIMPLE
 argument_list|)
 decl_stmt|;
 name|operands

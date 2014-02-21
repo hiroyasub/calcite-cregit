@@ -938,7 +938,7 @@ name|SqlWriter
 operator|.
 name|SubqueryStyle
 operator|.
-name|Black
+name|BLACK
 argument_list|)
 expr_stmt|;
 name|checkSimple

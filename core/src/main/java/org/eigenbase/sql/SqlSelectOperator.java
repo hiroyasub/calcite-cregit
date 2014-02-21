@@ -347,7 +347,7 @@ name|SqlWriter
 operator|.
 name|FrameTypeEnum
 operator|.
-name|Select
+name|SELECT
 argument_list|)
 decl_stmt|;
 name|writer
@@ -456,7 +456,7 @@ name|SqlWriter
 operator|.
 name|FrameTypeEnum
 operator|.
-name|SelectList
+name|SELECT_LIST
 argument_list|)
 decl_stmt|;
 name|unparseListClause
@@ -515,7 +515,7 @@ name|SqlWriter
 operator|.
 name|FrameTypeEnum
 operator|.
-name|FromList
+name|FROM_LIST
 argument_list|)
 decl_stmt|;
 name|fromClause
@@ -716,7 +716,7 @@ name|SqlWriter
 operator|.
 name|FrameTypeEnum
 operator|.
-name|WhereList
+name|WHERE_LIST
 argument_list|)
 decl_stmt|;
 name|unparseListClause
@@ -801,7 +801,7 @@ name|SqlWriter
 operator|.
 name|FrameTypeEnum
 operator|.
-name|GroupByList
+name|GROUP_BY_LIST
 argument_list|)
 decl_stmt|;
 if|if
@@ -829,7 +829,7 @@ name|SqlWriter
 operator|.
 name|FrameTypeEnum
 operator|.
-name|Simple
+name|SIMPLE
 argument_list|,
 literal|"("
 argument_list|,
@@ -942,7 +942,7 @@ name|SqlWriter
 operator|.
 name|FrameTypeEnum
 operator|.
-name|WindowDeclList
+name|WINDOW_DECL_LIST
 argument_list|)
 decl_stmt|;
 for|for
@@ -1038,7 +1038,7 @@ name|SqlWriter
 operator|.
 name|FrameTypeEnum
 operator|.
-name|OrderByList
+name|ORDER_BY_LIST
 argument_list|)
 decl_stmt|;
 name|unparseListClause

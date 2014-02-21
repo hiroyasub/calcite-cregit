@@ -126,7 +126,7 @@ name|create
 argument_list|(
 name|MappingType
 operator|.
-name|PartialSurjection
+name|PARTIAL_SURJECTION
 argument_list|,
 literal|3
 argument_list|,
@@ -147,7 +147,7 @@ name|create
 argument_list|(
 name|MappingType
 operator|.
-name|PartialSurjection
+name|PARTIAL_SURJECTION
 argument_list|,
 literal|3
 argument_list|,
@@ -168,7 +168,7 @@ name|create
 argument_list|(
 name|MappingType
 operator|.
-name|PartialSurjection
+name|PARTIAL_SURJECTION
 argument_list|,
 literal|4
 argument_list|,
@@ -302,7 +302,7 @@ name|create
 argument_list|(
 name|MappingType
 operator|.
-name|PartialSurjection
+name|PARTIAL_SURJECTION
 argument_list|,
 literal|5
 argument_list|,

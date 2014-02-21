@@ -339,7 +339,7 @@ name|left
 argument_list|,
 name|SqlMonikerType
 operator|.
-name|Table
+name|TABLE
 argument_list|)
 argument_list|)
 expr_stmt|;

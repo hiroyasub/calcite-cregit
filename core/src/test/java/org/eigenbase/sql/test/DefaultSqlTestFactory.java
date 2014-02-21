@@ -226,7 +226,7 @@ literal|"conformance"
 argument_list|,
 name|SqlConformance
 operator|.
-name|Default
+name|DEFAULT
 argument_list|)
 decl_stmt|;
 specifier|public

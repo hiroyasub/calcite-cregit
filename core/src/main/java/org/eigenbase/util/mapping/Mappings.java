@@ -104,7 +104,7 @@ name|mappingType
 condition|)
 block|{
 case|case
-name|Bijection
+name|BIJECTION
 case|:
 assert|assert
 name|sourceCount
@@ -119,7 +119,7 @@ name|sourceCount
 argument_list|)
 return|;
 case|case
-name|InverseSurjection
+name|INVERSE_SURJECTION
 case|:
 assert|assert
 name|sourceCount
@@ -136,10 +136,10 @@ name|targetCount
 argument_list|)
 return|;
 case|case
-name|PartialSurjection
+name|PARTIAL_SURJECTION
 case|:
 case|case
-name|Surjection
+name|SURJECTION
 case|:
 return|return
 operator|new
@@ -155,10 +155,10 @@ name|mappingType
 argument_list|)
 return|;
 case|case
-name|PartialFunction
+name|PARTIAL_FUNCTION
 case|:
 case|case
-name|Function
+name|FUNCTION
 case|:
 return|return
 operator|new
@@ -172,10 +172,10 @@ name|mappingType
 argument_list|)
 return|;
 case|case
-name|InverseFunction
+name|INVERSE_FUNCTION
 case|:
 case|case
-name|InversePartialFunction
+name|INVERSE_PARTIAL_FUNCTION
 case|:
 return|return
 operator|new
@@ -266,7 +266,7 @@ name|create
 argument_list|(
 name|MappingType
 operator|.
-name|InverseSurjection
+name|INVERSE_SURJECTION
 argument_list|,
 name|mapping2
 operator|.
@@ -378,7 +378,7 @@ name|create
 argument_list|(
 name|MappingType
 operator|.
-name|InverseSurjection
+name|INVERSE_SURJECTION
 argument_list|,
 name|mapping1
 operator|.
@@ -891,7 +891,7 @@ name|targetCount
 argument_list|,
 name|MappingType
 operator|.
-name|Function
+name|FUNCTION
 argument_list|)
 decl_stmt|;
 for|for
@@ -965,7 +965,7 @@ name|targetCount
 argument_list|,
 name|MappingType
 operator|.
-name|Function
+name|FUNCTION
 argument_list|)
 decl_stmt|;
 for|for
@@ -1175,7 +1175,7 @@ name|create
 argument_list|(
 name|MappingType
 operator|.
-name|InverseSurjection
+name|INVERSE_SURJECTION
 argument_list|,
 name|sourceCount
 argument_list|,
@@ -1344,7 +1344,7 @@ name|create
 argument_list|(
 name|MappingType
 operator|.
-name|InverseSurjection
+name|INVERSE_SURJECTION
 argument_list|,
 name|s0
 operator|+
@@ -1511,7 +1511,7 @@ name|create
 argument_list|(
 name|MappingType
 operator|.
-name|InverseSurjection
+name|INVERSE_SURJECTION
 argument_list|,
 name|s0
 argument_list|,
@@ -2635,7 +2635,7 @@ literal|1
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Creates a partial mapping from a list. For example,<code>      * PartialMapping({1, 2, 4}, 6)</code> creates the mapping      *      *<table border="1">      *<tr>      *<th>source</th>      *<td>0</td>      *<td>1</td>      *<td>2</td>      *<td>3</td>      *<td>4</td>      *<td>5</td>      *</tr>      *<tr>      *<th>target</th>      *<td>-1</td>      *<td>0</td>      *<td>1</td>      *<td>-1</td>      *<td>2</td>      *<td>-1</td>      *</tr>      *</table>      *      * @param sourceList  List whose i'th element is the source of target #i      * @param sourceCount Number of elements in the source domain      * @param mappingType Mapping type, must be      *                    {@link org.eigenbase.util.mapping.MappingType#PartialSurjection}      *                    or stronger.      */
+comment|/**      * Creates a partial mapping from a list. For example,<code>      * PartialMapping({1, 2, 4}, 6)</code> creates the mapping      *      *<table border="1">      *<tr>      *<th>source</th>      *<td>0</td>      *<td>1</td>      *<td>2</td>      *<td>3</td>      *<td>4</td>      *<td>5</td>      *</tr>      *<tr>      *<th>target</th>      *<td>-1</td>      *<td>0</td>      *<td>1</td>      *<td>-1</td>      *<td>2</td>      *<td>-1</td>      *</tr>      *</table>      *      * @param sourceList  List whose i'th element is the source of target #i      * @param sourceCount Number of elements in the source domain      * @param mappingType Mapping type, must be      *                    {@link org.eigenbase.util.mapping.MappingType#PARTIAL_SURJECTION}      *                    or stronger.      */
 specifier|public
 name|PartialMapping
 parameter_list|(
@@ -3372,7 +3372,7 @@ name|targetCount
 argument_list|,
 name|MappingType
 operator|.
-name|InverseSurjection
+name|INVERSE_SURJECTION
 argument_list|)
 expr_stmt|;
 block|}
@@ -3552,7 +3552,7 @@ block|{
 return|return
 name|MappingType
 operator|.
-name|Bijection
+name|BIJECTION
 return|;
 block|}
 specifier|public

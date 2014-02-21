@@ -978,7 +978,7 @@ name|RelFieldCollation
 operator|.
 name|Direction
 operator|.
-name|Descending
+name|DESCENDING
 argument_list|)
 argument_list|)
 argument_list|)
@@ -1173,7 +1173,7 @@ name|RelFieldCollation
 operator|.
 name|Direction
 operator|.
-name|Descending
+name|DESCENDING
 decl_stmt|;
 name|body
 operator|.
@@ -1675,7 +1675,7 @@ name|RelFieldCollation
 operator|.
 name|Direction
 operator|.
-name|Descending
+name|DESCENDING
 decl_stmt|;
 name|body
 operator|.

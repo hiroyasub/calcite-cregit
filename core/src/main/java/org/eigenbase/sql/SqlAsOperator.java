@@ -162,7 +162,7 @@ name|SqlWriter
 operator|.
 name|FrameTypeEnum
 operator|.
-name|Simple
+name|SIMPLE
 argument_list|)
 decl_stmt|;
 name|operands
@@ -257,7 +257,7 @@ name|SqlWriter
 operator|.
 name|FrameTypeEnum
 operator|.
-name|Simple
+name|SIMPLE
 argument_list|,
 literal|"("
 argument_list|,

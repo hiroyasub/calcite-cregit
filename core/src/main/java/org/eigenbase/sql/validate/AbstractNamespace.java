@@ -89,7 +89,7 @@ name|SqlValidatorImpl
 operator|.
 name|Status
 operator|.
-name|Unvalidated
+name|UNVALIDATED
 decl_stmt|;
 comment|/**    * Type of the output row, which comprises the name and type of each output    * column. Set on validate.    */
 specifier|protected
@@ -151,7 +151,7 @@ name|status
 condition|)
 block|{
 case|case
-name|Unvalidated
+name|UNVALIDATED
 case|:
 try|try
 block|{
@@ -161,7 +161,7 @@ name|SqlValidatorImpl
 operator|.
 name|Status
 operator|.
-name|InProgress
+name|IN_PROGRESS
 expr_stmt|;
 name|Util
 operator|.
@@ -222,12 +222,12 @@ name|SqlValidatorImpl
 operator|.
 name|Status
 operator|.
-name|Valid
+name|VALID
 expr_stmt|;
 block|}
 break|break;
 case|case
-name|InProgress
+name|IN_PROGRESS
 case|:
 throw|throw
 name|Util
@@ -238,7 +238,7 @@ literal|"todo: Cycle detected during type-checking"
 argument_list|)
 throw|;
 case|case
-name|Valid
+name|VALID
 case|:
 break|break;
 default|default:
@@ -418,7 +418,7 @@ block|{
 return|return
 name|SqlMonotonicity
 operator|.
-name|NotMonotonic
+name|NOT_MONOTONIC
 return|;
 block|}
 specifier|public

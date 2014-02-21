@@ -102,7 +102,7 @@ block|{
 return|return
 name|SqlMonikerType
 operator|.
-name|Column
+name|COLUMN
 return|;
 block|}
 specifier|public

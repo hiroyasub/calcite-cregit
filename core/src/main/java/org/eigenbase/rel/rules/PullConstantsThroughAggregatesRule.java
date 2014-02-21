@@ -886,7 +886,7 @@ name|isA
 argument_list|(
 name|MappingType
 operator|.
-name|InverseSurjection
+name|INVERSE_SURJECTION
 argument_list|)
 assert|;
 specifier|final

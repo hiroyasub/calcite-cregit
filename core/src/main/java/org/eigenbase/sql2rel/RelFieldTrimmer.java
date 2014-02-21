@@ -1047,7 +1047,7 @@ name|create
 argument_list|(
 name|MappingType
 operator|.
-name|InverseSurjection
+name|INVERSE_SURJECTION
 argument_list|,
 name|fieldCount
 argument_list|,
@@ -1196,7 +1196,7 @@ name|create
 argument_list|(
 name|MappingType
 operator|.
-name|InverseSurjection
+name|INVERSE_SURJECTION
 argument_list|,
 name|fieldCount
 argument_list|,
@@ -2300,7 +2300,7 @@ name|create
 argument_list|(
 name|MappingType
 operator|.
-name|InverseSurjection
+name|INVERSE_SURJECTION
 argument_list|,
 name|fieldCount
 argument_list|,
@@ -3036,7 +3036,7 @@ name|create
 argument_list|(
 name|MappingType
 operator|.
-name|InverseSurjection
+name|INVERSE_SURJECTION
 argument_list|,
 name|rowType
 operator|.
@@ -3916,7 +3916,7 @@ name|create
 argument_list|(
 name|MappingType
 operator|.
-name|InverseSurjection
+name|INVERSE_SURJECTION
 argument_list|,
 name|fieldCount
 argument_list|,

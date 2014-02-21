@@ -1059,7 +1059,7 @@ name|explainDepth
 condition|)
 block|{
 case|case
-name|Type
+name|TYPE
 case|:
 return|return
 name|createPreparedExplanation
@@ -1076,7 +1076,7 @@ name|detailLevel
 argument_list|)
 return|;
 case|case
-name|Logical
+name|LOGICAL
 case|:
 return|return
 name|createPreparedExplanation
@@ -1166,7 +1166,7 @@ name|explainDepth
 condition|)
 block|{
 case|case
-name|Physical
+name|PHYSICAL
 case|:
 default|default:
 name|rootRel

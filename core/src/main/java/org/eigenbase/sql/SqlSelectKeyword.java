@@ -40,9 +40,9 @@ name|SqlLiteral
 operator|.
 name|SqlSymbol
 block|{
-name|Distinct
+name|DISTINCT
 block|,
-name|All
+name|ALL
 block|;
 comment|/**    * Creates a parse-tree node representing an occurrence of this keyword    * at a particular position in the parsed text.    */
 specifier|public

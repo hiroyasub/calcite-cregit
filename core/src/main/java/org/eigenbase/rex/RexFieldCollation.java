@@ -205,13 +205,13 @@ name|RelFieldCollation
 operator|.
 name|Direction
 operator|.
-name|Descending
+name|DESCENDING
 else|:
 name|RelFieldCollation
 operator|.
 name|Direction
 operator|.
-name|Ascending
+name|ASCENDING
 return|;
 block|}
 specifier|public

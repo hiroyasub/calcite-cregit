@@ -105,7 +105,7 @@ name|SqlCollation
 argument_list|(
 name|Coercibility
 operator|.
-name|Coercible
+name|COERCIBLE
 argument_list|)
 decl_stmt|;
 specifier|public
@@ -119,7 +119,7 @@ name|SqlCollation
 argument_list|(
 name|Coercibility
 operator|.
-name|Implicit
+name|IMPLICIT
 argument_list|)
 decl_stmt|;
 comment|//~ Enums ------------------------------------------------------------------
@@ -128,16 +128,15 @@ specifier|public
 enum|enum
 name|Coercibility
 block|{
-name|Explicit
+comment|/** Strongest coercibility. */
+name|EXPLICIT
 block|,
-comment|/* strongest */
-name|Implicit
+name|IMPLICIT
 block|,
-name|Coercible
+name|COERCIBLE
 block|,
-name|None
-block|;
-comment|/* weakest */
+comment|/** Weakest coercibility. */
+name|NONE
 block|}
 comment|//~ Instance fields --------------------------------------------------------
 specifier|protected
@@ -506,7 +505,7 @@ name|coercibility1
 condition|)
 block|{
 case|case
-name|Coercible
+name|COERCIBLE
 case|:
 switch|switch
 condition|(
@@ -514,7 +513,7 @@ name|coercibility2
 condition|)
 block|{
 case|case
-name|Coercible
+name|COERCIBLE
 case|:
 return|return
 operator|new
@@ -526,11 +525,11 @@ name|collationName
 argument_list|,
 name|Coercibility
 operator|.
-name|Coercible
+name|COERCIBLE
 argument_list|)
 return|;
 case|case
-name|Implicit
+name|IMPLICIT
 case|:
 return|return
 operator|new
@@ -542,17 +541,17 @@ name|collationName
 argument_list|,
 name|Coercibility
 operator|.
-name|Implicit
+name|IMPLICIT
 argument_list|)
 return|;
 case|case
-name|None
+name|NONE
 case|:
 return|return
 literal|null
 return|;
 case|case
-name|Explicit
+name|EXPLICIT
 case|:
 return|return
 operator|new
@@ -564,7 +563,7 @@ name|collationName
 argument_list|,
 name|Coercibility
 operator|.
-name|Explicit
+name|EXPLICIT
 argument_list|)
 return|;
 default|default:
@@ -578,7 +577,7 @@ argument_list|)
 throw|;
 block|}
 case|case
-name|Implicit
+name|IMPLICIT
 case|:
 switch|switch
 condition|(
@@ -586,7 +585,7 @@ name|coercibility2
 condition|)
 block|{
 case|case
-name|Coercible
+name|COERCIBLE
 case|:
 return|return
 operator|new
@@ -598,11 +597,11 @@ name|collationName
 argument_list|,
 name|Coercibility
 operator|.
-name|Implicit
+name|IMPLICIT
 argument_list|)
 return|;
 case|case
-name|Implicit
+name|IMPLICIT
 case|:
 if|if
 condition|(
@@ -628,7 +627,7 @@ name|collationName
 argument_list|,
 name|Coercibility
 operator|.
-name|Implicit
+name|IMPLICIT
 argument_list|)
 return|;
 block|}
@@ -636,13 +635,13 @@ return|return
 literal|null
 return|;
 case|case
-name|None
+name|NONE
 case|:
 return|return
 literal|null
 return|;
 case|case
-name|Explicit
+name|EXPLICIT
 case|:
 return|return
 operator|new
@@ -654,7 +653,7 @@ name|collationName
 argument_list|,
 name|Coercibility
 operator|.
-name|Explicit
+name|EXPLICIT
 argument_list|)
 return|;
 default|default:
@@ -668,7 +667,7 @@ argument_list|)
 throw|;
 block|}
 case|case
-name|None
+name|NONE
 case|:
 switch|switch
 condition|(
@@ -676,19 +675,19 @@ name|coercibility2
 condition|)
 block|{
 case|case
-name|Coercible
+name|COERCIBLE
 case|:
 case|case
-name|Implicit
+name|IMPLICIT
 case|:
 case|case
-name|None
+name|NONE
 case|:
 return|return
 literal|null
 return|;
 case|case
-name|Explicit
+name|EXPLICIT
 case|:
 return|return
 operator|new
@@ -700,7 +699,7 @@ name|collationName
 argument_list|,
 name|Coercibility
 operator|.
-name|Explicit
+name|EXPLICIT
 argument_list|)
 return|;
 default|default:
@@ -714,7 +713,7 @@ argument_list|)
 throw|;
 block|}
 case|case
-name|Explicit
+name|EXPLICIT
 case|:
 switch|switch
 condition|(
@@ -722,13 +721,13 @@ name|coercibility2
 condition|)
 block|{
 case|case
-name|Coercible
+name|COERCIBLE
 case|:
 case|case
-name|Implicit
+name|IMPLICIT
 case|:
 case|case
-name|None
+name|NONE
 case|:
 return|return
 operator|new
@@ -740,11 +739,11 @@ name|collationName
 argument_list|,
 name|Coercibility
 operator|.
-name|Explicit
+name|EXPLICIT
 argument_list|)
 return|;
 case|case
-name|Explicit
+name|EXPLICIT
 case|:
 if|if
 condition|(
@@ -770,7 +769,7 @@ name|collationName
 argument_list|,
 name|Coercibility
 operator|.
-name|Explicit
+name|EXPLICIT
 argument_list|)
 return|;
 block|}

@@ -1741,7 +1741,7 @@ argument_list|()
 condition|?
 name|SqlSelectKeyword
 operator|.
-name|Distinct
+name|DISTINCT
 operator|.
 name|symbol
 argument_list|(
@@ -1797,10 +1797,10 @@ argument_list|()
 condition|)
 block|{
 case|case
-name|Descending
+name|DESCENDING
 case|:
 case|case
-name|StrictlyDescending
+name|STRICTLY_DESCENDING
 case|:
 name|node
 operator|=

@@ -10455,7 +10455,7 @@ name|RelFieldCollation
 operator|.
 name|Direction
 operator|.
-name|Ascending
+name|ASCENDING
 argument_list|,
 name|RelFieldCollation
 operator|.
@@ -10529,7 +10529,7 @@ name|RelFieldCollation
 operator|.
 name|Direction
 operator|.
-name|Descending
+name|DESCENDING
 argument_list|,
 name|nullDirection
 argument_list|)
@@ -18098,7 +18098,7 @@ argument_list|()
 operator|==
 name|SqlSelectKeyword
 operator|.
-name|Distinct
+name|DISTINCT
 operator|)
 condition|)
 block|{

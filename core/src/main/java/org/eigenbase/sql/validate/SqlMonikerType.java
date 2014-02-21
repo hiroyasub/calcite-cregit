@@ -24,20 +24,20 @@ specifier|public
 enum|enum
 name|SqlMonikerType
 block|{
-name|Column
+name|COLUMN
 block|,
-name|Table
+name|TABLE
 block|,
-name|View
+name|VIEW
 block|,
-name|Schema
+name|SCHEMA
 block|,
-name|Repository
+name|REPOSITORY
 block|,
-name|Function
+name|FUNCTION
 block|,
-name|Keyword
-block|; }
+name|KEYWORD
+block|}
 end_enum
 
 begin_comment

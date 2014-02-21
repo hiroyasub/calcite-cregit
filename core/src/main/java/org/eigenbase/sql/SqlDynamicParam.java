@@ -193,7 +193,7 @@ block|{
 return|return
 name|SqlMonotonicity
 operator|.
-name|Constant
+name|CONSTANT
 return|;
 block|}
 specifier|public

@@ -16,7 +16,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * Describes the type of a mapping, from the most general {@link #MultiFunction}  * (every element in the source and target domain can participate in many  * mappings) to the most retricted {@link #Bijection} (every element in the  * source and target domain must be paired with precisely one element in the  * other domain).  *  *<p>Some common types:  *  *<ul>  *<li>A surjection is a mapping if every target has at least one source; also  * known as an 'onto' mapping.  *<li>A mapping is a partial function if every source has at most one target.  *<li>A mapping is a function if every source has precisely one target.  *<li>An injection is a mapping where a target has at most one source; also  * somewhat confusingly known as a 'one-to-one' mapping.  *<li>A bijection is a mapping which is both an injection and a surjection.  * Every source has precisely one target, and vice versa.  *</ul>  *  *<p>Once you know what type of mapping you want, call {@link  * Mappings#create(MappingType, int, int)} to create an efficient implementation  * of that mapping.  */
+comment|/**  * Describes the type of a mapping, from the most general {@link #MULTI_FUNCTION}  * (every element in the source and target domain can participate in many  * mappings) to the most retricted {@link #BIJECTION} (every element in the  * source and target domain must be paired with precisely one element in the  * other domain).  *  *<p>Some common types:  *  *<ul>  *<li>A surjection is a mapping if every target has at least one source; also  * known as an 'onto' mapping.  *<li>A mapping is a partial function if every source has at most one target.  *<li>A mapping is a function if every source has precisely one target.  *<li>An injection is a mapping where a target has at most one source; also  * somewhat confusingly known as a 'one-to-one' mapping.  *<li>A bijection is a mapping which is both an injection and a surjection.  * Every source has precisely one target, and vice versa.  *</ul>  *  *<p>Once you know what type of mapping you want, call {@link  * Mappings#create(MappingType, int, int)} to create an efficient implementation  * of that mapping.  */
 end_comment
 
 begin_enum
@@ -27,55 +27,55 @@ block|{
 comment|//            ordinal source target function inverse
 comment|//            ======= ====== ====== ======== =================
 comment|//                  0      1      1 true     0 Bijection
-name|Bijection
+name|BIJECTION
 block|,
 comment|//                  1<= 1      1 true     4 InverseSurjection
-name|Surjection
+name|SURJECTION
 block|,
 comment|//                  2>= 1      1 true     8 InverseInjection
-name|Injection
+name|INJECTION
 block|,
 comment|//                  3    any      1 true     12 InverseFunction
-name|Function
+name|FUNCTION
 block|,
 comment|/**    * An inverse surjection has a source for every target, and no source has    * more than one target.    */
 comment|//                  4      1<= 1 partial  1 Surjection
-name|InverseSurjection
+name|INVERSE_SURJECTION
 block|,
 comment|/**    * A partial surjection has no more than one source for any target, and no    * more than one target for any source.    */
 comment|//                  5<= 1<= 1 partial  5 PartialSurjection
-name|PartialSurjection
+name|PARTIAL_SURJECTION
 block|,
 comment|//                  6>= 1<= 1 partial  9 InversePartialInjection
-name|PartialInjection
+name|PARTIAL_INJECTION
 block|,
 comment|//                  7    any<= 1 partial  13 InversePartialFunction
-name|PartialFunction
+name|PARTIAL_FUNCTION
 block|,
 comment|//                  8      1>= 1 multi    2 Injection
-name|InverseInjection
+name|INVERSE_INJECTION
 block|,
 comment|//                  9<= 1>= 1 multi    6 PartialInjection
-name|InversePartialInjection
+name|INVERSE_PARTIAL_INJECTION
 block|,
 comment|//                 10>= 1>= 1 multi    10
-name|Ten
+name|TEN
 block|,
 comment|//                 11    any>= 1 multi    14
-name|Eleven
+name|ELEVEN
 block|,
-comment|/**    * An inverse function has a source for every target, but a source might    * have 0, 1 or more targets.    *    *<p>Obeys the constaints {@link MappingType#isMandatorySource()}, {@link    * MappingType#isSingleSource()}.    *    *<p>Similar types:    *    *<ul>    *<li> {@link #InverseSurjection} is stronger (a source may not have    * multiple targets);    *<li>{@link #InversePartialFunction} is weaker (a target may have 0 or 1    * sources).    *</ul>    */
+comment|/**    * An inverse function has a source for every target, but a source might    * have 0, 1 or more targets.    *    *<p>Obeys the constaints {@link MappingType#isMandatorySource()}, {@link    * MappingType#isSingleSource()}.    *    *<p>Similar types:    *    *<ul>    *<li> {@link #INVERSE_SURJECTION} is stronger (a source may not have    * multiple targets);    *<li>{@link #INVERSE_PARTIAL_FUNCTION} is weaker (a target may have 0 or 1    * sources).    *</ul>    */
 comment|//                 12      1    any multi    3 Function
-name|InverseFunction
+name|INVERSE_FUNCTION
 block|,
 comment|//                 13<= 1    any multi    7 PartialFunction
-name|InversePartialFunction
+name|INVERSE_PARTIAL_FUNCTION
 block|,
 comment|//                 14>= 1    any multi    11
-name|Fourteen
+name|FOURTEEN
 block|,
 comment|//                 15    any    any multi    15 MultiFunction
-name|MultiFunction
+name|MULTI_FUNCTION
 block|;
 specifier|private
 specifier|final
@@ -130,7 +130,7 @@ name|inverseOrdinal
 index|]
 return|;
 block|}
-comment|/**    * Returns whether this mapping type is (possibly a weaker form of) a given    * mapping type.    *    *<p>For example, a {@link #Bijection} is a {@link #Function}, but not    * every {link #Function} is a {@link #Bijection}.    */
+comment|/**    * Returns whether this mapping type is (possibly a weaker form of) a given    * mapping type.    *    *<p>For example, a {@link #BIJECTION} is a {@link #FUNCTION}, but not    * every {link #Function} is a {@link #BIJECTION}.    */
 specifier|public
 name|boolean
 name|isA

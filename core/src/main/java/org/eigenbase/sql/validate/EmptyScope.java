@@ -350,11 +350,11 @@ operator|)
 condition|?
 name|SqlMonotonicity
 operator|.
-name|Constant
+name|CONSTANT
 else|:
 name|SqlMonotonicity
 operator|.
-name|NotMonotonic
+name|NOT_MONOTONIC
 return|;
 block|}
 specifier|public

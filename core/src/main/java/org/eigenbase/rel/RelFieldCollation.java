@@ -13,6 +13,18 @@ name|rel
 package|;
 end_package
 
+begin_import
+import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
+name|util
+operator|.
+name|Util
+import|;
+end_import
+
 begin_comment
 comment|/**  * Definition of the ordering of one field of a RelNode whose  * output is to be sorted.  *  * @see RelCollation  */
 end_comment
@@ -29,20 +41,41 @@ enum|enum
 name|Direction
 block|{
 comment|/**      * Ascending direction: A value is always followed by a greater or equal      * value.      */
-name|Ascending
+name|ASCENDING
 block|,
 comment|/**      * Strictly ascending direction: A value is always followed by a greater      * value.      */
-name|StrictlyAscending
+name|STRICTLY_ASCENDING
 block|,
 comment|/**      * Descending direction: A value is always followed by a lesser or equal      * value.      */
-name|Descending
+name|DESCENDING
 block|,
 comment|/**      * Strictly descending direction: A value is always followed by a lesser      * value.      */
-name|StrictlyDescending
+name|STRICTLY_DESCENDING
 block|,
 comment|/**      * Clustered direction: Values occur in no particular order, and the      * same value may occur in contiguous groups, but never occurs after      * that. This sort order tends to occur when values are ordered      * according to a hash-key.      */
-name|Clustered
-block|,   }
+name|CLUSTERED
+block|;
+annotation|@
+name|Override
+specifier|public
+name|String
+name|toString
+parameter_list|()
+block|{
+comment|// For backwards-compatibility, short-term.
+return|return
+name|Util
+operator|.
+name|toCamelCase
+argument_list|(
+literal|"_"
+operator|+
+name|name
+argument_list|()
+argument_list|)
+return|;
+block|}
+block|}
 comment|/**    * Ordering of nulls.    */
 specifier|public
 enum|enum
@@ -88,7 +121,7 @@ name|fieldIndex
 argument_list|,
 name|Direction
 operator|.
-name|Ascending
+name|ASCENDING
 argument_list|,
 name|NullDirection
 operator|.

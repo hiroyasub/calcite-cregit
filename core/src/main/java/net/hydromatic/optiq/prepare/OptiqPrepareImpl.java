@@ -3547,7 +3547,7 @@ argument_list|()
 argument_list|,
 name|SqlConformance
 operator|.
-name|Default
+name|DEFAULT
 argument_list|)
 block|{ }
 return|;
@@ -4613,7 +4613,7 @@ block|{
 return|return
 name|SqlMonotonicity
 operator|.
-name|NotMonotonic
+name|NOT_MONOTONIC
 return|;
 block|}
 specifier|public

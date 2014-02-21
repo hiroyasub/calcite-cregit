@@ -34,17 +34,17 @@ specifier|public
 enum|enum
 name|RelDataTypeComparability
 block|{
-name|None
+name|NONE
 argument_list|(
 literal|"No comparisons allowed"
 argument_list|)
 block|,
-name|Unordered
+name|UNORDERED
 argument_list|(
 literal|"Only equals/not-equals allowed"
 argument_list|)
 block|,
-name|All
+name|ALL
 argument_list|(
 literal|"All comparisons allowed"
 argument_list|)

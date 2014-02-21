@@ -1460,7 +1460,7 @@ name|conformance
 operator|=
 name|SqlConformance
 operator|.
-name|Default
+name|DEFAULT
 expr_stmt|;
 block|}
 return|return

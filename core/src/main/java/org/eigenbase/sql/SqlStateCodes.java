@@ -22,7 +22,7 @@ specifier|public
 enum|enum
 name|SqlStateCodes
 block|{
-name|CardinalityViolation
+name|CARDINALITY_VIOLATION
 argument_list|(
 literal|"cardinality violation"
 argument_list|,
@@ -31,7 +31,7 @@ argument_list|,
 literal|"000"
 argument_list|)
 block|,
-name|NullValueNotAllowed
+name|NULL_VALUE_NOT_ALLOWED
 argument_list|(
 literal|"null value not allowed"
 argument_list|,
@@ -40,7 +40,7 @@ argument_list|,
 literal|"004"
 argument_list|)
 block|,
-name|NumericValueOutOfRange
+name|NUMERIC_VALUE_OUT_OF_RANGE
 argument_list|(
 literal|"numeric value out of range"
 argument_list|,

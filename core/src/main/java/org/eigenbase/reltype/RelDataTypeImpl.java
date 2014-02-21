@@ -751,7 +751,7 @@ block|{
 return|return
 name|RelDataTypeComparability
 operator|.
-name|All
+name|ALL
 return|;
 block|}
 comment|/**    * Returns an implementation of    * {@link RelProtoDataType}    * that copies a given type using the given type factory.    */

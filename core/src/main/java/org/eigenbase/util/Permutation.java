@@ -1323,7 +1323,7 @@ block|{
 return|return
 name|MappingType
 operator|.
-name|Bijection
+name|BIJECTION
 return|;
 block|}
 specifier|public

@@ -297,13 +297,13 @@ enum|enum
 name|Status
 block|{
 comment|/**      * Validation has not started for this scope.      */
-name|Unvalidated
+name|UNVALIDATED
 block|,
 comment|/**      * Validation is in progress for this scope.      */
-name|InProgress
+name|IN_PROGRESS
 block|,
 comment|/**      * Validation has completed (perhaps unsuccessfully).      */
-name|Valid
+name|VALID
 block|}
 comment|//~ Instance fields --------------------------------------------------------
 specifier|private
@@ -2139,7 +2139,7 @@ argument_list|()
 operator|!=
 name|SqlMonikerType
 operator|.
-name|Function
+name|FUNCTION
 condition|)
 block|{
 name|hintList
@@ -2479,7 +2479,7 @@ argument_list|()
 argument_list|,
 name|SqlMonikerType
 operator|.
-name|Column
+name|COLUMN
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -2583,7 +2583,7 @@ argument_list|()
 argument_list|,
 name|SqlMonikerType
 operator|.
-name|Column
+name|COLUMN
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -2665,7 +2665,7 @@ argument_list|()
 operator|==
 name|SqlMonikerType
 operator|.
-name|Function
+name|FUNCTION
 condition|)
 block|{
 name|result
@@ -2780,7 +2780,7 @@ argument_list|()
 argument_list|,
 name|SqlMonikerType
 operator|.
-name|Function
+name|FUNCTION
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -2852,7 +2852,7 @@ name|sig
 argument_list|,
 name|SqlMonikerType
 operator|.
-name|Function
+name|FUNCTION
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -2872,7 +2872,7 @@ argument_list|()
 argument_list|,
 name|SqlMonikerType
 operator|.
-name|Function
+name|FUNCTION
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -12015,7 +12015,7 @@ name|getModifierNode
 argument_list|(
 name|SqlSelectKeyword
 operator|.
-name|Distinct
+name|DISTINCT
 argument_list|)
 operator|.
 name|getParserPosition

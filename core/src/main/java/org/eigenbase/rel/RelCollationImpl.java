@@ -404,7 +404,7 @@ name|RelFieldCollation
 operator|.
 name|Direction
 operator|.
-name|Ascending
+name|ASCENDING
 argument_list|,
 name|RelFieldCollation
 operator|.

@@ -1561,7 +1561,7 @@ return|return
 name|returnTypeInference
 return|;
 block|}
-comment|/**    * Returns whether this operator is monotonic.    *    *<p>Default implementation returns {@link SqlMonotonicity#NotMonotonic}.    *    * @param call  Call to this operator    * @param scope Scope in which the call occurs    */
+comment|/**    * Returns whether this operator is monotonic.    *    *<p>Default implementation returns {@link SqlMonotonicity#NOT_MONOTONIC}.    *    * @param call  Call to this operator    * @param scope Scope in which the call occurs    */
 specifier|public
 name|SqlMonotonicity
 name|getMonotonicity
@@ -1576,7 +1576,7 @@ block|{
 return|return
 name|SqlMonotonicity
 operator|.
-name|NotMonotonic
+name|NOT_MONOTONIC
 return|;
 block|}
 comment|/**    * @return true iff a call to this operator is guaranteed to always return    * the same result given the same operands; true is assumed by default    */

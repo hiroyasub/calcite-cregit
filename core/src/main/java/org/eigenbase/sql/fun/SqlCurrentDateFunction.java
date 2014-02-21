@@ -121,7 +121,7 @@ block|{
 return|return
 name|SqlMonotonicity
 operator|.
-name|Increasing
+name|INCREASING
 return|;
 block|}
 comment|// Plans referencing context variables should never be cached

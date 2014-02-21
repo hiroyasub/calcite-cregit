@@ -2036,7 +2036,7 @@ name|SqlCollation
 operator|.
 name|Coercibility
 operator|.
-name|Coercible
+name|COERCIBLE
 argument_list|)
 expr_stmt|;
 name|checkCollation
@@ -2049,7 +2049,7 @@ name|SqlCollation
 operator|.
 name|Coercibility
 operator|.
-name|Explicit
+name|EXPLICIT
 argument_list|)
 expr_stmt|;
 block|}
@@ -2125,7 +2125,7 @@ name|SqlCollation
 operator|.
 name|Coercibility
 operator|.
-name|Coercible
+name|COERCIBLE
 argument_list|)
 expr_stmt|;
 name|checkCollation
@@ -2138,7 +2138,7 @@ name|SqlCollation
 operator|.
 name|Coercibility
 operator|.
-name|Explicit
+name|EXPLICIT
 argument_list|)
 expr_stmt|;
 name|checkCollation
@@ -2151,7 +2151,7 @@ name|SqlCollation
 operator|.
 name|Coercibility
 operator|.
-name|Explicit
+name|EXPLICIT
 argument_list|)
 expr_stmt|;
 block|}
@@ -2438,7 +2438,7 @@ name|SqlCollation
 operator|.
 name|Coercibility
 operator|.
-name|Explicit
+name|EXPLICIT
 argument_list|)
 expr_stmt|;
 block|}

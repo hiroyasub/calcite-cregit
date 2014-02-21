@@ -128,7 +128,7 @@ name|typeFactory
 argument_list|,
 name|SqlConformance
 operator|.
-name|Default
+name|DEFAULT
 argument_list|)
 expr_stmt|;
 block|}

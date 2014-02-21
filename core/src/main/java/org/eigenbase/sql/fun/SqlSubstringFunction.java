@@ -809,7 +809,7 @@ name|mono0
 operator|!=
 name|SqlMonotonicity
 operator|.
-name|NotMonotonic
+name|NOT_MONOTONIC
 operator|)
 operator|&&
 operator|(
@@ -827,7 +827,7 @@ argument_list|)
 operator|==
 name|SqlMonotonicity
 operator|.
-name|Constant
+name|CONSTANT
 operator|)
 operator|&&
 operator|(
@@ -878,7 +878,7 @@ argument_list|)
 operator|==
 name|SqlMonotonicity
 operator|.
-name|Constant
+name|CONSTANT
 operator|)
 condition|)
 block|{

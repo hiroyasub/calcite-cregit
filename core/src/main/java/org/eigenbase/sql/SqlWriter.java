@@ -42,10 +42,10 @@ enum|enum
 name|SubqueryStyle
 block|{
 comment|/**      * Julian's style of subquery nesting. Like this:      *      *<pre>SELECT *      * FROM (      *     SELECT *      *     FROM t      * )      * WHERE condition</pre>      */
-name|Hyde
+name|HYDE
 block|,
 comment|/**      * Damian's style of subquery nesting. Like this:      *      *<pre>SELECT *      * FROM      * (   SELECT *      *     FROM t      * )      * WHERE condition</pre>      */
-name|Black
+name|BLACK
 block|}
 comment|/**    * Enumerates the types of frame.    */
 enum|enum
@@ -54,61 +54,61 @@ implements|implements
 name|FrameType
 block|{
 comment|/**      * SELECT query (or UPDATE or DELETE). The items in the list are the      * clauses: FROM, WHERE, etc.      */
-name|Select
+name|SELECT
 block|,
 comment|/**      * Simple list.      */
-name|Simple
+name|SIMPLE
 block|,
 comment|/**      * The SELECT clause of a SELECT statement.      */
-name|SelectList
+name|SELECT_LIST
 block|,
 comment|/**      * The WINDOW clause of a SELECT statement.      */
-name|WindowDeclList
+name|WINDOW_DECL_LIST
 block|,
 comment|/**      * The SET clause of an UPDATE statement.      */
-name|UpdateSetList
+name|UPDATE_SET_LIST
 block|,
 comment|/**      * Function declaration.      */
-name|FunDecl
+name|FUN_DECL
 block|,
 comment|/**      * Function call or datatype declaration.      *      *<p>Examples:      *<li>SUBSTRING('foobar' FROM 1 + 2 TO 4)</li>      *<li>DECIMAL(10, 5)</li>      */
-name|FunCall
+name|FUN_CALL
 block|,
 comment|/**      * Window specification.      *      *<p>Examples:      *<li>SUM(x) OVER (ORDER BY hireDate ROWS 3 PRECEDING)</li>      *<li>WINDOW w1 AS (ORDER BY hireDate), w2 AS (w1 PARTITION BY gender      * RANGE BETWEEN INTERVAL '1' YEAR PRECEDING AND '2' MONTH      * PRECEDING)</li>      */
-name|Window
+name|WINDOW
 block|,
 comment|/**      * ORDER BY clause of a SELECT statement. The "list" has only two items:      * the query and the order by clause, with ORDER BY as the separator.      */
-name|OrderBy
+name|ORDER_BY
 block|,
 comment|/**      * ORDER BY list.      *      *<p>Example:      *<li>ORDER BY x, y DESC, z      */
-name|OrderByList
+name|ORDER_BY_LIST
 block|,
 comment|/**      * WITH clause of a SELECT statement. The "list" has only two items:      * the WITH clause and the query, with AS as the separator.      */
-name|With
+name|WITH
 block|,
 comment|/**      * OFFSET clause.      *      *<p>Example:      *<li>OFFSET 10 ROWS</li></p>      */
-name|Offset
+name|OFFSET
 block|,
 comment|/**      * FETCH clause.      *      *<p>Example:      *<li>FETCH FIRST 3 ROWS ONLY</li></p>      */
-name|Fetch
+name|FETCH
 block|,
 comment|/**      * GROUP BY list.      *      *<p>Example:      *<li>GROUP BY x, FLOOR(y)      */
-name|GroupByList
+name|GROUP_BY_LIST
 block|,
 comment|/**      * Sub-query list. Encloses a SELECT, UNION, EXCEPT, INTERSECT query      * with optional ORDER BY.      *      *<p>Example:      *<li>GROUP BY x, FLOOR(y)      */
-name|Subquery
+name|SUB_QUERY
 block|,
 comment|/**      * Set operation.      *      *<p>Example:      *<li>SELECT * FROM a UNION SELECT * FROM b      */
-name|Setop
+name|SETOP
 block|,
 comment|/**      * FROM clause (containing various kinds of JOIN).      */
-name|FromList
+name|FROM_LIST
 block|,
 comment|/**      * WHERE clause.      */
-name|WhereList
+name|WHERE_LIST
 block|,
 comment|/**      * Compound identifier.      *      *<p>Example:      *<li>"A"."B"."C"      */
-name|Identifier
+name|IDENTIFIER
 argument_list|(
 literal|false
 argument_list|)

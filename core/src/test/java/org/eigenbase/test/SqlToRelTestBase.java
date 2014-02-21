@@ -637,7 +637,7 @@ name|monotonicity
 operator|!=
 name|SqlMonotonicity
 operator|.
-name|NotMonotonic
+name|NOT_MONOTONIC
 condition|)
 block|{
 specifier|final
@@ -655,13 +655,13 @@ name|RelFieldCollation
 operator|.
 name|Direction
 operator|.
-name|Descending
+name|DESCENDING
 else|:
 name|RelFieldCollation
 operator|.
 name|Direction
 operator|.
-name|Ascending
+name|ASCENDING
 decl_stmt|;
 name|collationList
 operator|.
@@ -1619,7 +1619,7 @@ block|{
 return|return
 name|SqlConformance
 operator|.
-name|Default
+name|DEFAULT
 return|;
 block|}
 specifier|public

@@ -110,7 +110,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Pretty printer for SQL statements.  *  *<p>There are several options to control the format.  *  *<table>  *<tr>  *<th>Option</th>  *<th>Description</th>  *<th>Default</th>  *</tr>  *<tr>  *<td>{@link #setSelectListItemsOnSeparateLines SelectListItemsOnSeparateLines}  *</td>  *<td>Whether each item in the select clause is on its own line</td>  *<td>false</td>  *</tr>  *<tr>  *<td>{@link #setCaseClausesOnNewLines CaseClausesOnNewLines}</td>  *<td>Whether the WHEN, THEN and ELSE clauses of a CASE expression appear at  * the start of a new line.</td>  *<td>false</td>  *</tr>  *<tr>  *<td>{@link #setIndentation Indentation}</td>  *<td>Number of spaces to indent</td>  *<td>4</td>  *</tr>  *<tr>  *<td>{@link #setKeywordsLowerCase KeywordsLowerCase}</td>  *<td>Whether to print keywords (SELECT, AS, etc.) in lower-case.</td>  *<td>false</td>  *</tr>  *<tr>  *<td>{@link #isAlwaysUseParentheses ParenthesizeAllExprs}</td>  *<td>Whether to enclose all expressions in parentheses, even if the operator  * has high enough precedence that the parentheses are not required.  *  *<p>For example, the parentheses are required in the expression<code>(a + b)  * c</code> because the '*' operator has higher precedence than the '+'  * operator, and so without the parentheses, the expression would be equivalent  * to<code>a + (b * c)</code>. The fully-parenthesized expression,<code>((a +  * b) * c)</code> is unambiguous even if you don't know the precedence of every  * operator.</td>  *<td></td>  *</tr>  *<tr>  *<td>{@link #setQuoteAllIdentifiers QuoteAllIdentifiers}</td>  *<td>Whether to quote all identifiers, even those which would be correct  * according to the rules of the {@link SqlDialect} if quotation marks were  * omitted.</td>  *<td>true</td>  *</tr>  *<tr>  *<td>{@link #setSelectListItemsOnSeparateLines SelectListItemsOnSeparateLines}  *</td>  *<td>Whether each item in the select clause is on its own line.</td>  *<td>false</td>  *</tr>  *<tr>  *<td>{@link #setSubqueryStyle SubqueryStyle}</td>  *<td>Style for formatting sub-queries. Values are: {@link  * org.eigenbase.sql.SqlWriter.SubqueryStyle#Hyde Hyde}, {@link  * org.eigenbase.sql.SqlWriter.SubqueryStyle#Black Black}.</td>  *<td>{@link org.eigenbase.sql.SqlWriter.SubqueryStyle#Hyde Hyde}</td>  *</tr>  *<tr>  *<td>{@link #setLineLength LineLength}</td>  *<td>Set the desired maximum length for lines (to look nice in editors,  * printouts, etc.).</td>  *<td>0</td>  *</tr>  *</table>  */
+comment|/**  * Pretty printer for SQL statements.  *  *<p>There are several options to control the format.  *  *<table>  *<tr>  *<th>Option</th>  *<th>Description</th>  *<th>Default</th>  *</tr>  *<tr>  *<td>{@link #setSelectListItemsOnSeparateLines SelectListItemsOnSeparateLines}  *</td>  *<td>Whether each item in the select clause is on its own line</td>  *<td>false</td>  *</tr>  *<tr>  *<td>{@link #setCaseClausesOnNewLines CaseClausesOnNewLines}</td>  *<td>Whether the WHEN, THEN and ELSE clauses of a CASE expression appear at  * the start of a new line.</td>  *<td>false</td>  *</tr>  *<tr>  *<td>{@link #setIndentation Indentation}</td>  *<td>Number of spaces to indent</td>  *<td>4</td>  *</tr>  *<tr>  *<td>{@link #setKeywordsLowerCase KeywordsLowerCase}</td>  *<td>Whether to print keywords (SELECT, AS, etc.) in lower-case.</td>  *<td>false</td>  *</tr>  *<tr>  *<td>{@link #isAlwaysUseParentheses ParenthesizeAllExprs}</td>  *<td>Whether to enclose all expressions in parentheses, even if the operator  * has high enough precedence that the parentheses are not required.  *  *<p>For example, the parentheses are required in the expression<code>(a + b)  * c</code> because the '*' operator has higher precedence than the '+'  * operator, and so without the parentheses, the expression would be equivalent  * to<code>a + (b * c)</code>. The fully-parenthesized expression,<code>((a +  * b) * c)</code> is unambiguous even if you don't know the precedence of every  * operator.</td>  *<td></td>  *</tr>  *<tr>  *<td>{@link #setQuoteAllIdentifiers QuoteAllIdentifiers}</td>  *<td>Whether to quote all identifiers, even those which would be correct  * according to the rules of the {@link SqlDialect} if quotation marks were  * omitted.</td>  *<td>true</td>  *</tr>  *<tr>  *<td>{@link #setSelectListItemsOnSeparateLines SelectListItemsOnSeparateLines}  *</td>  *<td>Whether each item in the select clause is on its own line.</td>  *<td>false</td>  *</tr>  *<tr>  *<td>{@link #setSubqueryStyle SubqueryStyle}</td>  *<td>Style for formatting sub-queries. Values are: {@link  * org.eigenbase.sql.SqlWriter.SubqueryStyle#HYDE Hyde}, {@link  * org.eigenbase.sql.SqlWriter.SubqueryStyle#BLACK Black}.</td>  *<td>{@link org.eigenbase.sql.SqlWriter.SubqueryStyle#HYDE Hyde}</td>  *</tr>  *<tr>  *<td>{@link #setLineLength LineLength}</td>  *<td>Set the desired maximum length for lines (to look nice in editors,  * printouts, etc.).</td>  *<td>0</td>  *</tr>  *</table>  */
 end_comment
 
 begin_class
@@ -391,7 +391,7 @@ operator|=
 name|caseClausesOnNewLines
 expr_stmt|;
 block|}
-comment|/**    * Sets the subquery style. Default is {@link    * org.eigenbase.sql.SqlWriter.SubqueryStyle#Hyde}.    */
+comment|/**    * Sets the subquery style. Default is {@link    * org.eigenbase.sql.SqlWriter.SubqueryStyle#HYDE}.    */
 specifier|public
 name|void
 name|setSubqueryStyle
@@ -474,7 +474,7 @@ name|frameType
 operator|==
 name|FrameTypeEnum
 operator|.
-name|OrderBy
+name|ORDER_BY
 operator|)
 operator|||
 operator|(
@@ -484,7 +484,7 @@ name|frameType
 operator|==
 name|FrameTypeEnum
 operator|.
-name|With
+name|WITH
 operator|)
 operator|||
 operator|(
@@ -494,7 +494,7 @@ name|frameType
 operator|==
 name|FrameTypeEnum
 operator|.
-name|Setop
+name|SETOP
 operator|)
 return|;
 block|}
@@ -609,7 +609,7 @@ name|subqueryStyle
 operator|=
 name|SubqueryStyle
 operator|.
-name|Hyde
+name|HYDE
 expr_stmt|;
 name|alwaysUseParentheses
 operator|=
@@ -1207,7 +1207,7 @@ name|frameTypeEnum
 condition|)
 block|{
 case|case
-name|WindowDeclList
+name|WINDOW_DECL_LIST
 case|:
 return|return
 operator|new
@@ -1237,7 +1237,7 @@ literal|false
 argument_list|)
 return|;
 case|case
-name|UpdateSetList
+name|UPDATE_SET_LIST
 case|:
 return|return
 operator|new
@@ -1267,7 +1267,7 @@ literal|false
 argument_list|)
 return|;
 case|case
-name|SelectList
+name|SELECT_LIST
 case|:
 return|return
 operator|new
@@ -1301,10 +1301,10 @@ literal|false
 argument_list|)
 return|;
 case|case
-name|OrderByList
+name|ORDER_BY_LIST
 case|:
 case|case
-name|GroupByList
+name|GROUP_BY_LIST
 case|:
 return|return
 operator|new
@@ -1334,7 +1334,7 @@ literal|false
 argument_list|)
 return|;
 case|case
-name|Subquery
+name|SUB_QUERY
 case|:
 switch|switch
 condition|(
@@ -1342,7 +1342,7 @@ name|subqueryStyle
 condition|)
 block|{
 case|case
-name|Black
+name|BLACK
 case|:
 comment|// Generate, e.g.:
 comment|//
@@ -1400,7 +1400,7 @@ block|}
 block|}
 return|;
 case|case
-name|Hyde
+name|HYDE
 case|:
 comment|// Generate, e.g.:
 comment|//
@@ -1456,13 +1456,13 @@ argument_list|)
 throw|;
 block|}
 case|case
-name|OrderBy
+name|ORDER_BY
 case|:
 case|case
-name|Offset
+name|OFFSET
 case|:
 case|case
-name|Fetch
+name|FETCH
 case|:
 return|return
 operator|new
@@ -1492,7 +1492,7 @@ literal|false
 argument_list|)
 return|;
 case|case
-name|Select
+name|SELECT
 case|:
 return|return
 operator|new
@@ -1525,7 +1525,7 @@ literal|false
 argument_list|)
 return|;
 case|case
-name|Setop
+name|SETOP
 case|:
 return|return
 operator|new
@@ -1560,7 +1560,7 @@ literal|false
 argument_list|)
 return|;
 case|case
-name|Window
+name|WINDOW
 case|:
 return|return
 operator|new
@@ -1590,7 +1590,7 @@ literal|false
 argument_list|)
 return|;
 case|case
-name|FunCall
+name|FUN_CALL
 case|:
 name|setNeedWhitespace
 argument_list|(
@@ -1625,10 +1625,10 @@ literal|false
 argument_list|)
 return|;
 case|case
-name|Identifier
+name|IDENTIFIER
 case|:
 case|case
-name|Simple
+name|SIMPLE
 case|:
 return|return
 operator|new
@@ -1658,7 +1658,7 @@ literal|false
 argument_list|)
 return|;
 case|case
-name|WhereList
+name|WHERE_LIST
 case|:
 return|return
 operator|new
@@ -1688,7 +1688,7 @@ literal|false
 argument_list|)
 return|;
 case|case
-name|FromList
+name|FROM_LIST
 case|:
 return|return
 operator|new
@@ -2759,7 +2759,7 @@ name|startList
 argument_list|(
 name|FrameTypeEnum
 operator|.
-name|FunCall
+name|FUN_CALL
 argument_list|,
 literal|"("
 argument_list|,
@@ -2799,7 +2799,7 @@ name|startList
 argument_list|(
 name|FrameTypeEnum
 operator|.
-name|Simple
+name|SIMPLE
 argument_list|,
 literal|null
 argument_list|,

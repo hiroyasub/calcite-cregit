@@ -607,7 +607,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**    * Returns whether expression is always ascending, descending or constant.    * This property is useful because it allows to safely aggregte infinite    * streams of values.    *    *<p>The default implementation returns {@link    * SqlMonotonicity#NotMonotonic}.    */
+comment|/**    * Returns whether expression is always ascending, descending or constant.    * This property is useful because it allows to safely aggregte infinite    * streams of values.    *    *<p>The default implementation returns {@link    * SqlMonotonicity#NOT_MONOTONIC}.    */
 specifier|public
 name|SqlMonotonicity
 name|getMonotonicity
@@ -619,7 +619,7 @@ block|{
 return|return
 name|SqlMonotonicity
 operator|.
-name|NotMonotonic
+name|NOT_MONOTONIC
 return|;
 block|}
 block|}

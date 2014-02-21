@@ -259,7 +259,7 @@ argument_list|()
 argument_list|,
 name|SqlMonikerType
 operator|.
-name|Column
+name|COLUMN
 argument_list|)
 argument_list|)
 expr_stmt|;

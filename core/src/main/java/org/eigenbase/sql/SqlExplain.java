@@ -91,11 +91,11 @@ name|SqlLiteral
 operator|.
 name|SqlSymbol
 block|{
-name|Type
+name|TYPE
 block|,
-name|Logical
+name|LOGICAL
 block|,
-name|Physical
+name|PHYSICAL
 block|;
 comment|/**      * Creates a parse-tree node representing an occurrence of this symbol      * at a particular position in the parsed text.      */
 specifier|public
@@ -276,7 +276,7 @@ argument_list|()
 operator|==
 name|Depth
 operator|.
-name|Physical
+name|PHYSICAL
 return|;
 block|}
 comment|/**    * @return whether type should be returned    */
@@ -291,7 +291,7 @@ argument_list|()
 operator|==
 name|Depth
 operator|.
-name|Type
+name|TYPE
 return|;
 block|}
 comment|/**    * Returns whether result is to be in XML format.    */
@@ -381,7 +381,7 @@ argument_list|()
 condition|)
 block|{
 case|case
-name|Type
+name|TYPE
 case|:
 name|writer
 operator|.
@@ -392,7 +392,7 @@ argument_list|)
 expr_stmt|;
 break|break;
 case|case
-name|Logical
+name|LOGICAL
 case|:
 name|writer
 operator|.
@@ -403,7 +403,7 @@ argument_list|)
 expr_stmt|;
 break|break;
 case|case
-name|Physical
+name|PHYSICAL
 case|:
 name|writer
 operator|.

@@ -240,7 +240,7 @@ name|SqlWriter
 operator|.
 name|FrameTypeEnum
 operator|.
-name|Select
+name|SELECT
 argument_list|,
 literal|"DELETE FROM"
 argument_list|,

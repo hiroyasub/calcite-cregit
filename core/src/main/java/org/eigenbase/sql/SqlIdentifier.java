@@ -502,7 +502,7 @@ name|SqlWriter
 operator|.
 name|FrameTypeEnum
 operator|.
-name|Identifier
+name|IDENTIFIER
 argument_list|)
 decl_stmt|;
 for|for

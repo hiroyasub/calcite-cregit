@@ -361,7 +361,7 @@ block|{
 return|return
 name|SqlMonotonicity
 operator|.
-name|Constant
+name|CONSTANT
 return|;
 block|}
 specifier|public
@@ -535,7 +535,7 @@ name|SqlWriter
 operator|.
 name|FrameTypeEnum
 operator|.
-name|FunCall
+name|FUN_CALL
 argument_list|,
 literal|"("
 argument_list|,

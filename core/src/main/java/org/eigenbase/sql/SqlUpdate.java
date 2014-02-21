@@ -329,7 +329,7 @@ name|SqlWriter
 operator|.
 name|FrameTypeEnum
 operator|.
-name|Select
+name|SELECT
 argument_list|,
 literal|"UPDATE"
 argument_list|,
@@ -435,7 +435,7 @@ name|SqlWriter
 operator|.
 name|FrameTypeEnum
 operator|.
-name|UpdateSetList
+name|UPDATE_SET_LIST
 argument_list|,
 literal|"SET"
 argument_list|,

@@ -593,7 +593,7 @@ argument_list|)
 argument_list|,
 name|RelDataTypeComparability
 operator|.
-name|None
+name|NONE
 argument_list|)
 expr_stmt|;
 comment|// Register "SALES" schema.
@@ -1321,7 +1321,7 @@ name|name
 argument_list|,
 name|SqlMonikerType
 operator|.
-name|Schema
+name|SCHEMA
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1392,7 +1392,7 @@ name|tableName
 argument_list|,
 name|SqlMonikerType
 operator|.
-name|Table
+name|TABLE
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1608,7 +1608,7 @@ name|monotonicity
 operator|!=
 name|SqlMonotonicity
 operator|.
-name|NotMonotonic
+name|NOT_MONOTONIC
 condition|)
 block|{
 specifier|final
@@ -1626,13 +1626,13 @@ name|RelFieldCollation
 operator|.
 name|Direction
 operator|.
-name|Descending
+name|DESCENDING
 else|:
 name|RelFieldCollation
 operator|.
 name|Direction
 operator|.
-name|Ascending
+name|ASCENDING
 decl_stmt|;
 name|collationList
 operator|.
@@ -1992,7 +1992,7 @@ block|{
 return|return
 name|SqlMonotonicity
 operator|.
-name|NotMonotonic
+name|NOT_MONOTONIC
 return|;
 block|}
 specifier|public

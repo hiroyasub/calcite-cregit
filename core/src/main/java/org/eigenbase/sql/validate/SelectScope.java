@@ -313,7 +313,7 @@ name|monotonicity
 operator|!=
 name|SqlMonotonicity
 operator|.
-name|NotMonotonic
+name|NOT_MONOTONIC
 condition|)
 block|{
 return|return
@@ -352,7 +352,7 @@ name|monotonicity
 operator|=
 name|SqlMonotonicity
 operator|.
-name|Increasing
+name|INCREASING
 expr_stmt|;
 if|if
 condition|(
@@ -422,7 +422,7 @@ block|}
 return|return
 name|SqlMonotonicity
 operator|.
-name|NotMonotonic
+name|NOT_MONOTONIC
 return|;
 block|}
 specifier|public

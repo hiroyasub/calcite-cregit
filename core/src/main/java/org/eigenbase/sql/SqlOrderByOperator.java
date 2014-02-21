@@ -127,7 +127,7 @@ name|SqlWriter
 operator|.
 name|FrameTypeEnum
 operator|.
-name|OrderBy
+name|ORDER_BY
 argument_list|)
 decl_stmt|;
 name|operands
@@ -180,7 +180,7 @@ name|SqlWriter
 operator|.
 name|FrameTypeEnum
 operator|.
-name|OrderByList
+name|ORDER_BY_LIST
 argument_list|)
 decl_stmt|;
 name|unparseListClause
@@ -225,7 +225,7 @@ name|SqlWriter
 operator|.
 name|FrameTypeEnum
 operator|.
-name|Offset
+name|OFFSET
 argument_list|)
 decl_stmt|;
 name|writer
@@ -295,7 +295,7 @@ name|SqlWriter
 operator|.
 name|FrameTypeEnum
 operator|.
-name|Fetch
+name|FETCH
 argument_list|)
 decl_stmt|;
 name|writer

@@ -473,7 +473,7 @@ name|create
 argument_list|(
 name|MappingType
 operator|.
-name|InverseSurjection
+name|INVERSE_SURJECTION
 argument_list|,
 name|getChild
 argument_list|()
