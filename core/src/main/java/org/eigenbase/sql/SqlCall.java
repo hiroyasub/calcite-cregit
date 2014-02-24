@@ -510,6 +510,17 @@ parameter_list|)
 block|{
 if|if
 condition|(
+name|node
+operator|==
+name|this
+condition|)
+block|{
+return|return
+literal|true
+return|;
+block|}
+if|if
+condition|(
 operator|!
 operator|(
 name|node
@@ -592,7 +603,7 @@ operator|.
 name|getOperandList
 argument_list|()
 argument_list|,
-literal|true
+name|fail
 argument_list|)
 return|;
 block|}

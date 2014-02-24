@@ -303,11 +303,9 @@ operator|==
 literal|null
 assert|;
 return|return
-name|SqlStdOperatorTable
+name|SqlCase
 operator|.
-name|CASE
-operator|.
-name|createSwitchedCall
+name|createSwitched
 argument_list|(
 name|pos
 argument_list|,

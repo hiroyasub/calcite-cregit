@@ -1500,12 +1500,11 @@ block|}
 name|SqlNode
 name|join
 init|=
-name|SqlStdOperatorTable
-operator|.
-name|JOIN
-operator|.
-name|createCall
+operator|new
+name|SqlJoin
 argument_list|(
+name|POS
+argument_list|,
 name|leftResult
 operator|.
 name|asFrom
@@ -1547,8 +1546,6 @@ name|POS
 argument_list|)
 argument_list|,
 name|sqlCondition
-argument_list|,
-name|POS
 argument_list|)
 decl_stmt|;
 return|return

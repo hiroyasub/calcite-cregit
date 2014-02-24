@@ -219,11 +219,9 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 return|return
-name|SqlStdOperatorTable
+name|SqlCase
 operator|.
-name|CASE
-operator|.
-name|createSwitchedCall
+name|createSwitched
 argument_list|(
 name|pos
 argument_list|,
