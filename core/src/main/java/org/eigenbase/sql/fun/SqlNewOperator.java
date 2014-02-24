@@ -93,11 +93,10 @@ comment|// direct call to the constructor method.
 return|return
 name|call
 operator|.
-name|getOperands
-argument_list|()
-index|[
+name|operand
+argument_list|(
 literal|0
-index|]
+argument_list|)
 return|;
 block|}
 comment|// override SqlOperator

@@ -15,6 +15,16 @@ end_package
 
 begin_import
 import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|eigenbase
@@ -42,7 +52,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Abstract base for chararacter and binary string literals.  */
+comment|/**  * Abstract base for character and binary string literals.  */
 end_comment
 
 begin_class
@@ -77,15 +87,17 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**    * Helper routine for {@link SqlUtil#concatenateLiterals}.    *    * @param lits homogeneous StringLiteral[] args.    * @return StringLiteral with concatenated value. this == lits[0], used only    * for method dispatch.    */
+comment|/**    * Helper routine for {@link SqlUtil#concatenateLiterals}.    *    * @param literals homogeneous StringLiteral args    * @return StringLiteral with concatenated value. this == lits[0], used only    * for method dispatch.    */
 specifier|protected
 specifier|abstract
 name|SqlAbstractStringLiteral
 name|concat1
 parameter_list|(
+name|List
+argument_list|<
 name|SqlLiteral
-index|[]
-name|lits
+argument_list|>
+name|literals
 parameter_list|)
 function_decl|;
 block|}

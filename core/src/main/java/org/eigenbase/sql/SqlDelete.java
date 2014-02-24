@@ -50,7 +50,7 @@ specifier|public
 class|class
 name|SqlDelete
 extends|extends
-name|SqlCall
+name|SqlBasicCall
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
 comment|// constants representing operand positions

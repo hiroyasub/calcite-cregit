@@ -50,7 +50,7 @@ specifier|public
 class|class
 name|SqlCase
 extends|extends
-name|SqlCall
+name|SqlBasicCall
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
 comment|/**    * VALUE_OPERAND = 0    */

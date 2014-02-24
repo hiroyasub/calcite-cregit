@@ -259,7 +259,8 @@ operator|.
 name|getCall
 argument_list|()
 operator|.
-name|operands
+name|getOperandList
+argument_list|()
 argument_list|)
 decl_stmt|;
 if|if
@@ -345,9 +346,8 @@ parameter_list|(
 name|SqlWriter
 name|writer
 parameter_list|,
-name|SqlNode
-index|[]
-name|operands
+name|SqlCall
+name|call
 parameter_list|,
 name|int
 name|leftPrec
@@ -385,7 +385,10 @@ control|(
 name|SqlNode
 name|operand
 range|:
-name|operands
+name|call
+operator|.
+name|getOperandList
+argument_list|()
 control|)
 block|{
 name|writer

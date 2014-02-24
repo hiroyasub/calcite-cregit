@@ -33,7 +33,7 @@ name|eigenbase
 operator|.
 name|sql
 operator|.
-name|SqlCall
+name|*
 import|;
 end_import
 
@@ -45,19 +45,7 @@ name|eigenbase
 operator|.
 name|sql
 operator|.
-name|SqlNode
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
-name|sql
-operator|.
-name|SqlWithItemOperator
+name|SqlWithItem
 import|;
 end_import
 
@@ -73,15 +61,8 @@ name|ListScope
 block|{
 specifier|private
 specifier|final
-name|SqlCall
+name|SqlWithItem
 name|withItem
-decl_stmt|;
-specifier|private
-specifier|final
-name|SqlWithItemOperator
-operator|.
-name|Call
-name|call
 decl_stmt|;
 comment|/** Creates a WithScope. */
 name|WithScope
@@ -89,7 +70,7 @@ parameter_list|(
 name|SqlValidatorScope
 name|parent
 parameter_list|,
-name|SqlCall
+name|SqlWithItem
 name|withItem
 parameter_list|)
 block|{
@@ -103,19 +84,6 @@ operator|.
 name|withItem
 operator|=
 name|withItem
-expr_stmt|;
-name|this
-operator|.
-name|call
-operator|=
-name|SqlWithItemOperator
-operator|.
-name|Call
-operator|.
-name|of
-argument_list|(
-name|withItem
-argument_list|)
 expr_stmt|;
 block|}
 specifier|public
@@ -158,7 +126,7 @@ argument_list|)
 operator|.
 name|equals
 argument_list|(
-name|call
+name|withItem
 operator|.
 name|name
 operator|.
@@ -173,7 +141,7 @@ argument_list|()
 operator|.
 name|getNamespace
 argument_list|(
-name|call
+name|withItem
 operator|.
 name|query
 argument_list|)
@@ -212,7 +180,7 @@ name|name
 operator|.
 name|equals
 argument_list|(
-name|call
+name|withItem
 operator|.
 name|name
 operator|.
@@ -227,7 +195,7 @@ argument_list|()
 operator|.
 name|getNamespace
 argument_list|(
-name|call
+name|withItem
 operator|.
 name|query
 argument_list|)

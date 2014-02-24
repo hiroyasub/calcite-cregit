@@ -60,7 +60,7 @@ specifier|public
 class|class
 name|SqlUpdate
 extends|extends
-name|SqlCall
+name|SqlBasicCall
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
 comment|// constants representing operand positions

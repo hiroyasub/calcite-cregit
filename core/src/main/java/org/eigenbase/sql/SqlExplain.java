@@ -36,7 +36,7 @@ specifier|public
 class|class
 name|SqlExplain
 extends|extends
-name|SqlCall
+name|SqlBasicCall
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
 comment|// constants representing operand positions

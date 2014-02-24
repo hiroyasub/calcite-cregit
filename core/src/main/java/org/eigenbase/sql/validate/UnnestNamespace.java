@@ -227,11 +227,10 @@ name|operand
 init|=
 name|unnest
 operator|.
-name|getOperands
-argument_list|()
-index|[
+name|operand
+argument_list|(
 literal|0
-index|]
+argument_list|)
 decl_stmt|;
 name|RelDataType
 name|type

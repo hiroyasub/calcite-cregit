@@ -585,13 +585,10 @@ return|;
 block|}
 if|else if
 condition|(
-operator|(
 name|node
 operator|instanceof
 name|SqlCall
-operator|)
 operator|&&
-operator|(
 operator|(
 operator|(
 name|SqlCall
@@ -605,7 +602,6 @@ operator|==
 name|SqlStdOperatorTable
 operator|.
 name|CAST
-operator|)
 condition|)
 block|{
 return|return
@@ -618,11 +614,10 @@ operator|)
 name|node
 operator|)
 operator|.
-name|getOperands
-argument_list|()
-index|[
+name|operand
+argument_list|(
 literal|0
-index|]
+argument_list|)
 argument_list|)
 return|;
 block|}

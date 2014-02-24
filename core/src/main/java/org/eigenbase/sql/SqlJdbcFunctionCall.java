@@ -549,7 +549,8 @@ name|operand
 range|:
 name|call
 operator|.
-name|operands
+name|getOperandList
+argument_list|()
 control|)
 block|{
 name|RelDataType
@@ -814,9 +815,8 @@ parameter_list|(
 name|SqlWriter
 name|writer
 parameter_list|,
-name|SqlNode
-index|[]
-name|operands
+name|SqlCall
+name|call
 parameter_list|,
 name|int
 name|leftPrec
@@ -859,7 +859,10 @@ control|(
 name|SqlNode
 name|operand
 range|:
-name|operands
+name|call
+operator|.
+name|getOperandList
+argument_list|()
 control|)
 block|{
 name|writer

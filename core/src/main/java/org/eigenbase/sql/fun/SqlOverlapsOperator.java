@@ -82,7 +82,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * SqlOverlapsOperator represents the SQL:1999 standard OVERLAPS function  * Determins if two anchored time intervals overlaps.  */
+comment|/**  * SqlOverlapsOperator represents the SQL:1999 standard {@code OVERLAPS}  * function. Determines whether two anchored time intervals overlap.  */
 end_comment
 
 begin_class
@@ -147,9 +147,8 @@ parameter_list|(
 name|SqlWriter
 name|writer
 parameter_list|,
-name|SqlNode
-index|[]
-name|operands
+name|SqlCall
+name|call
 parameter_list|,
 name|int
 name|leftPrec
@@ -175,10 +174,12 @@ argument_list|,
 literal|")"
 argument_list|)
 decl_stmt|;
-name|operands
-index|[
+name|call
+operator|.
+name|operand
+argument_list|(
 literal|0
-index|]
+argument_list|)
 operator|.
 name|unparse
 argument_list|(
@@ -198,10 +199,12 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|operands
-index|[
+name|call
+operator|.
+name|operand
+argument_list|(
 literal|1
-index|]
+argument_list|)
 operator|.
 name|unparse
 argument_list|(
@@ -238,10 +241,12 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|operands
-index|[
+name|call
+operator|.
+name|operand
+argument_list|(
 literal|2
-index|]
+argument_list|)
 operator|.
 name|unparse
 argument_list|(
@@ -261,10 +266,12 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|operands
-index|[
+name|call
+operator|.
+name|operand
+argument_list|(
 literal|3
-index|]
+argument_list|)
 operator|.
 name|unparse
 argument_list|(
@@ -487,10 +494,10 @@ name|callBinding
 argument_list|,
 name|call
 operator|.
-name|operands
-index|[
+name|operand
+argument_list|(
 literal|0
-index|]
+argument_list|)
 argument_list|,
 literal|0
 argument_list|,
@@ -515,10 +522,10 @@ name|callBinding
 argument_list|,
 name|call
 operator|.
-name|operands
-index|[
+name|operand
+argument_list|(
 literal|2
-index|]
+argument_list|)
 argument_list|,
 literal|0
 argument_list|,
@@ -541,10 +548,10 @@ name|scope
 argument_list|,
 name|call
 operator|.
-name|operands
-index|[
+name|operand
+argument_list|(
 literal|0
-index|]
+argument_list|)
 argument_list|)
 decl_stmt|;
 name|RelDataType
@@ -558,10 +565,10 @@ name|scope
 argument_list|,
 name|call
 operator|.
-name|operands
-index|[
+name|operand
+argument_list|(
 literal|1
-index|]
+argument_list|)
 argument_list|)
 decl_stmt|;
 name|RelDataType
@@ -575,10 +582,10 @@ name|scope
 argument_list|,
 name|call
 operator|.
-name|operands
-index|[
+name|operand
+argument_list|(
 literal|2
-index|]
+argument_list|)
 argument_list|)
 decl_stmt|;
 name|RelDataType
@@ -592,10 +599,10 @@ name|scope
 argument_list|,
 name|call
 operator|.
-name|operands
-index|[
+name|operand
+argument_list|(
 literal|3
-index|]
+argument_list|)
 argument_list|)
 decl_stmt|;
 comment|// t0 must be comparable with t2

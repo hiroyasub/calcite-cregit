@@ -62,7 +62,7 @@ specifier|public
 class|class
 name|SqlInsert
 extends|extends
-name|SqlCall
+name|SqlBasicCall
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
 comment|// constants representing operand positions

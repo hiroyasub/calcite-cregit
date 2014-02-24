@@ -161,7 +161,8 @@ name|operand
 range|:
 name|call
 operator|.
-name|operands
+name|getOperandList
+argument_list|()
 control|)
 block|{
 if|if

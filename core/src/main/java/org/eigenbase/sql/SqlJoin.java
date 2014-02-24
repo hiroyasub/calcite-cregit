@@ -36,7 +36,7 @@ specifier|public
 class|class
 name|SqlJoin
 extends|extends
-name|SqlCall
+name|SqlBasicCall
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
 specifier|public

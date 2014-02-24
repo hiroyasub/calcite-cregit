@@ -6226,17 +6226,6 @@ parameter_list|()
 block|{
 name|tester
 operator|.
-name|setFor
-argument_list|(
-name|SqlStdOperatorTable
-operator|.
-name|SELECT
-argument_list|,
-name|VM_EXPAND
-argument_list|)
-expr_stmt|;
-name|tester
-operator|.
 name|check
 argument_list|(
 literal|"select * from (values(1))"
@@ -15486,19 +15475,6 @@ name|void
 name|testWindow
 parameter_list|()
 block|{
-name|tester
-operator|.
-name|setFor
-argument_list|(
-name|SqlStdOperatorTable
-operator|.
-name|WINDOW
-argument_list|,
-name|VM_FENNEL
-argument_list|,
-name|VM_JAVA
-argument_list|)
-expr_stmt|;
 if|if
 condition|(
 operator|!

@@ -347,8 +347,10 @@ parameter_list|(
 name|SqlCallBinding
 name|binding
 parameter_list|,
+name|List
+argument_list|<
 name|SqlNode
-index|[]
+argument_list|>
 name|operands
 parameter_list|,
 name|boolean
@@ -385,7 +387,8 @@ literal|2
 operator|<=
 name|operands
 operator|.
-name|length
+name|size
+argument_list|()
 operator|:
 literal|"precondition failed"
 assert|;
@@ -426,7 +429,8 @@ name|i
 operator|<
 name|operands
 operator|.
-name|length
+name|size
+argument_list|()
 condition|;
 name|i
 operator|++
@@ -447,9 +451,11 @@ block|}
 name|msg
 operator|+=
 name|operands
-index|[
+operator|.
+name|get
+argument_list|(
 name|i
-index|]
+argument_list|)
 operator|.
 name|toString
 argument_list|()
@@ -497,8 +503,10 @@ parameter_list|,
 name|SqlValidatorScope
 name|scope
 parameter_list|,
+name|List
+argument_list|<
 name|SqlNode
-index|[]
+argument_list|>
 name|operands
 parameter_list|)
 block|{
@@ -636,7 +644,8 @@ name|operand
 range|:
 name|call
 operator|.
-name|operands
+name|getOperandList
+argument_list|()
 control|)
 block|{
 name|RelDataType

@@ -194,10 +194,10 @@ name|getValidatedNodeType
 argument_list|(
 name|call
 operator|.
-name|operands
-index|[
+name|operand
+argument_list|(
 literal|0
-index|]
+argument_list|)
 argument_list|)
 decl_stmt|;
 if|if

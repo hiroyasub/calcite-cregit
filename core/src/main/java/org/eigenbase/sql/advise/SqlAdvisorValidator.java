@@ -564,10 +564,10 @@ name|relation
 init|=
 name|call
 operator|.
-name|operands
-index|[
+name|operand
+argument_list|(
 literal|0
-index|]
+argument_list|)
 decl_stmt|;
 name|validateFrom
 argument_list|(
@@ -584,10 +584,10 @@ name|window
 init|=
 name|call
 operator|.
-name|operands
-index|[
+name|operand
+argument_list|(
 literal|1
-index|]
+argument_list|)
 decl_stmt|;
 name|SqlValidatorScope
 name|opScope

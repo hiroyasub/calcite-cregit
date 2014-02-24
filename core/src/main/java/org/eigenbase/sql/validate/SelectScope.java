@@ -395,11 +395,10 @@ operator|)
 name|order0
 operator|)
 operator|.
-name|getOperands
-argument_list|()
-index|[
+name|operand
+argument_list|(
 literal|0
-index|]
+argument_list|)
 expr_stmt|;
 block|}
 if|if
@@ -574,12 +573,6 @@ name|parent
 decl_stmt|;
 while|while
 condition|(
-operator|(
-literal|null
-operator|!=
-name|walker
-operator|)
-operator|&&
 operator|!
 operator|(
 name|walker

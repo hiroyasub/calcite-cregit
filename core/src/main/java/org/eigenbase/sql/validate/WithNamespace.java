@@ -35,43 +35,7 @@ name|eigenbase
 operator|.
 name|sql
 operator|.
-name|SqlCall
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
-name|sql
-operator|.
-name|SqlKind
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
-name|sql
-operator|.
-name|SqlNode
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
-name|sql
-operator|.
-name|SqlWithOperator
+name|*
 import|;
 end_import
 
@@ -101,7 +65,7 @@ block|{
 comment|//~ Instance fields --------------------------------------------------------
 specifier|private
 specifier|final
-name|SqlCall
+name|SqlWith
 name|with
 decl_stmt|;
 specifier|private
@@ -116,7 +80,7 @@ parameter_list|(
 name|SqlValidatorImpl
 name|validator
 parameter_list|,
-name|SqlCall
+name|SqlWith
 name|with
 parameter_list|,
 name|SqlValidatorScope
@@ -145,16 +109,6 @@ name|scope
 operator|=
 name|scope
 expr_stmt|;
-assert|assert
-name|with
-operator|.
-name|getKind
-argument_list|()
-operator|==
-name|SqlKind
-operator|.
-name|WITH
-assert|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
 specifier|protected
@@ -162,27 +116,12 @@ name|RelDataType
 name|validateImpl
 parameter_list|()
 block|{
-specifier|final
-name|SqlWithOperator
-operator|.
-name|Call
-name|call
-init|=
-name|SqlWithOperator
-operator|.
-name|Call
-operator|.
-name|of
-argument_list|(
-name|with
-argument_list|)
-decl_stmt|;
 for|for
 control|(
 name|SqlNode
-name|with
+name|withItem
 range|:
-name|call
+name|with
 operator|.
 name|withList
 control|)
@@ -192,9 +131,9 @@ operator|.
 name|validateWithItem
 argument_list|(
 operator|(
-name|SqlCall
+name|SqlWithItem
 operator|)
-name|with
+name|withItem
 argument_list|)
 expr_stmt|;
 block|}
@@ -210,7 +149,7 @@ name|Util
 operator|.
 name|last
 argument_list|(
-name|call
+name|with
 operator|.
 name|withList
 operator|.
@@ -223,7 +162,7 @@ name|validator
 operator|.
 name|validateQuery
 argument_list|(
-name|call
+name|with
 operator|.
 name|body
 argument_list|,
@@ -238,7 +177,7 @@ name|validator
 operator|.
 name|getValidatedNodeType
 argument_list|(
-name|call
+name|with
 operator|.
 name|body
 argument_list|)
@@ -279,7 +218,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End TableConstructorNamespace.java
+comment|// End WithNamespace.java
 end_comment
 
 end_unit

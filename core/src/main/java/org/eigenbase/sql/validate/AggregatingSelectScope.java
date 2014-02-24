@@ -52,7 +52,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Scope for resolving identifers within a SELECT statement which has a GROUP BY  * clause.  *  *<p>The same set of identifiers are in scope, but it won't allow access to  * identifiers or expressions which are not group-expressions.  */
+comment|/**  * Scope for resolving identifiers within a SELECT statement that has a  * GROUP BY clause.  *  *<p>The same set of identifiers are in scope, but it won't allow access to  * identifiers or expressions which are not group-expressions.  */
 end_comment
 
 begin_class
@@ -261,11 +261,10 @@ operator|)
 name|selectItem
 operator|)
 operator|.
-name|getOperands
-argument_list|()
-index|[
+name|operand
+argument_list|(
 literal|0
-index|]
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -344,17 +343,6 @@ return|return
 name|parent
 return|;
 block|}
-if|else if
-condition|(
-name|call
-operator|instanceof
-name|SqlWindow
-condition|)
-block|{
-return|return
-name|parent
-return|;
-block|}
 else|else
 block|{
 comment|// Check whether expression is constant within the group.
@@ -366,7 +354,7 @@ comment|// If it perfectly matches an expression in the GROUP BY
 comment|// clause, we validate its arguments in the non-aggregating
 comment|// scope. Example, 'empno + 1' in
 comment|//
-comment|//   SELET empno + 1 FROM emp GROUP BY empno + 1
+comment|//   SELECT empno + 1 FROM emp GROUP BY empno + 1
 specifier|final
 name|boolean
 name|matches

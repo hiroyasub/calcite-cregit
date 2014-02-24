@@ -225,7 +225,7 @@ name|eigenbase
 operator|.
 name|sql
 operator|.
-name|SqlWindowOperator
+name|SqlWindow
 import|;
 end_import
 
@@ -10289,12 +10289,12 @@ argument_list|)
 argument_list|)
 decl_stmt|;
 specifier|final
-name|SqlWindowOperator
+name|SqlWindow
 operator|.
 name|OffsetRange
 name|offsetAndRange
 init|=
-name|SqlWindowOperator
+name|SqlWindow
 operator|.
 name|getOffsetAndRange
 argument_list|(

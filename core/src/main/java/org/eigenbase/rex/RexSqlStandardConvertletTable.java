@@ -605,7 +605,7 @@ return|;
 block|}
 return|return
 operator|new
-name|SqlCall
+name|SqlBasicCall
 argument_list|(
 name|op
 argument_list|,
@@ -760,7 +760,7 @@ return|;
 block|}
 return|return
 operator|new
-name|SqlCall
+name|SqlBasicCall
 argument_list|(
 name|op
 argument_list|,
@@ -871,7 +871,7 @@ argument_list|)
 expr_stmt|;
 return|return
 operator|new
-name|SqlCall
+name|SqlBasicCall
 argument_list|(
 name|op
 argument_list|,
@@ -882,7 +882,10 @@ argument_list|(
 operator|new
 name|SqlNode
 index|[
-literal|0
+name|operandList
+operator|.
+name|size
+argument_list|()
 index|]
 argument_list|)
 argument_list|,

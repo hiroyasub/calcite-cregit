@@ -355,6 +355,15 @@ block|{
 if|if
 condition|(
 name|call
+operator|instanceof
+name|SqlCall
+operator|&&
+operator|(
+operator|(
+name|SqlCall
+operator|)
+name|call
+operator|)
 operator|.
 name|getOperator
 argument_list|()
@@ -489,7 +498,11 @@ literal|true
 argument_list|,
 name|ArgHandlerImpl
 operator|.
-name|INSTANCE
+expr|<
+name|Void
+operator|>
+name|instance
+argument_list|()
 argument_list|)
 expr_stmt|;
 comment|// Restore scope.

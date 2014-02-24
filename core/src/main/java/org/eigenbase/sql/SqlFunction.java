@@ -415,9 +415,8 @@ parameter_list|(
 name|SqlWriter
 name|writer
 parameter_list|,
-name|SqlNode
-index|[]
-name|operands
+name|SqlCall
+name|call
 parameter_list|,
 name|int
 name|leftPrec
@@ -435,7 +434,7 @@ name|writer
 argument_list|,
 name|this
 argument_list|,
-name|operands
+name|call
 argument_list|,
 name|leftPrec
 argument_list|,
@@ -614,13 +613,16 @@ name|convertRowArgToColumnList
 parameter_list|)
 block|{
 specifier|final
+name|List
+argument_list|<
 name|SqlNode
-index|[]
+argument_list|>
 name|operands
 init|=
 name|call
 operator|.
-name|operands
+name|getOperandList
+argument_list|()
 decl_stmt|;
 comment|// Scope for operands. Usually the same as 'scope'.
 specifier|final
@@ -792,11 +794,9 @@ condition|)
 block|{
 if|if
 condition|(
-operator|(
 name|function
 operator|==
 literal|null
-operator|)
 operator|&&
 name|SqlUtil
 operator|.
@@ -932,7 +932,12 @@ comment|// REVIEW jvs 25-Mar-2005:  This is, in a sense, expanding
 comment|// identifiers, but we ignore shouldExpandIdentifiers()
 comment|// because otherwise later validation code will
 comment|// choke on the unresolved function.
+operator|(
+operator|(
+name|SqlBasicCall
+operator|)
 name|call
+operator|)
 operator|.
 name|setOperator
 argument_list|(

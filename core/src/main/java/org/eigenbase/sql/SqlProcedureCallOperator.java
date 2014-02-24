@@ -115,21 +115,14 @@ block|{
 comment|// for now, rewrite "CALL f(x)" to "SELECT f(x) FROM VALUES(0)"
 comment|// TODO jvs 18-Jan-2005:  rewrite to SELECT * FROM TABLE f(x)
 comment|// once we support function calls as tables
-name|SqlStdOperatorTable
-name|opTab
-init|=
-name|SqlStdOperatorTable
-operator|.
-name|instance
-argument_list|()
-decl_stmt|;
 return|return
-name|SqlStdOperatorTable
-operator|.
-name|SELECT
-operator|.
-name|createCall
+operator|new
+name|SqlSelect
 argument_list|(
+name|SqlParserPos
+operator|.
+name|ZERO
+argument_list|,
 literal|null
 argument_list|,
 operator|new
@@ -141,11 +134,10 @@ name|singletonList
 argument_list|(
 name|call
 operator|.
-name|getOperands
-argument_list|()
-index|[
+name|operand
+argument_list|(
 literal|0
-index|]
+argument_list|)
 argument_list|)
 argument_list|,
 name|SqlParserPos
@@ -199,10 +191,6 @@ argument_list|,
 literal|null
 argument_list|,
 literal|null
-argument_list|,
-name|SqlParserPos
-operator|.
-name|ZERO
 argument_list|)
 return|;
 block|}

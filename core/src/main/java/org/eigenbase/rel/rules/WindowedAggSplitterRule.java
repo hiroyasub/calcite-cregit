@@ -87,29 +87,15 @@ end_import
 
 begin_import
 import|import
-name|net
+name|com
 operator|.
-name|hydromatic
+name|google
 operator|.
-name|linq4j
+name|common
 operator|.
-name|function
+name|base
 operator|.
-name|Function1
-import|;
-end_import
-
-begin_import
-import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|linq4j
-operator|.
-name|function
-operator|.
-name|Functions
+name|Function
 import|;
 end_import
 
@@ -124,6 +110,20 @@ operator|.
 name|collect
 operator|.
 name|ImmutableList
+import|;
+end_import
+
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|Lists
 import|;
 end_import
 
@@ -541,9 +541,9 @@ name|createProject
 argument_list|(
 name|rel
 argument_list|,
-name|Functions
+name|Lists
 operator|.
-name|apply
+name|transform
 argument_list|(
 name|program
 operator|.
@@ -551,7 +551,7 @@ name|getProjectList
 argument_list|()
 argument_list|,
 operator|new
-name|Function1
+name|Function
 argument_list|<
 name|RexLocalRef
 argument_list|,

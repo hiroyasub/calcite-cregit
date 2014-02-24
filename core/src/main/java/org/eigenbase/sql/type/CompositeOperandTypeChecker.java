@@ -909,12 +909,12 @@ operator|.
 name|getCall
 argument_list|()
 operator|.
-name|operands
-index|[
+name|operand
+argument_list|(
 name|ord
 operator|.
 name|i
-index|]
+argument_list|)
 argument_list|,
 literal|0
 argument_list|,

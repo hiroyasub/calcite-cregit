@@ -261,8 +261,10 @@ name|RelDataType
 argument_list|>
 name|argTypes
 parameter_list|,
+name|List
+argument_list|<
 name|SqlNode
-index|[]
+argument_list|>
 name|operands
 parameter_list|)
 function_decl|;
@@ -610,7 +612,7 @@ function_decl|;
 name|void
 name|validateWith
 parameter_list|(
-name|SqlCall
+name|SqlWith
 name|with
 parameter_list|,
 name|SqlValidatorScope
@@ -620,7 +622,7 @@ function_decl|;
 name|void
 name|validateWithItem
 parameter_list|(
-name|SqlCall
+name|SqlWithItem
 name|withItem
 parameter_list|)
 function_decl|;

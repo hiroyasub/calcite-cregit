@@ -4843,12 +4843,11 @@ name|selects
 operator|.
 name|add
 argument_list|(
-name|SqlStdOperatorTable
-operator|.
-name|SELECT
-operator|.
-name|createCall
+operator|new
+name|SqlSelect
 argument_list|(
+name|POS
+argument_list|,
 name|SqlNodeList
 operator|.
 name|EMPTY
@@ -4876,8 +4875,6 @@ argument_list|,
 literal|null
 argument_list|,
 literal|null
-argument_list|,
-name|POS
 argument_list|)
 argument_list|)
 expr_stmt|;

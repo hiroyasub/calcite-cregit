@@ -182,9 +182,8 @@ parameter_list|(
 name|SqlWriter
 name|writer
 parameter_list|,
-name|SqlNode
-index|[]
-name|operands
+name|SqlCall
+name|call
 parameter_list|,
 name|int
 name|leftPrec

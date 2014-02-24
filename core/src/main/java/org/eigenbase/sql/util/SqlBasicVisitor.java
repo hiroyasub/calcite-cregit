@@ -233,10 +233,7 @@ argument_list|<
 name|R
 argument_list|>
 block|{
-comment|// REVIEW jvs 16-June-2006:  This doesn't actually work, because it
-comment|// is type-erased, and if you try to add<R>, you get the error
-comment|// "non-static class R cannot be referenced from a static context."
-specifier|public
+specifier|private
 specifier|static
 specifier|final
 name|ArgHandler
@@ -246,6 +243,27 @@ operator|new
 name|ArgHandlerImpl
 argument_list|()
 decl_stmt|;
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unchecked"
+argument_list|)
+specifier|public
+specifier|static
+parameter_list|<
+name|R
+parameter_list|>
+name|ArgHandler
+argument_list|<
+name|R
+argument_list|>
+name|instance
+parameter_list|()
+block|{
+return|return
+name|INSTANCE
+return|;
+block|}
 specifier|public
 name|R
 name|result
