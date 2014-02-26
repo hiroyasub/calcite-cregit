@@ -7045,6 +7045,8 @@ name|returnsUnordered
 argument_list|(
 literal|"C=false; deptno=10"
 argument_list|,
+literal|"C=false; deptno=10"
+argument_list|,
 literal|"C=true; deptno=10"
 argument_list|,
 literal|"C=true; deptno=20"
