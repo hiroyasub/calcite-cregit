@@ -135,6 +135,12 @@ name|LOCAL_TEMPORARY
 block|,
 comment|/** A structure, similar to a view, that is the basis for auto-generated      * materializations. It is either a single table or a collection of tables      * that are joined via many-to-one relationships from a central hub table.      * It is not available for queries, but is just used as an intermediate      * structure during query planning. */
 name|STAR
+block|,
+comment|/** Index table. (Used by Apache Phoenix.) */
+name|INDEX
+block|,
+comment|/** Join table. (Used by Apache Phoenix.) */
+name|JOIN
 block|,   }
 block|}
 end_interface

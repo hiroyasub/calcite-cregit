@@ -934,6 +934,26 @@ argument_list|(
 literal|4
 argument_list|)
 decl_stmt|;
+comment|// Clean up table type. In particular, this ensures that 'SYSTEM TABLE',
+comment|// returned by Phoenix among others, maps to TableType.SYSTEM_TABLE.
+comment|// We know enum constants are upper-case without spaces, so we can't
+comment|// make things worse.
+specifier|final
+name|String
+name|tableTypeName2
+init|=
+name|tableTypeName
+operator|.
+name|toUpperCase
+argument_list|()
+operator|.
+name|replace
+argument_list|(
+literal|' '
+argument_list|,
+literal|'_'
+argument_list|)
+decl_stmt|;
 specifier|final
 name|TableType
 name|tableType
@@ -946,7 +966,7 @@ name|TableType
 operator|.
 name|class
 argument_list|,
-name|tableTypeName
+name|tableTypeName2
 argument_list|)
 decl_stmt|;
 specifier|final
