@@ -913,6 +913,11 @@ operator|.
 name|clearRules
 argument_list|()
 expr_stmt|;
+name|planner
+operator|.
+name|clear
+argument_list|()
+expr_stmt|;
 for|for
 control|(
 name|RelOptRule

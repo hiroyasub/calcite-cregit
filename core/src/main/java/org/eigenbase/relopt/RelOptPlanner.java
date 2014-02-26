@@ -174,6 +174,11 @@ name|void
 name|clearRules
 parameter_list|()
 function_decl|;
+comment|/**    * Remove all internal status of planner.    */
+name|void
+name|clear
+parameter_list|()
+function_decl|;
 comment|/**    * Registers a rule. If the rule has already been registered, does nothing.    * This method should determine if the given rule is a {@link    * org.eigenbase.rel.convert.ConverterRule} and pass the ConverterRule to    * all {@link #addRelTraitDef(RelTraitDef) registered} RelTraitDef    * instances.    *    * @return whether the rule was added, as per {@link    * java.util.Collection#add}    */
 name|boolean
 name|addRule

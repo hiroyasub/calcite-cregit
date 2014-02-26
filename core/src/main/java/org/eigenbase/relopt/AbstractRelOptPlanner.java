@@ -221,6 +221,12 @@ expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
 specifier|public
+name|void
+name|clear
+parameter_list|()
+block|{
+block|}
+specifier|public
 name|RelOptCostFactory
 name|getCostFactory
 parameter_list|()

@@ -404,6 +404,27 @@ expr_stmt|;
 block|}
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+comment|/**    * Clear internal data structure for this rule queue.    */
+specifier|public
+name|void
+name|clear
+parameter_list|()
+block|{
+name|this
+operator|.
+name|subsetImportances
+operator|.
+name|clear
+argument_list|()
+expr_stmt|;
+name|this
+operator|.
+name|boostedSubsets
+operator|.
+name|clear
+argument_list|()
+expr_stmt|;
+block|}
 comment|/**    * Removes the {@link PhaseMatchList rule-match list} for the given planner    * phase.    */
 specifier|public
 name|void
