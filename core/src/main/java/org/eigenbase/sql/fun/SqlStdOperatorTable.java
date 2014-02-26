@@ -2422,12 +2422,12 @@ decl_stmt|;
 specifier|public
 specifier|static
 specifier|final
-name|SqlOrderByOperator
+name|SqlSpecialOperator
 name|ORDER_BY
 init|=
-operator|new
-name|SqlOrderByOperator
-argument_list|()
+name|SqlOrderBy
+operator|.
+name|OPERATOR
 decl_stmt|;
 specifier|public
 specifier|static
