@@ -489,12 +489,16 @@ specifier|static
 name|SparkHandler
 name|sparkHandler
 decl_stmt|;
+comment|/** Returns a spark handler. Returns a trivial handler, for which      * {@link SparkHandler#enabled()} returns {@code false}, if {@code enable}      * is {@code false} or if Spark is not on the class path. Never returns      * null. */
 specifier|public
 specifier|static
 specifier|synchronized
 name|SparkHandler
 name|getSparkHandler
-parameter_list|()
+parameter_list|(
+name|boolean
+name|enable
+parameter_list|)
 block|{
 if|if
 condition|(
@@ -505,7 +509,13 @@ condition|)
 block|{
 name|sparkHandler
 operator|=
+name|enable
+condition|?
 name|createHandler
+argument_list|()
+else|:
+operator|new
+name|TrivialSparkHandler
 argument_list|()
 expr_stmt|;
 block|}
