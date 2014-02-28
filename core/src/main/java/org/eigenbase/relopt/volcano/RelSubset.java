@@ -954,15 +954,18 @@ expr_stmt|;
 block|}
 comment|// If this isn't the first rel in the set, it must have compatible
 comment|// row type.
-assert|assert
-operator|(
+if|if
+condition|(
 name|set
 operator|.
 name|rel
-operator|==
+operator|!=
 literal|null
-operator|)
-operator|||
+condition|)
+block|{
+if|if
+condition|(
+operator|!
 name|RelOptUtil
 operator|.
 name|equal
@@ -981,7 +984,15 @@ argument_list|()
 argument_list|,
 literal|true
 argument_list|)
-assert|;
+condition|)
+block|{
+throw|throw
+operator|new
+name|AssertionError
+argument_list|()
+throw|;
+block|}
+block|}
 name|set
 operator|.
 name|addInternal
