@@ -7290,16 +7290,6 @@ operator|new
 name|SpaceList
 argument_list|()
 decl_stmt|;
-specifier|public
-name|SpaceList
-parameter_list|()
-block|{
-name|populate
-argument_list|(
-literal|"               "
-argument_list|)
-expr_stmt|;
-block|}
 annotation|@
 name|Override
 specifier|public
@@ -7347,6 +7337,13 @@ block|}
 name|String
 name|s
 init|=
+name|size
+argument_list|()
+operator|<
+literal|16
+condition|?
+literal|"                "
+else|:
 name|get
 argument_list|(
 name|size
