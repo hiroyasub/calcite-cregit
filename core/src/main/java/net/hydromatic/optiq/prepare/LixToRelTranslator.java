@@ -641,9 +641,6 @@ operator|.
 name|makeRangeReference
 argument_list|(
 name|child
-operator|.
-name|getRowType
-argument_list|()
 argument_list|)
 argument_list|)
 decl_stmt|;
@@ -817,9 +814,6 @@ operator|.
 name|makeRangeReference
 argument_list|(
 name|input
-operator|.
-name|getRowType
-argument_list|()
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -900,9 +894,6 @@ operator|.
 name|makeRangeReference
 argument_list|(
 name|input
-operator|.
-name|getRowType
-argument_list|()
 argument_list|)
 argument_list|)
 expr_stmt|;

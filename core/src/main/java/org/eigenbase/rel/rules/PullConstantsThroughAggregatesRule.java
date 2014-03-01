@@ -699,6 +699,18 @@ name|newAggCalls
 argument_list|)
 expr_stmt|;
 block|}
+specifier|final
+name|RexBuilder
+name|rexBuilder
+init|=
+name|aggregate
+operator|.
+name|getCluster
+argument_list|()
+operator|.
+name|getRexBuilder
+argument_list|()
+decl_stmt|;
 comment|// Create a projection back again.
 name|List
 argument_list|<
@@ -764,9 +776,9 @@ block|{
 comment|// Aggregate expressions' names and positions are unchanged.
 name|expr
 operator|=
-name|RelOptUtil
+name|rexBuilder
 operator|.
-name|createInputRef
+name|makeInputRef
 argument_list|(
 name|newAggregate
 argument_list|,
@@ -806,9 +818,9 @@ comment|// Project the aggregation expression, in its original
 comment|// position.
 name|expr
 operator|=
-name|RelOptUtil
+name|rexBuilder
 operator|.
-name|createInputRef
+name|makeInputRef
 argument_list|(
 name|newAggregate
 argument_list|,
@@ -960,6 +972,18 @@ argument_list|(
 name|target
 argument_list|)
 decl_stmt|;
+specifier|final
+name|RexBuilder
+name|rexBuilder
+init|=
+name|child
+operator|.
+name|getCluster
+argument_list|()
+operator|.
+name|getRexBuilder
+argument_list|()
+decl_stmt|;
 name|projects
 operator|.
 name|add
@@ -968,9 +992,12 @@ name|Pair
 operator|.
 name|of
 argument_list|(
-name|RelOptUtil
+operator|(
+name|RexNode
+operator|)
+name|rexBuilder
 operator|.
-name|createInputRef
+name|makeInputRef
 argument_list|(
 name|child
 argument_list|,

@@ -478,9 +478,6 @@ operator|.
 name|makeRangeReference
 argument_list|(
 name|table
-operator|.
-name|getRowType
-argument_list|()
 argument_list|)
 argument_list|,
 literal|"deptno"

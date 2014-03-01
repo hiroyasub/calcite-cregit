@@ -846,6 +846,27 @@ name|collation
 argument_list|)
 return|;
 block|}
+comment|/** Creates a copy of this {@code NlsString} with different content but same    * charset and collation. */
+specifier|public
+name|NlsString
+name|copy
+parameter_list|(
+name|String
+name|value
+parameter_list|)
+block|{
+return|return
+operator|new
+name|NlsString
+argument_list|(
+name|value
+argument_list|,
+name|charsetName
+argument_list|,
+name|collation
+argument_list|)
+return|;
+block|}
 block|}
 end_class
 

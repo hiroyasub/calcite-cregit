@@ -443,12 +443,7 @@ name|rexBuilder
 operator|.
 name|makeRangeReference
 argument_list|(
-name|table
-operator|.
-name|getRowType
-argument_list|(
-name|typeFactory
-argument_list|)
+name|tableRel
 argument_list|)
 argument_list|,
 literal|"i"

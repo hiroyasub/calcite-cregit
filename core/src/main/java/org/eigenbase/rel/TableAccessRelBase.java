@@ -454,10 +454,7 @@ name|rexBuilder
 operator|.
 name|makeInputRef
 argument_list|(
-name|field
-operator|.
-name|getType
-argument_list|()
+name|this
 argument_list|,
 name|i
 argument_list|)
