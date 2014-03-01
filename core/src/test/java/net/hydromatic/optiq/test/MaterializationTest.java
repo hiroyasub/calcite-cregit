@@ -21,6 +21,20 @@ name|net
 operator|.
 name|hydromatic
 operator|.
+name|linq4j
+operator|.
+name|function
+operator|.
+name|Function1
+import|;
+end_import
+
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
 name|optiq
 operator|.
 name|jdbc
@@ -126,6 +140,16 @@ import|;
 end_import
 
 begin_import
+import|import
+name|java
+operator|.
+name|sql
+operator|.
+name|ResultSet
+import|;
+end_import
+
+begin_import
 import|import static
 name|org
 operator|.
@@ -146,6 +170,24 @@ specifier|public
 class|class
 name|MaterializationTest
 block|{
+specifier|private
+specifier|static
+specifier|final
+name|Function1
+argument_list|<
+name|ResultSet
+argument_list|,
+name|Void
+argument_list|>
+name|CONTAINS_M0
+init|=
+name|OptiqAssert
+operator|.
+name|checkResultContains
+argument_list|(
+literal|"EnumerableTableAccessRel(table=[[hr, m0]])"
+argument_list|)
+decl_stmt|;
 specifier|final
 name|JavaTypeFactoryImpl
 name|typeFactory
@@ -310,6 +352,8 @@ argument_list|,
 name|JdbcTest
 operator|.
 name|HR_MODEL
+argument_list|,
+name|CONTAINS_M0
 argument_list|)
 expr_stmt|;
 block|}
@@ -326,6 +370,14 @@ name|query
 parameter_list|,
 name|String
 name|model
+parameter_list|,
+name|Function1
+argument_list|<
+name|ResultSet
+argument_list|,
+name|Void
+argument_list|>
+name|checker
 parameter_list|)
 block|{
 try|try
@@ -374,9 +426,9 @@ argument_list|(
 literal|true
 argument_list|)
 operator|.
-name|explainContains
+name|explainMatches
 argument_list|(
-literal|"EnumerableTableAccessRel(table=[[hr, m0]])"
+name|checker
 argument_list|)
 operator|.
 name|sameResultWithMaterializationsDisabled
@@ -470,7 +522,7 @@ literal|false
 expr_stmt|;
 block|}
 block|}
-comment|/** Runs the same test as {@link #testFilterQueryOnProjectView()} but more    * concisely.*/
+comment|/** Runs the same test as {@link #testFilterQueryOnProjectView()} but more    * concisely. */
 annotation|@
 name|Test
 specifier|public
@@ -486,7 +538,7 @@ literal|"select \"empid\" + 1 as x from \"emps\" where \"deptno\" = 10"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** As {@link #testFilterQueryOnProjectView()} but with extra column in    * materialized view.*/
+comment|/** As {@link #testFilterQueryOnProjectView()} but with extra column in    * materialized view. */
 annotation|@
 name|Test
 specifier|public
@@ -502,7 +554,7 @@ literal|"select \"empid\" + 1 as x from \"emps\" where \"deptno\" = 10"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** As {@link #testFilterQueryOnProjectView()} but with extra column in both    * materialized view and query.*/
+comment|/** As {@link #testFilterQueryOnProjectView()} but with extra column in both    * materialized view and query. */
 annotation|@
 name|Test
 specifier|public
@@ -518,9 +570,7 @@ literal|"select \"empid\" + 1 as x, \"name\" from \"emps\" where \"deptno\" = 10
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** As {@link #testFilterQueryOnProjectView()} but materialized view contains    * an expression and query.*/
-annotation|@
-name|Ignore
+comment|/** As {@link #testFilterQueryOnProjectView()} but materialized view contains    * an expression and query. */
 annotation|@
 name|Test
 specifier|public
@@ -536,7 +586,7 @@ literal|"select \"name\" from \"emps\" where \"deptno\" - 10 = 0"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** As {@link #testFilterQueryOnProjectView3()} but materialized view cannot    * be used because it does not contain required expression.*/
+comment|/** As {@link #testFilterQueryOnProjectView3()} but materialized view cannot    * be used because it does not contain required expression. */
 annotation|@
 name|Test
 specifier|public
@@ -549,6 +599,52 @@ argument_list|(
 literal|"select \"deptno\" - 10 as \"x\", \"empid\" + 1, \"name\" from \"emps\""
 argument_list|,
 literal|"select \"name\" from \"emps\" where \"deptno\" + 10 = 20"
+argument_list|,
+name|JdbcTest
+operator|.
+name|HR_MODEL
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** As {@link #testFilterQueryOnProjectView3()} but also contains an    * expression column. */
+annotation|@
+name|Ignore
+argument_list|(
+literal|"fix project expr on filter"
+argument_list|)
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFilterQueryOnProjectView5
+parameter_list|()
+block|{
+name|checkMaterialize
+argument_list|(
+literal|"select \"deptno\" - 10 as \"x\", \"empid\" + 1, \"name\" from \"emps\""
+argument_list|,
+literal|"select \"name\", \"empid\" + 1 from \"emps\" where \"deptno\" - 10 = 0"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** As {@link #testFilterQueryOnProjectView3()} but also contains an    * expression column. */
+annotation|@
+name|Ignore
+argument_list|(
+literal|"fix project expr on filter"
+argument_list|)
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFilterQueryOnProjectView6
+parameter_list|()
+block|{
+name|checkNoMaterialize
+argument_list|(
+literal|"select \"deptno\" - 10 as \"x\", \"empid\" + 1, \"name\" from \"emps\""
+argument_list|,
+literal|"select \"name\", \"empid\" + 2 from \"emps\" where \"deptno\" - 10 = 0"
 argument_list|,
 name|JdbcTest
 operator|.
@@ -592,6 +688,9 @@ block|}
 comment|/** As {@link #testFilterQueryOnFilterView()} but condition is weaker in    * view. */
 annotation|@
 name|Ignore
+argument_list|(
+literal|"not implemented"
+argument_list|)
 annotation|@
 name|Test
 specifier|public
@@ -601,9 +700,22 @@ parameter_list|()
 block|{
 name|checkMaterialize
 argument_list|(
-literal|"select \"deptno\", \"empid\", \"name\" from \"emps\" where \"deptno\" = 10 or \"empid\"< 150"
+literal|"select \"deptno\", \"empid\", \"name\" from \"emps\" where \"deptno\" = 10 or \"deptno\" = 20 or \"empid\"< 160"
 argument_list|,
 literal|"select \"empid\" + 1 as x, \"name\" from \"emps\" where \"deptno\" = 10"
+argument_list|,
+name|JdbcTest
+operator|.
+name|HR_MODEL
+argument_list|,
+name|OptiqAssert
+operator|.
+name|checkResultContains
+argument_list|(
+literal|"EnumerableCalcRel(expr#0..2=[{inputs}], expr#3=[1], expr#4=[+($t1, $t3)], X=[$t4], name=[$t2], condition=?)\n"
+operator|+
+literal|"  EnumerableTableAccessRel(table=[[hr, m0]])"
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -1384,6 +1496,8 @@ argument_list|,
 name|JdbcTest
 operator|.
 name|FOODMART_MODEL
+argument_list|,
+name|CONTAINS_M0
 argument_list|)
 expr_stmt|;
 block|}
@@ -1421,6 +1535,8 @@ argument_list|,
 name|JdbcTest
 operator|.
 name|FOODMART_MODEL
+argument_list|,
+name|CONTAINS_M0
 argument_list|)
 expr_stmt|;
 block|}

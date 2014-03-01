@@ -3404,6 +3404,11 @@ argument_list|,
 name|child
 argument_list|)
 expr_stmt|;
+name|rel
+operator|.
+name|recomputeDigest
+argument_list|()
+expr_stmt|;
 block|}
 return|return
 name|rel
