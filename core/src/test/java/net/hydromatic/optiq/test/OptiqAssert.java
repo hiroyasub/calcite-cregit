@@ -4687,6 +4687,25 @@ return|return
 name|this
 return|;
 block|}
+annotation|@
+name|Override
+specifier|public
+name|AssertQuery
+name|queryContains
+parameter_list|(
+name|Function1
+argument_list|<
+name|List
+argument_list|,
+name|Void
+argument_list|>
+name|predicate1
+parameter_list|)
+block|{
+return|return
+name|this
+return|;
+block|}
 block|}
 comment|/** Information necessary to create a JDBC connection. Specify one to run    * tests against a different database. (hsqldb is the default.) */
 specifier|public

@@ -87,17 +87,27 @@ name|org
 operator|.
 name|junit
 operator|.
-name|Assert
+name|*
 import|;
 end_import
 
 begin_import
 import|import
-name|org
+name|java
 operator|.
-name|junit
+name|sql
 operator|.
-name|Test
+name|ResultSet
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|sql
+operator|.
+name|SQLException
 import|;
 end_import
 
@@ -107,7 +117,31 @@ name|java
 operator|.
 name|util
 operator|.
-name|List
+name|*
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|hamcrest
+operator|.
+name|CoreMatchers
+operator|.
+name|equalTo
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|assertThat
 import|;
 end_import
 
@@ -232,7 +266,17 @@ name|of
 argument_list|(
 literal|"model"
 argument_list|,
-literal|"mongodb/target/test-classes/mongo-zips-model.json"
+name|MongoAdapterTest
+operator|.
+name|class
+operator|.
+name|getResource
+argument_list|(
+literal|"/mongo-zips-model.json"
+argument_list|)
+operator|.
+name|getPath
+argument_list|()
 argument_list|)
 decl_stmt|;
 comment|/** Connection factory based on the "mongo-zips" model. */
@@ -253,17 +297,41 @@ name|of
 argument_list|(
 literal|"model"
 argument_list|,
-literal|"mongodb/target/test-classes/mongo-foodmart-model.json"
+name|MongoAdapterTest
+operator|.
+name|class
+operator|.
+name|getResource
+argument_list|(
+literal|"/mongo-foodmart-model.json"
+argument_list|)
+operator|.
+name|getPath
+argument_list|()
 argument_list|)
 decl_stmt|;
-comment|/** Disabled by default, because we do not expect Mongo to be installed and    * populated with the FoodMart data set. */
-specifier|private
+comment|/** Whether to run Mongo tests. Disabled by default, because we do not expect    * Mongo to be installed and populated with the FoodMart data set. To enable,    * specify {@code -Doptiq.test.mongodb=true} on the Java command line. */
+specifier|public
+specifier|static
+specifier|final
+name|boolean
+name|ENABLED
+init|=
+name|Boolean
+operator|.
+name|getBoolean
+argument_list|(
+literal|"optiq.test.mongodb"
+argument_list|)
+decl_stmt|;
+comment|/** Whether to run this test. */
+specifier|protected
 name|boolean
 name|enabled
 parameter_list|()
 block|{
 return|return
-literal|true
+name|ENABLED
 return|;
 block|}
 comment|/** Returns a function that checks that a particular MongoDB pipeline is    * generated to implement a query. */
@@ -334,6 +402,185 @@ block|}
 block|}
 return|;
 block|}
+specifier|static
+name|Function1
+argument_list|<
+name|ResultSet
+argument_list|,
+name|Void
+argument_list|>
+name|checkResultUnordered
+parameter_list|(
+specifier|final
+name|String
+modifier|...
+name|lines
+parameter_list|)
+block|{
+return|return
+operator|new
+name|Function1
+argument_list|<
+name|ResultSet
+argument_list|,
+name|Void
+argument_list|>
+argument_list|()
+block|{
+specifier|public
+name|Void
+name|apply
+parameter_list|(
+name|ResultSet
+name|resultSet
+parameter_list|)
+block|{
+try|try
+block|{
+specifier|final
+name|List
+argument_list|<
+name|String
+argument_list|>
+name|expectedList
+init|=
+operator|new
+name|ArrayList
+argument_list|<
+name|String
+argument_list|>
+argument_list|()
+decl_stmt|;
+name|Collections
+operator|.
+name|addAll
+argument_list|(
+name|expectedList
+argument_list|,
+name|lines
+argument_list|)
+expr_stmt|;
+name|Collections
+operator|.
+name|sort
+argument_list|(
+name|expectedList
+argument_list|)
+expr_stmt|;
+specifier|final
+name|List
+argument_list|<
+name|String
+argument_list|>
+name|actualList
+init|=
+operator|new
+name|ArrayList
+argument_list|<
+name|String
+argument_list|>
+argument_list|()
+decl_stmt|;
+name|OptiqAssert
+operator|.
+name|toStringList
+argument_list|(
+name|resultSet
+argument_list|,
+name|actualList
+argument_list|)
+expr_stmt|;
+for|for
+control|(
+name|int
+name|i
+init|=
+literal|0
+init|;
+name|i
+operator|<
+name|actualList
+operator|.
+name|size
+argument_list|()
+condition|;
+name|i
+operator|++
+control|)
+block|{
+name|String
+name|s
+init|=
+name|actualList
+operator|.
+name|get
+argument_list|(
+name|i
+argument_list|)
+decl_stmt|;
+name|actualList
+operator|.
+name|set
+argument_list|(
+name|i
+argument_list|,
+name|s
+operator|.
+name|replaceAll
+argument_list|(
+literal|"\\.0;"
+argument_list|,
+literal|";"
+argument_list|)
+operator|.
+name|replaceAll
+argument_list|(
+literal|"\\.0$"
+argument_list|,
+literal|""
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+name|Collections
+operator|.
+name|sort
+argument_list|(
+name|actualList
+argument_list|)
+expr_stmt|;
+name|assertThat
+argument_list|(
+name|actualList
+argument_list|,
+name|equalTo
+argument_list|(
+name|expectedList
+argument_list|)
+argument_list|)
+expr_stmt|;
+return|return
+literal|null
+return|;
+block|}
+catch|catch
+parameter_list|(
+name|SQLException
+name|e
+parameter_list|)
+block|{
+throw|throw
+operator|new
+name|RuntimeException
+argument_list|(
+name|e
+argument_list|)
+throw|;
+block|}
+block|}
+block|}
+return|;
+block|}
 annotation|@
 name|Test
 specifier|public
@@ -373,7 +620,7 @@ literal|"PLAN=EnumerableCalcRel(expr#0..4=[{inputs}], expr#5=[0], expr#6=[ITEM($
 operator|+
 literal|"  MongoToEnumerableConverter\n"
 operator|+
-literal|"    MongoSortRel(sort0=[$3], dir0=[Ascending])\n"
+literal|"    MongoSortRel(sort0=[$3], dir0=[ASC])\n"
 operator|+
 literal|"      MongoTableScan(table=[[mongo_raw, zips]], ops=[[<{city: 1, loc: 1, pop: 1, state: 1, _id: 1}, {$project: {city: 1, loc: 1, pop: 1, state: 1, _id: 1}}>]])"
 argument_list|)
@@ -428,7 +675,7 @@ literal|"PLAN=EnumerableCalcRel(expr#0..4=[{inputs}], expr#5=[0], expr#6=[ITEM($
 operator|+
 literal|"  MongoToEnumerableConverter\n"
 operator|+
-literal|"    MongoSortRel(sort0=[$3], dir0=[Ascending])\n"
+literal|"    MongoSortRel(sort0=[$3], dir0=[ASC])\n"
 operator|+
 literal|"      MongoFilterRel(condition=[AND(=($0, 'SPRINGFIELD'),>=($4, '20000'),<=($4, '30000'))])\n"
 operator|+
@@ -488,9 +735,12 @@ argument_list|)
 operator|.
 name|returns
 argument_list|(
-literal|"product_id=337\n"
-operator|+
-literal|"product_id=1512\n"
+name|checkResultUnordered
+argument_list|(
+literal|"product_id=337"
+argument_list|,
+literal|"product_id=1512"
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -624,13 +874,16 @@ argument_list|)
 operator|.
 name|returns
 argument_list|(
-literal|"warehouse_id=6; warehouse_state_province=CA\n"
-operator|+
-literal|"warehouse_id=7; warehouse_state_province=CA\n"
-operator|+
-literal|"warehouse_id=14; warehouse_state_province=CA\n"
-operator|+
-literal|"warehouse_id=24; warehouse_state_province=CA\n"
+name|checkResultUnordered
+argument_list|(
+literal|"warehouse_id=6; warehouse_state_province=CA"
+argument_list|,
+literal|"warehouse_id=7; warehouse_state_province=CA"
+argument_list|,
+literal|"warehouse_id=14; warehouse_state_province=CA"
+argument_list|,
+literal|"warehouse_id=24; warehouse_state_province=CA"
+argument_list|)
 argument_list|)
 operator|.
 name|queryContains
@@ -684,21 +937,24 @@ argument_list|)
 operator|.
 name|returns
 argument_list|(
-literal|"store_id=1; store_name=Store 1\n"
-operator|+
-literal|"store_id=3; store_name=Store 3\n"
-operator|+
-literal|"store_id=7; store_name=Store 7\n"
-operator|+
-literal|"store_id=10; store_name=Store 10\n"
-operator|+
-literal|"store_id=11; store_name=Store 11\n"
-operator|+
-literal|"store_id=15; store_name=Store 15\n"
-operator|+
-literal|"store_id=16; store_name=Store 16\n"
-operator|+
-literal|"store_id=24; store_name=Store 24\n"
+name|checkResultUnordered
+argument_list|(
+literal|"store_id=1; store_name=Store 1"
+argument_list|,
+literal|"store_id=3; store_name=Store 3"
+argument_list|,
+literal|"store_id=7; store_name=Store 7"
+argument_list|,
+literal|"store_id=10; store_name=Store 10"
+argument_list|,
+literal|"store_id=11; store_name=Store 11"
+argument_list|,
+literal|"store_id=15; store_name=Store 15"
+argument_list|,
+literal|"store_id=16; store_name=Store 16"
+argument_list|,
+literal|"store_id=24; store_name=Store 24"
+argument_list|)
 argument_list|)
 operator|.
 name|queryContains
@@ -860,9 +1116,13 @@ literal|"      MongoTableScan(table=[[mongo_raw, zips]], ops=[[<{city: 1, state:
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Ignore
+annotation|@
+name|Test
 specifier|public
 name|void
-name|_testFoodmartQueries
+name|testFoodmartQueries
 parameter_list|()
 block|{
 specifier|final
