@@ -301,10 +301,15 @@ argument_list|)
 decl_stmt|;
 name|assertThat
 argument_list|(
+name|Util
+operator|.
+name|toLinux
+argument_list|(
 name|parse
 operator|.
 name|toString
 argument_list|()
+argument_list|)
 argument_list|,
 name|equalTo
 argument_list|(
@@ -363,6 +368,10 @@ name|rel
 parameter_list|)
 block|{
 return|return
+name|Util
+operator|.
+name|toLinux
+argument_list|(
 name|RelOptUtil
 operator|.
 name|dumpPlan
@@ -376,6 +385,7 @@ argument_list|,
 name|SqlExplainLevel
 operator|.
 name|DIGEST_ATTRIBUTES
+argument_list|)
 argument_list|)
 return|;
 block|}
@@ -940,6 +950,10 @@ argument_list|)
 decl_stmt|;
 name|assertThat
 argument_list|(
+name|Util
+operator|.
+name|toLinux
+argument_list|(
 name|parse
 operator|.
 name|toSqlString
@@ -949,6 +963,7 @@ argument_list|)
 operator|.
 name|getSql
 argument_list|()
+argument_list|)
 argument_list|,
 name|equalTo
 argument_list|(

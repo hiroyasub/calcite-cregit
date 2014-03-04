@@ -1173,10 +1173,15 @@ name|assertEquals
 argument_list|(
 name|expected
 argument_list|,
+name|Util
+operator|.
+name|toLinux
+argument_list|(
 name|handler
 operator|.
 name|toString
 argument_list|()
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}

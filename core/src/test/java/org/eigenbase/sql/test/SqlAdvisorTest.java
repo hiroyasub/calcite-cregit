@@ -934,9 +934,7 @@ argument_list|)
 operator|.
 name|append
 argument_list|(
-name|TestUtil
-operator|.
-name|NL
+literal|"\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -1554,9 +1552,7 @@ argument_list|)
 operator|.
 name|append
 argument_list|(
-name|TestUtil
-operator|.
-name|NL
+literal|"\n"
 argument_list|)
 expr_stmt|;
 block|}

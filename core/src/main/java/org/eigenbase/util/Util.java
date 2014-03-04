@@ -2631,6 +2631,26 @@ name|toString
 argument_list|()
 return|;
 block|}
+specifier|public
+specifier|static
+name|String
+name|toLinux
+parameter_list|(
+name|String
+name|s
+parameter_list|)
+block|{
+return|return
+name|s
+operator|.
+name|replaceAll
+argument_list|(
+literal|"\r\n"
+argument_list|,
+literal|"\n"
+argument_list|)
+return|;
+block|}
 comment|/**    * Materializes the results of a {@link java.util.Iterator} as a {@link    * java.util.List}.    *    * @param iter iterator to materialize    * @return materialized list    */
 specifier|public
 specifier|static
