@@ -472,10 +472,15 @@ argument_list|)
 decl_stmt|;
 name|assertThat
 argument_list|(
+name|Util
+operator|.
+name|toLinux
+argument_list|(
 name|parse
 operator|.
 name|toString
 argument_list|()
+argument_list|)
 argument_list|,
 name|equalTo
 argument_list|(

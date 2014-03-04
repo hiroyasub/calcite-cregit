@@ -371,6 +371,18 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
+name|util
+operator|.
+name|Util
+import|;
+end_import
+
+begin_import
+import|import
 name|com
 operator|.
 name|google
@@ -11721,10 +11733,15 @@ name|HSQLDB
 case|:
 name|assertThat
 argument_list|(
+name|Util
+operator|.
+name|toLinux
+argument_list|(
 name|sqls
 index|[
 literal|0
 index|]
+argument_list|)
 argument_list|,
 name|equalTo
 argument_list|(
