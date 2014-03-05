@@ -586,7 +586,7 @@ parameter_list|)
 block|{
 name|LOGGER
 operator|.
-name|warning
+name|fine
 argument_list|(
 name|e
 operator|.
@@ -3694,7 +3694,7 @@ parameter_list|)
 block|{
 name|LOGGER
 operator|.
-name|warning
+name|fine
 argument_list|(
 name|e
 operator|.
