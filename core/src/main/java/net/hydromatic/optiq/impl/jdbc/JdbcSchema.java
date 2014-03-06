@@ -1516,7 +1516,7 @@ comment|// ignore
 block|}
 block|}
 block|}
-comment|/** Schema factory that creates a    * {@link net.hydromatic.optiq.impl.clone.CloneSchema}.    * This allows you to create a clone schema inside a model.json file.    *    *<pre>{@code    * {    *   version: '1.0',    *   defaultSchema: 'FOODMART_CLONE',    *   schemas: [    *     {    *       name: 'FOODMART_CLONE',    *       type: 'custom',    *       factory: 'net.hydromatic.optiq.impl.clone.CloneSchema.Factory',    *       operand: {    *         driver: 'com.mysql.jdbc.Driver',    *         url: 'jdbc:mysql://localhost/foodmart',    *         user: 'foodmart',    *         password: 'foodmart'    *       }    *     }    *   ]    * }    * }</pre>    */
+comment|/** Schema factory that creates a    * {@link net.hydromatic.optiq.impl.jdbc.JdbcSchema}.    * This allows you to create a jdbc schema inside a model.json file.    *    *<pre>{@code    * {    *   version: '1.0',    *   defaultSchema: 'FOODMART_CLONE',    *   schemas: [    *     {    *       name: 'FOODMART_CLONE',    *       type: 'custom',    *       factory: 'net.hydromatic.optiq.impl.clone.JdbcSchema$Factory',    *       operand: {    *         jdbcDriver: 'com.mysql.jdbc.Driver',    *         jdbcUrl: 'jdbc:mysql://localhost/foodmart',    *         jdbcUser: 'foodmart',    *         jdbcPassword: 'foodmart'    *       }    *     }    *   ]    * }    * }</pre>    */
 specifier|public
 specifier|static
 class|class

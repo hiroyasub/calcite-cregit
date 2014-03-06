@@ -889,7 +889,7 @@ block|}
 return|;
 block|}
 block|}
-comment|/** Factory that creates a schema by instantiating an object and looking at    * its public fields.    *    *<p>The following example instantiates a {@code FoodMart} object as a schema    * that contains tables called {@code EMPS} and {@code DEPTS} based on the    * object's fields.</p>    *    *<pre>    * {@code schemas: [    *     {    *       name: "foodmart",    *       type: "custom",    *       factory: "net.hydromatic.optiq.impl.java.ReflectiveSchema.Factory",    *       operand: {    *         class: "com.acme.FoodMart",    *         staticMethod: "instance"    *       }    *     }    *   ]    *    * class FoodMart {    *   public static final FoodMart instance() {    *     return new FoodMart();    *   }    *    *   Employee[] EMPS;    *   Department[] DEPTS;    * }    * }</pre>    * */
+comment|/** Factory that creates a schema by instantiating an object and looking at    * its public fields.    *    *<p>The following example instantiates a {@code FoodMart} object as a schema    * that contains tables called {@code EMPS} and {@code DEPTS} based on the    * object's fields.</p>    *    *<pre>    * {@code schemas: [    *     {    *       name: "foodmart",    *       type: "custom",    *       factory: "net.hydromatic.optiq.impl.java.ReflectiveSchema$Factory",    *       operand: {    *         class: "com.acme.FoodMart",    *         staticMethod: "instance"    *       }    *     }    *   ]    *    * class FoodMart {    *   public static final FoodMart instance() {    *     return new FoodMart();    *   }    *    *   Employee[] EMPS;    *   Department[] DEPTS;    * }    * }</pre>    * */
 specifier|public
 specifier|static
 class|class
