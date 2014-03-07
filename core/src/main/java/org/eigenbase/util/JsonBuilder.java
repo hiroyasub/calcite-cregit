@@ -63,7 +63,7 @@ name|optiq
 operator|.
 name|runtime
 operator|.
-name|Spacer
+name|Spaces
 import|;
 end_import
 
@@ -517,22 +517,20 @@ name|int
 name|indent
 parameter_list|)
 block|{
+name|Spaces
+operator|.
+name|append
+argument_list|(
 name|buf
 operator|.
 name|append
 argument_list|(
 literal|'\n'
 argument_list|)
-operator|.
-name|append
-argument_list|(
-operator|new
-name|Spacer
-argument_list|(
+argument_list|,
 name|indent
 operator|*
 literal|2
-argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
