@@ -15929,6 +15929,49 @@ literal|"RecordType(TIMESTAMP(0) NOT NULL CURRENT_TIMESTAMP) NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testLexAndQuoting
+parameter_list|()
+block|{
+specifier|final
+name|SqlTester
+name|tester1
+init|=
+name|tester
+operator|.
+name|withLex
+argument_list|(
+name|ConnectionConfig
+operator|.
+name|Lex
+operator|.
+name|JAVA
+argument_list|)
+operator|.
+name|withQuoting
+argument_list|(
+name|Quoting
+operator|.
+name|DOUBLE_QUOTE
+argument_list|)
+decl_stmt|;
+comment|// in Java mode, creating identifiers with spaces is not encouraged, but you
+comment|// can use double-quote if you really have to
+name|tester1
+operator|.
+name|checkResultType
+argument_list|(
+literal|"select \"x[y] z \" from (\n"
+operator|+
+literal|"  select e.EMPNO as \"x[y] z \" from EMP as e)"
+argument_list|,
+literal|"RecordType(INTEGER NOT NULL x[y] z ) NOT NULL"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Tests using case-insensitive matching of identifiers. */
 annotation|@
 name|Test

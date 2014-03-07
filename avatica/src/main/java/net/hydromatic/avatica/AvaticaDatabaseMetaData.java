@@ -495,6 +495,7 @@ throws|throws
 name|SQLException
 block|{
 return|return
+operator|!
 name|caseSensitive
 argument_list|()
 operator|&&
@@ -514,7 +515,6 @@ throws|throws
 name|SQLException
 block|{
 return|return
-operator|!
 name|caseSensitive
 argument_list|()
 operator|&&
