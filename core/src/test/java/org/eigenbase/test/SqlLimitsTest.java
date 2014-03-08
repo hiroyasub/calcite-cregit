@@ -103,6 +103,16 @@ name|org
 operator|.
 name|junit
 operator|.
+name|BeforeClass
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
 name|Test
 import|;
 end_import
@@ -351,6 +361,26 @@ block|{
 return|return
 name|TYPE_LIST
 return|;
+block|}
+annotation|@
+name|BeforeClass
+specifier|public
+specifier|static
+name|void
+name|setUSLocale
+parameter_list|()
+block|{
+comment|// This ensures numbers in exceptions are printed as in asserts.
+comment|// For example, 1,000 vs 1 000
+name|Locale
+operator|.
+name|setDefault
+argument_list|(
+name|Locale
+operator|.
+name|US
+argument_list|)
+expr_stmt|;
 block|}
 annotation|@
 name|Test

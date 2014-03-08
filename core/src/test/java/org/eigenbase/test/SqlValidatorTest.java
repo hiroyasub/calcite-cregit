@@ -31,6 +31,16 @@ name|java
 operator|.
 name|util
 operator|.
+name|Locale
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
 name|logging
 operator|.
 name|*
@@ -126,6 +136,16 @@ operator|.
 name|jdbc
 operator|.
 name|ConnectionConfig
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|BeforeClass
 import|;
 end_import
 
@@ -290,6 +310,26 @@ argument_list|()
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|BeforeClass
+specifier|public
+specifier|static
+name|void
+name|setUSLocale
+parameter_list|()
+block|{
+comment|// This ensures numbers in exceptions are printed as in asserts.
+comment|// For example, 1,000 vs 1 000
+name|Locale
+operator|.
+name|setDefault
+argument_list|(
+name|Locale
+operator|.
+name|US
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public
