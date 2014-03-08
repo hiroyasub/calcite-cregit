@@ -7009,7 +7009,7 @@ return|return
 name|list
 return|;
 block|}
-comment|/**    * Ands two sets of join filters together, either of which can be null.    *    * @param rexBuilder rexBuilder to create AND expression    * @param left       filter on the left that the right will be AND'd to    * @param right      filter on the right    * @return AND'd filter    */
+comment|/**    * Ands two sets of join filters together, either of which can be null.    *    * @param rexBuilder rexBuilder to create AND expression    * @param left       filter on the left that the right will be AND'd to    * @param right      filter on the right    * @return AND'd filter    *    * @see org.eigenbase.rex.RexUtil#composeConjunction    */
 specifier|public
 specifier|static
 name|RexNode
@@ -8818,6 +8818,22 @@ name|getInputs
 argument_list|()
 argument_list|)
 decl_stmt|;
+if|if
+condition|(
+name|inputs
+operator|.
+name|get
+argument_list|(
+name|ordinal
+argument_list|)
+operator|==
+name|newInput
+condition|)
+block|{
+return|return
+name|parent
+return|;
+block|}
 name|inputs
 operator|.
 name|set

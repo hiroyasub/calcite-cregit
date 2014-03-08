@@ -971,16 +971,19 @@ argument_list|)
 condition|)
 block|{
 comment|// compare strings to get better error message
-name|assertEquals
+name|assertThat
+argument_list|(
+name|newlineList
+argument_list|(
+name|result
+argument_list|)
+argument_list|,
+name|equalTo
 argument_list|(
 name|newlineList
 argument_list|(
 name|expected
 argument_list|)
-argument_list|,
-name|newlineList
-argument_list|(
-name|result
 argument_list|)
 argument_list|)
 expr_stmt|;

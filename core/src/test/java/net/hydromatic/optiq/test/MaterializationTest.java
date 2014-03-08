@@ -89,6 +89,18 @@ name|org
 operator|.
 name|eigenbase
 operator|.
+name|reltype
+operator|.
+name|RelDataType
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
 name|rex
 operator|.
 name|*
@@ -146,6 +158,18 @@ operator|.
 name|sql
 operator|.
 name|ResultSet
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|hamcrest
+operator|.
+name|CoreMatchers
+operator|.
+name|*
 import|;
 end_import
 
@@ -610,7 +634,7 @@ comment|/** As {@link #testFilterQueryOnProjectView3()} but also contains an    
 annotation|@
 name|Ignore
 argument_list|(
-literal|"fix project expr on filter"
+literal|"fix project expr on filter - plans, but wrong results"
 argument_list|)
 annotation|@
 name|Test
@@ -715,6 +739,87 @@ argument_list|(
 literal|"EnumerableCalcRel(expr#0..2=[{inputs}], expr#3=[1], expr#4=[+($t1, $t3)], X=[$t4], name=[$t2], condition=?)\n"
 operator|+
 literal|"  EnumerableTableAccessRel(table=[[hr, m0]])"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Aggregation query at same level of aggregation as aggregation    * materialization. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAggregate
+parameter_list|()
+block|{
+name|checkMaterialize
+argument_list|(
+literal|"select \"deptno\", count(*) as c, sum(\"empid\") as s from \"emps\" group by \"deptno\""
+argument_list|,
+literal|"select count(*) + 1 as c, \"deptno\" from \"emps\" group by \"deptno\""
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Aggregation query at coarser level of aggregation than aggregation    * materialization. Requires an additional AggregateRel to roll up. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAggregateRollUp
+parameter_list|()
+block|{
+name|checkMaterialize
+argument_list|(
+literal|"select \"empid\", \"deptno\", count(*) as c, sum(\"empid\") as s from \"emps\" group by \"empid\", \"deptno\""
+argument_list|,
+literal|"select count(*) + 1 as c, \"deptno\" from \"emps\" group by \"deptno\""
+argument_list|,
+name|JdbcTest
+operator|.
+name|HR_MODEL
+argument_list|,
+name|OptiqAssert
+operator|.
+name|checkResultContains
+argument_list|(
+literal|"EnumerableCalcRel(expr#0..1=[{inputs}], expr#2=[1], expr#3=[+($t1, $t2)], C=[$t3], deptno=[$t0])\n"
+operator|+
+literal|"  EnumerableAggregateRel(group=[{1}], agg#0=[COUNT($1)])\n"
+operator|+
+literal|"    EnumerableTableAccessRel(table=[[hr, m0]])"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Aggregation materialization with a project. */
+annotation|@
+name|Ignore
+argument_list|(
+literal|"work in progress"
+argument_list|)
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAggregateProject
+parameter_list|()
+block|{
+comment|// Note that materialization does not start with the GROUP BY columns.
+comment|// Not a smart way to design a materialization, but people may do it.
+name|checkMaterialize
+argument_list|(
+literal|"select \"deptno\", count(*) as c, \"empid\" + 2, sum(\"empid\") as s from \"emps\" group by \"empid\", \"deptno\""
+argument_list|,
+literal|"select count(*) + 1 as c, \"deptno\" from \"emps\" group by \"deptno\""
+argument_list|,
+name|JdbcTest
+operator|.
+name|HR_MODEL
+argument_list|,
+name|OptiqAssert
+operator|.
+name|checkResultContains
+argument_list|(
+literal|"xxx"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1432,6 +1537,429 @@ name|toString
 argument_list|()
 argument_list|)
 expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSplitFilter
+parameter_list|()
+block|{
+specifier|final
+name|RexLiteral
+name|i1
+init|=
+name|rexBuilder
+operator|.
+name|makeExactLiteral
+argument_list|(
+name|BigDecimal
+operator|.
+name|ONE
+argument_list|)
+decl_stmt|;
+specifier|final
+name|RexLiteral
+name|i2
+init|=
+name|rexBuilder
+operator|.
+name|makeExactLiteral
+argument_list|(
+name|BigDecimal
+operator|.
+name|valueOf
+argument_list|(
+literal|2
+argument_list|)
+argument_list|)
+decl_stmt|;
+specifier|final
+name|RexLiteral
+name|i3
+init|=
+name|rexBuilder
+operator|.
+name|makeExactLiteral
+argument_list|(
+name|BigDecimal
+operator|.
+name|valueOf
+argument_list|(
+literal|3
+argument_list|)
+argument_list|)
+decl_stmt|;
+specifier|final
+name|RelDataType
+name|intType
+init|=
+name|typeFactory
+operator|.
+name|createType
+argument_list|(
+name|int
+operator|.
+name|class
+argument_list|)
+decl_stmt|;
+specifier|final
+name|RexInputRef
+name|x
+init|=
+name|rexBuilder
+operator|.
+name|makeInputRef
+argument_list|(
+name|intType
+argument_list|,
+literal|0
+argument_list|)
+decl_stmt|;
+comment|// $0
+specifier|final
+name|RexInputRef
+name|y
+init|=
+name|rexBuilder
+operator|.
+name|makeInputRef
+argument_list|(
+name|intType
+argument_list|,
+literal|1
+argument_list|)
+decl_stmt|;
+comment|// $1
+specifier|final
+name|RexInputRef
+name|z
+init|=
+name|rexBuilder
+operator|.
+name|makeInputRef
+argument_list|(
+name|intType
+argument_list|,
+literal|2
+argument_list|)
+decl_stmt|;
+comment|// $2
+specifier|final
+name|RexNode
+name|x_eq_1
+init|=
+name|rexBuilder
+operator|.
+name|makeCall
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|EQUALS
+argument_list|,
+name|x
+argument_list|,
+name|i1
+argument_list|)
+decl_stmt|;
+comment|// $0 = 1
+specifier|final
+name|RexNode
+name|x_eq_1_b
+init|=
+name|rexBuilder
+operator|.
+name|makeCall
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|EQUALS
+argument_list|,
+name|x
+argument_list|,
+name|i1
+argument_list|)
+decl_stmt|;
+comment|// $0 = 1 again
+specifier|final
+name|RexNode
+name|y_eq_2
+init|=
+name|rexBuilder
+operator|.
+name|makeCall
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|EQUALS
+argument_list|,
+name|y
+argument_list|,
+name|i2
+argument_list|)
+decl_stmt|;
+comment|// $1 = 2
+specifier|final
+name|RexNode
+name|z_eq_3
+init|=
+name|rexBuilder
+operator|.
+name|makeCall
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|EQUALS
+argument_list|,
+name|z
+argument_list|,
+name|i3
+argument_list|)
+decl_stmt|;
+comment|// $2 = 3
+name|RexNode
+name|newFilter
+decl_stmt|;
+comment|// Example 1.
+comment|// TODO:
+comment|// Example 2.
+comment|//   condition: x = 1,
+comment|//   target:    x = 1 or z = 3
+comment|// yields
+comment|//   residue:   not (z = 3)
+name|newFilter
+operator|=
+name|SubstitutionVisitor
+operator|.
+name|splitFilter
+argument_list|(
+name|rexBuilder
+argument_list|,
+name|x_eq_1
+argument_list|,
+name|rexBuilder
+operator|.
+name|makeCall
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|OR
+argument_list|,
+name|x_eq_1
+argument_list|,
+name|z_eq_3
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|assertThat
+argument_list|(
+name|newFilter
+operator|.
+name|toString
+argument_list|()
+argument_list|,
+name|equalTo
+argument_list|(
+literal|"NOT(=($2, 3))"
+argument_list|)
+argument_list|)
+expr_stmt|;
+comment|// 2b.
+comment|//   condition: x = 1 or y = 2
+comment|//   target:    x = 1 or y = 2 or z = 3
+comment|// yields
+comment|//   residue:   not (z = 3)
+name|newFilter
+operator|=
+name|SubstitutionVisitor
+operator|.
+name|splitFilter
+argument_list|(
+name|rexBuilder
+argument_list|,
+name|rexBuilder
+operator|.
+name|makeCall
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|OR
+argument_list|,
+name|x_eq_1
+argument_list|,
+name|y_eq_2
+argument_list|)
+argument_list|,
+name|rexBuilder
+operator|.
+name|makeCall
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|OR
+argument_list|,
+name|x_eq_1
+argument_list|,
+name|y_eq_2
+argument_list|,
+name|z_eq_3
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|assertThat
+argument_list|(
+name|newFilter
+operator|.
+name|toString
+argument_list|()
+argument_list|,
+name|equalTo
+argument_list|(
+literal|"NOT(=($2, 3))"
+argument_list|)
+argument_list|)
+expr_stmt|;
+comment|// 2c.
+comment|//   condition: x = 1
+comment|//   target:    x = 1 or y = 2 or z = 3
+comment|// yields
+comment|//   residue:   not (y = 2) and not (z = 3)
+name|newFilter
+operator|=
+name|SubstitutionVisitor
+operator|.
+name|splitFilter
+argument_list|(
+name|rexBuilder
+argument_list|,
+name|x_eq_1
+argument_list|,
+name|rexBuilder
+operator|.
+name|makeCall
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|OR
+argument_list|,
+name|x_eq_1
+argument_list|,
+name|y_eq_2
+argument_list|,
+name|z_eq_3
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|assertThat
+argument_list|(
+name|newFilter
+operator|.
+name|toString
+argument_list|()
+argument_list|,
+name|equalTo
+argument_list|(
+literal|"AND(NOT(=($1, 2)), NOT(=($2, 3)))"
+argument_list|)
+argument_list|)
+expr_stmt|;
+comment|// 2d.
+comment|//   condition: x = 1 or y = 2
+comment|//   target:    y = 2 or x = 1
+comment|// yields
+comment|//   residue:   true
+name|newFilter
+operator|=
+name|SubstitutionVisitor
+operator|.
+name|splitFilter
+argument_list|(
+name|rexBuilder
+argument_list|,
+name|rexBuilder
+operator|.
+name|makeCall
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|OR
+argument_list|,
+name|x_eq_1
+argument_list|,
+name|y_eq_2
+argument_list|)
+argument_list|,
+name|rexBuilder
+operator|.
+name|makeCall
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|OR
+argument_list|,
+name|y_eq_2
+argument_list|,
+name|x_eq_1
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|assertThat
+argument_list|(
+name|newFilter
+operator|.
+name|isAlwaysTrue
+argument_list|()
+argument_list|,
+name|equalTo
+argument_list|(
+literal|true
+argument_list|)
+argument_list|)
+expr_stmt|;
+comment|// 2e.
+comment|//   condition: x = 1
+comment|//   target:    x = 1 (different object)
+comment|// yields
+comment|//   residue:   true
+name|newFilter
+operator|=
+name|SubstitutionVisitor
+operator|.
+name|splitFilter
+argument_list|(
+name|rexBuilder
+argument_list|,
+name|x_eq_1
+argument_list|,
+name|x_eq_1_b
+argument_list|)
+expr_stmt|;
+name|assertThat
+argument_list|(
+name|newFilter
+operator|.
+name|isAlwaysTrue
+argument_list|()
+argument_list|,
+name|equalTo
+argument_list|(
+literal|true
+argument_list|)
+argument_list|)
+expr_stmt|;
+comment|// 2f.
+comment|//   condition: x = 1 or y = 2
+comment|//   target:    x = 1
+comment|// yields
+comment|//   residue:   null
+comment|// TODO:
+comment|// Example 3.
+comment|// Condition [x = 1 and y = 2],
+comment|// target [y = 2 and x = 1] yields
+comment|// residue [true].
+comment|// TODO:
+comment|// Example 4.
+comment|// TODO:
 block|}
 comment|/** Tests a complicated star-join query on a complicated materialized    * star-join query. Some of the features:    *    * 1. query joins in different order;    * 2. query's join conditions are in where clause;    * 3. query does not use all join tables (safe to omit them because they are    *    many-to-mandatory-one joins);    * 4. query is at higher granularity, therefore needs to roll up;    * 5. query has a condition on one of the materialization's grouping columns.    */
 annotation|@
