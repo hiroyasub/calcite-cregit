@@ -25,6 +25,20 @@ name|optiq
 operator|.
 name|jdbc
 operator|.
+name|OptiqConnection
+import|;
+end_import
+
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|optiq
+operator|.
+name|jdbc
+operator|.
 name|OptiqPrepare
 import|;
 end_import
@@ -43,6 +57,11 @@ name|OptiqPrepare
 operator|.
 name|Context
 name|createPrepareContext
+parameter_list|()
+function_decl|;
+comment|/** Returns the connection. */
+name|OptiqConnection
+name|getConnection
 parameter_list|()
 function_decl|;
 block|}
