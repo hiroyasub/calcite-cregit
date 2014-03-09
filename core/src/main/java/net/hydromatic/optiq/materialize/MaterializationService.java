@@ -334,11 +334,11 @@ name|materializedTable
 operator|=
 name|schema
 operator|.
-name|compositeTableMap
-operator|.
-name|get
+name|getTable
 argument_list|(
 name|tableName
+argument_list|,
+literal|true
 argument_list|)
 expr_stmt|;
 if|if

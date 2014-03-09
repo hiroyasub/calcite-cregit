@@ -426,11 +426,11 @@ name|table
 init|=
 name|schema
 operator|.
-name|compositeTableMap
-operator|.
-name|get
+name|getTable
 argument_list|(
 name|name
+argument_list|,
+name|caseSensitive
 argument_list|)
 decl_stmt|;
 if|if
@@ -577,6 +577,8 @@ operator|.
 name|getSubSchema
 argument_list|(
 name|schemaName
+argument_list|,
+name|caseSensitive
 argument_list|)
 expr_stmt|;
 if|if

@@ -565,6 +565,8 @@ operator|.
 name|getSubSchema
 argument_list|(
 literal|"mat"
+argument_list|,
+literal|true
 argument_list|)
 decl_stmt|;
 if|if

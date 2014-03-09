@@ -16189,6 +16189,74 @@ name|sql1
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Tests using case-insensitive matching of table names. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testCaseInsensitiveTables
+parameter_list|()
+block|{
+specifier|final
+name|SqlTester
+name|tester1
+init|=
+name|tester
+operator|.
+name|withLex
+argument_list|(
+name|ConnectionConfig
+operator|.
+name|Lex
+operator|.
+name|SQL_SERVER
+argument_list|)
+decl_stmt|;
+name|tester1
+operator|.
+name|checkQuery
+argument_list|(
+literal|"select eMp.* from (select * from emp) as EmP"
+argument_list|)
+expr_stmt|;
+name|tester1
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"select ^eMp^.* from (select * from emp as EmP)"
+argument_list|,
+literal|"Unknown identifier 'eMp'"
+argument_list|)
+expr_stmt|;
+name|tester1
+operator|.
+name|checkQuery
+argument_list|(
+literal|"select eMp.* from (select * from emP) as EmP"
+argument_list|)
+expr_stmt|;
+name|tester1
+operator|.
+name|checkQuery
+argument_list|(
+literal|"select eMp.empNo from (select * from emP) as EmP"
+argument_list|)
+expr_stmt|;
+name|tester1
+operator|.
+name|checkQuery
+argument_list|(
+literal|"select empNo from (select Empno from emP) as EmP"
+argument_list|)
+expr_stmt|;
+name|tester1
+operator|.
+name|checkQuery
+argument_list|(
+literal|"select empNo from (select Empno from emP)"
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public
