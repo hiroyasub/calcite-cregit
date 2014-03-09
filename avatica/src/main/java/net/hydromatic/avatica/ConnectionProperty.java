@@ -80,7 +80,7 @@ argument_list|,
 literal|"ORACLE"
 argument_list|)
 block|,
-comment|/** How identifiers are quoted.    *  Default value is based on lex. */
+comment|/** How identifiers are quoted.    *  If not specified, value from {@link #LEX} is used. */
 name|QUOTING
 argument_list|(
 literal|"quoting"
@@ -92,7 +92,7 @@ argument_list|,
 literal|null
 argument_list|)
 block|,
-comment|/** How identifiers are stored if they are quoted.    *  Default value is based on lex. */
+comment|/** How identifiers are stored if they are quoted.    *  If not specified, value from {@link #LEX} is used. */
 name|QUOTED_CASING
 argument_list|(
 literal|"quotedCasing"
@@ -104,7 +104,7 @@ argument_list|,
 literal|null
 argument_list|)
 block|,
-comment|/** How identifiers are stored if they are not quoted.    *  Default value is based on lex. */
+comment|/** How identifiers are stored if they are not quoted.    *  If not specified, value from {@link #LEX} is used. */
 name|UNQUOTED_CASING
 argument_list|(
 literal|"unquotedCasing"
@@ -116,7 +116,7 @@ argument_list|,
 literal|null
 argument_list|)
 block|,
-comment|/** Whether identifiers are matched case-sensitively.    *  Default value is based on lex. */
+comment|/** Whether identifiers are matched case-sensitively.    *  If not specified, value from {@link #LEX} is used. */
 name|CASE_SENSITIVE
 argument_list|(
 literal|"caseSensitive"
@@ -611,6 +611,7 @@ condition|)
 block|{
 comment|// For now, don't throw. It messes up sub-projects.
 comment|//throw new RuntimeException("Unknown property '" + name + "'");
+continue|continue;
 block|}
 name|map
 operator|.

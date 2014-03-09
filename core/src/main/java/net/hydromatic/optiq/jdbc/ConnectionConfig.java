@@ -92,6 +92,7 @@ comment|/** Named, built-in lexical policy. A lexical policy describes how    * 
 enum|enum
 name|Lex
 block|{
+comment|/** Lexical policy similar to Oracle. The case of identifiers enclosed in      * double-quotes is preserved; unquoted identifiers are converted to      * upper-case; after which, identifiers are matched case-sensitively. */
 name|ORACLE
 argument_list|(
 name|Quoting
@@ -109,6 +110,7 @@ argument_list|,
 literal|true
 argument_list|)
 block|,
+comment|/** Lexical policy similar to MySQL. (To be precise: MySQL on Windows;      * MySQL on Linux uses case-sensitive matching, like the Linux file system.)      * The case of identifiers is preserved whether or not they quoted;      * after which, identifiers are matched case-insensitively.      * Back-ticks allow identifiers to contain non-alphanumeric characters. */
 name|MYSQL
 argument_list|(
 name|Quoting
@@ -126,6 +128,7 @@ argument_list|,
 literal|false
 argument_list|)
 block|,
+comment|/** Lexical policy similar to Microsoft SQL Server.      * The case of identifiers is preserved whether or not they are quoted;      * after which, identifiers are matched case-insensitively.      * Brackets allow identifiers to contain non-alphanumeric characters. */
 name|SQL_SERVER
 argument_list|(
 name|Quoting
@@ -143,6 +146,7 @@ argument_list|,
 literal|false
 argument_list|)
 block|,
+comment|/** Lexical policy similar to Java.      * The case of identifiers is preserved whether or not they are quoted;      * after which, identifiers are matched case-sensitively.      * Unlike Java, back-ticks allow identifiers to contain non-alphanumeric      * characters. */
 name|JAVA
 argument_list|(
 name|Quoting
