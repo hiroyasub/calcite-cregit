@@ -85,6 +85,36 @@ name|java
 operator|.
 name|util
 operator|.
+name|ArrayList
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Arrays
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
 name|Properties
 import|;
 end_import
@@ -394,8 +424,6 @@ argument_list|,
 literal|"explain plan for select * from EMPS"
 argument_list|,
 literal|"PLAN=EnumerableTableAccessRel(table=[[SALES, EMPS]])\n"
-operator|+
-literal|"\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -415,8 +443,6 @@ argument_list|,
 literal|"explain plan for select * from EMPS"
 argument_list|,
 literal|"PLAN=CsvTableScan(table=[[SALES, EMPS]], fields=[[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]])\n"
-operator|+
-literal|"\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -436,8 +462,6 @@ argument_list|,
 literal|"explain plan for select name, empno from EMPS"
 argument_list|,
 literal|"PLAN=CsvTableScan(table=[[SALES, EMPS]], fields=[[1, 0]])\n"
-operator|+
-literal|"\n"
 argument_list|)
 expr_stmt|;
 comment|// make sure that it works...
@@ -447,15 +471,15 @@ literal|"smart"
 argument_list|,
 literal|"select name, empno from EMPS"
 argument_list|,
-literal|"NAME=Fred; EMPNO=100\n"
-operator|+
-literal|"NAME=Eric; EMPNO=110\n"
-operator|+
-literal|"NAME=John; EMPNO=110\n"
-operator|+
-literal|"NAME=Wilma; EMPNO=120\n"
-operator|+
-literal|"NAME=Alice; EMPNO=130\n"
+literal|"NAME=Fred; EMPNO=100"
+argument_list|,
+literal|"NAME=Eric; EMPNO=110"
+argument_list|,
+literal|"NAME=John; EMPNO=110"
+argument_list|,
+literal|"NAME=Wilma; EMPNO=120"
+argument_list|,
+literal|"NAME=Alice; EMPNO=130"
 argument_list|)
 expr_stmt|;
 block|}
@@ -478,6 +502,22 @@ name|sql
 argument_list|,
 name|model
 argument_list|,
+name|output
+argument_list|()
+argument_list|)
+expr_stmt|;
+block|}
+specifier|private
+name|Function1
+argument_list|<
+name|ResultSet
+argument_list|,
+name|Void
+argument_list|>
+name|output
+parameter_list|()
+block|{
+return|return
 operator|new
 name|Function1
 argument_list|<
@@ -526,8 +566,7 @@ literal|null
 return|;
 block|}
 block|}
-argument_list|)
-expr_stmt|;
+return|;
 block|}
 specifier|private
 name|void
@@ -541,6 +580,7 @@ name|sql
 parameter_list|,
 specifier|final
 name|String
+modifier|...
 name|expected
 parameter_list|)
 throws|throws
@@ -552,6 +592,31 @@ name|sql
 argument_list|,
 name|model
 argument_list|,
+name|expect
+argument_list|(
+name|expected
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Returns a function that checks the contents of a result set against an    * expected string. */
+specifier|private
+specifier|static
+name|Function1
+argument_list|<
+name|ResultSet
+argument_list|,
+name|Void
+argument_list|>
+name|expect
+parameter_list|(
+specifier|final
+name|String
+modifier|...
+name|expected
+parameter_list|)
+block|{
+return|return
 operator|new
 name|Function1
 argument_list|<
@@ -571,23 +636,41 @@ parameter_list|)
 block|{
 try|try
 block|{
+specifier|final
+name|List
+argument_list|<
 name|String
-name|actual
+argument_list|>
+name|lines
 init|=
+operator|new
+name|ArrayList
+argument_list|<
+name|String
+argument_list|>
+argument_list|()
+decl_stmt|;
 name|CsvTest
 operator|.
-name|toString
+name|collect
 argument_list|(
+name|lines
+argument_list|,
 name|resultSet
 argument_list|)
-decl_stmt|;
+expr_stmt|;
 name|Assert
 operator|.
 name|assertEquals
 argument_list|(
+name|Arrays
+operator|.
+name|asList
+argument_list|(
 name|expected
+argument_list|)
 argument_list|,
-name|actual
+name|lines
 argument_list|)
 expr_stmt|;
 block|}
@@ -610,8 +693,7 @@ literal|null
 return|;
 block|}
 block|}
-argument_list|)
-expr_stmt|;
+return|;
 block|}
 specifier|private
 name|void
@@ -716,15 +798,22 @@ block|}
 block|}
 specifier|private
 specifier|static
-name|String
-name|toString
+name|void
+name|collect
 parameter_list|(
+name|List
+argument_list|<
+name|String
+argument_list|>
+name|result
+parameter_list|,
 name|ResultSet
 name|resultSet
 parameter_list|)
 throws|throws
 name|SQLException
 block|{
+specifier|final
 name|StringBuilder
 name|buf
 init|=
@@ -740,6 +829,13 @@ name|next
 argument_list|()
 condition|)
 block|{
+name|buf
+operator|.
+name|setLength
+argument_list|(
+literal|0
+argument_list|)
+expr_stmt|;
 name|int
 name|n
 init|=
@@ -811,20 +907,17 @@ operator|=
 literal|"; "
 expr_stmt|;
 block|}
-name|buf
+name|result
 operator|.
-name|append
+name|add
 argument_list|(
-literal|"\n"
-argument_list|)
-expr_stmt|;
-block|}
-return|return
 name|buf
 operator|.
 name|toString
 argument_list|()
-return|;
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 specifier|private
 name|void
@@ -930,8 +1023,40 @@ argument_list|(
 literal|"smart"
 argument_list|,
 literal|"select * from emps join depts on emps.name = depts.name"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWackyColumns
+parameter_list|()
+throws|throws
+name|SQLException
+block|{
+name|checkSql
+argument_list|(
+literal|"select * from wacky_column_names where false"
 argument_list|,
-literal|""
+literal|"bug"
+argument_list|,
+name|expect
+argument_list|()
+argument_list|)
+expr_stmt|;
+name|checkSql
+argument_list|(
+literal|"select \"joined at\", \"naME\" from wacky_column_names where \"2gender\" = 'F'"
+argument_list|,
+literal|"bug"
+argument_list|,
+name|expect
+argument_list|(
+literal|"joined at=2005-09-07; naME=Wilma"
+argument_list|,
+literal|"joined at=2007-01-01; naME=Alice"
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -950,7 +1075,7 @@ literal|"smart"
 argument_list|,
 literal|"select empno, slacker from emps where slacker"
 argument_list|,
-literal|"EMPNO=100; SLACKER=true\n"
+literal|"EMPNO=100; SLACKER=true"
 argument_list|)
 expr_stmt|;
 block|}
