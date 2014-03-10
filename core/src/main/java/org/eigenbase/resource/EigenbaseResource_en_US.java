@@ -27,18 +27,6 @@ name|IOException
 import|;
 end_import
 
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
-name|resgen
-operator|.
-name|*
-import|;
-end_import
-
 begin_comment
 comment|/**  * This class was generated  * by class org.eigenbase.resgen.ResourceGen  * from /Users/jhyde/open1/dynamodb/eigenbase/src/org/eigenbase/resource/EigenbaseResource.xml  * on Fri Mar 23 14:27:41 PDT 2012.  * It contains a list of messages, and methods to  * retrieve and format those messages.  */
 end_comment
