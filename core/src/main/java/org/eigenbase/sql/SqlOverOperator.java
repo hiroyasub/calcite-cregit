@@ -31,18 +31,6 @@ name|org
 operator|.
 name|eigenbase
 operator|.
-name|resource
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
 name|sql
 operator|.
 name|type
@@ -88,6 +76,20 @@ operator|.
 name|linq4j
 operator|.
 name|Ord
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|eigenbase
+operator|.
+name|util
+operator|.
+name|Static
+operator|.
+name|RESOURCE
 import|;
 end_import
 
@@ -194,14 +196,9 @@ name|newValidationError
 argument_list|(
 name|aggCall
 argument_list|,
-name|EigenbaseResource
+name|RESOURCE
 operator|.
-name|instance
-argument_list|()
-operator|.
-name|OverNonAggregate
-operator|.
-name|ex
+name|overNonAggregate
 argument_list|()
 argument_list|)
 throw|;

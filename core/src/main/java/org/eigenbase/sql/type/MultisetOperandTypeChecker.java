@@ -43,21 +43,23 @@ name|org
 operator|.
 name|eigenbase
 operator|.
-name|resource
+name|sql
 operator|.
 name|*
 import|;
 end_import
 
 begin_import
-import|import
+import|import static
 name|org
 operator|.
 name|eigenbase
 operator|.
-name|sql
+name|util
 operator|.
-name|*
+name|Static
+operator|.
+name|RESOURCE
 import|;
 end_import
 
@@ -231,14 +233,9 @@ name|callBinding
 operator|.
 name|newError
 argument_list|(
-name|EigenbaseResource
+name|RESOURCE
 operator|.
-name|instance
-argument_list|()
-operator|.
-name|TypeNotComparable
-operator|.
-name|ex
+name|typeNotComparable
 argument_list|(
 name|op0
 operator|.

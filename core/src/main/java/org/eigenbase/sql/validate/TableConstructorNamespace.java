@@ -39,6 +39,20 @@ name|*
 import|;
 end_import
 
+begin_import
+import|import static
+name|org
+operator|.
+name|eigenbase
+operator|.
+name|util
+operator|.
+name|Static
+operator|.
+name|RESOURCE
+import|;
+end_import
+
 begin_comment
 comment|/**  * Namespace for a table constructor<code>VALUES (expr, expr, ...)</code>.  */
 end_comment
@@ -183,13 +197,10 @@ name|newValidationError
 argument_list|(
 name|values
 argument_list|,
-operator|new
-name|SqlValidatorException
-argument_list|(
-literal|"Incompatible types"
-argument_list|,
-literal|null
-argument_list|)
+name|RESOURCE
+operator|.
+name|incompatibleTypes
+argument_list|()
 argument_list|)
 throw|;
 block|}

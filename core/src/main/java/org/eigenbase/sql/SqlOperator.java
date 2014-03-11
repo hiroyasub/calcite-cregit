@@ -115,6 +115,20 @@ name|*
 import|;
 end_import
 
+begin_import
+import|import static
+name|org
+operator|.
+name|eigenbase
+operator|.
+name|util
+operator|.
+name|Static
+operator|.
+name|RESOURCE
+import|;
+end_import
+
 begin_comment
 comment|/**  * A<code>SqlOperator</code> is a type of node in a SQL parse tree (it is NOT a  * node in a SQL parse tree). It includes functions, operators such as '=', and  * syntactic constructs such as 'case' statements. Operators may represent  * query-level expressions (e.g. {@link SqlSelectOperator} or row-level  * expressions (e.g. {@link org.eigenbase.sql.fun.SqlBetweenOperator}.  *  *<p>Operators have<em>formal operands</em>, meaning ordered (and optionally  * named) placeholders for the values they operate on. For example, the division  * operator takes two operands; the first is the numerator and the second is the  * denominator. In the context of subclass {@link SqlFunction}, formal operands  * are referred to as<em>parameters</em>.  *  *<p>When an operator is instantiated via a {@link SqlCall}, it is supplied  * with<em>actual operands</em>. For example, in the expression<code>3 /  * 5</code>, the literal expression<code>3</code> is the actual operand  * corresponding to the numerator, and<code>5</code> is the actual operand  * corresponding to the denominator. In the context of SqlFunction, actual  * operands are referred to as<em>arguments</em>  *  *<p>In many cases, the formal/actual distinction is clear from context, in  * which case we drop these qualifiers.  */
 end_comment
@@ -1285,14 +1299,9 @@ name|newValidationError
 argument_list|(
 name|call
 argument_list|,
-name|EigenbaseResource
+name|RESOURCE
 operator|.
-name|instance
-argument_list|()
-operator|.
-name|InvalidArgCount
-operator|.
-name|ex
+name|invalidArgCount
 argument_list|(
 name|call
 operator|.
@@ -1319,14 +1328,9 @@ name|newValidationError
 argument_list|(
 name|call
 argument_list|,
-name|EigenbaseResource
+name|RESOURCE
 operator|.
-name|instance
-argument_list|()
-operator|.
-name|WrongNumOfArguments
-operator|.
-name|ex
+name|wrongNumOfArguments
 argument_list|()
 argument_list|)
 throw|;

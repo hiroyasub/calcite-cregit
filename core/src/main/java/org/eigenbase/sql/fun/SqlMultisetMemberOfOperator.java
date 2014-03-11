@@ -33,18 +33,6 @@ name|org
 operator|.
 name|eigenbase
 operator|.
-name|resource
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
 name|sql
 operator|.
 name|*
@@ -62,6 +50,20 @@ operator|.
 name|type
 operator|.
 name|*
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|eigenbase
+operator|.
+name|util
+operator|.
+name|Static
+operator|.
+name|RESOURCE
 import|;
 end_import
 
@@ -233,14 +235,9 @@ name|callBinding
 operator|.
 name|newValidationError
 argument_list|(
-name|EigenbaseResource
+name|RESOURCE
 operator|.
-name|instance
-argument_list|()
-operator|.
-name|TypeNotComparableNear
-operator|.
-name|ex
+name|typeNotComparableNear
 argument_list|(
 name|t0
 operator|.

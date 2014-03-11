@@ -43,21 +43,23 @@ name|org
 operator|.
 name|eigenbase
 operator|.
-name|resource
+name|sql
 operator|.
 name|*
 import|;
 end_import
 
 begin_import
-import|import
+import|import static
 name|org
 operator|.
 name|eigenbase
 operator|.
-name|sql
+name|util
 operator|.
-name|*
+name|Static
+operator|.
+name|RESOURCE
 import|;
 end_import
 
@@ -274,14 +276,9 @@ name|newValidationError
 argument_list|(
 name|ctx
 argument_list|,
-name|EigenbaseResource
+name|RESOURCE
 operator|.
-name|instance
-argument_list|()
-operator|.
-name|ColumnNotFound
-operator|.
-name|ex
+name|columnNotFound
 argument_list|(
 name|columnName
 argument_list|)

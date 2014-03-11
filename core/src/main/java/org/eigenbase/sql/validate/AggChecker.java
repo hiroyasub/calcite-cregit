@@ -31,18 +31,6 @@ name|org
 operator|.
 name|eigenbase
 operator|.
-name|resource
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
 name|sql
 operator|.
 name|*
@@ -60,6 +48,20 @@ operator|.
 name|util
 operator|.
 name|*
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|eigenbase
+operator|.
+name|util
+operator|.
+name|Static
+operator|.
+name|RESOURCE
 import|;
 end_import
 
@@ -260,7 +262,7 @@ name|this
 argument_list|)
 return|;
 block|}
-comment|// Didn't find the identifer in the group-by list as is, now find
+comment|// Didn't find the identifier in the group-by list as is, now find
 comment|// it fully-qualified.
 comment|// TODO: It would be better if we always compared fully-qualified
 comment|// to fully-qualified.
@@ -318,26 +320,16 @@ name|originalExpr
 argument_list|,
 name|distinct
 condition|?
-name|EigenbaseResource
+name|RESOURCE
 operator|.
-name|instance
-argument_list|()
-operator|.
-name|NotSelectDistinctExpr
-operator|.
-name|ex
+name|notSelectDistinctExpr
 argument_list|(
 name|exprString
 argument_list|)
 else|:
-name|EigenbaseResource
+name|RESOURCE
 operator|.
-name|instance
-argument_list|()
-operator|.
-name|NotGroupExpr
-operator|.
-name|ex
+name|notGroupExpr
 argument_list|(
 name|exprString
 argument_list|)
@@ -355,15 +347,6 @@ block|{
 if|if
 condition|(
 name|call
-operator|instanceof
-name|SqlCall
-operator|&&
-operator|(
-operator|(
-name|SqlCall
-operator|)
-name|call
-operator|)
 operator|.
 name|getOperator
 argument_list|()
@@ -377,8 +360,7 @@ condition|(
 name|distinct
 condition|)
 block|{
-comment|// Cannot use agg fun in ORDER BY clause if have SELECT
-comment|// DISTINCT.
+comment|// Cannot use agg fun in ORDER BY clause if have SELECT DISTINCT.
 name|SqlNode
 name|originalExpr
 init|=
@@ -405,14 +387,9 @@ name|newValidationError
 argument_list|(
 name|call
 argument_list|,
-name|EigenbaseResource
+name|RESOURCE
 operator|.
-name|instance
-argument_list|()
-operator|.
-name|NotSelectDistinctExpr
-operator|.
-name|ex
+name|notSelectDistinctExpr
 argument_list|(
 name|exprString
 argument_list|)

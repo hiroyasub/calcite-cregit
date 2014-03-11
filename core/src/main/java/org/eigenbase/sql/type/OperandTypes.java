@@ -43,18 +43,6 @@ name|org
 operator|.
 name|eigenbase
 operator|.
-name|resource
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
 name|sql
 operator|.
 name|*
@@ -72,6 +60,20 @@ operator|.
 name|collect
 operator|.
 name|ImmutableList
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|eigenbase
+operator|.
+name|util
+operator|.
+name|Static
+operator|.
+name|RESOURCE
 import|;
 end_import
 
@@ -661,14 +663,9 @@ name|callBinding
 operator|.
 name|newError
 argument_list|(
-name|EigenbaseResource
+name|RESOURCE
 operator|.
-name|instance
-argument_list|()
-operator|.
-name|ArgumentMustBePositiveInteger
-operator|.
-name|ex
+name|argumentMustBePositiveInteger
 argument_list|(
 name|callBinding
 operator|.

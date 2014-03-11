@@ -79,26 +79,28 @@ name|org
 operator|.
 name|eigenbase
 operator|.
-name|resource
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
 name|util
 operator|.
 name|*
 import|;
 end_import
 
+begin_import
+import|import static
+name|org
+operator|.
+name|eigenbase
+operator|.
+name|util
+operator|.
+name|Static
+operator|.
+name|RESOURCE
+import|;
+end_import
+
 begin_comment
-comment|/**  * AbstractRelOptPlanner is an abstract base for implementations of the {@link  * RelOptPlanner} interface.  */
+comment|/**  * Abstract base for implementations of the {@link RelOptPlanner} interface.  */
 end_comment
 
 begin_class
@@ -258,12 +260,10 @@ argument_list|()
 condition|)
 block|{
 throw|throw
-name|EigenbaseResource
+name|RESOURCE
 operator|.
-name|instance
+name|preparationAborted
 argument_list|()
-operator|.
-name|PreparationAborted
 operator|.
 name|ex
 argument_list|()
@@ -296,14 +296,13 @@ operator|!=
 literal|null
 assert|;
 assert|assert
+operator|!
 name|description
 operator|.
-name|indexOf
+name|contains
 argument_list|(
 literal|"$"
 argument_list|)
-operator|<
-literal|0
 operator|:
 literal|"Rule's description should not contain '$': "
 operator|+
@@ -458,18 +457,11 @@ name|RelOptRule
 name|rule
 parameter_list|)
 block|{
-if|if
-condition|(
+return|return
 name|ruleDescExclusionFilter
-operator|==
+operator|!=
 literal|null
-condition|)
-block|{
-return|return
-literal|false
-return|;
-block|}
-return|return
+operator|&&
 name|ruleDescExclusionFilter
 operator|.
 name|matcher

@@ -75,35 +75,9 @@ name|org
 operator|.
 name|eigenbase
 operator|.
-name|resource
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
 name|sql
 operator|.
 name|*
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
-name|sql
-operator|.
-name|validate
-operator|.
-name|SqlValidatorException
 import|;
 end_import
 
@@ -140,6 +114,20 @@ operator|.
 name|avatica
 operator|.
 name|Casing
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|eigenbase
+operator|.
+name|util
+operator|.
+name|Static
+operator|.
+name|RESOURCE
 import|;
 end_import
 
@@ -510,6 +498,11 @@ operator|.
 name|evaluateIntervalLiteral
 argument_list|(
 name|literal
+argument_list|,
+name|intervalQualifier
+operator|.
+name|getParserPosition
+argument_list|()
 argument_list|)
 expr_stmt|;
 assert|assert
@@ -520,7 +513,7 @@ assert|;
 block|}
 catch|catch
 parameter_list|(
-name|SqlValidatorException
+name|EigenbaseContextException
 name|e
 parameter_list|)
 block|{
@@ -717,6 +710,11 @@ operator|.
 name|evaluateIntervalLiteral
 argument_list|(
 name|literal
+argument_list|,
+name|intervalQualifier
+operator|.
+name|getParserPosition
+argument_list|()
 argument_list|)
 expr_stmt|;
 assert|assert
@@ -727,7 +725,7 @@ assert|;
 block|}
 catch|catch
 parameter_list|(
-name|SqlValidatorException
+name|EigenbaseContextException
 name|e
 parameter_list|)
 block|{
@@ -2029,7 +2027,7 @@ return|return
 literal|null
 return|;
 block|}
-comment|/**    * Extracts the values from a collation name.    *    *<p>Collation names are on the form<i>charset$locale$strength</i>.    *    * @param in The collation name    * @return A link {@link ParsedCollation}    */
+comment|/**    * Extracts the values from a collation name.    *    *<p>Collation names are on the form<i>charset$locale$strength</i>.    *    * @param in The collation name    * @return A {@link ParsedCollation}    */
 specifier|public
 specifier|static
 name|ParsedCollation
@@ -2206,23 +2204,16 @@ expr_stmt|;
 block|}
 else|else
 block|{
-comment|// FIXME jvs 28-Aug-2004:  i18n
 throw|throw
-name|EigenbaseResource
+name|RESOURCE
 operator|.
-name|instance
-argument_list|()
-operator|.
-name|ParserError
+name|illegalLocaleFormat
+argument_list|(
+name|localeStr
+argument_list|)
 operator|.
 name|ex
-argument_list|(
-literal|"Locale '"
-operator|+
-name|localeStr
-operator|+
-literal|"' in an illegal format"
-argument_list|)
+argument_list|()
 throw|;
 block|}
 return|return
@@ -3452,17 +3443,15 @@ literal|1
 condition|)
 block|{
 throw|throw
-name|EigenbaseResource
+name|RESOURCE
 operator|.
-name|instance
-argument_list|()
-operator|.
-name|UnicodeEscapeCharLength
-operator|.
-name|ex
+name|unicodeEscapeCharLength
 argument_list|(
 name|s
 argument_list|)
+operator|.
+name|ex
+argument_list|()
 throw|;
 block|}
 name|char
@@ -3533,17 +3522,15 @@ operator|)
 condition|)
 block|{
 throw|throw
-name|EigenbaseResource
+name|RESOURCE
 operator|.
-name|instance
-argument_list|()
-operator|.
-name|UnicodeEscapeCharIllegal
-operator|.
-name|ex
+name|unicodeEscapeCharIllegal
 argument_list|(
 name|s
 argument_list|)
+operator|.
+name|ex
+argument_list|()
 throw|;
 block|}
 return|return

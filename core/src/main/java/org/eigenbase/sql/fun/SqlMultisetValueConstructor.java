@@ -43,18 +43,6 @@ name|org
 operator|.
 name|eigenbase
 operator|.
-name|resource
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
 name|sql
 operator|.
 name|*
@@ -76,16 +64,16 @@ import|;
 end_import
 
 begin_import
-import|import
+import|import static
 name|org
 operator|.
 name|eigenbase
 operator|.
-name|sql
+name|util
 operator|.
-name|validate
+name|Static
 operator|.
-name|SqlValidatorException
+name|RESOURCE
 import|;
 end_import
 
@@ -278,13 +266,10 @@ name|callBinding
 operator|.
 name|newValidationError
 argument_list|(
-operator|new
-name|SqlValidatorException
-argument_list|(
-literal|"Require at least 1 argument"
-argument_list|,
-literal|null
-argument_list|)
+name|RESOURCE
+operator|.
+name|requireAtLeastOneArg
+argument_list|()
 argument_list|)
 throw|;
 block|}
@@ -319,14 +304,9 @@ name|callBinding
 operator|.
 name|newValidationError
 argument_list|(
-name|EigenbaseResource
+name|RESOURCE
 operator|.
-name|instance
-argument_list|()
-operator|.
-name|NeedSameTypeParameter
-operator|.
-name|ex
+name|needSameTypeParameter
 argument_list|()
 argument_list|)
 throw|;

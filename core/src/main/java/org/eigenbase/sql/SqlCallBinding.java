@@ -43,7 +43,7 @@ name|eigenbase
 operator|.
 name|resource
 operator|.
-name|*
+name|Resources
 import|;
 end_import
 
@@ -84,6 +84,20 @@ operator|.
 name|util
 operator|.
 name|*
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|eigenbase
+operator|.
+name|util
+operator|.
+name|Static
+operator|.
+name|RESOURCE
 import|;
 end_import
 
@@ -603,7 +617,12 @@ specifier|public
 name|EigenbaseException
 name|newError
 parameter_list|(
+name|Resources
+operator|.
+name|ExInst
+argument_list|<
 name|SqlValidatorException
+argument_list|>
 name|e
 parameter_list|)
 block|{
@@ -631,14 +650,9 @@ name|newValidationError
 argument_list|(
 name|call
 argument_list|,
-name|EigenbaseResource
+name|RESOURCE
 operator|.
-name|instance
-argument_list|()
-operator|.
-name|CanNotApplyOp2Type
-operator|.
-name|ex
+name|canNotApplyOp2Type
 argument_list|(
 name|getOperator
 argument_list|()
@@ -669,7 +683,12 @@ specifier|public
 name|EigenbaseException
 name|newValidationError
 parameter_list|(
+name|Resources
+operator|.
+name|ExInst
+argument_list|<
 name|SqlValidatorException
+argument_list|>
 name|ex
 parameter_list|)
 block|{

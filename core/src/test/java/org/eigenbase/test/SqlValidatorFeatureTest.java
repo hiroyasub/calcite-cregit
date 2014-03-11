@@ -127,6 +127,20 @@ name|Test
 import|;
 end_import
 
+begin_import
+import|import static
+name|org
+operator|.
+name|eigenbase
+operator|.
+name|util
+operator|.
+name|Static
+operator|.
+name|RESOURCE
+import|;
+end_import
+
 begin_comment
 comment|/**  * SqlValidatorFeatureTest verifies that features can be independently enabled  * or disabled.  */
 end_comment
@@ -149,7 +163,9 @@ literal|"feature_disabled"
 decl_stmt|;
 comment|//~ Instance fields --------------------------------------------------------
 specifier|private
-name|ResourceDefinition
+name|Resources
+operator|.
+name|Feature
 name|disabledFeature
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
@@ -190,12 +206,10 @@ name|checkFeature
 argument_list|(
 literal|"select ^distinct^ name from dept"
 argument_list|,
-name|EigenbaseResource
+name|RESOURCE
 operator|.
-name|instance
+name|sQLFeature_E051_01
 argument_list|()
-operator|.
-name|SQLFeature_E051_01
 argument_list|)
 expr_stmt|;
 block|}
@@ -210,12 +224,10 @@ name|checkFeature
 argument_list|(
 literal|"select name from dept order by ^name desc^"
 argument_list|,
-name|EigenbaseResource
+name|RESOURCE
 operator|.
-name|instance
+name|sQLConformance_OrderByDesc
 argument_list|()
-operator|.
-name|SQLConformance_OrderByDesc
 argument_list|)
 expr_stmt|;
 block|}
@@ -232,12 +244,10 @@ name|checkFeature
 argument_list|(
 literal|"^select name from dept intersect select name from dept^"
 argument_list|,
-name|EigenbaseResource
+name|RESOURCE
 operator|.
-name|instance
+name|sQLFeature_F302
 argument_list|()
-operator|.
-name|SQLFeature_F302
 argument_list|)
 expr_stmt|;
 block|}
@@ -252,12 +262,10 @@ name|checkFeature
 argument_list|(
 literal|"^select name from dept except select name from dept^"
 argument_list|,
-name|EigenbaseResource
+name|RESOURCE
 operator|.
-name|instance
+name|sQLFeature_E071_03
 argument_list|()
-operator|.
-name|SQLFeature_E071_03
 argument_list|)
 expr_stmt|;
 block|}
@@ -272,24 +280,20 @@ name|checkFeature
 argument_list|(
 literal|"values ^multiset[1]^"
 argument_list|,
-name|EigenbaseResource
+name|RESOURCE
 operator|.
-name|instance
+name|sQLFeature_S271
 argument_list|()
-operator|.
-name|SQLFeature_S271
 argument_list|)
 expr_stmt|;
 name|checkFeature
 argument_list|(
 literal|"values ^multiset(select * from dept)^"
 argument_list|,
-name|EigenbaseResource
+name|RESOURCE
 operator|.
-name|instance
+name|sQLFeature_S271
 argument_list|()
-operator|.
-name|SQLFeature_S271
 argument_list|)
 expr_stmt|;
 block|}
@@ -304,24 +308,20 @@ name|checkFeature
 argument_list|(
 literal|"select name from ^dept tablesample bernoulli(50)^"
 argument_list|,
-name|EigenbaseResource
+name|RESOURCE
 operator|.
-name|instance
+name|sQLFeature_T613
 argument_list|()
-operator|.
-name|SQLFeature_T613
 argument_list|)
 expr_stmt|;
 name|checkFeature
 argument_list|(
 literal|"select name from ^dept tablesample substitute('sample_dept')^"
 argument_list|,
-name|EigenbaseResource
+name|RESOURCE
 operator|.
-name|instance
+name|sQLFeatureExt_T613_Substitution
 argument_list|()
-operator|.
-name|SQLFeatureExt_T613_Substitution
 argument_list|)
 expr_stmt|;
 block|}
@@ -332,7 +332,9 @@ parameter_list|(
 name|String
 name|sql
 parameter_list|,
-name|ResourceDefinition
+name|Resources
+operator|.
+name|Feature
 name|feature
 parameter_list|)
 block|{
@@ -487,7 +489,9 @@ specifier|protected
 name|void
 name|validateFeature
 parameter_list|(
-name|ResourceDefinition
+name|Resources
+operator|.
+name|Feature
 name|feature
 parameter_list|,
 name|SqlParserPos
@@ -497,8 +501,11 @@ block|{
 if|if
 condition|(
 name|feature
-operator|==
+operator|.
+name|equals
+argument_list|(
 name|disabledFeature
+argument_list|)
 condition|)
 block|{
 name|EigenbaseException

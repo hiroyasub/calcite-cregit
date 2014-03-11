@@ -51,18 +51,6 @@ name|org
 operator|.
 name|eigenbase
 operator|.
-name|resource
-operator|.
-name|EigenbaseResource
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
 name|sql
 operator|.
 name|parser
@@ -162,6 +150,20 @@ operator|.
 name|collect
 operator|.
 name|ImmutableMap
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|eigenbase
+operator|.
+name|util
+operator|.
+name|Static
+operator|.
+name|RESOURCE
 import|;
 end_import
 
@@ -1882,9 +1884,10 @@ name|value
 parameter_list|,
 name|TimeUnit
 name|unit
+parameter_list|,
+name|SqlParserPos
+name|pos
 parameter_list|)
-throws|throws
-name|SqlValidatorException
 block|{
 if|if
 condition|(
@@ -1900,6 +1903,8 @@ block|{
 throw|throw
 name|fieldExceedsPrecisionException
 argument_list|(
+name|pos
+argument_list|,
 name|sign
 argument_list|,
 name|value
@@ -2259,7 +2264,7 @@ return|return
 name|ret
 return|;
 block|}
-comment|/**    * Validates an INTERVAL literal against a YEAR interval qualifier.    *    * @throws SqlValidatorException if the interval value is illegal.    */
+comment|/**    * Validates an INTERVAL literal against a YEAR interval qualifier.    *    * @throws EigenbaseContextException if the interval value is illegal.    */
 specifier|private
 name|int
 index|[]
@@ -2273,9 +2278,10 @@ name|value
 parameter_list|,
 name|String
 name|originalValue
+parameter_list|,
+name|SqlParserPos
+name|pos
 parameter_list|)
-throws|throws
-name|SqlValidatorException
 block|{
 name|BigDecimal
 name|year
@@ -2329,8 +2335,10 @@ name|e
 parameter_list|)
 block|{
 throw|throw
-name|intervalidValueException
+name|invalidValueException
 argument_list|(
+name|pos
+argument_list|,
 name|originalValue
 argument_list|)
 throw|;
@@ -2345,6 +2353,8 @@ argument_list|,
 name|TimeUnit
 operator|.
 name|YEAR
+argument_list|,
+name|pos
 argument_list|)
 expr_stmt|;
 comment|// package values up for return
@@ -2362,14 +2372,16 @@ block|}
 else|else
 block|{
 throw|throw
-name|intervalidValueException
+name|invalidValueException
 argument_list|(
+name|pos
+argument_list|,
 name|originalValue
 argument_list|)
 throw|;
 block|}
 block|}
-comment|/**    * Validates an INTERVAL literal against a YEAR TO MONTH interval qualifier.    *    * @throws SqlValidatorException if the interval value is illegal.    */
+comment|/**    * Validates an INTERVAL literal against a YEAR TO MONTH interval qualifier.    *    * @throws EigenbaseContextException if the interval value is illegal.    */
 specifier|private
 name|int
 index|[]
@@ -2383,9 +2395,10 @@ name|value
 parameter_list|,
 name|String
 name|originalValue
+parameter_list|,
+name|SqlParserPos
+name|pos
 parameter_list|)
-throws|throws
-name|SqlValidatorException
 block|{
 name|BigDecimal
 name|year
@@ -2451,8 +2464,10 @@ name|e
 parameter_list|)
 block|{
 throw|throw
-name|intervalidValueException
+name|invalidValueException
 argument_list|(
+name|pos
+argument_list|,
 name|originalValue
 argument_list|)
 throw|;
@@ -2467,6 +2482,8 @@ argument_list|,
 name|TimeUnit
 operator|.
 name|YEAR
+argument_list|,
+name|pos
 argument_list|)
 expr_stmt|;
 if|if
@@ -2485,8 +2502,10 @@ operator|)
 condition|)
 block|{
 throw|throw
-name|intervalidValueException
+name|invalidValueException
 argument_list|(
+name|pos
+argument_list|,
 name|originalValue
 argument_list|)
 throw|;
@@ -2506,14 +2525,16 @@ block|}
 else|else
 block|{
 throw|throw
-name|intervalidValueException
+name|invalidValueException
 argument_list|(
+name|pos
+argument_list|,
 name|originalValue
 argument_list|)
 throw|;
 block|}
 block|}
-comment|/**    * Validates an INTERVAL literal against a MONTH interval qualifier.    *    * @throws SqlValidatorException if the interval value is illegal.    */
+comment|/**    * Validates an INTERVAL literal against a MONTH interval qualifier.    *    * @throws EigenbaseContextException if the interval value is illegal.    */
 specifier|private
 name|int
 index|[]
@@ -2527,9 +2548,10 @@ name|value
 parameter_list|,
 name|String
 name|originalValue
+parameter_list|,
+name|SqlParserPos
+name|pos
 parameter_list|)
-throws|throws
-name|SqlValidatorException
 block|{
 name|BigDecimal
 name|month
@@ -2583,8 +2605,10 @@ name|e
 parameter_list|)
 block|{
 throw|throw
-name|intervalidValueException
+name|invalidValueException
 argument_list|(
+name|pos
+argument_list|,
 name|originalValue
 argument_list|)
 throw|;
@@ -2599,6 +2623,8 @@ argument_list|,
 name|TimeUnit
 operator|.
 name|MONTH
+argument_list|,
+name|pos
 argument_list|)
 expr_stmt|;
 comment|// package values up for return
@@ -2616,14 +2642,16 @@ block|}
 else|else
 block|{
 throw|throw
-name|intervalidValueException
+name|invalidValueException
 argument_list|(
+name|pos
+argument_list|,
 name|originalValue
 argument_list|)
 throw|;
 block|}
 block|}
-comment|/**    * Validates an INTERVAL literal against a DAY interval qualifier.    *    * @throws SqlValidatorException if the interval value is illegal.    */
+comment|/**    * Validates an INTERVAL literal against a DAY interval qualifier.    *    * @throws EigenbaseContextException if the interval value is illegal.    */
 specifier|private
 name|int
 index|[]
@@ -2637,9 +2665,10 @@ name|value
 parameter_list|,
 name|String
 name|originalValue
+parameter_list|,
+name|SqlParserPos
+name|pos
 parameter_list|)
-throws|throws
-name|SqlValidatorException
 block|{
 name|BigDecimal
 name|day
@@ -2693,8 +2722,10 @@ name|e
 parameter_list|)
 block|{
 throw|throw
-name|intervalidValueException
+name|invalidValueException
 argument_list|(
+name|pos
+argument_list|,
 name|originalValue
 argument_list|)
 throw|;
@@ -2709,6 +2740,8 @@ argument_list|,
 name|TimeUnit
 operator|.
 name|DAY
+argument_list|,
+name|pos
 argument_list|)
 expr_stmt|;
 comment|// package values up for return
@@ -2732,14 +2765,16 @@ block|}
 else|else
 block|{
 throw|throw
-name|intervalidValueException
+name|invalidValueException
 argument_list|(
+name|pos
+argument_list|,
 name|originalValue
 argument_list|)
 throw|;
 block|}
 block|}
-comment|/**    * Validates an INTERVAL literal against a DAY TO HOUR interval qualifier.    *    * @throws SqlValidatorException if the interval value is illegal.    */
+comment|/**    * Validates an INTERVAL literal against a DAY TO HOUR interval qualifier.    *    * @throws EigenbaseContextException if the interval value is illegal.    */
 specifier|private
 name|int
 index|[]
@@ -2753,9 +2788,10 @@ name|value
 parameter_list|,
 name|String
 name|originalValue
+parameter_list|,
+name|SqlParserPos
+name|pos
 parameter_list|)
-throws|throws
-name|SqlValidatorException
 block|{
 name|BigDecimal
 name|day
@@ -2821,8 +2857,10 @@ name|e
 parameter_list|)
 block|{
 throw|throw
-name|intervalidValueException
+name|invalidValueException
 argument_list|(
+name|pos
+argument_list|,
 name|originalValue
 argument_list|)
 throw|;
@@ -2837,6 +2875,8 @@ argument_list|,
 name|TimeUnit
 operator|.
 name|DAY
+argument_list|,
+name|pos
 argument_list|)
 expr_stmt|;
 if|if
@@ -2855,8 +2895,10 @@ operator|)
 condition|)
 block|{
 throw|throw
-name|intervalidValueException
+name|invalidValueException
 argument_list|(
+name|pos
+argument_list|,
 name|originalValue
 argument_list|)
 throw|;
@@ -2882,14 +2924,16 @@ block|}
 else|else
 block|{
 throw|throw
-name|intervalidValueException
+name|invalidValueException
 argument_list|(
+name|pos
+argument_list|,
 name|originalValue
 argument_list|)
 throw|;
 block|}
 block|}
-comment|/**    * Validates an INTERVAL literal against a DAY TO MINUTE interval qualifier.    *    * @throws SqlValidatorException if the interval value is illegal.    */
+comment|/**    * Validates an INTERVAL literal against a DAY TO MINUTE interval qualifier.    *    * @throws EigenbaseContextException if the interval value is illegal.    */
 specifier|private
 name|int
 index|[]
@@ -2903,9 +2947,10 @@ name|value
 parameter_list|,
 name|String
 name|originalValue
+parameter_list|,
+name|SqlParserPos
+name|pos
 parameter_list|)
-throws|throws
-name|SqlValidatorException
 block|{
 name|BigDecimal
 name|day
@@ -2983,8 +3028,10 @@ name|e
 parameter_list|)
 block|{
 throw|throw
-name|intervalidValueException
+name|invalidValueException
 argument_list|(
+name|pos
+argument_list|,
 name|originalValue
 argument_list|)
 throw|;
@@ -2999,6 +3046,8 @@ argument_list|,
 name|TimeUnit
 operator|.
 name|DAY
+argument_list|,
+name|pos
 argument_list|)
 expr_stmt|;
 if|if
@@ -3029,8 +3078,10 @@ operator|)
 condition|)
 block|{
 throw|throw
-name|intervalidValueException
+name|invalidValueException
 argument_list|(
+name|pos
+argument_list|,
 name|originalValue
 argument_list|)
 throw|;
@@ -3056,14 +3107,16 @@ block|}
 else|else
 block|{
 throw|throw
-name|intervalidValueException
+name|invalidValueException
 argument_list|(
+name|pos
+argument_list|,
 name|originalValue
 argument_list|)
 throw|;
 block|}
 block|}
-comment|/**    * Validates an INTERVAL literal against a DAY TO SECOND interval qualifier.    *    * @throws SqlValidatorException if the interval value is illegal.    */
+comment|/**    * Validates an INTERVAL literal against a DAY TO SECOND interval qualifier.    *    * @throws EigenbaseContextException if the interval value is illegal.    */
 specifier|private
 name|int
 index|[]
@@ -3077,9 +3130,10 @@ name|value
 parameter_list|,
 name|String
 name|originalValue
+parameter_list|,
+name|SqlParserPos
+name|pos
 parameter_list|)
-throws|throws
-name|SqlValidatorException
 block|{
 name|BigDecimal
 name|day
@@ -3220,8 +3274,10 @@ name|e
 parameter_list|)
 block|{
 throw|throw
-name|intervalidValueException
+name|invalidValueException
 argument_list|(
+name|pos
+argument_list|,
 name|originalValue
 argument_list|)
 throw|;
@@ -3261,6 +3317,8 @@ argument_list|,
 name|TimeUnit
 operator|.
 name|DAY
+argument_list|,
+name|pos
 argument_list|)
 expr_stmt|;
 if|if
@@ -3311,8 +3369,10 @@ operator|)
 condition|)
 block|{
 throw|throw
-name|intervalidValueException
+name|invalidValueException
 argument_list|(
+name|pos
+argument_list|,
 name|originalValue
 argument_list|)
 throw|;
@@ -3338,14 +3398,16 @@ block|}
 else|else
 block|{
 throw|throw
-name|intervalidValueException
+name|invalidValueException
 argument_list|(
+name|pos
+argument_list|,
 name|originalValue
 argument_list|)
 throw|;
 block|}
 block|}
-comment|/**    * Validates an INTERVAL literal against an HOUR interval qualifier.    *    * @throws SqlValidatorException if the interval value is illegal.    */
+comment|/**    * Validates an INTERVAL literal against an HOUR interval qualifier.    *    * @throws EigenbaseContextException if the interval value is illegal.    */
 specifier|private
 name|int
 index|[]
@@ -3359,9 +3421,10 @@ name|value
 parameter_list|,
 name|String
 name|originalValue
+parameter_list|,
+name|SqlParserPos
+name|pos
 parameter_list|)
-throws|throws
-name|SqlValidatorException
 block|{
 name|BigDecimal
 name|hour
@@ -3415,8 +3478,10 @@ name|e
 parameter_list|)
 block|{
 throw|throw
-name|intervalidValueException
+name|invalidValueException
 argument_list|(
+name|pos
+argument_list|,
 name|originalValue
 argument_list|)
 throw|;
@@ -3431,6 +3496,8 @@ argument_list|,
 name|TimeUnit
 operator|.
 name|HOUR
+argument_list|,
+name|pos
 argument_list|)
 expr_stmt|;
 comment|// package values up for return
@@ -3454,14 +3521,16 @@ block|}
 else|else
 block|{
 throw|throw
-name|intervalidValueException
+name|invalidValueException
 argument_list|(
+name|pos
+argument_list|,
 name|originalValue
 argument_list|)
 throw|;
 block|}
 block|}
-comment|/**    * Validates an INTERVAL literal against an HOUR TO MINUTE interval    * qualifier.    *    * @throws SqlValidatorException if the interval value is illegal.    */
+comment|/**    * Validates an INTERVAL literal against an HOUR TO MINUTE interval    * qualifier.    *    * @throws EigenbaseContextException if the interval value is illegal.    */
 specifier|private
 name|int
 index|[]
@@ -3475,9 +3544,10 @@ name|value
 parameter_list|,
 name|String
 name|originalValue
+parameter_list|,
+name|SqlParserPos
+name|pos
 parameter_list|)
-throws|throws
-name|SqlValidatorException
 block|{
 name|BigDecimal
 name|hour
@@ -3543,8 +3613,10 @@ name|e
 parameter_list|)
 block|{
 throw|throw
-name|intervalidValueException
+name|invalidValueException
 argument_list|(
+name|pos
+argument_list|,
 name|originalValue
 argument_list|)
 throw|;
@@ -3559,6 +3631,8 @@ argument_list|,
 name|TimeUnit
 operator|.
 name|HOUR
+argument_list|,
+name|pos
 argument_list|)
 expr_stmt|;
 if|if
@@ -3577,8 +3651,10 @@ operator|)
 condition|)
 block|{
 throw|throw
-name|intervalidValueException
+name|invalidValueException
 argument_list|(
+name|pos
+argument_list|,
 name|originalValue
 argument_list|)
 throw|;
@@ -3604,14 +3680,16 @@ block|}
 else|else
 block|{
 throw|throw
-name|intervalidValueException
+name|invalidValueException
 argument_list|(
+name|pos
+argument_list|,
 name|originalValue
 argument_list|)
 throw|;
 block|}
 block|}
-comment|/**    * Validates an INTERVAL literal against an HOUR TO SECOND interval    * qualifier.    *    * @throws SqlValidatorException if the interval value is illegal.    */
+comment|/**    * Validates an INTERVAL literal against an HOUR TO SECOND interval    * qualifier.    *    * @throws EigenbaseContextException if the interval value is illegal.    */
 specifier|private
 name|int
 index|[]
@@ -3625,9 +3703,10 @@ name|value
 parameter_list|,
 name|String
 name|originalValue
+parameter_list|,
+name|SqlParserPos
+name|pos
 parameter_list|)
-throws|throws
-name|SqlValidatorException
 block|{
 name|BigDecimal
 name|hour
@@ -3756,8 +3835,10 @@ name|e
 parameter_list|)
 block|{
 throw|throw
-name|intervalidValueException
+name|invalidValueException
 argument_list|(
+name|pos
+argument_list|,
 name|originalValue
 argument_list|)
 throw|;
@@ -3797,6 +3878,8 @@ argument_list|,
 name|TimeUnit
 operator|.
 name|HOUR
+argument_list|,
+name|pos
 argument_list|)
 expr_stmt|;
 if|if
@@ -3835,8 +3918,10 @@ operator|)
 condition|)
 block|{
 throw|throw
-name|intervalidValueException
+name|invalidValueException
 argument_list|(
+name|pos
+argument_list|,
 name|originalValue
 argument_list|)
 throw|;
@@ -3862,14 +3947,16 @@ block|}
 else|else
 block|{
 throw|throw
-name|intervalidValueException
+name|invalidValueException
 argument_list|(
+name|pos
+argument_list|,
 name|originalValue
 argument_list|)
 throw|;
 block|}
 block|}
-comment|/**    * Validates an INTERVAL literal against an MINUTE interval qualifier.    *    * @throws SqlValidatorException if the interval value is illegal.    */
+comment|/**    * Validates an INTERVAL literal against an MINUTE interval qualifier.    *    * @throws EigenbaseContextException if the interval value is illegal.    */
 specifier|private
 name|int
 index|[]
@@ -3883,9 +3970,10 @@ name|value
 parameter_list|,
 name|String
 name|originalValue
+parameter_list|,
+name|SqlParserPos
+name|pos
 parameter_list|)
-throws|throws
-name|SqlValidatorException
 block|{
 name|BigDecimal
 name|minute
@@ -3939,8 +4027,10 @@ name|e
 parameter_list|)
 block|{
 throw|throw
-name|intervalidValueException
+name|invalidValueException
 argument_list|(
+name|pos
+argument_list|,
 name|originalValue
 argument_list|)
 throw|;
@@ -3955,6 +4045,8 @@ argument_list|,
 name|TimeUnit
 operator|.
 name|MINUTE
+argument_list|,
+name|pos
 argument_list|)
 expr_stmt|;
 comment|// package values up for return
@@ -3978,14 +4070,16 @@ block|}
 else|else
 block|{
 throw|throw
-name|intervalidValueException
+name|invalidValueException
 argument_list|(
+name|pos
+argument_list|,
 name|originalValue
 argument_list|)
 throw|;
 block|}
 block|}
-comment|/**    * Validates an INTERVAL literal against an MINUTE TO SECOND interval    * qualifier.    *    * @throws SqlValidatorException if the interval value is illegal.    */
+comment|/**    * Validates an INTERVAL literal against an MINUTE TO SECOND interval    * qualifier.    *    * @throws EigenbaseContextException if the interval value is illegal.    */
 specifier|private
 name|int
 index|[]
@@ -3999,9 +4093,10 @@ name|value
 parameter_list|,
 name|String
 name|originalValue
+parameter_list|,
+name|SqlParserPos
+name|pos
 parameter_list|)
-throws|throws
-name|SqlValidatorException
 block|{
 name|BigDecimal
 name|minute
@@ -4118,8 +4213,10 @@ name|e
 parameter_list|)
 block|{
 throw|throw
-name|intervalidValueException
+name|invalidValueException
 argument_list|(
+name|pos
+argument_list|,
 name|originalValue
 argument_list|)
 throw|;
@@ -4159,6 +4256,8 @@ argument_list|,
 name|TimeUnit
 operator|.
 name|MINUTE
+argument_list|,
+name|pos
 argument_list|)
 expr_stmt|;
 if|if
@@ -4185,8 +4284,10 @@ operator|)
 condition|)
 block|{
 throw|throw
-name|intervalidValueException
+name|invalidValueException
 argument_list|(
+name|pos
+argument_list|,
 name|originalValue
 argument_list|)
 throw|;
@@ -4212,14 +4313,16 @@ block|}
 else|else
 block|{
 throw|throw
-name|intervalidValueException
+name|invalidValueException
 argument_list|(
+name|pos
+argument_list|,
 name|originalValue
 argument_list|)
 throw|;
 block|}
 block|}
-comment|/**    * Validates an INTERVAL literal against an SECOND interval qualifier.    *    * @throws SqlValidatorException if the interval value is illegal.    */
+comment|/**    * Validates an INTERVAL literal against an SECOND interval qualifier.    *    * @throws EigenbaseContextException if the interval value is illegal.    */
 specifier|private
 name|int
 index|[]
@@ -4233,9 +4336,10 @@ name|value
 parameter_list|,
 name|String
 name|originalValue
+parameter_list|,
+name|SqlParserPos
+name|pos
 parameter_list|)
-throws|throws
-name|SqlValidatorException
 block|{
 name|BigDecimal
 name|second
@@ -4340,8 +4444,10 @@ name|e
 parameter_list|)
 block|{
 throw|throw
-name|intervalidValueException
+name|invalidValueException
 argument_list|(
+name|pos
+argument_list|,
 name|originalValue
 argument_list|)
 throw|;
@@ -4381,6 +4487,8 @@ argument_list|,
 name|TimeUnit
 operator|.
 name|SECOND
+argument_list|,
+name|pos
 argument_list|)
 expr_stmt|;
 if|if
@@ -4395,8 +4503,10 @@ operator|)
 condition|)
 block|{
 throw|throw
-name|intervalidValueException
+name|invalidValueException
 argument_list|(
+name|pos
+argument_list|,
 name|originalValue
 argument_list|)
 throw|;
@@ -4422,14 +4532,16 @@ block|}
 else|else
 block|{
 throw|throw
-name|intervalidValueException
+name|invalidValueException
 argument_list|(
+name|pos
+argument_list|,
 name|originalValue
 argument_list|)
 throw|;
 block|}
 block|}
-comment|/**    * Validates an INTERVAL literal according to the rules specified by the    * interval qualifier. The assumption is made that the interval qualfier has    * been validated prior to calling this method. Evaluating against an    * invalid qualifier could lead to strange results.    *    * @return field values, never null    * @throws SqlValidatorException if the interval value is illegal    */
+comment|/**    * Validates an INTERVAL literal according to the rules specified by the    * interval qualifier. The assumption is made that the interval qualifier has    * been validated prior to calling this method. Evaluating against an    * invalid qualifier could lead to strange results.    *    * @return field values, never null    * @throws EigenbaseContextException if the interval value is illegal    */
 specifier|public
 name|int
 index|[]
@@ -4437,9 +4549,10 @@ name|evaluateIntervalLiteral
 parameter_list|(
 name|String
 name|value
+parameter_list|,
+name|SqlParserPos
+name|pos
 parameter_list|)
-throws|throws
-name|SqlValidatorException
 block|{
 comment|// save original value for if we have to throw
 specifier|final
@@ -4488,8 +4601,10 @@ argument_list|)
 condition|)
 block|{
 throw|throw
-name|intervalidValueException
+name|invalidValueException
 argument_list|(
+name|pos
+argument_list|,
 name|value0
 argument_list|)
 throw|;
@@ -4513,6 +4628,8 @@ argument_list|,
 name|value
 argument_list|,
 name|value0
+argument_list|,
+name|pos
 argument_list|)
 return|;
 case|case
@@ -4526,6 +4643,8 @@ argument_list|,
 name|value
 argument_list|,
 name|value0
+argument_list|,
+name|pos
 argument_list|)
 return|;
 case|case
@@ -4539,6 +4658,8 @@ argument_list|,
 name|value
 argument_list|,
 name|value0
+argument_list|,
+name|pos
 argument_list|)
 return|;
 case|case
@@ -4552,6 +4673,8 @@ argument_list|,
 name|value
 argument_list|,
 name|value0
+argument_list|,
+name|pos
 argument_list|)
 return|;
 case|case
@@ -4565,6 +4688,8 @@ argument_list|,
 name|value
 argument_list|,
 name|value0
+argument_list|,
+name|pos
 argument_list|)
 return|;
 case|case
@@ -4578,6 +4703,8 @@ argument_list|,
 name|value
 argument_list|,
 name|value0
+argument_list|,
+name|pos
 argument_list|)
 return|;
 case|case
@@ -4591,6 +4718,8 @@ argument_list|,
 name|value
 argument_list|,
 name|value0
+argument_list|,
+name|pos
 argument_list|)
 return|;
 case|case
@@ -4604,6 +4733,8 @@ argument_list|,
 name|value
 argument_list|,
 name|value0
+argument_list|,
+name|pos
 argument_list|)
 return|;
 case|case
@@ -4617,6 +4748,8 @@ argument_list|,
 name|value
 argument_list|,
 name|value0
+argument_list|,
+name|pos
 argument_list|)
 return|;
 case|case
@@ -4630,6 +4763,8 @@ argument_list|,
 name|value
 argument_list|,
 name|value0
+argument_list|,
+name|pos
 argument_list|)
 return|;
 case|case
@@ -4643,6 +4778,8 @@ argument_list|,
 name|value
 argument_list|,
 name|value0
+argument_list|,
+name|pos
 argument_list|)
 return|;
 case|case
@@ -4656,6 +4793,8 @@ argument_list|,
 name|value
 argument_list|,
 name|value0
+argument_list|,
+name|pos
 argument_list|)
 return|;
 case|case
@@ -4669,12 +4808,16 @@ argument_list|,
 name|value
 argument_list|,
 name|value0
+argument_list|,
+name|pos
 argument_list|)
 return|;
 default|default:
 throw|throw
-name|intervalidValueException
+name|invalidValueException
 argument_list|(
+name|pos
+argument_list|,
 name|value0
 argument_list|)
 throw|;
@@ -4705,22 +4848,26 @@ argument_list|)
 return|;
 block|}
 specifier|private
-name|SqlValidatorException
-name|intervalidValueException
+name|EigenbaseContextException
+name|invalidValueException
 parameter_list|(
+name|SqlParserPos
+name|pos
+parameter_list|,
 name|String
 name|value
 parameter_list|)
 block|{
 return|return
-name|EigenbaseResource
+name|SqlUtil
 operator|.
-name|instance
-argument_list|()
+name|newContextException
+argument_list|(
+name|pos
+argument_list|,
+name|RESOURCE
 operator|.
-name|UnsupportedIntervalLiteral
-operator|.
-name|ex
+name|unsupportedIntervalLiteral
 argument_list|(
 literal|"'"
 operator|+
@@ -4733,12 +4880,16 @@ operator|+
 name|toString
 argument_list|()
 argument_list|)
+argument_list|)
 return|;
 block|}
 specifier|private
-name|SqlValidatorException
+name|EigenbaseContextException
 name|fieldExceedsPrecisionException
 parameter_list|(
+name|SqlParserPos
+name|pos
+parameter_list|,
 name|int
 name|sign
 parameter_list|,
@@ -4769,14 +4920,15 @@ argument_list|()
 expr_stmt|;
 block|}
 return|return
-name|EigenbaseResource
+name|SqlUtil
 operator|.
-name|instance
-argument_list|()
+name|newContextException
+argument_list|(
+name|pos
+argument_list|,
+name|RESOURCE
 operator|.
-name|IntervalFieldExceedsPrecision
-operator|.
-name|ex
+name|intervalFieldExceedsPrecision
 argument_list|(
 name|value
 argument_list|,
@@ -4790,6 +4942,7 @@ operator|+
 name|precision
 operator|+
 literal|")"
+argument_list|)
 argument_list|)
 return|;
 block|}

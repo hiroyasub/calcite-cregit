@@ -1756,6 +1756,15 @@ operator|.
 name|class
 argument_list|)
 block|,
+name|OBJECT_TO_STRING
+argument_list|(
+name|Object
+operator|.
+name|class
+argument_list|,
+literal|"toString"
+argument_list|)
+block|,
 name|ROUND_LONG
 argument_list|(
 name|SqlFunctions

@@ -43,6 +43,18 @@ name|org
 operator|.
 name|eigenbase
 operator|.
+name|resource
+operator|.
+name|Resources
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
 name|sql
 operator|.
 name|*
@@ -279,14 +291,19 @@ name|SqlNode
 name|operand
 parameter_list|)
 function_decl|;
-comment|/**    * Adds "line x, column y" context to a validator exception.    *    *<p>Note that the input exception is checked (it derives from {@link    * Exception}) and the output exception is unchecked (it derives from {@link    * RuntimeException}). This is intentional -- it should remind code authors    * to provide context for their validation errors.    *    * @param e    The validation error    * @param node The place where the exception occurred    * @return Exception containing positional information    * @pre node != null    * @post return != null    */
-name|EigenbaseException
+comment|/**    * Adds "line x, column y" context to a validator exception.    *    *<p>Note that the input exception is checked (it derives from {@link    * Exception}) and the output exception is unchecked (it derives from {@link    * RuntimeException}). This is intentional -- it should remind code authors    * to provide context for their validation errors.    *    * @param node The place where the exception occurred    * @param e    The validation error    * @return Exception containing positional information    * @pre node != null    * @post return != null    */
+name|EigenbaseContextException
 name|newValidationError
 parameter_list|(
 name|SqlNode
 name|node
 parameter_list|,
+name|Resources
+operator|.
+name|ExInst
+argument_list|<
 name|SqlValidatorException
+argument_list|>
 name|e
 parameter_list|)
 function_decl|;

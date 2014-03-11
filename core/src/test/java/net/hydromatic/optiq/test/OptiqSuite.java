@@ -298,6 +298,10 @@ name|OptionsListTest
 operator|.
 name|class
 block|,
+name|ResourceTest
+operator|.
+name|class
+block|,
 name|PermutationTestCase
 operator|.
 name|class

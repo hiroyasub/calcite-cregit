@@ -83,6 +83,20 @@ name|*
 import|;
 end_import
 
+begin_import
+import|import static
+name|org
+operator|.
+name|eigenbase
+operator|.
+name|util
+operator|.
+name|Static
+operator|.
+name|RESOURCE
+import|;
+end_import
+
 begin_comment
 comment|/**  * A<code>SqlCollation</code> is an object representing a<code>Collate</code>  * statement. It is immutable.  */
 end_comment
@@ -368,7 +382,7 @@ name|col2
 argument_list|)
 return|;
 block|}
-comment|/**    * Returns the collating sequence (the collation name) and the coercibility    * for the resulting value of a dyadic operator.    *    * @param col1 first operand for the dyadic operation    * @param col2 second operand for the dyadic operation    * @return the resulting collation sequence    * @throws EigenbaseException {@link EigenbaseResource#InvalidCompare} or    *                            {@link EigenbaseResource#DifferentCollations} if no collating sequence    *                            can be deduced    * @sql.99 Part 2 Section 4.2.3 Table 2    */
+comment|/**    * Returns the collating sequence (the collation name) and the coercibility    * for the resulting value of a dyadic operator.    *    * @param col1 first operand for the dyadic operation    * @param col2 second operand for the dyadic operation    * @return the resulting collation sequence    * @throws EigenbaseException {@link EigenbaseNewResource#invalidCompare} or    *                            {@link EigenbaseNewResource#differentCollations}    *                            if no collating sequence can be deduced    * @sql.99 Part 2 Section 4.2.3 Table 2    */
 specifier|public
 specifier|static
 name|SqlCollation
@@ -399,14 +413,9 @@ name|ret
 condition|)
 block|{
 throw|throw
-name|EigenbaseResource
+name|RESOURCE
 operator|.
-name|instance
-argument_list|()
-operator|.
-name|InvalidCompare
-operator|.
-name|ex
+name|invalidCompare
 argument_list|(
 name|col1
 operator|.
@@ -428,13 +437,16 @@ name|col2
 operator|.
 name|coercibility
 argument_list|)
+operator|.
+name|ex
+argument_list|()
 throw|;
 block|}
 return|return
 name|ret
 return|;
 block|}
-comment|/**    * Returns the collating sequence (the collation name) to use for the    * resulting value of a comparison.    *    * @param col1 first operand for the dyadic operation    * @param col2 second operand for the dyadic operation    * @return the resulting collation sequence. If no collating sequence could    * be deduced a {@link EigenbaseResource#InvalidCompare} is thrown    * @sql.99 Part 2 Section 4.2.3 Table 3    */
+comment|/**    * Returns the collating sequence (the collation name) to use for the    * resulting value of a comparison.    *    * @param col1 first operand for the dyadic operation    * @param col2 second operand for the dyadic operation    * @return the resulting collation sequence. If no collating sequence could    * be deduced a {@link EigenbaseNewResource#invalidCompare} is thrown    * @sql.99 Part 2 Section 4.2.3 Table 3    */
 specifier|public
 specifier|static
 name|String
@@ -774,14 +786,9 @@ argument_list|)
 return|;
 block|}
 throw|throw
-name|EigenbaseResource
+name|RESOURCE
 operator|.
-name|instance
-argument_list|()
-operator|.
-name|DifferentCollations
-operator|.
-name|ex
+name|differentCollations
 argument_list|(
 name|col1
 operator|.
@@ -791,6 +798,9 @@ name|col2
 operator|.
 name|collationName
 argument_list|)
+operator|.
+name|ex
+argument_list|()
 throw|;
 default|default:
 throw|throw

@@ -27,16 +27,6 @@ begin_import
 import|import
 name|java
 operator|.
-name|sql
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
 name|text
 operator|.
 name|*
@@ -44,14 +34,16 @@ import|;
 end_import
 
 begin_import
-import|import
+import|import static
 name|org
 operator|.
 name|eigenbase
 operator|.
-name|resource
+name|util
 operator|.
-name|*
+name|Static
+operator|.
+name|RESOURCE
 import|;
 end_import
 
@@ -480,17 +472,15 @@ block|}
 else|else
 block|{
 throw|throw
-name|EigenbaseResource
+name|RESOURCE
 operator|.
-name|instance
-argument_list|()
-operator|.
-name|InvalidBoolean
-operator|.
-name|ex
+name|invalidBoolean
 argument_list|(
 name|str
 argument_list|)
+operator|.
+name|ex
+argument_list|()
 throw|;
 block|}
 block|}
