@@ -7614,6 +7614,28 @@ argument_list|(
 literal|"C=0\n"
 argument_list|)
 expr_stmt|;
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|withModel
+argument_list|(
+name|FOODMART_MODEL
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select count(*) as c from \"customer\" "
+operator|+
+literal|"where cast(\"customer_id\" as char(20)) = 'this string is longer than 30 characters'"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"C=0\n"
+argument_list|)
+expr_stmt|;
 block|}
 comment|/** Tests the NOT IN operator. Problems arose in code-generation because    * the column allows nulls. */
 annotation|@
