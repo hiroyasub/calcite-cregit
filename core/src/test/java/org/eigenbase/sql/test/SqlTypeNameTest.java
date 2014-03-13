@@ -825,9 +825,11 @@ argument_list|)
 decl_stmt|;
 name|assertEquals
 argument_list|(
-literal|"ARRAY did not map to null"
+literal|"ARRAY did not map to ARRAY"
 argument_list|,
-literal|null
+name|SqlTypeName
+operator|.
+name|ARRAY
 argument_list|,
 name|tn
 argument_list|)

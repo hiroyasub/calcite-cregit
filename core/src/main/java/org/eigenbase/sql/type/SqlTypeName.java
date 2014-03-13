@@ -1294,6 +1294,15 @@ argument_list|,
 name|STRUCTURED
 argument_list|)
 decl|.
+name|put
+argument_list|(
+name|Types
+operator|.
+name|ARRAY
+argument_list|,
+name|ARRAY
+argument_list|)
+decl|.
 name|build
 argument_list|()
 decl_stmt|;
