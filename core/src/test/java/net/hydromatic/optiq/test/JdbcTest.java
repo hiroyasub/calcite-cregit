@@ -7560,6 +7560,61 @@ literal|"deptno=40; E=Employee [empid: 200, deptno: 20, name: Eric]\n"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testVarcharEquals
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|withModel
+argument_list|(
+name|FOODMART_MODEL
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select \"lname\" from \"customer\" where \"lname\" = 'Nowmer'"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"lname=Nowmer\n"
+argument_list|)
+expr_stmt|;
+comment|// lname is declared as VARCHAR(30), comparing it with a string longer
+comment|// than 30 characters would introduce a cast to the least restrictive
+comment|// type, thus lname would be cast to a varchar(40) in this case.
+comment|// These sorts of casts are removed though when constructing the jdbc
+comment|// sql, since e.g. HSQLDB does not support them.
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|withModel
+argument_list|(
+name|FOODMART_MODEL
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select count(*) as c from \"customer\" "
+operator|+
+literal|"where \"lname\" = 'this string is longer than 30 characters'"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"C=0\n"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Tests the NOT IN operator. Problems arose in code-generation because    * the column allows nulls. */
 annotation|@
 name|Test

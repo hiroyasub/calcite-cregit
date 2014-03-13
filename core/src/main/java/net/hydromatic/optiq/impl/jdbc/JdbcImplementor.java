@@ -1023,6 +1023,52 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+if|else if
+condition|(
+name|type
+operator|.
+name|getSqlTypeName
+argument_list|()
+operator|==
+name|SqlTypeName
+operator|.
+name|VARCHAR
+operator|&&
+name|call
+operator|.
+name|getOperands
+argument_list|()
+operator|.
+name|get
+argument_list|(
+literal|0
+argument_list|)
+operator|.
+name|getType
+argument_list|()
+operator|.
+name|getSqlTypeName
+argument_list|()
+operator|==
+name|SqlTypeName
+operator|.
+name|VARCHAR
+condition|)
+block|{
+comment|// Don't perform casting from varchar to varchar
+comment|// This produced things like
+comment|// CAST("mycolumn" AS VARCHAR(10) CHARACTER SET "ISO-8859-1")
+comment|//   = 'this value'
+comment|// which is not always supported, besides being unnecessary
+return|return
+name|nodeList
+operator|.
+name|get
+argument_list|(
+literal|0
+argument_list|)
+return|;
+block|}
 else|else
 block|{
 name|nodeList
