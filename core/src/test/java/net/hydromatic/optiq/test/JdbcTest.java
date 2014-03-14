@@ -6880,6 +6880,185 @@ literal|"store_id=0; grocery_sqft=null\n"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Tests sorting by an expression not in the select clause. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testOrderByExpr
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select \"name\", \"empid\" from \"hr\".\"emps\"\n"
+operator|+
+literal|"order by - \"empid\""
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"name=Eric; empid=200\n"
+operator|+
+literal|"name=Sebastian; empid=150\n"
+operator|+
+literal|"name=Theodore; empid=110\n"
+operator|+
+literal|"name=Bill; empid=100\n"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests sorting by an expression not in the '*' select clause. Test case for    *<a href="https://github.com/julianhyde/optiq/issues/176">issue #176</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testOrderStarByExpr
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select * from \"hr\".\"emps\"\n"
+operator|+
+literal|"order by - \"empid\""
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|"EnumerableCalcRel(expr#0..5=[{inputs}], proj#0..4=[{exprs}])\n"
+operator|+
+literal|"  EnumerableSortRel(sort0=[$5], dir0=[ASC])\n"
+operator|+
+literal|"    EnumerableCalcRel(expr#0..4=[{inputs}], expr#5=[-($t0)], proj#0..5=[{exprs}])\n"
+operator|+
+literal|"      EnumerableTableAccessRel(table=[[hr, emps]])"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"empid=200; deptno=20; name=Eric; salary=8000.0; commission=500\n"
+operator|+
+literal|"empid=150; deptno=10; name=Sebastian; salary=7000.0; commission=null\n"
+operator|+
+literal|"empid=110; deptno=10; name=Theodore; salary=11500.0; commission=250\n"
+operator|+
+literal|"empid=100; deptno=10; name=Bill; salary=10000.0; commission=1000\n"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testOrderUnionStarByExpr
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select * from \"hr\".\"emps\" where \"empid\"< 150\n"
+operator|+
+literal|"union all\n"
+operator|+
+literal|"select * from \"hr\".\"emps\" where \"empid\"> 150\n"
+operator|+
+literal|"order by - \"empid\""
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"empid=200; deptno=20; name=Eric; salary=8000.0; commission=500\n"
+operator|+
+literal|"empid=110; deptno=10; name=Theodore; salary=11500.0; commission=250\n"
+operator|+
+literal|"empid=100; deptno=10; name=Bill; salary=10000.0; commission=1000\n"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests sorting by a CAST expression not in the select clause. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testOrderByCast
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|FOODMART_CLONE
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select \"customer_id\", \"postal_code\" from \"customer\"\n"
+operator|+
+literal|"where \"customer_id\"< 5\n"
+operator|+
+literal|"order by cast(substring(\"postal_code\" from 3) as integer) desc"
+argument_list|)
+comment|// ordered by last 3 digits (980, 674, 172, 057)
+operator|.
+name|returns
+argument_list|(
+literal|"customer_id=3; postal_code=73980\n"
+operator|+
+literal|"customer_id=4; postal_code=74674\n"
+operator|+
+literal|"customer_id=2; postal_code=17172\n"
+operator|+
+literal|"customer_id=1; postal_code=15057\n"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Tests ORDER BY ... DESC NULLS FIRST. */
 annotation|@
 name|Test

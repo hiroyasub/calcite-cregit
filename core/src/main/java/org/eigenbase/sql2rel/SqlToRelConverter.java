@@ -10362,7 +10362,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates a list of collations required to implement the ORDER BY clause,    * if there is one. Populates<code>extraOrderExprs</code> with any sort    * expressions which are not in the select clause.    *    * @param bb              Scope within which to resolve identifiers    * @param select          Select clause, null if order by is applied to set    *                        operation (UNION etc.)    * @param orderList       Order by clause, may be null    * @param extraOrderExprs Sort expressions which are not in the select    *                        clause (output)    * @param collationList   List of collations (output)    * @pre bb.root != null    */
+comment|/**    * Creates a list of collations required to implement the ORDER BY clause,    * if there is one. Populates<code>extraOrderExprs</code> with any sort    * expressions which are not in the select clause.    *    * @param bb              Scope within which to resolve identifiers    * @param select          Select clause. Never null, because we invent a    *                        dummy SELECT if ORDER BY is applied to a set    *                        operation (UNION etc.)    * @param orderList       Order by clause, may be null    * @param extraOrderExprs Sort expressions which are not in the select    *                        clause (output)    * @param collationList   List of collations (output)    * @pre bb.root != null    */
 specifier|protected
 name|void
 name|gatherOrderExprs
@@ -10398,6 +10398,11 @@ operator|!=
 literal|null
 operator|:
 literal|"precondition: child != null"
+assert|;
+assert|assert
+name|select
+operator|!=
+literal|null
 assert|;
 if|if
 condition|(
@@ -10471,6 +10476,11 @@ name|NullDirection
 name|nullDirection
 parameter_list|)
 block|{
+assert|assert
+name|select
+operator|!=
+literal|null
+assert|;
 comment|// Handle DESC keyword, e.g. 'select a, b from t order by a desc'.
 switch|switch
 condition|(
@@ -10587,13 +10597,7 @@ name|orderItem
 argument_list|)
 decl_stmt|;
 comment|// Scan the select list and order exprs for an identical expression.
-if|if
-condition|(
-name|select
-operator|!=
-literal|null
-condition|)
-block|{
+specifier|final
 name|SelectScope
 name|selectScope
 init|=
@@ -10712,25 +10716,8 @@ argument_list|)
 return|;
 block|}
 block|}
-block|}
 comment|// TODO:  handle collation sequence
 comment|// TODO: flag expressions as non-standard
-name|int
-name|ordinal
-init|=
-name|select
-operator|.
-name|getSelectList
-argument_list|()
-operator|.
-name|size
-argument_list|()
-operator|+
-name|extraExprs
-operator|.
-name|size
-argument_list|()
-decl_stmt|;
 name|extraExprs
 operator|.
 name|add
@@ -10743,6 +10730,8 @@ operator|new
 name|RelFieldCollation
 argument_list|(
 name|ordinal
+operator|+
+literal|1
 argument_list|,
 name|direction
 argument_list|,
