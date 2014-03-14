@@ -2633,6 +2633,23 @@ operator|.
 name|getSqlTypeName
 argument_list|()
 decl_stmt|;
+if|if
+condition|(
+name|type
+operator|instanceof
+name|RelDataTypeFactoryImpl
+operator|.
+name|JavaType
+condition|)
+block|{
+comment|// We'd rather print "INTEGER" than "JavaType(int)".
+return|return
+name|sqlTypeName
+operator|.
+name|getName
+argument_list|()
+return|;
+block|}
 switch|switch
 condition|(
 name|sqlTypeName
@@ -2665,11 +2682,12 @@ argument_list|)
 return|;
 default|default:
 return|return
-name|sqlTypeName
+name|type
 operator|.
-name|getName
+name|toString
 argument_list|()
 return|;
+comment|// e.g. "VARCHAR(10)", "INTEGER ARRAY"
 block|}
 block|}
 specifier|protected
