@@ -1965,8 +1965,9 @@ name|type
 argument_list|)
 throw|;
 block|}
-comment|// Update this if  ExInstWithCause gets more type parameters
-comment|// For instance  ExInstWithCause<A, B, C>
+comment|// Update this if ExInstWithCause gets more type parameters
+comment|// For instance if B and C are added ExInstWithCause<A, B, C>,
+comment|// code below should be updated
 if|if
 condition|(
 name|args
@@ -2073,6 +2074,10 @@ name|Exception
 name|e
 parameter_list|)
 block|{
+comment|// This can never happen since exSupplier should be just a ex() call.
+comment|// catch(Exception) is required since Callable#call throws Exception.
+comment|// Just in case we get exception somehow, we will rethrow it as a part
+comment|// of AssertionError below.
 name|cause
 operator|=
 name|e
