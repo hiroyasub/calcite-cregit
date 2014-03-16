@@ -1615,7 +1615,7 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Test one of the custom conversions which is recognized by the class of    * the operator (in this case, {@link    * org.eigenbase.sql.fun.SqlCaseOperator}).    */
+comment|/**    * Test one of the custom conversions which is recognized by the class of    * the operator (in this case, {@link org.eigenbase.sql.fun.SqlCaseOperator}).    */
 annotation|@
 name|Test
 specifier|public

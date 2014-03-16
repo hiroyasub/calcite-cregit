@@ -142,7 +142,16 @@ name|SqlCaseOperator
 extends|extends
 name|SqlOperator
 block|{
-comment|//~ Static fields/initializers ---------------------------------------------
+specifier|public
+specifier|static
+specifier|final
+name|SqlCaseOperator
+name|INSTANCE
+init|=
+operator|new
+name|SqlCaseOperator
+argument_list|()
+decl_stmt|;
 specifier|private
 specifier|static
 specifier|final
@@ -161,7 +170,7 @@ literal|"CASE"
 argument_list|)
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-specifier|public
+specifier|private
 name|SqlCaseOperator
 parameter_list|()
 block|{

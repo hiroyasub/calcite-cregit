@@ -1534,9 +1534,7 @@ operator|.
 name|asFrom
 argument_list|()
 argument_list|,
-name|SqlJoinOperator
-operator|.
-name|ConditionType
+name|JoinConditionType
 operator|.
 name|ON
 operator|.
@@ -1563,8 +1561,6 @@ return|;
 block|}
 specifier|private
 specifier|static
-name|SqlJoinOperator
-operator|.
 name|JoinType
 name|joinType
 parameter_list|(
@@ -1581,8 +1577,6 @@ case|case
 name|LEFT
 case|:
 return|return
-name|SqlJoinOperator
-operator|.
 name|JoinType
 operator|.
 name|LEFT
@@ -1591,8 +1585,6 @@ case|case
 name|RIGHT
 case|:
 return|return
-name|SqlJoinOperator
-operator|.
 name|JoinType
 operator|.
 name|RIGHT
@@ -1601,8 +1593,6 @@ case|case
 name|INNER
 case|:
 return|return
-name|SqlJoinOperator
-operator|.
 name|JoinType
 operator|.
 name|INNER
@@ -1611,8 +1601,6 @@ case|case
 name|FULL
 case|:
 return|return
-name|SqlJoinOperator
-operator|.
 name|JoinType
 operator|.
 name|FULL

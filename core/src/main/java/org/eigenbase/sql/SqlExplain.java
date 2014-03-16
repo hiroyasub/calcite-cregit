@@ -41,20 +41,6 @@ name|eigenbase
 operator|.
 name|sql
 operator|.
-name|fun
-operator|.
-name|SqlStdOperatorTable
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
-name|sql
-operator|.
 name|parser
 operator|.
 name|*
@@ -72,6 +58,22 @@ name|SqlExplain
 extends|extends
 name|SqlCall
 block|{
+specifier|public
+specifier|static
+specifier|final
+name|SqlSpecialOperator
+name|OPERATOR
+init|=
+operator|new
+name|SqlSpecialOperator
+argument_list|(
+literal|"EXPLAIN"
+argument_list|,
+name|SqlKind
+operator|.
+name|EXPLAIN
+argument_list|)
+decl_stmt|;
 comment|//~ Enums ------------------------------------------------------------------
 comment|/**    * The level of abstraction with which to display the plan.    */
 specifier|public
@@ -207,9 +209,7 @@ name|getOperator
 parameter_list|()
 block|{
 return|return
-name|SqlStdOperatorTable
-operator|.
-name|EXPLAIN
+name|OPERATOR
 return|;
 block|}
 specifier|public

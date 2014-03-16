@@ -6599,6 +6599,7 @@ operator|.
 name|getRight
 argument_list|()
 decl_stmt|;
+specifier|final
 name|boolean
 name|isNatural
 init|=
@@ -6607,8 +6608,7 @@ operator|.
 name|isNatural
 argument_list|()
 decl_stmt|;
-name|SqlJoinOperator
-operator|.
+specifier|final
 name|JoinType
 name|joinType
 init|=
@@ -8790,9 +8790,7 @@ parameter_list|,
 name|SqlNode
 name|condition
 parameter_list|,
-name|SqlJoinOperator
-operator|.
-name|ConditionType
+name|JoinConditionType
 name|conditionType
 parameter_list|,
 name|RelNode
@@ -9120,8 +9118,6 @@ specifier|static
 name|JoinRelType
 name|convertJoinType
 parameter_list|(
-name|SqlJoinOperator
-operator|.
 name|JoinType
 name|joinType
 parameter_list|)
