@@ -49,7 +49,7 @@ name|eigenbase
 operator|.
 name|util
 operator|.
-name|Pair
+name|*
 import|;
 end_import
 
@@ -616,13 +616,13 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"PLAN=EnumerableCalcRel(expr#0..4=[{inputs}], expr#5=[0], expr#6=[ITEM($t1, $t5)], expr#7=[CAST($t6):FLOAT NOT NULL], expr#8=[1], expr#9=[ITEM($t1, $t8)], expr#10=[CAST($t9):FLOAT NOT NULL], CITY=[$t0], LONGITUDE=[$t7], LATITUDE=[$t10], POP=[$t2], STATE=[$t3], ID=[$t4])\n"
+literal|"PLAN=MongoToEnumerableConverter\n"
 operator|+
-literal|"  MongoToEnumerableConverter\n"
+literal|"  MongoSortRel(sort0=[$4], dir0=[ASC])\n"
 operator|+
-literal|"    MongoSortRel(sort0=[$3], dir0=[ASC])\n"
+literal|"    MongoProjectRel(CITY=[CAST(ITEM($0, 'city')):VARCHAR(20) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\"], LONGITUDE=[CAST(ITEM(ITEM($0, 'loc'), 0)):FLOAT NOT NULL], LATITUDE=[CAST(ITEM(ITEM($0, 'loc'), 1)):FLOAT NOT NULL], POP=[CAST(ITEM($0, 'pop')):INTEGER], STATE=[CAST(ITEM($0, 'state')):VARCHAR(2) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\"], ID=[CAST(ITEM($0, '_id')):VARCHAR(5) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\"])\n"
 operator|+
-literal|"      MongoTableScan(table=[[mongo_raw, zips]], ops=[[<{city: 1, loc: 1, pop: 1, state: 1, _id: 1}, {$project: {city: 1, loc: 1, pop: 1, state: 1, _id: 1}}>]])"
+literal|"      MongoTableScan(table=[[mongo_raw, zips]])"
 argument_list|)
 expr_stmt|;
 block|}
@@ -633,6 +633,16 @@ name|void
 name|testFilterSort
 parameter_list|()
 block|{
+comment|// LONGITUDE and LATITUDE are null because of OPTIQ-194.
+name|Util
+operator|.
+name|discard
+argument_list|(
+name|Bug
+operator|.
+name|OPTIQ194_FIXED
+argument_list|)
+expr_stmt|;
 name|OptiqAssert
 operator|.
 name|that
@@ -660,26 +670,103 @@ argument_list|)
 operator|.
 name|returns
 argument_list|(
-literal|"CITY=SPRINGFIELD; LONGITUDE=-81.249855; LATITUDE=33.534264; POP=2184; STATE=SC; ID=29146\n"
+literal|"CITY=SPRINGFIELD; LONGITUDE=null; LATITUDE=null; POP=2184; STATE=SC; ID=29146\n"
 operator|+
-literal|"CITY=SPRINGFIELD; LONGITUDE=-77.186584; LATITUDE=38.779716; POP=16811; STATE=VA; ID=22150\n"
+literal|"CITY=SPRINGFIELD; LONGITUDE=null; LATITUDE=null; POP=16811; STATE=VA; ID=22150\n"
 operator|+
-literal|"CITY=SPRINGFIELD; LONGITUDE=-77.23702; LATITUDE=38.744858; POP=32161; STATE=VA; ID=22153\n"
+literal|"CITY=SPRINGFIELD; LONGITUDE=null; LATITUDE=null; POP=32161; STATE=VA; ID=22153\n"
 operator|+
-literal|"CITY=SPRINGFIELD; LONGITUDE=-78.69502; LATITUDE=39.462997; POP=1321; STATE=WV; ID=26763\n"
+literal|"CITY=SPRINGFIELD; LONGITUDE=null; LATITUDE=null; POP=1321; STATE=WV; ID=26763\n"
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|mongoChecker
+argument_list|(
+literal|"{\n"
+operator|+
+literal|"  $match: {\n"
+operator|+
+literal|"    city: \"SPRINGFIELD\",\n"
+operator|+
+literal|"    _id: {\n"
+operator|+
+literal|"      $lte: \"30000\",\n"
+operator|+
+literal|"      $gte: \"20000\"\n"
+operator|+
+literal|"    }\n"
+operator|+
+literal|"  }\n"
+operator|+
+literal|"}"
+argument_list|,
+literal|"{$project: {CITY: '$city', LONGITUDE: '$loc[0]', LATITUDE: '$loc[1]', POP: '$pop', STATE: '$state', ID: '$_id'}}"
+argument_list|,
+literal|"{$sort: {STATE: 1}}"
+argument_list|)
 argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"PLAN=EnumerableCalcRel(expr#0..4=[{inputs}], expr#5=[0], expr#6=[ITEM($t1, $t5)], expr#7=[CAST($t6):FLOAT NOT NULL], expr#8=[1], expr#9=[ITEM($t1, $t8)], expr#10=[CAST($t9):FLOAT NOT NULL], CITY=[$t0], LONGITUDE=[$t7], LATITUDE=[$t10], POP=[$t2], STATE=[$t3], ID=[$t4])\n"
+literal|"PLAN=MongoToEnumerableConverter\n"
 operator|+
-literal|"  MongoToEnumerableConverter\n"
+literal|"  MongoSortRel(sort0=[$4], dir0=[ASC])\n"
 operator|+
-literal|"    MongoSortRel(sort0=[$3], dir0=[ASC])\n"
+literal|"    MongoProjectRel(CITY=[CAST(ITEM($0, 'city')):VARCHAR(20) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\"], LONGITUDE=[CAST(ITEM(ITEM($0, 'loc'), 0)):FLOAT NOT NULL], LATITUDE=[CAST(ITEM(ITEM($0, 'loc'), 1)):FLOAT NOT NULL], POP=[CAST(ITEM($0, 'pop')):INTEGER], STATE=[CAST(ITEM($0, 'state')):VARCHAR(2) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\"], ID=[CAST(ITEM($0, '_id')):VARCHAR(5) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\"])\n"
 operator|+
-literal|"      MongoFilterRel(condition=[AND(=($0, 'SPRINGFIELD'),>=($4, '20000'),<=($4, '30000'))])\n"
+literal|"      MongoFilterRel(condition=[AND(=(CAST(ITEM($0, 'city')):VARCHAR(20) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\", 'SPRINGFIELD'),>=(CAST(ITEM($0, '_id')):VARCHAR(5) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\", '20000'),<=(CAST(ITEM($0, '_id')):VARCHAR(5) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\", '30000'))])\n"
 operator|+
-literal|"        MongoTableScan(table=[[mongo_raw, zips]], ops=[[<{city: 1, loc: 1, pop: 1, state: 1, _id: 1}, {$project: {city: 1, loc: 1, pop: 1, state: 1, _id: 1}}>]])"
+literal|"        MongoTableScan(table=[[mongo_raw, zips]])"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFilterSortDesc
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|enable
+argument_list|(
+name|enabled
+argument_list|()
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|ZIPS
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select * from zips\n"
+operator|+
+literal|"where pop BETWEEN 20000 AND 20100\n"
+operator|+
+literal|"order by state desc, pop"
+argument_list|)
+operator|.
+name|limit
+argument_list|(
+literal|4
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"CITY=SHERIDAN; LONGITUDE=null; LATITUDE=null; POP=20025; STATE=WY; ID=82801\n"
+operator|+
+literal|"CITY=MOUNTLAKE TERRAC; LONGITUDE=null; LATITUDE=null; POP=20059; STATE=WA; ID=98043\n"
+operator|+
+literal|"CITY=FALMOUTH; LONGITUDE=null; LATITUDE=null; POP=20039; STATE=VA; ID=22405\n"
+operator|+
+literal|"CITY=FORT WORTH; LONGITUDE=null; LATITUDE=null; POP=20012; STATE=TX; ID=76104\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -721,11 +808,15 @@ literal|"PLAN=EnumerableUnionRel(all=[true])\n"
 operator|+
 literal|"  MongoToEnumerableConverter\n"
 operator|+
-literal|"    MongoTableScan(table=[[_foodmart, sales_fact_1997]], ops=[[<{product_id: 1}, {$project: {product_id: 1}}>]])\n"
+literal|"    MongoProjectRel(product_id=[CAST(ITEM($0, 'product_id')):DOUBLE])\n"
+operator|+
+literal|"      MongoTableScan(table=[[_foodmart, sales_fact_1997]])\n"
 operator|+
 literal|"  MongoToEnumerableConverter\n"
 operator|+
-literal|"    MongoTableScan(table=[[_foodmart, sales_fact_1998]], ops=[[<{product_id: 1}, {$project: {product_id: 1}}>]])"
+literal|"    MongoProjectRel(product_id=[CAST(ITEM($0, 'product_id')):DOUBLE])\n"
+operator|+
+literal|"      MongoTableScan(table=[[_foodmart, sales_fact_1998]])\n"
 argument_list|)
 operator|.
 name|limit
@@ -820,8 +911,6 @@ name|queryContains
 argument_list|(
 name|mongoChecker
 argument_list|(
-literal|"{$project: {city: 1, loc: 1, pop: 1, state: 1, _id: 1}}"
-argument_list|,
 literal|"{\n"
 operator|+
 literal|"  $match: {\n"
@@ -831,6 +920,8 @@ operator|+
 literal|"  }\n"
 operator|+
 literal|"}"
+argument_list|,
+literal|"{$project: {CITY: '$city', LONGITUDE: '$loc[0]', LATITUDE: '$loc[1]', POP: '$pop', STATE: '$state', ID: '$_id'}}"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -867,9 +958,11 @@ name|explainContains
 argument_list|(
 literal|"PLAN=MongoToEnumerableConverter\n"
 operator|+
-literal|"  MongoFilterRel(condition=[=($1, 'CA')])\n"
+literal|"  MongoProjectRel(warehouse_id=[CAST(ITEM($0, 'warehouse_id')):DOUBLE], warehouse_state_province=[CAST(ITEM($0, 'warehouse_state_province')):VARCHAR(20) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\"])\n"
 operator|+
-literal|"    MongoTableScan(table=[[_foodmart, warehouse]], ops=[[<{warehouse_id: 1, warehouse_state_province: 1}, {$project: {warehouse_id: 1, warehouse_state_province: 1}}>]])"
+literal|"    MongoFilterRel(condition=[=(CAST(ITEM($0, 'warehouse_state_province')):VARCHAR(20) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\", 'CA')])\n"
+operator|+
+literal|"      MongoTableScan(table=[[_foodmart, warehouse]])"
 argument_list|)
 operator|.
 name|returns
@@ -888,10 +981,10 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
+comment|// Per https://github.com/julianhyde/optiq/issues/164,
+comment|// $match must occur before $project for good performance.
 name|mongoChecker
 argument_list|(
-literal|"{$project: {warehouse_id: 1, warehouse_state_province: 1}}"
-argument_list|,
 literal|"{\n"
 operator|+
 literal|"  $match: {\n"
@@ -901,6 +994,8 @@ operator|+
 literal|"  }\n"
 operator|+
 literal|"}"
+argument_list|,
+literal|"{$project: {warehouse_id: 1, warehouse_state_province: 1}}"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -961,9 +1056,67 @@ name|queryContains
 argument_list|(
 name|mongoChecker
 argument_list|(
-literal|"{$project: {store_id: 1, store_name: 1}}"
+literal|"{\n"
+operator|+
+literal|"  $match: {\n"
+operator|+
+literal|"    $or: [\n"
+operator|+
+literal|"      {\n"
+operator|+
+literal|"        store_name: \"Store 1\"\n"
+operator|+
+literal|"      },\n"
+operator|+
+literal|"      {\n"
+operator|+
+literal|"        store_name: \"Store 10\"\n"
+operator|+
+literal|"      },\n"
+operator|+
+literal|"      {\n"
+operator|+
+literal|"        store_name: \"Store 11\"\n"
+operator|+
+literal|"      },\n"
+operator|+
+literal|"      {\n"
+operator|+
+literal|"        store_name: \"Store 15\"\n"
+operator|+
+literal|"      },\n"
+operator|+
+literal|"      {\n"
+operator|+
+literal|"        store_name: \"Store 16\"\n"
+operator|+
+literal|"      },\n"
+operator|+
+literal|"      {\n"
+operator|+
+literal|"        store_name: \"Store 24\"\n"
+operator|+
+literal|"      },\n"
+operator|+
+literal|"      {\n"
+operator|+
+literal|"        store_name: \"Store 3\"\n"
+operator|+
+literal|"      },\n"
+operator|+
+literal|"      {\n"
+operator|+
+literal|"        store_name: \"Store 7\"\n"
+operator|+
+literal|"      }\n"
+operator|+
+literal|"    ]\n"
+operator|+
+literal|"  }\n"
+operator|+
+literal|"}"
 argument_list|,
-literal|"{\n  $match: {\n    $or: [\n      {\n        store_name: \"Store 1\"\n      },\n      {\n        store_name: \"Store 10\"\n      },\n      {\n        store_name: \"Store 11\"\n      },\n      {\n        store_name: \"Store 15\"\n      },\n      {\n        store_name: \"Store 16\"\n      },\n      {\n        store_name: \"Store 24\"\n      },\n      {\n        store_name: \"Store 3\"\n      },\n      {\n        store_name: \"Store 7\"\n      }\n    ]\n  }\n}"
+literal|"{$project: {store_id: 1, store_name: 1}}"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1006,11 +1159,11 @@ name|explainContains
 argument_list|(
 literal|"PLAN=EnumerableAggregateRel(group=[{}], EXPR$0=[COUNT()])\n"
 operator|+
-literal|"  EnumerableCalcRel(expr#0=[{inputs}], expr#0=[0], DUMMY=[$t0])\n"
+literal|"  MongoToEnumerableConverter\n"
 operator|+
-literal|"    MongoToEnumerableConverter\n"
+literal|"    MongoProjectRel(DUMMY=[0])\n"
 operator|+
-literal|"      MongoTableScan(table=[[mongo_raw, zips]], ops=[[<{}, {$project: {}}>]])"
+literal|"      MongoTableScan(table=[[mongo_raw, zips]])"
 argument_list|)
 expr_stmt|;
 block|}
@@ -1039,7 +1192,7 @@ argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"select state, city from zips"
+literal|"select state, city, 0 as zero from zips"
 argument_list|)
 operator|.
 name|limit
@@ -1049,18 +1202,17 @@ argument_list|)
 operator|.
 name|returns
 argument_list|(
-literal|"STATE=AL; CITY=ACMAR\n"
+literal|"STATE=AL; CITY=ACMAR; ZERO=0\n"
 operator|+
-literal|"STATE=AL; CITY=ADAMSVILLE\n"
+literal|"STATE=AL; CITY=ADAMSVILLE; ZERO=0\n"
 argument_list|)
 operator|.
-name|explainContains
+name|queryContains
 argument_list|(
-literal|"PLAN=EnumerableCalcRel(expr#0..1=[{inputs}], STATE=[$t1], CITY=[$t0])\n"
-operator|+
-literal|"  MongoToEnumerableConverter\n"
-operator|+
-literal|"    MongoTableScan(table=[[mongo_raw, zips]], ops=[[<{city: 1, state: 1}, {$project: {city: 1, state: 1}}>]])"
+name|mongoChecker
+argument_list|(
+literal|"{$project: {STATE: '$state', CITY: '$city', ZERO: {$ifNull: [null, 0]}}}"
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -1106,13 +1258,88 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"PLAN=EnumerableCalcRel(expr#0..1=[{inputs}], STATE=[$t1], CITY=[$t0])\n"
+literal|"PLAN=MongoToEnumerableConverter\n"
 operator|+
-literal|"  MongoToEnumerableConverter\n"
+literal|"  MongoProjectRel(STATE=[CAST(ITEM($0, 'state')):VARCHAR(2) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\"], CITY=[CAST(ITEM($0, 'city')):VARCHAR(20) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\"])\n"
 operator|+
-literal|"    MongoFilterRel(condition=[=($1, 'CA')])\n"
+literal|"    MongoFilterRel(condition=[=(CAST(ITEM($0, 'state')):VARCHAR(2) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\", 'CA')])\n"
 operator|+
-literal|"      MongoTableScan(table=[[mongo_raw, zips]], ops=[[<{city: 1, state: 1}, {$project: {city: 1, state: 1}}>]])"
+literal|"      MongoTableScan(table=[[mongo_raw, zips]])"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** MongoDB's predicates are handed (they can only accept literals on the    * right-hand size) so it's worth testing that we handle them right both    * ways around. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFilterReversed
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|enable
+argument_list|(
+name|enabled
+argument_list|()
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|ZIPS
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select state, city from zips where 'WI'< state"
+argument_list|)
+operator|.
+name|limit
+argument_list|(
+literal|2
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"STATE=WV; CITY=BLUEWELL\n"
+operator|+
+literal|"STATE=WV; CITY=ATHENS\n"
+argument_list|)
+expr_stmt|;
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|enable
+argument_list|(
+name|enabled
+argument_list|()
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|ZIPS
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select state, city from zips where state> 'WI'"
+argument_list|)
+operator|.
+name|limit
+argument_list|(
+literal|2
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"STATE=WV; CITY=BLUEWELL\n"
+operator|+
+literal|"STATE=WV; CITY=ATHENS\n"
 argument_list|)
 expr_stmt|;
 block|}

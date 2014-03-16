@@ -217,6 +217,15 @@ name|FRG378_FIXED
 init|=
 literal|true
 decl_stmt|;
+comment|/**    * Whether    *<a href="https://github.com/julianhyde/optiq/issues/194">OPTIQ-194</a>,    * "Array items in MongoDB adapter" is fixed.    */
+specifier|public
+specifier|static
+specifier|final
+name|boolean
+name|OPTIQ194_FIXED
+init|=
+literal|false
+decl_stmt|;
 comment|/**    * Use this to flag temporary code.    */
 specifier|public
 specifier|static
