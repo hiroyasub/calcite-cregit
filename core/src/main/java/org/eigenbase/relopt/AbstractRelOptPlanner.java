@@ -655,6 +655,13 @@ return|return
 literal|false
 return|;
 block|}
+comment|// implement RelOptPlanner
+specifier|public
+name|void
+name|clearRelTraitDefs
+parameter_list|()
+block|{
+block|}
 specifier|public
 name|List
 argument_list|<

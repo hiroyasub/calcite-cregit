@@ -161,6 +161,11 @@ name|RelTraitDef
 name|relTraitDef
 parameter_list|)
 function_decl|;
+comment|/**    * Clear all the registered RelTraitDef.    */
+name|void
+name|clearRelTraitDefs
+parameter_list|()
+function_decl|;
 comment|/**    * Returns the list of active trait types.    */
 name|List
 argument_list|<
