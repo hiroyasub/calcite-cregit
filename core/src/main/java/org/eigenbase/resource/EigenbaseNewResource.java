@@ -94,13 +94,6 @@ name|BaseMessage
 argument_list|(
 literal|"Illegal {0} literal {1}: {2}"
 argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|EigenbaseException
-operator|.
-name|class
-argument_list|)
 name|ExInst
 argument_list|<
 name|EigenbaseException
@@ -121,13 +114,6 @@ annotation|@
 name|BaseMessage
 argument_list|(
 literal|"Length of identifier ''{0}'' must be less than or equal to {1,number,#} characters"
-argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|EigenbaseException
-operator|.
-name|class
 argument_list|)
 name|ExInst
 argument_list|<
@@ -159,13 +145,6 @@ name|BaseMessage
 argument_list|(
 literal|"BETWEEN operator has no terminating AND"
 argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
-argument_list|)
 name|ExInst
 argument_list|<
 name|SqlValidatorException
@@ -189,13 +168,6 @@ name|value
 operator|=
 literal|"42000"
 argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|EigenbaseException
-operator|.
-name|class
-argument_list|)
 name|ExInst
 argument_list|<
 name|EigenbaseException
@@ -214,13 +186,6 @@ name|BaseMessage
 argument_list|(
 literal|"Illegal expression. Was expecting \"(DATETIME - DATETIME) INTERVALQUALIFIER\""
 argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|EigenbaseException
-operator|.
-name|class
-argument_list|)
 name|ExInst
 argument_list|<
 name|EigenbaseException
@@ -232,13 +197,6 @@ annotation|@
 name|BaseMessage
 argument_list|(
 literal|"Illegal overlaps expression. Was expecting expression on the form \"(DATETIME, EXPRESSION) OVERLAPS (DATETIME, EXPRESSION)\""
-argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|EigenbaseException
-operator|.
-name|class
 argument_list|)
 name|ExInst
 argument_list|<
@@ -252,13 +210,6 @@ name|BaseMessage
 argument_list|(
 literal|"Non-query expression encountered in illegal context"
 argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|EigenbaseException
-operator|.
-name|class
-argument_list|)
 name|ExInst
 argument_list|<
 name|EigenbaseException
@@ -270,13 +221,6 @@ annotation|@
 name|BaseMessage
 argument_list|(
 literal|"Query expression encountered in illegal context"
-argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|EigenbaseException
-operator|.
-name|class
 argument_list|)
 name|ExInst
 argument_list|<
@@ -290,13 +234,6 @@ name|BaseMessage
 argument_list|(
 literal|"CURSOR expression encountered in illegal context"
 argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|EigenbaseException
-operator|.
-name|class
-argument_list|)
 name|ExInst
 argument_list|<
 name|EigenbaseException
@@ -309,13 +246,6 @@ name|BaseMessage
 argument_list|(
 literal|"ORDER BY unexpected"
 argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|EigenbaseException
-operator|.
-name|class
-argument_list|)
 name|ExInst
 argument_list|<
 name|EigenbaseException
@@ -327,13 +257,6 @@ annotation|@
 name|BaseMessage
 argument_list|(
 literal|"Illegal binary string {0}"
-argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|EigenbaseException
-operator|.
-name|class
 argument_list|)
 name|ExInst
 argument_list|<
@@ -350,13 +273,6 @@ name|BaseMessage
 argument_list|(
 literal|"''FROM'' without operands preceding it is illegal"
 argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|EigenbaseException
-operator|.
-name|class
-argument_list|)
 name|ExInst
 argument_list|<
 name|EigenbaseException
@@ -368,13 +284,6 @@ annotation|@
 name|BaseMessage
 argument_list|(
 literal|"ROW expression encountered in illegal context"
-argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|EigenbaseException
-operator|.
-name|class
 argument_list|)
 name|ExInst
 argument_list|<
@@ -399,13 +308,6 @@ name|value
 operator|=
 literal|"2202H"
 argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|EigenbaseException
-operator|.
-name|class
-argument_list|)
 name|ExInst
 argument_list|<
 name|EigenbaseException
@@ -417,13 +319,6 @@ annotation|@
 name|BaseMessage
 argument_list|(
 literal|"Unknown character set ''{0}''"
-argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|EigenbaseException
-operator|.
-name|class
 argument_list|)
 name|ExInst
 argument_list|<
@@ -439,13 +334,6 @@ annotation|@
 name|BaseMessage
 argument_list|(
 literal|"Failed to encode ''{0}'' in character set ''{1}''"
-argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|EigenbaseException
-operator|.
-name|class
 argument_list|)
 name|ExInst
 argument_list|<
@@ -465,13 +353,6 @@ name|BaseMessage
 argument_list|(
 literal|"UESCAPE ''{0}'' must be exactly one character"
 argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|EigenbaseException
-operator|.
-name|class
-argument_list|)
 name|ExInst
 argument_list|<
 name|EigenbaseException
@@ -486,13 +367,6 @@ annotation|@
 name|BaseMessage
 argument_list|(
 literal|"UESCAPE ''{0}'' may not be hex digit, whitespace, plus sign, or double quote"
-argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|EigenbaseException
-operator|.
-name|class
 argument_list|)
 name|ExInst
 argument_list|<
@@ -509,13 +383,6 @@ name|BaseMessage
 argument_list|(
 literal|"UESCAPE cannot be specified without Unicode literal introducer"
 argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|EigenbaseException
-operator|.
-name|class
-argument_list|)
 name|ExInst
 argument_list|<
 name|EigenbaseException
@@ -527,13 +394,6 @@ annotation|@
 name|BaseMessage
 argument_list|(
 literal|"Unicode escape sequence starting at character {0,number,#} is not exactly four hex digits"
-argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
 argument_list|)
 name|ExInst
 argument_list|<
@@ -550,13 +410,6 @@ name|BaseMessage
 argument_list|(
 literal|"No match found for function signature {0}"
 argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
-argument_list|)
 name|ExInst
 argument_list|<
 name|SqlValidatorException
@@ -571,13 +424,6 @@ annotation|@
 name|BaseMessage
 argument_list|(
 literal|"Invalid number of arguments to function ''{0}''. Was expecting {1,number,#} arguments"
-argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
 argument_list|)
 name|ExInst
 argument_list|<
@@ -597,20 +443,7 @@ name|BaseMessage
 argument_list|(
 literal|"At line {0,number,#}, column {1,number,#}"
 argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|value
-operator|=
-name|EigenbaseContextException
-operator|.
-name|class
-argument_list|,
-name|causeRequired
-operator|=
-literal|true
-argument_list|)
-name|ExInst
+name|ExInstWithCause
 argument_list|<
 name|EigenbaseContextException
 argument_list|>
@@ -628,20 +461,7 @@ name|BaseMessage
 argument_list|(
 literal|"From line {0,number,#}, column {1,number,#} to line {2,number,#}, column {3,number,#}"
 argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|value
-operator|=
-name|EigenbaseContextException
-operator|.
-name|class
-argument_list|,
-name|causeRequired
-operator|=
-literal|true
-argument_list|)
-name|ExInst
+name|ExInstWithCause
 argument_list|<
 name|EigenbaseContextException
 argument_list|>
@@ -665,13 +485,6 @@ name|BaseMessage
 argument_list|(
 literal|"Cast function cannot convert value of type {0} to type {1}"
 argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
-argument_list|)
 name|ExInst
 argument_list|<
 name|SqlValidatorException
@@ -690,13 +503,6 @@ name|BaseMessage
 argument_list|(
 literal|"Unknown datatype name ''{0}''"
 argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
-argument_list|)
 name|ExInst
 argument_list|<
 name|SqlValidatorException
@@ -711,13 +517,6 @@ annotation|@
 name|BaseMessage
 argument_list|(
 literal|"Values passed to {0} operator must have compatible types"
-argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
 argument_list|)
 name|ExInst
 argument_list|<
@@ -734,13 +533,6 @@ name|BaseMessage
 argument_list|(
 literal|"Values in expression list must have compatible types"
 argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
-argument_list|)
 name|ExInst
 argument_list|<
 name|SqlValidatorException
@@ -752,13 +544,6 @@ annotation|@
 name|BaseMessage
 argument_list|(
 literal|"Cannot apply {0} to the two different charsets {1} and {2}"
-argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
 argument_list|)
 name|ExInst
 argument_list|<
@@ -781,13 +566,6 @@ name|BaseMessage
 argument_list|(
 literal|"ORDER BY is only allowed on top-level SELECT"
 argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
-argument_list|)
 name|ExInst
 argument_list|<
 name|SqlValidatorException
@@ -799,13 +577,6 @@ annotation|@
 name|BaseMessage
 argument_list|(
 literal|"Unknown identifier ''{0}''"
-argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
 argument_list|)
 name|ExInst
 argument_list|<
@@ -822,13 +593,6 @@ name|BaseMessage
 argument_list|(
 literal|"Unknown field ''{0}''"
 argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
-argument_list|)
 name|ExInst
 argument_list|<
 name|SqlValidatorException
@@ -843,13 +607,6 @@ annotation|@
 name|BaseMessage
 argument_list|(
 literal|"Unknown target column ''{0}''"
-argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
 argument_list|)
 name|ExInst
 argument_list|<
@@ -866,13 +623,6 @@ name|BaseMessage
 argument_list|(
 literal|"Target column ''{0}'' is assigned more than once"
 argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
-argument_list|)
 name|ExInst
 argument_list|<
 name|SqlValidatorException
@@ -887,13 +637,6 @@ annotation|@
 name|BaseMessage
 argument_list|(
 literal|"Number of INSERT target columns ({0,number}) does not equal number of source items ({1,number})"
-argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
 argument_list|)
 name|ExInst
 argument_list|<
@@ -912,13 +655,6 @@ annotation|@
 name|BaseMessage
 argument_list|(
 literal|"Cannot assign to target field ''{0}'' of type {1} from source field ''{2}'' of type {3}"
-argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
 argument_list|)
 name|ExInst
 argument_list|<
@@ -944,13 +680,6 @@ name|BaseMessage
 argument_list|(
 literal|"Table ''{0}'' not found"
 argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
-argument_list|)
 name|ExInst
 argument_list|<
 name|SqlValidatorException
@@ -966,13 +695,6 @@ name|BaseMessage
 argument_list|(
 literal|"Column ''{0}'' not found in any table"
 argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
-argument_list|)
 name|ExInst
 argument_list|<
 name|SqlValidatorException
@@ -987,13 +709,6 @@ annotation|@
 name|BaseMessage
 argument_list|(
 literal|"Column ''{0}'' not found in table ''{1}''"
-argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
 argument_list|)
 name|ExInst
 argument_list|<
@@ -1013,13 +728,6 @@ name|BaseMessage
 argument_list|(
 literal|"Column ''{0}'' is ambiguous"
 argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
-argument_list|)
 name|ExInst
 argument_list|<
 name|SqlValidatorException
@@ -1034,13 +742,6 @@ annotation|@
 name|BaseMessage
 argument_list|(
 literal|"Operand {0} must be a query"
-argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
 argument_list|)
 name|ExInst
 argument_list|<
@@ -1057,13 +758,6 @@ name|BaseMessage
 argument_list|(
 literal|"Parameters must be of the same type"
 argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
-argument_list|)
 name|ExInst
 argument_list|<
 name|SqlValidatorException
@@ -1075,13 +769,6 @@ annotation|@
 name|BaseMessage
 argument_list|(
 literal|"Cannot apply ''{0}'' to arguments of type {1}. Supported form(s): {2}"
-argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
 argument_list|)
 name|ExInst
 argument_list|<
@@ -1104,13 +791,6 @@ name|BaseMessage
 argument_list|(
 literal|"Expected a boolean type"
 argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
-argument_list|)
 name|ExInst
 argument_list|<
 name|SqlValidatorException
@@ -1123,13 +803,6 @@ name|BaseMessage
 argument_list|(
 literal|"ELSE clause or at least one THEN clause must be non-NULL"
 argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
-argument_list|)
 name|ExInst
 argument_list|<
 name|SqlValidatorException
@@ -1141,13 +814,6 @@ annotation|@
 name|BaseMessage
 argument_list|(
 literal|"Function ''{0}'' is not defined"
-argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
 argument_list|)
 name|ExInst
 argument_list|<
@@ -1163,13 +829,6 @@ annotation|@
 name|BaseMessage
 argument_list|(
 literal|"Encountered {0} with {1,number} parameter(s); was expecting {2}"
-argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
 argument_list|)
 name|ExInst
 argument_list|<
@@ -1192,13 +851,6 @@ name|BaseMessage
 argument_list|(
 literal|"Illegal mixing of types in CASE or COALESCE statement"
 argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
-argument_list|)
 name|ExInst
 argument_list|<
 name|SqlValidatorException
@@ -1210,13 +862,6 @@ annotation|@
 name|BaseMessage
 argument_list|(
 literal|"Invalid compare. Comparing (collation, coercibility): ({0}, {1} with ({2}, {3}) is illegal"
-argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|EigenbaseException
-operator|.
-name|class
 argument_list|)
 name|ExInst
 argument_list|<
@@ -1242,13 +887,6 @@ name|BaseMessage
 argument_list|(
 literal|"Invalid syntax. Two explicit different collations ({0}, {1}) are illegal"
 argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|EigenbaseException
-operator|.
-name|class
-argument_list|)
 name|ExInst
 argument_list|<
 name|EigenbaseException
@@ -1266,13 +904,6 @@ annotation|@
 name|BaseMessage
 argument_list|(
 literal|"{0} is not comparable to {1}"
-argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
 argument_list|)
 name|ExInst
 argument_list|<
@@ -1292,13 +923,6 @@ name|BaseMessage
 argument_list|(
 literal|"Cannot compare values of types ''{0}'', ''{1}''"
 argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
-argument_list|)
 name|ExInst
 argument_list|<
 name|SqlValidatorException
@@ -1317,13 +941,6 @@ name|BaseMessage
 argument_list|(
 literal|"Wrong number of arguments to expression"
 argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
-argument_list|)
 name|ExInst
 argument_list|<
 name|SqlValidatorException
@@ -1335,13 +952,6 @@ annotation|@
 name|BaseMessage
 argument_list|(
 literal|"Operands {0} not comparable to each other"
-argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
 argument_list|)
 name|ExInst
 argument_list|<
@@ -1358,13 +968,6 @@ name|BaseMessage
 argument_list|(
 literal|"Types {0} not comparable to each other"
 argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
-argument_list|)
 name|ExInst
 argument_list|<
 name|SqlValidatorException
@@ -1379,13 +982,6 @@ annotation|@
 name|BaseMessage
 argument_list|(
 literal|"Numeric literal ''{0}'' out of range"
-argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
 argument_list|)
 name|ExInst
 argument_list|<
@@ -1402,13 +998,6 @@ name|BaseMessage
 argument_list|(
 literal|"Date literal ''{0}'' out of range"
 argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
-argument_list|)
 name|ExInst
 argument_list|<
 name|SqlValidatorException
@@ -1424,13 +1013,6 @@ name|BaseMessage
 argument_list|(
 literal|"String literal continued on same line"
 argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
-argument_list|)
 name|ExInst
 argument_list|<
 name|SqlValidatorException
@@ -1443,13 +1025,6 @@ name|BaseMessage
 argument_list|(
 literal|"Table or column alias must be a simple identifier"
 argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
-argument_list|)
 name|ExInst
 argument_list|<
 name|SqlValidatorException
@@ -1461,13 +1036,6 @@ annotation|@
 name|BaseMessage
 argument_list|(
 literal|"List of column aliases must have same degree as table; table has {0,number,#} columns {1}, whereas alias list has {2,number,#} columns"
-argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
 argument_list|)
 name|ExInst
 argument_list|<
@@ -1490,13 +1058,6 @@ name|BaseMessage
 argument_list|(
 literal|"Duplicate name ''{0}'' in column alias list"
 argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
-argument_list|)
 name|ExInst
 argument_list|<
 name|SqlValidatorException
@@ -1512,13 +1073,6 @@ name|BaseMessage
 argument_list|(
 literal|"INNER, LEFT, RIGHT or FULL join requires a condition (NATURAL keyword or ON or USING clause)"
 argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
-argument_list|)
 name|ExInst
 argument_list|<
 name|SqlValidatorException
@@ -1530,13 +1084,6 @@ annotation|@
 name|BaseMessage
 argument_list|(
 literal|"Cannot specify condition (NATURAL keyword, or ON or USING clause) following CROSS JOIN"
-argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
 argument_list|)
 name|ExInst
 argument_list|<
@@ -1550,13 +1097,6 @@ name|BaseMessage
 argument_list|(
 literal|"Cannot specify NATURAL keyword with ON or USING clause"
 argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
-argument_list|)
 name|ExInst
 argument_list|<
 name|SqlValidatorException
@@ -1568,13 +1108,6 @@ annotation|@
 name|BaseMessage
 argument_list|(
 literal|"Column name ''{0}'' in USING clause is not unique on one side of join"
-argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
 argument_list|)
 name|ExInst
 argument_list|<
@@ -1590,13 +1123,6 @@ annotation|@
 name|BaseMessage
 argument_list|(
 literal|"Column ''{0}'' matched using NATURAL keyword or USING clause has incompatible types: cannot compare ''{1}'' to ''{2}''"
-argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
 argument_list|)
 name|ExInst
 argument_list|<
@@ -1619,13 +1145,6 @@ name|BaseMessage
 argument_list|(
 literal|"Window ''{0}'' not found"
 argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
-argument_list|)
 name|ExInst
 argument_list|<
 name|SqlValidatorException
@@ -1640,13 +1159,6 @@ annotation|@
 name|BaseMessage
 argument_list|(
 literal|"Expression ''{0}'' is not being grouped"
-argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
 argument_list|)
 name|ExInst
 argument_list|<
@@ -1663,13 +1175,6 @@ name|BaseMessage
 argument_list|(
 literal|"Expression ''{0}'' is not in the select clause"
 argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
-argument_list|)
 name|ExInst
 argument_list|<
 name|SqlValidatorException
@@ -1684,13 +1189,6 @@ annotation|@
 name|BaseMessage
 argument_list|(
 literal|"Aggregate expression is illegal in {0} clause"
-argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
 argument_list|)
 name|ExInst
 argument_list|<
@@ -1707,13 +1205,6 @@ name|BaseMessage
 argument_list|(
 literal|"Windowed aggregate expression is illegal in {0} clause"
 argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
-argument_list|)
 name|ExInst
 argument_list|<
 name|SqlValidatorException
@@ -1729,13 +1220,6 @@ name|BaseMessage
 argument_list|(
 literal|"Aggregate expression is illegal in GROUP BY clause"
 argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
-argument_list|)
 name|ExInst
 argument_list|<
 name|SqlValidatorException
@@ -1747,13 +1231,6 @@ annotation|@
 name|BaseMessage
 argument_list|(
 literal|"Aggregate expressions cannot be nested"
-argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
 argument_list|)
 name|ExInst
 argument_list|<
@@ -1767,13 +1244,6 @@ name|BaseMessage
 argument_list|(
 literal|"Aggregate expression is illegal in ORDER BY clause of non-aggregating SELECT"
 argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
-argument_list|)
 name|ExInst
 argument_list|<
 name|SqlValidatorException
@@ -1785,13 +1255,6 @@ annotation|@
 name|BaseMessage
 argument_list|(
 literal|"{0} clause must be a condition"
-argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
 argument_list|)
 name|ExInst
 argument_list|<
@@ -1808,13 +1271,6 @@ name|BaseMessage
 argument_list|(
 literal|"HAVING clause must be a condition"
 argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
-argument_list|)
 name|ExInst
 argument_list|<
 name|SqlValidatorException
@@ -1826,13 +1282,6 @@ annotation|@
 name|BaseMessage
 argument_list|(
 literal|"OVER must be applied to aggregate function"
-argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
 argument_list|)
 name|ExInst
 argument_list|<
@@ -1846,13 +1295,6 @@ name|BaseMessage
 argument_list|(
 literal|"Cannot override window attribute"
 argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
-argument_list|)
 name|ExInst
 argument_list|<
 name|SqlValidatorException
@@ -1864,13 +1306,6 @@ annotation|@
 name|BaseMessage
 argument_list|(
 literal|"Column count mismatch in {0}"
-argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
 argument_list|)
 name|ExInst
 argument_list|<
@@ -1886,13 +1321,6 @@ annotation|@
 name|BaseMessage
 argument_list|(
 literal|"Type mismatch in column {0,number} of {1}"
-argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
 argument_list|)
 name|ExInst
 argument_list|<
@@ -1912,13 +1340,6 @@ name|BaseMessage
 argument_list|(
 literal|"Binary literal string must contain an even number of hexits"
 argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
-argument_list|)
 name|ExInst
 argument_list|<
 name|SqlValidatorException
@@ -1931,13 +1352,6 @@ name|BaseMessage
 argument_list|(
 literal|"Binary literal string must contain only characters ''0'' - ''9'', ''A'' - ''F''"
 argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
-argument_list|)
 name|ExInst
 argument_list|<
 name|SqlValidatorException
@@ -1949,13 +1363,6 @@ annotation|@
 name|BaseMessage
 argument_list|(
 literal|"Illegal interval literal format {0} for {1}"
-argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
 argument_list|)
 name|ExInst
 argument_list|<
@@ -1975,13 +1382,6 @@ name|BaseMessage
 argument_list|(
 literal|"Interval field value {0,number} exceeds precision of {1} field"
 argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
-argument_list|)
 name|ExInst
 argument_list|<
 name|SqlValidatorException
@@ -2000,13 +1400,6 @@ name|BaseMessage
 argument_list|(
 literal|"RANGE clause cannot be used with compound ORDER BY clause"
 argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
-argument_list|)
 name|ExInst
 argument_list|<
 name|SqlValidatorException
@@ -2018,13 +1411,6 @@ annotation|@
 name|BaseMessage
 argument_list|(
 literal|"Data type of ORDER BY prohibits use of RANGE clause"
-argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
 argument_list|)
 name|ExInst
 argument_list|<
@@ -2038,13 +1424,6 @@ name|BaseMessage
 argument_list|(
 literal|"Data Type mismatch between ORDER BY and RANGE clause"
 argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
-argument_list|)
 name|ExInst
 argument_list|<
 name|SqlValidatorException
@@ -2056,13 +1435,6 @@ annotation|@
 name|BaseMessage
 argument_list|(
 literal|"Window ORDER BY expression of type DATE requires range of type INTERVAL"
-argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
 argument_list|)
 name|ExInst
 argument_list|<
@@ -2076,13 +1448,6 @@ name|BaseMessage
 argument_list|(
 literal|"Window boundary must be constant"
 argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
-argument_list|)
 name|ExInst
 argument_list|<
 name|SqlValidatorException
@@ -2094,13 +1459,6 @@ annotation|@
 name|BaseMessage
 argument_list|(
 literal|"ROWS value must be a non-negative integral constant"
-argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
 argument_list|)
 name|ExInst
 argument_list|<
@@ -2114,13 +1472,6 @@ name|BaseMessage
 argument_list|(
 literal|"Window specification must contain an ORDER BY clause"
 argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
-argument_list|)
 name|ExInst
 argument_list|<
 name|SqlValidatorException
@@ -2132,13 +1483,6 @@ annotation|@
 name|BaseMessage
 argument_list|(
 literal|"UNBOUNDED FOLLOWING cannot be specified for the lower frame boundary"
-argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
 argument_list|)
 name|ExInst
 argument_list|<
@@ -2152,13 +1496,6 @@ name|BaseMessage
 argument_list|(
 literal|"UNBOUNDED PRECEDING cannot be specified for the upper frame boundary"
 argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
-argument_list|)
 name|ExInst
 argument_list|<
 name|SqlValidatorException
@@ -2170,13 +1507,6 @@ annotation|@
 name|BaseMessage
 argument_list|(
 literal|"Upper frame boundary cannot be PRECEDING when lower boundary is CURRENT ROW"
-argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
 argument_list|)
 name|ExInst
 argument_list|<
@@ -2190,13 +1520,6 @@ name|BaseMessage
 argument_list|(
 literal|"Upper frame boundary cannot be CURRENT ROW when lower boundary is FOLLOWING"
 argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
-argument_list|)
 name|ExInst
 argument_list|<
 name|SqlValidatorException
@@ -2208,13 +1531,6 @@ annotation|@
 name|BaseMessage
 argument_list|(
 literal|"Upper frame boundary cannot be PRECEDING when lower boundary is FOLLOWING"
-argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
 argument_list|)
 name|ExInst
 argument_list|<
@@ -2228,13 +1544,6 @@ name|BaseMessage
 argument_list|(
 literal|"Window name must be a simple identifier"
 argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
-argument_list|)
 name|ExInst
 argument_list|<
 name|SqlValidatorException
@@ -2246,13 +1555,6 @@ annotation|@
 name|BaseMessage
 argument_list|(
 literal|"Duplicate window names not allowed"
-argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
 argument_list|)
 name|ExInst
 argument_list|<
@@ -2266,13 +1568,6 @@ name|BaseMessage
 argument_list|(
 literal|"Empty window specification not allowed"
 argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
-argument_list|)
 name|ExInst
 argument_list|<
 name|SqlValidatorException
@@ -2284,13 +1579,6 @@ annotation|@
 name|BaseMessage
 argument_list|(
 literal|"Duplicate window specification not allowed in the same window clause"
-argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
 argument_list|)
 name|ExInst
 argument_list|<
@@ -2304,13 +1592,6 @@ name|BaseMessage
 argument_list|(
 literal|"ROW/RANGE not allowed with RANK or DENSE_RANK functions"
 argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
-argument_list|)
 name|ExInst
 argument_list|<
 name|SqlValidatorException
@@ -2322,13 +1603,6 @@ annotation|@
 name|BaseMessage
 argument_list|(
 literal|"RANK or DENSE_RANK functions require ORDER BY clause in window specification"
-argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
 argument_list|)
 name|ExInst
 argument_list|<
@@ -2342,13 +1616,6 @@ name|BaseMessage
 argument_list|(
 literal|"PARTITION BY not allowed with existing window reference"
 argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
-argument_list|)
 name|ExInst
 argument_list|<
 name|SqlValidatorException
@@ -2360,13 +1627,6 @@ annotation|@
 name|BaseMessage
 argument_list|(
 literal|"ORDER BY not allowed in both base and referenced windows"
-argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
 argument_list|)
 name|ExInst
 argument_list|<
@@ -2380,13 +1640,6 @@ name|BaseMessage
 argument_list|(
 literal|"Referenced window cannot have framing declarations"
 argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
-argument_list|)
 name|ExInst
 argument_list|<
 name|SqlValidatorException
@@ -2398,13 +1651,6 @@ annotation|@
 name|BaseMessage
 argument_list|(
 literal|"Type ''{0}'' is not supported"
-argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
 argument_list|)
 name|ExInst
 argument_list|<
@@ -2421,13 +1667,6 @@ name|BaseMessage
 argument_list|(
 literal|"DISTINCT/ALL not allowed with {0} function"
 argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
-argument_list|)
 name|ExInst
 argument_list|<
 name|SqlValidatorException
@@ -2442,13 +1681,6 @@ annotation|@
 name|BaseMessage
 argument_list|(
 literal|"Not allowed to perform {0} on {1}"
-argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
 argument_list|)
 name|ExInst
 argument_list|<
@@ -2468,13 +1700,6 @@ name|BaseMessage
 argument_list|(
 literal|"The {0} function does not support the {1} data type."
 argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
-argument_list|)
 name|ExInst
 argument_list|<
 name|SqlValidatorException
@@ -2493,13 +1718,6 @@ name|BaseMessage
 argument_list|(
 literal|"Only scalar subqueries allowed in select list."
 argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
-argument_list|)
 name|ExInst
 argument_list|<
 name|SqlValidatorException
@@ -2511,13 +1729,6 @@ annotation|@
 name|BaseMessage
 argument_list|(
 literal|"Ordinal out of range"
-argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
 argument_list|)
 name|ExInst
 argument_list|<
@@ -2531,13 +1742,6 @@ name|BaseMessage
 argument_list|(
 literal|"Window has negative size"
 argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
-argument_list|)
 name|ExInst
 argument_list|<
 name|SqlValidatorException
@@ -2549,13 +1753,6 @@ annotation|@
 name|BaseMessage
 argument_list|(
 literal|"UNBOUNDED FOLLOWING window not supported"
-argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
 argument_list|)
 name|ExInst
 argument_list|<
@@ -2569,13 +1766,6 @@ name|BaseMessage
 argument_list|(
 literal|"Cannot use DISALLOW PARTIAL with window based on RANGE"
 argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
-argument_list|)
 name|ExInst
 argument_list|<
 name|SqlValidatorException
@@ -2587,13 +1777,6 @@ annotation|@
 name|BaseMessage
 argument_list|(
 literal|"Interval leading field precision ''{0,number,#}'' out of range for {1}"
-argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
 argument_list|)
 name|ExInst
 argument_list|<
@@ -2613,13 +1796,6 @@ name|BaseMessage
 argument_list|(
 literal|"Interval fractional second precision ''{0,number,#}'' out of range for {1}"
 argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
-argument_list|)
 name|ExInst
 argument_list|<
 name|SqlValidatorException
@@ -2638,13 +1814,6 @@ name|BaseMessage
 argument_list|(
 literal|"Duplicate relation name ''{0}'' in FROM clause"
 argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
-argument_list|)
 name|ExInst
 argument_list|<
 name|SqlValidatorException
@@ -2659,13 +1828,6 @@ annotation|@
 name|BaseMessage
 argument_list|(
 literal|"Duplicate column name ''{0}'' in output"
-argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
 argument_list|)
 name|ExInst
 argument_list|<
@@ -2682,13 +1844,6 @@ name|BaseMessage
 argument_list|(
 literal|"Duplicate name ''{0}'' in column list"
 argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
-argument_list|)
 name|ExInst
 argument_list|<
 name|SqlValidatorException
@@ -2703,13 +1858,6 @@ annotation|@
 name|BaseMessage
 argument_list|(
 literal|"Internal error: {0}"
-argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|EigenbaseException
-operator|.
-name|class
 argument_list|)
 name|ExInst
 argument_list|<
@@ -2726,13 +1874,6 @@ name|BaseMessage
 argument_list|(
 literal|"Argument to function ''{0}'' must be a literal"
 argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
-argument_list|)
 name|ExInst
 argument_list|<
 name|SqlValidatorException
@@ -2747,13 +1888,6 @@ annotation|@
 name|BaseMessage
 argument_list|(
 literal|"Argument to function ''{0}'' must be a positive integer literal"
-argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
 argument_list|)
 name|ExInst
 argument_list|<
@@ -2770,13 +1904,6 @@ name|BaseMessage
 argument_list|(
 literal|"Validation Error: {0}"
 argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|EigenbaseException
-operator|.
-name|class
-argument_list|)
 name|ExInst
 argument_list|<
 name|EigenbaseException
@@ -2791,13 +1918,6 @@ annotation|@
 name|BaseMessage
 argument_list|(
 literal|"Locale ''{0}'' in an illegal format"
-argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|EigenbaseException
-operator|.
-name|class
 argument_list|)
 name|ExInst
 argument_list|<
@@ -2814,13 +1934,6 @@ name|BaseMessage
 argument_list|(
 literal|"Argument to function ''{0}'' must not be NULL"
 argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
-argument_list|)
 name|ExInst
 argument_list|<
 name|SqlValidatorException
@@ -2836,13 +1949,6 @@ name|BaseMessage
 argument_list|(
 literal|"Illegal use of ''NULL''"
 argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
-argument_list|)
 name|ExInst
 argument_list|<
 name|SqlValidatorException
@@ -2855,13 +1961,6 @@ name|BaseMessage
 argument_list|(
 literal|"Illegal use of dynamic parameter"
 argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
-argument_list|)
 name|ExInst
 argument_list|<
 name|SqlValidatorException
@@ -2873,13 +1972,6 @@ annotation|@
 name|BaseMessage
 argument_list|(
 literal|"''{0}'' is not a valid boolean value"
-argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|EigenbaseException
-operator|.
-name|class
 argument_list|)
 name|ExInst
 argument_list|<
@@ -2895,13 +1987,6 @@ annotation|@
 name|BaseMessage
 argument_list|(
 literal|"Argument to function ''{0}'' must be a valid precision between ''{1,number,#}'' and ''{2,number,#}''"
-argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
 argument_list|)
 name|ExInst
 argument_list|<
@@ -2924,13 +2009,6 @@ name|BaseMessage
 argument_list|(
 literal|"''{0}'' is not a valid datetime format"
 argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|EigenbaseException
-operator|.
-name|class
-argument_list|)
 name|ExInst
 argument_list|<
 name|EigenbaseException
@@ -2945,13 +2023,6 @@ annotation|@
 name|BaseMessage
 argument_list|(
 literal|"Cannot explicitly insert value into IDENTITY column ''{0}'' which is ALWAYS GENERATED"
-argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|EigenbaseException
-operator|.
-name|class
 argument_list|)
 name|ExInst
 argument_list|<
@@ -2968,13 +2039,6 @@ name|BaseMessage
 argument_list|(
 literal|"Argument to function ''{0}'' must have a scale of 0"
 argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|EigenbaseException
-operator|.
-name|class
-argument_list|)
 name|ExInst
 argument_list|<
 name|EigenbaseException
@@ -2989,13 +2053,6 @@ annotation|@
 name|BaseMessage
 argument_list|(
 literal|"Statement preparation aborted"
-argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|EigenbaseException
-operator|.
-name|class
 argument_list|)
 name|ExInst
 argument_list|<
@@ -3020,13 +2077,6 @@ name|value
 operator|=
 literal|"SQL:2003 Part 2 Annex F"
 argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|EigenbaseException
-operator|.
-name|class
-argument_list|)
 name|Feature
 name|sQLFeature_E051_01
 parameter_list|()
@@ -3046,13 +2096,6 @@ argument_list|,
 name|value
 operator|=
 literal|"SQL:2003 Part 2 Annex F"
-argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|EigenbaseException
-operator|.
-name|class
 argument_list|)
 name|Feature
 name|sQLFeature_E071_03
@@ -3074,13 +2117,6 @@ name|value
 operator|=
 literal|"SQL:2003 Part 2 Annex F"
 argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|EigenbaseException
-operator|.
-name|class
-argument_list|)
 name|Feature
 name|sQLFeature_E101_03
 parameter_list|()
@@ -3100,13 +2136,6 @@ argument_list|,
 name|value
 operator|=
 literal|"SQL:2003 Part 2 Annex F"
-argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|EigenbaseException
-operator|.
-name|class
 argument_list|)
 name|Feature
 name|sQLFeature_E151
@@ -3128,13 +2157,6 @@ name|value
 operator|=
 literal|"SQL:2003 Part 2 Annex F"
 argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|EigenbaseException
-operator|.
-name|class
-argument_list|)
 name|Feature
 name|sQLFeature_F302
 parameter_list|()
@@ -3154,13 +2176,6 @@ argument_list|,
 name|value
 operator|=
 literal|"SQL:2003 Part 2 Annex F"
-argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|EigenbaseException
-operator|.
-name|class
 argument_list|)
 name|Feature
 name|sQLFeature_F312
@@ -3182,13 +2197,6 @@ name|value
 operator|=
 literal|"SQL:2003 Part 2 Annex F"
 argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|EigenbaseException
-operator|.
-name|class
-argument_list|)
 name|Feature
 name|sQLFeature_S271
 parameter_list|()
@@ -3209,13 +2217,6 @@ name|value
 operator|=
 literal|"SQL:2003 Part 2 Annex F"
 argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|EigenbaseException
-operator|.
-name|class
-argument_list|)
 name|Feature
 name|sQLFeature_T613
 parameter_list|()
@@ -3235,13 +2236,6 @@ argument_list|,
 name|value
 operator|=
 literal|"Eigenbase-defined"
-argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|EigenbaseException
-operator|.
-name|class
 argument_list|)
 name|ExInst
 argument_list|<
@@ -3266,13 +2260,6 @@ name|value
 operator|=
 literal|"Eigenbase-defined"
 argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|EigenbaseException
-operator|.
-name|class
-argument_list|)
 name|Feature
 name|sQLConformance_OrderByDesc
 parameter_list|()
@@ -3292,13 +2279,6 @@ argument_list|,
 name|value
 operator|=
 literal|"Eigenbase-defined"
-argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|EigenbaseException
-operator|.
-name|class
 argument_list|)
 name|ExInst
 argument_list|<
@@ -3323,13 +2303,6 @@ name|value
 operator|=
 literal|"Eigenbase-defined"
 argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|EigenbaseException
-operator|.
-name|class
-argument_list|)
 name|Feature
 name|sQLFeatureExt_T613_Substitution
 parameter_list|()
@@ -3349,13 +2322,6 @@ argument_list|,
 name|value
 operator|=
 literal|"Eigenbase-defined"
-argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|EigenbaseException
-operator|.
-name|class
 argument_list|)
 name|ExInst
 argument_list|<
@@ -3380,13 +2346,6 @@ name|value
 operator|=
 literal|"Eigenbase-defined"
 argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|EigenbaseException
-operator|.
-name|class
-argument_list|)
 name|ExInst
 argument_list|<
 name|EigenbaseException
@@ -3410,13 +2369,6 @@ name|value
 operator|=
 literal|"Eigenbase-defined"
 argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|EigenbaseException
-operator|.
-name|class
-argument_list|)
 name|ExInst
 argument_list|<
 name|EigenbaseException
@@ -3428,13 +2380,6 @@ annotation|@
 name|BaseMessage
 argument_list|(
 literal|"Require at least 1 argument"
-argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
 argument_list|)
 name|ExInst
 argument_list|<
@@ -3448,13 +2393,6 @@ name|BaseMessage
 argument_list|(
 literal|"Map requires at least 2 arguments"
 argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
-argument_list|)
 name|ExInst
 argument_list|<
 name|SqlValidatorException
@@ -3466,13 +2404,6 @@ annotation|@
 name|BaseMessage
 argument_list|(
 literal|"Map requires an even number of arguments"
-argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
 argument_list|)
 name|ExInst
 argument_list|<
@@ -3486,13 +2417,6 @@ name|BaseMessage
 argument_list|(
 literal|"Incompatible types"
 argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
-argument_list|)
 name|ExInst
 argument_list|<
 name|SqlValidatorException
@@ -3505,13 +2429,6 @@ name|BaseMessage
 argument_list|(
 literal|"Number of columns must match number of query columns"
 argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
-argument_list|)
 name|ExInst
 argument_list|<
 name|SqlValidatorException
@@ -3523,13 +2440,6 @@ annotation|@
 name|BaseMessage
 argument_list|(
 literal|"Column has duplicate column name ''{0}'' and no column list specified"
-argument_list|)
-annotation|@
-name|ExceptionClass
-argument_list|(
-name|SqlValidatorException
-operator|.
-name|class
 argument_list|)
 name|ExInst
 argument_list|<
