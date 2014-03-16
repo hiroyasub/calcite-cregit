@@ -3874,7 +3874,12 @@ operator|.
 name|getTraitSet
 argument_list|()
 operator|.
-name|contains
+name|getTrait
+argument_list|(
+name|traitDef
+argument_list|)
+operator|.
+name|subsumes
 argument_list|(
 name|toTrait
 argument_list|)
