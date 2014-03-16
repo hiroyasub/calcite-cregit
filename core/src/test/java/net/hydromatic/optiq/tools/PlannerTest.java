@@ -61,11 +61,9 @@ name|hydromatic
 operator|.
 name|optiq
 operator|.
-name|impl
+name|config
 operator|.
-name|java
-operator|.
-name|ReflectiveSchema
+name|Lex
 import|;
 end_import
 
@@ -77,9 +75,11 @@ name|hydromatic
 operator|.
 name|optiq
 operator|.
-name|jdbc
+name|impl
 operator|.
-name|ConnectionConfig
+name|java
+operator|.
+name|ReflectiveSchema
 import|;
 end_import
 
@@ -550,8 +550,6 @@ name|Frameworks
 operator|.
 name|getPlanner
 argument_list|(
-name|ConnectionConfig
-operator|.
 name|Lex
 operator|.
 name|ORACLE

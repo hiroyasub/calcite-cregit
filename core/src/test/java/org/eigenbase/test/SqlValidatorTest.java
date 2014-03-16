@@ -133,9 +133,9 @@ name|hydromatic
 operator|.
 name|optiq
 operator|.
-name|jdbc
+name|config
 operator|.
-name|ConnectionConfig
+name|Lex
 import|;
 end_import
 
@@ -15759,8 +15759,6 @@ name|tester
 operator|.
 name|withLex
 argument_list|(
-name|ConnectionConfig
-operator|.
 name|Lex
 operator|.
 name|JAVA
@@ -15844,8 +15842,6 @@ name|tester
 operator|.
 name|withLex
 argument_list|(
-name|ConnectionConfig
-operator|.
 name|Lex
 operator|.
 name|JAVA
@@ -15944,8 +15940,6 @@ name|tester
 operator|.
 name|withLex
 argument_list|(
-name|ConnectionConfig
-operator|.
 name|Lex
 operator|.
 name|JAVA
@@ -16205,8 +16199,6 @@ name|tester
 operator|.
 name|withLex
 argument_list|(
-name|ConnectionConfig
-operator|.
 name|Lex
 operator|.
 name|SQL_SERVER

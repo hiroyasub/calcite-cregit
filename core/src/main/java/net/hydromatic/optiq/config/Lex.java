@@ -11,7 +11,7 @@ name|hydromatic
 operator|.
 name|optiq
 operator|.
-name|jdbc
+name|config
 package|;
 end_package
 
@@ -40,59 +40,15 @@ import|;
 end_import
 
 begin_comment
-comment|/** Interface for reading connection properties within Optiq code. There is  * a method for every property. At some point there will be similar config  * classes for system and statement properties. */
+comment|/** Named, built-in lexical policy. A lexical policy describes how  * identifiers are quoted, whether they are converted to upper- or  * lower-case when they are read, and whether they are matched  * case-sensitively. */
 end_comment
 
-begin_interface
+begin_enum
 specifier|public
-interface|interface
-name|ConnectionConfig
-block|{
-name|boolean
-name|autoTemp
-parameter_list|()
-function_decl|;
-name|boolean
-name|materializationsEnabled
-parameter_list|()
-function_decl|;
-name|String
-name|model
-parameter_list|()
-function_decl|;
-name|String
-name|schema
-parameter_list|()
-function_decl|;
-name|Lex
-name|lex
-parameter_list|()
-function_decl|;
-name|Quoting
-name|quoting
-parameter_list|()
-function_decl|;
-name|Casing
-name|unquotedCasing
-parameter_list|()
-function_decl|;
-name|Casing
-name|quotedCasing
-parameter_list|()
-function_decl|;
-name|boolean
-name|caseSensitive
-parameter_list|()
-function_decl|;
-name|boolean
-name|spark
-parameter_list|()
-function_decl|;
-comment|/** Named, built-in lexical policy. A lexical policy describes how    * identifiers are quoted, whether they are converted to upper- or    * lower-case when they are read, and whether they are matched    * case-sensitively. */
 enum|enum
 name|Lex
 block|{
-comment|/** Lexical policy similar to Oracle. The case of identifiers enclosed in      * double-quotes is preserved; unquoted identifiers are converted to      * upper-case; after which, identifiers are matched case-sensitively. */
+comment|/** Lexical policy similar to Oracle. The case of identifiers enclosed in    * double-quotes is preserved; unquoted identifiers are converted to    * upper-case; after which, identifiers are matched case-sensitively. */
 name|ORACLE
 argument_list|(
 name|Quoting
@@ -110,7 +66,7 @@ argument_list|,
 literal|true
 argument_list|)
 block|,
-comment|/** Lexical policy similar to MySQL. (To be precise: MySQL on Windows;      * MySQL on Linux uses case-sensitive matching, like the Linux file system.)      * The case of identifiers is preserved whether or not they quoted;      * after which, identifiers are matched case-insensitively.      * Back-ticks allow identifiers to contain non-alphanumeric characters. */
+comment|/** Lexical policy similar to MySQL. (To be precise: MySQL on Windows;    * MySQL on Linux uses case-sensitive matching, like the Linux file system.)    * The case of identifiers is preserved whether or not they quoted;    * after which, identifiers are matched case-insensitively.    * Back-ticks allow identifiers to contain non-alphanumeric characters. */
 name|MYSQL
 argument_list|(
 name|Quoting
@@ -128,7 +84,7 @@ argument_list|,
 literal|false
 argument_list|)
 block|,
-comment|/** Lexical policy similar to Microsoft SQL Server.      * The case of identifiers is preserved whether or not they are quoted;      * after which, identifiers are matched case-insensitively.      * Brackets allow identifiers to contain non-alphanumeric characters. */
+comment|/** Lexical policy similar to Microsoft SQL Server.    * The case of identifiers is preserved whether or not they are quoted;    * after which, identifiers are matched case-insensitively.    * Brackets allow identifiers to contain non-alphanumeric characters. */
 name|SQL_SERVER
 argument_list|(
 name|Quoting
@@ -146,7 +102,7 @@ argument_list|,
 literal|false
 argument_list|)
 block|,
-comment|/** Lexical policy similar to Java.      * The case of identifiers is preserved whether or not they are quoted;      * after which, identifiers are matched case-sensitively.      * Unlike Java, back-ticks allow identifiers to contain non-alphanumeric      * characters. */
+comment|/** Lexical policy similar to Java.    * The case of identifiers is preserved whether or not they are quoted;    * after which, identifiers are matched case-sensitively.    * Unlike Java, back-ticks allow identifiers to contain non-alphanumeric    * characters. */
 name|JAVA
 argument_list|(
 name|Quoting
@@ -225,11 +181,10 @@ name|caseSensitive
 expr_stmt|;
 block|}
 block|}
-block|}
-end_interface
+end_enum
 
 begin_comment
-comment|// End ConnectionConfig.java
+comment|// End Lex.java
 end_comment
 
 end_unit

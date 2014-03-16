@@ -47,6 +47,20 @@ name|hydromatic
 operator|.
 name|optiq
 operator|.
+name|config
+operator|.
+name|OptiqConnectionConfig
+import|;
+end_import
+
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|optiq
+operator|.
 name|impl
 operator|.
 name|java
@@ -130,8 +144,7 @@ parameter_list|()
 throws|throws
 name|SQLException
 function_decl|;
-comment|/** Returns a view onto this connection's configuration properties. Code    * within Optiq should use this view rather than calling    * {@link java.util.Properties#getProperty(String)}. */
-name|ConnectionConfig
+name|OptiqConnectionConfig
 name|config
 parameter_list|()
 function_decl|;

@@ -73,11 +73,9 @@ name|hydromatic
 operator|.
 name|optiq
 operator|.
-name|impl
+name|config
 operator|.
-name|java
-operator|.
-name|JavaTypeFactory
+name|Lex
 import|;
 end_import
 
@@ -89,9 +87,11 @@ name|hydromatic
 operator|.
 name|optiq
 operator|.
-name|jdbc
+name|impl
 operator|.
-name|ConnectionConfig
+name|java
+operator|.
+name|JavaTypeFactory
 import|;
 end_import
 
@@ -273,8 +273,6 @@ name|ruleSets
 decl_stmt|;
 specifier|private
 specifier|final
-name|ConnectionConfig
-operator|.
 name|Lex
 name|lex
 decl_stmt|;
@@ -332,8 +330,6 @@ decl_stmt|;
 specifier|public
 name|PlannerImpl
 parameter_list|(
-name|ConnectionConfig
-operator|.
 name|Lex
 name|lex
 parameter_list|,

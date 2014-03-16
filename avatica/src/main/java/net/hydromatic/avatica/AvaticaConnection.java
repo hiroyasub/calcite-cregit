@@ -226,6 +226,20 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+comment|/** Returns a view onto this connection's configuration properties. Code    * in Avatica and derived projects should use this view rather than calling    * {@link java.util.Properties#getProperty(String)}. Derived projects will    * almost certainly subclass {@link ConnectionConfig} with their own    * properties. */
+specifier|public
+name|ConnectionConfig
+name|config
+parameter_list|()
+block|{
+return|return
+operator|new
+name|ConnectionConfigImpl
+argument_list|(
+name|info
+argument_list|)
+return|;
+block|}
 comment|// Connection methods
 specifier|public
 name|AvaticaStatement
@@ -1237,11 +1251,32 @@ name|TimeZone
 name|getTimeZone
 parameter_list|()
 block|{
+specifier|final
+name|String
+name|timeZoneName
+init|=
+name|config
+argument_list|()
+operator|.
+name|timeZone
+argument_list|()
+decl_stmt|;
 return|return
+name|timeZoneName
+operator|==
+literal|null
+condition|?
 name|TimeZone
 operator|.
 name|getDefault
 argument_list|()
+else|:
+name|TimeZone
+operator|.
+name|getTimeZone
+argument_list|(
+name|timeZoneName
+argument_list|)
 return|;
 block|}
 comment|/**    * Executes a parsed query, closing any previously open result set.    *    * @param prepareResult Parsed query    * @return Result set    * @throws java.sql.SQLException if a database error occurs    */

@@ -199,9 +199,9 @@ name|hydromatic
 operator|.
 name|optiq
 operator|.
-name|jdbc
+name|config
 operator|.
-name|ConnectionConfig
+name|Lex
 import|;
 end_import
 
@@ -1401,8 +1401,6 @@ specifier|public
 name|SqlTester
 name|withLex
 parameter_list|(
-name|ConnectionConfig
-operator|.
 name|Lex
 name|lex
 parameter_list|)

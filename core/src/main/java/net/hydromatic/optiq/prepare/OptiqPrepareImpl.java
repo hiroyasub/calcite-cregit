@@ -123,11 +123,9 @@ name|hydromatic
 operator|.
 name|optiq
 operator|.
-name|impl
+name|config
 operator|.
-name|java
-operator|.
-name|JavaTypeFactory
+name|OptiqConnectionConfig
 import|;
 end_import
 
@@ -139,9 +137,11 @@ name|hydromatic
 operator|.
 name|optiq
 operator|.
-name|jdbc
+name|impl
 operator|.
-name|ConnectionConfig
+name|java
+operator|.
+name|JavaTypeFactory
 import|;
 end_import
 
@@ -1777,7 +1777,7 @@ operator|==
 literal|null
 assert|;
 specifier|final
-name|ConnectionConfig
+name|OptiqConnectionConfig
 name|config
 init|=
 name|context
