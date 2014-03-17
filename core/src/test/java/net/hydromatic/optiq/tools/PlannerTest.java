@@ -1045,12 +1045,12 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Unit test that calls {@link Planner#transform} twice,    * with different rule sets, with different conventions */
+comment|/** Unit test that calls {@link Planner#transform} twice,    * with different rule sets, with different conventions.    *    *<p>{@link net.hydromatic.optiq.impl.jdbc.JdbcConvention} is different    * from the typical convention in that it is not a singleton. Switching to    * a different instance causes problems unless the planner's state is wiped    * clean between calls to {@link Planner#transform}. */
 annotation|@
 name|Test
 specifier|public
 name|void
-name|testPlanTransformWithDiffRulesetAndConvention
+name|testPlanTransformWithDiffRuleSetAndConvention
 parameter_list|()
 throws|throws
 name|Exception
@@ -1211,7 +1211,9 @@ argument_list|)
 argument_list|,
 name|equalTo
 argument_list|(
-literal|"JdbcProjectRel(name=[$2])\n  MockJdbcTableScan(table=[[hr, emps]])\n"
+literal|"JdbcProjectRel(name=[$2])\n"
+operator|+
+literal|"  MockJdbcTableScan(table=[[hr, emps]])\n"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1324,7 +1326,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**      * Rule to convert a {@link JavaRules.EnumerableTableAccessRel} to an      * {@link MockJdbcTableScan}.      */
+comment|/**    * Rule to convert a {@link JavaRules.EnumerableTableAccessRel} to an    * {@link MockJdbcTableScan}.    */
 specifier|private
 class|class
 name|MockJdbcTableRule
@@ -1368,7 +1370,7 @@ specifier|final
 name|JavaRules
 operator|.
 name|EnumerableTableAccessRel
-name|tbl
+name|scan
 init|=
 operator|(
 name|JavaRules
@@ -1381,12 +1383,12 @@ return|return
 operator|new
 name|MockJdbcTableScan
 argument_list|(
-name|tbl
+name|scan
 operator|.
 name|getCluster
 argument_list|()
 argument_list|,
-name|tbl
+name|scan
 operator|.
 name|getTable
 argument_list|()
@@ -1400,7 +1402,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**      * Relational expression representing a "mock" scan of a table in a      * JDBC data source.      */
+comment|/**    * Relational expression representing a "mock" scan of a table in a    * JDBC data source.    */
 specifier|private
 class|class
 name|MockJdbcTableScan
