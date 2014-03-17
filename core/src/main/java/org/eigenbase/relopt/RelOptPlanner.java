@@ -169,12 +169,7 @@ argument_list|>
 name|getRelTraitDefs
 parameter_list|()
 function_decl|;
-comment|/**    * Removes all rules.    */
-name|void
-name|clearRules
-parameter_list|()
-function_decl|;
-comment|/**    * Remove all internal status of planner.    */
+comment|/**    * Removes all internal state, including all rules.    */
 name|void
 name|clear
 parameter_list|()

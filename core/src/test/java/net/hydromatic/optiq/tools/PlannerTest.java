@@ -1045,7 +1045,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Unit test that calls {@link Planner#transform} twice,    * with different rule sets, with different conventions.    *    *<p>{@link net.hydromatic.optiq.impl.jdbc.JdbcConvention} is different    * from the typical convention in that it is not a singleton. Switching to    * a different instance causes problems unless the planner's state is wiped    * clean between calls to {@link Planner#transform}. */
+comment|/** Unit test that calls {@link Planner#transform} twice,    * with different rule sets, with different conventions.    *    *<p>{@link net.hydromatic.optiq.impl.jdbc.JdbcConvention} is different    * from the typical convention in that it is not a singleton. Switching to    * a different instance causes problems unless planner state is wiped clean    * between calls to {@link Planner#transform}. */
 annotation|@
 name|Test
 specifier|public

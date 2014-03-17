@@ -177,11 +177,18 @@ parameter_list|)
 block|{
 comment|// ignore - this planner does not support materializations
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
-name|clearRules
+name|clear
 parameter_list|()
 block|{
+name|super
+operator|.
+name|clear
+argument_list|()
+expr_stmt|;
 name|this
 operator|.
 name|rule

@@ -197,6 +197,7 @@ argument_list|>
 name|mapDigestToVertex
 decl_stmt|;
 specifier|private
+specifier|final
 name|Set
 argument_list|<
 name|RelOptRule
@@ -436,11 +437,18 @@ return|return
 name|added
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
-name|clearRules
+name|clear
 parameter_list|()
 block|{
+name|super
+operator|.
+name|clear
+argument_list|()
+expr_stmt|;
 for|for
 control|(
 name|RelOptRule
