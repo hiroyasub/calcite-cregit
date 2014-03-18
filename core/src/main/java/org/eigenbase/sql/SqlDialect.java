@@ -553,6 +553,22 @@ return|;
 block|}
 if|else if
 condition|(
+name|productName
+operator|.
+name|equals
+argument_list|(
+literal|"Phoenix"
+argument_list|)
+condition|)
+block|{
+return|return
+name|DatabaseProduct
+operator|.
+name|PHOENIX
+return|;
+block|}
+if|else if
+condition|(
 name|upperProductName
 operator|.
 name|contains
@@ -1433,6 +1449,9 @@ case|:
 case|case
 name|HSQLDB
 case|:
+case|case
+name|PHOENIX
+case|:
 return|return
 literal|false
 return|;
@@ -1722,6 +1741,13 @@ argument_list|(
 literal|"Interbase"
 argument_list|,
 literal|null
+argument_list|)
+block|,
+name|PHOENIX
+argument_list|(
+literal|"Phoenix"
+argument_list|,
+literal|"\""
 argument_list|)
 block|,
 name|POSTGRESQL
