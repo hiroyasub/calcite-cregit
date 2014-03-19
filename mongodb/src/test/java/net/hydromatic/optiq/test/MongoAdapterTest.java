@@ -630,6 +630,150 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testSortLimit
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|enable
+argument_list|(
+name|enabled
+argument_list|()
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|ZIPS
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select state, id from zips\n"
+operator|+
+literal|"order by state, id offset 2 rows fetch next 3 rows only"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"STATE=AK; ID=99502\n"
+operator|+
+literal|"STATE=AK; ID=99503\n"
+operator|+
+literal|"STATE=AK; ID=99504\n"
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|mongoChecker
+argument_list|(
+literal|"{$project: {STATE: '$state', ID: '$_id'}}"
+argument_list|,
+literal|"{$sort: {STATE: 1, ID: 1}}"
+argument_list|,
+literal|"{$skip: 2}"
+argument_list|,
+literal|"{$limit: 3}"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testOffsetLimit
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|enable
+argument_list|(
+name|enabled
+argument_list|()
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|ZIPS
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select state, id from zips\n"
+operator|+
+literal|"offset 2 fetch next 3 rows only"
+argument_list|)
+operator|.
+name|runs
+argument_list|()
+operator|.
+name|queryContains
+argument_list|(
+name|mongoChecker
+argument_list|(
+literal|"{$skip: 2}"
+argument_list|,
+literal|"{$limit: 3}"
+argument_list|,
+literal|"{$project: {STATE: '$state', ID: '$_id'}}"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testLimit
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|enable
+argument_list|(
+name|enabled
+argument_list|()
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|ZIPS
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select state, id from zips\n"
+operator|+
+literal|"fetch next 3 rows only"
+argument_list|)
+operator|.
+name|runs
+argument_list|()
+operator|.
+name|queryContains
+argument_list|(
+name|mongoChecker
+argument_list|(
+literal|"{$limit: 3}"
+argument_list|,
+literal|"{$project: {STATE: '$state', ID: '$_id'}}"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testFilterSort
 parameter_list|()
 block|{
