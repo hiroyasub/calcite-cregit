@@ -288,6 +288,15 @@ argument_list|()
 operator|.
 name|getTypeFactory
 argument_list|()
+argument_list|,
+name|getChild
+argument_list|()
+operator|.
+name|getRowType
+argument_list|()
+operator|.
+name|getFieldNames
+argument_list|()
 argument_list|)
 decl_stmt|;
 specifier|final
@@ -354,11 +363,21 @@ operator|+
 literal|"'"
 argument_list|)
 condition|?
+name|MongoRules
+operator|.
+name|maybeQuote
+argument_list|(
 name|name
+argument_list|)
 operator|+
 literal|": 1"
 else|:
+name|MongoRules
+operator|.
+name|maybeQuote
+argument_list|(
 name|name
+argument_list|)
 operator|+
 literal|": "
 operator|+

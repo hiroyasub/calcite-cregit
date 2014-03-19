@@ -1265,12 +1265,46 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Query based on the "mongo-zips" model. */
+comment|/** Simple query based on the "mongo-zips" model. */
 annotation|@
 name|Test
 specifier|public
 name|void
 name|testZips
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|enable
+argument_list|(
+name|enabled
+argument_list|()
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|ZIPS
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select state, city from zips"
+argument_list|)
+operator|.
+name|returnsCount
+argument_list|(
+literal|29467
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testCountGroupByEmpty
 parameter_list|()
 block|{
 name|OptiqAssert
@@ -1301,13 +1335,312 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"PLAN=EnumerableAggregateRel(group=[{}], EXPR$0=[COUNT()])\n"
+literal|"PLAN=MongoToEnumerableConverter\n"
 operator|+
-literal|"  MongoToEnumerableConverter\n"
+literal|"  MongoAggregateRel(group=[{}], EXPR$0=[COUNT()])\n"
 operator|+
 literal|"    MongoProjectRel(DUMMY=[0])\n"
 operator|+
 literal|"      MongoTableScan(table=[[mongo_raw, zips]])"
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|mongoChecker
+argument_list|(
+literal|"{$project: {DUMMY: {$ifNull: [null, 0]}}}"
+argument_list|,
+literal|"{$group: {_id: {}, 'EXPR$0': {$sum: 1}}}"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testGroupByOneColumnNotProjected
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|enable
+argument_list|(
+name|enabled
+argument_list|()
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|ZIPS
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select count(*) from zips group by state"
+argument_list|)
+operator|.
+name|limit
+argument_list|(
+literal|2
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"EXPR$0=659\n"
+operator|+
+literal|"EXPR$0=484\n"
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|mongoChecker
+argument_list|(
+literal|"{$project: {STATE: '$state'}}"
+argument_list|,
+literal|"{$group: {_id: '$STATE', 'EXPR$0': {$sum: 1}}}"
+argument_list|,
+literal|"{$project: {STATE: '$_id', 'EXPR$0': '$EXPR$0'}}"
+argument_list|,
+literal|"{$project: {'EXPR$0': 1}}"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testGroupByOneColumn
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|enable
+argument_list|(
+name|enabled
+argument_list|()
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|ZIPS
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select count(*) as c, state from zips group by state"
+argument_list|)
+operator|.
+name|limit
+argument_list|(
+literal|2
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"C=659; STATE=WV\n"
+operator|+
+literal|"C=484; STATE=WA\n"
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|mongoChecker
+argument_list|(
+literal|"{$project: {STATE: '$state'}}"
+argument_list|,
+literal|"{$group: {_id: '$STATE', C: {$sum: 1}}}"
+argument_list|,
+literal|"{$project: {STATE: '$_id', C: '$C'}}"
+argument_list|,
+literal|"{$project: {C: 1, STATE: 1}}"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testGroupByMinMaxSum
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|enable
+argument_list|(
+name|enabled
+argument_list|()
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|ZIPS
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select count(*) as c, state,\n"
+operator|+
+literal|" min(pop) as min_pop, max(pop) as max_pop, sum(pop) as sum_pop\n"
+operator|+
+literal|"from zips group by state"
+argument_list|)
+operator|.
+name|limit
+argument_list|(
+literal|2
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"C=659; STATE=WV; MIN_POP=0; MAX_POP=70185; SUM_POP=1793477\n"
+operator|+
+literal|"C=484; STATE=WA; MIN_POP=2; MAX_POP=50515; SUM_POP=4866692\n"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testGroupComposite
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|enable
+argument_list|(
+name|enabled
+argument_list|()
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|ZIPS
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select count(*) as c, state, city from zips\n"
+operator|+
+literal|"group by state, city order by c desc limit 2"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"C=93; STATE=TX; CITY=HOUSTON\n"
+operator|+
+literal|"C=56; STATE=CA; CITY=LOS ANGELES\n"
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|mongoChecker
+argument_list|(
+literal|"{$project: {STATE: '$state', CITY: '$city'}}"
+argument_list|,
+literal|"{$group: {_id: {STATE: '$STATE', CITY: '$CITY'}, C: {$sum: 1}}}"
+argument_list|,
+literal|"{$project: {_id: 0, STATE: '$_id.STATE', CITY: '$_id.CITY', C: '$C'}}"
+argument_list|,
+literal|"{$project: {C: 1, STATE: 1, CITY: 1}}"
+argument_list|,
+literal|"{$sort: {C: -1}}"
+argument_list|,
+literal|"{$limit: 2}"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDistinctCount
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|enable
+argument_list|(
+name|enabled
+argument_list|()
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|ZIPS
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select state, count(distinct city) as cdc from zips\n"
+operator|+
+literal|"where state in ('CA', 'TX') group by state"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"STATE=CA; CDC=1079\n"
+operator|+
+literal|"STATE=TX; CDC=1238\n"
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|mongoChecker
+argument_list|(
+literal|"{\n"
+operator|+
+literal|"  $match: {\n"
+operator|+
+literal|"    $or: [\n"
+operator|+
+literal|"      {\n"
+operator|+
+literal|"        state: \"CA\"\n"
+operator|+
+literal|"      },\n"
+operator|+
+literal|"      {\n"
+operator|+
+literal|"        state: \"TX\"\n"
+operator|+
+literal|"      }\n"
+operator|+
+literal|"    ]\n"
+operator|+
+literal|"  }\n"
+operator|+
+literal|"}"
+argument_list|,
+literal|"{$project: {STATE: '$state', CITY: '$city'}}"
+argument_list|,
+literal|"{$group: {_id: {STATE: '$STATE', CITY: '$CITY'}}}"
+argument_list|,
+literal|"{$project: {_id: 0, STATE: '$_id.STATE', CITY: '$_id.CITY'}}"
+argument_list|,
+literal|"{$group: {_id: '$STATE', CDC: {$sum: {$cond: [ {$eq: ['CITY', null]}, 0, 1]}}}}"
+argument_list|,
+literal|"{$project: {STATE: '$_id', CDC: '$CDC'}}"
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
