@@ -237,16 +237,6 @@ name|ImmutableList
 import|;
 end_import
 
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|List
-import|;
-end_import
-
 begin_comment
 comment|/** Implementation of {@link net.hydromatic.optiq.tools.Planner}. */
 end_comment
@@ -281,10 +271,10 @@ name|RuleSet
 argument_list|>
 name|ruleSets
 decl_stmt|;
-comment|/**    * Holds the RelTraitDefs to be registered with planner.    */
+comment|/** Holds the trait definitions to be registered with planner. May be null. */
 specifier|private
 specifier|final
-name|List
+name|ImmutableList
 argument_list|<
 name|RelTraitDef
 argument_list|>
@@ -346,44 +336,7 @@ specifier|private
 name|RelNode
 name|rel
 decl_stmt|;
-specifier|public
-name|PlannerImpl
-parameter_list|(
-name|Lex
-name|lex
-parameter_list|,
-name|Function1
-argument_list|<
-name|SchemaPlus
-argument_list|,
-name|Schema
-argument_list|>
-name|schemaFactory
-parameter_list|,
-name|SqlOperatorTable
-name|operatorTable
-parameter_list|,
-name|ImmutableList
-argument_list|<
-name|RuleSet
-argument_list|>
-name|ruleSets
-parameter_list|)
-block|{
-name|this
-argument_list|(
-name|lex
-argument_list|,
-name|schemaFactory
-argument_list|,
-name|operatorTable
-argument_list|,
-name|ruleSets
-argument_list|,
-literal|null
-argument_list|)
-expr_stmt|;
-block|}
+comment|/** Creates a planner. Not a public API; call    * {@link net.hydromatic.optiq.tools.Frameworks#getPlanner} instead. */
 specifier|public
 name|PlannerImpl
 parameter_list|(
@@ -407,7 +360,7 @@ name|RuleSet
 argument_list|>
 name|ruleSets
 parameter_list|,
-name|List
+name|ImmutableList
 argument_list|<
 name|RelTraitDef
 argument_list|>
@@ -685,8 +638,8 @@ name|State
 operator|.
 name|STATE_2_READY
 expr_stmt|;
-comment|// If user specify own traitDef, in stead of default default trait,
-comment|// First, clear the default trait def registered with planer
+comment|// If user specify own traitDef, instead of default default trait,
+comment|// first, clear the default trait def registered with planner
 comment|// then, register the trait def specified in traitDefs.
 if|if
 condition|(

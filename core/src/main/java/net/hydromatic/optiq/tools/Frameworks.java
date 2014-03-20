@@ -257,8 +257,7 @@ name|ruleSets
 parameter_list|)
 block|{
 return|return
-operator|new
-name|PlannerImpl
+name|getPlanner
 argument_list|(
 name|lex
 argument_list|,
@@ -266,16 +265,13 @@ name|schemaFactory
 argument_list|,
 name|operatorTable
 argument_list|,
-name|ImmutableList
-operator|.
-name|copyOf
-argument_list|(
+literal|null
+argument_list|,
 name|ruleSets
-argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates an instance of {@code Planner}.    *    * @param lex The type of lexing the SqlParser should do.  Controls case rules    *     and quoted identifier syntax.    * @param schemaFactory Schema factory. Given a root schema, it creates and    *                      returns the schema that should be used to execute    *                      queries.    * @param operatorTable The instance of SqlOperatorTable that be should to    *     resolve Optiq operators.    * @param ruleSets An array of one or more rule sets used during the course of    *     query evaluation. The common use case is when there is a single rule    *     set and {@link net.hydromatic.optiq.tools.Planner#transform}    *     will only be called once. However, consumers may also register multiple    *     {@link net.hydromatic.optiq.tools.RuleSet}s and do multiple repetitions    *     of {@link Planner#transform} planning cycles using different indices.    *     The order of rule sets provided here determines the zero-based indices    *     of rule sets elsewhere in this class.    *  @param  traitDefs The list of RelTraitDef that would be registered with    *                    planner. The planner would first de-register any    *                    existing RelTraitDef, before register the RelTraitDef    *                    in this list.    *                    Also, the order of RelTraitDef matters, if planner is    *                    VolcanoPlanner, which will call RelTraitDef.convert()    *                    in the order of this list. The most important    *                    RelTraitDef comes first in the list, followed by    *                    the second most important one, etc.    * @return The Planner object.    */
+comment|/**    * Creates an instance of {@code Planner}.    *    *<p>If {@code traitDefs} is specified, the planner first de-registers any    * existing {@link RelTraitDef}s, then registers the {@code RelTraitDef}s in    * this list.</p>    *    *<p>The order of {@code RelTraitDef}s in {@code traitDefs} matters if the    * planner is VolcanoPlanner. The planner calls {@link RelTraitDef#convert} in    * the order of this list. The most important trait comes first in the list,    * followed by the second most important one, etc.</p>    *    * @param lex The type of lexing the SqlParser should do.  Controls case rules    *     and quoted identifier syntax.    * @param schemaFactory Schema factory. Given a root schema, it creates and    *                      returns the schema that should be used to execute    *                      queries.    * @param operatorTable The instance of SqlOperatorTable that be should to    *     resolve Optiq operators.    * @param ruleSets An array of one or more rule sets used during the course of    *     query evaluation. The common use case is when there is a single rule    *     set and {@link net.hydromatic.optiq.tools.Planner#transform}    *     will only be called once. However, consumers may also register multiple    *     {@link net.hydromatic.optiq.tools.RuleSet}s and do multiple repetitions    *     of {@link Planner#transform} planning cycles using different indices.    *     The order of rule sets provided here determines the zero-based indices    *     of rule sets elsewhere in this class.    *  @param  traitDefs The list of RelTraitDef that would be registered with    *     planner, or null.    * @return The Planner object.    */
 specifier|public
 specifier|static
 name|Planner
@@ -324,6 +320,17 @@ name|ruleSets
 argument_list|)
 argument_list|,
 name|traitDefs
+operator|==
+literal|null
+condition|?
+literal|null
+else|:
+name|ImmutableList
+operator|.
+name|copyOf
+argument_list|(
+name|traitDefs
+argument_list|)
 argument_list|)
 return|;
 block|}
