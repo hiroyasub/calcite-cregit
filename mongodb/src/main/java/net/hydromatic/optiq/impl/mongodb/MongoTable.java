@@ -716,7 +716,18 @@ name|RuntimeException
 argument_list|(
 literal|"While running MongoDB query "
 operator|+
+name|Util
+operator|.
+name|toString
+argument_list|(
 name|operations
+argument_list|,
+literal|"["
+argument_list|,
+literal|",\n"
+argument_list|,
+literal|"]"
+argument_list|)
 argument_list|,
 name|e
 argument_list|)

@@ -255,11 +255,13 @@ init|=
 operator|new
 name|Translator
 argument_list|(
+name|MongoRules
+operator|.
+name|mongoFieldNames
+argument_list|(
 name|getRowType
 argument_list|()
-operator|.
-name|getFieldNames
-argument_list|()
+argument_list|)
 argument_list|)
 decl_stmt|;
 name|String
