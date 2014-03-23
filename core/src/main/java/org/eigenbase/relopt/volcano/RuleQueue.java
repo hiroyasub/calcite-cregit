@@ -229,13 +229,17 @@ argument_list|>
 name|matchListMap
 init|=
 operator|new
-name|HashMap
+name|EnumMap
 argument_list|<
 name|VolcanoPlannerPhase
 argument_list|,
 name|PhaseMatchList
 argument_list|>
-argument_list|()
+argument_list|(
+name|VolcanoPlannerPhase
+operator|.
+name|class
+argument_list|)
 decl_stmt|;
 comment|/**    * Sorts rule-matches into decreasing order of importance.    */
 specifier|private
@@ -298,7 +302,7 @@ expr_stmt|;
 name|phaseRuleMapping
 operator|=
 operator|new
-name|HashMap
+name|EnumMap
 argument_list|<
 name|VolcanoPlannerPhase
 argument_list|,
@@ -307,7 +311,11 @@ argument_list|<
 name|String
 argument_list|>
 argument_list|>
-argument_list|()
+argument_list|(
+name|VolcanoPlannerPhase
+operator|.
+name|class
+argument_list|)
 expr_stmt|;
 comment|// init empty sets for all phases
 for|for
@@ -590,6 +598,18 @@ name|double
 name|factor
 parameter_list|)
 block|{
+if|if
+condition|(
+name|LOGGER
+operator|.
+name|isLoggable
+argument_list|(
+name|Level
+operator|.
+name|FINER
+argument_list|)
+condition|)
+block|{
 name|LOGGER
 operator|.
 name|finer
@@ -605,6 +625,7 @@ operator|+
 literal|")"
 argument_list|)
 expr_stmt|;
+block|}
 name|ArrayList
 argument_list|<
 name|RelSubset
@@ -1287,6 +1308,18 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+if|if
+condition|(
+name|LOGGER
+operator|.
+name|isLoggable
+argument_list|(
+name|Level
+operator|.
+name|FINEST
+argument_list|)
+condition|)
+block|{
 name|LOGGER
 operator|.
 name|finest
@@ -1300,6 +1333,7 @@ operator|+
 name|importance
 argument_list|)
 expr_stmt|;
+block|}
 return|return
 name|importance
 return|;

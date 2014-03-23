@@ -1598,6 +1598,7 @@ return|;
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------
 comment|/**    * Visitor which walks over a tree of {@link RelSet}s, replacing each node    * with the cheapest implementation of the expression.    */
+specifier|static
 class|class
 name|CheapestPlanReplacer
 block|{
