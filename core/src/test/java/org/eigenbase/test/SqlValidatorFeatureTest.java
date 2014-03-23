@@ -163,8 +163,6 @@ literal|"feature_disabled"
 decl_stmt|;
 comment|//~ Instance fields --------------------------------------------------------
 specifier|private
-name|Resources
-operator|.
 name|Feature
 name|disabledFeature
 decl_stmt|;
@@ -332,8 +330,6 @@ parameter_list|(
 name|String
 name|sql
 parameter_list|,
-name|Resources
-operator|.
 name|Feature
 name|feature
 parameter_list|)
@@ -489,8 +485,6 @@ specifier|protected
 name|void
 name|validateFeature
 parameter_list|(
-name|Resources
-operator|.
 name|Feature
 name|feature
 parameter_list|,

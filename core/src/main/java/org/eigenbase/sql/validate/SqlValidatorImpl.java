@@ -15771,8 +15771,6 @@ specifier|protected
 name|void
 name|validateFeature
 parameter_list|(
-name|Resources
-operator|.
 name|Feature
 name|feature
 parameter_list|,
