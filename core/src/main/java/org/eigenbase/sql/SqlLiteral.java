@@ -418,7 +418,7 @@ operator|.
 name|LITERAL
 return|;
 block|}
-comment|/**    * Returns the value of this literal.    *    *<p>Try not to use this method! There are so many different kinds of    * values, it's better to to let SqlLiteral do whatever it is you want to    * do.    *    * @see #booleanValue(SqlNode)    * @see #symbolValue(SqlNode)    */
+comment|/**    * Returns the value of this literal.    *    *<p>Try not to use this method! There are so many different kinds of    * values, it's better to to let SqlLiteral do whatever it is you want to    * do.    *    * @see #booleanValue()    * @see #symbolValue()    */
 specifier|public
 name|Object
 name|getValue
@@ -428,7 +428,39 @@ return|return
 name|value
 return|;
 block|}
-comment|/**    * Converts extracts the value from a boolean literal.    *    * @throws ClassCastException if the value is not a boolean literal    */
+comment|/** Returns the value as a symbol. */
+specifier|public
+parameter_list|<
+name|E
+extends|extends
+name|SqlSymbol
+parameter_list|>
+name|E
+name|symbolValue
+parameter_list|()
+block|{
+comment|//noinspection unchecked
+return|return
+operator|(
+name|E
+operator|)
+name|value
+return|;
+block|}
+comment|/** Returns the value as a boolean. */
+specifier|public
+name|boolean
+name|booleanValue
+parameter_list|()
+block|{
+return|return
+operator|(
+name|Boolean
+operator|)
+name|value
+return|;
+block|}
+comment|/**    * Converts extracts the value from a boolean literal.    *    * @throws ClassCastException if the value is not a boolean literal    *    * @deprecated Use {@link #booleanValue()}    */
 specifier|public
 specifier|static
 name|boolean
@@ -438,6 +470,13 @@ name|SqlNode
 name|node
 parameter_list|)
 block|{
+name|Bug
+operator|.
+name|upgrade
+argument_list|(
+literal|"remove after 0.6"
+argument_list|)
+expr_stmt|;
 return|return
 operator|(
 name|Boolean
@@ -452,7 +491,7 @@ operator|.
 name|value
 return|;
 block|}
-comment|/**    * Extracts the enumerated value from a symbol literal.    *    * @throws ClassCastException if the value is not a symbol literal    * @see #createSymbol(SqlSymbol, SqlParserPos)    */
+comment|/**    * Extracts the enumerated value from a symbol literal.    *    * @throws ClassCastException if the value is not a symbol literal    * @see #createSymbol(SqlSymbol, SqlParserPos)    *    * @deprecated Use {@link #symbolValue()}    */
 specifier|public
 specifier|static
 name|SqlSymbol
@@ -462,6 +501,13 @@ name|SqlNode
 name|node
 parameter_list|)
 block|{
+name|Bug
+operator|.
+name|upgrade
+argument_list|(
+literal|"remove after 0.6"
+argument_list|)
+expr_stmt|;
 return|return
 operator|(
 name|SqlSymbol
@@ -963,7 +1009,7 @@ name|pos
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates a literal which represents a parser symbol, for example the    *<code>TRAILING</code> keyword in the call<code>Trim(TRAILING 'x' FROM    * 'Hello world!')</code>.    *    * @see #symbolValue(SqlNode)    */
+comment|/**    * Creates a literal which represents a parser symbol, for example the    *<code>TRAILING</code> keyword in the call<code>Trim(TRAILING 'x' FROM    * 'Hello world!')</code>.    *    * @see #symbolValue()    */
 specifier|public
 specifier|static
 name|SqlLiteral

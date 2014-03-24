@@ -321,15 +321,10 @@ name|getDetailLevel
 parameter_list|()
 block|{
 return|return
-operator|(
-name|SqlExplainLevel
-operator|)
-name|SqlLiteral
+name|detailLevel
 operator|.
 name|symbolValue
-argument_list|(
-name|detailLevel
-argument_list|)
+argument_list|()
 return|;
 block|}
 comment|/**    * Returns the level of abstraction at which this plan should be displayed.    */
@@ -339,15 +334,10 @@ name|getDepth
 parameter_list|()
 block|{
 return|return
-operator|(
-name|Depth
-operator|)
-name|SqlLiteral
+name|depth
 operator|.
 name|symbolValue
-argument_list|(
-name|depth
-argument_list|)
+argument_list|()
 return|;
 block|}
 comment|/**    * @return the number of dynamic parameters in the statement    */
@@ -397,12 +387,10 @@ name|isXml
 parameter_list|()
 block|{
 return|return
-name|SqlLiteral
+name|asXml
 operator|.
 name|booleanValue
-argument_list|(
-name|asXml
-argument_list|)
+argument_list|()
 return|;
 block|}
 annotation|@

@@ -181,6 +181,26 @@ return|return
 name|right
 return|;
 block|}
+comment|/**      * Creates a parse-tree node representing an occurrence of this flag      * at a particular position in the parsed text.      */
+specifier|public
+name|SqlLiteral
+name|symbol
+parameter_list|(
+name|SqlParserPos
+name|pos
+parameter_list|)
+block|{
+return|return
+name|SqlLiteral
+operator|.
+name|createSymbol
+argument_list|(
+name|this
+argument_list|,
+name|pos
+argument_list|)
+return|;
+block|}
 block|}
 comment|//~ Constructors -----------------------------------------------------------
 specifier|public
@@ -453,14 +473,12 @@ operator|new
 name|SqlNode
 index|[]
 block|{
-name|SqlLiteral
-operator|.
-name|createSymbol
-argument_list|(
 name|Flag
 operator|.
 name|BOTH
-argument_list|,
+operator|.
+name|symbol
+argument_list|(
 name|SqlParserPos
 operator|.
 name|ZERO
