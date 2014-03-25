@@ -63,9 +63,9 @@ name|org
 operator|.
 name|eigenbase
 operator|.
-name|xom
+name|util
 operator|.
-name|*
+name|XmlOutput
 import|;
 end_import
 
@@ -83,7 +83,7 @@ block|{
 comment|//~ Instance fields --------------------------------------------------------
 specifier|private
 specifier|final
-name|XMLOutput
+name|XmlOutput
 name|xmlOutput
 decl_stmt|;
 name|boolean
@@ -117,7 +117,7 @@ expr_stmt|;
 name|xmlOutput
 operator|=
 operator|new
-name|XMLOutput
+name|XmlOutput
 argument_list|(
 name|pw
 argument_list|)
