@@ -87,6 +87,18 @@ end_import
 
 begin_import
 import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|avatica
+operator|.
+name|Casing
+import|;
+end_import
+
+begin_import
+import|import
 name|com
 operator|.
 name|google
@@ -795,6 +807,24 @@ name|Reader
 name|reader
 parameter_list|)
 function_decl|;
+comment|/**    * Parses a SQL expression ending with EOF and constructs a    * parse tree.    *    * @return constructed parse tree.    */
+specifier|public
+specifier|abstract
+name|SqlNode
+name|parseSqlExpressionEof
+parameter_list|()
+throws|throws
+name|Exception
+function_decl|;
+comment|/**    * Parses a SQL statement ending with EOF and constructs a    * parse tree.    *    * @return constructed parse tree.    */
+specifier|public
+specifier|abstract
+name|SqlNode
+name|parseSqlStmtEof
+parameter_list|()
+throws|throws
+name|Exception
+function_decl|;
 comment|/**    * Sets the tab stop size.    *    * @param tabSize Tab stop size    */
 specifier|public
 specifier|abstract
@@ -803,6 +833,36 @@ name|setTabSize
 parameter_list|(
 name|int
 name|tabSize
+parameter_list|)
+function_decl|;
+comment|/**    * Sets the casing policy for quoted identifiers.    *    * @param quotedCasing Casing to set.    */
+specifier|public
+specifier|abstract
+name|void
+name|setQuotedCasing
+parameter_list|(
+name|Casing
+name|quotedCasing
+parameter_list|)
+function_decl|;
+comment|/**    * Sets the casing policy for unquoted identifiers.    *    * @param unquotedCasing Casing to set.    */
+specifier|public
+specifier|abstract
+name|void
+name|setUnquotedCasing
+parameter_list|(
+name|Casing
+name|unquotedCasing
+parameter_list|)
+function_decl|;
+comment|/**    * Change parser state.    *    * @param stateName new state.    */
+specifier|public
+specifier|abstract
+name|void
+name|switchTo
+parameter_list|(
+name|String
+name|stateName
 parameter_list|)
 function_decl|;
 comment|//~ Inner Interfaces -------------------------------------------------------

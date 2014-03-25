@@ -1480,14 +1480,12 @@ name|getSqlKeywords
 parameter_list|()
 block|{
 return|return
-operator|new
 name|SqlParser
+operator|.
+name|create
 argument_list|(
 literal|""
 argument_list|)
-operator|.
-name|getParserImpl
-argument_list|()
 operator|.
 name|getMetadata
 argument_list|()

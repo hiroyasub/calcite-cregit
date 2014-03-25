@@ -1228,10 +1228,7 @@ name|Arrays
 operator|.
 name|asList
 argument_list|(
-name|getParserImpl
-argument_list|()
-operator|.
-name|getMetadata
+name|getParserMetadata
 argument_list|()
 operator|.
 name|getJdbcKeywords
@@ -1274,17 +1271,20 @@ return|return
 name|al
 return|;
 block|}
-comment|/**    * Returns the underlying Parser implementation class.    *    *<p>To use a different parser (recognizing a different dialect of SQL),    * derived class should override.    *    * @return a {@link SqlAbstractParserImpl} instance    */
+comment|/**    * Returns the underlying Parser metadata.    *    *<p>To use a different parser (recognizing a different dialect of SQL),    * derived class should override.    *    * @return a {@link SqlAbstractParserImpl.Metadata} instance.    */
 specifier|protected
 name|SqlAbstractParserImpl
-name|getParserImpl
+operator|.
+name|Metadata
+name|getParserMetadata
 parameter_list|()
 block|{
 name|SqlParser
 name|parser
 init|=
-operator|new
 name|SqlParser
+operator|.
+name|create
 argument_list|(
 literal|""
 argument_list|)
@@ -1292,7 +1292,7 @@ decl_stmt|;
 return|return
 name|parser
 operator|.
-name|getParserImpl
+name|getMetadata
 argument_list|()
 return|;
 block|}
@@ -1310,8 +1310,9 @@ block|{
 name|SqlParser
 name|parser
 init|=
-operator|new
 name|SqlParser
+operator|.
+name|create
 argument_list|(
 name|sql
 argument_list|)

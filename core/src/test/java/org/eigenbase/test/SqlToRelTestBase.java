@@ -1593,8 +1593,9 @@ block|{
 name|SqlParser
 name|parser
 init|=
-operator|new
 name|SqlParser
+operator|.
+name|create
 argument_list|(
 name|sql
 argument_list|)
