@@ -1115,18 +1115,8 @@ break|break;
 case|case
 name|NULL
 case|:
-name|dateTimeArgs
-operator|.
-name|add
-argument_list|(
-name|Expressions
-operator|.
-name|constant
-argument_list|(
-literal|null
-argument_list|)
-argument_list|)
-expr_stmt|;
+comment|// We don't specify a calendar at all, so we don't add an argument and
+comment|// instead use the version of the getXXX that doesn't take a Calendar
 break|break;
 case|case
 name|DIRECT
