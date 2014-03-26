@@ -247,7 +247,7 @@ name|AWT_WORKAROUND_PROPERTY
 init|=
 literal|"org.eigenbase.util.AWT_WORKAROUND"
 decl_stmt|;
-comment|/**    * System-dependent newline character.    */
+comment|/**    * System-dependent newline character.    *    *<p>In general, you should not use this in expected results of tests.    * Expected results should be the expected result on Linux (or Mac OS) using    * '\n'. Apply {@link Util#toLinux(String)} to Windows actual results, if    * necessary, to make them look like Linux actual.</p>    */
 specifier|public
 specifier|static
 specifier|final

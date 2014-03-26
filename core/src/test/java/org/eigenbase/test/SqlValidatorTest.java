@@ -15295,9 +15295,7 @@ name|validator
 argument_list|,
 literal|"select * from dept"
 argument_list|,
-literal|"SELECT *"
-operator|+
-name|NL
+literal|"SELECT *\n"
 operator|+
 literal|"FROM `DEPT`"
 argument_list|)
@@ -15333,9 +15331,7 @@ name|validator
 argument_list|,
 literal|"select * from dept"
 argument_list|,
-literal|"SELECT `DEPT`.`DEPTNO`, `DEPT`.`NAME`"
-operator|+
-name|NL
+literal|"SELECT `DEPT`.`DEPTNO`, `DEPT`.`NAME`\n"
 operator|+
 literal|"FROM `CATALOG`.`SALES`.`DEPT` AS `DEPT`"
 argument_list|)
@@ -15383,10 +15379,6 @@ literal|"select name from dept where name = 'Moonracer' group by name"
 operator|+
 literal|" having sum(deptno)> 3 order by name"
 argument_list|,
-name|TestUtil
-operator|.
-name|fold
-argument_list|(
 literal|"SELECT `DEPT`.`NAME`\n"
 operator|+
 literal|"FROM `CATALOG`.`SALES`.`DEPT` AS `DEPT`\n"
@@ -15398,7 +15390,6 @@ operator|+
 literal|"HAVING SUM(`DEPT`.`DEPTNO`)> 3\n"
 operator|+
 literal|"ORDER BY `NAME`"
-argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -15446,10 +15437,6 @@ literal|" where name = 'Moonracer' group by name"
 operator|+
 literal|" having sum(deptno)> 3 order by name"
 argument_list|,
-name|TestUtil
-operator|.
-name|fold
-argument_list|(
 literal|"SELECT `EXPR$0`.`NAME`\n"
 operator|+
 literal|"FROM (SELECT `DEPT`.`DEPTNO`, `DEPT`.`NAME`\n"
@@ -15463,7 +15450,6 @@ operator|+
 literal|"HAVING SUM(`EXPR$0`.`DEPTNO`)> 3\n"
 operator|+
 literal|"ORDER BY `NAME`"
-argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -15505,14 +15491,9 @@ name|validator
 argument_list|,
 literal|"select coalesce(deptno, empno) from emp"
 argument_list|,
-name|TestUtil
-operator|.
-name|fold
-argument_list|(
 literal|"SELECT COALESCE(`EMP`.`DEPTNO`, `EMP`.`EMPNO`)\n"
 operator|+
 literal|"FROM `CATALOG`.`SALES`.`EMP` AS `EMP`"
-argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -15526,9 +15507,7 @@ name|validator
 argument_list|,
 literal|"select coalesce(deptno, empno) from emp"
 argument_list|,
-literal|"SELECT COALESCE(`DEPTNO`, `EMPNO`)"
-operator|+
-name|NL
+literal|"SELECT COALESCE(`DEPTNO`, `EMPNO`)\n"
 operator|+
 literal|"FROM `EMP`"
 argument_list|)
@@ -15573,14 +15552,9 @@ name|validator
 argument_list|,
 literal|"select coalesce(deptno, empno) from emp"
 argument_list|,
-name|TestUtil
-operator|.
-name|fold
-argument_list|(
 literal|"SELECT CASE WHEN `EMP`.`DEPTNO` IS NOT NULL THEN `EMP`.`DEPTNO` ELSE `EMP`.`EMPNO` END\n"
 operator|+
 literal|"FROM `CATALOG`.`SALES`.`EMP` AS `EMP`"
-argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -15594,11 +15568,7 @@ name|validator
 argument_list|,
 literal|"select coalesce(deptno, empno) from emp"
 argument_list|,
-literal|"SELECT CASE WHEN `DEPTNO` IS NOT NULL THEN `DEPTNO` "
-operator|+
-literal|"ELSE `EMPNO` END"
-operator|+
-name|NL
+literal|"SELECT CASE WHEN `DEPTNO` IS NOT NULL THEN `DEPTNO` ELSE `EMPNO` END\n"
 operator|+
 literal|"FROM `EMP`"
 argument_list|)

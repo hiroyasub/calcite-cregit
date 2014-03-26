@@ -3770,25 +3770,7 @@ name|sb
 operator|.
 name|append
 argument_list|(
-name|Util
-operator|.
-name|LINE_SEPARATOR
-argument_list|)
-expr_stmt|;
-name|sb
-operator|.
-name|append
-argument_list|(
-literal|"Breadth-first from root:  {"
-argument_list|)
-expr_stmt|;
-name|sb
-operator|.
-name|append
-argument_list|(
-name|Util
-operator|.
-name|LINE_SEPARATOR
+literal|"\nBreadth-first from root:  {\n"
 argument_list|)
 expr_stmt|;
 while|while
@@ -3813,15 +3795,11 @@ name|append
 argument_list|(
 literal|"    "
 argument_list|)
-expr_stmt|;
-name|sb
 operator|.
 name|append
 argument_list|(
 name|vertex
 argument_list|)
-expr_stmt|;
-name|sb
 operator|.
 name|append
 argument_list|(
@@ -3842,13 +3820,14 @@ name|append
 argument_list|(
 name|rel
 argument_list|)
-expr_stmt|;
-name|sb
 operator|.
 name|append
 argument_list|(
 literal|", rowcount="
-operator|+
+argument_list|)
+operator|.
+name|append
+argument_list|(
 name|RelMetadataQuery
 operator|.
 name|getRowCount
@@ -3856,26 +3835,23 @@ argument_list|(
 name|rel
 argument_list|)
 argument_list|)
-expr_stmt|;
-name|sb
 operator|.
 name|append
 argument_list|(
 literal|", cumulative cost="
-operator|+
+argument_list|)
+operator|.
+name|append
+argument_list|(
 name|getCost
 argument_list|(
 name|rel
 argument_list|)
 argument_list|)
-expr_stmt|;
-name|sb
 operator|.
 name|append
 argument_list|(
-name|Util
-operator|.
-name|LINE_SEPARATOR
+literal|'\n'
 argument_list|)
 expr_stmt|;
 block|}

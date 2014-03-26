@@ -999,6 +999,7 @@ argument_list|>
 name|types
 parameter_list|)
 block|{
+specifier|final
 name|RelDataType
 name|type0
 init|=
@@ -1009,15 +1010,13 @@ argument_list|(
 literal|0
 argument_list|)
 decl_stmt|;
+specifier|final
 name|int
-name|nFields
+name|fieldCount
 init|=
 name|type0
 operator|.
-name|getFieldList
-argument_list|()
-operator|.
-name|size
+name|getFieldCount
 argument_list|()
 decl_stmt|;
 comment|// precheck that all types are structs with same number of fields
@@ -1052,7 +1051,7 @@ operator|.
 name|size
 argument_list|()
 operator|!=
-name|nFields
+name|fieldCount
 condition|)
 block|{
 return|return
@@ -1061,25 +1060,12 @@ return|;
 block|}
 block|}
 comment|// recursively compute column-wise least restrictive
-name|RelDataType
-index|[]
-name|outputTypes
+specifier|final
+name|FieldInfoBuilder
+name|builder
 init|=
-operator|new
-name|RelDataType
-index|[
-name|nFields
-index|]
-decl_stmt|;
-name|String
-index|[]
-name|fieldNames
-init|=
-operator|new
-name|String
-index|[
-name|nFields
-index|]
+name|builder
+argument_list|()
 decl_stmt|;
 for|for
 control|(
@@ -1090,7 +1076,7 @@ literal|0
 init|;
 name|j
 operator|<
-name|nFields
+name|fieldCount
 condition|;
 operator|++
 name|j
@@ -1098,11 +1084,16 @@ control|)
 block|{
 comment|// REVIEW jvs 22-Jan-2004:  Always use the field name from the
 comment|// first type?
-name|fieldNames
-index|[
+specifier|final
+name|int
+name|k
+init|=
 name|j
-index|]
-operator|=
+decl_stmt|;
+name|builder
+operator|.
+name|add
+argument_list|(
 name|type0
 operator|.
 name|getFieldList
@@ -1115,18 +1106,7 @@ argument_list|)
 operator|.
 name|getName
 argument_list|()
-expr_stmt|;
-specifier|final
-name|int
-name|k
-init|=
-name|j
-decl_stmt|;
-name|outputTypes
-index|[
-name|j
-index|]
-operator|=
+argument_list|,
 name|leastRestrictive
 argument_list|(
 operator|new
@@ -1178,15 +1158,14 @@ return|;
 block|}
 block|}
 argument_list|)
+argument_list|)
 expr_stmt|;
 block|}
 return|return
-name|createStructType
-argument_list|(
-name|outputTypes
-argument_list|,
-name|fieldNames
-argument_list|)
+name|builder
+operator|.
+name|build
+argument_list|()
 return|;
 block|}
 comment|// copy a non-record type, setting nullability

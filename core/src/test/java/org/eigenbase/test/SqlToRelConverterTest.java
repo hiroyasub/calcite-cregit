@@ -1870,10 +1870,6 @@ name|TestUtil
 operator|.
 name|assertEqualsVerbose
 argument_list|(
-name|TestUtil
-operator|.
-name|fold
-argument_list|(
 literal|"<RelNode type=\"ProjectRel\">\n"
 operator|+
 literal|"\t<Property name=\"EXPR$0\">\n"
@@ -1899,14 +1895,16 @@ operator|+
 literal|"\t</Inputs>\n"
 operator|+
 literal|"</RelNode>\n"
-operator|+
-literal|""
-argument_list|)
 argument_list|,
+name|Util
+operator|.
+name|toLinux
+argument_list|(
 name|sw
 operator|.
 name|toString
 argument_list|()
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}

@@ -190,19 +190,11 @@ operator|.
 name|getTypeFactory
 argument_list|()
 operator|.
-name|createStructType
+name|builder
+argument_list|()
+operator|.
+name|add
 argument_list|(
-operator|new
-name|RelDataType
-index|[]
-block|{
-name|type
-block|}
-argument_list|,
-operator|new
-name|String
-index|[]
-block|{
 name|validator
 operator|.
 name|deriveAlias
@@ -211,8 +203,12 @@ name|unnest
 argument_list|,
 literal|0
 argument_list|)
-block|}
+argument_list|,
+name|type
 argument_list|)
+operator|.
+name|build
+argument_list|()
 return|;
 block|}
 comment|/**    * Returns the type of the argument to UNNEST.    */

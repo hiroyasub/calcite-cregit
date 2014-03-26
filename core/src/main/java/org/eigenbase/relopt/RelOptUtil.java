@@ -786,11 +786,7 @@ block|}
 name|String
 name|s
 init|=
-literal|"Cannot add expression of different type to set: "
-operator|+
-name|Util
-operator|.
-name|LINE_SEPARATOR
+literal|"Cannot add expression of different type to set:\n"
 operator|+
 literal|"set type is "
 operator|+
@@ -799,33 +795,21 @@ operator|.
 name|getFullTypeString
 argument_list|()
 operator|+
-name|Util
-operator|.
-name|LINE_SEPARATOR
-operator|+
-literal|"expression type is "
+literal|"\nexpression type is "
 operator|+
 name|actualRowType
 operator|.
 name|getFullTypeString
 argument_list|()
 operator|+
-name|Util
-operator|.
-name|LINE_SEPARATOR
-operator|+
-literal|"set is "
+literal|"\nset is "
 operator|+
 name|equivalenceClass
 operator|.
 name|toString
 argument_list|()
 operator|+
-name|Util
-operator|.
-name|LINE_SEPARATOR
-operator|+
-literal|"expression is "
+literal|"\nexpression is "
 operator|+
 name|newRel
 operator|.

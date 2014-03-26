@@ -1777,11 +1777,7 @@ name|out
 operator|.
 name|print
 argument_list|(
-literal|"<?xml version=\"1.0\" ?>"
-operator|+
-name|TestUtil
-operator|.
-name|NL
+literal|"<?xml version=\"1.0\" ?>\n"
 argument_list|)
 expr_stmt|;
 name|childNodes
@@ -2100,11 +2096,7 @@ operator|.
 name|getNodeValue
 argument_list|()
 operator|+
-literal|"-->"
-operator|+
-name|TestUtil
-operator|.
-name|NL
+literal|"-->\n"
 argument_list|)
 expr_stmt|;
 break|break;

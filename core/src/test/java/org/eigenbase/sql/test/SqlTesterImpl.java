@@ -2082,7 +2082,12 @@ name|assertEqualsVerbose
 argument_list|(
 name|expectedRewrite
 argument_list|,
+name|Util
+operator|.
+name|toLinux
+argument_list|(
 name|actualRewrite
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}

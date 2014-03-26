@@ -202,16 +202,6 @@ class|class
 name|SqlOperatorBaseTest
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
-specifier|public
-specifier|static
-specifier|final
-name|String
-name|NL
-init|=
-name|TestUtil
-operator|.
-name|NL
-decl_stmt|;
 comment|// TODO: Change message when Fnl3Fixed to something like
 comment|// "Invalid character for cast: PC=0 Code=22018"
 specifier|public
@@ -15426,17 +15416,11 @@ name|checkFails
 argument_list|(
 literal|"trim('xy' from 'abcde')"
 argument_list|,
-literal|"could not calculate results for the following row:"
+literal|"could not calculate results for the following row:\n"
 operator|+
-name|NL
+literal|"\\[ 0 \\]\n"
 operator|+
-literal|"\\[ 0 \\]"
-operator|+
-name|NL
-operator|+
-literal|"Messages:"
-operator|+
-name|NL
+literal|"Messages:\n"
 operator|+
 literal|"\\[0\\]:PC=0 Code=22027 "
 argument_list|,
@@ -15449,17 +15433,11 @@ name|checkFails
 argument_list|(
 literal|"trim('' from 'abcde')"
 argument_list|,
-literal|"could not calculate results for the following row:"
+literal|"could not calculate results for the following row:\n"
 operator|+
-name|NL
+literal|"\\[ 0 \\]\n"
 operator|+
-literal|"\\[ 0 \\]"
-operator|+
-name|NL
-operator|+
-literal|"Messages:"
-operator|+
-name|NL
+literal|"Messages:\n"
 operator|+
 literal|"\\[0\\]:PC=0 Code=22027 "
 argument_list|,
