@@ -98,7 +98,7 @@ name|SqlOperatorTable
 name|getOperatorTable
 parameter_list|()
 function_decl|;
-comment|/**    * Validates an expression tree. You can call this method multiple times,    * but not reentrantly.    *    * @param topNode top of expression tree to be validated    * @return validated tree (possibly rewritten)    * @pre outermostNode == null    */
+comment|/**    * Validates an expression tree. You can call this method multiple times,    * but not reentrantly.    *    * @param topNode top of expression tree to be validated    * @return validated tree (possibly rewritten)    */
 name|SqlNode
 name|validate
 parameter_list|(
@@ -106,7 +106,7 @@ name|SqlNode
 name|topNode
 parameter_list|)
 function_decl|;
-comment|/**    * Validates an expression tree. You can call this method multiple times,    * but not reentrantly.    *    * @param topNode       top of expression tree to be validated    * @param nameToTypeMap map of simple name to {@link RelDataType}; used to    *                      resolve {@link SqlIdentifier} references    * @return validated tree (possibly rewritten)    * @pre outermostNode == null    */
+comment|/**    * Validates an expression tree. You can call this method multiple times,    * but not reentrantly.    *    * @param topNode       top of expression tree to be validated    * @param nameToTypeMap map of simple name to {@link RelDataType}; used to    *                      resolve {@link SqlIdentifier} references    * @return validated tree (possibly rewritten)    */
 name|SqlNode
 name|validateParameterizedExpression
 parameter_list|(
@@ -291,7 +291,7 @@ name|SqlNode
 name|operand
 parameter_list|)
 function_decl|;
-comment|/**    * Adds "line x, column y" context to a validator exception.    *    *<p>Note that the input exception is checked (it derives from {@link    * Exception}) and the output exception is unchecked (it derives from {@link    * RuntimeException}). This is intentional -- it should remind code authors    * to provide context for their validation errors.    *    * @param node The place where the exception occurred    * @param e    The validation error    * @return Exception containing positional information    * @pre node != null    * @post return != null    */
+comment|/**    * Adds "line x, column y" context to a validator exception.    *    *<p>Note that the input exception is checked (it derives from    * {@link Exception}) and the output exception is unchecked (it derives from    * {@link RuntimeException}). This is intentional -- it should remind code    * authors to provide context for their validation errors.</p>    *    * @param node The place where the exception occurred, not null    * @param e    The validation error    * @return Exception containing positional information, never null    */
 name|EigenbaseContextException
 name|newValidationError
 parameter_list|(
@@ -383,7 +383,7 @@ name|RelDataTypeFactory
 name|getTypeFactory
 parameter_list|()
 function_decl|;
-comment|/**    * Saves the type of a {@link SqlNode}, now that it has been validated.    *    * @param node A SQL parse tree node    * @param type Its type; must not be null    * @pre type != null    * @pre node != null    * @deprecated This method should not be in the {@link SqlValidator}    * interface. The validator should drive the type-derivation process, and    * store nodes' types when they have been derived.    */
+comment|/**    * Saves the type of a {@link SqlNode}, now that it has been validated.    *    * @param node A SQL parse tree node, never null    * @param type Its type; must not be null    * @deprecated This method should not be in the {@link SqlValidator}    * interface. The validator should drive the type-derivation process, and    * store nodes' types when they have been derived.    */
 name|void
 name|setValidatedNodeType
 parameter_list|(
@@ -407,7 +407,7 @@ name|RelDataType
 name|getUnknownType
 parameter_list|()
 function_decl|;
-comment|/**    * Returns the appropriate scope for validating a particular clause of a    * SELECT statement.    *    *<p>Consider    *    *<blockquote><code>    *<pre>SELECT *    * FROM foo    * WHERE EXISTS (    *    SELECT deptno AS x    *    FROM emp    *       JOIN dept ON emp.deptno = dept.deptno    *    WHERE emp.deptno = 5    *    GROUP BY deptno    *    ORDER BY x)</pre>    *</code></blockquote>    *    * What objects can be seen in each part of the sub-query?    *    *<ul>    *<li>In FROM ({@link #getFromScope} , you can only see 'foo'.    *<li>In WHERE ({@link #getWhereScope}), GROUP BY ({@link #getGroupScope}),    * SELECT ({@link #getSelectScope}), and the ON clause of the JOIN ({@link    * #getJoinScope}) you can see 'emp', 'dept', and 'foo'.    *<li>In ORDER BY ({@link #getOrderScope}), you can see the column alias    * 'x'; and tables 'emp', 'dept', and 'foo'.    *</ul>    *    * @param select SELECT statement    * @return naming scope for SELECT statement    */
+comment|/**    * Returns the appropriate scope for validating a particular clause of a    * SELECT statement.    *    *<p>Consider</p>    *    *<blockquote><pre><code>SELECT *    * FROM foo    * WHERE EXISTS (    *    SELECT deptno AS x    *    FROM emp    *       JOIN dept ON emp.deptno = dept.deptno    *    WHERE emp.deptno = 5    *    GROUP BY deptno    *    ORDER BY x)</code></pre></blockquote>    *    *<p>What objects can be seen in each part of the sub-query?</p>    *    *<ul>    *<li>In FROM ({@link #getFromScope} , you can only see 'foo'.    *<li>In WHERE ({@link #getWhereScope}), GROUP BY ({@link #getGroupScope}),    * SELECT ({@link #getSelectScope}), and the ON clause of the JOIN ({@link    * #getJoinScope}) you can see 'emp', 'dept', and 'foo'.    *<li>In ORDER BY ({@link #getOrderScope}), you can see the column alias    * 'x'; and tables 'emp', 'dept', and 'foo'.    *</ul>    *    * @param select SELECT statement    * @return naming scope for SELECT statement    */
 name|SqlValidatorScope
 name|getSelectScope
 parameter_list|(

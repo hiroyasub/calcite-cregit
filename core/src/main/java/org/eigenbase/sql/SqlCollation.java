@@ -360,7 +360,7 @@ name|hashCode
 argument_list|()
 return|;
 block|}
-comment|/**    * Returns the collating sequence (the collation name) and the coercibility    * for the resulting value of a dyadic operator.    *    * @param col1 first operand for the dyadic operation    * @param col2 second operand for the dyadic operation    * @return the resulting collation sequence. The "no collating sequence"    * result is returned as null.    * @sql.99 Part 2 Section 4.2.3 Table 2    */
+comment|/**    * Returns the collating sequence (the collation name) and the coercibility    * for the resulting value of a dyadic operator.    *    * @param col1 first operand for the dyadic operation    * @param col2 second operand for the dyadic operation    * @return the resulting collation sequence. The "no collating sequence"    * result is returned as null.    *    * @sql.99 Part 2 Section 4.2.3 Table 2    */
 specifier|public
 specifier|static
 name|SqlCollation
@@ -382,7 +382,7 @@ name|col2
 argument_list|)
 return|;
 block|}
-comment|/**    * Returns the collating sequence (the collation name) and the coercibility    * for the resulting value of a dyadic operator.    *    * @param col1 first operand for the dyadic operation    * @param col2 second operand for the dyadic operation    * @return the resulting collation sequence    * @throws EigenbaseException {@link EigenbaseNewResource#invalidCompare} or    *                            {@link EigenbaseNewResource#differentCollations}    *                            if no collating sequence can be deduced    * @sql.99 Part 2 Section 4.2.3 Table 2    */
+comment|/**    * Returns the collating sequence (the collation name) and the coercibility    * for the resulting value of a dyadic operator.    *    * @param col1 first operand for the dyadic operation    * @param col2 second operand for the dyadic operation    * @return the resulting collation sequence    * @throws EigenbaseException {@link EigenbaseNewResource#invalidCompare} or    *                            {@link EigenbaseNewResource#differentCollations}    *                            if no collating sequence can be deduced    *    * @sql.99 Part 2 Section 4.2.3 Table 2    */
 specifier|public
 specifier|static
 name|SqlCollation
@@ -446,7 +446,7 @@ return|return
 name|ret
 return|;
 block|}
-comment|/**    * Returns the collating sequence (the collation name) to use for the    * resulting value of a comparison.    *    * @param col1 first operand for the dyadic operation    * @param col2 second operand for the dyadic operation    * @return the resulting collation sequence. If no collating sequence could    * be deduced a {@link EigenbaseNewResource#invalidCompare} is thrown    * @sql.99 Part 2 Section 4.2.3 Table 3    */
+comment|/**    * Returns the collating sequence (the collation name) to use for the    * resulting value of a comparison.    *    * @param col1 first operand for the dyadic operation    * @param col2 second operand for the dyadic operation    * @return the resulting collation sequence. If no collating sequence could    * be deduced a {@link EigenbaseNewResource#invalidCompare} is thrown    *    * @sql.99 Part 2 Section 4.2.3 Table 3    */
 specifier|public
 specifier|static
 name|String

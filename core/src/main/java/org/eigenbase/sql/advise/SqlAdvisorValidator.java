@@ -143,7 +143,7 @@ name|typeFactory
 argument_list|)
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a SqlAdvisor validator.    *    * @param opTab         Operator table    * @param catalogReader Catalog reader    * @param typeFactory   Type factory    * @param conformance   Compatibility mode    * @pre opTab != null    * @pre // node is a "query expression" (per SQL standard)    * @pre catalogReader != null    * @pre typeFactory != null    */
+comment|/**    * Creates a SqlAdvisor validator.    *    * @param opTab         Operator table    * @param catalogReader Catalog reader    * @param typeFactory   Type factory    * @param conformance   Compatibility mode    */
 specifier|public
 name|SqlAdvisorValidator
 parameter_list|(
@@ -171,6 +171,21 @@ argument_list|,
 name|conformance
 argument_list|)
 expr_stmt|;
+assert|assert
+name|opTab
+operator|!=
+literal|null
+assert|;
+assert|assert
+name|catalogReader
+operator|!=
+literal|null
+assert|;
+assert|assert
+name|typeFactory
+operator|!=
+literal|null
+assert|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
 comment|/**    * Registers the identifier and its scope into a map keyed by ParserPostion.    */

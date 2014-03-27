@@ -120,7 +120,7 @@ return|return
 literal|true
 return|;
 block|}
-comment|/**    * Returns an iterable over the bits in a bitmap that are set to '1'.    *    *<p>This allows you to iterate over a bit set using a 'foreach' construct.    * For instance:    *    *<blockquote><code>    * BitSet bitSet;<br/>    * for (int i : Util.toIter(bitSet)) {<br/>    *&nbsp;&nbsp;print(i);<br/>    * }<br/></code></blockquote>    *    * @param bitSet Bit set    * @return Iterable    */
+comment|/**    * Returns an iterable over the bits in a bitmap that are set to '1'.    *    *<p>This allows you to iterate over a bit set using a 'foreach' construct.    * For instance:    *    *<blockquote><code>    * BitSet bitSet;<br>    * for (int i : Util.toIter(bitSet)) {<br>    *&nbsp;&nbsp;print(i);<br>    * }</code></blockquote>    *    * @param bitSet Bit set    * @return Iterable    */
 specifier|public
 specifier|static
 name|Iterable

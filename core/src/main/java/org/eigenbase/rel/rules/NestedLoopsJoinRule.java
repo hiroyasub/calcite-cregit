@@ -88,7 +88,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Rule which converts a {@link JoinRel} into a {@link CorrelatorRel}, which can  * then be implemented using nested loops.  *  *<p>For example,  *  *<blockquote><code>select * from emp join dept on emp.deptno =  * dept.deptno</code></blockquote>  *  * becomes a CorrelatorRel which restarts TableAccessRel("DEPT") for each row  * read from TableAccessRel("EMP").</p>  *  *<p>This rule is not applicable if for certain types of outer join. For  * example,  *  *<blockquote><code>select * from emp right join dept on emp.deptno =  * dept.deptno</code></blockquote>  *  * would require emitting a NULL emp row if a certain department contained no  * employees, and CorrelatorRel cannot do that.</p>  */
+comment|/**  * Rule which converts a {@link JoinRel} into a {@link CorrelatorRel}, which can  * then be implemented using nested loops.  *  *<p>For example,</p>  *  *<blockquote><code>select * from emp join dept on emp.deptno =  * dept.deptno</code></blockquote>  *  *<p>becomes a CorrelatorRel which restarts TableAccessRel("DEPT") for each row  * read from TableAccessRel("EMP").</p>  *  *<p>This rule is not applicable if for certain types of outer join. For  * example,</p>  *  *<blockquote><code>select * from emp right join dept on emp.deptno =  * dept.deptno</code></blockquote>  *  *<p>would require emitting a NULL emp row if a certain department contained no  * employees, and CorrelatorRel cannot do that.</p>  */
 end_comment
 
 begin_class

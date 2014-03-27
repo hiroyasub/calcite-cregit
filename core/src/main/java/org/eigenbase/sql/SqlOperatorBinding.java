@@ -289,7 +289,7 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
-comment|/**    * Wraps a validation error with context appropriate to this operator call.    *    * @param e Validation error    * @return Error wrapped, if possible, with positional information    * @pre node != null    * @post return != null    */
+comment|/**    * Wraps a validation error with context appropriate to this operator call.    *    * @param e Validation error, not null    * @return Error wrapped, if possible, with positional information    */
 specifier|public
 specifier|abstract
 name|EigenbaseException

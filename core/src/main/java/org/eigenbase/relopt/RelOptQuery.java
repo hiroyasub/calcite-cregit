@@ -79,26 +79,6 @@ init|=
 literal|"$cor"
 decl_stmt|;
 comment|//~ Instance fields --------------------------------------------------------
-comment|/**    * Maps a from-list expression to the name of the correlating variable which    * references it. This is for forward-references, caused when from items    * have correlating variables. We will later resolve to a {@link RelNode}.    */
-specifier|private
-specifier|final
-name|Map
-argument_list|<
-name|DeferredLookup
-argument_list|,
-name|String
-argument_list|>
-name|mapDeferredToCorrel
-init|=
-operator|new
-name|HashMap
-argument_list|<
-name|DeferredLookup
-argument_list|,
-name|String
-argument_list|>
-argument_list|()
-decl_stmt|;
 comment|/**    * Maps name of correlating variable (e.g. "$cor3") to the {@link RelNode}    * which implements it.    */
 specifier|final
 name|Map
@@ -181,21 +161,6 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**    * Returns the map which identifies which correlating variable each {@link    * org.eigenbase.relopt.RelOptQuery.DeferredLookup} will set.    *    * @return Map of deferred lookups    */
-specifier|public
-name|Map
-argument_list|<
-name|DeferredLookup
-argument_list|,
-name|String
-argument_list|>
-name|getMapDeferredToCorrel
-parameter_list|()
-block|{
-return|return
-name|mapDeferredToCorrel
-return|;
-block|}
 comment|/**    * Creates a cluster.    *    * @param typeFactory Type factory    * @param rexBuilder  Expression builder    * @return New cluster    */
 specifier|public
 name|RelOptCluster
@@ -240,41 +205,6 @@ operator|+
 name|n
 return|;
 block|}
-comment|/**    * Creates a name for a correlating variable for which no {@link RelNode}    * has been created yet.    *    * @param deferredLookup contains the information required to resolve the    *                       variable later    */
-specifier|public
-name|String
-name|createCorrelUnresolved
-parameter_list|(
-name|DeferredLookup
-name|deferredLookup
-parameter_list|)
-block|{
-name|int
-name|n
-init|=
-name|nextCorrel
-operator|++
-decl_stmt|;
-name|String
-name|name
-init|=
-name|CORREL_PREFIX
-operator|+
-name|n
-decl_stmt|;
-name|mapDeferredToCorrel
-operator|.
-name|put
-argument_list|(
-name|deferredLookup
-argument_list|,
-name|name
-argument_list|)
-expr_stmt|;
-return|return
-name|name
-return|;
-block|}
 comment|/**    * Returns the relational expression which populates a correlating variable.    */
 specifier|public
 name|RelNode
@@ -314,21 +244,6 @@ argument_list|,
 name|rel
 argument_list|)
 expr_stmt|;
-block|}
-comment|//~ Inner Interfaces -------------------------------------------------------
-comment|/**    * Contains the information necessary to repeat a call to {@link    * org.eigenbase.sql2rel.SqlToRelConverter.Blackboard#lookup}.    */
-specifier|public
-interface|interface
-name|DeferredLookup
-block|{
-comment|/**      * Creates an expression which accesses a particular field of this      * lookup.      *      *<p>For example, when resolving      *      *<pre>      * select *      * from dept      * where exists (      *   select *      *   from emp      *   where deptno = dept.deptno      *   and specialty = 'Karate')</pre>      *      * the expression<code>dept.deptno</code> would be handled using a      * deferred lookup for<code>dept</code> (because the sub-query is      * validated before the outer query) and the translator would call      *<code>getFieldAccess("DEPTNO")</code> on that lookup.      *      * @param name Name of field      * @return Expression which retrieves the given field of this lookup's      * correlating variable      */
-name|RexFieldAccess
-name|getFieldAccess
-parameter_list|(
-name|String
-name|name
-parameter_list|)
-function_decl|;
 block|}
 block|}
 end_class

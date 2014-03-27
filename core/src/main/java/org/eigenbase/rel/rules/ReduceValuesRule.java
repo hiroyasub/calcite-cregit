@@ -120,7 +120,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Planner rule that folds projections and filters into an underlying {@link  * ValuesRel}. Returns an {@link EmptyRel} if all rows are filtered away.  *  *<p>For example,  *  *<blockquote><code>select a - b from (values (1, 2), (3, 5), (7, 11)) as t (a,  * b) where a + b> 4</code></blockquote>  * becomes  *  *<blockquote><code>select x from (values (-2), (-4))</code></blockquote>  */
+comment|/**  * Planner rule that folds projections and filters into an underlying  * {@link ValuesRel}. Returns an {@link EmptyRel} if all rows are filtered away.  *  *<p>For example,</p>  *  *<blockquote><code>select a - b from (values (1, 2), (3, 5), (7, 11)) as t (a,  * b) where a + b&gt; 4</code></blockquote>  *  *<p>becomes</p>  *  *<blockquote><code>select x from (values (-2), (-4))</code></blockquote>  */
 end_comment
 
 begin_class

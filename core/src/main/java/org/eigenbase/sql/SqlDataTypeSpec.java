@@ -420,24 +420,18 @@ return|return
 name|timeZone
 return|;
 block|}
-comment|/**    * Returns a new SqlDataTypeSpec corresponding to the component type if the    * type spec is a collections type spec.<br>    * Collection types are<code>ARRAY</code> and<code>MULTISET</code>.    *    * @pre null != getCollectionsTypeName()    */
+comment|/**    * Returns a new SqlDataTypeSpec corresponding to the component type if the    * type spec is a collections type spec.<br>    * Collection types are<code>ARRAY</code> and<code>MULTISET</code>.    */
 specifier|public
 name|SqlDataTypeSpec
 name|getComponentTypeSpec
 parameter_list|()
 block|{
-name|Util
-operator|.
-name|pre
-argument_list|(
-literal|null
-operator|!=
+assert|assert
 name|getCollectionsTypeName
 argument_list|()
-argument_list|,
-literal|"null != getCollectionsTypeName()"
-argument_list|)
-expr_stmt|;
+operator|!=
+literal|null
+assert|;
 return|return
 operator|new
 name|SqlDataTypeSpec

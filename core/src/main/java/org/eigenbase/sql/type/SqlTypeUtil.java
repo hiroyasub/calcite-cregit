@@ -166,7 +166,7 @@ class|class
 name|SqlTypeUtil
 block|{
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**    * Checks whether two types or more are char comparable.    *    * @return Returns true if all operands are of char type and if they are    * comparable, i.e. of the same charset and collation of same charset    * @pre argTypes != null    * @pre argTypes.length>= 2    */
+comment|/**    * Checks whether two types or more are char comparable.    *    * @return Returns true if all operands are of char type and if they are    * comparable, i.e. of the same charset and collation of same charset    */
 specifier|public
 specifier|static
 name|boolean
@@ -180,21 +180,17 @@ name|argTypes
 parameter_list|)
 block|{
 assert|assert
-literal|null
-operator|!=
 name|argTypes
-operator|:
-literal|"precondition failed"
+operator|!=
+literal|null
 assert|;
 assert|assert
-literal|2
-operator|<=
 name|argTypes
 operator|.
 name|size
 argument_list|()
-operator|:
-literal|"precondition failed"
+operator|>=
+literal|2
 assert|;
 for|for
 control|(
@@ -354,7 +350,7 @@ return|return
 literal|true
 return|;
 block|}
-comment|/**    * Returns whether the operands to a call are char type-comparable.    *    * @param binding        Binding of call to operands    * @param operands       Operands to check for compatibility; usually the    *                       operands of the bound call, but not always    * @param throwOnFailure Whether to throw an exception on failure    * @return whether operands are valid    * @pre null != operands    * @pre 2<= operands.length    */
+comment|/**    * Returns whether the operands to a call are char type-comparable.    *    * @param binding        Binding of call to operands    * @param operands       Operands to check for compatibility; usually the    *                       operands of the bound call, but not always    * @param throwOnFailure Whether to throw an exception on failure    * @return whether operands are valid    */
 specifier|public
 specifier|static
 name|boolean
@@ -392,21 +388,17 @@ name|getScope
 argument_list|()
 decl_stmt|;
 assert|assert
-literal|null
-operator|!=
 name|operands
-operator|:
-literal|"precondition failed"
+operator|!=
+literal|null
 assert|;
 assert|assert
-literal|2
-operator|<=
 name|operands
 operator|.
 name|size
 argument_list|()
-operator|:
-literal|"precondition failed"
+operator|>=
+literal|2
 assert|;
 if|if
 condition|(

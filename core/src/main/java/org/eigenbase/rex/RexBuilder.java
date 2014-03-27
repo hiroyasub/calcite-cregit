@@ -3204,7 +3204,7 @@ name|DOUBLE
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates a character string literal.    *    * @pre s != null    */
+comment|/**    * Creates a character string literal.    */
 specifier|public
 name|RexLiteral
 name|makeLiteral
@@ -3213,6 +3213,11 @@ name|String
 name|s
 parameter_list|)
 block|{
+assert|assert
+name|s
+operator|!=
+literal|null
+assert|;
 return|return
 name|makePreciseStringLiteral
 argument_list|(
@@ -3400,7 +3405,7 @@ return|return
 name|type
 return|;
 block|}
-comment|/**    * Creates a character string literal from an {@link NlsString}.    *    *<p>If the string's charset and collation are not set, uses the system    * defaults.    *    * @pre str != null    */
+comment|/**    * Creates a character string literal from an {@link NlsString}.    *    *<p>If the string's charset and collation are not set, uses the system    * defaults.    */
 specifier|public
 name|RexLiteral
 name|makeCharLiteral
@@ -3409,17 +3414,11 @@ name|NlsString
 name|str
 parameter_list|)
 block|{
-name|Util
-operator|.
-name|pre
-argument_list|(
+assert|assert
 name|str
 operator|!=
 literal|null
-argument_list|,
-literal|"str != null"
-argument_list|)
-expr_stmt|;
+assert|;
 name|RelDataType
 name|type
 init|=
@@ -3445,7 +3444,7 @@ name|CHAR
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates a Date literal.    *    * @pre date != null    */
+comment|/**    * Creates a Date literal.    */
 specifier|public
 name|RexLiteral
 name|makeDateLiteral
@@ -3454,17 +3453,11 @@ name|Calendar
 name|date
 parameter_list|)
 block|{
-name|Util
-operator|.
-name|pre
-argument_list|(
+assert|assert
 name|date
 operator|!=
 literal|null
-argument_list|,
-literal|"date != null"
-argument_list|)
-expr_stmt|;
+assert|;
 return|return
 name|makeLiteral
 argument_list|(
@@ -3485,7 +3478,7 @@ name|DATE
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates a Time literal.    *    * @pre time != null    */
+comment|/**    * Creates a Time literal.    */
 specifier|public
 name|RexLiteral
 name|makeTimeLiteral
@@ -3497,17 +3490,11 @@ name|int
 name|precision
 parameter_list|)
 block|{
-name|Util
-operator|.
-name|pre
-argument_list|(
+assert|assert
 name|time
 operator|!=
 literal|null
-argument_list|,
-literal|"time != null"
-argument_list|)
-expr_stmt|;
+assert|;
 return|return
 name|makeLiteral
 argument_list|(
@@ -3530,7 +3517,7 @@ name|TIME
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates a Timestamp literal.    *    * @pre timestamp != null    */
+comment|/**    * Creates a Timestamp literal.    */
 specifier|public
 name|RexLiteral
 name|makeTimestampLiteral
@@ -3542,17 +3529,11 @@ name|int
 name|precision
 parameter_list|)
 block|{
-name|Util
-operator|.
-name|pre
-argument_list|(
+assert|assert
 name|timestamp
 operator|!=
 literal|null
-argument_list|,
-literal|"timestamp != null"
-argument_list|)
-expr_stmt|;
+assert|;
 return|return
 name|makeLiteral
 argument_list|(

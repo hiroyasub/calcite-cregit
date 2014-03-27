@@ -298,7 +298,7 @@ return|return
 name|ret
 return|;
 block|}
-comment|/**    * Parses a string using {@link SimpleDateFormat} and a given pattern. The    * entire string must match the pattern specified.    *    * @param s       string to be parsed    * @param pattern {@link SimpleDateFormat}  pattern    * @param tz      time zone in which to interpret string. Defaults to the Java    *                default time zone    * @return a Calendar initialized with the parsed value, or null if parsing    * failed. If returned, the Calendar is configured to the GMT time zone.    * @pre pattern != null    */
+comment|/**    * Parses a string using {@link SimpleDateFormat} and a given pattern. The    * entire string must match the pattern specified.    *    * @param s       string to be parsed    * @param pattern {@link SimpleDateFormat}  pattern    * @param tz      time zone in which to interpret string. Defaults to the Java    *                default time zone    * @return a Calendar initialized with the parsed value, or null if parsing    * failed. If returned, the Calendar is configured to the GMT time zone.    */
 specifier|public
 specifier|static
 name|Calendar
@@ -364,7 +364,7 @@ return|return
 name|ret
 return|;
 block|}
-comment|/**    * Parses a string using {@link SimpleDateFormat} and a given pattern, and    * if present, parses a fractional seconds component. The fractional seconds    * component must begin with a decimal point ('.') followed by numeric    * digits. The precision is rounded to a maximum of 3 digits of fractional    * seconds precision (to obtain milliseconds).    *    * @param s       string to be parsed    * @param pattern {@link SimpleDateFormat}  pattern    * @param tz      time zone in which to interpret string. Defaults to the    *                local time zone    * @return a {@link DateTimeUtil.PrecisionTime PrecisionTime} initialized    * with the parsed value, or null if parsing failed. The PrecisionTime    * contains a GMT Calendar and a precision.    * @pre pattern != null    */
+comment|/**    * Parses a string using {@link SimpleDateFormat} and a given pattern, and    * if present, parses a fractional seconds component. The fractional seconds    * component must begin with a decimal point ('.') followed by numeric    * digits. The precision is rounded to a maximum of 3 digits of fractional    * seconds precision (to obtain milliseconds).    *    * @param s       string to be parsed    * @param pattern {@link SimpleDateFormat}  pattern    * @param tz      time zone in which to interpret string. Defaults to the    *                local time zone    * @return a {@link DateTimeUtil.PrecisionTime PrecisionTime} initialized    * with the parsed value, or null if parsing failed. The PrecisionTime    * contains a GMT Calendar and a precision.    */
 specifier|public
 specifier|static
 name|PrecisionTime
@@ -380,6 +380,11 @@ name|TimeZone
 name|tz
 parameter_list|)
 block|{
+assert|assert
+name|pattern
+operator|!=
+literal|null
+assert|;
 name|ParsePosition
 name|pp
 init|=

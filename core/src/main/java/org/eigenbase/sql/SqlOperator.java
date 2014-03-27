@@ -206,7 +206,7 @@ name|SqlOperandTypeChecker
 name|operandTypeChecker
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates an operator.    *    * @pre kind != null    */
+comment|/**    * Creates an operator.    */
 specifier|protected
 name|SqlOperator
 parameter_list|(
@@ -232,17 +232,11 @@ name|SqlOperandTypeChecker
 name|operandTypeChecker
 parameter_list|)
 block|{
-name|Util
-operator|.
-name|pre
-argument_list|(
+assert|assert
 name|kind
 operator|!=
 literal|null
-argument_list|,
-literal|"kind != null"
-argument_list|)
-expr_stmt|;
+assert|;
 name|this
 operator|.
 name|name
@@ -495,7 +489,7 @@ return|return
 name|rightPrec
 return|;
 block|}
-comment|/**    * Returns the syntactic type of this operator.    *    * @post return != null    */
+comment|/**    * Returns the syntactic type of this operator, never null.    */
 specifier|public
 specifier|abstract
 name|SqlSyntax

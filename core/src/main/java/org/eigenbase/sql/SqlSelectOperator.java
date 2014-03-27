@@ -66,7 +66,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * An operator describing a query. (Not a query itself.)  *  *<p>Operands are:  *  *<ul>  *<li>0: distinct ({@link SqlLiteral})</li>  *<li>1: selectClause ({@link SqlNodeList})</li>  *<li>2: fromClause ({@link SqlCall} to "join" operator)</li>  *<li>3: whereClause ({@link SqlNode})</li>  *<li>4: havingClause ({@link SqlNode})</li>  *<li>5: groupClause ({@link SqlNode})</li>  *<li>6: windowClause ({@link SqlNodeList})</li>  *<li>7: orderClause ({@link SqlNode})</li>  *</ul>  *</p>  */
+comment|/**  * An operator describing a query. (Not a query itself.)  *  *<p>Operands are:</p>  *  *<ul>  *<li>0: distinct ({@link SqlLiteral})</li>  *<li>1: selectClause ({@link SqlNodeList})</li>  *<li>2: fromClause ({@link SqlCall} to "join" operator)</li>  *<li>3: whereClause ({@link SqlNode})</li>  *<li>4: havingClause ({@link SqlNode})</li>  *<li>5: groupClause ({@link SqlNode})</li>  *<li>6: windowClause ({@link SqlNodeList})</li>  *<li>7: orderClause ({@link SqlNode})</li>  *</ul>  */
 end_comment
 
 begin_class

@@ -114,7 +114,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * PullConstantsThroughAggregatesRule removes constant expressions from the  * group list of an {@link AggregateRel}.  *  *<h4>Effect of the rule</h4>  *  *<p>Since the transformed relational expression has to match the original  * relational expression, the constants are placed in a projection above the  * reduced aggregate. If those constants are not used, another rule will remove  * them from the project.  *  *<p>AggregateRel needs its group columns to be on the prefix of its input  * relational expression. Therefore, if a constant is not on the trailing edge  * of the group list, removing it will leave a hole. In this case, the rule adds  * a project before the aggregate to reorder the columns, and permutes them back  * afterwards.  */
+comment|/**  * PullConstantsThroughAggregatesRule removes constant expressions from the  * group list of an {@link AggregateRel}.  *  *<p><b>Effect of the rule</b></p>  *  *<p>Since the transformed relational expression has to match the original  * relational expression, the constants are placed in a projection above the  * reduced aggregate. If those constants are not used, another rule will remove  * them from the project.  *  *<p>AggregateRel needs its group columns to be on the prefix of its input  * relational expression. Therefore, if a constant is not on the trailing edge  * of the group list, removing it will leave a hole. In this case, the rule adds  * a project before the aggregate to reorder the columns, and permutes them back  * afterwards.  */
 end_comment
 
 begin_class

@@ -11498,7 +11498,7 @@ argument_list|)
 argument_list|)
 throw|;
 block|}
-comment|/**    * Validates a SELECT statement.    *    * @param select        Select statement    * @param targetRowType Desired row type, must not be null, may be the data    *                      type 'unknown'.    * @pre targetRowType != null    */
+comment|/**    * Validates a SELECT statement.    *    * @param select        Select statement    * @param targetRowType Desired row type, must not be null, may be the data    *                      type 'unknown'.    */
 specifier|protected
 name|void
 name|validateSelect

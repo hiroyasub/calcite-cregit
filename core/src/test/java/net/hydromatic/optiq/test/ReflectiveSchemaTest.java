@@ -2257,7 +2257,7 @@ literal|"empid=4; deptno=10; name=Abd; salary=0.0; commission=null\n"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** If a method returns a    * {@link net.hydromatic.optiq.impl.ViewTable.ViewTableFunction}, then it    * should be expanded. */
+comment|/** If a method returns a    * {@link ViewTable}.{@code ViewTableFunction}, then it    * should be expanded. */
 annotation|@
 name|Ignore
 annotation|@

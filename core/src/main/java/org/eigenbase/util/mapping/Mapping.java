@@ -26,7 +26,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A<dfn>Mapping</dfn> is a relationship between a source domain to target  * domain of integers.  *  *<p>This interface represents the most general possible mapping. Depending on  * the {@link MappingType} of a particular mapping, some of the operations may  * not be applicable. If you call the method, you will receive a runtime error.  * For instance:  *<li>If a target has more than one source, then the method {@link  * #getSource(int)} will throw {@link Mappings.TooManyElementsException}.  *<li>If a source has no targets, then the method {@link #getTarget} will throw  * {@link Mappings.NoElementException}.  */
+comment|/**  * A<dfn>Mapping</dfn> is a relationship between a source domain to target  * domain of integers.  *  *<p>This interface represents the most general possible mapping. Depending on  * the {@link MappingType} of a particular mapping, some of the operations may  * not be applicable. If you call the method, you will receive a runtime error.  * For instance:  *  *<ul>  *<li>If a target has more than one source, then the method  *     {@link #getSource(int)} will throw  *     {@link Mappings.TooManyElementsException}.  *<li>If a source has no targets, then the method {@link #getTarget} will throw  *     {@link Mappings.NoElementException}.  *</ul>  */
 end_comment
 
 begin_interface

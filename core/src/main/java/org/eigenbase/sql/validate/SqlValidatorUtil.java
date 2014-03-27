@@ -496,7 +496,7 @@ name|id
 argument_list|)
 return|;
 block|}
-comment|/**    * Derives an alias for a node, and invents a mangled identifier if it    * cannot.    *    *<p>Examples:    *    *<ul>    *<li>Alias: "1 + 2 as foo" yields "foo"    *<li>Identifier: "foo.bar.baz" yields "baz"    *<li>Anything else yields "expr$<i>ordinal</i>"    *</ul>    *    * @return An alias, if one can be derived; or a synthetic alias    * "expr$<i>ordinal</i>" if ordinal>= 0; otherwise null    */
+comment|/**    * Derives an alias for a node, and invents a mangled identifier if it    * cannot.    *    *<p>Examples:    *    *<ul>    *<li>Alias: "1 + 2 as foo" yields "foo"    *<li>Identifier: "foo.bar.baz" yields "baz"    *<li>Anything else yields "expr$<i>ordinal</i>"    *</ul>    *    * @return An alias, if one can be derived; or a synthetic alias    * "expr$<i>ordinal</i>" if ordinal&lt; 0; otherwise null    */
 specifier|public
 specifier|static
 name|String
@@ -840,7 +840,7 @@ name|used
 argument_list|)
 return|;
 block|}
-comment|/**    * Resolves a multi-part identifier such as "SCHEMA.EMP.EMPNO" to a    * namespace. The returned namespace may represent a schema, table, column,    * etc.    *    * @pre names.size()> 0    * @post return != null    */
+comment|/**    * Resolves a multi-part identifier such as "SCHEMA.EMP.EMPNO" to a    * namespace. The returned namespace, never null, may represent a    * schema, table, column, etc.    */
 specifier|public
 specifier|static
 name|SqlValidatorNamespace
@@ -856,20 +856,14 @@ argument_list|>
 name|names
 parameter_list|)
 block|{
-name|Util
-operator|.
-name|pre
-argument_list|(
+assert|assert
 name|names
 operator|.
 name|size
 argument_list|()
 operator|>
 literal|0
-argument_list|,
-literal|"names.size()> 0"
-argument_list|)
-expr_stmt|;
+assert|;
 name|SqlValidatorNamespace
 name|namespace
 init|=
@@ -937,17 +931,11 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-name|Util
-operator|.
-name|permAssert
-argument_list|(
+assert|assert
 name|namespace
 operator|!=
 literal|null
-argument_list|,
-literal|"post: namespace != null"
-argument_list|)
-expr_stmt|;
+assert|;
 return|return
 name|namespace
 return|;

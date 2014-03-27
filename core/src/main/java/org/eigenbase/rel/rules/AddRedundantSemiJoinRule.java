@@ -50,7 +50,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Rule to add a semijoin into a joinrel. Transformation is as follows:  *  *<p>JoinRel(X, Y) -> JoinRel(SemiJoinRel(X, Y), Y)  */
+comment|/**  * Rule to add a semijoin into a joinrel. Transformation is as follows:  *  *<p>JoinRel(X, Y)&rarr; JoinRel(SemiJoinRel(X, Y), Y)  */
 end_comment
 
 begin_class

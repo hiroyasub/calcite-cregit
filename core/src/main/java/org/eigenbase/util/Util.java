@@ -929,7 +929,7 @@ name|set
 return|;
 block|}
 block|}
-comment|/**    * Computes<code>nlogn(n)</code> using the natural logarithm (or<code>    * n</code> if<code>n<{@link Math#E}</code>, so the result is never    * negative.    */
+comment|/**    * Computes<code>nlogn(n)</code> using the natural logarithm (or<code>    * n</code> if<code>n&lt; {@link Math#E}</code>, so the result is never    * negative.    */
 specifier|public
 specifier|static
 name|double
@@ -5633,7 +5633,7 @@ block|}
 block|}
 return|;
 block|}
-comment|/**    * Makes a collection of untyped elements appear as a list of strictly typed    * elements, by filtering out those which are not of the correct type.    *    *<p>The returned object is an {@link Iterable},    * which makes it ideal for use with the 'foreach' construct. For example,    *    *<blockquote><code>List&lt;Number&gt; numbers = Arrays.asList(1, 2, 3.14,    * 4, null, 6E23);<br/>    * for (int myInt : filter(numbers, Integer.class)) {<br/>    *&nbsp;&nbsp;&nbsp;&nbsp;print(i);<br/>    * }</code></blockquote>    *    * will print 1, 2, 4.    *    * @param iterable      Iterable    * @param includeFilter Class whose instances to include    */
+comment|/**    * Makes a collection of untyped elements appear as a list of strictly typed    * elements, by filtering out those which are not of the correct type.    *    *<p>The returned object is an {@link Iterable},    * which makes it ideal for use with the 'foreach' construct. For example,    *    *<blockquote><code>List&lt;Number&gt; numbers = Arrays.asList(1, 2, 3.14,    * 4, null, 6E23);<br>    * for (int myInt : filter(numbers, Integer.class)) {<br>    *&nbsp;&nbsp;&nbsp;&nbsp;print(i);<br>    * }</code></blockquote>    *    * will print 1, 2, 4.    *    * @param iterable      Iterable    * @param includeFilter Class whose instances to include    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -5898,7 +5898,7 @@ return|return
 name|result
 return|;
 block|}
-comment|/**    * Converts a {@link Properties} object to a<code>{@link Map}&lt;String,    * String&gt;</code>.    *    *<p>This is necessary because {@link Properties} is a dinosaur class. It    * ought to extend<code>Map&lt;String,String&gt;</code>, but instead    * extends<code>{@link Hashtable}&lt;Object,Object&gt;</code>.    *    *<p>Typical usage, to iterate over a {@link Properties}:    *    *<blockquote>    *<code>    * Properties properties;<br/>    * for (Map.Entry&lt;String, String&gt; entry =    * Util.toMap(properties).entrySet()) {<br/>    * println("key=" + entry.getKey() + ", value=" + entry.getValue());<br/>    * }    *</code>    *</blockquote>    */
+comment|/**    * Converts a {@link Properties} object to a<code>{@link Map}&lt;String,    * String&gt;</code>.    *    *<p>This is necessary because {@link Properties} is a dinosaur class. It    * ought to extend<code>Map&lt;String,String&gt;</code>, but instead    * extends<code>{@link Hashtable}&lt;Object,Object&gt;</code>.    *    *<p>Typical usage, to iterate over a {@link Properties}:    *    *<blockquote>    *<code>    * Properties properties;<br>    * for (Map.Entry&lt;String, String&gt; entry =    * Util.toMap(properties).entrySet()) {<br>    * println("key=" + entry.getKey() + ", value=" + entry.getValue());<br>    * }    *</code>    *</blockquote>    */
 specifier|public
 specifier|static
 name|Map
@@ -5921,7 +5921,7 @@ operator|)
 name|properties
 return|;
 block|}
-comment|/**    * Returns a hashmap with given contents.    *    *<p>Use this method in initializers. Type parameters are inferred from    * context, and the contents are initialized declaratively. For example,    *    *<blockquote><code>Map&lt;String, Integer&gt; population =<br/>    *&nbsp;&nbsp;Olap4jUtil.mapOf(<br/>    *&nbsp;&nbsp;&nbsp;&nbsp;"UK", 65000000,<br/>    *&nbsp;&nbsp;&nbsp;&nbsp;"USA", 300000000);</code></blockquote>    *    * @param key       First key    * @param value     First value    * @param keyValues Second and sequent key/value pairs    * @param<K>       Key type    * @param<V>       Value type    * @return Map with given contents    */
+comment|/**    * Returns a hashmap with given contents.    *    *<p>Use this method in initializers. Type parameters are inferred from    * context, and the contents are initialized declaratively. For example,    *    *<blockquote><code>Map&lt;String, Integer&gt; population =<br>    *&nbsp;&nbsp;Olap4jUtil.mapOf(<br>    *&nbsp;&nbsp;&nbsp;&nbsp;"UK", 65000000,<br>    *&nbsp;&nbsp;&nbsp;&nbsp;"USA", 300000000);</code></blockquote>    *    * @param key       First key    * @param value     First value    * @param keyValues Second and sequent key/value pairs    * @param<K>       Key type    * @param<V>       Value type    * @return Map with given contents    */
 specifier|public
 specifier|static
 parameter_list|<

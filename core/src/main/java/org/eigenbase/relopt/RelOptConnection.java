@@ -14,7 +14,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * The planner's view of a connection to a database.  *  *<p>A connection contains a {@link RelOptSchema}, via which the query planner  * can access {@link RelOptTable} objects.</p>  *  *<p>If used in saffron, and if saffron is being used as a Java preprocessor,  * then every class which implements<code>RelOptConnection</code> must  * implement the method  *  *<blockquote>  *<pre>public static RelOptSchema getRelOptSchema()</pre>  *</blockquote>  *</p>  */
+comment|/**  * The planner's view of a connection to a database.  *  *<p>A connection contains a {@link RelOptSchema}, via which the query planner  * can access {@link RelOptTable} objects.</p>  */
 end_comment
 
 begin_interface
@@ -22,8 +22,7 @@ specifier|public
 interface|interface
 name|RelOptConnection
 block|{
-comment|//~ Methods ----------------------------------------------------------------
-comment|/**    * Returns the schema underlying this connection. Non-abstract classes    * implementing this interface must also provide<code>public static Schema    * getRelOptSchemaStatic()</code>.    */
+comment|/**    * Returns the schema underlying this connection.    */
 name|RelOptSchema
 name|getRelOptSchema
 parameter_list|()

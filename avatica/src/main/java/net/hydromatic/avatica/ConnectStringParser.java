@@ -1198,7 +1198,7 @@ name|toString
 argument_list|()
 return|;
 block|}
-comment|/**    * Converts a {@link Properties} object to a<code>{@link Map}&lt;String,    * String&gt;</code>.    *    *<p>This is necessary because {@link Properties} is a dinosaur class. It    * ought to extend<code>Map&lt;String,String&gt;</code>, but instead    * extends<code>{@link java.util.Hashtable}&lt;Object,Object&gt;</code>.    *    *<p>Typical usage, to iterate over a {@link Properties}:    *    *<blockquote>    *<code>    * Properties properties;<br/>    * for (Map.Entry&lt;String, String&gt; entry =    * Util.toMap(properties).entrySet()) {<br/>    *   println("key=" + entry.getKey() + ", value=" + entry.getValue());<br/>    * }    *</code>    *</blockquote>    */
+comment|/**    * Converts a {@link Properties} object to a<code>{@link Map}&lt;String,    * String&gt;</code>.    *    *<p>This is necessary because {@link Properties} is a dinosaur class. It    * ought to extend<code>Map&lt;String,String&gt;</code>, but instead    * extends<code>{@link java.util.Hashtable}&lt;Object,Object&gt;</code>.    *    *<p>Typical usage, to iterate over a {@link Properties}:    *    *<blockquote>    *<code>    * Properties properties;<br>    * for (Map.Entry&lt;String, String&gt; entry =    * Util.toMap(properties).entrySet()) {<br>    *   println("key=" + entry.getKey() + ", value=" + entry.getValue());<br>    * }    *</code>    *</blockquote>    */
 specifier|public
 specifier|static
 name|Map

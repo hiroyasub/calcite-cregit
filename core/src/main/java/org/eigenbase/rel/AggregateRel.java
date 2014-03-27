@@ -48,7 +48,7 @@ extends|extends
 name|AggregateRelBase
 block|{
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates an AggregateRel.    *    * @param cluster  Cluster that this relational expression belongs to    * @param child    input relational expression    * @param groupSet Bitset of grouping fields    * @param aggCalls Array of aggregates to compute    * @pre aggCalls != null    */
+comment|/**    * Creates an AggregateRel.    *    * @param cluster  Cluster that this relational expression belongs to    * @param child    input relational expression    * @param groupSet Bit set of grouping fields    * @param aggCalls Array of aggregates to compute, not null    */
 specifier|public
 name|AggregateRel
 parameter_list|(

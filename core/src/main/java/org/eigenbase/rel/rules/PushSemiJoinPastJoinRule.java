@@ -74,7 +74,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * PushSemiJoinPastJoinRule implements the rule for pushing semijoins down in a  * tree past a join in order to trigger other rules that will convert semijoins.  * SemiJoinRel(JoinRel(X, Y), Z) --> JoinRel(SemiJoinRel(X, Z), Y) or  * SemiJoinRel(JoinRel(X, Y), Z) --> JoinRel(X, SemiJoinRel(Y, Z)) Whether this  * first or second conversion is applied depends on which operands actually  * participate in the semijoin.  */
+comment|/**  * PushSemiJoinPastJoinRule implements the rule for pushing semijoins down in a  * tree past a join in order to trigger other rules that will convert semijoins.  *  *<ul>  *<li>SemiJoinRel(JoinRel(X, Y), Z)&rarr; JoinRel(SemiJoinRel(X, Z), Y)  *<li>SemiJoinRel(JoinRel(X, Y), Z)&rarr; JoinRel(X, SemiJoinRel(Y, Z))  *</ul>  *  *<p>Whether this  * first or second conversion is applied depends on which operands actually  * participate in the semijoin.</p>  */
 end_comment
 
 begin_class

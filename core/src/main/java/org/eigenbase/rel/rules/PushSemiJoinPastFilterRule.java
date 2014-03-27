@@ -40,7 +40,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * PushSemiJoinPastFilterRule implements the rule for pushing semijoins down in  * a tree past a filter in order to trigger other rules that will convert  * semijoins. SemiJoinRel(FilterRel(X), Y) --> FilterRel(SemiJoinRel(X, Y))  */
+comment|/**  * PushSemiJoinPastFilterRule implements the rule for pushing semijoins down in  * a tree past a filter in order to trigger other rules that will convert  * semijoins. SemiJoinRel(FilterRel(X), Y)&rarr; FilterRel(SemiJoinRel(X, Y))  */
 end_comment
 
 begin_class

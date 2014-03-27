@@ -701,7 +701,7 @@ return|return
 name|executor
 return|;
 block|}
-comment|/**    * Fires a rule, taking care of tracing and listener notification.    *    * @param ruleCall description of rule call    * @pre ruleCall.getRule().matches(ruleCall)    */
+comment|/**    * Fires a rule, taking care of tracing and listener notification.    *    * @param ruleCall description of rule call    */
 specifier|protected
 name|void
 name|fireRule

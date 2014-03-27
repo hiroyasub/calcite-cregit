@@ -6199,7 +6199,7 @@ name|visitor
 argument_list|)
 return|;
 block|}
-comment|/**    * Converts a FROM clause into a relational expression.    *    * @param bb   Scope within which to resolve identifiers    * @param from FROM clause of a query. Examples include:    *    *<ul>    *<li>a single table ("SALES.EMP"),    *<li>an aliased table ("EMP AS E"),    *<li>a list of tables ("EMP, DEPT"),    *<li>an ANSI Join expression ("EMP JOIN DEPT ON EMP.DEPTNO =    *             DEPT.DEPTNO"),    *<li>a VALUES clause ("VALUES ('Fred', 20)"),    *<li>a query ("(SELECT * FROM EMP WHERE GENDER = 'F')"),    *<li>or any combination of the above.    *</ul>    * @post return != null    */
+comment|/**    * Converts a FROM clause into a relational expression.    *    * @param bb   Scope within which to resolve identifiers    * @param from FROM clause of a query. Examples include:    *    *<ul>    *<li>a single table ("SALES.EMP"),    *<li>an aliased table ("EMP AS E"),    *<li>a list of tables ("EMP, DEPT"),    *<li>an ANSI Join expression ("EMP JOIN DEPT ON EMP.DEPTNO =    *             DEPT.DEPTNO"),    *<li>a VALUES clause ("VALUES ('Fred', 20)"),    *<li>a query ("(SELECT * FROM EMP WHERE GENDER = 'F')"),    *<li>or any combination of the above.    *</ul>    */
 specifier|protected
 name|void
 name|convertFrom
@@ -10360,7 +10360,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates a list of collations required to implement the ORDER BY clause,    * if there is one. Populates<code>extraOrderExprs</code> with any sort    * expressions which are not in the select clause.    *    * @param bb              Scope within which to resolve identifiers    * @param select          Select clause. Never null, because we invent a    *                        dummy SELECT if ORDER BY is applied to a set    *                        operation (UNION etc.)    * @param orderList       Order by clause, may be null    * @param extraOrderExprs Sort expressions which are not in the select    *                        clause (output)    * @param collationList   List of collations (output)    * @pre bb.root != null    */
+comment|/**    * Creates a list of collations required to implement the ORDER BY clause,    * if there is one. Populates<code>extraOrderExprs</code> with any sort    * expressions which are not in the select clause.    *    * @param bb              Scope within which to resolve identifiers    * @param select          Select clause. Never null, because we invent a    *                        dummy SELECT if ORDER BY is applied to a set    *                        operation (UNION etc.)    * @param orderList       Order by clause, may be null    * @param extraOrderExprs Sort expressions which are not in the select    *                        clause (output)    * @param collationList   List of collations (output)    */
 specifier|protected
 name|void
 name|gatherOrderExprs

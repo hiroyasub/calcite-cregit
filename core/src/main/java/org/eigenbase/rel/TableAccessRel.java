@@ -36,7 +36,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A<code>TableAccessRel</code> reads all the rows from a {@link RelOptTable}.  *  *<p>If the table is a<code>net.sf.saffron.ext.JdbcTable</code>, then this is  * literally possible. But for other kinds of tables, there may be many ways to  * read the data from the table. For some kinds of table, it may not even be  * possible to read all of the rows unless some narrowing constraint is applied.  *  *<p>In the example of the<code>net.sf.saffron.ext.ReflectSchema</code>  * schema,  *  *<blockquote>  *<pre>select from fields</pre>  *</blockquote>  *  * cannot be implemented, but  *  *<blockquote>  *<pre>select from fields as f  * where f.getClass().getName().equals("java.lang.String")</pre>  *</blockquote>  *  * can. It is the optimizer's responsibility to find these ways, by applying  * transformation rules.</p>  */
+comment|/**  * A<code>TableAccessRel</code> reads all the rows from a {@link RelOptTable}.  *  *<p>If the table is a<code>net.sf.saffron.ext.JdbcTable</code>, then this is  * literally possible. But for other kinds of tables, there may be many ways to  * read the data from the table. For some kinds of table, it may not even be  * possible to read all of the rows unless some narrowing constraint is applied.  *  *<p>In the example of the<code>net.sf.saffron.ext.ReflectSchema</code>  * schema,</p>  *  *<blockquote>  *<pre>select from fields</pre>  *</blockquote>  *  *<p>cannot be implemented, but</p>  *  *<blockquote>  *<pre>select from fields as f  * where f.getClass().getName().equals("java.lang.String")</pre>  *</blockquote>  *  *<p>can. It is the optimizer's responsibility to find these ways, by applying  * transformation rules.</p>  */
 end_comment
 
 begin_class

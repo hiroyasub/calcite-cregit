@@ -57,7 +57,7 @@ name|RelDataType
 name|elementType
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Constructs a new MultisetSqlType. This constructor should only be called    * from a factory method.    *    * @pre null!=elementType    */
+comment|/**    * Constructs a new MultisetSqlType. This constructor should only be called    * from a factory method.    */
 specifier|public
 name|MultisetSqlType
 parameter_list|(
@@ -79,17 +79,11 @@ argument_list|,
 literal|null
 argument_list|)
 expr_stmt|;
-name|Util
-operator|.
-name|pre
-argument_list|(
-literal|null
-operator|!=
+assert|assert
 name|elementType
-argument_list|,
-literal|"null!=elementType"
-argument_list|)
-expr_stmt|;
+operator|!=
+literal|null
+assert|;
 name|this
 operator|.
 name|elementType

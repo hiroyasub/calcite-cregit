@@ -611,7 +611,7 @@ return|return
 literal|false
 return|;
 block|}
-comment|/**    * Returns whether a node represents the NULL value or a series of nested    * CAST(NULL as<TYPE>) calls<br>    * For Example:<br>    * isNull(CAST(CAST(NULL as INTEGER) AS VARCHAR(1))) returns true    */
+comment|/**    * Returns whether a node represents the NULL value or a series of nested    *<code>CAST(NULL AS type)</code> calls. For example:    *<code>isNull(CAST(CAST(NULL as INTEGER) AS VARCHAR(1)))</code>    * returns {@code true}.    */
 specifier|public
 specifier|static
 name|boolean
@@ -629,8 +629,6 @@ argument_list|,
 literal|false
 argument_list|)
 operator|||
-operator|(
-operator|(
 name|node
 operator|.
 name|getKind
@@ -639,7 +637,6 @@ operator|==
 name|SqlKind
 operator|.
 name|CAST
-operator|)
 operator|&&
 name|isNull
 argument_list|(
@@ -655,10 +652,9 @@ argument_list|(
 literal|0
 argument_list|)
 argument_list|)
-operator|)
 return|;
 block|}
-comment|/**    * Returns whether a node is a literal.    *    *<p>Many constructs which require literals also accept<code>CAST(NULL AS    *<i>type</i>)</code>. This method does not accept casts, so you should    * call {@link #isNullLiteral} first.    *    * @param node The node, never null.    * @return Whether the node is a literal    * @pre node != null    */
+comment|/**    * Returns whether a node is a literal.    *    *<p>Many constructs which require literals also accept<code>CAST(NULL AS    *<i>type</i>)</code>. This method does not accept casts, so you should    * call {@link #isNullLiteral} first.    *    * @param node The node, never null.    * @return Whether the node is a literal    */
 specifier|public
 specifier|static
 name|boolean
@@ -668,24 +664,18 @@ name|SqlNode
 name|node
 parameter_list|)
 block|{
-name|Util
-operator|.
-name|pre
-argument_list|(
+assert|assert
 name|node
 operator|!=
 literal|null
-argument_list|,
-literal|"node != null"
-argument_list|)
-expr_stmt|;
+assert|;
 return|return
 name|node
 operator|instanceof
 name|SqlLiteral
 return|;
 block|}
-comment|/**    * Returns whether a node is a literal chain which is used to represent a    * continued string literal.    *    * @param node The node, never null.    * @return Whether the node is a literal chain    * @pre node != null    */
+comment|/**    * Returns whether a node is a literal chain which is used to represent a    * continued string literal.    *    * @param node The node, never null.    * @return Whether the node is a literal chain    */
 specifier|public
 specifier|static
 name|boolean
@@ -695,17 +685,11 @@ name|SqlNode
 name|node
 parameter_list|)
 block|{
-name|Util
-operator|.
-name|pre
-argument_list|(
+assert|assert
 name|node
 operator|!=
 literal|null
-argument_list|,
-literal|"node != null"
-argument_list|)
-expr_stmt|;
+assert|;
 if|if
 condition|(
 name|node

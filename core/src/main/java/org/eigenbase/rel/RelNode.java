@@ -282,7 +282,7 @@ name|boolean
 name|fail
 parameter_list|)
 function_decl|;
-comment|/**    * Returns a description of the physical ordering (or orderings) of this    * relational expression.    *    * @post return != null    */
+comment|/**    * Returns a description of the physical ordering (or orderings) of this    * relational expression. Never null.    */
 name|List
 argument_list|<
 name|RelCollation

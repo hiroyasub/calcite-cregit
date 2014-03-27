@@ -102,7 +102,7 @@ name|ToRelContext
 name|context
 parameter_list|)
 function_decl|;
-comment|/**    * Returns a description of the physical ordering (or orderings) of the rows    * returned from this table.    *    * @post return != null    * @see RelNode#getCollationList()    */
+comment|/**    * Returns a description of the physical ordering (or orderings) of the rows    * returned from this table.    *    * @see RelNode#getCollationList()    */
 name|List
 argument_list|<
 name|RelCollation

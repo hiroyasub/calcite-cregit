@@ -650,7 +650,7 @@ return|return
 literal|false
 return|;
 block|}
-comment|/**    * Returns whether a node represents the NULL value or a series of nested    * CAST(NULL as<TYPE>) calls<br>    * For Example:<br>    * isNull(CAST(CAST(NULL as INTEGER) AS VARCHAR(1))) returns true    */
+comment|/**    * Returns whether a node represents the NULL value or a series of nested    * {@code CAST(NULL AS type)} calls. For example:    *<code>isNull(CAST(CAST(NULL as INTEGER) AS VARCHAR(1)))</code>    * returns {@code true}.    */
 specifier|public
 specifier|static
 name|boolean

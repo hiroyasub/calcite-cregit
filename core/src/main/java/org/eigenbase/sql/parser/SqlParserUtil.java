@@ -2456,7 +2456,7 @@ name|o
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Converts a list of {expression, operator, expression, ...} into a tree,    * taking operator precedence and associativity into account.    *    * @pre list.size() % 2 == 1    */
+comment|/**    * Converts a list of {expression, operator, expression, ...} into a tree,    * taking operator precedence and associativity into account.    */
 specifier|public
 specifier|static
 name|SqlNode
@@ -2469,6 +2469,16 @@ argument_list|>
 name|list
 parameter_list|)
 block|{
+assert|assert
+name|list
+operator|.
+name|size
+argument_list|()
+operator|%
+literal|2
+operator|==
+literal|1
+assert|;
 if|if
 condition|(
 name|LOGGER

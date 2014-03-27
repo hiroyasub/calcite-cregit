@@ -1997,7 +1997,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**    * Computes the number of distinct rows for a set of keys returned from a    * join    *    * @param joinRel   RelNode representing the join    * @param joinType  type of join    * @param groupKey  keys that the distinct row count will be computed for    * @param predicate join predicate    * @param If true for NDV choose max(left NDV, right NDV) otherwise    *        use (left NDV * right NDV)    * @return number of distinct rows    */
+comment|/**    * Computes the number of distinct rows for a set of keys returned from a    * join. Also known as NDV (number of distinct values).    *    * @param joinRel   RelNode representing the join    * @param joinType  type of join    * @param groupKey  keys that the distinct row count will be computed for    * @param predicate join predicate    * @param useMaxNdv If true use formula<code>max(left NDV, right NDV)</code>,    *                  otherwise use<code>left NDV * right NDV</code>.    * @return number of distinct rows    */
 specifier|public
 specifier|static
 name|Double
@@ -2016,7 +2016,7 @@ name|RexNode
 name|predicate
 parameter_list|,
 name|boolean
-name|useMaxNDV
+name|useMaxNdv
 parameter_list|)
 block|{
 name|Double
@@ -2224,7 +2224,7 @@ expr_stmt|;
 block|}
 if|if
 condition|(
-name|useMaxNDV
+name|useMaxNdv
 condition|)
 block|{
 name|distRowCount

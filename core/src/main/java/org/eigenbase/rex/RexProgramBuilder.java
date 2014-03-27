@@ -2322,7 +2322,7 @@ operator|=
 literal|null
 expr_stmt|;
 block|}
-comment|/**    * Adds a project item for every input field.    *    *<p>You cannot call this method if there are other project items.    *    * @pre projectRefList.isEmpty()    */
+comment|/**    * Adds a project item for every input field.    *    *<p>You cannot call this method if there are other project items.    */
 specifier|public
 name|void
 name|addIdentity

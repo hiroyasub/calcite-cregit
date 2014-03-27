@@ -71,34 +71,34 @@ block|,
 comment|/**      * Function declaration.      */
 name|FUN_DECL
 block|,
-comment|/**      * Function call or datatype declaration.      *      *<p>Examples:      *<li>SUBSTRING('foobar' FROM 1 + 2 TO 4)</li>      *<li>DECIMAL(10, 5)</li>      */
+comment|/**      * Function call or datatype declaration.      *      *<p>Examples:</p>      *<ul>      *<li><code>SUBSTRING('foobar' FROM 1 + 2 TO 4)</code></li>      *<li><code>DECIMAL(10, 5)</code></li>      *</ul>      */
 name|FUN_CALL
 block|,
-comment|/**      * Window specification.      *      *<p>Examples:      *<li>SUM(x) OVER (ORDER BY hireDate ROWS 3 PRECEDING)</li>      *<li>WINDOW w1 AS (ORDER BY hireDate), w2 AS (w1 PARTITION BY gender      * RANGE BETWEEN INTERVAL '1' YEAR PRECEDING AND '2' MONTH      * PRECEDING)</li>      */
+comment|/**      * Window specification.      *      *<p>Examples:</p>      *<ul>      *<li><code>SUM(x) OVER (ORDER BY hireDate ROWS 3 PRECEDING)</code></li>      *<li><code>WINDOW w1 AS (ORDER BY hireDate), w2 AS (w1 PARTITION BY gender      * RANGE BETWEEN INTERVAL '1' YEAR PRECEDING AND '2' MONTH      * PRECEDING)</code></li>      *</ul>      */
 name|WINDOW
 block|,
 comment|/**      * ORDER BY clause of a SELECT statement. The "list" has only two items:      * the query and the order by clause, with ORDER BY as the separator.      */
 name|ORDER_BY
 block|,
-comment|/**      * ORDER BY list.      *      *<p>Example:      *<li>ORDER BY x, y DESC, z      */
+comment|/**      * ORDER BY list.      *      *<p>Example:</p>      *<ul>      *<li><code>ORDER BY x, y DESC, z</code></li>      *</ul>      */
 name|ORDER_BY_LIST
 block|,
 comment|/**      * WITH clause of a SELECT statement. The "list" has only two items:      * the WITH clause and the query, with AS as the separator.      */
 name|WITH
 block|,
-comment|/**      * OFFSET clause.      *      *<p>Example:      *<li>OFFSET 10 ROWS</li></p>      */
+comment|/**      * OFFSET clause.      *      *<p>Example:</p>      *<ul>      *<li><code>OFFSET 10 ROWS</code></li>      *</ul>      */
 name|OFFSET
 block|,
-comment|/**      * FETCH clause.      *      *<p>Example:      *<li>FETCH FIRST 3 ROWS ONLY</li></p>      */
+comment|/**      * FETCH clause.      *      *<p>Example:</p>      *<ul>      *<li><code>FETCH FIRST 3 ROWS ONLY</code></li>      *</ul>      */
 name|FETCH
 block|,
-comment|/**      * GROUP BY list.      *      *<p>Example:      *<li>GROUP BY x, FLOOR(y)      */
+comment|/**      * GROUP BY list.      *      *<p>Example:</p>      *<ul>      *<li><code>GROUP BY x, FLOOR(y)</code></li>      *</ul>      */
 name|GROUP_BY_LIST
 block|,
-comment|/**      * Sub-query list. Encloses a SELECT, UNION, EXCEPT, INTERSECT query      * with optional ORDER BY.      *      *<p>Example:      *<li>GROUP BY x, FLOOR(y)      */
+comment|/**      * Sub-query list. Encloses a SELECT, UNION, EXCEPT, INTERSECT query      * with optional ORDER BY.      *      *<p>Example:</p>      *<ul>      *<li><code>GROUP BY x, FLOOR(y)</code></li>      *</ul>      */
 name|SUB_QUERY
 block|,
-comment|/**      * Set operation.      *      *<p>Example:      *<li>SELECT * FROM a UNION SELECT * FROM b      */
+comment|/**      * Set operation.      *      *<p>Example:</p>      *<ul>      *<li><code>SELECT * FROM a UNION SELECT * FROM b</code></li>      *</ul>      */
 name|SETOP
 block|,
 comment|/**      * FROM clause (containing various kinds of JOIN).      */
@@ -107,7 +107,7 @@ block|,
 comment|/**      * WHERE clause.      */
 name|WHERE_LIST
 block|,
-comment|/**      * Compound identifier.      *      *<p>Example:      *<li>"A"."B"."C"      */
+comment|/**      * Compound identifier.      *      *<p>Example:</p>      *<ul>      *<li><code>"A"."B"."C"</code></li>      *</ul>      */
 name|IDENTIFIER
 argument_list|(
 literal|false

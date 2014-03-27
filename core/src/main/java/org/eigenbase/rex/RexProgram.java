@@ -196,7 +196,7 @@ index|[]
 name|refCounts
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a program.    *    * @param inputRowType  Input row type    * @param exprs         Common expressions    * @param projects      Projection expressions    * @param condition     Condition expression. If null, calculator does not    *                      filter rows    * @param outputRowType Description of the row produced by the program    * @pre !containCommonExprs(exprs)    * @pre !containForwardRefs(exprs)    * @pre !containNonTrivialAggs(exprs)    */
+comment|/**    * Creates a program.    *    *<p>The expressions must be valid: they must not contain common expressions,    * forward references, or non-trivial aggregates.</p>    *    * @param inputRowType  Input row type    * @param exprs         Common expressions    * @param projects      Projection expressions    * @param condition     Condition expression. If null, calculator does not    *                      filter rows    * @param outputRowType Description of the row produced by the program    */
 specifier|public
 name|RexProgram
 parameter_list|(
@@ -276,7 +276,7 @@ comment|// REVIEW jvs 16-Oct-2006:  The description below is confusing.  I
 comment|// think it means "none of the entries are null, there may be none,
 comment|// and there is no further reduction into smaller common sub-expressions
 comment|// possible"?
-comment|/**    * Returns the common sub-expressions of this program.    *    *<p>The list is never null but may be empty; each the expression in the    * list is not null; and no further reduction into smaller common    * sub-expressions is possible.    *    * @post return != null    * @post !containCommonExprs(exprs)    */
+comment|/**    * Returns the common sub-expressions of this program.    *    *<p>The list is never null but may be empty; each the expression in the    * list is not null; and no further reduction into smaller common    * sub-expressions is possible.    */
 specifier|public
 name|List
 argument_list|<

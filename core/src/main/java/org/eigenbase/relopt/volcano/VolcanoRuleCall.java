@@ -493,7 +493,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**    * Called when all operands have matched.    *    * @pre getRule().matches(this)    */
+comment|/**    * Called when all operands have matched.    */
 specifier|protected
 name|void
 name|onMatch

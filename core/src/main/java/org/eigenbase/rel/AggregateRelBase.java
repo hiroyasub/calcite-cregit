@@ -192,7 +192,7 @@ name|BitSet
 name|groupSet
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates an AggregateRelBase.    *    * @param cluster  Cluster    * @param traits   Traits    * @param child    Child    * @param groupSet Bitset of grouping fields    * @param aggCalls Collection of calls to aggregate functions    */
+comment|/**    * Creates an AggregateRelBase.    *    * @param cluster  Cluster    * @param traits   Traits    * @param child    Child    * @param groupSet Bit set of grouping fields    * @param aggCalls Collection of calls to aggregate functions    */
 specifier|protected
 name|AggregateRelBase
 parameter_list|(
@@ -224,17 +224,11 @@ argument_list|,
 name|child
 argument_list|)
 expr_stmt|;
-name|Util
-operator|.
-name|pre
-argument_list|(
+assert|assert
 name|aggCalls
 operator|!=
 literal|null
-argument_list|,
-literal|"aggCalls != null"
-argument_list|)
-expr_stmt|;
+assert|;
 name|this
 operator|.
 name|aggCalls

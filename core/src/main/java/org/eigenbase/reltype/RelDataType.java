@@ -95,7 +95,7 @@ comment|// will be declared to return a read-only List<RelDataTypeField>,
 comment|// and getFields() will be eliminated.  Currently,
 comment|// anyone can mutate a type by poking into the array returned
 comment|// by getFields!
-comment|/**    * Gets the fields in a struct type. The field count is equal to the size of    * the returned list.    *    * @return read-only list of fields    * @pre this.isStruct()    */
+comment|/**    * Gets the fields in a struct type. The field count is equal to the size of    * the returned list.    *    * @return read-only list of fields    */
 name|List
 argument_list|<
 name|RelDataTypeField
@@ -116,7 +116,7 @@ name|int
 name|getFieldCount
 parameter_list|()
 function_decl|;
-comment|/**    * Looks up a field by name.    *    *<p>NOTE: Be careful choosing the value of {@code caseSensitive}:</p>    *<ul>    *<li>If the field name was supplied by an end-user (e.g. as a column alias    * in SQL), use your session's case-sensitivity setting.</li>    *<li>Only hard-code {@code true} if you are sure that the field name is    * internally generated.</li>    *<li>Hard-coding {@code false} is almost certainly wrong.</li>    *</ul>    *    * @param fieldName name of field to find    * @param caseSensitive Whether case-sensitive    * @return named field, or null if not found    * @pre this.isStruct()    */
+comment|/**    * Looks up a field by name.    *    *<p>NOTE: Be careful choosing the value of {@code caseSensitive}:</p>    *<ul>    *<li>If the field name was supplied by an end-user (e.g. as a column alias    * in SQL), use your session's case-sensitivity setting.</li>    *<li>Only hard-code {@code true} if you are sure that the field name is    * internally generated.</li>    *<li>Hard-coding {@code false} is almost certainly wrong.</li>    *</ul>    *    * @param fieldName name of field to find    * @param caseSensitive Whether case-sensitive    * @return named field, or null if not found    */
 name|RelDataTypeField
 name|getField
 parameter_list|(

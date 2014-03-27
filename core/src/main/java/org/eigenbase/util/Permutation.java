@@ -313,7 +313,7 @@ literal|"element"
 argument_list|)
 throw|;
 block|}
-comment|/**    * Returns a string representation of this permutation.    *    *<p>For example, the mapping    *    *<table>    *<tr>    *<th>source</th>    *<th>target</th>    *</tr>    *<tr>    *<td>0</td>    *<td>2</td>    *</tr>    *<tr>    *<td>1</td>    *<td>0</td>    *</tr>    *<tr>    *<td>2</td>    *<td>1</td>    *</tr>    *<tr>    *<td>3</td>    *<td>3</td>    *</tr>    *</table>    *    * is represented by the string "[2, 0, 1, 3]".    */
+comment|/**    * Returns a string representation of this permutation.    *    *<p>For example, the mapping    *    *<table>    *<caption>Example mapping</caption>    *<tr>    *<th>source</th>    *<th>target</th>    *</tr>    *<tr>    *<td>0</td>    *<td>2</td>    *</tr>    *<tr>    *<td>1</td>    *<td>0</td>    *</tr>    *<tr>    *<td>2</td>    *<td>1</td>    *</tr>    *<tr>    *<td>3</td>    *<td>3</td>    *</tr>    *</table>    *    * is represented by the string "[2, 0, 1, 3]".    */
 specifier|public
 name|String
 name|toString
@@ -530,7 +530,7 @@ comment|//  previous source of target (0) was 2, is now 1
 comment|//  something now has to have target 1 -- use previous source
 comment|// After:  [2, 0, 1, 3]
 block|}
-comment|/**    * Inserts into the targets.    *    *<p>For example, consider the permutation</p>    *    *<table border="1">    *<tr>    *<td>source</td>    *<td>0</td>    *<td>1</td>    *<td>2</td>    *<td>3</td>    *<td>4</td>    *</tr>    *<tr>    *<td>target</td>    *<td>3</td>    *<td>0</td>    *<td>4</td>    *<td>2</td>    *<td>1</td>    *</tr>    *</table>    *    *<p>After applying<code>insertTarget(2)</code> every target 2 or higher is    * shifted up one.</p>    *    *<table border="1">    *<tr>    *<td>source</td>    *<td>0</td>    *<td>1</td>    *<td>2</td>    *<td>3</td>    *<td>4</td>    *<td>5</td>    *</tr>    *<tr>    *<td>target</td>    *<td>4</td>    *<td>0</td>    *<td>5</td>    *<td>3</td>    *<td>1</td>    *<td>2</td>    *</tr>    *</table>    *    *<p>Note that the array has been extended to accommodate the new target, and    * the previously unmapped source 5 is mapped to the unused target slot 2.</p>    *    * @param x Ordinal of position to add to target    */
+comment|/**    * Inserts into the targets.    *    *<p>For example, consider the permutation</p>    *    *<table border="1">    *<caption>Example permutation</caption>    *<tr>    *<td>source</td>    *<td>0</td>    *<td>1</td>    *<td>2</td>    *<td>3</td>    *<td>4</td>    *</tr>    *<tr>    *<td>target</td>    *<td>3</td>    *<td>0</td>    *<td>4</td>    *<td>2</td>    *<td>1</td>    *</tr>    *</table>    *    *<p>After applying<code>insertTarget(2)</code> every target 2 or higher is    * shifted up one.</p>    *    *<table border="1">    *<caption>Mapping after applying insertTarget(2)</caption>    *<tr>    *<td>source</td>    *<td>0</td>    *<td>1</td>    *<td>2</td>    *<td>3</td>    *<td>4</td>    *<td>5</td>    *</tr>    *<tr>    *<td>target</td>    *<td>4</td>    *<td>0</td>    *<td>5</td>    *<td>3</td>    *<td>1</td>    *<td>2</td>    *</tr>    *</table>    *    *<p>Note that the array has been extended to accommodate the new target, and    * the previously unmapped source 5 is mapped to the unused target slot 2.</p>    *    * @param x Ordinal of position to add to target    */
 specifier|public
 name|void
 name|insertTarget

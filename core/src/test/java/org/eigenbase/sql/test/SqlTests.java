@@ -884,7 +884,7 @@ name|actualSet
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Compares the columns of a result set against several String-valued    * reference lists, taking order into account.    *    * @param resultSet Result set    * @param refLists  vararg of List<String>. The first list is compared to the    *                  first column, the second list to the second column and so    *                  on    */
+comment|/**    * Compares the columns of a result set against several String-valued    * reference lists, taking order into account.    *    * @param resultSet Result set    * @param refLists  vararg of List&lt;String&gt;. The first list is compared    *                  to the first column, the second list to the second column    *                  and so on    */
 specifier|public
 specifier|static
 name|void

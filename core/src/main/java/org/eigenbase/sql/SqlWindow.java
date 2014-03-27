@@ -168,7 +168,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * SQL window specification.  *  *<p>For example, the query  *  *<blockquote>  *<pre>SELECT sum(a) OVER (w ROWS 3 PRECEDING)  * FROM t  * WINDOW w AS (PARTITION BY x, y ORDER BY z),  *     w1 AS (w ROWS 5 PRECEDING UNBOUNDED FOLLOWING)</pre>  *</blockquote>  *  * declares windows w and w1, and uses a window in an OVER clause. It thus  * contains 3 {@link SqlWindow} objects.</p>  */
+comment|/**  * SQL window specification.  *  *<p>For example, the query</p>  *  *<blockquote>  *<pre>SELECT sum(a) OVER (w ROWS 3 PRECEDING)  * FROM t  * WINDOW w AS (PARTITION BY x, y ORDER BY z),  *     w1 AS (w ROWS 5 PRECEDING UNBOUNDED FOLLOWING)</pre>  *</blockquote>  *  *<p>declares windows w and w1, and uses a window in an OVER clause. It thus  * contains 3 {@link SqlWindow} objects.</p>  */
 end_comment
 
 begin_class

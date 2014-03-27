@@ -26,7 +26,7 @@ extends|extends
 name|RelOptRule
 block|{
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a<code>CommonRelSubExprRule</code>.    *    * @param operand root operand, must not be null    * @pre operand != null    */
+comment|/**    * Creates a<code>CommonRelSubExprRule</code>.    *    * @param operand root operand, must not be null    */
 specifier|public
 name|CommonRelSubExprRule
 parameter_list|(
@@ -40,7 +40,6 @@ name|operand
 argument_list|)
 expr_stmt|;
 block|}
-comment|//~ Methods ----------------------------------------------------------------
 block|}
 end_class
 

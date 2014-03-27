@@ -86,7 +86,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * PushSemiJoinPastProjectRule implements the rule for pushing semijoins down in  * a tree past a project in order to trigger other rules that will convert  * semijoins.  *  *<p>SemiJoinRel(ProjectRel(X), Y) --> ProjectRel(SemiJoinRel(X, Y))  */
+comment|/**  * PushSemiJoinPastProjectRule implements the rule for pushing semijoins down in  * a tree past a project in order to trigger other rules that will convert  * semijoins.  *  *<p>SemiJoinRel(ProjectRel(X), Y)&rarr; ProjectRel(SemiJoinRel(X, Y))  */
 end_comment
 
 begin_class

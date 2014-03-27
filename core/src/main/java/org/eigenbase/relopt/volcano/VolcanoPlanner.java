@@ -1339,7 +1339,7 @@ return|return
 name|usedTables
 return|;
 block|}
-comment|/**    * Finds an expression's equivalence set. If the expression is not    * registered, returns null.    *    * @param rel Relational expression    * @return Equivalence set that expression belongs to, or null if it is not    * registered    * @pre rel != null    */
+comment|/**    * Finds an expression's equivalence set. If the expression is not    * registered, returns null.    *    * @param rel Relational expression    * @return Equivalence set that expression belongs to, or null if it is not    * registered    */
 specifier|public
 name|RelSet
 name|getSet
@@ -3611,7 +3611,7 @@ return|return
 name|cost
 return|;
 block|}
-comment|/**    * Returns the subset that a relational expression belongs to.    *    * @param rel Relational expression    * @return Subset it belongs to, or null if it is not registered    * @pre rel != null    */
+comment|/**    * Returns the subset that a relational expression belongs to.    *    * @param rel Relational expression    * @return Subset it belongs to, or null if it is not registered    */
 specifier|public
 name|RelSubset
 name|getSubset
@@ -6750,7 +6750,7 @@ name|timestamp
 return|;
 block|}
 block|}
-comment|/**    * Normalizes references to subsets within the string representation of a    * plan.    *    *<p>This is useful when writing tests: it helps to ensure that tests don't    * break when an extra rule is introduced that generates a new subset and    * causes subsequent subset numbers to be off by one.    *    *<p>For example,    *    *<blockquote>    * FennelAggRel.FENNEL_EXEC(child=Subset#17.FENNEL_EXEC,groupCount=1,    * EXPR$1=COUNT())<br/>    *&nbsp;&nbsp;FennelSortRel.FENNEL_EXEC(child=Subset#2.FENNEL_EXEC,    * key=[0], discardDuplicates=false)<br/>    *&nbsp;&nbsp;&nbsp;&nbsp;FennelCalcRel.FENNEL_EXEC(    * child=Subset#4.FENNEL_EXEC, expr#0..8={inputs}, expr#9=3456,    * DEPTNO=$t7, $f0=$t9)<br/>    *&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MockTableImplRel.FENNEL_EXEC(    * table=[CATALOG, SALES, EMP])</blockquote>    *    * becomes    *    *<blockquote>    * FennelAggRel.FENNEL_EXEC(child=Subset#{0}.FENNEL_EXEC, groupCount=1,    * EXPR$1=COUNT())<br/>    *&nbsp;&nbsp;FennelSortRel.FENNEL_EXEC(child=Subset#{1}.FENNEL_EXEC,    * key=[0], discardDuplicates=false)<br/>    *&nbsp;&nbsp;&nbsp;&nbsp;FennelCalcRel.FENNEL_EXEC(    * child=Subset#{2}.FENNEL_EXEC,expr#0..8={inputs},expr#9=3456,DEPTNO=$t7,    * $f0=$t9)<br/>    *&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MockTableImplRel.FENNEL_EXEC(    * table=[CATALOG, SALES, EMP])</blockquote>    *    * @param plan Plan    * @return Normalized plan    */
+comment|/**    * Normalizes references to subsets within the string representation of a    * plan.    *    *<p>This is useful when writing tests: it helps to ensure that tests don't    * break when an extra rule is introduced that generates a new subset and    * causes subsequent subset numbers to be off by one.    *    *<p>For example,    *    *<blockquote>    * FennelAggRel.FENNEL_EXEC(child=Subset#17.FENNEL_EXEC,groupCount=1,    * EXPR$1=COUNT())<br>    *&nbsp;&nbsp;FennelSortRel.FENNEL_EXEC(child=Subset#2.FENNEL_EXEC,    * key=[0], discardDuplicates=false)<br>    *&nbsp;&nbsp;&nbsp;&nbsp;FennelCalcRel.FENNEL_EXEC(    * child=Subset#4.FENNEL_EXEC, expr#0..8={inputs}, expr#9=3456,    * DEPTNO=$t7, $f0=$t9)<br>    *&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MockTableImplRel.FENNEL_EXEC(    * table=[CATALOG, SALES, EMP])</blockquote>    *    * becomes    *    *<blockquote>    * FennelAggRel.FENNEL_EXEC(child=Subset#{0}.FENNEL_EXEC, groupCount=1,    * EXPR$1=COUNT())<br>    *&nbsp;&nbsp;FennelSortRel.FENNEL_EXEC(child=Subset#{1}.FENNEL_EXEC,    * key=[0], discardDuplicates=false)<br>    *&nbsp;&nbsp;&nbsp;&nbsp;FennelCalcRel.FENNEL_EXEC(    * child=Subset#{2}.FENNEL_EXEC,expr#0..8={inputs},expr#9=3456,DEPTNO=$t7,    * $f0=$t9)<br>    *&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MockTableImplRel.FENNEL_EXEC(    * table=[CATALOG, SALES, EMP])</blockquote>    *    * @param plan Plan    * @return Normalized plan    */
 specifier|public
 specifier|static
 name|String

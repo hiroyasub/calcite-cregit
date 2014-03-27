@@ -7639,7 +7639,7 @@ return|return
 literal|null
 return|;
 block|}
-comment|/** NULL -> FALSE, FALSE -> FALSE, TRUE -> TRUE. */
+comment|/** NULL&rarr; FALSE, FALSE&rarr; FALSE, TRUE&rarr; TRUE. */
 specifier|public
 specifier|static
 name|boolean
@@ -7657,7 +7657,7 @@ operator|&&
 name|b
 return|;
 block|}
-comment|/** NULL -> TRUE, FALSE -> FALSE, TRUE -> TRUE. */
+comment|/** NULL&rarr; TRUE, FALSE&rarr; FALSE, TRUE&rarr; TRUE. */
 specifier|public
 specifier|static
 name|boolean

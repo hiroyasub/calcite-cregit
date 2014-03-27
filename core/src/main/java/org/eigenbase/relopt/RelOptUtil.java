@@ -982,7 +982,7 @@ return|return
 name|mapping
 return|;
 block|}
-comment|/**    * Creates a plan suitable for use in<code>EXISTS</code> or<code>IN</code>    * statements. See {@link    * org.eigenbase.sql2rel.SqlToRelConverter#convertExists} Note: this    * implementation of createExistsPlan is only called from    * net.sf.farrago.fennel.rel. The last two arguments do not apply to    * those invocations and can be removed from the method.    *    *    *    * @param cluster    Cluster    * @param seekRel    A query rel, for example the resulting rel from 'select *    *                   from emp' or 'values (1,2,3)' or '('Foo', 34)'.    * @param conditions May be null    * @param extraExpr  Column expression to add. "TRUE" for EXISTS and IN    * @param extraName  Name of expression to add.    * @return relational expression which outer joins a boolean condition    * column    * @pre extraExpr == null || extraName != null    */
+comment|/**    * Creates a plan suitable for use in<code>EXISTS</code> or<code>IN</code>    * statements. See {@link    * org.eigenbase.sql2rel.SqlToRelConverter#convertExists} Note: this    * implementation of createExistsPlan is only called from    * net.sf.farrago.fennel.rel. The last two arguments do not apply to    * those invocations and can be removed from the method.    *    * @param cluster    Cluster    * @param seekRel    A query rel, for example the resulting rel from 'select *    *                   from emp' or 'values (1,2,3)' or '('Foo', 34)'.    * @param conditions May be null    * @param extraExpr  Column expression to add. "TRUE" for EXISTS and IN    * @param extraName  Name of expression to add.    * @return relational expression which outer joins a boolean condition    * column    */
 specifier|public
 specifier|static
 name|RelNode
@@ -1007,6 +1007,15 @@ name|String
 name|extraName
 parameter_list|)
 block|{
+assert|assert
+name|extraExpr
+operator|==
+literal|null
+operator|||
+name|extraName
+operator|!=
+literal|null
+assert|;
 name|RelNode
 name|ret
 init|=
