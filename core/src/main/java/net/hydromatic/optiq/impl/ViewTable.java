@@ -298,11 +298,11 @@ operator|=
 name|rowType
 expr_stmt|;
 block|}
-comment|/** Table function that returns a view. */
+comment|/** Table macro that returns a view. */
 specifier|public
 specifier|static
-name|ViewTableFunction
-name|viewFunction
+name|ViewTableMacro
+name|viewMacro
 parameter_list|(
 name|SchemaPlus
 name|schema
@@ -321,7 +321,7 @@ parameter_list|)
 block|{
 return|return
 operator|new
-name|ViewTableFunction
+name|ViewTableMacro
 argument_list|(
 name|OptiqSchema
 operator|.
@@ -510,9 +510,9 @@ block|}
 comment|/** Table function that implements a view. It returns the operator    * tree of the view's SQL query. */
 specifier|static
 class|class
-name|ViewTableFunction
+name|ViewTableMacro
 implements|implements
-name|TableFunction
+name|TableMacro
 block|{
 specifier|protected
 specifier|final
@@ -533,7 +533,7 @@ name|String
 argument_list|>
 name|schemaPath
 decl_stmt|;
-name|ViewTableFunction
+name|ViewTableMacro
 parameter_list|(
 name|OptiqSchema
 name|schema
@@ -581,7 +581,7 @@ block|}
 specifier|public
 name|List
 argument_list|<
-name|Parameter
+name|FunctionParameter
 argument_list|>
 name|getParameters
 parameter_list|()

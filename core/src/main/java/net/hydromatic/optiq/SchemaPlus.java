@@ -51,15 +51,15 @@ name|Table
 name|table
 parameter_list|)
 function_decl|;
-comment|/** Adds a table function to this schema. */
+comment|/** Adds a function to this schema. */
 name|void
 name|add
 parameter_list|(
 name|String
 name|name
 parameter_list|,
-name|TableFunction
-name|table
+name|Function
+name|function
 parameter_list|)
 function_decl|;
 name|boolean

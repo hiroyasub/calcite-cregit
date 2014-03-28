@@ -473,9 +473,9 @@ block|}
 specifier|private
 name|Collection
 argument_list|<
-name|TableFunction
+name|Function
 argument_list|>
-name|getTableFunctionsFrom
+name|getFunctionsFrom
 parameter_list|(
 name|List
 argument_list|<
@@ -538,7 +538,7 @@ decl_stmt|;
 return|return
 name|schema
 operator|.
-name|compositeTableFunctionMap
+name|compositeFunctionMap
 operator|.
 name|get
 argument_list|(
@@ -809,11 +809,11 @@ block|}
 specifier|final
 name|Collection
 argument_list|<
-name|TableFunction
+name|Function
 argument_list|>
-name|tableFunctions
+name|functions
 init|=
-name|getTableFunctionsFrom
+name|getFunctionsFrom
 argument_list|(
 name|opName
 operator|.
@@ -830,7 +830,7 @@ argument_list|)
 decl_stmt|;
 if|if
 condition|(
-name|tableFunctions
+name|functions
 operator|.
 name|isEmpty
 argument_list|()
@@ -865,7 +865,7 @@ name|ImmutableList
 operator|.
 name|copyOf
 argument_list|(
-name|tableFunctions
+name|functions
 argument_list|)
 argument_list|)
 return|;
@@ -884,9 +884,9 @@ parameter_list|,
 specifier|final
 name|ImmutableList
 argument_list|<
-name|TableFunction
+name|Function
 argument_list|>
-name|tableFunctions
+name|functions
 parameter_list|)
 block|{
 return|return
@@ -910,7 +910,7 @@ name|toOp
 argument_list|(
 name|name
 argument_list|,
-name|tableFunctions
+name|functions
 operator|.
 name|get
 argument_list|(
@@ -925,7 +925,7 @@ name|size
 parameter_list|()
 block|{
 return|return
-name|tableFunctions
+name|functions
 operator|.
 name|size
 argument_list|()
@@ -941,8 +941,8 @@ parameter_list|(
 name|String
 name|name
 parameter_list|,
-name|TableFunction
-name|tableFunction
+name|Function
+name|function
 parameter_list|)
 block|{
 name|List
@@ -986,16 +986,10 @@ argument_list|()
 decl_stmt|;
 for|for
 control|(
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|optiq
-operator|.
-name|Parameter
+name|FunctionParameter
 name|o
 range|:
-name|tableFunction
+name|function
 operator|.
 name|getParameters
 argument_list|()
@@ -1049,7 +1043,7 @@ name|returnType
 decl_stmt|;
 if|if
 condition|(
-name|tableFunction
+name|function
 operator|instanceof
 name|ScalarFunction
 condition|)
@@ -1060,7 +1054,7 @@ operator|(
 operator|(
 name|ScalarFunction
 operator|)
-name|tableFunction
+name|function
 operator|)
 operator|.
 name|getReturnType
@@ -1073,13 +1067,23 @@ operator|=
 literal|null
 expr_stmt|;
 block|}
-else|else
+if|else if
+condition|(
+name|function
+operator|instanceof
+name|TableMacro
+condition|)
 block|{
 comment|// Make a call with dummy arguments, to get the table, so get its row
 comment|// type.
 name|table
 operator|=
-name|tableFunction
+operator|(
+operator|(
+name|TableMacro
+operator|)
+name|function
+operator|)
 operator|.
 name|apply
 argument_list|(
@@ -1098,6 +1102,18 @@ name|CURSOR
 argument_list|)
 expr_stmt|;
 block|}
+else|else
+block|{
+throw|throw
+operator|new
+name|AssertionError
+argument_list|(
+literal|"unknown function type "
+operator|+
+name|function
+argument_list|)
+throw|;
+block|}
 return|return
 operator|new
 name|SqlUserDefinedFunction
@@ -1110,7 +1126,7 @@ name|argTypes
 argument_list|,
 name|typeFamilies
 argument_list|,
-name|tableFunction
+name|function
 argument_list|,
 name|table
 argument_list|)

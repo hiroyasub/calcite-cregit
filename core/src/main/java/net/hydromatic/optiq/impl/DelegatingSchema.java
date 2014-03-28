@@ -190,9 +190,9 @@ block|}
 specifier|public
 name|Collection
 argument_list|<
-name|TableFunction
+name|Function
 argument_list|>
-name|getTableFunctions
+name|getFunctions
 parameter_list|(
 name|String
 name|name
@@ -201,7 +201,7 @@ block|{
 return|return
 name|schema
 operator|.
-name|getTableFunctions
+name|getFunctions
 argument_list|(
 name|name
 argument_list|)
@@ -212,13 +212,13 @@ name|Set
 argument_list|<
 name|String
 argument_list|>
-name|getTableFunctionNames
+name|getFunctionNames
 parameter_list|()
 block|{
 return|return
 name|schema
 operator|.
-name|getTableFunctionNames
+name|getFunctionNames
 argument_list|()
 return|;
 block|}

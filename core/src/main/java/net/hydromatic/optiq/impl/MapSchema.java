@@ -90,7 +90,7 @@ name|Multimap
 argument_list|<
 name|String
 argument_list|,
-name|TableFunction
+name|Function
 argument_list|>
 name|membersMap
 decl_stmt|;
@@ -135,7 +135,7 @@ operator|.
 expr|<
 name|String
 argument_list|,
-name|TableFunction
+name|Function
 operator|>
 name|create
 argument_list|()
@@ -173,7 +173,7 @@ name|ListMultimap
 argument_list|<
 name|String
 argument_list|,
-name|TableFunction
+name|Function
 argument_list|>
 name|membersMap
 parameter_list|,
@@ -297,9 +297,9 @@ name|Multimap
 argument_list|<
 name|String
 argument_list|,
-name|TableFunction
+name|Function
 argument_list|>
-name|getTableFunctionMultimap
+name|getFunctionMultimap
 parameter_list|()
 block|{
 return|return

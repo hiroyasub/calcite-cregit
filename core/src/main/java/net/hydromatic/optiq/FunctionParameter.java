@@ -38,19 +38,27 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Function that returns a scalar result.  */
+comment|/**  * Parameter to a {@link Function}.  *  *<p>NOTE: We'd have called it {@code Parameter} but the overlap with  * {@link java.lang.reflect.Parameter} was too confusing.</p>  */
 end_comment
 
 begin_interface
 specifier|public
 interface|interface
-name|ScalarFunction
-extends|extends
-name|Function
+name|FunctionParameter
 block|{
-comment|/**    * Returns the return type of this function, constructed using the given    * type factory.    *    * @param typeFactory Type factory    */
+comment|/**    * Zero-based ordinal of this parameter within the member's parameter    * list.    *    * @return Parameter ordinal    */
+name|int
+name|getOrdinal
+parameter_list|()
+function_decl|;
+comment|/**    * Name of the parameter.    *    * @return Parameter name    */
+name|String
+name|getName
+parameter_list|()
+function_decl|;
+comment|/**    * Returns the type of this parameter.    *    * @param typeFactory Type factory to be used to create the type    *    * @return Parameter type.    */
 name|RelDataType
-name|getReturnType
+name|getType
 parameter_list|(
 name|RelDataTypeFactory
 name|typeFactory
@@ -60,7 +68,7 @@ block|}
 end_interface
 
 begin_comment
-comment|// End ScalarFunction.java
+comment|// End FunctionParameter.java
 end_comment
 
 end_unit

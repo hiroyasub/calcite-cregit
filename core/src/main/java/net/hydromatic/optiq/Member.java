@@ -64,7 +64,7 @@ function_decl|;
 comment|/**    * Returns the parameters of this member.    *    * @return Parameters; never null    */
 name|List
 argument_list|<
-name|Parameter
+name|FunctionParameter
 argument_list|>
 name|getParameters
 parameter_list|()

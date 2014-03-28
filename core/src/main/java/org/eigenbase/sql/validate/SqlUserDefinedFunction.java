@@ -83,24 +83,12 @@ name|hydromatic
 operator|.
 name|optiq
 operator|.
-name|Table
-import|;
-end_import
-
-begin_import
-import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|optiq
-operator|.
-name|TableFunction
+name|*
 import|;
 end_import
 
 begin_comment
-comment|/** * User-defined function.  *  *<p>Created by the validator, after resolving a function call to a function  * (perhaps a table function) defined in an Optiq schema.</p> */
+comment|/** * User-defined function.  *  *<p>Created by the validator, after resolving a function call to a function  * defined in an Optiq schema.</p> */
 end_comment
 
 begin_class
@@ -112,8 +100,8 @@ name|SqlFunction
 block|{
 specifier|public
 specifier|final
-name|TableFunction
-name|tableFunction
+name|Function
+name|function
 decl_stmt|;
 specifier|public
 specifier|final
@@ -141,8 +129,8 @@ name|SqlTypeFamily
 argument_list|>
 name|typeFamilies
 parameter_list|,
-name|TableFunction
-name|tableFunction
+name|Function
+name|function
 parameter_list|,
 name|Table
 name|table
@@ -185,9 +173,9 @@ argument_list|)
 expr_stmt|;
 name|this
 operator|.
-name|tableFunction
+name|function
 operator|=
-name|tableFunction
+name|function
 expr_stmt|;
 name|this
 operator|.

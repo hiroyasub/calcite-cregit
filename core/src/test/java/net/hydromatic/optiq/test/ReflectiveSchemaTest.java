@@ -984,7 +984,7 @@ literal|"emps_view"
 argument_list|,
 name|ViewTable
 operator|.
-name|viewFunction
+name|viewMacro
 argument_list|(
 name|schema
 argument_list|,
@@ -1119,7 +1119,7 @@ literal|"emps"
 argument_list|,
 name|ViewTable
 operator|.
-name|viewFunction
+name|viewMacro
 argument_list|(
 name|schema
 argument_list|,
@@ -1142,7 +1142,7 @@ literal|"hr_emps"
 argument_list|,
 name|ViewTable
 operator|.
-name|viewFunction
+name|viewMacro
 argument_list|(
 name|schema
 argument_list|,
@@ -1165,7 +1165,7 @@ literal|"s_emps"
 argument_list|,
 name|ViewTable
 operator|.
-name|viewFunction
+name|viewMacro
 argument_list|(
 name|schema
 argument_list|,
@@ -1188,7 +1188,7 @@ literal|"null_emps"
 argument_list|,
 name|ViewTable
 operator|.
-name|viewFunction
+name|viewMacro
 argument_list|(
 name|schema
 argument_list|,
@@ -2257,14 +2257,14 @@ literal|"empid=4; deptno=10; name=Abd; salary=0.0; commission=null\n"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** If a method returns a    * {@link ViewTable}.{@code ViewTableFunction}, then it    * should be expanded. */
+comment|/** If a method returns a    * {@link ViewTable}.{@code ViewTableMacro}, then it    * should be expanded. */
 annotation|@
 name|Ignore
 annotation|@
 name|Test
 specifier|public
 name|void
-name|testTableFunctionIsView
+name|testTableMacroIsView
 parameter_list|()
 throws|throws
 name|Exception
@@ -2298,14 +2298,14 @@ literal|"empid=4; deptno=10; name=Abd; salary=0.0; commission=null\n"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Finds a table-function using reflection. */
+comment|/** Finds a table-macro using reflection. */
 annotation|@
 name|Ignore
 annotation|@
 name|Test
 specifier|public
 name|void
-name|testTableFunction
+name|testTableMacro
 parameter_list|()
 throws|throws
 name|Exception

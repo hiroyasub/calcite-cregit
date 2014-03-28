@@ -38,7 +38,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A namespace for tables and table functions.  *  *<p>A schema can also contain sub-schemas, to any level of nesting. Most  * providers have a limited number of levels; for example, most JDBC databases  * have either one level ("schemas") or two levels ("database" and  * "catalog").</p>  *  *<p>There may be multiple overloaded table functions with the same name but  * different numbers or types of parameters.  * For this reason, {@link #getTableFunctions} returns a list of all  * members with the same name. Optiq will call  * {@link Schemas#resolve(org.eigenbase.reltype.RelDataTypeFactory, String, java.util.Collection, java.util.List)}  * to choose the appropriate one.</p>  *  *<p>The most common and important type of member is the one with no  * arguments and a result type that is a collection of records. This is called a  *<dfn>relation</dfn>. It is equivalent to a table in a relational  * database.</p>  *  *<p>For example, the query</p>  *  *<blockquote>select * from sales.emps</blockquote>  *  *<p>is valid if "sales" is a registered  * schema and "emps" is a member with zero parameters and a result type  * of<code>Collection(Record(int: "empno", String: "name"))</code>.</p>  *  *<p>A schema may be nested within another schema; see  * {@link Schema#getSubSchema(String)}.</p>  */
+comment|/**  * A namespace for tables and functions.  *  *<p>A schema can also contain sub-schemas, to any level of nesting. Most  * providers have a limited number of levels; for example, most JDBC databases  * have either one level ("schemas") or two levels ("database" and  * "catalog").</p>  *  *<p>There may be multiple overloaded functions with the same name but  * different numbers or types of parameters.  * For this reason, {@link #getFunctions} returns a list of all  * members with the same name. Optiq will call  * {@link Schemas#resolve(org.eigenbase.reltype.RelDataTypeFactory, String, java.util.Collection, java.util.List)}  * to choose the appropriate one.</p>  *  *<p>The most common and important type of member is the one with no  * arguments and a result type that is a collection of records. This is called a  *<dfn>relation</dfn>. It is equivalent to a table in a relational  * database.</p>  *  *<p>For example, the query</p>  *  *<blockquote>select * from sales.emps</blockquote>  *  *<p>is valid if "sales" is a registered  * schema and "emps" is a member with zero parameters and a result type  * of<code>Collection(Record(int: "empno", String: "name"))</code>.</p>  *  *<p>A schema may be nested within another schema; see  * {@link Schema#getSubSchema(String)}.</p>  */
 end_comment
 
 begin_interface
@@ -72,23 +72,23 @@ argument_list|>
 name|getTableNames
 parameter_list|()
 function_decl|;
-comment|/**    * Returns a list of table functions in this schema with the given name, or    * an empty list if there is no such table function.    *    * @param name Name of table function    * @return List of table functions with given name, or empty list    */
+comment|/**    * Returns a list of functions in this schema with the given name, or    * an empty list if there is no such function.    *    * @param name Name of function    * @return List of functions with given name, or empty list    */
 name|Collection
 argument_list|<
-name|TableFunction
+name|Function
 argument_list|>
-name|getTableFunctions
+name|getFunctions
 parameter_list|(
 name|String
 name|name
 parameter_list|)
 function_decl|;
-comment|/**    * Returns the names of the table functions in this schema.    */
+comment|/**    * Returns the names of the functions in this schema.    */
 name|Set
 argument_list|<
 name|String
 argument_list|>
-name|getTableFunctionNames
+name|getFunctionNames
 parameter_list|()
 function_decl|;
 comment|/**    * Returns a sub-schema with a given name, or null.    */
@@ -112,7 +112,7 @@ name|Expression
 name|getExpression
 parameter_list|()
 function_decl|;
-comment|/** Returns whether the user is allowed to create new tables, table functions    * and sub-schemas in this schema, in addition to those returned automatically    * by methods such as {@link #getTable(String)}.    *    *<p>Even if this method returns true, the maps are not modified. Optiq    * stores the defined objects in a wrapper object. */
+comment|/** Returns whether the user is allowed to create new tables, functions    * and sub-schemas in this schema, in addition to those returned automatically    * by methods such as {@link #getTable(String)}.    *    *<p>Even if this method returns true, the maps are not modified. Optiq    * stores the defined objects in a wrapper object. */
 name|boolean
 name|isMutable
 parameter_list|()

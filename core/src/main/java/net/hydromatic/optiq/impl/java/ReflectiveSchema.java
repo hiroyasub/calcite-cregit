@@ -63,18 +63,6 @@ name|hydromatic
 operator|.
 name|optiq
 operator|.
-name|Parameter
-import|;
-end_import
-
-begin_import
-import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|optiq
-operator|.
 name|Table
 import|;
 end_import
@@ -324,9 +312,9 @@ name|Multimap
 argument_list|<
 name|String
 argument_list|,
-name|TableFunction
+name|Function
 argument_list|>
-name|getTableFunctionMultimap
+name|getFunctionMultimap
 parameter_list|()
 block|{
 specifier|final
@@ -336,7 +324,7 @@ name|Builder
 argument_list|<
 name|String
 argument_list|,
-name|TableFunction
+name|Function
 argument_list|>
 name|builder
 init|=
@@ -387,8 +375,8 @@ block|{
 continue|continue;
 block|}
 specifier|final
-name|TableFunction
-name|tableFunction
+name|TableMacro
+name|tableMacro
 init|=
 name|methodMember
 argument_list|(
@@ -401,7 +389,7 @@ name|put
 argument_list|(
 name|methodName
 argument_list|,
-name|tableFunction
+name|tableMacro
 argument_list|)
 expr_stmt|;
 block|}
@@ -413,7 +401,7 @@ argument_list|()
 return|;
 block|}
 specifier|private
-name|TableFunction
+name|TableMacro
 name|methodMember
 parameter_list|(
 specifier|final
@@ -448,7 +436,7 @@ argument_list|()
 decl_stmt|;
 return|return
 operator|new
-name|MethodTableFunction
+name|MethodTableMacro
 argument_list|(
 name|this
 argument_list|,
@@ -1091,13 +1079,13 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/** Table function based on a Java method. */
+comment|/** Table macro based on a Java method. */
 specifier|private
 specifier|static
 class|class
-name|MethodTableFunction
+name|MethodTableMacro
 implements|implements
-name|TableFunction
+name|TableMacro
 block|{
 specifier|private
 specifier|final
@@ -1124,7 +1112,7 @@ index|[]
 name|parameterTypes
 decl_stmt|;
 specifier|public
-name|MethodTableFunction
+name|MethodTableMacro
 parameter_list|(
 name|ReflectiveSchema
 name|schema
@@ -1206,7 +1194,7 @@ block|}
 specifier|public
 name|List
 argument_list|<
-name|Parameter
+name|FunctionParameter
 argument_list|>
 name|getParameters
 parameter_list|()
@@ -1215,12 +1203,12 @@ return|return
 operator|new
 name|AbstractList
 argument_list|<
-name|Parameter
+name|FunctionParameter
 argument_list|>
 argument_list|()
 block|{
 specifier|public
-name|Parameter
+name|FunctionParameter
 name|get
 parameter_list|(
 specifier|final
@@ -1230,7 +1218,7 @@ parameter_list|)
 block|{
 return|return
 operator|new
-name|Parameter
+name|FunctionParameter
 argument_list|()
 block|{
 specifier|public

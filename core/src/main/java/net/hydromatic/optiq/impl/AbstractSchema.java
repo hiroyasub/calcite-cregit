@@ -78,7 +78,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Abstract implementation of {@link Schema}.  *  *<p>Behavior is as follows:</p>  *<ul>  *<li>The schema has no tables unless you override  *       {@link #getTableMap()}.</li>  *<li>The schema has no table-functions unless you override  *       {@link #getTableFunctionMultimap()}.</li>  *<li>The schema has no sub-schemas unless you override  *       {@link #getSubSchemaMap()}.</li>  *<li>The schema is mutable unless you override  *       {@link #isMutable()}.</li>  *<li>The name and parent schema are as specified in the constructor  *       arguments.</li>  *</ul>  *  *<p>For constructing custom maps and multi-maps, we recommend  * {@link com.google.common.base.Suppliers} and  * {@link com.google.common.collect.Maps}.</p>  */
+comment|/**  * Abstract implementation of {@link Schema}.  *  *<p>Behavior is as follows:</p>  *<ul>  *<li>The schema has no tables unless you override  *       {@link #getTableMap()}.</li>  *<li>The schema has no functions unless you override  *       {@link #getFunctionMultimap()}.</li>  *<li>The schema has no sub-schemas unless you override  *       {@link #getSubSchemaMap()}.</li>  *<li>The schema is mutable unless you override  *       {@link #isMutable()}.</li>  *<li>The name and parent schema are as specified in the constructor  *       arguments.</li>  *</ul>  *  *<p>For constructing custom maps and multi-maps, we recommend  * {@link com.google.common.base.Suppliers} and  * {@link com.google.common.collect.Maps}.</p>  */
 end_comment
 
 begin_class
@@ -221,15 +221,15 @@ name|name
 argument_list|)
 return|;
 block|}
-comment|/**    * Returns a multi-map of table-functions in this schema by name.    * It is a multi-map because functions are overloaded; there may be more than    * one function in a schema with a given name (as long as they have different    * parameter lists).    *    *<p>The implementations of {@link #getTableFunctionNames()}    * and {@link #getTableFunctions(String)} depend on this map.    * The default implementation of this method returns the empty multi-map.    * Override this method to change their behavior.</p>    */
+comment|/**    * Returns a multi-map of functions in this schema by name.    * It is a multi-map because functions are overloaded; there may be more than    * one function in a schema with a given name (as long as they have different    * parameter lists).    *    *<p>The implementations of {@link #getFunctionNames()}    * and {@link Schema#getFunctions(String)} depend on this map.    * The default implementation of this method returns the empty multi-map.    * Override this method to change their behavior.</p>    */
 specifier|protected
 name|Multimap
 argument_list|<
 name|String
 argument_list|,
-name|TableFunction
+name|Function
 argument_list|>
-name|getTableFunctionMultimap
+name|getFunctionMultimap
 parameter_list|()
 block|{
 return|return
@@ -243,16 +243,16 @@ specifier|public
 specifier|final
 name|Collection
 argument_list|<
-name|TableFunction
+name|Function
 argument_list|>
-name|getTableFunctions
+name|getFunctions
 parameter_list|(
 name|String
 name|name
 parameter_list|)
 block|{
 return|return
-name|getTableFunctionMultimap
+name|getFunctionMultimap
 argument_list|()
 operator|.
 name|get
@@ -267,11 +267,11 @@ name|Set
 argument_list|<
 name|String
 argument_list|>
-name|getTableFunctionNames
+name|getFunctionNames
 parameter_list|()
 block|{
 return|return
-name|getTableFunctionMultimap
+name|getFunctionMultimap
 argument_list|()
 operator|.
 name|keySet

@@ -769,7 +769,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testTableFunction
+name|testTableMacro
 parameter_list|()
 throws|throws
 name|SQLException
@@ -838,8 +838,8 @@ argument_list|)
 argument_list|)
 decl_stmt|;
 specifier|final
-name|TableFunction
-name|tableFunction
+name|TableMacro
+name|tableMacro
 init|=
 name|Schemas
 operator|.
@@ -856,7 +856,7 @@ name|add
 argument_list|(
 literal|"GenerateStrings"
 argument_list|,
-name|tableFunction
+name|tableMacro
 argument_list|)
 expr_stmt|;
 name|ResultSet

@@ -1115,7 +1115,7 @@ name|name
 argument_list|,
 name|ViewTable
 operator|.
-name|viewFunction
+name|viewMacro
 argument_list|(
 name|schema
 argument_list|,

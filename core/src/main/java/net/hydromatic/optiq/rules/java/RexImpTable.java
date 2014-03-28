@@ -63,7 +63,7 @@ name|hydromatic
 operator|.
 name|optiq
 operator|.
-name|TableFunction
+name|Function
 import|;
 end_import
 
@@ -196,20 +196,6 @@ operator|.
 name|validate
 operator|.
 name|SqlUserDefinedFunction
-import|;
-end_import
-
-begin_import
-import|import
-name|com
-operator|.
-name|google
-operator|.
-name|common
-operator|.
-name|base
-operator|.
-name|Function
 import|;
 end_import
 
@@ -430,7 +416,7 @@ argument_list|>
 name|translatedOperands
 parameter_list|)
 block|{
-name|TableFunction
+name|Function
 name|x
 init|=
 operator|(
@@ -443,7 +429,7 @@ name|getOperator
 argument_list|()
 operator|)
 operator|.
-name|tableFunction
+name|function
 decl_stmt|;
 specifier|final
 name|Method
@@ -1814,6 +1800,14 @@ argument_list|(
 name|expressions
 argument_list|,
 operator|new
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|base
+operator|.
 name|Function
 argument_list|<
 name|Expression

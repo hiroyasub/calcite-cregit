@@ -762,9 +762,9 @@ name|Multimap
 argument_list|<
 name|String
 argument_list|,
-name|TableFunction
+name|Function
 argument_list|>
-name|getTableFunctions
+name|getFunctions
 parameter_list|()
 block|{
 comment|// TODO: populate map from JDBC metadata
@@ -779,16 +779,16 @@ specifier|public
 specifier|final
 name|Collection
 argument_list|<
-name|TableFunction
+name|Function
 argument_list|>
-name|getTableFunctions
+name|getFunctions
 parameter_list|(
 name|String
 name|name
 parameter_list|)
 block|{
 return|return
-name|getTableFunctions
+name|getFunctions
 argument_list|()
 operator|.
 name|get
@@ -803,11 +803,11 @@ name|Set
 argument_list|<
 name|String
 argument_list|>
-name|getTableFunctionNames
+name|getFunctionNames
 parameter_list|()
 block|{
 return|return
-name|getTableFunctions
+name|getFunctions
 argument_list|()
 operator|.
 name|keySet

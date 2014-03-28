@@ -302,10 +302,10 @@ operator|=
 name|key
 expr_stmt|;
 block|}
-comment|/** Table function that returns a materialized view. */
+comment|/** Table macro that returns a materialized view. */
 specifier|public
 specifier|static
-name|MaterializedViewTableFunction
+name|MaterializedViewTableMacro
 name|create
 parameter_list|(
 specifier|final
@@ -330,7 +330,7 @@ parameter_list|)
 block|{
 return|return
 operator|new
-name|MaterializedViewTableFunction
+name|MaterializedViewTableMacro
 argument_list|(
 name|schema
 argument_list|,
@@ -430,9 +430,9 @@ comment|/** Table function that returns the table that materializes a view. */
 specifier|public
 specifier|static
 class|class
-name|MaterializedViewTableFunction
+name|MaterializedViewTableMacro
 extends|extends
-name|ViewTableFunction
+name|ViewTableMacro
 block|{
 specifier|private
 specifier|final
@@ -440,7 +440,7 @@ name|MaterializationKey
 name|key
 decl_stmt|;
 specifier|private
-name|MaterializedViewTableFunction
+name|MaterializedViewTableMacro
 parameter_list|(
 name|OptiqSchema
 name|schema

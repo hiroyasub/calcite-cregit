@@ -37,38 +37,51 @@ name|RelDataTypeFactory
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
+import|;
+end_import
+
 begin_comment
-comment|/**  * Parameter to a {@link TableFunction}.  */
+comment|/**  * Function that returns a {@link Table}.  *  *<p>As the name "macro" implies, this is invoked at "compile time", that is,  * during query preparation. Compile-time expansion of table expressions allows  * for some very powerful query-optimizations.</p>  */
 end_comment
 
 begin_interface
 specifier|public
 interface|interface
-name|Parameter
+name|TableMacro
+extends|extends
+name|Function
 block|{
-comment|/**    * Zero-based ordinal of this parameter within the member's parameter    * list.    *    * @return Parameter ordinal    */
-name|int
-name|getOrdinal
-parameter_list|()
-function_decl|;
-comment|/**    * Name of the parameter.    *    * @return Parameter name    */
-name|String
-name|getName
-parameter_list|()
-function_decl|;
-comment|/**    * Returns the type of this parameter.    *    * @param typeFactory Type factory to be used to create the type    *    * @return Parameter type.    */
+comment|/**    * Returns the record type of the table yielded by this function when    * applied to parameters of given types.    *    * @param typeFactory Type factory    */
 name|RelDataType
-name|getType
+name|getRowType
 parameter_list|(
 name|RelDataTypeFactory
 name|typeFactory
+parameter_list|)
+function_decl|;
+comment|/**    * Applies arguments to yield a table.    *    * @param arguments Arguments    * @return Table    */
+name|Table
+name|apply
+parameter_list|(
+name|List
+argument_list|<
+name|Object
+argument_list|>
+name|arguments
 parameter_list|)
 function_decl|;
 block|}
 end_interface
 
 begin_comment
-comment|// End Parameter.java
+comment|// End TableMacro.java
 end_comment
 
 end_unit

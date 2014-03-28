@@ -15,30 +15,6 @@ end_package
 
 begin_import
 import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
-name|reltype
-operator|.
-name|RelDataType
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
-name|reltype
-operator|.
-name|RelDataTypeFactory
-import|;
-end_import
-
-begin_import
-import|import
 name|java
 operator|.
 name|util
@@ -48,52 +24,27 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Function that returns a {@link Table}.  */
+comment|/**  * Named expression that accepts parameters and returns a result.  *  *<p>The application may occur at compile time (for a macro) or at run time  * (for a regular function). The result may be a relation, and so might any of  * the parameters.</p>  *  *<p>Functions are registered in a {@link Schema}, and may be queried by name  * ({@link Schema#getFunctions(String)}) then overloads resolved based on  * parameter types.</p>  *  * @see TableMacro  * @see ScalarFunction  */
 end_comment
 
 begin_interface
 specifier|public
 interface|interface
-name|TableFunction
+name|Function
 block|{
-comment|/**    * Returns the parameters of this table function.    *    * @return Parameters; never null    */
+comment|/**    * Returns the parameters of this function.    *    * @return Parameters; never null    */
 name|List
 argument_list|<
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|optiq
-operator|.
-name|Parameter
+name|FunctionParameter
 argument_list|>
 name|getParameters
 parameter_list|()
-function_decl|;
-comment|/**    * Returns the record type of the table yielded by this function when    * applied to parameters of given types.    *    * @param typeFactory Type factory    */
-name|RelDataType
-name|getRowType
-parameter_list|(
-name|RelDataTypeFactory
-name|typeFactory
-parameter_list|)
-function_decl|;
-comment|/**    * Applies arguments to yield a table.    *    * @param arguments Arguments    * @return Table    */
-name|Table
-name|apply
-parameter_list|(
-name|List
-argument_list|<
-name|Object
-argument_list|>
-name|arguments
-parameter_list|)
 function_decl|;
 block|}
 end_interface
 
 begin_comment
-comment|// End TableFunction.java
+comment|// End Function.java
 end_comment
 
 end_unit
