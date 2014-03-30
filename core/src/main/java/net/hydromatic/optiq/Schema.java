@@ -46,16 +46,6 @@ specifier|public
 interface|interface
 name|Schema
 block|{
-comment|/**    * Returns the parent schema, or null if this schema has no parent.    */
-name|SchemaPlus
-name|getParentSchema
-parameter_list|()
-function_decl|;
-comment|/**    * Returns the name of this schema.    *    *<p>The name must not be null, and must be unique within its parent.    * The root schema is typically named "".    */
-name|String
-name|getName
-parameter_list|()
-function_decl|;
 comment|/**    * Returns a table with a given name, or null if not found.    *    * @param name Table name    * @return Table, or null    */
 name|Table
 name|getTable
@@ -107,10 +97,16 @@ argument_list|>
 name|getSubSchemaNames
 parameter_list|()
 function_decl|;
-comment|/**    * Returns the expression by which this schema can be referenced in generated    * code.    */
+comment|/**    * Returns the expression by which this schema can be referenced in generated    * code.    *    * @param parentSchema    * @param name    */
 name|Expression
 name|getExpression
-parameter_list|()
+parameter_list|(
+name|SchemaPlus
+name|parentSchema
+parameter_list|,
+name|String
+name|name
+parameter_list|)
 function_decl|;
 comment|/** Returns whether the user is allowed to create new tables, functions    * and sub-schemas in this schema, in addition to those returned automatically    * by methods such as {@link #getTable(String)}.    *    *<p>Even if this method returns true, the maps are not modified. Optiq    * stores the defined objects in a wrapper object. */
 name|boolean

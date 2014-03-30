@@ -343,8 +343,6 @@ name|generateSql
 argument_list|(
 name|jdbcConvention
 operator|.
-name|jdbcSchema
-operator|.
 name|dialect
 argument_list|)
 decl_stmt|;
@@ -512,10 +510,7 @@ name|convert_
 argument_list|(
 name|jdbcConvention
 operator|.
-name|jdbcSchema
-operator|.
-name|getExpression
-argument_list|()
+name|expression
 argument_list|,
 name|JdbcSchema
 operator|.

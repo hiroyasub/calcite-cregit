@@ -538,14 +538,10 @@ literal|null
 condition|?
 name|schemaPath
 else|:
-name|Schemas
+name|schema
 operator|.
 name|path
 argument_list|(
-name|schema
-operator|.
-name|schema
-argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;

@@ -102,16 +102,10 @@ specifier|final
 name|DB
 name|mongoDb
 decl_stmt|;
-comment|/**    * Creates a MONGO schema.    *    * @param parentSchema Parent schema    * @param name Name of schema    * @param host Mongo host, e.g. "localhost"    * @param database Mongo database name, e.g. "foodmart"    */
+comment|/**    * Creates a MongoDB schema.    *    * @param host Mongo host, e.g. "localhost"    * @param database Mongo database name, e.g. "foodmart"    */
 specifier|public
 name|MongoSchema
 parameter_list|(
-name|SchemaPlus
-name|parentSchema
-parameter_list|,
-name|String
-name|name
-parameter_list|,
 name|String
 name|host
 parameter_list|,
@@ -120,11 +114,7 @@ name|database
 parameter_list|)
 block|{
 name|super
-argument_list|(
-name|parentSchema
-argument_list|,
-name|name
-argument_list|)
+argument_list|()
 expr_stmt|;
 try|try
 block|{

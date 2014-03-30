@@ -230,26 +230,16 @@ specifier|final
 name|SchemaPlus
 name|sourceSchema
 decl_stmt|;
-comment|/**    * Creates a CloneSchema.    *    * @param parentSchema Parent schema    * @param name Name of schema    * @param sourceSchema JDBC data source    */
+comment|/**    * Creates a CloneSchema.    *    * @param sourceSchema JDBC data source    */
 specifier|public
 name|CloneSchema
 parameter_list|(
-name|SchemaPlus
-name|parentSchema
-parameter_list|,
-name|String
-name|name
-parameter_list|,
 name|SchemaPlus
 name|sourceSchema
 parameter_list|)
 block|{
 name|super
-argument_list|(
-name|parentSchema
-argument_list|,
-name|name
-argument_list|)
+argument_list|()
 expr_stmt|;
 name|this
 operator|.
@@ -561,6 +551,8 @@ name|parentSchema
 operator|.
 name|add
 argument_list|(
+name|name
+argument_list|,
 name|JdbcSchema
 operator|.
 name|create
@@ -579,10 +571,6 @@ return|return
 operator|new
 name|CloneSchema
 argument_list|(
-name|parentSchema
-argument_list|,
-name|name
-argument_list|,
 name|schema
 argument_list|)
 return|;

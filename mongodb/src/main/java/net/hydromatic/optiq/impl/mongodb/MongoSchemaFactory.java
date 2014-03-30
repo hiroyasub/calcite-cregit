@@ -118,10 +118,6 @@ return|return
 operator|new
 name|MongoSchema
 argument_list|(
-name|parentSchema
-argument_list|,
-name|name
-argument_list|,
 name|host
 argument_list|,
 name|database

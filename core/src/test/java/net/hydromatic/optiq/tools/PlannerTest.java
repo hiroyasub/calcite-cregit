@@ -681,8 +681,6 @@ return|return
 operator|new
 name|ReflectiveSchema
 argument_list|(
-name|parentSchema
-argument_list|,
 literal|"hr"
 argument_list|,
 operator|new
@@ -1280,6 +1278,8 @@ init|=
 operator|new
 name|JdbcConvention
 argument_list|(
+literal|null
+argument_list|,
 literal|null
 argument_list|,
 literal|"myjdbc"

@@ -806,13 +806,11 @@ name|rootSchema
 operator|.
 name|add
 argument_list|(
+literal|"foo"
+argument_list|,
 operator|new
 name|AbstractSchema
-argument_list|(
-name|rootSchema
-argument_list|,
-literal|"foo"
-argument_list|)
+argument_list|()
 argument_list|)
 decl_stmt|;
 specifier|final

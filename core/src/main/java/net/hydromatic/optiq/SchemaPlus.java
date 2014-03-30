@@ -24,6 +24,16 @@ name|SchemaPlus
 extends|extends
 name|Schema
 block|{
+comment|/**    * Returns the parent schema, or null if this schema has no parent.    */
+name|SchemaPlus
+name|getParentSchema
+parameter_list|()
+function_decl|;
+comment|/**    * Returns the name of this schema.    *    *<p>The name must not be null, and must be unique within its parent.    * The root schema is typically named "".    */
+name|String
+name|getName
+parameter_list|()
+function_decl|;
 comment|// override with stricter return
 name|SchemaPlus
 name|getSubSchema
@@ -36,6 +46,9 @@ comment|/** Adds a schema as a sub-schema of this schema, and returns the wrappe
 name|SchemaPlus
 name|add
 parameter_list|(
+name|String
+name|name
+parameter_list|,
 name|Schema
 name|schema
 parameter_list|)
@@ -78,13 +91,6 @@ argument_list|<
 name|T
 argument_list|>
 name|clazz
-parameter_list|)
-function_decl|;
-name|SchemaPlus
-name|addRecursive
-parameter_list|(
-name|Schema
-name|schema
 parameter_list|)
 function_decl|;
 block|}
