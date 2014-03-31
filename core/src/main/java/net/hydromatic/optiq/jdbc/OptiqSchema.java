@@ -1181,7 +1181,6 @@ name|SchemaPlus
 name|plus
 parameter_list|()
 block|{
-comment|//    System.out.println("plus: " + n++);
 return|return
 operator|new
 name|SchemaPlusImpl

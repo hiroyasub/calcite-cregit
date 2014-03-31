@@ -217,6 +217,12 @@ condition|(
 name|category
 operator|!=
 name|functionCategory
+operator|&&
+name|category
+operator|!=
+name|SqlFunctionCategory
+operator|.
+name|USER_DEFINED_FUNCTION
 condition|)
 block|{
 continue|continue;

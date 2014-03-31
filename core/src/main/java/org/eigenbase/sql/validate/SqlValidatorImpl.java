@@ -1570,12 +1570,12 @@ name|deriveType
 argument_list|(
 name|scope
 argument_list|,
-name|selectItem
+name|expanded
 argument_list|)
 decl_stmt|;
 name|setValidatedNodeTypeImpl
 argument_list|(
-name|selectItem
+name|expanded
 argument_list|,
 name|type
 argument_list|)

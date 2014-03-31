@@ -167,9 +167,7 @@ name|eigenbase
 operator|.
 name|sql
 operator|.
-name|fun
-operator|.
-name|SqlStdOperatorTable
+name|SqlOperatorTable
 import|;
 end_import
 
@@ -278,7 +276,7 @@ name|Schema
 argument_list|>
 name|schemaFactory
 parameter_list|,
-name|SqlStdOperatorTable
+name|SqlOperatorTable
 name|operatorTable
 parameter_list|,
 name|RuleSet
@@ -325,7 +323,7 @@ name|Schema
 argument_list|>
 name|schemaFactory
 parameter_list|,
-name|SqlStdOperatorTable
+name|SqlOperatorTable
 name|operatorTable
 parameter_list|,
 name|List

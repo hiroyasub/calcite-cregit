@@ -14058,6 +14058,26 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
+name|Ignore
+argument_list|(
+literal|"https://github.com/julianhyde/optiq/issues/217"
+argument_list|)
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAggregateInNonGroupBy
+parameter_list|()
+block|{
+name|checkFails
+argument_list|(
+literal|"select count(1), empno from emp"
+argument_list|,
+literal|"xxx"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
 name|Test
 specifier|public
 name|void
