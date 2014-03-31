@@ -391,18 +391,6 @@ name|eigenbase
 operator|.
 name|util
 operator|.
-name|Bug
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
-name|util
-operator|.
 name|Util
 import|;
 end_import
@@ -920,21 +908,6 @@ name|notNullValue
 argument_list|()
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-literal|true
-condition|)
-block|{
-name|Bug
-operator|.
-name|upgrade
-argument_list|(
-literal|"fix https://github.com/julianhyde/optiq/issues/217"
-argument_list|)
-expr_stmt|;
-return|return;
-comment|// TODO: fix issue
-block|}
 comment|// The presence of an aggregate function in the SELECT clause causes it
 comment|// to become an aggregate query. Non-aggregate expressions become illegal.
 name|planner
@@ -956,6 +929,8 @@ argument_list|(
 literal|"select \"deptno\", count(1) from \"emps\""
 argument_list|)
 expr_stmt|;
+try|try
+block|{
 name|validate
 operator|=
 name|planner
@@ -965,14 +940,40 @@ argument_list|(
 name|parse
 argument_list|)
 expr_stmt|;
-name|assertThat
+name|fail
 argument_list|(
+literal|"expected exception, got "
+operator|+
 name|validate
-argument_list|,
-name|notNullValue
-argument_list|()
 argument_list|)
 expr_stmt|;
+block|}
+catch|catch
+parameter_list|(
+name|ValidationException
+name|e
+parameter_list|)
+block|{
+name|assertThat
+argument_list|(
+name|e
+operator|.
+name|getCause
+argument_list|()
+operator|.
+name|getCause
+argument_list|()
+operator|.
+name|getMessage
+argument_list|()
+argument_list|,
+name|containsString
+argument_list|(
+literal|"Expression 'deptno' is not being grouped"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 specifier|private
 name|Planner
