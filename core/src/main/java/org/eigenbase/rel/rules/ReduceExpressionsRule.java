@@ -1519,7 +1519,7 @@ argument_list|()
 decl_stmt|;
 name|executor
 operator|.
-name|execute
+name|reduce
 argument_list|(
 name|rexBuilder
 argument_list|,

@@ -360,7 +360,7 @@ name|Executor
 block|{
 comment|/**      * Reduces expressions, and writes their results into {@code reducedValues}.      */
 name|void
-name|execute
+name|reduce
 parameter_list|(
 name|RexBuilder
 name|rexBuilder
