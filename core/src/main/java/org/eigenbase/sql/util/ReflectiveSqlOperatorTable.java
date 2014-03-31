@@ -373,6 +373,8 @@ name|getSimple
 argument_list|()
 expr_stmt|;
 block|}
+comment|// Always look up built-in operators case-insensitively. Even in sessions
+comment|// with unquotedCasing=UNCHANGED and caseSensitive=true.
 specifier|final
 name|Collection
 argument_list|<
@@ -385,6 +387,9 @@ operator|.
 name|get
 argument_list|(
 name|simpleName
+operator|.
+name|toUpperCase
+argument_list|()
 argument_list|)
 decl_stmt|;
 if|if

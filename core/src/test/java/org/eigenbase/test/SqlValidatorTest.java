@@ -67,6 +67,20 @@ name|eigenbase
 operator|.
 name|sql
 operator|.
+name|fun
+operator|.
+name|SqlStdOperatorTable
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
+name|sql
+operator|.
 name|test
 operator|.
 name|SqlTester
@@ -121,6 +135,18 @@ name|hydromatic
 operator|.
 name|avatica
 operator|.
+name|Casing
+import|;
+end_import
+
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|avatica
+operator|.
 name|Quoting
 import|;
 end_import
@@ -136,6 +162,16 @@ operator|.
 name|config
 operator|.
 name|Lex
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|hamcrest
+operator|.
+name|CoreMatchers
 import|;
 end_import
 
@@ -15890,23 +15926,29 @@ argument_list|,
 literal|"Column 'PATH' not found in table 't'"
 argument_list|)
 expr_stmt|;
-comment|// Built-in functions now must be written in correct case.
+comment|// Built-in functions can be written in any case, even those with no args,
+comment|// and regardless of spaces between function name and open parenthesis.
 name|tester1
 operator|.
-name|checkQueryFails
+name|checkQuery
 argument_list|(
-literal|"values (^current_timestamp^)"
-argument_list|,
-literal|"Unknown identifier 'current_timestamp'"
+literal|"values (current_timestamp, floor(2.5), ceil (3.5))"
+argument_list|)
+expr_stmt|;
+name|tester1
+operator|.
+name|checkQuery
+argument_list|(
+literal|"values (CURRENT_TIMESTAMP, FLOOR(2.5), CEIL (3.5))"
 argument_list|)
 expr_stmt|;
 name|tester1
 operator|.
 name|checkResultType
 argument_list|(
-literal|"values (CURRENT_TIMESTAMP)"
+literal|"values (CURRENT_TIMESTAMP, CEIL (3.5))"
 argument_list|,
-literal|"RecordType(TIMESTAMP(0) NOT NULL CURRENT_TIMESTAMP) NOT NULL"
+literal|"RecordType(TIMESTAMP(0) NOT NULL CURRENT_TIMESTAMP, DECIMAL(2, 0) NOT NULL EXPR$1) NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
@@ -15977,6 +16019,19 @@ operator|.
 name|BRACKET
 argument_list|)
 decl_stmt|;
+specifier|final
+name|SqlTester
+name|tester2
+init|=
+name|tester
+operator|.
+name|withQuoting
+argument_list|(
+name|Quoting
+operator|.
+name|BRACKET
+argument_list|)
+decl_stmt|;
 name|tester1
 operator|.
 name|checkQuery
@@ -16024,14 +16079,7 @@ operator|+
 literal|"select 1 from dept where dept.deptno = [E].deptno)"
 argument_list|)
 expr_stmt|;
-name|tester
-operator|.
-name|withQuoting
-argument_list|(
-name|Quoting
-operator|.
-name|BRACKET
-argument_list|)
+name|tester2
 operator|.
 name|checkQueryFails
 argument_list|(
@@ -16042,6 +16090,304 @@ argument_list|,
 literal|"(?s).*Table 'E' not found"
 argument_list|)
 expr_stmt|;
+name|checkFails
+argument_list|(
+literal|"select count(1), ^empno^ from emp"
+argument_list|,
+literal|"Expression 'EMPNO' is not being grouped"
+argument_list|)
+expr_stmt|;
+comment|// Table aliases should follow case-sensitivity preference.
+comment|//
+comment|// In MySQL, table aliases are case-insensitive:
+comment|// mysql> select `D`.day from DAYS as `d`, DAYS as `D`;
+comment|// ERROR 1066 (42000): Not unique table/alias: 'D'
+name|tester2
+operator|.
+name|checkQuery
+argument_list|(
+literal|"select count(*) from dept as [D], dept as [d]"
+argument_list|)
+expr_stmt|;
+if|if
+condition|(
+operator|!
+name|Bug
+operator|.
+name|upgrade
+argument_list|(
+literal|"fix case sensitivity bug"
+argument_list|)
+condition|)
+block|{
+return|return;
+block|}
+name|tester1
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"select count(*) from dept as [D], dept as [d]"
+argument_list|,
+literal|"xxx"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests matching of built-in operator names. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUnquotedBuiltInFunctionNames
+parameter_list|()
+block|{
+specifier|final
+name|SqlTester
+name|mysql
+init|=
+name|tester
+operator|.
+name|withUnquotedCasing
+argument_list|(
+name|Casing
+operator|.
+name|UNCHANGED
+argument_list|)
+operator|.
+name|withQuoting
+argument_list|(
+name|Quoting
+operator|.
+name|BACK_TICK
+argument_list|)
+operator|.
+name|withCaseSensitive
+argument_list|(
+literal|false
+argument_list|)
+decl_stmt|;
+specifier|final
+name|SqlTester
+name|oracle
+init|=
+name|tester
+operator|.
+name|withUnquotedCasing
+argument_list|(
+name|Casing
+operator|.
+name|TO_UPPER
+argument_list|)
+operator|.
+name|withCaseSensitive
+argument_list|(
+literal|true
+argument_list|)
+decl_stmt|;
+comment|// Built-in functions are always case-insensitive.
+name|oracle
+operator|.
+name|checkQuery
+argument_list|(
+literal|"select count(*), sum(deptno), floor(2.5) from dept"
+argument_list|)
+expr_stmt|;
+name|oracle
+operator|.
+name|checkQuery
+argument_list|(
+literal|"select COUNT(*), FLOOR(2.5) from dept"
+argument_list|)
+expr_stmt|;
+name|oracle
+operator|.
+name|checkQuery
+argument_list|(
+literal|"select cOuNt(*), FlOOr(2.5) from dept"
+argument_list|)
+expr_stmt|;
+name|oracle
+operator|.
+name|checkQuery
+argument_list|(
+literal|"select cOuNt (*), FlOOr (2.5) from dept"
+argument_list|)
+expr_stmt|;
+name|oracle
+operator|.
+name|checkQuery
+argument_list|(
+literal|"select current_time from dept"
+argument_list|)
+expr_stmt|;
+name|oracle
+operator|.
+name|checkQuery
+argument_list|(
+literal|"select Current_Time from dept"
+argument_list|)
+expr_stmt|;
+name|oracle
+operator|.
+name|checkQuery
+argument_list|(
+literal|"select CURRENT_TIME from dept"
+argument_list|)
+expr_stmt|;
+name|mysql
+operator|.
+name|checkQuery
+argument_list|(
+literal|"select sum(deptno), floor(2.5) from dept"
+argument_list|)
+expr_stmt|;
+name|mysql
+operator|.
+name|checkQuery
+argument_list|(
+literal|"select count(*), sum(deptno), floor(2.5) from dept"
+argument_list|)
+expr_stmt|;
+name|mysql
+operator|.
+name|checkQuery
+argument_list|(
+literal|"select COUNT(*), FLOOR(2.5) from dept"
+argument_list|)
+expr_stmt|;
+name|mysql
+operator|.
+name|checkQuery
+argument_list|(
+literal|"select cOuNt(*), FlOOr(2.5) from dept"
+argument_list|)
+expr_stmt|;
+name|mysql
+operator|.
+name|checkQuery
+argument_list|(
+literal|"select cOuNt (*), FlOOr (2.5) from dept"
+argument_list|)
+expr_stmt|;
+name|mysql
+operator|.
+name|checkQuery
+argument_list|(
+literal|"select current_time from dept"
+argument_list|)
+expr_stmt|;
+name|mysql
+operator|.
+name|checkQuery
+argument_list|(
+literal|"select Current_Time from dept"
+argument_list|)
+expr_stmt|;
+name|mysql
+operator|.
+name|checkQuery
+argument_list|(
+literal|"select CURRENT_TIME from dept"
+argument_list|)
+expr_stmt|;
+comment|// MySQL assumes that a quoted function name is not a built-in.
+comment|//
+comment|// mysql> select `sum`(`day`) from days;
+comment|// ERROR 1630 (42000): FUNCTION foodmart.sum does not exist. Check the
+comment|//   'Function Name Parsing and Resolution' section in the Reference Manual
+comment|// mysql> select `SUM`(`day`) from days;
+comment|// ERROR 1630 (42000): FUNCTION foodmart.SUM does not exist. Check the
+comment|//   'Function Name Parsing and Resolution' section in the Reference Manual
+comment|// mysql> select SUM(`day`) from days;
+comment|// +------------+
+comment|// | SUM(`day`) |
+comment|// +------------+
+comment|// |         28 |
+comment|// +------------+
+comment|// 1 row in set (0.00 sec)
+comment|//
+comment|// We do not follow MySQL in this regard. `count` is preserved in
+comment|// lower-case, and is matched case-insensitively because it is a built-in.
+comment|// So, the query succeeds.
+name|oracle
+operator|.
+name|checkQuery
+argument_list|(
+literal|"select \"count\"(*) from dept"
+argument_list|)
+expr_stmt|;
+name|mysql
+operator|.
+name|checkQuery
+argument_list|(
+literal|"select `count`(*) from dept"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Sanity check: All built-ins are upper-case. We rely on this. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testStandardOperatorNamesAreUpperCase
+parameter_list|()
+block|{
+for|for
+control|(
+name|SqlOperator
+name|op
+range|:
+name|SqlStdOperatorTable
+operator|.
+name|instance
+argument_list|()
+operator|.
+name|getOperatorList
+argument_list|()
+control|)
+block|{
+specifier|final
+name|String
+name|name
+init|=
+name|op
+operator|.
+name|getName
+argument_list|()
+decl_stmt|;
+switch|switch
+condition|(
+name|op
+operator|.
+name|getSyntax
+argument_list|()
+condition|)
+block|{
+case|case
+name|SPECIAL
+case|:
+case|case
+name|INTERNAL
+case|:
+break|break;
+default|default:
+name|assertThat
+argument_list|(
+name|name
+operator|.
+name|toUpperCase
+argument_list|()
+argument_list|,
+name|CoreMatchers
+operator|.
+name|equalTo
+argument_list|(
+name|name
+argument_list|)
+argument_list|)
+expr_stmt|;
+break|break;
+block|}
+block|}
 block|}
 comment|/** Tests that it is an error to insert into the same column twice, even using    * case-insensitive matching. */
 annotation|@
