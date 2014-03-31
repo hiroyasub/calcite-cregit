@@ -458,9 +458,7 @@ argument_list|)
 expr_stmt|;
 name|checkExpType
 argument_list|(
-literal|"'ab '"
-operator|+
-name|NL
+literal|"'ab '\n"
 operator|+
 literal|"' cd'"
 argument_list|,
@@ -469,25 +467,15 @@ argument_list|)
 expr_stmt|;
 name|checkExpType
 argument_list|(
-literal|"'ab'"
+literal|"'ab'\n"
 operator|+
-name|NL
+literal|"'cd'\n"
 operator|+
-literal|"'cd'"
+literal|"'ef'\n"
 operator|+
-name|NL
+literal|"'gh'\n"
 operator|+
-literal|"'ef'"
-operator|+
-name|NL
-operator|+
-literal|"'gh'"
-operator|+
-name|NL
-operator|+
-literal|"'ij'"
-operator|+
-name|NL
+literal|"'ij'\n"
 operator|+
 literal|"'kl'"
 argument_list|,
@@ -496,9 +484,7 @@ argument_list|)
 expr_stmt|;
 name|checkExpType
 argument_list|(
-literal|"n'ab '"
-operator|+
-name|NL
+literal|"n'ab '\n"
 operator|+
 literal|"' cd'"
 argument_list|,
@@ -507,9 +493,7 @@ argument_list|)
 expr_stmt|;
 name|checkExpType
 argument_list|(
-literal|"_UTF16'ab '"
-operator|+
-name|NL
+literal|"_UTF16'ab '\n"
 operator|+
 literal|"' cd'"
 argument_list|,
@@ -532,9 +516,7 @@ argument_list|)
 expr_stmt|;
 name|checkExpType
 argument_list|(
-literal|"x'abcd'"
-operator|+
-name|NL
+literal|"x'abcd'\n"
 operator|+
 literal|"'ff001122aabb'"
 argument_list|,
@@ -543,17 +525,11 @@ argument_list|)
 expr_stmt|;
 name|checkExpType
 argument_list|(
-literal|"x'aaaa'"
+literal|"x'aaaa'\n"
 operator|+
-name|NL
+literal|"'bbbb'\n"
 operator|+
-literal|"'bbbb'"
-operator|+
-name|NL
-operator|+
-literal|"'0000'"
-operator|+
-name|NL
+literal|"'0000'\n"
 operator|+
 literal|"'1111'"
 argument_list|,
@@ -1335,9 +1311,7 @@ parameter_list|()
 block|{
 name|check
 argument_list|(
-literal|"select 'foo'"
-operator|+
-name|NL
+literal|"select 'foo'\n"
 operator|+
 literal|"'bar' from (values(true))"
 argument_list|)
@@ -3864,7 +3838,7 @@ block|{
 comment|// double-nested rows can confuse validator namespace resolution
 name|checkColumnType
 argument_list|(
-literal|"select t.r.\"EXPR$1\".\"EXPR$2\" \n"
+literal|"select t.r.\"EXPR$1\".\"EXPR$2\"\n"
 operator|+
 literal|"from (select ((1,2),(3,4,5)) r from dept) t"
 argument_list|,
@@ -10016,9 +9990,7 @@ comment|// checkWinFuncExpWithWinClause(" sum(distinct sal) over w ", null);
 comment|// 7.11 rule 10c
 name|checkWin
 argument_list|(
-literal|"select sum(sal) over (w partition by ^deptno^)"
-operator|+
-name|NL
+literal|"select sum(sal) over (w partition by ^deptno^)\n"
 operator|+
 literal|" from emp window w as (order by empno rows 2 preceding )"
 argument_list|,
@@ -10028,9 +10000,7 @@ expr_stmt|;
 comment|// 7.11 rule 10d
 name|checkWin
 argument_list|(
-literal|"select sum(sal) over (w order by ^empno^)"
-operator|+
-name|NL
+literal|"select sum(sal) over (w order by ^empno^)\n"
 operator|+
 literal|" from emp window w as (order by empno rows 2 preceding )"
 argument_list|,
@@ -10040,9 +10010,7 @@ expr_stmt|;
 comment|// 7.11 rule 10e
 name|checkWin
 argument_list|(
-literal|"select sum(sal) over (w) "
-operator|+
-name|NL
+literal|"select sum(sal) over (w)\n"
 operator|+
 literal|" from emp window w as (order by empno ^rows^ 2 preceding )"
 argument_list|,
@@ -10501,9 +10469,7 @@ argument_list|)
 expr_stmt|;
 name|checkFails
 argument_list|(
-literal|"select min(sal) over "
-operator|+
-name|NL
+literal|"select min(sal) over\n"
 operator|+
 literal|"(partition by comm order by deptno) from emp group by deptno,sal,comm"
 argument_list|,
@@ -10512,9 +10478,7 @@ argument_list|)
 expr_stmt|;
 name|checkFails
 argument_list|(
-literal|"select min(sal) over "
-operator|+
-name|NL
+literal|"select min(sal) over\n"
 operator|+
 literal|"(partition by ^comm^ order by deptno) from emp group by deptno,sal"
 argument_list|,
@@ -10683,27 +10647,27 @@ parameter_list|()
 block|{
 name|check
 argument_list|(
-literal|"select * from \n"
+literal|"select * from\n"
 operator|+
-literal|"( select sum(empno) over w, sum(deptno) over w from emp \n"
+literal|"( select sum(empno) over w, sum(deptno) over w from emp\n"
 operator|+
 literal|"window w as (order by hiredate range interval '1' minute preceding))"
 argument_list|)
 expr_stmt|;
 name|check
 argument_list|(
-literal|"select * from \n"
+literal|"select * from\n"
 operator|+
-literal|"( select sum(empno) over w, sum(deptno) over w, hiredate from emp) \n"
+literal|"( select sum(empno) over w, sum(deptno) over w, hiredate from emp)\n"
 operator|+
 literal|"window w as (order by hiredate range interval '1' minute preceding)"
 argument_list|)
 expr_stmt|;
 name|checkFails
 argument_list|(
-literal|"select * from \n"
+literal|"select * from\n"
 operator|+
-literal|"( select sum(empno) over w, sum(deptno) over w from emp) \n"
+literal|"( select sum(empno) over w, sum(deptno) over w from emp)\n"
 operator|+
 literal|"window w as (order by ^hiredate^ range interval '1' minute preceding)"
 argument_list|,
@@ -10929,7 +10893,7 @@ literal|" join "
 operator|+
 name|depts
 operator|+
-name|NL
+literal|"\n"
 operator|+
 literal|" on ^emps^.deptno = deptno"
 argument_list|,
@@ -10943,17 +10907,13 @@ literal|"select * from "
 operator|+
 name|emps
 operator|+
-literal|" as e"
-operator|+
-name|NL
+literal|" as e\n"
 operator|+
 literal|" join "
 operator|+
 name|depts
 operator|+
-literal|" as d"
-operator|+
-name|NL
+literal|" as d\n"
 operator|+
 literal|" on e.deptno = d.deptno"
 argument_list|)
@@ -10965,15 +10925,13 @@ literal|"select * from "
 operator|+
 name|emps
 operator|+
-literal|" as emps,"
-operator|+
-name|NL
+literal|" as emps,\n"
 operator|+
 literal|" "
 operator|+
 name|depts
 operator|+
-name|NL
+literal|"\n"
 operator|+
 literal|"where ^deptno^> 5"
 argument_list|,
@@ -10987,17 +10945,13 @@ literal|"select * from "
 operator|+
 name|emps
 operator|+
-literal|" as e"
-operator|+
-name|NL
+literal|" as e\n"
 operator|+
 literal|" join "
 operator|+
 name|depts
 operator|+
-literal|" as d"
-operator|+
-name|NL
+literal|" as d\n"
 operator|+
 literal|" on e.deptno = ^deptno^"
 argument_list|,
@@ -11011,17 +10965,13 @@ literal|"select * from "
 operator|+
 name|emps
 operator|+
-literal|" as e"
-operator|+
-name|NL
+literal|" as e\n"
 operator|+
 literal|" join "
 operator|+
 name|depts
 operator|+
-literal|" as d"
-operator|+
-name|NL
+literal|" as d\n"
 operator|+
 literal|" on e.deptno = age"
 argument_list|)
@@ -11033,15 +10983,13 @@ literal|"select * from "
 operator|+
 name|depts
 operator|+
-name|NL
+literal|"\n"
 operator|+
 literal|" join (select mod(age, 30) as agemod from "
 operator|+
 name|emps
 operator|+
-literal|") "
-operator|+
-name|NL
+literal|")\n"
 operator|+
 literal|"on deptno = agemod"
 argument_list|)
@@ -11053,17 +11001,13 @@ literal|"select name from "
 operator|+
 name|depts
 operator|+
-literal|" "
-operator|+
-name|NL
+literal|"\n"
 operator|+
 literal|"join (select mod(age, 30) as agemod, deptno from "
 operator|+
 name|emps
 operator|+
-literal|") "
-operator|+
-name|NL
+literal|")\n"
 operator|+
 literal|"on ^deptno^ = agemod"
 argument_list|,
@@ -11077,9 +11021,7 @@ literal|"select * from "
 operator|+
 name|emps
 operator|+
-literal|" as e,"
-operator|+
-name|NL
+literal|" as e,\n"
 operator|+
 literal|" (select 1, ^e^.deptno from (values(true))) as d"
 argument_list|,
@@ -11151,9 +11093,7 @@ parameter_list|()
 block|{
 name|checkFails
 argument_list|(
-literal|"select * from emp join dept"
-operator|+
-name|NL
+literal|"select * from emp join dept\n"
 operator|+
 literal|" on emp.deptno = ^deptno^"
 argument_list|,
@@ -11163,13 +11103,9 @@ expr_stmt|;
 comment|// this is ok
 name|check
 argument_list|(
-literal|"select * from emp as e"
+literal|"select * from emp as e\n"
 operator|+
-name|NL
-operator|+
-literal|" join dept as d"
-operator|+
-name|NL
+literal|" join dept as d\n"
 operator|+
 literal|" on e.deptno = d.deptno"
 argument_list|)
@@ -11177,9 +11113,7 @@ expr_stmt|;
 comment|// fail: ambiguous column in WHERE
 name|checkFails
 argument_list|(
-literal|"select * from emp as emps, dept"
-operator|+
-name|NL
+literal|"select * from emp as emps, dept\n"
 operator|+
 literal|"where ^deptno^> 5"
 argument_list|,
@@ -11189,9 +11123,7 @@ expr_stmt|;
 comment|// fail: alias 'd' obscures original table name 'dept'
 name|checkFails
 argument_list|(
-literal|"select * from emp as emps, dept as d"
-operator|+
-name|NL
+literal|"select * from emp as emps, dept as d\n"
 operator|+
 literal|"where ^dept^.deptno> 5"
 argument_list|,
@@ -11201,13 +11133,9 @@ expr_stmt|;
 comment|// fail: ambiguous column reference in ON clause
 name|checkFails
 argument_list|(
-literal|"select * from emp as e"
+literal|"select * from emp as e\n"
 operator|+
-name|NL
-operator|+
-literal|" join dept as d"
-operator|+
-name|NL
+literal|" join dept as d\n"
 operator|+
 literal|" on e.deptno = ^deptno^"
 argument_list|,
@@ -11217,13 +11145,9 @@ expr_stmt|;
 comment|// ok: column 'comm' is unambiguous
 name|check
 argument_list|(
-literal|"select * from emp as e"
+literal|"select * from emp as e\n"
 operator|+
-name|NL
-operator|+
-literal|" join dept as d"
-operator|+
-name|NL
+literal|" join dept as d\n"
 operator|+
 literal|" on e.deptno = comm"
 argument_list|)
@@ -11231,13 +11155,9 @@ expr_stmt|;
 comment|// ok: reference to derived column
 name|check
 argument_list|(
-literal|"select * from dept"
+literal|"select * from dept\n"
 operator|+
-name|NL
-operator|+
-literal|" join (select mod(comm, 30) as commmod from emp) "
-operator|+
-name|NL
+literal|" join (select mod(comm, 30) as commmod from emp)\n"
 operator|+
 literal|"on deptno = commmod"
 argument_list|)
@@ -11245,13 +11165,9 @@ expr_stmt|;
 comment|// fail: deptno is ambiguous
 name|checkFails
 argument_list|(
-literal|"select name from dept "
+literal|"select name from dept\n"
 operator|+
-name|NL
-operator|+
-literal|"join (select mod(comm, 30) as commmod, deptno from emp) "
-operator|+
-name|NL
+literal|"join (select mod(comm, 30) as commmod, deptno from emp)\n"
 operator|+
 literal|"on ^deptno^ = commmod"
 argument_list|,
@@ -11261,9 +11177,7 @@ expr_stmt|;
 comment|// fail: lateral reference
 name|checkFails
 argument_list|(
-literal|"select * from emp as e,"
-operator|+
-name|NL
+literal|"select * from emp as e,\n"
 operator|+
 literal|" (select 1, ^e^.deptno from (values(true))) as d"
 argument_list|,
@@ -11360,13 +11274,9 @@ block|{
 comment|// ok: cyclic reference
 name|check
 argument_list|(
-literal|"select * from emp as e"
+literal|"select * from emp as e\n"
 operator|+
-name|NL
-operator|+
-literal|"where e.deptno in ("
-operator|+
-name|NL
+literal|"where e.deptno in (\n"
 operator|+
 literal|"  select 1 from (values(true)) where e.empno> 10)"
 argument_list|)
@@ -11374,13 +11284,9 @@ expr_stmt|;
 comment|// ok: cyclic reference
 name|check
 argument_list|(
-literal|"select * from emp as e"
+literal|"select * from emp as e\n"
 operator|+
-name|NL
-operator|+
-literal|"where e.deptno in ("
-operator|+
-name|NL
+literal|"where e.deptno in (\n"
 operator|+
 literal|"  select e.deptno from (values(true)))"
 argument_list|)
@@ -11725,9 +11631,7 @@ comment|// It is an error to refer to a table which has been given another
 comment|// alias.
 name|checkFails
 argument_list|(
-literal|"select * from emp as e where exists ("
-operator|+
-name|NL
+literal|"select * from emp as e where exists (\n"
 operator|+
 literal|"  select 1 from dept where dept.deptno = ^emp^.deptno)"
 argument_list|,
@@ -11746,13 +11650,9 @@ comment|// You cannot refer to a table ('e2') in the parent scope of a query in
 comment|// the from clause.
 name|checkFails
 argument_list|(
-literal|"select * from emp as e1 where exists ("
+literal|"select * from emp as e1 where exists (\n"
 operator|+
-name|NL
-operator|+
-literal|"  select * from emp as e2, "
-operator|+
-name|NL
+literal|"  select * from emp as e2,\n"
 operator|+
 literal|"    (select * from dept where dept.deptno = ^e2^.deptno))"
 argument_list|,
@@ -11773,13 +11673,9 @@ comment|//
 comment|// Note: Oracle10g does not allow this query.
 name|check
 argument_list|(
-literal|"select * from emp as e1 where exists ("
+literal|"select * from emp as e1 where exists (\n"
 operator|+
-name|NL
-operator|+
-literal|"  select * from emp as e2, "
-operator|+
-name|NL
+literal|"  select * from emp as e2,\n"
 operator|+
 literal|"    (select * from dept where dept.deptno = e1.deptno))"
 argument_list|)
@@ -11794,21 +11690,13 @@ parameter_list|()
 block|{
 name|checkFails
 argument_list|(
-literal|"select * from emp as e1 where exists ("
+literal|"select * from emp as e1 where exists (\n"
 operator|+
-name|NL
+literal|"  select * from emp as e2,\n"
 operator|+
-literal|"  select * from emp as e2, "
+literal|"  (select deptno from dept as d\n"
 operator|+
-name|NL
-operator|+
-literal|"  (select deptno from dept as d"
-operator|+
-name|NL
-operator|+
-literal|"   union"
-operator|+
-name|NL
+literal|"   union\n"
 operator|+
 literal|"   select deptno from emp as e3 where deptno = ^e2^.deptno))"
 argument_list|,
@@ -11817,13 +11705,9 @@ argument_list|)
 expr_stmt|;
 name|checkFails
 argument_list|(
-literal|"select * from emp"
+literal|"select * from emp\n"
 operator|+
-name|NL
-operator|+
-literal|"union"
-operator|+
-name|NL
+literal|"union\n"
 operator|+
 literal|"select * from dept where ^empno^< 10"
 argument_list|,
@@ -11840,13 +11724,9 @@ parameter_list|()
 block|{
 name|checkFails
 argument_list|(
-literal|"select 1,2 from emp"
+literal|"select 1,2 from emp\n"
 operator|+
-name|NL
-operator|+
-literal|"union"
-operator|+
-name|NL
+literal|"union\n"
 operator|+
 literal|"select ^3^ from dept"
 argument_list|,
@@ -11863,13 +11743,9 @@ parameter_list|()
 block|{
 name|checkFails
 argument_list|(
-literal|"select * from ( values (1))"
+literal|"select * from ( values (1))\n"
 operator|+
-name|NL
-operator|+
-literal|"union"
-operator|+
-name|NL
+literal|"union\n"
 operator|+
 literal|"select ^*^ from ( values (1,2))"
 argument_list|,
@@ -11878,13 +11754,9 @@ argument_list|)
 expr_stmt|;
 name|checkFails
 argument_list|(
-literal|"select * from ( values (1))"
+literal|"select * from ( values (1))\n"
 operator|+
-name|NL
-operator|+
-literal|"union"
-operator|+
-name|NL
+literal|"union\n"
 operator|+
 literal|"select ^*^ from emp"
 argument_list|,
@@ -11893,13 +11765,9 @@ argument_list|)
 expr_stmt|;
 name|checkFails
 argument_list|(
-literal|"select * from emp"
+literal|"select * from emp\n"
 operator|+
-name|NL
-operator|+
-literal|"union"
-operator|+
-name|NL
+literal|"union\n"
 operator|+
 literal|"select ^*^ from ( values (1))"
 argument_list|,
@@ -11960,9 +11828,7 @@ parameter_list|()
 block|{
 name|checkFails
 argument_list|(
-literal|"values (1, ^2^, 3), (3, 4, 5), (6, 7, 8) union "
-operator|+
-name|NL
+literal|"values (1, ^2^, 3), (3, 4, 5), (6, 7, 8) union\n"
 operator|+
 literal|"select deptno, name, deptno from dept"
 argument_list|,
@@ -11971,9 +11837,7 @@ argument_list|)
 expr_stmt|;
 name|checkFails
 argument_list|(
-literal|"select 1 from (values (^'x'^)) union "
-operator|+
-name|NL
+literal|"select 1 from (values (^'x'^)) union\n"
 operator|+
 literal|"select 'a' from (values ('y'))"
 argument_list|,
@@ -11982,9 +11846,7 @@ argument_list|)
 expr_stmt|;
 name|checkFails
 argument_list|(
-literal|"select 1 from (values (^'x'^)) union "
-operator|+
-name|NL
+literal|"select 1 from (values (^'x'^)) union\n"
 operator|+
 literal|"(values ('a'))"
 argument_list|,
@@ -12068,9 +11930,7 @@ comment|// inherited column, not found in either side of the join, in the
 comment|// USING clause
 name|checkFails
 argument_list|(
-literal|"select * from dept where exists ("
-operator|+
-name|NL
+literal|"select * from dept where exists (\n"
 operator|+
 literal|"select 1 from emp join bonus using (^dname^))"
 argument_list|,
@@ -12081,9 +11941,7 @@ comment|// inherited column, found in only one side of the join, in the
 comment|// USING clause
 name|checkFails
 argument_list|(
-literal|"select * from dept where exists ("
-operator|+
-name|NL
+literal|"select * from dept where exists (\n"
 operator|+
 literal|"select 1 from emp join bonus using (^deptno^))"
 argument_list|,
@@ -12100,9 +11958,7 @@ parameter_list|()
 block|{
 name|checkFails
 argument_list|(
-literal|"select * from emp cross join dept"
-operator|+
-name|NL
+literal|"select * from emp cross join dept\n"
 operator|+
 literal|" ^on emp.deptno = dept.deptno^"
 argument_list|,
@@ -12119,9 +11975,7 @@ parameter_list|()
 block|{
 name|checkFails
 argument_list|(
-literal|"select * from emp inner ^join^ dept "
-operator|+
-name|NL
+literal|"select * from emp inner ^join^ dept\n"
 operator|+
 literal|"where emp.deptno = dept.deptno"
 argument_list|,
@@ -12329,9 +12183,7 @@ parameter_list|()
 block|{
 name|check
 argument_list|(
-literal|"select * from (emp join bonus using (job))"
-operator|+
-name|NL
+literal|"select * from (emp join bonus using (job))\n"
 operator|+
 literal|"join dept using (deptno)"
 argument_list|)
@@ -12340,9 +12192,7 @@ comment|// cannot alias a JOIN (actually this is a parser error, but who's
 comment|// counting?)
 name|checkFails
 argument_list|(
-literal|"select * from (emp join bonus using (job)) as x"
-operator|+
-name|NL
+literal|"select * from (emp join bonus using (job)) as x\n"
 operator|+
 literal|"join dept using (deptno)"
 argument_list|,
@@ -12351,9 +12201,7 @@ argument_list|)
 expr_stmt|;
 name|checkFails
 argument_list|(
-literal|"select * from (emp join bonus using (job))"
-operator|+
-name|NL
+literal|"select * from (emp join bonus using (job))\n"
 operator|+
 literal|"join dept using (^dname^)"
 argument_list|,
@@ -12363,9 +12211,7 @@ expr_stmt|;
 comment|// Needs real Error Message and error marks in query
 name|checkFails
 argument_list|(
-literal|"select * from (emp join bonus using (job))"
-operator|+
-name|NL
+literal|"select * from (emp join bonus using (job))\n"
 operator|+
 literal|"join (select 1 as job from (true)) using (job)"
 argument_list|,
@@ -13138,34 +12984,22 @@ argument_list|)
 expr_stmt|;
 name|check
 argument_list|(
-literal|"select deptno from dept"
+literal|"select deptno from dept\n"
 operator|+
-name|NL
+literal|"union\n"
 operator|+
-literal|"union"
-operator|+
-name|NL
-operator|+
-literal|"select empno from emp"
-operator|+
-name|NL
+literal|"select empno from emp\n"
 operator|+
 literal|"order by deptno"
 argument_list|)
 expr_stmt|;
 name|checkFails
 argument_list|(
-literal|"select deptno from dept"
+literal|"select deptno from dept\n"
 operator|+
-name|NL
+literal|"union\n"
 operator|+
-literal|"union"
-operator|+
-name|NL
-operator|+
-literal|"select empno from emp"
-operator|+
-name|NL
+literal|"select empno from emp\n"
 operator|+
 literal|"order by ^empno^"
 argument_list|,
@@ -13174,17 +13008,11 @@ argument_list|)
 expr_stmt|;
 name|checkFails
 argument_list|(
-literal|"select deptno from dept"
+literal|"select deptno from dept\n"
 operator|+
-name|NL
+literal|"union\n"
 operator|+
-literal|"union"
-operator|+
-name|NL
-operator|+
-literal|"select empno from emp"
-operator|+
-name|NL
+literal|"select empno from emp\n"
 operator|+
 literal|"order by ^10^"
 argument_list|,
@@ -13202,18 +13030,14 @@ expr_stmt|;
 comment|// Sort by scalar subquery
 name|check
 argument_list|(
-literal|"select * from emp "
-operator|+
-name|NL
+literal|"select * from emp\n"
 operator|+
 literal|"order by (select name from dept where deptno = emp.deptno)"
 argument_list|)
 expr_stmt|;
 name|checkFails
 argument_list|(
-literal|"select * from emp "
-operator|+
-name|NL
+literal|"select * from emp\n"
 operator|+
 literal|"order by (select name from dept where deptno = emp.^foo^)"
 argument_list|,
@@ -13675,17 +13499,11 @@ comment|// that the agg function SUM always applies to the current scope.
 comment|// As it happens, the query is valid.
 name|check
 argument_list|(
-literal|"select deptno "
+literal|"select deptno\n"
 operator|+
-name|NL
+literal|"from emp\n"
 operator|+
-literal|"from emp "
-operator|+
-name|NL
-operator|+
-literal|"group by deptno "
-operator|+
-name|NL
+literal|"group by deptno\n"
 operator|+
 literal|"having exists (select sum(emp.sal)> 10 from (values(true)))"
 argument_list|)
@@ -14145,9 +13963,7 @@ block|{
 comment|// reference to unqualified correlating column
 name|check
 argument_list|(
-literal|"select * from emp where exists ("
-operator|+
-name|NL
+literal|"select * from emp where exists (\n"
 operator|+
 literal|"select * from dept where deptno = sal)"
 argument_list|)
@@ -14155,9 +13971,7 @@ expr_stmt|;
 comment|// reference to qualified correlating column
 name|check
 argument_list|(
-literal|"select * from emp where exists ("
-operator|+
-name|NL
+literal|"select * from emp where exists (\n"
 operator|+
 literal|"select * from dept where deptno = emp.sal)"
 argument_list|)

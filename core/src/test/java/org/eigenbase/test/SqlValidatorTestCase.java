@@ -165,19 +165,6 @@ class|class
 name|SqlValidatorTestCase
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
-specifier|protected
-specifier|static
-specifier|final
-name|String
-name|NL
-init|=
-name|System
-operator|.
-name|getProperty
-argument_list|(
-literal|"line.separator"
-argument_list|)
-decl_stmt|;
 specifier|private
 specifier|static
 specifier|final
@@ -1323,25 +1310,19 @@ name|sap
 operator|.
 name|sql
 operator|+
-literal|"];"
-operator|+
-name|NL
+literal|"];\n"
 operator|+
 literal|" expected pattern ["
 operator|+
 name|expectedMsgPattern
 operator|+
-literal|"];"
-operator|+
-name|NL
+literal|"];\n"
 operator|+
 literal|" actual ["
 operator|+
 name|actualMessage
 operator|+
-literal|"];"
-operator|+
-name|NL
+literal|"];\n"
 operator|+
 literal|" actual as java regexp ["
 operator|+

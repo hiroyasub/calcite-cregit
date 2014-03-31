@@ -65,19 +65,6 @@ class|class
 name|OptionsListTest
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
-specifier|private
-specifier|static
-specifier|final
-name|String
-name|NL
-init|=
-name|System
-operator|.
-name|getProperty
-argument_list|(
-literal|"line.separator"
-argument_list|)
-decl_stmt|;
 comment|//~ Methods ----------------------------------------------------------------
 annotation|@
 name|Test
@@ -919,9 +906,7 @@ parameter_list|()
 block|{
 name|checkIt
 argument_list|(
-literal|"verbose=true"
-operator|+
-name|NL
+literal|"verbose=true\n"
 operator|+
 literal|"file=file.txt"
 argument_list|,
@@ -992,11 +977,7 @@ name|checkIt
 argument_list|(
 literal|"verbose=true"
 operator|+
-name|NL
-operator|+
 literal|"file=foo.txt"
-operator|+
-name|NL
 operator|+
 literal|"file=bar.txt"
 argument_list|,
@@ -1251,7 +1232,7 @@ else|:
 literal|" (default)"
 operator|)
 operator|+
-name|NL
+literal|"\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -1281,7 +1262,7 @@ operator|.
 name|getName
 argument_list|()
 operator|+
-name|NL
+literal|"\n"
 argument_list|)
 expr_stmt|;
 block|}
