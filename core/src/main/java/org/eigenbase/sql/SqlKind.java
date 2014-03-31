@@ -84,6 +84,9 @@ block|,
 comment|/**    * UPDATE statement    */
 name|UPDATE
 block|,
+comment|/**    * "ALTER scope SET option = value" statement.    */
+name|SET_OPTION
+block|,
 comment|/**    * A dynamic parameter.    */
 name|DYNAMIC_PARAM
 block|,

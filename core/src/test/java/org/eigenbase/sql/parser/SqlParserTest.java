@@ -151,6 +151,18 @@ begin_import
 import|import static
 name|org
 operator|.
+name|hamcrest
+operator|.
+name|CoreMatchers
+operator|.
+name|*
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
 name|junit
 operator|.
 name|Assert
@@ -13670,40 +13682,40 @@ operator|.
 name|parseStmt
 argument_list|()
 decl_stmt|;
-name|SqlOptionSetter
+name|SqlSetOption
 name|opt
 init|=
 operator|(
-name|SqlOptionSetter
+name|SqlSetOption
 operator|)
 name|node
 decl_stmt|;
-assert|assert
+name|assertThat
+argument_list|(
 name|opt
 operator|.
 name|getScope
 argument_list|()
-operator|.
-name|equalsIgnoreCase
+argument_list|,
+name|equalTo
 argument_list|(
-literal|"system"
+literal|"SYSTEM"
 argument_list|)
-operator|:
-literal|"scope parsed incorrectly in option set statement."
-assert|;
-assert|assert
+argument_list|)
+expr_stmt|;
+name|assertThat
+argument_list|(
 name|opt
 operator|.
 name|getName
 argument_list|()
-operator|.
-name|equalsIgnoreCase
+argument_list|,
+name|equalTo
 argument_list|(
-literal|"schema"
+literal|"SCHEMA"
 argument_list|)
-operator|:
-literal|"option name parsed incorrectly in option set statement."
-assert|;
+argument_list|)
+expr_stmt|;
 name|SqlPrettyWriter
 name|writer
 init|=
@@ -13715,22 +13727,24 @@ operator|.
 name|EIGENBASE
 argument_list|)
 decl_stmt|;
-assert|assert
+name|assertThat
+argument_list|(
 name|writer
 operator|.
 name|format
 argument_list|(
 name|opt
 operator|.
-name|getVal
+name|getValue
 argument_list|()
 argument_list|)
-operator|.
-name|equalsIgnoreCase
+argument_list|,
+name|equalTo
 argument_list|(
-literal|"true"
+literal|"TRUE"
 argument_list|)
-assert|;
+argument_list|)
+expr_stmt|;
 name|writer
 operator|=
 operator|new
@@ -13741,11 +13755,7 @@ operator|.
 name|EIGENBASE
 argument_list|)
 expr_stmt|;
-name|System
-operator|.
-name|out
-operator|.
-name|println
+name|assertThat
 argument_list|(
 name|writer
 operator|.
@@ -13753,6 +13763,69 @@ name|format
 argument_list|(
 name|opt
 argument_list|)
+argument_list|,
+name|equalTo
+argument_list|(
+literal|"ALTER SYSTEM SET \"SCHEMA\" = TRUE"
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|check
+argument_list|(
+literal|"alter system set \"a number\" = 1"
+argument_list|,
+literal|"ALTER SYSTEM SET `a number` = 1"
+argument_list|)
+expr_stmt|;
+name|check
+argument_list|(
+literal|"alter system set flag = false"
+argument_list|,
+literal|"ALTER SYSTEM SET `FLAG` = FALSE"
+argument_list|)
+expr_stmt|;
+name|check
+argument_list|(
+literal|"alter system set approx = -12.3450"
+argument_list|,
+literal|"ALTER SYSTEM SET `APPROX` = -12.3450"
+argument_list|)
+expr_stmt|;
+name|check
+argument_list|(
+literal|"alter system set onOff = on"
+argument_list|,
+literal|"ALTER SYSTEM SET `ONOFF` = `ON`"
+argument_list|)
+expr_stmt|;
+name|check
+argument_list|(
+literal|"alter system set onOff = off"
+argument_list|,
+literal|"ALTER SYSTEM SET `ONOFF` = `OFF`"
+argument_list|)
+expr_stmt|;
+name|check
+argument_list|(
+literal|"alter system set baz = foo"
+argument_list|,
+literal|"ALTER SYSTEM SET `BAZ` = `FOO`"
+argument_list|)
+expr_stmt|;
+comment|// expressions not allowed
+name|checkFails
+argument_list|(
+literal|"alter system set aString = 'abc' ^||^ 'def' "
+argument_list|,
+literal|"(?s)Encountered \"\\|\\|\" at line 1, column 34\\..*"
+argument_list|)
+expr_stmt|;
+comment|// multiple assignments not allowed
+name|checkFails
+argument_list|(
+literal|"alter system set x = 1^,^ y = 2"
+argument_list|,
+literal|"(?s)Encountered \",\" at line 1, column 23\\..*"
 argument_list|)
 expr_stmt|;
 block|}
