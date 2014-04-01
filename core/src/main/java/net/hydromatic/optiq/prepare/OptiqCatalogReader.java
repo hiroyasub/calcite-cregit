@@ -298,8 +298,6 @@ argument_list|)
 return|;
 block|}
 specifier|public
-name|OptiqPrepareImpl
-operator|.
 name|RelOptTableImpl
 name|getTable
 parameter_list|(
@@ -319,8 +317,6 @@ operator|!=
 literal|null
 condition|)
 block|{
-name|OptiqPrepareImpl
-operator|.
 name|RelOptTableImpl
 name|table
 init|=
@@ -360,8 +356,6 @@ argument_list|)
 return|;
 block|}
 specifier|private
-name|OptiqPrepareImpl
-operator|.
 name|RelOptTableImpl
 name|getTableFrom
 parameter_list|(
@@ -441,10 +435,9 @@ literal|null
 condition|)
 block|{
 return|return
-operator|new
-name|OptiqPrepareImpl
-operator|.
 name|RelOptTableImpl
+operator|.
+name|create
 argument_list|(
 name|this
 argument_list|,
@@ -637,8 +630,6 @@ literal|null
 return|;
 block|}
 specifier|public
-name|OptiqPrepareImpl
-operator|.
 name|RelOptTableImpl
 name|getTableForMember
 parameter_list|(
@@ -971,19 +962,6 @@ name|SqlTypeFamily
 argument_list|>
 argument_list|()
 decl_stmt|;
-name|List
-argument_list|<
-name|Object
-argument_list|>
-name|dummyArguments
-init|=
-operator|new
-name|ArrayList
-argument_list|<
-name|Object
-argument_list|>
-argument_list|()
-decl_stmt|;
 for|for
 control|(
 name|FunctionParameter
@@ -1022,21 +1000,7 @@ operator|.
 name|ANY
 argument_list|)
 expr_stmt|;
-name|dummyArguments
-operator|.
-name|add
-argument_list|(
-name|zero
-argument_list|(
-name|type
-argument_list|)
-argument_list|)
-expr_stmt|;
 block|}
-specifier|final
-name|Table
-name|table
-decl_stmt|;
 specifier|final
 name|RelDataType
 name|returnType
@@ -1062,10 +1026,6 @@ argument_list|(
 name|typeFactory
 argument_list|)
 expr_stmt|;
-name|table
-operator|=
-literal|null
-expr_stmt|;
 block|}
 if|else if
 condition|(
@@ -1074,22 +1034,6 @@ operator|instanceof
 name|TableMacro
 condition|)
 block|{
-comment|// Make a call with dummy arguments, to get the table, so get its row
-comment|// type.
-name|table
-operator|=
-operator|(
-operator|(
-name|TableMacro
-operator|)
-name|function
-operator|)
-operator|.
-name|apply
-argument_list|(
-name|dummyArguments
-argument_list|)
-expr_stmt|;
 name|returnType
 operator|=
 name|typeFactory
@@ -1127,8 +1071,6 @@ argument_list|,
 name|typeFamilies
 argument_list|,
 name|function
-argument_list|,
-name|table
 argument_list|)
 return|;
 block|}

@@ -480,10 +480,9 @@ name|TableAccessRel
 argument_list|(
 name|cluster
 argument_list|,
-operator|new
-name|OptiqPrepareImpl
-operator|.
 name|RelOptTableImpl
+operator|.
+name|create
 argument_list|(
 literal|null
 argument_list|,
@@ -532,10 +531,9 @@ name|TableAccessRel
 argument_list|(
 name|cluster
 argument_list|,
-operator|new
-name|OptiqPrepareImpl
-operator|.
 name|RelOptTableImpl
+operator|.
+name|create
 argument_list|(
 literal|null
 argument_list|,

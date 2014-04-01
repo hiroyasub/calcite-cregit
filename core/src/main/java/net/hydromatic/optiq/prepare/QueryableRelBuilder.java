@@ -289,15 +289,12 @@ name|table
 argument_list|)
 decl_stmt|;
 specifier|final
-name|OptiqPrepareImpl
-operator|.
 name|RelOptTableImpl
 name|relOptTable
 init|=
-operator|new
-name|OptiqPrepareImpl
-operator|.
 name|RelOptTableImpl
+operator|.
+name|create
 argument_list|(
 literal|null
 argument_list|,

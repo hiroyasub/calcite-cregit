@@ -794,14 +794,6 @@ operator|.
 name|class
 argument_list|)
 decl_stmt|;
-name|JavaTypeFactory
-name|typeFactory
-init|=
-name|optiqConnection
-operator|.
-name|getTypeFactory
-argument_list|()
-decl_stmt|;
 name|SchemaPlus
 name|rootSchema
 init|=
@@ -837,8 +829,6 @@ argument_list|(
 name|JdbcTest
 operator|.
 name|GENERATE_STRINGS_METHOD
-argument_list|,
-name|typeFactory
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -855,8 +845,6 @@ argument_list|(
 name|JdbcTest
 operator|.
 name|STRING_UNION_METHOD
-argument_list|,
-name|typeFactory
 argument_list|)
 argument_list|)
 expr_stmt|;

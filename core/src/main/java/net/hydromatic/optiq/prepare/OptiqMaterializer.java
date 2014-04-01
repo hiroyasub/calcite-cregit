@@ -435,15 +435,12 @@ name|table
 operator|instanceof
 name|StarTable
 assert|;
-name|OptiqPrepareImpl
-operator|.
 name|RelOptTableImpl
 name|starRelOptTable
 init|=
-operator|new
-name|OptiqPrepareImpl
-operator|.
 name|RelOptTableImpl
+operator|.
+name|create
 argument_list|(
 name|catalogReader
 argument_list|,

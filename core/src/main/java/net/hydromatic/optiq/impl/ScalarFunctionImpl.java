@@ -162,7 +162,7 @@ block|}
 comment|/** Creates and validates a ScalarFunctionImpl. */
 specifier|public
 specifier|static
-name|ScalarFunctionImpl
+name|Function
 name|create
 parameter_list|(
 name|List
@@ -232,7 +232,9 @@ throw|throw
 operator|new
 name|RuntimeException
 argument_list|(
-literal|"method not found"
+literal|"No 'eval' method not found in class "
+operator|+
+name|clazz
 argument_list|)
 throw|;
 block|}
@@ -278,6 +280,39 @@ literal|"parameters"
 argument_list|)
 throw|;
 block|}
+block|}
+specifier|final
+name|Class
+argument_list|<
+name|?
+argument_list|>
+name|returnType
+init|=
+name|method
+operator|.
+name|getReturnType
+argument_list|()
+decl_stmt|;
+if|if
+condition|(
+name|Table
+operator|.
+name|class
+operator|.
+name|isAssignableFrom
+argument_list|(
+name|returnType
+argument_list|)
+condition|)
+block|{
+return|return
+name|Schemas
+operator|.
+name|methodMember
+argument_list|(
+name|method
+argument_list|)
+return|;
 block|}
 return|return
 operator|new
