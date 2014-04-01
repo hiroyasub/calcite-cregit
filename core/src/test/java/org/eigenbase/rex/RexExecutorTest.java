@@ -399,6 +399,7 @@ block|}
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Tests an executor that uses variables stored in a {@link DataContext}.    * Can change the value of the variable and execute again. */
 annotation|@
 name|Test
 specifier|public
@@ -520,14 +521,8 @@ name|SqlStdOperatorTable
 operator|.
 name|SUBSTRING
 argument_list|,
-operator|(
-name|RexNode
-operator|)
 name|input
 argument_list|,
-operator|(
-name|RexNode
-operator|)
 name|lengthArg
 argument_list|)
 decl_stmt|;
@@ -539,9 +534,6 @@ name|constExps
 init|=
 name|ImmutableList
 operator|.
-expr|<
-name|RexNode
-operator|>
 name|of
 argument_list|(
 name|substr
@@ -1064,7 +1056,7 @@ block|}
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Callback for {@link #check}. Test code will typically use {@code builder}    * to create some expressions, call    * {@link org.eigenbase.rex.RexExecutorImpl#execute} to evaluate them into    * a list, then check that the results are as expected. */
+comment|/** Callback for {@link #check}. Test code will typically use {@code builder}    * to create some expressions, call    * {@link org.eigenbase.rex.RexExecutorImpl#reduce} to evaluate them into    * a list, then check that the results are as expected. */
 interface|interface
 name|Action
 block|{

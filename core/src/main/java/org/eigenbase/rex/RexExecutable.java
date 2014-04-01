@@ -168,7 +168,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Contains executable code from {@link RexNode} expression.  */
+comment|/**  * Result of compiling code generated from a {@link RexNode} expression.  */
 end_comment
 
 begin_class
@@ -184,6 +184,8 @@ name|GENERATED_CLASS_NAME
 init|=
 literal|"Reducer"
 decl_stmt|;
+specifier|private
+specifier|final
 name|Function1
 argument_list|<
 name|DataContext
@@ -196,29 +198,25 @@ decl_stmt|;
 specifier|private
 specifier|final
 name|String
-name|generatedCode
+name|code
 decl_stmt|;
 specifier|private
 name|DataContext
 name|dataContext
 decl_stmt|;
-specifier|private
-specifier|final
-name|RexBuilder
-name|rexBuilder
-decl_stmt|;
 specifier|public
 name|RexExecutable
 parameter_list|(
 name|String
-name|genCode
+name|code
 parameter_list|,
-name|RexBuilder
-name|rexBuilder
+name|Object
+name|reason
 parameter_list|)
 block|{
 try|try
 block|{
+comment|//noinspection unchecked
 name|compiledFunction
 operator|=
 operator|(
@@ -236,7 +234,7 @@ argument_list|,
 operator|new
 name|StringReader
 argument_list|(
-name|genCode
+name|code
 argument_list|)
 argument_list|)
 argument_list|,
@@ -277,7 +275,9 @@ throw|throw
 operator|new
 name|RuntimeException
 argument_list|(
-literal|"While compiling generated Rex code"
+literal|"While compiling "
+operator|+
+name|reason
 argument_list|,
 name|e
 argument_list|)
@@ -293,7 +293,9 @@ throw|throw
 operator|new
 name|RuntimeException
 argument_list|(
-literal|"While compiling generated Rex code"
+literal|"While compiling "
+operator|+
+name|reason
 argument_list|,
 name|e
 argument_list|)
@@ -301,15 +303,9 @@ throw|;
 block|}
 name|this
 operator|.
-name|rexBuilder
+name|code
 operator|=
-name|rexBuilder
-expr_stmt|;
-name|this
-operator|.
-name|generatedCode
-operator|=
-name|genCode
+name|code
 expr_stmt|;
 block|}
 specifier|public
@@ -331,6 +327,9 @@ specifier|public
 name|void
 name|reduce
 parameter_list|(
+name|RexBuilder
+name|rexBuilder
+parameter_list|,
 name|List
 argument_list|<
 name|RexNode
@@ -433,7 +432,7 @@ name|Pair
 operator|.
 name|of
 argument_list|(
-name|generatedCode
+name|code
 argument_list|,
 name|values
 argument_list|)
@@ -476,11 +475,15 @@ name|getSource
 parameter_list|()
 block|{
 return|return
-name|generatedCode
+name|code
 return|;
 block|}
 block|}
 end_class
+
+begin_comment
+comment|// End RexExecutable.java
+end_comment
 
 end_unit
 
