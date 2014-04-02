@@ -87,7 +87,7 @@ literal|null
 argument_list|,
 name|OperandTypes
 operator|.
-name|INTERVAL_SAME_SAME
+name|INTERVALINTERVAL_INTERVALDATETIME
 argument_list|,
 name|SqlFunctionCategory
 operator|.

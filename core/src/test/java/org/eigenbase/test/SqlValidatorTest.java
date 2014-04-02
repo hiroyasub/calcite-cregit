@@ -14141,6 +14141,11 @@ argument_list|(
 literal|"extract(minute from interval '1.1' second)"
 argument_list|)
 expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"extract(year from DATE '2008-2-2')"
+argument_list|)
+expr_stmt|;
 name|checkWholeExpFails
 argument_list|(
 literal|"extract(minute from interval '11' month)"

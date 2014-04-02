@@ -971,6 +971,21 @@ operator|.
 name|DATETIME
 argument_list|)
 decl_stmt|;
+specifier|public
+specifier|static
+specifier|final
+name|SqlSingleOperandTypeChecker
+name|INTERVALINTERVAL_INTERVALDATETIME
+init|=
+name|OperandTypes
+operator|.
+name|or
+argument_list|(
+name|INTERVAL_SAME_SAME
+argument_list|,
+name|INTERVAL_DATETIME
+argument_list|)
+decl_stmt|;
 comment|// TODO: datetime+interval checking missing
 comment|// TODO: interval+datetime checking missing
 specifier|public
