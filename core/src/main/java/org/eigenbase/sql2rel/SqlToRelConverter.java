@@ -679,7 +679,7 @@ name|ViewExpander
 name|viewExpander
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a converter.    *    * @param viewExpander  Preparing statement    * @param validator     Validator    * @param catalogReader Schema    * @param planner       Planner    * @param rexBuilder    Rex builder    */
+comment|/**    * Creates a converter.    *    * @param viewExpander    Preparing statement    * @param validator       Validator    * @param catalogReader   Schema    * @param planner         Planner    * @param rexBuilder      Rex builder    * @param convertletTable Expression converter    */
 specifier|public
 name|SqlToRelConverter
 parameter_list|(
@@ -701,6 +701,9 @@ name|planner
 parameter_list|,
 name|RexBuilder
 name|rexBuilder
+parameter_list|,
+name|SqlRexConvertletTable
+name|convertletTable
 parameter_list|)
 block|{
 name|this
@@ -807,9 +810,7 @@ operator|=
 operator|new
 name|SqlNodeToRexConverterImpl
 argument_list|(
-operator|new
-name|StandardConvertletTable
-argument_list|()
+name|convertletTable
 argument_list|)
 expr_stmt|;
 name|decorrelationEnabled

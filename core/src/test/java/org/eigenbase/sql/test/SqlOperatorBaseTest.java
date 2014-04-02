@@ -175,6 +175,16 @@ name|org
 operator|.
 name|junit
 operator|.
+name|Ignore
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
 name|Test
 import|;
 end_import
@@ -15814,6 +15824,50 @@ operator|.
 name|checkNull
 argument_list|(
 literal|"extract(month from cast(null as interval year))"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Ignore
+specifier|public
+name|void
+name|testExtractFuncFromDateTime
+parameter_list|()
+block|{
+comment|/* StandardConvertletTable.convertExtract() will throw an      * exception when the second input to extract function is of      * DATETIME type. Once the capability to handle DATETIME type      * is added to convertExtract() we can add this test      */
+name|tester
+operator|.
+name|setFor
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|EXTRACT
+argument_list|,
+name|VM_FENNEL
+argument_list|,
+name|VM_JAVA
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(year from date '2008-2-23')"
+argument_list|,
+literal|"2008"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(minute from time '12:23:34')"
+argument_list|,
+literal|"23"
+argument_list|,
+literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}

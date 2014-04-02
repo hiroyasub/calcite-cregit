@@ -1520,6 +1520,10 @@ name|RexBuilder
 argument_list|(
 name|typeFactory
 argument_list|)
+argument_list|,
+name|StandardConvertletTable
+operator|.
+name|INSTANCE
 argument_list|)
 return|;
 block|}

@@ -160,6 +160,17 @@ name|StandardConvertletTable
 extends|extends
 name|ReflectiveConvertletTable
 block|{
+comment|// Singleton instance of StandardConvertletTable
+specifier|public
+specifier|static
+specifier|final
+name|StandardConvertletTable
+name|INSTANCE
+init|=
+operator|new
+name|StandardConvertletTable
+argument_list|()
+decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 specifier|public
 name|StandardConvertletTable
@@ -2237,6 +2248,46 @@ literal|false
 argument_list|)
 argument_list|)
 decl_stmt|;
+comment|/* TODO: Handle DateTime types.      * Raise exception for now, that we don't extract from DATETIME types      */
+name|SqlTypeName
+name|extractFrom
+init|=
+name|exprs
+operator|.
+name|get
+argument_list|(
+literal|1
+argument_list|)
+operator|.
+name|getType
+argument_list|()
+operator|.
+name|getSqlTypeName
+argument_list|()
+decl_stmt|;
+if|if
+condition|(
+name|SqlTypeFamily
+operator|.
+name|DATETIME
+operator|.
+name|getTypeNames
+argument_list|()
+operator|.
+name|contains
+argument_list|(
+name|extractFrom
+argument_list|)
+condition|)
+block|{
+throw|throw
+operator|new
+name|UnsupportedOperationException
+argument_list|(
+literal|"Extract function does not support DATETIME data types"
+argument_list|)
+throw|;
+block|}
 name|SqlIntervalQualifier
 operator|.
 name|TimeUnit
