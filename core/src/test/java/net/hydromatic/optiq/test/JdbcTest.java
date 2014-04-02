@@ -9775,22 +9775,28 @@ literal|"Cannot define view; parent schema 'adhoc' is not mutable"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Tests a JDBC connection that provides a model that contains a view. */
-annotation|@
-name|Test
-specifier|public
-name|void
-name|testModelView
-parameter_list|()
-throws|throws
-name|Exception
-block|{
-specifier|final
+specifier|private
 name|OptiqAssert
 operator|.
 name|AssertThat
-name|with
+name|modelWithView
+parameter_list|(
+name|String
+name|view
+parameter_list|)
+block|{
+specifier|final
+name|Class
+argument_list|<
+name|EmpDeptTableFactory
+argument_list|>
+name|clazz
 init|=
+name|EmpDeptTableFactory
+operator|.
+name|class
+decl_stmt|;
+return|return
 name|OptiqAssert
 operator|.
 name|that
@@ -9818,9 +9824,7 @@ literal|"           type: 'custom',\n"
 operator|+
 literal|"           factory: '"
 operator|+
-name|EmpDeptTableFactory
-operator|.
-name|class
+name|clazz
 operator|.
 name|getName
 argument_list|()
@@ -9837,7 +9841,11 @@ literal|"           name: 'V',\n"
 operator|+
 literal|"           type: 'view',\n"
 operator|+
-literal|"           sql: 'select * from \"EMPLOYEES\" where \"deptno\" = 10'\n"
+literal|"           sql: '"
+operator|+
+name|view
+operator|+
+literal|"'\n"
 operator|+
 literal|"         }\n"
 operator|+
@@ -9848,6 +9856,28 @@ operator|+
 literal|"   ]\n"
 operator|+
 literal|"}"
+argument_list|)
+return|;
+block|}
+comment|/** Tests a JDBC connection that provides a model that contains a view. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testModelView
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|OptiqAssert
+operator|.
+name|AssertThat
+name|with
+init|=
+name|modelWithView
+argument_list|(
+literal|"select * from \"EMPLOYEES\" where \"deptno\" = 10"
 argument_list|)
 decl_stmt|;
 name|with
@@ -10085,6 +10115,66 @@ throw|;
 block|}
 block|}
 block|}
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests a view with ORDER BY and LIMIT clauses. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testOrderByView
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|OptiqAssert
+operator|.
+name|AssertThat
+name|with
+init|=
+name|modelWithView
+argument_list|(
+literal|"select * from \"EMPLOYEES\" where \"deptno\" = 10 "
+operator|+
+literal|"order by \"empid\" limit 2"
+argument_list|)
+decl_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select \"name\" from \"adhoc\".V order by \"name\""
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"name=Bill\n"
+operator|+
+literal|"name=Theodore\n"
+argument_list|)
+expr_stmt|;
+comment|// Now a sub-query with ORDER BY and LIMIT clauses. (Same net effect, but
+comment|// ORDER BY and LIMIT in sub-query were not standard SQL until SQL:2008.)
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select \"name\" from (\n"
+operator|+
+literal|"select * from \"adhoc\".\"EMPLOYEES\" where \"deptno\" = 10\n"
+operator|+
+literal|"order by \"empid\" limit 2)\n"
+operator|+
+literal|"order by \"name\""
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"name=Bill\n"
+operator|+
+literal|"name=Theodore\n"
 argument_list|)
 expr_stmt|;
 block|}
