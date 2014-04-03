@@ -165,27 +165,7 @@ name|org
 operator|.
 name|junit
 operator|.
-name|Before
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|junit
-operator|.
-name|Ignore
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|junit
-operator|.
-name|Test
+name|*
 import|;
 end_import
 
@@ -15759,6 +15739,17 @@ name|tester
 operator|.
 name|checkScalar
 argument_list|(
+literal|"extract(day from interval '23456 3:4:5.678' day(5) to second)"
+argument_list|,
+literal|"23456"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
 literal|"extract(hour from interval '2 3:4:5.678' day to second)"
 argument_list|,
 literal|"3"
@@ -15828,13 +15819,12 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
-name|Ignore
+name|Test
 specifier|public
 name|void
 name|testExtractFuncFromDateTime
 parameter_list|()
 block|{
-comment|/* StandardConvertletTable.convertExtract() will throw an      * exception when the second input to extract function is of      * DATETIME type. Once the capability to handle DATETIME type      * is added to convertExtract() we can add this test      */
 name|tester
 operator|.
 name|setFor
@@ -15863,11 +15853,65 @@ name|tester
 operator|.
 name|checkScalar
 argument_list|(
+literal|"extract(month from date '2008-2-23')"
+argument_list|,
+literal|"2"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(month from timestamp '2008-2-23 12:34:56')"
+argument_list|,
+literal|"2"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(minute from timestamp '2008-2-23 12:34:56')"
+argument_list|,
+literal|"34"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
 literal|"extract(minute from time '12:23:34')"
 argument_list|,
 literal|"23"
 argument_list|,
 literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"extract(month from cast(null as timestamp))"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"extract(month from cast(null as date))"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"extract(second from cast(null as time))"
 argument_list|)
 expr_stmt|;
 block|}

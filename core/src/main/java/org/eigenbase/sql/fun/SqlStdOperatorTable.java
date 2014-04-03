@@ -2384,6 +2384,23 @@ return|;
 block|}
 block|}
 decl_stmt|;
+comment|/** Internal operator that extracts time periods (year, month, date) from a    * date in internal format (number of days since epoch). */
+specifier|public
+specifier|static
+specifier|final
+name|SqlSpecialOperator
+name|EXTRACT_DATE
+init|=
+operator|new
+name|SqlSpecialOperator
+argument_list|(
+literal|"EXTRACT_DATE"
+argument_list|,
+name|SqlKind
+operator|.
+name|OTHER
+argument_list|)
+decl_stmt|;
 comment|//-------------------------------------------------------------
 comment|//                   FUNCTIONS
 comment|//-------------------------------------------------------------

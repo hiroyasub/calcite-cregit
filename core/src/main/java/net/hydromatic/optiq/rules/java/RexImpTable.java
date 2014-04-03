@@ -1020,6 +1020,22 @@ operator|.
 name|STRICT
 argument_list|)
 expr_stmt|;
+comment|// datetime
+name|defineMethod
+argument_list|(
+name|EXTRACT_DATE
+argument_list|,
+name|BuiltinMethod
+operator|.
+name|UNIX_DATE_EXTRACT
+operator|.
+name|method
+argument_list|,
+name|NullPolicy
+operator|.
+name|STRICT
+argument_list|)
+expr_stmt|;
 name|map
 operator|.
 name|put
