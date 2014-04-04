@@ -120,6 +120,15 @@ argument_list|()
 return|;
 block|}
 specifier|public
+name|void
+name|register
+parameter_list|(
+name|RelOptPlanner
+name|planner
+parameter_list|)
+block|{
+block|}
+specifier|public
 name|boolean
 name|subsumes
 parameter_list|(

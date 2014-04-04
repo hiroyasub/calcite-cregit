@@ -99,6 +99,15 @@ operator|==
 name|trait
 return|;
 block|}
+specifier|public
+name|void
+name|register
+parameter_list|(
+name|RelOptPlanner
+name|planner
+parameter_list|)
+block|{
+block|}
 block|}
 end_enum
 

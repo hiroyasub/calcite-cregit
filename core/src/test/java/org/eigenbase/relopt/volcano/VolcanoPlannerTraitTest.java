@@ -905,6 +905,15 @@ operator|++
 expr_stmt|;
 block|}
 specifier|public
+name|void
+name|register
+parameter_list|(
+name|RelOptPlanner
+name|planner
+parameter_list|)
+block|{
+block|}
+specifier|public
 name|RelTraitDef
 name|getTraitDef
 parameter_list|()
@@ -984,7 +993,7 @@ block|{
 return|return
 name|equals
 argument_list|(
-literal|true
+name|trait
 argument_list|)
 return|;
 block|}

@@ -41,7 +41,7 @@ name|Object
 name|o
 parameter_list|)
 function_decl|;
-comment|/**    * Returns whether this trait subsumes a given trait.    *    *<p>Must form a partial order: must be reflective (t subsumes t),    * anti-symmetric (if t1 subsumes t2 and t1 != t2 then t2 does not subsume    * t1),    * and transitive (if t1 subsumes t2 and t2 subsumes t3, then t1 subsumes    * t3)</p>    *    *<p>May traits cannot be substituted, in which case, this method should    * return {@code equals(trait)}.</p>    */
+comment|/**    * Returns whether this trait subsumes a given trait.    *    *<p>Must form a partial order: must be reflective (t subsumes t),    * anti-symmetric (if t1 subsumes t2 and t1 != t2 then t2 does not subsume    * t1),    * and transitive (if t1 subsumes t2 and t2 subsumes t3, then t1 subsumes    * t3)</p>    *    *<p>Many traits cannot be substituted, in which case, this method should    * return {@code equals(trait)}.</p>    */
 name|boolean
 name|subsumes
 parameter_list|(
@@ -53,6 +53,14 @@ comment|/**    * Returns a succinct name for this trait. The planner may use thi
 name|String
 name|toString
 parameter_list|()
+function_decl|;
+comment|/**    * Registers a trait instance with the planner.    *    *<p>This is an opportunity to add rules that relate to that trait. However,    * typical implementations will do nothing.</p>    *    * @param planner Planner    */
+name|void
+name|register
+parameter_list|(
+name|RelOptPlanner
+name|planner
+parameter_list|)
 function_decl|;
 block|}
 end_interface

@@ -100,7 +100,9 @@ name|EnumerableConvention
 operator|.
 name|INSTANCE
 argument_list|,
-literal|"JdbcToEnumerableConverterRule"
+literal|"JdbcToEnumerableConverterRule:"
+operator|+
+name|out
 argument_list|)
 expr_stmt|;
 block|}
