@@ -1309,9 +1309,9 @@ decl_stmt|;
 name|RelTraitSet
 name|traitSet
 init|=
-name|planner
+name|convert
 operator|.
-name|getEmptyTraitSet
+name|getTraitSet
 argument_list|()
 operator|.
 name|replace
