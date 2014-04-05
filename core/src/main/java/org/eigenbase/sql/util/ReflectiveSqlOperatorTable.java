@@ -284,10 +284,7 @@ block|}
 block|}
 comment|// implement SqlOperatorTable
 specifier|public
-name|List
-argument_list|<
-name|SqlOperator
-argument_list|>
+name|void
 name|lookupOperatorOverloads
 parameter_list|(
 name|SqlIdentifier
@@ -298,6 +295,12 @@ name|category
 parameter_list|,
 name|SqlSyntax
 name|syntax
+parameter_list|,
+name|List
+argument_list|<
+name|SqlOperator
+argument_list|>
+name|operatorList
 parameter_list|)
 block|{
 comment|// NOTE jvs 3-Mar-2005:  ignore category until someone cares
@@ -355,12 +358,7 @@ expr_stmt|;
 block|}
 else|else
 block|{
-return|return
-name|ImmutableList
-operator|.
-name|of
-argument_list|()
-return|;
+return|return;
 block|}
 block|}
 else|else
@@ -400,27 +398,8 @@ name|isEmpty
 argument_list|()
 condition|)
 block|{
-return|return
-name|ImmutableList
-operator|.
-name|of
-argument_list|()
-return|;
+return|return;
 block|}
-specifier|final
-name|List
-argument_list|<
-name|SqlOperator
-argument_list|>
-name|overloads
-init|=
-operator|new
-name|ArrayList
-argument_list|<
-name|SqlOperator
-argument_list|>
-argument_list|()
-decl_stmt|;
 for|for
 control|(
 name|SqlOperator
@@ -439,7 +418,7 @@ operator|==
 name|syntax
 condition|)
 block|{
-name|overloads
+name|operatorList
 operator|.
 name|add
 argument_list|(
@@ -462,7 +441,7 @@ condition|)
 block|{
 comment|// this special case is needed for operators like CAST,
 comment|// which are treated as functions but have special syntax
-name|overloads
+name|operatorList
 operator|.
 name|add
 argument_list|(
@@ -504,16 +483,15 @@ name|syntax
 argument_list|)
 argument_list|)
 decl_stmt|;
+comment|// REVIEW: should only search operators added during this method?
 if|if
 condition|(
-operator|(
 name|extra
 operator|!=
 literal|null
-operator|)
 operator|&&
 operator|!
-name|overloads
+name|operatorList
 operator|.
 name|contains
 argument_list|(
@@ -521,7 +499,7 @@ name|extra
 argument_list|)
 condition|)
 block|{
-name|overloads
+name|operatorList
 operator|.
 name|add
 argument_list|(
@@ -531,9 +509,6 @@ expr_stmt|;
 block|}
 break|break;
 block|}
-return|return
-name|overloads
-return|;
 block|}
 specifier|public
 name|void

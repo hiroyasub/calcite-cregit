@@ -125,6 +125,20 @@ name|ImmutableSet
 import|;
 end_import
 
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|Lists
+import|;
+end_import
+
 begin_comment
 comment|/**  * Abstract base for parsers generated from CommonParser.jj.  */
 end_comment
@@ -698,12 +712,18 @@ name|isSimple
 argument_list|()
 condition|)
 block|{
+specifier|final
 name|List
 argument_list|<
 name|SqlOperator
 argument_list|>
 name|list
 init|=
+name|Lists
+operator|.
+name|newArrayList
+argument_list|()
+decl_stmt|;
 name|opTab
 operator|.
 name|lookupOperatorOverloads
@@ -715,8 +735,10 @@ argument_list|,
 name|SqlSyntax
 operator|.
 name|FUNCTION
+argument_list|,
+name|list
 argument_list|)
-decl_stmt|;
+expr_stmt|;
 if|if
 condition|(
 name|list

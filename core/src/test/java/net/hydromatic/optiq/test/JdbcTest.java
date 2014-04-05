@@ -10550,6 +10550,297 @@ literal|"declaring class 'net.hydromatic.optiq.test.JdbcTest$AwkwardFunction' of
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Tests user-defined function. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testPath
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|String
+name|name
+init|=
+name|MyPlusFunction
+operator|.
+name|class
+operator|.
+name|getName
+argument_list|()
+decl_stmt|;
+specifier|final
+name|OptiqAssert
+operator|.
+name|AssertThat
+name|with
+init|=
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|withModel
+argument_list|(
+literal|"{\n"
+operator|+
+literal|"  version: '1.0',\n"
+operator|+
+literal|"   schemas: [\n"
+operator|+
+literal|"     {\n"
+operator|+
+literal|"       name: 'adhoc',\n"
+operator|+
+literal|"       functions: [\n"
+operator|+
+literal|"         {\n"
+operator|+
+literal|"           name: 'MY_PLUS',\n"
+operator|+
+literal|"           className: '"
+operator|+
+name|name
+operator|+
+literal|"'\n"
+operator|+
+literal|"         }\n"
+operator|+
+literal|"       ]\n"
+operator|+
+literal|"     },\n"
+operator|+
+literal|"     {\n"
+operator|+
+literal|"       name: 'adhoc2',\n"
+operator|+
+literal|"       functions: [\n"
+operator|+
+literal|"         {\n"
+operator|+
+literal|"           name: 'MY_PLUS2',\n"
+operator|+
+literal|"           className: '"
+operator|+
+name|name
+operator|+
+literal|"'\n"
+operator|+
+literal|"         }\n"
+operator|+
+literal|"       ]\n"
+operator|+
+literal|"     },\n"
+operator|+
+literal|"     {\n"
+operator|+
+literal|"       name: 'adhoc3',\n"
+operator|+
+literal|"       path: ['adhoc2','adhoc3'],\n"
+operator|+
+literal|"       functions: [\n"
+operator|+
+literal|"         {\n"
+operator|+
+literal|"           name: 'MY_PLUS3',\n"
+operator|+
+literal|"           className: '"
+operator|+
+name|name
+operator|+
+literal|"'\n"
+operator|+
+literal|"         }\n"
+operator|+
+literal|"       ]\n"
+operator|+
+literal|"     }\n"
+operator|+
+literal|"   ]\n"
+operator|+
+literal|"}"
+argument_list|)
+decl_stmt|;
+specifier|final
+name|String
+name|err
+init|=
+literal|"No match found for function signature"
+decl_stmt|;
+specifier|final
+name|String
+name|res
+init|=
+literal|"EXPR$0=2\n"
+decl_stmt|;
+comment|// adhoc can see own function MY_PLUS but not adhoc2.MY_PLUS2 unless
+comment|// qualified
+specifier|final
+name|OptiqAssert
+operator|.
+name|AssertThat
+name|adhoc
+init|=
+name|with
+operator|.
+name|withSchema
+argument_list|(
+literal|"adhoc"
+argument_list|)
+decl_stmt|;
+name|adhoc
+operator|.
+name|query
+argument_list|(
+literal|"values MY_PLUS(1, 1)"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+name|res
+argument_list|)
+expr_stmt|;
+name|adhoc
+operator|.
+name|query
+argument_list|(
+literal|"values MY_PLUS2(1, 1)"
+argument_list|)
+operator|.
+name|throws_
+argument_list|(
+name|err
+argument_list|)
+expr_stmt|;
+name|adhoc
+operator|.
+name|query
+argument_list|(
+literal|"values \"adhoc2\".MY_PLUS(1, 1)"
+argument_list|)
+operator|.
+name|throws_
+argument_list|(
+name|err
+argument_list|)
+expr_stmt|;
+name|adhoc
+operator|.
+name|query
+argument_list|(
+literal|"values \"adhoc2\".MY_PLUS2(1, 1)"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+name|res
+argument_list|)
+expr_stmt|;
+comment|// adhoc2 can see own function MY_PLUS2 but not adhoc2.MY_PLUS unless
+comment|// qualified
+specifier|final
+name|OptiqAssert
+operator|.
+name|AssertThat
+name|adhoc2
+init|=
+name|with
+operator|.
+name|withSchema
+argument_list|(
+literal|"adhoc2"
+argument_list|)
+decl_stmt|;
+name|adhoc2
+operator|.
+name|query
+argument_list|(
+literal|"values MY_PLUS2(1, 1)"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+name|res
+argument_list|)
+expr_stmt|;
+name|adhoc2
+operator|.
+name|query
+argument_list|(
+literal|"values MY_PLUS(1, 1)"
+argument_list|)
+operator|.
+name|throws_
+argument_list|(
+name|err
+argument_list|)
+expr_stmt|;
+name|adhoc2
+operator|.
+name|query
+argument_list|(
+literal|"values \"adhoc\".MY_PLUS(1, 1)"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+name|res
+argument_list|)
+expr_stmt|;
+comment|// adhoc3 can see own adhoc2.MY_PLUS2 because in path, with or without
+comment|// qualification, but can only see adhoc.MY_PLUS with qualification
+specifier|final
+name|OptiqAssert
+operator|.
+name|AssertThat
+name|adhoc3
+init|=
+name|with
+operator|.
+name|withSchema
+argument_list|(
+literal|"adhoc3"
+argument_list|)
+decl_stmt|;
+name|adhoc3
+operator|.
+name|query
+argument_list|(
+literal|"values MY_PLUS2(1, 1)"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+name|res
+argument_list|)
+expr_stmt|;
+name|adhoc3
+operator|.
+name|query
+argument_list|(
+literal|"values MY_PLUS(1, 1)"
+argument_list|)
+operator|.
+name|throws_
+argument_list|(
+name|err
+argument_list|)
+expr_stmt|;
+name|adhoc3
+operator|.
+name|query
+argument_list|(
+literal|"values \"adhoc\".MY_PLUS(1, 1)"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+name|res
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public

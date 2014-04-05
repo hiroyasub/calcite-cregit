@@ -106,12 +106,8 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|// implement SqlOperatorTable
 specifier|public
-name|List
-argument_list|<
-name|SqlOperator
-argument_list|>
+name|void
 name|lookupOperatorOverloads
 parameter_list|(
 name|SqlIdentifier
@@ -122,21 +118,14 @@ name|category
 parameter_list|,
 name|SqlSyntax
 name|syntax
-parameter_list|)
-block|{
+parameter_list|,
 name|List
 argument_list|<
 name|SqlOperator
 argument_list|>
-name|list
-init|=
-operator|new
-name|ArrayList
-argument_list|<
-name|SqlOperator
-argument_list|>
-argument_list|()
-decl_stmt|;
+name|operatorList
+parameter_list|)
+block|{
 for|for
 control|(
 name|SqlOperatorTable
@@ -145,10 +134,6 @@ range|:
 name|tableList
 control|)
 block|{
-name|list
-operator|.
-name|addAll
-argument_list|(
 name|table
 operator|.
 name|lookupOperatorOverloads
@@ -158,13 +143,11 @@ argument_list|,
 name|category
 argument_list|,
 name|syntax
-argument_list|)
+argument_list|,
+name|operatorList
 argument_list|)
 expr_stmt|;
 block|}
-return|return
-name|list
-return|;
 block|}
 comment|// implement SqlOperatorTable
 specifier|public

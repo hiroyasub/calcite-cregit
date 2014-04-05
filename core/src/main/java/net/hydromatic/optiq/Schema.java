@@ -97,7 +97,7 @@ argument_list|>
 name|getSubSchemaNames
 parameter_list|()
 function_decl|;
-comment|/**    * Returns the expression by which this schema can be referenced in generated    * code.    *    * @param parentSchema    * @param name    */
+comment|/**    * Returns the expression by which this schema can be referenced in generated    * code.    *    * @param parentSchema Parent schema    * @param name Name of this schema    */
 name|Expression
 name|getExpression
 parameter_list|(

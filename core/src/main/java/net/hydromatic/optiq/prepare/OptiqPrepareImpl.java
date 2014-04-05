@@ -1882,9 +1882,6 @@ name|ChainedSqlOperatorTable
 argument_list|(
 name|ImmutableList
 operator|.
-expr|<
-name|SqlOperatorTable
-operator|>
 name|of
 argument_list|(
 name|SqlStdOperatorTable

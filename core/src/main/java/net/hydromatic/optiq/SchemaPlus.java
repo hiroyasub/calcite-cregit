@@ -13,6 +13,20 @@ name|optiq
 package|;
 end_package
 
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|ImmutableList
+import|;
+end_import
+
 begin_comment
 comment|/**  * Extension to the {@link Schema} interface.  *  *<p>Given a user-defined schema that implements the {@link Schema} interface,  * Optiq creates a wrapper that implements the {@code SchemaPlus} interface.  * This provides extra functionality, such as access to tables that have been  * added explicitly.</p>  *  *<p>A user-defined schema does not need to implement this interface, but by  * the time a schema is passed to a method in a user-defined schema or  * user-defined table, it will have been wrapped in this interface.</p>  */
 end_comment
@@ -91,6 +105,19 @@ argument_list|<
 name|T
 argument_list|>
 name|clazz
+parameter_list|)
+function_decl|;
+name|void
+name|setPath
+parameter_list|(
+name|ImmutableList
+argument_list|<
+name|ImmutableList
+argument_list|<
+name|String
+argument_list|>
+argument_list|>
+name|path
 parameter_list|)
 function_decl|;
 block|}

@@ -3846,12 +3846,18 @@ comment|// a half-hearted resolution now in case it's a
 comment|// builtin function requiring special casing.  If it's
 comment|// not, we'll handle it later during overload
 comment|// resolution.
+specifier|final
 name|List
 argument_list|<
 name|SqlOperator
 argument_list|>
 name|overloads
 init|=
+name|Lists
+operator|.
+name|newArrayList
+argument_list|()
+decl_stmt|;
 name|opTab
 operator|.
 name|lookupOperatorOverloads
@@ -3866,8 +3872,10 @@ argument_list|,
 name|SqlSyntax
 operator|.
 name|FUNCTION
+argument_list|,
+name|overloads
 argument_list|)
-decl_stmt|;
+expr_stmt|;
 if|if
 condition|(
 name|overloads
@@ -6178,12 +6186,18 @@ name|argTypes
 parameter_list|)
 block|{
 comment|// For builtins, we can give a better error message
+specifier|final
 name|List
 argument_list|<
 name|SqlOperator
 argument_list|>
 name|overloads
 init|=
+name|Lists
+operator|.
+name|newArrayList
+argument_list|()
+decl_stmt|;
 name|opTab
 operator|.
 name|lookupOperatorOverloads
@@ -6198,8 +6212,10 @@ argument_list|,
 name|SqlSyntax
 operator|.
 name|FUNCTION
+argument_list|,
+name|overloads
 argument_list|)
-decl_stmt|;
+expr_stmt|;
 if|if
 condition|(
 name|overloads

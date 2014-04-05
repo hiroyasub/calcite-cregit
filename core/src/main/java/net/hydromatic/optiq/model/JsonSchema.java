@@ -151,6 +151,14 @@ specifier|public
 name|String
 name|name
 decl_stmt|;
+comment|/** SQL-path. May be null, or a list, each element of which is a string or a    * string-list. */
+specifier|public
+name|List
+argument_list|<
+name|Object
+argument_list|>
+name|path
+decl_stmt|;
 specifier|public
 name|List
 argument_list|<
