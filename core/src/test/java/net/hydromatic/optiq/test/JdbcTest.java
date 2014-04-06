@@ -10361,22 +10361,14 @@ block|}
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Tests user-defined function. */
-annotation|@
-name|Test
-specifier|public
-name|void
-name|testUserDefinedFunction
-parameter_list|()
-throws|throws
-name|Exception
-block|{
-specifier|final
+specifier|private
 name|OptiqAssert
 operator|.
 name|AssertThat
-name|with
-init|=
+name|withUdf
+parameter_list|()
+block|{
+return|return
 name|OptiqAssert
 operator|.
 name|that
@@ -10440,6 +10432,23 @@ literal|"         },\n"
 operator|+
 literal|"         {\n"
 operator|+
+literal|"           name: 'MY_STR',\n"
+operator|+
+literal|"           className: '"
+operator|+
+name|MyToStringFunction
+operator|.
+name|class
+operator|.
+name|getName
+argument_list|()
+operator|+
+literal|"'\n"
+operator|+
+literal|"         },\n"
+operator|+
+literal|"         {\n"
+operator|+
 literal|"           name: 'MY_DOUBLE',\n"
 operator|+
 literal|"           className: '"
@@ -10463,6 +10472,26 @@ literal|"   ]\n"
 operator|+
 literal|"}"
 argument_list|)
+return|;
+block|}
+comment|/** Tests user-defined function. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUserDefinedFunction
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|OptiqAssert
+operator|.
+name|AssertThat
+name|with
+init|=
+name|withUdf
+argument_list|()
 decl_stmt|;
 name|with
 operator|.
@@ -10498,6 +10527,116 @@ operator|+
 literal|"P=20\n"
 operator|+
 literal|"P=20\n"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Tests that IS NULL/IS NOT NULL is properly implemented for non-strict    * functions.    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testNotNullImplementor
+parameter_list|()
+block|{
+specifier|final
+name|OptiqAssert
+operator|.
+name|AssertThat
+name|with
+init|=
+name|withUdf
+argument_list|()
+decl_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select upper(\"adhoc\".my_str(\"name\")) as p from \"adhoc\".EMPLOYEES"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"P=<BILL>\n"
+operator|+
+literal|"P=<ERIC>\n"
+operator|+
+literal|"P=<SEBASTIAN>\n"
+operator|+
+literal|"P=<THEODORE>\n"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select \"name\" as p from \"adhoc\".EMPLOYEES\n"
+operator|+
+literal|"where \"adhoc\".my_str(\"name\") is not null"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"P=Bill\n"
+operator|+
+literal|"P=Eric\n"
+operator|+
+literal|"P=Sebastian\n"
+operator|+
+literal|"P=Theodore\n"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select \"name\" as p from \"adhoc\".EMPLOYEES\n"
+operator|+
+literal|"where \"adhoc\".my_str(upper(\"name\")) is not null"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"P=Bill\n"
+operator|+
+literal|"P=Eric\n"
+operator|+
+literal|"P=Sebastian\n"
+operator|+
+literal|"P=Theodore\n"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select \"name\" as p from \"adhoc\".EMPLOYEES\n"
+operator|+
+literal|"where upper(\"adhoc\".my_str(\"name\")) is not null"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"P=Bill\n"
+operator|+
+literal|"P=Eric\n"
+operator|+
+literal|"P=Sebastian\n"
+operator|+
+literal|"P=Theodore\n"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select \"name\" as p from \"adhoc\".EMPLOYEES\n"
+operator|+
+literal|"where \"adhoc\".my_str(\"name\") is null"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|""
 argument_list|)
 expr_stmt|;
 block|}
@@ -15482,6 +15621,44 @@ return|return
 name|x
 operator|+
 name|y
+return|;
+block|}
+block|}
+comment|/** Example of a non-strict UDF. (Does something useful when passed NULL.) */
+specifier|public
+specifier|static
+class|class
+name|MyToStringFunction
+block|{
+specifier|public
+specifier|static
+name|String
+name|eval
+parameter_list|(
+name|Object
+name|o
+parameter_list|)
+block|{
+if|if
+condition|(
+name|o
+operator|==
+literal|null
+condition|)
+block|{
+return|return
+literal|"<null>"
+return|;
+block|}
+return|return
+literal|"<"
+operator|+
+name|o
+operator|.
+name|toString
+argument_list|()
+operator|+
+literal|">"
 return|;
 block|}
 block|}

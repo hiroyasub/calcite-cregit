@@ -1036,6 +1036,7 @@ name|Function
 name|function
 parameter_list|)
 block|{
+specifier|final
 name|List
 argument_list|<
 name|RelDataType
@@ -1049,6 +1050,7 @@ name|RelDataType
 argument_list|>
 argument_list|()
 decl_stmt|;
+specifier|final
 name|List
 argument_list|<
 name|SqlTypeFamily
@@ -1095,6 +1097,10 @@ name|typeFamilies
 operator|.
 name|add
 argument_list|(
+name|Util
+operator|.
+name|first
+argument_list|(
 name|type
 operator|.
 name|getSqlTypeName
@@ -1102,6 +1108,11 @@ argument_list|()
 operator|.
 name|getFamily
 argument_list|()
+argument_list|,
+name|SqlTypeFamily
+operator|.
+name|ANY
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}

@@ -3381,7 +3381,11 @@ return|;
 block|}
 block|}
 block|}
-return|return
+name|Expression
+name|result
+decl_stmt|;
+name|result
+operator|=
 name|implementor
 operator|.
 name|implement
@@ -3391,6 +3395,14 @@ argument_list|,
 name|call
 argument_list|,
 name|translatedOperands
+argument_list|)
+expr_stmt|;
+return|return
+name|nullAs
+operator|.
+name|handle
+argument_list|(
+name|result
 argument_list|)
 return|;
 block|}
