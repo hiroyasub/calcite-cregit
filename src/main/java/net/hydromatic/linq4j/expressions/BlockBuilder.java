@@ -236,7 +236,7 @@ argument_list|>
 name|replacements
 init|=
 operator|new
-name|HashMap
+name|IdentityHashMap
 argument_list|<
 name|ParameterExpression
 argument_list|,
@@ -364,6 +364,17 @@ name|result
 operator|=
 name|x
 expr_stmt|;
+if|if
+condition|(
+name|declaration
+operator|.
+name|parameter
+operator|!=
+name|x
+condition|)
+block|{
+comment|// declaration.parameter can be equal to x if exactly the same
+comment|// declaration was present in BlockBuilder
 name|replacements
 operator|.
 name|put
@@ -375,6 +386,7 @@ argument_list|,
 name|x
 argument_list|)
 expr_stmt|;
+block|}
 block|}
 else|else
 block|{
@@ -1028,7 +1040,7 @@ argument_list|>
 name|subMap
 init|=
 operator|new
-name|HashMap
+name|IdentityHashMap
 argument_list|<
 name|ParameterExpression
 argument_list|,
@@ -1638,7 +1650,7 @@ argument_list|>
 name|map
 init|=
 operator|new
-name|HashMap
+name|IdentityHashMap
 argument_list|<
 name|ParameterExpression
 argument_list|,
