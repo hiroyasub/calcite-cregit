@@ -39,6 +39,20 @@ name|Type
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|concurrent
+operator|.
+name|atomic
+operator|.
+name|AtomicInteger
+import|;
+end_import
+
 begin_comment
 comment|/**  * Represents a named parameter expression.  */
 end_comment
@@ -52,10 +66,13 @@ name|Expression
 block|{
 specifier|private
 specifier|static
-name|int
-name|seq
+specifier|final
+name|AtomicInteger
+name|SEQ
 init|=
-literal|0
+operator|new
+name|AtomicInteger
+argument_list|()
 decl_stmt|;
 specifier|public
 specifier|final
@@ -82,8 +99,10 @@ name|type
 argument_list|,
 literal|"p"
 operator|+
-name|seq
-operator|++
+name|SEQ
+operator|.
+name|getAndIncrement
+argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
