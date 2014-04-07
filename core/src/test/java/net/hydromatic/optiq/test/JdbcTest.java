@@ -10640,6 +10640,50 @@ literal|""
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Tests derived return type of user-defined function. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUdfDerivedReturnType
+parameter_list|()
+block|{
+specifier|final
+name|OptiqAssert
+operator|.
+name|AssertThat
+name|with
+init|=
+name|withUdf
+argument_list|()
+decl_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select max(\"adhoc\".my_double(\"deptno\")) as p from \"adhoc\".EMPLOYEES"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"P=40\n"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select max(\"adhoc\".my_str(\"name\")) as p from \"adhoc\".EMPLOYEES\n"
+operator|+
+literal|"where \"adhoc\".my_str(\"name\") is null"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"P=null\n"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Test for {@link EigenbaseNewResource#requireDefaultConstructor(String)}. */
 annotation|@
 name|Test

@@ -772,7 +772,7 @@ block|{
 name|fun
 operator|=
 operator|new
-name|SqlFunction
+name|SqlUnresolvedFunction
 argument_list|(
 name|funName
 argument_list|,

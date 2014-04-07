@@ -3825,35 +3825,30 @@ operator|.
 name|getOperator
 argument_list|()
 operator|instanceof
-name|SqlFunction
+name|SqlUnresolvedFunction
 condition|)
 block|{
-name|SqlFunction
+assert|assert
+name|call
+operator|instanceof
+name|SqlBasicCall
+assert|;
+specifier|final
+name|SqlUnresolvedFunction
 name|function
 init|=
 operator|(
-name|SqlFunction
+name|SqlUnresolvedFunction
 operator|)
 name|call
 operator|.
 name|getOperator
 argument_list|()
 decl_stmt|;
-if|if
-condition|(
-name|function
-operator|.
-name|getFunctionType
-argument_list|()
-operator|==
-literal|null
-condition|)
-block|{
 comment|// This function hasn't been resolved yet.  Perform
 comment|// a half-hearted resolution now in case it's a
 comment|// builtin function requiring special casing.  If it's
-comment|// not, we'll handle it later during overload
-comment|// resolution.
+comment|// not, we'll handle it later during overload resolution.
 specifier|final
 name|List
 argument_list|<
@@ -3875,7 +3870,10 @@ operator|.
 name|getNameAsId
 argument_list|()
 argument_list|,
-literal|null
+name|function
+operator|.
+name|getFunctionType
+argument_list|()
 argument_list|,
 name|SqlSyntax
 operator|.
@@ -3911,7 +3909,6 @@ literal|0
 argument_list|)
 argument_list|)
 expr_stmt|;
-block|}
 block|}
 block|}
 if|if
