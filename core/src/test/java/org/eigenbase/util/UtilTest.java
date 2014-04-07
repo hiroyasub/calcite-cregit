@@ -3024,18 +3024,23 @@ name|testCompositeList
 parameter_list|()
 block|{
 comment|// Made up of zero lists
-name|CompositeList
+comment|//noinspection unchecked
+name|List
 argument_list|<
 name|String
 argument_list|>
 name|list
 init|=
-operator|new
 name|CompositeList
-argument_list|<
-name|String
-argument_list|>
-argument_list|()
+operator|.
+name|of
+argument_list|(
+operator|new
+name|List
+index|[
+literal|0
+index|]
+argument_list|)
 decl_stmt|;
 name|assertEquals
 argument_list|(
@@ -3136,14 +3141,12 @@ name|String
 argument_list|>
 argument_list|()
 decl_stmt|;
-comment|// Made up of two lists, two of which are empty
+comment|// Made up of three lists, two of which are empty
 name|list
 operator|=
-operator|new
 name|CompositeList
-argument_list|<
-name|String
-argument_list|>
+operator|.
+name|of
 argument_list|(
 name|listEmpty
 argument_list|,

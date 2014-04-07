@@ -603,7 +603,6 @@ name|RelDataType
 name|deriveRowType
 parameter_list|()
 block|{
-comment|//noinspection unchecked
 return|return
 name|getCluster
 argument_list|()
