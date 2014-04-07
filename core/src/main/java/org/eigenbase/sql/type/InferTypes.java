@@ -17,6 +17,16 @@ end_package
 
 begin_import
 import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|eigenbase
@@ -60,6 +70,20 @@ operator|.
 name|sql
 operator|.
 name|SqlNode
+import|;
+end_import
+
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|ImmutableList
 import|;
 end_import
 
@@ -411,6 +435,32 @@ block|}
 block|}
 block|}
 decl_stmt|;
+comment|/** Returns an {@link SqlOperandTypeInference} that returns a given list of    * types. */
+specifier|public
+specifier|static
+name|SqlOperandTypeInference
+name|explicit
+parameter_list|(
+name|List
+argument_list|<
+name|RelDataType
+argument_list|>
+name|types
+parameter_list|)
+block|{
+return|return
+operator|new
+name|ExplicitOperandTypeInference
+argument_list|(
+name|ImmutableList
+operator|.
+name|copyOf
+argument_list|(
+name|types
+argument_list|)
+argument_list|)
+return|;
+block|}
 block|}
 end_class
 

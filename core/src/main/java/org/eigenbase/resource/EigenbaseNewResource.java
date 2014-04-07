@@ -2451,8 +2451,57 @@ name|String
 name|s
 parameter_list|)
 function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
+literal|"Declaring class ''{0}'' of non-static user-defined function must have a public constructor with zero parameters"
+argument_list|)
+name|ExInst
+argument_list|<
+name|RuntimeException
+argument_list|>
+name|requireDefaultConstructor
+parameter_list|(
+name|String
+name|className
+parameter_list|)
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
+literal|"In user-defined aggregate class ''{0}'', first parameter to ''add'' method must be the accumulator (the return type of the ''init'' method)"
+argument_list|)
+name|ExInst
+argument_list|<
+name|RuntimeException
+argument_list|>
+name|firstParameterOfAdd
+parameter_list|(
+name|String
+name|className
+parameter_list|)
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
+literal|"In user-defined aggregate class ''{0}'', parameter types of ''initAdd'' method must be same as value type(s)"
+argument_list|)
+name|ExInst
+argument_list|<
+name|RuntimeException
+argument_list|>
+name|initAddWrongParamTypes
+parameter_list|(
+name|String
+name|className
+parameter_list|)
+function_decl|;
 block|}
 end_interface
+
+begin_comment
+comment|// End EigenbaseNewResource.java
+end_comment
 
 end_unit
 

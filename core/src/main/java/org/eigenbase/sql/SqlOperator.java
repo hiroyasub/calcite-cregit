@@ -1422,9 +1422,7 @@ name|isAggregator
 parameter_list|()
 block|{
 return|return
-name|this
-operator|instanceof
-name|SqlAggFunction
+literal|false
 return|;
 block|}
 comment|/**    * Accepts a {@link SqlVisitor}, visiting each operand of a call. Returns    * null.    *    * @param visitor Visitor    * @param call    Call to visit    */

@@ -107,6 +107,17 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
+specifier|public
+name|boolean
+name|isAggregator
+parameter_list|()
+block|{
+return|return
+literal|true
+return|;
+block|}
 specifier|public
 name|boolean
 name|isQuantifierAllowed

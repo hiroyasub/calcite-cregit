@@ -17,16 +17,6 @@ end_package
 
 begin_import
 import|import
-name|java
-operator|.
-name|util
-operator|.
-name|List
-import|;
-end_import
-
-begin_import
-import|import
 name|org
 operator|.
 name|eigenbase
@@ -84,10 +74,10 @@ argument_list|>
 name|paramTypes
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-specifier|public
+comment|/** Use {@link org.eigenbase.sql.type.InferTypes#explicit(List)}. */
 name|ExplicitOperandTypeInference
 parameter_list|(
-name|List
+name|ImmutableList
 argument_list|<
 name|RelDataType
 argument_list|>
@@ -98,12 +88,7 @@ name|this
 operator|.
 name|paramTypes
 operator|=
-name|ImmutableList
-operator|.
-name|copyOf
-argument_list|(
 name|paramTypes
-argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------

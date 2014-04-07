@@ -11611,6 +11611,51 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testSumInvalidArgs
+parameter_list|()
+block|{
+name|checkFails
+argument_list|(
+literal|"select ^sum(ename)^, deptno from emp group by deptno"
+argument_list|,
+literal|"(?s)Cannot apply 'SUM' to arguments of type 'SUM\\(<VARCHAR\\(20\\)>\\)'\\. .*"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSumTooManyArgs
+parameter_list|()
+block|{
+name|checkFails
+argument_list|(
+literal|"select ^sum(empno, deptno)^, deptno from emp group by deptno"
+argument_list|,
+literal|"Invalid number of arguments to function 'SUM'. Was expecting 1 arguments"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSumTooFewArgs
+parameter_list|()
+block|{
+name|checkFails
+argument_list|(
+literal|"select ^sum()^, deptno from emp group by deptno"
+argument_list|,
+literal|"Invalid number of arguments to function 'SUM'. Was expecting 1 arguments"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testSingleNoAlias
 parameter_list|()
 block|{

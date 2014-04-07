@@ -341,6 +341,18 @@ name|org
 operator|.
 name|eigenbase
 operator|.
+name|resource
+operator|.
+name|EigenbaseNewResource
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
 name|sql
 operator|.
 name|*
@@ -868,9 +880,9 @@ specifier|final
 name|TableMacro
 name|tableMacro
 init|=
-name|Schemas
+name|TableMacroImpl
 operator|.
-name|methodMember
+name|create
 argument_list|(
 name|GENERATE_STRINGS_METHOD
 argument_list|)
@@ -977,9 +989,9 @@ specifier|final
 name|TableMacro
 name|tableMacro
 init|=
-name|Schemas
+name|TableMacroImpl
 operator|.
-name|methodMember
+name|create
 argument_list|(
 name|VIEW_METHOD
 argument_list|)
@@ -10489,7 +10501,7 @@ literal|"P=20\n"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Tests user-defined function. */
+comment|/** Test for {@link EigenbaseNewResource#requireDefaultConstructor(String)}. */
 annotation|@
 name|Test
 specifier|public
@@ -10499,6 +10511,68 @@ parameter_list|()
 throws|throws
 name|Exception
 block|{
+name|withBadUdf
+argument_list|(
+name|AwkwardFunction
+operator|.
+name|class
+argument_list|)
+operator|.
+name|connectThrows
+argument_list|(
+literal|"Declaring class 'net.hydromatic.optiq.test.JdbcTest$AwkwardFunction' of non-static user-defined function must have a public constructor with zero parameters"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests user-defined aggregate function. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUserDefinedAggregateFunction
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|String
+name|empDept
+init|=
+name|EmpDeptTableFactory
+operator|.
+name|class
+operator|.
+name|getName
+argument_list|()
+decl_stmt|;
+specifier|final
+name|String
+name|sum
+init|=
+name|MyStaticSumFunction
+operator|.
+name|class
+operator|.
+name|getName
+argument_list|()
+decl_stmt|;
+specifier|final
+name|String
+name|sum2
+init|=
+name|MySumFunction
+operator|.
+name|class
+operator|.
+name|getName
+argument_list|()
+decl_stmt|;
+specifier|final
+name|OptiqAssert
+operator|.
+name|AssertThat
+name|with
+init|=
 name|OptiqAssert
 operator|.
 name|that
@@ -10516,20 +10590,47 @@ literal|"     {\n"
 operator|+
 literal|"       name: 'adhoc',\n"
 operator|+
+literal|"       tables: [\n"
+operator|+
+literal|"         {\n"
+operator|+
+literal|"           name: 'EMPLOYEES',\n"
+operator|+
+literal|"           type: 'custom',\n"
+operator|+
+literal|"           factory: '"
+operator|+
+name|empDept
+operator|+
+literal|"',\n"
+operator|+
+literal|"           operand: {'foo': true, 'bar': 345}\n"
+operator|+
+literal|"         }\n"
+operator|+
+literal|"       ],\n"
+operator|+
 literal|"       functions: [\n"
 operator|+
 literal|"         {\n"
 operator|+
-literal|"           name: 'AWKWARD',\n"
+literal|"           name: 'MY_SUM',\n"
 operator|+
 literal|"           className: '"
 operator|+
-name|AwkwardFunction
-operator|.
-name|class
-operator|.
-name|getName
-argument_list|()
+name|sum
+operator|+
+literal|"'\n"
+operator|+
+literal|"         },\n"
+operator|+
+literal|"         {\n"
+operator|+
+literal|"           name: 'MY_SUM2',\n"
+operator|+
+literal|"           className: '"
+operator|+
+name|sum2
 operator|+
 literal|"'\n"
 operator|+
@@ -10544,13 +10645,258 @@ operator|+
 literal|"}"
 argument_list|)
 operator|.
-name|connectThrows
+name|withSchema
 argument_list|(
-literal|"declaring class 'net.hydromatic.optiq.test.JdbcTest$AwkwardFunction' of non-static UDF must have a public constructor with zero parameters"
+literal|"adhoc"
+argument_list|)
+decl_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select my_sum(\"empid\"), \"deptno\" as p from EMPLOYEES\n"
+argument_list|)
+operator|.
+name|throws_
+argument_list|(
+literal|"Expression 'deptno' is not being grouped"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select my_sum(\"deptno\") as p from EMPLOYEES\n"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"P=50\n"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select my_sum(\"name\") as p from EMPLOYEES\n"
+argument_list|)
+operator|.
+name|throws_
+argument_list|(
+literal|"Cannot apply 'MY_SUM' to arguments of type 'MY_SUM(<JAVATYPE(CLASS JAVA.LANG.STRING)>)'. Supported form(s): 'MY_SUM(<NUMERIC>)"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select my_sum(\"deptno\", 1) as p from EMPLOYEES\n"
+argument_list|)
+operator|.
+name|throws_
+argument_list|(
+literal|"Invalid number of arguments to function 'MY_SUM'. Was expecting 1 arguments"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select my_sum() as p from EMPLOYEES\n"
+argument_list|)
+operator|.
+name|throws_
+argument_list|(
+literal|"Invalid number of arguments to function 'MY_SUM'. Was expecting 1 arguments"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select \"deptno\", my_sum(\"deptno\") as p from EMPLOYEES\n"
+operator|+
+literal|"group by \"deptno\""
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"deptno=20; P=20"
+argument_list|,
+literal|"deptno=10; P=30"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select \"deptno\", my_sum2(\"deptno\") as p from EMPLOYEES\n"
+operator|+
+literal|"group by \"deptno\""
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"deptno=20; P=20"
+argument_list|,
+literal|"deptno=10; P=30"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Tests user-defined function. */
+comment|/** Test for {@link EigenbaseNewResource#initAddWrongParamTypes(String)}. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUserDefinedAggregateFunction2
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+name|Util
+operator|.
+name|discard
+argument_list|(
+name|EigenbaseNewResource
+operator|.
+name|class
+argument_list|)
+expr_stmt|;
+name|withBadUdf
+argument_list|(
+name|SumFunctionBadInitAdd
+operator|.
+name|class
+argument_list|)
+operator|.
+name|connectThrows
+argument_list|(
+literal|"In user-defined aggregate class 'net.hydromatic.optiq.test.JdbcTest$SumFunctionBadInitAdd', parameter types of 'initAdd' method must be same as value type(s)"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Test for {@link EigenbaseNewResource#firstParameterOfAdd(String)}. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUserDefinedAggregateFunction3
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+name|withBadUdf
+argument_list|(
+name|SumFunctionBadIAdd
+operator|.
+name|class
+argument_list|)
+operator|.
+name|connectThrows
+argument_list|(
+literal|"Caused by: java.lang.RuntimeException: In user-defined aggregate class 'net.hydromatic.optiq.test.JdbcTest$SumFunctionBadIAdd', first parameter to 'add' method must be the accumulator (the return type of the 'init' method)"
+argument_list|)
+expr_stmt|;
+block|}
+specifier|private
+specifier|static
+name|OptiqAssert
+operator|.
+name|AssertThat
+name|withBadUdf
+parameter_list|(
+name|Class
+name|clazz
+parameter_list|)
+block|{
+specifier|final
+name|String
+name|empDept
+init|=
+name|EmpDeptTableFactory
+operator|.
+name|class
+operator|.
+name|getName
+argument_list|()
+decl_stmt|;
+specifier|final
+name|String
+name|className
+init|=
+name|clazz
+operator|.
+name|getName
+argument_list|()
+decl_stmt|;
+return|return
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|withModel
+argument_list|(
+literal|"{\n"
+operator|+
+literal|"  version: '1.0',\n"
+operator|+
+literal|"   schemas: [\n"
+operator|+
+literal|"     {\n"
+operator|+
+literal|"       name: 'adhoc',\n"
+operator|+
+literal|"       tables: [\n"
+operator|+
+literal|"         {\n"
+operator|+
+literal|"           name: 'EMPLOYEES',\n"
+operator|+
+literal|"           type: 'custom',\n"
+operator|+
+literal|"           factory: '"
+operator|+
+name|empDept
+operator|+
+literal|"',\n"
+operator|+
+literal|"           operand: {'foo': true, 'bar': 345}\n"
+operator|+
+literal|"         }\n"
+operator|+
+literal|"       ],\n"
+operator|+
+literal|"       functions: [\n"
+operator|+
+literal|"         {\n"
+operator|+
+literal|"           name: 'AWKWARD',\n"
+operator|+
+literal|"           className: '"
+operator|+
+name|className
+operator|+
+literal|"'\n"
+operator|+
+literal|"         }\n"
+operator|+
+literal|"       ]\n"
+operator|+
+literal|"     }\n"
+operator|+
+literal|"   ]\n"
+operator|+
+literal|"}"
+argument_list|)
+operator|.
+name|withSchema
+argument_list|(
+literal|"adhoc"
+argument_list|)
+return|;
+block|}
+comment|/** Tests resolution of functions using schema paths. */
 annotation|@
 name|Test
 specifier|public
@@ -15115,7 +15461,7 @@ argument_list|()
 block|}
 decl_stmt|;
 block|}
-comment|/** Example of a UDF with a nontatic {@code eval} method. */
+comment|/** Example of a UDF with a non-static {@code eval} method. */
 specifier|public
 specifier|static
 class|class
@@ -15189,6 +15535,240 @@ parameter_list|)
 block|{
 return|return
 literal|0
+return|;
+block|}
+block|}
+comment|/** Example of a user-defined aggregate function (UDAF). */
+specifier|public
+specifier|static
+class|class
+name|MySumFunction
+block|{
+specifier|public
+name|MySumFunction
+parameter_list|()
+block|{
+block|}
+specifier|public
+name|long
+name|init
+parameter_list|()
+block|{
+return|return
+literal|0L
+return|;
+block|}
+specifier|public
+name|long
+name|initAdd
+parameter_list|(
+name|int
+name|v
+parameter_list|)
+block|{
+return|return
+name|v
+return|;
+block|}
+specifier|public
+name|long
+name|add
+parameter_list|(
+name|long
+name|accumulator
+parameter_list|,
+name|int
+name|v
+parameter_list|)
+block|{
+return|return
+name|accumulator
+operator|+
+name|v
+return|;
+block|}
+specifier|public
+name|long
+name|merge
+parameter_list|(
+name|long
+name|accumulator0
+parameter_list|,
+name|long
+name|accumulator1
+parameter_list|)
+block|{
+return|return
+name|accumulator0
+operator|+
+name|accumulator1
+return|;
+block|}
+specifier|public
+name|long
+name|result
+parameter_list|(
+name|long
+name|accumulator
+parameter_list|)
+block|{
+return|return
+name|accumulator
+return|;
+block|}
+block|}
+comment|/** Example of a user-defined aggregate function (UDAF), whose methods are    * static. */
+specifier|public
+specifier|static
+class|class
+name|MyStaticSumFunction
+block|{
+specifier|public
+specifier|static
+name|long
+name|init
+parameter_list|()
+block|{
+return|return
+literal|0L
+return|;
+block|}
+specifier|public
+specifier|static
+name|long
+name|initAdd
+parameter_list|(
+name|int
+name|v
+parameter_list|)
+block|{
+return|return
+name|v
+return|;
+block|}
+specifier|public
+specifier|static
+name|long
+name|add
+parameter_list|(
+name|long
+name|accumulator
+parameter_list|,
+name|int
+name|v
+parameter_list|)
+block|{
+return|return
+name|accumulator
+operator|+
+name|v
+return|;
+block|}
+specifier|public
+specifier|static
+name|long
+name|merge
+parameter_list|(
+name|long
+name|accumulator0
+parameter_list|,
+name|long
+name|accumulator1
+parameter_list|)
+block|{
+return|return
+name|accumulator0
+operator|+
+name|accumulator1
+return|;
+block|}
+specifier|public
+specifier|static
+name|long
+name|result
+parameter_list|(
+name|long
+name|accumulator
+parameter_list|)
+block|{
+return|return
+name|accumulator
+return|;
+block|}
+block|}
+specifier|public
+specifier|static
+class|class
+name|SumFunctionBadInitAdd
+block|{
+specifier|public
+name|long
+name|init
+parameter_list|()
+block|{
+return|return
+literal|0L
+return|;
+block|}
+specifier|public
+name|long
+name|initAdd
+parameter_list|(
+name|int
+name|v
+parameter_list|)
+block|{
+return|return
+name|v
+return|;
+block|}
+specifier|public
+name|long
+name|add
+parameter_list|(
+name|long
+name|accumulator
+parameter_list|,
+name|long
+name|v
+parameter_list|)
+block|{
+return|return
+name|accumulator
+operator|+
+name|v
+return|;
+block|}
+block|}
+specifier|public
+specifier|static
+class|class
+name|SumFunctionBadIAdd
+block|{
+specifier|public
+name|long
+name|init
+parameter_list|()
+block|{
+return|return
+literal|0L
+return|;
+block|}
+specifier|public
+name|long
+name|add
+parameter_list|(
+name|short
+name|accumulator
+parameter_list|,
+name|int
+name|v
+parameter_list|)
+block|{
+return|return
+name|accumulator
+operator|+
+name|v
 return|;
 block|}
 block|}

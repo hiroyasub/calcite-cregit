@@ -425,6 +425,21 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testAggregateNoGroup
+parameter_list|()
+block|{
+name|check
+argument_list|(
+literal|"select sum(deptno) from emp"
+argument_list|,
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testHaving
 parameter_list|()
 block|{

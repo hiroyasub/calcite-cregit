@@ -1907,6 +1907,13 @@ argument_list|,
 name|typeFactory
 argument_list|)
 decl_stmt|;
+name|validator
+operator|.
+name|setIdentifierExpansion
+argument_list|(
+literal|true
+argument_list|)
+expr_stmt|;
 specifier|final
 name|List
 argument_list|<
