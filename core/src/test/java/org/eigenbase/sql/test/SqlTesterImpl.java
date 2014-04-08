@@ -2278,6 +2278,23 @@ operator|+
 literal|")"
 return|;
 block|}
+specifier|public
+specifier|static
+name|String
+name|buildQueryAgg
+parameter_list|(
+name|String
+name|expression
+parameter_list|)
+block|{
+return|return
+literal|"select "
+operator|+
+name|expression
+operator|+
+literal|" from (values (1)) as t(x) group by x"
+return|;
+block|}
 comment|/**    * Builds a query that extracts all literals as columns in an underlying    * select.    *    *<p>For example,</p>    *    *<blockquote>{@code 1< 5}</blockquote>    *    *<p>becomes</p>    *    *<blockquote>{@code SELECT p0< p1    * FROM (VALUES (1, 5)) AS t(p0, p1)}</blockquote>    *    *<p>Null literals don't have enough type information to be extracted.    * We push down {@code CAST(NULL AS type)} but raw nulls such as    * {@code CASE 1 WHEN 2 THEN 'a' ELSE NULL END} are left as is.</p>    *    * @param expression Scalar expression    * @return Query that evaluates a scalar expression    */
 specifier|private
 name|String

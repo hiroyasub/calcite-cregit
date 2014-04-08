@@ -13970,6 +13970,42 @@ argument_list|,
 literal|"Expression 'EMPNO' is not being grouped"
 argument_list|)
 expr_stmt|;
+name|checkColumnType
+argument_list|(
+literal|"select count(*) from emp"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|checkColumnType
+argument_list|(
+literal|"select count(deptno) from emp"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+comment|// Even though deptno is not null, its sum may be, because emp may be empty.
+name|checkColumnType
+argument_list|(
+literal|"select sum(deptno) from emp"
+argument_list|,
+literal|"INTEGER"
+argument_list|)
+expr_stmt|;
+name|checkColumnType
+argument_list|(
+literal|"select sum(deptno) from emp group by ()"
+argument_list|,
+literal|"INTEGER"
+argument_list|)
+expr_stmt|;
+name|checkColumnType
+argument_list|(
+literal|"select sum(deptno) from emp group by empno"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
 block|}
 annotation|@
 name|Test

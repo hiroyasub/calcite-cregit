@@ -120,6 +120,17 @@ name|sqlOperator
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+comment|/**    * If the operator call occurs in an aggregate query, returns the number of    * columns in the GROUP BY clause. For example, for "SELECT count(*) FROM emp    * GROUP BY deptno, gender", returns 2.    *    *<p>Returns 0 if the query is implicitly "GROUP BY ()" because of an    * aggregate expression. For example, "SELECT sum(sal) FROM emp".</p>    *    *<p>Returns -1 if the query is not an aggregate query.</p>    */
+specifier|public
+name|int
+name|getGroupCount
+parameter_list|()
+block|{
+return|return
+operator|-
+literal|1
+return|;
+block|}
 comment|/**    * @return bound operator    */
 specifier|public
 name|SqlOperator

@@ -124,7 +124,7 @@ name|OTHER_FUNCTION
 argument_list|,
 name|ReturnTypes
 operator|.
-name|ARG0
+name|ARG0_NULLABLE_IF_EMPTY
 argument_list|,
 literal|null
 argument_list|,

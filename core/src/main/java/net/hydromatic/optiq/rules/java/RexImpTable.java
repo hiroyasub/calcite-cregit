@@ -1443,17 +1443,6 @@ name|aggMap
 operator|.
 name|put
 argument_list|(
-name|SUM
-argument_list|,
-operator|new
-name|SumImplementor
-argument_list|()
-argument_list|)
-expr_stmt|;
-name|aggMap
-operator|.
-name|put
-argument_list|(
 name|SUM0
 argument_list|,
 operator|new

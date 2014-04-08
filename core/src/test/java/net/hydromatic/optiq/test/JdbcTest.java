@@ -8116,6 +8116,51 @@ literal|".distinct("
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Tests that SUM and AVG over empty set return null. COUNT returns 0. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAggregateEmpty
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select\n"
+operator|+
+literal|" count(*) as cs,\n"
+operator|+
+literal|" count(\"deptno\") as c,\n"
+operator|+
+literal|" sum(\"deptno\") as s,\n"
+operator|+
+literal|" avg(\"deptno\") as a\n"
+operator|+
+literal|"from \"hr\".\"emps\"\n"
+operator|+
+literal|"where \"deptno\"< 0"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"CS=0; C=0; S=null; A=null\n"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Tests sorting by a column that is already sorted. */
 annotation|@
 name|Test

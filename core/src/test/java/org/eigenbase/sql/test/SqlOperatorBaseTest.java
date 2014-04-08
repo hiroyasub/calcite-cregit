@@ -16874,28 +16874,28 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
-operator|.
-name|checkType
+name|checkAggType
 argument_list|(
+name|tester
+argument_list|,
 literal|"sum(1)"
 argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
-operator|.
-name|checkType
+name|checkAggType
 argument_list|(
+name|tester
+argument_list|,
 literal|"sum(1.2)"
 argument_list|,
 literal|"DECIMAL(2, 1) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
-operator|.
-name|checkType
+name|checkAggType
 argument_list|(
+name|tester
+argument_list|,
 literal|"sum(DISTINCT 1.5)"
 argument_list|,
 literal|"DECIMAL(2, 1) NOT NULL"
@@ -17034,6 +17034,36 @@ literal|0
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Very similar to {@code tester.checkType}, but generates inside a SELECT    * with a non-empty GROUP BY. Aggregate functions may be nullable if executed    * in a SELECT with an empty GROUP BY.    *    *<p>Viz: {@code SELECT sum(1) FROM emp} has type "INTEGER",    * {@code SELECT sum(1) FROM emp GROUP BY deptno} has type "INTEGER NOT NULL",    */
+specifier|protected
+name|void
+name|checkAggType
+parameter_list|(
+name|SqlTester
+name|tester
+parameter_list|,
+name|String
+name|expr
+parameter_list|,
+name|String
+name|type
+parameter_list|)
+block|{
+name|tester
+operator|.
+name|checkColumnType
+argument_list|(
+name|SqlTesterImpl
+operator|.
+name|buildQueryAgg
+argument_list|(
+name|expr
+argument_list|)
+argument_list|,
+name|type
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public
@@ -17083,11 +17113,38 @@ argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
-name|tester
-operator|.
-name|checkType
+name|checkAggType
 argument_list|(
+name|tester
+argument_list|,
 literal|"AVG(DISTINCT 1.5)"
+argument_list|,
+literal|"DECIMAL(2, 1) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|checkAggType
+argument_list|(
+name|tester
+argument_list|,
+literal|"avg(1)"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+name|checkAggType
+argument_list|(
+name|tester
+argument_list|,
+literal|"avg(1.2)"
+argument_list|,
+literal|"DECIMAL(2, 1) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|checkAggType
+argument_list|(
+name|tester
+argument_list|,
+literal|"avg(DISTINCT 1.5)"
 argument_list|,
 literal|"DECIMAL(2, 1) NOT NULL"
 argument_list|)
@@ -17210,10 +17267,10 @@ argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
-name|tester
-operator|.
-name|checkType
+name|checkAggType
 argument_list|(
+name|tester
+argument_list|,
 literal|"stddev_pop(DISTINCT 1.5)"
 argument_list|,
 literal|"DECIMAL(2, 1) NOT NULL"
@@ -17369,10 +17426,10 @@ argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
-name|tester
-operator|.
-name|checkType
+name|checkAggType
 argument_list|(
+name|tester
+argument_list|,
 literal|"stddev_samp(DISTINCT 1.5)"
 argument_list|,
 literal|"DECIMAL(2, 1) NOT NULL"
@@ -17528,10 +17585,10 @@ argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
-name|tester
-operator|.
-name|checkType
+name|checkAggType
 argument_list|(
+name|tester
+argument_list|,
 literal|"var_pop(DISTINCT 1.5)"
 argument_list|,
 literal|"DECIMAL(2, 1) NOT NULL"
@@ -17687,10 +17744,10 @@ argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
-name|tester
-operator|.
-name|checkType
+name|checkAggType
 argument_list|(
+name|tester
+argument_list|,
 literal|"var_samp(DISTINCT 1.5)"
 argument_list|,
 literal|"DECIMAL(2, 1) NOT NULL"
