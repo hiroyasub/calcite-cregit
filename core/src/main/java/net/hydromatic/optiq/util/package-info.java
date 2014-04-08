@@ -9,9 +9,11 @@ end_comment
 
 begin_package
 package|package
-name|org
+name|net
 operator|.
-name|eigenbase
+name|hydromatic
+operator|.
+name|optiq
 operator|.
 name|util
 package|;
