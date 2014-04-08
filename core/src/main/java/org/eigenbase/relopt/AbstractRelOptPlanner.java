@@ -746,6 +746,19 @@ return|return
 name|executor
 return|;
 block|}
+specifier|public
+name|void
+name|onCopy
+parameter_list|(
+name|RelNode
+name|rel
+parameter_list|,
+name|RelNode
+name|newRel
+parameter_list|)
+block|{
+comment|// do nothing
+block|}
 comment|/**    * Fires a rule, taking care of tracing and listener notification.    *    * @param ruleCall description of rule call    */
 specifier|protected
 name|void

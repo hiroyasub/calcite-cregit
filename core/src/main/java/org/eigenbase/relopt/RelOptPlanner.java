@@ -354,6 +354,17 @@ name|Executor
 name|getExecutor
 parameter_list|()
 function_decl|;
+comment|/** Called when a relational expression is copied to a similar expression. */
+name|void
+name|onCopy
+parameter_list|(
+name|RelNode
+name|rel
+parameter_list|,
+name|RelNode
+name|newRel
+parameter_list|)
+function_decl|;
 comment|/** Can reduce expressions, writing a literal for each into a list. */
 interface|interface
 name|Executor
