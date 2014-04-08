@@ -374,6 +374,14 @@ name|SqlTypeName
 operator|.
 name|VARBINARY
 return|;
+case|case
+name|ANY
+case|:
+return|return
+name|SqlTypeName
+operator|.
+name|ANY
+return|;
 default|default:
 throw|throw
 name|Util
