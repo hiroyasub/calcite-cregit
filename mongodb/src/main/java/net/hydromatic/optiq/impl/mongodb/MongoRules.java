@@ -645,6 +645,20 @@ name|RexLiteral
 name|literal
 parameter_list|)
 block|{
+if|if
+condition|(
+name|literal
+operator|.
+name|getValue
+argument_list|()
+operator|==
+literal|null
+condition|)
+block|{
+return|return
+literal|"null"
+return|;
+block|}
 return|return
 literal|"{$ifNull: [null, "
 operator|+
