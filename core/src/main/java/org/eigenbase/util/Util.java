@@ -7173,7 +7173,7 @@ specifier|static
 class|class
 name|FoundOne
 extends|extends
-name|RuntimeException
+name|ControlFlowException
 block|{
 specifier|private
 specifier|final
@@ -7214,18 +7214,6 @@ parameter_list|()
 block|{
 return|return
 name|node
-return|;
-block|}
-annotation|@
-name|Override
-specifier|public
-specifier|synchronized
-name|Throwable
-name|fillInStackTrace
-parameter_list|()
-block|{
-return|return
-name|this
 return|;
 block|}
 block|}

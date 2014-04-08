@@ -1431,6 +1431,9 @@ assert|assert
 operator|!
 name|fail
 assert|;
+return|return
+literal|true
+return|;
 block|}
 block|}
 return|return
@@ -3825,7 +3828,7 @@ specifier|static
 class|class
 name|SubExprExistsException
 extends|extends
-name|RuntimeException
+name|ControlFlowException
 block|{
 name|SubExprExistsException
 parameter_list|(
@@ -3977,7 +3980,7 @@ specifier|static
 class|class
 name|IllegalForwardRefException
 extends|extends
-name|RuntimeException
+name|ControlFlowException
 block|{     }
 block|}
 comment|/**    * Visitor which builds a bitmap of the inputs used by an expression.    */

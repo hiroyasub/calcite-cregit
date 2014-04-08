@@ -390,7 +390,7 @@ specifier|static
 class|class
 name|OverFound
 extends|extends
-name|RuntimeException
+name|ControlFlowException
 block|{
 specifier|public
 specifier|static

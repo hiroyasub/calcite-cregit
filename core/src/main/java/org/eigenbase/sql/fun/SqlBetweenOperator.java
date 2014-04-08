@@ -1017,9 +1017,11 @@ name|AND
 condition|)
 block|{
 throw|throw
-operator|new
-name|Found
-argument_list|()
+name|Util
+operator|.
+name|FoundOne
+operator|.
+name|NULL
 throw|;
 block|}
 return|return
@@ -1053,9 +1055,9 @@ return|;
 block|}
 catch|catch
 parameter_list|(
-name|AndFinder
+name|Util
 operator|.
-name|Found
+name|FoundOne
 name|e
 parameter_list|)
 block|{
@@ -1064,13 +1066,6 @@ literal|true
 return|;
 block|}
 block|}
-specifier|private
-specifier|static
-class|class
-name|Found
-extends|extends
-name|RuntimeException
-block|{     }
 block|}
 block|}
 end_class
