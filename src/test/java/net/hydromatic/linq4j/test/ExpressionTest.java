@@ -4499,6 +4499,10 @@ literal|"if (true) {\n"
 operator|+
 literal|"  return;\n"
 operator|+
+literal|"} else {\n"
+operator|+
+literal|"  return 1;\n"
+operator|+
 literal|"}\n"
 argument_list|,
 name|Expressions
@@ -4507,7 +4511,7 @@ name|toString
 argument_list|(
 name|Expressions
 operator|.
-name|ifThen
+name|ifThenElse
 argument_list|(
 name|Expressions
 operator|.
@@ -4521,6 +4525,97 @@ operator|.
 name|return_
 argument_list|(
 literal|null
+argument_list|)
+argument_list|,
+name|Expressions
+operator|.
+name|return_
+argument_list|(
+literal|null
+argument_list|,
+name|Expressions
+operator|.
+name|constant
+argument_list|(
+literal|1
+argument_list|)
+argument_list|)
+argument_list|)
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testIfElseIfElse
+parameter_list|()
+block|{
+name|assertEquals
+argument_list|(
+literal|"if (true) {\n"
+operator|+
+literal|"  return;\n"
+operator|+
+literal|"} else if (false) {\n"
+operator|+
+literal|"  return;\n"
+operator|+
+literal|"} else {\n"
+operator|+
+literal|"  return 1;\n"
+operator|+
+literal|"}\n"
+argument_list|,
+name|Expressions
+operator|.
+name|toString
+argument_list|(
+name|Expressions
+operator|.
+name|ifThenElse
+argument_list|(
+name|Expressions
+operator|.
+name|constant
+argument_list|(
+literal|true
+argument_list|)
+argument_list|,
+name|Expressions
+operator|.
+name|return_
+argument_list|(
+literal|null
+argument_list|)
+argument_list|,
+name|Expressions
+operator|.
+name|constant
+argument_list|(
+literal|false
+argument_list|)
+argument_list|,
+name|Expressions
+operator|.
+name|return_
+argument_list|(
+literal|null
+argument_list|)
+argument_list|,
+name|Expressions
+operator|.
+name|return_
+argument_list|(
+literal|null
+argument_list|,
+name|Expressions
+operator|.
+name|constant
+argument_list|(
+literal|1
+argument_list|)
 argument_list|)
 argument_list|)
 argument_list|)
