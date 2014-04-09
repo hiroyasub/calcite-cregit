@@ -21,32 +21,6 @@ name|net
 operator|.
 name|hydromatic
 operator|.
-name|linq4j
-operator|.
-name|function
-operator|.
-name|Function1
-import|;
-end_import
-
-begin_import
-import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|optiq
-operator|.
-name|Schema
-import|;
-end_import
-
-begin_import
-import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
 name|optiq
 operator|.
 name|SchemaPlus
@@ -78,6 +52,20 @@ operator|.
 name|jdbc
 operator|.
 name|OptiqConnection
+import|;
+end_import
+
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|optiq
+operator|.
+name|jdbc
+operator|.
+name|OptiqSchema
 import|;
 end_import
 
@@ -283,7 +271,7 @@ name|Frameworks
 parameter_list|()
 block|{
 block|}
-comment|/**    * Creates an instance of {@code Planner}.    *    * @param lex The type of lexing the SqlParser should do.  Controls case rules    *     and quoted identifier syntax.    * @param schemaFactory Schema factory. Given a root schema, it creates and    *                      returns the schema that should be used to execute    *                      queries.    * @param operatorTable The instance of SqlOperatorTable that be should to    *     resolve Optiq operators.    * @param ruleSets An array of one or more rule sets used during the course of    *     query evaluation. The common use case is when there is a single rule    *     set and {@link net.hydromatic.optiq.tools.Planner#transform}    *     will only be called once. However, consumers may also register multiple    *     {@link net.hydromatic.optiq.tools.RuleSet}s and do multiple repetitions    *     of {@link Planner#transform} planning cycles using different indices.    *     The order of rule sets provided here determines the zero-based indices    *     of rule sets elsewhere in this class.    * @return The Planner object.    */
+comment|/**    * Creates an instance of {@code Planner}.    *    * @param lex The type of lexing the SqlParser should do.  Controls case rules    *     and quoted identifier syntax.    * @param defaultSchema Default schema. Must not be null.    * @param operatorTable The instance of SqlOperatorTable that be should to    *     resolve Optiq operators.    * @param ruleSets An array of one or more rule sets used during the course of    *     query evaluation. The common use case is when there is a single rule    *     set and {@link net.hydromatic.optiq.tools.Planner#transform}    *     will only be called once. However, consumers may also register multiple    *     {@link net.hydromatic.optiq.tools.RuleSet}s and do multiple repetitions    *     of {@link Planner#transform} planning cycles using different indices.    *     The order of rule sets provided here determines the zero-based indices    *     of rule sets elsewhere in this class.    * @return The Planner object.    */
 specifier|public
 specifier|static
 name|Planner
@@ -292,13 +280,8 @@ parameter_list|(
 name|Lex
 name|lex
 parameter_list|,
-name|Function1
-argument_list|<
 name|SchemaPlus
-argument_list|,
-name|Schema
-argument_list|>
-name|schemaFactory
+name|defaultSchema
 parameter_list|,
 name|SqlOperatorTable
 name|operatorTable
@@ -317,7 +300,7 @@ name|SqlParserImpl
 operator|.
 name|FACTORY
 argument_list|,
-name|schemaFactory
+name|defaultSchema
 argument_list|,
 name|operatorTable
 argument_list|,
@@ -331,7 +314,7 @@ name|ruleSets
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates an instance of {@code Planner}.    *    *<p>If {@code traitDefs} is specified, the planner first de-registers any    * existing {@link RelTraitDef}s, then registers the {@code RelTraitDef}s in    * this list.</p>    *    *<p>The order of {@code RelTraitDef}s in {@code traitDefs} matters if the    * planner is VolcanoPlanner. The planner calls {@link RelTraitDef#convert} in    * the order of this list. The most important trait comes first in the list,    * followed by the second most important one, etc.</p>    *    * @param lex The type of lexing the SqlParser should do.  Controls case rules    *     and quoted identifier syntax.    * @param parserFactory Parser factory creates and returns the SQL parser.    * @param schemaFactory Schema factory. Given a root schema, it creates and    *                      returns the schema that should be used to execute    *                      queries.    * @param operatorTable The instance of SqlOperatorTable that be should to    *     resolve Optiq operators.    * @param ruleSets An array of one or more rule sets used during the course of    *     query evaluation. The common use case is when there is a single rule    *     set and {@link net.hydromatic.optiq.tools.Planner#transform}    *     will only be called once. However, consumers may also register multiple    *     {@link net.hydromatic.optiq.tools.RuleSet}s and do multiple repetitions    *     of {@link Planner#transform} planning cycles using different indices.    *     The order of rule sets provided here determines the zero-based indices    *     of rule sets elsewhere in this class.    *  @param  traitDefs The list of RelTraitDef that would be registered with    *     planner, or null.    * @return The Planner object.    */
+comment|/**    * Creates an instance of {@code Planner}.    *    *<p>If {@code traitDefs} is specified, the planner first de-registers any    * existing {@link RelTraitDef}s, then registers the {@code RelTraitDef}s in    * this list.</p>    *    *<p>The order of {@code RelTraitDef}s in {@code traitDefs} matters if the    * planner is VolcanoPlanner. The planner calls {@link RelTraitDef#convert} in    * the order of this list. The most important trait comes first in the list,    * followed by the second most important one, etc.</p>    *    * @param lex The type of lexing the SqlParser should do.  Controls case rules    *     and quoted identifier syntax.    * @param parserFactory Parser factory creates and returns the SQL parser.    * @param operatorTable The instance of SqlOperatorTable that be should to    *     resolve Optiq operators.    * @param ruleSets An array of one or more rule sets used during the course of    *     query evaluation. The common use case is when there is a single rule    *     set and {@link net.hydromatic.optiq.tools.Planner#transform}    *     will only be called once. However, consumers may also register multiple    *     {@link net.hydromatic.optiq.tools.RuleSet}s and do multiple repetitions    *     of {@link Planner#transform} planning cycles using different indices.    *     The order of rule sets provided here determines the zero-based indices    *     of rule sets elsewhere in this class.    *  @param  traitDefs The list of RelTraitDef that would be registered with    *     planner, or null.    * @return The Planner object.    */
 specifier|public
 specifier|static
 name|Planner
@@ -343,13 +326,8 @@ parameter_list|,
 name|SqlParserImplFactory
 name|parserFactory
 parameter_list|,
-name|Function1
-argument_list|<
 name|SchemaPlus
-argument_list|,
-name|Schema
-argument_list|>
-name|schemaFactory
+name|defaultSchema
 parameter_list|,
 name|SqlOperatorTable
 name|operatorTable
@@ -376,7 +354,7 @@ name|lex
 argument_list|,
 name|parserFactory
 argument_list|,
-name|schemaFactory
+name|defaultSchema
 argument_list|,
 name|operatorTable
 argument_list|,
@@ -605,6 +583,23 @@ name|e
 argument_list|)
 throw|;
 block|}
+block|}
+comment|/**    * Creates a root schema.    */
+specifier|public
+specifier|static
+name|SchemaPlus
+name|createRootSchema
+parameter_list|()
+block|{
+return|return
+name|OptiqSchema
+operator|.
+name|createRootSchema
+argument_list|()
+operator|.
+name|plus
+argument_list|()
+return|;
 block|}
 block|}
 end_class

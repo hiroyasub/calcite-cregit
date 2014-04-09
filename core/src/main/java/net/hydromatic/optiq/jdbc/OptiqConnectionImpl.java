@@ -353,40 +353,20 @@ operator|new
 name|JavaTypeFactoryImpl
 argument_list|()
 expr_stmt|;
-if|if
-condition|(
-name|rootSchema
-operator|==
-literal|null
-condition|)
-block|{
-name|rootSchema
-operator|=
-operator|new
-name|OptiqRootSchema
-argument_list|(
-operator|new
-name|RootSchema
-argument_list|()
-argument_list|)
-expr_stmt|;
-name|rootSchema
-operator|.
-name|add
-argument_list|(
-literal|"metadata"
-argument_list|,
-name|MetadataSchema
-operator|.
-name|INSTANCE
-argument_list|)
-expr_stmt|;
-block|}
 name|this
 operator|.
 name|rootSchema
 operator|=
 name|rootSchema
+operator|!=
+literal|null
+condition|?
+name|rootSchema
+else|:
+name|OptiqSchema
+operator|.
+name|createRootSchema
+argument_list|()
 expr_stmt|;
 name|OptiqConnectionConfig
 name|cfg
@@ -1120,7 +1100,6 @@ expr_stmt|;
 block|}
 block|}
 comment|/** Schema that has no parents. */
-specifier|private
 specifier|static
 class|class
 name|RootSchema
@@ -1233,7 +1212,7 @@ operator|.
 name|rootSchema
 expr_stmt|;
 comment|// Store the time at which the query started executing. The SQL
-comment|// standard says that functions such as CURRENTTIMESTAMP return the
+comment|// standard says that functions such as CURRENT_TIMESTAMP return the
 comment|// same value throughout the query.
 specifier|final
 name|long
