@@ -2327,8 +2327,6 @@ argument_list|,
 operator|new
 name|ReflectiveSchema
 argument_list|(
-literal|"hr"
-argument_list|,
 operator|new
 name|JdbcTest
 operator|.
@@ -2357,8 +2355,6 @@ argument_list|,
 operator|new
 name|ReflectiveSchema
 argument_list|(
-literal|"foodmart"
-argument_list|,
 operator|new
 name|JdbcTest
 operator|.
@@ -2387,8 +2383,6 @@ argument_list|,
 operator|new
 name|ReflectiveSchema
 argument_list|(
-literal|"SALES"
-argument_list|,
 operator|new
 name|JdbcTest
 operator|.
@@ -2799,8 +2793,6 @@ argument_list|,
 operator|new
 name|ReflectiveSchema
 argument_list|(
-name|name
-argument_list|,
 name|schema
 argument_list|)
 argument_list|)

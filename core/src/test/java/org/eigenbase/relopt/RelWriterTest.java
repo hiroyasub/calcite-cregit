@@ -421,8 +421,6 @@ argument_list|,
 operator|new
 name|ReflectiveSchema
 argument_list|(
-literal|"hr"
-argument_list|,
 operator|new
 name|JdbcTest
 operator|.
@@ -676,8 +674,6 @@ argument_list|,
 operator|new
 name|ReflectiveSchema
 argument_list|(
-literal|"hr"
-argument_list|,
 operator|new
 name|JdbcTest
 operator|.

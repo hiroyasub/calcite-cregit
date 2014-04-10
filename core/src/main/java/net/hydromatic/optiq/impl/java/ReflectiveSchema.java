@@ -107,18 +107,6 @@ end_import
 
 begin_import
 import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
-name|util
-operator|.
-name|Bug
-import|;
-end_import
-
-begin_import
-import|import
 name|com
 operator|.
 name|google
@@ -169,33 +157,19 @@ name|Class
 name|clazz
 decl_stmt|;
 specifier|private
-specifier|final
-name|String
-name|name
-decl_stmt|;
-specifier|private
 name|Object
 name|target
 decl_stmt|;
-comment|/**    * Creates a ReflectiveSchema.    *    * @param name Name    * @param target Object whose fields will be sub-objects of the schema    */
+comment|/**    * Creates a ReflectiveSchema.    *    * @param target Object whose fields will be sub-objects of the schema    */
 specifier|public
 name|ReflectiveSchema
 parameter_list|(
-name|String
-name|name
-parameter_list|,
 name|Object
 name|target
 parameter_list|)
 block|{
 name|super
 argument_list|()
-expr_stmt|;
-name|this
-operator|.
-name|name
-operator|=
-name|name
 expr_stmt|;
 name|this
 operator|.
@@ -212,24 +186,6 @@ name|target
 operator|=
 name|target
 expr_stmt|;
-block|}
-specifier|public
-name|String
-name|getName
-parameter_list|()
-block|{
-name|Bug
-operator|.
-name|upgrade
-argument_list|(
-literal|"remove name field and this method when "
-operator|+
-literal|"https://github.com/julianhyde/optiq/issues/214 is fixed"
-argument_list|)
-expr_stmt|;
-return|return
-name|name
-return|;
 block|}
 annotation|@
 name|Override
@@ -1114,8 +1070,6 @@ return|return
 operator|new
 name|ReflectiveSchema
 argument_list|(
-name|name
-argument_list|,
 name|target
 argument_list|)
 return|;

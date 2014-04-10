@@ -1531,8 +1531,6 @@ argument_list|,
 operator|new
 name|ReflectiveSchema
 argument_list|(
-literal|"hr"
-argument_list|,
 operator|new
 name|HrSchema
 argument_list|()
@@ -1806,8 +1804,6 @@ argument_list|,
 operator|new
 name|ReflectiveSchema
 argument_list|(
-literal|"hr"
-argument_list|,
 operator|new
 name|HrSchema
 argument_list|()
@@ -2023,8 +2019,6 @@ argument_list|,
 operator|new
 name|ReflectiveSchema
 argument_list|(
-literal|"hr"
-argument_list|,
 operator|new
 name|HrSchema
 argument_list|()
@@ -10328,8 +10322,6 @@ argument_list|,
 operator|new
 name|ReflectiveSchema
 argument_list|(
-literal|"hr"
-argument_list|,
 operator|new
 name|HrSchema
 argument_list|()
@@ -11560,8 +11552,6 @@ argument_list|,
 operator|new
 name|ReflectiveSchema
 argument_list|(
-literal|"TEST"
-argument_list|,
 operator|new
 name|MySchema
 argument_list|()
@@ -15665,8 +15655,6 @@ return|return
 operator|new
 name|ReflectiveSchema
 argument_list|(
-name|name
-argument_list|,
 operator|new
 name|HrSchema
 argument_list|()
