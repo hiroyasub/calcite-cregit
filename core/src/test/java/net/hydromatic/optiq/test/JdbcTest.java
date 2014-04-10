@@ -10882,6 +10882,23 @@ argument_list|)
 decl_stmt|;
 name|with
 operator|.
+name|withSchema
+argument_list|(
+literal|null
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select \"adhoc\".my_sum(\"deptno\") as p from \"adhoc\".EMPLOYEES\n"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"P=50\n"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
 name|query
 argument_list|(
 literal|"select my_sum(\"empid\"), \"deptno\" as p from EMPLOYEES\n"
@@ -10925,7 +10942,7 @@ argument_list|)
 operator|.
 name|throws_
 argument_list|(
-literal|"Invalid number of arguments to function 'MY_SUM'. Was expecting 1 arguments"
+literal|"No match found for function signature MY_SUM(<NUMERIC>,<NUMERIC>)"
 argument_list|)
 expr_stmt|;
 name|with
@@ -10937,7 +10954,7 @@ argument_list|)
 operator|.
 name|throws_
 argument_list|(
-literal|"Invalid number of arguments to function 'MY_SUM'. Was expecting 1 arguments"
+literal|"No match found for function signature MY_SUM()"
 argument_list|)
 expr_stmt|;
 name|with

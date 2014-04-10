@@ -68,7 +68,8 @@ implements|implements
 name|Aggregation
 block|{
 comment|//~ Constructors -----------------------------------------------------------
-specifier|public
+comment|/** Creates a built-in SqlAggFunction. */
+specifier|protected
 name|SqlAggFunction
 parameter_list|(
 name|String
@@ -90,9 +91,12 @@ name|SqlFunctionCategory
 name|funcType
 parameter_list|)
 block|{
-name|super
+comment|// We leave sqlIdentifier as null to indicate that this is a builtin.
+name|this
 argument_list|(
 name|name
+argument_list|,
+literal|null
 argument_list|,
 name|kind
 argument_list|,
@@ -101,6 +105,52 @@ argument_list|,
 name|operandTypeInference
 argument_list|,
 name|operandTypeChecker
+argument_list|,
+name|funcType
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Creates a user-defined SqlAggFunction. */
+specifier|protected
+name|SqlAggFunction
+parameter_list|(
+name|String
+name|name
+parameter_list|,
+name|SqlIdentifier
+name|sqlIdentifier
+parameter_list|,
+name|SqlKind
+name|kind
+parameter_list|,
+name|SqlReturnTypeInference
+name|returnTypeInference
+parameter_list|,
+name|SqlOperandTypeInference
+name|operandTypeInference
+parameter_list|,
+name|SqlOperandTypeChecker
+name|operandTypeChecker
+parameter_list|,
+name|SqlFunctionCategory
+name|funcType
+parameter_list|)
+block|{
+name|super
+argument_list|(
+name|name
+argument_list|,
+name|sqlIdentifier
+argument_list|,
+name|kind
+argument_list|,
+name|returnTypeInference
+argument_list|,
+name|operandTypeInference
+argument_list|,
+name|operandTypeChecker
+argument_list|,
+literal|null
 argument_list|,
 name|funcType
 argument_list|)
