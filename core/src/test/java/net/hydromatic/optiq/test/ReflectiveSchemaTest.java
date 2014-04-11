@@ -1779,7 +1779,12 @@ argument_list|)
 operator|.
 name|planContains
 argument_list|(
-literal|"return current13.wrapperLong == null ? (Long) null : Long.valueOf(current13.wrapperLong.longValue() / current13.primitiveLong);"
+literal|"final Long inp13_ = current.wrapperLong;"
+argument_list|)
+operator|.
+name|planContains
+argument_list|(
+literal|"return inp13_ == null ? (Long) null : Long.valueOf(inp13_.longValue() / current.primitiveLong);"
 argument_list|)
 operator|.
 name|returns
@@ -1798,7 +1803,12 @@ argument_list|)
 operator|.
 name|planContains
 argument_list|(
-literal|"return current13.wrapperLong == null ? (Long) null : Long.valueOf(current13.wrapperLong.longValue() / current13.wrapperLong.longValue());"
+literal|"final Long inp13_ = ((net.hydromatic.optiq.test.ReflectiveSchemaTest.EveryType) inputEnumerator.current()).wrapperLong;"
+argument_list|)
+operator|.
+name|planContains
+argument_list|(
+literal|"return inp13_ == null ? (Long) null : Long.valueOf(inp13_.longValue() / inp13_.longValue());"
 argument_list|)
 operator|.
 name|returns
