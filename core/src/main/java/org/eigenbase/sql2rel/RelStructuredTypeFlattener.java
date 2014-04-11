@@ -1422,6 +1422,14 @@ argument_list|,
 name|newChild
 argument_list|,
 name|newCollation
+argument_list|,
+name|rel
+operator|.
+name|offset
+argument_list|,
+name|rel
+operator|.
+name|fetch
 argument_list|)
 decl_stmt|;
 name|setNewForOldRel

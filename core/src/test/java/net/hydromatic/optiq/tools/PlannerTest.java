@@ -462,12 +462,19 @@ specifier|public
 class|class
 name|PlannerTest
 block|{
-annotation|@
-name|Test
-specifier|public
+specifier|private
 name|void
-name|testParseAndConvert
-parameter_list|()
+name|checkParseAndConvert
+parameter_list|(
+name|String
+name|query
+parameter_list|,
+name|String
+name|queryFromParseTree
+parameter_list|,
+name|String
+name|expectedRelExpr
+parameter_list|)
 throws|throws
 name|Exception
 block|{
@@ -486,7 +493,7 @@ name|planner
 operator|.
 name|parse
 argument_list|(
-literal|"select * from \"emps\" where \"name\" like '%e%'"
+name|query
 argument_list|)
 decl_stmt|;
 name|assertThat
@@ -503,11 +510,7 @@ argument_list|)
 argument_list|,
 name|equalTo
 argument_list|(
-literal|"SELECT *\n"
-operator|+
-literal|"FROM `emps`\n"
-operator|+
-literal|"WHERE `name` LIKE '%e%'"
+name|queryFromParseTree
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -540,12 +543,67 @@ argument_list|)
 argument_list|,
 name|equalTo
 argument_list|(
+name|expectedRelExpr
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testParseAndConvert
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+name|checkParseAndConvert
+argument_list|(
+literal|"select * from \"emps\" where \"name\" like '%e%'"
+argument_list|,
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `emps`\n"
+operator|+
+literal|"WHERE `name` LIKE '%e%'"
+argument_list|,
 literal|"ProjectRel(empid=[$0], deptno=[$1], name=[$2], salary=[$3], commission=[$4])\n"
 operator|+
 literal|"  FilterRel(condition=[LIKE($2, '%e%')])\n"
 operator|+
 literal|"    EnumerableTableAccessRel(table=[[hr, emps]])\n"
 argument_list|)
+expr_stmt|;
+block|}
+comment|/** Unit test that parses, validates and converts the query using    * order by and offset. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testParseAndConvertWithOrderByAndOffset
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+name|checkParseAndConvert
+argument_list|(
+literal|"select * from \"emps\" "
+operator|+
+literal|"order by \"emps\".\"deptno\" offset 10"
+argument_list|,
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `emps`\n"
+operator|+
+literal|"ORDER BY `emps`.`deptno`\n"
+operator|+
+literal|"OFFSET 10 ROWS"
+argument_list|,
+literal|"SortRel(sort0=[$1], dir0=[ASC], offset=[10])\n"
+operator|+
+literal|"  ProjectRel(empid=[$0], deptno=[$1], name=[$2], salary=[$3], commission=[$4])\n"
+operator|+
+literal|"    EnumerableTableAccessRel(table=[[hr, emps]])\n"
 argument_list|)
 expr_stmt|;
 block|}

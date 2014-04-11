@@ -113,6 +113,25 @@ extends|extends
 name|SqlToRelTestBase
 block|{
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
+specifier|protected
+name|Tester
+name|createTester
+parameter_list|()
+block|{
+return|return
+name|super
+operator|.
+name|createTester
+argument_list|()
+operator|.
+name|withDecorrelation
+argument_list|(
+literal|false
+argument_list|)
+return|;
+block|}
 comment|/**    * Checks the plan for a SQL statement before/after executing a given rule.    *    * @param rule Planner rule    * @param sql  SQL query    */
 specifier|protected
 name|void

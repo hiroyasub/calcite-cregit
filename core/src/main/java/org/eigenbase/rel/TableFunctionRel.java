@@ -178,7 +178,7 @@ block|{
 assert|assert
 name|traitSet
 operator|.
-name|comprises
+name|containsIfApplicable
 argument_list|(
 name|Convention
 operator|.

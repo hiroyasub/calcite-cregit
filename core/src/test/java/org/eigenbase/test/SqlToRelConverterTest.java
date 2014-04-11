@@ -1074,7 +1074,42 @@ name|void
 name|testWithInsideWhereExists
 parameter_list|()
 block|{
-name|check
+name|tester
+operator|.
+name|withDecorrelation
+argument_list|(
+literal|false
+argument_list|)
+operator|.
+name|assertConvertsTo
+argument_list|(
+literal|"select * from emp\n"
+operator|+
+literal|"where exists (\n"
+operator|+
+literal|"  with dept2 as (select * from dept where dept.deptno>= emp.deptno)\n"
+operator|+
+literal|"  select 1 from dept2 where deptno<= emp.deptno)"
+argument_list|,
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWithInsideWhereExistsDecorrelate
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|withDecorrelation
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|assertConvertsTo
 argument_list|(
 literal|"select * from emp\n"
 operator|+
@@ -1260,7 +1295,14 @@ name|void
 name|testCollectionTableWithCursorParam
 parameter_list|()
 block|{
-name|check
+name|tester
+operator|.
+name|withDecorrelation
+argument_list|(
+literal|false
+argument_list|)
+operator|.
+name|assertConvertsTo
 argument_list|(
 literal|"select * from table(dedup("
 operator|+
@@ -1390,9 +1432,86 @@ name|void
 name|testExistsCorrelated
 parameter_list|()
 block|{
-name|check
+name|tester
+operator|.
+name|withDecorrelation
+argument_list|(
+literal|false
+argument_list|)
+operator|.
+name|assertConvertsTo
 argument_list|(
 literal|"select*from emp where exists (select 1 from dept where emp.deptno=dept.deptno)"
+argument_list|,
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testExistsCorrelatedDecorrelate
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|withDecorrelation
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|assertConvertsTo
+argument_list|(
+literal|"select*from emp where exists (select 1 from dept where emp.deptno=dept.deptno)"
+argument_list|,
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testExistsCorrelatedLimit
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|withDecorrelation
+argument_list|(
+literal|false
+argument_list|)
+operator|.
+name|assertConvertsTo
+argument_list|(
+literal|"select*from emp where exists (\n"
+operator|+
+literal|"  select 1 from dept where emp.deptno=dept.deptno limit 1)"
+argument_list|,
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testExistsCorrelatedLimitDecorrelate
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|withDecorrelation
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|assertConvertsTo
+argument_list|(
+literal|"select*from emp where exists (\n"
+operator|+
+literal|"  select 1 from dept where emp.deptno=dept.deptno limit 1)"
 argument_list|,
 literal|"${plan}"
 argument_list|)
@@ -1474,7 +1593,36 @@ name|void
 name|testLateral
 parameter_list|()
 block|{
-name|check
+name|tester
+operator|.
+name|withDecorrelation
+argument_list|(
+literal|false
+argument_list|)
+operator|.
+name|assertConvertsTo
+argument_list|(
+literal|"select * from emp, LATERAL (select * from dept where emp.deptno=dept.deptno)"
+argument_list|,
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testLateralDecorrelate
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|withDecorrelation
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|assertConvertsTo
 argument_list|(
 literal|"select * from emp, LATERAL (select * from dept where emp.deptno=dept.deptno)"
 argument_list|,

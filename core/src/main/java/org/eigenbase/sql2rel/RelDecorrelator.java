@@ -1406,6 +1406,14 @@ argument_list|,
 name|newChildRel
 argument_list|,
 name|newCollation
+argument_list|,
+name|rel
+operator|.
+name|offset
+argument_list|,
+name|rel
+operator|.
+name|fetch
 argument_list|)
 decl_stmt|;
 name|mapOldToNewRel
