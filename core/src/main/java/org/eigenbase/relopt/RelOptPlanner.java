@@ -195,6 +195,11 @@ name|RelOptRule
 name|rule
 parameter_list|)
 function_decl|;
+comment|/**    * Provides the Context created when this planner was constructed.    * @return Either null or an externally defined context.    */
+name|Context
+name|getContext
+parameter_list|()
+function_decl|;
 comment|/**    * Sets the exclusion filter to use for this planner. Rules which match the    * given pattern will not be fired regardless of whether or when they are    * added to the planner.    *    * @param exclusionFilter pattern to match for exclusion; null to disable    *                        filtering    */
 name|void
 name|setRuleDescExclusionFilter

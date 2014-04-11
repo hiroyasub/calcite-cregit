@@ -11391,6 +11391,14 @@ argument_list|,
 name|mapCorVarToCorRel
 argument_list|,
 name|mapFieldAccessToCorVar
+argument_list|,
+name|cluster
+operator|.
+name|getPlanner
+argument_list|()
+operator|.
+name|getContext
+argument_list|()
 argument_list|)
 decl_stmt|;
 name|boolean

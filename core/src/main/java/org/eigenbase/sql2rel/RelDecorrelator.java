@@ -346,6 +346,11 @@ specifier|private
 name|RelNode
 name|currentRel
 decl_stmt|;
+specifier|private
+specifier|final
+name|Context
+name|context
+decl_stmt|;
 comment|// maps built during decorrelation
 specifier|private
 specifier|final
@@ -446,6 +451,9 @@ operator|.
 name|Correlation
 argument_list|>
 name|mapFieldAccessToCorVar
+parameter_list|,
+name|Context
+name|context
 parameter_list|)
 block|{
 name|this
@@ -471,6 +479,12 @@ operator|.
 name|mapFieldAccessToCorVar
 operator|=
 name|mapFieldAccessToCorVar
+expr_stmt|;
+name|this
+operator|.
+name|context
+operator|=
+name|context
 expr_stmt|;
 name|decorrelateVisitor
 operator|=
@@ -800,6 +814,8 @@ operator|new
 name|HepPlanner
 argument_list|(
 name|program
+argument_list|,
+name|context
 argument_list|,
 literal|true
 argument_list|,

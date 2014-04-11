@@ -100,6 +100,20 @@ import|;
 end_import
 
 begin_import
+import|import static
+name|org
+operator|.
+name|eigenbase
+operator|.
+name|util
+operator|.
+name|Static
+operator|.
+name|RESOURCE
+import|;
+end_import
+
+begin_import
 import|import
 name|com
 operator|.
@@ -124,20 +138,6 @@ operator|.
 name|collect
 operator|.
 name|Iterables
-import|;
-end_import
-
-begin_import
-import|import static
-name|org
-operator|.
-name|eigenbase
-operator|.
-name|util
-operator|.
-name|Static
-operator|.
-name|RESOURCE
 import|;
 end_import
 
@@ -252,6 +252,11 @@ argument_list|>
 argument_list|()
 decl_stmt|;
 specifier|private
+specifier|final
+name|Context
+name|context
+decl_stmt|;
+specifier|private
 name|Executor
 name|executor
 decl_stmt|;
@@ -262,13 +267,28 @@ name|AbstractRelOptPlanner
 parameter_list|(
 name|RelOptCostFactory
 name|costFactory
+parameter_list|,
+comment|//
+name|Context
+name|context
 parameter_list|)
 block|{
+assert|assert
+name|costFactory
+operator|!=
+literal|null
+assert|;
 name|this
 operator|.
 name|costFactory
 operator|=
 name|costFactory
+expr_stmt|;
+name|this
+operator|.
+name|context
+operator|=
+name|context
 expr_stmt|;
 comment|// In case no one calls setCancelFlag, set up a
 comment|// dummy here.
@@ -305,6 +325,15 @@ name|void
 name|clear
 parameter_list|()
 block|{
+block|}
+specifier|public
+name|Context
+name|getContext
+parameter_list|()
+block|{
+return|return
+name|context
+return|;
 block|}
 specifier|public
 name|RelOptCostFactory

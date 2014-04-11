@@ -124,6 +124,8 @@ argument_list|(
 name|RelOptCostImpl
 operator|.
 name|FACTORY
+argument_list|,
+literal|null
 argument_list|)
 expr_stmt|;
 name|setExecutor
