@@ -221,6 +221,39 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/**    * Test case for<a href="https://github.com/julianhyde/optiq/issues/245">    * Off-by-one translation of ON clause of JOIN</a>.    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testConditionOffByOne
+parameter_list|()
+block|{
+comment|// Bug causes the plan to contain
+comment|//   JoinRel(condition=[=($9, $9)], joinType=[inner])
+name|check
+argument_list|(
+literal|"SELECT * FROM emp JOIN dept on emp.deptno + 0 = dept.deptno"
+argument_list|,
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testConditionOffByOneReversed
+parameter_list|()
+block|{
+name|check
+argument_list|(
+literal|"SELECT * FROM emp JOIN dept on dept.deptno = emp.deptno + 0"
+argument_list|,
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public
