@@ -455,7 +455,7 @@ name|T
 name|element
 parameter_list|)
 function_decl|;
-comment|/**    * Determines whether a sequence contains a specified    * element by using a specified EqualityComparer<T>.    */
+comment|/**    * Determines whether a sequence contains a specified    * element by using a specified {@code EqualityComparer<T>}.    */
 name|boolean
 name|contains
 parameter_list|(
@@ -551,7 +551,7 @@ argument_list|>
 name|source
 parameter_list|)
 function_decl|;
-comment|/**    * Returns distinct elements from a sequence by using    * a specified EqualityComparer<T> to compare values.    */
+comment|/**    * Returns distinct elements from a sequence by using    * a specified {@code EqualityComparer<T>} to compare values.    */
 name|Queryable
 argument_list|<
 name|T
@@ -619,7 +619,7 @@ argument_list|>
 name|enumerable
 parameter_list|)
 function_decl|;
-comment|/**    * Produces the set difference of two sequences by    * using the specified EqualityComparer<T> to compare    * values.    */
+comment|/**    * Produces the set difference of two sequences by    * using the specified {@code EqualityComparer<T>} to compare    * values.    */
 name|Queryable
 argument_list|<
 name|T
@@ -1509,7 +1509,7 @@ argument_list|>
 name|predicate
 parameter_list|)
 function_decl|;
-comment|/**    * Returns the maximum value in a generic    * IQueryable<T>.    */
+comment|/**    * Returns the maximum value in a generic    * {@code IQueryable<T>}.    */
 name|T
 name|max
 parameter_list|(
@@ -1520,7 +1520,7 @@ argument_list|>
 name|source
 parameter_list|)
 function_decl|;
-comment|/**    * Invokes a projection function on each element of a    * generic IQueryable<T> and returns the maximum resulting    * value.    */
+comment|/**    * Invokes a projection function on each element of a    * generic {@code IQueryable<T>} and returns the maximum resulting    * value.    */
 parameter_list|<
 name|TResult
 extends|extends
@@ -1550,7 +1550,7 @@ argument_list|>
 name|selector
 parameter_list|)
 function_decl|;
-comment|/**    * Returns the minimum value in a generic    * IQueryable<T>.    */
+comment|/**    * Returns the minimum value in a generic    * {@code IQueryable<T>}.    */
 name|T
 name|min
 parameter_list|(
@@ -1561,7 +1561,7 @@ argument_list|>
 name|source
 parameter_list|)
 function_decl|;
-comment|/**    * Invokes a projection function on each element of a    * generic IQueryable<T> and returns the minimum resulting    * value.    */
+comment|/**    * Invokes a projection function on each element of a    * generic {@code IQueryable<T>} and returns the minimum resulting    * value.    */
 parameter_list|<
 name|TResult
 extends|extends
@@ -1836,7 +1836,7 @@ argument_list|>
 name|selector
 parameter_list|)
 function_decl|;
-comment|/**    * Projects each element of a sequence to an    * Enumerable<T> and combines the resulting sequences into one    * sequence.    */
+comment|/**    * Projects each element of a sequence to an    * {@code Enumerable<T>} and combines the resulting sequences into one    * sequence.    */
 parameter_list|<
 name|TResult
 parameter_list|>
@@ -1867,7 +1867,7 @@ argument_list|>
 name|selector
 parameter_list|)
 function_decl|;
-comment|/**    * Projects each element of a sequence to an    * Enumerable<T> and combines the resulting sequences into one    * sequence. The index of each source element is used in the    * projected form of that element.    */
+comment|/**    * Projects each element of a sequence to an    * {@code Enumerable<T>} and combines the resulting sequences into one    * sequence. The index of each source element is used in the    * projected form of that element.    */
 parameter_list|<
 name|TResult
 parameter_list|>
@@ -1900,7 +1900,7 @@ argument_list|>
 name|selector
 parameter_list|)
 function_decl|;
-comment|/**    * Projects each element of a sequence to an    * Enumerable<T> that incorporates the index of the source    * element that produced it. A result selector function is invoked    * on each element of each intermediate sequence, and the    * resulting values are combined into a single, one-dimensional    * sequence and returned.    */
+comment|/**    * Projects each element of a sequence to an    * {@code Enumerable<T>} that incorporates the index of the source    * element that produced it. A result selector function is invoked    * on each element of each intermediate sequence, and the    * resulting values are combined into a single, one-dimensional    * sequence and returned.    */
 parameter_list|<
 name|TCollection
 parameter_list|,
@@ -1948,7 +1948,7 @@ argument_list|>
 name|resultSelector
 parameter_list|)
 function_decl|;
-comment|/**    * Projects each element of a sequence to an    * Enumerable<T> and invokes a result selector function on each    * element therein. The resulting values from each intermediate    * sequence are combined into a single, one-dimensional sequence    * and returned.    */
+comment|/**    * Projects each element of a sequence to an    * {@code Enumerable<T>} and invokes a result selector function on each    * element therein. The resulting values from each intermediate    * sequence are combined into a single, one-dimensional sequence    * and returned.    */
 parameter_list|<
 name|TCollection
 parameter_list|,
@@ -2576,7 +2576,7 @@ argument_list|>
 name|source1
 parameter_list|)
 function_decl|;
-comment|/**    * Produces the set union of two sequences by using a    * specified EqualityComparer<T>.    */
+comment|/**    * Produces the set union of two sequences by using a    * specified {@code EqualityComparer<T>}.    */
 name|Queryable
 argument_list|<
 name|T

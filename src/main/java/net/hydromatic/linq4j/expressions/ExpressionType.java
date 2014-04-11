@@ -86,7 +86,7 @@ argument_list|,
 literal|false
 argument_list|)
 block|,
-comment|/**    * A bitwise or logical AND operation, such as (a&amp; b) in C# and    * (a And b) in Visual Basic.    */
+comment|/**    * A bitwise or logical AND operation, such as {@code a&amp; b} in Java.    */
 name|And
 argument_list|(
 literal|"& "
@@ -98,7 +98,7 @@ argument_list|,
 literal|false
 argument_list|)
 block|,
-comment|/**    * A conditional AND operation that evaluates the second operand    * only if the first operand evaluates to true. It corresponds to    * (a&& b) in C# and (a AndAlso b) in Visual Basic.    */
+comment|/**    * A conditional AND operation that evaluates the second operand    * only if the first operand evaluates to true. It corresponds to    * {@code a&& b} in Java.    */
 name|AndAlso
 argument_list|(
 literal|"&& "
@@ -113,10 +113,10 @@ block|,
 comment|/**    * An operation that obtains the length of a one-dimensional    * array, such as array.Length.    */
 name|ArrayLength
 block|,
-comment|/**    * An indexing operation in a one-dimensional array, such as    * array[index] in C# or array(index) in Visual Basic.    */
+comment|/**    * An indexing operation in a one-dimensional array, such as    * {@code array[index]} in Java.    */
 name|ArrayIndex
 block|,
-comment|/**    * A method call, such as in the obj.sampleMethod()    * expression.    */
+comment|/**    * A method call, such as in the {@code obj.sampleMethod()}    * expression.    */
 name|Call
 argument_list|(
 literal|"."
@@ -131,7 +131,7 @@ block|,
 comment|/**    * A node that represents a null coalescing operation, such    * as (a ?? b) in C# or If(a, b) in Visual Basic.    */
 name|Coalesce
 block|,
-comment|/**    * A conditional operation, such as a> b ? a : b in C# or    * If(a> b, a, b) in Visual Basic.    */
+comment|/**    * A conditional operation, such as {@code a> b ? a : b} in Java.    */
 name|Conditional
 argument_list|(
 literal|" ? "
@@ -148,7 +148,7 @@ block|,
 comment|/**    * A constant value.    */
 name|Constant
 block|,
-comment|/**    * A cast or conversion operation, such as (SampleType)obj in    * C#or CType(obj, SampleType) in Visual Basic. For a numeric    * conversion, if the converted value is too large for the    * destination type, no exception is thrown.    */
+comment|/**    * A cast or conversion operation, such as {@code (SampleType) obj} in    * Java. For a numeric    * conversion, if the converted value is too large for the    * destination type, no exception is thrown.    */
 name|Convert
 argument_list|(
 literal|null
@@ -160,7 +160,7 @@ argument_list|,
 literal|true
 argument_list|)
 block|,
-comment|/**    * A cast or conversion operation, such as (SampleType)obj in    * C#or CType(obj, SampleType) in Visual Basic. For a numeric    * conversion, if the converted value does not fit the    * destination type, an exception is thrown.    */
+comment|/**    * A cast or conversion operation, such as {@code (SampleType) obj} in    * Java. For a numeric    * conversion, if the converted value does not fit the    * destination type, an exception is thrown.    */
 name|ConvertChecked
 block|,
 comment|/**    * A division operation, such as (a / b), for numeric    * operands.    */
@@ -175,7 +175,7 @@ argument_list|,
 literal|false
 argument_list|)
 block|,
-comment|/**    * A node that represents an equality comparison, such as (a    * == b) in C# or (a = b) in Visual Basic.    */
+comment|/**    * A node that represents an equality comparison, such as {@code a == b} in    * Java.    */
 name|Equal
 argument_list|(
 literal|" == "
@@ -187,7 +187,7 @@ argument_list|,
 literal|false
 argument_list|)
 block|,
-comment|/**    * A bitwise or logical XOR operation, such as (a ^ b) in C#    * or (a Xor b) in Visual Basic.    */
+comment|/**    * A bitwise or logical XOR operation, such as {@code a ^ b} in Java.    */
 name|ExclusiveOr
 argument_list|(
 literal|" ^ "
@@ -226,10 +226,10 @@ block|,
 comment|/**    * An operation that invokes a delegate or lambda expression,    * such as sampleDelegate.Invoke().    */
 name|Invoke
 block|,
-comment|/**    * A lambda expression, such as a =&gt; a + a in C# or    * Function(a) a + a in Visual Basic.    */
+comment|/**    * A lambda expression, such as {@code a -&gt; a + a} in Java.    */
 name|Lambda
 block|,
-comment|/**    * A bitwise left-shift operation, such as (a&lt;&lt; b).    */
+comment|/**    * A bitwise left-shift operation, such as {@code a<< b} in Java.    */
 name|LeftShift
 argument_list|(
 literal|"<< "

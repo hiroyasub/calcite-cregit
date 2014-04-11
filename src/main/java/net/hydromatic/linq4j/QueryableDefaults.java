@@ -329,7 +329,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/**    * Converts a generic Enumerable<T> to a generic    * IQueryable<T>.    */
+comment|/**    * Converts a generic {@code Enumerable<T>} to a generic    * {@code IQueryable<T>}.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -811,7 +811,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/**    * Determines whether a sequence contains a specified    * element by using a specified EqualityComparer<T>.    */
+comment|/**    * Determines whether a sequence contains a specified    * element by using a specified {@code EqualityComparer<T>}.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -973,7 +973,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/**    * Returns distinct elements from a sequence by using    * a specified EqualityComparer<T> to compare values.    */
+comment|/**    * Returns distinct elements from a sequence by using    * a specified {@code EqualityComparer<T>} to compare values.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -1086,7 +1086,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/**    * Produces the set difference of two sequences by    * using the specified EqualityComparer<T> to compare    * values.    */
+comment|/**    * Produces the set difference of two sequences by    * using the specified {@code EqualityComparer<T>} to compare    * values.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -1786,7 +1786,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/**    * Correlates the elements of two sequences based on    * key equality and groups the results. A specified    * EqualityComparer<T> is used to compare keys.    */
+comment|/**    * Correlates the elements of two sequences based on    * key equality and groups the results. A specified    * {@code EqualityComparer<T>} is used to compare keys.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -1900,7 +1900,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/**    * Produces the set intersection of two sequences by    * using the specified EqualityComparer<T> to compare    * values.    */
+comment|/**    * Produces the set intersection of two sequences by    * using the specified {@code EqualityComparer<T>} to compare    * values.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -2011,7 +2011,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/**    * Correlates the elements of two sequences based on    * matching keys. A specified EqualityComparer<T> is used to    * compare keys.    */
+comment|/**    * Correlates the elements of two sequences based on    * matching keys. A specified {@code EqualityComparer<T>} is used to    * compare keys.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -2255,7 +2255,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/**    * Returns the maximum value in a generic    * IQueryable<T>.    */
+comment|/**    * Returns the maximum value in a generic    * {@code IQueryable<T>}.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -2278,7 +2278,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/**    * Invokes a projection function on each element of a    * generic IQueryable<T> and returns the maximum resulting    * value.    */
+comment|/**    * Invokes a projection function on each element of a    * generic {@code IQueryable<T>} and returns the maximum resulting    * value.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -2314,7 +2314,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/**    * Returns the minimum value in a generic    * IQueryable<T>.    */
+comment|/**    * Returns the minimum value in a generic    * {@code IQueryable<T>}.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -2337,7 +2337,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/**    * Invokes a projection function on each element of a    * generic IQueryable<T> and returns the minimum resulting    * value.    */
+comment|/**    * Invokes a projection function on each element of a    * generic {@code IQueryable<T>} and returns the minimum resulting    * value.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -2736,7 +2736,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/**    * Projects each element of a sequence to an    * Enumerable<T> and combines the resulting sequences into one    * sequence.    */
+comment|/**    * Projects each element of a sequence to an    * {@code Enumerable<T>} and combines the resulting sequences into one    * sequence.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -2778,7 +2778,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/**    * Projects each element of a sequence to an    * Enumerable<T> and combines the resulting sequences into one    * sequence. The index of each source element is used in the    * projected form of that element.    *    *<p>NOTE: Renamed from {@code selectMany} because had same erasure as    * {@link #selectMany(net.hydromatic.linq4j.Queryable, net.hydromatic.linq4j.expressions.FunctionExpression)}</p>    */
+comment|/**    * Projects each element of a sequence to an    * {@code Enumerable<T>} and combines the resulting sequences into one    * sequence. The index of each source element is used in the    * projected form of that element.    *    *<p>NOTE: Renamed from {@code selectMany} because had same erasure as    * {@link #selectMany(net.hydromatic.linq4j.Queryable, net.hydromatic.linq4j.expressions.FunctionExpression)}</p>    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -2822,7 +2822,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/**    * Projects each element of a sequence to an    * Enumerable<T> that incorporates the index of the source    * element that produced it. A result selector function is invoked    * on each element of each intermediate sequence, and the    * resulting values are combined into a single, one-dimensional    * sequence and returned.    */
+comment|/**    * Projects each element of a sequence to an    * {@code Enumerable<T>} that incorporates the index of the source    * element that produced it. A result selector function is invoked    * on each element of each intermediate sequence, and the    * resulting values are combined into a single, one-dimensional    * sequence and returned.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -2881,7 +2881,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/**    * Projects each element of a sequence to an    * Enumerable<T> and invokes a result selector function on each    * element therein. The resulting values from each intermediate    * sequence are combined into a single, one-dimensional sequence    * and returned.    *    *<p>NOTE: Renamed from {@code selectMany} because had same erasure as    * {@link #selectMany(net.hydromatic.linq4j.Queryable, net.hydromatic.linq4j.expressions.FunctionExpression, net.hydromatic.linq4j.expressions.FunctionExpression)}</p>    */
+comment|/**    * Projects each element of a sequence to an    * {@code Enumerable<T>} and invokes a result selector function on each    * element therein. The resulting values from each intermediate    * sequence are combined into a single, one-dimensional sequence    * and returned.    *    *<p>NOTE: Renamed from {@code selectMany} because had same erasure as    * {@link #selectMany(net.hydromatic.linq4j.Queryable, net.hydromatic.linq4j.expressions.FunctionExpression, net.hydromatic.linq4j.expressions.FunctionExpression)}</p>    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -2967,7 +2967,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/**    * Determines whether two sequences are equal by    * using a specified EqualityComparer<T> to compare    * elements.    */
+comment|/**    * Determines whether two sequences are equal by    * using a specified {@code EqualityComparer<T>} to compare    * elements.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -4004,7 +4004,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/**    * Produces the set union of two sequences by using a    * specified EqualityComparer<T>.    */
+comment|/**    * Produces the set union of two sequences by using a    * specified {@code EqualityComparer<T>}.    */
 specifier|public
 specifier|static
 parameter_list|<

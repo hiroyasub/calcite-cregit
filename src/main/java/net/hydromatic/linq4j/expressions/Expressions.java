@@ -2193,7 +2193,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/**    * Creates a DynamicExpression that represents a dynamic    * operation bound by the provided CallSiteBinder, using varargs.    */
+comment|/**    * Creates a {@code DynamicExpression} that represents a dynamic    * operation bound by the provided {@code CallSiteBinder}, using varargs.    */
 specifier|public
 specifier|static
 name|DynamicExpression
@@ -2217,7 +2217,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/**    * Creates an ElementInit, given an Iterable<T> as the second    * argument.    */
+comment|/**    * Creates an {@code ElementInit}, given an {@code Iterable<T>} as the second    * argument.    */
 specifier|public
 specifier|static
 name|ElementInit

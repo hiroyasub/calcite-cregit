@@ -169,7 +169,7 @@ argument_list|>
 name|predicate
 parameter_list|)
 function_decl|;
-comment|/**    * Returns the input typed as Enumerable<TSource>.    *    *<p>The AsEnumerable<TSource>(Enumerable<TSource>) method has no effect    * other than to change the compile-time type of source from a type that    * implements Enumerable<TSource> to Enumerable<TSource> itself.    *    *<p>AsEnumerable<TSource>(Enumerable<TSource>) can be used to choose    * between query implementations when a sequence implements    * Enumerable<TSource> but also has a different set of public query methods    * available. For example, given a generic class Table that implements    * Enumerable<TSource> and has its own methods such as Where, Select, and    * SelectMany, a call to Where would invoke the public Where method of    * Table. A Table type that represents a database table could have a Where    * method that takes the predicate argument as an expression tree and    * converts the tree to SQL for remote execution. If remote execution is not    * desired, for example because the predicate invokes a local method, the    * AsEnumerable<TSource> method can be used to hide the custom methods and    * instead make the standard query operators available.    */
+comment|/**    * Returns the input typed as {@code Enumerable<TSource>}.    *    *<p>This method has no effect    * other than to change the compile-time type of source from a type that    * implements {@code Enumerable<TSource>} to {@code Enumerable<TSource>}    * itself.    *    *<p>{@code asEnumerable<TSource>(Enumerable<TSource>)} can be used to choose    * between query implementations when a sequence implements     * {@code Enumerable<TSource>} but also has a different set of public query    * methods available. For example, given a generic class Table that implements    * {@code Enumerable<TSource>} and has its own methods such as {@code where},    * {@code select}, and {@code selectMany}, a call to {@code where} would    * invoke the public {@code where} method of {@code Table}. A {@code Table}    * type that represents a database table could have a {@code where} method    * that takes the predicate argument as an expression tree and converts the    * tree to SQL for remote execution. If remote execution is not desired, for    * example because the predicate invokes a local method, the    * {@code asEnumerable<TSource>} method can be used to hide the custom methods    * and instead make the standard query operators available.    */
 name|Enumerable
 argument_list|<
 name|TSource
@@ -334,7 +334,7 @@ name|TSource
 name|element
 parameter_list|)
 function_decl|;
-comment|/**    * Determines whether a sequence contains a specified    * element by using a specified EqualityComparer<TSource>.    */
+comment|/**    * Determines whether a sequence contains a specified    * element by using a specified {@code EqualityComparer<TSource>}.    */
 name|boolean
 name|contains
 parameter_list|(
@@ -385,7 +385,7 @@ argument_list|>
 name|distinct
 parameter_list|()
 function_decl|;
-comment|/**    * Returns distinct elements from a sequence by using    * a specified EqualityComparer<TSource> to compare values.    */
+comment|/**    * Returns distinct elements from a sequence by using    * a specified {@code EqualityComparer<TSource>} to compare values.    */
 name|Enumerable
 argument_list|<
 name|TSource
@@ -429,7 +429,7 @@ argument_list|>
 name|enumerable1
 parameter_list|)
 function_decl|;
-comment|/**    * Produces the set difference of two sequences by    * using the specified EqualityComparer<TSource> to compare    * values.    */
+comment|/**    * Produces the set difference of two sequences by    * using the specified {@code EqualityComparer<TSource>} to compare    * values.    */
 name|Enumerable
 argument_list|<
 name|TSource
@@ -930,7 +930,7 @@ argument_list|>
 name|resultSelector
 parameter_list|)
 function_decl|;
-comment|/**    * Correlates the elements of two sequences based on    * key equality and groups the results. A specified    * EqualityComparer<TSource> is used to compare keys.    */
+comment|/**    * Correlates the elements of two sequences based on    * key equality and groups the results. A specified    * {@code EqualityComparer<TSource>} is used to compare keys.    */
 parameter_list|<
 name|TInner
 parameter_list|,
@@ -1000,7 +1000,7 @@ argument_list|>
 name|enumerable1
 parameter_list|)
 function_decl|;
-comment|/**    * Produces the set intersection of two sequences by    * using the specified EqualityComparer<TSource> to compare    * values.    */
+comment|/**    * Produces the set intersection of two sequences by    * using the specified {@code EqualityComparer<TSource>} to compare    * values.    */
 name|Enumerable
 argument_list|<
 name|TSource
@@ -1085,7 +1085,7 @@ argument_list|>
 name|resultSelector
 parameter_list|)
 function_decl|;
-comment|/**    * Correlates the elements of two sequences based on    * matching keys. A specified EqualityComparer<TSource> is used to    * compare keys.    */
+comment|/**    * Correlates the elements of two sequences based on    * matching keys. A specified {@code EqualityComparer<TSource>} is used to    * compare keys.    */
 parameter_list|<
 name|TInner
 parameter_list|,
@@ -1615,7 +1615,7 @@ argument_list|>
 name|selector
 parameter_list|)
 function_decl|;
-comment|/**    * Projects each element of a sequence to an    * Enumerable<TSource> and flattens the resulting sequences into one    * sequence.    */
+comment|/**    * Projects each element of a sequence to an    * {@code Enumerable<TSource>} and flattens the resulting sequences into one    * sequence.    */
 parameter_list|<
 name|TResult
 parameter_list|>
@@ -1637,7 +1637,7 @@ argument_list|>
 name|selector
 parameter_list|)
 function_decl|;
-comment|/**    * Projects each element of a sequence to an    * Enumerable<TSource>, and flattens the resulting sequences into one    * sequence. The index of each source element is used in the    * projected form of that element.    */
+comment|/**    * Projects each element of a sequence to an    * {@code Enumerable<TSource>}, and flattens the resulting sequences into one    * sequence. The index of each source element is used in the    * projected form of that element.    */
 parameter_list|<
 name|TResult
 parameter_list|>
@@ -1661,7 +1661,7 @@ argument_list|>
 name|selector
 parameter_list|)
 function_decl|;
-comment|/**    * Projects each element of a sequence to an    * Enumerable<TSource>, flattens the resulting sequences into one    * sequence, and invokes a result selector function on each    * element therein. The index of each source element is used in    * the intermediate projected form of that element.    */
+comment|/**    * Projects each element of a sequence to an    * {@code Enumerable<TSource>}, flattens the resulting sequences into one    * sequence, and invokes a result selector function on each    * element therein. The index of each source element is used in    * the intermediate projected form of that element.    */
 parameter_list|<
 name|TCollection
 parameter_list|,
@@ -1697,7 +1697,7 @@ argument_list|>
 name|resultSelector
 parameter_list|)
 function_decl|;
-comment|/**    * Projects each element of a sequence to an    * Enumerable<TSource>, flattens the resulting sequences into one    * sequence, and invokes a result selector function on each    * element therein.    */
+comment|/**    * Projects each element of a sequence to an    * {@code Enumerable<TSource>}, flattens the resulting sequences into one    * sequence, and invokes a result selector function on each    * element therein.    */
 parameter_list|<
 name|TCollection
 parameter_list|,
@@ -1742,7 +1742,7 @@ argument_list|>
 name|enumerable1
 parameter_list|)
 function_decl|;
-comment|/**    * Determines whether two sequences are equal by    * comparing their elements by using a specified    * EqualityComparer<TSource>.    */
+comment|/**    * Determines whether two sequences are equal by    * comparing their elements by using a specified    * {@code EqualityComparer<TSource>}.    */
 name|boolean
 name|sequenceEqual
 parameter_list|(
@@ -1983,7 +1983,7 @@ argument_list|>
 name|predicate
 parameter_list|)
 function_decl|;
-comment|/**    * Creates a Dictionary<TKey, TValue> from an    * Enumerable<TSource> according to a specified key selector    * function.    *    *<p>NOTE: Called {@code toDictionary} in LINQ.NET.</p>    */
+comment|/**    * Creates a {@code Map<TKey, TValue>} from an    * {@code Enumerable<TSource>} according to a specified key selector    * function.    *    *<p>NOTE: Called {@code toDictionary} in LINQ.NET.</p>    */
 parameter_list|<
 name|TKey
 parameter_list|>
@@ -2004,7 +2004,7 @@ argument_list|>
 name|keySelector
 parameter_list|)
 function_decl|;
-comment|/**    * Creates a Dictionary<TKey, TValue> from an    * Enumerable<TSource> according to a specified key selector function    * and key comparer.    */
+comment|/**    * Creates a {@code Map<TKey, TValue>} from an    * {@code Enumerable<TSource>} according to a specified key selector function    * and key comparer.    */
 parameter_list|<
 name|TKey
 parameter_list|>
@@ -2031,7 +2031,7 @@ argument_list|>
 name|comparer
 parameter_list|)
 function_decl|;
-comment|/**    * Creates a Dictionary<TKey, TValue> from an    * Enumerable<TSource> according to specified key selector and element    * selector functions.    */
+comment|/**    * Creates a {@code Map<TKey, TValue>} from an    * {@code Enumerable<TSource>} according to specified key selector and element    * selector functions.    */
 parameter_list|<
 name|TKey
 parameter_list|,
@@ -2062,7 +2062,7 @@ argument_list|>
 name|elementSelector
 parameter_list|)
 function_decl|;
-comment|/**    * Creates a Dictionary<TKey, TValue> from an    * Enumerable<TSource> according to a specified key selector function,    * a comparer, and an element selector function.    */
+comment|/**    * Creates a {@code Map<TKey, TValue>} from an    * {@code Enumerable<TSource>} according to a specified key selector function,    * a comparer, and an element selector function.    */
 parameter_list|<
 name|TKey
 parameter_list|,
@@ -2099,7 +2099,7 @@ argument_list|>
 name|comparer
 parameter_list|)
 function_decl|;
-comment|/**    * Creates a List<TSource> from an Enumerable<TSource>.    */
+comment|/**    * Creates a {@code List<TSource>} from an {@code Enumerable<TSource>}.    */
 name|List
 argument_list|<
 name|TSource
@@ -2107,7 +2107,7 @@ argument_list|>
 name|toList
 parameter_list|()
 function_decl|;
-comment|/**    * Creates a Lookup<TKey, TElement> from an    * Enumerable<TSource> according to a specified key selector    * function.    */
+comment|/**    * Creates a {@code Lookup<TKey, TElement>} from an    * {@code Enumerable<TSource>} according to a specified key selector    * function.    */
 parameter_list|<
 name|TKey
 parameter_list|>
@@ -2128,7 +2128,7 @@ argument_list|>
 name|keySelector
 parameter_list|)
 function_decl|;
-comment|/**    * Creates a Lookup<TKey, TElement> from an    * Enumerable<TSource> according to a specified key selector function    * and key comparer.    */
+comment|/**    * Creates a {@code Lookup<TKey, TElement>} from an    * {@code Enumerable<TSource>} according to a specified key selector function    * and key comparer.    */
 parameter_list|<
 name|TKey
 parameter_list|>
@@ -2155,7 +2155,7 @@ argument_list|>
 name|comparer
 parameter_list|)
 function_decl|;
-comment|/**    * Creates a Lookup<TKey, TElement> from an    * Enumerable<TSource> according to specified key selector and element    * selector functions.    */
+comment|/**    * Creates a {@code Lookup<TKey, TElement>} from an    * {@code Enumerable<TSource>} according to specified key selector and element    * selector functions.    */
 parameter_list|<
 name|TKey
 parameter_list|,
@@ -2186,7 +2186,7 @@ argument_list|>
 name|elementSelector
 parameter_list|)
 function_decl|;
-comment|/**    * Creates a Lookup<TKey, TElement> from an    * Enumerable<TSource> according to a specified key selector function,    * a comparer and an element selector function.    */
+comment|/**    * Creates a {@code Lookup<TKey, TElement>} from an    * {@code Enumerable<TSource>} according to a specified key selector function,    * a comparer and an element selector function.    */
 parameter_list|<
 name|TKey
 parameter_list|,
@@ -2237,7 +2237,7 @@ argument_list|>
 name|source1
 parameter_list|)
 function_decl|;
-comment|/**    * Produces the set union of two sequences by using a    * specified EqualityComparer<TSource>.    */
+comment|/**    * Produces the set union of two sequences by using a    * specified {@code EqualityComparer<TSource>}.    */
 name|Enumerable
 argument_list|<
 name|TSource
