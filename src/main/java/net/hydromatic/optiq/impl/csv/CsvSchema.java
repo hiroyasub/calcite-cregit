@@ -97,16 +97,10 @@ specifier|final
 name|boolean
 name|smart
 decl_stmt|;
-comment|/**    * Creates a CSV schema.    *    * @param parentSchema Parent schema    * @param name Schema name    * @param directoryFile Directory that holds .csv files    * @param smart      Whether to instantiate smart tables that undergo    *                   query optimization    */
+comment|/**    * Creates a CSV schema.    *    * @param directoryFile Directory that holds {@code .csv} files    * @param smart      Whether to instantiate smart tables that undergo    *                   query optimization    */
 specifier|public
 name|CsvSchema
 parameter_list|(
-name|SchemaPlus
-name|parentSchema
-parameter_list|,
-name|String
-name|name
-parameter_list|,
 name|File
 name|directoryFile
 parameter_list|,
@@ -115,11 +109,7 @@ name|smart
 parameter_list|)
 block|{
 name|super
-argument_list|(
-name|parentSchema
-argument_list|,
-name|name
-argument_list|)
+argument_list|()
 expr_stmt|;
 name|this
 operator|.

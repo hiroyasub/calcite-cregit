@@ -50,7 +50,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Factory that creates a {@link CsvSchema}.  *  *<p>Allows a custom schema to be included in a model.json file.</p>  */
+comment|/**  * Factory that creates a {@link CsvSchema}.  *  *<p>Allows a custom schema to be included in a<code><i>model</i>.json</code>  * file.</p>  */
 end_comment
 
 begin_class
@@ -120,10 +120,6 @@ return|return
 operator|new
 name|CsvSchema
 argument_list|(
-name|parentSchema
-argument_list|,
-name|name
-argument_list|,
 operator|new
 name|File
 argument_list|(
