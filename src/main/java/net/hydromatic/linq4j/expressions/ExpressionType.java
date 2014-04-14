@@ -477,9 +477,13 @@ name|Assign
 argument_list|(
 literal|" = "
 argument_list|,
+literal|null
+argument_list|,
 literal|false
 argument_list|,
 literal|14
+argument_list|,
+literal|true
 argument_list|,
 literal|true
 argument_list|)
@@ -537,9 +541,13 @@ name|AddAssign
 argument_list|(
 literal|" += "
 argument_list|,
+literal|null
+argument_list|,
 literal|false
 argument_list|,
 literal|14
+argument_list|,
+literal|true
 argument_list|,
 literal|true
 argument_list|)
@@ -549,9 +557,13 @@ name|AndAssign
 argument_list|(
 literal|"&= "
 argument_list|,
+literal|null
+argument_list|,
 literal|false
 argument_list|,
 literal|14
+argument_list|,
+literal|true
 argument_list|,
 literal|true
 argument_list|)
@@ -561,9 +573,13 @@ name|DivideAssign
 argument_list|(
 literal|" /= "
 argument_list|,
+literal|null
+argument_list|,
 literal|false
 argument_list|,
 literal|14
+argument_list|,
+literal|true
 argument_list|,
 literal|true
 argument_list|)
@@ -573,9 +589,13 @@ name|ExclusiveOrAssign
 argument_list|(
 literal|" ^= "
 argument_list|,
+literal|null
+argument_list|,
 literal|false
 argument_list|,
 literal|14
+argument_list|,
+literal|true
 argument_list|,
 literal|true
 argument_list|)
@@ -585,9 +605,13 @@ name|LeftShiftAssign
 argument_list|(
 literal|"<<= "
 argument_list|,
+literal|null
+argument_list|,
 literal|false
 argument_list|,
 literal|14
+argument_list|,
+literal|true
 argument_list|,
 literal|true
 argument_list|)
@@ -597,9 +621,13 @@ name|ModuloAssign
 argument_list|(
 literal|" %= "
 argument_list|,
+literal|null
+argument_list|,
 literal|false
 argument_list|,
 literal|14
+argument_list|,
+literal|true
 argument_list|,
 literal|true
 argument_list|)
@@ -609,9 +637,13 @@ name|MultiplyAssign
 argument_list|(
 literal|" *= "
 argument_list|,
+literal|null
+argument_list|,
 literal|false
 argument_list|,
 literal|14
+argument_list|,
+literal|true
 argument_list|,
 literal|true
 argument_list|)
@@ -621,9 +653,13 @@ name|OrAssign
 argument_list|(
 literal|" |= "
 argument_list|,
+literal|null
+argument_list|,
 literal|false
 argument_list|,
 literal|14
+argument_list|,
+literal|true
 argument_list|,
 literal|true
 argument_list|)
@@ -636,9 +672,13 @@ name|RightShiftAssign
 argument_list|(
 literal|">>= "
 argument_list|,
+literal|null
+argument_list|,
 literal|false
 argument_list|,
 literal|14
+argument_list|,
+literal|true
 argument_list|,
 literal|true
 argument_list|)
@@ -648,9 +688,13 @@ name|SubtractAssign
 argument_list|(
 literal|" -= "
 argument_list|,
+literal|null
+argument_list|,
 literal|false
 argument_list|,
 literal|14
+argument_list|,
+literal|true
 argument_list|,
 literal|true
 argument_list|)
@@ -659,6 +703,8 @@ comment|/**    * An addition compound assignment operation, such as (a +=    * b
 name|AddAssignChecked
 argument_list|(
 literal|" += "
+argument_list|,
+literal|null
 argument_list|,
 literal|false
 argument_list|,
@@ -672,9 +718,13 @@ name|MultiplyAssignChecked
 argument_list|(
 literal|" *= "
 argument_list|,
+literal|null
+argument_list|,
 literal|false
 argument_list|,
 literal|14
+argument_list|,
+literal|true
 argument_list|,
 literal|true
 argument_list|)
@@ -684,9 +734,13 @@ name|SubtractAssignChecked
 argument_list|(
 literal|" -= "
 argument_list|,
+literal|null
+argument_list|,
 literal|false
 argument_list|,
 literal|14
+argument_list|,
+literal|true
 argument_list|,
 literal|true
 argument_list|)
@@ -696,9 +750,13 @@ name|PreIncrementAssign
 argument_list|(
 literal|"++"
 argument_list|,
+literal|null
+argument_list|,
 literal|false
 argument_list|,
 literal|2
+argument_list|,
+literal|true
 argument_list|,
 literal|true
 argument_list|)
@@ -708,9 +766,13 @@ name|PreDecrementAssign
 argument_list|(
 literal|"--"
 argument_list|,
+literal|null
+argument_list|,
 literal|false
 argument_list|,
 literal|2
+argument_list|,
+literal|true
 argument_list|,
 literal|true
 argument_list|)
@@ -720,9 +782,13 @@ name|PostIncrementAssign
 argument_list|(
 literal|"++"
 argument_list|,
+literal|null
+argument_list|,
 literal|true
 argument_list|,
 literal|2
+argument_list|,
+literal|true
 argument_list|,
 literal|true
 argument_list|)
@@ -732,9 +798,13 @@ name|PostDecrementAssign
 argument_list|(
 literal|"--"
 argument_list|,
+literal|null
+argument_list|,
 literal|true
 argument_list|,
 literal|2
+argument_list|,
+literal|true
 argument_list|,
 literal|true
 argument_list|)
@@ -786,6 +856,10 @@ decl_stmt|;
 specifier|final
 name|int
 name|rprec
+decl_stmt|;
+specifier|final
+name|boolean
+name|modifiesLvalue
 decl_stmt|;
 name|ExpressionType
 parameter_list|()
@@ -850,6 +924,43 @@ name|right
 parameter_list|)
 block|{
 name|this
+argument_list|(
+name|op
+argument_list|,
+name|op2
+argument_list|,
+name|postfix
+argument_list|,
+name|prec
+argument_list|,
+name|right
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+block|}
+name|ExpressionType
+parameter_list|(
+name|String
+name|op
+parameter_list|,
+name|String
+name|op2
+parameter_list|,
+name|boolean
+name|postfix
+parameter_list|,
+name|int
+name|prec
+parameter_list|,
+name|boolean
+name|right
+parameter_list|,
+name|boolean
+name|modifiesLvalue
+parameter_list|)
+block|{
+name|this
 operator|.
 name|op
 operator|=
@@ -866,6 +977,12 @@ operator|.
 name|postfix
 operator|=
 name|postfix
+expr_stmt|;
+name|this
+operator|.
+name|modifiesLvalue
+operator|=
+name|modifiesLvalue
 expr_stmt|;
 name|this
 operator|.
