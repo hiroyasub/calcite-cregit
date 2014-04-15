@@ -1646,6 +1646,11 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
+name|Ignore
+argument_list|(
+literal|"NoSuchMethodException: SqlFunctions.lt(Date, Date)"
+argument_list|)
+annotation|@
 name|Test
 specifier|public
 name|void
@@ -1692,7 +1697,7 @@ block|}
 annotation|@
 name|Ignore
 argument_list|(
-literal|"Date literal"
+literal|"slow"
 argument_list|)
 annotation|@
 name|Test
@@ -1710,7 +1715,7 @@ block|}
 annotation|@
 name|Ignore
 argument_list|(
-literal|"Date literal"
+literal|"slow"
 argument_list|)
 annotation|@
 name|Test
@@ -1728,7 +1733,7 @@ block|}
 annotation|@
 name|Ignore
 argument_list|(
-literal|"Date literal"
+literal|"no method found"
 argument_list|)
 annotation|@
 name|Test
@@ -1743,11 +1748,6 @@ literal|9
 argument_list|)
 expr_stmt|;
 block|}
-annotation|@
-name|Ignore
-argument_list|(
-literal|"Date literal"
-argument_list|)
 annotation|@
 name|Test
 specifier|public
@@ -1764,7 +1764,7 @@ block|}
 annotation|@
 name|Ignore
 argument_list|(
-literal|"Date literal"
+literal|"CannotPlanException"
 argument_list|)
 annotation|@
 name|Test
@@ -1779,6 +1779,11 @@ literal|11
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Ignore
+argument_list|(
+literal|"NoSuchMethodException: SqlFunctions.lt(Date, Date)"
+argument_list|)
 annotation|@
 name|Test
 specifier|public
@@ -1810,11 +1815,6 @@ literal|13
 argument_list|)
 expr_stmt|;
 block|}
-annotation|@
-name|Ignore
-argument_list|(
-literal|"Date literal"
-argument_list|)
 annotation|@
 name|Test
 specifier|public
@@ -1860,6 +1860,11 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
+name|Ignore
+argument_list|(
+literal|"slow"
+argument_list|)
+annotation|@
 name|Test
 specifier|public
 name|void
@@ -1885,6 +1890,7 @@ literal|18
 argument_list|)
 expr_stmt|;
 block|}
+comment|// a bit slow
 annotation|@
 name|Test
 specifier|public
@@ -1898,11 +1904,6 @@ literal|19
 argument_list|)
 expr_stmt|;
 block|}
-annotation|@
-name|Ignore
-argument_list|(
-literal|"Date literal"
-argument_list|)
 annotation|@
 name|Test
 specifier|public
@@ -1919,7 +1920,7 @@ block|}
 annotation|@
 name|Ignore
 argument_list|(
-literal|"runs forever"
+literal|"slow"
 argument_list|)
 annotation|@
 name|Test
