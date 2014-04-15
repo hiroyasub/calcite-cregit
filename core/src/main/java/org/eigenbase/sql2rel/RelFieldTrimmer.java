@@ -716,6 +716,10 @@ name|size
 argument_list|()
 operator|==
 name|newFieldCount
+operator|||
+name|Bug
+operator|.
+name|TODO_FIXED
 operator|:
 literal|"target: "
 operator|+
@@ -2197,7 +2201,7 @@ name|RelDataTypeImpl
 operator|.
 name|extra
 argument_list|(
-name|rowType
+name|inputRowType
 argument_list|)
 operator|==
 literal|null

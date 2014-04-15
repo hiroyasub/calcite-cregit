@@ -3353,7 +3353,7 @@ name|sqlToRelConverter
 operator|.
 name|setTrimUnusedFields
 argument_list|(
-literal|false
+literal|true
 argument_list|)
 expr_stmt|;
 return|return
