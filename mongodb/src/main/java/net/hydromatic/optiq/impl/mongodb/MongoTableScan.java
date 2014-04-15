@@ -55,18 +55,6 @@ end_import
 
 begin_import
 import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
-name|util
-operator|.
-name|Pair
-import|;
-end_import
-
-begin_import
-import|import
 name|java
 operator|.
 name|util
@@ -96,7 +84,7 @@ specifier|final
 name|RelDataType
 name|projectRowType
 decl_stmt|;
-comment|/**    * Creates a MongoTableScan.    *    * @param cluster        Cluster    * @param traitSet       Traits    * @param table          Table    * @param mongoTable     MongoDB table    * @param projectRowType Fields and types to project; null to project raw row    * @param ops            List of operators to apply    */
+comment|/**    * Creates a MongoTableScan.    *    * @param cluster        Cluster    * @param traitSet       Traits    * @param table          Table    * @param mongoTable     MongoDB table    * @param projectRowType Fields and types to project; null to project raw row    */
 specifier|protected
 name|MongoTableScan
 parameter_list|(
@@ -114,17 +102,6 @@ name|mongoTable
 parameter_list|,
 name|RelDataType
 name|projectRowType
-parameter_list|,
-name|List
-argument_list|<
-name|Pair
-argument_list|<
-name|String
-argument_list|,
-name|String
-argument_list|>
-argument_list|>
-name|ops
 parameter_list|)
 block|{
 name|super
