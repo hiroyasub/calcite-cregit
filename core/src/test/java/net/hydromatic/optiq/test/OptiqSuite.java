@@ -294,10 +294,6 @@ name|FilteratorTest
 operator|.
 name|class
 block|,
-name|OptionsListTest
-operator|.
-name|class
-block|,
 name|PermutationTestCase
 operator|.
 name|class
