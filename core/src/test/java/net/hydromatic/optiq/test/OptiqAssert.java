@@ -311,6 +311,27 @@ name|ConnectionSpec
 operator|.
 name|HSQLDB
 decl_stmt|;
+comment|/** Whether to enable slow tests. Default is false. */
+specifier|public
+specifier|static
+specifier|final
+name|boolean
+name|ENABLE_SLOW
+init|=
+name|Util
+operator|.
+name|first
+argument_list|(
+name|Boolean
+operator|.
+name|getBoolean
+argument_list|(
+literal|"optiq.test.slow"
+argument_list|)
+argument_list|,
+literal|false
+argument_list|)
+decl_stmt|;
 specifier|private
 specifier|static
 specifier|final
