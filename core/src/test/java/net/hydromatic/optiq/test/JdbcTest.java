@@ -9280,6 +9280,8 @@ argument_list|,
 literal|"empid=110; deptno=10; DNAME=Sales"
 argument_list|,
 literal|"empid=150; deptno=10; DNAME=Sales"
+argument_list|,
+literal|"empid=200; deptno=20; DNAME=null"
 argument_list|)
 expr_stmt|;
 block|}
@@ -9320,6 +9322,8 @@ argument_list|,
 literal|"deptno=10; deptno=10"
 argument_list|,
 literal|"deptno=10; deptno=10"
+argument_list|,
+literal|"deptno=20; deptno=null"
 argument_list|)
 expr_stmt|;
 block|}
@@ -9360,6 +9364,12 @@ argument_list|,
 literal|"deptno=10; deptno=10"
 argument_list|,
 literal|"deptno=10; deptno=10"
+argument_list|,
+literal|"deptno=20; deptno=null"
+argument_list|,
+literal|"deptno=null; deptno=30"
+argument_list|,
+literal|"deptno=null; deptno=40"
 argument_list|)
 expr_stmt|;
 block|}
@@ -9400,6 +9410,10 @@ argument_list|,
 literal|"deptno=10; deptno=10"
 argument_list|,
 literal|"deptno=10; deptno=10"
+argument_list|,
+literal|"deptno=null; deptno=30"
+argument_list|,
+literal|"deptno=null; deptno=40"
 argument_list|)
 expr_stmt|;
 block|}
@@ -9444,6 +9458,108 @@ argument_list|,
 literal|"empid=150; deptno=10; DNAME=Marketing"
 argument_list|,
 literal|"empid=200; deptno=20; DNAME=Marketing"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testScalarSubQueryInCase
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select e.\"name\",\n"
+operator|+
+literal|" (CASE e.\"deptno\"\n"
+operator|+
+literal|"  WHEN (Select \"deptno\" from \"hr\".\"depts\" d\n"
+operator|+
+literal|"        where d.\"deptno\" = e.\"deptno\")\n"
+operator|+
+literal|"  THEN (Select d.\"name\" from \"hr\".\"depts\" d\n"
+operator|+
+literal|"        where d.\"deptno\" = e.\"deptno\")\n"
+operator|+
+literal|"  ELSE 'DepartmentNotFound'  END ) AS DEPTNAME\n"
+operator|+
+literal|"from \"hr\".\"emps\" e"
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"name=Bill; DEPTNAME=Sales"
+argument_list|,
+literal|"name=Eric; DEPTNAME=DepartmentNotFound"
+argument_list|,
+literal|"name=Sebastian; DEPTNAME=Sales"
+argument_list|,
+literal|"name=Theodore; DEPTNAME=Sales"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testScalarSubQueryInCase2
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select e.\"name\",\n"
+operator|+
+literal|" (CASE WHEN e.\"deptno\" = (\n"
+operator|+
+literal|"    Select \"deptno\" from \"hr\".\"depts\" d\n"
+operator|+
+literal|"    where d.\"name\" = 'Sales')\n"
+operator|+
+literal|"  THEN 'Sales'\n"
+operator|+
+literal|"  ELSE 'Not Matched'  END ) AS DEPTNAME\n"
+operator|+
+literal|"from \"hr\".\"emps\" e"
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"name=Bill; DEPTNAME=Sales      "
+argument_list|,
+literal|"name=Eric; DEPTNAME=Not Matched"
+argument_list|,
+literal|"name=Sebastian; DEPTNAME=Sales      "
+argument_list|,
+literal|"name=Theodore; DEPTNAME=Sales      "
 argument_list|)
 expr_stmt|;
 block|}

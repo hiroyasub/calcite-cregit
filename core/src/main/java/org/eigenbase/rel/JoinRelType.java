@@ -99,6 +99,46 @@ name|this
 return|;
 block|}
 block|}
+comment|/** Returns whether this join type generates nulls on side #{@code i}. */
+specifier|public
+name|boolean
+name|generatesNullsOn
+parameter_list|(
+name|int
+name|i
+parameter_list|)
+block|{
+switch|switch
+condition|(
+name|i
+condition|)
+block|{
+case|case
+literal|0
+case|:
+return|return
+name|generatesNullsOnLeft
+argument_list|()
+return|;
+case|case
+literal|1
+case|:
+return|return
+name|generatesNullsOnRight
+argument_list|()
+return|;
+default|default:
+throw|throw
+operator|new
+name|IllegalArgumentException
+argument_list|(
+literal|"invalid: "
+operator|+
+name|i
+argument_list|)
+throw|;
+block|}
+block|}
 block|}
 end_enum
 

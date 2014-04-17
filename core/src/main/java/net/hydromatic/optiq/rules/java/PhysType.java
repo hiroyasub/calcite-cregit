@@ -295,6 +295,14 @@ argument_list|>
 name|argList
 parameter_list|)
 function_decl|;
+comment|/** Returns a copy of this type that allows nulls if {@code nullable} is    * true. */
+name|PhysType
+name|makeNullable
+parameter_list|(
+name|boolean
+name|nullable
+parameter_list|)
+function_decl|;
 block|}
 end_interface
 
