@@ -7947,6 +7947,37 @@ operator|||
 name|b
 return|;
 block|}
+specifier|public
+specifier|static
+name|Object
+name|throwIf
+parameter_list|(
+name|Object
+name|o
+parameter_list|,
+name|Object
+name|v
+parameter_list|)
+block|{
+if|if
+condition|(
+name|o
+operator|!=
+literal|null
+condition|)
+block|{
+throw|throw
+operator|new
+name|RuntimeException
+argument_list|(
+literal|"more than one value"
+argument_list|)
+throw|;
+block|}
+return|return
+name|v
+return|;
+block|}
 comment|/** A range of time units. The first is more significant than the    * other (e.g. year-to-day) or the same as the other    * (e.g. month). */
 specifier|public
 enum|enum

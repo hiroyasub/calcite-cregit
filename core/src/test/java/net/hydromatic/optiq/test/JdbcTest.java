@@ -8876,6 +8876,213 @@ literal|"empid=110; deptno=10; name=Theodore; salary=11500.0; commission=250"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Tests a correlated scalar sub-query in the SELECT clause.    *    *<p>Note that there should be an extra row "empid=200; deptno=20;    * DNAME=null" but left join doesn't work.</p> */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testScalarSubQuery
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select \"empid\", \"deptno\",\n"
+operator|+
+literal|" (select \"name\" from \"hr\".\"depts\"\n"
+operator|+
+literal|"  where \"deptno\" = e.\"deptno\") as dname\n"
+operator|+
+literal|"from \"hr\".\"emps\" as e"
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"empid=100; deptno=10; DNAME=Sales"
+argument_list|,
+literal|"empid=110; deptno=10; DNAME=Sales"
+argument_list|,
+literal|"empid=150; deptno=10; DNAME=Sales"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testLeftJoin
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select e.\"deptno\", d.\"deptno\"\n"
+operator|+
+literal|"from \"hr\".\"emps\" as e\n"
+operator|+
+literal|"  left join \"hr\".\"depts\" as d using (\"deptno\")"
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"deptno=10; deptno=10"
+argument_list|,
+literal|"deptno=10; deptno=10"
+argument_list|,
+literal|"deptno=10; deptno=10"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFullJoin
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select e.\"deptno\", d.\"deptno\"\n"
+operator|+
+literal|"from \"hr\".\"emps\" as e\n"
+operator|+
+literal|"  full join \"hr\".\"depts\" as d using (\"deptno\")"
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"deptno=10; deptno=10"
+argument_list|,
+literal|"deptno=10; deptno=10"
+argument_list|,
+literal|"deptno=10; deptno=10"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testRightJoin
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select e.\"deptno\", d.\"deptno\"\n"
+operator|+
+literal|"from \"hr\".\"emps\" as e\n"
+operator|+
+literal|"  right join \"hr\".\"depts\" as d using (\"deptno\")"
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"deptno=10; deptno=10"
+argument_list|,
+literal|"deptno=10; deptno=10"
+argument_list|,
+literal|"deptno=10; deptno=10"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testScalarSubQueryUncorrelated
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select \"empid\", \"deptno\",\n"
+operator|+
+literal|" (select \"name\" from \"hr\".\"depts\"\n"
+operator|+
+literal|"  where \"deptno\" = 30) as dname\n"
+operator|+
+literal|"from \"hr\".\"emps\" as e"
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"empid=100; deptno=10; DNAME=Marketing"
+argument_list|,
+literal|"empid=110; deptno=10; DNAME=Marketing"
+argument_list|,
+literal|"empid=150; deptno=10; DNAME=Marketing"
+argument_list|,
+literal|"empid=200; deptno=20; DNAME=Marketing"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Tests the TABLES table in the information schema. */
 annotation|@
 name|Test
