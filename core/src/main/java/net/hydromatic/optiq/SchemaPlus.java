@@ -120,6 +120,17 @@ argument_list|>
 name|path
 parameter_list|)
 function_decl|;
+name|void
+name|setCacheEnabled
+parameter_list|(
+name|boolean
+name|cache
+parameter_list|)
+function_decl|;
+name|boolean
+name|isCacheEnabled
+parameter_list|()
+function_decl|;
 block|}
 end_interface
 

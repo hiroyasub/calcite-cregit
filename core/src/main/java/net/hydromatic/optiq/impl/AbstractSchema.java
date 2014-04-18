@@ -103,6 +103,21 @@ literal|true
 return|;
 block|}
 specifier|public
+name|boolean
+name|contentsHaveChangedSince
+parameter_list|(
+name|long
+name|lastCheck
+parameter_list|,
+name|long
+name|now
+parameter_list|)
+block|{
+return|return
+literal|false
+return|;
+block|}
+specifier|public
 name|Expression
 name|getExpression
 parameter_list|(
@@ -220,6 +235,7 @@ argument_list|(
 name|name
 argument_list|)
 return|;
+comment|// never null
 block|}
 specifier|public
 specifier|final
