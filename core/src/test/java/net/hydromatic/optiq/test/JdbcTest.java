@@ -6121,6 +6121,318 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testReuseExpressionWhenNullChecking
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select upper((case when \"empid\">\"deptno\"*10 then 'y' else null end)) T from \"hr\".\"emps\""
+argument_list|)
+operator|.
+name|planContains
+argument_list|(
+literal|"return current.empid<= current.deptno * 10 "
+operator|+
+literal|"? (String) null "
+operator|+
+literal|": net.hydromatic.optiq.runtime.SqlFunctions.upper(\"y\");"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"T=null\n"
+operator|+
+literal|"T=null\n"
+operator|+
+literal|"T=Y\n"
+operator|+
+literal|"T=Y\n"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testReuseExpressionWhenNullChecking2
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select upper((case when \"empid\">\"deptno\"*10 then \"name\" end)) T from \"hr\".\"emps\""
+argument_list|)
+operator|.
+name|planContains
+argument_list|(
+literal|"final String inp2_ = current.name;"
+argument_list|)
+operator|.
+name|planContains
+argument_list|(
+literal|"return current.empid<= current.deptno * 10 "
+operator|+
+literal|"|| inp2_ == null "
+operator|+
+literal|"? (String) null "
+operator|+
+literal|": net.hydromatic.optiq.runtime.SqlFunctions.upper(inp2_);"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"T=null\n"
+operator|+
+literal|"T=null\n"
+operator|+
+literal|"T=SEBASTIAN\n"
+operator|+
+literal|"T=THEODORE\n"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testReuseExpressionWhenNullChecking3
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select substring(\"name\", \"deptno\"+case when user<> 'sa' then 1 end) from \"hr\".\"emps\""
+argument_list|)
+operator|.
+name|planContains
+argument_list|(
+literal|"final String inp2_ = current.name;"
+argument_list|)
+operator|.
+name|planContains
+argument_list|(
+literal|"return inp2_ == null || !net.hydromatic.optiq.runtime"
+operator|+
+literal|".SqlFunctions.ne(\"sa\", \"sa\") ? (String) null"
+operator|+
+literal|": net.hydromatic.optiq.runtime.SqlFunctions.substring(inp2_, "
+operator|+
+literal|"current.deptno + 1);"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testReuseExpressionWhenNullChecking4
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select substring(trim(\n"
+operator|+
+literal|"substring(\"name\",\n"
+operator|+
+literal|"  \"deptno\"*0+case when user = 'sa' then 1 end)\n"
+operator|+
+literal|"), case when \"empid\">\"deptno\" then 4\n"
+comment|/* diff from 5 */
+operator|+
+literal|"   else\n"
+operator|+
+literal|"     case when \"deptno\"*8>8 then 5 end\n"
+operator|+
+literal|"   end-2) T\n"
+operator|+
+literal|"from\n"
+operator|+
+literal|"\"hr\".\"emps\""
+argument_list|)
+operator|.
+name|planContains
+argument_list|(
+literal|"final String inp2_ = current.name;"
+argument_list|)
+operator|.
+name|planContains
+argument_list|(
+literal|"final int inp1_ = current.deptno;"
+argument_list|)
+operator|.
+name|planContains
+argument_list|(
+literal|"return inp2_ == null "
+operator|+
+literal|"|| !net.hydromatic.optiq.runtime.SqlFunctions.eq(\"sa\", \"sa\") "
+operator|+
+literal|"|| !v5&& inp1_ * 8<= 8 "
+operator|+
+literal|"? (String) null "
+operator|+
+literal|": net.hydromatic.optiq.runtime.SqlFunctions.substring("
+operator|+
+literal|"net.hydromatic.optiq.runtime.SqlFunctions.trim(true, true, \" \", "
+operator|+
+literal|"net.hydromatic.optiq.runtime.SqlFunctions.substring(inp2_, "
+operator|+
+literal|"inp1_ * 0 + 1)), (v5 ? 4 : 5) - 2);"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"T=ill\n"
+operator|+
+literal|"T=ric\n"
+operator|+
+literal|"T=ebastian\n"
+operator|+
+literal|"T=heodore\n"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testReuseExpressionWhenNullChecking5
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select substring(trim(\n"
+operator|+
+literal|"substring(\"name\",\n"
+operator|+
+literal|"  \"deptno\"*0+case when user = 'sa' then 1 end)\n"
+operator|+
+literal|"), case when \"empid\">\"deptno\" then 5\n"
+comment|/* diff from 4 */
+operator|+
+literal|"   else\n"
+operator|+
+literal|"     case when \"deptno\"*8>8 then 5 end\n"
+operator|+
+literal|"   end-2) T\n"
+operator|+
+literal|"from\n"
+operator|+
+literal|"\"hr\".\"emps\""
+argument_list|)
+operator|.
+name|planContains
+argument_list|(
+literal|"final String inp2_ = current.name;"
+argument_list|)
+operator|.
+name|planContains
+argument_list|(
+literal|"final int inp1_ = current.deptno;"
+argument_list|)
+operator|.
+name|planContains
+argument_list|(
+literal|"return inp2_ == null "
+operator|+
+literal|"|| !net.hydromatic.optiq.runtime.SqlFunctions.eq(\"sa\", \"sa\") "
+operator|+
+literal|"|| current.empid<= inp1_&& inp1_ * 8<= 8 "
+operator|+
+literal|"? (String) null "
+operator|+
+literal|": net.hydromatic.optiq.runtime.SqlFunctions.substring("
+operator|+
+literal|"net.hydromatic.optiq.runtime.SqlFunctions.trim(true, true, \" \", "
+operator|+
+literal|"net.hydromatic.optiq.runtime.SqlFunctions.substring(inp2_, "
+operator|+
+literal|"inp1_ * 0 + 1)), 5 - 2);"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"T=ll\n"
+operator|+
+literal|"T=ic\n"
+operator|+
+literal|"T=bastian\n"
+operator|+
+literal|"T=eodore\n"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testValues
 parameter_list|()
 block|{
