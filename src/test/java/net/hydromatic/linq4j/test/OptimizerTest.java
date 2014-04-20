@@ -3287,8 +3287,72 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|booleanValueOfTrue
+parameter_list|()
+block|{
+comment|// Boolean.valueOf(true) -> true
+name|assertEquals
+argument_list|(
+literal|"{\n  return true;\n}\n"
+argument_list|,
+name|optimize
+argument_list|(
+name|Expressions
+operator|.
+name|call
+argument_list|(
+name|Boolean
+operator|.
+name|class
+argument_list|,
+literal|"valueOf"
+argument_list|,
+name|TRUE
+argument_list|)
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|booleanValueOfFalse
+parameter_list|()
+block|{
+comment|// Boolean.valueOf(false) -> false
+name|assertEquals
+argument_list|(
+literal|"{\n  return false;\n}\n"
+argument_list|,
+name|optimize
+argument_list|(
+name|Expressions
+operator|.
+name|call
+argument_list|(
+name|Boolean
+operator|.
+name|class
+argument_list|,
+literal|"valueOf"
+argument_list|,
+name|FALSE
+argument_list|)
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 end_class
+
+begin_comment
+comment|// End OptimizerTest.java
+end_comment
 
 end_unit
 
