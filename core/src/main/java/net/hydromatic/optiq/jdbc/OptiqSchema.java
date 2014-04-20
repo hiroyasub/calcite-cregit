@@ -518,12 +518,15 @@ block|}
 block|}
 expr_stmt|;
 block|}
-comment|/** Creates a root schema. It contains a "metadata" schema containing    * definitions of tables, columns etc. */
+comment|/** Creates a root schema. When<code>addMetadataSchema</code> argument is    * true a "metadata" schema containing definitions of tables, columns etc. is    * added to root schema. */
 specifier|public
 specifier|static
 name|OptiqRootSchema
 name|createRootSchema
-parameter_list|()
+parameter_list|(
+name|boolean
+name|addMetadataSchema
+parameter_list|)
 block|{
 name|OptiqRootSchema
 name|rootSchema
@@ -538,6 +541,11 @@ name|RootSchema
 argument_list|()
 argument_list|)
 decl_stmt|;
+if|if
+condition|(
+name|addMetadataSchema
+condition|)
+block|{
 name|rootSchema
 operator|.
 name|add
@@ -549,6 +557,7 @@ operator|.
 name|INSTANCE
 argument_list|)
 expr_stmt|;
+block|}
 return|return
 name|rootSchema
 return|;

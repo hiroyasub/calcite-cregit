@@ -584,18 +584,23 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**    * Creates a root schema.    */
+comment|/**    * Creates a root schema.    *    * @param addMetadataSchema Whether to add "metadata" schema containing    *    definitions of tables, columns etc.    */
 specifier|public
 specifier|static
 name|SchemaPlus
 name|createRootSchema
-parameter_list|()
+parameter_list|(
+name|boolean
+name|addMetadataSchema
+parameter_list|)
 block|{
 return|return
 name|OptiqSchema
 operator|.
 name|createRootSchema
-argument_list|()
+argument_list|(
+name|addMetadataSchema
+argument_list|)
 operator|.
 name|plus
 argument_list|()

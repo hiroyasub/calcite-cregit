@@ -993,7 +993,9 @@ return|return
 name|Frameworks
 operator|.
 name|createRootSchema
-argument_list|()
+argument_list|(
+literal|true
+argument_list|)
 operator|.
 name|add
 argument_list|(
@@ -2657,7 +2659,9 @@ operator|=
 name|Frameworks
 operator|.
 name|createRootSchema
-argument_list|()
+argument_list|(
+literal|true
+argument_list|)
 operator|.
 name|add
 argument_list|(
