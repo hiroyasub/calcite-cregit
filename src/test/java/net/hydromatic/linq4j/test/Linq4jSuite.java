@@ -105,6 +105,10 @@ name|InlinerTest
 operator|.
 name|class
 block|,
+name|DeterministicTest
+operator|.
+name|class
+block|,
 name|BlockBuilderTest
 operator|.
 name|class

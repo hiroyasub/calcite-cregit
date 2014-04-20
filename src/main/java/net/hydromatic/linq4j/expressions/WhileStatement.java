@@ -94,6 +94,15 @@ name|Visitor
 name|visitor
 parameter_list|)
 block|{
+name|visitor
+operator|=
+name|visitor
+operator|.
+name|preVisit
+argument_list|(
+name|this
+argument_list|)
+expr_stmt|;
 specifier|final
 name|Expression
 name|condition1

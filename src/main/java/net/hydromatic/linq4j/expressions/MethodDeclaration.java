@@ -207,6 +207,15 @@ name|Visitor
 name|visitor
 parameter_list|)
 block|{
+name|visitor
+operator|=
+name|visitor
+operator|.
+name|preVisit
+argument_list|(
+name|this
+argument_list|)
+expr_stmt|;
 comment|// do not visit parameters
 specifier|final
 name|BlockStatement
@@ -227,8 +236,6 @@ operator|.
 name|visit
 argument_list|(
 name|this
-argument_list|,
-name|parameters
 argument_list|,
 name|body
 argument_list|)

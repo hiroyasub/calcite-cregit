@@ -152,6 +152,15 @@ name|Visitor
 name|visitor
 parameter_list|)
 block|{
+name|visitor
+operator|=
+name|visitor
+operator|.
+name|preVisit
+argument_list|(
+name|this
+argument_list|)
+expr_stmt|;
 name|Expression
 name|expression1
 init|=

@@ -247,6 +247,15 @@ name|Visitor
 name|visitor
 parameter_list|)
 block|{
+name|visitor
+operator|=
+name|visitor
+operator|.
+name|preVisit
+argument_list|(
+name|this
+argument_list|)
+expr_stmt|;
 name|BlockStatement
 name|body
 init|=
@@ -267,8 +276,6 @@ argument_list|(
 name|this
 argument_list|,
 name|body
-argument_list|,
-name|parameterList
 argument_list|)
 return|;
 block|}

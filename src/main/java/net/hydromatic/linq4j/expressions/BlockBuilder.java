@@ -115,6 +115,16 @@ specifier|final
 name|BlockBuilder
 name|parent
 decl_stmt|;
+specifier|private
+specifier|static
+specifier|final
+name|Visitor
+name|OPTIMIZE_VISITOR
+init|=
+operator|new
+name|OptimizeVisitor
+argument_list|()
+decl_stmt|;
 comment|/**    * Creates a non-optimizing BlockBuilder.    */
 specifier|public
 name|BlockBuilder
@@ -1196,12 +1206,25 @@ if|if
 condition|(
 operator|!
 name|optimize
+argument_list|(
+name|createOptimizeVisitor
 argument_list|()
+argument_list|,
+literal|true
+argument_list|)
 condition|)
 block|{
 break|break;
 block|}
 block|}
+name|optimize
+argument_list|(
+name|createFinishingOptimizeVisitor
+argument_list|()
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
 block|}
 return|return
 name|Expressions
@@ -1216,7 +1239,13 @@ comment|/**    * Optimizes the list of statements. If an expression is used only
 specifier|private
 name|boolean
 name|optimize
-parameter_list|()
+parameter_list|(
+name|Visitor
+name|optimizer
+parameter_list|,
+name|boolean
+name|performInline
+parameter_list|)
 block|{
 name|boolean
 name|optimized
@@ -1244,6 +1273,8 @@ condition|(
 name|statement
 operator|instanceof
 name|DeclarationStatement
+operator|&&
+name|performInline
 condition|)
 block|{
 name|DeclarationStatement
@@ -1273,6 +1304,17 @@ block|}
 comment|// We are added only counters up to current statement.
 comment|// It is fine to count usages as the latter declarations cannot be used
 comment|// in more recent statements.
+if|if
+condition|(
+operator|!
+name|useCounter
+operator|.
+name|map
+operator|.
+name|isEmpty
+argument_list|()
+condition|)
+block|{
 name|statement
 operator|.
 name|accept
@@ -1280,6 +1322,7 @@ argument_list|(
 name|useCounter
 argument_list|)
 expr_stmt|;
+block|}
 block|}
 specifier|final
 name|Map
@@ -1315,14 +1358,6 @@ name|SubstituteVariableVisitor
 argument_list|(
 name|subMap
 argument_list|)
-decl_stmt|;
-specifier|final
-name|OptimizeVisitor
-name|optimizer
-init|=
-operator|new
-name|OptimizeVisitor
-argument_list|()
 decl_stmt|;
 specifier|final
 name|ArrayList
@@ -1386,6 +1421,12 @@ decl_stmt|;
 name|int
 name|count
 init|=
+name|slot
+operator|==
+literal|null
+condition|?
+literal|100
+else|:
 name|slot
 operator|.
 name|count
@@ -1650,6 +1691,28 @@ block|}
 block|}
 return|return
 name|optimized
+return|;
+block|}
+comment|/**    * Creates a visitor that will be used during block optimization.    * Subclasses might provide more specific optimizations (e.g. partial    * evaluation).    *    * @return visitor used to optimize the statements when converting to block    */
+specifier|protected
+name|Visitor
+name|createOptimizeVisitor
+parameter_list|()
+block|{
+return|return
+name|OPTIMIZE_VISITOR
+return|;
+block|}
+comment|/**    * Creates a final optimization visitor.    * Typically, the visitor will factor out constant expressions.    *    * @return visitor that is used to finalize the optimization    */
+specifier|protected
+name|Visitor
+name|createFinishingOptimizeVisitor
+parameter_list|()
+block|{
+return|return
+operator|new
+name|DeterministicCodeOptimizer
+argument_list|()
 return|;
 block|}
 comment|/**    * Creates a name for a new variable, unique within this block, controlling    * whether the variable can be inlined later.    */

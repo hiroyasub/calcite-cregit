@@ -113,6 +113,15 @@ name|Visitor
 name|visitor
 parameter_list|)
 block|{
+name|visitor
+operator|=
+name|visitor
+operator|.
+name|preVisit
+argument_list|(
+name|this
+argument_list|)
+expr_stmt|;
 comment|// do not visit parameter - visit may not return a ParameterExpression
 name|Expression
 name|initializer
@@ -140,8 +149,6 @@ operator|.
 name|visit
 argument_list|(
 name|this
-argument_list|,
-name|parameter
 argument_list|,
 name|initializer
 argument_list|)
