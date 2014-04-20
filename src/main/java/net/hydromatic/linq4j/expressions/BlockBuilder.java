@@ -1186,7 +1186,9 @@ condition|(
 name|optimizing
 condition|)
 block|{
-comment|/* We put an artificial limit of 10 iterations just to prevent       endless loop. Optimize should not loop forever, however it is hard to       prove if it always finishes in reasonable time. */
+comment|// We put an artificial limit of 10 iterations just to prevent an endless
+comment|// loop. Optimize should not loop forever, however it is hard to prove if
+comment|// it always finishes in reasonable time.
 for|for
 control|(
 name|int
@@ -1235,7 +1237,7 @@ name|statements
 argument_list|)
 return|;
 block|}
-comment|/**    * Optimizes the list of statements. If an expression is used only once,    * it is inlined.    *    * @return if any optimizations were made or not    */
+comment|/**    * Optimizes the list of statements. If an expression is used only once,    * it is inlined.    *    * @return whether any optimizations were made    */
 specifier|private
 name|boolean
 name|optimize
@@ -1247,10 +1249,10 @@ name|boolean
 name|performInline
 parameter_list|)
 block|{
-name|boolean
-name|optimized
+name|int
+name|optimizeCount
 init|=
-literal|false
+literal|0
 decl_stmt|;
 specifier|final
 name|UseCounter
@@ -1586,12 +1588,17 @@ argument_list|(
 name|optimizer
 argument_list|)
 expr_stmt|;
-name|optimized
-operator||=
+if|if
+condition|(
 name|beforeOptimize
 operator|!=
 name|oldStatement
+condition|)
+block|{
+operator|++
+name|optimizeCount
 expr_stmt|;
+block|}
 if|if
 condition|(
 name|oldStatement
@@ -1664,12 +1671,17 @@ argument_list|(
 name|optimizer
 argument_list|)
 expr_stmt|;
-name|optimized
-operator||=
+if|if
+condition|(
 name|beforeOptimize
 operator|!=
 name|oldStatement
+condition|)
+block|{
+operator|++
+name|optimizeCount
 expr_stmt|;
+block|}
 if|if
 condition|(
 name|oldStatement
@@ -1690,7 +1702,9 @@ block|}
 block|}
 block|}
 return|return
-name|optimized
+name|optimizeCount
+operator|>
+literal|0
 return|;
 block|}
 comment|/**    * Creates a visitor that will be used during block optimization.    * Subclasses might provide more specific optimizations (e.g. partial    * evaluation).    *    * @return visitor used to optimize the statements when converting to block    */

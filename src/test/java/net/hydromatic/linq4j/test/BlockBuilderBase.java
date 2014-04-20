@@ -35,10 +35,15 @@ end_comment
 
 begin_class
 specifier|public
-specifier|abstract
+specifier|final
 class|class
 name|BlockBuilderBase
 block|{
+specifier|private
+name|BlockBuilderBase
+parameter_list|()
+block|{
+block|}
 specifier|public
 specifier|static
 specifier|final
@@ -311,6 +316,10 @@ return|;
 block|}
 block|}
 end_class
+
+begin_comment
+comment|// End BlockBuilderBase.java
+end_comment
 
 end_unit
 

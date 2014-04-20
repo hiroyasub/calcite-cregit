@@ -82,7 +82,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Visitor that optimizes expressions.  *<p/>  *<p>The optimizations are essential, not mere tweaks. Without  * optimization, expressions such as {@code false == null} will be left in,  * which are invalid to Janino (because it does not automatically box  * primitives).</p>  */
+comment|/**  * Visitor that optimizes expressions.  *  *<p>The optimizations are essential, not mere tweaks. Without  * optimization, expressions such as {@code false == null} will be left in,  * which are invalid to Janino (because it does not automatically box  * primitives).</p>  */
 end_comment
 
 begin_class
@@ -2011,7 +2011,7 @@ return|return
 literal|null
 return|;
 block|}
-comment|/**    * Verifies if the expression always returns non-null result.    * For instance, primitive types cannot contain null values.    *    * @param expression expression to test    * @return true when the expression is known to be not-null    */
+comment|/**    * Returns whether an expression always returns a non-null result.    * For instance, primitive types cannot contain null values.    *    * @param expression expression to test    * @return true when the expression is known to be not-null    */
 specifier|protected
 name|boolean
 name|isKnownNotNull
@@ -2111,6 +2111,10 @@ return|;
 block|}
 block|}
 end_class
+
+begin_comment
+comment|// End OptimizeVisitor.java
+end_comment
 
 end_unit
 

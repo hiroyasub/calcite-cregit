@@ -51,6 +51,22 @@ end_import
 
 begin_import
 import|import static
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|linq4j
+operator|.
+name|test
+operator|.
+name|BlockBuilderBase
+operator|.
+name|*
+import|;
+end_import
+
+begin_import
+import|import static
 name|org
 operator|.
 name|junit
@@ -62,15 +78,13 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Tests expression inlining in BlockBuilder  */
+comment|/**  * Tests expression inlining in BlockBuilder.  */
 end_comment
 
 begin_class
 specifier|public
 class|class
 name|InlinerTest
-extends|extends
-name|BlockBuilderBase
 block|{
 name|BlockBuilder
 name|b
@@ -95,7 +109,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|inlineSingleUsage
+name|testInlineSingleUsage
 parameter_list|()
 block|{
 name|DeclarationStatement
@@ -160,7 +174,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|inlineConstant
+name|testInlineConstant
 parameter_list|()
 block|{
 name|DeclarationStatement
@@ -227,7 +241,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|inlineParameter
+name|testInlineParameter
 parameter_list|()
 block|{
 name|ParameterExpression
@@ -308,7 +322,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|noInlineMultipleUsage
+name|testNoInlineMultipleUsage
 parameter_list|()
 block|{
 name|ParameterExpression
@@ -416,7 +430,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|assignInConditionMultipleUsage
+name|testAssignInConditionMultipleUsage
 parameter_list|()
 block|{
 comment|// int t;
@@ -568,7 +582,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|assignInConditionOptimizedOut
+name|testAssignInConditionOptimizedOut
 parameter_list|()
 block|{
 comment|// int t;
@@ -727,7 +741,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|assignInConditionMultipleUsageNonOptimized
+name|testAssignInConditionMultipleUsageNonOptimized
 parameter_list|()
 block|{
 comment|// int t = 2;
@@ -879,7 +893,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|multipassOptimization
+name|testMultiPassOptimization
 parameter_list|()
 block|{
 comment|// int t = u + v;
@@ -1017,6 +1031,10 @@ expr_stmt|;
 block|}
 block|}
 end_class
+
+begin_comment
+comment|// End InlinerTest.java
+end_comment
 
 end_unit
 

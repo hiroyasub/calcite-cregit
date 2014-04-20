@@ -92,22 +92,6 @@ name|DeterministicCodeOptimizer
 extends|extends
 name|Visitor
 block|{
-specifier|private
-specifier|static
-specifier|final
-name|Set
-argument_list|<
-name|Class
-argument_list|>
-name|KNOWN_IMMUTABLE_CLASSES
-init|=
-operator|new
-name|HashSet
-argument_list|<
-name|Class
-argument_list|>
-argument_list|()
-decl_stmt|;
 specifier|protected
 specifier|final
 name|DeterministicCodeOptimizer
@@ -133,7 +117,7 @@ name|Boolean
 argument_list|>
 argument_list|()
 decl_stmt|;
-comment|/**    * The map that deduplicates expressions, so the same expressions may reuse    * the same final static fields.    */
+comment|/**    * The map that de-duplicates expressions, so the same expressions may reuse    * the same final static fields.    */
 specifier|protected
 specifier|final
 name|Map
@@ -1551,7 +1535,7 @@ name|klass
 argument_list|)
 return|;
 block|}
-comment|/**    * Checks if all the methods in given class are determinstic (i.e. return    * the same value given the same inputs)    *    * @param klass class to test    * @return true when all the methods including constructors are deterministic    */
+comment|/**    * Checks if all the methods in given class are deterministic (i.e. return    * the same value given the same inputs)    *    * @param klass class to test    * @return true when all the methods including constructors are deterministic    */
 specifier|protected
 name|boolean
 name|allMethodsDeterministic
@@ -1620,6 +1604,10 @@ return|;
 block|}
 block|}
 end_class
+
+begin_comment
+comment|// End DeterministicCodeOptimizer.java
+end_comment
 
 end_unit
 

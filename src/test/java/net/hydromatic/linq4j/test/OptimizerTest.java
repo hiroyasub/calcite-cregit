@@ -41,6 +41,22 @@ end_import
 
 begin_import
 import|import static
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|linq4j
+operator|.
+name|test
+operator|.
+name|BlockBuilderBase
+operator|.
+name|*
+import|;
+end_import
+
+begin_import
+import|import static
 name|org
 operator|.
 name|junit
@@ -59,14 +75,12 @@ begin_class
 specifier|public
 class|class
 name|OptimizerTest
-extends|extends
-name|BlockBuilderBase
 block|{
 annotation|@
 name|Test
 specifier|public
 name|void
-name|optimizeComparison
+name|testOptimizeComparison
 parameter_list|()
 block|{
 name|assertEquals
@@ -91,7 +105,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|optimizeTernaryAlwaysTrue
+name|testOptimizeTernaryAlwaysTrue
 parameter_list|()
 block|{
 comment|// true ? 1 : 2
@@ -119,7 +133,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|optimizeTernaryAlwaysFalse
+name|testOptimizeTernaryAlwaysFalse
 parameter_list|()
 block|{
 comment|// false ? 1 : 2
@@ -147,7 +161,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|optimizeTernaryAlwaysSame
+name|testOptimizeTernaryAlwaysSame
 parameter_list|()
 block|{
 comment|// bool ? 1 : 1
@@ -184,7 +198,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|nonOptimizableTernary
+name|testNonOptimizableTernary
 parameter_list|()
 block|{
 comment|// bool ? 1 : 2
@@ -221,7 +235,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|optimizeTernaryRotateNot
+name|testOptimizeTernaryRotateNot
 parameter_list|()
 block|{
 comment|// !bool ? 1 : 2
@@ -263,7 +277,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|optimizeTernaryRotateEqualFalse
+name|testOptimizeTernaryRotateEqualFalse
 parameter_list|()
 block|{
 comment|// bool == false ? 1 : 2
@@ -307,7 +321,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|optimizeTernaryAtrueB
+name|testOptimizeTernaryAtrueB
 parameter_list|()
 block|{
 comment|// a ? true : b  === a || b
@@ -353,7 +367,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|optimizeTernaryAtrueNull
+name|testOptimizeTernaryAtrueNull
 parameter_list|()
 block|{
 comment|// a ? Boolean.TRUE : null  === a ? Boolean.TRUE : (Boolean) null
@@ -399,7 +413,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|optimizeTernaryAtrueBoxed
+name|testOptimizeTernaryAtrueBoxed
 parameter_list|()
 block|{
 comment|// a ? Boolean.TRUE : Boolean.valueOf(b)  === a || b
@@ -456,7 +470,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|optimizeTernaryABtrue
+name|testOptimizeTernaryABtrue
 parameter_list|()
 block|{
 comment|// a ? b : true  === !a || b
@@ -502,7 +516,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|optimizeTernaryAfalseB
+name|testOptimizeTernaryAfalseB
 parameter_list|()
 block|{
 comment|// a ? false : b === !a&& b
@@ -548,7 +562,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|optimizeTernaryABfalse
+name|testOptimizeTernaryABfalse
 parameter_list|()
 block|{
 comment|// a ? b : false === a&& b
@@ -594,7 +608,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|optimizeTernaryInEqualABCeqB
+name|testOptimizeTernaryInEqualABCeqB
 parameter_list|()
 block|{
 comment|// (v ? (Integer) null : inp0_) == null
@@ -647,7 +661,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|optimizeTernaryInEqualABCeqC
+name|testOptimizeTernaryInEqualABCeqC
 parameter_list|()
 block|{
 comment|// (v ? inp0_ : (Integer) null) == null
@@ -700,7 +714,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|optimizeTernaryAeqBBA
+name|testOptimizeTernaryAeqBBA
 parameter_list|()
 block|{
 comment|// a == b ? b : a
@@ -763,7 +777,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|optimizeTernaryAeqBAB
+name|testOptimizeTernaryAeqBAB
 parameter_list|()
 block|{
 comment|// a == b ? a : b
@@ -826,7 +840,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|optimizeTernaryInEqualABCneqB
+name|testOptimizeTernaryInEqualABCneqB
 parameter_list|()
 block|{
 comment|// (v ? (Integer) null : inp0_) != null
@@ -879,7 +893,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|optimizeTernaryInEqualABCneqC
+name|testOptimizeTernaryInEqualABCneqC
 parameter_list|()
 block|{
 comment|// (v ? inp0_ : (Integer) null) != null
@@ -932,7 +946,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|optimizeTernaryAneqBBA
+name|testOptimizeTernaryAneqBBA
 parameter_list|()
 block|{
 comment|// a != b ? b : a
@@ -995,7 +1009,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|optimizeTernaryAneqBAB
+name|testOptimizeTernaryAneqBAB
 parameter_list|()
 block|{
 comment|// a != b ? a : b
@@ -1058,7 +1072,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|andAlsoTrueBool
+name|testAndAlsoTrueBool
 parameter_list|()
 block|{
 comment|// true&& bool
@@ -1093,7 +1107,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|andAlsoBoolTrue
+name|testAndAlsoBoolTrue
 parameter_list|()
 block|{
 comment|// bool&& true
@@ -1128,7 +1142,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|andAlsoFalseBool
+name|testAndAlsoFalseBool
 parameter_list|()
 block|{
 comment|// false&& bool
@@ -1163,7 +1177,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|andAlsoNullBool
+name|testAndAlsoNullBool
 parameter_list|()
 block|{
 comment|// null&& bool
@@ -1198,7 +1212,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|andAlsoXY
+name|testAndAlsoXY
 parameter_list|()
 block|{
 comment|// x&& y
@@ -1242,7 +1256,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|andAlsoXX
+name|testAndAlsoXX
 parameter_list|()
 block|{
 comment|// x&& x
@@ -1282,7 +1296,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|orElseTrueBool
+name|testOrElseTrueBool
 parameter_list|()
 block|{
 comment|// true || bool
@@ -1317,7 +1331,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|orElseFalseBool
+name|testOrElseFalseBool
 parameter_list|()
 block|{
 comment|// false || bool
@@ -1352,7 +1366,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|orElseNullBool
+name|testOrElseNullBool
 parameter_list|()
 block|{
 comment|// null || bool
@@ -1387,7 +1401,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|orElseXY
+name|testOrElseXY
 parameter_list|()
 block|{
 comment|// x || y
@@ -1431,7 +1445,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|orElseXX
+name|testOrElseXX
 parameter_list|()
 block|{
 comment|// x || x
@@ -1471,7 +1485,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|equalSameConst
+name|testEqualSameConst
 parameter_list|()
 block|{
 comment|// 1 == 1
@@ -1502,7 +1516,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|equalDifferentConst
+name|testEqualDifferentConst
 parameter_list|()
 block|{
 comment|// 1 == 2
@@ -1528,7 +1542,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|equalSameExpr
+name|testEqualSameExpr
 parameter_list|()
 block|{
 comment|// x == x
@@ -1568,7 +1582,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|equalDifferentExpr
+name|testEqualDifferentExpr
 parameter_list|()
 block|{
 comment|// x == y
@@ -1622,7 +1636,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|equalPrimitiveNull
+name|testEqualPrimitiveNull
 parameter_list|()
 block|{
 comment|// (int) x == null
@@ -1662,7 +1676,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|equalObjectNull
+name|testEqualObjectNull
 parameter_list|()
 block|{
 comment|// (Integer) x == null
@@ -1702,7 +1716,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|equalStringNull
+name|testEqualStringNull
 parameter_list|()
 block|{
 comment|// "Y" == null
@@ -1733,7 +1747,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|equalTypedNullUntypedNull
+name|testEqualTypedNullUntypedNull
 parameter_list|()
 block|{
 comment|// (Integer) null == null
@@ -1759,7 +1773,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|equalUnypedNullTypedNull
+name|testEqualUnypedNullTypedNull
 parameter_list|()
 block|{
 comment|// null == (Integer) null
@@ -1785,7 +1799,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|equalBoolTrue
+name|testEqualBoolTrue
 parameter_list|()
 block|{
 comment|// x == true
@@ -1825,7 +1839,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|equalBoolFalse
+name|testEqualBoolFalse
 parameter_list|()
 block|{
 comment|// x == false
@@ -1865,7 +1879,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|notEqualSameConst
+name|testNotEqualSameConst
 parameter_list|()
 block|{
 comment|// 1 != 1
@@ -1896,7 +1910,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|notEqualDifferentConst
+name|testNotEqualDifferentConst
 parameter_list|()
 block|{
 comment|// 1 != 2
@@ -1922,7 +1936,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|notEqualSameExpr
+name|testNotEqualSameExpr
 parameter_list|()
 block|{
 comment|// x != x
@@ -1962,7 +1976,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|notEqualDifferentExpr
+name|testNotEqualDifferentExpr
 parameter_list|()
 block|{
 comment|// x != y
@@ -2016,7 +2030,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|notEqualPrimitiveNull
+name|testNotEqualPrimitiveNull
 parameter_list|()
 block|{
 comment|// (int) x == null
@@ -2056,7 +2070,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|notEqualObjectNull
+name|testNotEqualObjectNull
 parameter_list|()
 block|{
 comment|// (Integer) x == null
@@ -2096,7 +2110,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|notEqualStringNull
+name|testNotEqualStringNull
 parameter_list|()
 block|{
 comment|// "Y" != null
@@ -2127,7 +2141,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|notEqualTypedNullUntypedNull
+name|testNotEqualTypedNullUntypedNull
 parameter_list|()
 block|{
 comment|// (Integer) null != null
@@ -2153,7 +2167,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|notEqualUnypedNullTypedNull
+name|testNotEqualUnypedNullTypedNull
 parameter_list|()
 block|{
 comment|// null != (Integer) null
@@ -2179,7 +2193,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|notEqualBoolTrue
+name|testNotEqualBoolTrue
 parameter_list|()
 block|{
 comment|// x != true
@@ -2219,7 +2233,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|notEqualBoolFalse
+name|testNotEqualBoolFalse
 parameter_list|()
 block|{
 comment|// x != false
@@ -2259,10 +2273,10 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|multipleFolding
+name|testMultipleFolding
 parameter_list|()
 block|{
-comment|// ( 1 == 2 ? 3 : 4 ) != (5 != 6 ? 4 : 8) ? 9 : 10
+comment|// (1 == 2 ? 3 : 4) != (5 != 6 ? 4 : 8) ? 9 : 10
 name|assertEquals
 argument_list|(
 literal|"{\n  return 10;\n}\n"
@@ -2366,7 +2380,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|conditionalIfTrue
+name|testConditionalIfTrue
 parameter_list|()
 block|{
 comment|// if (true) {return 1}
@@ -2399,7 +2413,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|conditionalIfTrueElse
+name|testConditionalIfTrueElse
 parameter_list|()
 block|{
 comment|// if (true) {return 1} else {return 2}
@@ -2441,7 +2455,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|conditionalIfFalse
+name|testConditionalIfFalse
 parameter_list|()
 block|{
 comment|// if (false) {return 1}
@@ -2474,7 +2488,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|conditionalIfFalseElse
+name|testConditionalIfFalseElse
 parameter_list|()
 block|{
 comment|// if (false) {return 1} else {return 2}
@@ -2516,7 +2530,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|conditionalIfBoolTrue
+name|testConditionalIfBoolTrue
 parameter_list|()
 block|{
 comment|// if (bool) {return 1} else if (true) {return 2}
@@ -2586,7 +2600,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|conditionalIfBoolTrueElse
+name|testConditionalIfBoolTrueElse
 parameter_list|()
 block|{
 comment|// if (bool) {return 1} else if (true) {return 2} else {return 3}
@@ -2665,7 +2679,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|conditionalIfBoolFalse
+name|testConditionalIfBoolFalse
 parameter_list|()
 block|{
 comment|// if (bool) {return 1} else if (false) {return 2}
@@ -2731,7 +2745,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|conditionalIfBoolFalseElse
+name|testConditionalIfBoolFalseElse
 parameter_list|()
 block|{
 comment|// if (bool) {return 1} else if (false) {return 2} else {return 3}
@@ -2810,7 +2824,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|conditionalIfBoolFalseTrue
+name|testConditionalIfBoolFalseTrue
 parameter_list|()
 block|{
 comment|// if (bool) {1} else if (false) {2} if (true) {4} else {5}
@@ -2905,7 +2919,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|castIntToShort
+name|testCastIntToShort
 parameter_list|()
 block|{
 comment|// return (short) 1 --> return (short) 1
@@ -2933,7 +2947,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|castIntToInt
+name|testCastIntToInt
 parameter_list|()
 block|{
 comment|// return (int) 1 --> return 1L
@@ -2961,7 +2975,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|castIntToLong
+name|testCastIntToLong
 parameter_list|()
 block|{
 comment|// return (long) 1 --> return 1L
@@ -2989,7 +3003,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|notTrue
+name|testNotTrue
 parameter_list|()
 block|{
 comment|// !true -> false
@@ -3013,7 +3027,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|notFalse
+name|testNotFalse
 parameter_list|()
 block|{
 comment|// !false -> true
@@ -3037,7 +3051,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|notNotA
+name|testNotNotA
 parameter_list|()
 block|{
 comment|// !!a -> a
@@ -3069,7 +3083,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|notEq
+name|testNotEq
 parameter_list|()
 block|{
 comment|// !(a == b) -> a != b
@@ -3106,7 +3120,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|notNeq
+name|testNotNeq
 parameter_list|()
 block|{
 comment|// !(a != b) -> a == b
@@ -3143,7 +3157,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|notGt
+name|testNotGt
 parameter_list|()
 block|{
 comment|// !(a> b) -> a<= b
@@ -3180,7 +3194,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|notGte
+name|testNotGte
 parameter_list|()
 block|{
 comment|// !(a>= b) -> a< b
@@ -3217,7 +3231,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|notLt
+name|testNotLt
 parameter_list|()
 block|{
 comment|// !(a< b) -> a>= b
@@ -3254,7 +3268,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|notLte
+name|testNotLte
 parameter_list|()
 block|{
 comment|// !(a<= b) -> a> b
@@ -3321,7 +3335,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|booleanValueOfFalse
+name|testBooleanValueOfFalse
 parameter_list|()
 block|{
 comment|// Boolean.valueOf(false) -> false

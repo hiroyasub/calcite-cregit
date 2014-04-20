@@ -51,6 +51,22 @@ end_import
 
 begin_import
 import|import static
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|linq4j
+operator|.
+name|test
+operator|.
+name|BlockBuilderBase
+operator|.
+name|*
+import|;
+end_import
+
+begin_import
+import|import static
 name|org
 operator|.
 name|junit
@@ -62,15 +78,13 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Tests BlockBuilder  */
+comment|/**  * Tests BlockBuilder.  */
 end_comment
 
 begin_class
 specifier|public
 class|class
 name|BlockBuilderTest
-extends|extends
-name|BlockBuilderBase
 block|{
 name|BlockBuilder
 name|b
@@ -95,7 +109,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|reuseExpressionsFromUpperLevel
+name|testReuseExpressionsFromUpperLevel
 parameter_list|()
 block|{
 name|Expression
@@ -206,7 +220,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testCustomOptimizer
+name|testTestCustomOptimizer
 parameter_list|()
 block|{
 name|BlockBuilder
@@ -329,6 +343,10 @@ expr_stmt|;
 block|}
 block|}
 end_class
+
+begin_comment
+comment|// End BlockBuilderTest.java
+end_comment
 
 end_unit
 

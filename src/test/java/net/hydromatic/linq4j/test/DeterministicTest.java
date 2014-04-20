@@ -73,13 +73,41 @@ end_import
 
 begin_import
 import|import static
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|linq4j
+operator|.
+name|test
+operator|.
+name|BlockBuilderBase
+operator|.
+name|*
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|hamcrest
+operator|.
+name|CoreMatchers
+operator|.
+name|*
+import|;
+end_import
+
+begin_import
+import|import static
 name|org
 operator|.
 name|junit
 operator|.
 name|Assert
 operator|.
-name|assertEquals
+name|assertThat
 import|;
 end_import
 
@@ -91,36 +119,16 @@ begin_class
 specifier|public
 class|class
 name|DeterministicTest
-extends|extends
-name|BlockBuilderBase
 block|{
 annotation|@
 name|Test
 specifier|public
 name|void
-name|factorOutBinaryAdd
+name|testFactorOutBinaryAdd
 parameter_list|()
 block|{
-name|assertEquals
+name|assertThat
 argument_list|(
-literal|"{\n"
-operator|+
-literal|"  return new Runnable(){\n"
-operator|+
-literal|"      int test() {\n"
-operator|+
-literal|"        return 1_2_$L4J$C$;\n"
-operator|+
-literal|"      }\n"
-operator|+
-literal|"\n"
-operator|+
-literal|"      static final int 1_2_$L4J$C$ = 1 + 2;\n"
-operator|+
-literal|"    };\n"
-operator|+
-literal|"}\n"
-argument_list|,
 name|optimize
 argument_list|(
 name|Expressions
@@ -175,17 +183,8 @@ argument_list|)
 argument_list|)
 argument_list|)
 argument_list|)
-argument_list|)
-expr_stmt|;
-block|}
-annotation|@
-name|Test
-specifier|public
-name|void
-name|factorOutBinaryAddMul
-parameter_list|()
-block|{
-name|assertEquals
+argument_list|,
+name|equalTo
 argument_list|(
 literal|"{\n"
 operator|+
@@ -193,7 +192,7 @@ literal|"  return new Runnable(){\n"
 operator|+
 literal|"      int test() {\n"
 operator|+
-literal|"        return 1_2_3_$L4J$C$;\n"
+literal|"        return 1_2_$L4J$C$;\n"
 operator|+
 literal|"      }\n"
 operator|+
@@ -201,12 +200,22 @@ literal|"\n"
 operator|+
 literal|"      static final int 1_2_$L4J$C$ = 1 + 2;\n"
 operator|+
-literal|"      static final int 1_2_3_$L4J$C$ = 1_2_$L4J$C$ * 3;\n"
-operator|+
 literal|"    };\n"
 operator|+
 literal|"}\n"
-argument_list|,
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFactorOutBinaryAddMul
+parameter_list|()
+block|{
+name|assertThat
+argument_list|(
 name|optimize
 argument_list|(
 name|Expressions
@@ -268,17 +277,8 @@ argument_list|)
 argument_list|)
 argument_list|)
 argument_list|)
-argument_list|)
-expr_stmt|;
-block|}
-annotation|@
-name|Test
-specifier|public
-name|void
-name|factorOutNestedClasses
-parameter_list|()
-block|{
-name|assertEquals
+argument_list|,
+name|equalTo
 argument_list|(
 literal|"{\n"
 operator|+
@@ -286,32 +286,32 @@ literal|"  return new Runnable(){\n"
 operator|+
 literal|"      int test() {\n"
 operator|+
-literal|"        return 1_4_$L4J$C$ + new java.util.concurrent.Callable(){\n"
-operator|+
-literal|"            Object call() {\n"
-operator|+
-literal|"              return 1_2_3_$L4J$C$;\n"
-operator|+
-literal|"            }\n"
-operator|+
-literal|"\n"
-operator|+
-literal|"            static final int 1_2_$L4J$C$ = 1 + 2;\n"
-operator|+
-literal|"            static final int 1_2_3_$L4J$C$ = 1_2_$L4J$C$ * 3;\n"
-operator|+
-literal|"          }.call();\n"
+literal|"        return 1_2_3_$L4J$C$;\n"
 operator|+
 literal|"      }\n"
 operator|+
 literal|"\n"
 operator|+
-literal|"      static final int 1_4_$L4J$C$ = 1 + 4;\n"
+literal|"      static final int 1_2_$L4J$C$ = 1 + 2;\n"
+operator|+
+literal|"      static final int 1_2_3_$L4J$C$ = 1_2_$L4J$C$ * 3;\n"
 operator|+
 literal|"    };\n"
 operator|+
 literal|"}\n"
-argument_list|,
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFactorOutNestedClasses
+parameter_list|()
+block|{
+name|assertThat
+argument_list|(
 name|optimize
 argument_list|(
 name|Expressions
@@ -401,7 +401,11 @@ literal|"call"
 argument_list|,
 name|Collections
 operator|.
-name|EMPTY_LIST
+expr|<
+name|ParameterExpression
+operator|>
+name|emptyList
+argument_list|()
 argument_list|,
 name|Blocks
 operator|.
@@ -441,17 +445,8 @@ argument_list|)
 argument_list|)
 argument_list|)
 argument_list|)
-argument_list|)
-expr_stmt|;
-block|}
-annotation|@
-name|Test
-specifier|public
-name|void
-name|newBigInteger
-parameter_list|()
-block|{
-name|assertEquals
+argument_list|,
+name|equalTo
 argument_list|(
 literal|"{\n"
 operator|+
@@ -459,22 +454,44 @@ literal|"  return new Runnable(){\n"
 operator|+
 literal|"      int test() {\n"
 operator|+
-literal|"        return new_java_math_BigInteger_42__$L4J$C$;\n"
+literal|"        return 1_4_$L4J$C$ + new java.util.concurrent.Callable(){\n"
+operator|+
+literal|"            Object call() {\n"
+operator|+
+literal|"              return 1_2_3_$L4J$C$;\n"
+operator|+
+literal|"            }\n"
+operator|+
+literal|"\n"
+operator|+
+literal|"            static final int 1_2_$L4J$C$ = 1 + 2;\n"
+operator|+
+literal|"            static final int 1_2_3_$L4J$C$ = 1_2_$L4J$C$ * 3;\n"
+operator|+
+literal|"          }.call();\n"
 operator|+
 literal|"      }\n"
 operator|+
 literal|"\n"
 operator|+
-literal|"      static final java.math.BigInteger "
-operator|+
-literal|"new_java_math_BigInteger_42__$L4J$C$ = new java.math.BigInteger(\n"
-operator|+
-literal|"        \"42\");\n"
+literal|"      static final int 1_4_$L4J$C$ = 1 + 4;\n"
 operator|+
 literal|"    };\n"
 operator|+
 literal|"}\n"
-argument_list|,
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testNewBigInteger
+parameter_list|()
+block|{
+name|assertThat
+argument_list|(
 name|optimize
 argument_list|(
 name|Expressions
@@ -536,18 +553,8 @@ argument_list|)
 argument_list|)
 argument_list|)
 argument_list|)
-argument_list|)
-expr_stmt|;
-block|}
-annotation|@
-name|Test
-specifier|public
-name|void
-name|instanceofTest
-parameter_list|()
-block|{
-comment|// Single instanceof is not optimized
-name|assertEquals
+argument_list|,
+name|equalTo
 argument_list|(
 literal|"{\n"
 operator|+
@@ -555,16 +562,35 @@ literal|"  return new Runnable(){\n"
 operator|+
 literal|"      int test() {\n"
 operator|+
-literal|"        return 1 instanceof Boolean;\n"
+literal|"        return new_java_math_BigInteger_42__$L4J$C$;\n"
 operator|+
 literal|"      }\n"
 operator|+
 literal|"\n"
 operator|+
+literal|"      static final java.math.BigInteger "
+operator|+
+literal|"new_java_math_BigInteger_42__$L4J$C$ = new java.math.BigInteger(\n"
+operator|+
+literal|"        \"42\");\n"
+operator|+
 literal|"    };\n"
 operator|+
 literal|"}\n"
-argument_list|,
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInstanceofTest
+parameter_list|()
+block|{
+comment|// Single instanceof is not optimized
+name|assertThat
+argument_list|(
 name|optimize
 argument_list|(
 name|Expressions
@@ -621,18 +647,8 @@ argument_list|)
 argument_list|)
 argument_list|)
 argument_list|)
-argument_list|)
-expr_stmt|;
-block|}
-annotation|@
-name|Test
-specifier|public
-name|void
-name|instanceofComplexTest
-parameter_list|()
-block|{
-comment|// instanceof is optimized in complex expressinos
-name|assertEquals
+argument_list|,
+name|equalTo
 argument_list|(
 literal|"{\n"
 operator|+
@@ -640,22 +656,29 @@ literal|"  return new Runnable(){\n"
 operator|+
 literal|"      int test() {\n"
 operator|+
-literal|"        return 1_instanceof_Boolean_2_instanceof_Integer_$L4J$C$;\n"
+literal|"        return 1 instanceof Boolean;\n"
 operator|+
 literal|"      }\n"
 operator|+
 literal|"\n"
 operator|+
-literal|"      static final boolean "
-operator|+
-literal|"1_instanceof_Boolean_2_instanceof_Integer_$L4J$C$ = 1 instanceof "
-operator|+
-literal|"Boolean || 2 instanceof Integer;\n"
-operator|+
 literal|"    };\n"
 operator|+
 literal|"}\n"
-argument_list|,
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInstanceofComplexTest
+parameter_list|()
+block|{
+comment|// instanceof is optimized in complex expressions
+name|assertThat
+argument_list|(
 name|optimize
 argument_list|(
 name|Expressions
@@ -728,18 +751,8 @@ argument_list|)
 argument_list|)
 argument_list|)
 argument_list|)
-argument_list|)
-expr_stmt|;
-block|}
-annotation|@
-name|Test
-specifier|public
-name|void
-name|staticField
-parameter_list|()
-block|{
-comment|// instanceof is optimized in complex expressinos
-name|assertEquals
+argument_list|,
+name|equalTo
 argument_list|(
 literal|"{\n"
 operator|+
@@ -747,28 +760,35 @@ literal|"  return new Runnable(){\n"
 operator|+
 literal|"      int test() {\n"
 operator|+
-literal|"        return "
-operator|+
-literal|"java_math_BigInteger_ONE_add_java_math_BigInteger_valueOf_42L__$L4J$C$;\n"
+literal|"        return 1_instanceof_Boolean_2_instanceof_Integer_$L4J$C$;\n"
 operator|+
 literal|"      }\n"
 operator|+
 literal|"\n"
 operator|+
-literal|"      static final java.math.BigInteger "
+literal|"      static final boolean "
 operator|+
-literal|"java_math_BigInteger_valueOf_42L__$L4J$C$ = java.math.BigInteger"
+literal|"1_instanceof_Boolean_2_instanceof_Integer_$L4J$C$ = 1 instanceof "
 operator|+
-literal|".valueOf(42L);\n"
-operator|+
-literal|"      static final java.math.BigInteger "
-operator|+
-literal|"java_math_BigInteger_ONE_add_java_math_BigInteger_valueOf_42L__$L4J$C$ = java.math.BigInteger.ONE.add(java_math_BigInteger_valueOf_42L__$L4J$C$);\n"
+literal|"Boolean || 2 instanceof Integer;\n"
 operator|+
 literal|"    };\n"
 operator|+
 literal|"}\n"
-argument_list|,
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testStaticField
+parameter_list|()
+block|{
+comment|// instanceof is optimized in complex expressions
+name|assertThat
+argument_list|(
 name|optimize
 argument_list|(
 name|Expressions
@@ -863,18 +883,8 @@ argument_list|)
 argument_list|)
 argument_list|)
 argument_list|)
-argument_list|)
-expr_stmt|;
-block|}
-annotation|@
-name|Test
-specifier|public
-name|void
-name|bigIntegerValueOf
-parameter_list|()
-block|{
-comment|// instanceof is optimized in complex expressinos
-name|assertEquals
+argument_list|,
+name|equalTo
 argument_list|(
 literal|"{\n"
 operator|+
@@ -884,7 +894,7 @@ literal|"      int test() {\n"
 operator|+
 literal|"        return "
 operator|+
-literal|"java_math_BigInteger_valueOf_42L_add_java_math_BigInteger_valueOf_42L__$L4J$C$;\n"
+literal|"java_math_BigInteger_ONE_add_java_math_BigInteger_valueOf_42L__$L4J$C$;\n"
 operator|+
 literal|"      }\n"
 operator|+
@@ -898,12 +908,25 @@ literal|".valueOf(42L);\n"
 operator|+
 literal|"      static final java.math.BigInteger "
 operator|+
-literal|"java_math_BigInteger_valueOf_42L_add_java_math_BigInteger_valueOf_42L__$L4J$C$ = java_math_BigInteger_valueOf_42L__$L4J$C$.add(java_math_BigInteger_valueOf_42L__$L4J$C$);\n"
+literal|"java_math_BigInteger_ONE_add_java_math_BigInteger_valueOf_42L__$L4J$C$ = java.math.BigInteger.ONE.add(java_math_BigInteger_valueOf_42L__$L4J$C$);\n"
 operator|+
 literal|"    };\n"
 operator|+
 literal|"}\n"
-argument_list|,
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testBigIntegerValueOf
+parameter_list|()
+block|{
+comment|// instanceof is optimized in complex expressions
+name|assertThat
+argument_list|(
 name|optimize
 argument_list|(
 name|Expressions
@@ -1014,11 +1037,46 @@ argument_list|)
 argument_list|)
 argument_list|)
 argument_list|)
+argument_list|,
+name|equalTo
+argument_list|(
+literal|"{\n"
+operator|+
+literal|"  return new Runnable(){\n"
+operator|+
+literal|"      int test() {\n"
+operator|+
+literal|"        return "
+operator|+
+literal|"java_math_BigInteger_valueOf_42L_add_java_math_BigInteger_valueOf_42L__$L4J$C$;\n"
+operator|+
+literal|"      }\n"
+operator|+
+literal|"\n"
+operator|+
+literal|"      static final java.math.BigInteger "
+operator|+
+literal|"java_math_BigInteger_valueOf_42L__$L4J$C$ = java.math.BigInteger"
+operator|+
+literal|".valueOf(42L);\n"
+operator|+
+literal|"      static final java.math.BigInteger "
+operator|+
+literal|"java_math_BigInteger_valueOf_42L_add_java_math_BigInteger_valueOf_42L__$L4J$C$ = java_math_BigInteger_valueOf_42L__$L4J$C$.add(java_math_BigInteger_valueOf_42L__$L4J$C$);\n"
+operator|+
+literal|"    };\n"
+operator|+
+literal|"}\n"
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
 block|}
 end_class
+
+begin_comment
+comment|// End DeterministicTest.java
+end_comment
 
 end_unit
 
