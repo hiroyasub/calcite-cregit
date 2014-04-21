@@ -1138,7 +1138,7 @@ argument_list|>
 name|comparer
 parameter_list|)
 function_decl|;
-comment|/**    * Correlates the elements of two sequences based on matching keys, with    * optional outer join semantics. A specified    * {@code EqualityComparer<TSource>} is used to compare keys.    *    *<p>A left join generates nulls on right, and vice versa:</p>    *    *<table>    *<tr>    *<td>Join type</td>    *<td>generateNullsOnLeft</td>    *<td>generateNullsOnRight</td>    *</tr>    *<tr><td>INNER</td><td>false</td><td>false</td></tr>    *<tr><td>LEFT</td><td>false</td><td>true</td></tr>    *<tr><td>RIGHT</td><td>true</td><td>false</td></tr>    *<tr><td>FULL</td><td>true</td><td>true</td></tr>    *</table>    */
+comment|/**    * Correlates the elements of two sequences based on matching keys, with    * optional outer join semantics. A specified    * {@code EqualityComparer<TSource>} is used to compare keys.    *    *<p>A left join generates nulls on right, and vice versa:</p>    *    *<table>    *<caption>Join types</caption>    *<tr>    *<td>Join type</td>    *<td>generateNullsOnLeft</td>    *<td>generateNullsOnRight</td>    *</tr>    *<tr><td>INNER</td><td>false</td><td>false</td></tr>    *<tr><td>LEFT</td><td>false</td><td>true</td></tr>    *<tr><td>RIGHT</td><td>true</td><td>false</td></tr>    *<tr><td>FULL</td><td>true</td><td>true</td></tr>    *</table>    */
 parameter_list|<
 name|TInner
 parameter_list|,
