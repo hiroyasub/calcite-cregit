@@ -31,6 +31,34 @@ end_import
 
 begin_import
 import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|linq4j
+operator|.
+name|function
+operator|.
+name|Deterministic
+import|;
+end_import
+
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|linq4j
+operator|.
+name|function
+operator|.
+name|NonDeterministic
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|junit
@@ -120,6 +148,86 @@ specifier|public
 class|class
 name|DeterministicTest
 block|{
+comment|/**    * Class to test @Deterministic annotation    */
+specifier|public
+specifier|static
+class|class
+name|TestClass
+block|{
+annotation|@
+name|Deterministic
+specifier|public
+specifier|static
+name|int
+name|deterministic
+parameter_list|(
+name|int
+name|a
+parameter_list|)
+block|{
+return|return
+name|a
+operator|+
+literal|1
+return|;
+block|}
+specifier|public
+specifier|static
+name|int
+name|nonDeterministic
+parameter_list|(
+name|int
+name|a
+parameter_list|)
+block|{
+return|return
+name|a
+operator|+
+literal|2
+return|;
+block|}
+block|}
+comment|/**    * Class to test @NonDeterministic annotation    */
+annotation|@
+name|Deterministic
+specifier|public
+specifier|static
+class|class
+name|TestDeterministicClass
+block|{
+specifier|public
+specifier|static
+name|int
+name|deterministic
+parameter_list|(
+name|int
+name|a
+parameter_list|)
+block|{
+return|return
+name|a
+operator|+
+literal|1
+return|;
+block|}
+annotation|@
+name|NonDeterministic
+specifier|public
+specifier|static
+name|int
+name|nonDeterministic
+parameter_list|(
+name|int
+name|a
+parameter_list|)
+block|{
+return|return
+name|a
+operator|+
+literal|2
+return|;
+block|}
+block|}
 annotation|@
 name|Test
 specifier|public
@@ -192,13 +300,118 @@ literal|"  return new Runnable(){\n"
 operator|+
 literal|"      int test() {\n"
 operator|+
-literal|"        return 1_2_$L4J$C$;\n"
+literal|"        return $L4J$C$1_2;\n"
 operator|+
 literal|"      }\n"
 operator|+
 literal|"\n"
 operator|+
-literal|"      static final int 1_2_$L4J$C$ = 1 + 2;\n"
+literal|"      static final int $L4J$C$1_2 = 1 + 2;\n"
+operator|+
+literal|"    };\n"
+operator|+
+literal|"}\n"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFactorOutBinaryAddNameCollision
+parameter_list|()
+block|{
+name|assertThat
+argument_list|(
+name|optimize
+argument_list|(
+name|Expressions
+operator|.
+name|new_
+argument_list|(
+name|Runnable
+operator|.
+name|class
+argument_list|,
+name|Collections
+operator|.
+expr|<
+name|Expression
+operator|>
+name|emptyList
+argument_list|()
+argument_list|,
+name|Expressions
+operator|.
+name|methodDecl
+argument_list|(
+literal|0
+argument_list|,
+name|int
+operator|.
+name|class
+argument_list|,
+literal|"test"
+argument_list|,
+name|Collections
+operator|.
+expr|<
+name|ParameterExpression
+operator|>
+name|emptyList
+argument_list|()
+argument_list|,
+name|Blocks
+operator|.
+name|toFunctionBlock
+argument_list|(
+name|Expressions
+operator|.
+name|multiply
+argument_list|(
+name|Expressions
+operator|.
+name|add
+argument_list|(
+name|ONE
+argument_list|,
+name|TWO
+argument_list|)
+argument_list|,
+name|Expressions
+operator|.
+name|subtract
+argument_list|(
+name|ONE
+argument_list|,
+name|TWO
+argument_list|)
+argument_list|)
+argument_list|)
+argument_list|)
+argument_list|)
+argument_list|)
+argument_list|,
+name|equalTo
+argument_list|(
+literal|"{\n"
+operator|+
+literal|"  return new Runnable(){\n"
+operator|+
+literal|"      int test() {\n"
+operator|+
+literal|"        return $L4J$C$1_2_1_20;\n"
+operator|+
+literal|"      }\n"
+operator|+
+literal|"\n"
+operator|+
+literal|"      static final int $L4J$C$1_2 = 1 + 2;\n"
+operator|+
+literal|"      static final int $L4J$C$1_20 = 1 - 2;\n"
+operator|+
+literal|"      static final int $L4J$C$1_2_1_20 = $L4J$C$1_2 * $L4J$C$1_20;\n"
 operator|+
 literal|"    };\n"
 operator|+
@@ -286,15 +499,15 @@ literal|"  return new Runnable(){\n"
 operator|+
 literal|"      int test() {\n"
 operator|+
-literal|"        return 1_2_3_$L4J$C$;\n"
+literal|"        return $L4J$C$1_2_3;\n"
 operator|+
 literal|"      }\n"
 operator|+
 literal|"\n"
 operator|+
-literal|"      static final int 1_2_$L4J$C$ = 1 + 2;\n"
+literal|"      static final int $L4J$C$1_2 = 1 + 2;\n"
 operator|+
-literal|"      static final int 1_2_3_$L4J$C$ = 1_2_$L4J$C$ * 3;\n"
+literal|"      static final int $L4J$C$1_2_3 = $L4J$C$1_2 * 3;\n"
 operator|+
 literal|"    };\n"
 operator|+
@@ -454,19 +667,19 @@ literal|"  return new Runnable(){\n"
 operator|+
 literal|"      int test() {\n"
 operator|+
-literal|"        return 1_4_$L4J$C$ + new java.util.concurrent.Callable(){\n"
+literal|"        return $L4J$C$1_4 + new java.util.concurrent.Callable(){\n"
 operator|+
 literal|"            Object call() {\n"
 operator|+
-literal|"              return 1_2_3_$L4J$C$;\n"
+literal|"              return $L4J$C$1_2_3;\n"
 operator|+
 literal|"            }\n"
 operator|+
 literal|"\n"
 operator|+
-literal|"            static final int 1_2_$L4J$C$ = 1 + 2;\n"
+literal|"            static final int $L4J$C$1_2 = 1 + 2;\n"
 operator|+
-literal|"            static final int 1_2_3_$L4J$C$ = 1_2_$L4J$C$ * 3;\n"
+literal|"            static final int $L4J$C$1_2_3 = $L4J$C$1_2 * 3;\n"
 operator|+
 literal|"          }.call();\n"
 operator|+
@@ -474,7 +687,7 @@ literal|"      }\n"
 operator|+
 literal|"\n"
 operator|+
-literal|"      static final int 1_4_$L4J$C$ = 1 + 4;\n"
+literal|"      static final int $L4J$C$1_4 = 1 + 4;\n"
 operator|+
 literal|"    };\n"
 operator|+
@@ -562,7 +775,7 @@ literal|"  return new Runnable(){\n"
 operator|+
 literal|"      int test() {\n"
 operator|+
-literal|"        return new_java_math_BigInteger_42__$L4J$C$;\n"
+literal|"        return $L4J$C$new_java_math_BigInteger_42_;\n"
 operator|+
 literal|"      }\n"
 operator|+
@@ -570,7 +783,7 @@ literal|"\n"
 operator|+
 literal|"      static final java.math.BigInteger "
 operator|+
-literal|"new_java_math_BigInteger_42__$L4J$C$ = new java.math.BigInteger(\n"
+literal|"$L4J$C$new_java_math_BigInteger_42_ = new java.math.BigInteger(\n"
 operator|+
 literal|"        \"42\");\n"
 operator|+
@@ -760,7 +973,7 @@ literal|"  return new Runnable(){\n"
 operator|+
 literal|"      int test() {\n"
 operator|+
-literal|"        return 1_instanceof_Boolean_2_instanceof_Integer_$L4J$C$;\n"
+literal|"        return $L4J$C$1_instanceof_Boolean_2_instanceof_Integer;\n"
 operator|+
 literal|"      }\n"
 operator|+
@@ -768,7 +981,7 @@ literal|"\n"
 operator|+
 literal|"      static final boolean "
 operator|+
-literal|"1_instanceof_Boolean_2_instanceof_Integer_$L4J$C$ = 1 instanceof "
+literal|"$L4J$C$1_instanceof_Boolean_2_instanceof_Integer = 1 instanceof "
 operator|+
 literal|"Boolean || 2 instanceof Integer;\n"
 operator|+
@@ -894,7 +1107,7 @@ literal|"      int test() {\n"
 operator|+
 literal|"        return "
 operator|+
-literal|"java_math_BigInteger_ONE_add_java_math_BigInteger_valueOf_42L__$L4J$C$;\n"
+literal|"$L4J$C$java_math_BigInteger_ONE_add_java_math_BigInteger_valueOf_42L_;\n"
 operator|+
 literal|"      }\n"
 operator|+
@@ -902,13 +1115,13 @@ literal|"\n"
 operator|+
 literal|"      static final java.math.BigInteger "
 operator|+
-literal|"java_math_BigInteger_valueOf_42L__$L4J$C$ = java.math.BigInteger"
+literal|"$L4J$C$java_math_BigInteger_valueOf_42L_ = java.math.BigInteger"
 operator|+
 literal|".valueOf(42L);\n"
 operator|+
 literal|"      static final java.math.BigInteger "
 operator|+
-literal|"java_math_BigInteger_ONE_add_java_math_BigInteger_valueOf_42L__$L4J$C$ = java.math.BigInteger.ONE.add(java_math_BigInteger_valueOf_42L__$L4J$C$);\n"
+literal|"$L4J$C$java_math_BigInteger_ONE_add_java_math_BigInteger_valueOf_42L_ = java.math.BigInteger.ONE.add($L4J$C$java_math_BigInteger_valueOf_42L_);\n"
 operator|+
 literal|"    };\n"
 operator|+
@@ -1048,7 +1261,7 @@ literal|"      int test() {\n"
 operator|+
 literal|"        return "
 operator|+
-literal|"java_math_BigInteger_valueOf_42L_add_java_math_BigInteger_valueOf_42L__$L4J$C$;\n"
+literal|"$L4J$C$java_math_BigInteger_valueOf_42L_add_java_math_BigInteger_valued8d57d69;\n"
 operator|+
 literal|"      }\n"
 operator|+
@@ -1056,13 +1269,417 @@ literal|"\n"
 operator|+
 literal|"      static final java.math.BigInteger "
 operator|+
-literal|"java_math_BigInteger_valueOf_42L__$L4J$C$ = java.math.BigInteger"
+literal|"$L4J$C$java_math_BigInteger_valueOf_42L_ = java.math.BigInteger"
 operator|+
 literal|".valueOf(42L);\n"
 operator|+
 literal|"      static final java.math.BigInteger "
 operator|+
-literal|"java_math_BigInteger_valueOf_42L_add_java_math_BigInteger_valueOf_42L__$L4J$C$ = java_math_BigInteger_valueOf_42L__$L4J$C$.add(java_math_BigInteger_valueOf_42L__$L4J$C$);\n"
+literal|"$L4J$C$java_math_BigInteger_valueOf_42L_add_java_math_BigInteger_valued8d57d69 = $L4J$C$java_math_BigInteger_valueOf_42L_.add($L4J$C$java_math_BigInteger_valueOf_42L_);\n"
+operator|+
+literal|"    };\n"
+operator|+
+literal|"}\n"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDeterministicMethodCall
+parameter_list|()
+block|{
+name|assertThat
+argument_list|(
+name|optimize
+argument_list|(
+name|Expressions
+operator|.
+name|new_
+argument_list|(
+name|Runnable
+operator|.
+name|class
+argument_list|,
+name|Collections
+operator|.
+expr|<
+name|Expression
+operator|>
+name|emptyList
+argument_list|()
+argument_list|,
+name|Expressions
+operator|.
+name|methodDecl
+argument_list|(
+literal|0
+argument_list|,
+name|int
+operator|.
+name|class
+argument_list|,
+literal|"test"
+argument_list|,
+name|Collections
+operator|.
+expr|<
+name|ParameterExpression
+operator|>
+name|emptyList
+argument_list|()
+argument_list|,
+name|Blocks
+operator|.
+name|toFunctionBlock
+argument_list|(
+name|Expressions
+operator|.
+name|call
+argument_list|(
+literal|null
+argument_list|,
+name|Types
+operator|.
+name|lookupMethod
+argument_list|(
+name|TestClass
+operator|.
+name|class
+argument_list|,
+literal|"deterministic"
+argument_list|,
+name|int
+operator|.
+name|class
+argument_list|)
+argument_list|,
+name|ONE
+argument_list|)
+argument_list|)
+argument_list|)
+argument_list|)
+argument_list|)
+argument_list|,
+name|equalTo
+argument_list|(
+literal|"{\n"
+operator|+
+literal|"  return new Runnable(){\n"
+operator|+
+literal|"      int test() {\n"
+operator|+
+literal|"        return $L4J$C$net_hydromatic_linq4j_test_DeterministicTest_TestClass_determin1da033bf;\n"
+operator|+
+literal|"      }\n"
+operator|+
+literal|"\n"
+operator|+
+literal|"      static final int $L4J$C$net_hydromatic_linq4j_test_DeterministicTest_TestClass_determin1da033bf = net.hydromatic.linq4j.test.DeterministicTest.TestClass.deterministic(1);\n"
+operator|+
+literal|"    };\n"
+operator|+
+literal|"}\n"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testNonDeterministicMethodCall
+parameter_list|()
+block|{
+name|assertThat
+argument_list|(
+name|optimize
+argument_list|(
+name|Expressions
+operator|.
+name|new_
+argument_list|(
+name|Runnable
+operator|.
+name|class
+argument_list|,
+name|Collections
+operator|.
+expr|<
+name|Expression
+operator|>
+name|emptyList
+argument_list|()
+argument_list|,
+name|Expressions
+operator|.
+name|methodDecl
+argument_list|(
+literal|0
+argument_list|,
+name|int
+operator|.
+name|class
+argument_list|,
+literal|"test"
+argument_list|,
+name|Collections
+operator|.
+expr|<
+name|ParameterExpression
+operator|>
+name|emptyList
+argument_list|()
+argument_list|,
+name|Blocks
+operator|.
+name|toFunctionBlock
+argument_list|(
+name|Expressions
+operator|.
+name|call
+argument_list|(
+literal|null
+argument_list|,
+name|Types
+operator|.
+name|lookupMethod
+argument_list|(
+name|TestClass
+operator|.
+name|class
+argument_list|,
+literal|"nonDeterministic"
+argument_list|,
+name|int
+operator|.
+name|class
+argument_list|)
+argument_list|,
+name|ONE
+argument_list|)
+argument_list|)
+argument_list|)
+argument_list|)
+argument_list|)
+argument_list|,
+name|equalTo
+argument_list|(
+literal|"{\n"
+operator|+
+literal|"  return new Runnable(){\n"
+operator|+
+literal|"      int test() {\n"
+operator|+
+literal|"        return net.hydromatic.linq4j.test.DeterministicTest.TestClass.nonDeterministic(1);\n"
+operator|+
+literal|"      }\n"
+operator|+
+literal|"\n"
+operator|+
+literal|"    };\n"
+operator|+
+literal|"}\n"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDeterministicClassDefaultMethod
+parameter_list|()
+block|{
+name|assertThat
+argument_list|(
+name|optimize
+argument_list|(
+name|Expressions
+operator|.
+name|new_
+argument_list|(
+name|Runnable
+operator|.
+name|class
+argument_list|,
+name|Collections
+operator|.
+expr|<
+name|Expression
+operator|>
+name|emptyList
+argument_list|()
+argument_list|,
+name|Expressions
+operator|.
+name|methodDecl
+argument_list|(
+literal|0
+argument_list|,
+name|int
+operator|.
+name|class
+argument_list|,
+literal|"test"
+argument_list|,
+name|Collections
+operator|.
+expr|<
+name|ParameterExpression
+operator|>
+name|emptyList
+argument_list|()
+argument_list|,
+name|Blocks
+operator|.
+name|toFunctionBlock
+argument_list|(
+name|Expressions
+operator|.
+name|call
+argument_list|(
+literal|null
+argument_list|,
+name|Types
+operator|.
+name|lookupMethod
+argument_list|(
+name|TestDeterministicClass
+operator|.
+name|class
+argument_list|,
+literal|"deterministic"
+argument_list|,
+name|int
+operator|.
+name|class
+argument_list|)
+argument_list|,
+name|ONE
+argument_list|)
+argument_list|)
+argument_list|)
+argument_list|)
+argument_list|)
+argument_list|,
+name|equalTo
+argument_list|(
+literal|"{\n"
+operator|+
+literal|"  return new Runnable(){\n"
+operator|+
+literal|"      int test() {\n"
+operator|+
+literal|"        return $L4J$C$net_hydromatic_linq4j_test_DeterministicTest_TestDeterministicCa1bc6d17;\n"
+operator|+
+literal|"      }\n"
+operator|+
+literal|"\n"
+operator|+
+literal|"      static final int $L4J$C$net_hydromatic_linq4j_test_DeterministicTest_TestDeterministicCa1bc6d17 = net.hydromatic.linq4j.test.DeterministicTest.TestDeterministicClass.deterministic(1);\n"
+operator|+
+literal|"    };\n"
+operator|+
+literal|"}\n"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDeterministicClassNonDeterministicMethod
+parameter_list|()
+block|{
+name|assertThat
+argument_list|(
+name|optimize
+argument_list|(
+name|Expressions
+operator|.
+name|new_
+argument_list|(
+name|Runnable
+operator|.
+name|class
+argument_list|,
+name|Collections
+operator|.
+expr|<
+name|Expression
+operator|>
+name|emptyList
+argument_list|()
+argument_list|,
+name|Expressions
+operator|.
+name|methodDecl
+argument_list|(
+literal|0
+argument_list|,
+name|int
+operator|.
+name|class
+argument_list|,
+literal|"test"
+argument_list|,
+name|Collections
+operator|.
+expr|<
+name|ParameterExpression
+operator|>
+name|emptyList
+argument_list|()
+argument_list|,
+name|Blocks
+operator|.
+name|toFunctionBlock
+argument_list|(
+name|Expressions
+operator|.
+name|call
+argument_list|(
+literal|null
+argument_list|,
+name|Types
+operator|.
+name|lookupMethod
+argument_list|(
+name|TestDeterministicClass
+operator|.
+name|class
+argument_list|,
+literal|"nonDeterministic"
+argument_list|,
+name|int
+operator|.
+name|class
+argument_list|)
+argument_list|,
+name|ONE
+argument_list|)
+argument_list|)
+argument_list|)
+argument_list|)
+argument_list|)
+argument_list|,
+name|equalTo
+argument_list|(
+literal|"{\n"
+operator|+
+literal|"  return new Runnable(){\n"
+operator|+
+literal|"      int test() {\n"
+operator|+
+literal|"        return net.hydromatic.linq4j.test.DeterministicTest.TestDeterministicClass.nonDeterministic(1);\n"
+operator|+
+literal|"      }\n"
+operator|+
+literal|"\n"
 operator|+
 literal|"    };\n"
 operator|+

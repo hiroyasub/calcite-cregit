@@ -135,6 +135,25 @@ literal|null
 operator|:
 literal|"name should not be null"
 assert|;
+assert|assert
+name|Character
+operator|.
+name|isJavaIdentifierStart
+argument_list|(
+name|name
+operator|.
+name|charAt
+argument_list|(
+literal|0
+argument_list|)
+argument_list|)
+operator|:
+literal|"parameter name should be valid java identifier: "
+operator|+
+name|name
+operator|+
+literal|". The first character is invalid."
+assert|;
 name|this
 operator|.
 name|modifier
