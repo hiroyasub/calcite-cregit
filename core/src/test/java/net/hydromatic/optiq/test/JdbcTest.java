@@ -6145,11 +6145,18 @@ argument_list|)
 operator|.
 name|planContains
 argument_list|(
+literal|"static final String $L4J$C$net_hydromatic_optiq_runtime_SqlFunctions_upper_y_ = "
+operator|+
+literal|"net.hydromatic.optiq.runtime.SqlFunctions.upper(\"y\");"
+argument_list|)
+operator|.
+name|planContains
+argument_list|(
 literal|"return current.empid<= current.deptno * 10 "
 operator|+
 literal|"? (String) null "
 operator|+
-literal|": net.hydromatic.optiq.runtime.SqlFunctions.upper(\"y\");"
+literal|": $L4J$C$net_hydromatic_optiq_runtime_SqlFunctions_upper_y_;"
 argument_list|)
 operator|.
 name|returns
@@ -6251,11 +6258,23 @@ argument_list|)
 operator|.
 name|planContains
 argument_list|(
-literal|"return inp2_ == null || !net.hydromatic.optiq.runtime"
+literal|"static final boolean $L4J$C$net_hydromatic_optiq_runtime_SqlFunctions_ne_sa_sa_ = "
 operator|+
-literal|".SqlFunctions.ne(\"sa\", \"sa\") ? (String) null"
+literal|"net.hydromatic.optiq.runtime.SqlFunctions.ne(\"sa\", \"sa\");"
+argument_list|)
+operator|.
+name|planContains
+argument_list|(
+literal|"static final boolean $L4J$C$_net_hydromatic_optiq_runtime_SqlFunctions_ne_sa_sa_ = "
 operator|+
-literal|": net.hydromatic.optiq.runtime.SqlFunctions.substring(inp2_, "
+literal|"!$L4J$C$net_hydromatic_optiq_runtime_SqlFunctions_ne_sa_sa_;"
+argument_list|)
+operator|.
+name|planContains
+argument_list|(
+literal|"return inp2_ == null || $L4J$C$_net_hydromatic_optiq_runtime_SqlFunctions_ne_sa_sa_ ? (String) null"
+operator|+
+literal|" : net.hydromatic.optiq.runtime.SqlFunctions.substring(inp2_, "
 operator|+
 literal|"current.deptno + 1);"
 argument_list|)
@@ -6316,9 +6335,23 @@ argument_list|)
 operator|.
 name|planContains
 argument_list|(
+literal|"static final boolean $L4J$C$net_hydromatic_optiq_runtime_SqlFunctions_eq_sa_sa_ = "
+operator|+
+literal|"net.hydromatic.optiq.runtime.SqlFunctions.eq(\"sa\", \"sa\");"
+argument_list|)
+operator|.
+name|planContains
+argument_list|(
+literal|"static final boolean $L4J$C$_net_hydromatic_optiq_runtime_SqlFunctions_eq_sa_sa_ = "
+operator|+
+literal|"!$L4J$C$net_hydromatic_optiq_runtime_SqlFunctions_eq_sa_sa_;"
+argument_list|)
+operator|.
+name|planContains
+argument_list|(
 literal|"return inp2_ == null "
 operator|+
-literal|"|| !net.hydromatic.optiq.runtime.SqlFunctions.eq(\"sa\", \"sa\") "
+literal|"|| $L4J$C$_net_hydromatic_optiq_runtime_SqlFunctions_eq_sa_sa_ "
 operator|+
 literal|"|| !v5&& inp1_ * 8<= 8 "
 operator|+
@@ -6400,9 +6433,28 @@ argument_list|)
 operator|.
 name|planContains
 argument_list|(
+literal|"static final int $L4J$C$5_2 = 5 - 2;"
+argument_list|)
+operator|.
+name|planContains
+argument_list|(
+literal|"static final boolean $L4J$C$net_hydromatic_optiq_runtime_SqlFunctions_eq_sa_sa_ = "
+operator|+
+literal|"net.hydromatic.optiq.runtime.SqlFunctions.eq(\"sa\", \"sa\");"
+argument_list|)
+operator|.
+name|planContains
+argument_list|(
+literal|"static final boolean $L4J$C$_net_hydromatic_optiq_runtime_SqlFunctions_eq_sa_sa_ = "
+operator|+
+literal|"!$L4J$C$net_hydromatic_optiq_runtime_SqlFunctions_eq_sa_sa_;"
+argument_list|)
+operator|.
+name|planContains
+argument_list|(
 literal|"return inp2_ == null "
 operator|+
-literal|"|| !net.hydromatic.optiq.runtime.SqlFunctions.eq(\"sa\", \"sa\") "
+literal|"|| $L4J$C$_net_hydromatic_optiq_runtime_SqlFunctions_eq_sa_sa_ "
 operator|+
 literal|"|| current.empid<= inp1_&& inp1_ * 8<= 8 "
 operator|+
@@ -6414,7 +6466,7 @@ literal|"net.hydromatic.optiq.runtime.SqlFunctions.trim(true, true, \" \", "
 operator|+
 literal|"net.hydromatic.optiq.runtime.SqlFunctions.substring(inp2_, "
 operator|+
-literal|"inp1_ * 0 + 1)), 5 - 2);"
+literal|"inp1_ * 0 + 1)), $L4J$C$5_2);"
 argument_list|)
 operator|.
 name|returns
@@ -11200,6 +11252,22 @@ argument_list|(
 literal|"select \"name\" as p from \"adhoc\".EMPLOYEES\n"
 operator|+
 literal|"where \"adhoc\".my_str(\"name\") is null"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|""
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select \"name\" as p from \"adhoc\".EMPLOYEES\n"
+operator|+
+literal|"where \"adhoc\".my_str(upper(\"adhoc\".my_str(\"name\")"
+operator|+
+literal|")) ='8'"
 argument_list|)
 operator|.
 name|returns

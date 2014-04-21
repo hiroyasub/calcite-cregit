@@ -33,6 +33,34 @@ name|net
 operator|.
 name|hydromatic
 operator|.
+name|linq4j
+operator|.
+name|function
+operator|.
+name|Deterministic
+import|;
+end_import
+
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|linq4j
+operator|.
+name|function
+operator|.
+name|NonDeterministic
+import|;
+end_import
+
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
 name|optiq
 operator|.
 name|DataContext
@@ -113,6 +141,8 @@ name|SuppressWarnings
 argument_list|(
 literal|"UnnecessaryUnboxing"
 argument_list|)
+annotation|@
+name|Deterministic
 specifier|public
 class|class
 name|SqlFunctions
@@ -3888,6 +3918,8 @@ else|:
 literal|"FALSE"
 return|;
 block|}
+annotation|@
+name|NonDeterministic
 specifier|private
 specifier|static
 name|Object
@@ -5542,6 +5574,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/** SQL {@code CURRENT_TIMESTAMP} function. */
+annotation|@
+name|NonDeterministic
 specifier|public
 specifier|static
 name|long
@@ -5569,6 +5603,8 @@ argument_list|)
 return|;
 block|}
 comment|/** SQL {@code CURRENT_TIME} function. */
+annotation|@
+name|NonDeterministic
 specifier|public
 specifier|static
 name|int
@@ -5614,6 +5650,8 @@ name|time
 return|;
 block|}
 comment|/** SQL {@code CURRENT_DATE} function. */
+annotation|@
+name|NonDeterministic
 specifier|public
 specifier|static
 name|int
@@ -5677,6 +5715,8 @@ name|date
 return|;
 block|}
 comment|/** SQL {@code LOCAL_TIMESTAMP} function. */
+annotation|@
+name|NonDeterministic
 specifier|public
 specifier|static
 name|long
@@ -5704,6 +5744,8 @@ argument_list|)
 return|;
 block|}
 comment|/** SQL {@code LOCAL_TIME} function. */
+annotation|@
+name|NonDeterministic
 specifier|public
 specifier|static
 name|int
