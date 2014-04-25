@@ -1842,7 +1842,12 @@ throw|throw
 operator|new
 name|RuntimeException
 argument_list|(
-literal|"parse failed"
+literal|"parse failed: "
+operator|+
+name|e
+operator|.
+name|getMessage
+argument_list|()
 argument_list|,
 name|e
 argument_list|)

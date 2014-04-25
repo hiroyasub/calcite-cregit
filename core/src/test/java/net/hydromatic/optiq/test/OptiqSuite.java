@@ -415,6 +415,10 @@ name|PlannerTest
 operator|.
 name|class
 block|,
+name|ExceptionMessageTest
+operator|.
+name|class
+block|,
 comment|// slow tests (above 1s)
 name|JdbcAdapterTest
 operator|.

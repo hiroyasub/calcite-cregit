@@ -246,9 +246,16 @@ name|helper
 operator|.
 name|createException
 argument_list|(
-literal|"while executing SQL: "
+literal|"error while executing SQL \""
 operator|+
 name|sql
+operator|+
+literal|"\": "
+operator|+
+name|e
+operator|.
+name|getMessage
+argument_list|()
 argument_list|,
 name|e
 argument_list|)

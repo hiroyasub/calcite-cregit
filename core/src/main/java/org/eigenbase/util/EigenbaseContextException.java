@@ -326,6 +326,30 @@ operator|=
 name|originalStatement
 expr_stmt|;
 block|}
+annotation|@
+name|Override
+specifier|public
+name|String
+name|getMessage
+parameter_list|()
+block|{
+comment|// The superclass' message is the textual context information
+comment|// for this exception, so we add in the underlying cause to the message
+return|return
+name|super
+operator|.
+name|getMessage
+argument_list|()
+operator|+
+literal|": "
+operator|+
+name|getCause
+argument_list|()
+operator|.
+name|getMessage
+argument_list|()
+return|;
+block|}
 block|}
 end_class
 

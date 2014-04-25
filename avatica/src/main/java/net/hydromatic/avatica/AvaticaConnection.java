@@ -1394,7 +1394,12 @@ name|helper
 operator|.
 name|createException
 argument_list|(
-literal|"exception while executing query"
+literal|"exception while executing query: "
+operator|+
+name|e
+operator|.
+name|getMessage
+argument_list|()
 argument_list|,
 name|e
 argument_list|)
