@@ -129,6 +129,14 @@ name|Type
 name|getJavaRowType
 parameter_list|()
 function_decl|;
+comment|/**    * Returns the Java class that is used to store the field with the given    * ordinal.    *    *<p>For instance, when the java row type is {@code Object[]}, the java    * field type is {@code Object} even if the field is not nullable.</p> */
+name|Type
+name|getJavaFieldType
+parameter_list|(
+name|int
+name|field
+parameter_list|)
+function_decl|;
 comment|/** Returns the SQL row type. */
 name|RelDataType
 name|getRowType
@@ -150,7 +158,7 @@ name|int
 name|index
 parameter_list|)
 function_decl|;
-comment|/** Generates a reference to a given field in an expression.    *    *<p>For example given {@code expression=employee} and {@code field=2},    * generates</p>    *<pre>{@code employee.deptno}</pre>    *    * @param expression Expression    * @param field Ordinal of field    * @return Expression to access the field of the expression    */
+comment|/** Generates a reference to a given field in an expression.    *    *<p>For example given {@code expression=employee} and {@code field=2},    * generates</p>    *    *<pre>{@code employee.deptno}</pre>    *    * @param expression Expression    * @param field Ordinal of field    * @return Expression to access the field of the expression    */
 name|Expression
 name|fieldReference
 parameter_list|(
@@ -161,7 +169,21 @@ name|int
 name|field
 parameter_list|)
 function_decl|;
-comment|/** Generates an accessor function for a given list of fields.  The resulting    * object is a {@link List} (implementing {@link Object#hashCode()} and    * {@link Object#equals(Object)} per that interface) and also implements    * {@link Comparable}.    *    *<p>For example:</p>    *<pre>{@code    * new Function1<Employee, Object[]> {    *    public Object[] apply(Employee v1) {    *        return FlatLists.of(v1.<fieldN>, v1.<fieldM>);    *    }    * }    * }</pre>    */
+comment|/** Generates a reference to a given field in an expression.    *    *<p>This method optimizes for the target storage type (i.e. avoids    * casts).</p>    *    *<p>For example given {@code expression=employee} and {@code field=2},    * generates</p>    *    *<pre>{@code employee.deptno}</pre>    *    * @param expression Expression    * @param field Ordinal of field    * @param storageType optional hint for storage class    * @return Expression to access the field of the expression    */
+name|Expression
+name|fieldReference
+parameter_list|(
+name|Expression
+name|expression
+parameter_list|,
+name|int
+name|field
+parameter_list|,
+name|Type
+name|storageType
+parameter_list|)
+function_decl|;
+comment|/** Generates an accessor function for a given list of fields.  The resulting    * object is a {@link List} (implementing {@link Object#hashCode()} and    * {@link Object#equals(Object)} per that interface) and also implements    * {@link Comparable}.    *    *<p>For example:</p>    *    *<pre>{@code    * new Function1<Employee, Object[]> {    *    public Object[] apply(Employee v1) {    *        return FlatLists.of(v1.<fieldN>, v1.<fieldM>);    *    }    * }    * }</pre>    */
 name|Expression
 name|generateAccessor
 parameter_list|(

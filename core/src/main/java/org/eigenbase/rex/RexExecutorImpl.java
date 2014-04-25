@@ -444,6 +444,8 @@ name|javaTypeFactory
 argument_list|,
 name|blockBuilder
 argument_list|,
+literal|null
+argument_list|,
 name|getter
 argument_list|)
 decl_stmt|;
@@ -645,6 +647,9 @@ name|list
 parameter_list|,
 name|int
 name|index
+parameter_list|,
+name|Type
+name|storageType
 parameter_list|)
 block|{
 throw|throw
@@ -737,6 +742,9 @@ name|list
 parameter_list|,
 name|int
 name|index
+parameter_list|,
+name|Type
+name|storageType
 parameter_list|)
 block|{
 name|MethodCallExpression
@@ -796,6 +804,13 @@ name|index
 argument_list|)
 argument_list|)
 decl_stmt|;
+if|if
+condition|(
+name|storageType
+operator|==
+literal|null
+condition|)
+block|{
 specifier|final
 name|RelDataType
 name|fieldType
@@ -813,10 +828,8 @@ operator|.
 name|getType
 argument_list|()
 decl_stmt|;
-specifier|final
-name|Type
-name|type
-init|=
+name|storageType
+operator|=
 operator|(
 operator|(
 name|JavaTypeFactory
@@ -828,7 +841,8 @@ name|getJavaClass
 argument_list|(
 name|fieldType
 argument_list|)
-decl_stmt|;
+expr_stmt|;
+block|}
 return|return
 name|RexToLixTranslator
 operator|.
@@ -836,7 +850,7 @@ name|convert
 argument_list|(
 name|recordAccess
 argument_list|,
-name|type
+name|storageType
 argument_list|)
 return|;
 block|}

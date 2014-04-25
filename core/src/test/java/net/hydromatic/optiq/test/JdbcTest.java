@@ -8732,6 +8732,46 @@ literal|"S=23220.0; FIVE=5; M=11500.0; C=2; deptno=10; empid=110\n"
 operator|+
 literal|"S=14300.0; FIVE=5; M=7000.0; C=2; deptno=10; empid=150\n"
 argument_list|)
+operator|.
+name|planContains
+argument_list|(
+literal|"_list.add(new Object[] {\n"
+operator|+
+literal|"        row[0],\n"
+comment|// box-unbox is optimized
+operator|+
+literal|"        row[1],\n"
+operator|+
+literal|"        row[2],\n"
+operator|+
+literal|"        row[3],\n"
+operator|+
+literal|"        w0$o0,\n"
+operator|+
+literal|"        w0$o1,\n"
+operator|+
+literal|"        w0$o2,\n"
+operator|+
+literal|"        w0$o3});"
+argument_list|)
+operator|.
+name|planContains
+argument_list|(
+literal|"return new Object[] {\n"
+operator|+
+literal|"                  net.hydromatic.optiq.runtime.SqlFunctions.toLong(current[4])> 0L ? (Float) current[5] : (Float) null,\n"
+operator|+
+literal|"                  5,\n"
+operator|+
+literal|"                  (Float) current[6],\n"
+operator|+
+literal|"                  (Long) current[7],\n"
+comment|// box-unbox eliminated
+operator|+
+literal|"                  current[1],\n"
+operator|+
+literal|"                  current[0]};"
+argument_list|)
 expr_stmt|;
 block|}
 comment|/** Tests windowed aggregation with multiple windows.    * One window straddles the current row.    * Some windows have no PARTITION BY clause. */

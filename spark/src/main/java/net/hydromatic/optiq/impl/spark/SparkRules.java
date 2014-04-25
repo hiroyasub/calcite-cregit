@@ -1570,6 +1570,8 @@ name|typeFactory
 argument_list|,
 name|builder2
 argument_list|,
+literal|null
+argument_list|,
 operator|new
 name|RexToLixTranslator
 operator|.
