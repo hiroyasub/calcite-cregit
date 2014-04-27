@@ -503,6 +503,33 @@ literal|"NAME=Alice; EMPNO=130"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJson
+parameter_list|()
+throws|throws
+name|SQLException
+block|{
+name|checkSql
+argument_list|(
+literal|"model"
+argument_list|,
+literal|"select _MAP['id'] as id,\n"
+operator|+
+literal|" _MAP['title'] as title,\n"
+operator|+
+literal|" CHAR_LENGTH(CAST(_MAP['title'] AS VARCHAR(30))) as len\n"
+operator|+
+literal|" from \"archers\""
+argument_list|,
+literal|"ID=19990101; TITLE=Washday blues.; LEN=14"
+argument_list|,
+literal|"ID=19990103; TITLE=Daniel creates a drama.; LEN=23"
+argument_list|)
+expr_stmt|;
+block|}
 specifier|private
 name|void
 name|checkSql
