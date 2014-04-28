@@ -1305,6 +1305,8 @@ name|Assert
 operator|.
 name|assertEquals
 argument_list|(
+name|tag
+argument_list|,
 name|expected2Canonical
 argument_list|,
 name|actualCanonical

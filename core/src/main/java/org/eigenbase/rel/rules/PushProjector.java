@@ -1653,6 +1653,9 @@ name|right
 argument_list|(
 name|projects
 argument_list|)
+argument_list|,
+literal|true
+comment|/* optimize to avoid trivial projections, as per javadoc */
 argument_list|)
 return|;
 block|}

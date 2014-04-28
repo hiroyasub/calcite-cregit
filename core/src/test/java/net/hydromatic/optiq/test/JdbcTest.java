@@ -8525,6 +8525,173 @@ literal|".distinct("
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Same result (and plan) as {@link #testSelectDistinct}. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testGroupByMax1IsNull
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select * from (\n"
+operator|+
+literal|"select max(1) max_id\n"
+operator|+
+literal|"from \"hr\".\"emps\" where 1=2\n"
+operator|+
+literal|") where max_id is null"
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"MAX_ID=null"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Same result (and plan) as {@link #testSelectDistinct}. */
+annotation|@
+name|Ignore
+argument_list|(
+literal|"Analytic functions over constants are not supported :("
+argument_list|)
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testGroupByMax1OverIsNull
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select * from (\n"
+operator|+
+literal|"select max(1) over (partition by 2 order by 3) max_id\n"
+operator|+
+literal|"from \"hr\".\"emps\" where 1=2\n"
+operator|+
+literal|") where max_id is null"
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"MAX_ID=null"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Same result (and plan) as {@link #testSelectDistinct}. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testGroupBy1Max1
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select * from (\n"
+operator|+
+literal|"select max(u) max_id\n"
+operator|+
+literal|"from (select \"empid\"+\"deptno\" u, 1 cnst\n"
+operator|+
+literal|"from \"hr\".\"emps\" a) where 1=2\n"
+operator|+
+literal|"group by cnst\n"
+operator|+
+literal|") where max_id is null"
+argument_list|)
+operator|.
+name|returnsCount
+argument_list|(
+literal|0
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Same result (and plan) as {@link #testSelectDistinct}. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testCountUnionAll
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select count(*) c from (\n"
+operator|+
+literal|"select * from \"hr\".\"emps\" where 1=2\n"
+operator|+
+literal|"union all\n"
+operator|+
+literal|"select * from \"hr\".\"emps\" where 3=4\n"
+operator|+
+literal|")"
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"C=0"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Tests that SUM and AVG over empty set return null. COUNT returns 0. */
 annotation|@
 name|Test

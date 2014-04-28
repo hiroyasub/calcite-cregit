@@ -17889,7 +17889,7 @@ name|checkType
 argument_list|(
 literal|"min(1)"
 argument_list|,
-literal|"INTEGER NOT NULL"
+literal|"INTEGER"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -17898,7 +17898,7 @@ name|checkType
 argument_list|(
 literal|"min(1.2)"
 argument_list|,
-literal|"DECIMAL(2, 1) NOT NULL"
+literal|"DECIMAL(2, 1)"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -17907,7 +17907,7 @@ name|checkType
 argument_list|(
 literal|"min(DISTINCT 1.5)"
 argument_list|,
-literal|"DECIMAL(2, 1) NOT NULL"
+literal|"DECIMAL(2, 1)"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -18043,7 +18043,7 @@ name|checkType
 argument_list|(
 literal|"max(1)"
 argument_list|,
-literal|"INTEGER NOT NULL"
+literal|"INTEGER"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -18052,7 +18052,7 @@ name|checkType
 argument_list|(
 literal|"max(1.2)"
 argument_list|,
-literal|"DECIMAL(2, 1) NOT NULL"
+literal|"DECIMAL(2, 1)"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -18061,7 +18061,7 @@ name|checkType
 argument_list|(
 literal|"max(DISTINCT 1.5)"
 argument_list|,
-literal|"DECIMAL(2, 1) NOT NULL"
+literal|"DECIMAL(2, 1)"
 argument_list|)
 expr_stmt|;
 name|tester

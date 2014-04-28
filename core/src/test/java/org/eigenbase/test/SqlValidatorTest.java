@@ -324,7 +324,7 @@ literal|" VARCHAR(20) NOT NULL ENAME,"
 operator|+
 literal|" VARCHAR(10) NOT NULL JOB,"
 operator|+
-literal|" INTEGER NOT NULL MGR,"
+literal|" INTEGER MGR,"
 operator|+
 literal|" TIMESTAMP(0) NOT NULL HIREDATE,"
 operator|+
@@ -3926,7 +3926,7 @@ literal|" VARCHAR(20) NOT NULL ENAME,"
 operator|+
 literal|" VARCHAR(10) NOT NULL JOB,"
 operator|+
-literal|" INTEGER NOT NULL MGR,"
+literal|" INTEGER MGR,"
 operator|+
 literal|" TIMESTAMP(0) NOT NULL HIREDATE,"
 operator|+
@@ -12147,7 +12147,7 @@ literal|" VARCHAR(20) NOT NULL ENAME,"
 operator|+
 literal|" VARCHAR(10) NOT NULL JOB,"
 operator|+
-literal|" INTEGER NOT NULL MGR,"
+literal|" INTEGER MGR,"
 operator|+
 literal|" TIMESTAMP(0) NOT NULL HIREDATE,"
 operator|+
@@ -14882,7 +14882,7 @@ literal|" VARCHAR(20) NOT NULL ENAME,"
 operator|+
 literal|" VARCHAR(10) NOT NULL JOB,"
 operator|+
-literal|" INTEGER NOT NULL MGR,"
+literal|" INTEGER MGR,"
 operator|+
 literal|" TIMESTAMP(0) NOT NULL HIREDATE,"
 operator|+
