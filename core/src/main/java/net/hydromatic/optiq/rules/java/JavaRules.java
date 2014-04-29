@@ -408,6 +408,14 @@ literal|"right"
 block|}
 decl_stmt|;
 specifier|private
+specifier|static
+specifier|final
+name|boolean
+name|B
+init|=
+literal|false
+decl_stmt|;
+specifier|private
 name|JavaRules
 parameter_list|()
 block|{
@@ -2308,6 +2316,8 @@ name|rel
 decl_stmt|;
 if|if
 condition|(
+name|B
+operator|&&
 name|RexMultisetUtil
 operator|.
 name|containsMultiset
@@ -2574,6 +2584,8 @@ name|rel
 decl_stmt|;
 if|if
 condition|(
+name|B
+operator|&&
 name|RexMultisetUtil
 operator|.
 name|containsMultiset
@@ -2820,6 +2832,8 @@ argument_list|()
 decl_stmt|;
 if|if
 condition|(
+name|B
+operator|&&
 name|RexMultisetUtil
 operator|.
 name|containsMultiset

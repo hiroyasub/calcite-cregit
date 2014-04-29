@@ -5431,7 +5431,7 @@ expr_stmt|;
 name|assertArrayEquals
 argument_list|(
 operator|new
-name|Object
+name|int
 index|[]
 block|{
 literal|1
@@ -5442,7 +5442,7 @@ literal|3
 block|}
 argument_list|,
 operator|(
-name|Object
+name|int
 index|[]
 operator|)
 name|array
@@ -5651,6 +5651,45 @@ name|optiqConnection
 operator|.
 name|close
 argument_list|()
+expr_stmt|;
+block|}
+comment|/** Tests the {@code CARDINALITY} function applied to an array column. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testArray2
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select \"deptno\", cardinality(\"employees\") as c\n"
+operator|+
+literal|"from \"hr\".\"depts\""
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"deptno=10; C=2"
+argument_list|,
+literal|"deptno=30; C=0"
+argument_list|,
+literal|"deptno=40; C=1"
+argument_list|)
 expr_stmt|;
 block|}
 specifier|private
