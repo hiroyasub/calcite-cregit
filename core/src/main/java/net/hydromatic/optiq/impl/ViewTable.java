@@ -682,6 +682,29 @@ argument_list|)
 return|;
 block|}
 block|}
+comment|/** Get the view's SQL definition. */
+specifier|public
+name|String
+name|getViewSql
+parameter_list|()
+block|{
+return|return
+name|viewSql
+return|;
+block|}
+comment|/** Get the schemapath of the view */
+specifier|public
+name|List
+argument_list|<
+name|String
+argument_list|>
+name|getSchemaPath
+parameter_list|()
+block|{
+return|return
+name|schemaPath
+return|;
+block|}
 block|}
 end_class
 
