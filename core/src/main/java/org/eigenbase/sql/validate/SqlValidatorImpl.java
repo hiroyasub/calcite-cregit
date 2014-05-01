@@ -9154,7 +9154,7 @@ name|this
 argument_list|,
 name|call
 argument_list|,
-name|usingScope
+name|parentScope
 argument_list|,
 name|enclosingNode
 argument_list|)
@@ -9172,7 +9172,7 @@ argument_list|)
 expr_stmt|;
 name|registerOperandSubqueries
 argument_list|(
-name|usingScope
+name|parentScope
 argument_list|,
 name|call
 argument_list|,
@@ -9262,7 +9262,7 @@ argument_list|)
 decl_stmt|;
 specifier|final
 name|CollectNamespace
-name|ttableConstructorNs
+name|tableConstructorNs
 init|=
 operator|new
 name|CollectNamespace
@@ -9292,7 +9292,7 @@ name|usingScope
 argument_list|,
 name|alias2
 argument_list|,
-name|ttableConstructorNs
+name|tableConstructorNs
 argument_list|,
 name|forceNullable
 argument_list|)

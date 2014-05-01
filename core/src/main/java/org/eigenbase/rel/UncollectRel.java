@@ -65,19 +65,21 @@ end_comment
 
 begin_class
 specifier|public
-specifier|final
 class|class
 name|UncollectRel
 extends|extends
 name|SingleRel
 block|{
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates an UncollectRel.    *    *<p>The row type of the child relational expression must contain precisely    * one column, that column must be a multiset of records.    *    * @param cluster Cluster the relational expression belongs to    * @param child   Child relational expression    */
+comment|/**    * Creates an UncollectRel.    *    *<p>The row type of the child relational expression must contain precisely    * one column, that column must be a multiset of records.    *    * @param cluster Cluster the relational expression belongs to    * @param traitSet Traits    * @param child   Child relational expression    */
 specifier|public
 name|UncollectRel
 parameter_list|(
 name|RelOptCluster
 name|cluster
+parameter_list|,
+name|RelTraitSet
+name|traitSet
 parameter_list|,
 name|RelNode
 name|child
@@ -87,14 +89,7 @@ name|super
 argument_list|(
 name|cluster
 argument_list|,
-name|cluster
-operator|.
-name|traitSetOf
-argument_list|(
-name|Convention
-operator|.
-name|NONE
-argument_list|)
+name|traitSet
 argument_list|,
 name|child
 argument_list|)
@@ -125,13 +120,21 @@ argument_list|()
 argument_list|,
 name|input
 operator|.
+name|getTraitSet
+argument_list|()
+argument_list|,
+name|input
+operator|.
 name|getInput
 argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
 specifier|public
+specifier|final
 name|RelNode
 name|copy
 parameter_list|(
@@ -143,6 +146,29 @@ argument_list|<
 name|RelNode
 argument_list|>
 name|inputs
+parameter_list|)
+block|{
+return|return
+name|copy
+argument_list|(
+name|traitSet
+argument_list|,
+name|sole
+argument_list|(
+name|inputs
+argument_list|)
+argument_list|)
+return|;
+block|}
+specifier|public
+name|RelNode
+name|copy
+parameter_list|(
+name|RelTraitSet
+name|traitSet
+parameter_list|,
+name|RelNode
+name|input
 parameter_list|)
 block|{
 assert|assert
@@ -162,10 +188,9 @@ argument_list|(
 name|getCluster
 argument_list|()
 argument_list|,
-name|sole
-argument_list|(
-name|inputs
-argument_list|)
+name|traitSet
+argument_list|,
+name|input
 argument_list|)
 return|;
 block|}

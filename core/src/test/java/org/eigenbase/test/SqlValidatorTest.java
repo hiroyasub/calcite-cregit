@@ -14473,6 +14473,25 @@ argument_list|(
 literal|"select*from unnest(multiset(select*from dept))"
 argument_list|)
 expr_stmt|;
+name|check
+argument_list|(
+literal|"select c from unnest(multiset(select deptno from dept)) as t(c)"
+argument_list|)
+expr_stmt|;
+name|checkFails
+argument_list|(
+literal|"select c from unnest(multiset(select * from dept)) as t(^c^)"
+argument_list|,
+literal|"List of column aliases must have same degree as table; table has 2 columns \\('DEPTNO', 'NAME'\\), whereas alias list has 1 columns"
+argument_list|)
+expr_stmt|;
+name|checkFails
+argument_list|(
+literal|"select ^c1^ from unnest(multiset(select name from dept)) as t(c)"
+argument_list|,
+literal|"Column 'C1' not found in any table"
+argument_list|)
+expr_stmt|;
 block|}
 annotation|@
 name|Test

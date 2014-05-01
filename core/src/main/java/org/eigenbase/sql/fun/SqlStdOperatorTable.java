@@ -3176,7 +3176,7 @@ literal|null
 argument_list|,
 name|OperandTypes
 operator|.
-name|MULTISET
+name|COLLECTION
 argument_list|,
 name|SqlFunctionCategory
 operator|.
@@ -3244,7 +3244,7 @@ literal|null
 argument_list|,
 name|OperandTypes
 operator|.
-name|RECORD_MULTISET
+name|RECORD_COLLECTION
 argument_list|)
 block|{       }
 decl_stmt|;
@@ -3440,7 +3440,7 @@ literal|null
 argument_list|,
 name|OperandTypes
 operator|.
-name|COLLECTION
+name|COLLECTION_OR_MAP
 argument_list|,
 name|SqlFunctionCategory
 operator|.

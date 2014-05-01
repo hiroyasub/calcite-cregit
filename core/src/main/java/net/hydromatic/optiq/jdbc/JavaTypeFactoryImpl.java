@@ -926,6 +926,9 @@ return|;
 case|case
 name|ARRAY
 case|:
+case|case
+name|MULTISET
+case|:
 return|return
 name|List
 operator|.
