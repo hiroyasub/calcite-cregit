@@ -1068,6 +1068,13 @@ literal|"]; exception ["
 operator|+
 name|actualMessage
 operator|+
+literal|"]; class ["
+operator|+
+name|actualException
+operator|.
+name|getClass
+argument_list|()
+operator|+
 literal|"]; pos [line "
 operator|+
 name|actualLine

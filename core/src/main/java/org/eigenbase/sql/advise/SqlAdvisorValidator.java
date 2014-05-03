@@ -686,7 +686,7 @@ else|else
 block|{
 name|namespace
 operator|.
-name|setRowType
+name|setType
 argument_list|(
 name|emptyStructType
 argument_list|)

@@ -82,10 +82,10 @@ block|}
 comment|//~ Methods ----------------------------------------------------------------
 specifier|public
 name|void
-name|setRowType
+name|setType
 parameter_list|(
 name|RelDataType
-name|rowType
+name|type
 parameter_list|)
 block|{
 throw|throw

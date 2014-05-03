@@ -520,7 +520,7 @@ block|{
 return|return
 name|namespace
 operator|.
-name|getRowTypeSansSystemColumns
+name|getType
 argument_list|()
 return|;
 block|}

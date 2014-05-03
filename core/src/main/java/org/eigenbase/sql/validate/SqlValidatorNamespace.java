@@ -81,17 +81,22 @@ name|SqlValidatorTable
 name|getTable
 parameter_list|()
 function_decl|;
-comment|/**    * Returns the row type of this namespace, which comprises a list of names    * and types of the output columns. If the scope's type has not yet been    * derived, derives it. Never returns null.    */
+comment|/**    * Returns the row type of this namespace, which comprises a list of names    * and types of the output columns. If the scope's type has not yet been    * derived, derives it.    *    * @return Row type of this namespace, never null, always a struct    */
 name|RelDataType
 name|getRowType
 parameter_list|()
 function_decl|;
-comment|/**    * Allows RowType for the namespace to be explicitly set.    */
+comment|/**    * Returns the type of this namespace.    *    * @return Row type converted to struct    */
+name|RelDataType
+name|getType
+parameter_list|()
+function_decl|;
+comment|/**    * Sets the type of this namespace.    *    *<p>Allows the type for the namespace to be explicitly set, but usually is    * called during {@link #validate()}.</p>    *    *<p>Implicitly also sets the row type. If the type is not a struct, then    * the row type is the type wrapped as a struct with a single column,    * otherwise the type and row type are the same.</p>    */
 name|void
-name|setRowType
+name|setType
 parameter_list|(
 name|RelDataType
-name|rowType
+name|type
 parameter_list|)
 function_decl|;
 comment|/**    * Returns the row type of this namespace, sans any system columns.    *    * @return Row type sans system columns    */

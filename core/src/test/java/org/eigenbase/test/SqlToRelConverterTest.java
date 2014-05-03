@@ -1590,6 +1590,21 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testJoinUnnest
+parameter_list|()
+block|{
+name|check
+argument_list|(
+literal|"select*from dept as d, unnest(multiset[d.deptno * 2])"
+argument_list|,
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testLateral
 parameter_list|()
 block|{
