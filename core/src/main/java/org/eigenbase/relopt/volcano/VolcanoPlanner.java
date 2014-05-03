@@ -3812,8 +3812,10 @@ operator|.
 name|get
 argument_list|()
 decl_stmt|;
-comment|// Naive algorithm: assumes that conversion from Tx1.Ty1 to Tx2.Ty2
-comment|// can happen in order (e.g. the traits are completely orthogonal).
+comment|// Traits may build on top of another...for example a collation trait
+comment|// would typically come after a distribution trait since distribution
+comment|// destroys collation; so when doing the conversion below we use
+comment|// fromTraits as the trait of the just previously converted RelNode.
 comment|// Also, toTraits may have fewer traits than fromTraits, excess traits
 comment|// will be left as is.  Finally, any null entries in toTraits are
 comment|// ignored.
@@ -3851,7 +3853,10 @@ block|{
 name|RelTrait
 name|fromTrait
 init|=
-name|fromTraits
+name|converted
+operator|.
+name|getTraitSet
+argument_list|()
 operator|.
 name|getTrait
 argument_list|(
@@ -4018,6 +4023,26 @@ name|converted
 operator|=
 name|rel
 expr_stmt|;
+block|}
+comment|// make sure final converted traitset subsumes what was required
+if|if
+condition|(
+name|converted
+operator|!=
+literal|null
+condition|)
+block|{
+assert|assert
+name|converted
+operator|.
+name|getTraitSet
+argument_list|()
+operator|.
+name|subsumes
+argument_list|(
+name|toTraits
+argument_list|)
+assert|;
 block|}
 return|return
 name|converted
