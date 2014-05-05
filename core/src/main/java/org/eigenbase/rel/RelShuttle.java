@@ -32,6 +32,13 @@ function_decl|;
 name|RelNode
 name|visit
 parameter_list|(
+name|TableFunctionRelBase
+name|scan
+parameter_list|)
+function_decl|;
+name|RelNode
+name|visit
+parameter_list|(
 name|ValuesRel
 name|values
 parameter_list|)

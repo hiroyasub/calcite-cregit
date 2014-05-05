@@ -2007,6 +2007,27 @@ function_decl|;
 annotation|@
 name|BaseMessage
 argument_list|(
+literal|"Wrong arguments for table function ''{0}'' call. Expected ''{1}'', actual ''{2}''"
+argument_list|)
+name|ExInst
+argument_list|<
+name|EigenbaseException
+argument_list|>
+name|illegalArgumentForTableFunctionCall
+parameter_list|(
+name|String
+name|a0
+parameter_list|,
+name|String
+name|a1
+parameter_list|,
+name|String
+name|a2
+parameter_list|)
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
 literal|"''{0}'' is not a valid datetime format"
 argument_list|)
 name|ExInst

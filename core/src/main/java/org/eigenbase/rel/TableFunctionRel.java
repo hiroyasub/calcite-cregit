@@ -17,6 +17,18 @@ begin_import
 import|import
 name|java
 operator|.
+name|lang
+operator|.
+name|reflect
+operator|.
+name|Type
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
 name|util
 operator|.
 name|List
@@ -95,7 +107,7 @@ extends|extends
 name|TableFunctionRelBase
 block|{
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a<code>TableFunctionRel</code>.    *    * @param cluster        Cluster that this relational expression belongs to    * @param inputs         0 or more relational inputs    * @param rexCall        function invocation expression    * @param rowType        row type produced by function    * @param columnMappings column mappings associated with this function    */
+comment|/**    * Creates a<code>TableFunctionRel</code>.    *    * @param cluster        Cluster that this relational expression belongs to    * @param inputs         0 or more relational inputs    * @param rexCall        function invocation expression    * @param elementType    element type of the collection that will implement    *                       this table    * @param rowType        row type produced by function    * @param columnMappings column mappings associated with this function    */
 specifier|public
 name|TableFunctionRel
 parameter_list|(
@@ -110,6 +122,9 @@ name|inputs
 parameter_list|,
 name|RexNode
 name|rexCall
+parameter_list|,
+name|Type
+name|elementType
 parameter_list|,
 name|RelDataType
 name|rowType
@@ -137,6 +152,8 @@ argument_list|,
 name|inputs
 argument_list|,
 name|rexCall
+argument_list|,
+name|elementType
 argument_list|,
 name|rowType
 argument_list|,
@@ -195,6 +212,9 @@ argument_list|,
 name|inputs
 argument_list|,
 name|getCall
+argument_list|()
+argument_list|,
+name|getElementType
 argument_list|()
 argument_list|,
 name|getRowType

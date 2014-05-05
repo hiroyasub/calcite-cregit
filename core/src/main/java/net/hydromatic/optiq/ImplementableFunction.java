@@ -15,41 +15,41 @@ end_package
 
 begin_import
 import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|optiq
+operator|.
+name|rules
+operator|.
 name|java
 operator|.
-name|util
-operator|.
-name|List
+name|CallImplementor
 import|;
 end_import
 
 begin_comment
-comment|/**  * Function that returns a {@link Table}.  *  *<p>As the name "macro" implies, this is invoked at "compile time", that is,  * during query preparation. Compile-time expansion of table expressions allows  * for some very powerful query-optimizations.</p>  */
+comment|/**  * Function that can be translated to java code.  *<p>  * @see net.hydromatic.optiq.ScalarFunction  * @see net.hydromatic.optiq.TableFunction  */
 end_comment
 
 begin_interface
 specifier|public
 interface|interface
-name|TableMacro
+name|ImplementableFunction
 extends|extends
 name|Function
 block|{
-comment|/**    * Applies arguments to yield a table.    *    * @param arguments Arguments    * @return Table    */
-name|TranslatableTable
-name|apply
-parameter_list|(
-name|List
-argument_list|<
-name|Object
-argument_list|>
-name|arguments
-parameter_list|)
+comment|/**    * Returns implementor that translates the function to linq4j expression.    * @return implementor that translates the function to linq4j expression.    */
+name|CallImplementor
+name|getImplementor
+parameter_list|()
 function_decl|;
 block|}
 end_interface
 
 begin_comment
-comment|// End TableMacro.java
+comment|// End ImplementableFunction.java
 end_comment
 
 end_unit

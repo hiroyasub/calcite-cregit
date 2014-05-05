@@ -423,6 +423,11 @@ argument_list|()
 argument_list|,
 name|funcRel
 operator|.
+name|getElementType
+argument_list|()
+argument_list|,
+name|funcRel
+operator|.
 name|getRowType
 argument_list|()
 argument_list|,

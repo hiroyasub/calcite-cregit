@@ -10,47 +10,40 @@ operator|.
 name|hydromatic
 operator|.
 name|optiq
+operator|.
+name|rules
+operator|.
+name|java
 package|;
 end_package
 
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|List
-import|;
-end_import
-
 begin_comment
-comment|/**  * Function that returns a {@link Table}.  *  *<p>As the name "macro" implies, this is invoked at "compile time", that is,  * during query preparation. Compile-time expansion of table expressions allows  * for some very powerful query-optimizations.</p>  */
+comment|/**  * Describes when a function/operator will return null.  *  *<p>STRICT and ANY are similar. STRICT says f(a0, a1) will NEVER return  * null if a0 and a1 are not null. This means that we can check whether f  * returns null just by checking its arguments. Use STRICT in preference to  * ANY whenever possible.</p>  */
 end_comment
 
-begin_interface
+begin_enum
 specifier|public
-interface|interface
-name|TableMacro
-extends|extends
-name|Function
+enum|enum
+name|NullPolicy
 block|{
-comment|/**    * Applies arguments to yield a table.    *    * @param arguments Arguments    * @return Table    */
-name|TranslatableTable
-name|apply
-parameter_list|(
-name|List
-argument_list|<
-name|Object
-argument_list|>
-name|arguments
-parameter_list|)
-function_decl|;
+comment|/** Returns null if and only if one of the arguments are null. */
+name|STRICT
+block|,
+comment|/** If any of the arguments are null, return null. */
+name|ANY
+block|,
+comment|/** If any of the arguments are false, result is false; else if any    * arguments are null, result is null; else true. */
+name|AND
+block|,
+comment|/** If any of the arguments are true, result is true; else if any    * arguments are null, result is null; else false. */
+name|OR
+block|,
+comment|/** If any argument is true, result is false; else if any argument is null,    * result is null; else true. */
+name|NOT
+block|,
+name|NONE
 block|}
-end_interface
-
-begin_comment
-comment|// End TableMacro.java
-end_comment
+end_enum
 
 end_unit
 

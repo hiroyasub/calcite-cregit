@@ -705,6 +705,9 @@ name|forAggregation
 parameter_list|(
 name|JavaTypeFactory
 name|typeFactory
+parameter_list|,
+name|BlockBuilder
+name|list
 parameter_list|)
 block|{
 return|return
@@ -717,7 +720,7 @@ name|typeFactory
 argument_list|,
 literal|null
 argument_list|,
-literal|null
+name|list
 argument_list|)
 return|;
 block|}
@@ -1763,8 +1766,6 @@ operator|.
 name|getOperator
 argument_list|()
 decl_stmt|;
-name|RexImpTable
-operator|.
 name|CallImplementor
 name|implementor
 init|=
@@ -2749,6 +2750,26 @@ argument_list|(
 name|fromType
 argument_list|)
 decl_stmt|;
+specifier|final
+name|boolean
+name|fromNumber
+init|=
+name|fromType
+operator|instanceof
+name|Class
+operator|&&
+name|Number
+operator|.
+name|class
+operator|.
+name|isAssignableFrom
+argument_list|(
+operator|(
+name|Class
+operator|)
+name|fromType
+argument_list|)
+decl_stmt|;
 if|if
 condition|(
 name|fromType
@@ -2929,9 +2950,7 @@ return|;
 block|}
 if|if
 condition|(
-name|fromBox
-operator|!=
-literal|null
+name|fromNumber
 condition|)
 block|{
 comment|// Generate "x.shortValue()".
@@ -2977,9 +2996,7 @@ block|}
 block|}
 if|else if
 condition|(
-name|fromBox
-operator|!=
-literal|null
+name|fromNumber
 operator|&&
 name|toBox
 operator|!=

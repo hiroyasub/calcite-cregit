@@ -439,6 +439,28 @@ block|}
 comment|// Must look for TableMacro before ScalarFunction. Both have an "eval"
 comment|// method.
 specifier|final
+name|TableFunction
+name|tableFunction
+init|=
+name|TableFunctionImpl
+operator|.
+name|create
+argument_list|(
+name|clazz
+argument_list|)
+decl_stmt|;
+if|if
+condition|(
+name|tableFunction
+operator|!=
+literal|null
+condition|)
+block|{
+return|return
+name|tableFunction
+return|;
+block|}
+specifier|final
 name|TableMacro
 name|macro
 init|=

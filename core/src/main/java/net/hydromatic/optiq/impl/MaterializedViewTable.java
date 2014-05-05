@@ -491,7 +491,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
-name|Table
+name|TranslatableTable
 name|apply
 parameter_list|(
 name|List

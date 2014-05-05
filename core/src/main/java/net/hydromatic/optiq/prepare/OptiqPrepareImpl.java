@@ -1045,6 +1045,15 @@ name|planner
 operator|.
 name|addRule
 argument_list|(
+name|JavaRules
+operator|.
+name|ENUMERABLE_TABLE_FUNCTION_RULE
+argument_list|)
+expr_stmt|;
+name|planner
+operator|.
+name|addRule
+argument_list|(
 name|TableAccessRule
 operator|.
 name|INSTANCE

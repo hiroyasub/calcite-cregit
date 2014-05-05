@@ -10,8 +10,38 @@ operator|.
 name|hydromatic
 operator|.
 name|optiq
+operator|.
+name|rules
+operator|.
+name|java
 package|;
 end_package
+
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|linq4j
+operator|.
+name|expressions
+operator|.
+name|Expression
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
+name|rex
+operator|.
+name|RexCall
+import|;
+end_import
 
 begin_import
 import|import
@@ -24,32 +54,36 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Function that returns a {@link Table}.  *  *<p>As the name "macro" implies, this is invoked at "compile time", that is,  * during query preparation. Compile-time expansion of table expressions allows  * for some very powerful query-optimizations.</p>  */
+comment|/**  * Simplified version of {@link net.hydromatic.optiq.rules.java.CallImplementor} that does not know about  * null semantics.  *<p>  * @see net.hydromatic.optiq.rules.java.RexImpTable  * @see net.hydromatic.optiq.rules.java.CallImplementor  *  **/
 end_comment
 
 begin_interface
 specifier|public
 interface|interface
-name|TableMacro
-extends|extends
-name|Function
+name|NotNullImplementor
 block|{
-comment|/**    * Applies arguments to yield a table.    *    * @param arguments Arguments    * @return Table    */
-name|TranslatableTable
-name|apply
+comment|/**    * Implements a call with assumption that all the null-checking is    * implemented by caller.    *<p>    * @param translator translator to implement the code    * @param call call to implement    * @param translatedOperands arguments of a call    * @return expression that implements given call    */
+name|Expression
+name|implement
 parameter_list|(
+name|RexToLixTranslator
+name|translator
+parameter_list|,
+name|RexCall
+name|call
+parameter_list|,
 name|List
 argument_list|<
-name|Object
+name|Expression
 argument_list|>
-name|arguments
+name|translatedOperands
 parameter_list|)
 function_decl|;
 block|}
 end_interface
 
 begin_comment
-comment|// End TableMacro.java
+comment|// End NotNullImplementor.java
 end_comment
 
 end_unit
