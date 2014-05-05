@@ -3449,11 +3449,6 @@ name|cache
 operator|=
 name|CacheBuilder
 operator|.
-expr|<
-name|String
-operator|,
-name|OptiqSchema
-operator|>
 name|newBuilder
 argument_list|()
 operator|.
