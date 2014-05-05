@@ -200,6 +200,11 @@ name|types
 parameter_list|,
 name|Calendar
 name|localCalendar
+parameter_list|,
+name|ArrayImpl
+operator|.
+name|Factory
+name|factory
 parameter_list|)
 block|{
 name|List
@@ -237,6 +242,8 @@ name|size
 argument_list|()
 argument_list|,
 name|localCalendar
+argument_list|,
+name|factory
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -257,6 +264,11 @@ name|ordinal
 parameter_list|,
 name|Calendar
 name|localCalendar
+parameter_list|,
+name|ArrayImpl
+operator|.
+name|Factory
+name|factory
 parameter_list|)
 block|{
 comment|// Create an accessor appropriate to the underlying type; the accessor
@@ -271,6 +283,8 @@ argument_list|)
 decl_stmt|;
 switch|switch
 condition|(
+name|type
+operator|.
 name|type
 operator|.
 name|type
@@ -386,6 +400,8 @@ switch|switch
 condition|(
 name|type
 operator|.
+name|type
+operator|.
 name|representation
 condition|)
 block|{
@@ -457,6 +473,8 @@ switch|switch
 condition|(
 name|type
 operator|.
+name|type
+operator|.
 name|representation
 condition|)
 block|{
@@ -496,6 +514,8 @@ literal|"bad "
 operator|+
 name|type
 operator|.
+name|type
+operator|.
 name|representation
 argument_list|)
 throw|;
@@ -507,6 +527,8 @@ name|TIME
 case|:
 switch|switch
 condition|(
+name|type
+operator|.
 name|type
 operator|.
 name|representation
@@ -548,6 +570,8 @@ literal|"bad "
 operator|+
 name|type
 operator|.
+name|type
+operator|.
 name|representation
 argument_list|)
 throw|;
@@ -559,6 +583,8 @@ name|TIMESTAMP
 case|:
 switch|switch
 condition|(
+name|type
+operator|.
 name|type
 operator|.
 name|representation
@@ -612,6 +638,8 @@ literal|"bad "
 operator|+
 name|type
 operator|.
+name|type
+operator|.
 name|representation
 argument_list|)
 throw|;
@@ -627,9 +655,20 @@ name|ArrayAccessor
 argument_list|(
 name|getter
 argument_list|,
+operator|(
+operator|(
+name|ColumnMetaData
+operator|.
+name|ArrayType
+operator|)
 name|type
 operator|.
+name|type
+operator|)
+operator|.
 name|component
+argument_list|,
+name|factory
 argument_list|)
 return|;
 case|case
@@ -652,6 +691,8 @@ if|if
 condition|(
 name|type
 operator|.
+name|type
+operator|.
 name|typeName
 operator|.
 name|startsWith
@@ -663,6 +704,8 @@ block|{
 name|int
 name|end
 init|=
+name|type
+operator|.
 name|type
 operator|.
 name|typeName
@@ -683,6 +726,8 @@ name|end
 operator|=
 name|type
 operator|.
+name|type
+operator|.
 name|typeName
 operator|.
 name|length
@@ -700,6 +745,8 @@ name|TimeUnitRange
 operator|.
 name|valueOf
 argument_list|(
+name|type
+operator|.
 name|type
 operator|.
 name|typeName
@@ -764,6 +811,8 @@ name|RuntimeException
 argument_list|(
 literal|"unknown type "
 operator|+
+name|type
+operator|.
 name|type
 operator|.
 name|type
@@ -3996,7 +4045,16 @@ block|{
 specifier|private
 specifier|final
 name|ColumnMetaData
-name|component
+operator|.
+name|AvaticaType
+name|componentType
+decl_stmt|;
+specifier|private
+specifier|final
+name|ArrayImpl
+operator|.
+name|Factory
+name|factory
 decl_stmt|;
 specifier|public
 name|ArrayAccessor
@@ -4005,7 +4063,14 @@ name|Getter
 name|getter
 parameter_list|,
 name|ColumnMetaData
-name|component
+operator|.
+name|AvaticaType
+name|componentType
+parameter_list|,
+name|ArrayImpl
+operator|.
+name|Factory
+name|factory
 parameter_list|)
 block|{
 name|super
@@ -4015,9 +4080,15 @@ argument_list|)
 expr_stmt|;
 name|this
 operator|.
-name|component
+name|componentType
 operator|=
-name|component
+name|componentType
+expr_stmt|;
+name|this
+operator|.
+name|factory
+operator|=
+name|factory
 expr_stmt|;
 block|}
 annotation|@
@@ -4054,7 +4125,9 @@ name|ArrayImpl
 argument_list|(
 name|list
 argument_list|,
-name|component
+name|componentType
+argument_list|,
+name|factory
 argument_list|)
 return|;
 block|}

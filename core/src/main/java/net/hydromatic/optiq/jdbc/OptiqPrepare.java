@@ -909,11 +909,10 @@ name|rowType
 decl_stmt|;
 specifier|public
 specifier|final
-name|List
-argument_list|<
 name|ColumnMetaData
-argument_list|>
-name|columnList
+operator|.
+name|StructType
+name|structType
 decl_stmt|;
 specifier|private
 specifier|final
@@ -948,11 +947,10 @@ parameter_list|,
 name|RelDataType
 name|rowType
 parameter_list|,
-name|List
-argument_list|<
 name|ColumnMetaData
-argument_list|>
-name|columnList
+operator|.
+name|StructType
+name|structType
 parameter_list|,
 name|int
 name|maxRowCount
@@ -990,9 +988,9 @@ name|rowType
 expr_stmt|;
 name|this
 operator|.
-name|columnList
+name|structType
 operator|=
-name|columnList
+name|structType
 expr_stmt|;
 name|this
 operator|.
@@ -1034,7 +1032,9 @@ argument_list|)
 decl_stmt|;
 comment|//noinspection unchecked
 return|return
-name|columnList
+name|structType
+operator|.
+name|columns
 operator|.
 name|size
 argument_list|()
@@ -1090,7 +1090,9 @@ name|getColumnList
 parameter_list|()
 block|{
 return|return
-name|columnList
+name|structType
+operator|.
+name|columns
 return|;
 block|}
 specifier|public

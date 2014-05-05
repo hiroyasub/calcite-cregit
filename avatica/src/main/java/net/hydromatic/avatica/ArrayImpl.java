@@ -46,13 +46,20 @@ name|Array
 block|{
 specifier|private
 specifier|final
-name|List
-name|list
+name|ColumnMetaData
+operator|.
+name|AvaticaType
+name|elementType
 decl_stmt|;
 specifier|private
 specifier|final
-name|ColumnMetaData
-name|component
+name|Factory
+name|factory
+decl_stmt|;
+specifier|private
+specifier|final
+name|List
+name|list
 decl_stmt|;
 specifier|public
 name|ArrayImpl
@@ -61,7 +68,12 @@ name|List
 name|list
 parameter_list|,
 name|ColumnMetaData
-name|component
+operator|.
+name|AvaticaType
+name|elementType
+parameter_list|,
+name|Factory
+name|factory
 parameter_list|)
 block|{
 name|this
@@ -72,9 +84,15 @@ name|list
 expr_stmt|;
 name|this
 operator|.
-name|component
+name|elementType
 operator|=
-name|component
+name|elementType
+expr_stmt|;
+name|this
+operator|.
+name|factory
+operator|=
+name|factory
 expr_stmt|;
 block|}
 specifier|public
@@ -85,7 +103,7 @@ throws|throws
 name|SQLException
 block|{
 return|return
-name|component
+name|elementType
 operator|.
 name|typeName
 return|;
@@ -98,7 +116,7 @@ throws|throws
 name|SQLException
 block|{
 return|return
-name|component
+name|elementType
 operator|.
 name|type
 return|;
@@ -117,7 +135,7 @@ name|list
 argument_list|)
 return|;
 block|}
-comment|/**    * Converts a collection of boxed primitives into an array of primitives.    *    * @param list Collection of boxed primitives    *    * @return array of primitives    * @throws ClassCastException   if any element is not of the box type    * @throws NullPointerException if any element is null    */
+comment|/**    * Converts a list into an array.    *    *<p>If the elements of the list are primitives, converts to an array of    * primitives (e.g. {@code boolean[]}.</p>    *    * @param list List of objects    *    * @return array    * @throws ClassCastException   if any element is not of the box type    * @throws NullPointerException if any element is null    */
 annotation|@
 name|SuppressWarnings
 argument_list|(
@@ -140,7 +158,7 @@ literal|0
 decl_stmt|;
 switch|switch
 condition|(
-name|component
+name|elementType
 operator|.
 name|representation
 condition|)
@@ -148,6 +166,7 @@ block|{
 case|case
 name|PRIMITIVE_DOUBLE
 case|:
+specifier|final
 name|double
 index|[]
 name|doubles
@@ -167,7 +186,7 @@ name|double
 name|v
 range|:
 operator|(
-name|Collection
+name|List
 argument_list|<
 name|Double
 argument_list|>
@@ -190,6 +209,7 @@ return|;
 case|case
 name|PRIMITIVE_FLOAT
 case|:
+specifier|final
 name|float
 index|[]
 name|floats
@@ -209,7 +229,7 @@ name|float
 name|v
 range|:
 operator|(
-name|Collection
+name|List
 argument_list|<
 name|Float
 argument_list|>
@@ -232,6 +252,7 @@ return|;
 case|case
 name|PRIMITIVE_INT
 case|:
+specifier|final
 name|int
 index|[]
 name|ints
@@ -251,7 +272,7 @@ name|int
 name|v
 range|:
 operator|(
-name|Collection
+name|List
 argument_list|<
 name|Integer
 argument_list|>
@@ -274,6 +295,7 @@ return|;
 case|case
 name|PRIMITIVE_LONG
 case|:
+specifier|final
 name|long
 index|[]
 name|longs
@@ -293,7 +315,7 @@ name|long
 name|v
 range|:
 operator|(
-name|Collection
+name|List
 argument_list|<
 name|Long
 argument_list|>
@@ -316,6 +338,7 @@ return|;
 case|case
 name|PRIMITIVE_SHORT
 case|:
+specifier|final
 name|short
 index|[]
 name|shorts
@@ -335,7 +358,7 @@ name|short
 name|v
 range|:
 operator|(
-name|Collection
+name|List
 argument_list|<
 name|Short
 argument_list|>
@@ -358,6 +381,7 @@ return|;
 case|case
 name|PRIMITIVE_BOOLEAN
 case|:
+specifier|final
 name|boolean
 index|[]
 name|booleans
@@ -377,7 +401,7 @@ name|boolean
 name|v
 range|:
 operator|(
-name|Collection
+name|List
 argument_list|<
 name|Boolean
 argument_list|>
@@ -400,6 +424,7 @@ return|;
 case|case
 name|PRIMITIVE_BYTE
 case|:
+specifier|final
 name|byte
 index|[]
 name|bytes
@@ -419,7 +444,7 @@ name|byte
 name|v
 range|:
 operator|(
-name|Collection
+name|List
 argument_list|<
 name|Byte
 argument_list|>
@@ -442,6 +467,7 @@ return|;
 case|case
 name|PRIMITIVE_CHAR
 case|:
+specifier|final
 name|char
 index|[]
 name|chars
@@ -461,7 +487,7 @@ name|char
 name|v
 range|:
 operator|(
-name|Collection
+name|List
 argument_list|<
 name|Character
 argument_list|>
@@ -496,7 +522,7 @@ argument_list|()
 decl_stmt|;
 switch|switch
 condition|(
-name|component
+name|elementType
 operator|.
 name|type
 condition|)
@@ -506,6 +532,19 @@ name|Types
 operator|.
 name|ARRAY
 case|:
+specifier|final
+name|ColumnMetaData
+operator|.
+name|ArrayType
+name|arrayType
+init|=
+operator|(
+name|ColumnMetaData
+operator|.
+name|ArrayType
+operator|)
+name|elementType
+decl_stmt|;
 for|for
 control|(
 name|i
@@ -538,9 +577,11 @@ index|[
 name|i
 index|]
 argument_list|,
-name|component
+name|arrayType
 operator|.
 name|component
+argument_list|,
+name|factory
 argument_list|)
 expr_stmt|;
 block|}
@@ -642,12 +683,16 @@ parameter_list|()
 throws|throws
 name|SQLException
 block|{
-throw|throw
-operator|new
-name|UnsupportedOperationException
-argument_list|()
-throw|;
-comment|// TODO
+return|return
+name|factory
+operator|.
+name|create
+argument_list|(
+name|elementType
+argument_list|,
+name|list
+argument_list|)
+return|;
 block|}
 specifier|public
 name|ResultSet
@@ -733,6 +778,24 @@ throws|throws
 name|SQLException
 block|{
 comment|// nothing to do
+block|}
+comment|/** Factory that can create a result set based on a list of values. */
+specifier|public
+interface|interface
+name|Factory
+block|{
+name|ResultSet
+name|create
+parameter_list|(
+name|ColumnMetaData
+operator|.
+name|AvaticaType
+name|elementType
+parameter_list|,
+name|Iterable
+name|iterable
+parameter_list|)
+function_decl|;
 block|}
 block|}
 end_class

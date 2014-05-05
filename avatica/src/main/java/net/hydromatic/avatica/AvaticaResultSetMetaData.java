@@ -421,6 +421,8 @@ name|column
 argument_list|)
 operator|.
 name|type
+operator|.
+name|type
 return|;
 block|}
 specifier|public
@@ -438,6 +440,8 @@ name|getColumnMetaData
 argument_list|(
 name|column
 argument_list|)
+operator|.
+name|type
 operator|.
 name|typeName
 return|;

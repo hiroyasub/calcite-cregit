@@ -439,7 +439,9 @@ name|adapt
 argument_list|(
 name|prepareResult
 operator|.
-name|columnList
+name|structType
+operator|.
+name|columns
 argument_list|,
 operator|new
 name|Function1
@@ -464,6 +466,8 @@ parameter_list|)
 block|{
 return|return
 name|column
+operator|.
+name|type
 operator|.
 name|representation
 return|;
