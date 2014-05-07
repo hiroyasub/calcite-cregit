@@ -318,7 +318,7 @@ expr_stmt|;
 block|}
 name|writer
 operator|.
-name|sep
+name|keyword
 argument_list|(
 literal|"AS"
 argument_list|)

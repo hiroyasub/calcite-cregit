@@ -1071,6 +1071,23 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testWithAlias
+parameter_list|()
+block|{
+name|check
+argument_list|(
+literal|"with w(x, y) as (select * from dept where deptno> 10)\n"
+operator|+
+literal|"select x from w where x< 30 union all select deptno from dept"
+argument_list|,
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testWithInsideWhereExists
 parameter_list|()
 block|{

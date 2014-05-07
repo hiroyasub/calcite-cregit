@@ -9475,8 +9475,6 @@ name|this
 argument_list|,
 name|with
 argument_list|,
-name|parentScope
-argument_list|,
 name|enclosingNode
 argument_list|)
 decl_stmt|;
@@ -9540,7 +9538,7 @@ name|registerQuery
 argument_list|(
 name|scope
 argument_list|,
-name|usingScope
+literal|null
 argument_list|,
 name|withItem
 operator|.
@@ -9558,8 +9556,25 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-comment|//      SqlValidatorNamespace ns = null; // TODO:
-comment|//      registerNamespace(usingScope, withItemCall.name.getSimple(), ns, false);
+name|registerNamespace
+argument_list|(
+literal|null
+argument_list|,
+name|alias
+argument_list|,
+operator|new
+name|WithItemNamespace
+argument_list|(
+name|this
+argument_list|,
+name|withItem
+argument_list|,
+name|enclosingNode
+argument_list|)
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
 name|scope
 operator|=
 name|withScope

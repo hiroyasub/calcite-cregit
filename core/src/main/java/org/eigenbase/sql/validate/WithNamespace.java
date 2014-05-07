@@ -68,13 +68,8 @@ specifier|final
 name|SqlWith
 name|with
 decl_stmt|;
-specifier|private
-specifier|final
-name|SqlValidatorScope
-name|scope
-decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a TableConstructorNamespace.    *    * @param validator     Validator    * @param with          WITH clause    * @param scope         Scope    * @param enclosingNode Enclosing node    */
+comment|/**    * Creates a TableConstructorNamespace.    *    * @param validator     Validator    * @param with          WITH clause    * @param enclosingNode Enclosing node    */
 name|WithNamespace
 parameter_list|(
 name|SqlValidatorImpl
@@ -82,9 +77,6 @@ name|validator
 parameter_list|,
 name|SqlWith
 name|with
-parameter_list|,
-name|SqlValidatorScope
-name|scope
 parameter_list|,
 name|SqlNode
 name|enclosingNode
@@ -102,12 +94,6 @@ operator|.
 name|with
 operator|=
 name|with
-expr_stmt|;
-name|this
-operator|.
-name|scope
-operator|=
-name|scope
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
@@ -202,16 +188,6 @@ parameter_list|()
 block|{
 return|return
 name|with
-return|;
-block|}
-comment|/**    * Returns the scope.    *    * @return scope    */
-specifier|public
-name|SqlValidatorScope
-name|getScope
-parameter_list|()
-block|{
-return|return
-name|scope
 return|;
 block|}
 block|}

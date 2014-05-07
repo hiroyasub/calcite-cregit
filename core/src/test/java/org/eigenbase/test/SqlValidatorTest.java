@@ -12545,6 +12545,51 @@ name|EMP_RECORD_TYPE
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Tests the {@code WITH} clause and column aliases. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWithColumnAlias
+parameter_list|()
+block|{
+name|checkResultType
+argument_list|(
+literal|"with w(x, y) as (select * from dept)\n"
+operator|+
+literal|"select * from w"
+argument_list|,
+literal|"RecordType(INTEGER NOT NULL X, VARCHAR(10) NOT NULL Y) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|checkResultType
+argument_list|(
+literal|"with w(x, y) as (select * from dept)\n"
+operator|+
+literal|"select * from w, w as w2"
+argument_list|,
+literal|"RecordType(INTEGER NOT NULL X, VARCHAR(10) NOT NULL Y, INTEGER NOT NULL X0, VARCHAR(10) NOT NULL Y0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|checkFails
+argument_list|(
+literal|"with w(x, y) as (select * from dept)\n"
+operator|+
+literal|"select ^deptno^ from w"
+argument_list|,
+literal|"Column 'DEPTNO' not found in any table"
+argument_list|)
+expr_stmt|;
+name|checkFails
+argument_list|(
+literal|"with w(x, ^x^) as (select * from dept)\n"
+operator|+
+literal|"select * from w"
+argument_list|,
+literal|"Duplicate name 'X' in column list"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Tests the {@code WITH} clause in sub-queries. */
 annotation|@
 name|Test
