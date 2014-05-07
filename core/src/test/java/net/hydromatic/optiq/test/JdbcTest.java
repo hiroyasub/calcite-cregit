@@ -11813,6 +11813,323 @@ literal|"deptno=null; deptno=40"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Various queries against EMP and DEPT, in particular involving composite    * join conditions in various flavors of outer join. Results are verified    * against MySQL (except full join, which MySQL does not support). */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testVariousOuter
+parameter_list|()
+block|{
+name|checkOuter
+argument_list|(
+literal|"select * from emp"
+argument_list|,
+literal|"ENAME=Adam ; DEPTNO=50; GENDER=M"
+argument_list|,
+literal|"ENAME=Alice; DEPTNO=30; GENDER=F"
+argument_list|,
+literal|"ENAME=Bob  ; DEPTNO=10; GENDER=M"
+argument_list|,
+literal|"ENAME=Eric ; DEPTNO=20; GENDER=M"
+argument_list|,
+literal|"ENAME=Eve  ; DEPTNO=50; GENDER=F"
+argument_list|,
+literal|"ENAME=Grace; DEPTNO=60; GENDER=F"
+argument_list|,
+literal|"ENAME=Jane ; DEPTNO=10; GENDER=F"
+argument_list|,
+literal|"ENAME=Susan; DEPTNO=30; GENDER=F"
+argument_list|)
+expr_stmt|;
+name|checkOuter
+argument_list|(
+literal|"select * from emp join dept on emp.deptno = dept.deptno"
+argument_list|,
+literal|"ENAME=Alice; DEPTNO=30; GENDER=F; DEPTNO0=30; DNAME=Engineering"
+argument_list|,
+literal|"ENAME=Bob  ; DEPTNO=10; GENDER=M; DEPTNO0=10; DNAME=Sales      "
+argument_list|,
+literal|"ENAME=Eric ; DEPTNO=20; GENDER=M; DEPTNO0=20; DNAME=Marketing  "
+argument_list|,
+literal|"ENAME=Jane ; DEPTNO=10; GENDER=F; DEPTNO0=10; DNAME=Sales      "
+argument_list|,
+literal|"ENAME=Susan; DEPTNO=30; GENDER=F; DEPTNO0=30; DNAME=Engineering"
+argument_list|)
+expr_stmt|;
+comment|// The following test is disabled, because we cannot handle non-equi-join.
+comment|// Following it are the results from MySQL.
+name|checkOuter
+argument_list|(
+literal|"select * from emp join dept on emp.deptno = dept.deptno and emp.gender = 'F'"
+argument_list|,
+literal|"TODO"
+argument_list|)
+expr_stmt|;
+comment|// +-------+--------+--------+--------+-------------+
+comment|// | ename | deptno | gender | deptno | dname       |
+comment|// +-------+--------+--------+--------+-------------+
+comment|// | Jane  |     10 | F      |     10 | Sales       |
+comment|// | Susan |     30 | F      |     30 | Engineering |
+comment|// | Alice |     30 | F      |     30 | Engineering |
+comment|// +-------+--------+--------+--------+-------------+
+name|checkOuter
+argument_list|(
+literal|"select * from emp join dept on emp.deptno = dept.deptno where emp.gender = 'F'"
+argument_list|,
+literal|"ENAME=Alice; DEPTNO=30; GENDER=F; DEPTNO0=30; DNAME=Engineering"
+argument_list|,
+literal|"ENAME=Jane ; DEPTNO=10; GENDER=F; DEPTNO0=10; DNAME=Sales      "
+argument_list|,
+literal|"ENAME=Susan; DEPTNO=30; GENDER=F; DEPTNO0=30; DNAME=Engineering"
+argument_list|)
+expr_stmt|;
+name|checkOuter
+argument_list|(
+literal|"select * from (select * from emp where gender ='F') as emp join dept on emp.deptno = dept.deptno"
+argument_list|,
+literal|"ENAME=Jane ; DEPTNO=10; GENDER=F; DEPTNO0=10; DNAME=Sales      "
+argument_list|,
+literal|"ENAME=Susan; DEPTNO=30; GENDER=F; DEPTNO0=30; DNAME=Engineering"
+argument_list|,
+literal|"ENAME=Alice; DEPTNO=30; GENDER=F; DEPTNO0=30; DNAME=Engineering"
+argument_list|)
+expr_stmt|;
+comment|// The following test is disabled, because we cannot handle non-equi-join.
+comment|// Following it are the results from MySQL.
+name|checkOuter
+argument_list|(
+literal|"select * from emp left join dept on emp.deptno = dept.deptno and emp.gender = 'F'"
+argument_list|,
+literal|"TODO"
+argument_list|)
+expr_stmt|;
+comment|// +-------+--------+--------+--------+-------------+
+comment|// | ename | deptno | gender | deptno | dname       |
+comment|// +-------+--------+--------+--------+-------------+
+comment|// | Jane  |     10 | F      |     10 | Sales       |
+comment|// | Susan |     30 | F      |     30 | Engineering |
+comment|// | Alice |     30 | F      |     30 | Engineering |
+comment|// | Bob   |     10 | M      |   NULL | NULL        |
+comment|// | Eric  |     20 | M      |   NULL | NULL        |
+comment|// | Adam  |     50 | M      |   NULL | NULL        |
+comment|// | Eve   |     50 | F      |   NULL | NULL        |
+comment|// | Grace |     60 | F      |   NULL | NULL        |
+comment|// +-------+--------+--------+--------+-------------+
+name|checkOuter
+argument_list|(
+literal|"select * from emp left join dept on emp.deptno = dept.deptno where emp.gender = 'F'"
+argument_list|,
+literal|"ENAME=Jane ; DEPTNO=10; GENDER=F; DEPTNO0=10; DNAME=Sales      "
+argument_list|,
+literal|"ENAME=Susan; DEPTNO=30; GENDER=F; DEPTNO0=30; DNAME=Engineering"
+argument_list|,
+literal|"ENAME=Alice; DEPTNO=30; GENDER=F; DEPTNO0=30; DNAME=Engineering"
+argument_list|,
+literal|"ENAME=Eve  ; DEPTNO=50; GENDER=F; DEPTNO0=null; DNAME=null"
+argument_list|,
+literal|"ENAME=Grace; DEPTNO=60; GENDER=F; DEPTNO0=null; DNAME=null"
+argument_list|)
+expr_stmt|;
+name|checkOuter
+argument_list|(
+literal|"select * from (select * from emp where gender ='F') as emp left join dept on emp.deptno = dept.deptno"
+argument_list|,
+literal|"ENAME=Jane ; DEPTNO=10; GENDER=F; DEPTNO0=10; DNAME=Sales      "
+argument_list|,
+literal|"ENAME=Susan; DEPTNO=30; GENDER=F; DEPTNO0=30; DNAME=Engineering"
+argument_list|,
+literal|"ENAME=Alice; DEPTNO=30; GENDER=F; DEPTNO0=30; DNAME=Engineering"
+argument_list|,
+literal|"ENAME=Eve  ; DEPTNO=50; GENDER=F; DEPTNO0=null; DNAME=null"
+argument_list|,
+literal|"ENAME=Grace; DEPTNO=60; GENDER=F; DEPTNO0=null; DNAME=null"
+argument_list|)
+expr_stmt|;
+comment|// The following test is disabled, because we cannot handle non-equi-join.
+comment|// Following it are the results from MySQL.
+name|checkOuter
+argument_list|(
+literal|"select * from emp right join dept on emp.deptno = dept.deptno and emp.gender = 'F'"
+argument_list|,
+literal|"TODO"
+argument_list|)
+expr_stmt|;
+comment|// +-------+--------+--------+--------+-------------+
+comment|// | ename | deptno | gender | deptno | dname       |
+comment|// +-------+--------+--------+--------+-------------+
+comment|// | Jane  |     10 | F      |     10 | Sales       |
+comment|// | Susan |     30 | F      |     30 | Engineering |
+comment|// | Alice |     30 | F      |     30 | Engineering |
+comment|// | NULL  |   NULL | NULL   |     20 | Marketing   |
+comment|// | NULL  |   NULL | NULL   |     40 | Empty       |
+comment|// +-------+--------+--------+--------+-------------+
+name|checkOuter
+argument_list|(
+literal|"select * from emp right join dept on emp.deptno = dept.deptno where emp.gender = 'F'"
+argument_list|,
+literal|"ENAME=Jane ; DEPTNO=10; GENDER=F; DEPTNO0=10; DNAME=Sales      "
+argument_list|,
+literal|"ENAME=Susan; DEPTNO=30; GENDER=F; DEPTNO0=30; DNAME=Engineering"
+argument_list|,
+literal|"ENAME=Alice; DEPTNO=30; GENDER=F; DEPTNO0=30; DNAME=Engineering"
+argument_list|)
+expr_stmt|;
+name|checkOuter
+argument_list|(
+literal|"select * from (select * from emp where gender ='F') as emp right join dept on emp.deptno = dept.deptno"
+argument_list|,
+literal|"ENAME=Jane ; DEPTNO=10; GENDER=F; DEPTNO0=10; DNAME=Sales      "
+argument_list|,
+literal|"ENAME=null; DEPTNO=null; GENDER=null; DEPTNO0=20; DNAME=Marketing  "
+argument_list|,
+literal|"ENAME=Susan; DEPTNO=30; GENDER=F; DEPTNO0=30; DNAME=Engineering"
+argument_list|,
+literal|"ENAME=Alice; DEPTNO=30; GENDER=F; DEPTNO0=30; DNAME=Engineering"
+argument_list|,
+literal|"ENAME=null; DEPTNO=null; GENDER=null; DEPTNO0=40; DNAME=Empty      "
+argument_list|)
+expr_stmt|;
+name|checkOuter
+argument_list|(
+literal|"select * from emp full join dept on emp.deptno = dept.deptno and emp.gender = 'F'"
+argument_list|,
+literal|"TODO"
+argument_list|)
+expr_stmt|;
+name|checkOuter
+argument_list|(
+literal|"select * from emp full join dept on emp.deptno = dept.deptno where emp.gender = 'F'"
+argument_list|,
+literal|"ENAME=Alice; DEPTNO=30; GENDER=F; DEPTNO0=30; DNAME=Engineering"
+argument_list|,
+literal|"ENAME=Eve  ; DEPTNO=50; GENDER=F; DEPTNO0=null; DNAME=null"
+argument_list|,
+literal|"ENAME=Grace; DEPTNO=60; GENDER=F; DEPTNO0=null; DNAME=null"
+argument_list|,
+literal|"ENAME=Jane ; DEPTNO=10; GENDER=F; DEPTNO0=10; DNAME=Sales      "
+argument_list|,
+literal|"ENAME=Susan; DEPTNO=30; GENDER=F; DEPTNO0=30; DNAME=Engineering"
+argument_list|)
+expr_stmt|;
+name|checkOuter
+argument_list|(
+literal|"select * from (select * from emp where gender ='F') as emp full join dept on emp.deptno = dept.deptno"
+argument_list|,
+literal|"ENAME=Alice; DEPTNO=30; GENDER=F; DEPTNO0=30; DNAME=Engineering"
+argument_list|,
+literal|"ENAME=Eve  ; DEPTNO=50; GENDER=F; DEPTNO0=null; DNAME=null"
+argument_list|,
+literal|"ENAME=Grace; DEPTNO=60; GENDER=F; DEPTNO0=null; DNAME=null"
+argument_list|,
+literal|"ENAME=Jane ; DEPTNO=10; GENDER=F; DEPTNO0=10; DNAME=Sales      "
+argument_list|,
+literal|"ENAME=Susan; DEPTNO=30; GENDER=F; DEPTNO0=30; DNAME=Engineering"
+argument_list|,
+literal|"ENAME=null; DEPTNO=null; GENDER=null; DEPTNO0=20; DNAME=Marketing  "
+argument_list|,
+literal|"ENAME=null; DEPTNO=null; GENDER=null; DEPTNO0=40; DNAME=Empty      "
+argument_list|)
+expr_stmt|;
+block|}
+specifier|private
+name|void
+name|checkOuter
+parameter_list|(
+name|String
+name|sql
+parameter_list|,
+name|String
+modifier|...
+name|lines
+parameter_list|)
+block|{
+if|if
+condition|(
+name|sql
+operator|.
+name|contains
+argument_list|(
+literal|"on emp.deptno = dept.deptno and emp.gender = 'F'"
+argument_list|)
+condition|)
+block|{
+comment|// We can't do non-equi-join yet
+return|return;
+block|}
+comment|// Append a 'WITH' clause that supplies EMP and DEPT tables like this:
+comment|//
+comment|// drop table emp;
+comment|// drop table dept;
+comment|// create table emp(ename varchar(10), deptno int, gender varchar(1));
+comment|// insert into emp values ('Jane', 10, 'F');
+comment|// insert into emp values ('Bob', 10, 'M');
+comment|// insert into emp values ('Eric', 20, 'M');
+comment|// insert into emp values ('Susan', 30, 'F');
+comment|// insert into emp values ('Alice', 30, 'F');
+comment|// insert into emp values ('Adam', 50, 'M');
+comment|// insert into emp values ('Eve', 50, 'F');
+comment|// insert into emp values ('Grace', 60, 'F');
+comment|// create table dept (deptno int, dname varchar(12));
+comment|// insert into dept values (10, 'Sales');
+comment|// insert into dept values (20, 'Marketing');
+comment|// insert into dept values (30, 'Engineering');
+comment|// insert into dept values (40, 'Empty');
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"with\n"
+operator|+
+literal|"  emp(ename, deptno, gender) as (values\n"
+operator|+
+literal|"    ('Jane', 10, 'F'),\n"
+operator|+
+literal|"    ('Bob', 10, 'M'),\n"
+operator|+
+literal|"    ('Eric', 20, 'M'),\n"
+operator|+
+literal|"    ('Susan', 30, 'F'),\n"
+operator|+
+literal|"    ('Alice', 30, 'F'),\n"
+operator|+
+literal|"    ('Adam', 50, 'M'),\n"
+operator|+
+literal|"    ('Eve', 50, 'F'),\n"
+operator|+
+literal|"    ('Grace', 60, 'F')),\n"
+operator|+
+literal|"  dept(deptno, dname) as (values\n"
+operator|+
+literal|"    (10, 'Sales'),\n"
+operator|+
+literal|"    (20, 'Marketing'),\n"
+operator|+
+literal|"    (30, 'Engineering'),\n"
+operator|+
+literal|"    (40, 'Empty'))\n"
+operator|+
+name|sql
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+name|lines
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public
