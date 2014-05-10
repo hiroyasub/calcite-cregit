@@ -734,7 +734,20 @@ operator|.
 name|containsAggs
 argument_list|()
 assert|;
-return|return
+name|program
+operator|=
+name|RexProgramBuilder
+operator|.
+name|normalize
+argument_list|(
+name|cluster
+operator|.
+name|getRexBuilder
+argument_list|()
+argument_list|,
+name|program
+argument_list|)
+argument_list|;                 return
 name|super
 operator|.
 name|makeRel
@@ -749,7 +762,7 @@ name|child
 argument_list|,
 name|program
 argument_list|)
-return|;
+argument_list|;
 block|}
 block|}
 operator|,

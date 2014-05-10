@@ -2232,18 +2232,10 @@ argument_list|,
 name|outputRowType
 argument_list|)
 decl_stmt|;
+comment|// Program is NOT normalized here (e.g. can contain literals in
+comment|// call operands), since literals should be inlined.
 return|return
-name|RexProgramBuilder
-operator|.
-name|normalize
-argument_list|(
-name|cluster
-operator|.
-name|getRexBuilder
-argument_list|()
-argument_list|,
 name|program
-argument_list|)
 return|;
 block|}
 specifier|private

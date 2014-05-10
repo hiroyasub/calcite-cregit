@@ -10716,50 +10716,6 @@ expr_stmt|;
 block|}
 comment|/** Same result (and plan) as {@link #testSelectDistinct}. */
 annotation|@
-name|Ignore
-argument_list|(
-literal|"Analytic functions over constants are not supported :("
-argument_list|)
-annotation|@
-name|Test
-specifier|public
-name|void
-name|testGroupByMax1OverIsNull
-parameter_list|()
-block|{
-name|OptiqAssert
-operator|.
-name|that
-argument_list|()
-operator|.
-name|with
-argument_list|(
-name|OptiqAssert
-operator|.
-name|Config
-operator|.
-name|REGULAR
-argument_list|)
-operator|.
-name|query
-argument_list|(
-literal|"select * from (\n"
-operator|+
-literal|"select max(1) over (partition by 2 order by 3) max_id\n"
-operator|+
-literal|"from \"hr\".\"emps\" where 1=2\n"
-operator|+
-literal|") where max_id is null"
-argument_list|)
-operator|.
-name|returnsUnordered
-argument_list|(
-literal|"MAX_ID=null"
-argument_list|)
-expr_stmt|;
-block|}
-comment|/** Same result (and plan) as {@link #testSelectDistinct}. */
-annotation|@
 name|Test
 specifier|public
 name|void
@@ -11206,6 +11162,112 @@ literal|"S=14300.0; FIVE=5; M=7000.0; C=2; C2=3; C11=3; C11DEPT=2; deptno=10; em
 argument_list|)
 expr_stmt|;
 block|}
+comment|/**    * Tests that window aggregates work when computed over non-nullable    * {@link net.hydromatic.optiq.rules.java.JavaRowFormat#SCALAR} inputs.    * Window aggregates use temporary buffers, thus need to check if    * primitives are properly boxed and un-boxed.    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWinAggScalarNonNullPhysType
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select min(\"salary\"+1) over w as m\n"
+operator|+
+literal|"from \"hr\".\"emps\"\n"
+operator|+
+literal|"window w as (order by \"salary\"+1 rows 1 preceding)\n"
+argument_list|)
+operator|.
+name|typeIs
+argument_list|(
+literal|"[M REAL]"
+argument_list|)
+operator|.
+name|planContains
+argument_list|(
+literal|"final float row = net.hydromatic.optiq.runtime.SqlFunctions.toFloat(_rows[i]);"
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"M=7001.0"
+argument_list|,
+literal|"M=8001.0"
+argument_list|,
+literal|"M=10001.0"
+argument_list|,
+literal|"M=11501.0"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Tests that {@link org.eigenbase.rel.CalcRel} is implemented properly    * when input is {@link org.eigenbase.rel.WindowRel} and literal.    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWinAggScalarNonNullPhysTypePlusOne
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select 1+min(\"salary\"+1) over w as m\n"
+operator|+
+literal|"from \"hr\".\"emps\"\n"
+operator|+
+literal|"window w as (order by \"salary\"+1 rows 1 preceding)\n"
+argument_list|)
+operator|.
+name|typeIs
+argument_list|(
+literal|"[M REAL]"
+argument_list|)
+operator|.
+name|planContains
+argument_list|(
+literal|"final float row = net.hydromatic.optiq.runtime.SqlFunctions.toFloat(_rows[i]);"
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"M=7002.0"
+argument_list|,
+literal|"M=8002.0"
+argument_list|,
+literal|"M=10002.0"
+argument_list|,
+literal|"M=11502.0"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Tests for RANK and ORDER BY ... DESCENDING, NULLS FIRST, NULLS LAST. */
 annotation|@
 name|Test
@@ -11261,6 +11323,188 @@ operator|+
 literal|"deptno=10; empid=110; commission=250; RCNF=3; RCNL=2; R=2; RD=2\n"
 operator|+
 literal|"deptno=10; empid=100; commission=1000; RCNF=2; RCNL=1; R=1; RD=3\n"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests UNBOUNDED PRECEDING clause. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testOverUnboundedPreceding
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select \"empid\",\n"
+operator|+
+literal|"  count(\"empid\") over (partition by 42\n"
+operator|+
+literal|"    order by \"commission\" nulls first\n"
+operator|+
+literal|"    rows between UNBOUNDED PRECEDING and current row) as m\n"
+operator|+
+literal|"from \"hr\".\"emps\""
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"empid=100; M=4"
+argument_list|,
+literal|"empid=200; M=3"
+argument_list|,
+literal|"empid=150; M=1"
+argument_list|,
+literal|"empid=110; M=2"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests window aggregate whose argument is a constant. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWinAggConstant
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select max(1) over (partition by \"deptno\"\n"
+operator|+
+literal|"  order by \"empid\") as m\n"
+operator|+
+literal|"from \"hr\".\"emps\""
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"M=1"
+argument_list|,
+literal|"M=1"
+argument_list|,
+literal|"M=1"
+argument_list|,
+literal|"M=1"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests window aggregate PARTITION BY constant. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWinAggPartitionByConstant
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+comment|// *0 is used to make results predictable.
+comment|// If using just max(empid) optiq cannot compute the result
+comment|// properly since it does not support range windows yet :(
+literal|"select max(\"empid\"*0) over (partition by 42\n"
+operator|+
+literal|"  order by \"empid\") as m\n"
+operator|+
+literal|"from \"hr\".\"emps\""
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"M=0"
+argument_list|,
+literal|"M=0"
+argument_list|,
+literal|"M=0"
+argument_list|,
+literal|"M=0"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests window aggregate ORDER BY constant. Unlike in SELECT ... ORDER BY,    * the constant does not mean a column. It means a constant, therefore the    * order of the rows is not changed. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWinAggOrderByConstant
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+comment|// *0 is used to make results predictable.
+comment|// If using just max(empid) optiq cannot compute the result
+comment|// properly since it does not support range windows yet :(
+literal|"select max(\"empid\"*0) over (partition by \"deptno\"\n"
+operator|+
+literal|"  order by 42) as m\n"
+operator|+
+literal|"from \"hr\".\"emps\""
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"M=0"
+argument_list|,
+literal|"M=0"
+argument_list|,
+literal|"M=0"
+argument_list|,
+literal|"M=0"
 argument_list|)
 expr_stmt|;
 block|}

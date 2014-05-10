@@ -1615,13 +1615,22 @@ name|operand
 operator|instanceof
 name|RexLocalRef
 operator|)
+operator|&&
+operator|!
+operator|(
+name|operand
+operator|instanceof
+name|RexLiteral
+operator|)
 condition|)
 block|{
 assert|assert
 operator|!
 name|fail
 operator|:
-literal|"contains non trivial agg"
+literal|"contains non trivial agg: "
+operator|+
+name|operand
 assert|;
 return|return
 literal|true
