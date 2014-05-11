@@ -75,6 +75,20 @@ name|org
 operator|.
 name|eigenbase
 operator|.
+name|sql
+operator|.
+name|advise
+operator|.
+name|SqlAdvisor
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
 name|util
 operator|.
 name|Util
@@ -183,6 +197,16 @@ argument_list|(
 literal|"sparkContext"
 argument_list|,
 name|Object
+operator|.
+name|class
+argument_list|)
+block|,
+comment|/** Sql advisor that suggests completion hints. */
+name|SQL_ADVISOR
+argument_list|(
+literal|"sqlAdvisor"
+argument_list|,
+name|SqlAdvisor
 operator|.
 name|class
 argument_list|)
