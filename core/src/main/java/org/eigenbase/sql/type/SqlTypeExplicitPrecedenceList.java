@@ -510,9 +510,15 @@ name|this
 operator|.
 name|typeNames
 operator|=
-name|ImmutableList
+operator|new
+name|ArrayList
+argument_list|()
+expr_stmt|;
+name|this
 operator|.
-name|copyOf
+name|typeNames
+operator|.
+name|addAll
 argument_list|(
 name|typeNames
 argument_list|)
