@@ -1553,7 +1553,7 @@ argument_list|)
 argument_list|,
 name|equalTo
 argument_list|(
-literal|1970
+literal|1970L
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1571,7 +1571,7 @@ argument_list|)
 argument_list|,
 name|equalTo
 argument_list|(
-literal|1969
+literal|1969L
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1588,7 +1588,7 @@ argument_list|)
 argument_list|,
 name|equalTo
 argument_list|(
-literal|1970
+literal|1970L
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1605,7 +1605,7 @@ argument_list|)
 argument_list|,
 name|equalTo
 argument_list|(
-literal|1971
+literal|1971L
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1622,7 +1622,7 @@ argument_list|)
 argument_list|,
 name|equalTo
 argument_list|(
-literal|1
+literal|1L
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1640,7 +1640,7 @@ argument_list|)
 argument_list|,
 name|equalTo
 argument_list|(
-literal|12
+literal|12L
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1657,7 +1657,7 @@ argument_list|)
 argument_list|,
 name|equalTo
 argument_list|(
-literal|12
+literal|12L
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1674,7 +1674,7 @@ argument_list|)
 argument_list|,
 name|equalTo
 argument_list|(
-literal|1
+literal|1L
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1885,6 +1885,9 @@ argument_list|)
 argument_list|,
 name|equalTo
 argument_list|(
+operator|(
+name|long
+operator|)
 name|year
 argument_list|)
 argument_list|)
@@ -1902,6 +1905,9 @@ argument_list|)
 argument_list|,
 name|equalTo
 argument_list|(
+operator|(
+name|long
+operator|)
 name|month
 argument_list|)
 argument_list|)
@@ -1919,6 +1925,9 @@ argument_list|)
 argument_list|,
 name|equalTo
 argument_list|(
+operator|(
+name|long
+operator|)
 name|day
 argument_list|)
 argument_list|)

@@ -3066,6 +3066,54 @@ argument_list|)
 return|;
 block|}
 comment|// MOD
+comment|/** SQL<code>MOD</code> operator applied to byte values. */
+specifier|public
+specifier|static
+name|byte
+name|mod
+parameter_list|(
+name|byte
+name|b0
+parameter_list|,
+name|byte
+name|b1
+parameter_list|)
+block|{
+return|return
+operator|(
+name|byte
+operator|)
+operator|(
+name|b0
+operator|%
+name|b1
+operator|)
+return|;
+block|}
+comment|/** SQL<code>MOD</code> operator applied to short values. */
+specifier|public
+specifier|static
+name|short
+name|mod
+parameter_list|(
+name|short
+name|b0
+parameter_list|,
+name|short
+name|b1
+parameter_list|)
+block|{
+return|return
+operator|(
+name|short
+operator|)
+operator|(
+name|b0
+operator|%
+name|b1
+operator|)
+return|;
+block|}
 comment|/** SQL<code>MOD</code> operator applied to int values. */
 specifier|public
 specifier|static
@@ -3188,6 +3236,50 @@ index|]
 return|;
 block|}
 comment|// ABS
+comment|/** SQL<code>ABS</code> operator applied to byte values. */
+specifier|public
+specifier|static
+name|byte
+name|abs
+parameter_list|(
+name|byte
+name|b0
+parameter_list|)
+block|{
+return|return
+operator|(
+name|byte
+operator|)
+name|Math
+operator|.
+name|abs
+argument_list|(
+name|b0
+argument_list|)
+return|;
+block|}
+comment|/** SQL<code>ABS</code> operator applied to short values. */
+specifier|public
+specifier|static
+name|short
+name|abs
+parameter_list|(
+name|short
+name|b0
+parameter_list|)
+block|{
+return|return
+operator|(
+name|short
+operator|)
+name|Math
+operator|.
+name|abs
+argument_list|(
+name|b0
+argument_list|)
+return|;
+block|}
 comment|/** SQL<code>ABS</code> operator applied to int values. */
 specifier|public
 specifier|static
@@ -6307,7 +6399,7 @@ expr_stmt|;
 block|}
 specifier|public
 specifier|static
-name|int
+name|long
 name|unixDateExtract
 parameter_list|(
 name|TimeUnitRange

@@ -13764,6 +13764,14 @@ argument_list|,
 literal|"5"
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+operator|!
+name|DECIMAL
+condition|)
+block|{
+return|return;
+block|}
 name|tester
 operator|.
 name|checkScalarExact
@@ -13797,6 +13805,14 @@ argument_list|,
 literal|"-2"
 argument_list|)
 expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testModFuncNull
+parameter_list|()
+block|{
 name|tester
 operator|.
 name|checkNull
@@ -13811,6 +13827,14 @@ argument_list|(
 literal|"mod(4,cast(null as tinyint))"
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+operator|!
+name|DECIMAL
+condition|)
+block|{
+return|return;
+block|}
 name|tester
 operator|.
 name|checkNull
