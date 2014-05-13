@@ -1187,7 +1187,9 @@ argument_list|()
 decl_stmt|;
 name|fail
 argument_list|(
-literal|"Should fail with "
+literal|"Should fail, got "
+operator|+
+name|resultSet
 argument_list|)
 expr_stmt|;
 block|}
@@ -2659,10 +2661,6 @@ argument_list|(
 name|table
 argument_list|)
 operator|.
-operator|<
-name|Object
-index|[]
-operator|>
 name|asQueryable
 argument_list|()
 return|;
@@ -12639,7 +12637,7 @@ literal|"  THEN (Select d.\"name\" from \"hr\".\"depts\" d\n"
 operator|+
 literal|"        where d.\"deptno\" = e.\"deptno\")\n"
 operator|+
-literal|"  ELSE 'DepartmentNotFound'  END ) AS DEPTNAME\n"
+literal|"  ELSE 'DepartmentNotFound'  END) AS DEPTNAME\n"
 operator|+
 literal|"from \"hr\".\"emps\" e"
 argument_list|)
@@ -12689,7 +12687,7 @@ literal|"    where d.\"name\" = 'Sales')\n"
 operator|+
 literal|"  THEN 'Sales'\n"
 operator|+
-literal|"  ELSE 'Not Matched'  END ) AS DEPTNAME\n"
+literal|"  ELSE 'Not Matched'  END) AS DEPTNAME\n"
 operator|+
 literal|"from \"hr\".\"emps\" e"
 argument_list|)

@@ -578,9 +578,6 @@ argument_list|(
 name|res
 argument_list|)
 operator|.
-operator|<
-name|SqlAdvisorHint
-operator|>
 name|asQueryable
 argument_list|()
 return|;
