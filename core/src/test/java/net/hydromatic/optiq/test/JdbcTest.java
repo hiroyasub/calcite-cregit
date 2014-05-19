@@ -11654,6 +11654,64 @@ literal|"empid=110; M=2"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Tests windowed aggregation with no ORDER BY clause.    *    *<p>Test case for    *<a href="https://github.com/julianhyde/optiq/issues/285">issue #285</a>,    * "Window functions throw exception without ORDER BY".    *    *<p>Note:</p>    *    *<ul>    *<li>With no ORDER BY, the window is over all rows in the partition.    *<li>With an ORDER BY, the implicit frame is 'BETWEEN UNBOUNDED PRECEDING    *     AND CURRENT ROW'.    *<li>With no ORDER BY or PARTITION BY, the window contains all rows in the    *     table.    *</ul>    */
+annotation|@
+name|Ignore
+argument_list|(
+literal|"https://github.com/julianhyde/optiq/issues/285"
+argument_list|)
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testOverNoOrder
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select \"empid\",\n"
+operator|+
+literal|"  \"deptno\",\n"
+operator|+
+literal|"  \"salary\",\n"
+operator|+
+literal|"  count(\"empid\") over (partition by \"deptno\") as m,\n"
+operator|+
+literal|"  count(\"empid\") over (partition by \"deptno\"\n"
+operator|+
+literal|"                         order by \"salary\") as m2,\n"
+operator|+
+literal|"  count(\"empid\") over () as m3\n"
+operator|+
+literal|"from \"hr\".\"emps\""
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"empid=100; deptno=10; salary=10000; M=1; M2=3; M3=4"
+argument_list|,
+literal|"empid=110; deptno=10; salary=11500; M=1; M2=2; M3=4"
+argument_list|,
+literal|"empid=150; deptno=10; salary=7000; M=1; M2=1; M3=4"
+argument_list|,
+literal|"empid=200; deptno=20; salary=8000; M=1; M2=1; M3=4"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Tests window aggregate whose argument is a constant. */
 annotation|@
 name|Test
