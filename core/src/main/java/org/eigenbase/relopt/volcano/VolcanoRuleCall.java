@@ -73,6 +73,20 @@ name|*
 import|;
 end_import
 
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|ImmutableList
+import|;
+end_import
+
 begin_comment
 comment|/**  *<code>VolcanoRuleCall</code> implements the {@link RelOptRuleCall} interface  * for VolcanoPlanner.  */
 end_comment
@@ -1142,8 +1156,11 @@ argument_list|(
 name|operandOrdinal
 argument_list|)
 decl_stmt|;
+specifier|final
 name|Collection
 argument_list|<
+name|?
+extends|extends
 name|RelNode
 argument_list|>
 name|successors
@@ -1246,6 +1263,29 @@ operator|.
 name|ordinalInParent
 argument_list|)
 decl_stmt|;
+if|if
+condition|(
+name|operand
+operator|.
+name|getMatchedClass
+argument_list|()
+operator|==
+name|RelSubset
+operator|.
+name|class
+condition|)
+block|{
+name|successors
+operator|=
+name|subset
+operator|.
+name|set
+operator|.
+name|subsets
+expr_stmt|;
+block|}
+else|else
+block|{
 name|successors
 operator|=
 name|subset
@@ -1254,15 +1294,16 @@ name|getRelList
 argument_list|()
 expr_stmt|;
 block|}
+block|}
 else|else
 block|{
 comment|// The operand expects parentRel to have a certain number
 comment|// of inputs and it does not.
 name|successors
 operator|=
-name|Collections
+name|ImmutableList
 operator|.
-name|emptyList
+name|of
 argument_list|()
 expr_stmt|;
 block|}
