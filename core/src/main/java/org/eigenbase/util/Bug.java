@@ -14,7 +14,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * Holder for a list of constants describing which bugs which have not been  * fixed.  *  *<p>You can use these constants to control the flow of your code. For example,  * suppose that bug FNL-123 causes the "INSERT" statement to return an incorrect  * row-count, and you want to disable unit tests. You might use the constant in  * your code as follows:  *  *<blockquote>  *<pre>Statement stmt = connection.createStatement();  * int rowCount = stmt.execute(  *     "INSERT INTO FemaleEmps SELECT * FROM Emps WHERE gender = 'F'");  * if (Bug.Fnl123Fixed) {  *    assertEquals(rowCount, 5);  * }</pre>  *</blockquote>  *  *<p>The usage of the constant is a convenient way to identify the impact of  * the bug. When someone fixes the bug, they will remove the constant and all  * usages of it. Also, the constant helps track the propagation of the fix: as  * the fix is integrated into other branches, the constant will be removed from  * those branches.</p>  */
+comment|/**  * Holder for a list of constants describing which bugs which have not been  * fixed.  *  *<p>You can use these constants to control the flow of your code. For example,  * suppose that bug OPTIQ-123 causes the "INSERT" statement to return an  * incorrect row-count, and you want to disable unit tests. You might use the  * constant in your code as follows:  *  *<blockquote>  *<pre>Statement stmt = connection.createStatement();  * int rowCount = stmt.execute(  *     "INSERT INTO FemaleEmps SELECT * FROM Emps WHERE gender = 'F'");  * if (Bug.OPTIQ123_FIXED) {  *    assertEquals(rowCount, 5);  * }</pre>  *</blockquote>  *  *<p>The usage of the constant is a convenient way to identify the impact of  * the bug. When someone fixes the bug, they will remove the constant and all  * usages of it. Also, the constant helps track the propagation of the fix: as  * the fix is integrated into other branches, the constant will be removed from  * those branches.</p>  *  *<p><b>To do</b></p>  *  *<p>The following is a list of tasks to be completed before committing to  * master branch.</p>  *  *<ul>  *</ul>  */
 end_comment
 
 begin_class
@@ -44,16 +44,6 @@ name|DT785_FIXED
 init|=
 literal|false
 decl_stmt|;
-comment|// angel
-comment|/**    * Whether dtbug1446 "Window Rank Functions not fully implemented" is fixed.    */
-specifier|public
-specifier|static
-specifier|final
-name|boolean
-name|DT1446_FIXED
-init|=
-literal|false
-decl_stmt|;
 comment|// jhyde
 comment|/**    * Whether<a href="http://issues.eigenbase.org/browse/FNL-3">issue    * Fnl-3</a> is fixed.    */
 specifier|public
@@ -61,15 +51,6 @@ specifier|static
 specifier|final
 name|boolean
 name|FNL3_FIXED
-init|=
-literal|false
-decl_stmt|;
-comment|/**    * Whether<a href="http://issues.eigenbase.org/browse/FNL-77">issue FNL-77:    * Fennel calc returns CURRENT_TIMESTAMP in UTC, should be local time</a> is    * fixed.    */
-specifier|public
-specifier|static
-specifier|final
-name|boolean
-name|FNL77_FIXED
 init|=
 literal|false
 decl_stmt|;
@@ -100,15 +81,6 @@ name|DT1684_FIXED
 init|=
 literal|false
 decl_stmt|;
-comment|// kkrueger
-comment|// mberkowitz
-comment|// murali
-comment|// rchen
-comment|// schoi
-comment|// stephan
-comment|// tleung
-comment|// xluo
-comment|// zfong
 comment|/**    * Whether<a href="http://issues.eigenbase.org/browse/FNL-25">issue    * FNL-25</a> is fixed. (also filed as dtbug 153)    */
 specifier|public
 specifier|static
@@ -118,10 +90,6 @@ name|FNL25_FIXED
 init|=
 literal|false
 decl_stmt|;
-comment|// johnk
-comment|// jouellette
-comment|// jpham
-comment|// jvs
 comment|/**    * Whether<a href="http://issues.eigenbase.org/browse/FRG-73">issue FRG-73:    * miscellaneous bugs with nested comments</a> is fixed.    */
 specifier|public
 specifier|static
@@ -167,11 +135,6 @@ name|FRG189_FIXED
 init|=
 literal|false
 decl_stmt|;
-comment|// elin
-comment|// fliang
-comment|// fzhang
-comment|// hersker
-comment|// jack
 comment|/**    * Whether<a href="http://issues.eigenbase.org/browse/FRG-254">issue    * FRG-254: environment-dependent failure for    * SqlOperatorTest.testPrefixPlusOperator</a> is fixed.    */
 specifier|public
 specifier|static
@@ -207,15 +170,6 @@ name|boolean
 name|FRG375_FIXED
 init|=
 literal|false
-decl_stmt|;
-comment|/**    * Whether<a href="http://issues.eigenbase.org/browse/FRG-378">issue    * FRG-378: Regular expressions in SIMILAR TO predicates    * potentially don't match SQL:2008 spec in a few cases.</a> is fixed.    */
-specifier|public
-specifier|static
-specifier|final
-name|boolean
-name|FRG378_FIXED
-init|=
-literal|true
 decl_stmt|;
 comment|/**    * Whether    *<a href="https://github.com/julianhyde/optiq/issues/194">OPTIQ-194</a>,    * "Array items in MongoDB adapter" is fixed.    */
 specifier|public

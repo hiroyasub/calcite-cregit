@@ -344,6 +344,11 @@ argument_list|(
 name|paramTypes
 argument_list|)
 expr_stmt|;
+assert|assert
+name|category
+operator|!=
+literal|null
+assert|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
 specifier|public

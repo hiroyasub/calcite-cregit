@@ -132,6 +132,19 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
+specifier|public
+name|SqlSyntax
+name|getSyntax
+parameter_list|()
+block|{
+return|return
+name|SqlSyntax
+operator|.
+name|FUNCTION_STAR
+return|;
+block|}
 specifier|public
 name|List
 argument_list|<

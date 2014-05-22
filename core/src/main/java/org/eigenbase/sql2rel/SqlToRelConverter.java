@@ -6091,24 +6091,6 @@ literal|"Relation should have sort key for implicit ORDER BY"
 argument_list|)
 throw|;
 block|}
-if|if
-condition|(
-name|orderList
-operator|.
-name|size
-argument_list|()
-operator|<=
-literal|0
-condition|)
-block|{
-throw|throw
-operator|new
-name|AssertionError
-argument_list|(
-literal|"sort key must not be empty"
-argument_list|)
-throw|;
-block|}
 block|}
 specifier|final
 name|ImmutableList

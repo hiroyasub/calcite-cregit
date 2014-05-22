@@ -344,7 +344,9 @@ name|OperandTypes
 operator|.
 name|VARIADIC
 argument_list|,
-literal|null
+name|SqlFunctionCategory
+operator|.
+name|SYSTEM
 argument_list|)
 expr_stmt|;
 name|jdbcName

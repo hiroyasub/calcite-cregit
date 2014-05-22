@@ -15419,12 +15419,45 @@ name|this
 argument_list|)
 expr_stmt|;
 block|}
-comment|// Fill in missing bounds.
+comment|// Fill in missing bounds. Default bounds are "BETWEEN UNBOUNDED PRECEDING
+comment|// AND CURRENT ROW". (That has no effect if there is no ORDER BY clause.)
 if|if
 condition|(
 name|populateBounds
 condition|)
 block|{
+if|if
+condition|(
+name|window
+operator|.
+name|getLowerBound
+argument_list|()
+operator|==
+literal|null
+operator|&&
+name|window
+operator|.
+name|getUpperBound
+argument_list|()
+operator|==
+literal|null
+condition|)
+block|{
+name|window
+operator|.
+name|setLowerBound
+argument_list|(
+name|SqlWindow
+operator|.
+name|createUnboundedPreceding
+argument_list|(
+name|SqlParserPos
+operator|.
+name|ZERO
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
 if|if
 condition|(
 name|window

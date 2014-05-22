@@ -41,18 +41,6 @@ name|org
 operator|.
 name|eigenbase
 operator|.
-name|resource
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
 name|sql
 operator|.
 name|parser
@@ -1415,7 +1403,7 @@ return|return
 name|operandTypeInference
 return|;
 block|}
-comment|/**    * Returns whether this operator is an aggregate function. By default,    * subclass type is used (an instance of SqlAggFunction is assumed to be an    * aggregator; anything else is not).    *    * @return whether this operator is an aggregator    */
+comment|/**    * Returns whether this operator is an aggregate function. By default,    * subclass type is used (an instance of SqlAggFunction is assumed to be an    * aggregator; anything else is not).    *    *<p>Per SQL:2011, there are<dfn>aggregate functions</dfn> and    *<dfn>window functions</dfn>.    * Every aggregate function (e.g. SUM) is also a window function.    * There are window functions that are not aggregate functions, e.g. RANK,    * NTILE, LEAD, FIRST_VALUE.</p>    *    *<p>Collectively, aggregate and window functions are called<dfn>analytic    * functions</dfn>. Despite its name, this method returns true for every    * analytic function.</p>    *    * @see #requiresOrder()    *    * @return whether this operator is an analytic function (aggregate function    * or window function)    */
 specifier|public
 name|boolean
 name|isAggregator
@@ -1423,6 +1411,26 @@ parameter_list|()
 block|{
 return|return
 literal|false
+return|;
+block|}
+comment|/**    * Returns whether this is a window function that requires ordering.    *    *<p>Per SQL:2011, 2, 6.10: "If&lt;ntile function&gt;,&lt;lead or lag    * function&gt, RANK or DENSE_RANK is specified, then the window ordering    * clause shall be present."</p>    *    * @see #isAggregator()    */
+specifier|public
+name|boolean
+name|requiresOrder
+parameter_list|()
+block|{
+return|return
+literal|false
+return|;
+block|}
+comment|/**    * Returns whether this is a window function that allows framing (i.e. a    * ROWS or RANGE clause in the window specification).    */
+specifier|public
+name|boolean
+name|allowsFraming
+parameter_list|()
+block|{
+return|return
+literal|true
 return|;
 block|}
 comment|/**    * Accepts a {@link SqlVisitor}, visiting each operand of a call. Returns    * null.    *    * @param visitor Visitor    * @param call    Call to visit    */

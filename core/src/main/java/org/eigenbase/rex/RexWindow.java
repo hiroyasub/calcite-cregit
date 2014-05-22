@@ -188,23 +188,6 @@ operator|=
 name|computeDigest
 argument_list|()
 expr_stmt|;
-if|if
-condition|(
-operator|!
-name|isRows
-condition|)
-block|{
-assert|assert
-name|orderKeys
-operator|.
-name|size
-argument_list|()
-operator|>
-literal|0
-operator|:
-literal|"logical window requires sort key"
-assert|;
-block|}
 block|}
 comment|//~ Methods ----------------------------------------------------------------
 specifier|public

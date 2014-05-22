@@ -10687,7 +10687,33 @@ name|SqlWindow
 operator|.
 name|OffsetRange
 name|offsetAndRange
-init|=
+decl_stmt|;
+if|if
+condition|(
+name|window
+operator|.
+name|orderKeys
+operator|.
+name|getFieldCollations
+argument_list|()
+operator|.
+name|isEmpty
+argument_list|()
+condition|)
+block|{
+comment|// If there is no ORDER BY, every row is effectively equal to the
+comment|// current row, so we disable range-checking.
+comment|//
+comment|// TODO: extend range to rows "equal to current row" even with ORDER BY
+name|offsetAndRange
+operator|=
+literal|null
+expr_stmt|;
+block|}
+else|else
+block|{
+name|offsetAndRange
+operator|=
 name|SqlWindow
 operator|.
 name|getOffsetAndRange
@@ -10704,7 +10730,8 @@ name|window
 operator|.
 name|isRows
 argument_list|)
-decl_stmt|;
+expr_stmt|;
+block|}
 specifier|final
 name|Expression
 name|start_
@@ -10715,6 +10742,10 @@ name|append
 argument_list|(
 literal|"start"
 argument_list|,
+name|offsetAndRange
+operator|==
+literal|null
+operator|||
 name|offsetAndRange
 operator|.
 name|range
@@ -10761,6 +10792,12 @@ name|append
 argument_list|(
 literal|"end"
 argument_list|,
+name|offsetAndRange
+operator|==
+literal|null
+condition|?
+name|max_
+else|:
 name|optimizeAdd
 argument_list|(
 name|i_

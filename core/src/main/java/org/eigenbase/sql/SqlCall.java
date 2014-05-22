@@ -233,13 +233,6 @@ init|=
 name|getOperator
 argument_list|()
 decl_stmt|;
-specifier|final
-name|SqlLiteral
-name|functionQuantifier
-init|=
-name|getFunctionQuantifier
-argument_list|()
-decl_stmt|;
 if|if
 condition|(
 name|leftPrec
@@ -315,33 +308,6 @@ expr_stmt|;
 block|}
 else|else
 block|{
-if|if
-condition|(
-name|functionQuantifier
-operator|!=
-literal|null
-condition|)
-block|{
-comment|// REVIEW jvs 24-July-2006:  This is currently the only
-comment|// way to get the quantifier through to the unparse
-name|SqlUtil
-operator|.
-name|unparseFunctionSyntax
-argument_list|(
-name|operator
-argument_list|,
-name|writer
-argument_list|,
-name|this
-argument_list|,
-literal|true
-argument_list|,
-name|functionQuantifier
-argument_list|)
-expr_stmt|;
-block|}
-else|else
-block|{
 name|operator
 operator|.
 name|unparse
@@ -355,7 +321,6 @@ argument_list|,
 name|rightPrec
 argument_list|)
 expr_stmt|;
-block|}
 block|}
 block|}
 comment|/**    * Validates this call.    *    *<p>The default implementation delegates the validation to the operator's    * {@link SqlOperator#validateCall}. Derived classes may override (as do,    * for example {@link SqlSelect} and {@link SqlUpdate}).    */

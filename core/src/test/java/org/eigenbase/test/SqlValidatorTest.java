@@ -31,6 +31,26 @@ name|java
 operator|.
 name|util
 operator|.
+name|Arrays
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
 name|Locale
 import|;
 end_import
@@ -9795,21 +9815,45 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
-name|Ignore
-annotation|@
 name|Test
 specifier|public
 name|void
 name|testWindowFunctions2
 parameter_list|()
 block|{
-if|if
-condition|(
-name|Bug
+name|List
+argument_list|<
+name|String
+argument_list|>
+name|defined
+init|=
+name|Arrays
 operator|.
-name|DT1446_FIXED
-condition|)
-block|{
+name|asList
+argument_list|(
+literal|"RANK"
+argument_list|,
+literal|"ROW_NUMBER"
+argument_list|)
+decl_stmt|;
+name|checkWin
+argument_list|(
+literal|"select rank() over w from emp\n"
+operator|+
+literal|"window w as ^(partition by sal)^, w2 as (w order by deptno)"
+argument_list|,
+literal|"RANK or DENSE_RANK functions require ORDER BY clause in window specification"
+argument_list|)
+expr_stmt|;
+name|checkWin
+argument_list|(
+literal|"select rank() over w2 from emp\n"
+operator|+
+literal|"window w as (partition by sal), w2 as (w order by deptno)"
+argument_list|,
+literal|null
+argument_list|)
+expr_stmt|;
 comment|// row_number function
 name|checkWinFuncExpWithWinClause
 argument_list|(
@@ -9819,6 +9863,16 @@ literal|null
 argument_list|)
 expr_stmt|;
 comment|// rank function type
+if|if
+condition|(
+name|defined
+operator|.
+name|contains
+argument_list|(
+literal|"DENSE_RANK"
+argument_list|)
+condition|)
+block|{
 name|checkWinFuncExpWithWinClause
 argument_list|(
 literal|"dense_rank()"
@@ -9826,6 +9880,17 @@ argument_list|,
 literal|null
 argument_list|)
 expr_stmt|;
+block|}
+else|else
+block|{
+name|checkWinFuncExpWithWinClause
+argument_list|(
+literal|"^dense_rank()^"
+argument_list|,
+literal|"Function 'DENSE_RANK\\(\\)' is not defined"
+argument_list|)
+expr_stmt|;
+block|}
 name|checkWinFuncExpWithWinClause
 argument_list|(
 literal|"rank() over (order by empno)"
@@ -9863,11 +9928,20 @@ argument_list|,
 literal|"RANK or DENSE_RANK functions require ORDER BY clause in window specification"
 argument_list|)
 expr_stmt|;
-comment|// The following fail but it is reported as window needing OBC due
-comment|// to
-comment|// test sequence, so
-comment|// not really failing due to 6a.
-comment|/*              checkWin(                 "select rank() over w from emp "                 + "window w as ^(partition by deptno)^",                 "RANK or DENSE_RANK functions require ORDER BY clause in "                 + "window specification");             checkWin(                 "select dense_rank() over w from emp "                 + "window w as ^(partition by deptno)^",                 "RANK or DENSE_RANK functions require ORDER BY clause in "                 + "window specification"); */
+name|checkWin
+argument_list|(
+literal|"select rank() over w from emp window w as ^(partition by deptno)^"
+argument_list|,
+literal|"RANK or DENSE_RANK functions require ORDER BY clause in window specification"
+argument_list|)
+expr_stmt|;
+name|checkWin
+argument_list|(
+literal|"select dense_rank() over w from emp window w as ^(partition by deptno)^"
+argument_list|,
+literal|"RANK or DENSE_RANK functions require ORDER BY clause in window specification"
+argument_list|)
+expr_stmt|;
 comment|// rule 6b
 comment|// Framing not allowed with RANK& DENSE_RANK functions
 comment|// window framing defined in window clause
@@ -9885,6 +9959,16 @@ argument_list|,
 literal|"ROW/RANGE not allowed with RANK or DENSE_RANK functions"
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+name|defined
+operator|.
+name|contains
+argument_list|(
+literal|"PERCENT_RANK"
+argument_list|)
+condition|)
+block|{
 name|checkWin
 argument_list|(
 literal|"select percent_rank() over w from emp window w as (rows 2 preceding )"
@@ -9892,6 +9976,27 @@ argument_list|,
 literal|null
 argument_list|)
 expr_stmt|;
+block|}
+else|else
+block|{
+name|checkWinFuncExpWithWinClause
+argument_list|(
+literal|"^percent_rank()^"
+argument_list|,
+literal|"Function 'PERCENT_RANK\\(\\)' is not defined"
+argument_list|)
+expr_stmt|;
+block|}
+if|if
+condition|(
+name|defined
+operator|.
+name|contains
+argument_list|(
+literal|"CUME_DIST"
+argument_list|)
+condition|)
+block|{
 name|checkWin
 argument_list|(
 literal|"select cume_dist() over w from emp window w as (rows 2 preceding)"
@@ -9899,6 +10004,24 @@ argument_list|,
 literal|null
 argument_list|)
 expr_stmt|;
+name|checkWin
+argument_list|(
+literal|"select cume_dist() over (rows 2 preceding ) from emp "
+argument_list|,
+literal|null
+argument_list|)
+expr_stmt|;
+block|}
+else|else
+block|{
+name|checkWinFuncExpWithWinClause
+argument_list|(
+literal|"^cume_dist()^"
+argument_list|,
+literal|"Function 'CUME_DIST\\(\\)' is not defined"
+argument_list|)
+expr_stmt|;
+block|}
 comment|// window framing defined in in-line window
 name|checkWin
 argument_list|(
@@ -9914,57 +10037,21 @@ argument_list|,
 literal|"ROW/RANGE not allowed with RANK or DENSE_RANK functions"
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+name|defined
+operator|.
+name|contains
+argument_list|(
+literal|"PERCENT_RANK"
+argument_list|)
+condition|)
+block|{
 name|checkWin
 argument_list|(
 literal|"select percent_rank() over (rows 2 preceding ) from emp"
 argument_list|,
 literal|null
-argument_list|)
-expr_stmt|;
-name|checkWin
-argument_list|(
-literal|"select cume_dist() over (rows 2 preceding ) from emp "
-argument_list|,
-literal|null
-argument_list|)
-expr_stmt|;
-block|}
-else|else
-block|{
-comment|// Check for Rank function failure.
-name|checkWinFuncExpWithWinClause
-argument_list|(
-literal|"^dense_rank()^"
-argument_list|,
-literal|"Function 'DENSE_RANK\\(\\)' is not defined"
-argument_list|)
-expr_stmt|;
-name|checkWinFuncExpWithWinClause
-argument_list|(
-literal|"^percent_rank()^"
-argument_list|,
-literal|"Function 'PERCENT_RANK\\(\\)' is not defined"
-argument_list|)
-expr_stmt|;
-name|checkWinFuncExpWithWinClause
-argument_list|(
-literal|"^rank()^"
-argument_list|,
-literal|"Function 'RANK\\(\\)' is not defined"
-argument_list|)
-expr_stmt|;
-name|checkWinFuncExpWithWinClause
-argument_list|(
-literal|"^cume_dist()^"
-argument_list|,
-literal|"Function 'CUME_DIST\\(\\)' is not defined"
-argument_list|)
-expr_stmt|;
-name|checkWinFuncExpWithWinClause
-argument_list|(
-literal|"^row_number()^"
-argument_list|,
-literal|"Function 'ROW_NUMBER\\(\\)' is not defined"
 argument_list|)
 expr_stmt|;
 block|}
@@ -9984,7 +10071,7 @@ argument_list|,
 literal|"No match found for function signature INVALIDFUN\\(<NUMERIC>\\)"
 argument_list|)
 expr_stmt|;
-comment|// 6.10 rule 10. no distinct allowed aggreagate function
+comment|// 6.10 rule 10. no distinct allowed aggregate function
 comment|// Fails in parser.
 comment|// checkWinFuncExpWithWinClause(" sum(distinct sal) over w ", null);
 comment|// 7.11 rule 10c
@@ -10015,6 +10102,49 @@ operator|+
 literal|" from emp window w as (order by empno ^rows^ 2 preceding )"
 argument_list|,
 literal|"Referenced window cannot have framing declarations"
+argument_list|)
+expr_stmt|;
+comment|// Empty window is OK for functions that don't require ordering.
+name|checkWin
+argument_list|(
+literal|"select sum(sal) over () from emp"
+argument_list|,
+literal|null
+argument_list|)
+expr_stmt|;
+name|checkWin
+argument_list|(
+literal|"select sum(sal) over w from emp window w as ()"
+argument_list|,
+literal|null
+argument_list|)
+expr_stmt|;
+name|checkWin
+argument_list|(
+literal|"select count(*) over () from emp"
+argument_list|,
+literal|null
+argument_list|)
+expr_stmt|;
+name|checkWin
+argument_list|(
+literal|"select count(*) over w from emp window w as ()"
+argument_list|,
+literal|null
+argument_list|)
+expr_stmt|;
+name|checkWin
+argument_list|(
+literal|"select rank() over ^()^ from emp"
+argument_list|,
+literal|"RANK or DENSE_RANK functions require ORDER BY clause in window specification"
+argument_list|)
+expr_stmt|;
+name|checkWin
+argument_list|(
+literal|"select rank() over w from emp window w as ^()^"
+argument_list|,
+literal|"RANK or DENSE_RANK functions require ORDER BY clause in window specification"
 argument_list|)
 expr_stmt|;
 block|}
@@ -10393,7 +10523,7 @@ literal|null
 argument_list|)
 expr_stmt|;
 comment|// invalid tests exact numeric for the unsigned value specification The
-comment|// followoing two test fail as they should but in the parser: JR not
+comment|// following two test fail as they should but in the parser: JR not
 comment|// anymore now the validator kicks out
 name|checkWinClauseExp
 argument_list|(
@@ -10429,15 +10559,15 @@ argument_list|,
 literal|"Column 'XYZ' not found in any table"
 argument_list|)
 expr_stmt|;
-comment|// window defintion is empty when applied to unsorted table
+comment|// window definition is empty when applied to unsorted table
 name|checkWinClauseExp
 argument_list|(
 literal|"window w as ^( /* boo! */  )^"
 argument_list|,
-literal|"Window specification must contain an ORDER BY clause"
+literal|null
 argument_list|)
 expr_stmt|;
-comment|// duplidate window name
+comment|// duplicate window name
 name|checkWinClauseExp
 argument_list|(
 literal|"window w as (order by empno), ^w^ as (order by empno)"
@@ -10566,7 +10696,7 @@ name|checkWinClauseExp
 argument_list|(
 literal|"window w as ^(partition by sal)^, w2 as (w order by deptno)"
 argument_list|,
-literal|"Window specification must contain an ORDER BY clause"
+literal|null
 argument_list|)
 expr_stmt|;
 name|checkWinClauseExp

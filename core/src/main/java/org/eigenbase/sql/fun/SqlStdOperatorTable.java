@@ -3305,10 +3305,6 @@ argument_list|,
 name|writer
 argument_list|,
 name|call
-argument_list|,
-literal|true
-argument_list|,
-literal|null
 argument_list|)
 expr_stmt|;
 block|}
@@ -3658,7 +3654,7 @@ literal|null
 condition|)
 block|{
 comment|// Creates and initializes the standard operator table.
-comment|// Uses two-phase construction, because we can't intialize the
+comment|// Uses two-phase construction, because we can't initialize the
 comment|// table until the constructor of the sub-class has completed.
 name|instance
 operator|=

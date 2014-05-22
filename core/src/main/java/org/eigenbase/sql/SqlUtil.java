@@ -737,7 +737,7 @@ literal|false
 return|;
 block|}
 block|}
-comment|/**    * Unparses a call to an operator which has function syntax.    *    * @param operator    The operator    * @param writer      Writer    * @param call    List of 0 or more operands    * @param emptyParens Whether to print parentheses if there are 0 operands    * @param quantifier  Quantifier    */
+comment|/**    * Unparses a call to an operator which has function syntax.    *    * @param operator    The operator    * @param writer      Writer    * @param call    List of 0 or more operands    */
 specifier|public
 specifier|static
 name|void
@@ -751,12 +751,6 @@ name|writer
 parameter_list|,
 name|SqlCall
 name|call
-parameter_list|,
-name|boolean
-name|emptyParens
-parameter_list|,
-name|SqlLiteral
-name|quantifier
 parameter_list|)
 block|{
 if|if
@@ -774,18 +768,17 @@ name|SqlFunction
 operator|)
 name|operator
 decl_stmt|;
-if|if
+switch|switch
 condition|(
 name|function
 operator|.
 name|getFunctionType
 argument_list|()
-operator|==
-name|SqlFunctionCategory
-operator|.
-name|USER_DEFINED_SPECIFIC_FUNCTION
 condition|)
 block|{
+case|case
+name|USER_DEFINED_SPECIFIC_FUNCTION
+case|:
 name|writer
 operator|.
 name|keyword
@@ -856,14 +849,35 @@ name|operandCount
 argument_list|()
 operator|==
 literal|0
-operator|&&
-operator|!
-name|emptyParens
 condition|)
 block|{
+switch|switch
+condition|(
+name|call
+operator|.
+name|getOperator
+argument_list|()
+operator|.
+name|getSyntax
+argument_list|()
+condition|)
+block|{
+case|case
+name|FUNCTION_ID
+case|:
 comment|// For example, the "LOCALTIME" function appears as "LOCALTIME"
 comment|// when it has 0 args, not "LOCALTIME()".
 return|return;
+case|case
+name|FUNCTION_STAR
+case|:
+comment|// E.g. "COUNT(*)"
+case|case
+name|FUNCTION
+case|:
+comment|// E.g. "RANK()"
+comment|// fall through - dealt with below
+block|}
 block|}
 specifier|final
 name|SqlWriter
@@ -886,11 +900,20 @@ argument_list|,
 literal|")"
 argument_list|)
 decl_stmt|;
+specifier|final
+name|SqlLiteral
+name|quantifier
+init|=
+name|call
+operator|.
+name|getFunctionQuantifier
+argument_list|()
+decl_stmt|;
 if|if
 condition|(
-literal|null
-operator|!=
 name|quantifier
+operator|!=
+literal|null
 condition|)
 block|{
 name|quantifier
@@ -913,12 +936,22 @@ name|operandCount
 argument_list|()
 operator|==
 literal|0
-operator|&&
-name|operator
-operator|instanceof
-name|SqlAggFunction
 condition|)
 block|{
+switch|switch
+condition|(
+name|call
+operator|.
+name|getOperator
+argument_list|()
+operator|.
+name|getSyntax
+argument_list|()
+condition|)
+block|{
+case|case
+name|FUNCTION_STAR
+case|:
 name|writer
 operator|.
 name|sep
@@ -926,6 +959,7 @@ argument_list|(
 literal|"*"
 argument_list|)
 expr_stmt|;
+block|}
 block|}
 for|for
 control|(
