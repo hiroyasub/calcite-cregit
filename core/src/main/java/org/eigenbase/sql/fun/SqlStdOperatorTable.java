@@ -1107,7 +1107,7 @@ literal|"IS NOT NULL"
 argument_list|,
 name|SqlKind
 operator|.
-name|OTHER
+name|IS_NOT_NULL
 argument_list|,
 literal|30
 argument_list|,

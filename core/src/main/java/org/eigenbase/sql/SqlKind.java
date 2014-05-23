@@ -239,6 +239,9 @@ block|,
 comment|/**    * The "IS NULL" operator.    */
 name|IS_NULL
 block|,
+comment|/**    * The "IS NOT NULL" operator.    */
+name|IS_NOT_NULL
+block|,
 comment|/**    * The "PRECEDING" qualifier of an interval end-point in a window    * specification.    */
 name|PRECEDING
 block|,
