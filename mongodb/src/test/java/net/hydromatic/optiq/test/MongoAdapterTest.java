@@ -2211,6 +2211,84 @@ expr_stmt|;
 block|}
 block|}
 block|}
+comment|/** Test case for<a href="https://github.com/julianhyde/optiq/issues/286">    * optiq-286, "Error casting MongoDB date"</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDate
+parameter_list|()
+block|{
+comment|// Assumes that you have created the following collection before running
+comment|// this test:
+comment|//
+comment|// $ mongo
+comment|//> use test
+comment|// switched to db test
+comment|//> db.createCollection("datatypes")
+comment|// { "ok" : 1 }
+comment|//> db.datatypes.insert( {
+comment|//     "_id" : ObjectId("53655599e4b0c980df0a8c27"),
+comment|//     "_class" : "com.ericblue.Test",
+comment|//     "date" : ISODate("2012-09-05T07:00:00Z"),
+comment|//     "value" : 1231,
+comment|//     "ownerId" : "531e7789e4b0853ddb861313"
+comment|//   } )
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|enable
+argument_list|(
+name|enabled
+argument_list|()
+argument_list|)
+operator|.
+name|withModel
+argument_list|(
+literal|"{\n"
+operator|+
+literal|"  version: '1.0',\n"
+operator|+
+literal|"  defaultSchema: 'test',\n"
+operator|+
+literal|"   schemas: [\n"
+operator|+
+literal|"     {\n"
+operator|+
+literal|"       type: 'custom',\n"
+operator|+
+literal|"       name: 'test',\n"
+operator|+
+literal|"       factory: 'net.hydromatic.optiq.impl.mongodb.MongoSchemaFactory',\n"
+operator|+
+literal|"       operand: {\n"
+operator|+
+literal|"         host: 'localhost',\n"
+operator|+
+literal|"         database: 'test'\n"
+operator|+
+literal|"       }\n"
+operator|+
+literal|"     }\n"
+operator|+
+literal|"   ]\n"
+operator|+
+literal|"}"
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select cast(_MAP['date'] as DATE) from \"datatypes\""
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"EXPR$0=2012-09-05"
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 end_class
 
