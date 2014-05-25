@@ -51,6 +51,34 @@ name|optiq
 operator|.
 name|impl
 operator|.
+name|AbstractSchema
+import|;
+end_import
+
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|optiq
+operator|.
+name|impl
+operator|.
+name|ViewTable
+import|;
+end_import
+
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|optiq
+operator|.
+name|impl
+operator|.
 name|clone
 operator|.
 name|CloneSchema
@@ -140,6 +168,20 @@ operator|.
 name|util
 operator|.
 name|*
+import|;
+end_import
+
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|ImmutableList
 import|;
 end_import
 
@@ -2419,6 +2461,104 @@ name|schemaList
 operator|.
 name|contains
 argument_list|(
+literal|"post"
+argument_list|)
+condition|)
+block|{
+specifier|final
+name|SchemaPlus
+name|post
+init|=
+name|rootSchema
+operator|.
+name|add
+argument_list|(
+literal|"POST"
+argument_list|,
+operator|new
+name|AbstractSchema
+argument_list|()
+argument_list|)
+decl_stmt|;
+name|post
+operator|.
+name|add
+argument_list|(
+literal|"EMP"
+argument_list|,
+name|ViewTable
+operator|.
+name|viewMacro
+argument_list|(
+name|post
+argument_list|,
+literal|"select * from (values\n"
+operator|+
+literal|"    ('Jane', 10, 'F'),\n"
+operator|+
+literal|"    ('Bob', 10, 'M'),\n"
+operator|+
+literal|"    ('Eric', 20, 'M'),\n"
+operator|+
+literal|"    ('Susan', 30, 'F'),\n"
+operator|+
+literal|"    ('Alice', 30, 'F'),\n"
+operator|+
+literal|"    ('Adam', 50, 'M'),\n"
+operator|+
+literal|"    ('Eve', 50, 'F'),\n"
+operator|+
+literal|"    ('Grace', 60, 'F')) as t(ename, deptno, gender)"
+argument_list|,
+name|ImmutableList
+operator|.
+expr|<
+name|String
+operator|>
+name|of
+argument_list|()
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|post
+operator|.
+name|add
+argument_list|(
+literal|"DEPT"
+argument_list|,
+name|ViewTable
+operator|.
+name|viewMacro
+argument_list|(
+name|post
+argument_list|,
+literal|"select * from (values\n"
+operator|+
+literal|"    (10, 'Sales'),\n"
+operator|+
+literal|"    (20, 'Marketing'),\n"
+operator|+
+literal|"    (30, 'Engineering'),\n"
+operator|+
+literal|"    (40, 'Empty')) as t(deptno, dname)"
+argument_list|,
+name|ImmutableList
+operator|.
+expr|<
+name|String
+operator|>
+name|of
+argument_list|()
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+if|if
+condition|(
+name|schemaList
+operator|.
+name|contains
+argument_list|(
 literal|"metadata"
 argument_list|)
 condition|)
@@ -3392,6 +3532,21 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+comment|/** Use sparingly. Does not close the connection. */
+specifier|public
+name|Connection
+name|connect
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+return|return
+name|connectionFactory
+operator|.
+name|createConnection
+argument_list|()
+return|;
+block|}
 specifier|public
 name|AssertThat
 name|enable
@@ -3467,6 +3622,8 @@ argument_list|(
 literal|"hr"
 argument_list|,
 literal|"foodmart"
+argument_list|,
+literal|"post"
 argument_list|)
 return|;
 case|case
