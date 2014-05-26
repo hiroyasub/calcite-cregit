@@ -1167,7 +1167,7 @@ literal|"IS NOT TRUE"
 argument_list|,
 name|SqlKind
 operator|.
-name|OTHER
+name|IS_NOT_TRUE
 argument_list|,
 literal|30
 argument_list|,
@@ -1227,7 +1227,7 @@ literal|"IS NOT FALSE"
 argument_list|,
 name|SqlKind
 operator|.
-name|OTHER
+name|IS_NOT_FALSE
 argument_list|,
 literal|30
 argument_list|,
@@ -1287,7 +1287,7 @@ literal|"IS NOT UNKNOWN"
 argument_list|,
 name|SqlKind
 operator|.
-name|OTHER
+name|IS_NOT_NULL
 argument_list|,
 literal|30
 argument_list|,

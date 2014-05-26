@@ -233,6 +233,12 @@ block|,
 comment|/**    * The "IS FALSE" operator.    */
 name|IS_FALSE
 block|,
+comment|/**    * The "IS NOT TRUE" operator.    */
+name|IS_NOT_TRUE
+block|,
+comment|/**    * The "IS NOT FALSE" operator.    */
+name|IS_NOT_FALSE
+block|,
 comment|/**    * The "IS UNKNOWN" operator.    */
 name|IS_UNKNOWN
 block|,
