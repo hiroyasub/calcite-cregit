@@ -646,7 +646,9 @@ name|Expressions
 operator|.
 name|declare
 argument_list|(
-literal|0
+name|Modifier
+operator|.
+name|FINAL
 argument_list|,
 name|value_
 argument_list|,

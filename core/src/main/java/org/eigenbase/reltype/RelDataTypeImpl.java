@@ -795,7 +795,7 @@ block|}
 block|}
 return|;
 block|}
-comment|/** Returns a {@link org.eigenbase.reltype.RelProtoDataType} that will create    * a type {@code typeName}. For example,    * {@code proto(SqlTypeName.DATE)} will create {@code DATE}.    *    * @param typeName Type name    * @return Proto data type    */
+comment|/** Returns a {@link org.eigenbase.reltype.RelProtoDataType} that will create    * a type {@code typeName}.    *    *<p>For example, {@code proto(SqlTypeName.DATE), false}    * will create {@code DATE NOT NULL}.</p>    *    * @param typeName Type name    * @param nullable Whether nullable    * @return Proto data type    */
 specifier|public
 specifier|static
 name|RelProtoDataType
@@ -804,6 +804,10 @@ parameter_list|(
 specifier|final
 name|SqlTypeName
 name|typeName
+parameter_list|,
+specifier|final
+name|boolean
+name|nullable
 parameter_list|)
 block|{
 assert|assert
@@ -824,19 +828,32 @@ name|RelDataTypeFactory
 name|typeFactory
 parameter_list|)
 block|{
-return|return
+specifier|final
+name|RelDataType
+name|type
+init|=
 name|typeFactory
 operator|.
 name|createSqlType
 argument_list|(
 name|typeName
 argument_list|)
+decl_stmt|;
+return|return
+name|typeFactory
+operator|.
+name|createTypeWithNullability
+argument_list|(
+name|type
+argument_list|,
+name|nullable
+argument_list|)
 return|;
 block|}
 block|}
 return|;
 block|}
-comment|/** Returns a {@link org.eigenbase.reltype.RelProtoDataType} that will create    * a type {@code typeName(precision)}. For example,    * {@code proto(SqlTypeName.VARCHAR, 100)} will create {@code VARCHAR(100)}.    *    * @param typeName Type name    * @param precision Precision    * @return Proto data type    */
+comment|/** Returns a {@link org.eigenbase.reltype.RelProtoDataType} that will create    * a type {@code typeName(precision)}.    *    *<p>For example, {@code proto(SqlTypeName.VARCHAR, 100, false)}    * will create {@code VARCHAR(100) NOT NULL}.</p>    *    * @param typeName Type name    * @param precision Precision    * @param nullable Whether nullable    * @return Proto data type    */
 specifier|public
 specifier|static
 name|RelProtoDataType
@@ -849,6 +866,10 @@ parameter_list|,
 specifier|final
 name|int
 name|precision
+parameter_list|,
+specifier|final
+name|boolean
+name|nullable
 parameter_list|)
 block|{
 assert|assert
@@ -869,7 +890,10 @@ name|RelDataTypeFactory
 name|typeFactory
 parameter_list|)
 block|{
-return|return
+specifier|final
+name|RelDataType
+name|type
+init|=
 name|typeFactory
 operator|.
 name|createSqlType
@@ -878,12 +902,22 @@ name|typeName
 argument_list|,
 name|precision
 argument_list|)
+decl_stmt|;
+return|return
+name|typeFactory
+operator|.
+name|createTypeWithNullability
+argument_list|(
+name|type
+argument_list|,
+name|nullable
+argument_list|)
 return|;
 block|}
 block|}
 return|;
 block|}
-comment|/** Returns a {@link org.eigenbase.reltype.RelProtoDataType} that will create    * a type {@code typeName(precision, scale)}. For example,    * {@code proto(SqlTypeName.DECIMAL, 7, 2)} will create {@code DECIMAL(7, 2)}.    *    * @param typeName Type name    * @param precision Precision    * @param scale Scale    * @return Proto data type    */
+comment|/** Returns a {@link org.eigenbase.reltype.RelProtoDataType} that will create    * a type {@code typeName(precision, scale)}.    *    *<p>For example, {@code proto(SqlTypeName.DECIMAL, 7, 2, false)}    * will create {@code DECIMAL(7, 2) NOT NULL}.</p>    *    * @param typeName Type name    * @param precision Precision    * @param scale Scale    * @param nullable Whether nullable    * @return Proto data type    */
 specifier|public
 specifier|static
 name|RelProtoDataType
@@ -900,6 +934,10 @@ parameter_list|,
 specifier|final
 name|int
 name|scale
+parameter_list|,
+specifier|final
+name|boolean
+name|nullable
 parameter_list|)
 block|{
 return|return
@@ -915,7 +953,10 @@ name|RelDataTypeFactory
 name|typeFactory
 parameter_list|)
 block|{
-return|return
+specifier|final
+name|RelDataType
+name|type
+init|=
 name|typeFactory
 operator|.
 name|createSqlType
@@ -925,6 +966,16 @@ argument_list|,
 name|precision
 argument_list|,
 name|scale
+argument_list|)
+decl_stmt|;
+return|return
+name|typeFactory
+operator|.
+name|createTypeWithNullability
+argument_list|(
+name|type
+argument_list|,
+name|nullable
 argument_list|)
 return|;
 block|}

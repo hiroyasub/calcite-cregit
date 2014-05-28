@@ -165,19 +165,7 @@ name|lang
 operator|.
 name|reflect
 operator|.
-name|Method
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|lang
-operator|.
-name|reflect
-operator|.
-name|Type
+name|*
 import|;
 end_import
 
@@ -1622,7 +1610,9 @@ name|Expressions
 operator|.
 name|declare
 argument_list|(
-literal|0
+name|Modifier
+operator|.
+name|FINAL
 argument_list|,
 name|unboxed
 argument_list|,

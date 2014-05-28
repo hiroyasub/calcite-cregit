@@ -1189,7 +1189,7 @@ literal|false
 return|;
 block|}
 comment|/**    * Returns a string containing the difference between the contents of two    * files. The string has a similar format to the UNIX 'diff' utility.    */
-specifier|private
+specifier|public
 specifier|static
 name|String
 name|diff

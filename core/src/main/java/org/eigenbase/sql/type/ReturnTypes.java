@@ -199,6 +199,8 @@ operator|.
 name|proto
 argument_list|(
 name|typeName
+argument_list|,
+literal|false
 argument_list|)
 argument_list|)
 return|;
@@ -226,6 +228,8 @@ argument_list|(
 name|typeName
 argument_list|,
 name|precision
+argument_list|,
+literal|false
 argument_list|)
 argument_list|)
 return|;

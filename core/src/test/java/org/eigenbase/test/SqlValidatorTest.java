@@ -9836,6 +9836,21 @@ argument_list|,
 literal|"ROW_NUMBER"
 argument_list|)
 decl_stmt|;
+if|if
+condition|(
+name|Bug
+operator|.
+name|TODO_FIXED
+condition|)
+block|{
+name|checkColumnType
+argument_list|(
+literal|"select rank() over (order by deptno) from emp"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+block|}
 name|checkWin
 argument_list|(
 literal|"select rank() over w from emp\n"
