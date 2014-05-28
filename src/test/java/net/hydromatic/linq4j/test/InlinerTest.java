@@ -33,6 +33,16 @@ begin_import
 import|import
 name|org
 operator|.
+name|hamcrest
+operator|.
+name|CoreMatchers
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
 name|junit
 operator|.
 name|Before
@@ -46,6 +56,18 @@ operator|.
 name|junit
 operator|.
 name|Test
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|lang
+operator|.
+name|reflect
+operator|.
+name|Modifier
 import|;
 end_import
 
@@ -74,6 +96,18 @@ operator|.
 name|Assert
 operator|.
 name|assertEquals
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|assertThat
 import|;
 end_import
 
@@ -585,6 +619,51 @@ name|void
 name|testAssignInConditionOptimizedOut
 parameter_list|()
 block|{
+name|checkAssignInConditionOptimizedOut
+argument_list|(
+name|Modifier
+operator|.
+name|FINAL
+argument_list|,
+literal|"{\n"
+operator|+
+literal|"  return 1 != a ? b : c;\n"
+operator|+
+literal|"}\n"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAssignInConditionNotOptimizedWithoutFinal
+parameter_list|()
+block|{
+name|checkAssignInConditionOptimizedOut
+argument_list|(
+literal|0
+argument_list|,
+literal|"{\n"
+operator|+
+literal|"  int t;\n"
+operator|+
+literal|"  return (t = 1) != a ? b : c;\n"
+operator|+
+literal|"}\n"
+argument_list|)
+expr_stmt|;
+block|}
+name|void
+name|checkAssignInConditionOptimizedOut
+parameter_list|(
+name|int
+name|modifiers
+parameter_list|,
+name|String
+name|s
+parameter_list|)
+block|{
 comment|// int t;
 comment|// return (t = 1) != a ? b : c
 specifier|final
@@ -620,7 +699,7 @@ name|Expressions
 operator|.
 name|declare
 argument_list|(
-literal|0
+name|modifiers
 argument_list|,
 name|t
 argument_list|,
@@ -717,14 +796,8 @@ name|v
 argument_list|)
 argument_list|)
 expr_stmt|;
-name|assertEquals
+name|assertThat
 argument_list|(
-literal|"{\n"
-operator|+
-literal|"  return 1 != a ? b : c;\n"
-operator|+
-literal|"}\n"
-argument_list|,
 name|Expressions
 operator|.
 name|toString
@@ -733,6 +806,13 @@ name|builder
 operator|.
 name|toBlock
 argument_list|()
+argument_list|)
+argument_list|,
+name|CoreMatchers
+operator|.
+name|equalTo
+argument_list|(
+name|s
 argument_list|)
 argument_list|)
 expr_stmt|;

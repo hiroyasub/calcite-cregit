@@ -922,17 +922,11 @@ name|FINAL
 operator|)
 operator|!=
 literal|0
-operator|&&
-name|decl
-operator|.
-name|initializer
-operator|!=
-literal|null
 return|;
 block|}
 specifier|protected
 name|void
-name|addExpresisonForReuse
+name|addExpressionForReuse
 parameter_list|(
 name|DeclarationStatement
 name|decl
@@ -1147,7 +1141,7 @@ name|name
 argument_list|)
 throw|;
 block|}
-name|addExpresisonForReuse
+name|addExpressionForReuse
 argument_list|(
 name|decl
 argument_list|)
@@ -1443,11 +1437,6 @@ name|count
 operator|>
 literal|1
 operator|&&
-name|isSafeForReuse
-argument_list|(
-name|statement
-argument_list|)
-operator|&&
 name|isSimpleExpression
 argument_list|(
 name|statement
@@ -1460,6 +1449,22 @@ comment|// Inline simple final constants
 name|count
 operator|=
 literal|1
+expr_stmt|;
+block|}
+if|if
+condition|(
+operator|!
+name|isSafeForReuse
+argument_list|(
+name|statement
+argument_list|)
+condition|)
+block|{
+comment|// Don't inline variables that are not final. They might be assigned
+comment|// more than once.
+name|count
+operator|=
+literal|100
 expr_stmt|;
 block|}
 if|if
@@ -1687,7 +1692,7 @@ operator|instanceof
 name|DeclarationStatement
 condition|)
 block|{
-name|addExpresisonForReuse
+name|addExpressionForReuse
 argument_list|(
 operator|(
 name|DeclarationStatement

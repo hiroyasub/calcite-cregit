@@ -105,7 +105,7 @@ argument_list|,
 literal|"close"
 argument_list|)
 decl_stmt|;
-specifier|private
+specifier|public
 specifier|static
 name|Method
 name|getMethod
