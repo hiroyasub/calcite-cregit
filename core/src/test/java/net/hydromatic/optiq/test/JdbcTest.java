@@ -11717,21 +11717,23 @@ literal|" count(*) over () as m3\n"
 operator|+
 literal|"from emp"
 argument_list|,
-literal|"ENAME=Adam ; DEPTNO=50; GENDER=M; M1=2; M2=1; M3=8"
+literal|"ENAME=Adam ; DEPTNO=50; GENDER=M; M1=2; M2=1; M3=9"
 argument_list|,
-literal|"ENAME=Alice; DEPTNO=30; GENDER=F; M1=2; M2=1; M3=8"
+literal|"ENAME=Alice; DEPTNO=30; GENDER=F; M1=2; M2=1; M3=9"
 argument_list|,
-literal|"ENAME=Bob  ; DEPTNO=10; GENDER=M; M1=2; M2=1; M3=8"
+literal|"ENAME=Bob  ; DEPTNO=10; GENDER=M; M1=2; M2=1; M3=9"
 argument_list|,
-literal|"ENAME=Eric ; DEPTNO=20; GENDER=M; M1=1; M2=1; M3=8"
+literal|"ENAME=Eric ; DEPTNO=20; GENDER=M; M1=1; M2=1; M3=9"
 argument_list|,
-literal|"ENAME=Eve  ; DEPTNO=50; GENDER=F; M1=2; M2=2; M3=8"
+literal|"ENAME=Eve  ; DEPTNO=50; GENDER=F; M1=2; M2=2; M3=9"
 argument_list|,
-literal|"ENAME=Grace; DEPTNO=60; GENDER=F; M1=1; M2=1; M3=8"
+literal|"ENAME=Grace; DEPTNO=60; GENDER=F; M1=1; M2=1; M3=9"
 argument_list|,
-literal|"ENAME=Jane ; DEPTNO=10; GENDER=F; M1=2; M2=2; M3=8"
+literal|"ENAME=Jane ; DEPTNO=10; GENDER=F; M1=2; M2=2; M3=9"
 argument_list|,
-literal|"ENAME=Susan; DEPTNO=30; GENDER=F; M1=2; M2=2; M3=8"
+literal|"ENAME=Susan; DEPTNO=30; GENDER=F; M1=2; M2=2; M3=9"
+argument_list|,
+literal|"ENAME=Wilma; DEPTNO=null; GENDER=F; M1=1; M2=1; M3=9"
 argument_list|)
 expr_stmt|;
 block|}
@@ -12116,6 +12118,76 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testNotInEmptyQuery
+parameter_list|()
+block|{
+comment|// RHS is empty, therefore returns all rows from emp
+name|checkOuter
+argument_list|(
+literal|"select deptno from emp where deptno not in (\n"
+operator|+
+literal|"select deptno from dept where deptno = -1)"
+argument_list|,
+literal|"DEPTNO=10"
+argument_list|,
+literal|"DEPTNO=10"
+argument_list|,
+literal|"DEPTNO=20"
+argument_list|,
+literal|"DEPTNO=30"
+argument_list|,
+literal|"DEPTNO=30"
+argument_list|,
+literal|"DEPTNO=50"
+argument_list|,
+literal|"DEPTNO=50"
+argument_list|,
+literal|"DEPTNO=60"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testNotInQuery
+parameter_list|()
+block|{
+name|checkOuter
+argument_list|(
+literal|"select deptno from emp where deptno not in (\n"
+operator|+
+literal|"select deptno from dept)"
+argument_list|,
+literal|"DEPTNO=50"
+argument_list|,
+literal|"DEPTNO=50"
+argument_list|,
+literal|"DEPTNO=60"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testNotInQueryWithNull
+parameter_list|()
+block|{
+comment|// There is a NULL on the RHS, and '10 not in (20, null)' yields null,
+comment|// so no rows are returned.
+name|checkOuter
+argument_list|(
+literal|"select deptno from emp where deptno not in (\n"
+operator|+
+literal|"select deptno from emp)"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testTrim
 parameter_list|()
 block|{
@@ -12468,6 +12540,7 @@ comment|// insert into emp values ('Alice', 30, 'F');
 comment|// insert into emp values ('Adam', 50, 'M');
 comment|// insert into emp values ('Eve', 50, 'F');
 comment|// insert into emp values ('Grace', 60, 'F');
+comment|// insert into emp values ('Wilma', null, 'F');
 comment|// create table dept (deptno int, dname varchar(12));
 comment|// insert into dept values (10, 'Sales');
 comment|// insert into dept values (20, 'Marketing');
@@ -12507,7 +12580,9 @@ literal|"    ('Adam', 50, 'M'),\n"
 operator|+
 literal|"    ('Eve', 50, 'F'),\n"
 operator|+
-literal|"    ('Grace', 60, 'F')),\n"
+literal|"    ('Grace', 60, 'F'),\n"
+operator|+
+literal|"    ('Wilma', cast(null as integer), 'F')),\n"
 operator|+
 literal|"  dept(deptno, dname) as (values\n"
 operator|+

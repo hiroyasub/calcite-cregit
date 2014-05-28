@@ -2508,7 +2508,11 @@ literal|"    ('Adam', 50, 'M'),\n"
 operator|+
 literal|"    ('Eve', 50, 'F'),\n"
 operator|+
-literal|"    ('Grace', 60, 'F')) as t(ename, deptno, gender)"
+literal|"    ('Grace', 60, 'F'),\n"
+operator|+
+literal|"    ('Wilma', cast(null as integer), 'F'))\n"
+operator|+
+literal|"  as t(ename, deptno, gender)"
 argument_list|,
 name|ImmutableList
 operator|.
