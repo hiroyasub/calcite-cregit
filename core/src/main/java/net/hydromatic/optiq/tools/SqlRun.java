@@ -149,6 +149,12 @@ name|execute
 init|=
 literal|true
 decl_stmt|;
+specifier|private
+name|boolean
+name|skip
+init|=
+literal|false
+decl_stmt|;
 specifier|public
 name|SqlRun
 parameter_list|(
@@ -918,6 +924,24 @@ block|{
 return|return
 operator|new
 name|CheckResultCommand
+argument_list|(
+name|lines
+argument_list|)
+return|;
+block|}
+if|if
+condition|(
+name|line
+operator|.
+name|startsWith
+argument_list|(
+literal|"skip"
+argument_list|)
+condition|)
+block|{
+return|return
+operator|new
+name|SkipCommand
 argument_list|(
 name|lines
 argument_list|)
@@ -2735,7 +2759,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/** Command that executes a comment. (Does nothing.) */
+comment|/** Command that disables execution of a block. */
 class|class
 name|IfCommand
 extends|extends
@@ -2822,16 +2846,24 @@ argument_list|(
 name|ifLines
 argument_list|)
 expr_stmt|;
-comment|// switch to a mode where we don't execute, just echo
+comment|// Switch to a mode where we don't execute, just echo.
 name|boolean
 name|oldExecute
 init|=
 name|execute
 decl_stmt|;
+if|if
+condition|(
+operator|!
+name|skip
+condition|)
+block|{
+comment|// If "skip" is set, stay in the current mode.
 name|execute
 operator|=
 literal|false
 expr_stmt|;
+block|}
 name|command
 operator|.
 name|execute
@@ -2845,6 +2877,52 @@ name|echo
 argument_list|(
 name|endLines
 argument_list|)
+expr_stmt|;
+block|}
+block|}
+comment|/** Command that switches to a mode where we skip executing the rest of the    * input. The input is still printed. */
+class|class
+name|SkipCommand
+extends|extends
+name|SimpleCommand
+block|{
+specifier|public
+name|SkipCommand
+parameter_list|(
+name|List
+argument_list|<
+name|String
+argument_list|>
+name|lines
+parameter_list|)
+block|{
+name|super
+argument_list|(
+name|lines
+argument_list|)
+expr_stmt|;
+block|}
+specifier|public
+name|void
+name|execute
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+name|echo
+argument_list|(
+name|lines
+argument_list|)
+expr_stmt|;
+comment|// Switch to a mode where we don't execute, just echo.
+comment|// Set "skip" so we don't leave that mode.
+name|skip
+operator|=
+literal|true
+expr_stmt|;
+name|execute
+operator|=
+literal|false
 expr_stmt|;
 block|}
 block|}
