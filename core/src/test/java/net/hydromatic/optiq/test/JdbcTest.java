@@ -14727,6 +14727,57 @@ argument_list|()
 operator|+
 literal|"'\n"
 operator|+
+literal|"         },\n"
+operator|+
+literal|"         {\n"
+operator|+
+literal|"           name: 'COUNT_ARGS',\n"
+operator|+
+literal|"           className: '"
+operator|+
+name|CountArgs0Function
+operator|.
+name|class
+operator|.
+name|getName
+argument_list|()
+operator|+
+literal|"'\n"
+operator|+
+literal|"         },\n"
+operator|+
+literal|"         {\n"
+operator|+
+literal|"           name: 'COUNT_ARGS',\n"
+operator|+
+literal|"           className: '"
+operator|+
+name|CountArgs1Function
+operator|.
+name|class
+operator|.
+name|getName
+argument_list|()
+operator|+
+literal|"'\n"
+operator|+
+literal|"         },\n"
+operator|+
+literal|"         {\n"
+operator|+
+literal|"           name: 'COUNT_ARGS',\n"
+operator|+
+literal|"           className: '"
+operator|+
+name|CountArgs2Function
+operator|.
+name|class
+operator|.
+name|getName
+argument_list|()
+operator|+
+literal|"'\n"
+operator|+
 literal|"         }\n"
 operator|+
 literal|"       ]\n"
@@ -14962,6 +15013,58 @@ operator|.
 name|returns
 argument_list|(
 literal|"P=null\n"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests a user-defined function that has multiple overloads. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUdfOverloaded
+parameter_list|()
+block|{
+specifier|final
+name|OptiqAssert
+operator|.
+name|AssertThat
+name|with
+init|=
+name|withUdf
+argument_list|()
+decl_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"values (\"adhoc\".count_args(),\n"
+operator|+
+literal|" \"adhoc\".count_args(0),\n"
+operator|+
+literal|" \"adhoc\".count_args(0, 0))"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"EXPR$0=0; EXPR$1=1; EXPR$2=2\n"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select max(\"adhoc\".count_args()) as p0,\n"
+operator|+
+literal|" min(\"adhoc\".count_args(0)) as p1,\n"
+operator|+
+literal|" max(\"adhoc\".count_args(0, 0)) as p2\n"
+operator|+
+literal|"from \"adhoc\".EMPLOYEES limit 1"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"P0=0; P1=1; P2=2\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -21096,6 +21199,84 @@ block|{
 return|return
 name|x
 operator|*
+literal|2
+return|;
+block|}
+block|}
+comment|/** Example of a UDF that has overloaded UDFs (same name, different args). */
+specifier|public
+specifier|abstract
+specifier|static
+class|class
+name|CountArgs0Function
+block|{
+specifier|private
+name|CountArgs0Function
+parameter_list|()
+block|{
+block|}
+specifier|public
+specifier|static
+name|int
+name|eval
+parameter_list|()
+block|{
+return|return
+literal|0
+return|;
+block|}
+block|}
+comment|/** See {@link CountArgs0Function}. */
+specifier|public
+specifier|abstract
+specifier|static
+class|class
+name|CountArgs1Function
+block|{
+specifier|private
+name|CountArgs1Function
+parameter_list|()
+block|{
+block|}
+specifier|public
+specifier|static
+name|int
+name|eval
+parameter_list|(
+name|int
+name|x
+parameter_list|)
+block|{
+return|return
+literal|1
+return|;
+block|}
+block|}
+comment|/** See {@link CountArgs0Function}. */
+specifier|public
+specifier|abstract
+specifier|static
+class|class
+name|CountArgs2Function
+block|{
+specifier|private
+name|CountArgs2Function
+parameter_list|()
+block|{
+block|}
+specifier|public
+specifier|static
+name|int
+name|eval
+parameter_list|(
+name|int
+name|x
+parameter_list|,
+name|int
+name|y
+parameter_list|)
+block|{
+return|return
 literal|2
 return|;
 block|}
