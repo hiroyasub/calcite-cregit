@@ -1933,7 +1933,7 @@ name|String
 argument_list|,
 name|String
 argument_list|>
-name|entry
+name|e
 range|:
 name|Util
 operator|.
@@ -1949,7 +1949,7 @@ block|{
 name|String
 name|s
 init|=
-name|entry
+name|e
 operator|.
 name|getValue
 argument_list|()

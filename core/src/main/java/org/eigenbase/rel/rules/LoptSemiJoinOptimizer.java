@@ -1,63 +1,25 @@
 begin_unit|revision:1.0.0;language:Java;cregit-version:0.0.1
 begin_comment
-comment|/* // Licensed to DynamoBI Corporation (DynamoBI) under one // or more contributor license agreements.  See the NOTICE file // distributed with this work for additional information // regarding copyright ownership.  DynamoBI licenses this file // to you under the Apache License, Version 2.0 (the // "License"); you may not use this file except in compliance // with the License.  You may obtain a copy of the License at  //   http://www.apache.org/licenses/LICENSE-2.0  // Unless required by applicable law or agreed to in writing, // software distributed under the License is distributed on an // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY // KIND, either express or implied.  See the License for the // specific language governing permissions and limitations // under the License. */
+comment|/* // Licensed to Julian Hyde under one or more contributor license // agreements. See the NOTICE file distributed with this work for // additional information regarding copyright ownership. // // Julian Hyde licenses this file to you under the Apache License, // Version 2.0 (the "License"); you may not use this file except in // compliance with the License. You may obtain a copy of the License at: // // http://www.apache.org/licenses/LICENSE-2.0 // // Unless required by applicable law or agreed to in writing, software // distributed under the License is distributed on an "AS IS" BASIS, // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. // See the License for the specific language governing permissions and // limitations under the License. */
 end_comment
 
 begin_package
 package|package
 name|org
 operator|.
-name|luciddb
+name|eigenbase
 operator|.
-name|optimizer
+name|rel
+operator|.
+name|rules
 package|;
 end_package
-
-begin_import
-import|import
-name|org
-operator|.
-name|luciddb
-operator|.
-name|lcs
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|luciddb
-operator|.
-name|session
-operator|.
-name|*
-import|;
-end_import
 
 begin_import
 import|import
 name|java
 operator|.
 name|util
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
-name|net
-operator|.
-name|sf
-operator|.
-name|farrago
-operator|.
-name|fem
-operator|.
-name|med
 operator|.
 name|*
 import|;
@@ -95,20 +57,6 @@ name|org
 operator|.
 name|eigenbase
 operator|.
-name|rel
-operator|.
-name|rules
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
 name|relopt
 operator|.
 name|*
@@ -135,14 +83,40 @@ name|eigenbase
 operator|.
 name|sql
 operator|.
+name|SqlKind
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
+name|sql
+operator|.
 name|fun
 operator|.
 name|*
 import|;
 end_import
 
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|optiq
+operator|.
+name|util
+operator|.
+name|BitSets
+import|;
+end_import
+
 begin_comment
-comment|/**  * LoptSemiJoinOptimizer implements the logic for determining the optimal  * semijoins to be used in processing joins in a query.  *  * @author Zelaine Fong  * @version $Id$  */
+comment|/**  * Implements the logic for determining the optimal  * semi-joins to be used in processing joins in a query.  */
 end_comment
 
 begin_class
@@ -154,24 +128,25 @@ comment|//~ Static fields/initializers -----------------------------------------
 comment|// minimum score required for a join filter to be considered
 specifier|private
 specifier|static
+specifier|final
 name|int
-name|thresholdScore
+name|THRESHOLD_SCORE
 init|=
 literal|10
 decl_stmt|;
 comment|//~ Instance fields --------------------------------------------------------
-comment|/**      * RexBuilder for constructing new RexNodes      */
+comment|/**    * RexBuilder for constructing new RexNodes    */
 specifier|private
 name|RexBuilder
 name|rexBuilder
 decl_stmt|;
-comment|/**      * Semijoins corresponding to each join factor, if they are going to be      * filtered by semijoins. Otherwise, the entry is the original join factor.      */
+comment|/**    * Semijoins corresponding to each join factor, if they are going to be    * filtered by semijoins. Otherwise, the entry is the original join factor.    */
 specifier|private
 name|RelNode
 index|[]
 name|chosenSemiJoins
 decl_stmt|;
-comment|/**      * Associates potential semijoins with each fact table factor. The first      * parameter in the map corresponds to the fact table. The second      * corresponds to the dimension table and a SemiJoinRel that captures all      * the necessary semijoin data between that fact and dimension table      */
+comment|/**    * Associates potential semijoins with each fact table factor. The first    * parameter in the map corresponds to the fact table. The second    * corresponds to the dimension table and a SemiJoinRel that captures all    * the necessary semijoin data between that fact and dimension table    */
 specifier|private
 name|Map
 argument_list|<
@@ -263,7 +238,7 @@ name|rexBuilder
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**      * Determines all possible semijoins that can be used by dimension tables to      * filter fact tables. Constructs SemiJoinRels corresponding to potential      * dimension table filters and stores them in the member field      * "possibleSemiJoins"      *      * @param multiJoin join factors being optimized      */
+comment|/**    * Determines all possible semijoins that can be used by dimension tables to    * filter fact tables. Constructs SemiJoinRels corresponding to potential    * dimension table filters and stores them in the member field    * "possibleSemiJoins"    *    * @param multiJoin join factors being optimized    */
 specifier|public
 name|void
 name|makePossibleSemiJoins
@@ -558,7 +533,7 @@ block|}
 block|}
 block|}
 block|}
-comment|/**      * Determines if a join filter can be used with a semijoin against a      * specified fact table. A suitable filter is of the form "factable.col1 =      * dimTable.col2".      *      * @param multiJoin join factors being optimized      * @param joinFilter filter to be analyzed      * @param factIdx index corresponding to the fact table      *      * @return index of corresponding dimension table if the filter is      * appropriate; otherwise -1 is returned      */
+comment|/**    * Determines if a join filter can be used with a semijoin against a    * specified fact table. A suitable filter is of the form "factable.col1 =    * dimTable.col2".    *    * @param multiJoin join factors being optimized    * @param joinFilter filter to be analyzed    * @param factIdx index corresponding to the fact table    *    * @return index of corresponding dimension table if the filter is    * appropriate; otherwise -1 is returned    */
 specifier|private
 name|int
 name|isSuitableFilter
@@ -575,39 +550,28 @@ parameter_list|)
 block|{
 comment|// ignore non-equality filters where the operands are not
 comment|// RexInputRefs
-if|if
+switch|switch
 condition|(
-operator|!
-operator|(
 name|joinFilter
-operator|instanceof
-name|RexCall
-operator|)
-operator|||
-operator|(
-operator|(
-operator|(
-name|RexCall
-operator|)
-name|joinFilter
-operator|)
 operator|.
-name|getOperator
+name|getKind
 argument_list|()
-operator|!=
-name|SqlStdOperatorTable
-operator|.
-name|equalsOperator
-operator|)
 condition|)
 block|{
+case|case
+name|EQUALS
+case|:
+break|break;
+default|default:
 return|return
 operator|-
 literal|1
 return|;
 block|}
+name|List
+argument_list|<
 name|RexNode
-index|[]
+argument_list|>
 name|operands
 init|=
 operator|(
@@ -625,9 +589,11 @@ condition|(
 operator|!
 operator|(
 name|operands
-index|[
+operator|.
+name|get
+argument_list|(
 literal|0
-index|]
+argument_list|)
 operator|instanceof
 name|RexInputRef
 operator|)
@@ -635,9 +601,11 @@ operator|||
 operator|!
 operator|(
 name|operands
-index|[
+operator|.
+name|get
+argument_list|(
 literal|1
-index|]
+argument_list|)
 operator|instanceof
 name|RexInputRef
 operator|)
@@ -665,14 +633,12 @@ name|joinFilter
 argument_list|)
 decl_stmt|;
 assert|assert
-operator|(
 name|joinRefs
 operator|.
 name|cardinality
 argument_list|()
 operator|==
 literal|2
-operator|)
 assert|;
 name|int
 name|factor1
@@ -723,7 +689,7 @@ operator|-
 literal|1
 return|;
 block|}
-comment|/**      * Given a list of possible filters on a fact table, determine if there is      * an index that can be used, provided all the fact table keys originate      * from the same underlying table.      *      * @param multiJoin join factors being optimized      * @param joinFilters filters to be used on the fact table      * @param factIdx index in join factors corresponding to the fact table      * @param dimIdx index in join factors corresponding to the dimension table      *      * @return SemiJoinRel containing information regarding the semijoin that      * can be used to filter the fact table      */
+comment|/**    * Given a list of possible filters on a fact table, determine if there is    * an index that can be used, provided all the fact table keys originate    * from the same underlying table.    *    * @param multiJoin join factors being optimized    * @param joinFilters filters to be used on the fact table    * @param factIdx index in join factors corresponding to the fact table    * @param dimIdx index in join factors corresponding to the dimension table    *    * @return SemiJoinRel containing information regarding the semijoin that    * can be used to filter the fact table    */
 specifier|private
 name|SemiJoinRel
 name|findSemiJoinIndexByCost
@@ -744,17 +710,19 @@ name|int
 name|dimIdx
 parameter_list|)
 block|{
-comment|// create a SemiJoinRel with the semijoin condition and keys
+comment|// create a SemiJoinRel with the semi-join condition and keys
 name|RexNode
 name|semiJoinCondition
 init|=
 name|RexUtil
 operator|.
-name|andRexNodeList
+name|composeConjunction
 argument_list|(
 name|rexBuilder
 argument_list|,
 name|joinFilters
+argument_list|,
+literal|true
 argument_list|)
 decl_stmt|;
 name|int
@@ -864,14 +832,12 @@ name|rightKeys
 argument_list|)
 expr_stmt|;
 assert|assert
-operator|(
 name|leftKeys
 operator|.
 name|size
 argument_list|()
 operator|>
 literal|0
-operator|)
 assert|;
 comment|// make sure all the fact table keys originate from the same table
 comment|// and are simple column references
@@ -937,15 +903,15 @@ name|factTable
 operator|.
 name|toRel
 argument_list|(
+name|RelOptUtil
+operator|.
+name|getContext
+argument_list|(
 name|factRel
 operator|.
 name|getCluster
 argument_list|()
-argument_list|,
-name|factTable
-operator|.
-name|getPreparingStmt
-argument_list|()
+argument_list|)
 argument_list|)
 decl_stmt|;
 name|LcsIndexOptimizer
@@ -1119,7 +1085,7 @@ return|return
 name|semiJoin
 return|;
 block|}
-comment|/**      * Modifies the semijoin condition to reflect the fact that the RHS is now      * the second factor into a join and the LHS is the first      *      * @param multiJoin join factors being optimized      * @param leftAdjustment amount the left RexInputRefs need to be adjusted by      * @param semiJoinCondition condition to be adjusted      * @param leftIdx index of the join factor corresponding to the LHS of the      * semijoin,      * @param rightIdx index of the join factor corresponding to the RHS of the      * semijoin      *      * @return modified semijoin condition      */
+comment|/**    * Modifies the semijoin condition to reflect the fact that the RHS is now    * the second factor into a join and the LHS is the first    *    * @param multiJoin join factors being optimized    * @param leftAdjustment amount the left RexInputRefs need to be adjusted by    * @param semiJoinCondition condition to be adjusted    * @param leftIdx index of the join factor corresponding to the LHS of the    * semijoin,    * @param rightIdx index of the join factor corresponding to the RHS of the    * semijoin    *    * @return modified semijoin condition    */
 specifier|private
 name|RexNode
 name|adjustSemiJoinCondition
@@ -1330,7 +1296,7 @@ return|return
 name|semiJoinCondition
 return|;
 block|}
-comment|/**      * Validates the candidate semijoin keys corresponding to the fact table.      * Ensure the keys all originate from the same underlying table, and they      * all correspond to simple column references. If unsuitable keys are found,      * they're removed from the key list and a new list corresponding to the      * remaining valid keys is returned.      *      * @param factRel fact table RelNode      * @param leftKeys fact table semijoin keys      * @param rightKeys dimension table semijoin keys      * @param actualLeftKeys the remaining valid fact table semijoin keys      *      * @return the underlying fact table if the semijoin keys are valid;      * otherwise null      */
+comment|/**    * Validates the candidate semijoin keys corresponding to the fact table.    * Ensure the keys all originate from the same underlying table, and they    * all correspond to simple column references. If unsuitable keys are found,    * they're removed from the key list and a new list corresponding to the    * remaining valid keys is returned.    *    * @param factRel fact table RelNode    * @param leftKeys fact table semijoin keys    * @param rightKeys dimension table semijoin keys    * @param actualLeftKeys the remaining valid fact table semijoin keys    *    * @return the underlying fact table if the semijoin keys are valid;    * otherwise null    */
 specifier|private
 name|LcsTable
 name|validateKeys
@@ -1391,12 +1357,13 @@ name|removeKey
 init|=
 literal|false
 decl_stmt|;
+specifier|final
 name|RelColumnOrigin
 name|colOrigin
 init|=
-name|LoptMetadataProvider
+name|RelMetadataQuery
 operator|.
-name|getSimpleColumnOrigin
+name|getColumnOrigin
 argument_list|(
 name|factRel
 argument_list|,
@@ -1477,11 +1444,9 @@ block|{
 comment|// the tables must match because the column has
 comment|// a simple origin
 assert|assert
-operator|(
 name|table
 operator|==
 name|theTable
-operator|)
 assert|;
 block|}
 block|}
@@ -1545,7 +1510,7 @@ name|theTable
 return|;
 block|}
 block|}
-comment|/**      * Removes from an expression any sub-expressions that reference key values      * that aren't contained in a key list passed in. The keys represent join      * keys on one side of a join. The subexpressions are all assumed to be of      * the form "tab1.col1 = tab2.col2".      *      * @param keys join keys from one side of the join      * @param nFields number of fields in the side of the join for which the      * keys correspond      * @param condition original expression      *      * @return modified expression with filters that don't reference specified      * keys removed      */
+comment|/**    * Removes from an expression any sub-expressions that reference key values    * that aren't contained in a key list passed in. The keys represent join    * keys on one side of a join. The subexpressions are all assumed to be of    * the form "tab1.col1 = tab2.col2".    *    * @param keys join keys from one side of the join    * @param nFields number of fields in the side of the join for which the    * keys correspond    * @param condition original expression    *    * @return modified expression with filters that don't reference specified    * keys removed    */
 specifier|private
 name|RexNode
 name|removeExtraFilters
@@ -1567,11 +1532,9 @@ comment|// recursively walk the expression; if all sub-expressions are
 comment|// removed from one side of the expression, just return what remains
 comment|// from the other side
 assert|assert
-operator|(
 name|condition
 operator|instanceof
 name|RexCall
-operator|)
 assert|;
 name|RexCall
 name|call
@@ -1587,14 +1550,16 @@ name|condition
 operator|.
 name|isA
 argument_list|(
-name|RexKind
+name|SqlKind
 operator|.
-name|And
+name|AND
 argument_list|)
 condition|)
 block|{
+name|List
+argument_list|<
 name|RexNode
-index|[]
+argument_list|>
 name|operands
 init|=
 name|call
@@ -1612,9 +1577,11 @@ argument_list|,
 name|nFields
 argument_list|,
 name|operands
-index|[
+operator|.
+name|get
+argument_list|(
 literal|0
-index|]
+argument_list|)
 argument_list|)
 decl_stmt|;
 name|RexNode
@@ -1627,9 +1594,11 @@ argument_list|,
 name|nFields
 argument_list|,
 name|operands
-index|[
+operator|.
+name|get
+argument_list|(
 literal|1
-index|]
+argument_list|)
 argument_list|)
 decl_stmt|;
 if|if
@@ -1661,7 +1630,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|andOperator
+name|AND
 argument_list|,
 name|left
 argument_list|,
@@ -1673,7 +1642,6 @@ comment|// determine which side of the equality filter references the join
 comment|// operand we're interested in; then, check if it is contained in
 comment|// our key list
 assert|assert
-operator|(
 name|call
 operator|.
 name|getOperator
@@ -1681,11 +1649,12 @@ argument_list|()
 operator|==
 name|SqlStdOperatorTable
 operator|.
-name|equalsOperator
-operator|)
+name|EQUALS
 assert|;
+name|List
+argument_list|<
 name|RexNode
-index|[]
+argument_list|>
 name|operands
 init|=
 name|call
@@ -1694,24 +1663,24 @@ name|getOperands
 argument_list|()
 decl_stmt|;
 assert|assert
-operator|(
 name|operands
-index|[
+operator|.
+name|get
+argument_list|(
 literal|0
-index|]
+argument_list|)
 operator|instanceof
 name|RexInputRef
-operator|)
 assert|;
 assert|assert
-operator|(
 name|operands
-index|[
+operator|.
+name|get
+argument_list|(
 literal|1
-index|]
+argument_list|)
 operator|instanceof
 name|RexInputRef
-operator|)
 assert|;
 name|int
 name|idx
@@ -1721,9 +1690,11 @@ operator|(
 name|RexInputRef
 operator|)
 name|operands
-index|[
+operator|.
+name|get
+argument_list|(
 literal|0
-index|]
+argument_list|)
 operator|)
 operator|.
 name|getIndex
@@ -1761,9 +1732,11 @@ operator|(
 name|RexInputRef
 operator|)
 name|operands
-index|[
+operator|.
+name|get
+argument_list|(
 literal|1
-index|]
+argument_list|)
 operator|)
 operator|.
 name|getIndex
@@ -1789,7 +1762,7 @@ return|return
 name|condition
 return|;
 block|}
-comment|/**      * Finds the optimal semijoin for filtering the least costly fact table from      * among the remaining possible semijoins to choose from. The chosen      * semijoin is stored in the chosenSemiJoins array      *      * @param multiJoin join factors being optimized      *      * @return true if a suitable semijoin is found; false otherwise      */
+comment|/**    * Finds the optimal semijoin for filtering the least costly fact table from    * among the remaining possible semijoins to choose from. The chosen    * semijoin is stored in the chosenSemiJoins array    *    * @param multiJoin join factors being optimized    *    * @return true if a suitable semijoin is found; false otherwise    */
 specifier|public
 name|boolean
 name|chooseBestSemiJoin
@@ -1982,7 +1955,7 @@ condition|(
 operator|(
 name|score
 operator|>
-name|thresholdScore
+name|THRESHOLD_SCORE
 operator|)
 operator|&&
 operator|(
@@ -2117,7 +2090,7 @@ return|return
 literal|false
 return|;
 block|}
-comment|/**      * Computes a score relevant to applying a set of semijoins on a fact table.      * The higher the score, the better.      *      * @param factRel fact table being filtered      * @param dimRel dimension table that participates in semijoin      * @param semiJoin semijoin between fact and dimension tables      *      * @return computed score of applying the dimension table filters on the      * fact table      */
+comment|/**    * Computes a score relevant to applying a set of semijoins on a fact table.    * The higher the score, the better.    *    * @param factRel fact table being filtered    * @param dimRel dimension table that participates in semijoin    * @param semiJoin semijoin between fact and dimension tables    *    * @return computed score of applying the dimension table filters on the    * fact table    */
 specifier|private
 name|double
 name|computeScore
@@ -2345,7 +2318,7 @@ operator|/
 name|dimRows
 return|;
 block|}
-comment|/**      * Determines whether a join of the dimension table in a semijoin can be      * removed. It can be if the dimension keys are unique and the only fields      * referenced from the dimension table are its semijoin keys. The semijoin      * keys can be mapped to the corresponding keys from the fact table (because      * of the equality condition associated with the semijoin keys). Therefore,      * that's why the dimension table can be removed even though those fields      * are referenced elsewhere in the query tree.      *      * @param multiJoin join factors being optimized      * @param semiJoin semijoin under consideration      * @param factIdx id of the fact table in the semijoin      * @param dimIdx id of the dimension table in the semijoin      */
+comment|/**    * Determines whether a join of the dimension table in a semijoin can be    * removed. It can be if the dimension keys are unique and the only fields    * referenced from the dimension table are its semijoin keys. The semijoin    * keys can be mapped to the corresponding keys from the fact table (because    * of the equality condition associated with the semijoin keys). Therefore,    * that's why the dimension table can be removed even though those fields    * are referenced elsewhere in the query tree.    *    * @param multiJoin join factors being optimized    * @param semiJoin semijoin under consideration    * @param factIdx id of the fact table in the semijoin    * @param dimIdx id of the dimension table in the semijoin    */
 specifier|private
 name|void
 name|removeJoin
@@ -2464,18 +2437,10 @@ argument_list|)
 decl_stmt|;
 name|dimProjRefs
 operator|=
-operator|new
-name|BitSet
-argument_list|(
-name|nDimFields
-argument_list|)
-expr_stmt|;
-name|RelOptUtil
+name|BitSets
 operator|.
-name|setRexInputBitmap
+name|range
 argument_list|(
-name|dimProjRefs
-argument_list|,
 literal|0
 argument_list|,
 name|nDimFields
@@ -2485,7 +2450,7 @@ block|}
 if|if
 condition|(
 operator|!
-name|RelOptUtil
+name|BitSets
 operator|.
 name|contains
 argument_list|(
@@ -2671,7 +2636,7 @@ operator|--
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Removes a dimension table from a fact table's list of possible semijoins      *      * @param possibleDimensions possible dimension tables associated with the      * fact table      * @param factIdx index corresponding to fact table      * @param dimIdx index corresponding to dimension table      */
+comment|/**    * Removes a dimension table from a fact table's list of possible semijoins    *    * @param possibleDimensions possible dimension tables associated with the    * fact table    * @param factIdx index corresponding to fact table    * @param dimIdx index corresponding to dimension table    */
 specifier|private
 name|void
 name|removePossibleSemiJoin
@@ -2738,7 +2703,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * @param factIdx index corresponding to the desired factor      *      * @return optimal semijoin for the specified factor; may be the factor      * itself if semijoins are not chosen for the factor      */
+comment|/**    * @param factIdx index corresponding to the desired factor    *    * @return optimal semijoin for the specified factor; may be the factor    * itself if semijoins are not chosen for the factor    */
 specifier|public
 name|RelNode
 name|getChosenSemiJoin
@@ -2755,6 +2720,7 @@ index|]
 return|;
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------
+comment|/** . */
 specifier|private
 class|class
 name|FactorCostComparator
@@ -2849,6 +2815,92 @@ literal|0
 else|:
 literal|1
 operator|)
+return|;
+block|}
+block|}
+comment|/** Dummy class to allow code to compile. */
+specifier|private
+specifier|abstract
+specifier|static
+class|class
+name|LcsTable
+implements|implements
+name|RelOptTable
+block|{   }
+comment|/** Dummy class to allow code to compile. */
+specifier|private
+specifier|static
+class|class
+name|LcsRowScanRel
+block|{   }
+comment|/** Dummy class to allow code to compile. */
+specifier|private
+specifier|static
+class|class
+name|LcsIndexOptimizer
+block|{
+specifier|public
+name|LcsIndexOptimizer
+parameter_list|(
+name|LcsRowScanRel
+name|rel
+parameter_list|)
+block|{
+block|}
+specifier|public
+name|FemLocalIndex
+name|findSemiJoinIndexByCost
+parameter_list|(
+name|RelNode
+name|dimRel
+parameter_list|,
+name|List
+argument_list|<
+name|Integer
+argument_list|>
+name|actualLeftKeys
+parameter_list|,
+name|List
+argument_list|<
+name|Integer
+argument_list|>
+name|rightKeys
+parameter_list|,
+name|List
+argument_list|<
+name|Integer
+argument_list|>
+name|bestKeyOrder
+parameter_list|)
+block|{
+return|return
+literal|null
+return|;
+block|}
+block|}
+comment|/** Dummy class to allow code to compile. */
+specifier|private
+specifier|static
+class|class
+name|FemLocalIndex
+block|{ }
+comment|/** Dummy class to allow code to compile. */
+specifier|private
+specifier|static
+class|class
+name|LucidDbSpecialOperators
+block|{
+specifier|public
+specifier|static
+name|boolean
+name|isLcsRidColumnId
+parameter_list|(
+name|int
+name|originColumnOrdinal
+parameter_list|)
+block|{
+return|return
+literal|false
 return|;
 block|}
 block|}

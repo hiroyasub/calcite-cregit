@@ -184,11 +184,9 @@ literal|false
 decl_stmt|;
 while|while
 condition|(
-operator|(
 name|wordStart
 operator|>
 literal|0
-operator|)
 operator|&&
 name|Character
 operator|.
@@ -262,14 +260,12 @@ name|cursor
 decl_stmt|;
 while|while
 condition|(
-operator|(
 name|wordEnd
 operator|<
 name|sql
 operator|.
 name|length
 argument_list|()
-operator|)
 operator|&&
 name|Character
 operator|.
