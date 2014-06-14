@@ -21,16 +21,6 @@ name|java
 operator|.
 name|util
 operator|.
-name|Arrays
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
 name|List
 import|;
 end_import
@@ -58,6 +48,18 @@ operator|.
 name|parser
 operator|.
 name|*
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
+name|util
+operator|.
+name|UnmodifiableArrayList
 import|;
 end_import
 
@@ -326,9 +328,9 @@ name|getOperandList
 parameter_list|()
 block|{
 return|return
-name|Arrays
+name|UnmodifiableArrayList
 operator|.
-name|asList
+name|of
 argument_list|(
 name|value
 argument_list|,

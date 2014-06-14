@@ -349,9 +349,9 @@ argument_list|()
 argument_list|)
 decl_stmt|;
 return|return
-name|Arrays
+name|ImmutableNullableList
 operator|.
-name|asList
+name|of
 argument_list|(
 name|argTypes
 operator|.

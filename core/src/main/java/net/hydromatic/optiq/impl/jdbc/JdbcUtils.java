@@ -95,6 +95,20 @@ end_import
 
 begin_import
 import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|ImmutableList
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|sql
@@ -236,9 +250,9 @@ decl_stmt|;
 name|List
 name|key
 init|=
-name|Arrays
+name|ImmutableList
 operator|.
-name|asList
+name|of
 argument_list|(
 name|productName
 argument_list|,

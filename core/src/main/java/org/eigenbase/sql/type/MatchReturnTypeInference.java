@@ -21,16 +21,6 @@ name|java
 operator|.
 name|util
 operator|.
-name|Arrays
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
 name|List
 import|;
 end_import
@@ -61,13 +51,15 @@ end_import
 
 begin_import
 import|import
-name|org
+name|com
 operator|.
-name|eigenbase
+name|google
 operator|.
-name|util
+name|common
 operator|.
-name|*
+name|collect
+operator|.
+name|ImmutableList
 import|;
 end_import
 
@@ -106,18 +98,18 @@ name|start
 parameter_list|,
 name|SqlTypeName
 modifier|...
-name|typeName
+name|typeNames
 parameter_list|)
 block|{
 name|this
 argument_list|(
 name|start
 argument_list|,
-name|Arrays
+name|ImmutableList
 operator|.
-name|asList
+name|copyOf
 argument_list|(
-name|typeName
+name|typeNames
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -164,7 +156,12 @@ name|this
 operator|.
 name|typeNames
 operator|=
+name|ImmutableList
+operator|.
+name|copyOf
+argument_list|(
 name|typeNames
+argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------

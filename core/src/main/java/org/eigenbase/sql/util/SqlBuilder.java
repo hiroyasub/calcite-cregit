@@ -47,6 +47,18 @@ name|SqlDialect
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
+name|util
+operator|.
+name|UnmodifiableArrayList
+import|;
+end_import
+
 begin_comment
 comment|/**  * Extension to {@link StringBuilder} for the purposes of creating SQL queries  * and expressions.  *  *<p>Using this class helps to prevent SQL injection attacks, incorrectly  * quoted identifiers and strings. These problems occur when you build SQL by  * concatenating strings, and you forget to treat identifers and string literals  * correctly. SqlBuilder has special methods for appending identifiers and  * literals.  */
 end_comment
@@ -333,9 +345,9 @@ name|quoteIdentifier
 argument_list|(
 name|buf
 argument_list|,
-name|Arrays
+name|UnmodifiableArrayList
 operator|.
-name|asList
+name|of
 argument_list|(
 name|names
 argument_list|)

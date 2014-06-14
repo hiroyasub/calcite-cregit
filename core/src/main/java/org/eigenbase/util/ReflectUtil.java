@@ -1577,9 +1577,9 @@ name|Object
 argument_list|>
 name|key
 init|=
-name|Arrays
+name|ImmutableList
 operator|.
-name|asList
+name|of
 argument_list|(
 name|visitorClass
 argument_list|,

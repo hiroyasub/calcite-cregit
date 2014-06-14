@@ -1950,9 +1950,9 @@ name|Linq4j
 operator|.
 name|asEnumerable
 argument_list|(
-name|Arrays
+name|ImmutableList
 operator|.
-name|asList
+name|of
 argument_list|(
 operator|new
 name|MetaCatalog
@@ -1978,9 +1978,9 @@ name|Linq4j
 operator|.
 name|asEnumerable
 argument_list|(
-name|Arrays
+name|ImmutableList
 operator|.
-name|asList
+name|of
 argument_list|(
 operator|new
 name|MetaTableType

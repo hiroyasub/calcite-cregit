@@ -502,9 +502,9 @@ name|getOperandList
 parameter_list|()
 block|{
 return|return
-name|Arrays
+name|ImmutableNullableList
 operator|.
-name|asList
+name|of
 argument_list|(
 name|declName
 argument_list|,

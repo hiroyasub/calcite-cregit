@@ -78,6 +78,20 @@ import|;
 end_import
 
 begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|ImmutableList
+import|;
+end_import
+
+begin_import
 import|import static
 name|org
 operator|.
@@ -442,9 +456,9 @@ argument_list|,
 name|call
 argument_list|)
 argument_list|,
-name|Arrays
+name|ImmutableList
 operator|.
-name|asList
+name|of
 argument_list|(
 name|leftRowType
 argument_list|,

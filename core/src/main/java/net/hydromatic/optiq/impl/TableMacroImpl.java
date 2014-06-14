@@ -337,7 +337,7 @@ literal|"Expected "
 operator|+
 name|Arrays
 operator|.
-name|asList
+name|toString
 argument_list|(
 name|method
 operator|.

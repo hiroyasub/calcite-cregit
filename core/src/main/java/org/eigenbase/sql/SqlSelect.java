@@ -19,16 +19,6 @@ name|java
 operator|.
 name|util
 operator|.
-name|Arrays
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
 name|List
 import|;
 end_import
@@ -58,6 +48,18 @@ operator|.
 name|validate
 operator|.
 name|*
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
+name|util
+operator|.
+name|ImmutableNullableList
 import|;
 end_import
 
@@ -288,9 +290,9 @@ name|getOperandList
 parameter_list|()
 block|{
 return|return
-name|Arrays
+name|ImmutableNullableList
 operator|.
-name|asList
+name|of
 argument_list|(
 name|keywordList
 argument_list|,

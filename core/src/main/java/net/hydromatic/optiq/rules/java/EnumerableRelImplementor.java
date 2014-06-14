@@ -1251,12 +1251,9 @@ name|class
 argument_list|,
 literal|"hash"
 argument_list|,
-name|Arrays
+name|ImmutableList
 operator|.
-expr|<
-name|Expression
-operator|>
-name|asList
+name|of
 argument_list|(
 name|hParameter
 argument_list|,

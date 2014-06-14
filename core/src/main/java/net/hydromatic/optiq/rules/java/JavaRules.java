@@ -3670,12 +3670,12 @@ comment|// TODO: generics
 comment|//   Collections.singletonList(inputRowType),
 name|NO_EXPRS
 argument_list|,
-name|Arrays
+name|ImmutableList
 operator|.
 expr|<
 name|MemberDeclaration
 operator|>
-name|asList
+name|of
 argument_list|(
 name|Expressions
 operator|.
@@ -3883,12 +3883,12 @@ name|Aggregation
 argument_list|>
 name|SUPPORTED_AGGREGATIONS
 init|=
-name|Arrays
+name|ImmutableList
 operator|.
 expr|<
 name|Aggregation
 operator|>
-name|asList
+name|of
 argument_list|(
 name|SqlStdOperatorTable
 operator|.

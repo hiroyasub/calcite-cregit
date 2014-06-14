@@ -5065,9 +5065,9 @@ name|op
 argument_list|,
 name|toRex
 argument_list|(
-name|Arrays
+name|ImmutableList
 operator|.
-name|asList
+name|of
 argument_list|(
 name|call
 operator|.
