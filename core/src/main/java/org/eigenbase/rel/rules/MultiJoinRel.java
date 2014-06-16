@@ -75,6 +75,18 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
+name|util
+operator|.
+name|ImmutableNullableList
+import|;
+end_import
+
+begin_import
+import|import
 name|net
 operator|.
 name|hydromatic
@@ -113,6 +125,20 @@ name|ImmutableMap
 import|;
 end_import
 
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|Lists
+import|;
+end_import
+
 begin_comment
 comment|/**  * A MultiJoinRel represents a join of N inputs, whereas other join relnodes  * represent strictly binary joins.  */
 end_comment
@@ -127,7 +153,7 @@ name|AbstractRelNode
 block|{
 comment|//~ Instance fields --------------------------------------------------------
 specifier|private
-name|ImmutableList
+name|List
 argument_list|<
 name|RelNode
 argument_list|>
@@ -146,7 +172,7 @@ name|boolean
 name|isFullOuterJoin
 decl_stmt|;
 specifier|private
-name|ImmutableList
+name|List
 argument_list|<
 name|RexNode
 argument_list|>
@@ -160,7 +186,7 @@ argument_list|>
 name|joinTypes
 decl_stmt|;
 specifier|private
-name|ImmutableList
+name|List
 argument_list|<
 name|BitSet
 argument_list|>
@@ -252,9 +278,9 @@ name|this
 operator|.
 name|inputs
 operator|=
-name|ImmutableList
+name|Lists
 operator|.
-name|copyOf
+name|newArrayList
 argument_list|(
 name|inputs
 argument_list|)
@@ -281,13 +307,24 @@ name|this
 operator|.
 name|outerJoinConditions
 operator|=
-name|ImmutableList
+name|ImmutableNullableList
 operator|.
 name|copyOf
 argument_list|(
 name|outerJoinConditions
 argument_list|)
 expr_stmt|;
+assert|assert
+name|outerJoinConditions
+operator|.
+name|size
+argument_list|()
+operator|==
+name|inputs
+operator|.
+name|size
+argument_list|()
+assert|;
 name|this
 operator|.
 name|joinTypes
@@ -303,7 +340,7 @@ name|this
 operator|.
 name|projFields
 operator|=
-name|ImmutableList
+name|ImmutableNullableList
 operator|.
 name|copyOf
 argument_list|(
@@ -329,6 +366,31 @@ name|postJoinFilter
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
+specifier|public
+name|void
+name|replaceInput
+parameter_list|(
+name|int
+name|ordinalInParent
+parameter_list|,
+name|RelNode
+name|p
+parameter_list|)
+block|{
+name|inputs
+operator|.
+name|set
+argument_list|(
+name|ordinalInParent
+argument_list|,
+name|p
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Override
 specifier|public
 name|RelNode
 name|copy
@@ -346,7 +408,7 @@ block|{
 assert|assert
 name|traitSet
 operator|.
-name|comprises
+name|containsIfApplicable
 argument_list|(
 name|Convention
 operator|.

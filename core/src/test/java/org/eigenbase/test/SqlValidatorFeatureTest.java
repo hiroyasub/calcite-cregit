@@ -439,6 +439,9 @@ name|typeFactory
 argument_list|,
 name|caseSensitive
 argument_list|)
+operator|.
+name|init
+argument_list|()
 argument_list|,
 name|typeFactory
 argument_list|,

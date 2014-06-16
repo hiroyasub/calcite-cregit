@@ -301,7 +301,7 @@ name|RelDataType
 name|addressType
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a MockCatalogReader.    *    * @param typeFactory Type factory    */
+comment|/**    * Creates a MockCatalogReader.    *    *<p>Caller must then call {@link #init} to populate with data.</p>    *    * @param typeFactory Type factory    */
 specifier|public
 name|MockCatalogReader
 parameter_list|(
@@ -313,33 +313,6 @@ name|caseSensitive
 parameter_list|)
 block|{
 name|this
-argument_list|(
-name|typeFactory
-argument_list|,
-name|caseSensitive
-argument_list|,
-literal|false
-argument_list|)
-expr_stmt|;
-name|init
-argument_list|()
-expr_stmt|;
-block|}
-comment|/**    * Creates a MockCatalogReader but does not initialize.    *    *<p>Protected constructor for use by subclasses, which must call    * {@link #init} at the end of their public constructor.    *    * @param typeFactory Type factory    * @param dummy       Dummy parameter to distinguish from public constructor    */
-specifier|protected
-name|MockCatalogReader
-parameter_list|(
-name|RelDataTypeFactory
-name|typeFactory
-parameter_list|,
-name|boolean
-name|caseSensitive
-parameter_list|,
-name|boolean
-name|dummy
-parameter_list|)
-block|{
-name|this
 operator|.
 name|typeFactory
 operator|=
@@ -351,10 +324,6 @@ name|caseSensitive
 operator|=
 name|caseSensitive
 expr_stmt|;
-assert|assert
-operator|!
-name|dummy
-assert|;
 if|if
 condition|(
 name|caseSensitive
@@ -422,8 +391,8 @@ expr_stmt|;
 block|}
 block|}
 comment|/**    * Initializes this catalog reader.    */
-specifier|protected
-name|void
+specifier|public
+name|MockCatalogReader
 name|init
 parameter_list|()
 block|{
@@ -1032,6 +1001,9 @@ argument_list|(
 name|accountTable
 argument_list|)
 expr_stmt|;
+return|return
+name|this
+return|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
 specifier|public

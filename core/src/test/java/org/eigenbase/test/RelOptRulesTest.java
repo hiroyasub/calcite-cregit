@@ -57,6 +57,72 @@ begin_import
 import|import
 name|org
 operator|.
+name|eigenbase
+operator|.
+name|reltype
+operator|.
+name|RelDataType
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
+name|reltype
+operator|.
+name|RelDataTypeFactory
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
+name|sql
+operator|.
+name|type
+operator|.
+name|SqlTypeName
+import|;
+end_import
+
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|optiq
+operator|.
+name|prepare
+operator|.
+name|Prepare
+import|;
+end_import
+
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|base
+operator|.
+name|Function
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
 name|junit
 operator|.
 name|Ignore
@@ -293,7 +359,9 @@ expr_stmt|;
 block|}
 annotation|@
 name|Ignore
-comment|// have not tried under optiq (it might work)
+argument_list|(
+literal|"cycles"
+argument_list|)
 annotation|@
 name|Test
 specifier|public
@@ -354,9 +422,9 @@ name|checkPlanning
 argument_list|(
 name|program
 argument_list|,
-literal|"select d.name as dname,e.name as ename"
+literal|"select d.name as dname,e.ename as ename"
 operator|+
-literal|" from sales.emps e inner join sales.depts d"
+literal|" from emp e inner join dept d"
 operator|+
 literal|" on e.deptno=d.deptno"
 operator|+
@@ -366,7 +434,9 @@ expr_stmt|;
 block|}
 annotation|@
 name|Ignore
-comment|// have not tried under optiq (it might work)
+argument_list|(
+literal|"cycles"
+argument_list|)
 annotation|@
 name|Test
 specifier|public
@@ -428,14 +498,12 @@ name|checkPlanning
 argument_list|(
 name|program
 argument_list|,
-literal|"select upper(name) from sales.emps union all"
+literal|"select upper(ename) from emp union all"
 operator|+
-literal|" select lower(name) from sales.emps"
+literal|" select lower(ename) from emp"
 argument_list|)
 expr_stmt|;
 block|}
-annotation|@
-name|Ignore
 annotation|@
 name|Test
 specifier|public
@@ -481,15 +549,12 @@ name|checkPlanning
 argument_list|(
 name|program
 argument_list|,
-literal|"select e1.name from sales.emps e1, sales.depts d, sales.emps e2 "
+literal|"select e1.ename from emp e1, dept d, emp e2 "
 operator|+
 literal|"where e1.deptno = d.deptno and e1.empno = e2.empno"
 argument_list|)
 expr_stmt|;
 block|}
-annotation|@
-name|Ignore
-comment|// have not tried under optiq (it might work)
 annotation|@
 name|Test
 specifier|public
@@ -535,14 +600,12 @@ name|checkPlanning
 argument_list|(
 name|program
 argument_list|,
-literal|"select e1.name from sales.emps e1, sales.depts d, sales.emps e2 "
+literal|"select e1.ename from emp e1, dept d, emp e2 "
 operator|+
 literal|"where e1.deptno = d.deptno and d.deptno = e2.deptno"
 argument_list|)
 expr_stmt|;
 block|}
-annotation|@
-name|Ignore
 annotation|@
 name|Test
 specifier|public
@@ -587,14 +650,12 @@ name|checkPlanning
 argument_list|(
 name|program
 argument_list|,
-literal|"select e.name from sales.emps e, sales.depts d "
+literal|"select e.ename from emp e, dept d "
 operator|+
-literal|"where e.deptno = d.deptno and e.name = 'foo'"
+literal|"where e.deptno = d.deptno and e.ename = 'foo'"
 argument_list|)
 expr_stmt|;
 block|}
-annotation|@
-name|Ignore
 annotation|@
 name|Test
 specifier|public
@@ -639,7 +700,7 @@ name|checkPlanning
 argument_list|(
 name|program
 argument_list|,
-literal|"select e1.name from sales.emps e1, sales.depts d, sales.emps e2 "
+literal|"select e1.ename from emp e1, dept d, emp e2 "
 operator|+
 literal|"where e1.deptno = d.deptno and d.deptno = e2.deptno"
 argument_list|)
@@ -952,9 +1013,6 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
-name|Ignore
-comment|// have not tried under optiq (it might work)
-annotation|@
 name|Test
 specifier|public
 name|void
@@ -998,15 +1056,12 @@ name|checkPlanning
 argument_list|(
 name|program
 argument_list|,
-literal|"select e.name from sales.emps e, sales.depts d "
+literal|"select e.ename from emp e, dept d "
 operator|+
 literal|"where e.deptno = d.deptno"
 argument_list|)
 expr_stmt|;
 block|}
-annotation|@
-name|Ignore
-comment|// have not tried under optiq (it might work)
 annotation|@
 name|Test
 specifier|public
@@ -1058,15 +1113,12 @@ name|checkPlanning
 argument_list|(
 name|program
 argument_list|,
-literal|"select e.name from sales.emps e, sales.depts d "
+literal|"select e.ename from emp e, dept d "
 operator|+
-literal|"where e.deptno = d.deptno and e.name = 'foo'"
+literal|"where e.deptno = d.deptno and e.ename = 'foo'"
 argument_list|)
 expr_stmt|;
 block|}
-annotation|@
-name|Ignore
-comment|// have not tried under optiq (it might work)
 annotation|@
 name|Test
 specifier|public
@@ -1118,15 +1170,12 @@ name|checkPlanning
 argument_list|(
 name|program
 argument_list|,
-literal|"select e1.name from sales.emps e1, sales.depts d, sales.emps e2 "
+literal|"select e1.ename from emp e1, dept d, emp e2 "
 operator|+
 literal|"where e1.deptno = d.deptno and d.deptno = e2.deptno"
 argument_list|)
 expr_stmt|;
 block|}
-annotation|@
-name|Ignore
-comment|// have not tried under optiq (it might work)
 annotation|@
 name|Test
 specifier|public
@@ -1185,7 +1234,7 @@ name|checkPlanning
 argument_list|(
 name|program
 argument_list|,
-literal|"select e1.name from sales.emps e1, sales.depts d, sales.emps e2 "
+literal|"select e1.ename from emp e1, dept d, emp e2 "
 operator|+
 literal|"where e1.deptno = d.deptno and d.deptno = e2.deptno "
 operator|+
@@ -1193,9 +1242,6 @@ literal|"and d.name = 'foo'"
 argument_list|)
 expr_stmt|;
 block|}
-annotation|@
-name|Ignore
-comment|// have not tried under optiq (it might work)
 annotation|@
 name|Test
 specifier|public
@@ -1205,7 +1251,156 @@ parameter_list|()
 throws|throws
 name|Exception
 block|{
-comment|/*     stmt.executeUpdate("create schema oj");     stmt.executeUpdate("set schema 'oj'");     stmt.executeUpdate(         "create table A(a int primary key)");     stmt.executeUpdate(         "create table B(b int primary key)");     stmt.executeUpdate(         "create table C(c int primary key)");     stmt.executeUpdate(         "create table D(d int primary key)");     stmt.executeUpdate(         "create table E(e int primary key)");     stmt.executeUpdate(         "create table F(f int primary key)");     stmt.executeUpdate(         "create table G(g int primary key)");     stmt.executeUpdate(         "create table H(h int primary key)");     stmt.executeUpdate(         "create table I(i int primary key)");     stmt.executeUpdate(         "create table J(j int primary key)"); */
+specifier|final
+name|Tester
+name|tester1
+init|=
+name|tester
+operator|.
+name|withCatalogReaderFactory
+argument_list|(
+operator|new
+name|Function
+argument_list|<
+name|RelDataTypeFactory
+argument_list|,
+name|Prepare
+operator|.
+name|CatalogReader
+argument_list|>
+argument_list|()
+block|{
+specifier|public
+name|Prepare
+operator|.
+name|CatalogReader
+name|apply
+parameter_list|(
+name|RelDataTypeFactory
+name|typeFactory
+parameter_list|)
+block|{
+return|return
+operator|new
+name|MockCatalogReader
+argument_list|(
+name|typeFactory
+argument_list|,
+literal|true
+argument_list|)
+block|{
+annotation|@
+name|Override
+specifier|public
+name|MockCatalogReader
+name|init
+parameter_list|()
+block|{
+comment|// CREATE SCHEMA abc;
+comment|// CREATE TABLE a(a INT);
+comment|// ...
+comment|// CREATE TABLE j(j INT);
+name|MockSchema
+name|schema
+init|=
+operator|new
+name|MockSchema
+argument_list|(
+literal|"SALES"
+argument_list|)
+decl_stmt|;
+name|registerSchema
+argument_list|(
+name|schema
+argument_list|)
+expr_stmt|;
+specifier|final
+name|RelDataType
+name|intType
+init|=
+name|typeFactory
+operator|.
+name|createSqlType
+argument_list|(
+name|SqlTypeName
+operator|.
+name|INTEGER
+argument_list|)
+decl_stmt|;
+for|for
+control|(
+name|int
+name|i
+init|=
+literal|0
+init|;
+name|i
+operator|<
+literal|10
+condition|;
+name|i
+operator|++
+control|)
+block|{
+name|String
+name|t
+init|=
+name|String
+operator|.
+name|valueOf
+argument_list|(
+operator|(
+name|char
+operator|)
+operator|(
+literal|'A'
+operator|+
+name|i
+operator|)
+argument_list|)
+decl_stmt|;
+name|MockTable
+name|table
+init|=
+operator|new
+name|MockTable
+argument_list|(
+name|this
+argument_list|,
+name|schema
+argument_list|,
+name|t
+argument_list|)
+decl_stmt|;
+name|table
+operator|.
+name|addColumn
+argument_list|(
+name|t
+argument_list|,
+name|intType
+argument_list|)
+expr_stmt|;
+name|registerTable
+argument_list|(
+name|table
+argument_list|)
+expr_stmt|;
+block|}
+return|return
+name|this
+return|;
+block|}
+comment|// CHECKSTYLE: IGNORE 1
+block|}
+operator|.
+name|init
+argument_list|()
+return|;
+block|}
+block|}
+argument_list|)
+decl_stmt|;
 name|HepProgram
 name|program
 init|=
@@ -1239,7 +1434,15 @@ argument_list|()
 decl_stmt|;
 name|checkPlanning
 argument_list|(
+name|tester1
+argument_list|,
+literal|null
+argument_list|,
+operator|new
+name|HepPlanner
+argument_list|(
 name|program
+argument_list|)
 argument_list|,
 literal|"select * from "
 operator|+
@@ -1277,9 +1480,6 @@ literal|"    on a = i and h = j"
 argument_list|)
 expr_stmt|;
 block|}
-annotation|@
-name|Ignore
-comment|// have not tried under optiq (it might work)
 annotation|@
 name|Test
 specifier|public
@@ -1326,9 +1526,7 @@ name|program
 argument_list|,
 literal|"select e.* from "
 operator|+
-literal|"(select name, trim(city), age * 2, deptno from sales.emps) e, "
-operator|+
-literal|"sales.depts d "
+literal|"(select ename, trim(job), sal * 2, deptno from emp) e, dept d "
 operator|+
 literal|"where e.deptno = d.deptno"
 argument_list|)
