@@ -53,6 +53,16 @@ end_import
 
 begin_import
 import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Random
+import|;
+end_import
+
+begin_import
+import|import
 name|net
 operator|.
 name|hydromatic
@@ -62,16 +72,6 @@ operator|.
 name|query
 operator|.
 name|Query
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|Random
 import|;
 end_import
 
