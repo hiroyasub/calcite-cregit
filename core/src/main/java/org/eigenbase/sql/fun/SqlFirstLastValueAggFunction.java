@@ -132,8 +132,11 @@ name|boolean
 name|requiresOrder
 parameter_list|()
 block|{
+comment|// Allow the user to shoot herself into the foot by using first_value
+comment|// and/or last_value without order by. This will result in undefined
+comment|// behaviour, however lots of databases allow that.
 return|return
-literal|true
+literal|false
 return|;
 block|}
 specifier|public

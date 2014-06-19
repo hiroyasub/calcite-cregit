@@ -1446,18 +1446,6 @@ function_decl|;
 annotation|@
 name|BaseMessage
 argument_list|(
-literal|"Window boundary must be constant"
-argument_list|)
-name|ExInst
-argument_list|<
-name|SqlValidatorException
-argument_list|>
-name|rangeOrRowMustBeConstant
-parameter_list|()
-function_decl|;
-annotation|@
-name|BaseMessage
-argument_list|(
 literal|"ROWS value must be a non-negative integral constant"
 argument_list|)
 name|ExInst
@@ -2497,21 +2485,6 @@ argument_list|<
 name|RuntimeException
 argument_list|>
 name|firstParameterOfAdd
-parameter_list|(
-name|String
-name|className
-parameter_list|)
-function_decl|;
-annotation|@
-name|BaseMessage
-argument_list|(
-literal|"In user-defined aggregate class ''{0}'', parameter types of ''initAdd'' method must be same as value type(s)"
-argument_list|)
-name|ExInst
-argument_list|<
-name|RuntimeException
-argument_list|>
-name|initAddWrongParamTypes
 parameter_list|(
 name|String
 name|className

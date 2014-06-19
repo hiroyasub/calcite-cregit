@@ -35,18 +35,6 @@ end_import
 
 begin_import
 import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
-name|sql
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
 name|com
 operator|.
 name|google
@@ -87,12 +75,12 @@ name|orderKeys
 decl_stmt|;
 specifier|private
 specifier|final
-name|SqlNode
+name|RexWindowBound
 name|lowerBound
 decl_stmt|;
 specifier|private
 specifier|final
-name|SqlNode
+name|RexWindowBound
 name|upperBound
 decl_stmt|;
 specifier|private
@@ -121,10 +109,10 @@ name|RexFieldCollation
 argument_list|>
 name|orderKeys
 parameter_list|,
-name|SqlNode
+name|RexWindowBound
 name|lowerBound
 parameter_list|,
-name|SqlNode
+name|RexWindowBound
 name|upperBound
 parameter_list|,
 name|boolean
@@ -594,7 +582,7 @@ argument_list|()
 return|;
 block|}
 specifier|public
-name|SqlNode
+name|RexWindowBound
 name|getLowerBound
 parameter_list|()
 block|{
@@ -603,7 +591,7 @@ name|lowerBound
 return|;
 block|}
 specifier|public
-name|SqlNode
+name|RexWindowBound
 name|getUpperBound
 parameter_list|()
 block|{

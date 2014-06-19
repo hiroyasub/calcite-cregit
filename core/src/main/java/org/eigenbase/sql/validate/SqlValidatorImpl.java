@@ -15420,7 +15420,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|// Fill in missing bounds. Default bounds are "BETWEEN UNBOUNDED PRECEDING
-comment|// AND CURRENT ROW". (That has no effect if there is no ORDER BY clause.)
+comment|// AND CURRENT ROW" when ORDER BY present and "BETWEEN UNBOUNDED PRECEDING
+comment|// AND UNBOUNDED FOLLOWING" when no ORDER BY present.
 if|if
 condition|(
 name|populateBounds
@@ -15493,17 +15494,43 @@ operator|==
 literal|null
 condition|)
 block|{
+name|SqlParserPos
+name|pos
+init|=
+name|window
+operator|.
+name|getOrderList
+argument_list|()
+operator|.
+name|getParserPosition
+argument_list|()
+decl_stmt|;
 name|window
 operator|.
 name|setUpperBound
 argument_list|(
+name|window
+operator|.
+name|getOrderList
+argument_list|()
+operator|.
+name|size
+argument_list|()
+operator|==
+literal|0
+condition|?
+name|SqlWindow
+operator|.
+name|createUnboundedFollowing
+argument_list|(
+name|pos
+argument_list|)
+else|:
 name|SqlWindow
 operator|.
 name|createCurrentRow
 argument_list|(
-name|SqlParserPos
-operator|.
-name|ZERO
+name|pos
 argument_list|)
 argument_list|)
 expr_stmt|;

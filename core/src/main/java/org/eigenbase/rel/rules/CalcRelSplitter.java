@@ -1434,6 +1434,56 @@ break|break;
 block|}
 block|}
 block|}
+if|if
+condition|(
+name|levelCount
+operator|>
+literal|0
+condition|)
+block|{
+comment|// The latest level should be CalcRelType otherwise literals cannot be
+comment|// implemented.
+assert|assert
+literal|"CalcRelType"
+operator|.
+name|equals
+argument_list|(
+name|relTypes
+index|[
+literal|0
+index|]
+operator|.
+name|name
+argument_list|)
+operator|:
+literal|"The first RelType should be CalcRelType for proper RexLiteral"
+operator|+
+literal|" implementation at the last level, got "
+operator|+
+name|relTypes
+index|[
+literal|0
+index|]
+operator|.
+name|name
+assert|;
+if|if
+condition|(
+name|levelTypeOrdinals
+index|[
+name|levelCount
+operator|-
+literal|1
+index|]
+operator|!=
+literal|0
+condition|)
+block|{
+name|levelCount
+operator|++
+expr_stmt|;
+block|}
+block|}
 return|return
 name|levelCount
 return|;

@@ -971,10 +971,10 @@ name|RexFieldCollation
 argument_list|>
 name|orderKeys
 parameter_list|,
-name|SqlNode
+name|RexWindowBound
 name|lowerBound
 parameter_list|,
-name|SqlNode
+name|RexWindowBound
 name|upperBound
 parameter_list|,
 name|boolean
@@ -1243,10 +1243,10 @@ name|RexFieldCollation
 argument_list|>
 name|orderKeys
 parameter_list|,
-name|SqlNode
+name|RexWindowBound
 name|lowerBound
 parameter_list|,
-name|SqlNode
+name|RexWindowBound
 name|upperBound
 parameter_list|,
 name|boolean

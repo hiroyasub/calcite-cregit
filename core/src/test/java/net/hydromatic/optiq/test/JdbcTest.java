@@ -257,6 +257,20 @@ name|optiq
 operator|.
 name|prepare
 operator|.
+name|OptiqPrepareImpl
+import|;
+end_import
+
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|optiq
+operator|.
+name|prepare
+operator|.
 name|Prepare
 import|;
 end_import
@@ -360,18 +374,6 @@ operator|.
 name|reltype
 operator|.
 name|RelProtoDataType
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
-name|resource
-operator|.
-name|EigenbaseNewResource
 import|;
 end_import
 
@@ -11318,17 +11320,19 @@ argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"select sum(\"salary\" + \"empid\") over w as s,\n"
+literal|"select"
+operator|+
+literal|" \"deptno\",\n"
+operator|+
+literal|" \"empid\",\n"
+operator|+
+literal|"sum(\"salary\" + \"empid\") over w as s,\n"
 operator|+
 literal|" 5 as five,\n"
 operator|+
 literal|" min(\"salary\") over w as m,\n"
 operator|+
-literal|" count(*) over w as c,\n"
-operator|+
-literal|" \"deptno\",\n"
-operator|+
-literal|" \"empid\"\n"
+literal|" count(*) over w as c\n"
 operator|+
 literal|"from \"hr\".\"emps\"\n"
 operator|+
@@ -11337,33 +11341,37 @@ argument_list|)
 operator|.
 name|typeIs
 argument_list|(
-literal|"[S REAL, FIVE INTEGER NOT NULL, M REAL, C BIGINT, deptno INTEGER NOT NULL, empid INTEGER NOT NULL]"
+literal|"[deptno INTEGER NOT NULL, empid INTEGER NOT NULL, S REAL, FIVE INTEGER NOT NULL, M REAL, C BIGINT]"
 argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"EnumerableCalcRel(expr#0..7=[{inputs}], expr#8=[0], expr#9=[>($t4, $t8)], expr#10=[null], expr#11=[CASE($t9, $t5, $t10)], expr#12=[CAST($t11):JavaType(class java.lang.Float)], expr#13=[5], expr#14=[CAST($t6):JavaType(class java.lang.Float)], expr#15=[CAST($t7):BIGINT], S=[$t12], FIVE=[$t13], M=[$t14], C=[$t15], deptno=[$t1], empid=[$t0])\n"
+literal|"EnumerableCalcRel(expr#0..7=[{inputs}], expr#8=[0], expr#9=[>($t4, $t8)], expr#10=[null], expr#11=[CASE($t9, $t5, $t10)], expr#12=[CAST($t11):JavaType(class java.lang.Float)], expr#13=[5], expr#14=[CAST($t6):JavaType(class java.lang.Float)], expr#15=[CAST($t7):BIGINT], deptno=[$t1], empid=[$t0], S=[$t12], FIVE=[$t13], M=[$t14], C=[$t15])\n"
 operator|+
-literal|"  EnumerableWindowRel(window#0=[window(partition {1} order by [0] rows between 1 PRECEDING and CURRENT ROW aggs [COUNT($3), $SUM0($3), MIN($2), COUNT()])])\n"
+literal|"  EnumerableWindowRel(window#0=[window(partition {1} order by [0] rows between $4 PRECEDING and CURRENT ROW aggs [COUNT($3), $SUM0($3), MIN($2), COUNT()])])\n"
 operator|+
 literal|"    EnumerableCalcRel(expr#0..4=[{inputs}], expr#5=[+($t3, $t0)], proj#0..1=[{exprs}], salary=[$t3], $3=[$t5])\n"
 operator|+
 literal|"      EnumerableTableAccessRel(table=[[hr, emps]])\n"
 argument_list|)
 operator|.
-name|returns
+name|returnsUnordered
 argument_list|(
-literal|"S=8200.0; FIVE=5; M=8000.0; C=1; deptno=20; empid=200\n"
-operator|+
-literal|"S=10100.0; FIVE=5; M=10000.0; C=1; deptno=10; empid=100\n"
-operator|+
-literal|"S=23220.0; FIVE=5; M=11500.0; C=2; deptno=10; empid=110\n"
-operator|+
-literal|"S=14300.0; FIVE=5; M=7000.0; C=2; deptno=10; empid=150\n"
+literal|"deptno=10; empid=100; S=10100.0; FIVE=5; M=10000.0; C=1"
+argument_list|,
+literal|"deptno=10; empid=110; S=21710.0; FIVE=5; M=10000.0; C=2"
+argument_list|,
+literal|"deptno=10; empid=150; S=18760.0; FIVE=5; M=7000.0; C=2"
+argument_list|,
+literal|"deptno=20; empid=200; S=8200.0; FIVE=5; M=8000.0; C=1"
 argument_list|)
 operator|.
 name|planContains
 argument_list|(
+name|OptiqPrepareImpl
+operator|.
+name|DEBUG
+condition|?
 literal|"_list.add(new Object[] {\n"
 operator|+
 literal|"        row[0],\n"
@@ -11375,31 +11383,50 @@ literal|"        row[2],\n"
 operator|+
 literal|"        row[3],\n"
 operator|+
-literal|"        w0$o0,\n"
+literal|"        COUNTa0w0,\n"
 operator|+
-literal|"        w0$o1,\n"
+literal|"        $SUM0a1w0,\n"
 operator|+
-literal|"        w0$o2,\n"
+literal|"        MINa2w0,\n"
 operator|+
-literal|"        w0$o3});"
+literal|"        COUNTa3w0});"
+else|:
+literal|"_list.add(new Object[] {\n"
+operator|+
+literal|"        row[0],\n"
+comment|// box-unbox is optimized
+operator|+
+literal|"        row[1],\n"
+operator|+
+literal|"        row[2],\n"
+operator|+
+literal|"        row[3],\n"
+operator|+
+literal|"        a0w0,\n"
+operator|+
+literal|"        a1w0,\n"
+operator|+
+literal|"        a2w0,\n"
+operator|+
+literal|"        a3w0});"
 argument_list|)
 operator|.
 name|planContains
 argument_list|(
 literal|"return new Object[] {\n"
 operator|+
+literal|"                  current[1],\n"
+operator|+
+literal|"                  current[0],\n"
+operator|+
 literal|"                  net.hydromatic.optiq.runtime.SqlFunctions.toLong(current[4])> 0L ? (Float) current[5] : (Float) null,\n"
 operator|+
 literal|"                  5,\n"
 operator|+
 literal|"                  (Float) current[6],\n"
-operator|+
-literal|"                  (Long) current[7],\n"
 comment|// box-unbox eliminated
 operator|+
-literal|"                  current[1],\n"
-operator|+
-literal|"                  current[0]};"
+literal|"                  (Long) current[7]};\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -11427,7 +11454,13 @@ argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"select sum(\"salary\" + \"empid\") over w as s,\n"
+literal|"select"
+operator|+
+literal|" \"deptno\",\n"
+operator|+
+literal|" \"empid\",\n"
+operator|+
+literal|"sum(\"salary\" + \"empid\") over w as s,\n"
 operator|+
 literal|" 5 as five,\n"
 operator|+
@@ -11439,11 +11472,7 @@ literal|" count(*) over w2 as c2,\n"
 operator|+
 literal|" count(*) over w11 as c11,\n"
 operator|+
-literal|" count(*) over w11dept as c11dept,\n"
-operator|+
-literal|" \"deptno\",\n"
-operator|+
-literal|" \"empid\"\n"
+literal|" count(*) over w11dept as c11dept\n"
 operator|+
 literal|"from \"hr\".\"emps\"\n"
 operator|+
@@ -11458,7 +11487,7 @@ argument_list|)
 operator|.
 name|typeIs
 argument_list|(
-literal|"[S REAL, FIVE INTEGER NOT NULL, M REAL, C BIGINT, C2 BIGINT, C11 BIGINT, C11DEPT BIGINT, deptno INTEGER NOT NULL, empid INTEGER NOT NULL]"
+literal|"[deptno INTEGER NOT NULL, empid INTEGER NOT NULL, S REAL, FIVE INTEGER NOT NULL, M REAL, C BIGINT, C2 BIGINT, C11 BIGINT, C11DEPT BIGINT]"
 argument_list|)
 comment|// Check that optimizes for window whose PARTITION KEY is empty
 operator|.
@@ -11467,15 +11496,15 @@ argument_list|(
 literal|"tempList.size()"
 argument_list|)
 operator|.
-name|returns
+name|returnsUnordered
 argument_list|(
-literal|"S=16400.0; FIVE=5; M=8000.0; C=2; C2=3; C11=2; C11DEPT=1; deptno=20; empid=200\n"
-operator|+
-literal|"S=10100.0; FIVE=5; M=10000.0; C=1; C2=1; C11=2; C11DEPT=2; deptno=10; empid=100\n"
-operator|+
-literal|"S=23220.0; FIVE=5; M=11500.0; C=2; C2=2; C11=3; C11DEPT=3; deptno=10; empid=110\n"
-operator|+
-literal|"S=14300.0; FIVE=5; M=7000.0; C=2; C2=3; C11=3; C11DEPT=2; deptno=10; empid=150\n"
+literal|"deptno=20; empid=200; S=15350.0; FIVE=5; M=7000.0; C=2; C2=3; C11=2; C11DEPT=1"
+argument_list|,
+literal|"deptno=10; empid=100; S=10100.0; FIVE=5; M=10000.0; C=1; C2=1; C11=2; C11DEPT=2"
+argument_list|,
+literal|"deptno=10; empid=110; S=21710.0; FIVE=5; M=10000.0; C=2; C2=2; C11=3; C11DEPT=3"
+argument_list|,
+literal|"deptno=10; empid=150; S=18760.0; FIVE=5; M=7000.0; C=2; C2=3; C11=3; C11DEPT=2"
 argument_list|)
 expr_stmt|;
 block|}
@@ -11487,6 +11516,30 @@ name|void
 name|testWinAggScalarNonNullPhysType
 parameter_list|()
 block|{
+name|String
+name|planLine
+init|=
+literal|"a0s0w0 = net.hydromatic.optiq.runtime.SqlFunctions.lesser(a0s0w0, net.hydromatic.optiq.runtime.SqlFunctions.toFloat(_rows[j]));"
+decl_stmt|;
+if|if
+condition|(
+name|OptiqPrepareImpl
+operator|.
+name|DEBUG
+condition|)
+block|{
+name|planLine
+operator|=
+name|planLine
+operator|.
+name|replaceAll
+argument_list|(
+literal|"a0s0w0"
+argument_list|,
+literal|"MINa0s0w0"
+argument_list|)
+expr_stmt|;
+block|}
 name|OptiqAssert
 operator|.
 name|that
@@ -11517,18 +11570,18 @@ argument_list|)
 operator|.
 name|planContains
 argument_list|(
-literal|"final float row = net.hydromatic.optiq.runtime.SqlFunctions.toFloat(_rows[i]);"
+name|planLine
 argument_list|)
 operator|.
 name|returnsUnordered
 argument_list|(
 literal|"M=7001.0"
 argument_list|,
+literal|"M=7001.0"
+argument_list|,
 literal|"M=8001.0"
 argument_list|,
 literal|"M=10001.0"
-argument_list|,
-literal|"M=11501.0"
 argument_list|)
 expr_stmt|;
 block|}
@@ -11540,6 +11593,30 @@ name|void
 name|testWinAggScalarNonNullPhysTypePlusOne
 parameter_list|()
 block|{
+name|String
+name|planLine
+init|=
+literal|"a0s0w0 = net.hydromatic.optiq.runtime.SqlFunctions.lesser(a0s0w0, net.hydromatic.optiq.runtime.SqlFunctions.toFloat(_rows[j]));"
+decl_stmt|;
+if|if
+condition|(
+name|OptiqPrepareImpl
+operator|.
+name|DEBUG
+condition|)
+block|{
+name|planLine
+operator|=
+name|planLine
+operator|.
+name|replaceAll
+argument_list|(
+literal|"a0s0w0"
+argument_list|,
+literal|"MINa0s0w0"
+argument_list|)
+expr_stmt|;
+block|}
 name|OptiqAssert
 operator|.
 name|that
@@ -11570,18 +11647,18 @@ argument_list|)
 operator|.
 name|planContains
 argument_list|(
-literal|"final float row = net.hydromatic.optiq.runtime.SqlFunctions.toFloat(_rows[i]);"
+name|planLine
 argument_list|)
 operator|.
 name|returnsUnordered
 argument_list|(
 literal|"M=7002.0"
 argument_list|,
+literal|"M=7002.0"
+argument_list|,
 literal|"M=8002.0"
 argument_list|,
 literal|"M=10002.0"
-argument_list|,
-literal|"M=11502.0"
 argument_list|)
 expr_stmt|;
 block|}
@@ -11631,15 +11708,488 @@ argument_list|(
 literal|"[deptno INTEGER NOT NULL, empid INTEGER NOT NULL, commission INTEGER, RCNF INTEGER, RCNL INTEGER, R INTEGER, RD INTEGER]"
 argument_list|)
 operator|.
-name|returns
+name|returnsUnordered
 argument_list|(
-literal|"deptno=20; empid=200; commission=500; RCNF=1; RCNL=1; R=1; RD=1\n"
+literal|"deptno=10; empid=100; commission=1000; RCNF=2; RCNL=1; R=1; RD=3"
+argument_list|,
+literal|"deptno=10; empid=110; commission=250; RCNF=3; RCNL=2; R=2; RD=2"
+argument_list|,
+literal|"deptno=10; empid=150; commission=null; RCNF=1; RCNL=3; R=3; RD=1"
+argument_list|,
+literal|"deptno=20; empid=200; commission=500; RCNF=1; RCNL=1; R=1; RD=1"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests for RANK with same values */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWinAggRankValues
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select  \"deptno\",\n"
 operator|+
-literal|"deptno=10; empid=150; commission=null; RCNF=1; RCNL=3; R=3; RD=1\n"
+literal|" rank() over (order by \"deptno\") as r\n"
 operator|+
-literal|"deptno=10; empid=110; commission=250; RCNF=3; RCNL=2; R=2; RD=2\n"
+literal|"from \"hr\".\"emps\""
+argument_list|)
+operator|.
+name|typeIs
+argument_list|(
+literal|"[deptno INTEGER NOT NULL, R INTEGER]"
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"deptno=10; R=1"
+argument_list|,
+literal|"deptno=10; R=1"
+argument_list|,
+literal|"deptno=10; R=1"
+argument_list|,
+literal|"deptno=20; R=4"
+argument_list|)
+expr_stmt|;
+comment|// 4 for rank and 2 for dense_rank
+block|}
+comment|/** Tests for RANK with same values */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWinAggRankValuesDesc
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select  \"deptno\",\n"
 operator|+
-literal|"deptno=10; empid=100; commission=1000; RCNF=2; RCNL=1; R=1; RD=3\n"
+literal|" rank() over (order by \"deptno\" desc) as r\n"
+operator|+
+literal|"from \"hr\".\"emps\""
+argument_list|)
+operator|.
+name|typeIs
+argument_list|(
+literal|"[deptno INTEGER NOT NULL, R INTEGER]"
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"deptno=10; R=2"
+argument_list|,
+literal|"deptno=10; R=2"
+argument_list|,
+literal|"deptno=10; R=2"
+argument_list|,
+literal|"deptno=20; R=1"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests for DENSE_RANK with same values */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWinAggDenseRankValues
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select  \"deptno\",\n"
+operator|+
+literal|" dense_rank() over (order by \"deptno\") as r\n"
+operator|+
+literal|"from \"hr\".\"emps\""
+argument_list|)
+operator|.
+name|typeIs
+argument_list|(
+literal|"[deptno INTEGER NOT NULL, R INTEGER]"
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"deptno=10; R=1"
+argument_list|,
+literal|"deptno=10; R=1"
+argument_list|,
+literal|"deptno=10; R=1"
+argument_list|,
+literal|"deptno=20; R=2"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests for DENSE_RANK with same values */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWinAggDenseRankValuesDesc
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select  \"deptno\",\n"
+operator|+
+literal|" dense_rank() over (order by \"deptno\" desc) as r\n"
+operator|+
+literal|"from \"hr\".\"emps\""
+argument_list|)
+operator|.
+name|typeIs
+argument_list|(
+literal|"[deptno INTEGER NOT NULL, R INTEGER]"
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"deptno=10; R=2"
+argument_list|,
+literal|"deptno=10; R=2"
+argument_list|,
+literal|"deptno=10; R=2"
+argument_list|,
+literal|"deptno=20; R=1"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests for DATE +- INTERVAL window frame */
+annotation|@
+name|Ignore
+argument_list|(
+literal|"DATE/TIMESTAMP/INTERVAL support is broken:"
+operator|+
+literal|"1 year is converted to 12 months instead of milliseconds"
+argument_list|)
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWinIntervalFrame
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select  \"deptno\",\n"
+operator|+
+literal|" \"empid\",\n"
+operator|+
+literal|" \"hire_date\",\n"
+operator|+
+literal|" count(*) over (partition by \"deptno\" order by \"hire_date\""
+operator|+
+literal|" range between interval '1' year preceding and interval '1' year following) as r\n"
+operator|+
+literal|"from (select \"empid\", \"deptno\",\n"
+operator|+
+literal|"  DATE '2014-06-12' + \"empid\"*interval '0' day \"hire_date\"\n"
+operator|+
+literal|"  from \"hr\".\"emps\")"
+argument_list|)
+operator|.
+name|typeIs
+argument_list|(
+literal|"[deptno INTEGER NOT NULL, empid INTEGER NOT NULL, hire_date DATE NOT NULL, R BIGINT]"
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"deptno=10; R=1"
+argument_list|,
+literal|"deptno=10; R=1"
+argument_list|,
+literal|"deptno=10; R=1"
+argument_list|,
+literal|"deptno=20; R=4"
+argument_list|)
+expr_stmt|;
+comment|// 4 for rank and 2 for dense_rank
+block|}
+comment|/** Tests for FIRST_VALUE */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWinAggFirstValue
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select  \"deptno\",\n"
+operator|+
+literal|" \"empid\",\n"
+operator|+
+literal|" \"commission\",\n"
+operator|+
+literal|" first_value(\"commission\") over (partition by \"deptno\" order by \"empid\") as r\n"
+operator|+
+literal|"from \"hr\".\"emps\""
+argument_list|)
+operator|.
+name|typeIs
+argument_list|(
+literal|"[deptno INTEGER NOT NULL, empid INTEGER NOT NULL, commission INTEGER, R INTEGER]"
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"deptno=10; empid=100; commission=1000; R=1000"
+argument_list|,
+literal|"deptno=10; empid=110; commission=250; R=1000"
+argument_list|,
+literal|"deptno=10; empid=150; commission=null; R=1000"
+argument_list|,
+literal|"deptno=20; empid=200; commission=500; R=500"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests for FIRST_VALUE desc */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWinAggFirstValueDesc
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select  \"deptno\",\n"
+operator|+
+literal|" \"empid\",\n"
+operator|+
+literal|" \"commission\",\n"
+operator|+
+literal|" first_value(\"commission\") over (partition by \"deptno\" order by \"empid\" desc) as r\n"
+operator|+
+literal|"from \"hr\".\"emps\""
+argument_list|)
+operator|.
+name|typeIs
+argument_list|(
+literal|"[deptno INTEGER NOT NULL, empid INTEGER NOT NULL, commission INTEGER, R INTEGER]"
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"deptno=10; empid=100; commission=1000; R=null"
+argument_list|,
+literal|"deptno=10; empid=110; commission=250; R=null"
+argument_list|,
+literal|"deptno=10; empid=150; commission=null; R=null"
+argument_list|,
+literal|"deptno=20; empid=200; commission=500; R=500"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests for FIRST_VALUE empty window */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWinAggFirstValueEmptyWindow
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select \"deptno\",\n"
+operator|+
+literal|" \"empid\",\n"
+operator|+
+literal|" \"commission\",\n"
+operator|+
+literal|" first_value(\"commission\") over (partition by \"deptno\" order by \"empid\" desc range between 1000 preceding and 999 preceding) as r\n"
+operator|+
+literal|"from \"hr\".\"emps\""
+argument_list|)
+operator|.
+name|typeIs
+argument_list|(
+literal|"[deptno INTEGER NOT NULL, empid INTEGER NOT NULL, commission INTEGER, R INTEGER]"
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"deptno=10; empid=100; commission=1000; R=null"
+argument_list|,
+literal|"deptno=10; empid=110; commission=250; R=null"
+argument_list|,
+literal|"deptno=10; empid=150; commission=null; R=null"
+argument_list|,
+literal|"deptno=20; empid=200; commission=500; R=null"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests for ROW_NUMBER */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWinRowNumber
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select \"deptno\",\n"
+operator|+
+literal|" \"empid\",\n"
+operator|+
+literal|" \"commission\",\n"
+operator|+
+literal|" row_number() over (partition by \"deptno\" order by \"commission\" desc nulls first) as rcnf,\n"
+operator|+
+literal|" row_number() over (partition by \"deptno\" order by \"commission\" desc nulls last) as rcnl,\n"
+operator|+
+literal|" row_number() over (partition by \"deptno\" order by \"empid\") as r,\n"
+operator|+
+literal|" row_number() over (partition by \"deptno\" order by \"empid\" desc) as rd\n"
+operator|+
+literal|"from \"hr\".\"emps\""
+argument_list|)
+operator|.
+name|typeIs
+argument_list|(
+literal|"[deptno INTEGER NOT NULL, empid INTEGER NOT NULL, commission INTEGER, RCNF INTEGER, RCNL INTEGER, R INTEGER, RD INTEGER]"
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"deptno=10; empid=100; commission=1000; RCNF=2; RCNL=1; R=1; RD=3"
+argument_list|,
+literal|"deptno=10; empid=110; commission=250; RCNF=3; RCNL=2; R=2; RD=2"
+argument_list|,
+literal|"deptno=10; empid=150; commission=null; RCNF=1; RCNL=3; R=3; RD=1"
+argument_list|,
+literal|"deptno=20; empid=200; commission=500; RCNF=1; RCNL=1; R=1; RD=1"
 argument_list|)
 expr_stmt|;
 block|}
@@ -11690,7 +12240,7 @@ literal|"empid=110; M=2"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Tests windowed aggregation with no ORDER BY clause.    *    *<p>Test case for    *<a href="https://github.com/julianhyde/optiq/issues/285">issue #285</a>,    * "Window functions throw exception without ORDER BY".    *    *<p>Note:</p>    *    *<ul>    *<li>With no ORDER BY, the window is over all rows in the partition.    *<li>With an ORDER BY, the implicit frame is 'BETWEEN UNBOUNDED PRECEDING    *     AND CURRENT ROW'.    *<li>With no ORDER BY or PARTITION BY, the window contains all rows in the    *     table.    *</ul>    */
+comment|/** Tests windowed aggregation with no ORDER BY clause.    *    *<p>Test case for    *<a href="https://github.com/julianhyde/optiq/issues/285">issue #285</a>,    * "Window functions throw exception without ORDER BY".    *    *<p>Note:</p>    *    *<ul>    *<li>With no ORDER BY, the window is over all rows in the partition.    *<li>With an ORDER BY, the implicit frame is 'RANGE BETWEEN    *     UNBOUNDED PRECEDING AND CURRENT ROW'.    *<li>With no ORDER BY or PARTITION BY, the window contains all rows in the    *     table.    *</ul>    */
 annotation|@
 name|Test
 specifier|public
@@ -11698,7 +12248,7 @@ name|void
 name|testOverNoOrder
 parameter_list|()
 block|{
-comment|// If no range is specified, default is "ROWS BETWEEN UNBOUNDED PRECEDING
+comment|// If no range is specified, default is "RANGE BETWEEN UNBOUNDED PRECEDING
 comment|// AND CURRENT ROW".
 comment|// The aggregate function is within the current partition;
 comment|// if there is no partition, that means the whole table.
@@ -11777,6 +12327,53 @@ argument_list|,
 literal|"M=1"
 argument_list|,
 literal|"M=1"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests multiple window aggregates over constants.    * This tests that EnumerableWindowRel is able to reference the right slot    * when accessing constant for aggregation argument.*/
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWinAggConstantMultipleConstants
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select \"deptno\", sum(1) over (partition by \"deptno\"\n"
+operator|+
+literal|"  order by \"empid\" rows between unbounded preceding and current row) as a,\n"
+operator|+
+literal|" sum(-1) over (partition by \"deptno\"\n"
+operator|+
+literal|"  order by \"empid\" rows between unbounded preceding and current row) as b\n"
+operator|+
+literal|"from \"hr\".\"emps\""
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"deptno=10; A=1; B=-1"
+argument_list|,
+literal|"deptno=10; A=2; B=-2"
+argument_list|,
+literal|"deptno=10; A=3; B=-3"
+argument_list|,
+literal|"deptno=20; A=1; B=-1"
 argument_list|)
 expr_stmt|;
 block|}
@@ -15324,38 +15921,6 @@ argument_list|(
 literal|"deptno=20; P=20"
 argument_list|,
 literal|"deptno=10; P=30"
-argument_list|)
-expr_stmt|;
-block|}
-comment|/** Test for {@link EigenbaseNewResource#initAddWrongParamTypes(String)}. */
-annotation|@
-name|Test
-specifier|public
-name|void
-name|testUserDefinedAggregateFunction2
-parameter_list|()
-throws|throws
-name|Exception
-block|{
-name|Util
-operator|.
-name|discard
-argument_list|(
-name|EigenbaseNewResource
-operator|.
-name|class
-argument_list|)
-expr_stmt|;
-name|withBadUdf
-argument_list|(
-name|SumFunctionBadInitAdd
-operator|.
-name|class
-argument_list|)
-operator|.
-name|connectThrows
-argument_list|(
-literal|"In user-defined aggregate class 'net.hydromatic.optiq.test.JdbcTest$SumFunctionBadInitAdd', parameter types of 'initAdd' method must be same as value type(s)"
 argument_list|)
 expr_stmt|;
 block|}
@@ -21328,18 +21893,6 @@ return|;
 block|}
 specifier|public
 name|long
-name|initAdd
-parameter_list|(
-name|int
-name|v
-parameter_list|)
-block|{
-return|return
-name|v
-return|;
-block|}
-specifier|public
-name|long
 name|add
 parameter_list|(
 name|long
@@ -21404,19 +21957,6 @@ block|}
 specifier|public
 specifier|static
 name|long
-name|initAdd
-parameter_list|(
-name|int
-name|v
-parameter_list|)
-block|{
-return|return
-name|v
-return|;
-block|}
-specifier|public
-specifier|static
-name|long
 name|add
 parameter_list|(
 name|long
@@ -21461,50 +22001,6 @@ parameter_list|)
 block|{
 return|return
 name|accumulator
-return|;
-block|}
-block|}
-specifier|public
-specifier|static
-class|class
-name|SumFunctionBadInitAdd
-block|{
-specifier|public
-name|long
-name|init
-parameter_list|()
-block|{
-return|return
-literal|0L
-return|;
-block|}
-specifier|public
-name|long
-name|initAdd
-parameter_list|(
-name|int
-name|v
-parameter_list|)
-block|{
-return|return
-name|v
-return|;
-block|}
-specifier|public
-name|long
-name|add
-parameter_list|(
-name|long
-name|accumulator
-parameter_list|,
-name|long
-name|v
-parameter_list|)
-block|{
-return|return
-name|accumulator
-operator|+
-name|v
 return|;
 block|}
 block|}

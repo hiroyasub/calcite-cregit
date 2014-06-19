@@ -10245,7 +10245,7 @@ literal|"order by deptno "
 operator|+
 literal|"rows between unbounded preceding and unbounded following)^"
 argument_list|,
-literal|"UNBOUNDED FOLLOWING window not supported"
+literal|null
 argument_list|)
 expr_stmt|;
 name|checkWinFuncExp
@@ -10256,7 +10256,7 @@ literal|"order by deptno "
 operator|+
 literal|"rows between CURRENT ROW and unbounded following)^"
 argument_list|,
-literal|"UNBOUNDED FOLLOWING window not supported"
+literal|null
 argument_list|)
 expr_stmt|;
 name|checkWinFuncExp
@@ -10827,11 +10827,12 @@ name|void
 name|testWindowNegative
 parameter_list|()
 block|{
+comment|// Do not fail when window has negative size. Allow
 specifier|final
 name|String
 name|negSize
 init|=
-literal|"Window has negative size"
+literal|null
 decl_stmt|;
 name|checkNegWindow
 argument_list|(
@@ -10861,11 +10862,12 @@ argument_list|,
 literal|null
 argument_list|)
 expr_stmt|;
+comment|// Unbounded following IS supported
 specifier|final
 name|String
 name|unboundedFollowing
 init|=
-literal|"UNBOUNDED FOLLOWING window not supported"
+literal|null
 decl_stmt|;
 name|checkNegWindow
 argument_list|(

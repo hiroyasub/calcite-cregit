@@ -6238,6 +6238,8 @@ expr_stmt|;
 comment|// Chained string literals are valid syntax. They are unlikely to be
 comment|// semantically valid, because intervals are usually numeric or
 comment|// datetime.
+comment|// Note: literal chain is not yet replaced with combined literal
+comment|// since we are just parsing, and not validating the sql.
 name|check
 argument_list|(
 literal|"select count(*) over w from emp window w as (\n"
@@ -6250,7 +6252,7 @@ literal|"SELECT (COUNT(*) OVER `W`)\n"
 operator|+
 literal|"FROM `EMP`\n"
 operator|+
-literal|"WINDOW `W` AS (ROWS 'foobarbaz' PRECEDING)"
+literal|"WINDOW `W` AS (ROWS 'foo'\n'bar'\n'baz' PRECEDING)"
 argument_list|)
 expr_stmt|;
 comment|// Partition clause out of place. Found after ORDER BY

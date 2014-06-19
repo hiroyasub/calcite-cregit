@@ -1194,14 +1194,18 @@ argument_list|(
 name|actualList
 argument_list|)
 expr_stmt|;
-name|assertThat
-argument_list|(
-name|actualList
-argument_list|,
-name|equalTo
+comment|// Use assertArrayEquals since it implements fine-grained comparison.
+name|assertArrayEquals
 argument_list|(
 name|expectedList
-argument_list|)
+operator|.
+name|toArray
+argument_list|()
+argument_list|,
+name|actualList
+operator|.
+name|toArray
+argument_list|()
 argument_list|)
 expr_stmt|;
 return|return
