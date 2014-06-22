@@ -11501,6 +11501,48 @@ literal|"deptno=10"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWithOrderBy
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"with emp2 as (select * from \"hr\".\"emps\")\n"
+operator|+
+literal|"select * from emp2\n"
+operator|+
+literal|"order by \"deptno\" desc, \"empid\" desc"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"empid=200; deptno=20; name=Eric; salary=8000.0; commission=500\n"
+operator|+
+literal|"empid=150; deptno=10; name=Sebastian; salary=7000.0; commission=null\n"
+operator|+
+literal|"empid=110; deptno=10; name=Theodore; salary=11500.0; commission=250\n"
+operator|+
+literal|"empid=100; deptno=10; name=Bill; salary=10000.0; commission=1000\n"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Tests windowed aggregation. */
 annotation|@
 name|Test
