@@ -4981,6 +4981,10 @@ name|result
 parameter_list|)
 block|{
 return|return
+name|RexToLixTranslator
+operator|.
+name|convert
+argument_list|(
 name|result
 operator|.
 name|accumulator
@@ -4989,6 +4993,12 @@ operator|.
 name|get
 argument_list|(
 literal|1
+argument_list|)
+argument_list|,
+name|info
+operator|.
+name|returnType
+argument_list|()
 argument_list|)
 return|;
 block|}
@@ -5806,6 +5816,10 @@ operator|.
 name|hasRows
 argument_list|()
 argument_list|,
+name|RexToLixTranslator
+operator|.
+name|convert
+argument_list|(
 name|winResult
 operator|.
 name|arguments
@@ -5828,6 +5842,12 @@ operator|.
 name|get
 argument_list|(
 literal|0
+argument_list|)
+argument_list|,
+name|info
+operator|.
+name|returnType
+argument_list|()
 argument_list|)
 argument_list|,
 name|getDefaultValue
