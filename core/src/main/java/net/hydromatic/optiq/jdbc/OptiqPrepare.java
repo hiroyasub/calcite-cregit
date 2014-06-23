@@ -169,9 +169,7 @@ name|eigenbase
 operator|.
 name|relopt
 operator|.
-name|volcano
-operator|.
-name|VolcanoPlanner
+name|RelOptRule
 import|;
 end_import
 
@@ -469,8 +467,8 @@ function_decl|;
 name|void
 name|registerRules
 parameter_list|(
-name|VolcanoPlanner
-name|planner
+name|RuleSetBuilder
+name|builder
 parameter_list|)
 function_decl|;
 name|boolean
@@ -491,6 +489,25 @@ name|Object
 name|sparkContext
 parameter_list|()
 function_decl|;
+comment|/** Allows Spark to declare the rules it needs. */
+interface|interface
+name|RuleSetBuilder
+block|{
+name|void
+name|addRule
+parameter_list|(
+name|RelOptRule
+name|rule
+parameter_list|)
+function_decl|;
+name|void
+name|removeRule
+parameter_list|(
+name|RelOptRule
+name|rule
+parameter_list|)
+function_decl|;
+block|}
 block|}
 comment|/** Namespace that allows us to define non-abstract methods inside an    * interface. */
 specifier|public
@@ -744,8 +761,8 @@ specifier|public
 name|void
 name|registerRules
 parameter_list|(
-name|VolcanoPlanner
-name|planner
+name|RuleSetBuilder
+name|builder
 parameter_list|)
 block|{
 block|}
