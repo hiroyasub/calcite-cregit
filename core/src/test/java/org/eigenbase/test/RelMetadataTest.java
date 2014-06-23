@@ -1128,16 +1128,29 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testColumnOriginsAggMeasure
+name|testColumnOriginsAggReduced
+parameter_list|()
+block|{
+name|checkNoColumnOrigin
+argument_list|(
+literal|"select count(deptno),name from dept group by name"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testColumnOriginsAggCountNullable
 parameter_list|()
 block|{
 name|checkSingleColumnOrigin
 argument_list|(
-literal|"select count(deptno),name from dept group by name"
+literal|"select count(mgr),ename from emp group by ename"
 argument_list|,
-literal|"DEPT"
+literal|"EMP"
 argument_list|,
-literal|"DEPTNO"
+literal|"MGR"
 argument_list|,
 literal|true
 argument_list|)

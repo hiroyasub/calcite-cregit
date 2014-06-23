@@ -11361,9 +11361,72 @@ operator|+
 literal|"where \"deptno\"< 0"
 argument_list|)
 operator|.
+name|explainContains
+argument_list|(
+literal|"PLAN=EnumerableCalcRel(expr#0..2=[{inputs}], expr#3=[0], expr#4=[=($t0, $t3)], expr#5=[null], expr#6=[CASE($t4, $t5, $t1)], expr#7=[/($t2, $t0)], expr#8=[CAST($t7):JavaType(class java.lang.Integer)], CS=[$t0], C=[$t0], S=[$t6], A=[$t8])\n"
+operator|+
+literal|"  EnumerableAggregateRel(group=[{}], CS=[COUNT()], agg#1=[$SUM0($0)], agg#2=[SUM($0)])\n"
+operator|+
+literal|"    EnumerableCalcRel(expr#0..4=[{inputs}], expr#5=[0], expr#6=[<($t1, $t5)], deptno=[$t1], $condition=[$t6])\n"
+operator|+
+literal|"      EnumerableTableAccessRel(table=[[hr, emps]])\n"
+argument_list|)
+operator|.
 name|returns
 argument_list|(
 literal|"CS=0; C=0; S=null; A=null\n"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests that count(deptno) is reduced to count(). */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testReduceCountNotNullable
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select\n"
+operator|+
+literal|" count(\"deptno\") as cs,\n"
+operator|+
+literal|" count(*) as cs2\n"
+operator|+
+literal|"from \"hr\".\"emps\"\n"
+operator|+
+literal|"where \"deptno\"< 0"
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|"PLAN=EnumerableCalcRel(expr#0=[{inputs}], CS=[$t0], CS2=[$t0])\n"
+operator|+
+literal|"  EnumerableAggregateRel(group=[{}], CS=[COUNT()])\n"
+operator|+
+literal|"    EnumerableCalcRel(expr#0..4=[{inputs}], expr#5=[0], expr#6=[<($t1, $t5)], DUMMY=[$t5], $condition=[$t6])\n"
+operator|+
+literal|"      EnumerableTableAccessRel(table=[[hr, emps]])\n"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"CS=0; CS2=0\n"
 argument_list|)
 expr_stmt|;
 block|}
