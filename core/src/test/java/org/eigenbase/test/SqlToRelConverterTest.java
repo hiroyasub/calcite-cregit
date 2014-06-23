@@ -1050,6 +1050,47 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/OPTIQ-309">[OPTIQ-309]    * WITH ... ORDER BY query gives AssertionError</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWithOrder
+parameter_list|()
+block|{
+name|check
+argument_list|(
+literal|"with emp2 as (select * from emp)\n"
+operator|+
+literal|"select * from emp2 order by deptno"
+argument_list|,
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWithUnionOrder
+parameter_list|()
+block|{
+name|check
+argument_list|(
+literal|"with emp2 as (select empno, deptno as x from emp)\n"
+operator|+
+literal|"select * from emp2\n"
+operator|+
+literal|"union all\n"
+operator|+
+literal|"select * from emp2\n"
+operator|+
+literal|"order by empno + x"
+argument_list|,
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public

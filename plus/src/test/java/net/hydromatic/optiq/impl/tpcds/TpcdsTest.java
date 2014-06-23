@@ -268,11 +268,6 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
-name|Ignore
-argument_list|(
-literal|"assert fail in registerQuery"
-argument_list|)
-annotation|@
 name|Test
 specifier|public
 name|void
@@ -283,6 +278,9 @@ name|checkQuery
 argument_list|(
 literal|1
 argument_list|)
+operator|.
+name|runs
+argument_list|()
 expr_stmt|;
 block|}
 annotation|@
@@ -301,10 +299,15 @@ name|checkQuery
 argument_list|(
 literal|72
 argument_list|)
+operator|.
+name|runs
+argument_list|()
 expr_stmt|;
 block|}
 specifier|private
-name|void
+name|OptiqAssert
+operator|.
+name|AssertQuery
 name|checkQuery
 parameter_list|(
 name|int
@@ -360,6 +363,7 @@ literal|"+ interval '5' day"
 argument_list|)
 expr_stmt|;
 block|}
+return|return
 name|with
 argument_list|()
 operator|.
@@ -374,10 +378,7 @@ argument_list|,
 literal|"tpcds_01."
 argument_list|)
 argument_list|)
-operator|.
-name|runs
-argument_list|()
-expr_stmt|;
+return|;
 block|}
 block|}
 end_class

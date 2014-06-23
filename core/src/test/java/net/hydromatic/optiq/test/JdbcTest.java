@@ -16433,7 +16433,7 @@ literal|"P0=0; P1=1; P2=2\n"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test for {@link EigenbaseNewResource#requireDefaultConstructor(String)}. */
+comment|/** Test for    * {@link org.eigenbase.resource.EigenbaseNewResource#requireDefaultConstructor(String)}. */
 annotation|@
 name|Test
 specifier|public
@@ -16692,7 +16692,7 @@ literal|"deptno=10; P=30"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test for {@link EigenbaseNewResource#firstParameterOfAdd(String)}. */
+comment|/** Test for    * {@link org.eigenbase.resource.EigenbaseNewResource#firstParameterOfAdd(String)}. */
 annotation|@
 name|Test
 specifier|public
