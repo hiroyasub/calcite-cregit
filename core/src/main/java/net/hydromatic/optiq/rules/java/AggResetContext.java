@@ -27,20 +27,6 @@ name|linq4j
 operator|.
 name|expressions
 operator|.
-name|BlockBuilder
-import|;
-end_import
-
-begin_import
-import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|linq4j
-operator|.
-name|expressions
-operator|.
 name|Expression
 import|;
 end_import
@@ -59,62 +45,23 @@ begin_comment
 comment|/**  * Information for a call to {@link AggImplementor#implementReset(AggContext, AggResetContext)}.  * {@link AggResetContext} provides access to the accumulator variables  * that should be reset.  */
 end_comment
 
-begin_class
+begin_interface
 specifier|public
-class|class
+interface|interface
 name|AggResetContext
 extends|extends
 name|NestedBlockBuilder
 block|{
-specifier|private
-specifier|final
-name|List
-argument_list|<
-name|Expression
-argument_list|>
-name|accumulator
-decl_stmt|;
-comment|/**    * Creates aggregate reset context    * @param block code block that will contain the added initialization    * @param accumulator accumulator variables that store the intermediate    *                    aggregate state    */
-specifier|public
-name|AggResetContext
-parameter_list|(
-name|BlockBuilder
-name|block
-parameter_list|,
-name|List
-argument_list|<
-name|Expression
-argument_list|>
-name|accumulator
-parameter_list|)
-block|{
-name|super
-argument_list|(
-name|block
-argument_list|)
-expr_stmt|;
-name|this
-operator|.
-name|accumulator
-operator|=
-name|accumulator
-expr_stmt|;
-block|}
-comment|/**    * Returns accumulator variables that should be reset.    * There MUST be an assignment even if you just assign the default value.    * @return accumulator variables that should be reset or empty list when no    *   accumulator variables are used by the aggregate implementation.    * @see net.hydromatic.optiq.rules.java.AggImplementor#getStateType(AggContext)    */
-specifier|public
+comment|/**    * Returns accumulator variables that should be reset.    * There MUST be an assignment even if you just assign the default value.    * @return accumulator variables that should be reset or empty list when no    *   accumulator variables are used by the aggregate implementation.    * @see AggImplementor#getStateType(net.hydromatic.optiq.rules.java.AggContext)    */
 name|List
 argument_list|<
 name|Expression
 argument_list|>
 name|accumulator
 parameter_list|()
-block|{
-return|return
-name|accumulator
-return|;
+function_decl|;
 block|}
-block|}
-end_class
+end_interface
 
 begin_comment
 comment|// End AggResetContext.java

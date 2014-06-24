@@ -944,6 +944,34 @@ block|{
 name|typeErrorCount
 operator|++
 expr_stmt|;
+if|if
+condition|(
+name|composition
+operator|==
+name|Composition
+operator|.
+name|AND
+condition|)
+block|{
+comment|// Avoid trying other rules in AND if the first one fails.
+break|break
+name|label
+break|;
+block|}
+block|}
+if|else if
+condition|(
+name|composition
+operator|==
+name|Composition
+operator|.
+name|OR
+condition|)
+block|{
+break|break
+name|label
+break|;
+comment|// true OR any == true, just break
 block|}
 break|break;
 block|}

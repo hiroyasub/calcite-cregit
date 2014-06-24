@@ -14,8 +14,24 @@ operator|.
 name|rules
 operator|.
 name|java
+operator|.
+name|impl
 package|;
 end_package
+
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|linq4j
+operator|.
+name|expressions
+operator|.
+name|BlockBuilder
+import|;
+end_import
 
 begin_import
 import|import
@@ -33,13 +49,33 @@ end_import
 
 begin_import
 import|import
-name|org
+name|net
 operator|.
-name|eigenbase
+name|hydromatic
 operator|.
-name|rex
+name|optiq
 operator|.
-name|RexNode
+name|rules
+operator|.
+name|java
+operator|.
+name|AggResetContext
+import|;
+end_import
+
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|optiq
+operator|.
+name|rules
+operator|.
+name|java
+operator|.
+name|NestedBlockBuilderImpl
 import|;
 end_import
 
@@ -54,42 +90,69 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Information for a call to {@link AggImplementor#implementResult(AggContext, AggResultContext)}  * Typically, the aggregation implementation will convert {@link #accumulator()}  * to the resulting value of the aggregation.  * The implementation MUST NOT destroy the contents of {@link #accumulator()}.  */
+comment|/**  * Implementation of {@link net.hydromatic.optiq.rules.java.AggResetContext}  */
 end_comment
 
-begin_interface
+begin_class
 specifier|public
-interface|interface
-name|WinAggResultContext
+class|class
+name|AggResetContextImpl
 extends|extends
-name|AggResultContext
-extends|,
-name|WinAggFrameResultContext
+name|NestedBlockBuilderImpl
+implements|implements
+name|AggResetContext
 block|{
-comment|/**    * Returns {@link org.eigenbase.rex.RexNode} representation of arguments.    * This can be useful for manual translation of required arguments with    * different {@link NullPolicy}.    * @return {@link org.eigenbase.rex.RexNode} representation of arguments    */
-name|List
-argument_list|<
-name|RexNode
-argument_list|>
-name|rexArguments
-parameter_list|()
-function_decl|;
-comment|/**    * Returns Linq4j form of arguments.    * The resulting value is equivalent to    * {@code rowTranslator().translateList(rexArguments())}.    * This is handy if you need just operate on argument.    * @param rowIndex index of the requested row. The index must be in range    *                 of partition's startIndex and endIndex.    * @return Linq4j form of arguments of the particular row    */
+specifier|private
+specifier|final
 name|List
 argument_list|<
 name|Expression
 argument_list|>
-name|arguments
+name|accumulator
+decl_stmt|;
+comment|/**    * Creates aggregate reset context    * @param block code block that will contain the added initialization    * @param accumulator accumulator variables that store the intermediate    *                    aggregate state    */
+specifier|public
+name|AggResetContextImpl
 parameter_list|(
+name|BlockBuilder
+name|block
+parameter_list|,
+name|List
+argument_list|<
 name|Expression
-name|rowIndex
+argument_list|>
+name|accumulator
 parameter_list|)
-function_decl|;
+block|{
+name|super
+argument_list|(
+name|block
+argument_list|)
+expr_stmt|;
+name|this
+operator|.
+name|accumulator
+operator|=
+name|accumulator
+expr_stmt|;
 block|}
-end_interface
+specifier|public
+name|List
+argument_list|<
+name|Expression
+argument_list|>
+name|accumulator
+parameter_list|()
+block|{
+return|return
+name|accumulator
+return|;
+block|}
+block|}
+end_class
 
 begin_comment
-comment|// End WinAggResultContext.java
+comment|// End AggResetContext.java
 end_comment
 
 end_unit

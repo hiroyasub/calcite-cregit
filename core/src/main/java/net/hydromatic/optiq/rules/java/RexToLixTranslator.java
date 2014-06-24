@@ -1520,6 +1520,32 @@ name|x
 argument_list|)
 decl_stmt|;
 comment|// safe to share
+if|if
+condition|(
+name|nullAs
+operator|==
+name|RexImpTable
+operator|.
+name|NullAs
+operator|.
+name|NOT_POSSIBLE
+operator|&&
+name|input
+operator|.
+name|type
+operator|.
+name|equals
+argument_list|(
+name|storageType
+argument_list|)
+condition|)
+block|{
+comment|// When we asked for not null input that would be stored as box, avoid
+comment|// unboxing via nullAs.handle below.
+return|return
+name|input
+return|;
+block|}
 name|Expression
 name|nullHandled
 init|=
@@ -2414,6 +2440,7 @@ name|list
 return|;
 block|}
 comment|/**    * Translates the list of {@code RexNode}, using the default output types.    * This might be suboptimal in terms of additional box-unbox when you use    * the translation later.    * If you know the java class that will be used to store the results,    * use {@link net.hydromatic.optiq.rules.java.RexToLixTranslator#translateList(java.util.List, java.util.List)}    * version.    *    * @param operandList list of RexNodes to translate    *    * @return translated expressions    */
+specifier|public
 name|List
 argument_list|<
 name|Expression
@@ -2439,6 +2466,7 @@ argument_list|)
 return|;
 block|}
 comment|/**    * Translates the list of {@code RexNode}, while optimizing for output    * storage.    * For instance, if the result of translation is going to be stored in    * {@code Object[]}, and the input is {@code Object[]} as well,    * then translator will avoid casting, boxing, etc.    *    * @param operandList list of RexNodes to translate    * @param storageTypes hints of the java classes that will be used    *                     to store translation results. Use null to use    *                     default storage type    *    * @return translated expressions    */
+specifier|public
 name|List
 argument_list|<
 name|Expression

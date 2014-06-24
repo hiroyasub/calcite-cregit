@@ -972,7 +972,7 @@ specifier|final
 name|String
 name|START_OF_GROUP_DATA
 init|=
-literal|"values"
+literal|"(values"
 operator|+
 literal|"(1,0,1),\n"
 operator|+
@@ -12289,13 +12289,13 @@ argument_list|)
 expr_stmt|;
 comment|// 4 for rank and 2 for dense_rank
 block|}
-comment|/**    * Tests start_of_group approach for grouping of adjacent intervals.    * This is a step1, implemented as last_value.    * http://timurakhmadeev.wordpress.com/2013/07/21/start_of_group/    */
-annotation|@
-name|Test
-specifier|public
+specifier|private
 name|void
-name|testStartOfGroupLastValueStep1
-parameter_list|()
+name|startOfGroupStep1
+parameter_list|(
+name|String
+name|startOfGroup
+parameter_list|)
 block|{
 name|OptiqAssert
 operator|.
@@ -12319,9 +12319,13 @@ literal|"  from (\n"
 operator|+
 literal|"       select  t.*,\n"
 operator|+
-literal|"               case when val = last_value(val) over (order by rn rows between 1 preceding and 1 preceding) then 0 else 1 end start_of_group\n"
+literal|"               case when "
 operator|+
-literal|"         from ("
+name|startOfGroup
+operator|+
+literal|" then 0 else 1 end start_of_group\n"
+operator|+
+literal|"         from "
 operator|+
 name|START_OF_GROUP_DATA
 operator|+
@@ -12350,6 +12354,160 @@ argument_list|,
 literal|"RN=7; VAL=1; EXPECTED=4; START_OF_GROUP=1"
 argument_list|,
 literal|"RN=8; VAL=1; EXPECTED=4; START_OF_GROUP=0"
+argument_list|)
+expr_stmt|;
+block|}
+specifier|private
+name|void
+name|startOfGroupStep2
+parameter_list|(
+name|String
+name|startOfGroup
+parameter_list|)
+block|{
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select t.*\n"
+comment|// current row is assumed, group_id should be NOT NULL
+operator|+
+literal|"       ,sum(start_of_group) over (order by rn rows unbounded preceding) group_id\n"
+operator|+
+literal|"  from (\n"
+operator|+
+literal|"       select  t.*,\n"
+operator|+
+literal|"               case when "
+operator|+
+name|startOfGroup
+operator|+
+literal|" then 0 else 1 end start_of_group\n"
+operator|+
+literal|"         from "
+operator|+
+name|START_OF_GROUP_DATA
+operator|+
+literal|") t\n"
+argument_list|)
+operator|.
+name|typeIs
+argument_list|(
+literal|"[RN INTEGER NOT NULL, VAL INTEGER NOT NULL, EXPECTED INTEGER NOT NULL, START_OF_GROUP INTEGER NOT NULL, GROUP_ID INTEGER NOT NULL]"
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"RN=1; VAL=0; EXPECTED=1; START_OF_GROUP=1; GROUP_ID=1"
+argument_list|,
+literal|"RN=2; VAL=0; EXPECTED=1; START_OF_GROUP=0; GROUP_ID=1"
+argument_list|,
+literal|"RN=3; VAL=1; EXPECTED=2; START_OF_GROUP=1; GROUP_ID=2"
+argument_list|,
+literal|"RN=4; VAL=0; EXPECTED=3; START_OF_GROUP=1; GROUP_ID=3"
+argument_list|,
+literal|"RN=5; VAL=0; EXPECTED=3; START_OF_GROUP=0; GROUP_ID=3"
+argument_list|,
+literal|"RN=6; VAL=0; EXPECTED=3; START_OF_GROUP=0; GROUP_ID=3"
+argument_list|,
+literal|"RN=7; VAL=1; EXPECTED=4; START_OF_GROUP=1; GROUP_ID=4"
+argument_list|,
+literal|"RN=8; VAL=1; EXPECTED=4; START_OF_GROUP=0; GROUP_ID=4"
+argument_list|)
+expr_stmt|;
+block|}
+specifier|private
+name|void
+name|startOfGroupStep3
+parameter_list|(
+name|String
+name|startOfGroup
+parameter_list|)
+block|{
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select group_id, min(rn) min_rn, max(rn) max_rn, count(rn) cnt_rn, avg(val) avg_val"
+operator|+
+literal|" from (\n"
+operator|+
+literal|"select t.*\n"
+comment|// current row is assumed, group_id should be NOT NULL
+operator|+
+literal|"       ,sum(start_of_group) over (order by rn rows unbounded preceding) group_id\n"
+operator|+
+literal|"  from (\n"
+operator|+
+literal|"       select  t.*,\n"
+operator|+
+literal|"               case when "
+operator|+
+name|startOfGroup
+operator|+
+literal|" then 0 else 1 end start_of_group\n"
+operator|+
+literal|"         from "
+operator|+
+name|START_OF_GROUP_DATA
+operator|+
+literal|") t\n"
+operator|+
+literal|") group by group_id\n"
+argument_list|)
+operator|.
+name|typeIs
+argument_list|(
+literal|"[GROUP_ID INTEGER NOT NULL, MIN_RN INTEGER NOT NULL, MAX_RN INTEGER NOT NULL, CNT_RN BIGINT NOT NULL, AVG_VAL INTEGER NOT NULL]"
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"GROUP_ID=1; MIN_RN=1; MAX_RN=2; CNT_RN=2; AVG_VAL=0"
+argument_list|,
+literal|"GROUP_ID=2; MIN_RN=3; MAX_RN=3; CNT_RN=1; AVG_VAL=1"
+argument_list|,
+literal|"GROUP_ID=3; MIN_RN=4; MAX_RN=6; CNT_RN=3; AVG_VAL=0"
+argument_list|,
+literal|"GROUP_ID=4; MIN_RN=7; MAX_RN=8; CNT_RN=2; AVG_VAL=1"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Tests start_of_group approach for grouping of adjacent intervals.    * This is a step1, implemented as last_value.    * http://timurakhmadeev.wordpress.com/2013/07/21/start_of_group/    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testStartOfGroupLastValueStep1
+parameter_list|()
+block|{
+name|startOfGroupStep1
+argument_list|(
+literal|"val = last_value(val) over (order by rn rows between 1 preceding and 1 preceding)"
 argument_list|)
 expr_stmt|;
 block|}
@@ -12361,62 +12519,9 @@ name|void
 name|testStartOfGroupLastValueStep2
 parameter_list|()
 block|{
-name|OptiqAssert
-operator|.
-name|that
-argument_list|()
-operator|.
-name|with
+name|startOfGroupStep2
 argument_list|(
-name|OptiqAssert
-operator|.
-name|Config
-operator|.
-name|REGULAR
-argument_list|)
-operator|.
-name|query
-argument_list|(
-literal|"select t.*\n"
-comment|// current row is assumed, group_id should be NOT NULL
-operator|+
-literal|"       ,sum(start_of_group) over (order by rn rows unbounded preceding) group_id\n"
-operator|+
-literal|"  from (\n"
-operator|+
-literal|"       select  t.*,\n"
-operator|+
-literal|"               case when val = last_value(val) over (order by rn rows between 1 preceding and 1 preceding) then 0 else 1 end start_of_group\n"
-operator|+
-literal|"         from ("
-operator|+
-name|START_OF_GROUP_DATA
-operator|+
-literal|") t\n"
-argument_list|)
-operator|.
-name|typeIs
-argument_list|(
-literal|"[RN INTEGER NOT NULL, VAL INTEGER NOT NULL, EXPECTED INTEGER NOT NULL, START_OF_GROUP INTEGER NOT NULL, GROUP_ID INTEGER NOT NULL]"
-argument_list|)
-operator|.
-name|returnsUnordered
-argument_list|(
-literal|"RN=1; VAL=0; EXPECTED=1; START_OF_GROUP=1; GROUP_ID=1"
-argument_list|,
-literal|"RN=2; VAL=0; EXPECTED=1; START_OF_GROUP=0; GROUP_ID=1"
-argument_list|,
-literal|"RN=3; VAL=1; EXPECTED=2; START_OF_GROUP=1; GROUP_ID=2"
-argument_list|,
-literal|"RN=4; VAL=0; EXPECTED=3; START_OF_GROUP=1; GROUP_ID=3"
-argument_list|,
-literal|"RN=5; VAL=0; EXPECTED=3; START_OF_GROUP=0; GROUP_ID=3"
-argument_list|,
-literal|"RN=6; VAL=0; EXPECTED=3; START_OF_GROUP=0; GROUP_ID=3"
-argument_list|,
-literal|"RN=7; VAL=1; EXPECTED=4; START_OF_GROUP=1; GROUP_ID=4"
-argument_list|,
-literal|"RN=8; VAL=1; EXPECTED=4; START_OF_GROUP=0; GROUP_ID=4"
+literal|"val = last_value(val) over (order by rn rows between 1 preceding and 1 preceding)"
 argument_list|)
 expr_stmt|;
 block|}
@@ -12428,69 +12533,13 @@ name|void
 name|testStartOfGroupLastValueStep3
 parameter_list|()
 block|{
-name|OptiqAssert
-operator|.
-name|that
-argument_list|()
-operator|.
-name|with
+name|startOfGroupStep3
 argument_list|(
-name|OptiqAssert
-operator|.
-name|Config
-operator|.
-name|REGULAR
-argument_list|)
-operator|.
-name|query
-argument_list|(
-literal|"select group_id, min(rn) min_rn, max(rn) max_rn, count(rn) cnt_rn, avg(val) avg_val"
-operator|+
-literal|" from (\n"
-operator|+
-literal|"select t.*\n"
-comment|// current row is assumed, group_id should be NOT NULL
-operator|+
-literal|"       ,sum(start_of_group) over (order by rn rows unbounded preceding) group_id\n"
-operator|+
-literal|"  from (\n"
-operator|+
-literal|"       select  t.*,\n"
-operator|+
-literal|"               case when val = last_value(val) over (order by rn rows between 1 preceding and 1 preceding) then 0 else 1 end start_of_group\n"
-operator|+
-literal|"         from ("
-operator|+
-name|START_OF_GROUP_DATA
-operator|+
-literal|") t\n"
-operator|+
-literal|") group by group_id\n"
-argument_list|)
-operator|.
-name|typeIs
-argument_list|(
-literal|"[GROUP_ID INTEGER NOT NULL, MIN_RN INTEGER NOT NULL, MAX_RN INTEGER NOT NULL, CNT_RN BIGINT NOT NULL, AVG_VAL INTEGER NOT NULL]"
-argument_list|)
-operator|.
-name|returnsUnordered
-argument_list|(
-literal|"GROUP_ID=1; MIN_RN=1; MAX_RN=2; CNT_RN=2; AVG_VAL=0"
-argument_list|,
-literal|"GROUP_ID=2; MIN_RN=3; MAX_RN=3; CNT_RN=1; AVG_VAL=1"
-argument_list|,
-literal|"GROUP_ID=3; MIN_RN=4; MAX_RN=6; CNT_RN=3; AVG_VAL=0"
-argument_list|,
-literal|"GROUP_ID=4; MIN_RN=7; MAX_RN=8; CNT_RN=2; AVG_VAL=1"
+literal|"val = last_value(val) over (order by rn rows between 1 preceding and 1 preceding)"
 argument_list|)
 expr_stmt|;
 block|}
 comment|/**    * Tests start_of_group approach for grouping of adjacent intervals.    * This is a step1, implemented as last_value.    * http://timurakhmadeev.wordpress.com/2013/07/21/start_of_group/    */
-annotation|@
-name|Ignore
-argument_list|(
-literal|"LEAD/LAG is not implemented yet"
-argument_list|)
 annotation|@
 name|Test
 specifier|public
@@ -12498,68 +12547,13 @@ name|void
 name|testStartOfGroupLagStep1
 parameter_list|()
 block|{
-name|OptiqAssert
-operator|.
-name|that
-argument_list|()
-operator|.
-name|with
+name|startOfGroupStep1
 argument_list|(
-name|OptiqAssert
-operator|.
-name|Config
-operator|.
-name|REGULAR
-argument_list|)
-operator|.
-name|query
-argument_list|(
-literal|"select t.*\n"
-operator|+
-literal|"  from (\n"
-operator|+
-literal|"       select  t.*,\n"
-operator|+
-literal|"               case when val = lag(val) over (order by rn) then 0 else 1 end start_of_group\n"
-operator|+
-literal|"         from ("
-operator|+
-name|START_OF_GROUP_DATA
-operator|+
-literal|") t\n"
-argument_list|)
-operator|.
-name|typeIs
-argument_list|(
-literal|"[RN INTEGER NOT NULL, VAL INTEGER NOT NULL, EXPECTED INTEGER NOT NULL, START_OF_GROUP INTEGER NOT NULL]"
-argument_list|)
-operator|.
-name|returnsUnordered
-argument_list|(
-literal|"RN=1; VAL=0; EXPECTED=1; START_OF_GROUP=1"
-argument_list|,
-literal|"RN=2; VAL=0; EXPECTED=1; START_OF_GROUP=0"
-argument_list|,
-literal|"RN=3; VAL=1; EXPECTED=2; START_OF_GROUP=1"
-argument_list|,
-literal|"RN=4; VAL=0; EXPECTED=3; START_OF_GROUP=1"
-argument_list|,
-literal|"RN=5; VAL=0; EXPECTED=3; START_OF_GROUP=0"
-argument_list|,
-literal|"RN=6; VAL=0; EXPECTED=3; START_OF_GROUP=0"
-argument_list|,
-literal|"RN=7; VAL=1; EXPECTED=4; START_OF_GROUP=1"
-argument_list|,
-literal|"RN=8; VAL=1; EXPECTED=4; START_OF_GROUP=0"
+literal|"val = lag(val) over (order by rn)"
 argument_list|)
 expr_stmt|;
 block|}
 comment|/**    * Tests start_of_group approach for grouping of adjacent intervals.    * This is a step2, that gets the final group numbers    * http://timurakhmadeev.wordpress.com/2013/07/21/start_of_group/    */
-annotation|@
-name|Ignore
-argument_list|(
-literal|"LEAD/LAG is not implemented yet"
-argument_list|)
 annotation|@
 name|Test
 specifier|public
@@ -12567,75 +12561,74 @@ name|void
 name|testStartOfGroupLagValueStep2
 parameter_list|()
 block|{
-name|OptiqAssert
-operator|.
-name|that
-argument_list|()
-operator|.
-name|with
+name|startOfGroupStep2
 argument_list|(
-name|OptiqAssert
-operator|.
-name|Config
-operator|.
-name|REGULAR
-argument_list|)
-operator|.
-name|query
-argument_list|(
-literal|"select t.*\n"
-operator|+
-literal|"       ,sum(start_of_group) over (order by rn rows between unbounded preceding and current row) group_id\n"
-operator|+
-literal|"  from (\n"
-operator|+
-literal|"       select  t.*,\n"
-operator|+
-literal|"               case when val = lag(val) over (order by rn) then 0 else 1 end start_of_group\n"
-operator|+
-literal|"         from ("
-operator|+
-name|START_OF_GROUP_DATA
-operator|+
-literal|") t\n"
-argument_list|)
-operator|.
-name|typeIs
-argument_list|(
-literal|"[RN INTEGER NOT NULL, VAL INTEGER NOT NULL, EXPECTED INTEGER NOT NULL, START_OF_GROUP INTEGER NOT NULL, GROUP_ID INTEGER NOT NULL]"
-argument_list|)
-operator|.
-name|returnsUnordered
-argument_list|(
-literal|"RN=1; VAL=0; EXPECTED=1; START_OF_GROUP=1; GROUP_ID=1"
-argument_list|,
-literal|"RN=2; VAL=0; EXPECTED=1; START_OF_GROUP=0; GROUP_ID=1"
-argument_list|,
-literal|"RN=3; VAL=1; EXPECTED=2; START_OF_GROUP=1; GROUP_ID=2"
-argument_list|,
-literal|"RN=4; VAL=0; EXPECTED=3; START_OF_GROUP=1; GROUP_ID=3"
-argument_list|,
-literal|"RN=5; VAL=0; EXPECTED=3; START_OF_GROUP=0; GROUP_ID=3"
-argument_list|,
-literal|"RN=6; VAL=0; EXPECTED=3; START_OF_GROUP=0; GROUP_ID=3"
-argument_list|,
-literal|"RN=7; VAL=1; EXPECTED=4; START_OF_GROUP=1; GROUP_ID=4"
-argument_list|,
-literal|"RN=8; VAL=1; EXPECTED=4; START_OF_GROUP=0; GROUP_ID=4"
+literal|"val = lag(val) over (order by rn)"
 argument_list|)
 expr_stmt|;
 block|}
 comment|/**    * Tests start_of_group approach for grouping of adjacent intervals.    * This is a step3, that aggregates the computed groups    * http://timurakhmadeev.wordpress.com/2013/07/21/start_of_group/    */
 annotation|@
-name|Ignore
-argument_list|(
-literal|"LEAD/LAG is not implemented yet"
-argument_list|)
-annotation|@
 name|Test
 specifier|public
 name|void
 name|testStartOfGroupLagStep3
+parameter_list|()
+block|{
+name|startOfGroupStep3
+argument_list|(
+literal|"val = lag(val) over (order by rn)"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Tests start_of_group approach for grouping of adjacent intervals.    * This is a step1, implemented as last_value.    * http://timurakhmadeev.wordpress.com/2013/07/21/start_of_group/    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testStartOfGroupLeadStep1
+parameter_list|()
+block|{
+name|startOfGroupStep1
+argument_list|(
+literal|"val = lead(val, -1) over (order by rn)"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Tests start_of_group approach for grouping of adjacent intervals.    * This is a step2, that gets the final group numbers    * http://timurakhmadeev.wordpress.com/2013/07/21/start_of_group/    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testStartOfGroupLeadValueStep2
+parameter_list|()
+block|{
+name|startOfGroupStep2
+argument_list|(
+literal|"val = lead(val, -1) over (order by rn)"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Tests start_of_group approach for grouping of adjacent intervals.    * This is a step3, that aggregates the computed groups    * http://timurakhmadeev.wordpress.com/2013/07/21/start_of_group/    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testStartOfGroupLeadStep3
+parameter_list|()
+block|{
+name|startOfGroupStep3
+argument_list|(
+literal|"val = lead(val, -1) over (order by rn)"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Tests default value of LAG function.    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testLagDefaultValue
 parameter_list|()
 block|{
 name|OptiqAssert
@@ -12654,44 +12647,431 @@ argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"select group_id, min(rn) min_rn, max(rn) max_rn, count(rn) cnt_rn, avg(val) avg_val"
+literal|"select t.*, lag(rn+expected,1,42) over (order by rn) l\n"
 operator|+
-literal|" from (\n"
-operator|+
-literal|"select t.*\n"
-comment|// current row is assumed, group_id should be NOT NULL
-operator|+
-literal|"       ,sum(start_of_group) over (order by rn rows unbounded preceding) group_id\n"
-operator|+
-literal|"  from (\n"
-operator|+
-literal|"       select  t.*,\n"
-operator|+
-literal|"               case when val = lag(val) over (order by rn) then 0 else 1 end start_of_group\n"
-operator|+
-literal|"         from ("
+literal|" from "
 operator|+
 name|START_OF_GROUP_DATA
-operator|+
-literal|") t\n"
-operator|+
-literal|") group by group_id\n"
 argument_list|)
 operator|.
 name|typeIs
 argument_list|(
-literal|"[GROUP_ID INTEGER NOT NULL, MIN_RN INTEGER NOT NULL, MAX_RN INTEGER NOT NULL, CNT_RN BIGINT NOT NULL, AVG_VAL INTEGER NOT NULL]"
+literal|"[RN INTEGER NOT NULL, VAL INTEGER NOT NULL, EXPECTED INTEGER NOT NULL, L INTEGER NOT NULL]"
 argument_list|)
 operator|.
 name|returnsUnordered
 argument_list|(
-literal|"GROUP_ID=1; MIN_RN=1; MAX_RN=2; CNT_RN=2; AVG_VAL=0"
+literal|"RN=1; VAL=0; EXPECTED=1; L=42"
 argument_list|,
-literal|"GROUP_ID=2; MIN_RN=3; MAX_RN=3; CNT_RN=1; AVG_VAL=1"
+literal|"RN=2; VAL=0; EXPECTED=1; L=2"
 argument_list|,
-literal|"GROUP_ID=3; MIN_RN=4; MAX_RN=6; CNT_RN=3; AVG_VAL=0"
+literal|"RN=3; VAL=1; EXPECTED=2; L=3"
 argument_list|,
-literal|"GROUP_ID=4; MIN_RN=7; MAX_RN=8; CNT_RN=2; AVG_VAL=1"
+literal|"RN=4; VAL=0; EXPECTED=3; L=5"
+argument_list|,
+literal|"RN=5; VAL=0; EXPECTED=3; L=7"
+argument_list|,
+literal|"RN=6; VAL=0; EXPECTED=3; L=8"
+argument_list|,
+literal|"RN=7; VAL=1; EXPECTED=4; L=9"
+argument_list|,
+literal|"RN=8; VAL=1; EXPECTED=4; L=11"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Tests default value of LEAD function.    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testLeadDefaultValue
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select t.*, lead(rn+expected,1,42) over (order by rn) l\n"
+operator|+
+literal|" from "
+operator|+
+name|START_OF_GROUP_DATA
+argument_list|)
+operator|.
+name|typeIs
+argument_list|(
+literal|"[RN INTEGER NOT NULL, VAL INTEGER NOT NULL, EXPECTED INTEGER NOT NULL, L INTEGER NOT NULL]"
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"RN=1; VAL=0; EXPECTED=1; L=3"
+argument_list|,
+literal|"RN=2; VAL=0; EXPECTED=1; L=5"
+argument_list|,
+literal|"RN=3; VAL=1; EXPECTED=2; L=7"
+argument_list|,
+literal|"RN=4; VAL=0; EXPECTED=3; L=8"
+argument_list|,
+literal|"RN=5; VAL=0; EXPECTED=3; L=9"
+argument_list|,
+literal|"RN=6; VAL=0; EXPECTED=3; L=11"
+argument_list|,
+literal|"RN=7; VAL=1; EXPECTED=4; L=12"
+argument_list|,
+literal|"RN=8; VAL=1; EXPECTED=4; L=42"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Tests expression in offset value of LAG function.    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testLagExpressionOffset
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select t.*, lag(rn, expected, 42) over (order by rn) l\n"
+operator|+
+literal|" from "
+operator|+
+name|START_OF_GROUP_DATA
+argument_list|)
+operator|.
+name|typeIs
+argument_list|(
+literal|"[RN INTEGER NOT NULL, VAL INTEGER NOT NULL, EXPECTED INTEGER NOT NULL, L INTEGER NOT NULL]"
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"RN=1; VAL=0; EXPECTED=1; L=42"
+argument_list|,
+literal|"RN=2; VAL=0; EXPECTED=1; L=1"
+argument_list|,
+literal|"RN=3; VAL=1; EXPECTED=2; L=1"
+argument_list|,
+literal|"RN=4; VAL=0; EXPECTED=3; L=1"
+argument_list|,
+literal|"RN=5; VAL=0; EXPECTED=3; L=2"
+argument_list|,
+literal|"RN=6; VAL=0; EXPECTED=3; L=3"
+argument_list|,
+literal|"RN=7; VAL=1; EXPECTED=4; L=3"
+argument_list|,
+literal|"RN=8; VAL=1; EXPECTED=4; L=4"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Tests DATE as offset argument of LAG function.    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testLagInvalidOffsetArgument
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select t.*, lag(rn, DATE '2014-06-20', 42) over (order by rn) l\n"
+operator|+
+literal|" from "
+operator|+
+name|START_OF_GROUP_DATA
+argument_list|)
+operator|.
+name|throws_
+argument_list|(
+literal|"Cannot apply 'LAG' to arguments of type 'LAG(<INTEGER>,<DATE>,<INTEGER>)'"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Tests NTILE(2).    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testNtile1
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select rn, ntile(1) over (order by rn) l\n"
+operator|+
+literal|" from "
+operator|+
+name|START_OF_GROUP_DATA
+argument_list|)
+operator|.
+name|typeIs
+argument_list|(
+literal|"[RN INTEGER NOT NULL, L INTEGER NOT NULL]"
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"RN=1; L=1"
+argument_list|,
+literal|"RN=2; L=1"
+argument_list|,
+literal|"RN=3; L=1"
+argument_list|,
+literal|"RN=4; L=1"
+argument_list|,
+literal|"RN=5; L=1"
+argument_list|,
+literal|"RN=6; L=1"
+argument_list|,
+literal|"RN=7; L=1"
+argument_list|,
+literal|"RN=8; L=1"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Tests NTILE(2).    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testNtile2
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select rn, ntile(2) over (order by rn) l\n"
+operator|+
+literal|" from "
+operator|+
+name|START_OF_GROUP_DATA
+argument_list|)
+operator|.
+name|typeIs
+argument_list|(
+literal|"[RN INTEGER NOT NULL, L INTEGER NOT NULL]"
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"RN=1; L=1"
+argument_list|,
+literal|"RN=2; L=1"
+argument_list|,
+literal|"RN=3; L=1"
+argument_list|,
+literal|"RN=4; L=1"
+argument_list|,
+literal|"RN=5; L=2"
+argument_list|,
+literal|"RN=6; L=2"
+argument_list|,
+literal|"RN=7; L=2"
+argument_list|,
+literal|"RN=8; L=2"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Tests expression in offset value of LAG function.    */
+annotation|@
+name|Ignore
+argument_list|(
+literal|"Have no idea how to validate that expression is constant"
+argument_list|)
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testNtileConstantArgs
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select rn, ntile(1+1) over (order by rn) l\n"
+operator|+
+literal|" from "
+operator|+
+name|START_OF_GROUP_DATA
+argument_list|)
+operator|.
+name|typeIs
+argument_list|(
+literal|"[RN INTEGER NOT NULL, VAL INTEGER NOT NULL, EXPECTED INTEGER NOT NULL, L INTEGER NOT NULL]"
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"RN=1; L=1"
+argument_list|,
+literal|"RN=2; L=1"
+argument_list|,
+literal|"RN=3; L=1"
+argument_list|,
+literal|"RN=4; L=1"
+argument_list|,
+literal|"RN=5; L=2"
+argument_list|,
+literal|"RN=6; L=2"
+argument_list|,
+literal|"RN=7; L=2"
+argument_list|,
+literal|"RN=8; L=2"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Tests expression in offset value of LAG function.    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testNtileNegativeArg
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select rn, ntile(-1) over (order by rn) l\n"
+operator|+
+literal|" from "
+operator|+
+name|START_OF_GROUP_DATA
+argument_list|)
+operator|.
+name|throws_
+argument_list|(
+literal|"Argument to function 'NTILE' must be a positive integer literal"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Tests expression in offset value of LAG function.    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testNtileDecimalArg
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select rn, ntile(3.141592653) over (order by rn) l\n"
+operator|+
+literal|" from "
+operator|+
+name|START_OF_GROUP_DATA
+argument_list|)
+operator|.
+name|throws_
+argument_list|(
+literal|"Cannot apply 'NTILE' to arguments of type 'NTILE(<DECIMAL(10, 9)>)'"
 argument_list|)
 expr_stmt|;
 block|}

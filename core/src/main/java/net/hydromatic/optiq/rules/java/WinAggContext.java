@@ -18,22 +18,20 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * Information for a call to {@link AggImplementor#implementResult(AggContext, AggResultContext)}  * Typically, the aggregation implementation will convert {@link #accumulator()}  * to the resulting value of the aggregation.  * The implementation MUST NOT destroy the contents of {@link #accumulator()}.  */
+comment|/**  * Marker interface to allow {@link net.hydromatic.optiq.rules.java.AggImplementor} to tell if it is used in  * regular or windowed context.  */
 end_comment
 
 begin_interface
 specifier|public
 interface|interface
-name|AggResultContext
+name|WinAggContext
 extends|extends
-name|NestedBlockBuilder
-extends|,
-name|AggResetContext
+name|AggContext
 block|{ }
 end_interface
 
 begin_comment
-comment|// End AggResultContext.java
+comment|// End WinAggContext.java
 end_comment
 
 end_unit

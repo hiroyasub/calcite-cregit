@@ -260,8 +260,6 @@ operator|!
 operator|(
 name|info
 operator|instanceof
-name|WinAggImplementor
-operator|.
 name|WinAggContext
 operator|)
 operator|||

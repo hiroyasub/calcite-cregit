@@ -1627,6 +1627,43 @@ argument_list|(
 literal|true
 argument_list|)
 decl_stmt|;
+comment|/**    *<code>LEAD</code> aggregate function.    */
+specifier|public
+specifier|static
+specifier|final
+name|SqlAggFunction
+name|LEAD
+init|=
+operator|new
+name|SqlLeadLagAggFunction
+argument_list|(
+literal|true
+argument_list|)
+decl_stmt|;
+comment|/**    *<code>LAG</code> aggregate function.    */
+specifier|public
+specifier|static
+specifier|final
+name|SqlAggFunction
+name|LAG
+init|=
+operator|new
+name|SqlLeadLagAggFunction
+argument_list|(
+literal|false
+argument_list|)
+decl_stmt|;
+comment|/**    *<code>NTILE</code> aggregate function.    */
+specifier|public
+specifier|static
+specifier|final
+name|SqlAggFunction
+name|NTILE
+init|=
+operator|new
+name|SqlNtileAggFunction
+argument_list|()
+decl_stmt|;
 comment|/**    *<code>SINGLE_VALUE</code> aggregate function.    */
 specifier|public
 specifier|static

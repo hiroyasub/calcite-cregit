@@ -14,8 +14,24 @@ operator|.
 name|rules
 operator|.
 name|java
+operator|.
+name|impl
 package|;
 end_package
+
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|linq4j
+operator|.
+name|expressions
+operator|.
+name|BlockBuilder
+import|;
+end_import
 
 begin_import
 import|import
@@ -31,29 +47,72 @@ name|Expression
 import|;
 end_import
 
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|optiq
+operator|.
+name|rules
+operator|.
+name|java
+operator|.
+name|AggResultContext
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
+import|;
+end_import
+
 begin_comment
-comment|/**  * Information for a call to {@link AggImplementor#implementAdd(AggContext, AggAddContext)}.  * {@link WinAggAddContext} is used when implementing windowed aggregate.  * Typically, the aggregation implementation will use {@link #arguments()}  * or {@link #rexArguments()} to update aggregate value.  * @see AggAddContext  */
+comment|/**  * Implementation of {@link net.hydromatic.optiq.rules.java.AggResultContext}  */
 end_comment
 
-begin_interface
+begin_class
 specifier|public
-interface|interface
-name|WinAggAddContext
+class|class
+name|AggResultContextImpl
 extends|extends
-name|AggAddContext
-extends|,
-name|WinAggResultContext
+name|AggResetContextImpl
+implements|implements
+name|AggResultContext
 block|{
-comment|/**    * Returns current position inside for-loop of window aggregate.    * Note, the position is relative to {@link WinAggFrameContext#startIndex()}.    * This is NOT current row as in "rows between current row".    * If you need to know the relative index of the current row in the partition,    * use {@link WinAggFrameContext#index()}.    * @return current position inside for-loop of window aggregate.    * @see WinAggFrameContext#index()    * @see WinAggFrameContext#startIndex()    */
+comment|/**    * Creates aggregate result context    * @param block code block that will contain the result calculation statements    * @param accumulator accumulator variables that store the intermediate    *                    aggregate state    */
+specifier|public
+name|AggResultContextImpl
+parameter_list|(
+name|BlockBuilder
+name|block
+parameter_list|,
+name|List
+argument_list|<
 name|Expression
-name|currentPosition
-parameter_list|()
-function_decl|;
+argument_list|>
+name|accumulator
+parameter_list|)
+block|{
+name|super
+argument_list|(
+name|block
+argument_list|,
+name|accumulator
+argument_list|)
+expr_stmt|;
 block|}
-end_interface
+block|}
+end_class
 
 begin_comment
-comment|// End WinAggAddContext.java
+comment|// End AggResultContext.java
 end_comment
 
 end_unit

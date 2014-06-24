@@ -27,20 +27,6 @@ name|linq4j
 operator|.
 name|expressions
 operator|.
-name|BlockBuilder
-import|;
-end_import
-
-begin_import
-import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|linq4j
-operator|.
-name|expressions
-operator|.
 name|Expression
 import|;
 end_import
@@ -68,41 +54,17 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Information for a call to {@link AggImplementor#implementAdd(AggContext, AggAddContext)}.  * Typically, the aggregation implementation will use {@link #arguments()}  * or {@link #rexArguments()} to update aggregate value.  */
+comment|/**  * Information for a call to {@link net.hydromatic.optiq.rules.java.AggImplementor#implementAdd(AggContext, AggAddContext)}.  * Typically, the aggregation implementation will use {@link #arguments()}  * or {@link #rexArguments()} to update aggregate value.  */
 end_comment
 
-begin_class
+begin_interface
 specifier|public
-specifier|abstract
-class|class
+interface|interface
 name|AggAddContext
 extends|extends
 name|AggResultContext
 block|{
-specifier|public
-name|AggAddContext
-parameter_list|(
-name|BlockBuilder
-name|block
-parameter_list|,
-name|List
-argument_list|<
-name|Expression
-argument_list|>
-name|accumulator
-parameter_list|)
-block|{
-name|super
-argument_list|(
-name|block
-argument_list|,
-name|accumulator
-argument_list|)
-expr_stmt|;
-block|}
-comment|/**    * Returns {@link RexNode} representation of arguments.    * This can be useful for manual translation of required arguments with    * different {@link net.hydromatic.optiq.rules.java.NullPolicy}.    * @return {@link RexNode} representation of arguments    */
-specifier|public
-specifier|abstract
+comment|/**    * Returns {@link org.eigenbase.rex.RexNode} representation of arguments.    * This can be useful for manual translation of required arguments with    * different {@link NullPolicy}.    * @return {@link org.eigenbase.rex.RexNode} representation of arguments    */
 name|List
 argument_list|<
 name|RexNode
@@ -111,35 +73,24 @@ name|rexArguments
 parameter_list|()
 function_decl|;
 comment|/**    * Returns Linq4j form of arguments.    * The resulting value is equivalent to    * {@code rowTranslator().translateList(rexArguments())}.    * This is handy if you need just operate on argument.    * @return Linq4j form of arguments.    */
-specifier|public
-specifier|final
 name|List
 argument_list|<
 name|Expression
 argument_list|>
 name|arguments
 parameter_list|()
-block|{
-return|return
-name|rowTranslator
-argument_list|()
-operator|.
-name|translateList
-argument_list|(
-name|rexArguments
-argument_list|()
-argument_list|)
-return|;
-block|}
-comment|/**    * Returns {@link RexToLixTranslator} suitable to transform the arguments.    * @return {@link RexToLixTranslator} suitable to transform the arguments.    */
-specifier|public
-specifier|abstract
+function_decl|;
+comment|/**    * Returns {@link net.hydromatic.optiq.rules.java.RexToLixTranslator} suitable to transform the arguments.    * @return {@link net.hydromatic.optiq.rules.java.RexToLixTranslator} suitable to transform the arguments.    */
 name|RexToLixTranslator
 name|rowTranslator
 parameter_list|()
 function_decl|;
 block|}
-end_class
+end_interface
+
+begin_comment
+comment|// End AggAddContext.java
+end_comment
 
 end_unit
 
