@@ -13498,6 +13498,130 @@ literal|"ENAME=Wilma; DEPTNO=null; GENDER=F; M1=1; M2=1; M3=9"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Tests that field-trimming creates a project near the table scan. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testTrimFields
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+try|try
+block|{
+name|Prepare
+operator|.
+name|trim
+operator|=
+literal|true
+expr_stmt|;
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select \"name\", count(\"commission\") + 1\n"
+operator|+
+literal|"from \"hr\".\"emps\"\n"
+operator|+
+literal|"group by \"deptno\", \"name\""
+argument_list|)
+operator|.
+name|convertContains
+argument_list|(
+literal|"ProjectRel(name=[$1], EXPR$1=[+($2, 1)])\n"
+operator|+
+literal|"  AggregateRel(group=[{0, 1}], agg#0=[COUNT($2)])\n"
+operator|+
+literal|"    ProjectRel(deptno=[$1], name=[$2], commission=[$4])\n"
+operator|+
+literal|"      EnumerableTableAccessRel(table=[[hr, emps]])\n"
+argument_list|)
+expr_stmt|;
+block|}
+finally|finally
+block|{
+name|Prepare
+operator|.
+name|trim
+operator|=
+literal|false
+expr_stmt|;
+block|}
+block|}
+comment|/** Tests that field-trimming creates a project near the table scan, in a    * query with windowed-aggregation. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testTrimFieldsOver
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+try|try
+block|{
+name|Prepare
+operator|.
+name|trim
+operator|=
+literal|true
+expr_stmt|;
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select \"name\", count(\"commission\") over (partition by \"deptno\") + 1\n"
+operator|+
+literal|"from \"hr\".\"emps\"\n"
+operator|+
+literal|"where \"empid\"> 10"
+argument_list|)
+operator|.
+name|convertContains
+argument_list|(
+literal|"ProjectRel(name=[$2], EXPR$1=[+(CAST(COUNT($4) OVER (PARTITION BY $1 RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)):BIGINT, 1)])\n"
+operator|+
+literal|"  FilterRel(condition=[>($0, 10)])\n"
+operator|+
+literal|"    EnumerableTableAccessRel(table=[[hr, emps]])\n"
+argument_list|)
+expr_stmt|;
+block|}
+finally|finally
+block|{
+name|Prepare
+operator|.
+name|trim
+operator|=
+literal|false
+expr_stmt|;
+block|}
+block|}
 comment|/** Tests window aggregate whose argument is a constant. */
 annotation|@
 name|Test
