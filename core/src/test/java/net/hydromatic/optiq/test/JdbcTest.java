@@ -13604,7 +13604,7 @@ argument_list|)
 operator|.
 name|convertContains
 argument_list|(
-literal|"ProjectRel(name=[$2], EXPR$1=[+(CAST(COUNT($3) OVER (PARTITION BY $1 RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)):BIGINT, 1)])\n"
+literal|"ProjectRel(name=[$2], EXPR$1=[+(COUNT($3) OVER (PARTITION BY $1 RANGE BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING), 1)])\n"
 operator|+
 literal|"  FilterRel(condition=[>($0, 10)])\n"
 operator|+
