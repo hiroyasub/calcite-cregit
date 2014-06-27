@@ -13604,11 +13604,13 @@ argument_list|)
 operator|.
 name|convertContains
 argument_list|(
-literal|"ProjectRel(name=[$2], EXPR$1=[+(CAST(COUNT($4) OVER (PARTITION BY $1 RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)):BIGINT, 1)])\n"
+literal|"ProjectRel(name=[$2], EXPR$1=[+(CAST(COUNT($3) OVER (PARTITION BY $1 RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)):BIGINT, 1)])\n"
 operator|+
 literal|"  FilterRel(condition=[>($0, 10)])\n"
 operator|+
-literal|"    EnumerableTableAccessRel(table=[[hr, emps]])\n"
+literal|"    ProjectRel(empid=[$0], deptno=[$1], name=[$2], commission=[$4])\n"
+operator|+
+literal|"      EnumerableTableAccessRel(table=[[hr, emps]])\n"
 argument_list|)
 expr_stmt|;
 block|}

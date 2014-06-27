@@ -79,6 +79,9 @@ block|,
 comment|/** Called with the output of sql-to-rel-converter. */
 name|CONVERTED
 block|,
+comment|/** Called after de-correlation and field trimming, but before    * optimization. */
+name|TRIMMED
+block|,
 comment|/** Called when a constant expression is being reduced. */
 name|EXPRESSION_REDUCER
 block|,

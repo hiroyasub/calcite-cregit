@@ -1171,6 +1171,15 @@ argument_list|(
 name|rootRel
 argument_list|)
 expr_stmt|;
+name|Hook
+operator|.
+name|TRIMMED
+operator|.
+name|run
+argument_list|(
+name|rootRel
+argument_list|)
+expr_stmt|;
 comment|// Display physical plan after decorrelation.
 if|if
 condition|(
