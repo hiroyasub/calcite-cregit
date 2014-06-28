@@ -489,14 +489,36 @@ specifier|protected
 name|RelDataType
 name|parameterRowType
 decl_stmt|;
+comment|// temporary. for testing.
 specifier|public
 specifier|static
-name|boolean
-name|trim
+specifier|final
+name|ThreadLocal
+argument_list|<
+name|Boolean
+argument_list|>
+name|THREAD_TRIM
 init|=
+operator|new
+name|ThreadLocal
+argument_list|<
+name|Boolean
+argument_list|>
+argument_list|()
+block|{
+annotation|@
+name|Override
+specifier|protected
+name|Boolean
+name|initialValue
+parameter_list|()
+block|{
+return|return
 literal|false
+return|;
+block|}
+block|}
 decl_stmt|;
-comment|// temporary. for testing.
 specifier|public
 name|Prepare
 parameter_list|(
@@ -1504,7 +1526,10 @@ comment|// For now, don't trim if there are more than 3 joins. The projects
 comment|// near the leaves created by trim migrate past joins and seem to
 comment|// prevent join-reordering.
 return|return
-name|trim
+name|THREAD_TRIM
+operator|.
+name|get
+argument_list|()
 operator|||
 name|RelOptUtil
 operator|.
