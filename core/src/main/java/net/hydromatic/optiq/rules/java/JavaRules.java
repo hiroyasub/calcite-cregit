@@ -5444,7 +5444,7 @@ argument_list|()
 operator|.
 name|appendIfNotNull
 argument_list|(
-name|keyPhysType
+name|physType
 operator|.
 name|comparer
 argument_list|()
