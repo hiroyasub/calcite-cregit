@@ -2737,6 +2737,42 @@ argument_list|()
 argument_list|)
 argument_list|)
 expr_stmt|;
+name|post
+operator|.
+name|add
+argument_list|(
+literal|"EMPS"
+argument_list|,
+name|ViewTable
+operator|.
+name|viewMacro
+argument_list|(
+name|post
+argument_list|,
+literal|"select * from (values\n"
+operator|+
+literal|"    (100, 'Fred',  10, CAST(NULL AS CHAR(1)), CAST(NULL AS VARCHAR(20)), 40,               25, TRUE,    FALSE, DATE '1996-08-03'),\n"
+operator|+
+literal|"    (110, 'Eric',  20, 'M',                   'San Francisco',           3,                80, UNKNOWN, FALSE, DATE '2001-01-01'),\n"
+operator|+
+literal|"    (110, 'John',  40, 'M',                   'Vancouver',               2, CAST(NULL AS INT), FALSE,   TRUE,  DATE '2002-05-03'),\n"
+operator|+
+literal|"    (120, 'Wilma', 20, 'F',                   CAST(NULL AS VARCHAR(20)), 1,                 5, UNKNOWN, TRUE,  DATE '2005-09-07'),\n"
+operator|+
+literal|"    (130, 'Alice', 40, 'F',                   'Vancouver',               2, CAST(NULL AS INT), FALSE,   TRUE,  DATE '2007-01-01'))\n"
+operator|+
+literal|" as t(empno, name, deptno, gender, city, empid, age, slacker, manager, joinedat)"
+argument_list|,
+name|ImmutableList
+operator|.
+expr|<
+name|String
+operator|>
+name|of
+argument_list|()
+argument_list|)
+argument_list|)
+expr_stmt|;
 block|}
 if|if
 condition|(
