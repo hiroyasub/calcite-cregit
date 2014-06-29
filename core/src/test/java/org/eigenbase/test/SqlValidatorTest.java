@@ -14853,9 +14853,53 @@ argument_list|)
 expr_stmt|;
 name|checkFails
 argument_list|(
-literal|"select ^count(sal,ename)^ from emp"
+literal|"select ^count()^ from emp"
 argument_list|,
 literal|"Invalid number of arguments to function 'COUNT'. Was expecting 1 arguments"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testCountCompositeFunction
+parameter_list|()
+block|{
+name|check
+argument_list|(
+literal|"select count(ename, deptno) from emp"
+argument_list|)
+expr_stmt|;
+name|checkFails
+argument_list|(
+literal|"select count(ename, deptno, ^gender^) from emp"
+argument_list|,
+literal|"Column 'GENDER' not found in any table"
+argument_list|)
+expr_stmt|;
+name|check
+argument_list|(
+literal|"select count(ename, 1, deptno) from emp"
+argument_list|)
+expr_stmt|;
+name|check
+argument_list|(
+literal|"select count(distinct ename, 1, deptno) from emp"
+argument_list|)
+expr_stmt|;
+name|checkFails
+argument_list|(
+literal|"select count(deptno, *) from emp"
+argument_list|,
+literal|"(?s).*Encountered \", \\*\" at .*"
+argument_list|)
+expr_stmt|;
+name|checkFails
+argument_list|(
+literal|"select count(*, deptno) from emp"
+argument_list|,
+literal|"(?s).*Encountered \",\" at .*"
 argument_list|)
 expr_stmt|;
 block|}

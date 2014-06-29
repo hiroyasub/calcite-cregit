@@ -121,9 +121,17 @@ name|BIGINT
 argument_list|,
 literal|null
 argument_list|,
+name|SqlValidator
+operator|.
+name|STRICT
+condition|?
 name|OperandTypes
 operator|.
 name|ANY
+else|:
+name|OperandTypes
+operator|.
+name|ONE_OR_MORE
 argument_list|,
 name|SqlFunctionCategory
 operator|.

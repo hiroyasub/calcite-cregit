@@ -82,6 +82,24 @@ specifier|public
 interface|interface
 name|SqlValidator
 block|{
+comment|/** Whether to follow the SQL standard strictly. */
+name|boolean
+name|STRICT
+init|=
+name|Util
+operator|.
+name|first
+argument_list|(
+name|Boolean
+operator|.
+name|getBoolean
+argument_list|(
+literal|"optiq.strict.sql"
+argument_list|)
+argument_list|,
+literal|false
+argument_list|)
+decl_stmt|;
 comment|//~ Methods ----------------------------------------------------------------
 comment|/**    * Returns the dialect of SQL (SQL:2003, etc.) this validator recognizes.    * Default is {@link SqlConformance#DEFAULT}.    *    * @return dialect of SQL this validator recognizes    */
 name|SqlConformance

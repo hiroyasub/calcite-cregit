@@ -10038,6 +10038,124 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testDistinctCountSimple
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|s
+init|=
+literal|"select count(distinct \"sales_fact_1997\".\"unit_sales\") as \"m0\"\n"
+operator|+
+literal|"from \"sales_fact_1997\" as \"sales_fact_1997\""
+decl_stmt|;
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|FOODMART_CLONE
+argument_list|)
+operator|.
+name|query
+argument_list|(
+name|s
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|"EnumerableAggregateRel(group=[{}], m0=[COUNT($0)])\n"
+operator|+
+literal|"  EnumerableAggregateRel(group=[{0}])\n"
+operator|+
+literal|"    EnumerableCalcRel(expr#0..7=[{inputs}], unit_sales=[$t7])\n"
+operator|+
+literal|"      EnumerableTableAccessRel(table=[[foodmart2, sales_fact_1997]])"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"m0=6\n"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDistinctCount2
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|s
+init|=
+literal|"select cast(\"unit_sales\" as integer) as \"u\",\n"
+operator|+
+literal|" count(distinct \"sales_fact_1997\".\"customer_id\") as \"m0\"\n"
+operator|+
+literal|"from \"sales_fact_1997\" as \"sales_fact_1997\"\n"
+operator|+
+literal|"group by \"unit_sales\""
+decl_stmt|;
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|FOODMART_CLONE
+argument_list|)
+operator|.
+name|query
+argument_list|(
+name|s
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|"EnumerableCalcRel(expr#0..1=[{inputs}], expr#2=[CAST($t0):INTEGER NOT NULL], u=[$t2], m0=[$t1])\n"
+operator|+
+literal|"  EnumerableAggregateRel(group=[{0}], m0=[COUNT($1)])\n"
+operator|+
+literal|"    EnumerableAggregateRel(group=[{0, 1}])\n"
+operator|+
+literal|"      EnumerableCalcRel(expr#0..7=[{inputs}], unit_sales=[$t7], customer_id=[$t2])\n"
+operator|+
+literal|"        EnumerableTableAccessRel(table=[[foodmart2, sales_fact_1997]])"
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"u=1; m0=523"
+argument_list|,
+literal|"u=5; m0=1059"
+argument_list|,
+literal|"u=4; m0=4459"
+argument_list|,
+literal|"u=6; m0=19"
+argument_list|,
+literal|"u=3; m0=4895"
+argument_list|,
+literal|"u=2; m0=4735"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testDistinctCount
 parameter_list|()
 block|{
@@ -10045,7 +10163,90 @@ specifier|final
 name|String
 name|s
 init|=
-literal|"select \"time_by_day\".\"the_year\" as \"c0\", sum(\"sales_fact_1997\".\"unit_sales\") as \"m0\" from \"time_by_day\" as \"time_by_day\", \"sales_fact_1997\" as \"sales_fact_1997\" where \"sales_fact_1997\".\"time_id\" = \"time_by_day\".\"time_id\" and \"time_by_day\".\"the_year\" = 1997 group by \"time_by_day\".\"the_year\""
+literal|"select \"time_by_day\".\"the_year\" as \"c0\",\n"
+operator|+
+literal|" count(distinct \"sales_fact_1997\".\"unit_sales\") as \"m0\"\n"
+operator|+
+literal|"from \"time_by_day\" as \"time_by_day\",\n"
+operator|+
+literal|" \"sales_fact_1997\" as \"sales_fact_1997\"\n"
+operator|+
+literal|"where \"sales_fact_1997\".\"time_id\" = \"time_by_day\".\"time_id\"\n"
+operator|+
+literal|"and \"time_by_day\".\"the_year\" = 1997\n"
+operator|+
+literal|"group by \"time_by_day\".\"the_year\""
+decl_stmt|;
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|FOODMART_CLONE
+argument_list|)
+operator|.
+name|query
+argument_list|(
+name|s
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|"EnumerableAggregateRel(group=[{0}], m0=[COUNT($1)])\n"
+operator|+
+literal|"  EnumerableAggregateRel(group=[{0, 1}])\n"
+operator|+
+literal|"    EnumerableCalcRel(expr#0..3=[{inputs}], c0=[$t3], unit_sales=[$t1])\n"
+operator|+
+literal|"      EnumerableJoinRel(condition=[=($0, $2)], joinType=[inner])\n"
+operator|+
+literal|"        EnumerableCalcRel(expr#0..7=[{inputs}], time_id=[$t1], unit_sales=[$t7])\n"
+operator|+
+literal|"          EnumerableTableAccessRel(table=[[foodmart2, sales_fact_1997]])\n"
+operator|+
+literal|"        EnumerableCalcRel(expr#0..9=[{inputs}], expr#10=[CAST($t4):INTEGER], expr#11=[1997], expr#12=[=($t10, $t11)], time_id=[$t0], the_year=[$t4], $condition=[$t12])\n"
+operator|+
+literal|"          EnumerableTableAccessRel(table=[[foodmart2, time_by_day]])"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"c0=1997; m0=6\n"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDistinctCountComposite
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|s
+init|=
+literal|"select \"time_by_day\".\"the_year\" as \"c0\",\n"
+operator|+
+literal|" count(distinct \"sales_fact_1997\".\"product_id\",\n"
+operator|+
+literal|"       \"sales_fact_1997\".\"customer_id\") as \"m0\"\n"
+operator|+
+literal|"from \"time_by_day\" as \"time_by_day\",\n"
+operator|+
+literal|" \"sales_fact_1997\" as \"sales_fact_1997\"\n"
+operator|+
+literal|"where \"sales_fact_1997\".\"time_id\" = \"time_by_day\".\"time_id\"\n"
+operator|+
+literal|"and \"time_by_day\".\"the_year\" = 1997\n"
+operator|+
+literal|"group by \"time_by_day\".\"the_year\""
 decl_stmt|;
 name|OptiqAssert
 operator|.
@@ -10068,7 +10269,7 @@ argument_list|)
 operator|.
 name|returns
 argument_list|(
-literal|"c0=1997; m0=266773.0000\n"
+literal|"c0=1997; m0=85452\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -11142,8 +11343,6 @@ name|returnsUnordered
 argument_list|(
 literal|"C=false; deptno=10"
 argument_list|,
-literal|"C=false; deptno=10"
-argument_list|,
 literal|"C=true; deptno=10"
 argument_list|,
 literal|"C=true; deptno=20"
@@ -11427,6 +11626,52 @@ operator|.
 name|returns
 argument_list|(
 literal|"CS=0; CS2=0\n"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests that {@code count(deptno, commission, commission + 1)} is reduced to    * {@code count(commission, commission + 1)}, because deptno is NOT NULL. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testReduceCompositeCountNotNullable
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select\n"
+operator|+
+literal|" count(\"deptno\", \"commission\", \"commission\" + 1) as cs\n"
+operator|+
+literal|"from \"hr\".\"emps\""
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|"EnumerableAggregateRel(group=[{}], CS=[COUNT($0, $1)])\n"
+operator|+
+literal|"  EnumerableCalcRel(expr#0..4=[{inputs}], expr#5=[1], expr#6=[+($t4, $t5)], commission=[$t4], $f2=[$t6])\n"
+operator|+
+literal|"    EnumerableTableAccessRel(table=[[hr, emps]])"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"CS=3\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -14553,6 +14798,21 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testRunAgg
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+name|checkRun
+argument_list|(
+literal|"sql/agg.oq"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testRunOuter
 parameter_list|()
 throws|throws
@@ -14813,6 +15073,35 @@ operator|.
 name|Config
 operator|.
 name|REGULAR
+argument_list|)
+operator|.
+name|connect
+argument_list|()
+return|;
+block|}
+if|if
+condition|(
+name|name
+operator|.
+name|equals
+argument_list|(
+literal|"foodmart"
+argument_list|)
+condition|)
+block|{
+return|return
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|FOODMART_CLONE
 argument_list|)
 operator|.
 name|connect

@@ -16699,13 +16699,20 @@ argument_list|)
 expr_stmt|;
 name|tester
 operator|.
-name|checkFails
+name|checkType
 argument_list|(
-literal|"^COUNT(1, 2)^"
+literal|"count(1, 2)"
 argument_list|,
-literal|"Invalid number of arguments to function 'COUNT'. Was expecting 1 arguments"
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"count(1, 2, 'x', 'y')"
 argument_list|,
-literal|false
+literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
 specifier|final
@@ -16739,14 +16746,6 @@ operator|)
 literal|0
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-operator|!
-name|enable
-condition|)
-block|{
-return|return;
-block|}
 name|tester
 operator|.
 name|checkAgg

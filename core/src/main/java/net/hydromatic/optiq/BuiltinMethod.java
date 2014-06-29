@@ -854,6 +854,15 @@ operator|.
 name|class
 argument_list|)
 block|,
+name|IDENTITY_COMPARER
+argument_list|(
+name|Functions
+operator|.
+name|class
+argument_list|,
+literal|"identityComparer"
+argument_list|)
+block|,
 name|IDENTITY_SELECTOR
 argument_list|(
 name|Functions
