@@ -339,6 +339,9 @@ name|right
 parameter_list|,
 name|JoinRelType
 name|joinType
+parameter_list|,
+name|boolean
+name|semiJoinDone
 parameter_list|)
 block|{
 assert|assert
@@ -364,18 +367,16 @@ name|right
 argument_list|,
 name|conditionExpr
 argument_list|,
-name|this
-operator|.
 name|joinType
 argument_list|,
 name|this
 operator|.
 name|variablesStopped
 argument_list|,
-name|this
-operator|.
 name|semiJoinDone
 argument_list|,
+name|this
+operator|.
 name|systemFieldList
 argument_list|)
 return|;
@@ -407,23 +408,8 @@ name|RelWriter
 name|pw
 parameter_list|)
 block|{
-comment|// NOTE jvs 14-Mar-2006: Do it this way so that semijoin state
-comment|// don't clutter things up in optimizers that don't use semijoins
-if|if
-condition|(
-operator|!
-name|semiJoinDone
-condition|)
-block|{
-return|return
-name|super
-operator|.
-name|explainTerms
-argument_list|(
-name|pw
-argument_list|)
-return|;
-block|}
+comment|// Don't ever print semiJoinDone=false. This way, we
+comment|// don't clutter things up in optimizers that don't use semi-joins.
 return|return
 name|super
 operator|.
@@ -432,15 +418,18 @@ argument_list|(
 name|pw
 argument_list|)
 operator|.
-name|item
+name|itemIf
 argument_list|(
 literal|"semiJoinDone"
+argument_list|,
+name|semiJoinDone
 argument_list|,
 name|semiJoinDone
 argument_list|)
 return|;
 block|}
-comment|/**    * Returns whether this JoinRel has already spawned a {@link    * org.eigenbase.rel.rules.SemiJoinRel} via {@link    * org.eigenbase.rel.rules.AddRedundantSemiJoinRule}.    *    * @return whether this join has already spawned a semi join    */
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isSemiJoinDone

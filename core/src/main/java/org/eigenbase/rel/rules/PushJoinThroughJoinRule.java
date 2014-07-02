@@ -114,6 +114,7 @@ name|PushJoinThroughJoinRule
 extends|extends
 name|RelOptRule
 block|{
+comment|/** Instance of the rule that works on logical joins only, and pushes to the    * right. */
 specifier|public
 specifier|static
 specifier|final
@@ -130,8 +131,13 @@ argument_list|,
 name|JoinRel
 operator|.
 name|class
+argument_list|,
+name|RelFactories
+operator|.
+name|DEFAULT_PROJECT_FACTORY
 argument_list|)
 decl_stmt|;
+comment|/** Instance of the rule that works on logical joins only, and pushes to the    * left. */
 specifier|public
 specifier|static
 specifier|final
@@ -148,6 +154,10 @@ argument_list|,
 name|JoinRel
 operator|.
 name|class
+argument_list|,
+name|RelFactories
+operator|.
+name|DEFAULT_PROJECT_FACTORY
 argument_list|)
 decl_stmt|;
 specifier|private
@@ -161,38 +171,6 @@ name|ProjectFactory
 name|projectFactory
 decl_stmt|;
 comment|/**    * Creates a PushJoinThroughJoinRule.    */
-specifier|private
-name|PushJoinThroughJoinRule
-parameter_list|(
-name|String
-name|description
-parameter_list|,
-name|boolean
-name|right
-parameter_list|,
-name|Class
-argument_list|<
-name|?
-extends|extends
-name|JoinRelBase
-argument_list|>
-name|clazz
-parameter_list|)
-block|{
-name|this
-argument_list|(
-name|description
-argument_list|,
-name|right
-argument_list|,
-name|clazz
-argument_list|,
-name|RelFactories
-operator|.
-name|DEFAULT_PROJECT_FACTORY
-argument_list|)
-expr_stmt|;
-block|}
 specifier|public
 name|PushJoinThroughJoinRule
 parameter_list|(
@@ -211,7 +189,7 @@ argument_list|>
 name|clazz
 parameter_list|,
 name|ProjectFactory
-name|pFactory
+name|projectFactory
 parameter_list|)
 block|{
 name|super
@@ -248,9 +226,11 @@ name|right
 operator|=
 name|right
 expr_stmt|;
+name|this
+operator|.
 name|projectFactory
 operator|=
-name|pFactory
+name|projectFactory
 expr_stmt|;
 block|}
 annotation|@
@@ -685,6 +665,11 @@ name|bottomJoin
 operator|.
 name|getJoinType
 argument_list|()
+argument_list|,
+name|bottomJoin
+operator|.
+name|isSemiJoinDone
+argument_list|()
 argument_list|)
 decl_stmt|;
 comment|// target: | A       | C      | B |
@@ -816,6 +801,11 @@ argument_list|,
 name|topJoin
 operator|.
 name|getJoinType
+argument_list|()
+argument_list|,
+name|topJoin
+operator|.
+name|isSemiJoinDone
 argument_list|()
 argument_list|)
 decl_stmt|;
@@ -1265,6 +1255,11 @@ name|bottomJoin
 operator|.
 name|getJoinType
 argument_list|()
+argument_list|,
+name|bottomJoin
+operator|.
+name|isSemiJoinDone
+argument_list|()
 argument_list|)
 decl_stmt|;
 comment|// target: | C      | B | A       |
@@ -1396,6 +1391,11 @@ argument_list|,
 name|topJoin
 operator|.
 name|getJoinType
+argument_list|()
+argument_list|,
+name|topJoin
+operator|.
+name|isSemiJoinDone
 argument_list|()
 argument_list|)
 decl_stmt|;

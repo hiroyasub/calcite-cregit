@@ -416,7 +416,7 @@ if|if
 condition|(
 name|rel
 operator|instanceof
-name|JoinRel
+name|JoinRelBase
 condition|)
 block|{
 comment|// no variable here -- go deeper

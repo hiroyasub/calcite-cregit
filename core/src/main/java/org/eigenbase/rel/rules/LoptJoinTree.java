@@ -38,7 +38,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Utility class used to store a {@link JoinRel} tree and the factors that make  * up the tree.  *  *<p>Because {@link RelNode}s can be duplicated in a query  * when you have a self-join, factor ids are needed to distinguish between the  * different join inputs that correspond to identical tables. The class  * associates factor ids with a join tree, matching the order of the factor ids  * with the order of those factors in the join tree.  */
+comment|/**  * Utility class used to store a {@link JoinRelBase} tree and the factors that  * make up the tree.  *  *<p>Because {@link RelNode}s can be duplicated in a query  * when you have a self-join, factor ids are needed to distinguish between the  * different join inputs that correspond to identical tables. The class  * associates factor ids with a join tree, matching the order of the factor ids  * with the order of those factors in the join tree.  */
 end_comment
 
 begin_class
@@ -216,7 +216,7 @@ name|LoptJoinTree
 argument_list|(
 operator|(
 operator|(
-name|JoinRel
+name|JoinRelBase
 operator|)
 name|joinTree
 operator|)
@@ -253,7 +253,7 @@ name|LoptJoinTree
 argument_list|(
 operator|(
 operator|(
-name|JoinRel
+name|JoinRelBase
 operator|)
 name|joinTree
 operator|)

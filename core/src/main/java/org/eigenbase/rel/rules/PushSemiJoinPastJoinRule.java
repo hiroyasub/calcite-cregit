@@ -74,7 +74,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * PushSemiJoinPastJoinRule implements the rule for pushing semijoins down in a  * tree past a join in order to trigger other rules that will convert semijoins.  *  *<ul>  *<li>SemiJoinRel(JoinRel(X, Y), Z)&rarr; JoinRel(SemiJoinRel(X, Z), Y)  *<li>SemiJoinRel(JoinRel(X, Y), Z)&rarr; JoinRel(X, SemiJoinRel(Y, Z))  *</ul>  *  *<p>Whether this  * first or second conversion is applied depends on which operands actually  * participate in the semijoin.</p>  */
+comment|/**  * PushSemiJoinPastJoinRule implements the rule for pushing semi-joins down in a  * tree past a join in order to trigger other rules that will convert  * semi-joins.  *  *<ul>  *<li>SemiJoinRel(JoinRel(X, Y), Z)&rarr; JoinRel(SemiJoinRel(X, Z), Y)  *<li>SemiJoinRel(JoinRel(X, Y), Z)&rarr; JoinRel(X, SemiJoinRel(Y, Z))  *</ul>  *  *<p>Whether this  * first or second conversion is applied depends on which operands actually  * participate in the semi-join.</p>  */
 end_comment
 
 begin_class
@@ -112,7 +112,7 @@ name|some
 argument_list|(
 name|operand
 argument_list|(
-name|JoinRel
+name|JoinRelBase
 operator|.
 name|class
 argument_list|,
@@ -144,8 +144,9 @@ argument_list|(
 literal|0
 argument_list|)
 decl_stmt|;
-name|JoinRel
-name|joinRel
+specifier|final
+name|JoinRelBase
+name|join
 init|=
 name|call
 operator|.
@@ -154,6 +155,15 @@ argument_list|(
 literal|1
 argument_list|)
 decl_stmt|;
+if|if
+condition|(
+name|join
+operator|instanceof
+name|SemiJoinRel
+condition|)
+block|{
+return|return;
+block|}
 name|List
 argument_list|<
 name|Integer
@@ -176,13 +186,13 @@ operator|.
 name|getRightKeys
 argument_list|()
 decl_stmt|;
-comment|// X is the left child of the join below the semijoin
-comment|// Y is the right child of the join below the semijoin
-comment|// Z is the right child of the semijoin
+comment|// X is the left child of the join below the semi-join
+comment|// Y is the right child of the join below the semi-join
+comment|// Z is the right child of the semi-join
 name|int
 name|nFieldsX
 init|=
-name|joinRel
+name|join
 operator|.
 name|getLeft
 argument_list|()
@@ -199,7 +209,7 @@ decl_stmt|;
 name|int
 name|nFieldsY
 init|=
-name|joinRel
+name|join
 operator|.
 name|getRight
 argument_list|()
@@ -253,8 +263,8 @@ argument_list|>
 argument_list|()
 decl_stmt|;
 comment|// create a list of fields for the full join result; note that
-comment|// we can't simply use the fields from the semijoin because the
-comment|// rowtype of a semijoin only includes the left hand side fields
+comment|// we can't simply use the fields from the semi-join because the
+comment|// row-type of a semi-join only includes the left hand side fields
 name|List
 argument_list|<
 name|RelDataTypeField
@@ -342,8 +352,8 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|// determine which operands below the semijoin are the actual
-comment|// Rels that participate in the semijoin
+comment|// determine which operands below the semi-join are the actual
+comment|// Rels that participate in the semi-join
 name|int
 name|nKeysFromX
 init|=
@@ -370,7 +380,7 @@ expr_stmt|;
 block|}
 block|}
 comment|// the keys must all originate from either the left or right;
-comment|// otherwise, a semijoin wouldn't have been created
+comment|// otherwise, a semi-join wouldn't have been created
 assert|assert
 operator|(
 name|nKeysFromX
@@ -387,7 +397,7 @@ name|size
 argument_list|()
 operator|)
 assert|;
-comment|// need to convert the semijoin condition and possibly the keys
+comment|// need to convert the semi-join condition and possibly the keys
 name|RexNode
 name|newSemiJoinFilter
 decl_stmt|;
@@ -417,7 +427,7 @@ block|{
 comment|// (X, Y, Z) --> (X, Z, Y)
 comment|// semiJoin(X, Z)
 comment|// pass 0 as Y's adjustment because there shouldn't be any
-comment|// references to Y in the semijoin filter
+comment|// references to Y in the semi-join filter
 name|setJoinAdjustments
 argument_list|(
 name|adjustments
@@ -542,7 +552,7 @@ condition|)
 block|{
 name|leftSemiJoinOp
 operator|=
-name|joinRel
+name|join
 operator|.
 name|getLeft
 argument_list|()
@@ -552,7 +562,7 @@ else|else
 block|{
 name|leftSemiJoinOp
 operator|=
-name|joinRel
+name|join
 operator|.
 name|getRight
 argument_list|()
@@ -602,7 +612,7 @@ name|newSemiJoin
 expr_stmt|;
 name|rightJoinRel
 operator|=
-name|joinRel
+name|join
 operator|.
 name|getRight
 argument_list|()
@@ -612,7 +622,7 @@ else|else
 block|{
 name|leftJoinRel
 operator|=
-name|joinRel
+name|join
 operator|.
 name|getLeft
 argument_list|()
@@ -625,44 +635,32 @@ block|}
 name|RelNode
 name|newJoinRel
 init|=
-operator|new
-name|JoinRel
-argument_list|(
-name|joinRel
+name|join
 operator|.
-name|getCluster
+name|copy
+argument_list|(
+name|join
+operator|.
+name|getTraitSet
+argument_list|()
+argument_list|,
+name|join
+operator|.
+name|getCondition
 argument_list|()
 argument_list|,
 name|leftJoinRel
 argument_list|,
 name|rightJoinRel
 argument_list|,
-name|joinRel
-operator|.
-name|getCondition
-argument_list|()
-argument_list|,
-name|joinRel
+name|join
 operator|.
 name|getJoinType
 argument_list|()
 argument_list|,
-name|Collections
-operator|.
-expr|<
-name|String
-operator|>
-name|emptySet
-argument_list|()
-argument_list|,
-name|joinRel
+name|join
 operator|.
 name|isSemiJoinDone
-argument_list|()
-argument_list|,
-name|joinRel
-operator|.
-name|getSystemFieldList
 argument_list|()
 argument_list|)
 decl_stmt|;

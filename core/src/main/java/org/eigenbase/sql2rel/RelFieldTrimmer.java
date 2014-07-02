@@ -2519,6 +2519,11 @@ name|join
 operator|.
 name|getJoinType
 argument_list|()
+argument_list|,
+name|join
+operator|.
+name|isSemiJoinDone
+argument_list|()
 argument_list|)
 decl_stmt|;
 return|return

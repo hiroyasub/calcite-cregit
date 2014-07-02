@@ -821,6 +821,16 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+comment|/**    * Returns whether this JoinRel has already spawned a    * {@link org.eigenbase.rel.rules.SemiJoinRel} via    * {@link org.eigenbase.rel.rules.AddRedundantSemiJoinRule}.    *    *<p>The base implementation returns false.</p>    *    * @return whether this join has already spawned a semi join    */
+specifier|public
+name|boolean
+name|isSemiJoinDone
+parameter_list|()
+block|{
+return|return
+literal|false
+return|;
+block|}
 comment|/**    * Returns a list of system fields that will be prefixed to    * output row type.    *    * @return list of system fields    */
 specifier|public
 name|List
@@ -1304,10 +1314,13 @@ literal|1
 argument_list|)
 argument_list|,
 name|joinType
+argument_list|,
+name|isSemiJoinDone
+argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates a copy of this join, overriding condition, system fields and    * inputs.    *    *<p>General contract as {@link org.eigenbase.rel.RelNode#copy}.    *    * @param conditionExpr Condition    * @param left          Left input    * @param right         Right input    * @param joinType      Join type    * @return Copy of this join    */
+comment|/**    * Creates a copy of this join, overriding condition, system fields and    * inputs.    *    *<p>General contract as {@link org.eigenbase.rel.RelNode#copy}.    *    * @param conditionExpr Condition    * @param left          Left input    * @param right         Right input    * @param joinType      Join type    * @param semiJoinDone  Whether this join has been translated to a    *                      semi-join    * @return Copy of this join    */
 specifier|public
 specifier|abstract
 name|JoinRelBase
@@ -1327,6 +1340,9 @@ name|right
 parameter_list|,
 name|JoinRelType
 name|joinType
+parameter_list|,
+name|boolean
+name|semiJoinDone
 parameter_list|)
 function_decl|;
 block|}

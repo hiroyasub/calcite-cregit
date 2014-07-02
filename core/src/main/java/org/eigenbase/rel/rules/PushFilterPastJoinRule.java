@@ -104,7 +104,7 @@ name|class
 argument_list|,
 name|operand
 argument_list|(
-name|JoinRel
+name|JoinRelBase
 operator|.
 name|class
 argument_list|,
@@ -136,7 +136,7 @@ argument_list|(
 literal|0
 argument_list|)
 decl_stmt|;
-name|JoinRel
+name|JoinRelBase
 name|join
 init|=
 name|call
@@ -169,7 +169,7 @@ name|PushFilterPastJoinRule
 argument_list|(
 name|operand
 argument_list|(
-name|JoinRel
+name|JoinRelBase
 operator|.
 name|class
 argument_list|,
@@ -190,7 +190,7 @@ name|RelOptRuleCall
 name|call
 parameter_list|)
 block|{
-name|JoinRel
+name|JoinRelBase
 name|join
 init|=
 name|call
@@ -623,6 +623,11 @@ argument_list|,
 name|join
 operator|.
 name|getJoinType
+argument_list|()
+argument_list|,
+name|join
+operator|.
+name|isSemiJoinDone
 argument_list|()
 argument_list|)
 decl_stmt|;

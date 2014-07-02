@@ -762,6 +762,11 @@ name|joinRel
 operator|.
 name|getJoinType
 argument_list|()
+argument_list|,
+name|joinRel
+operator|.
+name|isSemiJoinDone
+argument_list|()
 argument_list|)
 decl_stmt|;
 comment|// expand out the new projection expressions; if the join is an

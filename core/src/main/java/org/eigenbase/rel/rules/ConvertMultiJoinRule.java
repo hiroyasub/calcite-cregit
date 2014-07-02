@@ -86,7 +86,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Rule to flatten a tree of {@link JoinRel}s into a single {@link MultiJoinRel}  * with N inputs. An input is not flattened if the input is a null generating  * input in an outer join, i.e., either input in a full outer join, the right  * hand side of a left outer join, or the left hand side of a right outer join.  *  *<p>Join conditions are also pulled up from the inputs into the topmost {@link  * MultiJoinRel}, unless the input corresponds to a null generating input in an  * outer join,  *  *<p>Outer join information is also stored in the {@link MultiJoinRel}. A  * boolean flag indicates if the join is a full outer join, and in the case of  * left and right outer joins, the join type and outer join conditions are  * stored in arrays in the {@link MultiJoinRel}. This outer join information is  * associated with the null generating input in the outer join. So, in the case  * of a a left outer join between A and B, the information is associated with B,  * not A.  *  *<p>Here are examples of the {@link MultiJoinRel}s constructed after this rule  * has been applied on following join trees.  *  *<pre>  * A JOIN B&rarr; MJ(A, B)  * A JOIN B JOIN C&rarr; MJ(A, B, C)  * A LEFTOUTER B&rarr; MJ(A, B), left outer join on input#1  * A RIGHTOUTER B&rarr; MJ(A, B), right outer join on input#0  * A FULLOUTER B&rarr; MJ[full](A, B)  * A LEFTOUTER (B JOIN C)&rarr; MJ(A, MJ(B, C))), left outer join on input#1 in  * the outermost MultiJoinRel  * (A JOIN B) LEFTOUTER C&rarr; MJ(A, B, C), left outer join on input#2  * A LEFTOUTER (B FULLOUTER C)&rarr; MJ(A, MJ[full](B, C)), left outer join on  *      input#1 in the outermost MultiJoinRel  * (A LEFTOUTER B) FULLOUTER (C RIGHTOUTER D)&rarr;  *      MJ[full](MJ(A, B), MJ(C, D)), left outer join on input #1 in the first  *      inner MultiJoinRel and right outer join on input#0 in the second inner  *      MultiJoinRel  *</pre>  */
+comment|/**  * Rule to flatten a tree of {@link JoinRel}s into a single {@link MultiJoinRel}  * with N inputs. An input is not flattened if the input is a null generating  * input in an outer join, i.e., either input in a full outer join, the right  * hand side of a left outer join, or the left hand side of a right outer join.  *  *<p>Join conditions are also pulled up from the inputs into the topmost  * {@link MultiJoinRel},  * unless the input corresponds to a null generating input in an outer join,  *  *<p>Outer join information is also stored in the {@link MultiJoinRel}. A  * boolean flag indicates if the join is a full outer join, and in the case of  * left and right outer joins, the join type and outer join conditions are  * stored in arrays in the {@link MultiJoinRel}. This outer join information is  * associated with the null generating input in the outer join. So, in the case  * of a a left outer join between A and B, the information is associated with B,  * not A.  *  *<p>Here are examples of the {@link MultiJoinRel}s constructed after this rule  * has been applied on following join trees.  *  *<pre>  * A JOIN B&rarr; MJ(A, B)  * A JOIN B JOIN C&rarr; MJ(A, B, C)  * A LEFTOUTER B&rarr; MJ(A, B), left outer join on input#1  * A RIGHTOUTER B&rarr; MJ(A, B), right outer join on input#0  * A FULLOUTER B&rarr; MJ[full](A, B)  * A LEFTOUTER (B JOIN C)&rarr; MJ(A, MJ(B, C))), left outer join on input#1 in  * the outermost MultiJoinRel  * (A JOIN B) LEFTOUTER C&rarr; MJ(A, B, C), left outer join on input#2  * A LEFTOUTER (B FULLOUTER C)&rarr; MJ(A, MJ[full](B, C)), left outer join on  *      input#1 in the outermost MultiJoinRel  * (A LEFTOUTER B) FULLOUTER (C RIGHTOUTER D)&rarr;  *      MJ[full](MJ(A, B), MJ(C, D)), left outer join on input #1 in the first  *      inner MultiJoinRel and right outer join on input#0 in the second inner  *      MultiJoinRel  *</pre>  *  *<p>The constructor is parameterized to allow any sub-class of  * {@link JoinRelBase}, not just {@link JoinRel}.</p>  */
 end_comment
 
 begin_class
@@ -104,21 +104,31 @@ name|INSTANCE
 init|=
 operator|new
 name|ConvertMultiJoinRule
-argument_list|()
+argument_list|(
+name|JoinRel
+operator|.
+name|class
+argument_list|)
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 comment|/**    * Creates a ConvertMultiJoinRule.    */
-specifier|private
+specifier|public
 name|ConvertMultiJoinRule
-parameter_list|()
+parameter_list|(
+name|Class
+argument_list|<
+name|?
+extends|extends
+name|JoinRelBase
+argument_list|>
+name|clazz
+parameter_list|)
 block|{
 name|super
 argument_list|(
 name|operand
 argument_list|(
-name|JoinRel
-operator|.
-name|class
+name|clazz
 argument_list|,
 name|operand
 argument_list|(
@@ -152,8 +162,9 @@ name|RelOptRuleCall
 name|call
 parameter_list|)
 block|{
-name|JoinRel
-name|origJoinRel
+specifier|final
+name|JoinRelBase
+name|origJoin
 init|=
 name|call
 operator|.
@@ -162,6 +173,7 @@ argument_list|(
 literal|0
 argument_list|)
 decl_stmt|;
+specifier|final
 name|RelNode
 name|left
 init|=
@@ -172,6 +184,7 @@ argument_list|(
 literal|1
 argument_list|)
 decl_stmt|;
+specifier|final
 name|RelNode
 name|right
 init|=
@@ -220,7 +233,7 @@ name|newInputs
 init|=
 name|combineInputs
 argument_list|(
-name|origJoinRel
+name|origJoin
 argument_list|,
 name|left
 argument_list|,
@@ -260,7 +273,7 @@ argument_list|()
 decl_stmt|;
 name|combineOuterJoins
 argument_list|(
-name|origJoinRel
+name|origJoin
 argument_list|,
 name|newInputs
 argument_list|,
@@ -305,7 +318,7 @@ name|newJoinFilter
 init|=
 name|combineJoinFilters
 argument_list|(
-name|origJoinRel
+name|origJoin
 argument_list|,
 name|left
 argument_list|,
@@ -337,7 +350,7 @@ name|addOnJoinFieldRefCounts
 argument_list|(
 name|newInputs
 argument_list|,
-name|origJoinRel
+name|origJoin
 operator|.
 name|getRowType
 argument_list|()
@@ -345,7 +358,7 @@ operator|.
 name|getFieldCount
 argument_list|()
 argument_list|,
-name|origJoinRel
+name|origJoin
 operator|.
 name|getCondition
 argument_list|()
@@ -360,7 +373,7 @@ name|newPostJoinFilter
 init|=
 name|combinePostJoinFilters
 argument_list|(
-name|origJoinRel
+name|origJoin
 argument_list|,
 name|left
 argument_list|,
@@ -373,7 +386,7 @@ init|=
 operator|new
 name|MultiJoinRel
 argument_list|(
-name|origJoinRel
+name|origJoin
 operator|.
 name|getCluster
 argument_list|()
@@ -382,12 +395,12 @@ name|newInputs
 argument_list|,
 name|newJoinFilter
 argument_list|,
-name|origJoinRel
+name|origJoin
 operator|.
 name|getRowType
 argument_list|()
 argument_list|,
-name|origJoinRel
+name|origJoin
 operator|.
 name|getJoinType
 argument_list|()
@@ -423,7 +436,7 @@ name|RelNode
 argument_list|>
 name|combineInputs
 parameter_list|(
-name|JoinRel
+name|JoinRelBase
 name|join
 parameter_list|,
 name|RelNode
@@ -803,7 +816,7 @@ specifier|private
 name|void
 name|combineOuterJoins
 parameter_list|(
-name|JoinRel
+name|JoinRelBase
 name|joinRel
 parameter_list|,
 name|List
@@ -1311,12 +1324,12 @@ expr_stmt|;
 block|}
 block|}
 block|}
-comment|/**    * Combines the join filters from the left and right inputs (if they are    * MultiJoinRels) with the join filter in the joinrel into a single AND'd    * join filter, unless the inputs correspond to null generating inputs in an    * outer join    *    * @param joinRel join rel    * @param left    left child of the joinrel    * @param right   right child of the joinrel    * @return combined join filters AND'd together    */
+comment|/**    * Combines the join filters from the left and right inputs (if they are    * MultiJoinRels) with the join filter in the joinrel into a single AND'd    * join filter, unless the inputs correspond to null generating inputs in an    * outer join    *    * @param joinRel join rel    * @param left    left child of the join    * @param right   right child of the join    * @return combined join filters AND-ed together    */
 specifier|private
 name|RexNode
 name|combineJoinFilters
 parameter_list|(
-name|JoinRel
+name|JoinRelBase
 name|joinRel
 parameter_list|,
 name|RelNode
@@ -1519,7 +1532,7 @@ specifier|private
 name|RexNode
 name|shiftRightFilter
 parameter_list|(
-name|JoinRel
+name|JoinRelBase
 name|joinRel
 parameter_list|,
 name|RelNode
@@ -1855,7 +1868,7 @@ specifier|private
 name|RexNode
 name|combinePostJoinFilters
 parameter_list|(
-name|JoinRel
+name|JoinRelBase
 name|joinRel
 parameter_list|,
 name|RelNode

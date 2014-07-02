@@ -154,7 +154,7 @@ extends|extends
 name|RelOptRule
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
-comment|/** The singleton. */
+comment|/** The default instance of the rule; operates only on logical expressions. */
 specifier|public
 specifier|static
 specifier|final
@@ -163,26 +163,57 @@ name|INSTANCE
 init|=
 operator|new
 name|RemoveDistinctAggregateRule
-argument_list|()
-decl_stmt|;
-comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Private constructor.    */
-specifier|private
-name|RemoveDistinctAggregateRule
-parameter_list|()
-block|{
-name|super
-argument_list|(
-name|operand
 argument_list|(
 name|AggregateRel
 operator|.
 name|class
 argument_list|,
+name|RelFactories
+operator|.
+name|DEFAULT_JOIN_FACTORY
+argument_list|)
+decl_stmt|;
+specifier|private
+specifier|final
+name|RelFactories
+operator|.
+name|JoinFactory
+name|joinFactory
+decl_stmt|;
+comment|//~ Constructors -----------------------------------------------------------
+specifier|public
+name|RemoveDistinctAggregateRule
+parameter_list|(
+name|Class
+argument_list|<
+name|?
+extends|extends
+name|AggregateRel
+argument_list|>
+name|clazz
+parameter_list|,
+name|RelFactories
+operator|.
+name|JoinFactory
+name|joinFactory
+parameter_list|)
+block|{
+name|super
+argument_list|(
+name|operand
+argument_list|(
+name|clazz
+argument_list|,
 name|any
 argument_list|()
 argument_list|)
 argument_list|)
+expr_stmt|;
+name|this
+operator|.
+name|joinFactory
+operator|=
+name|joinFactory
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
@@ -194,7 +225,8 @@ name|RelOptRuleCall
 name|call
 parameter_list|)
 block|{
-name|AggregateRel
+specifier|final
+name|AggregateRelBase
 name|aggregate
 init|=
 name|call
@@ -638,12 +670,12 @@ name|rel
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Converts an aggregrate relational expression which contains just one    * distinct aggregate function (or perhaps several over the same arguments)    * and no non-distinct aggregate functions.    */
+comment|/**    * Converts an aggregate relational expression that contains just one    * distinct aggregate function (or perhaps several over the same arguments)    * and no non-distinct aggregate functions.    */
 specifier|private
 name|RelNode
 name|convertMonopole
 parameter_list|(
-name|AggregateRel
+name|AggregateRelBase
 name|aggregate
 parameter_list|,
 name|List
@@ -685,7 +717,7 @@ argument_list|>
 argument_list|()
 decl_stmt|;
 specifier|final
-name|AggregateRel
+name|AggregateRelBase
 name|distinct
 init|=
 name|createSelectDistinct
@@ -726,15 +758,14 @@ argument_list|,
 name|sourceOf
 argument_list|)
 expr_stmt|;
-name|AggregateRel
-name|newAggregate
-init|=
-operator|new
-name|AggregateRel
+return|return
+name|aggregate
+operator|.
+name|copy
 argument_list|(
 name|aggregate
 operator|.
-name|getCluster
+name|getTraitSet
 argument_list|()
 argument_list|,
 name|distinct
@@ -746,9 +777,6 @@ argument_list|()
 argument_list|,
 name|newAggCalls
 argument_list|)
-decl_stmt|;
-return|return
-name|newAggregate
 return|;
 block|}
 comment|/**    * Converts all distinct aggregate calls to a given set of arguments.    *    *<p>This method is called several times, one for each set of arguments.    * Each time it is called, it generates a JOIN to a new SELECT DISTINCT    * relational expression, and modifies the set of top-level calls.    *    * @param aggregate Original aggregate    * @param left      Child relational expression (either the original    *                  aggregate, the output from the previous call to this    *                  method, or null in the case where we're converting the    *                  first distinct aggregate in a query with no non-distinct    *                  aggregates)    * @param argList   Arguments to the distinct aggregate function    * @param refs      Array of expressions which will be the projected by the    *                  result of this rule. Those relating to this arg list will    *                  be modified    * @return Relational expression    */
@@ -756,7 +784,7 @@ specifier|private
 name|RelNode
 name|doRewrite
 parameter_list|(
-name|AggregateRel
+name|AggregateRelBase
 name|aggregate
 parameter_list|,
 name|RelNode
@@ -857,7 +885,7 @@ comment|//   GROUP BY e.deptno
 comment|//
 comment|// Note that if a query contains no non-distinct aggregates, then the
 comment|// very first join/group by is omitted.  In the example above, if
-comment|// MAX(age) is removed, then the subselect of "e" is not needed, and
+comment|// MAX(age) is removed, then the sub-select of "e" is not needed, and
 comment|// instead the two other group by's are joined to one another.
 comment|// Project the columns of the GROUP BY plus the arguments
 comment|// to the agg function.
@@ -879,7 +907,7 @@ argument_list|>
 argument_list|()
 decl_stmt|;
 specifier|final
-name|AggregateRel
+name|AggregateRelBase
 name|distinct
 init|=
 name|createSelectDistinct
@@ -1161,15 +1189,16 @@ name|newAggCall
 argument_list|)
 expr_stmt|;
 block|}
-name|AggregateRel
+name|AggregateRelBase
 name|distinctAgg
 init|=
-operator|new
-name|AggregateRel
+name|aggregate
+operator|.
+name|copy
 argument_list|(
 name|aggregate
 operator|.
-name|getCluster
+name|getTraitSet
 argument_list|()
 argument_list|,
 name|distinct
@@ -1331,14 +1360,10 @@ block|}
 block|}
 comment|// Join in the new 'select distinct' relation.
 return|return
-operator|new
-name|JoinRel
-argument_list|(
-name|aggregate
+name|joinFactory
 operator|.
-name|getCluster
-argument_list|()
-argument_list|,
+name|createJoin
+argument_list|(
 name|left
 argument_list|,
 name|distinctAgg
@@ -1356,6 +1381,8 @@ name|String
 operator|>
 name|of
 argument_list|()
+argument_list|,
+literal|false
 argument_list|)
 return|;
 block|}
@@ -1557,13 +1584,13 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**    * Given an {@link AggregateRel} and the ordinals of the arguments to a    * particular call to an aggregate function, creates a 'select distinct'    * relational expression which projects the group columns and those    * arguments but nothing else.    *    *<p>For example, given    *    *<blockquote>    *<pre>select f0, count(distinct f1), count(distinct f2)    * from t group by f0</pre>    *</blockquote>    *    * and the arglist    *    *<blockquote>{2}</blockquote>    *    * returns    *    *<blockquote>    *<pre>select distinct f0, f2 from t</pre>    *</blockquote>    *    * '    *    *<p>The<code>sourceOf</code> map is populated with the source of each    * column; in this case sourceOf.get(0) = 0, and sourceOf.get(1) = 2.</p>    *    * @param aggregate Aggregate relational expression    * @param argList   Ordinals of columns to distinctify    * @param sourceOf  Out parameter, is populated with a map of where each    *                  output field came from    * @return Aggregate relational expression which projects the required    * columns    */
+comment|/**    * Given an {@link AggregateRel} and the ordinals of the arguments to a    * particular call to an aggregate function, creates a 'select distinct'    * relational expression which projects the group columns and those    * arguments but nothing else.    *    *<p>For example, given    *    *<blockquote>    *<pre>select f0, count(distinct f1), count(distinct f2)    * from t group by f0</pre>    *</blockquote>    *    * and the arglist    *    *<blockquote>{2}</blockquote>    *    * returns    *    *<blockquote>    *<pre>select distinct f0, f2 from t</pre>    *</blockquote>    *    * '    *    *<p>The<code>sourceOf</code> map is populated with the source of each    * column; in this case sourceOf.get(0) = 0, and sourceOf.get(1) = 2.</p>    *    * @param aggregate Aggregate relational expression    * @param argList   Ordinals of columns to make distinct    * @param sourceOf  Out parameter, is populated with a map of where each    *                  output field came from    * @return Aggregate relational expression which projects the required    * columns    */
 specifier|private
 specifier|static
-name|AggregateRel
+name|AggregateRelBase
 name|createSelectDistinct
 parameter_list|(
-name|AggregateRel
+name|AggregateRelBase
 name|aggregate
 parameter_list|,
 name|List
@@ -1738,16 +1765,14 @@ argument_list|)
 decl_stmt|;
 comment|// Get the distinct values of the GROUP BY fields and the arguments
 comment|// to the agg functions.
-specifier|final
-name|AggregateRel
-name|distinct
-init|=
-operator|new
-name|AggregateRel
+return|return
+name|aggregate
+operator|.
+name|copy
 argument_list|(
 name|aggregate
 operator|.
-name|getCluster
+name|getTraitSet
 argument_list|()
 argument_list|,
 name|project
@@ -1770,9 +1795,6 @@ operator|>
 name|of
 argument_list|()
 argument_list|)
-decl_stmt|;
-return|return
-name|distinct
 return|;
 block|}
 block|}

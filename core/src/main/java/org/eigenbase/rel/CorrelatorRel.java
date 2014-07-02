@@ -407,6 +407,9 @@ name|right
 parameter_list|,
 name|JoinRelType
 name|joinType
+parameter_list|,
+name|boolean
+name|semiJoinDone
 parameter_list|)
 block|{
 assert|assert

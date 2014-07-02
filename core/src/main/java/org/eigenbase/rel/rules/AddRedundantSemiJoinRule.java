@@ -50,7 +50,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Rule to add a semijoin into a joinrel. Transformation is as follows:  *  *<p>JoinRel(X, Y)&rarr; JoinRel(SemiJoinRel(X, Y), Y)  */
+comment|/**  * Rule to add a semi-join into a join. Transformation is as follows:  *  *<p>JoinRel(X, Y)&rarr; JoinRel(SemiJoinRel(X, Y), Y)  *  *<p>The constructor is parameterized to allow any sub-class of  * {@link JoinRelBase}, not just {@link JoinRel}.</p>  */
 end_comment
 
 begin_class
@@ -68,21 +68,31 @@ name|INSTANCE
 init|=
 operator|new
 name|AddRedundantSemiJoinRule
-argument_list|()
+argument_list|(
+name|JoinRel
+operator|.
+name|class
+argument_list|)
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 comment|/**    * Creates an AddRedundantSemiJoinRule.    */
 specifier|private
 name|AddRedundantSemiJoinRule
-parameter_list|()
+parameter_list|(
+name|Class
+argument_list|<
+name|?
+extends|extends
+name|JoinRelBase
+argument_list|>
+name|clazz
+parameter_list|)
 block|{
 name|super
 argument_list|(
 name|operand
 argument_list|(
-name|JoinRel
-operator|.
-name|class
+name|clazz
 argument_list|,
 name|any
 argument_list|()
@@ -99,7 +109,7 @@ name|RelOptRuleCall
 name|call
 parameter_list|)
 block|{
-name|JoinRel
+name|JoinRelBase
 name|origJoinRel
 init|=
 name|call
@@ -231,12 +241,18 @@ decl_stmt|;
 name|RelNode
 name|newJoinRel
 init|=
-operator|new
-name|JoinRel
+name|origJoinRel
+operator|.
+name|copy
 argument_list|(
 name|origJoinRel
 operator|.
-name|getCluster
+name|getTraitSet
+argument_list|()
+argument_list|,
+name|origJoinRel
+operator|.
+name|getCondition
 argument_list|()
 argument_list|,
 name|semiJoin
@@ -246,29 +262,11 @@ operator|.
 name|getRight
 argument_list|()
 argument_list|,
-name|origJoinRel
-operator|.
-name|getCondition
-argument_list|()
-argument_list|,
 name|JoinRelType
 operator|.
 name|INNER
 argument_list|,
-name|Collections
-operator|.
-expr|<
-name|String
-operator|>
-name|emptySet
-argument_list|()
-argument_list|,
 literal|true
-argument_list|,
-name|origJoinRel
-operator|.
-name|getSystemFieldList
-argument_list|()
 argument_list|)
 decl_stmt|;
 name|call
