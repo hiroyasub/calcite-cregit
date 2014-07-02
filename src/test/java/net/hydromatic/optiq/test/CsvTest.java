@@ -943,7 +943,7 @@ name|append
 argument_list|(
 name|resultSet
 operator|.
-name|getObject
+name|getString
 argument_list|(
 name|i
 argument_list|)

@@ -89,8 +89,6 @@ name|CsvFieldType
 block|{
 name|STRING
 argument_list|(
-literal|null
-argument_list|,
 name|String
 operator|.
 name|class
@@ -156,8 +154,6 @@ argument_list|)
 block|,
 name|DATE
 argument_list|(
-literal|null
-argument_list|,
 name|java
 operator|.
 name|sql
@@ -171,8 +167,6 @@ argument_list|)
 block|,
 name|TIME
 argument_list|(
-literal|null
-argument_list|,
 name|java
 operator|.
 name|sql
@@ -186,8 +180,6 @@ argument_list|)
 block|,
 name|TIMESTAMP
 argument_list|(
-literal|null
-argument_list|,
 name|java
 operator|.
 name|sql
@@ -199,11 +191,6 @@ argument_list|,
 literal|"timestamp"
 argument_list|)
 block|;
-specifier|private
-specifier|final
-name|Primitive
-name|primitive
-decl_stmt|;
 specifier|private
 specifier|final
 name|Class
@@ -267,8 +254,6 @@ block|{
 name|this
 argument_list|(
 name|primitive
-argument_list|,
-name|primitive
 operator|.
 name|boxClass
 argument_list|,
@@ -283,9 +268,6 @@ expr_stmt|;
 block|}
 name|CsvFieldType
 parameter_list|(
-name|Primitive
-name|primitive
-parameter_list|,
 name|Class
 name|clazz
 parameter_list|,
@@ -293,12 +275,6 @@ name|String
 name|simpleName
 parameter_list|)
 block|{
-name|this
-operator|.
-name|primitive
-operator|=
-name|primitive
-expr_stmt|;
 name|this
 operator|.
 name|clazz

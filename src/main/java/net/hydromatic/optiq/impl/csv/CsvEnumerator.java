@@ -510,13 +510,6 @@ condition|(
 name|fieldType
 condition|)
 block|{
-default|default:
-case|case
-name|STRING
-case|:
-return|return
-name|string
-return|;
 case|case
 name|BOOLEAN
 case|:
@@ -854,6 +847,13 @@ return|return
 literal|null
 return|;
 block|}
+case|case
+name|STRING
+case|:
+default|default:
+return|return
+name|string
+return|;
 block|}
 block|}
 block|}
