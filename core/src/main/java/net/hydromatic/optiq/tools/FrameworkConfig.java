@@ -138,22 +138,22 @@ specifier|public
 interface|interface
 name|FrameworkConfig
 block|{
-comment|/**    * The type of lexing the SqlParser should do.  Controls case rules    * and quoted identifier syntax.    */
+comment|/**    * The type of lexical analysis the SqlParser should do.  Controls case rules    * and quoted identifier syntax.    */
 name|Lex
 name|getLex
 parameter_list|()
 function_decl|;
-comment|/**    * Provides the Parser factory that creates the SqlParser used in parsing    * queries.    */
+comment|/**    * Provides the parser factory that creates the SqlParser used in parsing    * queries.    */
 name|SqlParserImplFactory
 name|getParserFactory
 parameter_list|()
 function_decl|;
-comment|/**    * Returns the default schema that should be checked before looking at the    * root schema.  Return null to only consult the root schema.    */
+comment|/**    * Returns the default schema that should be checked before looking at the    * root schema.  Returns null to only consult the root schema.    */
 name|SchemaPlus
 name|getDefaultSchema
 parameter_list|()
 function_decl|;
-comment|/**    * List of of one or more programs used during the course of    *     query evaluation. The common use case is when there is a single program    *     created using {@link Programs#of(RuleSet)}    *     and {@link net.hydromatic.optiq.tools.Planner#transform}    *     will only be called once. However, consumers may also create programs    *     not based on rule sets, register multiple programs,    *     and do multiple repetitions    *     of {@link Planner#transform} planning cycles using different indices.    *     The order of programs provided here determines the zero-based indices    *     of programs elsewhere in this class.    */
+comment|/**    * Returns a list of one or more programs used during the course of query    * evaluation.    *    *<p>The common use case is when there is a single program    * created using {@link Programs#of(RuleSet)}    * and {@link net.hydromatic.optiq.tools.Planner#transform}    * will only be called once.    *    *<p>However, consumers may also create programs    * not based on rule sets, register multiple programs,    * and do multiple repetitions    * of {@link Planner#transform} planning cycles using different indices.    *    *<p>The order of programs provided here determines the zero-based indices    * of programs elsewhere in this class.    */
 name|ImmutableList
 argument_list|<
 name|Program
@@ -161,17 +161,17 @@ argument_list|>
 name|getPrograms
 parameter_list|()
 function_decl|;
-comment|/**    * Return the instance of SqlOperatorTable that should be used to    * resolve Optiq operators.    */
+comment|/**    * Returns operator table that should be used to    * resolve functions and operators during query validation.    */
 name|SqlOperatorTable
 name|getOperatorTable
 parameter_list|()
 function_decl|;
-comment|/**    * Return the cost factory that should be used when creating the planner.    * If null, use the default cost factory for that planner.    */
+comment|/**    * Returns the cost factory that should be used when creating the planner.    * If null, use the default cost factory for that planner.    */
 name|RelOptCostFactory
 name|getCostFactory
 parameter_list|()
 function_decl|;
-comment|/**    *<p>If {@code traitDefs} is non-null, the planner first de-registers any    * existing {@link RelTraitDef}s, then registers the {@code RelTraitDef}s in    * this list.</p>    *    *<p>The order of {@code RelTraitDef}s in {@code traitDefs} matters if the    * planner is VolcanoPlanner. The planner calls {@link RelTraitDef#convert} in    * the order of this list. The most important trait comes first in the list,    * followed by the second most important one, etc.</p>    *    * @param lex The type of lexing the SqlParser should do.  Controls case rules    *     and quoted identifier syntax.    * @param parserFactory    * @param operatorTable The instance of SqlOperatorTable that be should to    *     resolve Optiq operators.    * @param ruleSets    *  @param  traitDefs The list of RelTraitDef that would be registered with    *     planner, or null.  * @return  */
+comment|/**    * Returns a list of trait definitions.    *    *<p>If the list is not null, the planner first de-registers any    * existing {@link RelTraitDef}s, then registers the {@code RelTraitDef}s in    * this list.</p>    *    *<p>The order of {@code RelTraitDef}s in the list matters if the    * planner is VolcanoPlanner. The planner calls {@link RelTraitDef#convert} in    * the order of this list. The most important trait comes first in the list,    * followed by the second most important one, etc.</p>    */
 name|ImmutableList
 argument_list|<
 name|RelTraitDef
@@ -179,18 +179,22 @@ argument_list|>
 name|getTraitDefs
 parameter_list|()
 function_decl|;
-comment|/**    * Return the convertlet table that should be used when converting from Sql    * to row expressions    */
+comment|/**    * Returns the convertlet table that should be used when converting from SQL    * to row expressions    */
 name|SqlRexConvertletTable
 name|getConvertletTable
 parameter_list|()
 function_decl|;
-comment|/**    * Returns the PlannerContext that should be made available during planning by    * calling {@link org.eigenbase.relopt.RelOptPlanner#getPlannerContext}    */
+comment|/**    * Returns the PlannerContext that should be made available during planning by    * calling {@link org.eigenbase.relopt.RelOptPlanner#getContext()}.    */
 name|Context
 name|getContext
 parameter_list|()
 function_decl|;
 block|}
 end_interface
+
+begin_comment
+comment|// End FrameworkConfig.java
+end_comment
 
 end_unit
 

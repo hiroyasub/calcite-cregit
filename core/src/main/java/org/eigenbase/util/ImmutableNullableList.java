@@ -119,6 +119,10 @@ operator|||
 name|elements
 operator|instanceof
 name|ImmutableList
+operator|||
+name|elements
+operator|==
+name|SINGLETON_NULL
 condition|)
 block|{
 comment|//noinspection unchecked

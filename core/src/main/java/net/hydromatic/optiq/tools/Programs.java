@@ -247,6 +247,33 @@ name|RULE_SET_TO_PROGRAM
 argument_list|)
 return|;
 block|}
+comment|/** Creates a list of programs based on a list of rule sets. */
+specifier|public
+specifier|static
+name|List
+argument_list|<
+name|Program
+argument_list|>
+name|listOf
+parameter_list|(
+name|List
+argument_list|<
+name|RuleSet
+argument_list|>
+name|ruleSets
+parameter_list|)
+block|{
+return|return
+name|Lists
+operator|.
+name|transform
+argument_list|(
+name|ruleSets
+argument_list|,
+name|RULE_SET_TO_PROGRAM
+argument_list|)
+return|;
+block|}
 comment|/** Creates a program from a list of rules. */
 specifier|public
 specifier|static

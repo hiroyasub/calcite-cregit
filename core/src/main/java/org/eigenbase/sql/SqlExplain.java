@@ -93,7 +93,6 @@ modifier|...
 name|operands
 parameter_list|)
 block|{
-comment|//explicandum, detailLevel, depth, asXml
 return|return
 operator|new
 name|SqlExplain

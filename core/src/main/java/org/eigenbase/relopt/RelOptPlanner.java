@@ -195,7 +195,7 @@ name|RelOptRule
 name|rule
 parameter_list|)
 function_decl|;
-comment|/**    * Provides the Context created when this planner was constructed.    * @return Either null or an externally defined context.    */
+comment|/**    * Provides the Context created when this planner was constructed.    *    * @return Either null or an externally defined context.    */
 name|Context
 name|getContext
 parameter_list|()

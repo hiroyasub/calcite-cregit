@@ -1082,7 +1082,6 @@ operator|.
 name|Context
 name|prepareContext
 parameter_list|,
-comment|//
 name|org
 operator|.
 name|eigenbase
@@ -1092,7 +1091,6 @@ operator|.
 name|Context
 name|externalContext
 parameter_list|,
-comment|//
 name|RelOptCostFactory
 name|costFactory
 parameter_list|)
@@ -1101,7 +1099,6 @@ specifier|final
 name|VolcanoPlanner
 name|planner
 init|=
-comment|//
 operator|new
 name|VolcanoPlanner
 argument_list|(
@@ -3111,7 +3108,6 @@ name|createPlanner
 argument_list|(
 name|prepareContext
 argument_list|,
-comment|//
 name|action
 operator|.
 name|getConfig
@@ -3120,7 +3116,6 @@ operator|.
 name|getContext
 argument_list|()
 argument_list|,
-comment|//
 name|action
 operator|.
 name|getConfig

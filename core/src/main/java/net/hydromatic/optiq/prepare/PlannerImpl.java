@@ -965,7 +965,7 @@ return|return
 name|rel
 return|;
 block|}
-comment|/** Implements {@link org.eigenbase.relopt.RelOptTable.ViewExpander}    * interface for {@link net.hydromatic.optiq.tools.Planner} */
+comment|/** Implements {@link org.eigenbase.relopt.RelOptTable.ViewExpander}    * interface for {@link net.hydromatic.optiq.tools.Planner}. */
 specifier|public
 class|class
 name|ViewExpanderImpl
@@ -1104,9 +1104,7 @@ argument_list|(
 literal|false
 argument_list|)
 expr_stmt|;
-name|RelNode
-name|relNode
-init|=
+return|return
 name|sqlToRelConverter
 operator|.
 name|convertQuery
@@ -1117,9 +1115,6 @@ literal|true
 argument_list|,
 literal|false
 argument_list|)
-decl_stmt|;
-return|return
-name|relNode
 return|;
 block|}
 block|}
