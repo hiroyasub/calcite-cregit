@@ -500,6 +500,14 @@ argument_list|(
 name|PrecScale
 operator|.
 name|NO_NO
+operator||
+name|PrecScale
+operator|.
+name|YES_NO
+operator||
+name|PrecScale
+operator|.
+name|YES_YES
 argument_list|,
 literal|true
 argument_list|,
