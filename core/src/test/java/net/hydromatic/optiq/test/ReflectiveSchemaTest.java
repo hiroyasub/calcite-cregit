@@ -1662,7 +1662,7 @@ literal|"C=1\n"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test case for    *<a href="https://github.com/julianhyde/optiq/issues/119">optiq-119</a>.    * Comparing a Java type with a SQL type. */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/OPTIQ-119">OPTIQ-119</a>,    * "Comparing a Java type long with a SQL type INTEGER gives wrong answer". */
 annotation|@
 name|Test
 specifier|public

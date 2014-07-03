@@ -32,7 +32,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Provides information on the current window.  * All the indexes are ready to be used in {@link WinAggFrameResultContext#arguments(net.hydromatic.linq4j.expressions.Expression)},  * {@link WinAggFrameResultContext#rowTranslator(net.hydromatic.linq4j.expressions.Expression)} and similar methods.  */
+comment|/**  * Provides information on the current window.  *  *<p>All the indexes are ready to be used in  * {@link WinAggResultContext#arguments(net.hydromatic.linq4j.expressions.Expression)},  * {@link WinAggFrameResultContext#rowTranslator(net.hydromatic.linq4j.expressions.Expression)}  * and similar methods.  */
 end_comment
 
 begin_interface

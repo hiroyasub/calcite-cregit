@@ -221,7 +221,7 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Test case for<a href="https://github.com/julianhyde/optiq/issues/245">    * Off-by-one translation of ON clause of JOIN</a>.    */
+comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/OPTIQ-245">OPTIQ-245</a>,    * "Off-by-one translation of ON clause of JOIN".    */
 annotation|@
 name|Test
 specifier|public
@@ -301,7 +301,7 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Test case for<a href="https://github.com/julianhyde/optiq/issues/74">    * JOIN ... USING fails in 3-way join with    * UnsupportedOperationException</a>.    */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/OPTIQ-74">OPTIQ-74</a>,    * "JOIN ... USING fails in 3-way join with UnsupportedOperationException". */
 annotation|@
 name|Test
 specifier|public

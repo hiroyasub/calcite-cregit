@@ -30,7 +30,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Function that can be translated to java code.  *<p>  * @see net.hydromatic.optiq.rules.java.AggImplementor  * @see net.hydromatic.optiq.rules.java.WinAggImplementor  * @see net.hydromatic.optiq.rules.java.StrictAggImplementor  * @see net.hydromatic.optiq.rules.java.StrictWinAggImplementor  */
+comment|/**  * Function that can be translated to java code.  *  * @see net.hydromatic.optiq.rules.java.AggImplementor  * @see net.hydromatic.optiq.rules.java.WinAggImplementor  * @see net.hydromatic.optiq.rules.java.StrictAggImplementor  * @see net.hydromatic.optiq.rules.java.StrictWinAggImplementor  */
 end_comment
 
 begin_interface
@@ -40,7 +40,7 @@ name|ImplementableAggFunction
 extends|extends
 name|AggregateFunction
 block|{
-comment|/**    * Returns implementor that translates the function to linq4j expression.    * @param windowContext true when aggregate is used in window context    * @return implementor that translates the function to linq4j expression.    */
+comment|/**    * Returns implementor that translates the function to linq4j expression.    *    * @param windowContext true when aggregate is used in window context    * @return implementor that translates the function to linq4j expression.    */
 name|AggImplementor
 name|getImplementor
 parameter_list|(

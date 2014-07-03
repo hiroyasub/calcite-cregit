@@ -547,7 +547,7 @@ literal|"Column 'EMPID' not found in any table"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test case for https://github.com/julianhyde/optiq/issues/9. */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/OPTIQ-9">OPTIQ-9</a>,    * "RexToLixTranslator not incrementing local variable name counter". */
 annotation|@
 name|Test
 specifier|public

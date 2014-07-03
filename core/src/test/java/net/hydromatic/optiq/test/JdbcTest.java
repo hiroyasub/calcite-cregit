@@ -6102,7 +6102,7 @@ literal|730
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Tests 3-way AND.    *    *<p>With<a href="https://github.com/julianhyde/optiq/issues/127">optiq-127,    * "EnumerableCalcRel can't support 3+ AND conditions"</a>, the last condition    * is ignored and rows with deptno=10 are wrongly returned.</p>    */
+comment|/** Tests 3-way AND.    *    *<p>With<a href="https://issues.apache.org/jira/browse/OPTIQ-127">OPTIQ-127,    * "EnumerableCalcRel can't support 3+ AND conditions"</a>, the last condition    * is ignored and rows with deptno=10 are wrongly returned.</p>    */
 annotation|@
 name|Test
 specifier|public
@@ -6221,7 +6221,7 @@ literal|"C=287\n"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test case for    *<a href="https://github.com/julianhyde/optiq/issues/281">issue #281</a>,    * "SQL type of EXTRACT is BIGINT but it is implemented as int". */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/OPTIQ-281">OPTIQ-281</a>,    * "SQL type of EXTRACT is BIGINT but it is implemented as int". */
 annotation|@
 name|Test
 specifier|public
@@ -6398,7 +6398,7 @@ literal|"full_name=Terry Anderson\n"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test case for    *<a href="https://github.com/julianhyde/optiq/issues/35">issue #35</a>. */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/OPTIQ-35">OPTIQ-35</a>,    * "Support parenthesized sub-clause in JOIN". */
 annotation|@
 name|Ignore
 annotation|@
@@ -8421,7 +8421,7 @@ name|sql
 argument_list|)
 return|;
 block|}
-comment|/** Makes sure that a projection introduced by a call to    * {@link org.eigenbase.rel.rules.SwapJoinRule} does not manifest as an    * {@link net.hydromatic.optiq.rules.java.JavaRules.EnumerableCalcRel} in the    * plan.    *    *<p>Test case for (not yet fixed)    *<a href="https://github.com/julianhyde/optiq/issues/92">#92</a>, "Project    * should be optimized away, not converted to EnumerableCalcRel".</p>    */
+comment|/** Makes sure that a projection introduced by a call to    * {@link org.eigenbase.rel.rules.SwapJoinRule} does not manifest as an    * {@link net.hydromatic.optiq.rules.java.JavaRules.EnumerableCalcRel} in the    * plan.    *    *<p>Test case for (not yet fixed)    *<a href="https://issues.apache.org/jira/browse/OPTIQ-92">OPTIQ-92</a>,    * "Project should be optimized away, not converted to EnumerableCalcRel".</p>    */
 annotation|@
 name|Ignore
 annotation|@
@@ -8659,7 +8659,7 @@ name|runs
 argument_list|()
 expr_stmt|;
 block|}
-comment|/** Test case for (not yet fixed)    *<a href="https://github.com/julianhyde/optiq/issues/99">issue #99</a>,    * "Recognize semi-join that has high selectivity and push it down". */
+comment|/** Test case for (not yet fixed)    *<a href="https://issues.apache.org/jira/browse/OPTIQ-99">OPTIQ-99</a>,    * "Recognize semi-join that has high selectivity and push it down". */
 annotation|@
 name|Ignore
 annotation|@
@@ -10590,7 +10590,7 @@ literal|"name=Bill; empid=100\n"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Tests sorting by an expression not in the '*' select clause. Test case for    *<a href="https://github.com/julianhyde/optiq/issues/176">issue #176</a>. */
+comment|/** Tests sorting by an expression not in the '*' select clause. Test case for    *<a href="https://issues.apache.org/jira/browse/OPTIQ-176">OPTIQ-176</a>. */
 annotation|@
 name|Test
 specifier|public
@@ -11135,7 +11135,7 @@ literal|"empid=200; deptno=20; name=Eric; salary=8000.0; commission=500\n"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Limit implemented using {@link Queryable#take}. Test case for    *<a href="https://github.com/julianhyde/optiq/issues/96">issue #96</a>. */
+comment|/** Limit implemented using {@link Queryable#take}. Test case for    *<a href="https://issues.apache.org/jira/browse/OPTIQ-96">OPTIQ-96</a>,    * "LIMIT against a table in a clone schema causes    * UnsupportedOperationException". */
 annotation|@
 name|Test
 specifier|public
@@ -11172,7 +11172,7 @@ literal|"day=2; week_day=Monday\n"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Limit implemented using {@link Queryable#take}. Test case for    *<a href="https://github.com/julianhyde/optiq/issues/70">issue #70</a>. */
+comment|/** Limit implemented using {@link Queryable#take}. Test case for    *<a href="https://issues.apache.org/jira/browse/OPTIQ-70">OPTIQ-70</a>,    * "Joins seem to be very expensive in memory". */
 annotation|@
 name|Test
 specifier|public
@@ -13696,7 +13696,7 @@ literal|"empid=200; commission=500; M=260"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Tests windowed aggregation with no ORDER BY clause.    *    *<p>Test case for    *<a href="https://github.com/julianhyde/optiq/issues/285">issue #285</a>,    * "Window functions throw exception without ORDER BY".    *    *<p>Note:</p>    *    *<ul>    *<li>With no ORDER BY, the window is over all rows in the partition.    *<li>With an ORDER BY, the implicit frame is 'RANGE BETWEEN    *     UNBOUNDED PRECEDING AND CURRENT ROW'.    *<li>With no ORDER BY or PARTITION BY, the window contains all rows in the    *     table.    *</ul>    */
+comment|/** Tests windowed aggregation with no ORDER BY clause.    *    *<p>Test case for    *<a href="https://issues.apache.org/jira/browse/OPTIQ-285">OPTIQ-285</a>,    * "Window functions throw exception without ORDER BY".    *    *<p>Note:</p>    *    *<ul>    *<li>With no ORDER BY, the window is over all rows in the partition.    *<li>With an ORDER BY, the implicit frame is 'RANGE BETWEEN    *     UNBOUNDED PRECEDING AND CURRENT ROW'.    *<li>With no ORDER BY or PARTITION BY, the window contains all rows in the    *     table.    *</ul>    */
 annotation|@
 name|Test
 specifier|public
@@ -15786,7 +15786,7 @@ literal|"C=730\n"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Tests a JSON model with a comment. Not standard JSON, but harmless to    * allow Jackson's comments extension.    *    *<p>Test case for<a href="https://github.com/julianhyde/optiq/issues/160">    *   optiq-160, "Allow comments in schema definitions"</a>.</p> */
+comment|/** Tests a JSON model with a comment. Not standard JSON, but harmless to    * allow Jackson's comments extension.    *    *<p>Test case for    *<a href="https://issues.apache.org/jira/browse/OPTIQ-160">OPTIQ-160</a>,    * "Allow comments in schema definitions".</p> */
 annotation|@
 name|Test
 specifier|public
@@ -19760,7 +19760,7 @@ literal|"Cannot apply = to the two different charsets ISO-8859-1 and UTF-16LE"
 argument_list|)
 expr_stmt|;
 comment|// The CONVERT function (what SQL:2011 calls "character transliteration") is
-comment|// not implemented yet. See https://github.com/julianhyde/optiq/issues/111.
+comment|// not implemented yet. See https://issues.apache.org/jira/browse/OPTIQ-111.
 name|with
 operator|.
 name|query

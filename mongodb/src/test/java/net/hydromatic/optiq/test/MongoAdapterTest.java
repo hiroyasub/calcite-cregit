@@ -1125,7 +1125,7 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-comment|// Per https://github.com/julianhyde/optiq/issues/164,
+comment|// Per https://issues.apache.org/jira/browse/OPTIQ-164,
 comment|// $match must occur before $project for good performance.
 name|mongoChecker
 argument_list|(
@@ -1588,7 +1588,7 @@ block|}
 annotation|@
 name|Ignore
 argument_list|(
-literal|"https://github.com/julianhyde/optiq/issues/270"
+literal|"https://issues.apache.org/jira/browse/OPTIQ-270"
 argument_list|)
 annotation|@
 name|Test
@@ -2211,7 +2211,7 @@ expr_stmt|;
 block|}
 block|}
 block|}
-comment|/** Test case for<a href="https://github.com/julianhyde/optiq/issues/286">    * optiq-286, "Error casting MongoDB date"</a>. */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/OPTIQ-286">OPTIQ-286</a>,    * "Error casting MongoDB date". */
 annotation|@
 name|Test
 specifier|public
