@@ -17017,6 +17017,46 @@ argument_list|()
 operator|+
 literal|"'\n"
 operator|+
+literal|"         },\n"
+operator|+
+literal|"         {\n"
+operator|+
+literal|"           name: 'MY_ABS',\n"
+operator|+
+literal|"           className: '"
+operator|+
+name|java
+operator|.
+name|lang
+operator|.
+name|Math
+operator|.
+name|class
+operator|.
+name|getName
+argument_list|()
+operator|+
+literal|"',\n"
+operator|+
+literal|"           methodName: 'abs'\n"
+operator|+
+literal|"         },\n"
+operator|+
+literal|"         {\n"
+operator|+
+literal|"           className: '"
+operator|+
+name|MultipleFunction
+operator|.
+name|class
+operator|.
+name|getName
+argument_list|()
+operator|+
+literal|"',\n"
+operator|+
+literal|"           methodName: '*'\n"
+operator|+
 literal|"         }\n"
 operator|+
 literal|"       ]\n"
@@ -17327,6 +17367,113 @@ operator|.
 name|connectThrows
 argument_list|(
 literal|"Declaring class 'net.hydromatic.optiq.test.JdbcTest$AwkwardFunction' of non-static user-defined function must have a public constructor with zero parameters"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests user-defined function, with multiple methods per class. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUserDefinedFunctionWithMethodName
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+comment|// java.lang.Math has abs(int) and abs(double).
+specifier|final
+name|OptiqAssert
+operator|.
+name|AssertThat
+name|with
+init|=
+name|withUdf
+argument_list|()
+decl_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"values abs(-4)"
+argument_list|)
+operator|.
+name|returnsValue
+argument_list|(
+literal|"4"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"values abs(-4.5)"
+argument_list|)
+operator|.
+name|returnsValue
+argument_list|(
+literal|"4.5"
+argument_list|)
+expr_stmt|;
+comment|// 3 overloads of "fun1", another method "fun2", but method "nonStatic"
+comment|// cannot be used as a function
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"values \"adhoc\".\"fun1\"(2)"
+argument_list|)
+operator|.
+name|returnsValue
+argument_list|(
+literal|"4"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"values \"adhoc\".\"fun1\"(2, 3)"
+argument_list|)
+operator|.
+name|returnsValue
+argument_list|(
+literal|"5"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"values \"adhoc\".\"fun1\"('Foo Bar')"
+argument_list|)
+operator|.
+name|returnsValue
+argument_list|(
+literal|"foo bar"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"values \"adhoc\".\"fun2\"(10)"
+argument_list|)
+operator|.
+name|returnsValue
+argument_list|(
+literal|"30"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"values \"adhoc\".\"nonStatic\"(2)"
+argument_list|)
+operator|.
+name|throws_
+argument_list|(
+literal|"No match found for function signature nonStatic(<NUMERIC>)"
 argument_list|)
 expr_stmt|;
 block|}
@@ -23510,6 +23657,99 @@ parameter_list|)
 block|{
 return|return
 literal|0
+return|;
+block|}
+block|}
+comment|/** UDF class that has multiple methods, some overloaded. */
+specifier|public
+specifier|static
+class|class
+name|MultipleFunction
+block|{
+specifier|private
+name|MultipleFunction
+parameter_list|()
+block|{
+block|}
+comment|// Three overloads
+specifier|public
+specifier|static
+name|String
+name|fun1
+parameter_list|(
+name|String
+name|x
+parameter_list|)
+block|{
+return|return
+name|x
+operator|.
+name|toLowerCase
+argument_list|()
+return|;
+block|}
+specifier|public
+specifier|static
+name|int
+name|fun1
+parameter_list|(
+name|int
+name|x
+parameter_list|)
+block|{
+return|return
+name|x
+operator|*
+literal|2
+return|;
+block|}
+specifier|public
+specifier|static
+name|int
+name|fun1
+parameter_list|(
+name|int
+name|x
+parameter_list|,
+name|int
+name|y
+parameter_list|)
+block|{
+return|return
+name|x
+operator|+
+name|y
+return|;
+block|}
+comment|// Another method
+specifier|public
+specifier|static
+name|int
+name|fun2
+parameter_list|(
+name|int
+name|x
+parameter_list|)
+block|{
+return|return
+name|x
+operator|*
+literal|3
+return|;
+block|}
+comment|// Non-static method cannot be used because constructor is private
+specifier|public
+name|int
+name|nonStatic
+parameter_list|(
+name|int
+name|x
+parameter_list|)
+block|{
+return|return
+name|x
+operator|*
+literal|3
 return|;
 block|}
 block|}

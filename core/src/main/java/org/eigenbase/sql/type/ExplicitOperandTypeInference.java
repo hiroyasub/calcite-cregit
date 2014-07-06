@@ -54,7 +54,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * ExplicitOperandTypeInferences implements {@link SqlOperandTypeInference} by  * explicity supplying a type for each parameter.  */
+comment|/**  * ExplicitOperandTypeInferences implements {@link SqlOperandTypeInference} by  * explicitly supplying a type for each parameter.  */
 end_comment
 
 begin_class
@@ -74,7 +74,7 @@ argument_list|>
 name|paramTypes
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/** Use {@link org.eigenbase.sql.type.InferTypes#explicit(List)}. */
+comment|/** Use {@link org.eigenbase.sql.type.InferTypes#explicit(java.util.List)}. */
 name|ExplicitOperandTypeInference
 parameter_list|(
 name|ImmutableList

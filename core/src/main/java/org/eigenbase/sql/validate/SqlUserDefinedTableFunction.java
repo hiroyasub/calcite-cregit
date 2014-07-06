@@ -165,6 +165,12 @@ parameter_list|,
 name|SqlOperandTypeChecker
 name|operandTypeChecker
 parameter_list|,
+name|List
+argument_list|<
+name|RelDataType
+argument_list|>
+name|paramTypes
+parameter_list|,
 name|TableFunction
 name|function
 parameter_list|)
@@ -178,6 +184,8 @@ argument_list|,
 name|operandTypeInference
 argument_list|,
 name|operandTypeChecker
+argument_list|,
+name|paramTypes
 argument_list|,
 name|function
 argument_list|)

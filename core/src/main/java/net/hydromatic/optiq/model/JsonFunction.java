@@ -43,6 +43,10 @@ name|String
 name|className
 decl_stmt|;
 specifier|public
+name|String
+name|methodName
+decl_stmt|;
+specifier|public
 name|List
 argument_list|<
 name|String
