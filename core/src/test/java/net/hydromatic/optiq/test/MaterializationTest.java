@@ -407,7 +407,7 @@ name|ResultSet
 argument_list|,
 name|Void
 argument_list|>
-name|checker
+name|explainChecker
 parameter_list|)
 block|{
 try|try
@@ -461,7 +461,7 @@ argument_list|)
 operator|.
 name|explainMatches
 argument_list|(
-name|checker
+name|explainChecker
 argument_list|)
 operator|.
 name|sameResultWithMaterializationsDisabled
@@ -612,7 +612,39 @@ literal|"select \"empid\" + 1 as x, \"name\" from \"emps\" where \"deptno\" = 10
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** As {@link #testFilterQueryOnProjectView()} but materialized view contains    * an expression and query. */
+comment|/** Temporary. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFilterQueryOnProjectViewX
+parameter_list|()
+block|{
+name|testFilterQueryOnProjectView3
+argument_list|()
+expr_stmt|;
+name|testFilterQueryOnProjectView5
+argument_list|()
+expr_stmt|;
+name|testFilterQueryOnProjectView6
+argument_list|()
+expr_stmt|;
+name|testFilterQueryOnProjectView7
+argument_list|()
+expr_stmt|;
+name|testFilterQueryOnProjectView
+argument_list|()
+expr_stmt|;
+name|testFilterQueryOnProjectView0
+argument_list|()
+expr_stmt|;
+name|testFilterQueryOnProjectView1
+argument_list|()
+expr_stmt|;
+name|testFilterQueryOnProjectView2
+argument_list|()
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public
@@ -650,11 +682,6 @@ expr_stmt|;
 block|}
 comment|/** As {@link #testFilterQueryOnProjectView3()} but also contains an    * expression column. */
 annotation|@
-name|Ignore
-argument_list|(
-literal|"fix project expr on filter - plans, but wrong results"
-argument_list|)
-annotation|@
 name|Test
 specifier|public
 name|void
@@ -663,23 +690,55 @@ parameter_list|()
 block|{
 name|checkMaterialize
 argument_list|(
-literal|"select \"deptno\" - 10 as \"x\", \"empid\" + 1, \"name\" from \"emps\""
+literal|"select \"deptno\" - 10 as \"x\", \"empid\" + 1 as ee, \"name\"\n"
+operator|+
+literal|"from \"emps\""
 argument_list|,
-literal|"select \"name\", \"empid\" + 1 from \"emps\" where \"deptno\" - 10 = 0"
+literal|"select \"name\", \"empid\" + 1 as e\n"
+operator|+
+literal|"from \"emps\" where \"deptno\" - 10 = 2"
+argument_list|,
+name|JdbcTest
+operator|.
+name|HR_MODEL
+argument_list|,
+name|OptiqAssert
+operator|.
+name|checkResultContains
+argument_list|(
+literal|"EnumerableCalcRel(expr#0..2=[{inputs}], expr#3=[2], expr#4=[=($t0, $t3)], name=[$t2], E=[$t1], $condition=[$t4])\n"
+operator|+
+literal|"  EnumerableTableAccessRel(table=[[hr, m0]]"
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** As {@link #testFilterQueryOnProjectView3()} but also contains an    * expression column. */
-annotation|@
-name|Ignore
-argument_list|(
-literal|"fix project expr on filter"
-argument_list|)
+comment|/** Cannot materialize because "name" is not projected in the MV. */
 annotation|@
 name|Test
 specifier|public
 name|void
 name|testFilterQueryOnProjectView6
+parameter_list|()
+block|{
+name|checkNoMaterialize
+argument_list|(
+literal|"select \"deptno\" - 10 as \"x\", \"empid\"  from \"emps\""
+argument_list|,
+literal|"select \"name\" from \"emps\" where \"deptno\" - 10 = 0"
+argument_list|,
+name|JdbcTest
+operator|.
+name|HR_MODEL
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** As {@link #testFilterQueryOnProjectView3()} but also contains an    * expression column. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFilterQueryOnProjectView7
 parameter_list|()
 block|{
 name|checkNoMaterialize

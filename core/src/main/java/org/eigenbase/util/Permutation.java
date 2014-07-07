@@ -64,7 +64,7 @@ index|[]
 name|sources
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a permutation of a given size.    *    *<p>It is intialized to the identity permutation, such as "[0, 1, 2, 3]".    *    * @param size Number of elements in the permutation    */
+comment|/**    * Creates a permutation of a given size.    *    *<p>It is initialized to the identity permutation, such as "[0, 1, 2, 3]".    *    * @param size Number of elements in the permutation    */
 specifier|public
 name|Permutation
 parameter_list|(
@@ -160,6 +160,27 @@ index|]
 decl_stmt|;
 if|if
 condition|(
+name|target
+operator|<
+literal|0
+operator|||
+name|target
+operator|>=
+name|sources
+operator|.
+name|length
+condition|)
+block|{
+throw|throw
+operator|new
+name|IllegalArgumentException
+argument_list|(
+literal|"target out of range"
+argument_list|)
+throw|;
+block|}
+if|if
+condition|(
 name|sources
 index|[
 name|target
@@ -194,7 +215,7 @@ literal|true
 argument_list|)
 assert|;
 block|}
-comment|/**    * Creates a permuation. Arrays are not copied, and are assumed to be valid    * permutations.    */
+comment|/**    * Creates a permutation. Arrays are not copied, and are assumed to be valid    * permutations.    */
 specifier|private
 name|Permutation
 parameter_list|(
@@ -977,12 +998,33 @@ name|int
 name|source
 parameter_list|)
 block|{
+try|try
+block|{
 return|return
 name|targets
 index|[
 name|source
 index|]
 return|;
+block|}
+catch|catch
+parameter_list|(
+name|ArrayIndexOutOfBoundsException
+name|e
+parameter_list|)
+block|{
+throw|throw
+operator|new
+name|Mappings
+operator|.
+name|NoElementException
+argument_list|(
+literal|"invalid source "
+operator|+
+name|source
+argument_list|)
+throw|;
+block|}
 block|}
 comment|/**    * Returns the position which maps to<code>target</code>.    */
 specifier|public
@@ -993,12 +1035,33 @@ name|int
 name|target
 parameter_list|)
 block|{
+try|try
+block|{
 return|return
 name|sources
 index|[
 name|target
 index|]
 return|;
+block|}
+catch|catch
+parameter_list|(
+name|ArrayIndexOutOfBoundsException
+name|e
+parameter_list|)
+block|{
+throw|throw
+operator|new
+name|Mappings
+operator|.
+name|NoElementException
+argument_list|(
+literal|"invalid target "
+operator|+
+name|target
+argument_list|)
+throw|;
+block|}
 block|}
 comment|/**    * Checks whether this permutation is valid.    *    *    *    * @param fail Whether to assert if invalid    * @return Whether valid    */
 specifier|private

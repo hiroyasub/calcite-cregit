@@ -332,7 +332,7 @@ literal|"          agg: \"COUNT\",\n"
 operator|+
 literal|"          type: {\n"
 operator|+
-literal|"            type: \"INTEGER\",\n"
+literal|"            type: \"BIGINT\",\n"
 operator|+
 literal|"            nullable: false\n"
 operator|+
@@ -354,7 +354,7 @@ literal|"          agg: \"COUNT\",\n"
 operator|+
 literal|"          type: {\n"
 operator|+
-literal|"            type: \"INTEGER\",\n"
+literal|"            type: \"BIGINT\",\n"
 operator|+
 literal|"            nullable: false\n"
 operator|+
@@ -530,6 +530,22 @@ operator|.
 name|INTEGER
 argument_list|)
 decl_stmt|;
+specifier|final
+name|RelDataType
+name|bigIntType
+init|=
+name|cluster
+operator|.
+name|getTypeFactory
+argument_list|()
+operator|.
+name|createSqlType
+argument_list|(
+name|SqlTypeName
+operator|.
+name|BIGINT
+argument_list|)
+decl_stmt|;
 name|AggregateRel
 name|aggregate
 init|=
@@ -567,7 +583,7 @@ argument_list|(
 literal|1
 argument_list|)
 argument_list|,
-name|intType
+name|bigIntType
 argument_list|,
 literal|"c"
 argument_list|)
@@ -589,7 +605,7 @@ operator|>
 name|of
 argument_list|()
 argument_list|,
-name|intType
+name|bigIntType
 argument_list|,
 literal|"d"
 argument_list|)
