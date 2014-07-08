@@ -1691,7 +1691,7 @@ block|}
 annotation|@
 name|Ignore
 argument_list|(
-literal|"CannotPlanException"
+literal|"slow"
 argument_list|)
 annotation|@
 name|Test
@@ -1706,11 +1706,6 @@ literal|2
 argument_list|)
 expr_stmt|;
 block|}
-annotation|@
-name|Ignore
-argument_list|(
-literal|"RelDecorrelator leaves a CorrelatorRel behind"
-argument_list|)
 annotation|@
 name|Test
 specifier|public

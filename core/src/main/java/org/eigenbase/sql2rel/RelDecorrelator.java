@@ -91,20 +91,6 @@ name|org
 operator|.
 name|eigenbase
 operator|.
-name|rel
-operator|.
-name|rules
-operator|.
-name|PushFilterPastJoinRule
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
 name|relopt
 operator|.
 name|*
@@ -863,13 +849,6 @@ argument_list|(
 operator|new
 name|RemoveCorrelationForScalarAggregateRule
 argument_list|()
-argument_list|)
-operator|.
-name|addRuleInstance
-argument_list|(
-name|PushFilterPastJoinRule
-operator|.
-name|FILTER_ON_JOIN
 argument_list|)
 operator|.
 name|build
@@ -2141,7 +2120,7 @@ condition|(
 name|produceCorVar
 condition|)
 block|{
-comment|// AggregaterRel does not change input ordering so corVars will be
+comment|// AggregateRel does not change input ordering so corVars will be
 comment|// located at the same position as the input newProjectRel.
 name|mapNewRelToMapCorVarToOutputPos
 operator|.

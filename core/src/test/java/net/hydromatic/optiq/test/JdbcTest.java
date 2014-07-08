@@ -14494,6 +14494,95 @@ literal|"empid=110; deptno=10; name=Theodore; salary=11500.0; commission=250"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/OPTIQ-313">OPTIQ-313</a>,    * "Query decorrelation fails". */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJoinInCorrelatedSubquery
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select *\n"
+operator|+
+literal|"from \"hr\".\"depts\" as d\n"
+operator|+
+literal|"where \"deptno\" in (\n"
+operator|+
+literal|"  select d2.\"deptno\"\n"
+operator|+
+literal|"  from \"hr\".\"depts\" as d2\n"
+operator|+
+literal|"  join \"hr\".\"emps\" as e2 using (\"deptno\")\n"
+operator|+
+literal|"where d.\"deptno\" = d2.\"deptno\")"
+argument_list|)
+operator|.
+name|convertMatches
+argument_list|(
+operator|new
+name|Function1
+argument_list|<
+name|RelNode
+argument_list|,
+name|Void
+argument_list|>
+argument_list|()
+block|{
+specifier|public
+name|Void
+name|apply
+parameter_list|(
+name|RelNode
+name|relNode
+parameter_list|)
+block|{
+name|String
+name|s
+init|=
+name|RelOptUtil
+operator|.
+name|toString
+argument_list|(
+name|relNode
+argument_list|)
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|s
+argument_list|,
+name|not
+argument_list|(
+name|containsString
+argument_list|(
+literal|"CorrelatorRel"
+argument_list|)
+argument_list|)
+argument_list|)
+expr_stmt|;
+return|return
+literal|null
+return|;
+block|}
+block|}
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Tests a correlated scalar sub-query in the SELECT clause.    *    *<p>Note that there should be an extra row "empid=200; deptno=20;    * DNAME=null" but left join doesn't work.</p> */
 annotation|@
 name|Test
