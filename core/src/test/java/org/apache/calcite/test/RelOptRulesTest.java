@@ -6678,6 +6678,25 @@ literal|" on d.deptno = e.deptno"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testPushJoinCondDownToProject
+parameter_list|()
+block|{
+name|checkPlanning
+argument_list|(
+name|FilterJoinRule
+operator|.
+name|FILTER_ON_JOIN
+argument_list|,
+literal|"select d.deptno, e.deptno from sales.dept d, sales.emp e"
+operator|+
+literal|" where d.deptno + 10 = e.deptno * 2"
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 end_class
 

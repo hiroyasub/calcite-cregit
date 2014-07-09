@@ -11786,7 +11786,7 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"EnumerableCalc(expr#0..1=[{inputs}], EMPNO=[$t1], DESC=[$t0])\n"
+literal|"EnumerableCalc(expr#0..1=[{inputs}], EMPNO=[$t1], EXPR$1=[$t0])\n"
 operator|+
 literal|"  EnumerableAggregate(group=[{1, 2}])\n"
 operator|+
