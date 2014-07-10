@@ -88,19 +88,6 @@ modifier|...
 name|types
 parameter_list|)
 function_decl|;
-comment|/**    * Creates a type which represents a structured collection of fields.    *    * @param types      types of the fields    * @param fieldNames names of the fields    * @return canonical struct type descriptor    *    * @deprecated Use {@link #createStructType(List, List)} or    *   {@link #builder()}; will be removed after 0.6.    * @see org.eigenbase.util.Bug#upgrade(String) remove after 0.6    */
-name|RelDataType
-name|createStructType
-parameter_list|(
-name|RelDataType
-index|[]
-name|types
-parameter_list|,
-name|String
-index|[]
-name|fieldNames
-parameter_list|)
-function_decl|;
 comment|/**    * Creates a type which represents a structured collection of fields, given    * lists of the names and types of the fields.    *    * @param typeList      types of the fields    * @param fieldNameList names of the fields    * @return canonical struct type descriptor    */
 name|RelDataType
 name|createStructType

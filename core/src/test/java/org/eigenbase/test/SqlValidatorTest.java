@@ -16269,10 +16269,7 @@ condition|(
 operator|!
 name|Bug
 operator|.
-name|upgrade
-argument_list|(
-literal|"fix case sensitivity bug"
-argument_list|)
+name|OPTIQ_319_FIXED
 condition|)
 block|{
 return|return;

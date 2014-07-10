@@ -171,12 +171,21 @@ name|FRG375_FIXED
 init|=
 literal|false
 decl_stmt|;
-comment|/**    * Whether    *<a href="https://github.com/julianhyde/optiq/issues/194">OPTIQ-194</a>,    * "Array items in MongoDB adapter" is fixed.    */
+comment|/**    * Whether    *<a href="https://issues.apache.org/jira/browse/OPTIQ-194">OPTIQ-194</a>,    * "Array items in MongoDB adapter" is fixed.    */
 specifier|public
 specifier|static
 specifier|final
 name|boolean
-name|OPTIQ194_FIXED
+name|OPTIQ_194_FIXED
+init|=
+literal|false
+decl_stmt|;
+comment|/**    * Whether    *<a href="https://issues.apache.org/jira/browse/OPTIQ-319">OPTIQ-319</a>,    * "Array items in MongoDB adapter" is fixed.    */
+specifier|public
+specifier|static
+specifier|final
+name|boolean
+name|OPTIQ_319_FIXED
 init|=
 literal|false
 decl_stmt|;

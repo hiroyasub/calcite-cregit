@@ -784,7 +784,7 @@ name|discard
 argument_list|(
 name|Bug
 operator|.
-name|OPTIQ194_FIXED
+name|OPTIQ_194_FIXED
 argument_list|)
 expr_stmt|;
 name|OptiqAssert
