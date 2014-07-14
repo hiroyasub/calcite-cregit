@@ -443,6 +443,10 @@ name|MaterializationTest
 operator|.
 name|class
 block|,
+name|LatticeTest
+operator|.
+name|class
+block|,
 name|SqlLimitsTest
 operator|.
 name|class

@@ -763,6 +763,189 @@ literal|"SemiMutableSchema"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Tests a model containing a lattice. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testReadLattice
+parameter_list|()
+throws|throws
+name|IOException
+block|{
+specifier|final
+name|ObjectMapper
+name|mapper
+init|=
+name|mapper
+argument_list|()
+decl_stmt|;
+name|JsonRoot
+name|root
+init|=
+name|mapper
+operator|.
+name|readValue
+argument_list|(
+literal|"{\n"
+operator|+
+literal|"  version: '1.0',\n"
+operator|+
+literal|"   schemas: [\n"
+operator|+
+literal|"     {\n"
+operator|+
+literal|"       name: 'FoodMart',\n"
+operator|+
+literal|"       tables: [\n"
+operator|+
+literal|"         {\n"
+operator|+
+literal|"           name: 'time_by_day',\n"
+operator|+
+literal|"           columns: [\n"
+operator|+
+literal|"             {\n"
+operator|+
+literal|"               name: 'time_id'\n"
+operator|+
+literal|"             }\n"
+operator|+
+literal|"           ]\n"
+operator|+
+literal|"         },\n"
+operator|+
+literal|"         {\n"
+operator|+
+literal|"           name: 'sales_fact_1997',\n"
+operator|+
+literal|"           columns: [\n"
+operator|+
+literal|"             {\n"
+operator|+
+literal|"               name: 'time_id'\n"
+operator|+
+literal|"             }\n"
+operator|+
+literal|"           ]\n"
+operator|+
+literal|"         }\n"
+operator|+
+literal|"       ],\n"
+operator|+
+literal|"       lattices: [\n"
+operator|+
+literal|"         {\n"
+operator|+
+literal|"           name: 'SalesStar',\n"
+operator|+
+literal|"           sql: 'select * from sales_fact_1997'\n"
+operator|+
+literal|"         }\n"
+operator|+
+literal|"       ]\n"
+operator|+
+literal|"     }\n"
+operator|+
+literal|"   ]\n"
+operator|+
+literal|"}"
+argument_list|,
+name|JsonRoot
+operator|.
+name|class
+argument_list|)
+decl_stmt|;
+name|assertEquals
+argument_list|(
+literal|"1.0"
+argument_list|,
+name|root
+operator|.
+name|version
+argument_list|)
+expr_stmt|;
+name|assertEquals
+argument_list|(
+literal|1
+argument_list|,
+name|root
+operator|.
+name|schemas
+operator|.
+name|size
+argument_list|()
+argument_list|)
+expr_stmt|;
+specifier|final
+name|JsonMapSchema
+name|schema
+init|=
+operator|(
+name|JsonMapSchema
+operator|)
+name|root
+operator|.
+name|schemas
+operator|.
+name|get
+argument_list|(
+literal|0
+argument_list|)
+decl_stmt|;
+name|assertEquals
+argument_list|(
+literal|"FoodMart"
+argument_list|,
+name|schema
+operator|.
+name|name
+argument_list|)
+expr_stmt|;
+name|assertEquals
+argument_list|(
+literal|1
+argument_list|,
+name|schema
+operator|.
+name|lattices
+operator|.
+name|size
+argument_list|()
+argument_list|)
+expr_stmt|;
+specifier|final
+name|JsonLattice
+name|lattice0
+init|=
+name|schema
+operator|.
+name|lattices
+operator|.
+name|get
+argument_list|(
+literal|0
+argument_list|)
+decl_stmt|;
+name|assertEquals
+argument_list|(
+literal|"SalesStar"
+argument_list|,
+name|lattice0
+operator|.
+name|name
+argument_list|)
+expr_stmt|;
+name|assertEquals
+argument_list|(
+literal|"select * from sales_fact_1997"
+argument_list|,
+name|lattice0
+operator|.
+name|sql
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 end_class
 

@@ -240,6 +240,14 @@ name|RelOptMaterialization
 name|materialization
 parameter_list|)
 function_decl|;
+comment|/**    * Defines a lattice.    *    *<p>The lattice may have materializations; it is not necessary to call    * {@link #addMaterialization} for these; they are registered implicitly.    */
+name|void
+name|addLattice
+parameter_list|(
+name|RelOptLattice
+name|lattice
+parameter_list|)
+function_decl|;
 comment|/**    * Finds the most efficient expression to implement this query.    *    * @throws CannotPlanException if cannot find a plan    */
 name|RelNode
 name|findBestExp

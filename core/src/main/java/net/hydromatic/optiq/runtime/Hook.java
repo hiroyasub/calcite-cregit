@@ -85,6 +85,9 @@ block|,
 comment|/** Called after de-correlation and field trimming, but before    * optimization. */
 name|TRIMMED
 block|,
+comment|/** Called by the planner after substituting a materialization. */
+name|SUB
+block|,
 comment|/** Called when a constant expression is being reduced. */
 name|EXPRESSION_REDUCER
 block|,
@@ -392,6 +395,22 @@ interface|interface
 name|Closeable
 comment|/*extends AutoCloseable*/
 block|{
+comment|/** Closeable that does nothing. */
+name|Closeable
+name|EMPTY
+init|=
+operator|new
+name|Closeable
+argument_list|()
+block|{
+specifier|public
+name|void
+name|close
+parameter_list|()
+block|{
+block|}
+block|}
+decl_stmt|;
 name|void
 name|close
 parameter_list|()

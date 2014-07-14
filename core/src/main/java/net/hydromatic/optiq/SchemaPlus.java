@@ -15,6 +15,20 @@ end_package
 
 begin_import
 import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|optiq
+operator|.
+name|materialize
+operator|.
+name|Lattice
+import|;
+end_import
+
+begin_import
+import|import
 name|com
 operator|.
 name|google
@@ -87,6 +101,17 @@ name|name
 parameter_list|,
 name|Function
 name|function
+parameter_list|)
+function_decl|;
+comment|/** Adds a lattice to this schema. */
+name|void
+name|add
+parameter_list|(
+name|String
+name|name
+parameter_list|,
+name|Lattice
+name|lattice
 parameter_list|)
 function_decl|;
 name|boolean

@@ -434,6 +434,16 @@ parameter_list|)
 block|{
 comment|// ignore - this planner does not support materializations
 block|}
+specifier|public
+name|void
+name|addLattice
+parameter_list|(
+name|RelOptLattice
+name|lattice
+parameter_list|)
+block|{
+comment|// ignore - this planner does not support lattices
+block|}
 comment|// implement RelOptPlanner
 specifier|public
 name|boolean
