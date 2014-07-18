@@ -35,6 +35,18 @@ begin_import
 import|import
 name|org
 operator|.
+name|eigenbase
+operator|.
+name|util
+operator|.
+name|Bug
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
 name|junit
 operator|.
 name|Ignore
@@ -284,6 +296,45 @@ argument_list|()
 expr_stmt|;
 block|}
 annotation|@
+name|Test
+specifier|public
+name|void
+name|testQuery17
+parameter_list|()
+block|{
+name|checkQuery
+argument_list|(
+literal|17
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|"xx"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testQuery58
+parameter_list|()
+block|{
+name|checkQuery
+argument_list|(
+literal|58
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|"xx"
+argument_list|)
+operator|.
+name|runs
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
 name|Ignore
 argument_list|(
 literal|"takes too long to optimize"
@@ -371,6 +422,48 @@ name|i
 condition|)
 block|{
 case|case
+literal|58
+case|:
+if|if
+condition|(
+name|Bug
+operator|.
+name|upgrade
+argument_list|(
+literal|"new TPC-DS generator"
+argument_list|)
+condition|)
+block|{
+comment|// Work around bug: Support '<DATE>  =<character literal>'.
+name|sql
+operator|=
+name|sql
+operator|.
+name|replace
+argument_list|(
+literal|" = '"
+argument_list|,
+literal|" = DATE '"
+argument_list|)
+expr_stmt|;
+block|}
+else|else
+block|{
+comment|// Until TPC-DS generator can handle date(...).
+name|sql
+operator|=
+name|sql
+operator|.
+name|replace
+argument_list|(
+literal|"'date([YEAR]+\"-01-01\",[YEAR]+\"-07-24\",sales)'"
+argument_list|,
+literal|"DATE '1998-08-18'"
+argument_list|)
+expr_stmt|;
+block|}
+break|break;
+case|case
 literal|72
 case|:
 comment|// Work around OPTIQ-304: Support '<DATE> +<INTEGER>'.
@@ -385,6 +478,7 @@ argument_list|,
 literal|"+ interval '5' day"
 argument_list|)
 expr_stmt|;
+break|break;
 block|}
 return|return
 name|with

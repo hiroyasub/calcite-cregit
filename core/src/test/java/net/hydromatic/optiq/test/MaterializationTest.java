@@ -461,6 +461,8 @@ argument_list|)
 operator|.
 name|explainMatches
 argument_list|(
+literal|""
+argument_list|,
 name|explainChecker
 argument_list|)
 operator|.

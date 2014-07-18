@@ -675,6 +675,10 @@ name|SwapJoinRule
 operator|.
 name|INSTANCE
 argument_list|,
+name|CommutativeJoinRule
+operator|.
+name|INSTANCE
+argument_list|,
 name|PushJoinThroughJoinRule
 operator|.
 name|LEFT
