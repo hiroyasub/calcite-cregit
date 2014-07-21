@@ -97,6 +97,20 @@ name|optiq
 operator|.
 name|util
 operator|.
+name|BitSetsTest
+import|;
+end_import
+
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|optiq
+operator|.
+name|util
+operator|.
 name|PartiallyOrderedSetTest
 import|;
 end_import
@@ -291,6 +305,10 @@ argument_list|(
 block|{
 comment|// very fast tests (under 0.1s)
 name|ArrayTableTest
+operator|.
+name|class
+block|,
+name|BitSetsTest
 operator|.
 name|class
 block|,
