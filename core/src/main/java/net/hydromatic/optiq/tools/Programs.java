@@ -544,6 +544,10 @@ argument_list|<
 name|RelOptRule
 argument_list|>
 name|rules
+parameter_list|,
+specifier|final
+name|boolean
+name|bushy
 parameter_list|)
 block|{
 return|return
@@ -693,6 +697,12 @@ name|list
 operator|.
 name|add
 argument_list|(
+name|bushy
+condition|?
+name|OptimizeBushyJoinRule
+operator|.
+name|INSTANCE
+else|:
 name|LoptOptimizeJoinRule
 operator|.
 name|INSTANCE
