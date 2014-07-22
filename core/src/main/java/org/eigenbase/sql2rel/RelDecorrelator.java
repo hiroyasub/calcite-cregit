@@ -6504,6 +6504,10 @@ expr_stmt|;
 block|}
 block|}
 block|}
+specifier|final
+name|RelDataType
+name|newType
+decl_stmt|;
 if|if
 condition|(
 operator|!
@@ -6512,15 +6516,15 @@ condition|)
 block|{
 comment|// TODO: ideally this only needs to be called if the result
 comment|// type will also change. However, since that requires
-comment|// suport from type inference rules to tell whether a rule
+comment|// support from type inference rules to tell whether a rule
 comment|// decides return type based on input types, for now all
 comment|// operators will be recreated with new type if any operand
 comment|// changed, unless the operator has "built-in" type.
-name|newCall
+name|newType
 operator|=
 name|rexBuilder
 operator|.
-name|makeCall
+name|deriveReturnType
 argument_list|(
 name|operator
 argument_list|,
@@ -6535,25 +6539,29 @@ comment|// operators with return type built into the operator
 comment|// definition, and with no type inference rules, such as
 comment|// cast function with less than 2 operands.
 comment|// TODO: Comments in RexShuttle.visitCall() mention other
-comment|// types in this catagory. Need to resolve those together
-comment|// and preferrably in the base class RexShuttle.
+comment|// types in this category. Need to resolve those together
+comment|// and preferably in the base class RexShuttle.
+name|newType
+operator|=
+name|call
+operator|.
+name|getType
+argument_list|()
+expr_stmt|;
+block|}
 name|newCall
 operator|=
 name|rexBuilder
 operator|.
 name|makeCall
 argument_list|(
-name|call
-operator|.
-name|getType
-argument_list|()
+name|newType
 argument_list|,
 name|operator
 argument_list|,
 name|clonedOperands
 argument_list|)
 expr_stmt|;
-block|}
 block|}
 else|else
 block|{

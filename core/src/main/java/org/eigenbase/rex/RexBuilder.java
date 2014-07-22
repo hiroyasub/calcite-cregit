@@ -640,7 +640,7 @@ name|field
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates a call with an array of arguments and a predetermined type.    */
+comment|/**    * Creates a call with a list of arguments and a predetermined type.    */
 specifier|public
 name|RexNode
 name|makeCall
@@ -670,7 +670,7 @@ name|exprs
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates a call with an array of arguments.    *    *<p>This is the fundamental method called by all of the other<code>    * makeCall</code> methods. If you derive a class from {@link RexBuilder},    * this is the only method you need to override.</p>    */
+comment|/**    * Creates a call with an array of arguments.    *    *<p>If you already know the return type of the call, then    * {@link #makeCall(org.eigenbase.reltype.RelDataType, org.eigenbase.sql.SqlOperator, java.util.List)}    * is preferred.</p>    */
 specifier|public
 name|RexNode
 name|makeCall
@@ -694,8 +694,6 @@ init|=
 name|deriveReturnType
 argument_list|(
 name|op
-argument_list|,
-name|typeFactory
 argument_list|,
 name|exprs
 argument_list|)
@@ -740,49 +738,13 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates a call with an array of arguments.    *    *<p>This is the fundamental method called by all of the other<code>    * makeCall</code> methods. If you derive a class from {@link RexBuilder},    * this is the only method you need to override.</p>    */
-specifier|public
-name|RexNode
-name|makeFlatCall
-parameter_list|(
-name|SqlOperator
-name|op
-parameter_list|,
-name|List
-argument_list|<
-name|?
-extends|extends
-name|RexNode
-argument_list|>
-name|exprs
-parameter_list|)
-block|{
-return|return
-name|makeCall
-argument_list|(
-name|op
-argument_list|,
-name|RexUtil
-operator|.
-name|flatten
-argument_list|(
-name|exprs
-argument_list|,
-name|op
-argument_list|)
-argument_list|)
-return|;
-block|}
-comment|/**    * Derives the return type of a call to an operator.    *    * @param op          the operator being called    * @param typeFactory factory for return type    * @param exprs       actual operands    * @return derived type    */
+comment|/**    * Derives the return type of a call to an operator.    *    * @param op          the operator being called    * @param exprs       actual operands    * @return derived type    */
 specifier|public
 name|RelDataType
 name|deriveReturnType
 parameter_list|(
 name|SqlOperator
 name|op
-parameter_list|,
-name|RelDataTypeFactory
-name|typeFactory
 parameter_list|,
 name|List
 argument_list|<

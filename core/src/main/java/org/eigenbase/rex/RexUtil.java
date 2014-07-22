@@ -3092,11 +3092,10 @@ expr_stmt|;
 block|}
 block|}
 comment|/**    * Converts a list of operands into a list that is flat with respect to    * the given operator. The operands are assumed to be flat already.    */
+specifier|public
 specifier|static
 name|List
 argument_list|<
-name|?
-extends|extends
 name|RexNode
 argument_list|>
 name|flatten
@@ -3123,7 +3122,11 @@ name|op
 argument_list|)
 condition|)
 block|{
+comment|//noinspection unchecked
 return|return
+operator|(
+name|List
+operator|)
 name|exprs
 return|;
 block|}
