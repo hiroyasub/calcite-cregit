@@ -99,20 +99,6 @@ name|hydromatic
 operator|.
 name|optiq
 operator|.
-name|prepare
-operator|.
-name|OptiqPrepareImpl
-import|;
-end_import
-
-begin_import
-import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|optiq
-operator|.
 name|rules
 operator|.
 name|java
@@ -378,20 +364,6 @@ operator|.
 name|collect
 operator|.
 name|ImmutableList
-import|;
-end_import
-
-begin_import
-import|import
-name|com
-operator|.
-name|google
-operator|.
-name|common
-operator|.
-name|collect
-operator|.
-name|ImmutableSet
 import|;
 end_import
 
@@ -2385,6 +2357,8 @@ name|Programs
 operator|.
 name|heuristicJoinOrder
 argument_list|(
+name|Programs
+operator|.
 name|RULE_SET
 argument_list|,
 literal|false
@@ -2467,7 +2441,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Plans a 4-table join query on the FoodMart schema. The ideal plan is not    * bushy, but nevertheless exercises the bushy-join heuristic optimizer. */
+comment|/** Plans a 3-table join query on the FoodMart schema. The ideal plan is not    * bushy, but nevertheless exercises the bushy-join heuristic optimizer. */
 annotation|@
 name|Test
 specifier|public
@@ -2477,10 +2451,8 @@ parameter_list|()
 throws|throws
 name|Exception
 block|{
-specifier|final
-name|String
-name|sql
-init|=
+name|checkBushy
+argument_list|(
 literal|"select *\n"
 operator|+
 literal|"from \"sales_fact_1997\" as s\n"
@@ -2492,27 +2464,143 @@ operator|+
 literal|"where c.\"city\" = 'San Francisco'\n"
 operator|+
 literal|"and p.\"brand_name\" = 'Washington'"
-decl_stmt|;
-specifier|final
+argument_list|,
+literal|"EnumerableProjectRel(product_id=[$0], time_id=[$1], customer_id=[$2], promotion_id=[$3], store_id=[$4], store_sales=[$5], store_cost=[$6], unit_sales=[$7], customer_id0=[$8], account_num=[$9], lname=[$10], fname=[$11], mi=[$12], address1=[$13], address2=[$14], address3=[$15], address4=[$16], city=[$17], state_province=[$18], postal_code=[$19], country=[$20], customer_region_id=[$21], phone1=[$22], phone2=[$23], birthdate=[$24], marital_status=[$25], yearly_income=[$26], gender=[$27], total_children=[$28], num_children_at_home=[$29], education=[$30], date_accnt_opened=[$31], member_card=[$32], occupation=[$33], houseowner=[$34], num_cars_owned=[$35], fullname=[$36], product_class_id=[$37], product_id0=[$38], brand_name=[$39], product_name=[$40], SKU=[$41], SRP=[$42], gross_weight=[$43], net_weight=[$44], recyclable_package=[$45], low_fat=[$46], units_per_case=[$47], cases_per_pallet=[$48], shelf_width=[$49], shelf_height=[$50], shelf_depth=[$51])\n"
+operator|+
+literal|"  EnumerableProjectRel($f0=[$44], $f1=[$45], $f2=[$46], $f3=[$47], $f4=[$48], $f5=[$49], $f6=[$50], $f7=[$51], $f8=[$15], $f9=[$16], $f10=[$17], $f11=[$18], $f12=[$19], $f13=[$20], $f14=[$21], $f15=[$22], $f16=[$23], $f17=[$24], $f18=[$25], $f19=[$26], $f20=[$27], $f21=[$28], $f22=[$29], $f23=[$30], $f24=[$31], $f25=[$32], $f26=[$33], $f27=[$34], $f28=[$35], $f29=[$36], $f30=[$37], $f31=[$38], $f32=[$39], $f33=[$40], $f34=[$41], $f35=[$42], $f36=[$43], $f37=[$0], $f38=[$1], $f39=[$2], $f40=[$3], $f41=[$4], $f42=[$5], $f43=[$6], $f44=[$7], $f45=[$8], $f46=[$9], $f47=[$10], $f48=[$11], $f49=[$12], $f50=[$13], $f51=[$14])\n"
+operator|+
+literal|"    EnumerableJoinRel(condition=[=($44, $1)], joinType=[inner])\n"
+operator|+
+literal|"      EnumerableFilterRel(condition=[=($2, 'Washington')])\n"
+operator|+
+literal|"        EnumerableTableAccessRel(table=[[foodmart2, product]])\n"
+operator|+
+literal|"      EnumerableJoinRel(condition=[=($31, $0)], joinType=[inner])\n"
+operator|+
+literal|"        EnumerableFilterRel(condition=[=($9, 'San Francisco')])\n"
+operator|+
+literal|"          EnumerableTableAccessRel(table=[[foodmart2, customer]])\n"
+operator|+
+literal|"        EnumerableTableAccessRel(table=[[foodmart2, sales_fact_1997]])\n"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Plans a 4-table join query on the FoodMart schema.    *    *<p>The ideal plan is bushy:    *   customer x (product_class x  product x sales)    * which would be written    *   (customer x ((product_class x product) x sales))    * if you don't assume 'x' is left-associative. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testBushy
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+name|checkBushy
+argument_list|(
+literal|"select *\n"
+operator|+
+literal|"from \"sales_fact_1997\" as s\n"
+operator|+
+literal|"  join \"customer\" as c using (\"customer_id\")\n"
+operator|+
+literal|"  join \"product\" as p using (\"product_id\")\n"
+operator|+
+literal|"  join \"product_class\" as pc using (\"product_class_id\")\n"
+operator|+
+literal|"where c.\"city\" = 'San Francisco'\n"
+operator|+
+literal|"and p.\"brand_name\" = 'Washington'"
+argument_list|,
+literal|"EnumerableProjectRel(product_id=[$0], time_id=[$1], customer_id=[$2], promotion_id=[$3], store_id=[$4], store_sales=[$5], store_cost=[$6], unit_sales=[$7], customer_id0=[$8], account_num=[$9], lname=[$10], fname=[$11], mi=[$12], address1=[$13], address2=[$14], address3=[$15], address4=[$16], city=[$17], state_province=[$18], postal_code=[$19], country=[$20], customer_region_id=[$21], phone1=[$22], phone2=[$23], birthdate=[$24], marital_status=[$25], yearly_income=[$26], gender=[$27], total_children=[$28], num_children_at_home=[$29], education=[$30], date_accnt_opened=[$31], member_card=[$32], occupation=[$33], houseowner=[$34], num_cars_owned=[$35], fullname=[$36], product_class_id=[$37], product_id0=[$38], brand_name=[$39], product_name=[$40], SKU=[$41], SRP=[$42], gross_weight=[$43], net_weight=[$44], recyclable_package=[$45], low_fat=[$46], units_per_case=[$47], cases_per_pallet=[$48], shelf_width=[$49], shelf_height=[$50], shelf_depth=[$51], product_class_id0=[$52], product_subcategory=[$53], product_category=[$54], product_department=[$55], product_family=[$56])\n"
+operator|+
+literal|"  EnumerableProjectRel($f0=[$49], $f1=[$50], $f2=[$51], $f3=[$52], $f4=[$53], $f5=[$54], $f6=[$55], $f7=[$56], $f8=[$0], $f9=[$1], $f10=[$2], $f11=[$3], $f12=[$4], $f13=[$5], $f14=[$6], $f15=[$7], $f16=[$8], $f17=[$9], $f18=[$10], $f19=[$11], $f20=[$12], $f21=[$13], $f22=[$14], $f23=[$15], $f24=[$16], $f25=[$17], $f26=[$18], $f27=[$19], $f28=[$20], $f29=[$21], $f30=[$22], $f31=[$23], $f32=[$24], $f33=[$25], $f34=[$26], $f35=[$27], $f36=[$28], $f37=[$34], $f38=[$35], $f39=[$36], $f40=[$37], $f41=[$38], $f42=[$39], $f43=[$40], $f44=[$41], $f45=[$42], $f46=[$43], $f47=[$44], $f48=[$45], $f49=[$46], $f50=[$47], $f51=[$48], $f52=[$29], $f53=[$30], $f54=[$31], $f55=[$32], $f56=[$33])\n"
+operator|+
+literal|"    EnumerableJoinRel(condition=[=($51, $0)], joinType=[inner])\n"
+operator|+
+literal|"      EnumerableFilterRel(condition=[=($9, 'San Francisco')])\n"
+operator|+
+literal|"        EnumerableTableAccessRel(table=[[foodmart2, customer]])\n"
+operator|+
+literal|"      EnumerableJoinRel(condition=[=($20, $6)], joinType=[inner])\n"
+operator|+
+literal|"        EnumerableJoinRel(condition=[=($5, $0)], joinType=[inner])\n"
+operator|+
+literal|"          EnumerableTableAccessRel(table=[[foodmart2, product_class]])\n"
+operator|+
+literal|"          EnumerableFilterRel(condition=[=($2, 'Washington')])\n"
+operator|+
+literal|"            EnumerableTableAccessRel(table=[[foodmart2, product]])\n"
+operator|+
+literal|"        EnumerableTableAccessRel(table=[[foodmart2, sales_fact_1997]])\n"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Plans a 5-table join query on the FoodMart schema. The ideal plan is    * bushy: store x (customer x (product_class x product x sales)). */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testBushy5
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+name|checkBushy
+argument_list|(
+literal|"select *\n"
+operator|+
+literal|"from \"sales_fact_1997\" as s\n"
+operator|+
+literal|"  join \"customer\" as c using (\"customer_id\")\n"
+operator|+
+literal|"  join \"product\" as p using (\"product_id\")\n"
+operator|+
+literal|"  join \"product_class\" as pc using (\"product_class_id\")\n"
+operator|+
+literal|"  join \"store\" as st using (\"store_id\")\n"
+operator|+
+literal|"where c.\"city\" = 'San Francisco'\n"
+argument_list|,
+literal|"EnumerableProjectRel(product_id=[$0], time_id=[$1], customer_id=[$2], promotion_id=[$3], store_id=[$4], store_sales=[$5], store_cost=[$6], unit_sales=[$7], customer_id0=[$8], account_num=[$9], lname=[$10], fname=[$11], mi=[$12], address1=[$13], address2=[$14], address3=[$15], address4=[$16], city=[$17], state_province=[$18], postal_code=[$19], country=[$20], customer_region_id=[$21], phone1=[$22], phone2=[$23], birthdate=[$24], marital_status=[$25], yearly_income=[$26], gender=[$27], total_children=[$28], num_children_at_home=[$29], education=[$30], date_accnt_opened=[$31], member_card=[$32], occupation=[$33], houseowner=[$34], num_cars_owned=[$35], fullname=[$36], product_class_id=[$37], product_id0=[$38], brand_name=[$39], product_name=[$40], SKU=[$41], SRP=[$42], gross_weight=[$43], net_weight=[$44], recyclable_package=[$45], low_fat=[$46], units_per_case=[$47], cases_per_pallet=[$48], shelf_width=[$49], shelf_height=[$50], shelf_depth=[$51], product_class_id0=[$52], product_subcategory=[$53], product_category=[$54], product_department=[$55], product_family=[$56], store_id0=[$57], store_type=[$58], region_id=[$59], store_name=[$60], store_number=[$61], store_street_address=[$62], store_city=[$63], store_state=[$64], store_postal_code=[$65], store_country=[$66], store_manager=[$67], store_phone=[$68], store_fax=[$69], first_opened_date=[$70], last_remodel_date=[$71], store_sqft=[$72], grocery_sqft=[$73], frozen_sqft=[$74], meat_sqft=[$75], coffee_bar=[$76], video_store=[$77], salad_bar=[$78], prepared_food=[$79], florist=[$80])\n"
+operator|+
+literal|"  EnumerableProjectRel($f0=[$73], $f1=[$74], $f2=[$75], $f3=[$76], $f4=[$77], $f5=[$78], $f6=[$79], $f7=[$80], $f8=[$24], $f9=[$25], $f10=[$26], $f11=[$27], $f12=[$28], $f13=[$29], $f14=[$30], $f15=[$31], $f16=[$32], $f17=[$33], $f18=[$34], $f19=[$35], $f20=[$36], $f21=[$37], $f22=[$38], $f23=[$39], $f24=[$40], $f25=[$41], $f26=[$42], $f27=[$43], $f28=[$44], $f29=[$45], $f30=[$46], $f31=[$47], $f32=[$48], $f33=[$49], $f34=[$50], $f35=[$51], $f36=[$52], $f37=[$58], $f38=[$59], $f39=[$60], $f40=[$61], $f41=[$62], $f42=[$63], $f43=[$64], $f44=[$65], $f45=[$66], $f46=[$67], $f47=[$68], $f48=[$69], $f49=[$70], $f50=[$71], $f51=[$72], $f52=[$53], $f53=[$54], $f54=[$55], $f55=[$56], $f56=[$57], $f57=[$0], $f58=[$1], $f59=[$2], $f60=[$3], $f61=[$4], $f62=[$5], $f63=[$6], $f64=[$7], $f65=[$8], $f66=[$9], $f67=[$10], $f68=[$11], $f69=[$12], $f70=[$13], $f71=[$14], $f72=[$15], $f73=[$16], $f74=[$17], $f75=[$18], $f76=[$19], $f77=[$20], $f78=[$21], $f79=[$22], $f80=[$23])\n"
+operator|+
+literal|"    EnumerableJoinRel(condition=[=($77, $0)], joinType=[inner])\n"
+operator|+
+literal|"      EnumerableTableAccessRel(table=[[foodmart2, store]])\n"
+operator|+
+literal|"      EnumerableJoinRel(condition=[=($51, $0)], joinType=[inner])\n"
+operator|+
+literal|"        EnumerableFilterRel(condition=[=($9, 'San Francisco')])\n"
+operator|+
+literal|"          EnumerableTableAccessRel(table=[[foodmart2, customer]])\n"
+operator|+
+literal|"        EnumerableJoinRel(condition=[=($20, $6)], joinType=[inner])\n"
+operator|+
+literal|"          EnumerableJoinRel(condition=[=($5, $0)], joinType=[inner])\n"
+operator|+
+literal|"            EnumerableTableAccessRel(table=[[foodmart2, product_class]])\n"
+operator|+
+literal|"            EnumerableTableAccessRel(table=[[foodmart2, product]])\n"
+operator|+
+literal|"          EnumerableTableAccessRel(table=[[foodmart2, sales_fact_1997]])\n"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Checks that a query returns a particular plan, using a planner with    * OptimizeBushyJoinRule enabled. */
+specifier|private
+name|void
+name|checkBushy
+parameter_list|(
+name|String
+name|sql
+parameter_list|,
 name|String
 name|expected
-init|=
-literal|""
-operator|+
-literal|"EnumerableJoinRel(condition=[=($0, $38)], joinType=[inner])\n"
-operator|+
-literal|"  EnumerableJoinRel(condition=[=($2, $8)], joinType=[inner])\n"
-operator|+
-literal|"    EnumerableTableAccessRel(table=[[foodmart2, sales_fact_1997]])\n"
-operator|+
-literal|"    EnumerableFilterRel(condition=[=($9, 'San Francisco')])\n"
-operator|+
-literal|"      EnumerableTableAccessRel(table=[[foodmart2, customer]])\n"
-operator|+
-literal|"  EnumerableFilterRel(condition=[=($2, 'Washington')])\n"
-operator|+
-literal|"    EnumerableTableAccessRel(table=[[foodmart2, product]])\n"
-decl_stmt|;
+parameter_list|)
+throws|throws
+name|Exception
+block|{
 specifier|final
 name|SchemaPlus
 name|rootSchema
@@ -2573,6 +2661,8 @@ name|Programs
 operator|.
 name|heuristicJoinOrder
 argument_list|(
+name|Programs
+operator|.
 name|RULE_SET
 argument_list|,
 literal|true
@@ -2976,124 +3066,6 @@ literal|null
 return|;
 block|}
 block|}
-specifier|private
-specifier|static
-specifier|final
-name|ImmutableSet
-argument_list|<
-name|RelOptRule
-argument_list|>
-name|RULE_SET
-init|=
-name|ImmutableSet
-operator|.
-name|of
-argument_list|(
-name|JavaRules
-operator|.
-name|ENUMERABLE_JOIN_RULE
-argument_list|,
-name|JavaRules
-operator|.
-name|ENUMERABLE_PROJECT_RULE
-argument_list|,
-name|JavaRules
-operator|.
-name|ENUMERABLE_FILTER_RULE
-argument_list|,
-name|JavaRules
-operator|.
-name|ENUMERABLE_AGGREGATE_RULE
-argument_list|,
-name|JavaRules
-operator|.
-name|ENUMERABLE_SORT_RULE
-argument_list|,
-name|JavaRules
-operator|.
-name|ENUMERABLE_LIMIT_RULE
-argument_list|,
-name|JavaRules
-operator|.
-name|ENUMERABLE_UNION_RULE
-argument_list|,
-name|JavaRules
-operator|.
-name|ENUMERABLE_INTERSECT_RULE
-argument_list|,
-name|JavaRules
-operator|.
-name|ENUMERABLE_MINUS_RULE
-argument_list|,
-name|JavaRules
-operator|.
-name|ENUMERABLE_TABLE_MODIFICATION_RULE
-argument_list|,
-name|JavaRules
-operator|.
-name|ENUMERABLE_VALUES_RULE
-argument_list|,
-name|JavaRules
-operator|.
-name|ENUMERABLE_WINDOW_RULE
-argument_list|,
-name|JavaRules
-operator|.
-name|ENUMERABLE_ONE_ROW_RULE
-argument_list|,
-name|JavaRules
-operator|.
-name|ENUMERABLE_EMPTY_RULE
-argument_list|,
-name|TableAccessRule
-operator|.
-name|INSTANCE
-argument_list|,
-name|OptiqPrepareImpl
-operator|.
-name|COMMUTE
-condition|?
-name|CommutativeJoinRule
-operator|.
-name|INSTANCE
-else|:
-name|MergeProjectRule
-operator|.
-name|INSTANCE
-argument_list|,
-name|PushFilterPastProjectRule
-operator|.
-name|INSTANCE
-argument_list|,
-name|PushFilterPastJoinRule
-operator|.
-name|FILTER_ON_JOIN
-argument_list|,
-name|RemoveDistinctAggregateRule
-operator|.
-name|INSTANCE
-argument_list|,
-name|ReduceAggregatesRule
-operator|.
-name|INSTANCE
-argument_list|,
-name|SwapJoinRule
-operator|.
-name|INSTANCE
-argument_list|,
-name|PushJoinThroughJoinRule
-operator|.
-name|RIGHT
-argument_list|,
-name|PushJoinThroughJoinRule
-operator|.
-name|LEFT
-argument_list|,
-name|PushSortPastProjectRule
-operator|.
-name|INSTANCE
-argument_list|)
-decl_stmt|;
 comment|/**    * Test to determine whether de-correlation correctly removes CorrelatorRel.    */
 annotation|@
 name|Test
@@ -3178,18 +3150,14 @@ argument_list|()
 argument_list|)
 argument_list|)
 decl_stmt|;
-name|Planner
-name|p
+specifier|final
+name|FrameworkConfig
+name|config
 init|=
-name|Frameworks
-operator|.
-name|getPlanner
-argument_list|(
 name|Frameworks
 operator|.
 name|newConfigBuilder
 argument_list|()
-comment|//
 operator|.
 name|lex
 argument_list|(
@@ -3197,13 +3165,11 @@ name|Lex
 operator|.
 name|MYSQL
 argument_list|)
-comment|//
 operator|.
 name|defaultSchema
 argument_list|(
 name|schema
 argument_list|)
-comment|//
 operator|.
 name|programs
 argument_list|(
@@ -3211,13 +3177,23 @@ name|Programs
 operator|.
 name|ofRules
 argument_list|(
+name|Programs
+operator|.
 name|RULE_SET
 argument_list|)
 argument_list|)
-comment|//
 operator|.
 name|build
 argument_list|()
+decl_stmt|;
+name|Planner
+name|p
+init|=
+name|Frameworks
+operator|.
+name|getPlanner
+argument_list|(
+name|config
 argument_list|)
 decl_stmt|;
 name|SqlNode

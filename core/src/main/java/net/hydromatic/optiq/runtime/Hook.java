@@ -85,6 +85,9 @@ block|,
 comment|/** Called when a constant expression is being reduced. */
 name|EXPRESSION_REDUCER
 block|,
+comment|/** Called to create a Program to optimize the statement. */
+name|PROGRAM
+block|,
 comment|/** Called with a query that has been generated to send to a back-end system.    * The query might be a SQL string (for the JDBC adapter), a list of Mongo    * pipeline expressions (for the MongoDB adapter), et cetera. */
 name|QUERY_PLAN
 block|;

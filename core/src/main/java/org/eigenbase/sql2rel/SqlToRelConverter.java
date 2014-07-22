@@ -1917,6 +1917,7 @@ argument_list|)
 expr_stmt|;
 return|return;
 block|}
+specifier|final
 name|Map
 argument_list|<
 name|Integer
@@ -1925,13 +1926,9 @@ name|Integer
 argument_list|>
 name|squished
 init|=
-operator|new
-name|HashMap
-argument_list|<
-name|Integer
-argument_list|,
-name|Integer
-argument_list|>
+name|Maps
+operator|.
+name|newHashMap
 argument_list|()
 decl_stmt|;
 specifier|final
@@ -1949,6 +1946,7 @@ operator|.
 name|getFieldList
 argument_list|()
 decl_stmt|;
+specifier|final
 name|List
 argument_list|<
 name|Pair
@@ -1960,16 +1958,9 @@ argument_list|>
 argument_list|>
 name|newProjects
 init|=
-operator|new
-name|ArrayList
-argument_list|<
-name|Pair
-argument_list|<
-name|RexNode
-argument_list|,
-name|String
-argument_list|>
-argument_list|>
+name|Lists
+operator|.
+name|newArrayList
 argument_list|()
 decl_stmt|;
 for|for
@@ -2081,6 +2072,7 @@ name|root
 expr_stmt|;
 comment|// Create the expressions to reverse the mapping.
 comment|// Project($0, $1, $0, $2).
+specifier|final
 name|List
 argument_list|<
 name|Pair
@@ -2092,16 +2084,9 @@ argument_list|>
 argument_list|>
 name|undoProjects
 init|=
-operator|new
-name|ArrayList
-argument_list|<
-name|Pair
-argument_list|<
-name|RexNode
-argument_list|,
-name|String
-argument_list|>
-argument_list|>
+name|Lists
+operator|.
+name|newArrayList
 argument_list|()
 decl_stmt|;
 for|for
@@ -2221,17 +2206,6 @@ return|return;
 block|}
 comment|// Usual case: all of the expressions in the SELECT clause are
 comment|// different.
-name|List
-argument_list|<
-name|AggregateCall
-argument_list|>
-name|aggCalls
-init|=
-name|Collections
-operator|.
-name|emptyList
-argument_list|()
-decl_stmt|;
 name|rel
 operator|=
 name|createAggregate
@@ -2251,7 +2225,13 @@ name|getFieldCount
 argument_list|()
 argument_list|)
 argument_list|,
-name|aggCalls
+name|ImmutableList
+operator|.
+expr|<
+name|AggregateCall
+operator|>
+name|of
+argument_list|()
 argument_list|)
 expr_stmt|;
 name|bb

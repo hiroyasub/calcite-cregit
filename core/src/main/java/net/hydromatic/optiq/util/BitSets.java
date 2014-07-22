@@ -23,6 +23,18 @@ name|eigenbase
 operator|.
 name|util
 operator|.
+name|ImmutableIntList
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
+name|util
+operator|.
 name|IntList
 import|;
 end_import
@@ -391,7 +403,7 @@ return|return
 name|bitSet
 return|;
 block|}
-comment|/**    * Creates a bitset with given bits set.    *    *<p>For example, {@code of(new Integer[] {0, 3})} returns a bit set    * with bits {0, 3} set.    *    * @param bits Array of bits to set    * @return Bit set    */
+comment|/**    * Creates a BitSet with given bits set.    *    *<p>For example, {@code of(new Integer[] {0, 3})} returns a bit set    * with bits {0, 3} set.    *    * @param bits Array of bits to set    * @return Bit set    */
 specifier|public
 specifier|static
 name|BitSet
@@ -430,13 +442,13 @@ return|return
 name|bitSet
 return|;
 block|}
-comment|/**    * Creates a bitset with given bits set.    *    *<p>For example, {@code of(Arrays.asList(0, 3)) } returns a bit set    * with bits {0, 3} set.    *    * @param bits Collection of bits to set    * @return Bit set    */
+comment|/**    * Creates a BitSet with given bits set.    *    *<p>For example, {@code of(Arrays.asList(0, 3)) } returns a bit set    * with bits {0, 3} set.    *    * @param bits Collection of bits to set    * @return Bit set    */
 specifier|public
 specifier|static
 name|BitSet
 name|of
 parameter_list|(
-name|Collection
+name|Iterable
 argument_list|<
 name|?
 extends|extends
@@ -469,6 +481,63 @@ name|bit
 operator|.
 name|intValue
 argument_list|()
+argument_list|)
+expr_stmt|;
+block|}
+return|return
+name|bitSet
+return|;
+block|}
+comment|/**    * Creates a BitSet with given bits set.    *    *<p>For example, {@code of(ImmutableIntList.of(0, 3))} returns a bit set    * with bits {0, 3} set.    *    * @param bits Collection of bits to set    * @return Bit set    */
+specifier|public
+specifier|static
+name|BitSet
+name|of
+parameter_list|(
+name|ImmutableIntList
+name|bits
+parameter_list|)
+block|{
+specifier|final
+name|BitSet
+name|bitSet
+init|=
+operator|new
+name|BitSet
+argument_list|()
+decl_stmt|;
+for|for
+control|(
+name|int
+name|i
+init|=
+literal|0
+init|,
+name|n
+init|=
+name|bits
+operator|.
+name|size
+argument_list|()
+init|;
+name|i
+operator|<
+name|n
+condition|;
+name|i
+operator|++
+control|)
+block|{
+name|bitSet
+operator|.
+name|set
+argument_list|(
+name|bits
+operator|.
+name|getInt
+argument_list|(
+name|i
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -520,6 +589,7 @@ return|return
 name|bitSet
 return|;
 block|}
+comment|/** Creates a BitSet with bits between 0 and {@code toIndex} set. */
 specifier|public
 specifier|static
 name|BitSet

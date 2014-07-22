@@ -357,10 +357,7 @@ argument_list|)
 return|;
 block|}
 specifier|public
-name|List
-argument_list|<
-name|Integer
-argument_list|>
+name|ImmutableIntList
 name|getLeftKeys
 parameter_list|()
 block|{
@@ -369,10 +366,7 @@ name|leftKeys
 return|;
 block|}
 specifier|public
-name|List
-argument_list|<
-name|Integer
-argument_list|>
+name|ImmutableIntList
 name|getRightKeys
 parameter_list|()
 block|{
