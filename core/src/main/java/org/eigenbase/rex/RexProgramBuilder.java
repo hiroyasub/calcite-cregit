@@ -911,6 +911,7 @@ block|}
 else|else
 block|{
 comment|// AND the new condition with the existing condition.
+comment|// If the new condition is identical to the existing condition, skip it.
 name|RexLocalRef
 name|ref
 init|=
@@ -919,10 +920,19 @@ argument_list|(
 name|expr
 argument_list|)
 decl_stmt|;
-specifier|final
-name|RexLocalRef
-name|andRef
-init|=
+if|if
+condition|(
+operator|!
+name|ref
+operator|.
+name|equals
+argument_list|(
+name|conditionRef
+argument_list|)
+condition|)
+block|{
+name|conditionRef
+operator|=
 name|registerInput
 argument_list|(
 name|rexBuilder
@@ -938,11 +948,8 @@ argument_list|,
 name|ref
 argument_list|)
 argument_list|)
-decl_stmt|;
-name|conditionRef
-operator|=
-name|andRef
 expr_stmt|;
+block|}
 block|}
 block|}
 comment|/**    * Registers an expression in the list of common sub-expressions, and    * returns a reference to that expression.     *<p>The expression must be expressed in terms of the<em>inputs</em> of    * this program.</p>    */

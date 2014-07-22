@@ -687,52 +687,6 @@ argument_list|>
 name|exprs
 parameter_list|)
 block|{
-comment|// TODO jvs 12-Jun-2010:  Find a better place for this;
-comment|// it surely does not belong here.
-if|if
-condition|(
-name|op
-operator|==
-name|SqlStdOperatorTable
-operator|.
-name|AND
-operator|&&
-name|exprs
-operator|.
-name|size
-argument_list|()
-operator|==
-literal|2
-operator|&&
-name|exprs
-operator|.
-name|get
-argument_list|(
-literal|0
-argument_list|)
-operator|.
-name|equals
-argument_list|(
-name|exprs
-operator|.
-name|get
-argument_list|(
-literal|1
-argument_list|)
-argument_list|)
-condition|)
-block|{
-comment|// Avoid generating 'AND(x, x)'; this can cause plan explosions if a
-comment|// relnode is its own child and is merged with itself.
-return|return
-name|exprs
-operator|.
-name|get
-argument_list|(
-literal|0
-argument_list|)
-return|;
-block|}
 specifier|final
 name|RelDataType
 name|type

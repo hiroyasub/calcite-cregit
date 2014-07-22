@@ -5666,6 +5666,15 @@ operator|.
 name|PROJECT
 argument_list|)
 expr_stmt|;
+name|planner
+operator|.
+name|addRule
+argument_list|(
+name|MergeFilterRule
+operator|.
+name|INSTANCE
+argument_list|)
+expr_stmt|;
 block|}
 comment|/**    * Dumps a plan as a string.    *    * @param header      Header to print before the plan. Ignored if the format    *                    is XML.    * @param rel         Relational expression to explain.    * @param asXml       Whether to format as XML.    * @param detailLevel Detail level.    * @return Plan    */
 specifier|public

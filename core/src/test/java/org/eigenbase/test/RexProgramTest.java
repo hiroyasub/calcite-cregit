@@ -413,7 +413,7 @@ name|program2
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Tests that AND(x, x) is translated to x.    */
+comment|/**    * Checks translation of AND(x, x).    */
 annotation|@
 name|Test
 specifier|public
@@ -421,6 +421,9 @@ name|void
 name|testDuplicateAnd
 parameter_list|()
 block|{
+comment|// RexProgramBuilder used to translate AND(x, x) to x.
+comment|// Now it translates it to AND(x, x).
+comment|// The optimization of AND(x, x) => x occurs at a higher level.
 specifier|final
 name|RexProgramBuilder
 name|builder
@@ -454,7 +457,9 @@ literal|"expr#4=[+($t0, $t3)], expr#5=[+($t2, $t4)], "
 operator|+
 literal|"expr#6=[+($t0, $t0)], expr#7=[>($t2, $t0)], "
 operator|+
-literal|"a=[$t5], b=[$t6], $condition=[$t7])"
+literal|"expr#8=[AND($t7, $t7)], expr#9=[AND($t8, $t7)], "
+operator|+
+literal|"a=[$t5], b=[$t6], $condition=[$t9])"
 argument_list|,
 name|program
 argument_list|)
