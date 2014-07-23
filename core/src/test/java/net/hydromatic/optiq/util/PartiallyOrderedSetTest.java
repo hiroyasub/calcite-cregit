@@ -17,6 +17,20 @@ end_package
 
 begin_import
 import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|optiq
+operator|.
+name|test
+operator|.
+name|OptiqAssert
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|eigenbase
@@ -76,15 +90,21 @@ name|DEBUG
 init|=
 literal|false
 decl_stmt|;
+comment|// 100, 250, 1000, 3000 are reasonable
 specifier|private
 specifier|static
 specifier|final
 name|int
 name|SCALE
 init|=
-literal|100
+name|OptiqAssert
+operator|.
+name|ENABLE_SLOW
+condition|?
+literal|250
+else|:
+literal|50
 decl_stmt|;
-comment|// 100, 250, 1000, 3000 are reasonable
 specifier|final
 name|long
 name|seed
@@ -1211,6 +1231,16 @@ name|void
 name|testDivisorPoset
 parameter_list|()
 block|{
+if|if
+condition|(
+operator|!
+name|OptiqAssert
+operator|.
+name|ENABLE_SLOW
+condition|)
+block|{
+return|return;
+block|}
 name|PartiallyOrderedSet
 argument_list|<
 name|Integer
