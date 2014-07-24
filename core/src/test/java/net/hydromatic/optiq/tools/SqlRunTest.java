@@ -151,6 +151,8 @@ literal|"select count(*) as c1 from \"foodmart\".\"days\";\n"
 operator|+
 literal|"!ok\n"
 operator|+
+literal|"!plan\n"
+operator|+
 literal|"\n"
 argument_list|,
 literal|"!use foodmart\n"
@@ -182,6 +184,16 @@ operator|+
 literal|"\n"
 operator|+
 literal|"!ok\n"
+operator|+
+literal|"JdbcToEnumerableConverter\n"
+operator|+
+literal|"  JdbcAggregateRel(group=[{}], C1=[COUNT()])\n"
+operator|+
+literal|"    JdbcProjectRel(DUMMY=[0])\n"
+operator|+
+literal|"      JdbcTableScan(table=[[foodmart, days]])\n"
+operator|+
+literal|"!plan\n"
 operator|+
 literal|"\n"
 argument_list|)
@@ -334,6 +346,92 @@ operator|+
 literal|"3\n"
 operator|+
 literal|"4\n"
+operator|+
+literal|"!ok\n"
+operator|+
+literal|"\n"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Content inside a '!ok' command, that needs to be matched. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testOkContent
+parameter_list|()
+block|{
+name|check
+argument_list|(
+literal|"!use foodmart\n"
+operator|+
+literal|"values (1), (2);\n"
+operator|+
+literal|"baz\n"
+operator|+
+literal|"!ok\n"
+operator|+
+literal|"\n"
+argument_list|,
+name|containsString
+argument_list|(
+literal|"!use foodmart\n"
+operator|+
+literal|"values (1), (2);\n"
+operator|+
+literal|"EXPR$0\n"
+operator|+
+literal|"1\n"
+operator|+
+literal|"2\n"
+operator|+
+literal|"!ok\n"
+operator|+
+literal|"\n"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Content inside a '!plan' command, that needs to be matched. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testPlanContent
+parameter_list|()
+block|{
+name|check
+argument_list|(
+literal|"!use foodmart\n"
+operator|+
+literal|"values (1), (2);\n"
+operator|+
+literal|"foo\n"
+operator|+
+literal|"!plan\n"
+operator|+
+literal|"baz\n"
+operator|+
+literal|"!ok\n"
+operator|+
+literal|"\n"
+argument_list|,
+name|containsString
+argument_list|(
+literal|"!use foodmart\n"
+operator|+
+literal|"values (1), (2);\n"
+operator|+
+literal|"EnumerableValuesRel(tuples=[[{ 1 }, { 2 }]])\n"
+operator|+
+literal|"!plan\n"
+operator|+
+literal|"EXPR$0\n"
+operator|+
+literal|"1\n"
+operator|+
+literal|"2\n"
 operator|+
 literal|"!ok\n"
 operator|+
