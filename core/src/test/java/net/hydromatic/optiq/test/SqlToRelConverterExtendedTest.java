@@ -21,20 +21,6 @@ name|net
 operator|.
 name|hydromatic
 operator|.
-name|linq4j
-operator|.
-name|function
-operator|.
-name|Function1
-import|;
-end_import
-
-begin_import
-import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
 name|optiq
 operator|.
 name|SchemaPlus
@@ -119,6 +105,20 @@ end_import
 
 begin_import
 import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|base
+operator|.
+name|Function
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|junit
@@ -170,7 +170,6 @@ name|void
 name|before
 parameter_list|()
 block|{
-comment|//noinspection unchecked
 name|this
 operator|.
 name|closeable
@@ -181,11 +180,8 @@ name|CONVERTED
 operator|.
 name|addThread
 argument_list|(
-operator|(
-name|Function1
-operator|)
 operator|new
-name|Function1
+name|Function
 argument_list|<
 name|RelNode
 argument_list|,

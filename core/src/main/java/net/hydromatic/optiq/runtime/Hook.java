@@ -17,15 +17,15 @@ end_package
 
 begin_import
 import|import
-name|net
+name|com
 operator|.
-name|hydromatic
+name|google
 operator|.
-name|linq4j
+name|common
 operator|.
-name|function
+name|base
 operator|.
-name|Function1
+name|Function
 import|;
 end_import
 
@@ -92,7 +92,7 @@ specifier|private
 specifier|final
 name|List
 argument_list|<
-name|Function1
+name|Function
 argument_list|<
 name|Object
 argument_list|,
@@ -104,7 +104,7 @@ init|=
 operator|new
 name|CopyOnWriteArrayList
 argument_list|<
-name|Function1
+name|Function
 argument_list|<
 name|Object
 argument_list|,
@@ -119,7 +119,7 @@ name|ThreadLocal
 argument_list|<
 name|List
 argument_list|<
-name|Function1
+name|Function
 argument_list|<
 name|Object
 argument_list|,
@@ -134,7 +134,7 @@ name|ThreadLocal
 argument_list|<
 name|List
 argument_list|<
-name|Function1
+name|Function
 argument_list|<
 name|Object
 argument_list|,
@@ -147,7 +147,7 @@ block|{
 specifier|protected
 name|List
 argument_list|<
-name|Function1
+name|Function
 argument_list|<
 name|Object
 argument_list|,
@@ -161,7 +161,7 @@ return|return
 operator|new
 name|ArrayList
 argument_list|<
-name|Function1
+name|Function
 argument_list|<
 name|Object
 argument_list|,
@@ -175,23 +175,37 @@ block|}
 decl_stmt|;
 comment|/** Adds a handler for this Hook.    *    *<p>Returns a {@link Hook.Closeable} so that you can use the following    * try-finally pattern to prevent leaks:</p>    *    *<blockquote><pre>    *     final Hook.Closeable closeable = Hook.FOO.add(HANDLER);    *     try {    *         ...    *     } finally {    *         closeable.close();    *     }</pre>    *</blockquote>    */
 specifier|public
+parameter_list|<
+name|T
+parameter_list|,
+name|R
+parameter_list|>
 name|Closeable
 name|add
 parameter_list|(
 specifier|final
-name|Function1
+name|Function
+argument_list|<
+name|T
+argument_list|,
+name|R
+argument_list|>
+name|handler
+parameter_list|)
+block|{
+comment|//noinspection unchecked
+name|handlers
+operator|.
+name|add
+argument_list|(
+operator|(
+name|Function
 argument_list|<
 name|Object
 argument_list|,
 name|Object
 argument_list|>
-name|handler
-parameter_list|)
-block|{
-name|handlers
-operator|.
-name|add
-argument_list|(
+operator|)
 name|handler
 argument_list|)
 expr_stmt|;
@@ -219,7 +233,7 @@ specifier|private
 name|boolean
 name|remove
 parameter_list|(
-name|Function1
+name|Function
 name|handler
 parameter_list|)
 block|{
@@ -234,19 +248,25 @@ return|;
 block|}
 comment|/** Adds a handler for this thread. */
 specifier|public
+parameter_list|<
+name|T
+parameter_list|,
+name|R
+parameter_list|>
 name|Closeable
 name|addThread
 parameter_list|(
 specifier|final
-name|Function1
+name|Function
 argument_list|<
-name|Object
+name|T
 argument_list|,
-name|Object
+name|R
 argument_list|>
 name|handler
 parameter_list|)
 block|{
+comment|//noinspection unchecked
 name|threadHandlers
 operator|.
 name|get
@@ -254,6 +274,14 @@ argument_list|()
 operator|.
 name|add
 argument_list|(
+operator|(
+name|Function
+argument_list|<
+name|Object
+argument_list|,
+name|Object
+argument_list|>
+operator|)
 name|handler
 argument_list|)
 expr_stmt|;
@@ -281,7 +309,7 @@ specifier|private
 name|boolean
 name|removeThread
 parameter_list|(
-name|Function1
+name|Function
 name|handler
 parameter_list|)
 block|{
@@ -308,7 +336,7 @@ parameter_list|)
 block|{
 for|for
 control|(
-name|Function1
+name|Function
 argument_list|<
 name|Object
 argument_list|,
@@ -329,7 +357,7 @@ expr_stmt|;
 block|}
 for|for
 control|(
-name|Function1
+name|Function
 argument_list|<
 name|Object
 argument_list|,
