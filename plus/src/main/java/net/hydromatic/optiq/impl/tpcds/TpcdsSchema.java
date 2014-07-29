@@ -383,12 +383,19 @@ name|put
 argument_list|(
 literal|"customer"
 argument_list|,
+literal|100000
+argument_list|)
+decl|.
+name|put
+argument_list|(
+literal|"customer_address"
+argument_list|,
 literal|50000
 argument_list|)
 decl|.
 name|put
 argument_list|(
-literal|"demographics"
+literal|"customer_demographics"
 argument_list|,
 literal|1920800
 argument_list|)
@@ -430,7 +437,7 @@ argument_list|)
 decl|.
 name|put
 argument_list|(
-literal|"promotions"
+literal|"promotion"
 argument_list|,
 literal|300
 argument_list|)
@@ -681,7 +688,7 @@ argument_list|(
 literal|"add row count estimate to TpcdsTable, and use it"
 argument_list|)
 expr_stmt|;
-name|double
+name|Integer
 name|rowCount
 init|=
 name|TABLE_ROW_COUNTS
@@ -693,6 +700,15 @@ operator|.
 name|name
 argument_list|)
 decl_stmt|;
+assert|assert
+name|rowCount
+operator|!=
+literal|null
+operator|:
+name|tpcdsTable
+operator|.
+name|name
+assert|;
 return|return
 name|Statistics
 operator|.

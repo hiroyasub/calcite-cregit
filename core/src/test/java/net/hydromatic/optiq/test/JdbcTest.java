@@ -21491,18 +21491,35 @@ block|{
 literal|null
 block|}
 decl_stmt|;
-specifier|final
-name|Hook
+name|OptiqAssert
 operator|.
-name|Closeable
-name|hook
-init|=
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|JDBC_FOODMART
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select count(*) as c from \"foodmart\".\"employee\" as e1\n"
+operator|+
+literal|"  where \"first_name\" = 'abcde'\n"
+operator|+
+literal|"  and \"gender\" = 'F'"
+argument_list|)
+operator|.
+name|withHook
+argument_list|(
 name|Hook
 operator|.
 name|QUERY_PLAN
-operator|.
-name|addThread
-argument_list|(
+argument_list|,
 operator|new
 name|Function
 argument_list|<
@@ -21532,31 +21549,6 @@ literal|null
 return|;
 block|}
 block|}
-argument_list|)
-decl_stmt|;
-try|try
-block|{
-name|OptiqAssert
-operator|.
-name|that
-argument_list|()
-operator|.
-name|with
-argument_list|(
-name|OptiqAssert
-operator|.
-name|Config
-operator|.
-name|JDBC_FOODMART
-argument_list|)
-operator|.
-name|query
-argument_list|(
-literal|"select count(*) as c from \"foodmart\".\"employee\" as e1\n"
-operator|+
-literal|"  where \"first_name\" = 'abcde'\n"
-operator|+
-literal|"  and \"gender\" = 'F'"
 argument_list|)
 operator|.
 name|returns
@@ -21599,15 +21591,6 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 break|break;
-block|}
-block|}
-finally|finally
-block|{
-name|hook
-operator|.
-name|close
-argument_list|()
-expr_stmt|;
 block|}
 block|}
 annotation|@
