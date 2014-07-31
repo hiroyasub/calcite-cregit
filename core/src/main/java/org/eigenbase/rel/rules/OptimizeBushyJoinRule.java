@@ -741,12 +741,14 @@ specifier|final
 name|int
 name|z
 init|=
-name|lastVertex
-operator|.
-name|factors
+name|BitSets
 operator|.
 name|previousClearBit
 argument_list|(
+name|lastVertex
+operator|.
+name|factors
+argument_list|,
 name|lastVertex
 operator|.
 name|id
