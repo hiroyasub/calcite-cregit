@@ -55,6 +55,18 @@ name|org
 operator|.
 name|eigenbase
 operator|.
+name|relopt
+operator|.
+name|RelOptPredicateList
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
 name|rex
 operator|.
 name|RexNode
@@ -259,6 +271,19 @@ name|explainLevel
 parameter_list|)
 function_decl|;
 block|}
+comment|/** Metadata about the predicates that hold in the rows emitted from a    * relational expression. */
+specifier|public
+interface|interface
+name|Predicates
+extends|extends
+name|Metadata
+block|{
+comment|/**      * Derives the predicates that hold on rows emitted from a relational      * expression.      *      * @return Predicate list      */
+name|RelOptPredicateList
+name|getPredicates
+parameter_list|()
+function_decl|;
+block|}
 comment|/** The built-in forms of metadata. */
 interface|interface
 name|All
@@ -276,6 +301,8 @@ extends|,
 name|ColumnUniqueness
 extends|,
 name|ColumnOrigin
+extends|,
+name|Predicates
 block|{   }
 block|}
 end_class

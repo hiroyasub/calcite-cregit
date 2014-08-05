@@ -6982,7 +6982,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**    * Returns a condition decomposed by AND.    *    *<p>For example, {@code conjunctions(TRUE)} returns the empty list.</p>    */
+comment|/**    * Returns a condition decomposed by AND.    *    *<p>For example, {@code conjunctions(TRUE)} returns the empty list;    * {@code conjunctions(FALSE)} returns list {@code {FALSE}}.</p>    */
 specifier|public
 specifier|static
 name|List

@@ -87,6 +87,10 @@ argument_list|,
 name|RelMdExplainVisibility
 operator|.
 name|SOURCE
+argument_list|,
+name|RelMdPredicates
+operator|.
+name|SOURCE
 argument_list|)
 argument_list|)
 expr_stmt|;

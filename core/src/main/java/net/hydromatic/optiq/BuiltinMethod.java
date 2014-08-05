@@ -2347,6 +2347,15 @@ argument_list|,
 literal|"getQueryProvider"
 argument_list|)
 block|,
+name|PREDICATES
+argument_list|(
+name|Predicates
+operator|.
+name|class
+argument_list|,
+literal|"getPredicates"
+argument_list|)
+block|,
 name|METADATA_REL
 argument_list|(
 name|Metadata
