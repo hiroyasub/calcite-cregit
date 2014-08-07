@@ -12838,6 +12838,48 @@ literal|"Table 'E' not found"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWithOrderAgg
+parameter_list|()
+block|{
+name|check
+argument_list|(
+literal|"select count(*) from emp order by count(*)"
+argument_list|)
+expr_stmt|;
+name|check
+argument_list|(
+literal|"with q as (select * from emp)\n"
+operator|+
+literal|"select count(*) from q group by deptno order by count(*)"
+argument_list|)
+expr_stmt|;
+name|check
+argument_list|(
+literal|"with q as (select * from emp)\n"
+operator|+
+literal|"select count(*) from q order by count(*)"
+argument_list|)
+expr_stmt|;
+comment|// ORDER BY on UNION would produce a similar parse tree,
+comment|// SqlOrderBy(SqlUnion(SqlSelect ...)), but is not valid SQL.
+name|checkFails
+argument_list|(
+literal|"select count(*) from emp\n"
+operator|+
+literal|"union all\n"
+operator|+
+literal|"select count(*) from emp\n"
+operator|+
+literal|"order by ^count(*)^"
+argument_list|,
+literal|"Aggregate expression is illegal in ORDER BY clause of non-aggregating SELECT"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/**    * Tests a large scalar expression, which will expose any O(n^2) algorithms    * lurking in the validation process.    */
 annotation|@
 name|Test
