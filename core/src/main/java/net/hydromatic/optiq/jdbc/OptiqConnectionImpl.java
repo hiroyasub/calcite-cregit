@@ -293,6 +293,18 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
+name|util
+operator|.
+name|Holder
+import|;
+end_import
+
+begin_import
+import|import
 name|com
 operator|.
 name|google
@@ -1315,16 +1327,21 @@ comment|// Store the time at which the query started executing. The SQL
 comment|// standard says that functions such as CURRENT_TIMESTAMP return the
 comment|// same value throughout the query.
 specifier|final
-name|long
-index|[]
-name|times
+name|Holder
+argument_list|<
+name|Long
+argument_list|>
+name|timeHolder
 init|=
-block|{
+name|Holder
+operator|.
+name|of
+argument_list|(
 name|System
 operator|.
 name|currentTimeMillis
 argument_list|()
-block|}
+argument_list|)
 decl_stmt|;
 comment|// Give a hook chance to alter the clock.
 name|Hook
@@ -1333,17 +1350,17 @@ name|CURRENT_TIME
 operator|.
 name|run
 argument_list|(
-name|times
+name|timeHolder
 argument_list|)
 expr_stmt|;
 specifier|final
 name|long
 name|time
 init|=
-name|times
-index|[
-literal|0
-index|]
+name|timeHolder
+operator|.
+name|get
+argument_list|()
 decl_stmt|;
 specifier|final
 name|TimeZone
