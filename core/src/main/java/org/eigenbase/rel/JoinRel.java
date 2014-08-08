@@ -109,7 +109,8 @@ name|boolean
 name|semiJoinDone
 decl_stmt|;
 specifier|private
-name|List
+specifier|final
+name|ImmutableList
 argument_list|<
 name|RelDataTypeField
 argument_list|>
@@ -158,12 +159,12 @@ name|variablesStopped
 argument_list|,
 literal|false
 argument_list|,
-name|Collections
+name|ImmutableList
 operator|.
 expr|<
 name|RelDataTypeField
 operator|>
-name|emptyList
+name|of
 argument_list|()
 argument_list|)
 expr_stmt|;
@@ -196,7 +197,7 @@ parameter_list|,
 name|boolean
 name|semiJoinDone
 parameter_list|,
-name|List
+name|ImmutableList
 argument_list|<
 name|RelDataTypeField
 argument_list|>

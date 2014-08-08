@@ -227,6 +227,18 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
+name|util14
+operator|.
+name|DateTimeUtil
+import|;
+end_import
+
+begin_import
+import|import
 name|com
 operator|.
 name|google
@@ -264,18 +276,6 @@ operator|.
 name|collect
 operator|.
 name|Lists
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
-name|util14
-operator|.
-name|DateTimeUtil
 import|;
 end_import
 
