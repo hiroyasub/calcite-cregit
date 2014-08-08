@@ -1896,6 +1896,15 @@ argument_list|,
 literal|"+1234.56"
 argument_list|)
 expr_stmt|;
+name|checkCastToString
+argument_list|(
+literal|"interval '60' day"
+argument_list|,
+literal|"CHAR(8)"
+argument_list|,
+literal|"+60"
+argument_list|)
+expr_stmt|;
 comment|// boolean
 name|checkCastToString
 argument_list|(
@@ -4129,6 +4138,14 @@ argument_list|,
 literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
 expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testCastStringToDateTime
+parameter_list|()
+block|{
 name|tester
 operator|.
 name|checkScalar
@@ -9925,6 +9942,37 @@ literal|"INTERVAL YEAR TO MONTH NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDatePlusInterval
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"date '2014-02-11' + interval '2' day"
+argument_list|,
+literal|"2014-02-13"
+argument_list|,
+literal|"DATE NOT NULL"
+argument_list|)
+expr_stmt|;
+comment|// 60 days is more than 2^32 milliseconds
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"date '2014-02-11' + interval '60' day"
+argument_list|,
+literal|"2014-04-12"
+argument_list|,
+literal|"DATE NOT NULL"
+argument_list|)
+expr_stmt|;
 block|}
 annotation|@
 name|Test
