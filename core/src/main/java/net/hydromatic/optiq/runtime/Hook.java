@@ -70,6 +70,9 @@ specifier|public
 enum|enum
 name|Hook
 block|{
+comment|/** Called to get the current time. Use this to return a predictable time    * in tests. */
+name|CURRENT_TIME
+block|,
 comment|/** Called with the SQL string and parse tree, in an array. */
 name|PARSE_TREE
 block|,

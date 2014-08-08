@@ -171,6 +171,15 @@ comment|/** Variable that may be asked for in a call to {@link DataContext#get}.
 enum|enum
 name|Variable
 block|{
+name|UTC_TIMESTAMP
+argument_list|(
+literal|"utcTimestamp"
+argument_list|,
+name|Long
+operator|.
+name|class
+argument_list|)
+block|,
 comment|/** The time at which the current statement started executing. In      * milliseconds after 1970-01-01 00:00:00, UTC. Required. */
 name|CURRENT_TIMESTAMP
 argument_list|(
