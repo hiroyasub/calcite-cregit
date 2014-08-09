@@ -1456,9 +1456,24 @@ parameter_list|()
 block|{
 name|checkFilterSelectivity
 argument_list|(
-literal|"select * from emp where deptno is not null"
+literal|"select * from emp where mgr is not null"
 argument_list|,
 name|DEFAULT_NOTNULL_SELECTIVITY
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSelectivityIsNotNullFilterOnNotNullColumn
+parameter_list|()
+block|{
+name|checkFilterSelectivity
+argument_list|(
+literal|"select * from emp where deptno is not null"
+argument_list|,
+literal|1.0d
 argument_list|)
 expr_stmt|;
 block|}

@@ -16799,7 +16799,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|IS_TRUE
+name|IS_NOT_NULL
 argument_list|,
 name|fieldAccess
 argument_list|)
