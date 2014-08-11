@@ -468,6 +468,7 @@ name|boolean
 name|ignoreNulls
 parameter_list|)
 block|{
+specifier|final
 name|RelNode
 name|left
 init|=
@@ -476,6 +477,7 @@ operator|.
 name|getLeft
 argument_list|()
 decl_stmt|;
+specifier|final
 name|RelNode
 name|right
 init|=
@@ -672,38 +674,15 @@ block|}
 block|}
 block|}
 comment|// locate the columns that participate in equijoins
-name|BitSet
-name|leftJoinCols
+specifier|final
+name|JoinInfo
+name|joinInfo
 init|=
-operator|new
-name|BitSet
-argument_list|()
-decl_stmt|;
-name|BitSet
-name|rightJoinCols
-init|=
-operator|new
-name|BitSet
-argument_list|()
-decl_stmt|;
-name|RelMdUtil
-operator|.
-name|findEquiJoinCols
-argument_list|(
-name|left
-argument_list|,
-name|right
-argument_list|,
 name|rel
 operator|.
-name|getCondition
+name|analyzeCondition
 argument_list|()
-argument_list|,
-name|leftJoinCols
-argument_list|,
-name|rightJoinCols
-argument_list|)
-expr_stmt|;
+decl_stmt|;
 comment|// determine if either or both the LHS and RHS are unique on the
 comment|// equijoin columns
 name|Boolean
@@ -715,7 +694,10 @@ name|areColumnsUnique
 argument_list|(
 name|left
 argument_list|,
-name|leftJoinCols
+name|joinInfo
+operator|.
+name|leftSet
+argument_list|()
 argument_list|,
 name|ignoreNulls
 argument_list|)
@@ -729,7 +711,10 @@ name|areColumnsUnique
 argument_list|(
 name|right
 argument_list|,
-name|rightJoinCols
+name|joinInfo
+operator|.
+name|rightSet
+argument_list|()
 argument_list|,
 name|ignoreNulls
 argument_list|)

@@ -1345,6 +1345,25 @@ name|boolean
 name|semiJoinDone
 parameter_list|)
 function_decl|;
+comment|/** Analyzes the join condition. */
+specifier|public
+name|JoinInfo
+name|analyzeCondition
+parameter_list|()
+block|{
+return|return
+name|JoinInfo
+operator|.
+name|of
+argument_list|(
+name|left
+argument_list|,
+name|right
+argument_list|,
+name|condition
+argument_list|)
+return|;
+block|}
 block|}
 end_class
 

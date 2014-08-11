@@ -522,6 +522,7 @@ return|return
 literal|false
 return|;
 block|}
+specifier|final
 name|RelNode
 name|left
 init|=
@@ -530,6 +531,7 @@ operator|.
 name|getLeft
 argument_list|()
 decl_stmt|;
+specifier|final
 name|RelNode
 name|right
 init|=
@@ -692,38 +694,15 @@ comment|// columns from the other join input are unique.  If they are, then
 comment|// the columns are unique for the entire join if they're unique for
 comment|// the corresponding join input, provided that input is not null
 comment|// generating.
-name|BitSet
-name|leftJoinCols
+specifier|final
+name|JoinInfo
+name|joinInfo
 init|=
-operator|new
-name|BitSet
-argument_list|()
-decl_stmt|;
-name|BitSet
-name|rightJoinCols
-init|=
-operator|new
-name|BitSet
-argument_list|()
-decl_stmt|;
-name|RelMdUtil
-operator|.
-name|findEquiJoinCols
-argument_list|(
-name|left
-argument_list|,
-name|right
-argument_list|,
 name|rel
 operator|.
-name|getCondition
+name|analyzeCondition
 argument_list|()
-argument_list|,
-name|leftJoinCols
-argument_list|,
-name|rightJoinCols
-argument_list|)
-expr_stmt|;
+decl_stmt|;
 if|if
 condition|(
 name|leftColumns
@@ -758,7 +737,10 @@ name|areColumnsUnique
 argument_list|(
 name|right
 argument_list|,
-name|rightJoinCols
+name|joinInfo
+operator|.
+name|rightSet
+argument_list|()
 argument_list|,
 name|ignoreNulls
 argument_list|)
@@ -822,7 +804,10 @@ name|areColumnsUnique
 argument_list|(
 name|left
 argument_list|,
-name|leftJoinCols
+name|joinInfo
+operator|.
+name|leftSet
+argument_list|()
 argument_list|,
 name|ignoreNulls
 argument_list|)

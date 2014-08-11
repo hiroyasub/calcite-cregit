@@ -7983,7 +7983,7 @@ expr_stmt|;
 block|}
 block|}
 block|}
-comment|/**    * Splits a join condition.    *    * @param left      Left input to the join    * @param right     Right input to the join    * @param condition Join condition    * @return Array holding the output; neither element is null. Element 0 is    * the equi-join condition (or TRUE if empty); Element 1 is rest of the    * condition (or TRUE if empty).    */
+comment|/**    * Splits a join condition.    *    * @param left      Left input to the join    * @param right     Right input to the join    * @param condition Join condition    * @return Array holding the output; neither element is null. Element 0 is    * the equi-join condition (or TRUE if empty); Element 1 is rest of the    * condition (or TRUE if empty).    *    * @deprecated Will be removed after 0.9.1    */
 specifier|public
 specifier|static
 name|RexNode
@@ -8000,6 +8000,13 @@ name|RexNode
 name|condition
 parameter_list|)
 block|{
+name|Bug
+operator|.
+name|upgrade
+argument_list|(
+literal|"remove after 0.9.1"
+argument_list|)
+expr_stmt|;
 specifier|final
 name|RexBuilder
 name|rexBuilder

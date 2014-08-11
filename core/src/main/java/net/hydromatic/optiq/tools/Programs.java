@@ -381,6 +381,10 @@ name|JavaRules
 operator|.
 name|ENUMERABLE_EMPTY_RULE
 argument_list|,
+name|SemiJoinRule
+operator|.
+name|INSTANCE
+argument_list|,
 name|TableAccessRule
 operator|.
 name|INSTANCE

@@ -218,7 +218,7 @@ specifier|static
 name|RelNode
 name|strip
 parameter_list|(
-name|ProjectRel
+name|ProjectRelBase
 name|project
 parameter_list|)
 block|{
