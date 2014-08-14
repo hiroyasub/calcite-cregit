@@ -116,7 +116,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Implementation of {@link org.eigenbase.rel.FilterRel} relational expression in  * MongoDB.  */
+comment|/**  * Implementation of a {@link org.eigenbase.rel.FilterRel} relational expression  * in MongoDB.  */
 end_comment
 
 begin_class
@@ -197,20 +197,18 @@ literal|0.1
 argument_list|)
 return|;
 block|}
-annotation|@
-name|Override
 specifier|public
-name|RelNode
+name|MongoFilterRel
 name|copy
 parameter_list|(
 name|RelTraitSet
 name|traitSet
 parameter_list|,
-name|List
-argument_list|<
 name|RelNode
-argument_list|>
-name|inputs
+name|input
+parameter_list|,
+name|RexNode
+name|condition
 parameter_list|)
 block|{
 return|return
@@ -222,10 +220,7 @@ argument_list|()
 argument_list|,
 name|traitSet
 argument_list|,
-name|sole
-argument_list|(
-name|inputs
-argument_list|)
+name|input
 argument_list|,
 name|condition
 argument_list|)

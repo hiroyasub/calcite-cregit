@@ -102,19 +102,35 @@ name|INSTANCE
 init|=
 operator|new
 name|PushFilterPastSetOpRule
-argument_list|()
+argument_list|(
+name|RelFactories
+operator|.
+name|DEFAULT_FILTER_FACTORY
+argument_list|)
+decl_stmt|;
+specifier|private
+specifier|final
+name|RelFactories
+operator|.
+name|FilterFactory
+name|filterFactory
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 comment|/**    * Creates a PushFilterPastSetOpRule.    */
 specifier|private
 name|PushFilterPastSetOpRule
-parameter_list|()
+parameter_list|(
+name|RelFactories
+operator|.
+name|FilterFactory
+name|filterFactory
+parameter_list|)
 block|{
 name|super
 argument_list|(
 name|operand
 argument_list|(
-name|FilterRel
+name|FilterRelBase
 operator|.
 name|class
 argument_list|,
@@ -130,6 +146,12 @@ argument_list|)
 argument_list|)
 argument_list|)
 expr_stmt|;
+name|this
+operator|.
+name|filterFactory
+operator|=
+name|filterFactory
+expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
 comment|// implement RelOptRule
@@ -141,7 +163,7 @@ name|RelOptRuleCall
 name|call
 parameter_list|)
 block|{
-name|FilterRel
+name|FilterRelBase
 name|filterRel
 init|=
 name|call
@@ -160,14 +182,6 @@ name|rel
 argument_list|(
 literal|1
 argument_list|)
-decl_stmt|;
-name|RelOptCluster
-name|cluster
-init|=
-name|setOpRel
-operator|.
-name|getCluster
-argument_list|()
 decl_stmt|;
 name|RexNode
 name|condition
@@ -273,11 +287,10 @@ name|newSetOpInputs
 operator|.
 name|add
 argument_list|(
-operator|new
-name|FilterRel
+name|filterFactory
+operator|.
+name|createFilter
 argument_list|(
-name|cluster
-argument_list|,
 name|input
 argument_list|,
 name|newCondition

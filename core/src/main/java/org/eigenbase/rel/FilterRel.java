@@ -15,16 +15,6 @@ end_package
 
 begin_import
 import|import
-name|java
-operator|.
-name|util
-operator|.
-name|List
-import|;
-end_import
-
-begin_import
-import|import
 name|org
 operator|.
 name|eigenbase
@@ -48,7 +38,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A<code>FilterRel</code> is a relational expression which iterates over its  * input, and returns elements for which<code>condition</code> evaluates to  *<code>true</code>.  */
+comment|/**  * Relational expression that iterates over its input  * and returns elements for which<code>condition</code> evaluates to  *<code>true</code>.  *  *<p>If the condition allows nulls, then a null value is treated the same as  * false.</p>  */
 end_comment
 
 begin_class
@@ -108,20 +98,18 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-annotation|@
-name|Override
 specifier|public
-name|RelNode
+name|FilterRel
 name|copy
 parameter_list|(
 name|RelTraitSet
 name|traitSet
 parameter_list|,
-name|List
-argument_list|<
 name|RelNode
-argument_list|>
-name|inputs
+name|input
+parameter_list|,
+name|RexNode
+name|condition
 parameter_list|)
 block|{
 assert|assert
@@ -141,13 +129,9 @@ argument_list|(
 name|getCluster
 argument_list|()
 argument_list|,
-name|sole
-argument_list|(
-name|inputs
-argument_list|)
+name|input
 argument_list|,
-name|getCondition
-argument_list|()
+name|condition
 argument_list|)
 return|;
 block|}

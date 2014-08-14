@@ -144,7 +144,11 @@ name|JOIN
 init|=
 operator|new
 name|PushDownJoinConditionRule
-argument_list|()
+argument_list|(
+name|RelFactories
+operator|.
+name|DEFAULT_FILTER_FACTORY
+argument_list|)
 decl_stmt|;
 comment|/** Whether to try to strengthen join-type. */
 specifier|private
@@ -152,9 +156,16 @@ specifier|final
 name|boolean
 name|smart
 decl_stmt|;
-comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a PushFilterPastJoinRule with an explicit root operand.    */
 specifier|private
+specifier|final
+name|RelFactories
+operator|.
+name|FilterFactory
+name|filterFactory
+decl_stmt|;
+comment|//~ Constructors -----------------------------------------------------------
+comment|/**    * Creates a PushFilterPastJoinRule with an explicit root operand and    * factories.    */
+specifier|protected
 name|PushFilterPastJoinRule
 parameter_list|(
 name|RelOptRuleOperand
@@ -165,6 +176,11 @@ name|id
 parameter_list|,
 name|boolean
 name|smart
+parameter_list|,
+name|RelFactories
+operator|.
+name|FilterFactory
+name|filterFactory
 parameter_list|)
 block|{
 name|super
@@ -182,6 +198,12 @@ name|smart
 operator|=
 name|smart
 expr_stmt|;
+name|this
+operator|.
+name|filterFactory
+operator|=
+name|filterFactory
+expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
 specifier|protected
@@ -191,7 +213,7 @@ parameter_list|(
 name|RelOptRuleCall
 name|call
 parameter_list|,
-name|FilterRel
+name|FilterRelBase
 name|filter
 parameter_list|,
 name|JoinRelBase
@@ -754,7 +776,7 @@ name|rel
 return|;
 block|}
 return|return
-name|CalcRel
+name|filterFactory
 operator|.
 name|createFilter
 argument_list|(
@@ -765,7 +787,7 @@ argument_list|)
 return|;
 block|}
 comment|/** Rule that pushes parts of the join condition to its inputs. */
-specifier|private
+specifier|public
 specifier|static
 class|class
 name|PushDownJoinConditionRule
@@ -774,7 +796,12 @@ name|PushFilterPastJoinRule
 block|{
 specifier|public
 name|PushDownJoinConditionRule
-parameter_list|()
+parameter_list|(
+name|RelFactories
+operator|.
+name|FilterFactory
+name|filterFactory
+parameter_list|)
 block|{
 name|super
 argument_list|(
@@ -795,6 +822,8 @@ argument_list|,
 literal|"PushFilterPastJoinRule:no-filter"
 argument_list|,
 literal|true
+argument_list|,
+name|filterFactory
 argument_list|)
 expr_stmt|;
 block|}
@@ -830,7 +859,7 @@ expr_stmt|;
 block|}
 block|}
 comment|/** Rule that tries to push filter expressions into a join    * condition and into the inputs of the join. */
-specifier|private
+specifier|public
 specifier|static
 class|class
 name|PushFilterIntoJoinRule
@@ -844,13 +873,35 @@ name|boolean
 name|smart
 parameter_list|)
 block|{
+name|this
+argument_list|(
+name|smart
+argument_list|,
+name|RelFactories
+operator|.
+name|DEFAULT_FILTER_FACTORY
+argument_list|)
+expr_stmt|;
+block|}
+specifier|public
+name|PushFilterIntoJoinRule
+parameter_list|(
+name|boolean
+name|smart
+parameter_list|,
+name|RelFactories
+operator|.
+name|FilterFactory
+name|filterFactory
+parameter_list|)
+block|{
 name|super
 argument_list|(
 name|RelOptRule
 operator|.
 name|operand
 argument_list|(
-name|FilterRel
+name|FilterRelBase
 operator|.
 name|class
 argument_list|,
@@ -872,6 +923,8 @@ argument_list|,
 literal|"PushFilterPastJoinRule:filter"
 argument_list|,
 name|smart
+argument_list|,
+name|filterFactory
 argument_list|)
 expr_stmt|;
 block|}
@@ -885,7 +938,7 @@ name|RelOptRuleCall
 name|call
 parameter_list|)
 block|{
-name|FilterRel
+name|FilterRelBase
 name|filter
 init|=
 name|call
