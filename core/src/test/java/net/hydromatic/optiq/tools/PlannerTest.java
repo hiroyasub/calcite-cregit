@@ -2436,7 +2436,7 @@ argument_list|)
 argument_list|,
 name|containsString
 argument_list|(
-literal|"EnumerableJoinRel(condition=[=($3, $0)], joinType=[inner])"
+literal|"EnumerableJoinRel(condition=[=($0, $3)], joinType=[inner])"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -2469,13 +2469,13 @@ literal|"EnumerableProjectRel(product_id=[$0], time_id=[$1], customer_id=[$2], p
 operator|+
 literal|"  EnumerableProjectRel($f0=[$44], $f1=[$45], $f2=[$46], $f3=[$47], $f4=[$48], $f5=[$49], $f6=[$50], $f7=[$51], $f8=[$15], $f9=[$16], $f10=[$17], $f11=[$18], $f12=[$19], $f13=[$20], $f14=[$21], $f15=[$22], $f16=[$23], $f17=[$24], $f18=[$25], $f19=[$26], $f20=[$27], $f21=[$28], $f22=[$29], $f23=[$30], $f24=[$31], $f25=[$32], $f26=[$33], $f27=[$34], $f28=[$35], $f29=[$36], $f30=[$37], $f31=[$38], $f32=[$39], $f33=[$40], $f34=[$41], $f35=[$42], $f36=[$43], $f37=[$0], $f38=[$1], $f39=[$2], $f40=[$3], $f41=[$4], $f42=[$5], $f43=[$6], $f44=[$7], $f45=[$8], $f46=[$9], $f47=[$10], $f48=[$11], $f49=[$12], $f50=[$13], $f51=[$14])\n"
 operator|+
-literal|"    EnumerableJoinRel(condition=[=($44, $1)], joinType=[inner])\n"
+literal|"    EnumerableJoinRel(condition=[=($1, $44)], joinType=[inner])\n"
 operator|+
 literal|"      EnumerableFilterRel(condition=[=($2, 'Washington')])\n"
 operator|+
 literal|"        EnumerableTableAccessRel(table=[[foodmart2, product]])\n"
 operator|+
-literal|"      EnumerableJoinRel(condition=[=($31, $0)], joinType=[inner])\n"
+literal|"      EnumerableJoinRel(condition=[=($0, $31)], joinType=[inner])\n"
 operator|+
 literal|"        EnumerableFilterRel(condition=[=($9, 'San Francisco')])\n"
 operator|+
@@ -2515,15 +2515,15 @@ literal|"EnumerableProjectRel(product_id=[$0], time_id=[$1], customer_id=[$2], p
 operator|+
 literal|"  EnumerableProjectRel($f0=[$49], $f1=[$50], $f2=[$51], $f3=[$52], $f4=[$53], $f5=[$54], $f6=[$55], $f7=[$56], $f8=[$0], $f9=[$1], $f10=[$2], $f11=[$3], $f12=[$4], $f13=[$5], $f14=[$6], $f15=[$7], $f16=[$8], $f17=[$9], $f18=[$10], $f19=[$11], $f20=[$12], $f21=[$13], $f22=[$14], $f23=[$15], $f24=[$16], $f25=[$17], $f26=[$18], $f27=[$19], $f28=[$20], $f29=[$21], $f30=[$22], $f31=[$23], $f32=[$24], $f33=[$25], $f34=[$26], $f35=[$27], $f36=[$28], $f37=[$34], $f38=[$35], $f39=[$36], $f40=[$37], $f41=[$38], $f42=[$39], $f43=[$40], $f44=[$41], $f45=[$42], $f46=[$43], $f47=[$44], $f48=[$45], $f49=[$46], $f50=[$47], $f51=[$48], $f52=[$29], $f53=[$30], $f54=[$31], $f55=[$32], $f56=[$33])\n"
 operator|+
-literal|"    EnumerableJoinRel(condition=[=($51, $0)], joinType=[inner])\n"
+literal|"    EnumerableJoinRel(condition=[=($0, $51)], joinType=[inner])\n"
 operator|+
 literal|"      EnumerableFilterRel(condition=[=($9, 'San Francisco')])\n"
 operator|+
 literal|"        EnumerableTableAccessRel(table=[[foodmart2, customer]])\n"
 operator|+
-literal|"      EnumerableJoinRel(condition=[=($20, $6)], joinType=[inner])\n"
+literal|"      EnumerableJoinRel(condition=[=($6, $20)], joinType=[inner])\n"
 operator|+
-literal|"        EnumerableJoinRel(condition=[=($5, $0)], joinType=[inner])\n"
+literal|"        EnumerableJoinRel(condition=[=($0, $5)], joinType=[inner])\n"
 operator|+
 literal|"          EnumerableTableAccessRel(table=[[foodmart2, product_class]])\n"
 operator|+
@@ -2565,19 +2565,19 @@ literal|"EnumerableProjectRel(product_id=[$0], time_id=[$1], customer_id=[$2], p
 operator|+
 literal|"  EnumerableProjectRel($f0=[$73], $f1=[$74], $f2=[$75], $f3=[$76], $f4=[$77], $f5=[$78], $f6=[$79], $f7=[$80], $f8=[$24], $f9=[$25], $f10=[$26], $f11=[$27], $f12=[$28], $f13=[$29], $f14=[$30], $f15=[$31], $f16=[$32], $f17=[$33], $f18=[$34], $f19=[$35], $f20=[$36], $f21=[$37], $f22=[$38], $f23=[$39], $f24=[$40], $f25=[$41], $f26=[$42], $f27=[$43], $f28=[$44], $f29=[$45], $f30=[$46], $f31=[$47], $f32=[$48], $f33=[$49], $f34=[$50], $f35=[$51], $f36=[$52], $f37=[$58], $f38=[$59], $f39=[$60], $f40=[$61], $f41=[$62], $f42=[$63], $f43=[$64], $f44=[$65], $f45=[$66], $f46=[$67], $f47=[$68], $f48=[$69], $f49=[$70], $f50=[$71], $f51=[$72], $f52=[$53], $f53=[$54], $f54=[$55], $f55=[$56], $f56=[$57], $f57=[$0], $f58=[$1], $f59=[$2], $f60=[$3], $f61=[$4], $f62=[$5], $f63=[$6], $f64=[$7], $f65=[$8], $f66=[$9], $f67=[$10], $f68=[$11], $f69=[$12], $f70=[$13], $f71=[$14], $f72=[$15], $f73=[$16], $f74=[$17], $f75=[$18], $f76=[$19], $f77=[$20], $f78=[$21], $f79=[$22], $f80=[$23])\n"
 operator|+
-literal|"    EnumerableJoinRel(condition=[=($77, $0)], joinType=[inner])\n"
+literal|"    EnumerableJoinRel(condition=[=($0, $77)], joinType=[inner])\n"
 operator|+
 literal|"      EnumerableTableAccessRel(table=[[foodmart2, store]])\n"
 operator|+
-literal|"      EnumerableJoinRel(condition=[=($51, $0)], joinType=[inner])\n"
+literal|"      EnumerableJoinRel(condition=[=($0, $51)], joinType=[inner])\n"
 operator|+
 literal|"        EnumerableFilterRel(condition=[=($9, 'San Francisco')])\n"
 operator|+
 literal|"          EnumerableTableAccessRel(table=[[foodmart2, customer]])\n"
 operator|+
-literal|"        EnumerableJoinRel(condition=[=($20, $6)], joinType=[inner])\n"
+literal|"        EnumerableJoinRel(condition=[=($6, $20)], joinType=[inner])\n"
 operator|+
-literal|"          EnumerableJoinRel(condition=[=($5, $0)], joinType=[inner])\n"
+literal|"          EnumerableJoinRel(condition=[=($0, $5)], joinType=[inner])\n"
 operator|+
 literal|"            EnumerableTableAccessRel(table=[[foodmart2, product_class]])\n"
 operator|+
@@ -2613,7 +2613,7 @@ literal|"    EnumerableJoinRel(condition=[true], joinType=[inner])\n"
 operator|+
 literal|"      EnumerableTableAccessRel(table=[[foodmart2, department]])\n"
 operator|+
-literal|"      EnumerableJoinRel(condition=[=($31, $0)], joinType=[inner])\n"
+literal|"      EnumerableJoinRel(condition=[=($0, $31)], joinType=[inner])\n"
 operator|+
 literal|"        EnumerableTableAccessRel(table=[[foodmart2, customer]])\n"
 operator|+
@@ -2653,7 +2653,7 @@ literal|"        EnumerableTableAccessRel(table=[[foodmart2, department]])\n"
 operator|+
 literal|"        EnumerableTableAccessRel(table=[[foodmart2, employee]])\n"
 operator|+
-literal|"      EnumerableJoinRel(condition=[=($31, $0)], joinType=[inner])\n"
+literal|"      EnumerableJoinRel(condition=[=($0, $31)], joinType=[inner])\n"
 operator|+
 literal|"        EnumerableTableAccessRel(table=[[foodmart2, customer]])\n"
 operator|+

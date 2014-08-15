@@ -445,7 +445,16 @@ name|right
 argument_list|,
 name|joinInfo
 operator|.
-name|remaining
+name|getRemaining
+argument_list|(
+name|join
+operator|.
+name|getCluster
+argument_list|()
+operator|.
+name|getRexBuilder
+argument_list|()
+argument_list|)
 argument_list|,
 name|correlationList
 argument_list|,

@@ -107,6 +107,18 @@ name|eigenbase
 operator|.
 name|util
 operator|.
+name|Holder
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
+name|util
+operator|.
 name|Pair
 import|;
 end_import
@@ -188,10 +200,8 @@ specifier|public
 class|class
 name|TpcdsTest
 block|{
-comment|/** Hook-handler that enables bushy-join optimization. */
-specifier|public
+specifier|private
 specifier|static
-specifier|final
 name|Function
 argument_list|<
 name|Pair
@@ -203,14 +213,22 @@ operator|.
 name|Materialization
 argument_list|>
 argument_list|,
+name|Holder
+argument_list|<
 name|Program
-index|[]
+argument_list|>
 argument_list|>
 argument_list|,
 name|Void
 argument_list|>
-name|HANDLER
-init|=
+name|handler
+parameter_list|(
+specifier|final
+name|boolean
+name|bushy
+parameter_list|)
+block|{
+return|return
 operator|new
 name|Function
 argument_list|<
@@ -223,8 +241,10 @@ operator|.
 name|Materialization
 argument_list|>
 argument_list|,
+name|Holder
+argument_list|<
 name|Program
-index|[]
+argument_list|>
 argument_list|>
 argument_list|,
 name|Void
@@ -244,19 +264,24 @@ operator|.
 name|Materialization
 argument_list|>
 argument_list|,
+name|Holder
+argument_list|<
 name|Program
-index|[]
 argument_list|>
-name|a0
+argument_list|>
+name|pair
 parameter_list|)
 block|{
-name|a0
+name|pair
 operator|.
 name|right
-index|[
-literal|0
-index|]
-operator|=
+operator|.
+name|set
+argument_list|(
+name|Programs
+operator|.
+name|sequence
+argument_list|(
 name|Programs
 operator|.
 name|heuristicJoinOrder
@@ -265,7 +290,13 @@ name|Programs
 operator|.
 name|RULE_SET
 argument_list|,
-literal|true
+name|bushy
+argument_list|)
+argument_list|,
+name|Programs
+operator|.
+name|CALC_PROGRAM
+argument_list|)
 argument_list|)
 expr_stmt|;
 return|return
@@ -273,7 +304,8 @@ literal|null
 return|;
 block|}
 block|}
-decl_stmt|;
+return|;
+block|}
 specifier|private
 specifier|static
 name|String
@@ -492,7 +524,10 @@ name|Hook
 operator|.
 name|PROGRAM
 argument_list|,
-name|HANDLER
+name|handler
+argument_list|(
+literal|true
+argument_list|)
 argument_list|)
 operator|.
 name|explainMatches
@@ -505,25 +540,25 @@ name|checkMaskedResultContains
 argument_list|(
 literal|""
 operator|+
-literal|"EnumerableProjectRel(I_ITEM_ID=[$0], I_ITEM_DESC=[$1], S_STATE=[$2], STORE_SALES_QUANTITYCOUNT=[$3], STORE_SALES_QUANTITYAVE=[$4], STORE_SALES_QUANTITYSTDEV=[$5], STORE_SALES_QUANTITYCOV=[/($5, $4)], AS_STORE_RETURNS_QUANTITYCOUNT=[$6], AS_STORE_RETURNS_QUANTITYAVE=[$7], AS_STORE_RETURNS_QUANTITYSTDEV=[$8], STORE_RETURNS_QUANTITYCOV=[/($8, $7)], CATALOG_SALES_QUANTITYCOUNT=[$9], CATALOG_SALES_QUANTITYAVE=[$10], CATALOG_SALES_QUANTITYSTDEV=[/($11, $10)], CATALOG_SALES_QUANTITYCOV=[/($11, $10)]): rowcount = 5.434029018852197E26, cumulative cost = {1.618185849567114E30 rows, 6.412154242245593E28 cpu, 0.0 io}\n"
+literal|"EnumerableCalcRel(expr#0..11=[{inputs}], expr#12=[/($t5, $t4)], expr#13=[/($t8, $t7)], expr#14=[/($t11, $t10)], proj#0..5=[{exprs}], STORE_SALES_QUANTITYCOV=[$t12], AS_STORE_RETURNS_QUANTITYCOUNT=[$t6], AS_STORE_RETURNS_QUANTITYAVE=[$t7], AS_STORE_RETURNS_QUANTITYSTDEV=[$t8], STORE_RETURNS_QUANTITYCOV=[$t13], CATALOG_SALES_QUANTITYCOUNT=[$t9], CATALOG_SALES_QUANTITYAVE=[$t10], CATALOG_SALES_QUANTITYSTDEV=[$t14], CATALOG_SALES_QUANTITYCOV=[$t14]): rowcount = 5.434029018852197E26, cumulative cost = {1.618185849567114E30 rows, 1.2672155671963324E30 cpu, 0.0 io}\n"
 operator|+
-literal|"  EnumerableSortRel(sort0=[$0], sort1=[$1], sort2=[$2], dir0=[ASC], dir1=[ASC], dir2=[ASC]): rowcount = 5.434029018852197E26, cumulative cost = {1.6176424466652288E30 rows, 5.597049889417763E28 cpu, 0.0 io}\n"
+literal|"  EnumerableSortRel(sort0=[$0], sort1=[$1], sort2=[$2], dir0=[ASC], dir1=[ASC], dir2=[ASC]): rowcount = 5.434029018852197E26, cumulative cost = {1.6176424466652288E30 rows, 1.2509134801397759E30 cpu, 0.0 io}\n"
 operator|+
-literal|"    EnumerableProjectRel(I_ITEM_ID=[$0], I_ITEM_DESC=[$1], S_STATE=[$2], STORE_SALES_QUANTITYCOUNT=[$3], STORE_SALES_QUANTITYAVE=[CAST(/($4, $5)):JavaType(class java.lang.Integer)], STORE_SALES_QUANTITYSTDEV=[CAST(POWER(/(-($6, /(*($4, $4), $5)), CASE(=($5, 1), null, -($5, 1))), 0.5)):JavaType(class java.lang.Integer)], AS_STORE_RETURNS_QUANTITYCOUNT=[$7], AS_STORE_RETURNS_QUANTITYAVE=[CAST(/($8, $7)):JavaType(class java.lang.Integer)], AS_STORE_RETURNS_QUANTITYSTDEV=[CAST(POWER(/(-($9, /(*($8, $8), $7)), CASE(=($7, 1), null, -($7, 1))), 0.5)):JavaType(class java.lang.Integer)], CATALOG_SALES_QUANTITYCOUNT=[$10], CATALOG_SALES_QUANTITYAVE=[CAST(/($11, $10)):JavaType(class java.lang.Integer)], $f11=[CAST(POWER(/(-($12, /(*($11, $11), $10)), CASE(=($10, 1), null, -($10, 1))), 0.5)):JavaType(class java.lang.Integer)]): rowcount = 5.434029018852197E26, cumulative cost = {1.1954863841615548E28 rows, 5.5427095992292415E28 cpu, 0.0 io}\n"
+literal|"    EnumerableCalcRel(expr#0..12=[{inputs}], expr#13=[/($t4, $t5)], expr#14=[CAST($t13):JavaType(class java.lang.Integer)], expr#15=[*($t4, $t4)], expr#16=[/($t15, $t5)], expr#17=[-($t6, $t16)], expr#18=[1], expr#19=[=($t5, $t18)], expr#20=[null], expr#21=[-($t5, $t18)], expr#22=[CASE($t19, $t20, $t21)], expr#23=[/($t17, $t22)], expr#24=[0.5], expr#25=[POWER($t23, $t24)], expr#26=[CAST($t25):JavaType(class java.lang.Integer)], expr#27=[/($t8, $t7)], expr#28=[CAST($t27):JavaType(class java.lang.Integer)], expr#29=[*($t8, $t8)], expr#30=[/($t29, $t7)], expr#31=[-($t9, $t30)], expr#32=[=($t7, $t18)], expr#33=[-($t7, $t18)], expr#34=[CASE($t32, $t20, $t33)], expr#35=[/($t31, $t34)], expr#36=[POWER($t35, $t24)], expr#37=[CAST($t36):JavaType(class java.lang.Integer)], expr#38=[/($t11, $t10)], expr#39=[CAST($t38):JavaType(class java.lang.Integer)], expr#40=[*($t11, $t11)], expr#41=[/($t40, $t10)], expr#42=[-($t12, $t41)], expr#43=[=($t10, $t18)], expr#44=[-($t10, $t18)], expr#45=[CASE($t43, $t20, $t44)], expr#46=[/($t42, $t45)], expr#47=[POWER($t46, $t24)], expr#48=[CAST($t47):JavaType(class java.lang.Integer)], proj#0..3=[{exprs}], STORE_SALES_QUANTITYAVE=[$t14], STORE_SALES_QUANTITYSTDEV=[$t26], AS_STORE_RETURNS_QUANTITYCOUNT=[$t7], AS_STORE_RETURNS_QUANTITYAVE=[$t28], AS_STORE_RETURNS_QUANTITYSTDEV=[$t37], CATALOG_SALES_QUANTITYCOUNT=[$t10], CATALOG_SALES_QUANTITYAVE=[$t39], $f11=[$t48]): rowcount = 5.434029018852197E26, cumulative cost = {1.1954863841615548E28 rows, 1.2503700772378907E30 cpu, 0.0 io}\n"
 operator|+
-literal|"      EnumerableAggregateRel(group=[{0, 1, 2}], STORE_SALES_QUANTITYCOUNT=[COUNT()], agg#1=[SUM($3)], agg#2=[COUNT($3)], agg#3=[SUM($6)], AS_STORE_RETURNS_QUANTITYCOUNT=[COUNT($4)], agg#5=[SUM($4)], agg#6=[SUM($7)], CATALOG_SALES_QUANTITYCOUNT=[COUNT($5)], agg#8=[SUM($5)], agg#9=[SUM($8)]): rowcount = 5.434029018852197E26, cumulative cost = {1.1411460939730328E28 rows, 4.890626116966977E28 cpu, 0.0 io}\n"
+literal|"      EnumerableAggregateRel(group=[{0, 1, 2}], STORE_SALES_QUANTITYCOUNT=[COUNT()], agg#1=[SUM($3)], agg#2=[COUNT($3)], agg#3=[SUM($6)], AS_STORE_RETURNS_QUANTITYCOUNT=[COUNT($4)], agg#5=[SUM($4)], agg#6=[SUM($7)], CATALOG_SALES_QUANTITYCOUNT=[COUNT($5)], agg#8=[SUM($5)], agg#9=[SUM($8)]): rowcount = 5.434029018852197E26, cumulative cost = {1.1411460939730328E28 rows, 1.2172225002228922E30 cpu, 0.0 io}\n"
 operator|+
-literal|"        EnumerableProjectRel(I_ITEM_ID=[$58], I_ITEM_DESC=[$61], S_STATE=[$24], SS_QUANTITY=[$89], SR_RETURN_QUANTITY=[$140], CS_QUANTITY=[$196], $f6=[*($89, $89)], $f7=[*($140, $140)], $f8=[*($196, $196)]): rowcount = 5.434029018852197E27, cumulative cost = {1.0868058037845108E28 rows, 4.890626116966977E28 cpu, 0.0 io}\n"
+literal|"        EnumerableCalcRel(expr#0..211=[{inputs}], expr#212=[*($t89, $t89)], expr#213=[*($t140, $t140)], expr#214=[*($t196, $t196)], I_ITEM_ID=[$t58], I_ITEM_DESC=[$t61], S_STATE=[$t24], SS_QUANTITY=[$t89], SR_RETURN_QUANTITY=[$t140], CS_QUANTITY=[$t196], $f6=[$t212], $f7=[$t213], $f8=[$t214]): rowcount = 5.434029018852197E27, cumulative cost = {1.0868058037845108E28 rows, 1.2172225002228922E30 cpu, 0.0 io}\n"
 operator|+
-literal|"          EnumerableJoinRel(condition=[AND(=($82, $133), =($81, $132), =($88, $139))], joinType=[inner]): rowcount = 5.434029018852197E27, cumulative cost = {5.434029018992911E27 rows, 5065780.0 cpu, 0.0 io}\n"
+literal|"          EnumerableJoinRel(condition=[AND(=($82, $133), =($81, $132), =($88, $139))], joinType=[inner]): rowcount = 5.434029018852197E27, cumulative cost = {5.434029018992911E27 rows, 1.8579845E7 cpu, 0.0 io}\n"
 operator|+
-literal|"            EnumerableJoinRel(condition=[=($0, $86)], joinType=[inner]): rowcount = 2.3008402586892598E13, cumulative cost = {4.8588854672852766E13 rows, 3044518.0 cpu, 0.0 io}\n"
+literal|"            EnumerableJoinRel(condition=[=($0, $86)], joinType=[inner]): rowcount = 2.3008402586892598E13, cumulative cost = {4.8588854672853766E13 rows, 7354409.0 cpu, 0.0 io}\n"
 operator|+
 literal|"              EnumerableTableAccessRel(table=[[TPCDS, STORE]]): rowcount = 12.0, cumulative cost = {12.0 rows, 13.0 cpu, 0.0 io}\n"
 operator|+
-literal|"              EnumerableJoinRel(condition=[=($0, $50)], joinType=[inner]): rowcount = 1.2782445881607E13, cumulative cost = {1.279800620431134E13 rows, 3044505.0 cpu, 0.0 io}\n"
+literal|"              EnumerableJoinRel(condition=[=($0, $50)], joinType=[inner]): rowcount = 1.2782445881607E13, cumulative cost = {1.279800620431234E13 rows, 7354396.0 cpu, 0.0 io}\n"
 operator|+
-literal|"                EnumerableFilterRel(condition=[=(CAST($15):VARCHAR(6) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\", '1998Q1')]): rowcount = 10957.35, cumulative cost = {84006.35 rows, 146099.0 cpu, 0.0 io}\n"
+literal|"                EnumerableCalcRel(expr#0..27=[{inputs}], expr#28=[CAST($t15):VARCHAR(6) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\"], expr#29=['1998Q1'], expr#30=[=($t28, $t29)], proj#0..27=[{exprs}], $condition=[$t30]): rowcount = 10957.35, cumulative cost = {84006.35 rows, 4455990.0 cpu, 0.0 io}\n"
 operator|+
 literal|"                  EnumerableTableAccessRel(table=[[TPCDS, DATE_DIM]]): rowcount = 73049.0, cumulative cost = {73049.0 rows, 73050.0 cpu, 0.0 io}\n"
 operator|+
@@ -533,19 +568,19 @@ literal|"                  EnumerableTableAccessRel(table=[[TPCDS, ITEM]]): rowc
 operator|+
 literal|"                  EnumerableTableAccessRel(table=[[TPCDS, STORE_SALES]]): rowcount = 2880404.0, cumulative cost = {2880404.0 rows, 2880405.0 cpu, 0.0 io}\n"
 operator|+
-literal|"            EnumerableJoinRel(condition=[AND(=($31, $79), =($30, $91))], joinType=[inner]): rowcount = 6.9978029381741304E16, cumulative cost = {6.9978054204658736E16 rows, 2021262.0 cpu, 0.0 io}\n"
+literal|"            EnumerableJoinRel(condition=[AND(=($31, $79), =($30, $91))], joinType=[inner]): rowcount = 6.9978029381741304E16, cumulative cost = {6.9978054204658736E16 rows, 1.1225436E7 cpu, 0.0 io}\n"
 operator|+
-literal|"              EnumerableJoinRel(condition=[=($28, $0)], joinType=[inner]): rowcount = 7.87597881975E8, cumulative cost = {7.884434222216867E8 rows, 433614.0 cpu, 0.0 io}\n"
+literal|"              EnumerableJoinRel(condition=[=($0, $28)], joinType=[inner]): rowcount = 7.87597881975E8, cumulative cost = {7.884434222216867E8 rows, 5035701.0 cpu, 0.0 io}\n"
 operator|+
-literal|"                EnumerableFilterRel(condition=[OR(=($15, '1998Q1'), =($15, '1998Q2'), =($15, '1998Q3'))]): rowcount = 18262.25, cumulative cost = {91311.25 rows, 146099.0 cpu, 0.0 io}\n"
+literal|"                EnumerableCalcRel(expr#0..27=[{inputs}], expr#28=['1998Q1'], expr#29=[=($t15, $t28)], expr#30=['1998Q2'], expr#31=[=($t15, $t30)], expr#32=['1998Q3'], expr#33=[=($t15, $t32)], expr#34=[OR($t29, $t31, $t33)], proj#0..27=[{exprs}], $condition=[$t34]): rowcount = 18262.25, cumulative cost = {91311.25 rows, 4748186.0 cpu, 0.0 io}\n"
 operator|+
 literal|"                  EnumerableTableAccessRel(table=[[TPCDS, DATE_DIM]]): rowcount = 73049.0, cumulative cost = {73049.0 rows, 73050.0 cpu, 0.0 io}\n"
 operator|+
 literal|"                EnumerableTableAccessRel(table=[[TPCDS, STORE_RETURNS]]): rowcount = 287514.0, cumulative cost = {287514.0 rows, 287515.0 cpu, 0.0 io}\n"
 operator|+
-literal|"              EnumerableJoinRel(condition=[=($28, $0)], joinType=[inner]): rowcount = 3.94888649445E9, cumulative cost = {3.9520401026966867E9 rows, 1587648.0 cpu, 0.0 io}\n"
+literal|"              EnumerableJoinRel(condition=[=($0, $28)], joinType=[inner]): rowcount = 3.94888649445E9, cumulative cost = {3.9520401026966867E9 rows, 6189735.0 cpu, 0.0 io}\n"
 operator|+
-literal|"                EnumerableFilterRel(condition=[OR(=($15, '1998Q1'), =($15, '1998Q2'), =($15, '1998Q3'))]): rowcount = 18262.25, cumulative cost = {91311.25 rows, 146099.0 cpu, 0.0 io}\n"
+literal|"                EnumerableCalcRel(expr#0..27=[{inputs}], expr#28=['1998Q1'], expr#29=[=($t15, $t28)], expr#30=['1998Q2'], expr#31=[=($t15, $t30)], expr#32=['1998Q3'], expr#33=[=($t15, $t32)], expr#34=[OR($t29, $t31, $t33)], proj#0..27=[{exprs}], $condition=[$t34]): rowcount = 18262.25, cumulative cost = {91311.25 rows, 4748186.0 cpu, 0.0 io}\n"
 operator|+
 literal|"                  EnumerableTableAccessRel(table=[[TPCDS, DATE_DIM]]): rowcount = 73049.0, cumulative cost = {73049.0 rows, 73050.0 cpu, 0.0 io}\n"
 operator|+
@@ -619,13 +654,44 @@ name|Hook
 operator|.
 name|PROGRAM
 argument_list|,
-name|HANDLER
+name|handler
+argument_list|(
+literal|true
+argument_list|)
 argument_list|)
 operator|.
 name|planContains
 argument_list|(
 literal|"xx"
 argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testQuery95
+parameter_list|()
+block|{
+name|checkQuery
+argument_list|(
+literal|95
+argument_list|)
+operator|.
+name|withHook
+argument_list|(
+name|Hook
+operator|.
+name|PROGRAM
+argument_list|,
+name|handler
+argument_list|(
+literal|false
+argument_list|)
+argument_list|)
+operator|.
+name|runs
+argument_list|()
 expr_stmt|;
 block|}
 specifier|private
@@ -726,6 +792,32 @@ argument_list|(
 literal|"+ 5"
 argument_list|,
 literal|"+ interval '5' day"
+argument_list|)
+expr_stmt|;
+break|break;
+case|case
+literal|95
+case|:
+name|sql
+operator|=
+name|sql
+operator|.
+name|replace
+argument_list|(
+literal|"60 days"
+argument_list|,
+literal|"interval '60' day"
+argument_list|)
+expr_stmt|;
+name|sql
+operator|=
+name|sql
+operator|.
+name|replace
+argument_list|(
+literal|"d_date between '"
+argument_list|,
+literal|"d_date between date '"
 argument_list|)
 expr_stmt|;
 break|break;

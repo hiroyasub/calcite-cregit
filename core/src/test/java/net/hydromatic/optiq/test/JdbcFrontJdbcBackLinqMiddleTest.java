@@ -308,7 +308,7 @@ literal|"C=7\n"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Tests that a theta join (a join whose condition cannot be decomposed    * into input0.x = input1.x and ... input0.z = input1.z) throws a reasonably    * civilized "cannot be implemented" exception. Of course, we'd like to be    * able to implement it one day. */
+comment|/** Tests a theta join: a join whose condition cannot be decomposed    * into input0.x = input1.x and ... input0.z = input1.z.    *    *<p>Currently, the query can be planned, but the plan is not efficient (uses    * cartesian product).</p>    */
 annotation|@
 name|Test
 specifier|public
@@ -325,7 +325,7 @@ name|OptiqAssert
 operator|.
 name|Config
 operator|.
-name|JDBC_FOODMART
+name|FOODMART_CLONE
 argument_list|)
 operator|.
 name|query
@@ -341,9 +341,25 @@ operator|+
 literal|"  on s.\"customer_id\" - c.\"customer_id\" = 0)"
 argument_list|)
 operator|.
-name|throws_
+name|explainContains
 argument_list|(
-literal|" could not be implemented"
+literal|"EnumerableAggregateRel(group=[{}], EXPR$0=[COUNT()])\n"
+operator|+
+literal|"  EnumerableCalcRel(expr#0..1=[{inputs}], expr#2=[0], expr#3=[-($t0, $t1)], expr#4=[=($t3, $t2)], DUMMY=[$t2], $condition=[$t4])\n"
+operator|+
+literal|"    EnumerableJoinRel(condition=[true], joinType=[inner])\n"
+operator|+
+literal|"      JdbcToEnumerableConverter\n"
+operator|+
+literal|"        JdbcProjectRel(customer_id=[$2])\n"
+operator|+
+literal|"          JdbcTableScan(table=[[foodmart, sales_fact_1997]])\n"
+operator|+
+literal|"      JdbcToEnumerableConverter\n"
+operator|+
+literal|"        JdbcProjectRel(customer_id=[$0])\n"
+operator|+
+literal|"          JdbcTableScan(table=[[foodmart, customer]])"
 argument_list|)
 expr_stmt|;
 block|}

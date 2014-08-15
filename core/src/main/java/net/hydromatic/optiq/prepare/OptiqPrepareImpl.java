@@ -728,6 +728,10 @@ name|ENUMERABLE_JOIN_RULE
 argument_list|,
 name|JavaRules
 operator|.
+name|ENUMERABLE_SEMI_JOIN_RULE
+argument_list|,
+name|JavaRules
+operator|.
 name|ENUMERABLE_PROJECT_RULE
 argument_list|,
 name|JavaRules

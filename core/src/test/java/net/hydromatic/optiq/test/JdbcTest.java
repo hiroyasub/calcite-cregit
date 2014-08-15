@@ -6546,6 +6546,51 @@ literal|"full_name=Terry Anderson\n"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** A join that has both equi and non-equi conditions.    *    *<p>Test case for    *<a href="https://issues.apache.org/jira/browse/OPTIQ-371">OPTIQ-371</a>,    * "Cannot implement JOIN whose ON clause contains mixed equi and theta". */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testEquiThetaJoin
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select e.\"empid\", d.\"name\", e.\"name\"\n"
+operator|+
+literal|"from \"hr\".\"emps\" as e\n"
+operator|+
+literal|"join \"hr\".\"depts\" as d\n"
+operator|+
+literal|"on e.\"deptno\" = d.\"deptno\"\n"
+operator|+
+literal|"and e.\"name\"<> d.\"name\"\n"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"empid=100; name=Sales; name=Bill\n"
+operator|+
+literal|"empid=150; name=Sales; name=Sebastian\n"
+operator|+
+literal|"empid=110; name=Sales; name=Theodore\n"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/OPTIQ-35">OPTIQ-35</a>,    * "Support parenthesized sub-clause in JOIN". */
 annotation|@
 name|Ignore
@@ -10352,7 +10397,7 @@ literal|"  EnumerableAggregateRel(group=[{0, 1}])\n"
 operator|+
 literal|"    EnumerableCalcRel(expr#0..3=[{inputs}], c0=[$t1], unit_sales=[$t3])\n"
 operator|+
-literal|"      EnumerableJoinRel(condition=[=($2, $0)], joinType=[inner])\n"
+literal|"      EnumerableJoinRel(condition=[=($0, $2)], joinType=[inner])\n"
 operator|+
 literal|"        EnumerableCalcRel(expr#0..9=[{inputs}], expr#10=[CAST($t4):INTEGER], expr#11=[1997], expr#12=[=($t10, $t11)], time_id=[$t0], the_year=[$t4], $condition=[$t12])\n"
 operator|+
@@ -10418,6 +10463,79 @@ operator|.
 name|returns
 argument_list|(
 literal|"c0=1997; m0=85452\n"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests a simple IN query implemented as a semi-join. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSimpleIn
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select * from \"hr\".\"depts\" where \"deptno\" in (\n"
+operator|+
+literal|"  select \"deptno\" from \"hr\".\"emps\"\n"
+operator|+
+literal|"  where \"empid\"< 150)"
+argument_list|)
+operator|.
+name|convertContains
+argument_list|(
+literal|"ProjectRel(deptno=[$0], name=[$1], employees=[$2])\n"
+operator|+
+literal|"  JoinRel(condition=[=($3, $4)], joinType=[inner])\n"
+operator|+
+literal|"    ProjectRel($f0=[$0], $f1=[$1], $f2=[$2], $f3=[$0])\n"
+operator|+
+literal|"      EnumerableTableAccessRel(table=[[hr, depts]])\n"
+operator|+
+literal|"    AggregateRel(group=[{0}])\n"
+operator|+
+literal|"      ProjectRel(deptno=[$1])\n"
+operator|+
+literal|"        FilterRel(condition=[<($0, 150)])\n"
+operator|+
+literal|"          ProjectRel(empid=[$0], deptno=[$1])\n"
+operator|+
+literal|"            EnumerableTableAccessRel(table=[[hr, emps]])"
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|"EnumerableCalcRel(expr#0..3=[{inputs}], proj#0..2=[{exprs}])\n"
+operator|+
+literal|"  EnumerableSemiJoinRel(condition=[=($3, $4)], joinType=[inner])\n"
+operator|+
+literal|"    EnumerableCalcRel(expr#0..2=[{inputs}], proj#0..2=[{exprs}], $f3=[$t0])\n"
+operator|+
+literal|"      EnumerableTableAccessRel(table=[[hr, depts]])\n"
+operator|+
+literal|"    EnumerableCalcRel(expr#0..4=[{inputs}], expr#5=[150], expr#6=[<($t0, $t5)], deptno=[$t1], $condition=[$t6])\n"
+operator|+
+literal|"      EnumerableTableAccessRel(table=[[hr, emps]])"
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"deptno=10; name=Sales; employees=[Employee [empid: 100, deptno: 10, name: Bill], Employee [empid: 150, deptno: 10, name: Sebastian]]"
 argument_list|)
 expr_stmt|;
 block|}

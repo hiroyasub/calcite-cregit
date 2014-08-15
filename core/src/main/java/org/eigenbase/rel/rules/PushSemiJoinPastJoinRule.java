@@ -73,6 +73,18 @@ name|*
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
+name|util
+operator|.
+name|ImmutableIntList
+import|;
+end_import
+
 begin_comment
 comment|/**  * PushSemiJoinPastJoinRule implements the rule for pushing semi-joins down in a  * tree past a join in order to trigger other rules that will convert  * semi-joins.  *  *<ul>  *<li>SemiJoinRel(JoinRel(X, Y), Z)&rarr; JoinRel(SemiJoinRel(X, Z), Y)  *<li>SemiJoinRel(JoinRel(X, Y), Z)&rarr; JoinRel(X, SemiJoinRel(Y, Z))  *</ul>  *  *<p>Whether this  * first or second conversion is applied depends on which operands actually  * participate in the semi-join.</p>  */
 end_comment
@@ -164,10 +176,8 @@ condition|)
 block|{
 return|return;
 block|}
-name|List
-argument_list|<
-name|Integer
-argument_list|>
+specifier|final
+name|ImmutableIntList
 name|leftKeys
 init|=
 name|semiJoin
@@ -175,10 +185,8 @@ operator|.
 name|getLeftKeys
 argument_list|()
 decl_stmt|;
-name|List
-argument_list|<
-name|Integer
-argument_list|>
+specifier|final
+name|ImmutableIntList
 name|rightKeys
 init|=
 name|semiJoin
@@ -579,6 +587,18 @@ operator|.
 name|getCluster
 argument_list|()
 argument_list|,
+name|semiJoin
+operator|.
+name|getCluster
+argument_list|()
+operator|.
+name|traitSetOf
+argument_list|(
+name|Convention
+operator|.
+name|NONE
+argument_list|)
+argument_list|,
 name|leftSemiJoinOp
 argument_list|,
 name|semiJoin
@@ -588,7 +608,12 @@ argument_list|()
 argument_list|,
 name|newSemiJoinFilter
 argument_list|,
+name|ImmutableIntList
+operator|.
+name|copyOf
+argument_list|(
 name|newLeftKeys
+argument_list|)
 argument_list|,
 name|rightKeys
 argument_list|)

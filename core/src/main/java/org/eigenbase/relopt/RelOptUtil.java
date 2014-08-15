@@ -7231,7 +7231,7 @@ return|return
 name|newKeys
 return|;
 block|}
-comment|/**    * Classifies filters according to where they should be processed. They    * either stay where they are, are pushed to the join (if they originated    * from above the join), or are pushed to one of the children. Filters that    * are pushed are added to list passed in as input parameters.    *    * @param joinRel      join node    * @param filters      filters to be classified    * @param joinType     join type; determines whether filters can be pushed    *                     into the ON clause    * @param pushLeft     true if filters can be pushed to the left    * @param pushRight    true if filters can be pushed to the right    * @param joinFilters  list of filters to push to the join    * @param leftFilters  list of filters to push to the left child    * @param rightFilters list of filters to push to the right child    * @param smart        Whether to try to strengthen the join type    * @return true if at least one filter was pushed    */
+comment|/**    * Classifies filters according to where they should be processed. They    * either stay where they are, are pushed to the join (if they originated    * from above the join), or are pushed to one of the children. Filters that    * are pushed are added to list passed in as input parameters.    *    * @param joinRel      join node    * @param filters      filters to be classified    * @param joinType     join type    * @param pushInto     whether filters can be pushed into the ON clause    * @param pushLeft     true if filters can be pushed to the left    * @param pushRight    true if filters can be pushed to the right    * @param joinFilters  list of filters to push to the join    * @param leftFilters  list of filters to push to the left child    * @param rightFilters list of filters to push to the right child    * @param smart        Whether to try to strengthen the join type    * @return whether at least one filter was pushed, or join type was    * strengthened    */
 specifier|public
 specifier|static
 name|boolean
@@ -7248,6 +7248,9 @@ name|filters
 parameter_list|,
 name|JoinRelType
 name|joinType
+parameter_list|,
+name|boolean
+name|pushInto
 parameter_list|,
 name|boolean
 name|pushLeft
@@ -7618,17 +7621,32 @@ argument_list|(
 name|filter
 argument_list|)
 expr_stmt|;
-comment|// if the filter can't be pushed to either child and the join
+block|}
+else|else
+block|{
+comment|// If the filter can't be pushed to either child and the join
 comment|// is an inner join, push them to the join if they originated
 comment|// from above the join
-block|}
-if|else if
+if|if
 condition|(
 name|joinType
 operator|==
 name|JoinRelType
 operator|.
 name|INNER
+operator|&&
+name|pushInto
+condition|)
+block|{
+if|if
+condition|(
+operator|!
+name|joinFilters
+operator|.
+name|contains
+argument_list|(
+name|filter
+argument_list|)
 condition|)
 block|{
 name|joinFilters
@@ -7638,6 +7656,7 @@ argument_list|(
 name|filter
 argument_list|)
 expr_stmt|;
+block|}
 name|filtersToRemove
 operator|.
 name|add
@@ -7645,19 +7664,13 @@ argument_list|(
 name|filter
 argument_list|)
 expr_stmt|;
+block|}
 comment|// If the filter will only evaluate to true if fields from the left
 comment|// are not null, and the left is null-generating, then we can make the
 comment|// left. Similarly for the right.
-block|}
-else|else
-block|{
 if|if
 condition|(
 name|smart
-operator|&&
-name|joinType
-operator|!=
-literal|null
 operator|&&
 name|joinType
 operator|.
@@ -7674,13 +7687,6 @@ name|rightBitmap
 argument_list|)
 condition|)
 block|{
-name|filtersToRemove
-operator|.
-name|add
-argument_list|(
-name|filter
-argument_list|)
-expr_stmt|;
 name|joinType
 operator|=
 name|joinType
@@ -7693,6 +7699,18 @@ operator|.
 name|set
 argument_list|(
 name|joinType
+argument_list|)
+expr_stmt|;
+if|if
+condition|(
+name|pushInto
+condition|)
+block|{
+name|filtersToRemove
+operator|.
+name|add
+argument_list|(
+name|filter
 argument_list|)
 expr_stmt|;
 if|if
@@ -7715,13 +7733,10 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+block|}
 if|if
 condition|(
 name|smart
-operator|&&
-name|joinType
-operator|!=
-literal|null
 operator|&&
 name|joinType
 operator|.
@@ -7761,6 +7776,18 @@ argument_list|)
 expr_stmt|;
 if|if
 condition|(
+name|pushInto
+condition|)
+block|{
+name|filtersToRemove
+operator|.
+name|add
+argument_list|(
+name|filter
+argument_list|)
+expr_stmt|;
+if|if
+condition|(
 operator|!
 name|joinFilters
 operator|.
@@ -7780,7 +7807,7 @@ expr_stmt|;
 block|}
 block|}
 block|}
-comment|// else, leave the filter where it is
+block|}
 block|}
 comment|// Remove filters after the loop, to prevent concurrent modification.
 if|if

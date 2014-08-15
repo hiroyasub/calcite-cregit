@@ -1367,7 +1367,16 @@ expr_stmt|;
 return|return
 name|joinInfo
 operator|.
-name|remaining
+name|getRemaining
+argument_list|(
+name|leftChild
+operator|.
+name|getCluster
+argument_list|()
+operator|.
+name|getRexBuilder
+argument_list|()
+argument_list|)
 return|;
 block|}
 comment|/**    * AND's two predicates together, either of which may be null, removing    * redundant filters.    *    * @param rexBuilder rexBuilder used to construct AND'd RexNode    * @param pred1      first predicate    * @param pred2      second predicate    * @return AND'd predicate or individual predicates if one is null    */
@@ -2110,6 +2119,12 @@ argument_list|,
 name|predList
 argument_list|,
 name|joinType
+argument_list|,
+name|joinType
+operator|==
+name|JoinRelType
+operator|.
+name|INNER
 argument_list|,
 operator|!
 name|joinType
