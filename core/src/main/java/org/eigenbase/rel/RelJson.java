@@ -1283,8 +1283,6 @@ if|else if
 condition|(
 name|value
 operator|instanceof
-name|CorrelatorRel
-operator|.
 name|Correlation
 condition|)
 block|{
@@ -1292,8 +1290,6 @@ return|return
 name|toJson
 argument_list|(
 operator|(
-name|CorrelatorRel
-operator|.
 name|Correlation
 operator|)
 name|value
@@ -1691,8 +1687,6 @@ specifier|private
 name|Object
 name|toJson
 parameter_list|(
-name|CorrelatorRel
-operator|.
 name|Correlation
 name|node
 parameter_list|)

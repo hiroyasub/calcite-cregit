@@ -49,6 +49,9 @@ block|,
 comment|/**    * Display only attributes which contribute to an expression's digest.    */
 name|DIGEST_ATTRIBUTES
 block|,
+comment|/**    * Display all attributes, including id, except cost.    */
+name|NON_COST_ATTRIBUTES
+block|,
 comment|/**    * Display all attributes, including cost.    */
 name|ALL_ATTRIBUTES
 block|;

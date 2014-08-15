@@ -69,18 +69,6 @@ name|eigenbase
 operator|.
 name|util
 operator|.
-name|Bug
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
-name|util
-operator|.
 name|Holder
 import|;
 end_import
@@ -246,53 +234,23 @@ name|getCondition
 argument_list|()
 argument_list|)
 decl_stmt|;
+comment|// If there is only the joinRel,
+comment|// make sure it does not match a cartesian product joinRel
+comment|// (with "true" condition), otherwise this rule will be applied
+comment|// again on the new cartesian product joinRel.
 if|if
 condition|(
 name|filter
 operator|==
 literal|null
-condition|)
-block|{
-comment|// There is only the joinRel
-comment|// make sure it does not match a cartesian product joinRel
-comment|// (with "true" condition) otherwise this rule will be applied
-comment|// again on the new cartesian product joinRel.
-name|boolean
-name|onlyTrueFilter
-init|=
-literal|true
-decl_stmt|;
-for|for
-control|(
-name|RexNode
-name|joinFilter
-range|:
+operator|&&
 name|joinFilters
-control|)
-block|{
-if|if
-condition|(
-operator|!
-name|joinFilter
 operator|.
-name|isAlwaysTrue
+name|isEmpty
 argument_list|()
 condition|)
 block|{
-name|onlyTrueFilter
-operator|=
-literal|false
-expr_stmt|;
-break|break;
-block|}
-block|}
-if|if
-condition|(
-name|onlyTrueFilter
-condition|)
-block|{
 return|return;
-block|}
 block|}
 specifier|final
 name|List
@@ -499,6 +457,28 @@ condition|)
 block|{
 return|return;
 block|}
+comment|// if nothing actually got pushed and there is nothing leftover,
+comment|// then this rule is a no-op
+if|if
+condition|(
+name|joinFilters
+operator|.
+name|isEmpty
+argument_list|()
+operator|&&
+name|leftFilters
+operator|.
+name|isEmpty
+argument_list|()
+operator|&&
+name|rightFilters
+operator|.
+name|isEmpty
+argument_list|()
+condition|)
+block|{
+return|return;
+block|}
 comment|// create FilterRels on top of the children if any filters were
 comment|// pushed to them
 specifier|final
@@ -545,23 +525,30 @@ argument_list|)
 decl_stmt|;
 comment|// create the new join node referencing the new children and
 comment|// containing its new join filters (if there are any)
+specifier|final
 name|RexNode
 name|joinFilter
-decl_stmt|;
-if|if
-condition|(
-name|joinFilters
+init|=
+name|RexUtil
 operator|.
-name|size
-argument_list|()
-operator|==
-literal|0
-condition|)
-block|{
-comment|// if nothing actually got pushed and there is nothing leftover,
+name|composeConjunction
+argument_list|(
+name|rexBuilder
+argument_list|,
+name|joinFilters
+argument_list|,
+literal|false
+argument_list|)
+decl_stmt|;
+comment|// If nothing actually got pushed and there is nothing leftover,
 comment|// then this rule is a no-op
 if|if
 condition|(
+name|joinFilter
+operator|.
+name|isAlwaysTrue
+argument_list|()
+operator|&&
 name|leftFilters
 operator|.
 name|isEmpty
@@ -584,32 +571,6 @@ argument_list|()
 condition|)
 block|{
 return|return;
-block|}
-name|joinFilter
-operator|=
-name|rexBuilder
-operator|.
-name|makeLiteral
-argument_list|(
-literal|true
-argument_list|)
-expr_stmt|;
-block|}
-else|else
-block|{
-name|joinFilter
-operator|=
-name|RexUtil
-operator|.
-name|composeConjunction
-argument_list|(
-name|rexBuilder
-argument_list|,
-name|joinFilters
-argument_list|,
-literal|true
-argument_list|)
-expr_stmt|;
 block|}
 name|RelNode
 name|newJoinRel
@@ -657,16 +618,6 @@ argument_list|(
 name|join
 argument_list|,
 name|newJoinRel
-argument_list|)
-expr_stmt|;
-comment|// The pushed filters are not exact copies of the original filter, but
-comment|// telling the planner about them seems to help the RelDecorrelator more
-comment|// often than not. The real solution is to fix OPTIQ-443.
-name|Bug
-operator|.
-name|upgrade
-argument_list|(
-literal|"OPTIQ-443"
 argument_list|)
 expr_stmt|;
 if|if

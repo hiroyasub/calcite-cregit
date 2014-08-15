@@ -73,6 +73,32 @@ begin_import
 import|import
 name|org
 operator|.
+name|eigenbase
+operator|.
+name|util
+operator|.
+name|Util
+import|;
+end_import
+
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|ImmutableList
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
 name|junit
 operator|.
 name|Ignore
@@ -86,6 +112,16 @@ operator|.
 name|junit
 operator|.
 name|Test
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
 import|;
 end_import
 
@@ -126,7 +162,7 @@ import|;
 end_import
 
 begin_comment
-comment|/** Unit test for {@link TpchSchema}.  *  *<p>Only runs if {@code -Doptiq.test.slow=true} is specified on the  * command-line.  * (See {@link net.hydromatic.optiq.test.OptiqAssert#ENABLE_SLOW}.)</p> */
+comment|/** Unit test for {@link TpchSchema}.  *  *<p>Because the TPC-H data generator takes time and memory to instantiate,  * tests that read data (that is, most tests) only run  * if {@code -Doptiq.test.slow=true} is specified on the command-line.  * (See {@link net.hydromatic.optiq.test.OptiqAssert#ENABLE_SLOW}.)</p> */
 end_comment
 
 begin_class
@@ -134,6 +170,41 @@ specifier|public
 class|class
 name|TpchTest
 block|{
+specifier|public
+specifier|static
+specifier|final
+name|String
+name|JAVA_VERSION
+init|=
+name|System
+operator|.
+name|getProperties
+argument_list|()
+operator|.
+name|getProperty
+argument_list|(
+literal|"java.version"
+argument_list|)
+decl_stmt|;
+specifier|public
+specifier|static
+specifier|final
+name|boolean
+name|ENABLE
+init|=
+name|OptiqAssert
+operator|.
+name|ENABLE_SLOW
+operator|&&
+name|JAVA_VERSION
+operator|.
+name|compareTo
+argument_list|(
+literal|"1.7"
+argument_list|)
+operator|>=
+literal|0
+decl_stmt|;
 specifier|private
 specifier|static
 name|String
@@ -221,11 +292,16 @@ literal|"}"
 decl_stmt|;
 specifier|static
 specifier|final
+name|List
+argument_list|<
 name|String
-index|[]
+argument_list|>
 name|QUERIES
 init|=
-block|{
+name|ImmutableList
+operator|.
+name|of
+argument_list|(
 comment|// 01
 literal|"select\n"
 operator|+
@@ -270,7 +346,7 @@ operator|+
 literal|"  l_returnflag,\n"
 operator|+
 literal|"  l_linestatus"
-block|,
+argument_list|,
 comment|// 02
 literal|"select\n"
 operator|+
@@ -365,7 +441,7 @@ operator|+
 literal|"  p.p_partkey\n"
 operator|+
 literal|"limit 100"
-block|,
+argument_list|,
 comment|// 03
 literal|"select\n"
 operator|+
@@ -418,7 +494,7 @@ operator|+
 literal|"  o.o_orderdate\n"
 operator|+
 literal|"limit 10"
-block|,
+argument_list|,
 comment|// 04
 literal|"select\n"
 operator|+
@@ -465,7 +541,7 @@ operator|+
 literal|"order by\n"
 operator|+
 literal|"  o_orderpriority"
-block|,
+argument_list|,
 comment|// 05
 literal|"select\n"
 operator|+
@@ -520,7 +596,7 @@ operator|+
 literal|"order by\n"
 operator|+
 literal|"  revenue desc"
-block|,
+argument_list|,
 comment|// 06
 literal|"select\n"
 operator|+
@@ -541,7 +617,7 @@ operator|+
 literal|"  l_discount between 0.03 - 0.01 and 0.03 + 0.01\n"
 operator|+
 literal|"  and l_quantity< 24"
-block|,
+argument_list|,
 comment|// 07
 literal|"select\n"
 operator|+
@@ -620,7 +696,7 @@ operator|+
 literal|"  cust_nation,\n"
 operator|+
 literal|"  l_year"
-block|,
+argument_list|,
 comment|// 08
 literal|"select\n"
 operator|+
@@ -695,7 +771,7 @@ operator|+
 literal|"order by\n"
 operator|+
 literal|"  o_year"
-block|,
+argument_list|,
 comment|// 09
 literal|"select\n"
 operator|+
@@ -760,7 +836,7 @@ operator|+
 literal|"  nation,\n"
 operator|+
 literal|"  o_year desc"
-block|,
+argument_list|,
 comment|// 10
 literal|"select\n"
 operator|+
@@ -825,7 +901,7 @@ operator|+
 literal|"  revenue desc\n"
 operator|+
 literal|"limit 20"
-block|,
+argument_list|,
 comment|// 11
 literal|"select\n"
 operator|+
@@ -880,7 +956,7 @@ operator|+
 literal|"order by\n"
 operator|+
 literal|"  \"value\" desc"
-block|,
+argument_list|,
 comment|// 12
 literal|"select\n"
 operator|+
@@ -937,7 +1013,7 @@ operator|+
 literal|"order by\n"
 operator|+
 literal|"  l.l_shipmode"
-block|,
+argument_list|,
 comment|// 13
 literal|"select\n"
 operator|+
@@ -980,7 +1056,7 @@ operator|+
 literal|"  custdist desc,\n"
 operator|+
 literal|"  c_count desc"
-block|,
+argument_list|,
 comment|// 14
 literal|"select\n"
 operator|+
@@ -1007,7 +1083,7 @@ operator|+
 literal|"  and l.l_shipdate>= date '1994-08-01'\n"
 operator|+
 literal|"  and l.l_shipdate< date '1994-08-01' + interval '1' month"
-block|,
+argument_list|,
 comment|// 15
 literal|"with revenue0 (supplier_no, total_revenue) as (\n"
 operator|+
@@ -1068,7 +1144,7 @@ operator|+
 literal|"order by\n"
 operator|+
 literal|"  s.s_suppkey"
-block|,
+argument_list|,
 comment|// 16
 literal|"select\n"
 operator|+
@@ -1129,7 +1205,7 @@ operator|+
 literal|"  p.p_type,\n"
 operator|+
 literal|"  p.p_size"
-block|,
+argument_list|,
 comment|// 17
 literal|"select\n"
 operator|+
@@ -1164,7 +1240,7 @@ operator|+
 literal|"      l2.l_partkey = p.p_partkey\n"
 operator|+
 literal|"  )"
-block|,
+argument_list|,
 comment|// 18
 literal|"select\n"
 operator|+
@@ -1231,7 +1307,7 @@ operator|+
 literal|"  o.o_orderdate\n"
 operator|+
 literal|"limit 100"
-block|,
+argument_list|,
 comment|// 19
 literal|"select\n"
 operator|+
@@ -1302,7 +1378,7 @@ operator|+
 literal|"    and l.l_shipinstruct = 'DELIVER IN PERSON'\n"
 operator|+
 literal|"  )"
-block|,
+argument_list|,
 comment|// 20
 literal|"select\n"
 operator|+
@@ -1377,7 +1453,7 @@ operator|+
 literal|"order by\n"
 operator|+
 literal|"  s.s_name"
-block|,
+argument_list|,
 comment|// 21
 literal|"select\n"
 operator|+
@@ -1458,7 +1534,7 @@ operator|+
 literal|"  s.s_name\n"
 operator|+
 literal|"limit 100"
-block|,
+argument_list|,
 comment|// 22
 literal|"select\n"
 operator|+
@@ -1533,7 +1609,7 @@ operator|+
 literal|"order by\n"
 operator|+
 literal|"  cntrycode"
-block|,   }
+argument_list|)
 decl_stmt|;
 annotation|@
 name|Test
@@ -1632,7 +1708,10 @@ name|OptiqAssert
 operator|.
 name|AssertThat
 name|with
-parameter_list|()
+parameter_list|(
+name|boolean
+name|enable
+parameter_list|)
 block|{
 return|return
 name|OptiqAssert
@@ -1647,9 +1726,23 @@ argument_list|)
 operator|.
 name|enable
 argument_list|(
+name|enable
+argument_list|)
+return|;
+block|}
+specifier|private
 name|OptiqAssert
 operator|.
-name|ENABLE_SLOW
+name|AssertThat
+name|with
+parameter_list|()
+block|{
+comment|// Only run on JDK 1.7 or higher. The io.airlift.tpch library requires it.
+comment|// Only run if slow tests are enabled; the library uses lots of memory.
+return|return
+name|with
+argument_list|(
+name|ENABLE
 argument_list|)
 return|;
 block|}
@@ -1716,6 +1809,13 @@ block|{
 name|query
 argument_list|(
 literal|2
+argument_list|,
+literal|true
+argument_list|)
+operator|.
+name|enable
+argument_list|(
+name|ENABLE
 argument_list|)
 operator|.
 name|convertMatches
@@ -2100,12 +2200,15 @@ block|{
 name|query
 argument_list|(
 name|i
+argument_list|,
+literal|null
 argument_list|)
 operator|.
 name|runs
 argument_list|()
 expr_stmt|;
 block|}
+comment|/** Runs with query #i.    *    * @param i Ordinal of query, per the benchmark, 1-based    * @param enable Whether to enable query execution.    *     If null, use the value of {@link #ENABLE}.    *     Pass true only for 'fast' tests that do not read any data.    */
 specifier|private
 name|OptiqAssert
 operator|.
@@ -2114,20 +2217,34 @@ name|query
 parameter_list|(
 name|int
 name|i
+parameter_list|,
+name|Boolean
+name|enable
 parameter_list|)
 block|{
 return|return
 name|with
-argument_list|()
+argument_list|(
+name|Util
+operator|.
+name|first
+argument_list|(
+name|enable
+argument_list|,
+name|ENABLE
+argument_list|)
+argument_list|)
 operator|.
 name|query
 argument_list|(
 name|QUERIES
-index|[
+operator|.
+name|get
+argument_list|(
 name|i
 operator|-
 literal|1
-index|]
+argument_list|)
 operator|.
 name|replaceAll
 argument_list|(

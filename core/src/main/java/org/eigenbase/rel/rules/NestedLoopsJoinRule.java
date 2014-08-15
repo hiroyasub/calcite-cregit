@@ -101,6 +101,20 @@ name|IntPair
 import|;
 end_import
 
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|Lists
+import|;
+end_import
+
 begin_comment
 comment|/**  * Rule which converts a {@link JoinRel} into a {@link CorrelatorRel}, which can  * then be implemented using nested loops.  *  *<p>For example,</p>  *  *<blockquote><code>select * from emp join dept on emp.deptno =  * dept.deptno</code></blockquote>  *  *<p>becomes a CorrelatorRel which restarts TableAccessRel("DEPT") for each row  * read from TableAccessRel("EMP").</p>  *  *<p>This rule is not applicable if for certain types of outer join. For  * example,</p>  *  *<blockquote><code>select * from emp right join dept on emp.deptno =  * dept.deptno</code></blockquote>  *  *<p>would require emitting a NULL emp row if a certain department contained no  * employees, and CorrelatorRel cannot do that.</p>  */
 end_comment
@@ -256,19 +270,13 @@ decl_stmt|;
 specifier|final
 name|List
 argument_list|<
-name|CorrelatorRel
-operator|.
 name|Correlation
 argument_list|>
 name|correlationList
 init|=
-operator|new
-name|ArrayList
-argument_list|<
-name|CorrelatorRel
+name|Lists
 operator|.
-name|Correlation
-argument_list|>
+name|newArrayList
 argument_list|()
 decl_stmt|;
 if|if
@@ -347,8 +355,6 @@ operator|.
 name|add
 argument_list|(
 operator|new
-name|CorrelatorRel
-operator|.
 name|Correlation
 argument_list|(
 name|dynInId

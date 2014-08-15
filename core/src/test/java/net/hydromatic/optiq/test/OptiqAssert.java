@@ -619,19 +619,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
-name|void
-name|connectThrows
-parameter_list|(
-name|String
-name|message
-parameter_list|)
-block|{
-comment|// nothing
-block|}
-annotation|@
-name|Override
-specifier|public
-name|void
+name|AssertThat
 name|connectThrows
 parameter_list|(
 name|Function1
@@ -643,7 +631,9 @@ argument_list|>
 name|exceptionChecker
 parameter_list|)
 block|{
-comment|// nothing
+return|return
+name|this
+return|;
 block|}
 annotation|@
 name|Override
@@ -3966,13 +3956,14 @@ return|;
 block|}
 comment|/** Asserts that there is an exception with the given message while      * creating a connection. */
 specifier|public
-name|void
+name|AssertThat
 name|connectThrows
 parameter_list|(
 name|String
 name|message
 parameter_list|)
 block|{
+return|return
 name|connectThrows
 argument_list|(
 name|checkException
@@ -3980,11 +3971,11 @@ argument_list|(
 name|message
 argument_list|)
 argument_list|)
-expr_stmt|;
+return|;
 block|}
 comment|/** Asserts that there is an exception that matches the given predicate      * while creating a connection. */
 specifier|public
-name|void
+name|AssertThat
 name|connectThrows
 parameter_list|(
 name|Function1
@@ -4048,6 +4039,9 @@ argument_list|(
 name|throwable
 argument_list|)
 expr_stmt|;
+return|return
+name|this
+return|;
 block|}
 comment|/** Creates a {@link OptiqConnection} and executes a callback. */
 specifier|public

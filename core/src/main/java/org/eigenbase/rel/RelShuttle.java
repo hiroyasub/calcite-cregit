@@ -67,6 +67,13 @@ function_decl|;
 name|RelNode
 name|visit
 parameter_list|(
+name|CorrelatorRel
+name|correlator
+parameter_list|)
+function_decl|;
+name|RelNode
+name|visit
+parameter_list|(
 name|UnionRel
 name|union
 parameter_list|)
