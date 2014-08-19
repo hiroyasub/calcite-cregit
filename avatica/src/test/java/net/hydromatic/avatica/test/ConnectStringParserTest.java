@@ -543,7 +543,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**    * Tests most of the examples from the<a    * href="http://msdn.microsoft.com/library/default.asp?url=/library/en-us/oledb/htm/oledbconnectionstringsyntax.asp">    * OLE DB spec</a>. Omitted are cases for Window handles, returning multiple    * values, and special handling of "Provider" keyword.    *    * @throws Throwable    */
+comment|/**    * Tests most of the examples from the<a    * href="http://msdn.microsoft.com/library/default.asp?url=/library/en-us/oledb/htm/oledbconnectionstringsyntax.asp">    * OLE DB spec</a>. Omitted are cases for Window handles, returning multiple    * values, and special handling of "Provider" keyword.    */
 annotation|@
 name|Test
 specifier|public

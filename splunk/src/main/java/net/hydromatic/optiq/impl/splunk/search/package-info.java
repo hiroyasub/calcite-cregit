@@ -4,16 +4,22 @@ comment|/* // Licensed to the Apache Software Foundation (ASF) under one or more
 end_comment
 
 begin_comment
-comment|/**  * Provides utility classes.  */
+comment|/**  * Executes queries via Splunk's REST API.  */
 end_comment
 
 begin_package
 package|package
-name|org
+name|net
 operator|.
-name|eigenbase
+name|hydromatic
 operator|.
-name|util
+name|optiq
+operator|.
+name|impl
+operator|.
+name|splunk
+operator|.
+name|search
 package|;
 end_package
 

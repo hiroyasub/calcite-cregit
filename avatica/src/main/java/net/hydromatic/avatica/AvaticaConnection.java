@@ -1279,7 +1279,7 @@ name|timeZoneName
 argument_list|)
 return|;
 block|}
-comment|/**    * Executes a parsed query, closing any previously open result set.    *    * @param prepareResult Parsed query    * @return Result set    * @throws java.sql.SQLException if a database error occurs    */
+comment|/**    * Executes a parsed query, closing any previously open result set.    *    * @param statement     Statement    * @param prepareResult Parsed query    * @return Result set    * @throws java.sql.SQLException if a database error occurs    */
 specifier|protected
 name|ResultSet
 name|executeQueryInternal

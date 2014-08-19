@@ -4,14 +4,20 @@ comment|/* // Licensed to the Apache Software Foundation (ASF) under one or more
 end_comment
 
 begin_comment
-comment|/**  * Provides utility classes.  */
+comment|/**  * Utilities for RPC to Splunk.  */
 end_comment
 
 begin_package
 package|package
-name|org
+name|net
 operator|.
-name|eigenbase
+name|hydromatic
+operator|.
+name|optiq
+operator|.
+name|impl
+operator|.
+name|splunk
 operator|.
 name|util
 package|;

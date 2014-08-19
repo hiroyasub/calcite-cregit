@@ -386,7 +386,7 @@ name|String
 name|plan
 parameter_list|)
 function_decl|;
-comment|/**      * Checks that a SQL statement converts to a given plan, optionally      * trimming columns that are not needed.      *      * @param sql  SQL query      * @param plan Expected plan      */
+comment|/**      * Checks that a SQL statement converts to a given plan, optionally      * trimming columns that are not needed.      *      * @param sql  SQL query      * @param plan Expected plan      * @param trim Whether to trim columns that are not needed      */
 name|void
 name|assertConvertsTo
 parameter_list|(

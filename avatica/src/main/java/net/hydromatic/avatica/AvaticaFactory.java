@@ -137,7 +137,7 @@ parameter_list|)
 throws|throws
 name|SQLException
 function_decl|;
-comment|/**    * Creates a result set. You will then need to call    * {@link AvaticaResultSet#execute()} on it.    *    * @param statement Statement    * @param prepareResult Prepared statement    * @return Result set    */
+comment|/**    * Creates a result set. You will then need to call    * {@link AvaticaResultSet#execute()} on it.    *    * @param statement Statement    * @param prepareResult Prepared statement    * @param timeZone Time zone    * @return Result set    */
 name|AvaticaResultSet
 name|newResultSet
 parameter_list|(

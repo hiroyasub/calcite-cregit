@@ -116,7 +116,7 @@ name|Factory
 name|factory
 parameter_list|)
 function_decl|;
-comment|/**    * Moves to the next row.    *    * @return Whether moved    */
+comment|/**    * Moves to the next row.    *    * @return Whether moved    *    * @throws SQLException on database error    */
 name|boolean
 name|next
 parameter_list|()
@@ -128,7 +128,7 @@ name|void
 name|close
 parameter_list|()
 function_decl|;
-comment|/**    * Returns whether the last value returned was null.    * @throws SQLException    */
+comment|/**    * Returns whether the last value returned was null.    *    * @throws SQLException on database error    */
 name|boolean
 name|wasNull
 parameter_list|()

@@ -520,7 +520,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Utility to infer Predicates that are applicable above a RelNode.  *  *<p>This is currently used by  * {@link org.eigenbase.rel.rules.TransitivePredicatesOnJoinRule} to  * infer<em>Predicates</em> that can be inferred from one side of a Join  * to the other.  *  *<p>The PullUp Strategy is sound but not complete. Here are some of the  * limitations:  *<ol>  *  *<li> For Aggregations we only PullUp predicates that only contain  * Grouping Keys. This can be extended to infer predicates on Aggregation  * expressions from  expressions on the aggregated columns. For e.g.  *<pre>  * select a, max(b) from R1 where b> 7 => max(b)> 7 or max(b) is null  *</pre>  *  *<li> For Projections we only look at columns that are projected without  * any function applied. So:  *<pre>  * select a from R1 where a> 7 -> a> 7 is pulledUp from the Projection.  * select a + 1 from R1 where a + 1> 7 -> a + 1> 7 is not pulledUp  *</pre>  *  *<li> There are several restrictions on Joins:  *<ul>  *<li> We only pullUp inferred predicates for now. Pulling up existing  *   predicates causes an explosion of duplicates. The existing predicates  *   are pushed back down as new predicates. Once we have rules to eliminate  *   duplicate Filter conditions, we should pullUp all predicates.  *  *<li> For Left Outer: we infer new predicates from the left and set them  *   as applicable on the Right side. No predicates are pulledUp.  *  *<li> Right Outer Joins are handled in an analogous manner.  *  *<li> For Full Outer Joins no predicates are pulledUp or inferred.  *</ul>  *</ol>  */
+comment|/**  * Utility to infer Predicates that are applicable above a RelNode.  *  *<p>This is currently used by  * {@link org.eigenbase.rel.rules.TransitivePredicatesOnJoinRule} to  * infer<em>Predicates</em> that can be inferred from one side of a Join  * to the other.  *  *<p>The PullUp Strategy is sound but not complete. Here are some of the  * limitations:  *<ol>  *  *<li> For Aggregations we only PullUp predicates that only contain  * Grouping Keys. This can be extended to infer predicates on Aggregation  * expressions from  expressions on the aggregated columns. For e.g.  *<pre>  * select a, max(b) from R1 where b&gt; 7  *&rarr; max(b)&gt; 7 or max(b) is null  *</pre>  *  *<li> For Projections we only look at columns that are projected without  * any function applied. So:  *<pre>  * select a from R1 where a&gt; 7  *&rarr; "a&gt; 7" is pulled up from the Projection.  * select a + 1 from R1 where a + 1&gt; 7  *&rarr; "a + 1 gt; 7" is not pulled up  *</pre>  *  *<li> There are several restrictions on Joins:  *<ul>  *<li> We only pullUp inferred predicates for now. Pulling up existing  *   predicates causes an explosion of duplicates. The existing predicates  *   are pushed back down as new predicates. Once we have rules to eliminate  *   duplicate Filter conditions, we should pullUp all predicates.  *  *<li> For Left Outer: we infer new predicates from the left and set them  *   as applicable on the Right side. No predicates are pulledUp.  *  *<li> Right Outer Joins are handled in an analogous manner.  *  *<li> For Full Outer Joins no predicates are pulledUp or inferred.  *</ul>  *</ol>  */
 end_comment
 
 begin_class
@@ -593,7 +593,7 @@ operator|.
 name|EMPTY
 return|;
 block|}
-comment|/**    * Infers predicates for a project.    *    *<ol>    *<li>create a mapping from input to projection. Map only positions that    * directly reference an input column.    *<li>Expressions that only contain above columns are retained in the    * Project's pullExpressions list.    *<li>For e.g. expression 'a + e = 9' below will not be pulled up because 'e'    * is not in the projection list.    *    *<pre>    * childPullUpExprs:      {a> 7, b + c< 10, a + e = 9}    * projectionExprs:       {a, b, c, e / 2}    * projectionPullupExprs: {a> 7, b + c< 10}    *</pre>    *    *</ol>    */
+comment|/**    * Infers predicates for a project.    *    *<ol>    *<li>create a mapping from input to projection. Map only positions that    * directly reference an input column.    *<li>Expressions that only contain above columns are retained in the    * Project's pullExpressions list.    *<li>For e.g. expression 'a + e = 9' below will not be pulled up because 'e'    * is not in the projection list.    *    *<pre>    * childPullUpExprs:      {a&gt; 7, b + c&lt; 10, a + e = 9}    * projectionExprs:       {a, b, c, e / 2}    * projectionPullupExprs: {a&gt; 7, b + c&lt; 10}    *</pre>    *    *</ol>    */
 specifier|public
 name|RelOptPredicateList
 name|getPredicates
@@ -964,7 +964,7 @@ literal|false
 argument_list|)
 return|;
 block|}
-comment|/**    * Infers predicates for an AggregateRel.    *    *<p>Pulls up predicates that only contains references to columns in the    * GroupSet. For e.g.    *    *<pre>    * childPullUpExprs : { a> 7, b + c< 10, a + e = 9}    * groupSet         : { a, b}    * pulledUpExprs    : { a> 7}    *</pre>    */
+comment|/**    * Infers predicates for an AggregateRel.    *    *<p>Pulls up predicates that only contains references to columns in the    * GroupSet. For e.g.    *    *<pre>    * childPullUpExprs : { a&gt; 7, b + c&lt; 10, a + e = 9}    * groupSet         : { a, b}    * pulledUpExprs    : { a&gt; 7}    *</pre>    */
 specifier|public
 name|RelOptPredicateList
 name|getPredicates

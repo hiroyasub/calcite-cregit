@@ -2331,7 +2331,7 @@ specifier|public
 interface|interface
 name|Filter
 block|{
-comment|/**      * Filters a string.      *      * @param diffRepository Repository      * @param testCaseName   Test case name      * @param tag            Tag being expanded      * @param text           Text being expanded      * @param expanded       Expanded text @return Expanded text after filtering      */
+comment|/**      * Filters a string.      *      * @param diffRepository Repository      * @param testCaseName   Test case name      * @param tag            Tag being expanded      * @param text           Text being expanded      * @param expanded       Expanded text      * @return Expanded text after filtering      */
 name|String
 name|filter
 parameter_list|(

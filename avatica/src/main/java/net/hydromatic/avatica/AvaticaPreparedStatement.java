@@ -119,7 +119,7 @@ specifier|final
 name|ResultSetMetaData
 name|resultSetMetaData
 decl_stmt|;
-comment|/**    * Creates an AvaticaPreparedStatement.    *    * @param connection Connection    * @param prepareResult Result of preparing statement    * @throws SQLException If fails due to underlying implementation reasons.    */
+comment|/**    * Creates an AvaticaPreparedStatement.    *    * @param connection Connection    * @param prepareResult Result of preparing statement    * @param resultSetType Result set type    * @param resultSetConcurrency Result set concurrency    * @param resultSetHoldability Result set holdability    * @throws SQLException If fails due to underlying implementation reasons.    */
 specifier|protected
 name|AvaticaPreparedStatement
 parameter_list|(
