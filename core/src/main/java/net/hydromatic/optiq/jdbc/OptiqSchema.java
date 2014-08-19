@@ -81,6 +81,20 @@ end_import
 
 begin_import
 import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|optiq
+operator|.
+name|util
+operator|.
+name|Compatible
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|eigenbase
@@ -338,7 +352,7 @@ specifier|private
 specifier|final
 name|Cached
 argument_list|<
-name|ImmutableSortedSet
+name|NavigableSet
 argument_list|<
 name|String
 argument_list|>
@@ -349,7 +363,7 @@ specifier|private
 specifier|final
 name|Cached
 argument_list|<
-name|ImmutableSortedSet
+name|NavigableSet
 argument_list|<
 name|String
 argument_list|>
@@ -425,6 +439,12 @@ name|OptiqSchema
 operator|.
 name|this
 argument_list|,
+name|Compatible
+operator|.
+name|INSTANCE
+operator|.
+name|navigableSet
+argument_list|(
 name|ImmutableSortedSet
 operator|.
 name|copyOf
@@ -435,6 +455,7 @@ name|schema
 operator|.
 name|getSubSchemaNames
 argument_list|()
+argument_list|)
 argument_list|)
 argument_list|)
 return|;
@@ -448,7 +469,7 @@ operator|=
 operator|new
 name|AbstractCached
 argument_list|<
-name|ImmutableSortedSet
+name|NavigableSet
 argument_list|<
 name|String
 argument_list|>
@@ -456,7 +477,7 @@ argument_list|>
 argument_list|()
 block|{
 specifier|public
-name|ImmutableSortedSet
+name|NavigableSet
 argument_list|<
 name|String
 argument_list|>
@@ -464,6 +485,12 @@ name|build
 parameter_list|()
 block|{
 return|return
+name|Compatible
+operator|.
+name|INSTANCE
+operator|.
+name|navigableSet
+argument_list|(
 name|ImmutableSortedSet
 operator|.
 name|copyOf
@@ -474,6 +501,7 @@ name|schema
 operator|.
 name|getTableNames
 argument_list|()
+argument_list|)
 argument_list|)
 return|;
 block|}
@@ -486,7 +514,7 @@ operator|=
 operator|new
 name|AbstractCached
 argument_list|<
-name|ImmutableSortedSet
+name|NavigableSet
 argument_list|<
 name|String
 argument_list|>
@@ -494,7 +522,7 @@ argument_list|>
 argument_list|()
 block|{
 specifier|public
-name|ImmutableSortedSet
+name|NavigableSet
 argument_list|<
 name|String
 argument_list|>
@@ -502,6 +530,12 @@ name|build
 parameter_list|()
 block|{
 return|return
+name|Compatible
+operator|.
+name|INSTANCE
+operator|.
+name|navigableSet
+argument_list|(
 name|ImmutableSortedSet
 operator|.
 name|copyOf
@@ -512,6 +546,7 @@ name|schema
 operator|.
 name|getFunctionNames
 argument_list|()
+argument_list|)
 argument_list|)
 return|;
 block|}
@@ -1501,10 +1536,17 @@ name|subSchemaMap
 argument_list|)
 expr_stmt|;
 return|return
+name|Compatible
+operator|.
+name|INSTANCE
+operator|.
+name|navigableMap
+argument_list|(
 name|builder
 operator|.
 name|build
 argument_list|()
+argument_list|)
 return|;
 block|}
 comment|/** Returns the set of all table names. Includes implicit and explicit tables    * and functions with zero parameters. */
@@ -1564,10 +1606,17 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 return|return
+name|Compatible
+operator|.
+name|INSTANCE
+operator|.
+name|navigableSet
+argument_list|(
 name|builder
 operator|.
 name|build
 argument_list|()
+argument_list|)
 return|;
 block|}
 comment|/** Returns a collection of all functions, explicit and implicit, with a given    * name. Never null. */
@@ -1852,10 +1901,17 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 return|return
+name|Compatible
+operator|.
+name|INSTANCE
+operator|.
+name|navigableSet
+argument_list|(
 name|builder
 operator|.
 name|build
 argument_list|()
+argument_list|)
 return|;
 block|}
 comment|/** Returns tables derived from explicit and implicit functions    * that take zero parameters. */
@@ -2047,10 +2103,17 @@ block|}
 block|}
 block|}
 return|return
+name|Compatible
+operator|.
+name|INSTANCE
+operator|.
+name|navigableMap
+argument_list|(
 name|builder
 operator|.
 name|build
 argument_list|()
+argument_list|)
 return|;
 block|}
 comment|/** Returns a tables derived from explicit and implicit functions    * that take zero parameters. */
@@ -3407,7 +3470,7 @@ name|SubSchemaCache
 block|{
 comment|/** The names of sub-schemas returned from the {@link Schema} SPI. */
 specifier|final
-name|ImmutableSortedSet
+name|NavigableSet
 argument_list|<
 name|String
 argument_list|>
@@ -3430,7 +3493,7 @@ specifier|final
 name|OptiqSchema
 name|optiqSchema
 parameter_list|,
-name|ImmutableSortedSet
+name|NavigableSet
 argument_list|<
 name|String
 argument_list|>
