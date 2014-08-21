@@ -136,6 +136,10 @@ argument_list|(
 name|RelFactories
 operator|.
 name|DEFAULT_FILTER_FACTORY
+argument_list|,
+name|RelFactories
+operator|.
+name|DEFAULT_PROJECT_FACTORY
 argument_list|)
 decl_stmt|;
 comment|/** Whether to try to strengthen join-type. */
@@ -150,6 +154,13 @@ name|RelFactories
 operator|.
 name|FilterFactory
 name|filterFactory
+decl_stmt|;
+specifier|private
+specifier|final
+name|RelFactories
+operator|.
+name|ProjectFactory
+name|projectFactory
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 comment|/**    * Creates a PushFilterPastJoinRule with an explicit root operand and    * factories.    */
@@ -169,6 +180,11 @@ name|RelFactories
 operator|.
 name|FilterFactory
 name|filterFactory
+parameter_list|,
+name|RelFactories
+operator|.
+name|ProjectFactory
+name|projectFactory
 parameter_list|)
 block|{
 name|super
@@ -191,6 +207,12 @@ operator|.
 name|filterFactory
 operator|=
 name|filterFactory
+expr_stmt|;
+name|this
+operator|.
+name|projectFactory
+operator|=
+name|projectFactory
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
@@ -680,6 +702,8 @@ name|getRowType
 argument_list|()
 argument_list|,
 literal|false
+argument_list|,
+name|projectFactory
 argument_list|)
 expr_stmt|;
 comment|// create a FilterRel on top of the join if needed
@@ -773,6 +797,11 @@ name|RelFactories
 operator|.
 name|FilterFactory
 name|filterFactory
+parameter_list|,
+name|RelFactories
+operator|.
+name|ProjectFactory
+name|projectFactory
 parameter_list|)
 block|{
 name|super
@@ -796,6 +825,8 @@ argument_list|,
 literal|true
 argument_list|,
 name|filterFactory
+argument_list|,
+name|projectFactory
 argument_list|)
 expr_stmt|;
 block|}
@@ -852,6 +883,10 @@ argument_list|,
 name|RelFactories
 operator|.
 name|DEFAULT_FILTER_FACTORY
+argument_list|,
+name|RelFactories
+operator|.
+name|DEFAULT_PROJECT_FACTORY
 argument_list|)
 expr_stmt|;
 block|}
@@ -865,6 +900,11 @@ name|RelFactories
 operator|.
 name|FilterFactory
 name|filterFactory
+parameter_list|,
+name|RelFactories
+operator|.
+name|ProjectFactory
+name|projectFactory
 parameter_list|)
 block|{
 name|super
@@ -897,6 +937,8 @@ argument_list|,
 name|smart
 argument_list|,
 name|filterFactory
+argument_list|,
+name|projectFactory
 argument_list|)
 expr_stmt|;
 block|}

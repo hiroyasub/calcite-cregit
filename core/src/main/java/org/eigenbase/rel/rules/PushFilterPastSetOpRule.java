@@ -117,7 +117,7 @@ name|filterFactory
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 comment|/**    * Creates a PushFilterPastSetOpRule.    */
-specifier|private
+specifier|public
 name|PushFilterPastSetOpRule
 parameter_list|(
 name|RelFactories

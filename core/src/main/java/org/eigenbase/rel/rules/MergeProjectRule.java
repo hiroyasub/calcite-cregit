@@ -76,7 +76,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * MergeProjectRule merges a {@link ProjectRelBase} into another {@link ProjectRelBase},  * provided the projects aren't projecting identical sets of input references.  */
+comment|/**  * MergeProjectRule merges a {@link ProjectRelBase} into  * another {@link ProjectRelBase},  * provided the projects aren't projecting identical sets of input references.  */
 end_comment
 
 begin_class
@@ -139,13 +139,13 @@ name|super
 argument_list|(
 name|operand
 argument_list|(
-name|ProjectRel
+name|ProjectRelBase
 operator|.
 name|class
 argument_list|,
 name|operand
 argument_list|(
-name|ProjectRel
+name|ProjectRelBase
 operator|.
 name|class
 argument_list|,

@@ -2003,6 +2003,48 @@ name|boolean
 name|rename
 parameter_list|)
 block|{
+return|return
+name|createCastRel
+argument_list|(
+name|rel
+argument_list|,
+name|castRowType
+argument_list|,
+name|rename
+argument_list|,
+name|RelFactories
+operator|.
+name|DEFAULT_PROJECT_FACTORY
+argument_list|)
+return|;
+block|}
+comment|/**    * Creates a projection which casts a rel's output to a desired row type.    *    * @param rel         producer of rows to be converted    * @param castRowType row type after cast    * @param rename      if true, use field names from castRowType; if false,    *                    preserve field names from rel    * @param projectFactory Project Factory    * @return conversion rel    */
+specifier|public
+specifier|static
+name|RelNode
+name|createCastRel
+parameter_list|(
+specifier|final
+name|RelNode
+name|rel
+parameter_list|,
+name|RelDataType
+name|castRowType
+parameter_list|,
+name|boolean
+name|rename
+parameter_list|,
+name|RelFactories
+operator|.
+name|ProjectFactory
+name|projectFactory
+parameter_list|)
+block|{
+assert|assert
+name|projectFactory
+operator|!=
+literal|null
+assert|;
 name|RelDataType
 name|rowType
 init|=
@@ -2058,7 +2100,7 @@ condition|)
 block|{
 comment|// Use names and types from castRowType.
 return|return
-name|CalcRel
+name|projectFactory
 operator|.
 name|createProject
 argument_list|(
@@ -2077,7 +2119,7 @@ else|else
 block|{
 comment|// Use names from rowType, types from castRowType.
 return|return
-name|CalcRel
+name|projectFactory
 operator|.
 name|createProject
 argument_list|(
