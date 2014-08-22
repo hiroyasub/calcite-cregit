@@ -310,6 +310,11 @@ expr_stmt|;
 block|}
 comment|/** Tests a theta join: a join whose condition cannot be decomposed    * into input0.x = input1.x and ... input0.z = input1.z.    *    *<p>Currently, the query can be planned, but the plan is not efficient (uses    * cartesian product).</p>    */
 annotation|@
+name|Ignore
+argument_list|(
+literal|"non-deterministic on JDK 1.7 vs 1.8"
+argument_list|)
+annotation|@
 name|Test
 specifier|public
 name|void
