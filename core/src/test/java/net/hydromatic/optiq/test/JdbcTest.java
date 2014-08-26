@@ -6466,6 +6466,74 @@ block|}
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/OPTIQ-387">OPTIQ-387</a>,    * "CompileException when cast TRUE to nullable boolean". */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testTrue
+parameter_list|()
+block|{
+specifier|final
+name|OptiqAssert
+operator|.
+name|AssertThat
+name|that
+init|=
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+decl_stmt|;
+name|that
+operator|.
+name|query
+argument_list|(
+literal|"select case when deptno = 10 then null else true end as x\n"
+operator|+
+literal|"from (values (10), (20)) as t(deptno)"
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"X=null"
+argument_list|,
+literal|"X=true"
+argument_list|)
+expr_stmt|;
+name|that
+operator|.
+name|query
+argument_list|(
+literal|"select case when deptno = 10 then null else 100 end as x\n"
+operator|+
+literal|"from (values (10), (20)) as t(deptno)"
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"X=null"
+argument_list|,
+literal|"X=100"
+argument_list|)
+expr_stmt|;
+name|that
+operator|.
+name|query
+argument_list|(
+literal|"select case when deptno = 10 then null else 'xy' end as x\n"
+operator|+
+literal|"from (values (10), (20)) as t(deptno)"
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"X=null"
+argument_list|,
+literal|"X=xy"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Unit test for self-join. Left and right children of the join are the same    * relational expression. */
 annotation|@
 name|Test
