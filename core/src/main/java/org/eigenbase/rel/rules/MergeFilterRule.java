@@ -225,7 +225,14 @@ operator|.
 name|getChild
 argument_list|()
 argument_list|,
+name|RexUtil
+operator|.
+name|flatten
+argument_list|(
+name|rexBuilder
+argument_list|,
 name|newCondition
+argument_list|)
 argument_list|)
 decl_stmt|;
 name|call
