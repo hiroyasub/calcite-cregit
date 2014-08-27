@@ -1633,6 +1633,85 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testNotInUncorrelatedSubquery
+parameter_list|()
+block|{
+name|check
+argument_list|(
+literal|"select empno from emp where deptno not in"
+operator|+
+literal|" (select deptno from dept)"
+argument_list|,
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInUncorrelatedSubqueryInSelect
+parameter_list|()
+block|{
+comment|// In the SELECT clause, the value of IN remains in 3-valued logic
+comment|// -- it's not forced into 2-valued by the "... IS TRUE" wrapper as in the
+comment|// WHERE clause -- so the translation is more complicated.
+name|check
+argument_list|(
+literal|"select name, deptno in (\n"
+operator|+
+literal|"  select case when true then deptno else null end from emp)\n"
+operator|+
+literal|"from dept"
+argument_list|,
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Plan should be as {@link #testInUncorrelatedSubqueryInSelect}, but with    * an extra NOT. Both queries require 3-valued logic. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testNotInUncorrelatedSubqueryInSelect
+parameter_list|()
+block|{
+name|check
+argument_list|(
+literal|"select empno, deptno not in (\n"
+operator|+
+literal|"  select case when true then deptno else null end from dept)\n"
+operator|+
+literal|"from emp"
+argument_list|,
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Since 'deptno NOT IN (SELECT deptno FROM dept)' can not be null, we    * generate a simpler plan. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testNotInUncorrelatedSubqueryInSelectNotNull
+parameter_list|()
+block|{
+name|check
+argument_list|(
+literal|"select empno, deptno not in (\n"
+operator|+
+literal|"  select deptno from dept)\n"
+operator|+
+literal|"from emp"
+argument_list|,
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testUnnestSelect
 parameter_list|()
 block|{

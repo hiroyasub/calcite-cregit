@@ -8787,6 +8787,29 @@ operator|||
 name|b
 return|;
 block|}
+comment|/** NULL&rarr; NULL, FALSE&rarr; TRUE, TRUE&rarr; FALSE. */
+specifier|public
+specifier|static
+name|Boolean
+name|not
+parameter_list|(
+name|Boolean
+name|b
+parameter_list|)
+block|{
+return|return
+operator|(
+name|b
+operator|==
+literal|null
+operator|)
+condition|?
+literal|null
+else|:
+operator|!
+name|b
+return|;
+block|}
 comment|/** Converts a JDBC array to a list. */
 specifier|public
 specifier|static

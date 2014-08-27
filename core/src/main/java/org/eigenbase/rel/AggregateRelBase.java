@@ -266,7 +266,9 @@ operator|==
 literal|0
 operator|)
 operator|:
-literal|"See http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=6222207"
+literal|"See https://bugs.openjdk.java.net/browse/JDK-6222207, "
+operator|+
+literal|"BitSet internal invariants may be violated"
 assert|;
 for|for
 control|(

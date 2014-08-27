@@ -14646,12 +14646,15 @@ name|void
 name|testNotInEmptyQuery
 parameter_list|()
 block|{
-comment|// RHS is empty, therefore returns all rows from emp
+comment|// RHS is empty, therefore returns all rows from emp, including the one
+comment|// with deptno = NULL.
 name|checkOuter
 argument_list|(
 literal|"select deptno from emp where deptno not in (\n"
 operator|+
 literal|"select deptno from dept where deptno = -1)"
+argument_list|,
+literal|"DEPTNO=null"
 argument_list|,
 literal|"DEPTNO=10"
 argument_list|,
@@ -14678,6 +14681,7 @@ name|void
 name|testNotInQuery
 parameter_list|()
 block|{
+comment|// None of the rows from RHS is NULL.
 name|checkOuter
 argument_list|(
 literal|"select deptno from emp where deptno not in (\n"
@@ -14699,8 +14703,8 @@ name|void
 name|testNotInQueryWithNull
 parameter_list|()
 block|{
-comment|// There is a NULL on the RHS, and '10 not in (20, null)' yields null,
-comment|// so no rows are returned.
+comment|// There is a NULL on the RHS, and '10 not in (20, null)' yields unknown
+comment|// (similarly for every other value of deptno), so no rows are returned.
 name|checkOuter
 argument_list|(
 literal|"select deptno from emp where deptno not in (\n"
@@ -14836,6 +14840,42 @@ argument_list|,
 literal|"empid=150; deptno=10; name=Sebastian; salary=7000.0; commission=null"
 argument_list|,
 literal|"empid=110; deptno=10; name=Theodore; salary=11500.0; commission=250"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testNotExistsCorrelated
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select * from \"hr\".\"emps\" where not exists (\n"
+operator|+
+literal|" select 1 from \"hr\".\"depts\"\n"
+operator|+
+literal|" where \"emps\".\"deptno\"=\"depts\".\"deptno\")"
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"empid=200; deptno=20; name=Eric; salary=8000.0; commission=500"
 argument_list|)
 expr_stmt|;
 block|}
@@ -15248,6 +15288,23 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
+name|Ignore
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testRunFoo
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+name|checkRun
+argument_list|(
+literal|"/tmp/foo.oq"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
 name|Test
 specifier|public
 name|void
@@ -15277,6 +15334,21 @@ literal|"sql/misc.oq"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testRunSubquery
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+name|checkRun
+argument_list|(
+literal|"sql/subquery.oq"
+argument_list|)
+expr_stmt|;
+block|}
 specifier|private
 name|void
 name|checkRun
@@ -15287,7 +15359,48 @@ parameter_list|)
 throws|throws
 name|Exception
 block|{
-comment|// e.g. "file:/home/fred/optiq/core/target/test-classes/sql/outer.oq"
+specifier|final
+name|File
+name|inFile
+decl_stmt|;
+specifier|final
+name|File
+name|outFile
+decl_stmt|;
+if|if
+condition|(
+name|path
+operator|.
+name|startsWith
+argument_list|(
+literal|"/"
+argument_list|)
+condition|)
+block|{
+comment|// e.g. path = "/tmp/foo.oq"
+name|inFile
+operator|=
+operator|new
+name|File
+argument_list|(
+name|path
+argument_list|)
+expr_stmt|;
+name|outFile
+operator|=
+operator|new
+name|File
+argument_list|(
+name|path
+operator|+
+literal|".out"
+argument_list|)
+expr_stmt|;
+block|}
+else|else
+block|{
+comment|// e.g. path = "sql/outer.oq"
+comment|// inUrl = "file:/home/fred/optiq/core/target/test-classes/sql/outer.oq"
 specifier|final
 name|URL
 name|inUrl
@@ -15375,10 +15488,8 @@ argument_list|(
 name|x
 argument_list|)
 decl_stmt|;
-specifier|final
-name|File
 name|inFile
-init|=
+operator|=
 operator|new
 name|File
 argument_list|(
@@ -15388,11 +15499,9 @@ literal|"/test-classes/"
 operator|+
 name|path
 argument_list|)
-decl_stmt|;
-specifier|final
-name|File
+expr_stmt|;
 name|outFile
-init|=
+operator|=
 operator|new
 name|File
 argument_list|(
@@ -15402,7 +15511,8 @@ literal|"/surefire/"
 operator|+
 name|path
 argument_list|)
-decl_stmt|;
+expr_stmt|;
+block|}
 name|outFile
 operator|.
 name|getParentFile
