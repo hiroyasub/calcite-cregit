@@ -229,6 +229,20 @@ name|org
 operator|.
 name|eigenbase
 operator|.
+name|rel
+operator|.
+name|rules
+operator|.
+name|SemiJoinRel
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
 name|relopt
 operator|.
 name|RelOptPredicateList
@@ -861,6 +875,24 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+comment|/** Infers predicates for a {@link SemiJoinRel}. */
+specifier|public
+name|RelOptPredicateList
+name|getPredicates
+parameter_list|(
+name|SemiJoinRel
+name|semiJoin
+parameter_list|)
+block|{
+comment|// Workaround, pending
+comment|// [OPTIQ-390] Transitive Inference(RelMdPredicate) doesn't handle SemiJoin
+return|return
+name|RelOptPredicateList
+operator|.
+name|EMPTY
+return|;
+block|}
+comment|/** Infers predicates for a {@link JoinRelBase}. */
 specifier|public
 name|RelOptPredicateList
 name|getPredicates
