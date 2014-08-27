@@ -11814,6 +11814,51 @@ literal|0
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Query that reads no columns from either underlying table. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testCountStar
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select count(*) c from \"hr\".\"emps\", \"hr\".\"depts\""
+argument_list|)
+operator|.
+name|convertContains
+argument_list|(
+literal|"AggregateRel(group=[{}], C=[COUNT()])\n"
+operator|+
+literal|"  ProjectRel(DUMMY=[0])\n"
+operator|+
+literal|"    JoinRel(condition=[true], joinType=[inner])\n"
+operator|+
+literal|"      ProjectRel(DUMMY=[0])\n"
+operator|+
+literal|"        EnumerableTableAccessRel(table=[[hr, emps]])\n"
+operator|+
+literal|"      ProjectRel(DUMMY=[0])\n"
+operator|+
+literal|"        EnumerableTableAccessRel(table=[[hr, depts]])"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Same result (and plan) as {@link #testSelectDistinct}. */
 annotation|@
 name|Test
@@ -11952,7 +11997,7 @@ literal|"PLAN=EnumerableCalcRel(expr#0=[{inputs}], CS=[$t0], CS2=[$t0])\n"
 operator|+
 literal|"  EnumerableAggregateRel(group=[{}], CS=[COUNT()])\n"
 operator|+
-literal|"    EnumerableCalcRel(expr#0..4=[{inputs}], expr#5=[0], expr#6=[<($t1, $t5)], DUMMY=[$t5], $condition=[$t6])\n"
+literal|"    EnumerableCalcRel(expr#0..4=[{inputs}], expr#5=[0], expr#6=[<($t1, $t5)], deptno=[$t1], $condition=[$t6])\n"
 operator|+
 literal|"      EnumerableTableAccessRel(table=[[hr, emps]])\n"
 argument_list|)

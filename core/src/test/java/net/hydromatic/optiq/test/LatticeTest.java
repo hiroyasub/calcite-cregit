@@ -484,9 +484,7 @@ literal|"AggregateRel(group=[{}], EXPR$0=[COUNT()])\n"
 operator|+
 literal|"  ProjectRel(DUMMY=[0])\n"
 operator|+
-literal|"    ProjectRel\n"
-operator|+
-literal|"      StarTableScan(table=[[adhoc, star]])\n"
+literal|"    StarTableScan(table=[[adhoc, star]])\n"
 argument_list|)
 expr_stmt|;
 block|}
