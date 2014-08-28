@@ -444,7 +444,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testPlanDisabled
+name|testIfFalse
 parameter_list|()
 block|{
 name|check
@@ -478,6 +478,54 @@ operator|+
 literal|"you like\n"
 operator|+
 literal|"!plan\n"
+operator|+
+literal|"!}\n"
+operator|+
+literal|"\n"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testIfTrue
+parameter_list|()
+block|{
+name|check
+argument_list|(
+literal|"!use foodmart\n"
+operator|+
+literal|"!if (true) {\n"
+operator|+
+literal|"values (1), (2);\n"
+operator|+
+literal|"anything\n"
+operator|+
+literal|"you like\n"
+operator|+
+literal|"!ok\n"
+operator|+
+literal|"!}\n"
+operator|+
+literal|"\n"
+argument_list|,
+name|containsString
+argument_list|(
+literal|"!use foodmart\n"
+operator|+
+literal|"!if (true) {\n"
+operator|+
+literal|"values (1), (2);\n"
+operator|+
+literal|"EXPR$0\n"
+operator|+
+literal|"1\n"
+operator|+
+literal|"2\n"
+operator|+
+literal|"!ok\n"
 operator|+
 literal|"!}\n"
 operator|+
