@@ -186,6 +186,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
 specifier|public
 name|double
 name|getRows
@@ -198,6 +200,8 @@ name|getRowCount
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelOptTable
 name|getTable
@@ -207,6 +211,8 @@ return|return
 name|table
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -241,6 +247,8 @@ name|columns
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelOptCost
 name|computeSelfCost
@@ -286,6 +294,8 @@ name|dIo
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|deriveRowType
@@ -298,6 +308,8 @@ name|getRowType
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelWriter
 name|explainTerms
@@ -338,6 +350,11 @@ argument_list|<
 name|RelDataTypeField
 argument_list|>
 name|extraFields
+parameter_list|,
+name|RelFactories
+operator|.
+name|ProjectFactory
+name|projectFactory
 parameter_list|)
 block|{
 specifier|final
@@ -515,23 +532,15 @@ argument_list|)
 expr_stmt|;
 block|}
 return|return
-operator|new
-name|ProjectRel
+name|projectFactory
+operator|.
+name|createProject
 argument_list|(
-name|getCluster
-argument_list|()
-argument_list|,
 name|this
 argument_list|,
 name|exprList
 argument_list|,
 name|nameList
-argument_list|,
-name|ProjectRel
-operator|.
-name|Flags
-operator|.
-name|BOXED
 argument_list|)
 return|;
 block|}

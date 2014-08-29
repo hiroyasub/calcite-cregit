@@ -49,6 +49,18 @@ name|*
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
+name|sql
+operator|.
+name|SqlKind
+import|;
+end_import
+
 begin_comment
 comment|/**  *<code>UnionRelBase</code> is an abstract base class for implementations of  * {@link UnionRel}.  */
 end_comment
@@ -88,6 +100,10 @@ argument_list|,
 name|traits
 argument_list|,
 name|inputs
+argument_list|,
+name|SqlKind
+operator|.
+name|UNION
 argument_list|,
 name|all
 argument_list|)
