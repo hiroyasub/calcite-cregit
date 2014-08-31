@@ -2661,7 +2661,7 @@ return|;
 block|}
 comment|/**    * Creates a reference to all the fields in the row.    *    *<p>For example, if the input row has type<code>T{f0,f1,f2,f3,f4}</code>    * then<code>makeRangeReference(T{f0,f1,f2,f3,f4}, S{f3,f4}, 3)</code> is    * an expression which yields the last 2 fields.    *    * @param type     Type of the resulting range record.    * @param offset   Index of first field.    * @param nullable Whether the record is nullable.    */
 specifier|public
-name|RexNode
+name|RexRangeRef
 name|makeRangeReference
 parameter_list|(
 name|RelDataType
