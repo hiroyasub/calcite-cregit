@@ -1506,6 +1506,9 @@ name|Pair
 operator|.
 name|of
 argument_list|(
+operator|(
+name|RelNode
+operator|)
 name|joinFactory
 operator|.
 name|createJoin

@@ -209,6 +209,16 @@ decl_stmt|;
 specifier|public
 specifier|static
 specifier|final
+name|SemiJoinFactory
+name|DEFAULT_SEMI_JOIN_FACTORY
+init|=
+operator|new
+name|SemiJoinFactoryImpl
+argument_list|()
+decl_stmt|;
+specifier|public
+specifier|static
+specifier|final
 name|SortFactory
 name|DEFAULT_SORT_FACTORY
 init|=
@@ -246,7 +256,7 @@ specifier|public
 interface|interface
 name|ProjectFactory
 block|{
-comment|/**      * Can create a {@link org.eigenbase.rel.ProjectRel} of the appropriate type      * for this rule's calling convention.      */
+comment|/** Creates a project. */
 name|RelNode
 name|createProject
 parameter_list|(
@@ -267,7 +277,7 @@ name|fieldNames
 parameter_list|)
 function_decl|;
 block|}
-comment|/**    * Implementation of {@link ProjectFactory} that returns vanilla    * {@link ProjectRel}.    */
+comment|/**    * Implementation of {@link ProjectFactory} that returns a vanilla    * {@link ProjectRel}.    */
 specifier|private
 specifier|static
 class|class
@@ -314,6 +324,7 @@ specifier|public
 interface|interface
 name|SortFactory
 block|{
+comment|/** Creates a sort. */
 name|RelNode
 name|createSort
 parameter_list|(
@@ -334,7 +345,7 @@ name|fetch
 parameter_list|)
 function_decl|;
 block|}
-comment|/**    * Implementation of {@link org.eigenbase.rel.RelFactories.SortFactory} that    * returns vanilla {@link SortRel}.    */
+comment|/**    * Implementation of {@link org.eigenbase.rel.RelFactories.SortFactory} that    * returns a vanilla {@link SortRel}.    */
 specifier|private
 specifier|static
 class|class
@@ -389,6 +400,7 @@ specifier|public
 interface|interface
 name|SetOpFactory
 block|{
+comment|/** Creates a set operation. */
 name|RelNode
 name|createSetOp
 parameter_list|(
@@ -510,8 +522,9 @@ specifier|public
 interface|interface
 name|AggregateFactory
 block|{
+comment|/** Creates an aggregate. */
 name|RelNode
-name|createAggrRelNode
+name|createAggregate
 parameter_list|(
 name|RelNode
 name|child
@@ -527,7 +540,7 @@ name|aggCalls
 parameter_list|)
 function_decl|;
 block|}
-comment|/**    * Implementation of {@link org.eigenbase.rel.RelFactories.AggregateFactory} that    * returns vanilla {@link AggregateRel}.    */
+comment|/**    * Implementation of {@link org.eigenbase.rel.RelFactories.AggregateFactory}    * that returns a vanilla {@link AggregateRel}.    */
 specifier|private
 specifier|static
 class|class
@@ -537,7 +550,7 @@ name|AggregateFactory
 block|{
 specifier|public
 name|RelNode
-name|createAggrRelNode
+name|createAggregate
 parameter_list|(
 name|RelNode
 name|child
@@ -575,7 +588,7 @@ specifier|public
 interface|interface
 name|FilterFactory
 block|{
-comment|/**      * Can create a {@link org.eigenbase.rel.FilterRel} of the appropriate type      * for this rule's calling convention.      */
+comment|/** Creates a filter. */
 name|RelNode
 name|createFilter
 parameter_list|(
@@ -587,7 +600,7 @@ name|condition
 parameter_list|)
 function_decl|;
 block|}
-comment|/**    * Implementation of {@link org.eigenbase.rel.RelFactories.FilterFactory} that    * returns vanilla {@link FilterRel}.    */
+comment|/**    * Implementation of {@link org.eigenbase.rel.RelFactories.FilterFactory} that    * returns a vanilla {@link FilterRel}.    */
 specifier|private
 specifier|static
 class|class
@@ -622,7 +635,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**    * Can create a {@link org.eigenbase.rel.JoinRelBase} of the appropriate type    * for this rule's calling convention.    */
+comment|/**    * Can create a join of the appropriate type for a rule's calling convention.    *    *<p>The result is typically a {@link org.eigenbase.rel.JoinRelBase}.    */
 specifier|public
 interface|interface
 name|JoinFactory
@@ -653,24 +666,8 @@ name|boolean
 name|semiJoinDone
 parameter_list|)
 function_decl|;
-name|SemiJoinRel
-name|createSemiJoinRel
-parameter_list|(
-name|RelTraitSet
-name|traitSet
-parameter_list|,
-name|RelNode
-name|left
-parameter_list|,
-name|RelNode
-name|right
-parameter_list|,
-name|RexNode
-name|condition
-parameter_list|)
-function_decl|;
 block|}
-comment|/**    * Implementation of {@link JoinFactory} that returns vanilla    * {@link JoinRel}.    */
+comment|/**    * Implementation of {@link JoinFactory} that returns a vanilla    * {@link JoinRel}.    */
 specifier|private
 specifier|static
 class|class
@@ -741,13 +738,39 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+block|}
+comment|/**    * Can create a semi-join of the appropriate type for a rule's calling    * convention.    */
 specifier|public
-name|SemiJoinRel
-name|createSemiJoinRel
+interface|interface
+name|SemiJoinFactory
+block|{
+comment|/**      * Creates a semi-join.      *      * @param left             Left input      * @param right            Right input      * @param condition        Join condition      */
+name|RelNode
+name|createSemiJoin
 parameter_list|(
-name|RelTraitSet
-name|traitSet
+name|RelNode
+name|left
 parameter_list|,
+name|RelNode
+name|right
+parameter_list|,
+name|RexNode
+name|condition
+parameter_list|)
+function_decl|;
+block|}
+comment|/**    * Implementation of {@link SemiJoinFactory} that returns a vanilla    * {@link SemiJoinRel}.    */
+specifier|private
+specifier|static
+class|class
+name|SemiJoinFactoryImpl
+implements|implements
+name|SemiJoinFactory
+block|{
+specifier|public
+name|RelNode
+name|createSemiJoin
+parameter_list|(
 name|RelNode
 name|left
 parameter_list|,
@@ -782,7 +805,10 @@ operator|.
 name|getCluster
 argument_list|()
 argument_list|,
-name|traitSet
+name|left
+operator|.
+name|getTraitSet
+argument_list|()
 argument_list|,
 name|left
 argument_list|,
@@ -871,8 +897,6 @@ name|RexNode
 argument_list|>
 argument_list|()
 block|{
-annotation|@
-name|Override
 specifier|public
 name|int
 name|size
@@ -885,8 +909,6 @@ name|size
 argument_list|()
 return|;
 block|}
-annotation|@
-name|Override
 specifier|public
 name|RexNode
 name|get
