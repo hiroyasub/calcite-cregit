@@ -11637,6 +11637,46 @@ literal|"deptno=10"
 argument_list|,
 literal|"deptno=20"
 argument_list|)
+expr_stmt|;
+block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/OPTIQ-397">OPTIQ-397</a>,    * "SELECT DISTINCT *" gives ClassCastException at runtime". */
+annotation|@
+name|Ignore
+argument_list|(
+literal|"OPTIQ-397"
+argument_list|)
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSelectDistinctStar
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select distinct *\n"
+operator|+
+literal|"from \"hr\".\"emps\"\n"
+argument_list|)
+operator|.
+name|returnsCount
+argument_list|(
+literal|5
+argument_list|)
 operator|.
 name|planContains
 argument_list|(
@@ -11724,6 +11764,43 @@ argument_list|(
 literal|"deptno=10"
 argument_list|,
 literal|"deptno=20"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Same result (and plan) as {@link #testSelectDistinct}. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testGroupByNoAggregatesAllColumns
+parameter_list|()
+block|{
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select \"deptno\"\n"
+operator|+
+literal|"from \"hr\".\"emps\"\n"
+operator|+
+literal|"group by \"deptno\", \"empid\", \"name\", \"salary\", \"commission\""
+argument_list|)
+operator|.
+name|returnsCount
+argument_list|(
+literal|4
 argument_list|)
 operator|.
 name|planContains

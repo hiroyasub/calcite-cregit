@@ -169,26 +169,6 @@ return|return
 name|root
 return|;
 block|}
-specifier|public
-name|void
-name|addMaterialization
-parameter_list|(
-name|RelOptMaterialization
-name|materialization
-parameter_list|)
-block|{
-comment|// ignore - this planner does not support materializations
-block|}
-specifier|public
-name|void
-name|addLattice
-parameter_list|(
-name|RelOptLattice
-name|lattice
-parameter_list|)
-block|{
-comment|// ignore - this planner does not support lattices
-block|}
 annotation|@
 name|Override
 specifier|public

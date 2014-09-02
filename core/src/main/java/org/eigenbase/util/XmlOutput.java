@@ -33,6 +33,20 @@ name|*
 import|;
 end_import
 
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|Lists
+import|;
+end_import
+
 begin_comment
 comment|/**  * Streaming XML output.  *  *<p>Use this class to write XML to any streaming source.  * While the class itself is unstructured and doesn't enforce any DTD  * specification, use of the class  * does ensure that the output is syntactically valid XML.</p>  */
 end_comment
@@ -1834,21 +1848,10 @@ name|clone
 operator|.
 name|translationVector
 operator|=
-operator|new
-name|ArrayList
-argument_list|<
-name|String
-argument_list|>
-argument_list|()
-expr_stmt|;
-name|Collections
+name|Lists
 operator|.
-name|addAll
+name|newArrayList
 argument_list|(
-name|clone
-operator|.
-name|translationVector
-argument_list|,
 name|clone
 operator|.
 name|translationTable

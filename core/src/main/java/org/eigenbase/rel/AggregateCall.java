@@ -516,6 +516,34 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+comment|/**    * Creates an equivalent AggregateCall with new argument ordinals.    *    * @param args Arguments    * @return AggregateCall that suits new inputs and GROUP BY columns    */
+specifier|public
+name|AggregateCall
+name|copy
+parameter_list|(
+name|List
+argument_list|<
+name|Integer
+argument_list|>
+name|args
+parameter_list|)
+block|{
+return|return
+operator|new
+name|AggregateCall
+argument_list|(
+name|aggregation
+argument_list|,
+name|distinct
+argument_list|,
+name|args
+argument_list|,
+name|type
+argument_list|,
+name|name
+argument_list|)
+return|;
+block|}
 comment|/**    * Creates equivalent AggregateCall that is adapted to a new input types    * and/or number of columns in GROUP BY.    *    * @param input relation that will be used as a child of AggregateRel    * @param aggArgs argument indices of the new call in the input    * @param oldGroupKeyCount number of columns in GROUP BY of old AggregateRel    * @param newGroupKeyCount number of columns in GROUP BY of new AggregateRel    * @return AggregateCall that suits new inputs and GROUP BY columns    */
 specifier|public
 name|AggregateCall

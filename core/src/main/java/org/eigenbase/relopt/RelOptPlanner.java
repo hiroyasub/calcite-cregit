@@ -195,7 +195,7 @@ name|RelOptRule
 name|rule
 parameter_list|)
 function_decl|;
-comment|/**    * Provides the Context created when this planner was constructed.    *    * @return Either null or an externally defined context.    */
+comment|/**    * Provides the Context created when this planner was constructed.    *    * @return Never null; either an externally defined context, or a dummy    * context that returns null for each requested interface    */
 name|Context
 name|getContext
 parameter_list|()
@@ -246,6 +246,14 @@ name|addLattice
 parameter_list|(
 name|RelOptLattice
 name|lattice
+parameter_list|)
+function_decl|;
+comment|/**    * Retrieves a lattice, given its star table.    */
+name|RelOptLattice
+name|getLattice
+parameter_list|(
+name|RelOptTable
+name|table
 parameter_list|)
 function_decl|;
 comment|/**    * Finds the most efficient expression to implement this query.    *    * @throws CannotPlanException if cannot find a plan    */

@@ -62,38 +62,52 @@ name|OptiqConnectionConfig
 extends|extends
 name|ConnectionConfig
 block|{
+comment|/** @see net.hydromatic.optiq.config.OptiqConnectionProperty#AUTO_TEMP */
 name|boolean
 name|autoTemp
 parameter_list|()
 function_decl|;
+comment|/** @see net.hydromatic.optiq.config.OptiqConnectionProperty#MATERIALIZATIONS_ENABLED */
 name|boolean
 name|materializationsEnabled
 parameter_list|()
 function_decl|;
+comment|/** @see net.hydromatic.optiq.config.OptiqConnectionProperty#CREATE_MATERIALIZATIONS */
+name|boolean
+name|createMaterializations
+parameter_list|()
+function_decl|;
+comment|/** @see net.hydromatic.optiq.config.OptiqConnectionProperty#MODEL */
 name|String
 name|model
 parameter_list|()
 function_decl|;
+comment|/** @see net.hydromatic.optiq.config.OptiqConnectionProperty#LEX */
 name|Lex
 name|lex
 parameter_list|()
 function_decl|;
+comment|/** @see net.hydromatic.optiq.config.OptiqConnectionProperty#QUOTING */
 name|Quoting
 name|quoting
 parameter_list|()
 function_decl|;
+comment|/** @see net.hydromatic.optiq.config.OptiqConnectionProperty#UNQUOTED_CASING */
 name|Casing
 name|unquotedCasing
 parameter_list|()
 function_decl|;
+comment|/** @see net.hydromatic.optiq.config.OptiqConnectionProperty#QUOTED_CASING */
 name|Casing
 name|quotedCasing
 parameter_list|()
 function_decl|;
+comment|/** @see net.hydromatic.optiq.config.OptiqConnectionProperty#CASE_SENSITIVE */
 name|boolean
 name|caseSensitive
 parameter_list|()
 function_decl|;
+comment|/** @see net.hydromatic.optiq.config.OptiqConnectionProperty#SPARK */
 name|boolean
 name|spark
 parameter_list|()

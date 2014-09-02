@@ -94,10 +94,22 @@ argument_list|,
 literal|false
 argument_list|)
 block|,
-comment|/** Whether materializations are enabled. */
+comment|/** Whether Optiq should use materializations. */
 name|MATERIALIZATIONS_ENABLED
 argument_list|(
 literal|"materializationsEnabled"
+argument_list|,
+name|Type
+operator|.
+name|BOOLEAN
+argument_list|,
+literal|true
+argument_list|)
+block|,
+comment|/** Whether Optiq should create materializations. */
+name|CREATE_MATERIALIZATIONS
+argument_list|(
+literal|"createMaterializations"
 argument_list|,
 name|Type
 operator|.

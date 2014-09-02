@@ -251,7 +251,8 @@ name|RelTrait
 argument_list|>
 argument_list|()
 decl_stmt|;
-specifier|private
+comment|/** External context. Never null. */
+specifier|protected
 specifier|final
 name|Context
 name|context
@@ -284,6 +285,21 @@ name|costFactory
 operator|=
 name|costFactory
 expr_stmt|;
+if|if
+condition|(
+name|context
+operator|==
+literal|null
+condition|)
+block|{
+name|context
+operator|=
+name|Contexts
+operator|.
+name|empty
+argument_list|()
+expr_stmt|;
+block|}
 name|this
 operator|.
 name|context
@@ -599,6 +615,39 @@ parameter_list|()
 block|{
 return|return
 name|this
+return|;
+block|}
+specifier|public
+name|void
+name|addMaterialization
+parameter_list|(
+name|RelOptMaterialization
+name|materialization
+parameter_list|)
+block|{
+comment|// ignore - this planner does not support materializations
+block|}
+specifier|public
+name|void
+name|addLattice
+parameter_list|(
+name|RelOptLattice
+name|lattice
+parameter_list|)
+block|{
+comment|// ignore - this planner does not support lattices
+block|}
+specifier|public
+name|RelOptLattice
+name|getLattice
+parameter_list|(
+name|RelOptTable
+name|table
+parameter_list|)
+block|{
+comment|// this planner does not support lattices
+return|return
+literal|null
 return|;
 block|}
 comment|// implement RelOptPlanner

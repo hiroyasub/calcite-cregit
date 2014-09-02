@@ -2253,12 +2253,10 @@ name|clauses
 argument_list|)
 expr_stmt|;
 block|}
-name|Collections
-operator|.
-name|addAll
-argument_list|(
 name|clauseList
-argument_list|,
+operator|.
+name|appendAll
+argument_list|(
 name|clauses
 argument_list|)
 expr_stmt|;

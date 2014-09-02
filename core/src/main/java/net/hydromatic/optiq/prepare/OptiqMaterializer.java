@@ -576,6 +576,8 @@ name|typeFactory
 argument_list|)
 argument_list|,
 name|starTable
+argument_list|,
+literal|null
 argument_list|)
 decl_stmt|;
 specifier|final

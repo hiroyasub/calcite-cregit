@@ -423,6 +423,14 @@ name|MergeProjectRule
 operator|.
 name|INSTANCE
 argument_list|,
+name|AggregateStarTableRule
+operator|.
+name|INSTANCE
+argument_list|,
+name|AggregateStarTableRule
+operator|.
+name|INSTANCE2
+argument_list|,
 name|PushFilterPastProjectRule
 operator|.
 name|INSTANCE
@@ -725,13 +733,6 @@ operator|.
 name|FACTORY
 argument_list|)
 decl_stmt|;
-if|if
-condition|(
-name|metadataProvider
-operator|!=
-literal|null
-condition|)
-block|{
 name|List
 argument_list|<
 name|RelMetadataProvider
@@ -743,6 +744,13 @@ operator|.
 name|newArrayList
 argument_list|()
 decl_stmt|;
+if|if
+condition|(
+name|metadataProvider
+operator|!=
+literal|null
+condition|)
+block|{
 name|list
 operator|.
 name|add
@@ -750,6 +758,7 @@ argument_list|(
 name|metadataProvider
 argument_list|)
 expr_stmt|;
+block|}
 name|hepPlanner
 operator|.
 name|registerMetadataProviders
@@ -777,7 +786,6 @@ argument_list|(
 name|plannerChain
 argument_list|)
 expr_stmt|;
-block|}
 name|hepPlanner
 operator|.
 name|setRoot
@@ -913,7 +921,9 @@ name|hep
 argument_list|,
 literal|false
 argument_list|,
-literal|null
+operator|new
+name|DefaultRelMetadataProvider
+argument_list|()
 argument_list|)
 decl_stmt|;
 comment|// Create a program that contains a rule to expand a MultiJoinRel
@@ -927,11 +937,9 @@ name|RelOptRule
 argument_list|>
 name|list
 init|=
-operator|new
-name|ArrayList
-argument_list|<
-name|RelOptRule
-argument_list|>
+name|Lists
+operator|.
+name|newArrayList
 argument_list|(
 name|rules
 argument_list|)

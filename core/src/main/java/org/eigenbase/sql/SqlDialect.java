@@ -1736,6 +1736,13 @@ argument_list|,
 literal|"\""
 argument_list|)
 block|,
+name|OPTIQ
+argument_list|(
+literal|"Apache Optiq"
+argument_list|,
+literal|"\""
+argument_list|)
+block|,
 name|INTERBASE
 argument_list|(
 literal|"Interbase"

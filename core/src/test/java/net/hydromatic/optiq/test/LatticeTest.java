@@ -17,6 +17,58 @@ end_package
 
 begin_import
 import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|linq4j
+operator|.
+name|function
+operator|.
+name|Function1
+import|;
+end_import
+
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|optiq
+operator|.
+name|runtime
+operator|.
+name|Hook
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
+name|rel
+operator|.
+name|RelNode
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
+name|relopt
+operator|.
+name|RelOptUtil
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|eigenbase
@@ -36,6 +88,20 @@ operator|.
 name|util
 operator|.
 name|Util
+import|;
+end_import
+
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|base
+operator|.
+name|Function
 import|;
 end_import
 
@@ -70,6 +136,18 @@ operator|.
 name|atomic
 operator|.
 name|AtomicInteger
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|hamcrest
+operator|.
+name|CoreMatchers
+operator|.
+name|anyOf
 import|;
 end_import
 
@@ -468,6 +546,14 @@ name|void
 name|testLatticeStarTable
 parameter_list|()
 block|{
+specifier|final
+name|AtomicInteger
+name|counter
+init|=
+operator|new
+name|AtomicInteger
+argument_list|()
+decl_stmt|;
 try|try
 block|{
 name|foodmartModel
@@ -478,13 +564,20 @@ argument_list|(
 literal|"select count(*) from \"adhoc\".\"star\""
 argument_list|)
 operator|.
-name|convertContains
+name|convertMatches
+argument_list|(
+name|OptiqAssert
+operator|.
+name|checkRel
 argument_list|(
 literal|"AggregateRel(group=[{}], EXPR$0=[COUNT()])\n"
 operator|+
 literal|"  ProjectRel(DUMMY=[0])\n"
 operator|+
 literal|"    StarTableScan(table=[[adhoc, star]])\n"
+argument_list|,
+name|counter
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -510,6 +603,19 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+name|assertThat
+argument_list|(
+name|counter
+operator|.
+name|get
+argument_list|()
+argument_list|,
+name|equalTo
+argument_list|(
+literal|1
+argument_list|)
+argument_list|)
+expr_stmt|;
 block|}
 comment|/** Tests that a 2-way join query can be mapped 4-way join lattice. */
 annotation|@
@@ -539,25 +645,22 @@ operator|+
 literal|"join \"foodmart\".\"product\" as p using (\"product_id\")\n"
 argument_list|)
 operator|.
+name|enableMaterializations
+argument_list|(
+literal|true
+argument_list|)
+operator|.
 name|substitutionMatches
 argument_list|(
 name|OptiqAssert
 operator|.
 name|checkRel
 argument_list|(
-literal|"ProjectRel(unit_sales=[$1], brand_name=[$3])\n"
+literal|"ProjectRel(unit_sales=[$7], brand_name=[$10])\n"
 operator|+
-literal|"  JoinRel(condition=[=($0, $2)], joinType=[inner])\n"
+literal|"  ProjectRel($f0=[$0], $f1=[$1], $f2=[$2], $f3=[$3], $f4=[$4], $f5=[$5], $f6=[$6], $f7=[$7], $f8=[$8], $f9=[$9], $f10=[$10], $f11=[$11], $f12=[$12], $f13=[$13], $f14=[$14], $f15=[$15], $f16=[$16], $f17=[$17], $f18=[$18], $f19=[$19], $f20=[$20], $f21=[$21], $f22=[$22])\n"
 operator|+
-literal|"    ProjectRel(product_id=[$0], unit_sales=[$7])\n"
-operator|+
-literal|"      ProjectRel($f0=[$0], $f1=[$1], $f2=[$2], $f3=[$3], $f4=[$4], $f5=[$5], $f6=[$6], $f7=[$7])\n"
-operator|+
-literal|"        TableAccessRel(table=[[adhoc, star]])\n"
-operator|+
-literal|"    ProjectRel(product_id=[$1], brand_name=[$2])\n"
-operator|+
-literal|"      JdbcTableScan(table=[[foodmart, product]])\n"
+literal|"    TableAccessRel(table=[[adhoc, star]])\n"
 argument_list|,
 name|counter
 argument_list|)
@@ -573,6 +676,204 @@ argument_list|,
 name|equalTo
 argument_list|(
 literal|1
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests an aggregate on a 2-way join query can use an aggregate table. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testLatticeRecognizeGroupJoin
+parameter_list|()
+block|{
+specifier|final
+name|AtomicInteger
+name|counter
+init|=
+operator|new
+name|AtomicInteger
+argument_list|()
+decl_stmt|;
+name|OptiqAssert
+operator|.
+name|AssertQuery
+name|that
+init|=
+name|foodmartModel
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"select distinct p.\"brand_name\", s.\"customer_id\"\n"
+operator|+
+literal|"from \"foodmart\".\"sales_fact_1997\" as s\n"
+operator|+
+literal|"join \"foodmart\".\"product\" as p using (\"product_id\")\n"
+argument_list|)
+operator|.
+name|enableMaterializations
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|substitutionMatches
+argument_list|(
+operator|new
+name|Function1
+argument_list|<
+name|RelNode
+argument_list|,
+name|Void
+argument_list|>
+argument_list|()
+block|{
+specifier|public
+name|Void
+name|apply
+parameter_list|(
+name|RelNode
+name|relNode
+parameter_list|)
+block|{
+name|counter
+operator|.
+name|incrementAndGet
+argument_list|()
+expr_stmt|;
+name|String
+name|s
+init|=
+name|RelOptUtil
+operator|.
+name|toString
+argument_list|(
+name|relNode
+argument_list|)
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|s
+argument_list|,
+name|anyOf
+argument_list|(
+name|containsString
+argument_list|(
+literal|"AggregateRel(group=[{0, 1}])\n"
+operator|+
+literal|"  ProjectRel(brand_name=[$10], customer_id=[$2])\n"
+operator|+
+literal|"    ProjectRel($f0=[$0], $f1=[$1], $f2=[$2], $f3=[$3], $f4=[$4], $f5=[$5], $f6=[$6], $f7=[$7], $f8=[$8], $f9=[$9], $f10=[$10], $f11=[$11], $f12=[$12], $f13=[$13], $f14=[$14], $f15=[$15], $f16=[$16], $f17=[$17], $f18=[$18], $f19=[$19], $f20=[$20], $f21=[$21], $f22=[$22])\n"
+operator|+
+literal|"      TableAccessRel(table=[[adhoc, star]])\n"
+argument_list|)
+argument_list|,
+name|containsString
+argument_list|(
+literal|"AggregateRel(group=[{0, 1}])\n"
+operator|+
+literal|"  ProjectRel(customer_id=[$2], brand_name=[$10])\n"
+operator|+
+literal|"    ProjectRel($f0=[$0], $f1=[$1], $f2=[$2], $f3=[$3], $f4=[$4], $f5=[$5], $f6=[$6], $f7=[$7], $f8=[$8], $f9=[$9], $f10=[$10], $f11=[$11], $f12=[$12], $f13=[$13], $f14=[$14], $f15=[$15], $f16=[$16], $f17=[$17], $f18=[$18], $f19=[$19], $f20=[$20], $f21=[$21], $f22=[$22])\n"
+operator|+
+literal|"      TableAccessRel(table=[[adhoc, star]])\n"
+argument_list|)
+argument_list|)
+argument_list|)
+expr_stmt|;
+return|return
+literal|null
+return|;
+block|}
+block|}
+argument_list|)
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|counter
+operator|.
+name|intValue
+argument_list|()
+argument_list|,
+name|equalTo
+argument_list|(
+literal|2
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|that
+operator|.
+name|explainContains
+argument_list|(
+literal|"EnumerableCalcRel(expr#0..1=[{inputs}], $f0=[$t1], $f1=[$t0])\n"
+operator|+
+literal|"  EnumerableTableAccessRel(table=[[adhoc, m{2, 10}]])"
+argument_list|)
+operator|.
+name|returnsCount
+argument_list|(
+literal|69203
+argument_list|)
+expr_stmt|;
+comment|// Run the same query again and see whether it uses the same
+comment|// materialization.
+name|that
+operator|.
+name|withHook
+argument_list|(
+name|Hook
+operator|.
+name|CREATE_MATERIALIZATION
+argument_list|,
+operator|new
+name|Function
+argument_list|<
+name|String
+argument_list|,
+name|Void
+argument_list|>
+argument_list|()
+block|{
+specifier|public
+name|Void
+name|apply
+parameter_list|(
+name|String
+name|materializationName
+parameter_list|)
+block|{
+name|counter
+operator|.
+name|incrementAndGet
+argument_list|()
+expr_stmt|;
+return|return
+literal|null
+return|;
+block|}
+block|}
+argument_list|)
+operator|.
+name|returnsCount
+argument_list|(
+literal|69203
+argument_list|)
+expr_stmt|;
+comment|// Ideally the counter would stay at 2. It increments to 3 because
+comment|// OptiqAssert.AssertQuery creates a new schema for every request,
+comment|// and therefore cannot re-use lattices or materializations from the
+comment|// previous request.
+name|assertThat
+argument_list|(
+name|counter
+operator|.
+name|intValue
+argument_list|()
+argument_list|,
+name|equalTo
+argument_list|(
+literal|3
 argument_list|)
 argument_list|)
 expr_stmt|;

@@ -127,6 +127,20 @@ name|rel
 operator|.
 name|rules
 operator|.
+name|AggregateProjectMergeRule
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
+name|rel
+operator|.
+name|rules
+operator|.
 name|CoerceInputsRule
 import|;
 end_import
@@ -3652,6 +3666,46 @@ name|Exception
 block|{
 name|basePullConstantTroughAggregate
 argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAggregateProjectMerge
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+name|HepProgram
+name|program
+init|=
+operator|new
+name|HepProgramBuilder
+argument_list|()
+operator|.
+name|addRuleInstance
+argument_list|(
+name|AggregateProjectMergeRule
+operator|.
+name|INSTANCE
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+name|checkPlanning
+argument_list|(
+name|program
+argument_list|,
+literal|"select x, sum(z), y from (\n"
+operator|+
+literal|"  select deptno as x, empno as y, sal as z, sal * 2 as zz\n"
+operator|+
+literal|"  from emp)\n"
+operator|+
+literal|"group by x, y"
+argument_list|)
 expr_stmt|;
 block|}
 specifier|public

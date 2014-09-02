@@ -5326,19 +5326,10 @@ name|call
 parameter_list|)
 block|{
 return|return
-operator|new
-name|AggregateCall
+name|call
+operator|.
+name|copy
 argument_list|(
-name|call
-operator|.
-name|getAggregation
-argument_list|()
-argument_list|,
-name|call
-operator|.
-name|isDistinct
-argument_list|()
-argument_list|,
 name|Mappings
 operator|.
 name|apply2
@@ -5350,15 +5341,6 @@ operator|.
 name|getArgList
 argument_list|()
 argument_list|)
-argument_list|,
-name|call
-operator|.
-name|getType
-argument_list|()
-argument_list|,
-name|call
-operator|.
-name|name
 argument_list|)
 return|;
 block|}
@@ -8618,7 +8600,7 @@ expr_stmt|;
 block|}
 block|}
 block|}
-comment|/** Based on      * {@link RemoveTrivialProjectRule#strip(org.eigenbase.rel.ProjectRelBase)}.      */
+comment|/** Based on {@link RemoveTrivialProjectRule#strip}. */
 specifier|public
 specifier|static
 name|MutableRel
