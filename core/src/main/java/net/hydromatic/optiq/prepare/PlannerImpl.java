@@ -235,6 +235,18 @@ name|eigenbase
 operator|.
 name|sql2rel
 operator|.
+name|RelDecorrelator
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
+name|sql2rel
+operator|.
 name|SqlRexConvertletTable
 import|;
 end_import
@@ -335,6 +347,11 @@ specifier|final
 name|SqlParserImplFactory
 name|parserFactory
 decl_stmt|;
+specifier|private
+specifier|final
+name|SqlRexConvertletTable
+name|convertletTable
+decl_stmt|;
 comment|// Options. TODO: allow client to set these. Maybe use a ConnectionConfig.
 specifier|private
 name|boolean
@@ -374,14 +391,6 @@ name|SqlNode
 name|validatedSqlNode
 decl_stmt|;
 comment|// set in STATE_5_CONVERT
-specifier|private
-name|SqlToRelConverter
-name|sqlToRelConverter
-decl_stmt|;
-specifier|private
-name|SqlRexConvertletTable
-name|convertletTable
-decl_stmt|;
 specifier|private
 name|RelNode
 name|rel
@@ -882,10 +891,10 @@ name|validatedSqlNode
 operator|!=
 literal|null
 assert|;
-name|this
-operator|.
+specifier|final
+name|SqlToRelConverter
 name|sqlToRelConverter
-operator|=
+init|=
 operator|new
 name|SqlToRelConverter
 argument_list|(
@@ -905,7 +914,7 @@ argument_list|()
 argument_list|,
 name|convertletTable
 argument_list|)
-expr_stmt|;
+decl_stmt|;
 name|sqlToRelConverter
 operator|.
 name|setTrimUnusedFields
@@ -946,12 +955,10 @@ argument_list|)
 expr_stmt|;
 name|rel
 operator|=
-name|sqlToRelConverter
+name|RelDecorrelator
 operator|.
-name|decorrelate
+name|decorrelateQuery
 argument_list|(
-name|validatedSqlNode
-argument_list|,
 name|rel
 argument_list|)
 expr_stmt|;
@@ -989,6 +996,7 @@ argument_list|>
 name|schemaPath
 parameter_list|)
 block|{
+specifier|final
 name|SqlParser
 name|parser
 init|=
@@ -1054,6 +1062,7 @@ argument_list|(
 name|schemaPath
 argument_list|)
 decl_stmt|;
+specifier|final
 name|SqlValidator
 name|validator
 init|=
@@ -1067,6 +1076,7 @@ argument_list|,
 name|typeFactory
 argument_list|)
 decl_stmt|;
+specifier|final
 name|SqlNode
 name|validatedSqlNode
 init|=
@@ -1077,6 +1087,7 @@ argument_list|(
 name|sqlNode
 argument_list|)
 decl_stmt|;
+specifier|final
 name|SqlToRelConverter
 name|sqlToRelConverter
 init|=
