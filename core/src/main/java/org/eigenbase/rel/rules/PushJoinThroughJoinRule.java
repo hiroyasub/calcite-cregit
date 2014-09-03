@@ -822,7 +822,7 @@ specifier|final
 name|RelNode
 name|newProject
 init|=
-name|RelFactories
+name|RelOptUtil
 operator|.
 name|createProject
 argument_list|(
@@ -1403,7 +1403,7 @@ specifier|final
 name|RelNode
 name|newProject
 init|=
-name|RelFactories
+name|RelOptUtil
 operator|.
 name|createProject
 argument_list|(

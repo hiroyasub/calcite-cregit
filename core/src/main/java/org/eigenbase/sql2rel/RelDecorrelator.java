@@ -1911,7 +1911,7 @@ comment|// replacing any previous mapping from old child).
 name|RelNode
 name|newProjectRel
 init|=
-name|CalcRel
+name|RelOptUtil
 operator|.
 name|createProject
 argument_list|(
@@ -2542,7 +2542,7 @@ block|}
 name|RelNode
 name|newProjectRel
 init|=
-name|CalcRel
+name|RelOptUtil
 operator|.
 name|createProject
 argument_list|(
@@ -2878,7 +2878,7 @@ block|{
 name|RelNode
 name|projectRel
 init|=
-name|CalcRel
+name|RelOptUtil
 operator|.
 name|createProject
 argument_list|(
@@ -3461,7 +3461,7 @@ comment|// Map filter to the new filter over join
 name|RelNode
 name|newFilterRel
 init|=
-name|CalcRel
+name|RelOptUtil
 operator|.
 name|createFilter
 argument_list|(
@@ -4890,7 +4890,7 @@ block|}
 name|RelNode
 name|newProjRel
 init|=
-name|CalcRel
+name|RelOptUtil
 operator|.
 name|createProject
 argument_list|(
@@ -5064,7 +5064,7 @@ argument_list|)
 expr_stmt|;
 block|}
 return|return
-name|CalcRel
+name|RelOptUtil
 operator|.
 name|createProject
 argument_list|(
@@ -5436,7 +5436,7 @@ name|additionalExprs
 argument_list|)
 expr_stmt|;
 return|return
-name|CalcRel
+name|RelOptUtil
 operator|.
 name|createProject
 argument_list|(
@@ -6723,7 +6723,7 @@ decl_stmt|;
 name|RelNode
 name|newProjRel
 init|=
-name|CalcRel
+name|RelOptUtil
 operator|.
 name|createProject
 argument_list|(
@@ -8505,7 +8505,7 @@ expr_stmt|;
 name|RelNode
 name|joinOutputProjRel
 init|=
-name|CalcRel
+name|RelOptUtil
 operator|.
 name|createProject
 argument_list|(
@@ -8757,7 +8757,7 @@ expr_stmt|;
 name|RelNode
 name|newAggOutputProjRel
 init|=
-name|CalcRel
+name|RelOptUtil
 operator|.
 name|createProject
 argument_list|(
@@ -9021,7 +9021,7 @@ operator|=
 operator|(
 name|ProjectRel
 operator|)
-name|CalcRel
+name|RelOptUtil
 operator|.
 name|createProject
 argument_list|(

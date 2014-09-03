@@ -206,7 +206,7 @@ decl_stmt|;
 name|RelNode
 name|filterRel
 init|=
-name|CalcRel
+name|RelOptUtil
 operator|.
 name|createFilter
 argument_list|(

@@ -535,7 +535,7 @@ condition|)
 block|{
 name|rel
 operator|=
-name|CalcRel
+name|RelOptUtil
 operator|.
 name|createProject
 argument_list|(

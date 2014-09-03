@@ -496,7 +496,7 @@ comment|// REVIEW jvs 23-Mar-2005:  How do we make sure that this
 comment|// implementation stays in Java?  Fennel can't handle
 comment|// structured types.
 return|return
-name|CalcRel
+name|RelOptUtil
 operator|.
 name|createProject
 argument_list|(
@@ -1413,7 +1413,7 @@ block|{
 name|RelNode
 name|newRel
 init|=
-name|CalcRel
+name|RelOptUtil
 operator|.
 name|createFilter
 argument_list|(
@@ -1849,7 +1849,7 @@ expr_stmt|;
 name|RelNode
 name|newRel
 init|=
-name|CalcRel
+name|RelOptUtil
 operator|.
 name|createProject
 argument_list|(

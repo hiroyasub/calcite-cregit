@@ -886,7 +886,7 @@ specifier|final
 name|RelNode
 name|inverseProject
 init|=
-name|CalcRel
+name|RelOptUtil
 operator|.
 name|createProject
 argument_list|(
@@ -1054,7 +1054,7 @@ argument_list|)
 expr_stmt|;
 block|}
 return|return
-name|CalcRel
+name|RelOptUtil
 operator|.
 name|createProject
 argument_list|(

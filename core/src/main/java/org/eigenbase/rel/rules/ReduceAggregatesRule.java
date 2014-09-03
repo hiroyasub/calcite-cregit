@@ -555,7 +555,7 @@ condition|)
 block|{
 name|input
 operator|=
-name|CalcRel
+name|RelOptUtil
 operator|.
 name|createProject
 argument_list|(
@@ -605,7 +605,7 @@ decl_stmt|;
 name|RelNode
 name|projectRel
 init|=
-name|CalcRel
+name|RelOptUtil
 operator|.
 name|createProject
 argument_list|(

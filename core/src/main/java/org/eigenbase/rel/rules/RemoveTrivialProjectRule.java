@@ -322,6 +322,8 @@ name|isIdentity
 parameter_list|(
 name|List
 argument_list|<
+name|?
+extends|extends
 name|RexNode
 argument_list|>
 name|exps

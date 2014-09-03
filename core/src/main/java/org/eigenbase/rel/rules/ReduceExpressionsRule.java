@@ -342,7 +342,7 @@ name|call
 operator|.
 name|transformTo
 argument_list|(
-name|CalcRel
+name|RelOptUtil
 operator|.
 name|createFilter
 argument_list|(

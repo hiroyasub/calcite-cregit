@@ -718,7 +718,7 @@ argument_list|)
 decl_stmt|;
 name|projChild
 operator|=
-name|CalcRel
+name|RelOptUtil
 operator|.
 name|createFilter
 argument_list|(
@@ -1327,7 +1327,7 @@ return|return
 operator|(
 name|ProjectRel
 operator|)
-name|CalcRel
+name|RelOptUtil
 operator|.
 name|createProject
 argument_list|(
@@ -1634,7 +1634,7 @@ return|return
 operator|(
 name|ProjectRel
 operator|)
-name|CalcRel
+name|RelOptUtil
 operator|.
 name|createProject
 argument_list|(

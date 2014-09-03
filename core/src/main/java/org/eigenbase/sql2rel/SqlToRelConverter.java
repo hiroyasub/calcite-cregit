@@ -3192,7 +3192,7 @@ name|bb
 operator|.
 name|setRoot
 argument_list|(
-name|CalcRel
+name|RelOptUtil
 operator|.
 name|createFilter
 argument_list|(
@@ -7585,7 +7585,7 @@ specifier|final
 name|RelNode
 name|childRel
 init|=
-name|CalcRel
+name|RelOptUtil
 operator|.
 name|createProject
 argument_list|(
@@ -8643,7 +8643,7 @@ argument_list|()
 decl_stmt|;
 name|leftRel
 operator|=
-name|CalcRel
+name|RelOptUtil
 operator|.
 name|createProject
 argument_list|(
@@ -8806,7 +8806,7 @@ argument_list|()
 decl_stmt|;
 name|rightRel
 operator|=
-name|CalcRel
+name|RelOptUtil
 operator|.
 name|createProject
 argument_list|(
@@ -10832,7 +10832,7 @@ name|bb
 operator|.
 name|setRoot
 argument_list|(
-name|CalcRel
+name|RelOptUtil
 operator|.
 name|createProject
 argument_list|(
@@ -11187,7 +11187,7 @@ name|bb
 operator|.
 name|setRoot
 argument_list|(
-name|CalcRel
+name|RelOptUtil
 operator|.
 name|createFilter
 argument_list|(
@@ -11207,7 +11207,7 @@ name|bb
 operator|.
 name|setRoot
 argument_list|(
-name|CalcRel
+name|RelOptUtil
 operator|.
 name|createProject
 argument_list|(
@@ -12699,7 +12699,7 @@ argument_list|)
 expr_stmt|;
 block|}
 return|return
-name|CalcRel
+name|RelOptUtil
 operator|.
 name|createProject
 argument_list|(
@@ -13433,7 +13433,7 @@ block|}
 name|RelNode
 name|massagedRel
 init|=
-name|CalcRel
+name|RelOptUtil
 operator|.
 name|createProject
 argument_list|(
@@ -14432,7 +14432,7 @@ block|}
 name|RelNode
 name|projRel
 init|=
-name|CalcRel
+name|RelOptUtil
 operator|.
 name|createProject
 argument_list|(
@@ -14814,7 +14814,7 @@ name|bb
 operator|.
 name|setRoot
 argument_list|(
-name|CalcRel
+name|RelOptUtil
 operator|.
 name|createProject
 argument_list|(
@@ -15301,7 +15301,7 @@ name|unionRels
 operator|.
 name|add
 argument_list|(
-name|CalcRel
+name|RelOptUtil
 operator|.
 name|createProject
 argument_list|(
@@ -15848,7 +15848,7 @@ init|=
 operator|(
 name|ProjectRel
 operator|)
-name|CalcRel
+name|RelOptUtil
 operator|.
 name|createProject
 argument_list|(

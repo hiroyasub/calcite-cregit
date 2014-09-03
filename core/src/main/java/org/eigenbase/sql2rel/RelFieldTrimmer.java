@@ -3021,7 +3021,7 @@ decl_stmt|;
 comment|// Create a projection; does nothing if remaining is identity.
 name|newInput
 operator|=
-name|CalcRel
+name|RelOptUtil
 operator|.
 name|projectMapping
 argument_list|(

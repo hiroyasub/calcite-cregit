@@ -362,7 +362,7 @@ argument_list|()
 argument_list|)
 decl_stmt|;
 return|return
-name|CalcRel
+name|RelOptUtil
 operator|.
 name|createProject
 argument_list|(
@@ -900,7 +900,7 @@ name|Util
 operator|.
 name|FoundOne
 argument_list|(
-name|CalcRel
+name|RelOptUtil
 operator|.
 name|createProject
 argument_list|(
@@ -970,7 +970,7 @@ name|Util
 operator|.
 name|FoundOne
 argument_list|(
-name|CalcRel
+name|RelOptUtil
 operator|.
 name|createProject
 argument_list|(

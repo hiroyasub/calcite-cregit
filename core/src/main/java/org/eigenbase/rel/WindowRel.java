@@ -1130,7 +1130,7 @@ name|windowList
 argument_list|)
 decl_stmt|;
 return|return
-name|CalcRel
+name|RelOptUtil
 operator|.
 name|createProject
 argument_list|(

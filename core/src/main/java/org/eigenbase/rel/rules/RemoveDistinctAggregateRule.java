@@ -645,18 +645,14 @@ name|refs
 argument_list|)
 expr_stmt|;
 block|}
-comment|//noinspection unchecked
 name|rel
 operator|=
-name|CalcRel
+name|RelOptUtil
 operator|.
 name|createProject
 argument_list|(
 name|rel
 argument_list|,
-operator|(
-name|List
-operator|)
 name|refs
 argument_list|,
 name|fieldNames
@@ -1752,7 +1748,7 @@ specifier|final
 name|RelNode
 name|project
 init|=
-name|CalcRel
+name|RelOptUtil
 operator|.
 name|createProject
 argument_list|(

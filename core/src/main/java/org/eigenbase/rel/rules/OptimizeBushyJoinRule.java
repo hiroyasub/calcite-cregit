@@ -1587,7 +1587,7 @@ specifier|final
 name|RelNode
 name|project
 init|=
-name|RelFactories
+name|RelOptUtil
 operator|.
 name|createProject
 argument_list|(

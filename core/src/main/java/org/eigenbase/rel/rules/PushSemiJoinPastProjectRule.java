@@ -314,7 +314,7 @@ comment|// of the semijoin and the semijoin only projects out the LHS
 name|RelNode
 name|newProject
 init|=
-name|CalcRel
+name|RelOptUtil
 operator|.
 name|createProject
 argument_list|(

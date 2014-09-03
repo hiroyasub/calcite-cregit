@@ -7005,7 +7005,7 @@ name|projects
 argument_list|)
 return|;
 block|}
-comment|/** Equivalent to {@link CalcRel#createProject(RelNode, List, List)}      * for {@link MutableRel}. */
+comment|/** Equivalent to      * {@link RelOptUtil#createProject(org.eigenbase.rel.RelNode, java.util.List, java.util.List)}      * for {@link MutableRel}. */
 specifier|static
 name|MutableRel
 name|of
@@ -8618,7 +8618,7 @@ expr_stmt|;
 block|}
 block|}
 block|}
-comment|/** Based on {@link RemoveTrivialProjectRule#strip(ProjectRel)}. */
+comment|/** Based on      * {@link RemoveTrivialProjectRule#strip(org.eigenbase.rel.ProjectRelBase)}.      */
 specifier|public
 specifier|static
 name|MutableRel
@@ -8711,7 +8711,7 @@ return|return
 literal|true
 return|;
 block|}
-comment|/** Equivalent to {@link CalcRel#createProject(RelNode, List)}      * for {@link MutableRel}. */
+comment|/** Equivalent to {@link RelOptUtil#createProject(org.eigenbase.rel.RelNode, java.util.List)}      * for {@link MutableRel}. */
 specifier|public
 specifier|static
 name|MutableRel

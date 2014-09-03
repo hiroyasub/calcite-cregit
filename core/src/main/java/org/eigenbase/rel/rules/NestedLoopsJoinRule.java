@@ -424,7 +424,7 @@ expr_stmt|;
 block|}
 name|right
 operator|=
-name|CalcRel
+name|RelOptUtil
 operator|.
 name|createFilter
 argument_list|(
