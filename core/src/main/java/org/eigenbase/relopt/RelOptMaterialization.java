@@ -905,28 +905,6 @@ name|rightTable
 argument_list|)
 condition|)
 block|{
-name|System
-operator|.
-name|out
-operator|.
-name|println
-argument_list|(
-literal|"left: "
-operator|+
-name|leftMapping
-argument_list|)
-expr_stmt|;
-name|System
-operator|.
-name|out
-operator|.
-name|println
-argument_list|(
-literal|"right: "
-operator|+
-name|rightMapping
-argument_list|)
-expr_stmt|;
 name|Mappings
 operator|.
 name|TargetMapping
