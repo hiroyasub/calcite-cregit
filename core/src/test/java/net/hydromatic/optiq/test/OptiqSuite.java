@@ -533,6 +533,12 @@ block|,
 name|PartiallyOrderedSetTest
 operator|.
 name|class
+block|,
+comment|// system tests and benchmarks (very slow, but usually only run if
+comment|// '-Doptiq.test.slow=true' is specified)
+name|FoodmartTest
+operator|.
+name|class
 block|}
 argument_list|)
 specifier|public

@@ -917,6 +917,9 @@ return|;
 case|case
 name|ANY
 case|:
+case|case
+name|NULL
+case|:
 switch|switch
 condition|(
 name|literal

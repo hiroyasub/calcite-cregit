@@ -1563,7 +1563,7 @@ argument_list|)
 operator|.
 name|returns
 argument_list|(
-name|Functions
+name|OptiqAssert
 operator|.
 expr|<
 name|ResultSet
@@ -2053,7 +2053,7 @@ argument_list|)
 operator|.
 name|returns
 argument_list|(
-name|Functions
+name|OptiqAssert
 operator|.
 expr|<
 name|ResultSet

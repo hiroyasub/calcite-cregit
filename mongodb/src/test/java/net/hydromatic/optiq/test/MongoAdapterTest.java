@@ -29,20 +29,6 @@ end_import
 
 begin_import
 import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|linq4j
-operator|.
-name|function
-operator|.
-name|Function1
-import|;
-end_import
-
-begin_import
-import|import
 name|org
 operator|.
 name|eigenbase
@@ -50,6 +36,20 @@ operator|.
 name|util
 operator|.
 name|*
+import|;
+end_import
+
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|base
+operator|.
+name|Function
 import|;
 end_import
 
@@ -351,7 +351,7 @@ block|}
 comment|/** Returns a function that checks that a particular MongoDB pipeline is    * generated to implement a query. */
 specifier|private
 specifier|static
-name|Function1
+name|Function
 argument_list|<
 name|List
 argument_list|,
@@ -367,7 +367,7 @@ parameter_list|)
 block|{
 return|return
 operator|new
-name|Function1
+name|Function
 argument_list|<
 name|List
 argument_list|,
@@ -418,7 +418,7 @@ return|;
 block|}
 comment|/** Similar to {@link OptiqAssert#checkResultUnordered}, but filters strings    * before comparing them. */
 specifier|static
-name|Function1
+name|Function
 argument_list|<
 name|ResultSet
 argument_list|,
@@ -434,7 +434,7 @@ parameter_list|)
 block|{
 return|return
 operator|new
-name|Function1
+name|Function
 argument_list|<
 name|ResultSet
 argument_list|,

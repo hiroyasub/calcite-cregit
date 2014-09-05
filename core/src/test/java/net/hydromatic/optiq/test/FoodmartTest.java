@@ -17,6 +17,20 @@ end_package
 
 begin_import
 import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|linq4j
+operator|.
+name|expressions
+operator|.
+name|Primitive
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|eigenbase
@@ -1022,7 +1036,49 @@ block|,
 literal|6737
 block|,
 literal|6739
-block|,   }
+block|,
+comment|// timeout oor OOM
+literal|420
+block|,
+literal|423
+block|,
+literal|5218
+block|,
+literal|5219
+block|,
+literal|5616
+block|,
+literal|5617
+block|,
+literal|5618
+block|,
+literal|5891
+block|,
+literal|5892
+block|,
+literal|5895
+block|,
+literal|5896
+block|,
+literal|5898
+block|,
+literal|5899
+block|,
+literal|5900
+block|,
+literal|5901
+block|,
+literal|5902
+block|,
+literal|6080
+block|,
+literal|6091
+block|,
+comment|// bugs
+literal|6597
+block|,
+comment|// OPTIQ-403
+block|}
 decl_stmt|;
 comment|// Interesting tests. (We need to fix and remove from the disabled list.)
 comment|// 2452, 2453, 2454, 2457 only: RTRIM
@@ -1128,14 +1184,6 @@ name|disabledId
 argument_list|)
 expr_stmt|;
 block|}
-name|buf
-operator|.
-name|setLength
-argument_list|(
-literal|0
-argument_list|)
-expr_stmt|;
-comment|// disable disable
 for|for
 control|(
 name|Integer
@@ -1202,6 +1250,42 @@ name|values
 argument_list|()
 control|)
 block|{
+if|if
+condition|(
+operator|!
+name|OptiqAssert
+operator|.
+name|ENABLE_SLOW
+operator|&&
+name|query1
+operator|.
+name|id
+operator|!=
+literal|2
+condition|)
+block|{
+comment|// If slow queries are not enabled, only run query #2.
+continue|continue;
+block|}
+if|if
+condition|(
+name|Primitive
+operator|.
+name|asList
+argument_list|(
+name|DISABLED_IDS
+argument_list|)
+operator|.
+name|contains
+argument_list|(
+name|query1
+operator|.
+name|id
+argument_list|)
+condition|)
+block|{
+continue|continue;
+block|}
 name|list
 operator|.
 name|add
@@ -1292,6 +1376,9 @@ name|Config
 operator|.
 name|FOODMART_CLONE
 argument_list|)
+operator|.
+name|pooled
+argument_list|()
 comment|//          .withSchema("foodmart")
 operator|.
 name|query

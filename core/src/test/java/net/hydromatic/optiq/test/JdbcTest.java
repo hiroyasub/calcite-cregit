@@ -4830,7 +4830,7 @@ operator|.
 name|doWithConnection
 argument_list|(
 operator|new
-name|Function1
+name|Function
 argument_list|<
 name|OptiqConnection
 argument_list|,
@@ -6399,7 +6399,7 @@ operator|.
 name|returns
 argument_list|(
 operator|new
-name|Function1
+name|Function
 argument_list|<
 name|ResultSet
 argument_list|,
@@ -7862,7 +7862,7 @@ operator|.
 name|doWithConnection
 argument_list|(
 operator|new
-name|Function1
+name|Function
 argument_list|<
 name|OptiqConnection
 argument_list|,
@@ -11891,6 +11891,76 @@ literal|0
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/OPTIQ-403">OPTIQ-403</a>,    * "Enumerable gives NullPointerException with HAVING on nullable    * expression". */
+annotation|@
+name|Ignore
+argument_list|(
+literal|"OPTIQ-403"
+argument_list|)
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testHavingNot
+parameter_list|()
+throws|throws
+name|IOException
+block|{
+name|withFoodMartQuery
+argument_list|(
+literal|6597
+argument_list|)
+operator|.
+name|runs
+argument_list|()
+expr_stmt|;
+block|}
+comment|/** Minimal case of {@link #testHavingNot()}. */
+annotation|@
+name|Ignore
+argument_list|(
+literal|"OPTIQ-403"
+argument_list|)
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testHavingNot2
+parameter_list|()
+throws|throws
+name|IOException
+block|{
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|FOODMART_CLONE
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select 1\n"
+operator|+
+literal|"from \"store\"\n"
+operator|+
+literal|"group by \"store\".\"store_street_address\"\n"
+operator|+
+literal|"having NOT (sum(\"store\".\"grocery_sqft\")< 10000)"
+argument_list|)
+operator|.
+name|returnsCount
+argument_list|(
+literal|0
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Query that reads no columns from either underlying table. */
 annotation|@
 name|Test
@@ -15043,7 +15113,7 @@ operator|.
 name|convertMatches
 argument_list|(
 operator|new
-name|Function1
+name|Function
 argument_list|<
 name|RelNode
 argument_list|,
@@ -16119,7 +16189,7 @@ operator|.
 name|doWithConnection
 argument_list|(
 operator|new
-name|Function1
+name|Function
 argument_list|<
 name|OptiqConnection
 argument_list|,
@@ -16291,7 +16361,7 @@ operator|.
 name|doWithConnection
 argument_list|(
 operator|new
-name|Function1
+name|Function
 argument_list|<
 name|OptiqConnection
 argument_list|,
@@ -16820,7 +16890,7 @@ operator|.
 name|doWithConnection
 argument_list|(
 operator|new
-name|Function1
+name|Function
 argument_list|<
 name|OptiqConnection
 argument_list|,
@@ -17117,7 +17187,7 @@ operator|.
 name|doWithConnection
 argument_list|(
 operator|new
-name|Function1
+name|Function
 argument_list|<
 name|OptiqConnection
 argument_list|,
@@ -17499,7 +17569,7 @@ operator|.
 name|doWithConnection
 argument_list|(
 operator|new
-name|Function1
+name|Function
 argument_list|<
 name|OptiqConnection
 argument_list|,
@@ -19039,7 +19109,7 @@ operator|.
 name|doWithConnection
 argument_list|(
 operator|new
-name|Function1
+name|Function
 argument_list|<
 name|OptiqConnection
 argument_list|,
@@ -19240,7 +19310,7 @@ operator|.
 name|doWithConnection
 argument_list|(
 operator|new
-name|Function1
+name|Function
 argument_list|<
 name|OptiqConnection
 argument_list|,
@@ -20243,7 +20313,7 @@ operator|.
 name|doWithConnection
 argument_list|(
 operator|new
-name|Function1
+name|Function
 argument_list|<
 name|OptiqConnection
 argument_list|,
@@ -20396,7 +20466,7 @@ operator|.
 name|doWithConnection
 argument_list|(
 operator|new
-name|Function1
+name|Function
 argument_list|<
 name|OptiqConnection
 argument_list|,
@@ -20639,7 +20709,7 @@ operator|.
 name|doWithConnection
 argument_list|(
 operator|new
-name|Function1
+name|Function
 argument_list|<
 name|OptiqConnection
 argument_list|,
@@ -20835,7 +20905,7 @@ operator|.
 name|doWithConnection
 argument_list|(
 operator|new
-name|Function1
+name|Function
 argument_list|<
 name|OptiqConnection
 argument_list|,
@@ -21031,7 +21101,7 @@ operator|.
 name|doWithConnection
 argument_list|(
 operator|new
-name|Function1
+name|Function
 argument_list|<
 name|OptiqConnection
 argument_list|,
@@ -21230,7 +21300,7 @@ operator|.
 name|doWithConnection
 argument_list|(
 operator|new
-name|Function1
+name|Function
 argument_list|<
 name|OptiqConnection
 argument_list|,
@@ -21396,7 +21466,7 @@ block|}
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Tests metadata for the ORACLE lexical scheme overriden like JAVA. */
+comment|/** Tests metadata for the ORACLE lexical scheme overridden like JAVA. */
 annotation|@
 name|Test
 specifier|public
@@ -21465,7 +21535,7 @@ operator|.
 name|doWithConnection
 argument_list|(
 operator|new
-name|Function1
+name|Function
 argument_list|<
 name|OptiqConnection
 argument_list|,
