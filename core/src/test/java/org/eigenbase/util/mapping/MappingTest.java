@@ -723,8 +723,6 @@ name|targets
 argument_list|)
 argument_list|)
 expr_stmt|;
-try|try
-block|{
 specifier|final
 name|Mapping
 name|inverse
@@ -734,23 +732,19 @@ operator|.
 name|inverse
 argument_list|()
 decl_stmt|;
-name|fail
+name|assertThat
 argument_list|(
-literal|"expected exception, got "
-operator|+
 name|inverse
+operator|.
+name|toString
+argument_list|()
+argument_list|,
+name|equalTo
+argument_list|(
+literal|"[size=5, sourceCount=10, targetCount=5, elements=[1:1, 3:0, 4:2, 5:3, 8:4]]"
+argument_list|)
 argument_list|)
 expr_stmt|;
-block|}
-catch|catch
-parameter_list|(
-name|UnsupportedOperationException
-name|e
-parameter_list|)
-block|{
-comment|// ok... but we'd prefer if that inverse succeeds if the mapping is
-comment|// invertible
-block|}
 block|}
 comment|/** Unit test for {@link Mappings#target(List, int)}. */
 annotation|@

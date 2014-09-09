@@ -139,15 +139,15 @@ end_import
 
 begin_import
 import|import
-name|net
+name|com
 operator|.
-name|hydromatic
+name|google
 operator|.
-name|linq4j
+name|common
 operator|.
-name|function
+name|base
 operator|.
-name|Function1
+name|Function
 import|;
 end_import
 
@@ -927,7 +927,7 @@ operator|.
 name|target
 argument_list|(
 operator|new
-name|Function1
+name|Function
 argument_list|<
 name|Integer
 argument_list|,

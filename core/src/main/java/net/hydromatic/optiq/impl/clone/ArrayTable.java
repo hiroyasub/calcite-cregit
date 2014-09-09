@@ -2338,8 +2338,7 @@ decl_stmt|;
 return|return
 name|pair
 operator|.
-name|getValue
-argument_list|()
+name|left
 return|;
 block|}
 specifier|public

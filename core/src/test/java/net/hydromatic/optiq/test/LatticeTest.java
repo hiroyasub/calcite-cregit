@@ -751,24 +751,18 @@ name|anyOf
 argument_list|(
 name|containsString
 argument_list|(
-literal|"AggregateRel(group=[{0, 1}])\n"
+literal|"ProjectRel($f0=[$1], $f1=[$0])\n"
 operator|+
-literal|"  ProjectRel(brand_name=[$10], customer_id=[$2])\n"
+literal|"  AggregateRel(group=[{2, 10}])\n"
 operator|+
-literal|"    ProjectRel($f0=[$0], $f1=[$1], $f2=[$2], $f3=[$3], $f4=[$4], $f5=[$5], $f6=[$6], $f7=[$7], $f8=[$8], $f9=[$9], $f10=[$10], $f11=[$11], $f12=[$12], $f13=[$13], $f14=[$14], $f15=[$15], $f16=[$16], $f17=[$17], $f18=[$18], $f19=[$19], $f20=[$20], $f21=[$21], $f22=[$22])\n"
-operator|+
-literal|"      TableAccessRel(table=[[adhoc, star]])\n"
+literal|"    TableAccessRel(table=[[adhoc, star]])\n"
 argument_list|)
 argument_list|,
 name|containsString
 argument_list|(
-literal|"AggregateRel(group=[{0, 1}])\n"
+literal|"AggregateRel(group=[{2, 10}])\n"
 operator|+
-literal|"  ProjectRel(customer_id=[$2], brand_name=[$10])\n"
-operator|+
-literal|"    ProjectRel($f0=[$0], $f1=[$1], $f2=[$2], $f3=[$3], $f4=[$4], $f5=[$5], $f6=[$6], $f7=[$7], $f8=[$8], $f9=[$9], $f10=[$10], $f11=[$11], $f12=[$12], $f13=[$13], $f14=[$14], $f15=[$15], $f16=[$16], $f17=[$17], $f18=[$18], $f19=[$19], $f20=[$20], $f21=[$21], $f22=[$22])\n"
-operator|+
-literal|"      TableAccessRel(table=[[adhoc, star]])\n"
+literal|"  TableAccessRel(table=[[adhoc, star]])\n"
 argument_list|)
 argument_list|)
 argument_list|)

@@ -1608,6 +1608,7 @@ block|}
 comment|/** Returns the singleton instance of the query set. It is backed by a      * soft reference, so it may be freed if memory is short and no one is      * using it. */
 specifier|public
 specifier|static
+specifier|synchronized
 name|FoodMartQuerySet
 name|instance
 parameter_list|()

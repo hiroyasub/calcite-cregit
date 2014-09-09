@@ -155,7 +155,11 @@ name|OptiqAssert
 operator|.
 name|getConnection
 argument_list|(
-literal|false
+name|OptiqAssert
+operator|.
+name|SchemaSpec
+operator|.
+name|JDBC_FOODMART
 argument_list|)
 decl_stmt|;
 specifier|final

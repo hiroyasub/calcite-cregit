@@ -5212,7 +5212,11 @@ name|OptiqAssert
 operator|.
 name|getConnection
 argument_list|(
-literal|false
+name|OptiqAssert
+operator|.
+name|SchemaSpec
+operator|.
+name|JDBC_FOODMART
 argument_list|)
 decl_stmt|;
 specifier|final
@@ -8914,6 +8918,90 @@ operator|+
 literal|"          EnumerableCalcRel(expr#0..9=[{inputs}], expr#10=[CAST($t4):INTEGER], expr#11=[1997], expr#12=[=($t10, $t11)], proj#0..9=[{exprs}], $condition=[$t12])\n"
 operator|+
 literal|"            EnumerableTableAccessRel(table=[[foodmart2, time_by_day]])"
+argument_list|)
+operator|.
+name|runs
+argument_list|()
+expr_stmt|;
+block|}
+comment|/** Tests that a relatively complex query on the foodmart schema creates    * an in-memory aggregate table and then uses it. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFoodmartLattice
+parameter_list|()
+throws|throws
+name|IOException
+block|{
+comment|// 8: select ... from customer, sales, time ... group by ...
+specifier|final
+name|FoodmartTest
+operator|.
+name|FoodmartQuery
+name|query
+init|=
+name|FoodmartTest
+operator|.
+name|FoodMartQuerySet
+operator|.
+name|instance
+argument_list|()
+operator|.
+name|queries
+operator|.
+name|get
+argument_list|(
+literal|8
+argument_list|)
+decl_stmt|;
+name|OptiqAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|OptiqAssert
+operator|.
+name|Config
+operator|.
+name|JDBC_FOODMART_WITH_LATTICE
+argument_list|)
+operator|.
+name|pooled
+argument_list|()
+operator|.
+name|withSchema
+argument_list|(
+literal|"foodmart"
+argument_list|)
+operator|.
+name|query
+argument_list|(
+name|query
+operator|.
+name|sql
+argument_list|)
+operator|.
+name|enableMaterializations
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|"EnumerableCalcRel(expr#0..8=[{inputs}], c0=[$t3], c1=[$t2], c2=[$t1], c3=[$t0], c4=[$t8], c5=[$t8], c6=[$t6], c7=[$t4], c8=[$t7], c9=[$t5])\n"
+operator|+
+literal|"  EnumerableSortRel(sort0=[$3], sort1=[$2], sort2=[$1], sort3=[$8], dir0=[ASC-nulls-last], dir1=[ASC-nulls-last], dir2=[ASC-nulls-last], dir3=[ASC-nulls-last])\n"
+operator|+
+literal|"    EnumerableCalcRel(expr#0..8=[{inputs}], expr#9=['%Jeanne%'], expr#10=[LIKE($t8, $t9)], proj#0..8=[{exprs}], $condition=[$t10])\n"
+operator|+
+literal|"      EnumerableAggregateRel(group=[{0, 1, 2, 3, 4, 5, 6, 7, 8}])\n"
+operator|+
+literal|"        EnumerableCalcRel(expr#0..9=[{inputs}], expr#10=[CAST($t0):INTEGER], expr#11=[1997], expr#12=[=($t10, $t11)], $f0=[$t1], $f1=[$t2], $f2=[$t3], $f3=[$t4], $f4=[$t5], $f5=[$t6], $f6=[$t7], $f7=[$t8], $f8=[$t9], $f9=[$t0], $condition=[$t12])\n"
+operator|+
+literal|"          EnumerableTableAccessRel(table=[[foodmart, m{12, 18, 27, 28, 30, 35, 36, 37, 40, 46}]])"
 argument_list|)
 operator|.
 name|runs
@@ -22098,7 +22186,11 @@ name|OptiqAssert
 operator|.
 name|getConnection
 argument_list|(
-literal|false
+name|OptiqAssert
+operator|.
+name|SchemaSpec
+operator|.
+name|JDBC_FOODMART
 argument_list|)
 decl_stmt|;
 specifier|final

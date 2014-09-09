@@ -2429,7 +2429,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/** Flattens a list of AND nodes. */
+comment|/** Flattens a list of AND nodes.    *    *<p>Treats null nodes as literal TRUE (i.e. ignores them). */
 specifier|public
 specifier|static
 name|ImmutableList
@@ -2469,6 +2469,13 @@ range|:
 name|nodes
 control|)
 block|{
+if|if
+condition|(
+name|node
+operator|!=
+literal|null
+condition|)
+block|{
 name|addAnd
 argument_list|(
 name|builder
@@ -2476,6 +2483,7 @@ argument_list|,
 name|node
 argument_list|)
 expr_stmt|;
+block|}
 block|}
 return|return
 name|builder
@@ -3097,6 +3105,35 @@ expr_stmt|;
 block|}
 return|return
 name|newFieldCollations
+return|;
+block|}
+comment|/**    * Applies a mapping to an expression.    */
+specifier|public
+specifier|static
+name|RexNode
+name|apply
+parameter_list|(
+name|Mappings
+operator|.
+name|TargetMapping
+name|mapping
+parameter_list|,
+name|RexNode
+name|node
+parameter_list|)
+block|{
+return|return
+name|node
+operator|.
+name|accept
+argument_list|(
+name|RexPermuteInputsShuttle
+operator|.
+name|of
+argument_list|(
+name|mapping
+argument_list|)
+argument_list|)
 return|;
 block|}
 comment|/**    * Applies a shuttle to an array of expressions. Creates a copy first.    *    * @param shuttle Shuttle    * @param exprs   Array of expressions    */

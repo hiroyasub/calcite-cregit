@@ -551,15 +551,6 @@ condition|)
 block|{
 return|return;
 block|}
-name|System
-operator|.
-name|out
-operator|.
-name|println
-argument_list|(
-name|aggregateTable
-argument_list|)
-expr_stmt|;
 specifier|final
 name|double
 name|rowCount
