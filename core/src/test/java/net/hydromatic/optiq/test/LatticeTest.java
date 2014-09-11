@@ -731,11 +731,16 @@ expr_stmt|;
 name|String
 name|s
 init|=
+name|Util
+operator|.
+name|toLinux
+argument_list|(
 name|RelOptUtil
 operator|.
 name|toString
 argument_list|(
 name|relNode
+argument_list|)
 argument_list|)
 decl_stmt|;
 name|assertThat
