@@ -1078,7 +1078,7 @@ specifier|public
 name|TrimResult
 name|trimFields
 parameter_list|(
-name|ProjectRel
+name|ProjectRelBase
 name|project
 parameter_list|,
 name|BitSet
@@ -1621,7 +1621,7 @@ specifier|public
 name|TrimResult
 name|trimFields
 parameter_list|(
-name|FilterRel
+name|FilterRelBase
 name|filter
 parameter_list|,
 name|BitSet
@@ -3110,7 +3110,7 @@ specifier|public
 name|TrimResult
 name|trimFields
 parameter_list|(
-name|AggregateRel
+name|AggregateRelBase
 name|aggregate
 parameter_list|,
 name|BitSet
