@@ -40,50 +40,32 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Element that describes a star schema and provides a framework for defining,  * recognizing, and recommending materialized views at various levels of  * aggregation.  *  * @see JsonRoot Description of schema elements  */
+comment|/**  * Materialized view within a {@link net.hydromatic.optiq.model.JsonLattice}.  *  *<p>A tile is defined in terms of its dimensionality (the grouping columns,  * drawn from the lattice) and measures (aggregate functions applied to  * lattice columns).  *  * @see JsonRoot Description of schema elements  */
 end_comment
 
 begin_class
 specifier|public
 class|class
-name|JsonLattice
+name|JsonTile
 block|{
-specifier|public
-name|String
-name|name
-decl_stmt|;
-specifier|public
-name|String
-name|sql
-decl_stmt|;
-comment|/** Whether to create in-memory materialized aggregates on demand.    *    *<p>Default is true. */
-specifier|public
-name|boolean
-name|auto
-init|=
-literal|true
-decl_stmt|;
-comment|/** List of materialized aggregates to create up front. */
+comment|/** List of grouping columns that define this tile.    *    *<p>Elements are either strings (column names unique within the lattice)    * or string lists (pairs of table alias and column name). */
 specifier|public
 specifier|final
 name|List
-argument_list|<
-name|JsonTile
-argument_list|>
-name|tiles
+name|dimensions
 init|=
 name|Lists
 operator|.
 name|newArrayList
 argument_list|()
 decl_stmt|;
-comment|/** List of measures that a tile should have by default.    *    *<p>A tile can define its own measures, including measures not in this list.    *    *<p>The default list is just count. */
+comment|/** List of measures in this tile.    *    *<p>If not specified, uses {@link JsonLattice#defaultMeasures}.    */
 specifier|public
 name|List
 argument_list|<
 name|JsonMeasure
 argument_list|>
-name|defaultMeasures
+name|measures
 decl_stmt|;
 specifier|public
 name|void
@@ -101,71 +83,11 @@ name|this
 argument_list|)
 expr_stmt|;
 block|}
-annotation|@
-name|Override
-specifier|public
-name|String
-name|toString
-parameter_list|()
-block|{
-return|return
-literal|"JsonLattice(name="
-operator|+
-name|name
-operator|+
-literal|", sql="
-operator|+
-name|sql
-operator|+
-literal|")"
-return|;
-block|}
-specifier|public
-name|void
-name|visitChildren
-parameter_list|(
-name|ModelHandler
-name|modelHandler
-parameter_list|)
-block|{
-for|for
-control|(
-name|JsonMeasure
-name|jsonMeasure
-range|:
-name|defaultMeasures
-control|)
-block|{
-name|jsonMeasure
-operator|.
-name|accept
-argument_list|(
-name|modelHandler
-argument_list|)
-expr_stmt|;
-block|}
-for|for
-control|(
-name|JsonTile
-name|jsonTile
-range|:
-name|tiles
-control|)
-block|{
-name|jsonTile
-operator|.
-name|accept
-argument_list|(
-name|modelHandler
-argument_list|)
-expr_stmt|;
-block|}
-block|}
 block|}
 end_class
 
 begin_comment
-comment|// End JsonLattice.java
+comment|// End JsonTile.java
 end_comment
 
 end_unit

@@ -338,6 +338,9 @@ name|viewSchemaPath
 parameter_list|,
 name|String
 name|tableName
+parameter_list|,
+name|boolean
+name|create
 parameter_list|)
 block|{
 specifier|final
@@ -380,6 +383,16 @@ condition|)
 block|{
 return|return
 name|existingKey
+return|;
+block|}
+if|if
+condition|(
+operator|!
+name|create
+condition|)
+block|{
+return|return
+literal|null
 return|;
 block|}
 specifier|final
@@ -843,6 +856,115 @@ name|materialization
 operator|.
 name|materializedTable
 return|;
+block|}
+return|return
+literal|null
+return|;
+block|}
+comment|/**    * Defines a tile.    *    *<p>Setting the {@code create} flag to false prevents a materialization    * from being created if one does not exist. Critically, it is set to false    * during the recursive SQL that populates a materialization. Otherwise a    * materialization would try to create itself to populate itself!    */
+specifier|public
+name|OptiqSchema
+operator|.
+name|TableEntry
+name|defineTile
+parameter_list|(
+name|Lattice
+name|lattice
+parameter_list|,
+name|BitSet
+name|groupSet
+parameter_list|,
+name|List
+argument_list|<
+name|Lattice
+operator|.
+name|Measure
+argument_list|>
+name|measureList
+parameter_list|,
+name|OptiqSchema
+name|schema
+parameter_list|,
+name|boolean
+name|create
+parameter_list|)
+block|{
+comment|// FIXME This is all upside down. We are looking for a materialization
+comment|// first. But we should define a tile first, then find out whether an
+comment|// exact materialization exists, then find out whether an acceptable
+comment|// approximate materialization exists, and if it does not, then maybe
+comment|// create a materialization.
+comment|//
+comment|// The SQL should not be part of the key of the materialization. There are
+comment|// better, more concise keys. And especially, check that we are not using
+comment|// that SQL to populate the materialization. There may be finer-grained
+comment|// materializations that we can roll up. (Maybe the SQL on the fact table
+comment|// gets optimized to use those materializations.)
+name|String
+name|sql
+init|=
+name|lattice
+operator|.
+name|sql
+argument_list|(
+name|groupSet
+argument_list|,
+name|measureList
+argument_list|)
+decl_stmt|;
+specifier|final
+name|MaterializationKey
+name|materializationKey
+init|=
+name|defineMaterialization
+argument_list|(
+name|schema
+argument_list|,
+name|sql
+argument_list|,
+name|schema
+operator|.
+name|path
+argument_list|(
+literal|null
+argument_list|)
+argument_list|,
+literal|"m"
+operator|+
+name|groupSet
+argument_list|,
+name|create
+argument_list|)
+decl_stmt|;
+if|if
+condition|(
+name|materializationKey
+operator|!=
+literal|null
+condition|)
+block|{
+specifier|final
+name|OptiqSchema
+operator|.
+name|TableEntry
+name|tableEntry
+init|=
+name|checkValid
+argument_list|(
+name|materializationKey
+argument_list|)
+decl_stmt|;
+if|if
+condition|(
+name|tableEntry
+operator|!=
+literal|null
+condition|)
+block|{
+return|return
+name|tableEntry
+return|;
+block|}
 block|}
 return|return
 literal|null

@@ -338,6 +338,11 @@ argument_list|)
 throw|;
 block|}
 block|}
+name|connection
+operator|.
+name|init
+argument_list|()
+expr_stmt|;
 block|}
 block|}
 return|;

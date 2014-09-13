@@ -3226,6 +3226,8 @@ operator|+
 literal|"join \"foodmart\".\"product\" as p using (\"product_id\")\n"
 operator|+
 literal|"join \"foodmart\".\"product_class\" as pc on p.\"product_class_id\" = pc.\"product_class_id\""
+argument_list|,
+literal|true
 argument_list|)
 argument_list|)
 expr_stmt|;

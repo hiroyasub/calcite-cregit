@@ -193,25 +193,77 @@ name|name
 parameter_list|,
 name|String
 name|sql
+parameter_list|,
+name|String
+modifier|...
+name|extras
 parameter_list|)
 block|{
-return|return
-name|modelWithLattices
+specifier|final
+name|StringBuilder
+name|buf
+init|=
+operator|new
+name|StringBuilder
 argument_list|(
 literal|"{ name: '"
-operator|+
+argument_list|)
+operator|.
+name|append
+argument_list|(
 name|name
-operator|+
+argument_list|)
+operator|.
+name|append
+argument_list|(
 literal|"', sql: "
-operator|+
+argument_list|)
+operator|.
+name|append
+argument_list|(
 name|TestUtil
 operator|.
 name|escapeString
 argument_list|(
 name|sql
 argument_list|)
-operator|+
+argument_list|)
+decl_stmt|;
+for|for
+control|(
+name|String
+name|extra
+range|:
+name|extras
+control|)
+block|{
+name|buf
+operator|.
+name|append
+argument_list|(
+literal|", "
+argument_list|)
+operator|.
+name|append
+argument_list|(
+name|extra
+argument_list|)
+expr_stmt|;
+block|}
+name|buf
+operator|.
+name|append
+argument_list|(
 literal|"}"
+argument_list|)
+expr_stmt|;
+return|return
+name|modelWithLattices
+argument_list|(
+name|buf
+operator|.
+name|toString
+argument_list|()
 argument_list|)
 return|;
 block|}
@@ -863,25 +915,150 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Tests 2-way join query on a pre-defined aggregate table. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testLatticeWithPreDefinedTiles
+parameter_list|()
+block|{
+name|foodmartModel
+argument_list|(
+literal|" auto: false,\n"
+operator|+
+literal|"  defaultMeasures: [ {\n"
+operator|+
+literal|"    agg: 'count'\n"
+operator|+
+literal|"  } ],\n"
+operator|+
+literal|"  tiles: [ {\n"
+operator|+
+literal|"    dimensions: [ 'the_year', ['t', 'quarter'] ],\n"
+operator|+
+literal|"    measures: [ {\n"
+operator|+
+literal|"      agg: 'count'\n"
+operator|+
+literal|"    }, {\n"
+operator|+
+literal|"      agg: 'sum',\n"
+operator|+
+literal|"      args: 'unit_sales'\n"
+operator|+
+literal|"    } ]\n"
+operator|+
+literal|"  } ]\n"
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select distinct t.\"the_year\", t.\"quarter\"\n"
+operator|+
+literal|"from \"foodmart\".\"sales_fact_1997\" as s\n"
+operator|+
+literal|"join \"foodmart\".\"time_by_day\" as t using (\"time_id\")\n"
+argument_list|)
+operator|.
+name|enableMaterializations
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|"EnumerableTableAccessRel(table=[[adhoc, m{27, 31}"
+argument_list|)
+operator|.
+name|returnsCount
+argument_list|(
+literal|4
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** A tile with no measures should inherit default measure list from the    * lattice. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testTileWithNoMeasures
+parameter_list|()
+block|{
+comment|// TODO
+block|}
+comment|/** A lattice with no default measure list should get "count(*)" is its    * default measure. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testLatticeWithNoMeasures
+parameter_list|()
+block|{
+comment|// TODO
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDimensionIsInvalidColumn
+parameter_list|()
+block|{
+comment|// TODO
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMeasureArgIsInvalidColumn
+parameter_list|()
+block|{
+comment|// TODO
+block|}
+comment|/** It is an error for "customer_id" to be a measure arg, because is not a    * unique alias. Both "c" and "t" have "customer_id". */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMeasureArgIsNotUniqueAlias
+parameter_list|()
+block|{
+comment|// TODO
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMeasureAggIsInvalid
+parameter_list|()
+block|{
+comment|// TODO
+block|}
 specifier|private
 name|OptiqAssert
 operator|.
 name|AssertThat
 name|foodmartModel
-parameter_list|()
+parameter_list|(
+name|String
+modifier|...
+name|extras
+parameter_list|)
 block|{
 return|return
 name|modelWithLattice
 argument_list|(
 literal|"star"
 argument_list|,
-literal|"select 1 from \"foodmart\".\"sales_fact_1997\" as s\n"
+literal|"select 1 from \"foodmart\".\"sales_fact_1997\" as \"s\"\n"
 operator|+
-literal|"join \"foodmart\".\"product\" as p using (\"product_id\")\n"
+literal|"join \"foodmart\".\"product\" as \"p\" using (\"product_id\")\n"
 operator|+
-literal|"join \"foodmart\".\"time_by_day\" as t using (\"time_id\")\n"
+literal|"join \"foodmart\".\"time_by_day\" as \"t\" using (\"time_id\")\n"
 operator|+
-literal|"join \"foodmart\".\"product_class\" as pc on p.\"product_class_id\" = pc.\"product_class_id\""
+literal|"join \"foodmart\".\"product_class\" as \"pc\" on \"p\".\"product_class_id\" = \"pc\".\"product_class_id\""
+argument_list|,
+name|extras
 argument_list|)
 return|;
 block|}
