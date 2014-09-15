@@ -123,7 +123,7 @@ name|?
 extends|extends
 name|ProjectRelBase
 argument_list|>
-name|projectRelBaseClass
+name|projectClass
 parameter_list|,
 name|RelFactories
 operator|.
@@ -139,7 +139,7 @@ name|filterClass
 argument_list|,
 name|operand
 argument_list|(
-name|projectRelBaseClass
+name|projectClass
 argument_list|,
 name|any
 argument_list|()
@@ -192,6 +192,29 @@ argument_list|(
 literal|1
 argument_list|)
 decl_stmt|;
+if|if
+condition|(
+name|RexOver
+operator|.
+name|containsOver
+argument_list|(
+name|projRel
+operator|.
+name|getProjects
+argument_list|()
+argument_list|,
+literal|null
+argument_list|)
+condition|)
+block|{
+comment|// In general a filter cannot be pushed below a windowing calculation.
+comment|// Applying the filter before the aggregation function changes
+comment|// the results of the windowing invocation.
+comment|//
+comment|// When the filter is on the PARTITION BY expression of the OVER clause
+comment|// it can be pushed down. For now we don't support this.
+return|return;
+block|}
 comment|// convert the filter to one that references the child of the project
 name|RexNode
 name|newCondition

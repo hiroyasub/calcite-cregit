@@ -4226,6 +4226,94 @@ name|transitiveInference
 argument_list|()
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testPushFilterWithRank
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+name|HepProgram
+name|program
+init|=
+operator|new
+name|HepProgramBuilder
+argument_list|()
+operator|.
+name|addRuleInstance
+argument_list|(
+name|PushFilterPastProjectRule
+operator|.
+name|INSTANCE
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+name|checkPlanning
+argument_list|(
+name|program
+argument_list|,
+literal|"select e1.ename, r\n"
+operator|+
+literal|"from (\n"
+operator|+
+literal|"  select ename, "
+operator|+
+literal|"  rank() over(partition by  deptno order by sal) as r "
+operator|+
+literal|"  from emp) e1\n"
+operator|+
+literal|"where r< 2"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testPushFilterWithRankExpr
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+name|HepProgram
+name|program
+init|=
+operator|new
+name|HepProgramBuilder
+argument_list|()
+operator|.
+name|addRuleInstance
+argument_list|(
+name|PushFilterPastProjectRule
+operator|.
+name|INSTANCE
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+name|checkPlanning
+argument_list|(
+name|program
+argument_list|,
+literal|"select e1.ename, r\n"
+operator|+
+literal|"from (\n"
+operator|+
+literal|"  select ename,\n"
+operator|+
+literal|"  rank() over(partition by  deptno order by sal) + 1 as r "
+operator|+
+literal|"  from emp) e1\n"
+operator|+
+literal|"where r< 2"
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 end_class
 
