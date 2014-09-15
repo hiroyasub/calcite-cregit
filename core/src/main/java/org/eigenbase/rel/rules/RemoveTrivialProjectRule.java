@@ -74,7 +74,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Rule which, given a {@link ProjectRelBase} node which merely returns its input,  * converts the node into its child.  *  *<p>For example,<code>ProjectRel(ArrayReader(a), {$input0})</code> becomes  *<code>ArrayReader(a)</code>.</p>  *  * @see org.eigenbase.rel.rules.RemoveTrivialCalcRule  */
+comment|/**  * Rule that, given a {@link ProjectRelBase} node that merely returns its input,  * converts the node into its child.  *  *<p>For example,<code>ProjectRel(ArrayReader(a), {$input0})</code> becomes  *<code>ArrayReader(a)</code>.</p>  *  * @see org.eigenbase.rel.rules.RemoveTrivialCalcRule  * @see org.eigenbase.rel.rules.MergeProjectRule  */
 end_comment
 
 begin_class
@@ -200,15 +200,7 @@ name|call
 operator|.
 name|transformTo
 argument_list|(
-name|convert
-argument_list|(
 name|child
-argument_list|,
-name|project
-operator|.
-name|getTraitSet
-argument_list|()
-argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
