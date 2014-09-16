@@ -77,7 +77,7 @@ name|common
 operator|.
 name|collect
 operator|.
-name|Maps
+name|*
 import|;
 end_import
 
@@ -127,6 +127,20 @@ init|=
 name|Maps
 operator|.
 name|newHashMap
+argument_list|()
+decl_stmt|;
+specifier|final
+name|List
+argument_list|<
+name|MaterializationService
+operator|.
+name|TileKey
+argument_list|>
+name|tileKeys
+init|=
+name|Lists
+operator|.
+name|newArrayList
 argument_list|()
 decl_stmt|;
 comment|/** A query materialized in a table, so that reading from the table gives the    * same results as executing the query. */

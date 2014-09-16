@@ -41,7 +41,7 @@ name|eigenbase
 operator|.
 name|rel
 operator|.
-name|AggregateCall
+name|RelNode
 import|;
 end_import
 
@@ -51,9 +51,9 @@ name|org
 operator|.
 name|eigenbase
 operator|.
-name|rel
+name|util
 operator|.
-name|RelNode
+name|Pair
 import|;
 end_import
 
@@ -122,7 +122,7 @@ specifier|public
 class|class
 name|RelOptLattice
 block|{
-specifier|private
+specifier|public
 specifier|final
 name|Lattice
 name|lattice
@@ -196,11 +196,18 @@ name|starRelOptTable
 argument_list|)
 return|;
 block|}
-comment|/** Retrieves a materialized table that will satisfy an aggregate query on    * the star table.    *    *<p>The current implementation creates a materialization and populates it,    * provided that {@link Lattice#auto} is true.    *    *<p>Future implementations might return materializations at a different    * level of aggregation, from which the desired result can be obtained by    * rolling up.    *    * @param planner Current planner    * @param groupSet Grouping key    * @param aggCallList Aggregate functions    * @return Materialized table    */
+comment|/** Retrieves a materialized table that will satisfy an aggregate query on    * the star table.    *    *<p>The current implementation creates a materialization and populates it,    * provided that {@link Lattice#auto} is true.    *    *<p>Future implementations might return materializations at a different    * level of aggregation, from which the desired result can be obtained by    * rolling up.    *    * @param planner Current planner    * @param groupSet Grouping key    * @param measureList Calls to aggregate functions    * @return Materialized table    */
 specifier|public
+name|Pair
+argument_list|<
 name|OptiqSchema
 operator|.
 name|TableEntry
+argument_list|,
+name|MaterializationService
+operator|.
+name|TileKey
+argument_list|>
 name|getAggregate
 parameter_list|(
 name|RelOptPlanner
@@ -211,9 +218,11 @@ name|groupSet
 parameter_list|,
 name|List
 argument_list|<
-name|AggregateCall
+name|Lattice
+operator|.
+name|Measure
 argument_list|>
-name|aggCallList
+name|measureList
 parameter_list|)
 block|{
 specifier|final
@@ -275,22 +284,6 @@ argument_list|(
 name|OptiqSchema
 operator|.
 name|class
-argument_list|)
-decl_stmt|;
-specifier|final
-name|List
-argument_list|<
-name|Lattice
-operator|.
-name|Measure
-argument_list|>
-name|measureList
-init|=
-name|lattice
-operator|.
-name|toMeasures
-argument_list|(
-name|aggCallList
 argument_list|)
 decl_stmt|;
 return|return

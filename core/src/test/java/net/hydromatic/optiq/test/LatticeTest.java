@@ -937,17 +937,7 @@ literal|"  tiles: [ {\n"
 operator|+
 literal|"    dimensions: [ 'the_year', ['t', 'quarter'] ],\n"
 operator|+
-literal|"    measures: [ {\n"
-operator|+
-literal|"      agg: 'count'\n"
-operator|+
-literal|"    }, {\n"
-operator|+
-literal|"      agg: 'sum',\n"
-operator|+
-literal|"      args: 'unit_sales'\n"
-operator|+
-literal|"    } ]\n"
+literal|"    measures: [ ]\n"
 operator|+
 literal|"  } ]\n"
 argument_list|)
@@ -975,6 +965,170 @@ name|returnsCount
 argument_list|(
 literal|4
 argument_list|)
+expr_stmt|;
+block|}
+comment|/** A query that uses a pre-defined aggregate table, at the same    *  granularity but fewer calls to aggregate functions. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testLatticeWithPreDefinedTilesFewerMeasures
+parameter_list|()
+block|{
+name|foodmartModel
+argument_list|(
+literal|" auto: false,\n"
+operator|+
+literal|"  defaultMeasures: [ {\n"
+operator|+
+literal|"    agg: 'count'\n"
+operator|+
+literal|"  } ],\n"
+operator|+
+literal|"  tiles: [ {\n"
+operator|+
+literal|"    dimensions: [ 'the_year', ['t', 'quarter'] ],\n"
+operator|+
+literal|"    measures: [ {\n"
+operator|+
+literal|"      agg: 'sum',\n"
+operator|+
+literal|"      args: 'unit_sales'\n"
+operator|+
+literal|"    }, {\n"
+operator|+
+literal|"      agg: 'sum',\n"
+operator|+
+literal|"      args: 'store_sales'\n"
+operator|+
+literal|"    }, {\n"
+operator|+
+literal|"      agg: 'count'\n"
+operator|+
+literal|"    } ]\n"
+operator|+
+literal|"  } ]\n"
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select t.\"the_year\", t.\"quarter\", count(*) as c\n"
+operator|+
+literal|"from \"foodmart\".\"sales_fact_1997\" as s\n"
+operator|+
+literal|"join \"foodmart\".\"time_by_day\" as t using (\"time_id\")\n"
+operator|+
+literal|"group by t.\"the_year\", t.\"quarter\""
+argument_list|)
+operator|.
+name|enableMaterializations
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|"EnumerableCalcRel(expr#0..4=[{inputs}], proj#0..2=[{exprs}])\n"
+operator|+
+literal|"  EnumerableTableAccessRel(table=[[adhoc, m{27, 31}"
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"the_year=1997; quarter=Q1; C=21588"
+argument_list|,
+literal|"the_year=1997; quarter=Q2; C=20368"
+argument_list|,
+literal|"the_year=1997; quarter=Q3; C=21453"
+argument_list|,
+literal|"the_year=1997; quarter=Q4; C=23428"
+argument_list|)
+operator|.
+name|sameResultWithMaterializationsDisabled
+argument_list|()
+expr_stmt|;
+block|}
+comment|/** Tests a query that uses a pre-defined aggregate table at a lower    * granularity. Includes a measure computed from a grouping column, a measure    * based on COUNT rolled up using SUM, and an expression on a measure. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testLatticeWithPreDefinedTilesRollUp
+parameter_list|()
+block|{
+name|foodmartModel
+argument_list|(
+literal|" auto: false,\n"
+operator|+
+literal|"  defaultMeasures: [ {\n"
+operator|+
+literal|"    agg: 'count'\n"
+operator|+
+literal|"  } ],\n"
+operator|+
+literal|"  tiles: [ {\n"
+operator|+
+literal|"    dimensions: [ 'the_year', ['t', 'quarter'] ],\n"
+operator|+
+literal|"    measures: [ {\n"
+operator|+
+literal|"      agg: 'sum',\n"
+operator|+
+literal|"      args: 'unit_sales'\n"
+operator|+
+literal|"    }, {\n"
+operator|+
+literal|"      agg: 'sum',\n"
+operator|+
+literal|"      args: 'store_sales'\n"
+operator|+
+literal|"    }, {\n"
+operator|+
+literal|"      agg: 'count'\n"
+operator|+
+literal|"    } ]\n"
+operator|+
+literal|"  } ]\n"
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select t.\"the_year\",\n"
+operator|+
+literal|"  count(*) as c,\n"
+operator|+
+literal|"  min(\"quarter\") as q,\n"
+operator|+
+literal|"  sum(\"unit_sales\") * 10 as us\n"
+operator|+
+literal|"from \"foodmart\".\"sales_fact_1997\" as s\n"
+operator|+
+literal|"join \"foodmart\".\"time_by_day\" as t using (\"time_id\")\n"
+operator|+
+literal|"group by t.\"the_year\""
+argument_list|)
+operator|.
+name|enableMaterializations
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|"EnumerableCalcRel(expr#0..3=[{inputs}], expr#4=[10], expr#5=[*($t3, $t4)], proj#0..2=[{exprs}], US=[$t5])\n"
+operator|+
+literal|"  EnumerableAggregateRel(group=[{0}], agg#0=[$SUM0($2)], Q=[MIN($1)], agg#2=[$SUM0($4)])\n"
+operator|+
+literal|"    EnumerableTableAccessRel(table=[[adhoc, m{27, 31}"
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"the_year=1997; C=86837; Q=Q1; US=2667730.0000"
+argument_list|)
+operator|.
+name|sameResultWithMaterializationsDisabled
+argument_list|()
 expr_stmt|;
 block|}
 comment|/** A tile with no measures should inherit default measure list from the    * lattice. */

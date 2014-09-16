@@ -498,6 +498,8 @@ name|defineMaterialization
 argument_list|(
 name|schema
 argument_list|,
+literal|null
+argument_list|,
 name|viewSql
 argument_list|,
 name|schemaPath
