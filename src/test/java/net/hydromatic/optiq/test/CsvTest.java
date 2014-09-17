@@ -414,6 +414,23 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testSelectSingleProject2
+parameter_list|()
+throws|throws
+name|SQLException
+block|{
+name|checkSql
+argument_list|(
+literal|"smart"
+argument_list|,
+literal|"select name from COMPRESSED_EMPS"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testCustomTable
 parameter_list|()
 throws|throws
