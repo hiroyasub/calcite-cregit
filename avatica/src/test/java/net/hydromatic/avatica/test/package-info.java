@@ -4,16 +4,18 @@ comment|/*  * Licensed to the Apache Software Foundation (ASF) under one or more
 end_comment
 
 begin_comment
-comment|/**  * Provides utility classes.  */
+comment|/**  * Avatica tests.  */
 end_comment
 
 begin_package
 package|package
-name|org
+name|net
 operator|.
-name|eigenbase
+name|hydromatic
 operator|.
-name|util
+name|avatica
+operator|.
+name|test
 package|;
 end_package
 
