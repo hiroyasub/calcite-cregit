@@ -2256,6 +2256,26 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/OPTIQ-412">OPTIQ-412</a>,    * "RelFieldTrimmer: when trimming SortRel, the collation and trait set don't    * match". */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSortWithTrim
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|assertConvertsTo
+argument_list|(
+literal|"select ename from (select * from emp order by sal) a"
+argument_list|,
+literal|"${plan}"
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+block|}
 comment|/**    * Visitor that checks that every {@link RelNode} in a tree is valid.    *    * @see RelNode#isValid(boolean)    */
 specifier|public
 specifier|static
