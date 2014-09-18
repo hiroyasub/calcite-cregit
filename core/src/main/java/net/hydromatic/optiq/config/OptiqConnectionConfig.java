@@ -112,6 +112,23 @@ name|boolean
 name|spark
 parameter_list|()
 function_decl|;
+comment|/** @see net.hydromatic.optiq.config.OptiqConnectionProperty#TYPE_SYSTEM */
+parameter_list|<
+name|T
+parameter_list|>
+name|T
+name|typeSystem
+parameter_list|(
+name|Class
+argument_list|<
+name|T
+argument_list|>
+name|typeSystemClass
+parameter_list|,
+name|T
+name|defaultTypeSystem
+parameter_list|)
+function_decl|;
 block|}
 end_interface
 

@@ -71,6 +71,11 @@ interface|interface
 name|RelDataTypeFactory
 block|{
 comment|//~ Methods ----------------------------------------------------------------
+comment|/**    * Returns the type system.    */
+name|RelDataTypeSystem
+name|getTypeSystem
+parameter_list|()
+function_decl|;
 comment|/**    * Creates a type which corresponds to a Java class.    *    * @param clazz the Java class used to define the type    * @return canonical Java type descriptor    */
 name|RelDataType
 name|createJavaType

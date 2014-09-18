@@ -101,7 +101,11 @@ name|typeFactory
 init|=
 operator|new
 name|SqlTypeFactoryImpl
-argument_list|()
+argument_list|(
+name|RelDataTypeSystem
+operator|.
+name|DEFAULT
+argument_list|)
 decl_stmt|;
 name|RelDataType
 name|t1

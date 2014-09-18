@@ -71,6 +71,8 @@ block|,
 name|STRING
 block|,
 name|ENUM
+block|,
+name|PLUGIN
 block|;
 specifier|public
 name|boolean
@@ -95,6 +97,9 @@ name|Boolean
 return|;
 case|case
 name|STRING
+case|:
+case|case
+name|PLUGIN
 case|:
 return|return
 name|defaultValue

@@ -1199,7 +1199,12 @@ argument_list|(
 name|interval
 operator|.
 name|getFractionalSecondPrecision
+argument_list|(
+name|typeFactory
+operator|.
+name|getTypeSystem
 argument_list|()
+argument_list|)
 argument_list|)
 argument_list|)
 argument_list|)

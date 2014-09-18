@@ -364,7 +364,15 @@ name|javaTypeFactory
 init|=
 operator|new
 name|JavaTypeFactoryImpl
+argument_list|(
+name|rexBuilder
+operator|.
+name|getTypeFactory
 argument_list|()
+operator|.
+name|getTypeSystem
+argument_list|()
+argument_list|)
 decl_stmt|;
 specifier|final
 name|BlockBuilder

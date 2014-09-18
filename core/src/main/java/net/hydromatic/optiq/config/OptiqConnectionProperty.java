@@ -227,6 +227,18 @@ name|STRING
 argument_list|,
 literal|null
 argument_list|)
+block|,
+comment|/** Type system. The name of a class that implements    * {@code org.eigenbase.reltype.RelDataTypeSystem} and has a public default    * constructor or an {@code INSTANCE} constant. */
+name|TYPE_SYSTEM
+argument_list|(
+literal|"typeSystem"
+argument_list|,
+name|Type
+operator|.
+name|PLUGIN
+argument_list|,
+literal|null
+argument_list|)
 block|;
 specifier|private
 specifier|final

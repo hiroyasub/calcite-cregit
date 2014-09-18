@@ -159,7 +159,11 @@ name|typeFactory
 operator|=
 operator|new
 name|JavaTypeFactoryImpl
-argument_list|()
+argument_list|(
+name|RelDataTypeSystem
+operator|.
+name|DEFAULT
+argument_list|)
 expr_stmt|;
 name|rexBuilder
 operator|=

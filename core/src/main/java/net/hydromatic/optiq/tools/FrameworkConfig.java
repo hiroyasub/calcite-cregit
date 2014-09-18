@@ -83,6 +83,18 @@ name|org
 operator|.
 name|eigenbase
 operator|.
+name|reltype
+operator|.
+name|RelDataTypeSystem
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
 name|sql
 operator|.
 name|SqlOperatorTable
@@ -130,7 +142,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Interface that describes how to configure planning sessions generated  * using the Frameworks tools.  */
+comment|/**  * Interface that describes how to configure planning sessions generated  * using the Frameworks tools.  *  * @see Frameworks#newConfigBuilder()  */
 end_comment
 
 begin_interface
@@ -187,6 +199,11 @@ function_decl|;
 comment|/**    * Returns the PlannerContext that should be made available during planning by    * calling {@link org.eigenbase.relopt.RelOptPlanner#getContext()}.    */
 name|Context
 name|getContext
+parameter_list|()
+function_decl|;
+comment|/**    * Returns the type system.    */
+name|RelDataTypeSystem
+name|getTypeSystem
 parameter_list|()
 function_decl|;
 block|}

@@ -19610,7 +19610,6 @@ argument_list|(
 name|type
 argument_list|)
 operator|&&
-operator|(
 name|type
 operator|.
 name|getSqlTypeName
@@ -19619,12 +19618,12 @@ operator|!=
 name|SqlTypeName
 operator|.
 name|BIGINT
-operator|)
 condition|)
 block|{
 return|return
-operator|new
-name|BasicSqlType
+name|typeFactory
+operator|.
+name|createSqlType
 argument_list|(
 name|SqlTypeName
 operator|.
@@ -19641,7 +19640,6 @@ argument_list|(
 name|type
 argument_list|)
 operator|&&
-operator|(
 name|type
 operator|.
 name|getSqlTypeName
@@ -19650,12 +19648,12 @@ operator|!=
 name|SqlTypeName
 operator|.
 name|DOUBLE
-operator|)
 condition|)
 block|{
 return|return
-operator|new
-name|BasicSqlType
+name|typeFactory
+operator|.
+name|createSqlType
 argument_list|(
 name|SqlTypeName
 operator|.

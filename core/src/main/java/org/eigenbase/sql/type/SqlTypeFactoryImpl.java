@@ -74,7 +74,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * SqlTypeFactoryImpl provides a default implementation of {@link  * RelDataTypeFactory} which supports SQL types.  */
+comment|/**  * SqlTypeFactoryImpl provides a default implementation of  * {@link RelDataTypeFactory} which supports SQL types.  */
 end_comment
 
 begin_class
@@ -87,8 +87,16 @@ block|{
 comment|//~ Constructors -----------------------------------------------------------
 specifier|public
 name|SqlTypeFactoryImpl
-parameter_list|()
+parameter_list|(
+name|RelDataTypeSystem
+name|typeSystem
+parameter_list|)
 block|{
+name|super
+argument_list|(
+name|typeSystem
+argument_list|)
+expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
 comment|// implement RelDataTypeFactory
@@ -113,10 +121,12 @@ name|createSqlType
 argument_list|(
 name|typeName
 argument_list|,
-name|typeName
+name|typeSystem
 operator|.
 name|getDefaultPrecision
-argument_list|()
+argument_list|(
+name|typeName
+argument_list|)
 argument_list|)
 return|;
 block|}
@@ -131,6 +141,8 @@ init|=
 operator|new
 name|BasicSqlType
 argument_list|(
+name|typeSystem
+argument_list|,
 name|typeName
 argument_list|)
 decl_stmt|;
@@ -201,6 +213,8 @@ init|=
 operator|new
 name|BasicSqlType
 argument_list|(
+name|typeSystem
+argument_list|,
 name|typeName
 argument_list|,
 name|precision
@@ -265,6 +279,8 @@ init|=
 operator|new
 name|BasicSqlType
 argument_list|(
+name|typeSystem
+argument_list|,
 name|typeName
 argument_list|,
 name|precision
@@ -407,6 +423,8 @@ init|=
 operator|new
 name|IntervalSqlType
 argument_list|(
+name|typeSystem
+argument_list|,
 name|intervalQualifier
 argument_list|,
 literal|false
@@ -1563,6 +1581,24 @@ operator|.
 name|getScale
 argument_list|()
 decl_stmt|;
+specifier|final
+name|int
+name|maxPrecision
+init|=
+name|typeSystem
+operator|.
+name|getMaxNumericPrecision
+argument_list|()
+decl_stmt|;
+specifier|final
+name|int
+name|maxScale
+init|=
+name|typeSystem
+operator|.
+name|getMaxNumericScale
+argument_list|()
+decl_stmt|;
 name|int
 name|dout
 init|=
@@ -1587,9 +1623,7 @@ name|min
 argument_list|(
 name|dout
 argument_list|,
-name|SqlTypeName
-operator|.
-name|MAX_NUMERIC_PRECISION
+name|maxPrecision
 argument_list|)
 expr_stmt|;
 name|int
@@ -1612,9 +1646,7 @@ name|min
 argument_list|(
 name|scale
 argument_list|,
-name|SqlTypeName
-operator|.
-name|MAX_NUMERIC_PRECISION
+name|maxPrecision
 operator|-
 name|dout
 argument_list|)
@@ -1627,9 +1659,7 @@ name|min
 argument_list|(
 name|scale
 argument_list|,
-name|SqlTypeName
-operator|.
-name|MAX_NUMERIC_SCALE
+name|maxScale
 argument_list|)
 expr_stmt|;
 name|int
@@ -1642,9 +1672,7 @@ decl_stmt|;
 assert|assert
 name|precision
 operator|<=
-name|SqlTypeName
-operator|.
-name|MAX_NUMERIC_PRECISION
+name|maxPrecision
 assert|;
 assert|assert
 name|precision
@@ -2077,6 +2105,8 @@ return|return
 operator|new
 name|IntervalSqlType
 argument_list|(
+name|typeSystem
+argument_list|,
 name|type
 operator|.
 name|getIntervalQualifier

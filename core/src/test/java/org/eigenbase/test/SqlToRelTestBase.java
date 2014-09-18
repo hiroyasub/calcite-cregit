@@ -1715,7 +1715,11 @@ block|{
 return|return
 operator|new
 name|SqlTypeFactoryImpl
-argument_list|()
+argument_list|(
+name|RelDataTypeSystem
+operator|.
+name|DEFAULT
+argument_list|)
 return|;
 block|}
 specifier|protected
