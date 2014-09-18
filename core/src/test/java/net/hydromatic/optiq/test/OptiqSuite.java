@@ -378,6 +378,10 @@ name|VolcanoPlannerTraitTest
 operator|.
 name|class
 block|,
+name|InterpreterTest
+operator|.
+name|class
+block|,
 name|VolcanoPlannerTest
 operator|.
 name|class

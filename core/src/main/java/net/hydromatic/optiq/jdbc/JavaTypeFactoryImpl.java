@@ -348,18 +348,16 @@ control|)
 block|{
 if|if
 condition|(
-operator|(
+operator|!
+name|Modifier
+operator|.
+name|isStatic
+argument_list|(
 name|field
 operator|.
 name|getModifiers
 argument_list|()
-operator|&
-name|Modifier
-operator|.
-name|STATIC
-operator|)
-operator|==
-literal|0
+argument_list|)
 condition|)
 block|{
 comment|// FIXME: watch out for recursion
