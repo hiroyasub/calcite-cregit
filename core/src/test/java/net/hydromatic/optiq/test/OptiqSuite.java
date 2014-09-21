@@ -95,20 +95,6 @@ name|hydromatic
 operator|.
 name|optiq
 operator|.
-name|tools
-operator|.
-name|SqlRunTest
-import|;
-end_import
-
-begin_import
-import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|optiq
-operator|.
 name|util
 operator|.
 name|BitSetsTest
@@ -527,10 +513,6 @@ name|class
 block|,
 comment|// slow tests that don't break often
 name|SqlToRelConverterExtendedTest
-operator|.
-name|class
-block|,
-name|SqlRunTest
 operator|.
 name|class
 block|,
