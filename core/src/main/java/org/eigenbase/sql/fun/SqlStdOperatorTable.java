@@ -1748,6 +1748,44 @@ operator|.
 name|STDDEV_POP
 argument_list|)
 decl_stmt|;
+comment|/**    *<code>COVAR_POP</code> aggregate function.    */
+specifier|public
+specifier|static
+specifier|final
+name|SqlAggFunction
+name|COVAR_POP
+init|=
+operator|new
+name|SqlAvgAggFunction
+argument_list|(
+literal|null
+argument_list|,
+name|SqlAvgAggFunction
+operator|.
+name|Subtype
+operator|.
+name|COVAR_POP
+argument_list|)
+decl_stmt|;
+comment|/**    *<code>COVAR_SAMP</code> aggregate function.    */
+specifier|public
+specifier|static
+specifier|final
+name|SqlAggFunction
+name|COVAR_SAMP
+init|=
+operator|new
+name|SqlAvgAggFunction
+argument_list|(
+literal|null
+argument_list|,
+name|SqlAvgAggFunction
+operator|.
+name|Subtype
+operator|.
+name|COVAR_SAMP
+argument_list|)
+decl_stmt|;
 comment|/**    *<code>STDDEV_SAMP</code> aggregate function.    */
 specifier|public
 specifier|static

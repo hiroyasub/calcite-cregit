@@ -386,6 +386,10 @@ literal|"KEYWORD(CONVERT)"
 argument_list|,
 literal|"KEYWORD(COUNT)"
 argument_list|,
+literal|"KEYWORD(COVAR_POP)"
+argument_list|,
+literal|"KEYWORD(COVAR_SAMP)"
+argument_list|,
 literal|"KEYWORD(CUME_DIST)"
 argument_list|,
 literal|"KEYWORD(CURRENT_CATALOG)"

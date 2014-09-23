@@ -199,6 +199,10 @@ name|Subtype
 block|{
 name|AVG
 block|,
+name|COVAR_POP
+block|,
+name|COVAR_SAMP
+block|,
 name|STDDEV_POP
 block|,
 name|STDDEV_SAMP
