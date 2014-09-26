@@ -270,6 +270,20 @@ literal|"See https://bugs.openjdk.java.net/browse/JDK-6222207, "
 operator|+
 literal|"BitSet internal invariants may be violated"
 assert|;
+assert|assert
+name|groupSet
+operator|.
+name|length
+argument_list|()
+operator|<=
+name|child
+operator|.
+name|getRowType
+argument_list|()
+operator|.
+name|getFieldCount
+argument_list|()
+assert|;
 for|for
 control|(
 name|AggregateCall

@@ -821,7 +821,7 @@ literal|"select count(*) + 1 as c, \"deptno\" from \"emps\" group by \"deptno\""
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Aggregation query at coarser level of aggregation than aggregation    * materialization. Requires an additional AggregateRel to roll up. */
+comment|/** Aggregation query at coarser level of aggregation than aggregation    * materialization. Requires an additional AggregateRel to roll up. Note that    * COUNT is rolled up using SUM. */
 annotation|@
 name|Test
 specifier|public
@@ -845,7 +845,7 @@ name|checkResultContains
 argument_list|(
 literal|"EnumerableCalcRel(expr#0..1=[{inputs}], expr#2=[1], expr#3=[+($t1, $t2)], C=[$t3], deptno=[$t0])\n"
 operator|+
-literal|"  EnumerableAggregateRel(group=[{1}], agg#0=[COUNT($1)])\n"
+literal|"  EnumerableAggregateRel(group=[{1}], agg#0=[SUM($2)])\n"
 operator|+
 literal|"    EnumerableTableAccessRel(table=[[hr, m0]])"
 argument_list|)
