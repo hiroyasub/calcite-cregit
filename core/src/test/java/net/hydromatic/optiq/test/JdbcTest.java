@@ -8993,13 +8993,11 @@ literal|"EnumerableCalcRel(expr#0..8=[{inputs}], c0=[$t3], c1=[$t2], c2=[$t1], c
 operator|+
 literal|"  EnumerableSortRel(sort0=[$3], sort1=[$2], sort2=[$1], sort3=[$8], dir0=[ASC-nulls-last], dir1=[ASC-nulls-last], dir2=[ASC-nulls-last], dir3=[ASC-nulls-last])\n"
 operator|+
-literal|"    EnumerableCalcRel(expr#0..8=[{inputs}], expr#9=['%Jeanne%'], expr#10=[LIKE($t8, $t9)], proj#0..8=[{exprs}], $condition=[$t10])\n"
+literal|"    EnumerableAggregateRel(group=[{0, 1, 2, 3, 4, 5, 6, 7, 8}])\n"
 operator|+
-literal|"      EnumerableAggregateRel(group=[{0, 1, 2, 3, 4, 5, 6, 7, 8}])\n"
+literal|"      EnumerableCalcRel(expr#0..9=[{inputs}], expr#10=[CAST($t0):INTEGER], expr#11=[1997], expr#12=[=($t10, $t11)], expr#13=['%Jeanne%'], expr#14=[LIKE($t9, $t13)], expr#15=[AND($t12, $t14)], $f0=[$t1], $f1=[$t2], $f2=[$t3], $f3=[$t4], $f4=[$t5], $f5=[$t6], $f6=[$t7], $f7=[$t8], $f8=[$t9], $f9=[$t0], $condition=[$t15])\n"
 operator|+
-literal|"        EnumerableCalcRel(expr#0..9=[{inputs}], expr#10=[CAST($t0):INTEGER], expr#11=[1997], expr#12=[=($t10, $t11)], $f0=[$t1], $f1=[$t2], $f2=[$t3], $f3=[$t4], $f4=[$t5], $f5=[$t6], $f6=[$t7], $f7=[$t8], $f8=[$t9], $f9=[$t0], $condition=[$t12])\n"
-operator|+
-literal|"          EnumerableTableAccessRel(table=[[foodmart, m{12, 18, 27, 28, 30, 35, 36, 37, 40, 46}]])"
+literal|"        EnumerableTableAccessRel(table=[[foodmart, m{12, 18, 27, 28, 30, 35, 36, 37, 40, 46}]])"
 argument_list|)
 operator|.
 name|runs

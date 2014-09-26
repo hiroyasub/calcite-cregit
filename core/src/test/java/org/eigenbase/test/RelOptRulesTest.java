@@ -183,6 +183,20 @@ name|rel
 operator|.
 name|rules
 operator|.
+name|FilterAggregateTransposeRule
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
+name|rel
+operator|.
+name|rules
+operator|.
 name|FilterToCalcRule
 import|;
 end_import
@@ -951,6 +965,27 @@ operator|+
 literal|" on d.deptno = e.deptno"
 operator|+
 literal|" where d.name = 'Charlie'"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testPushFilterPastAgg
+parameter_list|()
+block|{
+name|checkPlanning
+argument_list|(
+name|FilterAggregateTransposeRule
+operator|.
+name|INSTANCE
+argument_list|,
+literal|"select dname, c from"
+operator|+
+literal|" (select name dname, count(*) as c from dept group by name) t"
+operator|+
+literal|" where dname = 'Charlie'"
 argument_list|)
 expr_stmt|;
 block|}

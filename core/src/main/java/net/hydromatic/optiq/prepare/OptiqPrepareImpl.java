@@ -846,6 +846,10 @@ name|ReduceAggregatesRule
 operator|.
 name|INSTANCE
 argument_list|,
+name|FilterAggregateTransposeRule
+operator|.
+name|INSTANCE
+argument_list|,
 name|SwapJoinRule
 operator|.
 name|INSTANCE

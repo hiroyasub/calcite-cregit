@@ -238,7 +238,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Planner rule that matches an {@link org.eigenbase.rel.AggregateRelBase}  * on a {@link org.eigenbase.rel.FilterRelBase} and transposes them,  * pushing the aggregate below the filter.  *  *<p>In some cases, it is necessary to split the aggregate.  *  *<p>This rule does not directly improve performance. The aggregate will  * have to process more rows, to produce aggregated rows that will be thrown  * away. The rule might be beneficial if the predicate is very expensive to  * evaluate. The main use of the rule is to match a query that has a filter  * under an aggregate to an existing aggregate table.  */
+comment|/**  * Planner rule that matches an {@link org.eigenbase.rel.AggregateRelBase}  * on a {@link org.eigenbase.rel.FilterRelBase} and transposes them,  * pushing the aggregate below the filter.  *  *<p>In some cases, it is necessary to split the aggregate.  *  *<p>This rule does not directly improve performance. The aggregate will  * have to process more rows, to produce aggregated rows that will be thrown  * away. The rule might be beneficial if the predicate is very expensive to  * evaluate. The main use of the rule is to match a query that has a filter  * under an aggregate to an existing aggregate table.  *  * @see org.eigenbase.rel.rules.FilterAggregateTransposeRule  */
 end_comment
 
 begin_class
