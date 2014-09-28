@@ -27,13 +27,39 @@ end_import
 
 begin_import
 import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|ImmutableList
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|eigenbase
 operator|.
 name|reltype
 operator|.
-name|*
+name|RelDataType
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
+name|reltype
+operator|.
+name|RelDataTypeFactory
 import|;
 end_import
 
@@ -45,7 +71,31 @@ name|eigenbase
 operator|.
 name|sql
 operator|.
-name|*
+name|SqlAggFunction
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
+name|sql
+operator|.
+name|SqlFunctionCategory
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
+name|sql
+operator|.
+name|SqlKind
 import|;
 end_import
 
@@ -59,32 +109,32 @@ name|sql
 operator|.
 name|type
 operator|.
-name|*
+name|OperandTypes
 import|;
 end_import
 
 begin_import
 import|import
-name|com
+name|org
 operator|.
-name|google
+name|eigenbase
 operator|.
-name|common
+name|sql
 operator|.
-name|collect
+name|type
 operator|.
-name|ImmutableList
+name|ReturnTypes
 import|;
 end_import
 
 begin_comment
-comment|/**  *<code>Avg</code> is an aggregator which returns the average of the values  * which go into it. It has precisely one argument of numeric type  * (<code>int</code>,<code>long</code>,<code>float</code>,<code>  * double</code>), and the result is the same type.  */
+comment|/**  *<code>Covar</code> is an aggregator which returns the Covariance of the  * values which go into it. It has precisely two arguments of numeric type  * (<code>int</code>,<code>long</code>,<code>float</code>,<code>  * double</code>), and the result is the same type.  */
 end_comment
 
 begin_class
 specifier|public
 class|class
-name|SqlAvgAggFunction
+name|SqlCovarAggFunction
 extends|extends
 name|SqlAggFunction
 block|{
@@ -102,7 +152,7 @@ decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 comment|/**    * Creates a SqlAvgAggFunction    *    * @param type    Data type    * @param subtype Specific function, e.g. AVG or STDDEV_POP    */
 specifier|public
-name|SqlAvgAggFunction
+name|SqlCovarAggFunction
 parameter_list|(
 name|RelDataType
 name|type
@@ -130,7 +180,7 @@ literal|null
 argument_list|,
 name|OperandTypes
 operator|.
-name|NUMERIC
+name|NUMERIC_NUMERIC
 argument_list|,
 name|SqlFunctionCategory
 operator|.
@@ -183,7 +233,7 @@ return|return
 name|type
 return|;
 block|}
-comment|/**    * Returns the specific function, e.g. AVG or STDDEV_POP.    *    * @return Subtype    */
+comment|/**    * Returns the specific function, e.g. COVAR_POP or COVAR_SAMP.    *    * @return Subtype    */
 specifier|public
 name|Subtype
 name|getSubtype
@@ -193,25 +243,20 @@ return|return
 name|subtype
 return|;
 block|}
+comment|/**  * Enum for defining specific types.  */
 specifier|public
 enum|enum
 name|Subtype
 block|{
-name|AVG
+name|COVAR_POP
 block|,
-name|STDDEV_POP
-block|,
-name|STDDEV_SAMP
-block|,
-name|VAR_POP
-block|,
-name|VAR_SAMP
+name|COVAR_SAMP
 block|}
 block|}
 end_class
 
 begin_comment
-comment|// End SqlAvgAggFunction.java
+comment|// End SqlCovarAggFunction.java
 end_comment
 
 end_unit

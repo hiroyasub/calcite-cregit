@@ -17701,9 +17701,9 @@ name|tester
 operator|.
 name|checkFails
 argument_list|(
-literal|"^covar_pop(cast(null as varchar(2)))^"
+literal|"^covar_pop(cast(null as varchar(2)),cast(null as varchar(2)))^"
 argument_list|,
-literal|"(?s)Cannot apply 'COVAR_POP' to arguments of type 'COVAR_POP\\(<VARCHAR\\(2\\)>\\)'\\. Supported form\\(s\\): 'COVAR_POP\\(<NUMERIC>\\)'.*"
+literal|"(?s)Cannot apply 'COVAR_POP' to arguments of type 'COVAR_POP\\(<VARCHAR\\(2\\)>,<VARCHAR\\(2\\)>\\)'\\. Supported form\\(s\\): 'COVAR_POP\\(<NUMERIC>,<NUMERIC>\\)'.*"
 argument_list|,
 literal|false
 argument_list|)
@@ -17712,7 +17712,7 @@ name|tester
 operator|.
 name|checkType
 argument_list|(
-literal|"covar_pop(CAST(NULL AS INTEGER))"
+literal|"covar_pop(CAST(NULL AS INTEGER),CAST(NULL AS INTEGER))"
 argument_list|,
 literal|"INTEGER"
 argument_list|)
@@ -17721,7 +17721,7 @@ name|checkAggType
 argument_list|(
 name|tester
 argument_list|,
-literal|"covar_pop(DISTINCT 1.5)"
+literal|"covar_pop(1.5, 2.5)"
 argument_list|,
 literal|"DECIMAL(2, 1) NOT NULL"
 argument_list|)
@@ -17785,9 +17785,9 @@ name|tester
 operator|.
 name|checkFails
 argument_list|(
-literal|"^covar_samp(cast(null as varchar(2)))^"
+literal|"^covar_samp(cast(null as varchar(2)),cast(null as varchar(2)))^"
 argument_list|,
-literal|"(?s)Cannot apply 'COVAR_SAMP' to arguments of type 'COVAR_SAMP\\(<VARCHAR\\(2\\)>\\)'\\. Supported form\\(s\\): 'COVAR_SAMP\\(<NUMERIC>\\)'.*"
+literal|"(?s)Cannot apply 'COVAR_SAMP' to arguments of type 'COVAR_SAMP\\(<VARCHAR\\(2\\)>,<VARCHAR\\(2\\)>\\)'\\. Supported form\\(s\\): 'COVAR_SAMP\\(<NUMERIC>,<NUMERIC>\\)'.*"
 argument_list|,
 literal|false
 argument_list|)
@@ -17796,7 +17796,7 @@ name|tester
 operator|.
 name|checkType
 argument_list|(
-literal|"covar_samp(CAST(NULL AS INTEGER))"
+literal|"covar_samp(CAST(NULL AS INTEGER),CAST(NULL AS INTEGER))"
 argument_list|,
 literal|"INTEGER"
 argument_list|)
@@ -17805,7 +17805,7 @@ name|checkAggType
 argument_list|(
 name|tester
 argument_list|,
-literal|"covar_samp(DISTINCT 1.5)"
+literal|"covar_samp(1.5, 2.5)"
 argument_list|,
 literal|"DECIMAL(2, 1) NOT NULL"
 argument_list|)

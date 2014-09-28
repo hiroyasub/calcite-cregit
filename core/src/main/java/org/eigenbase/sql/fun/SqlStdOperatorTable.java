@@ -1756,11 +1756,11 @@ name|SqlAggFunction
 name|COVAR_POP
 init|=
 operator|new
-name|SqlAvgAggFunction
+name|SqlCovarAggFunction
 argument_list|(
 literal|null
 argument_list|,
-name|SqlAvgAggFunction
+name|SqlCovarAggFunction
 operator|.
 name|Subtype
 operator|.
@@ -1775,11 +1775,11 @@ name|SqlAggFunction
 name|COVAR_SAMP
 init|=
 operator|new
-name|SqlAvgAggFunction
+name|SqlCovarAggFunction
 argument_list|(
 literal|null
 argument_list|,
-name|SqlAvgAggFunction
+name|SqlCovarAggFunction
 operator|.
 name|Subtype
 operator|.
