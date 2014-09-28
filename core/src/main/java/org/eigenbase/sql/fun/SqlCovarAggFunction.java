@@ -27,20 +27,6 @@ end_import
 
 begin_import
 import|import
-name|com
-operator|.
-name|google
-operator|.
-name|common
-operator|.
-name|collect
-operator|.
-name|ImmutableList
-import|;
-end_import
-
-begin_import
-import|import
 name|org
 operator|.
 name|eigenbase
@@ -127,6 +113,20 @@ name|ReturnTypes
 import|;
 end_import
 
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|ImmutableList
+import|;
+end_import
+
 begin_comment
 comment|/**  *<code>Covar</code> is an aggregator which returns the Covariance of the  * values which go into it. It has precisely two arguments of numeric type  * (<code>int</code>,<code>long</code>,<code>float</code>,<code>  * double</code>), and the result is the same type.  */
 end_comment
@@ -150,7 +150,7 @@ name|Subtype
 name|subtype
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a SqlAvgAggFunction    *    * @param type    Data type    * @param subtype Specific function, e.g. AVG or STDDEV_POP    */
+comment|/**    * Creates a SqlCovarAggFunction.    *    * @param type    Data type    * @param subtype Specific function, e.g. COVAR_POP    */
 specifier|public
 name|SqlCovarAggFunction
 parameter_list|(
@@ -243,7 +243,7 @@ return|return
 name|subtype
 return|;
 block|}
-comment|/**  * Enum for defining specific types.  */
+comment|/**    * Enum for defining specific types.    */
 specifier|public
 enum|enum
 name|Subtype
@@ -251,6 +251,10 @@ block|{
 name|COVAR_POP
 block|,
 name|COVAR_SAMP
+block|,
+name|REGR_SXX
+block|,
+name|REGR_SYY
 block|}
 block|}
 end_class

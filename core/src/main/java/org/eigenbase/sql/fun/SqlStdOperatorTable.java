@@ -1748,6 +1748,44 @@ operator|.
 name|STDDEV_POP
 argument_list|)
 decl_stmt|;
+comment|/**    *<code>REGR_SXX</code> aggregate function.    */
+specifier|public
+specifier|static
+specifier|final
+name|SqlAggFunction
+name|REGR_SXX
+init|=
+operator|new
+name|SqlCovarAggFunction
+argument_list|(
+literal|null
+argument_list|,
+name|SqlCovarAggFunction
+operator|.
+name|Subtype
+operator|.
+name|REGR_SXX
+argument_list|)
+decl_stmt|;
+comment|/**    *<code>REGR_SYY</code> aggregate function.    */
+specifier|public
+specifier|static
+specifier|final
+name|SqlAggFunction
+name|REGR_SYY
+init|=
+operator|new
+name|SqlCovarAggFunction
+argument_list|(
+literal|null
+argument_list|,
+name|SqlCovarAggFunction
+operator|.
+name|Subtype
+operator|.
+name|REGR_SYY
+argument_list|)
+decl_stmt|;
 comment|/**    *<code>COVAR_POP</code> aggregate function.    */
 specifier|public
 specifier|static
@@ -1846,7 +1884,7 @@ decl_stmt|;
 comment|//-------------------------------------------------------------
 comment|// WINDOW Aggregate Functions
 comment|//-------------------------------------------------------------
-comment|/**    *<code>HISTORAM</code> aggregate function support. Used by window    * aggregate versions of MIN/MAX    */
+comment|/**    *<code>HISTOGRAM</code> aggregate function support. Used by window    * aggregate versions of MIN/MAX    */
 specifier|public
 specifier|static
 specifier|final
@@ -2196,7 +2234,7 @@ operator|.
 name|ANY
 argument_list|)
 decl_stmt|;
-comment|/**    * The "table function derived table" operator, which a table-valued    * function into a relation, e.g. "<code>SELECT * FROM    * TABLE(ramp(5))</code>".    *    *<p>This operator has function syntax (with one argument), whereas {@link    * #EXPLICIT_TABLE} is a prefix operator.    */
+comment|/**    * The "table function derived table" operator, which a table-valued    * function into a relation, e.g. "<code>SELECT * FROM    * TABLE(ramp(5))</code>".    *    *<p>This operator has function syntax (with one argument), whereas    * {@link #EXPLICIT_TABLE} is a prefix operator.    */
 specifier|public
 specifier|static
 specifier|final

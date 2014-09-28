@@ -472,6 +472,10 @@ literal|"KEYWORD(POWER)"
 argument_list|,
 literal|"KEYWORD(RANK)"
 argument_list|,
+literal|"KEYWORD(REGR_SXX)"
+argument_list|,
+literal|"KEYWORD(REGR_SYY)"
+argument_list|,
 literal|"KEYWORD(ROW)"
 argument_list|,
 literal|"KEYWORD(ROW_NUMBER)"
