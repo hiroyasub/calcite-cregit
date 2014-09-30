@@ -285,7 +285,7 @@ name|DriverManager
 operator|.
 name|getConnection
 argument_list|(
-literal|"jdbc:optiq:"
+literal|"jdbc:calcite:"
 argument_list|)
 decl_stmt|;
 name|OptiqConnection

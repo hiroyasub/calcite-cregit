@@ -128,7 +128,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * User-defined aggregate function.  *  *<p>Created by the validator, after resolving a function call to a function  * defined in an Optiq schema.</p>  */
+comment|/**  * User-defined aggregate function.  *  *<p>Created by the validator, after resolving a function call to a function  * defined in a Calcite schema.</p>  */
 end_comment
 
 begin_class

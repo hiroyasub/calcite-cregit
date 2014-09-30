@@ -36,7 +36,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Tests for using Optiq with Spark as an internal engine, as implemented by  * the {@link net.hydromatic.optiq.impl.spark} package.  */
+comment|/**  * Tests for using Calcite with Spark as an internal engine, as implemented by  * the {@link net.hydromatic.optiq.impl.spark} package.  */
 end_comment
 
 begin_class

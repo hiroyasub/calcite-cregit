@@ -30,7 +30,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Version information for Optiq JDBC Driver for Splunk.  */
+comment|/**  * Version information for Calcite JDBC Driver for Splunk.  */
 end_comment
 
 begin_class
@@ -45,11 +45,11 @@ parameter_list|()
 block|{
 name|super
 argument_list|(
-literal|"Optiq JDBC Driver for Splunk"
+literal|"Calcite JDBC Driver for Splunk"
 argument_list|,
 literal|"0.2"
 argument_list|,
-literal|"Optiq-Splunk"
+literal|"Calcite-Splunk"
 argument_list|,
 literal|"0.2"
 argument_list|,

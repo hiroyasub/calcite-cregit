@@ -206,7 +206,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Implementation of {@link OptiqPrepare.SparkHandler}. Gives the core Optiq  * engine access to rules that only exist in the Spark module.  */
+comment|/**  * Implementation of {@link OptiqPrepare.SparkHandler}. Gives the core Calcite  * engine access to rules that only exist in the Spark module.  */
 end_comment
 
 begin_class
@@ -238,7 +238,7 @@ name|JavaSparkContext
 argument_list|(
 literal|"local[1]"
 argument_list|,
-literal|"optiq"
+literal|"calcite"
 argument_list|)
 decl_stmt|;
 specifier|private
@@ -352,7 +352,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Creates a SparkHandlerImpl, initializing on first call. Optiq-core calls    * this via reflection. */
+comment|/** Creates a SparkHandlerImpl, initializing on first call. Calcite-core calls    * this via reflection. */
 annotation|@
 name|SuppressWarnings
 argument_list|(

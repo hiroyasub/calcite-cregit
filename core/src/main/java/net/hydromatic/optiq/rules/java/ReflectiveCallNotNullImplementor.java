@@ -106,7 +106,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Implementation of {@link net.hydromatic.optiq.rules.java  * .NotNullImplementor} that calls given {@link java.lang.reflect.Method}.  * When method is not static, a new instance of the required class is created.  */
+comment|/**  * Implementation of  * {@link net.hydromatic.optiq.rules.java.NotNullImplementor}  * that calls a given {@link java.lang.reflect.Method}.  *  *<p>When method is not static, a new instance of the required class is  * created.  */
 end_comment
 
 begin_class

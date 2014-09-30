@@ -94,7 +94,7 @@ argument_list|,
 literal|false
 argument_list|)
 block|,
-comment|/** Whether Optiq should use materializations. */
+comment|/** Whether Calcite should use materializations. */
 name|MATERIALIZATIONS_ENABLED
 argument_list|(
 literal|"materializationsEnabled"
@@ -106,7 +106,7 @@ argument_list|,
 literal|true
 argument_list|)
 block|,
-comment|/** Whether Optiq should create materializations. */
+comment|/** Whether Calcite should create materializations. */
 name|CREATE_MATERIALIZATIONS
 argument_list|(
 literal|"createMaterializations"
@@ -204,7 +204,7 @@ argument_list|,
 literal|null
 argument_list|)
 block|,
-comment|/** Specifies whether Spark should be used as the engine for processing that    * cannot be pushed to the source system. If false (the default), Optiq    * generates code that implements the Enumerable interface. */
+comment|/** Specifies whether Spark should be used as the engine for processing that    * cannot be pushed to the source system. If false (the default), Calcite    * generates code that implements the Enumerable interface. */
 name|SPARK
 argument_list|(
 literal|"spark"

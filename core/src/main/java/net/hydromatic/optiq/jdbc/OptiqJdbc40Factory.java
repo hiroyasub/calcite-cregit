@@ -16,7 +16,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * Implementation of {@link net.hydromatic.avatica.AvaticaFactory}  * for Optiq and JDBC 4.0 (corresponds to JDK 1.6).  */
+comment|/**  * Implementation of {@link net.hydromatic.avatica.AvaticaFactory}  * for Calcite and JDBC 4.0 (corresponds to JDK 1.6).  */
 end_comment
 
 begin_class

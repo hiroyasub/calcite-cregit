@@ -386,7 +386,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Implementation of JDBC connection  * in the Optiq engine.  *  *<p>Abstract to allow newer versions of JDBC to add methods.</p>  */
+comment|/**  * Implementation of JDBC connection  * in the Calcite engine.  *  *<p>Abstract to allow newer versions of JDBC to add methods.</p>  */
 end_comment
 
 begin_class

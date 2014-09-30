@@ -104,7 +104,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Implementation of {@link net.hydromatic.avatica.AvaticaFactory}  * for Optiq and JDBC 4.1 (corresponds to JDK 1.7).  */
+comment|/**  * Implementation of {@link net.hydromatic.avatica.AvaticaFactory}  * for Calcite and JDBC 4.1 (corresponds to JDK 1.7).  */
 end_comment
 
 begin_class

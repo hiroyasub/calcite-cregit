@@ -1738,7 +1738,7 @@ argument_list|)
 block|,
 name|OPTIQ
 argument_list|(
-literal|"Apache Optiq"
+literal|"Apache Calcite"
 argument_list|,
 literal|"\""
 argument_list|)

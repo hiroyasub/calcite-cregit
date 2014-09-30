@@ -680,7 +680,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Tests for using Optiq via JDBC.  */
+comment|/**  * Tests for using Calcite via JDBC.  */
 end_comment
 
 begin_class
@@ -1048,7 +1048,7 @@ name|DriverManager
 operator|.
 name|getConnection
 argument_list|(
-literal|"jdbc:optiq:"
+literal|"jdbc:calcite:"
 argument_list|)
 decl_stmt|;
 name|OptiqConnection
@@ -1323,7 +1323,7 @@ name|DriverManager
 operator|.
 name|getConnection
 argument_list|(
-literal|"jdbc:optiq:"
+literal|"jdbc:calcite:"
 argument_list|)
 decl_stmt|;
 name|OptiqConnection
@@ -1417,7 +1417,7 @@ name|DriverManager
 operator|.
 name|getConnection
 argument_list|(
-literal|"jdbc:optiq:"
+literal|"jdbc:calcite:"
 argument_list|)
 decl_stmt|;
 name|OptiqConnection
@@ -1855,7 +1855,7 @@ name|DriverManager
 operator|.
 name|getConnection
 argument_list|(
-literal|"jdbc:optiq:"
+literal|"jdbc:calcite:"
 argument_list|,
 name|info
 argument_list|)
@@ -2017,7 +2017,7 @@ name|DriverManager
 operator|.
 name|getConnection
 argument_list|(
-literal|"jdbc:optiq:"
+literal|"jdbc:calcite:"
 argument_list|)
 decl_stmt|;
 name|OptiqConnection
@@ -3129,7 +3129,7 @@ name|driver
 operator|.
 name|connect
 argument_list|(
-literal|"jdbc:optiq:"
+literal|"jdbc:calcite:"
 argument_list|,
 operator|new
 name|Properties
@@ -3402,7 +3402,7 @@ name|driver
 operator|.
 name|connect
 argument_list|(
-literal|"jdbc:optiq:"
+literal|"jdbc:calcite:"
 argument_list|,
 operator|new
 name|Properties
@@ -3608,7 +3608,7 @@ name|DriverManager
 operator|.
 name|getConnection
 argument_list|(
-literal|"jdbc:optiq:"
+literal|"jdbc:calcite:"
 argument_list|)
 decl_stmt|;
 name|OptiqConnection
@@ -3740,7 +3740,7 @@ name|DriverManager
 operator|.
 name|getDriver
 argument_list|(
-literal|"jdbc:optiq:"
+literal|"jdbc:calcite:"
 argument_list|)
 decl_stmt|;
 specifier|final
@@ -3752,7 +3752,7 @@ name|driver
 operator|.
 name|getPropertyInfo
 argument_list|(
-literal|"jdbc:optiq:"
+literal|"jdbc:calcite:"
 argument_list|,
 operator|new
 name|Properties
@@ -3848,7 +3848,7 @@ name|DriverManager
 operator|.
 name|getConnection
 argument_list|(
-literal|"jdbc:optiq:"
+literal|"jdbc:calcite:"
 argument_list|)
 decl_stmt|;
 name|OptiqConnection
@@ -3874,7 +3874,7 @@ argument_list|()
 decl_stmt|;
 name|assertEquals
 argument_list|(
-literal|"Optiq JDBC Driver"
+literal|"Calcite JDBC Driver"
 argument_list|,
 name|metaData
 operator|.
@@ -3926,7 +3926,7 @@ expr_stmt|;
 comment|// will work for the next few releases
 name|assertEquals
 argument_list|(
-literal|"Optiq"
+literal|"Calcite"
 argument_list|,
 name|metaData
 operator|.
@@ -7515,7 +7515,7 @@ name|DriverManager
 operator|.
 name|getConnection
 argument_list|(
-literal|"jdbc:optiq:"
+literal|"jdbc:calcite:"
 argument_list|,
 name|info
 argument_list|)
@@ -14606,7 +14606,7 @@ operator|.
 name|query
 argument_list|(
 comment|// *0 is used to make results predictable.
-comment|// If using just max(empid) optiq cannot compute the result
+comment|// If using just max(empid) calcite cannot compute the result
 comment|// properly since it does not support range windows yet :(
 literal|"select max(\"empid\"*0) over (partition by 42\n"
 operator|+
@@ -14652,7 +14652,7 @@ operator|.
 name|query
 argument_list|(
 comment|// *0 is used to make results predictable.
-comment|// If using just max(empid) optiq cannot compute the result
+comment|// If using just max(empid) calcite cannot compute the result
 comment|// properly since it does not support range windows yet :(
 literal|"select max(\"empid\"*0) over (partition by \"deptno\"\n"
 operator|+
@@ -15676,7 +15676,7 @@ block|}
 else|else
 block|{
 comment|// e.g. path = "sql/outer.oq"
-comment|// inUrl = "file:/home/fred/optiq/core/target/test-classes/sql/outer.oq"
+comment|// inUrl = "file:/home/fred/calcite/core/target/test-classes/sql/outer.oq"
 specifier|final
 name|URL
 name|inUrl
@@ -17605,7 +17605,7 @@ argument_list|)
 operator|.
 name|connect
 argument_list|(
-literal|"jdbc:optiq:"
+literal|"jdbc:calcite:"
 argument_list|,
 operator|new
 name|Properties
@@ -19054,7 +19054,7 @@ literal|"EXPR$1 CHAR(2) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test case for bug where if two tables have different element classes    * but those classes have identical fields, Optiq would generate code to use    * the wrong element class; a {@link ClassCastException} would ensue. */
+comment|/** Test case for bug where if two tables have different element classes    * but those classes have identical fields, Calcite would generate code to use    * the wrong element class; a {@link ClassCastException} would ensue. */
 annotation|@
 name|Test
 specifier|public
@@ -19078,7 +19078,7 @@ name|DriverManager
 operator|.
 name|getConnection
 argument_list|(
-literal|"jdbc:optiq:"
+literal|"jdbc:calcite:"
 argument_list|)
 decl_stmt|;
 name|OptiqConnection

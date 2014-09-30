@@ -18,7 +18,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * Marker interface to allow {@link net.hydromatic.optiq.rules.java.AggImplementor} to tell if it is used in  * regular or windowed context.  */
+comment|/**  * Marker interface to allow  * {@link net.hydromatic.optiq.rules.java.AggImplementor}  * to tell if it is used in regular or windowed context.  */
 end_comment
 
 begin_interface

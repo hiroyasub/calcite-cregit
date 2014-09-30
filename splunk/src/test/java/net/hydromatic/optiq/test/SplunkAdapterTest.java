@@ -120,7 +120,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Unit test of the Optiq adapter for Splunk.  */
+comment|/**  * Unit test of the Calcite adapter for Splunk.  */
 end_comment
 
 begin_class
@@ -152,7 +152,7 @@ name|SPLUNK_PASSWORD
 init|=
 literal|"changeme"
 decl_stmt|;
-comment|/** Whether to run Splunk tests. Disabled by default, because we do not expect    * Splunk to be installed and populated data set. To enable,    * specify {@code -Doptiq.test.splunk=true} on the Java command line. */
+comment|/** Whether to run Splunk tests. Disabled by default, because we do not expect    * Splunk to be installed and populated data set. To enable,    * specify {@code -Dcalcite.test.splunk=true} on the Java command line. */
 specifier|public
 specifier|static
 specifier|final
@@ -163,7 +163,7 @@ name|Boolean
 operator|.
 name|getBoolean
 argument_list|(
-literal|"optiq.test.splunk"
+literal|"calcite.test.splunk"
 argument_list|)
 decl_stmt|;
 comment|/** Whether this test is enabled. Tests are disabled unless we know that    * Splunk is present and loaded with the requisite data. */

@@ -62,7 +62,7 @@ specifier|public
 interface|interface
 name|AggImplementor
 block|{
-comment|/**    * Returns the types of the intermediate variables used by the aggregate    * implementation.    * For instance, for "concatenate to string" this can be {@link java.lang.StringBuilder}.    * Optiq calls this method before all other {@code implement*} methods.    * @param info aggregate context    * @return types of the intermediate variables used by the aggregate    *   implementation    */
+comment|/**    * Returns the types of the intermediate variables used by the aggregate    * implementation.    * For instance, for "concatenate to string" this can be {@link java.lang.StringBuilder}.    * Calcite calls this method before all other {@code implement*} methods.    * @param info aggregate context    * @return types of the intermediate variables used by the aggregate    *   implementation    */
 name|List
 argument_list|<
 name|Type
@@ -95,7 +95,7 @@ name|AggAddContext
 name|add
 parameter_list|)
 function_decl|;
-comment|/**    * Calculates the resulting value based on the intermediate variables.    * Note: this method must NOT destroy the intermediate variables as    * optiq might reuse the state when calculating sliding aggregates.    * {@link AggResetContext#accumulator()} should be used to reference    * the state variables.    * @param info aggregate context    * @param result result context    */
+comment|/**    * Calculates the resulting value based on the intermediate variables.    * Note: this method must NOT destroy the intermediate variables as    * calcite might reuse the state when calculating sliding aggregates.    * {@link AggResetContext#accumulator()} should be used to reference    * the state variables.    * @param info aggregate context    * @param result result context    */
 name|Expression
 name|implementResult
 parameter_list|(

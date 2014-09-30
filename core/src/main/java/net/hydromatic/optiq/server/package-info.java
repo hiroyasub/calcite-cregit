@@ -4,7 +4,7 @@ comment|/*  * Licensed to the Apache Software Foundation (ASF) under one or more
 end_comment
 
 begin_comment
-comment|/**  * Provides a server for hosting Optiq connections.  */
+comment|/**  * Provides a server for hosting Calcite connections.  */
 end_comment
 
 begin_package

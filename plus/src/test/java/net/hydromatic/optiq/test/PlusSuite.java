@@ -72,7 +72,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Suite consisting of all tests in the<code>optiq-plus</code> module.  */
+comment|/**  * Suite consisting of all tests in the<code>calcite-plus</code> module.  */
 end_comment
 
 begin_class

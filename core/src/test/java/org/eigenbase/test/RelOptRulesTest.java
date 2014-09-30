@@ -2856,7 +2856,7 @@ expr_stmt|;
 block|}
 annotation|@
 name|Ignore
-comment|// Optiq does not support INSERT yet
+comment|// Calcite does not support INSERT yet
 annotation|@
 name|Test
 specifier|public
@@ -3367,7 +3367,7 @@ expr_stmt|;
 block|}
 annotation|@
 name|Ignore
-comment|// Optiq does not support INSERT yet
+comment|// Calcite does not support INSERT yet
 annotation|@
 name|Test
 specifier|public

@@ -4,7 +4,7 @@ comment|/*  * Licensed to the Apache Software Foundation (ASF) under one or more
 end_comment
 
 begin_comment
-comment|/**  * Main package for Optiq, the dynamic data management platform.  */
+comment|/**  * Main package for Calcite, the dynamic data management platform.  */
 end_comment
 
 begin_package

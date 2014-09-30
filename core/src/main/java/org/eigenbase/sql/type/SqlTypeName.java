@@ -1586,7 +1586,7 @@ name|build
 argument_list|()
 return|;
 block|}
-comment|/**    * Returns the default precision for this type if supported, otherwise -1 if    * precision is either unsupported or must be specified explicitly.    *    * @deprecated Use    * {@link org.eigenbase.reltype.RelDataTypeSystem#getDefaultPrecision(SqlTypeName)};    * will be removed after optiq-0.9.1.    */
+comment|/**    * Returns the default precision for this type if supported, otherwise -1 if    * precision is either unsupported or must be specified explicitly.    *    * @deprecated Use    * {@link org.eigenbase.reltype.RelDataTypeSystem#getDefaultPrecision(SqlTypeName)};    * will be removed after calcite-0.9.1.    */
 specifier|public
 name|int
 name|getDefaultPrecision
@@ -2924,7 +2924,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**    * Returns the maximum precision (or length) allowed for this type, or -1 if    * precision/length are not applicable for this type.    *    * @return Maximum allowed precision    *    * @deprecated Use    * {@link org.eigenbase.reltype.RelDataTypeSystem#getMaxScale(SqlTypeName)};    * will be removed after optiq-0.9.1.    */
+comment|/**    * Returns the maximum precision (or length) allowed for this type, or -1 if    * precision/length are not applicable for this type.    *    * @return Maximum allowed precision    *    * @deprecated Use    * {@link org.eigenbase.reltype.RelDataTypeSystem#getMaxScale(SqlTypeName)};    * will be removed after calcite-0.9.1.    */
 specifier|public
 name|int
 name|getMaxPrecision
@@ -2941,7 +2941,7 @@ name|this
 argument_list|)
 return|;
 block|}
-comment|/**    * Returns the maximum scale (or fractional second precision in the case of    * intervals) allowed for this type, or -1 if precision/length are not    * applicable for this type.    *    * @return Maximum allowed scale    *    * @deprecated Use    * {@link org.eigenbase.reltype.RelDataTypeSystem#getMaxScale(SqlTypeName)};    * will be removed after optiq-0.9.1.    */
+comment|/**    * Returns the maximum scale (or fractional second precision in the case of    * intervals) allowed for this type, or -1 if precision/length are not    * applicable for this type.    *    * @return Maximum allowed scale    *    * @deprecated Use    * {@link org.eigenbase.reltype.RelDataTypeSystem#getMaxScale(SqlTypeName)};    * will be removed after calcite-0.9.1.    */
 specifier|public
 name|int
 name|getMaxScale

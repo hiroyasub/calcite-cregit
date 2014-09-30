@@ -343,7 +343,7 @@ throw|throw
 operator|new
 name|UnsupportedOperationException
 argument_list|(
-literal|"remove before optiq-0.9"
+literal|"remove before calcite-0.9"
 argument_list|)
 throw|;
 block|}
@@ -359,7 +359,7 @@ throw|throw
 operator|new
 name|UnsupportedOperationException
 argument_list|(
-literal|"remove before optiq-0.9"
+literal|"remove before calcite-0.9"
 argument_list|)
 throw|;
 block|}

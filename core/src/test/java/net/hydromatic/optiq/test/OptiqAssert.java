@@ -428,7 +428,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Fluid DSL for testing Optiq connections and queries.  */
+comment|/**  * Fluid DSL for testing Calcite connections and queries.  */
 end_comment
 
 begin_class
@@ -441,7 +441,7 @@ name|OptiqAssert
 parameter_list|()
 block|{
 block|}
-comment|/** Which database to use for tests that require a JDBC data source. By    * default the test suite runs against the embedded hsqldb database.    *    *<p>We recommend that casual users use hsqldb, and frequent Optiq developers    * use MySQL. The test suite runs faster against the MySQL database (mainly    * because of the 0.1s versus 6s startup time). You have to populate MySQL    * manually with the foodmart data set, otherwise there will be test failures.    * To run against MySQL, specify '-Doptiq.test.db=mysql' on the java command    * line.</p> */
+comment|/** Which database to use for tests that require a JDBC data source. By    * default the test suite runs against the embedded hsqldb database.    *    *<p>We recommend that casual users use hsqldb, and frequent Calcite    * developers use MySQL. The test suite runs faster against the MySQL database    * (mainly because of the 0.1s versus 6s startup time). You have to populate    * MySQL manually with the foodmart data set, otherwise there will be test    * failures.  To run against MySQL, specify '-Dcalcite.test.db=mysql' on the    * java command line. */
 specifier|public
 specifier|static
 specifier|final
@@ -456,7 +456,7 @@ name|System
 operator|.
 name|getProperty
 argument_list|(
-literal|"optiq.test.db"
+literal|"calcite.test.db"
 argument_list|)
 argument_list|,
 literal|"hsqldb"
@@ -490,7 +490,7 @@ name|Boolean
 operator|.
 name|getBoolean
 argument_list|(
-literal|"optiq.test.slow"
+literal|"calcite.test.slow"
 argument_list|)
 argument_list|,
 literal|false
@@ -3523,7 +3523,7 @@ name|DriverManager
 operator|.
 name|getConnection
 argument_list|(
-literal|"jdbc:optiq:"
+literal|"jdbc:calcite:"
 operator|+
 name|suffix
 argument_list|)
@@ -3678,7 +3678,7 @@ name|DriverManager
 operator|.
 name|getConnection
 argument_list|(
-literal|"jdbc:optiq:"
+literal|"jdbc:calcite:"
 argument_list|)
 decl_stmt|;
 name|OptiqConnection
@@ -3962,7 +3962,7 @@ name|DriverManager
 operator|.
 name|getConnection
 argument_list|(
-literal|"jdbc:optiq:"
+literal|"jdbc:calcite:"
 argument_list|,
 name|info
 argument_list|)
@@ -4016,7 +4016,7 @@ name|DriverManager
 operator|.
 name|getConnection
 argument_list|(
-literal|"jdbc:optiq:"
+literal|"jdbc:calcite:"
 argument_list|)
 decl_stmt|;
 name|OptiqConnection
@@ -4127,7 +4127,7 @@ name|DriverManager
 operator|.
 name|getConnection
 argument_list|(
-literal|"jdbc:optiq:"
+literal|"jdbc:calcite:"
 argument_list|,
 name|info
 argument_list|)
@@ -6104,7 +6104,7 @@ return|return
 name|this
 return|;
 block|}
-comment|/** Adds a hook and a handler for that hook. Optiq will create a thread      * hook (by calling {@link Hook#addThread(com.google.common.base.Function)})      * just before running the query, and remove the hook afterwards. */
+comment|/** Adds a hook and a handler for that hook. Calcite will create a thread      * hook (by calling {@link Hook#addThread(com.google.common.base.Function)})      * just before running the query, and remove the hook afterwards. */
 specifier|public
 parameter_list|<
 name|T

@@ -3270,7 +3270,7 @@ operator|=
 name|targetOperand
 expr_stmt|;
 block|}
-comment|/**      *<p>Applies this rule to a particular node in a query. The goal is      * to convert {@code query} into {@code target}. Before the rule is      * invoked, Optiq has made sure that query's children are equivalent      * to target's children.      *      *<p>There are 3 possible outcomes:</p>      *      *<ul>      *      *<li>{@code query} already exactly matches {@code target}; returns      * {@code target}</li>      *      *<li>{@code query} is sufficiently close to a match for      * {@code target}; returns {@code target}</li>      *      *<li>{@code query} cannot be made to match {@code target}; returns      * null</li>      *      *</ul>      *      *<p>REVIEW: Is possible that we match query PLUS one or more of its      * ancestors?</p>      *      * @param call Input parameters      */
+comment|/**      *<p>Applies this rule to a particular node in a query. The goal is      * to convert {@code query} into {@code target}. Before the rule is      * invoked, Calcite has made sure that query's children are equivalent      * to target's children.      *      *<p>There are 3 possible outcomes:</p>      *      *<ul>      *      *<li>{@code query} already exactly matches {@code target}; returns      * {@code target}</li>      *      *<li>{@code query} is sufficiently close to a match for      * {@code target}; returns {@code target}</li>      *      *<li>{@code query} cannot be made to match {@code target}; returns      * null</li>      *      *</ul>      *      *<p>REVIEW: Is possible that we match query PLUS one or more of its      * ancestors?</p>      *      * @param call Input parameters      */
 specifier|abstract
 name|UnifyResult
 name|apply

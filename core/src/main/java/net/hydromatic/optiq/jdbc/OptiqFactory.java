@@ -54,7 +54,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Extension of {@link net.hydromatic.avatica.AvaticaFactory}  * for Optiq.  */
+comment|/**  * Extension of {@link net.hydromatic.avatica.AvaticaFactory}  * for Calcite.  */
 end_comment
 
 begin_class

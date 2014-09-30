@@ -78,7 +78,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A fa&ccedil;ade that covers Optiq's query planning process: parse SQL,  * validate the parse tree, convert the parse tree to a relational expression,  * and optimize the relational expression.  *  *<p>Planner is NOT thread safe. However, it can be reused for  * different queries. The consumer of this interface is responsible for calling  * reset() after each use of Planner that corresponds to a different  * query.  */
+comment|/**  * A fa&ccedil;ade that covers Calcite's query planning process: parse SQL,  * validate the parse tree, convert the parse tree to a relational expression,  * and optimize the relational expression.  *  *<p>Planner is NOT thread safe. However, it can be reused for  * different queries. The consumer of this interface is responsible for calling  * reset() after each use of Planner that corresponds to a different  * query.  */
 end_comment
 
 begin_interface

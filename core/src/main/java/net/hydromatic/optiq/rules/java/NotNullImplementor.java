@@ -54,7 +54,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Simplified version of {@link net.hydromatic.optiq.rules.java.CallImplementor} that does not know about  * null semantics.  *<p>  * @see net.hydromatic.optiq.rules.java.RexImpTable  * @see net.hydromatic.optiq.rules.java.CallImplementor  *  **/
+comment|/**  * Simplified version of {@link net.hydromatic.optiq.rules.java.CallImplementor}  * that does not know about null semantics.  *  * @see net.hydromatic.optiq.rules.java.RexImpTable  * @see net.hydromatic.optiq.rules.java.CallImplementor  */
 end_comment
 
 begin_interface
@@ -62,7 +62,7 @@ specifier|public
 interface|interface
 name|NotNullImplementor
 block|{
-comment|/**    * Implements a call with assumption that all the null-checking is    * implemented by caller.    *<p>    * @param translator translator to implement the code    * @param call call to implement    * @param translatedOperands arguments of a call    * @return expression that implements given call    */
+comment|/**    * Implements a call with assumption that all the null-checking is    * implemented by caller.    *    * @param translator translator to implement the code    * @param call call to implement    * @param translatedOperands arguments of a call    * @return expression that implements given call    */
 name|Expression
 name|implement
 parameter_list|(

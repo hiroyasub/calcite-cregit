@@ -58,7 +58,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Embodiment of {@link org.eigenbase.sql.test.SqlOperatorBaseTest}  * that generates SQL statements and executes them using Optiq.  */
+comment|/**  * Embodiment of {@link org.eigenbase.sql.test.SqlOperatorBaseTest}  * that generates SQL statements and executes them using Calcite.  */
 end_comment
 
 begin_class

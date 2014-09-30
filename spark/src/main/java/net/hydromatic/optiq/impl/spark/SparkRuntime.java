@@ -114,7 +114,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Runtime utilities for Optiq's Spark adapter. Generated code calls these  * methods.  */
+comment|/**  * Runtime utilities for Calcite's Spark adapter. Generated code calls these  * methods.  */
 end_comment
 
 begin_class

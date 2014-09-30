@@ -4,7 +4,7 @@ comment|/*  * Licensed to the Apache Software Foundation (ASF) under one or more
 end_comment
 
 begin_comment
-comment|/**  * JDBC driver for Optiq.  */
+comment|/**  * JDBC driver for Calcite.  */
 end_comment
 
 begin_package

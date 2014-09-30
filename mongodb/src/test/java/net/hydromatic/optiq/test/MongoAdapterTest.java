@@ -324,7 +324,7 @@ name|getPath
 argument_list|()
 argument_list|)
 decl_stmt|;
-comment|/** Whether to run Mongo tests. Disabled by default, because we do not expect    * Mongo to be installed and populated with the FoodMart data set. To enable,    * specify {@code -Doptiq.test.mongodb=true} on the Java command line. */
+comment|/** Whether to run Mongo tests. Disabled by default, because we do not expect    * Mongo to be installed and populated with the FoodMart data set. To enable,    * specify {@code -Dcalcite.test.mongodb=true} on the Java command line. */
 specifier|public
 specifier|static
 specifier|final
@@ -335,7 +335,7 @@ name|Boolean
 operator|.
 name|getBoolean
 argument_list|(
-literal|"optiq.test.mongodb"
+literal|"calcite.test.mongodb"
 argument_list|)
 decl_stmt|;
 comment|/** Whether to run this test. */

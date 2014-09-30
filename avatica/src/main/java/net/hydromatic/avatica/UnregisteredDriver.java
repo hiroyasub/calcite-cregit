@@ -473,7 +473,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/** Returns the prefix of the connect string that this driver will recognize    * as its own. For example, "jdbc:optiq:". */
+comment|/** Returns the prefix of the connect string that this driver will recognize    * as its own. For example, "jdbc:calcite:". */
 specifier|protected
 specifier|abstract
 name|String

@@ -663,7 +663,7 @@ argument_list|()
 operator|.
 name|getProperty
 argument_list|(
-literal|"optiq.debug"
+literal|"calcite.debug"
 argument_list|)
 argument_list|)
 decl_stmt|;
@@ -684,7 +684,7 @@ argument_list|()
 operator|.
 name|getProperty
 argument_list|(
-literal|"optiq.enable.join.commute"
+literal|"calcite.enable.join.commute"
 argument_list|)
 argument_list|)
 decl_stmt|;
@@ -1192,7 +1192,7 @@ name|relNode
 argument_list|)
 return|;
 block|}
-comment|/** Creates a collection of planner factories.    *    *<p>The collection must have at least one factory, and each factory must    * create a planner. If the collection has more than one planner, Optiq will    * try each planner in turn.</p>    *    *<p>One of the things you can do with this mechanism is to try a simpler,    * faster, planner with a smaller rule set first, then fall back to a more    * complex planner for complex and costly queries.</p>    *    *<p>The default implementation returns a factory that calls    * {@link #createPlanner(net.hydromatic.optiq.jdbc.OptiqPrepare.Context)}.</p>    */
+comment|/** Creates a collection of planner factories.    *    *<p>The collection must have at least one factory, and each factory must    * create a planner. If the collection has more than one planner, Calcite will    * try each planner in turn.</p>    *    *<p>One of the things you can do with this mechanism is to try a simpler,    * faster, planner with a smaller rule set first, then fall back to a more    * complex planner for complex and costly queries.</p>    *    *<p>The default implementation returns a factory that calls    * {@link #createPlanner(net.hydromatic.optiq.jdbc.OptiqPrepare.Context)}.</p>    */
 specifier|protected
 name|List
 argument_list|<

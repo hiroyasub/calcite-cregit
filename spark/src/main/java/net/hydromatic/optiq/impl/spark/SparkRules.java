@@ -1721,7 +1721,7 @@ name|JavaSparkContext
 argument_list|(
 literal|"local[1]"
 argument_list|,
-literal|"optiq"
+literal|"calcite"
 argument_list|)
 decl_stmt|;
 specifier|final

@@ -478,7 +478,7 @@ operator|.
 name|INTEGER
 argument_list|)
 decl_stmt|;
-comment|// optiq is internally creating the creating the input ref via a
+comment|// calcite is internally creating the creating the input ref via a
 comment|// RexRangeRef
 comment|// which eventually leads to a RexInputRef. So we are good.
 specifier|final
@@ -636,7 +636,7 @@ index|[
 literal|0
 index|]
 operator|=
-literal|"Optiq"
+literal|"Calcite"
 expr_stmt|;
 name|result
 operator|=
@@ -667,7 +667,7 @@ index|]
 argument_list|,
 name|equalTo
 argument_list|(
-literal|"tiq"
+literal|"lcite"
 argument_list|)
 argument_list|)
 expr_stmt|;

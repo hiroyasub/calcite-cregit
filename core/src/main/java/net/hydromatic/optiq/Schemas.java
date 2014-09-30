@@ -1153,7 +1153,7 @@ name|tableName
 argument_list|)
 return|;
 block|}
-comment|/** Parses and validates a SQL query. For use within Optiq only. */
+comment|/** Parses and validates a SQL query. For use within Calcite only. */
 specifier|public
 specifier|static
 name|OptiqPrepare
@@ -1252,7 +1252,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/** Parses and validates a SQL query and converts to relational algebra. For    * use within Optiq only. */
+comment|/** Parses and validates a SQL query and converts to relational algebra. For    * use within Calcite only. */
 specifier|public
 specifier|static
 name|OptiqPrepare
@@ -1351,7 +1351,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/** Prepares a SQL query for execution. For use within Optiq only. */
+comment|/** Prepares a SQL query for execution. For use within Calcite only. */
 specifier|public
 specifier|static
 name|OptiqPrepare

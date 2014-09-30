@@ -591,7 +591,7 @@ name|RelDataTypeSystem
 name|typeSystem
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/** Creates a type factory with default type system.    *    * @deprecated Will be removed after optiq-0.9.1.    */
+comment|/** Creates a type factory with default type system.    *    * @deprecated Will be removed after calcite-0.9.1.    */
 specifier|protected
 name|RelDataTypeFactoryImpl
 parameter_list|()
@@ -607,7 +607,7 @@ name|Bug
 operator|.
 name|upgrade
 argument_list|(
-literal|"optiq-0.9.1"
+literal|"calcite-0.9.1"
 argument_list|)
 expr_stmt|;
 block|}

@@ -4,7 +4,7 @@ comment|/*  * Licensed to the Apache Software Foundation (ASF) under one or more
 end_comment
 
 begin_comment
-comment|/**  * Utilities to help implement Optiq's SPIs.  */
+comment|/**  * Utilities to help implement Calcite's SPIs.  */
 end_comment
 
 begin_package

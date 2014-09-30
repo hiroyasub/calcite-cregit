@@ -100,7 +100,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Implementation of {@link ResultSet}  * for the Optiq engine.  */
+comment|/**  * Implementation of {@link ResultSet}  * for the Calcite engine.  */
 end_comment
 
 begin_class

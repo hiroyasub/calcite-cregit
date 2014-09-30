@@ -70,7 +70,7 @@ name|algorithm
 init|=
 literal|false
 decl_stmt|;
-comment|/** Estimated number of rows.    *    *<p>If null, Optiq will a query to find the real value. */
+comment|/** Estimated number of rows.    *    *<p>If null, Calcite will a query to find the real value. */
 specifier|public
 name|Double
 name|rowCountEstimate

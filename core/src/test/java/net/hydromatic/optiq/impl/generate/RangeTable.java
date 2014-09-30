@@ -437,7 +437,7 @@ block|}
 block|}
 return|;
 block|}
-comment|/** Implementation of {@link net.hydromatic.optiq.TableFactory} that allows    * a {@link RangeTable} to be included as a custom table in an Optiq model    * file. */
+comment|/** Implementation of {@link net.hydromatic.optiq.TableFactory} that allows    * a {@link RangeTable} to be included as a custom table in a Calcite model    * file. */
 specifier|public
 specifier|static
 class|class

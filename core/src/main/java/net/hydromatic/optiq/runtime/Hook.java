@@ -392,7 +392,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/** Removes a Hook after use.    *    *<p>Note: Although it would be convenient, this interface cannot extend    * {@code AutoCloseable} while Optiq maintains compatibility with    * JDK 1.6.</p>    */
+comment|/** Removes a Hook after use.    *    *<p>Note: Although it would be convenient, this interface cannot extend    * {@code AutoCloseable} while Calcite maintains compatibility with    * JDK 1.6.</p>    */
 specifier|public
 interface|interface
 name|Closeable

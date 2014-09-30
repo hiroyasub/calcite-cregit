@@ -1144,7 +1144,7 @@ name|System
 operator|.
 name|getProperty
 argument_list|(
-literal|"optiq.ids"
+literal|"calcite.ids"
 argument_list|)
 decl_stmt|;
 if|if

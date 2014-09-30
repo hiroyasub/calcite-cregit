@@ -140,7 +140,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * User-defined table function.  *<p>  * Created by the validator, after resolving a function call to a function  * defined in an Optiq schema. */
+comment|/**  * User-defined table function.  *<p>  * Created by the validator, after resolving a function call to a function  * defined in a Calcite schema. */
 end_comment
 
 begin_class

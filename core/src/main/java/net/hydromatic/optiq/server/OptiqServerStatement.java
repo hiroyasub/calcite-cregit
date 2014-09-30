@@ -44,7 +44,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Statement within an Optiq server.  */
+comment|/**  * Statement within a Calcite server.  */
 end_comment
 
 begin_interface

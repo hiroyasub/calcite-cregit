@@ -72,7 +72,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Example of using Optiq via JDBC.  *  *<p>Schema is specified programmatically.</p>  */
+comment|/**  * Example of using Calcite via JDBC.  *  *<p>Schema is specified programmatically.</p>  */
 end_comment
 
 begin_class
@@ -123,7 +123,7 @@ name|DriverManager
 operator|.
 name|getConnection
 argument_list|(
-literal|"jdbc:optiq:"
+literal|"jdbc:calcite:"
 argument_list|)
 decl_stmt|;
 name|OptiqConnection

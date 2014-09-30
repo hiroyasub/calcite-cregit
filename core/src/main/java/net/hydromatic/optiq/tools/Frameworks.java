@@ -346,7 +346,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Tools for invoking Optiq functionality without initializing a container /  * server first.  */
+comment|/**  * Tools for invoking Calcite functionality without initializing a container /  * server first.  */
 end_comment
 
 begin_class
@@ -677,7 +677,7 @@ name|DriverManager
 operator|.
 name|getConnection
 argument_list|(
-literal|"jdbc:optiq:"
+literal|"jdbc:calcite:"
 argument_list|,
 name|info
 argument_list|)
@@ -1227,7 +1227,7 @@ name|this
 return|;
 block|}
 block|}
-comment|/**    * An implementation of {@link FrameworkConfig} that uses standard Optiq    * classes to provide basic planner functionality.    */
+comment|/**    * An implementation of {@link FrameworkConfig} that uses standard Calcite    * classes to provide basic planner functionality.    */
 specifier|static
 class|class
 name|StdFrameworkConfig

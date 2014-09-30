@@ -100,7 +100,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Extension to Optiq's implementation of  * {@link java.sql.Connection JDBC connection} allows schemas to be defined  * dynamically.  *  *<p>You can start off with an empty connection (no schemas), define one  * or two schemas, and start querying them.</p>  *  *<p>Since an {@code OptiqConnection} implements the linq4j  * {@link QueryProvider} interface, you can use a connection to execute  * expression trees as queries.</p>  */
+comment|/**  * Extension to Calcite's implementation of  * {@link java.sql.Connection JDBC connection} allows schemas to be defined  * dynamically.  *  *<p>You can start off with an empty connection (no schemas), define one  * or two schemas, and start querying them.</p>  *  *<p>Since an {@code OptiqConnection} implements the linq4j  * {@link QueryProvider} interface, you can use a connection to execute  * expression trees as queries.</p>  */
 end_comment
 
 begin_interface

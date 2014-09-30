@@ -309,7 +309,7 @@ operator|.
 name|close
 argument_list|()
 expr_stmt|;
-comment|// Connect via optiq to these databases
+comment|// Connect via calcite to these databases
 name|Connection
 name|connection
 init|=
@@ -317,7 +317,7 @@ name|DriverManager
 operator|.
 name|getConnection
 argument_list|(
-literal|"jdbc:optiq:"
+literal|"jdbc:calcite:"
 argument_list|)
 decl_stmt|;
 name|OptiqConnection
@@ -540,7 +540,7 @@ operator|.
 name|close
 argument_list|()
 expr_stmt|;
-comment|// Make an optiq schema with both a jdbc schema and a non-jdbc schema
+comment|// Make a Calcite schema with both a jdbc schema and a non-jdbc schema
 name|Connection
 name|optiqConn
 init|=
@@ -548,7 +548,7 @@ name|DriverManager
 operator|.
 name|getConnection
 argument_list|(
-literal|"jdbc:optiq:"
+literal|"jdbc:calcite:"
 argument_list|)
 decl_stmt|;
 name|OptiqConnection
@@ -957,7 +957,7 @@ operator|+
 literal|"field1 varchar(10))"
 argument_list|)
 expr_stmt|;
-comment|// Connect via optiq to these databases
+comment|// Connect via calcite to these databases
 name|Connection
 name|connection
 init|=
@@ -965,7 +965,7 @@ name|DriverManager
 operator|.
 name|getConnection
 argument_list|(
-literal|"jdbc:optiq:"
+literal|"jdbc:calcite:"
 argument_list|)
 decl_stmt|;
 name|OptiqConnection

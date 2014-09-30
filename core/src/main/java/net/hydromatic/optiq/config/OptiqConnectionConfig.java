@@ -52,7 +52,7 @@ import|;
 end_import
 
 begin_comment
-comment|/** Interface for reading connection properties within Optiq code. There is  * a method for every property. At some point there will be similar config  * classes for system and statement properties. */
+comment|/** Interface for reading connection properties within Calcite code. There is  * a method for every property. At some point there will be similar config  * classes for system and statement properties. */
 end_comment
 
 begin_interface

@@ -286,7 +286,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Optiq test suite.  *  *<p>Tests are sorted by approximate running time. The suite runs the fastest  * tests first, so that regressions can be discovered as fast as possible.  * Most unit tests run very quickly, and are scheduled before system tests  * (which are slower but more likely to break because they have more  * dependencies). Slow unit tests that don't break often are scheduled last.</p>  */
+comment|/**  * Calcite test suite.  *  *<p>Tests are sorted by approximate running time. The suite runs the fastest  * tests first, so that regressions can be discovered as fast as possible.  * Most unit tests run very quickly, and are scheduled before system tests  * (which are slower but more likely to break because they have more  * dependencies). Slow unit tests that don't break often are scheduled last.</p>  */
 end_comment
 
 begin_class
@@ -521,7 +521,7 @@ operator|.
 name|class
 block|,
 comment|// system tests and benchmarks (very slow, but usually only run if
-comment|// '-Doptiq.test.slow=true' is specified)
+comment|// '-Dcalcite.test.slow=true' is specified)
 name|FoodmartTest
 operator|.
 name|class

@@ -94,7 +94,7 @@ name|Boolean
 operator|.
 name|getBoolean
 argument_list|(
-literal|"optiq.strict.sql"
+literal|"calcite.strict.sql"
 argument_list|)
 argument_list|,
 literal|false

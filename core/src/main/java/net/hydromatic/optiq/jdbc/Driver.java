@@ -116,7 +116,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Optiq JDBC driver.  */
+comment|/**  * Calcite JDBC driver.  */
 end_comment
 
 begin_class
@@ -132,7 +132,7 @@ specifier|final
 name|String
 name|CONNECT_STRING_PREFIX
 init|=
-literal|"jdbc:optiq:"
+literal|"jdbc:calcite:"
 decl_stmt|;
 specifier|final
 name|Function0
@@ -243,11 +243,11 @@ name|class
 argument_list|,
 literal|"net-hydromatic-optiq-jdbc.properties"
 argument_list|,
-literal|"Optiq JDBC Driver"
+literal|"Calcite JDBC Driver"
 argument_list|,
 literal|"unknown version"
 argument_list|,
-literal|"Optiq"
+literal|"Calcite"
 argument_list|,
 literal|"unknown version"
 argument_list|)

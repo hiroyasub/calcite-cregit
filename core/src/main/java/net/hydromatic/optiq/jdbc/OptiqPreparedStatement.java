@@ -64,7 +64,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Implementation of {@link java.sql.PreparedStatement}  * for the Optiq engine.  *  *<p>This class has sub-classes which implement JDBC 3.0 and JDBC 4.0 APIs;  * it is instantiated using {@link net.hydromatic.avatica.AvaticaFactory#newPreparedStatement}.</p>  */
+comment|/**  * Implementation of {@link java.sql.PreparedStatement}  * for the Calcite engine.  *  *<p>This class has sub-classes which implement JDBC 3.0 and JDBC 4.0 APIs;  * it is instantiated using {@link net.hydromatic.avatica.AvaticaFactory#newPreparedStatement}.</p>  */
 end_comment
 
 begin_class

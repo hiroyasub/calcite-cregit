@@ -233,7 +233,7 @@ specifier|final
 name|MaterializationKey
 name|key
 decl_stmt|;
-comment|/**    * Internal connection, used to execute queries to materialize views.    * To be used only by Optiq internals. And sparingly.    */
+comment|/**    * Internal connection, used to execute queries to materialize views.    * To be used only by Calcite internals. And sparingly.    */
 specifier|public
 specifier|static
 specifier|final
@@ -250,7 +250,7 @@ name|DriverManager
 operator|.
 name|getConnection
 argument_list|(
-literal|"jdbc:optiq:"
+literal|"jdbc:calcite:"
 argument_list|)
 operator|.
 name|unwrap

@@ -54,7 +54,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Implementation of {@link java.sql.Statement}  * for the Optiq engine.  */
+comment|/**  * Implementation of {@link java.sql.Statement}  * for the Calcite engine.  */
 end_comment
 
 begin_class

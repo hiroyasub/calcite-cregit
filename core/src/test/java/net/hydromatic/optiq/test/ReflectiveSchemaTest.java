@@ -767,7 +767,7 @@ name|DriverManager
 operator|.
 name|getConnection
 argument_list|(
-literal|"jdbc:optiq:"
+literal|"jdbc:calcite:"
 argument_list|)
 decl_stmt|;
 name|OptiqConnection
@@ -909,7 +909,7 @@ name|DriverManager
 operator|.
 name|getConnection
 argument_list|(
-literal|"jdbc:optiq:"
+literal|"jdbc:calcite:"
 argument_list|)
 decl_stmt|;
 name|OptiqConnection
@@ -1039,7 +1039,7 @@ name|DriverManager
 operator|.
 name|getConnection
 argument_list|(
-literal|"jdbc:optiq:"
+literal|"jdbc:calcite:"
 argument_list|)
 decl_stmt|;
 name|OptiqConnection
@@ -1692,7 +1692,7 @@ name|CatchallSchema
 argument_list|()
 argument_list|)
 decl_stmt|;
-comment|// With optiq-119, returned 0 rows. The problem was that when comparing
+comment|// With OPTIQ-119, returned 0 rows. The problem was that when comparing
 comment|// a Java type (long) and a SQL type (INTEGER), the SQL type was deemed
 comment|// "less restrictive". So, the long value got truncated to an int value.
 name|with

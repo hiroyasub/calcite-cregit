@@ -42,7 +42,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Extension to the {@link Schema} interface.  *  *<p>Given a user-defined schema that implements the {@link Schema} interface,  * Optiq creates a wrapper that implements the {@code SchemaPlus} interface.  * This provides extra functionality, such as access to tables that have been  * added explicitly.</p>  *  *<p>A user-defined schema does not need to implement this interface, but by  * the time a schema is passed to a method in a user-defined schema or  * user-defined table, it will have been wrapped in this interface.</p>  */
+comment|/**  * Extension to the {@link Schema} interface.  *  *<p>Given a user-defined schema that implements the {@link Schema} interface,  * Calcite creates a wrapper that implements the {@code SchemaPlus} interface.  * This provides extra functionality, such as access to tables that have been  * added explicitly.</p>  *  *<p>A user-defined schema does not need to implement this interface, but by  * the time a schema is passed to a method in a user-defined schema or  * user-defined table, it will have been wrapped in this interface.</p>  */
 end_comment
 
 begin_interface

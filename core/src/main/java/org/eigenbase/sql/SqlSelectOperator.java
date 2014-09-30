@@ -496,7 +496,7 @@ operator|!=
 literal|null
 condition|)
 block|{
-comment|// Optiq SQL requires FROM but MySQL does not.
+comment|// Calcite SQL requires FROM but MySQL does not.
 name|writer
 operator|.
 name|sep
