@@ -959,7 +959,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Tests 2-way join query on a pre-defined aggregate table. */
+comment|/** Tests a model with pre-defined tiles. */
 annotation|@
 name|Test
 specifier|public
@@ -1173,6 +1173,87 @@ argument_list|)
 operator|.
 name|sameResultWithMaterializationsDisabled
 argument_list|()
+expr_stmt|;
+block|}
+comment|/** Tests a model that uses an algorithm to generate an initial set of    * tiles.    *    *<p>Test case for    *<a href="https://issues.apache.org/jira/browse/OPTIQ-428">OPTIQ-428,    * "Use optimization algorithm to suggest which tiles of a lattice to    * materialize"</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testTileAlgorithm
+parameter_list|()
+block|{
+name|foodmartModel
+argument_list|(
+literal|" auto: false,\n"
+operator|+
+literal|"  algorithm: true,\n"
+operator|+
+literal|"  rowCountEstimate: 86000,\n"
+operator|+
+literal|"  defaultMeasures: [ {\n"
+operator|+
+literal|"      agg: 'sum',\n"
+operator|+
+literal|"      args: 'unit_sales'\n"
+operator|+
+literal|"    }, {\n"
+operator|+
+literal|"      agg: 'sum',\n"
+operator|+
+literal|"      args: 'store_sales'\n"
+operator|+
+literal|"    }, {\n"
+operator|+
+literal|"      agg: 'count'\n"
+operator|+
+literal|"  } ],\n"
+operator|+
+literal|"  tiles: [ {\n"
+operator|+
+literal|"    dimensions: [ 'the_year', ['t', 'quarter'] ],\n"
+operator|+
+literal|"    measures: [ ]\n"
+operator|+
+literal|"  } ]\n"
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select distinct t.\"the_year\", t.\"quarter\"\n"
+operator|+
+literal|"from \"foodmart\".\"sales_fact_1997\" as s\n"
+operator|+
+literal|"join \"foodmart\".\"time_by_day\" as t using (\"time_id\")\n"
+argument_list|)
+operator|.
+name|enableMaterializations
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|"EnumerableAggregateRel(group=[{3, 4}])\n"
+operator|+
+literal|"  EnumerableTableAccessRel(table=[[adhoc, m{7, 16, 25, 27, 31, 37}]])"
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"the_year=1997; quarter=Q1"
+argument_list|,
+literal|"the_year=1997; quarter=Q2"
+argument_list|,
+literal|"the_year=1997; quarter=Q3"
+argument_list|,
+literal|"the_year=1997; quarter=Q4"
+argument_list|)
+operator|.
+name|returnsCount
+argument_list|(
+literal|4
+argument_list|)
 expr_stmt|;
 block|}
 comment|/** Runs all queries against the Foodmart schema, using a lattice.    *    *<p>Disabled for normal runs, because it is slow. */

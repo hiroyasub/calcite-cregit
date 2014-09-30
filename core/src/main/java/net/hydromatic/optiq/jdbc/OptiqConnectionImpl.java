@@ -696,7 +696,8 @@ name|tile
 range|:
 name|lattice
 operator|.
-name|tiles
+name|computeTiles
+argument_list|()
 control|)
 block|{
 name|service

@@ -63,6 +63,18 @@ name|auto
 init|=
 literal|true
 decl_stmt|;
+comment|/** Whether to use an algorithm to suggest aggregates.    *    *<p>Default is false. */
+specifier|public
+name|boolean
+name|algorithm
+init|=
+literal|false
+decl_stmt|;
+comment|/** Estimated number of rows.    *    *<p>If null, Optiq will a query to find the real value. */
+specifier|public
+name|Double
+name|rowCountEstimate
+decl_stmt|;
 comment|/** List of materialized aggregates to create up front. */
 specifier|public
 specifier|final

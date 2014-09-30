@@ -431,6 +431,13 @@ operator|.
 name|starRelOptTable
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+name|OptiqPrepareImpl
+operator|.
+name|DEBUG
+condition|)
+block|{
 name|System
 operator|.
 name|out
@@ -461,6 +468,7 @@ name|queryRel
 argument_list|)
 argument_list|)
 expr_stmt|;
+block|}
 block|}
 block|}
 comment|/** Converts a relational expression to use a    * {@link net.hydromatic.optiq.impl.StarTable} defined in {@code schema}.    * Uses the first star table that fits. */
