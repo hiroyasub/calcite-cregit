@@ -113,6 +113,20 @@ name|MaterializationService
 import|;
 end_import
 
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|optiq
+operator|.
+name|materialize
+operator|.
+name|TileKey
+import|;
+end_import
+
 begin_comment
 comment|/**  * Use of a lattice by the query optimizer.  */
 end_comment
@@ -204,8 +218,6 @@ name|OptiqSchema
 operator|.
 name|TableEntry
 argument_list|,
-name|MaterializationService
-operator|.
 name|TileKey
 argument_list|>
 name|getAggregate
@@ -300,6 +312,8 @@ argument_list|,
 name|schema
 argument_list|,
 name|create
+argument_list|,
+literal|false
 argument_list|)
 return|;
 block|}

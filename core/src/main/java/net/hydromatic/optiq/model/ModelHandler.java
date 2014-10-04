@@ -1355,7 +1355,8 @@ name|optiqSchema
 argument_list|,
 name|jsonMaterialization
 operator|.
-name|sql
+name|getSql
+argument_list|()
 argument_list|,
 literal|null
 argument_list|,
@@ -1447,7 +1448,8 @@ name|optiqSchema
 argument_list|,
 name|jsonLattice
 operator|.
-name|sql
+name|getSql
+argument_list|()
 argument_list|)
 operator|.
 name|auto
@@ -1750,7 +1752,8 @@ name|schema
 argument_list|,
 name|jsonView
 operator|.
-name|sql
+name|getSql
+argument_list|()
 argument_list|,
 name|path
 argument_list|)

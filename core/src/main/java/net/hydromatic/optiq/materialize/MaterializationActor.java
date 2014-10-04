@@ -130,17 +130,32 @@ name|newHashMap
 argument_list|()
 decl_stmt|;
 specifier|final
-name|List
+name|Map
 argument_list|<
-name|MaterializationService
+name|TileKey
+argument_list|,
+name|MaterializationKey
+argument_list|>
+name|keyByTile
+init|=
+name|Maps
 operator|.
+name|newHashMap
+argument_list|()
+decl_stmt|;
+comment|/** Tiles grouped by dimensionality. We use a    *  {@link TileKey} with no measures to represent a    *  dimensionality. */
+specifier|final
+name|Multimap
+argument_list|<
+name|TileKey
+argument_list|,
 name|TileKey
 argument_list|>
-name|tileKeys
+name|tilesByDimensionality
 init|=
-name|Lists
+name|HashMultimap
 operator|.
-name|newArrayList
+name|create
 argument_list|()
 decl_stmt|;
 comment|/** A query materialized in a table, so that reading from the table gives the    * same results as executing the query. */

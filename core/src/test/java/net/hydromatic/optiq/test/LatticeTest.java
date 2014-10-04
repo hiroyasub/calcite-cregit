@@ -23,6 +23,20 @@ name|hydromatic
 operator|.
 name|optiq
 operator|.
+name|materialize
+operator|.
+name|MaterializationService
+import|;
+end_import
+
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|optiq
+operator|.
 name|runtime
 operator|.
 name|Hook
@@ -107,6 +121,20 @@ end_import
 
 begin_import
 import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|Lists
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|junit
@@ -132,6 +160,46 @@ operator|.
 name|io
 operator|.
 name|IOException
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|sql
+operator|.
+name|Connection
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|sql
+operator|.
+name|DriverManager
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|sql
+operator|.
+name|ResultSet
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|sql
+operator|.
+name|SQLException
 import|;
 end_import
 
@@ -1019,40 +1087,8 @@ name|void
 name|testLatticeWithPreDefinedTilesFewerMeasures
 parameter_list|()
 block|{
-name|foodmartModel
-argument_list|(
-literal|" auto: false,\n"
-operator|+
-literal|"  defaultMeasures: [ {\n"
-operator|+
-literal|"    agg: 'count'\n"
-operator|+
-literal|"  } ],\n"
-operator|+
-literal|"  tiles: [ {\n"
-operator|+
-literal|"    dimensions: [ 'the_year', ['t', 'quarter'] ],\n"
-operator|+
-literal|"    measures: [ {\n"
-operator|+
-literal|"      agg: 'sum',\n"
-operator|+
-literal|"      args: 'unit_sales'\n"
-operator|+
-literal|"    }, {\n"
-operator|+
-literal|"      agg: 'sum',\n"
-operator|+
-literal|"      args: 'store_sales'\n"
-operator|+
-literal|"    }, {\n"
-operator|+
-literal|"      agg: 'count'\n"
-operator|+
-literal|"    } ]\n"
-operator|+
-literal|"  } ]\n"
-argument_list|)
+name|foodmartModelWithOneTile
+argument_list|()
 operator|.
 name|query
 argument_list|(
@@ -1100,40 +1136,8 @@ name|void
 name|testLatticeWithPreDefinedTilesRollUp
 parameter_list|()
 block|{
-name|foodmartModel
-argument_list|(
-literal|" auto: false,\n"
-operator|+
-literal|"  defaultMeasures: [ {\n"
-operator|+
-literal|"    agg: 'count'\n"
-operator|+
-literal|"  } ],\n"
-operator|+
-literal|"  tiles: [ {\n"
-operator|+
-literal|"    dimensions: [ 'the_year', ['t', 'quarter'] ],\n"
-operator|+
-literal|"    measures: [ {\n"
-operator|+
-literal|"      agg: 'sum',\n"
-operator|+
-literal|"      args: 'unit_sales'\n"
-operator|+
-literal|"    }, {\n"
-operator|+
-literal|"      agg: 'sum',\n"
-operator|+
-literal|"      args: 'store_sales'\n"
-operator|+
-literal|"    }, {\n"
-operator|+
-literal|"      agg: 'count'\n"
-operator|+
-literal|"    } ]\n"
-operator|+
-literal|"  } ]\n"
-argument_list|)
+name|foodmartModelWithOneTile
+argument_list|()
 operator|.
 name|query
 argument_list|(
@@ -1161,7 +1165,7 @@ name|explainContains
 argument_list|(
 literal|"EnumerableCalcRel(expr#0..3=[{inputs}], expr#4=[10], expr#5=[*($t3, $t4)], proj#0..2=[{exprs}], US=[$t5])\n"
 operator|+
-literal|"  EnumerableAggregateRel(group=[{0}], agg#0=[$SUM0($2)], Q=[MIN($1)], agg#2=[$SUM0($4)])\n"
+literal|"  EnumerableAggregateRel(group=[{0}], C=[$SUM0($2)], Q=[MIN($1)], agg#2=[$SUM0($4)])\n"
 operator|+
 literal|"    EnumerableTableAccessRel(table=[[adhoc, m{27, 31}"
 argument_list|)
@@ -1183,11 +1187,26 @@ name|void
 name|testTileAlgorithm
 parameter_list|()
 block|{
+name|MaterializationService
+operator|.
+name|setThreadLocal
+argument_list|()
+expr_stmt|;
+name|MaterializationService
+operator|.
+name|instance
+argument_list|()
+operator|.
+name|clear
+argument_list|()
+expr_stmt|;
 name|foodmartModel
 argument_list|(
 literal|" auto: false,\n"
 operator|+
 literal|"  algorithm: true,\n"
+operator|+
+literal|"  algorithmMaxMillis: -1,\n"
 operator|+
 literal|"  rowCountEstimate: 86000,\n"
 operator|+
@@ -1234,9 +1253,9 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"EnumerableAggregateRel(group=[{3, 4}])\n"
+literal|"EnumerableAggregateRel(group=[{2, 3}])\n"
 operator|+
-literal|"  EnumerableTableAccessRel(table=[[adhoc, m{7, 16, 25, 27, 31, 37}]])"
+literal|"  EnumerableTableAccessRel(table=[[adhoc, m{16, 17, 27, 31}]])"
 argument_list|)
 operator|.
 name|returnsUnordered
@@ -1253,6 +1272,367 @@ operator|.
 name|returnsCount
 argument_list|(
 literal|4
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests a query that uses no columns from the fact table. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testGroupByEmpty
+parameter_list|()
+block|{
+name|foodmartModel
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"select count(*) as c from \"foodmart\".\"sales_fact_1997\""
+argument_list|)
+operator|.
+name|enableMaterializations
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"C=86837"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Calls {@link #testDistinctCount()} followed by    * {@link #testGroupByEmpty()}. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testGroupByEmptyWithPrelude
+parameter_list|()
+block|{
+name|testDistinctCount
+argument_list|()
+expr_stmt|;
+name|testGroupByEmpty
+argument_list|()
+expr_stmt|;
+block|}
+comment|/** Tests a query that uses no dimension columns and one measure column. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testGroupByEmpty2
+parameter_list|()
+block|{
+name|foodmartModel
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"select sum(\"unit_sales\") as s\n"
+operator|+
+literal|"from \"foodmart\".\"sales_fact_1997\""
+argument_list|)
+operator|.
+name|enableMaterializations
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"S=266773.0000"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests that two queries of the same dimensionality that use different    * measures can use the same materialization. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testGroupByEmpty3
+parameter_list|()
+block|{
+specifier|final
+name|List
+argument_list|<
+name|String
+argument_list|>
+name|mats
+init|=
+name|Lists
+operator|.
+name|newArrayList
+argument_list|()
+decl_stmt|;
+specifier|final
+name|Function
+argument_list|<
+name|String
+argument_list|,
+name|Void
+argument_list|>
+name|handler
+init|=
+operator|new
+name|Function
+argument_list|<
+name|String
+argument_list|,
+name|Void
+argument_list|>
+argument_list|()
+block|{
+specifier|public
+name|Void
+name|apply
+parameter_list|(
+name|String
+name|materializationName
+parameter_list|)
+block|{
+name|mats
+operator|.
+name|add
+argument_list|(
+name|materializationName
+argument_list|)
+expr_stmt|;
+return|return
+literal|null
+return|;
+block|}
+block|}
+decl_stmt|;
+specifier|final
+name|OptiqAssert
+operator|.
+name|AssertThat
+name|that
+init|=
+name|foodmartModel
+argument_list|()
+operator|.
+name|pooled
+argument_list|()
+decl_stmt|;
+name|that
+operator|.
+name|query
+argument_list|(
+literal|"select sum(\"unit_sales\") as s, count(*) as c\n"
+operator|+
+literal|"from \"foodmart\".\"sales_fact_1997\""
+argument_list|)
+operator|.
+name|withHook
+argument_list|(
+name|Hook
+operator|.
+name|CREATE_MATERIALIZATION
+argument_list|,
+name|handler
+argument_list|)
+operator|.
+name|enableMaterializations
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|"EnumerableTableAccessRel(table=[[adhoc, m{}]])"
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"S=266773.0000; C=86837"
+argument_list|)
+expr_stmt|;
+name|assertThat
+argument_list|(
+name|mats
+operator|.
+name|toString
+argument_list|()
+argument_list|,
+name|mats
+operator|.
+name|size
+argument_list|()
+argument_list|,
+name|equalTo
+argument_list|(
+literal|2
+argument_list|)
+argument_list|)
+expr_stmt|;
+comment|// A similar query can use the same materialization.
+name|that
+operator|.
+name|query
+argument_list|(
+literal|"select sum(\"unit_sales\") as s\n"
+operator|+
+literal|"from \"foodmart\".\"sales_fact_1997\""
+argument_list|)
+operator|.
+name|withHook
+argument_list|(
+name|Hook
+operator|.
+name|CREATE_MATERIALIZATION
+argument_list|,
+name|handler
+argument_list|)
+operator|.
+name|enableMaterializations
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"S=266773.0000"
+argument_list|)
+expr_stmt|;
+name|assertThat
+argument_list|(
+name|mats
+operator|.
+name|toString
+argument_list|()
+argument_list|,
+name|mats
+operator|.
+name|size
+argument_list|()
+argument_list|,
+name|equalTo
+argument_list|(
+literal|2
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Rolling up SUM. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSum
+parameter_list|()
+block|{
+name|foodmartModelWithOneTile
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"select sum(\"unit_sales\") as c\n"
+operator|+
+literal|"from \"foodmart\".\"sales_fact_1997\"\n"
+operator|+
+literal|"group by \"product_id\"\n"
+operator|+
+literal|"order by 1 desc limit 1"
+argument_list|)
+operator|.
+name|enableMaterializations
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"C=267.0000"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests a distinct-count query.    *    *<p>We can't just roll up count(distinct ...) as we do count(...), but we    * can still use the aggregate table if we're smart. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDistinctCount
+parameter_list|()
+block|{
+name|foodmartModelWithOneTile
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"select count(distinct \"quarter\") as c\n"
+operator|+
+literal|"from \"foodmart\".\"sales_fact_1997\"\n"
+operator|+
+literal|"join \"foodmart\".\"time_by_day\" using (\"time_id\")\n"
+operator|+
+literal|"group by \"the_year\""
+argument_list|)
+operator|.
+name|enableMaterializations
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|"EnumerableCalcRel(expr#0..1=[{inputs}], C=[$t1])\n"
+operator|+
+literal|"  EnumerableAggregateRel(group=[{0}], C=[COUNT($1)])\n"
+operator|+
+literal|"    EnumerableCalcRel(expr#0..4=[{inputs}], proj#0..1=[{exprs}])\n"
+operator|+
+literal|"      EnumerableTableAccessRel(table=[[adhoc, m{27, 31}]])"
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"C=4"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDistinctCount2
+parameter_list|()
+block|{
+name|foodmartModelWithOneTile
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"select count(distinct \"the_year\") as c\n"
+operator|+
+literal|"from \"foodmart\".\"sales_fact_1997\"\n"
+operator|+
+literal|"join \"foodmart\".\"time_by_day\" using (\"time_id\")\n"
+operator|+
+literal|"group by \"the_year\""
+argument_list|)
+operator|.
+name|enableMaterializations
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|"EnumerableCalcRel(expr#0..1=[{inputs}], C=[$t1])\n"
+operator|+
+literal|"  EnumerableAggregateRel(group=[{0}], C=[COUNT($0)])\n"
+operator|+
+literal|"    EnumerableAggregateRel(group=[{0}])\n"
+operator|+
+literal|"      EnumerableTableAccessRel(table=[[adhoc, m{27, 31}]])"
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"C=1"
 argument_list|)
 expr_stmt|;
 block|}
@@ -1435,40 +1815,8 @@ condition|)
 block|{
 return|return;
 block|}
-name|foodmartModel
-argument_list|(
-literal|" auto: false,\n"
-operator|+
-literal|"  defaultMeasures: [ {\n"
-operator|+
-literal|"    agg: 'count'\n"
-operator|+
-literal|"  } ],\n"
-operator|+
-literal|"  tiles: [ {\n"
-operator|+
-literal|"    dimensions: [ 'the_year', ['t', 'quarter'] ],\n"
-operator|+
-literal|"    measures: [ {\n"
-operator|+
-literal|"      agg: 'sum',\n"
-operator|+
-literal|"      args: 'unit_sales'\n"
-operator|+
-literal|"    }, {\n"
-operator|+
-literal|"      agg: 'sum',\n"
-operator|+
-literal|"      args: 'store_sales'\n"
-operator|+
-literal|"    }, {\n"
-operator|+
-literal|"      agg: 'count'\n"
-operator|+
-literal|"    } ]\n"
-operator|+
-literal|"  } ]\n"
-argument_list|)
+name|foodmartModelWithOneTile
+argument_list|()
 operator|.
 name|withSchema
 argument_list|(
@@ -1570,6 +1918,104 @@ argument_list|,
 name|extras
 argument_list|)
 return|;
+block|}
+specifier|private
+name|OptiqAssert
+operator|.
+name|AssertThat
+name|foodmartModelWithOneTile
+parameter_list|()
+block|{
+return|return
+name|foodmartModel
+argument_list|(
+literal|" auto: false,\n"
+operator|+
+literal|"  defaultMeasures: [ {\n"
+operator|+
+literal|"    agg: 'count'\n"
+operator|+
+literal|"  } ],\n"
+operator|+
+literal|"  tiles: [ {\n"
+operator|+
+literal|"    dimensions: [ 'the_year', ['t', 'quarter'] ],\n"
+operator|+
+literal|"    measures: [ {\n"
+operator|+
+literal|"      agg: 'sum',\n"
+operator|+
+literal|"      args: 'unit_sales'\n"
+operator|+
+literal|"    }, {\n"
+operator|+
+literal|"      agg: 'sum',\n"
+operator|+
+literal|"      args: 'store_sales'\n"
+operator|+
+literal|"    }, {\n"
+operator|+
+literal|"      agg: 'count'\n"
+operator|+
+literal|"    } ]\n"
+operator|+
+literal|"  } ]\n"
+argument_list|)
+return|;
+block|}
+comment|// Just for debugging.
+specifier|private
+specifier|static
+name|void
+name|runJdbc
+parameter_list|()
+throws|throws
+name|SQLException
+block|{
+specifier|final
+name|Connection
+name|connection
+init|=
+name|DriverManager
+operator|.
+name|getConnection
+argument_list|(
+literal|"jdbc:calcite:model=core/src/test/resources/mysql-foodmart-lattice-model.json"
+argument_list|)
+decl_stmt|;
+specifier|final
+name|ResultSet
+name|resultSet
+init|=
+name|connection
+operator|.
+name|createStatement
+argument_list|()
+operator|.
+name|executeQuery
+argument_list|(
+literal|"select * from \"adhoc\".\"m{27, 31}\""
+argument_list|)
+decl_stmt|;
+name|System
+operator|.
+name|out
+operator|.
+name|println
+argument_list|(
+name|OptiqAssert
+operator|.
+name|toString
+argument_list|(
+name|resultSet
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|connection
+operator|.
+name|close
+argument_list|()
+expr_stmt|;
 block|}
 block|}
 end_class

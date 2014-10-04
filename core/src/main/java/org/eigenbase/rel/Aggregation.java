@@ -36,7 +36,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * An<code>Aggregation</code> aggregates a set of values into one value.  *  *<p>It is used, via a {@link AggregateCall}, in an {@link AggregateRel}  * relational operator.</p>  */
+comment|/**  * An<code>Aggregation</code> aggregates a set of values into one value.  *  *<p>It is used, via a {@link AggregateCall}, in an {@link AggregateRel}  * relational operator.</p>  *  * @deprecated Use {@link org.eigenbase.sql.SqlAggFunction};  * after {@link org.eigenbase.util.Bug#upgrade calcite-0.9.1},  * {@link org.eigenbase.rel.AggregateCall} will require a {@code SqlAggFunction}  * and after {@link org.eigenbase.util.Bug#upgrade calcite-0.9.2}  * this interface will be removed.  */
 end_comment
 
 begin_interface
@@ -45,7 +45,7 @@ interface|interface
 name|Aggregation
 block|{
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**    * Returns the parameter types accepted by this Aggregation.    *    * @param typeFactory Type factory to create the types    * @return Array of parameter types    */
+comment|/**    * Returns the parameter types accepted by this Aggregation.    *    * @param typeFactory Type factory to create the types    * @return Array of parameter types    *    * @deprecated Use    * {@link org.eigenbase.sql.SqlAggFunction#getOperandTypeInference()}; will    * be removed after {@link org.eigenbase.util.Bug#upgrade calcite-0.9.2}.    */
 name|List
 argument_list|<
 name|RelDataType
@@ -56,7 +56,7 @@ name|RelDataTypeFactory
 name|typeFactory
 parameter_list|)
 function_decl|;
-comment|/**    * Returns the type of the result yielded by this Aggregation.    *    * @param typeFactory Type factory to create the type    * @return Result type    */
+comment|/**    * Returns the type of the result yielded by this Aggregation.    *    * @param typeFactory Type factory to create the type    * @return Result type    *    * @deprecated Use    * {@link org.eigenbase.sql.SqlAggFunction#getReturnTypeInference()}; will    * be removed after {@link org.eigenbase.util.Bug#upgrade calcite-0.9.2}.    */
 name|RelDataType
 name|getReturnType
 parameter_list|(

@@ -64,6 +64,8 @@ name|Object
 name|o1
 parameter_list|)
 block|{
+comment|// Same as java.lang.Objects.equals (JDK 1.7 and later)
+comment|// and com.google.common.base.Objects.equal
 return|return
 name|o0
 operator|==

@@ -91,6 +91,18 @@ begin_import
 import|import static
 name|org
 operator|.
+name|hamcrest
+operator|.
+name|CoreMatchers
+operator|.
+name|equalTo
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
 name|junit
 operator|.
 name|Assert
@@ -763,7 +775,7 @@ literal|"SemiMutableSchema"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Tests a model containing a lattice. */
+comment|/** Tests a model containing a lattice and some views. */
 annotation|@
 name|Test
 specifier|public
@@ -829,6 +841,26 @@ literal|"             }\n"
 operator|+
 literal|"           ]\n"
 operator|+
+literal|"         },\n"
+operator|+
+literal|"         {\n"
+operator|+
+literal|"           name: 'V',\n"
+operator|+
+literal|"           type: 'view',\n"
+operator|+
+literal|"           sql: 'values (1)'\n"
+operator|+
+literal|"         },\n"
+operator|+
+literal|"         {\n"
+operator|+
+literal|"           name: 'V2',\n"
+operator|+
+literal|"           type: 'view',\n"
+operator|+
+literal|"           sql: [ 'values (1)', '(2)' ]\n"
+operator|+
 literal|"         }\n"
 operator|+
 literal|"       ],\n"
@@ -840,6 +872,14 @@ operator|+
 literal|"           name: 'SalesStar',\n"
 operator|+
 literal|"           sql: 'select * from sales_fact_1997'\n"
+operator|+
+literal|"         },\n"
+operator|+
+literal|"         {\n"
+operator|+
+literal|"           name: 'SalesStar2',\n"
+operator|+
+literal|"           sql: [ 'select *', 'from sales_fact_1997' ]\n"
 operator|+
 literal|"         }\n"
 operator|+
@@ -904,7 +944,7 @@ argument_list|)
 expr_stmt|;
 name|assertEquals
 argument_list|(
-literal|1
+literal|2
 argument_list|,
 name|schema
 operator|.
@@ -942,9 +982,307 @@ literal|"select * from sales_fact_1997"
 argument_list|,
 name|lattice0
 operator|.
-name|sql
+name|getSql
+argument_list|()
 argument_list|)
 expr_stmt|;
+specifier|final
+name|JsonLattice
+name|lattice1
+init|=
+name|schema
+operator|.
+name|lattices
+operator|.
+name|get
+argument_list|(
+literal|1
+argument_list|)
+decl_stmt|;
+name|assertEquals
+argument_list|(
+literal|"SalesStar2"
+argument_list|,
+name|lattice1
+operator|.
+name|name
+argument_list|)
+expr_stmt|;
+name|assertEquals
+argument_list|(
+literal|"select *\nfrom sales_fact_1997\n"
+argument_list|,
+name|lattice1
+operator|.
+name|getSql
+argument_list|()
+argument_list|)
+expr_stmt|;
+name|assertEquals
+argument_list|(
+literal|4
+argument_list|,
+name|schema
+operator|.
+name|tables
+operator|.
+name|size
+argument_list|()
+argument_list|)
+expr_stmt|;
+specifier|final
+name|JsonTable
+name|table1
+init|=
+name|schema
+operator|.
+name|tables
+operator|.
+name|get
+argument_list|(
+literal|1
+argument_list|)
+decl_stmt|;
+name|assertTrue
+argument_list|(
+operator|!
+operator|(
+name|table1
+operator|instanceof
+name|JsonView
+operator|)
+argument_list|)
+expr_stmt|;
+specifier|final
+name|JsonTable
+name|table2
+init|=
+name|schema
+operator|.
+name|tables
+operator|.
+name|get
+argument_list|(
+literal|2
+argument_list|)
+decl_stmt|;
+name|assertTrue
+argument_list|(
+name|table2
+operator|instanceof
+name|JsonView
+argument_list|)
+expr_stmt|;
+name|assertThat
+argument_list|(
+operator|(
+operator|(
+name|JsonView
+operator|)
+name|table2
+operator|)
+operator|.
+name|getSql
+argument_list|()
+argument_list|,
+name|equalTo
+argument_list|(
+literal|"values (1)"
+argument_list|)
+argument_list|)
+expr_stmt|;
+specifier|final
+name|JsonTable
+name|table3
+init|=
+name|schema
+operator|.
+name|tables
+operator|.
+name|get
+argument_list|(
+literal|3
+argument_list|)
+decl_stmt|;
+name|assertTrue
+argument_list|(
+name|table3
+operator|instanceof
+name|JsonView
+argument_list|)
+expr_stmt|;
+name|assertThat
+argument_list|(
+operator|(
+operator|(
+name|JsonView
+operator|)
+name|table3
+operator|)
+operator|.
+name|getSql
+argument_list|()
+argument_list|,
+name|equalTo
+argument_list|(
+literal|"values (1)\n(2)\n"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests a model with bad multi-line SQL. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testReadBadMultiLineSql
+parameter_list|()
+throws|throws
+name|IOException
+block|{
+specifier|final
+name|ObjectMapper
+name|mapper
+init|=
+name|mapper
+argument_list|()
+decl_stmt|;
+name|JsonRoot
+name|root
+init|=
+name|mapper
+operator|.
+name|readValue
+argument_list|(
+literal|"{\n"
+operator|+
+literal|"  version: '1.0',\n"
+operator|+
+literal|"   schemas: [\n"
+operator|+
+literal|"     {\n"
+operator|+
+literal|"       name: 'FoodMart',\n"
+operator|+
+literal|"       tables: [\n"
+operator|+
+literal|"         {\n"
+operator|+
+literal|"           name: 'V',\n"
+operator|+
+literal|"           type: 'view',\n"
+operator|+
+literal|"           sql: [ 'values (1)', 2 ]\n"
+operator|+
+literal|"         }\n"
+operator|+
+literal|"       ]\n"
+operator|+
+literal|"     }\n"
+operator|+
+literal|"   ]\n"
+operator|+
+literal|"}"
+argument_list|,
+name|JsonRoot
+operator|.
+name|class
+argument_list|)
+decl_stmt|;
+name|assertEquals
+argument_list|(
+literal|1
+argument_list|,
+name|root
+operator|.
+name|schemas
+operator|.
+name|size
+argument_list|()
+argument_list|)
+expr_stmt|;
+specifier|final
+name|JsonMapSchema
+name|schema
+init|=
+operator|(
+name|JsonMapSchema
+operator|)
+name|root
+operator|.
+name|schemas
+operator|.
+name|get
+argument_list|(
+literal|0
+argument_list|)
+decl_stmt|;
+name|assertEquals
+argument_list|(
+literal|1
+argument_list|,
+name|schema
+operator|.
+name|tables
+operator|.
+name|size
+argument_list|()
+argument_list|)
+expr_stmt|;
+specifier|final
+name|JsonView
+name|table1
+init|=
+operator|(
+name|JsonView
+operator|)
+name|schema
+operator|.
+name|tables
+operator|.
+name|get
+argument_list|(
+literal|0
+argument_list|)
+decl_stmt|;
+try|try
+block|{
+name|String
+name|s
+init|=
+name|table1
+operator|.
+name|getSql
+argument_list|()
+decl_stmt|;
+name|fail
+argument_list|(
+literal|"exprcted error, got "
+operator|+
+name|s
+argument_list|)
+expr_stmt|;
+block|}
+catch|catch
+parameter_list|(
+name|RuntimeException
+name|e
+parameter_list|)
+block|{
+name|assertThat
+argument_list|(
+name|e
+operator|.
+name|getMessage
+argument_list|()
+argument_list|,
+name|equalTo
+argument_list|(
+literal|"each element of a string list must be a string; found: 2"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 block|}
 end_class

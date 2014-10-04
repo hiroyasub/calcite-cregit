@@ -88,19 +88,9 @@ name|SqlSumEmptyIsZeroAggFunction
 extends|extends
 name|SqlAggFunction
 block|{
-comment|//~ Instance fields --------------------------------------------------------
-specifier|private
-specifier|final
-name|RelDataType
-name|type
-decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-specifier|public
 name|SqlSumEmptyIsZeroAggFunction
-parameter_list|(
-name|RelDataType
-name|type
-parameter_list|)
+parameter_list|()
 block|{
 name|super
 argument_list|(
@@ -125,12 +115,6 @@ operator|.
 name|NUMERIC
 argument_list|)
 expr_stmt|;
-name|this
-operator|.
-name|type
-operator|=
-name|type
-expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
 specifier|public
@@ -149,17 +133,15 @@ name|ImmutableList
 operator|.
 name|of
 argument_list|(
-name|type
+name|typeFactory
+operator|.
+name|createSqlType
+argument_list|(
+name|SqlTypeName
+operator|.
+name|ANY
 argument_list|)
-return|;
-block|}
-specifier|public
-name|RelDataType
-name|getType
-parameter_list|()
-block|{
-return|return
-name|type
+argument_list|)
 return|;
 block|}
 specifier|public
@@ -171,7 +153,14 @@ name|typeFactory
 parameter_list|)
 block|{
 return|return
-name|type
+name|typeFactory
+operator|.
+name|createSqlType
+argument_list|(
+name|SqlTypeName
+operator|.
+name|ANY
+argument_list|)
 return|;
 block|}
 block|}

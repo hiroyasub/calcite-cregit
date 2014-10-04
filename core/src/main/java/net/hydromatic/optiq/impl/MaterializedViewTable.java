@@ -469,7 +469,7 @@ argument_list|>
 name|viewSchemaPath
 parameter_list|,
 name|String
-name|tableName
+name|suggestedTableName
 parameter_list|)
 block|{
 name|super
@@ -504,7 +504,7 @@ name|viewSql
 argument_list|,
 name|schemaPath
 argument_list|,
-name|tableName
+name|suggestedTableName
 argument_list|,
 literal|true
 argument_list|)

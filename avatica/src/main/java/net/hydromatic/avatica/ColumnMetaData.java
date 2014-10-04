@@ -737,7 +737,7 @@ operator|.
 name|class
 argument_list|)
 block|;
-specifier|private
+specifier|public
 specifier|final
 name|Class
 name|clazz

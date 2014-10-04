@@ -2030,9 +2030,7 @@ name|SUM0
 init|=
 operator|new
 name|SqlSumEmptyIsZeroAggFunction
-argument_list|(
-literal|null
-argument_list|)
+argument_list|()
 decl_stmt|;
 comment|//-------------------------------------------------------------
 comment|// WINDOW Rank Functions

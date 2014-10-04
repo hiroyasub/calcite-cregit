@@ -38,7 +38,7 @@ name|JsonTable
 block|{
 comment|/** SQL query that is the definition of the view. */
 specifier|public
-name|String
+name|Object
 name|sql
 decl_stmt|;
 comment|/** Schema name(s) to use when resolving query. If not specified, defaults    * to current schema. */
@@ -78,6 +78,21 @@ operator|+
 name|name
 operator|+
 literal|")"
+return|;
+block|}
+comment|/** Returns the SQL query as a string, concatenating a list of lines if    * necessary. */
+specifier|public
+name|String
+name|getSql
+parameter_list|()
+block|{
+return|return
+name|JsonLattice
+operator|.
+name|toString
+argument_list|(
+name|sql
+argument_list|)
 return|;
 block|}
 block|}

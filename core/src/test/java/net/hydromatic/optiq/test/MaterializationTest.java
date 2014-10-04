@@ -845,7 +845,7 @@ name|checkResultContains
 argument_list|(
 literal|"EnumerableCalcRel(expr#0..1=[{inputs}], expr#2=[1], expr#3=[+($t1, $t2)], C=[$t3], deptno=[$t0])\n"
 operator|+
-literal|"  EnumerableAggregateRel(group=[{1}], agg#0=[SUM($2)])\n"
+literal|"  EnumerableAggregateRel(group=[{1}], agg#0=[$SUM0($2)])\n"
 operator|+
 literal|"    EnumerableTableAccessRel(table=[[hr, m0]])"
 argument_list|)

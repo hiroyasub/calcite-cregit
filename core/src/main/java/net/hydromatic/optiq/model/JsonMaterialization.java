@@ -33,7 +33,7 @@ name|String
 name|table
 decl_stmt|;
 specifier|public
-name|String
+name|Object
 name|sql
 decl_stmt|;
 specifier|public
@@ -69,6 +69,21 @@ operator|+
 name|view
 operator|+
 literal|")"
+return|;
+block|}
+comment|/** Returns the SQL query as a string, concatenating a list of lines if    * necessary. */
+specifier|public
+name|String
+name|getSql
+parameter_list|()
+block|{
+return|return
+name|JsonLattice
+operator|.
+name|toString
+argument_list|(
+name|sql
+argument_list|)
 return|;
 block|}
 block|}
