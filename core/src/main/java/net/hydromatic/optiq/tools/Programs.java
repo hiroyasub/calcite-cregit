@@ -823,6 +823,10 @@ parameter_list|,
 specifier|final
 name|boolean
 name|bushy
+parameter_list|,
+specifier|final
+name|int
+name|minJoinCount
 parameter_list|)
 block|{
 return|return
@@ -863,13 +867,7 @@ if|if
 condition|(
 name|joinCount
 operator|<
-operator|(
-name|bushy
-condition|?
-literal|2
-else|:
-literal|6
-operator|)
+name|minJoinCount
 condition|)
 block|{
 name|program

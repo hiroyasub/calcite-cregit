@@ -2362,6 +2362,8 @@ operator|.
 name|RULE_SET
 argument_list|,
 literal|false
+argument_list|,
+literal|6
 argument_list|)
 argument_list|)
 decl_stmt|;
@@ -2437,6 +2439,221 @@ argument_list|,
 name|containsString
 argument_list|(
 literal|"EnumerableJoinRel(condition=[=($0, $3)], joinType=[inner])"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/OPTIQ-435">OPTIQ-435</a>,    * "LoptOptimizeJoinRule incorrectly re-orders outer joins".    *    *<p>Checks the {@link org.eigenbase.rel.rules.LoptOptimizeJoinRule} on a    * query with a left outer join.    *    *<p>Specifically, tests that a relation (dependents) in an inner join    * cannot be pushed into an outer join (emps left join depts).    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testHeuristicLeftJoin
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+name|checkHeuristic
+argument_list|(
+literal|"select * from \"emps\" as e\n"
+operator|+
+literal|"left join \"depts\" as d using (\"deptno\")\n"
+operator|+
+literal|"join \"dependents\" as p on e.\"empid\" = p.\"empid\""
+argument_list|,
+literal|"EnumerableProjectRel(empid=[$0], deptno=[$1], name=[$2], salary=[$3], commission=[$4], deptno0=[$5], name0=[$6], employees=[$7], empid0=[$8], name1=[$9])\n"
+operator|+
+literal|"  EnumerableProjectRel(empid=[$2], deptno=[$3], name=[$4], salary=[$5], commission=[$6], deptno0=[$7], name0=[$8], employees=[$9], empid0=[$0], name1=[$1])\n"
+operator|+
+literal|"    EnumerableJoinRel(condition=[=($0, $2)], joinType=[inner])\n"
+operator|+
+literal|"      EnumerableTableAccessRel(table=[[hr, dependents]])\n"
+operator|+
+literal|"      EnumerableProjectRel(empid=[$0], deptno=[$1], name=[$2], salary=[$3], commission=[$4], deptno0=[$5], name0=[$6], employees=[$7])\n"
+operator|+
+literal|"        EnumerableJoinRel(condition=[=($1, $5)], joinType=[left])\n"
+operator|+
+literal|"          EnumerableTableAccessRel(table=[[hr, emps]])\n"
+operator|+
+literal|"          EnumerableTableAccessRel(table=[[hr, depts]])"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** It would probably be OK to transform    * {@code (emps right join depts) join dependents}    * to    * {@code (emps  join dependents) right join depts}    * but we do not currently allow it.    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testHeuristicPushInnerJoin
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+name|checkHeuristic
+argument_list|(
+literal|"select * from \"emps\" as e\n"
+operator|+
+literal|"right join \"depts\" as d using (\"deptno\")\n"
+operator|+
+literal|"join \"dependents\" as p on e.\"empid\" = p.\"empid\""
+argument_list|,
+literal|"EnumerableProjectRel(empid=[$0], deptno=[$1], name=[$2], salary=[$3], commission=[$4], deptno0=[$5], name0=[$6], employees=[$7], empid0=[$8], name1=[$9])\n"
+operator|+
+literal|"  EnumerableProjectRel(empid=[$2], deptno=[$3], name=[$4], salary=[$5], commission=[$6], deptno0=[$7], name0=[$8], employees=[$9], empid0=[$0], name1=[$1])\n"
+operator|+
+literal|"    EnumerableJoinRel(condition=[=($0, $2)], joinType=[inner])\n"
+operator|+
+literal|"      EnumerableTableAccessRel(table=[[hr, dependents]])\n"
+operator|+
+literal|"      EnumerableProjectRel(empid=[$0], deptno=[$1], name=[$2], salary=[$3], commission=[$4], deptno0=[$5], name0=[$6], employees=[$7])\n"
+operator|+
+literal|"        EnumerableJoinRel(condition=[=($1, $5)], joinType=[right])\n"
+operator|+
+literal|"          EnumerableTableAccessRel(table=[[hr, emps]])\n"
+operator|+
+literal|"          EnumerableTableAccessRel(table=[[hr, depts]])"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests that a relation (dependents) that is on the null-generating side of    * an outer join cannot be pushed into an inner join (emps join depts). */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testHeuristicRightJoin
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+name|checkHeuristic
+argument_list|(
+literal|"select * from \"emps\" as e\n"
+operator|+
+literal|"join \"depts\" as d using (\"deptno\")\n"
+operator|+
+literal|"right join \"dependents\" as p on e.\"empid\" = p.\"empid\""
+argument_list|,
+literal|"EnumerableProjectRel(empid=[$0], deptno=[$1], name=[$2], salary=[$3], commission=[$4], deptno0=[$5], name0=[$6], employees=[$7], empid0=[$8], name1=[$9])\n"
+operator|+
+literal|"  EnumerableProjectRel(empid=[$2], deptno=[$3], name=[$4], salary=[$5], commission=[$6], deptno0=[$7], name0=[$8], employees=[$9], empid0=[$0], name1=[$1])\n"
+operator|+
+literal|"    EnumerableJoinRel(condition=[=($0, $2)], joinType=[left])\n"
+operator|+
+literal|"      EnumerableTableAccessRel(table=[[hr, dependents]])\n"
+operator|+
+literal|"      EnumerableProjectRel(empid=[$0], deptno=[$1], name=[$2], salary=[$3], commission=[$4], deptno0=[$5], name0=[$6], employees=[$7])\n"
+operator|+
+literal|"        EnumerableJoinRel(condition=[=($1, $5)], joinType=[inner])\n"
+operator|+
+literal|"          EnumerableTableAccessRel(table=[[hr, emps]])\n"
+operator|+
+literal|"          EnumerableTableAccessRel(table=[[hr, depts]])"
+argument_list|)
+expr_stmt|;
+block|}
+specifier|private
+name|void
+name|checkHeuristic
+parameter_list|(
+name|String
+name|sql
+parameter_list|,
+name|String
+name|expected
+parameter_list|)
+throws|throws
+name|Exception
+block|{
+name|Planner
+name|planner
+init|=
+name|getPlanner
+argument_list|(
+literal|null
+argument_list|,
+name|Programs
+operator|.
+name|heuristicJoinOrder
+argument_list|(
+name|Programs
+operator|.
+name|RULE_SET
+argument_list|,
+literal|false
+argument_list|,
+literal|0
+argument_list|)
+argument_list|)
+decl_stmt|;
+name|SqlNode
+name|parse
+init|=
+name|planner
+operator|.
+name|parse
+argument_list|(
+name|sql
+argument_list|)
+decl_stmt|;
+name|SqlNode
+name|validate
+init|=
+name|planner
+operator|.
+name|validate
+argument_list|(
+name|parse
+argument_list|)
+decl_stmt|;
+name|RelNode
+name|convert
+init|=
+name|planner
+operator|.
+name|convert
+argument_list|(
+name|validate
+argument_list|)
+decl_stmt|;
+name|RelTraitSet
+name|traitSet
+init|=
+name|planner
+operator|.
+name|getEmptyTraitSet
+argument_list|()
+operator|.
+name|replace
+argument_list|(
+name|EnumerableConvention
+operator|.
+name|INSTANCE
+argument_list|)
+decl_stmt|;
+name|RelNode
+name|transform
+init|=
+name|planner
+operator|.
+name|transform
+argument_list|(
+literal|0
+argument_list|,
+name|traitSet
+argument_list|,
+name|convert
+argument_list|)
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|toString
+argument_list|(
+name|transform
+argument_list|)
+argument_list|,
+name|containsString
+argument_list|(
+name|expected
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -2740,6 +2957,8 @@ operator|.
 name|RULE_SET
 argument_list|,
 literal|true
+argument_list|,
+literal|2
 argument_list|)
 argument_list|)
 operator|.

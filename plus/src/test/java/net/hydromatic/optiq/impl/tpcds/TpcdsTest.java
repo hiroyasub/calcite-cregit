@@ -226,6 +226,10 @@ parameter_list|(
 specifier|final
 name|boolean
 name|bushy
+parameter_list|,
+specifier|final
+name|int
+name|minJoinCount
 parameter_list|)
 block|{
 return|return
@@ -291,6 +295,8 @@ operator|.
 name|RULE_SET
 argument_list|,
 name|bushy
+argument_list|,
+name|minJoinCount
 argument_list|)
 argument_list|,
 name|Programs
@@ -527,6 +533,8 @@ argument_list|,
 name|handler
 argument_list|(
 literal|true
+argument_list|,
+literal|2
 argument_list|)
 argument_list|)
 operator|.
@@ -657,6 +665,8 @@ argument_list|,
 name|handler
 argument_list|(
 literal|true
+argument_list|,
+literal|2
 argument_list|)
 argument_list|)
 operator|.
@@ -687,6 +697,8 @@ argument_list|,
 name|handler
 argument_list|(
 literal|false
+argument_list|,
+literal|6
 argument_list|)
 argument_list|)
 operator|.

@@ -644,6 +644,20 @@ return|return
 name|a
 return|;
 block|}
+comment|/** Returns an array of {@code int}s with the same contents as this list. */
+specifier|public
+name|int
+index|[]
+name|toIntArray
+parameter_list|()
+block|{
+return|return
+name|ints
+operator|.
+name|clone
+argument_list|()
+return|;
+block|}
 specifier|public
 name|Integer
 name|get

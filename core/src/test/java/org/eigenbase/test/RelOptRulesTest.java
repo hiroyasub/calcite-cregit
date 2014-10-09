@@ -2516,12 +2516,13 @@ literal|"and d.name = 'foo'"
 argument_list|)
 expr_stmt|;
 block|}
-annotation|@
-name|Test
-specifier|public
+specifier|private
 name|void
-name|testConvertMultiJoinRuleOuterJoins
-parameter_list|()
+name|checkPlanning
+parameter_list|(
+name|String
+name|query
+parameter_list|)
 throws|throws
 name|Exception
 block|{
@@ -2718,6 +2719,21 @@ argument_list|(
 name|program
 argument_list|)
 argument_list|,
+name|query
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testConvertMultiJoinRuleOuterJoins
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+name|checkPlanning
+argument_list|(
 literal|"select * from "
 operator|+
 literal|"    (select * from "
@@ -2751,6 +2767,57 @@ operator|+
 literal|"    (select * from I inner join J on i = j) "
 operator|+
 literal|"    on a = i and h = j"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testConvertMultiJoinRuleOuterJoins2
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+comment|// in (A right join B) join C, pushing C is not allowed;
+comment|// therefore there should be 2 MultiJoinRel
+name|checkPlanning
+argument_list|(
+literal|"select * from A right join B on a = b join C on b = c"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testConvertMultiJoinRuleOuterJoins3
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+comment|// in (A join B) left join C, pushing C is allowed;
+comment|// therefore there should be 1 MultiJoinRel
+name|checkPlanning
+argument_list|(
+literal|"select * from A join B on a = b left join C on b = c"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testConvertMultiJoinRuleOuterJoins4
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+comment|// in (A join B) right join C, pushing C is not allowed;
+comment|// therefore there should be 2 MultiJoinRel
+name|checkPlanning
+argument_list|(
+literal|"select * from A join B on a = b right join C on b = c"
 argument_list|)
 expr_stmt|;
 block|}
