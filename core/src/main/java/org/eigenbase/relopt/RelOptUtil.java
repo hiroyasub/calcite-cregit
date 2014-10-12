@@ -1830,7 +1830,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates a relational expression which filters according to a given    * condition, returning the same fields as its input.    *    * @param child     Child relational expression    * @param condition Condition    * @return Relational expression    */
+comment|/**    * Creates a relational expression which filters according to a given    * condition, returning the same fields as its input, using the default    * filter factory.    *    * @param child     Child relational expression    * @param condition Condition    * @return Relational expression    */
 specifier|public
 specifier|static
 name|RelNode
@@ -1916,7 +1916,7 @@ name|DEFAULT_FILTER_FACTORY
 argument_list|)
 return|;
 block|}
-comment|/** Creates a filter, or returns the original relational expression if the    * condition is trivial. */
+comment|/** Creates a filter using the default factory,    * or returns the original relational expression if the    * condition is trivial. */
 specifier|public
 specifier|static
 name|RelNode

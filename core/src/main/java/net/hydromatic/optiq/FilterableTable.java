@@ -9,17 +9,31 @@ name|net
 operator|.
 name|hydromatic
 operator|.
-name|avatica
+name|optiq
 package|;
 end_package
 
 begin_import
 import|import
-name|java
+name|net
 operator|.
-name|util
+name|hydromatic
 operator|.
-name|List
+name|linq4j
+operator|.
+name|Enumerable
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
+name|rex
+operator|.
+name|RexNode
 import|;
 end_import
 
@@ -29,51 +43,44 @@ name|java
 operator|.
 name|util
 operator|.
-name|Map
+name|List
 import|;
 end_import
 
 begin_comment
-comment|/**  * Result of preparing a statement.  */
+comment|/**  * Table that can be scanned, optionally applying supplied filter expressions,  * without creating an intermediate relational expression.  *  * @see ScannableTable  */
 end_comment
 
 begin_interface
 specifier|public
 interface|interface
-name|AvaticaPrepareResult
+name|FilterableTable
+extends|extends
+name|Table
 block|{
-name|List
+comment|/** Returns an enumerator over the rows in this Table. Each row is represented    * as an array of its column values.    *    *<p>The list of filters is mutable.    * If the table can implement a particular filter, it should remove that    * filter from the list.    * If it cannot implement a filter, it should leave it in the list.    * Any filters remaining will be implemented by the consuming Calcite    * operator. */
+name|Enumerable
 argument_list|<
-name|ColumnMetaData
-argument_list|>
-name|getColumnList
-parameter_list|()
-function_decl|;
-name|String
-name|getSql
-parameter_list|()
-function_decl|;
-name|List
-argument_list|<
-name|AvaticaParameter
-argument_list|>
-name|getParameterList
-parameter_list|()
-function_decl|;
-name|Map
-argument_list|<
-name|String
-argument_list|,
 name|Object
+index|[]
 argument_list|>
-name|getInternalParameters
-parameter_list|()
+name|scan
+parameter_list|(
+name|DataContext
+name|root
+parameter_list|,
+name|List
+argument_list|<
+name|RexNode
+argument_list|>
+name|filters
+parameter_list|)
 function_decl|;
 block|}
 end_interface
 
 begin_comment
-comment|// End AvaticaPrepareResult.java
+comment|// End FilterableTable.java
 end_comment
 
 end_unit

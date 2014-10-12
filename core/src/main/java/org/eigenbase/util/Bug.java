@@ -171,7 +171,7 @@ name|FRG375_FIXED
 init|=
 literal|false
 decl_stmt|;
-comment|/**    * Whether    *<a href="https://issues.apache.org/jira/browse/CALCITE-194">CALCITE-194</a>,    * "Array items in MongoDB adapter" is fixed.    */
+comment|/** Whether    *<a href="https://issues.apache.org/jira/browse/CALCITE-194">[CALCITE-194]    * Array items in MongoDB adapter</a> is fixed. */
 specifier|public
 specifier|static
 specifier|final
@@ -180,12 +180,21 @@ name|CALCITE_194_FIXED
 init|=
 literal|false
 decl_stmt|;
-comment|/**    * Whether    *<a href="https://issues.apache.org/jira/browse/CALCITE-319">CALCITE-319</a>,    * "Array items in MongoDB adapter" is fixed.    */
+comment|/** Whether    *<a href="https://issues.apache.org/jira/browse/CALCITE-319">[CALCITE-319]    * Table aliases should follow case-sensitivity policy</a> is fixed. */
 specifier|public
 specifier|static
 specifier|final
 name|boolean
 name|CALCITE_319_FIXED
+init|=
+literal|false
+decl_stmt|;
+comment|/** Whether    *<a href="https://issues.apache.org/jira/browse/CALCITE-445">[CALCITE-445]    * Pull up filters rejected by a ProjectableFilterableTable</a> is fixed. */
+specifier|public
+specifier|static
+specifier|final
+name|boolean
+name|CALCITE_445_FIXED
 init|=
 literal|false
 decl_stmt|;

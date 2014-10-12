@@ -137,6 +137,20 @@ name|ImmutableList
 import|;
 end_import
 
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|Lists
+import|;
+end_import
+
 begin_comment
 comment|/**  * PushProjector is a utility class used to perform operations used in push  * projection rules.  *  *<p>Pushing is particularly interesting in the case of join, because there  * are multiple inputs. Generally an expression can be pushed down to a  * particular input if it depends upon no other inputs. If it can be pushed  * down to both sides, it is pushed down to the left.  *  *<p>Sometimes an expression needs to be split before it can be pushed down.  * To flag that an expression cannot be split, specify a rule that it must be  *<dfn>preserved</dfn>. Such an expression will be pushed down intact to one  * of the inputs, or not pushed down at all.</p>  */
 end_comment
@@ -513,7 +527,7 @@ block|}
 comment|//~ Methods ----------------------------------------------------------------
 comment|/**    * Decomposes a projection to the input references referenced by a    * projection and a filter, either of which is optional. If both are    * provided, the filter is underneath the project.    *    *<p>Creates a projection containing all input references as well as    * preserving any special expressions. Converts the original projection    * and/or filter to reference the new projection. Then, finally puts on top,    * a final projection corresponding to the original projection.    *    * @param defaultExpr expression to be used in the projection if no fields    *                    or special columns are selected    * @return the converted projection if it makes sense to push elements of    * the projection; otherwise returns null    */
 specifier|public
-name|ProjectRel
+name|RelNode
 name|convertProject
 parameter_list|(
 name|RexNode
@@ -738,18 +752,13 @@ block|}
 comment|// put the original project on top of the filter/project, converting
 comment|// it to reference the modified projection list; otherwise, create
 comment|// a projection that essentially selects all fields
-name|ProjectRel
-name|topProject
-init|=
+return|return
 name|createNewProject
 argument_list|(
 name|projChild
 argument_list|,
 name|adjustments
 argument_list|)
-decl_stmt|;
-return|return
-name|topProject
 return|;
 block|}
 comment|/**    * Locates all references found in either the projection expressions a    * filter, as well as references to expressions that should be preserved.    * Based on that, determines whether pushing the projection makes sense.    *    * @return true if all inputs from the child that the projection is being    * pushed past are referenced in the projection/filter and no special    * preserve expressions are referenced; in that case, it does not make sense    * to push the projection    */
@@ -1484,7 +1493,7 @@ return|;
 block|}
 comment|/**    * Creates a new projection based on the original projection, adjusting all    * input refs using an adjustment array passed in. If there was no original    * projection, create a new one that selects every field from the underlying    * rel.    *    *<p>If the resulting projection would be trivial, return the child.    *    * @param projChild   child of the new project    * @param adjustments array indicating how much each input reference should    *                    be adjusted by    * @return the created projection    */
 specifier|public
-name|ProjectRel
+name|RelNode
 name|createNewProject
 parameter_list|(
 name|RelNode
@@ -1495,6 +1504,7 @@ index|[]
 name|adjustments
 parameter_list|)
 block|{
+specifier|final
 name|List
 argument_list|<
 name|Pair
@@ -1506,16 +1516,9 @@ argument_list|>
 argument_list|>
 name|projects
 init|=
-operator|new
-name|ArrayList
-argument_list|<
-name|Pair
-argument_list|<
-name|RexNode
-argument_list|,
-name|String
-argument_list|>
-argument_list|>
+name|Lists
+operator|.
+name|newArrayList
 argument_list|()
 decl_stmt|;
 if|if
@@ -1631,9 +1634,6 @@ expr_stmt|;
 block|}
 block|}
 return|return
-operator|(
-name|ProjectRel
-operator|)
 name|RelOptUtil
 operator|.
 name|createProject

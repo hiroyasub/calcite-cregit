@@ -246,7 +246,7 @@ argument_list|,
 name|preserveExprCondition
 argument_list|)
 decl_stmt|;
-name|ProjectRel
+name|RelNode
 name|topProject
 init|=
 name|pushProjector

@@ -431,6 +431,10 @@ name|AggregateStarTableRule
 operator|.
 name|INSTANCE2
 argument_list|,
+name|FilterTableRule
+operator|.
+name|INSTANCE
+argument_list|,
 name|PushFilterPastProjectRule
 operator|.
 name|INSTANCE

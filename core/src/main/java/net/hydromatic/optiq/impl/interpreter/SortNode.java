@@ -113,6 +113,16 @@ begin_import
 import|import
 name|java
 operator|.
+name|math
+operator|.
+name|BigDecimal
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
 name|util
 operator|.
 name|Collections
@@ -226,7 +236,8 @@ condition|?
 literal|0
 else|:
 operator|(
-name|Integer
+operator|(
+name|BigDecimal
 operator|)
 operator|(
 operator|(
@@ -238,6 +249,10 @@ name|offset
 operator|)
 operator|.
 name|getValue
+argument_list|()
+operator|)
+operator|.
+name|intValue
 argument_list|()
 decl_stmt|;
 specifier|final
@@ -254,7 +269,8 @@ operator|-
 literal|1
 else|:
 operator|(
-name|Integer
+operator|(
+name|BigDecimal
 operator|)
 operator|(
 operator|(
@@ -266,6 +282,10 @@ name|fetch
 operator|)
 operator|.
 name|getValue
+argument_list|()
+operator|)
+operator|.
+name|intValue
 argument_list|()
 decl_stmt|;
 comment|// In pure limit mode. No sort required.
@@ -338,7 +358,7 @@ literal|0
 init|;
 name|i
 operator|<
-name|offset
+name|fetch
 operator|&&
 operator|(
 name|row

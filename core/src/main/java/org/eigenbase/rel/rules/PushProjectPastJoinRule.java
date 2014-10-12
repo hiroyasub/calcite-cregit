@@ -369,7 +369,7 @@ argument_list|)
 decl_stmt|;
 comment|// put the original project on top of the join, converting it to
 comment|// reference the modified projection list
-name|ProjectRel
+name|RelNode
 name|topProject
 init|=
 name|pushProject

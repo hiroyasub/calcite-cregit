@@ -9,71 +9,50 @@ name|net
 operator|.
 name|hydromatic
 operator|.
-name|avatica
+name|optiq
 package|;
 end_package
 
 begin_import
 import|import
-name|java
+name|net
 operator|.
-name|util
+name|hydromatic
 operator|.
-name|List
-import|;
-end_import
-
-begin_import
-import|import
-name|java
+name|linq4j
 operator|.
-name|util
-operator|.
-name|Map
+name|Enumerable
 import|;
 end_import
 
 begin_comment
-comment|/**  * Result of preparing a statement.  */
+comment|/**  * Table that can be scanned without creating an intermediate relational  * expression.  */
 end_comment
 
 begin_interface
 specifier|public
 interface|interface
-name|AvaticaPrepareResult
+name|ScannableTable
+extends|extends
+name|Table
 block|{
-name|List
+comment|/** Returns an enumerator over the rows in this Table. Each row is represented    * as an array of its column values. */
+name|Enumerable
 argument_list|<
-name|ColumnMetaData
-argument_list|>
-name|getColumnList
-parameter_list|()
-function_decl|;
-name|String
-name|getSql
-parameter_list|()
-function_decl|;
-name|List
-argument_list|<
-name|AvaticaParameter
-argument_list|>
-name|getParameterList
-parameter_list|()
-function_decl|;
-name|Map
-argument_list|<
-name|String
-argument_list|,
 name|Object
+index|[]
 argument_list|>
-name|getInternalParameters
-parameter_list|()
+name|scan
+parameter_list|(
+name|DataContext
+name|root
+parameter_list|)
 function_decl|;
 block|}
 end_interface
 
 begin_comment
-comment|// End AvaticaPrepareResult.java
+comment|// End ScannableTable.java
 end_comment
 
 end_unit

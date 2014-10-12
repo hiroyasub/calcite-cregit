@@ -197,9 +197,6 @@ parameter_list|(
 name|String
 name|columnName
 parameter_list|,
-name|String
-name|tableName
-parameter_list|,
 name|int
 name|start
 parameter_list|,
@@ -210,9 +207,8 @@ block|{
 name|super
 argument_list|(
 name|Object
-index|[]
 operator|.
-expr|class
+name|class
 argument_list|)
 expr_stmt|;
 name|this
@@ -241,9 +237,6 @@ name|RangeTable
 name|create
 parameter_list|(
 name|String
-name|tableName
-parameter_list|,
-name|String
 name|columnName
 parameter_list|,
 name|int
@@ -258,8 +251,6 @@ operator|new
 name|RangeTable
 argument_list|(
 name|columnName
-argument_list|,
-name|tableName
 argument_list|,
 name|start
 argument_list|,
@@ -517,8 +508,6 @@ name|RangeTable
 operator|.
 name|create
 argument_list|(
-name|name
-argument_list|,
 name|columnName
 argument_list|,
 name|start

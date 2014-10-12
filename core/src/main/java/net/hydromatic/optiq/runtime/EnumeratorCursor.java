@@ -28,7 +28,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Implementation of {@link net.hydromatic.avatica.Cursor} on top of an  * {@link net.hydromatic.linq4j.Enumerator} that  * returns a record for each row. The returned record is cached to avoid  * multiple computations of current row.  * For instance,  * {@link net.hydromatic.optiq.rules.java.JavaRules.EnumerableCalcRel}  * computes result just in {@code current()} method, thus it makes sense to  * cache the result and make it available for all the accesors.  *  * @param<T> Element type  */
+comment|/**  * Implementation of {@link net.hydromatic.avatica.Cursor} on top of an  * {@link net.hydromatic.linq4j.Enumerator} that  * returns a record for each row. The returned record is cached to avoid  * multiple computations of current row.  * For instance,  * {@link net.hydromatic.optiq.rules.java.JavaRules.EnumerableCalcRel}  * computes result just in {@code current()} method, thus it makes sense to  * cache the result and make it available for all the accessors.  *  * @param<T> Element type  */
 end_comment
 
 begin_class

@@ -2490,6 +2490,33 @@ name|String
 name|className
 parameter_list|)
 function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
+literal|"FilterableTable.scan returned a filter that was not in the original list: {0}"
+argument_list|)
+name|ExInst
+argument_list|<
+name|EigenbaseException
+argument_list|>
+name|filterableTableInventedFilter
+parameter_list|(
+name|String
+name|s
+parameter_list|)
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
+literal|"FilterableTable.scan must not return null"
+argument_list|)
+name|ExInst
+argument_list|<
+name|EigenbaseException
+argument_list|>
+name|filterableTableScanReturnedNull
+parameter_list|()
+function_decl|;
 block|}
 end_interface
 

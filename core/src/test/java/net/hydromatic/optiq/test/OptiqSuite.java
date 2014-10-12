@@ -364,6 +364,10 @@ name|VolcanoPlannerTraitTest
 operator|.
 name|class
 block|,
+name|ScannableTableTest
+operator|.
+name|class
+block|,
 name|InterpreterTest
 operator|.
 name|class
