@@ -1501,7 +1501,14 @@ argument_list|,
 literal|"$f"
 argument_list|)
 operator|+
+name|Math
+operator|.
+name|max
+argument_list|(
 name|size
+argument_list|,
+name|attempt
+argument_list|)
 return|;
 block|}
 block|}

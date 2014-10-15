@@ -993,6 +993,26 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/OPTIQ-439">[OPTIQ-439]    * SqlValidatorUtil.uniquify() may not terminate under some    * conditions</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testGroupAlias
+parameter_list|()
+block|{
+name|check
+argument_list|(
+literal|"select \"$f2\", max(x), max(x + 1)\n"
+operator|+
+literal|"from (values (1, 2)) as t(\"$f2\", x)\n"
+operator|+
+literal|"group by \"$f2\""
+argument_list|,
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public
