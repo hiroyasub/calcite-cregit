@@ -7760,11 +7760,21 @@ decl_stmt|;
 assert|assert
 name|nTotalFields
 operator|==
+operator|(
+name|joinRel
+operator|instanceof
+name|SemiJoinRel
+condition|?
+name|nSysFields
+operator|+
+name|nFieldsLeft
+else|:
 name|nSysFields
 operator|+
 name|nFieldsLeft
 operator|+
 name|nFieldsRight
+operator|)
 assert|;
 comment|// set the reference bitmaps for the left and right children
 name|BitSet
