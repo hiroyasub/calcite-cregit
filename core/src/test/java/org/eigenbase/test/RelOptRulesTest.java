@@ -1003,6 +1003,30 @@ literal|" where dname = 'Charlie'"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/OPTIQ-434">[OPTIQ-434],    * FilterAggregateTransposeRule loses conditions that cannot be pushed</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testPushFilterPastAggTwo
+parameter_list|()
+block|{
+name|checkPlanning
+argument_list|(
+name|FilterAggregateTransposeRule
+operator|.
+name|INSTANCE
+argument_list|,
+literal|"select dept1.c1 from (\n"
+operator|+
+literal|"  select dept.name as c1, count(*) as c2\n"
+operator|+
+literal|"  from dept where dept.name> 'b' group by dept.name) dept1\n"
+operator|+
+literal|"where dept1.c1> 'c' and (dept1.c2> 30 or dept1.c1< 'z')"
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public
