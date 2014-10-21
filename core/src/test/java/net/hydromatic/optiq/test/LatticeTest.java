@@ -1175,7 +1175,7 @@ name|sameResultWithMaterializationsDisabled
 argument_list|()
 expr_stmt|;
 block|}
-comment|/** Tests a model that uses an algorithm to generate an initial set of    * tiles.    *    *<p>Test case for    *<a href="https://issues.apache.org/jira/browse/OPTIQ-428">OPTIQ-428,    * "Use optimization algorithm to suggest which tiles of a lattice to    * materialize"</a>. */
+comment|/** Tests a model that uses an algorithm to generate an initial set of    * tiles.    *    *<p>Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-428">CALCITE-428,    * "Use optimization algorithm to suggest which tiles of a lattice to    * materialize"</a>. */
 annotation|@
 name|Test
 specifier|public

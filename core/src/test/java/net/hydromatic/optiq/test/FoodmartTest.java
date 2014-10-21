@@ -1101,7 +1101,7 @@ block|,
 comment|// bugs
 literal|6597
 block|,
-comment|// OPTIQ-403
+comment|// CALCITE-403
 block|}
 decl_stmt|;
 comment|// Interesting tests. (We need to fix and remove from the disabled list.)

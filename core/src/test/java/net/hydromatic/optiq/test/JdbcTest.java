@@ -6256,7 +6256,7 @@ literal|730
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Tests 3-way AND.    *    *<p>With<a href="https://issues.apache.org/jira/browse/OPTIQ-127">OPTIQ-127,    * "EnumerableCalcRel can't support 3+ AND conditions"</a>, the last condition    * is ignored and rows with deptno=10 are wrongly returned.</p>    */
+comment|/** Tests 3-way AND.    *    *<p>With<a href="https://issues.apache.org/jira/browse/CALCITE-127">CALCITE-127,    * "EnumerableCalcRel can't support 3+ AND conditions"</a>, the last condition    * is ignored and rows with deptno=10 are wrongly returned.</p>    */
 annotation|@
 name|Test
 specifier|public
@@ -6375,7 +6375,7 @@ literal|"C=287\n"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/OPTIQ-281">OPTIQ-281</a>,    * "SQL type of EXTRACT is BIGINT but it is implemented as int". */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-281">CALCITE-281</a>,    * "SQL type of EXTRACT is BIGINT but it is implemented as int". */
 annotation|@
 name|Test
 specifier|public
@@ -6472,7 +6472,7 @@ block|}
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/OPTIQ-387">OPTIQ-387</a>,    * "CompileException when cast TRUE to nullable boolean". */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-387">CALCITE-387</a>,    * "CompileException when cast TRUE to nullable boolean". */
 annotation|@
 name|Test
 specifier|public
@@ -6620,7 +6620,7 @@ literal|"full_name=Terry Anderson\n"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** A join that has both equi and non-equi conditions.    *    *<p>Test case for    *<a href="https://issues.apache.org/jira/browse/OPTIQ-371">OPTIQ-371</a>,    * "Cannot implement JOIN whose ON clause contains mixed equi and theta". */
+comment|/** A join that has both equi and non-equi conditions.    *    *<p>Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-371">CALCITE-371</a>,    * "Cannot implement JOIN whose ON clause contains mixed equi and theta". */
 annotation|@
 name|Test
 specifier|public
@@ -6665,7 +6665,7 @@ literal|"empid=110; name=Sales; name=Theodore\n"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/OPTIQ-35">OPTIQ-35</a>,    * "Support parenthesized sub-clause in JOIN". */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-35">CALCITE-35</a>,    * "Support parenthesized sub-clause in JOIN". */
 annotation|@
 name|Ignore
 annotation|@
@@ -8688,7 +8688,7 @@ name|sql
 argument_list|)
 return|;
 block|}
-comment|/** Makes sure that a projection introduced by a call to    * {@link org.eigenbase.rel.rules.SwapJoinRule} does not manifest as an    * {@link net.hydromatic.optiq.rules.java.JavaRules.EnumerableCalcRel} in the    * plan.    *    *<p>Test case for (not yet fixed)    *<a href="https://issues.apache.org/jira/browse/OPTIQ-92">OPTIQ-92</a>,    * "Project should be optimized away, not converted to EnumerableCalcRel".</p>    */
+comment|/** Makes sure that a projection introduced by a call to    * {@link org.eigenbase.rel.rules.SwapJoinRule} does not manifest as an    * {@link net.hydromatic.optiq.rules.java.JavaRules.EnumerableCalcRel} in the    * plan.    *    *<p>Test case for (not yet fixed)    *<a href="https://issues.apache.org/jira/browse/CALCITE-92">CALCITE-92</a>,    * "Project should be optimized away, not converted to EnumerableCalcRel".</p>    */
 annotation|@
 name|Ignore
 annotation|@
@@ -9008,7 +9008,7 @@ name|runs
 argument_list|()
 expr_stmt|;
 block|}
-comment|/** Test case for (not yet fixed)    *<a href="https://issues.apache.org/jira/browse/OPTIQ-99">OPTIQ-99</a>,    * "Recognize semi-join that has high selectivity and push it down". */
+comment|/** Test case for (not yet fixed)    *<a href="https://issues.apache.org/jira/browse/CALCITE-99">CALCITE-99</a>,    * "Recognize semi-join that has high selectivity and push it down". */
 annotation|@
 name|Ignore
 annotation|@
@@ -11012,7 +11012,7 @@ literal|"name=Bill; empid=100\n"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Tests sorting by an expression not in the '*' select clause. Test case for    *<a href="https://issues.apache.org/jira/browse/OPTIQ-176">OPTIQ-176</a>. */
+comment|/** Tests sorting by an expression not in the '*' select clause. Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-176">CALCITE-176</a>. */
 annotation|@
 name|Test
 specifier|public
@@ -11557,7 +11557,7 @@ literal|"empid=200; deptno=20; name=Eric; salary=8000.0; commission=500\n"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Limit implemented using {@link Queryable#take}. Test case for    *<a href="https://issues.apache.org/jira/browse/OPTIQ-96">OPTIQ-96</a>,    * "LIMIT against a table in a clone schema causes    * UnsupportedOperationException". */
+comment|/** Limit implemented using {@link Queryable#take}. Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-96">CALCITE-96</a>,    * "LIMIT against a table in a clone schema causes    * UnsupportedOperationException". */
 annotation|@
 name|Test
 specifier|public
@@ -11594,7 +11594,7 @@ literal|"day=2; week_day=Monday\n"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Limit implemented using {@link Queryable#take}. Test case for    *<a href="https://issues.apache.org/jira/browse/OPTIQ-70">OPTIQ-70</a>,    * "Joins seem to be very expensive in memory". */
+comment|/** Limit implemented using {@link Queryable#take}. Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-70">CALCITE-70</a>,    * "Joins seem to be very expensive in memory". */
 annotation|@
 name|Test
 specifier|public
@@ -11727,11 +11727,11 @@ literal|"deptno=20"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/OPTIQ-397">OPTIQ-397</a>,    * "SELECT DISTINCT *" gives ClassCastException at runtime". */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-397">CALCITE-397</a>,    * "SELECT DISTINCT *" gives ClassCastException at runtime". */
 annotation|@
 name|Ignore
 argument_list|(
-literal|"OPTIQ-397"
+literal|"CALCITE-397"
 argument_list|)
 annotation|@
 name|Test
@@ -11979,11 +11979,11 @@ literal|0
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/OPTIQ-403">OPTIQ-403</a>,    * "Enumerable gives NullPointerException with HAVING on nullable    * expression". */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-403">CALCITE-403</a>,    * "Enumerable gives NullPointerException with HAVING on nullable    * expression". */
 annotation|@
 name|Ignore
 argument_list|(
-literal|"OPTIQ-403"
+literal|"CALCITE-403"
 argument_list|)
 annotation|@
 name|Test
@@ -12007,7 +12007,7 @@ comment|/** Minimal case of {@link #testHavingNot()}. */
 annotation|@
 name|Ignore
 argument_list|(
-literal|"OPTIQ-403"
+literal|"CALCITE-403"
 argument_list|)
 annotation|@
 name|Test
@@ -14310,7 +14310,7 @@ literal|"empid=200; commission=500; M=260"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Tests windowed aggregation with no ORDER BY clause.    *    *<p>Test case for    *<a href="https://issues.apache.org/jira/browse/OPTIQ-285">OPTIQ-285</a>,    * "Window functions throw exception without ORDER BY".    *    *<p>Note:</p>    *    *<ul>    *<li>With no ORDER BY, the window is over all rows in the partition.    *<li>With an ORDER BY, the implicit frame is 'RANGE BETWEEN    *     UNBOUNDED PRECEDING AND CURRENT ROW'.    *<li>With no ORDER BY or PARTITION BY, the window contains all rows in the    *     table.    *</ul>    */
+comment|/** Tests windowed aggregation with no ORDER BY clause.    *    *<p>Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-285">CALCITE-285</a>,    * "Window functions throw exception without ORDER BY".    *    *<p>Note:</p>    *    *<ul>    *<li>With no ORDER BY, the window is over all rows in the partition.    *<li>With an ORDER BY, the implicit frame is 'RANGE BETWEEN    *     UNBOUNDED PRECEDING AND CURRENT ROW'.    *<li>With no ORDER BY or PARTITION BY, the window contains all rows in the    *     table.    *</ul>    */
 annotation|@
 name|Test
 specifier|public
@@ -15159,7 +15159,7 @@ literal|"empid=200; deptno=20; name=Eric; salary=8000.0; commission=500"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/OPTIQ-313">OPTIQ-313</a>,    * "Query decorrelation fails". */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-313">CALCITE-313</a>,    * "Query decorrelation fails". */
 annotation|@
 name|Test
 specifier|public
@@ -16630,7 +16630,7 @@ literal|"C=730\n"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Tests a JSON model with a comment. Not standard JSON, but harmless to    * allow Jackson's comments extension.    *    *<p>Test case for    *<a href="https://issues.apache.org/jira/browse/OPTIQ-160">OPTIQ-160</a>,    * "Allow comments in schema definitions".</p> */
+comment|/** Tests a JSON model with a comment. Not standard JSON, but harmless to    * allow Jackson's comments extension.    *    *<p>Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-160">CALCITE-160</a>,    * "Allow comments in schema definitions".</p> */
 annotation|@
 name|Test
 specifier|public
@@ -20751,7 +20751,8 @@ literal|"Cannot apply = to the two different charsets ISO-8859-1 and UTF-16LE"
 argument_list|)
 expr_stmt|;
 comment|// The CONVERT function (what SQL:2011 calls "character transliteration") is
-comment|// not implemented yet. See https://issues.apache.org/jira/browse/OPTIQ-111.
+comment|// not implemented yet. See
+comment|// https://issues.apache.org/jira/browse/CALCITE-111.
 name|with
 operator|.
 name|query

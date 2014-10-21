@@ -2443,7 +2443,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/OPTIQ-435">OPTIQ-435</a>,    * "LoptOptimizeJoinRule incorrectly re-orders outer joins".    *    *<p>Checks the {@link org.eigenbase.rel.rules.LoptOptimizeJoinRule} on a    * query with a left outer join.    *    *<p>Specifically, tests that a relation (dependents) in an inner join    * cannot be pushed into an outer join (emps left join depts).    */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-435">CALCITE-435</a>,    * "LoptOptimizeJoinRule incorrectly re-orders outer joins".    *    *<p>Checks the {@link org.eigenbase.rel.rules.LoptOptimizeJoinRule} on a    * query with a left outer join.    *    *<p>Specifically, tests that a relation (dependents) in an inner join    * cannot be pushed into an outer join (emps left join depts).    */
 annotation|@
 name|Test
 specifier|public

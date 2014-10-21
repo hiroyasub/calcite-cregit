@@ -832,7 +832,7 @@ literal|null
 condition|)
 block|{
 comment|// We could improve this when we fix
-comment|// [OPTIQ-429] Add statistics SPI for lattice optimization algorithm
+comment|// [CALCITE-429] Add statistics SPI for lattice optimization algorithm
 name|rowCountEstimate
 operator|=
 literal|1000d

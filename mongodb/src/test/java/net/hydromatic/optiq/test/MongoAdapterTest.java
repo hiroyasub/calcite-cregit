@@ -781,14 +781,14 @@ name|void
 name|testFilterSort
 parameter_list|()
 block|{
-comment|// LONGITUDE and LATITUDE are null because of OPTIQ-194.
+comment|// LONGITUDE and LATITUDE are null because of CALCITE-194.
 name|Util
 operator|.
 name|discard
 argument_list|(
 name|Bug
 operator|.
-name|OPTIQ_194_FIXED
+name|CALCITE_194_FIXED
 argument_list|)
 expr_stmt|;
 name|OptiqAssert
@@ -1129,7 +1129,7 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-comment|// Per https://issues.apache.org/jira/browse/OPTIQ-164,
+comment|// Per https://issues.apache.org/jira/browse/CALCITE-164,
 comment|// $match must occur before $project for good performance.
 name|mongoChecker
 argument_list|(
@@ -1592,7 +1592,7 @@ block|}
 annotation|@
 name|Ignore
 argument_list|(
-literal|"https://issues.apache.org/jira/browse/OPTIQ-270"
+literal|"https://issues.apache.org/jira/browse/CALCITE-270"
 argument_list|)
 annotation|@
 name|Test
@@ -2215,7 +2215,7 @@ expr_stmt|;
 block|}
 block|}
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/OPTIQ-286">OPTIQ-286</a>,    * "Error casting MongoDB date". */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-286">CALCITE-286</a>,    * "Error casting MongoDB date". */
 annotation|@
 name|Test
 specifier|public

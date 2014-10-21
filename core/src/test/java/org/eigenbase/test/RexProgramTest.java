@@ -2279,7 +2279,7 @@ literal|"AND(?0.a, OR(?0.b, ?0.c), OR(?0.b, ?0.d, ?0.e), OR(?0.b, ?0.d, ?0.f, ?0
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Unit test for    *<a href="https://issues.apache.org/jira/browse/OPTIQ-394">OPTIQ-394,    * "Add RexUtil.toCnf, to convert expressions to conjunctive normal form    * (CNF)"</a>. */
+comment|/** Unit test for    *<a href="https://issues.apache.org/jira/browse/CALCITE-394">CALCITE-394,    * "Add RexUtil.toCnf, to convert expressions to conjunctive normal form    * (CNF)"</a>. */
 annotation|@
 name|Test
 specifier|public

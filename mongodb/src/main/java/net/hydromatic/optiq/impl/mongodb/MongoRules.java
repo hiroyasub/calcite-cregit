@@ -829,7 +829,7 @@ condition|(
 operator|!
 name|Bug
 operator|.
-name|OPTIQ_194_FIXED
+name|CALCITE_194_FIXED
 condition|)
 block|{
 return|return

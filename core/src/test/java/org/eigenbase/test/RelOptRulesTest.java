@@ -1003,7 +1003,7 @@ literal|" where dname = 'Charlie'"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/OPTIQ-434">[OPTIQ-434],    * FilterAggregateTransposeRule loses conditions that cannot be pushed</a>. */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-434">[CALCITE-434],    * FilterAggregateTransposeRule loses conditions that cannot be pushed</a>. */
 annotation|@
 name|Test
 specifier|public
@@ -1118,7 +1118,7 @@ literal|"  and emp.sal> 100)"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/OPTIQ-438">[OPTIQ-438],    * Push predicates through SemiJoinRel</a>. */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-438">[CALCITE-438],    * Push predicates through SemiJoinRel</a>. */
 annotation|@
 name|Test
 specifier|public

@@ -221,7 +221,7 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/OPTIQ-245">OPTIQ-245</a>,    * "Off-by-one translation of ON clause of JOIN".    */
+comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-245">CALCITE-245</a>,    * "Off-by-one translation of ON clause of JOIN".    */
 annotation|@
 name|Test
 specifier|public
@@ -301,7 +301,7 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/OPTIQ-74">OPTIQ-74</a>,    * "JOIN ... USING fails in 3-way join with UnsupportedOperationException". */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-74">CALCITE-74</a>,    * "JOIN ... USING fails in 3-way join with UnsupportedOperationException". */
 annotation|@
 name|Test
 specifier|public
@@ -993,7 +993,7 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/OPTIQ-439">[OPTIQ-439]    * SqlValidatorUtil.uniquify() may not terminate under some    * conditions</a>. */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-439">[CALCITE-439]    * SqlValidatorUtil.uniquify() may not terminate under some    * conditions</a>. */
 annotation|@
 name|Test
 specifier|public
@@ -1070,7 +1070,7 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/OPTIQ-309">[OPTIQ-309]    * WITH ... ORDER BY query gives AssertionError</a>. */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-309">[CALCITE-309]    * WITH ... ORDER BY query gives AssertionError</a>. */
 annotation|@
 name|Test
 specifier|public
@@ -2276,7 +2276,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/OPTIQ-412">OPTIQ-412</a>,    * "RelFieldTrimmer: when trimming SortRel, the collation and trait set don't    * match". */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-412">CALCITE-412</a>,    * "RelFieldTrimmer: when trimming SortRel, the collation and trait set don't    * match". */
 annotation|@
 name|Test
 specifier|public

@@ -684,7 +684,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Tests that validation (specifically, inferring the result of adding    * two DECIMAL(19, 0) values together) happens differently with a type system    * that allows a larger maximum precision for decimals.    *    *<p>Test case for    *<a href="https://issues.apache.org/jira/browse/OPTIQ-413">OPTIQ-413</a>,    * "Add RelDataTypeSystem plugin, allowing different max precision of a    * DECIMAL".    *    *<p>Also tests the plugin system, by specifying implementations of a    * plugin interface with public and private constructors. */
+comment|/** Tests that validation (specifically, inferring the result of adding    * two DECIMAL(19, 0) values together) happens differently with a type system    * that allows a larger maximum precision for decimals.    *    *<p>Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-413">CALCITE-413</a>,    * "Add RelDataTypeSystem plugin, allowing different max precision of a    * DECIMAL".    *    *<p>Also tests the plugin system, by specifying implementations of a    * plugin interface with public and private constructors. */
 annotation|@
 name|Test
 specifier|public

@@ -16080,7 +16080,7 @@ literal|"RecordType(INTEGER NOT NULL x[y] z ) NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/OPTIQ-145">OPTIQ-145,    * "Unexpected upper-casing of keywords when using java lexer"</a>. */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-145">CALCITE-145,    * "Unexpected upper-casing of keywords when using java lexer"</a>. */
 annotation|@
 name|Test
 specifier|public
@@ -16347,7 +16347,7 @@ condition|(
 operator|!
 name|Bug
 operator|.
-name|OPTIQ_319_FIXED
+name|CALCITE_319_FIXED
 condition|)
 block|{
 return|return;

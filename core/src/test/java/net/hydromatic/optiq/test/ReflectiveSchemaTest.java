@@ -1662,7 +1662,7 @@ literal|"C=1\n"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/OPTIQ-119">OPTIQ-119</a>,    * "Comparing a Java type long with a SQL type INTEGER gives wrong answer". */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-119">CALCITE-119</a>,    * "Comparing a Java type long with a SQL type INTEGER gives wrong answer". */
 annotation|@
 name|Test
 specifier|public
@@ -1692,7 +1692,7 @@ name|CatchallSchema
 argument_list|()
 argument_list|)
 decl_stmt|;
-comment|// With OPTIQ-119, returned 0 rows. The problem was that when comparing
+comment|// With CALCITE-119, returned 0 rows. The problem was that when comparing
 comment|// a Java type (long) and a SQL type (INTEGER), the SQL type was deemed
 comment|// "less restrictive". So, the long value got truncated to an int value.
 name|with

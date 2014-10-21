@@ -884,8 +884,8 @@ name|SemiJoinRel
 name|semiJoin
 parameter_list|)
 block|{
-comment|// Workaround, pending
-comment|// [OPTIQ-390] Transitive Inference(RelMdPredicate) doesn't handle SemiJoin
+comment|// Workaround, pending [CALCITE-390] "Transitive inference (RelMdPredicate)
+comment|// doesn't handle semi-join"
 return|return
 name|RelOptPredicateList
 operator|.

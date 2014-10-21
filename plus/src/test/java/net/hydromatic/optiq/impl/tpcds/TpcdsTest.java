@@ -794,7 +794,7 @@ break|break;
 case|case
 literal|72
 case|:
-comment|// Work around OPTIQ-304: Support '<DATE> +<INTEGER>'.
+comment|// Work around CALCITE-304: Support '<DATE> +<INTEGER>'.
 name|sql
 operator|=
 name|sql
