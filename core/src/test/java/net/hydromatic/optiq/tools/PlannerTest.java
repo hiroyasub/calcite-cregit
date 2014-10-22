@@ -189,6 +189,20 @@ name|eigenbase
 operator|.
 name|rel
 operator|.
+name|metadata
+operator|.
+name|RelMetadataQuery
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
+name|rel
+operator|.
 name|rules
 operator|.
 name|*
@@ -1118,6 +1132,179 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+block|}
+comment|/** Helper method for testing {@link RelMetadataQuery#getPulledUpPredicates}    * metadata. */
+specifier|private
+name|void
+name|checkMetadataUnionPredicates
+parameter_list|(
+name|String
+name|sql
+parameter_list|,
+name|String
+name|expectedPredicates
+parameter_list|)
+throws|throws
+name|Exception
+block|{
+name|Planner
+name|planner
+init|=
+name|getPlanner
+argument_list|(
+literal|null
+argument_list|)
+decl_stmt|;
+name|SqlNode
+name|parse
+init|=
+name|planner
+operator|.
+name|parse
+argument_list|(
+name|sql
+argument_list|)
+decl_stmt|;
+name|SqlNode
+name|validate
+init|=
+name|planner
+operator|.
+name|validate
+argument_list|(
+name|parse
+argument_list|)
+decl_stmt|;
+name|RelNode
+name|rel
+init|=
+name|planner
+operator|.
+name|convert
+argument_list|(
+name|validate
+argument_list|)
+decl_stmt|;
+specifier|final
+name|RelOptPredicateList
+name|predicates
+init|=
+name|RelMetadataQuery
+operator|.
+name|getPulledUpPredicates
+argument_list|(
+name|rel
+argument_list|)
+decl_stmt|;
+specifier|final
+name|String
+name|buf
+init|=
+name|predicates
+operator|.
+name|pulledUpPredicates
+operator|.
+name|toString
+argument_list|()
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|buf
+argument_list|,
+name|equalTo
+argument_list|(
+name|expectedPredicates
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests predicates that can be pulled-up from a UNION. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMetadataUnionPredicates
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+name|checkMetadataUnionPredicates
+argument_list|(
+literal|"select * from \"emps\" where \"deptno\"< 10\n"
+operator|+
+literal|"union all\n"
+operator|+
+literal|"select * from \"emps\" where \"empid\"> 2"
+argument_list|,
+literal|"[OR(<($1, 10),>($0, 2))]"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-443">[CALCITE-443],    * getPredicates from a union is not correct</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMetadataUnionPredicates2
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+name|checkMetadataUnionPredicates
+argument_list|(
+literal|"select * from \"emps\" where \"deptno\"< 10\n"
+operator|+
+literal|"union all\n"
+operator|+
+literal|"select * from \"emps\""
+argument_list|,
+literal|"[]"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMetadataUnionPredicates3
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+comment|// The result [OR(<($1, 10), AND(<($1, 10),>($0, 1)))]
+comment|// could be simplified to [<($1, 10)] but is nevertheless correct.
+name|checkMetadataUnionPredicates
+argument_list|(
+literal|"select * from \"emps\" where \"deptno\"< 10\n"
+operator|+
+literal|"union all\n"
+operator|+
+literal|"select * from \"emps\" where \"deptno\"< 10 and \"empid\"> 1"
+argument_list|,
+literal|"[OR(<($1, 10), AND(<($1, 10),>($0, 1)))]"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMetadataUnionPredicates4
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+name|checkMetadataUnionPredicates
+argument_list|(
+literal|"select * from \"emps\" where \"deptno\"< 10\n"
+operator|+
+literal|"union all\n"
+operator|+
+literal|"select * from \"emps\" where \"deptno\"< 10 or \"empid\"> 1"
+argument_list|,
+literal|"[OR(<($1, 10),<($1, 10),>($0, 1))]"
+argument_list|)
+expr_stmt|;
 block|}
 comment|/** Unit test that parses, validates, converts and plans. */
 annotation|@
