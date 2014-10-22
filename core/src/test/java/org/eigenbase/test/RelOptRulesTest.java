@@ -4473,6 +4473,20 @@ name|transitiveInference
 argument_list|()
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-443">[CALCITE-443],    * getPredicates from a union is not correct</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testTransitiveInferenceUnionAlwaysTrue
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+name|transitiveInference
+argument_list|()
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public

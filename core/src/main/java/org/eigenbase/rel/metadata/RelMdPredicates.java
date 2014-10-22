@@ -1222,7 +1222,6 @@ argument_list|)
 decl_stmt|;
 if|if
 condition|(
-operator|!
 name|info
 operator|.
 name|pulledUpPredicates
@@ -1231,13 +1230,15 @@ name|isEmpty
 argument_list|()
 condition|)
 block|{
-name|orList
+return|return
+name|RelOptPredicateList
 operator|.
-name|addAll
-argument_list|(
+name|EMPTY
+return|;
+block|}
 name|RelOptUtil
 operator|.
-name|disjunctions
+name|decomposeDisjunction
 argument_list|(
 name|RexUtil
 operator|.
@@ -1251,10 +1252,10 @@ name|pulledUpPredicates
 argument_list|,
 literal|false
 argument_list|)
-argument_list|)
+argument_list|,
+name|orList
 argument_list|)
 expr_stmt|;
-block|}
 block|}
 if|if
 condition|(
@@ -1321,7 +1322,7 @@ name|child
 argument_list|)
 return|;
 block|}
-comment|/**    * Utility to infer predicates from one side of the join that apply on the    * other side. Contract is: - initialize with a {@link JoinRelBase} and    * optional predicates applicable on its left and right subtrees. - you can    * then ask it for equivalentPredicate(s) given a predicate.    *<p>    * So for:    *<ol>    *<li>'<code>R1(x) join R2(y) on x = y</code>' a call for    * equivalentPredciates on '<code>x> 7</code>' will return '    *<code>[y> 7]</code>'    *<li>'<code>R1(x) join R2(y) on x = y join R3(z) on y = z</code>' a call for    * equivalentPredciates on the second join '<code>x> 7</code>' will return '    *<code>[y> 7, z> 7]</code>'    *</ol>    */
+comment|/**    * Utility to infer predicates from one side of the join that apply on the    * other side. Contract is: - initialize with a {@link JoinRelBase} and    * optional predicates applicable on its left and right subtrees. - you can    * then ask it for equivalentPredicate(s) given a predicate.    *<p>    * So for:    *<ol>    *<li>'<code>R1(x) join R2(y) on x = y</code>' a call for    * equivalentPredicates on '<code>x> 7</code>' will return '    *<code>[y> 7]</code>'    *<li>'<code>R1(x) join R2(y) on x = y join R3(z) on y = z</code>' a call for    * equivalentPredicates on the second join '<code>x> 7</code>' will return '    *<code>[y> 7, z> 7]</code>'    *</ol>    */
 specifier|static
 class|class
 name|JoinConditionBasedPredicateInference
