@@ -965,7 +965,70 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testPushFilterThroughOuterJoin
+name|testFullOuterJoinSimplificationToLeftOuter
+parameter_list|()
+block|{
+name|checkPlanning
+argument_list|(
+name|PushFilterPastJoinRule
+operator|.
+name|FILTER_ON_JOIN
+argument_list|,
+literal|"select 1 from sales.dept d full outer join sales.emp e"
+operator|+
+literal|" on d.deptno = e.deptno"
+operator|+
+literal|" where d.name = 'Charlie'"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFullOuterJoinSimplificationToRightOuter
+parameter_list|()
+block|{
+name|checkPlanning
+argument_list|(
+name|PushFilterPastJoinRule
+operator|.
+name|FILTER_ON_JOIN
+argument_list|,
+literal|"select 1 from sales.dept d full outer join sales.emp e"
+operator|+
+literal|" on d.deptno = e.deptno"
+operator|+
+literal|" where e.sal> 100"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFullOuterJoinSimplificationToInner
+parameter_list|()
+block|{
+name|checkPlanning
+argument_list|(
+name|PushFilterPastJoinRule
+operator|.
+name|FILTER_ON_JOIN
+argument_list|,
+literal|"select 1 from sales.dept d full outer join sales.emp e"
+operator|+
+literal|" on d.deptno = e.deptno"
+operator|+
+literal|" where d.name = 'Charlie' and e.sal> 100"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testLeftOuterJoinSimplificationToInner
 parameter_list|()
 block|{
 name|checkPlanning
@@ -975,6 +1038,27 @@ operator|.
 name|FILTER_ON_JOIN
 argument_list|,
 literal|"select 1 from sales.dept d left outer join sales.emp e"
+operator|+
+literal|" on d.deptno = e.deptno"
+operator|+
+literal|" where e.sal> 100"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testRightOuterJoinSimplificationToInner
+parameter_list|()
+block|{
+name|checkPlanning
+argument_list|(
+name|PushFilterPastJoinRule
+operator|.
+name|FILTER_ON_JOIN
+argument_list|,
+literal|"select 1 from sales.dept d right outer join sales.emp e"
 operator|+
 literal|" on d.deptno = e.deptno"
 operator|+
