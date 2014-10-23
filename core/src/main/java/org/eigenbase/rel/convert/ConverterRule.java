@@ -39,6 +39,20 @@ name|*
 import|;
 end_import
 
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|base
+operator|.
+name|Predicates
+import|;
+end_import
+
 begin_comment
 comment|/**  * Abstract base class for a rule which converts from one calling convention to  * another without changing semantics.  */
 end_comment
@@ -295,6 +309,14 @@ argument_list|(
 name|clazz
 argument_list|,
 name|in
+argument_list|,
+name|Predicates
+operator|.
+expr|<
+name|RelNode
+operator|>
+name|alwaysTrue
+argument_list|()
 argument_list|,
 name|any
 argument_list|()
