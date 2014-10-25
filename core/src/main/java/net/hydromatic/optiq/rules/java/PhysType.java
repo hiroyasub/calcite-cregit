@@ -325,6 +325,17 @@ name|boolean
 name|nullable
 parameter_list|)
 function_decl|;
+comment|/** Converts an enumerable of this physical type to an enumerable that uses a    * given physical type for its rows. */
+name|Expression
+name|convertTo
+parameter_list|(
+name|Expression
+name|expression
+parameter_list|,
+name|PhysType
+name|targetPhysType
+parameter_list|)
+function_decl|;
 block|}
 end_interface
 

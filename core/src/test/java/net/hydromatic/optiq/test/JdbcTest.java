@@ -11727,12 +11727,7 @@ literal|"deptno=20"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-397">CALCITE-397</a>,    * "SELECT DISTINCT *" gives ClassCastException at runtime". */
-annotation|@
-name|Ignore
-argument_list|(
-literal|"CALCITE-397"
-argument_list|)
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-397">[CALCITE-397]    * "SELECT DISTINCT *" on reflective schema gives ClassCastException at    * runtime</a>. */
 annotation|@
 name|Test
 specifier|public
@@ -11763,7 +11758,7 @@ argument_list|)
 operator|.
 name|returnsCount
 argument_list|(
-literal|5
+literal|4
 argument_list|)
 operator|.
 name|planContains

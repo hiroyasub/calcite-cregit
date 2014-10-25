@@ -809,8 +809,6 @@ name|Expressions
 operator|.
 name|call
 argument_list|(
-literal|null
-argument_list|,
 name|BuiltinMethod
 operator|.
 name|ARRAY_COMPARER
