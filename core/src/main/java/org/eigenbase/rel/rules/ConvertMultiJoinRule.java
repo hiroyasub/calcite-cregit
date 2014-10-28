@@ -159,7 +159,7 @@ init|=
 operator|new
 name|ConvertMultiJoinRule
 argument_list|(
-name|JoinRel
+name|JoinRelBase
 operator|.
 name|class
 argument_list|)

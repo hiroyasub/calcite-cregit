@@ -33,6 +33,20 @@ name|org
 operator|.
 name|eigenbase
 operator|.
+name|rel
+operator|.
+name|RelFactories
+operator|.
+name|FilterFactory
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
 name|relopt
 operator|.
 name|*
@@ -58,13 +72,25 @@ name|INSTANCE
 init|=
 operator|new
 name|PushSemiJoinPastFilterRule
-argument_list|()
+argument_list|(
+name|RelFactories
+operator|.
+name|DEFAULT_FILTER_FACTORY
+argument_list|)
+decl_stmt|;
+specifier|private
+specifier|final
+name|FilterFactory
+name|filterFactory
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a PushSemiJoinPastFilterRule.    */
-specifier|private
+comment|/**    * Creates a PushSemiJoinPastFilterRule.    * @param filterFactory Factory to create Filter    */
+specifier|public
 name|PushSemiJoinPastFilterRule
-parameter_list|()
+parameter_list|(
+name|FilterFactory
+name|filterFactory
+parameter_list|)
 block|{
 name|super
 argument_list|(
@@ -78,7 +104,7 @@ name|some
 argument_list|(
 name|operand
 argument_list|(
-name|FilterRel
+name|FilterRelBase
 operator|.
 name|class
 argument_list|,
@@ -88,6 +114,12 @@ argument_list|)
 argument_list|)
 argument_list|)
 argument_list|)
+expr_stmt|;
+name|this
+operator|.
+name|filterFactory
+operator|=
+name|filterFactory
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
@@ -110,7 +142,7 @@ argument_list|(
 literal|0
 argument_list|)
 decl_stmt|;
-name|FilterRel
+name|FilterRelBase
 name|filter
 init|=
 name|call
@@ -182,6 +214,8 @@ name|filter
 operator|.
 name|getCondition
 argument_list|()
+argument_list|,
+name|filterFactory
 argument_list|)
 decl_stmt|;
 name|call

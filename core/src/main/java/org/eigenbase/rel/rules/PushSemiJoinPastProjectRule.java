@@ -43,6 +43,20 @@ name|org
 operator|.
 name|eigenbase
 operator|.
+name|rel
+operator|.
+name|RelFactories
+operator|.
+name|ProjectFactory
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|eigenbase
+operator|.
 name|relopt
 operator|.
 name|*
@@ -116,13 +130,27 @@ name|INSTANCE
 init|=
 operator|new
 name|PushSemiJoinPastProjectRule
-argument_list|()
+argument_list|(
+name|RelFactories
+operator|.
+name|DEFAULT_PROJECT_FACTORY
+argument_list|)
+decl_stmt|;
+specifier|private
+specifier|final
+name|RelFactories
+operator|.
+name|ProjectFactory
+name|projectFactory
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a PushSemiJoinPastProjectRule.    */
-specifier|private
+comment|/**    * Creates a PushSemiJoinPastProjectRule.    *    * @param projectFactory factory to create Project    */
+specifier|public
 name|PushSemiJoinPastProjectRule
-parameter_list|()
+parameter_list|(
+name|ProjectFactory
+name|projectFactory
+parameter_list|)
 block|{
 name|super
 argument_list|(
@@ -146,6 +174,12 @@ argument_list|)
 argument_list|)
 argument_list|)
 argument_list|)
+expr_stmt|;
+name|this
+operator|.
+name|projectFactory
+operator|=
+name|projectFactory
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
@@ -314,7 +348,7 @@ comment|// of the semijoin and the semijoin only projects out the LHS
 name|RelNode
 name|newProject
 init|=
-name|RelOptUtil
+name|projectFactory
 operator|.
 name|createProject
 argument_list|(
