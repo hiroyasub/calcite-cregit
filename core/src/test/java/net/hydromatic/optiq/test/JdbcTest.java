@@ -3915,19 +3915,18 @@ argument_list|()
 decl_stmt|;
 name|assertEquals
 argument_list|(
-literal|0
+literal|1
 argument_list|,
 name|driverMajorVersion
 argument_list|)
 expr_stmt|;
-name|assertTrue
+name|assertEquals
 argument_list|(
+literal|0
+argument_list|,
 name|driverMinorVersion
-operator|>=
-literal|5
 argument_list|)
 expr_stmt|;
-comment|// will work for the next few releases
 name|assertEquals
 argument_list|(
 literal|"Calcite"
@@ -3980,16 +3979,16 @@ name|databaseMinorVersion
 argument_list|)
 expr_stmt|;
 comment|// Check how version is composed of major and minor version. Note that
-comment|// version is stored in pom.xml; major and minor version are
-comment|// stored in net-hydromatic-optiq-jdbc.properties, but derived from
-comment|// version.major and version.minor in pom.xml.
+comment|// version is stored in pom.xml, then generated into
+comment|// net-hydromatic-optiq-jdbc.properties; major and minor version are
+comment|// found by splitting the version string.
 name|assertTrue
 argument_list|(
 name|driverVersion
 operator|.
 name|startsWith
 argument_list|(
-literal|"0."
+literal|"1."
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -4056,7 +4055,7 @@ name|databaseProductVersion
 operator|.
 name|startsWith
 argument_list|(
-literal|"0."
+literal|"1."
 argument_list|)
 argument_list|)
 expr_stmt|;
