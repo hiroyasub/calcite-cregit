@@ -62,7 +62,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Factory that creates a {@link CsvTable}.  *  *<p>Allows a CSV table to be included in a model.json file, even in a  * schema that is not based upon {@link CsvSchema}.</p>  */
+comment|/**  * Factory that creates a {@link CsvTranslatableTable}.  *  *<p>Allows a CSV table to be included in a model.json file, even in a  * schema that is not based upon {@link CsvSchema}.</p>  */
 end_comment
 
 begin_class
@@ -121,19 +121,6 @@ argument_list|(
 literal|"file"
 argument_list|)
 decl_stmt|;
-name|Boolean
-name|smart
-init|=
-operator|(
-name|Boolean
-operator|)
-name|map
-operator|.
-name|get
-argument_list|(
-literal|"smart"
-argument_list|)
-decl_stmt|;
 specifier|final
 name|File
 name|file
@@ -161,37 +148,15 @@ argument_list|)
 else|:
 literal|null
 decl_stmt|;
-if|if
-condition|(
-name|smart
-operator|!=
-literal|null
-operator|&&
-name|smart
-condition|)
-block|{
 return|return
 operator|new
-name|CsvSmartTable
+name|CsvScannableTable
 argument_list|(
 name|file
 argument_list|,
 name|protoRowType
 argument_list|)
 return|;
-block|}
-else|else
-block|{
-return|return
-operator|new
-name|CsvTable
-argument_list|(
-name|file
-argument_list|,
-name|protoRowType
-argument_list|)
-return|;
-block|}
 block|}
 block|}
 end_class

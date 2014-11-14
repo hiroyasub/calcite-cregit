@@ -397,7 +397,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testSelectSingleProject
+name|testSelectSingleProjectGz
 parameter_list|()
 throws|throws
 name|SQLException
@@ -414,7 +414,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testSelectSingleProject2
+name|testSelectSingleProject
 parameter_list|()
 throws|throws
 name|SQLException
@@ -423,7 +423,7 @@ name|checkSql
 argument_list|(
 literal|"smart"
 argument_list|,
-literal|"select name from COMPRESSED_EMPS"
+literal|"select name from DEPTS"
 argument_list|)
 expr_stmt|;
 block|}
@@ -524,6 +524,80 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testFilterableSelect
+parameter_list|()
+throws|throws
+name|SQLException
+block|{
+name|checkSql
+argument_list|(
+literal|"filterable-model"
+argument_list|,
+literal|"select name from EMPS"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFilterableSelectStar
+parameter_list|()
+throws|throws
+name|SQLException
+block|{
+name|checkSql
+argument_list|(
+literal|"filterable-model"
+argument_list|,
+literal|"select * from EMPS"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Filter that can be fully handled by CsvFilterableTable. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFilterableWhere
+parameter_list|()
+throws|throws
+name|SQLException
+block|{
+name|checkSql
+argument_list|(
+literal|"filterable-model"
+argument_list|,
+literal|"select empno, gender, name from EMPS where name = 'John'"
+argument_list|,
+literal|"EMPNO=110; GENDER=M; NAME=John"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Filter that can be partly handled by CsvFilterableTable. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFilterableWhere2
+parameter_list|()
+throws|throws
+name|SQLException
+block|{
+name|checkSql
+argument_list|(
+literal|"filterable-model"
+argument_list|,
+literal|"select empno, gender, name from EMPS where gender = 'F' and empno> 125"
+argument_list|,
+literal|"EMPNO=130; GENDER=F; NAME=Alice"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testJson
 parameter_list|()
 throws|throws
@@ -531,7 +605,7 @@ name|SQLException
 block|{
 name|checkSql
 argument_list|(
-literal|"model"
+literal|"bug"
 argument_list|,
 literal|"select _MAP['id'] as id,\n"
 operator|+
@@ -805,7 +879,7 @@ name|put
 argument_list|(
 literal|"model"
 argument_list|,
-literal|"target/test-classes/"
+literal|"example/csv/target/test-classes/"
 operator|+
 name|model
 operator|+
@@ -1168,7 +1242,7 @@ name|put
 argument_list|(
 literal|"model"
 argument_list|,
-literal|"target/test-classes/bug.json"
+literal|"example/csv/target/test-classes/bug.json"
 argument_list|)
 expr_stmt|;
 name|Connection

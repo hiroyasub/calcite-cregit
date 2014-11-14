@@ -4,7 +4,7 @@ comment|/*  * Licensed to the Apache Software Foundation (ASF) under one or more
 end_comment
 
 begin_comment
-comment|/**  * Optiq query provider that reads from CSV (comma-separated value) files.  *  *<p>An optiq schema maps onto a directory, and each CSV file in that  * directory appears as a table.  Full SQL operations are available on  * those tables.</p>  */
+comment|/**  * Calcite query provider that reads from CSV (comma-separated value) files.  *  *<p>A Calcite schema maps onto a directory, and each CSV file in that  * directory appears as a table.  Full SQL operations are available on  * those tables.</p>  */
 end_comment
 
 begin_package

@@ -19,25 +19,37 @@ end_package
 
 begin_import
 import|import
-name|org
+name|net
 operator|.
-name|eigenbase
+name|hydromatic
 operator|.
-name|rel
+name|linq4j
 operator|.
-name|RelNode
+name|*
 import|;
 end_import
 
 begin_import
 import|import
-name|org
+name|net
 operator|.
-name|eigenbase
+name|hydromatic
 operator|.
-name|relopt
+name|optiq
 operator|.
-name|RelOptTable
+name|DataContext
+import|;
+end_import
+
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|optiq
+operator|.
+name|ScannableTable
 import|;
 end_import
 
@@ -49,7 +61,7 @@ name|eigenbase
 operator|.
 name|reltype
 operator|.
-name|RelProtoDataType
+name|*
 import|;
 end_import
 
@@ -64,17 +76,20 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Refinement of {@link CsvTable} that plans itself.  */
+comment|/**  * Table based on a CSV file.  *  *<p>It implements the {@link ScannableTable} interface, so Calcite gets  * data by calling the {@link #scan(DataContext)} method.  */
 end_comment
 
 begin_class
+specifier|public
 class|class
-name|CsvSmartTable
+name|CsvScannableTable
 extends|extends
 name|CsvTable
+implements|implements
+name|ScannableTable
 block|{
-comment|/** Creates a CsvSmartTable. */
-name|CsvSmartTable
+comment|/** Creates a CsvScannableTable. */
+name|CsvScannableTable
 parameter_list|(
 name|File
 name|file
@@ -92,31 +107,26 @@ argument_list|)
 expr_stmt|;
 block|}
 specifier|public
-name|RelNode
-name|toRel
+name|String
+name|toString
+parameter_list|()
+block|{
+return|return
+literal|"CsvScannableTable"
+return|;
+block|}
+specifier|public
+name|Enumerable
+argument_list|<
+name|Object
+index|[]
+argument_list|>
+name|scan
 parameter_list|(
-name|RelOptTable
-operator|.
-name|ToRelContext
-name|context
-parameter_list|,
-name|RelOptTable
-name|relOptTable
+name|DataContext
+name|root
 parameter_list|)
 block|{
-comment|// Request all fields.
-specifier|final
-name|int
-name|fieldCount
-init|=
-name|relOptTable
-operator|.
-name|getRowType
-argument_list|()
-operator|.
-name|getFieldCount
-argument_list|()
-decl_stmt|;
 specifier|final
 name|int
 index|[]
@@ -126,31 +136,62 @@ name|CsvEnumerator
 operator|.
 name|identityList
 argument_list|(
-name|fieldCount
+name|fieldTypes
+operator|.
+name|size
+argument_list|()
 argument_list|)
 decl_stmt|;
 return|return
 operator|new
-name|CsvTableScan
-argument_list|(
-name|context
-operator|.
-name|getCluster
+name|AbstractEnumerable
+argument_list|<
+name|Object
+index|[]
+argument_list|>
 argument_list|()
+block|{
+specifier|public
+name|Enumerator
+argument_list|<
+name|Object
+index|[]
+argument_list|>
+name|enumerator
+parameter_list|()
+block|{
+return|return
+operator|new
+name|CsvEnumerator
+argument_list|<
+name|Object
+index|[]
+argument_list|>
+argument_list|(
+name|file
 argument_list|,
-name|relOptTable
+literal|null
 argument_list|,
-name|this
+operator|new
+name|CsvEnumerator
+operator|.
+name|ArrayRowConverter
+argument_list|(
+name|fieldTypes
 argument_list|,
 name|fields
 argument_list|)
+argument_list|)
+return|;
+block|}
+block|}
 return|;
 block|}
 block|}
 end_class
 
 begin_comment
-comment|// End CsvSmartTable.java
+comment|// End CsvScannableTable.java
 end_comment
 
 end_unit

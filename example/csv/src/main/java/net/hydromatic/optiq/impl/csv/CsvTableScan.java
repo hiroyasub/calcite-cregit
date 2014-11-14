@@ -107,7 +107,7 @@ implements|implements
 name|EnumerableRel
 block|{
 specifier|final
-name|CsvTable
+name|CsvTranslatableTable
 name|csvTable
 decl_stmt|;
 specifier|final
@@ -124,7 +124,7 @@ parameter_list|,
 name|RelOptTable
 name|table
 parameter_list|,
-name|CsvTable
+name|CsvTranslatableTable
 name|csvTable
 parameter_list|,
 name|int
@@ -407,7 +407,7 @@ name|table
 operator|.
 name|getExpression
 argument_list|(
-name|CsvTable
+name|CsvTranslatableTable
 operator|.
 name|class
 argument_list|)

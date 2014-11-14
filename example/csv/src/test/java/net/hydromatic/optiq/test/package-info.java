@@ -20,7 +20,7 @@ package|;
 end_package
 
 begin_comment
-comment|// End CsvTest.java
+comment|// End package-info.java
 end_comment
 
 end_unit
