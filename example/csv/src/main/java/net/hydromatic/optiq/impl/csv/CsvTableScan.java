@@ -23,11 +23,9 @@ name|net
 operator|.
 name|hydromatic
 operator|.
-name|optiq
+name|linq4j
 operator|.
-name|rules
-operator|.
-name|java
+name|expressions
 operator|.
 name|*
 import|;
@@ -39,9 +37,11 @@ name|net
 operator|.
 name|hydromatic
 operator|.
-name|linq4j
+name|optiq
 operator|.
-name|expressions
+name|rules
+operator|.
+name|java
 operator|.
 name|*
 import|;

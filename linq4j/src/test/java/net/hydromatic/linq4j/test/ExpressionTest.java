@@ -5243,6 +5243,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** An enum. */
 enum|enum
 name|MyEnum
 block|{
@@ -5299,6 +5300,7 @@ return|return
 literal|0
 return|;
 block|}
+comment|/** A class with a field for each type of interest. */
 specifier|public
 specifier|static
 class|class

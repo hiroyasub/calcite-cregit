@@ -9570,6 +9570,7 @@ return|return
 name|sink
 return|;
 block|}
+comment|/** Enumerable that implements take-while. */
 specifier|static
 class|class
 name|TakeWhileEnumerator
@@ -9734,6 +9735,7 @@ argument_list|()
 expr_stmt|;
 block|}
 block|}
+comment|/** Enumerator that implements skip-while. */
 specifier|static
 class|class
 name|SkipWhileEnumerator
@@ -9910,6 +9912,7 @@ argument_list|()
 expr_stmt|;
 block|}
 block|}
+comment|/** Enumerator that casts each value. */
 specifier|static
 class|class
 name|CastingEnumerator
@@ -10019,6 +10022,7 @@ argument_list|()
 expr_stmt|;
 block|}
 block|}
+comment|/** Value wrapped with a comparer. */
 specifier|private
 specifier|static
 class|class
@@ -10165,6 +10169,7 @@ name|element
 return|;
 block|}
 block|}
+comment|/** Map that wraps each value. */
 specifier|private
 specifier|static
 class|class

@@ -468,6 +468,7 @@ return|return
 name|integers
 return|;
 block|}
+comment|/** Row converter. */
 specifier|private
 specifier|abstract
 specifier|static
@@ -857,6 +858,7 @@ return|;
 block|}
 block|}
 block|}
+comment|/** Array row converter. */
 specifier|private
 specifier|static
 class|class
@@ -972,6 +974,7 @@ name|objects
 return|;
 block|}
 block|}
+comment|/** Single column row converter. */
 specifier|private
 specifier|static
 class|class

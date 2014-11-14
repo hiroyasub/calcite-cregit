@@ -931,6 +931,7 @@ return|return
 name|o
 return|;
 block|}
+comment|/** Iterable enumerator. */
 annotation|@
 name|SuppressWarnings
 argument_list|(
@@ -1258,6 +1259,7 @@ block|}
 block|}
 block|}
 block|}
+comment|/** Composite enumerable. */
 specifier|static
 class|class
 name|CompositeEnumerable
@@ -1433,6 +1435,7 @@ block|}
 return|;
 block|}
 block|}
+comment|/** Iterable enumerable. */
 specifier|static
 class|class
 name|IterableEnumerable
@@ -1502,6 +1505,7 @@ argument_list|()
 return|;
 block|}
 block|}
+comment|/** Collection enumerable. */
 specifier|static
 class|class
 name|CollectionEnumerable
@@ -1614,6 +1618,7 @@ argument_list|()
 return|;
 block|}
 block|}
+comment|/** List enumerable. */
 specifier|static
 class|class
 name|ListEnumerable

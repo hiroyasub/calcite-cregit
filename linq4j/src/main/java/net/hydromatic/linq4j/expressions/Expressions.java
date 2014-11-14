@@ -10325,15 +10325,19 @@ block|}
 comment|// ~ Classes and interfaces ------------------------------------------------
 comment|// Some interfaces we'd rather not implement yet. They don't seem relevant
 comment|// in the Java world.
+comment|/** Property info. */
 interface|interface
 name|PropertyInfo
 block|{   }
+comment|/** Runtime variables expression. */
 interface|interface
 name|RuntimeVariablesExpression
 block|{   }
+comment|/** Symbol document info. */
 interface|interface
 name|SymbolDocumentInfo
 block|{   }
+comment|/** Fluent list. */
 specifier|public
 interface|interface
 name|FluentList
@@ -10404,6 +10408,7 @@ name|ts
 parameter_list|)
 function_decl|;
 block|}
+comment|/** Fluent array list. */
 specifier|private
 specifier|static
 class|class

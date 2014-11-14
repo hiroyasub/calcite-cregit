@@ -5986,7 +5986,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testTake_enumerable
+name|testTakeEnumerable
 parameter_list|()
 block|{
 specifier|final
@@ -6096,7 +6096,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testTake_queryable
+name|testTakeQueryable
 parameter_list|()
 block|{
 specifier|final
@@ -6180,7 +6180,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testTake_enumerable_zero_or_negative_size
+name|testTakeEnumerableZeroOrNegativeSize
 parameter_list|()
 block|{
 name|assertEquals
@@ -6239,7 +6239,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testTake_queryable_zero_or_negative_size
+name|testTakeQueryableZeroOrNegativeSize
 parameter_list|()
 block|{
 name|assertEquals
@@ -6304,7 +6304,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testTake_enumerable_greater_than_length
+name|testTakeEnumerableGreaterThanLength
 parameter_list|()
 block|{
 specifier|final
@@ -6400,7 +6400,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testTake_queryable_greater_than_length
+name|testTakeQueryableGreaterThanLength
 parameter_list|()
 block|{
 specifier|final
@@ -6496,7 +6496,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testTakeWhile_enumerable_predicate
+name|testTakeWhileEnumerablePredicate
 parameter_list|()
 block|{
 specifier|final
@@ -6592,7 +6592,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testTakeWhile_enumerable_function
+name|testTakeWhileEnumerableFunction
 parameter_list|()
 block|{
 specifier|final
@@ -6705,7 +6705,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testTakeWhile_queryable_functionexpression_predicate
+name|testTakeWhileQueryableFunctionExpressionPredicate
 parameter_list|()
 block|{
 specifier|final
@@ -7015,7 +7015,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testTakeWhileN_no_match
+name|testTakeWhileNNoMatch
 parameter_list|()
 block|{
 specifier|final
@@ -8031,6 +8031,7 @@ index|]
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Employee. */
 specifier|public
 specifier|static
 class|class
@@ -8283,6 +8284,7 @@ literal|true
 return|;
 block|}
 block|}
+comment|/** Department. */
 specifier|public
 specifier|static
 class|class

@@ -1936,6 +1936,7 @@ return|return
 name|this
 return|;
 block|}
+comment|/** Substitute Variable Visitor. */
 specifier|private
 specifier|static
 class|class
@@ -2221,6 +2222,7 @@ argument_list|)
 return|;
 block|}
 block|}
+comment|/** Use counter. */
 specifier|private
 specifier|static
 class|class

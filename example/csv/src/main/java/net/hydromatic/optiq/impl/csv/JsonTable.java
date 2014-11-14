@@ -23,6 +23,18 @@ name|net
 operator|.
 name|hydromatic
 operator|.
+name|linq4j
+operator|.
+name|*
+import|;
+end_import
+
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
 name|optiq
 operator|.
 name|*
@@ -88,18 +100,6 @@ operator|.
 name|java
 operator|.
 name|JavaRules
-import|;
-end_import
-
-begin_import
-import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|linq4j
-operator|.
-name|*
 import|;
 end_import
 

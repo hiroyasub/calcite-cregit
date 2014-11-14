@@ -2007,6 +2007,7 @@ name|selector
 argument_list|)
 return|;
 block|}
+comment|/** Array equality comparer. */
 specifier|private
 specifier|static
 class|class
@@ -2061,6 +2062,7 @@ argument_list|)
 return|;
 block|}
 block|}
+comment|/** Identity equality comparer. */
 specifier|private
 specifier|static
 class|class
@@ -2115,6 +2117,7 @@ argument_list|()
 return|;
 block|}
 block|}
+comment|/** Selector equality comparer. */
 specifier|private
 specifier|static
 specifier|final
@@ -2230,6 +2233,7 @@ argument_list|()
 return|;
 block|}
 block|}
+comment|/** Nulls first comparator. */
 specifier|private
 specifier|static
 class|class
@@ -2298,6 +2302,7 @@ argument_list|)
 return|;
 block|}
 block|}
+comment|/** Nulls last comparator. */
 specifier|private
 specifier|static
 class|class
@@ -2366,6 +2371,7 @@ argument_list|)
 return|;
 block|}
 block|}
+comment|/** Nulls first reverse comparator. */
 specifier|private
 specifier|static
 class|class
@@ -2435,6 +2441,7 @@ argument_list|)
 return|;
 block|}
 block|}
+comment|/** Nulls last reverse comparator. */
 specifier|private
 specifier|static
 class|class
@@ -2504,6 +2511,7 @@ argument_list|)
 return|;
 block|}
 block|}
+comment|/** Ignore. */
 specifier|private
 specifier|static
 specifier|final

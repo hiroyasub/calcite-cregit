@@ -4192,6 +4192,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
+comment|/** Replayable. */
 specifier|public
 interface|interface
 name|Replayable
@@ -4215,6 +4216,7 @@ name|factory
 parameter_list|)
 function_decl|;
 block|}
+comment|/** Replayable queryable. */
 specifier|public
 specifier|abstract
 specifier|static
@@ -4344,6 +4346,7 @@ name|this
 return|;
 block|}
 block|}
+comment|/** Non-leaf replayable queryable. */
 specifier|public
 specifier|abstract
 specifier|static
