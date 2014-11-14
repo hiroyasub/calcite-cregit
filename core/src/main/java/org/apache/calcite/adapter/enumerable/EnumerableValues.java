@@ -231,6 +231,20 @@ end_import
 
 begin_import
 import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|ImmutableList
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|lang
@@ -282,9 +296,9 @@ parameter_list|,
 name|RelDataType
 name|rowType
 parameter_list|,
-name|List
+name|ImmutableList
 argument_list|<
-name|List
+name|ImmutableList
 argument_list|<
 name|RexLiteral
 argument_list|>

@@ -1816,14 +1816,6 @@ name|ENUMERABLE_WINDOW_RULE
 argument_list|,
 name|EnumerableRules
 operator|.
-name|ENUMERABLE_ONE_ROW_RULE
-argument_list|,
-name|EnumerableRules
-operator|.
-name|ENUMERABLE_EMPTY_RULE
-argument_list|,
-name|EnumerableRules
-operator|.
 name|ENUMERABLE_TABLE_FUNCTION_SCAN_RULE
 argument_list|,
 name|AggregateStarTableRule

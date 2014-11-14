@@ -101,6 +101,20 @@ name|calcite
 operator|.
 name|plan
 operator|.
+name|RelOptRule
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
 name|RelTraitSet
 import|;
 end_import
@@ -255,6 +269,34 @@ end_import
 
 begin_import
 import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|base
+operator|.
+name|Predicate
+import|;
+end_import
+
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|ImmutableList
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -281,7 +323,7 @@ specifier|static
 specifier|final
 name|Function1
 argument_list|<
-name|List
+name|ImmutableList
 argument_list|<
 name|RexLiteral
 argument_list|>
@@ -293,7 +335,7 @@ init|=
 operator|new
 name|Function1
 argument_list|<
-name|List
+name|ImmutableList
 argument_list|<
 name|RexLiteral
 argument_list|>
@@ -306,7 +348,7 @@ specifier|public
 name|Object
 name|apply
 parameter_list|(
-name|List
+name|ImmutableList
 argument_list|<
 name|RexLiteral
 argument_list|>
@@ -359,12 +401,51 @@ return|;
 block|}
 block|}
 decl_stmt|;
+comment|/** Predicate, to be used when defining an operand of a {@link RelOptRule},    * that returns true if a Values contains zero tuples.    *    *<p>This is the conventional way to represent an empty relational    * expression. There are several rules that recognize empty relational    * expressions and prune away that section of the tree.    */
+specifier|public
+specifier|static
+specifier|final
+name|Predicate
+argument_list|<
+name|?
+super|super
+name|Values
+argument_list|>
+name|IS_EMPTY
+init|=
+operator|new
+name|Predicate
+argument_list|<
+name|Values
+argument_list|>
+argument_list|()
+block|{
+specifier|public
+name|boolean
+name|apply
+parameter_list|(
+name|Values
+name|values
+parameter_list|)
+block|{
+return|return
+name|values
+operator|.
+name|getTuples
+argument_list|()
+operator|.
+name|isEmpty
+argument_list|()
+return|;
+block|}
+block|}
+decl_stmt|;
 comment|//~ Instance fields --------------------------------------------------------
 specifier|protected
 specifier|final
-name|List
+name|ImmutableList
 argument_list|<
-name|List
+name|ImmutableList
 argument_list|<
 name|RexLiteral
 argument_list|>
@@ -382,9 +463,9 @@ parameter_list|,
 name|RelDataType
 name|rowType
 parameter_list|,
-name|List
+name|ImmutableList
 argument_list|<
-name|List
+name|ImmutableList
 argument_list|<
 name|RexLiteral
 argument_list|>
@@ -457,9 +538,9 @@ expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
 specifier|public
-name|List
+name|ImmutableList
 argument_list|<
-name|List
+name|ImmutableList
 argument_list|<
 name|RexLiteral
 argument_list|>
@@ -479,11 +560,11 @@ literal|"tuples"
 argument_list|)
 return|;
 block|}
-comment|/**    * @return rows of literals represented by this rel    */
+comment|/** Returns the rows of literals represented by this Values relational    * expression. */
 specifier|public
-name|List
+name|ImmutableList
 argument_list|<
-name|List
+name|ImmutableList
 argument_list|<
 name|RexLiteral
 argument_list|>
@@ -495,7 +576,7 @@ return|return
 name|tuples
 return|;
 block|}
-comment|/**    * @return true if all tuples match rowType; otherwise, assert on mismatch    */
+comment|/** Returns true if all tuples match rowType; otherwise, assert on    * mismatch. */
 specifier|private
 name|boolean
 name|assertRowType

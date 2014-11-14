@@ -133,6 +133,20 @@ end_import
 
 begin_import
 import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|ImmutableList
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -288,9 +302,9 @@ name|RelCollation
 name|getCollation
 parameter_list|()
 function_decl|;
-name|List
+name|ImmutableList
 argument_list|<
-name|List
+name|ImmutableList
 argument_list|<
 name|RexLiteral
 argument_list|>

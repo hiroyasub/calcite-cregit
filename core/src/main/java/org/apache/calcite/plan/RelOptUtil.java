@@ -335,22 +335,6 @@ name|rel
 operator|.
 name|rules
 operator|.
-name|EmptyPruneRules
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|rel
-operator|.
-name|rules
-operator|.
 name|FilterMergeRule
 import|;
 end_import
@@ -400,6 +384,22 @@ operator|.
 name|rules
 operator|.
 name|ProjectToWindowRule
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|rules
+operator|.
+name|PruneEmptyRules
 import|;
 end_import
 
@@ -6857,7 +6857,7 @@ name|planner
 operator|.
 name|addRule
 argument_list|(
-name|EmptyPruneRules
+name|PruneEmptyRules
 operator|.
 name|UNION_INSTANCE
 argument_list|)
@@ -6866,7 +6866,7 @@ name|planner
 operator|.
 name|addRule
 argument_list|(
-name|EmptyPruneRules
+name|PruneEmptyRules
 operator|.
 name|PROJECT_INSTANCE
 argument_list|)
@@ -6875,7 +6875,7 @@ name|planner
 operator|.
 name|addRule
 argument_list|(
-name|EmptyPruneRules
+name|PruneEmptyRules
 operator|.
 name|FILTER_INSTANCE
 argument_list|)
@@ -6884,7 +6884,7 @@ name|planner
 operator|.
 name|addRule
 argument_list|(
-name|EmptyPruneRules
+name|PruneEmptyRules
 operator|.
 name|SORT_INSTANCE
 argument_list|)
@@ -6893,7 +6893,7 @@ name|planner
 operator|.
 name|addRule
 argument_list|(
-name|EmptyPruneRules
+name|PruneEmptyRules
 operator|.
 name|AGGREGATE_INSTANCE
 argument_list|)
@@ -6902,7 +6902,7 @@ name|planner
 operator|.
 name|addRule
 argument_list|(
-name|EmptyPruneRules
+name|PruneEmptyRules
 operator|.
 name|JOIN_LEFT_INSTANCE
 argument_list|)
@@ -6911,7 +6911,7 @@ name|planner
 operator|.
 name|addRule
 argument_list|(
-name|EmptyPruneRules
+name|PruneEmptyRules
 operator|.
 name|JOIN_RIGHT_INSTANCE
 argument_list|)
@@ -6920,7 +6920,7 @@ name|planner
 operator|.
 name|addRule
 argument_list|(
-name|EmptyPruneRules
+name|PruneEmptyRules
 operator|.
 name|SORT_FETCH_ZERO_INSTANCE
 argument_list|)

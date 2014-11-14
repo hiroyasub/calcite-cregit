@@ -5549,9 +5549,9 @@ parameter_list|,
 name|RelDataType
 name|rowType
 parameter_list|,
-name|List
+name|ImmutableList
 argument_list|<
-name|List
+name|ImmutableList
 argument_list|<
 name|RexLiteral
 argument_list|>

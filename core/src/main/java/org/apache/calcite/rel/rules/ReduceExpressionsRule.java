@@ -99,22 +99,6 @@ name|rel
 operator|.
 name|core
 operator|.
-name|Empty
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|rel
-operator|.
-name|core
-operator|.
 name|Join
 import|;
 end_import
@@ -164,6 +148,22 @@ operator|.
 name|logical
 operator|.
 name|LogicalProject
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|logical
+operator|.
+name|LogicalValues
 import|;
 end_import
 
@@ -570,7 +570,7 @@ argument_list|(
 literal|"Reduce(Expressions|Values)Rule.*"
 argument_list|)
 decl_stmt|;
-comment|/**    * Singleton rule that reduces constants inside a    * {@link org.apache.calcite.rel.logical.LogicalFilter}. If the condition is a    * constant, the filter is removed (if TRUE) or replaced with    * {@link org.apache.calcite.rel.core.Empty} (if FALSE or NULL).    */
+comment|/**    * Singleton rule that reduces constants inside a    * {@link org.apache.calcite.rel.logical.LogicalFilter}. If the condition is a    * constant, the filter is removed (if TRUE) or replaced with an empty    * {@link org.apache.calcite.rel.core.Values} (if FALSE or NULL).    */
 specifier|public
 specifier|static
 specifier|final
@@ -705,11 +705,9 @@ expr_stmt|;
 block|}
 if|else if
 condition|(
-operator|(
 name|newConditionExp
 operator|instanceof
 name|RexLiteral
-operator|)
 operator|||
 name|RexUtil
 operator|.
@@ -725,8 +723,9 @@ name|call
 operator|.
 name|transformTo
 argument_list|(
-operator|new
-name|Empty
+name|LogicalValues
+operator|.
+name|createEmpty
 argument_list|(
 name|filter
 operator|.
@@ -981,8 +980,9 @@ name|call
 operator|.
 name|transformTo
 argument_list|(
-operator|new
-name|Empty
+name|LogicalValues
+operator|.
+name|createEmpty
 argument_list|(
 name|filter
 operator|.
@@ -1498,8 +1498,9 @@ name|call
 operator|.
 name|transformTo
 argument_list|(
-operator|new
-name|Empty
+name|LogicalValues
+operator|.
+name|createEmpty
 argument_list|(
 name|calc
 operator|.

@@ -115,22 +115,6 @@ name|rel
 operator|.
 name|core
 operator|.
-name|Empty
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|rel
-operator|.
-name|core
-operator|.
 name|Filter
 import|;
 end_import
@@ -193,9 +177,41 @@ name|calcite
 operator|.
 name|rel
 operator|.
+name|core
+operator|.
+name|Values
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
 name|logical
 operator|.
 name|LogicalUnion
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|logical
+operator|.
+name|LogicalValues
 import|;
 end_import
 
@@ -314,14 +330,14 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Collection of rules which remove sections of a query plan known never to  * produce any rows.  *  * @see org.apache.calcite.rel.core.Empty  */
+comment|/**  * Collection of rules which remove sections of a query plan known never to  * produce any rows.  *  *<p>Conventionally, the way to represent an empty relational expression is  * with a {@link Values} that has no tuples.  *  * @see LogicalValues#createEmpty  */
 end_comment
 
 begin_class
 specifier|public
 specifier|abstract
 class|class
-name|EmptyPruneRules
+name|PruneEmptyRules
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
 comment|/**    * Rule that removes empty children of a    * {@link org.apache.calcite.rel.logical.LogicalUnion}.    *    *<p>Examples:    *    *<ul>    *<li>Union(Rel, Empty, Rel2) becomes Union(Rel, Rel2)    *<li>Union(Rel, Empty, Empty) becomes Rel    *<li>Union(Empty, Empty) becomes Empty    *</ul>    */
@@ -344,9 +360,15 @@ name|unordered
 argument_list|(
 name|operand
 argument_list|(
-name|Empty
+name|Values
 operator|.
 name|class
+argument_list|,
+literal|null
+argument_list|,
+name|Values
+operator|.
+name|IS_EMPTY
 argument_list|,
 name|none
 argument_list|()
@@ -414,11 +436,10 @@ block|{
 if|if
 condition|(
 operator|!
-operator|(
+name|isEmpty
+argument_list|(
 name|childRel
-operator|instanceof
-name|Empty
-operator|)
+argument_list|)
 condition|)
 block|{
 name|newChildRels
@@ -520,6 +541,34 @@ expr_stmt|;
 block|}
 block|}
 decl_stmt|;
+specifier|private
+specifier|static
+name|boolean
+name|isEmpty
+parameter_list|(
+name|RelNode
+name|node
+parameter_list|)
+block|{
+return|return
+name|node
+operator|instanceof
+name|Values
+operator|&&
+operator|(
+operator|(
+name|Values
+operator|)
+name|node
+operator|)
+operator|.
+name|getTuples
+argument_list|()
+operator|.
+name|isEmpty
+argument_list|()
+return|;
+block|}
 comment|/**    * Rule that converts a {@link org.apache.calcite.rel.logical.LogicalProject}    * to empty if its child is empty.    *    *<p>Examples:    *    *<ul>    *<li>Project(Empty) becomes Empty    *</ul>    */
 specifier|public
 specifier|static
@@ -685,9 +734,15 @@ name|some
 argument_list|(
 name|operand
 argument_list|(
-name|Empty
+name|Values
 operator|.
 name|class
+argument_list|,
+literal|null
+argument_list|,
+name|Values
+operator|.
+name|IS_EMPTY
 argument_list|,
 name|none
 argument_list|()
@@ -786,9 +841,15 @@ argument_list|)
 argument_list|,
 name|operand
 argument_list|(
-name|Empty
+name|Values
 operator|.
 name|class
+argument_list|,
+literal|null
+argument_list|,
+name|Values
+operator|.
+name|IS_EMPTY
 argument_list|,
 name|none
 argument_list|()
@@ -847,10 +908,10 @@ expr_stmt|;
 block|}
 block|}
 decl_stmt|;
-comment|/** Creates an {@link org.apache.calcite.rel.core.Empty} to replace    * {@code node}. */
+comment|/** Creates a {@link org.apache.calcite.rel.core.Values} to replace    * {@code node}. */
 specifier|private
 specifier|static
-name|Empty
+name|Values
 name|empty
 parameter_list|(
 name|RelNode
@@ -858,8 +919,9 @@ name|node
 parameter_list|)
 block|{
 return|return
-operator|new
-name|Empty
+name|LogicalValues
+operator|.
+name|createEmpty
 argument_list|(
 name|node
 operator|.
@@ -904,9 +966,15 @@ name|clazz
 argument_list|,
 name|operand
 argument_list|(
-name|Empty
+name|Values
 operator|.
 name|class
+argument_list|,
+literal|null
+argument_list|,
+name|Values
+operator|.
+name|IS_EMPTY
 argument_list|,
 name|none
 argument_list|()
@@ -951,7 +1019,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End EmptyPruneRules.java
+comment|// End PruneEmptyRules.java
 end_comment
 
 end_unit
