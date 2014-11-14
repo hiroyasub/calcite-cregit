@@ -1047,6 +1047,16 @@ name|Casing
 name|unquotedCasing
 parameter_list|)
 function_decl|;
+comment|/**    * Sets the maximum length for sql identifier.    */
+specifier|public
+specifier|abstract
+name|void
+name|setIdentifierMaxLength
+parameter_list|(
+name|int
+name|identifierMaxLength
+parameter_list|)
+function_decl|;
 comment|/**    * Change parser state.    *    * @param stateName new state.    */
 specifier|public
 specifier|abstract

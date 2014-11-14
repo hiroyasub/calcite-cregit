@@ -23,20 +23,6 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|config
-operator|.
-name|Lex
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
 name|plan
 operator|.
 name|Context
@@ -127,7 +113,7 @@ name|sql
 operator|.
 name|parser
 operator|.
-name|SqlParserImplFactory
+name|SqlParser
 import|;
 end_import
 
@@ -168,14 +154,11 @@ specifier|public
 interface|interface
 name|FrameworkConfig
 block|{
-comment|/**    * The type of lexical analysis the SqlParser should do.  Controls case rules    * and quoted identifier syntax.    */
-name|Lex
-name|getLex
-parameter_list|()
-function_decl|;
-comment|/**    * Provides the parser factory that creates the SqlParser used in parsing    * queries.    */
-name|SqlParserImplFactory
-name|getParserFactory
+comment|/**    * The configuration of SQL parser.    */
+name|SqlParser
+operator|.
+name|Config
+name|getParserConfig
 parameter_list|()
 function_decl|;
 comment|/**    * Returns the default schema that should be checked before looking at the    * root schema.  Returns null to only consult the root schema.    */
