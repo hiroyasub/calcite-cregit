@@ -170,7 +170,7 @@ extends|extends
 name|Aggregate
 block|{
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a LogicalAggregate.    *    * @param cluster  Cluster that this relational expression belongs to    * @param child    input relational expression    * @param groupSet Bit set of grouping fields    * @param aggCalls Array of aggregates to compute, not null    */
+comment|/**    * Creates a LogicalAggregate.    *    * @param cluster  Cluster that this relational expression belongs to    * @param child    input relational expression    * @param groupSet Bit set of grouping fields    * @param groupSets Grouping sets, or null to use just {@code groupSet}    * @param aggCalls Array of aggregates to compute, not null    */
 specifier|public
 name|LogicalAggregate
 parameter_list|(
@@ -180,8 +180,17 @@ parameter_list|,
 name|RelNode
 name|child
 parameter_list|,
+name|boolean
+name|indicator
+parameter_list|,
 name|ImmutableBitSet
 name|groupSet
+parameter_list|,
+name|List
+argument_list|<
+name|ImmutableBitSet
+argument_list|>
+name|groupSets
 parameter_list|,
 name|List
 argument_list|<
@@ -205,7 +214,11 @@ argument_list|)
 argument_list|,
 name|child
 argument_list|,
+name|indicator
+argument_list|,
 name|groupSet
+argument_list|,
+name|groupSets
 argument_list|,
 name|aggCalls
 argument_list|)
@@ -238,8 +251,17 @@ parameter_list|,
 name|RelNode
 name|input
 parameter_list|,
+name|boolean
+name|indicator
+parameter_list|,
 name|ImmutableBitSet
 name|groupSet
+parameter_list|,
+name|List
+argument_list|<
+name|ImmutableBitSet
+argument_list|>
+name|groupSets
 parameter_list|,
 name|List
 argument_list|<
@@ -267,7 +289,13 @@ argument_list|()
 argument_list|,
 name|input
 argument_list|,
+name|this
+operator|.
+name|indicator
+argument_list|,
 name|groupSet
+argument_list|,
+name|groupSets
 argument_list|,
 name|aggCalls
 argument_list|)

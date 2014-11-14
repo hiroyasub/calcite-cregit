@@ -251,6 +251,12 @@ name|Aggregate
 operator|.
 name|class
 argument_list|,
+literal|null
+argument_list|,
+name|Aggregate
+operator|.
+name|IS_SIMPLE
+argument_list|,
 name|operand
 argument_list|(
 name|Project
@@ -540,7 +546,11 @@ operator|.
 name|getInput
 argument_list|()
 argument_list|,
+literal|false
+argument_list|,
 name|newGroupSet
+argument_list|,
+literal|null
 argument_list|,
 name|aggCalls
 operator|.

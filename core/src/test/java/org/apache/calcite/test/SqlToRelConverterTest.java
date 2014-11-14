@@ -181,6 +181,24 @@ name|class
 argument_list|)
 return|;
 block|}
+comment|/** Sets the SQL statement for a test. */
+specifier|public
+specifier|final
+name|Sql
+name|sql
+parameter_list|(
+name|String
+name|sql
+parameter_list|)
+block|{
+return|return
+operator|new
+name|Sql
+argument_list|(
+name|sql
+argument_list|)
+return|;
+block|}
 specifier|protected
 specifier|final
 name|void
@@ -193,12 +211,13 @@ name|String
 name|plan
 parameter_list|)
 block|{
-name|tester
-operator|.
-name|assertConvertsTo
+name|sql
 argument_list|(
 name|sql
-argument_list|,
+argument_list|)
+operator|.
+name|convertsTo
+argument_list|(
 name|plan
 argument_list|)
 expr_stmt|;
@@ -537,12 +556,225 @@ name|void
 name|testAggregateNoGroup
 parameter_list|()
 block|{
-name|check
+name|sql
 argument_list|(
 literal|"select sum(deptno) from emp"
-argument_list|,
-literal|"${plan}"
 argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testGroupEmpty
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select sum(deptno) from emp group by ()"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+comment|// Same effect as writing "GROUP BY deptno"
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSingletonGroupingSet
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select sum(sal) from emp group by grouping sets (deptno)"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testGroupingSets
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select deptno, ename, sum(sal) from emp\n"
+operator|+
+literal|"group by grouping sets ((deptno), (ename, deptno))\n"
+operator|+
+literal|"order by 2"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+comment|/**    * GROUP BY with duplicates    *    *<p>From SQL spec:    *<blockquote>NOTE 190 â That is, a simple<em>group by clause</em> that is    * not primitive may be transformed into a primitive<em>group by clause</em>    * by deleting all parentheses, and deleting extra commas as necessary for    * correct syntax. If there are no grouping columns at all (for example,    * GROUP BY (), ()), this is transformed to the canonical form GROUP BY ().    *</blockquote> */
+comment|// Same effect as writing "GROUP BY ()"
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testGroupByWithDuplicates
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select sum(sal) from emp group by (), ()"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+comment|/** GROUP BY with duplicate (and heavily nested) GROUPING SETS. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDuplicateGroupingSets
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select sum(sal) from emp\n"
+operator|+
+literal|"group by sal,\n"
+operator|+
+literal|"  grouping sets (deptno,\n"
+operator|+
+literal|"    grouping sets ((deptno, ename), ename),\n"
+operator|+
+literal|"      (ename)),\n"
+operator|+
+literal|"  ()"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testGroupingSetsCartesianProduct
+parameter_list|()
+block|{
+comment|// Equivalent to (a, c), (a, d), (b, c), (b, d)
+name|sql
+argument_list|(
+literal|"select 1 from (values (1, 2, 3, 4)) as t(a, b, c, d)\n"
+operator|+
+literal|"group by grouping sets (a, b), grouping sets (c, d)"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testGroupingSetsCartesianProduct2
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select 1 from (values (1, 2, 3, 4)) as t(a, b, c, d)\n"
+operator|+
+literal|"group by grouping sets (a, (a, b)), grouping sets (c), d"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testRollup
+parameter_list|()
+block|{
+comment|// Equivalent to {(a, b), (a), ()}  * {(c, d), (c), ()}
+name|sql
+argument_list|(
+literal|"select 1 from (values (1, 2, 3, 4)) as t(a, b, c, d)\n"
+operator|+
+literal|"group by rollup(a, b), rollup(c, d)"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testRollupTuples
+parameter_list|()
+block|{
+comment|// rollup(b, (a, d)) is (b, a, d), (b), ()
+name|sql
+argument_list|(
+literal|"select 1 from (values (1, 2, 3, 4)) as t(a, b, c, d)\n"
+operator|+
+literal|"group by rollup(b, (a, d))"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testCube
+parameter_list|()
+block|{
+comment|// cube(a, b) is {(a, b), (a), (b), ()}
+name|sql
+argument_list|(
+literal|"select 1 from (values (1, 2, 3, 4)) as t(a, b, c, d)\n"
+operator|+
+literal|"group by cube(a, b)"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testGroupingSetsWith
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"with t(a, b, c, d) as (values (1, 2, 3, 4))\n"
+operator|+
+literal|"select 1 from t\n"
+operator|+
+literal|"group by rollup(a, b), rollup(c, d)"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 block|}
 annotation|@
@@ -587,7 +819,7 @@ name|testGroupBug281b
 parameter_list|()
 block|{
 comment|// Try to confuse it with spurious columns.
-name|check
+name|sql
 argument_list|(
 literal|"select name, foo from ("
 operator|+
@@ -596,9 +828,10 @@ operator|+
 literal|"from dept "
 operator|+
 literal|"group by name, deptno, name)"
-argument_list|,
-literal|"${plan}"
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 block|}
 annotation|@
@@ -608,16 +841,17 @@ name|void
 name|testAggDistinct
 parameter_list|()
 block|{
-name|check
+name|sql
 argument_list|(
 literal|"select deptno, sum(sal), sum(distinct sal), count(*) "
 operator|+
 literal|"from emp "
 operator|+
 literal|"group by deptno"
-argument_list|,
-literal|"${plan}"
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 block|}
 annotation|@
@@ -627,12 +861,13 @@ name|void
 name|testSelectDistinct
 parameter_list|()
 block|{
-name|check
+name|sql
 argument_list|(
 literal|"select distinct sal + 5 from emp"
-argument_list|,
-literal|"${plan}"
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 block|}
 annotation|@
@@ -642,12 +877,13 @@ name|void
 name|testSelectDistinctGroup
 parameter_list|()
 block|{
-name|check
+name|sql
 argument_list|(
 literal|"select distinct sum(sal) from emp group by deptno"
-argument_list|,
-literal|"${plan}"
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 block|}
 comment|/**    * Tests that if the clause of SELECT DISTINCT contains duplicate    * expressions, they are only aggregated once.    */
@@ -2421,6 +2657,59 @@ argument_list|,
 name|ordinal
 argument_list|,
 name|parent
+argument_list|)
+expr_stmt|;
+block|}
+block|}
+comment|/** Allows fluent testing. */
+specifier|public
+class|class
+name|Sql
+block|{
+specifier|private
+specifier|final
+name|String
+name|sql
+decl_stmt|;
+name|Sql
+parameter_list|(
+name|String
+name|sql
+parameter_list|)
+block|{
+name|this
+operator|.
+name|sql
+operator|=
+name|sql
+expr_stmt|;
+block|}
+specifier|public
+name|void
+name|ok
+parameter_list|()
+block|{
+name|convertsTo
+argument_list|(
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
+specifier|public
+name|void
+name|convertsTo
+parameter_list|(
+name|String
+name|plan
+parameter_list|)
+block|{
+name|tester
+operator|.
+name|assertConvertsTo
+argument_list|(
+name|sql
+argument_list|,
+name|plan
 argument_list|)
 expr_stmt|;
 block|}

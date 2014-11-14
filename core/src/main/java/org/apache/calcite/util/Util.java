@@ -157,6 +157,20 @@ end_import
 
 begin_import
 import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|Ordering
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|io
@@ -428,6 +442,16 @@ operator|.
 name|util
 operator|.
 name|Collection
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Comparator
 import|;
 end_import
 
@@ -6188,7 +6212,7 @@ name|next
 expr_stmt|;
 block|}
 block|}
-comment|/** Returns whether an iterable is in ascending order. */
+comment|/** Returns whether an iterable is in ascending order.    *    *<p>This implies that it contains no duplicates. */
 specifier|public
 specifier|static
 parameter_list|<
@@ -6209,6 +6233,42 @@ extends|extends
 name|E
 argument_list|>
 name|list
+parameter_list|)
+block|{
+return|return
+name|isStrictlySorted
+argument_list|(
+name|list
+argument_list|,
+name|Ordering
+operator|.
+name|natural
+argument_list|()
+argument_list|)
+return|;
+block|}
+comment|/** Returns whether an iterable is in ascending order, according to a    * {@link java.util.Comparator}.    *    *<p>This implies that it contains no duplicates. */
+specifier|public
+specifier|static
+parameter_list|<
+name|E
+parameter_list|>
+name|boolean
+name|isStrictlySorted
+parameter_list|(
+name|Iterable
+argument_list|<
+name|?
+extends|extends
+name|E
+argument_list|>
+name|list
+parameter_list|,
+name|Comparator
+argument_list|<
+name|E
+argument_list|>
+name|comparator
 parameter_list|)
 block|{
 specifier|final
@@ -6275,10 +6335,12 @@ argument_list|()
 decl_stmt|;
 if|if
 condition|(
-name|e
+name|comparator
 operator|.
-name|compareTo
+name|compare
 argument_list|(
+name|e
+argument_list|,
 name|next
 argument_list|)
 operator|>=

@@ -41,7 +41,7 @@ name|calcite
 operator|.
 name|sql
 operator|.
-name|SqlInternalOperator
+name|SqlKind
 import|;
 end_import
 
@@ -55,7 +55,7 @@ name|calcite
 operator|.
 name|sql
 operator|.
-name|SqlKind
+name|SqlSpecialOperator
 import|;
 end_import
 
@@ -114,7 +114,7 @@ specifier|public
 class|class
 name|SqlThrowOperator
 extends|extends
-name|SqlInternalOperator
+name|SqlSpecialOperator
 block|{
 comment|//~ Constructors -----------------------------------------------------------
 specifier|public

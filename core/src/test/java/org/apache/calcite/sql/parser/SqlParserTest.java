@@ -387,16 +387,32 @@ name|String
 name|expected
 parameter_list|)
 block|{
-name|getTester
-argument_list|()
-operator|.
-name|check
+name|sql
 argument_list|(
 name|sql
-argument_list|,
+argument_list|)
+operator|.
+name|ok
+argument_list|(
 name|expected
 argument_list|)
 expr_stmt|;
+block|}
+specifier|protected
+name|Sql
+name|sql
+parameter_list|(
+name|String
+name|sql
+parameter_list|)
+block|{
+return|return
+operator|new
+name|Sql
+argument_list|(
+name|sql
+argument_list|)
+return|;
 block|}
 specifier|private
 name|SqlParser
@@ -531,13 +547,13 @@ name|String
 name|expectedMsgPattern
 parameter_list|)
 block|{
-name|getTester
-argument_list|()
-operator|.
-name|checkFails
+name|sql
 argument_list|(
 name|sql
-argument_list|,
+argument_list|)
+operator|.
+name|fails
+argument_list|(
 name|expectedMsgPattern
 argument_list|)
 expr_stmt|;
@@ -2055,18 +2071,34 @@ operator|+
 literal|"ORDER BY 3"
 argument_list|)
 expr_stmt|;
-name|checkFails
+comment|// Used to be invalid, valid now that we support grouping sets.
+name|sql
 argument_list|(
-literal|"select 1 from emp group by ()^,^ x"
-argument_list|,
-literal|"(?s)Encountered \\\",\\\" at .*"
+literal|"select 1 from emp group by (), x"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"SELECT 1\n"
+operator|+
+literal|"FROM `EMP`\n"
+operator|+
+literal|"GROUP BY (), `X`"
 argument_list|)
 expr_stmt|;
-name|checkFails
+comment|// Used to be invalid, valid now that we support grouping sets.
+name|sql
 argument_list|(
-literal|"select 1 from emp group by x, ^(^)"
-argument_list|,
-literal|"(?s)Encountered \"\\( \\)\" at .*"
+literal|"select 1 from emp group by x, ()"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"SELECT 1\n"
+operator|+
+literal|"FROM `EMP`\n"
+operator|+
+literal|"GROUP BY `X`, ()"
 argument_list|)
 expr_stmt|;
 comment|// parentheses do not an empty GROUP BY make
@@ -2136,6 +2168,185 @@ operator|+
 literal|"FROM `EMP`\n"
 operator|+
 literal|"HAVING (COUNT(*)> 5)"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testGroupingSets
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select deptno from emp\n"
+operator|+
+literal|"group by grouping sets (deptno, (deptno, gender), ())"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"SELECT `DEPTNO`\n"
+operator|+
+literal|"FROM `EMP`\n"
+operator|+
+literal|"GROUP BY (GROUPING_SETS(`DEPTNO`, (ROW(`DEPTNO`, `GENDER`)),))"
+argument_list|)
+expr_stmt|;
+comment|// Grouping sets must have parentheses
+name|sql
+argument_list|(
+literal|"select deptno from emp\n"
+operator|+
+literal|"group by grouping sets ^deptno^, (deptno, gender), ()"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s).*Encountered \"deptno\" at line 2, column 24.\n"
+operator|+
+literal|"Was expecting:\n"
+operator|+
+literal|"    \"\\(\" .*"
+argument_list|)
+expr_stmt|;
+comment|// Nested grouping sets, cube, rollup, grouping sets all OK
+name|sql
+argument_list|(
+literal|"select deptno from emp\n"
+operator|+
+literal|"group by grouping sets (deptno, grouping sets (e, d), (),\n"
+operator|+
+literal|"  cube (x, y), rollup(p, q))\n"
+operator|+
+literal|"order by a"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"SELECT `DEPTNO`\n"
+operator|+
+literal|"FROM `EMP`\n"
+operator|+
+literal|"GROUP BY (GROUPING_SETS(`DEPTNO`, (GROUPING_SETS(`E`, `D`)),, (CUBE(`X`, `Y`)), (ROLLUP(`P`, `Q`))))\n"
+operator|+
+literal|"ORDER BY `A`"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select deptno from emp\n"
+operator|+
+literal|"group by grouping sets (())"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"SELECT `DEPTNO`\n"
+operator|+
+literal|"FROM `EMP`\n"
+operator|+
+literal|"GROUP BY (GROUPING_SETS())"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testGroupByCube
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select deptno from emp\n"
+operator|+
+literal|"group by cube ((a, b), (c, d))"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"SELECT `DEPTNO`\n"
+operator|+
+literal|"FROM `EMP`\n"
+operator|+
+literal|"GROUP BY (CUBE((ROW(`A`, `B`)), (ROW(`C`, `D`))))"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testGroupByCube2
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select deptno from emp\n"
+operator|+
+literal|"group by cube ((a, b), (c, d)) order by a"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"SELECT `DEPTNO`\n"
+operator|+
+literal|"FROM `EMP`\n"
+operator|+
+literal|"GROUP BY (CUBE((ROW(`A`, `B`)), (ROW(`C`, `D`))))\n"
+operator|+
+literal|"ORDER BY `A`"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select deptno from emp\n"
+operator|+
+literal|"group by cube (^)"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s)Encountered \"\\)\" at .*"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testGroupByRollup
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select deptno from emp\n"
+operator|+
+literal|"group by rollup (deptno, deptno + 1, gender)"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"SELECT `DEPTNO`\n"
+operator|+
+literal|"FROM `EMP`\n"
+operator|+
+literal|"GROUP BY (ROLLUP(`DEPTNO`, (`DEPTNO` + 1), `GENDER`))"
+argument_list|)
+expr_stmt|;
+comment|// Nested rollup not ok
+name|sql
+argument_list|(
+literal|"select deptno from emp\n"
+operator|+
+literal|"group by rollup (deptno^, rollup(e, d))"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s)Encountered \", rollup\" at .*"
 argument_list|)
 expr_stmt|;
 block|}
@@ -14672,6 +14883,68 @@ name|expectedMsgPattern
 parameter_list|)
 block|{
 comment|// Do nothing. We're not interested in unparsing invalid SQL
+block|}
+block|}
+comment|/** Helper class for building fluent code such as    * {@code sql("values 1").ok();}. */
+specifier|private
+class|class
+name|Sql
+block|{
+specifier|private
+specifier|final
+name|String
+name|sql
+decl_stmt|;
+name|Sql
+parameter_list|(
+name|String
+name|sql
+parameter_list|)
+block|{
+name|this
+operator|.
+name|sql
+operator|=
+name|sql
+expr_stmt|;
+block|}
+specifier|public
+name|void
+name|ok
+parameter_list|(
+name|String
+name|expected
+parameter_list|)
+block|{
+name|getTester
+argument_list|()
+operator|.
+name|check
+argument_list|(
+name|sql
+argument_list|,
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+specifier|public
+name|void
+name|fails
+parameter_list|(
+name|String
+name|expectedMsgPattern
+parameter_list|)
+block|{
+name|getTester
+argument_list|()
+operator|.
+name|checkFails
+argument_list|(
+name|sql
+argument_list|,
+name|expectedMsgPattern
+argument_list|)
+expr_stmt|;
 block|}
 block|}
 block|}

@@ -113,20 +113,6 @@ name|calcite
 operator|.
 name|sql
 operator|.
-name|SqlInternalOperator
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|sql
-operator|.
 name|SqlKind
 import|;
 end_import
@@ -170,6 +156,20 @@ operator|.
 name|sql
 operator|.
 name|SqlOperatorBinding
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|SqlSpecialOperator
 import|;
 end_import
 
@@ -406,7 +406,7 @@ specifier|public
 class|class
 name|SqlLiteralChainOperator
 extends|extends
-name|SqlInternalOperator
+name|SqlSpecialOperator
 block|{
 comment|//~ Constructors -----------------------------------------------------------
 name|SqlLiteralChainOperator

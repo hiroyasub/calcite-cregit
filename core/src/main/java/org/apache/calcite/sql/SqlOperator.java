@@ -272,7 +272,7 @@ literal|"line.separator"
 argument_list|)
 decl_stmt|;
 comment|/**    * Maximum precedence.    */
-specifier|protected
+specifier|public
 specifier|static
 specifier|final
 name|int

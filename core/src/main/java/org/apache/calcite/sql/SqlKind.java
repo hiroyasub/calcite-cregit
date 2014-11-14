@@ -323,6 +323,15 @@ name|ESCAPE
 block|,
 comment|/**    * The internal REINTERPRET operator (meaning a reinterpret cast).    * An internal operator that does not appear in SQL syntax.    */
 name|REINTERPRET
+block|,
+comment|/** The internal {@code CUBE} operator that occurs within a {@code GROUP BY}    * clause. */
+name|CUBE
+block|,
+comment|/** The internal {@code ROLLUP} operator that occurs within a {@code GROUP BY}    * clause. */
+name|ROLLUP
+block|,
+comment|/** The internal {@code GROUPING SETS} operator that occurs within a    * {@code GROUP BY} clause. */
+name|GROUPING_SETS
 block|;
 comment|//~ Static fields/initializers ---------------------------------------------
 comment|// Most of the static fields are categories, aggregating several kinds into

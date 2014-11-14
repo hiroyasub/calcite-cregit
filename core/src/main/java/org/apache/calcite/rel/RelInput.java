@@ -194,6 +194,16 @@ parameter_list|)
 function_decl|;
 name|List
 argument_list|<
+name|ImmutableBitSet
+argument_list|>
+name|getBitSetList
+parameter_list|(
+name|String
+name|tag
+parameter_list|)
+function_decl|;
+name|List
+argument_list|<
 name|AggregateCall
 argument_list|>
 name|getAggregateCalls
@@ -296,6 +306,9 @@ name|getBoolean
 parameter_list|(
 name|String
 name|tag
+parameter_list|,
+name|boolean
+name|default_
 parameter_list|)
 function_decl|;
 block|}

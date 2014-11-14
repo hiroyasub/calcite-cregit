@@ -788,6 +788,57 @@ operator|new
 name|SqlAsOperator
 argument_list|()
 decl_stmt|;
+comment|/** {@code CUBE} operator, occurs within {@code GROUP BY} clause    * or nested within a {@code GROUPING SETS}. */
+specifier|public
+specifier|static
+specifier|final
+name|SqlInternalOperator
+name|CUBE
+init|=
+operator|new
+name|SqlInternalOperator
+argument_list|(
+literal|"CUBE"
+argument_list|,
+name|SqlKind
+operator|.
+name|CUBE
+argument_list|)
+decl_stmt|;
+comment|/** {@code ROLLUP} operator, occurs within {@code GROUP BY} clause    * or nested within a {@code GROUPING SETS}. */
+specifier|public
+specifier|static
+specifier|final
+name|SqlInternalOperator
+name|ROLLUP
+init|=
+operator|new
+name|SqlInternalOperator
+argument_list|(
+literal|"ROLLUP"
+argument_list|,
+name|SqlKind
+operator|.
+name|ROLLUP
+argument_list|)
+decl_stmt|;
+comment|/** {@code GROUPING SETS} operator, occurs within {@code GROUP BY} clause    * or nested within a {@code GROUPING SETS}. */
+specifier|public
+specifier|static
+specifier|final
+name|SqlInternalOperator
+name|GROUPING_SETS
+init|=
+operator|new
+name|SqlInternalOperator
+argument_list|(
+literal|"GROUPING_SETS"
+argument_list|,
+name|SqlKind
+operator|.
+name|GROUPING_SETS
+argument_list|)
+decl_stmt|;
 comment|/**    * String concatenation operator, '<code>||</code>'.    */
 specifier|public
 specifier|static
@@ -2694,7 +2745,7 @@ decl_stmt|;
 specifier|public
 specifier|static
 specifier|final
-name|SqlInternalOperator
+name|SqlThrowOperator
 name|THROW
 init|=
 operator|new

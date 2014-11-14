@@ -2357,7 +2357,16 @@ name|inputRel
 argument_list|,
 name|oldAggRel
 operator|.
+name|indicator
+argument_list|,
+name|oldAggRel
+operator|.
 name|getGroupSet
+argument_list|()
+argument_list|,
+name|oldAggRel
+operator|.
+name|getGroupSets
 argument_list|()
 argument_list|,
 name|newCalls

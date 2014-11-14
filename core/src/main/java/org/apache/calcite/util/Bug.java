@@ -200,6 +200,15 @@ name|CALCITE_445_FIXED
 init|=
 literal|false
 decl_stmt|;
+comment|/** Whether    *<a href="https://issues.apache.org/jira/browse/CALCITE-461">[CALCITE-461]    * Convert more planner rules to handle grouping sets</a> is fixed. */
+specifier|public
+specifier|static
+specifier|final
+name|boolean
+name|CALCITE_461_FIXED
+init|=
+literal|false
+decl_stmt|;
 comment|/**    * Use this to flag temporary code.    */
 specifier|public
 specifier|static

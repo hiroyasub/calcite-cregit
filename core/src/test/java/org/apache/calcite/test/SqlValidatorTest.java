@@ -9738,57 +9738,6 @@ literal|"INTERVAL SECOND NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
-specifier|protected
-name|void
-name|checkWin
-parameter_list|(
-name|String
-name|sql
-parameter_list|,
-name|String
-name|expectedMsgPattern
-parameter_list|)
-block|{
-name|LOGGER
-operator|.
-name|info
-argument_list|(
-name|sql
-argument_list|)
-expr_stmt|;
-name|checkFails
-argument_list|(
-name|sql
-argument_list|,
-name|expectedMsgPattern
-argument_list|)
-expr_stmt|;
-block|}
-specifier|public
-name|void
-name|checkWinClauseExp
-parameter_list|(
-name|String
-name|sql
-parameter_list|,
-name|String
-name|expectedMsgPattern
-parameter_list|)
-block|{
-name|sql
-operator|=
-literal|"select * from emp "
-operator|+
-name|sql
-expr_stmt|;
-name|checkWin
-argument_list|(
-name|sql
-argument_list|,
-name|expectedMsgPattern
-argument_list|)
-expr_stmt|;
-block|}
 specifier|public
 name|void
 name|checkWinFuncExpWithWinClause
@@ -9800,45 +9749,13 @@ name|String
 name|expectedMsgPattern
 parameter_list|)
 block|{
-name|sql
-operator|=
-literal|"select "
-operator|+
-name|sql
-operator|+
-literal|" from emp window w as (order by deptno)"
-expr_stmt|;
-name|checkWin
+name|winExp
 argument_list|(
 name|sql
-argument_list|,
-name|expectedMsgPattern
 argument_list|)
-expr_stmt|;
-block|}
-specifier|public
-name|void
-name|checkWinFuncExp
-parameter_list|(
-name|String
-name|sql
-parameter_list|,
-name|String
-name|expectedMsgPattern
-parameter_list|)
-block|{
-name|sql
-operator|=
-literal|"select "
-operator|+
-name|sql
-operator|+
-literal|" from emp"
-expr_stmt|;
-name|checkWin
+operator|.
+name|fails
 argument_list|(
-name|sql
-argument_list|,
 name|expectedMsgPattern
 argument_list|)
 expr_stmt|;
@@ -9849,10 +9766,13 @@ name|void
 name|_testWinPartClause
 parameter_list|()
 block|{
-name|checkWinClauseExp
+name|win
 argument_list|(
 literal|"window w as (w2 order by deptno), w2 as (^rang^e 100 preceding)"
-argument_list|,
+argument_list|)
+operator|.
+name|fails
+argument_list|(
 literal|"Referenced window cannot have framing declarations"
 argument_list|)
 expr_stmt|;
@@ -9870,7 +9790,7 @@ comment|// Window functions may only appear in the<select list> of a
 comment|//<query specification> or<select statement: single row>,
 comment|// or the<order by clause> of a simple table query.
 comment|// See 4.15.3 for detail
-name|checkWin
+name|winSql
 argument_list|(
 literal|"select *\n"
 operator|+
@@ -9881,11 +9801,14 @@ operator|+
 literal|"    order by empno\n"
 operator|+
 literal|"    rows 3 preceding)^> 10"
-argument_list|,
+argument_list|)
+operator|.
+name|fails
+argument_list|(
 literal|"Windowed aggregate expression is illegal in WHERE clause"
 argument_list|)
 expr_stmt|;
-name|checkWin
+name|winSql
 argument_list|(
 literal|"select *\n"
 operator|+
@@ -9898,11 +9821,14 @@ operator|+
 literal|"    rows 3 preceding)^ + 10\n"
 operator|+
 literal|"order by deptno"
-argument_list|,
+argument_list|)
+operator|.
+name|fails
+argument_list|(
 literal|"Windowed aggregate expression is illegal in GROUP BY clause"
 argument_list|)
 expr_stmt|;
-name|checkWin
+name|winSql
 argument_list|(
 literal|"select *\n"
 operator|+
@@ -9917,27 +9843,32 @@ operator|+
 literal|"    rows 3 preceding)^ = dept.deptno + 40\n"
 operator|+
 literal|"order by deptno"
-argument_list|,
+argument_list|)
+operator|.
+name|fails
+argument_list|(
 literal|"Windowed aggregate expression is illegal in ON clause"
 argument_list|)
 expr_stmt|;
 comment|// rule 3, a)
-name|checkWin
+name|winSql
 argument_list|(
 literal|"select sal from emp order by sum(sal) over (partition by deptno order by deptno)"
-argument_list|,
-literal|null
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 comment|// scope reference
 comment|// rule 4,
 comment|// valid window functions
-name|checkWinFuncExpWithWinClause
+name|winExp
 argument_list|(
 literal|"sum(sal)"
-argument_list|,
-literal|null
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 block|}
 annotation|@
@@ -9977,31 +9908,36 @@ literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
-name|checkWin
+name|winSql
 argument_list|(
 literal|"select rank() over w from emp\n"
 operator|+
 literal|"window w as ^(partition by sal)^, w2 as (w order by deptno)"
-argument_list|,
+argument_list|)
+operator|.
+name|fails
+argument_list|(
 literal|"RANK or DENSE_RANK functions require ORDER BY clause in window specification"
 argument_list|)
 expr_stmt|;
-name|checkWin
+name|winSql
 argument_list|(
 literal|"select rank() over w2 from emp\n"
 operator|+
 literal|"window w as (partition by sal), w2 as (w order by deptno)"
-argument_list|,
-literal|null
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 comment|// row_number function
-name|checkWinFuncExpWithWinClause
+name|winExp
 argument_list|(
 literal|"row_number() over (order by deptno)"
-argument_list|,
-literal|null
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 comment|// rank function type
 if|if
@@ -10014,12 +9950,13 @@ literal|"DENSE_RANK"
 argument_list|)
 condition|)
 block|{
-name|checkWinFuncExpWithWinClause
+name|winExp
 argument_list|(
 literal|"dense_rank()"
-argument_list|,
-literal|null
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 block|}
 else|else
@@ -10032,71 +9969,92 @@ literal|"Function 'DENSE_RANK\\(\\)' is not defined"
 argument_list|)
 expr_stmt|;
 block|}
-name|checkWinFuncExpWithWinClause
+name|winExp
 argument_list|(
 literal|"rank() over (order by empno)"
-argument_list|,
-literal|null
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
-name|checkWinFuncExpWithWinClause
+name|winExp
 argument_list|(
 literal|"percent_rank() over (order by empno)"
-argument_list|,
-literal|null
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
-name|checkWinFuncExpWithWinClause
+name|winExp
 argument_list|(
 literal|"cume_dist() over (order by empno)"
-argument_list|,
-literal|null
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 comment|// rule 6a
 comment|// ORDER BY required with RANK& DENSE_RANK
-name|checkWin
+name|winSql
 argument_list|(
 literal|"select rank() over ^(partition by deptno)^ from emp"
-argument_list|,
+argument_list|)
+operator|.
+name|fails
+argument_list|(
 literal|"RANK or DENSE_RANK functions require ORDER BY clause in window specification"
 argument_list|)
 expr_stmt|;
-name|checkWin
+name|winSql
 argument_list|(
 literal|"select dense_rank() over ^(partition by deptno)^ from emp "
-argument_list|,
+argument_list|)
+operator|.
+name|fails
+argument_list|(
 literal|"RANK or DENSE_RANK functions require ORDER BY clause in window specification"
 argument_list|)
 expr_stmt|;
-name|checkWin
+name|winSql
 argument_list|(
 literal|"select rank() over w from emp window w as ^(partition by deptno)^"
-argument_list|,
+argument_list|)
+operator|.
+name|fails
+argument_list|(
 literal|"RANK or DENSE_RANK functions require ORDER BY clause in window specification"
 argument_list|)
 expr_stmt|;
-name|checkWin
+name|winSql
 argument_list|(
 literal|"select dense_rank() over w from emp window w as ^(partition by deptno)^"
-argument_list|,
+argument_list|)
+operator|.
+name|fails
+argument_list|(
 literal|"RANK or DENSE_RANK functions require ORDER BY clause in window specification"
 argument_list|)
 expr_stmt|;
 comment|// rule 6b
 comment|// Framing not allowed with RANK& DENSE_RANK functions
 comment|// window framing defined in window clause
-name|checkWin
+name|winSql
 argument_list|(
 literal|"select rank() over w from emp window w as (order by empno ^rows^ 2 preceding )"
-argument_list|,
+argument_list|)
+operator|.
+name|fails
+argument_list|(
 literal|"ROW/RANGE not allowed with RANK or DENSE_RANK functions"
 argument_list|)
 expr_stmt|;
-name|checkWin
+name|winSql
 argument_list|(
 literal|"select dense_rank() over w from emp window w as (order by empno ^rows^ 2 preceding)"
-argument_list|,
+argument_list|)
+operator|.
+name|fails
+argument_list|(
 literal|"ROW/RANGE not allowed with RANK or DENSE_RANK functions"
 argument_list|)
 expr_stmt|;
@@ -10110,12 +10068,13 @@ literal|"PERCENT_RANK"
 argument_list|)
 condition|)
 block|{
-name|checkWin
+name|winSql
 argument_list|(
 literal|"select percent_rank() over w from emp window w as (rows 2 preceding )"
-argument_list|,
-literal|null
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 block|}
 else|else
@@ -10138,19 +10097,21 @@ literal|"CUME_DIST"
 argument_list|)
 condition|)
 block|{
-name|checkWin
+name|winSql
 argument_list|(
 literal|"select cume_dist() over w from emp window w as (rows 2 preceding)"
-argument_list|,
-literal|null
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
-name|checkWin
+name|winSql
 argument_list|(
 literal|"select cume_dist() over (rows 2 preceding ) from emp "
-argument_list|,
-literal|null
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 block|}
 else|else
@@ -10164,17 +10125,23 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|// window framing defined in in-line window
-name|checkWin
+name|winSql
 argument_list|(
 literal|"select rank() over (order by empno ^range^ 2 preceding ) from emp "
-argument_list|,
+argument_list|)
+operator|.
+name|fails
+argument_list|(
 literal|"ROW/RANGE not allowed with RANK or DENSE_RANK functions"
 argument_list|)
 expr_stmt|;
-name|checkWin
+name|winSql
 argument_list|(
 literal|"select dense_rank() over (order by empno ^rows^ 2 preceding ) from emp "
-argument_list|,
+argument_list|)
+operator|.
+name|fails
+argument_list|(
 literal|"ROW/RANGE not allowed with RANK or DENSE_RANK functions"
 argument_list|)
 expr_stmt|;
@@ -10188,12 +10155,13 @@ literal|"PERCENT_RANK"
 argument_list|)
 condition|)
 block|{
-name|checkWin
+name|winSql
 argument_list|(
 literal|"select percent_rank() over (rows 2 preceding ) from emp"
-argument_list|,
-literal|null
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 block|}
 comment|// invalid column reference
@@ -10216,75 +10184,94 @@ comment|// 6.10 rule 10. no distinct allowed aggregate function
 comment|// Fails in parser.
 comment|// checkWinFuncExpWithWinClause(" sum(distinct sal) over w ", null);
 comment|// 7.11 rule 10c
-name|checkWin
+name|winSql
 argument_list|(
 literal|"select sum(sal) over (w partition by ^deptno^)\n"
 operator|+
 literal|" from emp window w as (order by empno rows 2 preceding )"
-argument_list|,
+argument_list|)
+operator|.
+name|fails
+argument_list|(
 literal|"PARTITION BY not allowed with existing window reference"
 argument_list|)
 expr_stmt|;
 comment|// 7.11 rule 10d
-name|checkWin
+name|winSql
 argument_list|(
 literal|"select sum(sal) over (w order by ^empno^)\n"
 operator|+
 literal|" from emp window w as (order by empno rows 2 preceding )"
-argument_list|,
+argument_list|)
+operator|.
+name|fails
+argument_list|(
 literal|"ORDER BY not allowed in both base and referenced windows"
 argument_list|)
 expr_stmt|;
 comment|// 7.11 rule 10e
-name|checkWin
+name|winSql
 argument_list|(
 literal|"select sum(sal) over (w)\n"
 operator|+
 literal|" from emp window w as (order by empno ^rows^ 2 preceding )"
-argument_list|,
+argument_list|)
+operator|.
+name|fails
+argument_list|(
 literal|"Referenced window cannot have framing declarations"
 argument_list|)
 expr_stmt|;
 comment|// Empty window is OK for functions that don't require ordering.
-name|checkWin
+name|winSql
 argument_list|(
 literal|"select sum(sal) over () from emp"
-argument_list|,
-literal|null
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
-name|checkWin
+name|winSql
 argument_list|(
 literal|"select sum(sal) over w from emp window w as ()"
-argument_list|,
-literal|null
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
-name|checkWin
+name|winSql
 argument_list|(
 literal|"select count(*) over () from emp"
-argument_list|,
-literal|null
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
-name|checkWin
+name|winSql
 argument_list|(
 literal|"select count(*) over w from emp window w as ()"
-argument_list|,
-literal|null
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
-name|checkWin
+name|winSql
 argument_list|(
 literal|"select rank() over ^()^ from emp"
-argument_list|,
+argument_list|)
+operator|.
+name|fails
+argument_list|(
 literal|"RANK or DENSE_RANK functions require ORDER BY clause in window specification"
 argument_list|)
 expr_stmt|;
-name|checkWin
+name|winSql
 argument_list|(
 literal|"select rank() over w from emp window w as ^()^"
-argument_list|,
+argument_list|)
+operator|.
+name|fails
+argument_list|(
 literal|"RANK or DENSE_RANK functions require ORDER BY clause in window specification"
 argument_list|)
 expr_stmt|;
@@ -10305,7 +10292,7 @@ operator|+
 literal|"from emp order by empno"
 argument_list|)
 expr_stmt|;
-name|checkWinFuncExp
+name|winExp2
 argument_list|(
 literal|"sum(sal) OVER ("
 operator|+
@@ -10314,239 +10301,283 @@ operator|+
 literal|"order by empno "
 operator|+
 literal|"rows 2 preceding )"
-argument_list|,
-literal|null
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
-name|checkWinFuncExp
+name|winExp2
 argument_list|(
 literal|"sum(sal) OVER ("
 operator|+
 literal|"order by 1 "
 operator|+
 literal|"rows 2 preceding )"
-argument_list|,
-literal|null
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
-name|checkWinFuncExp
+name|winExp2
 argument_list|(
 literal|"sum(sal) OVER ("
 operator|+
 literal|"order by 'b' "
 operator|+
 literal|"rows 2 preceding )"
-argument_list|,
-literal|null
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
-name|checkWinFuncExp
+name|winExp2
 argument_list|(
 literal|"sum(sal) over ("
 operator|+
 literal|"partition by deptno "
 operator|+
 literal|"order by 1+1 rows 26 preceding)"
-argument_list|,
-literal|null
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
-name|checkWinFuncExp
+name|winExp2
 argument_list|(
 literal|"sum(sal) over (order by deptno rows unbounded preceding)"
-argument_list|,
-literal|null
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
-name|checkWinFuncExp
+name|winExp2
 argument_list|(
 literal|"sum(sal) over (order by deptno rows current row)"
-argument_list|,
-literal|null
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
-name|checkWinFuncExp
+name|winExp2
 argument_list|(
 literal|"sum(sal) over ^("
 operator|+
 literal|"order by deptno "
 operator|+
 literal|"rows between unbounded preceding and unbounded following)^"
-argument_list|,
-literal|null
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
-name|checkWinFuncExp
+name|winExp2
 argument_list|(
 literal|"sum(sal) over ^("
 operator|+
 literal|"order by deptno "
 operator|+
 literal|"rows between CURRENT ROW and unbounded following)^"
-argument_list|,
-literal|null
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
-name|checkWinFuncExp
+name|winExp2
 argument_list|(
 literal|"sum(sal) over ("
 operator|+
 literal|"order by deptno "
 operator|+
 literal|"rows between unbounded preceding and CURRENT ROW)"
-argument_list|,
-literal|null
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 comment|// logical current row/current row
-name|checkWinFuncExp
+name|winExp2
 argument_list|(
 literal|"sum(sal) over ("
 operator|+
 literal|"order by deptno "
 operator|+
 literal|"rows between CURRENT ROW and CURRENT ROW)"
-argument_list|,
-literal|null
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 comment|// physical current row/current row
-name|checkWinFuncExp
+name|winExp2
 argument_list|(
 literal|"sum(sal) over ("
 operator|+
 literal|"order by deptno "
 operator|+
 literal|"range between CURRENT ROW and CURRENT ROW)"
-argument_list|,
-literal|null
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
-name|checkWinFuncExp
+name|winExp2
 argument_list|(
 literal|"sum(sal) over ("
 operator|+
 literal|"order by deptno "
 operator|+
 literal|"rows between 2 preceding and CURRENT ROW)"
-argument_list|,
-literal|null
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
-name|checkWinFuncExpWithWinClause
+name|winExp
 argument_list|(
 literal|"sum(sal) OVER (w "
 operator|+
 literal|"rows 2 preceding )"
-argument_list|,
-literal|null
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
-name|checkWinFuncExp
+name|winExp2
 argument_list|(
 literal|"sum(sal) over (order by deptno range 2.0 preceding)"
-argument_list|,
-literal|null
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 comment|// Failure mode tests
-name|checkWinFuncExp
+name|winExp2
 argument_list|(
 literal|"sum(sal) over (order by deptno "
 operator|+
 literal|"rows between ^UNBOUNDED FOLLOWING^ and unbounded preceding)"
-argument_list|,
+argument_list|)
+operator|.
+name|fails
+argument_list|(
 literal|"UNBOUNDED FOLLOWING cannot be specified for the lower frame boundary"
 argument_list|)
 expr_stmt|;
-name|checkWinFuncExp
+name|winExp2
 argument_list|(
 literal|"sum(sal) over ("
 operator|+
 literal|"order by deptno "
 operator|+
 literal|"rows between 2 preceding and ^UNBOUNDED PRECEDING^)"
-argument_list|,
+argument_list|)
+operator|.
+name|fails
+argument_list|(
 literal|"UNBOUNDED PRECEDING cannot be specified for the upper frame boundary"
 argument_list|)
 expr_stmt|;
-name|checkWinFuncExp
+name|winExp2
 argument_list|(
 literal|"sum(sal) over ("
 operator|+
 literal|"order by deptno "
 operator|+
 literal|"rows between CURRENT ROW and ^2 preceding^)"
-argument_list|,
+argument_list|)
+operator|.
+name|fails
+argument_list|(
 literal|"Upper frame boundary cannot be PRECEDING when lower boundary is CURRENT ROW"
 argument_list|)
 expr_stmt|;
-name|checkWinFuncExp
+name|winExp2
 argument_list|(
 literal|"sum(sal) over ("
 operator|+
 literal|"order by deptno "
 operator|+
 literal|"rows between 2 following and ^CURRENT ROW^)"
-argument_list|,
+argument_list|)
+operator|.
+name|fails
+argument_list|(
 literal|"Upper frame boundary cannot be CURRENT ROW when lower boundary is FOLLOWING"
 argument_list|)
 expr_stmt|;
-name|checkWinFuncExp
+name|winExp2
 argument_list|(
 literal|"sum(sal) over ("
 operator|+
 literal|"order by deptno "
 operator|+
 literal|"rows between 2 following and ^2 preceding^)"
-argument_list|,
+argument_list|)
+operator|.
+name|fails
+argument_list|(
 literal|"Upper frame boundary cannot be PRECEDING when lower boundary is FOLLOWING"
 argument_list|)
 expr_stmt|;
-name|checkWinFuncExp
+name|winExp2
 argument_list|(
 literal|"sum(sal) over ("
 operator|+
 literal|"order by deptno "
 operator|+
 literal|"RANGE BETWEEN ^INTERVAL '1' SECOND^ PRECEDING AND INTERVAL '1' SECOND FOLLOWING)"
-argument_list|,
+argument_list|)
+operator|.
+name|fails
+argument_list|(
 literal|"Data Type mismatch between ORDER BY and RANGE clause"
 argument_list|)
 expr_stmt|;
-name|checkWinFuncExp
+name|winExp2
 argument_list|(
 literal|"sum(sal) over ("
 operator|+
 literal|"order by empno "
 operator|+
 literal|"RANGE BETWEEN ^INTERVAL '1' SECOND^ PRECEDING AND INTERVAL '1' SECOND FOLLOWING)"
-argument_list|,
+argument_list|)
+operator|.
+name|fails
+argument_list|(
 literal|"Data Type mismatch between ORDER BY and RANGE clause"
 argument_list|)
 expr_stmt|;
-name|checkWinFuncExp
+name|winExp2
 argument_list|(
 literal|"sum(sal) over (order by deptno, empno ^range^ 2 preceding)"
-argument_list|,
+argument_list|)
+operator|.
+name|fails
+argument_list|(
 literal|"RANGE clause cannot be used with compound ORDER BY clause"
 argument_list|)
 expr_stmt|;
-name|checkWinFuncExp
+name|winExp2
 argument_list|(
 literal|"sum(sal) over ^(partition by deptno range 5 preceding)^"
-argument_list|,
+argument_list|)
+operator|.
+name|fails
+argument_list|(
 literal|"Window specification must contain an ORDER BY clause"
 argument_list|)
 expr_stmt|;
-name|checkWinFuncExp
+name|winExp2
 argument_list|(
 literal|"sum(sal) over ^w1^"
-argument_list|,
+argument_list|)
+operator|.
+name|fails
+argument_list|(
 literal|"Window 'W1' not found"
 argument_list|)
 expr_stmt|;
-name|checkWinFuncExp
+name|winExp2
 argument_list|(
 literal|"sum(sal) OVER (^w1^ "
 operator|+
@@ -10555,7 +10586,10 @@ operator|+
 literal|"order by empno "
 operator|+
 literal|"rows 2 preceding )"
-argument_list|,
+argument_list|)
+operator|.
+name|fails
+argument_list|(
 literal|"Window 'W1' not found"
 argument_list|)
 expr_stmt|;
@@ -10567,17 +10601,21 @@ name|void
 name|testPartitionByExpr
 parameter_list|()
 block|{
-name|checkWinFuncExp
+name|winExp2
 argument_list|(
 literal|"sum(sal) over (partition by empno + deptno order by empno range 5 preceding)"
-argument_list|,
-literal|null
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
-name|checkWinFuncExp
+name|winExp2
 argument_list|(
 literal|"sum(sal) over (partition by ^empno + ename^ order by empno range 5 preceding)"
-argument_list|,
+argument_list|)
+operator|.
+name|fails
+argument_list|(
 literal|"(?s)Cannot apply '\\+' to arguments of type '<INTEGER> \\+<VARCHAR\\(20\\)>'.*"
 argument_list|)
 expr_stmt|;
@@ -10593,27 +10631,30 @@ comment|// -----------------------------------
 comment|// --   positive testings           --
 comment|// -----------------------------------
 comment|// correct syntax:
-name|checkWinFuncExpWithWinClause
+name|winExp
 argument_list|(
 literal|"sum(sal) as sumsal"
-argument_list|,
-literal|null
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
-name|checkWinClauseExp
+name|win
 argument_list|(
 literal|"window w as (partition by sal order by deptno rows 2 preceding)"
-argument_list|,
-literal|null
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 comment|// define window on an existing window
-name|checkWinClauseExp
+name|win
 argument_list|(
 literal|"window w as (order by sal), w1 as (w)"
-argument_list|,
-literal|null
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 comment|// -----------------------------------
 comment|// --   negative testings           --
@@ -10624,70 +10665,90 @@ comment|//    "Window name must be a simple identifier\");
 comment|// rule 11
 comment|// a)
 comment|// missing window order clause.
-name|checkWinClauseExp
+name|win
 argument_list|(
 literal|"window w as ^(range 100 preceding)^"
-argument_list|,
+argument_list|)
+operator|.
+name|fails
+argument_list|(
 literal|"Window specification must contain an ORDER BY clause"
 argument_list|)
 expr_stmt|;
 comment|// order by number
-name|checkWinClauseExp
+name|win
 argument_list|(
 literal|"window w as (order by sal range 100 preceding)"
-argument_list|,
-literal|null
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 comment|// order by date
-name|checkWinClauseExp
+name|win
 argument_list|(
 literal|"window w as (order by hiredate range ^100^ preceding)"
-argument_list|,
+argument_list|)
+operator|.
+name|fails
+argument_list|(
 literal|"Data Type mismatch between ORDER BY and RANGE clause"
 argument_list|)
 expr_stmt|;
 comment|// order by string, should fail
-name|checkWinClauseExp
+name|win
 argument_list|(
 literal|"window w as (order by ename range ^100^ preceding)"
-argument_list|,
+argument_list|)
+operator|.
+name|fails
+argument_list|(
 literal|"Data type of ORDER BY prohibits use of RANGE clause"
 argument_list|)
 expr_stmt|;
 comment|// todo: interval test ???
 comment|// b)
 comment|// valid
-name|checkWinClauseExp
+name|win
 argument_list|(
 literal|"window w as (rows 2 preceding)"
-argument_list|,
-literal|null
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 comment|// invalid tests exact numeric for the unsigned value specification The
 comment|// following two test fail as they should but in the parser: JR not
 comment|// anymore now the validator kicks out
-name|checkWinClauseExp
+name|win
 argument_list|(
 literal|"window w as (rows ^-2.5^ preceding)"
-argument_list|,
+argument_list|)
+operator|.
+name|fails
+argument_list|(
 literal|"ROWS value must be a non-negative integral constant"
 argument_list|)
 expr_stmt|;
-name|checkWinClauseExp
+name|win
 argument_list|(
 literal|"window w as (rows ^-2^ preceding)"
-argument_list|,
+argument_list|)
+operator|.
+name|fails
+argument_list|(
 literal|"ROWS value must be a non-negative integral constant"
 argument_list|)
 expr_stmt|;
 comment|// This test should fail as per 03 Std. but we pass it and plan
 comment|// to apply the FLOOR function before window processing
-name|checkWinClauseExp
+name|win
 argument_list|(
 literal|"window w as (rows ^2.5^ preceding)"
-argument_list|,
+argument_list|)
+operator|.
+name|fails
+argument_list|(
 literal|"ROWS value must be a non-negative integral constant"
 argument_list|)
 expr_stmt|;
@@ -10695,43 +10756,54 @@ comment|// -----------------------------------
 comment|// --   negative testings           --
 comment|// -----------------------------------
 comment|// reference undefined xyz column
-name|checkWinClauseExp
+name|win
 argument_list|(
 literal|"window w as (partition by ^xyz^)"
-argument_list|,
+argument_list|)
+operator|.
+name|fails
+argument_list|(
 literal|"Column 'XYZ' not found in any table"
 argument_list|)
 expr_stmt|;
 comment|// window definition is empty when applied to unsorted table
-name|checkWinClauseExp
+name|win
 argument_list|(
 literal|"window w as ^( /* boo! */  )^"
-argument_list|,
-literal|null
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 comment|// duplicate window name
-name|checkWinClauseExp
+name|win
 argument_list|(
 literal|"window w as (order by empno), ^w^ as (order by empno)"
-argument_list|,
+argument_list|)
+operator|.
+name|fails
+argument_list|(
 literal|"Duplicate window names not allowed"
 argument_list|)
 expr_stmt|;
-name|checkWinClauseExp
+name|win
 argument_list|(
 literal|"window win1 as (order by empno), ^win1^ as (order by empno)"
-argument_list|,
+argument_list|)
+operator|.
+name|fails
+argument_list|(
 literal|"Duplicate window names not allowed"
 argument_list|)
 expr_stmt|;
 comment|// syntax rule 6
-name|checkFails
+name|sql
 argument_list|(
 literal|"select min(sal) over (order by deptno) from emp group by deptno,sal"
-argument_list|,
-literal|null
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 name|checkFails
 argument_list|(
@@ -10740,14 +10812,15 @@ argument_list|,
 literal|"Expression 'DEPTNO' is not being grouped"
 argument_list|)
 expr_stmt|;
-name|checkFails
+name|sql
 argument_list|(
 literal|"select min(sal) over\n"
 operator|+
 literal|"(partition by comm order by deptno) from emp group by deptno,sal,comm"
-argument_list|,
-literal|null
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 name|checkFails
 argument_list|(
@@ -10759,66 +10832,82 @@ literal|"Expression 'COMM' is not being grouped"
 argument_list|)
 expr_stmt|;
 comment|// syntax rule 7
-name|checkWinClauseExp
+name|win
 argument_list|(
 literal|"window w as (order by rank() over (order by sal))"
-argument_list|,
-literal|null
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 comment|// ------------------------------------
 comment|// ---- window frame between tests ----
 comment|// ------------------------------------
 comment|// bound 1 shall not specify UNBOUNDED FOLLOWING
-name|checkWinClauseExp
+name|win
 argument_list|(
 literal|"window w as (rows between ^unbounded following^ and 5 following)"
-argument_list|,
+argument_list|)
+operator|.
+name|fails
+argument_list|(
 literal|"UNBOUNDED FOLLOWING cannot be specified for the lower frame boundary"
 argument_list|)
 expr_stmt|;
 comment|// bound 2 shall not specify UNBOUNDED PRECEDING
-name|checkWinClauseExp
+name|win
 argument_list|(
 literal|"window w as ("
 operator|+
 literal|"order by deptno "
 operator|+
 literal|"rows between 2 preceding and ^UNBOUNDED PRECEDING^)"
-argument_list|,
+argument_list|)
+operator|.
+name|fails
+argument_list|(
 literal|"UNBOUNDED PRECEDING cannot be specified for the upper frame boundary"
 argument_list|)
 expr_stmt|;
-name|checkWinClauseExp
+name|win
 argument_list|(
 literal|"window w as ("
 operator|+
 literal|"order by deptno "
 operator|+
 literal|"rows between 2 following and ^2 preceding^)"
-argument_list|,
+argument_list|)
+operator|.
+name|fails
+argument_list|(
 literal|"Upper frame boundary cannot be PRECEDING when lower boundary is FOLLOWING"
 argument_list|)
 expr_stmt|;
-name|checkWinClauseExp
+name|win
 argument_list|(
 literal|"window w as ("
 operator|+
 literal|"order by deptno "
 operator|+
 literal|"rows between CURRENT ROW and ^2 preceding^)"
-argument_list|,
+argument_list|)
+operator|.
+name|fails
+argument_list|(
 literal|"Upper frame boundary cannot be PRECEDING when lower boundary is CURRENT ROW"
 argument_list|)
 expr_stmt|;
-name|checkWinClauseExp
+name|win
 argument_list|(
 literal|"window w as ("
 operator|+
 literal|"order by deptno "
 operator|+
 literal|"rows between 2 following and ^CURRENT ROW^)"
-argument_list|,
+argument_list|)
+operator|.
+name|fails
+argument_list|(
 literal|"Upper frame boundary cannot be CURRENT ROW when lower boundary is FOLLOWING"
 argument_list|)
 expr_stmt|;
@@ -10828,63 +10917,81 @@ comment|// (w partition by deptno)", null); checkWinClauseExp("window w as
 comment|// (partition by sal order by deptno), w2 as (w partition by sal)",
 comment|// null); d) valid because existing window does not have an ORDER BY
 comment|// clause
-name|checkWinClauseExp
+name|win
 argument_list|(
 literal|"window w as (w2 range 2 preceding ), w2 as (order by sal)"
-argument_list|,
-literal|null
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
-name|checkWinClauseExp
+name|win
 argument_list|(
 literal|"window w as ^(partition by sal)^, w2 as (w order by deptno)"
-argument_list|,
-literal|null
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
-name|checkWinClauseExp
+name|win
 argument_list|(
 literal|"window w as (w2 partition by ^sal^), w2 as (order by deptno)"
-argument_list|,
+argument_list|)
+operator|.
+name|fails
+argument_list|(
 literal|"PARTITION BY not allowed with existing window reference"
 argument_list|)
 expr_stmt|;
-name|checkWinClauseExp
+name|win
 argument_list|(
 literal|"window w as (partition by sal order by deptno), w2 as (w order by ^deptno^)"
-argument_list|,
+argument_list|)
+operator|.
+name|fails
+argument_list|(
 literal|"ORDER BY not allowed in both base and referenced windows"
 argument_list|)
 expr_stmt|;
 comment|// e)
-name|checkWinClauseExp
+name|win
 argument_list|(
 literal|"window w as (w2 order by deptno), w2 as (^range^ 100 preceding)"
-argument_list|,
+argument_list|)
+operator|.
+name|fails
+argument_list|(
 literal|"Referenced window cannot have framing declarations"
 argument_list|)
 expr_stmt|;
 comment|// rule 12, todo: test scope of window assertExceptionIsThrown("select
 comment|// deptno as d from emp window d as (partition by deptno)", null);
 comment|// rule 13
-name|checkWinClauseExp
+name|win
 argument_list|(
 literal|"window w as (order by sal)"
-argument_list|,
-literal|null
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
-name|checkWinClauseExp
+name|win
 argument_list|(
 literal|"window w as (order by ^non_exist_col^)"
-argument_list|,
+argument_list|)
+operator|.
+name|fails
+argument_list|(
 literal|"Column 'NON_EXIST_COL' not found in any table"
 argument_list|)
 expr_stmt|;
-name|checkWinClauseExp
+name|win
 argument_list|(
 literal|"window w as (partition by ^non_exist_col^ order by sal)"
-argument_list|,
+argument_list|)
+operator|.
+name|fails
+argument_list|(
 literal|"Column 'NON_EXIST_COL' not found in any table"
 argument_list|)
 expr_stmt|;
@@ -10899,14 +11006,17 @@ block|{
 comment|// 7.10 syntax rule 2<new window name> NWN1 shall not be contained in
 comment|// the scope of another<new window name> NWN2 such that NWN1 and NWN2
 comment|// are equivalent.
-name|checkWinClauseExp
+name|win
 argument_list|(
 literal|"window\n"
 operator|+
 literal|"w  as (partition by deptno order by empno rows 2 preceding),\n"
 operator|+
 literal|"w2 as ^(partition by deptno order by empno rows 2 preceding)^\n"
-argument_list|,
+argument_list|)
+operator|.
+name|fails
+argument_list|(
 literal|"Duplicate window specification not allowed in the same window clause"
 argument_list|)
 expr_stmt|;
@@ -11131,12 +11241,13 @@ name|void
 name|testOneWinFunc
 parameter_list|()
 block|{
-name|checkWinClauseExp
+name|win
 argument_list|(
 literal|"window w as (partition by sal order by deptno rows 2 preceding)"
-argument_list|,
-literal|null
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 block|}
 annotation|@
@@ -13688,7 +13799,7 @@ operator|+
 literal|"order by x * sum(sal + 2)"
 argument_list|)
 expr_stmt|;
-name|checkFails
+name|sql
 argument_list|(
 literal|"select empno as x "
 operator|+
@@ -13697,7 +13808,10 @@ operator|+
 literal|"group by empno, deptno "
 operator|+
 literal|"order by empno * sum(sal + 2)"
-argument_list|,
+argument_list|)
+operator|.
+name|failsIf
+argument_list|(
 name|tester
 operator|.
 name|getConformance
@@ -13705,10 +13819,8 @@ argument_list|()
 operator|.
 name|isSortByAliasObscures
 argument_list|()
-condition|?
+argument_list|,
 literal|"xxxx"
-else|:
-literal|null
 argument_list|)
 expr_stmt|;
 comment|// Distinct on expressions with attempts to order on a column in
@@ -13752,12 +13864,16 @@ expr_stmt|;
 comment|// These tests are primarily intended to test cases where sorting by
 comment|// an alias is allowed.  But for instances that don't support sorting
 comment|// by alias, the tests also verify that a proper exception is thrown.
-name|checkFails
+name|sql
 argument_list|(
 literal|"select distinct cast(empno as bigint) as empno "
 operator|+
 literal|"from emp order by ^empno^"
-argument_list|,
+argument_list|)
+operator|.
+name|failsIf
+argument_list|(
+operator|!
 name|tester
 operator|.
 name|getConformance
@@ -13765,18 +13881,20 @@ argument_list|()
 operator|.
 name|isSortByAlias
 argument_list|()
-condition|?
-literal|null
-else|:
+argument_list|,
 literal|"Expression 'EMPNO' is not in the select clause"
 argument_list|)
 expr_stmt|;
-name|checkFails
+name|sql
 argument_list|(
 literal|"select distinct cast(empno as bigint) as eno "
 operator|+
 literal|"from emp order by ^eno^"
-argument_list|,
+argument_list|)
+operator|.
+name|failsIf
+argument_list|(
+operator|!
 name|tester
 operator|.
 name|getConformance
@@ -13784,18 +13902,20 @@ argument_list|()
 operator|.
 name|isSortByAlias
 argument_list|()
-condition|?
-literal|null
-else|:
+argument_list|,
 literal|"Column 'ENO' not found in any table"
 argument_list|)
 expr_stmt|;
-name|checkFails
+name|sql
 argument_list|(
 literal|"select distinct cast(empno as bigint) as empno "
 operator|+
 literal|"from emp e order by ^empno^"
-argument_list|,
+argument_list|)
+operator|.
+name|failsIf
+argument_list|(
+operator|!
 name|tester
 operator|.
 name|getConformance
@@ -13803,9 +13923,7 @@ argument_list|()
 operator|.
 name|isSortByAlias
 argument_list|()
-condition|?
-literal|null
-else|:
+argument_list|,
 literal|"Expression 'EMPNO' is not in the select clause"
 argument_list|)
 expr_stmt|;
@@ -13961,6 +14079,75 @@ name|check
 argument_list|(
 literal|"select localtime, deptno + 3 from emp group by deptno"
 argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testGroupingSets
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select count(1), ^empno^ from emp group by grouping sets (deptno)"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Expression 'EMPNO' is not being grouped"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select deptno, ename, sum(sal) from emp\n"
+operator|+
+literal|"group by grouping sets ((deptno), (ename, deptno))\n"
+operator|+
+literal|"order by 2"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+comment|// duplicate (and heavily nested) GROUPING SETS
+name|sql
+argument_list|(
+literal|"select sum(sal) from emp\n"
+operator|+
+literal|"group by deptno,\n"
+operator|+
+literal|"  grouping sets (deptno,\n"
+operator|+
+literal|"    grouping sets (deptno, ename),\n"
+operator|+
+literal|"      (ename)),\n"
+operator|+
+literal|"  ()"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testRollup
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select deptno, count(*) as c, sum(sal) as s\n"
+operator|+
+literal|"from emp\n"
+operator|+
+literal|"group by rollup(deptno)"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 block|}
 annotation|@

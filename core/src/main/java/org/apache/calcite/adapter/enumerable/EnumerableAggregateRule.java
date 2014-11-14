@@ -194,7 +194,16 @@ argument_list|)
 argument_list|,
 name|agg
 operator|.
+name|indicator
+argument_list|,
+name|agg
+operator|.
 name|getGroupSet
+argument_list|()
+argument_list|,
+name|agg
+operator|.
+name|getGroupSets
 argument_list|()
 argument_list|,
 name|agg

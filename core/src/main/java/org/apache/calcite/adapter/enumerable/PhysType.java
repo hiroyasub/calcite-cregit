@@ -239,6 +239,29 @@ name|JavaRowFormat
 name|targetFormat
 parameter_list|)
 function_decl|;
+comment|/** Generates a lambda expression that is a selector for the given fields from    * an expression.    *    *<p>{@code usedFields} must be a subset of {@code fields}.    * For each field, there is a corresponding indicator field.    * If a field is used, its value is assigned and its indicator is left    * {@code false}.    * If a field is not used, its value is not assigned and its indicator is    * set to {@code true};    * This will become a value of 1 when {@code GROUPING(field)} is called. */
+name|Expression
+name|generateSelector
+parameter_list|(
+name|ParameterExpression
+name|parameter
+parameter_list|,
+name|List
+argument_list|<
+name|Integer
+argument_list|>
+name|fields
+parameter_list|,
+name|List
+argument_list|<
+name|Integer
+argument_list|>
+name|usedFields
+parameter_list|,
+name|JavaRowFormat
+name|targetFormat
+parameter_list|)
+function_decl|;
 comment|/** Generates a selector for the given fields from an expression. */
 name|Expression
 name|selector
@@ -265,6 +288,23 @@ argument_list|<
 name|Integer
 argument_list|>
 name|integers
+parameter_list|,
+name|JavaRowFormat
+name|format
+parameter_list|)
+function_decl|;
+comment|/** Projects a given collection of fields from this input record, optionally    * with indicator fields, into a particular preferred output format.    *    *<p>The output format is optimized if there are 0 or 1 fields    * and indicators are disabled. */
+name|PhysType
+name|project
+parameter_list|(
+name|List
+argument_list|<
+name|Integer
+argument_list|>
+name|integers
+parameter_list|,
+name|boolean
+name|indicator
 parameter_list|,
 name|JavaRowFormat
 name|format

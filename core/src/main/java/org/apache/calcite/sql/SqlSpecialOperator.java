@@ -213,31 +213,6 @@ operator|.
 name|SPECIAL
 return|;
 block|}
-specifier|public
-name|void
-name|unparse
-parameter_list|(
-name|SqlWriter
-name|writer
-parameter_list|,
-name|SqlCall
-name|call
-parameter_list|,
-name|int
-name|leftPrec
-parameter_list|,
-name|int
-name|rightPrec
-parameter_list|)
-block|{
-throw|throw
-operator|new
-name|UnsupportedOperationException
-argument_list|(
-literal|"unparse must be implemented by SqlCall subclass"
-argument_list|)
-throw|;
-block|}
 comment|/**    * Reduces a list of operators and arguments according to the rules of    * precedence and associativity. Returns the ordinal of the node which    * replaced the expression.    *    *<p>The default implementation throws    * {@link UnsupportedOperationException}.    *    * @param ordinal indicating the ordinal of the current operator in the list    *                on which a possible reduction can be made    * @param list    List of alternating    *     {@link org.apache.calcite.sql.parser.SqlParserUtil.ToTreeListItem} and    *     {@link SqlNode}    * @return ordinal of the node which replaced the expression    */
 specifier|public
 name|int

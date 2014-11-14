@@ -12532,6 +12532,86 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testGroupingSets
+parameter_list|()
+block|{
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|CalciteAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select \"deptno\", count(*) as c, sum(\"salary\") as s\n"
+operator|+
+literal|"from \"hr\".\"emps\"\n"
+operator|+
+literal|"group by grouping sets((\"deptno\"), ())"
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"deptno=0; C=4; S=36500.0"
+argument_list|,
+literal|"deptno=10; C=3; S=28500.0"
+argument_list|,
+literal|"deptno=20; C=1; S=8000.0"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testRollup
+parameter_list|()
+block|{
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|CalciteAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select \"deptno\", count(*) as c, sum(\"salary\") as s\n"
+operator|+
+literal|"from \"hr\".\"emps\"\n"
+operator|+
+literal|"group by rollup(\"deptno\")"
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"deptno=0; C=4; S=36500.0"
+argument_list|,
+literal|"deptno=10; C=3; S=28500.0"
+argument_list|,
+literal|"deptno=20; C=1; S=8000.0"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testSelectDistinct
 parameter_list|()
 block|{
