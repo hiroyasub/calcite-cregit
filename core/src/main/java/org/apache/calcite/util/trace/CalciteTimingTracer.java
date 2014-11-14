@@ -7,7 +7,11 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
 operator|.
 name|trace
 package|;
@@ -19,7 +23,7 @@ name|java
 operator|.
 name|text
 operator|.
-name|*
+name|DecimalFormat
 import|;
 end_import
 
@@ -31,18 +35,30 @@ name|util
 operator|.
 name|logging
 operator|.
-name|*
+name|Level
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|logging
+operator|.
+name|Logger
 import|;
 end_import
 
 begin_comment
-comment|/**  * EigenbaseTimingTracer provides a mechanism for tracing the timing of a call  * sequence at nanosecond resolution.  */
+comment|/**  * CalciteTimingTracer provides a mechanism for tracing the timing of a call  * sequence at nanosecond resolution.  */
 end_comment
 
 begin_class
 specifier|public
 class|class
-name|EigenbaseTimingTracer
+name|CalciteTimingTracer
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
 specifier|private
@@ -70,7 +86,7 @@ decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 comment|/**    * Creates a new timing tracer, publishing an initial event (at elapsed time    * 0).    *    * @param logger     logger on which to log timing events; level FINE will be    *                   used    * @param startEvent event to trace as start of timing    */
 specifier|public
-name|EigenbaseTimingTracer
+name|CalciteTimingTracer
 parameter_list|(
 name|Logger
 name|logger
@@ -185,7 +201,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End EigenbaseTimingTracer.java
+comment|// End CalciteTimingTracer.java
 end_comment
 
 end_unit

@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
@@ -19,11 +21,15 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|reltype
+name|calcite
 operator|.
-name|*
+name|rel
+operator|.
+name|type
+operator|.
+name|RelDataType
 import|;
 end_import
 
@@ -31,11 +37,13 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
-name|*
+name|SqlCallBinding
 import|;
 end_import
 
@@ -74,7 +82,7 @@ argument_list|>
 name|paramTypes
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/** Use {@link org.eigenbase.sql.type.InferTypes#explicit(java.util.List)}. */
+comment|/** Use    * {@link org.apache.calcite.sql.type.InferTypes#explicit(java.util.List)}. */
 name|ExplicitOperandTypeInference
 parameter_list|(
 name|ImmutableList

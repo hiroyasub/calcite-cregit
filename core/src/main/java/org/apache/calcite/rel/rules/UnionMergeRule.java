@@ -7,13 +7,87 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
 name|rules
 package|;
 end_package
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptRule
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptRuleCall
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|RelNode
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|logical
+operator|.
+name|LogicalUnion
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|Util
+import|;
+end_import
 
 begin_import
 import|import
@@ -35,74 +109,38 @@ name|List
 import|;
 end_import
 
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
-name|rel
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
-name|relopt
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
-name|util
-operator|.
-name|Util
-import|;
-end_import
-
 begin_comment
-comment|/**  * CombineUnionsRule implements the rule for combining two non-distinct  * {@link UnionRel}s into a single {@link UnionRel}.  */
+comment|/**  * UnionMergeRule implements the rule for combining two  * non-distinct {@link org.apache.calcite.rel.logical.LogicalUnion}s  * into a single {@link org.apache.calcite.rel.logical.LogicalUnion}.  */
 end_comment
 
 begin_class
 specifier|public
 class|class
-name|CombineUnionsRule
+name|UnionMergeRule
 extends|extends
 name|RelOptRule
 block|{
 specifier|public
 specifier|static
 specifier|final
-name|CombineUnionsRule
+name|UnionMergeRule
 name|INSTANCE
 init|=
 operator|new
-name|CombineUnionsRule
+name|UnionMergeRule
 argument_list|()
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a CombineUnionsRule.    */
+comment|/**    * Creates a UnionMergeRule.    */
 specifier|private
-name|CombineUnionsRule
+name|UnionMergeRule
 parameter_list|()
 block|{
 name|super
 argument_list|(
 name|operand
 argument_list|(
-name|UnionRel
+name|LogicalUnion
 operator|.
 name|class
 argument_list|,
@@ -139,8 +177,8 @@ name|RelOptRuleCall
 name|call
 parameter_list|)
 block|{
-name|UnionRel
-name|topUnionRel
+name|LogicalUnion
+name|topUnion
 init|=
 name|call
 operator|.
@@ -149,10 +187,10 @@ argument_list|(
 literal|0
 argument_list|)
 decl_stmt|;
-name|UnionRel
-name|bottomUnionRel
+name|LogicalUnion
+name|bottomUnion
 decl_stmt|;
-comment|// We want to combine the UnionRel that's in the second input first.
+comment|// We want to combine the Union that's in the second input first.
 comment|// Hence, that's why the rule pattern matches on generic RelNodes
 comment|// rather than explicit UnionRels.  By doing so, and firing this rule
 comment|// in a bottom-up order, it allows us to only specify a single
@@ -166,10 +204,10 @@ argument_list|(
 literal|2
 argument_list|)
 operator|instanceof
-name|UnionRel
+name|LogicalUnion
 condition|)
 block|{
-name|bottomUnionRel
+name|bottomUnion
 operator|=
 name|call
 operator|.
@@ -188,10 +226,10 @@ argument_list|(
 literal|1
 argument_list|)
 operator|instanceof
-name|UnionRel
+name|LogicalUnion
 condition|)
 block|{
-name|bottomUnionRel
+name|bottomUnion
 operator|=
 name|call
 operator|.
@@ -209,12 +247,12 @@ comment|// If distincts haven't been removed yet, defer invoking this rule
 if|if
 condition|(
 operator|!
-name|topUnionRel
+name|topUnion
 operator|.
 name|all
 operator|||
 operator|!
-name|bottomUnionRel
+name|bottomUnion
 operator|.
 name|all
 condition|)
@@ -245,11 +283,11 @@ argument_list|(
 literal|2
 argument_list|)
 operator|instanceof
-name|UnionRel
+name|LogicalUnion
 condition|)
 block|{
 assert|assert
-name|topUnionRel
+name|topUnion
 operator|.
 name|getInputs
 argument_list|()
@@ -263,7 +301,7 @@ name|unionInputs
 operator|.
 name|add
 argument_list|(
-name|topUnionRel
+name|topUnion
 operator|.
 name|getInput
 argument_list|(
@@ -275,7 +313,7 @@ name|unionInputs
 operator|.
 name|addAll
 argument_list|(
-name|bottomUnionRel
+name|bottomUnion
 operator|.
 name|getInputs
 argument_list|()
@@ -288,7 +326,7 @@ name|unionInputs
 operator|.
 name|addAll
 argument_list|(
-name|bottomUnionRel
+name|bottomUnion
 operator|.
 name|getInputs
 argument_list|()
@@ -302,7 +340,7 @@ name|Util
 operator|.
 name|skip
 argument_list|(
-name|topUnionRel
+name|topUnion
 operator|.
 name|getInputs
 argument_list|()
@@ -316,7 +354,7 @@ operator|.
 name|size
 argument_list|()
 operator|==
-name|bottomUnionRel
+name|bottomUnion
 operator|.
 name|getInputs
 argument_list|()
@@ -324,7 +362,7 @@ operator|.
 name|size
 argument_list|()
 operator|+
-name|topUnionRel
+name|topUnion
 operator|.
 name|getInputs
 argument_list|()
@@ -334,13 +372,13 @@ argument_list|()
 operator|-
 literal|1
 assert|;
-name|UnionRel
-name|newUnionRel
+name|LogicalUnion
+name|newUnion
 init|=
 operator|new
-name|UnionRel
+name|LogicalUnion
 argument_list|(
-name|topUnionRel
+name|topUnion
 operator|.
 name|getCluster
 argument_list|()
@@ -354,7 +392,7 @@ name|call
 operator|.
 name|transformTo
 argument_list|(
-name|newUnionRel
+name|newUnion
 argument_list|)
 expr_stmt|;
 block|}
@@ -362,7 +400,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End CombineUnionsRule.java
+comment|// End UnionMergeRule.java
 end_comment
 
 end_unit

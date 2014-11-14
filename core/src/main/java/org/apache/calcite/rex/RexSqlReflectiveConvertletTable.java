@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rex
 package|;
@@ -15,23 +17,35 @@ end_package
 
 begin_import
 import|import
-name|java
+name|org
 operator|.
-name|util
+name|apache
 operator|.
-name|*
+name|calcite
+operator|.
+name|sql
+operator|.
+name|SqlOperator
 import|;
 end_import
 
 begin_import
 import|import
-name|org
+name|java
 operator|.
-name|eigenbase
+name|util
 operator|.
-name|sql
+name|HashMap
+import|;
+end_import
+
+begin_import
+import|import
+name|java
 operator|.
-name|*
+name|util
+operator|.
+name|Map
 import|;
 end_import
 
@@ -222,7 +236,7 @@ return|return
 literal|null
 return|;
 block|}
-comment|/**    * Registers a convertlet for a given operator instance    *    * @param op         Operator instance, say {@link    *                   org.eigenbase.sql.fun.SqlStdOperatorTable#MINUS}    * @param convertlet Convertlet    */
+comment|/**    * Registers a convertlet for a given operator instance    *    * @param op         Operator instance, say    * {@link org.apache.calcite.sql.fun.SqlStdOperatorTable#MINUS}    * @param convertlet Convertlet    */
 specifier|protected
 name|void
 name|registerOp

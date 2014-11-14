@@ -5,21 +5,25 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
+operator|.
+name|calcite
 operator|.
 name|linq4j
 operator|.
-name|expressions
+name|tree
 package|;
 end_package
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
+operator|.
+name|calcite
 operator|.
 name|linq4j
 operator|.
@@ -31,9 +35,11 @@ end_import
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
+operator|.
+name|calcite
 operator|.
 name|linq4j
 operator|.

@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
@@ -17,28 +19,60 @@ end_package
 
 begin_import
 import|import
-name|java
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|util
 operator|.
-name|*
+name|CalciteParserException
 import|;
 end_import
 
 begin_import
 import|import
-name|org
+name|java
 operator|.
-name|eigenbase
+name|util
 operator|.
-name|util14
+name|Collection
+import|;
+end_import
+
+begin_import
+import|import
+name|java
 operator|.
-name|*
+name|util
+operator|.
+name|Collections
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Set
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|TreeSet
 import|;
 end_import
 
 begin_comment
-comment|/**  * SqlParseException defines a checked exception corresponding to {@link  * SqlParser}.  */
+comment|/**  * SqlParseException defines a checked exception corresponding to  * {@link SqlParser}.  */
 end_comment
 
 begin_class
@@ -48,7 +82,7 @@ name|SqlParseException
 extends|extends
 name|Exception
 implements|implements
-name|EigenbaseParserException
+name|CalciteParserException
 block|{
 comment|//~ Instance fields --------------------------------------------------------
 specifier|private
@@ -287,7 +321,7 @@ return|return
 name|parserException
 return|;
 block|}
-comment|/**    * Per {@link java.io.Serializable} API, provides a replacement object to be    * written during serialization.    *    *<p>SqlParseException is serializable but is not available on the client.    * This implementation converts this SqlParseException into a vanilla {@link    * RuntimeException} with the same message.    */
+comment|/**    * Per {@link java.io.Serializable} API, provides a replacement object to be    * written during serialization.    *    *<p>SqlParseException is serializable but is not available on the client.    * This implementation converts this SqlParseException into a vanilla    * {@link RuntimeException} with the same message.    */
 specifier|private
 name|Object
 name|writeReplace

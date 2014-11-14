@@ -7,11 +7,127 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
+operator|.
+name|core
 package|;
 end_package
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|Convention
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptCluster
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptSamplingParameters
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelTraitSet
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|RelInput
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|RelNode
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|RelWriter
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|SingleRel
+import|;
+end_import
 
 begin_import
 import|import
@@ -23,26 +139,14 @@ name|List
 import|;
 end_import
 
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
-name|relopt
-operator|.
-name|*
-import|;
-end_import
-
 begin_comment
-comment|/**  * SamplingRel represents the TABLESAMPLE BERNOULLI or SYSTEM keyword applied to  * a table, view or subquery.  */
+comment|/**  * Relational expression that returns a sample of the rows from its input.  *  *<p>In SQL, a sample is expressed using the {@code TABLESAMPLE BERNOULLI} or  * {@code SYSTEM} keyword applied to a table, view or subquery.  */
 end_comment
 
 begin_class
 specifier|public
 class|class
-name|SamplingRel
+name|Sample
 extends|extends
 name|SingleRel
 block|{
@@ -54,7 +158,7 @@ name|params
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 specifier|public
-name|SamplingRel
+name|Sample
 parameter_list|(
 name|RelOptCluster
 name|cluster
@@ -89,9 +193,9 @@ operator|=
 name|params
 expr_stmt|;
 block|}
-comment|/**    * Creates a SamplingRel by parsing serialized output.    */
+comment|/**    * Creates a Sample by parsing serialized output.    */
 specifier|public
-name|SamplingRel
+name|Sample
 parameter_list|(
 name|RelInput
 name|input
@@ -220,7 +324,7 @@ argument_list|)
 assert|;
 return|return
 operator|new
-name|SamplingRel
+name|Sample
 argument_list|(
 name|getCluster
 argument_list|()
@@ -234,7 +338,7 @@ name|params
 argument_list|)
 return|;
 block|}
-comment|/**    * Retrieve the sampling parameters for this SamplingRel.    */
+comment|/**    * Retrieve the sampling parameters for this Sample.    */
 specifier|public
 name|RelOptSamplingParameters
 name|getSamplingParameters
@@ -244,7 +348,8 @@ return|return
 name|params
 return|;
 block|}
-comment|// implement RelNode
+annotation|@
+name|Override
 specifier|public
 name|RelWriter
 name|explainTerms
@@ -307,7 +412,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End SamplingRel.java
+comment|// End Sample.java
 end_comment
 
 end_unit

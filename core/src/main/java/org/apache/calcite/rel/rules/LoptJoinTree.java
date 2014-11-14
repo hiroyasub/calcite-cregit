@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
@@ -17,11 +19,15 @@ end_package
 
 begin_import
 import|import
-name|java
+name|org
 operator|.
-name|util
+name|apache
 operator|.
-name|*
+name|calcite
+operator|.
+name|rel
+operator|.
+name|RelNode
 import|;
 end_import
 
@@ -29,11 +35,15 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
-name|*
+name|core
+operator|.
+name|Join
 import|;
 end_import
 
@@ -65,8 +75,18 @@ name|Lists
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
+import|;
+end_import
+
 begin_comment
-comment|/**  * Utility class used to store a {@link JoinRelBase} tree and the factors that  * make up the tree.  *  *<p>Because {@link RelNode}s can be duplicated in a query  * when you have a self-join, factor ids are needed to distinguish between the  * different join inputs that correspond to identical tables. The class  * associates factor ids with a join tree, matching the order of the factor ids  * with the order of those factors in the join tree.  */
+comment|/**  * Utility class used to store a {@link org.apache.calcite.rel.core.Join} tree  * and the factors that make up the tree.  *  *<p>Because {@link RelNode}s can be duplicated in a query  * when you have a self-join, factor ids are needed to distinguish between the  * different join inputs that correspond to identical tables. The class  * associates factor ids with a join tree, matching the order of the factor ids  * with the order of those factors in the join tree.  */
 end_comment
 
 begin_class
@@ -258,7 +278,7 @@ name|LoptJoinTree
 argument_list|(
 operator|(
 operator|(
-name|JoinRelBase
+name|Join
 operator|)
 name|joinTree
 operator|)
@@ -304,7 +324,7 @@ name|LoptJoinTree
 argument_list|(
 operator|(
 operator|(
-name|JoinRelBase
+name|Join
 operator|)
 name|joinTree
 operator|)

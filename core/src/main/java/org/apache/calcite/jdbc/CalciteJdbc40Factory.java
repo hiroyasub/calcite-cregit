@@ -5,30 +5,30 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
 name|jdbc
 package|;
 end_package
 
 begin_comment
-comment|/**  * Implementation of {@link net.hydromatic.avatica.AvaticaFactory}  * for Calcite and JDBC 4.0 (corresponds to JDK 1.6).  */
+comment|/**  * Implementation of {@link org.apache.calcite.avatica.AvaticaFactory}  * for Calcite and JDBC 4.0 (corresponds to JDK 1.6).  */
 end_comment
 
 begin_class
 specifier|public
 class|class
-name|OptiqJdbc40Factory
+name|CalciteJdbc40Factory
 extends|extends
-name|OptiqJdbc41Factory
+name|CalciteJdbc41Factory
 block|{
 comment|/** Creates a factory for JDBC version 4.1. */
 specifier|public
-name|OptiqJdbc40Factory
+name|CalciteJdbc40Factory
 parameter_list|()
 block|{
 name|super
@@ -43,7 +43,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End OptiqJdbc40Factory.java
+comment|// End CalciteJdbc40Factory.java
 end_comment
 
 end_unit

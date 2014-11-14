@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
@@ -19,11 +21,13 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|rel
+name|calcite
 operator|.
-name|*
+name|plan
+operator|.
+name|RelOptRule
 import|;
 end_import
 
@@ -31,11 +35,59 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|relopt
+name|calcite
 operator|.
-name|*
+name|plan
+operator|.
+name|RelOptRuleCall
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|RelNode
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|core
+operator|.
+name|Sort
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|logical
+operator|.
+name|LogicalProject
 import|;
 end_import
 
@@ -54,43 +106,43 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Planner rule that pushes a {@link ProjectRel} past a {@link SortRel}.  */
+comment|/**  * Planner rule that pushes  * a {@link org.apache.calcite.rel.logical.LogicalProject}  * past a {@link org.apache.calcite.rel.core.Sort}.  *  * @see org.apache.calcite.rel.rules.SortProjectTransposeRule  */
 end_comment
 
 begin_class
 specifier|public
 class|class
-name|PushProjectPastSortRule
+name|ProjectSortTransposeRule
 extends|extends
 name|RelOptRule
 block|{
 specifier|public
 specifier|static
 specifier|final
-name|PushProjectPastSortRule
+name|ProjectSortTransposeRule
 name|INSTANCE
 init|=
 operator|new
-name|PushProjectPastSortRule
+name|ProjectSortTransposeRule
 argument_list|()
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a PushProjectPastSortRule.    */
+comment|/**    * Creates a ProjectSortTransposeRule.    */
 specifier|private
-name|PushProjectPastSortRule
+name|ProjectSortTransposeRule
 parameter_list|()
 block|{
 name|super
 argument_list|(
 name|operand
 argument_list|(
-name|ProjectRel
+name|LogicalProject
 operator|.
 name|class
 argument_list|,
 name|operand
 argument_list|(
-name|SortRel
+name|Sort
 operator|.
 name|class
 argument_list|,
@@ -102,7 +154,6 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|// implement RelOptRule
 specifier|public
 name|void
 name|onMatch
@@ -111,7 +162,7 @@ name|RelOptRuleCall
 name|call
 parameter_list|)
 block|{
-name|ProjectRel
+name|LogicalProject
 name|project
 init|=
 name|call
@@ -121,7 +172,7 @@ argument_list|(
 literal|0
 argument_list|)
 decl_stmt|;
-name|SortRel
+name|Sort
 name|sort
 init|=
 name|call
@@ -138,7 +189,7 @@ operator|.
 name|getClass
 argument_list|()
 operator|!=
-name|SortRel
+name|Sort
 operator|.
 name|class
 condition|)
@@ -163,13 +214,13 @@ name|of
 argument_list|(
 name|sort
 operator|.
-name|getChild
+name|getInput
 argument_list|()
 argument_list|)
 argument_list|)
 decl_stmt|;
 specifier|final
-name|SortRel
+name|Sort
 name|newSort
 init|=
 name|sort
@@ -209,7 +260,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End PushProjectPastSortRule.java
+comment|// End ProjectSortTransposeRule.java
 end_comment
 
 end_unit

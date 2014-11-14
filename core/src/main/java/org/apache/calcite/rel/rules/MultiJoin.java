@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
@@ -17,11 +19,15 @@ end_package
 
 begin_import
 import|import
-name|java
+name|org
 operator|.
-name|util
+name|apache
 operator|.
-name|*
+name|calcite
+operator|.
+name|linq4j
+operator|.
+name|Ord
 import|;
 end_import
 
@@ -29,11 +35,55 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|Convention
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptCluster
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelTraitSet
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
-name|*
+name|AbstractRelNode
 import|;
 end_import
 
@@ -41,11 +91,13 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|relopt
+name|calcite
 operator|.
-name|*
+name|rel
+operator|.
+name|RelNode
 import|;
 end_import
 
@@ -53,11 +105,13 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|reltype
+name|calcite
 operator|.
-name|*
+name|rel
+operator|.
+name|RelWriter
 import|;
 end_import
 
@@ -65,11 +119,45 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|core
+operator|.
+name|JoinRelType
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|type
+operator|.
+name|RelDataType
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rex
 operator|.
-name|*
+name|RexNode
 import|;
 end_import
 
@@ -77,7 +165,9 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|util
 operator|.
@@ -89,23 +179,13 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|util
 operator|.
 name|ImmutableNullableList
-import|;
-end_import
-
-begin_import
-import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|linq4j
-operator|.
-name|Ord
 import|;
 end_import
 
@@ -151,15 +231,65 @@ name|Lists
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|ArrayList
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|BitSet
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|HashMap
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Map
+import|;
+end_import
+
 begin_comment
-comment|/**  * A MultiJoinRel represents a join of N inputs, whereas other join relnodes  * represent strictly binary joins.  */
+comment|/**  * A MultiJoin represents a join of N inputs, whereas regular Joins  * represent strictly binary joins.  */
 end_comment
 
 begin_class
 specifier|public
 specifier|final
 class|class
-name|MultiJoinRel
+name|MultiJoin
 extends|extends
 name|AbstractRelNode
 block|{
@@ -227,9 +357,9 @@ name|RexNode
 name|postJoinFilter
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Constructs a MultiJoinRel.    *    * @param cluster               cluster that join belongs to    * @param inputs                inputs into this multirel join    * @param joinFilter            join filter applicable to this join node    * @param rowType               row type of the join result of this node    * @param isFullOuterJoin       true if the join is a full outer join    * @param outerJoinConditions   outer join condition associated with each join    *                              input, if the input is null-generating in a    *                              left or right outer join; null otherwise    * @param joinTypes             the join type corresponding to each input; if    *                              an input is null-generating in a left or right    *                              outer join, the entry indicates the type of    *                              outer join; otherwise, the entry is set to    *                              INNER    * @param projFields            fields that will be projected from each input;    *                              if null, projection information is not    *                              available yet so it's assumed that all fields    *                              from the input are projected    * @param joinFieldRefCountsMap counters of the number of times each field    *                              is referenced in join conditions, indexed by    *                              the input #    * @param postJoinFilter        filter to be applied after the joins are    */
+comment|/**    * Constructs a MultiJoin.    *    * @param cluster               cluster that join belongs to    * @param inputs                inputs into this multi-join    * @param joinFilter            join filter applicable to this join node    * @param rowType               row type of the join result of this node    * @param isFullOuterJoin       true if the join is a full outer join    * @param outerJoinConditions   outer join condition associated with each join    *                              input, if the input is null-generating in a    *                              left or right outer join; null otherwise    * @param joinTypes             the join type corresponding to each input; if    *                              an input is null-generating in a left or right    *                              outer join, the entry indicates the type of    *                              outer join; otherwise, the entry is set to    *                              INNER    * @param projFields            fields that will be projected from each input;    *                              if null, projection information is not    *                              available yet so it's assumed that all fields    *                              from the input are projected    * @param joinFieldRefCountsMap counters of the number of times each field    *                              is referenced in join conditions, indexed by    *                              the input #    * @param postJoinFilter        filter to be applied after the joins are    */
 specifier|public
-name|MultiJoinRel
+name|MultiJoin
 parameter_list|(
 name|RelOptCluster
 name|cluster
@@ -431,7 +561,7 @@ argument_list|)
 assert|;
 return|return
 operator|new
-name|MultiJoinRel
+name|MultiJoin
 argument_list|(
 name|getCluster
 argument_list|()
@@ -813,7 +943,7 @@ name|joinFilter
 argument_list|)
 return|;
 block|}
-comment|/**    * @return join filters associated with this MultiJoinRel    */
+comment|/**    * @return join filters associated with this MultiJoin    */
 specifier|public
 name|RexNode
 name|getJoinFilter
@@ -823,7 +953,7 @@ return|return
 name|joinFilter
 return|;
 block|}
-comment|/**    * @return true if the MultiJoinRel corresponds to a full outer join.    */
+comment|/**    * @return true if the MultiJoin corresponds to a full outer join.    */
 specifier|public
 name|boolean
 name|isFullOuterJoin
@@ -904,7 +1034,7 @@ name|cloneJoinFieldRefCountsMap
 argument_list|()
 return|;
 block|}
-comment|/**    * @return post-join filter associated with this MultiJoinRel    */
+comment|/**    * @return post-join filter associated with this MultiJoin    */
 specifier|public
 name|RexNode
 name|getPostJoinFilter
@@ -948,7 +1078,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End MultiJoinRel.java
+comment|// End MultiJoin.java
 end_comment
 
 end_unit

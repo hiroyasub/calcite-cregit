@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|util
 package|;
@@ -19,12 +21,22 @@ name|java
 operator|.
 name|util
 operator|.
-name|*
+name|Iterator
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|NoSuchElementException
 import|;
 end_import
 
 begin_comment
-comment|/**  * Filtered iterator class: an iterator that includes only elements that are  * instanceof a specified class. Apologies for the dorky name.  *  * @see Util#cast(List, Class)  * @see Util#cast(Iterator, Class)  */
+comment|/**  * Filtered iterator class: an iterator that includes only elements that are  * instanceof a specified class.  *  *<p>Apologies for the dorky name.  *  * @see Util#cast(java.util.List, Class)  * @see Util#cast(Iterator, Class)  *  * @param<E> Element type  */
 end_comment
 
 begin_class

@@ -5,15 +5,15 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
-name|rules
+name|adapter
 operator|.
-name|java
+name|enumerable
 package|;
 end_package
 
@@ -21,11 +21,15 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
-name|Aggregation
+name|type
+operator|.
+name|RelDataType
 import|;
 end_import
 
@@ -33,11 +37,13 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|reltype
+name|calcite
 operator|.
-name|RelDataType
+name|sql
+operator|.
+name|SqlAggFunction
 import|;
 end_import
 
@@ -73,11 +79,11 @@ interface|interface
 name|AggContext
 block|{
 comment|/**    * Returns the aggregation being implemented.    * @return aggregation being implemented.    */
-name|Aggregation
+name|SqlAggFunction
 name|aggregation
 parameter_list|()
 function_decl|;
-comment|/**    * Returns the return type of the aggregate as {@link org.eigenbase.reltype.RelDataType}.    * This can be helpful to test {@link org.eigenbase.reltype.RelDataType#isNullable()}.    * @return return type of the aggregate as {@link org.eigenbase.reltype.RelDataType}    */
+comment|/**    * Returns the return type of the aggregate as    * {@link org.apache.calcite.rel.type.RelDataType}.    * This can be helpful to test    * {@link org.apache.calcite.rel.type.RelDataType#isNullable()}.    *    * @return return type of the aggregate    */
 name|RelDataType
 name|returnRelType
 parameter_list|()
@@ -87,7 +93,7 @@ name|Type
 name|returnType
 parameter_list|()
 function_decl|;
-comment|/**    * Returns the parameter types of the aggregate as {@link org.eigenbase.reltype.RelDataType}.    * This can be helpful to test {@link org.eigenbase.reltype.RelDataType#isNullable()}.    * @return parameter types of the aggregate as {@link org.eigenbase.reltype.RelDataType}    */
+comment|/**    * Returns the parameter types of the aggregate as    * {@link org.apache.calcite.rel.type.RelDataType}.    * This can be helpful to test    * {@link org.apache.calcite.rel.type.RelDataType#isNullable()}.    */
 name|List
 argument_list|<
 name|?
@@ -97,7 +103,7 @@ argument_list|>
 name|parameterRelTypes
 parameter_list|()
 function_decl|;
-comment|/**    * Returns the parameter types of the aggregate as {@link java.lang.reflect.Type}.    * @return parameter types of the aggregate as {@link java.lang.reflect.Type}    */
+comment|/**    * Returns the parameter types of the aggregate as    * {@link java.lang.reflect.Type}.    */
 name|List
 argument_list|<
 name|?
@@ -109,6 +115,10 @@ parameter_list|()
 function_decl|;
 block|}
 end_interface
+
+begin_comment
+comment|// End AggContext.java
+end_comment
 
 end_unit
 

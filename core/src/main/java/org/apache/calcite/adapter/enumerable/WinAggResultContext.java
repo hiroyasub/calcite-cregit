@@ -5,27 +5,29 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
-name|rules
+name|adapter
 operator|.
-name|java
+name|enumerable
 package|;
 end_package
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
+operator|.
+name|calcite
 operator|.
 name|linq4j
 operator|.
-name|expressions
+name|tree
 operator|.
 name|Expression
 import|;
@@ -35,7 +37,9 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rex
 operator|.
@@ -54,7 +58,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Information for a call to {@link AggImplementor#implementResult(AggContext, AggResultContext)}  * Typically, the aggregation implementation will convert {@link #accumulator()}  * to the resulting value of the aggregation.  * The implementation MUST NOT destroy the contents of {@link #accumulator()}.  */
+comment|/**  * Information for a call to  * {@link AggImplementor#implementResult(AggContext, AggResultContext)}.  *  *<p>Typically, the aggregation implementation will convert  * {@link #accumulator()} to the resulting value of the aggregation.  The  * implementation MUST NOT destroy the contents of {@link #accumulator()}.  */
 end_comment
 
 begin_interface
@@ -66,7 +70,7 @@ name|AggResultContext
 extends|,
 name|WinAggFrameResultContext
 block|{
-comment|/**    * Returns {@link org.eigenbase.rex.RexNode} representation of arguments.    * This can be useful for manual translation of required arguments with    * different {@link NullPolicy}.    * @return {@link org.eigenbase.rex.RexNode} representation of arguments    */
+comment|/**    * Returns {@link org.apache.calcite.rex.RexNode} representation of arguments.    * This can be useful for manual translation of required arguments with    * different {@link NullPolicy}.    * @return {@link org.apache.calcite.rex.RexNode} representation of arguments    */
 name|List
 argument_list|<
 name|RexNode

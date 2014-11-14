@@ -5,13 +5,13 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
-name|impl
+name|adapter
 operator|.
 name|mongodb
 package|;
@@ -19,13 +19,13 @@ end_package
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
-name|impl
+name|adapter
 operator|.
 name|java
 operator|.
@@ -37,11 +37,69 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptCluster
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptCost
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptPlanner
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelTraitSet
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
-name|*
+name|RelNode
 import|;
 end_import
 
@@ -49,11 +107,15 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|relopt
+name|calcite
 operator|.
-name|*
+name|rel
+operator|.
+name|core
+operator|.
+name|Project
 import|;
 end_import
 
@@ -61,11 +123,15 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|reltype
+name|calcite
 operator|.
-name|*
+name|rel
+operator|.
+name|type
+operator|.
+name|RelDataType
 import|;
 end_import
 
@@ -73,11 +139,13 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rex
 operator|.
-name|*
+name|RexNode
 import|;
 end_import
 
@@ -85,7 +153,9 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|util
 operator|.
@@ -97,7 +167,9 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|util
 operator|.
@@ -111,25 +183,35 @@ name|java
 operator|.
 name|util
 operator|.
-name|*
+name|ArrayList
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
 import|;
 end_import
 
 begin_comment
-comment|/**  * Implementation of {@link ProjectRel} relational expression in  * MongoDB.  */
+comment|/**  * Implementation of {@link org.apache.calcite.rel.core.Project}  * relational expression in MongoDB.  */
 end_comment
 
 begin_class
 specifier|public
 class|class
-name|MongoProjectRel
+name|MongoProject
 extends|extends
-name|ProjectRelBase
+name|Project
 implements|implements
 name|MongoRel
 block|{
 specifier|public
-name|MongoProjectRel
+name|MongoProject
 parameter_list|(
 name|RelOptCluster
 name|cluster
@@ -189,7 +271,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
-name|ProjectRelBase
+name|Project
 name|copy
 parameter_list|(
 name|RelTraitSet
@@ -210,7 +292,7 @@ parameter_list|)
 block|{
 return|return
 operator|new
-name|MongoProjectRel
+name|MongoProject
 argument_list|(
 name|getCluster
 argument_list|()
@@ -265,7 +347,7 @@ name|visitChild
 argument_list|(
 literal|0
 argument_list|,
-name|getChild
+name|getInput
 argument_list|()
 argument_list|)
 expr_stmt|;
@@ -293,7 +375,7 @@ name|MongoRules
 operator|.
 name|mongoFieldNames
 argument_list|(
-name|getChild
+name|getInput
 argument_list|()
 operator|.
 name|getRowType
@@ -450,7 +532,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End MongoProjectRel.java
+comment|// End MongoProject.java
 end_comment
 
 end_unit

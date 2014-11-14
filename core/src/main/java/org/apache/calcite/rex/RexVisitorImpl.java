@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rex
 package|;
@@ -24,7 +26,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Default implementation of {@link RexVisitor}, which visits each node but does  * nothing while it's there.  */
+comment|/**  * Default implementation of {@link RexVisitor}, which visits each node but does  * nothing while it's there.  *  * @param<R> Return type from each {@code visitXxx} method.  */
 end_comment
 
 begin_class

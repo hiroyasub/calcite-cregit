@@ -5,27 +5,29 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
-name|rules
+name|adapter
 operator|.
-name|java
+name|enumerable
 package|;
 end_package
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
+operator|.
+name|calcite
 operator|.
 name|linq4j
 operator|.
-name|expressions
+name|tree
 operator|.
 name|Expression
 import|;
@@ -35,7 +37,9 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rex
 operator|.
@@ -54,7 +58,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Information for a call to {@link net.hydromatic.optiq.rules.java.AggImplementor#implementAdd(AggContext, AggAddContext)}.  * Typically, the aggregation implementation will use {@link #arguments()}  * or {@link #rexArguments()} to update aggregate value.  */
+comment|/**  * Information for a call to  * {@link org.apache.calcite.adapter.enumerable.AggImplementor#implementAdd(AggContext, AggAddContext)}.  *  *<p>Typically, the aggregation implementation will use {@link #arguments()}  * or {@link #rexArguments()} to update aggregate value.  */
 end_comment
 
 begin_interface
@@ -64,7 +68,7 @@ name|AggAddContext
 extends|extends
 name|AggResultContext
 block|{
-comment|/**    * Returns {@link org.eigenbase.rex.RexNode} representation of arguments.    * This can be useful for manual translation of required arguments with    * different {@link NullPolicy}.    * @return {@link org.eigenbase.rex.RexNode} representation of arguments    */
+comment|/**    * Returns {@link org.apache.calcite.rex.RexNode} representation of arguments.    * This can be useful for manual translation of required arguments with    * different {@link NullPolicy}.    * @return {@link org.apache.calcite.rex.RexNode} representation of arguments    */
 name|List
 argument_list|<
 name|RexNode
@@ -80,7 +84,7 @@ argument_list|>
 name|arguments
 parameter_list|()
 function_decl|;
-comment|/**    * Returns {@link net.hydromatic.optiq.rules.java.RexToLixTranslator} suitable to transform the arguments.    * @return {@link net.hydromatic.optiq.rules.java.RexToLixTranslator} suitable to transform the arguments.    */
+comment|/**    * Returns a    * {@link org.apache.calcite.adapter.enumerable.RexToLixTranslator}    * suitable to transform the arguments.    */
 name|RexToLixTranslator
 name|rowTranslator
 parameter_list|()

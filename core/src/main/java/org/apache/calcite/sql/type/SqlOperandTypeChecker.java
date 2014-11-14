@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
@@ -19,16 +21,46 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
-name|*
+name|SqlCallBinding
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|SqlOperandCountRange
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|SqlOperator
 import|;
 end_import
 
 begin_comment
-comment|/**  * Strategy interface to check for allowed operand types of an operator call.  *  *<p>This interface is an example of the {@link  * org.eigenbase.util.Glossary#STRATEGY_PATTERN strategy pattern}.</p>  */
+comment|/**  * Strategy interface to check for allowed operand types of an operator call.  *  *<p>This interface is an example of the  * {@link org.apache.calcite.util.Glossary#STRATEGY_PATTERN strategy pattern}.  */
 end_comment
 
 begin_interface

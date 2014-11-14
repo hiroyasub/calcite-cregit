@@ -5,11 +5,11 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
 name|model
 package|;
@@ -40,7 +40,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Materialized view within a {@link net.hydromatic.optiq.model.JsonLattice}.  *  *<p>A tile is defined in terms of its dimensionality (the grouping columns,  * drawn from the lattice) and measures (aggregate functions applied to  * lattice columns).  *  * @see JsonRoot Description of schema elements  */
+comment|/**  * Materialized view within a {@link org.apache.calcite.model.JsonLattice}.  *  *<p>A tile is defined in terms of its dimensionality (the grouping columns,  * drawn from the lattice) and measures (aggregate functions applied to  * lattice columns).  *  * @see JsonRoot Description of schema elements  */
 end_comment
 
 begin_class

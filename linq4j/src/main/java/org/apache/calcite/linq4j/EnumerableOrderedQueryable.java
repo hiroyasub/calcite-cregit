@@ -5,9 +5,11 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
+operator|.
+name|calcite
 operator|.
 name|linq4j
 package|;
@@ -15,13 +17,31 @@ end_package
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
+operator|.
+name|calcite
 operator|.
 name|linq4j
 operator|.
-name|expressions
+name|function
+operator|.
+name|Function1
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|linq4j
+operator|.
+name|tree
 operator|.
 name|Expression
 import|;
@@ -29,29 +49,17 @@ end_import
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
+operator|.
+name|calcite
 operator|.
 name|linq4j
 operator|.
-name|expressions
+name|tree
 operator|.
 name|FunctionExpression
-import|;
-end_import
-
-begin_import
-import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|linq4j
-operator|.
-name|function
-operator|.
-name|*
 import|;
 end_import
 
@@ -66,7 +74,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Implementation of {@link OrderedQueryable} by an  * {@link net.hydromatic.linq4j.Enumerable}.  *  * @param<T> Element type  */
+comment|/**  * Implementation of {@link OrderedQueryable} by an  * {@link org.apache.calcite.linq4j.Enumerable}.  *  * @param<T> Element type  */
 end_comment
 
 begin_class

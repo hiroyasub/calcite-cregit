@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
@@ -16,7 +18,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * Mapping from an input column of a {@link org.eigenbase.rel.RelNode} to one  * of its output columns.  */
+comment|/**  * Mapping from an input column of a {@link org.apache.calcite.rel.RelNode} to  * one of its output columns.  */
 end_comment
 
 begin_class

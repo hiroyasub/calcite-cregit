@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|util
 operator|.
@@ -17,11 +19,15 @@ end_package
 
 begin_import
 import|import
-name|java
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|util
 operator|.
-name|*
+name|BitSets
 import|;
 end_import
 
@@ -29,25 +35,41 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|util
 operator|.
-name|*
+name|IntList
 import|;
 end_import
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
 name|util
 operator|.
-name|BitSets
+name|Permutation
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|Util
 import|;
 end_import
 
@@ -65,8 +87,78 @@ name|Function
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|AbstractList
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|ArrayList
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Arrays
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|BitSet
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Iterator
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Map
+import|;
+end_import
+
 begin_comment
-comment|/**  * Utility functions related to mappings.  *  * @see MappingType  * @see Mapping  * @see Permutation  */
+comment|/**  * Utility functions related to mappings.  *  * @see MappingType  * @see Mapping  * @see org.apache.calcite.util.Permutation  */
 end_comment
 
 begin_class
@@ -2541,7 +2633,7 @@ return|return
 literal|true
 return|;
 block|}
-comment|/** Inverts an {@link java.lang.Iterable} over    * {@link org.eigenbase.util.mapping.IntPair}s. */
+comment|/** Inverts an {@link java.lang.Iterable} over    * {@link org.apache.calcite.util.mapping.IntPair}s. */
 specifier|public
 specifier|static
 name|Iterable
@@ -2587,7 +2679,7 @@ block|}
 block|}
 return|;
 block|}
-comment|/** Inverts an {@link java.util.Iterator} over    * {@link org.eigenbase.util.mapping.IntPair}s. */
+comment|/** Inverts an {@link java.util.Iterator} over    * {@link org.apache.calcite.util.mapping.IntPair}s. */
 specifier|public
 specifier|static
 name|Iterator
@@ -2824,6 +2916,7 @@ parameter_list|()
 function_decl|;
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------
+comment|/** Abstract implementation of {@link Mapping}. */
 specifier|public
 specifier|abstract
 specifier|static
@@ -3166,6 +3259,7 @@ argument_list|()
 return|;
 block|}
 block|}
+comment|/** Abstract implementation of mapping where both source and target    * domains are finite. */
 specifier|public
 specifier|abstract
 specifier|static
@@ -3233,6 +3327,7 @@ argument_list|)
 return|;
 block|}
 block|}
+comment|/** Iterator that yields the (source, target) values in a    * {@link FunctionMapping}. */
 specifier|static
 class|class
 name|FunctionMappingIter
@@ -3469,7 +3564,7 @@ literal|1
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Creates a partial mapping from a list. For example,<code>      * PartialMapping({1, 2, 4}, 6)</code> creates the mapping      *      *<table border="1">      *<caption>Example</caption>      *<tr>      *<th>source</th>      *<td>0</td>      *<td>1</td>      *<td>2</td>      *<td>3</td>      *<td>4</td>      *<td>5</td>      *</tr>      *<tr>      *<th>target</th>      *<td>-1</td>      *<td>0</td>      *<td>1</td>      *<td>-1</td>      *<td>2</td>      *<td>-1</td>      *</tr>      *</table>      *      * @param sourceList  List whose i'th element is the source of target #i      * @param sourceCount Number of elements in the source domain      * @param mappingType Mapping type, must be      *                    {@link org.eigenbase.util.mapping.MappingType#PARTIAL_SURJECTION}      *                    or stronger.      */
+comment|/**      * Creates a partial mapping from a list. For example,<code>      * PartialMapping({1, 2, 4}, 6)</code> creates the mapping      *      *<table border="1">      *<caption>Example</caption>      *<tr>      *<th>source</th>      *<td>0</td>      *<td>1</td>      *<td>2</td>      *<td>3</td>      *<td>4</td>      *<td>5</td>      *</tr>      *<tr>      *<th>target</th>      *<td>-1</td>      *<td>0</td>      *<td>1</td>      *<td>-1</td>      *<td>2</td>      *<td>-1</td>      *</tr>      *</table>      *      * @param sourceList  List whose i'th element is the source of target #i      * @param sourceCount Number of elements in the source domain      * @param mappingType Mapping type, must be      *   {@link org.apache.calcite.util.mapping.MappingType#PARTIAL_SURJECTION}      *   or stronger.      */
 specifier|public
 name|PartialMapping
 parameter_list|(
@@ -4078,6 +4173,7 @@ return|return
 literal|true
 return|;
 block|}
+comment|/** Mapping iterator. */
 specifier|private
 class|class
 name|MappingItr
@@ -4288,6 +4384,7 @@ index|]
 return|;
 block|}
 block|}
+comment|/** The identity mapping, of a given size, or infinite. */
 specifier|public
 specifier|static
 class|class
@@ -4531,6 +4628,7 @@ block|}
 return|;
 block|}
 block|}
+comment|/** Source mapping that returns the same result as a parent    * {@link SourceMapping} except for specific overriding elements. */
 specifier|public
 specifier|static
 class|class
@@ -4737,6 +4835,7 @@ argument_list|)
 throw|;
 block|}
 block|}
+comment|/** Target mapping that returns the same result as a parent    * {@link TargetMapping} except for specific overriding elements. */
 specifier|public
 specifier|static
 class|class

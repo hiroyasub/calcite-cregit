@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
@@ -19,11 +21,13 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|rel
+name|calcite
 operator|.
-name|*
+name|plan
+operator|.
+name|RelOptRule
 import|;
 end_import
 
@@ -31,16 +35,48 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|relopt
+name|calcite
 operator|.
-name|*
+name|plan
+operator|.
+name|RelOptRuleCall
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptUtil
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|logical
+operator|.
+name|LogicalUnion
 import|;
 end_import
 
 begin_comment
-comment|/**  *<code>UnionToDistinctRule</code> translates a distinct {@link UnionRel}  * (<code>all</code> =<code>false</code>) into an {@link AggregateRel} on top  * of a non-distinct {@link UnionRel} (<code>all</code> =<code>true</code>).  */
+comment|/**  * Planner rule that translates a distinct  * {@link org.apache.calcite.rel.logical.LogicalUnion}  * (<code>all</code> =<code>false</code>)  * into an {@link org.apache.calcite.rel.logical.LogicalAggregate}  * on top of a non-distinct {@link org.apache.calcite.rel.logical.LogicalUnion}  * (<code>all</code> =<code>true</code>).  */
 end_comment
 
 begin_class
@@ -70,7 +106,7 @@ name|super
 argument_list|(
 name|operand
 argument_list|(
-name|UnionRel
+name|LogicalUnion
 operator|.
 name|class
 argument_list|,
@@ -89,7 +125,7 @@ name|RelOptRuleCall
 name|call
 parameter_list|)
 block|{
-name|UnionRel
+name|LogicalUnion
 name|union
 init|=
 name|call
@@ -109,11 +145,11 @@ block|{
 return|return;
 comment|// nothing to do
 block|}
-name|UnionRel
+name|LogicalUnion
 name|unionAll
 init|=
 operator|new
-name|UnionRel
+name|LogicalUnion
 argument_list|(
 name|union
 operator|.

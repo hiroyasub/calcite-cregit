@@ -7,9 +7,13 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|reltype
+name|calcite
+operator|.
+name|rel
+operator|.
+name|type
 package|;
 end_package
 
@@ -24,7 +28,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * RelDataTypeField represents the definition of a field in a structured {@link  * RelDataType}.  *  *<p>Extends the {@link java.util.Map.Entry} interface to allow convenient  * inter-operation with Java collections classes. In any implementation of this  * interface, {@link #getKey()} must be equivalent to {@link #getName()}  * and {@link #getValue()} must be equivalent to {@link #getType()}.  */
+comment|/**  * RelDataTypeField represents the definition of a field in a structured  * {@link RelDataType}.  *  *<p>Extends the {@link java.util.Map.Entry} interface to allow convenient  * inter-operation with Java collections classes. In any implementation of this  * interface, {@link #getKey()} must be equivalent to {@link #getName()}  * and {@link #getValue()} must be equivalent to {@link #getType()}.  */
 end_comment
 
 begin_interface

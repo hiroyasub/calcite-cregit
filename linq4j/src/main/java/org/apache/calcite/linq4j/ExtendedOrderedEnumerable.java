@@ -5,9 +5,11 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
+operator|.
+name|calcite
 operator|.
 name|linq4j
 package|;
@@ -15,9 +17,11 @@ end_package
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
+operator|.
+name|calcite
 operator|.
 name|linq4j
 operator|.
@@ -54,7 +58,7 @@ argument_list|<
 name|T
 argument_list|>
 block|{
-comment|/**    * Performs a subsequent ordering of the elements in an    * {@link OrderedEnumerable} according to a key, using a specified    * comparator.    *    *<p>The functionality provided by this method is like that provided by    * {@link #thenBy(net.hydromatic.linq4j.function.Function1, java.util.Comparator) thenBy}    * or {@link #thenByDescending(net.hydromatic.linq4j.function.Function1, java.util.Comparator) thenByDescending},    * depending on whether descending is true or false. They both perform a    * subordinate ordering of an already sorted sequence of type    * {@link OrderedEnumerable}.</p>    */
+comment|/**    * Performs a subsequent ordering of the elements in an    * {@link OrderedEnumerable} according to a key, using a specified    * comparator.    *    *<p>The functionality provided by this method is like that provided by    * {@link #thenBy(org.apache.calcite.linq4j.function.Function1, java.util.Comparator) thenBy}    * or    * {@link #thenByDescending(org.apache.calcite.linq4j.function.Function1, java.util.Comparator) thenByDescending},    * depending on whether descending is true or false. They both perform a    * subordinate ordering of an already sorted sequence of type    * {@link OrderedEnumerable}.</p>    */
 parameter_list|<
 name|TKey
 parameter_list|>

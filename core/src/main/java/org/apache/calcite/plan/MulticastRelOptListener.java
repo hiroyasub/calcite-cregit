@@ -7,9 +7,11 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|relopt
+name|calcite
+operator|.
+name|plan
 package|;
 end_package
 
@@ -19,7 +21,17 @@ name|java
 operator|.
 name|util
 operator|.
-name|*
+name|ArrayList
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
 import|;
 end_import
 

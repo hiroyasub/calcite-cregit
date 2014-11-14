@@ -4,20 +4,20 @@ comment|/*  * Licensed to the Apache Software Foundation (ASF) under one or more
 end_comment
 
 begin_comment
-comment|/**  * Optiq-specific classes for implementation of regular and window aggregates.  */
+comment|/**  * Calcite-specific classes for implementation of regular and window aggregates.  */
 end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
-name|rules
+name|adapter
 operator|.
-name|java
+name|enumerable
 operator|.
 name|impl
 package|;

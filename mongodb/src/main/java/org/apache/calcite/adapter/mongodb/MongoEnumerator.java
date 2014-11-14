@@ -5,13 +5,13 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
-name|impl
+name|adapter
 operator|.
 name|mongodb
 package|;
@@ -19,9 +19,11 @@ end_package
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
+operator|.
+name|calcite
 operator|.
 name|linq4j
 operator|.
@@ -31,9 +33,11 @@ end_import
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
+operator|.
+name|calcite
 operator|.
 name|linq4j
 operator|.
@@ -47,9 +51,11 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|util14
+name|calcite
+operator|.
+name|util
 operator|.
 name|DateTimeUtil
 import|;
@@ -61,7 +67,17 @@ name|com
 operator|.
 name|mongodb
 operator|.
-name|*
+name|DBCursor
+import|;
+end_import
+
+begin_import
+import|import
+name|com
+operator|.
+name|mongodb
+operator|.
+name|DBObject
 import|;
 end_import
 
@@ -71,7 +87,37 @@ name|java
 operator|.
 name|util
 operator|.
-name|*
+name|Date
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Iterator
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Map
 import|;
 end_import
 

@@ -5,34 +5,36 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
-name|rules
+name|adapter
 operator|.
-name|java
+name|enumerable
 package|;
 end_package
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
+operator|.
+name|calcite
 operator|.
 name|linq4j
 operator|.
-name|expressions
+name|tree
 operator|.
 name|Expression
 import|;
 end_import
 
 begin_comment
-comment|/**  * Provides information on the current window.  *  *<p>All the indexes are ready to be used in  * {@link WinAggResultContext#arguments(net.hydromatic.linq4j.expressions.Expression)},  * {@link WinAggFrameResultContext#rowTranslator(net.hydromatic.linq4j.expressions.Expression)}  * and similar methods.  */
+comment|/**  * Provides information on the current window.  *  *<p>All the indexes are ready to be used in  * {@link WinAggResultContext#arguments(org.apache.calcite.linq4j.tree.Expression)},  * {@link WinAggFrameResultContext#rowTranslator(org.apache.calcite.linq4j.tree.Expression)}  * and similar methods.  */
 end_comment
 
 begin_interface

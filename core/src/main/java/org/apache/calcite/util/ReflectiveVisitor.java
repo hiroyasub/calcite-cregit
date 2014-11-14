@@ -7,14 +7,16 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|util
 package|;
 end_package
 
 begin_comment
-comment|/**  * Object which can be a target for a reflective visitation (see {@link  * ReflectUtil#invokeVisitor(ReflectiveVisitor, Object, Class, String)}.  *  *<p>This is a tagging interface: it has no methods, and is not even required  * in order to use reflective visitation, but serves to advise users of the  * class of the intended use of the class and refer them to auxilliary classes.  */
+comment|/**  * Object which can be a target for a reflective visitation (see  * {@link ReflectUtil#invokeVisitor(ReflectiveVisitor, Object, Class, String)}.  *  *<p>This is a tagging interface: it has no methods, and is not even required  * in order to use reflective visitation, but serves to advise users of the  * class of the intended use of the class and refer them to auxilliary classes.  */
 end_comment
 
 begin_interface

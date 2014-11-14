@@ -7,14 +7,16 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 package|;
 end_package
 
 begin_comment
-comment|/**  * A<code>RelVisitor</code> is a Visitor role in the {@link  * org.eigenbase.util.Glossary#VISITOR_PATTERN visitor pattern} and visits {@link  * RelNode} objects as the role of Element. Other components in the pattern:  * {@link RelNode#childrenAccept(RelVisitor)}.  */
+comment|/**  * A<code>RelVisitor</code> is a Visitor role in the  * {@link org.apache.calcite.util.Glossary#VISITOR_PATTERN visitor pattern} and  * visits {@link RelNode} objects as the role of Element. Other components in  * the pattern: {@link RelNode#childrenAccept(RelVisitor)}.  */
 end_comment
 
 begin_class

@@ -5,11 +5,11 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
 name|test
 package|;
@@ -17,9 +17,11 @@ end_package
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
+operator|.
+name|calcite
 operator|.
 name|linq4j
 operator|.
@@ -31,11 +33,41 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|util
 operator|.
-name|*
+name|Bug
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|Pair
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|Util
 import|;
 end_import
 
@@ -101,7 +133,27 @@ name|org
 operator|.
 name|junit
 operator|.
-name|*
+name|Assert
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|Ignore
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|Test
 import|;
 end_import
 
@@ -131,7 +183,17 @@ name|java
 operator|.
 name|util
 operator|.
-name|*
+name|Collections
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
 import|;
 end_import
 
@@ -160,7 +222,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Tests for the {@code net.hydromatic.optiq.impl.mongodb} package.  *  *<p>Before calling this test, you need to populate MongoDB with the "zips"  * data set (as described in HOWTO.md)  * and "foodmart" data set, as follows:</p>  *  *<blockquote><code>  * JAR=~/.m2/repository/pentaho/mondrian-data-foodmart-json/  * 0.3/mondrian-data-foodmart-json-0.3.jar<br>  * mkdir /tmp/foodmart<br>  * cd /tmp/foodmart<br>  * jar xvf $JAR<br>  * for i in *.json; do<br>  *&nbsp;&nbsp;mongoimport --db foodmart --collection ${i/.json/} --file $i<br>  * done<br>  *</code></blockquote>  */
+comment|/**  * Tests for the {@code org.apache.calcite.adapter.mongodb} package.  *  *<p>Before calling this test, you need to populate MongoDB with the "zips"  * data set (as described in HOWTO.md)  * and "foodmart" data set, as follows:</p>  *  *<blockquote><code>  * JAR=~/.m2/repository/pentaho/mondrian-data-foodmart-json/  * 0.3/mondrian-data-foodmart-json-0.3.jar<br>  * mkdir /tmp/foodmart<br>  * cd /tmp/foodmart<br>  * jar xvf $JAR<br>  * for i in *.json; do<br>  *&nbsp;&nbsp;mongoimport --db foodmart --collection ${i/.json/} --file $i<br>  * done<br>  *</code></blockquote>  */
 end_comment
 
 begin_class
@@ -180,7 +242,7 @@ literal|"       type: 'custom',\n"
 operator|+
 literal|"       name: '_foodmart',\n"
 operator|+
-literal|"       factory: 'net.hydromatic.optiq.impl.mongodb.MongoSchemaFactory',\n"
+literal|"       factory: 'org.apache.calcite.adapter.mongodb.MongoSchemaFactory',\n"
 operator|+
 literal|"       operand: {\n"
 operator|+
@@ -416,7 +478,7 @@ block|}
 block|}
 return|;
 block|}
-comment|/** Similar to {@link OptiqAssert#checkResultUnordered}, but filters strings    * before comparing them. */
+comment|/** Similar to {@link CalciteAssert#checkResultUnordered}, but filters strings    * before comparing them. */
 specifier|static
 name|Function
 argument_list|<
@@ -485,7 +547,7 @@ operator|.
 name|newArrayList
 argument_list|()
 decl_stmt|;
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|toStringList
 argument_list|(
@@ -592,7 +654,7 @@ name|void
 name|testSort
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
@@ -622,9 +684,9 @@ name|explainContains
 argument_list|(
 literal|"PLAN=MongoToEnumerableConverter\n"
 operator|+
-literal|"  MongoSortRel(sort0=[$4], dir0=[ASC])\n"
+literal|"  MongoSort(sort0=[$4], dir0=[ASC])\n"
 operator|+
-literal|"    MongoProjectRel(CITY=[CAST(ITEM($0, 'city')):VARCHAR(20) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\"], LONGITUDE=[CAST(ITEM(ITEM($0, 'loc'), 0)):FLOAT NOT NULL], LATITUDE=[CAST(ITEM(ITEM($0, 'loc'), 1)):FLOAT NOT NULL], POP=[CAST(ITEM($0, 'pop')):INTEGER], STATE=[CAST(ITEM($0, 'state')):VARCHAR(2) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\"], ID=[CAST(ITEM($0, '_id')):VARCHAR(5) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\"])\n"
+literal|"    MongoProject(CITY=[CAST(ITEM($0, 'city')):VARCHAR(20) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\"], LONGITUDE=[CAST(ITEM(ITEM($0, 'loc'), 0)):FLOAT NOT NULL], LATITUDE=[CAST(ITEM(ITEM($0, 'loc'), 1)):FLOAT NOT NULL], POP=[CAST(ITEM($0, 'pop')):INTEGER], STATE=[CAST(ITEM($0, 'state')):VARCHAR(2) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\"], ID=[CAST(ITEM($0, '_id')):VARCHAR(5) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\"])\n"
 operator|+
 literal|"      MongoTableScan(table=[[mongo_raw, zips]])"
 argument_list|)
@@ -637,7 +699,7 @@ name|void
 name|testSortLimit
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
@@ -691,7 +753,7 @@ name|void
 name|testOffsetLimit
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
@@ -737,7 +799,7 @@ name|void
 name|testLimit
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
@@ -791,7 +853,7 @@ operator|.
 name|CALCITE_194_FIXED
 argument_list|)
 expr_stmt|;
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
@@ -818,6 +880,8 @@ argument_list|)
 operator|.
 name|returns
 argument_list|(
+literal|""
+operator|+
 literal|"CITY=SPRINGFIELD; LONGITUDE=null; LATITUDE=null; POP=2184; STATE=SC; ID=29146\n"
 operator|+
 literal|"CITY=SPRINGFIELD; LONGITUDE=null; LATITUDE=null; POP=16811; STATE=VA; ID=22150\n"
@@ -859,11 +923,11 @@ name|explainContains
 argument_list|(
 literal|"PLAN=MongoToEnumerableConverter\n"
 operator|+
-literal|"  MongoSortRel(sort0=[$4], dir0=[ASC])\n"
+literal|"  MongoSort(sort0=[$4], dir0=[ASC])\n"
 operator|+
-literal|"    MongoProjectRel(CITY=[CAST(ITEM($0, 'city')):VARCHAR(20) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\"], LONGITUDE=[CAST(ITEM(ITEM($0, 'loc'), 0)):FLOAT NOT NULL], LATITUDE=[CAST(ITEM(ITEM($0, 'loc'), 1)):FLOAT NOT NULL], POP=[CAST(ITEM($0, 'pop')):INTEGER], STATE=[CAST(ITEM($0, 'state')):VARCHAR(2) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\"], ID=[CAST(ITEM($0, '_id')):VARCHAR(5) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\"])\n"
+literal|"    MongoProject(CITY=[CAST(ITEM($0, 'city')):VARCHAR(20) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\"], LONGITUDE=[CAST(ITEM(ITEM($0, 'loc'), 0)):FLOAT NOT NULL], LATITUDE=[CAST(ITEM(ITEM($0, 'loc'), 1)):FLOAT NOT NULL], POP=[CAST(ITEM($0, 'pop')):INTEGER], STATE=[CAST(ITEM($0, 'state')):VARCHAR(2) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\"], ID=[CAST(ITEM($0, '_id')):VARCHAR(5) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\"])\n"
 operator|+
-literal|"      MongoFilterRel(condition=[AND(=(CAST(ITEM($0, 'city')):VARCHAR(20) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\", 'SPRINGFIELD'),>=(CAST(ITEM($0, '_id')):VARCHAR(5) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\", '20000'),<=(CAST(ITEM($0, '_id')):VARCHAR(5) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\", '30000'))])\n"
+literal|"      MongoFilter(condition=[AND(=(CAST(ITEM($0, 'city')):VARCHAR(20) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\", 'SPRINGFIELD'),>=(CAST(ITEM($0, '_id')):VARCHAR(5) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\", '20000'),<=(CAST(ITEM($0, '_id')):VARCHAR(5) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\", '30000'))])\n"
 operator|+
 literal|"        MongoTableScan(table=[[mongo_raw, zips]])"
 argument_list|)
@@ -876,7 +940,7 @@ name|void
 name|testFilterSortDesc
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
@@ -908,6 +972,8 @@ argument_list|)
 operator|.
 name|returns
 argument_list|(
+literal|""
+operator|+
 literal|"CITY=SHERIDAN; LONGITUDE=null; LATITUDE=null; POP=20025; STATE=WY; ID=82801\n"
 operator|+
 literal|"CITY=MOUNTLAKE TERRAC; LONGITUDE=null; LATITUDE=null; POP=20059; STATE=WA; ID=98043\n"
@@ -925,7 +991,7 @@ name|void
 name|testUnionPlan
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
@@ -956,13 +1022,13 @@ literal|"PLAN=EnumerableUnionRel(all=[true])\n"
 operator|+
 literal|"  MongoToEnumerableConverter\n"
 operator|+
-literal|"    MongoProjectRel(product_id=[CAST(ITEM($0, 'product_id')):DOUBLE])\n"
+literal|"    MongoProject(product_id=[CAST(ITEM($0, 'product_id')):DOUBLE])\n"
 operator|+
 literal|"      MongoTableScan(table=[[_foodmart, sales_fact_1997]])\n"
 operator|+
 literal|"  MongoToEnumerableConverter\n"
 operator|+
-literal|"    MongoProjectRel(product_id=[CAST(ITEM($0, 'product_id')):DOUBLE])\n"
+literal|"    MongoProject(product_id=[CAST(ITEM($0, 'product_id')):DOUBLE])\n"
 operator|+
 literal|"      MongoTableScan(table=[[_foodmart, sales_fact_1998]])\n"
 argument_list|)
@@ -990,7 +1056,7 @@ name|void
 name|testFilterUnionPlan
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
@@ -1031,7 +1097,7 @@ name|void
 name|testFilterRedundant
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
@@ -1081,7 +1147,7 @@ name|void
 name|testSelectWhere
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
@@ -1106,9 +1172,9 @@ name|explainContains
 argument_list|(
 literal|"PLAN=MongoToEnumerableConverter\n"
 operator|+
-literal|"  MongoProjectRel(warehouse_id=[CAST(ITEM($0, 'warehouse_id')):DOUBLE], warehouse_state_province=[CAST(ITEM($0, 'warehouse_state_province')):VARCHAR(20) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\"])\n"
+literal|"  MongoProject(warehouse_id=[CAST(ITEM($0, 'warehouse_id')):DOUBLE], warehouse_state_province=[CAST(ITEM($0, 'warehouse_state_province')):VARCHAR(20) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\"])\n"
 operator|+
-literal|"    MongoFilterRel(condition=[=(CAST(ITEM($0, 'warehouse_state_province')):VARCHAR(20) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\", 'CA')])\n"
+literal|"    MongoFilter(condition=[=(CAST(ITEM($0, 'warehouse_state_province')):VARCHAR(20) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\", 'CA')])\n"
 operator|+
 literal|"      MongoTableScan(table=[[_foodmart, warehouse]])"
 argument_list|)
@@ -1155,7 +1221,7 @@ name|void
 name|testInPlan
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
@@ -1277,7 +1343,7 @@ name|void
 name|testZips
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
@@ -1311,7 +1377,7 @@ name|void
 name|testCountGroupByEmpty
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
@@ -1341,9 +1407,9 @@ name|explainContains
 argument_list|(
 literal|"PLAN=MongoToEnumerableConverter\n"
 operator|+
-literal|"  MongoAggregateRel(group=[{}], EXPR$0=[COUNT()])\n"
+literal|"  MongoAggregate(group=[{}], EXPR$0=[COUNT()])\n"
 operator|+
-literal|"    MongoProjectRel(DUMMY=[0])\n"
+literal|"    MongoProject(DUMMY=[0])\n"
 operator|+
 literal|"      MongoTableScan(table=[[mongo_raw, zips]])"
 argument_list|)
@@ -1366,7 +1432,7 @@ name|void
 name|testGroupByOneColumnNotProjected
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
@@ -1421,7 +1487,7 @@ name|void
 name|testGroupByOneColumn
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
@@ -1475,7 +1541,7 @@ name|testGroupByOneColumnReversed
 parameter_list|()
 block|{
 comment|// Note extra $project compared to testGroupByOneColumn.
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
@@ -1530,7 +1596,7 @@ name|void
 name|testGroupByHaving
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
@@ -1601,7 +1667,7 @@ name|void
 name|testGroupByHaving2
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
@@ -1671,7 +1737,7 @@ name|void
 name|testGroupByMinMaxSum
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
@@ -1716,7 +1782,7 @@ name|void
 name|testGroupComposite
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
@@ -1772,7 +1838,7 @@ name|void
 name|testDistinctCount
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
@@ -1850,7 +1916,7 @@ name|void
 name|testDistinctCountOrderBy
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
@@ -1918,7 +1984,7 @@ name|void
 name|testProject
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
@@ -1967,7 +2033,7 @@ name|void
 name|testFilter
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
@@ -2004,9 +2070,9 @@ name|explainContains
 argument_list|(
 literal|"PLAN=MongoToEnumerableConverter\n"
 operator|+
-literal|"  MongoProjectRel(STATE=[CAST(ITEM($0, 'state')):VARCHAR(2) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\"], CITY=[CAST(ITEM($0, 'city')):VARCHAR(20) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\"])\n"
+literal|"  MongoProject(STATE=[CAST(ITEM($0, 'state')):VARCHAR(2) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\"], CITY=[CAST(ITEM($0, 'city')):VARCHAR(20) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\"])\n"
 operator|+
-literal|"    MongoFilterRel(condition=[=(CAST(ITEM($0, 'state')):VARCHAR(2) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\", 'CA')])\n"
+literal|"    MongoFilter(condition=[=(CAST(ITEM($0, 'state')):VARCHAR(2) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\", 'CA')])\n"
 operator|+
 literal|"      MongoTableScan(table=[[mongo_raw, zips]])"
 argument_list|)
@@ -2020,7 +2086,7 @@ name|void
 name|testFilterReversed
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
@@ -2053,7 +2119,7 @@ operator|+
 literal|"STATE=WV; CITY=ATHENS\n"
 argument_list|)
 expr_stmt|;
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
@@ -2152,12 +2218,12 @@ block|{
 continue|continue;
 block|}
 specifier|final
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|AssertQuery
 name|query1
 init|=
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
@@ -2238,7 +2304,7 @@ comment|//     "date" : ISODate("2012-09-05T07:00:00Z"),
 comment|//     "value" : 1231,
 comment|//     "ownerId" : "531e7789e4b0853ddb861313"
 comment|//   } )
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
@@ -2265,7 +2331,7 @@ literal|"       type: 'custom',\n"
 operator|+
 literal|"       name: 'test',\n"
 operator|+
-literal|"       factory: 'net.hydromatic.optiq.impl.mongodb.MongoSchemaFactory',\n"
+literal|"       factory: 'org.apache.calcite.adapter.mongodb.MongoSchemaFactory',\n"
 operator|+
 literal|"       operand: {\n"
 operator|+

@@ -5,27 +5,29 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
-name|rules
+name|adapter
 operator|.
-name|java
+name|enumerable
 package|;
 end_package
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
+operator|.
+name|calcite
 operator|.
 name|linq4j
 operator|.
-name|expressions
+name|tree
 operator|.
 name|BlockStatement
 import|;
@@ -35,11 +37,13 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|rel
+name|calcite
 operator|.
-name|ProjectRelBase
+name|plan
+operator|.
+name|RelOptCluster
 import|;
 end_import
 
@@ -47,19 +51,9 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|rel
-operator|.
-name|RelFactories
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
+name|calcite
 operator|.
 name|rel
 operator|.
@@ -71,11 +65,15 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|relopt
+name|calcite
 operator|.
-name|RelOptCluster
+name|rel
+operator|.
+name|core
+operator|.
+name|Project
 import|;
 end_import
 
@@ -83,9 +81,29 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|reltype
+name|calcite
+operator|.
+name|rel
+operator|.
+name|core
+operator|.
+name|RelFactories
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|type
 operator|.
 name|RelDataType
 import|;
@@ -95,7 +113,9 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rex
 operator|.
@@ -107,7 +127,9 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rex
 operator|.
@@ -119,7 +141,9 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
@@ -140,7 +164,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A relational expression of one of the  * {@link net.hydromatic.optiq.rules.java.EnumerableConvention} calling  * conventions.  */
+comment|/**  * A relational expression of one of the  * {@link org.apache.calcite.adapter.enumerable.EnumerableConvention} calling  * conventions.  */
 end_comment
 
 begin_interface
@@ -174,9 +198,7 @@ parameter_list|)
 block|{
 return|return
 operator|new
-name|JavaRules
-operator|.
-name|EnumerableFilterRel
+name|EnumerableFilter
 argument_list|(
 name|child
 operator|.
@@ -273,9 +295,7 @@ argument_list|)
 decl_stmt|;
 return|return
 operator|new
-name|JavaRules
-operator|.
-name|EnumerableProjectRel
+name|EnumerableProject
 argument_list|(
 name|cluster
 argument_list|,
@@ -290,7 +310,7 @@ name|exprs
 argument_list|,
 name|rowType
 argument_list|,
-name|ProjectRelBase
+name|Project
 operator|.
 name|Flags
 operator|.

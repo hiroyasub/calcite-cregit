@@ -7,11 +7,43 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rex
 package|;
 end_package
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|type
+operator|.
+name|RelDataType
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|SqlKind
+import|;
+end_import
 
 begin_import
 import|import
@@ -23,32 +55,8 @@ name|Collection
 import|;
 end_import
 
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
-name|reltype
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
-name|sql
-operator|.
-name|SqlKind
-import|;
-end_import
-
 begin_comment
-comment|/**  * Row expression.  *  *<p>Every row-expression has a type. (Compare with {@link  * org.eigenbase.sql.SqlNode}, which is created before validation, and therefore  * types may not be available.)</p>  *  *<p>Some common row-expressions are: {@link RexLiteral} (constant value),  * {@link RexVariable} (variable), {@link RexCall} (call to operator with  * operands). Expressions are generally created using a {@link RexBuilder}  * factory.</p>  *  *<p>All sub-classes of RexNode are immutable.</p>  */
+comment|/**  * Row expression.  *  *<p>Every row-expression has a type.  * (Compare with {@link org.apache.calcite.sql.SqlNode}, which is created before  * validation, and therefore types may not be available.)  *  *<p>Some common row-expressions are: {@link RexLiteral} (constant value),  * {@link RexVariable} (variable), {@link RexCall} (call to operator with  * operands). Expressions are generally created using a {@link RexBuilder}  * factory.</p>  *  *<p>All sub-classes of RexNode are immutable.</p>  */
 end_comment
 
 begin_class
@@ -147,7 +155,7 @@ return|return
 name|digest
 return|;
 block|}
-comment|/**    * Accepts a visitor, dispatching to the right overloaded {@link    * RexVisitor#visitInputRef visitXxx} method.    *    *<p>Also see {@link RexProgram#apply(RexVisitor, java.util.List, RexNode)},    * which applies a visitor to several expressions simultaneously.    */
+comment|/**    * Accepts a visitor, dispatching to the right overloaded    * {@link RexVisitor#visitInputRef visitXxx} method.    *    *<p>Also see {@link RexProgram#apply(RexVisitor, java.util.List, RexNode)},    * which applies a visitor to several expressions simultaneously.    */
 specifier|public
 specifier|abstract
 parameter_list|<

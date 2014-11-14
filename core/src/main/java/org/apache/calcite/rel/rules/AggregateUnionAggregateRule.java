@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
@@ -17,11 +19,15 @@ end_package
 
 begin_import
 import|import
-name|java
+name|org
 operator|.
-name|util
+name|apache
 operator|.
-name|List
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptRule
 import|;
 end_import
 
@@ -29,11 +35,27 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptRuleCall
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
-name|*
+name|RelNode
 import|;
 end_import
 
@@ -41,11 +63,31 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|relopt
+name|calcite
 operator|.
-name|*
+name|rel
+operator|.
+name|logical
+operator|.
+name|LogicalAggregate
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|logical
+operator|.
+name|LogicalUnion
 import|;
 end_import
 
@@ -63,44 +105,54 @@ name|ImmutableList
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
+import|;
+end_import
+
 begin_comment
-comment|/**  * PullUpAggregateAboveUnionRule implements the rule for pulling {@link  * AggregateRel}s beneath a {@link UnionRel} so two {@link AggregateRel}s that  * are used to remove duplicates can be combined into a single {@link  * AggregateRel}.  *  *<p>This rule only handles cases where the {@link UnionRel}s still have only  * two inputs.  */
+comment|/**  * Planner rule that matches  * {@link org.apache.calcite.rel.logical.LogicalAggregate}s beneath a  * {@link org.apache.calcite.rel.logical.LogicalUnion} and pulls them up, so  * that a single  * {@link org.apache.calcite.rel.logical.LogicalAggregate} removes duplicates.  *  *<p>This rule only handles cases where the  * {@link org.apache.calcite.rel.logical.LogicalUnion}s  * still have only two inputs.  */
 end_comment
 
 begin_class
 specifier|public
 class|class
-name|PullUpAggregateAboveUnionRule
+name|AggregateUnionAggregateRule
 extends|extends
 name|RelOptRule
 block|{
 specifier|public
 specifier|static
 specifier|final
-name|PullUpAggregateAboveUnionRule
+name|AggregateUnionAggregateRule
 name|INSTANCE
 init|=
 operator|new
-name|PullUpAggregateAboveUnionRule
+name|AggregateUnionAggregateRule
 argument_list|()
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a PullUpAggregateAboveUnionRule.    */
+comment|/**    * Creates a AggregateUnionAggregateRule.    */
 specifier|private
-name|PullUpAggregateAboveUnionRule
+name|AggregateUnionAggregateRule
 parameter_list|()
 block|{
 name|super
 argument_list|(
 name|operand
 argument_list|(
-name|AggregateRel
+name|LogicalAggregate
 operator|.
 name|class
 argument_list|,
 name|operand
 argument_list|(
-name|UnionRel
+name|LogicalUnion
 operator|.
 name|class
 argument_list|,
@@ -138,8 +190,8 @@ name|RelOptRuleCall
 name|call
 parameter_list|)
 block|{
-name|UnionRel
-name|unionRel
+name|LogicalUnion
+name|union
 init|=
 name|call
 operator|.
@@ -152,14 +204,14 @@ comment|// If distincts haven't been removed yet, defer invoking this rule
 if|if
 condition|(
 operator|!
-name|unionRel
+name|union
 operator|.
 name|all
 condition|)
 block|{
 return|return;
 block|}
-name|AggregateRel
+name|LogicalAggregate
 name|topAggRel
 init|=
 name|call
@@ -169,11 +221,11 @@ argument_list|(
 literal|0
 argument_list|)
 decl_stmt|;
-name|AggregateRel
+name|LogicalAggregate
 name|bottomAggRel
 decl_stmt|;
-comment|// We want to apply this rule on the pattern where the AggregateRel
-comment|// is the second input into the UnionRel first.  Hence, that's why the
+comment|// We want to apply this rule on the pattern where the LogicalAggregate
+comment|// is the second input into the Union first.  Hence, that's why the
 comment|// rule pattern matches on generic RelNodes rather than explicit
 comment|// UnionRels.  By doing so, and firing this rule in a bottom-up order,
 comment|// it allows us to only specify a single pattern for this rule.
@@ -192,7 +244,7 @@ argument_list|(
 literal|3
 argument_list|)
 operator|instanceof
-name|AggregateRel
+name|LogicalAggregate
 condition|)
 block|{
 name|bottomAggRel
@@ -240,7 +292,7 @@ argument_list|(
 literal|2
 argument_list|)
 operator|instanceof
-name|AggregateRel
+name|LogicalAggregate
 condition|)
 block|{
 name|bottomAggRel
@@ -307,13 +359,13 @@ condition|)
 block|{
 return|return;
 block|}
-name|UnionRel
-name|newUnionRel
+name|LogicalUnion
+name|newUnion
 init|=
 operator|new
-name|UnionRel
+name|LogicalUnion
 argument_list|(
-name|unionRel
+name|union
 operator|.
 name|getCluster
 argument_list|()
@@ -323,18 +375,18 @@ argument_list|,
 literal|true
 argument_list|)
 decl_stmt|;
-name|AggregateRel
+name|LogicalAggregate
 name|newAggRel
 init|=
 operator|new
-name|AggregateRel
+name|LogicalAggregate
 argument_list|(
 name|topAggRel
 operator|.
 name|getCluster
 argument_list|()
 argument_list|,
-name|newUnionRel
+name|newUnion
 argument_list|,
 name|topAggRel
 operator|.
@@ -359,7 +411,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End PullUpAggregateAboveUnionRule.java
+comment|// End AggregateUnionAggregateRule.java
 end_comment
 
 end_unit

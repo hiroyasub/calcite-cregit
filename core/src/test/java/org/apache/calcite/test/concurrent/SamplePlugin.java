@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|test
 operator|.
@@ -76,7 +78,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Sample mtsql plugin. To use add at start of script  * "@plugin org.eigenbase.test.concurrent.SamplePlugin".  After doing a prepare  * you can then do "@describeResultSet" to show columns returned by query.  */
+comment|/**  * Sample mtsql plugin.  *  *<p>To use add at start of script "@plugin  * org.apache.calcite.test.concurrent.SamplePlugin".  After doing a prepare you  * can then do "@describeResultSet" to show columns returned by query.  */
 end_comment
 
 begin_class
@@ -150,6 +152,7 @@ block|}
 argument_list|)
 return|;
 block|}
+comment|/** Command that describes a result set. */
 specifier|static
 class|class
 name|DescribeResultSet

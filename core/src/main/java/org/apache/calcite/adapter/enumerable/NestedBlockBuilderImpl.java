@@ -5,27 +5,29 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
-name|rules
+name|adapter
 operator|.
-name|java
+name|enumerable
 package|;
 end_package
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
+operator|.
+name|calcite
 operator|.
 name|linq4j
 operator|.
-name|expressions
+name|tree
 operator|.
 name|BlockBuilder
 import|;
@@ -35,7 +37,9 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rex
 operator|.
@@ -49,12 +53,52 @@ name|java
 operator|.
 name|util
 operator|.
-name|*
+name|ArrayList
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Collections
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|HashMap
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Map
 import|;
 end_import
 
 begin_comment
-comment|/**  * Allows to build nested code blocks with tracking of current context and  * the nullability of particular {@link org.eigenbase.rex.RexNode} expressions.  * @see net.hydromatic.optiq.rules.java.StrictAggImplementor#implementAdd(AggContext, AggAddContext)  */
+comment|/**  * Allows to build nested code blocks with tracking of current context and the  * nullability of particular {@link org.apache.calcite.rex.RexNode} expressions.  *  * @see org.apache.calcite.adapter.enumerable.StrictAggImplementor#implementAdd(AggContext, AggAddContext)  */
 end_comment
 
 begin_class
@@ -398,7 +442,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End NestedBlockBuilder.java
+comment|// End NestedBlockBuilderImpl.java
 end_comment
 
 end_unit

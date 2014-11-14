@@ -7,9 +7,13 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
+operator|.
+name|logical
 package|;
 end_package
 
@@ -17,11 +21,13 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|relopt
+name|calcite
 operator|.
-name|*
+name|plan
+operator|.
+name|Convention
 import|;
 end_import
 
@@ -29,30 +35,118 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptCluster
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelTraitSet
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|RelInput
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|RelNode
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|RelShuttle
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|core
+operator|.
+name|Filter
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rex
 operator|.
-name|*
+name|RexNode
 import|;
 end_import
 
 begin_comment
-comment|/**  * Relational expression that iterates over its input  * and returns elements for which<code>condition</code> evaluates to  *<code>true</code>.  *  *<p>If the condition allows nulls, then a null value is treated the same as  * false.</p>  */
+comment|/**  * Sub-class of {@link org.apache.calcite.rel.core.Filter}  * not targeted at any particular engine or calling convention.  */
 end_comment
 
 begin_class
 specifier|public
 specifier|final
 class|class
-name|FilterRel
+name|LogicalFilter
 extends|extends
-name|FilterRelBase
+name|Filter
 block|{
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a filter.    *    * @param cluster   {@link RelOptCluster}  this relational expression belongs    *                  to    * @param child     input relational expression    * @param condition boolean expression which determines whether a row is    *                  allowed to pass    */
+comment|/**    * Creates a LogicalFilter.    *    * @param cluster   Cluster that this relational expression belongs to    * @param child     Input relational expression    * @param condition Boolean expression which determines whether a row is    *                  allowed to pass    */
 specifier|public
-name|FilterRel
+name|LogicalFilter
 parameter_list|(
 name|RelOptCluster
 name|cluster
@@ -83,9 +177,9 @@ name|condition
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Creates a FilterRel by parsing serialized output.    */
+comment|/**    * Creates a LogicalFilter by parsing serialized output.    */
 specifier|public
-name|FilterRel
+name|LogicalFilter
 parameter_list|(
 name|RelInput
 name|input
@@ -99,7 +193,7 @@ expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
 specifier|public
-name|FilterRel
+name|LogicalFilter
 name|copy
 parameter_list|(
 name|RelTraitSet
@@ -124,7 +218,7 @@ argument_list|)
 assert|;
 return|return
 operator|new
-name|FilterRel
+name|LogicalFilter
 argument_list|(
 name|getCluster
 argument_list|()
@@ -158,7 +252,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End FilterRel.java
+comment|// End LogicalFilter.java
 end_comment
 
 end_unit

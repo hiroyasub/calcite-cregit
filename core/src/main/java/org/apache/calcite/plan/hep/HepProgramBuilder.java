@@ -7,9 +7,11 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|relopt
+name|calcite
+operator|.
+name|plan
 operator|.
 name|hep
 package|;
@@ -17,37 +19,73 @@ end_package
 
 begin_import
 import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|CommonRelSubExprRule
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptPlanner
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptRule
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
 operator|.
-name|*
+name|ArrayList
 import|;
 end_import
 
 begin_import
 import|import
-name|org
+name|java
 operator|.
-name|eigenbase
+name|util
 operator|.
-name|rel
-operator|.
-name|convert
-operator|.
-name|*
+name|Collection
 import|;
 end_import
 
 begin_import
 import|import
-name|org
+name|java
 operator|.
-name|eigenbase
+name|util
 operator|.
-name|relopt
-operator|.
-name|*
+name|List
 import|;
 end_import
 
@@ -83,7 +121,7 @@ name|BeginGroup
 name|group
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a new HepProgramBuilder with an initially empty program. The    * program under construction has an initial match order of {@link    * HepMatchOrder#ARBITRARY}, and an initial match limit of {@link    * HepProgram#MATCH_UNTIL_FIXPOINT}.    */
+comment|/**    * Creates a new HepProgramBuilder with an initially empty program. The    * program under construction has an initial match order of    * {@link HepMatchOrder#ARBITRARY}, and an initial match limit of    * {@link HepProgram#MATCH_UNTIL_FIXPOINT}.    */
 specifier|public
 name|HepProgramBuilder
 parameter_list|()
@@ -105,7 +143,7 @@ operator|=
 literal|null
 expr_stmt|;
 block|}
-comment|/**    * Adds an instruction to attempt to match any rules of a given class. The    * order in which the rules within a class will be attempted is arbitrary,    * so if more control is needed, use addRuleInstance instead.    *    *<p>Note that when this method is used, it is also necessary to add the    * actual rule objects of interest to the planner via {@link    * RelOptPlanner#addRule}. If the planner does not have any rules of the    * given class, this instruction is a nop.    *    *<p>TODO: support classification via rule annotations.    *    * @param ruleClass class of rules to fire, e.g. ConverterRule.class    */
+comment|/**    * Adds an instruction to attempt to match any rules of a given class. The    * order in which the rules within a class will be attempted is arbitrary,    * so if more control is needed, use addRuleInstance instead.    *    *<p>Note that when this method is used, it is also necessary to add the    * actual rule objects of interest to the planner via    * {@link RelOptPlanner#addRule}. If the planner does not have any    * rules of the given class, this instruction is a nop.    *    *<p>TODO: support classification via rule annotations.    *    * @param ruleClass class of rules to fire, e.g. ConverterRule.class    */
 specifier|public
 parameter_list|<
 name|R
@@ -347,7 +385,7 @@ return|return
 name|this
 return|;
 block|}
-comment|/**    * Adds an instruction to attempt to match instances of {@link    * ConverterRule}, but only where a conversion is actually required.    *    * @param guaranteed if true, use only guaranteed converters; if false, use    *                   only non-guaranteed converters    */
+comment|/**    * Adds an instruction to attempt to match instances of    * {@link org.apache.calcite.rel.convert.ConverterRule},    * but only where a conversion is actually required.    *    * @param guaranteed if true, use only guaranteed converters; if false, use    *                   only non-guaranteed converters    */
 specifier|public
 name|HepProgramBuilder
 name|addConverters

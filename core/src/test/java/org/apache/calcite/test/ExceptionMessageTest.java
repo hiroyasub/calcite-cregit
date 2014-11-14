@@ -5,11 +5,11 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
 name|test
 package|;
@@ -17,25 +17,13 @@ end_package
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
-name|SchemaPlus
-import|;
-end_import
-
-begin_import
-import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|optiq
-operator|.
-name|impl
+name|adapter
 operator|.
 name|java
 operator|.
@@ -45,15 +33,29 @@ end_import
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
 name|jdbc
 operator|.
-name|OptiqConnection
+name|CalciteConnection
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|schema
+operator|.
+name|SchemaPlus
 import|;
 end_import
 
@@ -135,7 +137,19 @@ name|hamcrest
 operator|.
 name|CoreMatchers
 operator|.
-name|*
+name|containsString
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|hamcrest
+operator|.
+name|CoreMatchers
+operator|.
+name|equalTo
 import|;
 end_import
 
@@ -147,7 +161,19 @@ name|junit
 operator|.
 name|Assert
 operator|.
-name|*
+name|assertThat
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|fail
 import|;
 end_import
 
@@ -288,14 +314,14 @@ argument_list|(
 literal|"jdbc:calcite:"
 argument_list|)
 decl_stmt|;
-name|OptiqConnection
-name|optiqConnection
+name|CalciteConnection
+name|calciteConnection
 init|=
 name|connection
 operator|.
 name|unwrap
 argument_list|(
-name|OptiqConnection
+name|CalciteConnection
 operator|.
 name|class
 argument_list|)
@@ -303,7 +329,7 @@ decl_stmt|;
 name|SchemaPlus
 name|rootSchema
 init|=
-name|optiqConnection
+name|calciteConnection
 operator|.
 name|getRootSchema
 argument_list|()
@@ -323,7 +349,7 @@ argument_list|()
 argument_list|)
 argument_list|)
 expr_stmt|;
-name|optiqConnection
+name|calciteConnection
 operator|.
 name|setSchema
 argument_list|(
@@ -334,7 +360,7 @@ name|this
 operator|.
 name|conn
 operator|=
-name|optiqConnection
+name|calciteConnection
 expr_stmt|;
 block|}
 specifier|private

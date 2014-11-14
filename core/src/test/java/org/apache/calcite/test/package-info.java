@@ -4,14 +4,16 @@ comment|/*  * Licensed to the Apache Software Foundation (ASF) under one or more
 end_comment
 
 begin_comment
-comment|/**  * Eigenbase regression tests.  */
+comment|/**  * Tests for Calcite.  */
 end_comment
 
 begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|test
 package|;

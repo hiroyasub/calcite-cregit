@@ -7,9 +7,11 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|relopt
+name|calcite
+operator|.
+name|plan
 operator|.
 name|volcano
 package|;
@@ -21,12 +23,22 @@ name|java
 operator|.
 name|util
 operator|.
-name|*
+name|Map
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Set
 import|;
 end_import
 
 begin_comment
-comment|/**  * VolcanoPlannerPhaseRuleMappingInitializer describes an inteface for  * initializing the mapping of {@link VolcanoPlannerPhase}s to sets of rule  * descriptions.  *  *<p><b>Note:</b> Rule descriptions are obtained via {@link  * org.eigenbase.relopt.RelOptRule#toString()}. By default they are the class's  * simple name (e.g. class name sans package), unless the class is an inner  * class, in which case the default is the inner class's simple name. Some rules  * explicitly provide alternate descriptions by calling the  * {@link org.eigenbase.relopt.RelOptRule#RelOptRule(org.eigenbase.relopt.RelOptRuleOperand, String)}  * constructor.  */
+comment|/**  * VolcanoPlannerPhaseRuleMappingInitializer describes an inteface for  * initializing the mapping of {@link VolcanoPlannerPhase}s to sets of rule  * descriptions.  *  *<p><b>Note:</b> Rule descriptions are obtained via  * {@link org.apache.calcite.plan.RelOptRule#toString()}. By default they are  * the class's simple name (e.g. class name sans package), unless the class is  * an inner class, in which case the default is the inner class's simple  * name. Some rules explicitly provide alternate descriptions by calling the  * {@link org.apache.calcite.plan.RelOptRule#RelOptRule(org.apache.calcite.plan.RelOptRuleOperand, String)}  * constructor.  */
 end_comment
 
 begin_interface

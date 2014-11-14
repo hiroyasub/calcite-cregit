@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 package|;
@@ -15,19 +17,11 @@ end_package
 
 begin_import
 import|import
-name|java
-operator|.
-name|util
-operator|.
-name|List
-import|;
-end_import
-
-begin_import
-import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
@@ -41,7 +35,9 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|util
 operator|.
@@ -49,8 +45,18 @@ name|ImmutableNullableList
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
+import|;
+end_import
+
 begin_comment
-comment|/**  * Parse tree node that represents an {@code ORDER BY} on a query other than a  * {@code SELECT} (e.g. {@code VALUES} or {@code UNION}).  *  *<p>It is a purely syntactic operator, and is eliminated by  * {@link org.eigenbase.sql.validate.SqlValidatorImpl#performUnconditionalRewrites}  * and replaced with the ORDER_OPERAND of SqlSelect.</p>  */
+comment|/**  * Parse tree node that represents an {@code ORDER BY} on a query other than a  * {@code SELECT} (e.g. {@code VALUES} or {@code UNION}).  *  *<p>It is a purely syntactic operator, and is eliminated by  * {@link org.apache.calcite.sql.validate.SqlValidatorImpl#performUnconditionalRewrites}  * and replaced with the ORDER_OPERAND of SqlSelect.</p>  */
 end_comment
 
 begin_class
@@ -545,7 +551,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End SqlOrderByOperator.java
+comment|// End SqlOrderBy.java
 end_comment
 
 end_unit

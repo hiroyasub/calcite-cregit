@@ -7,9 +7,11 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|relopt
+name|calcite
+operator|.
+name|plan
 package|;
 end_package
 
@@ -17,11 +19,13 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
-name|*
+name|RelNode
 import|;
 end_import
 
@@ -29,7 +33,23 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|RelVisitor
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|util
 operator|.

@@ -5,27 +5,29 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
-name|rules
+name|adapter
 operator|.
-name|java
+name|enumerable
 package|;
 end_package
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
+operator|.
+name|calcite
 operator|.
 name|linq4j
 operator|.
-name|expressions
+name|tree
 operator|.
 name|Expression
 import|;
@@ -54,7 +56,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Implements an aggregate function by generating expressions to  * initialize, add to, and get a result from, an accumulator.  *  * @see net.hydromatic.optiq.rules.java.StrictAggImplementor  * @see net.hydromatic.optiq.rules.java.StrictWinAggImplementor  * @see net.hydromatic.optiq.rules.java.RexImpTable.CountImplementor  * @see net.hydromatic.optiq.rules.java.RexImpTable.SumImplementor  */
+comment|/**  * Implements an aggregate function by generating expressions to  * initialize, add to, and get a result from, an accumulator.  *  * @see org.apache.calcite.adapter.enumerable.StrictAggImplementor  * @see org.apache.calcite.adapter.enumerable.StrictWinAggImplementor  * @see org.apache.calcite.adapter.enumerable.RexImpTable.CountImplementor  * @see org.apache.calcite.adapter.enumerable.RexImpTable.SumImplementor  */
 end_comment
 
 begin_interface
@@ -62,7 +64,7 @@ specifier|public
 interface|interface
 name|AggImplementor
 block|{
-comment|/**    * Returns the types of the intermediate variables used by the aggregate    * implementation.    * For instance, for "concatenate to string" this can be {@link java.lang.StringBuilder}.    * Calcite calls this method before all other {@code implement*} methods.    * @param info aggregate context    * @return types of the intermediate variables used by the aggregate    *   implementation    */
+comment|/**    * Returns the types of the intermediate variables used by the aggregate    * implementation.    *    *<p>For instance, for "concatenate to string" this can be    * {@link java.lang.StringBuilder}.    * Calcite calls this method before all other {@code implement*} methods.    *    * @param info aggregate context    * @return types of the intermediate variables used by the aggregate    *   implementation    */
 name|List
 argument_list|<
 name|Type

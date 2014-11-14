@@ -5,18 +5,20 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
+operator|.
+name|calcite
 operator|.
 name|linq4j
 operator|.
-name|expressions
+name|tree
 package|;
 end_package
 
 begin_comment
-comment|/**  * Represents an initializer for a single element of an  * {@link net.hydromatic.linq4j.Enumerable} collection.  */
+comment|/**  * Represents an initializer for a single element of an  * {@link org.apache.calcite.linq4j.Enumerable} collection.  */
 end_comment
 
 begin_class

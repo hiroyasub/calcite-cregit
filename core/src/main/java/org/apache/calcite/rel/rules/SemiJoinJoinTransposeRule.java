@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
@@ -17,11 +19,15 @@ end_package
 
 begin_import
 import|import
-name|java
+name|org
 operator|.
-name|util
+name|apache
 operator|.
-name|*
+name|calcite
+operator|.
+name|plan
+operator|.
+name|Convention
 import|;
 end_import
 
@@ -29,11 +35,55 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptRule
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptRuleCall
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptUtil
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
-name|*
+name|RelNode
 import|;
 end_import
 
@@ -41,11 +91,15 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|relopt
+name|calcite
 operator|.
-name|*
+name|rel
+operator|.
+name|core
+operator|.
+name|Join
 import|;
 end_import
 
@@ -53,11 +107,15 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|reltype
+name|calcite
 operator|.
-name|*
+name|rel
+operator|.
+name|core
+operator|.
+name|SemiJoin
 import|;
 end_import
 
@@ -65,11 +123,29 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|type
+operator|.
+name|RelDataTypeField
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rex
 operator|.
-name|*
+name|RexNode
 import|;
 end_import
 
@@ -77,7 +153,9 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|util
 operator|.
@@ -85,38 +163,58 @@ name|ImmutableIntList
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|ArrayList
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
+import|;
+end_import
+
 begin_comment
-comment|/**  * PushSemiJoinPastJoinRule implements the rule for pushing semi-joins down in a  * tree past a join in order to trigger other rules that will convert  * semi-joins.  *  *<ul>  *<li>SemiJoinRel(JoinRel(X, Y), Z)&rarr; JoinRel(SemiJoinRel(X, Z), Y)  *<li>SemiJoinRel(JoinRel(X, Y), Z)&rarr; JoinRel(X, SemiJoinRel(Y, Z))  *</ul>  *  *<p>Whether this  * first or second conversion is applied depends on which operands actually  * participate in the semi-join.</p>  */
+comment|/**  * Planner rule that pushes a {@link org.apache.calcite.rel.core.SemiJoin}  * down in a tree past a {@link org.apache.calcite.rel.core.Join}  * in order to trigger other rules that will convert {@code SemiJoin}s.  *  *<ul>  *<li>SemiJoin(LogicalJoin(X, Y), Z)&rarr; LogicalJoin(SemiJoin(X, Z), Y)  *<li>SemiJoin(LogicalJoin(X, Y), Z)&rarr; LogicalJoin(X, SemiJoin(Y, Z))  *</ul>  *  *<p>Whether this  * first or second conversion is applied depends on which operands actually  * participate in the semi-join.</p>  */
 end_comment
 
 begin_class
 specifier|public
 class|class
-name|PushSemiJoinPastJoinRule
+name|SemiJoinJoinTransposeRule
 extends|extends
 name|RelOptRule
 block|{
 specifier|public
 specifier|static
 specifier|final
-name|PushSemiJoinPastJoinRule
+name|SemiJoinJoinTransposeRule
 name|INSTANCE
 init|=
 operator|new
-name|PushSemiJoinPastJoinRule
+name|SemiJoinJoinTransposeRule
 argument_list|()
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a PushSemiJoinPastJoinRule.    */
+comment|/**    * Creates a SemiJoinJoinTransposeRule.    */
 specifier|private
-name|PushSemiJoinPastJoinRule
+name|SemiJoinJoinTransposeRule
 parameter_list|()
 block|{
 name|super
 argument_list|(
 name|operand
 argument_list|(
-name|SemiJoinRel
+name|SemiJoin
 operator|.
 name|class
 argument_list|,
@@ -124,7 +222,7 @@ name|some
 argument_list|(
 name|operand
 argument_list|(
-name|JoinRelBase
+name|Join
 operator|.
 name|class
 argument_list|,
@@ -146,7 +244,7 @@ name|RelOptRuleCall
 name|call
 parameter_list|)
 block|{
-name|SemiJoinRel
+name|SemiJoin
 name|semiJoin
 init|=
 name|call
@@ -157,7 +255,7 @@ literal|0
 argument_list|)
 decl_stmt|;
 specifier|final
-name|JoinRelBase
+name|Join
 name|join
 init|=
 name|call
@@ -171,7 +269,7 @@ if|if
 condition|(
 name|join
 operator|instanceof
-name|SemiJoinRel
+name|SemiJoin
 condition|)
 block|{
 return|return;
@@ -576,11 +674,11 @@ name|getRight
 argument_list|()
 expr_stmt|;
 block|}
-name|SemiJoinRel
+name|SemiJoin
 name|newSemiJoin
 init|=
 operator|new
-name|SemiJoinRel
+name|SemiJoin
 argument_list|(
 name|semiJoin
 operator|.
@@ -808,7 +906,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End PushSemiJoinPastJoinRule.java
+comment|// End SemiJoinJoinTransposeRule.java
 end_comment
 
 end_unit

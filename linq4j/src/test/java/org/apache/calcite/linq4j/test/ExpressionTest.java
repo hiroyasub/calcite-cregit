@@ -5,9 +5,11 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
+operator|.
+name|calcite
 operator|.
 name|linq4j
 operator|.
@@ -17,29 +19,273 @@ end_package
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|linq4j
-operator|.
-name|expressions
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
-name|net
-operator|.
-name|hydromatic
+name|calcite
 operator|.
 name|linq4j
 operator|.
 name|function
 operator|.
 name|Function1
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|linq4j
+operator|.
+name|tree
+operator|.
+name|BlockBuilder
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|linq4j
+operator|.
+name|tree
+operator|.
+name|BlockStatement
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|linq4j
+operator|.
+name|tree
+operator|.
+name|Blocks
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|linq4j
+operator|.
+name|tree
+operator|.
+name|ClassDeclaration
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|linq4j
+operator|.
+name|tree
+operator|.
+name|DeclarationStatement
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|linq4j
+operator|.
+name|tree
+operator|.
+name|Expression
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|linq4j
+operator|.
+name|tree
+operator|.
+name|Expressions
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|linq4j
+operator|.
+name|tree
+operator|.
+name|FieldDeclaration
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|linq4j
+operator|.
+name|tree
+operator|.
+name|FunctionExpression
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|linq4j
+operator|.
+name|tree
+operator|.
+name|MemberDeclaration
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|linq4j
+operator|.
+name|tree
+operator|.
+name|MethodCallExpression
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|linq4j
+operator|.
+name|tree
+operator|.
+name|NewExpression
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|linq4j
+operator|.
+name|tree
+operator|.
+name|Node
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|linq4j
+operator|.
+name|tree
+operator|.
+name|ParameterExpression
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|linq4j
+operator|.
+name|tree
+operator|.
+name|Types
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|linq4j
+operator|.
+name|tree
+operator|.
+name|Visitor
 import|;
 end_import
 
@@ -103,7 +349,57 @@ name|java
 operator|.
 name|util
 operator|.
-name|*
+name|AbstractList
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Arrays
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Collections
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Comparator
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|TreeSet
 import|;
 end_import
 
@@ -115,12 +411,12 @@ name|junit
 operator|.
 name|Assert
 operator|.
-name|*
+name|assertEquals
 import|;
 end_import
 
 begin_comment
-comment|/**  * Unit test for {@link net.hydromatic.linq4j.expressions.Expression}  * and subclasses.  */
+comment|/**  * Unit test for {@link org.apache.calcite.linq4j.tree.Expression}  * and subclasses.  */
 end_comment
 
 begin_class
@@ -194,7 +490,7 @@ argument_list|)
 decl_stmt|;
 name|assertEquals
 argument_list|(
-literal|"new net.hydromatic.linq4j.function.Function1() {\n"
+literal|"new org.apache.calcite.linq4j.function.Function1() {\n"
 operator|+
 literal|"  public double apply(double arg) {\n"
 operator|+
@@ -340,7 +636,7 @@ argument_list|)
 decl_stmt|;
 name|assertEquals
 argument_list|(
-literal|"new net.hydromatic.linq4j.function.Function2() {\n"
+literal|"new org.apache.calcite.linq4j.function.Function2() {\n"
 operator|+
 literal|"  public int apply(int key, int key2) {\n"
 operator|+
@@ -1366,7 +1662,7 @@ argument_list|)
 decl_stmt|;
 name|assertEquals
 argument_list|(
-literal|"new net.hydromatic.linq4j.function.Function1() {\n"
+literal|"new org.apache.calcite.linq4j.function.Function1() {\n"
 operator|+
 literal|"  public int apply(String x) {\n"
 operator|+
@@ -2129,7 +2425,7 @@ expr_stmt|;
 comment|// enum
 name|assertEquals
 argument_list|(
-literal|"net.hydromatic.linq4j.test.ExpressionTest.MyEnum.X"
+literal|"org.apache.calcite.linq4j.test.ExpressionTest.MyEnum.X"
 argument_list|,
 name|Expressions
 operator|.
@@ -2149,11 +2445,11 @@ expr_stmt|;
 comment|// array of enum
 name|assertEquals
 argument_list|(
-literal|"new net.hydromatic.linq4j.test.ExpressionTest.MyEnum[] {\n"
+literal|"new org.apache.calcite.linq4j.test.ExpressionTest.MyEnum[] {\n"
 operator|+
-literal|"  net.hydromatic.linq4j.test.ExpressionTest.MyEnum.X,\n"
+literal|"  org.apache.calcite.linq4j.test.ExpressionTest.MyEnum.X,\n"
 operator|+
-literal|"  net.hydromatic.linq4j.test.ExpressionTest.MyEnum.Y}"
+literal|"  org.apache.calcite.linq4j.test.ExpressionTest.MyEnum.Y}"
 argument_list|,
 name|Expressions
 operator|.
@@ -2244,9 +2540,9 @@ expr_stmt|;
 comment|// automatically call constructor if it matches fields
 name|assertEquals
 argument_list|(
-literal|"new net.hydromatic.linq4j.test.Linq4jTest.Employee[] {\n"
+literal|"new org.apache.calcite.linq4j.test.Linq4jTest.Employee[] {\n"
 operator|+
-literal|"  new net.hydromatic.linq4j.test.Linq4jTest.Employee(\n"
+literal|"  new org.apache.calcite.linq4j.test.Linq4jTest.Employee(\n"
 operator|+
 literal|"    100,\n"
 operator|+
@@ -2254,7 +2550,7 @@ literal|"    \"Fred\",\n"
 operator|+
 literal|"    10),\n"
 operator|+
-literal|"  new net.hydromatic.linq4j.test.Linq4jTest.Employee(\n"
+literal|"  new org.apache.calcite.linq4j.test.Linq4jTest.Employee(\n"
 operator|+
 literal|"    110,\n"
 operator|+
@@ -2262,7 +2558,7 @@ literal|"    \"Bill\",\n"
 operator|+
 literal|"    30),\n"
 operator|+
-literal|"  new net.hydromatic.linq4j.test.Linq4jTest.Employee(\n"
+literal|"  new org.apache.calcite.linq4j.test.Linq4jTest.Employee(\n"
 operator|+
 literal|"    120,\n"
 operator|+
@@ -2270,7 +2566,7 @@ literal|"    \"Eric\",\n"
 operator|+
 literal|"    10),\n"
 operator|+
-literal|"  new net.hydromatic.linq4j.test.Linq4jTest.Employee(\n"
+literal|"  new org.apache.calcite.linq4j.test.Linq4jTest.Employee(\n"
 operator|+
 literal|"    130,\n"
 operator|+
@@ -4094,7 +4390,7 @@ literal|"  final int _c = 1 + 3;\n"
 operator|+
 literal|"  final int _d = 1 + 4;\n"
 operator|+
-literal|"  net.hydromatic.linq4j.test.ExpressionTest.bar(1, _b, _c, _d, net.hydromatic.linq4j.test.ExpressionTest.foo(_c));\n"
+literal|"  org.apache.calcite.linq4j.test.ExpressionTest.bar(1, _b, _c, _d, org.apache.calcite.linq4j.test.ExpressionTest.foo(_c));\n"
 operator|+
 literal|"}\n"
 argument_list|,
@@ -4267,7 +4563,7 @@ literal|"    \"string\",\n"
 operator|+
 literal|"    null},\n"
 operator|+
-literal|"  new net.hydromatic.linq4j.test.ExpressionTest.AllType(\n"
+literal|"  new org.apache.calcite.linq4j.test.ExpressionTest.AllType(\n"
 operator|+
 literal|"    true,\n"
 operator|+

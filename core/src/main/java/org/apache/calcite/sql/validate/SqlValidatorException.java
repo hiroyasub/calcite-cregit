@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
@@ -17,13 +19,27 @@ end_package
 
 begin_import
 import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|CalciteValidatorException
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
 operator|.
 name|logging
 operator|.
-name|*
+name|Logger
 import|;
 end_import
 
@@ -36,23 +52,11 @@ comment|// resource generation can use reflection.  That means it must have no
 end_comment
 
 begin_comment
-comment|// dependencies on other Eigenbase/Farrago code.
+comment|// dependencies on other Calcite code.
 end_comment
 
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
-name|util14
-operator|.
-name|*
-import|;
-end_import
-
 begin_comment
-comment|/**  * Exception thrown while validating a SQL statement.  *  *<p>Unlike {@link org.eigenbase.util.EigenbaseException}, this is a checked  * exception, which reminds code authors to wrap it in another exception  * containing the line/column context.  */
+comment|/**  * Exception thrown while validating a SQL statement.  *  *<p>Unlike {@link org.apache.calcite.runtime.CalciteException}, this is a  * checked exception, which reminds code authors to wrap it in another exception  * containing the line/column context.  */
 end_comment
 
 begin_class
@@ -62,7 +66,7 @@ name|SqlValidatorException
 extends|extends
 name|Exception
 implements|implements
-name|EigenbaseValidatorException
+name|CalciteValidatorException
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
 specifier|private
@@ -75,7 +79,7 @@ name|Logger
 operator|.
 name|getLogger
 argument_list|(
-literal|"org.eigenbase.util.EigenbaseException"
+literal|"org.apache.calcite.runtime.CalciteException"
 argument_list|)
 decl_stmt|;
 specifier|static
@@ -105,7 +109,7 @@ argument_list|,
 name|cause
 argument_list|)
 expr_stmt|;
-comment|// TODO: see note in EigenbaseException constructor
+comment|// TODO: see note in CalciteException constructor
 name|LOGGER
 operator|.
 name|throwing

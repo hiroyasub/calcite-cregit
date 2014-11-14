@@ -7,21 +7,13 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|util
 package|;
 end_package
-
-begin_import
-import|import
-name|java
-operator|.
-name|math
-operator|.
-name|*
-import|;
-end_import
 
 begin_import
 import|import
@@ -34,6 +26,16 @@ import|;
 end_import
 
 begin_import
+import|import
+name|java
+operator|.
+name|math
+operator|.
+name|BigDecimal
+import|;
+end_import
+
+begin_import
 import|import static
 name|org
 operator|.
@@ -41,12 +43,36 @@ name|junit
 operator|.
 name|Assert
 operator|.
-name|*
+name|assertEquals
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|assertTrue
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|fail
 import|;
 end_import
 
 begin_comment
-comment|/**  * ReflectVisitorTest tests {@link ReflectUtil#invokeVisitor} and {@link  * ReflectiveVisitor} and provides a contrived example of how to use them.  */
+comment|/**  * ReflectVisitorTest tests {@link ReflectUtil#invokeVisitor} and  * {@link ReflectiveVisitor} and provides a contrived example of how to use  * them.  */
 end_comment
 
 begin_class
@@ -376,6 +402,7 @@ specifier|public
 interface|interface
 name|FudgeableNumber
 block|{   }
+comment|/** Sub-interface of {@link FudgeableNumber}. */
 specifier|public
 interface|interface
 name|DiceyNumber
@@ -448,7 +475,7 @@ return|return
 name|result
 return|;
 block|}
-comment|/**      * Negates the given number without using a dispatcher object to cache      * applicable methods. The results should be the same as {@link      * #negate(Number)}.      *      * @param n the number to be negated      * @return the negated result; not guaranteed to be the same concrete      * type as n; null is returned if n's type wasn't handled      */
+comment|/**      * Negates the given number without using a dispatcher object to cache      * applicable methods. The results should be the same as      * {@link #negate(Number)}.      *      * @param n the number to be negated      * @return the negated result; not guaranteed to be the same concrete      * type as n; null is returned if n's type wasn't handled      */
 specifier|public
 name|Number
 name|negateWithoutDispatcher

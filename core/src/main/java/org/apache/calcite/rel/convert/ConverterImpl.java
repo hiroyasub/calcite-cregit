@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
@@ -19,11 +21,13 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|rel
+name|calcite
 operator|.
-name|*
+name|plan
+operator|.
+name|RelOptCluster
 import|;
 end_import
 
@@ -31,13 +35,99 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptCost
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptPlanner
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelTraitDef
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelTraitSet
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|RelNode
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|SingleRel
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
 name|metadata
 operator|.
-name|*
+name|RelMetadataQuery
 import|;
 end_import
 
@@ -45,39 +135,29 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|relopt
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
+name|calcite
 operator|.
 name|util
 operator|.
-name|*
+name|Util
 import|;
 end_import
 
 begin_comment
-comment|/**  * Abstract implementation of {@link org.eigenbase.rel.convert.ConverterRel}.  */
+comment|/**  * Abstract implementation of {@link Converter}.  */
 end_comment
 
 begin_class
 specifier|public
 specifier|abstract
 class|class
-name|ConverterRelImpl
+name|ConverterImpl
 extends|extends
 name|SingleRel
 implements|implements
-name|ConverterRel
+name|Converter
 block|{
 comment|//~ Instance fields --------------------------------------------------------
 specifier|protected
@@ -90,9 +170,9 @@ name|RelTraitDef
 name|traitDef
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a ConverterRelImpl.    *    * @param cluster  planner's cluster    * @param traitDef the RelTraitDef this converter converts    * @param traits   the output traits of this converter    * @param child    child rel (provides input traits)    */
+comment|/**    * Creates a ConverterImpl.    *    * @param cluster  planner's cluster    * @param traitDef the RelTraitDef this converter converts    * @param traits   the output traits of this converter    * @param child    child rel (provides input traits)    */
 specifier|protected
-name|ConverterRelImpl
+name|ConverterImpl
 parameter_list|(
 name|RelOptCluster
 name|cluster
@@ -149,7 +229,7 @@ name|RelMetadataQuery
 operator|.
 name|getRowCount
 argument_list|(
-name|getChild
+name|getInput
 argument_list|()
 argument_list|)
 decl_stmt|;
@@ -206,7 +286,7 @@ name|isDistinct
 parameter_list|()
 block|{
 return|return
-name|getChild
+name|getInput
 argument_list|()
 operator|.
 name|isDistinct
@@ -235,7 +315,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End ConverterRelImpl.java
+comment|// End ConverterImpl.java
 end_comment
 
 end_unit

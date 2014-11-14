@@ -7,9 +7,11 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|relopt
+name|calcite
+operator|.
+name|plan
 package|;
 end_package
 
@@ -17,7 +19,9 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rex
 operator|.
@@ -311,7 +315,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End RelOptPulledUpPredicates.java
+comment|// End RelOptPredicateList.java
 end_comment
 
 end_unit

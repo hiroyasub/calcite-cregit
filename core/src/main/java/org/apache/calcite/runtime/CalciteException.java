@@ -7,9 +7,11 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|util
+name|calcite
+operator|.
+name|runtime
 package|;
 end_package
 
@@ -21,7 +23,7 @@ name|util
 operator|.
 name|logging
 operator|.
-name|*
+name|Logger
 import|;
 end_import
 
@@ -34,17 +36,17 @@ comment|// resource generation can use reflection.  That means it must have no
 end_comment
 
 begin_comment
-comment|// dependencies on other Eigenbase code.
+comment|// dependencies on other Calcite code.
 end_comment
 
 begin_comment
-comment|/**  * Base class for all exceptions originating from Farrago.  *  * @see EigenbaseContextException  */
+comment|/**  * Base class for all exceptions originating from Farrago.  *  * @see CalciteContextException  */
 end_comment
 
 begin_class
 specifier|public
 class|class
-name|EigenbaseException
+name|CalciteException
 extends|extends
 name|RuntimeException
 block|{
@@ -69,7 +71,7 @@ name|Logger
 operator|.
 name|getLogger
 argument_list|(
-name|EigenbaseException
+name|CalciteException
 operator|.
 name|class
 operator|.
@@ -78,9 +80,9 @@ argument_list|()
 argument_list|)
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a new EigenbaseException object.    *    * @param message error message    * @param cause   underlying cause    */
+comment|/**    * Creates a new CalciteException object.    *    * @param message error message    * @param cause   underlying cause    */
 specifier|public
-name|EigenbaseException
+name|CalciteException
 parameter_list|(
 name|String
 name|message
@@ -102,7 +104,7 @@ name|LOGGER
 operator|.
 name|throwing
 argument_list|(
-literal|"EigenbaseException"
+literal|"CalciteException"
 argument_list|,
 literal|"constructor"
 argument_list|,
@@ -122,7 +124,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End EigenbaseException.java
+comment|// End CalciteException.java
 end_comment
 
 end_unit

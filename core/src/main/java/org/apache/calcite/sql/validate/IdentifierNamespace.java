@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
@@ -17,11 +19,17 @@ end_package
 
 begin_import
 import|import
-name|java
+name|org
 operator|.
-name|util
+name|apache
 operator|.
-name|*
+name|calcite
+operator|.
+name|rel
+operator|.
+name|type
+operator|.
+name|RelDataType
 import|;
 end_import
 
@@ -29,11 +37,15 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|reltype
+name|calcite
 operator|.
-name|*
+name|rel
+operator|.
+name|type
+operator|.
+name|RelDataTypeField
 import|;
 end_import
 
@@ -41,11 +53,13 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
-name|*
+name|SqlIdentifier
 import|;
 end_import
 
@@ -53,13 +67,29 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|SqlNode
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
 name|parser
 operator|.
-name|*
+name|SqlParserPos
 import|;
 end_import
 
@@ -67,11 +97,13 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|util
 operator|.
-name|*
+name|Pair
 import|;
 end_import
 
@@ -90,10 +122,42 @@ import|;
 end_import
 
 begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|ArrayList
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Collections
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
+import|;
+end_import
+
+begin_import
 import|import static
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|util
 operator|.
@@ -104,7 +168,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Namespace whose contents are defined by the type of an {@link  * org.eigenbase.sql.SqlIdentifier identifier}.  */
+comment|/**  * Namespace whose contents are defined by the type of an  * {@link org.apache.calcite.sql.SqlIdentifier identifier}.  */
 end_comment
 
 begin_class

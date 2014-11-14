@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 package|;
@@ -15,11 +17,17 @@ end_package
 
 begin_import
 import|import
-name|java
+name|org
 operator|.
-name|util
+name|apache
 operator|.
-name|*
+name|calcite
+operator|.
+name|rel
+operator|.
+name|type
+operator|.
+name|RelDataType
 import|;
 end_import
 
@@ -27,11 +35,15 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|reltype
+name|calcite
 operator|.
-name|*
+name|rel
+operator|.
+name|type
+operator|.
+name|RelDataTypeFactory
 import|;
 end_import
 
@@ -39,13 +51,15 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
 name|parser
 operator|.
-name|*
+name|SqlParserPos
 import|;
 end_import
 
@@ -53,13 +67,15 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
 name|type
 operator|.
-name|*
+name|SqlOperandTypeChecker
 import|;
 end_import
 
@@ -67,13 +83,47 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|type
+operator|.
+name|SqlOperandTypeInference
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|type
+operator|.
+name|SqlReturnTypeInference
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
 name|util
 operator|.
-name|*
+name|SqlBasicVisitor
 import|;
 end_import
 
@@ -81,13 +131,31 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|util
+operator|.
+name|SqlVisitor
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
 name|validate
 operator|.
-name|*
+name|SqlMonotonicity
 import|;
 end_import
 
@@ -95,11 +163,71 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|validate
+operator|.
+name|SqlValidator
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|validate
+operator|.
+name|SqlValidatorScope
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|validate
+operator|.
+name|SqlValidatorUtil
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|util
 operator|.
-name|*
+name|Util
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
 import|;
 end_import
 
@@ -107,7 +235,9 @@ begin_import
 import|import static
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|util
 operator|.
@@ -118,7 +248,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A<code>SqlOperator</code> is a type of node in a SQL parse tree (it is NOT a  * node in a SQL parse tree). It includes functions, operators such as '=', and  * syntactic constructs such as 'case' statements. Operators may represent  * query-level expressions (e.g. {@link SqlSelectOperator} or row-level  * expressions (e.g. {@link org.eigenbase.sql.fun.SqlBetweenOperator}.  *  *<p>Operators have<em>formal operands</em>, meaning ordered (and optionally  * named) placeholders for the values they operate on. For example, the division  * operator takes two operands; the first is the numerator and the second is the  * denominator. In the context of subclass {@link SqlFunction}, formal operands  * are referred to as<em>parameters</em>.  *  *<p>When an operator is instantiated via a {@link SqlCall}, it is supplied  * with<em>actual operands</em>. For example, in the expression<code>3 /  * 5</code>, the literal expression<code>3</code> is the actual operand  * corresponding to the numerator, and<code>5</code> is the actual operand  * corresponding to the denominator. In the context of SqlFunction, actual  * operands are referred to as<em>arguments</em>  *  *<p>In many cases, the formal/actual distinction is clear from context, in  * which case we drop these qualifiers.  */
+comment|/**  * A<code>SqlOperator</code> is a type of node in a SQL parse tree (it is NOT a  * node in a SQL parse tree). It includes functions, operators such as '=', and  * syntactic constructs such as 'case' statements. Operators may represent  * query-level expressions (e.g. {@link SqlSelectOperator} or row-level  * expressions (e.g. {@link org.apache.calcite.sql.fun.SqlBetweenOperator}.  *  *<p>Operators have<em>formal operands</em>, meaning ordered (and optionally  * named) placeholders for the values they operate on. For example, the division  * operator takes two operands; the first is the numerator and the second is the  * denominator. In the context of subclass {@link SqlFunction}, formal operands  * are referred to as<em>parameters</em>.  *  *<p>When an operator is instantiated via a {@link SqlCall}, it is supplied  * with<em>actual operands</em>. For example, in the expression<code>3 /  * 5</code>, the literal expression<code>3</code> is the actual operand  * corresponding to the numerator, and<code>5</code> is the actual operand  * corresponding to the denominator. In the context of SqlFunction, actual  * operands are referred to as<em>arguments</em>  *  *<p>In many cases, the formal/actual distinction is clear from context, in  * which case we drop these qualifiers.  */
 end_comment
 
 begin_class
@@ -634,7 +764,7 @@ return|return
 name|call
 return|;
 block|}
-comment|/**    * Writes a SQL representation of a call to this operator to a writer,    * including parentheses if the operators on either side are of greater    * precedence.    *    *<p>The default implementation of this method delegates to {@link    * SqlSyntax#unparse}.    */
+comment|/**    * Writes a SQL representation of a call to this operator to a writer,    * including parentheses if the operators on either side are of greater    * precedence.    *    *<p>The default implementation of this method delegates to    * {@link SqlSyntax#unparse}.    */
 specifier|public
 name|void
 name|unparse
@@ -870,7 +1000,7 @@ name|hashCode
 argument_list|()
 return|;
 block|}
-comment|/**    * Validates a call to this operator.    *    *<p>This method should not perform type-derivation or perform validation    * related related to types. That is done later, by {@link    * #deriveType(SqlValidator, SqlValidatorScope, SqlCall)}. This method    * should focus on structural validation.    *    *<p>A typical implementation of this method first validates the operands,    * then performs some operator-specific logic. The default implementation    * just validates the operands.    *    *<p>This method is the default implementation of {@link SqlCall#validate};    * but note that some sub-classes of {@link SqlCall} never call this method.    *    * @param call         the call to this operator    * @param validator    the active validator    * @param scope        validator scope    * @param operandScope validator scope in which to validate operands to this    *                     call; usually equal to scope, but not always because    *                     some operators introduce new scopes    * @see SqlNode#validateExpr(SqlValidator, SqlValidatorScope)    * @see #deriveType(SqlValidator, SqlValidatorScope, SqlCall)    */
+comment|/**    * Validates a call to this operator.    *    *<p>This method should not perform type-derivation or perform validation    * related related to types. That is done later, by    * {@link #deriveType(SqlValidator, SqlValidatorScope, SqlCall)}. This method    * should focus on structural validation.    *    *<p>A typical implementation of this method first validates the operands,    * then performs some operator-specific logic. The default implementation    * just validates the operands.    *    *<p>This method is the default implementation of {@link SqlCall#validate};    * but note that some sub-classes of {@link SqlCall} never call this method.    *    * @param call         the call to this operator    * @param validator    the active validator    * @param scope        validator scope    * @param operandScope validator scope in which to validate operands to this    *                     call; usually equal to scope, but not always because    *                     some operators introduce new scopes    * @see SqlNode#validateExpr(SqlValidator, SqlValidatorScope)    * @see #deriveType(SqlValidator, SqlValidatorScope, SqlCall)    */
 specifier|public
 name|void
 name|validateCall
@@ -1012,7 +1142,7 @@ name|call
 parameter_list|)
 block|{
 block|}
-comment|/**    * Infers the return type of an invocation of this operator; only called    * after the number and types of operands have already been validated.    * Subclasses must either override this method or supply an instance of    * {@link SqlReturnTypeInference} to the constructor.    *    * @param opBinding description of invocation (not necessarily a {@link    *                  SqlCall})    * @return inferred return type    */
+comment|/**    * Infers the return type of an invocation of this operator; only called    * after the number and types of operands have already been validated.    * Subclasses must either override this method or supply an instance of    * {@link SqlReturnTypeInference} to the constructor.    *    * @param opBinding description of invocation (not necessarily a    * {@link SqlCall})    * @return inferred return type    */
 specifier|public
 name|RelDataType
 name|inferReturnType
@@ -1483,7 +1613,7 @@ return|return
 literal|null
 return|;
 block|}
-comment|/**    * Accepts a {@link SqlVisitor}, directing an {@link    * org.eigenbase.sql.util.SqlBasicVisitor.ArgHandler} to visit operand of a    * call. The argument handler allows fine control about how the operands are    * visited, and how the results are combined.    *    * @param visitor         Visitor    * @param call            Call to visit    * @param onlyExpressions If true, ignores operands which are not    *                        expressions. For example, in the call to the    *<code>AS</code> operator    * @param argHandler      Called for each operand    */
+comment|/**    * Accepts a {@link SqlVisitor}, directing an    * {@link org.apache.calcite.sql.util.SqlBasicVisitor.ArgHandler}    * to visit an operand of a call.    *    *<p>The argument handler allows fine control about how the operands are    * visited, and how the results are combined.    *    * @param visitor         Visitor    * @param call            Call to visit    * @param onlyExpressions If true, ignores operands which are not    *                        expressions. For example, in the call to the    *<code>AS</code> operator    * @param argHandler      Called for each operand    */
 specifier|public
 parameter_list|<
 name|R

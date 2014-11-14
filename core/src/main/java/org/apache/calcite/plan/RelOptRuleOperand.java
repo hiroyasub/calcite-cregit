@@ -7,27 +7,21 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|relopt
+name|calcite
+operator|.
+name|plan
 package|;
 end_package
 
 begin_import
 import|import
-name|java
-operator|.
-name|util
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
@@ -39,11 +33,13 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|util
 operator|.
-name|*
+name|Util
 import|;
 end_import
 
@@ -103,8 +99,18 @@ name|ImmutableList
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
+import|;
+end_import
+
 begin_comment
-comment|/**  * A<code>RelOptRuleOperand</code> determines whether a {@link  * org.eigenbase.relopt.RelOptRule} can be applied to a particular expression.  *  *<p>For example, the rule to pull a filter up from the left side of a join  * takes operands:<code>(Join (Filter) (Any))</code>.</p>  *  *<p>Note that<code>children</code> means different things if it is empty or  * it is<code>null</code>:<code>(Join (Filter<b>()</b>) (Any))</code> means  * that, to match the rule,<code>Filter</code> must have no operands.</p>  */
+comment|/**  * Operand that determines whether a {@link RelOptRule}  * can be applied to a particular expression.  *  *<p>For example, the rule to pull a filter up from the left side of a join  * takes operands:<code>Join(Filter, Any)</code>.</p>  *  *<p>Note that<code>children</code> means different things if it is empty or  * it is<code>null</code>:<code>Join(Filter<b>()</b>, Any)</code> means  * that, to match the rule,<code>Filter</code> must have no operands.</p>  */
 end_comment
 
 begin_class
@@ -174,7 +180,7 @@ name|RelOptRuleOperandChildPolicy
 name|childPolicy
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates an operand.    *    *<p>The {@code childOperands} argument is often populated by calling one    * of the following methods:    * {@link RelOptRule#some},    * {@link RelOptRule#none()},    * {@link RelOptRule#any},    * {@link RelOptRule#unordered},    * See {@link org.eigenbase.relopt.RelOptRuleOperandChildren} for more    * details.</p>    *    * @param clazz    Class of relational expression to match (must not be null)    * @param trait    Trait to match, or null to match any trait    * @param children Child operands    *    * @deprecated Use    * {@link #RelOptRuleOperand(Class, RelTrait, com.google.common.base.Predicate, RelOptRuleOperandChildren)};    * will be removed after {@link Bug#upgrade(String) 0.9.2}    */
+comment|/**    * Creates an operand.    *    *<p>The {@code childOperands} argument is often populated by calling one    * of the following methods:    * {@link RelOptRule#some},    * {@link RelOptRule#none()},    * {@link RelOptRule#any},    * {@link RelOptRule#unordered},    * See {@link org.apache.calcite.plan.RelOptRuleOperandChildren} for more    * details.</p>    *    * @param clazz    Class of relational expression to match (must not be null)    * @param trait    Trait to match, or null to match any trait    * @param children Child operands    *    * @deprecated Use    * {@link #RelOptRuleOperand(Class, RelTrait, com.google.common.base.Predicate, RelOptRuleOperandChildren)};    * will be removed after    * {@link org.apache.calcite.util.Bug#upgrade(String) 0.9.2}    */
 specifier|protected
 parameter_list|<
 name|R
@@ -216,7 +222,7 @@ name|children
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Creates an operand.    *    *<p>The {@code childOperands} argument is often populated by calling one    * of the following methods:    * {@link RelOptRule#some},    * {@link RelOptRule#none()},    * {@link RelOptRule#any},    * {@link RelOptRule#unordered},    * See {@link org.eigenbase.relopt.RelOptRuleOperandChildren} for more    * details.</p>    *    * @param clazz    Class of relational expression to match (must not be null)    * @param trait    Trait to match, or null to match any trait    * @param predicate Predicate to apply to relational expression    * @param children Child operands    */
+comment|/**    * Creates an operand.    *    *<p>The {@code childOperands} argument is often populated by calling one    * of the following methods:    * {@link RelOptRule#some},    * {@link RelOptRule#none()},    * {@link RelOptRule#any},    * {@link RelOptRule#unordered},    * See {@link org.apache.calcite.plan.RelOptRuleOperandChildren} for more    * details.</p>    *    * @param clazz    Class of relational expression to match (must not be null)    * @param trait    Trait to match, or null to match any trait    * @param predicate Predicate to apply to relational expression    * @param children Child operands    */
 specifier|protected
 parameter_list|<
 name|R
@@ -521,7 +527,15 @@ operator|.
 name|clazz
 operator|)
 operator|&&
-name|Util
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|base
+operator|.
+name|Objects
 operator|.
 name|equal
 argument_list|(

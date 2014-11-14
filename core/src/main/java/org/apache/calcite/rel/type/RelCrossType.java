@@ -7,27 +7,23 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|reltype
+name|calcite
+operator|.
+name|rel
+operator|.
+name|type
 package|;
 end_package
 
 begin_import
 import|import
-name|java
+name|org
 operator|.
-name|util
+name|apache
 operator|.
-name|List
-import|;
-end_import
-
-begin_import
-import|import
-name|net
-operator|.
-name|hydromatic
+name|calcite
 operator|.
 name|linq4j
 operator|.
@@ -49,8 +45,18 @@ name|ImmutableList
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
+import|;
+end_import
+
 begin_comment
-comment|/**  * Type of the cartesian product of two or more sets of records.  *  *<p>Its fields are those of its constituent records, but unlike a {@link  * RelRecordType}, those fields' names are not necessarily distinct.</p>  */
+comment|/**  * Type of the cartesian product of two or more sets of records.  *  *<p>Its fields are those of its constituent records, but unlike a  * {@link RelRecordType}, those fields' names are not necessarily distinct.</p>  */
 end_comment
 
 begin_class

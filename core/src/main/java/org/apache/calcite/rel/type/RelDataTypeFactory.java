@@ -7,11 +7,59 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|reltype
+name|calcite
+operator|.
+name|rel
+operator|.
+name|type
 package|;
 end_package
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|SqlCollation
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|SqlIntervalQualifier
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|type
+operator|.
+name|SqlTypeName
+import|;
+end_import
 
 begin_import
 import|import
@@ -21,7 +69,7 @@ name|nio
 operator|.
 name|charset
 operator|.
-name|*
+name|Charset
 import|;
 end_import
 
@@ -31,38 +79,32 @@ name|java
 operator|.
 name|util
 operator|.
-name|*
+name|ArrayList
 import|;
 end_import
 
 begin_import
 import|import
-name|org
+name|java
 operator|.
-name|eigenbase
+name|util
 operator|.
-name|sql
-operator|.
-name|*
+name|List
 import|;
 end_import
 
 begin_import
 import|import
-name|org
+name|java
 operator|.
-name|eigenbase
+name|util
 operator|.
-name|sql
-operator|.
-name|type
-operator|.
-name|*
+name|Map
 import|;
 end_import
 
 begin_comment
-comment|/**  * RelDataTypeFactory is a factory for datatype descriptors. It defines methods  * for instantiating and combining SQL, Java, and collection types. The factory  * also provides methods for return type inference for arithmetic in cases where  * SQL 2003 is implementation defined or impractical.  *  *<p>This interface is an example of the  * {@link org.eigenbase.util.Glossary#ABSTRACT_FACTORY_PATTERN abstract factory pattern}.  * Any implementation of<code>RelDataTypeFactory</code> must ensure that type  * objects are canonical: two types are equal if and only if they are  * represented by the same Java object. This reduces memory consumption and  * comparison cost.  */
+comment|/**  * RelDataTypeFactory is a factory for datatype descriptors. It defines methods  * for instantiating and combining SQL, Java, and collection types. The factory  * also provides methods for return type inference for arithmetic in cases where  * SQL 2003 is implementation defined or impractical.  *  *<p>This interface is an example of the  * {@link org.apache.calcite.util.Glossary#ABSTRACT_FACTORY_PATTERN abstract factory pattern}.  * Any implementation of<code>RelDataTypeFactory</code> must ensure that type  * objects are canonical: two types are equal if and only if they are  * represented by the same Java object. This reduces memory consumption and  * comparison cost.  */
 end_comment
 
 begin_interface
@@ -294,7 +336,7 @@ name|RelDataType
 name|type2
 parameter_list|)
 function_decl|;
-comment|/**    * Creates a    * {@link org.eigenbase.reltype.RelDataTypeFactory.FieldInfoBuilder}.    */
+comment|/**    * Creates a    * {@link org.apache.calcite.rel.type.RelDataTypeFactory.FieldInfoBuilder}.    */
 name|FieldInfoBuilder
 name|builder
 parameter_list|()
@@ -466,7 +508,7 @@ return|return
 name|this
 return|;
 block|}
-comment|/**      * Adds a field with a type created using      * {@link org.eigenbase.reltype.RelDataTypeFactory#createSqlType(org.eigenbase.sql.type.SqlTypeName)}.      */
+comment|/**      * Adds a field with a type created using      * {@link org.apache.calcite.rel.type.RelDataTypeFactory#createSqlType(org.apache.calcite.sql.type.SqlTypeName)}.      */
 specifier|public
 name|FieldInfoBuilder
 name|add
@@ -494,7 +536,7 @@ return|return
 name|this
 return|;
 block|}
-comment|/**      * Adds a field with a type created using      * {@link org.eigenbase.reltype.RelDataTypeFactory#createSqlType(org.eigenbase.sql.type.SqlTypeName, int)}.      */
+comment|/**      * Adds a field with a type created using      * {@link org.apache.calcite.rel.type.RelDataTypeFactory#createSqlType(org.apache.calcite.sql.type.SqlTypeName, int)}.      */
 specifier|public
 name|FieldInfoBuilder
 name|add
@@ -527,7 +569,7 @@ return|return
 name|this
 return|;
 block|}
-comment|/**      * Adds a field with a type created using      * {@link org.eigenbase.reltype.RelDataTypeFactory#createSqlType(org.eigenbase.sql.type.SqlTypeName, int, int)}.      */
+comment|/**      * Adds a field with a type created using      * {@link org.apache.calcite.rel.type.RelDataTypeFactory#createSqlType(org.apache.calcite.sql.type.SqlTypeName, int, int)}.      */
 specifier|public
 name|FieldInfoBuilder
 name|add

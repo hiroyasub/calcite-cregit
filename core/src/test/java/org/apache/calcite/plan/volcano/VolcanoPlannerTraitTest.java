@@ -7,9 +7,11 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|relopt
+name|calcite
+operator|.
+name|plan
 operator|.
 name|volcano
 package|;
@@ -17,11 +19,17 @@ end_package
 
 begin_import
 import|import
-name|java
+name|org
 operator|.
-name|util
+name|apache
 operator|.
-name|List
+name|calcite
+operator|.
+name|adapter
+operator|.
+name|enumerable
+operator|.
+name|EnumerableConvention
 import|;
 end_import
 
@@ -29,11 +37,167 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|Convention
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|ConventionTraitDef
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptCluster
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptCost
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptPlanner
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptRule
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptRuleCall
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptUtil
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelTrait
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelTraitDef
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelTraitSet
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
-name|*
+name|AbstractRelNode
 import|;
 end_import
 
@@ -41,13 +205,57 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|RelNode
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|RelWriter
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|SingleRel
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
 name|convert
 operator|.
-name|*
+name|ConverterImpl
 import|;
 end_import
 
@@ -55,11 +263,15 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|relopt
+name|calcite
 operator|.
-name|*
+name|rel
+operator|.
+name|convert
+operator|.
+name|ConverterRule
 import|;
 end_import
 
@@ -67,11 +279,15 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|reltype
+name|calcite
 operator|.
-name|*
+name|rel
+operator|.
+name|type
+operator|.
+name|RelDataType
 import|;
 end_import
 
@@ -79,27 +295,29 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|type
+operator|.
+name|RelDataTypeFactory
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|util
 operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|optiq
-operator|.
-name|rules
-operator|.
-name|java
-operator|.
-name|EnumerableConvention
+name|Pair
 import|;
 end_import
 
@@ -152,6 +370,16 @@ import|;
 end_import
 
 begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
+import|;
+end_import
+
+begin_import
 import|import static
 name|org
 operator|.
@@ -159,7 +387,19 @@ name|junit
 operator|.
 name|Assert
 operator|.
-name|*
+name|assertEquals
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|assertTrue
 import|;
 end_import
 
@@ -852,6 +1092,7 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------
+comment|/** Implementation of {@link RelTrait} for testing. */
 specifier|private
 specifier|static
 class|class
@@ -1007,6 +1248,7 @@ name|description
 return|;
 block|}
 block|}
+comment|/** Definition of {@link AltTrait}. */
 specifier|private
 specifier|static
 class|class
@@ -1313,6 +1555,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+comment|/** A relational expression with zero inputs. */
 specifier|private
 specifier|abstract
 specifier|static
@@ -1445,6 +1688,7 @@ argument_list|)
 return|;
 block|}
 block|}
+comment|/** A relational expression with zero inputs, of NONE convention. */
 specifier|private
 specifier|static
 class|class
@@ -1508,6 +1752,7 @@ argument_list|)
 return|;
 block|}
 block|}
+comment|/** Relational expression with zero inputs, of PHYS convention. */
 specifier|private
 specifier|static
 class|class
@@ -1560,6 +1805,7 @@ return|;
 block|}
 comment|// TODO: SWZ Implement clone?
 block|}
+comment|/** Relational expression with one input. */
 specifier|private
 specifier|abstract
 specifier|static
@@ -1617,7 +1863,7 @@ name|deriveRowType
 parameter_list|()
 block|{
 return|return
-name|getChild
+name|getInput
 argument_list|()
 operator|.
 name|getRowType
@@ -1626,6 +1872,7 @@ return|;
 block|}
 comment|// TODO: SWZ Implement clone?
 block|}
+comment|/** Relational expression with one input, of NONE convention. */
 specifier|private
 specifier|static
 class|class
@@ -1714,6 +1961,7 @@ argument_list|)
 return|;
 block|}
 block|}
+comment|/** A mix-in interface to extend {@link RelNode}, for testing. */
 interface|interface
 name|FooRel
 block|{
@@ -1725,9 +1973,11 @@ name|implementor
 parameter_list|)
 function_decl|;
 block|}
+comment|/** An implementor for {@link FooRel}. */
 interface|interface
 name|FooRelImplementor
 block|{   }
+comment|/** Relational expression with one input, that implements the {@link FooRel}    * mix-in interface. */
 specifier|private
 specifier|static
 class|class
@@ -1834,6 +2084,7 @@ literal|null
 return|;
 block|}
 block|}
+comment|/** Relational expression with zero inputs, of the PHYS convention. */
 specifier|private
 specifier|static
 class|class
@@ -1908,6 +2159,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+comment|/** Planner rule to convert a {@link NoneSingleRel} to ENUMERABLE    * convention. */
 specifier|private
 specifier|static
 class|class
@@ -2015,6 +2267,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+comment|/** Another planner rule to convert a {@link NoneSingleRel} to ENUMERABLE    * convention. */
 specifier|private
 specifier|static
 class|class
@@ -2136,6 +2389,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+comment|/** Planner rule that converts between {@link AltTrait}s. */
 specifier|private
 specifier|static
 class|class
@@ -2214,12 +2468,13 @@ literal|true
 return|;
 block|}
 block|}
+comment|/** Relational expression that converts between {@link AltTrait} values. */
 specifier|private
 specifier|static
 class|class
 name|AltTraitConverter
 extends|extends
-name|ConverterRelImpl
+name|ConverterImpl
 block|{
 specifier|private
 specifier|final
@@ -2299,6 +2554,7 @@ argument_list|)
 return|;
 block|}
 block|}
+comment|/** Planner rule that converts from PHYS to ENUMERABLE convention. */
 specifier|private
 specifier|static
 class|class
@@ -2348,12 +2604,13 @@ argument_list|)
 return|;
 block|}
 block|}
+comment|/** Planner rule that converts PHYS to ENUMERABLE convention. */
 specifier|private
 specifier|static
 class|class
 name|PhysToIteratorConverter
 extends|extends
-name|ConverterRelImpl
+name|ConverterImpl
 block|{
 specifier|public
 name|PhysToIteratorConverter

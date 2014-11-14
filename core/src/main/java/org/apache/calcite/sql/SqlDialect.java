@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 package|;
@@ -19,7 +21,27 @@ name|java
 operator|.
 name|sql
 operator|.
-name|*
+name|DatabaseMetaData
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|sql
+operator|.
+name|SQLException
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|sql
+operator|.
+name|Timestamp
 import|;
 end_import
 
@@ -39,7 +61,17 @@ name|java
 operator|.
 name|util
 operator|.
-name|*
+name|List
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|TimeZone
 import|;
 end_import
 
@@ -51,12 +83,12 @@ name|util
 operator|.
 name|regex
 operator|.
-name|*
+name|Pattern
 import|;
 end_import
 
 begin_comment
-comment|/**  *<code>SqlDialect</code> encapsulates the differences between dialects of SQL.  *  *<p>It is used by classes such as {@link SqlWriter} and  * {@link org.eigenbase.sql.util.SqlBuilder}.  */
+comment|/**  *<code>SqlDialect</code> encapsulates the differences between dialects of SQL.  *  *<p>It is used by classes such as {@link SqlWriter} and  * {@link org.apache.calcite.sql.util.SqlBuilder}.  */
 end_comment
 
 begin_class
@@ -79,16 +111,16 @@ operator|.
 name|getDialect
 argument_list|()
 decl_stmt|;
-comment|/**    * A dialect useful for generating SQL which can be parsed by the    * Eigenbase parser, in particular quoting literals and identifiers. If you    * want a dialect that knows the full capabilities of the database, create    * one from a connection.    */
+comment|/**    * A dialect useful for generating SQL which can be parsed by the    * Calcite parser, in particular quoting literals and identifiers. If you    * want a dialect that knows the full capabilities of the database, create    * one from a connection.    */
 specifier|public
 specifier|static
 specifier|final
 name|SqlDialect
-name|EIGENBASE
+name|CALCITE
 init|=
 name|DatabaseProduct
 operator|.
-name|LUCIDDB
+name|CALCITE
 operator|.
 name|getDialect
 argument_list|()
@@ -1461,7 +1493,7 @@ literal|true
 return|;
 block|}
 block|}
-comment|/**    * A few utility functions copied from org.eigenbase.util.Util. We have    * copied them because we wish to keep SqlDialect's dependencies to a    * minimum.    */
+comment|/**    * A few utility functions copied from org.apache.calcite.util.Util. We have    * copied them because we wish to keep SqlDialect's dependencies to a    * minimum.    */
 specifier|public
 specifier|static
 class|class
@@ -1666,6 +1698,13 @@ argument_list|,
 literal|"\""
 argument_list|)
 block|,
+name|CALCITE
+argument_list|(
+literal|"Apache Calcite"
+argument_list|,
+literal|"\""
+argument_list|)
+block|,
 name|MSSQL
 argument_list|(
 literal|"Microsoft SQL Server"
@@ -1732,13 +1771,6 @@ block|,
 name|LUCIDDB
 argument_list|(
 literal|"LucidDB"
-argument_list|,
-literal|"\""
-argument_list|)
-block|,
-name|OPTIQ
-argument_list|(
-literal|"Apache Calcite"
 argument_list|,
 literal|"\""
 argument_list|)

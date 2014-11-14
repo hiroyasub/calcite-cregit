@@ -7,11 +7,115 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
+operator|.
+name|logical
 package|;
 end_package
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|Convention
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptCluster
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelTraitSet
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|RelInput
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|RelNode
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|RelShuttle
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|core
+operator|.
+name|Union
+import|;
+end_import
 
 begin_import
 import|import
@@ -23,33 +127,21 @@ name|List
 import|;
 end_import
 
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
-name|relopt
-operator|.
-name|*
-import|;
-end_import
-
 begin_comment
-comment|/**  *<code>UnionRel</code> returns the union of the rows of its inputs, optionally  * eliminating duplicates.  */
+comment|/**  * Sub-class of {@link org.apache.calcite.rel.core.Union}  * not targeted at any particular engine or calling convention.  */
 end_comment
 
 begin_class
 specifier|public
 specifier|final
 class|class
-name|UnionRel
+name|LogicalUnion
 extends|extends
-name|UnionRelBase
+name|Union
 block|{
 comment|//~ Constructors -----------------------------------------------------------
 specifier|public
-name|UnionRel
+name|LogicalUnion
 parameter_list|(
 name|RelOptCluster
 name|cluster
@@ -83,9 +175,9 @@ name|all
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Creates a UnionRel by parsing serialized output.    */
+comment|/**    * Creates a LogicalUnion by parsing serialized output.    */
 specifier|public
-name|UnionRel
+name|LogicalUnion
 parameter_list|(
 name|RelInput
 name|input
@@ -99,7 +191,7 @@ expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
 specifier|public
-name|UnionRel
+name|LogicalUnion
 name|copy
 parameter_list|(
 name|RelTraitSet
@@ -127,7 +219,7 @@ argument_list|)
 assert|;
 return|return
 operator|new
-name|UnionRel
+name|LogicalUnion
 argument_list|(
 name|getCluster
 argument_list|()
@@ -161,7 +253,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End UnionRel.java
+comment|// End LogicalUnion.java
 end_comment
 
 end_unit

@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
@@ -17,11 +19,15 @@ end_package
 
 begin_import
 import|import
-name|java
+name|org
 operator|.
-name|util
+name|apache
 operator|.
-name|*
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptRule
 import|;
 end_import
 
@@ -29,11 +35,41 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptRuleCall
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptUtil
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
-name|*
+name|RelNode
 import|;
 end_import
 
@@ -41,11 +77,15 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|relopt
+name|calcite
 operator|.
-name|*
+name|rel
+operator|.
+name|core
+operator|.
+name|Aggregate
 import|;
 end_import
 
@@ -53,11 +93,15 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|reltype
+name|calcite
 operator|.
-name|*
+name|rel
+operator|.
+name|core
+operator|.
+name|AggregateCall
 import|;
 end_import
 
@@ -65,11 +109,77 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|core
+operator|.
+name|JoinRelType
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|core
+operator|.
+name|RelFactories
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|logical
+operator|.
+name|LogicalAggregate
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|type
+operator|.
+name|RelDataTypeField
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rex
 operator|.
-name|*
+name|RexBuilder
 import|;
 end_import
 
@@ -77,13 +187,57 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rex
+operator|.
+name|RexInputRef
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rex
+operator|.
+name|RexNode
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rex
+operator|.
+name|RexUtil
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
 name|fun
 operator|.
-name|*
+name|SqlStdOperatorTable
 import|;
 end_import
 
@@ -91,25 +245,41 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|util
 operator|.
-name|*
+name|BitSets
 import|;
 end_import
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
 name|util
 operator|.
-name|BitSets
+name|Pair
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|Util
 import|;
 end_import
 
@@ -155,15 +325,85 @@ name|Lists
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|ArrayList
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|BitSet
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|HashMap
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|LinkedHashSet
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Map
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Set
+import|;
+end_import
+
 begin_comment
-comment|/**  * Rule to remove distinct aggregates from a {@link AggregateRel}.  */
+comment|/**  * Planner rule that expands distinct aggregates  * (such as {@code COUNT(DISTINCT x)}) from a  * {@link org.apache.calcite.rel.logical.LogicalAggregate}.  *  *<p>How this is done depends upon the arguments to the function. If all  * functions have the same argument  * (e.g. {@code COUNT(DISTINCT x), SUM(DISTINCT x)} both have the argument  * {@code x}) then one extra {@link org.apache.calcite.rel.core.Aggregate} is  * sufficient.  *  *<p>If there are multiple arguments  * (e.g. {@code COUNT(DISTINCT x), COUNT(DISTINCT y)})  * the rule creates separate {@code Aggregate}s and combines using a  * {@link org.apache.calcite.rel.core.Join}.  */
 end_comment
 
 begin_class
 specifier|public
 specifier|final
 class|class
-name|RemoveDistinctAggregateRule
+name|AggregateExpandDistinctAggregatesRule
 extends|extends
 name|RelOptRule
 block|{
@@ -172,13 +412,13 @@ comment|/** The default instance of the rule; operates only on logical expressio
 specifier|public
 specifier|static
 specifier|final
-name|RemoveDistinctAggregateRule
+name|AggregateExpandDistinctAggregatesRule
 name|INSTANCE
 init|=
 operator|new
-name|RemoveDistinctAggregateRule
+name|AggregateExpandDistinctAggregatesRule
 argument_list|(
-name|AggregateRel
+name|LogicalAggregate
 operator|.
 name|class
 argument_list|,
@@ -196,13 +436,13 @@ name|joinFactory
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 specifier|public
-name|RemoveDistinctAggregateRule
+name|AggregateExpandDistinctAggregatesRule
 parameter_list|(
 name|Class
 argument_list|<
 name|?
 extends|extends
-name|AggregateRel
+name|LogicalAggregate
 argument_list|>
 name|clazz
 parameter_list|,
@@ -240,7 +480,7 @@ name|call
 parameter_list|)
 block|{
 specifier|final
-name|AggregateRelBase
+name|Aggregate
 name|aggregate
 init|=
 name|call
@@ -617,7 +857,7 @@ block|{
 name|rel
 operator|=
 operator|new
-name|AggregateRel
+name|LogicalAggregate
 argument_list|(
 name|aggregate
 operator|.
@@ -626,7 +866,7 @@ argument_list|()
 argument_list|,
 name|aggregate
 operator|.
-name|getChild
+name|getInput
 argument_list|()
 argument_list|,
 name|groupSet
@@ -688,7 +928,7 @@ specifier|private
 name|RelNode
 name|convertMonopole
 parameter_list|(
-name|AggregateRelBase
+name|Aggregate
 name|aggregate
 parameter_list|,
 name|List
@@ -730,7 +970,7 @@ argument_list|>
 argument_list|()
 decl_stmt|;
 specifier|final
-name|AggregateRelBase
+name|Aggregate
 name|distinct
 init|=
 name|createSelectDistinct
@@ -805,7 +1045,7 @@ specifier|private
 name|RelNode
 name|doRewrite
 parameter_list|(
-name|AggregateRelBase
+name|Aggregate
 name|aggregate
 parameter_list|,
 name|RelNode
@@ -868,16 +1108,16 @@ name|getFieldList
 argument_list|()
 expr_stmt|;
 block|}
-comment|// AggregateRel(
+comment|// LogicalAggregate(
 comment|//     child,
 comment|//     {COUNT(DISTINCT 1), SUM(DISTINCT 1), SUM(2)})
 comment|//
 comment|// becomes
 comment|//
-comment|// AggregateRel(
-comment|//     JoinRel(
+comment|// LogicalAggregate(
+comment|//     LogicalJoin(
 comment|//         child,
-comment|//         AggregateRel(child,< all columns> {}),
+comment|//         LogicalAggregate(child,< all columns> {}),
 comment|//         INNER,
 comment|//<f2 = f5>))
 comment|//
@@ -928,7 +1168,7 @@ argument_list|>
 argument_list|()
 decl_stmt|;
 specifier|final
-name|AggregateRelBase
+name|Aggregate
 name|distinct
 init|=
 name|createSelectDistinct
@@ -1210,7 +1450,7 @@ name|newAggCall
 argument_list|)
 expr_stmt|;
 block|}
-name|AggregateRelBase
+name|Aggregate
 name|distinctAgg
 init|=
 name|aggregate
@@ -1579,13 +1819,13 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**    * Given an {@link AggregateRel} and the ordinals of the arguments to a    * particular call to an aggregate function, creates a 'select distinct'    * relational expression which projects the group columns and those    * arguments but nothing else.    *    *<p>For example, given    *    *<blockquote>    *<pre>select f0, count(distinct f1), count(distinct f2)    * from t group by f0</pre>    *</blockquote>    *    * and the arglist    *    *<blockquote>{2}</blockquote>    *    * returns    *    *<blockquote>    *<pre>select distinct f0, f2 from t</pre>    *</blockquote>    *    * '    *    *<p>The<code>sourceOf</code> map is populated with the source of each    * column; in this case sourceOf.get(0) = 0, and sourceOf.get(1) = 2.</p>    *    * @param aggregate Aggregate relational expression    * @param argList   Ordinals of columns to make distinct    * @param sourceOf  Out parameter, is populated with a map of where each    *                  output field came from    * @return Aggregate relational expression which projects the required    * columns    */
+comment|/**    * Given an {@link org.apache.calcite.rel.logical.LogicalAggregate}    * and the ordinals of the arguments to a    * particular call to an aggregate function, creates a 'select distinct'    * relational expression which projects the group columns and those    * arguments but nothing else.    *    *<p>For example, given    *    *<blockquote>    *<pre>select f0, count(distinct f1), count(distinct f2)    * from t group by f0</pre>    *</blockquote>    *    * and the arglist    *    *<blockquote>{2}</blockquote>    *    * returns    *    *<blockquote>    *<pre>select distinct f0, f2 from t</pre>    *</blockquote>    *    * '    *    *<p>The<code>sourceOf</code> map is populated with the source of each    * column; in this case sourceOf.get(0) = 0, and sourceOf.get(1) = 2.</p>    *    * @param aggregate Aggregate relational expression    * @param argList   Ordinals of columns to make distinct    * @param sourceOf  Out parameter, is populated with a map of where each    *                  output field came from    * @return Aggregate relational expression which projects the required    * columns    */
 specifier|private
 specifier|static
-name|AggregateRelBase
+name|Aggregate
 name|createSelectDistinct
 parameter_list|(
-name|AggregateRelBase
+name|Aggregate
 name|aggregate
 parameter_list|,
 name|List
@@ -1633,7 +1873,7 @@ name|child
 init|=
 name|aggregate
 operator|.
-name|getChild
+name|getInput
 argument_list|()
 decl_stmt|;
 specifier|final
@@ -1796,7 +2036,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End RemoveDistinctAggregateRule.java
+comment|// End AggregateExpandDistinctAggregatesRule.java
 end_comment
 
 end_unit

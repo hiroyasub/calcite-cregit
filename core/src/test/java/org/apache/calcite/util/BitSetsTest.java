@@ -5,27 +5,15 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
 name|util
 package|;
 end_package
-
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
-name|util
-operator|.
-name|ImmutableIntList
-import|;
-end_import
 
 begin_import
 import|import
@@ -164,7 +152,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Unit test for {@link net.hydromatic.optiq.util.BitSets}.  */
+comment|/**  * Unit test for {@link org.apache.calcite.util.BitSets}.  */
 end_comment
 
 begin_class
@@ -172,7 +160,7 @@ specifier|public
 class|class
 name|BitSetsTest
 block|{
-comment|/**    * Tests the method    * {@link net.hydromatic.optiq.util.BitSets#toIter(java.util.BitSet)}.    */
+comment|/**    * Tests the method    * {@link org.apache.calcite.util.BitSets#toIter(java.util.BitSet)}.    */
 annotation|@
 name|Test
 specifier|public
@@ -317,7 +305,7 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Tests the method    * {@link net.hydromatic.optiq.util.BitSets#toList(java.util.BitSet)}.    */
+comment|/**    * Tests the method    * {@link org.apache.calcite.util.BitSets#toList(java.util.BitSet)}.    */
 annotation|@
 name|Test
 specifier|public
@@ -403,7 +391,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Tests the method {@link net.hydromatic.optiq.util.BitSets#of(int...)}.    */
+comment|/**    * Tests the method {@link org.apache.calcite.util.BitSets#of(int...)}.    */
 annotation|@
 name|Test
 specifier|public
@@ -463,7 +451,7 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Tests the method {@link net.hydromatic.optiq.util.BitSets#range(int, int)}.    */
+comment|/**    * Tests the method {@link org.apache.calcite.util.BitSets#range(int, int)}.    */
 annotation|@
 name|Test
 specifier|public
@@ -555,7 +543,7 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Tests the method    * {@link net.hydromatic.optiq.util.BitSets#toArray(java.util.BitSet)}.    */
+comment|/**    * Tests the method    * {@link org.apache.calcite.util.BitSets#toArray(java.util.BitSet)}.    */
 annotation|@
 name|Test
 specifier|public
@@ -623,7 +611,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**    * Tests the method    * {@link net.hydromatic.optiq.util.BitSets#union(java.util.BitSet, java.util.BitSet...)}.    */
+comment|/**    * Tests the method    * {@link org.apache.calcite.util.BitSets#union(java.util.BitSet, java.util.BitSet...)}.    */
 annotation|@
 name|Test
 specifier|public
@@ -736,7 +724,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Tests the method    * {@link net.hydromatic.optiq.util.BitSets#contains(java.util.BitSet, java.util.BitSet)}.    */
+comment|/**    * Tests the method    * {@link org.apache.calcite.util.BitSets#contains(java.util.BitSet, java.util.BitSet)}.    */
 annotation|@
 name|Test
 specifier|public
@@ -964,7 +952,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Tests the method    * {@link net.hydromatic.optiq.util.BitSets#of(org.eigenbase.util.ImmutableIntList)}.    */
+comment|/**    * Tests the method    * {@link org.apache.calcite.util.BitSets#of(ImmutableIntList)}.    */
 annotation|@
 name|Test
 specifier|public
@@ -1039,7 +1027,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Tests the method    * {@link net.hydromatic.optiq.util.BitSets#previousClearBit(java.util.BitSet, int)}.    */
+comment|/**    * Tests the method    * {@link org.apache.calcite.util.BitSets#previousClearBit(java.util.BitSet, int)}.    */
 annotation|@
 name|Test
 specifier|public

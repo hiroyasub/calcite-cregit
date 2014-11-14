@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
@@ -19,11 +21,13 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|rel
+name|calcite
 operator|.
-name|*
+name|plan
+operator|.
+name|RelOptRuleCall
 import|;
 end_import
 
@@ -31,67 +35,112 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|relopt
+name|calcite
 operator|.
-name|*
+name|plan
+operator|.
+name|RelOptRuleOperand
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptUtil
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|RelNode
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|logical
+operator|.
+name|LogicalJoin
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|logical
+operator|.
+name|LogicalProject
 import|;
 end_import
 
 begin_comment
-comment|/**  * PullUpProjectsOnTopOfMultiJoinRule implements the rule for pulling {@link  * ProjectRel}s that are on top of a {@link MultiJoinRel} and beneath a {@link  * JoinRel} so the {@link ProjectRel} appears above the {@link JoinRel}. In the  * process of doing so, also save away information about the respective fields  * that are referenced in the expressions in the {@link ProjectRel} we're  * pulling up, as well as the join condition, in the resultant {@link  * MultiJoinRel}s  *  *<p>For example, if we have the following subselect:  *  *<pre>  *      (select X.x1, Y.y1 from X, Y  *          where X.x2 = Y.y2 and X.x3 = 1 and Y.y3 = 2)</pre>  *  *<p>The {@link MultiJoinRel} associated with (X, Y) associates x1 with X and  * y1 with Y. Although x3 and y3 need to be read due to the filters, they are  * not required after the row scan has completed and therefore are not saved.  * The join fields, x2 and y2, are also tracked separately.  *  *<p>Note that by only pulling up projects that are on top of {@link  * MultiJoinRel}s, we preserve projections on top of row scans.  *  *<p>See the superclass for details on restrictions regarding which {@link  * ProjectRel}s cannot be pulled.  */
+comment|/**  * MultiJoinProjectTransposeRule implements the rule for pulling  * {@link org.apache.calcite.rel.logical.LogicalProject}s that are on top of a  * {@link MultiJoin} and beneath a  * {@link org.apache.calcite.rel.logical.LogicalJoin} so the  * {@link org.apache.calcite.rel.logical.LogicalProject} appears above the  * {@link org.apache.calcite.rel.logical.LogicalJoin}.  *  *<p>In the process of doing  * so, also save away information about the respective fields that are  * referenced in the expressions in the  * {@link org.apache.calcite.rel.logical.LogicalProject} we're pulling up, as  * well as the join condition, in the resultant {@link MultiJoin}s  *  *<p>For example, if we have the following subselect:  *  *<pre>  *      (select X.x1, Y.y1 from X, Y  *          where X.x2 = Y.y2 and X.x3 = 1 and Y.y3 = 2)</pre>  *  *<p>The {@link MultiJoin} associated with (X, Y) associates x1 with X and  * y1 with Y. Although x3 and y3 need to be read due to the filters, they are  * not required after the row scan has completed and therefore are not saved.  * The join fields, x2 and y2, are also tracked separately.  *  *<p>Note that by only pulling up projects that are on top of  * {@link MultiJoin}s, we preserve projections on top of row scans.  *  *<p>See the superclass for details on restrictions regarding which  * {@link org.apache.calcite.rel.logical.LogicalProject}s cannot be pulled.  */
 end_comment
 
 begin_class
 specifier|public
 class|class
-name|PullUpProjectsOnTopOfMultiJoinRule
+name|MultiJoinProjectTransposeRule
 extends|extends
-name|PullUpProjectsAboveJoinRule
+name|JoinProjectTransposeRule
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
 specifier|public
 specifier|static
 specifier|final
-name|PullUpProjectsOnTopOfMultiJoinRule
+name|MultiJoinProjectTransposeRule
 name|MULTI_BOTH_PROJECT
 init|=
 operator|new
-name|PullUpProjectsOnTopOfMultiJoinRule
+name|MultiJoinProjectTransposeRule
 argument_list|(
 name|operand
 argument_list|(
-name|JoinRel
+name|LogicalJoin
 operator|.
 name|class
 argument_list|,
 name|operand
 argument_list|(
-name|ProjectRel
+name|LogicalProject
 operator|.
 name|class
 argument_list|,
 name|operand
 argument_list|(
-name|MultiJoinRel
-operator|.
-name|class
-argument_list|,
-name|any
-argument_list|()
-argument_list|)
-argument_list|)
-argument_list|,
-name|operand
-argument_list|(
-name|ProjectRel
-operator|.
-name|class
-argument_list|,
-name|operand
-argument_list|(
-name|MultiJoinRel
+name|MultiJoin
 operator|.
 name|class
 argument_list|,
@@ -99,23 +148,40 @@ name|any
 argument_list|()
 argument_list|)
 argument_list|)
+argument_list|,
+name|operand
+argument_list|(
+name|LogicalProject
+operator|.
+name|class
+argument_list|,
+name|operand
+argument_list|(
+name|MultiJoin
+operator|.
+name|class
+argument_list|,
+name|any
+argument_list|()
+argument_list|)
+argument_list|)
 argument_list|)
 argument_list|,
-literal|"PullUpProjectsOnTopOfMultiJoinRule: with two ProjectRel children"
+literal|"MultiJoinProjectTransposeRule: with two LogicalProject children"
 argument_list|)
 decl_stmt|;
 specifier|public
 specifier|static
 specifier|final
-name|PullUpProjectsOnTopOfMultiJoinRule
+name|MultiJoinProjectTransposeRule
 name|MULTI_LEFT_PROJECT
 init|=
 operator|new
-name|PullUpProjectsOnTopOfMultiJoinRule
+name|MultiJoinProjectTransposeRule
 argument_list|(
 name|operand
 argument_list|(
-name|JoinRel
+name|LogicalJoin
 operator|.
 name|class
 argument_list|,
@@ -123,13 +189,13 @@ name|some
 argument_list|(
 name|operand
 argument_list|(
-name|ProjectRel
+name|LogicalProject
 operator|.
 name|class
 argument_list|,
 name|operand
 argument_list|(
-name|MultiJoinRel
+name|MultiJoin
 operator|.
 name|class
 argument_list|,
@@ -140,21 +206,21 @@ argument_list|)
 argument_list|)
 argument_list|)
 argument_list|,
-literal|"PullUpProjectsOnTopOfMultiJoinRule: with ProjectRel on left"
+literal|"MultiJoinProjectTransposeRule: with LogicalProject on left"
 argument_list|)
 decl_stmt|;
 specifier|public
 specifier|static
 specifier|final
-name|PullUpProjectsOnTopOfMultiJoinRule
+name|MultiJoinProjectTransposeRule
 name|MULTI_RIGHT_PROJECT
 init|=
 operator|new
-name|PullUpProjectsOnTopOfMultiJoinRule
+name|MultiJoinProjectTransposeRule
 argument_list|(
 name|operand
 argument_list|(
-name|JoinRel
+name|LogicalJoin
 operator|.
 name|class
 argument_list|,
@@ -170,13 +236,13 @@ argument_list|)
 argument_list|,
 name|operand
 argument_list|(
-name|ProjectRel
+name|LogicalProject
 operator|.
 name|class
 argument_list|,
 name|operand
 argument_list|(
-name|MultiJoinRel
+name|MultiJoin
 operator|.
 name|class
 argument_list|,
@@ -186,12 +252,12 @@ argument_list|)
 argument_list|)
 argument_list|)
 argument_list|,
-literal|"PullUpProjectsOnTopOfMultiJoinRule: with ProjectRel on right"
+literal|"MultiJoinProjectTransposeRule: with LogicalProject on right"
 argument_list|)
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 specifier|public
-name|PullUpProjectsOnTopOfMultiJoinRule
+name|MultiJoinProjectTransposeRule
 parameter_list|(
 name|RelOptRuleOperand
 name|operand
@@ -209,7 +275,7 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|// override PullUpProjectsAboveJoinRule
+comment|// override JoinProjectTransposeRule
 specifier|protected
 name|boolean
 name|hasLeftChild
@@ -228,7 +294,7 @@ operator|!=
 literal|4
 return|;
 block|}
-comment|// override PullUpProjectsAboveJoinRule
+comment|// override JoinProjectTransposeRule
 specifier|protected
 name|boolean
 name|hasRightChild
@@ -247,9 +313,9 @@ operator|>
 literal|3
 return|;
 block|}
-comment|// override PullUpProjectsAboveJoinRule
+comment|// override JoinProjectTransposeRule
 specifier|protected
-name|ProjectRel
+name|LogicalProject
 name|getRightChild
 parameter_list|(
 name|RelOptRuleCall
@@ -288,7 +354,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|// override PullUpProjectsAboveJoinRule
+comment|// override JoinProjectTransposeRule
 specifier|protected
 name|RelNode
 name|getProjectChild
@@ -296,16 +362,16 @@ parameter_list|(
 name|RelOptRuleCall
 name|call
 parameter_list|,
-name|ProjectRel
+name|LogicalProject
 name|project
 parameter_list|,
 name|boolean
 name|leftChild
 parameter_list|)
 block|{
-comment|// locate the appropriate MultiJoinRel based on which rule was fired
+comment|// locate the appropriate MultiJoin based on which rule was fired
 comment|// and which projection we're dealing with
-name|MultiJoinRel
+name|MultiJoin
 name|multiJoin
 decl_stmt|;
 if|if
@@ -356,8 +422,8 @@ literal|4
 argument_list|)
 expr_stmt|;
 block|}
-comment|// create a new MultiJoinRel that reflects the columns in the projection
-comment|// above the MultiJoinRel
+comment|// create a new MultiJoin that reflects the columns in the projection
+comment|// above the MultiJoin
 return|return
 name|RelOptUtil
 operator|.
@@ -373,7 +439,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End PullUpProjectsOnTopOfMultiJoinRule.java
+comment|// End MultiJoinProjectTransposeRule.java
 end_comment
 
 end_unit

@@ -5,32 +5,34 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
+operator|.
+name|schema
 package|;
 end_package
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
-name|rules
+name|adapter
 operator|.
-name|java
+name|enumerable
 operator|.
 name|AggImplementor
 import|;
 end_import
 
 begin_comment
-comment|/**  * Function that can be translated to java code.  *  * @see net.hydromatic.optiq.rules.java.AggImplementor  * @see net.hydromatic.optiq.rules.java.WinAggImplementor  * @see net.hydromatic.optiq.rules.java.StrictAggImplementor  * @see net.hydromatic.optiq.rules.java.StrictWinAggImplementor  */
+comment|/**  * Function that can be translated to java code.  *  * @see org.apache.calcite.adapter.enumerable.AggImplementor  * @see org.apache.calcite.adapter.enumerable.WinAggImplementor  * @see org.apache.calcite.adapter.enumerable.StrictAggImplementor  * @see org.apache.calcite.adapter.enumerable.StrictWinAggImplementor  */
 end_comment
 
 begin_interface

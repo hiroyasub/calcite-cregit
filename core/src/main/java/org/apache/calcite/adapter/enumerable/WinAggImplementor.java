@@ -5,20 +5,20 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
-name|rules
+name|adapter
 operator|.
-name|java
+name|enumerable
 package|;
 end_package
 
 begin_comment
-comment|/**  * Implements a windowed aggregate function by generating expressions to  * initialize, add to, and get a result from, an accumulator.  * Windowed aggregate is more powerful than regular aggregate since it can  * access rows in the current partition by row indices.  * Regular aggregate can be used to implement windowed aggregate.  *<p>This interface does not define new methods: window-specific  * sub-interfaces are passed when implementing window aggregate.  *  * @see net.hydromatic.optiq.rules.java.StrictWinAggImplementor  * @see net.hydromatic.optiq.rules.java.RexImpTable.FirstLastValueImplementor  * @see net.hydromatic.optiq.rules.java.RexImpTable.RankImplementor  * @see net.hydromatic.optiq.rules.java.RexImpTable.RowNumberImplementor  */
+comment|/**  * Implements a windowed aggregate function by generating expressions to  * initialize, add to, and get a result from, an accumulator.  * Windowed aggregate is more powerful than regular aggregate since it can  * access rows in the current partition by row indices.  * Regular aggregate can be used to implement windowed aggregate.  *<p>This interface does not define new methods: window-specific  * sub-interfaces are passed when implementing window aggregate.  *  * @see org.apache.calcite.adapter.enumerable.StrictWinAggImplementor  * @see org.apache.calcite.adapter.enumerable.RexImpTable.FirstLastValueImplementor  * @see org.apache.calcite.adapter.enumerable.RexImpTable.RankImplementor  * @see org.apache.calcite.adapter.enumerable.RexImpTable.RowNumberImplementor  */
 end_comment
 
 begin_interface

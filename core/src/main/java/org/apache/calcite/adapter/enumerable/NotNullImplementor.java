@@ -5,27 +5,29 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
-name|rules
+name|adapter
 operator|.
-name|java
+name|enumerable
 package|;
 end_package
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
+operator|.
+name|calcite
 operator|.
 name|linq4j
 operator|.
-name|expressions
+name|tree
 operator|.
 name|Expression
 import|;
@@ -35,7 +37,9 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rex
 operator|.
@@ -54,7 +58,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Simplified version of {@link net.hydromatic.optiq.rules.java.CallImplementor}  * that does not know about null semantics.  *  * @see net.hydromatic.optiq.rules.java.RexImpTable  * @see net.hydromatic.optiq.rules.java.CallImplementor  */
+comment|/**  * Simplified version of  * {@link org.apache.calcite.adapter.enumerable.CallImplementor}  * that does not know about null semantics.  *  * @see org.apache.calcite.adapter.enumerable.RexImpTable  * @see org.apache.calcite.adapter.enumerable.CallImplementor  */
 end_comment
 
 begin_interface

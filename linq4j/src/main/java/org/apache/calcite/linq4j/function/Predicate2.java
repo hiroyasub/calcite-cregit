@@ -5,9 +5,11 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
+operator|.
+name|calcite
 operator|.
 name|linq4j
 operator|.
@@ -34,7 +36,7 @@ argument_list|<
 name|Boolean
 argument_list|>
 block|{
-comment|/**    * Predicate that always evaluates to {@code true}.    *    * @see net.hydromatic.linq4j.function.Functions#truePredicate1()    */
+comment|/**    * Predicate that always evaluates to {@code true}.    *    * @see org.apache.calcite.linq4j.function.Functions#truePredicate1()    */
 name|Predicate2
 argument_list|<
 name|Object
@@ -69,7 +71,7 @@ return|;
 block|}
 block|}
 decl_stmt|;
-comment|/**    * Predicate that always evaluates to {@code false}.    *    * @see net.hydromatic.linq4j.function.Functions#falsePredicate1()    */
+comment|/**    * Predicate that always evaluates to {@code false}.    *    * @see org.apache.calcite.linq4j.function.Functions#falsePredicate1()    */
 name|Predicate2
 argument_list|<
 name|Object

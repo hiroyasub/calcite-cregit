@@ -7,9 +7,11 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|relopt
+name|calcite
+operator|.
+name|plan
 operator|.
 name|volcano
 package|;
@@ -19,11 +21,13 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|relopt
+name|calcite
 operator|.
-name|*
+name|plan
+operator|.
+name|RelOptCost
 import|;
 end_import
 
@@ -31,7 +35,37 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptCostFactory
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptUtil
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|util
 operator|.
@@ -992,6 +1026,7 @@ operator|+
 literal|" io}"
 return|;
 block|}
+comment|/** Implementation of {@link org.apache.calcite.plan.RelOptCostFactory}    * that creates {@link org.apache.calcite.plan.volcano.VolcanoCost}s. */
 specifier|private
 specifier|static
 class|class

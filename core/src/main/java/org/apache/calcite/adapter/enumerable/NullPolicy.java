@@ -5,15 +5,15 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
-name|rules
+name|adapter
 operator|.
-name|java
+name|enumerable
 package|;
 end_package
 
@@ -44,6 +44,10 @@ block|,
 name|NONE
 block|}
 end_enum
+
+begin_comment
+comment|// End NullPolicy.java
+end_comment
 
 end_unit
 

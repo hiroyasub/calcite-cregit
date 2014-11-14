@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|test
 operator|.
@@ -54,6 +56,7 @@ specifier|public
 interface|interface
 name|ConcurrentTestPluginCommand
 block|{
+comment|/** Test context. */
 interface|interface
 name|TestContext
 block|{

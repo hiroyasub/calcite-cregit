@@ -5,11 +5,11 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
 name|util
 package|;
@@ -17,25 +17,11 @@ end_package
 
 begin_import
 import|import
-name|org
-operator|.
-name|eigenbase
+name|java
 operator|.
 name|util
 operator|.
-name|ImmutableIntList
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
-name|util
-operator|.
-name|IntList
+name|BitSet
 import|;
 end_import
 
@@ -45,7 +31,27 @@ name|java
 operator|.
 name|util
 operator|.
-name|*
+name|Iterator
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|SortedMap
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|TreeMap
 import|;
 end_import
 
@@ -824,7 +830,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/** Populates a {@link BitSet} from an    *  {@link org.eigenbase.util.ImmutableIntList}. */
+comment|/** Populates a {@link BitSet} from an    *  {@link ImmutableIntList}. */
 specifier|public
 specifier|static
 name|void

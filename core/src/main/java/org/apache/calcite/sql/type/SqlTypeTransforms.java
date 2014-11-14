@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
@@ -17,11 +19,17 @@ end_package
 
 begin_import
 import|import
-name|java
+name|org
 operator|.
-name|util
+name|apache
 operator|.
-name|List
+name|calcite
+operator|.
+name|rel
+operator|.
+name|type
+operator|.
+name|RelDataType
 import|;
 end_import
 
@@ -29,11 +37,15 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|reltype
+name|calcite
 operator|.
-name|*
+name|rel
+operator|.
+name|type
+operator|.
+name|RelDataTypeField
 import|;
 end_import
 
@@ -41,11 +53,13 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
-name|*
+name|SqlOperatorBinding
 import|;
 end_import
 
@@ -53,11 +67,13 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|util
 operator|.
-name|*
+name|Util
 import|;
 end_import
 
@@ -75,8 +91,18 @@ name|Preconditions
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
+import|;
+end_import
+
 begin_comment
-comment|/**  * SqlTypeTransforms defines a number of reusable instances of {@link  * SqlTypeTransform}.  *  *<p>NOTE: avoid anonymous inner classes here except for unique,  * non-generalizable strategies; anything else belongs in a reusable top-level  * class. If you find yourself copying and pasting an existing strategy's  * anonymous inner class, you're making a mistake.  */
+comment|/**  * SqlTypeTransforms defines a number of reusable instances of  * {@link SqlTypeTransform}.  *  *<p>NOTE: avoid anonymous inner classes here except for unique,  * non-generalizable strategies; anything else belongs in a reusable top-level  * class. If you find yourself copying and pasting an existing strategy's  * anonymous inner class, you're making a mistake.  */
 end_comment
 
 begin_class

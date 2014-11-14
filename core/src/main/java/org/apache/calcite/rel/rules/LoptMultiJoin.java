@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
@@ -17,11 +19,15 @@ end_package
 
 begin_import
 import|import
-name|java
+name|org
 operator|.
-name|util
+name|apache
 operator|.
-name|*
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptUtil
 import|;
 end_import
 
@@ -29,11 +35,13 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
-name|*
+name|RelNode
 import|;
 end_import
 
@@ -41,13 +49,47 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|core
+operator|.
+name|JoinRelType
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|core
+operator|.
+name|SemiJoin
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
 name|metadata
 operator|.
-name|*
+name|RelColumnOrigin
 import|;
 end_import
 
@@ -55,11 +97,15 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|relopt
+name|calcite
 operator|.
-name|*
+name|rel
+operator|.
+name|metadata
+operator|.
+name|RelMetadataQuery
 import|;
 end_import
 
@@ -67,11 +113,15 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|reltype
+name|calcite
 operator|.
-name|*
+name|rel
+operator|.
+name|type
+operator|.
+name|RelDataType
 import|;
 end_import
 
@@ -79,11 +129,45 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|type
+operator|.
+name|RelDataTypeFactory
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|type
+operator|.
+name|RelDataTypeField
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rex
 operator|.
-name|*
+name|RexCall
 import|;
 end_import
 
@@ -91,7 +175,23 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rex
+operator|.
+name|RexNode
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
@@ -103,25 +203,27 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|util
 operator|.
-name|IntList
+name|BitSets
 import|;
 end_import
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
 name|util
 operator|.
-name|BitSets
+name|IntList
 import|;
 end_import
 
@@ -153,8 +255,88 @@ name|Lists
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|ArrayList
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|BitSet
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|HashMap
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|HashSet
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|ListIterator
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Map
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Set
+import|;
+end_import
+
 begin_comment
-comment|/**  * Utility class that keeps track of the join factors that  * make up a {@link MultiJoinRel}.  */
+comment|/**  * Utility class that keeps track of the join factors that  * make up a {@link MultiJoin}.  */
 end_comment
 
 begin_class
@@ -163,11 +345,11 @@ class|class
 name|LoptMultiJoin
 block|{
 comment|//~ Instance fields --------------------------------------------------------
-comment|/**    * The MultiJoinRel being optimized    */
-name|MultiJoinRel
+comment|/**    * The MultiJoin being optimized    */
+name|MultiJoin
 name|multiJoin
 decl_stmt|;
-comment|/**    * Join filters associated with the MultiJoinRel, decomposed into a list.    * Excludes left/right outer join filters.    */
+comment|/**    * Join filters associated with the MultiJoin, decomposed into a list.    * Excludes left/right outer join filters.    */
 specifier|private
 name|List
 argument_list|<
@@ -175,7 +357,7 @@ name|RexNode
 argument_list|>
 name|joinFilters
 decl_stmt|;
-comment|/**    * All join filters associated with the MultiJoinRel, decomposed into a    * list. Includes left/right outer join filters.    */
+comment|/**    * All join filters associated with the MultiJoin, decomposed into a    * list. Includes left/right outer join filters.    */
 specifier|private
 name|List
 argument_list|<
@@ -183,18 +365,18 @@ name|RexNode
 argument_list|>
 name|allJoinFilters
 decl_stmt|;
-comment|/**    * Number of factors into the MultiJoinRel    */
+comment|/**    * Number of factors into the MultiJoin    */
 specifier|private
 specifier|final
 name|int
 name|nJoinFactors
 decl_stmt|;
-comment|/**    * Total number of fields in the MultiJoinRel    */
+comment|/**    * Total number of fields in the MultiJoin    */
 specifier|private
 name|int
 name|nTotalFields
 decl_stmt|;
-comment|/**    * Original inputs into the MultiJoinRel    */
+comment|/**    * Original inputs into the MultiJoin    */
 specifier|private
 specifier|final
 name|ImmutableList
@@ -290,7 +472,7 @@ index|[]
 name|joinRemovalFactors
 decl_stmt|;
 comment|/**    * The semijoins that allow the join of a dimension table to be removed    */
-name|SemiJoinRel
+name|SemiJoin
 index|[]
 name|joinRemovalSemiJoins
 decl_stmt|;
@@ -314,7 +496,7 @@ comment|//~ Constructors -------------------------------------------------------
 specifier|public
 name|LoptMultiJoin
 parameter_list|(
-name|MultiJoinRel
+name|MultiJoin
 name|multiJoin
 parameter_list|)
 block|{
@@ -630,7 +812,7 @@ expr_stmt|;
 name|joinRemovalSemiJoins
 operator|=
 operator|new
-name|SemiJoinRel
+name|SemiJoin
 index|[
 name|nJoinFactors
 index|]
@@ -657,9 +839,9 @@ argument_list|()
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**    * @return the MultiJoinRel corresponding to this multijoin    */
+comment|/**    * @return the MultiJoin corresponding to this multijoin    */
 specifier|public
-name|MultiJoinRel
+name|MultiJoin
 name|getMultiJoinRel
 parameter_list|()
 block|{
@@ -947,7 +1129,7 @@ return|;
 block|}
 comment|/**    * @param dimIdx the dimension factor for which information will be returned    *    * @return the semijoin that allows the join of a dimension table to be    * removed    */
 specifier|public
-name|SemiJoinRel
+name|SemiJoin
 name|getJoinRemovalSemiJoin
 parameter_list|(
 name|int
@@ -989,7 +1171,7 @@ parameter_list|(
 name|int
 name|dimIdx
 parameter_list|,
-name|SemiJoinRel
+name|SemiJoin
 name|semiJoin
 parameter_list|)
 block|{

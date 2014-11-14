@@ -7,11 +7,89 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
 operator|.
 name|trace
 package|;
 end_package
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|linq4j
+operator|.
+name|function
+operator|.
+name|Function2
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|linq4j
+operator|.
+name|function
+operator|.
+name|Functions
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptPlanner
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|prepare
+operator|.
+name|Prepare
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|RelImplementorImpl
+import|;
+end_import
 
 begin_import
 import|import
@@ -31,102 +109,34 @@ name|util
 operator|.
 name|logging
 operator|.
-name|*
+name|Level
 import|;
 end_import
 
 begin_import
 import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
-name|rel
-operator|.
-name|RelImplementorImpl
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
-name|relopt
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
+name|java
 operator|.
 name|util
 operator|.
-name|property
+name|logging
 operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|linq4j
-operator|.
-name|function
-operator|.
-name|Function2
-import|;
-end_import
-
-begin_import
-import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|linq4j
-operator|.
-name|function
-operator|.
-name|Functions
-import|;
-end_import
-
-begin_import
-import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|optiq
-operator|.
-name|prepare
-operator|.
-name|Prepare
+name|Logger
 import|;
 end_import
 
 begin_comment
-comment|/**  * Contains all of the {@link java.util.logging.Logger tracers} used within  * org.eigenbase class libraries.  *  *<h3>Note to developers</h3>  *  *<p>Please ensure that every tracer used in org.eigenbase is added to this  * class as a<em>public static final</em> member called<code>  *<i>component</i>Tracer</code>. For example, {@link #getPlannerTracer} is the  * tracer used by all classes which take part in the query planning process.  *  *<p>The javadoc in this file is the primary source of information on what  * tracers are available, so the javadoc against each tracer member must be an  * up-to-date description of what that tracer does. Be sure to describe what  * {@link Level tracing level} is required to obtain each category of tracing.  *  *<p>In the class where the tracer is used, create a<em>private</em> (or  * perhaps<em>protected</em>)<em>static final</em> member called<code>  * tracer</code>.  */
+comment|/**  * Contains all of the {@link java.util.logging.Logger tracers} used within  * org.apache.calcite class libraries.  *  *<h3>Note to developers</h3>  *  *<p>Please ensure that every tracer used in org.apache.calcite is added to  * this class as a<em>public static final</em> member called<code>  *<i>component</i>Tracer</code>. For example, {@link #getPlannerTracer} is the  * tracer used by all classes which take part in the query planning process.  *  *<p>The javadoc in this file is the primary source of information on what  * tracers are available, so the javadoc against each tracer member must be an  * up-to-date description of what that tracer does. Be sure to describe what  * {@link Level tracing level} is required to obtain each category of tracing.  *  *<p>In the class where the tracer is used, create a<em>private</em> (or  * perhaps<em>protected</em>)<em>static final</em> member called<code>  * tracer</code>.  */
 end_comment
 
 begin_class
 specifier|public
 specifier|abstract
 class|class
-name|EigenbaseTrace
+name|CalciteTrace
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
-comment|/**    * The "org.eigenbase.sql.parser" tracer reports parser events in {@link    * org.eigenbase.sql.parser.SqlParser} and other classes (at level {@link    * Level#FINE} or higher).    */
+comment|/**    * The "org.apache.calcite.sql.parser" tracer reports parser events in    * {@link org.apache.calcite.sql.parser.SqlParser} and other classes (at level    * {@link Level#FINE} or higher).    */
 specifier|public
 specifier|static
 specifier|final
@@ -190,7 +200,7 @@ block|}
 block|}
 decl_stmt|;
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**    * The "org.eigenbase.relopt.RelOptPlanner" tracer prints the query    * optimization process.    *    *<p>Levels:    *    *<ul>    *<li>{@link Level#FINE} prints rules as they fire;    *<li>{@link Level#FINER} prints and validates the whole expression pool    * and rule queue as each rule fires;    *<li>{@link Level#FINEST} prints finer details like rule importances.    *</ul>    */
+comment|/**    * The "org.apache.calcite.plan.RelOptPlanner" tracer prints the query    * optimization process.    *    *<p>Levels:    *    *<ul>    *<li>{@link Level#FINE} prints rules as they fire;    *<li>{@link Level#FINER} prints and validates the whole expression pool    * and rule queue as each rule fires;    *<li>{@link Level#FINEST} prints finer details like rule importances.    *</ul>    */
 specifier|public
 specifier|static
 name|Logger
@@ -211,7 +221,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**    * The "net.hydromatic.optiq.prepare.Prepare" tracer prints the generated    * program at level {@link java.util.logging.Level#FINE} or higher.    */
+comment|/**    * The "org.apache.calcite.prepare.Prepare" tracer prints the generated    * program at level {@link java.util.logging.Level#FINE} or higher.    */
 specifier|public
 specifier|static
 name|Logger
@@ -232,7 +242,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**    * The "org.eigenbase.rel.RelImplementorImpl" tracer reports when    * expressions are bound to variables ({@link Level#FINE})    */
+comment|/**    * The "org.apache.calcite.rel.RelImplementorImpl" tracer reports when    * expressions are bound to variables ({@link Level#FINE})    */
 specifier|public
 specifier|static
 name|Logger
@@ -253,7 +263,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**    * The tracer "org.eigenbase.sql.timing" traces timing for various stages of    * query processing.    *    * @see EigenbaseTimingTracer    */
+comment|/**    * The tracer "org.apache.calcite.sql.timing" traces timing for    * various stages of query processing.    *    * @see CalciteTimingTracer    */
 specifier|public
 specifier|static
 name|Logger
@@ -265,11 +275,11 @@ name|Logger
 operator|.
 name|getLogger
 argument_list|(
-literal|"org.eigenbase.sql.timing"
+literal|"org.apache.calcite.sql.timing"
 argument_list|)
 return|;
 block|}
-comment|/**    * The "org.eigenbase.sql.parser" tracer reports parse events.    */
+comment|/**    * The "org.apache.calcite.sql.parser" tracer reports parse events.    */
 specifier|public
 specifier|static
 name|Logger
@@ -281,11 +291,11 @@ name|Logger
 operator|.
 name|getLogger
 argument_list|(
-literal|"org.eigenbase.sql.parser"
+literal|"org.apache.calcite.sql.parser"
 argument_list|)
 return|;
 block|}
-comment|/**    * The "org.eigenbase.sql2rel" tracer reports parse events.    */
+comment|/**    * The "org.apache.calcite.sql2rel" tracer reports parse events.    */
 specifier|public
 specifier|static
 name|Logger
@@ -297,44 +307,7 @@ name|Logger
 operator|.
 name|getLogger
 argument_list|(
-literal|"org.eigenbase.sql2rel"
-argument_list|)
-return|;
-block|}
-comment|/**    * The "org.eigenbase.jmi.JmiChangeSet" tracer reports JmiChangeSet events.    */
-specifier|public
-specifier|static
-name|Logger
-name|getJmiChangeSetTracer
-parameter_list|()
-block|{
-return|return
-name|Logger
-operator|.
-name|getLogger
-argument_list|(
-literal|"org.eigenbase.jmi.JmiChangeSet"
-argument_list|)
-return|;
-block|}
-comment|/**    * The "org.eigenbase.util.property.Property" tracer reports errors related    * to all manner of properties.    */
-specifier|public
-specifier|static
-name|Logger
-name|getPropertyTracer
-parameter_list|()
-block|{
-return|return
-name|Logger
-operator|.
-name|getLogger
-argument_list|(
-name|Property
-operator|.
-name|class
-operator|.
-name|getName
-argument_list|()
+literal|"org.apache.calcite.sql2rel"
 argument_list|)
 return|;
 block|}
@@ -363,7 +336,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End EigenbaseTrace.java
+comment|// End CalciteTrace.java
 end_comment
 
 end_unit

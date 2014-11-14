@@ -5,11 +5,11 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
 name|test
 package|;
@@ -17,11 +17,11 @@ end_package
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
 name|materialize
 operator|.
@@ -31,15 +31,15 @@ end_import
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
-name|runtime
+name|plan
 operator|.
-name|Hook
+name|RelOptUtil
 import|;
 end_import
 
@@ -47,7 +47,9 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
@@ -59,11 +61,13 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|relopt
+name|calcite
 operator|.
-name|RelOptUtil
+name|runtime
+operator|.
+name|Hook
 import|;
 end_import
 
@@ -71,7 +75,9 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|util
 operator|.
@@ -83,7 +89,9 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|util
 operator|.
@@ -295,7 +303,7 @@ class|class
 name|LatticeTest
 block|{
 specifier|private
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|AssertThat
 name|modelWithLattice
@@ -380,7 +388,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|AssertThat
 name|modelWithLattices
@@ -406,7 +414,7 @@ operator|.
 name|class
 decl_stmt|;
 return|return
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
@@ -566,7 +574,7 @@ argument_list|)
 operator|.
 name|connectThrows
 argument_list|(
-literal|"Invalid node type AggregateRel in lattice query"
+literal|"Invalid node type LogicalAggregate in lattice query"
 argument_list|)
 expr_stmt|;
 block|}
@@ -587,7 +595,7 @@ argument_list|)
 operator|.
 name|connectThrows
 argument_list|(
-literal|"Invalid node type SortRel in lattice query"
+literal|"Invalid node type Sort in lattice query"
 argument_list|)
 expr_stmt|;
 block|}
@@ -612,7 +620,7 @@ argument_list|)
 operator|.
 name|connectThrows
 argument_list|(
-literal|"Invalid node type UnionRel in lattice query"
+literal|"Invalid node type LogicalUnion in lattice query"
 argument_list|)
 expr_stmt|;
 block|}
@@ -716,13 +724,13 @@ argument_list|)
 operator|.
 name|convertMatches
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|checkRel
 argument_list|(
-literal|"AggregateRel(group=[{}], EXPR$0=[COUNT()])\n"
+literal|"LogicalAggregate(group=[{}], EXPR$0=[COUNT()])\n"
 operator|+
-literal|"  ProjectRel(DUMMY=[0])\n"
+literal|"  LogicalProject(DUMMY=[0])\n"
 operator|+
 literal|"    StarTableScan(table=[[adhoc, star]])\n"
 argument_list|,
@@ -802,15 +810,15 @@ argument_list|)
 operator|.
 name|substitutionMatches
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|checkRel
 argument_list|(
-literal|"ProjectRel(unit_sales=[$7], brand_name=[$10])\n"
+literal|"LogicalProject(unit_sales=[$7], brand_name=[$10])\n"
 operator|+
-literal|"  ProjectRel($f0=[$0], $f1=[$1], $f2=[$2], $f3=[$3], $f4=[$4], $f5=[$5], $f6=[$6], $f7=[$7], $f8=[$8], $f9=[$9], $f10=[$10], $f11=[$11], $f12=[$12], $f13=[$13], $f14=[$14], $f15=[$15], $f16=[$16], $f17=[$17], $f18=[$18], $f19=[$19], $f20=[$20], $f21=[$21], $f22=[$22])\n"
+literal|"  LogicalProject($f0=[$0], $f1=[$1], $f2=[$2], $f3=[$3], $f4=[$4], $f5=[$5], $f6=[$6], $f7=[$7], $f8=[$8], $f9=[$9], $f10=[$10], $f11=[$11], $f12=[$12], $f13=[$13], $f14=[$14], $f15=[$15], $f16=[$16], $f17=[$17], $f18=[$18], $f19=[$19], $f20=[$20], $f21=[$21], $f22=[$22])\n"
 operator|+
-literal|"    TableAccessRel(table=[[adhoc, star]])\n"
+literal|"    LogicalTableScan(table=[[adhoc, star]])\n"
 argument_list|,
 name|counter
 argument_list|)
@@ -846,7 +854,7 @@ operator|new
 name|AtomicInteger
 argument_list|()
 decl_stmt|;
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|AssertQuery
 name|that
@@ -915,18 +923,18 @@ name|anyOf
 argument_list|(
 name|containsString
 argument_list|(
-literal|"ProjectRel($f0=[$1], $f1=[$0])\n"
+literal|"LogicalProject($f0=[$1], $f1=[$0])\n"
 operator|+
-literal|"  AggregateRel(group=[{2, 10}])\n"
+literal|"  LogicalAggregate(group=[{2, 10}])\n"
 operator|+
-literal|"    TableAccessRel(table=[[adhoc, star]])\n"
+literal|"    LogicalTableScan(table=[[adhoc, star]])\n"
 argument_list|)
 argument_list|,
 name|containsString
 argument_list|(
-literal|"AggregateRel(group=[{2, 10}])\n"
+literal|"LogicalAggregate(group=[{2, 10}])\n"
 operator|+
-literal|"  TableAccessRel(table=[[adhoc, star]])\n"
+literal|"  LogicalTableScan(table=[[adhoc, star]])\n"
 argument_list|)
 argument_list|)
 argument_list|)
@@ -955,9 +963,11 @@ name|that
 operator|.
 name|explainContains
 argument_list|(
-literal|"EnumerableCalcRel(expr#0..1=[{inputs}], $f0=[$t1], $f1=[$t0])\n"
+literal|""
 operator|+
-literal|"  EnumerableTableAccessRel(table=[[adhoc, m{2, 10}]])"
+literal|"EnumerableCalc(expr#0..1=[{inputs}], $f0=[$t1], $f1=[$t0])\n"
+operator|+
+literal|"  EnumerableTableScan(table=[[adhoc, m{2, 10}]])"
 argument_list|)
 operator|.
 name|returnsCount
@@ -1010,7 +1020,7 @@ literal|69203
 argument_list|)
 expr_stmt|;
 comment|// Ideally the counter would stay at 2. It increments to 3 because
-comment|// OptiqAssert.AssertQuery creates a new schema for every request,
+comment|// CalciteAssert.AssertQuery creates a new schema for every request,
 comment|// and therefore cannot re-use lattices or materializations from the
 comment|// previous request.
 name|assertThat
@@ -1070,7 +1080,7 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"EnumerableTableAccessRel(table=[[adhoc, m{27, 31}"
+literal|"EnumerableTableScan(table=[[adhoc, m{27, 31}"
 argument_list|)
 operator|.
 name|returnsCount
@@ -1108,9 +1118,11 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"EnumerableCalcRel(expr#0..4=[{inputs}], proj#0..2=[{exprs}])\n"
+literal|""
 operator|+
-literal|"  EnumerableTableAccessRel(table=[[adhoc, m{27, 31}"
+literal|"EnumerableCalc(expr#0..4=[{inputs}], proj#0..2=[{exprs}])\n"
+operator|+
+literal|"  EnumerableTableScan(table=[[adhoc, m{27, 31}"
 argument_list|)
 operator|.
 name|returnsUnordered
@@ -1163,11 +1175,13 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"EnumerableCalcRel(expr#0..3=[{inputs}], expr#4=[10], expr#5=[*($t3, $t4)], proj#0..2=[{exprs}], US=[$t5])\n"
+literal|""
 operator|+
-literal|"  EnumerableAggregateRel(group=[{0}], C=[$SUM0($2)], Q=[MIN($1)], agg#2=[$SUM0($4)])\n"
+literal|"EnumerableCalc(expr#0..3=[{inputs}], expr#4=[10], expr#5=[*($t3, $t4)], proj#0..2=[{exprs}], US=[$t5])\n"
 operator|+
-literal|"    EnumerableTableAccessRel(table=[[adhoc, m{27, 31}"
+literal|"  EnumerableAggregate(group=[{0}], C=[$SUM0($2)], Q=[MIN($1)], agg#2=[$SUM0($4)])\n"
+operator|+
+literal|"    EnumerableTableScan(table=[[adhoc, m{27, 31}"
 argument_list|)
 operator|.
 name|returnsUnordered
@@ -1253,9 +1267,9 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"EnumerableAggregateRel(group=[{2, 3}])\n"
+literal|"EnumerableAggregate(group=[{2, 3}])\n"
 operator|+
-literal|"  EnumerableTableAccessRel(table=[[adhoc, m{16, 17, 27, 31}]])"
+literal|"  EnumerableTableScan(table=[[adhoc, m{16, 17, 27, 31}]])"
 argument_list|)
 operator|.
 name|returnsUnordered
@@ -1406,7 +1420,7 @@ block|}
 block|}
 decl_stmt|;
 specifier|final
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|AssertThat
 name|that
@@ -1442,7 +1456,7 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"EnumerableTableAccessRel(table=[[adhoc, m{}]])"
+literal|"EnumerableTableScan(table=[[adhoc, m{}]])"
 argument_list|)
 operator|.
 name|returnsUnordered
@@ -1578,13 +1592,13 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"EnumerableCalcRel(expr#0..1=[{inputs}], C=[$t1])\n"
+literal|"EnumerableCalc(expr#0..1=[{inputs}], C=[$t1])\n"
 operator|+
-literal|"  EnumerableAggregateRel(group=[{0}], C=[COUNT($1)])\n"
+literal|"  EnumerableAggregate(group=[{0}], C=[COUNT($1)])\n"
 operator|+
-literal|"    EnumerableCalcRel(expr#0..4=[{inputs}], proj#0..1=[{exprs}])\n"
+literal|"    EnumerableCalc(expr#0..4=[{inputs}], proj#0..1=[{exprs}])\n"
 operator|+
-literal|"      EnumerableTableAccessRel(table=[[adhoc, m{27, 31}]])"
+literal|"      EnumerableTableScan(table=[[adhoc, m{27, 31}]])"
 argument_list|)
 operator|.
 name|returnsUnordered
@@ -1621,13 +1635,13 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"EnumerableCalcRel(expr#0..1=[{inputs}], C=[$t1])\n"
+literal|"EnumerableCalc(expr#0..1=[{inputs}], C=[$t1])\n"
 operator|+
-literal|"  EnumerableAggregateRel(group=[{0}], C=[COUNT($0)])\n"
+literal|"  EnumerableAggregate(group=[{0}], C=[COUNT($0)])\n"
 operator|+
-literal|"    EnumerableAggregateRel(group=[{0}])\n"
+literal|"    EnumerableAggregate(group=[{0}])\n"
 operator|+
-literal|"      EnumerableTableAccessRel(table=[[adhoc, m{27, 31}]])"
+literal|"      EnumerableTableScan(table=[[adhoc, m{27, 31}]])"
 argument_list|)
 operator|.
 name|returnsUnordered
@@ -1892,7 +1906,7 @@ block|{
 comment|// TODO
 block|}
 specifier|private
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|AssertThat
 name|foodmartModel
@@ -1920,7 +1934,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|AssertThat
 name|foodmartModelWithOneTile
@@ -2003,7 +2017,7 @@ name|out
 operator|.
 name|println
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|toString
 argument_list|(

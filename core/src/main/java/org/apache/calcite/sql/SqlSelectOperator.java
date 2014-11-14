@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 package|;
@@ -15,25 +17,17 @@ end_package
 
 begin_import
 import|import
-name|java
-operator|.
-name|util
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
 name|parser
 operator|.
-name|*
+name|SqlParserPos
 import|;
 end_import
 
@@ -41,13 +35,15 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
 name|type
 operator|.
-name|*
+name|ReturnTypes
 import|;
 end_import
 
@@ -55,13 +51,41 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
 name|util
 operator|.
-name|*
+name|SqlBasicVisitor
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|util
+operator|.
+name|SqlVisitor
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|ArrayList
 import|;
 end_import
 
@@ -218,7 +242,7 @@ index|]
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates a call to the<code>SELECT</code> operator.    *    * @param keywordList List of keywords such DISTINCT and ALL, or null    * @param selectList  The SELECT clause, or null if empty    * @param fromClause  The FROM clause    * @param whereClause The WHERE clause, or null if not present    * @param groupBy     The GROUP BY clause, or null if not present    * @param having      The HAVING clause, or null if not present    * @param windowDecls The WINDOW clause, or null if not present    * @param orderBy     The ORDER BY clause, or null if not present    * @param offset      Expression for number of rows to discard before    *                    returning first row    * @param fetch       Expression for number of rows to fetch    * @param pos         The parser position, or    *                    {@link org.eigenbase.sql.parser.SqlParserPos#ZERO} if not    *                    specified; must not be null.    * @return A {@link SqlSelect}, never null    */
+comment|/**    * Creates a call to the<code>SELECT</code> operator.    *    * @param keywordList List of keywords such DISTINCT and ALL, or null    * @param selectList  The SELECT clause, or null if empty    * @param fromClause  The FROM clause    * @param whereClause The WHERE clause, or null if not present    * @param groupBy     The GROUP BY clause, or null if not present    * @param having      The HAVING clause, or null if not present    * @param windowDecls The WINDOW clause, or null if not present    * @param orderBy     The ORDER BY clause, or null if not present    * @param offset      Expression for number of rows to discard before    *                    returning first row    * @param fetch       Expression for number of rows to fetch    * @param pos         The parser position, or    *                    {@link org.apache.calcite.sql.parser.SqlParserPos#ZERO}    *                    if not specified; must not be null.    * @return A {@link SqlSelect}, never null    */
 specifier|public
 name|SqlSelect
 name|createCall

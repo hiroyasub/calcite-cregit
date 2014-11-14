@@ -5,20 +5,20 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
-name|rules
+name|adapter
 operator|.
-name|java
+name|enumerable
 package|;
 end_package
 
 begin_comment
-comment|/**  * Information for a call to {@link AggImplementor#implementResult(AggContext, AggResultContext)}  * Typically, the aggregation implementation will convert {@link #accumulator()}  * to the resulting value of the aggregation.  * The implementation MUST NOT destroy the contents of {@link #accumulator()}.  */
+comment|/**  * Information for a call to  * {@link AggImplementor#implementResult(AggContext, AggResultContext)}  *  *<p>Typically, the aggregation implementation will convert  * {@link #accumulator()} to the resulting value of the aggregation.  The  * implementation MUST NOT destroy the contents of {@link #accumulator()}.  */
 end_comment
 
 begin_interface

@@ -5,11 +5,11 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
 name|server
 package|;
@@ -17,29 +17,29 @@ end_package
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
 name|jdbc
 operator|.
-name|OptiqConnection
+name|CalciteConnection
 import|;
 end_import
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
 name|jdbc
 operator|.
-name|OptiqPrepare
+name|CalcitePrepare
 import|;
 end_import
 
@@ -50,17 +50,17 @@ end_comment
 begin_interface
 specifier|public
 interface|interface
-name|OptiqServerStatement
+name|CalciteServerStatement
 block|{
 comment|/** Creates a context for preparing a statement for execution. */
-name|OptiqPrepare
+name|CalcitePrepare
 operator|.
 name|Context
 name|createPrepareContext
 parameter_list|()
 function_decl|;
 comment|/** Returns the connection. */
-name|OptiqConnection
+name|CalciteConnection
 name|getConnection
 parameter_list|()
 function_decl|;
@@ -68,7 +68,7 @@ block|}
 end_interface
 
 begin_comment
-comment|// End OptiqServerStatement.java
+comment|// End CalciteServerStatement.java
 end_comment
 
 end_unit

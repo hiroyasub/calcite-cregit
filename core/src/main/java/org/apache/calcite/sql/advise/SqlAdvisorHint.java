@@ -7,13 +7,31 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
 name|advise
 package|;
 end_package
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|validate
+operator|.
+name|SqlMoniker
+import|;
+end_import
 
 begin_import
 import|import
@@ -25,22 +43,8 @@ name|List
 import|;
 end_import
 
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
-name|sql
-operator|.
-name|validate
-operator|.
-name|SqlMoniker
-import|;
-end_import
-
 begin_comment
-comment|/**  * This class is used to return values for {@link SqlAdvisor#getCompletionHints  * (String, int, String[])}.  */
+comment|/**  * This class is used to return values for  * {@link SqlAdvisor#getCompletionHints (String, int, String[])}.  */
 end_comment
 
 begin_class
@@ -61,7 +65,7 @@ name|String
 index|[]
 name|names
 decl_stmt|;
-comment|/** One of {@link org.eigenbase.sql.validate.SqlMonikerType}. */
+comment|/** One of {@link org.apache.calcite.sql.validate.SqlMonikerType}. */
 specifier|public
 specifier|final
 name|String
@@ -165,6 +169,10 @@ expr_stmt|;
 block|}
 block|}
 end_class
+
+begin_comment
+comment|// End SqlAdvisorHint.java
+end_comment
 
 end_unit
 

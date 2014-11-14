@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
@@ -19,16 +21,116 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
-name|*
+name|SqlCall
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|SqlDataTypeSpec
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|SqlDynamicParam
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|SqlIdentifier
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|SqlIntervalQualifier
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|SqlLiteral
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|SqlNode
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|SqlNodeList
 import|;
 end_import
 
 begin_comment
-comment|/**  * Basic implementation of {@link SqlVisitor} which does nothing at each node.  *  *<p>This class is useful as a base class for classes which implement the  * {@link SqlVisitor} interface. The derived class can override whichever  * methods it chooses.  */
+comment|/**  * Basic implementation of {@link SqlVisitor} which does nothing at each node.  *  *<p>This class is useful as a base class for classes which implement the  * {@link SqlVisitor} interface. The derived class can override whichever  * methods it chooses.  *  * @param<R> Return type  */
 end_comment
 
 begin_class
@@ -183,10 +285,7 @@ literal|null
 return|;
 block|}
 comment|//~ Inner Interfaces -------------------------------------------------------
-comment|// REVIEW jvs 16-June-2006:  Without javadoc, the interaction between
-comment|// ArgHandler and SqlBasicVisitor isn't obvious (nor why this interface
-comment|// belongs here instead of at top-level).  visitChild already returns
-comment|// R; why is a separate result() call needed?
+comment|/** Argument handler. */
 specifier|public
 interface|interface
 name|ArgHandler
@@ -194,10 +293,12 @@ parameter_list|<
 name|R
 parameter_list|>
 block|{
+comment|/** Returns the result of visiting all children of a call to an operator,      * then the call itself.      *      *<p>Typically the result will be the result of the last child visited, or      * (if R is {@link Boolean}) whether all children were visited      * successfully. */
 name|R
 name|result
 parameter_list|()
 function_decl|;
+comment|/** Visits a particular operand of a call, using a given visitor. */
 name|R
 name|visitChild
 parameter_list|(
@@ -219,7 +320,7 @@ parameter_list|)
 function_decl|;
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------
-comment|/**    * Default implementation of {@link ArgHandler} which merely calls {@link    * SqlNode#accept} on each operand.    */
+comment|/**    * Default implementation of {@link ArgHandler} which merely calls    * {@link SqlNode#accept} on each operand.    */
 specifier|public
 specifier|static
 class|class

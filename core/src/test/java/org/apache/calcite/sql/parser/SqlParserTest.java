@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
@@ -17,11 +19,15 @@ end_package
 
 begin_import
 import|import
-name|java
+name|org
 operator|.
-name|util
+name|apache
 operator|.
-name|*
+name|calcite
+operator|.
+name|avatica
+operator|.
+name|Casing
 import|;
 end_import
 
@@ -29,11 +35,27 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
+operator|.
+name|avatica
+operator|.
+name|Quoting
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
-name|*
+name|SqlDialect
 import|;
 end_import
 
@@ -41,7 +63,37 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|SqlNode
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|SqlSetOption
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
@@ -49,7 +101,7 @@ name|parser
 operator|.
 name|impl
 operator|.
-name|*
+name|SqlParserImpl
 import|;
 end_import
 
@@ -57,7 +109,9 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
@@ -71,11 +125,13 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|test
 operator|.
-name|*
+name|SqlValidatorTestCase
 import|;
 end_import
 
@@ -83,11 +139,13 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|util
 operator|.
-name|*
+name|Bug
 import|;
 end_import
 
@@ -95,35 +153,41 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|util14
+name|calcite
 operator|.
-name|*
+name|util
+operator|.
+name|ConversionUtil
 import|;
 end_import
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|avatica
+name|calcite
 operator|.
-name|Casing
+name|util
+operator|.
+name|TestUtil
 import|;
 end_import
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|avatica
+name|calcite
 operator|.
-name|Quoting
+name|util
+operator|.
+name|Util
 import|;
 end_import
 
@@ -148,6 +212,16 @@ import|;
 end_import
 
 begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Locale
+import|;
+end_import
+
+begin_import
 import|import static
 name|org
 operator|.
@@ -155,7 +229,7 @@ name|hamcrest
 operator|.
 name|CoreMatchers
 operator|.
-name|*
+name|equalTo
 import|;
 end_import
 
@@ -167,12 +241,48 @@ name|junit
 operator|.
 name|Assert
 operator|.
-name|*
+name|assertEquals
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|assertFalse
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|assertThat
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|assertTrue
 import|;
 end_import
 
 begin_comment
-comment|/**  * A<code>SqlParserTest</code> is a unit-test for {@link SqlParser the SQL  * parser}.  */
+comment|/**  * A<code>SqlParserTest</code> is a unit-test for  * {@link SqlParser the SQL parser}.  */
 end_comment
 
 begin_class
@@ -13380,7 +13490,7 @@ literal|"' must be less than or equal to 128 characters"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Tests that you can't quote the names of builtin functions.    *    * @see org.eigenbase.test.SqlValidatorTest#testQuotedFunction()    */
+comment|/**    * Tests that you can't quote the names of builtin functions.    *    * @see org.apache.calcite.test.SqlValidatorTest#testQuotedFunction()    */
 annotation|@
 name|Test
 specifier|public
@@ -13726,7 +13836,7 @@ name|SqlPrettyWriter
 argument_list|(
 name|SqlDialect
 operator|.
-name|EIGENBASE
+name|CALCITE
 argument_list|)
 decl_stmt|;
 name|assertThat
@@ -13754,7 +13864,7 @@ name|SqlPrettyWriter
 argument_list|(
 name|SqlDialect
 operator|.
-name|EIGENBASE
+name|CALCITE
 argument_list|)
 expr_stmt|;
 name|assertThat
@@ -14342,7 +14452,7 @@ name|toSqlString
 argument_list|(
 name|SqlDialect
 operator|.
-name|EIGENBASE
+name|CALCITE
 argument_list|,
 literal|false
 argument_list|)
@@ -14369,7 +14479,7 @@ name|toSqlString
 argument_list|(
 name|SqlDialect
 operator|.
-name|EIGENBASE
+name|CALCITE
 argument_list|,
 literal|false
 argument_list|)
@@ -14467,7 +14577,7 @@ name|toSqlString
 argument_list|(
 name|SqlDialect
 operator|.
-name|EIGENBASE
+name|CALCITE
 argument_list|,
 literal|false
 argument_list|)
@@ -14494,7 +14604,7 @@ name|toSqlString
 argument_list|(
 name|SqlDialect
 operator|.
-name|EIGENBASE
+name|CALCITE
 argument_list|,
 literal|false
 argument_list|)

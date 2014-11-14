@@ -5,13 +5,13 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
-name|impl
+name|adapter
 operator|.
 name|splunk
 operator|.
@@ -25,7 +25,7 @@ name|java
 operator|.
 name|io
 operator|.
-name|*
+name|IOException
 import|;
 end_import
 
@@ -35,7 +35,37 @@ name|java
 operator|.
 name|net
 operator|.
-name|*
+name|InetAddress
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|net
+operator|.
+name|InetSocketAddress
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|net
+operator|.
+name|Socket
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|net
+operator|.
+name|SocketException
 import|;
 end_import
 
@@ -45,7 +75,7 @@ name|javax
 operator|.
 name|net
 operator|.
-name|*
+name|SocketFactory
 import|;
 end_import
 

@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
@@ -19,11 +21,13 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|rel
+name|calcite
 operator|.
-name|*
+name|plan
+operator|.
+name|RelOptRule
 import|;
 end_import
 
@@ -31,52 +35,70 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|relopt
+name|calcite
 operator|.
-name|*
+name|plan
+operator|.
+name|RelOptRuleCall
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|logical
+operator|.
+name|LogicalFilter
 import|;
 end_import
 
 begin_comment
-comment|/**  * PushFilterIntoMultiJoinRule implements the rule for pushing a {@link  * FilterRel} into a {@link MultiJoinRel}.  */
+comment|/**  * Planner rule that merges a  * {@link org.apache.calcite.rel.logical.LogicalFilter}  * into a {@link MultiJoin},  * creating a richer {@code MultiJoin}.  *  * @see org.apache.calcite.rel.rules.ProjectMultiJoinMergeRule  */
 end_comment
 
 begin_class
 specifier|public
 class|class
-name|PushFilterIntoMultiJoinRule
+name|FilterMultiJoinMergeRule
 extends|extends
 name|RelOptRule
 block|{
 specifier|public
 specifier|static
 specifier|final
-name|PushFilterIntoMultiJoinRule
+name|FilterMultiJoinMergeRule
 name|INSTANCE
 init|=
 operator|new
-name|PushFilterIntoMultiJoinRule
+name|FilterMultiJoinMergeRule
 argument_list|()
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a PushFilterIntoMultiJoinRule.    */
+comment|/**    * Creates a FilterMultiJoinMergeRule.    */
 specifier|private
-name|PushFilterIntoMultiJoinRule
+name|FilterMultiJoinMergeRule
 parameter_list|()
 block|{
 name|super
 argument_list|(
 name|operand
 argument_list|(
-name|FilterRel
+name|LogicalFilter
 operator|.
 name|class
 argument_list|,
 name|operand
 argument_list|(
-name|MultiJoinRel
+name|MultiJoin
 operator|.
 name|class
 argument_list|,
@@ -88,7 +110,6 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|// implement RelOptRule
 specifier|public
 name|void
 name|onMatch
@@ -97,8 +118,8 @@ name|RelOptRuleCall
 name|call
 parameter_list|)
 block|{
-name|FilterRel
-name|filterRel
+name|LogicalFilter
+name|filter
 init|=
 name|call
 operator|.
@@ -107,8 +128,8 @@ argument_list|(
 literal|0
 argument_list|)
 decl_stmt|;
-name|MultiJoinRel
-name|multiJoinRel
+name|MultiJoin
+name|multiJoin
 init|=
 name|call
 operator|.
@@ -117,58 +138,58 @@ argument_list|(
 literal|1
 argument_list|)
 decl_stmt|;
-name|MultiJoinRel
-name|newMultiJoinRel
+name|MultiJoin
+name|newMultiJoin
 init|=
 operator|new
-name|MultiJoinRel
+name|MultiJoin
 argument_list|(
-name|multiJoinRel
+name|multiJoin
 operator|.
 name|getCluster
 argument_list|()
 argument_list|,
-name|multiJoinRel
+name|multiJoin
 operator|.
 name|getInputs
 argument_list|()
 argument_list|,
-name|multiJoinRel
+name|multiJoin
 operator|.
 name|getJoinFilter
 argument_list|()
 argument_list|,
-name|multiJoinRel
+name|multiJoin
 operator|.
 name|getRowType
 argument_list|()
 argument_list|,
-name|multiJoinRel
+name|multiJoin
 operator|.
 name|isFullOuterJoin
 argument_list|()
 argument_list|,
-name|multiJoinRel
+name|multiJoin
 operator|.
 name|getOuterJoinConditions
 argument_list|()
 argument_list|,
-name|multiJoinRel
+name|multiJoin
 operator|.
 name|getJoinTypes
 argument_list|()
 argument_list|,
-name|multiJoinRel
+name|multiJoin
 operator|.
 name|getProjFields
 argument_list|()
 argument_list|,
-name|multiJoinRel
+name|multiJoin
 operator|.
 name|getJoinFieldRefCountsMap
 argument_list|()
 argument_list|,
-name|filterRel
+name|filter
 operator|.
 name|getCondition
 argument_list|()
@@ -178,7 +199,7 @@ name|call
 operator|.
 name|transformTo
 argument_list|(
-name|newMultiJoinRel
+name|newMultiJoin
 argument_list|)
 expr_stmt|;
 block|}
@@ -186,7 +207,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End PushFilterIntoMultiJoinRule.java
+comment|// End FilterMultiJoinMergeRule.java
 end_comment
 
 end_unit

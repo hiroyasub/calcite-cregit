@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
@@ -19,11 +21,13 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|rel
+name|calcite
 operator|.
-name|*
+name|plan
+operator|.
+name|RelOptRule
 import|;
 end_import
 
@@ -31,11 +35,29 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|relopt
+name|calcite
 operator|.
-name|*
+name|plan
+operator|.
+name|RelOptRuleCall
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|logical
+operator|.
+name|LogicalUnion
 import|;
 end_import
 
@@ -70,7 +92,7 @@ name|super
 argument_list|(
 name|operand
 argument_list|(
-name|UnionRel
+name|LogicalUnion
 operator|.
 name|class
 argument_list|,
@@ -89,7 +111,7 @@ name|RelOptRuleCall
 name|call
 parameter_list|)
 block|{
-name|UnionRel
+name|LogicalUnion
 name|union
 init|=
 name|call
@@ -125,7 +147,7 @@ block|{
 return|return;
 block|}
 comment|// REVIEW jvs 14-Mar-2006:  why don't we need to register
-comment|// the equivalence here like we do in RemoveDistinctRule?
+comment|// the equivalence here like we do in AggregateRemoveRule?
 name|call
 operator|.
 name|transformTo

@@ -7,23 +7,15 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|relopt
+name|calcite
+operator|.
+name|plan
 operator|.
 name|hep
 package|;
 end_package
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|*
-import|;
-end_import
 
 begin_import
 import|import
@@ -39,8 +31,18 @@ name|ImmutableList
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
+import|;
+end_import
+
 begin_comment
-comment|/**  * HepProgram specifies the order in which rules should be attempted by {@link  * HepPlanner}. Use {@link HepProgramBuilder} to create a new instance of  * HepProgram.  *  *<p>Note that the structure of a program is immutable, but the planner uses it  * as read/write during planning, so a program can only be in use by a single  * planner at a time.  */
+comment|/**  * HepProgram specifies the order in which rules should be attempted by  * {@link HepPlanner}. Use {@link HepProgramBuilder} to create a new  * instance of HepProgram.  *  *<p>Note that the structure of a program is immutable, but the planner uses it  * as read/write during planning, so a program can only be in use by a single  * planner at a time.  */
 end_comment
 
 begin_class
@@ -80,7 +82,7 @@ name|EndGroup
 name|group
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a new empty HepProgram. The program has an initial match order of    * {@link org.eigenbase.relopt.hep.HepMatchOrder#ARBITRARY}, and an initial    * match limit of {@link #MATCH_UNTIL_FIXPOINT}.    */
+comment|/**    * Creates a new empty HepProgram. The program has an initial match order of    * {@link org.apache.calcite.plan.hep.HepMatchOrder#ARBITRARY}, and an initial    * match limit of {@link #MATCH_UNTIL_FIXPOINT}.    */
 name|HepProgram
 parameter_list|(
 name|List

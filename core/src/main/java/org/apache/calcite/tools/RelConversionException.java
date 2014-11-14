@@ -5,18 +5,18 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
 name|tools
 package|;
 end_package
 
 begin_comment
-comment|/**  * An Exception thrown when attempting conversion to a set of  * {@link org.eigenbase.rel.RelNode}s.  */
+comment|/**  * An Exception thrown when attempting conversion to a set of  * {@link org.apache.calcite.rel.RelNode}s.  */
 end_comment
 
 begin_class

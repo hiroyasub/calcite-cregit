@@ -5,11 +5,11 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
 name|jdbc
 package|;
@@ -17,9 +17,11 @@ end_package
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
+operator|.
+name|calcite
 operator|.
 name|avatica
 operator|.
@@ -29,9 +31,11 @@ end_import
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
+operator|.
+name|calcite
 operator|.
 name|avatica
 operator|.
@@ -41,15 +45,15 @@ end_import
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
 name|server
 operator|.
-name|OptiqServerStatement
+name|CalciteServerStatement
 import|;
 end_import
 
@@ -59,28 +63,28 @@ name|java
 operator|.
 name|sql
 operator|.
-name|*
+name|SQLException
 import|;
 end_import
 
 begin_comment
-comment|/**  * Implementation of {@link java.sql.PreparedStatement}  * for the Calcite engine.  *  *<p>This class has sub-classes which implement JDBC 3.0 and JDBC 4.0 APIs;  * it is instantiated using {@link net.hydromatic.avatica.AvaticaFactory#newPreparedStatement}.</p>  */
+comment|/**  * Implementation of {@link java.sql.PreparedStatement}  * for the Calcite engine.  *  *<p>This class has sub-classes which implement JDBC 3.0 and JDBC 4.0 APIs;  * it is instantiated using  * {@link org.apache.calcite.avatica.AvaticaFactory#newPreparedStatement}.  */
 end_comment
 
 begin_class
 specifier|abstract
 class|class
-name|OptiqPreparedStatement
+name|CalcitePreparedStatement
 extends|extends
 name|AvaticaPreparedStatement
 implements|implements
-name|OptiqServerStatement
+name|CalciteServerStatement
 block|{
-comment|/**    * Creates an OptiqPreparedStatement.    *    * @param connection Connection    * @param prepareResult Result of preparing statement    *    * @throws SQLException if database error occurs    */
+comment|/**    * Creates a CalcitePreparedStatement.    *    * @param connection Connection    * @param prepareResult Result of preparing statement    *    * @throws SQLException if database error occurs    */
 specifier|protected
-name|OptiqPreparedStatement
+name|CalcitePreparedStatement
 parameter_list|(
-name|OptiqConnectionImpl
+name|CalciteConnectionImpl
 name|connection
 parameter_list|,
 name|AvaticaPrepareResult
@@ -115,13 +119,13 @@ block|}
 annotation|@
 name|Override
 specifier|public
-name|OptiqConnectionImpl
+name|CalciteConnectionImpl
 name|getConnection
 parameter_list|()
 block|{
 return|return
 operator|(
-name|OptiqConnectionImpl
+name|CalciteConnectionImpl
 operator|)
 name|super
 operator|.
@@ -130,7 +134,7 @@ argument_list|()
 return|;
 block|}
 specifier|public
-name|OptiqConnectionImpl
+name|CalciteConnectionImpl
 operator|.
 name|ContextImpl
 name|createPrepareContext
@@ -138,7 +142,7 @@ parameter_list|()
 block|{
 return|return
 operator|new
-name|OptiqConnectionImpl
+name|CalciteConnectionImpl
 operator|.
 name|ContextImpl
 argument_list|(
@@ -151,7 +155,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End OptiqPreparedStatement.java
+comment|// End CalcitePreparedStatement.java
 end_comment
 
 end_unit

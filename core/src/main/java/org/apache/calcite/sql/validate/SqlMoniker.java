@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
@@ -17,23 +19,25 @@ end_package
 
 begin_import
 import|import
-name|java
+name|org
 operator|.
-name|util
+name|apache
 operator|.
-name|List
+name|calcite
+operator|.
+name|sql
+operator|.
+name|SqlIdentifier
 import|;
 end_import
 
 begin_import
 import|import
-name|org
+name|java
 operator|.
-name|eigenbase
+name|util
 operator|.
-name|sql
-operator|.
-name|*
+name|List
 import|;
 end_import
 

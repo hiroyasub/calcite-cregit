@@ -5,11 +5,11 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
 name|tools
 package|;
@@ -19,9 +19,11 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|relopt
+name|calcite
+operator|.
+name|plan
 operator|.
 name|RelOptRule
 import|;
@@ -62,7 +64,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Utilities for creating and composing rule sets.  *  * @see net.hydromatic.optiq.tools.RuleSet  */
+comment|/**  * Utilities for creating and composing rule sets.  *  * @see org.apache.calcite.tools.RuleSet  */
 end_comment
 
 begin_class

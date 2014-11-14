@@ -4,16 +4,18 @@ comment|/*  * Licensed to the Apache Software Foundation (ASF) under one or more
 end_comment
 
 begin_comment
-comment|/**  * Provides a heuristic planner implementation for the interfaces in  * {@link org.eigenbase.relopt}.  */
+comment|/**  * Provides a heuristic planner implementation for the interfaces in  * {@link org.apache.calcite.plan}.  */
 end_comment
 
 begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|relopt
+name|calcite
+operator|.
+name|plan
 operator|.
 name|hep
 package|;

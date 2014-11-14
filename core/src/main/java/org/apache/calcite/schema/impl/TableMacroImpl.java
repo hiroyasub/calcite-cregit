@@ -5,11 +5,13 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
+operator|.
+name|schema
 operator|.
 name|impl
 package|;
@@ -17,13 +19,29 @@ end_package
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
-name|*
+name|schema
+operator|.
+name|TableMacro
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|schema
+operator|.
+name|TranslatableTable
 import|;
 end_import
 
@@ -87,18 +105,20 @@ begin_import
 import|import static
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|util
 operator|.
 name|Static
 operator|.
-name|*
+name|RESOURCE
 import|;
 end_import
 
 begin_comment
-comment|/**  * Implementation of {@link net.hydromatic.optiq.TableMacro} based on a method. */
+comment|/**  * Implementation of {@link org.apache.calcite.schema.TableMacro} based on a  * method. */
 end_comment
 
 begin_class

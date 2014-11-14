@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
@@ -17,11 +19,15 @@ end_package
 
 begin_import
 import|import
-name|java
+name|org
 operator|.
-name|util
+name|apache
 operator|.
-name|*
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptRule
 import|;
 end_import
 
@@ -29,11 +35,41 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptRuleCall
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptUtil
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
-name|*
+name|RelNode
 import|;
 end_import
 
@@ -41,11 +77,13 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|relopt
+name|calcite
 operator|.
-name|*
+name|rel
+operator|.
+name|SingleRel
 import|;
 end_import
 
@@ -53,7 +91,121 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|core
+operator|.
+name|Aggregate
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|core
+operator|.
+name|Empty
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|core
+operator|.
+name|Filter
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|core
+operator|.
+name|Join
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|core
+operator|.
+name|Project
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|core
+operator|.
+name|Sort
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|logical
+operator|.
+name|LogicalUnion
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rex
 operator|.
@@ -62,31 +214,117 @@ import|;
 end_import
 
 begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|ArrayList
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
+import|;
+end_import
+
+begin_import
 import|import static
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|relopt
+name|calcite
+operator|.
+name|plan
 operator|.
 name|RelOptRule
 operator|.
-name|*
+name|any
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptRule
+operator|.
+name|none
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptRule
+operator|.
+name|operand
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptRule
+operator|.
+name|some
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptRule
+operator|.
+name|unordered
 import|;
 end_import
 
 begin_comment
-comment|/**  * Collection of rules which remove sections of a query plan known never to  * produce any rows.  *  * @see EmptyRel  */
+comment|/**  * Collection of rules which remove sections of a query plan known never to  * produce any rows.  *  * @see org.apache.calcite.rel.core.Empty  */
 end_comment
 
 begin_class
 specifier|public
 specifier|abstract
 class|class
-name|RemoveEmptyRules
+name|EmptyPruneRules
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
-comment|/**    * Rule that removes empty children of a    * {@link UnionRel}.    *    *<p>Examples:    *    *<ul>    *<li>Union(Rel, Empty, Rel2) becomes Union(Rel, Rel2)    *<li>Union(Rel, Empty, Empty) becomes Rel    *<li>Union(Empty, Empty) becomes Empty    *</ul>    */
+comment|/**    * Rule that removes empty children of a    * {@link org.apache.calcite.rel.logical.LogicalUnion}.    *    *<p>Examples:    *    *<ul>    *<li>Union(Rel, Empty, Rel2) becomes Union(Rel, Rel2)    *<li>Union(Rel, Empty, Empty) becomes Rel    *<li>Union(Empty, Empty) becomes Empty    *</ul>    */
 specifier|public
 specifier|static
 specifier|final
@@ -98,7 +336,7 @@ name|RelOptRule
 argument_list|(
 name|operand
 argument_list|(
-name|UnionRel
+name|LogicalUnion
 operator|.
 name|class
 argument_list|,
@@ -106,7 +344,7 @@ name|unordered
 argument_list|(
 name|operand
 argument_list|(
-name|EmptyRel
+name|Empty
 operator|.
 name|class
 argument_list|,
@@ -127,7 +365,7 @@ name|RelOptRuleCall
 name|call
 parameter_list|)
 block|{
-name|UnionRel
+name|LogicalUnion
 name|union
 init|=
 name|call
@@ -179,7 +417,7 @@ operator|!
 operator|(
 name|childRel
 operator|instanceof
-name|EmptyRel
+name|Empty
 operator|)
 condition|)
 block|{
@@ -203,7 +441,7 @@ operator|.
 name|size
 argument_list|()
 operator|:
-literal|"planner promised us at least one EmptyRel child"
+literal|"planner promised us at least one Empty child"
 assert|;
 name|RelNode
 name|newRel
@@ -256,7 +494,7 @@ default|default:
 name|newRel
 operator|=
 operator|new
-name|UnionRel
+name|LogicalUnion
 argument_list|(
 name|union
 operator|.
@@ -282,7 +520,7 @@ expr_stmt|;
 block|}
 block|}
 decl_stmt|;
-comment|/**    * Rule that converts a {@link ProjectRel}    * to empty if its child is empty.    *    *<p>Examples:    *    *<ul>    *<li>Project(Empty) becomes Empty    *</ul>    */
+comment|/**    * Rule that converts a {@link org.apache.calcite.rel.logical.LogicalProject}    * to empty if its child is empty.    *    *<p>Examples:    *    *<ul>    *<li>Project(Empty) becomes Empty    *</ul>    */
 specifier|public
 specifier|static
 specifier|final
@@ -292,14 +530,14 @@ init|=
 operator|new
 name|RemoveEmptySingleRule
 argument_list|(
-name|ProjectRelBase
+name|Project
 operator|.
 name|class
 argument_list|,
 literal|"PruneEmptyProject"
 argument_list|)
 decl_stmt|;
-comment|/**    * Rule that converts a {@link FilterRel}    * to empty if its child is empty.    *    *<p>Examples:    *    *<ul>    *<li>Filter(Empty) becomes Empty    *</ul>    */
+comment|/**    * Rule that converts a {@link org.apache.calcite.rel.logical.LogicalFilter}    * to empty if its child is empty.    *    *<p>Examples:    *    *<ul>    *<li>Filter(Empty) becomes Empty    *</ul>    */
 specifier|public
 specifier|static
 specifier|final
@@ -309,14 +547,14 @@ init|=
 operator|new
 name|RemoveEmptySingleRule
 argument_list|(
-name|FilterRelBase
+name|Filter
 operator|.
 name|class
 argument_list|,
 literal|"PruneEmptyFilter"
 argument_list|)
 decl_stmt|;
-comment|/**    * Rule that converts a {@link SortRel}    * to empty if its child is empty.    *    *<p>Examples:    *    *<ul>    *<li>Sort(Empty) becomes Empty    *</ul>    */
+comment|/**    * Rule that converts a {@link org.apache.calcite.rel.core.Sort}    * to empty if its child is empty.    *    *<p>Examples:    *    *<ul>    *<li>Sort(Empty) becomes Empty    *</ul>    */
 specifier|public
 specifier|static
 specifier|final
@@ -326,14 +564,14 @@ init|=
 operator|new
 name|RemoveEmptySingleRule
 argument_list|(
-name|SortRel
+name|Sort
 operator|.
 name|class
 argument_list|,
 literal|"PruneEmptySort"
 argument_list|)
 decl_stmt|;
-comment|/**    * Rule that converts a {@link SortRel}    * to empty if it has {@code LIMIT 0}.    *    *<p>Examples:    *    *<ul>    *<li>Sort(Empty) becomes Empty    *</ul>    */
+comment|/**    * Rule that converts a {@link org.apache.calcite.rel.core.Sort}    * to empty if it has {@code LIMIT 0}.    *    *<p>Examples:    *    *<ul>    *<li>Sort(Empty) becomes Empty    *</ul>    */
 specifier|public
 specifier|static
 specifier|final
@@ -345,7 +583,7 @@ name|RelOptRule
 argument_list|(
 name|operand
 argument_list|(
-name|SortRel
+name|Sort
 operator|.
 name|class
 argument_list|,
@@ -366,7 +604,7 @@ name|RelOptRuleCall
 name|call
 parameter_list|)
 block|{
-name|SortRel
+name|Sort
 name|sort
 init|=
 name|call
@@ -410,7 +648,7 @@ block|}
 block|}
 block|}
 decl_stmt|;
-comment|/**    * Rule that converts an {@link AggregateRelBase}    * to empty if its child is empty.    *    *<p>Examples:    *    *<ul>    *<li>Aggregate(Empty) becomes Empty    *</ul>    */
+comment|/**    * Rule that converts an {@link org.apache.calcite.rel.core.Aggregate}    * to empty if its child is empty.    *    *<p>Examples:    *    *<ul>    *<li>Aggregate(Empty) becomes Empty    *</ul>    */
 specifier|public
 specifier|static
 specifier|final
@@ -420,14 +658,14 @@ init|=
 operator|new
 name|RemoveEmptySingleRule
 argument_list|(
-name|AggregateRelBase
+name|Aggregate
 operator|.
 name|class
 argument_list|,
 literal|"PruneEmptyAggregate"
 argument_list|)
 decl_stmt|;
-comment|/**    * Rule that converts a {@link JoinRelBase}    * to empty if its left child is empty.    *    *<p>Examples:    *    *<ul>    *<li>Join(Empty, Scan(Dept), INNER) becomes Empty    *</ul>    */
+comment|/**    * Rule that converts a {@link org.apache.calcite.rel.core.Join}    * to empty if its left child is empty.    *    *<p>Examples:    *    *<ul>    *<li>Join(Empty, Scan(Dept), INNER) becomes Empty    *</ul>    */
 specifier|public
 specifier|static
 specifier|final
@@ -439,7 +677,7 @@ name|RelOptRule
 argument_list|(
 name|operand
 argument_list|(
-name|JoinRelBase
+name|Join
 operator|.
 name|class
 argument_list|,
@@ -447,7 +685,7 @@ name|some
 argument_list|(
 name|operand
 argument_list|(
-name|EmptyRel
+name|Empty
 operator|.
 name|class
 argument_list|,
@@ -480,7 +718,7 @@ name|RelOptRuleCall
 name|call
 parameter_list|)
 block|{
-name|JoinRelBase
+name|Join
 name|join
 init|=
 name|call
@@ -518,7 +756,7 @@ expr_stmt|;
 block|}
 block|}
 decl_stmt|;
-comment|/**    * Rule that converts a {@link JoinRelBase}    * to empty if its right child is empty.    *    *<p>Examples:    *    *<ul>    *<li>Join(Scan(Emp), Empty, INNER) becomes Empty    *</ul>    */
+comment|/**    * Rule that converts a {@link org.apache.calcite.rel.core.Join}    * to empty if its right child is empty.    *    *<p>Examples:    *    *<ul>    *<li>Join(Scan(Emp), Empty, INNER) becomes Empty    *</ul>    */
 specifier|public
 specifier|static
 specifier|final
@@ -530,7 +768,7 @@ name|RelOptRule
 argument_list|(
 name|operand
 argument_list|(
-name|JoinRelBase
+name|Join
 operator|.
 name|class
 argument_list|,
@@ -548,7 +786,7 @@ argument_list|)
 argument_list|,
 name|operand
 argument_list|(
-name|EmptyRel
+name|Empty
 operator|.
 name|class
 argument_list|,
@@ -571,7 +809,7 @@ name|RelOptRuleCall
 name|call
 parameter_list|)
 block|{
-name|JoinRelBase
+name|Join
 name|join
 init|=
 name|call
@@ -609,10 +847,10 @@ expr_stmt|;
 block|}
 block|}
 decl_stmt|;
-comment|/** Creates an {@link EmptyRel} to replace {@code node}. */
+comment|/** Creates an {@link org.apache.calcite.rel.core.Empty} to replace    * {@code node}. */
 specifier|private
 specifier|static
-name|EmptyRel
+name|Empty
 name|empty
 parameter_list|(
 name|RelNode
@@ -621,7 +859,7 @@ parameter_list|)
 block|{
 return|return
 operator|new
-name|EmptyRel
+name|Empty
 argument_list|(
 name|node
 operator|.
@@ -666,7 +904,7 @@ name|clazz
 argument_list|,
 name|operand
 argument_list|(
-name|EmptyRel
+name|Empty
 operator|.
 name|class
 argument_list|,
@@ -713,7 +951,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End RemoveEmptyRules.java
+comment|// End EmptyPruneRules.java
 end_comment
 
 end_unit

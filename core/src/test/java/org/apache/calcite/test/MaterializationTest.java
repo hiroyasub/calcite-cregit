@@ -5,11 +5,11 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
 name|test
 package|;
@@ -17,11 +17,11 @@ end_package
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
 name|jdbc
 operator|.
@@ -31,11 +31,11 @@ end_import
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
 name|materialize
 operator|.
@@ -45,11 +45,25 @@ end_import
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
+operator|.
+name|plan
+operator|.
+name|SubstitutionVisitor
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|prepare
 operator|.
@@ -61,21 +75,13 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|relopt
+name|calcite
 operator|.
-name|SubstitutionVisitor
-import|;
-end_import
-
-begin_import
-import|import
-name|org
+name|rel
 operator|.
-name|eigenbase
-operator|.
-name|reltype
+name|type
 operator|.
 name|RelDataType
 import|;
@@ -85,9 +91,13 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|reltype
+name|calcite
+operator|.
+name|rel
+operator|.
+name|type
 operator|.
 name|RelDataTypeSystem
 import|;
@@ -97,11 +107,13 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rex
 operator|.
-name|*
+name|RexBuilder
 import|;
 end_import
 
@@ -109,7 +121,51 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rex
+operator|.
+name|RexInputRef
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rex
+operator|.
+name|RexLiteral
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rex
+operator|.
+name|RexNode
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
@@ -181,7 +237,7 @@ name|hamcrest
 operator|.
 name|CoreMatchers
 operator|.
-name|*
+name|equalTo
 import|;
 end_import
 
@@ -193,7 +249,43 @@ name|junit
 operator|.
 name|Assert
 operator|.
-name|*
+name|assertEquals
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|assertFalse
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|assertThat
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|assertTrue
 import|;
 end_import
 
@@ -217,11 +309,11 @@ name|Void
 argument_list|>
 name|CONTAINS_M0
 init|=
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|checkResultContains
 argument_list|(
-literal|"EnumerableTableAccessRel(table=[[hr, m0]])"
+literal|"EnumerableTableScan(table=[[hr, m0]])"
 argument_list|)
 decl_stmt|;
 specifier|final
@@ -253,14 +345,14 @@ name|void
 name|testFilter
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -290,7 +382,7 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"EnumerableTableAccessRel(table=[[hr, m0]])"
+literal|"EnumerableTableScan(table=[[hr, m0]])"
 argument_list|)
 operator|.
 name|sameResultWithMaterializationsDisabled
@@ -320,14 +412,14 @@ operator|.
 name|setThreadLocal
 argument_list|()
 expr_stmt|;
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -357,7 +449,7 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"EnumerableTableAccessRel(table=[[hr, m0]])"
+literal|"EnumerableTableScan(table=[[hr, m0]])"
 argument_list|)
 operator|.
 name|sameResultWithMaterializationsDisabled
@@ -442,14 +534,14 @@ operator|.
 name|setThreadLocal
 argument_list|()
 expr_stmt|;
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -530,14 +622,14 @@ operator|.
 name|setThreadLocal
 argument_list|()
 expr_stmt|;
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -565,7 +657,7 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"EnumerableTableAccessRel(table=[[hr, emps]])"
+literal|"EnumerableTableScan(table=[[hr, emps]])"
 argument_list|)
 expr_stmt|;
 block|}
@@ -687,13 +779,13 @@ name|JdbcTest
 operator|.
 name|HR_MODEL
 argument_list|,
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|checkResultContains
 argument_list|(
-literal|"EnumerableCalcRel(expr#0..2=[{inputs}], expr#3=[2], expr#4=[=($t0, $t3)], name=[$t2], E=[$t1], $condition=[$t4])\n"
+literal|"EnumerableCalc(expr#0..2=[{inputs}], expr#3=[2], expr#4=[=($t0, $t3)], name=[$t2], E=[$t1], $condition=[$t4])\n"
 operator|+
-literal|"  EnumerableTableAccessRel(table=[[hr, m0]]"
+literal|"  EnumerableTableScan(table=[[hr, m0]]"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -794,13 +886,13 @@ name|JdbcTest
 operator|.
 name|HR_MODEL
 argument_list|,
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|checkResultContains
 argument_list|(
 literal|"EnumerableCalcRel(expr#0..2=[{inputs}], expr#3=[1], expr#4=[+($t1, $t3)], X=[$t4], name=[$t2], condition=?)\n"
 operator|+
-literal|"  EnumerableTableAccessRel(table=[[hr, m0]])"
+literal|"  EnumerableTableScan(table=[[hr, m0]])"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -821,7 +913,7 @@ literal|"select count(*) + 1 as c, \"deptno\" from \"emps\" group by \"deptno\""
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Aggregation query at coarser level of aggregation than aggregation    * materialization. Requires an additional AggregateRel to roll up. Note that    * COUNT is rolled up using SUM. */
+comment|/** Aggregation query at coarser level of aggregation than aggregation    * materialization. Requires an additional aggregate to roll up. Note that    * COUNT is rolled up using SUM. */
 annotation|@
 name|Test
 specifier|public
@@ -839,15 +931,15 @@ name|JdbcTest
 operator|.
 name|HR_MODEL
 argument_list|,
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|checkResultContains
 argument_list|(
-literal|"EnumerableCalcRel(expr#0..1=[{inputs}], expr#2=[1], expr#3=[+($t1, $t2)], C=[$t3], deptno=[$t0])\n"
+literal|"EnumerableCalc(expr#0..1=[{inputs}], expr#2=[1], expr#3=[+($t1, $t2)], C=[$t3], deptno=[$t0])\n"
 operator|+
-literal|"  EnumerableAggregateRel(group=[{1}], agg#0=[$SUM0($2)])\n"
+literal|"  EnumerableAggregate(group=[{1}], agg#0=[$SUM0($2)])\n"
 operator|+
-literal|"    EnumerableTableAccessRel(table=[[hr, m0]])"
+literal|"    EnumerableTableScan(table=[[hr, m0]])"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -877,7 +969,7 @@ name|JdbcTest
 operator|.
 name|HR_MODEL
 argument_list|,
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|checkResultContains
 argument_list|(
@@ -956,7 +1048,7 @@ name|testMaterializationReferencesTableInOtherSchema
 parameter_list|()
 block|{
 block|}
-comment|/** Unit test for logic functions    * {@link org.eigenbase.relopt.SubstitutionVisitor#mayBeSatisfiable} and    * {@link org.eigenbase.relopt.SubstitutionVisitor#simplify}. */
+comment|/** Unit test for logic functions    * {@link org.apache.calcite.plan.SubstitutionVisitor#mayBeSatisfiable} and    * {@link org.apache.calcite.plan.SubstitutionVisitor#simplify}. */
 annotation|@
 name|Test
 specifier|public
@@ -2035,7 +2127,9 @@ parameter_list|()
 block|{
 name|checkMaterialize
 argument_list|(
-literal|"select p.\"product_name\", t.\"the_year\", sum(f.\"unit_sales\") as \"sum_unit_sales\", count(*) as \"c\"\n"
+literal|"select p.\"product_name\", t.\"the_year\",\n"
+operator|+
+literal|"  sum(f.\"unit_sales\") as \"sum_unit_sales\", count(*) as \"c\"\n"
 operator|+
 literal|"from \"foodmart\".\"sales_fact_1997\" as f\n"
 operator|+

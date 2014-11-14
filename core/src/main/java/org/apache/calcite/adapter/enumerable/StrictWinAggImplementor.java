@@ -5,27 +5,29 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
-name|rules
+name|adapter
 operator|.
-name|java
+name|enumerable
 package|;
 end_package
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
+operator|.
+name|calcite
 operator|.
 name|linq4j
 operator|.
-name|expressions
+name|tree
 operator|.
 name|Expression
 import|;
@@ -54,7 +56,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * The base implementation of strict window aggregate function.  * @see net.hydromatic.optiq.rules.java.RexImpTable.FirstLastValueImplementor  * @see net.hydromatic.optiq.rules.java.RexImpTable.RankImplementor  * @see net.hydromatic.optiq.rules.java.RexImpTable.RowNumberImplementor  */
+comment|/**  * The base implementation of strict window aggregate function.  * @see org.apache.calcite.adapter.enumerable.RexImpTable.FirstLastValueImplementor  * @see org.apache.calcite.adapter.enumerable.RexImpTable.RankImplementor  * @see org.apache.calcite.adapter.enumerable.RexImpTable.RowNumberImplementor  */
 end_comment
 
 begin_class
@@ -299,6 +301,10 @@ return|;
 block|}
 block|}
 end_class
+
+begin_comment
+comment|// End StrictWinAggImplementor.java
+end_comment
 
 end_unit
 

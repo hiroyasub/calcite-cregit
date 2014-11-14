@@ -5,13 +5,15 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
+operator|.
+name|calcite
 operator|.
 name|linq4j
 operator|.
-name|expressions
+name|tree
 package|;
 end_package
 
@@ -144,9 +146,9 @@ throw|throw
 operator|new
 name|AssertionError
 argument_list|(
-literal|"block cannot contain node that is neither statement nor "
+literal|"block cannot contain node that is neither "
 operator|+
-literal|"expression: "
+literal|"statement nor expression: "
 operator|+
 name|body
 argument_list|)

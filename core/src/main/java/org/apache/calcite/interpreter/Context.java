@@ -5,13 +5,11 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
-operator|.
-name|impl
+name|calcite
 operator|.
 name|interpreter
 package|;

@@ -5,9 +5,11 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
+operator|.
+name|calcite
 operator|.
 name|avatica
 package|;
@@ -15,9 +17,11 @@ end_package
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
+operator|.
+name|calcite
 operator|.
 name|avatica
 operator|.
@@ -33,12 +37,12 @@ name|java
 operator|.
 name|util
 operator|.
-name|*
+name|Map
 import|;
 end_import
 
 begin_comment
-comment|/**  * Definitions of properties that drive the behavior of  * {@link net.hydromatic.avatica.AvaticaDatabaseMetaData}.  */
+comment|/**  * Definitions of properties that drive the behavior of  * {@link org.apache.calcite.avatica.AvaticaDatabaseMetaData}.  */
 end_comment
 
 begin_enum

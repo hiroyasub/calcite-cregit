@@ -7,9 +7,13 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
+operator|.
+name|core
 package|;
 end_package
 

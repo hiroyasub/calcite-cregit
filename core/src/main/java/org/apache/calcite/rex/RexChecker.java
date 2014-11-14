@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rex
 package|;
@@ -15,35 +17,57 @@ end_package
 
 begin_import
 import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptUtil
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|type
+operator|.
+name|RelDataType
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|type
+operator|.
+name|RelDataTypeField
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
 operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
-name|relopt
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
-name|reltype
-operator|.
-name|*
+name|List
 import|;
 end_import
 
@@ -80,7 +104,7 @@ name|int
 name|failCount
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a RexChecker with a given input row type.    *    *<p>If<code>fail</code> is true, the checker will throw an {@link    * AssertionError} if an invalid node is found and assertions are enabled.    *    *<p>Otherwise, each method returns whether its part of the tree is valid.    *    * @param inputRowType Input row type    * @param fail         Whether to throw an {@link AssertionError} if an invalid node    *                     is detected    */
+comment|/**    * Creates a RexChecker with a given input row type.    *    *<p>If<code>fail</code> is true, the checker will throw an    * {@link AssertionError} if an invalid node is found and assertions are    * enabled.    *    *<p>Otherwise, each method returns whether its part of the tree is valid.    *    * @param inputRowType Input row type    * @param fail Whether to throw an {@link AssertionError} if an    *                     invalid node is detected    */
 specifier|public
 name|RexChecker
 parameter_list|(
@@ -105,7 +129,7 @@ name|fail
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Creates a RexChecker with a given set of input fields.    *    *<p>If<code>fail</code> is true, the checker will throw an {@link    * AssertionError} if an invalid node is found and assertions are enabled.    *    *<p>Otherwise, each method returns whether its part of the tree is valid.    *    * @param inputTypeList Input row type    * @param fail          Whether to throw an {@link AssertionError} if an invalid node    *                      is detected    */
+comment|/**    * Creates a RexChecker with a given set of input fields.    *    *<p>If<code>fail</code> is true, the checker will throw an    * {@link AssertionError} if an invalid node is found and assertions are    * enabled.    *    *<p>Otherwise, each method returns whether its part of the tree is valid.    *    * @param inputTypeList Input row type    * @param fail Whether to throw an {@link AssertionError} if an    *                      invalid node is detected    */
 specifier|public
 name|RexChecker
 parameter_list|(

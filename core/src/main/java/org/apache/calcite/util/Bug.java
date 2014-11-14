@@ -7,14 +7,16 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|util
 package|;
 end_package
 
 begin_comment
-comment|/**  * Holder for a list of constants describing which bugs which have not been  * fixed.  *  *<p>You can use these constants to control the flow of your code. For example,  * suppose that bug CALCITE-123 causes the "INSERT" statement to return an  * incorrect row-count, and you want to disable unit tests. You might use the  * constant in your code as follows:  *  *<blockquote>  *<pre>Statement stmt = connection.createStatement();  * int rowCount = stmt.execute(  *     "INSERT INTO FemaleEmps SELECT * FROM Emps WHERE gender = 'F'");  * if (Bug.OPTIQ123_FIXED) {  *    assertEquals(rowCount, 5);  * }</pre>  *</blockquote>  *  *<p>The usage of the constant is a convenient way to identify the impact of  * the bug. When someone fixes the bug, they will remove the constant and all  * usages of it. Also, the constant helps track the propagation of the fix: as  * the fix is integrated into other branches, the constant will be removed from  * those branches.</p>  *  *<p><b>To do</b></p>  *  *<p>The following is a list of tasks to be completed before committing to  * master branch.</p>  *  *<ul>  *</ul>  */
+comment|/**  * Holder for a list of constants describing which bugs which have not been  * fixed.  *  *<p>You can use these constants to control the flow of your code. For example,  * suppose that bug CALCITE-123 causes the "INSERT" statement to return an  * incorrect row-count, and you want to disable unit tests. You might use the  * constant in your code as follows:  *  *<blockquote>  *<pre>Statement stmt = connection.createStatement();  * int rowCount = stmt.execute(  *     "INSERT INTO FemaleEmps SELECT * FROM Emps WHERE gender = 'F'");  * if (Bug.CALCITE_123_FIXED) {  *    assertEquals(rowCount, 5);  * }</pre>  *</blockquote>  *  *<p>The usage of the constant is a convenient way to identify the impact of  * the bug. When someone fixes the bug, they will remove the constant and all  * usages of it. Also, the constant helps track the propagation of the fix: as  * the fix is integrated into other branches, the constant will be removed from  * those branches.</p>  *  *<p><b>To do</b></p>  *  *<p>The following is a list of tasks to be completed before committing to  * master branch.</p>  *  *<ul>  *</ul>  */
 end_comment
 
 begin_class

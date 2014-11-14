@@ -4,14 +4,16 @@ comment|/*  * Licensed to the Apache Software Foundation (ASF) under one or more
 end_comment
 
 begin_comment
-comment|/**  * Contains generated code for the  * {@link org.eigenbase.sql.parser Eigenbase SQL parser}.  */
+comment|/**  * Contains generated code for the  * {@link org.apache.calcite.sql.parser Calcite SQL parser}.  */
 end_comment
 
 begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.

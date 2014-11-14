@@ -5,11 +5,11 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
 name|runtime
 package|;
@@ -60,7 +60,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Tests {@link net.hydromatic.optiq.runtime.BinarySearch}.  */
+comment|/**  * Tests {@link org.apache.calcite.runtime.BinarySearch}.  */
 end_comment
 
 begin_class

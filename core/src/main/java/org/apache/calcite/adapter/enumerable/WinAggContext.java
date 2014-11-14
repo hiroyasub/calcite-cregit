@@ -5,20 +5,20 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
-name|rules
+name|adapter
 operator|.
-name|java
+name|enumerable
 package|;
 end_package
 
 begin_comment
-comment|/**  * Marker interface to allow  * {@link net.hydromatic.optiq.rules.java.AggImplementor}  * to tell if it is used in regular or windowed context.  */
+comment|/**  * Marker interface to allow  * {@link org.apache.calcite.adapter.enumerable.AggImplementor}  * to tell if it is used in regular or windowed context.  */
 end_comment
 
 begin_interface

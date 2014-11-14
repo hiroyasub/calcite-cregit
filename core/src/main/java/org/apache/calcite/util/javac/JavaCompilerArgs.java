@@ -7,7 +7,11 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
 operator|.
 name|javac
 package|;
@@ -19,12 +23,32 @@ name|java
 operator|.
 name|util
 operator|.
-name|*
+name|ArrayList
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|StringTokenizer
 import|;
 end_import
 
 begin_comment
-comment|/**  * A<code>JavaCompilerArgs</code> holds the arguments for a {@link  * JavaCompiler}.  *  *<p>Specific implementations of {@link JavaCompiler} may override<code>  * set<i>Argument</i></code> methods to store arguments in a different fashion,  * or may throw {@link UnsupportedOperationException} to indicate that the  * compiler does not support that argument.  */
+comment|/**  * A<code>JavaCompilerArgs</code> holds the arguments for a  * {@link JavaCompiler}.  *  *<p>Specific implementations of {@link JavaCompiler} may override<code>  * set<i>Argument</i></code> methods to store arguments in a different fashion,  * or may throw {@link UnsupportedOperationException} to indicate that the  * compiler does not support that argument.  */
 end_comment
 
 begin_class
@@ -443,7 +467,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**    * Sets the source code (that is, the full java program, generally starting    * with something like "package com.foo.bar;") and the file name.    *    *<p>This method is optional. It only works if the compiler supports    * in-memory compilation. If this compiler does not return in-memory    * compilation (which the base class does not), {@link #supportsSetSource}    * returns false, and this method throws {@link    * UnsupportedOperationException}.    */
+comment|/**    * Sets the source code (that is, the full java program, generally starting    * with something like "package com.foo.bar;") and the file name.    *    *<p>This method is optional. It only works if the compiler supports    * in-memory compilation. If this compiler does not return in-memory    * compilation (which the base class does not), {@link #supportsSetSource}    * returns false, and this method throws    * {@link UnsupportedOperationException}.    */
 specifier|public
 name|void
 name|setSource

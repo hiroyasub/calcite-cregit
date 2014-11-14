@@ -7,9 +7,11 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|relopt
+name|calcite
+operator|.
+name|plan
 package|;
 end_package
 
@@ -106,7 +108,7 @@ return|return
 name|samplingPercentage
 return|;
 block|}
-comment|/**    * Indicates whether the sample results should be repeatable. Sample results    * are only required to repeat if no changes have been made to the    * relation's content or structure. If the sample is configured to be    * repeatable, then a user-specified seed value can be obtained via {@link    * #getRepeatableSeed()}.    *    * @return true if the sample results should be repeatable    */
+comment|/**    * Indicates whether the sample results should be repeatable. Sample results    * are only required to repeat if no changes have been made to the    * relation's content or structure. If the sample is configured to be    * repeatable, then a user-specified seed value can be obtained via    * {@link #getRepeatableSeed()}.    *    * @return true if the sample results should be repeatable    */
 specifier|public
 name|boolean
 name|isRepeatable

@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|util
 package|;
@@ -19,12 +21,52 @@ name|java
 operator|.
 name|util
 operator|.
-name|*
+name|AbstractSequentialList
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Collection
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|LinkedList
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|ListIterator
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|NoSuchElementException
 import|;
 end_import
 
 begin_comment
-comment|/**  * Implementation of list similar to {@link LinkedList}, but stores elements  * in chunks of 32 elements.  *  *<p>ArrayList has O(n) insertion and deletion into the middle of the list.  * ChunkList insertion and deletion are O(1).</p>  */
+comment|/**  * Implementation of list similar to {@link LinkedList}, but stores elements  * in chunks of 32 elements.  *  *<p>ArrayList has O(n) insertion and deletion into the middle of the list.  * ChunkList insertion and deletion are O(1).</p>  *  * @param<E> element type  */
 end_comment
 
 begin_class
@@ -786,6 +828,7 @@ name|next
 expr_stmt|;
 block|}
 block|}
+comment|/** Iterator over a {@link ChunkList}. */
 specifier|private
 class|class
 name|ChunkListIterator

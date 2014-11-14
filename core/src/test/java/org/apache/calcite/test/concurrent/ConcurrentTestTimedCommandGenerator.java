@@ -7,13 +7,29 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|test
 operator|.
 name|concurrent
 package|;
 end_package
+
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|ImmutableList
+import|;
+end_import
 
 begin_import
 import|import
@@ -31,26 +47,42 @@ name|java
 operator|.
 name|util
 operator|.
-name|*
+name|Collection
 import|;
 end_import
 
 begin_import
 import|import
-name|com
+name|java
 operator|.
-name|google
+name|util
 operator|.
-name|common
+name|Iterator
+import|;
+end_import
+
+begin_import
+import|import
+name|java
 operator|.
-name|collect
+name|util
 operator|.
-name|ImmutableList
+name|List
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|NoSuchElementException
 import|;
 end_import
 
 begin_comment
-comment|/**  * ConcurrentTestTimedCommandGenerator extends {@link  * ConcurrentTestCommandGenerator} and repeats the configured command  * sequence until a certain amount of time has elapsed.  *  *<p>The command sequence is always completed in full, even if the time limit  * has been exceeded. Therefore, the time limit can only be considered the  * minimum length of time that the test will run and not a guarantee of how long  * the test will take.  */
+comment|/**  * ConcurrentTestTimedCommandGenerator extends  * {@link ConcurrentTestCommandGenerator} and repeats the configured command  * sequence until a certain amount of time has elapsed.  *  *<p>The command sequence is always completed in full, even if the time limit  * has been exceeded. Therefore, the time limit can only be considered the  * minimum length of time that the test will run and not a guarantee of how long  * the test will take.  */
 end_comment
 
 begin_class
@@ -70,7 +102,7 @@ name|long
 name|endTimeMillis
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Constructs a new ConcurrentTestTimedCommandGenerator that will run    * for at least the given amount of time. See {@link    * ConcurrentTestTimedCommandGenerator} for more information on the    * semantics of run-time length.    *    * @param runTimeSeconds minimum run-time length, in seconds    */
+comment|/**    * Constructs a new ConcurrentTestTimedCommandGenerator that will run    * for at least the given amount of time. See    * {@link ConcurrentTestTimedCommandGenerator} for more information on the    * semantics of run-time length.    *    * @param runTimeSeconds minimum run-time length, in seconds    */
 specifier|public
 name|ConcurrentTestTimedCommandGenerator
 parameter_list|(

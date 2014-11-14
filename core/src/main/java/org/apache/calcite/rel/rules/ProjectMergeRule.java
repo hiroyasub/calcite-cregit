@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
@@ -17,11 +19,15 @@ end_package
 
 begin_import
 import|import
-name|java
+name|org
 operator|.
-name|util
+name|apache
 operator|.
-name|*
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptRule
 import|;
 end_import
 
@@ -29,11 +35,13 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|rel
+name|calcite
 operator|.
-name|*
+name|plan
+operator|.
+name|RelOptRuleCall
 import|;
 end_import
 
@@ -41,9 +49,73 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptUtil
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
+operator|.
+name|RelNode
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|core
+operator|.
+name|Project
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|core
+operator|.
+name|RelFactories
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|core
 operator|.
 name|RelFactories
 operator|.
@@ -55,23 +127,13 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|relopt
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
+name|calcite
 operator|.
 name|rex
 operator|.
-name|*
+name|RexBuilder
 import|;
 end_import
 
@@ -79,7 +141,65 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rex
+operator|.
+name|RexLocalRef
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rex
+operator|.
+name|RexNode
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rex
+operator|.
+name|RexProgram
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rex
+operator|.
+name|RexProgramBuilder
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|util
 operator|.
@@ -87,29 +207,49 @@ name|Permutation
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|ArrayList
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
+import|;
+end_import
+
 begin_comment
-comment|/**  * MergeProjectRule merges a {@link ProjectRelBase} into  * another {@link ProjectRelBase},  * provided the projects aren't projecting identical sets of input references.  */
+comment|/**  * ProjectMergeRule merges a {@link org.apache.calcite.rel.core.Project} into  * another {@link org.apache.calcite.rel.core.Project},  * provided the projects aren't projecting identical sets of input references.  */
 end_comment
 
 begin_class
 specifier|public
 class|class
-name|MergeProjectRule
+name|ProjectMergeRule
 extends|extends
 name|RelOptRule
 block|{
 specifier|public
 specifier|static
 specifier|final
-name|MergeProjectRule
+name|ProjectMergeRule
 name|INSTANCE
 init|=
 operator|new
-name|MergeProjectRule
+name|ProjectMergeRule
 argument_list|()
 decl_stmt|;
 comment|//~ Instance fields --------------------------------------------------------
-comment|/**    * if true, always merge projects    */
+comment|/** Whether to always merge projects. */
 specifier|private
 specifier|final
 name|boolean
@@ -121,9 +261,9 @@ name|ProjectFactory
 name|projectFactory
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a MergeProjectRule.    */
+comment|/**    * Creates a ProjectMergeRule.    */
 specifier|private
-name|MergeProjectRule
+name|ProjectMergeRule
 parameter_list|()
 block|{
 name|this
@@ -136,9 +276,9 @@ name|DEFAULT_PROJECT_FACTORY
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Creates a MergeProjectRule, specifying whether to always merge projects.    *    * @param force Whether to always merge projects    */
+comment|/**    * Creates a ProjectMergeRule, specifying whether to always merge projects.    *    * @param force Whether to always merge projects    */
 specifier|public
-name|MergeProjectRule
+name|ProjectMergeRule
 parameter_list|(
 name|boolean
 name|force
@@ -151,13 +291,13 @@ name|super
 argument_list|(
 name|operand
 argument_list|(
-name|ProjectRelBase
+name|Project
 operator|.
 name|class
 argument_list|,
 name|operand
 argument_list|(
-name|ProjectRelBase
+name|Project
 operator|.
 name|class
 argument_list|,
@@ -166,7 +306,7 @@ argument_list|()
 argument_list|)
 argument_list|)
 argument_list|,
-literal|"MergeProjectRule"
+literal|"ProjectMergeRule"
 operator|+
 operator|(
 name|force
@@ -198,7 +338,7 @@ name|RelOptRuleCall
 name|call
 parameter_list|)
 block|{
-name|ProjectRelBase
+name|Project
 name|topProject
 init|=
 name|call
@@ -208,7 +348,7 @@ argument_list|(
 literal|0
 argument_list|)
 decl_stmt|;
-name|ProjectRelBase
+name|Project
 name|bottomProject
 init|=
 name|call
@@ -255,7 +395,7 @@ name|isIdentity
 argument_list|()
 condition|)
 block|{
-comment|// Let RemoveTrivialProjectRule handle this.
+comment|// Let ProjectRemoveRule handle this.
 return|return;
 block|}
 specifier|final
@@ -282,7 +422,7 @@ name|isIdentity
 argument_list|()
 condition|)
 block|{
-comment|// Let RemoveTrivialProjectRule handle this.
+comment|// Let ProjectRemoveRule handle this.
 return|return;
 block|}
 specifier|final
@@ -306,7 +446,7 @@ name|projectMapping
 argument_list|(
 name|bottomProject
 operator|.
-name|getChild
+name|getInput
 argument_list|()
 argument_list|,
 name|product
@@ -331,7 +471,7 @@ block|}
 block|}
 comment|// if we're not in force mode and the two projects reference identical
 comment|// inputs, then return and either let FennelRenameRule or
-comment|// RemoveTrivialProjectRule replace the projects
+comment|// ProjectRemoveRule replace the projects
 if|if
 condition|(
 operator|!
@@ -363,7 +503,7 @@ name|create
 argument_list|(
 name|bottomProject
 operator|.
-name|getChild
+name|getInput
 argument_list|()
 operator|.
 name|getRowType
@@ -512,7 +652,7 @@ name|createProject
 argument_list|(
 name|bottomProject
 operator|.
-name|getChild
+name|getInput
 argument_list|()
 argument_list|,
 name|newProjExprs
@@ -538,7 +678,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End MergeProjectRule.java
+comment|// End ProjectMergeRule.java
 end_comment
 
 end_unit

@@ -5,11 +5,13 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
+operator|.
+name|schema
 package|;
 end_package
 
@@ -17,9 +19,13 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|reltype
+name|calcite
+operator|.
+name|rel
+operator|.
+name|type
 operator|.
 name|RelDataType
 import|;
@@ -29,9 +35,13 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|reltype
+name|calcite
+operator|.
+name|rel
+operator|.
+name|type
 operator|.
 name|RelDataTypeFactory
 import|;
@@ -60,7 +70,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Function that returns a table during execution time.  *<p>  * In contrast with {@code TableMacro}, the result of the table is not known  * until execution.  */
+comment|/**  * Function that returns a table during execution time.  *  *<p>In contrast with {@code TableMacro}, the result of the table is not known  * until execution.  */
 end_comment
 
 begin_interface

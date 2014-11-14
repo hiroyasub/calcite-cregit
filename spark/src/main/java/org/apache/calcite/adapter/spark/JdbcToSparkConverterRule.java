@@ -5,13 +5,13 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
-name|impl
+name|adapter
 operator|.
 name|spark
 package|;
@@ -19,13 +19,13 @@ end_package
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
-name|impl
+name|adapter
 operator|.
 name|jdbc
 operator|.
@@ -37,7 +37,23 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelTraitSet
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
@@ -49,7 +65,9 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
@@ -59,20 +77,8 @@ name|ConverterRule
 import|;
 end_import
 
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
-name|relopt
-operator|.
-name|RelTraitSet
-import|;
-end_import
-
 begin_comment
-comment|/**  * Rule to convert a relational expression from  * {@link net.hydromatic.optiq.impl.jdbc.JdbcConvention} to  * {@link net.hydromatic.optiq.impl.spark.SparkRel#CONVENTION Spark convention}.  */
+comment|/**  * Rule to convert a relational expression from  * {@link org.apache.calcite.adapter.jdbc.JdbcConvention} to  * {@link org.apache.calcite.adapter.spark.SparkRel#CONVENTION Spark convention}.  */
 end_comment
 
 begin_class

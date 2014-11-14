@@ -5,11 +5,11 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
 name|jdbc
 package|;
@@ -17,21 +17,39 @@ end_package
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
+operator|.
+name|calcite
 operator|.
 name|avatica
 operator|.
-name|*
+name|AvaticaResultSet
 import|;
 end_import
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
+operator|.
+name|calcite
+operator|.
+name|avatica
+operator|.
+name|AvaticaStatement
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|linq4j
 operator|.
@@ -41,15 +59,15 @@ end_import
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
 name|server
 operator|.
-name|OptiqServerStatement
+name|CalciteServerStatement
 import|;
 end_import
 
@@ -61,15 +79,15 @@ begin_class
 specifier|public
 specifier|abstract
 class|class
-name|OptiqStatement
+name|CalciteStatement
 extends|extends
 name|AvaticaStatement
 implements|implements
-name|OptiqServerStatement
+name|CalciteServerStatement
 block|{
-name|OptiqStatement
+name|CalciteStatement
 parameter_list|(
-name|OptiqConnectionImpl
+name|CalciteConnectionImpl
 name|connection
 parameter_list|,
 name|int
@@ -98,19 +116,19 @@ comment|// implement Statement
 annotation|@
 name|Override
 specifier|public
-name|OptiqConnectionImpl
+name|CalciteConnectionImpl
 name|getConnection
 parameter_list|()
 block|{
 return|return
 operator|(
-name|OptiqConnectionImpl
+name|CalciteConnectionImpl
 operator|)
 name|connection
 return|;
 block|}
 specifier|public
-name|OptiqConnectionImpl
+name|CalciteConnectionImpl
 operator|.
 name|ContextImpl
 name|createPrepareContext
@@ -118,7 +136,7 @@ parameter_list|()
 block|{
 return|return
 operator|new
-name|OptiqConnectionImpl
+name|CalciteConnectionImpl
 operator|.
 name|ContextImpl
 argument_list|(
@@ -131,7 +149,7 @@ specifier|protected
 parameter_list|<
 name|T
 parameter_list|>
-name|OptiqPrepare
+name|CalcitePrepare
 operator|.
 name|PrepareResult
 argument_list|<
@@ -147,7 +165,7 @@ name|queryable
 parameter_list|)
 block|{
 specifier|final
-name|OptiqPrepare
+name|CalcitePrepare
 name|prepare
 init|=
 name|getConnection
@@ -188,11 +206,11 @@ operator|=
 literal|true
 expr_stmt|;
 specifier|final
-name|OptiqConnectionImpl
+name|CalciteConnectionImpl
 name|connection1
 init|=
 operator|(
-name|OptiqConnectionImpl
+name|CalciteConnectionImpl
 operator|)
 name|connection
 decl_stmt|;
@@ -247,7 +265,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End OptiqStatement.java
+comment|// End CalciteStatement.java
 end_comment
 
 end_unit

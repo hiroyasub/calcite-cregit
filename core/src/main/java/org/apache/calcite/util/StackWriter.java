@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|util
 package|;
@@ -19,7 +21,37 @@ name|java
 operator|.
 name|io
 operator|.
-name|*
+name|FilterWriter
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|io
+operator|.
+name|IOException
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|io
+operator|.
+name|PrintWriter
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|io
+operator|.
+name|Writer
 import|;
 end_import
 
@@ -29,7 +61,17 @@ name|java
 operator|.
 name|util
 operator|.
-name|*
+name|ArrayList
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
 import|;
 end_import
 
@@ -162,7 +204,7 @@ argument_list|>
 argument_list|()
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a new StackWriter on top of an existing Writer, with the    * specified string to be used for each level of indentation.    *    * @param writer      underlying writer    * @param indentation indentation unit such as {@link #INDENT_TAB} or {@link    *                    #INDENT_SPACE4}    */
+comment|/**    * Creates a new StackWriter on top of an existing Writer, with the    * specified string to be used for each level of indentation.    *    * @param writer      underlying writer    * @param indentation indentation unit such as {@link #INDENT_TAB} or    *                    {@link #INDENT_SPACE4}    */
 specifier|public
 name|StackWriter
 parameter_list|(

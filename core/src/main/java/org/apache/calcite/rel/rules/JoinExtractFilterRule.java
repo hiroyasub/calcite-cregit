@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
@@ -19,11 +21,13 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|rel
+name|calcite
 operator|.
-name|*
+name|plan
+operator|.
+name|RelOptRule
 import|;
 end_import
 
@@ -31,23 +35,101 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|relopt
+name|calcite
 operator|.
-name|*
+name|plan
+operator|.
+name|RelOptRuleCall
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptUtil
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|RelNode
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|core
+operator|.
+name|Join
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|core
+operator|.
+name|JoinRelType
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|logical
+operator|.
+name|LogicalJoin
 import|;
 end_import
 
 begin_comment
-comment|/**  * Rule to convert an {@link JoinRel inner join} to a {@link FilterRel filter}  * on top of a {@link JoinRel cartesian inner join}.  *  *<p>One benefit of this transformation is that after it, the join condition  * can be combined with conditions and expressions above the join. It also makes  * the<code>FennelCartesianJoinRule</code> applicable.  *  *<p>The constructor is parameterized to allow any sub-class of  * {@link JoinRelBase}, not just {@link JoinRel}.</p>  */
+comment|/**  * Rule to convert an  * {@link org.apache.calcite.rel.logical.LogicalJoin inner join} to a  * {@link org.apache.calcite.rel.logical.LogicalFilter filter} on top of a  * {@link org.apache.calcite.rel.logical.LogicalJoin cartesian inner join}.  *  *<p>One benefit of this transformation is that after it, the join condition  * can be combined with conditions and expressions above the join. It also makes  * the<code>FennelCartesianJoinRule</code> applicable.  *  *<p>The constructor is parameterized to allow any sub-class of  * {@link org.apache.calcite.rel.core.Join}, not just  * {@link org.apache.calcite.rel.logical.LogicalJoin}.</p>  */
 end_comment
 
 begin_class
 specifier|public
 specifier|final
 class|class
-name|ExtractJoinFilterRule
+name|JoinExtractFilterRule
 extends|extends
 name|RelOptRule
 block|{
@@ -56,27 +138,27 @@ comment|/** The singleton. */
 specifier|public
 specifier|static
 specifier|final
-name|ExtractJoinFilterRule
+name|JoinExtractFilterRule
 name|INSTANCE
 init|=
 operator|new
-name|ExtractJoinFilterRule
+name|JoinExtractFilterRule
 argument_list|(
-name|JoinRel
+name|LogicalJoin
 operator|.
 name|class
 argument_list|)
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates an ExtractJoinFilterRule.    */
+comment|/**    * Creates an JoinExtractFilterRule.    */
 specifier|public
-name|ExtractJoinFilterRule
+name|JoinExtractFilterRule
 parameter_list|(
 name|Class
 argument_list|<
 name|?
 extends|extends
-name|JoinRelBase
+name|Join
 argument_list|>
 name|clazz
 parameter_list|)
@@ -103,7 +185,7 @@ name|call
 parameter_list|)
 block|{
 specifier|final
-name|JoinRelBase
+name|Join
 name|join
 init|=
 name|call
@@ -155,7 +237,7 @@ block|{
 comment|// FIXME Enable this rule for joins with system fields
 return|return;
 block|}
-comment|// NOTE jvs 14-Mar-2006:  See SwapJoinRule for why we
+comment|// NOTE jvs 14-Mar-2006:  See JoinCommuteRule for why we
 comment|// preserve attribute semiJoinDone here.
 name|RelNode
 name|cartesianJoinRel
@@ -230,7 +312,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End ExtractJoinFilterRule.java
+comment|// End JoinExtractFilterRule.java
 end_comment
 
 end_unit

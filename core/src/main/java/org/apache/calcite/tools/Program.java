@@ -5,11 +5,11 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
 name|tools
 package|;
@@ -19,21 +19,11 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|rel
+name|calcite
 operator|.
-name|RelNode
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
-name|relopt
+name|plan
 operator|.
 name|RelOptPlanner
 import|;
@@ -43,16 +33,32 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|relopt
+name|calcite
+operator|.
+name|plan
 operator|.
 name|RelTraitSet
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|RelNode
+import|;
+end_import
+
 begin_comment
-comment|/**  * Program that transforms a relational expression into another relational  * expression.  *  *<p>A planner is a sequence of programs, each of which is sometimes called  * a "phase".  * The most typical program is an invocation of the volcano planner with a  * particular {@link net.hydromatic.optiq.tools.RuleSet}.</p>  */
+comment|/**  * Program that transforms a relational expression into another relational  * expression.  *  *<p>A planner is a sequence of programs, each of which is sometimes called  * a "phase".  * The most typical program is an invocation of the volcano planner with a  * particular {@link org.apache.calcite.tools.RuleSet}.</p>  */
 end_comment
 
 begin_interface

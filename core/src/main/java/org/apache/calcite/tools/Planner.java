@@ -5,11 +5,11 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
 name|tools
 package|;
@@ -19,7 +19,23 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelTraitSet
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
@@ -31,21 +47,13 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|relopt
+name|calcite
 operator|.
-name|RelTraitSet
-import|;
-end_import
-
-begin_import
-import|import
-name|org
+name|rel
 operator|.
-name|eigenbase
-operator|.
-name|reltype
+name|type
 operator|.
 name|RelDataTypeFactory
 import|;
@@ -55,7 +63,9 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
@@ -67,7 +77,9 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
@@ -86,7 +98,7 @@ specifier|public
 interface|interface
 name|Planner
 block|{
-comment|/**    * Parses and validates a SQL statement.    *    * @param sql The SQL statement to parse.    * @return The root node of the SQL parse tree.    * @throws org.eigenbase.sql.parser.SqlParseException on parse error    */
+comment|/**    * Parses and validates a SQL statement.    *    * @param sql The SQL statement to parse.    * @return The root node of the SQL parse tree.    * @throws org.apache.calcite.sql.parser.SqlParseException on parse error    */
 name|SqlNode
 name|parse
 parameter_list|(
@@ -106,7 +118,7 @@ parameter_list|)
 throws|throws
 name|ValidationException
 function_decl|;
-comment|/**    * Converts a SQL parse tree into a tree of relational expressions.    *    *<p>You must call {@link #validate(org.eigenbase.sql.SqlNode)} first.</p>    *    * @param sql The root node of the SQL parse tree.    * @return The root node of the newly generated RelNode tree.    * @throws net.hydromatic.optiq.tools.RelConversionException if the node    * cannot be converted or has not been validated    */
+comment|/**    * Converts a SQL parse tree into a tree of relational expressions.    *    *<p>You must call {@link #validate(org.apache.calcite.sql.SqlNode)} first.    *    * @param sql The root node of the SQL parse tree.    * @return The root node of the newly generated RelNode tree.    * @throws org.apache.calcite.tools.RelConversionException if the node    * cannot be converted or has not been validated    */
 name|RelNode
 name|convert
 parameter_list|(
@@ -121,7 +133,7 @@ name|RelDataTypeFactory
 name|getTypeFactory
 parameter_list|()
 function_decl|;
-comment|/**    * Converts one relational expression tree into another relational expression    * based on a particular rule set and requires set of traits.    *    * @param ruleSetIndex The RuleSet to use for conversion purposes.  Note that    *                     this is zero-indexed and is based on the list and order    *                     of RuleSets provided in the construction of this    *                     Planner.    * @param requiredOutputTraits The set of RelTraits required of the root node    *                             at the termination of the planning cycle.    * @param rel The root of the RelNode tree to convert.    * @return The root of the new RelNode tree.    * @throws net.hydromatic.optiq.tools.RelConversionException on conversion    *     error    */
+comment|/**    * Converts one relational expression tree into another relational expression    * based on a particular rule set and requires set of traits.    *    * @param ruleSetIndex The RuleSet to use for conversion purposes.  Note that    *                     this is zero-indexed and is based on the list and order    *                     of RuleSets provided in the construction of this    *                     Planner.    * @param requiredOutputTraits The set of RelTraits required of the root node    *                             at the termination of the planning cycle.    * @param rel The root of the RelNode tree to convert.    * @return The root of the new RelNode tree.    * @throws org.apache.calcite.tools.RelConversionException on conversion    *     error    */
 name|RelNode
 name|transform
 parameter_list|(

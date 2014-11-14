@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
@@ -17,11 +19,15 @@ end_package
 
 begin_import
 import|import
-name|java
+name|org
 operator|.
-name|util
+name|apache
 operator|.
-name|List
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptRule
 import|;
 end_import
 
@@ -29,11 +35,27 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptRuleCall
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
-name|*
+name|RelNode
 import|;
 end_import
 
@@ -41,11 +63,15 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|relopt
+name|calcite
 operator|.
-name|*
+name|rel
+operator|.
+name|core
+operator|.
+name|Project
 import|;
 end_import
 
@@ -53,11 +79,15 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|reltype
+name|calcite
 operator|.
-name|*
+name|rel
+operator|.
+name|type
+operator|.
+name|RelDataType
 import|;
 end_import
 
@@ -65,11 +95,43 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|type
+operator|.
+name|RelDataTypeField
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rex
 operator|.
-name|*
+name|RexInputRef
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rex
+operator|.
+name|RexNode
 import|;
 end_import
 
@@ -87,14 +149,24 @@ name|Predicate
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
+import|;
+end_import
+
 begin_comment
-comment|/**  * Rule that, given a {@link ProjectRelBase} node that merely returns its input,  * converts the node into its child.  *  *<p>For example,<code>ProjectRel(ArrayReader(a), {$input0})</code> becomes  *<code>ArrayReader(a)</code>.</p>  *  * @see org.eigenbase.rel.rules.RemoveTrivialCalcRule  * @see org.eigenbase.rel.rules.MergeProjectRule  */
+comment|/**  * Planner rule that,  * given a {@link org.apache.calcite.rel.core.Project} node that  * merely returns its input, converts the node into its child.  *  *<p>For example,<code>Project(ArrayReader(a), {$input0})</code> becomes  *<code>ArrayReader(a)</code>.</p>  *  * @see CalcRemoveRule  * @see ProjectMergeRule  */
 end_comment
 
 begin_class
 specifier|public
 class|class
-name|RemoveTrivialProjectRule
+name|ProjectRemoveRule
 extends|extends
 name|RelOptRule
 block|{
@@ -104,14 +176,14 @@ specifier|static
 specifier|final
 name|Predicate
 argument_list|<
-name|ProjectRelBase
+name|Project
 argument_list|>
 name|PREDICATE
 init|=
 operator|new
 name|Predicate
 argument_list|<
-name|ProjectRelBase
+name|Project
 argument_list|>
 argument_list|()
 block|{
@@ -119,7 +191,7 @@ specifier|public
 name|boolean
 name|apply
 parameter_list|(
-name|ProjectRelBase
+name|Project
 name|input
 parameter_list|)
 block|{
@@ -135,16 +207,16 @@ decl_stmt|;
 specifier|public
 specifier|static
 specifier|final
-name|RemoveTrivialProjectRule
+name|ProjectRemoveRule
 name|INSTANCE
 init|=
 operator|new
-name|RemoveTrivialProjectRule
+name|ProjectRemoveRule
 argument_list|()
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 specifier|private
-name|RemoveTrivialProjectRule
+name|ProjectRemoveRule
 parameter_list|()
 block|{
 comment|// Create a specialized operand to detect non-matches early. This keeps
@@ -153,7 +225,7 @@ name|super
 argument_list|(
 name|operand
 argument_list|(
-name|ProjectRelBase
+name|Project
 operator|.
 name|class
 argument_list|,
@@ -176,7 +248,7 @@ name|RelOptRuleCall
 name|call
 parameter_list|)
 block|{
-name|ProjectRelBase
+name|Project
 name|project
 init|=
 name|call
@@ -197,7 +269,7 @@ name|stripped
 init|=
 name|project
 operator|.
-name|getChild
+name|getInput
 argument_list|()
 decl_stmt|;
 name|RelNode
@@ -229,7 +301,7 @@ specifier|static
 name|RelNode
 name|strip
 parameter_list|(
-name|ProjectRelBase
+name|Project
 name|project
 parameter_list|)
 block|{
@@ -241,7 +313,7 @@ argument_list|)
 condition|?
 name|project
 operator|.
-name|getChild
+name|getInput
 argument_list|()
 else|:
 name|project
@@ -252,7 +324,7 @@ specifier|static
 name|boolean
 name|isTrivial
 parameter_list|(
-name|ProjectRelBase
+name|Project
 name|project
 parameter_list|)
 block|{
@@ -261,7 +333,7 @@ name|child
 init|=
 name|project
 operator|.
-name|getChild
+name|getInput
 argument_list|()
 decl_stmt|;
 specifier|final
@@ -494,7 +566,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End RemoveTrivialProjectRule.java
+comment|// End ProjectRemoveRule.java
 end_comment
 
 end_unit

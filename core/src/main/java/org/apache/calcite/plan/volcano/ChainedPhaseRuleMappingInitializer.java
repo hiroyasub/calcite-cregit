@@ -7,9 +7,11 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|relopt
+name|calcite
+operator|.
+name|plan
 operator|.
 name|volcano
 package|;
@@ -21,12 +23,22 @@ name|java
 operator|.
 name|util
 operator|.
-name|*
+name|Map
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Set
 import|;
 end_import
 
 begin_comment
-comment|/**  * ChainedPhaseRuleMappingInitializer is an abstract implementation of {@link  * VolcanoPlannerPhaseRuleMappingInitializer} that allows additional rules to be  * layered ontop of those configured by a subordinate  * VolcanoPlannerPhaseRuleMappingInitializer.  *  * @see VolcanoPlannerPhaseRuleMappingInitializer  */
+comment|/**  * ChainedPhaseRuleMappingInitializer is an abstract implementation of  * {@link VolcanoPlannerPhaseRuleMappingInitializer} that allows additional  * rules to be layered on top of those configured by a subordinate  * {@link VolcanoPlannerPhaseRuleMappingInitializer}.  *  * @see VolcanoPlannerPhaseRuleMappingInitializer  */
 end_comment
 
 begin_class

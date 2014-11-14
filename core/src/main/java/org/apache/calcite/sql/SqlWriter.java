@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 package|;
@@ -17,7 +19,9 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
@@ -385,11 +389,12 @@ name|inQuery
 parameter_list|()
 function_decl|;
 comment|//~ Inner Interfaces -------------------------------------------------------
-comment|/**    * A Frame is a piece of generated text which shares a common indentation    * level.    *    *<p>Every frame has a beginning, a series of clauses and separators, and    * an end. A typical frame is a comma-separated list. It begins with a "(",    * consists of expressions separated by ",", and ends with a ")".    *    *<p>A select statement is also a kind of frame. The beginning and end are    * are empty strings, but it consists of a sequence of clauses. "SELECT",    * "FROM", "WHERE" are separators.    *    *<p>A frame is current between a call to one of the {@link    * SqlWriter#startList} methods and the call to {@link    * SqlWriter#endList(Frame)}. If other code starts a frame in the mean time,    * the sub-frame is put onto a stack.    */
+comment|/**    * A Frame is a piece of generated text which shares a common indentation    * level.    *    *<p>Every frame has a beginning, a series of clauses and separators, and    * an end. A typical frame is a comma-separated list. It begins with a "(",    * consists of expressions separated by ",", and ends with a ")".    *    *<p>A select statement is also a kind of frame. The beginning and end are    * are empty strings, but it consists of a sequence of clauses. "SELECT",    * "FROM", "WHERE" are separators.    *    *<p>A frame is current between a call to one of the    * {@link SqlWriter#startList} methods and the call to    * {@link SqlWriter#endList(Frame)}. If other code starts a frame in the mean    * time, the sub-frame is put onto a stack.    */
 specifier|public
 interface|interface
 name|Frame
 block|{   }
+comment|/** Frame type. */
 interface|interface
 name|FrameType
 block|{

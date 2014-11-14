@@ -7,9 +7,11 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|relopt
+name|calcite
+operator|.
+name|plan
 package|;
 end_package
 
@@ -23,7 +25,7 @@ interface|interface
 name|RelOptCost
 block|{
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**    * @return number of rows processed; this should not be confused with the    * row count produced by a relational expression ({@link    * org.eigenbase.rel.RelNode#getRows})    */
+comment|/**    * @return number of rows processed; this should not be confused with the    * row count produced by a relational expression    * ({@link org.apache.calcite.rel.RelNode#getRows})    */
 name|double
 name|getRows
 parameter_list|()

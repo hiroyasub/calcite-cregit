@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
@@ -17,11 +19,17 @@ end_package
 
 begin_import
 import|import
-name|java
+name|org
 operator|.
-name|util
+name|apache
 operator|.
-name|*
+name|calcite
+operator|.
+name|adapter
+operator|.
+name|enumerable
+operator|.
+name|EnumerableInterpreter
 import|;
 end_import
 
@@ -29,11 +37,27 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptCost
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
-name|*
+name|RelNode
 import|;
 end_import
 
@@ -41,39 +65,61 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|relopt
+name|calcite
 operator|.
-name|*
+name|rel
+operator|.
+name|core
+operator|.
+name|Aggregate
 import|;
 end_import
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
-name|BuiltinMethod
+name|rel
+operator|.
+name|core
+operator|.
+name|Join
 import|;
 end_import
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
-name|rules
+name|rel
 operator|.
-name|java
+name|core
 operator|.
-name|JavaRules
+name|Union
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|BuiltInMethod
 import|;
 end_import
 
@@ -88,6 +134,16 @@ operator|.
 name|collect
 operator|.
 name|ImmutableList
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
 import|;
 end_import
 
@@ -128,7 +184,7 @@ name|ReflectiveRelMetadataProvider
 operator|.
 name|reflectiveSource
 argument_list|(
-name|BuiltinMethod
+name|BuiltInMethod
 operator|.
 name|PERCENTAGE_ORIGINAL_ROWS
 operator|.
@@ -141,7 +197,7 @@ name|ReflectiveRelMetadataProvider
 operator|.
 name|reflectiveSource
 argument_list|(
-name|BuiltinMethod
+name|BuiltInMethod
 operator|.
 name|CUMULATIVE_COST
 operator|.
@@ -154,7 +210,7 @@ name|ReflectiveRelMetadataProvider
 operator|.
 name|reflectiveSource
 argument_list|(
-name|BuiltinMethod
+name|BuiltInMethod
 operator|.
 name|NON_CUMULATIVE_COST
 operator|.
@@ -175,7 +231,7 @@ specifier|public
 name|Double
 name|getPercentageOriginalRows
 parameter_list|(
-name|AggregateRelBase
+name|Aggregate
 name|rel
 parameter_list|)
 block|{
@@ -189,7 +245,7 @@ name|getPercentageOriginalRows
 argument_list|(
 name|rel
 operator|.
-name|getChild
+name|getInput
 argument_list|()
 argument_list|)
 return|;
@@ -198,7 +254,7 @@ specifier|public
 name|Double
 name|getPercentageOriginalRows
 parameter_list|(
-name|UnionRelBase
+name|Union
 name|rel
 parameter_list|)
 block|{
@@ -283,7 +339,7 @@ specifier|public
 name|Double
 name|getPercentageOriginalRows
 parameter_list|(
-name|JoinRelBase
+name|Join
 name|rel
 parameter_list|)
 block|{
@@ -291,7 +347,7 @@ comment|// Assume any single-table filter conditions have already
 comment|// been pushed down.
 comment|// REVIEW jvs 28-Mar-2006: As with aggregation, this is
 comment|// oversimplified.
-comment|// REVIEW jvs 28-Mar-2006:  need any special casing for SemiJoinRel?
+comment|// REVIEW jvs 28-Mar-2006:  need any special casing for SemiJoin?
 name|double
 name|left
 init|=
@@ -532,9 +588,7 @@ specifier|public
 name|RelOptCost
 name|getCumulativeCost
 parameter_list|(
-name|JavaRules
-operator|.
-name|EnumerableInterpreterRel
+name|EnumerableInterpreter
 name|rel
 parameter_list|)
 block|{

@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
@@ -19,11 +21,13 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|rel
+name|calcite
 operator|.
-name|*
+name|plan
+operator|.
+name|Convention
 import|;
 end_import
 
@@ -31,13 +35,13 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|rel
+name|calcite
 operator|.
-name|RelFactories
+name|plan
 operator|.
-name|FilterFactory
+name|RelOptRule
 import|;
 end_import
 
@@ -45,58 +49,108 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|relopt
+name|calcite
 operator|.
-name|*
+name|plan
+operator|.
+name|RelOptRuleCall
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptUtil
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|RelNode
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|core
+operator|.
+name|SemiJoin
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|logical
+operator|.
+name|LogicalFilter
 import|;
 end_import
 
 begin_comment
-comment|/**  * PushSemiJoinPastFilterRule implements the rule for pushing semijoins down in  * a tree past a filter in order to trigger other rules that will convert  * semijoins. SemiJoinRel(FilterRel(X), Y)&rarr; FilterRel(SemiJoinRel(X, Y))  */
+comment|/**  * Planner rule that pushes  * {@link org.apache.calcite.rel.core.SemiJoin}s down in a tree past  * a {@link org.apache.calcite.rel.core.Filter}.  *  *<p>The intention is to trigger other rules that will convert  * {@code SemiJoin}s.  *  *<p>SemiJoin(LogicalFilter(X), Y)&rarr; LogicalFilter(SemiJoin(X, Y))  *  * @see SemiJoinProjectTransposeRule  */
 end_comment
 
 begin_class
 specifier|public
 class|class
-name|PushSemiJoinPastFilterRule
+name|SemiJoinFilterTransposeRule
 extends|extends
 name|RelOptRule
 block|{
 specifier|public
 specifier|static
 specifier|final
-name|PushSemiJoinPastFilterRule
+name|SemiJoinFilterTransposeRule
 name|INSTANCE
 init|=
 operator|new
-name|PushSemiJoinPastFilterRule
-argument_list|(
-name|RelFactories
-operator|.
-name|DEFAULT_FILTER_FACTORY
-argument_list|)
-decl_stmt|;
-specifier|private
-specifier|final
-name|FilterFactory
-name|filterFactory
+name|SemiJoinFilterTransposeRule
+argument_list|()
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a PushSemiJoinPastFilterRule.    * @param filterFactory Factory to create Filter    */
-specifier|public
-name|PushSemiJoinPastFilterRule
-parameter_list|(
-name|FilterFactory
-name|filterFactory
-parameter_list|)
+comment|/**    * Creates a SemiJoinFilterTransposeRule.    */
+specifier|private
+name|SemiJoinFilterTransposeRule
+parameter_list|()
 block|{
 name|super
 argument_list|(
 name|operand
 argument_list|(
-name|SemiJoinRel
+name|SemiJoin
 operator|.
 name|class
 argument_list|,
@@ -104,7 +158,7 @@ name|some
 argument_list|(
 name|operand
 argument_list|(
-name|FilterRelBase
+name|LogicalFilter
 operator|.
 name|class
 argument_list|,
@@ -114,12 +168,6 @@ argument_list|)
 argument_list|)
 argument_list|)
 argument_list|)
-expr_stmt|;
-name|this
-operator|.
-name|filterFactory
-operator|=
-name|filterFactory
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
@@ -132,7 +180,7 @@ name|RelOptRuleCall
 name|call
 parameter_list|)
 block|{
-name|SemiJoinRel
+name|SemiJoin
 name|semiJoin
 init|=
 name|call
@@ -142,7 +190,7 @@ argument_list|(
 literal|0
 argument_list|)
 decl_stmt|;
-name|FilterRelBase
+name|LogicalFilter
 name|filter
 init|=
 name|call
@@ -156,7 +204,7 @@ name|RelNode
 name|newSemiJoin
 init|=
 operator|new
-name|SemiJoinRel
+name|SemiJoin
 argument_list|(
 name|semiJoin
 operator|.
@@ -177,7 +225,7 @@ argument_list|)
 argument_list|,
 name|filter
 operator|.
-name|getChild
+name|getInput
 argument_list|()
 argument_list|,
 name|semiJoin
@@ -214,8 +262,6 @@ name|filter
 operator|.
 name|getCondition
 argument_list|()
-argument_list|,
-name|filterFactory
 argument_list|)
 decl_stmt|;
 name|call
@@ -230,7 +276,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End PushSemiJoinPastFilterRule.java
+comment|// End SemiJoinFilterTransposeRule.java
 end_comment
 
 end_unit

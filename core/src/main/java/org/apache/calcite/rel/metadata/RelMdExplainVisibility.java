@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
@@ -19,11 +21,13 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
-name|*
+name|RelNode
 import|;
 end_import
 
@@ -31,7 +35,9 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
@@ -41,13 +47,15 @@ end_import
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
-name|BuiltinMethod
+name|util
+operator|.
+name|BuiltInMethod
 import|;
 end_import
 
@@ -70,7 +78,7 @@ name|ReflectiveRelMetadataProvider
 operator|.
 name|reflectiveSource
 argument_list|(
-name|BuiltinMethod
+name|BuiltInMethod
 operator|.
 name|EXPLAIN_VISIBILITY
 operator|.

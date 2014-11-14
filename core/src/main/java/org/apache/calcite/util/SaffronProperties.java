@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|util
 package|;
@@ -15,31 +17,15 @@ end_package
 
 begin_import
 import|import
-name|java
+name|org
 operator|.
-name|io
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|security
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
-name|java
+name|eigenbase
 operator|.
 name|util
 operator|.
-name|*
+name|property
+operator|.
+name|BooleanProperty
 import|;
 end_import
 
@@ -53,12 +39,72 @@ name|util
 operator|.
 name|property
 operator|.
-name|*
+name|StringProperty
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|io
+operator|.
+name|File
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|io
+operator|.
+name|FileInputStream
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|io
+operator|.
+name|IOException
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|security
+operator|.
+name|AccessControlException
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Enumeration
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Properties
 import|;
 end_import
 
 begin_comment
-comment|/**  * Provides an environment for debugging information, et cetera, used by  * saffron.  *  *<p>{@link #getIntProperty} and {@link #getBooleanProperty} are convenience  * methods.</p>  *  *<p>It is a singleton, accessed via the {@link #instance} method. It is  * populated from System properties if saffron is invoked via a<code>  * main()</code> method, from a<code>javax.servlet.ServletContext</code> if  * saffron is invoked from a servlet, and so forth. If there is a file called  *<code>"saffron.properties"</code> in the current directory, it is read too.  *</p>  *  *<p>Every property used in saffron code must have a member in this class. The  * member must be public and final, and be of type {@link  * org.eigenbase.util.property.Property} or some subtype. The javadoc comment  * must describe the name of the property (for example,  * "net.sf.saffron.connection.PoolSize") and the default value, if any.<em>  * Developers, please make sure that this remains so!</em></p>  */
+comment|/**  * Provides an environment for debugging information, et cetera, used by  * saffron.  *  *<p>{@link #getIntProperty} and {@link #getBooleanProperty} are convenience  * methods.</p>  *  *<p>It is a singleton, accessed via the {@link #instance} method. It is  * populated from System properties if saffron is invoked via a<code>  * main()</code> method, from a<code>javax.servlet.ServletContext</code> if  * saffron is invoked from a servlet, and so forth. If there is a file called  *<code>"saffron.properties"</code> in the current directory, it is read too.  *</p>  *  *<p>Every property used in saffron code must have a member in this class. The  * member must be public and final, and be of type  * {@link org.eigenbase.util.property.Property} or some subtype. The javadoc  * comment must describe the name of the property (for example,  * "net.sf.saffron.connection.PoolSize") and the default value, if any.<em>  * Developers, please make sure that this remains so!</em></p>  */
 end_comment
 
 begin_class
@@ -92,7 +138,7 @@ argument_list|,
 literal|true
 argument_list|)
 decl_stmt|;
-comment|/**    * The string property "saffron.default.charset" is the name of the default    * character set. The default is "ISO-8859-1". It is used in {@link    * org.eigenbase.sql.validate.SqlValidator}.    */
+comment|/**    * The string property "saffron.default.charset" is the name of the default    * character set. The default is "ISO-8859-1". It is used in    * {@link org.apache.calcite.sql.validate.SqlValidator}.    */
 specifier|public
 specifier|final
 name|StringProperty
@@ -108,7 +154,7 @@ argument_list|,
 literal|"ISO-8859-1"
 argument_list|)
 decl_stmt|;
-comment|/**    * The string property "saffron.default.nationalcharset" is the name of the    * default national character set which is used with the N'string' construct    * which may or may not be different from the {@link #defaultCharset}. The    * default is "ISO-8859-1". It is used in {@link    * org.eigenbase.sql.SqlLiteral#SqlLiteral}    */
+comment|/**    * The string property "saffron.default.nationalcharset" is the name of the    * default national character set which is used with the N'string' construct    * which may or may not be different from the {@link #defaultCharset}. The    * default is "ISO-8859-1". It is used in    * {@link org.apache.calcite.sql.SqlLiteral#SqlLiteral}    */
 specifier|public
 specifier|final
 name|StringProperty
@@ -124,7 +170,7 @@ argument_list|,
 literal|"ISO-8859-1"
 argument_list|)
 decl_stmt|;
-comment|/**    * The string property "saffron.default.collation.name" is the name of the    * default collation. The default is "ISO-8859-1$en_US". Used in {@link    * org.eigenbase.sql.SqlCollation} and {@link    * org.eigenbase.sql.SqlLiteral#SqlLiteral}    */
+comment|/**    * The string property "saffron.default.collation.name" is the name of the    * default collation. The default is "ISO-8859-1$en_US". Used in    * {@link org.apache.calcite.sql.SqlCollation} and    * {@link org.apache.calcite.sql.SqlLiteral#SqlLiteral}    */
 specifier|public
 specifier|final
 name|StringProperty
@@ -140,7 +186,7 @@ argument_list|,
 literal|"ISO-8859-1$en_US"
 argument_list|)
 decl_stmt|;
-comment|/**    * The string property "saffron.default.collation.strength" is the strength    * of the default collation. The default is "primary". Used in {@link    * org.eigenbase.sql.SqlCollation} and {@link    * org.eigenbase.sql.SqlLiteral#SqlLiteral}    */
+comment|/**    * The string property "saffron.default.collation.strength" is the strength    * of the default collation. The default is "primary". Used in    * {@link org.apache.calcite.sql.SqlCollation} and    * {@link org.apache.calcite.sql.SqlLiteral#SqlLiteral}    */
 specifier|public
 specifier|final
 name|StringProperty

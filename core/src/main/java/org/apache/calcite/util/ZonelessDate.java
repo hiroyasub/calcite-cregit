@@ -7,9 +7,11 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|util14
+name|calcite
+operator|.
+name|util
 package|;
 end_package
 
@@ -29,7 +31,7 @@ name|java
 operator|.
 name|text
 operator|.
-name|*
+name|DateFormat
 import|;
 end_import
 
@@ -179,7 +181,7 @@ name|toString
 argument_list|()
 return|;
 block|}
-comment|/**    * Formats this ZonelessDate via a SimpleDateFormat    *    * @param format format string, as required by {@link SimpleDateFormat}    * @return the formatted date string    */
+comment|/**    * Formats this ZonelessDate via a SimpleDateFormat.    *    * @param format Format string, as required by    *     {@link java.text.SimpleDateFormat}    * @return the formatted date string    */
 specifier|public
 name|String
 name|toString
@@ -235,7 +237,7 @@ name|DATE_FORMAT_STRING
 argument_list|)
 return|;
 block|}
-comment|/**    * Parses a string as a ZonelessDate with a given format string.    *    * @param s      a string representing a date in ISO format, i.e. according to    *               the SimpleDateFormat string "yyyy-MM-dd"    * @param format format string as per {@link SimpleDateFormat}    * @return the parsed date, or null if parsing failed    */
+comment|/**    * Parses a string as a ZonelessDate with a given format string.    *    * @param s      a string representing a date in ISO format, i.e. according to    *               the SimpleDateFormat string "yyyy-MM-dd"    * @param format Format string as per {@link java.text.SimpleDateFormat}    * @return the parsed date, or null if parsing failed    */
 specifier|public
 specifier|static
 name|ZonelessDate

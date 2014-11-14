@@ -7,19 +7,25 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|relopt
+name|calcite
+operator|.
+name|plan
 package|;
 end_package
 
 begin_import
 import|import
-name|java
+name|org
 operator|.
-name|util
+name|apache
 operator|.
-name|*
+name|calcite
+operator|.
+name|rel
+operator|.
+name|RelNode
 import|;
 end_import
 
@@ -27,11 +33,79 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
-name|*
+name|RelVisitor
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|core
+operator|.
+name|TableModify
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Collections
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|HashMap
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Map
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Set
 import|;
 end_import
 
@@ -57,6 +131,7 @@ class|class
 name|TableAccessMap
 block|{
 comment|//~ Enums ------------------------------------------------------------------
+comment|/** Access mode. */
 specifier|public
 specifier|static
 enum|enum
@@ -352,13 +427,13 @@ argument_list|()
 return|;
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------
+comment|/** Visitor that finds all tables in a tree. */
 specifier|private
 class|class
 name|TableRelVisitor
 extends|extends
 name|RelVisitor
 block|{
-comment|// implement RelVisitor
 specifier|public
 name|void
 name|visit
@@ -406,14 +481,14 @@ name|newAccess
 decl_stmt|;
 comment|// FIXME jvs 1-Feb-2006:  Don't rely on object type here;
 comment|// eventually someone is going to write a rule which transforms
-comment|// to something which doesn't inherit TableModificationRelBase,
+comment|// to something which doesn't inherit TableModify,
 comment|// and this will break.  Need to make this explicit in
 comment|// the RelNode interface.
 if|if
 condition|(
 name|p
 operator|instanceof
-name|TableModificationRelBase
+name|TableModify
 condition|)
 block|{
 name|newAccess

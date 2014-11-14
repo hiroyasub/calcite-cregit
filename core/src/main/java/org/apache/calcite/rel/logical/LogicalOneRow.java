@@ -7,11 +7,101 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
+operator|.
+name|logical
 package|;
 end_package
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|Convention
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptCluster
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelTraitSet
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|RelInput
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|RelNode
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|core
+operator|.
+name|OneRow
+import|;
+end_import
 
 begin_import
 import|import
@@ -23,34 +113,22 @@ name|List
 import|;
 end_import
 
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
-name|relopt
-operator|.
-name|*
-import|;
-end_import
-
 begin_comment
-comment|/**  *<code>OneRowRel</code> always returns one row, one column (containing the  * value 0).  */
+comment|/**  * Sub-class of {@link org.apache.calcite.rel.core.OneRow}  * not targeted at any particular engine or calling convention.  */
 end_comment
 
 begin_class
 specifier|public
 specifier|final
 class|class
-name|OneRowRel
+name|LogicalOneRow
 extends|extends
-name|OneRowRelBase
+name|OneRow
 block|{
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a<code>OneRowRel</code>.    *    * @param cluster {@link RelOptCluster}  this relational expression belongs    *                to    */
+comment|/**    * Creates a<code>LogicalOneRow</code>.    *    * @param cluster   Cluster that this relational expression belongs to    */
 specifier|public
-name|OneRowRel
+name|LogicalOneRow
 parameter_list|(
 name|RelOptCluster
 name|cluster
@@ -71,9 +149,9 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Creates a OneRowRel by parsing serialized output.    */
+comment|/**    * Creates a LogicalOneRow by parsing serialized output.    */
 specifier|public
-name|OneRowRel
+name|LogicalOneRow
 parameter_list|(
 name|RelInput
 name|input
@@ -133,7 +211,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End OneRowRel.java
+comment|// End LogicalOneRow.java
 end_comment
 
 end_unit

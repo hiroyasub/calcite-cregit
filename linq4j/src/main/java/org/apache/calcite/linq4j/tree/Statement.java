@@ -5,13 +5,15 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
+operator|.
+name|calcite
 operator|.
 name|linq4j
 operator|.
-name|expressions
+name|tree
 package|;
 end_package
 
@@ -89,10 +91,10 @@ name|writer
 argument_list|)
 expr_stmt|;
 block|}
-annotation|@
-name|Override
 comment|// Make return type more specific. A statement can only become a different
 comment|// kind of statement; it can't become an expression.
+annotation|@
+name|Override
 specifier|public
 specifier|abstract
 name|Statement

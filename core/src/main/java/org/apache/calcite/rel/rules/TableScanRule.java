@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
@@ -19,11 +21,13 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|rel
+name|calcite
 operator|.
-name|*
+name|plan
+operator|.
+name|RelOptRule
 import|;
 end_import
 
@@ -31,22 +35,82 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|relopt
+name|calcite
 operator|.
-name|*
+name|plan
+operator|.
+name|RelOptRuleCall
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptTable
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptUtil
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|RelNode
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|logical
+operator|.
+name|LogicalTableScan
 import|;
 end_import
 
 begin_comment
-comment|/**  * Planner rule that converts a {@link TableAccessRel} to the result of calling  * {@link RelOptTable#toRel}.  */
+comment|/**  * Planner rule that converts a  * {@link org.apache.calcite.rel.logical.LogicalTableScan} to the result  * of calling {@link RelOptTable#toRel}.  */
 end_comment
 
 begin_class
 specifier|public
 class|class
-name|TableAccessRule
+name|TableScanRule
 extends|extends
 name|RelOptRule
 block|{
@@ -54,23 +118,23 @@ comment|//~ Static fields/initializers -----------------------------------------
 specifier|public
 specifier|static
 specifier|final
-name|TableAccessRule
+name|TableScanRule
 name|INSTANCE
 init|=
 operator|new
-name|TableAccessRule
+name|TableScanRule
 argument_list|()
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 specifier|private
-name|TableAccessRule
+name|TableScanRule
 parameter_list|()
 block|{
 name|super
 argument_list|(
 name|operand
 argument_list|(
-name|TableAccessRel
+name|LogicalTableScan
 operator|.
 name|class
 argument_list|,
@@ -90,7 +154,7 @@ name|call
 parameter_list|)
 block|{
 specifier|final
-name|TableAccessRel
+name|LogicalTableScan
 name|oldRel
 init|=
 name|call
@@ -133,7 +197,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End TableAccessRule.java
+comment|// End TableScanRule.java
 end_comment
 
 end_unit

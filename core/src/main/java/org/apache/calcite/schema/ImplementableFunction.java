@@ -5,32 +5,34 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
+operator|.
+name|schema
 package|;
 end_package
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
-name|rules
+name|adapter
 operator|.
-name|java
+name|enumerable
 operator|.
 name|CallImplementor
 import|;
 end_import
 
 begin_comment
-comment|/**  * Function that can be translated to java code.  *<p>  * @see net.hydromatic.optiq.ScalarFunction  * @see net.hydromatic.optiq.TableFunction  */
+comment|/**  * Function that can be translated to java code.  *  * @see ScalarFunction  * @see TableFunction  */
 end_comment
 
 begin_interface

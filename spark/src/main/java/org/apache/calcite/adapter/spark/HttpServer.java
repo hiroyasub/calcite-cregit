@@ -5,13 +5,13 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
-name|impl
+name|adapter
 operator|.
 name|spark
 package|;
@@ -151,7 +151,37 @@ name|java
 operator|.
 name|net
 operator|.
-name|*
+name|Inet4Address
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|net
+operator|.
+name|InetAddress
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|net
+operator|.
+name|InterfaceAddress
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|net
+operator|.
+name|NetworkInterface
 import|;
 end_import
 
@@ -548,7 +578,7 @@ name|System
 operator|.
 name|getenv
 argument_list|(
-literal|"OPTIQ_LOCAL_IP"
+literal|"CALCITE_LOCAL_IP"
 argument_list|)
 decl_stmt|;
 if|if
@@ -676,7 +706,7 @@ argument_list|)
 expr_stmt|;
 name|logWarning
 argument_list|(
-literal|"Set OPTIQ_LOCAL_IP if you need to bind to another address"
+literal|"Set CALCITE_LOCAL_IP if you need to bind to another address"
 argument_list|)
 expr_stmt|;
 return|return
@@ -712,7 +742,7 @@ argument_list|)
 expr_stmt|;
 name|logWarning
 argument_list|(
-literal|"Set OPTIQ_LOCAL_IP if you need to bind to another address"
+literal|"Set CALCITE_LOCAL_IP if you need to bind to another address"
 argument_list|)
 expr_stmt|;
 block|}

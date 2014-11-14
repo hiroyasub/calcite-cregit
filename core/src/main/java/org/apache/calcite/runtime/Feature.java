@@ -7,9 +7,11 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|resource
+name|calcite
+operator|.
+name|runtime
 package|;
 end_package
 
@@ -35,18 +37,6 @@ name|Locale
 import|;
 end_import
 
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
-name|util
-operator|.
-name|EigenbaseContextException
-import|;
-end_import
-
 begin_comment
 comment|/** SQL language feature. Expressed as the exception that would be thrown if it  * were used while disabled. */
 end_comment
@@ -60,7 +50,7 @@ name|Resources
 operator|.
 name|ExInstWithCause
 argument_list|<
-name|EigenbaseContextException
+name|CalciteContextException
 argument_list|>
 block|{
 specifier|public

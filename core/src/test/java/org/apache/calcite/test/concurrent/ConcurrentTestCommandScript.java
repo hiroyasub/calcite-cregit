@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|test
 operator|.
@@ -17,11 +19,119 @@ end_package
 
 begin_import
 import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|jdbc
+operator|.
+name|SqlTimeoutException
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|Util
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|io
 operator|.
-name|*
+name|BufferedReader
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|io
+operator|.
+name|BufferedWriter
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|io
+operator|.
+name|File
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|io
+operator|.
+name|FileReader
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|io
+operator|.
+name|IOException
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|io
+operator|.
+name|OutputStreamWriter
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|io
+operator|.
+name|PrintWriter
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|io
+operator|.
+name|StringReader
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|io
+operator|.
+name|StringWriter
 import|;
 end_import
 
@@ -31,7 +141,77 @@ name|java
 operator|.
 name|sql
 operator|.
-name|*
+name|Connection
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|sql
+operator|.
+name|DriverManager
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|sql
+operator|.
+name|PreparedStatement
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|sql
+operator|.
+name|ResultSet
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|sql
+operator|.
+name|ResultSetMetaData
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|sql
+operator|.
+name|SQLException
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|sql
+operator|.
+name|Statement
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|sql
+operator|.
+name|Timestamp
 import|;
 end_import
 
@@ -41,7 +221,97 @@ name|java
 operator|.
 name|util
 operator|.
-name|*
+name|ArrayList
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Arrays
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|HashMap
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Map
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Properties
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Stack
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|StringTokenizer
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|TreeMap
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|TreeSet
 import|;
 end_import
 
@@ -53,38 +323,24 @@ name|util
 operator|.
 name|regex
 operator|.
-name|*
+name|Matcher
 import|;
 end_import
 
 begin_import
 import|import
-name|org
-operator|.
-name|eigenbase
+name|java
 operator|.
 name|util
 operator|.
-name|Util
-import|;
-end_import
-
-begin_import
-import|import
-name|net
+name|regex
 operator|.
-name|hydromatic
-operator|.
-name|optiq
-operator|.
-name|jdbc
-operator|.
-name|SqlTimeoutException
+name|Pattern
 import|;
 end_import
 
 begin_comment
-comment|/**  * ConcurrentTestCommandScript creates instances of {@link  * ConcurrentTestCommand} that perform specific actions in a specific  * order and within the context of a test thread ({@link  * ConcurrentTestCommandExecutor}).  *  *<p>Actions are loaded from a script (see package javadoc for script format).  *  *<p>A single ConcurrentTestCommandScript creates commands  * for multiple threads. Each thread is represented by an integer "thread ID"  * and, optionally, a String thread name. Thread IDs may take on any positive  * integer value and may be a sparse set (e.g. 1, 2, 5). Thread names may be any  * String.  *  *<p>When each command is created, it is associated with a thread and given an  * execution order. Execution order values are positive integers, must be unique  * within a thread, and may be a sparse set.  * See {@link ConcurrentTestCommandGenerator#synchronizeCommandSets} for other  * considerations.  */
+comment|/**  * ConcurrentTestCommandScript creates instances of  * {@link ConcurrentTestCommand} that perform specific actions in a specific  * order and within the context of a test thread  * ({@link ConcurrentTestCommandExecutor}).  *  *<p>Actions are loaded from a script (see package javadoc for script format).  *  *<p>A single ConcurrentTestCommandScript creates commands  * for multiple threads. Each thread is represented by an integer "thread ID"  * and, optionally, a String thread name. Thread IDs may take on any positive  * integer value and may be a sparse set (e.g. 1, 2, 5). Thread names may be any  * String.  *  *<p>When each command is created, it is associated with a thread and given an  * execution order. Execution order values are positive integers, must be unique  * within a thread, and may be a sparse set.  * See {@link ConcurrentTestCommandGenerator#synchronizeCommandSets} for other  * considerations.  */
 end_comment
 
 begin_class
@@ -1623,7 +1879,7 @@ name|void
 name|executeCommands
 parameter_list|(
 name|int
-name|threadID
+name|threadId
 parameter_list|,
 name|List
 argument_list|<
@@ -1707,7 +1963,7 @@ argument_list|()
 decl_stmt|;
 name|storeSql
 argument_list|(
-name|threadID
+name|threadId
 argument_list|,
 name|sql
 argument_list|)
@@ -1850,7 +2106,7 @@ argument_list|)
 decl_stmt|;
 name|storeResults
 argument_list|(
-name|threadID
+name|threadId
 argument_list|,
 name|rset
 argument_list|,
@@ -1931,7 +2187,7 @@ condition|)
 block|{
 name|storeMessage
 argument_list|(
-name|threadID
+name|threadId
 argument_list|,
 name|String
 operator|.
@@ -1948,7 +2204,7 @@ else|else
 block|{
 name|storeMessage
 argument_list|(
-name|threadID
+name|threadId
 argument_list|,
 literal|"1 row affected."
 argument_list|)
@@ -1968,7 +2224,7 @@ condition|)
 block|{
 name|storeMessage
 argument_list|(
-name|threadID
+name|threadId
 argument_list|,
 name|ex
 operator|.
@@ -2633,7 +2889,7 @@ name|flush
 argument_list|()
 expr_stmt|;
 block|}
-comment|/**    * Causes errors to be send here for custom handling. See {@link    * #customErrorHandler(ConcurrentTestCommandExecutor)}.    */
+comment|/**    * Causes errors to be send here for custom handling. See    * {@link #customErrorHandler(ConcurrentTestCommandExecutor)}.    */
 name|boolean
 name|requiresCustomErrorHandling
 parameter_list|()
@@ -3012,6 +3268,7 @@ assert|;
 block|}
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------
+comment|/** State action. */
 specifier|private
 specifier|static
 class|class
@@ -3050,6 +3307,7 @@ name|stateData
 expr_stmt|;
 block|}
 block|}
+comment|/** State datum. */
 specifier|private
 specifier|static
 class|class
@@ -3086,7 +3344,7 @@ name|y
 expr_stmt|;
 block|}
 block|}
-comment|// Inner Class: a symbol table of script variables
+comment|/** Symbol table of script variables. */
 specifier|private
 class|class
 name|VariableTable
@@ -3130,6 +3388,7 @@ argument_list|>
 argument_list|()
 expr_stmt|;
 block|}
+comment|/** Exception. */
 specifier|public
 class|class
 name|Excn
@@ -3511,7 +3770,7 @@ return|;
 block|}
 block|}
 block|}
-comment|// Inner Class: the command parser
+comment|/** Command parser. */
 specifier|private
 class|class
 name|CommandParser
@@ -3589,6 +3848,7 @@ name|File
 argument_list|>
 argument_list|()
 decl_stmt|;
+comment|/** Binding of a value to a variable. */
 specifier|private
 class|class
 name|Binding
@@ -6821,12 +7081,7 @@ name|line
 return|;
 block|}
 block|}
-comment|// Inner Classes: the Commands
-comment|// When executed, a @print command defines how any following @fetch
-comment|// or @select commands will handle their resuult rows. MTSQL can print all
-comment|// rows, no rows, or every nth row. A printed row can be prefixed by a
-comment|// sequence nuber and/or the time it was received (a different notion than
-comment|// its rowtime, which often tells when it was inserted).
+comment|/** Print command.    *    *<p>When executed, a @print command defines how any following @fetch    * or @select commands will handle their resuult rows. MTSQL can print all    * rows, no rows, or every nth row. A printed row can be prefixed by a    * sequence nuber and/or the time it was received (a different notion than    * its rowtime, which often tells when it was inserted).    */
 specifier|private
 class|class
 name|PrintCommand
@@ -7120,6 +7375,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+comment|/** Echo command. */
 specifier|private
 class|class
 name|EchoCommand
@@ -7167,6 +7423,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+comment|/** Plugin command. */
 specifier|private
 class|class
 name|PluginCommand
@@ -7307,6 +7564,7 @@ literal|"[*?$|<>&]"
 argument_list|)
 decl_stmt|;
 comment|// REVIEW mb 2/24/09 (Mardi Gras) Should this have a timeout?
+comment|/** Shell command. */
 specifier|private
 class|class
 name|ShellCommand
@@ -7580,6 +7838,7 @@ expr_stmt|;
 block|}
 block|}
 block|}
+comment|/** Command that has a timeout. */
 comment|// TODO: replace by super.CommmandWithTimeout
 specifier|private
 specifier|abstract
@@ -7667,6 +7926,7 @@ literal|1
 return|;
 block|}
 block|}
+comment|/** Command with timeout and row limit. */
 specifier|private
 specifier|abstract
 specifier|static
@@ -8465,6 +8725,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+comment|/** Result reader. */
 specifier|private
 class|class
 name|ResultsReader
@@ -9515,7 +9776,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|// Inner class: stand-alone client test tool
+comment|/** Standalone client test tool. */
 specifier|private
 specifier|static
 class|class

@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
@@ -19,11 +21,55 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptRule
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptRuleCall
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptUtil
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
-name|*
+name|RelNode
 import|;
 end_import
 
@@ -31,11 +77,15 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|relopt
+name|calcite
 operator|.
-name|*
+name|rel
+operator|.
+name|core
+operator|.
+name|Filter
 import|;
 end_import
 
@@ -43,42 +93,90 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|core
+operator|.
+name|Project
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|core
+operator|.
+name|RelFactories
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rex
 operator|.
-name|*
+name|RexNode
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rex
+operator|.
+name|RexOver
 import|;
 end_import
 
 begin_comment
-comment|/**  * PushFilterPastProjectRule implements the rule for pushing a {@link FilterRel}  * past a {@link ProjectRel}.  */
+comment|/**  * Planner rule that pushes  * a {@link org.apache.calcite.rel.logical.LogicalFilter}  * past a {@link org.apache.calcite.rel.logical.LogicalProject}.  */
 end_comment
 
 begin_class
 specifier|public
 class|class
-name|PushFilterPastProjectRule
+name|FilterProjectTransposeRule
 extends|extends
 name|RelOptRule
 block|{
-comment|/** The default instance of    * {@link org.eigenbase.rel.rules.PushFilterPastJoinRule}.    *    *<p>It matches any kind of join or filter, and generates the same kind of    * join and filter. It uses null values for {@code filterFactory} and    * {@code projectFactory} to achieve this. */
+comment|/** The default instance of    * {@link org.apache.calcite.rel.rules.FilterProjectTransposeRule}.    *    *<p>It matches any kind of join or filter, and generates the same kind of    * join and filter. It uses null values for {@code filterFactory} and    * {@code projectFactory} to achieve this. */
 specifier|public
 specifier|static
 specifier|final
-name|PushFilterPastProjectRule
+name|FilterProjectTransposeRule
 name|INSTANCE
 init|=
 operator|new
-name|PushFilterPastProjectRule
+name|FilterProjectTransposeRule
 argument_list|(
-name|FilterRelBase
+name|Filter
 operator|.
 name|class
 argument_list|,
 literal|null
 argument_list|,
-name|ProjectRelBase
+name|Project
 operator|.
 name|class
 argument_list|,
@@ -100,15 +198,15 @@ name|ProjectFactory
 name|projectFactory
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a PushFilterPastProjectRule.    *    *<p>If {@code filterFactory} is null, creates the same kind of filter as    * matched in the rule. Similarly {@code projectFactory}.</p>    */
+comment|/**    * Creates a FilterProjectTransposeRule.    *    *<p>If {@code filterFactory} is null, creates the same kind of filter as    * matched in the rule. Similarly {@code projectFactory}.</p>    */
 specifier|public
-name|PushFilterPastProjectRule
+name|FilterProjectTransposeRule
 parameter_list|(
 name|Class
 argument_list|<
 name|?
 extends|extends
-name|FilterRelBase
+name|Filter
 argument_list|>
 name|filterClass
 parameter_list|,
@@ -121,7 +219,7 @@ name|Class
 argument_list|<
 name|?
 extends|extends
-name|ProjectRelBase
+name|Project
 argument_list|>
 name|projectClass
 parameter_list|,
@@ -171,7 +269,7 @@ name|call
 parameter_list|)
 block|{
 specifier|final
-name|FilterRelBase
+name|Filter
 name|filterRel
 init|=
 name|call
@@ -182,7 +280,7 @@ literal|0
 argument_list|)
 decl_stmt|;
 specifier|final
-name|ProjectRelBase
+name|Project
 name|projRel
 init|=
 name|call
@@ -249,7 +347,7 @@ argument_list|()
 argument_list|,
 name|projRel
 operator|.
-name|getChild
+name|getInput
 argument_list|()
 argument_list|,
 name|newCondition
@@ -261,7 +359,7 @@ name|createFilter
 argument_list|(
 name|projRel
 operator|.
-name|getChild
+name|getInput
 argument_list|()
 argument_list|,
 name|newCondition
@@ -328,7 +426,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End PushFilterPastProjectRule.java
+comment|// End FilterProjectTransposeRule.java
 end_comment
 
 end_unit

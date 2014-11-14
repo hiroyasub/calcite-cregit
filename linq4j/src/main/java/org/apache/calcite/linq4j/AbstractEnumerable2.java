@@ -5,16 +5,18 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
+operator|.
+name|calcite
 operator|.
 name|linq4j
 package|;
 end_package
 
 begin_comment
-comment|/**  * Abstract implementation of the {@link net.hydromatic.linq4j.Enumerable} interface that  * implements the extension methods.  *  *<p>It is helpful to derive from this class if you are implementing  * {@code Enumerable}, because {@code Enumerable} has so many extension methods,  * but it is not required.</p>  *  * @param<T> Element type  */
+comment|/**  * Abstract implementation of the {@link org.apache.calcite.linq4j.Enumerable}  * interface that implements the extension methods.  *  *<p>It is helpful to derive from this class if you are implementing  * {@code Enumerable}, because {@code Enumerable} has so many extension methods,  * but it is not required.</p>  *  * @param<T> Element type  */
 end_comment
 
 begin_class

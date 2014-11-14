@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
@@ -19,11 +21,15 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|reltype
+name|calcite
 operator|.
-name|*
+name|rel
+operator|.
+name|type
+operator|.
+name|RelDataType
 import|;
 end_import
 
@@ -31,11 +37,13 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
-name|*
+name|SqlOperatorBinding
 import|;
 end_import
 
@@ -54,7 +62,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Strategy to infer the type of an operator call from the type of the operands  * by using one {@link SqlReturnTypeInference} rule and a combination of {@link  * SqlTypeTransform}s  */
+comment|/**  * Strategy to infer the type of an operator call from the type of the operands  * by using one {@link SqlReturnTypeInference} rule and a combination of  * {@link SqlTypeTransform}s  */
 end_comment
 
 begin_class

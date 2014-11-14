@@ -7,9 +7,11 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|util14
+name|calcite
+operator|.
+name|util
 package|;
 end_package
 
@@ -19,7 +21,7 @@ name|java
 operator|.
 name|sql
 operator|.
-name|*
+name|Timestamp
 import|;
 end_import
 
@@ -29,7 +31,7 @@ name|java
 operator|.
 name|text
 operator|.
-name|*
+name|DateFormat
 import|;
 end_import
 
@@ -206,7 +208,7 @@ name|TIMESTAMP_FORMAT_STRING
 argument_list|)
 return|;
 block|}
-comment|/**    * Parses a string as a ZonelessTimestamp using a given format string.    *    *<p>This method's parsing is strict and may parse fractional seconds (as    * opposed to just milliseconds.)    *    * @param s      a string representing a time in ISO format, i.e. according to    *               the SimpleDateFormat string "yyyy-MM-dd HH:mm:ss"    * @param format format string as per {@link SimpleDateFormat}    * @return the parsed timestamp, or null if parsing failed    */
+comment|/**    * Parses a string as a ZonelessTimestamp using a given format string.    *    *<p>This method's parsing is strict and may parse fractional seconds (as    * opposed to just milliseconds.)    *    * @param s      a string representing a time in ISO format, i.e. according to    *               the SimpleDateFormat string "yyyy-MM-dd HH:mm:ss"    * @param format Format string as per {@link java.text.SimpleDateFormat}    * @return the parsed timestamp, or null if parsing failed    */
 specifier|public
 specifier|static
 name|ZonelessTimestamp

@@ -4,14 +4,16 @@ comment|/*  * Licensed to the Apache Software Foundation (ASF) under one or more
 end_comment
 
 begin_comment
-comment|/**  * Defines relational expressions.<p>&nbsp;</p>  *  *<h2>Related packages and classes</h2>  *<ul>  *<li>Package<code><a href="../sql/package-summary.html">  *        org.eigenbase.sql</a></code>  *        is an object model for SQL expressions</li>  *<li>Package<code><a href="../sql/package-summary.html">  *        org.eigenbase.rex</a></code>  *        is an object model for relational row expressions</li>  *<li>Package<code><a href="../relopt/package-summary.html">  *        org.eigenbase.relopt</a></code>  *        provides an optimizer interface.</li>  *</ul>  */
+comment|/**  * Provides a core set of planner rules.  *  *<p>Consider this package to be the "standard library" of planner rules.  * Most of the common rewrites that you would want to perform on logical  * relational expressions, or generically on any data source, are present,  * and have been well tested.  *  *<p>Of course, the library is never complete, and contributions are welcome.  *  *<p>Not present are rules specific to a particular data source: look in that  * data source's adapter.  *  *<p>Also out of the scope of this package are rules that support a particular  * operation, such as decorrelation or recognizing materialized views. Those are  * defined along with the algorithm.  *  *<p>For  *  *<h2>Related packages and classes</h2>  *<ul>  *<li>Package<code><a href="../sql/package-summary.html">  *        org.apache.calcite.sql</a></code>  *        is an object model for SQL expressions</li>  *<li>Package<code><a href="../rex/package-summary.html">  *        org.apache.calcite.rex</a></code>  *        is an object model for relational row expressions</li>  *<li>Package<code><a href="../plan/package-summary.html">  *        org.apache.calcite.plan</a></code>  *        provides an optimizer interface.</li>  *</ul>  */
 end_comment
 
 begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.

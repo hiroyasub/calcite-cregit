@@ -5,16 +5,18 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
+operator|.
+name|calcite
 operator|.
 name|linq4j
 package|;
 end_package
 
 begin_comment
-comment|/**  * Represents the result of applying a sorting operation to an  * {@link net.hydromatic.linq4j.Enumerable}.  *  * @param<T> element type  */
+comment|/**  * Represents the result of applying a sorting operation to an  * {@link org.apache.calcite.linq4j.Enumerable}.  *  * @param<T> element type  */
 end_comment
 
 begin_interface

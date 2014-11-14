@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|util
 package|;
@@ -17,11 +19,13 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|resource
+name|calcite
 operator|.
-name|EigenbaseNewResource
+name|runtime
+operator|.
+name|CalciteResource
 import|;
 end_import
 
@@ -29,16 +33,18 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|resource
+name|calcite
+operator|.
+name|runtime
 operator|.
 name|Resources
 import|;
 end_import
 
 begin_comment
-comment|/**  * Definitions of objects to be statically imported.  *  *<p>Developers: Give careful consideration before including an object in this  * class.  * Pros: Code that uses these objects will be terser.  * Cons: Namespace pollution,  * code that is difficult to understand (a general problem with static imports),  * potential cyclic initialization.</p>  */
+comment|/**  * Definitions of objects to be statically imported.  *  *<h3>Note to developers</h3>  *  *<p>Please give careful consideration before including an object in this  * class. Pros:  *<ul>  *<li>Code that uses these objects will be terser.  *</ul>  *  *<p>Cons:</p>  *<ul>  *<li>Namespace pollution,  *<li>code that is difficult to understand (a general problem with static  * imports),  *<li>potential cyclic initialization.  *</ul>  */
 end_comment
 
 begin_class
@@ -56,16 +62,16 @@ comment|/** Resources. */
 specifier|public
 specifier|static
 specifier|final
-name|EigenbaseNewResource
+name|CalciteResource
 name|RESOURCE
 init|=
 name|Resources
 operator|.
 name|create
 argument_list|(
-literal|"org.eigenbase.resource.EigenbaseResource"
+literal|"org.apache.calcite.runtime.CalciteResource"
 argument_list|,
-name|EigenbaseNewResource
+name|CalciteResource
 operator|.
 name|class
 argument_list|)

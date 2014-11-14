@@ -7,19 +7,27 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
+operator|.
+name|core
 package|;
 end_package
 
 begin_import
 import|import
-name|java
+name|org
 operator|.
-name|util
+name|apache
 operator|.
-name|*
+name|calcite
+operator|.
+name|plan
+operator|.
+name|Convention
 import|;
 end_import
 
@@ -27,11 +35,13 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|relopt
+name|calcite
 operator|.
-name|*
+name|plan
+operator|.
+name|RelOptCluster
 import|;
 end_import
 
@@ -39,11 +49,83 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelTraitSet
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|RelInput
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|RelNode
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|RelShuttle
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|RelWriter
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rex
 operator|.
-name|*
+name|RexNode
 import|;
 end_import
 
@@ -75,17 +157,47 @@ name|ImmutableSet
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|ArrayList
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Map
+import|;
+end_import
+
 begin_comment
-comment|/**  * A<code>CorrelatorRel</code> behaves like a kind of {@link JoinRel}, but  * works by setting variables in its environment and restarting its right-hand  * input.  *  *<p>A CorrelatorRel is used to represent a correlated query. One  * implementation strategy is to de-correlate the expression.  */
+comment|/**  * A relational operator that performs nested-loop joins.  *  *<p>It behaves like a kind of {@link Join},  * but works by setting variables in its environment and restarting its  * right-hand input.  *  *<p>A Correlator is used to represent a correlated query. One  * implementation strategy is to de-correlate the expression.  *  * @see Correlation  */
 end_comment
 
 begin_class
 specifier|public
 specifier|final
 class|class
-name|CorrelatorRel
+name|Correlator
 extends|extends
-name|JoinRelBase
+name|Join
 block|{
 comment|//~ Instance fields --------------------------------------------------------
 specifier|protected
@@ -97,9 +209,9 @@ argument_list|>
 name|correlations
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a CorrelatorRel.    *    * @param cluster      cluster this relational expression belongs to    * @param left         left input relational expression    * @param right        right input relational expression    * @param joinCond     join condition    * @param correlations set of expressions to set as variables each time a    *                     row arrives from the left input    * @param joinType     join type    */
+comment|/**    * Creates a Correlator.    *    * @param cluster      cluster this relational expression belongs to    * @param left         left input relational expression    * @param right        right input relational expression    * @param joinCond     join condition    * @param correlations set of expressions to set as variables each time a    *                     row arrives from the left input    * @param joinType     join type    */
 specifier|public
-name|CorrelatorRel
+name|Correlator
 parameter_list|(
 name|RelOptCluster
 name|cluster
@@ -182,9 +294,9 @@ name|INNER
 operator|)
 assert|;
 block|}
-comment|/**    * Creates a CorrelatorRel with no join condition.    *    * @param cluster      cluster this relational expression belongs to    * @param left         left input relational expression    * @param right        right input relational expression    * @param correlations set of expressions to set as variables each time a    *                     row arrives from the left input    * @param joinType     join type    */
+comment|/**    * Creates a Correlator with no join condition.    *    * @param cluster      Cluster that this relational expression belongs to    * @param left         left input relational expression    * @param right        right input relational expression    * @param correlations set of expressions to set as variables each time a    *                     row arrives from the left input    * @param joinType     join type    */
 specifier|public
-name|CorrelatorRel
+name|Correlator
 parameter_list|(
 name|RelOptCluster
 name|cluster
@@ -229,9 +341,9 @@ name|joinType
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Creates a CorrelatorRel by parsing serialized output.    */
+comment|/**    * Creates a Correlator by parsing serialized output.    */
 specifier|public
-name|CorrelatorRel
+name|Correlator
 parameter_list|(
 name|RelInput
 name|input
@@ -390,7 +502,7 @@ comment|//~ Methods ------------------------------------------------------------
 annotation|@
 name|Override
 specifier|public
-name|CorrelatorRel
+name|Correlator
 name|copy
 parameter_list|(
 name|RelTraitSet
@@ -424,7 +536,7 @@ argument_list|)
 assert|;
 return|return
 operator|new
-name|CorrelatorRel
+name|Correlator
 argument_list|(
 name|getCluster
 argument_list|()
@@ -501,7 +613,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End CorrelatorRel.java
+comment|// End Correlator.java
 end_comment
 
 end_unit

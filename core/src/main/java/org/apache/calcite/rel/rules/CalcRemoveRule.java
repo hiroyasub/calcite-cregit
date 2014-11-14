@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
@@ -19,11 +21,41 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptRule
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptRuleCall
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
-name|*
+name|RelNode
 import|;
 end_import
 
@@ -31,11 +63,15 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|relopt
+name|calcite
 operator|.
-name|*
+name|rel
+operator|.
+name|logical
+operator|.
+name|LogicalCalc
 import|;
 end_import
 
@@ -43,22 +79,24 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rex
 operator|.
-name|*
+name|RexProgram
 import|;
 end_import
 
 begin_comment
-comment|/**  * Rule which removes a trivial {@link CalcRel}.  *  *<p>A {@link CalcRel} is trivial if it projects its input fields in their  * original order, and it does not filter.  *  * @see org.eigenbase.rel.rules.RemoveTrivialProjectRule  */
+comment|/**  * Planner rule that removes a trivial  * {@link org.apache.calcite.rel.logical.LogicalCalc}.  *  *<p>A {@link org.apache.calcite.rel.logical.LogicalCalc}  * is trivial if it projects its input fields in their  * original order, and it does not filter.  *  * @see ProjectRemoveRule  */
 end_comment
 
 begin_class
 specifier|public
 class|class
-name|RemoveTrivialCalcRule
+name|CalcRemoveRule
 extends|extends
 name|RelOptRule
 block|{
@@ -66,23 +104,23 @@ comment|//~ Static fields/initializers -----------------------------------------
 specifier|public
 specifier|static
 specifier|final
-name|RemoveTrivialCalcRule
+name|CalcRemoveRule
 name|INSTANCE
 init|=
 operator|new
-name|RemoveTrivialCalcRule
+name|CalcRemoveRule
 argument_list|()
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 specifier|private
-name|RemoveTrivialCalcRule
+name|CalcRemoveRule
 parameter_list|()
 block|{
 name|super
 argument_list|(
 name|operand
 argument_list|(
-name|CalcRel
+name|LogicalCalc
 operator|.
 name|class
 argument_list|,
@@ -102,7 +140,7 @@ name|RelOptRuleCall
 name|call
 parameter_list|)
 block|{
-name|CalcRel
+name|LogicalCalc
 name|calc
 init|=
 name|call
@@ -175,7 +213,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End RemoveTrivialCalcRule.java
+comment|// End CalcRemoveRule.java
 end_comment
 
 end_unit

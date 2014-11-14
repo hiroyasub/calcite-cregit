@@ -5,11 +5,11 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
 name|test
 package|;
@@ -17,47 +17,347 @@ end_package
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
+operator|.
+name|calcite
+operator|.
+name|adapter
+operator|.
+name|clone
+operator|.
+name|CloneSchema
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|adapter
+operator|.
+name|generate
+operator|.
+name|RangeTable
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|adapter
+operator|.
+name|java
+operator|.
+name|AbstractQueryableTable
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|adapter
+operator|.
+name|java
+operator|.
+name|JavaTypeFactory
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|adapter
+operator|.
+name|java
+operator|.
+name|ReflectiveSchema
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|adapter
+operator|.
+name|jdbc
+operator|.
+name|JdbcConvention
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|adapter
+operator|.
+name|jdbc
+operator|.
+name|JdbcSchema
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|avatica
 operator|.
-name|*
+name|AvaticaConnection
 import|;
 end_import
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
+operator|.
+name|calcite
+operator|.
+name|avatica
+operator|.
+name|AvaticaStatement
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|avatica
+operator|.
+name|Handler
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|avatica
+operator|.
+name|HandlerImpl
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|avatica
+operator|.
+name|Meta
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|jdbc
+operator|.
+name|CalciteConnection
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|jdbc
+operator|.
+name|CalciteSchema
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|jdbc
+operator|.
+name|Driver
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|jdbc
+operator|.
+name|MetaImpl
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|linq4j
 operator|.
-name|*
+name|BaseQueryable
 import|;
 end_import
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
+operator|.
+name|calcite
 operator|.
 name|linq4j
 operator|.
-name|expressions
-operator|.
-name|Types
+name|Enumerable
 import|;
 end_import
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
+operator|.
+name|calcite
+operator|.
+name|linq4j
+operator|.
+name|Enumerator
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|linq4j
+operator|.
+name|Linq4j
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|linq4j
+operator|.
+name|Ord
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|linq4j
+operator|.
+name|QueryProvider
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|linq4j
+operator|.
+name|Queryable
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|linq4j
 operator|.
@@ -69,9 +369,11 @@ end_import
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
+operator|.
+name|calcite
 operator|.
 name|linq4j
 operator|.
@@ -83,191 +385,83 @@ end_import
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
-name|*
+name|linq4j
+operator|.
+name|tree
+operator|.
+name|Types
 import|;
 end_import
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
-name|impl
+name|plan
 operator|.
-name|*
+name|RelOptCluster
 import|;
 end_import
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
-name|impl
+name|plan
 operator|.
-name|clone
-operator|.
-name|CloneSchema
+name|RelOptTable
 import|;
 end_import
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
-name|impl
+name|plan
 operator|.
-name|generate
-operator|.
-name|RangeTable
+name|RelOptUtil
 import|;
 end_import
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
-operator|.
-name|impl
-operator|.
-name|java
-operator|.
-name|AbstractQueryableTable
-import|;
-end_import
-
-begin_import
-import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|optiq
-operator|.
-name|impl
-operator|.
-name|java
-operator|.
-name|JavaTypeFactory
-import|;
-end_import
-
-begin_import
-import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|optiq
-operator|.
-name|impl
-operator|.
-name|java
-operator|.
-name|ReflectiveSchema
-import|;
-end_import
-
-begin_import
-import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|optiq
-operator|.
-name|impl
-operator|.
-name|jdbc
-operator|.
-name|JdbcConvention
-import|;
-end_import
-
-begin_import
-import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|optiq
-operator|.
-name|impl
-operator|.
-name|jdbc
-operator|.
-name|JdbcSchema
-import|;
-end_import
-
-begin_import
-import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|optiq
-operator|.
-name|jdbc
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|optiq
-operator|.
-name|jdbc
-operator|.
-name|Driver
-import|;
-end_import
-
-begin_import
-import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|optiq
+name|calcite
 operator|.
 name|prepare
 operator|.
-name|OptiqPrepareImpl
+name|CalcitePrepareImpl
 import|;
 end_import
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
 name|prepare
 operator|.
@@ -277,11 +471,105 @@ end_import
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
+operator|.
+name|rel
+operator|.
+name|RelNode
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|core
+operator|.
+name|TableModify
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|logical
+operator|.
+name|LogicalTableModify
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|type
+operator|.
+name|RelDataType
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|type
+operator|.
+name|RelDataTypeFactory
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|type
+operator|.
+name|RelProtoDataType
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|runtime
 operator|.
@@ -291,11 +579,11 @@ end_import
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
 name|runtime
 operator|.
@@ -307,11 +595,13 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|rel
+name|calcite
 operator|.
-name|*
+name|schema
+operator|.
+name|ModifiableTable
 import|;
 end_import
 
@@ -319,11 +609,13 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|relopt
+name|calcite
 operator|.
-name|*
+name|schema
+operator|.
+name|QueryableTable
 import|;
 end_import
 
@@ -331,11 +623,13 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|reltype
+name|calcite
 operator|.
-name|RelDataType
+name|schema
+operator|.
+name|Schema
 import|;
 end_import
 
@@ -343,11 +637,13 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|reltype
+name|calcite
 operator|.
-name|RelDataTypeFactory
+name|schema
+operator|.
+name|SchemaFactory
 import|;
 end_import
 
@@ -355,11 +651,13 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|reltype
+name|calcite
 operator|.
-name|RelProtoDataType
+name|schema
+operator|.
+name|SchemaPlus
 import|;
 end_import
 
@@ -367,11 +665,179 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
+operator|.
+name|schema
+operator|.
+name|Table
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|schema
+operator|.
+name|TableFactory
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|schema
+operator|.
+name|TableFunction
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|schema
+operator|.
+name|TableMacro
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|schema
+operator|.
+name|TranslatableTable
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|schema
+operator|.
+name|impl
+operator|.
+name|AbstractSchema
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|schema
+operator|.
+name|impl
+operator|.
+name|AbstractTable
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|schema
+operator|.
+name|impl
+operator|.
+name|AbstractTableQueryable
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|schema
+operator|.
+name|impl
+operator|.
+name|TableFunctionImpl
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|schema
+operator|.
+name|impl
+operator|.
+name|TableMacroImpl
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|schema
+operator|.
+name|impl
+operator|.
+name|ViewTable
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
-name|*
+name|SqlDialect
 import|;
 end_import
 
@@ -379,7 +845,23 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|SqlSelect
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
@@ -393,7 +875,9 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
@@ -407,7 +891,9 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
@@ -421,19 +907,9 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|test
-operator|.
-name|DiffTestCase
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
+name|calcite
 operator|.
 name|util
 operator|.
@@ -445,7 +921,9 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|util
 operator|.
@@ -457,7 +935,9 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|util
 operator|.
@@ -523,6 +1003,18 @@ end_import
 
 begin_import
 import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|quidem
+operator|.
+name|Quidem
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|hsqldb
@@ -557,7 +1049,47 @@ name|java
 operator|.
 name|io
 operator|.
-name|*
+name|BufferedReader
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|io
+operator|.
+name|File
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|io
+operator|.
+name|FileReader
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|io
+operator|.
+name|FileWriter
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|io
+operator|.
+name|IOException
 import|;
 end_import
 
@@ -599,7 +1131,27 @@ name|java
 operator|.
 name|sql
 operator|.
-name|*
+name|Array
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|sql
+operator|.
+name|Connection
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|sql
+operator|.
+name|DatabaseMetaData
 import|;
 end_import
 
@@ -619,7 +1171,77 @@ name|java
 operator|.
 name|sql
 operator|.
+name|DriverManager
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|sql
+operator|.
+name|DriverPropertyInfo
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|sql
+operator|.
+name|PreparedStatement
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|sql
+operator|.
+name|ResultSet
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|sql
+operator|.
+name|ResultSetMetaData
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|sql
+operator|.
+name|SQLException
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|sql
+operator|.
 name|Statement
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|sql
+operator|.
+name|Timestamp
 import|;
 end_import
 
@@ -629,7 +1251,107 @@ name|java
 operator|.
 name|util
 operator|.
-name|*
+name|AbstractList
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|ArrayList
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Arrays
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Calendar
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Collections
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|HashMap
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|HashSet
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Map
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Properties
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|TimeZone
 import|;
 end_import
 
@@ -644,14 +1366,14 @@ import|;
 end_import
 
 begin_import
-import|import
-name|net
+import|import static
+name|org
 operator|.
-name|hydromatic
+name|hamcrest
 operator|.
-name|quidem
+name|CoreMatchers
 operator|.
-name|Quidem
+name|containsString
 import|;
 end_import
 
@@ -663,7 +1385,67 @@ name|hamcrest
 operator|.
 name|CoreMatchers
 operator|.
-name|*
+name|equalTo
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|hamcrest
+operator|.
+name|CoreMatchers
+operator|.
+name|instanceOf
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|hamcrest
+operator|.
+name|CoreMatchers
+operator|.
+name|is
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|hamcrest
+operator|.
+name|CoreMatchers
+operator|.
+name|not
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|hamcrest
+operator|.
+name|CoreMatchers
+operator|.
+name|notNullValue
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|hamcrest
+operator|.
+name|CoreMatchers
+operator|.
+name|nullValue
 import|;
 end_import
 
@@ -675,7 +1457,79 @@ name|junit
 operator|.
 name|Assert
 operator|.
-name|*
+name|assertArrayEquals
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|assertEquals
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|assertFalse
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|assertNotNull
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|assertThat
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|assertTrue
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|fail
 import|;
 end_import
 
@@ -852,7 +1706,7 @@ literal|"       name: 'foodmart',\n"
 operator|+
 literal|"       jdbcDriver: '"
 operator|+
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|CONNECTION_SPEC
 operator|.
@@ -862,7 +1716,7 @@ literal|"',\n"
 operator|+
 literal|"       jdbcUser: '"
 operator|+
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|CONNECTION_SPEC
 operator|.
@@ -872,7 +1726,7 @@ literal|"',\n"
 operator|+
 literal|"       jdbcPassword: '"
 operator|+
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|CONNECTION_SPEC
 operator|.
@@ -882,7 +1736,7 @@ literal|"',\n"
 operator|+
 literal|"       jdbcUrl: '"
 operator|+
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|CONNECTION_SPEC
 operator|.
@@ -1034,13 +1888,6 @@ name|SQLException
 throws|,
 name|ClassNotFoundException
 block|{
-name|Class
-operator|.
-name|forName
-argument_list|(
-literal|"net.hydromatic.optiq.jdbc.Driver"
-argument_list|)
-expr_stmt|;
 name|Connection
 name|connection
 init|=
@@ -1051,14 +1898,14 @@ argument_list|(
 literal|"jdbc:calcite:"
 argument_list|)
 decl_stmt|;
-name|OptiqConnection
-name|optiqConnection
+name|CalciteConnection
+name|calciteConnection
 init|=
 name|connection
 operator|.
 name|unwrap
 argument_list|(
-name|OptiqConnection
+name|CalciteConnection
 operator|.
 name|class
 argument_list|)
@@ -1066,7 +1913,7 @@ decl_stmt|;
 name|SchemaPlus
 name|rootSchema
 init|=
-name|optiqConnection
+name|calciteConnection
 operator|.
 name|getRootSchema
 argument_list|()
@@ -1124,7 +1971,7 @@ argument_list|)
 decl_stmt|;
 name|assertThat
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|toString
 argument_list|(
@@ -1188,7 +2035,7 @@ argument_list|()
 decl_stmt|;
 name|assertThat
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|toString
 argument_list|(
@@ -1286,9 +2133,9 @@ name|containsString
 argument_list|(
 literal|"Wrong arguments for table function 'public static "
 operator|+
-literal|"net.hydromatic.optiq.QueryableTable net"
+literal|"org.apache.calcite.schema.QueryableTable "
 operator|+
-literal|".hydromatic.optiq.test.JdbcTest"
+literal|"org.apache.calcite.test.JdbcTest"
 operator|+
 literal|".multiplicationTable(int,int,java.lang.Integer)'"
 operator|+
@@ -1309,13 +2156,6 @@ name|ClassNotFoundException
 throws|,
 name|SQLException
 block|{
-name|Class
-operator|.
-name|forName
-argument_list|(
-literal|"net.hydromatic.optiq.jdbc.Driver"
-argument_list|)
-expr_stmt|;
 name|Connection
 name|connection
 init|=
@@ -1326,14 +2166,14 @@ argument_list|(
 literal|"jdbc:calcite:"
 argument_list|)
 decl_stmt|;
-name|OptiqConnection
-name|optiqConnection
+name|CalciteConnection
+name|calciteConnection
 init|=
 name|connection
 operator|.
 name|unwrap
 argument_list|(
-name|OptiqConnection
+name|CalciteConnection
 operator|.
 name|class
 argument_list|)
@@ -1341,7 +2181,7 @@ decl_stmt|;
 name|SchemaPlus
 name|rootSchema
 init|=
-name|optiqConnection
+name|calciteConnection
 operator|.
 name|getRootSchema
 argument_list|()
@@ -1403,13 +2243,6 @@ name|SQLException
 throws|,
 name|ClassNotFoundException
 block|{
-name|Class
-operator|.
-name|forName
-argument_list|(
-literal|"net.hydromatic.optiq.jdbc.Driver"
-argument_list|)
-expr_stmt|;
 name|Connection
 name|connection
 init|=
@@ -1420,14 +2253,14 @@ argument_list|(
 literal|"jdbc:calcite:"
 argument_list|)
 decl_stmt|;
-name|OptiqConnection
-name|optiqConnection
+name|CalciteConnection
+name|calciteConnection
 init|=
 name|connection
 operator|.
 name|unwrap
 argument_list|(
-name|OptiqConnection
+name|CalciteConnection
 operator|.
 name|class
 argument_list|)
@@ -1435,7 +2268,7 @@ decl_stmt|;
 name|SchemaPlus
 name|rootSchema
 init|=
-name|optiqConnection
+name|calciteConnection
 operator|.
 name|getRootSchema
 argument_list|()
@@ -1534,7 +2367,7 @@ comment|// GenerateStrings returns 0..4, then 2 is added (process function),
 comment|// thus 2..6, finally where u> 3 leaves just 4..6
 name|assertThat
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|toString
 argument_list|(
@@ -1571,27 +2404,20 @@ name|SQLException
 throws|,
 name|ClassNotFoundException
 block|{
-name|Class
-operator|.
-name|forName
-argument_list|(
-literal|"net.hydromatic.optiq.jdbc.Driver"
-argument_list|)
-expr_stmt|;
 name|Connection
 name|connection
 init|=
 name|getConnectionWithMultiplyFunction
 argument_list|()
 decl_stmt|;
-name|OptiqConnection
-name|optiqConnection
+name|CalciteConnection
+name|calciteConnection
 init|=
 name|connection
 operator|.
 name|unwrap
 argument_list|(
-name|OptiqConnection
+name|CalciteConnection
 operator|.
 name|class
 argument_list|)
@@ -1599,7 +2425,7 @@ decl_stmt|;
 name|SchemaPlus
 name|rootSchema
 init|=
-name|optiqConnection
+name|calciteConnection
 operator|.
 name|getRootSchema
 argument_list|()
@@ -1698,7 +2524,7 @@ comment|// process sums and adds 2
 comment|// sum is 2 + 1..9 == 3..9
 name|assertThat
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|toString
 argument_list|(
@@ -1722,7 +2548,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Tests {@link org.eigenbase.sql.advise.SqlAdvisorGetHintsFunction}.    */
+comment|/**    * Tests {@link org.apache.calcite.sql.advise.SqlAdvisorGetHintsFunction}.    */
 annotation|@
 name|Test
 specifier|public
@@ -1755,7 +2581,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Tests {@link org.eigenbase.sql.advise.SqlAdvisorGetHintsFunction}.    */
+comment|/**    * Tests {@link org.apache.calcite.sql.advise.SqlAdvisorGetHintsFunction}.    */
 annotation|@
 name|Test
 specifier|public
@@ -1820,13 +2646,6 @@ name|ClassNotFoundException
 throws|,
 name|SQLException
 block|{
-name|Class
-operator|.
-name|forName
-argument_list|(
-literal|"net.hydromatic.optiq.jdbc.Driver"
-argument_list|)
-expr_stmt|;
 name|Properties
 name|info
 init|=
@@ -1864,14 +2683,14 @@ argument_list|,
 name|info
 argument_list|)
 decl_stmt|;
-name|OptiqConnection
-name|optiqConnection
+name|CalciteConnection
+name|calciteConnection
 init|=
 name|connection
 operator|.
 name|unwrap
 argument_list|(
-name|OptiqConnection
+name|CalciteConnection
 operator|.
 name|class
 argument_list|)
@@ -1879,7 +2698,7 @@ decl_stmt|;
 name|SchemaPlus
 name|rootSchema
 init|=
-name|optiqConnection
+name|calciteConnection
 operator|.
 name|getRootSchema
 argument_list|()
@@ -1913,7 +2732,7 @@ name|AbstractSchema
 argument_list|()
 argument_list|)
 decl_stmt|;
-name|optiqConnection
+name|calciteConnection
 operator|.
 name|setSchema
 argument_list|(
@@ -1984,7 +2803,7 @@ name|cursor
 argument_list|)
 expr_stmt|;
 return|return
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|toString
 argument_list|(
@@ -1995,7 +2814,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**    * Tests a relation that is accessed via method syntax.    *    *<p>The function ({@link #view(String)} has a return type    * {@link Table} and the actual returned value implements    * {@link net.hydromatic.optiq.TranslatableTable}.    */
+comment|/**    * Tests a relation that is accessed via method syntax.    *    *<p>The function ({@link #view(String)} has a return type    * {@link Table} and the actual returned value implements    * {@link org.apache.calcite.schema.TranslatableTable}.    */
 annotation|@
 name|Test
 specifier|public
@@ -2007,13 +2826,6 @@ name|SQLException
 throws|,
 name|ClassNotFoundException
 block|{
-name|Class
-operator|.
-name|forName
-argument_list|(
-literal|"net.hydromatic.optiq.jdbc.Driver"
-argument_list|)
-expr_stmt|;
 name|Connection
 name|connection
 init|=
@@ -2024,14 +2836,14 @@ argument_list|(
 literal|"jdbc:calcite:"
 argument_list|)
 decl_stmt|;
-name|OptiqConnection
-name|optiqConnection
+name|CalciteConnection
+name|calciteConnection
 init|=
 name|connection
 operator|.
 name|unwrap
 argument_list|(
-name|OptiqConnection
+name|CalciteConnection
 operator|.
 name|class
 argument_list|)
@@ -2039,7 +2851,7 @@ decl_stmt|;
 name|SchemaPlus
 name|rootSchema
 init|=
-name|optiqConnection
+name|calciteConnection
 operator|.
 name|getRootSchema
 argument_list|()
@@ -2098,7 +2910,7 @@ decl_stmt|;
 comment|// The call to "View('(10), (2)')" expands to 'values (1), (3), (10), (20)'.
 name|assertThat
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|toString
 argument_list|(
@@ -2107,8 +2919,6 @@ argument_list|)
 argument_list|,
 name|equalTo
 argument_list|(
-literal|""
-operator|+
 literal|"N=1\n"
 operator|+
 literal|"N=3\n"
@@ -2198,7 +3008,7 @@ name|Class
 name|clazz
 parameter_list|)
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
@@ -2291,7 +3101,7 @@ name|q1
 argument_list|)
 return|;
 block|}
-comment|/** A function that generates a table that generates a sequence of    * {@link net.hydromatic.optiq.test.JdbcTest.IntString} values. */
+comment|/** A function that generates a table that generates a sequence of    * {@link org.apache.calcite.test.JdbcTest.IntString} values. */
 specifier|public
 specifier|static
 name|QueryableTable
@@ -3030,7 +3840,7 @@ block|}
 block|}
 return|;
 block|}
-comment|/** Tests {@link net.hydromatic.avatica.Handler#onConnectionClose}    * and  {@link net.hydromatic.avatica.Handler#onStatementClose}. */
+comment|/** Tests {@link org.apache.calcite.avatica.Handler#onConnectionClose}    * and  {@link org.apache.calcite.avatica.Handler#onStatementClose}. */
 annotation|@
 name|Test
 specifier|public
@@ -3123,11 +3933,11 @@ operator|new
 name|HandlerDriver
 argument_list|()
 decl_stmt|;
-name|OptiqConnection
+name|CalciteConnection
 name|connection
 init|=
 operator|(
-name|OptiqConnection
+name|CalciteConnection
 operator|)
 name|driver
 operator|.
@@ -3396,11 +4206,11 @@ operator|new
 name|Driver
 argument_list|()
 decl_stmt|;
-name|OptiqConnection
+name|CalciteConnection
 name|connection
 init|=
 operator|(
-name|OptiqConnection
+name|CalciteConnection
 operator|)
 name|driver
 operator|.
@@ -3457,7 +4267,7 @@ argument_list|(
 operator|(
 name|Boolean
 operator|)
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|call
 argument_list|(
@@ -3467,7 +4277,7 @@ literal|"isCloseOnCompletion"
 argument_list|)
 argument_list|)
 expr_stmt|;
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|call
 argument_list|(
@@ -3481,7 +4291,7 @@ argument_list|(
 operator|(
 name|Boolean
 operator|)
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|call
 argument_list|(
@@ -3598,13 +4408,6 @@ name|ClassNotFoundException
 throws|,
 name|SQLException
 block|{
-name|Class
-operator|.
-name|forName
-argument_list|(
-literal|"net.hydromatic.optiq.jdbc.Driver"
-argument_list|)
-expr_stmt|;
 name|Connection
 name|connection
 init|=
@@ -3615,14 +4418,14 @@ argument_list|(
 literal|"jdbc:calcite:"
 argument_list|)
 decl_stmt|;
-name|OptiqConnection
-name|optiqConnection
+name|CalciteConnection
+name|calciteConnection
 init|=
 name|connection
 operator|.
 name|unwrap
 argument_list|(
-name|OptiqConnection
+name|CalciteConnection
 operator|.
 name|class
 argument_list|)
@@ -3631,7 +4434,7 @@ specifier|final
 name|SchemaPlus
 name|rootSchema
 init|=
-name|optiqConnection
+name|calciteConnection
 operator|.
 name|getRootSchema
 argument_list|()
@@ -3654,7 +4457,7 @@ expr_stmt|;
 name|Statement
 name|statement
 init|=
-name|optiqConnection
+name|calciteConnection
 operator|.
 name|createStatement
 argument_list|()
@@ -3683,7 +4486,7 @@ specifier|final
 name|String
 name|s
 init|=
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|toString
 argument_list|(
@@ -3726,13 +4529,6 @@ name|ClassNotFoundException
 throws|,
 name|SQLException
 block|{
-name|Class
-operator|.
-name|forName
-argument_list|(
-literal|"net.hydromatic.optiq.jdbc.Driver"
-argument_list|)
-expr_stmt|;
 name|java
 operator|.
 name|sql
@@ -3838,13 +4634,6 @@ name|ClassNotFoundException
 throws|,
 name|SQLException
 block|{
-name|Class
-operator|.
-name|forName
-argument_list|(
-literal|"net.hydromatic.optiq.jdbc.Driver"
-argument_list|)
-expr_stmt|;
 name|Connection
 name|connection
 init|=
@@ -3855,14 +4644,14 @@ argument_list|(
 literal|"jdbc:calcite:"
 argument_list|)
 decl_stmt|;
-name|OptiqConnection
-name|optiqConnection
+name|CalciteConnection
+name|calciteConnection
 init|=
 name|connection
 operator|.
 name|unwrap
 argument_list|(
-name|OptiqConnection
+name|CalciteConnection
 operator|.
 name|class
 argument_list|)
@@ -3871,7 +4660,7 @@ specifier|final
 name|DatabaseMetaData
 name|metaData
 init|=
-name|optiqConnection
+name|calciteConnection
 operator|.
 name|getMetaData
 argument_list|()
@@ -3920,13 +4709,14 @@ argument_list|,
 name|driverMajorVersion
 argument_list|)
 expr_stmt|;
-name|assertEquals
+name|assertTrue
 argument_list|(
-literal|0
-argument_list|,
 name|driverMinorVersion
+operator|==
+literal|0
 argument_list|)
 expr_stmt|;
+comment|// will work for the next few releases
 name|assertEquals
 argument_list|(
 literal|"Calcite"
@@ -3979,9 +4769,9 @@ name|databaseMinorVersion
 argument_list|)
 expr_stmt|;
 comment|// Check how version is composed of major and minor version. Note that
-comment|// version is stored in pom.xml, then generated into
-comment|// net-hydromatic-optiq-jdbc.properties; major and minor version are
-comment|// found by splitting the version string.
+comment|// version is stored in pom.xml; major and minor version are
+comment|// stored in org-apache-calcite-jdbc.properties, but derived from
+comment|// version.major and version.minor in pom.xml.
 name|assertTrue
 argument_list|(
 name|driverVersion
@@ -4134,7 +4924,7 @@ block|{
 name|Connection
 name|connection
 init|=
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|getConnection
 argument_list|(
@@ -4282,7 +5072,7 @@ block|{
 name|Connection
 name|connection
 init|=
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|getConnection
 argument_list|(
@@ -4393,7 +5183,7 @@ name|close
 argument_list|()
 expr_stmt|;
 block|}
-comment|/** Unit test for    * {@link net.hydromatic.optiq.jdbc.MetaImpl#likeToRegex(net.hydromatic.avatica.Meta.Pat)}. */
+comment|/** Unit test for    * {@link org.apache.calcite.jdbc.MetaImpl#likeToRegex(org.apache.calcite.avatica.Meta.Pat)}. */
 annotation|@
 name|Test
 specifier|public
@@ -4611,7 +5401,7 @@ block|{
 name|Connection
 name|connection
 init|=
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|getConnection
 argument_list|(
@@ -4785,14 +5575,14 @@ name|void
 name|testSimple
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -4823,7 +5613,7 @@ block|{
 comment|// JDBC 3.0 specification: "Column names supplied to getter methods are case
 comment|// insensitive. If a select list contains the same column more than once,
 comment|// the first instance of the column will be returned."
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
@@ -4833,7 +5623,7 @@ argument_list|(
 operator|new
 name|Function
 argument_list|<
-name|OptiqConnection
+name|CalciteConnection
 argument_list|,
 name|Object
 argument_list|>
@@ -4843,7 +5633,7 @@ specifier|public
 name|Object
 name|apply
 parameter_list|(
-name|OptiqConnection
+name|CalciteConnection
 name|c
 parameter_list|)
 block|{
@@ -5206,14 +5996,14 @@ throws|,
 name|SQLException
 block|{
 specifier|final
-name|OptiqConnection
+name|CalciteConnection
 name|connection
 init|=
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|getConnection
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|SchemaSpec
 operator|.
@@ -5309,14 +6099,14 @@ name|void
 name|testCloneGroupBy
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -5353,14 +6143,14 @@ name|void
 name|testCloneGroupBy2
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -5410,14 +6200,14 @@ name|void
 name|testCloneGroupBy2Plan
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -5431,25 +6221,25 @@ argument_list|)
 operator|.
 name|returns
 argument_list|(
-literal|"PLAN=EnumerableAggregateRel(group=[{0, 1, 2}], m0=[SUM($3)])\n"
+literal|"PLAN=EnumerableAggregate(group=[{0, 1, 2}], m0=[SUM($3)])\n"
 operator|+
-literal|"  EnumerableCalcRel(expr#0..37=[{inputs}], c0=[$t9], c1=[$t13], c2=[$t4], unit_sales=[$t22])\n"
+literal|"  EnumerableCalc(expr#0..37=[{inputs}], c0=[$t9], c1=[$t13], c2=[$t4], unit_sales=[$t22])\n"
 operator|+
-literal|"    EnumerableJoinRel(condition=[=($23, $0)], joinType=[inner])\n"
+literal|"    EnumerableJoin(condition=[=($23, $0)], joinType=[inner])\n"
 operator|+
-literal|"      EnumerableTableAccessRel(table=[[foodmart2, product_class]])\n"
+literal|"      EnumerableTableScan(table=[[foodmart2, product_class]])\n"
 operator|+
-literal|"      EnumerableJoinRel(condition=[=($10, $19)], joinType=[inner])\n"
+literal|"      EnumerableJoin(condition=[=($10, $19)], joinType=[inner])\n"
 operator|+
-literal|"        EnumerableJoinRel(condition=[=($11, $0)], joinType=[inner])\n"
+literal|"        EnumerableJoin(condition=[=($11, $0)], joinType=[inner])\n"
 operator|+
-literal|"          EnumerableCalcRel(expr#0..9=[{inputs}], expr#10=[CAST($t4):INTEGER], expr#11=[1997], expr#12=[=($t10, $t11)], proj#0..9=[{exprs}], $condition=[$t12])\n"
+literal|"          EnumerableCalc(expr#0..9=[{inputs}], expr#10=[CAST($t4):INTEGER], expr#11=[1997], expr#12=[=($t10, $t11)], proj#0..9=[{exprs}], $condition=[$t12])\n"
 operator|+
-literal|"            EnumerableTableAccessRel(table=[[foodmart2, time_by_day]])\n"
+literal|"            EnumerableTableScan(table=[[foodmart2, time_by_day]])\n"
 operator|+
-literal|"          EnumerableTableAccessRel(table=[[foodmart2, sales_fact_1997]])\n"
+literal|"          EnumerableTableScan(table=[[foodmart2, sales_fact_1997]])\n"
 operator|+
-literal|"        EnumerableTableAccessRel(table=[[foodmart2, product]])\n"
+literal|"        EnumerableTableScan(table=[[foodmart2, product]])\n"
 operator|+
 literal|"\n"
 argument_list|)
@@ -5462,14 +6252,14 @@ name|void
 name|testOrderByCase
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -5497,14 +6287,14 @@ name|void
 name|testAlmostBushy
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -5530,25 +6320,25 @@ name|explainMatches
 argument_list|(
 literal|"including all attributes "
 argument_list|,
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|checkMaskedResultContains
 argument_list|(
 literal|""
 operator|+
-literal|"EnumerableJoinRel(condition=[=($0, $38)], joinType=[inner]): rowcount = 7.050660528307499E8, cumulative cost = {1.0640240206183146E9 rows, 777302.0 cpu, 0.0 io}\n"
+literal|"EnumerableJoin(condition=[=($0, $38)], joinType=[inner]): rowcount = 7.050660528307499E8, cumulative cost = {1.0640240206183146E9 rows, 777302.0 cpu, 0.0 io}\n"
 operator|+
-literal|"  EnumerableJoinRel(condition=[=($2, $8)], joinType=[inner]): rowcount = 2.0087351932499997E7, cumulative cost = {2.117504619375143E7 rows, 724261.0 cpu, 0.0 io}\n"
+literal|"  EnumerableJoin(condition=[=($2, $8)], joinType=[inner]): rowcount = 2.0087351932499997E7, cumulative cost = {2.117504619375143E7 rows, 724261.0 cpu, 0.0 io}\n"
 operator|+
-literal|"    EnumerableTableAccessRel(table=[[foodmart2, sales_fact_1997]]): rowcount = 86837.0, cumulative cost = {86837.0 rows, 86838.0 cpu, 0.0 io}\n"
+literal|"    EnumerableTableScan(table=[[foodmart2, sales_fact_1997]]): rowcount = 86837.0, cumulative cost = {86837.0 rows, 86838.0 cpu, 0.0 io}\n"
 operator|+
-literal|"    EnumerableCalcRel(expr#0..28=[{inputs}], expr#29=['San Francisco'], expr#30=[=($t9, $t29)], proj#0..28=[{exprs}], $condition=[$t30]): rowcount = 1542.1499999999999, cumulative cost = {11823.15 rows, 637423.0 cpu, 0.0 io}\n"
+literal|"    EnumerableCalc(expr#0..28=[{inputs}], expr#29=['San Francisco'], expr#30=[=($t9, $t29)], proj#0..28=[{exprs}], $condition=[$t30]): rowcount = 1542.1499999999999, cumulative cost = {11823.15 rows, 637423.0 cpu, 0.0 io}\n"
 operator|+
-literal|"      EnumerableTableAccessRel(table=[[foodmart2, customer]]): rowcount = 10281.0, cumulative cost = {10281.0 rows, 10282.0 cpu, 0.0 io}\n"
+literal|"      EnumerableTableScan(table=[[foodmart2, customer]]): rowcount = 10281.0, cumulative cost = {10281.0 rows, 10282.0 cpu, 0.0 io}\n"
 operator|+
-literal|"  EnumerableCalcRel(expr#0..14=[{inputs}], expr#15=['Washington'], expr#16=[=($t2, $t15)], proj#0..14=[{exprs}], $condition=[$t16]): rowcount = 234.0, cumulative cost = {1794.0 rows, 53041.0 cpu, 0.0 io}\n"
+literal|"  EnumerableCalc(expr#0..14=[{inputs}], expr#15=['Washington'], expr#16=[=($t2, $t15)], proj#0..14=[{exprs}], $condition=[$t16]): rowcount = 234.0, cumulative cost = {1794.0 rows, 53041.0 cpu, 0.0 io}\n"
 operator|+
-literal|"    EnumerableTableAccessRel(table=[[foodmart2, product]]): rowcount = 1560.0, cumulative cost = {1560.0 rows, 1561.0 cpu, 0.0 io}\n"
+literal|"    EnumerableTableScan(table=[[foodmart2, product]]): rowcount = 1560.0, cumulative cost = {1560.0 rows, 1561.0 cpu, 0.0 io}\n"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -5557,7 +6347,7 @@ comment|/** Tests a query whose best plan is a bushy join.    * First join sales
 annotation|@
 name|Ignore
 argument_list|(
-literal|"extremely slow - a bit better if you disable MergeProjectRule"
+literal|"extremely slow - a bit better if you disable ProjectMergeRule"
 argument_list|)
 annotation|@
 name|Test
@@ -5566,14 +6356,14 @@ name|void
 name|testBushy
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -5601,7 +6391,7 @@ name|explainMatches
 argument_list|(
 literal|"including all attributes "
 argument_list|,
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|checkMaskedResultContains
 argument_list|(
@@ -5611,17 +6401,17 @@ literal|"EnumerableCalcRel(expr#0..56=[{inputs}], expr#57=['San Francisco'], exp
 operator|+
 literal|"  EnumerableJoinRel(condition=[=($51, $0)], joinType=[inner]): rowcount = 86837.0, cumulative cost = {726774.2819018068 rows, 98792.0 cpu, 0.0 io}\n"
 operator|+
-literal|"    EnumerableTableAccessRel(table=[[foodmart2, customer]]): rowcount = 10281.0, cumulative cost = {10281.0 rows, 10282.0 cpu, 0.0 io}\n"
+literal|"    EnumerableTableScan(table=[[foodmart2, customer]]): rowcount = 10281.0, cumulative cost = {10281.0 rows, 10282.0 cpu, 0.0 io}\n"
 operator|+
 literal|"    EnumerableJoinRel(condition=[=($5, $0)], joinType=[inner]): rowcount = 86837.0, cumulative cost = {447842.86095661717 rows, 88510.0 cpu, 0.0 io}\n"
 operator|+
-literal|"      EnumerableTableAccessRel(table=[[foodmart2, product_class]]): rowcount = 110.0, cumulative cost = {110.0 rows, 111.0 cpu, 0.0 io}\n"
+literal|"      EnumerableTableScan(table=[[foodmart2, product_class]]): rowcount = 110.0, cumulative cost = {110.0 rows, 111.0 cpu, 0.0 io}\n"
 operator|+
 literal|"      EnumerableJoinRel(condition=[=($15, $1)], joinType=[inner]): rowcount = 86837.0, cumulative cost = {273541.80811638 rows, 88399.0 cpu, 0.0 io}\n"
 operator|+
-literal|"        EnumerableTableAccessRel(table=[[foodmart2, product]]): rowcount = 1560.0, cumulative cost = {1560.0 rows, 1561.0 cpu, 0.0 io}\n"
+literal|"        EnumerableTableScan(table=[[foodmart2, product]]): rowcount = 1560.0, cumulative cost = {1560.0 rows, 1561.0 cpu, 0.0 io}\n"
 operator|+
-literal|"        EnumerableTableAccessRel(table=[[foodmart2, sales_fact_1997]]): rowcount = 86837.0, cumulative cost = {86837.0 rows, 86838.0 cpu, 0.0 io}\n"
+literal|"        EnumerableTableScan(table=[[foodmart2, sales_fact_1997]]): rowcount = 86837.0, cumulative cost = {86837.0 rows, 86838.0 cpu, 0.0 io}\n"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -6230,14 +7020,14 @@ name|void
 name|testJanino169
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -6263,14 +7053,14 @@ name|void
 name|testAnd3
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -6302,14 +7092,14 @@ name|void
 name|testJdbcDate
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -6343,14 +7133,14 @@ name|void
 name|testJdbcTimestamp
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -6382,14 +7172,14 @@ name|void
 name|testExtract
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -6480,12 +7270,12 @@ name|testTrue
 parameter_list|()
 block|{
 specifier|final
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|AssertThat
 name|that
 init|=
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
@@ -6547,14 +7337,14 @@ name|void
 name|testSelfJoin
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -6584,14 +7374,14 @@ name|void
 name|testSelfJoinDifferentColumns
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -6627,14 +7417,14 @@ name|void
 name|testEquiThetaJoin
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -6674,14 +7464,14 @@ name|void
 name|testJoinJoin
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -6783,14 +7573,14 @@ name|void
 name|testJoinFiveWay
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -6838,6 +7628,8 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
+literal|""
+operator|+
 literal|"EnumerableAggregateRel(group=[{0, 1, 2}], m0=[COUNT($3)])\n"
 operator|+
 literal|"  EnumerableCalcRel(expr#0..61=[{inputs}], c0=[$t19], c1=[$t4], c2=[$t46], product_id=[$t34])\n"
@@ -6846,7 +7638,7 @@ literal|"    EnumerableJoinRel(condition=[=($35, $0)], joinType=[inner])\n"
 operator|+
 literal|"      EnumerableCalcRel(expr#0..9=[{inputs}], expr#10=[CAST($t4):INTEGER], expr#11=[1997], expr#12=[=($t10, $t11)], proj#0..9=[{exprs}], $condition=[$t12])\n"
 operator|+
-literal|"        EnumerableTableAccessRel(table=[[foodmart2, time_by_day]])\n"
+literal|"        EnumerableTableScan(table=[[foodmart2, time_by_day]])\n"
 operator|+
 literal|"      EnumerableCalcRel(expr#0..51=[{inputs}], proj#0..23=[{exprs}], product_id=[$t44], time_id=[$t45], customer_id=[$t46], promotion_id=[$t47], store_id0=[$t48], store_sales=[$t49], store_cost=[$t50], unit_sales=[$t51], product_class_id=[$t24], product_subcategory=[$t25], product_category=[$t26], product_department=[$t27], product_family=[$t28], product_class_id0=[$t29], product_id0=[$t30], brand_name=[$t31], product_name=[$t32], SKU=[$t33], SRP=[$t34], gross_weight=[$t35], net_weight=[$t36], recyclable_package=[$t37], low_fat=[$t38], units_per_case=[$t39], cases_per_pallet=[$t40], shelf_width=[$t41], shelf_height=[$t42], shelf_depth=[$t43])\n"
 operator|+
@@ -6854,19 +7646,19 @@ literal|"        EnumerableJoinRel(condition=[=($48, $0)], joinType=[inner])\n"
 operator|+
 literal|"          EnumerableCalcRel(expr#0..23=[{inputs}], expr#24=['USA'], expr#25=[=($t9, $t24)], proj#0..23=[{exprs}], $condition=[$t25])\n"
 operator|+
-literal|"            EnumerableTableAccessRel(table=[[foodmart2, store]])\n"
+literal|"            EnumerableTableScan(table=[[foodmart2, store]])\n"
 operator|+
 literal|"          EnumerableCalcRel(expr#0..27=[{inputs}], proj#0..4=[{exprs}], product_class_id0=[$t13], product_id=[$t14], brand_name=[$t15], product_name=[$t16], SKU=[$t17], SRP=[$t18], gross_weight=[$t19], net_weight=[$t20], recyclable_package=[$t21], low_fat=[$t22], units_per_case=[$t23], cases_per_pallet=[$t24], shelf_width=[$t25], shelf_height=[$t26], shelf_depth=[$t27], product_id0=[$t5], time_id=[$t6], customer_id=[$t7], promotion_id=[$t8], store_id=[$t9], store_sales=[$t10], store_cost=[$t11], unit_sales=[$t12])\n"
 operator|+
 literal|"            EnumerableJoinRel(condition=[=($13, $0)], joinType=[inner])\n"
 operator|+
-literal|"              EnumerableTableAccessRel(table=[[foodmart2, product_class]])\n"
+literal|"              EnumerableTableScan(table=[[foodmart2, product_class]])\n"
 operator|+
 literal|"              EnumerableJoinRel(condition=[=($0, $9)], joinType=[inner])\n"
 operator|+
-literal|"                EnumerableTableAccessRel(table=[[foodmart2, sales_fact_1997]])\n"
+literal|"                EnumerableTableScan(table=[[foodmart2, sales_fact_1997]])\n"
 operator|+
-literal|"                EnumerableTableAccessRel(table=[[foodmart2, product]])\n"
+literal|"                EnumerableTableScan(table=[[foodmart2, product]])\n"
 operator|+
 literal|"\n"
 operator|+
@@ -7040,14 +7832,14 @@ literal|".\"deptno\""
 argument_list|)
 expr_stmt|;
 block|}
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -7212,19 +8004,19 @@ name|void
 name|testCloneQueries
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|AssertThat
 name|with
 init|=
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -7289,7 +8081,7 @@ operator|.
 name|right
 decl_stmt|;
 specifier|final
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|AssertQuery
 name|query1
@@ -7512,7 +8304,7 @@ literal|"}"
 argument_list|)
 expr_stmt|;
 name|Connection
-name|optiqConnection
+name|calciteConnection
 init|=
 name|DriverManager
 operator|.
@@ -7524,9 +8316,9 @@ name|info
 argument_list|)
 decl_stmt|;
 name|Statement
-name|optiqStatement
+name|calciteStatement
 init|=
-name|optiqConnection
+name|calciteConnection
 operator|.
 name|createStatement
 argument_list|()
@@ -7534,7 +8326,7 @@ decl_stmt|;
 name|ResultSet
 name|rs
 init|=
-name|optiqStatement
+name|calciteStatement
 operator|.
 name|executeQuery
 argument_list|(
@@ -7614,7 +8406,7 @@ argument_list|()
 expr_stmt|;
 name|rs
 operator|=
-name|optiqStatement
+name|calciteStatement
 operator|.
 name|executeQuery
 argument_list|(
@@ -7680,7 +8472,7 @@ argument_list|()
 expr_stmt|;
 name|rs
 operator|=
-name|optiqStatement
+name|calciteStatement
 operator|.
 name|executeQuery
 argument_list|(
@@ -7795,7 +8587,7 @@ name|next
 argument_list|()
 argument_list|)
 expr_stmt|;
-name|optiqConnection
+name|calciteConnection
 operator|.
 name|close
 argument_list|()
@@ -7809,14 +8601,14 @@ name|void
 name|testArray2
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -7850,14 +8642,14 @@ parameter_list|()
 throws|throws
 name|Exception
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -7869,7 +8661,7 @@ argument_list|(
 operator|new
 name|Function
 argument_list|<
-name|OptiqConnection
+name|CalciteConnection
 argument_list|,
 name|Object
 argument_list|>
@@ -7879,7 +8671,7 @@ specifier|public
 name|Object
 name|apply
 parameter_list|(
-name|OptiqConnection
+name|CalciteConnection
 name|a0
 parameter_list|)
 block|{
@@ -8277,14 +9069,14 @@ name|void
 name|testArrayConstructor
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -8309,14 +9101,14 @@ name|void
 name|testMultisetConstructor
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -8341,14 +9133,14 @@ name|void
 name|testMultisetQuery
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -8377,14 +9169,14 @@ name|void
 name|testMultisetQueryWithSingleColumn
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -8418,14 +9210,14 @@ name|void
 name|testUnnestArray
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -8450,14 +9242,14 @@ name|void
 name|testUnnestMultiset
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -8484,14 +9276,14 @@ name|void
 name|testUnnestMultiset2
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -8522,14 +9314,14 @@ name|void
 name|testArrayElement
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -8558,14 +9350,14 @@ name|void
 name|testLateral
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -8599,14 +9391,14 @@ name|void
 name|testUnnestArrayColumn
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -8633,7 +9425,7 @@ argument_list|)
 expr_stmt|;
 block|}
 specifier|private
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|AssertQuery
 name|withFoodMartQuery
@@ -8658,14 +9450,14 @@ name|instance
 argument_list|()
 decl_stmt|;
 return|return
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -8687,7 +9479,7 @@ name|sql
 argument_list|)
 return|;
 block|}
-comment|/** Makes sure that a projection introduced by a call to    * {@link org.eigenbase.rel.rules.SwapJoinRule} does not manifest as an    * {@link net.hydromatic.optiq.rules.java.JavaRules.EnumerableCalcRel} in the    * plan.    *    *<p>Test case for (not yet fixed)    *<a href="https://issues.apache.org/jira/browse/CALCITE-92">CALCITE-92</a>,    * "Project should be optimized away, not converted to EnumerableCalcRel".</p>    */
+comment|/** Makes sure that a projection introduced by a call to    * {@link org.apache.calcite.rel.rules.JoinCommuteRule} does not    * manifest as an    * {@link org.apache.calcite.adapter.enumerable.EnumerableCalc} in the    * plan.    *    *<p>Test case for (not yet fixed)    *<a href="https://issues.apache.org/jira/browse/CALCITE-92">CALCITE-92</a>,    * "Project should be optimized away, not converted to EnumerableCalcRel".</p>    */
 annotation|@
 name|Ignore
 annotation|@
@@ -8712,14 +9504,14 @@ operator|.
 name|instance
 argument_list|()
 decl_stmt|;
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -8742,6 +9534,8 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
+literal|""
+operator|+
 literal|"EnumerableSortRel(sort0=[$0], sort1=[$1], sort2=[$2], sort3=[$4], sort4=[$10], sort5=[$11], sort6=[$12], sort7=[$13], sort8=[$22], sort9=[$23], sort10=[$24], sort11=[$25], sort12=[$26], sort13=[$27], dir0=[Ascending-nulls-last], dir1=[Ascending-nulls-last], dir2=[Ascending-nulls-last], dir3=[Ascending-nulls-last], dir4=[Ascending-nulls-last], dir5=[Ascending-nulls-last], dir6=[Ascending-nulls-last], dir7=[Ascending-nulls-last], dir8=[Ascending-nulls-last], dir9=[Ascending-nulls-last], dir10=[Ascending-nulls-last], dir11=[Ascending-nulls-last], dir12=[Ascending-nulls-last], dir13=[Ascending-nulls-last])\n"
 operator|+
 literal|"  EnumerableCalcRel(expr#0..26=[{inputs}], proj#0..4=[{exprs}], c5=[$t4], c6=[$t5], c7=[$t6], c8=[$t7], c9=[$t8], c10=[$t9], c11=[$t10], c12=[$t11], c13=[$t12], c14=[$t13], c15=[$t14], c16=[$t15], c17=[$t16], c18=[$t17], c19=[$t18], c20=[$t19], c21=[$t20], c22=[$t21], c23=[$t22], c24=[$t23], c25=[$t24], c26=[$t25], c27=[$t26])\n"
@@ -8760,19 +9554,19 @@ literal|"              EnumerableCalcRel(expr#0..36=[{inputs}], customer_id=[$t8
 operator|+
 literal|"                EnumerableJoinRel(condition=[=($2, $8)], joinType=[inner])\n"
 operator|+
-literal|"                  EnumerableTableAccessRel(table=[[foodmart2, sales_fact_1997]])\n"
+literal|"                  EnumerableTableScan(table=[[foodmart2, sales_fact_1997]])\n"
 operator|+
-literal|"                  EnumerableTableAccessRel(table=[[foodmart2, customer]])\n"
+literal|"                  EnumerableTableScan(table=[[foodmart2, customer]])\n"
 operator|+
-literal|"              EnumerableTableAccessRel(table=[[foodmart2, store]])\n"
+literal|"              EnumerableTableScan(table=[[foodmart2, store]])\n"
 operator|+
-literal|"            EnumerableTableAccessRel(table=[[foodmart2, product]])\n"
+literal|"            EnumerableTableScan(table=[[foodmart2, product]])\n"
 operator|+
-literal|"          EnumerableTableAccessRel(table=[[foodmart2, product_class]])\n"
+literal|"          EnumerableTableScan(table=[[foodmart2, product_class]])\n"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Checks that a 3-way join is re-ordered so that join conditions can be    * applied. The plan must not contain cartesian joins.    * {@link org.eigenbase.rel.rules.PushJoinThroughJoinRule} makes this    * possible. */
+comment|/** Checks that a 3-way join is re-ordered so that join conditions can be    * applied. The plan must not contain cartesian joins.    * {@link org.apache.calcite.rel.rules.JoinPushThroughJoinRule} makes this    * possible. */
 annotation|@
 name|Ignore
 annotation|@
@@ -8782,14 +9576,14 @@ name|void
 name|testExplainJoin
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -8810,6 +9604,8 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
+literal|""
+operator|+
 literal|"EnumerableAggregateRel(group=[{}], m0=[COUNT($0)])\n"
 operator|+
 literal|"  EnumerableAggregateRel(group=[{0}])\n"
@@ -8818,15 +9614,15 @@ literal|"    EnumerableCalcRel(expr#0..27=[{inputs}], customer_id=[$t7])\n"
 operator|+
 literal|"      EnumerableJoinRel(condition=[=($13, $0)], joinType=[inner])\n"
 operator|+
-literal|"        EnumerableTableAccessRel(table=[[foodmart2, product_class]])\n"
+literal|"        EnumerableTableScan(table=[[foodmart2, product_class]])\n"
 operator|+
 literal|"        EnumerableJoinRel(condition=[=($0, $9)], joinType=[inner])\n"
 operator|+
-literal|"          EnumerableTableAccessRel(table=[[foodmart2, sales_fact_1997]])\n"
+literal|"          EnumerableTableScan(table=[[foodmart2, sales_fact_1997]])\n"
 operator|+
 literal|"          EnumerableCalcRel(expr#0..14=[{inputs}], expr#15=['Cormorant'], expr#16=[=($t2, $t15)], proj#0..14=[{exprs}], $condition=[$t16])\n"
 operator|+
-literal|"            EnumerableTableAccessRel(table=[[foodmart2, product]]"
+literal|"            EnumerableTableScan(table=[[foodmart2, product]]"
 argument_list|)
 expr_stmt|;
 block|}
@@ -8849,6 +9645,8 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
+literal|""
+operator|+
 literal|"EnumerableSortRel(sort0=[$0], sort1=[$1], dir0=[Ascending-nulls-last], dir1=[Ascending-nulls-last])\n"
 operator|+
 literal|"  EnumerableAggregateRel(group=[{0, 1}])\n"
@@ -8863,15 +9661,15 @@ literal|"          EnumerableJoinRel(condition=[=($0, $2)], joinType=[inner])\n"
 operator|+
 literal|"            EnumerableCalcRel(expr#0..10=[{inputs}], store_id=[$t2], month_of_year=[$t4])\n"
 operator|+
-literal|"              EnumerableTableAccessRel(table=[[foodmart2, agg_c_14_sales_fact_1997]])\n"
+literal|"              EnumerableTableScan(table=[[foodmart2, agg_c_14_sales_fact_1997]])\n"
 operator|+
 literal|"            EnumerableCalcRel(expr#0..23=[{inputs}], store_id=[$t0], store_country=[$t9])\n"
 operator|+
-literal|"              EnumerableTableAccessRel(table=[[foodmart2, store]])\n"
+literal|"              EnumerableTableScan(table=[[foodmart2, store]])\n"
 operator|+
 literal|"        EnumerableCalcRel(expr#0..9=[{inputs}], the_year=[$t4], month_of_year=[$t7])\n"
 operator|+
-literal|"          EnumerableTableAccessRel(table=[[foodmart2, time_by_day]])\n"
+literal|"          EnumerableTableScan(table=[[foodmart2, time_by_day]])\n"
 argument_list|)
 operator|.
 name|runs
@@ -8898,6 +9696,8 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
+literal|""
+operator|+
 literal|"EnumerableSortRel(sort0=[$0], sort1=[$1], sort2=[$2], sort3=[$4], dir0=[Ascending-nulls-last], dir1=[Ascending-nulls-last], dir2=[Ascending-nulls-last], dir3=[Ascending-nulls-last])\n"
 operator|+
 literal|"  EnumerableCalcRel(expr#0..8=[{inputs}], expr#9=['%Jeanne%'], expr#10=[LIKE($t4, $t9)], proj#0..4=[{exprs}], c5=[$t4], c6=[$t5], c7=[$t6], c8=[$t7], c9=[$t8], $condition=[$t10])\n"
@@ -8912,13 +9712,13 @@ literal|"          EnumerableCalcRel(expr#0..36=[{inputs}], customer_id=[$t8], a
 operator|+
 literal|"            EnumerableJoinRel(condition=[=($2, $8)], joinType=[inner])\n"
 operator|+
-literal|"              EnumerableTableAccessRel(table=[[foodmart2, sales_fact_1997]])\n"
+literal|"              EnumerableTableScan(table=[[foodmart2, sales_fact_1997]])\n"
 operator|+
-literal|"              EnumerableTableAccessRel(table=[[foodmart2, customer]])\n"
+literal|"              EnumerableTableScan(table=[[foodmart2, customer]])\n"
 operator|+
 literal|"          EnumerableCalcRel(expr#0..9=[{inputs}], expr#10=[CAST($t4):INTEGER], expr#11=[1997], expr#12=[=($t10, $t11)], proj#0..9=[{exprs}], $condition=[$t12])\n"
 operator|+
-literal|"            EnumerableTableAccessRel(table=[[foodmart2, time_by_day]])"
+literal|"            EnumerableTableScan(table=[[foodmart2, time_by_day]])"
 argument_list|)
 operator|.
 name|runs
@@ -8956,14 +9756,14 @@ argument_list|(
 literal|8
 argument_list|)
 decl_stmt|;
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -8992,15 +9792,17 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"EnumerableCalcRel(expr#0..8=[{inputs}], c0=[$t3], c1=[$t2], c2=[$t1], c3=[$t0], c4=[$t8], c5=[$t8], c6=[$t6], c7=[$t4], c8=[$t7], c9=[$t5])\n"
+literal|""
 operator|+
-literal|"  EnumerableSortRel(sort0=[$3], sort1=[$2], sort2=[$1], sort3=[$8], dir0=[ASC-nulls-last], dir1=[ASC-nulls-last], dir2=[ASC-nulls-last], dir3=[ASC-nulls-last])\n"
+literal|"EnumerableCalc(expr#0..8=[{inputs}], c0=[$t3], c1=[$t2], c2=[$t1], c3=[$t0], c4=[$t8], c5=[$t8], c6=[$t6], c7=[$t4], c8=[$t7], c9=[$t5])\n"
 operator|+
-literal|"    EnumerableAggregateRel(group=[{0, 1, 2, 3, 4, 5, 6, 7, 8}])\n"
+literal|"  EnumerableSort(sort0=[$3], sort1=[$2], sort2=[$1], sort3=[$8], dir0=[ASC-nulls-last], dir1=[ASC-nulls-last], dir2=[ASC-nulls-last], dir3=[ASC-nulls-last])\n"
 operator|+
-literal|"      EnumerableCalcRel(expr#0..9=[{inputs}], expr#10=[CAST($t0):INTEGER], expr#11=[1997], expr#12=[=($t10, $t11)], expr#13=['%Jeanne%'], expr#14=[LIKE($t9, $t13)], expr#15=[AND($t12, $t14)], $f0=[$t1], $f1=[$t2], $f2=[$t3], $f3=[$t4], $f4=[$t5], $f5=[$t6], $f6=[$t7], $f7=[$t8], $f8=[$t9], $f9=[$t0], $condition=[$t15])\n"
+literal|"    EnumerableAggregate(group=[{0, 1, 2, 3, 4, 5, 6, 7, 8}])\n"
 operator|+
-literal|"        EnumerableTableAccessRel(table=[[foodmart, m{12, 18, 27, 28, 30, 35, 36, 37, 40, 46}]])"
+literal|"      EnumerableCalc(expr#0..9=[{inputs}], expr#10=[CAST($t0):INTEGER], expr#11=[1997], expr#12=[=($t10, $t11)], expr#13=['%Jeanne%'], expr#14=[LIKE($t9, $t13)], expr#15=[AND($t12, $t14)], $f0=[$t1], $f1=[$t2], $f2=[$t3], $f3=[$t4], $f4=[$t5], $f5=[$t6], $f6=[$t7], $f7=[$t8], $f8=[$t9], $f9=[$t0], $condition=[$t15])\n"
+operator|+
+literal|"        EnumerableTableScan(table=[[foodmart, m{12, 18, 27, 28, 30, 35, 36, 37, 40, 46}]])"
 argument_list|)
 operator|.
 name|runs
@@ -9026,6 +9828,8 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
+literal|""
+operator|+
 literal|"EnumerableAggregateRel(group=[{0, 1, 2, 3}], m0=[COUNT($4)])\n"
 operator|+
 literal|"  EnumerableCalcRel(expr#0..69=[{inputs}], c0=[$t4], c1=[$t27], c2=[$t61], c3=[$t66], $f11=[$t11])\n"
@@ -9048,17 +9852,17 @@ literal|"                  EnumerableJoinRel(condition=[=($14, $25)], joinType=[
 operator|+
 literal|"                    EnumerableJoinRel(condition=[=($1, $8)], joinType=[inner])\n"
 operator|+
-literal|"                      EnumerableTableAccessRel(table=[[foodmart2, salary]])\n"
+literal|"                      EnumerableTableScan(table=[[foodmart2, salary]])\n"
 operator|+
-literal|"                      EnumerableTableAccessRel(table=[[foodmart2, employee]])\n"
+literal|"                      EnumerableTableScan(table=[[foodmart2, employee]])\n"
 operator|+
-literal|"                    EnumerableTableAccessRel(table=[[foodmart2, store]])\n"
+literal|"                    EnumerableTableScan(table=[[foodmart2, store]])\n"
 operator|+
-literal|"                EnumerableTableAccessRel(table=[[foodmart2, time_by_day]])\n"
+literal|"                EnumerableTableScan(table=[[foodmart2, time_by_day]])\n"
 operator|+
-literal|"            EnumerableTableAccessRel(table=[[foodmart2, position]])\n"
+literal|"            EnumerableTableScan(table=[[foodmart2, position]])\n"
 operator|+
-literal|"          EnumerableTableAccessRel(table=[[foodmart2, employee_closure]])\n"
+literal|"          EnumerableTableScan(table=[[foodmart2, employee_closure]])\n"
 operator|+
 literal|"      EnumerableAggregateRel(group=[{0}])\n"
 operator|+
@@ -9079,14 +9883,14 @@ name|void
 name|testExplainJoinOrderingWithOr
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -9121,7 +9925,7 @@ parameter_list|()
 block|{
 name|checkNullableTimestamp
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -9139,7 +9943,7 @@ parameter_list|()
 block|{
 name|checkNullableTimestamp
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -9151,13 +9955,13 @@ specifier|private
 name|void
 name|checkNullableTimestamp
 parameter_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 name|config
 parameter_list|)
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
@@ -9185,14 +9989,14 @@ name|void
 name|testReuseExpressionWhenNullChecking
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -9206,9 +10010,11 @@ argument_list|)
 operator|.
 name|planContains
 argument_list|(
-literal|"static final String $L4J$C$net_hydromatic_optiq_runtime_SqlFunctions_upper_y_ = "
+literal|"static final String "
 operator|+
-literal|"net.hydromatic.optiq.runtime.SqlFunctions.upper(\"y\");"
+literal|"$L4J$C$org_apache_calcite_runtime_SqlFunctions_upper_y_ = "
+operator|+
+literal|"org.apache.calcite.runtime.SqlFunctions.upper(\"y\");"
 argument_list|)
 operator|.
 name|planContains
@@ -9217,7 +10023,7 @@ literal|"return current.empid<= current.deptno * 10 "
 operator|+
 literal|"? (String) null "
 operator|+
-literal|": $L4J$C$net_hydromatic_optiq_runtime_SqlFunctions_upper_y_;"
+literal|": $L4J$C$org_apache_calcite_runtime_SqlFunctions_upper_y_;"
 argument_list|)
 operator|.
 name|returns
@@ -9239,14 +10045,14 @@ name|void
 name|testReuseExpressionWhenNullChecking2
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -9271,7 +10077,7 @@ literal|"|| inp2_ == null "
 operator|+
 literal|"? (String) null "
 operator|+
-literal|": net.hydromatic.optiq.runtime.SqlFunctions.upper(inp2_);"
+literal|": org.apache.calcite.runtime.SqlFunctions.upper(inp2_);"
 argument_list|)
 operator|.
 name|returns
@@ -9293,14 +10099,14 @@ name|void
 name|testReuseExpressionWhenNullChecking3
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -9319,23 +10125,29 @@ argument_list|)
 operator|.
 name|planContains
 argument_list|(
-literal|"static final boolean $L4J$C$net_hydromatic_optiq_runtime_SqlFunctions_ne_sa_sa_ = "
+literal|"static final boolean "
 operator|+
-literal|"net.hydromatic.optiq.runtime.SqlFunctions.ne(\"sa\", \"sa\");"
+literal|"$L4J$C$org_apache_calcite_runtime_SqlFunctions_ne_sa_sa_ = "
+operator|+
+literal|"org.apache.calcite.runtime.SqlFunctions.ne(\"sa\", \"sa\");"
 argument_list|)
 operator|.
 name|planContains
 argument_list|(
-literal|"static final boolean $L4J$C$_net_hydromatic_optiq_runtime_SqlFunctions_ne_sa_sa_ = "
+literal|"static final boolean "
 operator|+
-literal|"!$L4J$C$net_hydromatic_optiq_runtime_SqlFunctions_ne_sa_sa_;"
+literal|"$L4J$C$_org_apache_calcite_runtime_SqlFunctions_ne_sa_sa_ = "
+operator|+
+literal|"!$L4J$C$org_apache_calcite_runtime_SqlFunctions_ne_sa_sa_;"
 argument_list|)
 operator|.
 name|planContains
 argument_list|(
-literal|"return inp2_ == null || $L4J$C$_net_hydromatic_optiq_runtime_SqlFunctions_ne_sa_sa_ ? (String) null"
+literal|"return inp2_ == null "
 operator|+
-literal|" : net.hydromatic.optiq.runtime.SqlFunctions.substring(inp2_, "
+literal|"|| $L4J$C$_org_apache_calcite_runtime_SqlFunctions_ne_sa_sa_ ? (String) null"
+operator|+
+literal|" : org.apache.calcite.runtime.SqlFunctions.substring(inp2_, "
 operator|+
 literal|"current.deptno + 1);"
 argument_list|)
@@ -9348,14 +10160,14 @@ name|void
 name|testReuseExpressionWhenNullChecking4
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -9396,33 +10208,37 @@ argument_list|)
 operator|.
 name|planContains
 argument_list|(
-literal|"static final boolean $L4J$C$net_hydromatic_optiq_runtime_SqlFunctions_eq_sa_sa_ = "
+literal|"static final boolean "
 operator|+
-literal|"net.hydromatic.optiq.runtime.SqlFunctions.eq(\"sa\", \"sa\");"
+literal|"$L4J$C$org_apache_calcite_runtime_SqlFunctions_eq_sa_sa_ = "
+operator|+
+literal|"org.apache.calcite.runtime.SqlFunctions.eq(\"sa\", \"sa\");"
 argument_list|)
 operator|.
 name|planContains
 argument_list|(
-literal|"static final boolean $L4J$C$_net_hydromatic_optiq_runtime_SqlFunctions_eq_sa_sa_ = "
+literal|"static final boolean "
 operator|+
-literal|"!$L4J$C$net_hydromatic_optiq_runtime_SqlFunctions_eq_sa_sa_;"
+literal|"$L4J$C$_org_apache_calcite_runtime_SqlFunctions_eq_sa_sa_ = "
+operator|+
+literal|"!$L4J$C$org_apache_calcite_runtime_SqlFunctions_eq_sa_sa_;"
 argument_list|)
 operator|.
 name|planContains
 argument_list|(
 literal|"return inp2_ == null "
 operator|+
-literal|"|| $L4J$C$_net_hydromatic_optiq_runtime_SqlFunctions_eq_sa_sa_ "
+literal|"|| $L4J$C$_org_apache_calcite_runtime_SqlFunctions_eq_sa_sa_ "
 operator|+
 literal|"|| !v5&& inp1_ * 8<= 8 "
 operator|+
 literal|"? (String) null "
 operator|+
-literal|": net.hydromatic.optiq.runtime.SqlFunctions.substring("
+literal|": org.apache.calcite.runtime.SqlFunctions.substring("
 operator|+
-literal|"net.hydromatic.optiq.runtime.SqlFunctions.trim(true, true, \" \", "
+literal|"org.apache.calcite.runtime.SqlFunctions.trim(true, true, \" \", "
 operator|+
-literal|"net.hydromatic.optiq.runtime.SqlFunctions.substring(inp2_, "
+literal|"org.apache.calcite.runtime.SqlFunctions.substring(inp2_, "
 operator|+
 literal|"inp1_ * 0 + 1)), (v5 ? 4 : 5) - 2);"
 argument_list|)
@@ -9446,14 +10262,14 @@ name|void
 name|testReuseExpressionWhenNullChecking5
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -9499,33 +10315,37 @@ argument_list|)
 operator|.
 name|planContains
 argument_list|(
-literal|"static final boolean $L4J$C$net_hydromatic_optiq_runtime_SqlFunctions_eq_sa_sa_ = "
+literal|"static final boolean "
 operator|+
-literal|"net.hydromatic.optiq.runtime.SqlFunctions.eq(\"sa\", \"sa\");"
+literal|"$L4J$C$org_apache_calcite_runtime_SqlFunctions_eq_sa_sa_ = "
+operator|+
+literal|"org.apache.calcite.runtime.SqlFunctions.eq(\"sa\", \"sa\");"
 argument_list|)
 operator|.
 name|planContains
 argument_list|(
-literal|"static final boolean $L4J$C$_net_hydromatic_optiq_runtime_SqlFunctions_eq_sa_sa_ = "
+literal|"static final boolean "
 operator|+
-literal|"!$L4J$C$net_hydromatic_optiq_runtime_SqlFunctions_eq_sa_sa_;"
+literal|"$L4J$C$_org_apache_calcite_runtime_SqlFunctions_eq_sa_sa_ = "
+operator|+
+literal|"!$L4J$C$org_apache_calcite_runtime_SqlFunctions_eq_sa_sa_;"
 argument_list|)
 operator|.
 name|planContains
 argument_list|(
 literal|"return inp2_ == null "
 operator|+
-literal|"|| $L4J$C$_net_hydromatic_optiq_runtime_SqlFunctions_eq_sa_sa_ "
+literal|"|| $L4J$C$_org_apache_calcite_runtime_SqlFunctions_eq_sa_sa_ "
 operator|+
 literal|"|| current.empid<= inp1_&& inp1_ * 8<= 8 "
 operator|+
 literal|"? (String) null "
 operator|+
-literal|": net.hydromatic.optiq.runtime.SqlFunctions.substring("
+literal|": org.apache.calcite.runtime.SqlFunctions.substring("
 operator|+
-literal|"net.hydromatic.optiq.runtime.SqlFunctions.trim(true, true, \" \", "
+literal|"org.apache.calcite.runtime.SqlFunctions.trim(true, true, \" \", "
 operator|+
-literal|"net.hydromatic.optiq.runtime.SqlFunctions.substring(inp2_, "
+literal|"org.apache.calcite.runtime.SqlFunctions.substring(inp2_, "
 operator|+
 literal|"inp1_ * 0 + 1)), $L4J$C$5_2);"
 argument_list|)
@@ -9549,7 +10369,7 @@ name|void
 name|testValues
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
@@ -9574,7 +10394,7 @@ name|void
 name|testValuesAlias
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
@@ -9597,7 +10417,7 @@ name|void
 name|testValuesMinus
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
@@ -10288,7 +11108,7 @@ name|void
 name|testValuesComposite
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
@@ -10314,14 +11134,14 @@ name|void
 name|testInnerJoinValues
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -10351,14 +11171,14 @@ name|void
 name|testCartesianJoin
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -10397,14 +11217,14 @@ literal|"select count(distinct \"sales_fact_1997\".\"unit_sales\") as \"m0\"\n"
 operator|+
 literal|"from \"sales_fact_1997\" as \"sales_fact_1997\""
 decl_stmt|;
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -10418,13 +11238,13 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"EnumerableAggregateRel(group=[{}], m0=[COUNT($0)])\n"
+literal|"EnumerableAggregate(group=[{}], m0=[COUNT($0)])\n"
 operator|+
-literal|"  EnumerableAggregateRel(group=[{0}])\n"
+literal|"  EnumerableAggregate(group=[{0}])\n"
 operator|+
-literal|"    EnumerableCalcRel(expr#0..7=[{inputs}], unit_sales=[$t7])\n"
+literal|"    EnumerableCalc(expr#0..7=[{inputs}], unit_sales=[$t7])\n"
 operator|+
-literal|"      EnumerableTableAccessRel(table=[[foodmart2, sales_fact_1997]])"
+literal|"      EnumerableTableScan(table=[[foodmart2, sales_fact_1997]])"
 argument_list|)
 operator|.
 name|returns
@@ -10452,14 +11272,14 @@ literal|"from \"sales_fact_1997\" as \"sales_fact_1997\"\n"
 operator|+
 literal|"group by \"unit_sales\""
 decl_stmt|;
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -10473,15 +11293,17 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"EnumerableCalcRel(expr#0..1=[{inputs}], expr#2=[CAST($t0):INTEGER NOT NULL], u=[$t2], m0=[$t1])\n"
+literal|""
 operator|+
-literal|"  EnumerableAggregateRel(group=[{0}], m0=[COUNT($1)])\n"
+literal|"EnumerableCalc(expr#0..1=[{inputs}], expr#2=[CAST($t0):INTEGER NOT NULL], u=[$t2], m0=[$t1])\n"
 operator|+
-literal|"    EnumerableAggregateRel(group=[{0, 1}])\n"
+literal|"  EnumerableAggregate(group=[{0}], m0=[COUNT($1)])\n"
 operator|+
-literal|"      EnumerableCalcRel(expr#0..7=[{inputs}], unit_sales=[$t7], customer_id=[$t2])\n"
+literal|"    EnumerableAggregate(group=[{0, 1}])\n"
 operator|+
-literal|"        EnumerableTableAccessRel(table=[[foodmart2, sales_fact_1997]])"
+literal|"      EnumerableCalc(expr#0..7=[{inputs}], unit_sales=[$t7], customer_id=[$t2])\n"
+operator|+
+literal|"        EnumerableTableScan(table=[[foodmart2, sales_fact_1997]])"
 argument_list|)
 operator|.
 name|returnsUnordered
@@ -10525,14 +11347,14 @@ literal|"and \"time_by_day\".\"the_year\" = 1997\n"
 operator|+
 literal|"group by \"time_by_day\".\"the_year\""
 decl_stmt|;
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -10546,21 +11368,23 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"EnumerableAggregateRel(group=[{0}], m0=[COUNT($1)])\n"
+literal|""
 operator|+
-literal|"  EnumerableAggregateRel(group=[{0, 1}])\n"
+literal|"EnumerableAggregate(group=[{0}], m0=[COUNT($1)])\n"
 operator|+
-literal|"    EnumerableCalcRel(expr#0..3=[{inputs}], c0=[$t1], unit_sales=[$t3])\n"
+literal|"  EnumerableAggregate(group=[{0, 1}])\n"
 operator|+
-literal|"      EnumerableJoinRel(condition=[=($0, $2)], joinType=[inner])\n"
+literal|"    EnumerableCalc(expr#0..3=[{inputs}], c0=[$t1], unit_sales=[$t3])\n"
 operator|+
-literal|"        EnumerableCalcRel(expr#0..9=[{inputs}], expr#10=[CAST($t4):INTEGER], expr#11=[1997], expr#12=[=($t10, $t11)], time_id=[$t0], the_year=[$t4], $condition=[$t12])\n"
+literal|"      EnumerableJoin(condition=[=($0, $2)], joinType=[inner])\n"
 operator|+
-literal|"          EnumerableTableAccessRel(table=[[foodmart2, time_by_day]])\n"
+literal|"        EnumerableCalc(expr#0..9=[{inputs}], expr#10=[CAST($t4):INTEGER], expr#11=[1997], expr#12=[=($t10, $t11)], time_id=[$t0], the_year=[$t4], $condition=[$t12])\n"
 operator|+
-literal|"        EnumerableCalcRel(expr#0..7=[{inputs}], time_id=[$t1], unit_sales=[$t7])\n"
+literal|"          EnumerableTableScan(table=[[foodmart2, time_by_day]])\n"
 operator|+
-literal|"          EnumerableTableAccessRel(table=[[foodmart2, sales_fact_1997]])"
+literal|"        EnumerableCalc(expr#0..7=[{inputs}], time_id=[$t1], unit_sales=[$t7])\n"
+operator|+
+literal|"          EnumerableTableScan(table=[[foodmart2, sales_fact_1997]])"
 argument_list|)
 operator|.
 name|returns
@@ -10596,14 +11420,14 @@ literal|"and \"time_by_day\".\"the_year\" = 1997\n"
 operator|+
 literal|"group by \"time_by_day\".\"the_year\""
 decl_stmt|;
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -10629,14 +11453,14 @@ name|void
 name|testSimpleIn
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -10654,38 +11478,42 @@ argument_list|)
 operator|.
 name|convertContains
 argument_list|(
-literal|"ProjectRel(deptno=[$0], name=[$1], employees=[$2])\n"
+literal|""
 operator|+
-literal|"  JoinRel(condition=[=($3, $4)], joinType=[inner])\n"
+literal|"LogicalProject(deptno=[$0], name=[$1], employees=[$2])\n"
 operator|+
-literal|"    ProjectRel($f0=[$0], $f1=[$1], $f2=[$2], $f3=[$0])\n"
+literal|"  LogicalJoin(condition=[=($3, $4)], joinType=[inner])\n"
 operator|+
-literal|"      EnumerableTableAccessRel(table=[[hr, depts]])\n"
+literal|"    LogicalProject($f0=[$0], $f1=[$1], $f2=[$2], $f3=[$0])\n"
 operator|+
-literal|"    AggregateRel(group=[{0}])\n"
+literal|"      EnumerableTableScan(table=[[hr, depts]])\n"
 operator|+
-literal|"      ProjectRel(deptno=[$1])\n"
+literal|"    LogicalAggregate(group=[{0}])\n"
 operator|+
-literal|"        FilterRel(condition=[<($0, 150)])\n"
+literal|"      LogicalProject(deptno=[$1])\n"
 operator|+
-literal|"          ProjectRel(empid=[$0], deptno=[$1])\n"
+literal|"        LogicalFilter(condition=[<($0, 150)])\n"
 operator|+
-literal|"            EnumerableTableAccessRel(table=[[hr, emps]])"
+literal|"          LogicalProject(empid=[$0], deptno=[$1])\n"
+operator|+
+literal|"            EnumerableTableScan(table=[[hr, emps]])"
 argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"EnumerableCalcRel(expr#0..3=[{inputs}], proj#0..2=[{exprs}])\n"
+literal|""
 operator|+
-literal|"  EnumerableSemiJoinRel(condition=[=($3, $4)], joinType=[inner])\n"
+literal|"EnumerableCalc(expr#0..3=[{inputs}], proj#0..2=[{exprs}])\n"
 operator|+
-literal|"    EnumerableCalcRel(expr#0..2=[{inputs}], proj#0..2=[{exprs}], $f3=[$t0])\n"
+literal|"  EnumerableSemiJoin(condition=[=($3, $4)], joinType=[inner])\n"
 operator|+
-literal|"      EnumerableTableAccessRel(table=[[hr, depts]])\n"
+literal|"    EnumerableCalc(expr#0..2=[{inputs}], proj#0..2=[{exprs}], $f3=[$t0])\n"
 operator|+
-literal|"    EnumerableCalcRel(expr#0..4=[{inputs}], expr#5=[150], expr#6=[<($t0, $t5)], deptno=[$t1], $condition=[$t6])\n"
+literal|"      EnumerableTableScan(table=[[hr, depts]])\n"
 operator|+
-literal|"      EnumerableTableAccessRel(table=[[hr, emps]])"
+literal|"    EnumerableCalc(expr#0..4=[{inputs}], expr#5=[150], expr#6=[<($t0, $t5)], deptno=[$t1], $condition=[$t6])\n"
+operator|+
+literal|"      EnumerableTableScan(table=[[hr, emps]])"
 argument_list|)
 operator|.
 name|returnsUnordered
@@ -10704,14 +11532,14 @@ name|void
 name|testIn
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -10793,14 +11621,14 @@ condition|)
 block|{
 return|return;
 block|}
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -10892,7 +11720,7 @@ literal|"+-------+---------------------+-----+------+------------+\n"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Tests ORDER BY with no options. Nulls come last.    *    * @see net.hydromatic.avatica.AvaticaDatabaseMetaData#nullsAreSortedAtEnd()    */
+comment|/** Tests ORDER BY with no options. Nulls come last.    *    * @see org.apache.calcite.avatica.AvaticaDatabaseMetaData#nullsAreSortedAtEnd()    */
 annotation|@
 name|Test
 specifier|public
@@ -10900,14 +11728,14 @@ name|void
 name|testOrderBy
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -10939,14 +11767,14 @@ name|void
 name|testOrderByDesc
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -10978,14 +11806,14 @@ name|void
 name|testOrderByExpr
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -11019,14 +11847,14 @@ name|void
 name|testOrderStarByExpr
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -11042,17 +11870,21 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"EnumerableCalcRel(expr#0..5=[{inputs}], proj#0..4=[{exprs}])\n"
+literal|""
 operator|+
-literal|"  EnumerableSortRel(sort0=[$5], dir0=[ASC])\n"
+literal|"EnumerableCalc(expr#0..5=[{inputs}], proj#0..4=[{exprs}])\n"
 operator|+
-literal|"    EnumerableCalcRel(expr#0..4=[{inputs}], expr#5=[-($t0)], proj#0..5=[{exprs}])\n"
+literal|"  EnumerableSort(sort0=[$5], dir0=[ASC])\n"
 operator|+
-literal|"      EnumerableTableAccessRel(table=[[hr, emps]])"
+literal|"    EnumerableCalc(expr#0..4=[{inputs}], expr#5=[-($t0)], proj#0..5=[{exprs}])\n"
+operator|+
+literal|"      EnumerableTableScan(table=[[hr, emps]])"
 argument_list|)
 operator|.
 name|returns
 argument_list|(
+literal|""
+operator|+
 literal|"empid=200; deptno=20; name=Eric; salary=8000.0; commission=500\n"
 operator|+
 literal|"empid=150; deptno=10; name=Sebastian; salary=7000.0; commission=null\n"
@@ -11070,14 +11902,14 @@ name|void
 name|testOrderUnionStarByExpr
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -11097,6 +11929,8 @@ argument_list|)
 operator|.
 name|returns
 argument_list|(
+literal|""
+operator|+
 literal|"empid=200; deptno=20; name=Eric; salary=8000.0; commission=500\n"
 operator|+
 literal|"empid=110; deptno=10; name=Theodore; salary=11500.0; commission=250\n"
@@ -11113,14 +11947,14 @@ name|void
 name|testOrderByCast
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -11157,14 +11991,14 @@ name|void
 name|testOrderByDescNullsFirst
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -11196,14 +12030,14 @@ name|void
 name|testOrderByNullsFirst
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -11235,14 +12069,14 @@ name|void
 name|testOrderByDescNullsLast
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -11274,14 +12108,14 @@ name|void
 name|testOrderByNullsLast
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -11313,14 +12147,14 @@ name|void
 name|testOrderByFetch
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -11338,13 +12172,13 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"PLAN=EnumerableLimitRel(fetch=[5])\n"
+literal|"PLAN=EnumerableLimit(fetch=[5])\n"
 operator|+
-literal|"  EnumerableSortRel(sort0=[$0], dir0=[ASC])\n"
+literal|"  EnumerableSort(sort0=[$0], dir0=[ASC])\n"
 operator|+
-literal|"    EnumerableCalcRel(expr#0..23=[{inputs}], expr#24=[10], expr#25=[<($t0, $t24)], store_id=[$t0], grocery_sqft=[$t16], $condition=[$t25])\n"
+literal|"    EnumerableCalc(expr#0..23=[{inputs}], expr#24=[10], expr#25=[<($t0, $t24)], store_id=[$t0], grocery_sqft=[$t16], $condition=[$t25])\n"
 operator|+
-literal|"      EnumerableTableAccessRel(table=[[foodmart2, store]])\n"
+literal|"      EnumerableTableScan(table=[[foodmart2, store]])\n"
 argument_list|)
 operator|.
 name|returns
@@ -11369,14 +12203,14 @@ name|void
 name|testOrderByOffsetFetch
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -11414,14 +12248,14 @@ name|void
 name|testFetch
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -11450,14 +12284,14 @@ name|void
 name|testFetchStar
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -11473,6 +12307,8 @@ argument_list|)
 operator|.
 name|returns
 argument_list|(
+literal|""
+operator|+
 literal|"empid=100; deptno=10; name=Bill; salary=10000.0; commission=1000\n"
 operator|+
 literal|"empid=200; deptno=20; name=Eric; salary=8000.0; commission=500\n"
@@ -11487,14 +12323,14 @@ name|void
 name|testLimitZero
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -11515,7 +12351,7 @@ argument_list|)
 operator|.
 name|planContains
 argument_list|(
-literal|"return net.hydromatic.linq4j.Linq4j.asEnumerable(new Object[] {})"
+literal|"return org.apache.calcite.linq4j.Linq4j.asEnumerable(new Object[] {})"
 argument_list|)
 expr_stmt|;
 block|}
@@ -11527,14 +12363,14 @@ name|void
 name|testLimitStar
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -11550,6 +12386,8 @@ argument_list|)
 operator|.
 name|returns
 argument_list|(
+literal|""
+operator|+
 literal|"empid=100; deptno=10; name=Bill; salary=10000.0; commission=1000\n"
 operator|+
 literal|"empid=200; deptno=20; name=Eric; salary=8000.0; commission=500\n"
@@ -11564,14 +12402,14 @@ name|void
 name|testLimitOnQueryableTable
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -11601,14 +12439,14 @@ name|void
 name|testSelfJoinCount
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -11627,21 +12465,21 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"EnumerableAggregateRel(group=[{}], C=[COUNT()])\n"
+literal|"EnumerableAggregate(group=[{}], C=[COUNT()])\n"
 operator|+
-literal|"  EnumerableCalcRel(expr#0..1=[{inputs}], expr#2=[0], DUMMY=[$t2])\n"
+literal|"  EnumerableCalc(expr#0..1=[{inputs}], expr#2=[0], DUMMY=[$t2])\n"
 operator|+
-literal|"    EnumerableJoinRel(condition=[=($0, $1)], joinType=[inner])\n"
+literal|"    EnumerableJoin(condition=[=($0, $1)], joinType=[inner])\n"
 operator|+
 literal|"      JdbcToEnumerableConverter\n"
 operator|+
-literal|"        JdbcProjectRel(store_id=[$4])\n"
+literal|"        JdbcProject(store_id=[$4])\n"
 operator|+
 literal|"          JdbcTableScan(table=[[foodmart, sales_fact_1997]])\n"
 operator|+
 literal|"      JdbcToEnumerableConverter\n"
 operator|+
-literal|"        JdbcProjectRel(store_id=[$4])\n"
+literal|"        JdbcProject(store_id=[$4])\n"
 operator|+
 literal|"          JdbcTableScan(table=[[foodmart, sales_fact_1997]])\n"
 argument_list|)
@@ -11655,14 +12493,14 @@ name|void
 name|testGroupByNull
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -11697,14 +12535,14 @@ name|void
 name|testSelectDistinct
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -11734,14 +12572,14 @@ name|void
 name|testSelectDistinctStar
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -11774,14 +12612,14 @@ name|void
 name|testSelectDistinctComposite
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -11818,14 +12656,14 @@ name|void
 name|testGroupByNoAggregates
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -11857,14 +12695,14 @@ name|void
 name|testGroupByNoAggregatesAllColumns
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -11899,14 +12737,14 @@ name|void
 name|testGroupByMax1IsNull
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -11938,14 +12776,14 @@ name|void
 name|testGroupBy1Max1
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -12012,14 +12850,14 @@ parameter_list|()
 throws|throws
 name|IOException
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -12051,14 +12889,14 @@ name|void
 name|testCountStar
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -12072,19 +12910,19 @@ argument_list|)
 operator|.
 name|convertContains
 argument_list|(
-literal|"AggregateRel(group=[{}], C=[COUNT()])\n"
+literal|"LogicalAggregate(group=[{}], C=[COUNT()])\n"
 operator|+
-literal|"  ProjectRel(DUMMY=[0])\n"
+literal|"  LogicalProject(DUMMY=[0])\n"
 operator|+
-literal|"    JoinRel(condition=[true], joinType=[inner])\n"
+literal|"    LogicalJoin(condition=[true], joinType=[inner])\n"
 operator|+
-literal|"      ProjectRel(DUMMY=[0])\n"
+literal|"      LogicalProject(DUMMY=[0])\n"
 operator|+
-literal|"        EnumerableTableAccessRel(table=[[hr, emps]])\n"
+literal|"        EnumerableTableScan(table=[[hr, emps]])\n"
 operator|+
-literal|"      ProjectRel(DUMMY=[0])\n"
+literal|"      LogicalProject(DUMMY=[0])\n"
 operator|+
-literal|"        EnumerableTableAccessRel(table=[[hr, depts]])"
+literal|"        EnumerableTableScan(table=[[hr, depts]])"
 argument_list|)
 expr_stmt|;
 block|}
@@ -12096,14 +12934,14 @@ name|void
 name|testCountUnionAll
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -12137,14 +12975,14 @@ name|void
 name|testAggregateEmpty
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -12170,13 +13008,15 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"PLAN=EnumerableCalcRel(expr#0..2=[{inputs}], expr#3=[0], expr#4=[=($t0, $t3)], expr#5=[null], expr#6=[CASE($t4, $t5, $t1)], expr#7=[/($t2, $t0)], expr#8=[CAST($t7):JavaType(class java.lang.Integer)], CS=[$t0], C=[$t0], S=[$t6], A=[$t8])\n"
+literal|""
 operator|+
-literal|"  EnumerableAggregateRel(group=[{}], CS=[COUNT()], agg#1=[$SUM0($0)], agg#2=[SUM($0)])\n"
+literal|"PLAN=EnumerableCalc(expr#0..2=[{inputs}], expr#3=[0], expr#4=[=($t0, $t3)], expr#5=[null], expr#6=[CASE($t4, $t5, $t1)], expr#7=[/($t2, $t0)], expr#8=[CAST($t7):JavaType(class java.lang.Integer)], CS=[$t0], C=[$t0], S=[$t6], A=[$t8])\n"
 operator|+
-literal|"    EnumerableCalcRel(expr#0..4=[{inputs}], expr#5=[0], expr#6=[<($t1, $t5)], deptno=[$t1], $condition=[$t6])\n"
+literal|"  EnumerableAggregate(group=[{}], CS=[COUNT()], agg#1=[$SUM0($0)], agg#2=[SUM($0)])\n"
 operator|+
-literal|"      EnumerableTableAccessRel(table=[[hr, emps]])\n"
+literal|"    EnumerableCalc(expr#0..4=[{inputs}], expr#5=[0], expr#6=[<($t1, $t5)], deptno=[$t1], $condition=[$t6])\n"
+operator|+
+literal|"      EnumerableTableScan(table=[[hr, emps]])\n"
 argument_list|)
 operator|.
 name|returns
@@ -12193,14 +13033,14 @@ name|void
 name|testReduceCountNotNullable
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -12222,13 +13062,15 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"PLAN=EnumerableCalcRel(expr#0=[{inputs}], CS=[$t0], CS2=[$t0])\n"
+literal|""
 operator|+
-literal|"  EnumerableAggregateRel(group=[{}], CS=[COUNT()])\n"
+literal|"PLAN=EnumerableCalc(expr#0=[{inputs}], CS=[$t0], CS2=[$t0])\n"
 operator|+
-literal|"    EnumerableCalcRel(expr#0..4=[{inputs}], expr#5=[0], expr#6=[<($t1, $t5)], deptno=[$t1], $condition=[$t6])\n"
+literal|"  EnumerableAggregate(group=[{}], CS=[COUNT()])\n"
 operator|+
-literal|"      EnumerableTableAccessRel(table=[[hr, emps]])\n"
+literal|"    EnumerableCalc(expr#0..4=[{inputs}], expr#5=[0], expr#6=[<($t1, $t5)], deptno=[$t1], $condition=[$t6])\n"
+operator|+
+literal|"      EnumerableTableScan(table=[[hr, emps]])\n"
 argument_list|)
 operator|.
 name|returns
@@ -12245,14 +13087,14 @@ name|void
 name|testReduceCompositeCountNotNullable
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -12270,11 +13112,13 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"EnumerableAggregateRel(group=[{}], CS=[COUNT($0, $1)])\n"
+literal|""
 operator|+
-literal|"  EnumerableCalcRel(expr#0..4=[{inputs}], expr#5=[1], expr#6=[+($t4, $t5)], commission=[$t4], $f2=[$t6])\n"
+literal|"EnumerableAggregate(group=[{}], CS=[COUNT($0, $1)])\n"
 operator|+
-literal|"    EnumerableTableAccessRel(table=[[hr, emps]])"
+literal|"  EnumerableCalc(expr#0..4=[{inputs}], expr#5=[1], expr#6=[+($t4, $t5)], commission=[$t4], $f2=[$t6])\n"
+operator|+
+literal|"    EnumerableTableScan(table=[[hr, emps]])"
 argument_list|)
 operator|.
 name|returns
@@ -12291,14 +13135,14 @@ name|void
 name|testOrderByOnSortedTable
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -12314,9 +13158,9 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"PLAN=EnumerableSortRel(sort0=[$0], dir0=[ASC])\n"
+literal|"PLAN=EnumerableSort(sort0=[$0], dir0=[ASC])\n"
 operator|+
-literal|"  EnumerableTableAccessRel(table=[[foodmart2, time_by_day]])\n\n"
+literal|"  EnumerableTableScan(table=[[foodmart2, time_by_day]])\n\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -12333,14 +13177,14 @@ name|void
 name|testOrderByOnSortedTable2
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -12367,11 +13211,13 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"PLAN=EnumerableSortRel(sort0=[$0], dir0=[Ascending])\n"
+literal|""
 operator|+
-literal|"  EnumerableCalcRel(expr#0..9=[{inputs}], expr#10=[370], expr#11=[<($t0, $t10)], proj#0..1=[{exprs}], $condition=[$t11])\n"
+literal|"PLAN=EnumerableSort(sort0=[$0], dir0=[ASC])\n"
 operator|+
-literal|"    EnumerableTableAccessRel(table=[[foodmart2, time_by_day]])\n\n"
+literal|"  EnumerableCalc(expr#0..9=[{inputs}], expr#10=[370], expr#11=[<($t0, $t10)], proj#0..1=[{exprs}], $condition=[$t11])\n"
+operator|+
+literal|"    EnumerableTableScan(table=[[foodmart2, time_by_day]])\n\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -12382,14 +13228,14 @@ name|void
 name|testWithInsideWhereExists
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -12424,14 +13270,14 @@ name|void
 name|testWithOrderBy
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -12449,6 +13295,8 @@ argument_list|)
 operator|.
 name|returns
 argument_list|(
+literal|""
+operator|+
 literal|"empid=200; deptno=20; name=Eric; salary=8000.0; commission=500\n"
 operator|+
 literal|"empid=150; deptno=10; name=Sebastian; salary=7000.0; commission=null\n"
@@ -12467,14 +13315,14 @@ name|void
 name|testWinAgg
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -12509,13 +13357,15 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"EnumerableCalcRel(expr#0..7=[{inputs}], expr#8=[0], expr#9=[>($t4, $t8)], expr#10=[CAST($t5):JavaType(class java.lang.Float)], expr#11=[null], expr#12=[CASE($t9, $t10, $t11)], expr#13=[5], deptno=[$t1], empid=[$t0], S=[$t12], FIVE=[$t13], M=[$t6], C=[$t7])\n"
+literal|""
 operator|+
-literal|"  EnumerableWindowRel(window#0=[window(partition {1} order by [0] rows between $4 PRECEDING and CURRENT ROW aggs [COUNT($3), $SUM0($3), MIN($2), COUNT()])])\n"
+literal|"EnumerableCalc(expr#0..7=[{inputs}], expr#8=[0], expr#9=[>($t4, $t8)], expr#10=[CAST($t5):JavaType(class java.lang.Float)], expr#11=[null], expr#12=[CASE($t9, $t10, $t11)], expr#13=[5], deptno=[$t1], empid=[$t0], S=[$t12], FIVE=[$t13], M=[$t6], C=[$t7])\n"
 operator|+
-literal|"    EnumerableCalcRel(expr#0..4=[{inputs}], expr#5=[+($t3, $t0)], proj#0..1=[{exprs}], salary=[$t3], $3=[$t5])\n"
+literal|"  EnumerableWindow(window#0=[window(partition {1} order by [0] rows between $4 PRECEDING and CURRENT ROW aggs [COUNT($3), $SUM0($3), MIN($2), COUNT()])])\n"
 operator|+
-literal|"      EnumerableTableAccessRel(table=[[hr, emps]])\n"
+literal|"    EnumerableCalc(expr#0..4=[{inputs}], expr#5=[+($t3, $t0)], proj#0..1=[{exprs}], salary=[$t3], $3=[$t5])\n"
+operator|+
+literal|"      EnumerableTableScan(table=[[hr, emps]])\n"
 argument_list|)
 operator|.
 name|returnsUnordered
@@ -12531,7 +13381,7 @@ argument_list|)
 operator|.
 name|planContains
 argument_list|(
-name|OptiqPrepareImpl
+name|CalcitePrepareImpl
 operator|.
 name|DEBUG
 condition|?
@@ -12583,7 +13433,7 @@ operator|+
 literal|"                  current[0],\n"
 comment|// Float.valueOf(SqlFunctions.toFloat(current[5])) comes from SUM0
 operator|+
-literal|"                  net.hydromatic.optiq.runtime.SqlFunctions.toLong(current[4])> 0L ? Float.valueOf(net.hydromatic.optiq.runtime.SqlFunctions.toFloat(current[5])) : (Float) null,\n"
+literal|"                  org.apache.calcite.runtime.SqlFunctions.toLong(current[4])> 0L ? Float.valueOf(org.apache.calcite.runtime.SqlFunctions.toFloat(current[5])) : (Float) null,\n"
 operator|+
 literal|"                  5,\n"
 operator|+
@@ -12601,14 +13451,14 @@ name|void
 name|testWinAgg2
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -12671,7 +13521,7 @@ literal|"deptno=10; empid=150; S=18760.0; FIVE=5; M=7000.0; C=2; C2=3; C11=3; C1
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Tests that window aggregates work when computed over non-nullable    * {@link net.hydromatic.optiq.rules.java.JavaRowFormat#SCALAR} inputs.    * Window aggregates use temporary buffers, thus need to check if    * primitives are properly boxed and un-boxed.    */
+comment|/**    * Tests that window aggregates work when computed over non-nullable    * {@link org.apache.calcite.adapter.enumerable.JavaRowFormat#SCALAR} inputs.    * Window aggregates use temporary buffers, thus need to check if    * primitives are properly boxed and un-boxed.    */
 annotation|@
 name|Test
 specifier|public
@@ -12682,11 +13532,11 @@ block|{
 name|String
 name|planLine
 init|=
-literal|"a0s0w0 = net.hydromatic.optiq.runtime.SqlFunctions.lesser(a0s0w0, net.hydromatic.optiq.runtime.SqlFunctions.toFloat(_rows[j]));"
+literal|"a0s0w0 = org.apache.calcite.runtime.SqlFunctions.lesser(a0s0w0, org.apache.calcite.runtime.SqlFunctions.toFloat(_rows[j]));"
 decl_stmt|;
 if|if
 condition|(
-name|OptiqPrepareImpl
+name|CalcitePrepareImpl
 operator|.
 name|DEBUG
 condition|)
@@ -12703,14 +13553,14 @@ literal|"MINa0s0w0"
 argument_list|)
 expr_stmt|;
 block|}
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -12748,7 +13598,7 @@ literal|"M=10001.0"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Tests that {@link org.eigenbase.rel.CalcRel} is implemented properly    * when input is {@link org.eigenbase.rel.WindowRel} and literal.    */
+comment|/**    * Tests that {@link org.apache.calcite.rel.logical.LogicalCalc} is    * implemented properly when input is    * {@link org.apache.calcite.rel.logical.LogicalWindow} and literal.    */
 annotation|@
 name|Test
 specifier|public
@@ -12759,11 +13609,11 @@ block|{
 name|String
 name|planLine
 init|=
-literal|"a0s0w0 = net.hydromatic.optiq.runtime.SqlFunctions.lesser(a0s0w0, net.hydromatic.optiq.runtime.SqlFunctions.toFloat(_rows[j]));"
+literal|"a0s0w0 = org.apache.calcite.runtime.SqlFunctions.lesser(a0s0w0, org.apache.calcite.runtime.SqlFunctions.toFloat(_rows[j]));"
 decl_stmt|;
 if|if
 condition|(
-name|OptiqPrepareImpl
+name|CalcitePrepareImpl
 operator|.
 name|DEBUG
 condition|)
@@ -12780,14 +13630,14 @@ literal|"MINa0s0w0"
 argument_list|)
 expr_stmt|;
 block|}
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -12833,14 +13683,14 @@ name|void
 name|testWinAggRank
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -12891,14 +13741,14 @@ name|void
 name|testWinAggRankValues
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -12940,14 +13790,14 @@ name|void
 name|testWinAggRankValuesDesc
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -12988,14 +13838,14 @@ name|void
 name|testWinAggDenseRankValues
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -13036,14 +13886,14 @@ name|void
 name|testWinAggDenseRankValuesDesc
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -13091,14 +13941,14 @@ name|void
 name|testWinIntervalFrame
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -13150,14 +14000,14 @@ name|String
 name|startOfGroup
 parameter_list|)
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -13218,14 +14068,14 @@ name|String
 name|startOfGroup
 parameter_list|)
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -13289,14 +14139,14 @@ name|String
 name|startOfGroup
 parameter_list|)
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -13305,7 +14155,9 @@ argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"select group_id, min(rn) min_rn, max(rn) max_rn, count(rn) cnt_rn, avg(val) avg_val"
+literal|"select group_id, min(rn) min_rn, max(rn) max_rn,\n"
+operator|+
+literal|"  count(rn) cnt_rn, avg(val) avg_val"
 operator|+
 literal|" from (\n"
 operator|+
@@ -13484,14 +14336,14 @@ name|void
 name|testLagDefaultValue
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -13540,14 +14392,14 @@ name|void
 name|testLeadDefaultValue
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -13596,14 +14448,14 @@ name|void
 name|testLagExpressionOffset
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -13652,14 +14504,14 @@ name|void
 name|testLagInvalidOffsetArgument
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -13668,9 +14520,11 @@ argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"select t.*, lag(rn, DATE '2014-06-20', 42) over (order by rn) l\n"
+literal|"select t.*,\n"
 operator|+
-literal|" from "
+literal|"  lag(rn, DATE '2014-06-20', 42) over (order by rn) l\n"
+operator|+
+literal|"from "
 operator|+
 name|START_OF_GROUP_DATA
 argument_list|)
@@ -13689,14 +14543,14 @@ name|void
 name|testNtile1
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -13745,14 +14599,14 @@ name|void
 name|testNtile2
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -13806,14 +14660,14 @@ name|void
 name|testNtileConstantArgs
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -13862,14 +14716,14 @@ name|void
 name|testNtileNegativeArg
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -13899,14 +14753,14 @@ name|void
 name|testNtileDecimalArg
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -13936,14 +14790,14 @@ name|void
 name|testWinAggFirstValue
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -13988,14 +14842,14 @@ name|void
 name|testWinAggFirstValueDesc
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -14040,14 +14894,14 @@ name|void
 name|testWinAggFirstValueEmptyWindow
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -14092,14 +14946,14 @@ name|void
 name|testWinRowNumber
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -14150,14 +15004,14 @@ name|void
 name|testOverUnboundedPreceding
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -14204,14 +15058,14 @@ name|void
 name|testSumOverUnboundedPreceding
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -14258,14 +15112,14 @@ name|void
 name|testSumOverPossiblyEmptyWindow
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -14372,14 +15226,14 @@ argument_list|(
 literal|true
 argument_list|)
 expr_stmt|;
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -14397,13 +15251,13 @@ argument_list|)
 operator|.
 name|convertContains
 argument_list|(
-literal|"ProjectRel(name=[$1], EXPR$1=[+($2, 1)])\n"
+literal|"LogicalProject(name=[$1], EXPR$1=[+($2, 1)])\n"
 operator|+
-literal|"  AggregateRel(group=[{0, 1}], agg#0=[COUNT($2)])\n"
+literal|"  LogicalAggregate(group=[{0, 1}], agg#0=[COUNT($2)])\n"
 operator|+
-literal|"    ProjectRel(deptno=[$1], name=[$2], commission=[$4])\n"
+literal|"    LogicalProject(deptno=[$1], name=[$2], commission=[$4])\n"
 operator|+
-literal|"      EnumerableTableAccessRel(table=[[hr, emps]])\n"
+literal|"      EnumerableTableScan(table=[[hr, emps]])\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -14441,14 +15295,14 @@ argument_list|(
 literal|true
 argument_list|)
 expr_stmt|;
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -14457,7 +15311,9 @@ argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"select \"name\", count(\"commission\") over (partition by \"deptno\") + 1\n"
+literal|"select \"name\",\n"
+operator|+
+literal|"  count(\"commission\") over (partition by \"deptno\") + 1\n"
 operator|+
 literal|"from \"hr\".\"emps\"\n"
 operator|+
@@ -14466,13 +15322,15 @@ argument_list|)
 operator|.
 name|convertContains
 argument_list|(
-literal|"ProjectRel(name=[$2], EXPR$1=[+(COUNT($3) OVER (PARTITION BY $1 RANGE BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING), 1)])\n"
+literal|""
 operator|+
-literal|"  FilterRel(condition=[>($0, 10)])\n"
+literal|"LogicalProject(name=[$2], EXPR$1=[+(COUNT($3) OVER (PARTITION BY $1 RANGE BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING), 1)])\n"
 operator|+
-literal|"    ProjectRel(empid=[$0], deptno=[$1], name=[$2], commission=[$4])\n"
+literal|"  LogicalFilter(condition=[>($0, 10)])\n"
 operator|+
-literal|"      EnumerableTableAccessRel(table=[[hr, emps]])\n"
+literal|"    LogicalProject(empid=[$0], deptno=[$1], name=[$2], commission=[$4])\n"
+operator|+
+literal|"      EnumerableTableScan(table=[[hr, emps]])\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -14497,14 +15355,14 @@ name|void
 name|testWinAggConstant
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -14540,14 +15398,14 @@ name|void
 name|testWinAggConstantMultipleConstants
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -14587,14 +15445,14 @@ name|void
 name|testWinAggPartitionByConstant
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -14603,9 +15461,11 @@ argument_list|)
 operator|.
 name|query
 argument_list|(
+literal|""
 comment|// *0 is used to make results predictable.
 comment|// If using just max(empid) calcite cannot compute the result
 comment|// properly since it does not support range windows yet :(
+operator|+
 literal|"select max(\"empid\"*0) over (partition by 42\n"
 operator|+
 literal|"  order by \"empid\") as m\n"
@@ -14633,14 +15493,14 @@ name|void
 name|testWinAggOrderByConstant
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -14649,9 +15509,11 @@ argument_list|)
 operator|.
 name|query
 argument_list|(
+literal|""
 comment|// *0 is used to make results predictable.
 comment|// If using just max(empid) calcite cannot compute the result
 comment|// properly since it does not support range windows yet :(
+operator|+
 literal|"select max(\"empid\"*0) over (partition by \"deptno\"\n"
 operator|+
 literal|"  order by 42) as m\n"
@@ -14679,14 +15541,14 @@ name|void
 name|testWhereNullable
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -14714,14 +15576,14 @@ name|void
 name|testLike
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -14737,6 +15599,8 @@ argument_list|)
 operator|.
 name|returns
 argument_list|(
+literal|""
+operator|+
 literal|"empid=100; deptno=10; name=Bill; salary=10000.0; commission=1000\n"
 operator|+
 literal|"empid=150; deptno=10; name=Sebastian; salary=7000.0; commission=null\n"
@@ -14751,14 +15615,14 @@ name|void
 name|testArrayIndexing
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -14772,6 +15636,8 @@ argument_list|)
 operator|.
 name|returns
 argument_list|(
+literal|""
+operator|+
 literal|"deptno=10; E=Employee [empid: 100, deptno: 10, name: Bill]\n"
 operator|+
 literal|"deptno=30; E=null\n"
@@ -14787,7 +15653,7 @@ name|void
 name|testVarcharEquals
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
@@ -14812,7 +15678,7 @@ comment|// than 30 characters would introduce a cast to the least restrictive
 comment|// type, thus lname would be cast to a varchar(40) in this case.
 comment|// These sorts of casts are removed though when constructing the jdbc
 comment|// sql, since e.g. HSQLDB does not support them.
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
@@ -14834,7 +15700,7 @@ argument_list|(
 literal|"C=0\n"
 argument_list|)
 expr_stmt|;
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
@@ -14872,6 +15738,8 @@ argument_list|)
 operator|.
 name|returns
 argument_list|(
+literal|""
+operator|+
 literal|"empid=100; deptno=10; name=Bill; salary=10000.0; commission=1000\n"
 operator|+
 literal|"empid=200; deptno=20; name=Eric; salary=8000.0; commission=500\n"
@@ -14994,7 +15862,7 @@ name|void
 name|testTrim
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
@@ -15016,7 +15884,7 @@ argument_list|(
 literal|"lname=Nowmer\n"
 argument_list|)
 expr_stmt|;
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
@@ -15040,7 +15908,7 @@ argument_list|)
 expr_stmt|;
 block|}
 specifier|private
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|AssertQuery
 name|predicate
@@ -15050,14 +15918,14 @@ name|foo
 parameter_list|)
 block|{
 return|return
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -15084,14 +15952,14 @@ name|void
 name|testExistsCorrelated
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -15124,14 +15992,14 @@ name|void
 name|testNotExistsCorrelated
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -15161,14 +16029,14 @@ name|void
 name|testJoinInCorrelatedSubquery
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -15229,7 +16097,7 @@ name|not
 argument_list|(
 name|containsString
 argument_list|(
-literal|"CorrelatorRel"
+literal|"Correlator"
 argument_list|)
 argument_list|)
 argument_list|)
@@ -15250,14 +16118,14 @@ name|void
 name|testScalarSubQuery
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -15294,14 +16162,14 @@ name|void
 name|testLeftJoin
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -15336,14 +16204,14 @@ name|void
 name|testFullJoin
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -15382,14 +16250,14 @@ name|void
 name|testRightJoin
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -15474,14 +16342,14 @@ comment|// insert into dept values (10, 'Sales');
 comment|// insert into dept values (20, 'Marketing');
 comment|// insert into dept values (30, 'Engineering');
 comment|// insert into dept values (40, 'Empty');
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -15868,14 +16736,14 @@ argument_list|)
 condition|)
 block|{
 return|return
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -15897,14 +16765,14 @@ argument_list|)
 condition|)
 block|{
 return|return
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -15926,14 +16794,14 @@ argument_list|)
 condition|)
 block|{
 return|return
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -15960,7 +16828,7 @@ argument_list|)
 condition|)
 block|{
 return|return
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
@@ -16041,14 +16909,14 @@ name|void
 name|testScalarSubQueryUncorrelated
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -16085,14 +16953,14 @@ name|void
 name|testScalarSubQueryInCase
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -16137,14 +17005,14 @@ name|void
 name|testScalarSubQueryInCase2
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -16188,14 +17056,14 @@ name|void
 name|testMetaTables
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -16209,7 +17077,7 @@ argument_list|)
 operator|.
 name|returns
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|checkResultContains
 argument_list|(
@@ -16217,14 +17085,14 @@ literal|"tableSchem=metadata; tableName=COLUMNS; tableType=SYSTEM_TABLE; "
 argument_list|)
 argument_list|)
 expr_stmt|;
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -16254,14 +17122,14 @@ parameter_list|()
 throws|throws
 name|Exception
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -16273,7 +17141,7 @@ argument_list|(
 operator|new
 name|Function
 argument_list|<
-name|OptiqConnection
+name|CalciteConnection
 argument_list|,
 name|Object
 argument_list|>
@@ -16283,7 +17151,7 @@ specifier|public
 name|Object
 name|apply
 parameter_list|(
-name|OptiqConnection
+name|CalciteConnection
 name|a0
 parameter_list|)
 block|{
@@ -16426,14 +17294,14 @@ parameter_list|()
 throws|throws
 name|Exception
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -16445,7 +17313,7 @@ argument_list|(
 operator|new
 name|Function
 argument_list|<
-name|OptiqConnection
+name|CalciteConnection
 argument_list|,
 name|Object
 argument_list|>
@@ -16455,7 +17323,7 @@ specifier|public
 name|Object
 name|apply
 parameter_list|(
-name|OptiqConnection
+name|CalciteConnection
 name|connection
 parameter_list|)
 block|{
@@ -16469,7 +17337,9 @@ name|connection
 operator|.
 name|prepareStatement
 argument_list|(
-literal|"select \"deptno\", \"name\" from \"hr\".\"emps\"\n"
+literal|"select \"deptno\", \"name\" "
+operator|+
+literal|"from \"hr\".\"emps\"\n"
 operator|+
 literal|"where \"deptno\"< ? and \"name\" like ?"
 argument_list|)
@@ -16525,7 +17395,7 @@ literal|"deptno=10; name=Sebastian\n"
 operator|+
 literal|"deptno=10; name=Theodore\n"
 argument_list|,
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|toString
 argument_list|(
@@ -16554,7 +17424,7 @@ name|assertEquals
 argument_list|(
 literal|"deptno=10; name=Theodore\n"
 argument_list|,
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|toString
 argument_list|(
@@ -16603,7 +17473,7 @@ name|void
 name|testModel
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
@@ -16658,7 +17528,7 @@ argument_list|)
 argument_list|)
 argument_list|)
 expr_stmt|;
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
@@ -16692,7 +17562,7 @@ name|void
 name|testModelWithMaterializedView
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
@@ -16717,7 +17587,7 @@ argument_list|(
 literal|"C=86837\n"
 argument_list|)
 expr_stmt|;
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
@@ -16763,7 +17633,7 @@ name|void
 name|testModelCustomTable
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
@@ -16819,6 +17689,8 @@ argument_list|)
 operator|.
 name|returns
 argument_list|(
+literal|""
+operator|+
 literal|"empid=100; deptno=10; name=Bill; salary=10000.0; commission=1000\n"
 operator|+
 literal|"empid=150; deptno=10; name=Sebastian; salary=7000.0; commission=null\n"
@@ -16835,7 +17707,7 @@ name|void
 name|testModelCustomTable2
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
@@ -16914,12 +17786,12 @@ throws|throws
 name|Exception
 block|{
 specifier|final
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|AssertThat
 name|that
 init|=
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
@@ -16974,7 +17846,7 @@ argument_list|(
 operator|new
 name|Function
 argument_list|<
-name|OptiqConnection
+name|CalciteConnection
 argument_list|,
 name|Object
 argument_list|>
@@ -16984,7 +17856,7 @@ specifier|public
 name|Object
 name|apply
 parameter_list|(
-name|OptiqConnection
+name|CalciteConnection
 name|connection
 parameter_list|)
 block|{
@@ -17031,6 +17903,8 @@ argument_list|)
 operator|.
 name|returns
 argument_list|(
+literal|""
+operator|+
 literal|"empid=100; deptno=10; name=Bill; salary=10000.0; commission=1000\n"
 operator|+
 literal|"empid=150; deptno=10; name=Sebastian; salary=7000.0; commission=null\n"
@@ -17062,12 +17936,12 @@ throws|throws
 name|Exception
 block|{
 specifier|final
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|AssertThat
 name|that
 init|=
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
@@ -17143,7 +18017,7 @@ argument_list|)
 expr_stmt|;
 block|}
 specifier|private
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|AssertThat
 name|modelWithView
@@ -17164,7 +18038,7 @@ operator|.
 name|class
 decl_stmt|;
 return|return
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
@@ -17237,7 +18111,7 @@ throws|throws
 name|Exception
 block|{
 specifier|final
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|AssertThat
 name|with
@@ -17256,6 +18130,8 @@ argument_list|)
 operator|.
 name|returns
 argument_list|(
+literal|""
+operator|+
 literal|"empid=110; deptno=10; name=Theodore; salary=11500.0; commission=250\n"
 operator|+
 literal|"empid=150; deptno=10; name=Sebastian; salary=7000.0; commission=null\n"
@@ -17271,7 +18147,7 @@ argument_list|(
 operator|new
 name|Function
 argument_list|<
-name|OptiqConnection
+name|CalciteConnection
 argument_list|,
 name|Void
 argument_list|>
@@ -17281,7 +18157,7 @@ specifier|public
 name|Void
 name|apply
 parameter_list|(
-name|OptiqConnection
+name|CalciteConnection
 name|a0
 parameter_list|)
 block|{
@@ -17303,7 +18179,7 @@ literal|"TABLE_CAT=null; TABLE_SCHEM=adhoc; TABLE_NAME=EMPLOYEES; TABLE_TYPE=TAB
 operator|+
 literal|"TABLE_CAT=null; TABLE_SCHEM=adhoc; TABLE_NAME=V; TABLE_TYPE=VIEW; REMARKS=null; TYPE_CAT=null; TYPE_SCHEM=null; TYPE_NAME=null; SELF_REFERENCING_COL_NAME=null; REF_GENERATION=null\n"
 argument_list|,
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|toString
 argument_list|(
@@ -17327,7 +18203,7 @@ name|assertEquals
 argument_list|(
 literal|"TABLE_CAT=null; TABLE_SCHEM=adhoc; TABLE_NAME=V; TABLE_TYPE=VIEW; REMARKS=null; TYPE_CAT=null; TYPE_SCHEM=null; TYPE_NAME=null; SELF_REFERENCING_COL_NAME=null; REF_GENERATION=null\n"
 argument_list|,
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|toString
 argument_list|(
@@ -17371,7 +18247,7 @@ literal|"TABLE_CAT=null; TABLE_SCHEM=adhoc; TABLE_NAME=V; COLUMN_NAME=salary; DA
 operator|+
 literal|"TABLE_CAT=null; TABLE_SCHEM=adhoc; TABLE_NAME=V; COLUMN_NAME=commission; DATA_TYPE=4; TYPE_NAME=JavaType(class java.lang.Integer); COLUMN_SIZE=-1; BUFFER_LENGTH=null; DECIMAL_DIGITS=null; NUM_PREC_RADIX=10; NULLABLE=1; REMARKS=null; COLUMN_DEF=null; SQL_DATA_TYPE=null; SQL_DATETIME_SUB=null; CHAR_OCTET_LENGTH=-1; ORDINAL_POSITION=5; IS_NULLABLE=YES; SCOPE_CATALOG=null; SCOPE_TABLE=null; SOURCE_DATA_TYPE=null; IS_AUTOINCREMENT=null; IS_GENERATEDCOLUMN=null\n"
 argument_list|,
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|toString
 argument_list|(
@@ -17395,7 +18271,7 @@ name|assertEquals
 argument_list|(
 literal|"TABLE_CATALOG=null\n"
 argument_list|,
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|toString
 argument_list|(
@@ -17413,7 +18289,7 @@ literal|"TABLE_SCHEM=adhoc; TABLE_CATALOG=null\n"
 operator|+
 literal|"TABLE_SCHEM=metadata; TABLE_CATALOG=null\n"
 argument_list|,
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|toString
 argument_list|(
@@ -17429,7 +18305,7 @@ name|assertEquals
 argument_list|(
 literal|"TABLE_SCHEM=adhoc; TABLE_CATALOG=null\n"
 argument_list|,
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|toString
 argument_list|(
@@ -17451,7 +18327,7 @@ literal|"TABLE_TYPE=TABLE\n"
 operator|+
 literal|"TABLE_TYPE=VIEW\n"
 argument_list|,
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|toString
 argument_list|(
@@ -17496,7 +18372,7 @@ throws|throws
 name|Exception
 block|{
 specifier|final
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|AssertThat
 name|with
@@ -17545,7 +18421,7 @@ literal|"name=Theodore\n"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Tests saving query results into temporary tables, per    * {@link net.hydromatic.avatica.Handler.ResultSink}. */
+comment|/** Tests saving query results into temporary tables, per    * {@link org.apache.calcite.avatica.Handler.ResultSink}. */
 annotation|@
 name|Test
 specifier|public
@@ -17569,7 +18445,7 @@ name|Object
 argument_list|>
 argument_list|()
 decl_stmt|;
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
@@ -17577,23 +18453,23 @@ operator|.
 name|with
 argument_list|(
 operator|new
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|ConnectionFactory
 argument_list|()
 block|{
 specifier|public
-name|OptiqConnection
+name|CalciteConnection
 name|createConnection
 parameter_list|()
 throws|throws
 name|Exception
 block|{
-name|OptiqConnection
+name|CalciteConnection
 name|connection
 init|=
 operator|(
-name|OptiqConnection
+name|CalciteConnection
 operator|)
 operator|new
 name|AutoTempDriver
@@ -17653,7 +18529,7 @@ argument_list|(
 operator|new
 name|Function
 argument_list|<
-name|OptiqConnection
+name|CalciteConnection
 argument_list|,
 name|Object
 argument_list|>
@@ -17663,7 +18539,7 @@ specifier|public
 name|Object
 name|apply
 parameter_list|(
-name|OptiqConnection
+name|CalciteConnection
 name|a0
 parameter_list|)
 block|{
@@ -17715,14 +18591,14 @@ argument_list|)
 expr_stmt|;
 block|}
 specifier|private
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|AssertThat
 name|withUdf
 parameter_list|()
 block|{
 return|return
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
@@ -17929,7 +18805,7 @@ throws|throws
 name|Exception
 block|{
 specifier|final
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|AssertThat
 name|with
@@ -17983,7 +18859,7 @@ name|testNotNullImplementor
 parameter_list|()
 block|{
 specifier|final
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|AssertThat
 name|with
@@ -18109,7 +18985,7 @@ name|testUdfDerivedReturnType
 parameter_list|()
 block|{
 specifier|final
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|AssertThat
 name|with
@@ -18133,7 +19009,9 @@ name|with
 operator|.
 name|query
 argument_list|(
-literal|"select max(\"adhoc\".my_str(\"name\")) as p from \"adhoc\".EMPLOYEES\n"
+literal|"select max(\"adhoc\".my_str(\"name\")) as p\n"
+operator|+
+literal|"from \"adhoc\".EMPLOYEES\n"
 operator|+
 literal|"where \"adhoc\".my_str(\"name\") is null"
 argument_list|)
@@ -18153,7 +19031,7 @@ name|testUdfOverloaded
 parameter_list|()
 block|{
 specifier|final
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|AssertThat
 name|with
@@ -18196,7 +19074,7 @@ literal|"P0=0; P1=1; P2=2\n"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test for    * {@link org.eigenbase.resource.EigenbaseNewResource#requireDefaultConstructor(String)}. */
+comment|/** Test for    * {@link org.apache.calcite.runtime.CalciteResource#requireDefaultConstructor(String)}. */
 annotation|@
 name|Test
 specifier|public
@@ -18215,7 +19093,7 @@ argument_list|)
 operator|.
 name|connectThrows
 argument_list|(
-literal|"Declaring class 'net.hydromatic.optiq.test.JdbcTest$AwkwardFunction' of non-static user-defined function must have a public constructor with zero parameters"
+literal|"Declaring class 'org.apache.calcite.test.JdbcTest$AwkwardFunction' of non-static user-defined function must have a public constructor with zero parameters"
 argument_list|)
 expr_stmt|;
 block|}
@@ -18231,7 +19109,7 @@ name|Exception
 block|{
 comment|// java.lang.Math has abs(int) and abs(double).
 specifier|final
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|AssertThat
 name|with
@@ -18370,12 +19248,12 @@ name|getName
 argument_list|()
 decl_stmt|;
 specifier|final
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|AssertThat
 name|with
 init|=
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
@@ -18562,7 +19440,7 @@ literal|"deptno=10; P=30"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test for    * {@link org.eigenbase.resource.EigenbaseNewResource#firstParameterOfAdd(String)}. */
+comment|/** Test for    * {@link org.apache.calcite.runtime.CalciteResource#firstParameterOfAdd(String)}. */
 annotation|@
 name|Test
 specifier|public
@@ -18581,13 +19459,13 @@ argument_list|)
 operator|.
 name|connectThrows
 argument_list|(
-literal|"Caused by: java.lang.RuntimeException: In user-defined aggregate class 'net.hydromatic.optiq.test.JdbcTest$SumFunctionBadIAdd', first parameter to 'add' method must be the accumulator (the return type of the 'init' method)"
+literal|"Caused by: java.lang.RuntimeException: In user-defined aggregate class 'org.apache.calcite.test.JdbcTest$SumFunctionBadIAdd', first parameter to 'add' method must be the accumulator (the return type of the 'init' method)"
 argument_list|)
 expr_stmt|;
 block|}
 specifier|private
 specifier|static
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|AssertThat
 name|withBadUdf
@@ -18617,7 +19495,7 @@ name|getName
 argument_list|()
 decl_stmt|;
 return|return
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
@@ -18705,12 +19583,12 @@ name|getName
 argument_list|()
 decl_stmt|;
 specifier|final
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|AssertThat
 name|with
 init|=
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
@@ -18811,7 +19689,7 @@ decl_stmt|;
 comment|// adhoc can see own function MY_PLUS but not adhoc2.MY_PLUS2 unless
 comment|// qualified
 specifier|final
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|AssertThat
 name|adhoc
@@ -18874,7 +19752,7 @@ expr_stmt|;
 comment|// adhoc2 can see own function MY_PLUS2 but not adhoc2.MY_PLUS unless
 comment|// qualified
 specifier|final
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|AssertThat
 name|adhoc2
@@ -18925,7 +19803,7 @@ expr_stmt|;
 comment|// adhoc3 can see own adhoc2.MY_PLUS2 because in path, with or without
 comment|// qualification, but can only see adhoc.MY_PLUS with qualification
 specifier|final
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|AssertThat
 name|adhoc3
@@ -18982,19 +19860,19 @@ name|testExplain
 parameter_list|()
 block|{
 specifier|final
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|AssertThat
 name|with
 init|=
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -19010,7 +19888,7 @@ argument_list|)
 operator|.
 name|returns
 argument_list|(
-literal|"PLAN=EnumerableValuesRel(tuples=[[{ 1, 'ab' }]])\n\n"
+literal|"PLAN=EnumerableValues(tuples=[[{ 1, 'ab' }]])\n\n"
 argument_list|)
 expr_stmt|;
 name|with
@@ -19022,7 +19900,7 @@ argument_list|)
 operator|.
 name|returns
 argument_list|(
-literal|"PLAN=EnumerableValuesRel(tuples=[[{ 1, 'ab' }]])\n\n"
+literal|"PLAN=EnumerableValues(tuples=[[{ 1, 'ab' }]])\n\n"
 argument_list|)
 expr_stmt|;
 name|with
@@ -19034,7 +19912,7 @@ argument_list|)
 operator|.
 name|returns
 argument_list|(
-literal|"PLAN=ValuesRel(tuples=[[{ 1, 'ab' }]])\n\n"
+literal|"PLAN=LogicalValues(tuples=[[{ 1, 'ab' }]])\n\n"
 argument_list|)
 expr_stmt|;
 name|with
@@ -19062,13 +19940,6 @@ parameter_list|()
 throws|throws
 name|Exception
 block|{
-name|Class
-operator|.
-name|forName
-argument_list|(
-literal|"net.hydromatic.optiq.jdbc.Driver"
-argument_list|)
-expr_stmt|;
 name|Connection
 name|connection
 init|=
@@ -19079,14 +19950,14 @@ argument_list|(
 literal|"jdbc:calcite:"
 argument_list|)
 decl_stmt|;
-name|OptiqConnection
-name|optiqConnection
+name|CalciteConnection
+name|calciteConnection
 init|=
 name|connection
 operator|.
 name|unwrap
 argument_list|(
-name|OptiqConnection
+name|CalciteConnection
 operator|.
 name|class
 argument_list|)
@@ -19095,7 +19966,7 @@ specifier|final
 name|SchemaPlus
 name|rootSchema
 init|=
-name|optiqConnection
+name|calciteConnection
 operator|.
 name|getRootSchema
 argument_list|()
@@ -19118,7 +19989,7 @@ expr_stmt|;
 name|Statement
 name|statement
 init|=
-name|optiqConnection
+name|calciteConnection
 operator|.
 name|createStatement
 argument_list|()
@@ -19137,7 +20008,7 @@ name|assertEquals
 argument_list|(
 literal|"myvalue=2\n"
 argument_list|,
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|toString
 argument_list|(
@@ -19171,7 +20042,7 @@ parameter_list|()
 throws|throws
 name|Exception
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
@@ -19193,7 +20064,7 @@ argument_list|(
 operator|new
 name|Function
 argument_list|<
-name|OptiqConnection
+name|CalciteConnection
 argument_list|,
 name|Void
 argument_list|>
@@ -19203,7 +20074,7 @@ specifier|public
 name|Void
 name|apply
 parameter_list|(
-name|OptiqConnection
+name|CalciteConnection
 name|connection
 parameter_list|)
 block|{
@@ -19372,7 +20243,7 @@ parameter_list|()
 throws|throws
 name|Exception
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
@@ -19394,7 +20265,7 @@ argument_list|(
 operator|new
 name|Function
 argument_list|<
-name|OptiqConnection
+name|CalciteConnection
 argument_list|,
 name|Void
 argument_list|>
@@ -19404,7 +20275,7 @@ specifier|public
 name|Void
 name|apply
 parameter_list|(
-name|OptiqConnection
+name|CalciteConnection
 name|connection
 parameter_list|)
 block|{
@@ -20378,14 +21249,14 @@ parameter_list|()
 throws|throws
 name|Exception
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -20397,7 +21268,7 @@ argument_list|(
 operator|new
 name|Function
 argument_list|<
-name|OptiqConnection
+name|CalciteConnection
 argument_list|,
 name|Object
 argument_list|>
@@ -20407,7 +21278,7 @@ specifier|public
 name|Object
 name|apply
 parameter_list|(
-name|OptiqConnection
+name|CalciteConnection
 name|conn
 parameter_list|)
 block|{
@@ -20497,14 +21368,14 @@ parameter_list|()
 throws|throws
 name|Exception
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -20531,14 +21402,14 @@ parameter_list|()
 throws|throws
 name|Exception
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -20550,7 +21421,7 @@ argument_list|(
 operator|new
 name|Function
 argument_list|<
-name|OptiqConnection
+name|CalciteConnection
 argument_list|,
 name|Object
 argument_list|>
@@ -20560,7 +21431,7 @@ specifier|public
 name|Object
 name|apply
 parameter_list|(
-name|OptiqConnection
+name|CalciteConnection
 name|conn
 parameter_list|)
 block|{
@@ -20649,19 +21520,19 @@ parameter_list|()
 throws|throws
 name|Exception
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|AssertThat
 name|with
 init|=
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -20772,7 +21643,7 @@ parameter_list|()
 throws|throws
 name|Exception
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
@@ -20794,7 +21665,7 @@ argument_list|(
 operator|new
 name|Function
 argument_list|<
-name|OptiqConnection
+name|CalciteConnection
 argument_list|,
 name|Void
 argument_list|>
@@ -20804,7 +21675,7 @@ specifier|public
 name|Void
 name|apply
 parameter_list|(
-name|OptiqConnection
+name|CalciteConnection
 name|connection
 parameter_list|)
 block|{
@@ -20968,7 +21839,7 @@ parameter_list|()
 throws|throws
 name|Exception
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
@@ -20990,7 +21861,7 @@ argument_list|(
 operator|new
 name|Function
 argument_list|<
-name|OptiqConnection
+name|CalciteConnection
 argument_list|,
 name|Void
 argument_list|>
@@ -21000,7 +21871,7 @@ specifier|public
 name|Void
 name|apply
 parameter_list|(
-name|OptiqConnection
+name|CalciteConnection
 name|connection
 parameter_list|)
 block|{
@@ -21164,7 +22035,7 @@ parameter_list|()
 throws|throws
 name|Exception
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
@@ -21186,7 +22057,7 @@ argument_list|(
 operator|new
 name|Function
 argument_list|<
-name|OptiqConnection
+name|CalciteConnection
 argument_list|,
 name|Void
 argument_list|>
@@ -21196,7 +22067,7 @@ specifier|public
 name|Void
 name|apply
 parameter_list|(
-name|OptiqConnection
+name|CalciteConnection
 name|connection
 parameter_list|)
 block|{
@@ -21363,7 +22234,7 @@ parameter_list|()
 throws|throws
 name|Exception
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
@@ -21385,7 +22256,7 @@ argument_list|(
 operator|new
 name|Function
 argument_list|<
-name|OptiqConnection
+name|CalciteConnection
 argument_list|,
 name|Void
 argument_list|>
@@ -21395,7 +22266,7 @@ specifier|public
 name|Void
 name|apply
 parameter_list|(
-name|OptiqConnection
+name|CalciteConnection
 name|connection
 parameter_list|)
 block|{
@@ -21559,7 +22430,7 @@ parameter_list|()
 throws|throws
 name|Exception
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
@@ -21620,7 +22491,7 @@ argument_list|(
 operator|new
 name|Function
 argument_list|<
-name|OptiqConnection
+name|CalciteConnection
 argument_list|,
 name|Void
 argument_list|>
@@ -21630,7 +22501,7 @@ specifier|public
 name|Void
 name|apply
 parameter_list|(
-name|OptiqConnection
+name|CalciteConnection
 name|connection
 parameter_list|)
 block|{
@@ -21793,12 +22664,12 @@ name|testLexCaseInsensitive
 parameter_list|()
 block|{
 specifier|final
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|AssertThat
 name|with
 init|=
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
@@ -21841,12 +22712,12 @@ argument_list|)
 expr_stmt|;
 comment|// case-sensitive gives error
 specifier|final
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|AssertThat
 name|with2
 init|=
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
@@ -22062,14 +22933,14 @@ block|{
 literal|null
 block|}
 decl_stmt|;
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -22129,7 +23000,7 @@ argument_list|)
 expr_stmt|;
 switch|switch
 condition|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|CONNECTION_SPEC
 condition|)
@@ -22174,14 +23045,14 @@ throws|throws
 name|Exception
 block|{
 specifier|final
-name|OptiqConnection
+name|CalciteConnection
 name|connection
 init|=
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|getConnection
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|SchemaSpec
 operator|.
@@ -22877,10 +23748,10 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 specifier|final
-name|OptiqSchema
-name|a2OptiqSchema
+name|CalciteSchema
+name|a2CalciteSchema
 init|=
-name|OptiqSchema
+name|CalciteSchema
 operator|.
 name|from
 argument_list|(
@@ -22889,7 +23760,7 @@ argument_list|)
 decl_stmt|;
 name|assertThat
 argument_list|(
-name|a2OptiqSchema
+name|a2CalciteSchema
 operator|.
 name|getTable
 argument_list|(
@@ -22904,7 +23775,7 @@ argument_list|)
 expr_stmt|;
 name|assertThat
 argument_list|(
-name|a2OptiqSchema
+name|a2CalciteSchema
 operator|.
 name|getTable
 argument_list|(
@@ -22919,7 +23790,7 @@ argument_list|)
 expr_stmt|;
 name|assertThat
 argument_list|(
-name|a2OptiqSchema
+name|a2CalciteSchema
 operator|.
 name|getTable
 argument_list|(
@@ -22934,7 +23805,7 @@ argument_list|)
 expr_stmt|;
 name|assertThat
 argument_list|(
-name|a2OptiqSchema
+name|a2CalciteSchema
 operator|.
 name|getTable
 argument_list|(
@@ -23773,6 +24644,7 @@ expr_stmt|;
 block|}
 block|}
 comment|//CHECKSTYLE: ON
+comment|/** Class with int and String fields. */
 specifier|public
 specifier|static
 class|class
@@ -23829,6 +24701,7 @@ literal|"}"
 return|;
 block|}
 block|}
+comment|/** Abstract base class for implementations of {@link ModifiableTable}. */
 specifier|public
 specifier|abstract
 specifier|static
@@ -23851,7 +24724,7 @@ argument_list|()
 expr_stmt|;
 block|}
 specifier|public
-name|TableModificationRelBase
+name|TableModify
 name|toModificationRel
 parameter_list|(
 name|RelOptCluster
@@ -23868,7 +24741,7 @@ parameter_list|,
 name|RelNode
 name|child
 parameter_list|,
-name|TableModificationRelBase
+name|TableModify
 operator|.
 name|Operation
 name|operation
@@ -23885,7 +24758,7 @@ parameter_list|)
 block|{
 return|return
 operator|new
-name|TableModificationRel
+name|LogicalTableModify
 argument_list|(
 name|cluster
 argument_list|,
@@ -23904,6 +24777,7 @@ argument_list|)
 return|;
 block|}
 block|}
+comment|/** Factory for EMP and DEPT tables. */
 specifier|public
 specifier|static
 class|class
@@ -24098,6 +24972,7 @@ block|}
 return|;
 block|}
 block|}
+comment|/** Schema factory that creates {@link MySchema} objects. */
 specifier|public
 specifier|static
 class|class
@@ -24253,11 +25128,11 @@ specifier|static
 class|class
 name|AutoTempDriver
 extends|extends
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
 name|jdbc
 operator|.
@@ -24342,11 +25217,11 @@ specifier|static
 class|class
 name|HandlerDriver
 extends|extends
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
 name|jdbc
 operator|.
@@ -24388,6 +25263,7 @@ argument_list|()
 return|;
 block|}
 block|}
+comment|/** Dummy table. */
 specifier|public
 specifier|static
 class|class
@@ -24406,6 +25282,7 @@ init|=
 literal|1
 decl_stmt|;
 block|}
+comment|/** Another dummy table. */
 specifier|public
 specifier|static
 class|class
@@ -24424,6 +25301,7 @@ init|=
 literal|2
 decl_stmt|;
 block|}
+comment|/** Schema containing dummy tables. */
 specifier|public
 specifier|static
 class|class
@@ -24871,6 +25749,7 @@ name|accumulator
 return|;
 block|}
 block|}
+comment|/** User-defined function. */
 specifier|public
 specifier|static
 class|class
@@ -24903,6 +25782,7 @@ name|v
 return|;
 block|}
 block|}
+comment|/** User-defined table-macro function. */
 specifier|public
 specifier|static
 class|class
@@ -24924,6 +25804,7 @@ argument_list|)
 return|;
 block|}
 block|}
+comment|/** User-defined table-macro function whose eval method is static. */
 specifier|public
 specifier|static
 class|class
@@ -25075,6 +25956,7 @@ block|}
 block|}
 return|;
 block|}
+comment|/** A table function that returns a {@link QueryableTable}. */
 specifier|public
 specifier|static
 class|class
@@ -25096,6 +25978,7 @@ argument_list|)
 return|;
 block|}
 block|}
+comment|/** A table function that returns a {@link QueryableTable} via a    * static method. */
 specifier|public
 specifier|static
 class|class

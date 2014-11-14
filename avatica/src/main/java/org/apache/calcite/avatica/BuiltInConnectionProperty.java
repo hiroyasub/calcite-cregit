@@ -5,9 +5,11 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
+operator|.
+name|calcite
 operator|.
 name|avatica
 package|;
@@ -45,15 +47,33 @@ end_import
 
 begin_import
 import|import static
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
+operator|.
+name|calcite
 operator|.
 name|avatica
 operator|.
 name|ConnectionConfigImpl
 operator|.
-name|*
+name|PropEnv
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|avatica
+operator|.
+name|ConnectionConfigImpl
+operator|.
+name|parse
 import|;
 end_import
 

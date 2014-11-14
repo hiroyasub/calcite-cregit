@@ -7,19 +7,27 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
+operator|.
+name|core
 package|;
 end_package
 
 begin_import
 import|import
-name|java
+name|org
 operator|.
-name|util
+name|apache
 operator|.
-name|*
+name|calcite
+operator|.
+name|rel
+operator|.
+name|RelNode
 import|;
 end_import
 
@@ -27,11 +35,15 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|reltype
+name|calcite
 operator|.
-name|*
+name|rel
+operator|.
+name|type
+operator|.
+name|RelDataType
 import|;
 end_import
 
@@ -39,11 +51,29 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|type
+operator|.
+name|RelDataTypeFactory
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
-name|*
+name|SqlAggFunction
 import|;
 end_import
 
@@ -51,7 +81,9 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
@@ -65,7 +97,9 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|util
 operator|.
@@ -89,8 +123,18 @@ name|ImmutableList
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
+import|;
+end_import
+
 begin_comment
-comment|/**  * Call to an aggregation function within an {@link AggregateRel}.  */
+comment|/**  * Call to an aggFunction function within an  * {@link org.apache.calcite.rel.logical.LogicalAggregate}.  */
 end_comment
 
 begin_class
@@ -101,8 +145,8 @@ block|{
 comment|//~ Instance fields --------------------------------------------------------
 specifier|private
 specifier|final
-name|Aggregation
-name|aggregation
+name|SqlAggFunction
+name|aggFunction
 decl_stmt|;
 specifier|private
 specifier|final
@@ -130,12 +174,12 @@ argument_list|>
 name|argList
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates an AggregateCall.    *    * @param aggregation Aggregation    * @param distinct    Whether distinct    * @param argList     List of ordinals of arguments    * @param type        Result type    * @param name        Name (may be null)    */
+comment|/**    * Creates an AggregateCall.    *    * @param aggFunction Aggregate function    * @param distinct    Whether distinct    * @param argList     List of ordinals of arguments    * @param type        Result type    * @param name        Name (may be null)    */
 specifier|public
 name|AggregateCall
 parameter_list|(
-name|Aggregation
-name|aggregation
+name|SqlAggFunction
+name|aggFunction
 parameter_list|,
 name|boolean
 name|distinct
@@ -166,7 +210,7 @@ operator|=
 name|name
 expr_stmt|;
 assert|assert
-name|aggregation
+name|aggFunction
 operator|!=
 literal|null
 assert|;
@@ -182,9 +226,9 @@ literal|null
 assert|;
 name|this
 operator|.
-name|aggregation
+name|aggFunction
 operator|=
-name|aggregation
+name|aggFunction
 expr_stmt|;
 name|this
 operator|.
@@ -275,13 +319,13 @@ name|argList
 argument_list|)
 decl_stmt|;
 specifier|final
-name|AggregateRelBase
+name|Aggregate
 operator|.
 name|AggCallBinding
 name|callBinding
 init|=
 operator|new
-name|AggregateRelBase
+name|Aggregate
 operator|.
 name|AggCallBinding
 argument_list|(
@@ -331,15 +375,15 @@ return|return
 name|distinct
 return|;
 block|}
-comment|/**    * Returns the Aggregation.    *    * @return aggregation    */
+comment|/**    * Returns the aggregate function.    *    * @return aggregate function    */
 specifier|public
 specifier|final
-name|Aggregation
+name|SqlAggFunction
 name|getAggregation
 parameter_list|()
 block|{
 return|return
-name|aggregation
+name|aggFunction
 return|;
 block|}
 comment|/**    * Returns the ordinals of the arguments to this call.    *    *<p>The list is immutable.    *    * @return list of argument ordinals    */
@@ -391,7 +435,7 @@ return|return
 operator|new
 name|AggregateCall
 argument_list|(
-name|aggregation
+name|aggFunction
 argument_list|,
 name|distinct
 argument_list|,
@@ -414,7 +458,7 @@ init|=
 operator|new
 name|StringBuilder
 argument_list|(
-name|aggregation
+name|aggFunction
 operator|.
 name|getName
 argument_list|()
@@ -542,13 +586,13 @@ operator|)
 name|o
 decl_stmt|;
 return|return
-name|aggregation
+name|aggFunction
 operator|.
 name|equals
 argument_list|(
 name|other
 operator|.
-name|aggregation
+name|aggFunction
 argument_list|)
 operator|&&
 operator|(
@@ -576,7 +620,7 @@ name|hashCode
 parameter_list|()
 block|{
 return|return
-name|aggregation
+name|aggFunction
 operator|.
 name|hashCode
 argument_list|()
@@ -587,14 +631,14 @@ name|hashCode
 argument_list|()
 return|;
 block|}
-comment|/**    * Creates a binding of this call in the context of an {@link AggregateRel},    * which can then be used to infer the return type.    */
+comment|/**    * Creates a binding of this call in the context of an    * {@link org.apache.calcite.rel.logical.LogicalAggregate},    * which can then be used to infer the return type.    */
 specifier|public
-name|AggregateRelBase
+name|Aggregate
 operator|.
 name|AggCallBinding
 name|createBinding
 parameter_list|(
-name|AggregateRelBase
+name|Aggregate
 name|aggregateRelBase
 parameter_list|)
 block|{
@@ -604,7 +648,7 @@ name|rowType
 init|=
 name|aggregateRelBase
 operator|.
-name|getChild
+name|getInput
 argument_list|()
 operator|.
 name|getRowType
@@ -612,7 +656,7 @@ argument_list|()
 decl_stmt|;
 return|return
 operator|new
-name|AggregateRelBase
+name|Aggregate
 operator|.
 name|AggCallBinding
 argument_list|(
@@ -627,7 +671,7 @@ argument_list|,
 operator|(
 name|SqlAggFunction
 operator|)
-name|aggregation
+name|aggFunction
 argument_list|,
 name|SqlTypeUtil
 operator|.
@@ -661,7 +705,7 @@ return|return
 operator|new
 name|AggregateCall
 argument_list|(
-name|aggregation
+name|aggFunction
 argument_list|,
 name|distinct
 argument_list|,
@@ -673,7 +717,7 @@ name|name
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates equivalent AggregateCall that is adapted to a new input types    * and/or number of columns in GROUP BY.    *    * @param input relation that will be used as a child of AggregateRel    * @param aggArgs argument indices of the new call in the input    * @param oldGroupKeyCount number of columns in GROUP BY of old AggregateRel    * @param newGroupKeyCount number of columns in GROUP BY of new AggregateRel    * @return AggregateCall that suits new inputs and GROUP BY columns    */
+comment|/**    * Creates equivalent AggregateCall that is adapted to a new input types    * and/or number of columns in GROUP BY.    *    * @param input relation that will be used as a child of aggregate    * @param aggArgs argument indices of the new call in the input    * @param oldGroupKeyCount number of columns in GROUP BY of old aggregate    * @param newGroupKeyCount number of columns in GROUP BY of new aggregate    * @return AggregateCall that suits new inputs and GROUP BY columns    */
 specifier|public
 name|AggregateCall
 name|adaptTo
@@ -701,7 +745,7 @@ init|=
 operator|(
 name|SqlAggFunction
 operator|)
-name|aggregation
+name|aggFunction
 decl_stmt|;
 comment|// The return type of aggregate call need to be recomputed.
 comment|// Since it might depend on the number of columns in GROUP BY.

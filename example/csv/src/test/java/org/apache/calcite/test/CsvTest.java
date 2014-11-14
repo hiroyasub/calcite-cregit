@@ -5,11 +5,11 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
 name|test
 package|;
@@ -17,9 +17,11 @@ end_package
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
+operator|.
+name|calcite
 operator|.
 name|linq4j
 operator|.
@@ -85,7 +87,57 @@ name|java
 operator|.
 name|sql
 operator|.
-name|*
+name|Connection
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|sql
+operator|.
+name|DriverManager
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|sql
+operator|.
+name|ResultSet
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|sql
+operator|.
+name|ResultSetMetaData
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|sql
+operator|.
+name|SQLException
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|sql
+operator|.
+name|Statement
 import|;
 end_import
 
@@ -130,7 +182,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Unit test of the Optiq adapter for CSV.  */
+comment|/**  * Unit test of the Calcite adapter for CSV.  */
 end_comment
 
 begin_class
@@ -322,7 +374,7 @@ literal|"       type: 'custom',\n"
 operator|+
 literal|"       name: 'bad',\n"
 operator|+
-literal|"       factory: 'net.hydromatic.optiq.impl.csv.CsvSchemaFactory',\n"
+literal|"       factory: 'org.apache.calcite.adapter.csv.CsvSchemaFactory',\n"
 operator|+
 literal|"       operand: {\n"
 operator|+
@@ -470,7 +522,7 @@ literal|"model"
 argument_list|,
 literal|"explain plan for select * from EMPS"
 argument_list|,
-literal|"PLAN=EnumerableTableAccessRel(table=[[SALES, EMPS]])\n"
+literal|"PLAN=EnumerableTableScan(table=[[SALES, EMPS]])\n"
 argument_list|)
 expr_stmt|;
 block|}

@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 package|;
@@ -15,11 +17,69 @@ end_package
 
 begin_import
 import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|parser
+operator|.
+name|SqlParserUtil
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|SaffronProperties
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|SerializableCharset
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|Util
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|io
 operator|.
-name|*
+name|Serializable
 import|;
 end_import
 
@@ -31,7 +91,7 @@ name|nio
 operator|.
 name|charset
 operator|.
-name|*
+name|Charset
 import|;
 end_import
 
@@ -41,45 +101,7 @@ name|java
 operator|.
 name|util
 operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
-name|resource
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
-name|sql
-operator|.
-name|parser
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
-name|util
-operator|.
-name|*
+name|Locale
 import|;
 end_import
 
@@ -87,7 +109,9 @@ begin_import
 import|import static
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|util
 operator|.
@@ -382,7 +406,7 @@ name|col2
 argument_list|)
 return|;
 block|}
-comment|/**    * Returns the collating sequence (the collation name) and the coercibility    * for the resulting value of a dyadic operator.    *    * @param col1 first operand for the dyadic operation    * @param col2 second operand for the dyadic operation    * @return the resulting collation sequence    * @throws EigenbaseException {@link EigenbaseNewResource#invalidCompare} or    *                            {@link EigenbaseNewResource#differentCollations}    *                            if no collating sequence can be deduced    *    * @sql.99 Part 2 Section 4.2.3 Table 2    */
+comment|/**    * Returns the collating sequence (the collation name) and the coercibility    * for the resulting value of a dyadic operator.    *    * @param col1 first operand for the dyadic operation    * @param col2 second operand for the dyadic operation    * @return the resulting collation sequence    *    * @throws org.apache.calcite.runtime.CalciteException    *   {@link org.apache.calcite.runtime.CalciteResource#invalidCompare} or    *   {@link org.apache.calcite.runtime.CalciteResource#differentCollations}    *   if no collating sequence can be deduced    *    * @sql.99 Part 2 Section 4.2.3 Table 2    */
 specifier|public
 specifier|static
 name|SqlCollation
@@ -446,7 +470,7 @@ return|return
 name|ret
 return|;
 block|}
-comment|/**    * Returns the collating sequence (the collation name) to use for the    * resulting value of a comparison.    *    * @param col1 first operand for the dyadic operation    * @param col2 second operand for the dyadic operation    * @return the resulting collation sequence. If no collating sequence could    * be deduced a {@link EigenbaseNewResource#invalidCompare} is thrown    *    * @sql.99 Part 2 Section 4.2.3 Table 3    */
+comment|/**    * Returns the collating sequence (the collation name) to use for the    * resulting value of a comparison.    *    * @param col1 first operand for the dyadic operation    * @param col2 second operand for the dyadic operation    *    * @return the resulting collation sequence. If no collating    * sequence could be deduced throws a    * {@link org.apache.calcite.runtime.CalciteResource#invalidCompare}    *    * @sql.99 Part 2 Section 4.2.3 Table 3    */
 specifier|public
 specifier|static
 name|String

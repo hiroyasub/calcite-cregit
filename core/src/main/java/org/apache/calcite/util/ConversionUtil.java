@@ -7,9 +7,11 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|util14
+name|calcite
+operator|.
+name|util
 package|;
 end_package
 
@@ -19,7 +21,7 @@ name|java
 operator|.
 name|nio
 operator|.
-name|*
+name|ByteOrder
 import|;
 end_import
 
@@ -29,7 +31,7 @@ name|java
 operator|.
 name|text
 operator|.
-name|*
+name|NumberFormat
 import|;
 end_import
 
@@ -37,7 +39,9 @@ begin_import
 import|import static
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|util
 operator|.
@@ -214,7 +218,7 @@ name|toUpperCase
 argument_list|()
 return|;
 block|}
-comment|/**    * Converts a string into a byte array. The inverse of {@link    * #toStringFromByteArray(byte[], int)}.    */
+comment|/**    * Converts a string into a byte array. The inverse of    * {@link #toStringFromByteArray(byte[], int)}.    */
 specifier|public
 specifier|static
 name|byte

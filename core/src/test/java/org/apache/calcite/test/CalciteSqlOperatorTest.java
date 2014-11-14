@@ -5,11 +5,11 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
 name|test
 package|;
@@ -17,15 +17,15 @@ end_package
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
 name|jdbc
 operator|.
-name|OptiqConnection
+name|CalciteConnection
 import|;
 end_import
 
@@ -33,7 +33,9 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
@@ -47,7 +49,9 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
@@ -58,13 +62,13 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Embodiment of {@link org.eigenbase.sql.test.SqlOperatorBaseTest}  * that generates SQL statements and executes them using Calcite.  */
+comment|/**  * Embodiment of {@link org.apache.calcite.sql.test.SqlOperatorBaseTest}  * that generates SQL statements and executes them using Calcite.  */
 end_comment
 
 begin_class
 specifier|public
 class|class
-name|OptiqSqlOperatorTest
+name|CalciteSqlOperatorTest
 extends|extends
 name|SqlOperatorBaseTest
 block|{
@@ -73,28 +77,28 @@ specifier|static
 specifier|final
 name|ThreadLocal
 argument_list|<
-name|OptiqConnection
+name|CalciteConnection
 argument_list|>
 name|LOCAL
 init|=
 operator|new
 name|ThreadLocal
 argument_list|<
-name|OptiqConnection
+name|CalciteConnection
 argument_list|>
 argument_list|()
 block|{
 annotation|@
 name|Override
 specifier|protected
-name|OptiqConnection
+name|CalciteConnection
 name|initialValue
 parameter_list|()
 block|{
 try|try
 block|{
 return|return
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|getConnection
 argument_list|(
@@ -136,7 +140,7 @@ argument_list|)
 return|;
 block|}
 specifier|public
-name|OptiqSqlOperatorTest
+name|CalciteSqlOperatorTest
 parameter_list|()
 block|{
 name|super
@@ -152,7 +156,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End OptiqSqlOperatorTest.java
+comment|// End CalciteSqlOperatorTest.java
 end_comment
 
 end_unit

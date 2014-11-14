@@ -7,9 +7,13 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|reltype
+name|calcite
+operator|.
+name|rel
+operator|.
+name|type
 package|;
 end_package
 
@@ -17,7 +21,9 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
@@ -28,7 +34,7 @@ import|;
 end_import
 
 begin_comment
-comment|/** Default implementation of {@link org.eigenbase.reltype.RelDataTypeSystem},  * providing parameters from the SQL standard.  *  *<p>To implement other type systems, create a derived class and override  * values as needed.  *  *<table border='1'>  *<caption>Parameter values</caption>  *<tr><th>Parameter</th><th>Value</th></tr>  *<tr><td>MAX_NUMERIC_SCALE</td><td>19</td></tr>  *</table>  */
+comment|/** Default implementation of  * {@link org.apache.calcite.rel.type.RelDataTypeSystem},  * providing parameters from the SQL standard.  *  *<p>To implement other type systems, create a derived class and override  * values as needed.  *  *<table border='1'>  *<caption>Parameter values</caption>  *<tr><th>Parameter</th><th>Value</th></tr>  *<tr><td>MAX_NUMERIC_SCALE</td><td>19</td></tr>  *</table>  */
 end_comment
 
 begin_class

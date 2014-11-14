@@ -7,9 +7,11 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|relopt
+name|calcite
+operator|.
+name|plan
 package|;
 end_package
 
@@ -17,27 +19,61 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|rel
+name|calcite
 operator|.
-name|*
+name|adapter
+operator|.
+name|jdbc
+operator|.
+name|JdbcRules
 import|;
 end_import
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
-name|impl
+name|rel
 operator|.
-name|jdbc
+name|AbstractRelNode
+import|;
+end_import
+
+begin_import
+import|import
+name|org
 operator|.
-name|JdbcRules
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|externalize
+operator|.
+name|RelJson
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|logical
+operator|.
+name|LogicalProject
 import|;
 end_import
 
@@ -59,7 +95,31 @@ name|hamcrest
 operator|.
 name|CoreMatchers
 operator|.
-name|*
+name|equalTo
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|hamcrest
+operator|.
+name|CoreMatchers
+operator|.
+name|is
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|hamcrest
+operator|.
+name|CoreMatchers
+operator|.
+name|sameInstance
 import|;
 end_import
 
@@ -71,12 +131,24 @@ name|junit
 operator|.
 name|Assert
 operator|.
-name|*
+name|assertThat
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|fail
 import|;
 end_import
 
 begin_comment
-comment|/**  * Unit test for {@link org.eigenbase.rel.RelJson}.  */
+comment|/**  * Unit test for {@link org.apache.calcite.rel.externalize.RelJson}.  */
 end_comment
 
 begin_class
@@ -100,21 +172,21 @@ argument_list|(
 literal|null
 argument_list|)
 decl_stmt|;
-comment|// in org.eigenbase.rel package
+comment|// in org.apache.calcite.rel package
 name|assertThat
 argument_list|(
 name|relJson
 operator|.
 name|classToTypeName
 argument_list|(
-name|ProjectRel
+name|LogicalProject
 operator|.
 name|class
 argument_list|)
 argument_list|,
 name|is
 argument_list|(
-literal|"ProjectRel"
+literal|"LogicalProject"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -124,7 +196,7 @@ name|relJson
 operator|.
 name|typeNameToClass
 argument_list|(
-literal|"ProjectRel"
+literal|"LogicalProject"
 argument_list|)
 argument_list|,
 name|sameInstance
@@ -132,13 +204,13 @@ argument_list|(
 operator|(
 name|Class
 operator|)
-name|ProjectRel
+name|LogicalProject
 operator|.
 name|class
 argument_list|)
 argument_list|)
 expr_stmt|;
-comment|// in net.hydromatic.optiq.impl.jdbc.JdbcRules outer class
+comment|// in org.apache.calcite.adapter.jdbc.JdbcRules outer class
 name|assertThat
 argument_list|(
 name|relJson
@@ -147,7 +219,7 @@ name|classToTypeName
 argument_list|(
 name|JdbcRules
 operator|.
-name|JdbcProjectRel
+name|JdbcProject
 operator|.
 name|class
 argument_list|)
@@ -174,7 +246,7 @@ name|Class
 operator|)
 name|JdbcRules
 operator|.
-name|JdbcProjectRel
+name|JdbcProject
 operator|.
 name|class
 argument_list|)
@@ -229,7 +301,7 @@ name|relJson
 operator|.
 name|typeNameToClass
 argument_list|(
-literal|"org.eigenbase.rel.NonExistentRel"
+literal|"org.apache.calcite.rel.NonExistentRel"
 argument_list|)
 decl_stmt|;
 name|fail
@@ -255,7 +327,7 @@ argument_list|()
 argument_list|,
 name|is
 argument_list|(
-literal|"unknown type org.eigenbase.rel.NonExistentRel"
+literal|"unknown type org.apache.calcite.rel.NonExistentRel"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -274,7 +346,7 @@ argument_list|)
 argument_list|,
 name|is
 argument_list|(
-literal|"org.eigenbase.relopt.RelOptPlanReaderTest$MyRel"
+literal|"org.apache.calcite.plan.RelOptPlanReaderTest$MyRel"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -344,12 +416,13 @@ argument_list|()
 argument_list|,
 name|is
 argument_list|(
-literal|"unknown type org.eigenbase.relopt.RelOptPlanReaderTest.MyRel"
+literal|"unknown type org.apache.calcite.plan.RelOptPlanReaderTest.MyRel"
 argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
 block|}
+comment|/** Dummy relational expression. */
 specifier|public
 specifier|static
 class|class

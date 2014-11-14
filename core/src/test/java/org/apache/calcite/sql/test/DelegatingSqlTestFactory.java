@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
@@ -19,7 +21,9 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
@@ -31,7 +35,9 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
@@ -45,7 +51,9 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
@@ -59,7 +67,9 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
@@ -73,7 +83,9 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
@@ -84,7 +96,7 @@ import|;
 end_import
 
 begin_comment
-comment|/** * Implementation of {@link SqlTestFactory} that delegates  * everything to an underlying factory.  *  *<p>Generally a chain starts with a  * {@link org.eigenbase.sql.test.DefaultSqlTestFactory}, and continues with a  * succession of objects that derive from {@code DelegatingSqlTestFactory}  * and override one method.</p>  *  *<p>Methods such as {@link org.eigenbase.sql.test.SqlTester#withConformance}  * help create such chains.</p> */
+comment|/** * Implementation of {@link SqlTestFactory} that delegates  * everything to an underlying factory.  *  *<p>Generally a chain starts with a  * {@link org.apache.calcite.sql.test.DefaultSqlTestFactory}, and continues with  * a succession of objects that derive from {@code DelegatingSqlTestFactory} and  * override one method.</p>  *  *<p>Methods such as  * {@link org.apache.calcite.sql.test.SqlTester#withConformance} help create  * such chains.</p> */
 end_comment
 
 begin_class

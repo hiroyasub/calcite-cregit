@@ -5,11 +5,11 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
 name|test
 package|;
@@ -31,12 +31,12 @@ name|java
 operator|.
 name|sql
 operator|.
-name|*
+name|SQLException
 import|;
 end_import
 
 begin_comment
-comment|/**  * Tests for using Calcite with Spark as an internal engine, as implemented by  * the {@link net.hydromatic.optiq.impl.spark} package.  */
+comment|/**  * Tests for using Calcite with Spark as an internal engine, as implemented by  * the {@link org.apache.calcite.adapter.spark} package.  */
 end_comment
 
 begin_class
@@ -54,14 +54,14 @@ parameter_list|()
 throws|throws
 name|SQLException
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -86,7 +86,7 @@ name|explainContains
 argument_list|(
 literal|"SparkToEnumerableConverter\n"
 operator|+
-literal|"  SparkValuesRel(tuples=[[{ 1, 'a' }, { 2, 'b' }]])"
+literal|"  SparkValues(tuples=[[{ 1, 'a' }, { 2, 'b' }]])"
 argument_list|)
 expr_stmt|;
 block|}
@@ -100,14 +100,14 @@ parameter_list|()
 throws|throws
 name|SQLException
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -132,9 +132,9 @@ name|explainContains
 argument_list|(
 literal|"PLAN=SparkToEnumerableConverter\n"
 operator|+
-literal|"  SparkCalcRel(expr#0..1=[{inputs}], expr#2=[2], expr#3=[<($t0, $t2)], proj#0..1=[{exprs}], $condition=[$t3])\n"
+literal|"  SparkCalc(expr#0..1=[{inputs}], expr#2=[2], expr#3=[<($t0, $t2)], proj#0..1=[{exprs}], $condition=[$t3])\n"
 operator|+
-literal|"    SparkValuesRel(tuples=[[{ 1, 'a' }, { 2, 'b' }]])\n"
+literal|"    SparkValues(tuples=[[{ 1, 'a' }, { 2, 'b' }]])\n"
 argument_list|)
 expr_stmt|;
 block|}

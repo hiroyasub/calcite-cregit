@@ -7,9 +7,13 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
+operator|.
+name|core
 package|;
 end_package
 
@@ -17,11 +21,13 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|relopt
+name|calcite
 operator|.
-name|*
+name|plan
+operator|.
+name|RelOptCluster
 import|;
 end_import
 
@@ -29,11 +35,13 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|reltype
+name|calcite
 operator|.
-name|*
+name|plan
+operator|.
+name|RelOptCost
 import|;
 end_import
 
@@ -41,32 +49,122 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptPlanner
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelTraitSet
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|AbstractRelNode
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|RelInput
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|type
+operator|.
+name|RelDataType
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|type
+operator|.
+name|RelDataTypeFactory
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
 name|type
 operator|.
-name|*
+name|SqlTypeName
 import|;
 end_import
 
 begin_comment
-comment|/**  *<code>OneRowRelBase</code> is an abstract base class for implementations of  * {@link OneRowRel}.  */
+comment|/**  * Relational expression that always returns one row.  *  *<p>It has one column, called "ZERO", containing the value 0.  *  * @see Values  */
 end_comment
 
 begin_class
 specifier|public
 specifier|abstract
 class|class
-name|OneRowRelBase
+name|OneRow
 extends|extends
 name|AbstractRelNode
 block|{
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a<code>OneRowRelBase</code> with specific traits.    *    * @param cluster {@link RelOptCluster}  this relational expression belongs    *                to    * @param traits  for this rel    */
+comment|/**    * Creates a<code>OneRow</code>.    *    * @param cluster   Cluster that this relational expression belongs to    * @param traits    Traits    */
 specifier|protected
-name|OneRowRelBase
+name|OneRow
 parameter_list|(
 name|RelOptCluster
 name|cluster
@@ -83,9 +181,9 @@ name|traits
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Creates a OneRowRelBase by parsing serialized output.    */
+comment|/**    * Creates a OneRow by parsing serialized output.    */
 specifier|protected
-name|OneRowRelBase
+name|OneRow
 parameter_list|(
 name|RelInput
 name|input
@@ -172,7 +270,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End OneRowRelBase.java
+comment|// End OneRow.java
 end_comment
 
 end_unit

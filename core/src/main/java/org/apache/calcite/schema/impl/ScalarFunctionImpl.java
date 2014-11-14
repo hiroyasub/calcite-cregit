@@ -5,11 +5,13 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
+operator|.
+name|schema
 operator|.
 name|impl
 package|;
@@ -17,29 +19,17 @@ end_package
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
-name|net
+name|adapter
 operator|.
-name|hydromatic
+name|enumerable
 operator|.
-name|optiq
-operator|.
-name|rules
-operator|.
-name|java
-operator|.
-name|*
+name|CallImplementor
 import|;
 end_import
 
@@ -47,9 +37,61 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|reltype
+name|calcite
+operator|.
+name|adapter
+operator|.
+name|enumerable
+operator|.
+name|NullPolicy
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|adapter
+operator|.
+name|enumerable
+operator|.
+name|ReflectiveCallNotNullImplementor
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|adapter
+operator|.
+name|enumerable
+operator|.
+name|RexImpTable
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|type
 operator|.
 name|RelDataType
 import|;
@@ -59,11 +101,43 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|reltype
+name|calcite
+operator|.
+name|rel
+operator|.
+name|type
 operator|.
 name|RelDataTypeFactory
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|schema
+operator|.
+name|ImplementableFunction
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|schema
+operator|.
+name|ScalarFunction
 import|;
 end_import
 
@@ -89,7 +163,19 @@ name|lang
 operator|.
 name|reflect
 operator|.
-name|*
+name|Method
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|lang
+operator|.
+name|reflect
+operator|.
+name|Modifier
 import|;
 end_import
 
@@ -97,18 +183,20 @@ begin_import
 import|import static
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|util
 operator|.
 name|Static
 operator|.
-name|*
+name|RESOURCE
 import|;
 end_import
 
 begin_comment
-comment|/** * Implementation of {@link net.hydromatic.optiq.ScalarFunction}. */
+comment|/** * Implementation of {@link org.apache.calcite.schema.ScalarFunction}. */
 end_comment
 
 begin_class
@@ -150,7 +238,7 @@ operator|=
 name|implementor
 expr_stmt|;
 block|}
-comment|/**    * Creates {@link net.hydromatic.optiq.ScalarFunction} for each method in a    * given class.    */
+comment|/**    * Creates {@link org.apache.calcite.schema.ScalarFunction} for each method in    * a given class.    */
 specifier|public
 specifier|static
 name|ImmutableMultimap
@@ -223,8 +311,6 @@ argument_list|()
 argument_list|)
 operator|&&
 operator|!
-name|ScalarFunctionImpl
-operator|.
 name|classHasPublicZeroArgsConstructor
 argument_list|(
 name|clazz
@@ -262,7 +348,7 @@ name|build
 argument_list|()
 return|;
 block|}
-comment|/**    * Creates {@link net.hydromatic.optiq.ScalarFunction} from given class.    *    *<p>If a method of the given name is not found or it does not suit,    * returns {@code null}.    *    * @param clazz class that is used to implement the function    * @param methodName Method name (typically "eval")    * @return created {@link ScalarFunction} or null    */
+comment|/**    * Creates {@link org.apache.calcite.schema.ScalarFunction} from given class.    *    *<p>If a method of the given name is not found or it does not suit,    * returns {@code null}.    *    * @param clazz class that is used to implement the function    * @param methodName Method name (typically "eval")    * @return created {@link ScalarFunction} or null    */
 specifier|public
 specifier|static
 name|ScalarFunction
@@ -307,7 +393,7 @@ name|method
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates {@link net.hydromatic.optiq.ScalarFunction} from given method.    * When {@code eval} method does not suit, {@code null} is returned.    *    * @param method method that is used to implement the function    * @return created {@link ScalarFunction} or null    */
+comment|/**    * Creates {@link org.apache.calcite.schema.ScalarFunction} from given method.    * When {@code eval} method does not suit, {@code null} is returned.    *    * @param method method that is used to implement the function    * @return created {@link ScalarFunction} or null    */
 specifier|public
 specifier|static
 name|ScalarFunction

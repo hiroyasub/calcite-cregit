@@ -5,19 +5,35 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
+operator|.
+name|schema
 package|;
 end_package
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
+operator|.
+name|calcite
+operator|.
+name|DataContext
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|linq4j
 operator|.
@@ -29,7 +45,9 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rex
 operator|.
@@ -48,7 +66,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Table that can be scanned, optionally applying supplied filter expressions,  * and projecting a given list of columns,  * without creating an intermediate relational expression.  *  *<p>If you wish to write a table that can apply projects but not filters,  * simply decline all filters.</p>  *  * @see net.hydromatic.optiq.ScannableTable  * @see net.hydromatic.optiq.FilterableTable  */
+comment|/**  * Table that can be scanned, optionally applying supplied filter expressions,  * and projecting a given list of columns,  * without creating an intermediate relational expression.  *  *<p>If you wish to write a table that can apply projects but not filters,  * simply decline all filters.</p>  *  * @see ScannableTable  * @see FilterableTable  */
 end_comment
 
 begin_interface

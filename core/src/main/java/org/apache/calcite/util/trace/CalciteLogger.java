@@ -7,7 +7,11 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
 operator|.
 name|trace
 package|;
@@ -21,18 +25,30 @@ name|util
 operator|.
 name|logging
 operator|.
-name|*
+name|Level
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|logging
+operator|.
+name|Logger
 import|;
 end_import
 
 begin_comment
-comment|/**  * This class is a small extension to {@link Logger}. {@link Logger#log(Level  * level, String msg, Object[] params)} is expensive to call, since the caller  * must always allocate and fill in the array<code>params</code>, even when  *<code>level</code> will prevent a message being logged. On the other hand,  * {@link Logger#log(Level level, String msg)} and {@link Logger#log(Level  * level, String msg, Object)} do not have this problem. As a workaround this  * class provides {@link #log(Level, String msg, Object, Object)} etc. (The  * varargs feature of java 1.5 half-solves this problem, by automatically  * wrapping args in an array, but it does so without testing the level.) Usage:  * replace:<code>static final Logger tracer =  * EigenbaseTracer.getMyTracer();</code> by:<code>static final EigenbaseLogger  * tracer = new EigenbaseLogger(EigenbaseTracer.getMyTracer());</code>  */
+comment|/**  * Small extension to {@link Logger} with some performance improvements.  *  *<p>{@link Logger#log(Level level, String msg, Object[] params)} is expensive  * to call, since the caller must always allocate and fill in the array  *<code>params</code>, even when<code>level</code> will prevent a message  * being logged. On the other hand, {@link Logger#log(Level level, String msg)}  * and {@link Logger#log(Level level, String msg, Object)} do not have this  * problem.  *  *<p>As a workaround this class provides  * {@link #log(Level, String msg, Object, Object)} etc. (The varargs feature of  * java 1.5 half-solves this problem, by automatically wrapping args in an  * array, but it does so without testing the level.)  *  *<p>Usage: replace:  *  *<blockquote><code>static final Logger tracer =  * CalciteTracer.getMyTracer();</code></blockquote>  *  *<p>by:  *  *<blockquote><code>static final CalciteLogger tracer =  *     new CalciteLogger(CalciteTrace.getMyTracer());</code></blockquote>  */
 end_comment
 
 begin_class
 specifier|public
 class|class
-name|EigenbaseLogger
+name|CalciteLogger
 block|{
 comment|//~ Instance fields --------------------------------------------------------
 specifier|private
@@ -43,7 +59,7 @@ decl_stmt|;
 comment|// delegate
 comment|//~ Constructors -----------------------------------------------------------
 specifier|public
-name|EigenbaseLogger
+name|CalciteLogger
 parameter_list|(
 name|Logger
 name|logger
@@ -448,7 +464,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End EigenbaseLogger.java
+comment|// End CalciteLogger.java
 end_comment
 
 end_unit

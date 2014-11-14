@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|util
 package|;
@@ -19,12 +21,22 @@ name|java
 operator|.
 name|util
 operator|.
-name|*
+name|AbstractList
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
 import|;
 end_import
 
 begin_comment
-comment|/**  * Converts a list whose members are automatically down-cast to a given type.  *  *<p>If a member of the backing list is not an instanceof<code>E</code>, the  * accessing method (such as {@link List#get}) will throw a {@link  * ClassCastException}.  *  *<p>All modifications are automatically written to the backing list. Not  * synchronized.  */
+comment|/**  * Converts a list whose members are automatically down-cast to a given type.  *  *<p>If a member of the backing list is not an instanceof<code>E</code>, the  * accessing method (such as {@link List#get}) will throw a  * {@link ClassCastException}.  *  *<p>All modifications are automatically written to the backing list. Not  * synchronized.  *  * @param<E> Element type  */
 end_comment
 
 begin_class

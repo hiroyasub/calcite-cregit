@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
@@ -17,41 +19,15 @@ end_package
 
 begin_import
 import|import
-name|java
-operator|.
-name|math
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|sql
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|reltype
+name|calcite
+operator|.
+name|rel
+operator|.
+name|type
 operator|.
 name|RelDataTypeSystem
 import|;
@@ -61,11 +37,13 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
-name|*
+name|SqlLiteral
 import|;
 end_import
 
@@ -73,13 +51,15 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
 name|parser
 operator|.
-name|*
+name|SqlParserPos
 import|;
 end_import
 
@@ -87,11 +67,13 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|util
 operator|.
-name|*
+name|DateTimeUtil
 import|;
 end_import
 
@@ -99,11 +81,13 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|util14
+name|calcite
 operator|.
-name|DateTimeUtil
+name|util
+operator|.
+name|Util
 import|;
 end_import
 
@@ -132,6 +116,66 @@ operator|.
 name|collect
 operator|.
 name|ImmutableMap
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|math
+operator|.
+name|BigDecimal
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|sql
+operator|.
+name|Types
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Arrays
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Calendar
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Map
 import|;
 end_import
 
@@ -1586,7 +1630,7 @@ name|build
 argument_list|()
 return|;
 block|}
-comment|/**    * Returns the default precision for this type if supported, otherwise -1 if    * precision is either unsupported or must be specified explicitly.    *    * @deprecated Use    * {@link org.eigenbase.reltype.RelDataTypeSystem#getDefaultPrecision(SqlTypeName)};    * will be removed after calcite-0.9.1.    */
+comment|/**    * Returns the default precision for this type if supported, otherwise -1 if    * precision is either unsupported or must be specified explicitly.    *    * @deprecated Use    * {@link org.apache.calcite.rel.type.RelDataTypeSystem#getDefaultPrecision(SqlTypeName)};    * will be removed after calcite-0.9.1.    */
 specifier|public
 name|int
 name|getDefaultPrecision
@@ -2924,7 +2968,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**    * Returns the maximum precision (or length) allowed for this type, or -1 if    * precision/length are not applicable for this type.    *    * @return Maximum allowed precision    *    * @deprecated Use    * {@link org.eigenbase.reltype.RelDataTypeSystem#getMaxScale(SqlTypeName)};    * will be removed after calcite-0.9.1.    */
+comment|/**    * Returns the maximum precision (or length) allowed for this type, or -1 if    * precision/length are not applicable for this type.    *    * @return Maximum allowed precision    *    * @deprecated Use    * {@link org.apache.calcite.rel.type.RelDataTypeSystem#getMaxScale(SqlTypeName)};    * will be removed after calcite-0.9.1.    */
 specifier|public
 name|int
 name|getMaxPrecision
@@ -2941,7 +2985,7 @@ name|this
 argument_list|)
 return|;
 block|}
-comment|/**    * Returns the maximum scale (or fractional second precision in the case of    * intervals) allowed for this type, or -1 if precision/length are not    * applicable for this type.    *    * @return Maximum allowed scale    *    * @deprecated Use    * {@link org.eigenbase.reltype.RelDataTypeSystem#getMaxScale(SqlTypeName)};    * will be removed after calcite-0.9.1.    */
+comment|/**    * Returns the maximum scale (or fractional second precision in the case of    * intervals) allowed for this type, or -1 if precision/length are not    * applicable for this type.    *    * @return Maximum allowed scale    *    * @deprecated Use    * {@link org.apache.calcite.rel.type.RelDataTypeSystem#getMaxScale(SqlTypeName)};    * will be removed after calcite-0.9.1.    */
 specifier|public
 name|int
 name|getMaxScale
@@ -3037,6 +3081,7 @@ literal|1
 return|;
 block|}
 block|}
+comment|/** Limit. */
 specifier|public
 enum|enum
 name|Limit

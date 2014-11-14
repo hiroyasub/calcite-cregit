@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
@@ -21,12 +23,12 @@ name|java
 operator|.
 name|util
 operator|.
-name|*
+name|Comparator
 import|;
 end_import
 
 begin_comment
-comment|/**  * A general-purpose implementation of {@link Comparator} to compare {@link  * SqlMoniker} values.  */
+comment|/**  * A general-purpose implementation of {@link Comparator} to compare  * {@link SqlMoniker} values.  */
 end_comment
 
 begin_class

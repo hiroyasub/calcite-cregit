@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|test
 package|;
@@ -15,23 +17,15 @@ end_package
 
 begin_import
 import|import
-name|java
+name|org
 operator|.
-name|lang
+name|apache
 operator|.
-name|reflect
+name|calcite
 operator|.
-name|Method
-import|;
-end_import
-
-begin_import
-import|import
-name|java
+name|plan
 operator|.
-name|util
-operator|.
-name|*
+name|RelOptPlanner
 import|;
 end_import
 
@@ -39,11 +33,27 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptTable
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
-name|*
+name|RelNode
 import|;
 end_import
 
@@ -51,13 +61,63 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|core
+operator|.
+name|Aggregate
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|logical
+operator|.
+name|LogicalAggregate
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|logical
+operator|.
+name|LogicalFilter
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
 name|metadata
 operator|.
-name|*
+name|CachingRelMetadataProvider
 import|;
 end_import
 
@@ -65,11 +125,111 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|relopt
+name|calcite
 operator|.
-name|*
+name|rel
+operator|.
+name|metadata
+operator|.
+name|ChainedRelMetadataProvider
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|metadata
+operator|.
+name|DefaultRelMetadataProvider
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|metadata
+operator|.
+name|Metadata
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|metadata
+operator|.
+name|ReflectiveRelMetadataProvider
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|metadata
+operator|.
+name|RelColumnOrigin
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|metadata
+operator|.
+name|RelMetadataProvider
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|metadata
+operator|.
+name|RelMetadataQuery
 import|;
 end_import
 
@@ -142,6 +302,58 @@ import|;
 end_import
 
 begin_import
+import|import
+name|java
+operator|.
+name|lang
+operator|.
+name|reflect
+operator|.
+name|Method
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|ArrayList
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|BitSet
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Set
+import|;
+end_import
+
+begin_import
 import|import static
 name|org
 operator|.
@@ -149,7 +361,19 @@ name|hamcrest
 operator|.
 name|CoreMatchers
 operator|.
-name|*
+name|equalTo
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|hamcrest
+operator|.
+name|CoreMatchers
+operator|.
+name|instanceOf
 import|;
 end_import
 
@@ -161,12 +385,36 @@ name|junit
 operator|.
 name|Assert
 operator|.
-name|*
+name|assertEquals
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|assertThat
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|assertTrue
 import|;
 end_import
 
 begin_comment
-comment|/**  * Unit test for {@link DefaultRelMetadataProvider}. See {@link  * SqlToRelTestBase} class comments for details on the schema used. Note that no  * optimizer rules are fired on the translation of the SQL into relational  * algebra (e.g. join conditions in the WHERE clause will look like filters), so  * it's necessary to phrase the SQL carefully.  */
+comment|/**  * Unit test for {@link DefaultRelMetadataProvider}. See  * {@link SqlToRelTestBase} class comments for details on the schema used. Note  * that no optimizer rules are fired on the translation of the SQL into  * relational algebra (e.g. join conditions in the WHERE clause will look like  * filters), so it's necessary to phrase the SQL carefully.  */
 end_comment
 
 begin_class
@@ -441,9 +689,11 @@ parameter_list|()
 block|{
 name|checkPercentageOriginalRows
 argument_list|(
-literal|"select * from (select * from dept where name='X')"
+literal|"select * from (\n"
 operator|+
-literal|" where deptno = 20"
+literal|"  select * from dept where name='X')\n"
+operator|+
+literal|"where deptno = 20"
 argument_list|,
 name|DEFAULT_EQUAL_SELECTIVITY_SQUARED
 argument_list|)
@@ -460,9 +710,11 @@ parameter_list|()
 block|{
 name|checkPercentageOriginalRows
 argument_list|(
-literal|"select * from (select * from dept where deptno=20)"
+literal|"select * from (\n"
 operator|+
-literal|" where deptno = 20"
+literal|"  select * from dept where deptno=20)\n"
+operator|+
+literal|"where deptno = 20"
 argument_list|,
 name|DEFAULT_EQUAL_SELECTIVITY
 argument_list|)
@@ -494,11 +746,13 @@ parameter_list|()
 block|{
 name|checkPercentageOriginalRows
 argument_list|(
-literal|"select * from (select * from emp where deptno=10) e"
+literal|"select * from (\n"
 operator|+
-literal|" inner join (select * from dept where deptno=10) d"
+literal|"  select * from emp where deptno=10) e\n"
 operator|+
-literal|" on e.deptno=d.deptno"
+literal|"inner join (select * from dept where deptno=10) d\n"
+operator|+
+literal|"on e.deptno=d.deptno"
 argument_list|,
 name|DEFAULT_EQUAL_SELECTIVITY_SQUARED
 argument_list|)
@@ -1622,7 +1876,9 @@ name|rel
 init|=
 name|convertSql
 argument_list|(
-literal|"select * from (select * from emp union all select * from emp) "
+literal|"select * from (\n"
+operator|+
+literal|"  select * from emp union all select * from emp) "
 operator|+
 literal|"where deptno = 10"
 argument_list|)
@@ -1857,7 +2113,7 @@ name|rel
 argument_list|,
 name|instanceOf
 argument_list|(
-name|FilterRel
+name|LogicalFilter
 operator|.
 name|class
 argument_list|)
@@ -1908,7 +2164,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 comment|// Next node is an aggregate. Its metadata uses
-comment|// getColType(AggregateRel, int).
+comment|// getColType(LogicalAggregate, int).
 specifier|final
 name|RelNode
 name|input
@@ -1926,7 +2182,7 @@ name|input
 argument_list|,
 name|instanceOf
 argument_list|(
-name|AggregateRel
+name|LogicalAggregate
 operator|.
 name|class
 argument_list|)
@@ -2348,7 +2604,7 @@ name|column
 parameter_list|)
 function_decl|;
 block|}
-comment|/** A provider for {@link org.eigenbase.test.RelMetadataTest.ColType} via    * reflection. */
+comment|/** A provider for {@link org.apache.calcite.test.RelMetadataTest.ColType} via    * reflection. */
 specifier|public
 specifier|static
 class|class
@@ -2432,7 +2688,7 @@ name|ColTypeImpl
 argument_list|()
 argument_list|)
 decl_stmt|;
-comment|/** Implementation of {@link ColType#getColType(int)} for      * {@link AggregateRel}, called via reflection. */
+comment|/** Implementation of {@link ColType#getColType(int)} for      * {@link org.apache.calcite.rel.logical.LogicalAggregate}, called via      * reflection. */
 annotation|@
 name|SuppressWarnings
 argument_list|(
@@ -2442,7 +2698,7 @@ specifier|public
 name|String
 name|getColType
 parameter_list|(
-name|AggregateRelBase
+name|Aggregate
 name|rel
 parameter_list|,
 name|int

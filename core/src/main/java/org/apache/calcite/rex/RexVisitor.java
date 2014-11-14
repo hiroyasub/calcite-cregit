@@ -7,14 +7,16 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rex
 package|;
 end_package
 
 begin_comment
-comment|/**  * Visitor pattern for traversing a tree of {@link RexNode} objects.  *  * @see org.eigenbase.util.Glossary#VISITOR_PATTERN  * @see RexShuttle  * @see RexVisitorImpl  */
+comment|/**  * Visitor pattern for traversing a tree of {@link RexNode} objects.  *  * @see org.apache.calcite.util.Glossary#VISITOR_PATTERN  * @see RexShuttle  * @see RexVisitorImpl  *  * @param<R> Return type  */
 end_comment
 
 begin_interface

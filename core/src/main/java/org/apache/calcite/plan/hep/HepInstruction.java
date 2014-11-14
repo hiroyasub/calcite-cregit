@@ -7,9 +7,11 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|relopt
+name|calcite
+operator|.
+name|plan
 operator|.
 name|hep
 package|;
@@ -17,23 +19,45 @@ end_package
 
 begin_import
 import|import
-name|java
+name|org
 operator|.
-name|util
+name|apache
 operator|.
-name|*
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptRule
 import|;
 end_import
 
 begin_import
 import|import
-name|org
+name|java
 operator|.
-name|eigenbase
+name|util
 operator|.
-name|relopt
+name|Collection
+import|;
+end_import
+
+begin_import
+import|import
+name|java
 operator|.
-name|*
+name|util
+operator|.
+name|HashSet
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Set
 import|;
 end_import
 
@@ -65,6 +89,7 @@ name|planner
 parameter_list|)
 function_decl|;
 comment|//~ Inner Classes ----------------------------------------------------------
+comment|/** Instruction that executes all rules of a given class. */
 specifier|static
 class|class
 name|RuleClass
@@ -125,6 +150,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+comment|/** Instruction that executes all rules in a given collection. */
 specifier|static
 class|class
 name|RuleCollection
@@ -154,6 +180,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+comment|/** Instruction that executes converter rules. */
 specifier|static
 class|class
 name|ConverterRules
@@ -186,6 +213,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+comment|/** Instruction that finds common relational sub-expressions. */
 specifier|static
 class|class
 name|CommonRelSubExprRules
@@ -214,6 +242,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+comment|/** Instruction that executes a given rule. */
 specifier|static
 class|class
 name|RuleInstance
@@ -273,6 +302,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+comment|/** Instruction that sets match order. */
 specifier|static
 class|class
 name|MatchOrder
@@ -298,6 +328,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+comment|/** Instruction that sets match limit. */
 specifier|static
 class|class
 name|MatchLimit
@@ -323,6 +354,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+comment|/** Instruction that executes a sub-program. */
 specifier|static
 class|class
 name|Subprogram
@@ -363,6 +395,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+comment|/** Instruction that begins a group. */
 specifier|static
 class|class
 name|BeginGroup
@@ -396,6 +429,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+comment|/** Instruction that ends a group. */
 specifier|static
 class|class
 name|EndGroup

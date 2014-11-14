@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
@@ -17,69 +19,131 @@ end_package
 
 begin_import
 import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptRule
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptRuleCall
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|RelNode
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|core
+operator|.
+name|SetOp
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|logical
+operator|.
+name|LogicalProject
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rex
+operator|.
+name|RexInputRef
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
 operator|.
-name|*
+name|ArrayList
 import|;
 end_import
 
 begin_import
 import|import
-name|org
+name|java
 operator|.
-name|eigenbase
+name|util
 operator|.
-name|rel
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
-name|relopt
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
-name|rex
-operator|.
-name|*
+name|List
 import|;
 end_import
 
 begin_comment
-comment|/**  * PushProjectPastSetOpRule implements the rule for pushing a {@link ProjectRel}  * past a {@link SetOpRel}. The children of the {@link SetOpRel} will project  * only the {@link RexInputRef}s referenced in the original {@link ProjectRel}.  */
+comment|/**  * Planner rule that pushes  * a {@link org.apache.calcite.rel.logical.LogicalProject}  * past a {@link org.apache.calcite.rel.core.SetOp}.  *  *<p>The children of the {@code SetOp} will project  * only the {@link RexInputRef}s referenced in the original  * {@code LogicalProject}.  */
 end_comment
 
 begin_class
 specifier|public
 class|class
-name|PushProjectPastSetOpRule
+name|ProjectSetOpTransposeRule
 extends|extends
 name|RelOptRule
 block|{
 specifier|public
 specifier|static
 specifier|final
-name|PushProjectPastSetOpRule
+name|ProjectSetOpTransposeRule
 name|INSTANCE
 init|=
 operator|new
-name|PushProjectPastSetOpRule
+name|ProjectSetOpTransposeRule
 argument_list|(
 name|PushProjector
 operator|.
@@ -97,9 +161,9 @@ name|ExprCondition
 name|preserveExprCondition
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a PushProjectPastSetOpRule with an explicit condition whether    * to preserve expressions.    *    * @param preserveExprCondition Condition whether to preserve expressions    */
+comment|/**    * Creates a ProjectSetOpTransposeRule with an explicit condition whether    * to preserve expressions.    *    * @param preserveExprCondition Condition whether to preserve expressions    */
 specifier|public
-name|PushProjectPastSetOpRule
+name|ProjectSetOpTransposeRule
 parameter_list|(
 name|PushProjector
 operator|.
@@ -111,13 +175,13 @@ name|super
 argument_list|(
 name|operand
 argument_list|(
-name|ProjectRel
+name|LogicalProject
 operator|.
 name|class
 argument_list|,
 name|operand
 argument_list|(
-name|SetOpRel
+name|SetOp
 operator|.
 name|class
 argument_list|,
@@ -144,7 +208,7 @@ name|RelOptRuleCall
 name|call
 parameter_list|)
 block|{
-name|ProjectRel
+name|LogicalProject
 name|origProj
 init|=
 name|call
@@ -154,8 +218,8 @@ argument_list|(
 literal|0
 argument_list|)
 decl_stmt|;
-name|SetOpRel
-name|setOpRel
+name|SetOp
+name|setOp
 init|=
 name|call
 operator|.
@@ -168,7 +232,7 @@ comment|// cannot push project past a distinct
 if|if
 condition|(
 operator|!
-name|setOpRel
+name|setOp
 operator|.
 name|all
 condition|)
@@ -186,7 +250,7 @@ name|origProj
 argument_list|,
 literal|null
 argument_list|,
-name|setOpRel
+name|setOp
 argument_list|,
 name|preserveExprCondition
 argument_list|)
@@ -228,7 +292,7 @@ control|(
 name|RelNode
 name|input
 range|:
-name|setOpRel
+name|setOp
 operator|.
 name|getInputs
 argument_list|()
@@ -236,7 +300,7 @@ control|)
 block|{
 comment|// be lazy:  produce two ProjectRels, and let another rule
 comment|// merge them (could probably just clone origProj instead?)
-name|ProjectRel
+name|LogicalProject
 name|p
 init|=
 name|pushProject
@@ -266,14 +330,14 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|// create a new setop whose children are the ProjectRels created above
-name|SetOpRel
-name|newSetOpRel
+name|SetOp
+name|newSetOp
 init|=
-name|setOpRel
+name|setOp
 operator|.
 name|copy
 argument_list|(
-name|setOpRel
+name|setOp
 operator|.
 name|getTraitSet
 argument_list|()
@@ -285,7 +349,7 @@ name|call
 operator|.
 name|transformTo
 argument_list|(
-name|newSetOpRel
+name|newSetOp
 argument_list|)
 expr_stmt|;
 block|}
@@ -293,7 +357,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End PushProjectPastSetOpRule.java
+comment|// End ProjectSetOpTransposeRule.java
 end_comment
 
 end_unit

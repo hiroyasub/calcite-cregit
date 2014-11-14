@@ -5,11 +5,11 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
 name|config
 package|;
@@ -17,9 +17,11 @@ end_package
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
+operator|.
+name|calcite
 operator|.
 name|avatica
 operator|.
@@ -29,9 +31,11 @@ end_import
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
+operator|.
+name|calcite
 operator|.
 name|avatica
 operator|.
@@ -41,9 +45,11 @@ end_import
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
+operator|.
+name|calcite
 operator|.
 name|avatica
 operator|.
@@ -62,20 +68,20 @@ import|;
 end_import
 
 begin_comment
-comment|/** Implementation of {@link OptiqConnectionConfig}. */
+comment|/** Implementation of {@link CalciteConnectionConfig}. */
 end_comment
 
 begin_class
 specifier|public
 class|class
-name|OptiqConnectionConfigImpl
+name|CalciteConnectionConfigImpl
 extends|extends
 name|ConnectionConfigImpl
 implements|implements
-name|OptiqConnectionConfig
+name|CalciteConnectionConfig
 block|{
 specifier|public
-name|OptiqConnectionConfigImpl
+name|CalciteConnectionConfigImpl
 parameter_list|(
 name|Properties
 name|properties
@@ -89,10 +95,10 @@ expr_stmt|;
 block|}
 comment|/** Returns a copy of this configuration with one property changed. */
 specifier|public
-name|OptiqConnectionConfigImpl
+name|CalciteConnectionConfigImpl
 name|set
 parameter_list|(
-name|OptiqConnectionProperty
+name|CalciteConnectionProperty
 name|property
 parameter_list|,
 name|String
@@ -123,7 +129,7 @@ argument_list|)
 expr_stmt|;
 return|return
 operator|new
-name|OptiqConnectionConfigImpl
+name|CalciteConnectionConfigImpl
 argument_list|(
 name|properties1
 argument_list|)
@@ -135,7 +141,7 @@ name|autoTemp
 parameter_list|()
 block|{
 return|return
-name|OptiqConnectionProperty
+name|CalciteConnectionProperty
 operator|.
 name|AUTO_TEMP
 operator|.
@@ -154,7 +160,7 @@ name|materializationsEnabled
 parameter_list|()
 block|{
 return|return
-name|OptiqConnectionProperty
+name|CalciteConnectionProperty
 operator|.
 name|MATERIALIZATIONS_ENABLED
 operator|.
@@ -173,7 +179,7 @@ name|createMaterializations
 parameter_list|()
 block|{
 return|return
-name|OptiqConnectionProperty
+name|CalciteConnectionProperty
 operator|.
 name|CREATE_MATERIALIZATIONS
 operator|.
@@ -192,7 +198,7 @@ name|model
 parameter_list|()
 block|{
 return|return
-name|OptiqConnectionProperty
+name|CalciteConnectionProperty
 operator|.
 name|MODEL
 operator|.
@@ -211,7 +217,7 @@ name|lex
 parameter_list|()
 block|{
 return|return
-name|OptiqConnectionProperty
+name|CalciteConnectionProperty
 operator|.
 name|LEX
 operator|.
@@ -234,7 +240,7 @@ name|quoting
 parameter_list|()
 block|{
 return|return
-name|OptiqConnectionProperty
+name|CalciteConnectionProperty
 operator|.
 name|QUOTING
 operator|.
@@ -262,7 +268,7 @@ name|unquotedCasing
 parameter_list|()
 block|{
 return|return
-name|OptiqConnectionProperty
+name|CalciteConnectionProperty
 operator|.
 name|UNQUOTED_CASING
 operator|.
@@ -290,7 +296,7 @@ name|quotedCasing
 parameter_list|()
 block|{
 return|return
-name|OptiqConnectionProperty
+name|CalciteConnectionProperty
 operator|.
 name|QUOTED_CASING
 operator|.
@@ -318,7 +324,7 @@ name|caseSensitive
 parameter_list|()
 block|{
 return|return
-name|OptiqConnectionProperty
+name|CalciteConnectionProperty
 operator|.
 name|CASE_SENSITIVE
 operator|.
@@ -342,7 +348,7 @@ name|spark
 parameter_list|()
 block|{
 return|return
-name|OptiqConnectionProperty
+name|CalciteConnectionProperty
 operator|.
 name|SPARK
 operator|.
@@ -373,7 +379,7 @@ name|defaultTypeSystem
 parameter_list|)
 block|{
 return|return
-name|OptiqConnectionProperty
+name|CalciteConnectionProperty
 operator|.
 name|TYPE_SYSTEM
 operator|.
@@ -394,7 +400,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End OptiqConnectionConfigImpl.java
+comment|// End CalciteConnectionConfigImpl.java
 end_comment
 
 end_unit

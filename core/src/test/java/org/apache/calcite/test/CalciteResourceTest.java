@@ -7,21 +7,13 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|test
 package|;
 end_package
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|*
-import|;
-end_import
 
 begin_import
 import|import
@@ -44,10 +36,22 @@ import|;
 end_import
 
 begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Map
+import|;
+end_import
+
+begin_import
 import|import static
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|util
 operator|.
@@ -65,22 +69,22 @@ name|junit
 operator|.
 name|Assert
 operator|.
-name|*
+name|assertThat
 import|;
 end_import
 
 begin_comment
-comment|/**  * Tests generated package org.eigenbase.resource (mostly a sanity check for  * resgen infrastructure).  */
+comment|/**  * Tests the generated implementation of  * {@link org.apache.calcite.runtime.CalciteResource} (mostly a sanity check for  * the resource-generation infrastructure).  */
 end_comment
 
 begin_class
 specifier|public
 class|class
-name|EigenbaseResourceTest
+name|CalciteResourceTest
 block|{
 comment|//~ Constructors -----------------------------------------------------------
 specifier|public
-name|EigenbaseResourceTest
+name|CalciteResourceTest
 parameter_list|()
 block|{
 block|}
@@ -135,7 +139,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End EigenbaseResourceTest.java
+comment|// End CalciteResourceTest.java
 end_comment
 
 end_unit

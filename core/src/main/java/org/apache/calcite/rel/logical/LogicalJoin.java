@@ -7,19 +7,27 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
+operator|.
+name|logical
 package|;
 end_package
 
 begin_import
 import|import
-name|java
+name|org
 operator|.
-name|util
+name|apache
 operator|.
-name|*
+name|calcite
+operator|.
+name|plan
+operator|.
+name|Convention
 import|;
 end_import
 
@@ -27,11 +35,13 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|relopt
+name|calcite
 operator|.
-name|*
+name|plan
+operator|.
+name|RelOptCluster
 import|;
 end_import
 
@@ -39,9 +49,115 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|reltype
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelTraitSet
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|RelInput
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|RelNode
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|RelShuttle
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|RelWriter
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|core
+operator|.
+name|Join
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|core
+operator|.
+name|JoinRelType
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|type
 operator|.
 name|RelDataTypeField
 import|;
@@ -51,11 +167,13 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rex
 operator|.
-name|*
+name|RexNode
 import|;
 end_import
 
@@ -87,17 +205,37 @@ name|ImmutableSet
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Set
+import|;
+end_import
+
 begin_comment
-comment|/**  * A JoinRel represents two relational expressions joined according to some  * condition.  *  *<p>Some rules:  *  *<ul><li>{@link org.eigenbase.rel.rules.ExtractJoinFilterRule} converts an  * {@link JoinRel inner join} to a {@link FilterRel filter} on top of a {@link  * JoinRel cartesian inner join}.<li>{@code  * net.sf.farrago.fennel.rel.FennelCartesianJoinRule} implements a JoinRel as a  * cartesian product.</ul>  */
+comment|/**  * Sub-class of {@link org.apache.calcite.rel.core.Join}  * not targeted at any particular engine or calling convention.  *  *<p>Some rules:  *  *<ul>  *<li>{@link org.apache.calcite.rel.rules.JoinExtractFilterRule} converts an  * {@link LogicalJoin inner join} to a {@link LogicalFilter filter} on top of a  * {@link LogicalJoin cartesian inner join}.  *  *<li>{@code net.sf.farrago.fennel.rel.FennelCartesianJoinRule}  * implements a LogicalJoin as a cartesian product.  *  *</ul>  */
 end_comment
 
 begin_class
 specifier|public
 specifier|final
 class|class
-name|JoinRel
+name|LogicalJoin
 extends|extends
-name|JoinRelBase
+name|Join
 block|{
 comment|//~ Instance fields --------------------------------------------------------
 comment|// NOTE jvs 14-Mar-2006:  Normally we don't use state like this
@@ -117,9 +255,9 @@ argument_list|>
 name|systemFieldList
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a JoinRel.    *    * @param cluster          Cluster    * @param left             Left input    * @param right            Right input    * @param condition        Join condition    * @param joinType         Join type    * @param variablesStopped Set of names of variables which are set by the    *                         LHS and used by the RHS and are not available to    *                         nodes above this JoinRel in the tree    */
+comment|/**    * Creates a LogicalJoin.    *    * @param cluster          Cluster    * @param left             Left input    * @param right            Right input    * @param condition        Join condition    * @param joinType         Join type    * @param variablesStopped Set of names of variables which are set by the    *                         LHS and used by the RHS and are not available to    *                         nodes above this LogicalJoin in the tree    */
 specifier|public
-name|JoinRel
+name|LogicalJoin
 parameter_list|(
 name|RelOptCluster
 name|cluster
@@ -169,9 +307,9 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Creates a JoinRel, flagged with whether it has been translated to a    * semi-join.    *    * @param cluster          Cluster    * @param left             Left input    * @param right            Right input    * @param condition        Join condition    * @param joinType         Join type    * @param variablesStopped Set of names of variables which are set by the    *                         LHS and used by the RHS and are not available to    *                         nodes above this JoinRel in the tree    * @param semiJoinDone     Whether this join has been translated to a    *                         semi-join    * @param systemFieldList  List of system fields that will be prefixed to    *                         output row type; typically empty but must not be    *                         null    * @see #isSemiJoinDone()    */
+comment|/**    * Creates a LogicalJoin, flagged with whether it has been translated to a    * semi-join.    *    * @param cluster          Cluster    * @param left             Left input    * @param right            Right input    * @param condition        Join condition    * @param joinType         Join type    * @param variablesStopped Set of names of variables which are set by the    *                         LHS and used by the RHS and are not available to    *                         nodes above this LogicalJoin in the tree    * @param semiJoinDone     Whether this join has been translated to a    *                         semi-join    * @param systemFieldList  List of system fields that will be prefixed to    *                         output row type; typically empty but must not be    *                         null    * @see #isSemiJoinDone()    */
 specifier|public
-name|JoinRel
+name|LogicalJoin
 parameter_list|(
 name|RelOptCluster
 name|cluster
@@ -246,9 +384,9 @@ operator|=
 name|systemFieldList
 expr_stmt|;
 block|}
-comment|/**    * Creates a JoinRel by parsing serialized output.    */
+comment|/**    * Creates a LogicalJoin by parsing serialized output.    */
 specifier|public
-name|JoinRel
+name|LogicalJoin
 parameter_list|(
 name|RelInput
 name|input
@@ -323,7 +461,7 @@ comment|//~ Methods ------------------------------------------------------------
 annotation|@
 name|Override
 specifier|public
-name|JoinRel
+name|LogicalJoin
 name|copy
 parameter_list|(
 name|RelTraitSet
@@ -357,7 +495,7 @@ argument_list|)
 assert|;
 return|return
 operator|new
-name|JoinRel
+name|LogicalJoin
 argument_list|(
 name|getCluster
 argument_list|()
@@ -456,7 +594,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End JoinRel.java
+comment|// End LogicalJoin.java
 end_comment
 
 end_unit

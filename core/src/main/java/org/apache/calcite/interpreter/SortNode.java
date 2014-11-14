@@ -5,13 +5,11 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
-operator|.
-name|impl
+name|calcite
 operator|.
 name|interpreter
 package|;
@@ -21,7 +19,9 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
@@ -33,11 +33,15 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
-name|SortRel
+name|core
+operator|.
+name|Sort
 import|;
 end_import
 
@@ -45,7 +49,9 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rex
 operator|.
@@ -150,7 +156,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Interpreter node that implements a  * {@link org.eigenbase.rel.SortRel}.  */
+comment|/**  * Interpreter node that implements a  * {@link org.apache.calcite.rel.core.Sort}.  */
 end_comment
 
 begin_class
@@ -172,7 +178,7 @@ name|sink
 decl_stmt|;
 specifier|private
 specifier|final
-name|SortRel
+name|Sort
 name|rel
 decl_stmt|;
 specifier|public
@@ -181,7 +187,7 @@ parameter_list|(
 name|Interpreter
 name|interpreter
 parameter_list|,
-name|SortRel
+name|Sort
 name|rel
 parameter_list|)
 block|{
@@ -785,7 +791,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End ScanNode.java
+comment|// End SortNode.java
 end_comment
 
 end_unit

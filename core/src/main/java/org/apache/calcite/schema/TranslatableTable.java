@@ -5,11 +5,13 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
+operator|.
+name|schema
 package|;
 end_package
 
@@ -17,11 +19,13 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|rel
+name|calcite
 operator|.
-name|RelNode
+name|plan
+operator|.
+name|RelOptTable
 import|;
 end_import
 
@@ -29,16 +33,18 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|relopt
+name|calcite
 operator|.
-name|RelOptTable
+name|rel
+operator|.
+name|RelNode
 import|;
 end_import
 
 begin_comment
-comment|/**  * Extension to {@link Table} that specifies how it is to be translated to  * a {@link org.eigenbase.rel.RelNode planner node}.  *  *<p>It is optional for a Table to implement this interface. A Table that does  * not implement this interface, a Table will be converted to an  * EnumerableTableAccessRel. Generally a Table will implements this interface to  * create a particular subclass of RelNode, and also register rules that act  * on that particular subclass of RelNode.</p>  */
+comment|/**  * Extension to {@link Table} that specifies how it is to be translated to  * a {@link org.apache.calcite.rel.RelNode planner node}.  *  *<p>It is optional for a Table to implement this interface. A Table that does  * not implement this interface, a Table will be converted to an  * EnumerableTableAccessRel. Generally a Table will implements this interface to  * create a particular subclass of RelNode, and also register rules that act  * on that particular subclass of RelNode.</p>  */
 end_comment
 
 begin_interface

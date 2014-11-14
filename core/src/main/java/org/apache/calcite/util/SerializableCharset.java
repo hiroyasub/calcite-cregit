@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|util
 package|;
@@ -19,7 +21,37 @@ name|java
 operator|.
 name|io
 operator|.
-name|*
+name|IOException
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|io
+operator|.
+name|ObjectInputStream
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|io
+operator|.
+name|ObjectOutputStream
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|io
+operator|.
+name|Serializable
 import|;
 end_import
 
@@ -31,7 +63,7 @@ name|nio
 operator|.
 name|charset
 operator|.
-name|*
+name|Charset
 import|;
 end_import
 
@@ -56,7 +88,7 @@ name|String
 name|charsetName
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a SerializableCharset. External users should call {@link    * #forCharset(Charset)}.    *    * @param charset Character set; must not be null    */
+comment|/**    * Creates a SerializableCharset. External users should call    * {@link #forCharset(Charset)}.    *    * @param charset Character set; must not be null    */
 specifier|private
 name|SerializableCharset
 parameter_list|(

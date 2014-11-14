@@ -5,11 +5,11 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
 name|config
 package|;
@@ -17,9 +17,11 @@ end_package
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
+operator|.
+name|calcite
 operator|.
 name|avatica
 operator|.
@@ -29,9 +31,11 @@ end_import
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
+operator|.
+name|calcite
 operator|.
 name|avatica
 operator|.
@@ -41,9 +45,11 @@ end_import
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
+operator|.
+name|calcite
 operator|.
 name|avatica
 operator|.
@@ -58,61 +64,61 @@ end_comment
 begin_interface
 specifier|public
 interface|interface
-name|OptiqConnectionConfig
+name|CalciteConnectionConfig
 extends|extends
 name|ConnectionConfig
 block|{
-comment|/** @see net.hydromatic.optiq.config.OptiqConnectionProperty#AUTO_TEMP */
+comment|/** @see CalciteConnectionProperty#AUTO_TEMP */
 name|boolean
 name|autoTemp
 parameter_list|()
 function_decl|;
-comment|/** @see net.hydromatic.optiq.config.OptiqConnectionProperty#MATERIALIZATIONS_ENABLED */
+comment|/** @see CalciteConnectionProperty#MATERIALIZATIONS_ENABLED */
 name|boolean
 name|materializationsEnabled
 parameter_list|()
 function_decl|;
-comment|/** @see net.hydromatic.optiq.config.OptiqConnectionProperty#CREATE_MATERIALIZATIONS */
+comment|/** @see CalciteConnectionProperty#CREATE_MATERIALIZATIONS */
 name|boolean
 name|createMaterializations
 parameter_list|()
 function_decl|;
-comment|/** @see net.hydromatic.optiq.config.OptiqConnectionProperty#MODEL */
+comment|/** @see CalciteConnectionProperty#MODEL */
 name|String
 name|model
 parameter_list|()
 function_decl|;
-comment|/** @see net.hydromatic.optiq.config.OptiqConnectionProperty#LEX */
+comment|/** @see CalciteConnectionProperty#LEX */
 name|Lex
 name|lex
 parameter_list|()
 function_decl|;
-comment|/** @see net.hydromatic.optiq.config.OptiqConnectionProperty#QUOTING */
+comment|/** @see CalciteConnectionProperty#QUOTING */
 name|Quoting
 name|quoting
 parameter_list|()
 function_decl|;
-comment|/** @see net.hydromatic.optiq.config.OptiqConnectionProperty#UNQUOTED_CASING */
+comment|/** @see CalciteConnectionProperty#UNQUOTED_CASING */
 name|Casing
 name|unquotedCasing
 parameter_list|()
 function_decl|;
-comment|/** @see net.hydromatic.optiq.config.OptiqConnectionProperty#QUOTED_CASING */
+comment|/** @see CalciteConnectionProperty#QUOTED_CASING */
 name|Casing
 name|quotedCasing
 parameter_list|()
 function_decl|;
-comment|/** @see net.hydromatic.optiq.config.OptiqConnectionProperty#CASE_SENSITIVE */
+comment|/** @see CalciteConnectionProperty#CASE_SENSITIVE */
 name|boolean
 name|caseSensitive
 parameter_list|()
 function_decl|;
-comment|/** @see net.hydromatic.optiq.config.OptiqConnectionProperty#SPARK */
+comment|/** @see CalciteConnectionProperty#SPARK */
 name|boolean
 name|spark
 parameter_list|()
 function_decl|;
-comment|/** @see net.hydromatic.optiq.config.OptiqConnectionProperty#TYPE_SYSTEM */
+comment|/** @see CalciteConnectionProperty#TYPE_SYSTEM */
 parameter_list|<
 name|T
 parameter_list|>
@@ -133,7 +139,7 @@ block|}
 end_interface
 
 begin_comment
-comment|// End OptiqConnectionConfig.java
+comment|// End CalciteConnectionConfig.java
 end_comment
 
 end_unit

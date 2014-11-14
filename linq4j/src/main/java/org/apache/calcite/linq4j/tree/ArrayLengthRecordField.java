@@ -5,13 +5,15 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
+operator|.
+name|calcite
 operator|.
 name|linq4j
 operator|.
-name|expressions
+name|tree
 package|;
 end_package
 
@@ -283,6 +285,10 @@ return|;
 block|}
 block|}
 end_class
+
+begin_comment
+comment|// End ArrayLengthRecordField.java
+end_comment
 
 end_unit
 

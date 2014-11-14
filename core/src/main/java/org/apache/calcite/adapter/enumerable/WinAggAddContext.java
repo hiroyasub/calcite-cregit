@@ -5,34 +5,36 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
-name|rules
+name|adapter
 operator|.
-name|java
+name|enumerable
 package|;
 end_package
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
+operator|.
+name|calcite
 operator|.
 name|linq4j
 operator|.
-name|expressions
+name|tree
 operator|.
 name|Expression
 import|;
 end_import
 
 begin_comment
-comment|/**  * Information for a call to {@link AggImplementor#implementAdd(AggContext, AggAddContext)}.  * {@link WinAggAddContext} is used when implementing windowed aggregate.  * Typically, the aggregation implementation will use {@link #arguments()}  * or {@link #rexArguments()} to update aggregate value.  * @see AggAddContext  */
+comment|/**  * Information for a call to  * {@link AggImplementor#implementAdd(AggContext, AggAddContext)}.  *  *<p>{@link WinAggAddContext} is used when implementing windowed aggregate.  * Typically, the aggregation implementation will use {@link #arguments()}  * or {@link #rexArguments()} to update aggregate value.  * @see AggAddContext  */
 end_comment
 
 begin_interface

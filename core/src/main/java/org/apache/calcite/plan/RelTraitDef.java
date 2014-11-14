@@ -7,9 +7,11 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|relopt
+name|calcite
+operator|.
+name|plan
 package|;
 end_package
 
@@ -17,11 +19,13 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
-name|*
+name|RelNode
 import|;
 end_import
 
@@ -29,13 +33,15 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
 name|convert
 operator|.
-name|*
+name|ConverterRule
 import|;
 end_import
 
@@ -49,12 +55,40 @@ name|common
 operator|.
 name|cache
 operator|.
-name|*
+name|CacheBuilder
+import|;
+end_import
+
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|cache
+operator|.
+name|CacheLoader
+import|;
+end_import
+
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|cache
+operator|.
+name|LoadingCache
 import|;
 end_import
 
 begin_comment
-comment|/**  * RelTraitDef represents a class of {@link RelTrait}s. Implementations of  * RelTraitDef may be singletons under the following conditions:  *  *<ol>  *<li>if the set of all possible associated RelTraits is finite and fixed (e.g.  * all RelTraits for this RelTraitDef are known at compile time). For example,  * the CallingConvention trait meets this requirement, because CallingConvention  * is effectively an enumeration.</li>  *<li>Either  *  *<ul>  *<li> {@link #canConvert(RelOptPlanner, RelTrait, RelTrait)} and {@link  * #convert(RelOptPlanner, RelNode, RelTrait, boolean)} do not require  * planner-instance-specific information,<b>or</b></li>  *<li>the RelTraitDef manages separate sets of conversion data internally. See  * {@link ConventionTraitDef} for an example of this.</li>  *</ul>  *</li>  *</ol>  *  *<p>Otherwise, a new instance of RelTraitDef must be constructed and  * registered with each new planner instantiated.</p>  *  * @param<T> Trait that this trait definition is based upon  */
+comment|/**  * RelTraitDef represents a class of {@link RelTrait}s. Implementations of  * RelTraitDef may be singletons under the following conditions:  *  *<ol>  *<li>if the set of all possible associated RelTraits is finite and fixed (e.g.  * all RelTraits for this RelTraitDef are known at compile time). For example,  * the CallingConvention trait meets this requirement, because CallingConvention  * is effectively an enumeration.</li>  *<li>Either  *  *<ul>  *<li> {@link #canConvert(RelOptPlanner, RelTrait, RelTrait)} and  * {@link #convert(RelOptPlanner, RelNode, RelTrait, boolean)} do not require  * planner-instance-specific information,<b>or</b></li>  *  *<li>the RelTraitDef manages separate sets of conversion data internally. See  * {@link ConventionTraitDef} for an example of this.</li>  *</ul>  *</li>  *</ol>  *  *<p>Otherwise, a new instance of RelTraitDef must be constructed and  * registered with each new planner instantiated.</p>  *  * @param<T> Trait that this trait definition is based upon  */
 end_comment
 
 begin_class
@@ -144,7 +178,7 @@ argument_list|>
 name|getTraitClass
 parameter_list|()
 function_decl|;
-comment|/**    * @return a simple name for this RelTraitDef (for use in    * {@link org.eigenbase.rel.RelNode#explain(RelWriter)}).    */
+comment|/**    * @return a simple name for this RelTraitDef (for use in    * {@link org.apache.calcite.rel.RelNode#explain}).    */
 specifier|public
 specifier|abstract
 name|String
@@ -230,7 +264,7 @@ name|T
 name|toTrait
 parameter_list|)
 function_decl|;
-comment|/**    * Provides notification of the registration of a particular {@link    * ConverterRule} with a {@link RelOptPlanner}. The default implementation    * does nothing.    *    * @param planner       the planner registering the rule    * @param converterRule the registered converter rule    */
+comment|/**    * Provides notification of the registration of a particular    * {@link ConverterRule} with a {@link RelOptPlanner}. The default    * implementation does nothing.    *    * @param planner       the planner registering the rule    * @param converterRule the registered converter rule    */
 specifier|public
 name|void
 name|registerConverterRule

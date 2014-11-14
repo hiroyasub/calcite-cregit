@@ -7,31 +7,25 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|relopt
+name|calcite
+operator|.
+name|plan
 package|;
 end_package
 
 begin_import
 import|import
-name|java
-operator|.
-name|util
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
-name|*
+name|RelNode
 import|;
 end_import
 
@@ -105,8 +99,28 @@ name|Lists
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|ArrayList
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
+import|;
+end_import
+
 begin_comment
-comment|/**  * A<code>RelOptRule</code> transforms an expression into another. It has a  * list of {@link RelOptRuleOperand}s, which determine whether the rule can be  * applied to a particular section of the tree.  *  *<p>The optimizer figures out which rules are applicable, then calls {@link  * #onMatch} on each of them.</p>  */
+comment|/**  * A<code>RelOptRule</code> transforms an expression into another. It has a  * list of {@link RelOptRuleOperand}s, which determine whether the rule can be  * applied to a particular section of the tree.  *  *<p>The optimizer figures out which rules are applicable, then calls  * {@link #onMatch} on each of them.</p>  */
 end_comment
 
 begin_class
@@ -431,7 +445,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates a list of child operands that matches child relational    * expressions in any order.    *    *<p>This is useful when matching a relational expression which    * can have a variable number of children. For example, the rule to    * eliminate empty children of a Union would have operands</p>    *    *<blockquote>Operand(UnionRel, true, Operand(EmptyRel))</blockquote>    *    *<p>and given the relational expressions</p>    *    *<blockquote>UnionRel(FilterRel, EmptyRel, ProjectRel)</blockquote>    *    *<p>would fire the rule with arguments</p>    *    *<blockquote>{Union, Empty}</blockquote>    *    *<p>It is up to the rule to deduce the other children, or indeed the    * position of the matched child.</p>    *    * @param first First child operand    * @param rest  Remaining child operands (may be empty)    */
+comment|/**    * Creates a list of child operands that matches child relational    * expressions in any order.    *    *<p>This is useful when matching a relational expression which    * can have a variable number of children. For example, the rule to    * eliminate empty children of a Union would have operands</p>    *    *<blockquote>Operand(Union, true, Operand(Empty))</blockquote>    *    *<p>and given the relational expressions</p>    *    *<blockquote>Union(LogicalFilter, Empty, LogicalProject)</blockquote>    *    *<p>would fire the rule with arguments</p>    *    *<blockquote>{Union, Empty}</blockquote>    *    *<p>It is up to the rule to deduce the other children, or indeed the    * position of the matched child.</p>    *    * @param first First child operand    * @param rest  Remaining child operands (may be empty)    */
 specifier|public
 specifier|static
 name|RelOptRuleOperandChildren
@@ -922,7 +936,7 @@ name|operand
 argument_list|)
 return|;
 block|}
-comment|/**    * Returns whether this rule could possibly match the given operands.    *    *<p>This method is an opportunity to apply side-conditions to a rule. The    * {@link RelOptPlanner} calls this method after matching all operands of    * the rule, and before calling {@link #onMatch(RelOptRuleCall)}.    *    *<p>In implementations of {@link RelOptPlanner} which may queue up a    * matched {@link RelOptRuleCall} for a long time before calling {@link    * #onMatch(RelOptRuleCall)}, this method is beneficial because it allows    * the planner to discard rules earlier in the process.    *    *<p>The default implementation of this method returns<code>true</code>.    * It is acceptable for any implementation of this method to give a false    * positives, that is, to say that the rule matches the operands but have    * {@link #onMatch(RelOptRuleCall)} subsequently not generate any    * successors.    *    *<p>The following script is useful to identify rules which commonly    * produce no successors. You should override this method for these rules:    *    *<blockquote>    *<pre><code>awk '    * /Apply rule/ {rule=$4; ruleCount[rule]++;}    * /generated 0 successors/ {ruleMiss[rule]++;}    * END {    *   printf "%-30s %s %s\n", "Rule", "Fire", "Miss";    *   for (i in ruleCount) {    *     printf "%-30s %5d %5d\n", i, ruleCount[i], ruleMiss[i];    *   }    * } ' FarragoTrace.log</code></pre>    *</blockquote>    *    * @param call Rule call which has been determined to match all operands of    *             this rule    * @return whether this RelOptRule matches a given RelOptRuleCall    */
+comment|/**    * Returns whether this rule could possibly match the given operands.    *    *<p>This method is an opportunity to apply side-conditions to a rule. The    * {@link RelOptPlanner} calls this method after matching all operands of    * the rule, and before calling {@link #onMatch(RelOptRuleCall)}.    *    *<p>In implementations of {@link RelOptPlanner} which may queue up a    * matched {@link RelOptRuleCall} for a long time before calling    * {@link #onMatch(RelOptRuleCall)}, this method is beneficial because it    * allows the planner to discard rules earlier in the process.    *    *<p>The default implementation of this method returns<code>true</code>.    * It is acceptable for any implementation of this method to give a false    * positives, that is, to say that the rule matches the operands but have    * {@link #onMatch(RelOptRuleCall)} subsequently not generate any    * successors.    *    *<p>The following script is useful to identify rules which commonly    * produce no successors. You should override this method for these rules:    *    *<blockquote>    *<pre><code>awk '    * /Apply rule/ {rule=$4; ruleCount[rule]++;}    * /generated 0 successors/ {ruleMiss[rule]++;}    * END {    *   printf "%-30s %s %s\n", "Rule", "Fire", "Miss";    *   for (i in ruleCount) {    *     printf "%-30s %5d %5d\n", i, ruleCount[i], ruleMiss[i];    *   }    * } ' FarragoTrace.log</code></pre>    *</blockquote>    *    * @param call Rule call which has been determined to match all operands of    *             this rule    * @return whether this RelOptRule matches a given RelOptRuleCall    */
 specifier|public
 name|boolean
 name|matches

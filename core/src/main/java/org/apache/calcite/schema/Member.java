@@ -5,19 +5,23 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
+operator|.
+name|schema
 package|;
 end_package
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
+operator|.
+name|calcite
 operator|.
 name|linq4j
 operator|.
@@ -29,9 +33,13 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|reltype
+name|calcite
+operator|.
+name|rel
+operator|.
+name|type
 operator|.
 name|RelDataType
 import|;
@@ -74,7 +82,7 @@ name|RelDataType
 name|getType
 parameter_list|()
 function_decl|;
-comment|/**    * Evaluates this member to yield a result. The result is a    * {@link net.hydromatic.linq4j.Queryable}.    *    * @param schemaInstance Object that is an instance of the containing    *                       {@link net.hydromatic.optiq.Schema}    * @param arguments List of arguments to the call; must match    *                  {@link #getParameters() parameters} in number and type    *    * @return An instance of this schema object, as a Queryable    */
+comment|/**    * Evaluates this member to yield a result. The result is a    * {@link org.apache.calcite.linq4j.Queryable}.    *    * @param schemaInstance Object that is an instance of the containing    *                       {@link Schema}    * @param arguments List of arguments to the call; must match    *                  {@link #getParameters() parameters} in number and type    *    * @return An instance of this schema object, as a Queryable    */
 name|Queryable
 name|evaluate
 parameter_list|(

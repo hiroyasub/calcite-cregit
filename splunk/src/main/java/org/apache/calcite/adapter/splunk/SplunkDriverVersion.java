@@ -5,13 +5,13 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
-name|impl
+name|adapter
 operator|.
 name|splunk
 package|;
@@ -19,9 +19,11 @@ end_package
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
+operator|.
+name|calcite
 operator|.
 name|avatica
 operator|.
@@ -39,7 +41,7 @@ name|SplunkDriverVersion
 extends|extends
 name|DriverVersion
 block|{
-comment|/** Creates an OptiqDriverVersion. */
+comment|/** Creates a SplunkDriverVersion. */
 name|SplunkDriverVersion
 parameter_list|()
 block|{

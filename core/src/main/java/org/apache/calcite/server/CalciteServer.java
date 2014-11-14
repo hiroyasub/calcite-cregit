@@ -5,11 +5,11 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
 name|server
 package|;
@@ -22,27 +22,27 @@ end_comment
 begin_interface
 specifier|public
 interface|interface
-name|OptiqServer
+name|CalciteServer
 block|{
 name|void
 name|removeStatement
 parameter_list|(
-name|OptiqServerStatement
-name|optiqServerStatement
+name|CalciteServerStatement
+name|calciteServerStatement
 parameter_list|)
 function_decl|;
 name|void
 name|addStatement
 parameter_list|(
-name|OptiqServerStatement
-name|optiqServerStatement
+name|CalciteServerStatement
+name|calciteServerStatement
 parameter_list|)
 function_decl|;
 block|}
 end_interface
 
 begin_comment
-comment|// End OptiqServer.java
+comment|// End CalciteServer.java
 end_comment
 
 end_unit

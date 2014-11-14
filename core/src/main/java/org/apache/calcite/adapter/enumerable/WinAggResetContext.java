@@ -5,20 +5,20 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
-name|rules
+name|adapter
 operator|.
-name|java
+name|enumerable
 package|;
 end_package
 
 begin_comment
-comment|/**  * Information for a call to {@link AggImplementor#implementReset(AggContext, AggResetContext)}.  * {@link AggResetContext} provides access to the accumulator variables  * that should be reset.  * Note: the very first reset of windowed aggregates is performed with null  * knowledge of indices and row count in the partition.  * In other words, the implementation should treat indices and partition row  * count as a hint to pre-size the collections.  */
+comment|/**  * Information for a call to  * {@link AggImplementor#implementReset(AggContext, AggResetContext)}.  *  *<p>The {@link AggResetContext} provides access to the accumulator variables  * that should be reset.  *  *<p>Note: the very first reset of windowed aggregates is performed with null  * knowledge of indices and row count in the partition.  * In other words, the implementation should treat indices and partition row  * count as a hint to pre-size the collections.  */
 end_comment
 
 begin_interface

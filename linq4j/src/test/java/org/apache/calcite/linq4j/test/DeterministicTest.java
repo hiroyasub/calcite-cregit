@@ -5,9 +5,11 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
+operator|.
+name|calcite
 operator|.
 name|linq4j
 operator|.
@@ -17,23 +19,11 @@ end_package
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|linq4j
-operator|.
-name|expressions
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
-name|net
-operator|.
-name|hydromatic
+name|calcite
 operator|.
 name|linq4j
 operator|.
@@ -45,15 +35,129 @@ end_import
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
+operator|.
+name|calcite
 operator|.
 name|linq4j
 operator|.
 name|function
 operator|.
 name|NonDeterministic
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|linq4j
+operator|.
+name|tree
+operator|.
+name|Blocks
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|linq4j
+operator|.
+name|tree
+operator|.
+name|ClassDeclarationFinder
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|linq4j
+operator|.
+name|tree
+operator|.
+name|DeterministicCodeOptimizer
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|linq4j
+operator|.
+name|tree
+operator|.
+name|Expression
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|linq4j
+operator|.
+name|tree
+operator|.
+name|Expressions
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|linq4j
+operator|.
+name|tree
+operator|.
+name|ParameterExpression
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|linq4j
+operator|.
+name|tree
+operator|.
+name|Types
 import|;
 end_import
 
@@ -113,9 +217,11 @@ end_import
 
 begin_import
 import|import static
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
+operator|.
+name|calcite
 operator|.
 name|linq4j
 operator|.
@@ -123,7 +229,97 @@ name|test
 operator|.
 name|BlockBuilderBase
 operator|.
-name|*
+name|FOUR
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|linq4j
+operator|.
+name|test
+operator|.
+name|BlockBuilderBase
+operator|.
+name|ONE
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|linq4j
+operator|.
+name|test
+operator|.
+name|BlockBuilderBase
+operator|.
+name|THREE
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|linq4j
+operator|.
+name|test
+operator|.
+name|BlockBuilderBase
+operator|.
+name|TWO
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|linq4j
+operator|.
+name|test
+operator|.
+name|BlockBuilderBase
+operator|.
+name|optimize
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|linq4j
+operator|.
+name|test
+operator|.
+name|BlockBuilderBase
+operator|.
+name|optimizeExpression
 import|;
 end_import
 
@@ -135,7 +331,19 @@ name|hamcrest
 operator|.
 name|CoreMatchers
 operator|.
-name|*
+name|equalTo
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|hamcrest
+operator|.
+name|CoreMatchers
+operator|.
+name|is
 import|;
 end_import
 
@@ -1926,13 +2134,13 @@ literal|"  return new Runnable(){\n"
 operator|+
 literal|"      int test() {\n"
 operator|+
-literal|"        return $L4J$C$net_hydromatic_linq4j_test_DeterministicTest_TestClass_determin1da033bf;\n"
+literal|"        return $L4J$C$org_apache_calcite_linq4j_test_DeterministicTest_TestClass_dete33e8af1c;\n"
 operator|+
 literal|"      }\n"
 operator|+
 literal|"\n"
 operator|+
-literal|"      static final int $L4J$C$net_hydromatic_linq4j_test_DeterministicTest_TestClass_determin1da033bf = net.hydromatic.linq4j.test.DeterministicTest.TestClass.deterministic(1);\n"
+literal|"      static final int $L4J$C$org_apache_calcite_linq4j_test_DeterministicTest_TestClass_dete33e8af1c = org.apache.calcite.linq4j.test.DeterministicTest.TestClass.deterministic(1);\n"
 operator|+
 literal|"    };\n"
 operator|+
@@ -2028,7 +2236,7 @@ literal|"  return new Runnable(){\n"
 operator|+
 literal|"      int test() {\n"
 operator|+
-literal|"        return net.hydromatic.linq4j.test.DeterministicTest.TestClass.nonDeterministic(1);\n"
+literal|"        return org.apache.calcite.linq4j.test.DeterministicTest.TestClass.nonDeterministic(1);\n"
 operator|+
 literal|"      }\n"
 operator|+
@@ -2128,13 +2336,13 @@ literal|"  return new Runnable(){\n"
 operator|+
 literal|"      int test() {\n"
 operator|+
-literal|"        return $L4J$C$net_hydromatic_linq4j_test_DeterministicTest_TestDeterministicCa1bc6d17;\n"
+literal|"        return $L4J$C$org_apache_calcite_linq4j_test_DeterministicTest_TestDeterminis9de610da;\n"
 operator|+
 literal|"      }\n"
 operator|+
 literal|"\n"
 operator|+
-literal|"      static final int $L4J$C$net_hydromatic_linq4j_test_DeterministicTest_TestDeterministicCa1bc6d17 = net.hydromatic.linq4j.test.DeterministicTest.TestDeterministicClass.deterministic(1);\n"
+literal|"      static final int $L4J$C$org_apache_calcite_linq4j_test_DeterministicTest_TestDeterminis9de610da = org.apache.calcite.linq4j.test.DeterministicTest.TestDeterministicClass.deterministic(1);\n"
 operator|+
 literal|"    };\n"
 operator|+
@@ -2230,7 +2438,7 @@ literal|"  return new Runnable(){\n"
 operator|+
 literal|"      int test() {\n"
 operator|+
-literal|"        return net.hydromatic.linq4j.test.DeterministicTest.TestDeterministicClass.nonDeterministic(1);\n"
+literal|"        return org.apache.calcite.linq4j.test.DeterministicTest.TestDeterministicClass.nonDeterministic(1);\n"
 operator|+
 literal|"      }\n"
 operator|+

@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|test
 package|;
@@ -15,55 +17,15 @@ end_package
 
 begin_import
 import|import
-name|java
+name|org
 operator|.
-name|nio
+name|apache
 operator|.
-name|charset
+name|calcite
 operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
-name|java
+name|avatica
 operator|.
-name|util
-operator|.
-name|Arrays
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|List
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|Locale
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|logging
-operator|.
-name|*
+name|Casing
 import|;
 end_import
 
@@ -71,9 +33,41 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|reltype
+name|calcite
+operator|.
+name|avatica
+operator|.
+name|Quoting
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|config
+operator|.
+name|Lex
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|type
 operator|.
 name|RelDataTypeSystem
 import|;
@@ -83,11 +77,13 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
-name|*
+name|SqlCollation
 import|;
 end_import
 
@@ -95,7 +91,37 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|SqlIntervalQualifier
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|SqlOperator
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
@@ -109,7 +135,9 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
@@ -123,13 +151,15 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
 name|type
 operator|.
-name|*
+name|SqlTypeName
 import|;
 end_import
 
@@ -137,13 +167,15 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
 name|validate
 operator|.
-name|*
+name|SqlConformance
 import|;
 end_import
 
@@ -151,49 +183,29 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|validate
+operator|.
+name|SqlValidator
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|util
 operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|avatica
-operator|.
-name|Casing
-import|;
-end_import
-
-begin_import
-import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|avatica
-operator|.
-name|Quoting
-import|;
-end_import
-
-begin_import
-import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|optiq
-operator|.
-name|config
-operator|.
-name|Lex
+name|Bug
 import|;
 end_import
 
@@ -238,6 +250,60 @@ import|;
 end_import
 
 begin_import
+import|import
+name|java
+operator|.
+name|nio
+operator|.
+name|charset
+operator|.
+name|Charset
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Arrays
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Locale
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|logging
+operator|.
+name|Logger
+import|;
+end_import
+
+begin_import
 import|import static
 name|org
 operator|.
@@ -245,12 +311,36 @@ name|junit
 operator|.
 name|Assert
 operator|.
-name|*
+name|assertEquals
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|assertThat
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|assertTrue
 import|;
 end_import
 
 begin_comment
-comment|/**  * Concrete child class of {@link SqlValidatorTestCase}, containing lots of unit  * tests.  *  *<p>If you want to run these same tests in a different environment, create a  * derived class whose {@link #getTester} returns a different implementation of  * {@link org.eigenbase.sql.test.SqlTester}.  */
+comment|/**  * Concrete child class of {@link SqlValidatorTestCase}, containing lots of unit  * tests.  *  *<p>If you want to run these same tests in a different environment, create a  * derived class whose {@link #getTester} returns a different implementation of  * {@link org.apache.calcite.sql.test.SqlTester}.  */
 end_comment
 
 begin_class
@@ -10210,7 +10300,9 @@ comment|// the<window specification> used by windowed agg functions is
 comment|// fully defined in SQL 03 Std. section 7.1<window clause>
 name|check
 argument_list|(
-literal|"select sum(sal) over (partition by deptno order by empno) from emp order by empno"
+literal|"select sum(sal) over (partition by deptno order by empno)\n"
+operator|+
+literal|"from emp order by empno"
 argument_list|)
 expr_stmt|;
 name|checkWinFuncExp
@@ -11490,7 +11582,9 @@ expr_stmt|;
 comment|// "select * from emp where empno in ()" is invalid -- see parser test
 name|check
 argument_list|(
-literal|"select * from emp where empno in (10 + deptno, cast(null as integer))"
+literal|"select * from emp\n"
+operator|+
+literal|"where empno in (10 + deptno, cast(null as integer))"
 argument_list|)
 expr_stmt|;
 name|checkFails
@@ -12577,7 +12671,9 @@ block|{
 comment|// FRG-115: having clause with between not working
 name|check
 argument_list|(
-literal|"select deptno from emp group by deptno having deptno between 10 and 12"
+literal|"select deptno from emp group by deptno\n"
+operator|+
+literal|"having deptno between 10 and 12"
 argument_list|)
 expr_stmt|;
 comment|// this worked even before FRG-115 was fixed
@@ -13911,7 +14007,9 @@ expr_stmt|;
 comment|// datatype equivalence
 name|check
 argument_list|(
-literal|"select cast(empno as VARCHAR(10)) from emp group by cast(empno as VARCHAR(10))"
+literal|"select cast(empno as VARCHAR(10)) from emp\n"
+operator|+
+literal|"group by cast(empno as VARCHAR(10))"
 argument_list|)
 expr_stmt|;
 name|checkFails
@@ -14023,7 +14121,9 @@ comment|// CASE expression.
 comment|// literal equivalence
 name|check
 argument_list|(
-literal|"select case empno when 10 then date '1969-04-29' else null end from emp "
+literal|"select case empno when 10 then date '1969-04-29' else null end\n"
+operator|+
+literal|"from emp\n"
 operator|+
 literal|"group by case empno when 10 then date '1969-04-29' else null end"
 argument_list|)
@@ -14068,7 +14168,9 @@ argument_list|)
 expr_stmt|;
 name|check
 argument_list|(
-literal|"select case empno when 10 then timestamp '1969-04-29 12:34:56.0' else null end from emp "
+literal|"select case empno when 10 then timestamp '1969-04-29 12:34:56.0'\n"
+operator|+
+literal|"       else null end from emp\n"
 operator|+
 literal|"group by case empno when 10 then timestamp '1969-04-29 12:34:56' else null end"
 argument_list|)
@@ -14097,9 +14199,15 @@ condition|)
 block|{
 name|check
 argument_list|(
-literal|"select case empno when 10 then _iso-8859-1'foo bar' collate latin1$en$1 else null end from emp "
+literal|"select case empno when 10\n"
 operator|+
-literal|"group by case empno when 10 then _iso-8859-1'foo bar' collate latin1$en$1 else null end"
+literal|"      then _iso-8859-1'foo bar' collate latin1$en$1 else null end\n"
+operator|+
+literal|"from emp\n"
+operator|+
+literal|"group by case empno when 10\n"
+operator|+
+literal|"      then _iso-8859-1'foo bar' collate latin1$en$1 else null end"
 argument_list|)
 expr_stmt|;
 block|}
@@ -14658,7 +14766,9 @@ condition|)
 block|{
 name|check
 argument_list|(
-literal|"select deptno from emp group by case when deptno = ? then 1 else 2 end"
+literal|"select deptno from emp\n"
+operator|+
+literal|"group by case when deptno = ? then 1 else 2 end"
 argument_list|)
 expr_stmt|;
 block|}
@@ -14844,17 +14954,23 @@ argument_list|)
 expr_stmt|;
 name|check
 argument_list|(
-literal|"select * from emp, LATERAL (select * from dept where emp.deptno=dept.deptno)"
+literal|"select * from emp,\n"
+operator|+
+literal|"  LATERAL (select * from dept where emp.deptno=dept.deptno)"
 argument_list|)
 expr_stmt|;
 name|check
 argument_list|(
-literal|"select * from emp, LATERAL (select * from dept where emp.deptno=dept.deptno) as ldt"
+literal|"select * from emp,\n"
+operator|+
+literal|"  LATERAL (select * from dept where emp.deptno=dept.deptno) as ldt"
 argument_list|)
 expr_stmt|;
 name|check
 argument_list|(
-literal|"select * from emp, LATERAL (select * from dept where emp.deptno=dept.deptno) ldt"
+literal|"select * from emp,\n"
+operator|+
+literal|"  LATERAL (select * from dept where emp.deptno=dept.deptno) ldt"
 argument_list|)
 expr_stmt|;
 block|}
@@ -15120,7 +15236,9 @@ argument_list|)
 expr_stmt|;
 name|check
 argument_list|(
-literal|"SELECT DISTINCT deptno, 33 FROM emp GROUP BY deptno HAVING deptno> 55"
+literal|"SELECT DISTINCT deptno, 33 FROM emp\n"
+operator|+
+literal|"GROUP BY deptno HAVING deptno> 55"
 argument_list|)
 expr_stmt|;
 name|checkFails
@@ -15189,7 +15307,9 @@ expr_stmt|;
 comment|// redundant distinct; same query is in unitsql/optimizer/distinct.sql
 name|check
 argument_list|(
-literal|"select distinct * from (select distinct deptno from emp) order by 1"
+literal|"select distinct * from (\n"
+operator|+
+literal|"  select distinct deptno from emp) order by 1"
 argument_list|)
 expr_stmt|;
 name|check

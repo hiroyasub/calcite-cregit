@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
@@ -17,11 +19,15 @@ end_package
 
 begin_import
 import|import
-name|java
+name|org
 operator|.
-name|util
+name|apache
 operator|.
-name|*
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptRule
 import|;
 end_import
 
@@ -29,11 +35,13 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|rel
+name|calcite
 operator|.
-name|*
+name|plan
+operator|.
+name|RelOptRuleCall
 import|;
 end_import
 
@@ -41,9 +49,89 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptUtil
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
+operator|.
+name|RelNode
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|core
+operator|.
+name|Join
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|core
+operator|.
+name|JoinRelType
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|core
+operator|.
+name|RelFactories
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|core
 operator|.
 name|RelFactories
 operator|.
@@ -55,11 +143,15 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|relopt
+name|calcite
 operator|.
-name|*
+name|rel
+operator|.
+name|logical
+operator|.
+name|LogicalJoin
 import|;
 end_import
 
@@ -67,11 +159,15 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|reltype
+name|calcite
 operator|.
-name|*
+name|rel
+operator|.
+name|type
+operator|.
+name|RelDataType
 import|;
 end_import
 
@@ -79,11 +175,29 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|type
+operator|.
+name|RelDataTypeField
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rex
 operator|.
-name|*
+name|RexBuilder
 import|;
 end_import
 
@@ -91,11 +205,55 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rex
+operator|.
+name|RexCall
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rex
+operator|.
+name|RexInputRef
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rex
+operator|.
+name|RexNode
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|util
 operator|.
-name|*
+name|Util
 import|;
 end_import
 
@@ -113,14 +271,24 @@ name|ImmutableList
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
+import|;
+end_import
+
 begin_comment
-comment|/**  *<code>SwapJoinRule</code> permutes the inputs to a join. Outer joins cannot  * be permuted.  */
+comment|/**  * Planner rule that permutes the inputs to a  * {@link org.apache.calcite.rel.core.Join}.  *  *<p>Outer joins cannot be permuted.  *  *<p>To preserve the order of columns in the output row, the rule adds a  * {@link org.apache.calcite.rel.core.Project}.  */
 end_comment
 
 begin_class
 specifier|public
 class|class
-name|SwapJoinRule
+name|JoinCommuteRule
 extends|extends
 name|RelOptRule
 block|{
@@ -129,11 +297,11 @@ comment|/** The singleton. */
 specifier|public
 specifier|static
 specifier|final
-name|SwapJoinRule
+name|JoinCommuteRule
 name|INSTANCE
 init|=
 operator|new
-name|SwapJoinRule
+name|JoinCommuteRule
 argument_list|()
 decl_stmt|;
 specifier|private
@@ -142,14 +310,14 @@ name|ProjectFactory
 name|projectFactory
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a SwapJoinRule.    */
+comment|/**    * Creates a JoinCommuteRule.    */
 specifier|private
-name|SwapJoinRule
+name|JoinCommuteRule
 parameter_list|()
 block|{
 name|this
 argument_list|(
-name|JoinRel
+name|LogicalJoin
 operator|.
 name|class
 argument_list|,
@@ -160,13 +328,13 @@ argument_list|)
 expr_stmt|;
 block|}
 specifier|public
-name|SwapJoinRule
+name|JoinCommuteRule
 parameter_list|(
 name|Class
 argument_list|<
 name|?
 extends|extends
-name|JoinRelBase
+name|Join
 argument_list|>
 name|clazz
 parameter_list|,
@@ -199,7 +367,7 @@ specifier|static
 name|RelNode
 name|swap
 parameter_list|(
-name|JoinRelBase
+name|Join
 name|join
 parameter_list|)
 block|{
@@ -218,7 +386,7 @@ specifier|static
 name|RelNode
 name|swap
 parameter_list|(
-name|JoinRelBase
+name|Join
 name|join
 parameter_list|,
 name|boolean
@@ -324,7 +492,7 @@ comment|// swap.  This way, we will generate one semijoin for the original
 comment|// join, and one for the swapped join, and no more.  This
 comment|// doesn't prevent us from seeing any new combinations assuming
 comment|// that the planner tries the desired order (semijoins after swaps).
-name|JoinRelBase
+name|Join
 name|newJoin
 init|=
 name|join
@@ -407,7 +575,7 @@ name|RelOptRuleCall
 name|call
 parameter_list|)
 block|{
-name|JoinRelBase
+name|Join
 name|join
 init|=
 name|call
@@ -453,20 +621,20 @@ block|}
 comment|// The result is either a Project or, if the project is trivial, a
 comment|// raw Join.
 specifier|final
-name|JoinRelBase
+name|Join
 name|newJoin
 init|=
 name|swapped
 operator|instanceof
-name|JoinRelBase
+name|Join
 condition|?
 operator|(
-name|JoinRelBase
+name|Join
 operator|)
 name|swapped
 else|:
 operator|(
-name|JoinRelBase
+name|Join
 operator|)
 name|swapped
 operator|.
@@ -823,7 +991,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End SwapJoinRule.java
+comment|// End JoinCommuteRule.java
 end_comment
 
 end_unit

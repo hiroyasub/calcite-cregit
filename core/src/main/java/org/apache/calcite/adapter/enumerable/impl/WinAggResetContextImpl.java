@@ -5,15 +5,15 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
-name|rules
+name|adapter
 operator|.
-name|java
+name|enumerable
 operator|.
 name|impl
 package|;
@@ -21,13 +21,31 @@ end_package
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
+operator|.
+name|calcite
+operator|.
+name|adapter
+operator|.
+name|enumerable
+operator|.
+name|WinAggResetContext
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|linq4j
 operator|.
-name|expressions
+name|tree
 operator|.
 name|BlockBuilder
 import|;
@@ -35,31 +53,17 @@ end_import
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
+operator|.
+name|calcite
 operator|.
 name|linq4j
 operator|.
-name|expressions
+name|tree
 operator|.
 name|Expression
-import|;
-end_import
-
-begin_import
-import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|optiq
-operator|.
-name|rules
-operator|.
-name|java
-operator|.
-name|WinAggResetContext
 import|;
 end_import
 
@@ -74,7 +78,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Implementation of {@link net.hydromatic.optiq.rules.java.WinAggResetContext}.  */
+comment|/**  * Implementation of  * {@link org.apache.calcite.adapter.enumerable.WinAggResetContext}.  */
 end_comment
 
 begin_class
@@ -248,6 +252,10 @@ return|;
 block|}
 block|}
 end_class
+
+begin_comment
+comment|// End WinAggResetContextImpl.java
+end_comment
 
 end_unit
 

@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
@@ -19,11 +21,43 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptRule
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptRuleCall
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
-name|*
+name|core
+operator|.
+name|Filter
 import|;
 end_import
 
@@ -31,11 +65,15 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|relopt
+name|calcite
 operator|.
-name|*
+name|rel
+operator|.
+name|core
+operator|.
+name|RelFactories
 import|;
 end_import
 
@@ -43,33 +81,91 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rex
 operator|.
-name|*
+name|RexBuilder
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rex
+operator|.
+name|RexNode
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rex
+operator|.
+name|RexProgram
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rex
+operator|.
+name|RexProgramBuilder
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rex
+operator|.
+name|RexUtil
 import|;
 end_import
 
 begin_comment
-comment|/**  * MergeFilterRule implements the rule for combining two {@link FilterRel}s  */
+comment|/**  * Planner rule that combines two  * {@link org.apache.calcite.rel.logical.LogicalFilter}s.  */
 end_comment
 
 begin_class
 specifier|public
 class|class
-name|MergeFilterRule
+name|FilterMergeRule
 extends|extends
 name|RelOptRule
 block|{
 specifier|public
 specifier|static
 specifier|final
-name|MergeFilterRule
+name|FilterMergeRule
 name|INSTANCE
 init|=
 operator|new
-name|MergeFilterRule
+name|FilterMergeRule
 argument_list|(
 name|RelFactories
 operator|.
@@ -84,9 +180,9 @@ name|FilterFactory
 name|filterFactory
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a MergeFilterRule.    */
+comment|/**    * Creates a FilterMergeRule.    */
 specifier|public
-name|MergeFilterRule
+name|FilterMergeRule
 parameter_list|(
 name|RelFactories
 operator|.
@@ -98,13 +194,13 @@ name|super
 argument_list|(
 name|operand
 argument_list|(
-name|FilterRelBase
+name|Filter
 operator|.
 name|class
 argument_list|,
 name|operand
 argument_list|(
-name|FilterRelBase
+name|Filter
 operator|.
 name|class
 argument_list|,
@@ -132,7 +228,7 @@ name|call
 parameter_list|)
 block|{
 specifier|final
-name|FilterRelBase
+name|Filter
 name|topFilter
 init|=
 name|call
@@ -143,7 +239,7 @@ literal|0
 argument_list|)
 decl_stmt|;
 specifier|final
-name|FilterRelBase
+name|Filter
 name|bottomFilter
 init|=
 name|call
@@ -154,8 +250,8 @@ literal|1
 argument_list|)
 decl_stmt|;
 comment|// use RexPrograms to merge the two FilterRels into a single program
-comment|// so we can convert the two FilterRel conditions to directly
-comment|// reference the bottom FilterRel's child
+comment|// so we can convert the two LogicalFilter conditions to directly
+comment|// reference the bottom LogicalFilter's child
 name|RexBuilder
 name|rexBuilder
 init|=
@@ -210,11 +306,11 @@ name|getCondition
 argument_list|()
 argument_list|)
 decl_stmt|;
-name|FilterRelBase
+name|Filter
 name|newFilterRel
 init|=
 operator|(
-name|FilterRelBase
+name|Filter
 operator|)
 name|filterFactory
 operator|.
@@ -222,7 +318,7 @@ name|createFilter
 argument_list|(
 name|bottomFilter
 operator|.
-name|getChild
+name|getInput
 argument_list|()
 argument_list|,
 name|RexUtil
@@ -243,12 +339,12 @@ name|newFilterRel
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Creates a RexProgram corresponding to a FilterRel    *    * @param filterRel the FilterRel    * @return created RexProgram    */
+comment|/**    * Creates a RexProgram corresponding to a LogicalFilter    *    * @param filterRel the LogicalFilter    * @return created RexProgram    */
 specifier|private
 name|RexProgram
 name|createProgram
 parameter_list|(
-name|FilterRelBase
+name|Filter
 name|filterRel
 parameter_list|)
 block|{
@@ -298,7 +394,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End MergeFilterRule.java
+comment|// End FilterMergeRule.java
 end_comment
 
 end_unit

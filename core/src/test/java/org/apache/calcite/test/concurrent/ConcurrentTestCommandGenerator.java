@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|test
 operator|.
@@ -17,53 +19,15 @@ end_package
 
 begin_import
 import|import
-name|java
+name|org
 operator|.
-name|io
+name|apache
 operator|.
-name|PrintStream
-import|;
-end_import
-
-begin_import
-import|import
-name|java
+name|calcite
 operator|.
-name|math
+name|jdbc
 operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|sql
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|regex
-operator|.
-name|Pattern
+name|SqlTimeoutException
 import|;
 end_import
 
@@ -71,25 +35,13 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|util
 operator|.
 name|Util
-import|;
-end_import
-
-begin_import
-import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|optiq
-operator|.
-name|jdbc
-operator|.
-name|SqlTimeoutException
 import|;
 end_import
 
@@ -107,8 +59,180 @@ name|ImmutableList
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|io
+operator|.
+name|PrintStream
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|math
+operator|.
+name|BigDecimal
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|math
+operator|.
+name|BigInteger
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|sql
+operator|.
+name|Connection
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|sql
+operator|.
+name|PreparedStatement
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|sql
+operator|.
+name|ResultSet
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|sql
+operator|.
+name|SQLException
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|sql
+operator|.
+name|Statement
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|ArrayList
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Collection
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Iterator
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Map
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Properties
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Set
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|TreeMap
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|regex
+operator|.
+name|Pattern
+import|;
+end_import
+
 begin_comment
-comment|/**  * ConcurrentTestCommandGenerator creates instances of {@link  * ConcurrentTestCommand} that perform specific actions in a specific  * order and within the context of a test thread ({@link  * ConcurrentTestCommandExecutor}).  *  *<p>Typical actions include preparing a SQL statement for execution, executing  * the statement and verifying its result set, and closing the statement.</p>  *  *<p>A single ConcurrentTestCommandGenerator creates commands for  * multiple threads. Each thread is represented by an integer "thread ID".  * Thread IDs may take on any positive integer value and may be a sparse set  * (e.g. 1, 2, 5).</p>  *  *<p>When each command is created, it is associated with a thread and given an  * execution order. Execution order values are positive integers, must be unique  * within a thread, and may be a sparse set.</p>  *  *<p>There are no restrictions on the order of command creation.</p>  */
+comment|/**  * ConcurrentTestCommandGenerator creates instances of  * {@link ConcurrentTestCommand} that perform specific actions in a specific  * order and within the context of a test thread  * ({@link ConcurrentTestCommandExecutor}).  *  *<p>Typical actions include preparing a SQL statement for execution, executing  * the statement and verifying its result set, and closing the statement.</p>  *  *<p>A single ConcurrentTestCommandGenerator creates commands for  * multiple threads. Each thread is represented by an integer "thread ID".  * Thread IDs may take on any positive integer value and may be a sparse set  * (e.g. 1, 2, 5).</p>  *  *<p>When each command is created, it is associated with a thread and given an  * execution order. Execution order values are positive integers, must be unique  * within a thread, and may be a sparse set.</p>  *  *<p>There are no restrictions on the order of command creation.</p>  */
 end_comment
 
 begin_class
@@ -438,7 +562,7 @@ name|command
 argument_list|)
 return|;
 block|}
-comment|/**    * Executes a previously {@link #addPrepareCommand(int, int, String)    * prepared} SQL statement and compares its {@link ResultSet} to the given    * data.    *    *<p><b>Expected data format:</b><code>{ 'row1, col1 value', 'row1, col2    * value', ... }, { 'row2, col1 value', 'row2, col2 value', ... },    * ...</code></p>    *    *<ul>    *<li>For string data: enclose value in apostrophes, use doubled apostrophe    * to include an apostrophe in the value.</li>    *<li>For integer or real data: simply use the stringified value (e.g. 123,    * 12.3, 0.65). No scientific notation is allowed.</li>    *<li>For null values, use the word<code>null</code> without quotes.</li>    *</ul>    *<b>Example:</b><code>{ 'foo', 10, 3.14, null }</code>    *    *<p><b>Note on timeout:</b> If the previously prepared statement's    * {@link Statement#setQueryTimeout(int)} method throws an    * {@link UnsupportedOperationException} it is ignored and no timeout is set.    *    * @param threadId the thread that should execute this command    * @param order    the execution order    * @param timeout  the query timeout, in seconds (see above)    * @param expected the expected results (see above)    * @return the newly-added command    */
+comment|/**    * Executes a previously    * {@link #addPrepareCommand(int, int, String) prepared} SQL statement and    * compares its {@link ResultSet} to the given data.    *    *<p><b>Expected data format:</b><code>{ 'row1, col1 value', 'row1, col2    * value', ... }, { 'row2, col1 value', 'row2, col2 value', ... },    * ...</code></p>    *    *<ul>    *<li>For string data: enclose value in apostrophes, use doubled apostrophe    * to include an apostrophe in the value.</li>    *<li>For integer or real data: simply use the stringified value (e.g. 123,    * 12.3, 0.65). No scientific notation is allowed.</li>    *<li>For null values, use the word<code>null</code> without quotes.</li>    *</ul>    *<b>Example:</b><code>{ 'foo', 10, 3.14, null }</code>    *    *<p><b>Note on timeout:</b> If the previously prepared statement's    * {@link Statement#setQueryTimeout(int)} method throws an    * {@link UnsupportedOperationException} it is ignored and no timeout is set.    *    * @param threadId the thread that should execute this command    * @param order    the execution order    * @param timeout  the query timeout, in seconds (see above)    * @param expected the expected results (see above)    * @return the newly-added command    */
 specifier|public
 name|ConcurrentTestCommand
 name|addFetchAndCompareCommand
@@ -794,7 +918,7 @@ operator|=
 name|jdbcProps
 expr_stmt|;
 block|}
-comment|/**    * Creates a {@link ConcurrentTestCommandExecutor} object for each define thread,    * and then runs them all.    *    * @throws Exception if no connection found or if a thread operation is    *                   interrupted    */
+comment|/**    * Creates a {@link ConcurrentTestCommandExecutor} object for each define    * thread, and then runs them all.    *    * @throws Exception if no connection found or if a thread operation is    *                   interrupted    */
 specifier|public
 name|void
 name|execute
@@ -1556,7 +1680,7 @@ return|return
 literal|false
 return|;
 block|}
-comment|/**    * Custom error handling occurs here if {@link    * #requiresCustomErrorHandling()} returns true. Default implementation does    * nothing.    */
+comment|/**    * Custom error handling occurs here if    * {@link #requiresCustomErrorHandling()} returns true. Default implementation    * does nothing.    */
 name|void
 name|customErrorHandler
 parameter_list|(
@@ -2015,7 +2139,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**    * ExplainCommand executes explain plan commands. Automatically closes the    * {@link Statement} before returning from {@link    * #execute(ConcurrentTestCommandExecutor)}.    */
+comment|/**    * ExplainCommand executes explain plan commands. Automatically closes the    * {@link Statement} before returning from    * {@link #execute(ConcurrentTestCommandExecutor)}.    */
 specifier|private
 specifier|static
 class|class
@@ -2224,6 +2348,7 @@ argument_list|()
 expr_stmt|;
 block|}
 block|}
+comment|/** Command that executes statements with a given timeout. */
 specifier|private
 specifier|abstract
 specifier|static
@@ -2567,7 +2692,7 @@ name|STATE_VALUE_END
 init|=
 literal|4
 decl_stmt|;
-comment|/**      * Parses expected values. See {@link      * ConcurrentTestCommandGenerator#addFetchAndCompareCommand(int,      * int, int, String)} for details on format of<code>expected</code>.      *      * @throws IllegalStateException if there are formatting errors in      *<code>expected</code>      */
+comment|/**      * Parses expected values. See      * {@link ConcurrentTestCommandGenerator#addFetchAndCompareCommand(int, int, int, String)}      * for details on format of<code>expected</code>.      *      * @throws IllegalStateException if there are formatting errors in      *<code>expected</code>      */
 specifier|private
 name|void
 name|parseExpected
@@ -4487,7 +4612,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**    * CommitCommand commits pending transactions via {@link    * Connection#commit()}.    */
+comment|/**    * CommitCommand commits pending transactions via    * {@link Connection#commit()}.    */
 specifier|private
 specifier|static
 class|class
@@ -4515,7 +4640,7 @@ argument_list|()
 expr_stmt|;
 block|}
 block|}
-comment|/**    * RollbackCommand rolls back pending transactions via {@link    * Connection#rollback()}.    */
+comment|/**    * RollbackCommand rolls back pending transactions via    * {@link Connection#rollback()}.    */
 specifier|private
 specifier|static
 class|class
@@ -4543,7 +4668,7 @@ argument_list|()
 expr_stmt|;
 block|}
 block|}
-comment|/**    * DdlCommand executes DDL commands. Automatically closes the {@link    * Statement} before returning from {@link    * #doExecute(ConcurrentTestCommandExecutor)}.    */
+comment|/**    * DdlCommand executes DDL commands. Automatically closes the    * {@link Statement} before returning from    * {@link #doExecute(ConcurrentTestCommandExecutor)}.    */
 specifier|private
 specifier|static
 class|class

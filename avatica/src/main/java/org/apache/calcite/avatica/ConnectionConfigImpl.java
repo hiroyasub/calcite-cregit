@@ -5,9 +5,11 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
+operator|.
+name|calcite
 operator|.
 name|avatica
 package|;
@@ -123,7 +125,7 @@ name|getString
 argument_list|()
 return|;
 block|}
-comment|/** Converts a {@link Properties} object containing (name, value)    * pairs into a map whose keys are    * {@link net.hydromatic.avatica.InternalProperty} objects.    *    *<p>Matching is case-insensitive. Throws if a property is not known.    * If a property occurs more than once, takes the last occurrence.</p>    *    * @param properties Properties    * @return Map    * @throws RuntimeException if a property is not known    */
+comment|/** Converts a {@link Properties} object containing (name, value)    * pairs into a map whose keys are    * {@link org.apache.calcite.avatica.InternalProperty} objects.    *    *<p>Matching is case-insensitive. Throws if a property is not known.    * If a property occurs more than once, takes the last occurrence.</p>    *    * @param properties Properties    * @return Map    * @throws RuntimeException if a property is not known    */
 specifier|public
 specifier|static
 name|Map

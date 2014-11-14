@@ -7,9 +7,11 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|resource
+name|calcite
+operator|.
+name|runtime
 package|;
 end_package
 
@@ -17,7 +19,9 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
@@ -28,26 +32,18 @@ import|;
 end_import
 
 begin_import
-import|import
+import|import static
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|util
+name|calcite
 operator|.
-name|EigenbaseContextException
-import|;
-end_import
-
-begin_import
-import|import
-name|org
+name|runtime
 operator|.
-name|eigenbase
+name|Resources
 operator|.
-name|util
-operator|.
-name|EigenbaseException
+name|BaseMessage
 import|;
 end_import
 
@@ -55,24 +51,74 @@ begin_import
 import|import static
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|resource
+name|calcite
+operator|.
+name|runtime
 operator|.
 name|Resources
 operator|.
-name|*
+name|ExInst
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|runtime
+operator|.
+name|Resources
+operator|.
+name|ExInstWithCause
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|runtime
+operator|.
+name|Resources
+operator|.
+name|Inst
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|runtime
+operator|.
+name|Resources
+operator|.
+name|Property
 import|;
 end_import
 
 begin_comment
-comment|/**  * Compiler-checked resources for the Eigenbase project.  */
+comment|/**  * Compiler-checked resources for the Calcite project.  */
 end_comment
 
 begin_interface
 specifier|public
 interface|interface
-name|EigenbaseNewResource
+name|CalciteResource
 block|{
 annotation|@
 name|BaseMessage
@@ -96,7 +142,7 @@ literal|"Illegal {0} literal {1}: {2}"
 argument_list|)
 name|ExInst
 argument_list|<
-name|EigenbaseException
+name|CalciteException
 argument_list|>
 name|illegalLiteral
 parameter_list|(
@@ -117,7 +163,7 @@ literal|"Length of identifier ''{0}'' must be less than or equal to {1,number,#}
 argument_list|)
 name|ExInst
 argument_list|<
-name|EigenbaseException
+name|CalciteException
 argument_list|>
 name|identifierTooLong
 parameter_list|(
@@ -170,7 +216,7 @@ literal|"42000"
 argument_list|)
 name|ExInst
 argument_list|<
-name|EigenbaseException
+name|CalciteException
 argument_list|>
 name|illegalIntervalLiteral
 parameter_list|(
@@ -188,7 +234,7 @@ literal|"Illegal expression. Was expecting \"(DATETIME - DATETIME) INTERVALQUALI
 argument_list|)
 name|ExInst
 argument_list|<
-name|EigenbaseException
+name|CalciteException
 argument_list|>
 name|illegalMinusDate
 parameter_list|()
@@ -200,7 +246,7 @@ literal|"Illegal overlaps expression. Was expecting expression on the form \"(DA
 argument_list|)
 name|ExInst
 argument_list|<
-name|EigenbaseException
+name|CalciteException
 argument_list|>
 name|illegalOverlaps
 parameter_list|()
@@ -212,7 +258,7 @@ literal|"Non-query expression encountered in illegal context"
 argument_list|)
 name|ExInst
 argument_list|<
-name|EigenbaseException
+name|CalciteException
 argument_list|>
 name|illegalNonQueryExpression
 parameter_list|()
@@ -224,7 +270,7 @@ literal|"Query expression encountered in illegal context"
 argument_list|)
 name|ExInst
 argument_list|<
-name|EigenbaseException
+name|CalciteException
 argument_list|>
 name|illegalQueryExpression
 parameter_list|()
@@ -236,7 +282,7 @@ literal|"CURSOR expression encountered in illegal context"
 argument_list|)
 name|ExInst
 argument_list|<
-name|EigenbaseException
+name|CalciteException
 argument_list|>
 name|illegalCursorExpression
 parameter_list|()
@@ -248,7 +294,7 @@ literal|"ORDER BY unexpected"
 argument_list|)
 name|ExInst
 argument_list|<
-name|EigenbaseException
+name|CalciteException
 argument_list|>
 name|illegalOrderBy
 parameter_list|()
@@ -260,7 +306,7 @@ literal|"Illegal binary string {0}"
 argument_list|)
 name|ExInst
 argument_list|<
-name|EigenbaseException
+name|CalciteException
 argument_list|>
 name|illegalBinaryString
 parameter_list|(
@@ -275,7 +321,7 @@ literal|"''FROM'' without operands preceding it is illegal"
 argument_list|)
 name|ExInst
 argument_list|<
-name|EigenbaseException
+name|CalciteException
 argument_list|>
 name|illegalFromEmpty
 parameter_list|()
@@ -287,7 +333,7 @@ literal|"ROW expression encountered in illegal context"
 argument_list|)
 name|ExInst
 argument_list|<
-name|EigenbaseException
+name|CalciteException
 argument_list|>
 name|illegalRowExpression
 parameter_list|()
@@ -310,7 +356,7 @@ literal|"2202H"
 argument_list|)
 name|ExInst
 argument_list|<
-name|EigenbaseException
+name|CalciteException
 argument_list|>
 name|invalidSampleSize
 parameter_list|()
@@ -322,7 +368,7 @@ literal|"Unknown character set ''{0}''"
 argument_list|)
 name|ExInst
 argument_list|<
-name|EigenbaseException
+name|CalciteException
 argument_list|>
 name|unknownCharacterSet
 parameter_list|(
@@ -337,7 +383,7 @@ literal|"Failed to encode ''{0}'' in character set ''{1}''"
 argument_list|)
 name|ExInst
 argument_list|<
-name|EigenbaseException
+name|CalciteException
 argument_list|>
 name|charsetEncoding
 parameter_list|(
@@ -355,7 +401,7 @@ literal|"UESCAPE ''{0}'' must be exactly one character"
 argument_list|)
 name|ExInst
 argument_list|<
-name|EigenbaseException
+name|CalciteException
 argument_list|>
 name|unicodeEscapeCharLength
 parameter_list|(
@@ -370,7 +416,7 @@ literal|"UESCAPE ''{0}'' may not be hex digit, whitespace, plus sign, or double 
 argument_list|)
 name|ExInst
 argument_list|<
-name|EigenbaseException
+name|CalciteException
 argument_list|>
 name|unicodeEscapeCharIllegal
 parameter_list|(
@@ -385,7 +431,7 @@ literal|"UESCAPE cannot be specified without Unicode literal introducer"
 argument_list|)
 name|ExInst
 argument_list|<
-name|EigenbaseException
+name|CalciteException
 argument_list|>
 name|unicodeEscapeUnexpected
 parameter_list|()
@@ -445,7 +491,7 @@ literal|"At line {0,number,#}, column {1,number,#}"
 argument_list|)
 name|ExInstWithCause
 argument_list|<
-name|EigenbaseContextException
+name|CalciteContextException
 argument_list|>
 name|validatorContextPoint
 parameter_list|(
@@ -463,7 +509,7 @@ literal|"From line {0,number,#}, column {1,number,#} to line {2,number,#}, colum
 argument_list|)
 name|ExInstWithCause
 argument_list|<
-name|EigenbaseContextException
+name|CalciteContextException
 argument_list|>
 name|validatorContext
 parameter_list|(
@@ -865,7 +911,7 @@ literal|"Invalid compare. Comparing (collation, coercibility): ({0}, {1} with ({
 argument_list|)
 name|ExInst
 argument_list|<
-name|EigenbaseException
+name|CalciteException
 argument_list|>
 name|invalidCompare
 parameter_list|(
@@ -889,7 +935,7 @@ literal|"Invalid syntax. Two explicit different collations ({0}, {1}) are illega
 argument_list|)
 name|ExInst
 argument_list|<
-name|EigenbaseException
+name|CalciteException
 argument_list|>
 name|differentCollations
 parameter_list|(
@@ -1849,7 +1895,7 @@ literal|"Internal error: {0}"
 argument_list|)
 name|ExInst
 argument_list|<
-name|EigenbaseException
+name|CalciteException
 argument_list|>
 name|internal
 parameter_list|(
@@ -1894,7 +1940,7 @@ literal|"Validation Error: {0}"
 argument_list|)
 name|ExInst
 argument_list|<
-name|EigenbaseException
+name|CalciteException
 argument_list|>
 name|validationError
 parameter_list|(
@@ -1909,7 +1955,7 @@ literal|"Locale ''{0}'' in an illegal format"
 argument_list|)
 name|ExInst
 argument_list|<
-name|EigenbaseException
+name|CalciteException
 argument_list|>
 name|illegalLocaleFormat
 parameter_list|(
@@ -1963,7 +2009,7 @@ literal|"''{0}'' is not a valid boolean value"
 argument_list|)
 name|ExInst
 argument_list|<
-name|EigenbaseException
+name|CalciteException
 argument_list|>
 name|invalidBoolean
 parameter_list|(
@@ -1999,7 +2045,7 @@ literal|"Wrong arguments for table function ''{0}'' call. Expected ''{1}'', actu
 argument_list|)
 name|ExInst
 argument_list|<
-name|EigenbaseException
+name|CalciteException
 argument_list|>
 name|illegalArgumentForTableFunctionCall
 parameter_list|(
@@ -2020,7 +2066,7 @@ literal|"''{0}'' is not a valid datetime format"
 argument_list|)
 name|ExInst
 argument_list|<
-name|EigenbaseException
+name|CalciteException
 argument_list|>
 name|invalidDatetimeFormat
 parameter_list|(
@@ -2035,7 +2081,7 @@ literal|"Cannot explicitly insert value into IDENTITY column ''{0}'' which is AL
 argument_list|)
 name|ExInst
 argument_list|<
-name|EigenbaseException
+name|CalciteException
 argument_list|>
 name|insertIntoAlwaysGenerated
 parameter_list|(
@@ -2050,7 +2096,7 @@ literal|"Argument to function ''{0}'' must have a scale of 0"
 argument_list|)
 name|ExInst
 argument_list|<
-name|EigenbaseException
+name|CalciteException
 argument_list|>
 name|argumentMustHaveScaleZero
 parameter_list|(
@@ -2065,7 +2111,7 @@ literal|"Statement preparation aborted"
 argument_list|)
 name|ExInst
 argument_list|<
-name|EigenbaseException
+name|CalciteException
 argument_list|>
 name|preparationAborted
 parameter_list|()
@@ -2248,7 +2294,7 @@ literal|"Eigenbase-defined"
 argument_list|)
 name|ExInst
 argument_list|<
-name|EigenbaseException
+name|CalciteException
 argument_list|>
 name|sQLConformance_MultipleActiveAutocommitStatements
 parameter_list|()
@@ -2291,7 +2337,7 @@ literal|"Eigenbase-defined"
 argument_list|)
 name|ExInst
 argument_list|<
-name|EigenbaseException
+name|CalciteException
 argument_list|>
 name|sharedStatementPlans
 parameter_list|()
@@ -2334,7 +2380,7 @@ literal|"Eigenbase-defined"
 argument_list|)
 name|ExInst
 argument_list|<
-name|EigenbaseException
+name|CalciteException
 argument_list|>
 name|personalityManagesRowCount
 parameter_list|()
@@ -2357,7 +2403,7 @@ literal|"Eigenbase-defined"
 argument_list|)
 name|ExInst
 argument_list|<
-name|EigenbaseException
+name|CalciteException
 argument_list|>
 name|personalitySupportsSnapshots
 parameter_list|()
@@ -2380,7 +2426,7 @@ literal|"Eigenbase-defined"
 argument_list|)
 name|ExInst
 argument_list|<
-name|EigenbaseException
+name|CalciteException
 argument_list|>
 name|personalitySupportsLabels
 parameter_list|()
@@ -2497,7 +2543,7 @@ literal|"FilterableTable.scan returned a filter that was not in the original lis
 argument_list|)
 name|ExInst
 argument_list|<
-name|EigenbaseException
+name|CalciteException
 argument_list|>
 name|filterableTableInventedFilter
 parameter_list|(
@@ -2512,7 +2558,7 @@ literal|"FilterableTable.scan must not return null"
 argument_list|)
 name|ExInst
 argument_list|<
-name|EigenbaseException
+name|CalciteException
 argument_list|>
 name|filterableTableScanReturnedNull
 parameter_list|()
@@ -2521,7 +2567,7 @@ block|}
 end_interface
 
 begin_comment
-comment|// End EigenbaseNewResource.java
+comment|// End CalciteResource.java
 end_comment
 
 end_unit

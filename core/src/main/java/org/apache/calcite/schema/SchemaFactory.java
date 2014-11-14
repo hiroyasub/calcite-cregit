@@ -5,11 +5,13 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
+operator|.
+name|schema
 package|;
 end_package
 
@@ -24,7 +26,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Factory for {@link net.hydromatic.optiq.Schema} objects.  *  *<p>A schema factory allows you to include a custom schema in a model file.  * For example, here is a model that contains a custom schema whose tables  * read CSV files. (See the  *<a href="https://github.com/julianhyde/optiq-csv">optiq-csv</a> for more  * details about this particular adapter.)</p>  *  *<pre>{@code  * {  *   version: '1.0',  *   defaultSchema: 'SALES',  *   schemas: [  *     {  *       name: 'SALES',  *       type: 'custom',  *       factory: 'net.hydromatic.optiq.impl.csv.CsvSchemaFactory',  *       mutable: true,  *       operand: {  *         directory: 'target/test-classes/sales'  *       },  *       tables: [  *         {  *           name: 'FEMALE_EMPS',  *           type: 'view',  *           sql: 'SELECT * FROM emps WHERE gender = \'F\''  *          }  *       ]  *     }  *   ]  * }  * }  *</pre>  *  *<p>If you do not wish to allow model authors to add additional tables  * (including views) to an instance of your schema, specify  * 'mutable: false'.</p>  *  *<p>A class that implements SchemaFactory specified in a schema must have a  * public default constructor.</p>  */
+comment|/**  * Factory for {@link Schema} objects.  *  *<p>A schema factory allows you to include a custom schema in a model file.  * For example, here is a model that contains a custom schema whose tables  * read CSV files. (See the  *<a href="https://github.com/julianhyde/optiq-csv">optiq-csv</a> for more  * details about this particular adapter.)</p>  *  *<pre>{@code  * {  *   version: '1.0',  *   defaultSchema: 'SALES',  *   schemas: [  *     {  *       name: 'SALES',  *       type: 'custom',  *       factory: 'org.apache.calcite.adapter.csv.CsvSchemaFactory',  *       mutable: true,  *       operand: {  *         directory: 'target/test-classes/sales'  *       },  *       tables: [  *         {  *           name: 'FEMALE_EMPS',  *           type: 'view',  *           sql: 'SELECT * FROM emps WHERE gender = \'F\''  *          }  *       ]  *     }  *   ]  * }  * }  *</pre>  *  *<p>If you do not wish to allow model authors to add additional tables  * (including views) to an instance of your schema, specify  * 'mutable: false'.</p>  *  *<p>A class that implements SchemaFactory specified in a schema must have a  * public default constructor.</p>  */
 end_comment
 
 begin_interface

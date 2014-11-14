@@ -7,16 +7,18 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|relopt
+name|calcite
+operator|.
+name|plan
 operator|.
 name|volcano
 package|;
 end_package
 
 begin_comment
-comment|/**  * VolcanoPlannerPhase represents the phases of operation that the {@link  * VolcanoPlanner} passes through during optimization of a tree of {@link  * org.eigenbase.rel.RelNode} objects.  */
+comment|/**  * VolcanoPlannerPhase represents the phases of operation that the  * {@link VolcanoPlanner} passes through during optimization of a tree of  * {@link org.apache.calcite.rel.RelNode} objects.  */
 end_comment
 
 begin_enum

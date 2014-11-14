@@ -5,11 +5,11 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
 name|test
 package|;
@@ -26,7 +26,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Tests for the {@code net.hydromatic.optiq.impl.jdbc} package.  */
+comment|/**  * Tests for the {@code org.apache.calcite.adapter.jdbc} package.  */
 end_comment
 
 begin_class
@@ -41,7 +41,7 @@ name|void
 name|testUnionPlan
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
@@ -66,7 +66,7 @@ name|explainContains
 argument_list|(
 literal|"PLAN=JdbcToEnumerableConverter\n"
 operator|+
-literal|"  JdbcUnionRel(all=[true])\n"
+literal|"  JdbcUnion(all=[true])\n"
 operator|+
 literal|"    JdbcTableScan(table=[[foodmart, sales_fact_1997]])\n"
 operator|+
@@ -78,7 +78,7 @@ argument_list|()
 operator|.
 name|enable
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|CONNECTION_SPEC
 operator|.
@@ -111,7 +111,7 @@ name|void
 name|testFilterUnionPlan
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
@@ -141,7 +141,7 @@ argument_list|()
 operator|.
 name|enable
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|CONNECTION_SPEC
 operator|.
@@ -178,7 +178,7 @@ name|void
 name|testInPlan
 parameter_list|()
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
@@ -202,7 +202,7 @@ argument_list|()
 operator|.
 name|enable
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|CONNECTION_SPEC
 operator|.

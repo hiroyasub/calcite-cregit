@@ -7,9 +7,13 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|reltype
+name|calcite
+operator|.
+name|rel
+operator|.
+name|type
 package|;
 end_package
 
@@ -17,7 +21,9 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
@@ -83,7 +89,7 @@ block|}
 end_interface
 
 begin_comment
-comment|// End RelDataTypeFactory.java
+comment|// End RelDataTypeSystem.java
 end_comment
 
 end_unit

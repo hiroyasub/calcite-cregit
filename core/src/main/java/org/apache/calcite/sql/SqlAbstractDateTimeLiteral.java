@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 package|;
@@ -15,11 +17,17 @@ end_package
 
 begin_import
 import|import
-name|java
+name|org
 operator|.
-name|util
+name|apache
 operator|.
-name|*
+name|calcite
+operator|.
+name|rel
+operator|.
+name|type
+operator|.
+name|RelDataType
 import|;
 end_import
 
@@ -27,11 +35,15 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|reltype
+name|calcite
 operator|.
-name|*
+name|rel
+operator|.
+name|type
+operator|.
+name|RelDataTypeFactory
 import|;
 end_import
 
@@ -39,13 +51,15 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
 name|parser
 operator|.
-name|*
+name|SqlParserPos
 import|;
 end_import
 
@@ -53,13 +67,15 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
 name|type
 operator|.
-name|*
+name|SqlTypeName
 import|;
 end_import
 
@@ -67,11 +83,61 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|util14
+name|calcite
 operator|.
-name|*
+name|util
+operator|.
+name|ZonelessDate
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|ZonelessTime
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|ZonelessTimestamp
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Calendar
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|TimeZone
 import|;
 end_import
 
@@ -103,7 +169,7 @@ name|int
 name|precision
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Constructs a datetime literal based on a Calendar. If the literal is to    * represent a Timestamp, the Calendar is expected to follow java.sql    * semantics. If the Calendar is to represent a Time or Date, the Calendar    * is expected to follow {@link ZonelessTime} and {@link ZonelessDate}    * semantics.    */
+comment|/**    * Constructs a datetime literal based on a Calendar. If the literal is to    * represent a Timestamp, the Calendar is expected to follow java.sql    * semantics. If the Calendar is to represent a Time or Date, the Calendar    * is expected to follow {@link org.apache.calcite.util.ZonelessTime}    * and {@link org.apache.calcite.util.ZonelessDate}    * semantics.    */
 specifier|protected
 name|SqlAbstractDateTimeLiteral
 parameter_list|(
@@ -278,7 +344,7 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Converts this literal to a {@link ZonelessDate} object.    */
+comment|/**    * Converts this literal to a    * {@link org.apache.calcite.util.ZonelessDate} object.    */
 specifier|protected
 name|ZonelessDate
 name|getDate
@@ -306,7 +372,7 @@ return|return
 name|zd
 return|;
 block|}
-comment|/**    * Converts this literal to a {@link ZonelessTime} object.    */
+comment|/**    * Converts this literal to a    * {@link org.apache.calcite.util.ZonelessTime} object.    */
 specifier|protected
 name|ZonelessTime
 name|getTime
@@ -334,7 +400,7 @@ return|return
 name|zt
 return|;
 block|}
-comment|/**    * Converts this literal to a {@link ZonelessTimestamp} object.    */
+comment|/**    * Converts this literal to a    * {@link org.apache.calcite.util.ZonelessTimestamp} object.    */
 specifier|protected
 name|ZonelessTimestamp
 name|getTimestamp

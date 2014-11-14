@@ -7,19 +7,27 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
+operator|.
+name|logical
 package|;
 end_package
 
 begin_import
 import|import
-name|java
+name|org
 operator|.
-name|util
+name|apache
 operator|.
-name|*
+name|calcite
+operator|.
+name|plan
+operator|.
+name|Convention
 import|;
 end_import
 
@@ -27,21 +35,51 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|relopt
+name|calcite
 operator|.
-name|*
+name|plan
+operator|.
+name|RelOptCluster
 import|;
 end_import
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptTable
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelTraitSet
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|prepare
 operator|.
@@ -49,21 +87,61 @@ name|Prepare
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|RelNode
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|core
+operator|.
+name|TableModify
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
+import|;
+end_import
+
 begin_comment
-comment|/**  * TableModificationRel is like TableAccessRel, but represents a request to  * modify a table rather than read from it. It takes one child which produces  * the modified rows. (For INSERT, the new values; for DELETE, the old values;  * for UPDATE, all old values plus updated new values.)  */
+comment|/**  * Sub-class of {@link org.apache.calcite.rel.core.TableModify}  * not targeted at any particular engine or calling convention.  */
 end_comment
 
 begin_class
 specifier|public
 specifier|final
 class|class
-name|TableModificationRel
+name|LogicalTableModify
 extends|extends
-name|TableModificationRelBase
+name|TableModify
 block|{
 comment|//~ Constructors -----------------------------------------------------------
 specifier|public
-name|TableModificationRel
+name|LogicalTableModify
 parameter_list|(
 name|RelOptCluster
 name|cluster
@@ -123,7 +201,7 @@ comment|//~ Methods ------------------------------------------------------------
 annotation|@
 name|Override
 specifier|public
-name|TableModificationRel
+name|LogicalTableModify
 name|copy
 parameter_list|(
 name|RelTraitSet
@@ -148,7 +226,7 @@ argument_list|)
 assert|;
 return|return
 operator|new
-name|TableModificationRel
+name|LogicalTableModify
 argument_list|(
 name|getCluster
 argument_list|()
@@ -177,7 +255,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End TableModificationRel.java
+comment|// End LogicalTableModify.java
 end_comment
 
 end_unit

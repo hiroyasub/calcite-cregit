@@ -7,17 +7,23 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|reltype
+name|calcite
+operator|.
+name|rel
+operator|.
+name|type
 package|;
 end_package
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
+operator|.
+name|calcite
 operator|.
 name|linq4j
 operator|.
@@ -28,7 +34,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Can be converted into a {@link RelDataType} given a  * {@link org.eigenbase.reltype.RelDataTypeFactory}.  *  * @see org.eigenbase.reltype.RelDataTypeImpl#proto  */
+comment|/**  * Can be converted into a {@link RelDataType} given a  * {@link org.apache.calcite.rel.type.RelDataTypeFactory}.  *  * @see org.apache.calcite.rel.type.RelDataTypeImpl#proto  */
 end_comment
 
 begin_interface

@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|util
 operator|.
@@ -16,7 +18,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * Describes the type of a mapping, from the most general {@link #MULTI_FUNCTION}  * (every element in the source and target domain can participate in many  * mappings) to the most retricted {@link #BIJECTION} (every element in the  * source and target domain must be paired with precisely one element in the  * other domain).  *  *<p>Some common types:  *  *<ul>  *<li>A surjection is a mapping if every target has at least one source; also  * known as an 'onto' mapping.  *<li>A mapping is a partial function if every source has at most one target.  *<li>A mapping is a function if every source has precisely one target.  *<li>An injection is a mapping where a target has at most one source; also  * somewhat confusingly known as a 'one-to-one' mapping.  *<li>A bijection is a mapping which is both an injection and a surjection.  * Every source has precisely one target, and vice versa.  *</ul>  *  *<p>Once you know what type of mapping you want, call {@link  * Mappings#create(MappingType, int, int)} to create an efficient implementation  * of that mapping.  */
+comment|/**  * Describes the type of a mapping, from the most general  * {@link #MULTI_FUNCTION} (every element in the source and target domain can  * participate in many mappings) to the most retricted {@link #BIJECTION} (every  * element in the source and target domain must be paired with precisely one  * element in the other domain).  *  *<p>Some common types:  *  *<ul>  *<li>A surjection is a mapping if every target has at least one source; also  * known as an 'onto' mapping.  *<li>A mapping is a partial function if every source has at most one target.  *<li>A mapping is a function if every source has precisely one target.  *<li>An injection is a mapping where a target has at most one source; also  * somewhat confusingly known as a 'one-to-one' mapping.  *<li>A bijection is a mapping which is both an injection and a surjection.  * Every source has precisely one target, and vice versa.  *</ul>  *  *<p>Once you know what type of mapping you want, call  * {@link Mappings#create(MappingType, int, int)} to create an efficient  * implementation of that mapping.  */
 end_comment
 
 begin_enum
@@ -64,7 +66,7 @@ block|,
 comment|//                 11    any>= 1 multi    14
 name|ELEVEN
 block|,
-comment|/**    * An inverse function has a source for every target, but a source might    * have 0, 1 or more targets.    *    *<p>Obeys the constaints {@link MappingType#isMandatorySource()}, {@link    * MappingType#isSingleSource()}.    *    *<p>Similar types:    *    *<ul>    *<li> {@link #INVERSE_SURJECTION} is stronger (a source may not have    * multiple targets);    *<li>{@link #INVERSE_PARTIAL_FUNCTION} is weaker (a target may have 0 or 1    * sources).    *</ul>    */
+comment|/**    * An inverse function has a source for every target, but a source might    * have 0, 1 or more targets.    *    *<p>Obeys the constaints {@link MappingType#isMandatorySource()},    * {@link MappingType#isSingleSource()}.    *    *<p>Similar types:    *    *<ul>    *<li> {@link #INVERSE_SURJECTION} is stronger (a source may not have    * multiple targets);    *<li>{@link #INVERSE_PARTIAL_FUNCTION} is weaker (a target may have 0 or 1    * sources).    *</ul>    */
 comment|//                 12      1    any multi    3 Function
 name|INVERSE_FUNCTION
 block|,

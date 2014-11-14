@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
@@ -17,11 +19,15 @@ end_package
 
 begin_import
 import|import
-name|java
+name|org
 operator|.
-name|util
+name|apache
 operator|.
-name|*
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptRule
 import|;
 end_import
 
@@ -29,11 +35,41 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptRuleCall
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptUtil
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
-name|*
+name|RelNode
 import|;
 end_import
 
@@ -41,11 +77,15 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|relopt
+name|calcite
 operator|.
-name|*
+name|rel
+operator|.
+name|core
+operator|.
+name|Join
 import|;
 end_import
 
@@ -53,11 +93,15 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|reltype
+name|calcite
 operator|.
-name|*
+name|rel
+operator|.
+name|core
+operator|.
+name|JoinRelType
 import|;
 end_import
 
@@ -65,11 +109,45 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|logical
+operator|.
+name|LogicalJoin
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|type
+operator|.
+name|RelDataTypeField
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rex
 operator|.
-name|*
+name|RexBuilder
 import|;
 end_import
 
@@ -77,7 +155,65 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rex
+operator|.
+name|RexInputRef
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rex
+operator|.
+name|RexNode
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rex
+operator|.
+name|RexUtil
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rex
+operator|.
+name|RexVisitorImpl
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|util
 operator|.
@@ -89,7 +225,9 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|util
 operator|.
@@ -139,41 +277,71 @@ name|Maps
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|BitSet
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Map
+import|;
+end_import
+
 begin_comment
-comment|/**  * Rule to flatten a tree of {@link JoinRel}s into a single {@link MultiJoinRel}  * with N inputs. An input is not flattened if the input is a null generating  * input in an outer join, i.e., either input in a full outer join, the right  * hand side of a left outer join, or the left hand side of a right outer join.  *  *<p>Join conditions are also pulled up from the inputs into the topmost  * {@link MultiJoinRel},  * unless the input corresponds to a null generating input in an outer join,  *  *<p>Outer join information is also stored in the {@link MultiJoinRel}. A  * boolean flag indicates if the join is a full outer join, and in the case of  * left and right outer joins, the join type and outer join conditions are  * stored in arrays in the {@link MultiJoinRel}. This outer join information is  * associated with the null generating input in the outer join. So, in the case  * of a a left outer join between A and B, the information is associated with B,  * not A.  *  *<p>Here are examples of the {@link MultiJoinRel}s constructed after this rule  * has been applied on following join trees.  *  *<ul>  *<li>A JOIN B&rarr; MJ(A, B)  *  *<li>A JOIN B JOIN C&rarr; MJ(A, B, C)  *  *<li>A LEFT JOIN B&rarr; MJ(A, B), left outer join on input#1  *  *<li>A RIGHT JOIN B&rarr; MJ(A, B), right outer join on input#0  *  *<li>A FULL JOIN B&rarr; MJ[full](A, B)  *  *<li>A LEFT JOIN (B JOIN C)&rarr; MJ(A, MJ(B, C))), left outer join on  * input#1 in the outermost MultiJoinRel  *  *<li>(A JOIN B) LEFT JOIN C&rarr; MJ(A, B, C), left outer join on input#2  *  *<li>(A LEFT JOIN B) JOIN C&rarr; MJ(MJ(A, B), C), left outer join on input#1  * of the inner MultiJoinRel        TODO  *  *<li>A LEFT JOIN (B FULL JOIN C)&rarr; MJ(A, MJ[full](B, C)), left outer join  * on input#1 in the outermost MultiJoinRel  *  *<li>(A LEFT JOIN B) FULL JOIN (C RIGHT JOIN D)&rarr;  *      MJ[full](MJ(A, B), MJ(C, D)), left outer join on input #1 in the first  *      inner MultiJoinRel and right outer join on input#0 in the second inner  *      MultiJoinRel  *</ul>  *  *<p>The constructor is parameterized to allow any sub-class of  * {@link JoinRelBase}, not just {@link JoinRel}.</p>  */
+comment|/**  * Planner rule to flatten a tree of  * {@link org.apache.calcite.rel.logical.LogicalJoin}s  * into a single {@link MultiJoin} with N inputs.  *  *<p>An input is not flattened if  * the input is a null generating input in an outer join, i.e., either input in  * a full outer join, the right hand side of a left outer join, or the left hand  * side of a right outer join.  *  *<p>Join conditions are also pulled up from the inputs into the topmost  * {@link MultiJoin},  * unless the input corresponds to a null generating input in an outer join,  *  *<p>Outer join information is also stored in the {@link MultiJoin}. A  * boolean flag indicates if the join is a full outer join, and in the case of  * left and right outer joins, the join type and outer join conditions are  * stored in arrays in the {@link MultiJoin}. This outer join information is  * associated with the null generating input in the outer join. So, in the case  * of a a left outer join between A and B, the information is associated with B,  * not A.  *  *<p>Here are examples of the {@link MultiJoin}s constructed after this rule  * has been applied on following join trees.  *  *<ul>  *<li>A JOIN B&rarr; MJ(A, B)  *  *<li>A JOIN B JOIN C&rarr; MJ(A, B, C)  *  *<li>A LEFT JOIN B&rarr; MJ(A, B), left outer join on input#1  *  *<li>A RIGHT JOIN B&rarr; MJ(A, B), right outer join on input#0  *  *<li>A FULL JOIN B&rarr; MJ[full](A, B)  *  *<li>A LEFT JOIN (B JOIN C)&rarr; MJ(A, MJ(B, C))), left outer join on  * input#1 in the outermost MultiJoin  *  *<li>(A JOIN B) LEFT JOIN C&rarr; MJ(A, B, C), left outer join on input#2  *  *<li>(A LEFT JOIN B) JOIN C&rarr; MJ(MJ(A, B), C), left outer join on input#1  * of the inner MultiJoin        TODO  *  *<li>A LEFT JOIN (B FULL JOIN C)&rarr; MJ(A, MJ[full](B, C)), left outer join  * on input#1 in the outermost MultiJoin  *  *<li>(A LEFT JOIN B) FULL JOIN (C RIGHT JOIN D)&rarr;  *      MJ[full](MJ(A, B), MJ(C, D)), left outer join on input #1 in the first  *      inner MultiJoin and right outer join on input#0 in the second inner  *      MultiJoin  *</ul>  *  *<p>The constructor is parameterized to allow any sub-class of  * {@link org.apache.calcite.rel.core.Join}, not just  * {@link org.apache.calcite.rel.logical.LogicalJoin}.</p>  *  * @see org.apache.calcite.rel.rules.FilterMultiJoinMergeRule  * @see org.apache.calcite.rel.rules.ProjectMultiJoinMergeRule  */
 end_comment
 
 begin_class
 specifier|public
 class|class
-name|ConvertMultiJoinRule
+name|JoinToMultiJoinRule
 extends|extends
 name|RelOptRule
 block|{
 specifier|public
 specifier|static
 specifier|final
-name|ConvertMultiJoinRule
+name|JoinToMultiJoinRule
 name|INSTANCE
 init|=
 operator|new
-name|ConvertMultiJoinRule
+name|JoinToMultiJoinRule
 argument_list|(
-name|JoinRelBase
+name|LogicalJoin
 operator|.
 name|class
 argument_list|)
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a ConvertMultiJoinRule.    */
+comment|/**    * Creates a JoinToMultiJoinRule.    */
 specifier|public
-name|ConvertMultiJoinRule
+name|JoinToMultiJoinRule
 parameter_list|(
 name|Class
 argument_list|<
 name|?
 extends|extends
-name|JoinRelBase
+name|Join
 argument_list|>
 name|clazz
 parameter_list|)
@@ -217,7 +385,7 @@ name|call
 parameter_list|)
 block|{
 specifier|final
-name|JoinRelBase
+name|Join
 name|origJoin
 init|=
 name|call
@@ -249,8 +417,8 @@ argument_list|(
 literal|2
 argument_list|)
 decl_stmt|;
-comment|// combine the children MultiJoinRel inputs into an array of inputs
-comment|// for the new MultiJoinRel
+comment|// combine the children MultiJoin inputs into an array of inputs
+comment|// for the new MultiJoin
 specifier|final
 name|List
 argument_list|<
@@ -330,8 +498,8 @@ name|joinSpecs
 argument_list|)
 expr_stmt|;
 comment|// pull up the join filters from the children MultiJoinRels and
-comment|// combine them with the join filter associated with this JoinRel to
-comment|// form the join filter for the new MultiJoinRel
+comment|// combine them with the join filter associated with this LogicalJoin to
+comment|// form the join filter for the new MultiJoin
 name|List
 argument_list|<
 name|RexNode
@@ -348,7 +516,7 @@ name|right
 argument_list|)
 decl_stmt|;
 comment|// add on the join field reference counts for the join condition
-comment|// associated with this JoinRel
+comment|// associated with this LogicalJoin
 specifier|final
 name|ImmutableMap
 argument_list|<
@@ -409,7 +577,7 @@ name|RelNode
 name|multiJoin
 init|=
 operator|new
-name|MultiJoinRel
+name|MultiJoin
 argument_list|(
 name|origJoin
 operator|.
@@ -481,7 +649,7 @@ name|multiJoin
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Combines the inputs into a JoinRel into an array of inputs.    *    * @param join                   original join    * @param left                   left input into join    * @param right                  right input into join    * @param projFieldsList         returns a list of the new combined projection    *                               fields    * @param joinFieldRefCountsList returns a list of the new combined join    *                               field reference counts    * @return combined left and right inputs in an array    */
+comment|/**    * Combines the inputs into a LogicalJoin into an array of inputs.    *    * @param join                   original join    * @param left                   left input into join    * @param right                  right input into join    * @param projFieldsList         returns a list of the new combined projection    *                               fields    * @param joinFieldRefCountsList returns a list of the new combined join    *                               field reference counts    * @return combined left and right inputs in an array    */
 specifier|private
 name|List
 argument_list|<
@@ -489,7 +657,7 @@ name|RelNode
 argument_list|>
 name|combineInputs
 parameter_list|(
-name|JoinRelBase
+name|Join
 name|join
 parameter_list|,
 name|RelNode
@@ -543,11 +711,11 @@ argument_list|)
 condition|)
 block|{
 specifier|final
-name|MultiJoinRel
+name|MultiJoin
 name|leftMultiJoin
 init|=
 operator|(
-name|MultiJoinRel
+name|MultiJoin
 operator|)
 name|left
 decl_stmt|;
@@ -670,11 +838,11 @@ argument_list|)
 condition|)
 block|{
 specifier|final
-name|MultiJoinRel
+name|MultiJoin
 name|rightMultiJoin
 init|=
 operator|(
-name|MultiJoinRel
+name|MultiJoin
 operator|)
 name|right
 decl_stmt|;
@@ -789,7 +957,7 @@ specifier|private
 name|void
 name|combineOuterJoins
 parameter_list|(
-name|JoinRelBase
+name|Join
 name|joinRel
 parameter_list|,
 name|List
@@ -866,7 +1034,7 @@ block|{
 name|copyOuterJoinInfo
 argument_list|(
 operator|(
-name|MultiJoinRel
+name|MultiJoin
 operator|)
 name|left
 argument_list|,
@@ -948,7 +1116,7 @@ block|{
 name|copyOuterJoinInfo
 argument_list|(
 operator|(
-name|MultiJoinRel
+name|MultiJoin
 operator|)
 name|right
 argument_list|,
@@ -1012,7 +1180,7 @@ block|{
 name|copyOuterJoinInfo
 argument_list|(
 operator|(
-name|MultiJoinRel
+name|MultiJoin
 operator|)
 name|left
 argument_list|,
@@ -1056,7 +1224,7 @@ block|{
 name|copyOuterJoinInfo
 argument_list|(
 operator|(
-name|MultiJoinRel
+name|MultiJoin
 operator|)
 name|right
 argument_list|,
@@ -1112,13 +1280,13 @@ expr_stmt|;
 block|}
 block|}
 block|}
-comment|/**    * Copies outer join data from a source MultiJoinRel to a new set of arrays.    * Also adjusts the conditions to reflect the new position of an input if    * that input ends up being shifted to the right.    *    * @param multiJoinRel     the source MultiJoinRel    * @param destJoinSpecs    the list where the join types and conditions will    *                         be copied    * @param adjustmentAmount if&gt; 0, the amount the RexInputRefs in the join    *                         conditions need to be adjusted by    * @param srcFields        the source fields that the original join conditions    *                         are referencing    * @param destFields       the destination fields that the new join conditions    */
+comment|/**    * Copies outer join data from a source MultiJoin to a new set of arrays.    * Also adjusts the conditions to reflect the new position of an input if    * that input ends up being shifted to the right.    *    * @param multiJoin     the source MultiJoin    * @param destJoinSpecs    the list where the join types and conditions will    *                         be copied    * @param adjustmentAmount if&gt; 0, the amount the RexInputRefs in the join    *                         conditions need to be adjusted by    * @param srcFields        the source fields that the original join conditions    *                         are referencing    * @param destFields       the destination fields that the new join conditions    */
 specifier|private
 name|void
 name|copyOuterJoinInfo
 parameter_list|(
-name|MultiJoinRel
-name|multiJoinRel
+name|MultiJoin
+name|multiJoin
 parameter_list|,
 name|List
 argument_list|<
@@ -1163,12 +1331,12 @@ name|Pair
 operator|.
 name|zip
 argument_list|(
-name|multiJoinRel
+name|multiJoin
 operator|.
 name|getJoinTypes
 argument_list|()
 argument_list|,
-name|multiJoinRel
+name|multiJoin
 operator|.
 name|getOuterJoinConditions
 argument_list|()
@@ -1276,7 +1444,7 @@ name|RelOptUtil
 operator|.
 name|RexInputConverter
 argument_list|(
-name|multiJoinRel
+name|multiJoin
 operator|.
 name|getCluster
 argument_list|()
@@ -1305,7 +1473,7 @@ name|RexNode
 argument_list|>
 name|combineJoinFilters
 parameter_list|(
-name|JoinRelBase
+name|Join
 name|joinRel
 parameter_list|,
 name|RelNode
@@ -1387,7 +1555,7 @@ name|add
 argument_list|(
 operator|(
 operator|(
-name|MultiJoinRel
+name|MultiJoin
 operator|)
 name|left
 operator|)
@@ -1412,11 +1580,11 @@ argument_list|()
 argument_list|)
 condition|)
 block|{
-name|MultiJoinRel
+name|MultiJoin
 name|multiJoin
 init|=
 operator|(
-name|MultiJoinRel
+name|MultiJoin
 operator|)
 name|right
 decl_stmt|;
@@ -1444,7 +1612,7 @@ return|return
 name|filters
 return|;
 block|}
-comment|/**    * Returns whether an input can be merged into a given relational expression    * without changing semantics.    *    * @param input          input into a join    * @param nullGenerating true if the input is null generating    * @return true if the input can be combined into a parent MultiJoinRel    */
+comment|/**    * Returns whether an input can be merged into a given relational expression    * without changing semantics.    *    * @param input          input into a join    * @param nullGenerating true if the input is null generating    * @return true if the input can be combined into a parent MultiJoin    */
 specifier|private
 name|boolean
 name|canCombine
@@ -1459,12 +1627,12 @@ block|{
 return|return
 name|input
 operator|instanceof
-name|MultiJoinRel
+name|MultiJoin
 operator|&&
 operator|!
 operator|(
 operator|(
-name|MultiJoinRel
+name|MultiJoin
 operator|)
 name|input
 operator|)
@@ -1475,7 +1643,7 @@ operator|&&
 operator|!
 operator|(
 operator|(
-name|MultiJoinRel
+name|MultiJoin
 operator|)
 name|input
 operator|)
@@ -1487,18 +1655,18 @@ operator|!
 name|nullGenerating
 return|;
 block|}
-comment|/**    * Shifts a filter originating from the right child of the JoinRel to the    * right, to reflect the filter now being applied on the resulting    * MultiJoinRel.    *    * @param joinRel     the original JoinRel    * @param left        the left child of the JoinRel    * @param right       the right child of the JoinRel    * @param rightFilter the filter originating from the right child    * @return the adjusted right filter    */
+comment|/**    * Shifts a filter originating from the right child of the LogicalJoin to the    * right, to reflect the filter now being applied on the resulting    * MultiJoin.    *    * @param joinRel     the original LogicalJoin    * @param left        the left child of the LogicalJoin    * @param right       the right child of the LogicalJoin    * @param rightFilter the filter originating from the right child    * @return the adjusted right filter    */
 specifier|private
 name|RexNode
 name|shiftRightFilter
 parameter_list|(
-name|JoinRelBase
+name|Join
 name|joinRel
 parameter_list|,
 name|RelNode
 name|left
 parameter_list|,
-name|MultiJoinRel
+name|MultiJoin
 name|right
 parameter_list|,
 name|RexNode
@@ -1620,7 +1788,7 @@ return|return
 name|rightFilter
 return|;
 block|}
-comment|/**    * Adds on to the existing join condition reference counts the references    * from the new join condition.    *    * @param multiJoinInputs          inputs into the new MultiJoinRel    * @param nTotalFields             total number of fields in the MultiJoinRel    * @param joinCondition            the new join condition    * @param origJoinFieldRefCounts   existing join condition reference counts    *    * @return Map containing the new join condition    */
+comment|/**    * Adds on to the existing join condition reference counts the references    * from the new join condition.    *    * @param multiJoinInputs          inputs into the new MultiJoin    * @param nTotalFields             total number of fields in the MultiJoin    * @param joinCondition            the new join condition    * @param origJoinFieldRefCounts   existing join condition reference counts    *    * @return Map containing the new join condition    */
 specifier|private
 name|ImmutableMap
 argument_list|<
@@ -1726,7 +1894,7 @@ name|currInput
 operator|++
 expr_stmt|;
 block|}
-comment|// add on to the counts for each input into the MultiJoinRel the
+comment|// add on to the counts for each input into the MultiJoin the
 comment|// reference counts computed for the current join condition
 name|currInput
 operator|=
@@ -1896,7 +2064,7 @@ name|build
 argument_list|()
 return|;
 block|}
-comment|/**    * Combines the post-join filters from the left and right inputs (if they    * are MultiJoinRels) into a single AND'd filter.    *    * @param joinRel the original JoinRel    * @param left    left child of the JoinRel    * @param right   right child of the JoinRel    * @return combined post-join filters AND'd together    */
+comment|/**    * Combines the post-join filters from the left and right inputs (if they    * are MultiJoinRels) into a single AND'd filter.    *    * @param joinRel the original LogicalJoin    * @param left    left child of the LogicalJoin    * @param right   right child of the LogicalJoin    * @return combined post-join filters AND'd together    */
 specifier|private
 name|List
 argument_list|<
@@ -1904,7 +2072,7 @@ name|RexNode
 argument_list|>
 name|combinePostJoinFilters
 parameter_list|(
-name|JoinRelBase
+name|Join
 name|joinRel
 parameter_list|,
 name|RelNode
@@ -1930,15 +2098,15 @@ if|if
 condition|(
 name|right
 operator|instanceof
-name|MultiJoinRel
+name|MultiJoin
 condition|)
 block|{
 specifier|final
-name|MultiJoinRel
+name|MultiJoin
 name|multiRight
 init|=
 operator|(
-name|MultiJoinRel
+name|MultiJoin
 operator|)
 name|right
 decl_stmt|;
@@ -1966,7 +2134,7 @@ if|if
 condition|(
 name|left
 operator|instanceof
-name|MultiJoinRel
+name|MultiJoin
 condition|)
 block|{
 name|filters
@@ -1975,7 +2143,7 @@ name|add
 argument_list|(
 operator|(
 operator|(
-name|MultiJoinRel
+name|MultiJoin
 operator|)
 name|left
 operator|)
@@ -2052,7 +2220,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End ConvertMultiJoinRule.java
+comment|// End JoinToMultiJoinRule.java
 end_comment
 
 end_unit

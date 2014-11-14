@@ -5,11 +5,11 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
 name|test
 package|;
@@ -17,15 +17,15 @@ end_package
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
 name|jdbc
 operator|.
-name|OptiqConnection
+name|CalciteConnection
 import|;
 end_import
 
@@ -85,15 +85,15 @@ end_import
 
 begin_import
 import|import static
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
 name|test
 operator|.
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 import|;
@@ -107,7 +107,19 @@ name|junit
 operator|.
 name|Assert
 operator|.
-name|*
+name|assertEquals
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|assertFalse
 import|;
 end_import
 
@@ -132,7 +144,7 @@ argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -168,7 +180,7 @@ argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -180,7 +192,7 @@ argument_list|(
 operator|new
 name|Function
 argument_list|<
-name|OptiqConnection
+name|CalciteConnection
 argument_list|,
 name|Object
 argument_list|>
@@ -190,7 +202,7 @@ specifier|public
 name|Object
 name|apply
 parameter_list|(
-name|OptiqConnection
+name|CalciteConnection
 name|a0
 parameter_list|)
 block|{
@@ -295,7 +307,7 @@ argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -307,7 +319,7 @@ argument_list|(
 operator|new
 name|Function
 argument_list|<
-name|OptiqConnection
+name|CalciteConnection
 argument_list|,
 name|Object
 argument_list|>
@@ -317,7 +329,7 @@ specifier|public
 name|Object
 name|apply
 parameter_list|(
-name|OptiqConnection
+name|CalciteConnection
 name|a0
 parameter_list|)
 block|{
@@ -427,7 +439,7 @@ argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -439,7 +451,7 @@ argument_list|(
 operator|new
 name|Function
 argument_list|<
-name|OptiqConnection
+name|CalciteConnection
 argument_list|,
 name|Object
 argument_list|>
@@ -449,7 +461,7 @@ specifier|public
 name|Object
 name|apply
 parameter_list|(
-name|OptiqConnection
+name|CalciteConnection
 name|a0
 parameter_list|)
 block|{
@@ -555,7 +567,7 @@ argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -567,7 +579,7 @@ argument_list|(
 operator|new
 name|Function
 argument_list|<
-name|OptiqConnection
+name|CalciteConnection
 argument_list|,
 name|Object
 argument_list|>
@@ -577,7 +589,7 @@ specifier|public
 name|Object
 name|apply
 parameter_list|(
-name|OptiqConnection
+name|CalciteConnection
 name|a0
 parameter_list|)
 block|{
@@ -643,7 +655,7 @@ argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -657,9 +669,11 @@ argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"select case when \"sales_fact_1997\".\"promotion_id\" = 1 then 0\n"
+literal|"select\n"
 operator|+
-literal|"                        else \"sales_fact_1997\".\"store_sales\" end as \"c0\"\n"
+literal|"  case when \"sales_fact_1997\".\"promotion_id\" = 1 then 0\n"
+operator|+
+literal|"  else \"sales_fact_1997\".\"store_sales\" end as \"c0\"\n"
 operator|+
 literal|"from \"sales_fact_1997\" as \"sales_fact_1997\""
 operator|+

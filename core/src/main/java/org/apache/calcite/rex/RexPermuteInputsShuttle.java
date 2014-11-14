@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rex
 package|;
@@ -15,19 +17,11 @@ end_package
 
 begin_import
 import|import
-name|java
-operator|.
-name|util
-operator|.
-name|List
-import|;
-end_import
-
-begin_import
-import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
@@ -39,9 +33,13 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|reltype
+name|calcite
+operator|.
+name|rel
+operator|.
+name|type
 operator|.
 name|RelDataTypeField
 import|;
@@ -51,7 +49,9 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|util
 operator|.
@@ -75,8 +75,18 @@ name|ImmutableList
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
+import|;
+end_import
+
 begin_comment
-comment|/**  * Shuttle which applies a permutation to its input fields.  *  * @see RexPermutationShuttle  * @see RexUtil#apply(org.eigenbase.util.mapping.Mappings.TargetMapping, RexNode)  */
+comment|/**  * Shuttle which applies a permutation to its input fields.  *  * @see RexPermutationShuttle  * @see RexUtil#apply(org.apache.calcite.util.mapping.Mappings.TargetMapping, RexNode)  */
 end_comment
 
 begin_class
@@ -103,7 +113,7 @@ argument_list|>
 name|fields
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a RexPermuteInputsShuttle.    *    *<p>The mapping provides at most one target for every source. If a source    * has no targets and is referenced in the expression,    * {@link org.eigenbase.util.mapping.Mappings.TargetMapping#getTarget(int)}    * will give an error. Otherwise the mapping gives a unique target.    *    * @param mapping Mapping    * @param inputs  Input relational expressions    */
+comment|/**    * Creates a RexPermuteInputsShuttle.    *    *<p>The mapping provides at most one target for every source. If a source    * has no targets and is referenced in the expression,    * {@link org.apache.calcite.util.mapping.Mappings.TargetMapping#getTarget(int)}    * will give an error. Otherwise the mapping gives a unique target.    *    * @param mapping Mapping    * @param inputs  Input relational expressions    */
 specifier|public
 name|RexPermuteInputsShuttle
 parameter_list|(

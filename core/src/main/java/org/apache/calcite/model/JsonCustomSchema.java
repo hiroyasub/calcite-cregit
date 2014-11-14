@@ -5,11 +5,11 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
 name|model
 package|;
@@ -26,7 +26,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * JSON schema element that represents a custom schema.  *  * @see net.hydromatic.optiq.model.JsonRoot Description of schema elements  */
+comment|/**  * JSON schema element that represents a custom schema.  *  * @see org.apache.calcite.model.JsonRoot Description of schema elements  */
 end_comment
 
 begin_class
@@ -36,7 +36,7 @@ name|JsonCustomSchema
 extends|extends
 name|JsonMapSchema
 block|{
-comment|/** Name of the factory class for this schema. Must implement interface    * {@link net.hydromatic.optiq.SchemaFactory} and have a public default    * constructor. */
+comment|/** Name of the factory class for this schema. Must implement interface    * {@link org.apache.calcite.schema.SchemaFactory} and have a public default    * constructor. */
 specifier|public
 name|String
 name|factory

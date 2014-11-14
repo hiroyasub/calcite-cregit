@@ -4,18 +4,20 @@ comment|/*  * Licensed to the Apache Software Foundation (ASF) under one or more
 end_comment
 
 begin_comment
-comment|/**  * Unit tests.  */
+comment|/**  * Utilities to help implement Calcite's SPIs.  */
 end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
-name|test
+name|schema
+operator|.
+name|impl
 package|;
 end_package
 

@@ -4,16 +4,16 @@ comment|/*  * Licensed to the Apache Software Foundation (ASF) under one or more
 end_comment
 
 begin_comment
-comment|/**  * Provides model files, in JSON format, defining schemas and other metadata.  *  *<p>Models are specified using a<code>model=&lt;uri&gt;</code> parameter on  * the JDBC connect string. Calcite loads the model while initializing the  * connection. It first parses the JSON, then uses a  * {@link net.hydromatic.optiq.model.ModelHandler} as visitor over the parse  * tree.</p>  *  *<p>There are standard implementations of schema and table, but the user can  * provide their own by implementing the  * {@link net.hydromatic.optiq.SchemaFactory}  * or {@link net.hydromatic.optiq.TableFactory}  * interfaces and including a custom schema in the model.</p>  *  *<p>There are several examples of schemas in the  *<a href="https://github.com/julianhyde/blog/master/optiq-csv/TUTORIAL.md">optiq-csv  * tutorial</a>.  */
+comment|/**  * Provides model files, in JSON format, defining schemas and other metadata.  *  *<p>Models are specified using a<code>model=&lt;uri&gt;</code> parameter on  * the JDBC connect string. Calcite loads the model while initializing the  * connection. It first parses the JSON, then uses a  * {@link org.apache.calcite.model.ModelHandler} as visitor over the parse  * tree.</p>  *  *<p>There are standard implementations of schema and table, but the user can  * provide their own by implementing the  * {@link org.apache.calcite.schema.SchemaFactory}  * or {@link org.apache.calcite.schema.TableFactory}  * interfaces and including a custom schema in the model.</p>  *  *<p>There are several examples of schemas in the  *<a href="https://github.com/julianhyde/blog/master/optiq-csv/TUTORIAL.md">optiq-csv  * tutorial</a>.  */
 end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
 name|model
 package|;

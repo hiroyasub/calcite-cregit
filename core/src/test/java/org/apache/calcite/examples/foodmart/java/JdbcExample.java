@@ -5,11 +5,11 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
 name|examples
 operator|.
@@ -21,25 +21,13 @@ end_package
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
-name|SchemaPlus
-import|;
-end_import
-
-begin_import
-import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|optiq
-operator|.
-name|impl
+name|adapter
 operator|.
 name|java
 operator|.
@@ -49,15 +37,29 @@ end_import
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
 name|jdbc
 operator|.
-name|OptiqConnection
+name|CalciteConnection
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|schema
+operator|.
+name|SchemaPlus
 import|;
 end_import
 
@@ -67,7 +69,47 @@ name|java
 operator|.
 name|sql
 operator|.
-name|*
+name|Connection
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|sql
+operator|.
+name|DriverManager
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|sql
+operator|.
+name|ResultSet
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|sql
+operator|.
+name|SQLException
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|sql
+operator|.
+name|Statement
 import|;
 end_import
 
@@ -113,7 +155,7 @@ name|Class
 operator|.
 name|forName
 argument_list|(
-literal|"net.hydromatic.optiq.jdbc.Driver"
+literal|"org.apache.calcite.jdbc.Driver"
 argument_list|)
 expr_stmt|;
 name|Connection
@@ -126,14 +168,14 @@ argument_list|(
 literal|"jdbc:calcite:"
 argument_list|)
 decl_stmt|;
-name|OptiqConnection
-name|optiqConnection
+name|CalciteConnection
+name|calciteConnection
 init|=
 name|connection
 operator|.
 name|unwrap
 argument_list|(
-name|OptiqConnection
+name|CalciteConnection
 operator|.
 name|class
 argument_list|)
@@ -141,7 +183,7 @@ decl_stmt|;
 name|SchemaPlus
 name|rootSchema
 init|=
-name|optiqConnection
+name|calciteConnection
 operator|.
 name|getRootSchema
 argument_list|()
@@ -320,6 +362,7 @@ name|close
 argument_list|()
 expr_stmt|;
 block|}
+comment|/** Object that will be used via reflection to create the "hr" schema. */
 specifier|public
 specifier|static
 class|class
@@ -358,6 +401,7 @@ argument_list|)
 block|,     }
 decl_stmt|;
 block|}
+comment|/** Object that will be used via reflection to create the "emps" table. */
 specifier|public
 specifier|static
 class|class
@@ -397,6 +441,7 @@ name|name
 expr_stmt|;
 block|}
 block|}
+comment|/** Object that will be used via reflection to create the "foodmart"    * schema. */
 specifier|public
 specifier|static
 class|class
@@ -427,6 +472,7 @@ argument_list|)
 block|,     }
 decl_stmt|;
 block|}
+comment|/** Object that will be used via reflection to create the    * "sales_fact_1997" fact table. */
 specifier|public
 specifier|static
 class|class

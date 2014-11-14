@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
@@ -30,7 +32,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * DefaultRelMetadataProvider supplies a default implementation of the {@link  * RelMetadataProvider} interface. It provides generic formulas and derivation  * rules for the standard logical algebra; coverage corresponds to the methods  * declared in {@link RelMetadataQuery}.  */
+comment|/**  * DefaultRelMetadataProvider supplies a default implementation of the  * {@link RelMetadataProvider} interface. It provides generic formulas and  * derivation rules for the standard logical algebra; coverage corresponds to  * the methods declared in {@link RelMetadataQuery}.  */
 end_comment
 
 begin_class

@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|util
 package|;
@@ -15,21 +17,15 @@ end_package
 
 begin_import
 import|import
-name|java
+name|com
 operator|.
-name|io
+name|google
 operator|.
-name|Serializable
-import|;
-end_import
-
-begin_import
-import|import
-name|java
+name|common
 operator|.
-name|util
+name|base
 operator|.
-name|*
+name|Objects
 import|;
 end_import
 
@@ -47,8 +43,78 @@ name|Iterators
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|io
+operator|.
+name|Serializable
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|AbstractList
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Collection
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|HashMap
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Iterator
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Map
+import|;
+end_import
+
 begin_comment
-comment|/**  * Pair of objects.  *  *<p>Because a pair implements {@link #equals(Object)}, {@link #hashCode()} and  * {@link #compareTo(Pair)}, it can be used in any kind of  * {@link java.util.Collection}.  */
+comment|/**  * Pair of objects.  *  *<p>Because a pair implements {@link #equals(Object)}, {@link #hashCode()} and  * {@link #compareTo(Pair)}, it can be used in any kind of  * {@link java.util.Collection}.  *  * @param<T1> Left-hand type  * @param<T2> Right-hand type  */
 end_comment
 
 begin_class
@@ -176,7 +242,7 @@ operator|instanceof
 name|Pair
 operator|)
 operator|&&
-name|Util
+name|Objects
 operator|.
 name|equal
 argument_list|(
@@ -194,7 +260,15 @@ operator|.
 name|left
 argument_list|)
 operator|&&
-name|Util
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|base
+operator|.
+name|Objects
 operator|.
 name|equal
 argument_list|(
@@ -500,7 +574,7 @@ return|return
 name|map
 return|;
 block|}
-comment|/**    * Converts two lists into a list of {@link org.eigenbase.util.Pair}s,    * whose length is the lesser of the lengths of the    * source lists.    *    * @param ks Left list    * @param vs Right list    * @return List of pairs    * @see net.hydromatic.linq4j.Ord#zip(java.util.List)    */
+comment|/**    * Converts two lists into a list of {@link Pair}s,    * whose length is the lesser of the lengths of the    * source lists.    *    * @param ks Left list    * @param vs Right list    * @return List of pairs    * @see org.apache.calcite.linq4j.Ord#zip(java.util.List)    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -543,7 +617,7 @@ literal|false
 argument_list|)
 return|;
 block|}
-comment|/**    * Converts two lists into a list of {@link Pair}s.    *    *<p>The length of the combined list is the lesser of the lengths of the    * source lists. But typically the source lists will be the same length.</p>    *    * @param ks     Left list    * @param vs     Right list    * @param strict Whether to fail if lists have different size    * @return List of pairs    * @see net.hydromatic.linq4j.Ord#zip(java.util.List)    */
+comment|/**    * Converts two lists into a list of {@link Pair}s.    *    *<p>The length of the combined list is the lesser of the lengths of the    * source lists. But typically the source lists will be the same length.</p>    *    * @param ks     Left list    * @param vs     Right list    * @param strict Whether to fail if lists have different size    * @return List of pairs    * @see org.apache.calcite.linq4j.Ord#zip(java.util.List)    */
 specifier|public
 specifier|static
 parameter_list|<

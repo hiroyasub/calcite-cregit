@@ -7,25 +7,27 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|util14
+name|calcite
+operator|.
+name|util
 package|;
 end_package
 
 begin_comment
-comment|/**  * This is a tagging interface to allow a {@link  * org.eigenbase.sql.parser.SqlParseException} to be identified without adding a  * dependency on it from client-side code.  */
+comment|/**  * Tagging interface to allow a  * {@link org.apache.calcite.sql.parser.SqlParseException}  * to be identified without adding a  * dependency on it from client-side code.  */
 end_comment
 
 begin_interface
 specifier|public
 interface|interface
-name|EigenbaseParserException
+name|CalciteParserException
 block|{ }
 end_interface
 
 begin_comment
-comment|// End EigenbaseParserException.java
+comment|// End CalciteParserException.java
 end_comment
 
 end_unit

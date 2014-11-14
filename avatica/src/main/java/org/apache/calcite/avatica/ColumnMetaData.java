@@ -5,9 +5,11 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
+operator|.
+name|calcite
 operator|.
 name|avatica
 package|;
@@ -31,7 +33,47 @@ name|java
 operator|.
 name|sql
 operator|.
-name|*
+name|DatabaseMetaData
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|sql
+operator|.
+name|ResultSetMetaData
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|sql
+operator|.
+name|Time
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|sql
+operator|.
+name|Timestamp
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|sql
+operator|.
+name|Types
 import|;
 end_import
 
@@ -76,7 +118,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Metadata for a column.  * (Compare with {@link java.sql.ResultSetMetaData}.)  */
+comment|/**  * Metadata for a column.  * (Compare with {@link ResultSetMetaData}.)  */
 end_comment
 
 begin_class

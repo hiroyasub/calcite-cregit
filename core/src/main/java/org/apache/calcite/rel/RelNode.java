@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 package|;
@@ -15,11 +17,15 @@ end_package
 
 begin_import
 import|import
-name|java
+name|org
 operator|.
-name|util
+name|apache
 operator|.
-name|*
+name|calcite
+operator|.
+name|plan
+operator|.
+name|Convention
 import|;
 end_import
 
@@ -27,13 +33,99 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptCost
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptNode
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptPlanner
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptQuery
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptTable
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelTraitSet
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
 name|metadata
 operator|.
-name|*
+name|Metadata
 import|;
 end_import
 
@@ -41,11 +133,15 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|relopt
+name|calcite
 operator|.
-name|*
+name|rel
+operator|.
+name|metadata
+operator|.
+name|RelMetadataQuery
 import|;
 end_import
 
@@ -53,11 +149,15 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|reltype
+name|calcite
 operator|.
-name|*
+name|rel
+operator|.
+name|type
+operator|.
+name|RelDataType
 import|;
 end_import
 
@@ -65,16 +165,48 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rex
 operator|.
-name|*
+name|RexNode
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|BitSet
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Set
 import|;
 end_import
 
 begin_comment
-comment|/**  * A<code>RelNode</code> is a relational expression.  *  *<p>A relational expression is not a scalar expression; see  * {@link org.eigenbase.sql.SqlNode} and {@link RexNode}.</p>  *  *<p>If this type of relational expression has some particular planner rules,  * it should implement the<em>public static</em> method  * {@link AbstractRelNode#register}.</p>  *  *<p>When a relational expression comes to be implemented, the system allocates  * a {@link org.eigenbase.relopt.RelImplementor} to manage the process. Every  * implementable relational expression has a {@link RelTraitSet} describing its  * physical attributes. The RelTraitSet always contains a {@link Convention}  * describing how the expression passes data to its consuming  * relational expression, but may contain other traits, including some applied  * externally. Because traits can be applied externally, implementations of  * RelNode should never assume the size or contents of their trait set (beyond  * those traits configured by the RelNode itself).</p>  *  *<p>For each calling-convention, there is a corresponding sub-interface of  * RelNode. For example, {@code net.hydromatic.optiq.rules.java.EnumerableRel}  * has operations to manage the conversion to a graph of  * {@code net.hydromatic.optiq.rules.java.EnumerableConvention}  * calling-convention, and it interacts with a  * {@code EnumerableRelImplementor}.</p>  *  *<p>A relational expression is only required to implement its  * calling-convention's interface when it is actually implemented, that is,  * converted into a plan/program. This means that relational expressions which  * cannot be implemented, such as converters, are not required to implement  * their convention's interface.</p>  *  *<p>Every relational expression must derive from {@link AbstractRelNode}. (Why  * have the<code>RelNode</code> interface, then? We need a root interface,  * because an interface can only derive from an interface.)</p>  */
+comment|/**  * A<code>RelNode</code> is a relational expression.  *  *<p>Relational expressions process data, so their names are typically verbs:  * Sort, Join, Project, Filter, Scan, Sample.  *  *<p>A relational expression is not a scalar expression; see  * {@link org.apache.calcite.sql.SqlNode} and {@link RexNode}.</p>  *  *<p>If this type of relational expression has some particular planner rules,  * it should implement the<em>public static</em> method  * {@link AbstractRelNode#register}.</p>  *  *<p>When a relational expression comes to be implemented, the system allocates  * a {@link org.apache.calcite.plan.RelImplementor} to manage the process. Every  * implementable relational expression has a {@link RelTraitSet} describing its  * physical attributes. The RelTraitSet always contains a {@link Convention}  * describing how the expression passes data to its consuming  * relational expression, but may contain other traits, including some applied  * externally. Because traits can be applied externally, implementations of  * RelNode should never assume the size or contents of their trait set (beyond  * those traits configured by the RelNode itself).</p>  *  *<p>For each calling-convention, there is a corresponding sub-interface of  * RelNode. For example,  * {@code org.apache.calcite.adapter.enumerable.EnumerableRel}  * has operations to manage the conversion to a graph of  * {@code org.apache.calcite.adapter.enumerable.EnumerableConvention}  * calling-convention, and it interacts with a  * {@code EnumerableRelImplementor}.</p>  *  *<p>A relational expression is only required to implement its  * calling-convention's interface when it is actually implemented, that is,  * converted into a plan/program. This means that relational expressions which  * cannot be implemented, such as converters, are not required to implement  * their convention's interface.</p>  *  *<p>Every relational expression must derive from {@link AbstractRelNode}. (Why  * have the<code>RelNode</code> interface, then? We need a root interface,  * because an interface can only derive from an interface.)</p>  */
 end_comment
 
 begin_interface
@@ -95,7 +227,7 @@ argument_list|>
 name|getChildExps
 parameter_list|()
 function_decl|;
-comment|/**    * Return the CallingConvention trait from this RelNode's {@link    * #getTraitSet() trait set}.    *    * @return this RelNode's CallingConvention    */
+comment|/**    * Return the CallingConvention trait from this RelNode's    * {@link #getTraitSet() trait set}.    *    * @return this RelNode's CallingConvention    */
 name|Convention
 name|getConvention
 parameter_list|()
@@ -131,7 +263,7 @@ name|String
 name|getOrCreateCorrelVariable
 parameter_list|()
 function_decl|;
-comment|/**    * Returns the sub-query this relational expression belongs to. A sub-query    * determines the scope for correlating variables (see {@link    * #setCorrelVariable(String)}).    *    * @return Sub-query    */
+comment|/**    * Returns the sub-query this relational expression belongs to. A sub-query    * determines the scope for correlating variables (see    * {@link #setCorrelVariable(String)}).    *    * @return Sub-query    */
 name|RelOptQuery
 name|getQuery
 parameter_list|()
@@ -141,7 +273,7 @@ name|RelDataType
 name|getRowType
 parameter_list|()
 function_decl|;
-comment|/**    * Returns the type of the rows expected for an input. Defaults to {@link    * #getRowType}.    *    * @param ordinalInParent input's 0-based ordinal with respect to this    *                        parent rel    * @return expected row type    */
+comment|/**    * Returns the type of the rows expected for an input. Defaults to    * {@link #getRowType}.    *    * @param ordinalInParent input's 0-based ordinal with respect to this    *                        parent rel    * @return expected row type    */
 name|RelDataType
 name|getExpectedInputRowType
 parameter_list|(
@@ -192,7 +324,7 @@ argument_list|>
 name|variableSet
 parameter_list|)
 function_decl|;
-comment|/**    * Interacts with the {@link RelVisitor} in a {@link    * org.eigenbase.util.Glossary#VISITOR_PATTERN visitor pattern} to traverse    * the tree of relational expressions.    */
+comment|/**    * Interacts with the {@link RelVisitor} in a    * {@link org.apache.calcite.util.Glossary#VISITOR_PATTERN visitor pattern} to    * traverse the tree of relational expressions.    */
 name|void
 name|childrenAccept
 parameter_list|(
@@ -224,7 +356,7 @@ argument_list|>
 name|metadataClass
 parameter_list|)
 function_decl|;
-comment|/**    * Describes the inputs and attributes of this relational expression.    * Each node should call {@code super.explain}, then call the    * {@link RelWriterImpl#input(String, RelNode)}    * and {@link RelWriterImpl#item(String, Object)} methods for each input    * and attribute.    *    * @param pw Plan writer    */
+comment|/**    * Describes the inputs and attributes of this relational expression.    * Each node should call {@code super.explain}, then call the    * {@link org.apache.calcite.rel.externalize.RelWriterImpl#input(String, RelNode)}    * and    * {@link org.apache.calcite.rel.externalize.RelWriterImpl#item(String, Object)}    * methods for each input and attribute.    *    * @param pw Plan writer    */
 name|void
 name|explain
 parameter_list|(
@@ -269,7 +401,7 @@ name|RelOptTable
 name|getTable
 parameter_list|()
 function_decl|;
-comment|/**    * Returns the name of this relational expression's class, sans package    * name, for use in explain. For example, for a<code>    * org.eigenbase.rel.ArrayRel.ArrayReader</code>, this method returns    * "ArrayReader".    */
+comment|/**    * Returns the name of this relational expression's class, sans package    * name, for use in explain. For example, for a<code>    * org.apache.calcite.rel.ArrayRel.ArrayReader</code>, this method returns    * "ArrayReader".    */
 name|String
 name|getRelTypeName
 parameter_list|()
@@ -304,7 +436,7 @@ argument_list|>
 name|inputs
 parameter_list|)
 function_decl|;
-comment|/**    * Registers any special rules specific to this kind of relational    * expression.    *    *<p>The planner calls this method this first time that it sees a    * relational expression of this class. The derived class should call {@link    * org.eigenbase.relopt.RelOptPlanner#addRule} for each rule, and then call    * {@code super.register}.</p>    */
+comment|/**    * Registers any special rules specific to this kind of relational    * expression.    *    *<p>The planner calls this method this first time that it sees a    * relational expression of this class. The derived class should call    * {@link org.apache.calcite.plan.RelOptPlanner#addRule} for each rule, and    * then call {@code super.register}.</p>    */
 name|void
 name|register
 parameter_list|(
@@ -312,7 +444,7 @@ name|RelOptPlanner
 name|planner
 parameter_list|)
 function_decl|;
-comment|/**    * Returns whether the result of this relational expression is uniquely    * identified by this columns with the given ordinals.    *    *<p>For example, if this relational expression is a TableAccessRel to    * T(A, B, C, D) whose key is (A, B), then isKey([0, 1]) yields true,    * and isKey([0]) and isKey([0, 2]) yields false.</p>    *    * @param columns Ordinals of key columns    * @return Whether the given columns are a key or a superset of a key    */
+comment|/**    * Returns whether the result of this relational expression is uniquely    * identified by this columns with the given ordinals.    *    *<p>For example, if this relational expression is a LogicalTableScan to    * T(A, B, C, D) whose key is (A, B), then isKey([0, 1]) yields true,    * and isKey([0]) and isKey([0, 2]) yields false.</p>    *    * @param columns Ordinals of key columns    * @return Whether the given columns are a key or a superset of a key    */
 name|boolean
 name|isKey
 parameter_list|(

@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
@@ -19,11 +21,13 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|rel
+name|calcite
 operator|.
-name|*
+name|plan
+operator|.
+name|RelTraitDef
 import|;
 end_import
 
@@ -31,22 +35,38 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|relopt
+name|calcite
 operator|.
-name|*
+name|plan
+operator|.
+name|RelTraitSet
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|RelNode
 import|;
 end_import
 
 begin_comment
-comment|/**  * A relational expression implements the interface<code>ConverterRel</code> to  * indicate that it converts a physical attribute, or {@link  * org.eigenbase.relopt.RelTrait trait}, of a relational expression from one  * value to another.  *  *<p>Sometimes this conversion is expensive; for example, to convert a  * non-distinct to a distinct object stream, we have to clone every object in  * the input.</p>  *  *<p>A converter does not change the logical expression being evaluated; after  * conversion, the number of rows and the values of those rows will still be the  * same. By declaring itself to be a converter, a relational expression is  * telling the planner about this equivalence, and the planner groups  * expressions which are logically equivalent but have different physical traits  * into groups called<code>RelSet</code>s.  *  *<p>In principle one could devise converters which change multiple traits  * simultaneously (say change the sort-order and the physical location of a  * relational expression). In which case, the method {@link #getInputTraits()}  * would return a {@link org.eigenbase.relopt.RelTraitSet}. But for simplicity,  * this class only allows one trait to be converted at a time; all other traits  * are assumed to be preserved.</p>  */
+comment|/**  * A relational expression implements the interface<code>Converter</code> to  * indicate that it converts a physical attribute, or  * {@link org.apache.calcite.plan.RelTrait trait}, of a relational expression  * from one value to another.  *  *<p>Sometimes this conversion is expensive; for example, to convert a  * non-distinct to a distinct object stream, we have to clone every object in  * the input.</p>  *  *<p>A converter does not change the logical expression being evaluated; after  * conversion, the number of rows and the values of those rows will still be the  * same. By declaring itself to be a converter, a relational expression is  * telling the planner about this equivalence, and the planner groups  * expressions which are logically equivalent but have different physical traits  * into groups called<code>RelSet</code>s.  *  *<p>In principle one could devise converters which change multiple traits  * simultaneously (say change the sort-order and the physical location of a  * relational expression). In which case, the method {@link #getInputTraits()}  * would return a {@link org.apache.calcite.plan.RelTraitSet}. But for  * simplicity, this class only allows one trait to be converted at a  * time; all other traits are assumed to be preserved.</p>  */
 end_comment
 
 begin_interface
 specifier|public
 interface|interface
-name|ConverterRel
+name|Converter
 extends|extends
 name|RelNode
 block|{
@@ -63,14 +83,14 @@ parameter_list|()
 function_decl|;
 comment|/**    * Returns the sole input relational expression    *    * @return child relational expression    */
 name|RelNode
-name|getChild
+name|getInput
 parameter_list|()
 function_decl|;
 block|}
 end_interface
 
 begin_comment
-comment|// End ConverterRel.java
+comment|// End Converter.java
 end_comment
 
 end_unit

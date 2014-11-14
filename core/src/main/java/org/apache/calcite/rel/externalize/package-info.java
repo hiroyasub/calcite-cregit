@@ -4,18 +4,20 @@ comment|/*  * Licensed to the Apache Software Foundation (ASF) under one or more
 end_comment
 
 begin_comment
-comment|/**  * Query optimizer rules.  */
+comment|/**  * Facilities to externalize {@link org.apache.calcite.rel.RelNode}s to and from  * XML and JSON format.  */
 end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
-name|rules
+name|rel
+operator|.
+name|externalize
 package|;
 end_package
 

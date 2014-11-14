@@ -7,9 +7,11 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|relopt
+name|calcite
+operator|.
+name|plan
 package|;
 end_package
 
@@ -28,7 +30,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Children of a {@link org.eigenbase.relopt.RelOptRuleOperand} and the policy  * for matching them.  *  *<p>Often created by calling one of the following methods:  * {@link RelOptRule#some},  * {@link RelOptRule#none},  * {@link RelOptRule#any},  * {@link RelOptRule#unordered},</p>  */
+comment|/**  * Children of a {@link org.apache.calcite.plan.RelOptRuleOperand} and the  * policy for matching them.  *  *<p>Often created by calling one of the following methods:  * {@link RelOptRule#some},  * {@link RelOptRule#none},  * {@link RelOptRule#any},  * {@link RelOptRule#unordered},</p>  */
 end_comment
 
 begin_class

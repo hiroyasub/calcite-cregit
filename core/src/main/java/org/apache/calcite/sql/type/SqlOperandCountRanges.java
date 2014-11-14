@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
@@ -19,7 +21,9 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
@@ -120,6 +124,7 @@ literal|1
 argument_list|)
 return|;
 block|}
+comment|/** Implementation of {@link SqlOperandCountRange}. */
 specifier|private
 specifier|static
 class|class

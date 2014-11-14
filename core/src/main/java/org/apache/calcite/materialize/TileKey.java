@@ -5,11 +5,11 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
 name|materialize
 package|;
@@ -17,13 +17,15 @@ end_package
 
 begin_import
 import|import
-name|org
+name|com
 operator|.
-name|eigenbase
+name|google
 operator|.
-name|util
+name|common
 operator|.
-name|Util
+name|base
+operator|.
+name|Objects
 import|;
 end_import
 
@@ -52,7 +54,7 @@ import|;
 end_import
 
 begin_comment
-comment|/** Definition of a particular combination of dimensions and measures of a  * lattice that is the basis of a materialization.  *  *<p>Holds similar information to a  * {@link net.hydromatic.optiq.materialize.Lattice.Tile} but a lattice is  * immutable and tiles are not added after their creation. */
+comment|/** Definition of a particular combination of dimensions and measures of a  * lattice that is the basis of a materialization.  *  *<p>Holds similar information to a  * {@link org.apache.calcite.materialize.Lattice.Tile} but a lattice is  * immutable and tiles are not added after their creation. */
 end_comment
 
 begin_class
@@ -126,9 +128,9 @@ name|hashCode
 parameter_list|()
 block|{
 return|return
-name|Util
+name|Objects
 operator|.
-name|hashV
+name|hashCode
 argument_list|(
 name|lattice
 argument_list|,

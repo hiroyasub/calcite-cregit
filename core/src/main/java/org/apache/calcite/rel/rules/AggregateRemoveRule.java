@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
@@ -19,11 +21,13 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|rel
+name|calcite
 operator|.
-name|*
+name|plan
+operator|.
+name|RelOptRule
 import|;
 end_import
 
@@ -31,44 +35,76 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|relopt
+name|calcite
 operator|.
-name|*
+name|plan
+operator|.
+name|RelOptRuleCall
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|RelNode
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|logical
+operator|.
+name|LogicalAggregate
 import|;
 end_import
 
 begin_comment
-comment|/**  * Rule to remove an {@link AggregateRel} implementing DISTINCT if the  * underlying relational expression is already distinct.  */
+comment|/**  * Planner rule that removes  * a {@link org.apache.calcite.rel.logical.LogicalAggregate}  * if it computes no aggregate functions  * (that is, it is implementing {@code SELECT DISTINCT})  * and the underlying relational expression is already distinct.  */
 end_comment
 
 begin_class
 specifier|public
 class|class
-name|RemoveDistinctRule
+name|AggregateRemoveRule
 extends|extends
 name|RelOptRule
 block|{
 specifier|public
 specifier|static
 specifier|final
-name|RemoveDistinctRule
+name|AggregateRemoveRule
 name|INSTANCE
 init|=
 operator|new
-name|RemoveDistinctRule
+name|AggregateRemoveRule
 argument_list|()
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a RemoveDistinctRule.    */
+comment|/**    * Creates a AggregateRemoveRule.    */
 specifier|private
-name|RemoveDistinctRule
+name|AggregateRemoveRule
 parameter_list|()
 block|{
 comment|// REVIEW jvs 14-Mar-2006: We have to explicitly mention the child here
 comment|// to make sure the rule re-fires after the child changes (e.g. via
-comment|// RemoveTrivialProjectRule), since that may change our information
+comment|// ProjectRemoveRule), since that may change our information
 comment|// about whether the child is distinct.  If we clean up the inference of
 comment|// distinct to make it correct up-front, we can get rid of the reference
 comment|// to the child here.
@@ -76,7 +112,7 @@ name|super
 argument_list|(
 name|operand
 argument_list|(
-name|AggregateRel
+name|LogicalAggregate
 operator|.
 name|class
 argument_list|,
@@ -102,7 +138,7 @@ name|RelOptRuleCall
 name|call
 parameter_list|)
 block|{
-name|AggregateRel
+name|LogicalAggregate
 name|distinct
 init|=
 name|call
@@ -184,7 +220,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End RemoveDistinctRule.java
+comment|// End AggregateRemoveRule.java
 end_comment
 
 end_unit

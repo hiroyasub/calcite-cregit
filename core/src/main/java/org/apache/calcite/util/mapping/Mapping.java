@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|util
 operator|.
@@ -21,7 +23,7 @@ name|java
 operator|.
 name|util
 operator|.
-name|*
+name|Iterator
 import|;
 end_import
 
@@ -52,7 +54,7 @@ name|IntPair
 argument_list|>
 block|{
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**    * Returns an iterator over the elements in this mapping.    *    *<p>This method is optional; implementations may throw {@link    * UnsupportedOperationException}.    */
+comment|/**    * Returns an iterator over the elements in this mapping.    *    *<p>This method is optional; implementations may throw    * {@link UnsupportedOperationException}.    */
 name|Iterator
 argument_list|<
 name|IntPair

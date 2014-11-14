@@ -7,21 +7,13 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rex
 package|;
 end_package
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|*
-import|;
-end_import
 
 begin_import
 import|import
@@ -37,8 +29,28 @@ name|ImmutableList
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|ArrayList
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
+import|;
+end_import
+
 begin_comment
-comment|/**  * Passes over a row-expression, calling a handler method for each node,  * appropriate to the type of the node.  *  *<p>Like {@link RexVisitor}, this is an instance of the {@link  * org.eigenbase.util.Glossary#VISITOR_PATTERN Visitor Pattern}. Use<code>  * RexShuttle</code> if you would like your methods to return a value.</p>  */
+comment|/**  * Passes over a row-expression, calling a handler method for each node,  * appropriate to the type of the node.  *  *<p>Like {@link RexVisitor}, this is an instance of the  * {@link org.apache.calcite.util.Glossary#VISITOR_PATTERN Visitor Pattern}. Use  *<code> RexShuttle</code> if you would like your methods to return a  * value.</p>  */
 end_comment
 
 begin_class

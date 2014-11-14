@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
@@ -17,11 +19,15 @@ end_package
 
 begin_import
 import|import
-name|java
+name|com
 operator|.
-name|math
+name|google
 operator|.
-name|*
+name|common
+operator|.
+name|collect
+operator|.
+name|ImmutableMap
 import|;
 end_import
 
@@ -29,9 +35,9 @@ begin_import
 import|import
 name|java
 operator|.
-name|sql
+name|math
 operator|.
-name|*
+name|BigDecimal
 import|;
 end_import
 
@@ -49,23 +55,49 @@ begin_import
 import|import
 name|java
 operator|.
-name|util
+name|sql
 operator|.
-name|*
+name|ResultSet
 import|;
 end_import
 
 begin_import
 import|import
-name|com
+name|java
 operator|.
-name|google
+name|sql
 operator|.
-name|common
+name|Time
+import|;
+end_import
+
+begin_import
+import|import
+name|java
 operator|.
-name|collect
+name|sql
 operator|.
-name|ImmutableMap
+name|Timestamp
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Map
 import|;
 end_import
 
@@ -412,7 +444,7 @@ name|build
 argument_list|()
 decl_stmt|;
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**    * Returns the {@link org.eigenbase.util.Glossary#SINGLETON_PATTERN    * singleton} instance.    */
+comment|/**    * Returns the    * {@link org.apache.calcite.util.Glossary#SINGLETON_PATTERN singleton}    * instance.    */
 specifier|public
 specifier|static
 name|JavaToSqlTypeConversionRules

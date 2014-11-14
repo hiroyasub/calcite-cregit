@@ -5,13 +5,13 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
-name|impl
+name|adapter
 operator|.
 name|tpch
 package|;
@@ -19,15 +19,15 @@ end_package
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
-name|test
+name|plan
 operator|.
-name|OptiqAssert
+name|RelOptUtil
 import|;
 end_import
 
@@ -35,7 +35,9 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
@@ -47,11 +49,13 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|relopt
+name|calcite
 operator|.
-name|RelOptUtil
+name|test
+operator|.
+name|CalciteAssert
 import|;
 end_import
 
@@ -59,7 +63,9 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|util
 operator|.
@@ -162,7 +168,7 @@ import|;
 end_import
 
 begin_comment
-comment|/** Unit test for {@link TpchSchema}.  *  *<p>Because the TPC-H data generator takes time and memory to instantiate,  * tests that read data (that is, most tests) only run  * if {@code -Dcalcite.test.slow=true} is specified on the command-line.  * (See {@link net.hydromatic.optiq.test.OptiqAssert#ENABLE_SLOW}.)</p> */
+comment|/** Unit test for {@link org.apache.calcite.adapter.tpch.TpchSchema}.  *  *<p>Because the TPC-H data generator takes time and memory to instantiate,  * tests that read data (that is, most tests) only run  * if {@code -Dcalcite.test.slow=true} is specified on the command-line.  * (See {@link org.apache.calcite.test.CalciteAssert#ENABLE_SLOW}.)</p> */
 end_comment
 
 begin_class
@@ -192,7 +198,7 @@ specifier|final
 name|boolean
 name|ENABLE
 init|=
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|ENABLE_SLOW
 operator|&&
@@ -228,7 +234,7 @@ name|name
 operator|+
 literal|"',\n"
 operator|+
-literal|"       factory: 'net.hydromatic.optiq.impl.tpch.TpchSchemaFactory',\n"
+literal|"       factory: 'org.apache.calcite.adapter.tpch.TpchSchemaFactory',\n"
 operator|+
 literal|"       operand: {\n"
 operator|+
@@ -1704,7 +1710,7 @@ argument_list|)
 expr_stmt|;
 block|}
 specifier|private
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|AssertThat
 name|with
@@ -1714,7 +1720,7 @@ name|enable
 parameter_list|)
 block|{
 return|return
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
@@ -1731,7 +1737,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|AssertThat
 name|with
@@ -1855,7 +1861,7 @@ name|not
 argument_list|(
 name|containsString
 argument_list|(
-literal|"CorrelatorRel"
+literal|"Correlator"
 argument_list|)
 argument_list|)
 argument_list|)
@@ -2210,7 +2216,7 @@ expr_stmt|;
 block|}
 comment|/** Runs with query #i.    *    * @param i Ordinal of query, per the benchmark, 1-based    * @param enable Whether to enable query execution.    *     If null, use the value of {@link #ENABLE}.    *     Pass true only for 'fast' tests that do not read any data.    */
 specifier|private
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|AssertQuery
 name|query

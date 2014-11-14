@@ -5,27 +5,29 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
-name|rules
+name|adapter
 operator|.
-name|java
+name|enumerable
 package|;
 end_package
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
+operator|.
+name|calcite
 operator|.
 name|linq4j
 operator|.
-name|expressions
+name|tree
 operator|.
 name|Expression
 import|;
@@ -35,7 +37,9 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rex
 operator|.
@@ -44,7 +48,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Implements a call via given translator.  *<p>  * @see net.hydromatic.optiq.ScalarFunction  * @see net.hydromatic.optiq.TableFunction  * @see net.hydromatic.optiq.rules.java.RexImpTable  */
+comment|/**  * Implements a call via given translator.  *  * @see org.apache.calcite.schema.ScalarFunction  * @see org.apache.calcite.schema.TableFunction  * @see org.apache.calcite.adapter.enumerable.RexImpTable  */
 end_comment
 
 begin_interface
@@ -70,6 +74,10 @@ parameter_list|)
 function_decl|;
 block|}
 end_interface
+
+begin_comment
+comment|// End CallImplementor.java
+end_comment
 
 end_unit
 

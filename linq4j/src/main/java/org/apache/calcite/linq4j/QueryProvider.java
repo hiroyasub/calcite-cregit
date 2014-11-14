@@ -5,9 +5,11 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
+operator|.
+name|calcite
 operator|.
 name|linq4j
 package|;
@@ -15,13 +17,15 @@ end_package
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
+operator|.
+name|calcite
 operator|.
 name|linq4j
 operator|.
-name|expressions
+name|tree
 operator|.
 name|Expression
 import|;
@@ -48,7 +52,7 @@ specifier|public
 interface|interface
 name|QueryProvider
 block|{
-comment|/**    * Constructs a {@link Queryable} object that can evaluate the query    * represented by a specified expression tree.    *    *<p>NOTE: The {@link net.hydromatic.linq4j.Queryable#getExpression()}    * property of the returned {@link Queryable} object is equal to    * {@code expression}.</p>    *    * @param expression Expression    * @param rowType Row type    * @param<T> Row type    *    * @return Queryable    */
+comment|/**    * Constructs a {@link Queryable} object that can evaluate the query    * represented by a specified expression tree.    *    *<p>NOTE: The {@link org.apache.calcite.linq4j.Queryable#getExpression()}    * property of the returned {@link Queryable} object is equal to    * {@code expression}.</p>    *    * @param expression Expression    * @param rowType Row type    * @param<T> Row type    *    * @return Queryable    */
 parameter_list|<
 name|T
 parameter_list|>
@@ -85,7 +89,7 @@ name|Type
 name|rowType
 parameter_list|)
 function_decl|;
-comment|/**    * Executes the query represented by a specified expression tree.    *    *<p>This method executes queries that return a single value    * (instead of an enumerable sequence of values). Expression trees that    * represent queries that return enumerable results are executed when the    * {@link Queryable} object that contains the expression tree is    * enumerated.</p>    *    *<p>The Queryable standard query operator methods that return singleton    * results call {@code execute}. They pass it a    * {@link net.hydromatic.linq4j.expressions.MethodCallExpression}    * that represents a linq4j query.    */
+comment|/**    * Executes the query represented by a specified expression tree.    *    *<p>This method executes queries that return a single value    * (instead of an enumerable sequence of values). Expression trees that    * represent queries that return enumerable results are executed when the    * {@link Queryable} object that contains the expression tree is    * enumerated.</p>    *    *<p>The Queryable standard query operator methods that return singleton    * results call {@code execute}. They pass it a    * {@link org.apache.calcite.linq4j.tree.MethodCallExpression}    * that represents a linq4j query.    */
 parameter_list|<
 name|T
 parameter_list|>

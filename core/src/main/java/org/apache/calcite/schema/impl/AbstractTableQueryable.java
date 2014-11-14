@@ -5,11 +5,13 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
+operator|.
+name|schema
 operator|.
 name|impl
 package|;
@@ -17,25 +19,71 @@ end_package
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
+operator|.
+name|calcite
 operator|.
 name|linq4j
 operator|.
-name|*
+name|AbstractQueryable
 import|;
 end_import
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
+operator|.
+name|calcite
 operator|.
 name|linq4j
 operator|.
-name|expressions
+name|Linq4j
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|linq4j
+operator|.
+name|QueryProvider
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|linq4j
+operator|.
+name|Queryable
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|linq4j
+operator|.
+name|tree
 operator|.
 name|Expression
 import|;
@@ -43,11 +91,13 @@ end_import
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
+operator|.
+name|schema
 operator|.
 name|QueryableTable
 import|;
@@ -55,11 +105,13 @@ end_import
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
+operator|.
+name|schema
 operator|.
 name|SchemaPlus
 import|;
@@ -88,7 +140,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Abstract implementation of {@link net.hydromatic.linq4j.Queryable} for  * {@link QueryableTable}.  *  *<p>Not to be confused with  * {@link net.hydromatic.optiq.impl.java.AbstractQueryableTable}.</p>  *  * @param<T> element type  */
+comment|/**  * Abstract implementation of {@link org.apache.calcite.linq4j.Queryable} for  * {@link QueryableTable}.  *  *<p>Not to be confused with  * {@link org.apache.calcite.adapter.java.AbstractQueryableTable}.</p>  *  * @param<T> element type  */
 end_comment
 
 begin_class

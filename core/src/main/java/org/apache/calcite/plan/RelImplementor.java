@@ -7,9 +7,11 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|relopt
+name|calcite
+operator|.
+name|plan
 package|;
 end_package
 
@@ -17,16 +19,18 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
-name|*
+name|RelNode
 import|;
 end_import
 
 begin_comment
-comment|/**  * Callback used to hold state while converting a tree of {@link RelNode  * relational expressions} into a plan. Calling conventions typically have their  * own protocol for walking over a tree, and correspondingly have their own  * implementors, which are subclasses of<code>RelImplementor</code>.  */
+comment|/**  * Callback used to hold state while converting a tree of  * {@link RelNode relational expressions} into a plan. Calling  * conventions typically have their own protocol for walking over a  * tree, and correspondingly have their own implementors, which are  * subclasses of<code>RelImplementor</code>.  */
 end_comment
 
 begin_interface

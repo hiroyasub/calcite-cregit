@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 package|;
@@ -15,19 +17,11 @@ end_package
 
 begin_import
 import|import
-name|java
-operator|.
-name|util
-operator|.
-name|List
-import|;
-end_import
-
-begin_import
-import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
@@ -41,7 +35,9 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
@@ -55,7 +51,9 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
@@ -76,6 +74,16 @@ operator|.
 name|collect
 operator|.
 name|ImmutableList
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
 import|;
 end_import
 
@@ -113,7 +121,7 @@ decl_stmt|;
 name|String
 name|name
 decl_stmt|;
-comment|/** Value of the option. May be a {@link org.eigenbase.sql.SqlLiteral} or    * a {@link org.eigenbase.sql.SqlIdentifier} with one part. Reserved words    * (currently just 'ON') are converted to identifiers by the parser. */
+comment|/** Value of the option. May be a {@link org.apache.calcite.sql.SqlLiteral} or    * a {@link org.apache.calcite.sql.SqlIdentifier} with one    * part. Reserved words (currently just 'ON') are converted to    * identifiers by the parser. */
 name|SqlNode
 name|value
 decl_stmt|;

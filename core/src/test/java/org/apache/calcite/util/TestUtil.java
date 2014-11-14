@@ -7,11 +7,23 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|util
 package|;
 end_package
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|ComparisonFailure
+import|;
+end_import
 
 begin_import
 import|import
@@ -21,17 +33,7 @@ name|util
 operator|.
 name|regex
 operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|junit
-operator|.
-name|ComparisonFailure
+name|Pattern
 import|;
 end_import
 

@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
@@ -17,11 +19,15 @@ end_package
 
 begin_import
 import|import
-name|java
+name|org
 operator|.
-name|util
+name|apache
 operator|.
-name|Set
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptCluster
 import|;
 end_import
 
@@ -29,11 +35,13 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|rel
+name|calcite
 operator|.
-name|JoinInfo
+name|plan
+operator|.
+name|RelTraitSet
 import|;
 end_import
 
@@ -41,31 +49,9 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|rel
-operator|.
-name|JoinRelBase
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
-name|rel
-operator|.
-name|JoinRelType
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
+name|calcite
 operator|.
 name|rel
 operator|.
@@ -77,11 +63,15 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|relopt
+name|calcite
 operator|.
-name|RelOptCluster
+name|rel
+operator|.
+name|core
+operator|.
+name|Join
 import|;
 end_import
 
@@ -89,11 +79,15 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|relopt
+name|calcite
 operator|.
-name|RelTraitSet
+name|rel
+operator|.
+name|core
+operator|.
+name|JoinInfo
 import|;
 end_import
 
@@ -101,7 +95,25 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|core
+operator|.
+name|JoinRelType
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rex
 operator|.
@@ -113,7 +125,9 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|util
 operator|.
@@ -135,6 +149,16 @@ name|Preconditions
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Set
+import|;
+end_import
+
 begin_comment
 comment|/**  * Base class for any join whose condition is based on column equality.  */
 end_comment
@@ -143,9 +167,9 @@ begin_class
 specifier|public
 specifier|abstract
 class|class
-name|EquiJoinRel
+name|EquiJoin
 extends|extends
-name|JoinRelBase
+name|Join
 block|{
 specifier|public
 specifier|final
@@ -157,9 +181,9 @@ specifier|final
 name|ImmutableIntList
 name|rightKeys
 decl_stmt|;
-comment|/** Creates an EquiJoinRel. */
+comment|/** Creates an EquiJoin. */
 specifier|public
-name|EquiJoinRel
+name|EquiJoin
 parameter_list|(
 name|RelOptCluster
 name|cluster
@@ -272,7 +296,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End EquiJoinRel.java
+comment|// End EquiJoin.java
 end_comment
 
 end_unit

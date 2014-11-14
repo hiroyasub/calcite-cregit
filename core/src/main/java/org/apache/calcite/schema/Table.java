@@ -5,11 +5,13 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
+operator|.
+name|schema
 package|;
 end_package
 
@@ -17,9 +19,13 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|reltype
+name|calcite
+operator|.
+name|rel
+operator|.
+name|type
 operator|.
 name|RelDataType
 import|;
@@ -29,16 +35,20 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|reltype
+name|calcite
+operator|.
+name|rel
+operator|.
+name|type
 operator|.
 name|RelDataTypeFactory
 import|;
 end_import
 
 begin_comment
-comment|/**  * Table.  *  *<p>The typical way for a table to be created is when Calcite interrogates  * a user-defined schema in order to validate names appearing in a SQL query.  * Calcite finds the schema by calling {@link Schema#getSubSchema(String)} on the  * connection's root schema, then gets a table by calling  * {@link Schema#getTable(String)}.</p>  *  *<p>Note that a table does not know its name. It is in fact possible for  * a table to be used more than once, perhaps under multiple names or under  * multiple schemas. (Compare with the  *<a href="http://en.wikipedia.org/wiki/Inode">i-node</a> concept in the UNIX  * filesystem.)</p>  *  * @see TableMacro  */
+comment|/**  * Table.  *  *<p>The typical way for a table to be created is when Calcite interrogates a  * user-defined schema in order to validate names appearing in a SQL query.  * Calcite finds the schema by calling {@link Schema#getSubSchema(String)} on  * the connection's root schema, then gets a table by calling  * {@link Schema#getTable(String)}.</p>  *  *<p>Note that a table does not know its name. It is in fact possible for  * a table to be used more than once, perhaps under multiple names or under  * multiple schemas. (Compare with the  *<a href="http://en.wikipedia.org/wiki/Inode">i-node</a> concept in the UNIX  * filesystem.)</p>  *  * @see TableMacro  */
 end_comment
 
 begin_interface

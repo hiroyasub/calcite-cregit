@@ -5,11 +5,11 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
 name|test
 package|;
@@ -17,13 +17,15 @@ end_package
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
+operator|.
+name|calcite
 operator|.
 name|linq4j
 operator|.
-name|expressions
+name|tree
 operator|.
 name|Primitive
 import|;
@@ -33,7 +35,9 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|util
 operator|.
@@ -80,6 +84,18 @@ operator|.
 name|collect
 operator|.
 name|ImmutableList
+import|;
+end_import
+
+begin_import
+import|import
+name|mondrian
+operator|.
+name|test
+operator|.
+name|data
+operator|.
+name|FoodMartQuery
 import|;
 end_import
 
@@ -133,7 +149,17 @@ name|java
 operator|.
 name|io
 operator|.
-name|*
+name|IOException
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|io
+operator|.
+name|InputStream
 import|;
 end_import
 
@@ -155,19 +181,37 @@ name|java
 operator|.
 name|util
 operator|.
-name|*
+name|ArrayList
 import|;
 end_import
 
 begin_import
 import|import
-name|mondrian
+name|java
 operator|.
-name|test
+name|util
 operator|.
-name|data
+name|LinkedHashMap
+import|;
+end_import
+
+begin_import
+import|import
+name|java
 operator|.
-name|FoodMartQuery
+name|util
+operator|.
+name|List
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Map
 import|;
 end_import
 
@@ -1150,7 +1194,7 @@ decl_stmt|;
 if|if
 condition|(
 operator|!
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|ENABLE_SLOW
 operator|&&
@@ -1330,7 +1374,7 @@ block|{
 if|if
 condition|(
 operator|!
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|ENABLE_SLOW
 operator|&&
@@ -1439,14 +1483,14 @@ parameter_list|()
 block|{
 try|try
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -1510,14 +1554,14 @@ parameter_list|()
 block|{
 try|try
 block|{
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -1575,6 +1619,7 @@ argument_list|)
 throw|;
 block|}
 block|}
+comment|/** Set of queries against the FoodMart database. */
 specifier|public
 specifier|static
 class|class
@@ -1765,7 +1810,7 @@ name|set
 return|;
 block|}
 block|}
-comment|// JSON class
+comment|/** JSON root element. */
 specifier|public
 specifier|static
 class|class
@@ -1787,7 +1832,7 @@ argument_list|>
 argument_list|()
 decl_stmt|;
 block|}
-comment|// JSON class
+comment|/** JSON query element. */
 specifier|public
 specifier|static
 class|class
@@ -1832,7 +1877,7 @@ argument_list|>
 argument_list|()
 decl_stmt|;
 block|}
-comment|// JSON class
+comment|/** JSON column element. */
 specifier|public
 specifier|static
 class|class

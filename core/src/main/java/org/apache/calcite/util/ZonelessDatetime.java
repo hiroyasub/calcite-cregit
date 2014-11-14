@@ -7,9 +7,11 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|util14
+name|calcite
+operator|.
+name|util
 package|;
 end_package
 
@@ -19,7 +21,7 @@ name|java
 operator|.
 name|io
 operator|.
-name|*
+name|Serializable
 import|;
 end_import
 
@@ -29,7 +31,7 @@ name|java
 operator|.
 name|text
 operator|.
-name|*
+name|DateFormat
 import|;
 end_import
 
@@ -39,7 +41,17 @@ name|java
 operator|.
 name|util
 operator|.
-name|*
+name|Calendar
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|TimeZone
 import|;
 end_import
 
@@ -216,7 +228,7 @@ name|getDateValue
 argument_list|()
 expr_stmt|;
 block|}
-comment|/**    * Gets the value of this datetime as a milliseconds value for {@link    * java.sql.Time}.    *    * @param zone time zone in which to generate a time value for    */
+comment|/**    * Gets the value of this datetime as a milliseconds value for    * {@link java.sql.Time}.    *    * @param zone time zone in which to generate a time value for    */
 specifier|public
 name|long
 name|getJdbcTime
@@ -242,7 +254,7 @@ name|timeValue
 argument_list|)
 return|;
 block|}
-comment|/**    * Gets the value of this datetime as a milliseconds value for {@link    * java.sql.Date}.    *    * @param zone time zone in which to generate a time value for    */
+comment|/**    * Gets the value of this datetime as a milliseconds value for    * {@link java.sql.Date}.    *    * @param zone time zone in which to generate a time value for    */
 specifier|public
 name|long
 name|getJdbcDate
@@ -334,7 +346,7 @@ name|getTimeInMillis
 argument_list|()
 return|;
 block|}
-comment|/**    * Gets the value of this datetime as a milliseconds value for {@link    * java.sql.Timestamp}.    *    * @param zone time zone in which to generate a time value for    */
+comment|/**    * Gets the value of this datetime as a milliseconds value for    * {@link java.sql.Timestamp}.    *    * @param zone time zone in which to generate a time value for    */
 specifier|public
 name|long
 name|getJdbcTimestamp

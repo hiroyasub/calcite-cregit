@@ -5,11 +5,11 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
 name|config
 package|;
@@ -17,9 +17,11 @@ end_package
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
+operator|.
+name|calcite
 operator|.
 name|avatica
 operator|.
@@ -59,15 +61,33 @@ end_import
 
 begin_import
 import|import static
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
+operator|.
+name|calcite
 operator|.
 name|avatica
 operator|.
 name|ConnectionConfigImpl
 operator|.
-name|*
+name|PropEnv
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|avatica
+operator|.
+name|ConnectionConfigImpl
+operator|.
+name|parse
 import|;
 end_import
 
@@ -78,7 +98,7 @@ end_comment
 begin_enum
 specifier|public
 enum|enum
-name|OptiqConnectionProperty
+name|CalciteConnectionProperty
 implements|implements
 name|ConnectionProperty
 block|{
@@ -228,7 +248,7 @@ argument_list|,
 literal|null
 argument_list|)
 block|,
-comment|/** Type system. The name of a class that implements    * {@code org.eigenbase.reltype.RelDataTypeSystem} and has a public default    * constructor or an {@code INSTANCE} constant. */
+comment|/** Type system. The name of a class that implements    * {@link org.apache.calcite.rel.type.RelDataTypeSystem} and has a public    * default constructor or an {@code INSTANCE} constant. */
 name|TYPE_SYSTEM
 argument_list|(
 literal|"typeSystem"
@@ -262,7 +282,7 @@ name|Map
 argument_list|<
 name|String
 argument_list|,
-name|OptiqConnectionProperty
+name|CalciteConnectionProperty
 argument_list|>
 name|NAME_TO_PROPS
 decl_stmt|;
@@ -275,16 +295,16 @@ name|HashMap
 argument_list|<
 name|String
 argument_list|,
-name|OptiqConnectionProperty
+name|CalciteConnectionProperty
 argument_list|>
 argument_list|()
 expr_stmt|;
 for|for
 control|(
-name|OptiqConnectionProperty
-name|property
+name|CalciteConnectionProperty
+name|p
 range|:
-name|OptiqConnectionProperty
+name|CalciteConnectionProperty
 operator|.
 name|values
 argument_list|()
@@ -294,31 +314,31 @@ name|NAME_TO_PROPS
 operator|.
 name|put
 argument_list|(
-name|property
+name|p
 operator|.
 name|camelName
 operator|.
 name|toUpperCase
 argument_list|()
 argument_list|,
-name|property
+name|p
 argument_list|)
 expr_stmt|;
 name|NAME_TO_PROPS
 operator|.
 name|put
 argument_list|(
-name|property
+name|p
 operator|.
 name|name
 argument_list|()
 argument_list|,
-name|property
+name|p
 argument_list|)
 expr_stmt|;
 block|}
 block|}
-name|OptiqConnectionProperty
+name|CalciteConnectionProperty
 parameter_list|(
 name|String
 name|camelName
@@ -415,7 +435,7 @@ block|}
 end_enum
 
 begin_comment
-comment|// End OptiqConnectionProperty.java
+comment|// End CalciteConnectionProperty.java
 end_comment
 
 end_unit

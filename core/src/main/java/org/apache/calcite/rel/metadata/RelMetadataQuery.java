@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
@@ -17,11 +19,15 @@ end_package
 
 begin_import
 import|import
-name|java
+name|org
 operator|.
-name|util
+name|apache
 operator|.
-name|*
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptCost
 import|;
 end_import
 
@@ -29,11 +35,41 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptPredicateList
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptTable
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
-name|*
+name|RelNode
 import|;
 end_import
 
@@ -41,23 +77,13 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|relopt
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
+name|calcite
 operator|.
 name|rex
 operator|.
-name|*
+name|RexNode
 import|;
 end_import
 
@@ -65,23 +91,13 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
-name|stat
-operator|.
-name|*
+name|SqlExplainLevel
 import|;
 end_import
 
@@ -99,8 +115,28 @@ name|Iterables
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|BitSet
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Set
+import|;
+end_import
+
 begin_comment
-comment|/**  * RelMetadataQuery provides a strongly-typed facade on top of {@link  * RelMetadataProvider} for the set of relational expression metadata queries  * defined as standard within Eigenbase. The Javadoc on these methods serves as  * their primary specification.  *  *<p>To add a new standard query<code>Xyz</code> to this interface, follow  * these steps:  *  *<ol>  *<li>Add a static method<code>getXyz</code> specification to this class.  *<li>Add unit tests to {@code org.eigenbase.test.RelMetadataTest}.  *<li>Write a new provider class<code>RelMdXyz</code> in this package. Follow  * the pattern from an existing class such as {@link RelMdColumnOrigins},  * overloading on all of the logical relational expressions to which the query  * applies.  *<li>Add a {@code SOURCE} static member, similar to  *     {@link RelMdColumnOrigins#SOURCE}.  *<li>Register the {@code SOURCE} object in {@link DefaultRelMetadataProvider}.  *<li>Get unit tests working.  *</ol>  *  *<p>Because relational expression metadata is extensible, extension projects  * can define similar facades in order to specify access to custom metadata.  * Please do not add queries here (nor on {@link RelNode}) which lack meaning  * outside of your extension.  *  *<p>Besides adding new metadata queries, extension projects may need to add  * custom providers for the standard queries in order to handle additional  * relational expressions (either logical or physical). In either case, the  * process is the same: write a reflective provider and chain it on to an  * instance of {@link DefaultRelMetadataProvider}, prepending it to the default  * providers. Then supply that instance to the planner via the appropriate  * plugin mechanism.  */
+comment|/**  * RelMetadataQuery provides a strongly-typed facade on top of  * {@link RelMetadataProvider} for the set of relational expression metadata  * queries defined as standard within Calcite. The Javadoc on these methods  * serves as their primary specification.  *  *<p>To add a new standard query<code>Xyz</code> to this interface, follow  * these steps:  *  *<ol>  *<li>Add a static method<code>getXyz</code> specification to this class.  *<li>Add unit tests to {@code org.apache.calcite.test.RelMetadataTest}.  *<li>Write a new provider class<code>RelMdXyz</code> in this package. Follow  * the pattern from an existing class such as {@link RelMdColumnOrigins},  * overloading on all of the logical relational expressions to which the query  * applies.  *<li>Add a {@code SOURCE} static member, similar to  *     {@link RelMdColumnOrigins#SOURCE}.  *<li>Register the {@code SOURCE} object in {@link DefaultRelMetadataProvider}.  *<li>Get unit tests working.  *</ol>  *  *<p>Because relational expression metadata is extensible, extension projects  * can define similar facades in order to specify access to custom metadata.  * Please do not add queries here (nor on {@link RelNode}) which lack meaning  * outside of your extension.  *  *<p>Besides adding new metadata queries, extension projects may need to add  * custom providers for the standard queries in order to handle additional  * relational expressions (either logical or physical). In either case, the  * process is the same: write a reflective provider and chain it on to an  * instance of {@link DefaultRelMetadataProvider}, prepending it to the default  * providers. Then supply that instance to the planner via the appropriate  * plugin mechanism.  */
 end_comment
 
 begin_class
@@ -110,24 +146,6 @@ class|class
 name|RelMetadataQuery
 block|{
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**    * Returns statistics for a relational expression. These statistics include    * features such as row counts, or column distributions. Stats are typically    * collected by sampling a table. They might also be inferred from a rel's    * history. Certain rels, such as filters, might generate stats from their    * inputs.    *    * @param rel the relational expression.    * @return a statistics object, if statistics are available, or null    * otherwise    */
-annotation|@
-name|Deprecated
-specifier|public
-specifier|static
-name|RelStatSource
-name|getStatistics
-parameter_list|(
-name|RelNode
-name|rel
-parameter_list|)
-block|{
-throw|throw
-operator|new
-name|UnsupportedOperationException
-argument_list|()
-throw|;
-block|}
 comment|/**    * Returns the    * {@link BuiltInMetadata.RowCount#getRowCount()}    * statistic.    *    * @param rel the relational expression    * @return estimated row count, or null if no reliable estimate can be    * determined    */
 specifier|public
 specifier|static
@@ -327,7 +345,7 @@ name|column
 argument_list|)
 return|;
 block|}
-comment|/**    * Determines the origin of a column, provided the column maps to a single    * column that isn't derived.    *    * @see #getColumnOrigins(org.eigenbase.rel.RelNode, int)    *    * @param rel the RelNode of the column    * @param column the offset of the column whose origin we are trying to    * determine    *    * @return the origin of a column provided it's a simple column; otherwise,    * returns null    */
+comment|/**    * Determines the origin of a column, provided the column maps to a single    * column that isn't derived.    *    * @see #getColumnOrigins(org.apache.calcite.rel.RelNode, int)    *    * @param rel the RelNode of the column    * @param column the offset of the column whose origin we are trying to    * determine    *    * @return the origin of a column provided it's a simple column; otherwise,    * returns null    */
 specifier|public
 specifier|static
 name|RelColumnOrigin
@@ -769,7 +787,7 @@ name|result
 argument_list|)
 return|;
 block|}
-comment|/**    * Returns the    * {@link org.eigenbase.rel.metadata.BuiltInMetadata.Predicates#getPredicates()}    * statistic.    *    * @param rel the relational expression    * @return Predicates that can be pulled above this RelNode    */
+comment|/**    * Returns the    * {@link org.apache.calcite.rel.metadata.BuiltInMetadata.Predicates#getPredicates()}    * statistic.    *    * @param rel the relational expression    * @return Predicates that can be pulled above this RelNode    */
 specifier|public
 specifier|static
 name|RelOptPredicateList

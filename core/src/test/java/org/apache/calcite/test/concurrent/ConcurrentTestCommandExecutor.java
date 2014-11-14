@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|test
 operator|.
@@ -31,7 +33,27 @@ name|java
 operator|.
 name|sql
 operator|.
-name|*
+name|Connection
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|sql
+operator|.
+name|DriverManager
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|sql
+operator|.
+name|Statement
 import|;
 end_import
 
@@ -41,7 +63,7 @@ name|java
 operator|.
 name|util
 operator|.
-name|*
+name|Properties
 import|;
 end_import
 
@@ -116,7 +138,7 @@ name|ConcurrentTestCommand
 name|errorCommand
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Constructs a ConcurrentTestCommandExecutor with the given thread    * ID, JDBC URL, commands and synchronization object.    *    * @param threadId         the thread ID (see {@link ConcurrentTestCommandGenerator})    * @param threadName       the thread's name    * @param jdbcURL          the JDBC URL to connect to    * @param jdbcProps        JDBC Connection properties (user, password, etc.)    * @param commands         the sequence of commands to execute -- null    *                         elements indicate no-ops    * @param synchronizer     synchronization object (may not be null);    * @param debugPrintStream if non-null a PrintStream to use for debugging    *                         output (may help debugging thread synchronization    */
+comment|/**    * Constructs a ConcurrentTestCommandExecutor with the given thread    * ID, JDBC URL, commands and synchronization object.    *    * @param threadId         the thread ID    *                         (see {@link ConcurrentTestCommandGenerator})    * @param threadName       the thread's name    * @param jdbcURL          the JDBC URL to connect to    * @param jdbcProps        JDBC Connection properties (user, password, etc.)    * @param commands         the sequence of commands to execute -- null    *                         elements indicate no-ops    * @param synchronizer     synchronization object (may not be null);    * @param debugPrintStream if non-null a PrintStream to use for debugging    *                         output (may help debugging thread synchronization    */
 name|ConcurrentTestCommandExecutor
 parameter_list|(
 name|int
@@ -536,7 +558,7 @@ return|return
 name|error
 return|;
 block|}
-comment|/**    * Returns location (e.g., command number) for exception returned by {@link    * #getFailureCause()}.    */
+comment|/**    * Returns location (e.g., command number) for exception returned by    * {@link #getFailureCause()}.    */
 specifier|public
 name|String
 name|getFailureLocation

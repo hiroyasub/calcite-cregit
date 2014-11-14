@@ -5,11 +5,11 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
 name|tools
 package|;
@@ -17,23 +17,11 @@ end_package
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
-operator|.
-name|SchemaPlus
-import|;
-end_import
-
-begin_import
-import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|optiq
+name|calcite
 operator|.
 name|config
 operator|.
@@ -45,9 +33,11 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|relopt
+name|calcite
+operator|.
+name|plan
 operator|.
 name|Context
 import|;
@@ -57,9 +47,11 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|relopt
+name|calcite
+operator|.
+name|plan
 operator|.
 name|RelOptCostFactory
 import|;
@@ -69,9 +61,11 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|relopt
+name|calcite
+operator|.
+name|plan
 operator|.
 name|RelTraitDef
 import|;
@@ -81,9 +75,13 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|reltype
+name|calcite
+operator|.
+name|rel
+operator|.
+name|type
 operator|.
 name|RelDataTypeSystem
 import|;
@@ -93,7 +91,23 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
+operator|.
+name|schema
+operator|.
+name|SchemaPlus
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
@@ -105,7 +119,9 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
@@ -119,7 +135,9 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql2rel
 operator|.
@@ -165,7 +183,7 @@ name|SchemaPlus
 name|getDefaultSchema
 parameter_list|()
 function_decl|;
-comment|/**    * Returns a list of one or more programs used during the course of query    * evaluation.    *    *<p>The common use case is when there is a single program    * created using {@link Programs#of(RuleSet)}    * and {@link net.hydromatic.optiq.tools.Planner#transform}    * will only be called once.    *    *<p>However, consumers may also create programs    * not based on rule sets, register multiple programs,    * and do multiple repetitions    * of {@link Planner#transform} planning cycles using different indices.    *    *<p>The order of programs provided here determines the zero-based indices    * of programs elsewhere in this class.    */
+comment|/**    * Returns a list of one or more programs used during the course of query    * evaluation.    *    *<p>The common use case is when there is a single program    * created using {@link Programs#of(RuleSet)}    * and {@link org.apache.calcite.tools.Planner#transform}    * will only be called once.    *    *<p>However, consumers may also create programs    * not based on rule sets, register multiple programs,    * and do multiple repetitions    * of {@link Planner#transform} planning cycles using different indices.    *    *<p>The order of programs provided here determines the zero-based indices    * of programs elsewhere in this class.    */
 name|ImmutableList
 argument_list|<
 name|Program
@@ -196,7 +214,7 @@ name|SqlRexConvertletTable
 name|getConvertletTable
 parameter_list|()
 function_decl|;
-comment|/**    * Returns the PlannerContext that should be made available during planning by    * calling {@link org.eigenbase.relopt.RelOptPlanner#getContext()}.    */
+comment|/**    * Returns the PlannerContext that should be made available during planning by    * calling {@link org.apache.calcite.plan.RelOptPlanner#getContext()}.    */
 name|Context
 name|getContext
 parameter_list|()

@@ -5,18 +5,18 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
 name|model
 package|;
 end_package
 
 begin_comment
-comment|/**  * An aggregate function applied to a column (or columns) of a lattice.  *  *<p>Occurs in a {@link net.hydromatic.optiq.model.JsonTile},  * and there is a default list in  * {@link net.hydromatic.optiq.model.JsonLattice}.  *  * @see JsonRoot Description of schema elements  */
+comment|/**  * An aggregate function applied to a column (or columns) of a lattice.  *  *<p>Occurs in a {@link org.apache.calcite.model.JsonTile},  * and there is a default list in  * {@link org.apache.calcite.model.JsonLattice}.  *  * @see JsonRoot Description of schema elements  */
 end_comment
 
 begin_class

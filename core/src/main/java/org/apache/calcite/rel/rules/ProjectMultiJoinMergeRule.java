@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
@@ -19,11 +21,13 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|rel
+name|calcite
 operator|.
-name|*
+name|plan
+operator|.
+name|RelOptRule
 import|;
 end_import
 
@@ -31,52 +35,84 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|relopt
+name|calcite
 operator|.
-name|*
+name|plan
+operator|.
+name|RelOptRuleCall
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptUtil
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|logical
+operator|.
+name|LogicalProject
 import|;
 end_import
 
 begin_comment
-comment|/**  * PushProjectIntoMultiJoinRule implements the rule for pushing projection  * information from a {@link ProjectRel} into the {@link MultiJoinRel} that is  * input into the {@link ProjectRel}.  */
+comment|/**  * Planner rule that pushes  * {@link org.apache.calcite.rel.core.Project}  * into a {@link MultiJoin},  * creating a richer {@code MultiJoin}.  *  * @see org.apache.calcite.rel.rules.FilterMultiJoinMergeRule  */
 end_comment
 
 begin_class
 specifier|public
 class|class
-name|PushProjectIntoMultiJoinRule
+name|ProjectMultiJoinMergeRule
 extends|extends
 name|RelOptRule
 block|{
 specifier|public
 specifier|static
 specifier|final
-name|PushProjectIntoMultiJoinRule
+name|ProjectMultiJoinMergeRule
 name|INSTANCE
 init|=
 operator|new
-name|PushProjectIntoMultiJoinRule
+name|ProjectMultiJoinMergeRule
 argument_list|()
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a PushProjectIntoMultiJoinRule.    */
+comment|/**    * Creates a ProjectMultiJoinMergeRule.    */
 specifier|private
-name|PushProjectIntoMultiJoinRule
+name|ProjectMultiJoinMergeRule
 parameter_list|()
 block|{
 name|super
 argument_list|(
 name|operand
 argument_list|(
-name|ProjectRel
+name|LogicalProject
 operator|.
 name|class
 argument_list|,
 name|operand
 argument_list|(
-name|MultiJoinRel
+name|MultiJoin
 operator|.
 name|class
 argument_list|,
@@ -96,7 +132,7 @@ name|RelOptRuleCall
 name|call
 parameter_list|)
 block|{
-name|ProjectRel
+name|LogicalProject
 name|project
 init|=
 name|call
@@ -106,7 +142,7 @@ argument_list|(
 literal|0
 argument_list|)
 decl_stmt|;
-name|MultiJoinRel
+name|MultiJoin
 name|multiJoin
 init|=
 name|call
@@ -173,9 +209,9 @@ condition|)
 block|{
 return|return;
 block|}
-comment|// create a new MultiJoinRel that reflects the columns in the projection
-comment|// above the MultiJoinRel
-name|MultiJoinRel
+comment|// create a new MultiJoin that reflects the columns in the projection
+comment|// above the MultiJoin
+name|MultiJoin
 name|newMultiJoin
 init|=
 name|RelOptUtil
@@ -187,11 +223,11 @@ argument_list|,
 name|project
 argument_list|)
 decl_stmt|;
-name|ProjectRel
+name|LogicalProject
 name|newProject
 init|=
 operator|(
-name|ProjectRel
+name|LogicalProject
 operator|)
 name|RelOptUtil
 operator|.
@@ -225,7 +261,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End PushProjectIntoMultiJoinRule.java
+comment|// End ProjectMultiJoinMergeRule.java
 end_comment
 
 end_unit

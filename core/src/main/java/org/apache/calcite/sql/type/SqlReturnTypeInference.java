@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
@@ -19,11 +21,15 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|reltype
+name|calcite
 operator|.
-name|*
+name|rel
+operator|.
+name|type
+operator|.
+name|RelDataType
 import|;
 end_import
 
@@ -31,16 +37,32 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
-name|*
+name|SqlOperator
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|SqlOperatorBinding
 import|;
 end_import
 
 begin_comment
-comment|/**  * Strategy interface to infer the type of an operator call from the type of the  * operands.  *  *<p>This interface is an example of the {@link  * org.eigenbase.util.Glossary#STRATEGY_PATTERN strategy pattern}. This makes  * sense because many operators have similar, straightforward strategies, such  * as to take the type of the first operand.</p>  */
+comment|/**  * Strategy interface to infer the type of an operator call from the type of the  * operands.  *  *<p>This interface is an example of the  * {@link org.apache.calcite.util.Glossary#STRATEGY_PATTERN strategy pattern}.  * This makes  * sense because many operators have similar, straightforward strategies, such  * as to take the type of the first operand.</p>  */
 end_comment
 
 begin_interface

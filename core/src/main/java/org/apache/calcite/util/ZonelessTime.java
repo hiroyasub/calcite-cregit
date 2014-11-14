@@ -7,9 +7,11 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|util14
+name|calcite
+operator|.
+name|util
 package|;
 end_package
 
@@ -29,7 +31,17 @@ name|java
 operator|.
 name|text
 operator|.
-name|*
+name|DateFormat
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|text
+operator|.
+name|SimpleDateFormat
 import|;
 end_import
 

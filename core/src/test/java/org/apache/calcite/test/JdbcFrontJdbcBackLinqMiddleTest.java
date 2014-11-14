@@ -5,11 +5,11 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
 name|test
 package|;
@@ -37,15 +37,15 @@ end_import
 
 begin_import
 import|import static
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
 name|test
 operator|.
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 import|;
@@ -72,7 +72,7 @@ argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -114,7 +114,7 @@ argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -146,7 +146,7 @@ argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -188,7 +188,7 @@ argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -242,7 +242,7 @@ argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -288,7 +288,7 @@ argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -326,7 +326,7 @@ argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -348,21 +348,21 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"EnumerableAggregateRel(group=[{}], EXPR$0=[COUNT()])\n"
+literal|"EnumerableAggregate(group=[{}], EXPR$0=[COUNT()])\n"
 operator|+
-literal|"  EnumerableCalcRel(expr#0..1=[{inputs}], expr#2=[0], expr#3=[-($t0, $t1)], expr#4=[=($t3, $t2)], DUMMY=[$t2], $condition=[$t4])\n"
+literal|"  EnumerableCalc(expr#0..1=[{inputs}], expr#2=[0], expr#3=[-($t0, $t1)], expr#4=[=($t3, $t2)], DUMMY=[$t2], $condition=[$t4])\n"
 operator|+
-literal|"    EnumerableJoinRel(condition=[true], joinType=[inner])\n"
+literal|"    EnumerableJoin(condition=[true], joinType=[inner])\n"
 operator|+
 literal|"      JdbcToEnumerableConverter\n"
 operator|+
-literal|"        JdbcProjectRel(customer_id=[$2])\n"
+literal|"        JdbcProject(customer_id=[$2])\n"
 operator|+
 literal|"          JdbcTableScan(table=[[foodmart, sales_fact_1997]])\n"
 operator|+
 literal|"      JdbcToEnumerableConverter\n"
 operator|+
-literal|"        JdbcProjectRel(customer_id=[$0])\n"
+literal|"        JdbcProject(customer_id=[$0])\n"
 operator|+
 literal|"          JdbcTableScan(table=[[foodmart, customer]])"
 argument_list|)
@@ -380,7 +380,7 @@ argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -418,7 +418,7 @@ argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -427,7 +427,9 @@ argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"select count(*), c.\"state_province\", sum(s.\"unit_sales\") as s\n"
+literal|"select count(*), c.\"state_province\",\n"
+operator|+
+literal|"  sum(s.\"unit_sales\") as s\n"
 operator|+
 literal|"from \"foodmart\".\"sales_fact_1997\" as s\n"
 operator|+
@@ -462,7 +464,7 @@ argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -529,7 +531,7 @@ argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -594,7 +596,7 @@ argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -618,7 +620,7 @@ literal|"              while (inputEnumerator.moveNext()) {\n"
 operator|+
 literal|"                final String v = (String) ((Object[]) inputEnumerator.current())[10];\n"
 operator|+
-literal|"                if (v != null&& net.hydromatic.optiq.runtime.SqlFunctions.eq(v, \"USA\")) {\n"
+literal|"                if (v != null&& org.apache.calcite.runtime.SqlFunctions.eq(v, \"USA\")) {\n"
 operator|+
 literal|"                  return true;\n"
 operator|+
@@ -646,7 +648,7 @@ argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -685,7 +687,7 @@ literal|"              final Object[] current12 = (Object[]) inputEnumerator.cur
 operator|+
 literal|"              final String v1 = (String) current12[10];\n"
 operator|+
-literal|"              if (net.hydromatic.optiq.runtime.SqlFunctions.eq((String) current12[12], \"USA\")&& (v1 != null&& net.hydromatic.optiq.runtime.SqlFunctions.eq(net.hydromatic.optiq.runtime.SqlFunctions.upper(v1), net.hydromatic.optiq.runtime.SqlFunctions.trim(net.hydromatic.optiq.runtime.SqlFunctions.upper(\"CA\"))))) {\n"
+literal|"              if (org.apache.calcite.runtime.SqlFunctions.eq((String) current12[12], \"USA\")&& (v1 != null&& org.apache.calcite.runtime.SqlFunctions.eq(org.apache.calcite.runtime.SqlFunctions.upper(v1), org.apache.calcite.runtime.SqlFunctions.trim(org.apache.calcite.runtime.SqlFunctions.upper(\"CA\"))))) {\n"
 operator|+
 literal|"                return true;\n"
 operator|+
@@ -716,7 +718,7 @@ argument_list|()
 operator|.
 name|with
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|Config
 operator|.
@@ -730,7 +732,7 @@ argument_list|)
 operator|.
 name|planContains
 argument_list|(
-literal|"  final net.hydromatic.linq4j.Enumerable _inputEnumerable1 = left.join(right, new net.hydromatic.linq4j.function.Function1() {\n"
+literal|"  final org.apache.calcite.linq4j.Enumerable _inputEnumerable1 = left.join(right, new org.apache.calcite.linq4j.function.Function1() {\n"
 argument_list|)
 expr_stmt|;
 block|}

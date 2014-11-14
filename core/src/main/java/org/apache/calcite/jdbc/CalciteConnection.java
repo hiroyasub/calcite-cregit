@@ -5,11 +5,11 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
 name|jdbc
 package|;
@@ -17,9 +17,41 @@ end_package
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
+operator|.
+name|calcite
+operator|.
+name|adapter
+operator|.
+name|java
+operator|.
+name|JavaTypeFactory
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|config
+operator|.
+name|CalciteConnectionConfig
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|linq4j
 operator|.
@@ -29,43 +61,15 @@ end_import
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
+operator|.
+name|schema
 operator|.
 name|SchemaPlus
-import|;
-end_import
-
-begin_import
-import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|optiq
-operator|.
-name|config
-operator|.
-name|OptiqConnectionConfig
-import|;
-end_import
-
-begin_import
-import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|optiq
-operator|.
-name|impl
-operator|.
-name|java
-operator|.
-name|JavaTypeFactory
 import|;
 end_import
 
@@ -100,13 +104,13 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Extension to Calcite's implementation of  * {@link java.sql.Connection JDBC connection} allows schemas to be defined  * dynamically.  *  *<p>You can start off with an empty connection (no schemas), define one  * or two schemas, and start querying them.</p>  *  *<p>Since an {@code OptiqConnection} implements the linq4j  * {@link QueryProvider} interface, you can use a connection to execute  * expression trees as queries.</p>  */
+comment|/**  * Extension to Calcite's implementation of  * {@link java.sql.Connection JDBC connection} allows schemas to be defined  * dynamically.  *  *<p>You can start off with an empty connection (no schemas), define one  * or two schemas, and start querying them.</p>  *  *<p>Since a {@code CalciteConnection} implements the linq4j  * {@link QueryProvider} interface, you can use a connection to execute  * expression trees as queries.</p>  */
 end_comment
 
 begin_interface
 specifier|public
 interface|interface
-name|OptiqConnection
+name|CalciteConnection
 extends|extends
 name|Connection
 extends|,
@@ -144,7 +148,7 @@ parameter_list|()
 throws|throws
 name|SQLException
 function_decl|;
-name|OptiqConnectionConfig
+name|CalciteConnectionConfig
 name|config
 parameter_list|()
 function_decl|;
@@ -152,7 +156,7 @@ block|}
 end_interface
 
 begin_comment
-comment|// End OptiqConnection.java
+comment|// End CalciteConnection.java
 end_comment
 
 end_unit

@@ -7,43 +7,25 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|relopt
+name|calcite
+operator|.
+name|plan
 package|;
 end_package
 
 begin_import
 import|import
-name|java
-operator|.
-name|util
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|logging
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
-name|*
+name|RelNode
 import|;
 end_import
 
@@ -51,11 +33,15 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
 operator|.
 name|trace
 operator|.
-name|*
+name|CalciteTrace
 import|;
 end_import
 
@@ -87,6 +73,38 @@ name|ImmutableMap
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Map
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|logging
+operator|.
+name|Logger
+import|;
+end_import
+
 begin_comment
 comment|/**  * A<code>RelOptRuleCall</code> is an invocation of a {@link RelOptRule} with a  * set of {@link RelNode relational expression}s as arguments.  */
 end_comment
@@ -104,7 +122,7 @@ specifier|final
 name|Logger
 name|LOGGER
 init|=
-name|EigenbaseTrace
+name|CalciteTrace
 operator|.
 name|getPlannerTracer
 argument_list|()
@@ -139,7 +157,7 @@ argument_list|<
 name|RelNode
 argument_list|>
 argument_list|>
-name|nodeChildren
+name|nodeInputs
 decl_stmt|;
 specifier|public
 specifier|final
@@ -166,7 +184,7 @@ argument_list|>
 name|parents
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a RelOptRuleCall.    *    * @param planner      Planner    * @param operand      Root operand    * @param rels         Array of relational expressions which matched each    *                     operand    * @param nodeChildren For each node which matched with<code>    *                     matchAnyChildren</code>=true, a list of the node's    *                     children    * @param parents      list of parent RelNodes corresponding to the first    *                     relational expression in the array argument, if known;    *                     otherwise, null    */
+comment|/**    * Creates a RelOptRuleCall.    *    * @param planner      Planner    * @param operand      Root operand    * @param rels         Array of relational expressions which matched each    *                     operand    * @param nodeInputs   For each node which matched with    *                     {@code matchAnyChildren}=true, a list of the node's    *                     inputs    * @param parents      list of parent RelNodes corresponding to the first    *                     relational expression in the array argument, if known;    *                     otherwise, null    */
 specifier|protected
 name|RelOptRuleCall
 parameter_list|(
@@ -189,7 +207,7 @@ argument_list|<
 name|RelNode
 argument_list|>
 argument_list|>
-name|nodeChildren
+name|nodeInputs
 parameter_list|,
 name|List
 argument_list|<
@@ -219,9 +237,9 @@ name|operand
 expr_stmt|;
 name|this
 operator|.
-name|nodeChildren
+name|nodeInputs
 operator|=
-name|nodeChildren
+name|nodeInputs
 expr_stmt|;
 name|this
 operator|.
@@ -279,7 +297,7 @@ argument_list|<
 name|RelNode
 argument_list|>
 argument_list|>
-name|nodeChildren
+name|nodeInputs
 parameter_list|)
 block|{
 name|this
@@ -290,7 +308,7 @@ name|operand
 argument_list|,
 name|rels
 argument_list|,
-name|nodeChildren
+name|nodeInputs
 argument_list|,
 literal|null
 argument_list|)
@@ -371,7 +389,7 @@ name|ordinal
 index|]
 return|;
 block|}
-comment|/**    * Returns the children of a given relational expression node matched in a    * rule.    *    *<p>If the policy of the operand which caused the match is not    * {@link org.eigenbase.relopt.RelOptRuleOperandChildPolicy#ANY},    * the children will have their    * own operands and therefore be easily available in the array returned by    * the {@link #getRels} method, so this method returns null.    *    *<p>This method is for    * {@link org.eigenbase.relopt.RelOptRuleOperandChildPolicy#ANY},    * which is generally used when a node can have a variable number of    * children, and hence where the matched children are not retrievable by any    * other means.    *    * @param rel Relational expression    * @return Children of relational expression    */
+comment|/**    * Returns the children of a given relational expression node matched in a    * rule.    *    *<p>If the policy of the operand which caused the match is not    * {@link org.apache.calcite.plan.RelOptRuleOperandChildPolicy#ANY},    * the children will have their    * own operands and therefore be easily available in the array returned by    * the {@link #getRels} method, so this method returns null.    *    *<p>This method is for    * {@link org.apache.calcite.plan.RelOptRuleOperandChildPolicy#ANY},    * which is generally used when a node can have a variable number of    * children, and hence where the matched children are not retrievable by any    * other means.    *    * @param rel Relational expression    * @return Children of relational expression    */
 specifier|public
 name|List
 argument_list|<
@@ -384,7 +402,7 @@ name|rel
 parameter_list|)
 block|{
 return|return
-name|nodeChildren
+name|nodeInputs
 operator|.
 name|get
 argument_list|(

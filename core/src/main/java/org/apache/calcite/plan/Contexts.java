@@ -7,23 +7,25 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|relopt
+name|calcite
+operator|.
+name|plan
 package|;
 end_package
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
 name|config
 operator|.
-name|OptiqConnectionConfig
+name|CalciteConnectionConfig
 import|;
 end_import
 
@@ -51,13 +53,13 @@ name|Contexts
 parameter_list|()
 block|{
 block|}
-comment|/** Returns a context that contains a    * {@link net.hydromatic.optiq.config.OptiqConnectionConfig}. */
+comment|/** Returns a context that contains a    * {@link org.apache.calcite.config.CalciteConnectionConfig}. */
 specifier|public
 specifier|static
 name|Context
 name|withConfig
 parameter_list|(
-name|OptiqConnectionConfig
+name|CalciteConnectionConfig
 name|config
 parameter_list|)
 block|{
@@ -80,7 +82,7 @@ return|return
 name|EMPTY_CONTEXT
 return|;
 block|}
-comment|/** Context that contains a    * {@link net.hydromatic.optiq.config.OptiqConnectionConfig}. */
+comment|/** Context that contains a    * {@link org.apache.calcite.config.CalciteConnectionConfig}. */
 specifier|private
 specifier|static
 class|class
@@ -89,13 +91,13 @@ implements|implements
 name|Context
 block|{
 specifier|private
-name|OptiqConnectionConfig
+name|CalciteConnectionConfig
 name|config
 decl_stmt|;
 specifier|public
 name|ConfigContext
 parameter_list|(
-name|OptiqConnectionConfig
+name|CalciteConnectionConfig
 name|config
 parameter_list|)
 block|{

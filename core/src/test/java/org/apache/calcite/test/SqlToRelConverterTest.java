@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|test
 package|;
@@ -15,23 +17,15 @@ end_package
 
 begin_import
 import|import
-name|java
-operator|.
-name|io
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
-name|*
+name|RelNode
 import|;
 end_import
 
@@ -39,11 +33,43 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|RelVisitor
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|externalize
+operator|.
+name|RelXmlWriter
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
-name|*
+name|SqlExplainLevel
 import|;
 end_import
 
@@ -51,11 +77,41 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|util
 operator|.
-name|*
+name|Bug
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|TestUtil
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|Util
 import|;
 end_import
 
@@ -69,8 +125,28 @@ name|Test
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|io
+operator|.
+name|PrintWriter
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|io
+operator|.
+name|StringWriter
+import|;
+end_import
+
 begin_comment
-comment|/**  * Unit test for {@link org.eigenbase.sql2rel.SqlToRelConverter}.  */
+comment|/**  * Unit test for {@link org.apache.calcite.sql2rel.SqlToRelConverter}.  */
 end_comment
 
 begin_class
@@ -230,7 +306,7 @@ name|testConditionOffByOne
 parameter_list|()
 block|{
 comment|// Bug causes the plan to contain
-comment|//   JoinRel(condition=[=($9, $9)], joinType=[inner])
+comment|//   LogicalJoin(condition=[=($9, $9)], joinType=[inner])
 name|check
 argument_list|(
 literal|"SELECT * FROM emp JOIN dept on emp.deptno + 0 = dept.deptno"
@@ -1983,7 +2059,7 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Test one of the custom conversions which is recognized by the class of    * the operator (in this case, {@link org.eigenbase.sql.fun.SqlCaseOperator}).    */
+comment|/**    * Test one of the custom conversions which is recognized by the class of the    * operator (in this case,    * {@link org.apache.calcite.sql.fun.SqlCaseOperator}).    */
 annotation|@
 name|Test
 specifier|public
@@ -1999,7 +2075,7 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Tests one of the custom conversions which is recognized by the identity    * of the operator (in this case, {@link    * org.eigenbase.sql.fun.SqlStdOperatorTable#CHARACTER_LENGTH}).    */
+comment|/**    * Tests one of the custom conversions which is recognized by the identity    * of the operator (in this case,    * {@link org.apache.calcite.sql.fun.SqlStdOperatorTable#CHARACTER_LENGTH}).    */
 annotation|@
 name|Test
 specifier|public
@@ -2238,7 +2314,7 @@ name|TestUtil
 operator|.
 name|assertEqualsVerbose
 argument_list|(
-literal|"<RelNode type=\"ProjectRel\">\n"
+literal|"<RelNode type=\"LogicalProject\">\n"
 operator|+
 literal|"\t<Property name=\"EXPR$0\">\n"
 operator|+
@@ -2250,7 +2326,7 @@ literal|"\t\t3\t</Property>\n"
 operator|+
 literal|"\t<Inputs>\n"
 operator|+
-literal|"\t\t<RelNode type=\"ValuesRel\">\n"
+literal|"\t\t<RelNode type=\"LogicalValues\">\n"
 operator|+
 literal|"\t\t\t<Property name=\"tuples\">\n"
 operator|+
@@ -2276,7 +2352,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-412">CALCITE-412</a>,    * "RelFieldTrimmer: when trimming SortRel, the collation and trait set don't    * match". */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-412">CALCITE-412</a>,    * "RelFieldTrimmer: when trimming Sort, the collation and trait set don't    * match". */
 annotation|@
 name|Test
 specifier|public

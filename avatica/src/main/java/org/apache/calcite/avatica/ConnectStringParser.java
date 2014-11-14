@@ -5,9 +5,11 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
+operator|.
+name|calcite
 operator|.
 name|avatica
 package|;
@@ -44,7 +46,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * ConnectStringParser is a utility class that parses or creates a JDBC connect  * string according to the OLE DB connect string syntax described at<a  * href="http://msdn.microsoft.com/library/default.asp?url=/library/en-us/oledb/htm/oledbconnectionstringsyntax.asp">  * OLE DB Connection String Syntax</a>.  *  *<p>This code was adapted from Mondrian's mondrian.olap.Util class.  * The primary differences between this and its Mondrian progenitor are:  *  *<ul>  *<li>use of regular {@link Properties} for compatibility with the JDBC API  * (replaces Mondrian's use of its own order-preserving and case-insensitive  * PropertyList, found in Util.java at link above)</li>  *<li>ability to pass to {@link #parse} a pre-existing Properties object into  * which properties are to be parsed, possibly overriding prior values</li>  *<li>use of {@link SQLException}s rather than unchecked {@link  * RuntimeException}s</li>  *<li>static members for parsing and creating connect strings</li>  *</ul>  *  *<p>ConnectStringParser has a private constructor. Callers use the static  * members:  *  *<dl>  *<dt>{@link #parse(String)}  *<dd>Parses the connect string into a new Properties object.  *  *<dt>{@link #parse(String, Properties)}  *<dd>Parses the connect string into an existing Properties object.  *  *<dt>{@link #getParamString(Properties)}  *<dd>Returns a param string, quoted and escaped as needed, to represent the  * supplied name-value pairs.  *</dl>  */
+comment|/**  * ConnectStringParser is a utility class that parses or creates a JDBC connect  * string according to the OLE DB connect string syntax described at<a  * href="http://msdn.microsoft.com/library/default.asp?url=/library/en-us/oledb/htm/oledbconnectionstringsyntax.asp">  * OLE DB Connection String Syntax</a>.  *  *<p>This code was adapted from Mondrian's mondrian.olap.Util class.  * The primary differences between this and its Mondrian progenitor are:  *  *<ul>  *<li>use of regular {@link Properties} for compatibility with the JDBC API  * (replaces Mondrian's use of its own order-preserving and case-insensitive  * PropertyList, found in Util.java at link above)</li>  *  *<li>ability to pass to {@link #parse} a pre-existing Properties object into  * which properties are to be parsed, possibly overriding prior values</li>  *  *<li>use of {@link SQLException}s rather than unchecked  * {@link RuntimeException}s</li>  *  *<li>static members for parsing and creating connect strings</li>  *  *</ul>  *  *<p>ConnectStringParser has a private constructor. Callers use the static  * members:  *  *<dl>  *<dt>{@link #parse(String)}  *<dd>Parses the connect string into a new Properties object.  *  *<dt>{@link #parse(String, Properties)}  *<dd>Parses the connect string into an existing Properties object.  *  *<dt>{@link #getParamString(Properties)}  *<dd>Returns a param string, quoted and escaped as needed, to represent the  * supplied name-value pairs.  *</dl>  */
 end_comment
 
 begin_class

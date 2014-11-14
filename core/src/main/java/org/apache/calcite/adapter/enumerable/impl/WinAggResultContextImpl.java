@@ -5,15 +5,15 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
-name|rules
+name|adapter
 operator|.
-name|java
+name|enumerable
 operator|.
 name|impl
 package|;
@@ -21,43 +21,15 @@ end_package
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|linq4j
+name|calcite
 operator|.
-name|expressions
+name|adapter
 operator|.
-name|BlockBuilder
-import|;
-end_import
-
-begin_import
-import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|linq4j
-operator|.
-name|expressions
-operator|.
-name|Expression
-import|;
-end_import
-
-begin_import
-import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|optiq
-operator|.
-name|rules
-operator|.
-name|java
+name|enumerable
 operator|.
 name|RexToLixTranslator
 import|;
@@ -65,15 +37,15 @@ end_import
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
-name|rules
+name|adapter
 operator|.
-name|java
+name|enumerable
 operator|.
 name|WinAggFrameResultContext
 import|;
@@ -81,15 +53,15 @@ end_import
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
-name|rules
+name|adapter
 operator|.
-name|java
+name|enumerable
 operator|.
 name|WinAggImplementor
 import|;
@@ -97,17 +69,49 @@ end_import
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
-name|rules
+name|adapter
 operator|.
-name|java
+name|enumerable
 operator|.
 name|WinAggResultContext
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|linq4j
+operator|.
+name|tree
+operator|.
+name|BlockBuilder
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|linq4j
+operator|.
+name|tree
+operator|.
+name|Expression
 import|;
 end_import
 
@@ -136,7 +140,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Implementation of {@link net.hydromatic.optiq.rules.java.WinAggResultContext}.  */
+comment|/**  * Implementation of  * {@link org.apache.calcite.adapter.enumerable.WinAggResultContext}.  */
 end_comment
 
 begin_class
@@ -425,7 +429,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End WinAggResultContext.java
+comment|// End WinAggResultContextImpl.java
 end_comment
 
 end_unit

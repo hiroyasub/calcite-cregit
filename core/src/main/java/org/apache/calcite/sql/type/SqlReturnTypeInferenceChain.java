@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
@@ -19,11 +21,15 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|reltype
+name|calcite
 operator|.
-name|*
+name|rel
+operator|.
+name|type
+operator|.
+name|RelDataType
 import|;
 end_import
 
@@ -31,11 +37,13 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
-name|*
+name|SqlOperatorBinding
 import|;
 end_import
 
@@ -74,7 +82,7 @@ argument_list|>
 name|rules
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a SqlReturnTypeInferenceChain from an array of rules.    *    *<p>Package-protected.    * Use {@link org.eigenbase.sql.type.ReturnTypes#chain}.</p>    */
+comment|/**    * Creates a SqlReturnTypeInferenceChain from an array of rules.    *    *<p>Package-protected.    * Use {@link org.apache.calcite.sql.type.ReturnTypes#chain}.</p>    */
 name|SqlReturnTypeInferenceChain
 parameter_list|(
 name|SqlReturnTypeInference

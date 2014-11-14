@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 package|;
@@ -15,19 +17,11 @@ end_package
 
 begin_import
 import|import
-name|java
-operator|.
-name|util
-operator|.
-name|List
-import|;
-end_import
-
-begin_import
-import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
@@ -39,11 +33,23 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|util
 operator|.
 name|Pair
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
 import|;
 end_import
 
@@ -56,7 +62,7 @@ specifier|public
 interface|interface
 name|RelWriter
 block|{
-comment|/**    * Prints an explanation of a node, with a list of (term, value) pairs.    *    *<p>The term-value pairs are generally gathered by calling    * {@link RelNode#explain(RelWriter)}. Each sub-class of    * {@link RelNode} calls {@link #input(String, org.eigenbase.rel.RelNode)}    * and {@link #item(String, Object)} to declare term-value pairs.</p>    *    * @param rel       Relational expression    * @param valueList List of term-value pairs    */
+comment|/**    * Prints an explanation of a node, with a list of (term, value) pairs.    *    *<p>The term-value pairs are generally gathered by calling    * {@link org.apache.calcite.rel.RelNode#explain(RelWriter)}.    * Each sub-class of {@link org.apache.calcite.rel.RelNode}    * calls {@link #input(String, org.apache.calcite.rel.RelNode)}    * and {@link #item(String, Object)} to declare term-value pairs.</p>    *    * @param rel       Relational expression    * @param valueList List of term-value pairs    */
 name|void
 name|explain
 parameter_list|(

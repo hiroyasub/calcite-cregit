@@ -5,11 +5,11 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
 name|jdbc
 package|;
@@ -17,11 +17,13 @@ end_package
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
+operator|.
+name|schema
 operator|.
 name|Schema
 import|;
@@ -34,12 +36,12 @@ end_comment
 begin_class
 specifier|public
 class|class
-name|OptiqRootSchema
+name|CalciteRootSchema
 extends|extends
-name|OptiqSchema
+name|CalciteSchema
 block|{
 comment|/** Creates a root schema. */
-name|OptiqRootSchema
+name|CalciteRootSchema
 parameter_list|(
 name|Schema
 name|schema
@@ -59,7 +61,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End OptiqRootSchema.java
+comment|// End CalciteRootSchema.java
 end_comment
 
 end_unit

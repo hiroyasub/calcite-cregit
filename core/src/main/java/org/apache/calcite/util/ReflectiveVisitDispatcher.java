@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|util
 package|;
@@ -21,7 +23,7 @@ name|lang
 operator|.
 name|reflect
 operator|.
-name|*
+name|Method
 import|;
 end_import
 
@@ -31,12 +33,12 @@ name|java
 operator|.
 name|util
 operator|.
-name|*
+name|List
 import|;
 end_import
 
 begin_comment
-comment|/**  * Interface for looking up methods relating to reflective visitation. One  * possible implementation would cache the results.  *  *<p>Type parameter 'R' is the base class of visitoR class; type parameter 'E'  * is the base class of visiteE class.  *  *<p>TODO: obsolete {@link ReflectUtil#lookupVisitMethod}, and use caching in  * implementing that method.  */
+comment|/**  * Interface for looking up methods relating to reflective visitation. One  * possible implementation would cache the results.  *  *<p>Type parameter 'R' is the base class of visitoR class; type parameter 'E'  * is the base class of visiteE class.  *  *<p>TODO: obsolete {@link ReflectUtil#lookupVisitMethod}, and use caching in  * implementing that method.  *  * @param<E> Argument type  * @param<R> Return type  */
 end_comment
 
 begin_interface
@@ -106,7 +108,7 @@ name|String
 name|visitMethodName
 parameter_list|)
 function_decl|;
-comment|/**    * Implements the {@link Glossary#VISITOR_PATTERN} via reflection. The basic    * technique is taken from<a    * href="http://www.javaworld.com/javaworld/javatips/jw-javatip98.html">a    * Javaworld article</a>. For an example of how to use it, see    * {@code ReflectVisitorTest}.    *    *<p>Visit method lookup follows the same rules as if compile-time resolution    * for VisitorClass.visit(VisiteeClass) were performed. An ambiguous match due    * to multiple interface inheritance results in an IllegalArgumentException. A    * non-match is indicated by returning false.</p>    *    * @param visitor         object whose visit method is to be invoked    * @param visitee         object to be passed as a parameter to the visit    *                        method    * @param visitMethodName name of visit method, e.g. "visit"    * @return true if a matching visit method was found and invoked    */
+comment|/**    * Implements the {@link org.apache.calcite.util.Glossary#VISITOR_PATTERN} via    * reflection. The basic technique is taken from<a    * href="http://www.javaworld.com/javaworld/javatips/jw-javatip98.html">a    * Javaworld article</a>. For an example of how to use it, see    * {@code ReflectVisitorTest}.    *    *<p>Visit method lookup follows the same rules as if compile-time resolution    * for VisitorClass.visit(VisiteeClass) were performed. An ambiguous match due    * to multiple interface inheritance results in an IllegalArgumentException. A    * non-match is indicated by returning false.</p>    *    * @param visitor         object whose visit method is to be invoked    * @param visitee         object to be passed as a parameter to the visit    *                        method    * @param visitMethodName name of visit method, e.g. "visit"    * @return true if a matching visit method was found and invoked    */
 name|boolean
 name|invokeVisitor
 parameter_list|(

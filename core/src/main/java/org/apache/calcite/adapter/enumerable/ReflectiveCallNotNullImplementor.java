@@ -5,27 +5,29 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
-name|rules
+name|adapter
 operator|.
-name|java
+name|enumerable
 package|;
 end_package
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
+operator|.
+name|calcite
 operator|.
 name|linq4j
 operator|.
-name|expressions
+name|tree
 operator|.
 name|Expression
 import|;
@@ -33,13 +35,15 @@ end_import
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
+operator|.
+name|calcite
 operator|.
 name|linq4j
 operator|.
-name|expressions
+name|tree
 operator|.
 name|Expressions
 import|;
@@ -47,13 +51,15 @@ end_import
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
+operator|.
+name|calcite
 operator|.
 name|linq4j
 operator|.
-name|expressions
+name|tree
 operator|.
 name|NewExpression
 import|;
@@ -63,7 +69,9 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rex
 operator|.
@@ -106,7 +114,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Implementation of  * {@link net.hydromatic.optiq.rules.java.NotNullImplementor}  * that calls a given {@link java.lang.reflect.Method}.  *  *<p>When method is not static, a new instance of the required class is  * created.  */
+comment|/**  * Implementation of  * {@link org.apache.calcite.adapter.enumerable.NotNullImplementor}  * that calls a given {@link java.lang.reflect.Method}.  *  *<p>When method is not static, a new instance of the required class is  * created.  */
 end_comment
 
 begin_class

@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 package|;
@@ -15,11 +17,17 @@ end_package
 
 begin_import
 import|import
-name|java
+name|org
 operator|.
-name|util
+name|apache
 operator|.
-name|*
+name|calcite
+operator|.
+name|rel
+operator|.
+name|type
+operator|.
+name|RelDataType
 import|;
 end_import
 
@@ -27,11 +35,15 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|reltype
+name|calcite
 operator|.
-name|*
+name|rel
+operator|.
+name|type
+operator|.
+name|RelDataTypeFactory
 import|;
 end_import
 
@@ -39,9 +51,25 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|resource
+name|calcite
+operator|.
+name|runtime
+operator|.
+name|CalciteException
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|runtime
 operator|.
 name|Resources
 import|;
@@ -51,30 +79,40 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
 name|validate
 operator|.
-name|*
+name|SqlValidatorException
 import|;
 end_import
 
 begin_import
 import|import
-name|org
-operator|.
-name|eigenbase
+name|java
 operator|.
 name|util
 operator|.
-name|*
+name|AbstractList
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
 import|;
 end_import
 
 begin_comment
-comment|/**  *<code>SqlOperatorBinding</code> represents the binding of an {@link  * SqlOperator} to actual operands, along with any additional information  * required to validate those operands if needed.  */
+comment|/**  *<code>SqlOperatorBinding</code> represents the binding of an  * {@link SqlOperator} to actual operands, along with any additional information  * required to validate those operands if needed.  */
 end_comment
 
 begin_class
@@ -303,7 +341,7 @@ block|}
 comment|/**    * Wraps a validation error with context appropriate to this operator call.    *    * @param e Validation error, not null    * @return Error wrapped, if possible, with positional information    */
 specifier|public
 specifier|abstract
-name|EigenbaseException
+name|CalciteException
 name|newError
 parameter_list|(
 name|Resources

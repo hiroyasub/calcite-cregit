@@ -7,9 +7,11 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|util
+name|calcite
+operator|.
+name|runtime
 package|;
 end_package
 
@@ -22,7 +24,7 @@ comment|// resource generation can use reflection.  That means it must have no
 end_comment
 
 begin_comment
-comment|// dependencies on other Eigenbase code.
+comment|// dependencies on other Calcite code.
 end_comment
 
 begin_comment
@@ -32,9 +34,9 @@ end_comment
 begin_class
 specifier|public
 class|class
-name|EigenbaseContextException
+name|CalciteContextException
 extends|extends
-name|EigenbaseException
+name|CalciteException
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
 comment|/**    * SerialVersionUID created with JDK 1.5 serialver tool. Prevents    * incompatible class conflict when serialized from JDK 1.5-built server to    * JDK 1.4-built client.    */
@@ -69,9 +71,9 @@ name|String
 name|originalStatement
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a new EigenbaseContextException object. This constructor is for    * use by the generated factory.    *    * @param message error message    * @param cause   underlying cause, must not be null    */
+comment|/**    * Creates a new CalciteContextException object. This constructor is for    * use by the generated factory.    *    * @param message error message    * @param cause   underlying cause, must not be null    */
 specifier|public
-name|EigenbaseContextException
+name|CalciteContextException
 parameter_list|(
 name|String
 name|message
@@ -96,9 +98,9 @@ literal|0
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Creates a new EigenbaseContextException object.    *    * @param message      error message    * @param cause        underlying cause, must not be null    * @param posLine      1-based start line number    * @param posColumn    1-based start column number    * @param endPosLine   1-based end line number    * @param endPosColumn 1-based end column number    */
+comment|/**    * Creates a new CalciteContextException object.    *    * @param message      error message    * @param cause        underlying cause, must not be null    * @param posLine      1-based start line number    * @param posColumn    1-based start column number    * @param endPosLine   1-based end line number    * @param endPosColumn 1-based end column number    */
 specifier|public
-name|EigenbaseContextException
+name|CalciteContextException
 parameter_list|(
 name|String
 name|message
@@ -143,9 +145,9 @@ name|endPosColumn
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Creates a new EigenbaseContextException object. This constructor is for    * use by the generated factory.    *    * @param message   error message    * @param cause     underlying cause, must not be null    * @param inputText is the orginal SQL statement, may be null    */
+comment|/**    * Creates a new CalciteContextException object. This constructor is for    * use by the generated factory.    *    * @param message   error message    * @param cause     underlying cause, must not be null    * @param inputText is the orginal SQL statement, may be null    */
 specifier|public
-name|EigenbaseContextException
+name|CalciteContextException
 parameter_list|(
 name|String
 name|message
@@ -354,7 +356,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End EigenbaseContextException.java
+comment|// End CalciteContextException.java
 end_comment
 
 end_unit

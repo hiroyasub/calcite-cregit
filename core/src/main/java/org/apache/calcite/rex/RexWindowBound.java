@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rex
 package|;
@@ -17,7 +19,9 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
@@ -29,7 +33,9 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
@@ -41,7 +47,9 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
@@ -53,7 +61,9 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
@@ -194,7 +204,7 @@ operator|-
 literal|1
 return|;
 block|}
-comment|/**    * Transforms the bound via {@link org.eigenbase.rex.RexVisitor}.    * @param visitor visitor to accept    * @param<R> return type of the visitor    * @return transformed bound    */
+comment|/**    * Transforms the bound via {@link org.apache.calcite.rex.RexVisitor}.    * @param visitor visitor to accept    * @param<R> return type of the visitor    * @return transformed bound    */
 specifier|public
 parameter_list|<
 name|R
@@ -552,9 +562,7 @@ name|offset
 operator|!=
 literal|null
 operator|:
-literal|"RexWindowBoundBounded offset should not be"
-operator|+
-literal|" null"
+literal|"RexWindowBoundBounded offset should not be null"
 assert|;
 block|}
 specifier|private

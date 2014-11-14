@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
@@ -26,7 +28,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Factory for {@link org.eigenbase.sql.parser.SqlAbstractParserImpl} objects.  *  *<p>A parser factory allows you to include a custom parser in  * {@link net.hydromatic.optiq.tools.Planner} created through  * {@link net.hydromatic.optiq.tools.Frameworks}.</p>  */
+comment|/**  * Factory for  * {@link org.apache.calcite.sql.parser.SqlAbstractParserImpl} objects.  *  *<p>A parser factory allows you to include a custom parser in  * {@link org.apache.calcite.tools.Planner} created through  * {@link org.apache.calcite.tools.Frameworks}.</p>  */
 end_comment
 
 begin_interface
@@ -44,6 +46,10 @@ parameter_list|)
 function_decl|;
 block|}
 end_interface
+
+begin_comment
+comment|// End SqlParserImplFactory.java
+end_comment
 
 end_unit
 

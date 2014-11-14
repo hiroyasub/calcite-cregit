@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
@@ -19,11 +21,41 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptRule
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptRuleCall
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
-name|*
+name|RelNode
 import|;
 end_import
 
@@ -31,11 +63,15 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|relopt
+name|calcite
 operator|.
-name|*
+name|rel
+operator|.
+name|logical
+operator|.
+name|LogicalFilter
 import|;
 end_import
 
@@ -43,33 +79,65 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|logical
+operator|.
+name|LogicalProject
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rex
 operator|.
-name|*
+name|RexNode
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rex
+operator|.
+name|RexOver
 import|;
 end_import
 
 begin_comment
-comment|/**  * PushProjectPastFilterRule implements the rule for pushing a projection past a  * filter.  */
+comment|/**  * Planner rule that pushes a {@link org.apache.calcite.rel.core.Project}  * past a {@link org.apache.calcite.rel.core.Filter}.  */
 end_comment
 
 begin_class
 specifier|public
 class|class
-name|PushProjectPastFilterRule
+name|ProjectFilterTransposeRule
 extends|extends
 name|RelOptRule
 block|{
 specifier|public
 specifier|static
 specifier|final
-name|PushProjectPastFilterRule
+name|ProjectFilterTransposeRule
 name|INSTANCE
 init|=
 operator|new
-name|PushProjectPastFilterRule
+name|ProjectFilterTransposeRule
 argument_list|(
 name|PushProjector
 operator|.
@@ -88,9 +156,9 @@ name|ExprCondition
 name|preserveExprCondition
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a PushProjectPastFilterRule.    *    * @param preserveExprCondition Condition for expressions that should be    *                              preserved in the projection    */
+comment|/**    * Creates a ProjectFilterTransposeRule.    *    * @param preserveExprCondition Condition for expressions that should be    *                              preserved in the projection    */
 specifier|private
-name|PushProjectPastFilterRule
+name|ProjectFilterTransposeRule
 parameter_list|(
 name|PushProjector
 operator|.
@@ -102,13 +170,13 @@ name|super
 argument_list|(
 name|operand
 argument_list|(
-name|ProjectRel
+name|LogicalProject
 operator|.
 name|class
 argument_list|,
 name|operand
 argument_list|(
-name|FilterRel
+name|LogicalFilter
 operator|.
 name|class
 argument_list|,
@@ -135,11 +203,11 @@ name|RelOptRuleCall
 name|call
 parameter_list|)
 block|{
-name|ProjectRel
+name|LogicalProject
 name|origProj
 decl_stmt|;
-name|FilterRel
-name|filterRel
+name|LogicalFilter
+name|filter
 decl_stmt|;
 if|if
 condition|(
@@ -161,7 +229,7 @@ argument_list|(
 literal|0
 argument_list|)
 expr_stmt|;
-name|filterRel
+name|filter
 operator|=
 name|call
 operator|.
@@ -177,7 +245,7 @@ name|origProj
 operator|=
 literal|null
 expr_stmt|;
-name|filterRel
+name|filter
 operator|=
 name|call
 operator|.
@@ -190,15 +258,15 @@ block|}
 name|RelNode
 name|rel
 init|=
-name|filterRel
+name|filter
 operator|.
-name|getChild
+name|getInput
 argument_list|()
 decl_stmt|;
 name|RexNode
 name|origFilter
 init|=
-name|filterRel
+name|filter
 operator|.
 name|getCondition
 argument_list|()
@@ -276,7 +344,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End PushProjectPastFilterRule.java
+comment|// End ProjectFilterTransposeRule.java
 end_comment
 
 end_unit

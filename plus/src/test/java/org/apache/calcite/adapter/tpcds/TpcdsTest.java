@@ -5,13 +5,13 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
-name|impl
+name|adapter
 operator|.
 name|tpcds
 package|;
@@ -19,11 +19,11 @@ end_package
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
 name|prepare
 operator|.
@@ -33,11 +33,11 @@ end_import
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
 name|runtime
 operator|.
@@ -47,25 +47,25 @@ end_import
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
 name|test
 operator|.
-name|OptiqAssert
+name|CalciteAssert
 import|;
 end_import
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
 name|tools
 operator|.
@@ -75,11 +75,11 @@ end_import
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
 name|tools
 operator|.
@@ -91,7 +91,9 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|util
 operator|.
@@ -103,7 +105,9 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|util
 operator|.
@@ -115,7 +119,9 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|util
 operator|.
@@ -134,6 +140,20 @@ operator|.
 name|base
 operator|.
 name|Function
+import|;
+end_import
+
+begin_import
+import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|tpcds
+operator|.
+name|query
+operator|.
+name|Query
 import|;
 end_import
 
@@ -177,22 +197,8 @@ name|Random
 import|;
 end_import
 
-begin_import
-import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|tpcds
-operator|.
-name|query
-operator|.
-name|Query
-import|;
-end_import
-
 begin_comment
-comment|/** Unit test for {@link net.hydromatic.optiq.impl.tpcds.TpcdsSchema}.  *  *<p>Only runs if {@code -Dcalcite.test.slow=true} is specified on the  * command-line.  * (See {@link net.hydromatic.optiq.test.OptiqAssert#ENABLE_SLOW}.)</p> */
+comment|/** Unit test for {@link org.apache.calcite.adapter.tpcds.TpcdsSchema}.  *  *<p>Only runs if {@code -Dcalcite.test.slow=true} is specified on the  * command-line.  * (See {@link org.apache.calcite.test.CalciteAssert#ENABLE_SLOW}.)</p> */
 end_comment
 
 begin_class
@@ -335,7 +341,7 @@ name|name
 operator|+
 literal|"',\n"
 operator|+
-literal|"       factory: 'net.hydromatic.optiq.impl.tpcds.TpcdsSchemaFactory',\n"
+literal|"       factory: 'org.apache.calcite.adapter.tpcds.TpcdsSchemaFactory',\n"
 operator|+
 literal|"       operand: {\n"
 operator|+
@@ -398,14 +404,14 @@ operator|+
 literal|"}"
 decl_stmt|;
 specifier|private
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|AssertThat
 name|with
 parameter_list|()
 block|{
 return|return
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|that
 argument_list|()
@@ -417,7 +423,7 @@ argument_list|)
 operator|.
 name|enable
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|ENABLE_SLOW
 argument_list|)
@@ -542,7 +548,7 @@ name|explainMatches
 argument_list|(
 literal|"including all attributes "
 argument_list|,
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|checkMaskedResultContains
 argument_list|(
@@ -707,7 +713,7 @@ argument_list|()
 expr_stmt|;
 block|}
 specifier|private
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|AssertQuery
 name|checkQuery

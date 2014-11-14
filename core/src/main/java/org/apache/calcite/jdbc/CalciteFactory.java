@@ -5,11 +5,11 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
 name|jdbc
 package|;
@@ -17,29 +17,59 @@ end_package
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|avatica
+name|calcite
 operator|.
-name|*
+name|adapter
+operator|.
+name|java
+operator|.
+name|JavaTypeFactory
 import|;
 end_import
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
-name|impl
+name|avatica
 operator|.
-name|java
+name|AvaticaConnection
+import|;
+end_import
+
+begin_import
+import|import
+name|org
 operator|.
-name|JavaTypeFactory
+name|apache
+operator|.
+name|calcite
+operator|.
+name|avatica
+operator|.
+name|AvaticaFactory
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|avatica
+operator|.
+name|UnregisteredDriver
 import|;
 end_import
 
@@ -54,14 +84,14 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Extension of {@link net.hydromatic.avatica.AvaticaFactory}  * for Calcite.  */
+comment|/**  * Extension of {@link org.apache.calcite.avatica.AvaticaFactory}  * for Calcite.  */
 end_comment
 
 begin_class
 specifier|public
 specifier|abstract
 class|class
-name|OptiqFactory
+name|CalciteFactory
 implements|implements
 name|AvaticaFactory
 block|{
@@ -77,7 +107,7 @@ name|minor
 decl_stmt|;
 comment|/** Creates a JDBC factory with given major/minor version number. */
 specifier|protected
-name|OptiqFactory
+name|CalciteFactory
 parameter_list|(
 name|int
 name|major
@@ -170,7 +200,7 @@ parameter_list|,
 name|Properties
 name|info
 parameter_list|,
-name|OptiqRootSchema
+name|CalciteRootSchema
 name|rootSchema
 parameter_list|,
 name|JavaTypeFactory
@@ -181,7 +211,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End OptiqFactory.java
+comment|// End CalciteFactory.java
 end_comment
 
 end_unit

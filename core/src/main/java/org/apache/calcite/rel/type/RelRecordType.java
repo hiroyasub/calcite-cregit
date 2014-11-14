@@ -7,11 +7,45 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|reltype
+name|calcite
+operator|.
+name|rel
+operator|.
+name|type
 package|;
 end_package
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|linq4j
+operator|.
+name|Ord
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|type
+operator|.
+name|SqlTypeName
+import|;
+end_import
 
 begin_import
 import|import
@@ -19,7 +53,7 @@ name|java
 operator|.
 name|io
 operator|.
-name|*
+name|Serializable
 import|;
 end_import
 
@@ -30,32 +64,6 @@ operator|.
 name|util
 operator|.
 name|List
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
-name|sql
-operator|.
-name|type
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|linq4j
-operator|.
-name|Ord
 import|;
 end_import
 
@@ -261,7 +269,7 @@ argument_list|)
 return|;
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------
-comment|/**    * Skinny object which has the same information content as a {@link    * RelRecordType} but skips redundant stuff like digest and the immutable    * list.    */
+comment|/**    * Skinny object which has the same information content as a    * {@link RelRecordType} but skips redundant stuff like digest and the    * immutable list.    */
 specifier|private
 specifier|static
 class|class
@@ -293,7 +301,7 @@ operator|=
 name|fields
 expr_stmt|;
 block|}
-comment|/**      * Per {@link Serializable} API. See {@link      * RelRecordType#writeReplace()}.      */
+comment|/**      * Per {@link Serializable} API. See      * {@link RelRecordType#writeReplace()}.      */
 specifier|private
 name|Object
 name|readResolve

@@ -4,18 +4,20 @@ comment|/*  * Licensed to the Apache Software Foundation (ASF) under one or more
 end_comment
 
 begin_comment
-comment|/**  * Object model for Java expressions.  *  *<p>This object model is used when the linq4j system is analyzing  * queries that have been submitted using methods on the  * {@link net.hydromatic.linq4j.Queryable} interface. The system attempts  * to understand the intent of the query and reorganize it for  * efficiency; for example, it may attempt to push down filters to the  * source SQL system.</p>  */
+comment|/**  * Object model for Java expressions.  *  *<p>This object model is used when the linq4j system is analyzing  * queries that have been submitted using methods on the  * {@link org.apache.calcite.linq4j.Queryable} interface. The system attempts  * to understand the intent of the query and reorganize it for  * efficiency; for example, it may attempt to push down filters to the  * source SQL system.</p>  */
 end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
+operator|.
+name|calcite
 operator|.
 name|linq4j
 operator|.
-name|expressions
+name|tree
 package|;
 end_package
 

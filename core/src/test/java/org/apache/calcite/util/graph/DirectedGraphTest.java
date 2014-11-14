@@ -5,11 +5,11 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
 name|util
 operator|.
@@ -85,7 +85,47 @@ name|java
 operator|.
 name|util
 operator|.
-name|*
+name|ArrayList
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Arrays
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|LinkedHashSet
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Set
 import|;
 end_import
 
@@ -109,7 +149,79 @@ name|junit
 operator|.
 name|Assert
 operator|.
-name|*
+name|assertEquals
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|assertFalse
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|assertNotNull
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|assertNull
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|assertThat
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|assertTrue
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|fail
 import|;
 end_import
 
@@ -1104,7 +1216,7 @@ return|return
 name|graph
 return|;
 block|}
-comment|/** Unit test for    * {@link net.hydromatic.optiq.util.graph.Graphs.FrozenGraph}. */
+comment|/** Unit test for    * {@link org.apache.calcite.util.graph.Graphs.FrozenGraph}. */
 annotation|@
 name|Test
 specifier|public
@@ -1363,7 +1475,7 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Unit test for {@link net.hydromatic.optiq.util.graph.CycleDetector}. */
+comment|/** Unit test for {@link org.apache.calcite.util.graph.CycleDetector}. */
 annotation|@
 name|Test
 specifier|public
@@ -1733,7 +1845,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Unit test for    * {@link net.hydromatic.optiq.util.graph.BreadthFirstIterator}. */
+comment|/** Unit test for    * {@link org.apache.calcite.util.graph.BreadthFirstIterator}. */
 annotation|@
 name|Test
 specifier|public

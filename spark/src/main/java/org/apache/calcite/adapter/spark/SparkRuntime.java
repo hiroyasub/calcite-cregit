@@ -5,13 +5,13 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
-name|impl
+name|adapter
 operator|.
 name|spark
 package|;
@@ -19,9 +19,23 @@ end_package
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
+operator|.
+name|calcite
+operator|.
+name|DataContext
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|linq4j
 operator|.
@@ -31,25 +45,15 @@ end_import
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
+operator|.
+name|calcite
 operator|.
 name|linq4j
 operator|.
 name|Linq4j
-import|;
-end_import
-
-begin_import
-import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|optiq
-operator|.
-name|DataContext
 import|;
 end_import
 
@@ -109,7 +113,17 @@ name|java
 operator|.
 name|util
 operator|.
-name|*
+name|Arrays
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
 import|;
 end_import
 
@@ -268,12 +282,12 @@ name|sparkContext
 argument_list|()
 return|;
 block|}
-comment|/** Combines linq4j {@link net.hydromatic.linq4j.function.Function}    * and Spark {@link org.apache.spark.api.java.function.FlatMapFunction}. */
+comment|/** Combines linq4j {@link org.apache.calcite.linq4j.function.Function}    * and Spark {@link org.apache.spark.api.java.function.FlatMapFunction}. */
 specifier|public
 specifier|abstract
 specifier|static
 class|class
-name|OptiqFlatMapFunction
+name|CalciteFlatMapFunction
 parameter_list|<
 name|T
 parameter_list|,
@@ -287,9 +301,11 @@ argument_list|,
 name|R
 argument_list|>
 implements|implements
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
+operator|.
+name|calcite
 operator|.
 name|linq4j
 operator|.

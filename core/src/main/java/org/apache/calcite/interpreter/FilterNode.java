@@ -5,13 +5,11 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
-operator|.
-name|impl
+name|calcite
 operator|.
 name|interpreter
 package|;
@@ -21,16 +19,20 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
-name|FilterRelBase
+name|core
+operator|.
+name|Filter
 import|;
 end_import
 
 begin_comment
-comment|/**  * Interpreter node that implements a {@link org.eigenbase.rel.FilterRelBase}.  */
+comment|/**  * Interpreter node that implements a  * {@link org.apache.calcite.rel.core.Filter}.  */
 end_comment
 
 begin_class
@@ -66,7 +68,7 @@ parameter_list|(
 name|Interpreter
 name|interpreter
 parameter_list|,
-name|FilterRelBase
+name|Filter
 name|rel
 parameter_list|)
 block|{

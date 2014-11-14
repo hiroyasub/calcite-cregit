@@ -7,21 +7,27 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
-name|rules
+name|core
 package|;
 end_package
 
 begin_import
 import|import
-name|java
+name|org
 operator|.
-name|util
+name|apache
 operator|.
-name|*
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptCluster
 import|;
 end_import
 
@@ -29,11 +35,55 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptCost
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptPlanner
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelTraitSet
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
-name|*
+name|RelNode
 import|;
 end_import
 
@@ -41,13 +91,15 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
 name|metadata
 operator|.
-name|*
+name|RelMetadataQuery
 import|;
 end_import
 
@@ -55,11 +107,15 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|relopt
+name|calcite
 operator|.
-name|*
+name|rel
+operator|.
+name|rules
+operator|.
+name|EquiJoin
 import|;
 end_import
 
@@ -67,11 +123,15 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|reltype
+name|calcite
 operator|.
-name|*
+name|rel
+operator|.
+name|type
+operator|.
+name|RelDataType
 import|;
 end_import
 
@@ -79,11 +139,29 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|type
+operator|.
+name|RelDataTypeField
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rex
 operator|.
-name|*
+name|RexNode
 import|;
 end_import
 
@@ -91,11 +169,41 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rex
+operator|.
+name|RexUtil
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|util
 operator|.
 name|ImmutableIntList
+import|;
+end_import
+
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|ImmutableList
 import|;
 end_import
 
@@ -114,20 +222,20 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A SemiJoinRel represents two relational expressions joined according to some  * condition, where the output only contains the columns from the left join  * input.  */
+comment|/**  * Relational expression that joins two relational expressions according to some  * condition, but outputs only columns from the left input, and eliminates  * duplicates.  *  *<p>The effect is something like the SQL {@code IN} operator.  */
 end_comment
 
 begin_class
 specifier|public
 class|class
-name|SemiJoinRel
+name|SemiJoin
 extends|extends
-name|EquiJoinRel
+name|EquiJoin
 block|{
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a SemiJoinRel.    *    * @param cluster   cluster that join belongs to    * @param traitSet  Traits    * @param left      left join input    * @param right     right join input    * @param condition join condition    * @param leftKeys  left keys of the semijoin    * @param rightKeys right keys of the semijoin    */
+comment|/**    * Creates a SemiJoin.    *    * @param cluster   cluster that join belongs to    * @param traitSet  Trait set    * @param left      left join input    * @param right     right join input    * @param condition join condition    * @param leftKeys  left keys of the semijoin    * @param rightKeys right keys of the semijoin    */
 specifier|public
-name|SemiJoinRel
+name|SemiJoin
 parameter_list|(
 name|RelOptCluster
 name|cluster
@@ -185,7 +293,7 @@ comment|//~ Methods ------------------------------------------------------------
 annotation|@
 name|Override
 specifier|public
-name|SemiJoinRel
+name|SemiJoin
 name|copy
 parameter_list|(
 name|RelTraitSet
@@ -237,7 +345,7 @@ argument_list|()
 assert|;
 return|return
 operator|new
-name|SemiJoinRel
+name|SemiJoin
 argument_list|(
 name|getCluster
 argument_list|()
@@ -260,7 +368,8 @@ name|rightKeys
 argument_list|)
 return|;
 block|}
-comment|// implement RelNode
+annotation|@
+name|Override
 specifier|public
 name|RelOptCost
 name|computeSelfCost
@@ -280,7 +389,8 @@ name|makeTinyCost
 argument_list|()
 return|;
 block|}
-comment|// implement RelNode
+annotation|@
+name|Override
 specifier|public
 name|double
 name|getRows
@@ -303,7 +413,9 @@ name|condition
 argument_list|)
 return|;
 block|}
-comment|/**    * @return returns rowtype representing only the left join input    */
+comment|/**    * {@inheritDoc}    *    *<p>In the case of semi-join, the row type consists of columns from left    * input only.    */
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|deriveRowType
@@ -331,12 +443,12 @@ argument_list|()
 argument_list|,
 literal|null
 argument_list|,
-name|Collections
+name|ImmutableList
 operator|.
 expr|<
 name|RelDataTypeField
 operator|>
-name|emptyList
+name|of
 argument_list|()
 argument_list|)
 return|;
@@ -345,7 +457,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End SemiJoinRel.java
+comment|// End SemiJoin.java
 end_comment
 
 end_unit

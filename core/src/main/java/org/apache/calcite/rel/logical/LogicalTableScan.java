@@ -7,11 +7,115 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
+operator|.
+name|logical
 package|;
 end_package
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|Convention
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptCluster
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptTable
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelTraitSet
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|RelInput
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|RelNode
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|core
+operator|.
+name|TableScan
+import|;
+end_import
 
 begin_import
 import|import
@@ -23,34 +127,22 @@ name|List
 import|;
 end_import
 
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
-name|relopt
-operator|.
-name|*
-import|;
-end_import
-
 begin_comment
-comment|/**  * A<code>TableAccessRel</code> reads all the rows from a {@link RelOptTable}.  *  *<p>If the table is a<code>net.sf.saffron.ext.JdbcTable</code>, then this is  * literally possible. But for other kinds of tables, there may be many ways to  * read the data from the table. For some kinds of table, it may not even be  * possible to read all of the rows unless some narrowing constraint is applied.  *  *<p>In the example of the<code>net.sf.saffron.ext.ReflectSchema</code>  * schema,</p>  *  *<blockquote>  *<pre>select from fields</pre>  *</blockquote>  *  *<p>cannot be implemented, but</p>  *  *<blockquote>  *<pre>select from fields as f  * where f.getClass().getName().equals("java.lang.String")</pre>  *</blockquote>  *  *<p>can. It is the optimizer's responsibility to find these ways, by applying  * transformation rules.</p>  */
+comment|/**  * A<code>LogicalTableScan</code> reads all the rows from a  * {@link RelOptTable}.  *  *<p>If the table is a<code>net.sf.saffron.ext.JdbcTable</code>, then this is  * literally possible. But for other kinds of tables, there may be many ways to  * read the data from the table. For some kinds of table, it may not even be  * possible to read all of the rows unless some narrowing constraint is applied.  *  *<p>In the example of the<code>net.sf.saffron.ext.ReflectSchema</code>  * schema,</p>  *  *<blockquote>  *<pre>select from fields</pre>  *</blockquote>  *  *<p>cannot be implemented, but</p>  *  *<blockquote>  *<pre>select from fields as f  * where f.getClass().getName().equals("java.lang.String")</pre>  *</blockquote>  *  *<p>can. It is the optimizer's responsibility to find these ways, by applying  * transformation rules.</p>  */
 end_comment
 
 begin_class
 specifier|public
 specifier|final
 class|class
-name|TableAccessRel
+name|LogicalTableScan
 extends|extends
-name|TableAccessRelBase
+name|TableScan
 block|{
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a TableAccessRel.    *    * @param cluster Cluster    * @param table   Table    */
+comment|/**    * Creates a LogicalTableScan.    *    * @param cluster Cluster    * @param table   Table    */
 specifier|public
-name|TableAccessRel
+name|LogicalTableScan
 parameter_list|(
 name|RelOptCluster
 name|cluster
@@ -76,9 +168,9 @@ name|table
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Creates a TableAccessRel by parsing serialized output.    */
+comment|/**    * Creates a LogicalTableScan by parsing serialized output.    */
 specifier|public
-name|TableAccessRel
+name|LogicalTableScan
 parameter_list|(
 name|RelInput
 name|input
@@ -130,7 +222,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End TableAccessRel.java
+comment|// End LogicalTableScan.java
 end_comment
 
 end_unit

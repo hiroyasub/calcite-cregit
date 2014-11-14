@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
@@ -19,46 +21,78 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|relopt
+name|calcite
 operator|.
-name|*
+name|plan
+operator|.
+name|RelOptRule
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptRuleCall
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|core
+operator|.
+name|SemiJoin
 import|;
 end_import
 
 begin_comment
-comment|/**  * RemoveSemiJoinRule implements the rule that removes semijoins from a join  * tree if it turns out it's not possible to convert a SemiJoinRel to an indexed  * scan on a join factor. Namely, if the join factor does not reduce to a single  * table that can be scanned using an index. This rule should only be applied  * after attempts have been made to convert SemiJoinRels.  */
+comment|/**  * Planner rule that removes a {@link org.apache.calcite.rel.core.SemiJoin}s  * from a join tree.  *  *<p>It is invoked after attempts have been made to convert a SemiJoin to an  * indexed scan on a join factor have failed. Namely, if the join factor does  * not reduce to a single table that can be scanned using an index.  *  *<p>It should only be enabled if all SemiJoins in the plan are advisory; that  * is, they can be safely dropped without affecting the semantics of the query.  */
 end_comment
 
 begin_class
 specifier|public
 class|class
-name|RemoveSemiJoinRule
+name|SemiJoinRemoveRule
 extends|extends
 name|RelOptRule
 block|{
 specifier|public
 specifier|static
 specifier|final
-name|RemoveSemiJoinRule
+name|SemiJoinRemoveRule
 name|INSTANCE
 init|=
 operator|new
-name|RemoveSemiJoinRule
+name|SemiJoinRemoveRule
 argument_list|()
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a RemoveSemiJoinRule.    */
+comment|/** Creates a SemiJoinRemoveRule. */
 specifier|private
-name|RemoveSemiJoinRule
+name|SemiJoinRemoveRule
 parameter_list|()
 block|{
 name|super
 argument_list|(
 name|operand
 argument_list|(
-name|SemiJoinRel
+name|SemiJoin
 operator|.
 name|class
 argument_list|,
@@ -69,7 +103,6 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|// implement RelOptRule
 specifier|public
 name|void
 name|onMatch
@@ -100,7 +133,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End RemoveSemiJoinRule.java
+comment|// End SemiJoinRemoveRule.java
 end_comment
 
 end_unit

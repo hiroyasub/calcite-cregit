@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 package|;
@@ -15,43 +17,15 @@ end_package
 
 begin_import
 import|import
-name|java
-operator|.
-name|math
-operator|.
-name|BigDecimal
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|regex
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|reltype
+name|calcite
+operator|.
+name|rel
+operator|.
+name|type
 operator|.
 name|RelDataType
 import|;
@@ -61,9 +35,13 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|reltype
+name|calcite
+operator|.
+name|rel
+operator|.
+name|type
 operator|.
 name|RelDataTypeSystem
 import|;
@@ -73,13 +51,43 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
+operator|.
+name|runtime
+operator|.
+name|CalciteContextException
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|runtime
+operator|.
+name|SqlFunctions
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
 name|parser
 operator|.
-name|*
+name|SqlParserPos
 import|;
 end_import
 
@@ -87,13 +95,15 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
 name|type
 operator|.
-name|*
+name|SqlTypeName
 import|;
 end_import
 
@@ -101,13 +111,15 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
 name|util
 operator|.
-name|*
+name|SqlVisitor
 import|;
 end_import
 
@@ -115,13 +127,15 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
 name|validate
 operator|.
-name|*
+name|SqlValidator
 import|;
 end_import
 
@@ -129,21 +143,27 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|validate
+operator|.
+name|SqlValidatorScope
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|util
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|eigenbase
-operator|.
-name|util14
 operator|.
 name|DateTimeUtil
 import|;
@@ -151,15 +171,29 @@ end_import
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
-name|runtime
+name|util
 operator|.
-name|SqlFunctions
+name|Pair
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|Util
 import|;
 end_import
 
@@ -192,10 +226,56 @@ import|;
 end_import
 
 begin_import
+import|import
+name|java
+operator|.
+name|math
+operator|.
+name|BigDecimal
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Map
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|regex
+operator|.
+name|Matcher
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|regex
+operator|.
+name|Pattern
+import|;
+end_import
+
+begin_import
 import|import static
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|util
 operator|.
@@ -512,6 +592,7 @@ operator|)
 return|;
 block|}
 block|}
+comment|/** Range of time units. */
 specifier|private
 enum|enum
 name|TimeUnitRange
@@ -2334,7 +2415,7 @@ return|return
 name|ret
 return|;
 block|}
-comment|/**    * Validates an INTERVAL literal against a YEAR interval qualifier.    *    * @throws EigenbaseContextException if the interval value is illegal.    */
+comment|/**    * Validates an INTERVAL literal against a YEAR interval qualifier.    *    * @throws org.apache.calcite.runtime.CalciteContextException    * if the interval value is illegal    */
 specifier|private
 name|int
 index|[]
@@ -2456,7 +2537,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**    * Validates an INTERVAL literal against a YEAR TO MONTH interval qualifier.    *    * @throws EigenbaseContextException if the interval value is illegal.    */
+comment|/**    * Validates an INTERVAL literal against a YEAR TO MONTH interval qualifier.    *    * @throws org.apache.calcite.runtime.CalciteContextException    * if the interval value is illegal    */
 specifier|private
 name|int
 index|[]
@@ -2614,7 +2695,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**    * Validates an INTERVAL literal against a MONTH interval qualifier.    *    * @throws EigenbaseContextException if the interval value is illegal.    */
+comment|/**    * Validates an INTERVAL literal against a MONTH interval qualifier.    *    * @throws org.apache.calcite.runtime.CalciteContextException    * if the interval value is illegal    */
 specifier|private
 name|int
 index|[]
@@ -2736,7 +2817,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**    * Validates an INTERVAL literal against a DAY interval qualifier.    *    * @throws EigenbaseContextException if the interval value is illegal.    */
+comment|/**    * Validates an INTERVAL literal against a DAY interval qualifier.    *    * @throws org.apache.calcite.runtime.CalciteContextException    * if the interval value is illegal    */
 specifier|private
 name|int
 index|[]
@@ -2864,7 +2945,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**    * Validates an INTERVAL literal against a DAY TO HOUR interval qualifier.    *    * @throws EigenbaseContextException if the interval value is illegal.    */
+comment|/**    * Validates an INTERVAL literal against a DAY TO HOUR interval qualifier.    *    * @throws org.apache.calcite.runtime.CalciteContextException    * if the interval value is illegal    */
 specifier|private
 name|int
 index|[]
@@ -3028,7 +3109,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**    * Validates an INTERVAL literal against a DAY TO MINUTE interval qualifier.    *    * @throws EigenbaseContextException if the interval value is illegal.    */
+comment|/**    * Validates an INTERVAL literal against a DAY TO MINUTE interval qualifier.    *    * @throws org.apache.calcite.runtime.CalciteContextException    * if the interval value is illegal    */
 specifier|private
 name|int
 index|[]
@@ -3216,7 +3297,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**    * Validates an INTERVAL literal against a DAY TO SECOND interval qualifier.    *    * @throws EigenbaseContextException if the interval value is illegal.    */
+comment|/**    * Validates an INTERVAL literal against a DAY TO SECOND interval qualifier.    *    * @throws org.apache.calcite.runtime.CalciteContextException    * if the interval value is illegal    */
 specifier|private
 name|int
 index|[]
@@ -3521,7 +3602,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**    * Validates an INTERVAL literal against an HOUR interval qualifier.    *    * @throws EigenbaseContextException if the interval value is illegal.    */
+comment|/**    * Validates an INTERVAL literal against an HOUR interval qualifier.    *    * @throws org.apache.calcite.runtime.CalciteContextException    * if the interval value is illegal    */
 specifier|private
 name|int
 index|[]
@@ -3649,7 +3730,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**    * Validates an INTERVAL literal against an HOUR TO MINUTE interval    * qualifier.    *    * @throws EigenbaseContextException if the interval value is illegal.    */
+comment|/**    * Validates an INTERVAL literal against an HOUR TO MINUTE interval    * qualifier.    *    * @throws org.apache.calcite.runtime.CalciteContextException    * if the interval value is illegal    */
 specifier|private
 name|int
 index|[]
@@ -3813,7 +3894,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**    * Validates an INTERVAL literal against an HOUR TO SECOND interval    * qualifier.    *    * @throws EigenbaseContextException if the interval value is illegal.    */
+comment|/**    * Validates an INTERVAL literal against an HOUR TO SECOND interval    * qualifier.    *    * @throws org.apache.calcite.runtime.CalciteContextException    * if the interval value is illegal    */
 specifier|private
 name|int
 index|[]
@@ -4094,7 +4175,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**    * Validates an INTERVAL literal against an MINUTE interval qualifier.    *    * @throws EigenbaseContextException if the interval value is illegal.    */
+comment|/**    * Validates an INTERVAL literal against an MINUTE interval qualifier.    *    * @throws org.apache.calcite.runtime.CalciteContextException    * if the interval value is illegal    */
 specifier|private
 name|int
 index|[]
@@ -4222,7 +4303,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**    * Validates an INTERVAL literal against an MINUTE TO SECOND interval    * qualifier.    *    * @throws EigenbaseContextException if the interval value is illegal.    */
+comment|/**    * Validates an INTERVAL literal against an MINUTE TO SECOND interval    * qualifier.    *    * @throws org.apache.calcite.runtime.CalciteContextException    * if the interval value is illegal    */
 specifier|private
 name|int
 index|[]
@@ -4479,7 +4560,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**    * Validates an INTERVAL literal against an SECOND interval qualifier.    *    * @throws EigenbaseContextException if the interval value is illegal.    */
+comment|/**    * Validates an INTERVAL literal against an SECOND interval qualifier.    *    * @throws org.apache.calcite.runtime.CalciteContextException    * if the interval value is illegal    */
 specifier|private
 name|int
 index|[]
@@ -4712,7 +4793,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**    * Validates an INTERVAL literal according to the rules specified by the    * interval qualifier. The assumption is made that the interval qualifier has    * been validated prior to calling this method. Evaluating against an    * invalid qualifier could lead to strange results.    *    * @return field values, never null    * @throws EigenbaseContextException if the interval value is illegal    */
+comment|/**    * Validates an INTERVAL literal according to the rules specified by the    * interval qualifier. The assumption is made that the interval qualifier has    * been validated prior to calling this method. Evaluating against an    * invalid qualifier could lead to strange results.    *    * @return field values, never null    *    * @throws org.apache.calcite.runtime.CalciteContextException    * if the interval value is illegal    */
 specifier|public
 name|int
 index|[]
@@ -5048,7 +5129,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
-name|EigenbaseContextException
+name|CalciteContextException
 name|invalidValueException
 parameter_list|(
 name|SqlParserPos
@@ -5084,7 +5165,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
-name|EigenbaseContextException
+name|CalciteContextException
 name|fieldExceedsPrecisionException
 parameter_list|(
 name|SqlParserPos

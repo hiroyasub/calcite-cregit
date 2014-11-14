@@ -5,13 +5,13 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
-name|impl
+name|adapter
 operator|.
 name|spark
 package|;
@@ -19,9 +19,23 @@ end_package
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
+operator|.
+name|calcite
+operator|.
+name|DataContext
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|linq4j
 operator|.
@@ -31,27 +45,17 @@ end_import
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
+operator|.
+name|calcite
 operator|.
 name|linq4j
 operator|.
-name|expressions
+name|tree
 operator|.
 name|Types
-import|;
-end_import
-
-begin_import
-import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|optiq
-operator|.
-name|DataContext
 import|;
 end_import
 
@@ -128,7 +132,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Built-in methods in the Spark adapter.  *  * @see net.hydromatic.optiq.BuiltinMethod  */
+comment|/**  * Built-in methods in the Spark adapter.  *  * @see org.apache.calcite.util.BuiltInMethod  */
 end_comment
 
 begin_enum

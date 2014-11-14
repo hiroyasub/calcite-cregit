@@ -7,7 +7,9 @@ begin_package
 package|package
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 package|;
@@ -15,25 +17,17 @@ end_package
 
 begin_import
 import|import
-name|java
-operator|.
-name|util
-operator|.
-name|*
-import|;
-end_import
-
-begin_import
-import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
 name|parser
 operator|.
-name|*
+name|SqlParserPos
 import|;
 end_import
 
@@ -41,13 +35,15 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
 name|pretty
 operator|.
-name|*
+name|SqlPrettyWriter
 import|;
 end_import
 
@@ -55,13 +51,15 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
 name|util
 operator|.
-name|*
+name|SqlString
 import|;
 end_import
 
@@ -69,13 +67,31 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|util
+operator|.
+name|SqlVisitor
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
 name|validate
 operator|.
-name|*
+name|SqlMoniker
 import|;
 end_import
 
@@ -83,16 +99,86 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|validate
+operator|.
+name|SqlMonotonicity
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|validate
+operator|.
+name|SqlValidator
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|validate
+operator|.
+name|SqlValidatorScope
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|util
 operator|.
-name|*
+name|Util
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Set
 import|;
 end_import
 
 begin_comment
-comment|/**  * A<code>SqlNode</code> is a SQL parse tree. It may be an {@link SqlOperator  * operator}, {@link SqlLiteral literal}, {@link SqlIdentifier identifier}, and  * so forth.  */
+comment|/**  * A<code>SqlNode</code> is a SQL parse tree.  *  *<p>It may be an  * {@link SqlOperator operator}, {@link SqlLiteral literal},  * {@link SqlIdentifier identifier}, and so forth.  */
 end_comment
 
 begin_class
@@ -207,7 +293,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**    * Returns the type of node this is, or {@link    * org.eigenbase.sql.SqlKind#OTHER} if it's nothing special.    *    * @return a {@link SqlKind} value, never null    * @see #isA    */
+comment|/**    * Returns the type of node this is, or    * {@link org.apache.calcite.sql.SqlKind#OTHER} if it's nothing special.    *    * @return a {@link SqlKind} value, never null    * @see #isA    */
 specifier|public
 name|SqlKind
 name|getKind
@@ -524,7 +610,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Accepts a generic visitor.    *    *<p>Implementations of this method in subtypes simply call the appropriate    *<code>visit</code> method on the {@link org.eigenbase.sql.util.SqlVisitor    * visitor object}.    *    *<p>The type parameter<code>R</code> must be consistent with the type    * parameter of the visitor.    */
+comment|/**    * Accepts a generic visitor.    *    *<p>Implementations of this method in subtypes simply call the appropriate    *<code>visit</code> method on the    * {@link org.apache.calcite.sql.util.SqlVisitor visitor object}.    *    *<p>The type parameter<code>R</code> must be consistent with the type    * parameter of the visitor.    */
 specifier|public
 specifier|abstract
 parameter_list|<
@@ -553,7 +639,7 @@ name|boolean
 name|fail
 parameter_list|)
 function_decl|;
-comment|/**    * Returns whether two nodes are equal (using {@link    * #equalsDeep(SqlNode, boolean)}) or are both null.    *    * @param node1 First expression    * @param node2 Second expression    * @param fail  Whether to throw {@link AssertionError} if expressions are    *              not equal    */
+comment|/**    * Returns whether two nodes are equal (using    * {@link #equalsDeep(SqlNode, boolean)}) or are both null.    *    * @param node1 First expression    * @param node2 Second expression    * @param fail  Whether to throw {@link AssertionError} if expressions are    *              not equal    */
 specifier|public
 specifier|static
 name|boolean
@@ -607,7 +693,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**    * Returns whether expression is always ascending, descending or constant.    * This property is useful because it allows to safely aggregte infinite    * streams of values.    *    *<p>The default implementation returns {@link    * SqlMonotonicity#NOT_MONOTONIC}.    */
+comment|/**    * Returns whether expression is always ascending, descending or constant.    * This property is useful because it allows to safely aggregte infinite    * streams of values.    *    *<p>The default implementation returns    * {@link SqlMonotonicity#NOT_MONOTONIC}.    */
 specifier|public
 name|SqlMonotonicity
 name|getMonotonicity

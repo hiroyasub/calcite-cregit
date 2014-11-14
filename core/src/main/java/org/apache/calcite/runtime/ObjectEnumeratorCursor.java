@@ -5,11 +5,11 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
 name|runtime
 package|;
@@ -17,9 +17,11 @@ end_package
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
+operator|.
+name|calcite
 operator|.
 name|linq4j
 operator|.
@@ -28,7 +30,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Implementation of {@link net.hydromatic.avatica.Cursor} on top of an  * {@link net.hydromatic.linq4j.Enumerator} that  * returns an {@link Object} for each row.  */
+comment|/**  * Implementation of {@link org.apache.calcite.avatica.Cursor} on top of an  * {@link org.apache.calcite.linq4j.Enumerator} that  * returns an {@link Object} for each row.  */
 end_comment
 
 begin_class

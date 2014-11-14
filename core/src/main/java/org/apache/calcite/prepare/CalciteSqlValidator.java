@@ -5,11 +5,11 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
 name|prepare
 package|;
@@ -17,13 +17,13 @@ end_package
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
-name|impl
+name|adapter
 operator|.
 name|java
 operator|.
@@ -35,9 +35,13 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|reltype
+name|calcite
+operator|.
+name|rel
+operator|.
+name|type
 operator|.
 name|RelDataType
 import|;
@@ -47,7 +51,9 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
@@ -59,7 +65,9 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
@@ -71,7 +79,9 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
@@ -85,7 +95,9 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
@@ -101,17 +113,17 @@ end_comment
 
 begin_class
 class|class
-name|OptiqSqlValidator
+name|CalciteSqlValidator
 extends|extends
 name|SqlValidatorImpl
 block|{
 specifier|public
-name|OptiqSqlValidator
+name|CalciteSqlValidator
 parameter_list|(
 name|SqlOperatorTable
 name|opTab
 parameter_list|,
-name|OptiqCatalogReader
+name|CalciteCatalogReader
 name|catalogReader
 parameter_list|,
 name|JavaTypeFactory
@@ -190,7 +202,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End OptiqSqlValidator.java
+comment|// End CalciteSqlValidator.java
 end_comment
 
 end_unit

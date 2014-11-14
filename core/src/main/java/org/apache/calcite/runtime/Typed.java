@@ -5,11 +5,11 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
 name|runtime
 package|;
@@ -28,7 +28,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Adds type information to a {@link net.hydromatic.linq4j.Enumerable}.  */
+comment|/**  * Adds type information to a {@link org.apache.calcite.linq4j.Enumerable}.  */
 end_comment
 
 begin_interface

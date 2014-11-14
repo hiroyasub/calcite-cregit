@@ -5,11 +5,11 @@ end_comment
 
 begin_package
 package|package
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
 name|tools
 package|;
@@ -17,39 +17,77 @@ end_package
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
-name|SchemaPlus
+name|adapter
+operator|.
+name|enumerable
+operator|.
+name|EnumerableConvention
 import|;
 end_import
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
-name|config
+name|adapter
 operator|.
-name|Lex
+name|enumerable
+operator|.
+name|EnumerableProject
 import|;
 end_import
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
-name|impl
+name|adapter
+operator|.
+name|enumerable
+operator|.
+name|EnumerableRules
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|adapter
+operator|.
+name|enumerable
+operator|.
+name|EnumerableTableScan
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|adapter
 operator|.
 name|java
 operator|.
@@ -59,99 +97,65 @@ end_import
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
-name|impl
+name|adapter
 operator|.
 name|jdbc
 operator|.
-name|*
+name|JdbcConvention
 import|;
 end_import
 
 begin_import
 import|import
-name|net
+name|org
 operator|.
-name|hydromatic
+name|apache
 operator|.
-name|optiq
+name|calcite
 operator|.
-name|impl
+name|adapter
+operator|.
+name|jdbc
+operator|.
+name|JdbcImplementor
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|adapter
+operator|.
+name|jdbc
+operator|.
+name|JdbcRel
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|adapter
 operator|.
 name|jdbc
 operator|.
 name|JdbcRules
-operator|.
-name|JdbcProjectRel
-import|;
-end_import
-
-begin_import
-import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|optiq
-operator|.
-name|rules
-operator|.
-name|java
-operator|.
-name|EnumerableConvention
-import|;
-end_import
-
-begin_import
-import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|optiq
-operator|.
-name|rules
-operator|.
-name|java
-operator|.
-name|JavaRules
-import|;
-end_import
-
-begin_import
-import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|optiq
-operator|.
-name|rules
-operator|.
-name|java
-operator|.
-name|JavaRules
-operator|.
-name|EnumerableProjectRel
-import|;
-end_import
-
-begin_import
-import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|optiq
-operator|.
-name|test
-operator|.
-name|OptiqAssert
 import|;
 end_import
 
@@ -159,11 +163,153 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
+operator|.
+name|config
+operator|.
+name|Lex
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|ConventionTraitDef
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptCluster
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptPlanner
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptPredicateList
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptRule
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptTable
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptUtil
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelTraitDef
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelTraitSet
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
-name|*
+name|RelCollationTraitDef
 import|;
 end_import
 
@@ -171,7 +317,23 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|RelNode
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
@@ -185,7 +347,41 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|core
+operator|.
+name|Project
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|core
+operator|.
+name|TableScan
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
@@ -199,13 +395,15 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|rel
 operator|.
 name|rules
 operator|.
-name|*
+name|FilterMergeRule
 import|;
 end_import
 
@@ -213,11 +411,15 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|relopt
+name|calcite
 operator|.
-name|*
+name|rel
+operator|.
+name|rules
+operator|.
+name|SortRemoveRule
 import|;
 end_import
 
@@ -225,9 +427,13 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|reltype
+name|calcite
+operator|.
+name|rel
+operator|.
+name|type
 operator|.
 name|RelDataType
 import|;
@@ -237,9 +443,13 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|reltype
+name|calcite
+operator|.
+name|rel
+operator|.
+name|type
 operator|.
 name|RelDataTypeFactory
 import|;
@@ -249,11 +459,13 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
 operator|.
-name|sql
+name|calcite
 operator|.
-name|*
+name|schema
+operator|.
+name|SchemaPlus
 import|;
 end_import
 
@@ -261,7 +473,135 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|SqlAggFunction
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|SqlCall
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|SqlDialect
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|SqlExplainLevel
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|SqlFunctionCategory
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|SqlKind
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|SqlNode
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|SqlOperator
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|SqlOperatorTable
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
@@ -275,7 +615,9 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
@@ -289,13 +631,15 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
 name|type
 operator|.
-name|*
+name|OperandTypes
 import|;
 end_import
 
@@ -303,7 +647,41 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|type
+operator|.
+name|ReturnTypes
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|type
+operator|.
+name|SqlTypeName
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
@@ -317,7 +695,9 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
@@ -331,7 +711,9 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
@@ -345,7 +727,9 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
 operator|.
 name|sql
 operator|.
@@ -359,7 +743,23 @@ begin_import
 import|import
 name|org
 operator|.
-name|eigenbase
+name|apache
+operator|.
+name|calcite
+operator|.
+name|test
+operator|.
+name|CalciteAssert
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|util
 operator|.
@@ -397,7 +797,17 @@ name|java
 operator|.
 name|util
 operator|.
-name|*
+name|ArrayList
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
 import|;
 end_import
 
@@ -409,7 +819,31 @@ name|hamcrest
 operator|.
 name|CoreMatchers
 operator|.
-name|*
+name|containsString
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|hamcrest
+operator|.
+name|CoreMatchers
+operator|.
+name|equalTo
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|hamcrest
+operator|.
+name|CoreMatchers
+operator|.
+name|notNullValue
 import|;
 end_import
 
@@ -421,7 +855,31 @@ name|junit
 operator|.
 name|Assert
 operator|.
-name|*
+name|assertFalse
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|assertThat
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|fail
 import|;
 end_import
 
@@ -539,11 +997,11 @@ literal|"FROM `emps`\n"
 operator|+
 literal|"WHERE `name` LIKE '%e%'"
 argument_list|,
-literal|"ProjectRel(empid=[$0], deptno=[$1], name=[$2], salary=[$3], commission=[$4])\n"
+literal|"LogicalProject(empid=[$0], deptno=[$1], name=[$2], salary=[$3], commission=[$4])\n"
 operator|+
-literal|"  FilterRel(condition=[LIKE($2, '%e%')])\n"
+literal|"  LogicalFilter(condition=[LIKE($2, '%e%')])\n"
 operator|+
-literal|"    EnumerableTableAccessRel(table=[[hr, emps]])\n"
+literal|"    EnumerableTableScan(table=[[hr, emps]])\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -571,11 +1029,11 @@ literal|"ORDER BY `emps`.`deptno`\n"
 operator|+
 literal|"OFFSET 10 ROWS"
 argument_list|,
-literal|"SortRel(sort0=[$1], dir0=[ASC], offset=[10])\n"
+literal|"Sort(sort0=[$1], dir0=[ASC], offset=[10])\n"
 operator|+
-literal|"  ProjectRel(empid=[$0], deptno=[$1], name=[$2], salary=[$3], commission=[$4])\n"
+literal|"  LogicalProject(empid=[$0], deptno=[$1], name=[$2], salary=[$3], commission=[$4])\n"
 operator|+
-literal|"    EnumerableTableAccessRel(table=[[hr, emps]])\n"
+literal|"    EnumerableTableScan(table=[[hr, emps]])\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -830,13 +1288,13 @@ argument_list|()
 operator|.
 name|defaultSchema
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|addSchema
 argument_list|(
 name|rootSchema
 argument_list|,
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|SchemaSpec
 operator|.
@@ -1028,13 +1486,13 @@ argument_list|)
 operator|.
 name|defaultSchema
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|addSchema
 argument_list|(
 name|rootSchema
 argument_list|,
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|SchemaSpec
 operator|.
@@ -1064,7 +1522,7 @@ name|config
 argument_list|)
 return|;
 block|}
-comment|/** Tests that planner throws an error if you pass to    * {@link Planner#convert(org.eigenbase.sql.SqlNode)}    * a {@link org.eigenbase.sql.SqlNode} that has been parsed but not    * validated. */
+comment|/** Tests that planner throws an error if you pass to    * {@link Planner#convert(org.apache.calcite.sql.SqlNode)}    * a {@link org.apache.calcite.sql.SqlNode} that has been parsed but not    * validated. */
 annotation|@
 name|Test
 specifier|public
@@ -1323,15 +1781,15 @@ name|Programs
 operator|.
 name|ofRules
 argument_list|(
-name|MergeFilterRule
+name|FilterMergeRule
 operator|.
 name|INSTANCE
 argument_list|,
-name|JavaRules
+name|EnumerableRules
 operator|.
 name|ENUMERABLE_FILTER_RULE
 argument_list|,
-name|JavaRules
+name|EnumerableRules
 operator|.
 name|ENUMERABLE_PROJECT_RULE
 argument_list|)
@@ -1414,9 +1872,9 @@ argument_list|)
 argument_list|,
 name|equalTo
 argument_list|(
-literal|"EnumerableProjectRel(empid=[$0], deptno=[$1], name=[$2], salary=[$3], commission=[$4])\n"
+literal|"EnumerableProject(empid=[$0], deptno=[$1], name=[$2], salary=[$3], commission=[$4])\n"
 operator|+
-literal|"  EnumerableTableAccessRel(table=[[hr, emps]])\n"
+literal|"  EnumerableTableScan(table=[[hr, emps]])\n"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1438,15 +1896,15 @@ name|RuleSets
 operator|.
 name|ofList
 argument_list|(
-name|RemoveSortRule
+name|SortRemoveRule
 operator|.
 name|INSTANCE
 argument_list|,
-name|JavaRules
+name|EnumerableRules
 operator|.
 name|ENUMERABLE_PROJECT_RULE
 argument_list|,
-name|JavaRules
+name|EnumerableRules
 operator|.
 name|ENUMERABLE_SORT_RULE
 argument_list|)
@@ -1536,16 +1994,16 @@ argument_list|)
 argument_list|,
 name|equalTo
 argument_list|(
-literal|"EnumerableSortRel(sort0=[$1], dir0=[ASC])\n"
+literal|"EnumerableSort(sort0=[$1], dir0=[ASC])\n"
 operator|+
-literal|"  EnumerableProjectRel(empid=[$0], deptno=[$1], name=[$2], salary=[$3], commission=[$4])\n"
+literal|"  EnumerableProject(empid=[$0], deptno=[$1], name=[$2], salary=[$3], commission=[$4])\n"
 operator|+
-literal|"    EnumerableTableAccessRel(table=[[hr, emps]])\n"
+literal|"    EnumerableTableScan(table=[[hr, emps]])\n"
 argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Unit test that parses, validates, converts and    * plans for query using two duplicate order by.    * The duplicate order by should be removed by RemoveSortRule*/
+comment|/** Unit test that parses, validates, converts and    * plans for query using two duplicate order by.    * The duplicate order by should be removed by SortRemoveRule*/
 annotation|@
 name|Test
 specifier|public
@@ -1562,15 +2020,15 @@ name|RuleSets
 operator|.
 name|ofList
 argument_list|(
-name|RemoveSortRule
+name|SortRemoveRule
 operator|.
 name|INSTANCE
 argument_list|,
-name|JavaRules
+name|EnumerableRules
 operator|.
 name|ENUMERABLE_PROJECT_RULE
 argument_list|,
-name|JavaRules
+name|EnumerableRules
 operator|.
 name|ENUMERABLE_SORT_RULE
 argument_list|)
@@ -1666,15 +2124,15 @@ argument_list|)
 argument_list|,
 name|equalTo
 argument_list|(
-literal|"EnumerableProjectRel(empid=[$0])\n"
+literal|"EnumerableProject(empid=[$0])\n"
 operator|+
-literal|"  EnumerableProjectRel(empid=[$0], deptno=[$1])\n"
+literal|"  EnumerableProject(empid=[$0], deptno=[$1])\n"
 operator|+
-literal|"    EnumerableSortRel(sort0=[$1], dir0=[ASC])\n"
+literal|"    EnumerableSort(sort0=[$1], dir0=[ASC])\n"
 operator|+
-literal|"      EnumerableProjectRel(empid=[$0], deptno=[$1], name=[$2], salary=[$3], commission=[$4])\n"
+literal|"      EnumerableProject(empid=[$0], deptno=[$1], name=[$2], salary=[$3], commission=[$4])\n"
 operator|+
-literal|"        EnumerableTableAccessRel(table=[[hr, emps]])\n"
+literal|"        EnumerableTableScan(table=[[hr, emps]])\n"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1696,11 +2154,11 @@ name|RuleSets
 operator|.
 name|ofList
 argument_list|(
-name|JavaRules
+name|EnumerableRules
 operator|.
 name|ENUMERABLE_PROJECT_RULE
 argument_list|,
-name|JavaRules
+name|EnumerableRules
 operator|.
 name|ENUMERABLE_SORT_RULE
 argument_list|)
@@ -1796,17 +2254,17 @@ argument_list|)
 argument_list|,
 name|equalTo
 argument_list|(
-literal|"EnumerableProjectRel(empid=[$0])\n"
+literal|"EnumerableProject(empid=[$0])\n"
 operator|+
-literal|"  EnumerableSortRel(sort0=[$1], dir0=[ASC])\n"
+literal|"  EnumerableSort(sort0=[$1], dir0=[ASC])\n"
 operator|+
-literal|"    EnumerableProjectRel(empid=[$0], deptno=[$1])\n"
+literal|"    EnumerableProject(empid=[$0], deptno=[$1])\n"
 operator|+
-literal|"      EnumerableSortRel(sort0=[$1], dir0=[ASC])\n"
+literal|"      EnumerableSort(sort0=[$1], dir0=[ASC])\n"
 operator|+
-literal|"        EnumerableProjectRel(empid=[$0], deptno=[$1], name=[$2], salary=[$3], commission=[$4])\n"
+literal|"        EnumerableProject(empid=[$0], deptno=[$1], name=[$2], salary=[$3], commission=[$4])\n"
 operator|+
-literal|"          EnumerableTableAccessRel(table=[[hr, emps]])\n"
+literal|"          EnumerableTableScan(table=[[hr, emps]])\n"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1828,15 +2286,15 @@ name|RuleSets
 operator|.
 name|ofList
 argument_list|(
-name|MergeFilterRule
+name|FilterMergeRule
 operator|.
 name|INSTANCE
 argument_list|,
-name|JavaRules
+name|EnumerableRules
 operator|.
 name|ENUMERABLE_FILTER_RULE
 argument_list|,
-name|JavaRules
+name|EnumerableRules
 operator|.
 name|ENUMERABLE_PROJECT_RULE
 argument_list|)
@@ -1956,9 +2414,9 @@ argument_list|)
 argument_list|,
 name|equalTo
 argument_list|(
-literal|"EnumerableProjectRel(empid=[$0], deptno=[$1], name=[$2], salary=[$3], commission=[$4])\n"
+literal|"EnumerableProject(empid=[$0], deptno=[$1], name=[$2], salary=[$3], commission=[$4])\n"
 operator|+
-literal|"  EnumerableTableAccessRel(table=[[hr, emps]])\n"
+literal|"  EnumerableTableScan(table=[[hr, emps]])\n"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1980,15 +2438,15 @@ name|RuleSets
 operator|.
 name|ofList
 argument_list|(
-name|MergeFilterRule
+name|FilterMergeRule
 operator|.
 name|INSTANCE
 argument_list|,
-name|JavaRules
+name|EnumerableRules
 operator|.
 name|ENUMERABLE_FILTER_RULE
 argument_list|,
-name|JavaRules
+name|EnumerableRules
 operator|.
 name|ENUMERABLE_PROJECT_RULE
 argument_list|)
@@ -2090,9 +2548,9 @@ argument_list|)
 argument_list|,
 name|equalTo
 argument_list|(
-literal|"EnumerableProjectRel(empid=[$0], deptno=[$1], name=[$2], salary=[$3], commission=[$4])\n"
+literal|"EnumerableProject(empid=[$0], deptno=[$1], name=[$2], salary=[$3], commission=[$4])\n"
 operator|+
-literal|"  EnumerableTableAccessRel(table=[[hr, emps]])\n"
+literal|"  EnumerableTableScan(table=[[hr, emps]])\n"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -2175,7 +2633,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Unit test that calls {@link Planner#transform} twice,    * with different rule sets, with different conventions.    *    *<p>{@link net.hydromatic.optiq.impl.jdbc.JdbcConvention} is different    * from the typical convention in that it is not a singleton. Switching to    * a different instance causes problems unless planner state is wiped clean    * between calls to {@link Planner#transform}. */
+comment|/** Unit test that calls {@link Planner#transform} twice,    * with different rule sets, with different conventions.    *    *<p>{@link org.apache.calcite.adapter.jdbc.JdbcConvention} is different    * from the typical convention in that it is not a singleton. Switching to    * a different instance causes problems unless planner state is wiped clean    * between calls to {@link Planner#transform}. */
 annotation|@
 name|Test
 specifier|public
@@ -2192,15 +2650,15 @@ name|Programs
 operator|.
 name|ofRules
 argument_list|(
-name|MergeFilterRule
+name|FilterMergeRule
 operator|.
 name|INSTANCE
 argument_list|,
-name|JavaRules
+name|EnumerableRules
 operator|.
 name|ENUMERABLE_FILTER_RULE
 argument_list|,
-name|JavaRules
+name|EnumerableRules
 operator|.
 name|ENUMERABLE_PROJECT_RULE
 argument_list|)
@@ -2345,7 +2803,7 @@ argument_list|)
 argument_list|,
 name|equalTo
 argument_list|(
-literal|"JdbcProjectRel(name=[$2])\n"
+literal|"JdbcProject(name=[$2])\n"
 operator|+
 literal|"  MockJdbcTableScan(table=[[hr, emps]])\n"
 argument_list|)
@@ -2400,7 +2858,7 @@ expr_stmt|;
 comment|// takes about 2s
 if|if
 condition|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|ENABLE_SLOW
 condition|)
@@ -2625,12 +3083,12 @@ argument_list|)
 argument_list|,
 name|containsString
 argument_list|(
-literal|"EnumerableJoinRel(condition=[=($0, $3)], joinType=[inner])"
+literal|"EnumerableJoin(condition=[=($0, $3)], joinType=[inner])"
 argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-435">CALCITE-435</a>,    * "LoptOptimizeJoinRule incorrectly re-orders outer joins".    *    *<p>Checks the {@link org.eigenbase.rel.rules.LoptOptimizeJoinRule} on a    * query with a left outer join.    *    *<p>Specifically, tests that a relation (dependents) in an inner join    * cannot be pushed into an outer join (emps left join depts).    */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-435">CALCITE-435</a>,    * "LoptOptimizeJoinRule incorrectly re-orders outer joins".    *    *<p>Checks the    * {@link org.apache.calcite.rel.rules.LoptOptimizeJoinRule} on a query with a    * left outer join.    *    *<p>Specifically, tests that a relation (dependents) in an inner join    * cannot be pushed into an outer join (emps left join depts).    */
 annotation|@
 name|Test
 specifier|public
@@ -2648,21 +3106,21 @@ literal|"left join \"depts\" as d using (\"deptno\")\n"
 operator|+
 literal|"join \"dependents\" as p on e.\"empid\" = p.\"empid\""
 argument_list|,
-literal|"EnumerableProjectRel(empid=[$0], deptno=[$1], name=[$2], salary=[$3], commission=[$4], deptno0=[$5], name0=[$6], employees=[$7], empid0=[$8], name1=[$9])\n"
+literal|"EnumerableProject(empid=[$0], deptno=[$1], name=[$2], salary=[$3], commission=[$4], deptno0=[$5], name0=[$6], employees=[$7], empid0=[$8], name1=[$9])\n"
 operator|+
-literal|"  EnumerableProjectRel(empid=[$2], deptno=[$3], name=[$4], salary=[$5], commission=[$6], deptno0=[$7], name0=[$8], employees=[$9], empid0=[$0], name1=[$1])\n"
+literal|"  EnumerableProject(empid=[$2], deptno=[$3], name=[$4], salary=[$5], commission=[$6], deptno0=[$7], name0=[$8], employees=[$9], empid0=[$0], name1=[$1])\n"
 operator|+
-literal|"    EnumerableJoinRel(condition=[=($0, $2)], joinType=[inner])\n"
+literal|"    EnumerableJoin(condition=[=($0, $2)], joinType=[inner])\n"
 operator|+
-literal|"      EnumerableTableAccessRel(table=[[hr, dependents]])\n"
+literal|"      EnumerableTableScan(table=[[hr, dependents]])\n"
 operator|+
-literal|"      EnumerableProjectRel(empid=[$0], deptno=[$1], name=[$2], salary=[$3], commission=[$4], deptno0=[$5], name0=[$6], employees=[$7])\n"
+literal|"      EnumerableProject(empid=[$0], deptno=[$1], name=[$2], salary=[$3], commission=[$4], deptno0=[$5], name0=[$6], employees=[$7])\n"
 operator|+
-literal|"        EnumerableJoinRel(condition=[=($1, $5)], joinType=[left])\n"
+literal|"        EnumerableJoin(condition=[=($1, $5)], joinType=[left])\n"
 operator|+
-literal|"          EnumerableTableAccessRel(table=[[hr, emps]])\n"
+literal|"          EnumerableTableScan(table=[[hr, emps]])\n"
 operator|+
-literal|"          EnumerableTableAccessRel(table=[[hr, depts]])"
+literal|"          EnumerableTableScan(table=[[hr, depts]])"
 argument_list|)
 expr_stmt|;
 block|}
@@ -2684,21 +3142,21 @@ literal|"right join \"depts\" as d using (\"deptno\")\n"
 operator|+
 literal|"join \"dependents\" as p on e.\"empid\" = p.\"empid\""
 argument_list|,
-literal|"EnumerableProjectRel(empid=[$0], deptno=[$1], name=[$2], salary=[$3], commission=[$4], deptno0=[$5], name0=[$6], employees=[$7], empid0=[$8], name1=[$9])\n"
+literal|"EnumerableProject(empid=[$0], deptno=[$1], name=[$2], salary=[$3], commission=[$4], deptno0=[$5], name0=[$6], employees=[$7], empid0=[$8], name1=[$9])\n"
 operator|+
-literal|"  EnumerableProjectRel(empid=[$2], deptno=[$3], name=[$4], salary=[$5], commission=[$6], deptno0=[$7], name0=[$8], employees=[$9], empid0=[$0], name1=[$1])\n"
+literal|"  EnumerableProject(empid=[$2], deptno=[$3], name=[$4], salary=[$5], commission=[$6], deptno0=[$7], name0=[$8], employees=[$9], empid0=[$0], name1=[$1])\n"
 operator|+
-literal|"    EnumerableJoinRel(condition=[=($0, $2)], joinType=[inner])\n"
+literal|"    EnumerableJoin(condition=[=($0, $2)], joinType=[inner])\n"
 operator|+
-literal|"      EnumerableTableAccessRel(table=[[hr, dependents]])\n"
+literal|"      EnumerableTableScan(table=[[hr, dependents]])\n"
 operator|+
-literal|"      EnumerableProjectRel(empid=[$0], deptno=[$1], name=[$2], salary=[$3], commission=[$4], deptno0=[$5], name0=[$6], employees=[$7])\n"
+literal|"      EnumerableProject(empid=[$0], deptno=[$1], name=[$2], salary=[$3], commission=[$4], deptno0=[$5], name0=[$6], employees=[$7])\n"
 operator|+
-literal|"        EnumerableJoinRel(condition=[=($1, $5)], joinType=[right])\n"
+literal|"        EnumerableJoin(condition=[=($1, $5)], joinType=[right])\n"
 operator|+
-literal|"          EnumerableTableAccessRel(table=[[hr, emps]])\n"
+literal|"          EnumerableTableScan(table=[[hr, emps]])\n"
 operator|+
-literal|"          EnumerableTableAccessRel(table=[[hr, depts]])"
+literal|"          EnumerableTableScan(table=[[hr, depts]])"
 argument_list|)
 expr_stmt|;
 block|}
@@ -2720,21 +3178,21 @@ literal|"join \"depts\" as d using (\"deptno\")\n"
 operator|+
 literal|"right join \"dependents\" as p on e.\"empid\" = p.\"empid\""
 argument_list|,
-literal|"EnumerableProjectRel(empid=[$0], deptno=[$1], name=[$2], salary=[$3], commission=[$4], deptno0=[$5], name0=[$6], employees=[$7], empid0=[$8], name1=[$9])\n"
+literal|"EnumerableProject(empid=[$0], deptno=[$1], name=[$2], salary=[$3], commission=[$4], deptno0=[$5], name0=[$6], employees=[$7], empid0=[$8], name1=[$9])\n"
 operator|+
-literal|"  EnumerableProjectRel(empid=[$2], deptno=[$3], name=[$4], salary=[$5], commission=[$6], deptno0=[$7], name0=[$8], employees=[$9], empid0=[$0], name1=[$1])\n"
+literal|"  EnumerableProject(empid=[$2], deptno=[$3], name=[$4], salary=[$5], commission=[$6], deptno0=[$7], name0=[$8], employees=[$9], empid0=[$0], name1=[$1])\n"
 operator|+
-literal|"    EnumerableJoinRel(condition=[=($0, $2)], joinType=[left])\n"
+literal|"    EnumerableJoin(condition=[=($0, $2)], joinType=[left])\n"
 operator|+
-literal|"      EnumerableTableAccessRel(table=[[hr, dependents]])\n"
+literal|"      EnumerableTableScan(table=[[hr, dependents]])\n"
 operator|+
-literal|"      EnumerableProjectRel(empid=[$0], deptno=[$1], name=[$2], salary=[$3], commission=[$4], deptno0=[$5], name0=[$6], employees=[$7])\n"
+literal|"      EnumerableProject(empid=[$0], deptno=[$1], name=[$2], salary=[$3], commission=[$4], deptno0=[$5], name0=[$6], employees=[$7])\n"
 operator|+
-literal|"        EnumerableJoinRel(condition=[=($1, $5)], joinType=[inner])\n"
+literal|"        EnumerableJoin(condition=[=($1, $5)], joinType=[inner])\n"
 operator|+
-literal|"          EnumerableTableAccessRel(table=[[hr, emps]])\n"
+literal|"          EnumerableTableScan(table=[[hr, emps]])\n"
 operator|+
-literal|"          EnumerableTableAccessRel(table=[[hr, depts]])"
+literal|"          EnumerableTableScan(table=[[hr, depts]])"
 argument_list|)
 expr_stmt|;
 block|}
@@ -2869,23 +3327,23 @@ literal|"where c.\"city\" = 'San Francisco'\n"
 operator|+
 literal|"and p.\"brand_name\" = 'Washington'"
 argument_list|,
-literal|"EnumerableProjectRel(product_id=[$0], time_id=[$1], customer_id=[$2], promotion_id=[$3], store_id=[$4], store_sales=[$5], store_cost=[$6], unit_sales=[$7], customer_id0=[$8], account_num=[$9], lname=[$10], fname=[$11], mi=[$12], address1=[$13], address2=[$14], address3=[$15], address4=[$16], city=[$17], state_province=[$18], postal_code=[$19], country=[$20], customer_region_id=[$21], phone1=[$22], phone2=[$23], birthdate=[$24], marital_status=[$25], yearly_income=[$26], gender=[$27], total_children=[$28], num_children_at_home=[$29], education=[$30], date_accnt_opened=[$31], member_card=[$32], occupation=[$33], houseowner=[$34], num_cars_owned=[$35], fullname=[$36], product_class_id=[$37], product_id0=[$38], brand_name=[$39], product_name=[$40], SKU=[$41], SRP=[$42], gross_weight=[$43], net_weight=[$44], recyclable_package=[$45], low_fat=[$46], units_per_case=[$47], cases_per_pallet=[$48], shelf_width=[$49], shelf_height=[$50], shelf_depth=[$51])\n"
+literal|"EnumerableProject(product_id=[$0], time_id=[$1], customer_id=[$2], promotion_id=[$3], store_id=[$4], store_sales=[$5], store_cost=[$6], unit_sales=[$7], customer_id0=[$8], account_num=[$9], lname=[$10], fname=[$11], mi=[$12], address1=[$13], address2=[$14], address3=[$15], address4=[$16], city=[$17], state_province=[$18], postal_code=[$19], country=[$20], customer_region_id=[$21], phone1=[$22], phone2=[$23], birthdate=[$24], marital_status=[$25], yearly_income=[$26], gender=[$27], total_children=[$28], num_children_at_home=[$29], education=[$30], date_accnt_opened=[$31], member_card=[$32], occupation=[$33], houseowner=[$34], num_cars_owned=[$35], fullname=[$36], product_class_id=[$37], product_id0=[$38], brand_name=[$39], product_name=[$40], SKU=[$41], SRP=[$42], gross_weight=[$43], net_weight=[$44], recyclable_package=[$45], low_fat=[$46], units_per_case=[$47], cases_per_pallet=[$48], shelf_width=[$49], shelf_height=[$50], shelf_depth=[$51])\n"
 operator|+
-literal|"  EnumerableProjectRel($f0=[$44], $f1=[$45], $f2=[$46], $f3=[$47], $f4=[$48], $f5=[$49], $f6=[$50], $f7=[$51], $f8=[$15], $f9=[$16], $f10=[$17], $f11=[$18], $f12=[$19], $f13=[$20], $f14=[$21], $f15=[$22], $f16=[$23], $f17=[$24], $f18=[$25], $f19=[$26], $f20=[$27], $f21=[$28], $f22=[$29], $f23=[$30], $f24=[$31], $f25=[$32], $f26=[$33], $f27=[$34], $f28=[$35], $f29=[$36], $f30=[$37], $f31=[$38], $f32=[$39], $f33=[$40], $f34=[$41], $f35=[$42], $f36=[$43], $f37=[$0], $f38=[$1], $f39=[$2], $f40=[$3], $f41=[$4], $f42=[$5], $f43=[$6], $f44=[$7], $f45=[$8], $f46=[$9], $f47=[$10], $f48=[$11], $f49=[$12], $f50=[$13], $f51=[$14])\n"
+literal|"  EnumerableProject($f0=[$44], $f1=[$45], $f2=[$46], $f3=[$47], $f4=[$48], $f5=[$49], $f6=[$50], $f7=[$51], $f8=[$15], $f9=[$16], $f10=[$17], $f11=[$18], $f12=[$19], $f13=[$20], $f14=[$21], $f15=[$22], $f16=[$23], $f17=[$24], $f18=[$25], $f19=[$26], $f20=[$27], $f21=[$28], $f22=[$29], $f23=[$30], $f24=[$31], $f25=[$32], $f26=[$33], $f27=[$34], $f28=[$35], $f29=[$36], $f30=[$37], $f31=[$38], $f32=[$39], $f33=[$40], $f34=[$41], $f35=[$42], $f36=[$43], $f37=[$0], $f38=[$1], $f39=[$2], $f40=[$3], $f41=[$4], $f42=[$5], $f43=[$6], $f44=[$7], $f45=[$8], $f46=[$9], $f47=[$10], $f48=[$11], $f49=[$12], $f50=[$13], $f51=[$14])\n"
 operator|+
-literal|"    EnumerableJoinRel(condition=[=($1, $44)], joinType=[inner])\n"
+literal|"    EnumerableJoin(condition=[=($1, $44)], joinType=[inner])\n"
 operator|+
-literal|"      EnumerableFilterRel(condition=[=($2, 'Washington')])\n"
+literal|"      EnumerableFilter(condition=[=($2, 'Washington')])\n"
 operator|+
-literal|"        EnumerableTableAccessRel(table=[[foodmart2, product]])\n"
+literal|"        EnumerableTableScan(table=[[foodmart2, product]])\n"
 operator|+
-literal|"      EnumerableJoinRel(condition=[=($0, $31)], joinType=[inner])\n"
+literal|"      EnumerableJoin(condition=[=($0, $31)], joinType=[inner])\n"
 operator|+
-literal|"        EnumerableFilterRel(condition=[=($9, 'San Francisco')])\n"
+literal|"        EnumerableFilter(condition=[=($9, 'San Francisco')])\n"
 operator|+
-literal|"          EnumerableTableAccessRel(table=[[foodmart2, customer]])\n"
+literal|"          EnumerableTableScan(table=[[foodmart2, customer]])\n"
 operator|+
-literal|"        EnumerableTableAccessRel(table=[[foodmart2, sales_fact_1997]])\n"
+literal|"        EnumerableTableScan(table=[[foodmart2, sales_fact_1997]])\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -2915,27 +3373,27 @@ literal|"where c.\"city\" = 'San Francisco'\n"
 operator|+
 literal|"and p.\"brand_name\" = 'Washington'"
 argument_list|,
-literal|"EnumerableProjectRel(product_id=[$0], time_id=[$1], customer_id=[$2], promotion_id=[$3], store_id=[$4], store_sales=[$5], store_cost=[$6], unit_sales=[$7], customer_id0=[$8], account_num=[$9], lname=[$10], fname=[$11], mi=[$12], address1=[$13], address2=[$14], address3=[$15], address4=[$16], city=[$17], state_province=[$18], postal_code=[$19], country=[$20], customer_region_id=[$21], phone1=[$22], phone2=[$23], birthdate=[$24], marital_status=[$25], yearly_income=[$26], gender=[$27], total_children=[$28], num_children_at_home=[$29], education=[$30], date_accnt_opened=[$31], member_card=[$32], occupation=[$33], houseowner=[$34], num_cars_owned=[$35], fullname=[$36], product_class_id=[$37], product_id0=[$38], brand_name=[$39], product_name=[$40], SKU=[$41], SRP=[$42], gross_weight=[$43], net_weight=[$44], recyclable_package=[$45], low_fat=[$46], units_per_case=[$47], cases_per_pallet=[$48], shelf_width=[$49], shelf_height=[$50], shelf_depth=[$51], product_class_id0=[$52], product_subcategory=[$53], product_category=[$54], product_department=[$55], product_family=[$56])\n"
+literal|"EnumerableProject(product_id=[$0], time_id=[$1], customer_id=[$2], promotion_id=[$3], store_id=[$4], store_sales=[$5], store_cost=[$6], unit_sales=[$7], customer_id0=[$8], account_num=[$9], lname=[$10], fname=[$11], mi=[$12], address1=[$13], address2=[$14], address3=[$15], address4=[$16], city=[$17], state_province=[$18], postal_code=[$19], country=[$20], customer_region_id=[$21], phone1=[$22], phone2=[$23], birthdate=[$24], marital_status=[$25], yearly_income=[$26], gender=[$27], total_children=[$28], num_children_at_home=[$29], education=[$30], date_accnt_opened=[$31], member_card=[$32], occupation=[$33], houseowner=[$34], num_cars_owned=[$35], fullname=[$36], product_class_id=[$37], product_id0=[$38], brand_name=[$39], product_name=[$40], SKU=[$41], SRP=[$42], gross_weight=[$43], net_weight=[$44], recyclable_package=[$45], low_fat=[$46], units_per_case=[$47], cases_per_pallet=[$48], shelf_width=[$49], shelf_height=[$50], shelf_depth=[$51], product_class_id0=[$52], product_subcategory=[$53], product_category=[$54], product_department=[$55], product_family=[$56])\n"
 operator|+
-literal|"  EnumerableProjectRel($f0=[$49], $f1=[$50], $f2=[$51], $f3=[$52], $f4=[$53], $f5=[$54], $f6=[$55], $f7=[$56], $f8=[$0], $f9=[$1], $f10=[$2], $f11=[$3], $f12=[$4], $f13=[$5], $f14=[$6], $f15=[$7], $f16=[$8], $f17=[$9], $f18=[$10], $f19=[$11], $f20=[$12], $f21=[$13], $f22=[$14], $f23=[$15], $f24=[$16], $f25=[$17], $f26=[$18], $f27=[$19], $f28=[$20], $f29=[$21], $f30=[$22], $f31=[$23], $f32=[$24], $f33=[$25], $f34=[$26], $f35=[$27], $f36=[$28], $f37=[$34], $f38=[$35], $f39=[$36], $f40=[$37], $f41=[$38], $f42=[$39], $f43=[$40], $f44=[$41], $f45=[$42], $f46=[$43], $f47=[$44], $f48=[$45], $f49=[$46], $f50=[$47], $f51=[$48], $f52=[$29], $f53=[$30], $f54=[$31], $f55=[$32], $f56=[$33])\n"
+literal|"  EnumerableProject($f0=[$49], $f1=[$50], $f2=[$51], $f3=[$52], $f4=[$53], $f5=[$54], $f6=[$55], $f7=[$56], $f8=[$0], $f9=[$1], $f10=[$2], $f11=[$3], $f12=[$4], $f13=[$5], $f14=[$6], $f15=[$7], $f16=[$8], $f17=[$9], $f18=[$10], $f19=[$11], $f20=[$12], $f21=[$13], $f22=[$14], $f23=[$15], $f24=[$16], $f25=[$17], $f26=[$18], $f27=[$19], $f28=[$20], $f29=[$21], $f30=[$22], $f31=[$23], $f32=[$24], $f33=[$25], $f34=[$26], $f35=[$27], $f36=[$28], $f37=[$34], $f38=[$35], $f39=[$36], $f40=[$37], $f41=[$38], $f42=[$39], $f43=[$40], $f44=[$41], $f45=[$42], $f46=[$43], $f47=[$44], $f48=[$45], $f49=[$46], $f50=[$47], $f51=[$48], $f52=[$29], $f53=[$30], $f54=[$31], $f55=[$32], $f56=[$33])\n"
 operator|+
-literal|"    EnumerableJoinRel(condition=[=($0, $51)], joinType=[inner])\n"
+literal|"    EnumerableJoin(condition=[=($0, $51)], joinType=[inner])\n"
 operator|+
-literal|"      EnumerableFilterRel(condition=[=($9, 'San Francisco')])\n"
+literal|"      EnumerableFilter(condition=[=($9, 'San Francisco')])\n"
 operator|+
-literal|"        EnumerableTableAccessRel(table=[[foodmart2, customer]])\n"
+literal|"        EnumerableTableScan(table=[[foodmart2, customer]])\n"
 operator|+
-literal|"      EnumerableJoinRel(condition=[=($6, $20)], joinType=[inner])\n"
+literal|"      EnumerableJoin(condition=[=($6, $20)], joinType=[inner])\n"
 operator|+
-literal|"        EnumerableJoinRel(condition=[=($0, $5)], joinType=[inner])\n"
+literal|"        EnumerableJoin(condition=[=($0, $5)], joinType=[inner])\n"
 operator|+
-literal|"          EnumerableTableAccessRel(table=[[foodmart2, product_class]])\n"
+literal|"          EnumerableTableScan(table=[[foodmart2, product_class]])\n"
 operator|+
-literal|"          EnumerableFilterRel(condition=[=($2, 'Washington')])\n"
+literal|"          EnumerableFilter(condition=[=($2, 'Washington')])\n"
 operator|+
-literal|"            EnumerableTableAccessRel(table=[[foodmart2, product]])\n"
+literal|"            EnumerableTableScan(table=[[foodmart2, product]])\n"
 operator|+
-literal|"        EnumerableTableAccessRel(table=[[foodmart2, sales_fact_1997]])\n"
+literal|"        EnumerableTableScan(table=[[foodmart2, sales_fact_1997]])\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -2965,29 +3423,29 @@ literal|"  join \"store\" as st using (\"store_id\")\n"
 operator|+
 literal|"where c.\"city\" = 'San Francisco'\n"
 argument_list|,
-literal|"EnumerableProjectRel(product_id=[$0], time_id=[$1], customer_id=[$2], promotion_id=[$3], store_id=[$4], store_sales=[$5], store_cost=[$6], unit_sales=[$7], customer_id0=[$8], account_num=[$9], lname=[$10], fname=[$11], mi=[$12], address1=[$13], address2=[$14], address3=[$15], address4=[$16], city=[$17], state_province=[$18], postal_code=[$19], country=[$20], customer_region_id=[$21], phone1=[$22], phone2=[$23], birthdate=[$24], marital_status=[$25], yearly_income=[$26], gender=[$27], total_children=[$28], num_children_at_home=[$29], education=[$30], date_accnt_opened=[$31], member_card=[$32], occupation=[$33], houseowner=[$34], num_cars_owned=[$35], fullname=[$36], product_class_id=[$37], product_id0=[$38], brand_name=[$39], product_name=[$40], SKU=[$41], SRP=[$42], gross_weight=[$43], net_weight=[$44], recyclable_package=[$45], low_fat=[$46], units_per_case=[$47], cases_per_pallet=[$48], shelf_width=[$49], shelf_height=[$50], shelf_depth=[$51], product_class_id0=[$52], product_subcategory=[$53], product_category=[$54], product_department=[$55], product_family=[$56], store_id0=[$57], store_type=[$58], region_id=[$59], store_name=[$60], store_number=[$61], store_street_address=[$62], store_city=[$63], store_state=[$64], store_postal_code=[$65], store_country=[$66], store_manager=[$67], store_phone=[$68], store_fax=[$69], first_opened_date=[$70], last_remodel_date=[$71], store_sqft=[$72], grocery_sqft=[$73], frozen_sqft=[$74], meat_sqft=[$75], coffee_bar=[$76], video_store=[$77], salad_bar=[$78], prepared_food=[$79], florist=[$80])\n"
+literal|"EnumerableProject(product_id=[$0], time_id=[$1], customer_id=[$2], promotion_id=[$3], store_id=[$4], store_sales=[$5], store_cost=[$6], unit_sales=[$7], customer_id0=[$8], account_num=[$9], lname=[$10], fname=[$11], mi=[$12], address1=[$13], address2=[$14], address3=[$15], address4=[$16], city=[$17], state_province=[$18], postal_code=[$19], country=[$20], customer_region_id=[$21], phone1=[$22], phone2=[$23], birthdate=[$24], marital_status=[$25], yearly_income=[$26], gender=[$27], total_children=[$28], num_children_at_home=[$29], education=[$30], date_accnt_opened=[$31], member_card=[$32], occupation=[$33], houseowner=[$34], num_cars_owned=[$35], fullname=[$36], product_class_id=[$37], product_id0=[$38], brand_name=[$39], product_name=[$40], SKU=[$41], SRP=[$42], gross_weight=[$43], net_weight=[$44], recyclable_package=[$45], low_fat=[$46], units_per_case=[$47], cases_per_pallet=[$48], shelf_width=[$49], shelf_height=[$50], shelf_depth=[$51], product_class_id0=[$52], product_subcategory=[$53], product_category=[$54], product_department=[$55], product_family=[$56], store_id0=[$57], store_type=[$58], region_id=[$59], store_name=[$60], store_number=[$61], store_street_address=[$62], store_city=[$63], store_state=[$64], store_postal_code=[$65], store_country=[$66], store_manager=[$67], store_phone=[$68], store_fax=[$69], first_opened_date=[$70], last_remodel_date=[$71], store_sqft=[$72], grocery_sqft=[$73], frozen_sqft=[$74], meat_sqft=[$75], coffee_bar=[$76], video_store=[$77], salad_bar=[$78], prepared_food=[$79], florist=[$80])\n"
 operator|+
-literal|"  EnumerableProjectRel($f0=[$73], $f1=[$74], $f2=[$75], $f3=[$76], $f4=[$77], $f5=[$78], $f6=[$79], $f7=[$80], $f8=[$24], $f9=[$25], $f10=[$26], $f11=[$27], $f12=[$28], $f13=[$29], $f14=[$30], $f15=[$31], $f16=[$32], $f17=[$33], $f18=[$34], $f19=[$35], $f20=[$36], $f21=[$37], $f22=[$38], $f23=[$39], $f24=[$40], $f25=[$41], $f26=[$42], $f27=[$43], $f28=[$44], $f29=[$45], $f30=[$46], $f31=[$47], $f32=[$48], $f33=[$49], $f34=[$50], $f35=[$51], $f36=[$52], $f37=[$58], $f38=[$59], $f39=[$60], $f40=[$61], $f41=[$62], $f42=[$63], $f43=[$64], $f44=[$65], $f45=[$66], $f46=[$67], $f47=[$68], $f48=[$69], $f49=[$70], $f50=[$71], $f51=[$72], $f52=[$53], $f53=[$54], $f54=[$55], $f55=[$56], $f56=[$57], $f57=[$0], $f58=[$1], $f59=[$2], $f60=[$3], $f61=[$4], $f62=[$5], $f63=[$6], $f64=[$7], $f65=[$8], $f66=[$9], $f67=[$10], $f68=[$11], $f69=[$12], $f70=[$13], $f71=[$14], $f72=[$15], $f73=[$16], $f74=[$17], $f75=[$18], $f76=[$19], $f77=[$20], $f78=[$21], $f79=[$22], $f80=[$23])\n"
+literal|"  EnumerableProject($f0=[$73], $f1=[$74], $f2=[$75], $f3=[$76], $f4=[$77], $f5=[$78], $f6=[$79], $f7=[$80], $f8=[$24], $f9=[$25], $f10=[$26], $f11=[$27], $f12=[$28], $f13=[$29], $f14=[$30], $f15=[$31], $f16=[$32], $f17=[$33], $f18=[$34], $f19=[$35], $f20=[$36], $f21=[$37], $f22=[$38], $f23=[$39], $f24=[$40], $f25=[$41], $f26=[$42], $f27=[$43], $f28=[$44], $f29=[$45], $f30=[$46], $f31=[$47], $f32=[$48], $f33=[$49], $f34=[$50], $f35=[$51], $f36=[$52], $f37=[$58], $f38=[$59], $f39=[$60], $f40=[$61], $f41=[$62], $f42=[$63], $f43=[$64], $f44=[$65], $f45=[$66], $f46=[$67], $f47=[$68], $f48=[$69], $f49=[$70], $f50=[$71], $f51=[$72], $f52=[$53], $f53=[$54], $f54=[$55], $f55=[$56], $f56=[$57], $f57=[$0], $f58=[$1], $f59=[$2], $f60=[$3], $f61=[$4], $f62=[$5], $f63=[$6], $f64=[$7], $f65=[$8], $f66=[$9], $f67=[$10], $f68=[$11], $f69=[$12], $f70=[$13], $f71=[$14], $f72=[$15], $f73=[$16], $f74=[$17], $f75=[$18], $f76=[$19], $f77=[$20], $f78=[$21], $f79=[$22], $f80=[$23])\n"
 operator|+
-literal|"    EnumerableJoinRel(condition=[=($0, $77)], joinType=[inner])\n"
+literal|"    EnumerableJoin(condition=[=($0, $77)], joinType=[inner])\n"
 operator|+
-literal|"      EnumerableTableAccessRel(table=[[foodmart2, store]])\n"
+literal|"      EnumerableTableScan(table=[[foodmart2, store]])\n"
 operator|+
-literal|"      EnumerableJoinRel(condition=[=($0, $51)], joinType=[inner])\n"
+literal|"      EnumerableJoin(condition=[=($0, $51)], joinType=[inner])\n"
 operator|+
-literal|"        EnumerableFilterRel(condition=[=($9, 'San Francisco')])\n"
+literal|"        EnumerableFilter(condition=[=($9, 'San Francisco')])\n"
 operator|+
-literal|"          EnumerableTableAccessRel(table=[[foodmart2, customer]])\n"
+literal|"          EnumerableTableScan(table=[[foodmart2, customer]])\n"
 operator|+
-literal|"        EnumerableJoinRel(condition=[=($6, $20)], joinType=[inner])\n"
+literal|"        EnumerableJoin(condition=[=($6, $20)], joinType=[inner])\n"
 operator|+
-literal|"          EnumerableJoinRel(condition=[=($0, $5)], joinType=[inner])\n"
+literal|"          EnumerableJoin(condition=[=($0, $5)], joinType=[inner])\n"
 operator|+
-literal|"            EnumerableTableAccessRel(table=[[foodmart2, product_class]])\n"
+literal|"            EnumerableTableScan(table=[[foodmart2, product_class]])\n"
 operator|+
-literal|"            EnumerableTableAccessRel(table=[[foodmart2, product]])\n"
+literal|"            EnumerableTableScan(table=[[foodmart2, product]])\n"
 operator|+
-literal|"          EnumerableTableAccessRel(table=[[foodmart2, sales_fact_1997]])\n"
+literal|"          EnumerableTableScan(table=[[foodmart2, sales_fact_1997]])\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -3009,19 +3467,19 @@ literal|"join \"customer\" using (\"customer_id\")\n"
 operator|+
 literal|"cross join \"department\""
 argument_list|,
-literal|"EnumerableProjectRel(product_id=[$0], time_id=[$1], customer_id=[$2], promotion_id=[$3], store_id=[$4], store_sales=[$5], store_cost=[$6], unit_sales=[$7], customer_id0=[$8], account_num=[$9], lname=[$10], fname=[$11], mi=[$12], address1=[$13], address2=[$14], address3=[$15], address4=[$16], city=[$17], state_province=[$18], postal_code=[$19], country=[$20], customer_region_id=[$21], phone1=[$22], phone2=[$23], birthdate=[$24], marital_status=[$25], yearly_income=[$26], gender=[$27], total_children=[$28], num_children_at_home=[$29], education=[$30], date_accnt_opened=[$31], member_card=[$32], occupation=[$33], houseowner=[$34], num_cars_owned=[$35], fullname=[$36], department_id=[$37], department_description=[$38])\n"
+literal|"EnumerableProject(product_id=[$0], time_id=[$1], customer_id=[$2], promotion_id=[$3], store_id=[$4], store_sales=[$5], store_cost=[$6], unit_sales=[$7], customer_id0=[$8], account_num=[$9], lname=[$10], fname=[$11], mi=[$12], address1=[$13], address2=[$14], address3=[$15], address4=[$16], city=[$17], state_province=[$18], postal_code=[$19], country=[$20], customer_region_id=[$21], phone1=[$22], phone2=[$23], birthdate=[$24], marital_status=[$25], yearly_income=[$26], gender=[$27], total_children=[$28], num_children_at_home=[$29], education=[$30], date_accnt_opened=[$31], member_card=[$32], occupation=[$33], houseowner=[$34], num_cars_owned=[$35], fullname=[$36], department_id=[$37], department_description=[$38])\n"
 operator|+
-literal|"  EnumerableProjectRel($f0=[$31], $f1=[$32], $f2=[$33], $f3=[$34], $f4=[$35], $f5=[$36], $f6=[$37], $f7=[$38], $f8=[$2], $f9=[$3], $f10=[$4], $f11=[$5], $f12=[$6], $f13=[$7], $f14=[$8], $f15=[$9], $f16=[$10], $f17=[$11], $f18=[$12], $f19=[$13], $f20=[$14], $f21=[$15], $f22=[$16], $f23=[$17], $f24=[$18], $f25=[$19], $f26=[$20], $f27=[$21], $f28=[$22], $f29=[$23], $f30=[$24], $f31=[$25], $f32=[$26], $f33=[$27], $f34=[$28], $f35=[$29], $f36=[$30], $f37=[$0], $f38=[$1])\n"
+literal|"  EnumerableProject($f0=[$31], $f1=[$32], $f2=[$33], $f3=[$34], $f4=[$35], $f5=[$36], $f6=[$37], $f7=[$38], $f8=[$2], $f9=[$3], $f10=[$4], $f11=[$5], $f12=[$6], $f13=[$7], $f14=[$8], $f15=[$9], $f16=[$10], $f17=[$11], $f18=[$12], $f19=[$13], $f20=[$14], $f21=[$15], $f22=[$16], $f23=[$17], $f24=[$18], $f25=[$19], $f26=[$20], $f27=[$21], $f28=[$22], $f29=[$23], $f30=[$24], $f31=[$25], $f32=[$26], $f33=[$27], $f34=[$28], $f35=[$29], $f36=[$30], $f37=[$0], $f38=[$1])\n"
 operator|+
-literal|"    EnumerableJoinRel(condition=[true], joinType=[inner])\n"
+literal|"    EnumerableJoin(condition=[true], joinType=[inner])\n"
 operator|+
-literal|"      EnumerableTableAccessRel(table=[[foodmart2, department]])\n"
+literal|"      EnumerableTableScan(table=[[foodmart2, department]])\n"
 operator|+
-literal|"      EnumerableJoinRel(condition=[=($0, $31)], joinType=[inner])\n"
+literal|"      EnumerableJoin(condition=[=($0, $31)], joinType=[inner])\n"
 operator|+
-literal|"        EnumerableTableAccessRel(table=[[foodmart2, customer]])\n"
+literal|"        EnumerableTableScan(table=[[foodmart2, customer]])\n"
 operator|+
-literal|"        EnumerableTableAccessRel(table=[[foodmart2, sales_fact_1997]])"
+literal|"        EnumerableTableScan(table=[[foodmart2, sales_fact_1997]])"
 argument_list|)
 expr_stmt|;
 block|}
@@ -3045,27 +3503,27 @@ literal|"cross join \"department\"\n"
 operator|+
 literal|"join \"employee\" using (\"department_id\")"
 argument_list|,
-literal|"EnumerableProjectRel(product_id=[$0], time_id=[$1], customer_id=[$2], promotion_id=[$3], store_id=[$4], store_sales=[$5], store_cost=[$6], unit_sales=[$7], customer_id0=[$8], account_num=[$9], lname=[$10], fname=[$11], mi=[$12], address1=[$13], address2=[$14], address3=[$15], address4=[$16], city=[$17], state_province=[$18], postal_code=[$19], country=[$20], customer_region_id=[$21], phone1=[$22], phone2=[$23], birthdate=[$24], marital_status=[$25], yearly_income=[$26], gender=[$27], total_children=[$28], num_children_at_home=[$29], education=[$30], date_accnt_opened=[$31], member_card=[$32], occupation=[$33], houseowner=[$34], num_cars_owned=[$35], fullname=[$36], department_id=[$37], department_description=[$38], employee_id=[$39], full_name=[$40], first_name=[$41], last_name=[$42], position_id=[$43], position_title=[$44], store_id0=[$45], department_id0=[$46], birth_date=[$47], hire_date=[$48], end_date=[$49], salary=[$50], supervisor_id=[$51], education_level=[$52], marital_status0=[$53], gender0=[$54], management_role=[$55])\n"
+literal|"EnumerableProject(product_id=[$0], time_id=[$1], customer_id=[$2], promotion_id=[$3], store_id=[$4], store_sales=[$5], store_cost=[$6], unit_sales=[$7], customer_id0=[$8], account_num=[$9], lname=[$10], fname=[$11], mi=[$12], address1=[$13], address2=[$14], address3=[$15], address4=[$16], city=[$17], state_province=[$18], postal_code=[$19], country=[$20], customer_region_id=[$21], phone1=[$22], phone2=[$23], birthdate=[$24], marital_status=[$25], yearly_income=[$26], gender=[$27], total_children=[$28], num_children_at_home=[$29], education=[$30], date_accnt_opened=[$31], member_card=[$32], occupation=[$33], houseowner=[$34], num_cars_owned=[$35], fullname=[$36], department_id=[$37], department_description=[$38], employee_id=[$39], full_name=[$40], first_name=[$41], last_name=[$42], position_id=[$43], position_title=[$44], store_id0=[$45], department_id0=[$46], birth_date=[$47], hire_date=[$48], end_date=[$49], salary=[$50], supervisor_id=[$51], education_level=[$52], marital_status0=[$53], gender0=[$54], management_role=[$55])\n"
 operator|+
-literal|"  EnumerableProjectRel($f0=[$48], $f1=[$49], $f2=[$50], $f3=[$51], $f4=[$52], $f5=[$53], $f6=[$54], $f7=[$55], $f8=[$19], $f9=[$20], $f10=[$21], $f11=[$22], $f12=[$23], $f13=[$24], $f14=[$25], $f15=[$26], $f16=[$27], $f17=[$28], $f18=[$29], $f19=[$30], $f20=[$31], $f21=[$32], $f22=[$33], $f23=[$34], $f24=[$35], $f25=[$36], $f26=[$37], $f27=[$38], $f28=[$39], $f29=[$40], $f30=[$41], $f31=[$42], $f32=[$43], $f33=[$44], $f34=[$45], $f35=[$46], $f36=[$47], $f37=[$0], $f38=[$1], $f39=[$2], $f40=[$3], $f41=[$4], $f42=[$5], $f43=[$6], $f44=[$7], $f45=[$8], $f46=[$9], $f47=[$10], $f48=[$11], $f49=[$12], $f50=[$13], $f51=[$14], $f52=[$15], $f53=[$16], $f54=[$17], $f55=[$18])\n"
+literal|"  EnumerableProject($f0=[$48], $f1=[$49], $f2=[$50], $f3=[$51], $f4=[$52], $f5=[$53], $f6=[$54], $f7=[$55], $f8=[$19], $f9=[$20], $f10=[$21], $f11=[$22], $f12=[$23], $f13=[$24], $f14=[$25], $f15=[$26], $f16=[$27], $f17=[$28], $f18=[$29], $f19=[$30], $f20=[$31], $f21=[$32], $f22=[$33], $f23=[$34], $f24=[$35], $f25=[$36], $f26=[$37], $f27=[$38], $f28=[$39], $f29=[$40], $f30=[$41], $f31=[$42], $f32=[$43], $f33=[$44], $f34=[$45], $f35=[$46], $f36=[$47], $f37=[$0], $f38=[$1], $f39=[$2], $f40=[$3], $f41=[$4], $f42=[$5], $f43=[$6], $f44=[$7], $f45=[$8], $f46=[$9], $f47=[$10], $f48=[$11], $f49=[$12], $f50=[$13], $f51=[$14], $f52=[$15], $f53=[$16], $f54=[$17], $f55=[$18])\n"
 operator|+
-literal|"    EnumerableJoinRel(condition=[true], joinType=[inner])\n"
+literal|"    EnumerableJoin(condition=[true], joinType=[inner])\n"
 operator|+
-literal|"      EnumerableJoinRel(condition=[=($0, $9)], joinType=[inner])\n"
+literal|"      EnumerableJoin(condition=[=($0, $9)], joinType=[inner])\n"
 operator|+
-literal|"        EnumerableTableAccessRel(table=[[foodmart2, department]])\n"
+literal|"        EnumerableTableScan(table=[[foodmart2, department]])\n"
 operator|+
-literal|"        EnumerableTableAccessRel(table=[[foodmart2, employee]])\n"
+literal|"        EnumerableTableScan(table=[[foodmart2, employee]])\n"
 operator|+
-literal|"      EnumerableJoinRel(condition=[=($0, $31)], joinType=[inner])\n"
+literal|"      EnumerableJoin(condition=[=($0, $31)], joinType=[inner])\n"
 operator|+
-literal|"        EnumerableTableAccessRel(table=[[foodmart2, customer]])\n"
+literal|"        EnumerableTableScan(table=[[foodmart2, customer]])\n"
 operator|+
-literal|"        EnumerableTableAccessRel(table=[[foodmart2, sales_fact_1997]])\n"
+literal|"        EnumerableTableScan(table=[[foodmart2, sales_fact_1997]])\n"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Checks that a query returns a particular plan, using a planner with    * OptimizeBushyJoinRule enabled. */
+comment|/** Checks that a query returns a particular plan, using a planner with    * MultiJoinOptimizeBushyRule enabled. */
 specifier|private
 name|void
 name|checkBushy
@@ -3108,13 +3566,13 @@ argument_list|)
 operator|.
 name|defaultSchema
 argument_list|(
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|addSchema
 argument_list|(
 name|rootSchema
 argument_list|,
-name|OptiqAssert
+name|CalciteAssert
 operator|.
 name|SchemaSpec
 operator|.
@@ -3235,7 +3693,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Rule to convert a {@link EnumerableProjectRel} to an    * {@link JdbcProjectRel}.    */
+comment|/**    * Rule to convert a    * {@link org.apache.calcite.adapter.enumerable.EnumerableProject} to an    * {@link org.apache.calcite.adapter.jdbc.JdbcRules.JdbcProject}.    */
 specifier|private
 class|class
 name|MockJdbcProjectRule
@@ -3251,7 +3709,7 @@ parameter_list|)
 block|{
 name|super
 argument_list|(
-name|EnumerableProjectRel
+name|EnumerableProject
 operator|.
 name|class
 argument_list|,
@@ -3274,17 +3732,19 @@ name|rel
 parameter_list|)
 block|{
 specifier|final
-name|EnumerableProjectRel
+name|EnumerableProject
 name|project
 init|=
 operator|(
-name|EnumerableProjectRel
+name|EnumerableProject
 operator|)
 name|rel
 decl_stmt|;
 return|return
 operator|new
-name|JdbcProjectRel
+name|JdbcRules
+operator|.
+name|JdbcProject
 argument_list|(
 name|rel
 operator|.
@@ -3306,12 +3766,12 @@ name|convert
 argument_list|(
 name|project
 operator|.
-name|getChild
+name|getInput
 argument_list|()
 argument_list|,
 name|project
 operator|.
-name|getChild
+name|getInput
 argument_list|()
 operator|.
 name|getTraitSet
@@ -3334,7 +3794,7 @@ operator|.
 name|getRowType
 argument_list|()
 argument_list|,
-name|ProjectRelBase
+name|Project
 operator|.
 name|Flags
 operator|.
@@ -3343,7 +3803,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**    * Rule to convert a {@link JavaRules.EnumerableTableAccessRel} to an    * {@link MockJdbcTableScan}.    */
+comment|/**    * Rule to convert a    * {@link org.apache.calcite.adapter.enumerable.EnumerableTableScan} to an    * {@link MockJdbcTableScan}.    */
 specifier|private
 class|class
 name|MockJdbcTableRule
@@ -3359,9 +3819,7 @@ parameter_list|)
 block|{
 name|super
 argument_list|(
-name|JavaRules
-operator|.
-name|EnumerableTableAccessRel
+name|EnumerableTableScan
 operator|.
 name|class
 argument_list|,
@@ -3384,15 +3842,11 @@ name|rel
 parameter_list|)
 block|{
 specifier|final
-name|JavaRules
-operator|.
-name|EnumerableTableAccessRel
+name|EnumerableTableScan
 name|scan
 init|=
 operator|(
-name|JavaRules
-operator|.
-name|EnumerableTableAccessRel
+name|EnumerableTableScan
 operator|)
 name|rel
 decl_stmt|;
@@ -3424,7 +3878,7 @@ specifier|private
 class|class
 name|MockJdbcTableScan
 extends|extends
-name|TableAccessRelBase
+name|TableScan
 implements|implements
 name|JdbcRel
 block|{
@@ -3546,7 +4000,7 @@ literal|null
 return|;
 block|}
 block|}
-comment|/**    * Test to determine whether de-correlation correctly removes CorrelatorRel.    */
+comment|/**    * Test to determine whether de-correlation correctly removes Correlator.    */
 annotation|@
 name|Test
 specifier|public
@@ -3591,7 +4045,7 @@ argument_list|)
 operator|.
 name|contains
 argument_list|(
-literal|"CorrelatorRel"
+literal|"Correlator"
 argument_list|)
 argument_list|)
 expr_stmt|;
