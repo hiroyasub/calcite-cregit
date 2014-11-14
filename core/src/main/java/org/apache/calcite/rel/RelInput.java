@@ -119,11 +119,15 @@ end_import
 
 begin_import
 import|import
-name|java
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|util
 operator|.
-name|BitSet
+name|ImmutableBitSet
 import|;
 end_import
 
@@ -181,7 +185,7 @@ name|String
 name|tag
 parameter_list|)
 function_decl|;
-name|BitSet
+name|ImmutableBitSet
 name|getBitSet
 parameter_list|(
 name|String

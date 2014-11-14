@@ -89,11 +89,15 @@ end_import
 
 begin_import
 import|import
-name|java
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|util
 operator|.
-name|BitSet
+name|ImmutableBitSet
 import|;
 end_import
 
@@ -140,10 +144,10 @@ name|UniqueKeys
 extends|extends
 name|Metadata
 block|{
-comment|/**      * Determines the set of unique minimal keys for this expression. A key is      * represented as a {@link BitSet}, where each bit position represents a      * 0-based output column ordinal.      *      *<p>Note that {@link RelNode#isDistinct} should return {@code true} if and      * only if at least one key is known.</p>      *      *<p>Nulls can be ignored if the relational expression has filtered out      * null values.      *      * @param ignoreNulls if true, ignore null values when determining      *                    whether the keys are unique      * @return set of keys, or null if this information cannot be determined      * (whereas empty set indicates definitely no keys at all)      */
+comment|/**      * Determines the set of unique minimal keys for this expression. A key is      * represented as an {@link org.apache.calcite.util.ImmutableBitSet}, where      * each bit position represents a 0-based output column ordinal.      *      *<p>Note that {@link RelNode#isDistinct} should return {@code true} if and      * only if at least one key is known.</p>      *      *<p>Nulls can be ignored if the relational expression has filtered out      * null values.      *      * @param ignoreNulls if true, ignore null values when determining      *                    whether the keys are unique      * @return set of keys, or null if this information cannot be determined      * (whereas empty set indicates definitely no keys at all)      */
 name|Set
 argument_list|<
-name|BitSet
+name|ImmutableBitSet
 argument_list|>
 name|getUniqueKeys
 parameter_list|(
@@ -163,7 +167,7 @@ comment|/**      * Determines whether a specified set of columns from a specifie
 name|Boolean
 name|areColumnsUnique
 parameter_list|(
-name|BitSet
+name|ImmutableBitSet
 name|columns
 parameter_list|,
 name|boolean
@@ -195,7 +199,7 @@ comment|/**      * Estimates the number of rows which would be produced by a GRO
 name|Double
 name|getDistinctRowCount
 parameter_list|(
-name|BitSet
+name|ImmutableBitSet
 name|groupKey
 parameter_list|,
 name|RexNode
@@ -227,7 +231,7 @@ comment|/**      * Estimates the distinct row count in the original source for t
 name|Double
 name|getPopulationSize
 parameter_list|(
-name|BitSet
+name|ImmutableBitSet
 name|groupKey
 parameter_list|)
 function_decl|;

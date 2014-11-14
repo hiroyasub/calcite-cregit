@@ -25,17 +25,7 @@ name|calcite
 operator|.
 name|util
 operator|.
-name|BitSets
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|BitSet
+name|ImmutableBitSet
 import|;
 end_import
 
@@ -87,7 +77,7 @@ specifier|public
 name|boolean
 name|isKey
 parameter_list|(
-name|BitSet
+name|ImmutableBitSet
 name|columns
 parameter_list|)
 block|{
@@ -110,7 +100,7 @@ parameter_list|,
 specifier|final
 name|List
 argument_list|<
-name|BitSet
+name|ImmutableBitSet
 argument_list|>
 name|keys
 parameter_list|)
@@ -133,13 +123,13 @@ specifier|public
 name|boolean
 name|isKey
 parameter_list|(
-name|BitSet
+name|ImmutableBitSet
 name|columns
 parameter_list|)
 block|{
 for|for
 control|(
-name|BitSet
+name|ImmutableBitSet
 name|key
 range|:
 name|keys
@@ -147,12 +137,10 @@ control|)
 block|{
 if|if
 condition|(
-name|BitSets
+name|columns
 operator|.
 name|contains
 argument_list|(
-name|columns
-argument_list|,
 name|key
 argument_list|)
 condition|)

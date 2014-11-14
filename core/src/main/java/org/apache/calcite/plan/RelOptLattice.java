@@ -109,17 +109,21 @@ name|calcite
 operator|.
 name|util
 operator|.
-name|Pair
+name|ImmutableBitSet
 import|;
 end_import
 
 begin_import
 import|import
-name|java
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|util
 operator|.
-name|BitSet
+name|Pair
 import|;
 end_import
 
@@ -231,7 +235,7 @@ parameter_list|(
 name|RelOptPlanner
 name|planner
 parameter_list|,
-name|BitSet
+name|ImmutableBitSet
 name|groupSet
 parameter_list|,
 name|List

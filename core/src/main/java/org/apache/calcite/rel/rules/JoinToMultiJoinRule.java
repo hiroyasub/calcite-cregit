@@ -217,6 +217,20 @@ name|calcite
 operator|.
 name|util
 operator|.
+name|ImmutableBitSet
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
 name|ImmutableIntList
 import|;
 end_import
@@ -274,16 +288,6 @@ operator|.
 name|collect
 operator|.
 name|Maps
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|BitSet
 import|;
 end_import
 
@@ -422,7 +426,7 @@ comment|// for the new MultiJoin
 specifier|final
 name|List
 argument_list|<
-name|BitSet
+name|ImmutableBitSet
 argument_list|>
 name|projFieldsList
 init|=
@@ -668,7 +672,7 @@ name|right
 parameter_list|,
 name|List
 argument_list|<
-name|BitSet
+name|ImmutableBitSet
 argument_list|>
 name|projFieldsList
 parameter_list|,

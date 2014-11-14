@@ -177,7 +177,7 @@ name|calcite
 operator|.
 name|util
 operator|.
-name|BitSets
+name|ImmutableBitSet
 import|;
 end_import
 
@@ -220,16 +220,6 @@ operator|.
 name|collect
 operator|.
 name|Lists
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|BitSet
 import|;
 end_import
 
@@ -367,7 +357,7 @@ literal|3
 argument_list|)
 decl_stmt|;
 specifier|final
-name|BitSet
+name|ImmutableBitSet
 name|bits
 init|=
 name|RelOptUtil
@@ -385,10 +375,10 @@ literal|null
 argument_list|)
 decl_stmt|;
 specifier|final
-name|BitSet
+name|ImmutableBitSet
 name|rightBits
 init|=
-name|BitSets
+name|ImmutableBitSet
 operator|.
 name|range
 argument_list|(
@@ -440,7 +430,7 @@ argument_list|()
 operator|.
 name|equals
 argument_list|(
-name|BitSets
+name|ImmutableBitSet
 operator|.
 name|range
 argument_list|(
@@ -472,15 +462,13 @@ specifier|final
 name|IntList
 name|aggregateKeys
 init|=
-name|BitSets
-operator|.
-name|toList
-argument_list|(
 name|aggregate
 operator|.
 name|getGroupSet
 argument_list|()
-argument_list|)
+operator|.
+name|toList
+argument_list|()
 decl_stmt|;
 for|for
 control|(

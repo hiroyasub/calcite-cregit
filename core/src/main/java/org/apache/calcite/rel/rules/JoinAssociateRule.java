@@ -187,7 +187,7 @@ name|calcite
 operator|.
 name|util
 operator|.
-name|BitSets
+name|ImmutableBitSet
 import|;
 end_import
 
@@ -218,16 +218,6 @@ operator|.
 name|collect
 operator|.
 name|Lists
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|BitSet
 import|;
 end_import
 
@@ -439,10 +429,10 @@ name|getFieldCount
 argument_list|()
 decl_stmt|;
 specifier|final
-name|BitSet
+name|ImmutableBitSet
 name|aBitSet
 init|=
-name|BitSets
+name|ImmutableBitSet
 operator|.
 name|range
 argument_list|(
@@ -452,10 +442,10 @@ name|aCount
 argument_list|)
 decl_stmt|;
 specifier|final
-name|BitSet
+name|ImmutableBitSet
 name|bBitSet
 init|=
-name|BitSets
+name|ImmutableBitSet
 operator|.
 name|range
 argument_list|(

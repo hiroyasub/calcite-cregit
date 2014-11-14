@@ -1679,7 +1679,7 @@ name|calcite
 operator|.
 name|util
 operator|.
-name|BitSets
+name|ImmutableBitSet
 import|;
 end_import
 
@@ -1922,16 +1922,6 @@ operator|.
 name|util
 operator|.
 name|ArrayList
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|BitSet
 import|;
 end_import
 
@@ -3828,7 +3818,7 @@ name|createAggregate
 argument_list|(
 name|bb
 argument_list|,
-name|BitSets
+name|ImmutableBitSet
 operator|.
 name|range
 argument_list|(
@@ -5372,7 +5362,7 @@ name|cluster
 argument_list|,
 name|seek
 argument_list|,
-name|BitSets
+name|ImmutableBitSet
 operator|.
 name|of
 argument_list|()
@@ -11062,7 +11052,7 @@ return|return
 name|node
 return|;
 default|default:
-name|BitSet
+name|ImmutableBitSet
 name|bits
 init|=
 name|RelOptUtil
@@ -11270,7 +11260,7 @@ specifier|static
 name|Side
 name|of
 parameter_list|(
-name|BitSet
+name|ImmutableBitSet
 name|bitSet
 parameter_list|,
 name|int
@@ -12602,7 +12592,7 @@ name|createAggregate
 argument_list|(
 name|bb
 argument_list|,
-name|BitSets
+name|ImmutableBitSet
 operator|.
 name|range
 argument_list|(
@@ -12963,7 +12953,7 @@ parameter_list|(
 name|Blackboard
 name|bb
 parameter_list|,
-name|BitSet
+name|ImmutableBitSet
 name|groupSet
 parameter_list|,
 name|List

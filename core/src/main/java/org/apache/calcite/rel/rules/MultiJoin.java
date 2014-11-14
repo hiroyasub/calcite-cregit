@@ -171,6 +171,20 @@ name|calcite
 operator|.
 name|util
 operator|.
+name|ImmutableBitSet
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
 name|ImmutableIntList
 import|;
 end_import
@@ -238,16 +252,6 @@ operator|.
 name|util
 operator|.
 name|ArrayList
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|BitSet
 import|;
 end_import
 
@@ -337,7 +341,7 @@ specifier|private
 specifier|final
 name|List
 argument_list|<
-name|BitSet
+name|ImmutableBitSet
 argument_list|>
 name|projFields
 decl_stmt|;
@@ -393,7 +397,7 @@ name|joinTypes
 parameter_list|,
 name|List
 argument_list|<
-name|BitSet
+name|ImmutableBitSet
 argument_list|>
 name|projFields
 parameter_list|,
@@ -993,7 +997,7 @@ comment|/**    * @return bitmaps representing the fields projected from each inp
 specifier|public
 name|List
 argument_list|<
-name|BitSet
+name|ImmutableBitSet
 argument_list|>
 name|getProjFields
 parameter_list|()

@@ -349,7 +349,7 @@ name|calcite
 operator|.
 name|util
 operator|.
-name|BitSets
+name|CompositeList
 import|;
 end_import
 
@@ -363,7 +363,7 @@ name|calcite
 operator|.
 name|util
 operator|.
-name|CompositeList
+name|ImmutableBitSet
 import|;
 end_import
 
@@ -425,16 +425,6 @@ name|java
 operator|.
 name|util
 operator|.
-name|BitSet
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
 name|List
 import|;
 end_import
@@ -462,7 +452,7 @@ name|aggCalls
 decl_stmt|;
 specifier|protected
 specifier|final
-name|BitSet
+name|ImmutableBitSet
 name|groupSet
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
@@ -479,7 +469,7 @@ parameter_list|,
 name|RelNode
 name|child
 parameter_list|,
-name|BitSet
+name|ImmutableBitSet
 name|groupSet
 parameter_list|,
 name|List
@@ -524,25 +514,6 @@ assert|assert
 name|groupSet
 operator|!=
 literal|null
-assert|;
-assert|assert
-name|groupSet
-operator|.
-name|isEmpty
-argument_list|()
-operator|==
-operator|(
-name|groupSet
-operator|.
-name|cardinality
-argument_list|()
-operator|==
-literal|0
-operator|)
-operator|:
-literal|"See https://bugs.openjdk.java.net/browse/JDK-6222207, "
-operator|+
-literal|"BitSet internal invariants may be violated"
 assert|;
 assert|assert
 name|groupSet
@@ -663,7 +634,7 @@ parameter_list|,
 name|RelNode
 name|input
 parameter_list|,
-name|BitSet
+name|ImmutableBitSet
 name|groupSet
 parameter_list|,
 name|List
@@ -710,9 +681,9 @@ name|cardinality
 argument_list|()
 return|;
 block|}
-comment|/**    * Returns a bitmap of the grouping fields.    *    * @return bitset of ordinals of grouping fields    */
+comment|/**    * Returns a bit set of the grouping fields.    *    * @return bit set of ordinals of grouping fields    */
 specifier|public
-name|BitSet
+name|ImmutableBitSet
 name|getGroupSet
 parameter_list|()
 block|{
@@ -944,7 +915,7 @@ specifier|final
 name|RelDataType
 name|inputRowType
 parameter_list|,
-name|BitSet
+name|ImmutableBitSet
 name|groupSet
 parameter_list|,
 specifier|final
@@ -959,12 +930,10 @@ specifier|final
 name|IntList
 name|groupList
 init|=
-name|BitSets
+name|groupSet
 operator|.
 name|toList
-argument_list|(
-name|groupSet
-argument_list|)
+argument_list|()
 decl_stmt|;
 assert|assert
 name|groupList
@@ -1143,9 +1112,6 @@ block|{
 name|SqlAggFunction
 name|aggFunction
 init|=
-operator|(
-name|SqlAggFunction
-operator|)
 name|aggCall
 operator|.
 name|getAggregation

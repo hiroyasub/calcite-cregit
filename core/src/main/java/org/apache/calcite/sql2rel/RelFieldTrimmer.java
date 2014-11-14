@@ -495,7 +495,7 @@ name|calcite
 operator|.
 name|util
 operator|.
-name|BitSets
+name|Bug
 import|;
 end_import
 
@@ -509,7 +509,7 @@ name|calcite
 operator|.
 name|util
 operator|.
-name|Bug
+name|ImmutableBitSet
 import|;
 end_import
 
@@ -678,16 +678,6 @@ operator|.
 name|util
 operator|.
 name|ArrayList
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|BitSet
 import|;
 end_import
 
@@ -917,7 +907,7 @@ name|RelNode
 operator|.
 name|class
 argument_list|,
-name|BitSet
+name|ImmutableBitSet
 operator|.
 name|class
 argument_list|,
@@ -1027,10 +1017,10 @@ name|getFieldCount
 argument_list|()
 decl_stmt|;
 specifier|final
-name|BitSet
+name|ImmutableBitSet
 name|fieldsUsed
 init|=
-name|BitSets
+name|ImmutableBitSet
 operator|.
 name|range
 argument_list|(
@@ -1096,7 +1086,7 @@ parameter_list|,
 name|RelNode
 name|input
 parameter_list|,
-name|BitSet
+name|ImmutableBitSet
 name|fieldsUsed
 parameter_list|,
 name|Set
@@ -1134,7 +1124,7 @@ comment|// MedMdrClassExtentRel, only naked MedMdrClassExtentRel.
 comment|// So, disable trimming.
 name|fieldsUsed
 operator|=
-name|BitSets
+name|ImmutableBitSet
 operator|.
 name|range
 argument_list|(
@@ -1170,7 +1160,7 @@ parameter_list|,
 name|RelNode
 name|input
 parameter_list|,
-name|BitSet
+name|ImmutableBitSet
 name|fieldsUsed
 parameter_list|,
 name|Set
@@ -1393,7 +1383,7 @@ parameter_list|(
 name|RelNode
 name|rel
 parameter_list|,
-name|BitSet
+name|ImmutableBitSet
 name|fieldsUsed
 parameter_list|,
 name|Set
@@ -1561,7 +1551,7 @@ parameter_list|(
 name|RelNode
 name|rel
 parameter_list|,
-name|BitSet
+name|ImmutableBitSet
 name|fieldsUsed
 parameter_list|,
 name|Set
@@ -1601,7 +1591,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**    * Variant of {@link #trimFields(RelNode, BitSet, Set)} for    * {@link org.apache.calcite.rel.logical.LogicalProject}.    */
+comment|/**    * Variant of {@link #trimFields(RelNode, ImmutableBitSet, Set)} for    * {@link org.apache.calcite.rel.logical.LogicalProject}.    */
 specifier|public
 name|TrimResult
 name|trimFields
@@ -1609,7 +1599,7 @@ parameter_list|(
 name|Project
 name|project
 parameter_list|,
-name|BitSet
+name|ImmutableBitSet
 name|fieldsUsed
 parameter_list|,
 name|Set
@@ -1656,18 +1646,6 @@ name|getRowType
 argument_list|()
 decl_stmt|;
 comment|// Which fields are required from the input?
-name|BitSet
-name|inputFieldsUsed
-init|=
-operator|new
-name|BitSet
-argument_list|(
-name|inputRowType
-operator|.
-name|getFieldCount
-argument_list|()
-argument_list|)
-decl_stmt|;
 specifier|final
 name|Set
 argument_list|<
@@ -1694,8 +1672,6 @@ name|RelOptUtil
 operator|.
 name|InputFinder
 argument_list|(
-name|inputFieldsUsed
-argument_list|,
 name|inputExtraFields
 argument_list|)
 decl_stmt|;
@@ -1741,6 +1717,16 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+name|ImmutableBitSet
+name|inputFieldsUsed
+init|=
+name|inputFinder
+operator|.
+name|inputBitSet
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
 comment|// Create input with trimmed columns.
 name|TrimResult
 name|trimResult
@@ -2144,7 +2130,7 @@ name|mapping
 argument_list|)
 return|;
 block|}
-comment|/**    * Variant of {@link #trimFields(RelNode, BitSet, Set)} for    * {@link org.apache.calcite.rel.logical.LogicalFilter}.    */
+comment|/**    * Variant of {@link #trimFields(RelNode, ImmutableBitSet, Set)} for    * {@link org.apache.calcite.rel.logical.LogicalFilter}.    */
 specifier|public
 name|TrimResult
 name|trimFields
@@ -2152,7 +2138,7 @@ parameter_list|(
 name|Filter
 name|filter
 parameter_list|,
-name|BitSet
+name|ImmutableBitSet
 name|fieldsUsed
 parameter_list|,
 name|Set
@@ -2200,17 +2186,6 @@ argument_list|()
 decl_stmt|;
 comment|// We use the fields used by the consumer, plus any fields used in the
 comment|// filter.
-name|BitSet
-name|inputFieldsUsed
-init|=
-operator|(
-name|BitSet
-operator|)
-name|fieldsUsed
-operator|.
-name|clone
-argument_list|()
-decl_stmt|;
 specifier|final
 name|Set
 argument_list|<
@@ -2237,11 +2212,18 @@ name|RelOptUtil
 operator|.
 name|InputFinder
 argument_list|(
-name|inputFieldsUsed
-argument_list|,
 name|inputExtraFields
 argument_list|)
 decl_stmt|;
+name|inputFinder
+operator|.
+name|inputBitSet
+operator|.
+name|addAll
+argument_list|(
+name|fieldsUsed
+argument_list|)
+expr_stmt|;
 name|conditionExpr
 operator|.
 name|accept
@@ -2249,6 +2231,17 @@ argument_list|(
 name|inputFinder
 argument_list|)
 expr_stmt|;
+specifier|final
+name|ImmutableBitSet
+name|inputFieldsUsed
+init|=
+name|inputFinder
+operator|.
+name|inputBitSet
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
 comment|// Create input with trimmed columns.
 name|TrimResult
 name|trimResult
@@ -2362,7 +2355,7 @@ name|inputMapping
 argument_list|)
 return|;
 block|}
-comment|/**    * Variant of {@link #trimFields(RelNode, BitSet, Set)} for    * {@link org.apache.calcite.rel.core.Sort}.    */
+comment|/**    * Variant of {@link #trimFields(RelNode, ImmutableBitSet, Set)} for    * {@link org.apache.calcite.rel.core.Sort}.    */
 specifier|public
 name|TrimResult
 name|trimFields
@@ -2370,7 +2363,7 @@ parameter_list|(
 name|Sort
 name|sort
 parameter_list|,
-name|BitSet
+name|ImmutableBitSet
 name|fieldsUsed
 parameter_list|,
 name|Set
@@ -2418,16 +2411,18 @@ argument_list|()
 decl_stmt|;
 comment|// We use the fields used by the consumer, plus any fields used as sort
 comment|// keys.
-name|BitSet
+specifier|final
+name|ImmutableBitSet
+operator|.
+name|Builder
 name|inputFieldsUsed
 init|=
-operator|(
-name|BitSet
-operator|)
-name|fieldsUsed
+name|ImmutableBitSet
 operator|.
-name|clone
-argument_list|()
+name|builder
+argument_list|(
+name|fieldsUsed
+argument_list|)
 decl_stmt|;
 for|for
 control|(
@@ -2474,6 +2469,9 @@ argument_list|,
 name|input
 argument_list|,
 name|inputFieldsUsed
+operator|.
+name|build
+argument_list|()
 argument_list|,
 name|inputExtraFields
 argument_list|)
@@ -2600,7 +2598,7 @@ name|inputMapping
 argument_list|)
 return|;
 block|}
-comment|/**    * Variant of {@link #trimFields(RelNode, BitSet, Set)} for    * {@link org.apache.calcite.rel.logical.LogicalJoin}.    */
+comment|/**    * Variant of {@link #trimFields(RelNode, ImmutableBitSet, Set)} for    * {@link org.apache.calcite.rel.logical.LogicalJoin}.    */
 specifier|public
 name|TrimResult
 name|trimFields
@@ -2608,7 +2606,7 @@ parameter_list|(
 name|Join
 name|join
 parameter_list|,
-name|BitSet
+name|ImmutableBitSet
 name|fieldsUsed
 parameter_list|,
 name|Set
@@ -2674,17 +2672,6 @@ name|size
 argument_list|()
 decl_stmt|;
 comment|// Add in fields used in the condition.
-name|BitSet
-name|fieldsUsedPlus
-init|=
-operator|(
-name|BitSet
-operator|)
-name|fieldsUsed
-operator|.
-name|clone
-argument_list|()
-decl_stmt|;
 specifier|final
 name|Set
 argument_list|<
@@ -2711,11 +2698,18 @@ name|RelOptUtil
 operator|.
 name|InputFinder
 argument_list|(
-name|fieldsUsedPlus
-argument_list|,
 name|combinedInputExtraFields
 argument_list|)
 decl_stmt|;
+name|inputFinder
+operator|.
+name|inputBitSet
+operator|.
+name|addAll
+argument_list|(
+name|fieldsUsed
+argument_list|)
+expr_stmt|;
 name|conditionExpr
 operator|.
 name|accept
@@ -2723,6 +2717,17 @@ argument_list|(
 name|inputFinder
 argument_list|)
 expr_stmt|;
+specifier|final
+name|ImmutableBitSet
+name|fieldsUsedPlus
+init|=
+name|inputFinder
+operator|.
+name|inputBitSet
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
 comment|// If no system fields are used, we can remove them.
 name|int
 name|systemFieldUsedCount
@@ -2868,26 +2873,22 @@ name|getFieldCount
 argument_list|()
 decl_stmt|;
 comment|// Compute required mapping.
-name|BitSet
+name|ImmutableBitSet
+operator|.
+name|Builder
 name|inputFieldsUsed
 init|=
-operator|new
-name|BitSet
-argument_list|(
-name|inputFieldCount
-argument_list|)
+name|ImmutableBitSet
+operator|.
+name|builder
+argument_list|()
 decl_stmt|;
 for|for
 control|(
 name|int
 name|bit
 range|:
-name|BitSets
-operator|.
-name|toIter
-argument_list|(
 name|fieldsUsedPlus
-argument_list|)
 control|)
 block|{
 if|if
@@ -2916,15 +2917,6 @@ block|}
 block|}
 comment|// If there are system fields, we automatically use the
 comment|// corresponding field in each input.
-if|if
-condition|(
-name|newSystemFieldCount
-operator|>
-literal|0
-condition|)
-block|{
-comment|// calling with newSystemFieldCount == 0 should be safe but hits
-comment|// http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=6222207
 name|inputFieldsUsed
 operator|.
 name|set
@@ -2934,7 +2926,6 @@ argument_list|,
 name|newSystemFieldCount
 argument_list|)
 expr_stmt|;
-block|}
 comment|// FIXME: We ought to collect extra fields for each input
 comment|// individually. For now, we assume that just one input has
 comment|// on-demand fields.
@@ -2983,6 +2974,9 @@ argument_list|,
 name|input
 argument_list|,
 name|inputFieldsUsed
+operator|.
+name|build
+argument_list|()
 argument_list|,
 name|inputExtraFields
 argument_list|)
@@ -3415,7 +3409,7 @@ name|mapping
 argument_list|)
 return|;
 block|}
-comment|/**    * Variant of {@link #trimFields(RelNode, BitSet, Set)} for    * {@link org.apache.calcite.rel.core.SetOp} (including UNION and UNION ALL).    */
+comment|/**    * Variant of {@link #trimFields(RelNode, ImmutableBitSet, Set)} for    * {@link org.apache.calcite.rel.core.SetOp} (including UNION and UNION ALL).    */
 specifier|public
 name|TrimResult
 name|trimFields
@@ -3423,7 +3417,7 @@ parameter_list|(
 name|SetOp
 name|setOp
 parameter_list|,
-name|BitSet
+name|ImmutableBitSet
 name|fieldsUsed
 parameter_list|,
 name|Set
@@ -3468,8 +3462,10 @@ argument_list|()
 condition|)
 block|{
 name|fieldsUsed
+operator|=
+name|ImmutableBitSet
 operator|.
-name|set
+name|of
 argument_list|(
 name|rowType
 operator|.
@@ -3658,7 +3654,7 @@ name|mapping
 argument_list|)
 return|;
 block|}
-comment|/**    * Variant of {@link #trimFields(RelNode, BitSet, Set)} for    * {@link org.apache.calcite.rel.logical.LogicalAggregate}.    */
+comment|/**    * Variant of {@link #trimFields(RelNode, ImmutableBitSet, Set)} for    * {@link org.apache.calcite.rel.logical.LogicalAggregate}.    */
 specifier|public
 name|TrimResult
 name|trimFields
@@ -3666,7 +3662,7 @@ parameter_list|(
 name|Aggregate
 name|aggregate
 parameter_list|,
-name|BitSet
+name|ImmutableBitSet
 name|fieldsUsed
 parameter_list|,
 name|Set
@@ -3698,38 +3694,23 @@ name|getRowType
 argument_list|()
 decl_stmt|;
 comment|// Compute which input fields are used.
-name|BitSet
+comment|// 1. group fields are always used
+specifier|final
+name|ImmutableBitSet
+operator|.
+name|Builder
 name|inputFieldsUsed
 init|=
-operator|new
-name|BitSet
-argument_list|()
-decl_stmt|;
-comment|// 1. group fields are always used
-for|for
-control|(
-name|int
-name|i
-range|:
-name|BitSets
+name|ImmutableBitSet
 operator|.
-name|toIter
+name|builder
 argument_list|(
 name|aggregate
 operator|.
 name|getGroupSet
 argument_list|()
 argument_list|)
-control|)
-block|{
-name|inputFieldsUsed
-operator|.
-name|set
-argument_list|(
-name|i
-argument_list|)
-expr_stmt|;
-block|}
+decl_stmt|;
 comment|// 2. agg functions
 for|for
 control|(
@@ -3797,6 +3778,9 @@ argument_list|,
 name|input
 argument_list|,
 name|inputFieldsUsed
+operator|.
+name|build
+argument_list|()
 argument_list|,
 name|inputExtraFields
 argument_list|)
@@ -3829,7 +3813,7 @@ name|fieldsUsed
 operator|.
 name|equals
 argument_list|(
-name|BitSets
+name|ImmutableBitSet
 operator|.
 name|range
 argument_list|(
@@ -3942,7 +3926,7 @@ name|usedAggCallCount
 argument_list|)
 decl_stmt|;
 specifier|final
-name|BitSet
+name|ImmutableBitSet
 name|newGroupSet
 init|=
 name|Mappings
@@ -4128,7 +4112,7 @@ name|mapping
 argument_list|)
 return|;
 block|}
-comment|/**    * Variant of {@link #trimFields(RelNode, BitSet, Set)} for    * {@link org.apache.calcite.rel.logical.LogicalTableModify}.    */
+comment|/**    * Variant of {@link #trimFields(RelNode, ImmutableBitSet, Set)} for    * {@link org.apache.calcite.rel.logical.LogicalTableModify}.    */
 specifier|public
 name|TrimResult
 name|trimFields
@@ -4136,7 +4120,7 @@ parameter_list|(
 name|LogicalTableModify
 name|modifier
 parameter_list|,
-name|BitSet
+name|ImmutableBitSet
 name|fieldsUsed
 parameter_list|,
 name|Set
@@ -4193,10 +4177,11 @@ operator|.
 name|getFieldCount
 argument_list|()
 decl_stmt|;
-name|BitSet
+specifier|final
+name|ImmutableBitSet
 name|inputFieldsUsed
 init|=
-name|BitSets
+name|ImmutableBitSet
 operator|.
 name|range
 argument_list|(
@@ -4331,7 +4316,7 @@ name|mapping
 argument_list|)
 return|;
 block|}
-comment|/**    * Variant of {@link #trimFields(RelNode, BitSet, Set)} for    * {@link org.apache.calcite.rel.logical.LogicalTableFunctionScan}.    */
+comment|/**    * Variant of {@link #trimFields(RelNode, ImmutableBitSet, Set)} for    * {@link org.apache.calcite.rel.logical.LogicalTableFunctionScan}.    */
 specifier|public
 name|TrimResult
 name|trimFields
@@ -4339,7 +4324,7 @@ parameter_list|(
 name|LogicalTableFunctionScan
 name|tabFun
 parameter_list|,
-name|BitSet
+name|ImmutableBitSet
 name|fieldsUsed
 parameter_list|,
 name|Set
@@ -4403,10 +4388,10 @@ operator|.
 name|getFieldCount
 argument_list|()
 decl_stmt|;
-name|BitSet
+name|ImmutableBitSet
 name|inputFieldsUsed
 init|=
-name|BitSets
+name|ImmutableBitSet
 operator|.
 name|range
 argument_list|(
@@ -4524,7 +4509,7 @@ name|mapping
 argument_list|)
 return|;
 block|}
-comment|/**    * Variant of {@link #trimFields(RelNode, BitSet, Set)} for    * {@link org.apache.calcite.rel.logical.LogicalValues}.    */
+comment|/**    * Variant of {@link #trimFields(RelNode, ImmutableBitSet, Set)} for    * {@link org.apache.calcite.rel.logical.LogicalValues}.    */
 specifier|public
 name|TrimResult
 name|trimFields
@@ -4532,7 +4517,7 @@ parameter_list|(
 name|LogicalValues
 name|values
 parameter_list|,
-name|BitSet
+name|ImmutableBitSet
 name|fieldsUsed
 parameter_list|,
 name|Set
@@ -4573,7 +4558,7 @@ condition|)
 block|{
 name|fieldsUsed
 operator|=
-name|BitSets
+name|ImmutableBitSet
 operator|.
 name|range
 argument_list|(
@@ -4592,7 +4577,7 @@ name|fieldsUsed
 operator|.
 name|equals
 argument_list|(
-name|BitSets
+name|ImmutableBitSet
 operator|.
 name|range
 argument_list|(
@@ -4672,12 +4657,7 @@ control|(
 name|int
 name|field
 range|:
-name|BitSets
-operator|.
-name|toIter
-argument_list|(
 name|fieldsUsed
-argument_list|)
 control|)
 block|{
 name|newTuple
@@ -4764,7 +4744,7 @@ specifier|private
 name|Mapping
 name|createMapping
 parameter_list|(
-name|BitSet
+name|ImmutableBitSet
 name|fieldsUsed
 parameter_list|,
 name|int
@@ -4801,12 +4781,7 @@ control|(
 name|int
 name|field
 range|:
-name|BitSets
-operator|.
-name|toIter
-argument_list|(
 name|fieldsUsed
-argument_list|)
 control|)
 block|{
 name|mapping
@@ -4824,7 +4799,7 @@ return|return
 name|mapping
 return|;
 block|}
-comment|/**    * Variant of {@link #trimFields(RelNode, BitSet, Set)} for    * {@link org.apache.calcite.rel.logical.LogicalTableScan}.    */
+comment|/**    * Variant of {@link #trimFields(RelNode, ImmutableBitSet, Set)} for    * {@link org.apache.calcite.rel.logical.LogicalTableScan}.    */
 specifier|public
 name|TrimResult
 name|trimFields
@@ -4833,7 +4808,7 @@ specifier|final
 name|TableScan
 name|tableAccessRel
 parameter_list|,
-name|BitSet
+name|ImmutableBitSet
 name|fieldsUsed
 parameter_list|,
 name|Set
@@ -4861,7 +4836,7 @@ name|fieldsUsed
 operator|.
 name|equals
 argument_list|(
-name|BitSets
+name|ImmutableBitSet
 operator|.
 name|range
 argument_list|(

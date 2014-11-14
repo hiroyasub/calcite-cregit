@@ -209,7 +209,7 @@ name|calcite
 operator|.
 name|util
 operator|.
-name|BitSets
+name|BuiltInMethod
 import|;
 end_import
 
@@ -223,7 +223,7 @@ name|calcite
 operator|.
 name|util
 operator|.
-name|BuiltInMethod
+name|ImmutableBitSet
 import|;
 end_import
 
@@ -803,7 +803,7 @@ name|RelOptUtil
 operator|.
 name|splitFilters
 argument_list|(
-name|BitSets
+name|ImmutableBitSet
 operator|.
 name|range
 argument_list|(

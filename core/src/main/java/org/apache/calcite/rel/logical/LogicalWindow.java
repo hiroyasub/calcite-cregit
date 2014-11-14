@@ -283,7 +283,7 @@ name|calcite
 operator|.
 name|util
 operator|.
-name|BitSets
+name|ImmutableBitSet
 import|;
 end_import
 
@@ -402,16 +402,6 @@ operator|.
 name|util
 operator|.
 name|ArrayList
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|BitSet
 import|;
 end_import
 
@@ -1578,7 +1568,7 @@ name|WindowKey
 block|{
 specifier|private
 specifier|final
-name|BitSet
+name|ImmutableBitSet
 name|groupSet
 decl_stmt|;
 specifier|private
@@ -1604,7 +1594,7 @@ decl_stmt|;
 specifier|public
 name|WindowKey
 parameter_list|(
-name|BitSet
+name|ImmutableBitSet
 name|groupSet
 parameter_list|,
 name|RelCollation
@@ -1853,10 +1843,10 @@ argument_list|)
 argument_list|)
 argument_list|)
 decl_stmt|;
-name|BitSet
+name|ImmutableBitSet
 name|groupSet
 init|=
-name|BitSets
+name|ImmutableBitSet
 operator|.
 name|of
 argument_list|(
@@ -1887,12 +1877,19 @@ block|{
 comment|// If PARTITION BY references constant, we can ignore such partition key.
 comment|// All the inputs after inputFieldCount are literals, thus we can clear.
 name|groupSet
+operator|=
+name|groupSet
 operator|.
-name|clear
+name|except
+argument_list|(
+name|ImmutableBitSet
+operator|.
+name|range
 argument_list|(
 name|inputFieldCount
 argument_list|,
 name|groupLength
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}

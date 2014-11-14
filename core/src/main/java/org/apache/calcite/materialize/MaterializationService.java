@@ -331,7 +331,7 @@ name|calcite
 operator|.
 name|util
 operator|.
-name|BitSets
+name|ImmutableBitSet
 import|;
 end_import
 
@@ -438,16 +438,6 @@ operator|.
 name|util
 operator|.
 name|ArrayList
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|BitSet
 import|;
 end_import
 
@@ -1290,7 +1280,7 @@ parameter_list|(
 name|Lattice
 name|lattice
 parameter_list|,
-name|BitSet
+name|ImmutableBitSet
 name|groupSet
 parameter_list|,
 name|List
@@ -1577,14 +1567,12 @@ name|lattice
 operator|==
 name|lattice
 operator|&&
-name|BitSets
-operator|.
-name|contains
-argument_list|(
 name|tileKey2
 operator|.
 name|dimensions
-argument_list|,
+operator|.
+name|contains
+argument_list|(
 name|groupSet
 argument_list|)
 operator|&&
@@ -1999,14 +1987,12 @@ argument_list|(
 name|measure
 argument_list|)
 operator|||
-name|BitSets
-operator|.
-name|contains
-argument_list|(
 name|tileKey
 operator|.
 name|dimensions
-argument_list|,
+operator|.
+name|contains
+argument_list|(
 name|measure
 operator|.
 name|argBitSet

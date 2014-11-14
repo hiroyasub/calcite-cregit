@@ -383,7 +383,7 @@ name|calcite
 operator|.
 name|util
 operator|.
-name|BitSets
+name|BuiltInMethod
 import|;
 end_import
 
@@ -397,7 +397,7 @@ name|calcite
 operator|.
 name|util
 operator|.
-name|BuiltInMethod
+name|ImmutableBitSet
 import|;
 end_import
 
@@ -462,16 +462,6 @@ operator|.
 name|util
 operator|.
 name|ArrayList
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|BitSet
 import|;
 end_import
 
@@ -550,7 +540,7 @@ parameter_list|,
 name|RelNode
 name|child
 parameter_list|,
-name|BitSet
+name|ImmutableBitSet
 name|groupSet
 parameter_list|,
 name|List
@@ -658,7 +648,7 @@ parameter_list|,
 name|RelNode
 name|input
 parameter_list|,
-name|BitSet
+name|ImmutableBitSet
 name|groupSet
 parameter_list|,
 name|List
@@ -891,12 +881,10 @@ name|inputPhysType
 operator|.
 name|project
 argument_list|(
-name|BitSets
+name|groupSet
 operator|.
 name|toList
-argument_list|(
-name|groupSet
-argument_list|)
+argument_list|()
 argument_list|,
 name|JavaRowFormat
 operator|.
@@ -928,12 +916,10 @@ name|generateSelector
 argument_list|(
 name|parameter
 argument_list|,
-name|BitSets
+name|groupSet
 operator|.
 name|toList
-argument_list|(
-name|groupSet
-argument_list|)
+argument_list|()
 argument_list|,
 name|keyPhysType
 operator|.
@@ -1997,7 +1983,7 @@ name|groupSet
 operator|.
 name|equals
 argument_list|(
-name|BitSets
+name|ImmutableBitSet
 operator|.
 name|range
 argument_list|(

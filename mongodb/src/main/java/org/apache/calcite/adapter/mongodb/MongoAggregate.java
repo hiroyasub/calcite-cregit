@@ -177,7 +177,7 @@ name|calcite
 operator|.
 name|util
 operator|.
-name|BitSets
+name|ImmutableBitSet
 import|;
 end_import
 
@@ -221,16 +221,6 @@ name|java
 operator|.
 name|util
 operator|.
-name|BitSet
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
 name|List
 import|;
 end_import
@@ -260,7 +250,7 @@ parameter_list|,
 name|RelNode
 name|child
 parameter_list|,
-name|BitSet
+name|ImmutableBitSet
 name|groupSet
 parameter_list|,
 name|List
@@ -340,7 +330,7 @@ parameter_list|,
 name|RelNode
 name|input
 parameter_list|,
-name|BitSet
+name|ImmutableBitSet
 name|groupSet
 parameter_list|,
 name|List
@@ -473,14 +463,9 @@ name|inNames
 operator|.
 name|get
 argument_list|(
-name|BitSets
-operator|.
-name|toList
-argument_list|(
 name|groupSet
-argument_list|)
 operator|.
-name|get
+name|nth
 argument_list|(
 literal|0
 argument_list|)
@@ -526,12 +511,7 @@ control|(
 name|int
 name|group
 range|:
-name|BitSets
-operator|.
-name|toIter
-argument_list|(
 name|groupSet
-argument_list|)
 control|)
 block|{
 specifier|final
@@ -775,12 +755,7 @@ control|(
 name|int
 name|group
 range|:
-name|BitSets
-operator|.
-name|toIter
-argument_list|(
 name|groupSet
-argument_list|)
 control|)
 block|{
 name|fixups

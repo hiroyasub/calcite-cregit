@@ -77,11 +77,15 @@ end_import
 
 begin_import
 import|import
-name|java
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|util
 operator|.
-name|BitSet
+name|ImmutableBitSet
 import|;
 end_import
 
@@ -148,7 +152,7 @@ comment|/**    * Returns whether the given columns are a key or a superset of a 
 name|boolean
 name|isKey
 parameter_list|(
-name|BitSet
+name|ImmutableBitSet
 name|columns
 parameter_list|)
 function_decl|;

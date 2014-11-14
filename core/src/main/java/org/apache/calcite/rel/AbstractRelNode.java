@@ -257,7 +257,7 @@ name|calcite
 operator|.
 name|util
 operator|.
-name|BitSets
+name|ImmutableBitSet
 import|;
 end_import
 
@@ -346,16 +346,6 @@ operator|.
 name|util
 operator|.
 name|ArrayList
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|BitSet
 import|;
 end_import
 
@@ -738,7 +728,7 @@ block|{
 return|return
 name|isKey
 argument_list|(
-name|BitSets
+name|ImmutableBitSet
 operator|.
 name|range
 argument_list|(
@@ -755,7 +745,7 @@ specifier|public
 name|boolean
 name|isKey
 parameter_list|(
-name|BitSet
+name|ImmutableBitSet
 name|columns
 parameter_list|)
 block|{

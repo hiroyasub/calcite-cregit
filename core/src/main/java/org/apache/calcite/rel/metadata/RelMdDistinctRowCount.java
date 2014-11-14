@@ -241,7 +241,7 @@ name|calcite
 operator|.
 name|util
 operator|.
-name|BitSets
+name|BuiltInMethod
 import|;
 end_import
 
@@ -255,7 +255,7 @@ name|calcite
 operator|.
 name|util
 operator|.
-name|BuiltInMethod
+name|ImmutableBitSet
 import|;
 end_import
 
@@ -280,16 +280,6 @@ operator|.
 name|util
 operator|.
 name|ArrayList
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|BitSet
 import|;
 end_import
 
@@ -347,7 +337,7 @@ parameter_list|(
 name|Union
 name|rel
 parameter_list|,
-name|BitSet
+name|ImmutableBitSet
 name|groupKey
 parameter_list|,
 name|RexNode
@@ -484,7 +474,7 @@ parameter_list|(
 name|Sort
 name|rel
 parameter_list|,
-name|BitSet
+name|ImmutableBitSet
 name|groupKey
 parameter_list|,
 name|RexNode
@@ -514,7 +504,7 @@ parameter_list|(
 name|Filter
 name|rel
 parameter_list|,
-name|BitSet
+name|ImmutableBitSet
 name|groupKey
 parameter_list|,
 name|RexNode
@@ -570,7 +560,7 @@ parameter_list|(
 name|Join
 name|rel
 parameter_list|,
-name|BitSet
+name|ImmutableBitSet
 name|groupKey
 parameter_list|,
 name|RexNode
@@ -604,7 +594,7 @@ parameter_list|(
 name|SemiJoin
 name|rel
 parameter_list|,
-name|BitSet
+name|ImmutableBitSet
 name|groupKey
 parameter_list|,
 name|RexNode
@@ -680,7 +670,7 @@ parameter_list|(
 name|Aggregate
 name|rel
 parameter_list|,
-name|BitSet
+name|ImmutableBitSet
 name|groupKey
 parameter_list|,
 name|RexNode
@@ -758,11 +748,14 @@ literal|true
 argument_list|)
 decl_stmt|;
 comment|// set the bits as they correspond to the child input
-name|BitSet
+name|ImmutableBitSet
+operator|.
+name|Builder
 name|childKey
 init|=
-operator|new
-name|BitSet
+name|ImmutableBitSet
+operator|.
+name|builder
 argument_list|()
 decl_stmt|;
 name|RelMdUtil
@@ -789,6 +782,9 @@ name|getInput
 argument_list|()
 argument_list|,
 name|childKey
+operator|.
+name|build
+argument_list|()
 argument_list|,
 name|childPreds
 argument_list|)
@@ -851,7 +847,7 @@ parameter_list|(
 name|Values
 name|rel
 parameter_list|,
-name|BitSet
+name|ImmutableBitSet
 name|groupKey
 parameter_list|,
 name|RexNode
@@ -899,25 +895,31 @@ parameter_list|(
 name|Project
 name|rel
 parameter_list|,
-name|BitSet
+name|ImmutableBitSet
 name|groupKey
 parameter_list|,
 name|RexNode
 name|predicate
 parameter_list|)
 block|{
-name|BitSet
+name|ImmutableBitSet
+operator|.
+name|Builder
 name|baseCols
 init|=
-operator|new
-name|BitSet
+name|ImmutableBitSet
+operator|.
+name|builder
 argument_list|()
 decl_stmt|;
-name|BitSet
+name|ImmutableBitSet
+operator|.
+name|Builder
 name|projCols
 init|=
-operator|new
-name|BitSet
+name|ImmutableBitSet
+operator|.
+name|builder
 argument_list|()
 decl_stmt|;
 name|List
@@ -974,7 +976,7 @@ name|RelOptUtil
 operator|.
 name|splitFilters
 argument_list|(
-name|BitSets
+name|ImmutableBitSet
 operator|.
 name|range
 argument_list|(
@@ -1065,6 +1067,9 @@ name|getInput
 argument_list|()
 argument_list|,
 name|baseCols
+operator|.
+name|build
+argument_list|()
 argument_list|,
 name|modifiedPred
 argument_list|)
@@ -1135,12 +1140,10 @@ control|(
 name|int
 name|bit
 range|:
-name|BitSets
-operator|.
-name|toIter
-argument_list|(
 name|projCols
-argument_list|)
+operator|.
+name|build
+argument_list|()
 control|)
 block|{
 name|Double
@@ -1200,7 +1203,7 @@ parameter_list|(
 name|RelNode
 name|rel
 parameter_list|,
-name|BitSet
+name|ImmutableBitSet
 name|groupKey
 parameter_list|,
 name|RexNode

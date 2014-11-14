@@ -73,11 +73,15 @@ end_import
 
 begin_import
 import|import
-name|java
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|util
 operator|.
-name|BitSet
+name|ImmutableBitSet
 import|;
 end_import
 
@@ -102,13 +106,13 @@ name|Strong
 block|{
 specifier|private
 specifier|final
-name|BitSet
+name|ImmutableBitSet
 name|nullColumns
 decl_stmt|;
 specifier|private
 name|Strong
 parameter_list|(
-name|BitSet
+name|ImmutableBitSet
 name|nullColumns
 parameter_list|)
 block|{
@@ -124,7 +128,7 @@ specifier|static
 name|Strong
 name|of
 parameter_list|(
-name|BitSet
+name|ImmutableBitSet
 name|nullColumns
 parameter_list|)
 block|{
@@ -145,7 +149,7 @@ parameter_list|(
 name|RexNode
 name|node
 parameter_list|,
-name|BitSet
+name|ImmutableBitSet
 name|nullColumns
 parameter_list|)
 block|{

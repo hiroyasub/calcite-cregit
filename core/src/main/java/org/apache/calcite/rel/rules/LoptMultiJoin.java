@@ -223,6 +223,20 @@ name|calcite
 operator|.
 name|util
 operator|.
+name|ImmutableBitSet
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
 name|IntList
 import|;
 end_import
@@ -252,6 +266,20 @@ operator|.
 name|collect
 operator|.
 name|Lists
+import|;
+end_import
+
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|Maps
 import|;
 end_import
 
@@ -397,7 +425,7 @@ decl_stmt|;
 comment|/**    * If a join factor is null generating in a left or right outer join, the    * bitmap contains the non-null generating factors that the null generating    * factor is dependent upon    */
 specifier|private
 specifier|final
-name|BitSet
+name|ImmutableBitSet
 index|[]
 name|outerJoinFactors
 decl_stmt|;
@@ -405,7 +433,7 @@ comment|/**    * Bitmap corresponding to the fields projected from each join fac
 specifier|private
 name|List
 argument_list|<
-name|BitSet
+name|ImmutableBitSet
 argument_list|>
 name|projFields
 decl_stmt|;
@@ -426,7 +454,7 @@ name|Map
 argument_list|<
 name|RexNode
 argument_list|,
-name|BitSet
+name|ImmutableBitSet
 argument_list|>
 name|factorsRefByJoinFilter
 decl_stmt|;
@@ -436,7 +464,7 @@ name|Map
 argument_list|<
 name|RexNode
 argument_list|,
-name|BitSet
+name|ImmutableBitSet
 argument_list|>
 name|fieldsRefByJoinFilter
 decl_stmt|;
@@ -451,7 +479,7 @@ index|[]
 name|nFieldsInJoinFactor
 decl_stmt|;
 comment|/**    * Bitmap indicating which factors each factor references in join filters    * that correspond to comparisons    */
-name|BitSet
+name|ImmutableBitSet
 index|[]
 name|factorsRefByFactor
 decl_stmt|;
@@ -721,7 +749,7 @@ decl_stmt|;
 name|outerJoinFactors
 operator|=
 operator|new
-name|BitSet
+name|ImmutableBitSet
 index|[
 name|nJoinFactors
 index|]
@@ -756,7 +784,7 @@ block|{
 comment|// set a bitmap containing the factors referenced in the
 comment|// ON condition of the outer join; mask off the factor
 comment|// corresponding to the factor itself
-name|BitSet
+name|ImmutableBitSet
 name|dependentFactors
 init|=
 name|getJoinFilterFactorBitmap
@@ -771,6 +799,8 @@ argument_list|,
 literal|false
 argument_list|)
 decl_stmt|;
+name|dependentFactors
+operator|=
 name|dependentFactors
 operator|.
 name|clear
@@ -918,7 +948,7 @@ return|;
 block|}
 comment|/**    * @param joinFilter filter for which information will be returned    *    * @return bitmap corresponding to the factors referenced within the    * specified join filter    */
 specifier|public
-name|BitSet
+name|ImmutableBitSet
 name|getFactorsRefByJoinFilter
 parameter_list|(
 name|RexNode
@@ -955,7 +985,7 @@ return|;
 block|}
 comment|/**    * @param joinFilter the filter for which information will be returned    *    * @return bitmap corresponding to the fields referenced by a join filter    */
 specifier|public
-name|BitSet
+name|ImmutableBitSet
 name|getFieldsRefByJoinFilter
 parameter_list|(
 name|RexNode
@@ -985,7 +1015,7 @@ return|;
 block|}
 comment|/**    * @param factIdx factor for which information will be returned    *    * @return bitmap corresponding to the factors referenced by the specified    * factor in the various join filters that correspond to comparisons    */
 specifier|public
-name|BitSet
+name|ImmutableBitSet
 name|getFactorsRefByFactor
 parameter_list|(
 name|int
@@ -1039,7 +1069,7 @@ return|;
 block|}
 comment|/**    * @param factIdx factor for which information will be returned    *    * @return bitmap containing the factors that a null generating factor is    * dependent upon, if the factor is null generating in a left or right outer    * join; otherwise null is returned    */
 specifier|public
-name|BitSet
+name|ImmutableBitSet
 name|getOuterJoinFactors
 parameter_list|(
 name|int
@@ -1076,7 +1106,7 @@ return|;
 block|}
 comment|/**    * @param factIdx factor for which information will be returned    *    * @return bitmap containing the fields that are projected from a factor    */
 specifier|public
-name|BitSet
+name|ImmutableBitSet
 name|getProjFields
 parameter_list|(
 name|int
@@ -1184,7 +1214,7 @@ name|semiJoin
 expr_stmt|;
 block|}
 comment|/**    * Returns a bitmap representing the factors referenced in a join filter    *    * @param joinFilter the join filter    * @param setFields if true, add the fields referenced by the join filter    * into a map    *    * @return the bitmap containing the factor references    */
-name|BitSet
+name|ImmutableBitSet
 name|getJoinFilterFactorBitmap
 parameter_list|(
 name|RexNode
@@ -1194,7 +1224,7 @@ name|boolean
 name|setFields
 parameter_list|)
 block|{
-name|BitSet
+name|ImmutableBitSet
 name|fieldRefBitmap
 init|=
 name|fieldBitmap
@@ -1225,37 +1255,39 @@ argument_list|)
 return|;
 block|}
 specifier|private
-name|BitSet
+name|ImmutableBitSet
 name|fieldBitmap
 parameter_list|(
 name|RexNode
 name|joinFilter
 parameter_list|)
 block|{
-name|BitSet
-name|fieldRefBitmap
+specifier|final
+name|RelOptUtil
+operator|.
+name|InputFinder
+name|inputFinder
 init|=
 operator|new
-name|BitSet
-argument_list|(
-name|nTotalFields
-argument_list|)
+name|RelOptUtil
+operator|.
+name|InputFinder
+argument_list|()
 decl_stmt|;
 name|joinFilter
 operator|.
 name|accept
 argument_list|(
-operator|new
-name|RelOptUtil
-operator|.
-name|InputFinder
-argument_list|(
-name|fieldRefBitmap
-argument_list|)
+name|inputFinder
 argument_list|)
 expr_stmt|;
 return|return
-name|fieldRefBitmap
+name|inputFinder
+operator|.
+name|inputBitSet
+operator|.
+name|build
+argument_list|()
 return|;
 block|}
 comment|/**    * Sets bitmaps indicating which factors and fields each join filter    * references    */
@@ -1266,24 +1298,16 @@ parameter_list|()
 block|{
 name|fieldsRefByJoinFilter
 operator|=
-operator|new
-name|HashMap
-argument_list|<
-name|RexNode
-argument_list|,
-name|BitSet
-argument_list|>
+name|Maps
+operator|.
+name|newHashMap
 argument_list|()
 expr_stmt|;
 name|factorsRefByJoinFilter
 operator|=
-operator|new
-name|HashMap
-argument_list|<
-name|RexNode
-argument_list|,
-name|BitSet
-argument_list|>
+name|Maps
+operator|.
+name|newHashMap
 argument_list|()
 expr_stmt|;
 name|ListIterator
@@ -1329,7 +1353,7 @@ name|remove
 argument_list|()
 expr_stmt|;
 block|}
-name|BitSet
+name|ImmutableBitSet
 name|factorRefBitmap
 init|=
 name|getJoinFilterFactorBitmap
@@ -1352,33 +1376,29 @@ block|}
 block|}
 comment|/**    * Sets the bitmap indicating which factors a filter references based on    * which fields it references    *    * @param fieldRefBitmap bitmap representing fields referenced    * @return bitmap representing factors referenced that will    * be set by this method    */
 specifier|private
-name|BitSet
+name|ImmutableBitSet
 name|factorBitmap
 parameter_list|(
-name|BitSet
+name|ImmutableBitSet
 name|fieldRefBitmap
 parameter_list|)
 block|{
-name|BitSet
+name|ImmutableBitSet
+operator|.
+name|Builder
 name|factorRefBitmap
 init|=
-operator|new
-name|BitSet
-argument_list|(
-name|nJoinFactors
-argument_list|)
+name|ImmutableBitSet
+operator|.
+name|builder
+argument_list|()
 decl_stmt|;
 for|for
 control|(
 name|int
 name|field
 range|:
-name|BitSets
-operator|.
-name|toIter
-argument_list|(
 name|fieldRefBitmap
-argument_list|)
 control|)
 block|{
 name|int
@@ -1399,6 +1419,9 @@ expr_stmt|;
 block|}
 return|return
 name|factorRefBitmap
+operator|.
+name|build
+argument_list|()
 return|;
 block|}
 comment|/**    * Determines the join factor corresponding to a RexInputRef    *    * @param rexInputRef rexInputRef index    *    * @return index corresponding to join factor    */
@@ -1484,7 +1507,7 @@ expr_stmt|;
 name|factorsRefByFactor
 operator|=
 operator|new
-name|BitSet
+name|ImmutableBitSet
 index|[
 name|nJoinFactors
 index|]
@@ -1509,11 +1532,10 @@ index|[
 name|i
 index|]
 operator|=
-operator|new
-name|BitSet
-argument_list|(
-name|nJoinFactors
-argument_list|)
+name|ImmutableBitSet
+operator|.
+name|of
+argument_list|()
 expr_stmt|;
 block|}
 for|for
@@ -1524,7 +1546,7 @@ range|:
 name|allJoinFilters
 control|)
 block|{
-name|BitSet
+name|ImmutableBitSet
 name|factorRefs
 init|=
 name|factorsRefByJoinFilter
@@ -1570,33 +1592,36 @@ control|(
 name|int
 name|factor
 range|:
-name|BitSets
-operator|.
-name|toIter
-argument_list|(
 name|factorRefs
-argument_list|)
 control|)
 block|{
 name|factorsRefByFactor
 index|[
 name|factor
 index|]
+operator|=
+name|ImmutableBitSet
 operator|.
-name|or
+name|builder
 argument_list|(
-name|factorRefs
-argument_list|)
-expr_stmt|;
 name|factorsRefByFactor
 index|[
 name|factor
 index|]
+argument_list|)
+operator|.
+name|addAll
+argument_list|(
+name|factorRefs
+argument_list|)
 operator|.
 name|clear
 argument_list|(
 name|factor
 argument_list|)
+operator|.
+name|build
+argument_list|()
 expr_stmt|;
 block|}
 if|if
@@ -1640,7 +1665,7 @@ name|RexCall
 operator|)
 name|joinFilter
 decl_stmt|;
-name|BitSet
+name|ImmutableBitSet
 name|leftFields
 init|=
 name|fieldBitmap
@@ -1656,7 +1681,7 @@ literal|0
 argument_list|)
 argument_list|)
 decl_stmt|;
-name|BitSet
+name|ImmutableBitSet
 name|leftBitmap
 init|=
 name|factorBitmap
@@ -1729,12 +1754,10 @@ specifier|final
 name|IntList
 name|list
 init|=
-name|BitSets
+name|factorRefs
 operator|.
 name|toList
-argument_list|(
-name|factorRefs
-argument_list|)
+argument_list|()
 decl_stmt|;
 for|for
 control|(
@@ -1863,7 +1886,9 @@ parameter_list|(
 name|LoptJoinTree
 name|joinTree
 parameter_list|,
-name|BitSet
+name|ImmutableBitSet
+operator|.
+name|Builder
 name|childFactors
 parameter_list|)
 block|{
@@ -2426,7 +2451,7 @@ name|RexNode
 name|condition
 parameter_list|)
 block|{
-name|BitSet
+name|ImmutableBitSet
 name|fieldRefBitmap
 init|=
 name|fieldBitmap
@@ -2434,7 +2459,7 @@ argument_list|(
 name|condition
 argument_list|)
 decl_stmt|;
-name|BitSet
+name|ImmutableBitSet
 name|factorRefBitmap
 init|=
 name|factorBitmap
@@ -2460,11 +2485,11 @@ class|class
 name|Edge
 block|{
 specifier|final
-name|BitSet
+name|ImmutableBitSet
 name|factors
 decl_stmt|;
 specifier|final
-name|BitSet
+name|ImmutableBitSet
 name|columns
 decl_stmt|;
 specifier|final
@@ -2476,10 +2501,10 @@ parameter_list|(
 name|RexNode
 name|condition
 parameter_list|,
-name|BitSet
+name|ImmutableBitSet
 name|factors
 parameter_list|,
-name|BitSet
+name|ImmutableBitSet
 name|columns
 parameter_list|)
 block|{

@@ -103,6 +103,20 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|ImmutableBitSet
+import|;
+end_import
+
+begin_import
+import|import
 name|com
 operator|.
 name|google
@@ -112,16 +126,6 @@ operator|.
 name|collect
 operator|.
 name|Iterables
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|BitSet
 import|;
 end_import
 
@@ -527,7 +531,7 @@ specifier|public
 specifier|static
 name|Set
 argument_list|<
-name|BitSet
+name|ImmutableBitSet
 argument_list|>
 name|getUniqueKeys
 parameter_list|(
@@ -566,7 +570,7 @@ specifier|public
 specifier|static
 name|Set
 argument_list|<
-name|BitSet
+name|ImmutableBitSet
 argument_list|>
 name|getUniqueKeys
 parameter_list|(
@@ -603,7 +607,7 @@ name|ignoreNulls
 argument_list|)
 return|;
 block|}
-comment|/**    * Returns the    * {@link BuiltInMetadata.ColumnUniqueness#areColumnsUnique(BitSet, boolean)}    * statistic.    *    * @param rel     the relational expression    * @param columns column mask representing the subset of columns for which    *                uniqueness will be determined    * @return true or false depending on whether the columns are unique, or    * null if not enough information is available to make that determination    */
+comment|/**    * Returns the    * {@link BuiltInMetadata.ColumnUniqueness#areColumnsUnique(org.apache.calcite.util.ImmutableBitSet, boolean)}    * statistic.    *    * @param rel     the relational expression    * @param columns column mask representing the subset of columns for which    *                uniqueness will be determined    * @return true or false depending on whether the columns are unique, or    * null if not enough information is available to make that determination    */
 specifier|public
 specifier|static
 name|Boolean
@@ -612,7 +616,7 @@ parameter_list|(
 name|RelNode
 name|rel
 parameter_list|,
-name|BitSet
+name|ImmutableBitSet
 name|columns
 parameter_list|)
 block|{
@@ -644,7 +648,7 @@ literal|false
 argument_list|)
 return|;
 block|}
-comment|/**    * Returns the    * {@link BuiltInMetadata.ColumnUniqueness#areColumnsUnique(BitSet, boolean)}    * statistic.    *    * @param rel         the relational expression    * @param columns     column mask representing the subset of columns for which    *                    uniqueness will be determined    * @param ignoreNulls if true, ignore null values when determining column    *                    uniqueness    * @return true or false depending on whether the columns are unique, or    * null if not enough information is available to make that determination    */
+comment|/**    * Returns the    * {@link BuiltInMetadata.ColumnUniqueness#areColumnsUnique(org.apache.calcite.util.ImmutableBitSet, boolean)}    * statistic.    *    * @param rel         the relational expression    * @param columns     column mask representing the subset of columns for which    *                    uniqueness will be determined    * @param ignoreNulls if true, ignore null values when determining column    *                    uniqueness    * @return true or false depending on whether the columns are unique, or    * null if not enough information is available to make that determination    */
 specifier|public
 specifier|static
 name|Boolean
@@ -653,7 +657,7 @@ parameter_list|(
 name|RelNode
 name|rel
 parameter_list|,
-name|BitSet
+name|ImmutableBitSet
 name|columns
 parameter_list|,
 name|boolean
@@ -688,7 +692,7 @@ name|ignoreNulls
 argument_list|)
 return|;
 block|}
-comment|/**    * Returns the    * {@link BuiltInMetadata.PopulationSize#getPopulationSize(BitSet)}    * statistic.    *    * @param rel      the relational expression    * @param groupKey column mask representing the subset of columns for which    *                 the row count will be determined    * @return distinct row count for the given groupKey, or null if no reliable    * estimate can be determined    */
+comment|/**    * Returns the    * {@link BuiltInMetadata.PopulationSize#getPopulationSize(org.apache.calcite.util.ImmutableBitSet)}    * statistic.    *    * @param rel      the relational expression    * @param groupKey column mask representing the subset of columns for which    *                 the row count will be determined    * @return distinct row count for the given groupKey, or null if no reliable    * estimate can be determined    */
 specifier|public
 specifier|static
 name|Double
@@ -697,7 +701,7 @@ parameter_list|(
 name|RelNode
 name|rel
 parameter_list|,
-name|BitSet
+name|ImmutableBitSet
 name|groupKey
 parameter_list|)
 block|{
@@ -735,7 +739,7 @@ name|result
 argument_list|)
 return|;
 block|}
-comment|/**    * Returns the    * {@link BuiltInMetadata.DistinctRowCount#getDistinctRowCount(BitSet, RexNode)}    * statistic.    *    * @param rel       the relational expression    * @param groupKey  column mask representing group by columns    * @param predicate pre-filtered predicates    * @return distinct row count for groupKey, filtered by predicate, or null    * if no reliable estimate can be determined    */
+comment|/**    * Returns the    * {@link BuiltInMetadata.DistinctRowCount#getDistinctRowCount(org.apache.calcite.util.ImmutableBitSet, org.apache.calcite.rex.RexNode)}    * statistic.    *    * @param rel       the relational expression    * @param groupKey  column mask representing group by columns    * @param predicate pre-filtered predicates    * @return distinct row count for groupKey, filtered by predicate, or null    * if no reliable estimate can be determined    */
 specifier|public
 specifier|static
 name|Double
@@ -744,7 +748,7 @@ parameter_list|(
 name|RelNode
 name|rel
 parameter_list|,
-name|BitSet
+name|ImmutableBitSet
 name|groupKey
 parameter_list|,
 name|RexNode

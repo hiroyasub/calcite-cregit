@@ -251,7 +251,7 @@ name|calcite
 operator|.
 name|util
 operator|.
-name|BitSets
+name|ImmutableBitSet
 import|;
 end_import
 
@@ -332,16 +332,6 @@ operator|.
 name|util
 operator|.
 name|ArrayList
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|BitSet
 import|;
 end_import
 
@@ -698,7 +688,7 @@ name|getFieldNames
 argument_list|()
 decl_stmt|;
 specifier|final
-name|BitSet
+name|ImmutableBitSet
 name|groupSet
 init|=
 name|aggregate
@@ -737,7 +727,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|// Aggregate the original relation, including any non-distinct aggs.
+comment|// Aggregate the original relation, including any non-distinct aggregates.
 name|List
 argument_list|<
 name|AggregateCall
@@ -833,7 +823,7 @@ name|aggCall
 argument_list|)
 expr_stmt|;
 block|}
-comment|// In the case where there are no non-distinct aggs (regardless of
+comment|// In the case where there are no non-distinct aggregates (regardless of
 comment|// whether there are group bys), there's no need to generate the
 comment|// extra aggregate and join.
 name|RelNode
@@ -1023,7 +1013,7 @@ argument_list|()
 argument_list|,
 name|distinct
 argument_list|,
-name|BitSets
+name|ImmutableBitSet
 operator|.
 name|range
 argument_list|(
@@ -1464,7 +1454,7 @@ argument_list|()
 argument_list|,
 name|distinct
 argument_list|,
-name|BitSets
+name|ImmutableBitSet
 operator|.
 name|range
 argument_list|(
@@ -1896,15 +1886,10 @@ control|(
 name|int
 name|i
 range|:
-name|BitSets
-operator|.
-name|toIter
-argument_list|(
 name|aggregate
 operator|.
 name|getGroupSet
 argument_list|()
-argument_list|)
 control|)
 block|{
 name|sourceOf
@@ -2012,7 +1997,7 @@ argument_list|()
 argument_list|,
 name|project
 argument_list|,
-name|BitSets
+name|ImmutableBitSet
 operator|.
 name|range
 argument_list|(

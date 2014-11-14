@@ -245,6 +245,20 @@ name|calcite
 operator|.
 name|util
 operator|.
+name|ImmutableBitSet
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
 name|Pair
 import|;
 end_import
@@ -375,12 +389,12 @@ name|projRefs
 decl_stmt|;
 comment|/**    * Bitmap containing the fields in the RelNode that the projection is being    * pushed past, if the RelNode is not a join. If the RelNode is a join, then    * the fields correspond to the left hand side of the join.    */
 specifier|final
-name|BitSet
+name|ImmutableBitSet
 name|childBitmap
 decl_stmt|;
 comment|/**    * Bitmap containing the fields in the right hand side of a join, in the    * case where the projection is being pushed past a join. Not used    * otherwise.    */
 specifier|final
-name|BitSet
+name|ImmutableBitSet
 name|rightBitmap
 decl_stmt|;
 comment|/**    * Number of fields in the RelNode that the projection is being pushed past,    * if the RelNode is not a join. If the RelNode is a join, then this is the    * number of fields in the left hand side of the join.    *    *<p>The identity    * {@code nChildFields == nSysFields + nFields + nFieldsRight}    * holds. {@code nFields} does not include {@code nSysFields}.    * The output of a join looks like this:    *    *<blockquote><pre>    * | nSysFields | nFields | nFieldsRight |    *</pre></blockquote>    *    * The output of a single-input rel looks like this:    *    *<blockquote><pre>    * | nSysFields | nFields |    *</pre></blockquote>    */
@@ -599,7 +613,7 @@ argument_list|()
 expr_stmt|;
 name|childBitmap
 operator|=
-name|BitSets
+name|ImmutableBitSet
 operator|.
 name|range
 argument_list|(
@@ -612,7 +626,7 @@ argument_list|)
 expr_stmt|;
 name|rightBitmap
 operator|=
-name|BitSets
+name|ImmutableBitSet
 operator|.
 name|range
 argument_list|(
@@ -636,7 +650,7 @@ literal|0
 expr_stmt|;
 name|childBitmap
 operator|=
-name|BitSets
+name|ImmutableBitSet
 operator|.
 name|range
 argument_list|(
@@ -1843,12 +1857,12 @@ name|rexRefs
 decl_stmt|;
 specifier|private
 specifier|final
-name|BitSet
+name|ImmutableBitSet
 name|leftFields
 decl_stmt|;
 specifier|private
 specifier|final
-name|BitSet
+name|ImmutableBitSet
 name|rightFields
 decl_stmt|;
 specifier|private
@@ -1878,10 +1892,10 @@ parameter_list|(
 name|BitSet
 name|rexRefs
 parameter_list|,
-name|BitSet
+name|ImmutableBitSet
 name|leftFields
 parameter_list|,
-name|BitSet
+name|ImmutableBitSet
 name|rightFields
 parameter_list|,
 name|ExprCondition
@@ -1995,7 +2009,7 @@ comment|// if the arguments of the expression only reference the
 comment|// left hand side, preserve it on the left; similarly, if
 comment|// it only references expressions on the right
 specifier|final
-name|BitSet
+name|ImmutableBitSet
 name|exprArgs
 init|=
 name|RelOptUtil
@@ -2019,12 +2033,10 @@ condition|)
 block|{
 if|if
 condition|(
-name|BitSets
+name|leftFields
 operator|.
 name|contains
 argument_list|(
-name|leftFields
-argument_list|,
 name|exprArgs
 argument_list|)
 condition|)
@@ -2042,12 +2054,10 @@ return|;
 block|}
 if|else if
 condition|(
-name|BitSets
+name|rightFields
 operator|.
 name|contains
 argument_list|(
-name|rightFields
-argument_list|,
 name|exprArgs
 argument_list|)
 condition|)

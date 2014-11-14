@@ -175,7 +175,7 @@ name|calcite
 operator|.
 name|util
 operator|.
-name|BitSets
+name|ImmutableBitSet
 import|;
 end_import
 
@@ -204,16 +204,6 @@ operator|.
 name|collect
 operator|.
 name|Lists
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|BitSet
 import|;
 end_import
 
@@ -359,15 +349,10 @@ control|(
 name|int
 name|key
 range|:
-name|BitSets
-operator|.
-name|toIter
-argument_list|(
 name|aggregate
 operator|.
 name|getGroupSet
 argument_list|()
-argument_list|)
 control|)
 block|{
 specifier|final
@@ -527,10 +512,10 @@ argument_list|)
 expr_stmt|;
 block|}
 specifier|final
-name|BitSet
+name|ImmutableBitSet
 name|newGroupSet
 init|=
-name|BitSets
+name|ImmutableBitSet
 operator|.
 name|of
 argument_list|(
@@ -573,12 +558,10 @@ decl_stmt|;
 if|if
 condition|(
 operator|!
-name|BitSets
+name|newGroupSet
 operator|.
 name|toList
-argument_list|(
-name|newGroupSet
-argument_list|)
+argument_list|()
 operator|.
 name|equals
 argument_list|(
@@ -610,12 +593,7 @@ name|posList
 operator|.
 name|add
 argument_list|(
-name|BitSets
-operator|.
-name|toList
-argument_list|(
 name|newGroupSet
-argument_list|)
 operator|.
 name|indexOf
 argument_list|(

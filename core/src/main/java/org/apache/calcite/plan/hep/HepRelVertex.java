@@ -143,17 +143,21 @@ name|calcite
 operator|.
 name|util
 operator|.
-name|Util
+name|ImmutableBitSet
 import|;
 end_import
 
 begin_import
 import|import
-name|java
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|util
 operator|.
-name|BitSet
+name|Util
 import|;
 end_import
 
@@ -340,7 +344,7 @@ specifier|public
 name|boolean
 name|isKey
 parameter_list|(
-name|BitSet
+name|ImmutableBitSet
 name|columns
 parameter_list|)
 block|{

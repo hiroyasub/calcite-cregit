@@ -17,6 +17,20 @@ end_package
 
 begin_import
 import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|ImmutableBitSet
+import|;
+end_import
+
+begin_import
+import|import
 name|com
 operator|.
 name|google
@@ -43,16 +57,6 @@ name|ImmutableList
 import|;
 end_import
 
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|BitSet
-import|;
-end_import
-
 begin_comment
 comment|/** Definition of a particular combination of dimensions and measures of a  * lattice that is the basis of a materialization.  *  *<p>Holds similar information to a  * {@link org.apache.calcite.materialize.Lattice.Tile} but a lattice is  * immutable and tiles are not added after their creation. */
 end_comment
@@ -69,7 +73,7 @@ name|lattice
 decl_stmt|;
 specifier|public
 specifier|final
-name|BitSet
+name|ImmutableBitSet
 name|dimensions
 decl_stmt|;
 specifier|public
@@ -89,7 +93,7 @@ parameter_list|(
 name|Lattice
 name|lattice
 parameter_list|,
-name|BitSet
+name|ImmutableBitSet
 name|dimensions
 parameter_list|,
 name|ImmutableList

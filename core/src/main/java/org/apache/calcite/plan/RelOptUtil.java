@@ -795,20 +795,6 @@ name|calcite
 operator|.
 name|util
 operator|.
-name|BitSets
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|util
-operator|.
 name|Bug
 import|;
 end_import
@@ -824,6 +810,20 @@ operator|.
 name|util
 operator|.
 name|Holder
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|ImmutableBitSet
 import|;
 end_import
 
@@ -2075,7 +2075,7 @@ argument_list|()
 argument_list|,
 name|ret
 argument_list|,
-name|BitSets
+name|ImmutableBitSet
 operator|.
 name|of
 argument_list|()
@@ -2203,7 +2203,7 @@ name|cluster
 argument_list|,
 name|ret
 argument_list|,
-name|BitSets
+name|ImmutableBitSet
 operator|.
 name|range
 argument_list|(
@@ -2384,7 +2384,7 @@ name|cluster
 argument_list|,
 name|ret
 argument_list|,
-name|BitSets
+name|ImmutableBitSet
 operator|.
 name|range
 argument_list|(
@@ -3292,7 +3292,7 @@ argument_list|()
 argument_list|,
 name|rel
 argument_list|,
-name|BitSets
+name|ImmutableBitSet
 operator|.
 name|of
 argument_list|()
@@ -3322,7 +3322,7 @@ argument_list|()
 argument_list|,
 name|rel
 argument_list|,
-name|BitSets
+name|ImmutableBitSet
 operator|.
 name|range
 argument_list|(
@@ -4341,11 +4341,9 @@ literal|1
 argument_list|)
 decl_stmt|;
 specifier|final
-name|BitSet
+name|ImmutableBitSet
 name|projRefs0
 init|=
-name|RelOptUtil
-operator|.
 name|InputFinder
 operator|.
 name|bits
@@ -4354,11 +4352,9 @@ name|op0
 argument_list|)
 decl_stmt|;
 specifier|final
-name|BitSet
+name|ImmutableBitSet
 name|projRefs1
 init|=
-name|RelOptUtil
-operator|.
 name|InputFinder
 operator|.
 name|bits
@@ -4642,11 +4638,9 @@ comment|//     f(LHS)> 0 ===> ( f(LHS)> 0 ) = TRUE,
 comment|// and make the RHS produce TRUE, but only if we're strictly
 comment|// looking for equi-joins
 specifier|final
-name|BitSet
+name|ImmutableBitSet
 name|projRefs
 init|=
-name|RelOptUtil
-operator|.
 name|InputFinder
 operator|.
 name|bits
@@ -8556,10 +8550,10 @@ operator|+
 name|nFieldsRight
 assert|;
 comment|// set the reference bitmaps for the left and right children
-name|BitSet
+name|ImmutableBitSet
 name|leftBitmap
 init|=
-name|BitSets
+name|ImmutableBitSet
 operator|.
 name|range
 argument_list|(
@@ -8570,10 +8564,10 @@ operator|+
 name|nFieldsLeft
 argument_list|)
 decl_stmt|;
-name|BitSet
+name|ImmutableBitSet
 name|rightBitmap
 init|=
-name|BitSets
+name|ImmutableBitSet
 operator|.
 name|range
 argument_list|(
@@ -8962,10 +8956,10 @@ name|nFieldsRight
 operator|)
 assert|;
 comment|// set the reference bitmaps for the left and right children
-name|BitSet
+name|ImmutableBitSet
 name|leftBitmap
 init|=
-name|BitSets
+name|ImmutableBitSet
 operator|.
 name|range
 argument_list|(
@@ -8976,10 +8970,10 @@ operator|+
 name|nFieldsLeft
 argument_list|)
 decl_stmt|;
-name|BitSet
+name|ImmutableBitSet
 name|rightBitmap
 init|=
-name|BitSets
+name|ImmutableBitSet
 operator|.
 name|range
 argument_list|(
@@ -9021,6 +9015,17 @@ argument_list|(
 name|filter
 argument_list|)
 decl_stmt|;
+specifier|final
+name|ImmutableBitSet
+name|inputBits
+init|=
+name|inputFinder
+operator|.
+name|inputBitSet
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
 comment|// REVIEW - are there any expressions that need special handling
 comment|// and therefore cannot be pushed?
 comment|// filters can be pushed to the left child if the left child
@@ -9030,15 +9035,11 @@ if|if
 condition|(
 name|pushLeft
 operator|&&
-name|BitSets
+name|leftBitmap
 operator|.
 name|contains
 argument_list|(
-name|leftBitmap
-argument_list|,
-name|inputFinder
-operator|.
-name|inputBitSet
+name|inputBits
 argument_list|)
 condition|)
 block|{
@@ -9104,15 +9105,11 @@ if|else if
 condition|(
 name|pushRight
 operator|&&
-name|BitSets
+name|rightBitmap
 operator|.
 name|contains
 argument_list|(
-name|rightBitmap
-argument_list|,
-name|inputFinder
-operator|.
-name|inputBitSet
+name|inputBits
 argument_list|)
 condition|)
 block|{
@@ -9343,7 +9340,7 @@ specifier|static
 name|void
 name|splitFilters
 parameter_list|(
-name|BitSet
+name|ImmutableBitSet
 name|childBitmap
 parameter_list|,
 name|RexNode
@@ -9375,11 +9372,9 @@ name|predicate
 argument_list|)
 control|)
 block|{
-name|BitSet
+name|ImmutableBitSet
 name|filterRefs
 init|=
-name|RelOptUtil
-operator|.
 name|InputFinder
 operator|.
 name|bits
@@ -9389,12 +9384,10 @@ argument_list|)
 decl_stmt|;
 if|if
 condition|(
-name|BitSets
+name|childBitmap
 operator|.
 name|contains
 argument_list|(
-name|childBitmap
-argument_list|,
 name|filterRefs
 argument_list|)
 condition|)
@@ -10183,7 +10176,7 @@ comment|// Locate all input references in the projection expressions as well
 comment|// the post-join filter.  Since the filter effectively sits in
 comment|// between the LogicalProject and the MultiJoin, the projection needs
 comment|// to include those filter references.
-name|BitSet
+name|ImmutableBitSet
 name|inputRefs
 init|=
 name|InputFinder
@@ -10219,11 +10212,9 @@ name|BitSet
 argument_list|>
 name|newProjFields
 init|=
-operator|new
-name|ArrayList
-argument_list|<
-name|BitSet
-argument_list|>
+name|Lists
+operator|.
+name|newArrayList
 argument_list|()
 decl_stmt|;
 for|for
@@ -10274,12 +10265,7 @@ control|(
 name|int
 name|bit
 range|:
-name|BitSets
-operator|.
-name|toIter
-argument_list|(
 name|inputRefs
-argument_list|)
 control|)
 block|{
 while|while
@@ -10380,7 +10366,16 @@ operator|.
 name|getJoinTypes
 argument_list|()
 argument_list|,
+name|Lists
+operator|.
+name|transform
+argument_list|(
 name|newProjFields
+argument_list|,
+name|ImmutableBitSet
+operator|.
+name|FROM_BIT_SET
+argument_list|)
 argument_list|,
 name|multiJoin
 operator|.
@@ -12779,8 +12774,11 @@ argument_list|<
 name|Void
 argument_list|>
 block|{
+specifier|public
 specifier|final
-name|BitSet
+name|ImmutableBitSet
+operator|.
+name|Builder
 name|inputBitSet
 decl_stmt|;
 specifier|private
@@ -12793,15 +12791,10 @@ name|extraFields
 decl_stmt|;
 specifier|public
 name|InputFinder
-parameter_list|(
-name|BitSet
-name|inputBitSet
-parameter_list|)
+parameter_list|()
 block|{
 name|this
 argument_list|(
-name|inputBitSet
-argument_list|,
 literal|null
 argument_list|)
 expr_stmt|;
@@ -12809,9 +12802,6 @@ block|}
 specifier|public
 name|InputFinder
 parameter_list|(
-name|BitSet
-name|inputBitSet
-parameter_list|,
 name|Set
 argument_list|<
 name|RelDataTypeField
@@ -12828,7 +12818,10 @@ name|this
 operator|.
 name|inputBitSet
 operator|=
-name|inputBitSet
+name|ImmutableBitSet
+operator|.
+name|builder
+argument_list|()
 expr_stmt|;
 name|this
 operator|.
@@ -12853,11 +12846,7 @@ name|inputFinder
 init|=
 operator|new
 name|InputFinder
-argument_list|(
-operator|new
-name|BitSet
 argument_list|()
-argument_list|)
 decl_stmt|;
 name|node
 operator|.
@@ -12873,7 +12862,7 @@ block|}
 comment|/**      * Returns a bit set describing the inputs used by an expression.      */
 specifier|public
 specifier|static
-name|BitSet
+name|ImmutableBitSet
 name|bits
 parameter_list|(
 name|RexNode
@@ -12887,12 +12876,15 @@ name|node
 argument_list|)
 operator|.
 name|inputBitSet
+operator|.
+name|build
+argument_list|()
 return|;
 block|}
 comment|/**      * Returns a bit set describing the inputs used by a collection of      * project expressions and an optional condition.      */
 specifier|public
 specifier|static
-name|BitSet
+name|ImmutableBitSet
 name|bits
 parameter_list|(
 name|List
@@ -12906,22 +12898,18 @@ name|expr
 parameter_list|)
 block|{
 specifier|final
-name|BitSet
-name|inputBitSet
+name|InputFinder
+name|inputFinder
 init|=
 operator|new
-name|BitSet
+name|InputFinder
 argument_list|()
 decl_stmt|;
 name|RexProgram
 operator|.
 name|apply
 argument_list|(
-operator|new
-name|InputFinder
-argument_list|(
-name|inputBitSet
-argument_list|)
+name|inputFinder
 argument_list|,
 name|exprs
 argument_list|,
@@ -12929,7 +12917,12 @@ name|expr
 argument_list|)
 expr_stmt|;
 return|return
+name|inputFinder
+operator|.
 name|inputBitSet
+operator|.
+name|build
+argument_list|()
 return|;
 block|}
 specifier|public

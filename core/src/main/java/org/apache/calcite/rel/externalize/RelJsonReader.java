@@ -227,7 +227,7 @@ name|calcite
 operator|.
 name|util
 operator|.
-name|BitSets
+name|ImmutableBitSet
 import|;
 end_import
 
@@ -368,16 +368,6 @@ operator|.
 name|util
 operator|.
 name|ArrayList
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|BitSet
 import|;
 end_import
 
@@ -919,7 +909,7 @@ argument_list|)
 return|;
 block|}
 specifier|public
-name|BitSet
+name|ImmutableBitSet
 name|getBitSet
 parameter_list|(
 name|String
@@ -927,7 +917,7 @@ name|tag
 parameter_list|)
 block|{
 return|return
-name|BitSets
+name|ImmutableBitSet
 operator|.
 name|of
 argument_list|(

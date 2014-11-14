@@ -241,7 +241,7 @@ name|calcite
 operator|.
 name|util
 operator|.
-name|BitSets
+name|ImmutableBitSet
 import|;
 end_import
 
@@ -252,16 +252,6 @@ operator|.
 name|util
 operator|.
 name|ArrayList
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|BitSet
 import|;
 end_import
 
@@ -434,7 +424,7 @@ specifier|public
 name|boolean
 name|isKey
 parameter_list|(
-name|BitSet
+name|ImmutableBitSet
 name|columns
 parameter_list|)
 block|{
@@ -542,7 +532,7 @@ specifier|public
 name|RelNode
 name|project
 parameter_list|(
-name|BitSet
+name|ImmutableBitSet
 name|fieldsUsed
 parameter_list|,
 name|Set
@@ -573,7 +563,7 @@ name|fieldsUsed
 operator|.
 name|equals
 argument_list|(
-name|BitSets
+name|ImmutableBitSet
 operator|.
 name|range
 argument_list|(
@@ -645,12 +635,7 @@ control|(
 name|int
 name|i
 range|:
-name|BitSets
-operator|.
-name|toIter
-argument_list|(
 name|fieldsUsed
-argument_list|)
 control|)
 block|{
 name|RelDataTypeField

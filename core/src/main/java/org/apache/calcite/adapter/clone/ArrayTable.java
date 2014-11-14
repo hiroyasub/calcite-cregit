@@ -221,7 +221,7 @@ name|calcite
 operator|.
 name|util
 operator|.
-name|BitSets
+name|ImmutableBitSet
 import|;
 end_import
 
@@ -269,6 +269,20 @@ end_import
 
 begin_import
 import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|Lists
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|lang
@@ -307,27 +321,7 @@ name|java
 operator|.
 name|util
 operator|.
-name|ArrayList
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
 name|Arrays
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|BitSet
 import|;
 end_import
 
@@ -434,15 +428,13 @@ block|{
 specifier|final
 name|List
 argument_list|<
-name|BitSet
+name|ImmutableBitSet
 argument_list|>
 name|keys
 init|=
-operator|new
-name|ArrayList
-argument_list|<
-name|BitSet
-argument_list|>
+name|Lists
+operator|.
+name|newArrayList
 argument_list|()
 decl_stmt|;
 specifier|final
@@ -489,7 +481,7 @@ name|keys
 operator|.
 name|add
 argument_list|(
-name|BitSets
+name|ImmutableBitSet
 operator|.
 name|of
 argument_list|(

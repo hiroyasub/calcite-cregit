@@ -289,7 +289,7 @@ name|calcite
 operator|.
 name|util
 operator|.
-name|BitSets
+name|ImmutableBitSet
 import|;
 end_import
 
@@ -386,16 +386,6 @@ operator|.
 name|util
 operator|.
 name|Arrays
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|BitSet
 import|;
 end_import
 
@@ -1491,7 +1481,7 @@ parameter_list|(
 name|RexNode
 name|e
 parameter_list|,
-name|BitSet
+name|ImmutableBitSet
 name|b
 parameter_list|)
 block|{
@@ -1528,19 +1518,19 @@ name|INTEGER
 argument_list|)
 decl_stmt|;
 specifier|final
-name|BitSet
+name|ImmutableBitSet
 name|c
 init|=
-name|BitSets
+name|ImmutableBitSet
 operator|.
 name|of
 argument_list|()
 decl_stmt|;
 specifier|final
-name|BitSet
+name|ImmutableBitSet
 name|c0
 init|=
-name|BitSets
+name|ImmutableBitSet
 operator|.
 name|of
 argument_list|(
@@ -1548,10 +1538,10 @@ literal|0
 argument_list|)
 decl_stmt|;
 specifier|final
-name|BitSet
+name|ImmutableBitSet
 name|c1
 init|=
-name|BitSets
+name|ImmutableBitSet
 operator|.
 name|of
 argument_list|(
@@ -1559,10 +1549,10 @@ literal|1
 argument_list|)
 decl_stmt|;
 specifier|final
-name|BitSet
+name|ImmutableBitSet
 name|c01
 init|=
-name|BitSets
+name|ImmutableBitSet
 operator|.
 name|of
 argument_list|(
@@ -1572,10 +1562,10 @@ literal|1
 argument_list|)
 decl_stmt|;
 specifier|final
-name|BitSet
+name|ImmutableBitSet
 name|c13
 init|=
-name|BitSets
+name|ImmutableBitSet
 operator|.
 name|of
 argument_list|(

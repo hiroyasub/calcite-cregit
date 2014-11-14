@@ -219,7 +219,7 @@ name|calcite
 operator|.
 name|util
 operator|.
-name|BitSets
+name|ImmutableBitSet
 import|;
 end_import
 
@@ -512,15 +512,10 @@ control|(
 name|int
 name|i
 range|:
-name|BitSets
-operator|.
-name|toIter
-argument_list|(
 name|aggregate
 operator|.
 name|getGroupSet
 argument_list|()
-argument_list|)
 control|)
 block|{
 specifier|final
@@ -695,7 +690,7 @@ argument_list|()
 argument_list|,
 name|child
 argument_list|,
-name|BitSets
+name|ImmutableBitSet
 operator|.
 name|range
 argument_list|(
@@ -945,7 +940,7 @@ argument_list|()
 argument_list|,
 name|project
 argument_list|,
-name|BitSets
+name|ImmutableBitSet
 operator|.
 name|range
 argument_list|(

@@ -17,11 +17,15 @@ end_package
 
 begin_import
 import|import
-name|java
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
 operator|.
 name|util
 operator|.
-name|BitSet
+name|ImmutableBitSet
 import|;
 end_import
 
@@ -43,7 +47,7 @@ comment|/** Returns whether the given set of columns is a unique key, or a super
 name|boolean
 name|isKey
 parameter_list|(
-name|BitSet
+name|ImmutableBitSet
 name|columns
 parameter_list|)
 function_decl|;

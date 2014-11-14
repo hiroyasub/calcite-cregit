@@ -203,7 +203,7 @@ name|calcite
 operator|.
 name|util
 operator|.
-name|BitSets
+name|ImmutableBitSet
 import|;
 end_import
 
@@ -262,16 +262,6 @@ operator|.
 name|collect
 operator|.
 name|Lists
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|BitSet
 import|;
 end_import
 
@@ -363,7 +353,7 @@ argument_list|)
 decl_stmt|;
 comment|// Do the columns used by the filter appear in the output of the aggregate?
 specifier|final
-name|BitSet
+name|ImmutableBitSet
 name|filterColumns
 init|=
 name|RelOptUtil
@@ -379,18 +369,16 @@ argument_list|()
 argument_list|)
 decl_stmt|;
 specifier|final
-name|BitSet
+name|ImmutableBitSet
 name|newGroupSet
 init|=
-name|BitSets
-operator|.
-name|union
-argument_list|(
 name|aggregate
 operator|.
 name|getGroupSet
 argument_list|()
-argument_list|,
+operator|.
+name|union
+argument_list|(
 name|filterColumns
 argument_list|)
 decl_stmt|;
@@ -481,12 +469,7 @@ name|a0
 parameter_list|)
 block|{
 return|return
-name|BitSets
-operator|.
-name|toList
-argument_list|(
 name|newGroupSet
-argument_list|)
 operator|.
 name|indexOf
 argument_list|(
@@ -546,15 +529,13 @@ argument_list|)
 decl_stmt|;
 if|if
 condition|(
-name|BitSets
-operator|.
-name|contains
-argument_list|(
 name|aggregate
 operator|.
 name|getGroupSet
 argument_list|()
-argument_list|,
+operator|.
+name|contains
+argument_list|(
 name|filterColumns
 argument_list|)
 condition|)
@@ -584,11 +565,14 @@ block|{
 comment|// The filter needs at least one extra column.
 comment|// Now aggregate it away.
 specifier|final
-name|BitSet
+name|ImmutableBitSet
+operator|.
+name|Builder
 name|topGroupSet
 init|=
-operator|new
-name|BitSet
+name|ImmutableBitSet
+operator|.
+name|builder
 argument_list|()
 decl_stmt|;
 for|for
@@ -596,27 +580,17 @@ control|(
 name|int
 name|c
 range|:
-name|BitSets
-operator|.
-name|toIter
-argument_list|(
 name|aggregate
 operator|.
 name|getGroupSet
 argument_list|()
-argument_list|)
 control|)
 block|{
 name|topGroupSet
 operator|.
 name|set
 argument_list|(
-name|BitSets
-operator|.
-name|toList
-argument_list|(
 name|newGroupSet
-argument_list|)
 operator|.
 name|indexOf
 argument_list|(
@@ -740,6 +714,9 @@ argument_list|,
 name|newFilter
 argument_list|,
 name|topGroupSet
+operator|.
+name|build
+argument_list|()
 argument_list|,
 name|topAggCallList
 argument_list|)

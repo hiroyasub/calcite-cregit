@@ -363,7 +363,7 @@ name|calcite
 operator|.
 name|util
 operator|.
-name|BitSets
+name|ImmutableBitSet
 import|;
 end_import
 
@@ -450,16 +450,6 @@ operator|.
 name|util
 operator|.
 name|ArrayList
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|BitSet
 import|;
 end_import
 
@@ -1479,9 +1469,6 @@ literal|"agg"
 argument_list|,
 name|toJson
 argument_list|(
-operator|(
-name|SqlOperator
-operator|)
 name|node
 operator|.
 name|getAggregation
@@ -1645,7 +1632,7 @@ if|else if
 condition|(
 name|value
 operator|instanceof
-name|BitSet
+name|ImmutableBitSet
 condition|)
 block|{
 specifier|final
@@ -1665,15 +1652,10 @@ control|(
 name|Integer
 name|integer
 range|:
-name|BitSets
-operator|.
-name|toIter
-argument_list|(
 operator|(
-name|BitSet
+name|ImmutableBitSet
 operator|)
 name|value
-argument_list|)
 control|)
 block|{
 name|list

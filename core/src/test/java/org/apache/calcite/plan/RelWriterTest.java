@@ -269,7 +269,7 @@ name|calcite
 operator|.
 name|util
 operator|.
-name|BitSets
+name|ImmutableBitSet
 import|;
 end_import
 
@@ -672,7 +672,7 @@ name|cluster
 argument_list|,
 name|filter
 argument_list|,
-name|BitSets
+name|ImmutableBitSet
 operator|.
 name|of
 argument_list|(

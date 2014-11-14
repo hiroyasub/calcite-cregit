@@ -93,6 +93,20 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|ImmutableBitSet
+import|;
+end_import
+
+begin_import
+import|import
 name|com
 operator|.
 name|google
@@ -102,16 +116,6 @@ operator|.
 name|collect
 operator|.
 name|ImmutableList
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|BitSet
 import|;
 end_import
 
@@ -303,7 +307,7 @@ specifier|public
 name|boolean
 name|isKey
 parameter_list|(
-name|BitSet
+name|ImmutableBitSet
 name|columns
 parameter_list|)
 block|{

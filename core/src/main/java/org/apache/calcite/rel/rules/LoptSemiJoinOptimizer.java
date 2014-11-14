@@ -277,7 +277,7 @@ name|calcite
 operator|.
 name|util
 operator|.
-name|BitSets
+name|ImmutableBitSet
 import|;
 end_import
 
@@ -326,16 +326,6 @@ operator|.
 name|util
 operator|.
 name|Arrays
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|BitSet
 import|;
 end_import
 
@@ -906,7 +896,7 @@ comment|// the other references the dimension table; since we know this is
 comment|// a join filter and we've already verified that the operands are
 comment|// RexInputRefs, verify that the factors belong to the fact and
 comment|// dimension table
-name|BitSet
+name|ImmutableBitSet
 name|joinRefs
 init|=
 name|multiJoin
@@ -2438,33 +2428,21 @@ comment|// be less than half.  There may be instances where an even smaller
 comment|// selectivity value is required because of the overhead of
 comment|// index lookups on a very large fact table.  Half was chosen as
 comment|// a middle ground based on testing that was done with a large
-comment|// dataset.
-name|BitSet
+comment|// data set.
+specifier|final
+name|ImmutableBitSet
 name|dimCols
 init|=
-operator|new
-name|BitSet
-argument_list|()
-decl_stmt|;
-for|for
-control|(
-name|int
-name|dimCol
-range|:
+name|ImmutableBitSet
+operator|.
+name|of
+argument_list|(
 name|semiJoin
 operator|.
 name|getRightKeys
 argument_list|()
-control|)
-block|{
-name|dimCols
-operator|.
-name|set
-argument_list|(
-name|dimCol
 argument_list|)
-expr_stmt|;
-block|}
+decl_stmt|;
 name|double
 name|selectivity
 init|=
@@ -2681,32 +2659,20 @@ return|return;
 block|}
 comment|// Check if the semijoin keys corresponding to the dimension table
 comment|// are unique.  The semijoin will filter out the nulls.
-name|BitSet
+specifier|final
+name|ImmutableBitSet
 name|dimKeys
 init|=
-operator|new
-name|BitSet
-argument_list|()
-decl_stmt|;
-for|for
-control|(
-name|Integer
-name|key
-range|:
+name|ImmutableBitSet
+operator|.
+name|of
+argument_list|(
 name|semiJoin
 operator|.
 name|getRightKeys
 argument_list|()
-control|)
-block|{
-name|dimKeys
-operator|.
-name|set
-argument_list|(
-name|key
 argument_list|)
-expr_stmt|;
-block|}
+decl_stmt|;
 name|RelNode
 name|dimRel
 init|=
@@ -2735,7 +2701,7 @@ block|}
 comment|// check that the only fields referenced from the dimension table
 comment|// in either its projection or join conditions are the dimension
 comment|// keys
-name|BitSet
+name|ImmutableBitSet
 name|dimProjRefs
 init|=
 name|multiJoin
@@ -2764,7 +2730,7 @@ argument_list|)
 decl_stmt|;
 name|dimProjRefs
 operator|=
-name|BitSets
+name|ImmutableBitSet
 operator|.
 name|range
 argument_list|(
@@ -2777,12 +2743,10 @@ block|}
 if|if
 condition|(
 operator|!
-name|BitSets
+name|dimKeys
 operator|.
 name|contains
 argument_list|(
-name|dimKeys
-argument_list|,
 name|dimProjRefs
 argument_list|)
 condition|)

@@ -659,16 +659,6 @@ name|java
 operator|.
 name|util
 operator|.
-name|BitSet
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
 name|Calendar
 import|;
 end_import
@@ -3074,7 +3064,7 @@ name|class
 argument_list|,
 literal|"areColumnsUnique"
 argument_list|,
-name|BitSet
+name|ImmutableBitSet
 operator|.
 name|class
 argument_list|,
@@ -3100,7 +3090,7 @@ name|class
 argument_list|,
 literal|"getDistinctRowCount"
 argument_list|,
-name|BitSet
+name|ImmutableBitSet
 operator|.
 name|class
 argument_list|,
@@ -3126,7 +3116,7 @@ name|class
 argument_list|,
 literal|"getPopulationSize"
 argument_list|,
-name|BitSet
+name|ImmutableBitSet
 operator|.
 name|class
 argument_list|)
