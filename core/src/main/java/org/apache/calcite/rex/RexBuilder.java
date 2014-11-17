@@ -1076,7 +1076,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates a reference to an aggregate call, checking for repeated calls.    *    *<p>Argument types help to optimize for repeated aggregates.    * For instance count(42) is equivalent to count(*).</p>    *    * @param aggCall aggregate call to be added    * @param groupCount number of groups in the aggregate relation    * @param aggCalls destination list of aggregate calls    * @param aggCallMapping the dictionary of already added calls    * @param aggArgTypes Argument types, not null    * @return Rex expression for the given aggregate call    */
+comment|/**    * Creates a reference to an aggregate call, checking for repeated calls.    *    *<p>Argument types help to optimize for repeated aggregates.    * For instance count(42) is equivalent to count(*).</p>    *    * @param aggCall aggregate call to be added    * @param groupCount number of groups in the aggregate relation    * @param indicator Whether the Aggregate has indicator (GROUPING) columns    * @param aggCalls destination list of aggregate calls    * @param aggCallMapping the dictionary of already added calls    * @param aggArgTypes Argument types, not null    *    * @return Rex expression for the given aggregate call    */
 specifier|public
 name|RexNode
 name|addAggCall
@@ -1086,6 +1086,9 @@ name|aggCall
 parameter_list|,
 name|int
 name|groupCount
+parameter_list|,
+name|boolean
+name|indicator
 parameter_list|,
 name|List
 argument_list|<
@@ -1199,6 +1202,14 @@ name|size
 argument_list|()
 operator|+
 name|groupCount
+operator|*
+operator|(
+name|indicator
+condition|?
+literal|2
+else|:
+literal|1
+operator|)
 decl_stmt|;
 name|aggCalls
 operator|.

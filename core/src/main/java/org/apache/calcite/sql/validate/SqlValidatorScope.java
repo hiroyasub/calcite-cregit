@@ -260,6 +260,17 @@ argument_list|>
 name|names
 parameter_list|)
 function_decl|;
+comment|/** Converts the type of an expression to nullable, if the context    * warrants it. */
+name|RelDataType
+name|nullifyType
+parameter_list|(
+name|SqlNode
+name|node
+parameter_list|,
+name|RelDataType
+name|type
+parameter_list|)
+function_decl|;
 block|}
 end_interface
 

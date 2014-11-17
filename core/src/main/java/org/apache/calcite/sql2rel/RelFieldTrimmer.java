@@ -3700,26 +3700,9 @@ argument_list|>
 name|extraFields
 parameter_list|)
 block|{
-if|if
-condition|(
-name|aggregate
-operator|.
-name|indicator
-condition|)
-block|{
-throw|throw
-operator|new
-name|AssertionError
-argument_list|(
-name|Bug
-operator|.
-name|CALCITE_461_FIXED
-argument_list|)
-throw|;
-block|}
 comment|// Fields:
 comment|//
-comment|// | sys fields | group fields | agg functions |
+comment|// | sys fields | group fields | indicator fields | agg functions |
 comment|//
 comment|// Two kinds of trimming:
 comment|//
@@ -3728,7 +3711,7 @@ comment|// agg rel with no system fields.
 comment|//
 comment|// 2. If aggregate functions are not used, remove them.
 comment|//
-comment|// But grouping fields stay, even if they are not used.
+comment|// But group and indicator fields stay, even if they are not used.
 specifier|final
 name|RelDataType
 name|rowType
@@ -3846,6 +3829,48 @@ name|trimResult
 operator|.
 name|right
 decl_stmt|;
+comment|// We have to return group keys and (if present) indicators.
+comment|// So, pretend that the consumer asked for them.
+specifier|final
+name|int
+name|groupCount
+init|=
+name|aggregate
+operator|.
+name|getGroupSet
+argument_list|()
+operator|.
+name|cardinality
+argument_list|()
+decl_stmt|;
+specifier|final
+name|int
+name|indicatorCount
+init|=
+name|aggregate
+operator|.
+name|indicator
+condition|?
+name|groupCount
+else|:
+literal|0
+decl_stmt|;
+name|fieldsUsed
+operator|=
+name|fieldsUsed
+operator|.
+name|union
+argument_list|(
+name|ImmutableBitSet
+operator|.
+name|range
+argument_list|(
+name|groupCount
+operator|+
+name|indicatorCount
+argument_list|)
+argument_list|)
+expr_stmt|;
 comment|// If the input is unchanged, and we need to project all columns,
 comment|// there's nothing to do.
 if|if
@@ -3889,22 +3914,12 @@ argument_list|)
 return|;
 block|}
 comment|// Which agg calls are used by our consumer?
-specifier|final
-name|int
-name|groupCount
-init|=
-name|aggregate
-operator|.
-name|getGroupSet
-argument_list|()
-operator|.
-name|cardinality
-argument_list|()
-decl_stmt|;
 name|int
 name|j
 init|=
 name|groupCount
+operator|+
+name|indicatorCount
 decl_stmt|;
 name|int
 name|usedAggCallCount
@@ -3966,6 +3981,8 @@ name|getFieldCount
 argument_list|()
 argument_list|,
 name|groupCount
+operator|+
+name|indicatorCount
 operator|+
 name|usedAggCallCount
 argument_list|)
@@ -4070,6 +4087,31 @@ operator|.
 name|target
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+name|aggregate
+operator|.
+name|indicator
+condition|)
+block|{
+name|mapping
+operator|.
+name|set
+argument_list|(
+name|pair
+operator|.
+name|source
+operator|+
+name|groupCount
+argument_list|,
+name|pair
+operator|.
+name|target
+operator|+
+name|groupCount
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 block|}
 comment|// Now create new agg calls, and populate mapping for them.
@@ -4090,6 +4132,8 @@ decl_stmt|;
 name|j
 operator|=
 name|groupCount
+operator|+
+name|indicatorCount
 expr_stmt|;
 for|for
 control|(
@@ -4156,6 +4200,8 @@ name|j
 argument_list|,
 name|groupCount
 operator|+
+name|indicatorCount
+operator|+
 name|newAggCallList
 operator|.
 name|size
@@ -4183,7 +4229,9 @@ name|createAggregate
 argument_list|(
 name|newInput
 argument_list|,
-literal|false
+name|aggregate
+operator|.
+name|indicator
 argument_list|,
 name|newGroupSet
 argument_list|,

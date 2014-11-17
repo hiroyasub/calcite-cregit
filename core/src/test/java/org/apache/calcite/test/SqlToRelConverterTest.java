@@ -704,6 +704,29 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testRollupSimple
+parameter_list|()
+block|{
+comment|// a is nullable so is translated as just "a"
+comment|// b is not null, so is represented as 0 inside Aggregate, then
+comment|// using "CASE WHEN i$b THEN NULL ELSE b END"
+name|sql
+argument_list|(
+literal|"select a, b, count(*) as c\n"
+operator|+
+literal|"from (values (cast(null as integer), 2)) as t(a, b)\n"
+operator|+
+literal|"group by rollup(a, b)"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testRollup
 parameter_list|()
 block|{
@@ -828,6 +851,26 @@ operator|+
 literal|"from dept "
 operator|+
 literal|"group by name, deptno, name)"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testGroupByExpression
+parameter_list|()
+block|{
+comment|// This used to cause an infinite loop,
+comment|// SqlValidatorImpl.getValidatedNodeType
+comment|// calling getValidatedNodeTypeIfKnown
+comment|// calling getValidatedNodeType.
+name|sql
+argument_list|(
+literal|"select count(*) from emp group by substring(ename FROM 1 FOR 1)"
 argument_list|)
 operator|.
 name|ok

@@ -948,6 +948,16 @@ name|cardinality
 argument_list|()
 decl_stmt|;
 specifier|final
+name|int
+name|indicatorArity
+init|=
+name|indicator
+condition|?
+name|keyArity
+else|:
+literal|0
+decl_stmt|;
+specifier|final
 name|List
 argument_list|<
 name|AggImpState
@@ -1838,6 +1848,8 @@ init|;
 name|j
 operator|<
 name|keyArity
+operator|+
+name|indicatorArity
 condition|;
 name|j
 operator|++

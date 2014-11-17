@@ -737,7 +737,7 @@ literal|null
 argument_list|,
 name|BuiltInMethod
 operator|.
-name|ARRAYS_AS_LIST
+name|LIST_N
 operator|.
 name|method
 argument_list|,

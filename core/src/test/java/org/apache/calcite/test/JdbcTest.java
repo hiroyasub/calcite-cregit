@@ -12560,7 +12560,7 @@ argument_list|)
 operator|.
 name|returnsUnordered
 argument_list|(
-literal|"deptno=0; C=4; S=36500.0"
+literal|"deptno=null; C=4; S=36500.0"
 argument_list|,
 literal|"deptno=10; C=3; S=28500.0"
 argument_list|,
@@ -12600,7 +12600,7 @@ argument_list|)
 operator|.
 name|returnsUnordered
 argument_list|(
-literal|"deptno=0; C=4; S=36500.0"
+literal|"deptno=null; C=4; S=36500.0"
 argument_list|,
 literal|"deptno=10; C=3; S=28500.0"
 argument_list|,
@@ -16476,6 +16476,22 @@ operator|.
 name|returnsUnordered
 argument_list|(
 name|lines
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Runs the dummy script, which is checked in empty but which you may    * use as scratch space during development. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testRunDummy
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+name|checkRun
+argument_list|(
+literal|"sql/dummy.oq"
 argument_list|)
 expr_stmt|;
 block|}
