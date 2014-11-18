@@ -15,8 +15,6 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|adapter
-operator|.
 name|interpreter
 package|;
 end_package
