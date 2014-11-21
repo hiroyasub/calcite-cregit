@@ -2354,6 +2354,30 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testGrouping
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select deptno, grouping(deptno) from emp\n"
+operator|+
+literal|"group by grouping sets (deptno, (deptno, gender), ())"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"SELECT `DEPTNO`, (GROUPING(`DEPTNO`))\n"
+operator|+
+literal|"FROM `EMP`\n"
+operator|+
+literal|"GROUP BY (GROUPING_SETS(`DEPTNO`, (ROW(`DEPTNO`, `GENDER`)),))"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testWith
 parameter_list|()
 block|{

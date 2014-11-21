@@ -618,6 +618,73 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testGroupingSetsProduct
+parameter_list|()
+block|{
+comment|// Example in SQL:2011:
+comment|//   GROUP BY GROUPING SETS ((A, B), (C)), GROUPING SETS ((X, Y), ())
+comment|// is transformed to
+comment|//   GROUP BY GROUPING SETS ((A, B, X, Y), (A, B), (C, X, Y), (C))
+name|sql
+argument_list|(
+literal|"select 1\n"
+operator|+
+literal|"from (values (0, 1, 2, 3, 4)) as t(a, b, c, x, y)\n"
+operator|+
+literal|"group by grouping sets ((a, b), c), grouping sets ((x, y), ())"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+comment|/** When the GROUPING function occurs with GROUP BY (effectively just one    * grouping set), we can translate it directly to 1. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testGroupingFunctionWithGroupBy
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select deptno, grouping(deptno), count(*), grouping(empno)\n"
+operator|+
+literal|"from emp\n"
+operator|+
+literal|"group by empno, deptno\n"
+operator|+
+literal|"order by 2"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testGroupingFunction
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select deptno, grouping(deptno), count(*), grouping(empno)\n"
+operator|+
+literal|"from emp\n"
+operator|+
+literal|"group by rollup(empno, deptno)"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
 comment|/**    * GROUP BY with duplicates    *    *<p>From SQL spec:    *<blockquote>NOTE 190 â That is, a simple<em>group by clause</em> that is    * not primitive may be transformed into a primitive<em>group by clause</em>    * by deleting all parentheses, and deleting extra commas as necessary for    * correct syntax. If there are no grouping columns at all (for example,    * GROUP BY (), ()), this is transformed to the canonical form GROUP BY ().    *</blockquote> */
 comment|// Same effect as writing "GROUP BY ()"
 annotation|@

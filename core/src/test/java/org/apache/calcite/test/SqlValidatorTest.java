@@ -9934,6 +9934,12 @@ name|Arrays
 operator|.
 name|asList
 argument_list|(
+literal|"CUME_DIST"
+argument_list|,
+literal|"DENSE_RANK"
+argument_list|,
+literal|"PERCENT_RANK"
+argument_list|,
 literal|"RANK"
 argument_list|,
 literal|"ROW_NUMBER"
@@ -10116,11 +10122,37 @@ condition|)
 block|{
 name|winSql
 argument_list|(
-literal|"select percent_rank() over w from emp window w as (rows 2 preceding )"
+literal|"select percent_rank() over w from emp\n"
+operator|+
+literal|"window w as (order by empno)"
 argument_list|)
 operator|.
 name|ok
 argument_list|()
+expr_stmt|;
+name|winSql
+argument_list|(
+literal|"select percent_rank() over w from emp\n"
+operator|+
+literal|"window w as (order by empno ^rows^ 2 preceding)"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"ROW/RANGE not allowed with RANK or DENSE_RANK functions"
+argument_list|)
+expr_stmt|;
+name|winSql
+argument_list|(
+literal|"select percent_rank() over w from emp\n"
+operator|+
+literal|"window w as ^(partition by empno)^"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"RANK or DENSE_RANK functions require ORDER BY clause in window specification"
+argument_list|)
 expr_stmt|;
 block|}
 else|else
@@ -10145,7 +10177,27 @@ condition|)
 block|{
 name|winSql
 argument_list|(
-literal|"select cume_dist() over w from emp window w as (rows 2 preceding)"
+literal|"select cume_dist() over w from emp window w as ^(rows 2 preceding)^"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"RANK or DENSE_RANK functions require ORDER BY clause in window specification"
+argument_list|)
+expr_stmt|;
+name|winSql
+argument_list|(
+literal|"select cume_dist() over w from emp window w as (order by empno ^rows^ 2 preceding)"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"ROW/RANGE not allowed with RANK or DENSE_RANK functions"
+argument_list|)
+expr_stmt|;
+name|winSql
+argument_list|(
+literal|"select cume_dist() over w from emp window w as (order by empno)"
 argument_list|)
 operator|.
 name|ok
@@ -10153,7 +10205,7 @@ argument_list|()
 expr_stmt|;
 name|winSql
 argument_list|(
-literal|"select cume_dist() over (rows 2 preceding ) from emp "
+literal|"select cume_dist() over (order by empno) from emp "
 argument_list|)
 operator|.
 name|ok
@@ -10203,7 +10255,7 @@ condition|)
 block|{
 name|winSql
 argument_list|(
-literal|"select percent_rank() over (rows 2 preceding ) from emp"
+literal|"select percent_rank() over (order by empno) from emp"
 argument_list|)
 operator|.
 name|ok
@@ -12660,6 +12712,254 @@ name|sets
 argument_list|)
 argument_list|)
 return|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testGrouping
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select deptno, grouping(deptno) from emp group by deptno"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select deptno / 2, grouping(deptno / 2),\n"
+operator|+
+literal|" ^grouping(deptno / 2, empno)^\n"
+operator|+
+literal|"from emp group by deptno / 2, empno"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Invalid number of arguments to function 'GROUPING'. Was expecting 1 arguments"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select deptno, grouping(^empno^) from emp group by deptno"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Expression 'EMPNO' is not being grouped"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select deptno, grouping(^deptno + 1^) from emp group by deptno"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Argument to GROUPING operator must be a grouped expression"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select deptno, grouping(emp.^xxx^) from emp"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Column 'XXX' not found in table 'EMP'"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select deptno, ^grouping(deptno)^ from emp"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"GROUPING operator may only occur in an aggregate query"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select deptno, sum(^grouping(deptno)^) over () from emp"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"GROUPING operator may only occur in an aggregate query"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select deptno from emp group by deptno having grouping(deptno)< 5"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select deptno from emp group by deptno order by grouping(deptno)"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select deptno as xx from emp group by deptno order by grouping(xx)"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select deptno as empno from emp\n"
+operator|+
+literal|"group by deptno order by grouping(empno)"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select 1 as deptno from emp\n"
+operator|+
+literal|"group by deptno order by grouping(^deptno^)"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Argument to GROUPING operator must be a grouped expression"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select deptno from emp group by deptno order by grouping(emp.deptno)"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select ^deptno^ from emp group by empno order by grouping(deptno)"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Expression 'DEPTNO' is not being grouped"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select deptno from emp order by ^grouping(deptno)^"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"GROUPING operator may only occur in an aggregate query"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select deptno from emp where ^grouping(deptno)^ = 1"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"GROUPING operator may only occur in an aggregate query"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select deptno from emp where ^grouping(deptno)^ = 1 group by deptno"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"GROUPING operator may only occur in SELECT, HAVING or ORDER BY clause"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select deptno from emp group by deptno, ^grouping(deptno)^"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"GROUPING operator may only occur in SELECT, HAVING or ORDER BY clause"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select deptno from emp\n"
+operator|+
+literal|"group by grouping sets(deptno, ^grouping(deptno)^)"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"GROUPING operator may only occur in SELECT, HAVING or ORDER BY clause"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select deptno from emp\n"
+operator|+
+literal|"group by cube(empno, ^grouping(deptno)^)"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"GROUPING operator may only occur in SELECT, HAVING or ORDER BY clause"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select deptno from emp\n"
+operator|+
+literal|"group by rollup(empno, ^grouping(deptno)^)"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"GROUPING operator may only occur in SELECT, HAVING or ORDER BY clause"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testCubeGrouping
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select deptno, grouping(deptno) from emp group by cube(deptno)"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select deptno, grouping(^deptno + 1^) from emp\n"
+operator|+
+literal|"group by cube(deptno, empno)"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Argument to GROUPING operator must be a grouped expression"
+argument_list|)
+expr_stmt|;
 block|}
 annotation|@
 name|Test

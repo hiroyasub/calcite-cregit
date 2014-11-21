@@ -626,6 +626,8 @@ literal|"KEYWORD(FLOOR)"
 argument_list|,
 literal|"KEYWORD(FUSION)"
 argument_list|,
+literal|"KEYWORD(GROUPING)"
+argument_list|,
 literal|"KEYWORD(INTERVAL)"
 argument_list|,
 literal|"KEYWORD(LAST_VALUE)"

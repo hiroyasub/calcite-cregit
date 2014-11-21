@@ -1246,6 +1246,9 @@ name|get
 argument_list|(
 name|groupKey
 argument_list|)
+operator|.
+name|getName
+argument_list|()
 argument_list|,
 name|booleanType
 argument_list|)

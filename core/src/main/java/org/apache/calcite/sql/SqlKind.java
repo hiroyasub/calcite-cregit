@@ -332,6 +332,9 @@ name|ROLLUP
 block|,
 comment|/** The internal {@code GROUPING SETS} operator that occurs within a    * {@code GROUP BY} clause. */
 name|GROUPING_SETS
+block|,
+comment|/** The internal {@code GROUPING} function. */
+name|GROUPING
 block|;
 comment|//~ Static fields/initializers ---------------------------------------------
 comment|// Most of the static fields are categories, aggregating several kinds into

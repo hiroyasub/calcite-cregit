@@ -839,6 +839,17 @@ operator|.
 name|GROUPING_SETS
 argument_list|)
 decl_stmt|;
+comment|/** {@code GROUPING} function. Occurs in similar places to an aggregate    * function ({@code SELECT}, {@code HAVING} clause, etc. of an aggregate    * query), but not technically an aggregate function. */
+specifier|public
+specifier|static
+specifier|final
+name|SqlGroupingFunction
+name|GROUPING
+init|=
+operator|new
+name|SqlGroupingFunction
+argument_list|()
+decl_stmt|;
 comment|/**    * String concatenation operator, '<code>||</code>'.    */
 specifier|public
 specifier|static

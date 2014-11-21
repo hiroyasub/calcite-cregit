@@ -16951,6 +16951,15 @@ argument_list|(
 literal|null
 argument_list|)
 expr_stmt|;
+name|call
+operator|.
+name|validate
+argument_list|(
+name|this
+argument_list|,
+name|scope
+argument_list|)
+expr_stmt|;
 block|}
 specifier|public
 name|void
