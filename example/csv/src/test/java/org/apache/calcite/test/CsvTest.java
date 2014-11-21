@@ -1345,6 +1345,36 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testReadme
+parameter_list|()
+throws|throws
+name|SQLException
+block|{
+name|checkSql
+argument_list|(
+literal|"SELECT d.name, COUNT(*) cnt"
+operator|+
+literal|" FROM emps AS e"
+operator|+
+literal|" JOIN depts AS d ON e.deptno = d.deptno"
+operator|+
+literal|" GROUP BY d.name"
+argument_list|,
+literal|"smart"
+argument_list|,
+name|expect
+argument_list|(
+literal|"NAME=Sales; CNT=1"
+argument_list|,
+literal|"NAME=Marketing; CNT=2"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testDateType
 parameter_list|()
 throws|throws

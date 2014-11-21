@@ -665,6 +665,38 @@ argument_list|(
 name|typeString
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+name|fieldType
+operator|==
+literal|null
+condition|)
+block|{
+name|System
+operator|.
+name|out
+operator|.
+name|println
+argument_list|(
+literal|"WARNING: Found unknown type: "
+operator|+
+name|typeString
+operator|+
+literal|" in file: "
+operator|+
+name|file
+operator|.
+name|getAbsolutePath
+argument_list|()
+operator|+
+literal|" for column: "
+operator|+
+name|name
+operator|+
+literal|". Will assume the type of column is string"
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 else|else
 block|{
