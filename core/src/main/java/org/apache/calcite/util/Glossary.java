@@ -165,7 +165,7 @@ name|TEMPLATE_METHOD_PATTERN
 init|=
 literal|null
 decl_stmt|;
-comment|/**    * Represent an operation to be performed on the elments of an object    * structure. Lets you define a new operation without changing the classes    * of the elements on which it operates. (See<a    * href="http://c2.com/cgi/wiki?VisitorPattern">GoF</a>.)    */
+comment|/**    * Represent an operation to be performed on the elements of an object    * structure. Lets you define a new operation without changing the classes    * of the elements on which it operates. (See<a    * href="http://c2.com/cgi/wiki?VisitorPattern">GoF</a>.)    */
 name|Glossary
 name|VISITOR_PATTERN
 init|=
