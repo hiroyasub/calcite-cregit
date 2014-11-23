@@ -348,7 +348,7 @@ argument_list|()
 argument_list|)
 argument_list|)
 argument_list|,
-literal|"ValuesReduceRule[Filter"
+literal|"ValuesReduceRule(Filter)"
 argument_list|)
 block|{
 specifier|public
@@ -420,7 +420,7 @@ argument_list|()
 argument_list|)
 argument_list|)
 argument_list|,
-literal|"ValuesReduceRule[Project]"
+literal|"ValuesReduceRule(Project)"
 argument_list|)
 block|{
 specifier|public
@@ -499,7 +499,7 @@ argument_list|)
 argument_list|)
 argument_list|)
 argument_list|,
-literal|"ValuesReduceRule[Project+Filter]"
+literal|"ValuesReduceRule(Project-Filter)"
 argument_list|)
 block|{
 specifier|public

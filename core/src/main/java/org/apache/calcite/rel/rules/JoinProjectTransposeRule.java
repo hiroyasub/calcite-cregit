@@ -395,7 +395,7 @@ argument_list|()
 argument_list|)
 argument_list|)
 argument_list|,
-literal|"JoinProjectTransposeRule: with two LogicalProject children"
+literal|"JoinProjectTransposeRule(Project-Project)"
 argument_list|)
 decl_stmt|;
 specifier|public
@@ -427,7 +427,7 @@ argument_list|)
 argument_list|)
 argument_list|)
 argument_list|,
-literal|"JoinProjectTransposeRule: with LogicalProject on left"
+literal|"JoinProjectTransposeRule(Project-Other)"
 argument_list|)
 decl_stmt|;
 specifier|public
@@ -466,7 +466,7 @@ argument_list|()
 argument_list|)
 argument_list|)
 argument_list|,
-literal|"JoinProjectTransposeRule: with LogicalProject on right"
+literal|"JoinProjectTransposeRule(Other-Project)"
 argument_list|)
 decl_stmt|;
 specifier|private

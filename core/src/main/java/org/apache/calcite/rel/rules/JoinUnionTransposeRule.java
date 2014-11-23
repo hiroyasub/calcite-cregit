@@ -204,7 +204,7 @@ argument_list|()
 argument_list|)
 argument_list|)
 argument_list|,
-literal|"union on left"
+literal|"JoinUnionTransposeRule(Union-Other)"
 argument_list|)
 decl_stmt|;
 specifier|public
@@ -243,7 +243,7 @@ argument_list|()
 argument_list|)
 argument_list|)
 argument_list|,
-literal|"union on right"
+literal|"JoinUnionTransposeRule(Other-Union)"
 argument_list|)
 decl_stmt|;
 specifier|private
@@ -253,16 +253,14 @@ name|RelOptRuleOperand
 name|operand
 parameter_list|,
 name|String
-name|id
+name|description
 parameter_list|)
 block|{
 name|super
 argument_list|(
 name|operand
 argument_list|,
-literal|"JoinUnionTransposeRule: "
-operator|+
-name|id
+name|description
 argument_list|)
 expr_stmt|;
 block|}

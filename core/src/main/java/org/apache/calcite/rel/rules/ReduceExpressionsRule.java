@@ -584,7 +584,7 @@ name|LogicalFilter
 operator|.
 name|class
 argument_list|,
-literal|"ReduceExpressionsRule[Filter]"
+literal|"ReduceExpressionsRule(Filter)"
 argument_list|)
 block|{
 specifier|public
@@ -1015,7 +1015,7 @@ name|LogicalProject
 operator|.
 name|class
 argument_list|,
-literal|"ReduceExpressionsRule[Project]"
+literal|"ReduceExpressionsRule(Project)"
 argument_list|)
 block|{
 specifier|public
@@ -1131,7 +1131,7 @@ name|Join
 operator|.
 name|class
 argument_list|,
-literal|"ReduceExpressionsRule[Join]"
+literal|"ReduceExpressionsRule(Join)"
 argument_list|)
 block|{
 specifier|public
@@ -1253,7 +1253,7 @@ name|LogicalCalc
 operator|.
 name|class
 argument_list|,
-literal|"ReduceExpressionsRule[Calc]"
+literal|"ReduceExpressionsRule(Calc)"
 argument_list|)
 block|{
 specifier|public

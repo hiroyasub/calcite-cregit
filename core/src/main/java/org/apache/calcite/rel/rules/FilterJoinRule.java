@@ -373,7 +373,7 @@ name|super
 argument_list|(
 name|operand
 argument_list|,
-literal|"PushFilterRule: "
+literal|"PushFilterRule:"
 operator|+
 name|id
 argument_list|)

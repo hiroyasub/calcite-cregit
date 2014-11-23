@@ -209,6 +209,29 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
+if|if
+condition|(
+operator|!
+name|description
+operator|.
+name|matches
+argument_list|(
+literal|"[A-Za-z][-A-Za-z0-9_.():]*"
+argument_list|)
+condition|)
+block|{
+throw|throw
+operator|new
+name|RuntimeException
+argument_list|(
+literal|"Rule description '"
+operator|+
+name|description
+operator|+
+literal|"' is not valid"
+argument_list|)
+throw|;
+block|}
 name|this
 operator|.
 name|description
@@ -1034,7 +1057,9 @@ return|return
 literal|null
 return|;
 block|}
+comment|/** Returns the description of this rule.    *    *<p>It must be unique (for rules that are not equal) and must consist of    * only the characters A-Z, a-z, 0-9, '_', '.', '(', ')'. It must start with    * a letter. */
 specifier|public
+specifier|final
 name|String
 name|toString
 parameter_list|()
