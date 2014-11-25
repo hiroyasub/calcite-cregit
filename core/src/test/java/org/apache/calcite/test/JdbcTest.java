@@ -12891,12 +12891,7 @@ literal|0
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-403">CALCITE-403</a>,    * "Enumerable gives NullPointerException with HAVING on nullable    * expression". */
-annotation|@
-name|Ignore
-argument_list|(
-literal|"CALCITE-403"
-argument_list|)
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-403">CALCITE-403</a>,    * "Enumerable gives NullPointerException with NOT on nullable    * expression". */
 annotation|@
 name|Test
 specifier|public
@@ -12916,11 +12911,6 @@ argument_list|()
 expr_stmt|;
 block|}
 comment|/** Minimal case of {@link #testHavingNot()}. */
-annotation|@
-name|Ignore
-argument_list|(
-literal|"CALCITE-403"
-argument_list|)
 annotation|@
 name|Test
 specifier|public
@@ -12952,12 +12942,52 @@ literal|"from \"store\"\n"
 operator|+
 literal|"group by \"store\".\"store_street_address\"\n"
 operator|+
-literal|"having NOT (sum(\"store\".\"grocery_sqft\")< 10000)"
+literal|"having NOT (sum(\"store\".\"grocery_sqft\")< 20000)"
 argument_list|)
 operator|.
 name|returnsCount
 argument_list|(
-literal|0
+literal|10
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWhereNot
+parameter_list|()
+throws|throws
+name|IOException
+block|{
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|CalciteAssert
+operator|.
+name|Config
+operator|.
+name|FOODMART_CLONE
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select 1\n"
+operator|+
+literal|"from \"store\"\n"
+operator|+
+literal|"where NOT (\"store\".\"grocery_sqft\"< 22000)\n"
+operator|+
+literal|"group by \"store\".\"store_street_address\"\n"
+argument_list|)
+operator|.
+name|returnsCount
+argument_list|(
+literal|8
 argument_list|)
 expr_stmt|;
 block|}
