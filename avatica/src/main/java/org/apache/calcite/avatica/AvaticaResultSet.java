@@ -781,6 +781,20 @@ block|{
 comment|// TODO: for timeout, see IteratorResultSet.next
 if|if
 condition|(
+name|isClosed
+argument_list|()
+condition|)
+block|{
+throw|throw
+operator|new
+name|SQLException
+argument_list|(
+literal|"next() called on closed cursor"
+argument_list|)
+throw|;
+block|}
+if|if
+condition|(
 name|cursor
 operator|.
 name|next
