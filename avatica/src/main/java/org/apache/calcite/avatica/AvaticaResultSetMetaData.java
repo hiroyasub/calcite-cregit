@@ -35,16 +35,6 @@ name|SQLException
 import|;
 end_import
 
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|List
-import|;
-end_import
-
 begin_comment
 comment|/**  * Implementation of {@link ResultSetMetaData}  * for the Avatica framework.  */
 end_comment
@@ -64,12 +54,12 @@ specifier|final
 name|Object
 name|query
 decl_stmt|;
+comment|// reserved for future use
 specifier|final
-name|List
-argument_list|<
-name|ColumnMetaData
-argument_list|>
-name|columnMetaDataList
+name|Meta
+operator|.
+name|Signature
+name|signature
 decl_stmt|;
 specifier|public
 name|AvaticaResultSetMetaData
@@ -80,11 +70,10 @@ parameter_list|,
 name|Object
 name|query
 parameter_list|,
-name|List
-argument_list|<
-name|ColumnMetaData
-argument_list|>
-name|columnMetaDataList
+name|Meta
+operator|.
+name|Signature
+name|signature
 parameter_list|)
 block|{
 name|this
@@ -101,9 +90,9 @@ name|query
 expr_stmt|;
 name|this
 operator|.
-name|columnMetaDataList
+name|signature
 operator|=
-name|columnMetaDataList
+name|signature
 expr_stmt|;
 block|}
 specifier|private
@@ -115,7 +104,9 @@ name|column
 parameter_list|)
 block|{
 return|return
-name|columnMetaDataList
+name|signature
+operator|.
+name|columns
 operator|.
 name|get
 argument_list|(
@@ -134,7 +125,9 @@ throws|throws
 name|SQLException
 block|{
 return|return
-name|columnMetaDataList
+name|signature
+operator|.
+name|columns
 operator|.
 name|size
 argument_list|()

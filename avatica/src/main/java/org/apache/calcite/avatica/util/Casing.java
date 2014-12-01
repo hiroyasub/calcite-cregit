@@ -12,70 +12,33 @@ operator|.
 name|calcite
 operator|.
 name|avatica
+operator|.
+name|util
 package|;
 end_package
 
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|List
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|Map
-import|;
-end_import
-
 begin_comment
-comment|/**  * Result of preparing a statement.  */
+comment|/** Policy for converting case of identifiers before storing them.  *  *<p>A database often has policies for quoted versus unquoted identifiers.  * For example, Oracle converts unquoted identifiers to upper-case, but  * quoted identifiers are unchanged.</p> */
 end_comment
 
-begin_interface
+begin_enum
 specifier|public
-interface|interface
-name|AvaticaPrepareResult
+enum|enum
+name|Casing
 block|{
-name|List
-argument_list|<
-name|ColumnMetaData
-argument_list|>
-name|getColumnList
-parameter_list|()
-function_decl|;
-name|String
-name|getSql
-parameter_list|()
-function_decl|;
-name|List
-argument_list|<
-name|AvaticaParameter
-argument_list|>
-name|getParameterList
-parameter_list|()
-function_decl|;
-name|Map
-argument_list|<
-name|String
-argument_list|,
-name|Object
-argument_list|>
-name|getInternalParameters
-parameter_list|()
-function_decl|;
+comment|/** The case of identifiers is not changed. */
+name|UNCHANGED
+block|,
+comment|/** Identifiers are converted to upper-case. */
+name|TO_UPPER
+block|,
+comment|/** Identifiers are converted to lower-case. */
+name|TO_LOWER
 block|}
-end_interface
+end_enum
 
 begin_comment
-comment|// End AvaticaPrepareResult.java
+comment|// End Casing.java
 end_comment
 
 end_unit

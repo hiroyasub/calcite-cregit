@@ -25,7 +25,7 @@ name|calcite
 operator|.
 name|avatica
 operator|.
-name|AvaticaPrepareResult
+name|AvaticaPreparedStatement
 import|;
 end_import
 
@@ -39,21 +39,7 @@ name|calcite
 operator|.
 name|avatica
 operator|.
-name|AvaticaPreparedStatement
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|server
-operator|.
-name|CalciteServerStatement
+name|Meta
 import|;
 end_import
 
@@ -77,18 +63,23 @@ class|class
 name|CalcitePreparedStatement
 extends|extends
 name|AvaticaPreparedStatement
-implements|implements
-name|CalciteServerStatement
 block|{
-comment|/**    * Creates a CalcitePreparedStatement.    *    * @param connection Connection    * @param prepareResult Result of preparing statement    *    * @throws SQLException if database error occurs    */
+comment|/**    * Creates a CalcitePreparedStatement.    *    * @param connection Connection    * @param h Statement handle    * @param signature Result of preparing statement    * @param resultSetType Result set type    * @param resultSetConcurrency Result set concurrency    * @param resultSetHoldability Result set holdability    * @throws SQLException if database error occurs    */
 specifier|protected
 name|CalcitePreparedStatement
 parameter_list|(
 name|CalciteConnectionImpl
 name|connection
 parameter_list|,
-name|AvaticaPrepareResult
-name|prepareResult
+name|Meta
+operator|.
+name|StatementHandle
+name|h
+parameter_list|,
+name|Meta
+operator|.
+name|Signature
+name|signature
 parameter_list|,
 name|int
 name|resultSetType
@@ -106,7 +97,9 @@ name|super
 argument_list|(
 name|connection
 argument_list|,
-name|prepareResult
+name|h
+argument_list|,
+name|signature
 argument_list|,
 name|resultSetType
 argument_list|,
@@ -131,24 +124,6 @@ name|super
 operator|.
 name|getConnection
 argument_list|()
-return|;
-block|}
-specifier|public
-name|CalciteConnectionImpl
-operator|.
-name|ContextImpl
-name|createPrepareContext
-parameter_list|()
-block|{
-return|return
-operator|new
-name|CalciteConnectionImpl
-operator|.
-name|ContextImpl
-argument_list|(
-name|getConnection
-argument_list|()
-argument_list|)
 return|;
 block|}
 block|}

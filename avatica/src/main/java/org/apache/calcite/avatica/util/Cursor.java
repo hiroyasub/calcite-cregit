@@ -12,8 +12,24 @@ operator|.
 name|calcite
 operator|.
 name|avatica
+operator|.
+name|util
 package|;
 end_package
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|avatica
+operator|.
+name|ColumnMetaData
+import|;
+end_import
 
 begin_import
 import|import

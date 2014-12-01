@@ -41,6 +41,8 @@ name|calcite
 operator|.
 name|avatica
 operator|.
+name|util
+operator|.
 name|ByteString
 import|;
 end_import

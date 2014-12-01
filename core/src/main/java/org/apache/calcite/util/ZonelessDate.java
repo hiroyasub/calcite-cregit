@@ -17,6 +17,22 @@ end_package
 
 begin_import
 import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|avatica
+operator|.
+name|util
+operator|.
+name|DateTimeUtils
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|sql
@@ -148,7 +164,7 @@ name|Date
 argument_list|(
 name|getJdbcDate
 argument_list|(
-name|DateTimeUtil
+name|DateTimeUtils
 operator|.
 name|DEFAULT_ZONE
 argument_list|)
@@ -168,7 +184,7 @@ name|getTempDate
 argument_list|(
 name|getJdbcDate
 argument_list|(
-name|DateTimeUtil
+name|DateTimeUtils
 operator|.
 name|DEFAULT_ZONE
 argument_list|)
@@ -231,7 +247,7 @@ name|parse
 argument_list|(
 name|s
 argument_list|,
-name|DateTimeUtil
+name|DateTimeUtils
 operator|.
 name|DATE_FORMAT_STRING
 argument_list|)
@@ -253,7 +269,7 @@ block|{
 name|Calendar
 name|cal
 init|=
-name|DateTimeUtil
+name|DateTimeUtils
 operator|.
 name|parseDateFormat
 argument_list|(
@@ -261,7 +277,7 @@ name|s
 argument_list|,
 name|format
 argument_list|,
-name|DateTimeUtil
+name|DateTimeUtils
 operator|.
 name|GMT_ZONE
 argument_list|)

@@ -27,6 +27,8 @@ name|calcite
 operator|.
 name|avatica
 operator|.
+name|util
+operator|.
 name|Casing
 import|;
 end_import
@@ -40,6 +42,8 @@ operator|.
 name|calcite
 operator|.
 name|avatica
+operator|.
+name|util
 operator|.
 name|Quoting
 import|;
@@ -13001,6 +13005,13 @@ argument_list|(
 literal|"cast(x as interval minute to second)"
 argument_list|,
 literal|"CAST(`X` AS INTERVAL MINUTE TO SECOND)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"cast(interval '3-2' year to month as CHAR(5))"
+argument_list|,
+literal|"CAST(INTERVAL '3-2' YEAR TO MONTH AS CHAR(5))"
 argument_list|)
 expr_stmt|;
 block|}

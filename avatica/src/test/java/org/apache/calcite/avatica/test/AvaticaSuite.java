@@ -62,6 +62,10 @@ block|{
 name|ConnectStringParserTest
 operator|.
 name|class
+block|,
+name|RemoteDriverTest
+operator|.
+name|class
 block|}
 argument_list|)
 specifier|public

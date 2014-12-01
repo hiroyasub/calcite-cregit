@@ -25,7 +25,9 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|runtime
+name|avatica
+operator|.
+name|util
 operator|.
 name|Spaces
 import|;

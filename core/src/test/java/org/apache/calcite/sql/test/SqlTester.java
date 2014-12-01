@@ -27,6 +27,8 @@ name|calcite
 operator|.
 name|avatica
 operator|.
+name|util
+operator|.
 name|Casing
 import|;
 end_import
@@ -40,6 +42,8 @@ operator|.
 name|calcite
 operator|.
 name|avatica
+operator|.
+name|util
 operator|.
 name|Quoting
 import|;

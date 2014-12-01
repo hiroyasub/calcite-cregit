@@ -67,7 +67,7 @@ name|calcite
 operator|.
 name|avatica
 operator|.
-name|Cursor
+name|Handler
 import|;
 end_import
 
@@ -81,7 +81,9 @@ name|calcite
 operator|.
 name|avatica
 operator|.
-name|Handler
+name|util
+operator|.
+name|Cursor
 import|;
 end_import
 
@@ -223,25 +225,33 @@ name|statement
 parameter_list|,
 name|CalcitePrepare
 operator|.
-name|PrepareResult
-name|prepareResult
+name|CalciteSignature
+name|calciteSignature
 parameter_list|,
 name|ResultSetMetaData
 name|resultSetMetaData
 parameter_list|,
 name|TimeZone
 name|timeZone
+parameter_list|,
+name|Iterable
+argument_list|<
+name|Object
+argument_list|>
+name|iterable
 parameter_list|)
 block|{
 name|super
 argument_list|(
 name|statement
 argument_list|,
-name|prepareResult
+name|calciteSignature
 argument_list|,
 name|resultSetMetaData
 argument_list|,
 name|timeZone
+argument_list|,
+name|iterable
 argument_list|)
 expr_stmt|;
 block|}
@@ -337,6 +347,9 @@ name|AvaticaType
 name|elementType
 parameter_list|,
 name|Iterable
+argument_list|<
+name|Object
+argument_list|>
 name|iterable
 parameter_list|)
 block|{
@@ -352,9 +365,9 @@ argument_list|,
 operator|(
 name|CalcitePrepare
 operator|.
-name|PrepareResult
+name|CalciteSignature
 operator|)
-name|prepareResult
+name|signature
 argument_list|,
 name|resultSetMetaData
 argument_list|,
@@ -362,6 +375,8 @@ name|localCalendar
 operator|.
 name|getTimeZone
 argument_list|()
+argument_list|,
+name|iterable
 argument_list|)
 decl_stmt|;
 specifier|final
@@ -502,19 +517,26 @@ argument_list|)
 return|;
 block|}
 comment|// do not make public
+parameter_list|<
+name|T
+parameter_list|>
 name|CalcitePrepare
 operator|.
-name|PrepareResult
-name|getPrepareResult
+name|CalciteSignature
+argument_list|<
+name|T
+argument_list|>
+name|getSignature
 parameter_list|()
 block|{
+comment|//noinspection unchecked
 return|return
 operator|(
 name|CalcitePrepare
 operator|.
-name|PrepareResult
+name|CalciteSignature
 operator|)
-name|prepareResult
+name|signature
 return|;
 block|}
 comment|// do not make public

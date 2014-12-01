@@ -112,6 +112,8 @@ operator|.
 name|BOOLEAN
 argument_list|,
 literal|false
+argument_list|,
+literal|false
 argument_list|)
 block|,
 comment|/** Whether Calcite should use materializations. */
@@ -124,6 +126,8 @@ operator|.
 name|BOOLEAN
 argument_list|,
 literal|true
+argument_list|,
+literal|false
 argument_list|)
 block|,
 comment|/** Whether Calcite should create materializations. */
@@ -136,6 +140,8 @@ operator|.
 name|BOOLEAN
 argument_list|,
 literal|true
+argument_list|,
+literal|false
 argument_list|)
 block|,
 comment|/** URI of the model. */
@@ -148,6 +154,8 @@ operator|.
 name|STRING
 argument_list|,
 literal|null
+argument_list|,
+literal|false
 argument_list|)
 block|,
 comment|/** Lexical policy. */
@@ -162,6 +170,8 @@ argument_list|,
 name|Lex
 operator|.
 name|ORACLE
+argument_list|,
+literal|false
 argument_list|)
 block|,
 comment|/** How identifiers are quoted.    *  If not specified, value from {@link #LEX} is used. */
@@ -174,6 +184,8 @@ operator|.
 name|ENUM
 argument_list|,
 literal|null
+argument_list|,
+literal|false
 argument_list|)
 block|,
 comment|/** How identifiers are stored if they are quoted.    *  If not specified, value from {@link #LEX} is used. */
@@ -186,6 +198,8 @@ operator|.
 name|ENUM
 argument_list|,
 literal|null
+argument_list|,
+literal|false
 argument_list|)
 block|,
 comment|/** How identifiers are stored if they are not quoted.    *  If not specified, value from {@link #LEX} is used. */
@@ -198,6 +212,8 @@ operator|.
 name|ENUM
 argument_list|,
 literal|null
+argument_list|,
+literal|false
 argument_list|)
 block|,
 comment|/** Whether identifiers are matched case-sensitively.    *  If not specified, value from {@link #LEX} is used. */
@@ -210,6 +226,8 @@ operator|.
 name|BOOLEAN
 argument_list|,
 literal|null
+argument_list|,
+literal|false
 argument_list|)
 block|,
 comment|/** Name of initial schema. */
@@ -222,6 +240,8 @@ operator|.
 name|STRING
 argument_list|,
 literal|null
+argument_list|,
+literal|false
 argument_list|)
 block|,
 comment|/** Specifies whether Spark should be used as the engine for processing that    * cannot be pushed to the source system. If false (the default), Calcite    * generates code that implements the Enumerable interface. */
@@ -232,6 +252,8 @@ argument_list|,
 name|Type
 operator|.
 name|BOOLEAN
+argument_list|,
+literal|false
 argument_list|,
 literal|false
 argument_list|)
@@ -246,6 +268,8 @@ operator|.
 name|STRING
 argument_list|,
 literal|null
+argument_list|,
+literal|false
 argument_list|)
 block|,
 comment|/** Type system. The name of a class that implements    * {@link org.apache.calcite.rel.type.RelDataTypeSystem} and has a public    * default constructor or an {@code INSTANCE} constant. */
@@ -258,6 +282,8 @@ operator|.
 name|PLUGIN
 argument_list|,
 literal|null
+argument_list|,
+literal|false
 argument_list|)
 block|;
 specifier|private
@@ -274,6 +300,11 @@ specifier|private
 specifier|final
 name|Object
 name|defaultValue
+decl_stmt|;
+specifier|private
+specifier|final
+name|boolean
+name|required
 decl_stmt|;
 specifier|private
 specifier|static
@@ -348,6 +379,9 @@ name|type
 parameter_list|,
 name|Object
 name|defaultValue
+parameter_list|,
+name|boolean
+name|required
 parameter_list|)
 block|{
 name|this
@@ -367,6 +401,12 @@ operator|.
 name|defaultValue
 operator|=
 name|defaultValue
+expr_stmt|;
+name|this
+operator|.
+name|required
+operator|=
+name|required
 expr_stmt|;
 assert|assert
 name|defaultValue
@@ -406,6 +446,15 @@ parameter_list|()
 block|{
 return|return
 name|type
+return|;
+block|}
+specifier|public
+name|boolean
+name|required
+parameter_list|()
+block|{
+return|return
+name|required
 return|;
 block|}
 specifier|public

@@ -1847,7 +1847,7 @@ specifier|public
 specifier|static
 name|CalcitePrepare
 operator|.
-name|PrepareResult
+name|CalciteSignature
 argument_list|<
 name|Object
 argument_list|>

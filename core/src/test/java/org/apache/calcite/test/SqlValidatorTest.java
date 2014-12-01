@@ -25,6 +25,8 @@ name|calcite
 operator|.
 name|avatica
 operator|.
+name|util
+operator|.
 name|Casing
 import|;
 end_import
@@ -39,7 +41,25 @@ name|calcite
 operator|.
 name|avatica
 operator|.
+name|util
+operator|.
 name|Quoting
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|avatica
+operator|.
+name|util
+operator|.
+name|TimeUnit
 import|;
 end_import
 
@@ -84,20 +104,6 @@ operator|.
 name|sql
 operator|.
 name|SqlCollation
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|sql
-operator|.
-name|SqlIntervalQualifier
 import|;
 end_import
 
@@ -4358,8 +4364,6 @@ name|assertEquals
 argument_list|(
 literal|0
 argument_list|,
-name|SqlIntervalQualifier
-operator|.
 name|TimeUnit
 operator|.
 name|YEAR
@@ -4372,8 +4376,6 @@ name|assertEquals
 argument_list|(
 literal|1
 argument_list|,
-name|SqlIntervalQualifier
-operator|.
 name|TimeUnit
 operator|.
 name|MONTH
@@ -4386,8 +4388,6 @@ name|assertEquals
 argument_list|(
 literal|2
 argument_list|,
-name|SqlIntervalQualifier
-operator|.
 name|TimeUnit
 operator|.
 name|DAY
@@ -4400,8 +4400,6 @@ name|assertEquals
 argument_list|(
 literal|3
 argument_list|,
-name|SqlIntervalQualifier
-operator|.
 name|TimeUnit
 operator|.
 name|HOUR
@@ -4414,8 +4412,6 @@ name|assertEquals
 argument_list|(
 literal|4
 argument_list|,
-name|SqlIntervalQualifier
-operator|.
 name|TimeUnit
 operator|.
 name|MINUTE
@@ -4428,8 +4424,6 @@ name|assertEquals
 argument_list|(
 literal|5
 argument_list|,
-name|SqlIntervalQualifier
-operator|.
 name|TimeUnit
 operator|.
 name|SECOND
@@ -4442,8 +4436,6 @@ name|boolean
 name|b
 init|=
 operator|(
-name|SqlIntervalQualifier
-operator|.
 name|TimeUnit
 operator|.
 name|YEAR
@@ -4451,8 +4443,6 @@ operator|.
 name|ordinal
 argument_list|()
 operator|<
-name|SqlIntervalQualifier
-operator|.
 name|TimeUnit
 operator|.
 name|MONTH
@@ -4462,8 +4452,6 @@ argument_list|()
 operator|)
 operator|&&
 operator|(
-name|SqlIntervalQualifier
-operator|.
 name|TimeUnit
 operator|.
 name|MONTH
@@ -4471,8 +4459,6 @@ operator|.
 name|ordinal
 argument_list|()
 operator|<
-name|SqlIntervalQualifier
-operator|.
 name|TimeUnit
 operator|.
 name|DAY
@@ -4482,8 +4468,6 @@ argument_list|()
 operator|)
 operator|&&
 operator|(
-name|SqlIntervalQualifier
-operator|.
 name|TimeUnit
 operator|.
 name|DAY
@@ -4491,8 +4475,6 @@ operator|.
 name|ordinal
 argument_list|()
 operator|<
-name|SqlIntervalQualifier
-operator|.
 name|TimeUnit
 operator|.
 name|HOUR
@@ -4502,8 +4484,6 @@ argument_list|()
 operator|)
 operator|&&
 operator|(
-name|SqlIntervalQualifier
-operator|.
 name|TimeUnit
 operator|.
 name|HOUR
@@ -4511,8 +4491,6 @@ operator|.
 name|ordinal
 argument_list|()
 operator|<
-name|SqlIntervalQualifier
-operator|.
 name|TimeUnit
 operator|.
 name|MINUTE
@@ -4522,8 +4500,6 @@ argument_list|()
 operator|)
 operator|&&
 operator|(
-name|SqlIntervalQualifier
-operator|.
 name|TimeUnit
 operator|.
 name|MINUTE
@@ -4531,8 +4507,6 @@ operator|.
 name|ordinal
 argument_list|()
 operator|<
-name|SqlIntervalQualifier
-operator|.
 name|TimeUnit
 operator|.
 name|SECOND

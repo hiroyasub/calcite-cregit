@@ -11,7 +11,9 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|runtime
+name|avatica
+operator|.
+name|util
 package|;
 end_package
 
@@ -25,21 +27,7 @@ name|calcite
 operator|.
 name|avatica
 operator|.
-name|ArrayImpl
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|avatica
-operator|.
-name|ByteString
+name|AvaticaUtils
 import|;
 end_import
 
@@ -54,64 +42,6 @@ operator|.
 name|avatica
 operator|.
 name|ColumnMetaData
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|avatica
-operator|.
-name|Cursor
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|linq4j
-operator|.
-name|tree
-operator|.
-name|Primitive
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|util
-operator|.
-name|DateTimeUtil
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|util
-operator|.
-name|Util
 import|;
 end_import
 
@@ -316,7 +246,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Base class for implementing a cursor.  *  *<p>Derived class needs to provide {@link Getter} and can override  * {@link org.apache.calcite.avatica.Cursor.Accessor} implementations if it  * wishes.</p>  */
+comment|/**  * Base class for implementing a cursor.  *  *<p>Derived class needs to provide {@link Getter} and can override  * {@link org.apache.calcite.avatica.util.Cursor.Accessor} implementations if it  * wishes.</p>  */
 end_comment
 
 begin_class
@@ -904,13 +834,9 @@ name|length
 argument_list|()
 expr_stmt|;
 block|}
-name|SqlFunctions
-operator|.
 name|TimeUnitRange
 name|range
 init|=
-name|SqlFunctions
-operator|.
 name|TimeUnitRange
 operator|.
 name|valueOf
@@ -1039,7 +965,7 @@ argument_list|)
 expr_stmt|;
 block|}
 return|return
-name|SqlFunctions
+name|DateTimeUtils
 operator|.
 name|unixTimestampToString
 argument_list|(
@@ -1060,7 +986,7 @@ name|Calendar
 name|calendar
 parameter_list|)
 block|{
-name|Util
+name|AvaticaUtils
 operator|.
 name|discard
 argument_list|(
@@ -1069,7 +995,7 @@ argument_list|)
 expr_stmt|;
 comment|// timezone shift doesn't make sense
 return|return
-name|SqlFunctions
+name|DateTimeUtils
 operator|.
 name|unixDateToString
 argument_list|(
@@ -1111,7 +1037,7 @@ argument_list|)
 expr_stmt|;
 block|}
 return|return
-name|SqlFunctions
+name|DateTimeUtils
 operator|.
 name|unixTimeToString
 argument_list|(
@@ -1256,6 +1182,11 @@ name|Getter
 name|getter
 parameter_list|)
 block|{
+assert|assert
+name|getter
+operator|!=
+literal|null
+assert|;
 name|this
 operator|.
 name|getter
@@ -2786,7 +2717,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**    * Accessor that assumes that the underlying value is an array of    * {@link org.apache.calcite.avatica.ByteString} values;    * corresponds to {@link java.sql.Types#BINARY}    * and {@link java.sql.Types#VARBINARY}.    */
+comment|/**    * Accessor that assumes that the underlying value is an array of    * {@link org.apache.calcite.avatica.util.ByteString} values;    * corresponds to {@link java.sql.Types#BINARY}    * and {@link java.sql.Types#VARBINARY}.    */
 specifier|private
 specifier|static
 class|class
@@ -2927,7 +2858,7 @@ name|long
 operator|)
 name|v
 operator|*
-name|DateTimeUtil
+name|DateTimeUtils
 operator|.
 name|MILLIS_PER_DAY
 argument_list|,
@@ -2976,7 +2907,7 @@ name|long
 operator|)
 name|v
 operator|*
-name|DateTimeUtil
+name|DateTimeUtils
 operator|.
 name|MILLIS_PER_DAY
 argument_list|,
@@ -3490,7 +3421,7 @@ operator|.
 name|getTime
 argument_list|()
 operator|/
-name|DateTimeUtil
+name|DateTimeUtils
 operator|.
 name|MILLIS_PER_DAY
 operator|)
@@ -3667,7 +3598,7 @@ operator|.
 name|getTime
 argument_list|()
 operator|%
-name|DateTimeUtil
+name|DateTimeUtils
 operator|.
 name|MILLIS_PER_DAY
 operator|)
@@ -4040,8 +3971,6 @@ name|IntAccessor
 block|{
 specifier|private
 specifier|final
-name|SqlFunctions
-operator|.
 name|TimeUnitRange
 name|range
 decl_stmt|;
@@ -4051,8 +3980,6 @@ parameter_list|(
 name|Getter
 name|getter
 parameter_list|,
-name|SqlFunctions
-operator|.
 name|TimeUnitRange
 name|range
 parameter_list|)
@@ -4098,7 +4025,7 @@ literal|null
 return|;
 block|}
 return|return
-name|SqlFunctions
+name|DateTimeUtils
 operator|.
 name|intervalYearMonthToString
 argument_list|(
@@ -4119,8 +4046,6 @@ name|LongAccessor
 block|{
 specifier|private
 specifier|final
-name|SqlFunctions
-operator|.
 name|TimeUnitRange
 name|range
 decl_stmt|;
@@ -4135,8 +4060,6 @@ parameter_list|(
 name|Getter
 name|getter
 parameter_list|,
-name|SqlFunctions
-operator|.
 name|TimeUnitRange
 name|range
 parameter_list|,
@@ -4191,7 +4114,7 @@ literal|null
 return|;
 block|}
 return|return
-name|SqlFunctions
+name|DateTimeUtils
 operator|.
 name|intervalDayTimeToString
 argument_list|(
@@ -4295,9 +4218,9 @@ block|}
 comment|// The object can be java array in case of user-provided class for row
 comment|// storage.
 return|return
-name|Primitive
+name|AvaticaUtils
 operator|.
-name|asList
+name|primitiveList
 argument_list|(
 name|object
 argument_list|)
@@ -4490,9 +4413,9 @@ name|append
 argument_list|(
 name|buf
 argument_list|,
-name|Primitive
+name|AvaticaUtils
 operator|.
-name|asList
+name|primitiveList
 argument_list|(
 name|o
 argument_list|)

@@ -25,7 +25,25 @@ name|calcite
 operator|.
 name|avatica
 operator|.
+name|util
+operator|.
 name|ByteString
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|avatica
+operator|.
+name|util
+operator|.
+name|DateTimeUtils
 import|;
 end_import
 
@@ -146,20 +164,6 @@ operator|.
 name|util
 operator|.
 name|ConversionUtil
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|util
-operator|.
-name|DateTimeUtil
 import|;
 end_import
 
@@ -1461,7 +1465,7 @@ decl_stmt|;
 name|TimeZone
 name|tz
 init|=
-name|DateTimeUtil
+name|DateTimeUtils
 operator|.
 name|GMT_ZONE
 decl_stmt|;
@@ -1481,7 +1485,7 @@ condition|)
 block|{
 name|cal
 operator|=
-name|DateTimeUtil
+name|DateTimeUtils
 operator|.
 name|parseDateFormat
 argument_list|(
@@ -1496,12 +1500,12 @@ block|}
 else|else
 block|{
 comment|// Allow fractional seconds for times and timestamps
-name|DateTimeUtil
+name|DateTimeUtils
 operator|.
 name|PrecisionTime
 name|ts
 init|=
-name|DateTimeUtil
+name|DateTimeUtils
 operator|.
 name|parsePrecisionDateTimeLiteral
 argument_list|(
@@ -1592,7 +1596,7 @@ case|case
 name|DATE
 case|:
 return|return
-name|DateTimeUtil
+name|DateTimeUtils
 operator|.
 name|DATE_FORMAT_STRING
 return|;
@@ -1600,7 +1604,7 @@ case|case
 name|TIME
 case|:
 return|return
-name|DateTimeUtil
+name|DateTimeUtils
 operator|.
 name|TIME_FORMAT_STRING
 return|;
@@ -1608,7 +1612,7 @@ case|case
 name|TIMESTAMP
 case|:
 return|return
-name|DateTimeUtil
+name|DateTimeUtils
 operator|.
 name|TIMESTAMP_FORMAT_STRING
 return|;
@@ -1761,7 +1765,7 @@ operator|.
 name|getTimeInMillis
 argument_list|()
 operator|/
-name|DateTimeUtil
+name|DateTimeUtils
 operator|.
 name|MILLIS_PER_DAY
 operator|)
@@ -1784,7 +1788,7 @@ operator|.
 name|getTimeInMillis
 argument_list|()
 operator|%
-name|DateTimeUtil
+name|DateTimeUtils
 operator|.
 name|MILLIS_PER_DAY
 operator|)

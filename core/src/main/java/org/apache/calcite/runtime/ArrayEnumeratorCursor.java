@@ -30,7 +30,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Implementation of {@link org.apache.calcite.avatica.Cursor} on top of an  * {@link org.apache.calcite.linq4j.Enumerator} that  * returns an array of {@link Object} for each row.  */
+comment|/**  * Implementation of {@link org.apache.calcite.avatica.util.Cursor} on top of an  * {@link org.apache.calcite.linq4j.Enumerator} that  * returns an array of {@link Object} for each row.  */
 end_comment
 
 begin_class
@@ -72,64 +72,11 @@ parameter_list|)
 block|{
 return|return
 operator|new
-name|ArrayEnumeratorGetter
+name|ArrayGetter
 argument_list|(
 name|ordinal
 argument_list|)
 return|;
-block|}
-comment|/** Implementation of {@link Getter} that reads from records that are    * arrays. */
-class|class
-name|ArrayEnumeratorGetter
-extends|extends
-name|AbstractGetter
-block|{
-specifier|protected
-specifier|final
-name|int
-name|field
-decl_stmt|;
-specifier|public
-name|ArrayEnumeratorGetter
-parameter_list|(
-name|int
-name|field
-parameter_list|)
-block|{
-name|this
-operator|.
-name|field
-operator|=
-name|field
-expr_stmt|;
-block|}
-specifier|public
-name|Object
-name|getObject
-parameter_list|()
-block|{
-name|Object
-name|o
-init|=
-name|current
-argument_list|()
-index|[
-name|field
-index|]
-decl_stmt|;
-name|wasNull
-index|[
-literal|0
-index|]
-operator|=
-name|o
-operator|==
-literal|null
-expr_stmt|;
-return|return
-name|o
-return|;
-block|}
 block|}
 block|}
 end_class

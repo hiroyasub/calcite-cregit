@@ -221,6 +221,20 @@ name|calcite
 operator|.
 name|jdbc
 operator|.
+name|CalciteMetaImpl
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|jdbc
+operator|.
 name|CalciteSchema
 import|;
 end_import
@@ -236,20 +250,6 @@ operator|.
 name|jdbc
 operator|.
 name|Driver
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|jdbc
-operator|.
-name|MetaImpl
 import|;
 end_import
 
@@ -1341,6 +1341,16 @@ name|java
 operator|.
 name|util
 operator|.
+name|NoSuchElementException
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
 name|Properties
 import|;
 end_import
@@ -1352,6 +1362,18 @@ operator|.
 name|util
 operator|.
 name|TimeZone
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|regex
+operator|.
+name|Pattern
 import|;
 end_import
 
@@ -5216,7 +5238,7 @@ name|close
 argument_list|()
 expr_stmt|;
 block|}
-comment|/** Unit test for    * {@link org.apache.calcite.jdbc.MetaImpl#likeToRegex(org.apache.calcite.avatica.Meta.Pat)}. */
+comment|/** Unit test for    * {@link org.apache.calcite.jdbc.CalciteMetaImpl#likeToRegex(org.apache.calcite.avatica.Meta.Pat)}. */
 annotation|@
 name|Test
 specifier|public
@@ -5391,11 +5413,11 @@ name|String
 name|abc
 parameter_list|)
 block|{
-name|assertTrue
-argument_list|(
-name|b
-operator|==
-name|MetaImpl
+specifier|final
+name|Pattern
+name|regex
+init|=
+name|CalciteMetaImpl
 operator|.
 name|likeToRegex
 argument_list|(
@@ -5408,6 +5430,12 @@ argument_list|(
 name|pattern
 argument_list|)
 argument_list|)
+decl_stmt|;
+name|assertTrue
+argument_list|(
+name|b
+operator|==
+name|regex
 operator|.
 name|matcher
 argument_list|(
@@ -7243,8 +7271,63 @@ name|ResultSet
 name|a0
 parameter_list|)
 block|{
+comment|// The following behavior is not quite correct. See
+comment|//   [CALCITE-508] Reading from ResultSet before calling next()
+comment|//   should throw SQLException not NoSuchElementException
+comment|// for details.
 try|try
 block|{
+specifier|final
+name|BigDecimal
+name|bigDecimal
+init|=
+name|a0
+operator|.
+name|getBigDecimal
+argument_list|(
+literal|1
+argument_list|)
+decl_stmt|;
+name|fail
+argument_list|(
+literal|"expected error, got "
+operator|+
+name|bigDecimal
+argument_list|)
+expr_stmt|;
+block|}
+catch|catch
+parameter_list|(
+name|SQLException
+name|e
+parameter_list|)
+block|{
+throw|throw
+operator|new
+name|RuntimeException
+argument_list|(
+name|e
+argument_list|)
+throw|;
+block|}
+catch|catch
+parameter_list|(
+name|NoSuchElementException
+name|e
+parameter_list|)
+block|{
+comment|// ok
+block|}
+try|try
+block|{
+name|assertTrue
+argument_list|(
+name|a0
+operator|.
+name|next
+argument_list|()
+argument_list|)
+expr_stmt|;
 specifier|final
 name|BigDecimal
 name|bigDecimal

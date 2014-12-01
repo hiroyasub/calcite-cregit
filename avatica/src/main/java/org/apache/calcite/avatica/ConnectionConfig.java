@@ -15,6 +15,22 @@ name|avatica
 package|;
 end_package
 
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|avatica
+operator|.
+name|remote
+operator|.
+name|Service
+import|;
+end_import
+
 begin_comment
 comment|/**  * Connection configuration.  */
 end_comment
@@ -30,6 +46,16 @@ parameter_list|()
 function_decl|;
 name|String
 name|timeZone
+parameter_list|()
+function_decl|;
+name|Service
+operator|.
+name|Factory
+name|factory
+parameter_list|()
+function_decl|;
+name|String
+name|url
 parameter_list|()
 function_decl|;
 block|}

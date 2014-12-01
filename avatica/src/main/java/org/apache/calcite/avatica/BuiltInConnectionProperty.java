@@ -88,6 +88,20 @@ name|BuiltInConnectionProperty
 implements|implements
 name|ConnectionProperty
 block|{
+comment|/** Factory. */
+name|FACTORY
+argument_list|(
+literal|"factory"
+argument_list|,
+name|Type
+operator|.
+name|PLUGIN
+argument_list|,
+literal|null
+argument_list|,
+literal|false
+argument_list|)
+block|,
 comment|/** Name of initial schema. */
 name|SCHEMA
 argument_list|(
@@ -98,6 +112,8 @@ operator|.
 name|STRING
 argument_list|,
 literal|null
+argument_list|,
+literal|false
 argument_list|)
 block|,
 comment|/** Timezone, for example 'gmt-3'. Default is the JVM's time zone. */
@@ -110,6 +126,22 @@ operator|.
 name|STRING
 argument_list|,
 literal|null
+argument_list|,
+literal|false
+argument_list|)
+block|,
+comment|/** Remote URL. */
+name|URL
+argument_list|(
+literal|"url"
+argument_list|,
+name|Type
+operator|.
+name|STRING
+argument_list|,
+literal|null
+argument_list|,
+literal|false
 argument_list|)
 block|;
 specifier|private
@@ -126,6 +158,11 @@ specifier|private
 specifier|final
 name|Object
 name|defaultValue
+decl_stmt|;
+specifier|private
+specifier|final
+name|boolean
+name|required
 decl_stmt|;
 specifier|private
 specifier|static
@@ -200,6 +237,9 @@ name|type
 parameter_list|,
 name|Object
 name|defaultValue
+parameter_list|,
+name|boolean
+name|required
 parameter_list|)
 block|{
 name|this
@@ -219,6 +259,12 @@ operator|.
 name|defaultValue
 operator|=
 name|defaultValue
+expr_stmt|;
+name|this
+operator|.
+name|required
+operator|=
+name|required
 expr_stmt|;
 assert|assert
 name|defaultValue
@@ -258,6 +304,15 @@ parameter_list|()
 block|{
 return|return
 name|type
+return|;
+block|}
+specifier|public
+name|boolean
+name|required
+parameter_list|()
+block|{
+return|return
+name|required
 return|;
 block|}
 specifier|public

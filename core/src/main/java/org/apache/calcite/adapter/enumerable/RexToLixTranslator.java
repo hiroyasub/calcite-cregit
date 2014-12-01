@@ -55,7 +55,25 @@ name|calcite
 operator|.
 name|avatica
 operator|.
+name|util
+operator|.
 name|ByteString
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|avatica
+operator|.
+name|util
+operator|.
+name|DateTimeUtils
 import|;
 end_import
 
@@ -412,20 +430,6 @@ operator|.
 name|util
 operator|.
 name|ControlFlowException
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|util
-operator|.
-name|DateTimeUtil
 import|;
 end_import
 
@@ -1584,8 +1588,7 @@ name|constant
 argument_list|(
 name|interval
 operator|.
-name|foo
-argument_list|()
+name|timeUnitRange
 argument_list|)
 argument_list|)
 argument_list|)
@@ -1620,8 +1623,7 @@ name|constant
 argument_list|(
 name|interval
 operator|.
-name|foo
-argument_list|()
+name|timeUnitRange
 argument_list|)
 argument_list|,
 name|Expressions
@@ -2678,7 +2680,7 @@ operator|.
 name|getTimeInMillis
 argument_list|()
 operator|/
-name|DateTimeUtil
+name|DateTimeUtils
 operator|.
 name|MILLIS_PER_DAY
 operator|)
@@ -2709,7 +2711,7 @@ operator|.
 name|getTimeInMillis
 argument_list|()
 operator|%
-name|DateTimeUtil
+name|DateTimeUtils
 operator|.
 name|MILLIS_PER_DAY
 operator|)

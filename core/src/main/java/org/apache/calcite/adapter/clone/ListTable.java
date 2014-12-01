@@ -441,14 +441,12 @@ argument_list|>
 name|iterator
 parameter_list|()
 block|{
+comment|//noinspection unchecked
 return|return
-name|Linq4j
+name|list
 operator|.
-name|enumeratorIterator
-argument_list|(
-name|enumerator
+name|iterator
 argument_list|()
-argument_list|)
 return|;
 block|}
 specifier|public

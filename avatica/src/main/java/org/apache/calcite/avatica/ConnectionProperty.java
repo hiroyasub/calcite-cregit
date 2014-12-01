@@ -64,6 +64,11 @@ name|Properties
 name|properties
 parameter_list|)
 function_decl|;
+comment|/** Whether the property is mandatory. */
+name|boolean
+name|required
+parameter_list|()
+function_decl|;
 comment|/** Data type of property. */
 enum|enum
 name|Type

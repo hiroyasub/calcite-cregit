@@ -11,7 +11,9 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|runtime
+name|avatica
+operator|.
+name|util
 package|;
 end_package
 

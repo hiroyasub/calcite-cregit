@@ -471,7 +471,9 @@ argument_list|()
 argument_list|,
 name|equalTo
 argument_list|(
-literal|"exception while executing query: Can't iterate over badEntries"
+literal|"error while executing SQL \"select * from \"badEntries\"\": "
+operator|+
+literal|"Can't iterate over badEntries"
 argument_list|)
 argument_list|)
 expr_stmt|;

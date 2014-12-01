@@ -458,13 +458,10 @@ name|iterator
 parameter_list|()
 block|{
 return|return
-name|Linq4j
+name|enumerable
 operator|.
-name|enumeratorIterator
-argument_list|(
-name|enumerator
+name|iterator
 argument_list|()
-argument_list|)
 return|;
 block|}
 specifier|public

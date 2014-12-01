@@ -42,9 +42,13 @@ name|enumerator
 parameter_list|()
 block|{
 return|return
+operator|new
 name|Linq4j
 operator|.
-name|iterableEnumerator
+name|IterableEnumerator
+argument_list|<
+name|T
+argument_list|>
 argument_list|(
 name|this
 argument_list|)

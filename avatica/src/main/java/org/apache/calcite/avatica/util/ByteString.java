@@ -12,6 +12,8 @@ operator|.
 name|calcite
 operator|.
 name|avatica
+operator|.
+name|util
 package|;
 end_package
 

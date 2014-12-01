@@ -17,6 +17,22 @@ end_package
 
 begin_import
 import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|avatica
+operator|.
+name|util
+operator|.
+name|DateTimeUtils
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|io
@@ -169,7 +185,7 @@ name|timePart
 init|=
 name|internalTime
 operator|%
-name|DateTimeUtil
+name|DateTimeUtils
 operator|.
 name|MILLIS_PER_DAY
 decl_stmt|;
@@ -182,7 +198,7 @@ condition|)
 block|{
 name|timePart
 operator|+=
-name|DateTimeUtil
+name|DateTimeUtils
 operator|.
 name|MILLIS_PER_DAY
 expr_stmt|;
@@ -268,7 +284,7 @@ name|cal
 init|=
 name|getCalendar
 argument_list|(
-name|DateTimeUtil
+name|DateTimeUtils
 operator|.
 name|GMT_ZONE
 argument_list|)
@@ -360,7 +376,7 @@ name|cal
 init|=
 name|getCalendar
 argument_list|(
-name|DateTimeUtil
+name|DateTimeUtils
 operator|.
 name|GMT_ZONE
 argument_list|)
@@ -607,7 +623,7 @@ return|;
 block|}
 name|tempFormatter
 operator|=
-name|DateTimeUtil
+name|DateTimeUtils
 operator|.
 name|newDateFormat
 argument_list|(
@@ -618,7 +634,7 @@ name|tempFormatter
 operator|.
 name|setTimeZone
 argument_list|(
-name|DateTimeUtil
+name|DateTimeUtils
 operator|.
 name|GMT_ZONE
 argument_list|)
