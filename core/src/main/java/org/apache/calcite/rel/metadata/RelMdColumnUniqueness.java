@@ -718,7 +718,7 @@ comment|// right sides of the join
 name|ImmutableBitSet
 operator|.
 name|Builder
-name|leftColumns
+name|leftBuilder
 init|=
 name|ImmutableBitSet
 operator|.
@@ -728,7 +728,7 @@ decl_stmt|;
 name|ImmutableBitSet
 operator|.
 name|Builder
-name|rightColumns
+name|rightBuilder
 init|=
 name|ImmutableBitSet
 operator|.
@@ -761,7 +761,7 @@ operator|<
 name|nLeftColumns
 condition|)
 block|{
-name|leftColumns
+name|leftBuilder
 operator|.
 name|set
 argument_list|(
@@ -771,7 +771,7 @@ expr_stmt|;
 block|}
 else|else
 block|{
-name|rightColumns
+name|rightBuilder
 operator|.
 name|set
 argument_list|(
@@ -785,6 +785,15 @@ block|}
 comment|// If the original column mask contains columns from both the left and
 comment|// right hand side, then the columns are unique if and only if they're
 comment|// unique for their respective join inputs
+specifier|final
+name|ImmutableBitSet
+name|leftColumns
+init|=
+name|leftBuilder
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
 name|Boolean
 name|leftUnique
 init|=
@@ -795,12 +804,18 @@ argument_list|(
 name|left
 argument_list|,
 name|leftColumns
-operator|.
-name|build
-argument_list|()
 argument_list|,
 name|ignoreNulls
 argument_list|)
+decl_stmt|;
+specifier|final
+name|ImmutableBitSet
+name|rightColumns
+init|=
+name|rightBuilder
+operator|.
+name|build
+argument_list|()
 decl_stmt|;
 name|Boolean
 name|rightUnique
@@ -812,9 +827,6 @@ argument_list|(
 name|right
 argument_list|,
 name|rightColumns
-operator|.
-name|build
-argument_list|()
 argument_list|,
 name|ignoreNulls
 argument_list|)
