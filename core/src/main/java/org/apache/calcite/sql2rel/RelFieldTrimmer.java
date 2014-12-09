@@ -3849,11 +3849,8 @@ name|indicatorCount
 init|=
 name|aggregate
 operator|.
-name|indicator
-condition|?
-name|groupCount
-else|:
-literal|0
+name|getIndicatorCount
+argument_list|()
 decl_stmt|;
 name|fieldsUsed
 operator|=
@@ -4055,8 +4052,8 @@ block|}
 argument_list|)
 argument_list|)
 decl_stmt|;
-comment|// Populate mapping of where to find the fields. System and grouping
-comment|// fields first.
+comment|// Populate mapping of where to find the fields. System, group key and
+comment|// indicator fields first.
 for|for
 control|(
 name|IntPair

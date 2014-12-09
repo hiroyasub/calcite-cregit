@@ -940,22 +940,17 @@ argument_list|)
 decl_stmt|;
 specifier|final
 name|int
-name|keyArity
+name|groupCount
 init|=
-name|groupSet
-operator|.
-name|cardinality
+name|getGroupCount
 argument_list|()
 decl_stmt|;
 specifier|final
 name|int
-name|indicatorArity
+name|indicatorCount
 init|=
-name|indicator
-condition|?
-name|keyArity
-else|:
-literal|0
+name|getIndicatorCount
+argument_list|()
 decl_stmt|;
 specifier|final
 name|List
@@ -1806,7 +1801,7 @@ name|key_
 decl_stmt|;
 if|if
 condition|(
-name|keyArity
+name|groupCount
 operator|==
 literal|0
 condition|)
@@ -1847,9 +1842,9 @@ literal|0
 init|;
 name|j
 operator|<
-name|keyArity
+name|groupCount
 operator|+
-name|indicatorArity
+name|indicatorCount
 condition|;
 name|j
 operator|++
@@ -2079,7 +2074,7 @@ expr_stmt|;
 block|}
 if|else if
 condition|(
-name|keyArity
+name|groupCount
 operator|==
 literal|0
 condition|)

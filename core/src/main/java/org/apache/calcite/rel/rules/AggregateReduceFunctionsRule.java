@@ -657,11 +657,8 @@ name|indicatorCount
 init|=
 name|oldAggRel
 operator|.
-name|indicator
-condition|?
-name|groupCount
-else|:
-literal|0
+name|getIndicatorCount
+argument_list|()
 decl_stmt|;
 specifier|final
 name|List
