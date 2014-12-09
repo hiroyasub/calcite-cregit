@@ -1219,38 +1219,47 @@ function_decl|;
 annotation|@
 name|BaseMessage
 argument_list|(
-literal|"Argument to GROUPING operator must be a grouped expression"
+literal|"Argument to {0} operator must be a grouped expression"
 argument_list|)
 name|ExInst
 argument_list|<
 name|SqlValidatorException
 argument_list|>
 name|groupingArgument
-parameter_list|()
+parameter_list|(
+name|String
+name|a0
+parameter_list|)
 function_decl|;
 annotation|@
 name|BaseMessage
 argument_list|(
-literal|"GROUPING operator may only occur in an aggregate query"
+literal|"{0} operator may only occur in an aggregate query"
 argument_list|)
 name|ExInst
 argument_list|<
 name|SqlValidatorException
 argument_list|>
 name|groupingInAggregate
-parameter_list|()
+parameter_list|(
+name|String
+name|a0
+parameter_list|)
 function_decl|;
 annotation|@
 name|BaseMessage
 argument_list|(
-literal|"GROUPING operator may only occur in SELECT, HAVING or ORDER BY clause"
+literal|"{0} operator may only occur in SELECT, HAVING or ORDER BY clause"
 argument_list|)
 name|ExInst
 argument_list|<
 name|SqlValidatorException
 argument_list|>
 name|groupingInWrongClause
-parameter_list|()
+parameter_list|(
+name|String
+name|a0
+parameter_list|)
 function_decl|;
 annotation|@
 name|BaseMessage

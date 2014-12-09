@@ -12911,6 +12911,354 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testGroupingId
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select deptno, grouping_id(deptno) from emp group by deptno"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select deptno / 2, grouping_id(deptno / 2),\n"
+operator|+
+literal|" ^grouping_id(deptno / 2, empno)^\n"
+operator|+
+literal|"from emp group by deptno / 2, empno"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select deptno / 2, ^grouping_id()^\n"
+operator|+
+literal|"from emp group by deptno / 2, empno"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Invalid number of arguments to function 'GROUPING_ID'. Was expecting 1 arguments"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select deptno, grouping_id(^empno^) from emp group by deptno"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Expression 'EMPNO' is not being grouped"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select deptno, grouping_id(^deptno + 1^) from emp group by deptno"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Argument to GROUPING_ID operator must be a grouped expression"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select deptno, grouping_id(emp.^xxx^) from emp"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Column 'XXX' not found in table 'EMP'"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select deptno, ^grouping_id(deptno)^ from emp"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"GROUPING_ID operator may only occur in an aggregate query"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select deptno, sum(^grouping_id(deptno)^) over () from emp"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"GROUPING_ID operator may only occur in an aggregate query"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select deptno from emp group by deptno having grouping_id(deptno)< 5"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select deptno from emp group by deptno order by grouping_id(deptno)"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select deptno as xx from emp group by deptno order by grouping_id(xx)"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select deptno as empno from emp\n"
+operator|+
+literal|"group by deptno order by grouping_id(empno)"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select 1 as deptno from emp\n"
+operator|+
+literal|"group by deptno order by grouping_id(^deptno^)"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Argument to GROUPING_ID operator must be a grouped expression"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select deptno from emp group by deptno\n"
+operator|+
+literal|"order by grouping_id(emp.deptno)"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select ^deptno^ from emp group by empno order by grouping_id(deptno)"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Expression 'DEPTNO' is not being grouped"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select deptno from emp order by ^grouping_id(deptno)^"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"GROUPING_ID operator may only occur in an aggregate query"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select deptno from emp where ^grouping_id(deptno)^ = 1"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"GROUPING_ID operator may only occur in an aggregate query"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select deptno from emp where ^grouping_id(deptno)^ = 1\n"
+operator|+
+literal|"group by deptno"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"GROUPING_ID operator may only occur in SELECT, HAVING or ORDER BY clause"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select deptno from emp group by deptno, ^grouping_id(deptno)^"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"GROUPING_ID operator may only occur in SELECT, HAVING or ORDER BY clause"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select deptno from emp\n"
+operator|+
+literal|"group by grouping sets(deptno, ^grouping_id(deptno)^)"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"GROUPING_ID operator may only occur in SELECT, HAVING or ORDER BY clause"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select deptno from emp\n"
+operator|+
+literal|"group by cube(empno, ^grouping_id(deptno)^)"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"GROUPING_ID operator may only occur in SELECT, HAVING or ORDER BY clause"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select deptno from emp\n"
+operator|+
+literal|"group by rollup(empno, ^grouping_id(deptno)^)"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"GROUPING_ID operator may only occur in SELECT, HAVING or ORDER BY clause"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testGroupId
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select deptno, group_id() from emp group by deptno"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select deptno, ^group_id^ as x from emp group by deptno"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Column 'GROUP_ID' not found in any table"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select deptno, ^group_id(deptno)^ from emp group by deptno"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Invalid number of arguments to function 'GROUP_ID'\\. "
+operator|+
+literal|"Was expecting 0 arguments"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select deptno from emp order by ^group_id(deptno)^"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"GROUP_ID operator may only occur in an aggregate query"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select deptno from emp where ^group_id()^ = 1"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"GROUP_ID operator may only occur in an aggregate query"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select deptno from emp where ^group_id()^ = 1 group by deptno"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"GROUP_ID operator may only occur in SELECT, HAVING or ORDER BY clause"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select deptno from emp group by deptno, ^group_id()^"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"GROUP_ID operator may only occur in SELECT, HAVING or ORDER BY clause"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select deptno from emp\n"
+operator|+
+literal|"group by grouping sets(deptno, ^group_id()^)"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"GROUP_ID operator may only occur in SELECT, HAVING or ORDER BY clause"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select deptno from emp\n"
+operator|+
+literal|"group by cube(empno, ^group_id()^)"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"GROUP_ID operator may only occur in SELECT, HAVING or ORDER BY clause"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select deptno from emp\n"
+operator|+
+literal|"group by rollup(empno, ^group_id()^)"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"GROUP_ID operator may only occur in SELECT, HAVING or ORDER BY clause"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testCubeGrouping
 parameter_list|()
 block|{

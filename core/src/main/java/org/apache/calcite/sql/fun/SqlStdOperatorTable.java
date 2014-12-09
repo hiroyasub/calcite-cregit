@@ -850,6 +850,28 @@ operator|new
 name|SqlGroupingFunction
 argument_list|()
 decl_stmt|;
+comment|/** {@code GROUP_ID} function. */
+specifier|public
+specifier|static
+specifier|final
+name|SqlGroupIdFunction
+name|GROUP_ID
+init|=
+operator|new
+name|SqlGroupIdFunction
+argument_list|()
+decl_stmt|;
+comment|/** {@code GROUPING_ID} function. */
+specifier|public
+specifier|static
+specifier|final
+name|SqlGroupingIdFunction
+name|GROUPING_ID
+init|=
+operator|new
+name|SqlGroupingIdFunction
+argument_list|()
+decl_stmt|;
 comment|/**    * String concatenation operator, '<code>||</code>'.    */
 specifier|public
 specifier|static

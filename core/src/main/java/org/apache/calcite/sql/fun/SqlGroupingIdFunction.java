@@ -78,36 +78,36 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * The {@code GROUPING} function.  *  *<p>This function is defined in the SQL standard.  *  *<p>Some examples are in {@code agg.oq}.  */
+comment|/**  * The {@code GROUPING_ID} function.  *  *<p>This function is not defined in the SQL standard; our implementation is  * consistent with Oracle.  *  *<p>Some examples are in {@code agg.oq}.  */
 end_comment
 
 begin_class
 class|class
-name|SqlGroupingFunction
+name|SqlGroupingIdFunction
 extends|extends
 name|SqlAbstractGroupFunction
 block|{
 specifier|public
-name|SqlGroupingFunction
+name|SqlGroupingIdFunction
 parameter_list|()
 block|{
 name|super
 argument_list|(
-literal|"GROUPING"
+literal|"GROUPING_ID"
 argument_list|,
 name|SqlKind
 operator|.
-name|GROUPING
+name|GROUPING_ID
 argument_list|,
 name|ReturnTypes
 operator|.
-name|INTEGER
+name|BIGINT
 argument_list|,
 literal|null
 argument_list|,
 name|OperandTypes
 operator|.
-name|ANY
+name|ONE_OR_MORE
 argument_list|,
 name|SqlFunctionCategory
 operator|.
@@ -119,7 +119,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End SqlGroupingFunction.java
+comment|// End SqlGroupingIdFunction.java
 end_comment
 
 end_unit

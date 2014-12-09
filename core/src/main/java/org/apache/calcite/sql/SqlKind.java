@@ -333,8 +333,14 @@ block|,
 comment|/** The internal {@code GROUPING SETS} operator that occurs within a    * {@code GROUP BY} clause. */
 name|GROUPING_SETS
 block|,
-comment|/** The internal {@code GROUPING} function. */
+comment|/** The internal {@code GROUPING(e)} function. */
 name|GROUPING
+block|,
+comment|/** The internal {@code GROUPING_ID(e, ...)} function. */
+name|GROUPING_ID
+block|,
+comment|/** The internal {@code GROUP_ID()} function. */
+name|GROUP_ID
 block|;
 comment|//~ Static fields/initializers ---------------------------------------------
 comment|// Most of the static fields are categories, aggregating several kinds into
