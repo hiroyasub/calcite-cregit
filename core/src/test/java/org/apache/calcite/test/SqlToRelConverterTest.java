@@ -1648,6 +1648,24 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testTableExtend
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select * from dept extend (x varchar(5) not null)"
+argument_list|)
+operator|.
+name|convertsTo
+argument_list|(
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testExplicitTable
 parameter_list|()
 block|{

@@ -944,6 +944,10 @@ literal|"KEYWORD(FULL)"
 argument_list|,
 literal|"KEYWORD(ORDER)"
 argument_list|,
+literal|"KEYWORD(()"
+argument_list|,
+literal|"KEYWORD(EXTEND)"
+argument_list|,
 literal|"KEYWORD(AS)"
 argument_list|,
 literal|"KEYWORD(USING)"

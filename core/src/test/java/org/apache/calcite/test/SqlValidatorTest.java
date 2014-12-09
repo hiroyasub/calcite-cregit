@@ -16839,6 +16839,32 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testTableExtend
+parameter_list|()
+block|{
+name|checkResultType
+argument_list|(
+literal|"select * from dept extend (x int not null)"
+argument_list|,
+literal|"RecordType(INTEGER NOT NULL DEPTNO, VARCHAR(10) NOT NULL NAME, INTEGER NOT NULL X) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|checkResultType
+argument_list|(
+literal|"select deptno + x as z\n"
+operator|+
+literal|"from dept extend (x int not null) as x\n"
+operator|+
+literal|"where x> 10"
+argument_list|,
+literal|"RecordType(INTEGER NOT NULL Z) NOT NULL"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testExplicitTable
 parameter_list|()
 block|{

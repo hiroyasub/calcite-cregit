@@ -83,6 +83,22 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|rel
+operator|.
+name|type
+operator|.
+name|RelDataTypeField
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|util
 operator|.
 name|ImmutableBitSet
@@ -176,6 +192,17 @@ name|getExpression
 parameter_list|(
 name|Class
 name|clazz
+parameter_list|)
+function_decl|;
+comment|/** Returns a table with the given extra fields. */
+name|RelOptTable
+name|extend
+parameter_list|(
+name|List
+argument_list|<
+name|RelDataTypeField
+argument_list|>
+name|extendedFields
 parameter_list|)
 function_decl|;
 comment|/** Can expand a view into relational expressions. */

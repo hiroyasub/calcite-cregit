@@ -872,6 +872,23 @@ operator|new
 name|SqlGroupingIdFunction
 argument_list|()
 decl_stmt|;
+comment|/** {@code EXTEND} operator to add columns to a table's schema, as in    * {@code SELECT ... FROM emp EXTEND (horoscope VARCHAR(100))}. */
+specifier|public
+specifier|static
+specifier|final
+name|SqlInternalOperator
+name|EXTEND
+init|=
+operator|new
+name|SqlInternalOperator
+argument_list|(
+literal|"EXTEND"
+argument_list|,
+name|SqlKind
+operator|.
+name|EXTEND
+argument_list|)
+decl_stmt|;
 comment|/**    * String concatenation operator, '<code>||</code>'.    */
 specifier|public
 specifier|static

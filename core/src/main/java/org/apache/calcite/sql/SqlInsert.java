@@ -117,7 +117,7 @@ decl_stmt|;
 name|SqlNodeList
 name|keywords
 decl_stmt|;
-name|SqlIdentifier
+name|SqlNode
 name|targetTable
 decl_stmt|;
 name|SqlNode
@@ -136,7 +136,7 @@ parameter_list|,
 name|SqlNodeList
 name|keywords
 parameter_list|,
-name|SqlIdentifier
+name|SqlNode
 name|targetTable
 parameter_list|,
 name|SqlNode
@@ -298,7 +298,7 @@ block|}
 block|}
 comment|/**    * @return the identifier for the target table of the insertion    */
 specifier|public
-name|SqlIdentifier
+name|SqlNode
 name|getTargetTable
 parameter_list|()
 block|{

@@ -2855,8 +2855,9 @@ decl_stmt|;
 name|MockTable
 name|table
 init|=
-operator|new
 name|MockTable
+operator|.
+name|create
 argument_list|(
 name|this
 argument_list|,

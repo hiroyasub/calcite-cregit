@@ -144,7 +144,7 @@ operator|.
 name|UPDATE
 argument_list|)
 decl_stmt|;
-name|SqlIdentifier
+name|SqlNode
 name|targetTable
 decl_stmt|;
 name|SqlNodeList
@@ -169,7 +169,7 @@ parameter_list|(
 name|SqlParserPos
 name|pos
 parameter_list|,
-name|SqlIdentifier
+name|SqlNode
 name|targetTable
 parameter_list|,
 name|SqlNodeList
@@ -384,7 +384,7 @@ block|}
 block|}
 comment|/**    * @return the identifier for the target table of the update    */
 specifier|public
-name|SqlIdentifier
+name|SqlNode
 name|getTargetTable
 parameter_list|()
 block|{

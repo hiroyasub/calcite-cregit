@@ -2228,7 +2228,7 @@ literal|"SELECT `DEPTNO`\n"
 operator|+
 literal|"FROM `EMP`\n"
 operator|+
-literal|"GROUP BY (GROUPING_SETS(`DEPTNO`, (GROUPING_SETS(`E`, `D`)),, (CUBE(`X`, `Y`)), (ROLLUP(`P`, `Q`))))\n"
+literal|"GROUP BY (GROUPING_SETS(`DEPTNO`, GROUPING_SETS(`E`, `D`),, CUBE(`X`, `Y`), ROLLUP(`P`, `Q`)))\n"
 operator|+
 literal|"ORDER BY `A`"
 argument_list|)
@@ -5009,6 +5009,120 @@ argument_list|(
 literal|"select * from (values^(^))"
 argument_list|,
 literal|"(?s).*Encountered \"\\( \\)\" at .*"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Test case for [CALCITE-493]. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testTableExtend
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select * from emp extend (x int, y varchar(10) not null)"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"SELECT *\n"
+operator|+
+literal|"FROM (EXTEND(`EMP`, `X`, INTEGER, `Y`, VARCHAR(10)))"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select * from emp extend (x int, y varchar(10) not null) where true"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"SELECT *\n"
+operator|+
+literal|"FROM (EXTEND(`EMP`, `X`, INTEGER, `Y`, VARCHAR(10)))\n"
+operator|+
+literal|"WHERE TRUE"
+argument_list|)
+expr_stmt|;
+comment|// with table alias
+name|sql
+argument_list|(
+literal|"select * from emp extend (x int, y varchar(10) not null) as t"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"SELECT *\n"
+operator|+
+literal|"FROM (EXTEND(`EMP`, `X`, INTEGER, `Y`, VARCHAR(10))) AS `T`"
+argument_list|)
+expr_stmt|;
+comment|// as previous, without AS
+name|sql
+argument_list|(
+literal|"select * from emp extend (x int, y varchar(10) not null) t"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"SELECT *\n"
+operator|+
+literal|"FROM (EXTEND(`EMP`, `X`, INTEGER, `Y`, VARCHAR(10))) AS `T`"
+argument_list|)
+expr_stmt|;
+comment|// with table alias and column alias list
+name|sql
+argument_list|(
+literal|"select * from emp extend (x int, y varchar(10) not null) as t(a, b)"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"SELECT *\n"
+operator|+
+literal|"FROM (EXTEND(`EMP`, `X`, INTEGER, `Y`, VARCHAR(10))) AS `T` (`A`, `B`)"
+argument_list|)
+expr_stmt|;
+comment|// as previous, without AS
+name|sql
+argument_list|(
+literal|"select * from emp extend (x int, y varchar(10) not null) t(a, b)"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"SELECT *\n"
+operator|+
+literal|"FROM (EXTEND(`EMP`, `X`, INTEGER, `Y`, VARCHAR(10))) AS `T` (`A`, `B`)"
+argument_list|)
+expr_stmt|;
+comment|// omit EXTEND
+name|sql
+argument_list|(
+literal|"select * from emp (x int, y varchar(10) not null) t(a, b)"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"SELECT *\n"
+operator|+
+literal|"FROM (EXTEND(`EMP`, `X`, INTEGER, `Y`, VARCHAR(10))) AS `T` (`A`, `B`)"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select * from emp (x int, y varchar(10) not null) where x = y"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"SELECT *\n"
+operator|+
+literal|"FROM (EXTEND(`EMP`, `X`, INTEGER, `Y`, VARCHAR(10)))\n"
+operator|+
+literal|"WHERE (`X` = `Y`)"
 argument_list|)
 expr_stmt|;
 block|}

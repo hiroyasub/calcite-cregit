@@ -324,6 +324,9 @@ block|,
 comment|/**    * The internal REINTERPRET operator (meaning a reinterpret cast).    * An internal operator that does not appear in SQL syntax.    */
 name|REINTERPRET
 block|,
+comment|/** The internal {@code EXTEND} operator that qualifies a table name in the    * {@code FROM} clause. */
+name|EXTEND
+block|,
 comment|/** The internal {@code CUBE} operator that occurs within a {@code GROUP BY}    * clause. */
 name|CUBE
 block|,
@@ -387,6 +390,14 @@ argument_list|(
 name|AS
 argument_list|,
 name|DESCENDING
+argument_list|,
+name|CUBE
+argument_list|,
+name|ROLLUP
+argument_list|,
+name|GROUPING_SETS
+argument_list|,
+name|EXTEND
 argument_list|,
 name|SELECT
 argument_list|,

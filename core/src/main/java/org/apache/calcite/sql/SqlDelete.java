@@ -130,7 +130,7 @@ operator|.
 name|DELETE
 argument_list|)
 decl_stmt|;
-name|SqlIdentifier
+name|SqlNode
 name|targetTable
 decl_stmt|;
 name|SqlNode
@@ -149,7 +149,7 @@ parameter_list|(
 name|SqlParserPos
 name|pos
 parameter_list|,
-name|SqlIdentifier
+name|SqlNode
 name|targetTable
 parameter_list|,
 name|SqlNode
@@ -259,9 +259,6 @@ literal|0
 case|:
 name|targetTable
 operator|=
-operator|(
-name|SqlIdentifier
-operator|)
 name|operand
 expr_stmt|;
 break|break;
@@ -307,7 +304,7 @@ block|}
 block|}
 comment|/**    * @return the identifier for the target table of the deletion    */
 specifier|public
-name|SqlIdentifier
+name|SqlNode
 name|getTargetTable
 parameter_list|()
 block|{
