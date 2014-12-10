@@ -289,8 +289,6 @@ argument_list|()
 argument_list|,
 name|input
 argument_list|,
-name|this
-operator|.
 name|indicator
 argument_list|,
 name|groupSet
