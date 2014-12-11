@@ -16462,6 +16462,159 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testQuarter
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|setFor
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|QUARTER
+argument_list|,
+name|VM_FENNEL
+argument_list|,
+name|VM_JAVA
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"quarter(date '2008-1-23')"
+argument_list|,
+literal|"1"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"quarter(date '2008-2-23')"
+argument_list|,
+literal|"1"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"quarter(date '2008-3-23')"
+argument_list|,
+literal|"1"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"quarter(date '2008-4-23')"
+argument_list|,
+literal|"2"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"quarter(date '2008-5-23')"
+argument_list|,
+literal|"2"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"quarter(date '2008-6-23')"
+argument_list|,
+literal|"2"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"quarter(date '2008-7-23')"
+argument_list|,
+literal|"3"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"quarter(date '2008-8-23')"
+argument_list|,
+literal|"3"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"quarter(date '2008-9-23')"
+argument_list|,
+literal|"3"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"quarter(date '2008-10-23')"
+argument_list|,
+literal|"4"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"quarter(date '2008-11-23')"
+argument_list|,
+literal|"4"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"quarter(date '2008-12-23')"
+argument_list|,
+literal|"4"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testExtractFunc
 parameter_list|()
 block|{

@@ -3809,6 +3809,17 @@ operator|new
 name|SqlExtractFunction
 argument_list|()
 decl_stmt|;
+comment|/**    * The SQL<code>QUARTER</code> operator. Returns the Quarter    * from a DATETIME  E.g.<br>    *<code>QUARTER(date '2008-9-23')</code> returns<code>    * 3</code>    */
+specifier|public
+specifier|static
+specifier|final
+name|SqlQuarterFunction
+name|QUARTER
+init|=
+operator|new
+name|SqlQuarterFunction
+argument_list|()
+decl_stmt|;
 comment|/**    * The ELEMENT operator, used to convert a multiset with only one item to a    * "regular" type. Example ... log(ELEMENT(MULTISET[1])) ...    */
 specifier|public
 specifier|static
