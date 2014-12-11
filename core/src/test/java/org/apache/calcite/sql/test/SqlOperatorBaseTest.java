@@ -5490,7 +5490,7 @@ operator|!
 name|enable
 condition|)
 block|{
-return|return;
+comment|//      return;
 block|}
 name|tester
 operator|.
@@ -6326,23 +6326,17 @@ argument_list|,
 literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-literal|false
-condition|)
-block|{
 name|tester
 operator|.
 name|checkScalar
 argument_list|(
-literal|"{fn QUARTER(date)}"
+literal|"{fn QUARTER(DATE '2014-12-10')}"
 argument_list|,
-literal|null
+literal|"4"
 argument_list|,
-literal|""
+literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-block|}
 if|if
 condition|(
 literal|false
@@ -16608,6 +16602,13 @@ argument_list|,
 literal|"4"
 argument_list|,
 literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"quarter(cast(null as date))"
 argument_list|)
 expr_stmt|;
 block|}
