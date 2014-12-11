@@ -572,6 +572,17 @@ block|}
 block|}
 block|}
 return|return
+name|min
+operator|==
+name|max
+condition|?
+name|SqlOperandCountRanges
+operator|.
+name|of
+argument_list|(
+name|min
+argument_list|)
+else|:
 name|SqlOperandCountRanges
 operator|.
 name|between
@@ -644,7 +655,7 @@ name|max
 init|=
 name|Integer
 operator|.
-name|MAX_VALUE
+name|MIN_VALUE
 decl_stmt|;
 for|for
 control|(

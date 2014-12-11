@@ -925,6 +925,20 @@ name|google
 operator|.
 name|common
 operator|.
+name|annotations
+operator|.
+name|VisibleForTesting
+import|;
+end_import
+
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
 name|base
 operator|.
 name|Function
@@ -1252,6 +1266,21 @@ name|UPDATE_ANON_PREFIX
 init|=
 literal|"SYS$ANON"
 decl_stmt|;
+annotation|@
+name|VisibleForTesting
+specifier|public
+name|SqlValidatorScope
+name|getEmptyScope
+parameter_list|()
+block|{
+return|return
+operator|new
+name|EmptyScope
+argument_list|(
+name|this
+argument_list|)
+return|;
+block|}
 comment|//~ Enums ------------------------------------------------------------------
 comment|/**    * Validation status.    */
 specifier|public

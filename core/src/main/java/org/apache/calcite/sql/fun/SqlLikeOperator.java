@@ -266,7 +266,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * An operator describing the<code>LIKE</code> and<code>SIMILAR</code>  * operators.  *  *<p>Syntax of the two operators:  *  *<ul>  *<li><code>src-value [NOT] LIKE pattern-value [ESCAPE  * escape-value]</code></li>  *<li><code>src-value [NOT] SIMILAR pattern-value [ESCAPE  * escape-value]</code></li>  *</ul>  *  *<p><b>NOTE</b> If the<code>NOT</code> clause is present the  * {@link org.apache.calcite.sql.parser.SqlParser parser} will generate a  * eqvivalent to<code>NOT (src LIKE pattern ...)</code>  */
+comment|/**  * An operator describing the<code>LIKE</code> and<code>SIMILAR</code>  * operators.  *  *<p>Syntax of the two operators:  *  *<ul>  *<li><code>src-value [NOT] LIKE pattern-value [ESCAPE  * escape-value]</code></li>  *<li><code>src-value [NOT] SIMILAR pattern-value [ESCAPE  * escape-value]</code></li>  *</ul>  *  *<p><b>NOTE</b> If the<code>NOT</code> clause is present the  * {@link org.apache.calcite.sql.parser.SqlParser parser} will generate a  * equivalent to<code>NOT (src LIKE pattern ...)</code>  */
 end_comment
 
 begin_class

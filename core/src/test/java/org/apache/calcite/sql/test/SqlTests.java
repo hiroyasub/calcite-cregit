@@ -2050,6 +2050,28 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+comment|/** Result checker that accepts any result. */
+specifier|public
+specifier|static
+specifier|final
+name|ResultChecker
+name|ANY_RESULT_CHECKER
+init|=
+operator|new
+name|ResultChecker
+argument_list|()
+block|{
+specifier|public
+name|void
+name|checkResult
+parameter_list|(
+name|ResultSet
+name|result
+parameter_list|)
+block|{
+block|}
+block|}
+decl_stmt|;
 block|}
 end_class
 

@@ -3406,7 +3406,7 @@ argument_list|)
 expr_stmt|;
 name|checkExpFails
 argument_list|(
-literal|"LOCALTIME(^100000000000000^)"
+literal|"^LOCALTIME(100000000000000)^"
 argument_list|,
 literal|"(?s).*Numeric literal '100000000000000' out of range.*"
 argument_list|)
@@ -3468,7 +3468,7 @@ argument_list|)
 expr_stmt|;
 name|checkExpFails
 argument_list|(
-literal|"LOCALTIMESTAMP(^100000000000000^)"
+literal|"^LOCALTIMESTAMP(100000000000000)^"
 argument_list|,
 literal|"(?s).*Numeric literal '100000000000000' out of range.*"
 argument_list|)
@@ -3581,7 +3581,7 @@ argument_list|)
 expr_stmt|;
 name|checkExpFails
 argument_list|(
-literal|"CURRENT_TIME(^100000000000000^)"
+literal|"^CURRENT_TIME(100000000000000)^"
 argument_list|,
 literal|"(?s).*Numeric literal '100000000000000' out of range.*"
 argument_list|)
@@ -3656,7 +3656,7 @@ argument_list|)
 expr_stmt|;
 name|checkExpFails
 argument_list|(
-literal|"CURRENT_TIMESTAMP(^100000000000000^)"
+literal|"^CURRENT_TIMESTAMP(100000000000000)^"
 argument_list|,
 literal|"(?s).*Numeric literal '100000000000000' out of range.*"
 argument_list|)
