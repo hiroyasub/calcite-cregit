@@ -567,6 +567,8 @@ argument_list|,
 literal|null
 argument_list|,
 name|getter
+argument_list|,
+literal|null
 argument_list|)
 decl_stmt|;
 name|blockBuilder

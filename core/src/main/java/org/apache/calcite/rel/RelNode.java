@@ -236,15 +236,7 @@ name|Convention
 name|getConvention
 parameter_list|()
 function_decl|;
-comment|/**    * Sets the name of the variable which is to be implicitly set at runtime    * each time a row is returned from this relational expression    *    * @param correlVariable Name of correlating variable    */
-name|void
-name|setCorrelVariable
-parameter_list|(
-name|String
-name|correlVariable
-parameter_list|)
-function_decl|;
-comment|/**    * Returns the name of the variable which is to be implicitly set at runtime    * each time a row is returned from this relational expression; or null if    * there is no variable.    *    * @return Name of correlating variable, or null    */
+comment|/**    * Returns the name of the variable which is to be implicitly set at runtime    * each time a row is returned from the first input of this relational    * expression; or null if there is no variable.    *    * @return Name of correlating variable, or null    */
 name|String
 name|getCorrelVariable
 parameter_list|()
@@ -261,11 +253,6 @@ parameter_list|(
 name|int
 name|i
 parameter_list|)
-function_decl|;
-comment|/**    * Returns a variable with which to reference the current row of this    * relational expression as a correlating variable. Creates a variable if    * none exists.    */
-name|String
-name|getOrCreateCorrelVariable
-parameter_list|()
 function_decl|;
 comment|/**    * Returns the sub-query this relational expression belongs to. A sub-query    * determines the scope for correlating variables (see    * {@link #setCorrelVariable(String)}).    *    * @return Sub-query    */
 name|RelOptQuery
@@ -298,7 +285,7 @@ name|double
 name|getRows
 parameter_list|()
 function_decl|;
-comment|/**    * Returns the names of variables which are set in this relational    * expression but also used and therefore not available to parents of this    * relational expression.    *    *<p>By default, returns the empty set. Derived classes may override this    * method.</p>    */
+comment|/**    * Returns the names of variables which are set in this relational    * expression but also used and therefore not available to parents of this    * relational expression.    */
 name|Set
 argument_list|<
 name|String
@@ -317,7 +304,7 @@ argument_list|>
 name|variableSet
 parameter_list|)
 function_decl|;
-comment|/**    * Collects variables set by this expression.    *    * @param variableSet receives variables known to be set by    */
+comment|/**    * Collects variables set by this expression.    * TODO: is this required?    *    * @param variableSet receives variables known to be set by    */
 name|void
 name|collectVariablesSet
 parameter_list|(
@@ -380,14 +367,6 @@ comment|/**    * Computes the digest, assigns it, and returns it. For planner us
 name|String
 name|recomputeDigest
 parameter_list|()
-function_decl|;
-comment|/**    * Registers a correlation variable.    *    * @see #getVariablesStopped    */
-name|void
-name|registerCorrelVariable
-parameter_list|(
-name|String
-name|correlVariable
-parameter_list|)
 function_decl|;
 comment|/**    * Replaces the<code>ordinalInParent</code><sup>th</sup> input. You must    * override this method if you override {@link #getInputs}.    */
 name|void

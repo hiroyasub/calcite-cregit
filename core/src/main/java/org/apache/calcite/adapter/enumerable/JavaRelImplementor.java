@@ -69,9 +69,9 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|rel
+name|plan
 operator|.
-name|RelImplementorImpl
+name|RelImplementor
 import|;
 end_import
 
@@ -90,7 +90,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Abstract base class for implementations of {@link RelImplementorImpl}  * that generate java code.  */
+comment|/**  * Abstract base class for implementations of {@link RelImplementor}  * that generate java code.  */
 end_comment
 
 begin_class
@@ -98,9 +98,14 @@ specifier|public
 specifier|abstract
 class|class
 name|JavaRelImplementor
-extends|extends
-name|RelImplementorImpl
+implements|implements
+name|RelImplementor
 block|{
+specifier|private
+specifier|final
+name|RexBuilder
+name|rexBuilder
+decl_stmt|;
 specifier|public
 name|JavaRelImplementor
 parameter_list|(
@@ -108,14 +113,32 @@ name|RexBuilder
 name|rexBuilder
 parameter_list|)
 block|{
-name|super
-argument_list|(
+name|this
+operator|.
 name|rexBuilder
-argument_list|)
+operator|=
+name|rexBuilder
 expr_stmt|;
+assert|assert
+name|rexBuilder
+operator|.
+name|getTypeFactory
+argument_list|()
+operator|instanceof
+name|JavaTypeFactory
+operator|:
+literal|"Type factory of rexBuilder should be a JavaTypeFactory"
+assert|;
 block|}
-annotation|@
-name|Override
+specifier|public
+name|RexBuilder
+name|getRexBuilder
+parameter_list|()
+block|{
+return|return
+name|rexBuilder
+return|;
+block|}
 specifier|public
 name|JavaTypeFactory
 name|getTypeFactory
@@ -125,7 +148,7 @@ return|return
 operator|(
 name|JavaTypeFactory
 operator|)
-name|super
+name|rexBuilder
 operator|.
 name|getTypeFactory
 argument_list|()

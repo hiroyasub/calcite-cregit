@@ -126,6 +126,10 @@ block|,
 name|TypeTest
 operator|.
 name|class
+block|,
+name|CorrelateJoinTest
+operator|.
+name|class
 block|}
 argument_list|)
 specifier|public

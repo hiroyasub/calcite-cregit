@@ -59,7 +59,7 @@ name|rel
 operator|.
 name|core
 operator|.
-name|Correlator
+name|Correlate
 import|;
 end_import
 
@@ -393,7 +393,7 @@ name|ImmutableBitSet
 argument_list|>
 name|getUniqueKeys
 parameter_list|(
-name|Correlator
+name|Correlate
 name|rel
 parameter_list|,
 name|boolean

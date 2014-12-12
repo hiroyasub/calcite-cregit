@@ -1762,6 +1762,10 @@ name|ENUMERABLE_SEMI_JOIN_RULE
 argument_list|,
 name|EnumerableRules
 operator|.
+name|ENUMERABLE_CORRELATE_RULE
+argument_list|,
+name|EnumerableRules
+operator|.
 name|ENUMERABLE_PROJECT_RULE
 argument_list|,
 name|EnumerableRules

@@ -272,6 +272,20 @@ argument_list|,
 literal|false
 argument_list|)
 block|,
+comment|/** If the planner should try de-correlating as much as it is possible.    * If true (the default), Calcite de-correlates the plan. */
+name|FORCE_DECORRELATE
+argument_list|(
+literal|"forceDecorrelate"
+argument_list|,
+name|Type
+operator|.
+name|BOOLEAN
+argument_list|,
+literal|true
+argument_list|,
+literal|false
+argument_list|)
+block|,
 comment|/** Type system. The name of a class that implements    * {@link org.apache.calcite.rel.type.RelDataTypeSystem} and has a public    * default constructor or an {@code INSTANCE} constant. */
 name|TYPE_SYSTEM
 argument_list|(

@@ -2246,6 +2246,62 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testNestedCorrelations
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|withDecorrelation
+argument_list|(
+literal|false
+argument_list|)
+operator|.
+name|assertConvertsTo
+argument_list|(
+literal|"select * from (select 2+deptno d2, 3+deptno d3 from emp) e\n"
+operator|+
+literal|" where exists (select 1 from (select deptno+1 d1 from dept) d\n"
+operator|+
+literal|" where d1=e.d2 and exists (select 2 from (select deptno+4 d4, deptno+5 d5, deptno+6 d6 from dept)\n"
+operator|+
+literal|" where d4=d.d1 and d5=d.d1 and d6=e.d3))"
+argument_list|,
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testNestedCorrelationsDecorrelated
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|withDecorrelation
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|assertConvertsTo
+argument_list|(
+literal|"select * from (select 2+deptno d2, 3+deptno d3 from emp) e\n"
+operator|+
+literal|" where exists (select 1 from (select deptno+1 d1 from dept) d\n"
+operator|+
+literal|" where d1=e.d2 and exists (select 2 from (select deptno+4 d4, deptno+5 d5, deptno+6 d6 from dept)\n"
+operator|+
+literal|" where d4=d.d1 and d5=d.d1 and d6=e.d3))"
+argument_list|,
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testElement
 parameter_list|()
 block|{

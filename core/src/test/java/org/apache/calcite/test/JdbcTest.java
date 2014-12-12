@@ -16323,7 +16323,7 @@ name|not
 argument_list|(
 name|containsString
 argument_list|(
-literal|"Correlator"
+literal|"Correlate"
 argument_list|)
 argument_list|)
 argument_list|)

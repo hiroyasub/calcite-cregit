@@ -11,37 +11,35 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|plan
+name|linq4j
 package|;
 end_package
 
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|rel
-operator|.
-name|RelNode
-import|;
-end_import
-
 begin_comment
-comment|/**  * This is a marker interface for a callback used to convert a tree of  * {@link RelNode relational expressions} into a plan. Calling  * conventions typically have their own protocol for walking over a  * tree, and correspondingly have their own implementors  */
+comment|/**  * Specifies the type of correlation operation: inner, left, semi, or anti.  */
 end_comment
 
-begin_interface
+begin_enum
 specifier|public
-interface|interface
-name|RelImplementor
-block|{ }
-end_interface
+enum|enum
+name|CorrelateJoinType
+block|{
+comment|/**    * Inner join    */
+name|INNER
+block|,
+comment|/**    * Left-outer join    */
+name|LEFT
+block|,
+comment|/**    * Semi-join    *<p>Similar to from A ... where a in (select b from B ...)</p>    */
+name|SEMI
+block|,
+comment|/**    * Anti-join    *<p>Similar to from A ... where a NOT in (select b from B ...)</p>    *<p>Note: if B.b is nullable and B has nulls, no rows must be returned</p>    */
+name|ANTI
+block|; }
+end_enum
 
 begin_comment
-comment|// End RelImplementor.java
+comment|// End SemiJoinType.java
 end_comment
 
 end_unit

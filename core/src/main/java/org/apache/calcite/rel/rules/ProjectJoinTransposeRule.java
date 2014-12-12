@@ -85,6 +85,22 @@ name|calcite
 operator|.
 name|rel
 operator|.
+name|core
+operator|.
+name|SemiJoin
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
 name|logical
 operator|.
 name|LogicalProject
@@ -246,6 +262,16 @@ argument_list|(
 literal|1
 argument_list|)
 decl_stmt|;
+if|if
+condition|(
+name|join
+operator|instanceof
+name|SemiJoin
+condition|)
+block|{
+return|return;
+comment|// TODO: support SemiJoin
+block|}
 comment|// locate all fields referenced in the projection and join condition;
 comment|// determine which inputs are referenced in the projection and
 comment|// join condition; if all fields are being referenced and there are no

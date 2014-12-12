@@ -1418,6 +1418,19 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+name|this
+operator|.
+name|context
+operator|.
+name|config
+argument_list|()
+operator|.
+name|forceDecorrelate
+argument_list|()
+condition|)
+block|{
 comment|// Subquery decorrelation.
 name|rootRel
 operator|=
@@ -1430,6 +1443,7 @@ argument_list|,
 name|rootRel
 argument_list|)
 expr_stmt|;
+block|}
 comment|// Trim unused fields.
 name|rootRel
 operator|=

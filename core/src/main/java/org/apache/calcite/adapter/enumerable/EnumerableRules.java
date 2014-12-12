@@ -107,6 +107,16 @@ operator|new
 name|EnumerableSemiJoinRule
 argument_list|()
 decl_stmt|;
+specifier|public
+specifier|static
+specifier|final
+name|RelOptRule
+name|ENUMERABLE_CORRELATE_RULE
+init|=
+operator|new
+name|EnumerableCorrelateRule
+argument_list|()
+decl_stmt|;
 specifier|private
 name|EnumerableRules
 parameter_list|()

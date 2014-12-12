@@ -122,6 +122,11 @@ name|boolean
 name|spark
 parameter_list|()
 function_decl|;
+comment|/** @see CalciteConnectionProperty#FORCE_DECORRELATE */
+name|boolean
+name|forceDecorrelate
+parameter_list|()
+function_decl|;
 comment|/** @see CalciteConnectionProperty#TYPE_SYSTEM */
 parameter_list|<
 name|T
