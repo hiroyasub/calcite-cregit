@@ -113,7 +113,7 @@ interface|interface
 name|RelDataTypeFactory
 block|{
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**    * Returns the type system.    */
+comment|/**    * Returns the type system.    *    * @return Type system    */
 name|RelDataTypeSystem
 name|getTypeSystem
 parameter_list|()

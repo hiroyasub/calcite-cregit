@@ -84,7 +84,7 @@ argument_list|>
 name|arguments
 parameter_list|()
 function_decl|;
-comment|/**    * Returns a    * {@link org.apache.calcite.adapter.enumerable.RexToLixTranslator}    * suitable to transform the arguments.    */
+comment|/**    * Returns a    * {@link org.apache.calcite.adapter.enumerable.RexToLixTranslator}    * suitable to transform the arguments.    *    * @return {@link RexToLixTranslator} suitable to transform the arguments    */
 name|RexToLixTranslator
 name|rowTranslator
 parameter_list|()

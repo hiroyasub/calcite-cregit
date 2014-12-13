@@ -55,7 +55,7 @@ name|int
 name|getId
 parameter_list|()
 function_decl|;
-comment|/**    * Returns a string which concisely describes the definition of this    * relational expression. Two relational expressions are equivalent if and    * only if their digests are the same.    *    *<p>The digest does not contain the relational expression's identity --    * that would prevent similar relational expressions from ever comparing    * equal -- but does include the identity of children (on the assumption    * that children have already been normalized).    *    *<p>If you want a descriptive string which contains the identity, call    * {@link Object#toString()}, which always returns "rel#{id}:{digest}".    */
+comment|/**    * Returns a string which concisely describes the definition of this    * relational expression. Two relational expressions are equivalent if and    * only if their digests are the same.    *    *<p>The digest does not contain the relational expression's identity --    * that would prevent similar relational expressions from ever comparing    * equal -- but does include the identity of children (on the assumption    * that children have already been normalized).    *    *<p>If you want a descriptive string which contains the identity, call    * {@link Object#toString()}, which always returns "rel#{id}:{digest}".    *    * @return Digest of this {@code RelNode}    */
 name|String
 name|getDigest
 parameter_list|()
@@ -71,11 +71,12 @@ name|RelDataType
 name|getRowType
 parameter_list|()
 function_decl|;
-comment|/**    * Returns a string which describes the relational expression and, unlike    * {@link #getDigest()}, also includes the identity. Typically returns    * "rel#{id}:{digest}".    */
+comment|/**    * Returns a string which describes the relational expression and, unlike    * {@link #getDigest()}, also includes the identity. Typically returns    * "rel#{id}:{digest}".    *    * @return String which describes the relational expression and, unlike    *   {@link #getDigest()}, also includes the identity    */
 name|String
 name|getDescription
 parameter_list|()
 function_decl|;
+comment|/**    * Returns an array of this relational expression's inputs. If there are no    * inputs, returns an empty list, not {@code null}.    *    * @return Array of this relational expression's inputs    */
 name|List
 argument_list|<
 name|?

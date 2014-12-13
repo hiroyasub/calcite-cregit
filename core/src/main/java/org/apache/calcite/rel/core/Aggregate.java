@@ -771,7 +771,7 @@ name|aggCalls
 argument_list|)
 return|;
 block|}
-comment|/** Creates a copy of this aggregate.    *    * @see #copy(org.apache.calcite.plan.RelTraitSet, java.util.List)    */
+comment|/** Creates a copy of this aggregate.    *    * @param traitSet Traits    * @param input Input    * @param indicator Whether row type should include indicator fields to    *                 indicate which grouping set is active; must be true if    *                 aggregate is not simple    * @param groupSet Bit set of grouping fields    * @param groupSets List of all grouping sets; null for just {@code groupSet}    * @param aggCalls Collection of calls to aggregate functions    * @return New {@code Aggregate} if any parameter differs from the value of    *   this {@code Aggregate}, or just {@code this} if all the parameters are    *   the same    *    * @see #copy(org.apache.calcite.plan.RelTraitSet, java.util.List)    */
 specifier|public
 specifier|abstract
 name|Aggregate
@@ -864,7 +864,7 @@ return|return
 name|groupSet
 return|;
 block|}
-comment|/**    * Returns the list of grouping sets computed by this Aggregate.    */
+comment|/**    * Returns the list of grouping sets computed by this Aggregate.    *    * @return List of all grouping sets; null for just {@code groupSet}    */
 specifier|public
 name|ImmutableList
 argument_list|<
@@ -1119,7 +1119,7 @@ name|aggCalls
 argument_list|)
 return|;
 block|}
-comment|/** Computes the row type of an {@code Aggregate} before it exists. */
+comment|/**    * Computes the row type of an {@code Aggregate} before it exists.    *    * @param typeFactory Type factory    * @param inputRowType Input row type    * @param indicator Whether row type should include indicator fields to    *                 indicate which grouping set is active; must be true if    *                 aggregate is not simple    * @param groupSet Bit set of grouping fields    * @param groupSets List of all grouping sets; null for just {@code groupSet}    * @param aggCalls Collection of calls to aggregate functions    * @return Row type of the aggregate    */
 specifier|public
 specifier|static
 name|RelDataType
@@ -1414,7 +1414,7 @@ name|fail
 argument_list|)
 return|;
 block|}
-comment|/**    * Returns whether any of the aggregates are DISTINCT.    */
+comment|/**    * Returns whether any of the aggregates are DISTINCT.    *    * @return Whether any of the aggregates are DISTINCT    */
 specifier|public
 name|boolean
 name|containsDistinctCall
@@ -1445,7 +1445,7 @@ return|return
 literal|false
 return|;
 block|}
-comment|/** Returns the type of roll-up. */
+comment|/**    * Returns the type of roll-up.    *    * @return Type of roll-up    */
 specifier|public
 name|Group
 name|getGroupType

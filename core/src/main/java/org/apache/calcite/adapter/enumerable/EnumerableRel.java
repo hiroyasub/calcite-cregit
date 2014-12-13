@@ -321,7 +321,7 @@ block|}
 block|}
 decl_stmt|;
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**    * Creates a plan for this expression according to a calling convention.    *    * @param implementor Implementor    * @param pref Preferred representation for rows in result expression    */
+comment|/**    * Creates a plan for this expression according to a calling convention.    *    * @param implementor Implementor    * @param pref Preferred representation for rows in result expression    * @return Plan for this expression according to a calling convention    */
 name|Result
 name|implement
 parameter_list|(

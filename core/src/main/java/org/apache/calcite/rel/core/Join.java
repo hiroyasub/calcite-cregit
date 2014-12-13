@@ -1337,7 +1337,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates a copy of this join, overriding condition, system fields and    * inputs.    *    *<p>General contract as {@link RelNode#copy}.    *    * @param conditionExpr Condition    * @param left          Left input    * @param right         Right input    * @param joinType      Join type    * @param semiJoinDone  Whether this join has been translated to a    *                      semi-join    * @return Copy of this join    */
+comment|/**    * Creates a copy of this join, overriding condition, system fields and    * inputs.    *    *<p>General contract as {@link RelNode#copy}.    *    * @param traitSet      Traits    * @param conditionExpr Condition    * @param left          Left input    * @param right         Right input    * @param joinType      Join type    * @param semiJoinDone  Whether this join has been translated to a    *                      semi-join    * @return Copy of this join    */
 specifier|public
 specifier|abstract
 name|Join
@@ -1362,7 +1362,7 @@ name|boolean
 name|semiJoinDone
 parameter_list|)
 function_decl|;
-comment|/** Analyzes the join condition. */
+comment|/**    * Analyzes the join condition.    *    * @return Analyzed join condition    */
 specifier|public
 name|JoinInfo
 name|analyzeCondition

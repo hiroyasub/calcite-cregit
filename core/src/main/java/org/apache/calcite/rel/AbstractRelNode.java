@@ -1206,7 +1206,7 @@ name|this
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Describes the inputs and attributes of this relational expression.    * Each node should call {@code super.explainTerms}, then call the    * {@link org.apache.calcite.rel.externalize.RelWriterImpl#input(String, RelNode)}    * and    * {@link org.apache.calcite.rel.externalize.RelWriterImpl#item(String, Object)}    * methods for each input and attribute.    *    * @param pw Plan writer    */
+comment|/**    * Describes the inputs and attributes of this relational expression.    * Each node should call {@code super.explainTerms}, then call the    * {@link org.apache.calcite.rel.externalize.RelWriterImpl#input(String, RelNode)}    * and    * {@link org.apache.calcite.rel.externalize.RelWriterImpl#item(String, Object)}    * methods for each input and attribute.    *    * @param pw Plan writer    * @return Plan writer for fluent-explain pattern    */
 specifier|public
 name|RelWriter
 name|explainTerms
@@ -1479,7 +1479,7 @@ return|return
 literal|null
 return|;
 block|}
-comment|/**    * Computes the digest. Does not modify this object.    */
+comment|/**    * Computes the digest. Does not modify this object.    *    * @return Digest    */
 specifier|protected
 name|String
 name|computeDigest

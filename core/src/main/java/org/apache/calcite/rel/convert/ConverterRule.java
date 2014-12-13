@@ -289,7 +289,7 @@ name|RelNode
 name|rel
 parameter_list|)
 function_decl|;
-comment|/**    * Returns true if this rule can convert<em>any</em> relational expression    * of the input convention.    *    *<p>The union-to-java converter, for example, is not guaranteed, because    * it only works on unions.</p>    */
+comment|/**    * Returns true if this rule can convert<em>any</em> relational expression    * of the input convention.    *    *<p>The union-to-java converter, for example, is not guaranteed, because    * it only works on unions.</p>    *    * @return {@code true} if this rule can convert<em>any</em> relational    *   expression    */
 specifier|public
 name|boolean
 name|isGuaranteed

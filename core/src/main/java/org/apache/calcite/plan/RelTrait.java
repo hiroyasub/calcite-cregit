@@ -43,7 +43,7 @@ name|Object
 name|o
 parameter_list|)
 function_decl|;
-comment|/**    * Returns whether this trait subsumes a given trait.    *    *<p>Must form a partial order: must be reflective (t subsumes t),    * anti-symmetric (if t1 subsumes t2 and t1 != t2 then t2 does not subsume    * t1),    * and transitive (if t1 subsumes t2 and t2 subsumes t3, then t1 subsumes    * t3)</p>    *    *<p>Many traits cannot be substituted, in which case, this method should    * return {@code equals(trait)}.</p>    */
+comment|/**    * Returns whether this trait subsumes a given trait.    *    *<p>Must form a partial order: must be reflective (t subsumes t),    * anti-symmetric (if t1 subsumes t2 and t1 != t2 then t2 does not subsume    * t1),    * and transitive (if t1 subsumes t2 and t2 subsumes t3, then t1 subsumes    * t3)</p>    *    *<p>Many traits cannot be substituted, in which case, this method should    * return {@code equals(trait)}.</p>    *    * @param trait Given trait    * @return Whether this trait subsumes a given trait    */
 name|boolean
 name|subsumes
 parameter_list|(

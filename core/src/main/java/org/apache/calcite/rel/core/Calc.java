@@ -270,6 +270,7 @@ argument_list|>
 name|collationList
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
+comment|/**    * Creates calc node.    *    * @param cluster Cluster    * @param traits Traits    * @param child Input relation    * @param rowType Output row type    * @param program Calc program    * @param collationList Description of the physical ordering (or orderings)    *                      of this relational expression. Never null    */
 specifier|protected
 name|Calc
 parameter_list|(
@@ -368,7 +369,7 @@ name|collationList
 argument_list|)
 return|;
 block|}
-comment|/** Creates a copy of this {@code Calc}. */
+comment|/**    * Creates a copy of this {@code Calc}.    *    * @param traitSet Traits    * @param child Input relation    * @param program Calc program    * @param collationList Description of the physical ordering (or orderings)    *                      of this relational expression. Never null    * @return New {@code Calc} if any parameter differs from the value of this    *   {@code Calc}, or just {@code this} if all the parameters are the same     * @see #copy(org.apache.calcite.plan.RelTraitSet, java.util.List)    */
 specifier|public
 specifier|abstract
 name|Calc

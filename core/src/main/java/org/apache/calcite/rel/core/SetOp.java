@@ -643,7 +643,7 @@ block|}
 argument_list|)
 return|;
 block|}
-comment|/**    * Returns whether all the inputs of this set operator have the same row    * type as its output row.    *    * @param compareNames Whether column names are important in the    *                     homogeneity comparison    */
+comment|/**    * Returns whether all the inputs of this set operator have the same row    * type as its output row.    *    * @param compareNames Whether column names are important in the    *                     homogeneity comparison    * @return Whether all the inputs of this set operator have the same row    *   type as its output row    */
 specifier|public
 name|boolean
 name|isHomogeneous

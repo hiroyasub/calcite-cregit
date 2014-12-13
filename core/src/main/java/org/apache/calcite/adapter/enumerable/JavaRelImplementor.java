@@ -154,7 +154,7 @@ name|getTypeFactory
 argument_list|()
 return|;
 block|}
-comment|/** Returns the expression with which to access the    * {@link org.apache.calcite.DataContext}. */
+comment|/**    * Returns the expression used to access    * {@link org.apache.calcite.DataContext}.    *    * @return expression used to access {@link org.apache.calcite.DataContext}.    */
 specifier|public
 name|ParameterExpression
 name|getRootExpression

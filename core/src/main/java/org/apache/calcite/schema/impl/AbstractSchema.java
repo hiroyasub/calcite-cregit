@@ -240,7 +240,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**    * Returns a map of tables in this schema by name.    *    *<p>The implementations of {@link #getTableNames()}    * and {@link #getTable(String)} depend on this map.    * The default implementation of this method returns the empty map.    * Override this method to change their behavior.</p>    */
+comment|/**    * Returns a map of tables in this schema by name.    *    *<p>The implementations of {@link #getTableNames()}    * and {@link #getTable(String)} depend on this map.    * The default implementation of this method returns the empty map.    * Override this method to change their behavior.</p>    *    * @return Map of tables in this schema by name    */
 specifier|protected
 name|Map
 argument_list|<
@@ -294,7 +294,7 @@ name|name
 argument_list|)
 return|;
 block|}
-comment|/**    * Returns a multi-map of functions in this schema by name.    * It is a multi-map because functions are overloaded; there may be more than    * one function in a schema with a given name (as long as they have different    * parameter lists).    *    *<p>The implementations of {@link #getFunctionNames()}    * and {@link Schema#getFunctions(String)} depend on this map.    * The default implementation of this method returns the empty multi-map.    * Override this method to change their behavior.</p>    */
+comment|/**    * Returns a multi-map of functions in this schema by name.    * It is a multi-map because functions are overloaded; there may be more than    * one function in a schema with a given name (as long as they have different    * parameter lists).    *    *<p>The implementations of {@link #getFunctionNames()}    * and {@link Schema#getFunctions(String)} depend on this map.    * The default implementation of this method returns the empty multi-map.    * Override this method to change their behavior.</p>    *    * @return Multi-map of functions in this schema by name    */
 specifier|protected
 name|Multimap
 argument_list|<
@@ -352,7 +352,7 @@ name|keySet
 argument_list|()
 return|;
 block|}
-comment|/**    * Returns a map of tables in this schema by name.    *    *<p>The implementations of {@link #getTableNames()}    * and {@link #getTable(String)} depend on this map.    * The default implementation of this method returns the empty map.    * Override this method to change their behavior.</p>    */
+comment|/**    * Returns a map of sub-schemas in this schema by name.    *    *<p>The implementations of {@link #getSubSchemaNames()}    * and {@link #getSubSchema(String)} depend on this map.    * The default implementation of this method returns the empty map.    * Override this method to change their behavior.</p>    *    * @return Map of sub-schemas in this schema by name    */
 specifier|protected
 name|Map
 argument_list|<

@@ -68,7 +68,7 @@ name|String
 name|name
 parameter_list|)
 function_decl|;
-comment|/**    * Returns the names of the tables in this schema.    */
+comment|/**    * Returns the names of the tables in this schema.    *    * @return Names of the tables in this schema    */
 name|Set
 argument_list|<
 name|String
@@ -87,7 +87,7 @@ name|String
 name|name
 parameter_list|)
 function_decl|;
-comment|/**    * Returns the names of the functions in this schema.    */
+comment|/**    * Returns the names of the functions in this schema.    *    * @return Names of the functions in this schema    */
 name|Set
 argument_list|<
 name|String
@@ -95,7 +95,7 @@ argument_list|>
 name|getFunctionNames
 parameter_list|()
 function_decl|;
-comment|/**    * Returns a sub-schema with a given name, or null.    */
+comment|/**    * Returns a sub-schema with a given name, or null.    *    * @param name Sub-schema name    * @return Sub-schema with a given name, or null    */
 name|Schema
 name|getSubSchema
 parameter_list|(
@@ -103,7 +103,7 @@ name|String
 name|name
 parameter_list|)
 function_decl|;
-comment|/**    * Returns the names of this schema's child schemas.    */
+comment|/**    * Returns the names of this schema's child schemas.    *    * @return Names of this schema's child schemas    */
 name|Set
 argument_list|<
 name|String
@@ -111,7 +111,7 @@ argument_list|>
 name|getSubSchemaNames
 parameter_list|()
 function_decl|;
-comment|/**    * Returns the expression by which this schema can be referenced in generated    * code.    *    * @param parentSchema Parent schema    * @param name Name of this schema    */
+comment|/**    * Returns the expression by which this schema can be referenced in generated    * code.    *    * @param parentSchema Parent schema    * @param name Name of this schema    * @return Expression by which this schema can be referenced in generated code    */
 name|Expression
 name|getExpression
 parameter_list|(
@@ -122,7 +122,7 @@ name|String
 name|name
 parameter_list|)
 function_decl|;
-comment|/** Returns whether the user is allowed to create new tables, functions    * and sub-schemas in this schema, in addition to those returned automatically    * by methods such as {@link #getTable(String)}.    *    *<p>Even if this method returns true, the maps are not modified. Calcite    * stores the defined objects in a wrapper object. */
+comment|/** Returns whether the user is allowed to create new tables, functions    * and sub-schemas in this schema, in addition to those returned automatically    * by methods such as {@link #getTable(String)}.    *    *<p>Even if this method returns true, the maps are not modified. Calcite    * stores the defined objects in a wrapper object.    *    * @return Whether the user is allowed to create new tables, functions    *   and sub-schemas in this schema    */
 name|boolean
 name|isMutable
 parameter_list|()

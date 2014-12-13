@@ -56,7 +56,7 @@ specifier|public
 interface|interface
 name|CallImplementor
 block|{
-comment|/** Implements a call. */
+comment|/**    * Implements a call.    *    * @param translator Translator for the call    * @param call Call that should be implemented    * @param nullAs The desired mode of {@code null} translation    * @return Translated call    */
 name|Expression
 name|implement
 parameter_list|(

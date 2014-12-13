@@ -699,7 +699,7 @@ name|rowType
 argument_list|)
 return|;
 block|}
-comment|/** Copies a project.    *    * @see #copy(RelTraitSet, List) */
+comment|/**    * Copies a project.    *    * @param traitSet Traits    * @param input Input    * @param exps Project expressions    * @param rowType Output row type    * @return New {@code Project} if any parameter differs from the value of this    *   {@code Project}, or just {@code this} if all the parameters are    *   the same    *    * @see #copy(RelTraitSet, List)    */
 specifier|public
 specifier|abstract
 name|Project
@@ -766,7 +766,7 @@ return|return
 name|exps
 return|;
 block|}
-comment|/**    * Returns the project expressions.    */
+comment|/**    * Returns the project expressions.    *    * @return Project expressions    */
 specifier|public
 name|List
 argument_list|<
@@ -779,7 +779,7 @@ return|return
 name|exps
 return|;
 block|}
-comment|/**    * Returns a list of (expression, name) pairs. Convenient for various    * transformations.    */
+comment|/**    * Returns a list of (expression, name) pairs. Convenient for various    * transformations.    *    * @return List of (expression, name) pairs    */
 specifier|public
 specifier|final
 name|List
@@ -1291,7 +1291,7 @@ block|}
 end_function
 
 begin_comment
-comment|/**    * Returns a mapping, or null if this projection is not a mapping.    */
+comment|/**    * Returns a mapping, or null if this projection is not a mapping.    *    * @return Mapping, or null if this projection is not a mapping    */
 end_comment
 
 begin_function
@@ -1321,7 +1321,7 @@ block|}
 end_function
 
 begin_comment
-comment|/**    * Returns a mapping of a set of project expressions.    *    *<p>The mapping is an inverse surjection.    * Every target has a source field, but    * a source field may appear as zero, one, or more target fields.    * Thus you can safely call    * {@link Mappings.TargetMapping#getTarget(int)}.    *    * @param inputFieldCount Number of input fields    * @param projects Project expressions    */
+comment|/**    * Returns a mapping of a set of project expressions.    *    *<p>The mapping is an inverse surjection.    * Every target has a source field, but    * a source field may appear as zero, one, or more target fields.    * Thus you can safely call    * {@link Mappings.TargetMapping#getTarget(int)}.    *    * @param inputFieldCount Number of input fields    * @param projects Project expressions    * @return Mapping of a set of project expressions    */
 end_comment
 
 begin_function
@@ -1424,7 +1424,7 @@ block|}
 end_function
 
 begin_comment
-comment|/**    * Returns a permutation, if this projection is merely a permutation of its    * input fields, otherwise null.    */
+comment|/**    * Returns a permutation, if this projection is merely a permutation of its    * input fields, otherwise null.    *    * @return Permutation, if this projection is merely a permutation of its    *   input fields, otherwise null    */
 end_comment
 
 begin_function

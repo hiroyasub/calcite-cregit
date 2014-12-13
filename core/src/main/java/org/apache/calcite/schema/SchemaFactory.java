@@ -34,7 +34,7 @@ specifier|public
 interface|interface
 name|SchemaFactory
 block|{
-comment|/** Creates a Schema.    *    * @param parentSchema Parent schema    * @param name Name of this schema    * @param operand The "operand" JSON property    */
+comment|/** Creates a Schema.    *    * @param parentSchema Parent schema    * @param name Name of this schema    * @param operand The "operand" JSON property    * @return Created schema    */
 name|Schema
 name|create
 parameter_list|(

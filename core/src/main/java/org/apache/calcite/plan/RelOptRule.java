@@ -252,7 +252,7 @@ argument_list|()
 expr_stmt|;
 block|}
 comment|//~ Methods for creating operands ------------------------------------------
-comment|/**    * Creates an operand that matches a relational expression that has no    * children.    *    * @param clazz Class of relational expression to match (must not be null)    * @return Operand    */
+comment|/**    * Creates an operand that matches a relational expression that has no    * children.    *    * @param clazz Class of relational expression to match (must not be null)    * @param operandList Child operands    * @param<R> Class of relational expression to match    * @return Operand that matches a relational expression that has no    *   children    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -293,7 +293,7 @@ name|operandList
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates an operand that matches a relational expression that has no    * children.    *    * @param clazz Class of relational expression to match (must not be null)    * @param trait Trait to match, or null to match any trait    * @return Operand    */
+comment|/**    * Creates an operand that matches a relational expression that has no    * children.    *    * @param clazz Class of relational expression to match (must not be null)    * @param trait Trait to match, or null to match any trait    * @param operandList Child operands    * @param<R> Class of relational expression to match    * @return Operand that matches a relational expression that has no    *   children    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -337,7 +337,7 @@ name|operandList
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates an operand that matches a relational expression that has a    * particular trait and predicate.    *    * @param clazz Class of relational expression to match (must not be null)    * @param trait Trait to match, or null to match any trait    * @return Operand    */
+comment|/**    * Creates an operand that matches a relational expression that has a    * particular trait and predicate.    *    * @param clazz Class of relational expression to match (must not be null)    * @param trait Trait to match, or null to match any trait    * @param predicate Additional match predicate    * @param operandList Child operands    * @param<R> Class of relational expression to match    * @return Operand that matches a relational expression that has a    *   particular trait and predicate    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -383,7 +383,7 @@ name|operandList
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates an operand that matches a relational expression that has no    * children.    *    * @param clazz Class of relational expression to match (must not be null)    * @param trait Trait to match, or null to match any trait    * @return Operand    */
+comment|/**    * Creates an operand that matches a relational expression that has no    * children.    *    * @param clazz Class of relational expression to match (must not be null)    * @param trait Trait to match, or null to match any trait    * @param predicate Additional match predicate    * @param first First operand    * @param rest Rest operands    * @param<R> Class of relational expression to match    * @return Operand    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -438,7 +438,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates an operand that matches a relational expression with a given    * list of children.    *    *<p>Shorthand for<code>operand(clazz, some(...))</code>.    *    *<p>If you wish to match a relational expression that has no children    * (that is, a leaf node), write<code>operand(clazz, none())</code></p>.    *    *<p>If you wish to match a relational expression that has any number of    * children, write<code>operand(clazz, any())</code></p>.    *    * @param clazz Class of relational expression to match (must not be null)    * @return Operand    */
+comment|/**    * Creates an operand that matches a relational expression with a given    * list of children.    *    *<p>Shorthand for<code>operand(clazz, some(...))</code>.    *    *<p>If you wish to match a relational expression that has no children    * (that is, a leaf node), write<code>operand(clazz, none())</code></p>.    *    *<p>If you wish to match a relational expression that has any number of    * children, write<code>operand(clazz, any())</code></p>.    *    * @param clazz Class of relational expression to match (must not be null)    * @param first First operand    * @param rest Rest operands    * @param<R> Class of relational expression to match    * @return Operand that matches a relational expression with a given    *   list of children    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -478,7 +478,7 @@ argument_list|)
 return|;
 block|}
 comment|//~ Methods for creating lists of child operands ---------------------------
-comment|/**    * Creates a list of child operands that matches child relational    * expressions in the order they appear.    *    * @param first First child operand    * @param rest  Remaining child operands (may be empty)    */
+comment|/**    * Creates a list of child operands that matches child relational    * expressions in the order they appear.    *    * @param first First child operand    * @param rest  Remaining child operands (may be empty)    * @return List of child operands that matches child relational    *   expressions in the order    */
 specifier|public
 specifier|static
 name|RelOptRuleOperandChildren
@@ -523,7 +523,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates a list of child operands that matches child relational    * expressions in any order.    *    *<p>This is useful when matching a relational expression which    * can have a variable number of children. For example, the rule to    * eliminate empty children of a Union would have operands</p>    *    *<blockquote>Operand(Union, true, Operand(Empty))</blockquote>    *    *<p>and given the relational expressions</p>    *    *<blockquote>Union(LogicalFilter, Empty, LogicalProject)</blockquote>    *    *<p>would fire the rule with arguments</p>    *    *<blockquote>{Union, Empty}</blockquote>    *    *<p>It is up to the rule to deduce the other children, or indeed the    * position of the matched child.</p>    *    * @param first First child operand    * @param rest  Remaining child operands (may be empty)    */
+comment|/**    * Creates a list of child operands that matches child relational    * expressions in any order.    *    *<p>This is useful when matching a relational expression which    * can have a variable number of children. For example, the rule to    * eliminate empty children of a Union would have operands</p>    *    *<blockquote>Operand(Union, true, Operand(Empty))</blockquote>    *    *<p>and given the relational expressions</p>    *    *<blockquote>Union(LogicalFilter, Empty, LogicalProject)</blockquote>    *    *<p>would fire the rule with arguments</p>    *    *<blockquote>{Union, Empty}</blockquote>    *    *<p>It is up to the rule to deduce the other children, or indeed the    * position of the matched child.</p>    *    * @param first First child operand    * @param rest  Remaining child operands (may be empty)    * @return List of child operands that matches child relational    *   expressions in any order    */
 specifier|public
 specifier|static
 name|RelOptRuleOperandChildren
@@ -568,7 +568,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates an empty list of child operands.    */
+comment|/**    * Creates an empty list of child operands.    *    * @return Empty list of child operands    */
 specifier|public
 specifier|static
 name|RelOptRuleOperandChildren
@@ -581,7 +581,7 @@ operator|.
 name|LEAF_CHILDREN
 return|;
 block|}
-comment|/**    * Creates a list of child operands that signifies that the operand matches    * any number of child relational expressions.    */
+comment|/**    * Creates a list of child operands that signifies that the operand matches    * any number of child relational expressions.    *    * @return List of child operands that signifies that the operand matches    *   any number of child relational expressions    */
 specifier|public
 specifier|static
 name|RelOptRuleOperandChildren
@@ -967,7 +967,7 @@ name|obj
 argument_list|)
 return|;
 block|}
-comment|/**    * Returns whether this rule is equal to another rule.    *    *<p>The base implementation checks that the rules have the same class and    * that the operands are equal; derived classes can override.    */
+comment|/**    * Returns whether this rule is equal to another rule.    *    *<p>The base implementation checks that the rules have the same class and    * that the operands are equal; derived classes can override.    *    * @param that Another rule    * @return Whether this rule is equal to another rule    */
 specifier|protected
 name|boolean
 name|equals
@@ -1037,7 +1037,7 @@ name|RelOptRuleCall
 name|call
 parameter_list|)
 function_decl|;
-comment|/**    * Returns the convention of the result of firing this rule, null if    * not known.    */
+comment|/**    * Returns the convention of the result of firing this rule, null if    * not known.    *    * @return Convention of the result of firing this rule, null if    *   not known    */
 specifier|public
 name|Convention
 name|getOutConvention
@@ -1047,7 +1047,7 @@ return|return
 literal|null
 return|;
 block|}
-comment|/**    * Returns the trait which will be modified as a result of firing this rule,    * or null if the rule is not a converter rule.    */
+comment|/**    * Returns the trait which will be modified as a result of firing this rule,    * or null if the rule is not a converter rule.    *    * @return Trait which will be modified as a result of firing this rule,    *   or null if the rule is not a converter rule    */
 specifier|public
 name|RelTrait
 name|getOutTrait
@@ -1057,7 +1057,7 @@ return|return
 literal|null
 return|;
 block|}
-comment|/** Returns the description of this rule.    *    *<p>It must be unique (for rules that are not equal) and must consist of    * only the characters A-Z, a-z, 0-9, '_', '.', '(', ')'. It must start with    * a letter. */
+comment|/**    * Returns the description of this rule.    *    *<p>It must be unique (for rules that are not equal) and must consist of    * only the characters A-Z, a-z, 0-9, '_', '.', '(', ')'. It must start with    * a letter. */
 specifier|public
 specifier|final
 name|String

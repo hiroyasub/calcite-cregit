@@ -93,7 +93,7 @@ name|Type
 name|returnType
 parameter_list|()
 function_decl|;
-comment|/**    * Returns the parameter types of the aggregate as    * {@link org.apache.calcite.rel.type.RelDataType}.    * This can be helpful to test    * {@link org.apache.calcite.rel.type.RelDataType#isNullable()}.    */
+comment|/**    * Returns the parameter types of the aggregate as    * {@link org.apache.calcite.rel.type.RelDataType}.    * This can be helpful to test    * {@link org.apache.calcite.rel.type.RelDataType#isNullable()}.    *    * @return Parameter types of the aggregate    */
 name|List
 argument_list|<
 name|?
@@ -103,7 +103,7 @@ argument_list|>
 name|parameterRelTypes
 parameter_list|()
 function_decl|;
-comment|/**    * Returns the parameter types of the aggregate as    * {@link java.lang.reflect.Type}.    */
+comment|/**    * Returns the parameter types of the aggregate as    * {@link java.lang.reflect.Type}.    *    * @return Parameter types of the aggregate    */
 name|List
 argument_list|<
 name|?

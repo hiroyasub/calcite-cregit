@@ -64,7 +64,7 @@ specifier|public
 interface|interface
 name|AggImplementor
 block|{
-comment|/**    * Returns the types of the intermediate variables used by the aggregate    * implementation.    *    *<p>For instance, for "concatenate to string" this can be    * {@link java.lang.StringBuilder}.    * Calcite calls this method before all other {@code implement*} methods.    *    * @param info aggregate context    * @return types of the intermediate variables used by the aggregate    *   implementation    */
+comment|/**    * Returns the types of the intermediate variables used by the aggregate    * implementation.    *    *<p>For instance, for "concatenate to string" this can be    * {@link java.lang.StringBuilder}.    * Calcite calls this method before all other {@code implement*} methods.    *    * @param info Aggregate context    * @return Types of the intermediate variables used by the aggregate    *   implementation    */
 name|List
 argument_list|<
 name|Type
@@ -75,7 +75,7 @@ name|AggContext
 name|info
 parameter_list|)
 function_decl|;
-comment|/**    * Implements reset of the intermediate variables to the initial state.    * {@link AggResetContext#accumulator()} should be used to reference    * the state variables.    * For instance, to zero the count use the following code:    * {@code reset.currentBlock().add(Expressions.statement(    * Expressions.assign(reset.accumulator().get(0), Expressions.constant(0)));}    * @param info aggregate context    * @param reset reset context    */
+comment|/**    * Implements reset of the intermediate variables to the initial state.    * {@link AggResetContext#accumulator()} should be used to reference    * the state variables.    * For instance, to zero the count use the following code:    * {@code reset.currentBlock().add(Expressions.statement(    * Expressions.assign(reset.accumulator().get(0), Expressions.constant(0)));}    *    * @param info Aggregate context    * @param reset Reset context    */
 name|void
 name|implementReset
 parameter_list|(
@@ -86,7 +86,7 @@ name|AggResetContext
 name|reset
 parameter_list|)
 function_decl|;
-comment|/**    * Updates intermediate values to account for the newly added value.    * {@link AggResetContext#accumulator()} should be used to reference    * the state variables.    * @param info aggregate context    * @param add add context    */
+comment|/**    * Updates intermediate values to account for the newly added value.    * {@link AggResetContext#accumulator()} should be used to reference    * the state variables.    *    * @param info Aggregate context    * @param add Add context    */
 name|void
 name|implementAdd
 parameter_list|(
@@ -97,7 +97,7 @@ name|AggAddContext
 name|add
 parameter_list|)
 function_decl|;
-comment|/**    * Calculates the resulting value based on the intermediate variables.    * Note: this method must NOT destroy the intermediate variables as    * calcite might reuse the state when calculating sliding aggregates.    * {@link AggResetContext#accumulator()} should be used to reference    * the state variables.    * @param info aggregate context    * @param result result context    */
+comment|/**    * Calculates the resulting value based on the intermediate variables.    * Note: this method must NOT destroy the intermediate variables as    * calcite might reuse the state when calculating sliding aggregates.    * {@link AggResetContext#accumulator()} should be used to reference    * the state variables.    *    * @param info Aggregate context    * @param result Result context    * @return Expression that is a result of calculating final value of    *   the aggregate being implemented    */
 name|Expression
 name|implementResult
 parameter_list|(

@@ -221,7 +221,7 @@ specifier|final
 name|double
 name|factor
 decl_stmt|;
-comment|/** Creates an EnumerableInterpreterRel. */
+comment|/**    * Creates an EnumerableInterpreter.    *    * @param cluster Cluster    * @param traitSet Traits    * @param input Input relation    * @param factor Cost multiply factor    */
 specifier|public
 name|EnumerableInterpreter
 parameter_list|(
