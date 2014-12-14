@@ -55,6 +55,20 @@ name|calcite
 operator|.
 name|rel
 operator|.
+name|RelCollation
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
 name|RelNode
 import|;
 end_import
@@ -98,6 +112,20 @@ operator|.
 name|util
 operator|.
 name|ImmutableBitSet
+import|;
+end_import
+
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|ImmutableList
 import|;
 end_import
 
@@ -173,6 +201,22 @@ parameter_list|,
 name|boolean
 name|ignoreNulls
 parameter_list|)
+function_decl|;
+block|}
+comment|/** Metadata about which columns are sorted. */
+specifier|public
+interface|interface
+name|Collation
+extends|extends
+name|Metadata
+block|{
+comment|/** Determines which columns are sorted. */
+name|ImmutableList
+argument_list|<
+name|RelCollation
+argument_list|>
+name|collations
+parameter_list|()
 function_decl|;
 block|}
 comment|/** Metadata about the number of rows returned by a relational expression. */

@@ -145,7 +145,7 @@ name|calcite
 operator|.
 name|rel
 operator|.
-name|RelCollationImpl
+name|RelCollations
 import|;
 end_import
 
@@ -1374,7 +1374,7 @@ name|traitSet
 operator|.
 name|replace
 argument_list|(
-name|RelCollationImpl
+name|RelCollations
 operator|.
 name|EMPTY
 argument_list|)

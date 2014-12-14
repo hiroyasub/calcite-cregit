@@ -139,7 +139,7 @@ name|calcite
 operator|.
 name|rel
 operator|.
-name|RelCollationImpl
+name|RelCollations
 import|;
 end_import
 
@@ -1065,7 +1065,7 @@ name|collationList
 operator|.
 name|add
 argument_list|(
-name|RelCollationImpl
+name|RelCollations
 operator|.
 name|of
 argument_list|(
@@ -1463,8 +1463,9 @@ name|context
 parameter_list|)
 block|{
 return|return
-operator|new
 name|LogicalTableScan
+operator|.
+name|create
 argument_list|(
 name|context
 operator|.
@@ -1727,8 +1728,9 @@ name|context
 parameter_list|)
 block|{
 return|return
-operator|new
 name|LogicalTableScan
+operator|.
+name|create
 argument_list|(
 name|context
 operator|.

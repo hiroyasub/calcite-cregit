@@ -309,7 +309,7 @@ parameter_list|)
 block|{
 try|try
 block|{
-name|RexProgram
+name|RexUtil
 operator|.
 name|apply
 argument_list|(
@@ -365,7 +365,7 @@ parameter_list|)
 block|{
 try|try
 block|{
-name|RexProgram
+name|RexUtil
 operator|.
 name|apply
 argument_list|(

@@ -430,7 +430,7 @@ literal|0
 argument_list|)
 decl_stmt|;
 name|LogicalProject
-name|child
+name|input
 init|=
 name|call
 operator|.
@@ -467,7 +467,7 @@ name|RexProgram
 operator|.
 name|create
 argument_list|(
-name|child
+name|input
 operator|.
 name|getInput
 argument_list|()
@@ -475,19 +475,19 @@ operator|.
 name|getRowType
 argument_list|()
 argument_list|,
-name|child
+name|input
 operator|.
 name|getProjects
 argument_list|()
 argument_list|,
 literal|null
 argument_list|,
-name|child
+name|input
 operator|.
 name|getRowType
 argument_list|()
 argument_list|,
-name|child
+name|input
 operator|.
 name|getCluster
 argument_list|()
@@ -500,7 +500,7 @@ specifier|final
 name|RelDataType
 name|childRowType
 init|=
-name|child
+name|input
 operator|.
 name|getRowType
 argument_list|()
@@ -686,7 +686,7 @@ name|aggCall
 operator|.
 name|adaptTo
 argument_list|(
-name|child
+name|input
 argument_list|,
 name|aggCall
 operator|.
@@ -702,15 +702,11 @@ expr_stmt|;
 block|}
 name|newAggregate
 operator|=
-operator|new
 name|LogicalAggregate
-argument_list|(
-name|aggregate
 operator|.
-name|getCluster
-argument_list|()
-argument_list|,
-name|child
+name|create
+argument_list|(
+name|input
 argument_list|,
 literal|false
 argument_list|,
@@ -835,7 +831,7 @@ name|createProjection
 argument_list|(
 name|mapping
 argument_list|,
-name|child
+name|input
 argument_list|)
 decl_stmt|;
 comment|// Adjust aggregate calls for new field positions.
@@ -956,14 +952,10 @@ block|}
 comment|// Aggregate on projection.
 name|newAggregate
 operator|=
-operator|new
 name|LogicalAggregate
-argument_list|(
-name|aggregate
 operator|.
-name|getCluster
-argument_list|()
-argument_list|,
+name|create
+argument_list|(
 name|project
 argument_list|,
 literal|false

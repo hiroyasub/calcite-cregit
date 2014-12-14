@@ -25,7 +25,7 @@ name|calcite
 operator|.
 name|plan
 operator|.
-name|RelTrait
+name|RelMultipleTrait
 import|;
 end_import
 
@@ -48,7 +48,7 @@ specifier|public
 interface|interface
 name|RelCollation
 extends|extends
-name|RelTrait
+name|RelMultipleTrait
 block|{
 comment|//~ Methods ----------------------------------------------------------------
 comment|/**    * Returns the ordinals and directions of the columns in this ordering.    */

@@ -625,6 +625,9 @@ expr_stmt|;
 block|}
 if|if
 condition|(
+operator|(
+name|Class
+operator|)
 name|a
 operator|.
 name|getClass

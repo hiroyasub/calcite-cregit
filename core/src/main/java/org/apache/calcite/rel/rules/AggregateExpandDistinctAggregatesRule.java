@@ -848,14 +848,10 @@ else|else
 block|{
 name|rel
 operator|=
-operator|new
 name|LogicalAggregate
-argument_list|(
-name|aggregate
 operator|.
-name|getCluster
-argument_list|()
-argument_list|,
+name|create
+argument_list|(
 name|aggregate
 operator|.
 name|getInput

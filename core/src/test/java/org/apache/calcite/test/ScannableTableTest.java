@@ -1041,7 +1041,7 @@ argument_list|()
 argument_list|,
 name|equalTo
 argument_list|(
-literal|"returnCount=2"
+literal|"returnCount=2, filter=4"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1246,7 +1246,7 @@ argument_list|()
 argument_list|,
 name|equalTo
 argument_list|(
-literal|"returnCount=2"
+literal|"returnCount=2, filter=4"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1450,7 +1450,7 @@ argument_list|()
 argument_list|,
 name|equalTo
 argument_list|(
-literal|"returnCount=2, projects=[2, 1]"
+literal|"returnCount=2, filter=4, projects=[2, 1]"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -2834,6 +2834,26 @@ argument_list|(
 name|returnCount
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+name|filter
+operator|!=
+literal|null
+condition|)
+block|{
+name|buf
+operator|.
+name|append
+argument_list|(
+literal|", filter="
+argument_list|)
+operator|.
+name|append
+argument_list|(
+name|filter
+argument_list|)
+expr_stmt|;
+block|}
 if|if
 condition|(
 name|projects

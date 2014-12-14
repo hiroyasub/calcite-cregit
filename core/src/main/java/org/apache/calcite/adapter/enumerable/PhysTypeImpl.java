@@ -2894,11 +2894,11 @@ name|field
 argument_list|(
 literal|null
 argument_list|,
-name|Collections
+name|BuiltInMethod
 operator|.
-name|class
-argument_list|,
-literal|"EMPTY_LIST"
+name|COMPARABLE_EMPTY_LIST
+operator|.
+name|field
 argument_list|)
 argument_list|,
 name|v1

@@ -511,11 +511,10 @@ name|newFuncInputs
 operator|.
 name|add
 argument_list|(
-operator|new
 name|LogicalFilter
+operator|.
+name|create
 argument_list|(
-name|cluster
-argument_list|,
 name|funcInput
 argument_list|,
 name|newCondition
@@ -527,8 +526,9 @@ comment|// create a new UDX whose children are the filters created above
 name|LogicalTableFunctionScan
 name|newFuncRel
 init|=
-operator|new
 name|LogicalTableFunctionScan
+operator|.
+name|create
 argument_list|(
 name|cluster
 argument_list|,

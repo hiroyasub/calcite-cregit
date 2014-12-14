@@ -69,7 +69,7 @@ name|calcite
 operator|.
 name|rel
 operator|.
-name|RelCollationImpl
+name|RelCollations
 import|;
 end_import
 
@@ -2638,7 +2638,10 @@ return|return
 literal|true
 return|;
 block|}
-comment|/**    * Returns whether the leading edge of a given array of expressions is    * wholly {@link RexInputRef} objects with types and names corresponding    * to the underlying row type.    *    * @deprecated Remove before    * {@link org.apache.calcite.util.Bug#upgrade Calcite-1.1}. */
+comment|/**    * Returns whether the leading edge of a given array of expressions is    * wholly {@link RexInputRef} objects with types and names corresponding    * to the underlying row type. */
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.1
 specifier|public
 specifier|static
 name|boolean
@@ -3374,7 +3377,7 @@ if|if
 condition|(
 name|collation
 operator|==
-name|RelCollationImpl
+name|RelCollations
 operator|.
 name|PRESERVE
 condition|)
@@ -3459,7 +3462,7 @@ specifier|final
 name|RelCollation
 name|newCollation
 init|=
-name|RelCollationImpl
+name|RelCollations
 operator|.
 name|of
 argument_list|(
@@ -3538,7 +3541,7 @@ argument_list|)
 condition|?
 name|collation
 else|:
-name|RelCollationImpl
+name|RelCollations
 operator|.
 name|of
 argument_list|(

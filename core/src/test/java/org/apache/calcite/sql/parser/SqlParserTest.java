@@ -2968,6 +2968,52 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testOrderUnion
+parameter_list|()
+block|{
+comment|// ORDER BY inside UNION not allowed
+name|sql
+argument_list|(
+literal|"select a from t order by a\n"
+operator|+
+literal|"^union^ all\n"
+operator|+
+literal|"select b from t order by b"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s).*Encountered \"union\" at .*"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testLimitUnion
+parameter_list|()
+block|{
+comment|// LIMIT inside UNION not allowed
+name|sql
+argument_list|(
+literal|"select a from t limit 10\n"
+operator|+
+literal|"^union^ all\n"
+operator|+
+literal|"select b from t order by b"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s).*Encountered \"union\" at .*"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testUnionOfNonQueryFails
 parameter_list|()
 block|{

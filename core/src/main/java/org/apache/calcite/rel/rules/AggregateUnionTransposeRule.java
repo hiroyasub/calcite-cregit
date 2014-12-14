@@ -633,11 +633,10 @@ name|newUnionInputs
 operator|.
 name|add
 argument_list|(
-operator|new
 name|LogicalAggregate
+operator|.
+name|create
 argument_list|(
-name|cluster
-argument_list|,
 name|input
 argument_list|,
 literal|false
@@ -664,20 +663,19 @@ operator|!
 name|anyTransformed
 condition|)
 block|{
-comment|// none of the children could benefit from the pushdown,
+comment|// none of the children could benefit from the push-down,
 comment|// so bail out (preventing the infinite loop to which most
 comment|// planners would succumb)
 return|return;
 block|}
-comment|// create a new union whose children are the aggs created above
+comment|// create a new union whose children are the aggregates created above
 name|LogicalUnion
 name|newUnion
 init|=
-operator|new
 name|LogicalUnion
+operator|.
+name|create
 argument_list|(
-name|cluster
-argument_list|,
 name|newUnionInputs
 argument_list|,
 literal|true
@@ -686,11 +684,10 @@ decl_stmt|;
 name|LogicalAggregate
 name|newTopAggRel
 init|=
-operator|new
 name|LogicalAggregate
+operator|.
+name|create
 argument_list|(
-name|cluster
-argument_list|,
 name|newUnion
 argument_list|,
 name|aggRel

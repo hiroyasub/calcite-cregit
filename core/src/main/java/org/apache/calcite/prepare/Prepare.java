@@ -744,14 +744,11 @@ name|SqlExplainLevel
 name|detailLevel
 parameter_list|)
 function_decl|;
-comment|/**    * Optimizes a query plan.    *    * @param logicalRowType logical row type of relational expression (before    * struct fields are flattened, or field names are renamed for uniqueness)    * @param rootRel root of a relational expression    *    * @param materializations Tables known to be populated with a given query    * @param lattices Lattices    * @return an equivalent optimized relational expression    */
+comment|/**    * Optimizes a query plan.    *    * @param rootRel root of a relational expression    * @param materializations Tables known to be populated with a given query    * @param lattices Lattices    * @return an equivalent optimized relational expression    */
 specifier|protected
 name|RelNode
 name|optimize
 parameter_list|(
-name|RelDataType
-name|logicalRowType
-parameter_list|,
 specifier|final
 name|RelNode
 name|rootRel
@@ -1071,6 +1068,9 @@ name|replace
 argument_list|(
 name|resultConvention
 argument_list|)
+operator|.
+name|simplify
+argument_list|()
 return|;
 block|}
 comment|/**    * Implements a physical query plan.    *    * @param rowType original row type returned by query validator    * @param rootRel root of the relational expression.    * @param sqlKind SqlKind of the original statement.    * @return an executable plan    */
@@ -1495,11 +1495,6 @@ operator|=
 name|optimize
 argument_list|(
 name|rootRel
-operator|.
-name|getRowType
-argument_list|()
-argument_list|,
-name|rootRel
 argument_list|,
 name|materializations
 argument_list|,
@@ -1526,8 +1521,6 @@ name|rootRel
 operator|=
 name|optimize
 argument_list|(
-name|resultType
-argument_list|,
 name|rootRel
 argument_list|,
 name|materializations

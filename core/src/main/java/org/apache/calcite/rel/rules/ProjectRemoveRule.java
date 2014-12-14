@@ -242,7 +242,9 @@ argument_list|(
 literal|false
 argument_list|)
 decl_stmt|;
-comment|/** @deprecated Remove before    * {@link org.apache.calcite.util.Bug#upgrade Calcite-1.1}. */
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.1
 specifier|public
 specifier|static
 specifier|final
@@ -420,7 +422,10 @@ else|:
 name|project
 return|;
 block|}
-comment|/**    * Returns the child of a project if the project is trivial    * otherwise the project itself. If useNamesInIdentityProjCalc is true    * then trivial comparison uses both names and types.    *    * @deprecated Remove before    * {@link org.apache.calcite.util.Bug#upgrade Calcite-1.1}. */
+comment|/**    * Returns the child of a project if the project is trivial    * otherwise the project itself. If useNamesInIdentityProjCalc is true    * then trivial comparison uses both names and types. */
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.1
 specifier|public
 specifier|static
 name|RelNode
@@ -467,7 +472,9 @@ literal|false
 argument_list|)
 return|;
 block|}
-comment|/** @deprecated Remove before    * {@link org.apache.calcite.util.Bug#upgrade Calcite-1.1}. */
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.1
 specifier|public
 specifier|static
 name|boolean
@@ -574,7 +581,9 @@ literal|false
 argument_list|)
 return|;
 block|}
-comment|/** @deprecated Remove before    * {@link org.apache.calcite.util.Bug#upgrade Calcite-1.1}. */
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.1
 specifier|public
 specifier|static
 name|boolean

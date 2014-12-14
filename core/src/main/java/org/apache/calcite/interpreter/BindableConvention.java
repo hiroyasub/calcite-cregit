@@ -152,7 +152,7 @@ return|;
 block|}
 specifier|public
 name|boolean
-name|subsumes
+name|satisfies
 parameter_list|(
 name|RelTrait
 name|trait

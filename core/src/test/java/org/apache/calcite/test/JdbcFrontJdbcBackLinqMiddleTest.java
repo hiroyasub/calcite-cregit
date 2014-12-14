@@ -192,7 +192,7 @@ name|CalciteAssert
 operator|.
 name|Config
 operator|.
-name|JDBC_FOODMART
+name|FOODMART_CLONE
 argument_list|)
 operator|.
 name|query

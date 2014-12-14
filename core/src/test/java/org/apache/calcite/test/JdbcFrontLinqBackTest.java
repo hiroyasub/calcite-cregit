@@ -380,13 +380,11 @@ operator|+
 literal|"on e.\"empid\" = s.\"cust_id\""
 argument_list|)
 operator|.
-name|returns
+name|returnsUnordered
 argument_list|(
-literal|""
-operator|+
-literal|"cust_id=100; prod_id=10; empid=100; deptno=10; name=Bill; salary=10000.0; commission=1000\n"
-operator|+
-literal|"cust_id=150; prod_id=20; empid=150; deptno=10; name=Sebastian; salary=7000.0; commission=null\n"
+literal|"cust_id=100; prod_id=10; empid=100; deptno=10; name=Bill; salary=10000.0; commission=1000"
+argument_list|,
+literal|"cust_id=150; prod_id=20; empid=150; deptno=10; name=Sebastian; salary=7000.0; commission=null"
 argument_list|)
 expr_stmt|;
 block|}
@@ -436,6 +434,17 @@ operator|+
 literal|"from \"hr\".\"emps\" as e\n"
 operator|+
 literal|"order by \"deptno\", \"name\" desc"
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|"EnumerableCalc(expr#0..1=[{inputs}], expr#2=[UPPER($t1)], UN=[$t2], deptno=[$t0])\n"
+operator|+
+literal|"  EnumerableSort(sort0=[$0], sort1=[$1], dir0=[ASC], dir1=[DESC])\n"
+operator|+
+literal|"    EnumerableCalc(expr#0..4=[{inputs}], deptno=[$t1], name=[$t2])\n"
+operator|+
+literal|"      EnumerableTableScan(table=[[hr, emps]])"
 argument_list|)
 operator|.
 name|returns

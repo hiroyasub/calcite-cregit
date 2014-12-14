@@ -1678,6 +1678,10 @@ name|ENUMERABLE_JOIN_RULE
 argument_list|,
 name|EnumerableRules
 operator|.
+name|ENUMERABLE_MERGE_JOIN_RULE
+argument_list|,
+name|EnumerableRules
+operator|.
 name|ENUMERABLE_SEMI_JOIN_RULE
 argument_list|,
 name|EnumerableRules
@@ -4861,8 +4865,6 @@ name|rootRel
 operator|=
 name|optimize
 argument_list|(
-name|resultType
-argument_list|,
 name|rootRel
 argument_list|,
 name|materializations

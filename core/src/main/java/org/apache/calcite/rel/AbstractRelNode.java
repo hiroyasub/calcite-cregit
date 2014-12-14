@@ -898,6 +898,10 @@ return|return
 literal|true
 return|;
 block|}
+comment|/** @deprecated Use {@link RelMetadataQuery#collations(RelNode)} */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 name|List
 argument_list|<

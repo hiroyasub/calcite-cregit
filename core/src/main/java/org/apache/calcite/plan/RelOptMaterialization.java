@@ -1010,8 +1010,9 @@ name|RelOptUtil
 operator|.
 name|createProject
 argument_list|(
-operator|new
 name|LogicalTableScan
+operator|.
+name|create
 argument_list|(
 name|cluster
 argument_list|,
@@ -1189,8 +1190,9 @@ name|RelOptUtil
 operator|.
 name|createProject
 argument_list|(
-operator|new
 name|LogicalTableScan
+operator|.
+name|create
 argument_list|(
 name|cluster
 argument_list|,

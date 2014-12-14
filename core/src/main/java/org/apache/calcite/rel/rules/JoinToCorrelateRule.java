@@ -630,14 +630,10 @@ decl_stmt|;
 name|RelNode
 name|newRel
 init|=
-operator|new
 name|LogicalCorrelate
-argument_list|(
-name|join
 operator|.
-name|getCluster
-argument_list|()
-argument_list|,
+name|create
+argument_list|(
 name|left
 argument_list|,
 name|filteredRight

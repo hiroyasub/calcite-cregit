@@ -1161,8 +1161,9 @@ specifier|final
 name|RelNode
 name|newRel
 init|=
-operator|new
 name|LogicalValues
+operator|.
+name|create
 argument_list|(
 name|values
 operator|.

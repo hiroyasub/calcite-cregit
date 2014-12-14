@@ -111,7 +111,7 @@ name|calcite
 operator|.
 name|rel
 operator|.
-name|RelCollationImpl
+name|RelCollations
 import|;
 end_import
 
@@ -826,7 +826,7 @@ name|collations
 parameter_list|)
 block|{
 return|return
-name|RelCollationImpl
+name|RelCollations
 operator|.
 name|of
 argument_list|(

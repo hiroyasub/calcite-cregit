@@ -382,7 +382,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A<code>RelSubset</code> is set of expressions in a set which have the same  * calling convention. An expression may be in more than one sub-set of a set;  * the same expression is used.  */
+comment|/**  * Subset of an equivalence class where all relational expressions have the  * same physical properties.  *  *<p>Physical properties are instances of the {@link RelTraitSet}, and consist  * of traits such as calling convention and collation (sort-order).  *  *<p>For some traits, a relational expression can have more than one instance.  * For example, R can be sorted on both [X] and [Y, Z]. In which case, R would  * belong to the sub-sets for [X] and [Y, Z]; and also the leading edges [Y] and  * [].  *  * @see RelNode  * @see RelSet  * @see RelTrait  */
 end_comment
 
 begin_class
@@ -458,6 +458,12 @@ name|boosted
 operator|=
 literal|false
 expr_stmt|;
+assert|assert
+name|traits
+operator|.
+name|allSimple
+argument_list|()
+assert|;
 name|computeBestCost
 argument_list|(
 name|cluster
@@ -1433,7 +1439,7 @@ operator|.
 name|getTraitSet
 argument_list|()
 operator|.
-name|subsumes
+name|satisfies
 argument_list|(
 name|subset
 operator|.
@@ -1770,7 +1776,7 @@ operator|.
 name|getTraitSet
 argument_list|()
 operator|.
-name|subsumes
+name|satisfies
 argument_list|(
 name|traitSet
 argument_list|)
@@ -1826,7 +1832,7 @@ operator|.
 name|getTraitSet
 argument_list|()
 operator|.
-name|subsumes
+name|satisfies
 argument_list|(
 name|traitSet
 argument_list|)

@@ -663,11 +663,10 @@ specifier|final
 name|LogicalFilter
 name|filter
 init|=
-operator|new
 name|LogicalFilter
+operator|.
+name|create
 argument_list|(
-name|cluster
-argument_list|,
 name|tableRel
 argument_list|,
 name|condition
@@ -692,9 +691,9 @@ decl_stmt|;
 name|RelTraitSet
 name|desiredTraits
 init|=
-name|rootRel
+name|cluster
 operator|.
-name|getTraitSet
+name|traitSet
 argument_list|()
 operator|.
 name|replace

@@ -1742,7 +1742,7 @@ return|return
 name|al
 return|;
 block|}
-comment|/**    * Returns the underlying Parser metadata.    *    *<p>To use a different parser (recognizing a different dialect of SQL),    * derived class should override.    *    * @return a {@link SqlAbstractParserImpl.Metadata} instance.    */
+comment|/**    * Returns the underlying Parser metadata.    *    *<p>To use a different parser (recognizing a different dialect of SQL),    * derived class should override.    *    * @return metadata    */
 specifier|protected
 name|SqlAbstractParserImpl
 operator|.

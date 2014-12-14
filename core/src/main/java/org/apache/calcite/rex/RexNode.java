@@ -155,7 +155,7 @@ return|return
 name|digest
 return|;
 block|}
-comment|/**    * Accepts a visitor, dispatching to the right overloaded    * {@link RexVisitor#visitInputRef visitXxx} method.    *    *<p>Also see {@link RexProgram#apply(RexVisitor, java.util.List, RexNode)},    * which applies a visitor to several expressions simultaneously.    */
+comment|/**    * Accepts a visitor, dispatching to the right overloaded    * {@link RexVisitor#visitInputRef visitXxx} method.    *    *<p>Also see {@link RexUtil#apply(RexVisitor, java.util.List, RexNode)},    * which applies a visitor to several expressions simultaneously.    */
 specifier|public
 specifier|abstract
 parameter_list|<

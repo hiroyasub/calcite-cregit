@@ -514,14 +514,10 @@ break|break;
 default|default:
 name|newRel
 operator|=
-operator|new
 name|LogicalUnion
-argument_list|(
-name|union
 operator|.
-name|getCluster
-argument_list|()
-argument_list|,
+name|create
+argument_list|(
 name|newChildRels
 argument_list|,
 name|union

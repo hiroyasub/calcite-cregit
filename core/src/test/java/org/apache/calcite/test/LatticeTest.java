@@ -1286,6 +1286,73 @@ literal|4
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Tests a query that is created within {@link #testTileAlgorithm()}. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJG
+parameter_list|()
+block|{
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|CalciteAssert
+operator|.
+name|Config
+operator|.
+name|JDBC_FOODMART
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"SELECT \"s\".\"unit_sales\", \"p\".\"recyclable_package\", \"t\".\"the_day\", \"t\".\"the_year\", \"t\".\"quarter\", \"pc\".\"product_family\", COUNT(*) AS \"m0\", SUM(\"s\".\"store_sales\") AS \"m1\", SUM(\"s\".\"unit_sales\") AS \"m2\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"sales_fact_1997\" AS \"s\"\n"
+operator|+
+literal|"JOIN \"foodmart\".\"product\" AS \"p\" ON \"s\".\"product_id\" = \"p\".\"product_id\"\n"
+operator|+
+literal|"JOIN \"foodmart\".\"time_by_day\" AS \"t\" ON \"s\".\"time_id\" = \"t\".\"time_id\"\n"
+operator|+
+literal|"JOIN \"foodmart\".\"product_class\" AS \"pc\" ON \"p\".\"product_class_id\" = \"pc\".\"product_class_id\"\n"
+operator|+
+literal|"GROUP BY \"s\".\"unit_sales\", \"p\".\"recyclable_package\", \"t\".\"the_day\", \"t\".\"the_year\", \"t\".\"quarter\", \"pc\".\"product_family\""
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|"EnumerableAggregate(group=[{0, 1, 2, 3, 4, 5}], m0=[COUNT()], m1=[SUM($6)], m2=[SUM($0)])\n"
+operator|+
+literal|"  EnumerableCalc(expr#0..37=[{inputs}], unit_sales=[$t17], recyclable_package=[$t26], the_day=[$t2], the_year=[$t4], quarter=[$t8], product_family=[$t37], store_sales=[$t15])\n"
+operator|+
+literal|"    EnumerableJoin(condition=[=($0, $11)], joinType=[inner])\n"
+operator|+
+literal|"      JdbcToEnumerableConverter\n"
+operator|+
+literal|"        JdbcTableScan(table=[[foodmart, time_by_day]])\n"
+operator|+
+literal|"      EnumerableJoin(condition=[=($8, $23)], joinType=[inner])\n"
+operator|+
+literal|"        EnumerableJoin(condition=[=($0, $9)], joinType=[inner])\n"
+operator|+
+literal|"          JdbcToEnumerableConverter\n"
+operator|+
+literal|"            JdbcTableScan(table=[[foodmart, sales_fact_1997]])\n"
+operator|+
+literal|"          JdbcToEnumerableConverter\n"
+operator|+
+literal|"            JdbcTableScan(table=[[foodmart, product]])\n"
+operator|+
+literal|"        JdbcToEnumerableConverter\n"
+operator|+
+literal|"          JdbcTableScan(table=[[foodmart, product_class]])"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Tests a query that uses no columns from the fact table. */
 annotation|@
 name|Test

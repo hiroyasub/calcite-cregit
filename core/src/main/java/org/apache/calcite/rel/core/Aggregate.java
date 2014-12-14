@@ -1085,6 +1085,23 @@ argument_list|(
 name|this
 argument_list|)
 decl_stmt|;
+comment|// Aggregates with more aggregate functions cost a bit more
+specifier|final
+name|float
+name|multiplier
+init|=
+literal|1f
+operator|+
+operator|(
+name|float
+operator|)
+name|aggCalls
+operator|.
+name|size
+argument_list|()
+operator|*
+literal|0.125f
+decl_stmt|;
 return|return
 name|planner
 operator|.
@@ -1094,6 +1111,8 @@ operator|.
 name|makeCost
 argument_list|(
 name|rowCount
+operator|*
+name|multiplier
 argument_list|,
 literal|0
 argument_list|,

@@ -101,6 +101,16 @@ specifier|public
 specifier|static
 specifier|final
 name|RelOptRule
+name|ENUMERABLE_MERGE_JOIN_RULE
+init|=
+operator|new
+name|EnumerableMergeJoinRule
+argument_list|()
+decl_stmt|;
+specifier|public
+specifier|static
+specifier|final
+name|RelOptRule
 name|ENUMERABLE_SEMI_JOIN_RULE
 init|=
 operator|new

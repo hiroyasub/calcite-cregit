@@ -2799,6 +2799,27 @@ name|n
 argument_list|)
 throw|;
 block|}
+comment|/** Returns a bit set the same as this but with a given bit set. */
+specifier|public
+name|ImmutableBitSet
+name|set
+parameter_list|(
+name|int
+name|i
+parameter_list|)
+block|{
+return|return
+name|union
+argument_list|(
+name|ImmutableBitSet
+operator|.
+name|of
+argument_list|(
+name|i
+argument_list|)
+argument_list|)
+return|;
+block|}
 comment|/** Returns a bit set the same as this but with a given bit cleared. */
 specifier|public
 name|ImmutableBitSet

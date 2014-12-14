@@ -624,7 +624,10 @@ argument_list|(
 name|EnumerableConvention
 operator|.
 name|INSTANCE
-argument_list|,
+argument_list|)
+operator|.
+name|replace
+argument_list|(
 name|ALT_TRAIT2
 argument_list|)
 argument_list|)
@@ -899,7 +902,10 @@ argument_list|(
 name|EnumerableConvention
 operator|.
 name|INSTANCE
-argument_list|,
+argument_list|)
+operator|.
+name|replace
+argument_list|(
 name|ALT_TRAIT2
 argument_list|)
 argument_list|)
@@ -1225,7 +1231,7 @@ return|;
 block|}
 specifier|public
 name|boolean
-name|subsumes
+name|satisfies
 parameter_list|(
 name|RelTrait
 name|trait

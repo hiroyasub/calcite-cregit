@@ -502,13 +502,14 @@ case|case
 name|INNER
 case|:
 comment|// LogicalJoin is used to share the code of column names deduplication
-return|return
-operator|new
+specifier|final
 name|LogicalJoin
+name|join
+init|=
+name|LogicalJoin
+operator|.
+name|create
 argument_list|(
-name|getCluster
-argument_list|()
-argument_list|,
 name|left
 argument_list|,
 name|right
@@ -537,6 +538,9 @@ operator|>
 name|of
 argument_list|()
 argument_list|)
+decl_stmt|;
+return|return
+name|join
 operator|.
 name|deriveRowType
 argument_list|()

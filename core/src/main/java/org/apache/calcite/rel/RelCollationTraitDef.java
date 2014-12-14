@@ -158,7 +158,7 @@ name|getDefault
 parameter_list|()
 block|{
 return|return
-name|RelCollationImpl
+name|RelCollations
 operator|.
 name|EMPTY
 return|;
@@ -184,7 +184,7 @@ if|if
 condition|(
 name|toCollation
 operator|==
-name|RelCollationImpl
+name|RelCollations
 operator|.
 name|PRESERVE
 condition|)
@@ -232,7 +232,14 @@ decl_stmt|;
 name|RelNode
 name|newRel
 init|=
+name|planner
+operator|.
+name|register
+argument_list|(
 name|sort
+argument_list|,
+name|rel
+argument_list|)
 decl_stmt|;
 specifier|final
 name|RelTraitSet
@@ -268,7 +275,7 @@ name|planner
 operator|.
 name|changeTraits
 argument_list|(
-name|sort
+name|newRel
 argument_list|,
 name|newTraitSet
 argument_list|)
@@ -295,7 +302,7 @@ block|{
 return|return
 name|toTrait
 operator|!=
-name|RelCollationImpl
+name|RelCollations
 operator|.
 name|PRESERVE
 return|;

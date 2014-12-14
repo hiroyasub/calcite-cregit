@@ -375,14 +375,10 @@ assert|;
 name|LogicalUnion
 name|newUnion
 init|=
-operator|new
 name|LogicalUnion
-argument_list|(
-name|topUnion
 operator|.
-name|getCluster
-argument_list|()
-argument_list|,
+name|create
+argument_list|(
 name|unionInputs
 argument_list|,
 literal|true

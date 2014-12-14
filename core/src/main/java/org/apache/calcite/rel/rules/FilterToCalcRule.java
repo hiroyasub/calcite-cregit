@@ -55,20 +55,6 @@ name|calcite
 operator|.
 name|rel
 operator|.
-name|RelCollation
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|rel
-operator|.
 name|RelNode
 import|;
 end_import
@@ -163,22 +149,8 @@ name|RexProgramBuilder
 import|;
 end_import
 
-begin_import
-import|import
-name|com
-operator|.
-name|google
-operator|.
-name|common
-operator|.
-name|collect
-operator|.
-name|ImmutableList
-import|;
-end_import
-
 begin_comment
-comment|/**  * Planner rule which converts a  * {@link org.apache.calcite.rel.logical.LogicalFilter} to a  * {@link org.apache.calcite.rel.logical.LogicalCalc}.  *  *<p>The rule does<em>NOT</em> fire if the child is a  * {@link org.apache.calcite.rel.logical.LogicalFilter} or a  * {@link org.apache.calcite.rel.logical.LogicalProject} (we assume they they  * will be converted using {@link FilterToCalcRule} or  * {@link ProjectToCalcRule}) or a  * {@link org.apache.calcite.rel.logical.LogicalCalc}. This  * {@link org.apache.calcite.rel.logical.LogicalFilter} will eventually be  * converted by {@link FilterCalcMergeRule}.  */
+comment|/**  * Planner rule that converts a  * {@link org.apache.calcite.rel.logical.LogicalFilter} to a  * {@link org.apache.calcite.rel.logical.LogicalCalc}.  *  *<p>The rule does<em>NOT</em> fire if the child is a  * {@link org.apache.calcite.rel.logical.LogicalFilter} or a  * {@link org.apache.calcite.rel.logical.LogicalProject} (we assume they they  * will be converted using {@link FilterToCalcRule} or  * {@link ProjectToCalcRule}) or a  * {@link org.apache.calcite.rel.logical.LogicalCalc}. This  * {@link org.apache.calcite.rel.logical.LogicalFilter} will eventually be  * converted by {@link FilterCalcMergeRule}.  */
 end_comment
 
 begin_class
@@ -309,30 +281,13 @@ specifier|final
 name|LogicalCalc
 name|calc
 init|=
-operator|new
 name|LogicalCalc
+operator|.
+name|create
 argument_list|(
-name|filter
-operator|.
-name|getCluster
-argument_list|()
-argument_list|,
-name|filter
-operator|.
-name|getTraitSet
-argument_list|()
-argument_list|,
 name|rel
 argument_list|,
 name|program
-argument_list|,
-name|ImmutableList
-operator|.
-expr|<
-name|RelCollation
-operator|>
-name|of
-argument_list|()
 argument_list|)
 decl_stmt|;
 name|call

@@ -93,6 +93,10 @@ argument_list|,
 name|RelMdPredicates
 operator|.
 name|SOURCE
+argument_list|,
+name|RelMdCollation
+operator|.
+name|SOURCE
 argument_list|)
 argument_list|)
 expr_stmt|;

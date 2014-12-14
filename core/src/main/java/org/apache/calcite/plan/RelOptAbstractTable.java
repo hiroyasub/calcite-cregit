@@ -340,8 +340,9 @@ name|context
 parameter_list|)
 block|{
 return|return
-operator|new
 name|LogicalTableScan
+operator|.
+name|create
 argument_list|(
 name|context
 operator|.

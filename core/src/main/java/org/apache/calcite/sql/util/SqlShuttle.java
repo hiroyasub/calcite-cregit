@@ -400,7 +400,7 @@ return|;
 block|}
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------
-comment|/**    * Implementation of {@link ArgHandler} which deep-copies {@link SqlCall}s    * and their operands.    */
+comment|/**    * Implementation of    * {@link org.apache.calcite.sql.util.SqlBasicVisitor.ArgHandler}    * that deep-copies {@link SqlCall}s and their operands.    */
 specifier|protected
 class|class
 name|CallCopyingArgHandler

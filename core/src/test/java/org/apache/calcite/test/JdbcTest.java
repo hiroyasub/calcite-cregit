@@ -11451,6 +11451,66 @@ literal|"EMPNO=1; DESC=SameName\n"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Tests a merge-join. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMergeJoin
+parameter_list|()
+block|{
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|CalciteAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select \"emps\".\"empid\",\n"
+operator|+
+literal|" \"depts\".\"deptno\", \"depts\".\"name\"\n"
+operator|+
+literal|"from \"hr\".\"emps\"\n"
+operator|+
+literal|" join \"hr\".\"depts\" using (\"deptno\")"
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|""
+operator|+
+literal|"EnumerableCalc(expr#0..3=[{inputs}], empid=[$t2], deptno=[$t0], name=[$t1])\n"
+operator|+
+literal|"  EnumerableJoin(condition=[=($0, $3)], joinType=[inner])\n"
+operator|+
+literal|"    EnumerableCalc(expr#0..3=[{inputs}], proj#0..1=[{exprs}])\n"
+operator|+
+literal|"      EnumerableTableScan(table=[[hr, depts]])\n"
+operator|+
+literal|"    EnumerableCalc(expr#0..4=[{inputs}], proj#0..1=[{exprs}])\n"
+operator|+
+literal|"      EnumerableTableScan(table=[[hr, emps]])"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"empid=100; deptno=10; name=Sales\n"
+operator|+
+literal|"empid=150; deptno=10; name=Sales\n"
+operator|+
+literal|"empid=110; deptno=10; name=Sales\n"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Tests a cartesian product aka cross join. */
 annotation|@
 name|Test
@@ -12417,11 +12477,9 @@ name|explainContains
 argument_list|(
 literal|"PLAN=EnumerableLimit(fetch=[5])\n"
 operator|+
-literal|"  EnumerableSort(sort0=[$0], dir0=[ASC])\n"
+literal|"  EnumerableCalc(expr#0..23=[{inputs}], expr#24=[10], expr#25=[<($t0, $t24)], store_id=[$t0], grocery_sqft=[$t16], $condition=[$t25])\n"
 operator|+
-literal|"    EnumerableCalc(expr#0..23=[{inputs}], expr#24=[10], expr#25=[<($t0, $t24)], store_id=[$t0], grocery_sqft=[$t16], $condition=[$t25])\n"
-operator|+
-literal|"      EnumerableTableScan(table=[[foodmart2, store]])\n"
+literal|"    EnumerableTableScan(table=[[foodmart2, store]])\n"
 argument_list|)
 operator|.
 name|returns
@@ -13068,6 +13126,102 @@ literal|10
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** ORDER BY on a sort-key does not require a sort. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testOrderOnSortedTable
+parameter_list|()
+throws|throws
+name|IOException
+block|{
+comment|// The ArrayTable "store" is sorted by "store_id".
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|CalciteAssert
+operator|.
+name|Config
+operator|.
+name|FOODMART_CLONE
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select \"day\"\n"
+operator|+
+literal|"from \"days\"\n"
+operator|+
+literal|"order by \"day\""
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"day=1\n"
+operator|+
+literal|"day=2\n"
+operator|+
+literal|"day=3\n"
+operator|+
+literal|"day=4\n"
+operator|+
+literal|"day=5\n"
+operator|+
+literal|"day=6\n"
+operator|+
+literal|"day=7\n"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** ORDER BY on a sort-key does not require a sort. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testOrderSorted
+parameter_list|()
+throws|throws
+name|IOException
+block|{
+comment|// The ArrayTable "store" is sorted by "store_id".
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|CalciteAssert
+operator|.
+name|Config
+operator|.
+name|FOODMART_CLONE
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select \"store_id\"\n"
+operator|+
+literal|"from \"store\"\n"
+operator|+
+literal|"order by \"store_id\" limit 3"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"store_id=0\n"
+operator|+
+literal|"store_id=1\n"
+operator|+
+literal|"store_id=2\n"
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public
@@ -13340,9 +13494,7 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"PLAN=EnumerableSort(sort0=[$0], dir0=[ASC])\n"
-operator|+
-literal|"  EnumerableTableScan(table=[[foodmart2, time_by_day]])\n\n"
+literal|"PLAN=EnumerableTableScan(table=[[foodmart2, time_by_day]])\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -16368,6 +16520,21 @@ block|{
 name|checkRun
 argument_list|(
 literal|"sql/sequence.oq"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testRunSort
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+name|checkRun
+argument_list|(
+literal|"sql/sort.oq"
 argument_list|)
 expr_stmt|;
 block|}
@@ -25132,11 +25299,10 @@ name|flattened
 parameter_list|)
 block|{
 return|return
-operator|new
 name|LogicalTableModify
+operator|.
+name|create
 argument_list|(
-name|cluster
-argument_list|,
 name|table
 argument_list|,
 name|catalogReader
