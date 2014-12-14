@@ -350,11 +350,6 @@ operator|.
 name|getInput
 argument_list|()
 argument_list|,
-name|filter
-operator|.
-name|getRowType
-argument_list|()
-argument_list|,
 name|mergedProgram
 argument_list|,
 name|Collections

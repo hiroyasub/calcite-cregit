@@ -197,22 +197,6 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|rel
-operator|.
-name|type
-operator|.
-name|RelDataType
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
 name|rex
 operator|.
 name|RexProgram
@@ -270,7 +254,7 @@ argument_list|>
 name|collationList
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates calc node.    *    * @param cluster Cluster    * @param traits Traits    * @param child Input relation    * @param rowType Output row type    * @param program Calc program    * @param collationList Description of the physical ordering (or orderings)    *                      of this relational expression. Never null    */
+comment|/**    * Creates calc node.    *    * @param cluster Cluster    * @param traits Traits    * @param child Input relation    * @param program Calc program    * @param collationList Description of the physical ordering (or orderings)    *                      of this relational expression. Never null    */
 specifier|protected
 name|Calc
 parameter_list|(
@@ -282,9 +266,6 @@ name|traits
 parameter_list|,
 name|RelNode
 name|child
-parameter_list|,
-name|RelDataType
-name|rowType
 parameter_list|,
 name|RexProgram
 name|program
@@ -309,7 +290,10 @@ name|this
 operator|.
 name|rowType
 operator|=
-name|rowType
+name|program
+operator|.
+name|getOutputRowType
+argument_list|()
 expr_stmt|;
 name|this
 operator|.
@@ -420,32 +404,6 @@ argument_list|()
 operator|.
 name|getRowType
 argument_list|()
-argument_list|,
-name|fail
-argument_list|)
-condition|)
-block|{
-return|return
-literal|false
-return|;
-block|}
-if|if
-condition|(
-operator|!
-name|RelOptUtil
-operator|.
-name|equal
-argument_list|(
-literal|"rowtype of program"
-argument_list|,
-name|program
-operator|.
-name|getOutputRowType
-argument_list|()
-argument_list|,
-literal|"declared rowtype of rel"
-argument_list|,
-name|rowType
 argument_list|,
 name|fail
 argument_list|)

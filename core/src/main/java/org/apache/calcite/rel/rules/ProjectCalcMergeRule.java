@@ -347,11 +347,6 @@ argument_list|()
 argument_list|,
 name|calc
 argument_list|,
-name|project
-operator|.
-name|getRowType
-argument_list|()
-argument_list|,
 name|program
 argument_list|,
 name|Collections
@@ -475,11 +470,6 @@ argument_list|,
 name|calc
 operator|.
 name|getInput
-argument_list|()
-argument_list|,
-name|project
-operator|.
-name|getRowType
 argument_list|()
 argument_list|,
 name|mergedProgram

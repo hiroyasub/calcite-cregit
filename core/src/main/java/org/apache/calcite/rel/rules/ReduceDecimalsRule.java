@@ -635,11 +635,6 @@ name|getInput
 argument_list|()
 argument_list|,
 name|newProgram
-operator|.
-name|getOutputRowType
-argument_list|()
-argument_list|,
-name|newProgram
 argument_list|,
 name|Collections
 operator|.

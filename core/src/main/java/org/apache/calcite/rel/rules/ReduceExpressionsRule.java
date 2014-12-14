@@ -1609,11 +1609,6 @@ operator|.
 name|getInput
 argument_list|()
 argument_list|,
-name|calc
-operator|.
-name|getRowType
-argument_list|()
-argument_list|,
 name|builder
 operator|.
 name|getProgram

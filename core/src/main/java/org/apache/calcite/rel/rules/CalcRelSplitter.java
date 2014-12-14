@@ -1190,11 +1190,6 @@ name|cluster
 argument_list|,
 name|traits
 argument_list|,
-name|program1
-operator|.
-name|getOutputRowType
-argument_list|()
-argument_list|,
 name|rel
 argument_list|,
 name|program1
@@ -3220,9 +3215,6 @@ parameter_list|,
 name|RelTraitSet
 name|traits
 parameter_list|,
-name|RelDataType
-name|rowType
-parameter_list|,
 name|RelNode
 name|child
 parameter_list|,
@@ -3239,8 +3231,6 @@ argument_list|,
 name|traits
 argument_list|,
 name|child
-argument_list|,
-name|rowType
 argument_list|,
 name|program
 argument_list|,

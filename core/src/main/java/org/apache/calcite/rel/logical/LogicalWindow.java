@@ -558,11 +558,17 @@ parameter_list|,
 specifier|final
 name|RexProgram
 name|program
-parameter_list|,
-name|RelDataType
-name|outRowType
 parameter_list|)
 block|{
+specifier|final
+name|RelDataType
+name|outRowType
+init|=
+name|program
+operator|.
+name|getOutputRowType
+argument_list|()
+decl_stmt|;
 comment|// Build a list of distinct groups, partitions and aggregate
 comment|// functions.
 specifier|final

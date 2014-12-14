@@ -11944,11 +11944,6 @@ argument_list|,
 name|rel
 argument_list|,
 name|program
-operator|.
-name|getOutputRowType
-argument_list|()
-argument_list|,
-name|program
 argument_list|,
 name|ImmutableList
 operator|.

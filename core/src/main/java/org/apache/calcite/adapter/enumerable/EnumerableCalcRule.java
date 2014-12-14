@@ -231,11 +231,6 @@ name|INSTANCE
 argument_list|)
 argument_list|)
 argument_list|,
-name|calc
-operator|.
-name|getRowType
-argument_list|()
-argument_list|,
 name|program
 argument_list|,
 name|calc
