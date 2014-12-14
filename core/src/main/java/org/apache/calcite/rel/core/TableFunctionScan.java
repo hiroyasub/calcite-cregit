@@ -179,6 +179,20 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rex
+operator|.
+name|RexShuttle
+import|;
+end_import
+
+begin_import
+import|import
 name|com
 operator|.
 name|google
@@ -286,7 +300,7 @@ argument_list|>
 name|columnMappings
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a<code>TableFunctionScan</code>.    *    * @param cluster        Cluster that this relational expression belongs to    * @param inputs         0 or more relational inputs    * @param rexCall        function invocation expression    * @param elementType    element type of the collection that will implement    *                       this table    * @param rowType        row type produced by function    * @param columnMappings column mappings associated with this function    */
+comment|/**    * Creates a<code>TableFunctionScan</code>.    *    * @param cluster        Cluster that this relational expression belongs to    * @param inputs         0 or more relational inputs    * @param rexCall        Function invocation expression    * @param elementType    Element type of the collection that will implement    *                       this table    * @param rowType        Row type produced by function    * @param columnMappings Column mappings associated with this function    */
 specifier|protected
 name|TableFunctionScan
 parameter_list|(
@@ -435,6 +449,71 @@ comment|//~ Methods ------------------------------------------------------------
 annotation|@
 name|Override
 specifier|public
+specifier|final
+name|TableFunctionScan
+name|copy
+parameter_list|(
+name|RelTraitSet
+name|traitSet
+parameter_list|,
+name|List
+argument_list|<
+name|RelNode
+argument_list|>
+name|inputs
+parameter_list|)
+block|{
+return|return
+name|copy
+argument_list|(
+name|traitSet
+argument_list|,
+name|inputs
+argument_list|,
+name|rexCall
+argument_list|,
+name|elementType
+argument_list|,
+name|rowType
+argument_list|,
+name|columnMappings
+argument_list|)
+return|;
+block|}
+comment|/**    * Copies this relational expression, substituting traits and    * inputs.    *    * @param traitSet       Traits    * @param inputs         0 or more relational inputs    * @param rexCall        Function invocation expression    * @param elementType    Element type of the collection that will implement    *                       this table    * @param rowType        Row type produced by function    * @param columnMappings Column mappings associated with this function    * @return Copy of this relational expression, substituting traits and    * inputs    */
+specifier|public
+specifier|abstract
+name|TableFunctionScan
+name|copy
+parameter_list|(
+name|RelTraitSet
+name|traitSet
+parameter_list|,
+name|List
+argument_list|<
+name|RelNode
+argument_list|>
+name|inputs
+parameter_list|,
+name|RexNode
+name|rexCall
+parameter_list|,
+name|Type
+name|elementType
+parameter_list|,
+name|RelDataType
+name|rowType
+parameter_list|,
+name|Set
+argument_list|<
+name|RelColumnMapping
+argument_list|>
+name|columnMappings
+parameter_list|)
+function_decl|;
+annotation|@
+name|Override
+specifier|public
 name|List
 argument_list|<
 name|RelNode
@@ -462,6 +541,56 @@ operator|.
 name|of
 argument_list|(
 name|rexCall
+argument_list|)
+return|;
+block|}
+specifier|public
+name|RelNode
+name|accept
+parameter_list|(
+name|RexShuttle
+name|shuttle
+parameter_list|)
+block|{
+name|RexNode
+name|rexCall
+init|=
+name|shuttle
+operator|.
+name|apply
+argument_list|(
+name|this
+operator|.
+name|rexCall
+argument_list|)
+decl_stmt|;
+if|if
+condition|(
+name|rexCall
+operator|==
+name|this
+operator|.
+name|rexCall
+condition|)
+block|{
+return|return
+name|this
+return|;
+block|}
+return|return
+name|copy
+argument_list|(
+name|traitSet
+argument_list|,
+name|inputs
+argument_list|,
+name|rexCall
+argument_list|,
+name|elementType
+argument_list|,
+name|rowType
+argument_list|,
+name|columnMappings
 argument_list|)
 return|;
 block|}
@@ -585,14 +714,12 @@ return|return
 name|nRows
 return|;
 block|}
+comment|/**    * Returns function invocation expression.    *    *<p>Within this rexCall, instances of    * {@link org.apache.calcite.rex.RexInputRef} refer to entire input    * {@link org.apache.calcite.rel.RelNode}s rather than their fields.    *    * @return function invocation expression    */
 specifier|public
 name|RexNode
 name|getCall
 parameter_list|()
 block|{
-comment|// NOTE jvs 7-May-2006:  Within this rexCall, instances
-comment|// of RexInputRef refer to entire input RelNodes rather
-comment|// than their fields.
 return|return
 name|rexCall
 return|;
@@ -681,7 +808,7 @@ return|return
 name|pw
 return|;
 block|}
-comment|/**    * @return set of mappings known for this table function, or null if unknown    * (not the same as empty!)    */
+comment|/**    * Returns set of mappings known for this table function, or null if unknown    * (not the same as empty!).    *    * @return set of mappings known for this table function, or null if unknown    * (not the same as empty!)    */
 specifier|public
 name|Set
 argument_list|<
@@ -694,7 +821,7 @@ return|return
 name|columnMappings
 return|;
 block|}
-comment|/**    * Returns element type of the collection that will implement this table.    * @return element type of the collection that will implement this table    */
+comment|/**    * Returns element type of the collection that will implement this table.    *    * @return element type of the collection that will implement this table    */
 specifier|public
 name|Type
 name|getElementType

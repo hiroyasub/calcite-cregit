@@ -872,13 +872,12 @@ init|=
 operator|(
 name|T
 operator|)
-name|expr
-operator|.
-name|accept
+name|apply
 argument_list|(
-name|this
+name|expr
 argument_list|)
 decl_stmt|;
+comment|// Avoid NPE if expr is null
 if|if
 condition|(
 name|expr
@@ -927,6 +926,17 @@ argument_list|>
 name|exprList
 parameter_list|)
 block|{
+if|if
+condition|(
+name|exprList
+operator|==
+literal|null
+condition|)
+block|{
+return|return
+literal|null
+return|;
+block|}
 specifier|final
 name|List
 argument_list|<

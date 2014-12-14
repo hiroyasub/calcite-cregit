@@ -183,6 +183,20 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|rex
+operator|.
+name|RexShuttle
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|util
 operator|.
 name|ImmutableBitSet
@@ -223,7 +237,9 @@ extends|,
 name|Cloneable
 block|{
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**    * Returns a list of this relational expression's child expressions.    * (These are scalar expressions, and so do not include the relational    * inputs that are returned by {@link #getInputs}.    *    *<p>The caller should treat the list as unmodifiable; typical    * implementations will return an immutable list. If there are no    * child expressions, returns an empty list, not<code>null</code>.    *    * @return List of this relational expression's child expressions    */
+comment|/**    * Returns a list of this relational expression's child expressions.    * (These are scalar expressions, and so do not include the relational    * inputs that are returned by {@link #getInputs}.    *    *<p>The caller should treat the list as unmodifiable; typical    * implementations will return an immutable list. If there are no    * child expressions, returns an empty list, not<code>null</code>.    *    * @deprecated use #accept(org.apache.calcite.rex.RexShuttle)    * @return List of this relational expression's child expressions    * @see #accept(org.apache.calcite.rex.RexShuttle)    */
+annotation|@
+name|Deprecated
 name|List
 argument_list|<
 name|RexNode
@@ -440,6 +456,14 @@ name|RelNode
 name|accept
 parameter_list|(
 name|RelShuttle
+name|shuttle
+parameter_list|)
+function_decl|;
+comment|/**    * Accepts a visit from a shuttle. If the shuttle updates expression, then    * a copy of the relation should be created.    *    * @param shuttle Shuttle    * @return A copy of this node incorporating changes made by the shuttle to    * this node's children    */
+name|RelNode
+name|accept
+parameter_list|(
+name|RexShuttle
 name|shuttle
 parameter_list|)
 function_decl|;
