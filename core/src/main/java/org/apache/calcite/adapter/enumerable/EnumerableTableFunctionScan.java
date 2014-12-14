@@ -412,6 +412,17 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
+name|t
+operator|=
+name|t
+operator|.
+name|setCorrelates
+argument_list|(
+name|implementor
+operator|.
+name|allCorrelateVariables
+argument_list|)
+expr_stmt|;
 specifier|final
 name|Expression
 name|translated

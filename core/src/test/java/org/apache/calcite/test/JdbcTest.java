@@ -2996,7 +2996,7 @@ parameter_list|()
 throws|throws
 name|Exception
 block|{
-name|checkTableMacroInModel
+name|checkTableFunctionInModel
 argument_list|(
 name|TestTableFunction
 operator|.
@@ -3014,7 +3014,7 @@ parameter_list|()
 throws|throws
 name|Exception
 block|{
-name|checkTableMacroInModel
+name|checkTableFunctionInModel
 argument_list|(
 name|TestStaticTableFunction
 operator|.
@@ -3023,13 +3023,16 @@ argument_list|)
 expr_stmt|;
 block|}
 specifier|private
-name|void
-name|checkTableMacroInModel
+name|CalciteAssert
+operator|.
+name|AssertThat
+name|assertWithMacro
 parameter_list|(
 name|Class
 name|clazz
 parameter_list|)
 block|{
+return|return
 name|CalciteAssert
 operator|.
 name|that
@@ -3072,6 +3075,20 @@ literal|"   ]\n"
 operator|+
 literal|"}"
 argument_list|)
+return|;
+block|}
+specifier|private
+name|void
+name|checkTableMacroInModel
+parameter_list|(
+name|Class
+name|clazz
+parameter_list|)
+block|{
+name|assertWithMacro
+argument_list|(
+name|clazz
+argument_list|)
 operator|.
 name|query
 argument_list|(
@@ -3087,6 +3104,59 @@ operator|+
 literal|"c=3\n"
 operator|+
 literal|"c=30\n"
+argument_list|)
+expr_stmt|;
+block|}
+specifier|private
+name|void
+name|checkTableFunctionInModel
+parameter_list|(
+name|Class
+name|clazz
+parameter_list|)
+block|{
+name|checkTableMacroInModel
+argument_list|(
+name|clazz
+argument_list|)
+expr_stmt|;
+name|assertWithMacro
+argument_list|(
+name|clazz
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select \"a\".\"c\" a, \"b\".\"c\" b\n"
+operator|+
+literal|"  from table(\"adhoc\".\"View\"('(30)')) \"a\",\n"
+operator|+
+literal|" lateral(select *\n"
+operator|+
+literal|"   from table(\"adhoc\".\"View\"('('||\n"
+operator|+
+literal|"          cast(\"a\".\"c\" as varchar(10))||')'))) \"b\""
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"A=1; B=1"
+argument_list|,
+literal|"A=1; B=3"
+argument_list|,
+literal|"A=1; B=1"
+argument_list|,
+literal|"A=3; B=1"
+argument_list|,
+literal|"A=3; B=3"
+argument_list|,
+literal|"A=3; B=3"
+argument_list|,
+literal|"A=30; B=1"
+argument_list|,
+literal|"A=30; B=3"
+argument_list|,
+literal|"A=30; B=30"
 argument_list|)
 expr_stmt|;
 block|}
@@ -26078,6 +26148,31 @@ name|String
 name|s
 parameter_list|)
 block|{
+name|List
+argument_list|<
+name|Integer
+argument_list|>
+name|items
+decl_stmt|;
+comment|// Argument is null in case SQL contains function call with expression.
+comment|// Then the engine calls a function with null argumets to get getRowType.
+if|if
+condition|(
+name|s
+operator|==
+literal|null
+condition|)
+block|{
+name|items
+operator|=
+name|ImmutableList
+operator|.
+name|of
+argument_list|()
+expr_stmt|;
+block|}
+else|else
+block|{
 name|Integer
 name|latest
 init|=
@@ -26100,18 +26195,11 @@ literal|1
 argument_list|)
 argument_list|)
 decl_stmt|;
-name|List
-argument_list|<
-name|Object
-argument_list|>
 name|items
-init|=
-name|Arrays
+operator|=
+name|ImmutableList
 operator|.
-expr|<
-name|Object
-operator|>
-name|asList
+name|of
 argument_list|(
 literal|1
 argument_list|,
@@ -26119,11 +26207,12 @@ literal|3
 argument_list|,
 name|latest
 argument_list|)
-decl_stmt|;
+expr_stmt|;
+block|}
 specifier|final
 name|Enumerable
 argument_list|<
-name|Object
+name|Integer
 argument_list|>
 name|enumerable
 init|=
@@ -26147,7 +26236,7 @@ block|{
 specifier|public
 name|Queryable
 argument_list|<
-name|Object
+name|Integer
 argument_list|>
 name|asQueryable
 parameter_list|(
