@@ -7,6 +7,11 @@ begin_comment
 comment|/**  * Language-integrated query for Java (linq4j) main package.  */
 end_comment
 
+begin_annotation
+annotation|@
+name|PackageMarker
+end_annotation
+
 begin_package
 package|package
 name|org

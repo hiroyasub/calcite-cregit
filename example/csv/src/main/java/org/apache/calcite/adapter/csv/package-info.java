@@ -7,6 +7,11 @@ begin_comment
 comment|/**  * Calcite query provider that reads from CSV (comma-separated value) files.  *  *<p>A Calcite schema maps onto a directory, and each CSV file in that  * directory appears as a table.  Full SQL operations are available on  * those tables.</p>  */
 end_comment
 
+begin_annotation
+annotation|@
+name|PackageMarker
+end_annotation
+
 begin_package
 package|package
 name|org
@@ -20,6 +25,22 @@ operator|.
 name|csv
 package|;
 end_package
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|avatica
+operator|.
+name|util
+operator|.
+name|PackageMarker
+import|;
+end_import
 
 begin_comment
 comment|// End package-info.java

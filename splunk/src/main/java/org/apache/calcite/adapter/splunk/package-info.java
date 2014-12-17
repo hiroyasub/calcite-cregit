@@ -7,6 +7,11 @@ begin_comment
 comment|/**  * Splunk query provider.  *  *<p>There is a single table, called "Splunk". It has fixed columns  * "host", "index", "source", "sourcetype". It has a variable type, so other  * fields are held in a map field called "_others".</p>  */
 end_comment
 
+begin_annotation
+annotation|@
+name|PackageMarker
+end_annotation
+
 begin_package
 package|package
 name|org
@@ -20,6 +25,22 @@ operator|.
 name|splunk
 package|;
 end_package
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|avatica
+operator|.
+name|util
+operator|.
+name|PackageMarker
+import|;
+end_import
 
 begin_comment
 comment|// End package-info.java

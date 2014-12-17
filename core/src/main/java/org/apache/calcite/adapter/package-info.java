@@ -7,6 +7,11 @@ begin_comment
 comment|/**  * Calcite adapters.  *  *<p>An adapter allows Calcite to access data in a particular data source as  * if it were a collection of tables in a schema. Each adapter typically  * contains an implementation of {@link org.apache.calcite.schema.SchemaFactory}  * and some classes that implement other schema SPIs.  *  *<p>To use an adapter, include a custom schema in a JSON model file:  *  *<blockquote><pre>  *    schemas: [  *      {  *        type: 'custom',  *        name: 'My Custom Schema',  *        factory: 'com.acme.MySchemaFactory',  *        operand: {a: 'foo', b: [1, 3.5] }  *      }  *   ]  *</pre>  *</blockquote>  */
 end_comment
 
+begin_annotation
+annotation|@
+name|PackageMarker
+end_annotation
+
 begin_package
 package|package
 name|org
@@ -18,6 +23,22 @@ operator|.
 name|adapter
 package|;
 end_package
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|avatica
+operator|.
+name|util
+operator|.
+name|PackageMarker
+import|;
+end_import
 
 begin_comment
 comment|// End package-info.java

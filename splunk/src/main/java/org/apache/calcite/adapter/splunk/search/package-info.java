@@ -7,6 +7,11 @@ begin_comment
 comment|/**  * Executes queries via Splunk's REST API.  */
 end_comment
 
+begin_annotation
+annotation|@
+name|PackageMarker
+end_annotation
+
 begin_package
 package|package
 name|org
@@ -22,6 +27,22 @@ operator|.
 name|search
 package|;
 end_package
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|avatica
+operator|.
+name|util
+operator|.
+name|PackageMarker
+import|;
+end_import
 
 begin_comment
 comment|// End package-info.java

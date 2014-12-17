@@ -7,6 +7,11 @@ begin_comment
 comment|/**  * Provides an implementation of relational expressions using an interpreter.  *  *<p>The implementation is not efficient compared to generated code, but  * preparation time is less, and so the total prepare + execute time is  * competitive for queries over small data sets.  */
 end_comment
 
+begin_annotation
+annotation|@
+name|PackageMarker
+end_annotation
+
 begin_package
 package|package
 name|org
@@ -18,6 +23,22 @@ operator|.
 name|interpreter
 package|;
 end_package
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|avatica
+operator|.
+name|util
+operator|.
+name|PackageMarker
+import|;
+end_import
 
 begin_comment
 comment|// End package-info.java

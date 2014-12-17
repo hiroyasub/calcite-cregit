@@ -7,6 +7,11 @@ begin_comment
 comment|/**  * Avatica utilities.  */
 end_comment
 
+begin_annotation
+annotation|@
+name|PackageMarker
+end_annotation
+
 begin_package
 package|package
 name|org
