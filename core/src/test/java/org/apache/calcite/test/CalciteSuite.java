@@ -655,6 +655,10 @@ name|TableInRootSchemaTest
 operator|.
 name|class
 block|,
+name|RelMdColumnOriginsTest
+operator|.
+name|class
+block|,
 name|MultiJdbcSchemaJoinTest
 operator|.
 name|class
