@@ -404,20 +404,12 @@ specifier|final
 name|SqlNodeList
 name|groupList
 init|=
-name|SqlValidatorUtil
-operator|.
-name|DeepCopier
-operator|.
-name|copy
-argument_list|(
-name|parent
-argument_list|,
 name|select
 operator|.
 name|getGroup
 argument_list|()
-argument_list|)
 decl_stmt|;
+comment|//          SqlValidatorUtil.DeepCopier.copy(parent, select.getGroup());
 for|for
 control|(
 name|SqlNode

@@ -698,6 +698,13 @@ return|;
 block|}
 name|walker
 operator|=
+operator|(
+operator|(
+name|DelegatingScope
+operator|)
+name|walker
+operator|)
+operator|.
 name|parent
 expr_stmt|;
 block|}

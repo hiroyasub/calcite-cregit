@@ -11682,6 +11682,105 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testStarAliasFails
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select emp.^*^ AS x from emp"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Unknown field '\\*'"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testNonLocalStar
+parameter_list|()
+block|{
+comment|// MySQL allows this but we can't, currently
+name|sql
+argument_list|(
+literal|"select * from emp e where exists (\n"
+operator|+
+literal|"  select ^e^.* from dept where dept.deptno = e.deptno)"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Unknown identifier 'E'"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Parser allows "*" in FROM clause because "*" can occur in any identifier.    * But validator must not.    *    *<p>See also    *<a href="https://issues.apache.org/jira/browse/CALCITE-546">[CALCITE-546]    * "Allow table, column and field called '*'"</a> (not yet fixed).    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testStarInFromFails
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select emp.empno AS x from ^sales.*^"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Table 'SALES.\\*' not found"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select emp.empno from emp where emp.^*^ is not null"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Unknown field '\\*'"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testStarDotIdFails
+parameter_list|()
+block|{
+comment|// Parser allows a star inside (not at end of) compound identifier, but
+comment|// validator does not
+name|sql
+argument_list|(
+literal|"select emp.^*^.foo from emp"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Column '\\*' not found in table 'EMP'"
+argument_list|)
+expr_stmt|;
+comment|// Parser does not allow star dot identifier.
+name|sql
+argument_list|(
+literal|"select ^*^.foo from emp"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s).*Encountered \".\" at .*"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testAsColumnList
 parameter_list|()
 block|{
@@ -12051,6 +12150,220 @@ operator|+
 literal|"  select 1 from emp where emp.empno = emp.deptno)"
 argument_list|)
 expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSchemaTableStar
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select ^sales.e^.* from sales.emp as e"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Unknown identifier 'SALES\\.E'"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select sales.dept.* from sales.dept"
+argument_list|)
+operator|.
+name|type
+argument_list|(
+literal|"RecordType(INTEGER NOT NULL DEPTNO,"
+operator|+
+literal|" VARCHAR(10) NOT NULL NAME) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select sales.emp.* from emp"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select sales.emp.* from emp as emp"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+comment|// MySQL gives: "Unknown table 'emp'"
+comment|// (consistent with MySQL)
+name|sql
+argument_list|(
+literal|"select ^sales.emp^.* from emp as e"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Unknown identifier 'SALES.EMP'"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSchemaTableColumn
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select emp.empno from sales.emp"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select sales.emp.empno from sales.emp"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select sales.emp.empno from sales.emp\n"
+operator|+
+literal|"where sales.emp.deptno> 0"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select 1 from sales.emp where sales.emp.^bad^< 0"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Column 'BAD' not found in table 'SALES.EMP'"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select ^sales.bad^.empno from sales.emp\n"
+operator|+
+literal|"where sales.emp.deptno> 0"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Table 'SALES\\.BAD' not found"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select sales.emp.deptno from sales.emp"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select 1 from sales.emp where sales.emp.deptno = 10"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select 1 from sales.emp order by sales.emp.deptno"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+comment|// alias does not hide the fully-qualified name if same
+comment|// (consistent with MySQL)
+name|sql
+argument_list|(
+literal|"select sales.emp.deptno from sales.emp as emp"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+comment|// alias hides the fully-qualified name
+comment|// (consistent with MySQL)
+name|sql
+argument_list|(
+literal|"select ^sales.emp^.deptno from sales.emp as e"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Table 'SALES\\.EMP' not found"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select sales.emp.deptno from sales.emp, ^sales.emp^"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Duplicate relation name 'EMP' in FROM clause"
+argument_list|)
+expr_stmt|;
+comment|// Table exists but not used in FROM clause
+name|sql
+argument_list|(
+literal|"select ^sales.emp^.deptno from sales.dept as d1, sales.dept"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Table 'SALES.EMP' not found"
+argument_list|)
+expr_stmt|;
+comment|// Table does not exist
+name|sql
+argument_list|(
+literal|"select ^sales.bad^.deptno from sales.dept as d1, sales.dept"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Table 'SALES.BAD' not found"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Ignore
+argument_list|(
+literal|"does not work yet"
+argument_list|)
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSchemaTableColumnInGroupBy
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select 1 from sales.emp group by sales.emp.deptno"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+comment|// TODO:
 block|}
 annotation|@
 name|Test
@@ -17054,21 +17367,13 @@ literal|"RecordType(INTEGER NOT NULL X, INTEGER NOT NULL Y) NOT NULL"
 argument_list|)
 expr_stmt|;
 comment|// Qualifying with schema is OK.
-if|if
-condition|(
-name|Bug
-operator|.
-name|FRG140_FIXED
-condition|)
-block|{
 name|checkResultType
 argument_list|(
 literal|"SELECT customer.contact.coord.x, customer.contact.email, contact.coord.y FROM customer.contact"
 argument_list|,
-literal|"RecordType(INTEGER NOT NULL X, INTEGER NOT NULL Y) NOT NULL"
+literal|"RecordType(INTEGER NOT NULL X, VARCHAR(20) NOT NULL EMAIL, INTEGER NOT NULL Y) NOT NULL"
 argument_list|)
 expr_stmt|;
-block|}
 block|}
 annotation|@
 name|Test

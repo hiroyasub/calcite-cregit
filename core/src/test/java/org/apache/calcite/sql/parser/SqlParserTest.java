@@ -3700,6 +3700,71 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testSchemaTableStar
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select schem.emp.*, emp.empno * dept.deptno\n"
+operator|+
+literal|"from schem.emp, dept"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"SELECT `SCHEM`.`EMP`.*, (`EMP`.`EMPNO` * `DEPT`.`DEPTNO`)\n"
+operator|+
+literal|"FROM `SCHEM`.`EMP`,\n"
+operator|+
+literal|"`DEPT`"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testCatalogSchemaTableStar
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select cat.schem.emp.* from cat.schem.emp"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"SELECT `CAT`.`SCHEM`.`EMP`.*\n"
+operator|+
+literal|"FROM `CAT`.`SCHEM`.`EMP`"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAliasedStar
+parameter_list|()
+block|{
+comment|// OK in parser; validator will give error
+name|sql
+argument_list|(
+literal|"select emp.* as foo from emp"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"SELECT `EMP`.* AS `FOO`\n"
+operator|+
+literal|"FROM `EMP`"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testNotExists
 parameter_list|()
 block|{

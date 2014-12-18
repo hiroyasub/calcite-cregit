@@ -163,6 +163,16 @@ name|java
 operator|.
 name|util
 operator|.
+name|Collection
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
 name|List
 import|;
 end_import
@@ -204,7 +214,7 @@ literal|0
 index|]
 decl_stmt|;
 comment|//~ Instance fields --------------------------------------------------------
-specifier|private
+specifier|protected
 specifier|final
 name|SqlParserPos
 name|pos
@@ -567,7 +577,7 @@ parameter_list|,
 name|SqlParserPos
 name|pos
 parameter_list|,
-name|List
+name|Collection
 argument_list|<
 name|SqlMoniker
 argument_list|>

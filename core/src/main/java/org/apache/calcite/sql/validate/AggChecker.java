@@ -359,7 +359,7 @@ comment|// it fully-qualified.
 comment|// TODO: It would be better if we always compared fully-qualified
 comment|// to fully-qualified.
 specifier|final
-name|SqlIdentifier
+name|SqlQualified
 name|fqId
 init|=
 name|Stacks
@@ -379,6 +379,8 @@ condition|(
 name|isGroupExpr
 argument_list|(
 name|fqId
+operator|.
+name|identifier
 argument_list|)
 condition|)
 block|{

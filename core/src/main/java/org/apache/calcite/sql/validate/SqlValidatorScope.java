@@ -105,6 +105,30 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|Pair
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Collection
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -133,12 +157,15 @@ name|SqlNode
 name|getNode
 parameter_list|()
 function_decl|;
-comment|/**    * Looks up a node with a given name. Returns null if none is found.    *    * @param name        Name of node to find    * @param ancestorOut If not null, writes the ancestor scope here    * @param offsetOut   If not null, writes the offset within the ancestor here    */
+comment|/**    * Looks up a node with a given name. Returns null if none is found.    *    * @param names       Name of node to find    * @param ancestorOut If not null, writes the ancestor scope here    * @param offsetOut   If not null, writes the offset within the ancestor here    */
 name|SqlValidatorNamespace
 name|resolve
 parameter_list|(
+name|List
+argument_list|<
 name|String
-name|name
+argument_list|>
+name|names
 parameter_list|,
 name|SqlValidatorScope
 index|[]
@@ -149,8 +176,13 @@ index|[]
 name|offsetOut
 parameter_list|)
 function_decl|;
-comment|/**    * Finds the table alias which is implicitly qualifying an unqualified    * column name. Throws an error if there is not exactly one table.    *    *<p>This method is only implemented in scopes (such as    * {@link org.apache.calcite.sql.validate.SelectScope}) which can be the    * context for name-resolution. In scopes such as    * {@link org.apache.calcite.sql.validate.IdentifierNamespace}, it throws    * {@link UnsupportedOperationException}.</p>    *    * @param columnName Column name    * @param ctx        Validation context, to appear in any error thrown    * @return Table alias    */
+comment|/**    * Finds the table alias which is implicitly qualifying an unqualified    * column name. Throws an error if there is not exactly one table.    *    *<p>This method is only implemented in scopes (such as    * {@link org.apache.calcite.sql.validate.SelectScope}) which can be the    * context for name-resolution. In scopes such as    * {@link org.apache.calcite.sql.validate.IdentifierNamespace}, it throws    * {@link UnsupportedOperationException}.</p>    *    * @param columnName Column name    * @param ctx        Validation context, to appear in any error thrown    * @return Table alias and namespace    */
+name|Pair
+argument_list|<
 name|String
+argument_list|,
+name|SqlValidatorNamespace
+argument_list|>
 name|findQualifyingTableName
 parameter_list|(
 name|String
@@ -175,15 +207,15 @@ comment|/**    * Collects the {@link SqlMoniker}s of all table aliases (uses of 
 name|void
 name|findAliases
 parameter_list|(
-name|List
+name|Collection
 argument_list|<
 name|SqlMoniker
 argument_list|>
 name|result
 parameter_list|)
 function_decl|;
-comment|/**    * Converts an identifier into a fully-qualified identifier. For example,    * the "empno" in "select empno from emp natural join dept" becomes    * "emp.empno".    */
-name|SqlIdentifier
+comment|/**    * Converts an identifier into a fully-qualified identifier. For example,    * the "empno" in "select empno from emp natural join dept" becomes    * "emp.empno".    *    * @return A qualified identifier, never null    */
+name|SqlQualified
 name|fullyQualify
 parameter_list|(
 name|SqlIdentifier

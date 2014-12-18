@@ -165,8 +165,11 @@ specifier|public
 name|SqlValidatorNamespace
 name|resolve
 parameter_list|(
+name|List
+argument_list|<
 name|String
-name|name
+argument_list|>
+name|names
 parameter_list|,
 name|SqlValidatorScope
 index|[]
@@ -179,7 +182,7 @@ parameter_list|)
 block|{
 if|if
 condition|(
-name|name
+name|names
 operator|.
 name|equals
 argument_list|(
@@ -206,7 +209,7 @@ name|super
 operator|.
 name|resolve
 argument_list|(
-name|name
+name|names
 argument_list|,
 name|ancestorOut
 argument_list|,

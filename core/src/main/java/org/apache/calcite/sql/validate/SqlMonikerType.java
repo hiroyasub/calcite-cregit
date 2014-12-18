@@ -34,6 +34,8 @@ name|VIEW
 block|,
 name|SCHEMA
 block|,
+name|CATALOG
+block|,
 name|REPOSITORY
 block|,
 name|FUNCTION

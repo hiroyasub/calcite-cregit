@@ -206,7 +206,7 @@ name|hintToken
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**    * Turns a partially completed or syntactically incorrect sql statement into    * a simplified, valid one that can be passed into getCompletionHints().    *    * @param sql    A partial or syntatically incorrect sql statement    * @param cursor to indicate column position in the query at which    *               completion hints need to be retrieved.    * @return a completed, valid (and possibly simplified SQL statement    */
+comment|/**    * Turns a partially completed or syntactically incorrect sql statement into    * a simplified, valid one that can be passed into getCompletionHints().    *    * @param sql    A partial or syntactically incorrect sql statement    * @param cursor to indicate column position in the query at which    *               completion hints need to be retrieved.    * @return a completed, valid (and possibly simplified SQL statement    */
 specifier|public
 name|String
 name|simplifySql
@@ -282,7 +282,7 @@ name|sql
 argument_list|)
 return|;
 block|}
-comment|/**    * Turns a partially completed or syntatically incorrect sql statement into    * a simplified, valid one that can be validated    *    * @param sql A partial or syntatically incorrect sql statement    * @return a completed, valid (and possibly simplified) SQL statement    */
+comment|/**    * Turns a partially completed or syntactically incorrect sql statement into    * a simplified, valid one that can be validated    *    * @param sql A partial or syntactically incorrect sql statement    * @return a completed, valid (and possibly simplified) SQL statement    */
 specifier|public
 name|String
 name|simplifySql
@@ -345,7 +345,7 @@ name|token
 argument_list|)
 expr_stmt|;
 block|}
-comment|// Gather consecutive subsequences of tokens into subqueries.
+comment|// Gather consecutive sub-sequences of tokens into subqueries.
 name|List
 argument_list|<
 name|Token

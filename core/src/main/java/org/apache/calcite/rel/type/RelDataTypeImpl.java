@@ -302,7 +302,7 @@ if|if
 condition|(
 name|Util
 operator|.
-name|match
+name|matches
 argument_list|(
 name|caseSensitive
 argument_list|,

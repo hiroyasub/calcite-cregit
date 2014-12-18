@@ -209,7 +209,7 @@ argument_list|)
 expr_stmt|;
 block|}
 specifier|public
-name|SqlIdentifier
+name|SqlQualified
 name|fullyQualify
 parameter_list|(
 name|SqlIdentifier
@@ -282,7 +282,18 @@ literal|null
 condition|)
 block|{
 return|return
+name|SqlQualified
+operator|.
+name|create
+argument_list|(
+name|this
+argument_list|,
+literal|1
+argument_list|,
+name|selectNs
+argument_list|,
 name|identifier
+argument_list|)
 return|;
 block|}
 block|}

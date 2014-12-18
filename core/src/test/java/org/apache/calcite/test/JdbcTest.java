@@ -2582,23 +2582,17 @@ name|SQLException
 throws|,
 name|ClassNotFoundException
 block|{
-name|String
-name|res
-init|=
 name|adviseSql
 argument_list|(
 literal|"select e.e^ from \"emps\" e"
-argument_list|)
-decl_stmt|;
-name|assertThat
-argument_list|(
-name|res
 argument_list|,
-name|equalTo
+name|CalciteAssert
+operator|.
+name|checkResultUnordered
 argument_list|(
-literal|"id=e; names=null; type=MATCH\n"
-operator|+
-literal|"id=empid; names=[empid]; type=COLUMN\n"
+literal|"id=e; names=null; type=MATCH"
+argument_list|,
+literal|"id=empid; names=[empid]; type=COLUMN"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -2615,53 +2609,55 @@ name|SQLException
 throws|,
 name|ClassNotFoundException
 block|{
-name|String
-name|res
-init|=
 name|adviseSql
 argument_list|(
 literal|"select empid from \"emps\" e, ^"
-argument_list|)
-decl_stmt|;
-name|assertThat
-argument_list|(
-name|res
 argument_list|,
-name|equalTo
+name|CalciteAssert
+operator|.
+name|checkResultUnordered
 argument_list|(
-literal|"id=; names=null; type=MATCH\n"
-operator|+
-literal|"id=(; names=[(]; type=KEYWORD\n"
-operator|+
-literal|"id=LATERAL; names=[LATERAL]; type=KEYWORD\n"
-operator|+
-literal|"id=TABLE; names=[TABLE]; type=KEYWORD\n"
-operator|+
-literal|"id=UNNEST; names=[UNNEST]; type=KEYWORD\n"
-operator|+
-literal|"id=hr; names=[hr]; type=SCHEMA\n"
-operator|+
-literal|"id=metadata; names=[metadata]; type=SCHEMA\n"
-operator|+
-literal|"id=s; names=[s]; type=SCHEMA\n"
-operator|+
-literal|"id=hr.dependents; names=[hr, dependents]; type=TABLE\n"
-operator|+
-literal|"id=hr.depts; names=[hr, depts]; type=TABLE\n"
-operator|+
-literal|"id=hr.emps; names=[hr, emps]; type=TABLE\n"
-operator|+
-literal|"id=hr.locations; names=[hr, locations]; type=TABLE\n"
+literal|"id=; names=null; type=MATCH"
+argument_list|,
+literal|"id=(; names=[(]; type=KEYWORD"
+argument_list|,
+literal|"id=LATERAL; names=[LATERAL]; type=KEYWORD"
+argument_list|,
+literal|"id=TABLE; names=[TABLE]; type=KEYWORD"
+argument_list|,
+literal|"id=UNNEST; names=[UNNEST]; type=KEYWORD"
+argument_list|,
+literal|"id=hr; names=[hr]; type=SCHEMA"
+argument_list|,
+literal|"id=metadata; names=[metadata]; type=SCHEMA"
+argument_list|,
+literal|"id=s; names=[s]; type=SCHEMA"
+argument_list|,
+literal|"id=hr.dependents; names=[hr, dependents]; type=TABLE"
+argument_list|,
+literal|"id=hr.depts; names=[hr, depts]; type=TABLE"
+argument_list|,
+literal|"id=hr.emps; names=[hr, emps]; type=TABLE"
+argument_list|,
+literal|"id=hr.locations; names=[hr, locations]; type=TABLE"
 argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
 specifier|private
-name|String
+name|void
 name|adviseSql
 parameter_list|(
 name|String
 name|sql
+parameter_list|,
+name|Function
+argument_list|<
+name|ResultSet
+argument_list|,
+name|Void
+argument_list|>
+name|checker
 parameter_list|)
 throws|throws
 name|ClassNotFoundException
@@ -2824,17 +2820,32 @@ operator|.
 name|cursor
 argument_list|)
 expr_stmt|;
-return|return
-name|CalciteAssert
-operator|.
-name|toString
-argument_list|(
+specifier|final
+name|ResultSet
+name|resultSet
+init|=
 name|ps
 operator|.
 name|executeQuery
 argument_list|()
+decl_stmt|;
+name|checker
+operator|.
+name|apply
+argument_list|(
+name|resultSet
 argument_list|)
-return|;
+expr_stmt|;
+name|resultSet
+operator|.
+name|close
+argument_list|()
+expr_stmt|;
+name|connection
+operator|.
+name|close
+argument_list|()
+expr_stmt|;
 block|}
 comment|/**    * Tests a relation that is accessed via method syntax.    *    *<p>The function ({@link #view(String)} has a return type    * {@link Table} and the actual returned value implements    * {@link org.apache.calcite.schema.TranslatableTable}.    */
 annotation|@

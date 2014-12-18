@@ -146,6 +146,16 @@ name|String
 name|alias
 parameter_list|)
 function_decl|;
+name|boolean
+name|matches
+parameter_list|(
+name|String
+name|string
+parameter_list|,
+name|String
+name|name
+parameter_list|)
+function_decl|;
 name|int
 name|match
 parameter_list|(

@@ -110,15 +110,6 @@ name|FRG78_FIXED
 init|=
 literal|false
 decl_stmt|;
-comment|/**    * Whether<a href="http://issues.eigenbase.org/browse/FRG-140">issue    * FRG-140: validator does not accept column qualified by schema name</a> is    * fixed.    */
-specifier|public
-specifier|static
-specifier|final
-name|boolean
-name|FRG140_FIXED
-init|=
-literal|false
-decl_stmt|;
 comment|/**    * Whether<a href="http://issues.eigenbase.org/browse/FRG-187">issue    * FRG-187: FarragoAutoVmOperatorTest.testOverlapsOperator fails</a> is    * fixed.    */
 specifier|public
 specifier|static
