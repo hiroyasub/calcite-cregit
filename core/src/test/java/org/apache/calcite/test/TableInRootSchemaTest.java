@@ -548,6 +548,21 @@ name|nullValue
 argument_list|()
 argument_list|)
 expr_stmt|;
+name|assertThat
+argument_list|(
+name|resultSetMetaData
+operator|.
+name|getColumnClassName
+argument_list|(
+literal|1
+argument_list|)
+argument_list|,
+name|equalTo
+argument_list|(
+literal|"java.lang.String"
+argument_list|)
+argument_list|)
+expr_stmt|;
 comment|// Per JDBC, column name should be null. But DBUnit requires every column
 comment|// to have a name, so the driver uses the label.
 name|assertThat
@@ -589,6 +604,21 @@ argument_list|)
 argument_list|,
 name|nullValue
 argument_list|()
+argument_list|)
+expr_stmt|;
+name|assertThat
+argument_list|(
+name|resultSetMetaData
+operator|.
+name|getColumnClassName
+argument_list|(
+literal|2
+argument_list|)
+argument_list|,
+name|equalTo
+argument_list|(
+literal|"java.lang.Integer"
+argument_list|)
 argument_list|)
 expr_stmt|;
 name|resultSet

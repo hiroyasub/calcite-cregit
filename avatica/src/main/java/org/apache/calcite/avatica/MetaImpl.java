@@ -1185,7 +1185,10 @@ literal|false
 argument_list|,
 literal|false
 argument_list|,
-literal|null
+name|scalarType
+operator|.
+name|columnClassName
+argument_list|()
 argument_list|)
 return|;
 block|}
