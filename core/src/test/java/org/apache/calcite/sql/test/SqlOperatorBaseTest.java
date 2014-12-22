@@ -17318,6 +17318,15 @@ argument_list|,
 literal|null
 argument_list|)
 expr_stmt|;
+name|tester
+operator|.
+name|checkColumnType
+argument_list|(
+literal|"select cast(null as any)['x'] from (values(1))"
+argument_list|,
+literal|"ANY"
+argument_list|)
+expr_stmt|;
 block|}
 annotation|@
 name|Test
