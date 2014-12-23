@@ -4759,9 +4759,7 @@ specifier|final
 name|RelSubset
 name|subset
 init|=
-name|mapRel2Subset
-operator|.
-name|get
+name|getSubset
 argument_list|(
 name|rel
 argument_list|)
@@ -4791,31 +4789,22 @@ argument_list|)
 decl_stmt|;
 if|if
 condition|(
-name|equivSubset
-operator|!=
 name|subset
+operator|.
+name|set
+operator|!=
+name|equivSubset
+operator|.
+name|set
 condition|)
 block|{
-assert|assert
-name|subset
-operator|.
-name|set
-operator|!=
-name|equivSubset
-operator|.
-name|set
-operator|:
-literal|"Same set, different subsets means rel and equivRel"
-operator|+
-literal|" have different traits, and that's an error"
-assert|;
 name|merge
 argument_list|(
-name|subset
+name|equivSubset
 operator|.
 name|set
 argument_list|,
-name|equivSubset
+name|subset
 operator|.
 name|set
 argument_list|)
@@ -7132,7 +7121,7 @@ literal|0
 return|;
 block|}
 specifier|private
-name|void
+name|RelSet
 name|merge
 parameter_list|(
 name|RelSet
@@ -7234,7 +7223,9 @@ operator|==
 name|set
 condition|)
 block|{
-return|return;
+return|return
+name|set
+return|;
 block|}
 block|}
 comment|// If necessary, swap the sets, so we're always merging the newer set
@@ -7304,8 +7295,11 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
+return|return
+name|set
+return|;
 block|}
-comment|/**    * Registers a new expression<code>exp</code> and queues up rule matches.    * If<code>set</code> is not null, makes the expression part of that    * equivalence set. If an identical expression is already registered, we    * don't need to register this one and nor should we queue up rule matches.    *    * @param rel relational expression to register. Must be either a    *         {@link RelSubset}, or an unregistered {@link RelNode}    * @param set set that rel belongs to, or<code>null</code>    * @return the equivalence-set    * @pre rel instanceof RelSubset || !isRegistered(rel)    */
+comment|/**    * Registers a new expression<code>exp</code> and queues up rule matches.    * If<code>set</code> is not null, makes the expression part of that    * equivalence set. If an identical expression is already registered, we    * don't need to register this one and nor should we queue up rule matches.    *    * @param rel relational expression to register. Must be either a    *         {@link RelSubset}, or an unregistered {@link RelNode}    * @param set set that rel belongs to, or<code>null</code>    * @return the equivalence-set    */
 specifier|private
 name|RelSubset
 name|registerImpl
@@ -7317,27 +7311,6 @@ name|RelSet
 name|set
 parameter_list|)
 block|{
-assert|assert
-operator|(
-name|rel
-operator|instanceof
-name|RelSubset
-operator|)
-operator|||
-operator|!
-name|isRegistered
-argument_list|(
-name|rel
-argument_list|)
-operator|:
-literal|"pre: rel instanceof RelSubset || !isRegistered(rel)"
-operator|+
-literal|" : {rel="
-operator|+
-name|rel
-operator|+
-literal|"}"
-assert|;
 if|if
 condition|(
 name|rel
@@ -7357,6 +7330,17 @@ name|rel
 argument_list|)
 return|;
 block|}
+assert|assert
+operator|!
+name|isRegistered
+argument_list|(
+name|rel
+argument_list|)
+operator|:
+literal|"already been registered: "
+operator|+
+name|rel
+assert|;
 if|if
 condition|(
 name|rel
@@ -8309,14 +8293,6 @@ operator|&&
 operator|(
 name|set
 operator|!=
-literal|null
-operator|)
-operator|&&
-operator|(
-name|set
-operator|.
-name|equivalentSet
-operator|==
 literal|null
 operator|)
 operator|&&
