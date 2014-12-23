@@ -30,16 +30,16 @@ block|,
 comment|/**    * Left-outer join    */
 name|LEFT
 block|,
-comment|/**    * Semi-join    *<p>Similar to from A ... where a in (select b from B ...)</p>    */
+comment|/**    * Semi-join.    *    *<p>Similar to {@code from A ... where a in (select b from B ...)}</p>    */
 name|SEMI
 block|,
-comment|/**    * Anti-join    *<p>Similar to from A ... where a NOT in (select b from B ...)</p>    *<p>Note: if B.b is nullable and B has nulls, no rows must be returned</p>    */
+comment|/**    * Anti-join.    *    *<p>Similar to {@code from A ... where a NOT in (select b from B ...)}    *    *<p>Note: if B.b is nullable and B has nulls, no rows must be returned.    */
 name|ANTI
 block|; }
 end_enum
 
 begin_comment
-comment|// End SemiJoinType.java
+comment|// End CorrelateJoinType.java
 end_comment
 
 end_unit

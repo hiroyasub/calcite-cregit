@@ -221,7 +221,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End Correlation.java
+comment|// End CorrelationId.java
 end_comment
 
 end_unit
