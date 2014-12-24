@@ -544,6 +544,10 @@ name|ExceptionMessageTest
 operator|.
 name|class
 block|,
+name|InduceGroupingTypeTest
+operator|.
+name|class
+block|,
 comment|// medium tests (above 0.1s)
 name|SqlParserTest
 operator|.
