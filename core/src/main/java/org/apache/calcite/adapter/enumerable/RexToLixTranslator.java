@@ -3775,6 +3775,12 @@ block|}
 if|if
 condition|(
 name|fromNumber
+operator|||
+name|fromBox
+operator|==
+name|Primitive
+operator|.
+name|CHAR
 condition|)
 block|{
 comment|// Generate "x.shortValue()".

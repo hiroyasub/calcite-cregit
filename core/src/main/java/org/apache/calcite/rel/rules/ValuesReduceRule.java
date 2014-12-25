@@ -27,6 +27,20 @@ name|calcite
 operator|.
 name|plan
 operator|.
+name|RelOptPredicateList
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
 name|RelOptRule
 import|;
 end_import
@@ -864,6 +878,14 @@ name|fieldsPerRow
 operator|)
 assert|;
 comment|// Compute the values they reduce to.
+specifier|final
+name|RelOptPredicateList
+name|predicates
+init|=
+name|RelOptPredicateList
+operator|.
+name|EMPTY
+decl_stmt|;
 name|ReduceExpressionsRule
 operator|.
 name|reduceExpressions
@@ -871,6 +893,8 @@ argument_list|(
 name|values
 argument_list|,
 name|reducibleExps
+argument_list|,
+name|predicates
 argument_list|)
 expr_stmt|;
 name|int
