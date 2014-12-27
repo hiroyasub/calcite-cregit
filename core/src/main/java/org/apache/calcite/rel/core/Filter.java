@@ -81,6 +81,20 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|prepare
+operator|.
+name|CalcitePrepareImpl
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|rel
 operator|.
 name|RelInput
@@ -320,7 +334,17 @@ operator|=
 name|condition
 expr_stmt|;
 comment|// Too expensive for everyday use:
-comment|// assert isValid(true);
+assert|assert
+operator|!
+name|CalcitePrepareImpl
+operator|.
+name|DEBUG
+operator|||
+name|isValid
+argument_list|(
+literal|true
+argument_list|)
+assert|;
 block|}
 comment|/**    * Creates a Filter by parsing serialized output.    */
 specifier|protected
@@ -487,6 +511,32 @@ name|boolean
 name|fail
 parameter_list|)
 block|{
+if|if
+condition|(
+name|RexUtil
+operator|.
+name|isNullabilityCast
+argument_list|(
+name|getCluster
+argument_list|()
+operator|.
+name|getTypeFactory
+argument_list|()
+argument_list|,
+name|condition
+argument_list|)
+condition|)
+block|{
+assert|assert
+operator|!
+name|fail
+operator|:
+literal|"Cast for just nullability not allowed"
+assert|;
+return|return
+literal|false
+return|;
+block|}
 specifier|final
 name|RexChecker
 name|checker
