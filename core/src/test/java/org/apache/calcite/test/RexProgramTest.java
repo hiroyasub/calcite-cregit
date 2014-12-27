@@ -1036,9 +1036,7 @@ literal|"expr#4=[+($t0, $t3)], expr#5=[+($t2, $t4)], "
 operator|+
 literal|"expr#6=[+($t0, $t0)], expr#7=[>($t2, $t0)], "
 operator|+
-literal|"expr#8=[AND($t7, $t7)], expr#9=[AND($t8, $t7)], "
-operator|+
-literal|"a=[$t5], b=[$t6], $condition=[$t9])"
+literal|"a=[$t5], b=[$t6], $condition=[$t7])"
 argument_list|,
 name|program
 argument_list|)

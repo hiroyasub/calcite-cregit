@@ -387,6 +387,22 @@ name|rel
 operator|.
 name|rules
 operator|.
+name|FilterMergeRule
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|rules
+operator|.
 name|FilterProjectTransposeRule
 import|;
 end_import
@@ -2184,6 +2200,117 @@ operator|+
 literal|" on e.deptno=d.deptno"
 operator|+
 literal|" where d.name='Propane'"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests that filters are combined if they are identical. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMergeFilter
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+name|HepProgram
+name|program
+init|=
+operator|new
+name|HepProgramBuilder
+argument_list|()
+operator|.
+name|addRuleInstance
+argument_list|(
+name|FilterProjectTransposeRule
+operator|.
+name|INSTANCE
+argument_list|)
+operator|.
+name|addRuleInstance
+argument_list|(
+name|FilterMergeRule
+operator|.
+name|INSTANCE
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+name|checkPlanning
+argument_list|(
+name|program
+argument_list|,
+literal|"select name from (\n"
+operator|+
+literal|"  select *\n"
+operator|+
+literal|"  from dept\n"
+operator|+
+literal|"  where deptno = 10)\n"
+operator|+
+literal|"where deptno = 10\n"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests that a filters is combined are combined if they are identical,    * even if one of them originates in an ON clause of a JOIN. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMergeJoinFilter
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+name|HepProgram
+name|program
+init|=
+operator|new
+name|HepProgramBuilder
+argument_list|()
+operator|.
+name|addRuleInstance
+argument_list|(
+name|FilterProjectTransposeRule
+operator|.
+name|INSTANCE
+argument_list|)
+operator|.
+name|addRuleInstance
+argument_list|(
+name|FilterMergeRule
+operator|.
+name|INSTANCE
+argument_list|)
+operator|.
+name|addRuleInstance
+argument_list|(
+name|FilterJoinRule
+operator|.
+name|FILTER_ON_JOIN
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+name|checkPlanning
+argument_list|(
+name|program
+argument_list|,
+literal|"select * from (\n"
+operator|+
+literal|"  select d.deptno, e.ename\n"
+operator|+
+literal|"  from emp as e\n"
+operator|+
+literal|"  join dept as d\n"
+operator|+
+literal|"  on e.deptno = d.deptno\n"
+operator|+
+literal|"  and d.deptno = 10)\n"
+operator|+
+literal|"where deptno = 10\n"
 argument_list|)
 expr_stmt|;
 block|}
