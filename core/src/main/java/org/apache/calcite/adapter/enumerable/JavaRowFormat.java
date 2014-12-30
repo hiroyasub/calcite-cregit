@@ -953,14 +953,6 @@ name|RelDataType
 name|type
 parameter_list|)
 block|{
-assert|assert
-name|type
-operator|.
-name|getFieldCount
-argument_list|()
-operator|>
-literal|1
-assert|;
 return|return
 name|Object
 index|[]

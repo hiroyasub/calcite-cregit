@@ -745,20 +745,6 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|DataContext
-operator|.
-name|ROOT
-import|;
-end_import
-
-begin_import
-import|import static
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
 name|linq4j
 operator|.
 name|tree
@@ -10379,6 +10365,15 @@ operator|.
 name|getOperator
 argument_list|()
 decl_stmt|;
+specifier|final
+name|Expression
+name|root
+init|=
+name|translator
+operator|.
+name|getRoot
+argument_list|()
+decl_stmt|;
 if|if
 condition|(
 name|op
@@ -10464,7 +10459,7 @@ name|CURRENT_TIMESTAMP
 operator|.
 name|method
 argument_list|,
-name|ROOT
+name|root
 argument_list|)
 return|;
 block|}
@@ -10486,7 +10481,7 @@ name|CURRENT_TIME
 operator|.
 name|method
 argument_list|,
-name|ROOT
+name|root
 argument_list|)
 return|;
 block|}
@@ -10508,7 +10503,7 @@ name|CURRENT_DATE
 operator|.
 name|method
 argument_list|,
-name|ROOT
+name|root
 argument_list|)
 return|;
 block|}
@@ -10530,7 +10525,7 @@ name|LOCAL_TIMESTAMP
 operator|.
 name|method
 argument_list|,
-name|ROOT
+name|root
 argument_list|)
 return|;
 block|}
@@ -10552,7 +10547,7 @@ name|LOCAL_TIME
 operator|.
 name|method
 argument_list|,
-name|ROOT
+name|root
 argument_list|)
 return|;
 block|}

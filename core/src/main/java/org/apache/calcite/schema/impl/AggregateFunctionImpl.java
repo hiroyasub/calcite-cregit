@@ -428,7 +428,7 @@ block|}
 comment|/** Creates an aggregate function, or returns null. */
 specifier|public
 specifier|static
-name|AggregateFunction
+name|AggregateFunctionImpl
 name|create
 parameter_list|(
 name|Class

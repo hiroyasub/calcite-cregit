@@ -350,7 +350,7 @@ end_comment
 begin_class
 specifier|public
 class|class
-name|ScanNode
+name|TableScanNode
 implements|implements
 name|Node
 block|{
@@ -383,8 +383,7 @@ name|int
 index|[]
 name|projects
 decl_stmt|;
-specifier|public
-name|ScanNode
+name|TableScanNode
 parameter_list|(
 name|Interpreter
 name|interpreter
@@ -570,6 +569,10 @@ name|int
 index|[]
 name|projects1
 init|=
+name|projects
+operator|==
+literal|null
+operator|||
 name|isIdentity
 argument_list|(
 name|projects
@@ -722,6 +725,40 @@ argument_list|(
 literal|"have filters, but table cannot handle them"
 argument_list|)
 throw|;
+block|}
+specifier|final
+name|ScannableTable
+name|scannableTable
+init|=
+name|table
+operator|.
+name|unwrap
+argument_list|(
+name|ScannableTable
+operator|.
+name|class
+argument_list|)
+decl_stmt|;
+if|if
+condition|(
+name|scannableTable
+operator|!=
+literal|null
+condition|)
+block|{
+return|return
+name|Enumerables
+operator|.
+name|toRow
+argument_list|(
+name|scannableTable
+operator|.
+name|scan
+argument_list|(
+name|root
+argument_list|)
+argument_list|)
+return|;
 block|}
 comment|//noinspection unchecked
 name|Enumerable
@@ -1049,40 +1086,6 @@ argument_list|)
 return|;
 block|}
 block|}
-specifier|final
-name|ScannableTable
-name|scannableTable
-init|=
-name|table
-operator|.
-name|unwrap
-argument_list|(
-name|ScannableTable
-operator|.
-name|class
-argument_list|)
-decl_stmt|;
-if|if
-condition|(
-name|scannableTable
-operator|!=
-literal|null
-condition|)
-block|{
-return|return
-name|Enumerables
-operator|.
-name|toRow
-argument_list|(
-name|scannableTable
-operator|.
-name|scan
-argument_list|(
-name|root
-argument_list|)
-argument_list|)
-return|;
-block|}
 throw|throw
 operator|new
 name|AssertionError
@@ -1161,7 +1164,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End ScanNode.java
+comment|// End TableScanNode.java
 end_comment
 
 end_unit

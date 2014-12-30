@@ -6371,8 +6371,8 @@ argument_list|,
 literal|"CURRENT_TIME(3)"
 argument_list|)
 expr_stmt|;
-comment|// checkFails("SELECT CURRENT_TIME() FROM foo", "SELECT CURRENT_TIME()
-comment|// FROM `FOO`");
+comment|// checkFails("SELECT CURRENT_TIME() FROM foo",
+comment|//     "SELECT CURRENT_TIME() FROM `FOO`");
 name|checkExp
 argument_list|(
 literal|"CURRENT_TIME"
@@ -6395,8 +6395,8 @@ argument_list|,
 literal|"LOCALTIME(3)"
 argument_list|)
 expr_stmt|;
-comment|// checkFails("SELECT LOCALTIME() FROM foo", "SELECT LOCALTIME() FROM
-comment|// `FOO`");
+comment|// checkFails("SELECT LOCALTIME() FROM foo",
+comment|//     "SELECT LOCALTIME() FROM `FOO`");
 name|checkExp
 argument_list|(
 literal|"LOCALTIME"
@@ -6419,8 +6419,8 @@ argument_list|,
 literal|"LOCALTIMESTAMP(3)"
 argument_list|)
 expr_stmt|;
-comment|// checkFails("SELECT LOCALTIMESTAMP() FROM foo", "SELECT
-comment|// LOCALTIMESTAMP() FROM `FOO`");
+comment|// checkFails("SELECT LOCALTIMESTAMP() FROM foo",
+comment|//     "SELECT LOCALTIMESTAMP() FROM `FOO`");
 name|checkExp
 argument_list|(
 literal|"LOCALTIMESTAMP"
@@ -6443,8 +6443,8 @@ argument_list|,
 literal|"CURRENT_DATE(3)"
 argument_list|)
 expr_stmt|;
-comment|// checkFails("SELECT CURRENT_DATE() FROM foo", "SELECT CURRENT_DATE()
-comment|// FROM `FOO`");
+comment|// checkFails("SELECT CURRENT_DATE() FROM foo",
+comment|//     "SELECT CURRENT_DATE() FROM `FOO`");
 name|checkExp
 argument_list|(
 literal|"CURRENT_DATE"
@@ -6452,8 +6452,9 @@ argument_list|,
 literal|"`CURRENT_DATE`"
 argument_list|)
 expr_stmt|;
-comment|// checkFails("SELECT CURRENT_DATE(x+y) FROM foo", "CURRENT_DATE((`X` +
-comment|// `Y`))"); CURRENT_TIMESTAMP - returns timestamp w/ TZ
+comment|// checkFails("SELECT CURRENT_DATE(x+y) FROM foo",
+comment|//     "CURRENT_DATE((`X` + `Y`))");
+comment|// CURRENT_TIMESTAMP - returns timestamp w/ TZ
 name|checkExp
 argument_list|(
 literal|"CURRENT_TIMESTAMP(3)"
@@ -6461,8 +6462,8 @@ argument_list|,
 literal|"CURRENT_TIMESTAMP(3)"
 argument_list|)
 expr_stmt|;
-comment|// checkFails("SELECT CURRENT_TIMESTAMP() FROM foo", "SELECT
-comment|// CURRENT_TIMESTAMP() FROM `FOO`");
+comment|// checkFails("SELECT CURRENT_TIMESTAMP() FROM foo",
+comment|//     "SELECT CURRENT_TIMESTAMP() FROM `FOO`");
 name|checkExp
 argument_list|(
 literal|"CURRENT_TIMESTAMP"

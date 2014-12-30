@@ -11,42 +11,41 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|interpreter
+name|runtime
 package|;
 end_package
 
 begin_comment
-comment|/**  * Compiled scalar expression.  */
+comment|/**  * Extension to {@link Bindable} that returns rows that are arrays of objects.  *  *<p>It also implements {@link Typed}; the {@link #getElementType()} method  * must return {@code Object[].class}.  */
 end_comment
 
 begin_interface
 specifier|public
 interface|interface
-name|Scalar
-block|{
-name|Object
-name|execute
-parameter_list|(
-name|Context
-name|context
-parameter_list|)
-function_decl|;
-name|void
-name|execute
-parameter_list|(
-name|Context
-name|context
-parameter_list|,
+name|ArrayBindable
+extends|extends
+name|Bindable
+argument_list|<
 name|Object
 index|[]
-name|results
-parameter_list|)
+argument_list|>
+extends|,
+name|Typed
+block|{
+comment|// override
+name|Class
+argument_list|<
+name|Object
+index|[]
+argument_list|>
+name|getElementType
+parameter_list|()
 function_decl|;
 block|}
 end_interface
 
 begin_comment
-comment|// End Scalar.java
+comment|// End ArrayBindable.java
 end_comment
 
 end_unit

@@ -15,6 +15,18 @@ name|interpreter
 package|;
 end_package
 
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|DataContext
+import|;
+end_import
+
 begin_comment
 comment|/**  * Context for executing a scalar expression in an interpreter.  */
 end_comment
@@ -24,12 +36,30 @@ specifier|public
 class|class
 name|Context
 block|{
+specifier|public
+specifier|final
+name|DataContext
+name|root
+decl_stmt|;
 comment|/** Values of incoming columns from all inputs. */
 specifier|public
 name|Object
 index|[]
 name|values
 decl_stmt|;
+name|Context
+parameter_list|(
+name|DataContext
+name|root
+parameter_list|)
+block|{
+name|this
+operator|.
+name|root
+operator|=
+name|root
+expr_stmt|;
+block|}
 block|}
 end_class
 

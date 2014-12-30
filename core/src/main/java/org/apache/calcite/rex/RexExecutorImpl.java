@@ -279,6 +279,20 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|Util
+import|;
+end_import
+
+begin_import
+import|import
 name|com
 operator|.
 name|google
@@ -566,6 +580,8 @@ name|blockBuilder
 argument_list|,
 literal|null
 argument_list|,
+name|root_
+argument_list|,
 name|getter
 argument_list|,
 literal|null
@@ -651,12 +667,14 @@ operator|.
 name|DEBUG
 condition|)
 block|{
+name|Util
+operator|.
+name|debugCode
+argument_list|(
 name|System
 operator|.
 name|out
-operator|.
-name|println
-argument_list|(
+argument_list|,
 name|code
 argument_list|)
 expr_stmt|;

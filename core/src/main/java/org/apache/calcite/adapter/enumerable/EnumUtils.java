@@ -361,13 +361,6 @@ block|,
 literal|"right"
 block|}
 decl_stmt|;
-specifier|static
-specifier|final
-name|boolean
-name|B
-init|=
-literal|false
-decl_stmt|;
 comment|/** Declares a method that overrides another method. */
 specifier|public
 specifier|static

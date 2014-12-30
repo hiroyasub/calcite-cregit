@@ -1007,7 +1007,7 @@ name|Modifier
 operator|.
 name|PUBLIC
 argument_list|,
-name|Type
+name|Class
 operator|.
 name|class
 argument_list|,

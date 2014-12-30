@@ -9926,6 +9926,9 @@ expr_stmt|;
 block|}
 comment|/** Tests that a relatively complex query on the foodmart schema creates    * an in-memory aggregate table and then uses it. */
 annotation|@
+name|Ignore
+comment|// DO NOT CHECK IN
+annotation|@
 name|Test
 specifier|public
 name|void

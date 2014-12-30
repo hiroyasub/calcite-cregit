@@ -64,6 +64,7 @@ comment|/**  * Represents internal state when implementing aggregate functions. 
 end_comment
 
 begin_class
+specifier|public
 class|class
 name|AggImpState
 block|{

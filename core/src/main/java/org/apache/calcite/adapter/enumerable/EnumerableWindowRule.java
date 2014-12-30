@@ -92,7 +92,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Rule to convert a {@link org.apache.calcite.rel.logical.LogicalAggregate} to  * an {@link org.apache.calcite.adapter.enumerable.EnumerableAggregate}.  */
+comment|/**  * Rule to convert a {@link org.apache.calcite.rel.logical.LogicalWindow} to  * an {@link org.apache.calcite.adapter.enumerable.EnumerableWindow}.  */
 end_comment
 
 begin_class

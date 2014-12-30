@@ -15,38 +15,53 @@ name|interpreter
 package|;
 end_package
 
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|RelNode
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|runtime
+operator|.
+name|ArrayBindable
+import|;
+end_import
+
 begin_comment
-comment|/**  * Compiled scalar expression.  */
+comment|/**  * Relational expression that can implement itself in Bindable  * convention.  *  * @see org.apache.calcite.interpreter.BindableConvention  */
 end_comment
 
 begin_interface
 specifier|public
 interface|interface
-name|Scalar
-block|{
-name|Object
-name|execute
-parameter_list|(
-name|Context
-name|context
-parameter_list|)
-function_decl|;
-name|void
-name|execute
-parameter_list|(
-name|Context
-name|context
-parameter_list|,
-name|Object
-index|[]
-name|results
-parameter_list|)
-function_decl|;
-block|}
+name|BindableRel
+extends|extends
+name|RelNode
+extends|,
+name|ArrayBindable
+extends|,
+name|InterpretableRel
+block|{ }
 end_interface
 
 begin_comment
-comment|// End Scalar.java
+comment|// End BindableRel.java
 end_comment
 
 end_unit

@@ -100,6 +100,15 @@ name|Convention
 block|{
 name|INSTANCE
 block|;
+comment|/** Cost of an enumerable node versus implementing an equivalent node in a    * "typical" calling convention. */
+specifier|public
+specifier|static
+specifier|final
+name|double
+name|COST_MULTIPLIER
+init|=
+literal|1.0d
+decl_stmt|;
 annotation|@
 name|Override
 specifier|public

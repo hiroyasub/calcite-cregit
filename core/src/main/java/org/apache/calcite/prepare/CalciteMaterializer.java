@@ -27,7 +27,7 @@ name|adapter
 operator|.
 name|enumerable
 operator|.
-name|EnumerableConvention
+name|EnumerableRel
 import|;
 end_import
 
@@ -39,11 +39,9 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|adapter
+name|interpreter
 operator|.
-name|enumerable
-operator|.
-name|EnumerableRel
+name|BindableConvention
 import|;
 end_import
 
@@ -544,7 +542,7 @@ name|ANY
 argument_list|,
 name|planner
 argument_list|,
-name|EnumerableConvention
+name|BindableConvention
 operator|.
 name|INSTANCE
 argument_list|)

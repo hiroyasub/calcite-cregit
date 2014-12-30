@@ -115,21 +115,7 @@ name|calcite
 operator|.
 name|runtime
 operator|.
-name|Bindable
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|runtime
-operator|.
-name|Typed
+name|ArrayBindable
 import|;
 end_import
 
@@ -514,7 +500,7 @@ literal|true
 return|;
 block|}
 specifier|public
-name|Bindable
+name|ArrayBindable
 name|compile
 parameter_list|(
 name|ClassDeclaration
@@ -571,16 +557,7 @@ literal|"\n"
 operator|+
 literal|"    implements "
 operator|+
-name|Bindable
-operator|.
-name|class
-operator|.
-name|getName
-argument_list|()
-operator|+
-literal|", "
-operator|+
-name|Typed
+name|ArrayBindable
 operator|.
 name|class
 operator|.
@@ -716,7 +693,7 @@ argument_list|()
 decl_stmt|;
 return|return
 operator|(
-name|Bindable
+name|ArrayBindable
 operator|)
 name|o
 return|;
