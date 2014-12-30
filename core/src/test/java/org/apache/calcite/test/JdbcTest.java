@@ -7646,6 +7646,59 @@ literal|"empid=110; name=Sales; name=Theodore\n"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-451">[CALCITE-451]    * Implement theta join, inner and outer, in enumerable convention</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testThetaJoin
+parameter_list|()
+block|{
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|CalciteAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select e.\"empid\", d.\"name\", e.\"name\"\n"
+operator|+
+literal|"from \"hr\".\"emps\" as e\n"
+operator|+
+literal|"left join \"hr\".\"depts\" as d\n"
+operator|+
+literal|"on e.\"deptno\"< d.\"deptno\"\n"
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"empid=100; name=Marketing; name=Bill"
+argument_list|,
+literal|"empid=100; name=HR; name=Bill"
+argument_list|,
+literal|"empid=200; name=Marketing; name=Eric"
+argument_list|,
+literal|"empid=200; name=HR; name=Eric"
+argument_list|,
+literal|"empid=150; name=Marketing; name=Sebastian"
+argument_list|,
+literal|"empid=150; name=HR; name=Sebastian"
+argument_list|,
+literal|"empid=110; name=Marketing; name=Theodore"
+argument_list|,
+literal|"empid=110; name=HR; name=Theodore"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-35">CALCITE-35</a>,    * "Support parenthesized sub-clause in JOIN". */
 annotation|@
 name|Ignore
