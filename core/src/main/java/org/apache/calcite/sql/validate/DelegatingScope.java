@@ -739,6 +739,19 @@ operator|!=
 literal|null
 condition|)
 block|{
+name|identifier
+operator|.
+name|setName
+argument_list|(
+literal|1
+argument_list|,
+name|field
+operator|.
+name|getName
+argument_list|()
+argument_list|)
+expr_stmt|;
+comment|// normalize case to match defn
 return|return
 name|identifier
 return|;

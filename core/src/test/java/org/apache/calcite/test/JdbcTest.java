@@ -7182,7 +7182,7 @@ literal|730
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Tests 3-way AND.    *    *<p>With<a href="https://issues.apache.org/jira/browse/CALCITE-127">CALCITE-127,    * "EnumerableCalcRel can't support 3+ AND conditions"</a>, the last condition    * is ignored and rows with deptno=10 are wrongly returned.</p>    */
+comment|/** Tests 3-way AND.    *    *<p>With    *<a href="https://issues.apache.org/jira/browse/CALCITE-127">[CALCITE-127],    * "EnumerableCalcRel can't support 3+ AND conditions"</a>, the last condition    * is ignored and rows with deptno=10 are wrongly returned.</p>    */
 annotation|@
 name|Test
 specifier|public
@@ -23062,6 +23062,91 @@ operator|.
 name|throws_
 argument_list|(
 literal|"Table 'metaData.tAbles' not found"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests case-insensitive resolution of sub-query columns.    *    *<p>Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-555">[CALCITE-555],    * "Case-insensitive matching of sub-query columns fails"</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testLexCaseInsensitiveSubQueryField
+parameter_list|()
+block|{
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|ImmutableMap
+operator|.
+name|of
+argument_list|(
+literal|"lex"
+argument_list|,
+literal|"MYSQL"
+argument_list|)
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select DID \n"
+operator|+
+literal|"from (select deptid as did \n"
+operator|+
+literal|"         FROM\n"
+operator|+
+literal|"            ( values (1), (2) ) as T1(deptid) \n"
+operator|+
+literal|"         ) "
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"DID=1"
+argument_list|,
+literal|"DID=2"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testLexCaseInsensitiveTableAlias
+parameter_list|()
+block|{
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|ImmutableMap
+operator|.
+name|of
+argument_list|(
+literal|"lex"
+argument_list|,
+literal|"MYSQL"
+argument_list|)
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select e.empno\n"
+operator|+
+literal|"from (values (1, 2)) as E (empno, deptno),\n"
+operator|+
+literal|"  (values (3, 4)) as d (deptno, name)"
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"empno=1"
 argument_list|)
 expr_stmt|;
 block|}
