@@ -1339,6 +1339,17 @@ argument_list|,
 literal|true
 argument_list|)
 operator|.
+name|orderBy
+argument_list|(
+name|Functions
+operator|.
+expr|<
+name|String
+operator|>
+name|identitySelector
+argument_list|()
+argument_list|)
+operator|.
 name|toList
 argument_list|()
 operator|.
@@ -1347,7 +1358,7 @@ argument_list|()
 argument_list|,
 name|equalTo
 argument_list|(
-literal|"[{null, null, 20, Sales}, {null, null, 15, Marketing}]"
+literal|"[{null, null, 15, Marketing}, {null, null, 20, Sales}]"
 argument_list|)
 argument_list|)
 expr_stmt|;
