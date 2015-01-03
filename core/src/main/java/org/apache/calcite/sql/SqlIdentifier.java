@@ -441,9 +441,9 @@ name|poses
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Modifies one name component of this identifier. */
+comment|/** Returns an identifier that is the same as this except one modified name.    * Does not modify this identifier. */
 specifier|public
-name|void
+name|SqlIdentifier
 name|setName
 parameter_list|(
 name|int
@@ -494,15 +494,30 @@ index|]
 operator|=
 name|name
 expr_stmt|;
-name|names
-operator|=
+return|return
+operator|new
+name|SqlIdentifier
+argument_list|(
 name|ImmutableList
 operator|.
 name|copyOf
 argument_list|(
 name|nameArray
 argument_list|)
-expr_stmt|;
+argument_list|,
+name|collation
+argument_list|,
+name|pos
+argument_list|,
+name|componentPositions
+argument_list|)
+return|;
+block|}
+else|else
+block|{
+return|return
+name|this
+return|;
 block|}
 block|}
 comment|/**    * Returns the position of the<code>i</code>th component of a compound    * identifier, or the position of the whole identifier if that information    * is not present.    *    * @param i Ordinal of component.    * @return Position of i'th component    */

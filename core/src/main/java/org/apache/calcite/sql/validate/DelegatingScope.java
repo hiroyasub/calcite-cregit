@@ -919,6 +919,9 @@ argument_list|)
 argument_list|)
 throw|;
 block|}
+comment|// normalize case to match definition, in a copy of the identifier
+name|identifier
+operator|=
 name|identifier
 operator|.
 name|setName
@@ -931,7 +934,6 @@ name|getName
 argument_list|()
 argument_list|)
 expr_stmt|;
-comment|// normalize case to match defn
 name|fromRowType
 operator|=
 name|field
