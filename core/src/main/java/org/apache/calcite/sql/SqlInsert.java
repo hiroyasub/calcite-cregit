@@ -227,6 +227,24 @@ name|columnList
 argument_list|)
 return|;
 block|}
+comment|/** Returns whether this is an UPSERT statement.    *    *<p>In SQL, this is represented using the {@code UPSERT} keyword rather than    * {@code INSERT}; in the abstract syntax tree, an UPSERT is indicated by the    * presence of a {@link SqlInsertKeyword#UPSERT} keyword. */
+specifier|public
+specifier|final
+name|boolean
+name|isUpsert
+parameter_list|()
+block|{
+return|return
+name|getModifierNode
+argument_list|(
+name|SqlInsertKeyword
+operator|.
+name|UPSERT
+argument_list|)
+operator|!=
+literal|null
+return|;
+block|}
 annotation|@
 name|Override
 specifier|public
@@ -418,6 +436,11 @@ name|writer
 operator|.
 name|sep
 argument_list|(
+name|isUpsert
+argument_list|()
+condition|?
+literal|"UPSERT INTO"
+else|:
 literal|"INSERT INTO"
 argument_list|)
 expr_stmt|;

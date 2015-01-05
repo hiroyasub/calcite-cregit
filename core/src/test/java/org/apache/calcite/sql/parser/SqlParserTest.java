@@ -5536,6 +5536,70 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testUpsertValues
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"upsert into emps values (1,'Fredkin')"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"UPSERT INTO `EMPS`\n"
+operator|+
+literal|"(VALUES (ROW(1, 'Fredkin')))"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUpsertSelect
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"upsert into emps select * from emp as e"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"UPSERT INTO `EMPS`\n"
+operator|+
+literal|"(SELECT *\n"
+operator|+
+literal|"FROM `EMP` AS `E`)"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testExplainUpsert
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"explain plan for upsert into emps1 values (1, 2)"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"EXPLAIN PLAN INCLUDING ATTRIBUTES WITH IMPLEMENTATION FOR\n"
+operator|+
+literal|"UPSERT INTO `EMPS1`\n"
+operator|+
+literal|"(VALUES (ROW(1, 2)))"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testDelete
 parameter_list|()
 block|{
@@ -5559,6 +5623,28 @@ argument_list|(
 literal|"delete from emps where empno=12"
 argument_list|,
 literal|"DELETE FROM `EMPS`\n"
+operator|+
+literal|"WHERE (`EMPNO` = 12)"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUpdate
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"update emps set empno = empno + 1, sal = sal - 1 where empno=12"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"UPDATE `EMPS` (`EMPNO`, `SAL`) SET `EMPNO` = (`EMPNO` + 1)\n"
+operator|+
+literal|", `SAL` = (`SAL` - 1)\n"
 operator|+
 literal|"WHERE (`EMPNO` = 12)"
 argument_list|)
