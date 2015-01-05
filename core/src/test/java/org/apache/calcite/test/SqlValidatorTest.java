@@ -17375,6 +17375,30 @@ literal|"RecordType(INTEGER NOT NULL X, VARCHAR(20) NOT NULL EMAIL, INTEGER NOT 
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-xxx">CALCITE-xxx,    * "Unexpected upper-casing of keywords when using java lexer"</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testRecordTypeElided
+parameter_list|()
+block|{
+name|checkResultType
+argument_list|(
+literal|"SELECT contact.x, contact.coord.y FROM customer.contact"
+argument_list|,
+literal|"RecordType(INTEGER NOT NULL X, INTEGER NOT NULL Y) NOT NULL"
+argument_list|)
+expr_stmt|;
+comment|// Qualifying with schema is OK.
+name|checkResultType
+argument_list|(
+literal|"SELECT customer.contact.x, customer.contact.email, contact.coord.y FROM customer.contact"
+argument_list|,
+literal|"RecordType(INTEGER NOT NULL X, VARCHAR(20) NOT NULL EMAIL, INTEGER NOT NULL Y) NOT NULL"
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public

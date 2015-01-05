@@ -3214,7 +3214,7 @@ argument_list|)
 argument_list|,
 name|containsString
 argument_list|(
-literal|"EnumerableJoin(condition=[=($0, $3)], joinType=[inner])"
+literal|"EnumerableJoin(condition=[=($0, $5)], joinType=[inner])"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -3237,21 +3237,23 @@ literal|"left join \"depts\" as d using (\"deptno\")\n"
 operator|+
 literal|"join \"dependents\" as p on e.\"empid\" = p.\"empid\""
 argument_list|,
-literal|"EnumerableProject(empid=[$0], deptno=[$1], name=[$2], salary=[$3], commission=[$4], deptno0=[$5], name0=[$6], employees=[$7], empid0=[$8], name1=[$9])\n"
+literal|"EnumerableProject(empid=[$0], deptno=[$1], name=[$2], salary=[$3], commission=[$4], deptno0=[$5], name0=[$6], employees=[$7], location=[$8], location9=[$9], empid0=[$10], name1=[$11])\n"
 operator|+
-literal|"  EnumerableProject(empid=[$2], deptno=[$3], name=[$4], salary=[$5], commission=[$6], deptno0=[$7], name0=[$8], employees=[$9], empid0=[$0], name1=[$1])\n"
+literal|"  EnumerableProject(empid=[$2], deptno=[$3], name=[$4], salary=[$5], commission=[$6], deptno0=[$7], name0=[$8], employees=[$9], x=[$10], y=[$11], empid0=[$0], name1=[$1])\n"
 operator|+
 literal|"    EnumerableJoin(condition=[=($0, $2)], joinType=[inner])\n"
 operator|+
 literal|"      EnumerableTableScan(table=[[hr, dependents]])\n"
 operator|+
-literal|"      EnumerableProject(empid=[$0], deptno=[$1], name=[$2], salary=[$3], commission=[$4], deptno0=[$5], name0=[$6], employees=[$7])\n"
+literal|"      EnumerableProject(empid=[$0], deptno=[$1], name=[$2], salary=[$3], commission=[$4], deptno0=[$5], name0=[$6], employees=[$7], x=[$8], y=[$9])\n"
 operator|+
 literal|"        EnumerableJoin(condition=[=($1, $5)], joinType=[left])\n"
 operator|+
 literal|"          EnumerableTableScan(table=[[hr, emps]])\n"
 operator|+
-literal|"          EnumerableTableScan(table=[[hr, depts]])"
+literal|"          EnumerableProject(deptno=[$0], name=[$1], employees=[$2], x=[$3.x], y=[$3.y])\n"
+operator|+
+literal|"            EnumerableTableScan(table=[[hr, depts]])"
 argument_list|)
 expr_stmt|;
 block|}
@@ -3273,21 +3275,23 @@ literal|"right join \"depts\" as d using (\"deptno\")\n"
 operator|+
 literal|"join \"dependents\" as p on e.\"empid\" = p.\"empid\""
 argument_list|,
-literal|"EnumerableProject(empid=[$0], deptno=[$1], name=[$2], salary=[$3], commission=[$4], deptno0=[$5], name0=[$6], employees=[$7], empid0=[$8], name1=[$9])\n"
+literal|"EnumerableProject(empid=[$0], deptno=[$1], name=[$2], salary=[$3], commission=[$4], deptno0=[$5], name0=[$6], employees=[$7], location=[$8], location9=[$9], empid0=[$10], name1=[$11])\n"
 operator|+
-literal|"  EnumerableProject(empid=[$2], deptno=[$3], name=[$4], salary=[$5], commission=[$6], deptno0=[$7], name0=[$8], employees=[$9], empid0=[$0], name1=[$1])\n"
+literal|"  EnumerableProject(empid=[$2], deptno=[$3], name=[$4], salary=[$5], commission=[$6], deptno0=[$7], name0=[$8], employees=[$9], x=[$10], y=[$11], empid0=[$0], name1=[$1])\n"
 operator|+
 literal|"    EnumerableJoin(condition=[=($0, $2)], joinType=[inner])\n"
 operator|+
 literal|"      EnumerableTableScan(table=[[hr, dependents]])\n"
 operator|+
-literal|"      EnumerableProject(empid=[$0], deptno=[$1], name=[$2], salary=[$3], commission=[$4], deptno0=[$5], name0=[$6], employees=[$7])\n"
+literal|"      EnumerableProject(empid=[$5], deptno=[$6], name=[$7], salary=[$8], commission=[$9], deptno0=[$0], name0=[$1], employees=[$2], x=[$3], y=[$4])\n"
 operator|+
-literal|"        EnumerableJoin(condition=[=($1, $5)], joinType=[right])\n"
+literal|"        EnumerableJoin(condition=[=($0, $6)], joinType=[left])\n"
 operator|+
-literal|"          EnumerableTableScan(table=[[hr, emps]])\n"
+literal|"          EnumerableProject(deptno=[$0], name=[$1], employees=[$2], x=[$3.x], y=[$3.y])\n"
 operator|+
-literal|"          EnumerableTableScan(table=[[hr, depts]])"
+literal|"            EnumerableTableScan(table=[[hr, depts]])\n"
+operator|+
+literal|"          EnumerableTableScan(table=[[hr, emps]])"
 argument_list|)
 expr_stmt|;
 block|}
@@ -3309,21 +3313,23 @@ literal|"join \"depts\" as d using (\"deptno\")\n"
 operator|+
 literal|"right join \"dependents\" as p on e.\"empid\" = p.\"empid\""
 argument_list|,
-literal|"EnumerableProject(empid=[$0], deptno=[$1], name=[$2], salary=[$3], commission=[$4], deptno0=[$5], name0=[$6], employees=[$7], empid0=[$8], name1=[$9])\n"
+literal|"EnumerableProject(empid=[$0], deptno=[$1], name=[$2], salary=[$3], commission=[$4], deptno0=[$5], name0=[$6], employees=[$7], location=[$8], location9=[$9], empid0=[$10], name1=[$11])\n"
 operator|+
-literal|"  EnumerableProject(empid=[$2], deptno=[$3], name=[$4], salary=[$5], commission=[$6], deptno0=[$7], name0=[$8], employees=[$9], empid0=[$0], name1=[$1])\n"
+literal|"  EnumerableProject(empid=[$2], deptno=[$3], name=[$4], salary=[$5], commission=[$6], deptno0=[$7], name0=[$8], employees=[$9], x=[$10], y=[$11], empid0=[$0], name1=[$1])\n"
 operator|+
 literal|"    EnumerableJoin(condition=[=($0, $2)], joinType=[left])\n"
 operator|+
 literal|"      EnumerableTableScan(table=[[hr, dependents]])\n"
 operator|+
-literal|"      EnumerableProject(empid=[$0], deptno=[$1], name=[$2], salary=[$3], commission=[$4], deptno0=[$5], name0=[$6], employees=[$7])\n"
+literal|"      EnumerableProject(empid=[$0], deptno=[$1], name=[$2], salary=[$3], commission=[$4], deptno0=[$5], name0=[$6], employees=[$7], x=[$8], y=[$9])\n"
 operator|+
 literal|"        EnumerableJoin(condition=[=($1, $5)], joinType=[inner])\n"
 operator|+
 literal|"          EnumerableTableScan(table=[[hr, emps]])\n"
 operator|+
-literal|"          EnumerableTableScan(table=[[hr, depts]])"
+literal|"          EnumerableProject(deptno=[$0], name=[$1], employees=[$2], x=[$3.x], y=[$3.y])\n"
+operator|+
+literal|"            EnumerableTableScan(table=[[hr, depts]])"
 argument_list|)
 expr_stmt|;
 block|}

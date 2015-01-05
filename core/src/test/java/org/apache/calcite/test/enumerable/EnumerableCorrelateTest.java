@@ -183,7 +183,7 @@ literal|"  EnumerableSemiJoin(condition=[=($1, $5)], joinType=[inner])\n"
 operator|+
 literal|"    EnumerableTableScan(table=[[s, emps]])\n"
 operator|+
-literal|"    EnumerableCalc(expr#0..3=[{inputs}], expr#4=[true], $f01=[$t0], $f0=[$t4])\n"
+literal|"    EnumerableCalc(expr#0..4=[{inputs}], expr#5=[true], $f01=[$t0], $f0=[$t5])\n"
 operator|+
 literal|"      EnumerableJoin(condition=[=($0, $1)], joinType=[inner])\n"
 operator|+
@@ -239,7 +239,7 @@ literal|"    EnumerableTableScan(table=[[s, emps]])\n"
 operator|+
 literal|"    EnumerableAggregate(group=[{}], agg#0=[MIN($0)])\n"
 operator|+
-literal|"      EnumerableCalc(expr#0..2=[{inputs}], expr#3=[true], expr#4=[$cor0], expr#5=[$t4.deptno], expr#6=[=($t0, $t5)], $f0=[$t3], $condition=[$t6])\n"
+literal|"      EnumerableCalc(expr#0..3=[{inputs}], expr#4=[true], expr#5=[$cor0], expr#6=[$t5.deptno], expr#7=[=($t0, $t6)], $f0=[$t4], $condition=[$t7])\n"
 operator|+
 literal|"        EnumerableTableScan(table=[[s, depts]])"
 argument_list|)

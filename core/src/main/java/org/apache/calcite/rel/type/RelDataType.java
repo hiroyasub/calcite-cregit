@@ -152,7 +152,7 @@ name|int
 name|getFieldCount
 parameter_list|()
 function_decl|;
-comment|/**    * Looks up a field by name.    *    *<p>NOTE: Be careful choosing the value of {@code caseSensitive}:</p>    *<ul>    *<li>If the field name was supplied by an end-user (e.g. as a column alias    * in SQL), use your session's case-sensitivity setting.</li>    *<li>Only hard-code {@code true} if you are sure that the field name is    * internally generated.</li>    *<li>Hard-coding {@code false} is almost certainly wrong.</li>    *</ul>    *    * @param fieldName name of field to find    * @param caseSensitive Whether case-sensitive    * @return named field, or null if not found    */
+comment|/**    * Looks up a field by name.    *    *<p>NOTE: Be careful choosing the value of {@code caseSensitive}:</p>    *<ul>    *<li>If the field name was supplied by an end-user (e.g. as a column alias    * in SQL), use your session's case-sensitivity setting.</li>    *<li>Only hard-code {@code true} if you are sure that the field name is    * internally generated.</li>    *<li>Hard-coding {@code false} is almost certainly wrong.</li>    *</ul>    *    * @param fieldName Name of field to find    * @param caseSensitive Whether match is case-sensitive    * @param elideRecord Whether to find fields nested within records    * @return named field, or null if not found    */
 name|RelDataTypeField
 name|getField
 parameter_list|(
@@ -161,6 +161,9 @@ name|fieldName
 parameter_list|,
 name|boolean
 name|caseSensitive
+parameter_list|,
+name|boolean
+name|elideRecord
 parameter_list|)
 function_decl|;
 comment|/**    * Queries whether this type allows null values.    *    * @return whether type allows null values    */

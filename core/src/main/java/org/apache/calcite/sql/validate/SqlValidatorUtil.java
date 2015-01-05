@@ -648,7 +648,7 @@ return|return
 name|table
 return|;
 block|}
-comment|/**    * Looks up a field with a given name, returning null if not found.    *    * @param rowType    Row type    * @param columnName Field name    * @return Field, or null if not found    */
+comment|/**    * Looks up a field with a given name, returning null if not found.    *    * @param caseSensitive Whether match is case-sensitive    * @param elideRecord Whether to find fields nested within records    * @param rowType    Row type    * @param columnName Field name    * @return Field, or null if not found    */
 specifier|public
 specifier|static
 name|RelDataTypeField
@@ -656,6 +656,9 @@ name|lookupField
 parameter_list|(
 name|boolean
 name|caseSensitive
+parameter_list|,
+name|boolean
+name|elideRecord
 parameter_list|,
 specifier|final
 name|RelDataType
@@ -673,6 +676,8 @@ argument_list|(
 name|columnName
 argument_list|,
 name|caseSensitive
+argument_list|,
+name|elideRecord
 argument_list|)
 return|;
 block|}
@@ -1601,6 +1606,9 @@ name|typeFactory
 parameter_list|,
 name|boolean
 name|caseSensitive
+parameter_list|,
+name|boolean
+name|elideRecord
 parameter_list|)
 block|{
 comment|// If the names in columnNameList and type have case-sensitive differences,
@@ -1643,6 +1651,8 @@ argument_list|(
 name|name
 argument_list|,
 name|caseSensitive
+argument_list|,
+name|elideRecord
 argument_list|)
 decl_stmt|;
 name|fields

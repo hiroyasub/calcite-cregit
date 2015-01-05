@@ -681,6 +681,13 @@ decl_stmt|;
 specifier|private
 specifier|final
 name|boolean
+name|elideRecord
+init|=
+literal|true
+decl_stmt|;
+specifier|private
+specifier|final
+name|boolean
 name|caseSensitive
 decl_stmt|;
 specifier|public
@@ -1425,6 +1432,8 @@ name|lookupField
 argument_list|(
 name|caseSensitive
 argument_list|,
+name|elideRecord
+argument_list|,
 name|rowType
 argument_list|,
 name|alias
@@ -1545,6 +1554,8 @@ argument_list|,
 name|typeFactory
 argument_list|,
 name|caseSensitive
+argument_list|,
+name|elideRecord
 argument_list|)
 return|;
 block|}

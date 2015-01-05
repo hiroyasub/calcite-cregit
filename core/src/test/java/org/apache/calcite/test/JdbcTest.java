@@ -9629,11 +9629,11 @@ argument_list|)
 operator|.
 name|returnsUnordered
 argument_list|(
-literal|"empid=100; deptno=10; name=Bill; salary=10000.0; commission=1000; deptno0=10; name0=Sales; employees=[Employee [empid: 100, deptno: 10, name: Bill], Employee [empid: 150, deptno: 10, name: Sebastian]]"
+literal|"empid=100; deptno=10; name=Bill; salary=10000.0; commission=1000; deptno0=10; name0=Sales; employees=[Employee [empid: 100, deptno: 10, name: Bill], Employee [empid: 150, deptno: 10, name: Sebastian]]; location=Location [x: -122, y: 38]"
 argument_list|,
-literal|"empid=110; deptno=10; name=Theodore; salary=11500.0; commission=250; deptno0=10; name0=Sales; employees=[Employee [empid: 100, deptno: 10, name: Bill], Employee [empid: 150, deptno: 10, name: Sebastian]]"
+literal|"empid=110; deptno=10; name=Theodore; salary=11500.0; commission=250; deptno0=10; name0=Sales; employees=[Employee [empid: 100, deptno: 10, name: Bill], Employee [empid: 150, deptno: 10, name: Sebastian]]; location=Location [x: -122, y: 38]"
 argument_list|,
-literal|"empid=150; deptno=10; name=Sebastian; salary=7000.0; commission=null; deptno0=10; name0=Sales; employees=[Employee [empid: 100, deptno: 10, name: Bill], Employee [empid: 150, deptno: 10, name: Sebastian]]"
+literal|"empid=150; deptno=10; name=Sebastian; salary=7000.0; commission=null; deptno0=10; name0=Sales; employees=[Employee [empid: 100, deptno: 10, name: Bill], Employee [empid: 150, deptno: 10, name: Sebastian]]; location=Location [x: -122, y: 38]"
 argument_list|)
 expr_stmt|;
 block|}
@@ -11448,13 +11448,13 @@ argument_list|)
 operator|.
 name|returnsUnordered
 argument_list|(
-literal|"empid=100; deptno=10; name=Bill; salary=10000.0; commission=1000; deptno0=30; name0=Marketing; employees=[]"
+literal|"empid=100; deptno=10; name=Bill; salary=10000.0; commission=1000; deptno0=30; name0=Marketing; employees=[]; location=Location [x: 0, y: 52]"
 argument_list|,
-literal|"empid=100; deptno=10; name=Bill; salary=10000.0; commission=1000; deptno0=40; name0=HR; employees=[Employee [empid: 200, deptno: 20, name: Eric]]"
+literal|"empid=100; deptno=10; name=Bill; salary=10000.0; commission=1000; deptno0=40; name0=HR; employees=[Employee [empid: 200, deptno: 20, name: Eric]]; location=null"
 argument_list|,
-literal|"empid=110; deptno=10; name=Theodore; salary=11500.0; commission=250; deptno0=30; name0=Marketing; employees=[]"
+literal|"empid=110; deptno=10; name=Theodore; salary=11500.0; commission=250; deptno0=30; name0=Marketing; employees=[]; location=Location [x: 0, y: 52]"
 argument_list|,
-literal|"empid=110; deptno=10; name=Theodore; salary=11500.0; commission=250; deptno0=40; name0=HR; employees=[Employee [empid: 200, deptno: 20, name: Eric]]"
+literal|"empid=110; deptno=10; name=Theodore; salary=11500.0; commission=250; deptno0=40; name0=HR; employees=[Employee [empid: 200, deptno: 20, name: Eric]]; location=null"
 argument_list|)
 expr_stmt|;
 block|}
@@ -11736,11 +11736,11 @@ name|convertContains
 argument_list|(
 literal|""
 operator|+
-literal|"LogicalProject(deptno=[$0], name=[$1], employees=[$2])\n"
+literal|"LogicalProject(deptno=[$0], name=[$1], employees=[$2], location=[$3])\n"
 operator|+
-literal|"  LogicalJoin(condition=[=($3, $4)], joinType=[inner])\n"
+literal|"  LogicalJoin(condition=[=($4, $5)], joinType=[inner])\n"
 operator|+
-literal|"    LogicalProject($f0=[$0], $f1=[$1], $f2=[$2], $f3=[$0])\n"
+literal|"    LogicalProject($f0=[$0], $f1=[$1], $f2=[$2], $f3=[$3], $f4=[$0])\n"
 operator|+
 literal|"      EnumerableTableScan(table=[[hr, depts]])\n"
 operator|+
@@ -11759,11 +11759,11 @@ name|explainContains
 argument_list|(
 literal|""
 operator|+
-literal|"EnumerableCalc(expr#0..3=[{inputs}], proj#0..2=[{exprs}])\n"
+literal|"EnumerableCalc(expr#0..4=[{inputs}], proj#0..3=[{exprs}])\n"
 operator|+
-literal|"  EnumerableSemiJoin(condition=[=($3, $4)], joinType=[inner])\n"
+literal|"  EnumerableSemiJoin(condition=[=($4, $5)], joinType=[inner])\n"
 operator|+
-literal|"    EnumerableCalc(expr#0..2=[{inputs}], proj#0..2=[{exprs}], $f3=[$t0])\n"
+literal|"    EnumerableCalc(expr#0..3=[{inputs}], proj#0..3=[{exprs}], $f4=[$t0])\n"
 operator|+
 literal|"      EnumerableTableScan(table=[[hr, depts]])\n"
 operator|+
@@ -11774,7 +11774,7 @@ argument_list|)
 operator|.
 name|returnsUnordered
 argument_list|(
-literal|"deptno=10; name=Sales; employees=[Employee [empid: 100, deptno: 10, name: Bill], Employee [empid: 150, deptno: 10, name: Sebastian]]"
+literal|"deptno=10; name=Sales; employees=[Employee [empid: 100, deptno: 10, name: Bill], Employee [empid: 150, deptno: 10, name: Sebastian]]; location=Location [x: -122, y: 38]"
 argument_list|)
 expr_stmt|;
 block|}
@@ -24839,6 +24839,15 @@ index|[
 literal|2
 index|]
 argument_list|)
+argument_list|,
+operator|new
+name|Location
+argument_list|(
+operator|-
+literal|122
+argument_list|,
+literal|38
+argument_list|)
 argument_list|)
 block|,
 operator|new
@@ -24855,6 +24864,14 @@ name|Employee
 operator|>
 name|emptyList
 argument_list|()
+argument_list|,
+operator|new
+name|Location
+argument_list|(
+literal|0
+argument_list|,
+literal|52
+argument_list|)
 argument_list|)
 block|,
 operator|new
@@ -24873,6 +24890,8 @@ index|[
 literal|1
 index|]
 argument_list|)
+argument_list|,
+literal|null
 argument_list|)
 block|,     }
 decl_stmt|;
@@ -25147,6 +25166,11 @@ argument_list|>
 name|employees
 decl_stmt|;
 specifier|public
+specifier|final
+name|Location
+name|location
+decl_stmt|;
+specifier|public
 name|Department
 parameter_list|(
 name|int
@@ -25160,6 +25184,9 @@ argument_list|<
 name|Employee
 argument_list|>
 name|employees
+parameter_list|,
+name|Location
+name|location
 parameter_list|)
 block|{
 name|this
@@ -25179,6 +25206,12 @@ operator|.
 name|employees
 operator|=
 name|employees
+expr_stmt|;
+name|this
+operator|.
+name|location
+operator|=
+name|location
 expr_stmt|;
 block|}
 specifier|public
@@ -25199,6 +25232,10 @@ literal|", employees: "
 operator|+
 name|employees
 operator|+
+literal|", location: "
+operator|+
+name|location
+operator|+
 literal|"]"
 return|;
 block|}
@@ -25211,34 +25248,34 @@ block|{
 specifier|public
 specifier|final
 name|int
-name|locid
+name|x
 decl_stmt|;
 specifier|public
 specifier|final
-name|String
-name|name
+name|int
+name|y
 decl_stmt|;
 specifier|public
 name|Location
 parameter_list|(
 name|int
-name|locid
+name|x
 parameter_list|,
-name|String
-name|name
+name|int
+name|y
 parameter_list|)
 block|{
 name|this
 operator|.
-name|locid
+name|x
 operator|=
-name|locid
+name|x
 expr_stmt|;
 name|this
 operator|.
-name|name
+name|y
 operator|=
-name|name
+name|y
 expr_stmt|;
 block|}
 annotation|@
@@ -25249,13 +25286,13 @@ name|toString
 parameter_list|()
 block|{
 return|return
-literal|"Location [locid: "
+literal|"Location [x: "
 operator|+
-name|locid
+name|x
 operator|+
-literal|", name: "
+literal|", y: "
 operator|+
-name|name
+name|y
 operator|+
 literal|"]"
 return|;
