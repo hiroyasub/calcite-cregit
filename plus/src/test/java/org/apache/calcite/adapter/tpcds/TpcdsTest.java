@@ -740,9 +740,6 @@ name|query
 operator|.
 name|sql
 argument_list|(
-operator|-
-literal|1
-argument_list|,
 operator|new
 name|Random
 argument_list|(
