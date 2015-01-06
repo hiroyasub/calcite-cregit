@@ -1985,8 +1985,6 @@ name|isIdentity
 argument_list|(
 name|newProjectExprList
 argument_list|,
-name|newRowType
-argument_list|,
 name|newInput
 operator|.
 name|getRowType

@@ -11382,6 +11382,128 @@ literal|"EXPR$0=2; EXPR$1=abc\n"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/**    * Tests that even though trivial "rename columns" projection is removed,    * the query still returns proper column names.    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testValuesCompositeRenamed
+parameter_list|()
+block|{
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"select EXPR$0 q, EXPR$1 w from (values (1, 'a'), (2, 'abc'))"
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|"PLAN=EnumerableValues(tuples=[[{ 1, 'a  ' }, { 2, 'abc' }]])\n"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"Q=1; W=a  \n"
+operator|+
+literal|"Q=2; W=abc\n"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Tests that even though trivial "rename columns" projection is removed,    * the query still returns proper column names.    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testValuesCompositeRenamedSameNames
+parameter_list|()
+block|{
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"select EXPR$0 q, EXPR$1 q from (values (1, 'a'), (2, 'abc'))"
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|"PLAN=EnumerableValues(tuples=[[{ 1, 'a  ' }, { 2, 'abc' }]])\n"
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"Q=1; Q=a  "
+argument_list|,
+literal|"Q=2; Q=abc"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Tests that even though trivial "rename columns" projection is removed,    * the query still returns proper column names.    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUnionWithSameColumnNames
+parameter_list|()
+block|{
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|CalciteAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select \"deptno\", \"deptno\" from \"hr\".\"depts\" union select \"deptno\", \"empid\" from \"hr\".\"emps\""
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|""
+operator|+
+literal|"PLAN=EnumerableUnion(all=[false])\n"
+operator|+
+literal|"  EnumerableCalc(expr#0..3=[{inputs}], deptno=[$t0], deptno0=[$t0])\n"
+operator|+
+literal|"    EnumerableTableScan(table=[[hr, depts]])\n"
+operator|+
+literal|"  EnumerableCalc(expr#0..4=[{inputs}], deptno=[$t1], empid=[$t0])\n"
+operator|+
+literal|"    EnumerableTableScan(table=[[hr, emps]])\n"
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"deptno=10; deptno=110"
+argument_list|,
+literal|"deptno=10; deptno=10"
+argument_list|,
+literal|"deptno=20; deptno=200"
+argument_list|,
+literal|"deptno=10; deptno=100"
+argument_list|,
+literal|"deptno=10; deptno=150"
+argument_list|,
+literal|"deptno=30; deptno=30"
+argument_list|,
+literal|"deptno=40; deptno=40"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Tests inner join to an inline table ({@code VALUES} clause). */
 annotation|@
 name|Test
@@ -11411,6 +11533,19 @@ operator|+
 literal|"  (SELECT * FROM (VALUES (10, 'SameName')) AS t (id, desc)) as sn\n"
 operator|+
 literal|"where emps.deptno = sn.id and sn.desc = 'SameName' group by empno, desc"
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|"EnumerableAggregate(group=[{0, 1}])\n"
+operator|+
+literal|"  EnumerableCalc(expr#0..3=[{inputs}], expr#4=[CAST($t3):INTEGER NOT NULL], expr#5=[=($t4, $t0)], expr#6=['SameName'], expr#7=[=($t1, $t6)], expr#8=[AND($t5, $t7)], EMPNO=[$t2], DESC=[$t1], $condition=[$t8])\n"
+operator|+
+literal|"    EnumerableJoin(condition=[true], joinType=[inner])\n"
+operator|+
+literal|"      EnumerableValues(tuples=[[{ 10, 'SameName' }]])\n"
+operator|+
+literal|"      EnumerableTableScan(table=[[SALES, EMPS]])\n"
 argument_list|)
 operator|.
 name|returns
