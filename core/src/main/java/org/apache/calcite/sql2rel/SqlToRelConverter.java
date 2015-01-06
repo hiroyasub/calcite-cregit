@@ -12330,6 +12330,19 @@ operator|.
 name|EMPTY
 expr_stmt|;
 block|}
+name|replaceSubqueries
+argument_list|(
+name|bb
+argument_list|,
+name|groupList
+argument_list|,
+name|RelOptUtil
+operator|.
+name|Logic
+operator|.
+name|TRUE_FALSE_UNKNOWN
+argument_list|)
+expr_stmt|;
 comment|// register the group exprs
 comment|// build a map to remember the projections from the top scope to the
 comment|// output of the current root.
@@ -15442,28 +15455,6 @@ argument_list|(
 name|call
 argument_list|)
 return|;
-block|}
-if|if
-condition|(
-name|bb
-operator|.
-name|agg
-operator|!=
-literal|null
-condition|)
-block|{
-throw|throw
-name|Util
-operator|.
-name|newInternal
-argument_list|(
-literal|"Identifier '"
-operator|+
-name|identifier
-operator|+
-literal|"' is not a group expr"
-argument_list|)
-throw|;
 block|}
 specifier|final
 name|SqlQualified

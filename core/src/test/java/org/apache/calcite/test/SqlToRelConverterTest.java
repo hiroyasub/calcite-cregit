@@ -121,6 +121,16 @@ name|org
 operator|.
 name|junit
 operator|.
+name|Ignore
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
 name|Test
 import|;
 end_import
@@ -2789,6 +2799,94 @@ argument_list|,
 literal|"${plan}"
 argument_list|,
 literal|true
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Test group-by CASE expression involving a non-query IN    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testGroupByCaseSubquery
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"SELECT CASE WHEN emp.empno IN (3) THEN 0 ELSE 1 END\n"
+operator|+
+literal|"FROM emp\n"
+operator|+
+literal|"GROUP BY (CASE WHEN emp.empno IN (3) THEN 0 ELSE 1 END)"
+argument_list|)
+operator|.
+name|convertsTo
+argument_list|(
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Test aggregate function on a CASE expression involving a non-query IN    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAggCaseSubquery
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"SELECT SUM(CASE WHEN empno IN (3) THEN 0 ELSE 1 END) FROM emp"
+argument_list|)
+operator|.
+name|convertsTo
+argument_list|(
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAggScalarSubquery
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"SELECT SUM(SELECT min(deptno) FROM dept) FROM emp"
+argument_list|)
+operator|.
+name|convertsTo
+argument_list|(
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Test aggregate function on a CASE expression involving IN with a    * sub-query */
+annotation|@
+name|Ignore
+argument_list|(
+literal|"[CALCITE-551] Sub-query inside aggregate function"
+argument_list|)
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAggCaseInSubquery
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"SELECT SUM(\n"
+operator|+
+literal|"  CASE WHEN deptno IN (SELECT deptno FROM dept) THEN 1 ELSE 0 END)\n"
+operator|+
+literal|"FROM emp"
+argument_list|)
+operator|.
+name|convertsTo
+argument_list|(
+literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
