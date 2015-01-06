@@ -560,6 +560,8 @@ literal|"KEYWORD(COVAR_SAMP)"
 argument_list|,
 literal|"KEYWORD(CUME_DIST)"
 argument_list|,
+literal|"KEYWORD(CURRENT)"
+argument_list|,
 literal|"KEYWORD(CURRENT_CATALOG)"
 argument_list|,
 literal|"KEYWORD(CURRENT_DATE)"
@@ -623,6 +625,8 @@ argument_list|,
 literal|"KEYWORD(MULTISET)"
 argument_list|,
 literal|"KEYWORD(NEW)"
+argument_list|,
+literal|"KEYWORD(NEXT)"
 argument_list|,
 literal|"KEYWORD(NOT)"
 argument_list|,

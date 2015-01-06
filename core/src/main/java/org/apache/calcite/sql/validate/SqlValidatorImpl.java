@@ -18699,6 +18699,8 @@ operator|=
 name|validator
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlNode
 name|visit
@@ -18767,7 +18769,8 @@ return|return
 name|fqId
 return|;
 block|}
-comment|// implement SqlScopedShuttle
+annotation|@
+name|Override
 specifier|protected
 name|SqlNode
 name|visitScoped
@@ -18786,6 +18789,12 @@ condition|)
 block|{
 case|case
 name|SCALAR_QUERY
+case|:
+case|case
+name|CURRENT_VALUE
+case|:
+case|case
+name|NEXT_VALUE
 case|:
 return|return
 name|call

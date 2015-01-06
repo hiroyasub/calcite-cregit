@@ -278,6 +278,12 @@ block|,
 comment|/**    * The "CAST" operator.    */
 name|CAST
 block|,
+comment|/**    * The "NEXT VALUE OF sequence" operator.    */
+name|NEXT_VALUE
+block|,
+comment|/**    * The "CURRENT VALUE OF sequence" operator.    */
+name|CURRENT_VALUE
+block|,
 comment|/**    * The "TRIM" function.    */
 name|TRIM
 block|,

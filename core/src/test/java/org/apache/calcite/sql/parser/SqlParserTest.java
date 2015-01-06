@@ -14447,6 +14447,118 @@ literal|"(?s)Encountered \",\" at line 1, column 23\\..*"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSequence
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select next value for my_schema.my_seq from t"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"SELECT (NEXT VALUE FOR `MY_SCHEMA`.`MY_SEQ`)\n"
+operator|+
+literal|"FROM `T`"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select next value for my_schema.my_seq as s from t"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"SELECT (NEXT VALUE FOR `MY_SCHEMA`.`MY_SEQ`) AS `S`\n"
+operator|+
+literal|"FROM `T`"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select next value for my_seq as s from t"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"SELECT (NEXT VALUE FOR `MY_SEQ`) AS `S`\n"
+operator|+
+literal|"FROM `T`"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select 1 + next value for s + current value for s from t"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"SELECT ((1 + (NEXT VALUE FOR `S`)) + (CURRENT VALUE FOR `S`))\n"
+operator|+
+literal|"FROM `T`"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select 1 from t where next value for my_seq< 10"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"SELECT 1\n"
+operator|+
+literal|"FROM `T`\n"
+operator|+
+literal|"WHERE ((NEXT VALUE FOR `MY_SEQ`)< 10)"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select 1 from t\n"
+operator|+
+literal|"where next value for my_seq< 10 fetch next 3 rows only"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"SELECT 1\n"
+operator|+
+literal|"FROM `T`\n"
+operator|+
+literal|"WHERE ((NEXT VALUE FOR `MY_SEQ`)< 10)\n"
+operator|+
+literal|"FETCH NEXT 3 ROWS ONLY"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"insert into t values next value for my_seq, current value for my_seq"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"INSERT INTO `T`\n"
+operator|+
+literal|"(VALUES (ROW((NEXT VALUE FOR `MY_SEQ`))), (ROW((CURRENT VALUE FOR `MY_SEQ`))))"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"insert into t values (1, current value for my_seq)"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"INSERT INTO `T`\n"
+operator|+
+literal|"(VALUES (ROW(1, (CURRENT VALUE FOR `MY_SEQ`))))"
+argument_list|)
+expr_stmt|;
+block|}
 comment|//~ Inner Interfaces -------------------------------------------------------
 comment|/**    * Callback to control how test actions are performed.    */
 specifier|protected
