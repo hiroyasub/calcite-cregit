@@ -43,10 +43,7 @@ parameter_list|()
 block|{
 name|CalciteAssert
 operator|.
-name|that
-argument_list|()
-operator|.
-name|withModel
+name|model
 argument_list|(
 name|JdbcTest
 operator|.
@@ -113,10 +110,7 @@ parameter_list|()
 block|{
 name|CalciteAssert
 operator|.
-name|that
-argument_list|()
-operator|.
-name|withModel
+name|model
 argument_list|(
 name|JdbcTest
 operator|.
@@ -180,10 +174,7 @@ parameter_list|()
 block|{
 name|CalciteAssert
 operator|.
-name|that
-argument_list|()
-operator|.
-name|withModel
+name|model
 argument_list|(
 name|JdbcTest
 operator|.

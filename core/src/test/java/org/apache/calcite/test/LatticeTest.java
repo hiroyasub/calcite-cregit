@@ -416,10 +416,7 @@ decl_stmt|;
 return|return
 name|CalciteAssert
 operator|.
-name|that
-argument_list|()
-operator|.
-name|withModel
+name|model
 argument_list|(
 literal|""
 operator|+

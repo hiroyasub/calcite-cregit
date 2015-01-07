@@ -366,7 +366,7 @@ init|=
 operator|new
 name|CalciteAssert
 operator|.
-name|ConnectionFactory
+name|AbstractConnectionFactory
 argument_list|()
 block|{
 specifier|public
@@ -525,7 +525,7 @@ name|localConnection
 operator|=
 name|CalciteAssert
 operator|.
-name|that
+name|hr
 argument_list|()
 operator|.
 name|connect
@@ -955,7 +955,7 @@ name|Exception
 block|{
 name|CalciteAssert
 operator|.
-name|that
+name|hr
 argument_list|()
 operator|.
 name|with
@@ -985,7 +985,7 @@ name|Exception
 block|{
 name|CalciteAssert
 operator|.
-name|that
+name|hr
 argument_list|()
 operator|.
 name|with
@@ -1021,7 +1021,7 @@ name|Exception
 block|{
 name|CalciteAssert
 operator|.
-name|that
+name|hr
 argument_list|()
 operator|.
 name|with
@@ -1129,7 +1129,7 @@ name|connection
 init|=
 name|CalciteAssert
 operator|.
-name|that
+name|hr
 argument_list|()
 operator|.
 name|connect
@@ -1187,7 +1187,7 @@ name|localConnection
 init|=
 name|CalciteAssert
 operator|.
-name|that
+name|hr
 argument_list|()
 operator|.
 name|connect

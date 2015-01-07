@@ -293,6 +293,22 @@ name|test
 operator|.
 name|CalciteAssert
 operator|.
+name|hr
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|test
+operator|.
+name|CalciteAssert
+operator|.
 name|that
 import|;
 end_import
@@ -314,7 +330,7 @@ name|void
 name|testSelect
 parameter_list|()
 block|{
-name|that
+name|hr
 argument_list|()
 operator|.
 name|query
@@ -340,7 +356,7 @@ name|void
 name|testJoin
 parameter_list|()
 block|{
-name|that
+name|hr
 argument_list|()
 operator|.
 name|query
@@ -372,7 +388,7 @@ name|void
 name|testGroupBy
 parameter_list|()
 block|{
-name|that
+name|hr
 argument_list|()
 operator|.
 name|query
@@ -400,7 +416,7 @@ name|void
 name|testOrderBy
 parameter_list|()
 block|{
-name|that
+name|hr
 argument_list|()
 operator|.
 name|query
@@ -432,7 +448,7 @@ name|void
 name|testUnionAllOrderBy
 parameter_list|()
 block|{
-name|that
+name|hr
 argument_list|()
 operator|.
 name|query
@@ -476,7 +492,7 @@ name|void
 name|testUnion
 parameter_list|()
 block|{
-name|that
+name|hr
 argument_list|()
 operator|.
 name|query
@@ -518,7 +534,7 @@ name|void
 name|testIntersect
 parameter_list|()
 block|{
-name|that
+name|hr
 argument_list|()
 operator|.
 name|query
@@ -550,7 +566,7 @@ name|void
 name|testExcept
 parameter_list|()
 block|{
-name|that
+name|hr
 argument_list|()
 operator|.
 name|query
@@ -583,7 +599,7 @@ name|void
 name|testWhereBad
 parameter_list|()
 block|{
-name|that
+name|hr
 argument_list|()
 operator|.
 name|query
@@ -609,7 +625,7 @@ name|void
 name|testWhereOr
 parameter_list|()
 block|{
-name|that
+name|hr
 argument_list|()
 operator|.
 name|query
@@ -634,7 +650,7 @@ name|void
 name|testWhereLike
 parameter_list|()
 block|{
-name|that
+name|hr
 argument_list|()
 operator|.
 name|query
@@ -812,7 +828,7 @@ argument_list|(
 operator|new
 name|CalciteAssert
 operator|.
-name|ConnectionFactory
+name|AbstractConnectionFactory
 argument_list|()
 block|{
 specifier|public

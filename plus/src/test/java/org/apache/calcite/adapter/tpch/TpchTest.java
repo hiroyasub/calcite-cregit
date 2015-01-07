@@ -1722,10 +1722,7 @@ block|{
 return|return
 name|CalciteAssert
 operator|.
-name|that
-argument_list|()
-operator|.
-name|withModel
+name|model
 argument_list|(
 name|TPCH_MODEL
 argument_list|)
