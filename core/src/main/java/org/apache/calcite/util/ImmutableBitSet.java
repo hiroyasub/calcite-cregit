@@ -115,6 +115,20 @@ end_import
 
 begin_import
 import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|Ordering
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|io
@@ -305,6 +319,22 @@ argument_list|)
 return|;
 block|}
 block|}
+decl_stmt|;
+specifier|public
+specifier|static
+specifier|final
+name|Ordering
+argument_list|<
+name|ImmutableBitSet
+argument_list|>
+name|ORDERING
+init|=
+name|Ordering
+operator|.
+name|from
+argument_list|(
+name|COMPARATOR
+argument_list|)
 decl_stmt|;
 comment|// BitSets are packed into arrays of "words."  Currently a word is
 comment|// a long, which consists of 64 bits, requiring 6 address bits.
