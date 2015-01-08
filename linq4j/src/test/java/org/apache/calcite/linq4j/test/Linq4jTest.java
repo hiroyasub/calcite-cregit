@@ -5677,7 +5677,9 @@ literal|"Fred works in Sales, "
 operator|+
 literal|"Janet works in Sales, "
 operator|+
-literal|"null works in HR]"
+literal|"null works in HR, "
+operator|+
+literal|"null works in null]"
 argument_list|,
 name|s
 argument_list|)
