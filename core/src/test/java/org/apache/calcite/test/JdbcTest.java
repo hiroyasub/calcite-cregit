@@ -15991,8 +15991,6 @@ literal|"deptno=10; deptno=10"
 argument_list|,
 literal|"deptno=20; deptno=null"
 argument_list|,
-literal|"deptno=null; deptno=null"
-argument_list|,
 literal|"deptno=null; deptno=30"
 argument_list|,
 literal|"deptno=null; deptno=40"
