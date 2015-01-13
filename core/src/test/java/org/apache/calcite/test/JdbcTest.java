@@ -6471,9 +6471,9 @@ name|checkMaskedResultContains
 argument_list|(
 literal|""
 operator|+
-literal|"EnumerableJoin(condition=[=($0, $38)], joinType=[inner]): rowcount = 7.050660528307499E8, cumulative cost = {1.0640240206183146E9 rows, 777302.0 cpu, 0.0 io}\n"
+literal|"EnumerableJoin(condition=[=($0, $38)], joinType=[inner]): rowcount = 7.050660528307499E8, cumulative cost = {1.0640240216183146E9 rows, 777302.0 cpu, 0.0 io}\n"
 operator|+
-literal|"  EnumerableJoin(condition=[=($2, $8)], joinType=[inner]): rowcount = 2.0087351932499997E7, cumulative cost = {2.117504619375143E7 rows, 724261.0 cpu, 0.0 io}\n"
+literal|"  EnumerableJoin(condition=[=($2, $8)], joinType=[inner]): rowcount = 2.0087351932499997E7, cumulative cost = {2.117504719375143E7 rows, 724261.0 cpu, 0.0 io}\n"
 operator|+
 literal|"    EnumerableTableScan(table=[[foodmart2, sales_fact_1997]]): rowcount = 86837.0, cumulative cost = {86837.0 rows, 86838.0 cpu, 0.0 io}\n"
 operator|+
@@ -13139,9 +13139,9 @@ name|explainContains
 argument_list|(
 literal|""
 operator|+
-literal|"PLAN=EnumerableCalc(expr#0..2=[{inputs}], expr#3=[0], expr#4=[=($t0, $t3)], expr#5=[null], expr#6=[CASE($t4, $t5, $t1)], expr#7=[/($t2, $t0)], expr#8=[CAST($t7):JavaType(class java.lang.Integer)], CS=[$t0], C=[$t0], S=[$t6], A=[$t8])\n"
+literal|"PLAN=EnumerableCalc(expr#0..1=[{inputs}], expr#2=[0], expr#3=[=($t0, $t2)], expr#4=[null], expr#5=[CASE($t3, $t4, $t1)], expr#6=[/($t5, $t0)], expr#7=[CAST($t6):JavaType(class java.lang.Integer)], CS=[$t0], C=[$t0], S=[$t5], A=[$t7])\n"
 operator|+
-literal|"  EnumerableAggregate(group=[{}], CS=[COUNT()], agg#1=[$SUM0($0)], agg#2=[SUM($0)])\n"
+literal|"  EnumerableAggregate(group=[{}], CS=[COUNT()], agg#1=[$SUM0($0)])\n"
 operator|+
 literal|"    EnumerableCalc(expr#0..4=[{inputs}], expr#5=[0], expr#6=[<($t1, $t5)], deptno=[$t1], $condition=[$t6])\n"
 operator|+

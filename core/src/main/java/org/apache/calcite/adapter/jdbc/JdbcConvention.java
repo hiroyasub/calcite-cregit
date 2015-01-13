@@ -134,6 +134,15 @@ name|Convention
 operator|.
 name|Impl
 block|{
+comment|/** Cost of a JDBC node versus implementing an equivalent node in a "typical"    * calling convention. */
+specifier|public
+specifier|static
+specifier|final
+name|double
+name|COST_MULTIPLIER
+init|=
+literal|0.8d
+decl_stmt|;
 specifier|public
 specifier|final
 name|SqlDialect

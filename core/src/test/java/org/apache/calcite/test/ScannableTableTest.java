@@ -1246,7 +1246,7 @@ argument_list|()
 argument_list|,
 name|equalTo
 argument_list|(
-literal|"returnCount=2, projects=[0, 1, 2]"
+literal|"returnCount=2"
 argument_list|)
 argument_list|)
 expr_stmt|;

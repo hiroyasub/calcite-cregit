@@ -923,22 +923,6 @@ argument_list|(
 name|projectRel
 argument_list|)
 expr_stmt|;
-comment|// If we old AggRel(SUM(0)) transforms to new AggRel($SUM0($0)) both will
-comment|// have the same cost, but we prefer new. Before we set the importance of
-comment|// old to 0, we were getting different results between JDK 1.7 and 1.8
-comment|// because of some arbitrary orderings of rels within an equivalence set.
-name|ruleCall
-operator|.
-name|getPlanner
-argument_list|()
-operator|.
-name|setImportance
-argument_list|(
-name|oldAggRel
-argument_list|,
-literal|0d
-argument_list|)
-expr_stmt|;
 block|}
 specifier|private
 name|RexNode

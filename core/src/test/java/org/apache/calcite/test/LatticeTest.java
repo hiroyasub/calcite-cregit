@@ -1176,7 +1176,7 @@ literal|""
 operator|+
 literal|"EnumerableCalc(expr#0..3=[{inputs}], expr#4=[10], expr#5=[*($t3, $t4)], proj#0..2=[{exprs}], US=[$t5])\n"
 operator|+
-literal|"  EnumerableAggregate(group=[{0}], C=[$SUM0($2)], Q=[MIN($1)], agg#2=[$SUM0($4)])\n"
+literal|"  EnumerableAggregate(group=[{0}], C=[$SUM0($2)], Q=[MIN($1)], agg#2=[SUM($4)])\n"
 operator|+
 literal|"    EnumerableTableScan(table=[[adhoc, m{27, 31}"
 argument_list|)

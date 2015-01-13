@@ -569,15 +569,6 @@ name|getAggregates
 argument_list|()
 control|)
 block|{
-name|System
-operator|.
-name|out
-operator|.
-name|println
-argument_list|(
-name|aggregate
-argument_list|)
-expr_stmt|;
 name|tiles
 operator|.
 name|add

@@ -201,6 +201,23 @@ name|measures
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
+specifier|public
+name|String
+name|toString
+parameter_list|()
+block|{
+return|return
+literal|"dimensions: "
+operator|+
+name|dimensions
+operator|+
+literal|", measures: "
+operator|+
+name|measures
+return|;
+block|}
 block|}
 end_class
 
