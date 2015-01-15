@@ -1123,7 +1123,7 @@ name|exprs
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates a call with a list of arguments.    *    *<p>Equivalent to<code>makeCall(op, exprList.toArray(new    * RexNode[exprList.size()]))</code>.    */
+comment|/**    * Creates a call with a list of arguments.    *    *<p>Equivalent to    *<code>makeCall(op, exprList.toArray(new RexNode[exprList.size()]))</code>.    */
 specifier|public
 specifier|final
 name|RexNode

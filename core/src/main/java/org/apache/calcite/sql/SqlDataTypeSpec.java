@@ -240,7 +240,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Represents a SQL data type specification in a parse tree.  *  *<p>A<code>SqlDataTypeSpec</code> is immutable; once created, you cannot  * change any of the fields.</p>  *  *<p>todo: This should really be a subtype of {@link SqlCall}.</p>  *  *<p>In its full glory, we will have to support complex type expressions  * like:</p>  *  *<blockquote><code>ROW( NUMBER(5,2) NOT NULL AS foo, ROW( BOOLEAN AS b, MyUDT  * NOT NULL AS i ) AS rec )</code></blockquote>  *  *<p>Currently it only supports simple datatypes like CHAR, VARCHAR and DOUBLE,  * with optional precision and scale.</p>  */
+comment|/**  * Represents a SQL data type specification in a parse tree.  *  *<p>A<code>SqlDataTypeSpec</code> is immutable; once created, you cannot  * change any of the fields.</p>  *  *<p>todo: This should really be a subtype of {@link SqlCall}.</p>  *  *<p>In its full glory, we will have to support complex type expressions  * like:</p>  *  *<blockquote><code>ROW(<br>  *   NUMBER(5, 2) NOT NULL AS foo,<br>  *   ROW(BOOLEAN AS b, MyUDT NOT NULL AS i) AS rec)</code></blockquote>  *  *<p>Currently it only supports simple datatypes like CHAR, VARCHAR and DOUBLE,  * with optional precision and scale.</p>  */
 end_comment
 
 begin_class
