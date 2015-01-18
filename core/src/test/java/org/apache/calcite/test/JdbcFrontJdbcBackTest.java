@@ -662,7 +662,7 @@ operator|.
 name|JDBC_FOODMART
 argument_list|)
 operator|.
-name|withSchema
+name|withDefaultSchema
 argument_list|(
 literal|"foodmart"
 argument_list|)

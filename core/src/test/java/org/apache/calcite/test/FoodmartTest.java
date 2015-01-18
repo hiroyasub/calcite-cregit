@@ -1610,7 +1610,7 @@ operator|.
 name|pooled
 argument_list|()
 operator|.
-name|withSchema
+name|withDefaultSchema
 argument_list|(
 literal|"foodmart"
 argument_list|)

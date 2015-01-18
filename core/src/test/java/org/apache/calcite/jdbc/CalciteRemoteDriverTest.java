@@ -366,7 +366,7 @@ init|=
 operator|new
 name|CalciteAssert
 operator|.
-name|AbstractConnectionFactory
+name|ConnectionFactory
 argument_list|()
 block|{
 specifier|public
@@ -374,7 +374,7 @@ name|Connection
 name|createConnection
 parameter_list|()
 throws|throws
-name|Exception
+name|SQLException
 block|{
 return|return
 name|remoteConnection

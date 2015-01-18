@@ -475,7 +475,7 @@ operator|+
 literal|"}"
 argument_list|)
 operator|.
-name|withSchema
+name|withDefaultSchema
 argument_list|(
 literal|"adhoc"
 argument_list|)
@@ -1829,7 +1829,7 @@ block|}
 name|foodmartModelWithOneTile
 argument_list|()
 operator|.
-name|withSchema
+name|withDefaultSchema
 argument_list|(
 literal|"foodmart"
 argument_list|)
