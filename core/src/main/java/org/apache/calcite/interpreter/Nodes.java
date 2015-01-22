@@ -283,6 +283,20 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|rex
+operator|.
+name|RexUtil
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|schema
 operator|.
 name|FilterableTable
@@ -547,6 +561,19 @@ name|getDataContext
 argument_list|()
 argument_list|)
 decl_stmt|;
+if|if
+condition|(
+name|filterSplit
+operator|.
+name|rejectedFilters
+operator|.
+name|isEmpty
+argument_list|()
+condition|)
+block|{
+comment|// Only push down projects& filters if there are no rejected
+comment|// filters. The rejected filter might need columns that are not
+comment|// projected. See CALCITE-445.
 name|rel
 operator|=
 operator|new
@@ -592,11 +619,19 @@ name|createFilter
 argument_list|(
 name|rel
 argument_list|,
+name|RexUtil
+operator|.
+name|apply
+argument_list|(
+name|mapping
+argument_list|,
 name|filterSplit
 operator|.
 name|rejectedFilters
 argument_list|)
+argument_list|)
 expr_stmt|;
+block|}
 block|}
 block|}
 block|}
