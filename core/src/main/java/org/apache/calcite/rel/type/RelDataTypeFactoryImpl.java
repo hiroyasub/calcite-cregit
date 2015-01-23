@@ -121,20 +121,6 @@ name|calcite
 operator|.
 name|util
 operator|.
-name|Bug
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|util
-operator|.
 name|Pair
 import|;
 end_import
@@ -759,26 +745,6 @@ name|RelDataTypeSystem
 name|typeSystem
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/** Creates a type factory with default type system.    *    * @deprecated Will be removed after calcite-0.9.1.    */
-specifier|protected
-name|RelDataTypeFactoryImpl
-parameter_list|()
-block|{
-name|this
-argument_list|(
-name|RelDataTypeSystem
-operator|.
-name|DEFAULT
-argument_list|)
-expr_stmt|;
-name|Bug
-operator|.
-name|upgrade
-argument_list|(
-literal|"calcite-0.9.1"
-argument_list|)
-expr_stmt|;
-block|}
 comment|/** Creates a type factory. */
 specifier|protected
 name|RelDataTypeFactoryImpl
