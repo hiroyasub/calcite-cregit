@@ -4877,11 +4877,14 @@ expr_stmt|;
 name|assertTrue
 argument_list|(
 name|driverMinorVersion
-operator|==
+operator|>=
 literal|0
+operator|&&
+name|driverMinorVersion
+operator|<
+literal|10
 argument_list|)
 expr_stmt|;
-comment|// will work for the next few releases
 name|assertEquals
 argument_list|(
 literal|"Calcite"
@@ -4943,7 +4946,9 @@ name|driverVersion
 operator|.
 name|startsWith
 argument_list|(
-literal|"1."
+name|driverMajorVersion
+operator|+
+literal|"."
 argument_list|)
 argument_list|)
 expr_stmt|;
