@@ -1461,6 +1461,55 @@ argument_list|(
 literal|0
 argument_list|)
 expr_stmt|;
+comment|// Filter on one of the projected columns.
+name|resultSet
+operator|=
+name|statement
+operator|.
+name|executeQuery
+argument_list|(
+literal|"select \"i\",\"k\" from\n"
+operator|+
+literal|"\"s\".\"beatles\" where \"k\"> 1941"
+argument_list|)
+expr_stmt|;
+name|assertThat
+argument_list|(
+name|CalciteAssert
+operator|.
+name|toString
+argument_list|(
+name|resultSet
+argument_list|)
+argument_list|,
+name|equalTo
+argument_list|(
+literal|"i=4; k=1942\n"
+operator|+
+literal|"i=6; k=1943\n"
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|assertThat
+argument_list|(
+name|buf
+operator|.
+name|toString
+argument_list|()
+argument_list|,
+name|equalTo
+argument_list|(
+literal|"returnCount=4"
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|buf
+operator|.
+name|setLength
+argument_list|(
+literal|0
+argument_list|)
+expr_stmt|;
 block|}
 comment|/** A filter and project on a    * {@link org.apache.calcite.schema.ProjectableFilterableTable}. The table    * refuses to execute the filter, so Calcite should add a pull up and    * transform the filter (projecting the column needed by the filter). */
 annotation|@
