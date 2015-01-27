@@ -2885,7 +2885,60 @@ literal|" from dept d inner join emp e"
 operator|+
 literal|" on d.deptno = e.deptno + (5-5)"
 operator|+
-literal|" where d.deptno=(7+8) and d.deptno=coalesce(2,null)"
+literal|" where d.deptno=(7+8) and d.deptno=(8+7) and d.deptno=coalesce(2,null)"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-570">[CALCITE-570],    * ReduceExpressionsRule throws "duplicate key" exception</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testReduceConstantsDup
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+name|HepProgram
+name|program
+init|=
+operator|new
+name|HepProgramBuilder
+argument_list|()
+operator|.
+name|addRuleInstance
+argument_list|(
+name|ReduceExpressionsRule
+operator|.
+name|PROJECT_INSTANCE
+argument_list|)
+operator|.
+name|addRuleInstance
+argument_list|(
+name|ReduceExpressionsRule
+operator|.
+name|FILTER_INSTANCE
+argument_list|)
+operator|.
+name|addRuleInstance
+argument_list|(
+name|ReduceExpressionsRule
+operator|.
+name|JOIN_INSTANCE
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+name|checkPlanning
+argument_list|(
+name|program
+argument_list|,
+literal|"select d.deptno"
+operator|+
+literal|" from dept d"
+operator|+
+literal|" where d.deptno=7 and d.deptno=8"
 argument_list|)
 expr_stmt|;
 block|}

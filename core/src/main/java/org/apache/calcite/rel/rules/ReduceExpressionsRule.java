@@ -585,6 +585,20 @@ end_import
 
 begin_import
 import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|Maps
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -2362,10 +2376,11 @@ name|RelOptPredicateList
 name|predicates
 parameter_list|)
 block|{
+comment|// We cannot use an ImmutableMap.Builder here. If there are multiple entries
+comment|// with the same key (e.g. "WHERE deptno = 1 AND deptno = 2"), it doesn't
+comment|// matter which we take, so the latter will replace the former.
 specifier|final
-name|ImmutableMap
-operator|.
-name|Builder
+name|Map
 argument_list|<
 name|RexNode
 argument_list|,
@@ -2373,9 +2388,9 @@ name|RexLiteral
 argument_list|>
 name|builder
 init|=
-name|ImmutableMap
+name|Maps
 operator|.
-name|builder
+name|newHashMap
 argument_list|()
 decl_stmt|;
 for|for
@@ -2454,10 +2469,12 @@ block|}
 block|}
 block|}
 return|return
-name|builder
+name|ImmutableMap
 operator|.
-name|build
-argument_list|()
+name|copyOf
+argument_list|(
+name|builder
+argument_list|)
 return|;
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------
