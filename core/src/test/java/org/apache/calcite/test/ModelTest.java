@@ -53,6 +53,20 @@ name|calcite
 operator|.
 name|model
 operator|.
+name|JsonCustomTable
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|model
+operator|.
 name|JsonJdbcSchema
 import|;
 end_import
@@ -669,7 +683,25 @@ literal|"       name: 'My Custom Schema',\n"
 operator|+
 literal|"       factory: 'com.acme.MySchemaFactory',\n"
 operator|+
-literal|"       operand: {a: 'foo', b: [1, 3.5] }\n"
+literal|"       operand: {a: 'foo', b: [1, 3.5] },\n"
+operator|+
+literal|"       tables: [\n"
+operator|+
+literal|"         { type: 'custom', name: 'T1' },\n"
+operator|+
+literal|"         { type: 'custom', name: 'T2', operand: {} },\n"
+operator|+
+literal|"         { type: 'custom', name: 'T3', operand: {a: 'foo'} }\n"
+operator|+
+literal|"       ]\n"
+operator|+
+literal|"     },\n"
+operator|+
+literal|"     {\n"
+operator|+
+literal|"       type: 'custom',\n"
+operator|+
+literal|"       name: 'has-no-operand'\n"
 operator|+
 literal|"     }\n"
 operator|+
@@ -693,7 +725,7 @@ argument_list|)
 expr_stmt|;
 name|assertEquals
 argument_list|(
-literal|1
+literal|2
 argument_list|,
 name|root
 operator|.
@@ -825,6 +857,59 @@ name|get
 argument_list|(
 literal|1
 argument_list|)
+argument_list|)
+expr_stmt|;
+name|assertEquals
+argument_list|(
+literal|3
+argument_list|,
+name|schema
+operator|.
+name|tables
+operator|.
+name|size
+argument_list|()
+argument_list|)
+expr_stmt|;
+name|assertNull
+argument_list|(
+operator|(
+operator|(
+name|JsonCustomTable
+operator|)
+name|schema
+operator|.
+name|tables
+operator|.
+name|get
+argument_list|(
+literal|0
+argument_list|)
+operator|)
+operator|.
+name|operand
+argument_list|)
+expr_stmt|;
+name|assertTrue
+argument_list|(
+operator|(
+operator|(
+name|JsonCustomTable
+operator|)
+name|schema
+operator|.
+name|tables
+operator|.
+name|get
+argument_list|(
+literal|1
+argument_list|)
+operator|)
+operator|.
+name|operand
+operator|.
+name|isEmpty
+argument_list|()
 argument_list|)
 expr_stmt|;
 block|}

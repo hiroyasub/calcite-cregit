@@ -175,10 +175,15 @@ name|getCondition
 argument_list|()
 argument_list|)
 argument_list|,
+name|interpreter
+operator|.
+name|combinedRowType
+argument_list|(
 name|rel
 operator|.
 name|getInputs
 argument_list|()
+argument_list|)
 argument_list|)
 expr_stmt|;
 name|this

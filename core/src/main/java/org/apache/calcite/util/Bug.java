@@ -182,15 +182,6 @@ name|CALCITE_319_FIXED
 init|=
 literal|false
 decl_stmt|;
-comment|/** Whether    *<a href="https://issues.apache.org/jira/browse/CALCITE-445">[CALCITE-445]    * Pull up filters rejected by a ProjectableFilterableTable</a> is fixed. */
-specifier|public
-specifier|static
-specifier|final
-name|boolean
-name|CALCITE_445_FIXED
-init|=
-literal|false
-decl_stmt|;
 comment|/** Whether    *<a href="https://issues.apache.org/jira/browse/CALCITE-461">[CALCITE-461]    * Convert more planner rules to handle grouping sets</a> is fixed. */
 specifier|public
 specifier|static
@@ -209,25 +200,21 @@ name|TODO_FIXED
 init|=
 literal|false
 decl_stmt|;
-comment|/**    * Use this method to flag temporary code.    */
+comment|/**    * Use this method to flag temporary code.    *    *<p>Example #1:    *<blockquote><pre>    * if (Bug.remark("baz fixed") == null) {    *   baz();    * }</pre></blockquote>    *    *<p>Example #2:    *<blockquote><pre>    * /&#42;&#42;&#64;see Bug#remark Remove before checking in&#42;/    * void uselessMethod() {}    *</pre></blockquote>    */
 specifier|public
 specifier|static
-name|boolean
+parameter_list|<
+name|T
+parameter_list|>
+name|T
 name|remark
 parameter_list|(
-name|String
+name|T
 name|remark
 parameter_list|)
 block|{
-name|Util
-operator|.
-name|discard
-argument_list|(
-name|remark
-argument_list|)
-expr_stmt|;
 return|return
-literal|false
+name|remark
 return|;
 block|}
 comment|/**    * Use this method to flag code that should be re-visited after upgrading    * a component.    *    *<p>If the intended change is that a class or member be removed, flag    * instead using a {@link Deprecated} annotation followed by a comment such as    * "to be removed before 2.0".    */

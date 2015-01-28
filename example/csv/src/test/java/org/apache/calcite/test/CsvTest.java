@@ -522,7 +522,9 @@ literal|"model"
 argument_list|,
 literal|"explain plan for select * from EMPS"
 argument_list|,
-literal|"PLAN=EnumerableTableScan(table=[[SALES, EMPS]])\n"
+literal|"PLAN=EnumerableInterpreter\n"
+operator|+
+literal|"  BindableTableScan(table=[[SALES, EMPS]])\n"
 argument_list|)
 expr_stmt|;
 block|}

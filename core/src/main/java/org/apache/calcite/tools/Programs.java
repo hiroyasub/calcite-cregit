@@ -395,7 +395,7 @@ name|rel
 operator|.
 name|rules
 operator|.
-name|FilterTableRule
+name|FilterTableScanRule
 import|;
 end_import
 
@@ -923,7 +923,7 @@ name|AggregateStarTableRule
 operator|.
 name|INSTANCE2
 argument_list|,
-name|FilterTableRule
+name|FilterTableScanRule
 operator|.
 name|INSTANCE
 argument_list|,

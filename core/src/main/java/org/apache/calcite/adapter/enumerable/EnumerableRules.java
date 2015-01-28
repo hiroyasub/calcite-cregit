@@ -295,6 +295,16 @@ decl_stmt|;
 specifier|public
 specifier|static
 specifier|final
+name|EnumerableTableScanRule
+name|ENUMERABLE_TABLE_SCAN_RULE
+init|=
+operator|new
+name|EnumerableTableScanRule
+argument_list|()
+decl_stmt|;
+specifier|public
+specifier|static
+specifier|final
 name|EnumerableTableFunctionScanRule
 name|ENUMERABLE_TABLE_FUNCTION_SCAN_RULE
 init|=

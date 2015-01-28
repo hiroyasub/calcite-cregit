@@ -446,7 +446,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  */
+comment|/**  * Sub-class of {@link org.apache.calcite.rel.core.Window}  * not targeted at any particular engine or calling convention.  */
 end_comment
 
 begin_class

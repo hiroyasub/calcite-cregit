@@ -353,20 +353,6 @@ begin_import
 import|import
 name|org
 operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|util
-operator|.
-name|Bug
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
 name|junit
 operator|.
 name|Assert
@@ -1499,7 +1485,7 @@ argument_list|()
 argument_list|,
 name|equalTo
 argument_list|(
-literal|"returnCount=4"
+literal|"returnCount=4, projects=[0, 2]"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1638,13 +1624,7 @@ argument_list|()
 argument_list|,
 name|equalTo
 argument_list|(
-name|Bug
-operator|.
-name|CALCITE_445_FIXED
-condition|?
-literal|"returnCount=4, projects=[0, 2]"
-else|:
-literal|"returnCount=4"
+literal|"returnCount=4, projects=[2, 0]"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1938,13 +1918,7 @@ argument_list|()
 argument_list|,
 name|equalTo
 argument_list|(
-name|Bug
-operator|.
-name|CALCITE_445_FIXED
-condition|?
 literal|"returnCount=4, projects=[2]"
-else|:
-literal|"returnCount=4"
 argument_list|)
 argument_list|)
 expr_stmt|;

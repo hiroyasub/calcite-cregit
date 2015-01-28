@@ -104,7 +104,10 @@ argument_list|()
 argument_list|,
 name|rel
 operator|.
-name|getInputs
+name|getInput
+argument_list|()
+operator|.
+name|getRowType
 argument_list|()
 argument_list|)
 expr_stmt|;
