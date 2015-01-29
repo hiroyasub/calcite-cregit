@@ -2714,6 +2714,37 @@ name|Throwable
 name|e
 parameter_list|)
 block|{
+comment|// We ignore extended message for non-runtime exception, however
+comment|// it does not matter much since it is better to have AssertionError
+comment|// at the very top level of the exception stack.
+if|if
+condition|(
+name|e
+operator|instanceof
+name|RuntimeException
+condition|)
+block|{
+throw|throw
+operator|(
+name|RuntimeException
+operator|)
+name|e
+throw|;
+block|}
+if|if
+condition|(
+name|e
+operator|instanceof
+name|Error
+condition|)
+block|{
+throw|throw
+operator|(
+name|Error
+operator|)
+name|e
+throw|;
+block|}
 throw|throw
 operator|new
 name|RuntimeException

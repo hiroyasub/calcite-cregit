@@ -1140,7 +1140,7 @@ name|rel
 operator|=
 name|RelOptUtil
 operator|.
-name|project
+name|createProject
 argument_list|(
 name|rel
 argument_list|,

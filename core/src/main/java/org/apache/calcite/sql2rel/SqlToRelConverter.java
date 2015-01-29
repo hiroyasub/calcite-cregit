@@ -10913,7 +10913,7 @@ decl_stmt|;
 return|return
 name|RelOptUtil
 operator|.
-name|project
+name|createProject
 argument_list|(
 name|join
 argument_list|,
