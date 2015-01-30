@@ -17656,6 +17656,48 @@ name|void
 name|testModelCustomTable2
 parameter_list|()
 block|{
+name|testRangeTable
+argument_list|(
+literal|"object"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests a JDBC connection that provides a model that contains custom    * tables. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testModelCustomTableArrayRowSingleColumn
+parameter_list|()
+block|{
+name|testRangeTable
+argument_list|(
+literal|"array"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests a JDBC connection that provides a model that contains custom    * tables. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testModelCustomTableIntegerRowSingleColumn
+parameter_list|()
+block|{
+name|testRangeTable
+argument_list|(
+literal|"integer"
+argument_list|)
+expr_stmt|;
+block|}
+specifier|private
+name|void
+name|testRangeTable
+parameter_list|(
+name|String
+name|elementType
+parameter_list|)
+block|{
 name|CalciteAssert
 operator|.
 name|model
@@ -17691,7 +17733,13 @@ argument_list|()
 operator|+
 literal|"',\n"
 operator|+
-literal|"           operand: {'column': 'N', 'start': 3, 'end': 7 }\n"
+literal|"           operand: {'column': 'N', 'start': 3, 'end': 7, "
+operator|+
+literal|" 'elementType': '"
+operator|+
+name|elementType
+operator|+
+literal|"'}\n"
 operator|+
 literal|"         }\n"
 operator|+
