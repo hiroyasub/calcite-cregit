@@ -7217,6 +7217,13 @@ argument_list|(
 literal|"x'ff' || cast(null as varbinary)"
 argument_list|)
 expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|" cast(null as ANY) || cast(null as ANY) "
+argument_list|)
+expr_stmt|;
 block|}
 annotation|@
 name|Test
