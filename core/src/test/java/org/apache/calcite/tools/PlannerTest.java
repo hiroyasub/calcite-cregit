@@ -1111,7 +1111,7 @@ literal|"ORDER BY `emps`.`deptno`\n"
 operator|+
 literal|"OFFSET 10 ROWS"
 argument_list|,
-literal|"Sort(sort0=[$1], dir0=[ASC], offset=[10])\n"
+literal|"LogicalSort(sort0=[$1], dir0=[ASC], offset=[10])\n"
 operator|+
 literal|"  LogicalProject(empid=[$0], deptno=[$1], name=[$2], salary=[$3], commission=[$4])\n"
 operator|+

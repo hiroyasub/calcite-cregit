@@ -592,7 +592,7 @@ argument_list|)
 operator|.
 name|connectThrows
 argument_list|(
-literal|"Invalid node type Sort in lattice query"
+literal|"Invalid node type LogicalSort in lattice query"
 argument_list|)
 expr_stmt|;
 block|}
