@@ -510,11 +510,6 @@ name|RexNode
 argument_list|>
 name|exps
 decl_stmt|;
-comment|/**    * Values defined in {@link Flags}.    */
-specifier|protected
-name|int
-name|flags
-decl_stmt|;
 specifier|protected
 specifier|final
 name|ImmutableList
@@ -524,7 +519,7 @@ argument_list|>
 name|collationList
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a Project.    *    * @param cluster Cluster that this relational expression belongs to    * @param traits  traits of this rel    * @param input   input relational expression    * @param exps    List of expressions for the input columns    * @param rowType output row type    * @param flags      Flags; values as in {@link Project.Flags},    *                   usually {@link Project.Flags#BOXED}    */
+comment|/**    * Creates a Project.    *    * @param cluster Cluster that this relational expression belongs to    * @param traits  traits of this rel    * @param input   input relational expression    * @param exps    List of expressions for the input columns    * @param rowType output row type    */
 specifier|protected
 name|Project
 parameter_list|(
@@ -547,9 +542,6 @@ name|exps
 parameter_list|,
 name|RelDataType
 name|rowType
-parameter_list|,
-name|int
-name|flags
 parameter_list|)
 block|{
 name|super
@@ -582,12 +574,6 @@ operator|.
 name|rowType
 operator|=
 name|rowType
-expr_stmt|;
-name|this
-operator|.
-name|flags
-operator|=
-name|flags
 expr_stmt|;
 specifier|final
 name|RelCollation
@@ -672,10 +658,6 @@ literal|"exprs"
 argument_list|,
 literal|"fields"
 argument_list|)
-argument_list|,
-name|Flags
-operator|.
-name|BOXED
 argument_list|)
 expr_stmt|;
 block|}
@@ -745,25 +727,6 @@ parameter_list|()
 block|{
 return|return
 name|collationList
-return|;
-block|}
-specifier|public
-name|boolean
-name|isBoxed
-parameter_list|()
-block|{
-return|return
-operator|(
-name|flags
-operator|&
-name|Flags
-operator|.
-name|BOXED
-operator|)
-operator|==
-name|Flags
-operator|.
-name|BOXED
 return|;
 block|}
 annotation|@
@@ -875,15 +838,6 @@ argument_list|)
 return|;
 block|}
 specifier|public
-name|int
-name|getFlags
-parameter_list|()
-block|{
-return|return
-name|flags
-return|;
-block|}
-specifier|public
 name|boolean
 name|isValid
 parameter_list|(
@@ -982,32 +936,6 @@ assert|;
 return|return
 literal|false
 return|;
-block|}
-if|if
-condition|(
-operator|!
-name|isBoxed
-argument_list|()
-condition|)
-block|{
-if|if
-condition|(
-name|exps
-operator|.
-name|size
-argument_list|()
-operator|!=
-literal|1
-condition|)
-block|{
-assert|assert
-operator|!
-name|fail
-assert|;
-return|return
-literal|false
-return|;
-block|}
 block|}
 if|if
 condition|(
@@ -1641,48 +1569,6 @@ literal|true
 return|;
 block|}
 end_function
-
-begin_comment
-comment|//~ Inner Classes ----------------------------------------------------------
-end_comment
-
-begin_comment
-comment|/** A collection of integer constants that describe the kind of project. */
-end_comment
-
-begin_class
-specifier|public
-specifier|static
-class|class
-name|Flags
-block|{
-specifier|public
-specifier|static
-specifier|final
-name|int
-name|ANON_FIELDS
-init|=
-literal|2
-decl_stmt|;
-comment|/**      * Whether the resulting row is to be a synthetic class whose fields are      * the aliases of the fields.<code>boxed</code> must be true unless      * there is only one field:<code>select {dept.deptno} from dept</code>      * is boxed,<code>select dept.deptno from dept</code> is not.      */
-specifier|public
-specifier|static
-specifier|final
-name|int
-name|BOXED
-init|=
-literal|1
-decl_stmt|;
-specifier|public
-specifier|static
-specifier|final
-name|int
-name|NONE
-init|=
-literal|0
-decl_stmt|;
-block|}
-end_class
 
 begin_comment
 comment|//~ Inner Classes ----------------------------------------------------------

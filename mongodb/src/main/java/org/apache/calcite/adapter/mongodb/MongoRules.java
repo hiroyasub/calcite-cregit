@@ -1597,12 +1597,6 @@ name|project
 operator|.
 name|getRowType
 argument_list|()
-argument_list|,
-name|LogicalProject
-operator|.
-name|Flags
-operator|.
-name|BOXED
 argument_list|)
 return|;
 block|}

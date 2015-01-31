@@ -3074,12 +3074,6 @@ argument_list|,
 name|project
 operator|.
 name|rowType
-argument_list|,
-name|Project
-operator|.
-name|Flags
-operator|.
-name|BOXED
 argument_list|)
 return|;
 case|case

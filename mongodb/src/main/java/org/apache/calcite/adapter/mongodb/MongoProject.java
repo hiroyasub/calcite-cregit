@@ -230,9 +230,6 @@ name|exps
 parameter_list|,
 name|RelDataType
 name|rowType
-parameter_list|,
-name|int
-name|flags
 parameter_list|)
 block|{
 name|super
@@ -246,8 +243,6 @@ argument_list|,
 name|exps
 argument_list|,
 name|rowType
-argument_list|,
-name|flags
 argument_list|)
 expr_stmt|;
 assert|assert
@@ -304,8 +299,6 @@ argument_list|,
 name|exps
 argument_list|,
 name|rowType
-argument_list|,
-name|flags
 argument_list|)
 return|;
 block|}

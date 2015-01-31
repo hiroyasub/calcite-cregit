@@ -2653,12 +2653,6 @@ name|calc
 operator|.
 name|getProgram
 argument_list|()
-argument_list|,
-name|Project
-operator|.
-name|Flags
-operator|.
-name|BOXED
 argument_list|)
 return|;
 block|}
@@ -2678,12 +2672,6 @@ specifier|final
 name|RexProgram
 name|program
 decl_stmt|;
-comment|/**      * Values defined in {@link org.apache.calcite.rel.core.Project.Flags}.      */
-specifier|protected
-specifier|final
-name|int
-name|flags
-decl_stmt|;
 specifier|public
 name|JdbcCalc
 parameter_list|(
@@ -2698,9 +2686,6 @@ name|child
 parameter_list|,
 name|RexProgram
 name|program
-parameter_list|,
-name|int
-name|flags
 parameter_list|)
 block|{
 name|super
@@ -2718,12 +2703,6 @@ argument_list|()
 operator|instanceof
 name|JdbcConvention
 assert|;
-name|this
-operator|.
-name|flags
-operator|=
-name|flags
-expr_stmt|;
 name|this
 operator|.
 name|program
@@ -2863,8 +2842,6 @@ name|inputs
 argument_list|)
 argument_list|,
 name|program
-argument_list|,
-name|flags
 argument_list|)
 return|;
 block|}
@@ -3146,12 +3123,6 @@ name|project
 operator|.
 name|getRowType
 argument_list|()
-argument_list|,
-name|Project
-operator|.
-name|Flags
-operator|.
-name|BOXED
 argument_list|)
 return|;
 block|}
@@ -3186,9 +3157,6 @@ name|exps
 parameter_list|,
 name|RelDataType
 name|rowType
-parameter_list|,
-name|int
-name|flags
 parameter_list|)
 block|{
 name|super
@@ -3202,8 +3170,6 @@ argument_list|,
 name|exps
 argument_list|,
 name|rowType
-argument_list|,
-name|flags
 argument_list|)
 expr_stmt|;
 assert|assert
@@ -3249,8 +3215,6 @@ argument_list|,
 name|exps
 argument_list|,
 name|rowType
-argument_list|,
-name|flags
 argument_list|)
 return|;
 block|}

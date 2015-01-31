@@ -589,12 +589,6 @@ argument_list|)
 argument_list|)
 argument_list|,
 literal|null
-argument_list|,
-name|LogicalProject
-operator|.
-name|Flags
-operator|.
-name|BOXED
 argument_list|)
 return|;
 case|case

@@ -198,7 +198,7 @@ extends|extends
 name|Project
 block|{
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a LogicalProject with no sort keys.    *    * @param cluster    Cluster this relational expression belongs to    * @param child      input relational expression    * @param exps       set of expressions for the input columns    * @param fieldNames aliases of the expressions    * @param flags      Flags; values as in {@link Project.Flags},    *                   usually {@link Project.Flags#BOXED}    */
+comment|/**    * Creates a LogicalProject with no sort keys.    *    * @param cluster    Cluster this relational expression belongs to    * @param child      input relational expression    * @param exps       set of expressions for the input columns    * @param fieldNames aliases of the expressions    */
 specifier|public
 name|LogicalProject
 parameter_list|(
@@ -219,9 +219,6 @@ argument_list|<
 name|String
 argument_list|>
 name|fieldNames
-parameter_list|,
-name|int
-name|flags
 parameter_list|)
 block|{
 name|this
@@ -254,12 +251,10 @@ name|exps
 argument_list|,
 name|fieldNames
 argument_list|)
-argument_list|,
-name|flags
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Creates a LogicalProject.    *    * @param cluster  Cluster this relational expression belongs to    * @param traitSet traits of this rel    * @param child    input relational expression    * @param exps     List of expressions for the input columns    * @param rowType  output row type    * @param flags      Flags; values as in {@link Project.Flags},    *                   usually {@link Project.Flags#BOXED}    */
+comment|/**    * Creates a LogicalProject.    *    * @param cluster  Cluster this relational expression belongs to    * @param traitSet traits of this rel    * @param child    input relational expression    * @param exps     List of expressions for the input columns    * @param rowType  output row type    */
 specifier|public
 name|LogicalProject
 parameter_list|(
@@ -282,9 +277,6 @@ name|exps
 parameter_list|,
 name|RelDataType
 name|rowType
-parameter_list|,
-name|int
-name|flags
 parameter_list|)
 block|{
 name|super
@@ -298,8 +290,6 @@ argument_list|,
 name|exps
 argument_list|,
 name|rowType
-argument_list|,
-name|flags
 argument_list|)
 expr_stmt|;
 assert|assert
@@ -364,8 +354,6 @@ argument_list|,
 name|exps
 argument_list|,
 name|rowType
-argument_list|,
-name|flags
 argument_list|)
 return|;
 block|}
