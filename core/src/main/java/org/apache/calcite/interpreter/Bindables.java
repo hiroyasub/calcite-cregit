@@ -915,7 +915,7 @@ name|RelOptCluster
 name|cluster
 parameter_list|,
 name|RelTraitSet
-name|traits
+name|traitSet
 parameter_list|,
 name|RelOptTable
 name|table
@@ -925,7 +925,7 @@ name|super
 argument_list|(
 name|cluster
 argument_list|,
-name|traits
+name|traitSet
 argument_list|,
 name|table
 argument_list|)
@@ -1114,7 +1114,7 @@ name|RelTraitSet
 name|traitSet
 parameter_list|,
 name|RelNode
-name|child
+name|input
 parameter_list|,
 name|RexNode
 name|condition
@@ -1126,7 +1126,7 @@ name|cluster
 argument_list|,
 name|traitSet
 argument_list|,
-name|child
+name|input
 argument_list|,
 name|condition
 argument_list|)
@@ -1352,7 +1352,7 @@ name|RelTraitSet
 name|traitSet
 parameter_list|,
 name|RelNode
-name|child
+name|input
 parameter_list|,
 name|List
 argument_list|<
@@ -1360,7 +1360,7 @@ name|?
 extends|extends
 name|RexNode
 argument_list|>
-name|exps
+name|projects
 parameter_list|,
 name|RelDataType
 name|rowType
@@ -1372,9 +1372,9 @@ name|cluster
 argument_list|,
 name|traitSet
 argument_list|,
-name|child
+name|input
 argument_list|,
-name|exps
+name|projects
 argument_list|,
 name|rowType
 argument_list|)
@@ -1400,7 +1400,7 @@ name|List
 argument_list|<
 name|RexNode
 argument_list|>
-name|exps
+name|projects
 parameter_list|,
 name|RelDataType
 name|rowType
@@ -1417,7 +1417,7 @@ name|traitSet
 argument_list|,
 name|input
 argument_list|,
-name|exps
+name|projects
 argument_list|,
 name|rowType
 argument_list|)
@@ -1616,7 +1616,7 @@ name|RelTraitSet
 name|traitSet
 parameter_list|,
 name|RelNode
-name|child
+name|input
 parameter_list|,
 name|RelCollation
 name|collation
@@ -1634,7 +1634,7 @@ name|cluster
 argument_list|,
 name|traitSet
 argument_list|,
-name|child
+name|input
 argument_list|,
 name|collation
 argument_list|,
@@ -1653,7 +1653,7 @@ assert|assert
 name|getConvention
 argument_list|()
 operator|==
-name|child
+name|input
 operator|.
 name|getConvention
 argument_list|()
@@ -1918,7 +1918,7 @@ name|RelOptCluster
 name|cluster
 parameter_list|,
 name|RelTraitSet
-name|traits
+name|traitSet
 parameter_list|,
 name|RelNode
 name|left
@@ -1943,7 +1943,7 @@ name|super
 argument_list|(
 name|cluster
 argument_list|,
-name|traits
+name|traitSet
 argument_list|,
 name|left
 argument_list|,
@@ -2525,7 +2525,7 @@ name|RelTraitSet
 name|traitSet
 parameter_list|,
 name|RelNode
-name|child
+name|input
 parameter_list|,
 name|boolean
 name|indicator
@@ -2554,7 +2554,7 @@ name|cluster
 argument_list|,
 name|traitSet
 argument_list|,
-name|child
+name|input
 argument_list|,
 name|indicator
 argument_list|,
@@ -2912,10 +2912,10 @@ name|RelOptCluster
 name|cluster
 parameter_list|,
 name|RelTraitSet
-name|traits
+name|traitSet
 parameter_list|,
 name|RelNode
-name|child
+name|input
 parameter_list|,
 name|List
 argument_list|<
@@ -2937,9 +2937,9 @@ name|super
 argument_list|(
 name|cluster
 argument_list|,
-name|traits
+name|traitSet
 argument_list|,
-name|child
+name|input
 argument_list|,
 name|constants
 argument_list|,
@@ -3135,7 +3135,7 @@ argument_list|)
 decl_stmt|;
 specifier|final
 name|RelNode
-name|child
+name|input
 init|=
 name|winAgg
 operator|.
@@ -3144,13 +3144,13 @@ argument_list|()
 decl_stmt|;
 specifier|final
 name|RelNode
-name|convertedChild
+name|convertedInput
 init|=
 name|convert
 argument_list|(
-name|child
+name|input
 argument_list|,
-name|child
+name|input
 operator|.
 name|getTraitSet
 argument_list|()
@@ -3174,7 +3174,7 @@ argument_list|()
 argument_list|,
 name|traitSet
 argument_list|,
-name|convertedChild
+name|convertedInput
 argument_list|,
 name|winAgg
 operator|.

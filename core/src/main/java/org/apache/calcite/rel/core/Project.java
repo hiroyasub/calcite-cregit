@@ -483,7 +483,7 @@ argument_list|>
 name|exps
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a Project.    *    * @param cluster Cluster that this relational expression belongs to    * @param traits  traits of this rel    * @param input   input relational expression    * @param exps    List of expressions for the input columns    * @param rowType output row type    */
+comment|/**    * Creates a Project.    *    * @param cluster  Cluster that this relational expression belongs to    * @param traits   Traits of this relational expression    * @param input    Input relational expression    * @param projects List of expressions for the input columns    * @param rowType  Output row type    */
 specifier|protected
 name|Project
 parameter_list|(
@@ -502,7 +502,7 @@ name|?
 extends|extends
 name|RexNode
 argument_list|>
-name|exps
+name|projects
 parameter_list|,
 name|RelDataType
 name|rowType
@@ -530,7 +530,7 @@ name|ImmutableList
 operator|.
 name|copyOf
 argument_list|(
-name|exps
+name|projects
 argument_list|)
 expr_stmt|;
 name|this
@@ -545,6 +545,57 @@ argument_list|(
 literal|true
 argument_list|)
 assert|;
+block|}
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
+specifier|protected
+name|Project
+parameter_list|(
+name|RelOptCluster
+name|cluster
+parameter_list|,
+name|RelTraitSet
+name|traitSet
+parameter_list|,
+name|RelNode
+name|input
+parameter_list|,
+name|List
+argument_list|<
+name|?
+extends|extends
+name|RexNode
+argument_list|>
+name|projects
+parameter_list|,
+name|RelDataType
+name|rowType
+parameter_list|,
+name|int
+name|flags
+parameter_list|)
+block|{
+name|this
+argument_list|(
+name|cluster
+argument_list|,
+name|traitSet
+argument_list|,
+name|input
+argument_list|,
+name|projects
+argument_list|,
+name|rowType
+argument_list|)
+expr_stmt|;
+name|Util
+operator|.
+name|discard
+argument_list|(
+name|flags
+argument_list|)
+expr_stmt|;
 block|}
 comment|/**    * Creates a Project by parsing serialized output.    */
 specifier|protected
@@ -623,7 +674,7 @@ name|rowType
 argument_list|)
 return|;
 block|}
-comment|/**    * Copies a project.    *    * @param traitSet Traits    * @param input Input    * @param exps Project expressions    * @param rowType Output row type    * @return New {@code Project} if any parameter differs from the value of this    *   {@code Project}, or just {@code this} if all the parameters are    *   the same    *    * @see #copy(RelTraitSet, List)    */
+comment|/**    * Copies a project.    *    * @param traitSet Traits    * @param input Input    * @param projects Project expressions    * @param rowType Output row type    * @return New {@code Project} if any parameter differs from the value of this    *   {@code Project}, or just {@code this} if all the parameters are    *   the same    *    * @see #copy(RelTraitSet, List)    */
 specifier|public
 specifier|abstract
 name|Project
@@ -639,12 +690,70 @@ name|List
 argument_list|<
 name|RexNode
 argument_list|>
-name|exps
+name|projects
 parameter_list|,
 name|RelDataType
 name|rowType
 parameter_list|)
 function_decl|;
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
+specifier|public
+name|Project
+name|copy
+parameter_list|(
+name|RelTraitSet
+name|traitSet
+parameter_list|,
+name|RelNode
+name|input
+parameter_list|,
+name|List
+argument_list|<
+name|RexNode
+argument_list|>
+name|projects
+parameter_list|,
+name|RelDataType
+name|rowType
+parameter_list|,
+name|int
+name|flags
+parameter_list|)
+block|{
+name|Util
+operator|.
+name|discard
+argument_list|(
+name|flags
+argument_list|)
+expr_stmt|;
+return|return
+name|copy
+argument_list|(
+name|traitSet
+argument_list|,
+name|input
+argument_list|,
+name|projects
+argument_list|,
+name|rowType
+argument_list|)
+return|;
+block|}
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
+specifier|public
+name|boolean
+name|isBoxed
+parameter_list|()
+block|{
+return|return
+literal|true
+return|;
+block|}
 annotation|@
 name|Override
 specifier|public
@@ -751,6 +860,18 @@ operator|.
 name|getFieldNames
 argument_list|()
 argument_list|)
+return|;
+block|}
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
+specifier|public
+name|int
+name|getFlags
+parameter_list|()
+block|{
+return|return
+literal|1
 return|;
 block|}
 specifier|public
@@ -1441,6 +1562,46 @@ end_function
 begin_comment
 comment|//~ Inner Classes ----------------------------------------------------------
 end_comment
+
+begin_comment
+comment|/** No longer used. */
+end_comment
+
+begin_class
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
+specifier|public
+specifier|static
+class|class
+name|Flags
+block|{
+specifier|public
+specifier|static
+specifier|final
+name|int
+name|ANON_FIELDS
+init|=
+literal|2
+decl_stmt|;
+specifier|public
+specifier|static
+specifier|final
+name|int
+name|BOXED
+init|=
+literal|1
+decl_stmt|;
+specifier|public
+specifier|static
+specifier|final
+name|int
+name|NONE
+init|=
+literal|0
+decl_stmt|;
+block|}
+end_class
 
 begin_comment
 comment|/**    * Visitor which walks over a program and checks validity.    */
