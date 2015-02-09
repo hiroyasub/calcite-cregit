@@ -95,20 +95,6 @@ name|common
 operator|.
 name|collect
 operator|.
-name|ImmutableList
-import|;
-end_import
-
-begin_import
-import|import
-name|com
-operator|.
-name|google
-operator|.
-name|common
-operator|.
-name|collect
-operator|.
 name|ImmutableMap
 import|;
 end_import
@@ -124,16 +110,6 @@ operator|.
 name|collect
 operator|.
 name|Lists
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|junit
-operator|.
-name|Assert
 import|;
 end_import
 
@@ -222,13 +198,13 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Tests for the {@code org.apache.calcite.adapter.mongodb} package.  *  *<p>Before calling this test, you need to populate MongoDB with the "zips"  * data set (as described in HOWTO.md)  * and "foodmart" data set, as follows:</p>  *  *<blockquote><code>  * JAR=~/.m2/repository/pentaho/mondrian-data-foodmart-json/  * 0.3/mondrian-data-foodmart-json-0.3.jar<br>  * mkdir /tmp/foodmart<br>  * cd /tmp/foodmart<br>  * jar xvf $JAR<br>  * for i in *.json; do<br>  *&nbsp;&nbsp;mongoimport --db foodmart --collection ${i/.json/} --file $i<br>  * done<br>  *</code></blockquote>  */
+comment|/**  * Tests for the {@code org.apache.calcite.adapter.mongodb} package.  *  *<p>Before calling this test, you need to populate MongoDB with the "zips"  * data set (as described in HOWTO.md)  * and "foodmart" data set, as follows:</p>  *  *<blockquote><code>  * git clone https://github.com/vlsi/test-dataset  * cd test-dataset  * mvn install  *</code></blockquote>  *  * This will create a virtual machine with MongoDB and test dataset.  */
 end_comment
 
 begin_class
 specifier|public
 class|class
-name|MongoAdapterTest
+name|MongoAdapterIT
 block|{
 specifier|public
 specifier|static
@@ -342,7 +318,7 @@ name|of
 argument_list|(
 literal|"model"
 argument_list|,
-name|MongoAdapterTest
+name|MongoAdapterIT
 operator|.
 name|class
 operator|.
@@ -373,7 +349,7 @@ name|of
 argument_list|(
 literal|"model"
 argument_list|,
-name|MongoAdapterTest
+name|MongoAdapterIT
 operator|.
 name|class
 operator|.
@@ -386,7 +362,7 @@ name|getPath
 argument_list|()
 argument_list|)
 decl_stmt|;
-comment|/** Whether to run Mongo tests. Disabled by default, because we do not expect    * Mongo to be installed and populated with the FoodMart data set. To enable,    * specify {@code -Dcalcite.test.mongodb=true} on the Java command line. */
+comment|/** Whether to run Mongo tests. Enabled by default, however test is only    * included if "it" profile is activated ({@code -Pit}). To disable,    * specify {@code -Dcalcite.test.mongodb=false} on the Java command line. */
 specifier|public
 specifier|static
 specifier|final
@@ -395,9 +371,16 @@ name|ENABLED
 init|=
 name|Boolean
 operator|.
-name|getBoolean
+name|valueOf
+argument_list|(
+name|System
+operator|.
+name|getProperty
 argument_list|(
 literal|"calcite.test.mongodb"
+argument_list|,
+literal|"true"
+argument_list|)
 argument_list|)
 decl_stmt|;
 comment|/** Whether to run this test. */
@@ -445,32 +428,47 @@ name|List
 name|actual
 parameter_list|)
 block|{
-if|if
-condition|(
-operator|!
+name|Object
+index|[]
+name|actualArray
+init|=
+name|actual
+operator|==
+literal|null
+operator|||
 name|actual
 operator|.
-name|contains
-argument_list|(
-name|ImmutableList
+name|isEmpty
+argument_list|()
+condition|?
+literal|null
+else|:
+operator|(
+operator|(
+name|List
+operator|)
+name|actual
 operator|.
-name|copyOf
+name|get
 argument_list|(
+literal|0
+argument_list|)
+operator|)
+operator|.
+name|toArray
+argument_list|()
+decl_stmt|;
+name|CalciteAssert
+operator|.
+name|assertArrayEqual
+argument_list|(
+literal|"expected MongoDB query not found"
+argument_list|,
 name|strings
-argument_list|)
-argument_list|)
-condition|)
-block|{
-name|Assert
-operator|.
-name|fail
-argument_list|(
-literal|"expected MongoDB query not found; actual: "
-operator|+
-name|actual
+argument_list|,
+name|actualArray
 argument_list|)
 expr_stmt|;
-block|}
 return|return
 literal|null
 return|;
@@ -677,7 +675,7 @@ argument_list|)
 operator|.
 name|returnsCount
 argument_list|(
-literal|29467
+literal|29353
 argument_list|)
 operator|.
 name|explainContains
@@ -686,7 +684,7 @@ literal|"PLAN=MongoToEnumerableConverter\n"
 operator|+
 literal|"  MongoSort(sort0=[$4], dir0=[ASC])\n"
 operator|+
-literal|"    MongoProject(CITY=[CAST(ITEM($0, 'city')):VARCHAR(20) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\"], LONGITUDE=[CAST(ITEM(ITEM($0, 'loc'), 0)):FLOAT NOT NULL], LATITUDE=[CAST(ITEM(ITEM($0, 'loc'), 1)):FLOAT NOT NULL], POP=[CAST(ITEM($0, 'pop')):INTEGER], STATE=[CAST(ITEM($0, 'state')):VARCHAR(2) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\"], ID=[CAST(ITEM($0, '_id')):VARCHAR(5) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\"])\n"
+literal|"    MongoProject(CITY=[CAST(ITEM($0, 'city')):VARCHAR(20) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\"], LONGITUDE=[CAST(ITEM(ITEM($0, 'loc'), 0)):FLOAT], LATITUDE=[CAST(ITEM(ITEM($0, 'loc'), 1)):FLOAT], POP=[CAST(ITEM($0, 'pop')):INTEGER], STATE=[CAST(ITEM($0, 'state')):VARCHAR(2) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\"], ID=[CAST(ITEM($0, '_id')):VARCHAR(5) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\"])\n"
 operator|+
 literal|"      MongoTableScan(table=[[mongo_raw, zips]])"
 argument_list|)
@@ -724,11 +722,11 @@ argument_list|)
 operator|.
 name|returns
 argument_list|(
-literal|"STATE=AK; ID=99502\n"
-operator|+
 literal|"STATE=AK; ID=99503\n"
 operator|+
 literal|"STATE=AK; ID=99504\n"
+operator|+
+literal|"STATE=AK; ID=99505\n"
 argument_list|)
 operator|.
 name|queryContains
@@ -837,6 +835,8 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
+name|Ignore
+annotation|@
 name|Test
 specifier|public
 name|void
@@ -873,22 +873,24 @@ name|query
 argument_list|(
 literal|"select * from zips\n"
 operator|+
-literal|"where city = 'SPRINGFIELD' and id between '20000' and '30000'\n"
+literal|"where city = 'SPRINGFIELD' and id>= '70000'\n"
 operator|+
-literal|"order by state"
+literal|"order by state, id"
 argument_list|)
 operator|.
 name|returns
 argument_list|(
 literal|""
 operator|+
-literal|"CITY=SPRINGFIELD; LONGITUDE=null; LATITUDE=null; POP=2184; STATE=SC; ID=29146\n"
+literal|"CITY=SPRINGFIELD; LONGITUDE=null; LATITUDE=null; POP=752; STATE=AR; ID=72157\n"
 operator|+
-literal|"CITY=SPRINGFIELD; LONGITUDE=null; LATITUDE=null; POP=16811; STATE=VA; ID=22150\n"
+literal|"CITY=SPRINGFIELD; LONGITUDE=null; LATITUDE=null; POP=1992; STATE=CO; ID=81073\n"
 operator|+
-literal|"CITY=SPRINGFIELD; LONGITUDE=null; LATITUDE=null; POP=32161; STATE=VA; ID=22153\n"
+literal|"CITY=SPRINGFIELD; LONGITUDE=null; LATITUDE=null; POP=5597; STATE=LA; ID=70462\n"
 operator|+
-literal|"CITY=SPRINGFIELD; LONGITUDE=null; LATITUDE=null; POP=1321; STATE=WV; ID=26763\n"
+literal|"CITY=SPRINGFIELD; LONGITUDE=null; LATITUDE=null; POP=32384; STATE=OR; ID=97477\n"
+operator|+
+literal|"CITY=SPRINGFIELD; LONGITUDE=null; LATITUDE=null; POP=27521; STATE=OR; ID=97478\n"
 argument_list|)
 operator|.
 name|queryContains
@@ -903,9 +905,7 @@ literal|"    city: \"SPRINGFIELD\",\n"
 operator|+
 literal|"    _id: {\n"
 operator|+
-literal|"      $lte: \"30000\",\n"
-operator|+
-literal|"      $gte: \"20000\"\n"
+literal|"      $gte: \"70000\"\n"
 operator|+
 literal|"    }\n"
 operator|+
@@ -915,7 +915,7 @@ literal|"}"
 argument_list|,
 literal|"{$project: {CITY: '$city', LONGITUDE: '$loc[0]', LATITUDE: '$loc[1]', POP: '$pop', STATE: '$state', ID: '$_id'}}"
 argument_list|,
-literal|"{$sort: {STATE: 1}}"
+literal|"{$sort: {STATE: 1, ID: 1}}"
 argument_list|)
 argument_list|)
 operator|.
@@ -923,11 +923,11 @@ name|explainContains
 argument_list|(
 literal|"PLAN=MongoToEnumerableConverter\n"
 operator|+
-literal|"  MongoSort(sort0=[$4], dir0=[ASC])\n"
+literal|"  MongoSort(sort0=[$4], sort1=[$5], dir0=[ASC], dir1=[ASC])\n"
 operator|+
-literal|"    MongoProject(CITY=[CAST(ITEM($0, 'city')):VARCHAR(20) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\"], LONGITUDE=[CAST(ITEM(ITEM($0, 'loc'), 0)):FLOAT NOT NULL], LATITUDE=[CAST(ITEM(ITEM($0, 'loc'), 1)):FLOAT NOT NULL], POP=[CAST(ITEM($0, 'pop')):INTEGER], STATE=[CAST(ITEM($0, 'state')):VARCHAR(2) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\"], ID=[CAST(ITEM($0, '_id')):VARCHAR(5) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\"])\n"
+literal|"    MongoProject(CITY=[CAST(ITEM($0, 'city')):VARCHAR(20) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\"], LONGITUDE=[CAST(ITEM(ITEM($0, 'loc'), 0)):FLOAT], LATITUDE=[CAST(ITEM(ITEM($0, 'loc'), 1)):FLOAT], POP=[CAST(ITEM($0, 'pop')):INTEGER], STATE=[CAST(ITEM($0, 'state')):VARCHAR(2) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\"], ID=[CAST(ITEM($0, '_id')):VARCHAR(5) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\"])\n"
 operator|+
-literal|"      MongoFilter(condition=[AND(=(CAST(ITEM($0, 'city')):VARCHAR(20) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\", 'SPRINGFIELD'),>=(CAST(ITEM($0, '_id')):VARCHAR(5) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\", '20000'),<=(CAST(ITEM($0, '_id')):VARCHAR(5) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\", '30000'))])\n"
+literal|"      MongoFilter(condition=[AND(=(CAST(ITEM($0, 'city')):VARCHAR(20) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\", 'SPRINGFIELD'),>=(CAST(ITEM($0, '_id')):VARCHAR(5) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\", '70000'))])\n"
 operator|+
 literal|"        MongoTableScan(table=[[mongo_raw, zips]])"
 argument_list|)
@@ -1018,7 +1018,7 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"PLAN=EnumerableUnionRel(all=[true])\n"
+literal|"PLAN=EnumerableUnion(all=[true])\n"
 operator|+
 literal|"  MongoToEnumerableConverter\n"
 operator|+
@@ -1030,7 +1030,7 @@ literal|"  MongoToEnumerableConverter\n"
 operator|+
 literal|"    MongoProject(product_id=[CAST(ITEM($0, 'product_id')):DOUBLE])\n"
 operator|+
-literal|"      MongoTableScan(table=[[_foodmart, sales_fact_1998]])\n"
+literal|"      MongoTableScan(table=[[_foodmart, sales_fact_1998]])"
 argument_list|)
 operator|.
 name|limit
@@ -1049,6 +1049,11 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Ignore
+argument_list|(
+literal|"java.lang.ClassCastException: java.lang.Integer cannot be cast to java.lang.Double"
+argument_list|)
 annotation|@
 name|Test
 specifier|public
@@ -1366,7 +1371,7 @@ argument_list|)
 operator|.
 name|returnsCount
 argument_list|(
-literal|29467
+literal|29353
 argument_list|)
 expr_stmt|;
 block|}
@@ -1400,7 +1405,7 @@ argument_list|)
 operator|.
 name|returns
 argument_list|(
-literal|"EXPR$0=29467\n"
+literal|"EXPR$0=29353\n"
 argument_list|)
 operator|.
 name|explainContains
@@ -1409,17 +1414,60 @@ literal|"PLAN=MongoToEnumerableConverter\n"
 operator|+
 literal|"  MongoAggregate(group=[{}], EXPR$0=[COUNT()])\n"
 operator|+
-literal|"    MongoProject(DUMMY=[0])\n"
-operator|+
-literal|"      MongoTableScan(table=[[mongo_raw, zips]])"
+literal|"    MongoTableScan(table=[[mongo_raw, zips]])"
 argument_list|)
 operator|.
 name|queryContains
 argument_list|(
 name|mongoChecker
 argument_list|(
-literal|"{$project: {DUMMY: {$ifNull: [null, 0]}}}"
-argument_list|,
+literal|"{$group: {_id: {}, 'EXPR$0': {$sum: 1}}}"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Ignore
+argument_list|(
+literal|"Returns 2 instead of 2*29353 == 58706"
+argument_list|)
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testCountGroupByEmptyMultiplyBy2
+parameter_list|()
+block|{
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|enable
+argument_list|(
+name|enabled
+argument_list|()
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|ZIPS
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select count(*)*2 from zips"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"EXPR$0=58706\n"
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|mongoChecker
+argument_list|(
 literal|"{$group: {_id: {}, 'EXPR$0': {$sum: 1}}}"
 argument_list|)
 argument_list|)
@@ -1450,7 +1498,7 @@ argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"select count(*) from zips group by state"
+literal|"select count(*) from zips group by state order by 1"
 argument_list|)
 operator|.
 name|limit
@@ -1460,9 +1508,9 @@ argument_list|)
 operator|.
 name|returns
 argument_list|(
-literal|"EXPR$0=659\n"
+literal|"EXPR$0=24\n"
 operator|+
-literal|"EXPR$0=484\n"
+literal|"EXPR$0=53\n"
 argument_list|)
 operator|.
 name|queryContains
@@ -1476,6 +1524,8 @@ argument_list|,
 literal|"{$project: {STATE: '$_id', 'EXPR$0': '$EXPR$0'}}"
 argument_list|,
 literal|"{$project: {'EXPR$0': 1}}"
+argument_list|,
+literal|"{$sort: {EXPR$0: 1}}"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1505,7 +1555,7 @@ argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"select state, count(*) as c from zips group by state"
+literal|"select state, count(*) as c from zips group by state order by state"
 argument_list|)
 operator|.
 name|limit
@@ -1515,9 +1565,9 @@ argument_list|)
 operator|.
 name|returns
 argument_list|(
-literal|"STATE=WV; C=659\n"
+literal|"STATE=AK; C=195\n"
 operator|+
-literal|"STATE=WA; C=484\n"
+literal|"STATE=AL; C=567\n"
 argument_list|)
 operator|.
 name|queryContains
@@ -1529,6 +1579,8 @@ argument_list|,
 literal|"{$group: {_id: '$STATE', C: {$sum: 1}}}"
 argument_list|,
 literal|"{$project: {STATE: '$_id', C: '$C'}}"
+argument_list|,
+literal|"{$sort: {STATE: 1}}"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1559,7 +1611,7 @@ argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"select count(*) as c, state from zips group by state"
+literal|"select count(*) as c, state from zips group by state order by state"
 argument_list|)
 operator|.
 name|limit
@@ -1569,9 +1621,9 @@ argument_list|)
 operator|.
 name|returns
 argument_list|(
-literal|"C=659; STATE=WV\n"
+literal|"C=195; STATE=AK\n"
 operator|+
-literal|"C=484; STATE=WA\n"
+literal|"C=567; STATE=AL\n"
 argument_list|)
 operator|.
 name|queryContains
@@ -1585,6 +1637,8 @@ argument_list|,
 literal|"{$project: {STATE: '$_id', C: '$C'}}"
 argument_list|,
 literal|"{$project: {C: 1, STATE: 1}}"
+argument_list|,
+literal|"{$sort: {STATE: 1}}"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1616,16 +1670,16 @@ name|query
 argument_list|(
 literal|"select state, count(*) as c from zips\n"
 operator|+
-literal|"group by state having count(*)> 1500"
+literal|"group by state having count(*)> 1500 order by state"
 argument_list|)
 operator|.
 name|returns
 argument_list|(
-literal|"STATE=NY; C=1596\n"
+literal|"STATE=CA; C=1516\n"
 operator|+
-literal|"STATE=TX; C=1676\n"
+literal|"STATE=NY; C=1595\n"
 operator|+
-literal|"STATE=CA; C=1523\n"
+literal|"STATE=TX; C=1671\n"
 argument_list|)
 operator|.
 name|queryContains
@@ -1651,6 +1705,8 @@ operator|+
 literal|"  }\n"
 operator|+
 literal|"}"
+argument_list|,
+literal|"{$sort: {STATE: 1}}"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1759,7 +1815,7 @@ literal|"select count(*) as c, state,\n"
 operator|+
 literal|" min(pop) as min_pop, max(pop) as max_pop, sum(pop) as sum_pop\n"
 operator|+
-literal|"from zips group by state"
+literal|"from zips group by state order by state"
 argument_list|)
 operator|.
 name|limit
@@ -1778,7 +1834,7 @@ name|queryContains
 argument_list|(
 name|mongoChecker
 argument_list|(
-literal|"{$project: {STATE: '$state', POP: '$pop'}}"
+literal|"{$project: {POP: '$pop', STATE: '$state'}}"
 argument_list|,
 literal|"{$group: {_id: '$STATE', C: {$sum: 1}, MIN_POP: {$min: '$POP'}, MAX_POP: {$max: '$POP'}, SUM_POP: {$sum: '$POP'}}}"
 argument_list|,
@@ -1832,11 +1888,11 @@ name|queryContains
 argument_list|(
 name|mongoChecker
 argument_list|(
-literal|"{$project: {STATE: '$state', CITY: '$city'}}"
+literal|"{$project: {CITY: '$city', STATE: '$state'}}"
 argument_list|,
-literal|"{$group: {_id: {STATE: '$STATE', CITY: '$CITY'}, C: {$sum: 1}}}"
+literal|"{$group: {_id: {CITY: '$CITY', STATE: '$STATE'}, C: {$sum: 1}}}"
 argument_list|,
-literal|"{$project: {_id: 0, STATE: '$_id.STATE', CITY: '$_id.CITY', C: '$C'}}"
+literal|"{$project: {_id: 0, CITY: '$_id.CITY', STATE: '$_id.STATE', C: '$C'}}"
 argument_list|,
 literal|"{$sort: {C: -1}}"
 argument_list|,
@@ -1874,14 +1930,14 @@ name|query
 argument_list|(
 literal|"select state, count(distinct city) as cdc from zips\n"
 operator|+
-literal|"where state in ('CA', 'TX') group by state"
+literal|"where state in ('CA', 'TX') group by state order by state"
 argument_list|)
 operator|.
 name|returns
 argument_list|(
-literal|"STATE=CA; CDC=1079\n"
+literal|"STATE=CA; CDC=1072\n"
 operator|+
-literal|"STATE=TX; CDC=1238\n"
+literal|"STATE=TX; CDC=1233\n"
 argument_list|)
 operator|.
 name|queryContains
@@ -1912,15 +1968,17 @@ literal|"  }\n"
 operator|+
 literal|"}"
 argument_list|,
-literal|"{$project: {STATE: '$state', CITY: '$city'}}"
+literal|"{$project: {CITY: '$city', STATE: '$state'}}"
 argument_list|,
-literal|"{$group: {_id: {STATE: '$STATE', CITY: '$CITY'}}}"
+literal|"{$group: {_id: {CITY: '$CITY', STATE: '$STATE'}}}"
 argument_list|,
-literal|"{$project: {_id: 0, STATE: '$_id.STATE', CITY: '$_id.CITY'}}"
+literal|"{$project: {_id: 0, CITY: '$_id.CITY', STATE: '$_id.STATE'}}"
 argument_list|,
 literal|"{$group: {_id: '$STATE', CDC: {$sum: {$cond: [ {$eq: ['CITY', null]}, 0, 1]}}}}"
 argument_list|,
 literal|"{$project: {STATE: '$_id', CDC: '$CDC'}}"
+argument_list|,
+literal|"{$sort: {STATE: 1}}"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1961,15 +2019,15 @@ argument_list|)
 operator|.
 name|returns
 argument_list|(
-literal|"STATE=NY; CDC=1371\n"
+literal|"STATE=NY; CDC=1370\n"
 operator|+
 literal|"STATE=PA; CDC=1369\n"
 operator|+
-literal|"STATE=TX; CDC=1238\n"
+literal|"STATE=TX; CDC=1233\n"
 operator|+
-literal|"STATE=IL; CDC=1151\n"
+literal|"STATE=IL; CDC=1148\n"
 operator|+
-literal|"STATE=CA; CDC=1079\n"
+literal|"STATE=CA; CDC=1072\n"
 argument_list|)
 operator|.
 name|queryContains
@@ -2018,7 +2076,7 @@ argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"select state, city, 0 as zero from zips"
+literal|"select state, city, 0 as zero from zips order by state, city"
 argument_list|)
 operator|.
 name|limit
@@ -2028,9 +2086,9 @@ argument_list|)
 operator|.
 name|returns
 argument_list|(
-literal|"STATE=AL; CITY=ACMAR; ZERO=0\n"
+literal|"STATE=AK; CITY=AKHIOK; ZERO=0\n"
 operator|+
-literal|"STATE=AL; CITY=ADAMSVILLE; ZERO=0\n"
+literal|"STATE=AK; CITY=AKIACHAK; ZERO=0\n"
 argument_list|)
 operator|.
 name|queryContains
@@ -2383,7 +2441,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End MongoAdapterTest.java
+comment|// End MongoAdapterIT.java
 end_comment
 
 end_unit
