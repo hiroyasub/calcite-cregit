@@ -1131,10 +1131,20 @@ comment|// Clean up table type. In particular, this ensures that 'SYSTEM TABLE',
 comment|// returned by Phoenix among others, maps to TableType.SYSTEM_TABLE.
 comment|// We know enum constants are upper-case without spaces, so we can't
 comment|// make things worse.
+comment|// PostgreSQL returns tableTypeName==null for pg_toast* tables
+comment|// This can happen if you start JdbcSchema off a "public" PG schema
+comment|// The tables are not designed to be queried by users, however we do
+comment|// not filter them as we keep all the other table types.
 specifier|final
 name|String
 name|tableTypeName2
 init|=
+name|tableTypeName
+operator|==
+literal|null
+condition|?
+literal|null
+else|:
 name|tableTypeName
 operator|.
 name|toUpperCase

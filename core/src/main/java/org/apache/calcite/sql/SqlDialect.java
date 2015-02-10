@@ -1484,6 +1484,9 @@ case|:
 case|case
 name|PHOENIX
 case|:
+case|case
+name|POSTGRESQL
+case|:
 return|return
 literal|false
 return|;
