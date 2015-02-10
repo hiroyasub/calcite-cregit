@@ -733,6 +733,22 @@ name|upperProductName
 operator|.
 name|contains
 argument_list|(
+literal|"H2"
+argument_list|)
+condition|)
+block|{
+return|return
+name|DatabaseProduct
+operator|.
+name|H2
+return|;
+block|}
+if|else if
+condition|(
+name|upperProductName
+operator|.
+name|contains
+argument_list|(
 literal|"VERTICA"
 argument_list|)
 condition|)
@@ -1479,6 +1495,9 @@ case|case
 name|MYSQL
 case|:
 case|case
+name|H2
+case|:
+case|case
 name|HSQLDB
 case|:
 case|case
@@ -1748,6 +1767,13 @@ argument_list|(
 literal|"Firebird"
 argument_list|,
 literal|null
+argument_list|)
+block|,
+name|H2
+argument_list|(
+literal|"H2"
+argument_list|,
+literal|"\""
 argument_list|)
 block|,
 name|HIVE

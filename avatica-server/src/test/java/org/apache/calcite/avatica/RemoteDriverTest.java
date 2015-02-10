@@ -2553,6 +2553,14 @@ parameter_list|()
 throws|throws
 name|Exception
 block|{
+comment|// Wait 5s for all other tests to finish. (Sorry! Hack!)
+name|Thread
+operator|.
+name|sleep
+argument_list|(
+literal|5000
+argument_list|)
+expr_stmt|;
 specifier|final
 name|String
 name|sql
