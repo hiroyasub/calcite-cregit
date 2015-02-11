@@ -2514,10 +2514,29 @@ literal|"EST10EST1,M10.5.0/2,M3.5.0/3"
 argument_list|)
 condition|)
 block|{
-comment|// older JVMs without the fix
+comment|// very old JVMs without the fix
 name|assertEquals
 argument_list|(
 literal|"EST10EST1,M10.5.0/2,M3.5.0/3"
+argument_list|,
+name|posixTime
+argument_list|)
+expr_stmt|;
+block|}
+if|else if
+condition|(
+name|posixTime
+operator|.
+name|equals
+argument_list|(
+literal|"EST10EST1,M10.1.0/2,M4.1.0/3"
+argument_list|)
+condition|)
+block|{
+comment|// old JVMs without the fix
+name|assertEquals
+argument_list|(
+literal|"EST10EST1,M10.1.0/2,M4.1.0/3"
 argument_list|,
 name|posixTime
 argument_list|)
@@ -2528,7 +2547,7 @@ block|{
 comment|// newer JVMs with the fix
 name|assertEquals
 argument_list|(
-literal|"EST10EST1,M10.1.0/2,M4.1.0/3"
+literal|"AEST10AEDT1,M10.1.0/2,M4.1.0/3"
 argument_list|,
 name|posixTime
 argument_list|)
