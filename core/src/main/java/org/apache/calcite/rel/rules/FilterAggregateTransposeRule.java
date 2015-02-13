@@ -565,9 +565,7 @@ argument_list|(
 name|aggRel
 operator|.
 name|getInput
-argument_list|(
-literal|0
-argument_list|)
+argument_list|()
 argument_list|,
 name|pushedConditions
 argument_list|,

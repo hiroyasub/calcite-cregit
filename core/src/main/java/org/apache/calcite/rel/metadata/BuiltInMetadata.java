@@ -69,6 +69,20 @@ name|calcite
 operator|.
 name|rel
 operator|.
+name|RelDistribution
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
 name|RelNode
 import|;
 end_import
@@ -216,6 +230,19 @@ argument_list|<
 name|RelCollation
 argument_list|>
 name|collations
+parameter_list|()
+function_decl|;
+block|}
+comment|/** Metadata about how a relational expression is distributed.    *    *<p>If you are an operator consuming a relational expression, which subset    * of the rows are you seeing? You might be seeing all of them (BROADCAST    * or SINGLETON), only those whose key column values have a particular hash    * code (HASH) or only those whose column values have particular values or    * ranges of values (RANGE).    *    *<p>When a relational expression is partitioned, it is often partitioned    * among nodes, but it may be partitioned among threads running on the same    * node. */
+specifier|public
+interface|interface
+name|Distribution
+extends|extends
+name|Metadata
+block|{
+comment|/** Determines how the rows are distributed. */
+name|RelDistribution
+name|distribution
 parameter_list|()
 function_decl|;
 block|}
@@ -373,6 +400,10 @@ extends|,
 name|ColumnOrigin
 extends|,
 name|Predicates
+extends|,
+name|Collation
+extends|,
+name|Distribution
 block|{   }
 block|}
 end_class

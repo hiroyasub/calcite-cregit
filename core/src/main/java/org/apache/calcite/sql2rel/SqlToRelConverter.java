@@ -6029,9 +6029,7 @@ operator|)
 name|left
 operator|.
 name|getInput
-argument_list|(
-literal|0
-argument_list|)
+argument_list|()
 operator|)
 operator|.
 name|getLeft

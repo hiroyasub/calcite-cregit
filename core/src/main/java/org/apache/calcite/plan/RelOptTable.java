@@ -55,7 +55,37 @@ name|calcite
 operator|.
 name|rel
 operator|.
+name|RelDistribution
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
 name|RelNode
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|metadata
+operator|.
+name|RelMetadataQuery
 import|;
 end_import
 
@@ -156,12 +186,17 @@ name|ToRelContext
 name|context
 parameter_list|)
 function_decl|;
-comment|/**    * Returns a description of the physical ordering (or orderings) of the rows    * returned from this table.    *    * @see RelNode#getCollationList()    */
+comment|/**    * Returns a description of the physical ordering (or orderings) of the rows    * returned from this table.    *    * @see RelMetadataQuery#collations(RelNode)    */
 name|List
 argument_list|<
 name|RelCollation
 argument_list|>
 name|getCollationList
+parameter_list|()
+function_decl|;
+comment|/**    * Returns a description of the physical distribution of the rows    * in this table.    *    * @see RelMetadataQuery#distribution(RelNode)    */
+name|RelDistribution
+name|getDistribution
 parameter_list|()
 function_decl|;
 comment|/**    * Returns whether the given columns are a key or a superset of a unique key    * of this table.    *    * @param columns Ordinals of key columns    * @return Whether the given columns are a key or a superset of a key    */

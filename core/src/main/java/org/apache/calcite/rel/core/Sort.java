@@ -167,20 +167,6 @@ name|calcite
 operator|.
 name|rel
 operator|.
-name|RelShuttle
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|rel
-operator|.
 name|RelWriter
 import|;
 end_import
@@ -714,25 +700,6 @@ block|}
 annotation|@
 name|Override
 specifier|public
-name|RelNode
-name|accept
-parameter_list|(
-name|RelShuttle
-name|shuttle
-parameter_list|)
-block|{
-return|return
-name|shuttle
-operator|.
-name|visit
-argument_list|(
-name|this
-argument_list|)
-return|;
-block|}
-annotation|@
-name|Override
-specifier|public
 name|List
 argument_list|<
 name|RexNode
@@ -845,7 +812,7 @@ name|fetch
 argument_list|)
 return|;
 block|}
-comment|/**    * Returns the array of {@link RelFieldCollation}s asked for by the sort    * specification, from most significant to least significant.    *    *<p>See also {@link #getCollationList()}, inherited from {@link RelNode},    * which lists all known collations. For example,    *<code>ORDER BY time_id</code> might also be sorted by    *<code>the_year, the_month</code> because of a known monotonicity    * constraint among the columns. {@code getCollations} would return    *<code>[time_id]</code> and {@code getCollationList} would return    *<code>[ [time_id], [the_year, the_month] ]</code>.</p>    */
+comment|/**    * Returns the array of {@link RelFieldCollation}s asked for by the sort    * specification, from most significant to least significant.    *    *<p>See also {@link RelMetadataQuery#collations(RelNode)},    * which lists all known collations. For example,    *<code>ORDER BY time_id</code> might also be sorted by    *<code>the_year, the_month</code> because of a known monotonicity    * constraint among the columns. {@code getCollation} would return    *<code>[time_id]</code> and {@code collations} would return    *<code>[ [time_id], [the_year, the_month] ]</code>.</p>    */
 specifier|public
 name|RelCollation
 name|getCollation
@@ -865,7 +832,6 @@ argument_list|>
 name|getCollationList
 parameter_list|()
 block|{
-comment|// TODO: include each prefix of the collation, e.g [[x, y], [x], []]
 return|return
 name|Collections
 operator|.

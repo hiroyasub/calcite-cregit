@@ -302,6 +302,10 @@ name|RelCollation
 name|getCollation
 parameter_list|()
 function_decl|;
+name|RelDistribution
+name|getDistribution
+parameter_list|()
+function_decl|;
 name|ImmutableList
 argument_list|<
 name|ImmutableList

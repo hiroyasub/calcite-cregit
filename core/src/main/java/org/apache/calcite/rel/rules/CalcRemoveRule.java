@@ -131,7 +131,6 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|// implement RelOptRule
 specifier|public
 name|void
 name|onMatch
@@ -170,16 +169,14 @@ block|{
 return|return;
 block|}
 name|RelNode
-name|child
+name|input
 init|=
 name|calc
 operator|.
 name|getInput
-argument_list|(
-literal|0
-argument_list|)
+argument_list|()
 decl_stmt|;
-name|child
+name|input
 operator|=
 name|call
 operator|.
@@ -188,7 +185,7 @@ argument_list|()
 operator|.
 name|register
 argument_list|(
-name|child
+name|input
 argument_list|,
 name|calc
 argument_list|)
@@ -199,7 +196,7 @@ name|transformTo
 argument_list|(
 name|convert
 argument_list|(
-name|child
+name|input
 argument_list|,
 name|calc
 operator|.

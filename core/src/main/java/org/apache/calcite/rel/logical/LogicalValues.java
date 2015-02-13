@@ -394,7 +394,7 @@ operator|.
 name|NONE
 argument_list|)
 operator|.
-name|replaceIf
+name|replaceIfs
 argument_list|(
 name|RelCollationTraitDef
 operator|.

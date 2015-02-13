@@ -37,6 +37,20 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|rel
+operator|.
+name|RelDistribution
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|util
 operator|.
 name|ImmutableBitSet
@@ -81,6 +95,11 @@ argument_list|<
 name|RelCollation
 argument_list|>
 name|getCollations
+parameter_list|()
+function_decl|;
+comment|/** Returns the distribution of the data in this table. */
+name|RelDistribution
+name|getDistribution
 parameter_list|()
 function_decl|;
 block|}

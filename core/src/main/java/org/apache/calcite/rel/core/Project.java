@@ -462,7 +462,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Relational expression that computes a set of  * 'select expressions' from its input relational expression.  *  *<p>The result is usually 'boxed' as a record with one named field for each  * column; if there is precisely one expression, the result may be 'unboxed',  * and consist of the raw value type.  *  * @see org.apache.calcite.rel.logical.LogicalProject  */
+comment|/**  * Relational expression that computes a set of  * 'select expressions' from its input relational expression.  *  * @see org.apache.calcite.rel.logical.LogicalProject  */
 end_comment
 
 begin_class
@@ -1318,6 +1318,8 @@ name|inputFieldCount
 parameter_list|,
 name|List
 argument_list|<
+name|?
+extends|extends
 name|RexNode
 argument_list|>
 name|projects
@@ -1405,7 +1407,7 @@ block|}
 end_function
 
 begin_comment
-comment|/**    * Returns a permutation, if this projection is merely a permutation of its    * input fields, otherwise null.    *    * @return Permutation, if this projection is merely a permutation of its    *   input fields, otherwise null    */
+comment|/**    * Returns a permutation, if this projection is merely a permutation of its    * input fields; otherwise null.    *    * @return Permutation, if this projection is merely a permutation of its    *   input fields; otherwise null    */
 end_comment
 
 begin_function
@@ -1414,14 +1416,51 @@ name|Permutation
 name|getPermutation
 parameter_list|()
 block|{
+return|return
+name|getPermutation
+argument_list|(
+name|getInput
+argument_list|()
+operator|.
+name|getRowType
+argument_list|()
+operator|.
+name|getFieldCount
+argument_list|()
+argument_list|,
+name|exps
+argument_list|)
+return|;
+block|}
+end_function
+
+begin_comment
+comment|/**    * Returns a permutation, if this projection is merely a permutation of its    * input fields; otherwise null.    */
+end_comment
+
+begin_function
+specifier|public
+specifier|static
+name|Permutation
+name|getPermutation
+parameter_list|(
+name|int
+name|inputFieldCount
+parameter_list|,
+name|List
+argument_list|<
+name|?
+extends|extends
+name|RexNode
+argument_list|>
+name|projects
+parameter_list|)
+block|{
 specifier|final
 name|int
 name|fieldCount
 init|=
-name|rowType
-operator|.
-name|getFieldList
-argument_list|()
+name|projects
 operator|.
 name|size
 argument_list|()
@@ -1430,17 +1469,7 @@ if|if
 condition|(
 name|fieldCount
 operator|!=
-name|getInput
-argument_list|()
-operator|.
-name|getRowType
-argument_list|()
-operator|.
-name|getFieldList
-argument_list|()
-operator|.
-name|size
-argument_list|()
+name|inputFieldCount
 condition|)
 block|{
 return|return
@@ -1475,7 +1504,7 @@ specifier|final
 name|RexNode
 name|exp
 init|=
-name|exps
+name|projects
 operator|.
 name|get
 argument_list|(

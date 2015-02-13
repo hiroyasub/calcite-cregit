@@ -262,11 +262,6 @@ name|getInput
 argument_list|()
 argument_list|,
 name|mergedProgram
-argument_list|,
-name|topCalc
-operator|.
-name|getCollationList
-argument_list|()
 argument_list|)
 decl_stmt|;
 if|if
