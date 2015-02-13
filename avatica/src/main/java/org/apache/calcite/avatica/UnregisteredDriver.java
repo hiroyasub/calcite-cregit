@@ -243,15 +243,18 @@ block|{
 case|case
 name|JDBC_30
 case|:
-return|return
-literal|"org.apache.calcite.avatica.AvaticaFactoryJdbc3Impl"
-return|;
 case|case
 name|JDBC_40
 case|:
-return|return
-literal|"org.apache.calcite.avatica.AvaticaJdbc40Factory"
-return|;
+throw|throw
+operator|new
+name|IllegalArgumentException
+argument_list|(
+literal|"JDBC version not supported: "
+operator|+
+name|jdbcVersion
+argument_list|)
+throw|;
 case|case
 name|JDBC_41
 case|:

@@ -351,15 +351,18 @@ block|{
 case|case
 name|JDBC_30
 case|:
-return|return
-literal|"org.apache.calcite.jdbc.CalciteJdbc3Factory"
-return|;
 case|case
 name|JDBC_40
 case|:
-return|return
-literal|"org.apache.calcite.jdbc.CalciteJdbc40Factory"
-return|;
+throw|throw
+operator|new
+name|IllegalArgumentException
+argument_list|(
+literal|"JDBC version not supported: "
+operator|+
+name|jdbcVersion
+argument_list|)
+throw|;
 case|case
 name|JDBC_41
 case|:

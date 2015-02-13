@@ -271,6 +271,9 @@ name|map
 parameter_list|)
 function_decl|;
 comment|/** Calls {@link java.sql.Connection}{@code .setSchema(String)}.    *    *<p>This method is available in JDK 1.7 and above, and in    * {@link org.apache.calcite.jdbc.CalciteConnection} in all JDK versions. */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 name|void
 name|setSchema
 parameter_list|(
