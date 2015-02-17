@@ -166,7 +166,7 @@ import|;
 end_import
 
 begin_comment
-comment|/** An analyzed join condition.  *  *<p>It is useful for the many algorithms that care whether a join is an  * equi-join.  *  *<p>You can create one using {@link #of}, or call  * {@link Join#analyzeCondition()}; many kinds of join cache their  * join info, especially those that are equi-joins and sub-class  * {@link org.apache.calcite.rel.rules.EquiJoin}.</p>  *  * @see Join#analyzeCondition() */
+comment|/** An analyzed join condition.  *  *<p>It is useful for the many algorithms that care whether a join is an  * equi-join.  *  *<p>You can create one using {@link #of}, or call  * {@link Join#analyzeCondition()}; many kinds of join cache their  * join info, especially those that are equi-joins and sub-class  * {@link org.apache.calcite.rel.core.EquiJoin}.</p>  *  * @see Join#analyzeCondition() */
 end_comment
 
 begin_class
