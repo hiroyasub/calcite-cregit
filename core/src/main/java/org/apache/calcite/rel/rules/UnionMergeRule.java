@@ -69,9 +69,55 @@ name|calcite
 operator|.
 name|rel
 operator|.
+name|core
+operator|.
+name|RelFactories
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|core
+operator|.
+name|Union
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
 name|logical
 operator|.
 name|LogicalUnion
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|SqlKind
 import|;
 end_import
 
@@ -110,7 +156,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * UnionMergeRule implements the rule for combining two  * non-distinct {@link org.apache.calcite.rel.logical.LogicalUnion}s  * into a single {@link org.apache.calcite.rel.logical.LogicalUnion}.  */
+comment|/**  * UnionMergeRule implements the rule for combining two  * non-distinct {@link org.apache.calcite.rel.core.Union}s  * into a single {@link org.apache.calcite.rel.core.Union}.  */
 end_comment
 
 begin_class
@@ -128,21 +174,47 @@ name|INSTANCE
 init|=
 operator|new
 name|UnionMergeRule
-argument_list|()
+argument_list|(
+name|LogicalUnion
+operator|.
+name|class
+argument_list|,
+name|RelFactories
+operator|.
+name|DEFAULT_SET_OP_FACTORY
+argument_list|)
+decl_stmt|;
+specifier|private
+specifier|final
+name|RelFactories
+operator|.
+name|SetOpFactory
+name|setOpFactory
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 comment|/**    * Creates a UnionMergeRule.    */
-specifier|private
+specifier|public
 name|UnionMergeRule
-parameter_list|()
+parameter_list|(
+name|Class
+argument_list|<
+name|?
+extends|extends
+name|Union
+argument_list|>
+name|clazz
+parameter_list|,
+name|RelFactories
+operator|.
+name|SetOpFactory
+name|setOpFactory
+parameter_list|)
 block|{
 name|super
 argument_list|(
 name|operand
 argument_list|(
-name|LogicalUnion
-operator|.
-name|class
+name|clazz
 argument_list|,
 name|operand
 argument_list|(
@@ -166,6 +238,12 @@ argument_list|)
 argument_list|)
 argument_list|)
 expr_stmt|;
+name|this
+operator|.
+name|setOpFactory
+operator|=
+name|setOpFactory
+expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
 comment|// implement RelOptRule
@@ -177,7 +255,7 @@ name|RelOptRuleCall
 name|call
 parameter_list|)
 block|{
-name|LogicalUnion
+name|Union
 name|topUnion
 init|=
 name|call
@@ -187,7 +265,7 @@ argument_list|(
 literal|0
 argument_list|)
 decl_stmt|;
-name|LogicalUnion
+name|Union
 name|bottomUnion
 decl_stmt|;
 comment|// We want to combine the Union that's in the second input first.
@@ -204,7 +282,7 @@ argument_list|(
 literal|2
 argument_list|)
 operator|instanceof
-name|LogicalUnion
+name|Union
 condition|)
 block|{
 name|bottomUnion
@@ -226,7 +304,7 @@ argument_list|(
 literal|1
 argument_list|)
 operator|instanceof
-name|LogicalUnion
+name|Union
 condition|)
 block|{
 name|bottomUnion
@@ -283,7 +361,7 @@ argument_list|(
 literal|2
 argument_list|)
 operator|instanceof
-name|LogicalUnion
+name|Union
 condition|)
 block|{
 assert|assert
@@ -372,13 +450,17 @@ argument_list|()
 operator|-
 literal|1
 assert|;
-name|LogicalUnion
+name|RelNode
 name|newUnion
 init|=
-name|LogicalUnion
+name|setOpFactory
 operator|.
-name|create
+name|createSetOp
 argument_list|(
+name|SqlKind
+operator|.
+name|UNION
+argument_list|,
 name|unionInputs
 argument_list|,
 literal|true
