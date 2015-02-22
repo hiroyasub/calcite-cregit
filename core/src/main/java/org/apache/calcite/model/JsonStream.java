@@ -11,70 +11,38 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|sql
+name|model
 package|;
 end_package
 
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|sql
-operator|.
-name|parser
-operator|.
-name|SqlParserPos
-import|;
-end_import
-
 begin_comment
-comment|/**  * Defines the keywords which can occur immediately after the "SELECT" keyword.  */
+comment|/**  * Information about whether a table allows streaming.  *  * @see org.apache.calcite.model.JsonRoot Description of schema elements  * @see org.apache.calcite.model.JsonTable#stream  */
 end_comment
 
-begin_enum
+begin_class
 specifier|public
-enum|enum
-name|SqlSelectKeyword
-implements|implements
-name|SqlLiteral
-operator|.
-name|SqlSymbol
+class|class
+name|JsonStream
 block|{
-name|DISTINCT
-block|,
-name|ALL
-block|,
-name|STREAM
-block|;
-comment|/**    * Creates a parse-tree node representing an occurrence of this keyword    * at a particular position in the parsed text.    */
+comment|/** Whether the table allows streaming. */
 specifier|public
-name|SqlLiteral
-name|symbol
-parameter_list|(
-name|SqlParserPos
-name|pos
-parameter_list|)
-block|{
-return|return
-name|SqlLiteral
-operator|.
-name|createSymbol
-argument_list|(
-name|this
-argument_list|,
-name|pos
-argument_list|)
-return|;
+name|boolean
+name|stream
+init|=
+literal|true
+decl_stmt|;
+comment|/** Whether the history of the table is available. */
+specifier|public
+name|boolean
+name|history
+init|=
+literal|false
+decl_stmt|;
 block|}
-block|}
-end_enum
+end_class
 
 begin_comment
-comment|// End SqlSelectKeyword.java
+comment|// End JsonStream.java
 end_comment
 
 end_unit

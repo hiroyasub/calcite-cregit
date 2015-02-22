@@ -290,7 +290,7 @@ extends|extends
 name|SingleRel
 block|{
 comment|//~ Instance fields --------------------------------------------------------
-specifier|protected
+specifier|public
 specifier|final
 name|RelCollation
 name|collation

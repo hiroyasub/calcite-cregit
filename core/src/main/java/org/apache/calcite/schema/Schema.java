@@ -165,6 +165,9 @@ name|JOIN
 block|,
 comment|/** Sequence table.      *      *<p>Used by Apache Phoenix, and others. Must have a single BIGINT column      * called "$seq". */
 name|SEQUENCE
+block|,
+comment|/** Stream. */
+name|STREAM
 block|,   }
 block|}
 end_interface

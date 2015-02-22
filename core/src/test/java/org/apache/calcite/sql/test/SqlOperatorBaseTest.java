@@ -17416,14 +17416,6 @@ argument_list|,
 name|VM_FENNEL
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-operator|!
-name|enable
-condition|)
-block|{
-return|return;
-block|}
 name|tester
 operator|.
 name|checkScalarApprox
@@ -17584,14 +17576,6 @@ argument_list|,
 name|VM_FENNEL
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-operator|!
-name|enable
-condition|)
-block|{
-return|return;
-block|}
 name|tester
 operator|.
 name|checkScalarApprox
@@ -17664,6 +17648,291 @@ operator|.
 name|checkNull
 argument_list|(
 literal|"floor(cast(null as real))"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFloorFuncDateTime
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"^floor('12:34:56')^"
+argument_list|,
+literal|"Cannot apply 'FLOOR' to arguments of type 'FLOOR\\(<CHAR\\(8\\)>\\)'\\. Supported form\\(s\\): 'FLOOR\\(<NUMERIC>\\)'\n"
+operator|+
+literal|"'FLOOR\\(<DATETIME_INTERVAL>\\)'\n"
+operator|+
+literal|"'FLOOR\\(<DATE> TO<TIME_UNIT>\\)'\n"
+operator|+
+literal|"'FLOOR\\(<TIME> TO<TIME_UNIT>\\)'\n"
+operator|+
+literal|"'FLOOR\\(<TIMESTAMP> TO<TIME_UNIT>\\)'"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"^floor(time '12:34:56')^"
+argument_list|,
+literal|"(?s)Cannot apply 'FLOOR' to arguments .*"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"^floor(123.45 to minute)^"
+argument_list|,
+literal|"(?s)Cannot apply 'FLOOR' to arguments .*"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"^floor('abcde' to minute)^"
+argument_list|,
+literal|"(?s)Cannot apply 'FLOOR' to arguments .*"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"floor(time '12:34:56' to minute)"
+argument_list|,
+literal|"12:34:00"
+argument_list|,
+literal|"TIME(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"floor(timestamp '2015-02-19 12:34:56.78' to second)"
+argument_list|,
+literal|"2015-02-19 12:34:56"
+argument_list|,
+literal|"TIMESTAMP(2) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"floor(timestamp '2015-02-19 12:34:56' to minute)"
+argument_list|,
+literal|"2015-02-19 12:34:00"
+argument_list|,
+literal|"TIMESTAMP(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"floor(timestamp '2015-02-19 12:34:56' to year)"
+argument_list|,
+literal|"2015-01-01 00:00:00"
+argument_list|,
+literal|"TIMESTAMP(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"floor(timestamp '2015-02-19 12:34:56' to month)"
+argument_list|,
+literal|"2015-02-01 00:00:00"
+argument_list|,
+literal|"TIMESTAMP(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"floor(cast(null as timestamp) to month)"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testCeilFuncDateTime
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"^ceil('12:34:56')^"
+argument_list|,
+literal|"Cannot apply 'CEIL' to arguments of type 'CEIL\\(<CHAR\\(8\\)>\\)'\\. Supported form\\(s\\): 'CEIL\\(<NUMERIC>\\)'\n"
+operator|+
+literal|"'CEIL\\(<DATETIME_INTERVAL>\\)'\n"
+operator|+
+literal|"'CEIL\\(<DATE> TO<TIME_UNIT>\\)'\n"
+operator|+
+literal|"'CEIL\\(<TIME> TO<TIME_UNIT>\\)'\n"
+operator|+
+literal|"'CEIL\\(<TIMESTAMP> TO<TIME_UNIT>\\)'"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"^ceil(time '12:34:56')^"
+argument_list|,
+literal|"(?s)Cannot apply 'CEIL' to arguments .*"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"^ceil(123.45 to minute)^"
+argument_list|,
+literal|"(?s)Cannot apply 'CEIL' to arguments .*"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"^ceil('abcde' to minute)^"
+argument_list|,
+literal|"(?s)Cannot apply 'CEIL' to arguments .*"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"ceil(time '12:34:56' to minute)"
+argument_list|,
+literal|"12:35:00"
+argument_list|,
+literal|"TIME(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"ceil(time '12:59:56' to minute)"
+argument_list|,
+literal|"13:00:00"
+argument_list|,
+literal|"TIME(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"ceil(timestamp '2015-02-19 12:34:56.78' to second)"
+argument_list|,
+literal|"2015-02-19 12:34:57"
+argument_list|,
+literal|"TIMESTAMP(2) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"ceil(timestamp '2015-02-19 12:34:56.00' to second)"
+argument_list|,
+literal|"2015-02-19 12:34:56"
+argument_list|,
+literal|"TIMESTAMP(2) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"ceil(timestamp '2015-02-19 12:34:56' to minute)"
+argument_list|,
+literal|"2015-02-19 12:35:00"
+argument_list|,
+literal|"TIMESTAMP(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"ceil(timestamp '2015-02-19 12:34:56' to year)"
+argument_list|,
+literal|"2016-01-01 00:00:00"
+argument_list|,
+literal|"TIMESTAMP(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"ceil(timestamp '2015-02-19 12:34:56' to month)"
+argument_list|,
+literal|"2015-03-01 00:00:00"
+argument_list|,
+literal|"TIMESTAMP(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"ceil(cast(null as timestamp) to month)"
+argument_list|)
+expr_stmt|;
+comment|// ceiling alias
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"ceiling(timestamp '2015-02-19 12:34:56' to month)"
+argument_list|,
+literal|"2015-03-01 00:00:00"
+argument_list|,
+literal|"TIMESTAMP(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"ceiling(cast(null as timestamp) to month)"
 argument_list|)
 expr_stmt|;
 block|}
@@ -18874,6 +19143,7 @@ condition|)
 block|{
 return|return;
 block|}
+comment|// verified on Oracle 10g
 name|tester
 operator|.
 name|checkAgg
@@ -18884,17 +19154,16 @@ name|values
 argument_list|,
 literal|1.414213562373095d
 argument_list|,
-comment|// verified on Oracle 10g
 literal|0.000000000000001d
 argument_list|)
 expr_stmt|;
+comment|// Oracle does not allow distinct
 name|tester
 operator|.
 name|checkAgg
 argument_list|(
 literal|"stddev_pop(DISTINCT x)"
 argument_list|,
-comment|// Oracle does not allow distinct
 name|values
 argument_list|,
 literal|1.5d
@@ -19033,6 +19302,7 @@ condition|)
 block|{
 return|return;
 block|}
+comment|// verified on Oracle 10g
 name|tester
 operator|.
 name|checkAgg
@@ -19043,17 +19313,16 @@ name|values
 argument_list|,
 literal|1.732050807568877d
 argument_list|,
-comment|// verified on Oracle 10g
 literal|0.000000000000001d
 argument_list|)
 expr_stmt|;
+comment|// Oracle does not allow distinct
 name|tester
 operator|.
 name|checkAgg
 argument_list|(
 literal|"stddev_samp(DISTINCT x)"
 argument_list|,
-comment|// Oracle does not allow distinct
 name|values
 argument_list|,
 literal|2.121320343559642d

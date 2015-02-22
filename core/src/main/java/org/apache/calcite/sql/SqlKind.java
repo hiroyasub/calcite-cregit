@@ -284,6 +284,12 @@ block|,
 comment|/**    * The "CURRENT VALUE OF sequence" operator.    */
 name|CURRENT_VALUE
 block|,
+comment|/**    * The "FLOOR" function    */
+name|FLOOR
+block|,
+comment|/**    * The "CEIL" function    */
+name|CEIL
+block|,
 comment|/**    * The "TRIM" function.    */
 name|TRIM
 block|,
@@ -414,6 +420,10 @@ argument_list|,
 name|CAST
 argument_list|,
 name|TRIM
+argument_list|,
+name|FLOOR
+argument_list|,
+name|CEIL
 argument_list|,
 name|LITERAL_CHAIN
 argument_list|,

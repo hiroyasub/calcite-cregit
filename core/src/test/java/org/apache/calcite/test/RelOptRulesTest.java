@@ -3678,6 +3678,8 @@ argument_list|,
 name|schema
 argument_list|,
 name|t
+argument_list|,
+literal|false
 argument_list|)
 decl_stmt|;
 name|table

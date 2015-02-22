@@ -11,9 +11,7 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|sql
-operator|.
-name|validate
+name|schema
 package|;
 end_package
 
@@ -27,82 +25,33 @@ name|calcite
 operator|.
 name|rel
 operator|.
-name|type
+name|stream
 operator|.
-name|RelDataType
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|sql
-operator|.
-name|SqlAccessType
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|List
+name|Delta
 import|;
 end_import
 
 begin_comment
-comment|/**  * Supplies a {@link SqlValidator} with the metadata for a table.  *  * @see SqlValidatorCatalogReader  */
+comment|/**  * Table that can be converted to a stream.  *  * @see Delta  */
 end_comment
 
 begin_interface
 specifier|public
 interface|interface
-name|SqlValidatorTable
+name|StreamableTable
+extends|extends
+name|Table
 block|{
-comment|//~ Methods ----------------------------------------------------------------
-name|RelDataType
-name|getRowType
+comment|/** Returns an enumerator over the rows in this Table. Each row is represented    * as an array of its column values. */
+name|Table
+name|stream
 parameter_list|()
-function_decl|;
-name|List
-argument_list|<
-name|String
-argument_list|>
-name|getQualifiedName
-parameter_list|()
-function_decl|;
-comment|/**    * Returns whether a given column is monotonic.    */
-name|SqlMonotonicity
-name|getMonotonicity
-parameter_list|(
-name|String
-name|columnName
-parameter_list|)
-function_decl|;
-comment|/**    * Returns the access type of the table    */
-name|SqlAccessType
-name|getAllowedAccess
-parameter_list|()
-function_decl|;
-name|boolean
-name|supportsModality
-parameter_list|(
-name|SqlModality
-name|modality
-parameter_list|)
 function_decl|;
 block|}
 end_interface
 
 begin_comment
-comment|// End SqlValidatorTable.java
+comment|// End StreamableTable.java
 end_comment
 
 end_unit

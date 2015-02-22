@@ -510,6 +510,30 @@ literal|" INTEGER NOT NULL DEPTNO,"
 operator|+
 literal|" BOOLEAN NOT NULL SLACKER) NOT NULL"
 decl_stmt|;
+specifier|private
+specifier|static
+specifier|final
+name|String
+name|STR_AGG_REQUIRES_MONO
+init|=
+literal|"Streaming aggregation requires at least one monotonic expression in GROUP BY clause"
+decl_stmt|;
+specifier|private
+specifier|static
+specifier|final
+name|String
+name|STR_ORDER_REQUIRES_MONO
+init|=
+literal|"Streaming ORDER BY must start with monotonic expression"
+decl_stmt|;
+specifier|private
+specifier|static
+specifier|final
+name|String
+name|STR_SET_OP_INCONSISTENT
+init|=
+literal|"Set operator cannot combine streaming and non-streaming inputs"
+decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 specifier|public
 name|SqlValidatorTest
@@ -539,6 +563,40 @@ operator|.
 name|US
 argument_list|)
 expr_stmt|;
+block|}
+specifier|private
+specifier|static
+name|String
+name|cannotConvertToStream
+parameter_list|(
+name|String
+name|name
+parameter_list|)
+block|{
+return|return
+literal|"Cannot convert table '"
+operator|+
+name|name
+operator|+
+literal|"' to stream"
+return|;
+block|}
+specifier|private
+specifier|static
+name|String
+name|cannotConvertToRelation
+parameter_list|(
+name|String
+name|table
+parameter_list|)
+block|{
+return|return
+literal|"Cannot convert stream '"
+operator|+
+name|table
+operator|+
+literal|"' to relation"
+return|;
 block|}
 annotation|@
 name|Test
@@ -18798,6 +18856,499 @@ name|checkQuery
 argument_list|(
 literal|"select empNo from (select Empno from emP)"
 argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testStream
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select stream * from orders"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select stream * from ^emp^"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|cannotConvertToStream
+argument_list|(
+literal|"EMP"
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select * from ^orders^"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|cannotConvertToRelation
+argument_list|(
+literal|"ORDERS"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testStreamWhere
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select stream * from orders where productId< 10"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select stream * from ^emp^ where deptno = 10"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|cannotConvertToStream
+argument_list|(
+literal|"EMP"
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select stream * from ^emp^ as e where deptno = 10"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|cannotConvertToStream
+argument_list|(
+literal|"E"
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select stream * from (^select * from emp as e1^) as e\n"
+operator|+
+literal|"where deptno = 10"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Cannot convert table 'E' to stream"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select * from ^orders^ where productId> 10"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|cannotConvertToRelation
+argument_list|(
+literal|"ORDERS"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testStreamGroupBy
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select stream rowtime, productId, count(*) as c\n"
+operator|+
+literal|"from orders\n"
+operator|+
+literal|"group by productId, rowtime"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select stream floor(rowtime to hour) as rowtime, productId,\n"
+operator|+
+literal|" count(*) as c\n"
+operator|+
+literal|"from orders\n"
+operator|+
+literal|"group by floor(rowtime to hour), productId"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select stream productId, count(*) as c\n"
+operator|+
+literal|"from orders\n"
+operator|+
+literal|"^group by productId^"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|STR_AGG_REQUIRES_MONO
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select stream ^count(*)^ as c\n"
+operator|+
+literal|"from orders"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|STR_AGG_REQUIRES_MONO
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select stream count(*) as c\n"
+operator|+
+literal|"from orders ^group by ()^"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|STR_AGG_REQUIRES_MONO
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testStreamHaving
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select stream rowtime, productId, count(*) as c\n"
+operator|+
+literal|"from orders\n"
+operator|+
+literal|"group by productId, rowtime\n"
+operator|+
+literal|"having count(*)> 5"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select stream floor(rowtime to hour) as rowtime, productId,\n"
+operator|+
+literal|" count(*) as c\n"
+operator|+
+literal|"from orders\n"
+operator|+
+literal|"group by floor(rowtime to hour), productId\n"
+operator|+
+literal|"having false"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select stream productId, count(*) as c\n"
+operator|+
+literal|"from orders\n"
+operator|+
+literal|"^group by productId^\n"
+operator|+
+literal|"having count(*)> 5"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|STR_AGG_REQUIRES_MONO
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select stream 1\n"
+operator|+
+literal|"from orders\n"
+operator|+
+literal|"having ^count(*)> 3^"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|STR_AGG_REQUIRES_MONO
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testStreamUnionAll
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select orderId\n"
+operator|+
+literal|"from ^orders^\n"
+operator|+
+literal|"union all\n"
+operator|+
+literal|"select orderId\n"
+operator|+
+literal|"from shipments"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|cannotConvertToRelation
+argument_list|(
+literal|"ORDERS"
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select stream orderId\n"
+operator|+
+literal|"from orders\n"
+operator|+
+literal|"union all\n"
+operator|+
+literal|"^select orderId\n"
+operator|+
+literal|"from shipments^"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|STR_SET_OP_INCONSISTENT
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select empno\n"
+operator|+
+literal|"from emp\n"
+operator|+
+literal|"union all\n"
+operator|+
+literal|"^select stream orderId\n"
+operator|+
+literal|"from orders^"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|STR_SET_OP_INCONSISTENT
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select stream orderId\n"
+operator|+
+literal|"from orders\n"
+operator|+
+literal|"union all\n"
+operator|+
+literal|"select stream orderId\n"
+operator|+
+literal|"from shipments"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select stream rowtime, orderId\n"
+operator|+
+literal|"from orders\n"
+operator|+
+literal|"union all\n"
+operator|+
+literal|"select stream rowtime, orderId\n"
+operator|+
+literal|"from shipments\n"
+operator|+
+literal|"order by rowtime"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testStreamValues
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select stream * from (^values 1^) as e"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|cannotConvertToStream
+argument_list|(
+literal|"E"
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select stream orderId from orders\n"
+operator|+
+literal|"union all\n"
+operator|+
+literal|"^values 1^"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|STR_SET_OP_INCONSISTENT
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"values 1, 2\n"
+operator|+
+literal|"union all\n"
+operator|+
+literal|"^select stream orderId from orders^\n"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|STR_SET_OP_INCONSISTENT
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testStreamOrderBy
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select stream *\n"
+operator|+
+literal|"from orders\n"
+operator|+
+literal|"order by rowtime"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select stream *\n"
+operator|+
+literal|"from orders\n"
+operator|+
+literal|"order by floor(rowtime to hour)"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select stream floor(rowtime to minute), productId\n"
+operator|+
+literal|"from orders\n"
+operator|+
+literal|"order by floor(rowtime to hour)"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select stream floor(rowtime to minute), productId\n"
+operator|+
+literal|"from orders\n"
+operator|+
+literal|"order by floor(rowtime to minute), productId desc"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select stream *\n"
+operator|+
+literal|"from orders\n"
+operator|+
+literal|"order by ^productId^, rowtime"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|STR_ORDER_REQUIRES_MONO
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select stream *\n"
+operator|+
+literal|"from orders\n"
+operator|+
+literal|"order by ^rowtime desc^"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|STR_ORDER_REQUIRES_MONO
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select stream *\n"
+operator|+
+literal|"from orders\n"
+operator|+
+literal|"order by floor(rowtime to hour), rowtime desc"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 block|}
 annotation|@

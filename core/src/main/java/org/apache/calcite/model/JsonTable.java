@@ -45,11 +45,15 @@ end_import
 
 begin_import
 import|import
-name|java
+name|com
 operator|.
-name|util
+name|google
 operator|.
-name|ArrayList
+name|common
+operator|.
+name|collect
+operator|.
+name|Lists
 import|;
 end_import
 
@@ -143,12 +147,15 @@ name|JsonColumn
 argument_list|>
 name|columns
 init|=
-operator|new
-name|ArrayList
-argument_list|<
-name|JsonColumn
-argument_list|>
+name|Lists
+operator|.
+name|newArrayList
 argument_list|()
+decl_stmt|;
+comment|/** Information about whether the table can be streamed, and if so, whether    * the history of the table is also available. */
+specifier|public
+name|JsonStream
+name|stream
 decl_stmt|;
 specifier|public
 specifier|abstract

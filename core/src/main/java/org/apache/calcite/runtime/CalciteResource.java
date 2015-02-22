@@ -2608,6 +2608,84 @@ argument_list|>
 name|filterableTableScanReturnedNull
 parameter_list|()
 function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
+literal|"Cannot convert table ''{0}'' to stream"
+argument_list|)
+name|ExInst
+argument_list|<
+name|SqlValidatorException
+argument_list|>
+name|cannotConvertToStream
+parameter_list|(
+name|String
+name|tableName
+parameter_list|)
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
+literal|"Cannot convert stream ''{0}'' to relation"
+argument_list|)
+name|ExInst
+argument_list|<
+name|SqlValidatorException
+argument_list|>
+name|cannotConvertToRelation
+parameter_list|(
+name|String
+name|tableName
+parameter_list|)
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
+literal|"Streaming aggregation requires at least one monotonic expression in GROUP BY clause"
+argument_list|)
+name|ExInst
+argument_list|<
+name|SqlValidatorException
+argument_list|>
+name|streamMustGroupByMonotonic
+parameter_list|()
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
+literal|"Streaming ORDER BY must start with monotonic expression"
+argument_list|)
+name|ExInst
+argument_list|<
+name|SqlValidatorException
+argument_list|>
+name|streamMustOrderByMonotonic
+parameter_list|()
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
+literal|"Set operator cannot combine streaming and non-streaming inputs"
+argument_list|)
+name|ExInst
+argument_list|<
+name|SqlValidatorException
+argument_list|>
+name|streamSetOpInconsistentInputs
+parameter_list|()
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
+literal|"Cannot stream VALUES"
+argument_list|)
+name|ExInst
+argument_list|<
+name|SqlValidatorException
+argument_list|>
+name|cannotStreamValues
+parameter_list|()
+function_decl|;
 block|}
 end_interface
 

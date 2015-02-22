@@ -964,6 +964,20 @@ name|SqlNode
 name|node
 parameter_list|)
 function_decl|;
+comment|/**    * Validates that a query is capable of producing a return of given modality    * (relational or streaming).    *    * @param select Query    * @param modality Modality (streaming or relational)    * @param fail Whether to throw a user error if does not support required    *             modality    * @return whether query supports the given modality    */
+name|boolean
+name|validateModality
+parameter_list|(
+name|SqlSelect
+name|select
+parameter_list|,
+name|SqlModality
+name|modality
+parameter_list|,
+name|boolean
+name|fail
+parameter_list|)
+function_decl|;
 name|void
 name|validateWith
 parameter_list|(

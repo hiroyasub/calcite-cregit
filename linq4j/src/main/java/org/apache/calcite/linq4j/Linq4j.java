@@ -1093,7 +1093,10 @@ block|}
 block|}
 return|;
 block|}
-comment|/**    * Returns whether the arguments are equal to each other.    *    *<p>Equivalent to {@code Objects#equals} in JDK 1.7 and above.</p>    */
+comment|/**    * Returns whether the arguments are equal to each other.    *    *<p>Equivalent to {@link java.util.Objects#equals} in JDK 1.7 and above.    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 specifier|static
 parameter_list|<
@@ -1126,7 +1129,10 @@ name|t1
 argument_list|)
 return|;
 block|}
-comment|/**    * Throws {@link NullPointerException} if argument is null, otherwise    * returns argument.    *    *<p>Equivalent to {@code Objects#equireNonNull} in JDK 1.7 and above.</p>    */
+comment|/**    * Throws {@link NullPointerException} if argument is null, otherwise    * returns argument.    *    *<p>Equivalent to {@link java.util.Objects#requireNonNull} in JDK 1.7 and    * above.    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 specifier|static
 parameter_list|<

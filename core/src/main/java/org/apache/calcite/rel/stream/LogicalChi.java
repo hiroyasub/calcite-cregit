@@ -11,9 +11,9 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|sql
+name|rel
 operator|.
-name|validate
+name|stream
 package|;
 end_package
 
@@ -25,11 +25,9 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|rel
+name|plan
 operator|.
-name|type
-operator|.
-name|RelDataType
+name|RelOptCluster
 import|;
 end_import
 
@@ -41,68 +39,66 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|sql
+name|plan
 operator|.
-name|SqlAccessType
+name|RelTraitSet
 import|;
 end_import
 
 begin_import
 import|import
-name|java
+name|org
 operator|.
-name|util
+name|apache
 operator|.
-name|List
+name|calcite
+operator|.
+name|rel
+operator|.
+name|RelNode
 import|;
 end_import
 
 begin_comment
-comment|/**  * Supplies a {@link SqlValidator} with the metadata for a table.  *  * @see SqlValidatorCatalogReader  */
+comment|/**  * Sub-class of {@link Chi}  * not targeted at any particular engine or calling convention.  */
 end_comment
 
-begin_interface
+begin_class
 specifier|public
-interface|interface
-name|SqlValidatorTable
+specifier|final
+class|class
+name|LogicalChi
+extends|extends
+name|Chi
 block|{
-comment|//~ Methods ----------------------------------------------------------------
-name|RelDataType
-name|getRowType
-parameter_list|()
-function_decl|;
-name|List
-argument_list|<
-name|String
-argument_list|>
-name|getQualifiedName
-parameter_list|()
-function_decl|;
-comment|/**    * Returns whether a given column is monotonic.    */
-name|SqlMonotonicity
-name|getMonotonicity
+specifier|public
+name|LogicalChi
 parameter_list|(
-name|String
-name|columnName
+name|RelOptCluster
+name|cluster
+parameter_list|,
+name|RelTraitSet
+name|traits
+parameter_list|,
+name|RelNode
+name|input
 parameter_list|)
-function_decl|;
-comment|/**    * Returns the access type of the table    */
-name|SqlAccessType
-name|getAllowedAccess
-parameter_list|()
-function_decl|;
-name|boolean
-name|supportsModality
-parameter_list|(
-name|SqlModality
-name|modality
-parameter_list|)
-function_decl|;
+block|{
+name|super
+argument_list|(
+name|cluster
+argument_list|,
+name|traits
+argument_list|,
+name|input
+argument_list|)
+expr_stmt|;
 block|}
-end_interface
+block|}
+end_class
 
 begin_comment
-comment|// End SqlValidatorTable.java
+comment|// End LogicalChi.java
 end_comment
 
 end_unit

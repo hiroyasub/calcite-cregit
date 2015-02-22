@@ -428,7 +428,11 @@ literal|"TABLE(CATALOG.SALES.DEPT)"
 argument_list|,
 literal|"TABLE(CATALOG.SALES.BONUS)"
 argument_list|,
+literal|"TABLE(CATALOG.SALES.ORDERS)"
+argument_list|,
 literal|"TABLE(CATALOG.SALES.SALGRADE)"
+argument_list|,
+literal|"TABLE(CATALOG.SALES.SHIPMENTS)"
 argument_list|)
 decl_stmt|;
 specifier|private
@@ -707,6 +711,8 @@ argument_list|(
 literal|"KEYWORD(ALL)"
 argument_list|,
 literal|"KEYWORD(DISTINCT)"
+argument_list|,
+literal|"KEYWORD(STREAM)"
 argument_list|,
 literal|"KEYWORD(*)"
 argument_list|)

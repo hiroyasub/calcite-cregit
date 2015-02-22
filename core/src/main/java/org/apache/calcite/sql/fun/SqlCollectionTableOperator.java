@@ -77,6 +77,22 @@ name|ReturnTypes
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|validate
+operator|.
+name|SqlModality
+import|;
+end_import
+
 begin_comment
 comment|/**  * SqlCollectionTableOperator is the "table function derived table" operator. It  * converts a table-valued function into a relation, e.g. "<code>SELECT * FROM  * TABLE(ramp(5))</code>".  *  *<p>This operator has function syntax (with one argument), whereas  * {@link SqlStdOperatorTable#EXPLICIT_TABLE} is a prefix operator.  */
 end_comment
@@ -88,27 +104,9 @@ name|SqlCollectionTableOperator
 extends|extends
 name|SqlFunctionalOperator
 block|{
-comment|//~ Static fields/initializers ---------------------------------------------
-specifier|public
-specifier|static
-specifier|final
-name|int
-name|MODALITY_RELATIONAL
-init|=
-literal|1
-decl_stmt|;
-specifier|public
-specifier|static
-specifier|final
-name|int
-name|MODALITY_STREAM
-init|=
-literal|2
-decl_stmt|;
-comment|//~ Instance fields --------------------------------------------------------
 specifier|private
 specifier|final
-name|int
+name|SqlModality
 name|modality
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
@@ -118,7 +116,7 @@ parameter_list|(
 name|String
 name|name
 parameter_list|,
-name|int
+name|SqlModality
 name|modality
 parameter_list|)
 block|{
@@ -154,7 +152,7 @@ expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
 specifier|public
-name|int
+name|SqlModality
 name|getModality
 parameter_list|()
 block|{

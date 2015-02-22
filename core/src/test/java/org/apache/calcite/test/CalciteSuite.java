@@ -672,6 +672,10 @@ name|CalciteRemoteDriverTest
 operator|.
 name|class
 block|,
+name|StreamTest
+operator|.
+name|class
+block|,
 comment|// test cases
 name|TableInRootSchemaTest
 operator|.

@@ -19,15 +19,11 @@ end_package
 
 begin_import
 import|import
-name|org
+name|java
 operator|.
-name|apache
+name|util
 operator|.
-name|calcite
-operator|.
-name|linq4j
-operator|.
-name|Linq4j
+name|List
 import|;
 end_import
 
@@ -37,7 +33,7 @@ name|java
 operator|.
 name|util
 operator|.
-name|List
+name|Objects
 import|;
 end_import
 
@@ -1030,7 +1026,7 @@ operator|.
 name|arguments
 argument_list|)
 operator|&&
-name|Linq4j
+name|Objects
 operator|.
 name|equals
 argument_list|(
@@ -1302,7 +1298,7 @@ name|memberDeclarations
 parameter_list|)
 block|{
 return|return
-name|Linq4j
+name|Objects
 operator|.
 name|equals
 argument_list|(

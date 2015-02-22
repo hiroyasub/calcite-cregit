@@ -209,6 +209,14 @@ name|SqlValidatorNamespace
 name|resolve
 parameter_list|()
 function_decl|;
+comment|/** Returns whether this namespace is capable of giving results of the desired    * modality. {@code true} means streaming, {@code false} means relational.    *    * @param modality Modality    */
+name|boolean
+name|supportsModality
+parameter_list|(
+name|SqlModality
+name|modality
+parameter_list|)
+function_decl|;
 block|}
 end_interface
 

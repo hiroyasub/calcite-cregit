@@ -19,20 +19,6 @@ end_package
 
 begin_import
 import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|linq4j
-operator|.
-name|Linq4j
-import|;
-end_import
-
-begin_import
-import|import
 name|java
 operator|.
 name|io
@@ -140,6 +126,16 @@ operator|.
 name|util
 operator|.
 name|Map
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
 import|;
 end_import
 
@@ -2211,7 +2207,7 @@ name|v2
 parameter_list|)
 block|{
 return|return
-name|Linq4j
+name|Objects
 operator|.
 name|equals
 argument_list|(
@@ -2312,7 +2308,7 @@ name|v2
 operator|!=
 literal|null
 operator|&&
-name|Linq4j
+name|Objects
 operator|.
 name|equals
 argument_list|(

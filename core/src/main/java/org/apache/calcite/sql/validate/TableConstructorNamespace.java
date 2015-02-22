@@ -265,6 +265,24 @@ return|return
 name|scope
 return|;
 block|}
+annotation|@
+name|Override
+specifier|public
+name|boolean
+name|supportsModality
+parameter_list|(
+name|SqlModality
+name|modality
+parameter_list|)
+block|{
+return|return
+name|modality
+operator|==
+name|SqlModality
+operator|.
+name|RELATION
+return|;
+block|}
 block|}
 end_class
 

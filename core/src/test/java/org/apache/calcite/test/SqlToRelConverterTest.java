@@ -2680,6 +2680,72 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testStream
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select stream productId from orders where productId = 10"
+argument_list|)
+operator|.
+name|convertsTo
+argument_list|(
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testStreamGroupBy
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select stream floor(rowtime to second) as rowtime, count(*) as c\n"
+operator|+
+literal|"from orders\n"
+operator|+
+literal|"group by floor(rowtime to second)"
+argument_list|)
+operator|.
+name|convertsTo
+argument_list|(
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testStreamWindowedAggregation
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select stream *,\n"
+operator|+
+literal|"  count(*) over (partition by productId\n"
+operator|+
+literal|"    order by rowtime\n"
+operator|+
+literal|"    range interval '1' second preceding) as c\n"
+operator|+
+literal|"from orders"
+argument_list|)
+operator|.
+name|convertsTo
+argument_list|(
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testExplainAsXml
 parameter_list|()
 block|{

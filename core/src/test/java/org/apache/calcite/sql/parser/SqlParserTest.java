@@ -1386,6 +1386,70 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testFloor
+parameter_list|()
+block|{
+name|checkExp
+argument_list|(
+literal|"floor(1.5)"
+argument_list|,
+literal|"FLOOR(1.5)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"floor(x)"
+argument_list|,
+literal|"FLOOR(`X`)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"floor(x to hour)"
+argument_list|,
+literal|"FLOOR(`X` TO HOUR)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"ceil(x to hour)"
+argument_list|,
+literal|"CEIL(`X` TO HOUR)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"ceil(x + interval '1' minute to second)"
+argument_list|,
+literal|"CEIL((`X` + INTERVAL '1' MINUTE TO SECOND))"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"ceil((x + interval '1' minute) to second)"
+argument_list|,
+literal|"CEIL((`X` + INTERVAL '1' MINUTE) TO SECOND)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"ceil(x + (interval '1:23' minute to second))"
+argument_list|,
+literal|"CEIL((`X` + INTERVAL '1:23' MINUTE TO SECOND))"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"ceil(x + interval '1:23' minute to second to second)"
+argument_list|,
+literal|"CEIL((`X` + INTERVAL '1:23' MINUTE TO SECOND) TO SECOND)"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testCast
 parameter_list|()
 block|{
@@ -4983,6 +5047,46 @@ operator|+
 literal|"FROM (SELECT ALL `FOO`\n"
 operator|+
 literal|"FROM `BAR`) AS `XYZ`"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSelectStream
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select stream foo from bar"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"SELECT STREAM `FOO`\n"
+operator|+
+literal|"FROM `BAR`"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSelectStreamDistinct
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select stream distinct foo from bar"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"SELECT STREAM DISTINCT `FOO`\n"
+operator|+
+literal|"FROM `BAR`"
 argument_list|)
 expr_stmt|;
 block|}

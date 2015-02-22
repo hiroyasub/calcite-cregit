@@ -11,9 +11,9 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|sql
+name|rel
 operator|.
-name|fun
+name|stream
 package|;
 end_package
 
@@ -25,9 +25,9 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|sql
+name|plan
 operator|.
-name|SqlCall
+name|RelOptCluster
 import|;
 end_import
 
@@ -39,9 +39,9 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|sql
+name|plan
 operator|.
-name|SqlFunction
+name|RelTraitSet
 import|;
 end_import
 
@@ -53,9 +53,9 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|sql
+name|rel
 operator|.
-name|SqlFunctionCategory
+name|RelInput
 import|;
 end_import
 
@@ -67,9 +67,9 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|sql
+name|rel
 operator|.
-name|SqlKind
+name|RelNode
 import|;
 end_import
 
@@ -81,11 +81,9 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|sql
+name|rel
 operator|.
-name|type
-operator|.
-name|OperandTypes
+name|SingleRel
 import|;
 end_import
 
@@ -97,117 +95,81 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|sql
+name|rel
 operator|.
-name|type
+name|core
 operator|.
-name|ReturnTypes
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|sql
-operator|.
-name|validate
-operator|.
-name|SqlMonotonicity
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|sql
-operator|.
-name|validate
-operator|.
-name|SqlValidatorScope
+name|TableScan
 import|;
 end_import
 
 begin_comment
-comment|/**  * Support for the CEIL/CEILING builtin function.  */
+comment|/**  * Relational operator that converts a relation to a stream.  *  *<p>For example, if {@code Orders} is a table, and {@link TableScan}(Orders)  * is a relational operator that returns the current contents of the table,  * then {@link Delta}(TableScan(Orders)) is a relational operator that returns  * all inserts into the table.  *  *<p>If unrestricted, Delta returns all previous inserts into the table (from  * time -&infin; to now) and all future inserts into the table (from now  * to +&infin;) and never terminates.  */
 end_comment
 
 begin_class
 specifier|public
+specifier|abstract
 class|class
-name|SqlCeilFunction
+name|Delta
 extends|extends
-name|SqlFunction
+name|SingleRel
 block|{
-comment|//~ Constructors -----------------------------------------------------------
-specifier|public
-name|SqlCeilFunction
-parameter_list|()
+specifier|protected
+name|Delta
+parameter_list|(
+name|RelOptCluster
+name|cluster
+parameter_list|,
+name|RelTraitSet
+name|traits
+parameter_list|,
+name|RelNode
+name|input
+parameter_list|)
 block|{
 name|super
 argument_list|(
-literal|"CEIL"
+name|cluster
 argument_list|,
-name|SqlKind
-operator|.
-name|OTHER_FUNCTION
+name|traits
 argument_list|,
-name|ReturnTypes
-operator|.
-name|ARG0
-argument_list|,
-literal|null
-argument_list|,
-name|OperandTypes
-operator|.
-name|NUMERIC
-argument_list|,
-name|SqlFunctionCategory
-operator|.
-name|NUMERIC
+name|input
 argument_list|)
 expr_stmt|;
 block|}
-comment|//~ Methods ----------------------------------------------------------------
-specifier|public
-name|SqlMonotonicity
-name|getMonotonicity
+comment|/** Creates a Delta by parsing serialized output. */
+specifier|protected
+name|Delta
 parameter_list|(
-name|SqlCall
-name|call
-parameter_list|,
-name|SqlValidatorScope
-name|scope
+name|RelInput
+name|input
 parameter_list|)
 block|{
-return|return
-name|scope
-operator|.
-name|getMonotonicity
+name|this
 argument_list|(
-name|call
+name|input
 operator|.
-name|operand
-argument_list|(
-literal|0
+name|getCluster
+argument_list|()
+argument_list|,
+name|input
+operator|.
+name|getTraitSet
+argument_list|()
+argument_list|,
+name|input
+operator|.
+name|getInput
+argument_list|()
 argument_list|)
-argument_list|)
-return|;
+expr_stmt|;
 block|}
 block|}
 end_class
 
 begin_comment
-comment|// End SqlCeilFunction.java
+comment|// End Delta.java
 end_comment
 
 end_unit
