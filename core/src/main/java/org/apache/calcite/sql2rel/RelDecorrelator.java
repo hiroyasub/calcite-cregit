@@ -1162,7 +1162,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * RelDecorrelator replaces all correlated expressions (corExp) in a relational  * expression (RelNode) tree with non-correlated expressions that are produced  * from joining the RelNode that produces the corExp with the RelNode that  * references it.  *  *<p>TODO:</p>  *<ul>  *<li>replace {@code CorelMap} constructor parameter with a RelNode  *<li>make {@link #currentRel} immutable (would require a fresh  *      RelDecorrelator for each node being decorrelated)</li>  *<li>make fields of {@link CorelMap} immutable</li>  *<li>make sub-class rules static, and have them create their own  *   de-correlator</li>  *</ul>  */
+comment|/**  * RelDecorrelator replaces all correlated expressions (corExp) in a relational  * expression (RelNode) tree with non-correlated expressions that are produced  * from joining the RelNode that produces the corExp with the RelNode that  * references it.  *  *<p>TODO:</p>  *<ul>  *<li>replace {@code CorelMap} constructor parameter with a RelNode  *<li>make {@link #currentRel} immutable (would require a fresh  *      RelDecorrelator for each node being decorrelated)</li>  *<li>make fields of {@code CorelMap} immutable</li>  *<li>make sub-class rules static, and have them create their own  *   de-correlator</li>  *</ul>  */
 end_comment
 
 begin_class

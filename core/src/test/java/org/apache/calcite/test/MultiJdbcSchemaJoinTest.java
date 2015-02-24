@@ -508,7 +508,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Makes sure that {@link #test} is re-entrant.    * Effectively a test for {@link TempDb}. */
+comment|/** Makes sure that {@link #test} is re-entrant.    * Effectively a test for {@code TempDb}. */
 annotation|@
 name|Test
 specifier|public

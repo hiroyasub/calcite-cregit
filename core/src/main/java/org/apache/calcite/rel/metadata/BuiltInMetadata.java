@@ -149,6 +149,16 @@ name|java
 operator|.
 name|util
 operator|.
+name|List
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
 name|Set
 import|;
 end_import
@@ -307,6 +317,27 @@ name|groupKey
 parameter_list|)
 function_decl|;
 block|}
+comment|/** Metadata about the size of rows and columns. */
+specifier|public
+interface|interface
+name|Size
+extends|extends
+name|Metadata
+block|{
+comment|/**      * Determines the average size (in bytes) of a row from this relational      * expression.      *      * @return average size of a row, in bytes, or null if not known      */
+name|Double
+name|averageRowSize
+parameter_list|()
+function_decl|;
+comment|/**      * Determines the average size (in bytes) of a value of a column in this      * relational expression.      *      *<p>Null values are included (presumably they occupy close to 0 bytes).      *      *<p>It is left to the caller to decide whether the size is the compressed      * size, the uncompressed size, or memory allocation when the value is      * wrapped in an object in the Java heap. The uncompressed size is probably      * a good compromise.      *      * @return an immutable list containing, for each column, the average size      * of a column value, in bytes. Each value or the entire list may be null if      * the metadata is not available      */
+name|List
+argument_list|<
+name|Double
+argument_list|>
+name|averageColumnSizes
+parameter_list|()
+function_decl|;
+block|}
 comment|/** Metadata about the origins of columns. */
 specifier|public
 interface|interface
@@ -381,6 +412,47 @@ name|getPredicates
 parameter_list|()
 function_decl|;
 block|}
+comment|/** Metadata about the degree of parallelism of a relational expression, and    * how its operators are assigned to processes with independent resource    * pools. */
+specifier|public
+interface|interface
+name|Parallelism
+extends|extends
+name|Metadata
+block|{
+comment|/** Returns whether each physical operator implementing this relational      * expression belongs to a different process than its inputs.      *      *<p>A collection of operators processing all of the splits of a particular      * stage in the query pipeline is called a "phase". A phase starts with      * a leaf node such as a {@link org.apache.calcite.rel.core.TableScan},      * or with a phase-change node such as an      * {@link org.apache.calcite.rel.core.Exchange}. Hadoop's shuffle operator      * (a form of sort-exchange) causes data to be sent across the network. */
+name|Boolean
+name|isPhaseTransition
+parameter_list|()
+function_decl|;
+comment|/** Returns the number of distinct splits of the data.      *      *<p>Note that splits must be distinct. For broadcast, where each copy is      * the same, returns 1.      *      *<p>Thus the split count is the<em>proportion</em> of the data seen by      * each operator instance.      */
+name|Integer
+name|splitCount
+parameter_list|()
+function_decl|;
+block|}
+comment|/** Metadata about the memory use of an operator. */
+specifier|public
+interface|interface
+name|Memory
+extends|extends
+name|Metadata
+block|{
+comment|/** Returns the expected amount of memory, in bytes, required by a physical      * operator implementing this relational expression, across all splits.      *      *<p>How much memory is used depends very much on the algorithm; for      * example, an implementation of      * {@link org.apache.calcite.rel.core.Aggregate} that loads all data into a      * hash table requires approximately {@code rowCount * averageRowSize}      * bytes, whereas an implementation that assumes that the input is sorted      * requires only {@code averageRowSize} bytes to maintain a single      * accumulator for each aggregate function.      */
+name|Double
+name|memory
+parameter_list|()
+function_decl|;
+comment|/** Returns the cumulative amount of memory, in bytes, required by the      * physical operator implementing this relational expression, and all other      * operators within the same phase, across all splits.      *      * @see org.apache.calcite.rel.metadata.BuiltInMetadata.Parallelism#splitCount()      */
+name|Double
+name|cumulativeMemoryWithinPhase
+parameter_list|()
+function_decl|;
+comment|/** Returns the expected cumulative amount of memory, in bytes, required by      * the physical operator implementing this relational expression, and all      * operators within the same phase, within each split.      *      *<p>Basic formula:      *      *<blockquote>cumulativeMemoryWithinPhaseSplit      *     = cumulativeMemoryWithinPhase / Parallelism.splitCount</blockquote>      */
+name|Double
+name|cumulativeMemoryWithinPhaseSplit
+parameter_list|()
+function_decl|;
+block|}
 comment|/** The built-in forms of metadata. */
 interface|interface
 name|All
@@ -404,6 +476,12 @@ extends|,
 name|Collation
 extends|,
 name|Distribution
+extends|,
+name|Size
+extends|,
+name|Parallelism
+extends|,
+name|Memory
 block|{   }
 block|}
 end_class
