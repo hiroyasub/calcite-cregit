@@ -474,7 +474,7 @@ operator|.
 name|SIZE
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-specifier|private
+specifier|protected
 name|RelMdSize
 parameter_list|()
 block|{

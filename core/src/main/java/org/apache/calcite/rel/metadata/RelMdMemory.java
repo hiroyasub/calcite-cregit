@@ -89,7 +89,7 @@ name|method
 argument_list|)
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-specifier|private
+specifier|protected
 name|RelMdMemory
 parameter_list|()
 block|{

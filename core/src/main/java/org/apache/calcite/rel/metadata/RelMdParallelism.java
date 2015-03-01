@@ -131,7 +131,7 @@ name|method
 argument_list|)
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-specifier|private
+specifier|protected
 name|RelMdParallelism
 parameter_list|()
 block|{
