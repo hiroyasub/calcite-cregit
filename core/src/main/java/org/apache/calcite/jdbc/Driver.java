@@ -569,7 +569,7 @@ comment|/** Creates an internal connection. */
 name|CalciteConnection
 name|connect
 parameter_list|(
-name|CalciteRootSchema
+name|CalciteSchema
 name|rootSchema
 parameter_list|,
 name|JavaTypeFactory

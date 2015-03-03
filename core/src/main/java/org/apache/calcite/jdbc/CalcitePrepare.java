@@ -681,7 +681,7 @@ name|JavaTypeFactory
 name|getTypeFactory
 parameter_list|()
 function_decl|;
-name|CalciteRootSchema
+name|CalciteSchema
 name|getRootSchema
 parameter_list|()
 function_decl|;

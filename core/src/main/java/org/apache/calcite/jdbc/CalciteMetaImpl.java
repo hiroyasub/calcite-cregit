@@ -4031,7 +4031,7 @@ specifier|static
 name|CalciteConnection
 name|connect
 parameter_list|(
-name|CalciteRootSchema
+name|CalciteSchema
 name|schema
 parameter_list|,
 name|JavaTypeFactory

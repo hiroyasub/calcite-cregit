@@ -818,7 +818,7 @@ name|JavaTypeFactory
 name|typeFactory
 decl_stmt|;
 specifier|final
-name|CalciteRootSchema
+name|CalciteSchema
 name|rootSchema
 decl_stmt|;
 specifier|final
@@ -861,7 +861,7 @@ parameter_list|,
 name|Properties
 name|info
 parameter_list|,
-name|CalciteRootSchema
+name|CalciteSchema
 name|rootSchema
 parameter_list|,
 name|JavaTypeFactory
@@ -944,6 +944,10 @@ name|this
 operator|.
 name|rootSchema
 operator|=
+name|Preconditions
+operator|.
+name|checkNotNull
+argument_list|(
 name|rootSchema
 operator|!=
 literal|null
@@ -955,6 +959,21 @@ operator|.
 name|createRootSchema
 argument_list|(
 literal|true
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|Preconditions
+operator|.
+name|checkArgument
+argument_list|(
+name|this
+operator|.
+name|rootSchema
+operator|.
+name|isRoot
+argument_list|()
+argument_list|,
+literal|"must be root schema"
 argument_list|)
 expr_stmt|;
 name|this
@@ -2604,7 +2623,7 @@ name|typeFactory
 return|;
 block|}
 specifier|public
-name|CalciteRootSchema
+name|CalciteSchema
 name|getRootSchema
 parameter_list|()
 block|{

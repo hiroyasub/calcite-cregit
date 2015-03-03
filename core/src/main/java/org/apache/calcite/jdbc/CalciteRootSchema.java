@@ -34,11 +34,14 @@ comment|/**  * Root schema.  */
 end_comment
 
 begin_class
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 class|class
 name|CalciteRootSchema
 extends|extends
-name|CalciteSchema
+name|CachingCalciteSchema
 block|{
 comment|/** Creates a root schema. */
 name|CalciteRootSchema

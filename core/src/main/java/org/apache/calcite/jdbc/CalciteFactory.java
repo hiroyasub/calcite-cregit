@@ -200,7 +200,7 @@ parameter_list|,
 name|Properties
 name|info
 parameter_list|,
-name|CalciteRootSchema
+name|CalciteSchema
 name|rootSchema
 parameter_list|,
 name|JavaTypeFactory
