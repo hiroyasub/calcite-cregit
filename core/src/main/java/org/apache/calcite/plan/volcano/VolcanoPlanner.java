@@ -3528,8 +3528,12 @@ name|equals
 argument_list|(
 name|toTraits
 argument_list|)
-operator|:
-literal|"pre: !rel.getTraits().equals(toTraits)"
+assert|;
+assert|assert
+name|toTraits
+operator|.
+name|allSimple
+argument_list|()
 assert|;
 name|RelSubset
 name|rel2
@@ -3571,6 +3575,9 @@ name|getCluster
 argument_list|()
 argument_list|,
 name|toTraits
+operator|.
+name|simplify
+argument_list|()
 argument_list|)
 return|;
 block|}
