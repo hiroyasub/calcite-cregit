@@ -1005,14 +1005,6 @@ block|{
 comment|// If the expression is a IS [NOT] NULL on a non-nullable
 comment|// column, then we can either remove the filter or replace
 comment|// it with an Empty.
-name|SqlOperator
-name|op
-init|=
-name|rexCall
-operator|.
-name|getOperator
-argument_list|()
-decl_stmt|;
 name|boolean
 name|alwaysTrue
 decl_stmt|;
@@ -2249,6 +2241,24 @@ operator|.
 name|getExecutor
 argument_list|()
 decl_stmt|;
+if|if
+condition|(
+name|executor
+operator|==
+literal|null
+condition|)
+block|{
+comment|// Cannot reduce expressions: caller has not set an executor in their
+comment|// environment. Caller should execute something like the following before
+comment|// invoking the planner:
+comment|//
+comment|// final RexExecutorImpl executor =
+comment|//   new RexExecutorImpl(Schemas.createDataContext(null));
+comment|// rootRel.getCluster().getPlanner().setExecutor(executor);
+return|return
+literal|false
+return|;
+block|}
 specifier|final
 name|List
 argument_list|<

@@ -3101,6 +3101,61 @@ literal|"select * from (values (1,2)) where 1 + 2> 3 + CAST(NULL AS INTEGER)"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-566">[CALCITE-566],    * ReduceExpressionsRule requires planner to have an Executor</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testReduceConstantsRequiresExecutor
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+name|HepProgram
+name|program
+init|=
+operator|new
+name|HepProgramBuilder
+argument_list|()
+operator|.
+name|addRuleInstance
+argument_list|(
+name|ReduceExpressionsRule
+operator|.
+name|FILTER_INSTANCE
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+comment|// Remove the executor
+name|tester
+operator|.
+name|convertSqlToRel
+argument_list|(
+literal|"values 1"
+argument_list|)
+operator|.
+name|getCluster
+argument_list|()
+operator|.
+name|getPlanner
+argument_list|()
+operator|.
+name|setExecutor
+argument_list|(
+literal|null
+argument_list|)
+expr_stmt|;
+comment|// Rule should not fire, but there should be no NPE
+name|checkPlanning
+argument_list|(
+name|program
+argument_list|,
+literal|"select * from (values (1,2)) where 1 + 2> 3 + CAST(NULL AS INTEGER)"
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public
