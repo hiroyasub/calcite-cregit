@@ -1864,10 +1864,17 @@ name|get
 argument_list|(
 name|bit
 operator|-
+operator|(
 name|aggRel
 operator|.
 name|getGroupCount
 argument_list|()
+operator|+
+name|aggRel
+operator|.
+name|getIndicatorCount
+argument_list|()
+operator|)
 argument_list|)
 decl_stmt|;
 for|for
