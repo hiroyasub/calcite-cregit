@@ -89,18 +89,6 @@ end_import
 
 begin_import
 import|import
-name|mondrian
-operator|.
-name|test
-operator|.
-name|data
-operator|.
-name|FoodMartQuery
-import|;
-end_import
-
-begin_import
-import|import
 name|org
 operator|.
 name|junit
@@ -1735,7 +1723,15 @@ name|InputStream
 name|inputStream
 init|=
 operator|new
-name|FoodMartQuery
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|foodmart
+operator|.
+name|queries
+operator|.
+name|FoodmartQuerySet
 argument_list|()
 operator|.
 name|getQueries

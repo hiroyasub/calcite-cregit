@@ -459,6 +459,22 @@ end_import
 
 begin_import
 import|import
+name|net
+operator|.
+name|hydromatic
+operator|.
+name|foodmart
+operator|.
+name|data
+operator|.
+name|hsqldb
+operator|.
+name|FoodmartHsqldb
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|io
@@ -7147,7 +7163,9 @@ name|ConnectionSpec
 block|{
 name|HSQLDB
 argument_list|(
-literal|"jdbc:hsqldb:res:foodmart"
+name|FoodmartHsqldb
+operator|.
+name|URI
 argument_list|,
 literal|"FOODMART"
 argument_list|,
