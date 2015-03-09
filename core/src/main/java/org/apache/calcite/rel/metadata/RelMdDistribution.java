@@ -691,7 +691,7 @@ name|mapping
 init|=
 name|Project
 operator|.
-name|getMapping
+name|getPartialMapping
 argument_list|(
 name|input
 operator|.
