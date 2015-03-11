@@ -1433,6 +1433,19 @@ argument_list|(
 name|signature
 argument_list|)
 decl_stmt|;
+comment|// user may have cancelled the query
+if|if
+condition|(
+name|resultSet
+operator|.
+name|isClosed
+argument_list|()
+condition|)
+block|{
+return|return
+literal|false
+return|;
+block|}
 return|return
 literal|true
 return|;
