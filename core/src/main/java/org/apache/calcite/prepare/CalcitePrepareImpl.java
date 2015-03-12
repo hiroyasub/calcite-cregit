@@ -2319,7 +2319,7 @@ name|externalContext
 operator|=
 name|Contexts
 operator|.
-name|withConfig
+name|of
 argument_list|(
 name|prepareContext
 operator|.
