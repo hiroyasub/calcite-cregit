@@ -332,11 +332,10 @@ parameter_list|,
 name|TimeZone
 name|timeZone
 parameter_list|,
-name|Iterable
-argument_list|<
-name|Object
-argument_list|>
-name|iterable
+name|Meta
+operator|.
+name|Frame
+name|firstFrame
 parameter_list|)
 block|{
 specifier|final
@@ -362,7 +361,7 @@ name|metaData
 argument_list|,
 name|timeZone
 argument_list|,
-name|iterable
+name|firstFrame
 argument_list|)
 return|;
 block|}

@@ -163,7 +163,7 @@ block|{
 return|return
 name|elementType
 operator|.
-name|typeName
+name|name
 return|;
 block|}
 specifier|public
@@ -176,7 +176,7 @@ block|{
 return|return
 name|elementType
 operator|.
-name|type
+name|id
 return|;
 block|}
 specifier|public
@@ -218,7 +218,7 @@ switch|switch
 condition|(
 name|elementType
 operator|.
-name|representation
+name|rep
 condition|)
 block|{
 case|case
@@ -582,7 +582,7 @@ switch|switch
 condition|(
 name|elementType
 operator|.
-name|type
+name|id
 condition|)
 block|{
 case|case

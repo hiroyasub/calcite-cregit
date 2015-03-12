@@ -417,7 +417,7 @@ argument_list|)
 operator|.
 name|type
 operator|.
-name|type
+name|id
 return|;
 block|}
 specifier|public
@@ -438,7 +438,7 @@ argument_list|)
 operator|.
 name|type
 operator|.
-name|typeName
+name|name
 return|;
 block|}
 specifier|public

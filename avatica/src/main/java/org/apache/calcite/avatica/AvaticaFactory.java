@@ -143,7 +143,7 @@ parameter_list|)
 throws|throws
 name|SQLException
 function_decl|;
-comment|/**    * Creates a result set. You will then need to call    * {@link AvaticaResultSet#execute()} on it.    *    *<p>If {@code signature} implements    * {@link org.apache.calcite.avatica.MetaImpl.WithIterable} we do not need    * to execute; we can use pre-canned data. This mechanism is used for    * metadata requests such as {@code getTables}.    *    * @param statement Statement    * @param signature Prepared statement    * @param timeZone Time zone    * @param iterable Iterable over rows in result, or null if an execute/fetch    *                 is required    * @return Result set    */
+comment|/**    * Creates a result set. You will then need to call    * {@link AvaticaResultSet#execute()} on it.    *    * @param statement Statement    * @param signature Prepared statement    * @param timeZone Time zone    * @param firstFrame Frame containing the first (or perhaps only) rows in the    *                   result, or null if an execute/fetch is required    * @return Result set    */
 name|AvaticaResultSet
 name|newResultSet
 parameter_list|(
@@ -158,11 +158,10 @@ parameter_list|,
 name|TimeZone
 name|timeZone
 parameter_list|,
-name|Iterable
-argument_list|<
-name|Object
-argument_list|>
-name|iterable
+name|Meta
+operator|.
+name|Frame
+name|firstFrame
 parameter_list|)
 throws|throws
 name|SQLException

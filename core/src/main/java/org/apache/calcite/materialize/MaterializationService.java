@@ -947,7 +947,7 @@ name|column
 operator|.
 name|type
 operator|.
-name|representation
+name|rep
 return|;
 block|}
 block|}

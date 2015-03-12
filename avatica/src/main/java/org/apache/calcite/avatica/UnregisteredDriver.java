@@ -140,7 +140,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Implementation of JDBC driver that does not register itself.  *  *<p>You can easily create a "vanity driver" that recognizes its own  * URL prefix as a sub-class of this class. Per the JDBC specification it  * must register itself when the class is loaded.</p>  *  *<p>Derived classes must implement {@link #createDriverVersion()} and  * {@link #getConnectStringPrefix()}, and may override  * {@link #createFactory()}.</p>  *  *<p>The provider must implement:</p>  *<ul>  *<li>{@link Meta#prepare(org.apache.calcite.avatica.Meta.StatementHandle, String, int)}  *<li>{@link Meta#createIterable(org.apache.calcite.avatica.Meta.StatementHandle, org.apache.calcite.avatica.Meta.Signature, Iterable)}  *</ul>  */
+comment|/**  * Implementation of JDBC driver that does not register itself.  *  *<p>You can easily create a "vanity driver" that recognizes its own  * URL prefix as a sub-class of this class. Per the JDBC specification it  * must register itself when the class is loaded.</p>  *  *<p>Derived classes must implement {@link #createDriverVersion()} and  * {@link #getConnectStringPrefix()}, and may override  * {@link #createFactory()}.</p>  *  *<p>The provider must implement:</p>  *<ul>  *<li>{@link Meta#prepare(org.apache.calcite.avatica.Meta.StatementHandle, String, int)}  *<li>{@link Meta#createIterable(org.apache.calcite.avatica.Meta.StatementHandle, org.apache.calcite.avatica.Meta.Signature, java.util.List, Meta.Frame)}  *</ul>  */
 end_comment
 
 begin_class

@@ -35,6 +35,26 @@ begin_import
 import|import
 name|java
 operator|.
+name|io
+operator|.
+name|IOException
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Arrays
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
 name|util
 operator|.
 name|HashMap
@@ -162,22 +182,140 @@ name|map1
 init|=
 operator|new
 name|HashMap
-argument_list|<
-name|String
-argument_list|,
-name|String
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
+try|try
+block|{
 name|map1
 operator|.
 name|put
 argument_list|(
 literal|"{\"request\":\"getSchemas\",\"catalog\":null,\"schemaPattern\":{\"s\":null}}"
 argument_list|,
-literal|"{\"response\":\"resultSet\", rows: []}"
+literal|"{\"response\":\"resultSet\", firstFrame: {offset: 0, done: true, rows: []}}"
 argument_list|)
 expr_stmt|;
+name|map1
+operator|.
+name|put
+argument_list|(
+name|JsonService
+operator|.
+name|encode
+argument_list|(
+operator|new
+name|SchemasRequest
+argument_list|(
+literal|null
+argument_list|,
+literal|null
+argument_list|)
+argument_list|)
+argument_list|,
+literal|"{\"response\":\"resultSet\", firstFrame: {offset: 0, done: true, rows: []}}"
+argument_list|)
+expr_stmt|;
+name|map1
+operator|.
+name|put
+argument_list|(
+name|JsonService
+operator|.
+name|encode
+argument_list|(
+operator|new
+name|TablesRequest
+argument_list|(
+literal|null
+argument_list|,
+literal|null
+argument_list|,
+literal|null
+argument_list|,
+name|Arrays
+operator|.
+expr|<
+name|String
+operator|>
+name|asList
+argument_list|()
+argument_list|)
+argument_list|)
+argument_list|,
+literal|"{\"response\":\"resultSet\", firstFrame: {offset: 0, done: true, rows: []}}"
+argument_list|)
+expr_stmt|;
+name|map1
+operator|.
+name|put
+argument_list|(
+literal|"{\"request\":\"createStatement\",\"connectionId\":0}"
+argument_list|,
+literal|"{\"response\":\"createStatement\",\"id\":0}"
+argument_list|)
+expr_stmt|;
+name|map1
+operator|.
+name|put
+argument_list|(
+literal|"{\"request\":\"prepareAndExecute\",\"statementId\":0,"
+operator|+
+literal|"\"sql\":\"select * from (\\n  values (1, 'a'), (null, 'b'), (3, 'c')) as t (c1, c2)\",\"maxRowCount\":-1}"
+argument_list|,
+literal|"{\"response\":\"resultSet\",\"signature\": {\n"
+operator|+
+literal|" \"columns\": [\n"
+operator|+
+literal|"   {\"columnName\": \"C1\", \"type\": {type: \"scalar\", id: 4, rep: \"INTEGER\"}},\n"
+operator|+
+literal|"   {\"columnName\": \"C2\", \"type\": {type: \"scalar\", id: 12, rep: \"STRING\"}}\n"
+operator|+
+literal|" ], \"cursorFactory\": {\"style\": \"ARRAY\"}\n"
+operator|+
+literal|"}, \"rows\": [[1, \"a\"], [null, \"b\"], [3, \"c\"]]}"
+argument_list|)
+expr_stmt|;
+name|map1
+operator|.
+name|put
+argument_list|(
+literal|"{\"request\":\"prepare\",\"statementId\":0,"
+operator|+
+literal|"\"sql\":\"select * from (\\n  values (1, 'a'), (null, 'b'), (3, 'c')) as t (c1, c2)\",\"maxRowCount\":-1}"
+argument_list|,
+literal|"{\"response\":\"prepare\",\"signature\": {\n"
+operator|+
+literal|" \"columns\": [\n"
+operator|+
+literal|"   {\"columnName\": \"C1\", \"type\": {type: \"scalar\", id: 4, rep: \"INTEGER\"}},\n"
+operator|+
+literal|"   {\"columnName\": \"C2\", \"type\": {type: \"scalar\", id: 12, rep: \"STRING\"}}\n"
+operator|+
+literal|" ],\n"
+operator|+
+literal|" \"parameters\": [],\n"
+operator|+
+literal|" \"cursorFactory\": {\"style\": \"ARRAY\"}\n"
+operator|+
+literal|"}}"
+argument_list|)
+expr_stmt|;
+block|}
+catch|catch
+parameter_list|(
+name|IOException
+name|e
+parameter_list|)
+block|{
+throw|throw
+operator|new
+name|RuntimeException
+argument_list|(
+name|e
+argument_list|)
+throw|;
+block|}
 return|return
 operator|new
 name|MockJsonService
