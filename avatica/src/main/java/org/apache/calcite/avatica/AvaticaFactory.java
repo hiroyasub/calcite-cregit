@@ -55,16 +55,6 @@ name|TimeZone
 import|;
 end_import
 
-begin_import
-import|import
-name|javax
-operator|.
-name|annotation
-operator|.
-name|Nullable
-import|;
-end_import
-
 begin_comment
 comment|/**  * Factory for JDBC objects.  *  *<p>There is an implementation for each supported JDBC version.</p>  */
 end_comment
@@ -106,8 +96,7 @@ parameter_list|(
 name|AvaticaConnection
 name|connection
 parameter_list|,
-annotation|@
-name|Nullable
+comment|/*@Nullable*/
 name|Meta
 operator|.
 name|StatementHandle
@@ -131,8 +120,7 @@ parameter_list|(
 name|AvaticaConnection
 name|connection
 parameter_list|,
-annotation|@
-name|Nullable
+comment|/*@Nullable*/
 name|Meta
 operator|.
 name|StatementHandle
