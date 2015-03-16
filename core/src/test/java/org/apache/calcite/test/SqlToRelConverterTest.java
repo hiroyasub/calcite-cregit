@@ -326,7 +326,7 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-245">CALCITE-245</a>,    * "Off-by-one translation of ON clause of JOIN".    */
+comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-245">[CALCITE-245]    * Off-by-one translation of ON clause of JOIN</a>.    */
 annotation|@
 name|Test
 specifier|public
@@ -406,7 +406,7 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-74">CALCITE-74</a>,    * "JOIN ... USING fails in 3-way join with UnsupportedOperationException". */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-74">[CALCITE-74]    * JOIN ... USING fails in 3-way join with    * UnsupportedOperationException</a>. */
 annotation|@
 name|Test
 specifier|public
@@ -2848,7 +2848,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-412">CALCITE-412</a>,    * "RelFieldTrimmer: when trimming Sort, the collation and trait set don't    * match". */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-412">[CALCITE-412]    * RelFieldTrimmer: when trimming Sort, the collation and trait set don't    * match</a>. */
 annotation|@
 name|Test
 specifier|public
@@ -2948,6 +2948,29 @@ operator|+
 literal|"  CASE WHEN deptno IN (SELECT deptno FROM dept) THEN 1 ELSE 0 END)\n"
 operator|+
 literal|"FROM emp"
+argument_list|)
+operator|.
+name|convertsTo
+argument_list|(
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-614">[CALCITE-614]    * IN within CASE within GROUP BY gives AssertionError</a>.    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testGroupByCaseIn
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select (CASE WHEN (deptno IN (10, 20)) THEN 0 ELSE deptno END),\n"
+operator|+
+literal|" min(empno) from EMP\n"
+operator|+
+literal|"group by (CASE WHEN (deptno IN (10, 20)) THEN 0 ELSE deptno END)"
 argument_list|)
 operator|.
 name|convertsTo
