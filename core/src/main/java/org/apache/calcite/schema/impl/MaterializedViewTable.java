@@ -523,6 +523,10 @@ argument_list|,
 name|viewSql
 argument_list|,
 name|viewSchemaPath
+argument_list|,
+name|Boolean
+operator|.
+name|TRUE
 argument_list|)
 expr_stmt|;
 name|this

@@ -2216,6 +2216,10 @@ name|getSql
 argument_list|()
 argument_list|,
 name|path
+argument_list|,
+name|jsonView
+operator|.
+name|modifiable
 argument_list|)
 argument_list|)
 expr_stmt|;

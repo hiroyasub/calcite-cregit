@@ -19285,6 +19285,30 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testInsert
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|checkQuery
+argument_list|(
+literal|"insert into emp (empno, deptno) values (1, 1)"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkQuery
+argument_list|(
+literal|"insert into emp (empno, deptno)\n"
+operator|+
+literal|"select 1, 1 from (values 'a')"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testStream
 parameter_list|()
 block|{

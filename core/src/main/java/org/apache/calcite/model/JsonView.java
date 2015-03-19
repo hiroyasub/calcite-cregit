@@ -49,6 +49,11 @@ name|String
 argument_list|>
 name|path
 decl_stmt|;
+comment|/** Whether this view should allow INSERT requests.    *    *<p>The values have the following meanings:    *<ul>    *<li>If true, Calcite throws an error when validating the schema if the    *     view is not modifiable.    *<li>If null, Calcite deduces whether the view is modifiable.    *<li>If false, Calcite will not allow inserts.    *</ul>    *    *<p>The default value is {@code null}.    */
+specifier|public
+name|Boolean
+name|modifiable
+decl_stmt|;
 specifier|public
 name|void
 name|accept

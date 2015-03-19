@@ -643,6 +643,20 @@ name|calcite
 operator|.
 name|schema
 operator|.
+name|ModifiableView
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|schema
+operator|.
 name|QueryableTable
 import|;
 end_import
@@ -955,6 +969,20 @@ name|calcite
 operator|.
 name|util
 operator|.
+name|JsonBuilder
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
 name|Litmus
 import|;
 end_import
@@ -998,6 +1026,20 @@ operator|.
 name|base
 operator|.
 name|Function
+import|;
+end_import
+
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|base
+operator|.
+name|Throwables
 import|;
 end_import
 
@@ -1429,6 +1471,22 @@ begin_import
 import|import static
 name|org
 operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|Static
+operator|.
+name|RESOURCE
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
 name|hamcrest
 operator|.
 name|CoreMatchers
@@ -1506,6 +1564,18 @@ operator|.
 name|CoreMatchers
 operator|.
 name|nullValue
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|hamcrest
+operator|.
+name|CoreMatchers
+operator|.
+name|startsWith
 import|;
 end_import
 
@@ -2063,6 +2133,609 @@ block|{
 return|return
 name|FOODMART_QUERIES
 return|;
+block|}
+comment|/** Tests a modifiable view. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testModelWithModifiableView
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|List
+argument_list|<
+name|Employee
+argument_list|>
+name|employees
+init|=
+operator|new
+name|ArrayList
+argument_list|<>
+argument_list|()
+decl_stmt|;
+name|employees
+operator|.
+name|add
+argument_list|(
+operator|new
+name|Employee
+argument_list|(
+literal|135
+argument_list|,
+literal|10
+argument_list|,
+literal|"Simon"
+argument_list|,
+literal|56.7f
+argument_list|,
+literal|null
+argument_list|)
+argument_list|)
+expr_stmt|;
+try|try
+block|{
+name|EmpDeptTableFactory
+operator|.
+name|THREAD_COLLECTION
+operator|.
+name|set
+argument_list|(
+name|employees
+argument_list|)
+expr_stmt|;
+specifier|final
+name|CalciteAssert
+operator|.
+name|AssertThat
+name|with
+init|=
+name|modelWithView
+argument_list|(
+literal|"select \"name\", \"empid\" as e, \"salary\" "
+operator|+
+literal|"from \"MUTABLE_EMPLOYEES\" where \"deptno\" = 10"
+argument_list|,
+literal|null
+argument_list|)
+decl_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select \"name\" from \"adhoc\".V order by \"name\""
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"name=Simon\n"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|doWithConnection
+argument_list|(
+operator|new
+name|Function
+argument_list|<
+name|CalciteConnection
+argument_list|,
+name|Object
+argument_list|>
+argument_list|()
+block|{
+annotation|@
+name|Override
+specifier|public
+name|Object
+name|apply
+parameter_list|(
+name|CalciteConnection
+name|input
+parameter_list|)
+block|{
+try|try
+block|{
+specifier|final
+name|Statement
+name|statement
+init|=
+name|input
+operator|.
+name|createStatement
+argument_list|()
+decl_stmt|;
+name|ResultSet
+name|resultSet
+init|=
+name|statement
+operator|.
+name|executeQuery
+argument_list|(
+literal|"explain plan for\n"
+operator|+
+literal|"insert into \"adhoc\".V\n"
+operator|+
+literal|"values ('Fred', 56, 123.4)"
+argument_list|)
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|resultSet
+operator|.
+name|next
+argument_list|()
+argument_list|,
+name|is
+argument_list|(
+literal|true
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|assertThat
+argument_list|(
+name|resultSet
+operator|.
+name|getString
+argument_list|(
+literal|1
+argument_list|)
+argument_list|,
+name|is
+argument_list|(
+literal|"EnumerableTableModify(table=[[adhoc, MUTABLE_EMPLOYEES]], operation=[INSERT], updateColumnList=[[]], flattened=[false])\n"
+operator|+
+literal|"  EnumerableCalc(expr#0..2=[{inputs}], expr#3=[CAST($t1):JavaType(int) NOT NULL], expr#4=[10], expr#5=[CAST($t0):JavaType(class java.lang.String)], expr#6=[CAST($t2):JavaType(float) NOT NULL], expr#7=[null], empid=[$t3], deptno=[$t4], name=[$t5], salary=[$t6], commission=[$t7])\n"
+operator|+
+literal|"    EnumerableValues(tuples=[[{ 'Fred', 56, 123.4 }]])\n"
+argument_list|)
+argument_list|)
+expr_stmt|;
+comment|// With named columns
+name|resultSet
+operator|=
+name|statement
+operator|.
+name|executeQuery
+argument_list|(
+literal|"explain plan for\n"
+operator|+
+literal|"insert into \"adhoc\".V (\"name\", e, \"salary\")\n"
+operator|+
+literal|"values ('Fred', 56, 123.4)"
+argument_list|)
+expr_stmt|;
+name|assertThat
+argument_list|(
+name|resultSet
+operator|.
+name|next
+argument_list|()
+argument_list|,
+name|is
+argument_list|(
+literal|true
+argument_list|)
+argument_list|)
+expr_stmt|;
+comment|// With named columns, in different order
+name|resultSet
+operator|=
+name|statement
+operator|.
+name|executeQuery
+argument_list|(
+literal|"explain plan for\n"
+operator|+
+literal|"insert into \"adhoc\".V (e, \"salary\", \"name\")\n"
+operator|+
+literal|"values (56, 123.4, 'Fred')"
+argument_list|)
+expr_stmt|;
+name|assertThat
+argument_list|(
+name|resultSet
+operator|.
+name|next
+argument_list|()
+argument_list|,
+name|is
+argument_list|(
+literal|true
+argument_list|)
+argument_list|)
+expr_stmt|;
+comment|// Mis-named column
+try|try
+block|{
+specifier|final
+name|PreparedStatement
+name|s
+init|=
+name|input
+operator|.
+name|prepareStatement
+argument_list|(
+literal|"explain plan for\n"
+operator|+
+literal|"insert into \"adhoc\".V (empno, \"salary\", \"name\")\n"
+operator|+
+literal|"values (56, 123.4, 'Fred')"
+argument_list|)
+decl_stmt|;
+name|fail
+argument_list|(
+literal|"expected error, got "
+operator|+
+name|s
+argument_list|)
+expr_stmt|;
+block|}
+catch|catch
+parameter_list|(
+name|SQLException
+name|e
+parameter_list|)
+block|{
+name|assertThat
+argument_list|(
+name|e
+operator|.
+name|getMessage
+argument_list|()
+argument_list|,
+name|startsWith
+argument_list|(
+literal|"Error while preparing statement"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+comment|// Fail to provide mandatory column
+try|try
+block|{
+specifier|final
+name|PreparedStatement
+name|s
+init|=
+name|input
+operator|.
+name|prepareStatement
+argument_list|(
+literal|"explain plan for\n"
+operator|+
+literal|"insert into \"adhoc\".V (e, name)\n"
+operator|+
+literal|"values (56, 'Fred')"
+argument_list|)
+decl_stmt|;
+name|fail
+argument_list|(
+literal|"expected error, got "
+operator|+
+name|s
+argument_list|)
+expr_stmt|;
+block|}
+catch|catch
+parameter_list|(
+name|SQLException
+name|e
+parameter_list|)
+block|{
+name|assertThat
+argument_list|(
+name|e
+operator|.
+name|getMessage
+argument_list|()
+argument_list|,
+name|startsWith
+argument_list|(
+literal|"Error while preparing statement"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+name|statement
+operator|.
+name|close
+argument_list|()
+expr_stmt|;
+return|return
+literal|null
+return|;
+block|}
+catch|catch
+parameter_list|(
+name|SQLException
+name|e
+parameter_list|)
+block|{
+throw|throw
+name|Throwables
+operator|.
+name|propagate
+argument_list|(
+name|e
+argument_list|)
+throw|;
+block|}
+block|}
+block|}
+argument_list|)
+expr_stmt|;
+block|}
+finally|finally
+block|{
+name|EmpDeptTableFactory
+operator|.
+name|THREAD_COLLECTION
+operator|.
+name|remove
+argument_list|()
+expr_stmt|;
+block|}
+block|}
+comment|/** Tests a few cases where modifiable views are invalid. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testModelWithInvalidModifiableView
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|List
+argument_list|<
+name|Employee
+argument_list|>
+name|employees
+init|=
+operator|new
+name|ArrayList
+argument_list|<>
+argument_list|()
+decl_stmt|;
+name|employees
+operator|.
+name|add
+argument_list|(
+operator|new
+name|Employee
+argument_list|(
+literal|135
+argument_list|,
+literal|10
+argument_list|,
+literal|"Simon"
+argument_list|,
+literal|56.7f
+argument_list|,
+literal|null
+argument_list|)
+argument_list|)
+expr_stmt|;
+try|try
+block|{
+name|EmpDeptTableFactory
+operator|.
+name|THREAD_COLLECTION
+operator|.
+name|set
+argument_list|(
+name|employees
+argument_list|)
+expr_stmt|;
+name|Util
+operator|.
+name|discard
+argument_list|(
+name|RESOURCE
+operator|.
+name|noValueSuppliedForViewColumn
+argument_list|(
+literal|null
+argument_list|,
+literal|null
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|modelWithView
+argument_list|(
+literal|"select \"name\", \"empid\" as e, \"salary\" "
+operator|+
+literal|"from \"MUTABLE_EMPLOYEES\" where \"commission\" = 10"
+argument_list|,
+literal|true
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select \"name\" from \"adhoc\".V order by \"name\""
+argument_list|)
+operator|.
+name|throws_
+argument_list|(
+literal|"View is not modifiable. No value is supplied for NOT NULL "
+operator|+
+literal|"column 'deptno' of base table 'MUTABLE_EMPLOYEES'"
+argument_list|)
+expr_stmt|;
+comment|// no error if we do not claim that the view is modifiable
+name|modelWithView
+argument_list|(
+literal|"select \"name\", \"empid\" as e, \"salary\" "
+operator|+
+literal|"from \"MUTABLE_EMPLOYEES\" where \"commission\" = 10"
+argument_list|,
+literal|null
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select \"name\" from \"adhoc\".V order by \"name\""
+argument_list|)
+operator|.
+name|runs
+argument_list|()
+expr_stmt|;
+name|modelWithView
+argument_list|(
+literal|"select \"name\", \"empid\" as e, \"salary\" "
+operator|+
+literal|"from \"MUTABLE_EMPLOYEES\" where \"deptno\" IN (10, 20)"
+argument_list|,
+literal|true
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select \"name\" from \"adhoc\".V order by \"name\""
+argument_list|)
+operator|.
+name|throws_
+argument_list|(
+literal|"View is not modifiable. No value is supplied for NOT NULL "
+operator|+
+literal|"column 'deptno' of base table 'MUTABLE_EMPLOYEES'"
+argument_list|)
+expr_stmt|;
+comment|// Deduce "deptno = 10" from the constraint, and add a further
+comment|// condition "deptno< 20 OR commission> 1000".
+name|modelWithView
+argument_list|(
+literal|"select \"name\", \"empid\" as e, \"salary\" "
+operator|+
+literal|"from \"MUTABLE_EMPLOYEES\"\n"
+operator|+
+literal|"where \"deptno\" = 10 AND (\"deptno\"< 20 OR \"commission\"> 1000)"
+argument_list|,
+literal|true
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"insert into \"adhoc\".v values ('n',1,2)"
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|""
+operator|+
+literal|"EnumerableTableModify(table=[[adhoc, MUTABLE_EMPLOYEES]], operation=[INSERT], updateColumnList=[[]], flattened=[false])\n"
+operator|+
+literal|"  EnumerableCalc(expr#0..2=[{inputs}], expr#3=[CAST($t1):JavaType(int) NOT NULL], expr#4=[10], expr#5=[CAST($t0):JavaType(class java.lang.String)], expr#6=[CAST($t2):JavaType(float) NOT NULL], expr#7=[null], expr#8=[20], expr#9=[<($t4, $t8)], expr#10=[1000], expr#11=[>($t7, $t10)], expr#12=[OR($t9, $t11)], empid=[$t3], deptno=[$t4], name=[$t5], salary=[$t6], commission=[$t7], $condition=[$t12])\n"
+operator|+
+literal|"    EnumerableValues(tuples=[[{ 'n', 1, 2 }]])"
+argument_list|)
+expr_stmt|;
+name|modelWithView
+argument_list|(
+literal|"select \"name\", \"empid\" as e, \"salary\" "
+operator|+
+literal|"from \"MUTABLE_EMPLOYEES\"\n"
+operator|+
+literal|"where \"commission\" = 100 AND \"deptno\" = 20"
+argument_list|,
+literal|true
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select \"name\" from \"adhoc\".V order by \"name\""
+argument_list|)
+operator|.
+name|runs
+argument_list|()
+expr_stmt|;
+name|modelWithView
+argument_list|(
+literal|"select \"name\", \"empid\" as e, \"salary\", \"empid\" + 3 as e3, 1 as one\n"
+operator|+
+literal|"from \"MUTABLE_EMPLOYEES\"\n"
+operator|+
+literal|"where \"commission\" = 100 AND \"deptno\" = 20"
+argument_list|,
+literal|true
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select \"name\" from \"adhoc\".V order by \"name\""
+argument_list|)
+operator|.
+name|runs
+argument_list|()
+expr_stmt|;
+name|Util
+operator|.
+name|discard
+argument_list|(
+name|RESOURCE
+operator|.
+name|moreThanOneMappedColumn
+argument_list|(
+literal|null
+argument_list|,
+literal|null
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|modelWithView
+argument_list|(
+literal|"select \"name\", \"empid\" as e, \"salary\", \"name\" as n2 "
+operator|+
+literal|"from \"MUTABLE_EMPLOYEES\" where \"deptno\" IN (10, 20)"
+argument_list|,
+literal|true
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select \"name\" from \"adhoc\".V order by \"name\""
+argument_list|)
+operator|.
+name|throws_
+argument_list|(
+literal|"View is not modifiable. More than one expression maps to "
+operator|+
+literal|"column 'name' of base table 'MUTABLE_EMPLOYEES'"
+argument_list|)
+expr_stmt|;
+comment|// no error if we do not claim that the view is modifiable
+name|modelWithView
+argument_list|(
+literal|"select \"name\", \"empid\" as e, \"salary\", \"name\" as n2 "
+operator|+
+literal|"from \"MUTABLE_EMPLOYEES\" where \"deptno\" IN (10, 20)"
+argument_list|,
+literal|null
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select \"name\" from \"adhoc\".V order by \"name\""
+argument_list|)
+operator|.
+name|runs
+argument_list|()
+expr_stmt|;
+block|}
+finally|finally
+block|{
+name|EmpDeptTableFactory
+operator|.
+name|THREAD_COLLECTION
+operator|.
+name|remove
+argument_list|()
+expr_stmt|;
+block|}
 block|}
 comment|/**    * Tests a table function with literal arguments.    */
 annotation|@
@@ -17955,6 +18628,9 @@ name|modelWithView
 parameter_list|(
 name|String
 name|view
+parameter_list|,
+name|Boolean
+name|modifiable
 parameter_list|)
 block|{
 specifier|final
@@ -18006,15 +18682,55 @@ literal|"         },\n"
 operator|+
 literal|"         {\n"
 operator|+
+literal|"           name: 'MUTABLE_EMPLOYEES',\n"
+operator|+
+literal|"           type: 'custom',\n"
+operator|+
+literal|"           factory: '"
+operator|+
+name|clazz
+operator|.
+name|getName
+argument_list|()
+operator|+
+literal|"',\n"
+operator|+
+literal|"           operand: {'foo': false}\n"
+operator|+
+literal|"         },\n"
+operator|+
+literal|"         {\n"
+operator|+
 literal|"           name: 'V',\n"
 operator|+
 literal|"           type: 'view',\n"
 operator|+
-literal|"           sql: '"
+operator|(
+name|modifiable
+operator|==
+literal|null
+condition|?
+literal|""
+else|:
+literal|" modifiable: "
 operator|+
+name|modifiable
+operator|+
+literal|",\n"
+operator|)
+operator|+
+literal|"           sql: "
+operator|+
+operator|new
+name|JsonBuilder
+argument_list|()
+operator|.
+name|toJsonString
+argument_list|(
 name|view
+argument_list|)
 operator|+
-literal|"'\n"
+literal|"\n"
 operator|+
 literal|"         }\n"
 operator|+
@@ -18047,6 +18763,8 @@ init|=
 name|modelWithView
 argument_list|(
 literal|"select * from \"EMPLOYEES\" where \"deptno\" = 10"
+argument_list|,
+literal|null
 argument_list|)
 decl_stmt|;
 name|with
@@ -18104,6 +18822,8 @@ comment|// all table types
 name|assertEquals
 argument_list|(
 literal|"TABLE_CAT=null; TABLE_SCHEM=adhoc; TABLE_NAME=EMPLOYEES; TABLE_TYPE=TABLE; REMARKS=null; TYPE_CAT=null; TYPE_SCHEM=null; TYPE_NAME=null; SELF_REFERENCING_COL_NAME=null; REF_GENERATION=null\n"
+operator|+
+literal|"TABLE_CAT=null; TABLE_SCHEM=adhoc; TABLE_NAME=MUTABLE_EMPLOYEES; TABLE_TYPE=TABLE; REMARKS=null; TYPE_CAT=null; TYPE_SCHEM=null; TYPE_NAME=null; SELF_REFERENCING_COL_NAME=null; REF_GENERATION=null\n"
 operator|+
 literal|"TABLE_CAT=null; TABLE_SCHEM=adhoc; TABLE_NAME=V; TABLE_TYPE=VIEW; REMARKS=null; TYPE_CAT=null; TYPE_SCHEM=null; TYPE_NAME=null; SELF_REFERENCING_COL_NAME=null; REF_GENERATION=null\n"
 argument_list|,
@@ -18310,6 +19030,8 @@ argument_list|(
 literal|"select * from \"EMPLOYEES\" where \"deptno\" = 10 "
 operator|+
 literal|"order by \"empid\" limit 2"
+argument_list|,
+literal|null
 argument_list|)
 decl_stmt|;
 name|with
@@ -23911,8 +24633,17 @@ argument_list|,
 literal|"values 1"
 argument_list|,
 literal|null
+argument_list|,
+literal|null
 argument_list|)
 decl_stmt|;
+name|Util
+operator|.
+name|discard
+argument_list|(
+name|function
+argument_list|)
+expr_stmt|;
 name|connection
 operator|.
 name|close
@@ -24496,9 +25227,6 @@ argument_list|)
 expr_stmt|;
 name|assertThat
 argument_list|(
-operator|(
-name|Double
-operator|)
 name|rs
 operator|.
 name|getObject
@@ -25670,6 +26398,26 @@ argument_list|)
 return|;
 block|}
 block|}
+comment|/** Abstract base class for implementations of {@link ModifiableView}. */
+specifier|public
+specifier|abstract
+specifier|static
+class|class
+name|AbstractModifiableView
+extends|extends
+name|AbstractTable
+implements|implements
+name|ModifiableView
+block|{
+specifier|protected
+name|AbstractModifiableView
+parameter_list|()
+block|{
+name|super
+argument_list|()
+expr_stmt|;
+block|}
+block|}
 comment|/** Factory for EMP and DEPT tables. */
 specifier|public
 specifier|static
@@ -25681,6 +26429,23 @@ argument_list|<
 name|Table
 argument_list|>
 block|{
+specifier|public
+specifier|static
+specifier|final
+name|ThreadLocal
+argument_list|<
+name|List
+argument_list|<
+name|Employee
+argument_list|>
+argument_list|>
+name|THREAD_COLLECTION
+init|=
+operator|new
+name|ThreadLocal
+argument_list|<>
+argument_list|()
+decl_stmt|;
 specifier|public
 name|Table
 name|create
@@ -25712,16 +26477,14 @@ name|Object
 index|[]
 name|array
 decl_stmt|;
-if|if
+switch|switch
 condition|(
 name|name
-operator|.
-name|equals
-argument_list|(
-literal|"EMPLOYEES"
-argument_list|)
 condition|)
 block|{
+case|case
+literal|"EMPLOYEES"
+case|:
 name|clazz
 operator|=
 name|Employee
@@ -25736,9 +26499,49 @@ argument_list|()
 operator|.
 name|emps
 expr_stmt|;
-block|}
-else|else
+break|break;
+case|case
+literal|"MUTABLE_EMPLOYEES"
+case|:
+name|List
+argument_list|<
+name|Employee
+argument_list|>
+name|employees
+init|=
+name|THREAD_COLLECTION
+operator|.
+name|get
+argument_list|()
+decl_stmt|;
+if|if
+condition|(
+name|employees
+operator|==
+literal|null
+condition|)
 block|{
+name|employees
+operator|=
+name|Collections
+operator|.
+name|emptyList
+argument_list|()
+expr_stmt|;
+block|}
+return|return
+name|JdbcFrontLinqBackTest
+operator|.
+name|mutable
+argument_list|(
+name|name
+argument_list|,
+name|employees
+argument_list|)
+return|;
+case|case
+literal|"DEPARTMENTS"
+case|:
 name|clazz
 operator|=
 name|Department
@@ -25753,6 +26556,15 @@ argument_list|()
 operator|.
 name|depts
 expr_stmt|;
+break|break;
+default|default:
+throw|throw
+operator|new
+name|AssertionError
+argument_list|(
+name|name
+argument_list|)
+throw|;
 block|}
 return|return
 operator|new

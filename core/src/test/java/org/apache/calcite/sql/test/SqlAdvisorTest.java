@@ -422,6 +422,8 @@ name|asList
 argument_list|(
 literal|"TABLE(CATALOG.SALES.EMP)"
 argument_list|,
+literal|"TABLE(CATALOG.SALES.EMP_20)"
+argument_list|,
 literal|"TABLE(CATALOG.SALES.EMP_ADDRESS)"
 argument_list|,
 literal|"TABLE(CATALOG.SALES.DEPT)"

@@ -2710,6 +2710,54 @@ argument_list|>
 name|cannotStreamValues
 parameter_list|()
 function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
+literal|"Modifiable view must be based on a single table"
+argument_list|)
+name|ExInst
+argument_list|<
+name|SqlValidatorException
+argument_list|>
+name|modifiableViewMustBeBasedOnSingleTable
+parameter_list|()
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
+literal|"View is not modifiable. More than one expression maps to column ''{0}'' of base table ''{1}''"
+argument_list|)
+name|ExInst
+argument_list|<
+name|SqlValidatorException
+argument_list|>
+name|moreThanOneMappedColumn
+parameter_list|(
+name|String
+name|columnName
+parameter_list|,
+name|String
+name|tableName
+parameter_list|)
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
+literal|"View is not modifiable. No value is supplied for NOT NULL column ''{0}'' of base table ''{1}''"
+argument_list|)
+name|ExInst
+argument_list|<
+name|SqlValidatorException
+argument_list|>
+name|noValueSuppliedForViewColumn
+parameter_list|(
+name|String
+name|columnName
+parameter_list|,
+name|String
+name|tableName
+parameter_list|)
+function_decl|;
 block|}
 end_interface
 

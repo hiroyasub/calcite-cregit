@@ -1299,6 +1299,8 @@ argument_list|,
 literal|"select * from \"hr\".\"emps\" where \"deptno\" = 10"
 argument_list|,
 literal|null
+argument_list|,
+literal|null
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1428,6 +1430,8 @@ name|singletonList
 argument_list|(
 literal|"hr"
 argument_list|)
+argument_list|,
+literal|null
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1451,6 +1455,8 @@ name|singletonList
 argument_list|(
 literal|"hr"
 argument_list|)
+argument_list|,
+literal|null
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1474,6 +1480,8 @@ name|singletonList
 argument_list|(
 literal|"s"
 argument_list|)
+argument_list|,
+literal|null
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1490,6 +1498,8 @@ argument_list|(
 name|schema
 argument_list|,
 literal|"select * from \"emps\""
+argument_list|,
+literal|null
 argument_list|,
 literal|null
 argument_list|)

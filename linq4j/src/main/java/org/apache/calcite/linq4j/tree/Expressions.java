@@ -1928,6 +1928,30 @@ expr_stmt|;
 block|}
 if|if
 condition|(
+operator|(
+name|clazz
+operator|==
+name|Float
+operator|.
+name|class
+operator|||
+name|clazz
+operator|==
+name|Double
+operator|.
+name|class
+operator|)
+operator|&&
+name|value
+operator|instanceof
+name|BigDecimal
+condition|)
+block|{
+comment|// Don't try to convert the value of float and double literals.
+comment|// We'd experience rounding, e.g. 3.2 becomes 3.1999998.
+block|}
+if|else if
+condition|(
 operator|!
 name|clazz
 operator|.

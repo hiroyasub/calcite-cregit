@@ -2999,6 +2999,61 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInsert
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"insert into emp (deptno, empno, ename) values (10, 150, 'Fred')"
+argument_list|)
+operator|.
+name|convertsTo
+argument_list|(
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSelectView
+parameter_list|()
+block|{
+comment|// translated condition: deptno = 20 and sal> 1000 and empno> 100
+name|sql
+argument_list|(
+literal|"select * from emp_20 where empno> 100"
+argument_list|)
+operator|.
+name|convertsTo
+argument_list|(
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInsertView
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"insert into emp_20 (empno, ename) values (150, 'Fred')"
+argument_list|)
+operator|.
+name|convertsTo
+argument_list|(
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-695">[CALCITE-695]    * SqlSingleValueAggFunction is created when it may not be needed</a>.    */
 annotation|@
 name|Test

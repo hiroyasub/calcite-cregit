@@ -4019,6 +4019,8 @@ name|String
 operator|>
 name|of
 argument_list|()
+argument_list|,
+literal|null
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -4051,6 +4053,8 @@ name|String
 operator|>
 name|of
 argument_list|()
+argument_list|,
+literal|null
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -4087,6 +4091,8 @@ name|String
 operator|>
 name|of
 argument_list|()
+argument_list|,
+literal|null
 argument_list|)
 argument_list|)
 expr_stmt|;
