@@ -15256,6 +15256,51 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testOrderJoin
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select * from emp as e, dept as d order by e.empno"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-633">[CALCITE-633],    * WITH ... ORDER BY cannot find table</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWithOrder
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"with e as (select * from emp)\n"
+operator|+
+literal|"select * from e as e1 order by e1.empno"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"with e as (select * from emp)\n"
+operator|+
+literal|"select * from e as e1, e as e2 order by e1.empno"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testOrderUnion
 parameter_list|()
 block|{
