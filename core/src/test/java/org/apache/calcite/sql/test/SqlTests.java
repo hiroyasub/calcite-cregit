@@ -1094,7 +1094,7 @@ return|;
 case|case
 name|Types
 operator|.
-name|FLOAT
+name|REAL
 case|:
 return|return
 name|ColumnMetaData

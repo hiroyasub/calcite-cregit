@@ -463,11 +463,6 @@ return|;
 case|case
 name|Types
 operator|.
-name|FLOAT
-case|:
-case|case
-name|Types
-operator|.
 name|REAL
 case|:
 return|return
@@ -477,6 +472,11 @@ argument_list|(
 name|getter
 argument_list|)
 return|;
+case|case
+name|Types
+operator|.
+name|FLOAT
+case|:
 case|case
 name|Types
 operator|.

@@ -1573,9 +1573,6 @@ case|case
 name|INTEGER
 case|:
 case|case
-name|FLOAT
-case|:
-case|case
 name|REAL
 case|:
 case|case
@@ -1593,6 +1590,10 @@ case|:
 case|case
 name|DOUBLE
 case|:
+case|case
+name|FLOAT
+case|:
+comment|// sic
 case|case
 name|TIMESTAMP
 case|:

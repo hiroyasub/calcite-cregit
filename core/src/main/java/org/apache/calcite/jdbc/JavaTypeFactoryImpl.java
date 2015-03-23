@@ -1017,6 +1017,10 @@ return|;
 case|case
 name|DOUBLE
 case|:
+case|case
+name|FLOAT
+case|:
+comment|// sic
 return|return
 name|type
 operator|.
@@ -1033,9 +1037,6 @@ name|class
 return|;
 case|case
 name|REAL
-case|:
-case|case
-name|FLOAT
 case|:
 return|return
 name|type

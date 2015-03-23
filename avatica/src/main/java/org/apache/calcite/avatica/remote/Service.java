@@ -808,7 +808,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/** Response that contains a result set.    *    *<p>Several types of request, including    * {@link org.apache.calcite.avatica.Meta#getCatalogs()} and    * {@link org.apache.calcite.avatica.Meta#getSchemas(String, org.apache.calcite.avatica.Meta.Pat)}    * {@link Meta#getTables(String, org.apache.calcite.avatica.Meta.Pat, org.apache.calcite.avatica.Meta.Pat, List<String>)}    * {@link Meta#getTableTypes()}    * return this response. */
+comment|/** Response that contains a result set.    *    *<p>Several types of request, including    * {@link org.apache.calcite.avatica.Meta#getCatalogs()} and    * {@link org.apache.calcite.avatica.Meta#getSchemas(String, org.apache.calcite.avatica.Meta.Pat)}    * {@link Meta#getTables(String, Meta.Pat, Meta.Pat, List)}    * {@link Meta#getTableTypes()}    * return this response. */
 class|class
 name|ResultSetResponse
 extends|extends
