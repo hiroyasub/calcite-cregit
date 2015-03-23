@@ -314,16 +314,7 @@ name|unmodifiableMap
 argument_list|(
 operator|new
 name|HashMap
-argument_list|<
-name|Class
-argument_list|,
-name|Class
-argument_list|<
-name|?
-extends|extends
-name|Function
-argument_list|>
-argument_list|>
+argument_list|<>
 argument_list|(
 name|inverse
 argument_list|(
@@ -497,11 +488,7 @@ name|map
 init|=
 operator|new
 name|HashMap
-argument_list|<
-name|K
-argument_list|,
-name|V
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 name|map
@@ -592,11 +579,7 @@ name|inverseMap
 init|=
 operator|new
 name|HashMap
-argument_list|<
-name|V
-argument_list|,
-name|K
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 for|for
@@ -1347,7 +1330,10 @@ block|}
 block|}
 return|;
 block|}
-comment|/**    * Creates a view of a list that applies a function to each element.    */
+comment|/**    * Creates a view of a list that applies a function to each element.    *    * @deprecated Use {@link com.google.common.collect.Lists#transform}    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 specifier|static
 parameter_list|<
@@ -1423,7 +1409,10 @@ block|}
 block|}
 return|;
 block|}
-comment|/**    * Creates a view of an array that applies a function to each element.    */
+comment|/**    * Creates a view of an array that applies a function to each element.    *    * @deprecated Use {@link com.google.common.collect.Lists#transform}    * and {@link Arrays#asList(Object[])}    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 specifier|static
 parameter_list|<
@@ -1526,7 +1515,7 @@ name|f
 parameter_list|)
 block|{
 specifier|final
-name|ArrayList
+name|List
 argument_list|<
 name|R
 argument_list|>
@@ -1534,9 +1523,7 @@ name|list2
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|R
-argument_list|>
+argument_list|<>
 argument_list|(
 name|list
 operator|.
@@ -1693,9 +1680,7 @@ name|list2
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|E
-argument_list|>
+argument_list|<>
 argument_list|(
 name|list
 operator|.
@@ -2119,11 +2104,7 @@ block|{
 return|return
 operator|new
 name|SelectorEqualityComparer
-argument_list|<
-name|T
-argument_list|,
-name|T2
-argument_list|>
+argument_list|<>
 argument_list|(
 name|selector
 argument_list|)
