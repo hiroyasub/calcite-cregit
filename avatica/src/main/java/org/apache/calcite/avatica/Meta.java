@@ -575,6 +575,14 @@ name|ConnectionHandle
 name|ch
 parameter_list|)
 function_decl|;
+comment|/** Close a statement.    */
+name|void
+name|closeStatement
+parameter_list|(
+name|StatementHandle
+name|h
+parameter_list|)
+function_decl|;
 comment|/** Factory to create instances of {@link Meta}. */
 interface|interface
 name|Factory

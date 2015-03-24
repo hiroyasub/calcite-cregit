@@ -592,6 +592,34 @@ name|close
 argument_list|()
 expr_stmt|;
 block|}
+try|try
+block|{
+comment|// inform the server to close the resource
+name|connection
+operator|.
+name|meta
+operator|.
+name|closeStatement
+argument_list|(
+name|handle
+argument_list|)
+expr_stmt|;
+block|}
+finally|finally
+block|{
+comment|// make sure we don't leak on our side
+name|connection
+operator|.
+name|statementMap
+operator|.
+name|remove
+argument_list|(
+name|handle
+operator|.
+name|id
+argument_list|)
+expr_stmt|;
+block|}
 comment|// If onStatementClose throws, this method will throw an exception (later
 comment|// converted to SQLException), but this statement still gets closed.
 name|connection
