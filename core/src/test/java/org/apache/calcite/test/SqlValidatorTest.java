@@ -15527,6 +15527,15 @@ argument_list|,
 literal|"xxxx"
 argument_list|)
 expr_stmt|;
+block|}
+comment|/**    * Tests validation of the ORDER BY clause when DISTINCT is present.    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testOrderDistinct
+parameter_list|()
+block|{
 comment|// Distinct on expressions with attempts to order on a column in
 comment|// the underlying table
 name|checkFails
@@ -15688,6 +15697,96 @@ condition|?
 literal|null
 else|:
 literal|"Column 'ENO' not found in any table"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Tests validation of the ORDER BY clause when DISTINCT and GROUP BY are    * present.    *    *<p>Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-634">[CALCITE-634]    * Allow ORDER BY aggregate function in SELECT DISTINCT, provided that it    * occurs in SELECT clause</a>.    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testOrderGroupDistinct
+parameter_list|()
+block|{
+comment|// Order by an aggregate function,
+comment|// which exists in select-clause with distinct being present
+name|check
+argument_list|(
+literal|"select distinct count(empno) AS countEMPNO from emp\n"
+operator|+
+literal|"group by empno\n"
+operator|+
+literal|"order by 1"
+argument_list|)
+expr_stmt|;
+name|check
+argument_list|(
+literal|"select distinct count(empno) from emp\n"
+operator|+
+literal|"group by empno\n"
+operator|+
+literal|"order by 1"
+argument_list|)
+expr_stmt|;
+name|check
+argument_list|(
+literal|"select distinct count(empno) AS countEMPNO from emp\n"
+operator|+
+literal|"group by empno\n"
+operator|+
+literal|"order by count(empno)"
+argument_list|)
+expr_stmt|;
+name|check
+argument_list|(
+literal|"select distinct count(empno) from emp\n"
+operator|+
+literal|"group by empno\n"
+operator|+
+literal|"order by count(empno)"
+argument_list|)
+expr_stmt|;
+name|check
+argument_list|(
+literal|"select distinct count(empno) from emp\n"
+operator|+
+literal|"group by empno\n"
+operator|+
+literal|"order by count(empno) desc"
+argument_list|)
+expr_stmt|;
+name|checkFails
+argument_list|(
+literal|"SELECT DISTINCT deptno from emp\n"
+operator|+
+literal|"ORDER BY deptno, ^sum(empno)^"
+argument_list|,
+literal|"Aggregate expression is illegal in ORDER BY clause of non-aggregating SELECT"
+argument_list|)
+expr_stmt|;
+name|checkFails
+argument_list|(
+literal|"SELECT DISTINCT deptno from emp\n"
+operator|+
+literal|"GROUP BY deptno ORDER BY deptno, ^sum(empno)^"
+argument_list|,
+literal|"Expression 'SUM\\(`EMP`\\.`EMPNO`\\)' is not in the select clause"
+argument_list|)
+expr_stmt|;
+name|checkFails
+argument_list|(
+literal|"SELECT DISTINCT deptno, min(empno) from emp\n"
+operator|+
+literal|"GROUP BY deptno ORDER BY deptno, ^sum(empno)^"
+argument_list|,
+literal|"Expression 'SUM\\(`EMP`\\.`EMPNO`\\)' is not in the select clause"
+argument_list|)
+expr_stmt|;
+name|check
+argument_list|(
+literal|"SELECT DISTINCT deptno, sum(empno) from emp\n"
+operator|+
+literal|"GROUP BY deptno ORDER BY deptno, sum(empno)"
 argument_list|)
 expr_stmt|;
 block|}
@@ -17213,21 +17312,6 @@ argument_list|(
 literal|"SELECT DISTINCT deptno from emp ORDER BY deptno + 2"
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-literal|false
-condition|)
-block|{
-comment|// Hersker 2008917: Julian will fix immediately after
-comment|// integration
-name|checkFails
-argument_list|(
-literal|"SELECT DISTINCT deptno from emp ORDER BY deptno, ^sum(empno)^"
-argument_list|,
-literal|"Expression 'SUM\\(`EMP`\\.`EMPNO`\\)' is not in the select clause"
-argument_list|)
-expr_stmt|;
-block|}
 comment|// The ORDER BY clause works on what is projected by DISTINCT - even if
 comment|// GROUP BY is present.
 name|checkFails
