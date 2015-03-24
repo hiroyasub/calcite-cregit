@@ -1010,6 +1010,26 @@ argument_list|)
 throw|;
 block|}
 block|}
+annotation|@
+name|Override
+specifier|public
+name|void
+name|closeConnection
+parameter_list|(
+name|ConnectionHandle
+name|ch
+parameter_list|)
+block|{
+comment|// TODO: implement
+comment|//
+comment|// lots of Calcite tests break with this simple implementation,
+comment|// requires investigation
+comment|//    try {
+comment|//      connection.close();
+comment|//    } catch (SQLException e) {
+comment|//      throw new RuntimeException(e);
+comment|//    }
+block|}
 specifier|public
 name|StatementHandle
 name|createStatement

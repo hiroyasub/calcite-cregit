@@ -669,6 +669,13 @@ comment|// Per specification, if onConnectionClose throws, this method will thro
 comment|// a SQLException, but statement will still be closed.
 try|try
 block|{
+name|meta
+operator|.
+name|closeConnection
+argument_list|(
+name|handle
+argument_list|)
+expr_stmt|;
 name|driver
 operator|.
 name|handler

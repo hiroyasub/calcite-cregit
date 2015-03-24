@@ -1547,8 +1547,18 @@ operator|.
 name|close
 argument_list|()
 expr_stmt|;
-comment|//    assertEquals("closing a connection closes the server-side connection",
-comment|//        1, connectionMap.size());
+name|assertEquals
+argument_list|(
+literal|"closing a connection closes the server-side connection"
+argument_list|,
+literal|1
+argument_list|,
+name|connectionMap
+operator|.
+name|size
+argument_list|()
+argument_list|)
+expr_stmt|;
 block|}
 specifier|private
 name|void
