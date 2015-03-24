@@ -155,6 +155,20 @@ end_import
 
 begin_import
 import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|cache
+operator|.
+name|Cache
+import|;
+end_import
+
+begin_import
+import|import
 name|net
 operator|.
 name|hydromatic
@@ -1310,11 +1324,11 @@ name|connection
 operator|.
 name|statementMap
 decl_stmt|;
-name|Map
+name|Cache
 argument_list|<
 name|Integer
 argument_list|,
-name|Statement
+name|Object
 argument_list|>
 name|serverMap
 init|=
@@ -1427,7 +1441,7 @@ init|=
 name|ljs
 argument_list|()
 decl_stmt|;
-name|Map
+name|Cache
 argument_list|<
 name|String
 argument_list|,
@@ -1447,9 +1461,9 @@ argument_list|)
 decl_stmt|;
 name|assertEquals
 argument_list|(
-literal|"should contain at least the default connection"
+literal|"connection cache should start empty"
 argument_list|,
-literal|1
+literal|0
 argument_list|,
 name|connectionMap
 operator|.
@@ -1471,7 +1485,7 @@ name|assertEquals
 argument_list|(
 literal|"statement creation implicitly creates a connection server-side"
 argument_list|,
-literal|2
+literal|1
 argument_list|,
 name|connectionMap
 operator|.
@@ -1493,7 +1507,7 @@ name|assertEquals
 argument_list|(
 literal|"statement creation implicitly creates a connection server-side"
 argument_list|,
-literal|3
+literal|2
 argument_list|,
 name|connectionMap
 operator|.
@@ -1542,6 +1556,18 @@ operator|.
 name|close
 argument_list|()
 expr_stmt|;
+name|assertEquals
+argument_list|(
+literal|"closing a connection closes the server-side connection"
+argument_list|,
+literal|1
+argument_list|,
+name|connectionMap
+operator|.
+name|size
+argument_list|()
+argument_list|)
+expr_stmt|;
 name|conn1
 operator|.
 name|close
@@ -1551,7 +1577,7 @@ name|assertEquals
 argument_list|(
 literal|"closing a connection closes the server-side connection"
 argument_list|,
-literal|1
+literal|0
 argument_list|,
 name|connectionMap
 operator|.
@@ -2197,11 +2223,11 @@ return|;
 block|}
 comment|/**      * Reach into the guts of a quasi-remote connection and pull out the      * statement map from the other side.      * TODO: refactor tests to replace reflection with package-local access      */
 specifier|static
-name|Map
+name|Cache
 argument_list|<
 name|Integer
 argument_list|,
-name|Statement
+name|Object
 argument_list|>
 name|getRemoteStatementMap
 parameter_list|(
@@ -2351,7 +2377,7 @@ name|class
 operator|.
 name|getDeclaredField
 argument_list|(
-literal|"statementMap"
+literal|"statementCache"
 argument_list|)
 decl_stmt|;
 name|jdbcMetaStatementMapF
@@ -2361,13 +2387,14 @@ argument_list|(
 literal|true
 argument_list|)
 expr_stmt|;
+comment|//noinspection unchecked
 return|return
 operator|(
-name|Map
+name|Cache
 argument_list|<
 name|Integer
 argument_list|,
-name|Statement
+name|Object
 argument_list|>
 operator|)
 name|jdbcMetaStatementMapF
@@ -2380,7 +2407,7 @@ return|;
 block|}
 comment|/**      * Reach into the guts of a quasi-remote connection and pull out the      * connection map from the other side.      * TODO: refactor tests to replace reflection with package-local access      */
 specifier|static
-name|Map
+name|Cache
 argument_list|<
 name|String
 argument_list|,
@@ -2526,7 +2553,7 @@ name|remoteMetaServiceService
 argument_list|)
 decl_stmt|;
 name|Field
-name|jdbcMetaStatementMapF
+name|jdbcMetaConnectionCacheF
 init|=
 name|JdbcMeta
 operator|.
@@ -2534,26 +2561,27 @@ name|class
 operator|.
 name|getDeclaredField
 argument_list|(
-literal|"connectionMap"
+literal|"connectionCache"
 argument_list|)
 decl_stmt|;
-name|jdbcMetaStatementMapF
+name|jdbcMetaConnectionCacheF
 operator|.
 name|setAccessible
 argument_list|(
 literal|true
 argument_list|)
 expr_stmt|;
+comment|//noinspection unchecked
 return|return
 operator|(
-name|Map
+name|Cache
 argument_list|<
 name|String
 argument_list|,
 name|Connection
 argument_list|>
 operator|)
-name|jdbcMetaStatementMapF
+name|jdbcMetaConnectionCacheF
 operator|.
 name|get
 argument_list|(

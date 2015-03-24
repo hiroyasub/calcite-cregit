@@ -119,7 +119,7 @@ name|join
 argument_list|()
 expr_stmt|;
 block|}
-comment|/**    * Create and start an {@link HttpServer}.    * @param args<br />&nbsp;&nbsp;args[0]: the {@link Meta.Factory} class name.<br />    *&nbsp;&nbsp;args[1:]: arguments passed along to    *             {@link Meta.Factory#create(java.util.List)}    */
+comment|/**    * Creates and starts an {@link HttpServer}.    *    *<p>Arguments are as follows:    *<ul>    *<li>args[0]: the {@link Meta.Factory} class name    *<li>args[1+]: arguments passed along to    *   {@link Meta.Factory#create(java.util.List)}    *</ul>    *    * @param args Command-line arguments    */
 specifier|public
 specifier|static
 name|HttpServer

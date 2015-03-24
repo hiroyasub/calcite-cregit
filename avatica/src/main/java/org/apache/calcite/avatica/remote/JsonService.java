@@ -589,8 +589,6 @@ argument_list|)
 throw|;
 block|}
 block|}
-annotation|@
-name|Override
 specifier|public
 name|CloseStatementResponse
 name|apply
@@ -632,8 +630,6 @@ argument_list|)
 throw|;
 block|}
 block|}
-annotation|@
-name|Override
 specifier|public
 name|CloseConnectionResponse
 name|apply

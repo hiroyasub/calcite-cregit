@@ -1095,8 +1095,6 @@ name|id
 argument_list|)
 return|;
 block|}
-annotation|@
-name|Override
 specifier|public
 name|CloseStatementResponse
 name|apply
@@ -1132,8 +1130,6 @@ name|CloseStatementResponse
 argument_list|()
 return|;
 block|}
-annotation|@
-name|Override
 specifier|public
 name|CloseConnectionResponse
 name|apply
