@@ -1022,10 +1022,16 @@ return|return
 operator|new
 name|StatementHandle
 argument_list|(
+name|ch
+operator|.
+name|id
+argument_list|,
 name|connection
 operator|.
 name|statementCount
 operator|++
+argument_list|,
+literal|null
 argument_list|)
 return|;
 block|}
@@ -1376,6 +1382,10 @@ return|return
 operator|new
 name|MetaResultSet
 argument_list|(
+name|connection
+operator|.
+name|id
+argument_list|,
 name|statement
 operator|.
 name|getId

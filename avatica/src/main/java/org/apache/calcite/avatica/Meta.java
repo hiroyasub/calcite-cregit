@@ -516,12 +516,12 @@ name|Frame
 name|firstFrame
 parameter_list|)
 function_decl|;
-comment|/** Prepares a statement.    *    * @param h Statement handle    * @param sql SQL query    * @param maxRowCount Negative for no limit (different meaning than JDBC)    * @return Signature of prepared statement    */
-name|Signature
+comment|/** Prepares a statement.    *    * @param ch Connection handle    * @param sql SQL query    * @param maxRowCount Negative for no limit (different meaning than JDBC)    * @return Signature of prepared statement    */
+name|StatementHandle
 name|prepare
 parameter_list|(
-name|StatementHandle
-name|h
+name|ConnectionHandle
+name|ch
 parameter_list|,
 name|String
 name|sql
@@ -530,12 +530,12 @@ name|int
 name|maxRowCount
 parameter_list|)
 function_decl|;
-comment|/** Prepares and executes a statement.    *    * @param h Statement handle    * @param sql SQL query    * @param maxRowCount Negative for no limit (different meaning than JDBC)    * @param callback Callback to lock, clear and assign cursor    * @return Signature of prepared statement    */
+comment|/** Prepares and executes a statement.    *    * @param ch Connection handle    * @param sql SQL query    * @param maxRowCount Negative for no limit (different meaning than JDBC)    * @param callback Callback to lock, clear and assign cursor    * @return MetaResultSet containing statement ID and first frame of data    */
 name|MetaResultSet
 name|prepareAndExecute
 parameter_list|(
-name|StatementHandle
-name|h
+name|ConnectionHandle
+name|ch
 parameter_list|,
 name|String
 name|sql
@@ -652,6 +652,11 @@ name|MetaResultSet
 block|{
 specifier|public
 specifier|final
+name|String
+name|connectionId
+decl_stmt|;
+specifier|public
+specifier|final
 name|int
 name|statementId
 decl_stmt|;
@@ -673,6 +678,9 @@ decl_stmt|;
 specifier|public
 name|MetaResultSet
 parameter_list|(
+name|String
+name|connectionId
+parameter_list|,
 name|int
 name|statementId
 parameter_list|,
@@ -696,6 +704,12 @@ name|requireNonNull
 argument_list|(
 name|signature
 argument_list|)
+expr_stmt|;
+name|this
+operator|.
+name|connectionId
+operator|=
+name|connectionId
 expr_stmt|;
 name|this
 operator|.
@@ -1712,7 +1726,7 @@ name|ConnectionHandle
 block|{
 specifier|public
 specifier|final
-name|int
+name|String
 name|id
 decl_stmt|;
 annotation|@
@@ -1723,12 +1737,7 @@ name|toString
 parameter_list|()
 block|{
 return|return
-name|Integer
-operator|.
-name|toString
-argument_list|(
 name|id
-argument_list|)
 return|;
 block|}
 annotation|@
@@ -1741,7 +1750,7 @@ name|JsonProperty
 argument_list|(
 literal|"id"
 argument_list|)
-name|int
+name|String
 name|id
 parameter_list|)
 block|{
@@ -1759,8 +1768,19 @@ name|StatementHandle
 block|{
 specifier|public
 specifier|final
+name|String
+name|connectionId
+decl_stmt|;
+specifier|public
+specifier|final
 name|int
 name|id
+decl_stmt|;
+comment|// not final because LocalService#apply(PrepareRequest)
+comment|/** Only present for PreparedStatement handles, null otherwise. */
+specifier|public
+name|Signature
+name|signature
 decl_stmt|;
 annotation|@
 name|Override
@@ -1770,6 +1790,10 @@ name|toString
 parameter_list|()
 block|{
 return|return
+name|connectionId
+operator|+
+literal|"::"
+operator|+
 name|Integer
 operator|.
 name|toString
@@ -1786,17 +1810,45 @@ parameter_list|(
 annotation|@
 name|JsonProperty
 argument_list|(
+literal|"connectionId"
+argument_list|)
+name|String
+name|connectionId
+parameter_list|,
+annotation|@
+name|JsonProperty
+argument_list|(
 literal|"id"
 argument_list|)
 name|int
 name|id
+parameter_list|,
+annotation|@
+name|JsonProperty
+argument_list|(
+literal|"signature"
+argument_list|)
+name|Signature
+name|signature
 parameter_list|)
 block|{
+name|this
+operator|.
+name|connectionId
+operator|=
+name|connectionId
+expr_stmt|;
 name|this
 operator|.
 name|id
 operator|=
 name|id
+expr_stmt|;
+name|this
+operator|.
+name|signature
+operator|=
+name|signature
 expr_stmt|;
 block|}
 block|}
