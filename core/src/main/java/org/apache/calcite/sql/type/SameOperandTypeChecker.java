@@ -214,7 +214,17 @@ name|nOperands
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|// implement SqlOperandTypeChecker
+specifier|public
+name|Consistency
+name|getConsistency
+parameter_list|()
+block|{
+return|return
+name|Consistency
+operator|.
+name|NONE
+return|;
+block|}
 specifier|public
 name|boolean
 name|checkOperandTypes

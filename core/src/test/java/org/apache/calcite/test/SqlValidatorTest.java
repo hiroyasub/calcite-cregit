@@ -1391,34 +1391,29 @@ name|void
 name|testEqualNotEqualFails
 parameter_list|()
 block|{
-name|checkExpFails
+name|checkExp
 argument_list|(
-literal|"^''<>1^"
-argument_list|,
-literal|"(?s).*Cannot apply '<>' to arguments of type '<CHAR.0.><><INTEGER>'.*"
+literal|"''<>1"
 argument_list|)
 expr_stmt|;
-name|checkExpFails
+comment|// compare CHAR, INTEGER ok; implicitly convert CHAR
+name|checkExp
 argument_list|(
-literal|"^'1'>=1^"
-argument_list|,
-literal|"(?s).*Cannot apply '>=' to arguments of type '<CHAR.1.>>=<INTEGER>'.*"
+literal|"'1'>=1"
 argument_list|)
 expr_stmt|;
-name|checkExpFails
+name|checkExp
 argument_list|(
-literal|"^1<>n'abc'^"
-argument_list|,
-literal|"(?s).*Cannot apply '<>' to arguments of type '<INTEGER><><CHAR.3.>'.*"
+literal|"1<>n'abc'"
 argument_list|)
 expr_stmt|;
-name|checkExpFails
+comment|// compare INTEGER, NCHAR ok
+name|checkExp
 argument_list|(
-literal|"^''=.1^"
-argument_list|,
-literal|"(?s).*Cannot apply '=' to arguments of type '<CHAR.0.> =<DECIMAL.1..1.>'.*"
+literal|"''=.1"
 argument_list|)
 expr_stmt|;
+comment|// compare CHAR, DECIMAL ok
 name|checkExpFails
 argument_list|(
 literal|"^true<>1e-1^"
@@ -1426,13 +1421,12 @@ argument_list|,
 literal|"(?s).*Cannot apply '<>' to arguments of type '<BOOLEAN><><DOUBLE>'.*"
 argument_list|)
 expr_stmt|;
-name|checkExpFails
+name|checkExp
 argument_list|(
-literal|"^false=''^"
-argument_list|,
-literal|"(?s).*Cannot apply '=' to arguments of type '<BOOLEAN> =<CHAR.0.>'.*"
+literal|"false=''"
 argument_list|)
 expr_stmt|;
+comment|// compare BOOLEAN, CHAR ok
 name|checkExpFails
 argument_list|(
 literal|"^x'a4'=0.01^"
@@ -2217,9 +2211,15 @@ argument_list|(
 literal|"'a' between 'b' and 'c'"
 argument_list|)
 expr_stmt|;
-name|checkWholeExpFails
+name|checkExp
 argument_list|(
 literal|"'' between 2 and 3"
+argument_list|)
+expr_stmt|;
+comment|// can implicitly convert CHAR to INTEGER
+name|checkWholeExpFails
+argument_list|(
+literal|"date '2012-02-03' between 2 and 3"
 argument_list|,
 literal|"(?s).*Cannot apply 'BETWEEN' to arguments of type.*"
 argument_list|)
@@ -11775,7 +11775,7 @@ literal|"Unknown identifier 'E'"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Parser allows "*" in FROM clause because "*" can occur in any identifier.    * But validator must not.    *    *<p>See also    *<a href="https://issues.apache.org/jira/browse/CALCITE-546">[CALCITE-546]    * "Allow table, column and field called '*'"</a> (not yet fixed).    */
+comment|/**    * Parser allows "*" in FROM clause because "*" can occur in any identifier.    * But validator must not.    *    *<p>See also    *<a href="https://issues.apache.org/jira/browse/CALCITE-546">[CALCITE-546]    * Allow table, column and field called '*'</a> (not yet fixed).    */
 annotation|@
 name|Test
 specifier|public
@@ -12033,9 +12033,14 @@ argument_list|,
 name|ERR_IN_VALUES_INCOMPATIBLE
 argument_list|)
 expr_stmt|;
-name|checkExpFails
+name|checkExp
 argument_list|(
 literal|"false and ^1 in ('b', 'c')^"
+argument_list|)
+expr_stmt|;
+name|checkExpFails
+argument_list|(
+literal|"false and ^1 in (date '2012-01-02', date '2012-01-04')^"
 argument_list|,
 name|ERR_IN_OPERANDS_INCOMPATIBLE
 argument_list|)
@@ -14114,11 +14119,23 @@ parameter_list|()
 block|{
 name|checkFails
 argument_list|(
-literal|"select * from emp natural ^join^\n"
+literal|"select *\n"
+operator|+
+literal|"from (select ename as name, hiredate as deptno from emp)\n"
+operator|+
+literal|"natural ^join^\n"
 operator|+
 literal|"(select deptno, name as sal from dept)"
 argument_list|,
-literal|"Column 'SAL' matched using NATURAL keyword or USING clause has incompatible types: cannot compare 'INTEGER' to 'VARCHAR\\(10\\)'"
+literal|"Column 'DEPTNO' matched using NATURAL keyword or USING clause has incompatible types: cannot compare 'TIMESTAMP\\(0\\)' to 'INTEGER'"
+argument_list|)
+expr_stmt|;
+comment|// INTEGER and VARCHAR are comparable: VARCHAR implicit converts to INTEGER
+name|check
+argument_list|(
+literal|"select * from emp natural ^join^\n"
+operator|+
+literal|"(select deptno, name as sal from dept)"
 argument_list|)
 expr_stmt|;
 comment|// make sal occur more than once on rhs, it is ignored and therefore
@@ -14140,9 +14157,21 @@ parameter_list|()
 block|{
 name|checkFails
 argument_list|(
-literal|"select * from emp join (select deptno, name as sal from dept) using (deptno, ^sal^)"
+literal|"select *\n"
+operator|+
+literal|"from (select ename as name, hiredate as deptno from emp)\n"
+operator|+
+literal|"join (select deptno, name as sal from dept) using (^deptno^, sal)"
 argument_list|,
-literal|"Column 'SAL' matched using NATURAL keyword or USING clause has incompatible types: cannot compare 'INTEGER' to 'VARCHAR\\(10\\)'"
+literal|"Column 'DEPTNO' matched using NATURAL keyword or USING clause has incompatible types: cannot compare 'TIMESTAMP\\(0\\)' to 'INTEGER'"
+argument_list|)
+expr_stmt|;
+comment|// INTEGER and VARCHAR are comparable: VARCHAR implicit converts to INTEGER
+name|check
+argument_list|(
+literal|"select * from emp\n"
+operator|+
+literal|"join (select deptno, name as sal from dept) using (deptno, sal)"
 argument_list|)
 expr_stmt|;
 block|}
@@ -15268,7 +15297,7 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-633">[CALCITE-633],    * WITH ... ORDER BY cannot find table</a>. */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-633">[CALCITE-633]    * WITH ... ORDER BY cannot find table</a>. */
 annotation|@
 name|Test
 specifier|public
@@ -16560,6 +16589,131 @@ literal|"(?s).*Cannot apply '=' to arguments of type '<INTERVAL MONTH> =<INTERVA
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-613">[CALCITE-613]    * Implicitly convert strings in comparisons</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDateCompare
+parameter_list|()
+block|{
+comment|// can convert character value to date, time, timestamp, interval
+comment|// provided it is on one side of a comparison operator (=,<,>, BETWEEN)
+name|checkExpType
+argument_list|(
+literal|"date '2015-03-17'< '2015-03-18'"
+argument_list|,
+literal|"BOOLEAN NOT NULL"
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"date '2015-03-17'> '2015-03-18'"
+argument_list|,
+literal|"BOOLEAN NOT NULL"
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"date '2015-03-17' = '2015-03-18'"
+argument_list|,
+literal|"BOOLEAN NOT NULL"
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"'2015-03-17'< date '2015-03-18'"
+argument_list|,
+literal|"BOOLEAN NOT NULL"
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"date '2015-03-17' between '2015-03-16' and '2015-03-19'"
+argument_list|,
+literal|"BOOLEAN NOT NULL"
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"date '2015-03-17' between '2015-03-16' and '2015-03'||'-19'"
+argument_list|,
+literal|"BOOLEAN NOT NULL"
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"'2015-03-17' between date '2015-03-16' and date '2015-03-19'"
+argument_list|,
+literal|"BOOLEAN NOT NULL"
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"date '2015-03-17' between date '2015-03-16' and '2015-03-19'"
+argument_list|,
+literal|"BOOLEAN NOT NULL"
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"date '2015-03-17' between '2015-03-16' and date '2015-03-19'"
+argument_list|,
+literal|"BOOLEAN NOT NULL"
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"time '12:34:56'< '12:34:57'"
+argument_list|,
+literal|"BOOLEAN NOT NULL"
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"timestamp '2015-03-17 12:34:56'< '2015-03-17 12:34:57'"
+argument_list|,
+literal|"BOOLEAN NOT NULL"
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"interval '2' hour< '2:30'"
+argument_list|,
+literal|"BOOLEAN NOT NULL"
+argument_list|)
+expr_stmt|;
+comment|// can convert to exact and approximate numeric
+name|checkExpType
+argument_list|(
+literal|"123> '72'"
+argument_list|,
+literal|"BOOLEAN NOT NULL"
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"12.3> '7.2'"
+argument_list|,
+literal|"BOOLEAN NOT NULL"
+argument_list|)
+expr_stmt|;
+comment|// can convert to boolean
+name|checkExpType
+argument_list|(
+literal|"true = 'true'"
+argument_list|,
+literal|"BOOLEAN NOT NULL"
+argument_list|)
+expr_stmt|;
+name|checkExpFails
+argument_list|(
+literal|"^true and 'true'^"
+argument_list|,
+literal|"Cannot apply 'AND' to arguments of type '<BOOLEAN> AND<CHAR\\(4\\)>'\\..*"
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public
@@ -17562,7 +17716,7 @@ literal|"RecordType(INTEGER NOT NULL X, VARCHAR(20) NOT NULL EMAIL, INTEGER NOT 
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-xxx">CALCITE-xxx,    * "Unexpected upper-casing of keywords when using java lexer"</a>. */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-497">[CALCITE-497]    * Support optional qualifier for column name references</a>. */
 annotation|@
 name|Test
 specifier|public
@@ -18259,7 +18413,7 @@ literal|"RecordType(INTEGER NOT NULL x[y] z ) NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-145">CALCITE-145,    * "Unexpected upper-casing of keywords when using java lexer"</a>. */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-145">[CALCITE-145]    * Unexpected upper-casing of keywords when using java lexer</a>. */
 annotation|@
 name|Test
 specifier|public

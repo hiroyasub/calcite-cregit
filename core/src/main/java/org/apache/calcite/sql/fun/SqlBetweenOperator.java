@@ -481,6 +481,12 @@ argument_list|,
 name|RelDataTypeComparability
 operator|.
 name|ALL
+argument_list|,
+name|SqlOperandTypeChecker
+operator|.
+name|Consistency
+operator|.
+name|COMPARE
 argument_list|)
 decl_stmt|;
 specifier|private

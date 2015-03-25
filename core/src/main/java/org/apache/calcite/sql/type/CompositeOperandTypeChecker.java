@@ -249,6 +249,17 @@ name|allowedRules
 return|;
 block|}
 specifier|public
+name|Consistency
+name|getConsistency
+parameter_list|()
+block|{
+return|return
+name|Consistency
+operator|.
+name|NONE
+return|;
+block|}
+specifier|public
 name|String
 name|getAllowedSignatures
 parameter_list|(

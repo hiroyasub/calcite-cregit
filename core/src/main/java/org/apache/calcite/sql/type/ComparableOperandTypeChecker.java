@@ -107,6 +107,20 @@ end_import
 
 begin_import
 import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|base
+operator|.
+name|Preconditions
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -132,7 +146,15 @@ specifier|final
 name|RelDataTypeComparability
 name|requiredComparability
 decl_stmt|;
+specifier|private
+specifier|final
+name|Consistency
+name|consistency
+decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 name|ComparableOperandTypeChecker
 parameter_list|(
@@ -141,6 +163,31 @@ name|nOperands
 parameter_list|,
 name|RelDataTypeComparability
 name|requiredComparability
+parameter_list|)
+block|{
+name|this
+argument_list|(
+name|nOperands
+argument_list|,
+name|requiredComparability
+argument_list|,
+name|Consistency
+operator|.
+name|NONE
+argument_list|)
+expr_stmt|;
+block|}
+specifier|public
+name|ComparableOperandTypeChecker
+parameter_list|(
+name|int
+name|nOperands
+parameter_list|,
+name|RelDataTypeComparability
+name|requiredComparability
+parameter_list|,
+name|Consistency
+name|consistency
 parameter_list|)
 block|{
 name|super
@@ -153,6 +200,17 @@ operator|.
 name|requiredComparability
 operator|=
 name|requiredComparability
+expr_stmt|;
+name|this
+operator|.
+name|consistency
+operator|=
+name|Preconditions
+operator|.
+name|checkNotNull
+argument_list|(
+name|consistency
+argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
@@ -409,7 +467,6 @@ return|return
 name|b
 return|;
 block|}
-comment|// implement SqlOperandTypeChecker
 specifier|public
 name|String
 name|getAllowedSignatures
@@ -439,6 +496,17 @@ argument_list|,
 literal|"COMPARABLE_TYPE"
 argument_list|)
 argument_list|)
+return|;
+block|}
+annotation|@
+name|Override
+specifier|public
+name|Consistency
+name|getConsistency
+parameter_list|()
+block|{
+return|return
+name|consistency
 return|;
 block|}
 block|}

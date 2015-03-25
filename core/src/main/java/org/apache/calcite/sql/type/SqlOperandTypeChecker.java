@@ -96,6 +96,24 @@ name|String
 name|opName
 parameter_list|)
 function_decl|;
+comment|/** Returns the strategy for making the arguments have consistency types. */
+name|Consistency
+name|getConsistency
+parameter_list|()
+function_decl|;
+comment|/** Strategy used to make arguments consistent. */
+enum|enum
+name|Consistency
+block|{
+comment|/** Do not try to make arguments consistent. */
+name|NONE
+block|,
+comment|/** Make arguments of consistent type using comparison semantics.      * Character values are implicitly converted to numeric, date-time, interval      * or boolean. */
+name|COMPARE
+block|,
+comment|/** Convert all arguments to the least restrictive type. */
+name|LEAST_RESTRICTIVE
+block|}
 block|}
 end_interface
 

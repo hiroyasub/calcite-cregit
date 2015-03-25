@@ -516,6 +516,17 @@ operator|+
 literal|"(...)"
 return|;
 block|}
+specifier|public
+name|Consistency
+name|getConsistency
+parameter_list|()
+block|{
+return|return
+name|Consistency
+operator|.
+name|NONE
+return|;
+block|}
 block|}
 return|;
 block|}
@@ -1112,6 +1123,12 @@ argument_list|,
 name|RelDataTypeComparability
 operator|.
 name|ALL
+argument_list|,
+name|SqlOperandTypeChecker
+operator|.
+name|Consistency
+operator|.
+name|COMPARE
 argument_list|)
 decl_stmt|;
 comment|/**    * Operand type-checking strategy where operand type must allow ordered    * comparisons. Used when instance comparisons are made on single operand    * functions    */
@@ -1129,6 +1146,12 @@ argument_list|,
 name|RelDataTypeComparability
 operator|.
 name|ALL
+argument_list|,
+name|SqlOperandTypeChecker
+operator|.
+name|Consistency
+operator|.
+name|NONE
 argument_list|)
 decl_stmt|;
 comment|/**    * Operand type-checking strategy where operand types must allow unordered    * comparisons.    */
@@ -1146,6 +1169,12 @@ argument_list|,
 name|RelDataTypeComparability
 operator|.
 name|UNORDERED
+argument_list|,
+name|SqlOperandTypeChecker
+operator|.
+name|Consistency
+operator|.
+name|LEAST_RESTRICTIVE
 argument_list|)
 decl_stmt|;
 comment|/**    * Operand type-checking strategy where two operands must both be in the    * same string type family.    */
@@ -1736,6 +1765,17 @@ return|return
 literal|"UNNEST(<MULTISET>)"
 return|;
 block|}
+specifier|public
+name|Consistency
+name|getConsistency
+parameter_list|()
+block|{
+return|return
+name|Consistency
+operator|.
+name|NONE
+return|;
+block|}
 block|}
 decl_stmt|;
 comment|/** Checker that returns whether a value is a collection (multiset or array)    * of scalar or record values. */
@@ -1954,6 +1994,17 @@ argument_list|(
 literal|"RECORDTYPE(SINGLE FIELD)"
 argument_list|)
 argument_list|)
+return|;
+block|}
+specifier|public
+name|Consistency
+name|getConsistency
+parameter_list|()
+block|{
+return|return
+name|Consistency
+operator|.
+name|NONE
 return|;
 block|}
 block|}

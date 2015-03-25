@@ -186,7 +186,6 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|// implement SqlOperandTypeChecker
 specifier|public
 name|SqlOperandCountRange
 name|getOperandCountRange
@@ -204,7 +203,6 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|// implement SqlOperandTypeChecker
 specifier|public
 name|boolean
 name|checkOperandTypes
@@ -310,7 +308,6 @@ return|return
 literal|true
 return|;
 block|}
-comment|// implement SqlOperandTypeChecker
 specifier|public
 name|String
 name|getAllowedSignatures
@@ -415,6 +412,17 @@ name|sb
 operator|.
 name|toString
 argument_list|()
+return|;
+block|}
+specifier|public
+name|Consistency
+name|getConsistency
+parameter_list|()
+block|{
+return|return
+name|Consistency
+operator|.
+name|NONE
 return|;
 block|}
 block|}

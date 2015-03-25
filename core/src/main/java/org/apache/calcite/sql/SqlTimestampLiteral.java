@@ -65,6 +65,20 @@ end_import
 
 begin_import
 import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|base
+operator|.
+name|Preconditions
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -101,17 +115,13 @@ name|SqlParserPos
 name|pos
 parameter_list|)
 block|{
-name|super
+name|this
 argument_list|(
 name|cal
 argument_list|,
-name|hasTimeZone
-argument_list|,
-name|SqlTypeName
-operator|.
-name|TIMESTAMP
-argument_list|,
 name|precision
+argument_list|,
+name|hasTimeZone
 argument_list|,
 name|DateTimeUtils
 operator|.
@@ -157,10 +167,25 @@ argument_list|,
 name|pos
 argument_list|)
 expr_stmt|;
+name|Preconditions
+operator|.
+name|checkArgument
+argument_list|(
+name|this
+operator|.
+name|precision
+operator|>=
+literal|0
+operator|&&
+name|this
+operator|.
+name|precision
+operator|<=
+literal|3
+argument_list|)
+expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/*   /**    * Converts this literal to a {@link java.sql.Timestamp} object.    o/   public Timestamp getTimestamp() {     return new Timestamp(getCal().getTimeInMillis());   } */
-comment|/*   /**    * Converts this literal to a {@link java.sql.Time} object.    o/   public Time getTime() {     long millis = getCal().getTimeInMillis();     int tzOffset = Calendar.getInstance().getTimeZone().getOffset(millis);     return new Time(millis - tzOffset);   } */
 specifier|public
 name|SqlNode
 name|clone

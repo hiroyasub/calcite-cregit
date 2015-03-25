@@ -367,6 +367,17 @@ operator|+
 literal|"<MULTISET>"
 return|;
 block|}
+specifier|public
+name|Consistency
+name|getConsistency
+parameter_list|()
+block|{
+return|return
+name|Consistency
+operator|.
+name|NONE
+return|;
+block|}
 block|}
 end_class
 

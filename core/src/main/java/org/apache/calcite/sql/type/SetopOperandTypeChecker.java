@@ -601,7 +601,17 @@ name|opName
 operator|+
 literal|" {1}"
 return|;
-comment|// todo: Wael, please review.
+block|}
+specifier|public
+name|Consistency
+name|getConsistency
+parameter_list|()
+block|{
+return|return
+name|Consistency
+operator|.
+name|NONE
+return|;
 block|}
 block|}
 end_class
