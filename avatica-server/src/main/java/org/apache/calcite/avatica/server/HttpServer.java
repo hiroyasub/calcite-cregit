@@ -146,6 +146,7 @@ specifier|final
 name|Handler
 name|handler
 decl_stmt|;
+specifier|public
 name|HttpServer
 parameter_list|(
 name|int
@@ -168,6 +169,7 @@ operator|=
 name|handler
 expr_stmt|;
 block|}
+specifier|public
 name|void
 name|start
 parameter_list|()

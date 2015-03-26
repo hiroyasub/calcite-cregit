@@ -128,6 +128,7 @@ comment|/**  * Jetty handler that executes Avatica JSON request-responses.  */
 end_comment
 
 begin_class
+specifier|public
 class|class
 name|AvaticaHandler
 extends|extends
