@@ -284,7 +284,7 @@ name|boolean
 name|force
 parameter_list|,
 name|ProjectFactory
-name|pFactory
+name|projectFactory
 parameter_list|)
 block|{
 name|super
@@ -311,7 +311,7 @@ operator|+
 operator|(
 name|force
 condition|?
-literal|": force mode"
+literal|":force_mode"
 else|:
 literal|""
 operator|)
@@ -323,13 +323,14 @@ name|force
 operator|=
 name|force
 expr_stmt|;
+name|this
+operator|.
 name|projectFactory
 operator|=
-name|pFactory
+name|projectFactory
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|// implement RelOptRule
 specifier|public
 name|void
 name|onMatch
@@ -525,11 +526,12 @@ name|rexBuilder
 argument_list|)
 decl_stmt|;
 comment|// create a RexProgram for the topmost project
+specifier|final
 name|List
 argument_list|<
 name|RexNode
 argument_list|>
-name|projExprs
+name|projects
 init|=
 name|topProject
 operator|.
@@ -548,7 +550,7 @@ operator|.
 name|getRowType
 argument_list|()
 argument_list|,
-name|projExprs
+name|projects
 argument_list|,
 literal|null
 argument_list|,
@@ -577,32 +579,32 @@ argument_list|)
 decl_stmt|;
 comment|// re-expand the topmost projection expressions, now that they
 comment|// reference the children of the bottom-most project
+specifier|final
 name|int
-name|nProjExprs
+name|projectCount
 init|=
-name|projExprs
+name|projects
 operator|.
 name|size
 argument_list|()
 decl_stmt|;
+specifier|final
 name|List
 argument_list|<
 name|RexNode
 argument_list|>
-name|newProjExprs
+name|newProjects
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|RexNode
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 name|List
 argument_list|<
 name|RexLocalRef
 argument_list|>
-name|projList
+name|projectRefs
 init|=
 name|mergedProgram
 operator|.
@@ -618,13 +620,13 @@ literal|0
 init|;
 name|i
 operator|<
-name|nProjExprs
+name|projectCount
 condition|;
 name|i
 operator|++
 control|)
 block|{
-name|newProjExprs
+name|newProjects
 operator|.
 name|add
 argument_list|(
@@ -632,7 +634,7 @@ name|mergedProgram
 operator|.
 name|expandLocalRef
 argument_list|(
-name|projList
+name|projectRefs
 operator|.
 name|get
 argument_list|(
@@ -655,7 +657,7 @@ operator|.
 name|getInput
 argument_list|()
 argument_list|,
-name|newProjExprs
+name|newProjects
 argument_list|,
 name|topProject
 operator|.
