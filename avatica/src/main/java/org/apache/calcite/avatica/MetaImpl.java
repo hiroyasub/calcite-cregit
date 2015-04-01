@@ -291,10 +291,17 @@ name|MetaImpl
 implements|implements
 name|Meta
 block|{
+comment|/** The {@link AvaticaConnection} backing {@code this}. */
 specifier|protected
 specifier|final
 name|AvaticaConnection
 name|connection
+decl_stmt|;
+comment|/** Represents the various states specific to {@link #connection}.    *    *<p>Note: this instance is used recursively with {@link #connection}'s getter and setter    * methods.</p>    */
+specifier|protected
+specifier|final
+name|ConnectionPropertiesImpl
+name|connProps
 decl_stmt|;
 specifier|public
 name|MetaImpl
@@ -308,6 +315,14 @@ operator|.
 name|connection
 operator|=
 name|connection
+expr_stmt|;
+name|this
+operator|.
+name|connProps
+operator|=
+operator|new
+name|ConnectionPropertiesImpl
+argument_list|()
 expr_stmt|;
 block|}
 comment|/** Uses a {@link org.apache.calcite.avatica.Meta.CursorFactory} to convert    * an {@link Iterable} into a    * {@link org.apache.calcite.avatica.util.Cursor}. */
@@ -1029,6 +1044,43 @@ comment|//      connection.close();
 comment|//    } catch (SQLException e) {
 comment|//      throw new RuntimeException(e);
 comment|//    }
+block|}
+annotation|@
+name|Override
+specifier|public
+name|ConnectionProperties
+name|connectionSync
+parameter_list|(
+name|ConnectionHandle
+name|ch
+parameter_list|,
+name|ConnectionProperties
+name|connProps
+parameter_list|)
+block|{
+name|this
+operator|.
+name|connProps
+operator|.
+name|merge
+argument_list|(
+name|connProps
+argument_list|)
+expr_stmt|;
+name|this
+operator|.
+name|connProps
+operator|.
+name|setDirty
+argument_list|(
+literal|false
+argument_list|)
+expr_stmt|;
+return|return
+name|this
+operator|.
+name|connProps
+return|;
 block|}
 specifier|public
 name|StatementHandle
