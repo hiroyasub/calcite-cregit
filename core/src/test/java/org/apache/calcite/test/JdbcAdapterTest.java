@@ -231,6 +231,661 @@ literal|"store_id=24; store_name=Store 24\n"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testEquiJoinPlan
+parameter_list|()
+block|{
+name|CalciteAssert
+operator|.
+name|model
+argument_list|(
+name|JdbcTest
+operator|.
+name|SCOTT_MODEL
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select empno, ename, e.deptno, dname \n"
+operator|+
+literal|"from scott.emp e inner join scott.dept d \n"
+operator|+
+literal|"on e.deptno = d.deptno"
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|"PLAN=JdbcToEnumerableConverter\n"
+operator|+
+literal|"  JdbcProject(EMPNO=[$2], ENAME=[$3], DEPTNO=[$4], DNAME=[$1])\n"
+operator|+
+literal|"    JdbcJoin(condition=[=($4, $0)], joinType=[inner])\n"
+operator|+
+literal|"      JdbcProject(DEPTNO=[$0], DNAME=[$1])\n"
+operator|+
+literal|"        JdbcTableScan(table=[[SCOTT, DEPT]])\n"
+operator|+
+literal|"      JdbcProject(EMPNO=[$0], ENAME=[$1], DEPTNO=[$7])\n"
+operator|+
+literal|"        JdbcTableScan(table=[[SCOTT, EMP]])"
+argument_list|)
+operator|.
+name|runs
+argument_list|()
+operator|.
+name|enable
+argument_list|(
+name|CalciteAssert
+operator|.
+name|DB
+operator|==
+name|CalciteAssert
+operator|.
+name|DatabaseInstance
+operator|.
+name|HSQLDB
+argument_list|)
+operator|.
+name|planHasSql
+argument_list|(
+literal|"SELECT \"t0\".\"EMPNO\", \"t0\".\"ENAME\", "
+operator|+
+literal|"\"t0\".\"DEPTNO\", \"t\".\"DNAME\"\n"
+operator|+
+literal|"FROM (SELECT \"DEPTNO\", \"DNAME\"\n"
+operator|+
+literal|"FROM \"SCOTT\".\"DEPT\") AS \"t\"\n"
+operator|+
+literal|"INNER JOIN (SELECT \"EMPNO\", \"ENAME\", \"DEPTNO\"\n"
+operator|+
+literal|"FROM \"SCOTT\".\"EMP\") AS \"t0\" "
+operator|+
+literal|"ON \"t\".\"DEPTNO\" = \"t0\".\"DEPTNO\""
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-631">[CALCITE-631]    * Push theta joins down to JDBC adapter</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testNonEquiJoinPlan
+parameter_list|()
+block|{
+name|CalciteAssert
+operator|.
+name|model
+argument_list|(
+name|JdbcTest
+operator|.
+name|SCOTT_MODEL
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select empno, ename, grade \n"
+operator|+
+literal|"from scott.emp e inner join scott.salgrade s \n"
+operator|+
+literal|"on e.sal> s.losal and e.sal< s.hisal"
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|"PLAN=JdbcToEnumerableConverter\n"
+operator|+
+literal|"  JdbcProject(EMPNO=[$3], ENAME=[$4], GRADE=[$0])\n"
+operator|+
+literal|"    JdbcJoin(condition=[AND(>($5, $1),<($5, $2))], joinType=[inner])\n"
+operator|+
+literal|"      JdbcTableScan(table=[[SCOTT, SALGRADE]])\n"
+operator|+
+literal|"      JdbcProject(EMPNO=[$0], ENAME=[$1], SAL=[$5])\n"
+operator|+
+literal|"        JdbcTableScan(table=[[SCOTT, EMP]])"
+argument_list|)
+operator|.
+name|runs
+argument_list|()
+operator|.
+name|enable
+argument_list|(
+name|CalciteAssert
+operator|.
+name|DB
+operator|==
+name|CalciteAssert
+operator|.
+name|DatabaseInstance
+operator|.
+name|HSQLDB
+argument_list|)
+operator|.
+name|planHasSql
+argument_list|(
+literal|"SELECT \"t\".\"EMPNO\", \"t\".\"ENAME\", "
+operator|+
+literal|"\"SALGRADE\".\"GRADE\"\n"
+operator|+
+literal|"FROM \"SCOTT\".\"SALGRADE\"\n"
+operator|+
+literal|"INNER JOIN (SELECT \"EMPNO\", \"ENAME\", \"SAL\"\n"
+operator|+
+literal|"FROM \"SCOTT\".\"EMP\") AS \"t\" ON \"SALGRADE\".\"LOSAL\"< \"t\".\"SAL\" AND \"SALGRADE\".\"HISAL\"> \"t\".\"SAL\""
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testNonEquiJoinReverseConditionPlan
+parameter_list|()
+block|{
+name|CalciteAssert
+operator|.
+name|model
+argument_list|(
+name|JdbcTest
+operator|.
+name|SCOTT_MODEL
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select empno, ename, grade \n"
+operator|+
+literal|"from scott.emp e inner join scott.salgrade s \n"
+operator|+
+literal|"on s.losal<= e.sal and s.hisal>= e.sal"
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|"PLAN=JdbcToEnumerableConverter\n"
+operator|+
+literal|"  JdbcProject(EMPNO=[$3], ENAME=[$4], GRADE=[$0])\n"
+operator|+
+literal|"    JdbcJoin(condition=[AND(<=($1, $5),>=($2, $5))], joinType=[inner])\n"
+operator|+
+literal|"      JdbcTableScan(table=[[SCOTT, SALGRADE]])\n"
+operator|+
+literal|"      JdbcProject(EMPNO=[$0], ENAME=[$1], SAL=[$5])\n"
+operator|+
+literal|"        JdbcTableScan(table=[[SCOTT, EMP]])"
+argument_list|)
+operator|.
+name|runs
+argument_list|()
+operator|.
+name|enable
+argument_list|(
+name|CalciteAssert
+operator|.
+name|DB
+operator|==
+name|CalciteAssert
+operator|.
+name|DatabaseInstance
+operator|.
+name|HSQLDB
+argument_list|)
+operator|.
+name|planHasSql
+argument_list|(
+literal|"SELECT \"t\".\"EMPNO\", \"t\".\"ENAME\", "
+operator|+
+literal|"\"SALGRADE\".\"GRADE\"\n"
+operator|+
+literal|"FROM \"SCOTT\".\"SALGRADE\"\n"
+operator|+
+literal|"INNER JOIN (SELECT \"EMPNO\", \"ENAME\", \"SAL\"\n"
+operator|+
+literal|"FROM \"SCOTT\".\"EMP\") AS \"t\" ON \"SALGRADE\".\"LOSAL\"<= \"t\".\"SAL\" AND \"SALGRADE\".\"HISAL\">= \"t\".\"SAL\""
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMixedJoinPlan
+parameter_list|()
+block|{
+name|CalciteAssert
+operator|.
+name|model
+argument_list|(
+name|JdbcTest
+operator|.
+name|SCOTT_MODEL
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select e.empno, e.ename, e.empno, e.ename  \n"
+operator|+
+literal|"from scott.emp e inner join scott.emp m on  \n"
+operator|+
+literal|"e.mgr = m.empno and e.sal> m.sal"
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|"PLAN=JdbcToEnumerableConverter\n"
+operator|+
+literal|"  JdbcProject(EMPNO=[$2], ENAME=[$3], EMPNO0=[$2], ENAME0=[$3])\n"
+operator|+
+literal|"    JdbcJoin(condition=[AND(=($4, $0),>($5, $1))], joinType=[inner])\n"
+operator|+
+literal|"      JdbcProject(EMPNO=[$0], SAL=[$5])\n"
+operator|+
+literal|"        JdbcTableScan(table=[[SCOTT, EMP]])\n"
+operator|+
+literal|"      JdbcProject(EMPNO=[$0], ENAME=[$1], MGR=[$3], SAL=[$5])\n"
+operator|+
+literal|"        JdbcTableScan(table=[[SCOTT, EMP]])"
+argument_list|)
+operator|.
+name|runs
+argument_list|()
+operator|.
+name|enable
+argument_list|(
+name|CalciteAssert
+operator|.
+name|DB
+operator|==
+name|CalciteAssert
+operator|.
+name|DatabaseInstance
+operator|.
+name|HSQLDB
+argument_list|)
+operator|.
+name|planHasSql
+argument_list|(
+literal|"SELECT \"t0\".\"EMPNO\", \"t0\".\"ENAME\", "
+operator|+
+literal|"\"t0\".\"EMPNO\" AS \"EMPNO0\", \"t0\".\"ENAME\" AS \"ENAME0\"\n"
+operator|+
+literal|"FROM (SELECT \"EMPNO\", \"SAL\"\n"
+operator|+
+literal|"FROM \"SCOTT\".\"EMP\") AS \"t\"\n"
+operator|+
+literal|"INNER JOIN (SELECT \"EMPNO\", \"ENAME\", \"MGR\", \"SAL\"\n"
+operator|+
+literal|"FROM \"SCOTT\".\"EMP\") AS \"t0\" ON \"t\".\"EMPNO\" = \"t0\".\"MGR\" AND \"t\".\"SAL\"< \"t0\".\"SAL\""
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMixedJoinWithOrPlan
+parameter_list|()
+block|{
+name|CalciteAssert
+operator|.
+name|model
+argument_list|(
+name|JdbcTest
+operator|.
+name|SCOTT_MODEL
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select e.empno, e.ename, e.empno, e.ename  \n"
+operator|+
+literal|"from scott.emp e inner join scott.emp m on  \n"
+operator|+
+literal|"e.mgr = m.empno and (e.sal> m.sal or m.hiredate> e.hiredate)"
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|"PLAN=JdbcToEnumerableConverter\n"
+operator|+
+literal|"  JdbcProject(EMPNO=[$3], ENAME=[$4], EMPNO0=[$3], ENAME0=[$4])\n"
+operator|+
+literal|"    JdbcJoin(condition=[AND(=($5, $0), OR(>($7, $2),>($1, $6)))], joinType=[inner])\n"
+operator|+
+literal|"      JdbcProject(EMPNO=[$0], HIREDATE=[$4], SAL=[$5])\n"
+operator|+
+literal|"        JdbcTableScan(table=[[SCOTT, EMP]])\n"
+operator|+
+literal|"      JdbcProject(EMPNO=[$0], ENAME=[$1], MGR=[$3], HIREDATE=[$4], SAL=[$5])\n"
+operator|+
+literal|"        JdbcTableScan(table=[[SCOTT, EMP]])"
+argument_list|)
+operator|.
+name|runs
+argument_list|()
+operator|.
+name|enable
+argument_list|(
+name|CalciteAssert
+operator|.
+name|DB
+operator|==
+name|CalciteAssert
+operator|.
+name|DatabaseInstance
+operator|.
+name|HSQLDB
+argument_list|)
+operator|.
+name|planHasSql
+argument_list|(
+literal|"SELECT \"t0\".\"EMPNO\", \"t0\".\"ENAME\", "
+operator|+
+literal|"\"t0\".\"EMPNO\" AS \"EMPNO0\", \"t0\".\"ENAME\" AS \"ENAME0\"\n"
+operator|+
+literal|"FROM (SELECT \"EMPNO\", \"HIREDATE\", \"SAL\"\n"
+operator|+
+literal|"FROM \"SCOTT\".\"EMP\") AS \"t\"\n"
+operator|+
+literal|"INNER JOIN (SELECT \"EMPNO\", \"ENAME\", \"MGR\", \"HIREDATE\", \"SAL\"\n"
+operator|+
+literal|"FROM \"SCOTT\".\"EMP\") AS \"t0\" ON \"t\".\"EMPNO\" = \"t0\".\"MGR\" AND (\"t\".\"SAL\"< \"t0\".\"SAL\" OR \"t\".\"HIREDATE\"> \"t0\".\"HIREDATE\")"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|tesJoin3TablesPlan
+parameter_list|()
+block|{
+name|CalciteAssert
+operator|.
+name|model
+argument_list|(
+name|JdbcTest
+operator|.
+name|SCOTT_MODEL
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select  empno, ename, dname, grade \n"
+operator|+
+literal|"from scott.emp e inner join scott.dept d \n"
+operator|+
+literal|"on e.deptno = d.deptno \n"
+operator|+
+literal|"inner join scott.salgrade s \n"
+operator|+
+literal|"on e.sal> s.losal and e.sal< s.hisal"
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|"PLAN=JdbcToEnumerableConverter\n"
+operator|+
+literal|"  JdbcProject(EMPNO=[$0], ENAME=[$1], DNAME=[$12], GRADE=[$8])\n"
+operator|+
+literal|"    JdbcJoin(condition=[=($7, $11)], joinType=[inner])\n"
+operator|+
+literal|"      JdbcJoin(condition=[AND(>($5, $9),<($5, $10))], joinType=[inner])\n"
+operator|+
+literal|"        JdbcTableScan(table=[[SCOTT, EMP]])\n"
+operator|+
+literal|"        JdbcTableScan(table=[[SCOTT, SALGRADE]])\n"
+operator|+
+literal|"      JdbcTableScan(table=[[SCOTT, DEPT]])"
+argument_list|)
+operator|.
+name|runs
+argument_list|()
+operator|.
+name|enable
+argument_list|(
+name|CalciteAssert
+operator|.
+name|DB
+operator|==
+name|CalciteAssert
+operator|.
+name|DatabaseInstance
+operator|.
+name|HSQLDB
+argument_list|)
+operator|.
+name|planHasSql
+argument_list|(
+literal|"SELECT \"EMP\".\"EMPNO\", \"EMP\".\"ENAME\", "
+operator|+
+literal|"\"DEPT\".\"DNAME\", \"SALGRADE\".\"GRADE\"\n"
+operator|+
+literal|"FROM \"SCOTT\".\"EMP\"\n"
+operator|+
+literal|"INNER JOIN \"SCOTT\".\"SALGRADE\" ON \"EMP\".\"SAL\"> \"SALGRADE\".\"LOSAL\" AND \"EMP\".\"SAL\"< \"SALGRADE\".\"HISAL\"\n"
+operator|+
+literal|"INNER JOIN \"SCOTT\".\"DEPT\" ON \"EMP\".\"DEPTNO\" = \"DEPT\".\"DEPTNO\""
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testCrossJoinWithJoinKeyPlan
+parameter_list|()
+block|{
+name|CalciteAssert
+operator|.
+name|model
+argument_list|(
+name|JdbcTest
+operator|.
+name|SCOTT_MODEL
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select empno, ename, d.deptno, dname \n"
+operator|+
+literal|"from scott.emp e,scott.dept d \n"
+operator|+
+literal|"where e.deptno = d.deptno"
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|"PLAN=JdbcToEnumerableConverter\n"
+operator|+
+literal|"  JdbcProject(EMPNO=[$2], ENAME=[$3], DEPTNO=[$0], DNAME=[$1])\n"
+operator|+
+literal|"    JdbcJoin(condition=[=($4, $0)], joinType=[inner])\n"
+operator|+
+literal|"      JdbcProject(DEPTNO=[$0], DNAME=[$1])\n"
+operator|+
+literal|"        JdbcTableScan(table=[[SCOTT, DEPT]])\n"
+operator|+
+literal|"      JdbcProject(EMPNO=[$0], ENAME=[$1], DEPTNO=[$7])\n"
+operator|+
+literal|"        JdbcTableScan(table=[[SCOTT, EMP]])"
+argument_list|)
+operator|.
+name|runs
+argument_list|()
+operator|.
+name|enable
+argument_list|(
+name|CalciteAssert
+operator|.
+name|DB
+operator|==
+name|CalciteAssert
+operator|.
+name|DatabaseInstance
+operator|.
+name|HSQLDB
+argument_list|)
+operator|.
+name|planHasSql
+argument_list|(
+literal|"SELECT \"t0\".\"EMPNO\", \"t0\".\"ENAME\", "
+operator|+
+literal|"\"t\".\"DEPTNO\", \"t\".\"DNAME\"\n"
+operator|+
+literal|"FROM (SELECT \"DEPTNO\", \"DNAME\"\n"
+operator|+
+literal|"FROM \"SCOTT\".\"DEPT\") AS \"t\"\n"
+operator|+
+literal|"INNER JOIN (SELECT \"EMPNO\", \"ENAME\", \"DEPTNO\"\n"
+operator|+
+literal|"FROM \"SCOTT\".\"EMP\") AS \"t0\" ON \"t\".\"DEPTNO\" = \"t0\".\"DEPTNO\""
+argument_list|)
+expr_stmt|;
+block|}
+comment|// JdbcJoin not used for this
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testCartesianJoinWithoutKeyPlan
+parameter_list|()
+block|{
+name|CalciteAssert
+operator|.
+name|model
+argument_list|(
+name|JdbcTest
+operator|.
+name|SCOTT_MODEL
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select empno, ename, d.deptno, dname \n"
+operator|+
+literal|"from scott.emp e,scott.dept d"
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|"PLAN=EnumerableJoin(condition=[true], "
+operator|+
+literal|"joinType=[inner])\n"
+operator|+
+literal|"  JdbcToEnumerableConverter\n"
+operator|+
+literal|"    JdbcProject(EMPNO=[$0], ENAME=[$1])\n"
+operator|+
+literal|"      JdbcTableScan(table=[[SCOTT, EMP]])\n"
+operator|+
+literal|"  JdbcToEnumerableConverter\n"
+operator|+
+literal|"    JdbcProject(DEPTNO=[$0], DNAME=[$1])\n"
+operator|+
+literal|"      JdbcTableScan(table=[[SCOTT, DEPT]])"
+argument_list|)
+operator|.
+name|runs
+argument_list|()
+operator|.
+name|enable
+argument_list|(
+name|CalciteAssert
+operator|.
+name|DB
+operator|==
+name|CalciteAssert
+operator|.
+name|DatabaseInstance
+operator|.
+name|HSQLDB
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testCrossJoinWithJoinKeyAndFilterPlan
+parameter_list|()
+block|{
+name|CalciteAssert
+operator|.
+name|model
+argument_list|(
+name|JdbcTest
+operator|.
+name|SCOTT_MODEL
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select empno, ename, d.deptno, dname \n"
+operator|+
+literal|"from scott.emp e,scott.dept d \n"
+operator|+
+literal|"where e.deptno = d.deptno \n"
+operator|+
+literal|"and e.deptno=20"
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|"PLAN=JdbcToEnumerableConverter\n"
+operator|+
+literal|"  JdbcProject(EMPNO=[$2], ENAME=[$3], DEPTNO=[$0], DNAME=[$1])\n"
+operator|+
+literal|"    JdbcJoin(condition=[=($4, $0)], joinType=[inner])\n"
+operator|+
+literal|"      JdbcProject(DEPTNO=[$0], DNAME=[$1])\n"
+operator|+
+literal|"        JdbcTableScan(table=[[SCOTT, DEPT]])\n"
+operator|+
+literal|"      JdbcProject(EMPNO=[$0], ENAME=[$1], DEPTNO=[$7])\n"
+operator|+
+literal|"        JdbcFilter(condition=[=(CAST($7):INTEGER, 20)])\n"
+operator|+
+literal|"          JdbcTableScan(table=[[SCOTT, EMP]])"
+argument_list|)
+operator|.
+name|runs
+argument_list|()
+operator|.
+name|enable
+argument_list|(
+name|CalciteAssert
+operator|.
+name|DB
+operator|==
+name|CalciteAssert
+operator|.
+name|DatabaseInstance
+operator|.
+name|HSQLDB
+argument_list|)
+operator|.
+name|planHasSql
+argument_list|(
+literal|"SELECT \"t1\".\"EMPNO\", \"t1\".\"ENAME\", "
+operator|+
+literal|"\"t\".\"DEPTNO\", \"t\".\"DNAME\"\n"
+operator|+
+literal|"FROM (SELECT \"DEPTNO\", \"DNAME\"\n"
+operator|+
+literal|"FROM \"SCOTT\".\"DEPT\") AS \"t\"\n"
+operator|+
+literal|"INNER JOIN (SELECT \"EMPNO\", \"ENAME\", \"DEPTNO\"\n"
+operator|+
+literal|"FROM \"SCOTT\".\"EMP\"\n"
+operator|+
+literal|"WHERE CAST(\"DEPTNO\" AS INTEGER) = 20) AS \"t1\" ON \"t\".\"DEPTNO\" = \"t1\".\"DEPTNO\""
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 end_class
 

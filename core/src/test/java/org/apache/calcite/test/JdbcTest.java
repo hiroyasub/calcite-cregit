@@ -1857,6 +1857,92 @@ specifier|public
 specifier|static
 specifier|final
 name|String
+name|SCOTT_SCHEMA
+init|=
+literal|"     {\n"
+operator|+
+literal|"       type: 'jdbc',\n"
+operator|+
+literal|"       name: 'SCOTT',\n"
+operator|+
+literal|"       jdbcDriver: '"
+operator|+
+name|CalciteAssert
+operator|.
+name|DB
+operator|.
+name|scott
+operator|.
+name|driver
+operator|+
+literal|"',\n"
+operator|+
+literal|"       jdbcUser: '"
+operator|+
+name|CalciteAssert
+operator|.
+name|DB
+operator|.
+name|scott
+operator|.
+name|username
+operator|+
+literal|"',\n"
+operator|+
+literal|"       jdbcPassword: '"
+operator|+
+name|CalciteAssert
+operator|.
+name|DB
+operator|.
+name|scott
+operator|.
+name|password
+operator|+
+literal|"',\n"
+operator|+
+literal|"       jdbcUrl: '"
+operator|+
+name|CalciteAssert
+operator|.
+name|DB
+operator|.
+name|scott
+operator|.
+name|url
+operator|+
+literal|"',\n"
+operator|+
+literal|"       jdbcCatalog: null,\n"
+operator|+
+literal|"       jdbcSchema: 'SCOTT'\n"
+operator|+
+literal|"     }\n"
+decl_stmt|;
+specifier|public
+specifier|static
+specifier|final
+name|String
+name|SCOTT_MODEL
+init|=
+literal|"{\n"
+operator|+
+literal|"  version: '1.0',\n"
+operator|+
+literal|"  defaultSchema: 'SCOTT',\n"
+operator|+
+literal|"   schemas: [\n"
+operator|+
+name|SCOTT_SCHEMA
+operator|+
+literal|"   ]\n"
+operator|+
+literal|"}"
+decl_stmt|;
+specifier|public
+specifier|static
+specifier|final
+name|String
 name|HR_SCHEMA
 init|=
 literal|"     {\n"
@@ -12222,33 +12308,31 @@ argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"select count(*) as c from \"foodmart\".\"sales_fact_1997\" as p1 join \"foodmart\".\"sales_fact_1997\" as p2 using (\"store_id\")"
+literal|"select count(*) as c from \"foodmart\".\"store\" as p1 join \"foodmart\".\"store\" as p2 using (\"store_id\")"
 argument_list|)
 operator|.
 name|returns
 argument_list|(
-literal|"C=749681031\n"
+literal|"C=25\n"
 argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"EnumerableAggregate(group=[{}], C=[COUNT()])\n"
+literal|"JdbcToEnumerableConverter\n"
 operator|+
-literal|"  EnumerableCalc(expr#0..1=[{inputs}], expr#2=[0], DUMMY=[$t2])\n"
+literal|"  JdbcAggregate(group=[{}], C=[COUNT()])\n"
 operator|+
-literal|"    EnumerableJoin(condition=[=($0, $1)], joinType=[inner])\n"
+literal|"    JdbcProject(DUMMY=[0])\n"
 operator|+
-literal|"      JdbcToEnumerableConverter\n"
+literal|"      JdbcJoin(condition=[=($0, $1)], joinType=[inner])\n"
 operator|+
-literal|"        JdbcProject(store_id=[$4])\n"
+literal|"        JdbcProject(store_id=[$0])\n"
 operator|+
-literal|"          JdbcTableScan(table=[[foodmart, sales_fact_1997]])\n"
+literal|"          JdbcTableScan(table=[[foodmart, store]])\n"
 operator|+
-literal|"      JdbcToEnumerableConverter\n"
+literal|"        JdbcProject(store_id=[$0])\n"
 operator|+
-literal|"        JdbcProject(store_id=[$4])\n"
-operator|+
-literal|"          JdbcTableScan(table=[[foodmart, sales_fact_1997]])\n"
+literal|"          JdbcTableScan(table=[[foodmart, store]])\n"
 argument_list|)
 expr_stmt|;
 block|}
