@@ -1451,8 +1451,9 @@ name|cursorFactory
 argument_list|)
 decl_stmt|;
 return|return
-operator|new
 name|MetaResultSet
+operator|.
+name|create
 argument_list|(
 name|connection
 operator|.

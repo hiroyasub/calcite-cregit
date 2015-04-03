@@ -162,7 +162,7 @@ name|PrepareRequest
 name|request
 parameter_list|)
 function_decl|;
-name|ResultSetResponse
+name|ExecuteResponse
 name|apply
 parameter_list|(
 name|PrepareAndExecuteRequest
@@ -802,6 +802,8 @@ name|TableTypesRequest
 extends|extends
 name|Request
 block|{
+annotation|@
+name|Override
 name|ResultSetResponse
 name|accept
 parameter_list|(
@@ -925,7 +927,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/** Response that contains a result set.    *    *<p>Several types of request, including    * {@link org.apache.calcite.avatica.Meta#getCatalogs()} and    * {@link org.apache.calcite.avatica.Meta#getSchemas(String, org.apache.calcite.avatica.Meta.Pat)}    * {@link Meta#getTables(String, Meta.Pat, Meta.Pat, List)}    * {@link Meta#getTableTypes()}    * return this response. */
+comment|/** Response that contains a result set.    *    *<p>Regular result sets have {@code updateCount} -1;    * any other value means a dummy result set that is just a count, and has    * no signature and no other data.    *    *<p>Several types of request, including    * {@link org.apache.calcite.avatica.Meta#getCatalogs()} and    * {@link org.apache.calcite.avatica.Meta#getSchemas(String, org.apache.calcite.avatica.Meta.Pat)}    * {@link Meta#getTables(String, Meta.Pat, Meta.Pat, List)}    * {@link Meta#getTableTypes()}    * return this response. */
 class|class
 name|ResultSetResponse
 extends|extends
@@ -959,6 +961,11 @@ name|Meta
 operator|.
 name|Frame
 name|firstFrame
+decl_stmt|;
+specifier|public
+specifier|final
+name|int
+name|updateCount
 decl_stmt|;
 annotation|@
 name|JsonCreator
@@ -1008,6 +1015,14 @@ name|Meta
 operator|.
 name|Frame
 name|firstFrame
+parameter_list|,
+annotation|@
+name|JsonProperty
+argument_list|(
+literal|"updateCount"
+argument_list|)
+name|int
+name|updateCount
 parameter_list|)
 block|{
 name|this
@@ -1039,6 +1054,12 @@ operator|.
 name|firstFrame
 operator|=
 name|firstFrame
+expr_stmt|;
+name|this
+operator|.
+name|updateCount
+operator|=
+name|updateCount
 expr_stmt|;
 block|}
 block|}
@@ -1114,7 +1135,7 @@ expr_stmt|;
 block|}
 annotation|@
 name|Override
-name|ResultSetResponse
+name|ExecuteResponse
 name|accept
 parameter_list|(
 name|Service
@@ -1129,6 +1150,45 @@ argument_list|(
 name|this
 argument_list|)
 return|;
+block|}
+block|}
+comment|/** Response to a    * {@link org.apache.calcite.avatica.remote.Service.PrepareAndExecuteRequest}. */
+class|class
+name|ExecuteResponse
+extends|extends
+name|Response
+block|{
+specifier|public
+specifier|final
+name|List
+argument_list|<
+name|ResultSetResponse
+argument_list|>
+name|results
+decl_stmt|;
+annotation|@
+name|JsonCreator
+specifier|public
+name|ExecuteResponse
+parameter_list|(
+annotation|@
+name|JsonProperty
+argument_list|(
+literal|"resultSets"
+argument_list|)
+name|List
+argument_list|<
+name|ResultSetResponse
+argument_list|>
+name|results
+parameter_list|)
+block|{
+name|this
+operator|.
+name|results
+operator|=
+name|results
+expr_stmt|;
 block|}
 block|}
 comment|/** Request for    * {@link org.apache.calcite.avatica.Meta#prepare(org.apache.calcite.avatica.Meta.ConnectionHandle, String, int)}. */

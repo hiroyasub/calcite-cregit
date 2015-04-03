@@ -235,7 +235,7 @@ name|put
 argument_list|(
 literal|"{\"request\":\"getSchemas\",\"catalog\":null,\"schemaPattern\":{\"s\":null}}"
 argument_list|,
-literal|"{\"response\":\"resultSet\", firstFrame: {offset: 0, done: true, rows: []}}"
+literal|"{\"response\":\"resultSet\", updateCount: -1, firstFrame: {offset: 0, done: true, rows: []}}"
 argument_list|)
 expr_stmt|;
 name|map1
@@ -255,7 +255,7 @@ literal|null
 argument_list|)
 argument_list|)
 argument_list|,
-literal|"{\"response\":\"resultSet\", firstFrame: {offset: 0, done: true, rows: []}}"
+literal|"{\"response\":\"resultSet\", updateCount: -1, firstFrame: {offset: 0, done: true, rows: []}}"
 argument_list|)
 expr_stmt|;
 name|map1
@@ -285,7 +285,7 @@ argument_list|()
 argument_list|)
 argument_list|)
 argument_list|,
-literal|"{\"response\":\"resultSet\", firstFrame: {offset: 0, done: true, rows: []}}"
+literal|"{\"response\":\"resultSet\", updateCount: -1, firstFrame: {offset: 0, done: true, rows: []}}"
 argument_list|)
 expr_stmt|;
 name|map1
@@ -305,7 +305,7 @@ literal|"{\"request\":\"prepareAndExecute\",\"statementId\":0,"
 operator|+
 literal|"\"sql\":\"select * from (\\n  values (1, 'a'), (null, 'b'), (3, 'c')) as t (c1, c2)\",\"maxRowCount\":-1}"
 argument_list|,
-literal|"{\"response\":\"resultSet\",\"signature\": {\n"
+literal|"{\"response\":\"resultSet\", updateCount: -1, \"signature\": {\n"
 operator|+
 literal|" \"columns\": [\n"
 operator|+
