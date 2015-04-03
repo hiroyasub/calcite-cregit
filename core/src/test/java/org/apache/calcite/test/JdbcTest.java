@@ -8715,10 +8715,18 @@ parameter_list|()
 throws|throws
 name|Exception
 block|{
+specifier|final
 name|String
-name|hsqldbMemUrl
+name|url
 init|=
-literal|"jdbc:hsqldb:mem:."
+name|MultiJdbcSchemaJoinTest
+operator|.
+name|TempDb
+operator|.
+name|INSTANCE
+operator|.
+name|getUrl
+argument_list|()
 decl_stmt|;
 name|Connection
 name|baseConnection
@@ -8727,7 +8735,7 @@ name|DriverManager
 operator|.
 name|getConnection
 argument_list|(
-name|hsqldbMemUrl
+name|url
 argument_list|)
 decl_stmt|;
 name|Statement
@@ -8828,7 +8836,7 @@ literal|"',\n"
 operator|+
 literal|"       jdbcUrl: '"
 operator|+
-name|hsqldbMemUrl
+name|url
 operator|+
 literal|"',\n"
 operator|+

@@ -4469,7 +4469,8 @@ argument_list|(
 name|aggCall
 argument_list|)
 argument_list|,
-name|rowType
+name|getRowType
+argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
