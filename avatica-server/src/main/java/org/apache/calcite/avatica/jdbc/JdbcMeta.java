@@ -2885,6 +2885,40 @@ name|boolean
 name|nullable
 parameter_list|)
 block|{
+if|if
+condition|(
+name|LOG
+operator|.
+name|isTraceEnabled
+argument_list|()
+condition|)
+block|{
+name|LOG
+operator|.
+name|trace
+argument_list|(
+literal|"getBestRowIdentifier catalog:"
+operator|+
+name|catalog
+operator|+
+literal|" schema:"
+operator|+
+name|schema
+operator|+
+literal|" table:"
+operator|+
+name|table
+operator|+
+literal|" scope:"
+operator|+
+name|scope
+operator|+
+literal|" nullable:"
+operator|+
+name|nullable
+argument_list|)
+expr_stmt|;
+block|}
 try|try
 block|{
 return|return
@@ -2946,6 +2980,32 @@ name|String
 name|table
 parameter_list|)
 block|{
+if|if
+condition|(
+name|LOG
+operator|.
+name|isTraceEnabled
+argument_list|()
+condition|)
+block|{
+name|LOG
+operator|.
+name|trace
+argument_list|(
+literal|"getVersionColumns catalog:"
+operator|+
+name|catalog
+operator|+
+literal|" schema:"
+operator|+
+name|schema
+operator|+
+literal|" table:"
+operator|+
+name|table
+argument_list|)
+expr_stmt|;
+block|}
 try|try
 block|{
 return|return
@@ -3003,6 +3063,32 @@ name|String
 name|table
 parameter_list|)
 block|{
+if|if
+condition|(
+name|LOG
+operator|.
+name|isTraceEnabled
+argument_list|()
+condition|)
+block|{
+name|LOG
+operator|.
+name|trace
+argument_list|(
+literal|"getPrimaryKeys catalog:"
+operator|+
+name|catalog
+operator|+
+literal|" schema:"
+operator|+
+name|schema
+operator|+
+literal|" table:"
+operator|+
+name|table
+argument_list|)
+expr_stmt|;
+block|}
 try|try
 block|{
 return|return
