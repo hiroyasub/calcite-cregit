@@ -1853,6 +1853,31 @@ literal|"   ]\n"
 operator|+
 literal|"}"
 decl_stmt|;
+specifier|private
+specifier|static
+specifier|final
+name|ConnectionSpec
+name|SCOTT
+init|=
+name|Util
+operator|.
+name|first
+argument_list|(
+name|CalciteAssert
+operator|.
+name|DB
+operator|.
+name|scott
+argument_list|,
+name|CalciteAssert
+operator|.
+name|DatabaseInstance
+operator|.
+name|HSQLDB
+operator|.
+name|scott
+argument_list|)
+decl_stmt|;
 specifier|public
 specifier|static
 specifier|final
@@ -1867,11 +1892,7 @@ literal|"       name: 'SCOTT',\n"
 operator|+
 literal|"       jdbcDriver: '"
 operator|+
-name|CalciteAssert
-operator|.
-name|DB
-operator|.
-name|scott
+name|SCOTT
 operator|.
 name|driver
 operator|+
@@ -1879,11 +1900,7 @@ literal|"',\n"
 operator|+
 literal|"       jdbcUser: '"
 operator|+
-name|CalciteAssert
-operator|.
-name|DB
-operator|.
-name|scott
+name|SCOTT
 operator|.
 name|username
 operator|+
@@ -1891,11 +1908,7 @@ literal|"',\n"
 operator|+
 literal|"       jdbcPassword: '"
 operator|+
-name|CalciteAssert
-operator|.
-name|DB
-operator|.
-name|scott
+name|SCOTT
 operator|.
 name|password
 operator|+
@@ -1903,11 +1916,7 @@ literal|"',\n"
 operator|+
 literal|"       jdbcUrl: '"
 operator|+
-name|CalciteAssert
-operator|.
-name|DB
-operator|.
-name|scott
+name|SCOTT
 operator|.
 name|url
 operator|+

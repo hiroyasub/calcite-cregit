@@ -1769,9 +1769,25 @@ argument_list|)
 operator|.
 name|returns
 argument_list|(
-literal|"C=659; STATE=WV; MIN_POP=0; MAX_POP=70185; SUM_POP=1793477\n"
+literal|"C=195; STATE=AK; MIN_POP=0; MAX_POP=32383; SUM_POP=544698\n"
 operator|+
-literal|"C=484; STATE=WA; MIN_POP=2; MAX_POP=50515; SUM_POP=4866692\n"
+literal|"C=567; STATE=AL; MIN_POP=0; MAX_POP=44165; SUM_POP=4040587\n"
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|mongoChecker
+argument_list|(
+literal|"{$project: {STATE: '$state', POP: '$pop'}}"
+argument_list|,
+literal|"{$group: {_id: '$STATE', C: {$sum: 1}, MIN_POP: {$min: '$POP'}, MAX_POP: {$max: '$POP'}, SUM_POP: {$sum: '$POP'}}}"
+argument_list|,
+literal|"{$project: {STATE: '$_id', C: '$C', MIN_POP: '$MIN_POP', MAX_POP: '$MAX_POP', SUM_POP: '$SUM_POP'}}"
+argument_list|,
+literal|"{$project: {C: 1, STATE: 1, MIN_POP: 1, MAX_POP: 1, SUM_POP: 1}}"
+argument_list|,
+literal|"{$sort: {STATE: 1}}"
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -1822,11 +1838,11 @@ literal|"{$group: {_id: {STATE: '$STATE', CITY: '$CITY'}, C: {$sum: 1}}}"
 argument_list|,
 literal|"{$project: {_id: 0, STATE: '$_id.STATE', CITY: '$_id.CITY', C: '$C'}}"
 argument_list|,
-literal|"{$project: {C: 1, STATE: 1, CITY: 1}}"
-argument_list|,
 literal|"{$sort: {C: -1}}"
 argument_list|,
 literal|"{$limit: 2}"
+argument_list|,
+literal|"{$project: {C: 1, STATE: 1, CITY: 1}}"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -2021,7 +2037,11 @@ name|queryContains
 argument_list|(
 name|mongoChecker
 argument_list|(
-literal|"{$project: {STATE: '$state', CITY: '$city', ZERO: {$ifNull: [null, 0]}}}"
+literal|"{$project: {CITY: '$city', STATE: '$state'}}"
+argument_list|,
+literal|"{$sort: {STATE: 1, CITY: 1}}"
+argument_list|,
+literal|"{$project: {STATE: 1, CITY: 1, ZERO: {$ifNull: [null, 0]}}}"
 argument_list|)
 argument_list|)
 expr_stmt|;

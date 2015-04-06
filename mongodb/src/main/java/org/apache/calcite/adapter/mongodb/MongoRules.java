@@ -1485,7 +1485,7 @@ operator|.
 name|getInput
 argument_list|()
 argument_list|,
-name|traitSet
+name|out
 argument_list|)
 argument_list|,
 name|filter
@@ -1585,7 +1585,7 @@ operator|.
 name|getInput
 argument_list|()
 argument_list|,
-name|traitSet
+name|out
 argument_list|)
 argument_list|,
 name|project
