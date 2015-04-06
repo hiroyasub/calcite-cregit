@@ -4514,11 +4514,6 @@ literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
 comment|// timestamp<-> time
-if|if
-condition|(
-name|enable
-condition|)
-block|{
 name|tester
 operator|.
 name|checkScalar
@@ -4530,7 +4525,6 @@ argument_list|,
 literal|"TIME(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-block|}
 comment|// time<-> string
 name|checkCastToString
 argument_list|(
@@ -4582,11 +4576,6 @@ name|getTime
 argument_list|()
 argument_list|)
 decl_stmt|;
-if|if
-condition|(
-name|enable
-condition|)
-block|{
 name|tester
 operator|.
 name|checkScalar
@@ -4598,15 +4587,6 @@ argument_list|,
 literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-block|}
-if|if
-condition|(
-operator|!
-name|enable
-condition|)
-block|{
-return|return;
-block|}
 comment|// Note: Casting to time(0) should lose date info and fractional
 comment|// seconds, then casting back to timestamp should initialize to
 comment|// current_date.
