@@ -15326,6 +15326,56 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-662">[CALCITE-662]    * Query validation fails when an ORDER BY clause is used with WITH    * CLAUSE</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWithOrderInParentheses
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"with e as (select * from emp)\n"
+operator|+
+literal|"(select e.empno from e order by e.empno)"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"with e as (select * from emp)\n"
+operator|+
+literal|"(select e.empno from e order by 1)"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"with e as (select * from emp)\n"
+operator|+
+literal|"(select ee.empno from e as ee order by ee.deptno)"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+comment|// worked even before CALCITE-662 fixed
+name|sql
+argument_list|(
+literal|"with e as (select * from emp)\n"
+operator|+
+literal|"(select e.empno from e)"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public
