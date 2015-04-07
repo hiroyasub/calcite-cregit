@@ -69,6 +69,22 @@ name|rel
 operator|.
 name|type
 operator|.
+name|RelDataType
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|type
+operator|.
 name|RelDataTypeFactory
 import|;
 end_import
@@ -103,6 +119,20 @@ name|SqlParseException
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|Pair
+import|;
+end_import
+
 begin_comment
 comment|/**  * A fa&ccedil;ade that covers Calcite's query planning process: parse SQL,  * validate the parse tree, convert the parse tree to a relational expression,  * and optimize the relational expression.  *  *<p>Planner is NOT thread safe. However, it can be reused for  * different queries. The consumer of this interface is responsible for calling  * reset() after each use of Planner that corresponds to a different  * query.  */
 end_comment
@@ -125,6 +155,21 @@ function_decl|;
 comment|/**    * Validates a SQL statement.    *    * @param sqlNode Root node of the SQL parse tree.    * @return Validated node    * @throws ValidationException if not valid    */
 name|SqlNode
 name|validate
+parameter_list|(
+name|SqlNode
+name|sqlNode
+parameter_list|)
+throws|throws
+name|ValidationException
+function_decl|;
+comment|/**    * Validates a SQL statement.    *    * @param sqlNode Root node of the SQL parse tree.    * @return Validated node and its validated type.    * @throws ValidationException if not valid    */
+name|Pair
+argument_list|<
+name|SqlNode
+argument_list|,
+name|RelDataType
+argument_list|>
+name|validateAndGetType
 parameter_list|(
 name|SqlNode
 name|sqlNode
