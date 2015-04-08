@@ -2740,7 +2740,7 @@ argument_list|)
 block|,
 name|FLOOR_DIV
 argument_list|(
-name|SqlFunctions
+name|DateTimeUtils
 operator|.
 name|class
 argument_list|,
@@ -2757,7 +2757,7 @@ argument_list|)
 block|,
 name|FLOOR_MOD
 argument_list|(
-name|SqlFunctions
+name|DateTimeUtils
 operator|.
 name|class
 argument_list|,

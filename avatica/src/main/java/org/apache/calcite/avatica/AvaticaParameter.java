@@ -1174,6 +1174,16 @@ name|Calendar
 name|cal
 parameter_list|)
 block|{
+name|setDate
+argument_list|(
+name|slots
+argument_list|,
+name|index
+argument_list|,
+name|x
+argument_list|)
+expr_stmt|;
+comment|// TODO: use calendar
 block|}
 specifier|public
 name|void

@@ -1013,6 +1013,14 @@ operator|.
 name|class
 argument_list|)
 block|,
+comment|/** Values are represented as some sub-class of {@link Number}.      * The JSON encoding does this. */
+name|NUMBER
+argument_list|(
+name|Number
+operator|.
+name|class
+argument_list|)
+block|,
 name|OBJECT
 argument_list|(
 name|Object
