@@ -1349,7 +1349,7 @@ specifier|public
 specifier|final
 name|List
 argument_list|<
-name|Object
+name|TypedValue
 argument_list|>
 name|parameterValues
 decl_stmt|;
@@ -1381,7 +1381,7 @@ literal|"parameterValues"
 argument_list|)
 name|List
 argument_list|<
-name|Object
+name|TypedValue
 argument_list|>
 name|parameterValues
 parameter_list|,

@@ -79,6 +79,22 @@ name|org
 operator|.
 name|apache
 operator|.
+name|calcite
+operator|.
+name|avatica
+operator|.
+name|util
+operator|.
+name|ByteString
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
 name|commons
 operator|.
 name|logging
@@ -744,7 +760,7 @@ name|EXPIRY_DURATION
 argument_list|(
 name|CONN_CACHE_KEY_BASE
 operator|+
-literal|".expirydiration"
+literal|".expiryduration"
 argument_list|,
 literal|"10"
 argument_list|)
@@ -895,7 +911,6 @@ specifier|final
 name|String
 name|defaultValue
 decl_stmt|;
-specifier|private
 name|StatementCacheSettings
 parameter_list|(
 name|String
@@ -1734,7 +1749,7 @@ expr_stmt|;
 block|}
 block|}
 block|}
-comment|/**    * @param url a database url of the form    *<code> jdbc:<em>subprotocol</em>:<em>subname</em></code>    */
+comment|/**    * @param url a database url of the form    *<code>jdbc:<em>subprotocol</em>:<em>subname</em></code>    */
 specifier|public
 name|JdbcMeta
 parameter_list|(
@@ -4540,6 +4555,26 @@ argument_list|(
 name|i
 argument_list|)
 decl_stmt|;
+if|if
+condition|(
+name|o
+operator|instanceof
+name|ByteString
+condition|)
+block|{
+name|o
+operator|=
+operator|(
+operator|(
+name|ByteString
+operator|)
+name|o
+operator|)
+operator|.
+name|getBytes
+argument_list|()
+expr_stmt|;
+block|}
 name|preparedStatement
 operator|.
 name|setObject

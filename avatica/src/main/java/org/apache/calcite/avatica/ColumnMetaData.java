@@ -17,6 +17,22 @@ end_package
 
 begin_import
 import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|avatica
+operator|.
+name|util
+operator|.
+name|ByteString
+import|;
+end_import
+
+begin_import
+import|import
 name|com
 operator|.
 name|fasterxml
@@ -979,6 +995,13 @@ operator|.
 name|util
 operator|.
 name|Date
+operator|.
+name|class
+argument_list|)
+block|,
+name|BYTE_STRING
+argument_list|(
+name|ByteString
 operator|.
 name|class
 argument_list|)

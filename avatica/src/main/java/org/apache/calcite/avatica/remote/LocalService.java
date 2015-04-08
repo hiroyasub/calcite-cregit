@@ -941,9 +941,14 @@ name|fetch
 argument_list|(
 name|h
 argument_list|,
+name|TypedValue
+operator|.
+name|values
+argument_list|(
 name|request
 operator|.
 name|parameterValues
+argument_list|)
 argument_list|,
 name|request
 operator|.
