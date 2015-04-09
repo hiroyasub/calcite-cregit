@@ -282,7 +282,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Planner rule that permutes the inputs to a  * {@link org.apache.calcite.rel.core.Join}.  *  *<p>Outer joins cannot be permuted.  *  *<p>To preserve the order of columns in the output row, the rule adds a  * {@link org.apache.calcite.rel.core.Project}.  */
+comment|/**  * Planner rule that permutes the inputs to a  * {@link org.apache.calcite.rel.core.Join}.  *  *<p>Permutation of outer joins can be turned on/off by specifying the  * swapOuter flag in the constructor.  *  *<p>To preserve the order of columns in the output row, the rule adds a  * {@link org.apache.calcite.rel.core.Project}.  */
 end_comment
 
 begin_class
@@ -293,7 +293,7 @@ extends|extends
 name|RelOptRule
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
-comment|/** The singleton. */
+comment|/** Instance of the rule that only swaps inner joins. */
 specifier|public
 specifier|static
 specifier|final
@@ -302,18 +302,41 @@ name|INSTANCE
 init|=
 operator|new
 name|JoinCommuteRule
-argument_list|()
+argument_list|(
+literal|false
+argument_list|)
+decl_stmt|;
+comment|/** Instance of the rule that swaps outer joins as well as inner joins. */
+specifier|public
+specifier|static
+specifier|final
+name|JoinCommuteRule
+name|SWAP_OUTER
+init|=
+operator|new
+name|JoinCommuteRule
+argument_list|(
+literal|true
+argument_list|)
 decl_stmt|;
 specifier|private
 specifier|final
 name|ProjectFactory
 name|projectFactory
 decl_stmt|;
+specifier|private
+specifier|final
+name|boolean
+name|swapOuter
+decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 comment|/**    * Creates a JoinCommuteRule.    */
 specifier|private
 name|JoinCommuteRule
-parameter_list|()
+parameter_list|(
+name|boolean
+name|swapOuter
+parameter_list|)
 block|{
 name|this
 argument_list|(
@@ -324,6 +347,36 @@ argument_list|,
 name|RelFactories
 operator|.
 name|DEFAULT_PROJECT_FACTORY
+argument_list|,
+name|swapOuter
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
+specifier|public
+name|JoinCommuteRule
+parameter_list|(
+name|Class
+argument_list|<
+name|?
+extends|extends
+name|Join
+argument_list|>
+name|clazz
+parameter_list|,
+name|ProjectFactory
+name|projectFactory
+parameter_list|)
+block|{
+name|this
+argument_list|(
+name|clazz
+argument_list|,
+name|projectFactory
+argument_list|,
+literal|false
 argument_list|)
 expr_stmt|;
 block|}
@@ -340,6 +393,9 @@ name|clazz
 parameter_list|,
 name|ProjectFactory
 name|projectFactory
+parameter_list|,
+name|boolean
+name|swapOuter
 parameter_list|)
 block|{
 name|super
@@ -358,6 +414,12 @@ operator|.
 name|projectFactory
 operator|=
 name|projectFactory
+expr_stmt|;
+name|this
+operator|.
+name|swapOuter
+operator|=
+name|swapOuter
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
@@ -607,6 +669,10 @@ init|=
 name|swap
 argument_list|(
 name|join
+argument_list|,
+name|this
+operator|.
+name|swapOuter
 argument_list|)
 decl_stmt|;
 if|if
