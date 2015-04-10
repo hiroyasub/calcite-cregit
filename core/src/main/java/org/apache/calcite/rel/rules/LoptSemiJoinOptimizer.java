@@ -27,20 +27,6 @@ name|calcite
 operator|.
 name|plan
 operator|.
-name|Convention
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|plan
-operator|.
 name|RelOptCost
 import|;
 end_import
@@ -525,16 +511,7 @@ name|possibleSemiJoins
 operator|=
 operator|new
 name|HashMap
-argument_list|<
-name|Integer
-argument_list|,
-name|Map
-argument_list|<
-name|Integer
-argument_list|,
-name|SemiJoin
-argument_list|>
-argument_list|>
+argument_list|<>
 argument_list|()
 expr_stmt|;
 comment|// semijoins can't be used with any type of outer join, including full
@@ -574,6 +551,7 @@ name|factIdx
 operator|++
 control|)
 block|{
+specifier|final
 name|Map
 argument_list|<
 name|Integer
@@ -587,16 +565,10 @@ name|dimFilters
 init|=
 operator|new
 name|HashMap
-argument_list|<
-name|Integer
-argument_list|,
-name|List
-argument_list|<
-name|RexNode
-argument_list|>
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
+specifier|final
 name|Map
 argument_list|<
 name|Integer
@@ -607,11 +579,7 @@ name|semiJoinMap
 init|=
 operator|new
 name|HashMap
-argument_list|<
-name|Integer
-argument_list|,
-name|SemiJoin
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 comment|// loop over all filters and find equality filters that reference
@@ -697,9 +665,7 @@ name|currDimFilters
 operator|=
 operator|new
 name|ArrayList
-argument_list|<
-name|RexNode
-argument_list|>
+argument_list|<>
 argument_list|()
 expr_stmt|;
 block|}
@@ -1124,6 +1090,7 @@ argument_list|)
 decl_stmt|;
 comment|// make sure all the fact table keys originate from the same table
 comment|// and are simple column references
+specifier|final
 name|List
 argument_list|<
 name|Integer
@@ -1132,9 +1099,7 @@ name|actualLeftKeys
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|Integer
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 name|LcsTable
@@ -1163,6 +1128,7 @@ literal|null
 return|;
 block|}
 comment|// find the best index
+specifier|final
 name|List
 argument_list|<
 name|Integer
@@ -1171,9 +1137,7 @@ name|bestKeyOrder
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|Integer
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 name|LcsTableScan
@@ -1238,12 +1202,14 @@ comment|// the index and remove the corresponding, unnecessary filters from
 comment|// the condition; note that we don't save the actual keys here because
 comment|// later when the semijoin is pushed past other RelNodes, the keys will
 comment|// be converted
+specifier|final
 name|List
 argument_list|<
 name|Integer
 argument_list|>
 name|truncatedLeftKeys
 decl_stmt|;
+specifier|final
 name|List
 argument_list|<
 name|Integer
@@ -1278,18 +1244,14 @@ name|truncatedLeftKeys
 operator|=
 operator|new
 name|ArrayList
-argument_list|<
-name|Integer
-argument_list|>
+argument_list|<>
 argument_list|()
 expr_stmt|;
 name|truncatedRightKeys
 operator|=
 operator|new
 name|ArrayList
-argument_list|<
-name|Integer
-argument_list|>
+argument_list|<>
 argument_list|()
 expr_stmt|;
 for|for
@@ -1342,29 +1304,11 @@ name|semiJoinCondition
 argument_list|)
 expr_stmt|;
 block|}
+return|return
 name|SemiJoin
-name|semiJoin
-init|=
-operator|new
-name|SemiJoin
+operator|.
+name|create
 argument_list|(
-name|factRel
-operator|.
-name|getCluster
-argument_list|()
-argument_list|,
-name|factRel
-operator|.
-name|getCluster
-argument_list|()
-operator|.
-name|traitSetOf
-argument_list|(
-name|Convention
-operator|.
-name|NONE
-argument_list|)
-argument_list|,
 name|factRel
 argument_list|,
 name|dimRel
@@ -1385,9 +1329,6 @@ argument_list|(
 name|truncatedRightKeys
 argument_list|)
 argument_list|)
-decl_stmt|;
-return|return
-name|semiJoin
 return|;
 block|}
 comment|/**    * Modifies the semijoin condition to reflect the fact that the RHS is now    * the second factor into a join and the LHS is the first    *    * @param multiJoin join factors being optimized    * @param leftAdjustment amount the left RexInputRefs need to be adjusted by    * @param semiJoinCondition condition to be adjusted    * @param leftIdx index of the join factor corresponding to the LHS of the    * semijoin,    * @param rightIdx index of the join factor corresponding to the RHS of the    * semijoin    *    * @return modified semijoin condition    */
@@ -2307,26 +2248,10 @@ decl_stmt|;
 name|SemiJoin
 name|chosenSemiJoin
 init|=
-operator|new
 name|SemiJoin
+operator|.
+name|create
 argument_list|(
-name|factRel
-operator|.
-name|getCluster
-argument_list|()
-argument_list|,
-name|factRel
-operator|.
-name|getCluster
-argument_list|()
-operator|.
-name|traitSetOf
-argument_list|(
-name|Convention
-operator|.
-name|NONE
-argument_list|)
-argument_list|,
 name|factRel
 argument_list|,
 name|chosenSemiJoins

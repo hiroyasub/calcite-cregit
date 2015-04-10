@@ -27,20 +27,6 @@ name|calcite
 operator|.
 name|plan
 operator|.
-name|Convention
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|plan
-operator|.
 name|RelOptRule
 import|;
 end_import
@@ -400,6 +386,7 @@ decl_stmt|;
 comment|// convert the LHS semijoin keys to reference the child projection
 comment|// expression; all projection expressions must be RexInputRefs,
 comment|// otherwise, we wouldn't have created this semijoin
+specifier|final
 name|List
 argument_list|<
 name|Integer
@@ -408,11 +395,10 @@ name|newLeftKeys
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|Integer
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
+specifier|final
 name|List
 argument_list|<
 name|Integer
@@ -424,6 +410,7 @@ operator|.
 name|getLeftKeys
 argument_list|()
 decl_stmt|;
+specifier|final
 name|List
 argument_list|<
 name|RexNode
@@ -482,26 +469,10 @@ decl_stmt|;
 name|SemiJoin
 name|newSemiJoin
 init|=
-operator|new
 name|SemiJoin
+operator|.
+name|create
 argument_list|(
-name|semiJoin
-operator|.
-name|getCluster
-argument_list|()
-argument_list|,
-name|semiJoin
-operator|.
-name|getCluster
-argument_list|()
-operator|.
-name|traitSetOf
-argument_list|(
-name|Convention
-operator|.
-name|NONE
-argument_list|)
-argument_list|,
 name|project
 operator|.
 name|getInput
