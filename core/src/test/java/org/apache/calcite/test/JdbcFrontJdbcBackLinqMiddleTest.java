@@ -786,7 +786,7 @@ argument_list|)
 operator|.
 name|planContains
 argument_list|(
-literal|"  final org.apache.calcite.linq4j.Enumerable _inputEnumerable1 = left.join(right, new org.apache.calcite.linq4j.function.Function1() {\n"
+literal|"  return left.join(right, new org.apache.calcite.linq4j.function.Function1() {\n"
 argument_list|)
 expr_stmt|;
 block|}

@@ -650,18 +650,17 @@ name|rel
 init|=
 name|newAggregate
 decl_stmt|;
-comment|//noinspection EqualsBetweenInconvertibleTypes
 if|if
 condition|(
 operator|!
-name|newGroupSet
-operator|.
-name|toList
-argument_list|()
+name|newKeys
 operator|.
 name|equals
 argument_list|(
-name|newKeys
+name|newGroupSet
+operator|.
+name|asList
+argument_list|()
 argument_list|)
 condition|)
 block|{

@@ -747,6 +747,7 @@ operator|.
 name|getInput
 argument_list|()
 decl_stmt|;
+specifier|final
 name|List
 argument_list|<
 name|RexNode
@@ -755,9 +756,7 @@ name|inputExprs
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|RexNode
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 for|for
@@ -1173,6 +1172,9 @@ operator|.
 name|projectTypes
 argument_list|(
 name|oldAggRel
+operator|.
+name|getInput
+argument_list|()
 operator|.
 name|getRowType
 argument_list|()

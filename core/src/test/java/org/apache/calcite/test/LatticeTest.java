@@ -1327,23 +1327,21 @@ name|explainContains
 argument_list|(
 literal|"JdbcToEnumerableConverter\n"
 operator|+
-literal|"  JdbcAggregate(group=[{0, 1, 2, 3, 4, 5}], m0=[COUNT()], m1=[SUM($6)], m2=[SUM($0)])\n"
+literal|"  JdbcAggregate(group=[{7, 16, 25, 27, 31, 37}], m0=[COUNT()], m1=[SUM($5)], m2=[SUM($7)])\n"
 operator|+
-literal|"    JdbcProject(unit_sales=[$12], recyclable_package=[$21], the_day=[$30], the_year=[$32], quarter=[$36], product_family=[$4], store_sales=[$10])\n"
+literal|"    JdbcJoin(condition=[=($8, $33)], joinType=[inner])\n"
 operator|+
-literal|"      JdbcJoin(condition=[=($13, $0)], joinType=[inner])\n"
+literal|"      JdbcJoin(condition=[=($1, $23)], joinType=[inner])\n"
 operator|+
-literal|"        JdbcTableScan(table=[[foodmart, product_class]])\n"
+literal|"        JdbcJoin(condition=[=($0, $9)], joinType=[inner])\n"
 operator|+
-literal|"        JdbcJoin(condition=[=($1, $23)], joinType=[inner])\n"
+literal|"          JdbcTableScan(table=[[foodmart, sales_fact_1997]])\n"
 operator|+
-literal|"          JdbcJoin(condition=[=($0, $9)], joinType=[inner])\n"
+literal|"          JdbcTableScan(table=[[foodmart, product]])\n"
 operator|+
-literal|"            JdbcTableScan(table=[[foodmart, sales_fact_1997]])\n"
+literal|"        JdbcTableScan(table=[[foodmart, time_by_day]])\n"
 operator|+
-literal|"            JdbcTableScan(table=[[foodmart, product]])\n"
-operator|+
-literal|"          JdbcTableScan(table=[[foodmart, time_by_day]])"
+literal|"      JdbcTableScan(table=[[foodmart, product_class]])"
 argument_list|)
 expr_stmt|;
 block|}

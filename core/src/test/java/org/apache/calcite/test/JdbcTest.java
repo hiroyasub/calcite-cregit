@@ -1389,6 +1389,16 @@ name|java
 operator|.
 name|util
 operator|.
+name|Set
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
 name|TimeZone
 import|;
 end_import
@@ -4989,7 +4999,7 @@ argument_list|()
 argument_list|)
 decl_stmt|;
 specifier|final
-name|HashSet
+name|Set
 argument_list|<
 name|String
 argument_list|>
@@ -4997,9 +5007,7 @@ name|names
 init|=
 operator|new
 name|HashSet
-argument_list|<
-name|String
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 for|for
@@ -8442,14 +8450,7 @@ name|list
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|Pair
-argument_list|<
-name|String
-argument_list|,
-name|String
-argument_list|>
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 for|for
@@ -11039,15 +11040,17 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"EnumerableAggregate(group=[{0, 1}])\n"
+literal|"EnumerableCalc(expr#0..1=[{inputs}], EMPNO=[$t1], DESC=[$t0])\n"
 operator|+
-literal|"  EnumerableCalc(expr#0..3=[{inputs}], expr#4=[CAST($t3):INTEGER NOT NULL], expr#5=[=($t4, $t0)], expr#6=['SameName'], expr#7=[=($t1, $t6)], expr#8=[AND($t5, $t7)], EMPNO=[$t2], DESC=[$t1], $condition=[$t8])\n"
+literal|"  EnumerableAggregate(group=[{1, 2}])\n"
 operator|+
-literal|"    EnumerableJoin(condition=[true], joinType=[inner])\n"
+literal|"    EnumerableCalc(expr#0..3=[{inputs}], expr#4=[CAST($t3):INTEGER NOT NULL], expr#5=[=($t4, $t0)], expr#6=['SameName'], expr#7=[=($t1, $t6)], expr#8=[AND($t5, $t7)], proj#0..3=[{exprs}], $condition=[$t8])\n"
 operator|+
-literal|"      EnumerableValues(tuples=[[{ 10, 'SameName' }]])\n"
+literal|"      EnumerableJoin(condition=[true], joinType=[inner])\n"
 operator|+
-literal|"      EnumerableTableScan(table=[[SALES, EMPS]])\n"
+literal|"        EnumerableValues(tuples=[[{ 10, 'SameName' }]])\n"
+operator|+
+literal|"        EnumerableTableScan(table=[[SALES, EMPS]])\n"
 argument_list|)
 operator|.
 name|returns
@@ -11184,11 +11187,9 @@ name|explainContains
 argument_list|(
 literal|"EnumerableAggregate(group=[{}], m0=[COUNT($0)])\n"
 operator|+
-literal|"  EnumerableAggregate(group=[{0}])\n"
+literal|"  EnumerableAggregate(group=[{7}])\n"
 operator|+
-literal|"    EnumerableCalc(expr#0..7=[{inputs}], unit_sales=[$t7])\n"
-operator|+
-literal|"      EnumerableTableScan(table=[[foodmart2, sales_fact_1997]])"
+literal|"    EnumerableTableScan(table=[[foodmart2, sales_fact_1997]])"
 argument_list|)
 operator|.
 name|returns
@@ -11241,13 +11242,11 @@ literal|""
 operator|+
 literal|"EnumerableCalc(expr#0..1=[{inputs}], expr#2=[CAST($t0):INTEGER NOT NULL], u=[$t2], m0=[$t1])\n"
 operator|+
-literal|"  EnumerableAggregate(group=[{0}], m0=[COUNT($1)])\n"
+literal|"  EnumerableAggregate(group=[{1}], m0=[COUNT($0)])\n"
 operator|+
-literal|"    EnumerableAggregate(group=[{0, 1}])\n"
+literal|"    EnumerableAggregate(group=[{2, 7}])\n"
 operator|+
-literal|"      EnumerableCalc(expr#0..7=[{inputs}], unit_sales=[$t7], customer_id=[$t2])\n"
-operator|+
-literal|"        EnumerableTableScan(table=[[foodmart2, sales_fact_1997]])"
+literal|"      EnumerableTableScan(table=[[foodmart2, sales_fact_1997]])"
 argument_list|)
 operator|.
 name|returnsUnordered
@@ -11316,19 +11315,17 @@ literal|""
 operator|+
 literal|"EnumerableAggregate(group=[{0}], m0=[COUNT($1)])\n"
 operator|+
-literal|"  EnumerableAggregate(group=[{0, 1}])\n"
+literal|"  EnumerableAggregate(group=[{1, 3}])\n"
 operator|+
-literal|"    EnumerableCalc(expr#0..3=[{inputs}], c0=[$t1], unit_sales=[$t3])\n"
+literal|"    EnumerableJoin(condition=[=($0, $2)], joinType=[inner])\n"
 operator|+
-literal|"      EnumerableJoin(condition=[=($0, $2)], joinType=[inner])\n"
+literal|"      EnumerableCalc(expr#0..9=[{inputs}], expr#10=[CAST($t4):INTEGER], expr#11=[1997], expr#12=[=($t10, $t11)], time_id=[$t0], the_year=[$t4], $condition=[$t12])\n"
 operator|+
-literal|"        EnumerableCalc(expr#0..9=[{inputs}], expr#10=[CAST($t4):INTEGER], expr#11=[1997], expr#12=[=($t10, $t11)], time_id=[$t0], the_year=[$t4], $condition=[$t12])\n"
+literal|"        EnumerableTableScan(table=[[foodmart2, time_by_day]])\n"
 operator|+
-literal|"          EnumerableTableScan(table=[[foodmart2, time_by_day]])\n"
+literal|"      EnumerableCalc(expr#0..7=[{inputs}], time_id=[$t1], unit_sales=[$t7])\n"
 operator|+
-literal|"        EnumerableCalc(expr#0..7=[{inputs}], time_id=[$t1], unit_sales=[$t7])\n"
-operator|+
-literal|"          EnumerableTableScan(table=[[foodmart2, sales_fact_1997]])"
+literal|"        EnumerableTableScan(table=[[foodmart2, sales_fact_1997]])"
 argument_list|)
 operator|.
 name|returns
@@ -11440,13 +11437,13 @@ literal|""
 operator|+
 literal|"EnumerableCalc(expr#0..4=[{inputs}], proj#0..3=[{exprs}])\n"
 operator|+
-literal|"  EnumerableSemiJoin(condition=[=($4, $5)], joinType=[inner])\n"
+literal|"  EnumerableSemiJoin(condition=[=($4, $6)], joinType=[inner])\n"
 operator|+
 literal|"    EnumerableCalc(expr#0..3=[{inputs}], proj#0..3=[{exprs}], $f4=[$t0])\n"
 operator|+
 literal|"      EnumerableTableScan(table=[[hr, depts]])\n"
 operator|+
-literal|"    EnumerableCalc(expr#0..4=[{inputs}], expr#5=[150], expr#6=[<($t0, $t5)], deptno=[$t1], $condition=[$t6])\n"
+literal|"    EnumerableCalc(expr#0..4=[{inputs}], expr#5=[150], expr#6=[<($t0, $t5)], proj#0..4=[{exprs}], $condition=[$t6])\n"
 operator|+
 literal|"      EnumerableTableScan(table=[[hr, emps]])"
 argument_list|)
@@ -12339,17 +12336,15 @@ literal|"JdbcToEnumerableConverter\n"
 operator|+
 literal|"  JdbcAggregate(group=[{}], C=[COUNT()])\n"
 operator|+
-literal|"    JdbcProject(DUMMY=[0])\n"
+literal|"    JdbcJoin(condition=[=($0, $1)], joinType=[inner])\n"
 operator|+
-literal|"      JdbcJoin(condition=[=($0, $1)], joinType=[inner])\n"
+literal|"      JdbcProject(store_id=[$0])\n"
 operator|+
-literal|"        JdbcProject(store_id=[$0])\n"
+literal|"        JdbcTableScan(table=[[foodmart, store]])\n"
 operator|+
-literal|"          JdbcTableScan(table=[[foodmart, store]])\n"
+literal|"      JdbcProject(store_id=[$0])\n"
 operator|+
-literal|"        JdbcProject(store_id=[$0])\n"
-operator|+
-literal|"          JdbcTableScan(table=[[foodmart, store]])\n"
+literal|"        JdbcTableScan(table=[[foodmart, store]])\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -12969,9 +12964,9 @@ literal|""
 operator|+
 literal|"PLAN=EnumerableCalc(expr#0..1=[{inputs}], expr#2=[0], expr#3=[=($t0, $t2)], expr#4=[null], expr#5=[CASE($t3, $t4, $t1)], expr#6=[/($t5, $t0)], expr#7=[CAST($t6):JavaType(class java.lang.Integer)], CS=[$t0], C=[$t0], S=[$t5], A=[$t7])\n"
 operator|+
-literal|"  EnumerableAggregate(group=[{}], CS=[COUNT()], agg#1=[$SUM0($0)])\n"
+literal|"  EnumerableAggregate(group=[{}], CS=[COUNT()], agg#1=[$SUM0($1)])\n"
 operator|+
-literal|"    EnumerableCalc(expr#0..4=[{inputs}], expr#5=[0], expr#6=[<($t1, $t5)], deptno=[$t1], $condition=[$t6])\n"
+literal|"    EnumerableCalc(expr#0..4=[{inputs}], expr#5=[0], expr#6=[<($t1, $t5)], proj#0..4=[{exprs}], $condition=[$t6])\n"
 operator|+
 literal|"      EnumerableTableScan(table=[[hr, emps]])\n"
 argument_list|)
@@ -13016,7 +13011,7 @@ literal|"PLAN=EnumerableCalc(expr#0=[{inputs}], CS=[$t0], CS2=[$t0])\n"
 operator|+
 literal|"  EnumerableAggregate(group=[{}], CS=[COUNT()])\n"
 operator|+
-literal|"    EnumerableCalc(expr#0..4=[{inputs}], expr#5=[0], expr#6=[<($t1, $t5)], deptno=[$t1], $condition=[$t6])\n"
+literal|"    EnumerableCalc(expr#0..4=[{inputs}], expr#5=[0], expr#6=[<($t1, $t5)], proj#0..4=[{exprs}], $condition=[$t6])\n"
 operator|+
 literal|"      EnumerableTableScan(table=[[hr, emps]])\n"
 argument_list|)
@@ -18286,9 +18281,7 @@ name|objects
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|Object
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 name|CalciteAssert
@@ -22877,11 +22870,9 @@ name|equalTo
 argument_list|(
 literal|"SELECT COUNT(*) AS \"C\"\n"
 operator|+
-literal|"FROM (SELECT 0 AS \"DUMMY\"\n"
-operator|+
 literal|"FROM \"foodmart\".\"employee\"\n"
 operator|+
-literal|"WHERE \"first_name\" = 'abcde' AND \"gender\" = 'F') AS \"t0\""
+literal|"WHERE \"first_name\" = 'abcde' AND \"gender\" = 'F'"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -22949,11 +22940,7 @@ name|aSubSchemaMap
 init|=
 operator|new
 name|HashMap
-argument_list|<
-name|String
-argument_list|,
-name|Schema
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 specifier|final
@@ -23295,11 +23282,7 @@ name|a2SubSchemaMap
 init|=
 operator|new
 name|HashMap
-argument_list|<
-name|String
-argument_list|,
-name|Schema
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 specifier|final
@@ -25920,9 +25903,7 @@ name|HANDLERS
 init|=
 operator|new
 name|ThreadLocal
-argument_list|<
-name|Handler
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 specifier|public

@@ -107,19 +107,17 @@ name|explainContains
 argument_list|(
 literal|"EnumerableCalc(expr#0..4=[{inputs}], empid=[$t0], name=[$t2])\n"
 operator|+
-literal|"  EnumerableSemiJoin(condition=[=($1, $5)], joinType=[inner])\n"
+literal|"  EnumerableSemiJoin(condition=[=($1, $6)], joinType=[inner])\n"
 operator|+
 literal|"    EnumerableTableScan(table=[[s, emps]])\n"
 operator|+
-literal|"    EnumerableCalc(expr#0..4=[{inputs}], expr#5=[true], deptno0=[$t0], $f0=[$t5])\n"
+literal|"    EnumerableCalc(expr#0..4=[{inputs}], expr#5=[true], $f0=[$t5], deptno0=[$t0])\n"
 operator|+
 literal|"      EnumerableJoin(condition=[=($0, $1)], joinType=[inner])\n"
 operator|+
-literal|"        EnumerableAggregate(group=[{0}])\n"
+literal|"        EnumerableAggregate(group=[{1}])\n"
 operator|+
-literal|"          EnumerableCalc(expr#0..4=[{inputs}], deptno=[$t1])\n"
-operator|+
-literal|"            EnumerableTableScan(table=[[s, emps]])\n"
+literal|"          EnumerableTableScan(table=[[s, emps]])\n"
 operator|+
 literal|"        EnumerableTableScan(table=[[s, depts]])"
 argument_list|)
