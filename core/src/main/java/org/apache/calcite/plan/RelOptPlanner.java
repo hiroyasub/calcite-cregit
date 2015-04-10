@@ -433,6 +433,7 @@ name|Executor
 name|executor
 parameter_list|)
 function_decl|;
+comment|/** Returns the executor used to evaluate constant expressions. */
 name|Executor
 name|getExecutor
 parameter_list|()

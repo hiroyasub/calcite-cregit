@@ -53,6 +53,20 @@ name|calcite
 operator|.
 name|plan
 operator|.
+name|RelOptPlanner
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
 name|RelTraitDef
 import|;
 end_import
@@ -164,6 +178,13 @@ function_decl|;
 comment|/**    * Returns the default schema that should be checked before looking at the    * root schema.  Returns null to only consult the root schema.    */
 name|SchemaPlus
 name|getDefaultSchema
+parameter_list|()
+function_decl|;
+comment|/**    * Returns the executor used to evaluate constant expressions.    */
+name|RelOptPlanner
+operator|.
+name|Executor
+name|getExecutor
 parameter_list|()
 function_decl|;
 comment|/**    * Returns a list of one or more programs used during the course of query    * evaluation.    *    *<p>The common use case is when there is a single program    * created using {@link Programs#of(RuleSet)}    * and {@link org.apache.calcite.tools.Planner#transform}    * will only be called once.    *    *<p>However, consumers may also create programs    * not based on rule sets, register multiple programs,    * and do multiple repetitions    * of {@link Planner#transform} planning cycles using different indices.    *    *<p>The order of programs provided here determines the zero-based indices    * of programs elsewhere in this class.    */

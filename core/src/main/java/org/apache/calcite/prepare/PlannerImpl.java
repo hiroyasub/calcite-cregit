@@ -545,6 +545,12 @@ specifier|private
 name|RelOptPlanner
 name|planner
 decl_stmt|;
+specifier|private
+name|RelOptPlanner
+operator|.
+name|Executor
+name|executor
+decl_stmt|;
 comment|// set in STATE_4_VALIDATE
 specifier|private
 name|CalciteSqlValidator
@@ -633,6 +639,15 @@ operator|=
 name|config
 operator|.
 name|getConvertletTable
+argument_list|()
+expr_stmt|;
+name|this
+operator|.
+name|executor
+operator|=
+name|config
+operator|.
+name|getExecutor
 argument_list|()
 expr_stmt|;
 name|reset
@@ -828,6 +843,13 @@ name|cluster
 operator|.
 name|getPlanner
 argument_list|()
+expr_stmt|;
+name|planner
+operator|.
+name|setExecutor
+argument_list|(
+name|executor
+argument_list|)
 expr_stmt|;
 return|return
 literal|null
