@@ -27,7 +27,7 @@ name|calcite
 operator|.
 name|avatica
 operator|.
-name|AvaticaParameter
+name|AvaticaSite
 import|;
 end_import
 
@@ -2740,7 +2740,7 @@ literal|null
 return|;
 block|}
 return|return
-name|AvaticaParameter
+name|AvaticaSite
 operator|.
 name|toBigDecimal
 argument_list|(

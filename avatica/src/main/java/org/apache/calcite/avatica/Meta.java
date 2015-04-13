@@ -17,6 +17,22 @@ end_package
 
 begin_import
 import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|avatica
+operator|.
+name|remote
+operator|.
+name|TypedValue
+import|;
+end_import
+
+begin_import
+import|import
 name|com
 operator|.
 name|fasterxml
@@ -536,7 +552,7 @@ name|signature
 parameter_list|,
 name|List
 argument_list|<
-name|Object
+name|TypedValue
 argument_list|>
 name|parameterValues
 parameter_list|,
@@ -584,7 +600,7 @@ name|h
 parameter_list|,
 name|List
 argument_list|<
-name|Object
+name|TypedValue
 argument_list|>
 name|parameterValues
 parameter_list|,

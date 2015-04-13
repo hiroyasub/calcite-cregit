@@ -1874,7 +1874,8 @@ name|values
 argument_list|(
 name|sqlType
 operator|.
-name|clazz
+name|boxedClass
+argument_list|()
 argument_list|)
 control|)
 block|{

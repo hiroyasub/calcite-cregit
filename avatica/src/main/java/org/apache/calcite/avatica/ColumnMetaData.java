@@ -1286,7 +1286,8 @@ argument_list|(
 name|id
 argument_list|)
 operator|.
-name|clazz
+name|boxedClass
+argument_list|()
 operator|.
 name|getName
 argument_list|()

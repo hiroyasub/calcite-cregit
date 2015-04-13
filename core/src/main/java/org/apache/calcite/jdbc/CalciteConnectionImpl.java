@@ -81,7 +81,7 @@ name|calcite
 operator|.
 name|avatica
 operator|.
-name|AvaticaParameter
+name|AvaticaSite
 import|;
 end_import
 
@@ -152,6 +152,22 @@ operator|.
 name|avatica
 operator|.
 name|UnregisteredDriver
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|avatica
+operator|.
+name|remote
+operator|.
+name|TypedValue
 import|;
 end_import
 
@@ -1488,7 +1504,7 @@ decl_stmt|;
 specifier|final
 name|List
 argument_list|<
-name|Object
+name|TypedValue
 argument_list|>
 name|parameterValues
 init|=
@@ -1503,7 +1519,7 @@ for|for
 control|(
 name|Ord
 argument_list|<
-name|Object
+name|TypedValue
 argument_list|>
 name|o
 range|:
@@ -1528,6 +1544,9 @@ argument_list|,
 name|o
 operator|.
 name|e
+operator|.
+name|toLocal
+argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
@@ -2044,7 +2063,7 @@ condition|)
 block|{
 name|e
 operator|=
-name|AvaticaParameter
+name|AvaticaSite
 operator|.
 name|DUMMY_VALUE
 expr_stmt|;
@@ -2093,7 +2112,7 @@ if|if
 condition|(
 name|o
 operator|==
-name|AvaticaParameter
+name|AvaticaSite
 operator|.
 name|DUMMY_VALUE
 condition|)

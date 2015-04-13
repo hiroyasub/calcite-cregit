@@ -17,6 +17,22 @@ end_package
 
 begin_import
 import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|avatica
+operator|.
+name|remote
+operator|.
+name|TypedValue
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|sql
@@ -865,6 +881,7 @@ parameter_list|()
 throws|throws
 name|SQLException
 block|{
+comment|//noinspection MagicConstant
 return|return
 name|meta
 operator|.
@@ -2258,7 +2275,7 @@ comment|/** A means for anyone who has a trojan to call the protected method    
 specifier|public
 name|List
 argument_list|<
-name|Object
+name|TypedValue
 argument_list|>
 name|getParameterValues
 parameter_list|(
