@@ -1058,8 +1058,11 @@ throws|throws
 name|SQLException
 block|{
 throw|throw
-operator|new
-name|UnsupportedOperationException
+name|connection
+operator|.
+name|helper
+operator|.
+name|unsupported
 argument_list|()
 throw|;
 block|}
