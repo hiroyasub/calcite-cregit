@@ -2757,6 +2757,55 @@ name|getMoreResults
 argument_list|()
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testRemotePreparedStatement
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|PreparedStatement
+name|preparedStatement
+init|=
+name|remoteConnection
+operator|.
+name|prepareStatement
+argument_list|(
+literal|"select * from \"hr\".\"emps\""
+argument_list|)
+decl_stmt|;
+name|ResultSet
+name|resultSet
+init|=
+name|preparedStatement
+operator|.
+name|executeQuery
+argument_list|()
+decl_stmt|;
+name|int
+name|count
+init|=
+literal|0
+decl_stmt|;
+while|while
+condition|(
+name|resultSet
+operator|.
+name|next
+argument_list|()
+condition|)
+block|{
+name|count
+operator|+=
+literal|1
+expr_stmt|;
+block|}
+comment|// TODO: implement remote fetch
+comment|//assertTrue(count> 0);
+block|}
 comment|/** A bunch of sample values of various types. */
 specifier|private
 specifier|static

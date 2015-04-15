@@ -2824,6 +2824,10 @@ argument_list|(
 name|h
 argument_list|)
 decl_stmt|;
+name|h
+operator|.
+name|signature
+operator|=
 name|calciteConnection
 operator|.
 name|parseQuery
