@@ -339,11 +339,9 @@ name|unparse
 argument_list|(
 name|writer
 argument_list|,
-name|getLeftPrec
-argument_list|()
+literal|10
 argument_list|,
-name|getRightPrec
-argument_list|()
+literal|10
 argument_list|)
 expr_stmt|;
 block|}

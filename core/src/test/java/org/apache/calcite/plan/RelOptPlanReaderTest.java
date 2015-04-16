@@ -226,7 +226,7 @@ argument_list|)
 argument_list|,
 name|is
 argument_list|(
-literal|"JdbcProjectRel"
+literal|"JdbcProject"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -236,7 +236,7 @@ name|relJson
 operator|.
 name|typeNameToClass
 argument_list|(
-literal|"JdbcProjectRel"
+literal|"JdbcProject"
 argument_list|)
 argument_list|,
 name|equalTo

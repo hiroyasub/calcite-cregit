@@ -1248,14 +1248,6 @@ name|int
 name|rightPrec
 parameter_list|)
 block|{
-name|SqlBinaryOperator
-name|binop
-init|=
-operator|(
-name|SqlBinaryOperator
-operator|)
-name|operator
-decl_stmt|;
 assert|assert
 name|call
 operator|.
@@ -1275,7 +1267,7 @@ operator|.
 name|startList
 argument_list|(
 operator|(
-name|binop
+name|operator
 operator|instanceof
 name|SqlSetOperator
 operator|)
@@ -1306,7 +1298,7 @@ name|writer
 argument_list|,
 name|leftPrec
 argument_list|,
-name|binop
+name|operator
 operator|.
 name|getLeftPrec
 argument_list|()
@@ -1316,7 +1308,7 @@ specifier|final
 name|boolean
 name|needsSpace
 init|=
-name|binop
+name|operator
 operator|.
 name|needsSpace
 argument_list|()
@@ -1332,7 +1324,7 @@ name|writer
 operator|.
 name|sep
 argument_list|(
-name|binop
+name|operator
 operator|.
 name|getName
 argument_list|()
@@ -1356,7 +1348,7 @@ name|unparse
 argument_list|(
 name|writer
 argument_list|,
-name|binop
+name|operator
 operator|.
 name|getRightPrec
 argument_list|()

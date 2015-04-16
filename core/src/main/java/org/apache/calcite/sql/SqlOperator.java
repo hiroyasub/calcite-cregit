@@ -1273,6 +1273,15 @@ return|return
 name|type
 return|;
 block|}
+comment|/**    * Returns whether this operator should be surrounded by space when    * unparsed.    *    * @return whether this operator should be surrounded by space    */
+name|boolean
+name|needsSpace
+parameter_list|()
+block|{
+return|return
+literal|true
+return|;
+block|}
 comment|/**    * Validates and determines coercibility and resulting collation name of    * binary operator if needed.    */
 specifier|protected
 name|RelDataType

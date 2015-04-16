@@ -443,6 +443,8 @@ name|COLLECTION_TABLE
 argument_list|,
 name|TABLESAMPLE
 argument_list|,
+name|VALUES
+argument_list|,
 name|WITH
 argument_list|,
 name|WITH_ITEM

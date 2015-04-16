@@ -812,7 +812,7 @@ name|SqlInternalOperator
 name|CUBE
 init|=
 operator|new
-name|SqlInternalOperator
+name|SqlRollupOperator
 argument_list|(
 literal|"CUBE"
 argument_list|,
@@ -829,7 +829,7 @@ name|SqlInternalOperator
 name|ROLLUP
 init|=
 operator|new
-name|SqlInternalOperator
+name|SqlRollupOperator
 argument_list|(
 literal|"ROLLUP"
 argument_list|,
@@ -846,9 +846,9 @@ name|SqlInternalOperator
 name|GROUPING_SETS
 init|=
 operator|new
-name|SqlInternalOperator
+name|SqlRollupOperator
 argument_list|(
-literal|"GROUPING_SETS"
+literal|"GROUPING SETS"
 argument_list|,
 name|SqlKind
 operator|.
@@ -888,7 +888,7 @@ operator|new
 name|SqlGroupingIdFunction
 argument_list|()
 decl_stmt|;
-comment|/** {@code EXTEND} operator to add columns to a table's schema, as in    * {@code SELECT ... FROM emp EXTEND (horoscope VARCHAR(100))}. */
+comment|/** {@code EXTEND} operator. */
 specifier|public
 specifier|static
 specifier|final
@@ -896,14 +896,8 @@ name|SqlInternalOperator
 name|EXTEND
 init|=
 operator|new
-name|SqlInternalOperator
-argument_list|(
-literal|"EXTEND"
-argument_list|,
-name|SqlKind
-operator|.
-name|EXTEND
-argument_list|)
+name|SqlExtendOperator
+argument_list|()
 decl_stmt|;
 comment|/**    * String concatenation operator, '<code>||</code>'.    */
 specifier|public

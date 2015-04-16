@@ -310,7 +310,9 @@ return|return
 literal|"{1} {0} {2}"
 return|;
 block|}
-comment|/**    * Returns whether this operator should be surrounded by space when    * unparsed.    *    *<p>Returns true for most operators but false for the '.' operator;    * consider    *    *<blockquote>    *<pre>x.y + 5 * 6</pre>    *</blockquote>    *    * @return whether this operator should be surrounded by space    */
+comment|/**    * {@inheritDoc}    *    *<p>Returns true for most operators but false for the '.' operator;    * consider    *    *<blockquote>    *<pre>x.y + 5 * 6</pre>    *</blockquote>    */
+annotation|@
+name|Override
 name|boolean
 name|needsSpace
 parameter_list|()

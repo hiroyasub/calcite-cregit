@@ -1132,7 +1132,7 @@ name|check
 argument_list|(
 literal|"values a between c and d and e and f between g and h"
 argument_list|,
-literal|"(VALUES (ROW((((`A` BETWEEN ASYMMETRIC `C` AND `D`) AND `E`) AND (`F` BETWEEN ASYMMETRIC `G` AND `H`)))))"
+literal|"VALUES (ROW((((`A` BETWEEN ASYMMETRIC `C` AND `D`) AND `E`) AND (`F` BETWEEN ASYMMETRIC `G` AND `H`))))"
 argument_list|)
 expr_stmt|;
 name|checkFails
@@ -1161,7 +1161,7 @@ name|check
 argument_list|(
 literal|"values a between b and c + 2 or d and e"
 argument_list|,
-literal|"(VALUES (ROW(((`A` BETWEEN ASYMMETRIC `B` AND (`C` + 2)) OR (`D` AND `E`)))))"
+literal|"VALUES (ROW(((`A` BETWEEN ASYMMETRIC `B` AND (`C` + 2)) OR (`D` AND `E`))))"
 argument_list|)
 expr_stmt|;
 comment|// '=' and BETWEEN have same precedence, and are left-assoc
@@ -1169,7 +1169,7 @@ name|check
 argument_list|(
 literal|"values x = a between b and c = d = e"
 argument_list|,
-literal|"(VALUES (ROW(((((`X` = `A`) BETWEEN ASYMMETRIC `B` AND `C`) = `D`) = `E`))))"
+literal|"VALUES (ROW(((((`X` = `A`) BETWEEN ASYMMETRIC `B` AND `C`) = `D`) = `E`)))"
 argument_list|)
 expr_stmt|;
 comment|// AND doesn't match BETWEEN if it's between parentheses!
@@ -1177,7 +1177,7 @@ name|check
 argument_list|(
 literal|"values a between b or (c and d) or e and f"
 argument_list|,
-literal|"(VALUES (ROW((`A` BETWEEN ASYMMETRIC ((`B` OR (`C` AND `D`)) OR `E`) AND `F`))))"
+literal|"VALUES (ROW((`A` BETWEEN ASYMMETRIC ((`B` OR (`C` AND `D`)) OR `E`) AND `F`)))"
 argument_list|)
 expr_stmt|;
 block|}
@@ -1656,7 +1656,7 @@ name|check
 argument_list|(
 literal|"values a and b like c"
 argument_list|,
-literal|"(VALUES (ROW((`A` AND (`B` LIKE `C`)))))"
+literal|"VALUES (ROW((`A` AND (`B` LIKE `C`))))"
 argument_list|)
 expr_stmt|;
 comment|// LIKE has higher precedence than AND
@@ -1664,7 +1664,7 @@ name|check
 argument_list|(
 literal|"values a and b like c escape d and e"
 argument_list|,
-literal|"(VALUES (ROW(((`A` AND (`B` LIKE `C` ESCAPE `D`)) AND `E`))))"
+literal|"VALUES (ROW(((`A` AND (`B` LIKE `C` ESCAPE `D`)) AND `E`)))"
 argument_list|)
 expr_stmt|;
 comment|// LIKE has same precedence as '='; LIKE is right-assoc, '=' is left
@@ -1672,7 +1672,7 @@ name|check
 argument_list|(
 literal|"values a = b like c = d"
 argument_list|,
-literal|"(VALUES (ROW(((`A` = `B`) LIKE (`C` = `D`)))))"
+literal|"VALUES (ROW(((`A` = `B`) LIKE (`C` = `D`))))"
 argument_list|)
 expr_stmt|;
 comment|// Nested LIKE
@@ -1680,21 +1680,21 @@ name|check
 argument_list|(
 literal|"values a like b like c escape d"
 argument_list|,
-literal|"(VALUES (ROW((`A` LIKE (`B` LIKE `C` ESCAPE `D`)))))"
+literal|"VALUES (ROW((`A` LIKE (`B` LIKE `C` ESCAPE `D`))))"
 argument_list|)
 expr_stmt|;
 name|check
 argument_list|(
 literal|"values a like b like c escape d and false"
 argument_list|,
-literal|"(VALUES (ROW(((`A` LIKE (`B` LIKE `C` ESCAPE `D`)) AND FALSE))))"
+literal|"VALUES (ROW(((`A` LIKE (`B` LIKE `C` ESCAPE `D`)) AND FALSE)))"
 argument_list|)
 expr_stmt|;
 name|check
 argument_list|(
 literal|"values a like b like c like d escape e escape f"
 argument_list|,
-literal|"(VALUES (ROW((`A` LIKE (`B` LIKE (`C` LIKE `D` ESCAPE `E`) ESCAPE `F`)))))"
+literal|"VALUES (ROW((`A` LIKE (`B` LIKE (`C` LIKE `D` ESCAPE `E`) ESCAPE `F`))))"
 argument_list|)
 expr_stmt|;
 comment|// Mixed LIKE and SIMILAR TO
@@ -1702,7 +1702,7 @@ name|check
 argument_list|(
 literal|"values a similar to b like c similar to d escape e escape f"
 argument_list|,
-literal|"(VALUES (ROW((`A` SIMILAR TO (`B` LIKE (`C` SIMILAR TO `D` ESCAPE `E`) ESCAPE `F`)))))"
+literal|"VALUES (ROW((`A` SIMILAR TO (`B` LIKE (`C` SIMILAR TO `D` ESCAPE `E`) ESCAPE `F`))))"
 argument_list|)
 expr_stmt|;
 comment|// FIXME should fail at "escape"
@@ -1718,7 +1718,7 @@ name|check
 argument_list|(
 literal|"values a like b + c escape d"
 argument_list|,
-literal|"(VALUES (ROW((`A` LIKE (`B` + `C`) ESCAPE `D`))))"
+literal|"VALUES (ROW((`A` LIKE (`B` + `C`) ESCAPE `D`)))"
 argument_list|)
 expr_stmt|;
 comment|// LIKE with ||
@@ -1726,7 +1726,7 @@ name|check
 argument_list|(
 literal|"values a like b || c escape d"
 argument_list|,
-literal|"(VALUES (ROW((`A` LIKE (`B` || `C`) ESCAPE `D`))))"
+literal|"VALUES (ROW((`A` LIKE (`B` || `C`) ESCAPE `D`)))"
 argument_list|)
 expr_stmt|;
 comment|// ESCAPE with no expression
@@ -1788,7 +1788,7 @@ name|check
 argument_list|(
 literal|"values a similar to b like c similar to d escape e escape f"
 argument_list|,
-literal|"(VALUES (ROW((`A` SIMILAR TO (`B` LIKE (`C` SIMILAR TO `D` ESCAPE `E`) ESCAPE `F`)))))"
+literal|"VALUES (ROW((`A` SIMILAR TO (`B` LIKE (`C` SIMILAR TO `D` ESCAPE `E`) ESCAPE `F`))))"
 argument_list|)
 expr_stmt|;
 comment|// SIMILAR TO with subquery
@@ -1796,11 +1796,11 @@ name|check
 argument_list|(
 literal|"values a similar to (select * from t where a like b escape c) escape d"
 argument_list|,
-literal|"(VALUES (ROW((`A` SIMILAR TO (SELECT *\n"
+literal|"VALUES (ROW((`A` SIMILAR TO (SELECT *\n"
 operator|+
 literal|"FROM `T`\n"
 operator|+
-literal|"WHERE (`A` LIKE `B` ESCAPE `C`)) ESCAPE `D`))))"
+literal|"WHERE (`A` LIKE `B` ESCAPE `C`)) ESCAPE `D`)))"
 argument_list|)
 expr_stmt|;
 block|}
@@ -2254,7 +2254,7 @@ literal|"SELECT `DEPTNO`\n"
 operator|+
 literal|"FROM `EMP`\n"
 operator|+
-literal|"GROUP BY (GROUPING_SETS(`DEPTNO`, (ROW(`DEPTNO`, `GENDER`)),))"
+literal|"GROUP BY GROUPING SETS(`DEPTNO`, (`DEPTNO`, `GENDER`), ())"
 argument_list|)
 expr_stmt|;
 comment|// Grouping sets must have parentheses
@@ -2292,7 +2292,7 @@ literal|"SELECT `DEPTNO`\n"
 operator|+
 literal|"FROM `EMP`\n"
 operator|+
-literal|"GROUP BY (GROUPING_SETS(`DEPTNO`, GROUPING_SETS(`E`, `D`),, CUBE(`X`, `Y`), ROLLUP(`P`, `Q`)))\n"
+literal|"GROUP BY GROUPING SETS(`DEPTNO`, GROUPING SETS(`E`, `D`), (), CUBE(`X`, `Y`), ROLLUP(`P`, `Q`))\n"
 operator|+
 literal|"ORDER BY `A`"
 argument_list|)
@@ -2310,7 +2310,7 @@ literal|"SELECT `DEPTNO`\n"
 operator|+
 literal|"FROM `EMP`\n"
 operator|+
-literal|"GROUP BY (GROUPING_SETS())"
+literal|"GROUP BY GROUPING SETS(())"
 argument_list|)
 expr_stmt|;
 block|}
@@ -2334,7 +2334,7 @@ literal|"SELECT `DEPTNO`\n"
 operator|+
 literal|"FROM `EMP`\n"
 operator|+
-literal|"GROUP BY (CUBE((ROW(`A`, `B`)), (ROW(`C`, `D`))))"
+literal|"GROUP BY CUBE((`A`, `B`), (`C`, `D`))"
 argument_list|)
 expr_stmt|;
 block|}
@@ -2358,7 +2358,7 @@ literal|"SELECT `DEPTNO`\n"
 operator|+
 literal|"FROM `EMP`\n"
 operator|+
-literal|"GROUP BY (CUBE((ROW(`A`, `B`)), (ROW(`C`, `D`))))\n"
+literal|"GROUP BY CUBE((`A`, `B`), (`C`, `D`))\n"
 operator|+
 literal|"ORDER BY `A`"
 argument_list|)
@@ -2396,7 +2396,7 @@ literal|"SELECT `DEPTNO`\n"
 operator|+
 literal|"FROM `EMP`\n"
 operator|+
-literal|"GROUP BY (ROLLUP(`DEPTNO`, (`DEPTNO` + 1), `GENDER`))"
+literal|"GROUP BY ROLLUP(`DEPTNO`, (`DEPTNO` + 1), `GENDER`)"
 argument_list|)
 expr_stmt|;
 comment|// Nested rollup not ok
@@ -2433,7 +2433,7 @@ literal|"SELECT `DEPTNO`, (GROUPING(`DEPTNO`))\n"
 operator|+
 literal|"FROM `EMP`\n"
 operator|+
-literal|"GROUP BY (GROUPING_SETS(`DEPTNO`, (ROW(`DEPTNO`, `GENDER`)),))"
+literal|"GROUP BY GROUPING SETS(`DEPTNO`, (`DEPTNO`, `GENDER`), ())"
 argument_list|)
 expr_stmt|;
 block|}
@@ -2454,9 +2454,9 @@ literal|"WITH `FEMALEEMPS` AS (SELECT *\n"
 operator|+
 literal|"FROM `EMPS`\n"
 operator|+
-literal|"WHERE (`GENDER` = 'F')) SELECT `DEPTNO`\n"
+literal|"WHERE (`GENDER` = 'F')) (SELECT `DEPTNO`\n"
 operator|+
-literal|"FROM `FEMALEEMPS`"
+literal|"FROM `FEMALEEMPS`)"
 argument_list|)
 expr_stmt|;
 block|}
@@ -2483,9 +2483,9 @@ literal|"WHERE (`GENDER` = 'F')), `MARRIEDFEMALEEMPS` (`X`, `Y`) AS (SELECT *\n"
 operator|+
 literal|"FROM `FEMALEEMPS`\n"
 operator|+
-literal|"WHERE (`MARITASTATUS` = 'M')) SELECT `DEPTNO`\n"
+literal|"WHERE (`MARITASTATUS` = 'M')) (SELECT `DEPTNO`\n"
 operator|+
-literal|"FROM `FEMALEEMPS`"
+literal|"FROM `FEMALEEMPS`)"
 argument_list|)
 expr_stmt|;
 block|}
@@ -2519,9 +2519,9 @@ literal|"with v(i,c) as (values (1, 'a'), (2, 'bb'))\n"
 operator|+
 literal|"select c, i from v"
 argument_list|,
-literal|"WITH `V` (`I`, `C`) AS (VALUES (ROW(1, 'a')), (ROW(2, 'bb'))) SELECT `C`, `I`\n"
+literal|"WITH `V` (`I`, `C`) AS (VALUES (ROW(1, 'a')), (ROW(2, 'bb'))) (SELECT `C`, `I`\n"
 operator|+
-literal|"FROM `V`"
+literal|"FROM `V`)"
 argument_list|)
 expr_stmt|;
 block|}
@@ -2565,11 +2565,11 @@ literal|"  select 1 as one from empDept)"
 argument_list|,
 literal|"WITH `EMP2` AS (SELECT *\n"
 operator|+
-literal|"FROM `EMP`) WITH `DEPT2` AS (SELECT *\n"
+literal|"FROM `EMP`) (WITH `DEPT2` AS (SELECT *\n"
 operator|+
-literal|"FROM `DEPT`) SELECT 1 AS `ONE`\n"
+literal|"FROM `DEPT`) (SELECT 1 AS `ONE`\n"
 operator|+
-literal|"FROM `EMPDEPT`"
+literal|"FROM `EMPDEPT`))"
 argument_list|)
 expr_stmt|;
 block|}
@@ -4266,7 +4266,7 @@ name|check
 argument_list|(
 literal|"values ( /** 1, 2 + ** */ 3)"
 argument_list|,
-literal|"(VALUES (ROW(3)))"
+literal|"VALUES (ROW(3))"
 argument_list|)
 expr_stmt|;
 comment|// comment in string is preserved
@@ -4274,7 +4274,7 @@ name|check
 argument_list|(
 literal|"values ('a string with /* a comment */ in it')"
 argument_list|,
-literal|"(VALUES (ROW('a string with /* a comment */ in it')))"
+literal|"VALUES (ROW('a string with /* a comment */ in it'))"
 argument_list|)
 expr_stmt|;
 comment|// SQL:2003, 5.2, syntax rule # 8 "There shall be no<separator>
@@ -4285,7 +4285,7 @@ literal|"values (- -1\n"
 operator|+
 literal|")"
 argument_list|,
-literal|"(VALUES (ROW((- -1))))"
+literal|"VALUES (ROW((- -1)))"
 argument_list|)
 expr_stmt|;
 name|check
@@ -4294,7 +4294,7 @@ literal|"values (--1+\n"
 operator|+
 literal|"2)"
 argument_list|,
-literal|"(VALUES (ROW(2)))"
+literal|"VALUES (ROW(2))"
 argument_list|)
 expr_stmt|;
 comment|// end of multiline commment without start
@@ -4386,7 +4386,7 @@ literal|"values (1 + /* comment -- rest of line\n"
 operator|+
 literal|" rest of comment */ 2)"
 argument_list|,
-literal|"(VALUES (ROW((1 + 2))))"
+literal|"VALUES (ROW((1 + 2)))"
 argument_list|)
 expr_stmt|;
 comment|// multiline comment inside singleline comment
@@ -4396,7 +4396,7 @@ literal|"values -- rest of line /* a comment */ \n"
 operator|+
 literal|"(1)"
 argument_list|,
-literal|"(VALUES (ROW(1)))"
+literal|"VALUES (ROW(1))"
 argument_list|)
 expr_stmt|;
 comment|// non-terminated multiline comment inside singleline comment
@@ -4406,7 +4406,7 @@ literal|"values -- rest of line /* a comment  \n"
 operator|+
 literal|"(1)"
 argument_list|,
-literal|"(VALUES (ROW(1)))"
+literal|"VALUES (ROW(1))"
 argument_list|)
 expr_stmt|;
 comment|// even if comment abuts the tokens at either end, it becomes a space
@@ -4414,7 +4414,7 @@ name|check
 argument_list|(
 literal|"values ('abc'/* a comment*/'def')"
 argument_list|,
-literal|"(VALUES (ROW('abc'\n'def')))"
+literal|"VALUES (ROW('abc'\n'def'))"
 argument_list|)
 expr_stmt|;
 comment|// comment which starts as soon as it has begun
@@ -4422,7 +4422,7 @@ name|check
 argument_list|(
 literal|"values /**/ (1)"
 argument_list|,
-literal|"(VALUES (ROW(1)))"
+literal|"VALUES (ROW(1))"
 argument_list|)
 expr_stmt|;
 block|}
@@ -5139,7 +5139,7 @@ name|check
 argument_list|(
 literal|"values(1,'two')"
 argument_list|,
-literal|"(VALUES (ROW(1, 'two')))"
+literal|"VALUES (ROW(1, 'two'))"
 argument_list|)
 expr_stmt|;
 block|}
@@ -5154,7 +5154,7 @@ name|check
 argument_list|(
 literal|"values row(1,'two')"
 argument_list|,
-literal|"(VALUES (ROW(1, 'two')))"
+literal|"VALUES (ROW(1, 'two'))"
 argument_list|)
 expr_stmt|;
 block|}
@@ -5244,7 +5244,7 @@ name|ok
 argument_list|(
 literal|"SELECT *\n"
 operator|+
-literal|"FROM (EXTEND(`EMP`, `X`, INTEGER, `Y`, VARCHAR(10)))"
+literal|"FROM `EMP` EXTEND (`X` INTEGER, `Y` VARCHAR(10))"
 argument_list|)
 expr_stmt|;
 name|sql
@@ -5256,7 +5256,7 @@ name|ok
 argument_list|(
 literal|"SELECT *\n"
 operator|+
-literal|"FROM (EXTEND(`EMP`, `X`, INTEGER, `Y`, VARCHAR(10)))\n"
+literal|"FROM `EMP` EXTEND (`X` INTEGER, `Y` VARCHAR(10))\n"
 operator|+
 literal|"WHERE TRUE"
 argument_list|)
@@ -5271,7 +5271,7 @@ name|ok
 argument_list|(
 literal|"SELECT *\n"
 operator|+
-literal|"FROM (EXTEND(`EMP`, `X`, INTEGER, `Y`, VARCHAR(10))) AS `T`"
+literal|"FROM `EMP` EXTEND (`X` INTEGER, `Y` VARCHAR(10)) AS `T`"
 argument_list|)
 expr_stmt|;
 comment|// as previous, without AS
@@ -5284,7 +5284,7 @@ name|ok
 argument_list|(
 literal|"SELECT *\n"
 operator|+
-literal|"FROM (EXTEND(`EMP`, `X`, INTEGER, `Y`, VARCHAR(10))) AS `T`"
+literal|"FROM `EMP` EXTEND (`X` INTEGER, `Y` VARCHAR(10)) AS `T`"
 argument_list|)
 expr_stmt|;
 comment|// with table alias and column alias list
@@ -5297,7 +5297,7 @@ name|ok
 argument_list|(
 literal|"SELECT *\n"
 operator|+
-literal|"FROM (EXTEND(`EMP`, `X`, INTEGER, `Y`, VARCHAR(10))) AS `T` (`A`, `B`)"
+literal|"FROM `EMP` EXTEND (`X` INTEGER, `Y` VARCHAR(10)) AS `T` (`A`, `B`)"
 argument_list|)
 expr_stmt|;
 comment|// as previous, without AS
@@ -5310,7 +5310,7 @@ name|ok
 argument_list|(
 literal|"SELECT *\n"
 operator|+
-literal|"FROM (EXTEND(`EMP`, `X`, INTEGER, `Y`, VARCHAR(10))) AS `T` (`A`, `B`)"
+literal|"FROM `EMP` EXTEND (`X` INTEGER, `Y` VARCHAR(10)) AS `T` (`A`, `B`)"
 argument_list|)
 expr_stmt|;
 comment|// omit EXTEND
@@ -5323,7 +5323,7 @@ name|ok
 argument_list|(
 literal|"SELECT *\n"
 operator|+
-literal|"FROM (EXTEND(`EMP`, `X`, INTEGER, `Y`, VARCHAR(10))) AS `T` (`A`, `B`)"
+literal|"FROM `EMP` EXTEND (`X` INTEGER, `Y` VARCHAR(10)) AS `T` (`A`, `B`)"
 argument_list|)
 expr_stmt|;
 name|sql
@@ -5335,7 +5335,7 @@ name|ok
 argument_list|(
 literal|"SELECT *\n"
 operator|+
-literal|"FROM (EXTEND(`EMP`, `X`, INTEGER, `Y`, VARCHAR(10)))\n"
+literal|"FROM `EMP` EXTEND (`X` INTEGER, `Y` VARCHAR(10))\n"
 operator|+
 literal|"WHERE (`X` = `Y`)"
 argument_list|)
@@ -5792,7 +5792,7 @@ argument_list|)
 operator|.
 name|ok
 argument_list|(
-literal|"UPDATE `EMPS` (`EMPNO`, `SAL`) SET `EMPNO` = (`EMPNO` + 1)\n"
+literal|"UPDATE `EMPS` SET `EMPNO` = (`EMPNO` + 1)\n"
 operator|+
 literal|", `SAL` = (`SAL` - 1)\n"
 operator|+
@@ -14209,13 +14209,13 @@ decl_stmt|;
 name|String
 name|out1
 init|=
-literal|"(VALUES (ROW(_UTF16'"
+literal|"VALUES (ROW(_UTF16'"
 operator|+
 name|ConversionUtil
 operator|.
 name|TEST_UNICODE_STRING
 operator|+
-literal|"')))"
+literal|"'))"
 decl_stmt|;
 name|check
 argument_list|(
@@ -14239,13 +14239,13 @@ decl_stmt|;
 name|String
 name|out2
 init|=
-literal|"(VALUES (ROW('"
+literal|"VALUES (ROW('"
 operator|+
 name|ConversionUtil
 operator|.
 name|TEST_UNICODE_SQL_ESCAPED_LITERAL
 operator|+
-literal|"')))"
+literal|"'))"
 decl_stmt|;
 name|check
 argument_list|(
@@ -14271,13 +14271,13 @@ decl_stmt|;
 name|String
 name|out3
 init|=
-literal|"(VALUES (ROW(_UTF16'"
+literal|"VALUES (ROW(_UTF16'"
 operator|+
 name|ConversionUtil
 operator|.
 name|TEST_UNICODE_SQL_ESCAPED_LITERAL
 operator|+
-literal|"')))"
+literal|"'))"
 decl_stmt|;
 name|check
 argument_list|(
@@ -14311,13 +14311,13 @@ decl_stmt|;
 name|String
 name|out
 init|=
-literal|"(VALUES (ROW(_UTF16'"
+literal|"VALUES (ROW(_UTF16'"
 operator|+
 name|ConversionUtil
 operator|.
 name|TEST_UNICODE_STRING
 operator|+
-literal|"')))"
+literal|"'))"
 decl_stmt|;
 name|check
 argument_list|(
@@ -15206,10 +15206,13 @@ name|assertEquals
 argument_list|(
 name|expected
 argument_list|,
+name|linux
+argument_list|(
 name|actual
 argument_list|)
+argument_list|)
 expr_stmt|;
-comment|// Unparse again in Eigenbase dialect (which we can parse), and
+comment|// Unparse again in Calcite dialect (which we can parse), and
 comment|// minimal parentheses.
 specifier|final
 name|String
@@ -15232,12 +15235,36 @@ decl_stmt|;
 comment|// Parse and unparse again.
 name|SqlNode
 name|sqlNode2
+decl_stmt|;
+specifier|final
+name|Quoting
+name|q
 init|=
+name|quoting
+decl_stmt|;
+try|try
+block|{
+name|quoting
+operator|=
+name|Quoting
+operator|.
+name|DOUBLE_QUOTE
+expr_stmt|;
+name|sqlNode2
+operator|=
 name|parseStmtAndHandleEx
 argument_list|(
 name|sql1
 argument_list|)
-decl_stmt|;
+expr_stmt|;
+block|}
+finally|finally
+block|{
+name|quoting
+operator|=
+name|q
+expr_stmt|;
+block|}
 specifier|final
 name|String
 name|sql2
@@ -15287,7 +15314,10 @@ name|assertEquals
 argument_list|(
 name|expected
 argument_list|,
+name|linux
+argument_list|(
 name|actual2
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -15331,10 +15361,13 @@ name|assertEquals
 argument_list|(
 name|expected
 argument_list|,
+name|linux
+argument_list|(
 name|actual
 argument_list|)
+argument_list|)
 expr_stmt|;
-comment|// Unparse again in Eigenbase dialect (which we can parse), and
+comment|// Unparse again in Calcite dialect (which we can parse), and
 comment|// minimal parentheses.
 specifier|final
 name|String
@@ -15357,12 +15390,36 @@ decl_stmt|;
 comment|// Parse and unparse again.
 name|SqlNode
 name|sqlNode2
+decl_stmt|;
+specifier|final
+name|Quoting
+name|q
 init|=
+name|quoting
+decl_stmt|;
+try|try
+block|{
+name|quoting
+operator|=
+name|Quoting
+operator|.
+name|DOUBLE_QUOTE
+expr_stmt|;
+name|sqlNode2
+operator|=
 name|parseExpressionAndHandleEx
 argument_list|(
 name|sql1
 argument_list|)
-decl_stmt|;
+expr_stmt|;
+block|}
+finally|finally
+block|{
+name|quoting
+operator|=
+name|q
+expr_stmt|;
+block|}
 specifier|final
 name|String
 name|sql2
@@ -15412,7 +15469,10 @@ name|assertEquals
 argument_list|(
 name|expected
 argument_list|,
+name|linux
+argument_list|(
 name|actual2
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -15442,6 +15502,39 @@ parameter_list|)
 block|{
 comment|// Do nothing. We're not interested in unparsing invalid SQL
 block|}
+block|}
+specifier|private
+name|String
+name|linux
+parameter_list|(
+name|String
+name|s
+parameter_list|)
+block|{
+if|if
+condition|(
+name|LINUXIFY
+operator|.
+name|get
+argument_list|()
+index|[
+literal|0
+index|]
+condition|)
+block|{
+name|s
+operator|=
+name|Util
+operator|.
+name|toLinux
+argument_list|(
+name|s
+argument_list|)
+expr_stmt|;
+block|}
+return|return
+name|s
+return|;
 block|}
 comment|/** Helper class for building fluent code such as    * {@code sql("values 1").ok();}. */
 specifier|private
