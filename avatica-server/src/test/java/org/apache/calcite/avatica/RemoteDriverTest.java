@@ -2422,6 +2422,11 @@ block|}
 block|}
 block|}
 annotation|@
+name|Ignore
+argument_list|(
+literal|"[CALCITE-687] Make RemoteDriverTest.testStatementLifecycle thread-safe"
+argument_list|)
+annotation|@
 name|Test
 specifier|public
 name|void
