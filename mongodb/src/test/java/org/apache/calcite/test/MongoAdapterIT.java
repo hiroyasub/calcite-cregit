@@ -1427,11 +1427,6 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
-name|Ignore
-argument_list|(
-literal|"Returns 2 instead of 2*29353 == 58706"
-argument_list|)
-annotation|@
 name|Test
 specifier|public
 name|void
@@ -1468,7 +1463,9 @@ name|queryContains
 argument_list|(
 name|mongoChecker
 argument_list|(
-literal|"{$group: {_id: {}, 'EXPR$0': {$sum: 1}}}"
+literal|"{$group: {_id: {}, _0: {$sum: 1}}}"
+argument_list|,
+literal|"{$project: {'EXPR$0': {$multiply: ['$_0', {$literal: 2}]}}}"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1639,6 +1636,118 @@ argument_list|,
 literal|"{$project: {C: 1, STATE: 1}}"
 argument_list|,
 literal|"{$sort: {STATE: 1}}"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testGroupByAvg
+parameter_list|()
+block|{
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|enable
+argument_list|(
+name|enabled
+argument_list|()
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|ZIPS
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select state, avg(pop) as a from zips group by state order by state"
+argument_list|)
+operator|.
+name|limit
+argument_list|(
+literal|2
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"STATE=AK; A=2793.3230769230768\n"
+operator|+
+literal|"STATE=AL; A=7126.255731922399\n"
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|mongoChecker
+argument_list|(
+literal|"{$project: {POP: '$pop', STATE: '$state'}}"
+argument_list|,
+literal|"{$group: {_id: '$STATE', A: {$avg: '$POP'}}}"
+argument_list|,
+literal|"{$project: {STATE: '$_id', A: '$A'}}"
+argument_list|,
+literal|"{$sort: {STATE: 1}}"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testGroupByAvgSumCount
+parameter_list|()
+block|{
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|enable
+argument_list|(
+name|enabled
+argument_list|()
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|ZIPS
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select state, avg(pop) as a, sum(pop) as s, count(pop) as c from zips group by state order by state"
+argument_list|)
+operator|.
+name|limit
+argument_list|(
+literal|2
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"STATE=AK; A=2793.3230769230768; S=544698; C=195\n"
+operator|+
+literal|"STATE=AL; A=7126.255731922399; S=4040587; C=567\n"
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|mongoChecker
+argument_list|(
+literal|"{$project: {POP: '$pop', STATE: '$state'}}"
+argument_list|,
+literal|"{$group: {_id: '$STATE', _1: {$sum: '$POP'}, _2: {$sum: {$cond: [ {$eq: ['POP', null]}, 0, 1]}}}}"
+argument_list|,
+literal|"{$project: {STATE: '$_id', _1: '$_1', _2: '$_2'}}"
+argument_list|,
+literal|"{$sort: {STATE: 1}}"
+argument_list|,
+literal|"{$project: {STATE: 1, A: {$divide: [{$cond:[{$eq: ['$_2', {$literal: 0}]},null,'$_1']}, '$_2']}, S: {$cond:[{$eq: ['$_2', {$literal: 0}]},null,'$_1']}, C: '$_2'}}"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -2099,7 +2208,7 @@ literal|"{$project: {CITY: '$city', STATE: '$state'}}"
 argument_list|,
 literal|"{$sort: {STATE: 1, CITY: 1}}"
 argument_list|,
-literal|"{$project: {STATE: 1, CITY: 1, ZERO: {$ifNull: [null, 0]}}}"
+literal|"{$project: {STATE: 1, CITY: 1, ZERO: {$literal: 0}}}"
 argument_list|)
 argument_list|)
 expr_stmt|;
