@@ -475,6 +475,25 @@ name|ConnectionSpec
 operator|.
 name|HSQLDB
 decl_stmt|;
+comment|// see [CALCITE-687] Make RemoteDriverTest.testStatementLifecycle thread-safe
+specifier|private
+specifier|static
+specifier|final
+name|boolean
+name|JDK17
+init|=
+name|System
+operator|.
+name|getProperty
+argument_list|(
+literal|"java.version"
+argument_list|)
+operator|.
+name|startsWith
+argument_list|(
+literal|"1.7"
+argument_list|)
+decl_stmt|;
 specifier|private
 name|Connection
 name|mjs
@@ -1035,6 +1054,13 @@ parameter_list|()
 throws|throws
 name|Exception
 block|{
+if|if
+condition|(
+name|JDK17
+condition|)
+block|{
+return|return;
+block|}
 name|checkStatementExecuteQuery
 argument_list|(
 name|ljs
@@ -3129,6 +3155,11 @@ expr_stmt|;
 block|}
 block|}
 annotation|@
+name|Ignore
+argument_list|(
+literal|"[CALCITE-687] Make RemoteDriverTest.testStatementLifecycle thread-safe"
+argument_list|)
+annotation|@
 name|Test
 specifier|public
 name|void
@@ -3137,14 +3168,6 @@ parameter_list|()
 throws|throws
 name|Exception
 block|{
-comment|// Wait 5s for all other tests to finish. (Sorry! Hack!)
-name|Thread
-operator|.
-name|sleep
-argument_list|(
-literal|5000
-argument_list|)
-expr_stmt|;
 specifier|final
 name|String
 name|sql
@@ -3317,6 +3340,13 @@ parameter_list|()
 throws|throws
 name|Exception
 block|{
+if|if
+condition|(
+name|JDK17
+condition|)
+block|{
+return|return;
+block|}
 name|checkPrepareBindExecuteFetch
 argument_list|(
 name|ljs
