@@ -747,6 +747,10 @@ name|MultiJdbcSchemaJoinTest
 operator|.
 name|class
 block|,
+name|SqlLineTest
+operator|.
+name|class
+block|,
 comment|// slow tests that don't break often
 name|SqlToRelConverterExtendedTest
 operator|.
