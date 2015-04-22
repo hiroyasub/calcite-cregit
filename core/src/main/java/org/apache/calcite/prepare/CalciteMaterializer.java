@@ -522,6 +522,9 @@ block|{
 specifier|public
 name|CalciteMaterializer
 parameter_list|(
+name|CalcitePrepareImpl
+name|prepare
+parameter_list|,
 name|CalcitePrepare
 operator|.
 name|Context
@@ -539,6 +542,8 @@ parameter_list|)
 block|{
 name|super
 argument_list|(
+name|prepare
+argument_list|,
 name|context
 argument_list|,
 name|catalogReader
