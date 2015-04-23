@@ -272,6 +272,9 @@ name|i
 parameter_list|)
 function_decl|;
 comment|/**    * Returns the sub-query this relational expression belongs to.    *    * @return Sub-query    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 name|RelOptQuery
 name|getQuery
 parameter_list|()

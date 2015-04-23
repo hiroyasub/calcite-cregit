@@ -466,13 +466,10 @@ name|getRexBuilder
 argument_list|()
 decl_stmt|;
 specifier|final
-name|String
-name|dynInIdStr
+name|int
+name|dynInId
 init|=
 name|cluster
-operator|.
-name|getQuery
-argument_list|()
 operator|.
 name|createCorrel
 argument_list|()
@@ -484,7 +481,7 @@ init|=
 operator|new
 name|CorrelationId
 argument_list|(
-name|dynInIdStr
+name|dynInId
 argument_list|)
 decl_stmt|;
 specifier|final
