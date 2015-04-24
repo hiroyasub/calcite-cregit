@@ -1128,16 +1128,6 @@ name|ignoreNulls
 parameter_list|)
 block|{
 comment|// group by keys form a unique key
-if|if
-condition|(
-name|rel
-operator|.
-name|getGroupCount
-argument_list|()
-operator|>
-literal|0
-condition|)
-block|{
 name|ImmutableBitSet
 name|groupKey
 init|=
@@ -1159,21 +1149,6 @@ argument_list|(
 name|groupKey
 argument_list|)
 return|;
-block|}
-else|else
-block|{
-comment|// interpret an empty set as asking whether the aggregation is full
-comment|// table (in which case it returns at most one row);
-comment|// TODO jvs 1-Sept-2008:  apply this convention consistently
-comment|// to other relational expressions, as well as to
-comment|// RelMetadataQuery.getUniqueKeys
-return|return
-name|columns
-operator|.
-name|isEmpty
-argument_list|()
-return|;
-block|}
 block|}
 comment|// Catch-all rule when none of the others apply.
 specifier|public
