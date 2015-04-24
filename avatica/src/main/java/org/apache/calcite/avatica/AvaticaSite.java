@@ -240,6 +240,7 @@ specifier|final
 name|AvaticaParameter
 name|parameter
 decl_stmt|;
+comment|/** Calendar is not thread-safe. But calendar is only used from within one    * thread, and we have to trust that clients are not modifying calendars    * that they pass to us in a method such as    * {@link java.sql.PreparedStatement#setTime(int, Time, Calendar)}, so we do    * not need to synchronize access. */
 specifier|final
 name|Calendar
 name|calendar
@@ -282,6 +283,21 @@ index|[]
 name|slots
 parameter_list|)
 block|{
+assert|assert
+name|calendar
+operator|!=
+literal|null
+assert|;
+assert|assert
+name|parameter
+operator|!=
+literal|null
+assert|;
+assert|assert
+name|slots
+operator|!=
+literal|null
+assert|;
 name|this
 operator|.
 name|parameter
@@ -1013,9 +1029,6 @@ name|x
 parameter_list|,
 name|int
 name|targetSqlType
-parameter_list|,
-name|Calendar
-name|calendar
 parameter_list|)
 block|{
 if|if

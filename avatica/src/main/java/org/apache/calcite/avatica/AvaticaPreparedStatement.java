@@ -357,7 +357,7 @@ name|slots
 argument_list|)
 return|;
 block|}
-comment|/** Returns a calendar in the connection's time zone, creating one the first    * time this method is called.    *    *<p>Uses the calendar to offset date-time values when calling methods such    * as {@link #setDate(int, Date)}. */
+comment|/** Returns a calendar in the connection's time zone, creating one the first    * time this method is called.    *    *<p>Uses the calendar to offset date-time values when calling methods such    * as {@link #setDate(int, Date)}.    *    *<p>A note on thread-safety. This method does not strictly need to be    * {@code synchronized}, because JDBC does not promise thread safety if    * different threads are accessing the same statement, or even different    * objects within a particular connection.    *    *<p>The calendar returned is to be used only within this statement, and    * JDBC only allows access to a statement from within one thread, so    * therefore does not need to be synchronized when accessed.    */
 specifier|protected
 specifier|synchronized
 name|Calendar
@@ -855,9 +855,6 @@ argument_list|(
 name|x
 argument_list|,
 name|targetSqlType
-argument_list|,
-name|getCalendar
-argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
@@ -1395,7 +1392,8 @@ name|AvaticaSite
 argument_list|(
 name|parameter
 argument_list|,
-name|calendar
+name|getCalendar
+argument_list|()
 argument_list|,
 name|param
 operator|-
