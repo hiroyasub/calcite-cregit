@@ -117,6 +117,22 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|sql
+operator|.
+name|validate
+operator|.
+name|SqlMonotonicity
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|test
 operator|.
 name|SqlValidatorTestCase
@@ -160,7 +176,6 @@ name|Tester
 block|{
 comment|//~ Enums ------------------------------------------------------------------
 comment|/**    * Name of a virtual machine that can potentially implement an operator.    */
-specifier|public
 enum|enum
 name|VmName
 block|{
@@ -363,6 +378,17 @@ name|typeChecker
 parameter_list|,
 name|ResultChecker
 name|resultChecker
+parameter_list|)
+function_decl|;
+comment|/**    * Tests that the first column of a SQL query has a given monotonicity.    *    * @param expectedMonotonicity Expected monotonicity    * @param query                SQL query    */
+name|void
+name|checkMonotonic
+parameter_list|(
+name|String
+name|query
+parameter_list|,
+name|SqlMonotonicity
+name|expectedMonotonicity
 parameter_list|)
 function_decl|;
 comment|/**    * Declares that this test is for a given operator. So we can check that all    * operators are tested.    *    * @param operator             Operator    * @param unimplementedVmNames Names of virtual machines for which this    */

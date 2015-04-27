@@ -197,6 +197,22 @@ name|sql
 operator|.
 name|validate
 operator|.
+name|SqlMonotonicity
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|validate
+operator|.
 name|SqlValidator
 import|;
 end_import
@@ -19437,6 +19453,359 @@ operator|.
 name|fails
 argument_list|(
 name|STR_AGG_REQUIRES_MONO
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests that various expressions are monotonic. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMonotonic
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select stream floor(rowtime to hour) from orders"
+argument_list|)
+operator|.
+name|monotonic
+argument_list|(
+name|SqlMonotonicity
+operator|.
+name|INCREASING
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select stream ceil(rowtime to minute) from orders"
+argument_list|)
+operator|.
+name|monotonic
+argument_list|(
+name|SqlMonotonicity
+operator|.
+name|INCREASING
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select stream extract(minute from rowtime) from orders"
+argument_list|)
+operator|.
+name|monotonic
+argument_list|(
+name|SqlMonotonicity
+operator|.
+name|NOT_MONOTONIC
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select stream (rowtime - timestamp '1970-01-01 00:00:00') hour from orders"
+argument_list|)
+operator|.
+name|monotonic
+argument_list|(
+name|SqlMonotonicity
+operator|.
+name|INCREASING
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select stream\n"
+operator|+
+literal|"cast((rowtime - timestamp '1970-01-01 00:00:00') hour as integer)\n"
+operator|+
+literal|"from orders"
+argument_list|)
+operator|.
+name|monotonic
+argument_list|(
+name|SqlMonotonicity
+operator|.
+name|INCREASING
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select stream\n"
+operator|+
+literal|"cast((rowtime - timestamp '1970-01-01 00:00:00') hour as integer) / 15\n"
+operator|+
+literal|"from orders"
+argument_list|)
+operator|.
+name|monotonic
+argument_list|(
+name|SqlMonotonicity
+operator|.
+name|INCREASING
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select stream\n"
+operator|+
+literal|"mod(cast((rowtime - timestamp '1970-01-01 00:00:00') hour as integer), 15)\n"
+operator|+
+literal|"from orders"
+argument_list|)
+operator|.
+name|monotonic
+argument_list|(
+name|SqlMonotonicity
+operator|.
+name|NOT_MONOTONIC
+argument_list|)
+expr_stmt|;
+comment|// constant
+name|sql
+argument_list|(
+literal|"select stream 1 - 2 from orders"
+argument_list|)
+operator|.
+name|monotonic
+argument_list|(
+name|SqlMonotonicity
+operator|.
+name|CONSTANT
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select stream 1 + 2 from orders"
+argument_list|)
+operator|.
+name|monotonic
+argument_list|(
+name|SqlMonotonicity
+operator|.
+name|CONSTANT
+argument_list|)
+expr_stmt|;
+comment|// extract(YEAR) is monotonic, extract(other time unit) is not
+name|sql
+argument_list|(
+literal|"select stream extract(year from rowtime) from orders"
+argument_list|)
+operator|.
+name|monotonic
+argument_list|(
+name|SqlMonotonicity
+operator|.
+name|INCREASING
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select stream extract(month from rowtime) from orders"
+argument_list|)
+operator|.
+name|monotonic
+argument_list|(
+name|SqlMonotonicity
+operator|.
+name|NOT_MONOTONIC
+argument_list|)
+expr_stmt|;
+comment|//<monotonic> - constant
+name|sql
+argument_list|(
+literal|"select stream extract(year from rowtime) - 3 from orders"
+argument_list|)
+operator|.
+name|monotonic
+argument_list|(
+name|SqlMonotonicity
+operator|.
+name|INCREASING
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select stream extract(year from rowtime) * 5 from orders"
+argument_list|)
+operator|.
+name|monotonic
+argument_list|(
+name|SqlMonotonicity
+operator|.
+name|INCREASING
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select stream extract(year from rowtime) * -5 from orders"
+argument_list|)
+operator|.
+name|monotonic
+argument_list|(
+name|SqlMonotonicity
+operator|.
+name|DECREASING
+argument_list|)
+expr_stmt|;
+comment|//<monotonic> / constant
+name|sql
+argument_list|(
+literal|"select stream extract(year from rowtime) / -5 from orders"
+argument_list|)
+operator|.
+name|monotonic
+argument_list|(
+name|SqlMonotonicity
+operator|.
+name|DECREASING
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select stream extract(year from rowtime) / 5 from orders"
+argument_list|)
+operator|.
+name|monotonic
+argument_list|(
+name|SqlMonotonicity
+operator|.
+name|INCREASING
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select stream extract(year from rowtime) / 0 from orders"
+argument_list|)
+operator|.
+name|monotonic
+argument_list|(
+name|SqlMonotonicity
+operator|.
+name|CONSTANT
+argument_list|)
+expr_stmt|;
+comment|// +inf is constant!
+comment|// constant /<monotonic> is not monotonic (we don't know whether sign of
+comment|// expression ever changes)
+name|sql
+argument_list|(
+literal|"select stream 5 / extract(year from rowtime) from orders"
+argument_list|)
+operator|.
+name|monotonic
+argument_list|(
+name|SqlMonotonicity
+operator|.
+name|NOT_MONOTONIC
+argument_list|)
+expr_stmt|;
+comment|//<monotonic> * constant
+name|sql
+argument_list|(
+literal|"select stream extract(year from rowtime) * -5 from orders"
+argument_list|)
+operator|.
+name|monotonic
+argument_list|(
+name|SqlMonotonicity
+operator|.
+name|DECREASING
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select stream extract(year from rowtime) * 5 from orders"
+argument_list|)
+operator|.
+name|monotonic
+argument_list|(
+name|SqlMonotonicity
+operator|.
+name|INCREASING
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select stream extract(year from rowtime) * 0 from orders"
+argument_list|)
+operator|.
+name|monotonic
+argument_list|(
+name|SqlMonotonicity
+operator|.
+name|CONSTANT
+argument_list|)
+expr_stmt|;
+comment|// 0 is constant!
+comment|// constant *<monotonic>
+name|sql
+argument_list|(
+literal|"select stream -5 * extract(year from rowtime) from orders"
+argument_list|)
+operator|.
+name|monotonic
+argument_list|(
+name|SqlMonotonicity
+operator|.
+name|DECREASING
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select stream 5 * extract(year from rowtime) from orders"
+argument_list|)
+operator|.
+name|monotonic
+argument_list|(
+name|SqlMonotonicity
+operator|.
+name|INCREASING
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select stream 0 * extract(year from rowtime) from orders"
+argument_list|)
+operator|.
+name|monotonic
+argument_list|(
+name|SqlMonotonicity
+operator|.
+name|CONSTANT
+argument_list|)
+expr_stmt|;
+comment|//<monotonic> -<monotonic>
+name|sql
+argument_list|(
+literal|"select stream\n"
+operator|+
+literal|"extract(year from rowtime) - extract(year from rowtime)\n"
+operator|+
+literal|"from orders"
+argument_list|)
+operator|.
+name|monotonic
+argument_list|(
+name|SqlMonotonicity
+operator|.
+name|NOT_MONOTONIC
+argument_list|)
+expr_stmt|;
+comment|//<monotonic> +<monotonic>
+name|sql
+argument_list|(
+literal|"select stream\n"
+operator|+
+literal|"extract(year from rowtime) + extract(year from rowtime)\n"
+operator|+
+literal|"from orders"
+argument_list|)
+operator|.
+name|monotonic
+argument_list|(
+name|SqlMonotonicity
+operator|.
+name|INCREASING
 argument_list|)
 expr_stmt|;
 block|}

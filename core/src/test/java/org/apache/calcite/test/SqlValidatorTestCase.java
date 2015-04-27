@@ -1253,13 +1253,6 @@ operator|==
 name|expectedMsgPattern
 condition|)
 block|{
-if|if
-condition|(
-literal|null
-operator|!=
-name|actualException
-condition|)
-block|{
 name|actualException
 operator|.
 name|printStackTrace
@@ -1306,64 +1299,26 @@ literal|"]"
 argument_list|)
 expr_stmt|;
 block|}
-block|}
-else|else
-block|{
-if|if
-condition|(
-literal|null
-operator|==
-name|actualException
-condition|)
-block|{
-name|fail
-argument_list|(
-literal|"Expected validator to throw "
-operator|+
-literal|"exception, but it did not; query ["
-operator|+
-name|sap
-operator|.
-name|sql
-operator|+
-literal|"]; expected ["
-operator|+
-name|expectedMsgPattern
-operator|+
-literal|"]"
-argument_list|)
-expr_stmt|;
-block|}
-else|else
-block|{
 name|String
 name|sqlWithCarets
 decl_stmt|;
 if|if
 condition|(
-operator|(
 name|actualColumn
 operator|<=
 literal|0
-operator|)
 operator|||
-operator|(
 name|actualLine
 operator|<=
 literal|0
-operator|)
 operator|||
-operator|(
 name|actualEndColumn
 operator|<=
 literal|0
-operator|)
 operator|||
-operator|(
 name|actualEndLine
 operator|<=
 literal|0
-operator|)
 condition|)
 block|{
 if|if
@@ -1458,9 +1413,9 @@ throw|throw
 operator|new
 name|AssertionError
 argument_list|(
-literal|"Actual error had a position, but expected error"
+literal|"Actual error had a position, but expected "
 operator|+
-literal|" did not. Add error position carets to sql:\n"
+literal|"error did not. Add error position carets to sql:\n"
 operator|+
 name|sqlWithCarets
 argument_list|)
@@ -1486,11 +1441,9 @@ expr_stmt|;
 block|}
 if|if
 condition|(
-operator|(
 name|actualMessage
 operator|==
 literal|null
-operator|)
 operator|||
 operator|!
 name|actualMessage
@@ -1584,15 +1537,12 @@ expr_stmt|;
 block|}
 if|else if
 condition|(
-operator|(
 name|sap
 operator|.
 name|pos
 operator|!=
 literal|null
-operator|)
 operator|&&
-operator|(
 operator|(
 name|actualLine
 operator|!=
@@ -1602,9 +1552,7 @@ name|pos
 operator|.
 name|getLineNum
 argument_list|()
-operator|)
 operator|||
-operator|(
 name|actualColumn
 operator|!=
 name|sap
@@ -1613,9 +1561,7 @@ name|pos
 operator|.
 name|getColumnNum
 argument_list|()
-operator|)
 operator|||
-operator|(
 name|actualEndLine
 operator|!=
 name|sap
@@ -1624,9 +1570,7 @@ name|pos
 operator|.
 name|getEndLineNum
 argument_list|()
-operator|)
 operator|||
-operator|(
 name|actualEndColumn
 operator|!=
 name|sap
@@ -1635,7 +1579,6 @@ name|pos
 operator|.
 name|getEndColumnNum
 argument_list|()
-operator|)
 operator|)
 condition|)
 block|{
@@ -1670,8 +1613,6 @@ operator|+
 literal|"]"
 argument_list|)
 expr_stmt|;
-block|}
-block|}
 block|}
 block|}
 comment|//~ Inner Interfaces -------------------------------------------------------
@@ -1931,6 +1872,27 @@ argument_list|(
 name|sql
 argument_list|,
 name|expectedType
+argument_list|)
+expr_stmt|;
+return|return
+name|this
+return|;
+block|}
+specifier|public
+name|Sql
+name|monotonic
+parameter_list|(
+name|SqlMonotonicity
+name|expectedMonotonicity
+parameter_list|)
+block|{
+name|tester
+operator|.
+name|checkMonotonic
+argument_list|(
+name|sql
+argument_list|,
+name|expectedMonotonicity
 argument_list|)
 expr_stmt|;
 return|return
