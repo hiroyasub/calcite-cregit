@@ -2086,6 +2086,36 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testAggregateFilter
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select sum(sal) filter (where gender = 'F') as femaleSal,\n"
+operator|+
+literal|" sum(sal) filter (where true) allSal,\n"
+operator|+
+literal|" count(distinct deptno) filter (where (deptno< 40))\n"
+operator|+
+literal|"from emp"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"SELECT (SUM(`SAL`) FILTER (WHERE (`GENDER` = 'F'))) AS `FEMALESAL`,"
+operator|+
+literal|" (SUM(`SAL`) FILTER (WHERE TRUE)) AS `ALLSAL`,"
+operator|+
+literal|" (COUNT(DISTINCT `DEPTNO`) FILTER (WHERE (`DEPTNO`< 40)))\n"
+operator|+
+literal|"FROM `EMP`"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testGroup
 parameter_list|()
 block|{

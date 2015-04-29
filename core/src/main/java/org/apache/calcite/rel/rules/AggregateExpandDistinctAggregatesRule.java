@@ -321,6 +321,20 @@ name|common
 operator|.
 name|collect
 operator|.
+name|Iterables
+import|;
+end_import
+
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
 name|Lists
 import|;
 end_import
@@ -498,23 +512,24 @@ name|nonDistinctCount
 init|=
 literal|0
 decl_stmt|;
+specifier|final
 name|Set
+argument_list|<
+name|Pair
 argument_list|<
 name|List
 argument_list|<
 name|Integer
 argument_list|>
+argument_list|,
+name|Integer
 argument_list|>
-name|argListSets
+argument_list|>
+name|argLists
 init|=
 operator|new
 name|LinkedHashSet
-argument_list|<
-name|List
-argument_list|<
-name|Integer
-argument_list|>
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 for|for
@@ -542,43 +557,23 @@ name|nonDistinctCount
 expr_stmt|;
 continue|continue;
 block|}
-name|ArrayList
-argument_list|<
-name|Integer
-argument_list|>
-name|argList
-init|=
-operator|new
-name|ArrayList
-argument_list|<
-name|Integer
-argument_list|>
-argument_list|()
-decl_stmt|;
-for|for
-control|(
-name|Integer
-name|arg
-range|:
+name|argLists
+operator|.
+name|add
+argument_list|(
+name|Pair
+operator|.
+name|of
+argument_list|(
 name|aggCall
 operator|.
 name|getArgList
 argument_list|()
-control|)
-block|{
-name|argList
+argument_list|,
+name|aggCall
 operator|.
-name|add
-argument_list|(
-name|arg
+name|filterArg
 argument_list|)
-expr_stmt|;
-block|}
-name|argListSets
-operator|.
-name|add
-argument_list|(
-name|argList
 argument_list|)
 expr_stmt|;
 block|}
@@ -586,7 +581,7 @@ name|Util
 operator|.
 name|permAssert
 argument_list|(
-name|argListSets
+name|argLists
 operator|.
 name|size
 argument_list|()
@@ -600,22 +595,37 @@ comment|// If all of the agg expressions are distinct and have the same
 comment|// arguments then we can use a more efficient form.
 if|if
 condition|(
-operator|(
 name|nonDistinctCount
 operator|==
 literal|0
-operator|)
 operator|&&
-operator|(
-name|argListSets
+name|argLists
 operator|.
 name|size
 argument_list|()
 operator|==
 literal|1
-operator|)
 condition|)
 block|{
+specifier|final
+name|Pair
+argument_list|<
+name|List
+argument_list|<
+name|Integer
+argument_list|>
+argument_list|,
+name|Integer
+argument_list|>
+name|pair
+init|=
+name|Iterables
+operator|.
+name|getOnlyElement
+argument_list|(
+name|argLists
+argument_list|)
+decl_stmt|;
 name|RelNode
 name|converted
 init|=
@@ -623,13 +633,13 @@ name|convertMonopole
 argument_list|(
 name|aggregate
 argument_list|,
-name|argListSets
+name|pair
 operator|.
-name|iterator
-argument_list|()
+name|left
+argument_list|,
+name|pair
 operator|.
-name|next
-argument_list|()
+name|right
 argument_list|)
 decl_stmt|;
 name|call
@@ -667,9 +677,7 @@ name|refs
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|RexInputRef
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 specifier|final
@@ -739,6 +747,7 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|// Aggregate the original relation, including any non-distinct aggregates.
+specifier|final
 name|List
 argument_list|<
 name|AggregateCall
@@ -747,9 +756,7 @@ name|newAggCallList
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|AggregateCall
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 name|int
@@ -876,13 +883,18 @@ comment|// For each set of operands, find and rewrite all calls which have that
 comment|// set of operands.
 for|for
 control|(
+name|Pair
+argument_list|<
 name|List
 argument_list|<
 name|Integer
 argument_list|>
+argument_list|,
+name|Integer
+argument_list|>
 name|argList
 range|:
-name|argListSets
+name|argLists
 control|)
 block|{
 name|rel
@@ -894,6 +906,12 @@ argument_list|,
 name|rel
 argument_list|,
 name|argList
+operator|.
+name|left
+argument_list|,
+name|argList
+operator|.
+name|right
 argument_list|,
 name|refs
 argument_list|)
@@ -933,6 +951,9 @@ argument_list|<
 name|Integer
 argument_list|>
 name|argList
+parameter_list|,
+name|int
+name|filterArg
 parameter_list|)
 block|{
 comment|// For example,
@@ -949,6 +970,7 @@ comment|//      FROM EMP GROUP BY deptno)
 comment|//    GROUP BY deptno
 comment|// Project the columns of the GROUP BY plus the arguments
 comment|// to the agg function.
+specifier|final
 name|Map
 argument_list|<
 name|Integer
@@ -959,11 +981,7 @@ name|sourceOf
 init|=
 operator|new
 name|HashMap
-argument_list|<
-name|Integer
-argument_list|,
-name|Integer
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 specifier|final
@@ -975,6 +993,8 @@ argument_list|(
 name|aggregate
 argument_list|,
 name|argList
+argument_list|,
+name|filterArg
 argument_list|,
 name|sourceOf
 argument_list|)
@@ -1047,7 +1067,7 @@ name|newAggCalls
 argument_list|)
 return|;
 block|}
-comment|/**    * Converts all distinct aggregate calls to a given set of arguments.    *    *<p>This method is called several times, one for each set of arguments.    * Each time it is called, it generates a JOIN to a new SELECT DISTINCT    * relational expression, and modifies the set of top-level calls.    *    * @param aggregate Original aggregate    * @param left      Child relational expression (either the original    *                  aggregate, the output from the previous call to this    *                  method, or null in the case where we're converting the    *                  first distinct aggregate in a query with no non-distinct    *                  aggregates)    * @param argList   Arguments to the distinct aggregate function    * @param refs      Array of expressions which will be the projected by the    *                  result of this rule. Those relating to this arg list will    *                  be modified    * @return Relational expression    */
+comment|/**    * Converts all distinct aggregate calls to a given set of arguments.    *    *<p>This method is called several times, one for each set of arguments.    * Each time it is called, it generates a JOIN to a new SELECT DISTINCT    * relational expression, and modifies the set of top-level calls.    *    * @param aggregate Original aggregate    * @param left      Child relational expression (either the original    *                  aggregate, the output from the previous call to this    *                  method, or null in the case where we're converting the    *                  first distinct aggregate in a query with no non-distinct    *                  aggregates)    * @param argList   Arguments to the distinct aggregate function    * @param filterArg Argument that filters input to aggregate function, or -1    * @param refs      Array of expressions which will be the projected by the    *                  result of this rule. Those relating to this arg list will    *                  be modified  @return Relational expression    */
 specifier|private
 name|RelNode
 name|doRewrite
@@ -1063,6 +1083,9 @@ argument_list|<
 name|Integer
 argument_list|>
 name|argList
+parameter_list|,
+name|int
+name|filterArg
 parameter_list|,
 name|List
 argument_list|<
@@ -1157,6 +1180,7 @@ comment|// MAX(age) is removed, then the sub-select of "e" is not needed, and
 comment|// instead the two other group by's are joined to one another.
 comment|// Project the columns of the GROUP BY plus the arguments
 comment|// to the agg function.
+specifier|final
 name|Map
 argument_list|<
 name|Integer
@@ -1167,11 +1191,7 @@ name|sourceOf
 init|=
 operator|new
 name|HashMap
-argument_list|<
-name|Integer
-argument_list|,
-name|Integer
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 specifier|final
@@ -1184,6 +1204,8 @@ name|aggregate
 argument_list|,
 name|argList
 argument_list|,
+name|filterArg
+argument_list|,
 name|sourceOf
 argument_list|)
 decl_stmt|;
@@ -1193,6 +1215,7 @@ comment|// field from the right; for example,
 comment|//   "COUNT(DISTINCT e.sal)"
 comment|// becomes
 comment|//   "COUNT(distinct_e.sal)".
+specifier|final
 name|List
 argument_list|<
 name|AggregateCall
@@ -1201,9 +1224,7 @@ name|aggCallList
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|AggregateCall
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 specifier|final
@@ -1303,9 +1324,7 @@ name|newArgs
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|Integer
-argument_list|>
+argument_list|<>
 argument_list|(
 name|argCount
 argument_list|)
@@ -1353,11 +1372,34 @@ argument_list|)
 expr_stmt|;
 block|}
 specifier|final
+name|int
+name|newFilterArg
+init|=
+name|aggCall
+operator|.
+name|filterArg
+operator|>=
+literal|0
+condition|?
+name|sourceOf
+operator|.
+name|get
+argument_list|(
+name|aggCall
+operator|.
+name|filterArg
+argument_list|)
+else|:
+operator|-
+literal|1
+decl_stmt|;
+specifier|final
 name|AggregateCall
 name|newAggCall
 init|=
-operator|new
 name|AggregateCall
+operator|.
+name|create
 argument_list|(
 name|aggCall
 operator|.
@@ -1367,6 +1409,8 @@ argument_list|,
 literal|false
 argument_list|,
 name|newArgs
+argument_list|,
+name|newFilterArg
 argument_list|,
 name|aggCall
 operator|.
@@ -1698,7 +1742,7 @@ name|i
 argument_list|)
 decl_stmt|;
 comment|// Ignore agg calls which are not distinct or have the wrong set
-comment|// arguments. If we're rewriting aggs whose args are {sal}, we will
+comment|// arguments. If we're rewriting aggregates whose args are {sal}, we will
 comment|// rewrite COUNT(DISTINCT sal) and SUM(DISTINCT sal) but ignore
 comment|// COUNT(DISTINCT gender) or SUM(sal).
 if|if
@@ -1750,9 +1794,7 @@ name|newArgs
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|Integer
-argument_list|>
+argument_list|<>
 argument_list|(
 name|argCount
 argument_list|)
@@ -1803,8 +1845,9 @@ specifier|final
 name|AggregateCall
 name|newAggCall
 init|=
-operator|new
 name|AggregateCall
+operator|.
+name|create
 argument_list|(
 name|aggCall
 operator|.
@@ -1814,6 +1857,9 @@ argument_list|,
 literal|false
 argument_list|,
 name|newArgs
+argument_list|,
+operator|-
+literal|1
 argument_list|,
 name|aggCall
 operator|.
@@ -1837,7 +1883,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**    * Given an {@link org.apache.calcite.rel.logical.LogicalAggregate}    * and the ordinals of the arguments to a    * particular call to an aggregate function, creates a 'select distinct'    * relational expression which projects the group columns and those    * arguments but nothing else.    *    *<p>For example, given    *    *<blockquote>    *<pre>select f0, count(distinct f1), count(distinct f2)    * from t group by f0</pre>    *</blockquote>    *    * and the arglist    *    *<blockquote>{2}</blockquote>    *    * returns    *    *<blockquote>    *<pre>select distinct f0, f2 from t</pre>    *</blockquote>    *    * '    *    *<p>The<code>sourceOf</code> map is populated with the source of each    * column; in this case sourceOf.get(0) = 0, and sourceOf.get(1) = 2.</p>    *    * @param aggregate Aggregate relational expression    * @param argList   Ordinals of columns to make distinct    * @param sourceOf  Out parameter, is populated with a map of where each    *                  output field came from    * @return Aggregate relational expression which projects the required    * columns    */
+comment|/**    * Given an {@link org.apache.calcite.rel.logical.LogicalAggregate}    * and the ordinals of the arguments to a    * particular call to an aggregate function, creates a 'select distinct'    * relational expression which projects the group columns and those    * arguments but nothing else.    *    *<p>For example, given    *    *<blockquote>    *<pre>select f0, count(distinct f1), count(distinct f2)    * from t group by f0</pre>    *</blockquote>    *    * and the argument list    *    *<blockquote>{2}</blockquote>    *    * returns    *    *<blockquote>    *<pre>select distinct f0, f2 from t</pre>    *</blockquote>    *    * '    *    *<p>The<code>sourceOf</code> map is populated with the source of each    * column; in this case sourceOf.get(0) = 0, and sourceOf.get(1) = 2.</p>    *    * @param aggregate Aggregate relational expression    * @param argList   Ordinals of columns to make distinct    * @param filterArg Ordinal of column to filter on, or -1    * @param sourceOf  Out parameter, is populated with a map of where each    *                  output field came from    * @return Aggregate relational expression which projects the required    * columns    */
 specifier|private
 specifier|static
 name|Aggregate
@@ -1851,6 +1897,9 @@ argument_list|<
 name|Integer
 argument_list|>
 name|argList
+parameter_list|,
+name|int
+name|filterArg
 parameter_list|,
 name|Map
 argument_list|<
@@ -1875,14 +1924,7 @@ name|projects
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|Pair
-argument_list|<
-name|RexNode
-argument_list|,
-name|String
-argument_list|>
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 specifier|final
@@ -1955,6 +1997,135 @@ range|:
 name|argList
 control|)
 block|{
+if|if
+condition|(
+name|filterArg
+operator|>=
+literal|0
+condition|)
+block|{
+comment|// Implement
+comment|//   agg(DISTINCT arg) FILTER $f
+comment|// by generating
+comment|//   SELECT DISTINCT ... CASE WHEN $f THEN arg ELSE NULL END AS arg
+comment|// and then applying
+comment|//   agg(arg)
+comment|// as usual.
+comment|//
+comment|// It works except for (rare) agg functions that need to see null
+comment|// values.
+specifier|final
+name|RexBuilder
+name|rexBuilder
+init|=
+name|aggregate
+operator|.
+name|getCluster
+argument_list|()
+operator|.
+name|getRexBuilder
+argument_list|()
+decl_stmt|;
+specifier|final
+name|RexInputRef
+name|filterRef
+init|=
+name|RexInputRef
+operator|.
+name|of
+argument_list|(
+name|filterArg
+argument_list|,
+name|childFields
+argument_list|)
+decl_stmt|;
+specifier|final
+name|Pair
+argument_list|<
+name|RexNode
+argument_list|,
+name|String
+argument_list|>
+name|argRef
+init|=
+name|RexInputRef
+operator|.
+name|of2
+argument_list|(
+name|arg
+argument_list|,
+name|childFields
+argument_list|)
+decl_stmt|;
+name|RexNode
+name|condition
+init|=
+name|rexBuilder
+operator|.
+name|makeCall
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|CASE
+argument_list|,
+name|filterRef
+argument_list|,
+name|argRef
+operator|.
+name|left
+argument_list|,
+name|rexBuilder
+operator|.
+name|ensureType
+argument_list|(
+name|argRef
+operator|.
+name|left
+operator|.
+name|getType
+argument_list|()
+argument_list|,
+name|rexBuilder
+operator|.
+name|constantNull
+argument_list|()
+argument_list|,
+literal|true
+argument_list|)
+argument_list|)
+decl_stmt|;
+name|sourceOf
+operator|.
+name|put
+argument_list|(
+name|arg
+argument_list|,
+name|projects
+operator|.
+name|size
+argument_list|()
+argument_list|)
+expr_stmt|;
+name|projects
+operator|.
+name|add
+argument_list|(
+name|Pair
+operator|.
+name|of
+argument_list|(
+name|condition
+argument_list|,
+literal|"i$"
+operator|+
+name|argRef
+operator|.
+name|right
+argument_list|)
+argument_list|)
+expr_stmt|;
+continue|continue;
+block|}
 if|if
 condition|(
 name|sourceOf

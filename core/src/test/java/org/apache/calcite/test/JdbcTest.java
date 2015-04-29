@@ -11386,6 +11386,78 @@ literal|"c0=1997; m0=85452\n"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAggregateFilter
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|s
+init|=
+literal|"select \"the_month\",\n"
+operator|+
+literal|" count(*) as \"c\",\n"
+operator|+
+literal|" count(*) filter (where \"day_of_month\"> 20) as \"c2\"\n"
+operator|+
+literal|"from \"time_by_day\" as \"time_by_day\"\n"
+operator|+
+literal|"where \"time_by_day\".\"the_year\" = 1997\n"
+operator|+
+literal|"group by \"time_by_day\".\"the_month\"\n"
+operator|+
+literal|"order by \"time_by_day\".\"the_month\""
+decl_stmt|;
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|CalciteAssert
+operator|.
+name|Config
+operator|.
+name|FOODMART_CLONE
+argument_list|)
+operator|.
+name|query
+argument_list|(
+name|s
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"the_month=April; c=30; c2=10\n"
+operator|+
+literal|"the_month=August; c=31; c2=11\n"
+operator|+
+literal|"the_month=December; c=31; c2=11\n"
+operator|+
+literal|"the_month=February; c=28; c2=8\n"
+operator|+
+literal|"the_month=January; c=31; c2=11\n"
+operator|+
+literal|"the_month=July; c=31; c2=11\n"
+operator|+
+literal|"the_month=June; c=30; c2=10\n"
+operator|+
+literal|"the_month=March; c=31; c2=11\n"
+operator|+
+literal|"the_month=May; c=31; c2=11\n"
+operator|+
+literal|"the_month=November; c=30; c2=10\n"
+operator|+
+literal|"the_month=October; c=31; c2=11\n"
+operator|+
+literal|"the_month=September; c=30; c2=10\n"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Tests a simple IN query implemented as a semi-join. */
 annotation|@
 name|Test
@@ -19390,6 +19462,147 @@ argument_list|(
 literal|"adhoc"
 argument_list|)
 return|;
+block|}
+comment|/** Tests user-defined aggregate function with FILTER.    *    *<p>Also tests that we do not try to push ADAF to JDBC source. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUserDefinedAggregateFunctionWithFilter
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|String
+name|sum
+init|=
+name|MyStaticSumFunction
+operator|.
+name|class
+operator|.
+name|getName
+argument_list|()
+decl_stmt|;
+specifier|final
+name|String
+name|sum2
+init|=
+name|MySumFunction
+operator|.
+name|class
+operator|.
+name|getName
+argument_list|()
+decl_stmt|;
+specifier|final
+name|CalciteAssert
+operator|.
+name|AssertThat
+name|with
+init|=
+name|CalciteAssert
+operator|.
+name|model
+argument_list|(
+literal|"{\n"
+operator|+
+literal|"  version: '1.0',\n"
+operator|+
+literal|"   schemas: [\n"
+operator|+
+name|SCOTT_SCHEMA
+operator|+
+literal|",\n"
+operator|+
+literal|"     {\n"
+operator|+
+literal|"       name: 'adhoc',\n"
+operator|+
+literal|"       functions: [\n"
+operator|+
+literal|"         {\n"
+operator|+
+literal|"           name: 'MY_SUM',\n"
+operator|+
+literal|"           className: '"
+operator|+
+name|sum
+operator|+
+literal|"'\n"
+operator|+
+literal|"         },\n"
+operator|+
+literal|"         {\n"
+operator|+
+literal|"           name: 'MY_SUM2',\n"
+operator|+
+literal|"           className: '"
+operator|+
+name|sum2
+operator|+
+literal|"'\n"
+operator|+
+literal|"         }\n"
+operator|+
+literal|"       ]\n"
+operator|+
+literal|"     }\n"
+operator|+
+literal|"   ]\n"
+operator|+
+literal|"}"
+argument_list|)
+operator|.
+name|withDefaultSchema
+argument_list|(
+literal|"adhoc"
+argument_list|)
+decl_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select deptno, \"adhoc\".my_sum(deptno) as p\n"
+operator|+
+literal|"from scott.emp\n"
+operator|+
+literal|"group by deptno\n"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"DEPTNO=20; P=100\n"
+operator|+
+literal|"DEPTNO=10; P=30\n"
+operator|+
+literal|"DEPTNO=30; P=180\n"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select deptno,\n"
+operator|+
+literal|"  \"adhoc\".my_sum(deptno) filter (where job = 'CLERK') as c,\n"
+operator|+
+literal|"  \"adhoc\".my_sum(deptno) filter (where job = 'XXX') as x\n"
+operator|+
+literal|"from scott.emp\n"
+operator|+
+literal|"group by deptno\n"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"DEPTNO=20; C=40; X=0\n"
+operator|+
+literal|"DEPTNO=10; C=10; X=0\n"
+operator|+
+literal|"DEPTNO=30; C=30; X=0\n"
+argument_list|)
+expr_stmt|;
 block|}
 comment|/** Tests resolution of functions using schema paths. */
 annotation|@

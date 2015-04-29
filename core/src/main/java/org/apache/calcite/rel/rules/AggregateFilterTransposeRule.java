@@ -774,8 +774,9 @@ name|topAggCallList
 operator|.
 name|add
 argument_list|(
-operator|new
 name|AggregateCall
+operator|.
+name|create
 argument_list|(
 name|rollup
 argument_list|,
@@ -791,6 +792,9 @@ argument_list|(
 name|i
 operator|++
 argument_list|)
+argument_list|,
+operator|-
+literal|1
 argument_list|,
 name|aggregateCall
 operator|.

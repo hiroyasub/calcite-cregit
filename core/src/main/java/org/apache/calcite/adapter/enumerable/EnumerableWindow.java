@@ -4824,6 +4824,16 @@ name|agg
 argument_list|)
 return|;
 block|}
+specifier|public
+name|RexNode
+name|rexFilterArgument
+parameter_list|()
+block|{
+return|return
+literal|null
+return|;
+comment|// REVIEW
+block|}
 block|}
 decl_stmt|;
 name|agg

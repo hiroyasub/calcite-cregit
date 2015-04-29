@@ -587,12 +587,15 @@ name|SqlValidatorScope
 name|scope
 parameter_list|)
 function_decl|;
-comment|/**    * Validates parameters for aggregate function.    *    * @param aggFunction function containing COLUMN_LIST parameter    * @param scope       Syntactic scope    */
+comment|/**    * Validates parameters for aggregate function.    *    * @param aggCall     Function containing COLUMN_LIST parameter    * @param filter      Filter, or null    * @param scope       Syntactic scope    */
 name|void
 name|validateAggregateParams
 parameter_list|(
 name|SqlCall
-name|aggFunction
+name|aggCall
+parameter_list|,
+name|SqlNode
+name|filter
 parameter_list|,
 name|SqlValidatorScope
 name|scope

@@ -16543,6 +16543,80 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testAggregateFilter
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select sum(empno) filter (where deptno< 10) as s from emp"
+argument_list|)
+operator|.
+name|type
+argument_list|(
+literal|"RecordType(INTEGER S) NOT NULL"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAggregateFilterNotBoolean
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select sum(empno) filter (where ^deptno + 10^) from emp"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"FILTER clause must be a condition"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAggregateFilterInHaving
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select sum(empno) as s from emp\n"
+operator|+
+literal|"group by deptno\n"
+operator|+
+literal|"having sum(empno) filter (where deptno< 20)> 10"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAggregateFilterContainsAggregate
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select sum(empno) filter (where ^count(*)< 10^) from emp"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"FILTER must not contain aggregate expression"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testCorrelatingVariables
 parameter_list|()
 block|{

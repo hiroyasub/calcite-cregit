@@ -76,6 +76,11 @@ argument_list|>
 name|rexArguments
 parameter_list|()
 function_decl|;
+comment|/**    * Returns {@link org.apache.calcite.rex.RexNode} representation of the    * filter, or null.    */
+name|RexNode
+name|rexFilterArgument
+parameter_list|()
+function_decl|;
 comment|/**    * Returns Linq4j form of arguments.    * The resulting value is equivalent to    * {@code rowTranslator().translateList(rexArguments())}.    * This is handy if you need just operate on argument.    * @return Linq4j form of arguments.    */
 name|List
 argument_list|<

@@ -1281,6 +1281,10 @@ operator|.
 name|copy
 argument_list|(
 name|nullableArgs
+argument_list|,
+name|aggCall
+operator|.
+name|filterArg
 argument_list|)
 expr_stmt|;
 block|}

@@ -1447,8 +1447,9 @@ name|index
 argument_list|)
 decl_stmt|;
 return|return
-operator|new
 name|AggregateCall
+operator|.
+name|create
 argument_list|(
 operator|(
 name|SqlAggFunction
@@ -1467,6 +1468,9 @@ operator|.
 name|getOperands
 argument_list|()
 argument_list|)
+argument_list|,
+operator|-
+literal|1
 argument_list|,
 name|aggCall
 operator|.

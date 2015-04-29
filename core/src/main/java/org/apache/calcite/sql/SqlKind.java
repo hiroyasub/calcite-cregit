@@ -116,6 +116,9 @@ block|,
 comment|/**    * OVER operator    */
 name|OVER
 block|,
+comment|/**    * FILTER operator    */
+name|FILTER
+block|,
 comment|/**    * Window specification    */
 name|WINDOW
 block|,

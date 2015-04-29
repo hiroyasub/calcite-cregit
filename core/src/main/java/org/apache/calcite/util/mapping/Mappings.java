@@ -2835,6 +2835,34 @@ block|}
 block|}
 return|;
 block|}
+comment|/** Applies a mapping to an optional integer, returning an optional    * result. */
+specifier|public
+specifier|static
+name|int
+name|apply
+parameter_list|(
+name|TargetMapping
+name|mapping
+parameter_list|,
+name|int
+name|i
+parameter_list|)
+block|{
+return|return
+name|i
+operator|<
+literal|0
+condition|?
+name|i
+else|:
+name|mapping
+operator|.
+name|getTarget
+argument_list|(
+name|i
+argument_list|)
+return|;
+block|}
 comment|//~ Inner Interfaces -------------------------------------------------------
 comment|/**    * Core interface of all mappings.    */
 specifier|public

@@ -1333,6 +1333,18 @@ function_decl|;
 annotation|@
 name|BaseMessage
 argument_list|(
+literal|"FILTER must not contain aggregate expression"
+argument_list|)
+name|ExInst
+argument_list|<
+name|SqlValidatorException
+argument_list|>
+name|aggregateInFilterIllegal
+parameter_list|()
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
 literal|"Aggregate expression is illegal in ORDER BY clause of non-aggregating SELECT"
 argument_list|)
 name|ExInst
@@ -1379,6 +1391,18 @@ argument_list|<
 name|SqlValidatorException
 argument_list|>
 name|overNonAggregate
+parameter_list|()
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
+literal|"FILTER must be applied to aggregate function"
+argument_list|)
+name|ExInst
+argument_list|<
+name|SqlValidatorException
+argument_list|>
+name|filterNonAggregate
 parameter_list|()
 function_decl|;
 annotation|@

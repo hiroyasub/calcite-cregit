@@ -99,6 +99,20 @@ name|calcite
 operator|.
 name|sql
 operator|.
+name|SqlFilterOperator
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
 name|SqlFunction
 import|;
 end_import
@@ -802,6 +816,17 @@ name|AS
 init|=
 operator|new
 name|SqlAsOperator
+argument_list|()
+decl_stmt|;
+comment|/**<code>FILTER</code> operator filters which rows are included in an    *  aggregate function. */
+specifier|public
+specifier|static
+specifier|final
+name|SqlFilterOperator
+name|FILTER
+init|=
+operator|new
+name|SqlFilterOperator
 argument_list|()
 decl_stmt|;
 comment|/** {@code CUBE} operator, occurs within {@code GROUP BY} clause    * or nested within a {@code GROUPING SETS}. */

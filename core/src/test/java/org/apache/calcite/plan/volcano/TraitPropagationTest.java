@@ -1352,8 +1352,9 @@ comment|// aggregate on s, count
 name|AggregateCall
 name|aggCall
 init|=
-operator|new
 name|AggregateCall
+operator|.
+name|create
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
@@ -1367,6 +1368,9 @@ name|singletonList
 argument_list|(
 literal|1
 argument_list|)
+argument_list|,
+operator|-
+literal|1
 argument_list|,
 name|sqlBigInt
 argument_list|,

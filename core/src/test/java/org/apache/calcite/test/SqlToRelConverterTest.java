@@ -978,6 +978,26 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testAggFilter
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select deptno, sum(sal * 2) filter (where empno< 10), count(*) "
+operator|+
+literal|"from emp "
+operator|+
+literal|"group by deptno"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testSelectDistinct
 parameter_list|()
 block|{
