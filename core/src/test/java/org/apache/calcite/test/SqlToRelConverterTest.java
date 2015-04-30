@@ -2999,6 +2999,77 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-695">[CALCITE-695]    * SqlSingleValueAggFunction is created when it may not be needed</a>.    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSubqueryAggreFunctionFollowedBySimpleOperation
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select deptno\n"
+operator|+
+literal|"from EMP\n"
+operator|+
+literal|"where deptno> (select min(deptno) * 2 + 10 from EMP)"
+argument_list|)
+operator|.
+name|convertsTo
+argument_list|(
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-695">[CALCITE-695]    * SqlSingleValueAggFunction is created when it may not be needed</a>.    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSubqueryValues
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select deptno\n"
+operator|+
+literal|"from EMP\n"
+operator|+
+literal|"where deptno> (values 10)"
+argument_list|)
+operator|.
+name|convertsTo
+argument_list|(
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-695">[CALCITE-695]    * SqlSingleValueAggFunction is created when it may not be needed</a>.    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSubqueryLimitOne
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select deptno\n"
+operator|+
+literal|"from EMP\n"
+operator|+
+literal|"where deptno> (select deptno \n"
+operator|+
+literal|"from EMP order by deptno limit 1)"
+argument_list|)
+operator|.
+name|convertsTo
+argument_list|(
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/**    * Visitor that checks that every {@link RelNode} in a tree is valid.    *    * @see RelNode#isValid(boolean)    */
 specifier|public
 specifier|static
