@@ -3070,6 +3070,29 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-710">[CALCITE-710]    * When look up subqueries, perform the same logic as the way when ones were registered</a>.    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testIdenticalExpressionInSubquery
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select deptno\n"
+operator|+
+literal|"from EMP\n"
+operator|+
+literal|"where deptno in (1, 2) or deptno in (1, 2)"
+argument_list|)
+operator|.
+name|convertsTo
+argument_list|(
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/**    * Visitor that checks that every {@link RelNode} in a tree is valid.    *    * @see RelNode#isValid(boolean)    */
 specifier|public
 specifier|static
