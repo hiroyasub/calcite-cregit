@@ -238,7 +238,6 @@ implements|,
 name|ParameterMetaData
 block|{
 specifier|private
-specifier|final
 name|Meta
 operator|.
 name|Signature

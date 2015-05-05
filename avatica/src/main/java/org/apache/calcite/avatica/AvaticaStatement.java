@@ -140,7 +140,6 @@ name|connection
 decl_stmt|;
 comment|/** Statement id; unique within connection. */
 specifier|public
-specifier|final
 name|Meta
 operator|.
 name|StatementHandle
