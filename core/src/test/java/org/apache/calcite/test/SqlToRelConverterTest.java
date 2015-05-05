@@ -3070,7 +3070,7 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-710">[CALCITE-710]    * When look up subqueries, perform the same logic as the way when ones were registered</a>.    */
+comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-710">[CALCITE-710]    * When look up subqueries, perform the same logic as the way when ones were    * registered</a>.    */
 annotation|@
 name|Test
 specifier|public
@@ -3085,6 +3085,66 @@ operator|+
 literal|"from EMP\n"
 operator|+
 literal|"where deptno in (1, 2) or deptno in (1, 2)"
+argument_list|)
+operator|.
+name|convertsTo
+argument_list|(
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-694">[CALCITE-694]    * Scan HAVING clause for sub-queries and IN-lists</a> relating to IN.    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testHavingAggrFunctionIn
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select deptno \n"
+operator|+
+literal|"from emp \n"
+operator|+
+literal|"group by deptno \n"
+operator|+
+literal|"having sum(case when deptno in (1, 2) then 0 else 1 end) + \n"
+operator|+
+literal|"sum(case when deptno in (3, 4) then 0 else 1 end)> 10"
+argument_list|)
+operator|.
+name|convertsTo
+argument_list|(
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-694">[CALCITE-694]    * Scan HAVING clause for sub-queries and IN-lists</a>, with a sub-query in    * the HAVING clause.    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testHavingInSubqueryWithAggrFunction
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select sal \n"
+operator|+
+literal|"from emp \n"
+operator|+
+literal|"group by sal \n"
+operator|+
+literal|"having sal in \n"
+operator|+
+literal|"(select deptno \n"
+operator|+
+literal|"from dept \n"
+operator|+
+literal|"group by deptno \n"
+operator|+
+literal|"having sum(deptno)> 0)"
 argument_list|)
 operator|.
 name|convertsTo

@@ -12459,6 +12459,30 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+comment|// The aggregate functions in having clause are also needed
+comment|// to be added to aggList to replace subqueries
+if|if
+condition|(
+name|having
+operator|!=
+literal|null
+operator|&&
+name|validator
+operator|.
+name|isAggregate
+argument_list|(
+name|having
+argument_list|)
+condition|)
+block|{
+name|aggList
+operator|.
+name|add
+argument_list|(
+name|having
+argument_list|)
+expr_stmt|;
+block|}
 comment|// first replace the subqueries inside the aggregates
 comment|// because they will provide input rows to the aggregates.
 name|replaceSubqueries
