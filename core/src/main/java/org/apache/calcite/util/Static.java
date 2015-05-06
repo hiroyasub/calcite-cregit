@@ -69,8 +69,6 @@ name|Resources
 operator|.
 name|create
 argument_list|(
-literal|"org.apache.calcite.runtime.CalciteResource"
-argument_list|,
 name|CalciteResource
 operator|.
 name|class
