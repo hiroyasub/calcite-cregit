@@ -657,6 +657,9 @@ name|select
 parameter_list|)
 function_decl|;
 comment|/**    * Returns whether a select list expression is an aggregate function.    *    * @param selectNode Expression in SELECT clause    * @return whether expression is an aggregate function    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 name|boolean
 name|isAggregate
 parameter_list|(

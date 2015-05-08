@@ -3153,6 +3153,56 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-716">[CALCITE-716]    * Scalar sub-query and aggregate function in SELECT or HAVING clause gives    * AssertionError</a>; variant involving HAVING clause.    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAggregateAndScalarSubQueryInHaving
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select deptno\n"
+operator|+
+literal|"from emp\n"
+operator|+
+literal|"group by deptno\n"
+operator|+
+literal|"having max(emp.empno)> (SELECT min(emp.empno) FROM emp)\n"
+argument_list|)
+operator|.
+name|convertsTo
+argument_list|(
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-716">[CALCITE-716]    * Scalar sub-query and aggregate function in SELECT or HAVING clause gives    * AssertionError</a>; variant involving SELECT clause.    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAggregateAndScalarSubQueryInSelect
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select deptno,\n"
+operator|+
+literal|"  max(emp.empno)> (SELECT min(emp.empno) FROM emp) as b\n"
+operator|+
+literal|"from emp\n"
+operator|+
+literal|"group by deptno\n"
+argument_list|)
+operator|.
+name|convertsTo
+argument_list|(
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/**    * Visitor that checks that every {@link RelNode} in a tree is valid.    *    * @see RelNode#isValid(boolean)    */
 specifier|public
 specifier|static
