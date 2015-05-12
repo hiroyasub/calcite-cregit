@@ -3407,6 +3407,87 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/**    * Test case (correlated scalar aggregate subquery) for    *<a href="https://issues.apache.org/jira/browse/CALCITE-714">[CALCITE-714]    * When de-correlating, push join condition into subquery</a>.    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testCorrelationScalarAggAndFilter
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|withDecorrelation
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|assertConvertsTo
+argument_list|(
+literal|"SELECT e1.empno FROM emp e1, dept d1 where e1.deptno = d1.deptno\n"
+operator|+
+literal|"and e1.deptno< 10 and d1.deptno< 15\n"
+operator|+
+literal|"and e1.sal> (select avg(sal) from emp e2 where e1.empno = e2.empno)"
+argument_list|,
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Test case (correlated EXISTS subquery) for    *<a href="https://issues.apache.org/jira/browse/CALCITE-714">[CALCITE-714]    * When de-correlating, push join condition into subquery</a>.    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testCorrelationExistsAndFilter
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|withDecorrelation
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|assertConvertsTo
+argument_list|(
+literal|"SELECT e1.empno FROM emp e1, dept d1 where e1.deptno = d1.deptno\n"
+operator|+
+literal|"and e1.deptno< 10 and d1.deptno< 15\n"
+operator|+
+literal|"and exists (select * from emp e2 where e1.empno = e2.empno)"
+argument_list|,
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Test case (correlated NOT EXISTS subquery) for    *<a href="https://issues.apache.org/jira/browse/CALCITE-714">[CALCITE-714]    * When de-correlating, push join condition into subquery</a>.    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testCorrelationNotExistsAndFilter
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|withDecorrelation
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|assertConvertsTo
+argument_list|(
+literal|"SELECT e1.empno FROM emp e1, dept d1 where e1.deptno = d1.deptno\n"
+operator|+
+literal|"and e1.deptno< 10 and d1.deptno< 15\n"
+operator|+
+literal|"and not exists (select * from emp e2 where e1.empno = e2.empno)"
+argument_list|,
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/**    * Visitor that checks that every {@link RelNode} in a tree is valid.    *    * @see RelNode#isValid(boolean)    */
 specifier|public
 specifier|static
