@@ -1344,7 +1344,7 @@ specifier|protected
 name|RelSubset
 name|root
 decl_stmt|;
-comment|/**    * If true, the planner keeps applying rules as long as they continue to    * reduce the cost. If false, the planner terminates as soon as it has found    * any implementation, no matter how expensive. The default is false due to    * unresolved bugs with various rules.    */
+comment|/**    * If true, the planner keeps applying rules as long as they continue to    * reduce the cost. If false, the planner terminates as soon as it has found    * any implementation, no matter how expensive.    */
 specifier|protected
 name|boolean
 name|ambitious
