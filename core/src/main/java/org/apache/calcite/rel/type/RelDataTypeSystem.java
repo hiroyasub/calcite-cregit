@@ -85,6 +85,41 @@ name|int
 name|getMaxNumericPrecision
 parameter_list|()
 function_decl|;
+comment|/** Returns the LITERAL string for the type, either PREFIX/SUFFIX. */
+name|String
+name|getLiteral
+parameter_list|(
+name|SqlTypeName
+name|typeName
+parameter_list|,
+name|boolean
+name|isPrefix
+parameter_list|)
+function_decl|;
+comment|/** Returns if the type is case sensitive true or not (false) */
+name|boolean
+name|isCaseSensitive
+parameter_list|(
+name|SqlTypeName
+name|typeName
+parameter_list|)
+function_decl|;
+comment|/** Returns if the type can be auto increment true or not (false) */
+name|boolean
+name|isAutoincrement
+parameter_list|(
+name|SqlTypeName
+name|typeName
+parameter_list|)
+function_decl|;
+comment|/** Returns the numeric type Radix, 2 or 10. 0 represent not applicable*/
+name|int
+name|getNumTypeRadix
+parameter_list|(
+name|SqlTypeName
+name|typeName
+parameter_list|)
+function_decl|;
 block|}
 end_interface
 

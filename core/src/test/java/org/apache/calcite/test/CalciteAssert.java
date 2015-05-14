@@ -1689,6 +1689,7 @@ block|}
 block|}
 return|;
 block|}
+specifier|public
 specifier|static
 name|Function
 argument_list|<
