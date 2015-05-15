@@ -1127,7 +1127,12 @@ literal|"FROM `hr`.`emps` AS `emps`"
 decl_stmt|;
 name|assertThat
 argument_list|(
+name|Util
+operator|.
+name|toLinux
+argument_list|(
 name|valStr
+argument_list|)
 argument_list|,
 name|equalTo
 argument_list|(

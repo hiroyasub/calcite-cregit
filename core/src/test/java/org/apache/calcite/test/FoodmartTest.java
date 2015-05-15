@@ -1197,15 +1197,7 @@ return|return
 name|ImmutableList
 operator|.
 name|of
-argument_list|(
-operator|new
-name|Object
-index|[]
-block|{
-operator|-
-literal|1
-block|}
-argument_list|)
+argument_list|()
 return|;
 block|}
 specifier|final

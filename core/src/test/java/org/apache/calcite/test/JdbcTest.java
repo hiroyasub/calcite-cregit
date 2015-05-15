@@ -2276,11 +2276,16 @@ argument_list|)
 expr_stmt|;
 name|assertThat
 argument_list|(
+name|Util
+operator|.
+name|toLinux
+argument_list|(
 name|resultSet
 operator|.
 name|getString
 argument_list|(
 literal|1
+argument_list|)
 argument_list|)
 argument_list|,
 name|is
