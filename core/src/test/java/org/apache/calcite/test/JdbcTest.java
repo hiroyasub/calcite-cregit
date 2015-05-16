@@ -3810,7 +3810,7 @@ name|close
 argument_list|()
 expr_stmt|;
 block|}
-comment|/** Table macro that takes a MAP as a parameter.    *    *<p>Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-588">CALCITE-588</a>,    * "Allow TableMacro to consume Maps and Collections". */
+comment|/** Table macro that takes a MAP as a parameter.    *    *<p>Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-588">[CALCITE-588]    * Allow TableMacro to consume Maps and Collections</a>. */
 annotation|@
 name|Test
 specifier|public
@@ -8208,7 +8208,7 @@ literal|730
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Tests 3-way AND.    *    *<p>With    *<a href="https://issues.apache.org/jira/browse/CALCITE-127">[CALCITE-127],    * "EnumerableCalcRel can't support 3+ AND conditions"</a>, the last condition    * is ignored and rows with deptno=10 are wrongly returned.</p>    */
+comment|/** Tests 3-way AND.    *    *<p>With    *<a href="https://issues.apache.org/jira/browse/CALCITE-127">[CALCITE-127]    * EnumerableCalcRel can't support 3+ AND conditions</a>, the last condition    * is ignored and rows with deptno=10 are wrongly returned.</p>    */
 annotation|@
 name|Test
 specifier|public
@@ -8318,7 +8318,7 @@ literal|"C=287\n"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-281">CALCITE-281</a>,    * "SQL type of EXTRACT is BIGINT but it is implemented as int". */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-281">[CALCITE-281]    * SQL type of EXTRACT is BIGINT but it is implemented as int</a>. */
 annotation|@
 name|Test
 specifier|public
@@ -8470,7 +8470,7 @@ block|}
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-387">CALCITE-387</a>,    * "CompileException when cast TRUE to nullable boolean". */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-387">[CALCITE-387]    * CompileException when cast TRUE to nullable boolean</a>. */
 annotation|@
 name|Test
 specifier|public
@@ -8618,7 +8618,7 @@ literal|"full_name=Terry Anderson\n"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** A join that has both equi and non-equi conditions.    *    *<p>Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-371">CALCITE-371</a>,    * "Cannot implement JOIN whose ON clause contains mixed equi and theta". */
+comment|/** A join that has both equi and non-equi conditions.    *    *<p>Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-371">[CALCITE-371]    * Cannot implement JOIN whose ON clause contains mixed equi and theta</a>. */
 annotation|@
 name|Test
 specifier|public
@@ -8698,7 +8698,7 @@ literal|"empid=110; name=HR; name=Theodore"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-35">CALCITE-35</a>,    * "Support parenthesized sub-clause in JOIN". */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-35">[CALCITE-35]    * Support parenthesized sub-clause in JOIN</a>. */
 annotation|@
 name|Ignore
 annotation|@
@@ -10634,7 +10634,7 @@ name|sql
 argument_list|)
 return|;
 block|}
-comment|/** Makes sure that a projection introduced by a call to    * {@link org.apache.calcite.rel.rules.JoinCommuteRule} does not    * manifest as an    * {@link org.apache.calcite.adapter.enumerable.EnumerableCalc} in the    * plan.    *    *<p>Test case for (not yet fixed)    *<a href="https://issues.apache.org/jira/browse/CALCITE-92">CALCITE-92</a>,    * "Project should be optimized away, not converted to EnumerableCalcRel".</p>    */
+comment|/** Makes sure that a projection introduced by a call to    * {@link org.apache.calcite.rel.rules.JoinCommuteRule} does not    * manifest as an    * {@link org.apache.calcite.adapter.enumerable.EnumerableCalc} in the    * plan.    *    *<p>Test case for (not yet fixed)    *<a href="https://issues.apache.org/jira/browse/CALCITE-92">[CALCITE-92]    * Project should be optimized away, not converted to EnumerableCalcRel</a>.    */
 annotation|@
 name|Ignore
 annotation|@
@@ -10967,7 +10967,7 @@ name|runs
 argument_list|()
 expr_stmt|;
 block|}
-comment|/** Test case for (not yet fixed)    *<a href="https://issues.apache.org/jira/browse/CALCITE-99">CALCITE-99</a>,    * "Recognize semi-join that has high selectivity and push it down". */
+comment|/** Test case for (not yet fixed)    *<a href="https://issues.apache.org/jira/browse/CALCITE-99">[CALCITE-99]    * Recognize semi-join that has high selectivity and push it down</a>. */
 annotation|@
 name|Ignore
 annotation|@
@@ -12512,7 +12512,7 @@ literal|"name=Bill; empid=100\n"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Tests sorting by an expression not in the '*' select clause. Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-176">CALCITE-176</a>. */
+comment|/** Tests sorting by an expression not in the '*' select clause. Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-176">[CALCITE-176]    * ORDER BY expression doesn't work with SELECT *</a>. */
 annotation|@
 name|Test
 specifier|public
@@ -13011,7 +13011,7 @@ literal|"empid=200; deptno=20; name=Eric; salary=8000.0; commission=500\n"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Limit implemented using {@link Queryable#take}. Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-96">CALCITE-96</a>,    * "LIMIT against a table in a clone schema causes    * UnsupportedOperationException". */
+comment|/** Limit implemented using {@link Queryable#take}. Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-96">[CALCITE-96]    * LIMIT against a table in a clone schema causes    * UnsupportedOperationException</a>. */
 annotation|@
 name|Test
 specifier|public
@@ -13048,7 +13048,7 @@ literal|"day=2; week_day=Monday\n"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Limit implemented using {@link Queryable#take}. Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-70">CALCITE-70</a>,    * "Joins seem to be very expensive in memory". */
+comment|/** Limit implemented using {@link Queryable#take}. Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-70">[CALCITE-70]    * Joins seem to be very expensive in memory</a>. */
 annotation|@
 name|Test
 specifier|public
@@ -13414,7 +13414,7 @@ literal|0
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-403">CALCITE-403</a>,    * "Enumerable gives NullPointerException with NOT on nullable    * expression". */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-403">[CALCITE-403]    * Enumerable gives NullPointerException with NOT on nullable    * expression</a>. */
 annotation|@
 name|Test
 specifier|public
@@ -15579,7 +15579,7 @@ literal|"empid=200; commission=500; M=260"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Tests windowed aggregation with no ORDER BY clause.    *    *<p>Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-285">CALCITE-285</a>,    * "Window functions throw exception without ORDER BY".    *    *<p>Note:</p>    *    *<ul>    *<li>With no ORDER BY, the window is over all rows in the partition.    *<li>With an ORDER BY, the implicit frame is 'RANGE BETWEEN    *     UNBOUNDED PRECEDING AND CURRENT ROW'.    *<li>With no ORDER BY or PARTITION BY, the window contains all rows in the    *     table.    *</ul>    */
+comment|/** Tests windowed aggregation with no ORDER BY clause.    *    *<p>Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-285">[CALCITE-285]    * Window functions throw exception without ORDER BY</a>.    *    *<p>Note:</p>    *    *<ul>    *<li>With no ORDER BY, the window is over all rows in the partition.    *<li>With an ORDER BY, the implicit frame is 'RANGE BETWEEN    *     UNBOUNDED PRECEDING AND CURRENT ROW'.    *<li>With no ORDER BY or PARTITION BY, the window contains all rows in the    *     table.    *</ul>    */
 annotation|@
 name|Test
 specifier|public
@@ -16382,7 +16382,7 @@ literal|"empid=200; deptno=20; name=Eric; salary=8000.0; commission=500"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-313">CALCITE-313</a>,    * "Query decorrelation fails". */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-313">[CALCITE-313]    * Query decorrelation fails</a>. */
 annotation|@
 name|Test
 specifier|public
@@ -18081,7 +18081,7 @@ literal|"C=730\n"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Tests a JSON model with a comment. Not standard JSON, but harmless to    * allow Jackson's comments extension.    *    *<p>Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-160">CALCITE-160</a>,    * "Allow comments in schema definitions".</p> */
+comment|/** Tests a JSON model with a comment. Not standard JSON, but harmless to    * allow Jackson's comments extension.    *    *<p>Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-160">[CALCITE-160]    * Allow comments in schema definitions</a>. */
 annotation|@
 name|Test
 specifier|public
@@ -23473,7 +23473,7 @@ literal|"Table 'metaData.tAbles' not found"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Tests case-insensitive resolution of sub-query columns.    *    *<p>Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-555">[CALCITE-555],    * "Case-insensitive matching of sub-query columns fails"</a>. */
+comment|/** Tests case-insensitive resolution of sub-query columns.    *    *<p>Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-555">[CALCITE-555]    * Case-insensitive matching of sub-query columns fails</a>. */
 annotation|@
 name|Test
 specifier|public
@@ -25296,6 +25296,190 @@ name|calciteConnection
 operator|.
 name|close
 argument_list|()
+expr_stmt|;
+block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-730">[CALCITE-730]    * ClassCastException in table from CloneSchema</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testNullableNumericColumnInCloneSchema
+parameter_list|()
+block|{
+name|CalciteAssert
+operator|.
+name|model
+argument_list|(
+literal|"{\n"
+operator|+
+literal|"  version: '1.0',\n"
+operator|+
+literal|"  defaultSchema: 'SCOTT_CLONE',\n"
+operator|+
+literal|"  schemas: [ {\n"
+operator|+
+literal|"    name: 'SCOTT_CLONE',\n"
+operator|+
+literal|"    type: 'custom',\n"
+operator|+
+literal|"    factory: 'org.apache.calcite.adapter.clone.CloneSchema$Factory',\n"
+operator|+
+literal|"    operand: {\n"
+operator|+
+literal|"      jdbcDriver: '"
+operator|+
+name|JdbcTest
+operator|.
+name|SCOTT
+operator|.
+name|driver
+operator|+
+literal|"',\n"
+operator|+
+literal|"      jdbcUser: '"
+operator|+
+name|JdbcTest
+operator|.
+name|SCOTT
+operator|.
+name|username
+operator|+
+literal|"',\n"
+operator|+
+literal|"      jdbcPassword: '"
+operator|+
+name|JdbcTest
+operator|.
+name|SCOTT
+operator|.
+name|password
+operator|+
+literal|"',\n"
+operator|+
+literal|"      jdbcUrl: '"
+operator|+
+name|JdbcTest
+operator|.
+name|SCOTT
+operator|.
+name|url
+operator|+
+literal|"',\n"
+operator|+
+literal|"      jdbcSchema: 'SCOTT'\n"
+operator|+
+literal|"   } } ]\n"
+operator|+
+literal|"}"
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select * from emp"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+operator|new
+name|Function
+argument_list|<
+name|ResultSet
+argument_list|,
+name|Void
+argument_list|>
+argument_list|()
+block|{
+specifier|public
+name|Void
+name|apply
+parameter_list|(
+name|ResultSet
+name|input
+parameter_list|)
+block|{
+specifier|final
+name|StringBuilder
+name|buf
+init|=
+operator|new
+name|StringBuilder
+argument_list|()
+decl_stmt|;
+try|try
+block|{
+specifier|final
+name|int
+name|columnCount
+init|=
+name|input
+operator|.
+name|getMetaData
+argument_list|()
+operator|.
+name|getColumnCount
+argument_list|()
+decl_stmt|;
+while|while
+condition|(
+name|input
+operator|.
+name|next
+argument_list|()
+condition|)
+block|{
+for|for
+control|(
+name|int
+name|i
+init|=
+literal|0
+init|;
+name|i
+operator|<
+name|columnCount
+condition|;
+name|i
+operator|++
+control|)
+block|{
+name|buf
+operator|.
+name|append
+argument_list|(
+name|input
+operator|.
+name|getObject
+argument_list|(
+name|i
+operator|+
+literal|1
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+block|}
+return|return
+literal|null
+return|;
+block|}
+catch|catch
+parameter_list|(
+name|SQLException
+name|e
+parameter_list|)
+block|{
+throw|throw
+name|Throwables
+operator|.
+name|propagate
+argument_list|(
+name|e
+argument_list|)
+throw|;
+block|}
+block|}
+block|}
+argument_list|)
 expr_stmt|;
 block|}
 comment|// Disable checkstyle, so it doesn't complain about fields like "customer_id".
