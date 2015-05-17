@@ -3682,7 +3682,7 @@ name|rootSchema
 operator|.
 name|add
 argument_list|(
-literal|"jdbc_scott"
+literal|"JDBC_SCOTT"
 argument_list|,
 name|JdbcSchema
 operator|.
@@ -3690,7 +3690,7 @@ name|create
 argument_list|(
 name|rootSchema
 argument_list|,
-literal|"jdbc_scott"
+literal|"JDBC_SCOTT"
 argument_list|,
 name|dataSource
 argument_list|,
@@ -4377,6 +4377,17 @@ argument_list|(
 name|SchemaSpec
 operator|.
 name|JDBC_FOODMART_WITH_LATTICE
+argument_list|)
+return|;
+case|case
+name|JDBC_SCOTT
+case|:
+return|return
+name|with
+argument_list|(
+name|SchemaSpec
+operator|.
+name|JDBC_SCOTT
 argument_list|)
 return|;
 case|case
@@ -7185,6 +7196,9 @@ name|LINGUAL
 block|,
 comment|/**      * Configuration that creates a connection to a MySQL server. Tables      * such as "customer" and "sales_fact_1997" are available. Queries      * are processed by generating Java that calls linq4j operators      * such as      * {@link org.apache.calcite.linq4j.Enumerable#where(org.apache.calcite.linq4j.function.Predicate1)}.      */
 name|JDBC_FOODMART
+block|,
+comment|/**      * Configuration that creates a connection to hsqldb containing the      * Scott schema via the JDBC adapter.      */
+name|JDBC_SCOTT
 block|,
 comment|/** Configuration that contains an in-memory clone of the FoodMart      * database. */
 name|FOODMART_CLONE

@@ -1828,6 +1828,7 @@ name|LogicalJoin
 operator|)
 name|rel
 decl_stmt|;
+specifier|final
 name|List
 argument_list|<
 name|RelNode
@@ -1836,9 +1837,7 @@ name|newInputs
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|RelNode
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 for|for
@@ -3367,9 +3366,7 @@ name|selectList
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|SqlNode
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 for|for
@@ -3800,9 +3797,7 @@ name|selectList
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|SqlNode
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 for|for
@@ -4144,6 +4139,25 @@ name|LogicalAggregate
 operator|)
 name|rel
 decl_stmt|;
+if|if
+condition|(
+name|agg
+operator|.
+name|getGroupSets
+argument_list|()
+operator|.
+name|size
+argument_list|()
+operator|!=
+literal|1
+condition|)
+block|{
+comment|// GROUPING SETS not supported; see
+comment|// [CALCITE-734] Push GROUPING SETS to underlying SQL via JDBC adapter
+return|return
+literal|null
+return|;
+block|}
 specifier|final
 name|RelTraitSet
 name|traitSet
@@ -4289,6 +4303,24 @@ name|getConvention
 argument_list|()
 operator|instanceof
 name|JdbcConvention
+assert|;
+assert|assert
+name|this
+operator|.
+name|groupSets
+operator|.
+name|size
+argument_list|()
+operator|==
+literal|1
+operator|:
+literal|"Grouping sets not supported"
+assert|;
+assert|assert
+operator|!
+name|this
+operator|.
+name|indicator
 assert|;
 for|for
 control|(
@@ -4503,9 +4535,7 @@ name|selectList
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|SqlNode
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 for|for
@@ -6266,9 +6296,7 @@ name|selects
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|SqlSelect
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 for|for
@@ -6291,9 +6319,7 @@ name|selectList
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|SqlNode
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 for|for
