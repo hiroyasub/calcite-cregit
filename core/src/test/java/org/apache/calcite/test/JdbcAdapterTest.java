@@ -1196,27 +1196,39 @@ name|close
 argument_list|()
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-259">[CALCITE-259]    * Using sub-queries in CASE statement against JDBC tables generates invalid    * Oracle SQL</a>. */
 annotation|@
 name|Test
-argument_list|(
-name|expected
-operator|=
-name|RuntimeException
-operator|.
-name|class
-argument_list|)
 specifier|public
 name|void
 name|testSubQueryWithSingleValue
 parameter_list|()
 block|{
+specifier|final
 name|String
-name|sql
-init|=
-literal|"SELECT \"full_name\" FROM \"employee\" WHERE "
-operator|+
-literal|"\"employee_id\" = (SELECT \"employee_id\" FROM \"salary\")"
+name|expected
 decl_stmt|;
+switch|switch
+condition|(
+name|CalciteAssert
+operator|.
+name|DB
+condition|)
+block|{
+case|case
+name|MYSQL
+case|:
+name|expected
+operator|=
+literal|"Subquery returns more than 1 row"
+expr_stmt|;
+break|break;
+default|default:
+name|expected
+operator|=
+literal|"more than one value in agg SINGLE_VALUE"
+expr_stmt|;
+block|}
 name|CalciteAssert
 operator|.
 name|model
@@ -1228,7 +1240,9 @@ argument_list|)
 operator|.
 name|query
 argument_list|(
-name|sql
+literal|"SELECT \"full_name\" FROM \"employee\" WHERE "
+operator|+
+literal|"\"employee_id\" = (SELECT \"employee_id\" FROM \"salary\")"
 argument_list|)
 operator|.
 name|explainContains
@@ -1236,21 +1250,10 @@ argument_list|(
 literal|"SINGLE_VALUE"
 argument_list|)
 operator|.
-name|enable
+name|throws_
 argument_list|(
-name|CalciteAssert
-operator|.
-name|DB
-operator|==
-name|CalciteAssert
-operator|.
-name|DatabaseInstance
-operator|.
-name|MYSQL
+name|expected
 argument_list|)
-operator|.
-name|runs
-argument_list|()
 expr_stmt|;
 block|}
 block|}
