@@ -523,6 +523,11 @@ name|getGroupCount
 argument_list|()
 operator|==
 literal|0
+operator|||
+name|opBinding
+operator|.
+name|hasFilter
+argument_list|()
 condition|)
 block|{
 return|return

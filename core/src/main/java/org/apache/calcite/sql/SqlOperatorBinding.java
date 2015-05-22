@@ -169,6 +169,16 @@ operator|-
 literal|1
 return|;
 block|}
+comment|/**    * Returns whether the operator is an aggregate function with a filter.    */
+specifier|public
+name|boolean
+name|hasFilter
+parameter_list|()
+block|{
+return|return
+literal|false
+return|;
+block|}
 comment|/**    * @return bound operator    */
 specifier|public
 name|SqlOperator

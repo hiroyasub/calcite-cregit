@@ -2842,6 +2842,29 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+comment|/** Returns a bit set the same as this but with a given bit set if condition    * is true. */
+specifier|public
+name|ImmutableBitSet
+name|setIf
+parameter_list|(
+name|int
+name|bit
+parameter_list|,
+name|boolean
+name|condition
+parameter_list|)
+block|{
+return|return
+name|condition
+condition|?
+name|set
+argument_list|(
+name|bit
+argument_list|)
+else|:
+name|this
+return|;
+block|}
 comment|/** Returns a bit set the same as this but with a given bit cleared. */
 specifier|public
 name|ImmutableBitSet
@@ -2861,6 +2884,34 @@ argument_list|(
 name|i
 argument_list|)
 argument_list|)
+return|;
+block|}
+comment|/** Returns a bit set the same as this but with a given bit cleared if    * condition is true. */
+specifier|public
+name|ImmutableBitSet
+name|clearIf
+parameter_list|(
+name|int
+name|i
+parameter_list|,
+name|boolean
+name|condition
+parameter_list|)
+block|{
+return|return
+name|condition
+condition|?
+name|except
+argument_list|(
+name|ImmutableBitSet
+operator|.
+name|of
+argument_list|(
+name|i
+argument_list|)
+argument_list|)
+else|:
+name|this
 return|;
 block|}
 comment|/** Returns a {@link BitSet} that has the same contents as this    * {@code ImmutableBitSet}. */
