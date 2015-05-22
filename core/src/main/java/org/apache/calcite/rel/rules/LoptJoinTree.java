@@ -543,10 +543,12 @@ extends|extends
 name|BinaryTree
 block|{
 specifier|private
+specifier|final
 name|BinaryTree
 name|left
 decl_stmt|;
 specifier|private
+specifier|final
 name|BinaryTree
 name|right
 decl_stmt|;

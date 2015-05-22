@@ -3981,7 +3981,7 @@ expr_stmt|;
 block|}
 block|}
 decl_stmt|;
-comment|/**    * The internal "$SCALAR_QUERY" operator returns a scalar value from a    * record type. It asusmes the record type only has one field, and returns    * that field as the output.    */
+comment|/**    * The internal "$SCALAR_QUERY" operator returns a scalar value from a    * record type. It assumes the record type only has one field, and returns    * that field as the output.    */
 specifier|public
 specifier|static
 specifier|final

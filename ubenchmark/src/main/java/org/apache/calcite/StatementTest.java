@@ -925,8 +925,7 @@ comment|/**/
 block|}
 block|}
 block|}
-comment|// Disable checkstyle, so it doesn't complain about fields like "customer_id".
-comment|//CHECKSTYLE: OFF
+comment|/** Pojo schema containing "emps" and "depts" tables. */
 specifier|public
 specifier|static
 class|class
@@ -1073,6 +1072,7 @@ argument_list|)
 block|,     }
 decl_stmt|;
 block|}
+comment|/** Employee record. */
 specifier|public
 specifier|static
 class|class
@@ -1175,6 +1175,7 @@ literal|"]"
 return|;
 block|}
 block|}
+comment|/** Department record. */
 specifier|public
 specifier|static
 class|class

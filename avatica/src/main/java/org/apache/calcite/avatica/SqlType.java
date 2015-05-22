@@ -2252,7 +2252,7 @@ name|boolean
 name|canGet
 parameter_list|(
 name|Method
-name|aClass
+name|method
 parameter_list|,
 name|SqlType
 name|sqlType
@@ -2269,7 +2269,7 @@ name|GET_LIST
 operator|.
 name|get
 argument_list|(
-name|aClass
+name|method
 argument_list|)
 decl_stmt|;
 return|return

@@ -1879,6 +1879,9 @@ argument_list|)
 return|;
 block|}
 comment|/**    * Sets a bitmap indicating all child RelNodes in a join tree    *    * @param joinTree join tree to be examined    * @param childFactors bitmap to be set    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 name|void
 name|getChildFactors
