@@ -171,6 +171,10 @@ argument_list|,
 name|signature
 operator|.
 name|cursorFactory
+argument_list|,
+name|signature
+operator|.
+name|statementType
 argument_list|)
 return|;
 block|}

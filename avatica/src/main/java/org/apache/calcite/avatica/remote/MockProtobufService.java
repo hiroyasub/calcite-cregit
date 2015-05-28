@@ -341,6 +341,12 @@ operator|.
 name|CursorFactory
 operator|.
 name|ARRAY
+argument_list|,
+name|Meta
+operator|.
+name|StatementType
+operator|.
+name|SELECT
 argument_list|)
 argument_list|,
 name|Meta
@@ -474,6 +480,12 @@ operator|.
 name|CursorFactory
 operator|.
 name|ARRAY
+argument_list|,
+name|Meta
+operator|.
+name|StatementType
+operator|.
+name|SELECT
 argument_list|)
 argument_list|,
 literal|null

@@ -1241,8 +1241,6 @@ name|Integer
 operator|.
 name|MAX_VALUE
 argument_list|,
-name|paramValues
-argument_list|,
 name|Long
 operator|.
 name|MAX_VALUE
@@ -1659,6 +1657,12 @@ argument_list|,
 name|params
 argument_list|,
 name|cursorFactory
+argument_list|,
+name|Meta
+operator|.
+name|StatementType
+operator|.
+name|SELECT
 argument_list|)
 decl_stmt|;
 name|Frame

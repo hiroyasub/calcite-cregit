@@ -429,11 +429,6 @@ argument_list|(
 name|fetchMaxRowCount
 argument_list|)
 operator|.
-name|addAllParameterValues
-argument_list|(
-name|values
-argument_list|)
-operator|.
 name|build
 argument_list|()
 decl_stmt|;
