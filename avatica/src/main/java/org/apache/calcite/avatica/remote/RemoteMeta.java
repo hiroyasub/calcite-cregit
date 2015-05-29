@@ -1000,8 +1000,8 @@ specifier|public
 name|ExecuteResult
 name|prepareAndExecute
 parameter_list|(
-name|ConnectionHandle
-name|ch
+name|StatementHandle
+name|h
 parameter_list|,
 name|String
 name|sql
@@ -1013,16 +1013,22 @@ name|PrepareCallback
 name|callback
 parameter_list|)
 block|{
+comment|// sync connection state if necessary
 name|connectionSync
 argument_list|(
-name|ch
+operator|new
+name|ConnectionHandle
+argument_list|(
+name|h
+operator|.
+name|connectionId
+argument_list|)
 argument_list|,
 operator|new
 name|ConnectionPropertiesImpl
 argument_list|()
 argument_list|)
 expr_stmt|;
-comment|// sync connection state if necessary
 specifier|final
 name|Service
 operator|.
@@ -1055,7 +1061,11 @@ name|Service
 operator|.
 name|PrepareAndExecuteRequest
 argument_list|(
-name|ch
+name|h
+operator|.
+name|connectionId
+argument_list|,
+name|h
 operator|.
 name|id
 argument_list|,

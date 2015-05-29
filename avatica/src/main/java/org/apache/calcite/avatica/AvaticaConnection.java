@@ -2093,6 +2093,8 @@ name|meta
 operator|.
 name|prepareAndExecute
 argument_list|(
+name|statement
+operator|.
 name|handle
 argument_list|,
 name|sql

@@ -596,12 +596,12 @@ name|int
 name|maxRowCount
 parameter_list|)
 function_decl|;
-comment|/** Prepares and executes a statement.    *    * @param ch Connection handle    * @param sql SQL query    * @param maxRowCount Negative for no limit (different meaning than JDBC)    * @param callback Callback to lock, clear and assign cursor    *    * @return Result containing statement ID, and if a query, a result set and    * first frame of data    */
+comment|/** Prepares and executes a statement.    *    * @param h Statement handle    * @param sql SQL query    * @param maxRowCount Negative for no limit (different meaning than JDBC)    * @param callback Callback to lock, clear and assign cursor    *    * @return Result containing statement ID, and if a query, a result set and    *     first frame of data    */
 name|ExecuteResult
 name|prepareAndExecute
 parameter_list|(
-name|ConnectionHandle
-name|ch
+name|StatementHandle
+name|h
 parameter_list|,
 name|String
 name|sql

@@ -1190,7 +1190,7 @@ name|updateCount
 expr_stmt|;
 block|}
 block|}
-comment|/** Request for    * {@link org.apache.calcite.avatica.Meta#prepareAndExecute(org.apache.calcite.avatica.Meta.ConnectionHandle, String, int, org.apache.calcite.avatica.Meta.PrepareCallback)}. */
+comment|/** Request for    * {@link org.apache.calcite.avatica.Meta#prepareAndExecute(Meta.StatementHandle, String, int, Meta.PrepareCallback)}. */
 class|class
 name|PrepareAndExecuteRequest
 extends|extends
@@ -1211,6 +1211,11 @@ specifier|final
 name|int
 name|maxRowCount
 decl_stmt|;
+specifier|public
+specifier|final
+name|int
+name|statementId
+decl_stmt|;
 annotation|@
 name|JsonCreator
 specifier|public
@@ -1223,6 +1228,14 @@ literal|"connectionId"
 argument_list|)
 name|String
 name|connectionId
+parameter_list|,
+annotation|@
+name|JsonProperty
+argument_list|(
+literal|"statementId"
+argument_list|)
+name|int
+name|statementId
 parameter_list|,
 annotation|@
 name|JsonProperty
@@ -1246,6 +1259,12 @@ operator|.
 name|connectionId
 operator|=
 name|connectionId
+expr_stmt|;
+name|this
+operator|.
+name|statementId
+operator|=
+name|statementId
 expr_stmt|;
 name|this
 operator|.
