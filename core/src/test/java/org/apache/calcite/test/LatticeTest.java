@@ -2031,6 +2031,194 @@ parameter_list|()
 block|{
 comment|// TODO
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testTwoLattices
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sales_lattice
+init|=
+literal|"{\n"
+operator|+
+literal|"  name: 'star',\n"
+operator|+
+literal|"  sql: [\n"
+operator|+
+literal|"    'select 1 from \"foodmart\".\"sales_fact_1997\" as \"s\"',\n"
+operator|+
+literal|"    'join \"foodmart\".\"product\" as \"p\" using (\"product_id\")',\n"
+operator|+
+literal|"    'join \"foodmart\".\"time_by_day\" as \"t\" using (\"time_id\")',\n"
+operator|+
+literal|"    'join \"foodmart\".\"product_class\" as \"pc\" on \"p\".\"product_class_id\" = \"pc\".\"product_class_id\"'\n"
+operator|+
+literal|"  ],\n"
+operator|+
+literal|"  auto: false,\n"
+operator|+
+literal|"  algorithm: true,\n"
+operator|+
+literal|"  algorithmMaxMillis: 10000,\n"
+operator|+
+literal|"  rowCountEstimate: 86837,\n"
+operator|+
+literal|"  defaultMeasures: [ {\n"
+operator|+
+literal|"    agg: 'count'\n"
+operator|+
+literal|"  } ],\n"
+operator|+
+literal|"  tiles: [ {\n"
+operator|+
+literal|"    dimensions: [ 'the_year', ['t', 'quarter'] ],\n"
+operator|+
+literal|"   measures: [ {\n"
+operator|+
+literal|"      agg: 'sum',\n"
+operator|+
+literal|"      args: 'unit_sales'\n"
+operator|+
+literal|"    }, {\n"
+operator|+
+literal|"      agg: 'sum',\n"
+operator|+
+literal|"      args: 'store_sales'\n"
+operator|+
+literal|"    }, {\n"
+operator|+
+literal|"      agg: 'count'\n"
+operator|+
+literal|"    } ]\n"
+operator|+
+literal|"  } ]\n"
+operator|+
+literal|"}\n"
+decl_stmt|;
+specifier|final
+name|String
+name|inventory_lattice
+init|=
+literal|"{\n"
+operator|+
+literal|"  name: 'warehouse',\n"
+operator|+
+literal|"  sql: [\n"
+operator|+
+literal|"  'select 1 from \"foodmart\".\"inventory_fact_1997\" as \"s\"',\n"
+operator|+
+literal|"  'join \"foodmart\".\"product\" as \"p\" using (\"product_id\")',\n"
+operator|+
+literal|"  'join \"foodmart\".\"time_by_day\" as \"t\" using (\"time_id\")',\n"
+operator|+
+literal|"  'join \"foodmart\".\"warehouse\" as \"w\" using (\"warehouse_id\")'\n"
+operator|+
+literal|"  ],\n"
+operator|+
+literal|"  auto: false,\n"
+operator|+
+literal|"  algorithm: true,\n"
+operator|+
+literal|"  algorithmMaxMillis: 10000,\n"
+operator|+
+literal|"  rowCountEstimate: 86837,\n"
+operator|+
+literal|"  defaultMeasures: [ {\n"
+operator|+
+literal|"    agg: 'count'\n"
+operator|+
+literal|"  } ],\n"
+operator|+
+literal|"  tiles: [ {\n"
+operator|+
+literal|"    dimensions: [ 'the_year', 'warehouse_name'],\n"
+operator|+
+literal|"    measures: [ {\n"
+operator|+
+literal|"      agg: 'sum',\n"
+operator|+
+literal|"      args: 'store_invoice'\n"
+operator|+
+literal|"    }, {\n"
+operator|+
+literal|"      agg: 'sum',\n"
+operator|+
+literal|"      args: 'supply_time'\n"
+operator|+
+literal|"    }, {\n"
+operator|+
+literal|"      agg: 'sum',\n"
+operator|+
+literal|"      args: 'warehouse_cost'\n"
+operator|+
+literal|"    } ]\n"
+operator|+
+literal|"  } ]\n"
+operator|+
+literal|"}\n"
+decl_stmt|;
+specifier|final
+name|AtomicInteger
+name|counter
+init|=
+operator|new
+name|AtomicInteger
+argument_list|()
+decl_stmt|;
+name|modelWithLattices
+argument_list|(
+name|sales_lattice
+argument_list|,
+name|inventory_lattice
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select s.\"unit_sales\", p.\"brand_name\"\n"
+operator|+
+literal|"from \"foodmart\".\"sales_fact_1997\" as s\n"
+operator|+
+literal|"join \"foodmart\".\"product\" as p using (\"product_id\")\n"
+argument_list|)
+operator|.
+name|enableMaterializations
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|substitutionMatches
+argument_list|(
+name|CalciteAssert
+operator|.
+name|checkRel
+argument_list|(
+literal|"LogicalProject(unit_sales=[$7], brand_name=[$10])\n"
+operator|+
+literal|"  LogicalProject(product_id=[$0], time_id=[$1], customer_id=[$2], promotion_id=[$3], store_id=[$4], store_sales=[$5], store_cost=[$6], unit_sales=[$7], product_class_id=[$8], product_id0=[$9], brand_name=[$10], product_name=[$11], SKU=[$12], SRP=[$13], gross_weight=[$14], net_weight=[$15], recyclable_package=[$16], low_fat=[$17], units_per_case=[$18], cases_per_pallet=[$19], shelf_width=[$20], shelf_height=[$21], shelf_depth=[$22])\n"
+operator|+
+literal|"    LogicalTableScan(table=[[adhoc, star]])\n"
+argument_list|,
+name|counter
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|assertThat
+argument_list|(
+name|counter
+operator|.
+name|intValue
+argument_list|()
+argument_list|,
+name|equalTo
+argument_list|(
+literal|1
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
 specifier|private
 name|CalciteAssert
 operator|.
