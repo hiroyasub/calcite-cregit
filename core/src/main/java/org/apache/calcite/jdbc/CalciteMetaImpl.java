@@ -2478,7 +2478,7 @@ argument_list|,
 literal|true
 argument_list|)
 operator|.
-name|getValue
+name|getTable
 argument_list|()
 decl_stmt|;
 return|return
