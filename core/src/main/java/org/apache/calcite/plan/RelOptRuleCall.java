@@ -37,6 +37,36 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|rel
+operator|.
+name|core
+operator|.
+name|Filter
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|tools
+operator|.
+name|RelBuilder
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|util
 operator|.
 name|trace
@@ -336,6 +366,9 @@ name|rule
 return|;
 block|}
 comment|/**    * Returns a list of matched relational expressions.    *    * @return matched relational expressions    * @deprecated Use {@link #getRelList()} or {@link #rel(int)}    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 name|RelNode
 index|[]
@@ -389,7 +422,7 @@ name|ordinal
 index|]
 return|;
 block|}
-comment|/**    * Returns the children of a given relational expression node matched in a    * rule.    *    *<p>If the policy of the operand which caused the match is not    * {@link org.apache.calcite.plan.RelOptRuleOperandChildPolicy#ANY},    * the children will have their    * own operands and therefore be easily available in the array returned by    * the {@link #getRels} method, so this method returns null.    *    *<p>This method is for    * {@link org.apache.calcite.plan.RelOptRuleOperandChildPolicy#ANY},    * which is generally used when a node can have a variable number of    * children, and hence where the matched children are not retrievable by any    * other means.    *    * @param rel Relational expression    * @return Children of relational expression    */
+comment|/**    * Returns the children of a given relational expression node matched in a    * rule.    *    *<p>If the policy of the operand which caused the match is not    * {@link org.apache.calcite.plan.RelOptRuleOperandChildPolicy#ANY},    * the children will have their    * own operands and therefore be easily available in the array returned by    * the {@link #getRelList()} method, so this method returns null.    *    *<p>This method is for    * {@link org.apache.calcite.plan.RelOptRuleOperandChildPolicy#ANY},    * which is generally used when a node can have a variable number of    * children, and hence where the matched children are not retrievable by any    * other means.    *    * @param rel Relational expression    * @return Children of relational expression    */
 specifier|public
 name|List
 argument_list|<
@@ -476,6 +509,34 @@ name|of
 argument_list|()
 argument_list|)
 expr_stmt|;
+block|}
+comment|/** Creates a {@link org.apache.calcite.tools.RelBuilder} to be used by    * code within the call. The {@code protoBuilder} argument contains policies    * such as what implementation of {@link Filter} to create. */
+specifier|public
+name|RelBuilder
+name|builder
+parameter_list|(
+name|RelBuilder
+operator|.
+name|ProtoRelBuilder
+name|protoBuilder
+parameter_list|)
+block|{
+return|return
+name|protoBuilder
+operator|.
+name|create
+argument_list|(
+name|rel
+argument_list|(
+literal|0
+argument_list|)
+operator|.
+name|getCluster
+argument_list|()
+argument_list|,
+literal|null
+argument_list|)
+return|;
 block|}
 block|}
 end_class

@@ -694,6 +694,10 @@ name|PlannerTest
 operator|.
 name|class
 block|,
+name|RelBuilderTest
+operator|.
+name|class
+block|,
 name|MaterializationTest
 operator|.
 name|class

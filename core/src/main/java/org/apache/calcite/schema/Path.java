@@ -70,8 +70,25 @@ argument_list|>
 extends|,
 name|RandomAccess
 block|{
+comment|/** Returns the parent path, or null if the path is empty. */
 name|Path
 name|parent
+parameter_list|()
+function_decl|;
+comment|/** Returns the names of this path, not including the name of the root. */
+name|List
+argument_list|<
+name|String
+argument_list|>
+name|names
+parameter_list|()
+function_decl|;
+comment|/** Returns the schemas of this path. */
+name|List
+argument_list|<
+name|Schema
+argument_list|>
+name|schemas
 parameter_list|()
 function_decl|;
 block|}
