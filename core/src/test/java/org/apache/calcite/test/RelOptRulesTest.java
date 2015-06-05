@@ -6549,10 +6549,10 @@ operator|.
 name|build
 argument_list|()
 decl_stmt|;
-name|checkPlanning
-argument_list|(
-name|program
-argument_list|,
+specifier|final
+name|String
+name|sql
+init|=
 literal|"select e1.ename, r\n"
 operator|+
 literal|"from (\n"
@@ -6564,6 +6564,12 @@ operator|+
 literal|"  from emp) e1\n"
 operator|+
 literal|"where r< 2"
+decl_stmt|;
+name|checkPlanning
+argument_list|(
+name|program
+argument_list|,
+name|sql
 argument_list|)
 expr_stmt|;
 block|}
@@ -6650,11 +6656,23 @@ name|addRuleInstance
 argument_list|(
 name|AggregateJoinTransposeRule
 operator|.
-name|INSTANCE
+name|EXTENDED
 argument_list|)
 operator|.
 name|build
 argument_list|()
+decl_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select e.empno,d.deptno \n"
+operator|+
+literal|"from (select * from sales.emp where empno = 10) as e "
+operator|+
+literal|"join sales.dept as d on e.empno = d.deptno "
+operator|+
+literal|"group by e.empno,d.deptno"
 decl_stmt|;
 name|checkPlanning
 argument_list|(
@@ -6668,13 +6686,7 @@ argument_list|(
 name|program
 argument_list|)
 argument_list|,
-literal|"select e.empno,d.deptno \n"
-operator|+
-literal|"from (select * from sales.emp where empno = 10) as e "
-operator|+
-literal|"join sales.dept as d on e.empno = d.deptno "
-operator|+
-literal|"group by e.empno,d.deptno"
+name|sql
 argument_list|)
 expr_stmt|;
 block|}
@@ -6717,11 +6729,25 @@ name|addRuleInstance
 argument_list|(
 name|AggregateJoinTransposeRule
 operator|.
-name|INSTANCE
+name|EXTENDED
 argument_list|)
 operator|.
 name|build
 argument_list|()
+decl_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select e.empno,d.deptno \n"
+operator|+
+literal|"from (select * from sales.emp where empno = 10) as e "
+operator|+
+literal|"join sales.dept as d on e.empno = d.deptno "
+operator|+
+literal|"and e.deptno + e.empno = d.deptno + 5 "
+operator|+
+literal|"group by e.empno,d.deptno"
 decl_stmt|;
 name|checkPlanning
 argument_list|(
@@ -6735,15 +6761,7 @@ argument_list|(
 name|program
 argument_list|)
 argument_list|,
-literal|"select e.empno,d.deptno \n"
-operator|+
-literal|"from (select * from sales.emp where empno = 10) as e "
-operator|+
-literal|"join sales.dept as d on e.empno = d.deptno "
-operator|+
-literal|"and e.deptno + e.empno = d.deptno + 5 "
-operator|+
-literal|"group by e.empno,d.deptno"
+name|sql
 argument_list|)
 expr_stmt|;
 block|}
@@ -6786,11 +6804,23 @@ name|addRuleInstance
 argument_list|(
 name|AggregateJoinTransposeRule
 operator|.
-name|INSTANCE
+name|EXTENDED
 argument_list|)
 operator|.
 name|build
 argument_list|()
+decl_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select e.empno,d.deptno \n"
+operator|+
+literal|"from (select * from sales.emp where empno = 10) as e "
+operator|+
+literal|"join sales.dept as d on e.empno< d.deptno "
+operator|+
+literal|"group by e.empno,d.deptno"
 decl_stmt|;
 name|checkPlanning
 argument_list|(
@@ -6804,21 +6834,16 @@ argument_list|(
 name|program
 argument_list|)
 argument_list|,
-literal|"select e.empno,d.deptno \n"
-operator|+
-literal|"from (select * from sales.emp where empno = 10) as e "
-operator|+
-literal|"join sales.dept as d on e.empno< d.deptno "
-operator|+
-literal|"group by e.empno,d.deptno"
+name|sql
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** SUM is the easiest aggregate function to split. */
 annotation|@
 name|Test
 specifier|public
 name|void
-name|testPushAggregateThroughJoin4
+name|testPushAggregateSumThroughJoin
 parameter_list|()
 throws|throws
 name|Exception
@@ -6853,11 +6878,23 @@ name|addRuleInstance
 argument_list|(
 name|AggregateJoinTransposeRule
 operator|.
-name|INSTANCE
+name|EXTENDED
 argument_list|)
 operator|.
 name|build
 argument_list|()
+decl_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select e.empno,sum(sal) \n"
+operator|+
+literal|"from (select * from sales.emp where empno = 10) as e "
+operator|+
+literal|"join sales.dept as d on e.empno = d.deptno "
+operator|+
+literal|"group by e.empno,d.deptno"
 decl_stmt|;
 name|checkPlanning
 argument_list|(
@@ -6871,13 +6908,233 @@ argument_list|(
 name|program
 argument_list|)
 argument_list|,
-literal|"select e.empno,sum(sal) \n"
+name|sql
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Push a variety of aggregate functions. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testPushAggregateFunctionsThroughJoin
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|HepProgram
+name|preProgram
+init|=
+operator|new
+name|HepProgramBuilder
+argument_list|()
+operator|.
+name|addRuleInstance
+argument_list|(
+name|AggregateProjectMergeRule
+operator|.
+name|INSTANCE
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+specifier|final
+name|HepProgram
+name|program
+init|=
+operator|new
+name|HepProgramBuilder
+argument_list|()
+operator|.
+name|addRuleInstance
+argument_list|(
+name|AggregateJoinTransposeRule
+operator|.
+name|EXTENDED
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select e.empno,\n"
 operator|+
-literal|"from (select * from sales.emp where empno = 10) as e "
+literal|"  min(sal) as min_sal, min(e.deptno) as min_deptno,\n"
 operator|+
-literal|"join sales.dept as d on e.empno = d.deptno "
+literal|"  sum(sal) + 1 as sum_sal_plus, max(sal) as max_sal,\n"
+operator|+
+literal|"  sum(sal) as sum_sal_2, count(sal) as count_sal\n"
+operator|+
+literal|"from sales.emp as e\n"
+operator|+
+literal|"join sales.dept as d on e.empno = d.deptno\n"
 operator|+
 literal|"group by e.empno,d.deptno"
+decl_stmt|;
+name|checkPlanning
+argument_list|(
+name|tester
+argument_list|,
+name|preProgram
+argument_list|,
+operator|new
+name|HepPlanner
+argument_list|(
+name|program
+argument_list|)
+argument_list|,
+name|sql
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Push a aggregate functions into a relation that is unique on the join    * key. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testPushAggregateThroughJoinDistinct
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|HepProgram
+name|preProgram
+init|=
+operator|new
+name|HepProgramBuilder
+argument_list|()
+operator|.
+name|addRuleInstance
+argument_list|(
+name|AggregateProjectMergeRule
+operator|.
+name|INSTANCE
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+specifier|final
+name|HepProgram
+name|program
+init|=
+operator|new
+name|HepProgramBuilder
+argument_list|()
+operator|.
+name|addRuleInstance
+argument_list|(
+name|AggregateJoinTransposeRule
+operator|.
+name|EXTENDED
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select d.deptno,\n"
+operator|+
+literal|"  sum(sal) as sum_sal, count(*) as c\n"
+operator|+
+literal|"from sales.emp as e\n"
+operator|+
+literal|"join (select distinct deptno from sales.dept) as d\n"
+operator|+
+literal|"  on e.empno = d.deptno\n"
+operator|+
+literal|"group by d.deptno"
+decl_stmt|;
+name|checkPlanning
+argument_list|(
+name|tester
+argument_list|,
+name|preProgram
+argument_list|,
+operator|new
+name|HepPlanner
+argument_list|(
+name|program
+argument_list|)
+argument_list|,
+name|sql
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Push count(*) through join, no GROUP BY. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testPushAggregateSumNoGroup
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|HepProgram
+name|preProgram
+init|=
+operator|new
+name|HepProgramBuilder
+argument_list|()
+operator|.
+name|addRuleInstance
+argument_list|(
+name|AggregateProjectMergeRule
+operator|.
+name|INSTANCE
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+specifier|final
+name|HepProgram
+name|program
+init|=
+operator|new
+name|HepProgramBuilder
+argument_list|()
+operator|.
+name|addRuleInstance
+argument_list|(
+name|AggregateJoinTransposeRule
+operator|.
+name|EXTENDED
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select count(*) from sales.emp join sales.dept using (deptno)"
+decl_stmt|;
+name|checkPlanning
+argument_list|(
+name|tester
+argument_list|,
+name|preProgram
+argument_list|,
+operator|new
+name|HepPlanner
+argument_list|(
+name|program
+argument_list|)
+argument_list|,
+name|sql
 argument_list|)
 expr_stmt|;
 block|}

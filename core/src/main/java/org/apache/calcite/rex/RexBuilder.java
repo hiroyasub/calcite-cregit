@@ -771,7 +771,9 @@ comment|/** Creates a list of {@link org.apache.calcite.rex.RexInputRef} express
 specifier|public
 name|List
 argument_list|<
-name|RexInputRef
+name|?
+extends|extends
+name|RexNode
 argument_list|>
 name|identityProjects
 parameter_list|(
@@ -2416,9 +2418,6 @@ name|CASE
 argument_list|,
 name|ImmutableList
 operator|.
-expr|<
-name|RexNode
-operator|>
 name|of
 argument_list|(
 name|makeCall
@@ -3209,7 +3208,7 @@ name|type
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates a reference to a given field of the input relational expression.    *    * @param input Input relational expression    * @param i    Ordinal of field    * @return Reference to field    */
+comment|/**    * Creates a reference to a given field of the input relational expression.    *    * @param input Input relational expression    * @param i    Ordinal of field    * @return Reference to field    *    * @see #identityProjects(RelDataType)    */
 specifier|public
 name|RexInputRef
 name|makeInputRef
