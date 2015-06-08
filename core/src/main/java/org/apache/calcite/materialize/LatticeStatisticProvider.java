@@ -11,89 +11,37 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|avatica
-operator|.
-name|test
+name|materialize
 package|;
 end_package
 
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|avatica
-operator|.
-name|RemoteDriverTest
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|junit
-operator|.
-name|runner
-operator|.
-name|RunWith
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|junit
-operator|.
-name|runners
-operator|.
-name|Suite
-import|;
-end_import
-
 begin_comment
-comment|/**  * Avatica test suite.  */
+comment|/**  * Estimates row counts for a lattice and its attributes.  */
 end_comment
 
-begin_class
-annotation|@
-name|RunWith
-argument_list|(
-name|Suite
-operator|.
-name|class
-argument_list|)
-annotation|@
-name|Suite
-operator|.
-name|SuiteClasses
-argument_list|(
-block|{
-name|AvaticaUtilsTest
-operator|.
-name|class
-block|,
-name|ConnectStringParserTest
-operator|.
-name|class
-block|,
-name|RemoteDriverTest
-operator|.
-name|class
-block|}
-argument_list|)
+begin_interface
 specifier|public
-class|class
-name|AvaticaSuite
-block|{ }
-end_class
+interface|interface
+name|LatticeStatisticProvider
+block|{
+comment|/** Returns an estimate of the number of distinct values in a column. */
+name|int
+name|cardinality
+parameter_list|(
+name|Lattice
+name|lattice
+parameter_list|,
+name|Lattice
+operator|.
+name|Column
+name|column
+parameter_list|)
+function_decl|;
+block|}
+end_interface
 
 begin_comment
-comment|// End AvaticaSuite.java
+comment|// End LatticeStatisticProvider.java
 end_comment
 
 end_unit

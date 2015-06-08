@@ -25,6 +25,20 @@ name|calcite
 operator|.
 name|materialize
 operator|.
+name|Lattices
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|materialize
+operator|.
 name|MaterializationService
 import|;
 end_import
@@ -1190,13 +1204,65 @@ name|sameResultWithMaterializationsDisabled
 argument_list|()
 expr_stmt|;
 block|}
-comment|/** Tests a model that uses an algorithm to generate an initial set of    * tiles.    *    *<p>Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-428">CALCITE-428,    * "Use optimization algorithm to suggest which tiles of a lattice to    * materialize"</a>. */
+comment|/** Tests a model that uses an algorithm to generate an initial set of    * tiles.    *    *<p>Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-428">[CALCITE-428]    * Use optimization algorithm to suggest which tiles of a lattice to    * materialize</a>. */
 annotation|@
 name|Test
 specifier|public
 name|void
 name|testTileAlgorithm
 parameter_list|()
+block|{
+name|checkTileAlgorithm
+argument_list|(
+name|FoodMartLatticeStatisticProvider
+operator|.
+name|class
+operator|.
+name|getCanonicalName
+argument_list|()
+argument_list|,
+literal|"EnumerableAggregate(group=[{2, 3}])\n"
+operator|+
+literal|"  EnumerableTableScan(table=[[adhoc, m{16, 17, 27, 31}]])"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testTileAlgorithm2
+parameter_list|()
+block|{
+comment|// Different explain than above, but note that it still selects columns
+comment|// (27, 31).
+name|checkTileAlgorithm
+argument_list|(
+name|Lattices
+operator|.
+name|class
+operator|.
+name|getCanonicalName
+argument_list|()
+operator|+
+literal|"#CACHED_SQL"
+argument_list|,
+literal|"EnumerableAggregate(group=[{0, 1}])\n"
+operator|+
+literal|"  EnumerableTableScan(table=[[adhoc, m{27, 31, 32, 36, 37}]"
+argument_list|)
+expr_stmt|;
+block|}
+specifier|private
+name|void
+name|checkTileAlgorithm
+parameter_list|(
+name|String
+name|statisticProvider
+parameter_list|,
+name|String
+name|expectedExplain
+parameter_list|)
 block|{
 name|MaterializationService
 operator|.
@@ -1239,6 +1305,12 @@ literal|"      agg: 'count'\n"
 operator|+
 literal|"  } ],\n"
 operator|+
+literal|"  statisticProvider: '"
+operator|+
+name|statisticProvider
+operator|+
+literal|"',\n"
+operator|+
 literal|"  tiles: [ {\n"
 operator|+
 literal|"    dimensions: [ 'the_year', ['t', 'quarter'] ],\n"
@@ -1264,9 +1336,7 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"EnumerableAggregate(group=[{2, 3}])\n"
-operator|+
-literal|"  EnumerableTableScan(table=[[adhoc, m{16, 17, 27, 31}]])"
+name|expectedExplain
 argument_list|)
 operator|.
 name|returnsUnordered
