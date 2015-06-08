@@ -11204,6 +11204,49 @@ literal|"Column 'HIREDATE' not found in any table"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-754">[CALCITE-754]    * Validator error when resolving OVER clause of JOIN query</a>. */
+annotation|@
+name|Ignore
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testPartitionByColumnInJoinAlias
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select sum(1) over(partition by t1.ename) \n"
+operator|+
+literal|"from emp t1, emp t2"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select sum(1) over(partition by emp.ename) \n"
+operator|+
+literal|"from emp, dept"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select sum(1) over(partition by ^deptno^) \n"
+operator|+
+literal|"from emp, dept"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Column 'DEPTNO' is ambiguous"
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public
