@@ -5590,7 +5590,7 @@ literal|false
 argument_list|)
 return|;
 block|}
-specifier|private
+specifier|public
 specifier|static
 name|SqlKind
 name|reverse
@@ -5642,7 +5642,7 @@ name|kind
 return|;
 block|}
 block|}
-specifier|private
+specifier|public
 specifier|static
 name|SqlOperator
 name|op

@@ -761,7 +761,9 @@ name|CalciteAssert
 operator|.
 name|checkResultContains
 argument_list|(
-literal|"EnumerableCalc(expr#0..2=[{inputs}], expr#3=[2], expr#4=[=($t0, $t3)], name=[$t2], E=[$t1], $condition=[$t4])\n"
+literal|"EnumerableCalc(expr#0..2=[{inputs}], expr#3=[2], "
+operator|+
+literal|"expr#4=[=($t0, $t3)], name=[$t2], E=[$t1], $condition=[$t4])\n"
 operator|+
 literal|"  EnumerableTableScan(table=[[hr, m0]]"
 argument_list|)
@@ -837,7 +839,9 @@ name|checkMaterialize
 argument_list|(
 literal|"select \"deptno\", \"empid\", \"name\" from \"emps\" where \"deptno\" = 10"
 argument_list|,
-literal|"select \"empid\" + 1 as x, \"name\" from \"emps\" where \"deptno\" = 10 and \"empid\"< 150"
+literal|"select \"empid\" + 1 as x, \"name\" from \"emps\" "
+operator|+
+literal|"where \"deptno\" = 10 and \"empid\"< 150"
 argument_list|)
 expr_stmt|;
 block|}
@@ -856,7 +860,9 @@ parameter_list|()
 block|{
 name|checkMaterialize
 argument_list|(
-literal|"select \"deptno\", \"empid\", \"name\" from \"emps\" where \"deptno\" = 10 or \"deptno\" = 20 or \"empid\"< 160"
+literal|"select \"deptno\", \"empid\", \"name\" from \"emps\" "
+operator|+
+literal|"where \"deptno\" = 10 or \"deptno\" = 20 or \"empid\"< 160"
 argument_list|,
 literal|"select \"empid\" + 1 as x, \"name\" from \"emps\" where \"deptno\" = 10"
 argument_list|,
@@ -868,10 +874,244 @@ name|CalciteAssert
 operator|.
 name|checkResultContains
 argument_list|(
-literal|"EnumerableCalcRel(expr#0..2=[{inputs}], expr#3=[1], expr#4=[+($t1, $t3)], X=[$t4], name=[$t2], condition=?)\n"
+literal|"EnumerableCalcRel(expr#0..2=[{inputs}], expr#3=[1], "
+operator|+
+literal|"expr#4=[+($t1, $t3)], X=[$t4], name=[$t2], condition=?)\n"
 operator|+
 literal|"  EnumerableTableScan(table=[[hr, m0]])"
 argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** As {@link #testFilterQueryOnFilterView()} but condition is stronger in    * query. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFilterQueryOnFilterView4
+parameter_list|()
+block|{
+name|checkMaterialize
+argument_list|(
+literal|"select * from \"emps\" where \"deptno\"> 10"
+argument_list|,
+literal|"select \"name\" from \"emps\" where \"deptno\"> 30"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** As {@link #testFilterQueryOnFilterView()} but condition is stronger in    * query and columns selected are subset of columns in materialized view */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFilterQueryOnFilterView5
+parameter_list|()
+block|{
+name|checkMaterialize
+argument_list|(
+literal|"select \"name\", \"deptno\" from \"emps\" where \"deptno\"> 10"
+argument_list|,
+literal|"select \"name\" from \"emps\" where \"deptno\"> 30"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** As {@link #testFilterQueryOnFilterView()} but condition is stronger in    * query and columns selected are subset of columns in materialized view */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFilterQueryOnFilterView6
+parameter_list|()
+block|{
+name|checkMaterialize
+argument_list|(
+literal|"select \"name\", \"deptno\", \"salary\" from \"emps\" "
+operator|+
+literal|"where \"salary\"> 2000.5"
+argument_list|,
+literal|"select \"name\" from \"emps\" where \"deptno\"> 30 and \"salary\"> 3000"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** As {@link #testFilterQueryOnFilterView()} but condition is stronger in    * query and columns selected are subset of columns in materialized view    * Condition here is complex*/
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFilterQueryOnFilterView7
+parameter_list|()
+block|{
+name|checkMaterialize
+argument_list|(
+literal|"select * from \"emps\" where "
+operator|+
+literal|"((\"salary\"< 1111.9 and \"deptno\"> 10)"
+operator|+
+literal|"or (\"empid\"> 400 and \"salary\"> 5000) "
+operator|+
+literal|"or \"salary\"> 500)"
+argument_list|,
+literal|"select \"name\" from \"emps\" where (\"salary\"> 1000 "
+operator|+
+literal|"or (\"deptno\">= 30 and \"salary\"<= 500))"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** As {@link #testFilterQueryOnFilterView()} but condition is stronger in    * query. However, columns selected are not present in columns of materialized view,    * hence should not use materialized view*/
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFilterQueryOnFilterView8
+parameter_list|()
+block|{
+name|checkNoMaterialize
+argument_list|(
+literal|"select \"name\", \"deptno\" from \"emps\" where \"deptno\"> 10"
+argument_list|,
+literal|"select \"name\", \"empid\" from \"emps\" where \"deptno\"> 30"
+argument_list|,
+name|JdbcTest
+operator|.
+name|HR_MODEL
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** As {@link #testFilterQueryOnFilterView()} but condition is weaker in    * query.*/
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFilterQueryOnFilterView9
+parameter_list|()
+block|{
+name|checkNoMaterialize
+argument_list|(
+literal|"select \"name\", \"deptno\" from \"emps\" where \"deptno\"> 10"
+argument_list|,
+literal|"select \"name\", \"empid\" from \"emps\" "
+operator|+
+literal|"where \"deptno\"> 30 or \"empid\"> 10"
+argument_list|,
+name|JdbcTest
+operator|.
+name|HR_MODEL
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** As {@link #testFilterQueryOnFilterView()} but condition currently    * has unsupported type being checked on query.    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFilterQueryOnFilterView10
+parameter_list|()
+block|{
+name|checkNoMaterialize
+argument_list|(
+literal|"select \"name\", \"deptno\" from \"emps\" where \"deptno\"> 10 "
+operator|+
+literal|"and \"name\" = \'calcite\'"
+argument_list|,
+literal|"select \"name\", \"empid\" from \"emps\" where \"deptno\"> 30 "
+operator|+
+literal|"or \"empid\"> 10"
+argument_list|,
+name|JdbcTest
+operator|.
+name|HR_MODEL
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** As {@link #testFilterQueryOnFilterView()} but condition is weaker in    * query and columns selected are subset of columns in materialized view    * Condition here is complex*/
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFilterQueryOnFilterView11
+parameter_list|()
+block|{
+name|checkNoMaterialize
+argument_list|(
+literal|"select \"name\", \"deptno\" from \"emps\" where "
+operator|+
+literal|"(\"salary\"< 1111.9 and \"deptno\"> 10)"
+operator|+
+literal|"or (\"empid\"> 400 and \"salary\"> 5000)"
+argument_list|,
+literal|"select \"name\" from \"emps\" where \"deptno\"> 30 and \"salary\"> 3000"
+argument_list|,
+name|JdbcTest
+operator|.
+name|HR_MODEL
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** As {@link #testFilterQueryOnFilterView()} but condition of    * query is stronger but is on the column not present in MV (salary).    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFilterQueryOnFilterView12
+parameter_list|()
+block|{
+name|checkNoMaterialize
+argument_list|(
+literal|"select \"name\", \"deptno\" from \"emps\" where \"salary\"> 2000.5"
+argument_list|,
+literal|"select \"name\" from \"emps\" where \"deptno\"> 30 and \"salary\"> 3000"
+argument_list|,
+name|JdbcTest
+operator|.
+name|HR_MODEL
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** As {@link #testFilterQueryOnFilterView()} but condition is weaker in    * query and columns selected are subset of columns in materialized view    * Condition here is complex*/
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFilterQueryOnFilterView13
+parameter_list|()
+block|{
+name|checkNoMaterialize
+argument_list|(
+literal|"select * from \"emps\" where "
+operator|+
+literal|"(\"salary\"< 1111.9 and \"deptno\"> 10)"
+operator|+
+literal|"or (\"empid\"> 400 and \"salary\"> 5000)"
+argument_list|,
+literal|"select \"name\" from \"emps\" where \"salary\"> 1000 "
+operator|+
+literal|"or (\"deptno\"> 30 and \"salary\"> 3000)"
+argument_list|,
+name|JdbcTest
+operator|.
+name|HR_MODEL
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** As {@link #testFilterQueryOnFilterView13()} but using alias    * and condition of query is stronger*/
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAlias
+parameter_list|()
+block|{
+name|checkMaterialize
+argument_list|(
+literal|"select * from \"emps\" as em where "
+operator|+
+literal|"(em.\"salary\"< 1111.9 and em.\"deptno\"> 10)"
+operator|+
+literal|"or (em.\"empid\"> 400 and em.\"salary\"> 5000)"
+argument_list|,
+literal|"select \"name\" as n from \"emps\" as e where "
+operator|+
+literal|"(e.\"empid\"> 500 and e.\"salary\"> 6000)"
 argument_list|)
 expr_stmt|;
 block|}
@@ -901,7 +1141,9 @@ parameter_list|()
 block|{
 name|checkMaterialize
 argument_list|(
-literal|"select \"empid\", \"deptno\", count(*) as c, sum(\"empid\") as s from \"emps\" group by \"empid\", \"deptno\""
+literal|"select \"empid\", \"deptno\", count(*) as c, sum(\"empid\") as s from \"emps\" "
+operator|+
+literal|"group by \"empid\", \"deptno\""
 argument_list|,
 literal|"select count(*) + 1 as c, \"deptno\" from \"emps\" group by \"deptno\""
 argument_list|,
@@ -913,7 +1155,9 @@ name|CalciteAssert
 operator|.
 name|checkResultContains
 argument_list|(
-literal|"EnumerableCalc(expr#0..1=[{inputs}], expr#2=[1], expr#3=[+($t1, $t2)], C=[$t3], deptno=[$t0])\n"
+literal|"EnumerableCalc(expr#0..1=[{inputs}], expr#2=[1], "
+operator|+
+literal|"expr#3=[+($t1, $t2)], C=[$t3], deptno=[$t0])\n"
 operator|+
 literal|"  EnumerableAggregate(group=[{1}], agg#0=[$SUM0($2)])\n"
 operator|+
@@ -2264,6 +2508,30 @@ argument_list|,
 name|JdbcTest
 operator|.
 name|HR_MODEL
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJoinMaterialization
+parameter_list|()
+block|{
+name|String
+name|q
+init|=
+literal|"select *\n"
+operator|+
+literal|"from (select * from \"emps\" where \"empid\"< 300)\n"
+operator|+
+literal|"join \"depts\" using (\"deptno\")"
+decl_stmt|;
+name|checkMaterialize
+argument_list|(
+literal|"select * from \"emps\" where \"empid\"< 500"
+argument_list|,
+name|q
 argument_list|)
 expr_stmt|;
 block|}

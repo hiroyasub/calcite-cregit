@@ -129,6 +129,20 @@ name|calcite
 operator|.
 name|plan
 operator|.
+name|MaterializedViewSubstitutionVisitor
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
 name|RelOptCost
 import|;
 end_import
@@ -326,20 +340,6 @@ operator|.
 name|plan
 operator|.
 name|RelTraitSet
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|plan
-operator|.
-name|SubstitutionVisitor
 import|;
 end_import
 
@@ -1984,6 +1984,8 @@ comment|// Try to rewrite the original root query in terms of the materialized
 comment|// query. If that is possible, register the remnant query as equivalent
 comment|// to the root.
 comment|//
+comment|// This call modifies originalRoot. Doesn't look like originalRoot should be mutable though.
+comment|// Need to check.
 name|RelNode
 name|sub
 init|=
@@ -2178,7 +2180,7 @@ argument_list|()
 expr_stmt|;
 return|return
 operator|new
-name|SubstitutionVisitor
+name|MaterializedViewSubstitutionVisitor
 argument_list|(
 name|target
 argument_list|,
