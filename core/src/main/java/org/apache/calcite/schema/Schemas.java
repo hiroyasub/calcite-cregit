@@ -2807,6 +2807,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+comment|/** Returns a sub-schema of a given schema obtained by following a sequence    * of names.    *    *<p>The result is null if the initial schema is null or any sub-schema does    * not exist.    */
 specifier|public
 specifier|static
 name|CalciteSchema
@@ -2815,7 +2816,7 @@ parameter_list|(
 name|CalciteSchema
 name|schema
 parameter_list|,
-name|List
+name|Iterable
 argument_list|<
 name|String
 argument_list|>
@@ -2830,6 +2831,17 @@ range|:
 name|names
 control|)
 block|{
+if|if
+condition|(
+name|schema
+operator|==
+literal|null
+condition|)
+block|{
+return|return
+literal|null
+return|;
+block|}
 name|schema
 operator|=
 name|schema
