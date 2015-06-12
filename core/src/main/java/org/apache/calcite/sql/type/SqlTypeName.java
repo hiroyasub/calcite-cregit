@@ -41,22 +41,6 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|rel
-operator|.
-name|type
-operator|.
-name|RelDataTypeSystem
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
 name|sql
 operator|.
 name|SqlLiteral
@@ -1632,23 +1616,6 @@ name|build
 argument_list|()
 return|;
 block|}
-comment|/**    * Returns the default precision for this type if supported, otherwise -1 if    * precision is either unsupported or must be specified explicitly.    *    * @deprecated Use    * {@link org.apache.calcite.rel.type.RelDataTypeSystem#getDefaultPrecision(SqlTypeName)};    * will be removed after calcite-0.9.1.    */
-specifier|public
-name|int
-name|getDefaultPrecision
-parameter_list|()
-block|{
-return|return
-name|RelDataTypeSystem
-operator|.
-name|DEFAULT
-operator|.
-name|getDefaultPrecision
-argument_list|(
-name|this
-argument_list|)
-return|;
-block|}
 comment|/**    * @return default scale for this type if supported, otherwise -1 if scale    * is either unsupported or must be specified explicitly    */
 specifier|public
 name|int
@@ -2969,40 +2936,6 @@ name|this
 argument_list|)
 throw|;
 block|}
-block|}
-comment|/**    * Returns the maximum precision (or length) allowed for this type, or -1 if    * precision/length are not applicable for this type.    *    * @return Maximum allowed precision    *    * @deprecated Use    * {@link org.apache.calcite.rel.type.RelDataTypeSystem#getMaxScale(SqlTypeName)};    * will be removed after calcite-0.9.1.    */
-specifier|public
-name|int
-name|getMaxPrecision
-parameter_list|()
-block|{
-return|return
-name|RelDataTypeSystem
-operator|.
-name|DEFAULT
-operator|.
-name|getMaxPrecision
-argument_list|(
-name|this
-argument_list|)
-return|;
-block|}
-comment|/**    * Returns the maximum scale (or fractional second precision in the case of    * intervals) allowed for this type, or -1 if precision/length are not    * applicable for this type.    *    * @return Maximum allowed scale    *    * @deprecated Use    * {@link org.apache.calcite.rel.type.RelDataTypeSystem#getMaxScale(SqlTypeName)};    * will be removed after calcite-0.9.1.    */
-specifier|public
-name|int
-name|getMaxScale
-parameter_list|()
-block|{
-return|return
-name|RelDataTypeSystem
-operator|.
-name|DEFAULT
-operator|.
-name|getMaxScale
-argument_list|(
-name|this
-argument_list|)
-return|;
 block|}
 comment|/**    * Returns the minimum precision (or length) allowed for this type, or -1 if    * precision/length are not applicable for this type.    *    * @return Minimum allowed precision    */
 specifier|public
