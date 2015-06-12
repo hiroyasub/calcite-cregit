@@ -338,6 +338,9 @@ name|category
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 specifier|static
 name|SqlNode
@@ -703,7 +706,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**    * Returns whether expression is always ascending, descending or constant.    * This property is useful because it allows to safely aggregte infinite    * streams of values.    *    *<p>The default implementation returns    * {@link SqlMonotonicity#NOT_MONOTONIC}.    */
+comment|/**    * Returns whether expression is always ascending, descending or constant.    * This property is useful because it allows to safely aggregate infinite    * streams of values.    *    *<p>The default implementation returns    * {@link SqlMonotonicity#NOT_MONOTONIC}.    *    * @param scope Scope    */
 specifier|public
 name|SqlMonotonicity
 name|getMonotonicity

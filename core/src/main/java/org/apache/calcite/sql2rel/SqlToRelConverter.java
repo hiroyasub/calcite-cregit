@@ -16774,6 +16774,11 @@ operator|instanceof
 name|List
 condition|)
 block|{
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unchecked"
+argument_list|)
 name|List
 argument_list|<
 name|SqlNode

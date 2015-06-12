@@ -125,6 +125,8 @@ expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
 comment|// implement SqlValidatorNamespace, overriding return type
+annotation|@
+name|Override
 specifier|public
 name|SqlSelect
 name|getNode

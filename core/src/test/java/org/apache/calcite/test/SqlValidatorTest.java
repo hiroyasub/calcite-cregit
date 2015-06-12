@@ -11206,8 +11206,6 @@ expr_stmt|;
 block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-754">[CALCITE-754]    * Validator error when resolving OVER clause of JOIN query</a>. */
 annotation|@
-name|Ignore
-annotation|@
 name|Test
 specifier|public
 name|void
