@@ -303,6 +303,18 @@ name|junit
 operator|.
 name|Assert
 operator|.
+name|assertFalse
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
 name|assertThat
 import|;
 end_import
@@ -316,6 +328,132 @@ specifier|public
 class|class
 name|LatticeTest
 block|{
+specifier|private
+specifier|static
+specifier|final
+name|String
+name|SALES_LATTICE
+init|=
+literal|"{\n"
+operator|+
+literal|"  name: 'star',\n"
+operator|+
+literal|"  sql: [\n"
+operator|+
+literal|"    'select 1 from \"foodmart\".\"sales_fact_1997\" as \"s\"',\n"
+operator|+
+literal|"    'join \"foodmart\".\"product\" as \"p\" using (\"product_id\")',\n"
+operator|+
+literal|"    'join \"foodmart\".\"time_by_day\" as \"t\" using (\"time_id\")',\n"
+operator|+
+literal|"    'join \"foodmart\".\"product_class\" as \"pc\" on \"p\".\"product_class_id\" = \"pc\".\"product_class_id\"'\n"
+operator|+
+literal|"  ],\n"
+operator|+
+literal|"  auto: false,\n"
+operator|+
+literal|"  algorithm: true,\n"
+operator|+
+literal|"  algorithmMaxMillis: 10000,\n"
+operator|+
+literal|"  rowCountEstimate: 86837,\n"
+operator|+
+literal|"  defaultMeasures: [ {\n"
+operator|+
+literal|"    agg: 'count'\n"
+operator|+
+literal|"  } ],\n"
+operator|+
+literal|"  tiles: [ {\n"
+operator|+
+literal|"    dimensions: [ 'the_year', ['t', 'quarter'] ],\n"
+operator|+
+literal|"   measures: [ {\n"
+operator|+
+literal|"      agg: 'sum',\n"
+operator|+
+literal|"      args: 'unit_sales'\n"
+operator|+
+literal|"    }, {\n"
+operator|+
+literal|"      agg: 'sum',\n"
+operator|+
+literal|"      args: 'store_sales'\n"
+operator|+
+literal|"    }, {\n"
+operator|+
+literal|"      agg: 'count'\n"
+operator|+
+literal|"    } ]\n"
+operator|+
+literal|"  } ]\n"
+operator|+
+literal|"}\n"
+decl_stmt|;
+specifier|private
+specifier|static
+specifier|final
+name|String
+name|INVENTORY_LATTICE
+init|=
+literal|"{\n"
+operator|+
+literal|"  name: 'warehouse',\n"
+operator|+
+literal|"  sql: [\n"
+operator|+
+literal|"  'select 1 from \"foodmart\".\"inventory_fact_1997\" as \"s\"',\n"
+operator|+
+literal|"  'join \"foodmart\".\"product\" as \"p\" using (\"product_id\")',\n"
+operator|+
+literal|"  'join \"foodmart\".\"time_by_day\" as \"t\" using (\"time_id\")',\n"
+operator|+
+literal|"  'join \"foodmart\".\"warehouse\" as \"w\" using (\"warehouse_id\")'\n"
+operator|+
+literal|"  ],\n"
+operator|+
+literal|"  auto: false,\n"
+operator|+
+literal|"  algorithm: true,\n"
+operator|+
+literal|"  algorithmMaxMillis: 10000,\n"
+operator|+
+literal|"  rowCountEstimate: 4070,\n"
+operator|+
+literal|"  defaultMeasures: [ {\n"
+operator|+
+literal|"    agg: 'count'\n"
+operator|+
+literal|"  } ],\n"
+operator|+
+literal|"  tiles: [ {\n"
+operator|+
+literal|"    dimensions: [ 'the_year', 'warehouse_name'],\n"
+operator|+
+literal|"    measures: [ {\n"
+operator|+
+literal|"      agg: 'sum',\n"
+operator|+
+literal|"      args: 'store_invoice'\n"
+operator|+
+literal|"    }, {\n"
+operator|+
+literal|"      agg: 'sum',\n"
+operator|+
+literal|"      args: 'supply_time'\n"
+operator|+
+literal|"    }, {\n"
+operator|+
+literal|"      agg: 'sum',\n"
+operator|+
+literal|"      args: 'warehouse_cost'\n"
+operator|+
+literal|"    } ]\n"
+operator|+
+literal|"  } ]\n"
+operator|+
+literal|"}\n"
+decl_stmt|;
 specifier|private
 name|CalciteAssert
 operator|.
@@ -2039,128 +2177,6 @@ name|testTwoLattices
 parameter_list|()
 block|{
 specifier|final
-name|String
-name|sales_lattice
-init|=
-literal|"{\n"
-operator|+
-literal|"  name: 'star',\n"
-operator|+
-literal|"  sql: [\n"
-operator|+
-literal|"    'select 1 from \"foodmart\".\"sales_fact_1997\" as \"s\"',\n"
-operator|+
-literal|"    'join \"foodmart\".\"product\" as \"p\" using (\"product_id\")',\n"
-operator|+
-literal|"    'join \"foodmart\".\"time_by_day\" as \"t\" using (\"time_id\")',\n"
-operator|+
-literal|"    'join \"foodmart\".\"product_class\" as \"pc\" on \"p\".\"product_class_id\" = \"pc\".\"product_class_id\"'\n"
-operator|+
-literal|"  ],\n"
-operator|+
-literal|"  auto: false,\n"
-operator|+
-literal|"  algorithm: true,\n"
-operator|+
-literal|"  algorithmMaxMillis: 10000,\n"
-operator|+
-literal|"  rowCountEstimate: 86837,\n"
-operator|+
-literal|"  defaultMeasures: [ {\n"
-operator|+
-literal|"    agg: 'count'\n"
-operator|+
-literal|"  } ],\n"
-operator|+
-literal|"  tiles: [ {\n"
-operator|+
-literal|"    dimensions: [ 'the_year', ['t', 'quarter'] ],\n"
-operator|+
-literal|"   measures: [ {\n"
-operator|+
-literal|"      agg: 'sum',\n"
-operator|+
-literal|"      args: 'unit_sales'\n"
-operator|+
-literal|"    }, {\n"
-operator|+
-literal|"      agg: 'sum',\n"
-operator|+
-literal|"      args: 'store_sales'\n"
-operator|+
-literal|"    }, {\n"
-operator|+
-literal|"      agg: 'count'\n"
-operator|+
-literal|"    } ]\n"
-operator|+
-literal|"  } ]\n"
-operator|+
-literal|"}\n"
-decl_stmt|;
-specifier|final
-name|String
-name|inventory_lattice
-init|=
-literal|"{\n"
-operator|+
-literal|"  name: 'warehouse',\n"
-operator|+
-literal|"  sql: [\n"
-operator|+
-literal|"  'select 1 from \"foodmart\".\"inventory_fact_1997\" as \"s\"',\n"
-operator|+
-literal|"  'join \"foodmart\".\"product\" as \"p\" using (\"product_id\")',\n"
-operator|+
-literal|"  'join \"foodmart\".\"time_by_day\" as \"t\" using (\"time_id\")',\n"
-operator|+
-literal|"  'join \"foodmart\".\"warehouse\" as \"w\" using (\"warehouse_id\")'\n"
-operator|+
-literal|"  ],\n"
-operator|+
-literal|"  auto: false,\n"
-operator|+
-literal|"  algorithm: true,\n"
-operator|+
-literal|"  algorithmMaxMillis: 10000,\n"
-operator|+
-literal|"  rowCountEstimate: 86837,\n"
-operator|+
-literal|"  defaultMeasures: [ {\n"
-operator|+
-literal|"    agg: 'count'\n"
-operator|+
-literal|"  } ],\n"
-operator|+
-literal|"  tiles: [ {\n"
-operator|+
-literal|"    dimensions: [ 'the_year', 'warehouse_name'],\n"
-operator|+
-literal|"    measures: [ {\n"
-operator|+
-literal|"      agg: 'sum',\n"
-operator|+
-literal|"      args: 'store_invoice'\n"
-operator|+
-literal|"    }, {\n"
-operator|+
-literal|"      agg: 'sum',\n"
-operator|+
-literal|"      args: 'supply_time'\n"
-operator|+
-literal|"    }, {\n"
-operator|+
-literal|"      agg: 'sum',\n"
-operator|+
-literal|"      args: 'warehouse_cost'\n"
-operator|+
-literal|"    } ]\n"
-operator|+
-literal|"  } ]\n"
-operator|+
-literal|"}\n"
-decl_stmt|;
-specifier|final
 name|AtomicInteger
 name|counter
 init|=
@@ -2170,9 +2186,9 @@ argument_list|()
 decl_stmt|;
 name|modelWithLattices
 argument_list|(
-name|sales_lattice
+name|SALES_LATTICE
 argument_list|,
-name|inventory_lattice
+name|INVENTORY_LATTICE
 argument_list|)
 operator|.
 name|query
@@ -2216,6 +2232,55 @@ name|equalTo
 argument_list|(
 literal|1
 argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-760">[CALCITE-760]    * Aggregate recommender blows up if row count estimate is too high</a>. */
+annotation|@
+name|Ignore
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testLatticeWithBadRowCountEstimate
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|lattice
+init|=
+name|INVENTORY_LATTICE
+operator|.
+name|replace
+argument_list|(
+literal|"rowCountEstimate: 4070,"
+argument_list|,
+literal|"rowCountEstimate: 4074070,"
+argument_list|)
+decl_stmt|;
+name|assertFalse
+argument_list|(
+name|lattice
+operator|.
+name|equals
+argument_list|(
+name|INVENTORY_LATTICE
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|modelWithLattices
+argument_list|(
+name|lattice
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"values 1\n"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"EXPR$0=1\n"
 argument_list|)
 expr_stmt|;
 block|}
