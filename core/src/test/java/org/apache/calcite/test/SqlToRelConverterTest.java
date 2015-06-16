@@ -2930,6 +2930,27 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/**    * [CALCITE-753] Test aggregate operators do not derive row types with duplicate column names    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAggNoDuplicateColumnNames
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"SELECT empno, EXPR$2, COUNT(empno) FROM (SELECT empno, deptno AS EXPR$2 "
+operator|+
+literal|"FROM emp) GROUP BY empno, EXPR$2"
+argument_list|)
+operator|.
+name|convertsTo
+argument_list|(
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public
