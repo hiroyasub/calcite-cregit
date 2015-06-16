@@ -3375,6 +3375,233 @@ literal|"select p1 is not distinct from p0 from (values (2, cast(null as integer
 argument_list|)
 expr_stmt|;
 block|}
+comment|// see HIVE-9645
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testReduceConstantsNullEqualsOne
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+name|HepProgram
+name|program
+init|=
+operator|new
+name|HepProgramBuilder
+argument_list|()
+operator|.
+name|addRuleInstance
+argument_list|(
+name|ReduceExpressionsRule
+operator|.
+name|PROJECT_INSTANCE
+argument_list|)
+operator|.
+name|addRuleInstance
+argument_list|(
+name|ReduceExpressionsRule
+operator|.
+name|FILTER_INSTANCE
+argument_list|)
+operator|.
+name|addRuleInstance
+argument_list|(
+name|ReduceExpressionsRule
+operator|.
+name|JOIN_INSTANCE
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+name|checkPlanning
+argument_list|(
+name|program
+argument_list|,
+literal|"select count(1) from emp where cast(null as integer) = 1"
+argument_list|)
+expr_stmt|;
+block|}
+comment|// see HIVE-9644
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testReduceConstantsCaseEquals
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+name|HepProgram
+name|program
+init|=
+operator|new
+name|HepProgramBuilder
+argument_list|()
+operator|.
+name|addRuleInstance
+argument_list|(
+name|ReduceExpressionsRule
+operator|.
+name|PROJECT_INSTANCE
+argument_list|)
+operator|.
+name|addRuleInstance
+argument_list|(
+name|ReduceExpressionsRule
+operator|.
+name|FILTER_INSTANCE
+argument_list|)
+operator|.
+name|addRuleInstance
+argument_list|(
+name|ReduceExpressionsRule
+operator|.
+name|JOIN_INSTANCE
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+comment|// Equivalent to 'deptno = 10'
+name|checkPlanning
+argument_list|(
+name|program
+argument_list|,
+literal|"select count(1) from emp\n"
+operator|+
+literal|"where case deptno\n"
+operator|+
+literal|"  when 20 then 2\n"
+operator|+
+literal|"  when 10 then 1\n"
+operator|+
+literal|"  else 3 end = 1"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testReduceConstantsCaseEquals2
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+name|HepProgram
+name|program
+init|=
+operator|new
+name|HepProgramBuilder
+argument_list|()
+operator|.
+name|addRuleInstance
+argument_list|(
+name|ReduceExpressionsRule
+operator|.
+name|PROJECT_INSTANCE
+argument_list|)
+operator|.
+name|addRuleInstance
+argument_list|(
+name|ReduceExpressionsRule
+operator|.
+name|FILTER_INSTANCE
+argument_list|)
+operator|.
+name|addRuleInstance
+argument_list|(
+name|ReduceExpressionsRule
+operator|.
+name|JOIN_INSTANCE
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+comment|// Equivalent to 'case when deptno = 20 then false
+comment|//                     when deptno = 10 then true
+comment|//                     else null end'
+name|checkPlanning
+argument_list|(
+name|program
+argument_list|,
+literal|"select count(1) from emp\n"
+operator|+
+literal|"where case deptno\n"
+operator|+
+literal|"  when 20 then 2\n"
+operator|+
+literal|"  when 10 then 1\n"
+operator|+
+literal|"  else cast(null as integer) end = 1"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testReduceConstantsCaseEquals3
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+name|HepProgram
+name|program
+init|=
+operator|new
+name|HepProgramBuilder
+argument_list|()
+operator|.
+name|addRuleInstance
+argument_list|(
+name|ReduceExpressionsRule
+operator|.
+name|PROJECT_INSTANCE
+argument_list|)
+operator|.
+name|addRuleInstance
+argument_list|(
+name|ReduceExpressionsRule
+operator|.
+name|FILTER_INSTANCE
+argument_list|)
+operator|.
+name|addRuleInstance
+argument_list|(
+name|ReduceExpressionsRule
+operator|.
+name|JOIN_INSTANCE
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+comment|// Equivalent to 'deptno = 30 or deptno = 10'
+name|checkPlanning
+argument_list|(
+name|program
+argument_list|,
+literal|"select count(1) from emp\n"
+operator|+
+literal|"where case deptno\n"
+operator|+
+literal|"  when 30 then 1\n"
+operator|+
+literal|"  when 20 then 2\n"
+operator|+
+literal|"  when 10 then 1\n"
+operator|+
+literal|"  when 30 then 111\n"
+operator|+
+literal|"  else 0 end = 1"
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public

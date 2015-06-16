@@ -167,6 +167,20 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|rex
+operator|.
+name|RexUtil
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|sql
 operator|.
 name|fun
@@ -1012,7 +1026,7 @@ name|testMaterializationReferencesTableInOtherSchema
 parameter_list|()
 block|{
 block|}
-comment|/** Unit test for logic functions    * {@link org.apache.calcite.plan.SubstitutionVisitor#mayBeSatisfiable} and    * {@link org.apache.calcite.plan.SubstitutionVisitor#simplify}. */
+comment|/** Unit test for logic functions    * {@link org.apache.calcite.plan.SubstitutionVisitor#mayBeSatisfiable} and    * {@link RexUtil#simplify}. */
 annotation|@
 name|Test
 specifier|public
@@ -1591,7 +1605,7 @@ specifier|final
 name|RexNode
 name|simple
 init|=
-name|SubstitutionVisitor
+name|RexUtil
 operator|.
 name|simplify
 argument_list|(
@@ -1636,7 +1650,7 @@ specifier|final
 name|RexNode
 name|simple
 init|=
-name|SubstitutionVisitor
+name|RexUtil
 operator|.
 name|simplify
 argument_list|(
