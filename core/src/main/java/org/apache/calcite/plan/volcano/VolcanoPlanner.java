@@ -2369,6 +2369,18 @@ if|if
 condition|(
 name|materialization
 operator|.
+name|starTable
+operator|!=
+literal|null
+condition|)
+block|{
+comment|// Materialization is a tile in a lattice. We will deal with it shortly.
+continue|continue;
+block|}
+if|if
+condition|(
+name|materialization
+operator|.
 name|table
 operator|!=
 literal|null
