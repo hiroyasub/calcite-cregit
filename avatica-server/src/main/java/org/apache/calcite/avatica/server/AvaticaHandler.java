@@ -224,7 +224,7 @@ name|response
 operator|.
 name|setContentType
 argument_list|(
-literal|"text/html;charset=utf-8"
+literal|"application/json;charset=utf-8"
 argument_list|)
 expr_stmt|;
 name|response
