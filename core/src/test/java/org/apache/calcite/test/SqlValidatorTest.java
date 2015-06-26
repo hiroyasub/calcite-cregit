@@ -10438,6 +10438,50 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testInvalidWindowFunctionWithGroupBy
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select max(^empno^) over () from emp\n"
+operator|+
+literal|"group by deptno"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Expression 'EMPNO' is not being grouped"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select max(deptno) over (partition by ^empno^) from emp\n"
+operator|+
+literal|"group by deptno"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Expression 'EMPNO' is not being grouped"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select rank() over (order by ^empno^) from emp\n"
+operator|+
+literal|"group by deptno"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Expression 'EMPNO' is not being grouped"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testInlineWinDef
 parameter_list|()
 block|{
