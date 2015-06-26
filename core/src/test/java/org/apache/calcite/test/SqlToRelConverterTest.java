@@ -3279,6 +3279,110 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-770">[CALCITE-770]    * window aggregate and ranking functions with grouped aggregates</a>.    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWindowAggWithGroupBy
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select min(deptno), rank() over (order by empno),\n"
+operator|+
+literal|"max(empno) over (partition by deptno)\n"
+operator|+
+literal|"from emp group by deptno, empno\n"
+argument_list|)
+operator|.
+name|convertsTo
+argument_list|(
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-770">[CALCITE-770]    * variant involving joins</a>.    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWindowAggWithGroupByAndJoin
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select min(d.deptno), rank() over (order by e.empno),\n"
+operator|+
+literal|" max(e.empno) over (partition by e.deptno)\n"
+operator|+
+literal|"from emp e, dept d\n"
+operator|+
+literal|"where e.deptno = d.deptno\n"
+operator|+
+literal|"group by d.deptno, e.empno, e.deptno\n"
+argument_list|)
+operator|.
+name|convertsTo
+argument_list|(
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-770">[CALCITE-770]    * variant involving HAVING clause</a>.    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWindowAggWithGroupByAndHaving
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select min(deptno), rank() over (order by empno),\n"
+operator|+
+literal|"max(empno) over (partition by deptno)\n"
+operator|+
+literal|"from emp group by deptno, empno\n"
+operator|+
+literal|"having empno< 10 and min(deptno)< 20\n"
+argument_list|)
+operator|.
+name|convertsTo
+argument_list|(
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-770">[CALCITE-770]    * variant involving join with subquery that contains window function and    * GROUP BY</a>.    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWindowAggInSubqueryJoin
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select T.x, T.y, T.z, emp.empno from (select min(deptno) as x,\n"
+operator|+
+literal|"   rank() over (order by empno) as y,\n"
+operator|+
+literal|"   max(empno) over (partition by deptno) as z\n"
+operator|+
+literal|"   from emp group by deptno, empno) as T\n"
+operator|+
+literal|" inner join emp on T.x = emp.deptno\n"
+operator|+
+literal|" and T.y = emp.empno\n"
+argument_list|)
+operator|.
+name|convertsTo
+argument_list|(
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/**    * Visitor that checks that every {@link RelNode} in a tree is valid.    *    * @see RelNode#isValid(boolean)    */
 specifier|public
 specifier|static
