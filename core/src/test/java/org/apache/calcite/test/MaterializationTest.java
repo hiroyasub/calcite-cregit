@@ -982,6 +982,40 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testOrderByQueryOnProjectView
+parameter_list|()
+block|{
+name|checkMaterialize
+argument_list|(
+literal|"select \"deptno\", \"empid\" from \"emps\""
+argument_list|,
+literal|"select \"empid\" from \"emps\" order by \"deptno\""
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Ignore
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testOrderByQueryOnOrderByView
+parameter_list|()
+block|{
+name|checkMaterialize
+argument_list|(
+literal|"select \"deptno\", \"empid\" from \"emps\" order by \"deptno\""
+argument_list|,
+literal|"select \"empid\" from \"emps\" order by \"deptno\""
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Ignore
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testDifferentColumnNames
 parameter_list|()
 block|{
