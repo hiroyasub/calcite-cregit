@@ -383,7 +383,10 @@ name|viewSchemaPath
 parameter_list|,
 specifier|final
 name|String
-name|tableName
+name|suggestedTableName
+parameter_list|,
+name|boolean
+name|existing
 parameter_list|)
 block|{
 return|return
@@ -396,7 +399,9 @@ name|viewSql
 argument_list|,
 name|viewSchemaPath
 argument_list|,
-name|tableName
+name|suggestedTableName
+argument_list|,
+name|existing
 argument_list|)
 return|;
 block|}
@@ -514,6 +519,9 @@ name|viewSchemaPath
 parameter_list|,
 name|String
 name|suggestedTableName
+parameter_list|,
+name|boolean
+name|existing
 parameter_list|)
 block|{
 name|super
@@ -555,6 +563,8 @@ argument_list|,
 name|suggestedTableName
 argument_list|,
 literal|true
+argument_list|,
+name|existing
 argument_list|)
 argument_list|)
 expr_stmt|;
