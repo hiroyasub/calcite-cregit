@@ -45,15 +45,11 @@ end_import
 
 begin_import
 import|import
-name|com
+name|java
 operator|.
-name|google
+name|util
 operator|.
-name|common
-operator|.
-name|collect
-operator|.
-name|Lists
+name|ArrayList
 import|;
 end_import
 
@@ -68,7 +64,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Schema schema element.  *  * @see JsonRoot Description of schema elements  */
+comment|/**  * Schema schema element.  *  *<p>Occurs within {@link JsonRoot#schemas}.  *  * @see JsonRoot Description of schema elements  */
 end_comment
 
 begin_class
@@ -151,11 +147,12 @@ specifier|abstract
 class|class
 name|JsonSchema
 block|{
+comment|/** Name of the schema.    *    *<p>Required.    *    * @see JsonRoot#defaultSchema    */
 specifier|public
 name|String
 name|name
 decl_stmt|;
-comment|/** SQL-path. May be null, or a list, each element of which is a string or a    * string-list. */
+comment|/** SQL path that is used to resolve functions used in this schema.    *    *<p>May be null, or a list, each element of which is a string or a    * string-list.    *    *<p>For example,    *    *<blockquote><pre>path: [ ['usr', 'lib'], 'lib' ]</pre></blockquote>    *    *<p>declares a path with two elements: the schema â/usr/libâ and the schema    * â/libâ. Most schemas are at the top level, and for these you can use a    * string.    */
 specifier|public
 name|List
 argument_list|<
@@ -163,6 +160,7 @@ name|Object
 argument_list|>
 name|path
 decl_stmt|;
+comment|/**    * List of tables in this schema that are materializations of queries.    *    *<p>The list may be empty.    */
 specifier|public
 specifier|final
 name|List
@@ -171,9 +169,9 @@ name|JsonMaterialization
 argument_list|>
 name|materializations
 init|=
-name|Lists
-operator|.
-name|newArrayList
+operator|new
+name|ArrayList
+argument_list|<>
 argument_list|()
 decl_stmt|;
 specifier|public
@@ -184,9 +182,9 @@ name|JsonLattice
 argument_list|>
 name|lattices
 init|=
-name|Lists
-operator|.
-name|newArrayList
+operator|new
+name|ArrayList
+argument_list|<>
 argument_list|()
 decl_stmt|;
 comment|/** Whether to cache metadata (tables, functions and sub-schemas) generated    * by this schema. Default value is {@code true}.    *    *<p>If {@code false}, Calcite will go back to the schema each time it needs    * metadata, for example, each time it needs a list of tables in order to    * validate a query against the schema.</p>    *    *<p>If {@code true}, Calcite will cache the metadata the first time it reads    * it. This can lead to better performance, especially if name-matching is    * case-insensitive    * (see {@link org.apache.calcite.config.Lex#caseSensitive}).    * However, it also leads to the problem of cache staleness.    * A particular schema implementation can override the    * {@link org.apache.calcite.schema.Schema#contentsHaveChangedSince(long, long)}    * method to tell Calcite when it should consider its cache to be out of    * date.</p>    *    *<p>Tables, functions and sub-schemas explicitly created in a schema are    * not affected by this caching mechanism. They always appear in the schema    * immediately, and are never flushed.</p>    */

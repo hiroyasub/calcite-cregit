@@ -26,7 +26,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Custom table schema element.  *  * @see JsonRoot Description of schema elements  */
+comment|/**  * Custom table schema element.  *  *<p>Like base class {@link JsonTable},  * occurs within {@link JsonMapSchema#tables}.  *  * @see JsonRoot Description of schema elements  */
 end_comment
 
 begin_class
@@ -36,12 +36,12 @@ name|JsonCustomTable
 extends|extends
 name|JsonTable
 block|{
-comment|/** Name of the factory class for this table. Must implement interface    * {@link org.apache.calcite.schema.TableFactory} and have a public default    * constructor. */
+comment|/** Name of the factory class for this table.    *    *<p>Required. Must implement interface    * {@link org.apache.calcite.schema.TableFactory} and have a public default    * constructor.    */
 specifier|public
 name|String
 name|factory
 decl_stmt|;
-comment|/** Operand. May be a JSON object (represented as Map) or null. */
+comment|/** Contains attributes to be passed to the factory.    *    *<p>May be a JSON object (represented as Map) or null.    */
 specifier|public
 name|Map
 argument_list|<

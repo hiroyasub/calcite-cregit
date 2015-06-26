@@ -16,7 +16,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * Element that describes how a table is a materialization of a query.  *  * @see JsonRoot Description of schema elements  */
+comment|/**  * Element that describes how a table is a materialization of a query.  *  *<p>Occurs within {@link JsonSchema#materializations}.  *  * @see JsonRoot Description of schema elements  */
 end_comment
 
 begin_class
@@ -32,6 +32,7 @@ specifier|public
 name|String
 name|table
 decl_stmt|;
+comment|/** SQL query that defines the materialization.    *    *<p>Must be a string or a list of strings (which are concatenated into a    * multi-line SQL string, separated by newlines).    */
 specifier|public
 name|Object
 name|sql

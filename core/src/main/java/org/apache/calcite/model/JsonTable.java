@@ -45,15 +45,11 @@ end_import
 
 begin_import
 import|import
-name|com
+name|java
 operator|.
-name|google
+name|util
 operator|.
-name|common
-operator|.
-name|collect
-operator|.
-name|Lists
+name|ArrayList
 import|;
 end_import
 
@@ -68,7 +64,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Table schema element.  *  * @see JsonRoot Description of schema elements  */
+comment|/**  * Table schema element.  *  *<p>Occurs within {@link JsonMapSchema#tables}.  *  * @see JsonRoot Description of schema elements  */
 end_comment
 
 begin_class
@@ -135,10 +131,12 @@ specifier|abstract
 class|class
 name|JsonTable
 block|{
+comment|/** Name of this table.    *    *<p>Required. Must be unique within the schema.    */
 specifier|public
 name|String
 name|name
 decl_stmt|;
+comment|/** Definition of the columns of this table.    *    *<p>Required for some kinds of type,    * optional for others (such as {@link JsonView}).    */
 specifier|public
 specifier|final
 name|List
@@ -147,9 +145,9 @@ name|JsonColumn
 argument_list|>
 name|columns
 init|=
-name|Lists
-operator|.
-name|newArrayList
+operator|new
+name|ArrayList
+argument_list|<>
 argument_list|()
 decl_stmt|;
 comment|/** Information about whether the table can be streamed, and if so, whether    * the history of the table is also available. */

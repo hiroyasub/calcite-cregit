@@ -16,7 +16,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * JSON object representing a column.  *  * @see JsonRoot Description of JSON schema elements  */
+comment|/**  * JSON object representing a column.  *  *<p>Occurs within {@link JsonTable#columns}.  *  * @see JsonRoot Description of JSON schema elements  */
 end_comment
 
 begin_class
@@ -24,6 +24,7 @@ specifier|public
 class|class
 name|JsonColumn
 block|{
+comment|/** Column name.    *    * Required, and must be unique within the table.    */
 specifier|public
 name|String
 name|name

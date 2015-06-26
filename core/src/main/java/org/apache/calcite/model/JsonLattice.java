@@ -17,15 +17,11 @@ end_package
 
 begin_import
 import|import
-name|com
+name|java
 operator|.
-name|google
+name|util
 operator|.
-name|common
-operator|.
-name|collect
-operator|.
-name|Lists
+name|ArrayList
 import|;
 end_import
 
@@ -40,7 +36,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Element that describes a star schema and provides a framework for defining,  * recognizing, and recommending materialized views at various levels of  * aggregation.  *  * @see JsonRoot Description of schema elements  */
+comment|/**  * Element that describes a star schema and provides a framework for defining,  * recognizing, and recommending materialized views at various levels of  * aggregation.  *  *<p>Occurs within {@link JsonSchema#lattices}.  *  * @see JsonRoot Description of schema elements  */
 end_comment
 
 begin_class
@@ -48,30 +44,31 @@ specifier|public
 class|class
 name|JsonLattice
 block|{
+comment|/** The name of this lattice.    *    *<p>Required.    */
 specifier|public
 name|String
 name|name
 decl_stmt|;
-comment|/** SQL query that defines the lattice.    *    *<p>Must be a string or a list of strings (which are concatenated separated    * by newlines).    */
+comment|/** SQL query that defines the lattice.    *    *<p>Must be a string or a list of strings (which are concatenated into a    * multi-line SQL string, separated by newlines).    *    *<p>The structure of the SQL statement, and in particular the order of    * items in the FROM clause, defines the fact table, dimension tables, and    * join paths for this lattice.    */
 specifier|public
 name|Object
 name|sql
 decl_stmt|;
-comment|/** Whether to create in-memory materialized aggregates on demand.    *    *<p>Default is true. */
+comment|/** Whether to materialize tiles on demand as queries are executed.    *    *<p>Optional; default is true.    */
 specifier|public
 name|boolean
 name|auto
 init|=
 literal|true
 decl_stmt|;
-comment|/** Whether to use an algorithm to suggest aggregates.    *    *<p>Default is false. */
+comment|/** Whether to use an optimization algorithm to suggest and populate an    * initial set of tiles.    *    *<p>Optional; default is false.    */
 specifier|public
 name|boolean
 name|algorithm
 init|=
 literal|false
 decl_stmt|;
-comment|/** Maximum time to run the algorithm. Default is -1, meaning no timeout. */
+comment|/** Maximum time (in milliseconds) to run the algorithm.    *    *<p>Optional; default is -1, meaning no timeout.    *    *<p>When the timeout is reached, Calcite uses the best result that has    * been obtained so far.    */
 specifier|public
 name|long
 name|algorithmMaxMillis
@@ -98,12 +95,12 @@ name|JsonTile
 argument_list|>
 name|tiles
 init|=
-name|Lists
-operator|.
-name|newArrayList
+operator|new
+name|ArrayList
+argument_list|<>
 argument_list|()
 decl_stmt|;
-comment|/** List of measures that a tile should have by default.    *    *<p>A tile can define its own measures, including measures not in this list.    *    *<p>The default list is just count. */
+comment|/** List of measures that a tile should have by default.    *    *<p>A tile can define its own measures, including measures not in this list.    *    *<p>Optional. The default list is just "count(*)".    */
 specifier|public
 name|List
 argument_list|<

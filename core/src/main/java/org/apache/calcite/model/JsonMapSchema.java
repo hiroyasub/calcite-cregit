@@ -36,7 +36,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * JSON object representing a schema whose tables are explicitly specified.  *  * @see JsonRoot Description of JSON schema elements  */
+comment|/**  * JSON object representing a schema whose tables are explicitly specified.  *  *<p>Like the base class {@link JsonSchema},  * occurs within {@link JsonRoot#schemas}.  *  * @see JsonRoot Description of JSON schema elements  */
 end_comment
 
 begin_class
@@ -46,6 +46,7 @@ name|JsonMapSchema
 extends|extends
 name|JsonSchema
 block|{
+comment|/** Tables in this schema.    *    *<p>The list may be empty.    */
 specifier|public
 specifier|final
 name|List
@@ -56,11 +57,10 @@ name|tables
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|JsonTable
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
+comment|/** Functions in this schema.    *    *<p>The list may be empty.    */
 specifier|public
 specifier|final
 name|List
@@ -71,9 +71,7 @@ name|functions
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|JsonFunction
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 annotation|@

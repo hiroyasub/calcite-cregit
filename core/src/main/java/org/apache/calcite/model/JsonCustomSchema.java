@@ -26,7 +26,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * JSON schema element that represents a custom schema.  *  * @see org.apache.calcite.model.JsonRoot Description of schema elements  */
+comment|/**  * JSON schema element that represents a custom schema.  *  *<p>Like the base class {@link JsonSchema},  * occurs within {@link JsonRoot#schemas}.  *  * @see org.apache.calcite.model.JsonRoot Description of schema elements  */
 end_comment
 
 begin_class
@@ -36,12 +36,12 @@ name|JsonCustomSchema
 extends|extends
 name|JsonMapSchema
 block|{
-comment|/** Name of the factory class for this schema. Must implement interface    * {@link org.apache.calcite.schema.SchemaFactory} and have a public default    * constructor. */
+comment|/** Name of the factory class for this schema.    *    *<p>Required. Must implement interface    * {@link org.apache.calcite.schema.SchemaFactory} and have a public default    * constructor.    */
 specifier|public
 name|String
 name|factory
 decl_stmt|;
-comment|/** Operand. May be a JSON object (represented as Map) or null. */
+comment|/** Contains attributes to be passed to the factory.    *    *<p>May be a JSON object (represented as Map) or null.    */
 specifier|public
 name|Map
 argument_list|<

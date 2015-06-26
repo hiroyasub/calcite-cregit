@@ -24,6 +24,7 @@ specifier|public
 class|class
 name|JsonMeasure
 block|{
+comment|/** The name of an aggregate function.    *    *<p>Required. Usually {@code count}, {@code sum},    * {@code min}, {@code max}.    */
 specifier|public
 name|String
 name|agg

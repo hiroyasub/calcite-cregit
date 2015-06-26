@@ -34,18 +34,22 @@ specifier|public
 class|class
 name|JsonFunction
 block|{
+comment|/** Name of this function.    *    *<p>Required.    */
 specifier|public
 name|String
 name|name
 decl_stmt|;
+comment|/** Name of the class that implements this function.    *    *<p>Required.    */
 specifier|public
 name|String
 name|className
 decl_stmt|;
+comment|/** Name of the method that implements this function.    *    *<p>Optional.    *    *<p>If specified, the method must exist (case-sensitive) and Calcite    * will create a scalar function. The method may be static or non-static, but    * if non-static, the class must have a public constructor with no parameters.    *    *<p>If "*", Calcite creates a function for every method    * in this class.    *    *<p>If not specified, Calcite looks for a method called "eval", and    * if found, creates a a table macro or scalar function.    * It also looks for methods "init", "add", "merge", "result", and    * if found, creates an aggregate function.    */
 specifier|public
 name|String
 name|methodName
 decl_stmt|;
+comment|/** Path for resolving this function.    *    *<p>Optional.    */
 specifier|public
 name|List
 argument_list|<

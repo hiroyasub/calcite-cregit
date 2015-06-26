@@ -16,7 +16,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * JSON object representing a schema that maps to a JDBC database.  *  * @see JsonRoot Description of JSON schema elements  */
+comment|/**  * JSON object representing a schema that maps to a JDBC database.  *  *<p>Like the base class {@link JsonSchema},  * occurs within {@link JsonRoot#schemas}.  *  * @see JsonRoot Description of JSON schema elements  */
 end_comment
 
 begin_class
@@ -26,26 +26,32 @@ name|JsonJdbcSchema
 extends|extends
 name|JsonSchema
 block|{
+comment|/** The name of the JDBC driver class.    *    *<p>Optional. If not specified, uses whichever class the JDBC    * {@link java.sql.DriverManager} chooses.    */
 specifier|public
 name|String
 name|jdbcDriver
 decl_stmt|;
+comment|/** JDBC connect string, for example âjdbc:mysql://localhost/foodmartâ.    *    *<p>Optional.    */
 specifier|public
 name|String
 name|jdbcUrl
 decl_stmt|;
+comment|/** JDBC user name.    *    *<p>Optional.    */
 specifier|public
 name|String
 name|jdbcUser
 decl_stmt|;
+comment|/** JDBC connect string, for example âjdbc:mysql://localhost/foodmartâ.    *    *<p>Optional.    */
 specifier|public
 name|String
 name|jdbcPassword
 decl_stmt|;
+comment|/** Name of the initial catalog in the JDBC data source.    *    *<p>Optional.    */
 specifier|public
 name|String
 name|jdbcCatalog
 decl_stmt|;
+comment|/** Name of the initial schema in the JDBC data source.    *    *<p>Optional.    */
 specifier|public
 name|String
 name|jdbcSchema

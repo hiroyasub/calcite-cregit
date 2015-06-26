@@ -26,7 +26,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * View schema element.  *  * @see JsonRoot Description of schema elements  */
+comment|/**  * View schema element.  *  *<p>Like base class {@link JsonTable},  * occurs within {@link JsonMapSchema#tables}.  *  *<h2>Modifiable views</h2>  *  *<p>A view is modifiable if contains only SELECT, FROM, WHERE (no JOIN,  * aggregation or sub-queries) and every column:  *  *<ul>  *<li>is specified once in the SELECT clause; or  *<li>occurs in the WHERE clause with a column = literal predicate; or  *<li>is nullable.  *</ul>  *  *<p>The second clause allows Calcite to automatically provide the correct  * value for hidden columns. It is useful in, say, a multi-tenant environment,  * where the {@code tenantId} column is hidden, mandatory (NOT NULL), and has a  * constant value for a particular view.  *  *<p>Errors regarding modifiable views:  *  *<ul>  *<li>If a view is marked modifiable: true and is not modifiable, Calcite  *   throws an error while reading the schema.  *<li>If you submit an INSERT, UPDATE or UPSERT command to a non-modifiable  *   view, Calcite throws an error when validating the statement.  *<li>If a DML statement creates a row that would not appear in the view  *   (for example, a row in female_emps, above, with gender = 'M'), Calcite  *   throws an error when executing the statement.  *</ul>  *  * @see JsonRoot Description of schema elements  */
 end_comment
 
 begin_class
@@ -36,12 +36,12 @@ name|JsonView
 extends|extends
 name|JsonTable
 block|{
-comment|/** SQL query that is the definition of the view. */
+comment|/** SQL query that is the definition of the view.    *    *<p>Must be a string or a list of strings (which are concatenated into a    * multi-line SQL string, separated by newlines).    */
 specifier|public
 name|Object
 name|sql
 decl_stmt|;
-comment|/** Schema name(s) to use when resolving query. If not specified, defaults    * to current schema. */
+comment|/** Schema name(s) to use when resolving query.    *    *<p>If not specified, defaults to current schema.    */
 specifier|public
 name|List
 argument_list|<

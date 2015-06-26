@@ -16,7 +16,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * Information about whether a table allows streaming.  *  * @see org.apache.calcite.model.JsonRoot Description of schema elements  * @see org.apache.calcite.model.JsonTable#stream  */
+comment|/**  * Information about whether a table allows streaming.  *  *<p>Occurs within {@link JsonTable#stream}.  *  * @see org.apache.calcite.model.JsonRoot Description of schema elements  * @see org.apache.calcite.model.JsonTable#stream  */
 end_comment
 
 begin_class
@@ -24,14 +24,14 @@ specifier|public
 class|class
 name|JsonStream
 block|{
-comment|/** Whether the table allows streaming. */
+comment|/** Whether the table allows streaming.    *    *<p>Optional; default true.    */
 specifier|public
 name|boolean
 name|stream
 init|=
 literal|true
 decl_stmt|;
-comment|/** Whether the history of the table is available. */
+comment|/** Whether the history of the table is available.    *    *<p>Optional; default false.    */
 specifier|public
 name|boolean
 name|history
