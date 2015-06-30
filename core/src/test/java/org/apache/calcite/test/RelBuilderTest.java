@@ -193,6 +193,22 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|rel
+operator|.
+name|type
+operator|.
+name|RelDataTypeField
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|rex
 operator|.
 name|RexInputRef
@@ -1660,7 +1676,7 @@ parameter_list|()
 block|{
 comment|// Equivalent SQL:
 comment|//   SELECT DISTINCT *
-comment|//   FROM emp
+comment|//   FROM dept
 specifier|final
 name|RelBuilder
 name|builder
@@ -1683,7 +1699,7 @@ name|builder
 operator|.
 name|scan
 argument_list|(
-literal|"EMP"
+literal|"DEPT"
 argument_list|)
 operator|.
 name|distinct
@@ -1701,9 +1717,9 @@ argument_list|)
 argument_list|,
 name|is
 argument_list|(
-literal|"LogicalAggregate(group=[{}])\n"
+literal|"LogicalAggregate(group=[{0, 1, 2}])\n"
 operator|+
-literal|"  LogicalTableScan(table=[[scott, EMP]])\n"
+literal|"  LogicalTableScan(table=[[scott, DEPT]])\n"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -2174,11 +2190,11 @@ name|expected
 init|=
 literal|"LogicalJoin(condition=[=($7, $0)], joinType=[inner])\n"
 operator|+
-literal|"  LogicalTableScan(table=[[scott, DEPT]])\n"
-operator|+
 literal|"  LogicalFilter(condition=[IS NULL($6)])\n"
 operator|+
 literal|"    LogicalTableScan(table=[[scott, EMP]])\n"
+operator|+
+literal|"  LogicalTableScan(table=[[scott, DEPT]])\n"
 decl_stmt|;
 name|assertThat
 argument_list|(
@@ -2310,9 +2326,341 @@ name|expected
 init|=
 literal|"LogicalJoin(condition=[true], joinType=[inner])\n"
 operator|+
-literal|"  LogicalTableScan(table=[[scott, DEPT]])\n"
-operator|+
 literal|"  LogicalTableScan(table=[[scott, EMP]])\n"
+operator|+
+literal|"  LogicalTableScan(table=[[scott, DEPT]])\n"
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|str
+argument_list|(
+name|root
+argument_list|)
+argument_list|,
+name|is
+argument_list|(
+name|expected
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAlias
+parameter_list|()
+block|{
+comment|// Equivalent SQL:
+comment|//   SELECT *
+comment|//   FROM emp AS e, dept
+comment|//   WHERE e.deptno = dept.deptno
+specifier|final
+name|RelBuilder
+name|builder
+init|=
+name|RelBuilder
+operator|.
+name|create
+argument_list|(
+name|config
+argument_list|()
+operator|.
+name|build
+argument_list|()
+argument_list|)
+decl_stmt|;
+name|RelNode
+name|root
+init|=
+name|builder
+operator|.
+name|scan
+argument_list|(
+literal|"EMP"
+argument_list|)
+operator|.
+name|as
+argument_list|(
+literal|"e"
+argument_list|)
+operator|.
+name|scan
+argument_list|(
+literal|"DEPT"
+argument_list|)
+operator|.
+name|join
+argument_list|(
+name|JoinRelType
+operator|.
+name|LEFT
+argument_list|)
+operator|.
+name|filter
+argument_list|(
+name|builder
+operator|.
+name|equals
+argument_list|(
+name|builder
+operator|.
+name|field
+argument_list|(
+literal|"e"
+argument_list|,
+literal|"DEPTNO"
+argument_list|)
+argument_list|,
+name|builder
+operator|.
+name|field
+argument_list|(
+literal|"DEPT"
+argument_list|,
+literal|"DEPTNO"
+argument_list|)
+argument_list|)
+argument_list|)
+operator|.
+name|project
+argument_list|(
+name|builder
+operator|.
+name|field
+argument_list|(
+literal|"e"
+argument_list|,
+literal|"ENAME"
+argument_list|)
+argument_list|,
+name|builder
+operator|.
+name|field
+argument_list|(
+literal|"DEPT"
+argument_list|,
+literal|"DNAME"
+argument_list|)
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"LogicalProject(ENAME=[$1], DNAME=[$9])\n"
+operator|+
+literal|"  LogicalFilter(condition=[=($7, $8)])\n"
+operator|+
+literal|"    LogicalJoin(condition=[true], joinType=[left])\n"
+operator|+
+literal|"      LogicalTableScan(table=[[scott, EMP]])\n"
+operator|+
+literal|"      LogicalTableScan(table=[[scott, DEPT]])\n"
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|str
+argument_list|(
+name|root
+argument_list|)
+argument_list|,
+name|is
+argument_list|(
+name|expected
+argument_list|)
+argument_list|)
+expr_stmt|;
+specifier|final
+name|RelDataTypeField
+name|field
+init|=
+name|root
+operator|.
+name|getRowType
+argument_list|()
+operator|.
+name|getFieldList
+argument_list|()
+operator|.
+name|get
+argument_list|(
+literal|1
+argument_list|)
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|field
+operator|.
+name|getName
+argument_list|()
+argument_list|,
+name|is
+argument_list|(
+literal|"DNAME"
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|assertThat
+argument_list|(
+name|field
+operator|.
+name|getType
+argument_list|()
+operator|.
+name|isNullable
+argument_list|()
+argument_list|,
+name|is
+argument_list|(
+literal|true
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAlias2
+parameter_list|()
+block|{
+comment|// Equivalent SQL:
+comment|//   SELECT *
+comment|//   FROM emp AS e, emp as m, dept
+comment|//   WHERE e.deptno = dept.deptno
+comment|//   AND m.empno = e.mgr
+specifier|final
+name|RelBuilder
+name|builder
+init|=
+name|RelBuilder
+operator|.
+name|create
+argument_list|(
+name|config
+argument_list|()
+operator|.
+name|build
+argument_list|()
+argument_list|)
+decl_stmt|;
+name|RelNode
+name|root
+init|=
+name|builder
+operator|.
+name|scan
+argument_list|(
+literal|"EMP"
+argument_list|)
+operator|.
+name|as
+argument_list|(
+literal|"e"
+argument_list|)
+operator|.
+name|scan
+argument_list|(
+literal|"EMP"
+argument_list|)
+operator|.
+name|as
+argument_list|(
+literal|"m"
+argument_list|)
+operator|.
+name|scan
+argument_list|(
+literal|"DEPT"
+argument_list|)
+operator|.
+name|join
+argument_list|(
+name|JoinRelType
+operator|.
+name|INNER
+argument_list|)
+operator|.
+name|join
+argument_list|(
+name|JoinRelType
+operator|.
+name|INNER
+argument_list|)
+operator|.
+name|filter
+argument_list|(
+name|builder
+operator|.
+name|equals
+argument_list|(
+name|builder
+operator|.
+name|field
+argument_list|(
+literal|"e"
+argument_list|,
+literal|"DEPTNO"
+argument_list|)
+argument_list|,
+name|builder
+operator|.
+name|field
+argument_list|(
+literal|"DEPT"
+argument_list|,
+literal|"DEPTNO"
+argument_list|)
+argument_list|)
+argument_list|,
+name|builder
+operator|.
+name|equals
+argument_list|(
+name|builder
+operator|.
+name|field
+argument_list|(
+literal|"m"
+argument_list|,
+literal|"EMPNO"
+argument_list|)
+argument_list|,
+name|builder
+operator|.
+name|field
+argument_list|(
+literal|"e"
+argument_list|,
+literal|"MGR"
+argument_list|)
+argument_list|)
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|""
+operator|+
+literal|"LogicalFilter(condition=[AND(=($7, $16), =($8, $3))])\n"
+operator|+
+literal|"  LogicalJoin(condition=[true], joinType=[inner])\n"
+operator|+
+literal|"    LogicalTableScan(table=[[scott, EMP]])\n"
+operator|+
+literal|"    LogicalJoin(condition=[true], joinType=[inner])\n"
+operator|+
+literal|"      LogicalTableScan(table=[[scott, EMP]])\n"
+operator|+
+literal|"      LogicalTableScan(table=[[scott, DEPT]])\n"
 decl_stmt|;
 name|assertThat
 argument_list|(
