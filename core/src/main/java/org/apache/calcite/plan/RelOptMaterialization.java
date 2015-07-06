@@ -542,7 +542,7 @@ operator|=
 name|queryRel
 expr_stmt|;
 block|}
-comment|/**    * Converts a relational expression to one that uses a    * {@link org.apache.calcite.schema.impl.StarTable}.    * The relational expression is already in leaf-join-form, per    * {@link #toLeafJoinForm(org.apache.calcite.rel.RelNode)}.    */
+comment|/**    * Converts a relational expression to one that uses a    * {@link org.apache.calcite.schema.impl.StarTable}.    *    *<p>The relational expression is already in leaf-join-form, per    * {@link #toLeafJoinForm(org.apache.calcite.rel.RelNode)}.    *    * @return Rewritten expression, or null if expression cannot be rewritten    * to use the star    */
 specifier|public
 specifier|static
 name|RelNode
@@ -1315,8 +1315,9 @@ operator|==
 name|rel
 condition|)
 block|{
+comment|// No rewrite happened.
 return|return
-name|rel
+literal|null
 return|;
 block|}
 specifier|final

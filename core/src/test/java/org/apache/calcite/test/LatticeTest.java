@@ -2235,6 +2235,172 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-787">[CALCITE-787]    * Star table wrongly assigned to materialized view</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testOneLatticeOneMV
+parameter_list|()
+block|{
+specifier|final
+name|AtomicInteger
+name|counter
+init|=
+operator|new
+name|AtomicInteger
+argument_list|()
+decl_stmt|;
+specifier|final
+name|Class
+argument_list|<
+name|JdbcTest
+operator|.
+name|EmpDeptTableFactory
+argument_list|>
+name|clazz
+init|=
+name|JdbcTest
+operator|.
+name|EmpDeptTableFactory
+operator|.
+name|class
+decl_stmt|;
+specifier|final
+name|String
+name|mv
+init|=
+literal|"       materializations: [\n"
+operator|+
+literal|"         {\n"
+operator|+
+literal|"           table: \"m0\",\n"
+operator|+
+literal|"           view: \"m0v\",\n"
+operator|+
+literal|"           sql: \"select * from \\\"foodmart\\\".\\\"sales_fact_1997\\\" "
+operator|+
+literal|"where \\\"product_id\\\" = 10\" "
+operator|+
+literal|"         }\n"
+operator|+
+literal|"       ]\n"
+decl_stmt|;
+specifier|final
+name|String
+name|model
+init|=
+literal|""
+operator|+
+literal|"{\n"
+operator|+
+literal|"  version: '1.0',\n"
+operator|+
+literal|"   schemas: [\n"
+operator|+
+name|JdbcTest
+operator|.
+name|FOODMART_SCHEMA
+operator|+
+literal|",\n"
+operator|+
+literal|"     {\n"
+operator|+
+literal|"       name: 'adhoc',\n"
+operator|+
+literal|"       tables: [\n"
+operator|+
+literal|"         {\n"
+operator|+
+literal|"           name: 'EMPLOYEES',\n"
+operator|+
+literal|"           type: 'custom',\n"
+operator|+
+literal|"           factory: '"
+operator|+
+name|clazz
+operator|.
+name|getName
+argument_list|()
+operator|+
+literal|"',\n"
+operator|+
+literal|"           operand: {'foo': true, 'bar': 345}\n"
+operator|+
+literal|"         }\n"
+operator|+
+literal|"       ],\n"
+operator|+
+literal|"       lattices: "
+operator|+
+literal|"["
+operator|+
+name|INVENTORY_LATTICE
+operator|+
+literal|"       ]\n"
+operator|+
+literal|"     },\n"
+operator|+
+literal|"     {\n"
+operator|+
+literal|"       name: 'mat',\n"
+operator|+
+name|mv
+operator|+
+literal|"     }\n"
+operator|+
+literal|"   ]\n"
+operator|+
+literal|"}"
+decl_stmt|;
+name|CalciteAssert
+operator|.
+name|model
+argument_list|(
+name|model
+argument_list|)
+operator|.
+name|withDefaultSchema
+argument_list|(
+literal|"foodmart"
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select * from \"foodmart\".\"sales_fact_1997\" where \"product_id\" = 10"
+argument_list|)
+operator|.
+name|enableMaterializations
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|substitutionMatches
+argument_list|(
+name|CalciteAssert
+operator|.
+name|checkRel
+argument_list|(
+literal|"EnumerableTableScan(table=[[mat, m0]])\n"
+argument_list|,
+name|counter
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|assertThat
+argument_list|(
+name|counter
+operator|.
+name|intValue
+argument_list|()
+argument_list|,
+name|equalTo
+argument_list|(
+literal|1
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-760">[CALCITE-760]    * Aggregate recommender blows up if row count estimate is too high</a>. */
 annotation|@
 name|Ignore

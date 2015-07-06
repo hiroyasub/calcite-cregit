@@ -2091,8 +2091,9 @@ operator|!=
 literal|null
 condition|)
 block|{
-name|root
-operator|=
+name|RelNode
+name|newRoot
+init|=
 name|RelOptMaterialization
 operator|.
 name|tryUseStar
@@ -2103,7 +2104,19 @@ name|materialization
 operator|.
 name|starRelOptTable
 argument_list|)
+decl_stmt|;
+if|if
+condition|(
+name|newRoot
+operator|!=
+literal|null
+condition|)
+block|{
+name|root
+operator|=
+name|newRoot
 expr_stmt|;
+block|}
 block|}
 comment|// Push filters to the bottom, and combine projects on top.
 name|RelNode
