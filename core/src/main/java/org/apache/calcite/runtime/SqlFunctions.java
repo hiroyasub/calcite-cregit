@@ -2746,6 +2746,10 @@ operator|.
 name|divide
 argument_list|(
 name|b1
+argument_list|,
+name|MathContext
+operator|.
+name|DECIMAL64
 argument_list|)
 return|;
 block|}
