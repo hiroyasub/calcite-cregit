@@ -1725,7 +1725,10 @@ return|return
 name|returnTypeInference
 return|;
 block|}
-comment|/**    * Returns whether this operator is monotonic.    *    *<p>Default implementation returns {@link SqlMonotonicity#NOT_MONOTONIC}.    *    * @param call  Call to this operator    * @param scope Scope in which the call occurs    */
+comment|/**    * Returns whether this operator is monotonic.    *    *<p>Default implementation returns {@link SqlMonotonicity#NOT_MONOTONIC}.    *    * @param call  Call to this operator    * @param scope Scope in which the call occurs    *    * @deprecated Use {@link #getMonotonicity(SqlOperatorBinding)}    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 name|SqlMonotonicity
 name|getMonotonicity
@@ -1735,6 +1738,33 @@ name|call
 parameter_list|,
 name|SqlValidatorScope
 name|scope
+parameter_list|)
+block|{
+return|return
+name|getMonotonicity
+argument_list|(
+operator|new
+name|SqlCallBinding
+argument_list|(
+name|scope
+operator|.
+name|getValidator
+argument_list|()
+argument_list|,
+name|scope
+argument_list|,
+name|call
+argument_list|)
+argument_list|)
+return|;
+block|}
+comment|/**    * Returns whether a call to this operator is monotonic.    *    *<p>Default implementation returns {@link SqlMonotonicity#NOT_MONOTONIC}.    *    * @param call Call to this operator with particular arguments and information    *             about the monotonicity of the arguments    */
+specifier|public
+name|SqlMonotonicity
+name|getMonotonicity
+parameter_list|(
+name|SqlOperatorBinding
+name|call
 parameter_list|)
 block|{
 return|return

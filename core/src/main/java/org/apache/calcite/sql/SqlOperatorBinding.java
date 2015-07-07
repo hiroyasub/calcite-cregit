@@ -87,6 +87,22 @@ name|sql
 operator|.
 name|validate
 operator|.
+name|SqlMonotonicity
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|validate
+operator|.
 name|SqlValidatorException
 import|;
 end_import
@@ -200,6 +216,9 @@ name|typeFactory
 return|;
 block|}
 comment|/**    * Gets the string value of a string literal operand.    *    * @param ordinal zero-based ordinal of operand of interest    * @return string value    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 name|String
 name|getStringLiteralOperand
@@ -215,9 +234,27 @@ argument_list|()
 throw|;
 block|}
 comment|/**    * Gets the integer value of a numeric literal operand.    *    * @param ordinal zero-based ordinal of operand of interest    * @return integer value    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 name|int
 name|getIntLiteralOperand
+parameter_list|(
+name|int
+name|ordinal
+parameter_list|)
+block|{
+throw|throw
+operator|new
+name|UnsupportedOperationException
+argument_list|()
+throw|;
+block|}
+comment|/**    * Gets the value of a literal operand.    *    *<p>Cases:    *<ul>    *<li>If the operand is not a literal, the value is null.    *    *<li>If the operand is a string literal,    * the value will be of type {@link org.apache.calcite.util.NlsString}.    *    *<li>If the operand is a numeric literal,    * the value will be of type {@link java.math.BigDecimal}.    *    *<li>If the operand is an interval qualifier,    * the value will be of type {@link SqlIntervalQualifier}</li>    *    *<li>Otherwise the type is undefined, and the value may be null.    *</ul>    *    * @param ordinal zero-based ordinal of operand of interest    * @return value of operand    */
+specifier|public
+name|Comparable
+name|getOperandLiteralValue
 parameter_list|(
 name|int
 name|ordinal
@@ -264,6 +301,21 @@ name|int
 name|ordinal
 parameter_list|)
 function_decl|;
+comment|/**    * Gets the monotonicity of a bound operand.    *    * @param ordinal zero-based ordinal of operand of interest    * @return monotonicity of operand    */
+specifier|public
+name|SqlMonotonicity
+name|getOperandMonotonicity
+parameter_list|(
+name|int
+name|ordinal
+parameter_list|)
+block|{
+return|return
+name|SqlMonotonicity
+operator|.
+name|NOT_MONOTONIC
+return|;
+block|}
 comment|/**    * Collects the types of the bound operands into a list.    *    * @return collected list    */
 specifier|public
 name|List
