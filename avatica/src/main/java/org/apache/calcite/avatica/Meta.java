@@ -224,6 +224,7 @@ argument_list|>
 name|getDatabaseProperties
 parameter_list|()
 function_decl|;
+comment|/** Per {@link DatabaseMetaData#getTables(String, String, String, String[])}. */
 name|MetaResultSet
 name|getTables
 parameter_list|(
@@ -243,6 +244,7 @@ argument_list|>
 name|typeList
 parameter_list|)
 function_decl|;
+comment|/** Per {@link DatabaseMetaData#getColumns(String, String, String, String)}. */
 name|MetaResultSet
 name|getColumns
 parameter_list|(
@@ -269,14 +271,17 @@ name|Pat
 name|schemaPattern
 parameter_list|)
 function_decl|;
+comment|/** Per {@link DatabaseMetaData#getCatalogs()}. */
 name|MetaResultSet
 name|getCatalogs
 parameter_list|()
 function_decl|;
+comment|/** Per {@link DatabaseMetaData#getTableTypes()}. */
 name|MetaResultSet
 name|getTableTypes
 parameter_list|()
 function_decl|;
+comment|/** Per {@link DatabaseMetaData#getProcedures(String, String, String)}. */
 name|MetaResultSet
 name|getProcedures
 parameter_list|(
@@ -290,6 +295,7 @@ name|Pat
 name|procedureNamePattern
 parameter_list|)
 function_decl|;
+comment|/** Per {@link DatabaseMetaData#getProcedureColumns(String, String, String, String)}. */
 name|MetaResultSet
 name|getProcedureColumns
 parameter_list|(
@@ -306,6 +312,7 @@ name|Pat
 name|columnNamePattern
 parameter_list|)
 function_decl|;
+comment|/** Per {@link DatabaseMetaData#getColumnPrivileges(String, String, String, String)}. */
 name|MetaResultSet
 name|getColumnPrivileges
 parameter_list|(
@@ -322,6 +329,7 @@ name|Pat
 name|columnNamePattern
 parameter_list|)
 function_decl|;
+comment|/** Per {@link DatabaseMetaData#getTablePrivileges(String, String, String)}. */
 name|MetaResultSet
 name|getTablePrivileges
 parameter_list|(
@@ -335,6 +343,7 @@ name|Pat
 name|tableNamePattern
 parameter_list|)
 function_decl|;
+comment|/** Per    * {@link DatabaseMetaData#getBestRowIdentifier(String, String, String, int, boolean)}. */
 name|MetaResultSet
 name|getBestRowIdentifier
 parameter_list|(
@@ -354,6 +363,7 @@ name|boolean
 name|nullable
 parameter_list|)
 function_decl|;
+comment|/** Per {@link DatabaseMetaData#getVersionColumns(String, String, String)}. */
 name|MetaResultSet
 name|getVersionColumns
 parameter_list|(
@@ -367,6 +377,7 @@ name|String
 name|table
 parameter_list|)
 function_decl|;
+comment|/** Per {@link DatabaseMetaData#getPrimaryKeys(String, String, String)}. */
 name|MetaResultSet
 name|getPrimaryKeys
 parameter_list|(
@@ -380,6 +391,7 @@ name|String
 name|table
 parameter_list|)
 function_decl|;
+comment|/** Per {@link DatabaseMetaData#getImportedKeys(String, String, String)}. */
 name|MetaResultSet
 name|getImportedKeys
 parameter_list|(
@@ -393,6 +405,7 @@ name|String
 name|table
 parameter_list|)
 function_decl|;
+comment|/** Per {@link DatabaseMetaData#getExportedKeys(String, String, String)}. */
 name|MetaResultSet
 name|getExportedKeys
 parameter_list|(
@@ -406,6 +419,7 @@ name|String
 name|table
 parameter_list|)
 function_decl|;
+comment|/** Per    * {@link DatabaseMetaData#getCrossReference(String, String, String, String, String, String)}. */
 name|MetaResultSet
 name|getCrossReference
 parameter_list|(
@@ -428,10 +442,12 @@ name|String
 name|foreignTable
 parameter_list|)
 function_decl|;
+comment|/** Per {@link DatabaseMetaData#getTypeInfo()}. */
 name|MetaResultSet
 name|getTypeInfo
 parameter_list|()
 function_decl|;
+comment|/** Per {@link DatabaseMetaData#getIndexInfo(String, String, String, boolean, boolean)}. */
 name|MetaResultSet
 name|getIndexInfo
 parameter_list|(
@@ -451,6 +467,7 @@ name|boolean
 name|approximate
 parameter_list|)
 function_decl|;
+comment|/** Per {@link DatabaseMetaData#getUDTs(String, String, String, int[])}. */
 name|MetaResultSet
 name|getUDTs
 parameter_list|(
@@ -468,6 +485,7 @@ index|[]
 name|types
 parameter_list|)
 function_decl|;
+comment|/** Per {@link DatabaseMetaData#getSuperTypes(String, String, String)}. */
 name|MetaResultSet
 name|getSuperTypes
 parameter_list|(
@@ -481,6 +499,7 @@ name|Pat
 name|typeNamePattern
 parameter_list|)
 function_decl|;
+comment|/** Per {@link DatabaseMetaData#getSuperTables(String, String, String)}. */
 name|MetaResultSet
 name|getSuperTables
 parameter_list|(
@@ -494,6 +513,7 @@ name|Pat
 name|tableNamePattern
 parameter_list|)
 function_decl|;
+comment|/** Per {@link DatabaseMetaData#getAttributes(String, String, String, String)}. */
 name|MetaResultSet
 name|getAttributes
 parameter_list|(
@@ -510,10 +530,12 @@ name|Pat
 name|attributeNamePattern
 parameter_list|)
 function_decl|;
+comment|/** Per {@link DatabaseMetaData#getClientInfoProperties()}. */
 name|MetaResultSet
 name|getClientInfoProperties
 parameter_list|()
 function_decl|;
+comment|/** Per {@link DatabaseMetaData#getFunctions(String, String, String)}. */
 name|MetaResultSet
 name|getFunctions
 parameter_list|(
@@ -527,6 +549,7 @@ name|Pat
 name|functionNamePattern
 parameter_list|)
 function_decl|;
+comment|/** Per {@link DatabaseMetaData#getFunctionColumns(String, String, String, String)}. */
 name|MetaResultSet
 name|getFunctionColumns
 parameter_list|(
@@ -543,6 +566,7 @@ name|Pat
 name|columnNamePattern
 parameter_list|)
 function_decl|;
+comment|/** Per {@link DatabaseMetaData#getPseudoColumns(String, String, String, String)}. */
 name|MetaResultSet
 name|getPseudoColumns
 parameter_list|(

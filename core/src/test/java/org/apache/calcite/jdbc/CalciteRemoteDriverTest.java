@@ -1172,7 +1172,7 @@ argument_list|)
 expr_stmt|;
 name|assertEquals
 argument_list|(
-literal|"TABLE_CATALOG"
+literal|"TABLE_CAT"
 argument_list|,
 name|metaData
 operator|.
@@ -1650,7 +1650,7 @@ argument_list|)
 operator|.
 name|returns
 argument_list|(
-literal|"TABLE_CATALOG=null\n"
+literal|"TABLE_CAT=null\n"
 argument_list|)
 expr_stmt|;
 block|}

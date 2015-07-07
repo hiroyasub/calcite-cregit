@@ -1703,6 +1703,13 @@ decl_stmt|;
 specifier|public
 specifier|final
 name|String
+name|scopeSchema
+init|=
+literal|null
+decl_stmt|;
+specifier|public
+specifier|final
+name|String
 name|scopeTable
 init|=
 literal|null
@@ -2044,7 +2051,7 @@ block|{
 specifier|public
 specifier|final
 name|String
-name|tableCatalog
+name|tableCat
 decl_stmt|;
 specifier|public
 name|MetaCatalog
@@ -2055,7 +2062,7 @@ parameter_list|)
 block|{
 name|this
 operator|.
-name|tableCatalog
+name|tableCat
 operator|=
 name|tableCatalog
 expr_stmt|;
@@ -2066,7 +2073,7 @@ name|getName
 parameter_list|()
 block|{
 return|return
-name|tableCatalog
+name|tableCat
 return|;
 block|}
 block|}

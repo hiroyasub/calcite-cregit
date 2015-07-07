@@ -2167,6 +2167,8 @@ literal|"IS_NULLABLE"
 argument_list|,
 literal|"SCOPE_CATALOG"
 argument_list|,
+literal|"SCOPE_SCHEMA"
+argument_list|,
 literal|"SCOPE_TABLE"
 argument_list|,
 literal|"SOURCE_DATA_TYPE"
@@ -3091,7 +3093,7 @@ name|MetaCatalog
 operator|.
 name|class
 argument_list|,
-literal|"TABLE_CATALOG"
+literal|"TABLE_CAT"
 argument_list|)
 return|;
 block|}
