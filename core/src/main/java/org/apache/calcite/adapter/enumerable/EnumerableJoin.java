@@ -321,6 +321,7 @@ implements|implements
 name|EnumerableRel
 block|{
 comment|/** Creates an EnumerableJoin.    *    *<p>Use {@link #create} unless you know what you're doing. */
+specifier|protected
 name|EnumerableJoin
 parameter_list|(
 name|RelOptCluster
