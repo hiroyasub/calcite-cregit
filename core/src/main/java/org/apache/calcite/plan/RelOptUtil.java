@@ -12066,7 +12066,7 @@ name|program
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates a relational expression that projects the given fields of the    * input.    *    *<p>Optimizes if the fields are the identity projection.    *    * @param factory    *          ProjectFactory    * @param child    *          Input relational expression    * @param posList    *          Source of each projected field    * @return Relational expression that projects given fields    */
+comment|/**    * Creates a relational expression that projects the given fields of the    * input.    *    *<p>Optimizes if the fields are the identity projection.    *    * @param factory ProjectFactory    * @param child Input relational expression    * @param posList Source of each projected field    * @return Relational expression that projects given fields    */
 specifier|public
 specifier|static
 name|RelNode

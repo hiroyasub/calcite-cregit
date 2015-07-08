@@ -850,7 +850,7 @@ argument_list|()
 throw|;
 block|}
 block|}
-comment|/**    * List that stores its two elements in the two members of the class.    * Unlike {@link java.util.ArrayList} or    * {@link java.util.Arrays#asList(Object[])} there is    * no array, only one piece of memory allocated, therefore is very compact    * and cache and CPU efficient.    *    *<p>The list is read-only and cannot be modified or re-sized.    * The elements may be null.    *    *<p>The list is created via {@link FlatLists#of}.    *    * @param<T>    */
+comment|/**    * List that stores its two elements in the two members of the class.    * Unlike {@link java.util.ArrayList} or    * {@link java.util.Arrays#asList(Object[])} there is    * no array, only one piece of memory allocated, therefore is very compact    * and cache and CPU efficient.    *    *<p>The list is read-only and cannot be modified or re-sized.    * The elements may be null.    *    *<p>The list is created via {@link FlatLists#of}.    *    * @param<T> Element type    */
 specifier|protected
 specifier|static
 class|class
@@ -1387,7 +1387,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**    * List that stores its three elements in the three members of the class.    * Unlike {@link java.util.ArrayList} or    * {@link java.util.Arrays#asList(Object[])} there is    * no array, only one piece of memory allocated, therefore is very compact    * and cache and CPU efficient.    *    *<p>The list is read-only, cannot be modified or re-sized.    * The elements may be null.    *    *<p>The list is created via {@link FlatLists#of(java.util.List)}.    *    * @param<T>    */
+comment|/**    * List that stores its three elements in the three members of the class.    * Unlike {@link java.util.ArrayList} or    * {@link java.util.Arrays#asList(Object[])} there is    * no array, only one piece of memory allocated, therefore is very compact    * and cache and CPU efficient.    *    *<p>The list is read-only, cannot be modified or re-sized.    * The elements may be null.    *    *<p>The list is created via {@link FlatLists#of(java.util.List)}.    *    * @param<T> Element type    */
 specifier|protected
 specifier|static
 class|class

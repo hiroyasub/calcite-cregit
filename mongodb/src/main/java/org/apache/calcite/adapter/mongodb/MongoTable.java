@@ -1105,7 +1105,7 @@ block|}
 block|}
 return|;
 block|}
-comment|/** Helper method to strip non-numerics from a string    *<p>Currently used to determine mongod versioning numbers    * from buildInfo.versionArray for use in aggregate method logic</p>    * @param valueString    * @return Integer */
+comment|/** Helper method to strip non-numerics from a string.    *    *<p>Currently used to determine mongod versioning numbers    * from buildInfo.versionArray for use in aggregate method logic. */
 specifier|private
 specifier|static
 name|Integer
@@ -1131,7 +1131,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/** Executes an "aggregate" operation for pre-2.6 mongo servers.    *<p>Return document is limited to 4M or 16M in size depending on    * version of mongo<p>Helper method for    * {@link org.apache.calcite.adapter.mongodb.MongoTable#aggregate}    *</p>    * @param dbCollection    * @param first the first aggregate action    * @param rest the rest of the aggregate actions    * @return AggregationOutput */
+comment|/** Executes an "aggregate" operation for pre-2.6 mongo servers.    *    *<p>Return document is limited to 4M or 16M in size depending on    * version of mongo.     *<p>Helper method for    * {@link org.apache.calcite.adapter.mongodb.MongoTable#aggregate}.    *    * @param dbCollection Collection    * @param first First aggregate action    * @param rest Rest of the aggregate actions    * @return Aggregation output    */
 specifier|private
 name|AggregationOutput
 name|aggregateOldWay

@@ -13916,11 +13916,6 @@ expr_stmt|;
 block|}
 comment|/** Tests sorting by a column that is already sorted. */
 annotation|@
-name|Ignore
-argument_list|(
-literal|"fix output for timezone"
-argument_list|)
-annotation|@
 name|Test
 specifier|public
 name|void
@@ -13952,22 +13947,20 @@ argument_list|)
 operator|.
 name|returns
 argument_list|(
-literal|"time_id=367; the_date=1997-01-01 00:00:00.0\n"
+literal|"time_id=367; the_date=1997-01-01 00:00:00\n"
 operator|+
-literal|"time_id=368; the_date=1997-01-02 00:00:00.0\n"
+literal|"time_id=368; the_date=1997-01-02 00:00:00\n"
 operator|+
-literal|"time_id=369; the_date=1997-01-03 00:00:00.0\n"
+literal|"time_id=369; the_date=1997-01-03 00:00:00\n"
 argument_list|)
 operator|.
 name|explainContains
 argument_list|(
 literal|""
 operator|+
-literal|"PLAN=EnumerableSort(sort0=[$0], dir0=[ASC])\n"
+literal|"PLAN=EnumerableCalc(expr#0..9=[{inputs}], expr#10=[370], expr#11=[<($t0, $t10)], proj#0..1=[{exprs}], $condition=[$t11])\n"
 operator|+
-literal|"  EnumerableCalc(expr#0..9=[{inputs}], expr#10=[370], expr#11=[<($t0, $t10)], proj#0..1=[{exprs}], $condition=[$t11])\n"
-operator|+
-literal|"    EnumerableTableScan(table=[[foodmart2, time_by_day]])\n\n"
+literal|"  EnumerableTableScan(table=[[foodmart2, time_by_day]])\n\n"
 argument_list|)
 expr_stmt|;
 block|}

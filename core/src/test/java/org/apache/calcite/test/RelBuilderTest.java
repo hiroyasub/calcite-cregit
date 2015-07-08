@@ -3472,9 +3472,7 @@ literal|"  LogicalTableScan(table=[[scott, EMP]])\n"
 decl_stmt|;
 name|assertThat
 argument_list|(
-name|RelOptUtil
-operator|.
-name|toString
+name|str
 argument_list|(
 name|root
 argument_list|)
@@ -3521,9 +3519,7 @@ argument_list|()
 decl_stmt|;
 name|assertThat
 argument_list|(
-name|RelOptUtil
-operator|.
-name|toString
+name|str
 argument_list|(
 name|root2
 argument_list|)
@@ -3626,9 +3622,7 @@ literal|"      LogicalTableScan(table=[[scott, DEPT]])\n"
 decl_stmt|;
 name|assertThat
 argument_list|(
-name|RelOptUtil
-operator|.
-name|toString
+name|str
 argument_list|(
 name|root
 argument_list|)
@@ -3690,9 +3684,7 @@ argument_list|()
 decl_stmt|;
 name|assertThat
 argument_list|(
-name|RelOptUtil
-operator|.
-name|toString
+name|str
 argument_list|(
 name|root2
 argument_list|)
