@@ -21277,6 +21277,14 @@ operator|.
 name|HISTOGRAM_AGG
 argument_list|,
 name|exprs
+argument_list|,
+name|ImmutableList
+operator|.
+expr|<
+name|RelCollation
+operator|>
+name|of
+argument_list|()
 argument_list|)
 decl_stmt|;
 name|RexNode
