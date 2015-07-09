@@ -189,7 +189,9 @@ operator|.
 name|getInput
 argument_list|()
 argument_list|,
-name|traitSet
+name|EnumerableConvention
+operator|.
+name|INSTANCE
 argument_list|)
 argument_list|,
 name|agg

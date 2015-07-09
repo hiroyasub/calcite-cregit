@@ -1598,7 +1598,9 @@ name|filterArg
 argument_list|,
 name|sumType
 argument_list|,
-literal|null
+name|oldCall
+operator|.
+name|name
 argument_list|)
 decl_stmt|;
 specifier|final

@@ -218,6 +218,9 @@ name|aggregate
 operator|.
 name|getTraitSet
 argument_list|()
+operator|.
+name|simplify
+argument_list|()
 argument_list|)
 decl_stmt|;
 comment|// If aggregate was projecting a subset of columns, add a project for the

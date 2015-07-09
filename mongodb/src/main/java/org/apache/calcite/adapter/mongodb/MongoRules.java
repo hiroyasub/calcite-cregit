@@ -2131,6 +2131,9 @@ name|getInput
 argument_list|()
 argument_list|,
 name|traitSet
+operator|.
+name|simplify
+argument_list|()
 argument_list|)
 argument_list|,
 name|agg

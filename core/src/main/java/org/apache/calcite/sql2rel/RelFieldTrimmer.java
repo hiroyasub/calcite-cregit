@@ -1179,7 +1179,7 @@ name|RelMetadataQuery
 operator|.
 name|collations
 argument_list|(
-name|rel
+name|input
 argument_list|)
 decl_stmt|;
 for|for

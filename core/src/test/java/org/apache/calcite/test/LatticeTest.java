@@ -1535,7 +1535,7 @@ name|explainContains
 argument_list|(
 literal|"JdbcToEnumerableConverter\n"
 operator|+
-literal|"  JdbcAggregate(group=[{7, 16, 25, 27, 31, 37}], m0=[COUNT()], m1=[SUM($5)], m2=[SUM($7)])\n"
+literal|"  JdbcAggregate(group=[{7, 16, 25, 27, 31, 37}], m0=[COUNT()], m1=[$SUM0($5)], m2=[$SUM0($7)])\n"
 operator|+
 literal|"    JdbcJoin(condition=[=($8, $33)], joinType=[inner])\n"
 operator|+
